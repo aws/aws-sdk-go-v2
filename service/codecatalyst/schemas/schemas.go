@@ -4,2603 +4,2533 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/accessTokens",
-	Code: 201})
+var (
+	eCreateAccessToken                                                     smithy.SchemaExtensions
+	eCreateDevEnvironment                                                  smithy.SchemaExtensions
+	eCreateProject                                                         smithy.SchemaExtensions
+	eCreateSourceRepository                                                smithy.SchemaExtensions
+	eCreateSourceRepositoryBranch                                          smithy.SchemaExtensions
+	eDeleteAccessToken                                                     smithy.SchemaExtensions
+	eDeleteDevEnvironment                                                  smithy.SchemaExtensions
+	eDeleteProject                                                         smithy.SchemaExtensions
+	eDeleteSourceRepository                                                smithy.SchemaExtensions
+	eDeleteSpace                                                           smithy.SchemaExtensions
+	eGetDevEnvironment                                                     smithy.SchemaExtensions
+	eGetProject                                                            smithy.SchemaExtensions
+	eGetSourceRepository                                                   smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrls                                          smithy.SchemaExtensions
+	eGetSpace                                                              smithy.SchemaExtensions
+	eGetSubscription                                                       smithy.SchemaExtensions
+	eGetUserDetails                                                        smithy.SchemaExtensions
+	eGetWorkflow                                                           smithy.SchemaExtensions
+	eGetWorkflowRun                                                        smithy.SchemaExtensions
+	eListAccessTokens                                                      smithy.SchemaExtensions
+	eListDevEnvironments                                                   smithy.SchemaExtensions
+	eListDevEnvironmentSessions                                            smithy.SchemaExtensions
+	eListEventLogs                                                         smithy.SchemaExtensions
+	eListProjects                                                          smithy.SchemaExtensions
+	eListSourceRepositories                                                smithy.SchemaExtensions
+	eListSourceRepositoryBranches                                          smithy.SchemaExtensions
+	eListSpaces                                                            smithy.SchemaExtensions
+	eListWorkflowRuns                                                      smithy.SchemaExtensions
+	eListWorkflows                                                         smithy.SchemaExtensions
+	eStartDevEnvironment                                                   smithy.SchemaExtensions
+	eStartDevEnvironmentSession                                            smithy.SchemaExtensions
+	eStartWorkflowRun                                                      smithy.SchemaExtensions
+	eStopDevEnvironment                                                    smithy.SchemaExtensions
+	eStopDevEnvironmentSession                                             smithy.SchemaExtensions
+	eUpdateDevEnvironment                                                  smithy.SchemaExtensions
+	eUpdateProject                                                         smithy.SchemaExtensions
+	eUpdateSpace                                                           smithy.SchemaExtensions
+	eVerifySession                                                         smithy.SchemaExtensions
+	e_CodeCatalyst                                                         smithy.SchemaExtensions
+	eAccessDeniedException                                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                                         smithy.SchemaExtensions
+	e_AccessTokenId                                                        smithy.SchemaExtensions
+	e_AccessTokenName                                                      smithy.SchemaExtensions
+	e_AccessTokenSecret                                                    smithy.SchemaExtensions
+	e_AccessTokenSummaries                                                 smithy.SchemaExtensions
+	e_AccessTokenSummaries_member                                          smithy.SchemaExtensions
+	eAccessTokenSummary                                                    smithy.SchemaExtensions
+	eAccessTokenSummary_id                                                 smithy.SchemaExtensions
+	eAccessTokenSummary_name                                               smithy.SchemaExtensions
+	eAccessTokenSummary_expiresTime                                        smithy.SchemaExtensions
+	e_ClientToken                                                          smithy.SchemaExtensions
+	e_ComparisonOperator                                                   smithy.SchemaExtensions
+	eConflictException                                                     smithy.SchemaExtensions
+	eConflictException_message                                             smithy.SchemaExtensions
+	eDevEnvironmentAccessDetails                                           smithy.SchemaExtensions
+	eDevEnvironmentAccessDetails_streamUrl                                 smithy.SchemaExtensions
+	eDevEnvironmentAccessDetails_tokenValue                                smithy.SchemaExtensions
+	e_DevEnvironmentRepositorySummaries                                    smithy.SchemaExtensions
+	e_DevEnvironmentRepositorySummaries_member                             smithy.SchemaExtensions
+	eDevEnvironmentRepositorySummary                                       smithy.SchemaExtensions
+	eDevEnvironmentRepositorySummary_repositoryName                        smithy.SchemaExtensions
+	eDevEnvironmentRepositorySummary_branchName                            smithy.SchemaExtensions
+	eDevEnvironmentSessionConfiguration                                    smithy.SchemaExtensions
+	eDevEnvironmentSessionConfiguration_sessionType                        smithy.SchemaExtensions
+	eDevEnvironmentSessionConfiguration_executeCommandSessionConfiguration smithy.SchemaExtensions
+	e_DevEnvironmentSessionsSummaryList                                    smithy.SchemaExtensions
+	e_DevEnvironmentSessionsSummaryList_member                             smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary                                          smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary_spaceName                                smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary_projectName                              smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary_devEnvironmentId                         smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary_startedTime                              smithy.SchemaExtensions
+	eDevEnvironmentSessionSummary_id                                       smithy.SchemaExtensions
+	e_DevEnvironmentSessionType                                            smithy.SchemaExtensions
+	e_DevEnvironmentStatus                                                 smithy.SchemaExtensions
+	eDevEnvironmentSummary                                                 smithy.SchemaExtensions
+	eDevEnvironmentSummary_spaceName                                       smithy.SchemaExtensions
+	eDevEnvironmentSummary_projectName                                     smithy.SchemaExtensions
+	eDevEnvironmentSummary_id                                              smithy.SchemaExtensions
+	eDevEnvironmentSummary_lastUpdatedTime                                 smithy.SchemaExtensions
+	eDevEnvironmentSummary_creatorId                                       smithy.SchemaExtensions
+	eDevEnvironmentSummary_status                                          smithy.SchemaExtensions
+	eDevEnvironmentSummary_statusReason                                    smithy.SchemaExtensions
+	eDevEnvironmentSummary_repositories                                    smithy.SchemaExtensions
+	eDevEnvironmentSummary_alias                                           smithy.SchemaExtensions
+	eDevEnvironmentSummary_ides                                            smithy.SchemaExtensions
+	eDevEnvironmentSummary_instanceType                                    smithy.SchemaExtensions
+	eDevEnvironmentSummary_inactivityTimeoutMinutes                        smithy.SchemaExtensions
+	eDevEnvironmentSummary_persistentStorage                               smithy.SchemaExtensions
+	eDevEnvironmentSummary_vpcConnectionName                               smithy.SchemaExtensions
+	e_DevEnvironmentSummaryList                                            smithy.SchemaExtensions
+	e_DevEnvironmentSummaryList_member                                     smithy.SchemaExtensions
+	eEmailAddress                                                          smithy.SchemaExtensions
+	eEmailAddress_email                                                    smithy.SchemaExtensions
+	eEmailAddress_verified                                                 smithy.SchemaExtensions
+	e_EventLogEntries                                                      smithy.SchemaExtensions
+	e_EventLogEntries_member                                               smithy.SchemaExtensions
+	eEventLogEntry                                                         smithy.SchemaExtensions
+	eEventLogEntry_id                                                      smithy.SchemaExtensions
+	eEventLogEntry_eventName                                               smithy.SchemaExtensions
+	eEventLogEntry_eventType                                               smithy.SchemaExtensions
+	eEventLogEntry_eventCategory                                           smithy.SchemaExtensions
+	eEventLogEntry_eventSource                                             smithy.SchemaExtensions
+	eEventLogEntry_eventTime                                               smithy.SchemaExtensions
+	eEventLogEntry_operationType                                           smithy.SchemaExtensions
+	eEventLogEntry_userIdentity                                            smithy.SchemaExtensions
+	eEventLogEntry_projectInformation                                      smithy.SchemaExtensions
+	eEventLogEntry_requestId                                               smithy.SchemaExtensions
+	eEventLogEntry_requestPayload                                          smithy.SchemaExtensions
+	eEventLogEntry_responsePayload                                         smithy.SchemaExtensions
+	eEventLogEntry_errorCode                                               smithy.SchemaExtensions
+	eEventLogEntry_sourceIpAddress                                         smithy.SchemaExtensions
+	eEventLogEntry_userAgent                                               smithy.SchemaExtensions
+	eEventPayload                                                          smithy.SchemaExtensions
+	eEventPayload_contentType                                              smithy.SchemaExtensions
+	eEventPayload_data                                                     smithy.SchemaExtensions
+	eExecuteCommandSessionConfiguration                                    smithy.SchemaExtensions
+	eExecuteCommandSessionConfiguration_command                            smithy.SchemaExtensions
+	eExecuteCommandSessionConfiguration_arguments                          smithy.SchemaExtensions
+	e_ExecuteCommandSessionConfigurationArguments                          smithy.SchemaExtensions
+	e_ExecuteCommandSessionConfigurationArguments_member                   smithy.SchemaExtensions
+	eFilter                                                                smithy.SchemaExtensions
+	eFilter_key                                                            smithy.SchemaExtensions
+	eFilter_values                                                         smithy.SchemaExtensions
+	eFilter_comparisonOperator                                             smithy.SchemaExtensions
+	e_FilterKey                                                            smithy.SchemaExtensions
+	e_Filters                                                              smithy.SchemaExtensions
+	e_Filters_member                                                       smithy.SchemaExtensions
+	eIde                                                                   smithy.SchemaExtensions
+	eIde_runtime                                                           smithy.SchemaExtensions
+	eIde_name                                                              smithy.SchemaExtensions
+	eIdeConfiguration                                                      smithy.SchemaExtensions
+	eIdeConfiguration_runtime                                              smithy.SchemaExtensions
+	eIdeConfiguration_name                                                 smithy.SchemaExtensions
+	e_IdeConfigurationList                                                 smithy.SchemaExtensions
+	e_IdeConfigurationList_member                                          smithy.SchemaExtensions
+	e_Ides                                                                 smithy.SchemaExtensions
+	e_Ides_member                                                          smithy.SchemaExtensions
+	e_InactivityTimeoutMinutes                                             smithy.SchemaExtensions
+	e_InstanceType                                                         smithy.SchemaExtensions
+	eListSourceRepositoriesItem                                            smithy.SchemaExtensions
+	eListSourceRepositoriesItem_id                                         smithy.SchemaExtensions
+	eListSourceRepositoriesItem_name                                       smithy.SchemaExtensions
+	eListSourceRepositoriesItem_description                                smithy.SchemaExtensions
+	eListSourceRepositoriesItem_lastUpdatedTime                            smithy.SchemaExtensions
+	eListSourceRepositoriesItem_createdTime                                smithy.SchemaExtensions
+	e_ListSourceRepositoriesItems                                          smithy.SchemaExtensions
+	e_ListSourceRepositoriesItems_member                                   smithy.SchemaExtensions
+	eListSourceRepositoryBranchesItem                                      smithy.SchemaExtensions
+	eListSourceRepositoryBranchesItem_ref                                  smithy.SchemaExtensions
+	eListSourceRepositoryBranchesItem_name                                 smithy.SchemaExtensions
+	eListSourceRepositoryBranchesItem_lastUpdatedTime                      smithy.SchemaExtensions
+	eListSourceRepositoryBranchesItem_headCommitId                         smithy.SchemaExtensions
+	e_ListSourceRepositoryBranchesItems                                    smithy.SchemaExtensions
+	e_ListSourceRepositoryBranchesItems_member                             smithy.SchemaExtensions
+	e_NameString                                                           smithy.SchemaExtensions
+	e_OperationType                                                        smithy.SchemaExtensions
+	ePersistentStorage                                                     smithy.SchemaExtensions
+	ePersistentStorage_sizeInGiB                                           smithy.SchemaExtensions
+	ePersistentStorageConfiguration                                        smithy.SchemaExtensions
+	ePersistentStorageConfiguration_sizeInGiB                              smithy.SchemaExtensions
+	e_ProjectDescription                                                   smithy.SchemaExtensions
+	e_ProjectDisplayName                                                   smithy.SchemaExtensions
+	eProjectInformation                                                    smithy.SchemaExtensions
+	eProjectInformation_name                                               smithy.SchemaExtensions
+	eProjectInformation_projectId                                          smithy.SchemaExtensions
+	eProjectListFilter                                                     smithy.SchemaExtensions
+	eProjectListFilter_key                                                 smithy.SchemaExtensions
+	eProjectListFilter_values                                              smithy.SchemaExtensions
+	eProjectListFilter_comparisonOperator                                  smithy.SchemaExtensions
+	e_ProjectListFilters                                                   smithy.SchemaExtensions
+	e_ProjectListFilters_member                                            smithy.SchemaExtensions
+	e_ProjectSummaries                                                     smithy.SchemaExtensions
+	e_ProjectSummaries_member                                              smithy.SchemaExtensions
+	eProjectSummary                                                        smithy.SchemaExtensions
+	eProjectSummary_name                                                   smithy.SchemaExtensions
+	eProjectSummary_displayName                                            smithy.SchemaExtensions
+	eProjectSummary_description                                            smithy.SchemaExtensions
+	e_RegionString                                                         smithy.SchemaExtensions
+	e_RepositoriesInput                                                    smithy.SchemaExtensions
+	e_RepositoriesInput_member                                             smithy.SchemaExtensions
+	eRepositoryInput                                                       smithy.SchemaExtensions
+	eRepositoryInput_repositoryName                                        smithy.SchemaExtensions
+	eRepositoryInput_branchName                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                             smithy.SchemaExtensions
+	eResourceNotFoundException_message                                     smithy.SchemaExtensions
+	e_SensitiveString                                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                 smithy.SchemaExtensions
+	e_SourceRepositoryBranchRefString                                      smithy.SchemaExtensions
+	e_SourceRepositoryBranchString                                         smithy.SchemaExtensions
+	e_SourceRepositoryDescriptionString                                    smithy.SchemaExtensions
+	e_SourceRepositoryIdString                                             smithy.SchemaExtensions
+	e_SourceRepositoryNameString                                           smithy.SchemaExtensions
+	e_SpaceDescription                                                     smithy.SchemaExtensions
+	e_SpaceSummaries                                                       smithy.SchemaExtensions
+	e_SpaceSummaries_member                                                smithy.SchemaExtensions
+	eSpaceSummary                                                          smithy.SchemaExtensions
+	eSpaceSummary_name                                                     smithy.SchemaExtensions
+	eSpaceSummary_regionName                                               smithy.SchemaExtensions
+	eSpaceSummary_displayName                                              smithy.SchemaExtensions
+	eSpaceSummary_description                                              smithy.SchemaExtensions
+	e_StatusReason                                                         smithy.SchemaExtensions
+	e_StringList                                                           smithy.SchemaExtensions
+	e_StringList_member                                                    smithy.SchemaExtensions
+	eThrottlingException                                                   smithy.SchemaExtensions
+	eThrottlingException_message                                           smithy.SchemaExtensions
+	e_Timestamp                                                            smithy.SchemaExtensions
+	eUserIdentity                                                          smithy.SchemaExtensions
+	eUserIdentity_userType                                                 smithy.SchemaExtensions
+	eUserIdentity_principalId                                              smithy.SchemaExtensions
+	eUserIdentity_userName                                                 smithy.SchemaExtensions
+	eUserIdentity_awsAccountId                                             smithy.SchemaExtensions
+	e_UserType                                                             smithy.SchemaExtensions
+	e_Uuid                                                                 smithy.SchemaExtensions
+	eValidationException                                                   smithy.SchemaExtensions
+	eValidationException_message                                           smithy.SchemaExtensions
+	eWorkflowDefinition                                                    smithy.SchemaExtensions
+	eWorkflowDefinition_path                                               smithy.SchemaExtensions
+	eWorkflowDefinitionSummary                                             smithy.SchemaExtensions
+	eWorkflowDefinitionSummary_path                                        smithy.SchemaExtensions
+	e_WorkflowRunMode                                                      smithy.SchemaExtensions
+	eWorkflowRunSortCriteria                                               smithy.SchemaExtensions
+	e_WorkflowRunSortCriteriaList                                          smithy.SchemaExtensions
+	e_WorkflowRunSortCriteriaList_member                                   smithy.SchemaExtensions
+	e_WorkflowRunStatus                                                    smithy.SchemaExtensions
+	eWorkflowRunStatusReason                                               smithy.SchemaExtensions
+	e_WorkflowRunStatusReasons                                             smithy.SchemaExtensions
+	e_WorkflowRunStatusReasons_member                                      smithy.SchemaExtensions
+	e_WorkflowRunSummaries                                                 smithy.SchemaExtensions
+	e_WorkflowRunSummaries_member                                          smithy.SchemaExtensions
+	eWorkflowRunSummary                                                    smithy.SchemaExtensions
+	eWorkflowRunSummary_id                                                 smithy.SchemaExtensions
+	eWorkflowRunSummary_workflowId                                         smithy.SchemaExtensions
+	eWorkflowRunSummary_workflowName                                       smithy.SchemaExtensions
+	eWorkflowRunSummary_status                                             smithy.SchemaExtensions
+	eWorkflowRunSummary_statusReasons                                      smithy.SchemaExtensions
+	eWorkflowRunSummary_startTime                                          smithy.SchemaExtensions
+	eWorkflowRunSummary_endTime                                            smithy.SchemaExtensions
+	eWorkflowRunSummary_lastUpdatedTime                                    smithy.SchemaExtensions
+	eWorkflowSortCriteria                                                  smithy.SchemaExtensions
+	e_WorkflowSortCriteriaList                                             smithy.SchemaExtensions
+	e_WorkflowSortCriteriaList_member                                      smithy.SchemaExtensions
+	e_WorkflowStatus                                                       smithy.SchemaExtensions
+	e_WorkflowSummaries                                                    smithy.SchemaExtensions
+	e_WorkflowSummaries_member                                             smithy.SchemaExtensions
+	eWorkflowSummary                                                       smithy.SchemaExtensions
+	eWorkflowSummary_id                                                    smithy.SchemaExtensions
+	eWorkflowSummary_name                                                  smithy.SchemaExtensions
+	eWorkflowSummary_sourceRepositoryName                                  smithy.SchemaExtensions
+	eWorkflowSummary_sourceBranchName                                      smithy.SchemaExtensions
+	eWorkflowSummary_definition                                            smithy.SchemaExtensions
+	eWorkflowSummary_createdTime                                           smithy.SchemaExtensions
+	eWorkflowSummary_lastUpdatedTime                                       smithy.SchemaExtensions
+	eWorkflowSummary_runMode                                               smithy.SchemaExtensions
+	eWorkflowSummary_status                                                smithy.SchemaExtensions
+	eCreateAccessTokenRequest                                              smithy.SchemaExtensions
+	eCreateAccessTokenRequest_name                                         smithy.SchemaExtensions
+	eCreateAccessTokenRequest_expiresTime                                  smithy.SchemaExtensions
+	eCreateAccessTokenResponse                                             smithy.SchemaExtensions
+	eCreateAccessTokenResponse_secret                                      smithy.SchemaExtensions
+	eCreateAccessTokenResponse_name                                        smithy.SchemaExtensions
+	eCreateAccessTokenResponse_expiresTime                                 smithy.SchemaExtensions
+	eCreateAccessTokenResponse_accessTokenId                               smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest                                           smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_spaceName                                 smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_projectName                               smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_repositories                              smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_clientToken                               smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_alias                                     smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_ides                                      smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_instanceType                              smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_inactivityTimeoutMinutes                  smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_persistentStorage                         smithy.SchemaExtensions
+	eCreateDevEnvironmentRequest_vpcConnectionName                         smithy.SchemaExtensions
+	eCreateDevEnvironmentResponse                                          smithy.SchemaExtensions
+	eCreateDevEnvironmentResponse_spaceName                                smithy.SchemaExtensions
+	eCreateDevEnvironmentResponse_projectName                              smithy.SchemaExtensions
+	eCreateDevEnvironmentResponse_id                                       smithy.SchemaExtensions
+	eCreateDevEnvironmentResponse_vpcConnectionName                        smithy.SchemaExtensions
+	eCreateProjectRequest                                                  smithy.SchemaExtensions
+	eCreateProjectRequest_spaceName                                        smithy.SchemaExtensions
+	eCreateProjectRequest_displayName                                      smithy.SchemaExtensions
+	eCreateProjectRequest_description                                      smithy.SchemaExtensions
+	eCreateProjectResponse                                                 smithy.SchemaExtensions
+	eCreateProjectResponse_spaceName                                       smithy.SchemaExtensions
+	eCreateProjectResponse_name                                            smithy.SchemaExtensions
+	eCreateProjectResponse_displayName                                     smithy.SchemaExtensions
+	eCreateProjectResponse_description                                     smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest                                   smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest_spaceName                         smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest_projectName                       smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest_sourceRepositoryName              smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest_name                              smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchRequest_headCommitId                      smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchResponse                                  smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchResponse_ref                              smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchResponse_name                             smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchResponse_lastUpdatedTime                  smithy.SchemaExtensions
+	eCreateSourceRepositoryBranchResponse_headCommitId                     smithy.SchemaExtensions
+	eCreateSourceRepositoryRequest                                         smithy.SchemaExtensions
+	eCreateSourceRepositoryRequest_spaceName                               smithy.SchemaExtensions
+	eCreateSourceRepositoryRequest_projectName                             smithy.SchemaExtensions
+	eCreateSourceRepositoryRequest_name                                    smithy.SchemaExtensions
+	eCreateSourceRepositoryRequest_description                             smithy.SchemaExtensions
+	eCreateSourceRepositoryResponse                                        smithy.SchemaExtensions
+	eCreateSourceRepositoryResponse_spaceName                              smithy.SchemaExtensions
+	eCreateSourceRepositoryResponse_projectName                            smithy.SchemaExtensions
+	eCreateSourceRepositoryResponse_name                                   smithy.SchemaExtensions
+	eCreateSourceRepositoryResponse_description                            smithy.SchemaExtensions
+	eDeleteAccessTokenRequest                                              smithy.SchemaExtensions
+	eDeleteAccessTokenRequest_id                                           smithy.SchemaExtensions
+	eDeleteAccessTokenResponse                                             smithy.SchemaExtensions
+	eDeleteDevEnvironmentRequest                                           smithy.SchemaExtensions
+	eDeleteDevEnvironmentRequest_spaceName                                 smithy.SchemaExtensions
+	eDeleteDevEnvironmentRequest_projectName                               smithy.SchemaExtensions
+	eDeleteDevEnvironmentRequest_id                                        smithy.SchemaExtensions
+	eDeleteDevEnvironmentResponse                                          smithy.SchemaExtensions
+	eDeleteDevEnvironmentResponse_spaceName                                smithy.SchemaExtensions
+	eDeleteDevEnvironmentResponse_projectName                              smithy.SchemaExtensions
+	eDeleteDevEnvironmentResponse_id                                       smithy.SchemaExtensions
+	eDeleteProjectRequest                                                  smithy.SchemaExtensions
+	eDeleteProjectRequest_spaceName                                        smithy.SchemaExtensions
+	eDeleteProjectRequest_name                                             smithy.SchemaExtensions
+	eDeleteProjectResponse                                                 smithy.SchemaExtensions
+	eDeleteProjectResponse_spaceName                                       smithy.SchemaExtensions
+	eDeleteProjectResponse_name                                            smithy.SchemaExtensions
+	eDeleteProjectResponse_displayName                                     smithy.SchemaExtensions
+	eDeleteSourceRepositoryRequest                                         smithy.SchemaExtensions
+	eDeleteSourceRepositoryRequest_spaceName                               smithy.SchemaExtensions
+	eDeleteSourceRepositoryRequest_projectName                             smithy.SchemaExtensions
+	eDeleteSourceRepositoryRequest_name                                    smithy.SchemaExtensions
+	eDeleteSourceRepositoryResponse                                        smithy.SchemaExtensions
+	eDeleteSourceRepositoryResponse_spaceName                              smithy.SchemaExtensions
+	eDeleteSourceRepositoryResponse_projectName                            smithy.SchemaExtensions
+	eDeleteSourceRepositoryResponse_name                                   smithy.SchemaExtensions
+	eDeleteSpaceRequest                                                    smithy.SchemaExtensions
+	eDeleteSpaceRequest_name                                               smithy.SchemaExtensions
+	eDeleteSpaceResponse                                                   smithy.SchemaExtensions
+	eDeleteSpaceResponse_name                                              smithy.SchemaExtensions
+	eDeleteSpaceResponse_displayName                                       smithy.SchemaExtensions
+	eGetDevEnvironmentRequest                                              smithy.SchemaExtensions
+	eGetDevEnvironmentRequest_spaceName                                    smithy.SchemaExtensions
+	eGetDevEnvironmentRequest_projectName                                  smithy.SchemaExtensions
+	eGetDevEnvironmentRequest_id                                           smithy.SchemaExtensions
+	eGetDevEnvironmentResponse                                             smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_spaceName                                   smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_projectName                                 smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_id                                          smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_lastUpdatedTime                             smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_creatorId                                   smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_status                                      smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_statusReason                                smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_repositories                                smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_alias                                       smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_ides                                        smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_instanceType                                smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_inactivityTimeoutMinutes                    smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_persistentStorage                           smithy.SchemaExtensions
+	eGetDevEnvironmentResponse_vpcConnectionName                           smithy.SchemaExtensions
+	eGetProjectRequest                                                     smithy.SchemaExtensions
+	eGetProjectRequest_spaceName                                           smithy.SchemaExtensions
+	eGetProjectRequest_name                                                smithy.SchemaExtensions
+	eGetProjectResponse                                                    smithy.SchemaExtensions
+	eGetProjectResponse_spaceName                                          smithy.SchemaExtensions
+	eGetProjectResponse_name                                               smithy.SchemaExtensions
+	eGetProjectResponse_displayName                                        smithy.SchemaExtensions
+	eGetProjectResponse_description                                        smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsRequest                                   smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsRequest_spaceName                         smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsRequest_projectName                       smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsRequest_sourceRepositoryName              smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsResponse                                  smithy.SchemaExtensions
+	eGetSourceRepositoryCloneUrlsResponse_https                            smithy.SchemaExtensions
+	eGetSourceRepositoryRequest                                            smithy.SchemaExtensions
+	eGetSourceRepositoryRequest_spaceName                                  smithy.SchemaExtensions
+	eGetSourceRepositoryRequest_projectName                                smithy.SchemaExtensions
+	eGetSourceRepositoryRequest_name                                       smithy.SchemaExtensions
+	eGetSourceRepositoryResponse                                           smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_spaceName                                 smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_projectName                               smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_name                                      smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_description                               smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_lastUpdatedTime                           smithy.SchemaExtensions
+	eGetSourceRepositoryResponse_createdTime                               smithy.SchemaExtensions
+	eGetSpaceRequest                                                       smithy.SchemaExtensions
+	eGetSpaceRequest_name                                                  smithy.SchemaExtensions
+	eGetSpaceResponse                                                      smithy.SchemaExtensions
+	eGetSpaceResponse_name                                                 smithy.SchemaExtensions
+	eGetSpaceResponse_regionName                                           smithy.SchemaExtensions
+	eGetSpaceResponse_displayName                                          smithy.SchemaExtensions
+	eGetSpaceResponse_description                                          smithy.SchemaExtensions
+	eGetSubscriptionRequest                                                smithy.SchemaExtensions
+	eGetSubscriptionRequest_spaceName                                      smithy.SchemaExtensions
+	eGetSubscriptionResponse                                               smithy.SchemaExtensions
+	eGetSubscriptionResponse_subscriptionType                              smithy.SchemaExtensions
+	eGetSubscriptionResponse_awsAccountName                                smithy.SchemaExtensions
+	eGetSubscriptionResponse_pendingSubscriptionType                       smithy.SchemaExtensions
+	eGetSubscriptionResponse_pendingSubscriptionStartTime                  smithy.SchemaExtensions
+	eGetUserDetailsRequest                                                 smithy.SchemaExtensions
+	eGetUserDetailsRequest_id                                              smithy.SchemaExtensions
+	eGetUserDetailsRequest_userName                                        smithy.SchemaExtensions
+	eGetUserDetailsResponse                                                smithy.SchemaExtensions
+	eGetUserDetailsResponse_userId                                         smithy.SchemaExtensions
+	eGetUserDetailsResponse_userName                                       smithy.SchemaExtensions
+	eGetUserDetailsResponse_displayName                                    smithy.SchemaExtensions
+	eGetUserDetailsResponse_primaryEmail                                   smithy.SchemaExtensions
+	eGetUserDetailsResponse_version                                        smithy.SchemaExtensions
+	eGetWorkflowRequest                                                    smithy.SchemaExtensions
+	eGetWorkflowRequest_spaceName                                          smithy.SchemaExtensions
+	eGetWorkflowRequest_id                                                 smithy.SchemaExtensions
+	eGetWorkflowRequest_projectName                                        smithy.SchemaExtensions
+	eGetWorkflowResponse                                                   smithy.SchemaExtensions
+	eGetWorkflowResponse_spaceName                                         smithy.SchemaExtensions
+	eGetWorkflowResponse_projectName                                       smithy.SchemaExtensions
+	eGetWorkflowResponse_id                                                smithy.SchemaExtensions
+	eGetWorkflowResponse_name                                              smithy.SchemaExtensions
+	eGetWorkflowResponse_sourceRepositoryName                              smithy.SchemaExtensions
+	eGetWorkflowResponse_sourceBranchName                                  smithy.SchemaExtensions
+	eGetWorkflowResponse_definition                                        smithy.SchemaExtensions
+	eGetWorkflowResponse_createdTime                                       smithy.SchemaExtensions
+	eGetWorkflowResponse_lastUpdatedTime                                   smithy.SchemaExtensions
+	eGetWorkflowResponse_runMode                                           smithy.SchemaExtensions
+	eGetWorkflowResponse_status                                            smithy.SchemaExtensions
+	eGetWorkflowRunRequest                                                 smithy.SchemaExtensions
+	eGetWorkflowRunRequest_spaceName                                       smithy.SchemaExtensions
+	eGetWorkflowRunRequest_id                                              smithy.SchemaExtensions
+	eGetWorkflowRunRequest_projectName                                     smithy.SchemaExtensions
+	eGetWorkflowRunResponse                                                smithy.SchemaExtensions
+	eGetWorkflowRunResponse_spaceName                                      smithy.SchemaExtensions
+	eGetWorkflowRunResponse_projectName                                    smithy.SchemaExtensions
+	eGetWorkflowRunResponse_id                                             smithy.SchemaExtensions
+	eGetWorkflowRunResponse_workflowId                                     smithy.SchemaExtensions
+	eGetWorkflowRunResponse_status                                         smithy.SchemaExtensions
+	eGetWorkflowRunResponse_statusReasons                                  smithy.SchemaExtensions
+	eGetWorkflowRunResponse_startTime                                      smithy.SchemaExtensions
+	eGetWorkflowRunResponse_endTime                                        smithy.SchemaExtensions
+	eGetWorkflowRunResponse_lastUpdatedTime                                smithy.SchemaExtensions
+	eListAccessTokensRequest                                               smithy.SchemaExtensions
+	eListAccessTokensRequest_maxResults                                    smithy.SchemaExtensions
+	eListAccessTokensRequest_nextToken                                     smithy.SchemaExtensions
+	eListAccessTokensResponse                                              smithy.SchemaExtensions
+	eListAccessTokensResponse_items                                        smithy.SchemaExtensions
+	eListAccessTokensResponse_nextToken                                    smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest                                     smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest_spaceName                           smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest_projectName                         smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest_devEnvironmentId                    smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest_nextToken                           smithy.SchemaExtensions
+	eListDevEnvironmentSessionsRequest_maxResults                          smithy.SchemaExtensions
+	eListDevEnvironmentSessionsResponse                                    smithy.SchemaExtensions
+	eListDevEnvironmentSessionsResponse_items                              smithy.SchemaExtensions
+	eListDevEnvironmentSessionsResponse_nextToken                          smithy.SchemaExtensions
+	eListDevEnvironmentsRequest                                            smithy.SchemaExtensions
+	eListDevEnvironmentsRequest_spaceName                                  smithy.SchemaExtensions
+	eListDevEnvironmentsRequest_projectName                                smithy.SchemaExtensions
+	eListDevEnvironmentsRequest_filters                                    smithy.SchemaExtensions
+	eListDevEnvironmentsRequest_nextToken                                  smithy.SchemaExtensions
+	eListDevEnvironmentsRequest_maxResults                                 smithy.SchemaExtensions
+	eListDevEnvironmentsResponse                                           smithy.SchemaExtensions
+	eListDevEnvironmentsResponse_items                                     smithy.SchemaExtensions
+	eListDevEnvironmentsResponse_nextToken                                 smithy.SchemaExtensions
+	eListEventLogsRequest                                                  smithy.SchemaExtensions
+	eListEventLogsRequest_spaceName                                        smithy.SchemaExtensions
+	eListEventLogsRequest_startTime                                        smithy.SchemaExtensions
+	eListEventLogsRequest_endTime                                          smithy.SchemaExtensions
+	eListEventLogsRequest_eventName                                        smithy.SchemaExtensions
+	eListEventLogsRequest_nextToken                                        smithy.SchemaExtensions
+	eListEventLogsRequest_maxResults                                       smithy.SchemaExtensions
+	eListEventLogsResponse                                                 smithy.SchemaExtensions
+	eListEventLogsResponse_nextToken                                       smithy.SchemaExtensions
+	eListEventLogsResponse_items                                           smithy.SchemaExtensions
+	eListProjectsRequest                                                   smithy.SchemaExtensions
+	eListProjectsRequest_spaceName                                         smithy.SchemaExtensions
+	eListProjectsRequest_nextToken                                         smithy.SchemaExtensions
+	eListProjectsRequest_maxResults                                        smithy.SchemaExtensions
+	eListProjectsRequest_filters                                           smithy.SchemaExtensions
+	eListProjectsResponse                                                  smithy.SchemaExtensions
+	eListProjectsResponse_nextToken                                        smithy.SchemaExtensions
+	eListProjectsResponse_items                                            smithy.SchemaExtensions
+	eListSourceRepositoriesRequest                                         smithy.SchemaExtensions
+	eListSourceRepositoriesRequest_spaceName                               smithy.SchemaExtensions
+	eListSourceRepositoriesRequest_projectName                             smithy.SchemaExtensions
+	eListSourceRepositoriesRequest_nextToken                               smithy.SchemaExtensions
+	eListSourceRepositoriesRequest_maxResults                              smithy.SchemaExtensions
+	eListSourceRepositoriesResponse                                        smithy.SchemaExtensions
+	eListSourceRepositoriesResponse_items                                  smithy.SchemaExtensions
+	eListSourceRepositoriesResponse_nextToken                              smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest                                   smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest_spaceName                         smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest_projectName                       smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest_sourceRepositoryName              smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest_nextToken                         smithy.SchemaExtensions
+	eListSourceRepositoryBranchesRequest_maxResults                        smithy.SchemaExtensions
+	eListSourceRepositoryBranchesResponse                                  smithy.SchemaExtensions
+	eListSourceRepositoryBranchesResponse_nextToken                        smithy.SchemaExtensions
+	eListSourceRepositoryBranchesResponse_items                            smithy.SchemaExtensions
+	eListSpacesRequest                                                     smithy.SchemaExtensions
+	eListSpacesRequest_nextToken                                           smithy.SchemaExtensions
+	eListSpacesResponse                                                    smithy.SchemaExtensions
+	eListSpacesResponse_nextToken                                          smithy.SchemaExtensions
+	eListSpacesResponse_items                                              smithy.SchemaExtensions
+	eListWorkflowRunsRequest                                               smithy.SchemaExtensions
+	eListWorkflowRunsRequest_spaceName                                     smithy.SchemaExtensions
+	eListWorkflowRunsRequest_workflowId                                    smithy.SchemaExtensions
+	eListWorkflowRunsRequest_projectName                                   smithy.SchemaExtensions
+	eListWorkflowRunsRequest_nextToken                                     smithy.SchemaExtensions
+	eListWorkflowRunsRequest_maxResults                                    smithy.SchemaExtensions
+	eListWorkflowRunsRequest_sortBy                                        smithy.SchemaExtensions
+	eListWorkflowRunsResponse                                              smithy.SchemaExtensions
+	eListWorkflowRunsResponse_nextToken                                    smithy.SchemaExtensions
+	eListWorkflowRunsResponse_items                                        smithy.SchemaExtensions
+	eListWorkflowsRequest                                                  smithy.SchemaExtensions
+	eListWorkflowsRequest_spaceName                                        smithy.SchemaExtensions
+	eListWorkflowsRequest_projectName                                      smithy.SchemaExtensions
+	eListWorkflowsRequest_nextToken                                        smithy.SchemaExtensions
+	eListWorkflowsRequest_maxResults                                       smithy.SchemaExtensions
+	eListWorkflowsRequest_sortBy                                           smithy.SchemaExtensions
+	eListWorkflowsResponse                                                 smithy.SchemaExtensions
+	eListWorkflowsResponse_nextToken                                       smithy.SchemaExtensions
+	eListWorkflowsResponse_items                                           smithy.SchemaExtensions
+	eStartDevEnvironmentRequest                                            smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_spaceName                                  smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_projectName                                smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_id                                         smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_ides                                       smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_instanceType                               smithy.SchemaExtensions
+	eStartDevEnvironmentRequest_inactivityTimeoutMinutes                   smithy.SchemaExtensions
+	eStartDevEnvironmentResponse                                           smithy.SchemaExtensions
+	eStartDevEnvironmentResponse_spaceName                                 smithy.SchemaExtensions
+	eStartDevEnvironmentResponse_projectName                               smithy.SchemaExtensions
+	eStartDevEnvironmentResponse_id                                        smithy.SchemaExtensions
+	eStartDevEnvironmentResponse_status                                    smithy.SchemaExtensions
+	eStartDevEnvironmentSessionRequest                                     smithy.SchemaExtensions
+	eStartDevEnvironmentSessionRequest_spaceName                           smithy.SchemaExtensions
+	eStartDevEnvironmentSessionRequest_projectName                         smithy.SchemaExtensions
+	eStartDevEnvironmentSessionRequest_id                                  smithy.SchemaExtensions
+	eStartDevEnvironmentSessionRequest_sessionConfiguration                smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse                                    smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse_accessDetails                      smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse_sessionId                          smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse_spaceName                          smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse_projectName                        smithy.SchemaExtensions
+	eStartDevEnvironmentSessionResponse_id                                 smithy.SchemaExtensions
+	eStartWorkflowRunRequest                                               smithy.SchemaExtensions
+	eStartWorkflowRunRequest_spaceName                                     smithy.SchemaExtensions
+	eStartWorkflowRunRequest_projectName                                   smithy.SchemaExtensions
+	eStartWorkflowRunRequest_workflowId                                    smithy.SchemaExtensions
+	eStartWorkflowRunRequest_clientToken                                   smithy.SchemaExtensions
+	eStartWorkflowRunResponse                                              smithy.SchemaExtensions
+	eStartWorkflowRunResponse_spaceName                                    smithy.SchemaExtensions
+	eStartWorkflowRunResponse_projectName                                  smithy.SchemaExtensions
+	eStartWorkflowRunResponse_id                                           smithy.SchemaExtensions
+	eStartWorkflowRunResponse_workflowId                                   smithy.SchemaExtensions
+	eStopDevEnvironmentRequest                                             smithy.SchemaExtensions
+	eStopDevEnvironmentRequest_spaceName                                   smithy.SchemaExtensions
+	eStopDevEnvironmentRequest_projectName                                 smithy.SchemaExtensions
+	eStopDevEnvironmentRequest_id                                          smithy.SchemaExtensions
+	eStopDevEnvironmentResponse                                            smithy.SchemaExtensions
+	eStopDevEnvironmentResponse_spaceName                                  smithy.SchemaExtensions
+	eStopDevEnvironmentResponse_projectName                                smithy.SchemaExtensions
+	eStopDevEnvironmentResponse_id                                         smithy.SchemaExtensions
+	eStopDevEnvironmentResponse_status                                     smithy.SchemaExtensions
+	eStopDevEnvironmentSessionRequest                                      smithy.SchemaExtensions
+	eStopDevEnvironmentSessionRequest_spaceName                            smithy.SchemaExtensions
+	eStopDevEnvironmentSessionRequest_projectName                          smithy.SchemaExtensions
+	eStopDevEnvironmentSessionRequest_id                                   smithy.SchemaExtensions
+	eStopDevEnvironmentSessionRequest_sessionId                            smithy.SchemaExtensions
+	eStopDevEnvironmentSessionResponse                                     smithy.SchemaExtensions
+	eStopDevEnvironmentSessionResponse_spaceName                           smithy.SchemaExtensions
+	eStopDevEnvironmentSessionResponse_projectName                         smithy.SchemaExtensions
+	eStopDevEnvironmentSessionResponse_id                                  smithy.SchemaExtensions
+	eStopDevEnvironmentSessionResponse_sessionId                           smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest                                           smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_spaceName                                 smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_projectName                               smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_id                                        smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_alias                                     smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_ides                                      smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_instanceType                              smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_inactivityTimeoutMinutes                  smithy.SchemaExtensions
+	eUpdateDevEnvironmentRequest_clientToken                               smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse                                          smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_id                                       smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_spaceName                                smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_projectName                              smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_alias                                    smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_ides                                     smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_instanceType                             smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_inactivityTimeoutMinutes                 smithy.SchemaExtensions
+	eUpdateDevEnvironmentResponse_clientToken                              smithy.SchemaExtensions
+	eUpdateProjectRequest                                                  smithy.SchemaExtensions
+	eUpdateProjectRequest_spaceName                                        smithy.SchemaExtensions
+	eUpdateProjectRequest_name                                             smithy.SchemaExtensions
+	eUpdateProjectRequest_description                                      smithy.SchemaExtensions
+	eUpdateProjectResponse                                                 smithy.SchemaExtensions
+	eUpdateProjectResponse_spaceName                                       smithy.SchemaExtensions
+	eUpdateProjectResponse_name                                            smithy.SchemaExtensions
+	eUpdateProjectResponse_displayName                                     smithy.SchemaExtensions
+	eUpdateProjectResponse_description                                     smithy.SchemaExtensions
+	eUpdateSpaceRequest                                                    smithy.SchemaExtensions
+	eUpdateSpaceRequest_name                                               smithy.SchemaExtensions
+	eUpdateSpaceRequest_description                                        smithy.SchemaExtensions
+	eUpdateSpaceResponse                                                   smithy.SchemaExtensions
+	eUpdateSpaceResponse_name                                              smithy.SchemaExtensions
+	eUpdateSpaceResponse_displayName                                       smithy.SchemaExtensions
+	eUpdateSpaceResponse_description                                       smithy.SchemaExtensions
+	eVerifySessionResponse                                                 smithy.SchemaExtensions
+	eVerifySessionResponse_identity                                        smithy.SchemaExtensions
+)
 
-var CreateDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iCreateAccessToken                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateAccessToken"}
+	iCreateDevEnvironment                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateDevEnvironment"}
+	iCreateProject                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateProject"}
+	iCreateSourceRepository                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepository"}
+	iCreateSourceRepositoryBranch                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepositoryBranch"}
+	iDeleteAccessToken                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteAccessToken"}
+	iDeleteDevEnvironment                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteDevEnvironment"}
+	iDeleteProject                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteProject"}
+	iDeleteSourceRepository                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSourceRepository"}
+	iDeleteSpace                                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSpace"}
+	iGetDevEnvironment                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetDevEnvironment"}
+	iGetProject                                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetProject"}
+	iGetSourceRepository                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepository"}
+	iGetSourceRepositoryCloneUrls                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepositoryCloneUrls"}
+	iGetSpace                                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSpace"}
+	iGetSubscription                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSubscription"}
+	iGetUserDetails                               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetUserDetails"}
+	iGetWorkflow                                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflow"}
+	iGetWorkflowRun                               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflowRun"}
+	iListAccessTokens                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListAccessTokens"}
+	iListDevEnvironments                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironments"}
+	iListDevEnvironmentSessions                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironmentSessions"}
+	iListEventLogs                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListEventLogs"}
+	iListProjects                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListProjects"}
+	iListSourceRepositories                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositories"}
+	iListSourceRepositoryBranches                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoryBranches"}
+	iListSpaces                                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSpaces"}
+	iListWorkflowRuns                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflowRuns"}
+	iListWorkflows                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflows"}
+	iStartDevEnvironment                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironment"}
+	iStartDevEnvironmentSession                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironmentSession"}
+	iStartWorkflowRun                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartWorkflowRun"}
+	iStopDevEnvironment                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironment"}
+	iStopDevEnvironmentSession                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironmentSession"}
+	iUpdateDevEnvironment                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateDevEnvironment"}
+	iUpdateProject                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateProject"}
+	iUpdateSpace                                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateSpace"}
+	iVerifySession                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "VerifySession"}
+	i_CodeCatalyst                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CodeCatalyst"}
+	iAccessDeniedException                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessDeniedException"}
+	i_AccessTokenId                               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessTokenId"}
+	i_AccessTokenName                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessTokenName"}
+	i_AccessTokenSecret                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessTokenSecret"}
+	i_AccessTokenSummaries                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessTokenSummaries"}
+	iAccessTokenSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "AccessTokenSummary"}
+	i_ClientToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ClientToken"}
+	i_ComparisonOperator                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ComparisonOperator"}
+	iConflictException                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ConflictException"}
+	iDevEnvironmentAccessDetails                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentAccessDetails"}
+	i_DevEnvironmentRepositorySummaries           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentRepositorySummaries"}
+	iDevEnvironmentRepositorySummary              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentRepositorySummary"}
+	iDevEnvironmentSessionConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSessionConfiguration"}
+	i_DevEnvironmentSessionsSummaryList           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSessionsSummaryList"}
+	iDevEnvironmentSessionSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSessionSummary"}
+	i_DevEnvironmentSessionType                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSessionType"}
+	i_DevEnvironmentStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentStatus"}
+	iDevEnvironmentSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSummary"}
+	i_DevEnvironmentSummaryList                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DevEnvironmentSummaryList"}
+	iEmailAddress                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "EmailAddress"}
+	i_EventLogEntries                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "EventLogEntries"}
+	iEventLogEntry                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "EventLogEntry"}
+	iEventPayload                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "EventPayload"}
+	iExecuteCommandSessionConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ExecuteCommandSessionConfiguration"}
+	i_ExecuteCommandSessionConfigurationArguments = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ExecuteCommandSessionConfigurationArguments"}
+	iFilter                                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Filter"}
+	i_FilterKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "FilterKey"}
+	i_Filters                                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Filters"}
+	iIde                                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Ide"}
+	iIdeConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "IdeConfiguration"}
+	i_IdeConfigurationList                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "IdeConfigurationList"}
+	i_Ides                                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Ides"}
+	i_InactivityTimeoutMinutes                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "InactivityTimeoutMinutes"}
+	i_InstanceType                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "InstanceType"}
+	iListSourceRepositoriesItem                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoriesItem"}
+	i_ListSourceRepositoriesItems                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoriesItems"}
+	iListSourceRepositoryBranchesItem             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoryBranchesItem"}
+	i_ListSourceRepositoryBranchesItems           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoryBranchesItems"}
+	i_NameString                                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "NameString"}
+	i_OperationType                               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "OperationType"}
+	iPersistentStorage                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "PersistentStorage"}
+	iPersistentStorageConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "PersistentStorageConfiguration"}
+	i_ProjectDescription                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectDescription"}
+	i_ProjectDisplayName                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectDisplayName"}
+	iProjectInformation                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectInformation"}
+	iProjectListFilter                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectListFilter"}
+	i_ProjectListFilters                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectListFilters"}
+	i_ProjectSummaries                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectSummaries"}
+	iProjectSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ProjectSummary"}
+	i_RegionString                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "RegionString"}
+	i_RepositoriesInput                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "RepositoriesInput"}
+	iRepositoryInput                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "RepositoryInput"}
+	iResourceNotFoundException                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ResourceNotFoundException"}
+	i_SensitiveString                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SensitiveString"}
+	iServiceQuotaExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ServiceQuotaExceededException"}
+	i_SourceRepositoryBranchRefString             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SourceRepositoryBranchRefString"}
+	i_SourceRepositoryBranchString                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SourceRepositoryBranchString"}
+	i_SourceRepositoryDescriptionString           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SourceRepositoryDescriptionString"}
+	i_SourceRepositoryIdString                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SourceRepositoryIdString"}
+	i_SourceRepositoryNameString                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SourceRepositoryNameString"}
+	i_SpaceDescription                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SpaceDescription"}
+	i_SpaceSummaries                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SpaceSummaries"}
+	iSpaceSummary                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "SpaceSummary"}
+	i_StatusReason                                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StatusReason"}
+	i_StringList                                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StringList"}
+	iThrottlingException                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ThrottlingException"}
+	i_Timestamp                                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Timestamp"}
+	iUserIdentity                                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UserIdentity"}
+	i_UserType                                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UserType"}
+	i_Uuid                                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "Uuid"}
+	iValidationException                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ValidationException"}
+	iWorkflowDefinition                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowDefinition"}
+	iWorkflowDefinitionSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowDefinitionSummary"}
+	i_WorkflowRunMode                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunMode"}
+	iWorkflowRunSortCriteria                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunSortCriteria"}
+	i_WorkflowRunSortCriteriaList                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunSortCriteriaList"}
+	i_WorkflowRunStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunStatus"}
+	iWorkflowRunStatusReason                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunStatusReason"}
+	i_WorkflowRunStatusReasons                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunStatusReasons"}
+	i_WorkflowRunSummaries                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunSummaries"}
+	iWorkflowRunSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowRunSummary"}
+	iWorkflowSortCriteria                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowSortCriteria"}
+	i_WorkflowSortCriteriaList                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowSortCriteriaList"}
+	i_WorkflowStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowStatus"}
+	i_WorkflowSummaries                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowSummaries"}
+	iWorkflowSummary                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "WorkflowSummary"}
+	iCreateAccessTokenRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateAccessTokenRequest"}
+	iCreateAccessTokenResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateAccessTokenResponse"}
+	iCreateDevEnvironmentRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateDevEnvironmentRequest"}
+	iCreateDevEnvironmentResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateDevEnvironmentResponse"}
+	iCreateProjectRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateProjectRequest"}
+	iCreateProjectResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateProjectResponse"}
+	iCreateSourceRepositoryBranchRequest          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepositoryBranchRequest"}
+	iCreateSourceRepositoryBranchResponse         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepositoryBranchResponse"}
+	iCreateSourceRepositoryRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepositoryRequest"}
+	iCreateSourceRepositoryResponse               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "CreateSourceRepositoryResponse"}
+	iDeleteAccessTokenRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteAccessTokenRequest"}
+	iDeleteAccessTokenResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteAccessTokenResponse"}
+	iDeleteDevEnvironmentRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteDevEnvironmentRequest"}
+	iDeleteDevEnvironmentResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteDevEnvironmentResponse"}
+	iDeleteProjectRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteProjectRequest"}
+	iDeleteProjectResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteProjectResponse"}
+	iDeleteSourceRepositoryRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSourceRepositoryRequest"}
+	iDeleteSourceRepositoryResponse               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSourceRepositoryResponse"}
+	iDeleteSpaceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSpaceRequest"}
+	iDeleteSpaceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "DeleteSpaceResponse"}
+	iGetDevEnvironmentRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetDevEnvironmentRequest"}
+	iGetDevEnvironmentResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetDevEnvironmentResponse"}
+	iGetProjectRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetProjectRequest"}
+	iGetProjectResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetProjectResponse"}
+	iGetSourceRepositoryCloneUrlsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepositoryCloneUrlsRequest"}
+	iGetSourceRepositoryCloneUrlsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepositoryCloneUrlsResponse"}
+	iGetSourceRepositoryRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepositoryRequest"}
+	iGetSourceRepositoryResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSourceRepositoryResponse"}
+	iGetSpaceRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSpaceRequest"}
+	iGetSpaceResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSpaceResponse"}
+	iGetSubscriptionRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSubscriptionRequest"}
+	iGetSubscriptionResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetSubscriptionResponse"}
+	iGetUserDetailsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetUserDetailsRequest"}
+	iGetUserDetailsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetUserDetailsResponse"}
+	iGetWorkflowRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflowRequest"}
+	iGetWorkflowResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflowResponse"}
+	iGetWorkflowRunRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflowRunRequest"}
+	iGetWorkflowRunResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "GetWorkflowRunResponse"}
+	iListAccessTokensRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListAccessTokensRequest"}
+	iListAccessTokensResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListAccessTokensResponse"}
+	iListDevEnvironmentSessionsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironmentSessionsRequest"}
+	iListDevEnvironmentSessionsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironmentSessionsResponse"}
+	iListDevEnvironmentsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironmentsRequest"}
+	iListDevEnvironmentsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListDevEnvironmentsResponse"}
+	iListEventLogsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListEventLogsRequest"}
+	iListEventLogsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListEventLogsResponse"}
+	iListProjectsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListProjectsRequest"}
+	iListProjectsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListProjectsResponse"}
+	iListSourceRepositoriesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoriesRequest"}
+	iListSourceRepositoriesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoriesResponse"}
+	iListSourceRepositoryBranchesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoryBranchesRequest"}
+	iListSourceRepositoryBranchesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSourceRepositoryBranchesResponse"}
+	iListSpacesRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSpacesRequest"}
+	iListSpacesResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListSpacesResponse"}
+	iListWorkflowRunsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflowRunsRequest"}
+	iListWorkflowRunsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflowRunsResponse"}
+	iListWorkflowsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflowsRequest"}
+	iListWorkflowsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "ListWorkflowsResponse"}
+	iStartDevEnvironmentRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironmentRequest"}
+	iStartDevEnvironmentResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironmentResponse"}
+	iStartDevEnvironmentSessionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironmentSessionRequest"}
+	iStartDevEnvironmentSessionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartDevEnvironmentSessionResponse"}
+	iStartWorkflowRunRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartWorkflowRunRequest"}
+	iStartWorkflowRunResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StartWorkflowRunResponse"}
+	iStopDevEnvironmentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironmentRequest"}
+	iStopDevEnvironmentResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironmentResponse"}
+	iStopDevEnvironmentSessionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironmentSessionRequest"}
+	iStopDevEnvironmentSessionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "StopDevEnvironmentSessionResponse"}
+	iUpdateDevEnvironmentRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateDevEnvironmentRequest"}
+	iUpdateDevEnvironmentResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateDevEnvironmentResponse"}
+	iUpdateProjectRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateProjectRequest"}
+	iUpdateProjectResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateProjectResponse"}
+	iUpdateSpaceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateSpaceRequest"}
+	iUpdateSpaceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "UpdateSpaceResponse"}
+	iVerifySessionResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.codecatalyst", Name: "VerifySessionResponse"}
+	pString                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/accessTokens",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments",
-	Code: 201})
-
-var CreateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects",
-	Code: 201})
-
-var CreateSourceRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}",
-	Code: 201})
-
-var CreateSourceRepositoryBranch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepositoryBranch",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/branches/{name}",
-	Code: 201})
-
-var DeleteAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/accessTokens/{id}",
-	Code: 200})
-
-var DeleteDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}",
-	Code: 200})
-
-var DeleteProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/spaces/{spaceName}/projects/{name}",
-	Code: 200})
-
-var DeleteSourceRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSourceRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}",
-	Code: 200})
-
-var DeleteSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/spaces/{name}",
-	Code: 200})
-
-var GetDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}",
-	Code: 200})
-
-var GetProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{name}",
-	Code: 200})
-
-var GetSourceRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}",
-	Code: 200})
-
-var GetSourceRepositoryCloneUrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepositoryCloneUrls",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/cloneUrls",
-	Code: 200})
-
-var GetSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{name}",
-	Code: 200})
-
-var GetSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/subscription",
-	Code: 200})
-
-var GetUserDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetUserDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/userDetails",
-	Code: 200})
-
-var GetWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}",
-	Code: 200})
-
-var GetWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}",
-	Code: 200})
-
-var ListAccessTokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListAccessTokens",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/accessTokens",
-	Code: 200})
-
-var ListDevEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/devEnvironments",
-	Code: 200})
-
-var ListDevEnvironmentSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironmentSessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{devEnvironmentId}/sessions",
-	Code: 200})
-
-var ListEventLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListEventLogs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/eventLogs",
-	Code: 200})
-
-var ListProjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListProjects",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects",
-	Code: 200})
-
-var ListSourceRepositories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositories",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories",
-	Code: 200})
-
-var ListSourceRepositoryBranches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoryBranches",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/branches",
-	Code: 200})
-
-var ListSpaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSpaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces",
-	Code: 200})
-
-var ListWorkflowRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflowRuns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns",
-	Code: 200})
-
-var ListWorkflows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/workflows",
-	Code: 200})
-
-var StartDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/start",
-	Code: 200})
-
-var StartDevEnvironmentSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironmentSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session",
-	Code: 200})
-
-var StartWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns",
-	Code: 200})
-
-var StopDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/stop",
-	Code: 200})
-
-var StopDevEnvironmentSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironmentSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session/{sessionId}",
-	Code: 200})
-
-var UpdateDevEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateDevEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}",
-	Code: 200})
-
-var UpdateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v1/spaces/{spaceName}/projects/{name}",
-	Code: 200})
-
-var UpdateSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v1/spaces/{name}",
-	Code: 200})
-
-var VerifySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "VerifySession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/session",
-	Code: 200})
-
-var _CodeCatalyst = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CodeCatalyst",
-}, smithy.ShapeTypeService, 0)
-
-var CodeCatalyst = smithy.NewServiceSchema(_CodeCatalyst, "2022-09-28")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccessTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessTokenName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessTokenName",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessTokenSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessTokenSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccessTokenSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessTokenSummaries",
-}, smithy.ShapeTypeList, 1)
-var _AccessTokenSummaries_member *smithy.Schema
-
-var AccessTokenSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "AccessTokenSummary",
-}, smithy.ShapeTypeStructure, 3)
-var AccessTokenSummary_id *smithy.Schema
-
-var AccessTokenSummary_name *smithy.Schema
-
-var AccessTokenSummary_expiresTime *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var DevEnvironmentAccessDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentAccessDetails",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var DevEnvironmentAccessDetails_streamUrl *smithy.Schema
-
-var DevEnvironmentAccessDetails_tokenValue *smithy.Schema
-
-var _DevEnvironmentRepositorySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentRepositorySummaries",
-}, smithy.ShapeTypeList, 1)
-var _DevEnvironmentRepositorySummaries_member *smithy.Schema
-
-var DevEnvironmentRepositorySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentRepositorySummary",
-}, smithy.ShapeTypeStructure, 2)
-var DevEnvironmentRepositorySummary_repositoryName *smithy.Schema
-
-var DevEnvironmentRepositorySummary_branchName *smithy.Schema
-
-var DevEnvironmentSessionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSessionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DevEnvironmentSessionConfiguration_sessionType *smithy.Schema
-
-var DevEnvironmentSessionConfiguration_executeCommandSessionConfiguration *smithy.Schema
-
-var _DevEnvironmentSessionsSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSessionsSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DevEnvironmentSessionsSummaryList_member *smithy.Schema
-
-var DevEnvironmentSessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSessionSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DevEnvironmentSessionSummary_spaceName *smithy.Schema
-
-var DevEnvironmentSessionSummary_projectName *smithy.Schema
-
-var DevEnvironmentSessionSummary_devEnvironmentId *smithy.Schema
-
-var DevEnvironmentSessionSummary_startedTime *smithy.Schema
-
-var DevEnvironmentSessionSummary_id *smithy.Schema
-
-var _DevEnvironmentSessionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSessionType",
-}, smithy.ShapeTypeString, 0)
-
-var _DevEnvironmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var DevEnvironmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSummary",
-}, smithy.ShapeTypeStructure, 14)
-var DevEnvironmentSummary_spaceName *smithy.Schema
-
-var DevEnvironmentSummary_projectName *smithy.Schema
-
-var DevEnvironmentSummary_id *smithy.Schema
-
-var DevEnvironmentSummary_lastUpdatedTime *smithy.Schema
-
-var DevEnvironmentSummary_creatorId *smithy.Schema
-
-var DevEnvironmentSummary_status *smithy.Schema
-
-var DevEnvironmentSummary_statusReason *smithy.Schema
-
-var DevEnvironmentSummary_repositories *smithy.Schema
-
-var DevEnvironmentSummary_alias *smithy.Schema
-
-var DevEnvironmentSummary_ides *smithy.Schema
-
-var DevEnvironmentSummary_instanceType *smithy.Schema
-
-var DevEnvironmentSummary_inactivityTimeoutMinutes *smithy.Schema
-
-var DevEnvironmentSummary_persistentStorage *smithy.Schema
-
-var DevEnvironmentSummary_vpcConnectionName *smithy.Schema
-
-var _DevEnvironmentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DevEnvironmentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DevEnvironmentSummaryList_member *smithy.Schema
-
-var EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeStructure, 2)
-var EmailAddress_email *smithy.Schema
-
-var EmailAddress_verified *smithy.Schema
-
-var _EventLogEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "EventLogEntries",
-}, smithy.ShapeTypeList, 1)
-var _EventLogEntries_member *smithy.Schema
-
-var EventLogEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "EventLogEntry",
-}, smithy.ShapeTypeStructure, 15)
-var EventLogEntry_id *smithy.Schema
-
-var EventLogEntry_eventName *smithy.Schema
-
-var EventLogEntry_eventType *smithy.Schema
-
-var EventLogEntry_eventCategory *smithy.Schema
-
-var EventLogEntry_eventSource *smithy.Schema
-
-var EventLogEntry_eventTime *smithy.Schema
-
-var EventLogEntry_operationType *smithy.Schema
-
-var EventLogEntry_userIdentity *smithy.Schema
-
-var EventLogEntry_projectInformation *smithy.Schema
-
-var EventLogEntry_requestId *smithy.Schema
-
-var EventLogEntry_requestPayload *smithy.Schema
-
-var EventLogEntry_responsePayload *smithy.Schema
-
-var EventLogEntry_errorCode *smithy.Schema
-
-var EventLogEntry_sourceIpAddress *smithy.Schema
-
-var EventLogEntry_userAgent *smithy.Schema
-
-var EventPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "EventPayload",
-}, smithy.ShapeTypeStructure, 2)
-var EventPayload_contentType *smithy.Schema
-
-var EventPayload_data *smithy.Schema
-
-var ExecuteCommandSessionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ExecuteCommandSessionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ExecuteCommandSessionConfiguration_command *smithy.Schema
-
-var ExecuteCommandSessionConfiguration_arguments *smithy.Schema
-
-var _ExecuteCommandSessionConfigurationArguments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ExecuteCommandSessionConfigurationArguments",
-}, smithy.ShapeTypeList, 1)
-var _ExecuteCommandSessionConfigurationArguments_member *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_key *smithy.Schema
-
-var Filter_values *smithy.Schema
-
-var Filter_comparisonOperator *smithy.Schema
-
-var _FilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "FilterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var Ide = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Ide",
-}, smithy.ShapeTypeStructure, 2)
-var Ide_runtime *smithy.Schema
-
-var Ide_name *smithy.Schema
-
-var IdeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "IdeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IdeConfiguration_runtime *smithy.Schema
-
-var IdeConfiguration_name *smithy.Schema
-
-var _IdeConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "IdeConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _IdeConfigurationList_member *smithy.Schema
-
-var _Ides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Ides",
-}, smithy.ShapeTypeList, 1)
-var _Ides_member *smithy.Schema
-
-var _InactivityTimeoutMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "InactivityTimeoutMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var ListSourceRepositoriesItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoriesItem",
-}, smithy.ShapeTypeStructure, 5)
-var ListSourceRepositoriesItem_id *smithy.Schema
-
-var ListSourceRepositoriesItem_name *smithy.Schema
-
-var ListSourceRepositoriesItem_description *smithy.Schema
-
-var ListSourceRepositoriesItem_lastUpdatedTime *smithy.Schema
-
-var ListSourceRepositoriesItem_createdTime *smithy.Schema
-
-var _ListSourceRepositoriesItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoriesItems",
-}, smithy.ShapeTypeList, 1)
-var _ListSourceRepositoriesItems_member *smithy.Schema
-
-var ListSourceRepositoryBranchesItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoryBranchesItem",
-}, smithy.ShapeTypeStructure, 4)
-var ListSourceRepositoryBranchesItem_ref *smithy.Schema
-
-var ListSourceRepositoryBranchesItem_name *smithy.Schema
-
-var ListSourceRepositoryBranchesItem_lastUpdatedTime *smithy.Schema
-
-var ListSourceRepositoryBranchesItem_headCommitId *smithy.Schema
-
-var _ListSourceRepositoryBranchesItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoryBranchesItems",
-}, smithy.ShapeTypeList, 1)
-var _ListSourceRepositoryBranchesItems_member *smithy.Schema
-
-var _NameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "NameString",
-}, smithy.ShapeTypeString, 0)
-
-var _OperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "OperationType",
-}, smithy.ShapeTypeString, 0)
-
-var PersistentStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "PersistentStorage",
-}, smithy.ShapeTypeStructure, 1)
-var PersistentStorage_sizeInGiB *smithy.Schema
-
-var PersistentStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "PersistentStorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PersistentStorageConfiguration_sizeInGiB *smithy.Schema
-
-var _ProjectDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ProjectDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var ProjectInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectInformation",
-}, smithy.ShapeTypeStructure, 2)
-var ProjectInformation_name *smithy.Schema
-
-var ProjectInformation_projectId *smithy.Schema
-
-var ProjectListFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectListFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ProjectListFilter_key *smithy.Schema
-
-var ProjectListFilter_values *smithy.Schema
-
-var ProjectListFilter_comparisonOperator *smithy.Schema
-
-var _ProjectListFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectListFilters",
-}, smithy.ShapeTypeList, 1)
-var _ProjectListFilters_member *smithy.Schema
-
-var _ProjectSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ProjectSummaries_member *smithy.Schema
-
-var ProjectSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ProjectSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ProjectSummary_name *smithy.Schema
-
-var ProjectSummary_displayName *smithy.Schema
-
-var ProjectSummary_description *smithy.Schema
-
-var _RegionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "RegionString",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoriesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "RepositoriesInput",
-}, smithy.ShapeTypeList, 1)
-var _RepositoriesInput_member *smithy.Schema
-
-var RepositoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "RepositoryInput",
-}, smithy.ShapeTypeStructure, 2)
-var RepositoryInput_repositoryName *smithy.Schema
-
-var RepositoryInput_branchName *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SourceRepositoryBranchRefString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SourceRepositoryBranchRefString",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceRepositoryBranchString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SourceRepositoryBranchString",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceRepositoryDescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SourceRepositoryDescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceRepositoryIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SourceRepositoryIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceRepositoryNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SourceRepositoryNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _SpaceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SpaceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SpaceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SpaceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SpaceSummaries_member *smithy.Schema
-
-var SpaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "SpaceSummary",
-}, smithy.ShapeTypeStructure, 4)
-var SpaceSummary_name *smithy.Schema
-
-var SpaceSummary_regionName *smithy.Schema
-
-var SpaceSummary_displayName *smithy.Schema
-
-var SpaceSummary_description *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var UserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UserIdentity",
-}, smithy.ShapeTypeStructure, 4)
-var UserIdentity_userType *smithy.Schema
-
-var UserIdentity_principalId *smithy.Schema
-
-var UserIdentity_userName *smithy.Schema
-
-var UserIdentity_awsAccountId *smithy.Schema
-
-var _UserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UserType",
-}, smithy.ShapeTypeString, 0)
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WorkflowDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowDefinition",
-}, smithy.ShapeTypeStructure, 1)
-var WorkflowDefinition_path *smithy.Schema
-
-var WorkflowDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowDefinitionSummary",
-}, smithy.ShapeTypeStructure, 1)
-var WorkflowDefinitionSummary_path *smithy.Schema
-
-var _WorkflowRunMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunMode",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowRunSortCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunSortCriteria",
-}, smithy.ShapeTypeStructure, 0)
-
-var _WorkflowRunSortCriteriaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunSortCriteriaList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowRunSortCriteriaList_member *smithy.Schema
-
-var _WorkflowRunStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunStatus",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowRunStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunStatusReason",
-}, smithy.ShapeTypeStructure, 0)
-
-var _WorkflowRunStatusReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunStatusReasons",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowRunStatusReasons_member *smithy.Schema
-
-var _WorkflowRunSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowRunSummaries_member *smithy.Schema
-
-var WorkflowRunSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowRunSummary",
-}, smithy.ShapeTypeStructure, 8)
-var WorkflowRunSummary_id *smithy.Schema
-
-var WorkflowRunSummary_workflowId *smithy.Schema
-
-var WorkflowRunSummary_workflowName *smithy.Schema
-
-var WorkflowRunSummary_status *smithy.Schema
-
-var WorkflowRunSummary_statusReasons *smithy.Schema
-
-var WorkflowRunSummary_startTime *smithy.Schema
-
-var WorkflowRunSummary_endTime *smithy.Schema
-
-var WorkflowRunSummary_lastUpdatedTime *smithy.Schema
-
-var WorkflowSortCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowSortCriteria",
-}, smithy.ShapeTypeStructure, 0)
-
-var _WorkflowSortCriteriaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowSortCriteriaList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowSortCriteriaList_member *smithy.Schema
-
-var _WorkflowStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkflowSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowSummaries_member *smithy.Schema
-
-var WorkflowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "WorkflowSummary",
-}, smithy.ShapeTypeStructure, 9)
-var WorkflowSummary_id *smithy.Schema
-
-var WorkflowSummary_name *smithy.Schema
-
-var WorkflowSummary_sourceRepositoryName *smithy.Schema
-
-var WorkflowSummary_sourceBranchName *smithy.Schema
-
-var WorkflowSummary_definition *smithy.Schema
-
-var WorkflowSummary_createdTime *smithy.Schema
-
-var WorkflowSummary_lastUpdatedTime *smithy.Schema
-
-var WorkflowSummary_runMode *smithy.Schema
-
-var WorkflowSummary_status *smithy.Schema
-
-var CreateAccessTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateAccessTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAccessTokenRequest_name *smithy.Schema
-
-var CreateAccessTokenRequest_expiresTime *smithy.Schema
-
-var CreateAccessTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateAccessTokenResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAccessTokenResponse_secret *smithy.Schema
-
-var CreateAccessTokenResponse_name *smithy.Schema
-
-var CreateAccessTokenResponse_expiresTime *smithy.Schema
-
-var CreateAccessTokenResponse_accessTokenId *smithy.Schema
-
-var CreateDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateDevEnvironmentRequest_spaceName *smithy.Schema
-
-var CreateDevEnvironmentRequest_projectName *smithy.Schema
-
-var CreateDevEnvironmentRequest_repositories *smithy.Schema
-
-var CreateDevEnvironmentRequest_clientToken *smithy.Schema
-
-var CreateDevEnvironmentRequest_alias *smithy.Schema
-
-var CreateDevEnvironmentRequest_ides *smithy.Schema
-
-var CreateDevEnvironmentRequest_instanceType *smithy.Schema
-
-var CreateDevEnvironmentRequest_inactivityTimeoutMinutes *smithy.Schema
-
-var CreateDevEnvironmentRequest_persistentStorage *smithy.Schema
-
-var CreateDevEnvironmentRequest_vpcConnectionName *smithy.Schema
-
-var CreateDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDevEnvironmentResponse_spaceName *smithy.Schema
-
-var CreateDevEnvironmentResponse_projectName *smithy.Schema
-
-var CreateDevEnvironmentResponse_id *smithy.Schema
-
-var CreateDevEnvironmentResponse_vpcConnectionName *smithy.Schema
-
-var CreateProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateProjectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateProjectRequest_spaceName *smithy.Schema
-
-var CreateProjectRequest_displayName *smithy.Schema
-
-var CreateProjectRequest_description *smithy.Schema
-
-var CreateProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateProjectResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProjectResponse_spaceName *smithy.Schema
-
-var CreateProjectResponse_name *smithy.Schema
-
-var CreateProjectResponse_displayName *smithy.Schema
-
-var CreateProjectResponse_description *smithy.Schema
-
-var CreateSourceRepositoryBranchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepositoryBranchRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateSourceRepositoryBranchRequest_spaceName *smithy.Schema
-
-var CreateSourceRepositoryBranchRequest_projectName *smithy.Schema
-
-var CreateSourceRepositoryBranchRequest_sourceRepositoryName *smithy.Schema
-
-var CreateSourceRepositoryBranchRequest_name *smithy.Schema
-
-var CreateSourceRepositoryBranchRequest_headCommitId *smithy.Schema
-
-var CreateSourceRepositoryBranchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepositoryBranchResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSourceRepositoryBranchResponse_ref *smithy.Schema
-
-var CreateSourceRepositoryBranchResponse_name *smithy.Schema
-
-var CreateSourceRepositoryBranchResponse_lastUpdatedTime *smithy.Schema
-
-var CreateSourceRepositoryBranchResponse_headCommitId *smithy.Schema
-
-var CreateSourceRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepositoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSourceRepositoryRequest_spaceName *smithy.Schema
-
-var CreateSourceRepositoryRequest_projectName *smithy.Schema
-
-var CreateSourceRepositoryRequest_name *smithy.Schema
-
-var CreateSourceRepositoryRequest_description *smithy.Schema
-
-var CreateSourceRepositoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "CreateSourceRepositoryResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSourceRepositoryResponse_spaceName *smithy.Schema
-
-var CreateSourceRepositoryResponse_projectName *smithy.Schema
-
-var CreateSourceRepositoryResponse_name *smithy.Schema
-
-var CreateSourceRepositoryResponse_description *smithy.Schema
-
-var DeleteAccessTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteAccessTokenRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessTokenRequest_id *smithy.Schema
-
-var DeleteAccessTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteAccessTokenResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDevEnvironmentRequest_spaceName *smithy.Schema
-
-var DeleteDevEnvironmentRequest_projectName *smithy.Schema
-
-var DeleteDevEnvironmentRequest_id *smithy.Schema
-
-var DeleteDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDevEnvironmentResponse_spaceName *smithy.Schema
-
-var DeleteDevEnvironmentResponse_projectName *smithy.Schema
-
-var DeleteDevEnvironmentResponse_id *smithy.Schema
-
-var DeleteProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteProjectRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProjectRequest_spaceName *smithy.Schema
-
-var DeleteProjectRequest_name *smithy.Schema
-
-var DeleteProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteProjectResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteProjectResponse_spaceName *smithy.Schema
-
-var DeleteProjectResponse_name *smithy.Schema
-
-var DeleteProjectResponse_displayName *smithy.Schema
-
-var DeleteSourceRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSourceRepositoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSourceRepositoryRequest_spaceName *smithy.Schema
-
-var DeleteSourceRepositoryRequest_projectName *smithy.Schema
-
-var DeleteSourceRepositoryRequest_name *smithy.Schema
-
-var DeleteSourceRepositoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSourceRepositoryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSourceRepositoryResponse_spaceName *smithy.Schema
-
-var DeleteSourceRepositoryResponse_projectName *smithy.Schema
-
-var DeleteSourceRepositoryResponse_name *smithy.Schema
-
-var DeleteSpaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSpaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSpaceRequest_name *smithy.Schema
-
-var DeleteSpaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "DeleteSpaceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSpaceResponse_name *smithy.Schema
-
-var DeleteSpaceResponse_displayName *smithy.Schema
-
-var GetDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDevEnvironmentRequest_spaceName *smithy.Schema
-
-var GetDevEnvironmentRequest_projectName *smithy.Schema
-
-var GetDevEnvironmentRequest_id *smithy.Schema
-
-var GetDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetDevEnvironmentResponse_spaceName *smithy.Schema
-
-var GetDevEnvironmentResponse_projectName *smithy.Schema
-
-var GetDevEnvironmentResponse_id *smithy.Schema
-
-var GetDevEnvironmentResponse_lastUpdatedTime *smithy.Schema
-
-var GetDevEnvironmentResponse_creatorId *smithy.Schema
-
-var GetDevEnvironmentResponse_status *smithy.Schema
-
-var GetDevEnvironmentResponse_statusReason *smithy.Schema
-
-var GetDevEnvironmentResponse_repositories *smithy.Schema
-
-var GetDevEnvironmentResponse_alias *smithy.Schema
-
-var GetDevEnvironmentResponse_ides *smithy.Schema
-
-var GetDevEnvironmentResponse_instanceType *smithy.Schema
-
-var GetDevEnvironmentResponse_inactivityTimeoutMinutes *smithy.Schema
-
-var GetDevEnvironmentResponse_persistentStorage *smithy.Schema
-
-var GetDevEnvironmentResponse_vpcConnectionName *smithy.Schema
-
-var GetProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetProjectRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetProjectRequest_spaceName *smithy.Schema
-
-var GetProjectRequest_name *smithy.Schema
-
-var GetProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetProjectResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetProjectResponse_spaceName *smithy.Schema
-
-var GetProjectResponse_name *smithy.Schema
-
-var GetProjectResponse_displayName *smithy.Schema
-
-var GetProjectResponse_description *smithy.Schema
-
-var GetSourceRepositoryCloneUrlsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepositoryCloneUrlsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSourceRepositoryCloneUrlsRequest_spaceName *smithy.Schema
-
-var GetSourceRepositoryCloneUrlsRequest_projectName *smithy.Schema
-
-var GetSourceRepositoryCloneUrlsRequest_sourceRepositoryName *smithy.Schema
-
-var GetSourceRepositoryCloneUrlsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepositoryCloneUrlsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSourceRepositoryCloneUrlsResponse_https *smithy.Schema
-
-var GetSourceRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepositoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSourceRepositoryRequest_spaceName *smithy.Schema
-
-var GetSourceRepositoryRequest_projectName *smithy.Schema
-
-var GetSourceRepositoryRequest_name *smithy.Schema
-
-var GetSourceRepositoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSourceRepositoryResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetSourceRepositoryResponse_spaceName *smithy.Schema
-
-var GetSourceRepositoryResponse_projectName *smithy.Schema
-
-var GetSourceRepositoryResponse_name *smithy.Schema
-
-var GetSourceRepositoryResponse_description *smithy.Schema
-
-var GetSourceRepositoryResponse_lastUpdatedTime *smithy.Schema
-
-var GetSourceRepositoryResponse_createdTime *smithy.Schema
-
-var GetSpaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSpaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpaceRequest_name *smithy.Schema
-
-var GetSpaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSpaceResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetSpaceResponse_name *smithy.Schema
-
-var GetSpaceResponse_regionName *smithy.Schema
-
-var GetSpaceResponse_displayName *smithy.Schema
-
-var GetSpaceResponse_description *smithy.Schema
-
-var GetSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionRequest_spaceName *smithy.Schema
-
-var GetSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetSubscriptionResponse_subscriptionType *smithy.Schema
-
-var GetSubscriptionResponse_awsAccountName *smithy.Schema
-
-var GetSubscriptionResponse_pendingSubscriptionType *smithy.Schema
-
-var GetSubscriptionResponse_pendingSubscriptionStartTime *smithy.Schema
-
-var GetUserDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetUserDetailsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetUserDetailsRequest_id *smithy.Schema
-
-var GetUserDetailsRequest_userName *smithy.Schema
-
-var GetUserDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetUserDetailsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetUserDetailsResponse_userId *smithy.Schema
-
-var GetUserDetailsResponse_userName *smithy.Schema
-
-var GetUserDetailsResponse_displayName *smithy.Schema
-
-var GetUserDetailsResponse_primaryEmail *smithy.Schema
-
-var GetUserDetailsResponse_version *smithy.Schema
-
-var GetWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetWorkflowRequest_spaceName *smithy.Schema
-
-var GetWorkflowRequest_id *smithy.Schema
-
-var GetWorkflowRequest_projectName *smithy.Schema
-
-var GetWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflowResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetWorkflowResponse_spaceName *smithy.Schema
-
-var GetWorkflowResponse_projectName *smithy.Schema
-
-var GetWorkflowResponse_id *smithy.Schema
-
-var GetWorkflowResponse_name *smithy.Schema
-
-var GetWorkflowResponse_sourceRepositoryName *smithy.Schema
-
-var GetWorkflowResponse_sourceBranchName *smithy.Schema
-
-var GetWorkflowResponse_definition *smithy.Schema
-
-var GetWorkflowResponse_createdTime *smithy.Schema
-
-var GetWorkflowResponse_lastUpdatedTime *smithy.Schema
-
-var GetWorkflowResponse_runMode *smithy.Schema
-
-var GetWorkflowResponse_status *smithy.Schema
-
-var GetWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetWorkflowRunRequest_spaceName *smithy.Schema
-
-var GetWorkflowRunRequest_id *smithy.Schema
-
-var GetWorkflowRunRequest_projectName *smithy.Schema
-
-var GetWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "GetWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetWorkflowRunResponse_spaceName *smithy.Schema
-
-var GetWorkflowRunResponse_projectName *smithy.Schema
-
-var GetWorkflowRunResponse_id *smithy.Schema
-
-var GetWorkflowRunResponse_workflowId *smithy.Schema
-
-var GetWorkflowRunResponse_status *smithy.Schema
-
-var GetWorkflowRunResponse_statusReasons *smithy.Schema
-
-var GetWorkflowRunResponse_startTime *smithy.Schema
-
-var GetWorkflowRunResponse_endTime *smithy.Schema
-
-var GetWorkflowRunResponse_lastUpdatedTime *smithy.Schema
-
-var ListAccessTokensRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListAccessTokensRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessTokensRequest_maxResults *smithy.Schema
-
-var ListAccessTokensRequest_nextToken *smithy.Schema
-
-var ListAccessTokensResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListAccessTokensResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessTokensResponse_items *smithy.Schema
-
-var ListAccessTokensResponse_nextToken *smithy.Schema
-
-var ListDevEnvironmentSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironmentSessionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListDevEnvironmentSessionsRequest_spaceName *smithy.Schema
-
-var ListDevEnvironmentSessionsRequest_projectName *smithy.Schema
-
-var ListDevEnvironmentSessionsRequest_devEnvironmentId *smithy.Schema
-
-var ListDevEnvironmentSessionsRequest_nextToken *smithy.Schema
-
-var ListDevEnvironmentSessionsRequest_maxResults *smithy.Schema
-
-var ListDevEnvironmentSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironmentSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevEnvironmentSessionsResponse_items *smithy.Schema
-
-var ListDevEnvironmentSessionsResponse_nextToken *smithy.Schema
-
-var ListDevEnvironmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironmentsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListDevEnvironmentsRequest_spaceName *smithy.Schema
-
-var ListDevEnvironmentsRequest_projectName *smithy.Schema
-
-var ListDevEnvironmentsRequest_filters *smithy.Schema
-
-var ListDevEnvironmentsRequest_nextToken *smithy.Schema
-
-var ListDevEnvironmentsRequest_maxResults *smithy.Schema
-
-var ListDevEnvironmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListDevEnvironmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevEnvironmentsResponse_items *smithy.Schema
-
-var ListDevEnvironmentsResponse_nextToken *smithy.Schema
-
-var ListEventLogsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListEventLogsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListEventLogsRequest_spaceName *smithy.Schema
-
-var ListEventLogsRequest_startTime *smithy.Schema
-
-var ListEventLogsRequest_endTime *smithy.Schema
-
-var ListEventLogsRequest_eventName *smithy.Schema
-
-var ListEventLogsRequest_nextToken *smithy.Schema
-
-var ListEventLogsRequest_maxResults *smithy.Schema
-
-var ListEventLogsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListEventLogsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventLogsResponse_nextToken *smithy.Schema
-
-var ListEventLogsResponse_items *smithy.Schema
-
-var ListProjectsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListProjectsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListProjectsRequest_spaceName *smithy.Schema
-
-var ListProjectsRequest_nextToken *smithy.Schema
-
-var ListProjectsRequest_maxResults *smithy.Schema
-
-var ListProjectsRequest_filters *smithy.Schema
-
-var ListProjectsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListProjectsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProjectsResponse_nextToken *smithy.Schema
-
-var ListProjectsResponse_items *smithy.Schema
-
-var ListSourceRepositoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoriesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSourceRepositoriesRequest_spaceName *smithy.Schema
-
-var ListSourceRepositoriesRequest_projectName *smithy.Schema
-
-var ListSourceRepositoriesRequest_nextToken *smithy.Schema
-
-var ListSourceRepositoriesRequest_maxResults *smithy.Schema
-
-var ListSourceRepositoriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceRepositoriesResponse_items *smithy.Schema
-
-var ListSourceRepositoriesResponse_nextToken *smithy.Schema
-
-var ListSourceRepositoryBranchesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoryBranchesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSourceRepositoryBranchesRequest_spaceName *smithy.Schema
-
-var ListSourceRepositoryBranchesRequest_projectName *smithy.Schema
-
-var ListSourceRepositoryBranchesRequest_sourceRepositoryName *smithy.Schema
-
-var ListSourceRepositoryBranchesRequest_nextToken *smithy.Schema
-
-var ListSourceRepositoryBranchesRequest_maxResults *smithy.Schema
-
-var ListSourceRepositoryBranchesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSourceRepositoryBranchesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceRepositoryBranchesResponse_nextToken *smithy.Schema
-
-var ListSourceRepositoryBranchesResponse_items *smithy.Schema
-
-var ListSpacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSpacesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListSpacesRequest_nextToken *smithy.Schema
-
-var ListSpacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListSpacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpacesResponse_nextToken *smithy.Schema
-
-var ListSpacesResponse_items *smithy.Schema
-
-var ListWorkflowRunsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflowRunsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListWorkflowRunsRequest_spaceName *smithy.Schema
-
-var ListWorkflowRunsRequest_workflowId *smithy.Schema
-
-var ListWorkflowRunsRequest_projectName *smithy.Schema
-
-var ListWorkflowRunsRequest_nextToken *smithy.Schema
-
-var ListWorkflowRunsRequest_maxResults *smithy.Schema
-
-var ListWorkflowRunsRequest_sortBy *smithy.Schema
-
-var ListWorkflowRunsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflowRunsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowRunsResponse_nextToken *smithy.Schema
-
-var ListWorkflowRunsResponse_items *smithy.Schema
-
-var ListWorkflowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflowsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListWorkflowsRequest_spaceName *smithy.Schema
-
-var ListWorkflowsRequest_projectName *smithy.Schema
-
-var ListWorkflowsRequest_nextToken *smithy.Schema
-
-var ListWorkflowsRequest_maxResults *smithy.Schema
-
-var ListWorkflowsRequest_sortBy *smithy.Schema
-
-var ListWorkflowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "ListWorkflowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowsResponse_nextToken *smithy.Schema
-
-var ListWorkflowsResponse_items *smithy.Schema
-
-var StartDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartDevEnvironmentRequest_spaceName *smithy.Schema
-
-var StartDevEnvironmentRequest_projectName *smithy.Schema
-
-var StartDevEnvironmentRequest_id *smithy.Schema
-
-var StartDevEnvironmentRequest_ides *smithy.Schema
-
-var StartDevEnvironmentRequest_instanceType *smithy.Schema
-
-var StartDevEnvironmentRequest_inactivityTimeoutMinutes *smithy.Schema
-
-var StartDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StartDevEnvironmentResponse_spaceName *smithy.Schema
-
-var StartDevEnvironmentResponse_projectName *smithy.Schema
-
-var StartDevEnvironmentResponse_id *smithy.Schema
-
-var StartDevEnvironmentResponse_status *smithy.Schema
-
-var StartDevEnvironmentSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironmentSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartDevEnvironmentSessionRequest_spaceName *smithy.Schema
-
-var StartDevEnvironmentSessionRequest_projectName *smithy.Schema
-
-var StartDevEnvironmentSessionRequest_id *smithy.Schema
-
-var StartDevEnvironmentSessionRequest_sessionConfiguration *smithy.Schema
-
-var StartDevEnvironmentSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartDevEnvironmentSessionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var StartDevEnvironmentSessionResponse_accessDetails *smithy.Schema
-
-var StartDevEnvironmentSessionResponse_sessionId *smithy.Schema
-
-var StartDevEnvironmentSessionResponse_spaceName *smithy.Schema
-
-var StartDevEnvironmentSessionResponse_projectName *smithy.Schema
-
-var StartDevEnvironmentSessionResponse_id *smithy.Schema
-
-var StartWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartWorkflowRunRequest_spaceName *smithy.Schema
-
-var StartWorkflowRunRequest_projectName *smithy.Schema
-
-var StartWorkflowRunRequest_workflowId *smithy.Schema
-
-var StartWorkflowRunRequest_clientToken *smithy.Schema
-
-var StartWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StartWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StartWorkflowRunResponse_spaceName *smithy.Schema
-
-var StartWorkflowRunResponse_projectName *smithy.Schema
-
-var StartWorkflowRunResponse_id *smithy.Schema
-
-var StartWorkflowRunResponse_workflowId *smithy.Schema
-
-var StopDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StopDevEnvironmentRequest_spaceName *smithy.Schema
-
-var StopDevEnvironmentRequest_projectName *smithy.Schema
-
-var StopDevEnvironmentRequest_id *smithy.Schema
-
-var StopDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StopDevEnvironmentResponse_spaceName *smithy.Schema
-
-var StopDevEnvironmentResponse_projectName *smithy.Schema
-
-var StopDevEnvironmentResponse_id *smithy.Schema
-
-var StopDevEnvironmentResponse_status *smithy.Schema
-
-var StopDevEnvironmentSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironmentSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StopDevEnvironmentSessionRequest_spaceName *smithy.Schema
-
-var StopDevEnvironmentSessionRequest_projectName *smithy.Schema
-
-var StopDevEnvironmentSessionRequest_id *smithy.Schema
-
-var StopDevEnvironmentSessionRequest_sessionId *smithy.Schema
-
-var StopDevEnvironmentSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "StopDevEnvironmentSessionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StopDevEnvironmentSessionResponse_spaceName *smithy.Schema
-
-var StopDevEnvironmentSessionResponse_projectName *smithy.Schema
-
-var StopDevEnvironmentSessionResponse_id *smithy.Schema
-
-var StopDevEnvironmentSessionResponse_sessionId *smithy.Schema
-
-var UpdateDevEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateDevEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateDevEnvironmentRequest_spaceName *smithy.Schema
-
-var UpdateDevEnvironmentRequest_projectName *smithy.Schema
-
-var UpdateDevEnvironmentRequest_id *smithy.Schema
-
-var UpdateDevEnvironmentRequest_alias *smithy.Schema
-
-var UpdateDevEnvironmentRequest_ides *smithy.Schema
-
-var UpdateDevEnvironmentRequest_instanceType *smithy.Schema
-
-var UpdateDevEnvironmentRequest_inactivityTimeoutMinutes *smithy.Schema
-
-var UpdateDevEnvironmentRequest_clientToken *smithy.Schema
-
-var UpdateDevEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateDevEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateDevEnvironmentResponse_id *smithy.Schema
-
-var UpdateDevEnvironmentResponse_spaceName *smithy.Schema
-
-var UpdateDevEnvironmentResponse_projectName *smithy.Schema
-
-var UpdateDevEnvironmentResponse_alias *smithy.Schema
-
-var UpdateDevEnvironmentResponse_ides *smithy.Schema
-
-var UpdateDevEnvironmentResponse_instanceType *smithy.Schema
-
-var UpdateDevEnvironmentResponse_inactivityTimeoutMinutes *smithy.Schema
-
-var UpdateDevEnvironmentResponse_clientToken *smithy.Schema
-
-var UpdateProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateProjectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProjectRequest_spaceName *smithy.Schema
-
-var UpdateProjectRequest_name *smithy.Schema
-
-var UpdateProjectRequest_description *smithy.Schema
-
-var UpdateProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateProjectResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProjectResponse_spaceName *smithy.Schema
-
-var UpdateProjectResponse_name *smithy.Schema
-
-var UpdateProjectResponse_displayName *smithy.Schema
-
-var UpdateProjectResponse_description *smithy.Schema
-
-var UpdateSpaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateSpaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSpaceRequest_name *smithy.Schema
-
-var UpdateSpaceRequest_description *smithy.Schema
-
-var UpdateSpaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "UpdateSpaceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSpaceResponse_name *smithy.Schema
-
-var UpdateSpaceResponse_displayName *smithy.Schema
-
-var UpdateSpaceResponse_description *smithy.Schema
-
-var VerifySessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codecatalyst",
-	Name:      "VerifySessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var VerifySessionResponse_identity *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccessTokenSummary_id = AccessTokenSummary.AddMember("id", _AccessTokenId)
-
-	AccessTokenSummary_name = AccessTokenSummary.AddMember("name", _AccessTokenName)
-
-	AccessTokenSummary_expiresTime = AccessTokenSummary.AddMember("expiresTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_AccessTokenSummaries_member = _AccessTokenSummaries.AddMember("member", AccessTokenSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	DevEnvironmentAccessDetails_streamUrl = DevEnvironmentAccessDetails.AddMember("streamUrl", _SensitiveString)
-
-	DevEnvironmentAccessDetails_tokenValue = DevEnvironmentAccessDetails.AddMember("tokenValue", _SensitiveString)
-
-	DevEnvironmentRepositorySummary_repositoryName = DevEnvironmentRepositorySummary.AddMember("repositoryName", _SourceRepositoryNameString)
-
-	DevEnvironmentRepositorySummary_branchName = DevEnvironmentRepositorySummary.AddMember("branchName", _SourceRepositoryBranchString)
-
-	_DevEnvironmentRepositorySummaries_member = _DevEnvironmentRepositorySummaries.AddMember("member", DevEnvironmentRepositorySummary)
-
-	_ExecuteCommandSessionConfigurationArguments_member = _ExecuteCommandSessionConfigurationArguments.AddMember("member", smithyprelude.String)
-
-	ExecuteCommandSessionConfiguration_command = ExecuteCommandSessionConfiguration.AddMember("command", smithyprelude.String)
-
-	ExecuteCommandSessionConfiguration_arguments = ExecuteCommandSessionConfiguration.AddMember("arguments", _ExecuteCommandSessionConfigurationArguments)
-
-	DevEnvironmentSessionConfiguration_sessionType = DevEnvironmentSessionConfiguration.AddMember("sessionType", _DevEnvironmentSessionType)
-
-	DevEnvironmentSessionConfiguration_executeCommandSessionConfiguration = DevEnvironmentSessionConfiguration.AddMember("executeCommandSessionConfiguration", ExecuteCommandSessionConfiguration)
-
-	DevEnvironmentSessionSummary_spaceName = DevEnvironmentSessionSummary.AddMember("spaceName", _NameString)
-
-	DevEnvironmentSessionSummary_projectName = DevEnvironmentSessionSummary.AddMember("projectName", _NameString)
-
-	DevEnvironmentSessionSummary_devEnvironmentId = DevEnvironmentSessionSummary.AddMember("devEnvironmentId", _Uuid)
-
-	DevEnvironmentSessionSummary_startedTime = DevEnvironmentSessionSummary.AddMember("startedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DevEnvironmentSessionSummary_id = DevEnvironmentSessionSummary.AddMember("id", smithyprelude.String)
-
-	_DevEnvironmentSessionsSummaryList_member = _DevEnvironmentSessionsSummaryList.AddMember("member", DevEnvironmentSessionSummary)
-
-	Ide_runtime = Ide.AddMember("runtime", smithyprelude.String)
-
-	Ide_name = Ide.AddMember("name", smithyprelude.String)
-
-	_Ides_member = _Ides.AddMember("member", Ide)
-
-	PersistentStorage_sizeInGiB = PersistentStorage.AddMember("sizeInGiB", smithyprelude.Integer)
-
-	DevEnvironmentSummary_spaceName = DevEnvironmentSummary.AddMember("spaceName", _NameString)
-
-	DevEnvironmentSummary_projectName = DevEnvironmentSummary.AddMember("projectName", _NameString)
-
-	DevEnvironmentSummary_id = DevEnvironmentSummary.AddMember("id", _Uuid)
-
-	DevEnvironmentSummary_lastUpdatedTime = DevEnvironmentSummary.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DevEnvironmentSummary_creatorId = DevEnvironmentSummary.AddMember("creatorId", smithyprelude.String)
-
-	DevEnvironmentSummary_status = DevEnvironmentSummary.AddMember("status", _DevEnvironmentStatus)
-
-	DevEnvironmentSummary_statusReason = DevEnvironmentSummary.AddMember("statusReason", _StatusReason)
-
-	DevEnvironmentSummary_repositories = DevEnvironmentSummary.AddMember("repositories", _DevEnvironmentRepositorySummaries)
-
-	DevEnvironmentSummary_alias = DevEnvironmentSummary.AddMember("alias", smithyprelude.String)
-
-	DevEnvironmentSummary_ides = DevEnvironmentSummary.AddMember("ides", _Ides)
-
-	DevEnvironmentSummary_instanceType = DevEnvironmentSummary.AddMember("instanceType", _InstanceType)
-
-	DevEnvironmentSummary_inactivityTimeoutMinutes = DevEnvironmentSummary.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	DevEnvironmentSummary_persistentStorage = DevEnvironmentSummary.AddMember("persistentStorage", PersistentStorage)
-
-	DevEnvironmentSummary_vpcConnectionName = DevEnvironmentSummary.AddMember("vpcConnectionName", _NameString)
-
-	_DevEnvironmentSummaryList_member = _DevEnvironmentSummaryList.AddMember("member", DevEnvironmentSummary)
-
-	EmailAddress_email = EmailAddress.AddMember("email", smithyprelude.String)
-
-	EmailAddress_verified = EmailAddress.AddMember("verified", smithyprelude.Boolean)
-
-	UserIdentity_userType = UserIdentity.AddMember("userType", _UserType)
-
-	UserIdentity_principalId = UserIdentity.AddMember("principalId", smithyprelude.String)
-
-	UserIdentity_userName = UserIdentity.AddMember("userName", smithyprelude.String)
-
-	UserIdentity_awsAccountId = UserIdentity.AddMember("awsAccountId", smithyprelude.String)
-
-	ProjectInformation_name = ProjectInformation.AddMember("name", smithyprelude.String)
-
-	ProjectInformation_projectId = ProjectInformation.AddMember("projectId", smithyprelude.String)
-
-	EventPayload_contentType = EventPayload.AddMember("contentType", smithyprelude.String)
-
-	EventPayload_data = EventPayload.AddMember("data", smithyprelude.String)
-
-	EventLogEntry_id = EventLogEntry.AddMember("id", smithyprelude.String)
-
-	EventLogEntry_eventName = EventLogEntry.AddMember("eventName", smithyprelude.String)
-
-	EventLogEntry_eventType = EventLogEntry.AddMember("eventType", smithyprelude.String)
-
-	EventLogEntry_eventCategory = EventLogEntry.AddMember("eventCategory", smithyprelude.String)
-
-	EventLogEntry_eventSource = EventLogEntry.AddMember("eventSource", smithyprelude.String)
-
-	EventLogEntry_eventTime = EventLogEntry.AddMember("eventTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	EventLogEntry_operationType = EventLogEntry.AddMember("operationType", _OperationType)
-
-	EventLogEntry_userIdentity = EventLogEntry.AddMember("userIdentity", UserIdentity)
-
-	EventLogEntry_projectInformation = EventLogEntry.AddMember("projectInformation", ProjectInformation)
-
-	EventLogEntry_requestId = EventLogEntry.AddMember("requestId", smithyprelude.String)
-
-	EventLogEntry_requestPayload = EventLogEntry.AddMember("requestPayload", EventPayload)
-
-	EventLogEntry_responsePayload = EventLogEntry.AddMember("responsePayload", EventPayload)
-
-	EventLogEntry_errorCode = EventLogEntry.AddMember("errorCode", smithyprelude.String)
-
-	EventLogEntry_sourceIpAddress = EventLogEntry.AddMember("sourceIpAddress", smithyprelude.String)
-
-	EventLogEntry_userAgent = EventLogEntry.AddMember("userAgent", smithyprelude.String)
-
-	_EventLogEntries_member = _EventLogEntries.AddMember("member", EventLogEntry)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Filter_key = Filter.AddMember("key", smithyprelude.String)
-
-	Filter_values = Filter.AddMember("values", _StringList)
-
-	Filter_comparisonOperator = Filter.AddMember("comparisonOperator", smithyprelude.String)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	IdeConfiguration_runtime = IdeConfiguration.AddMember("runtime", smithyprelude.String)
-
-	IdeConfiguration_name = IdeConfiguration.AddMember("name", smithyprelude.String)
-
-	_IdeConfigurationList_member = _IdeConfigurationList.AddMember("member", IdeConfiguration)
-
-	ListSourceRepositoriesItem_id = ListSourceRepositoriesItem.AddMember("id", _SourceRepositoryIdString)
-
-	ListSourceRepositoriesItem_name = ListSourceRepositoriesItem.AddMember("name", _SourceRepositoryNameString)
-
-	ListSourceRepositoriesItem_description = ListSourceRepositoriesItem.AddMember("description", _SourceRepositoryDescriptionString)
-
-	ListSourceRepositoriesItem_lastUpdatedTime = ListSourceRepositoriesItem.AddMember("lastUpdatedTime", _Timestamp)
-
-	ListSourceRepositoriesItem_createdTime = ListSourceRepositoriesItem.AddMember("createdTime", _Timestamp)
-
-	_ListSourceRepositoriesItems_member = _ListSourceRepositoriesItems.AddMember("member", ListSourceRepositoriesItem)
-
-	ListSourceRepositoryBranchesItem_ref = ListSourceRepositoryBranchesItem.AddMember("ref", _SourceRepositoryBranchRefString)
-
-	ListSourceRepositoryBranchesItem_name = ListSourceRepositoryBranchesItem.AddMember("name", _SourceRepositoryBranchString)
-
-	ListSourceRepositoryBranchesItem_lastUpdatedTime = ListSourceRepositoryBranchesItem.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListSourceRepositoryBranchesItem_headCommitId = ListSourceRepositoryBranchesItem.AddMember("headCommitId", smithyprelude.String)
-
-	_ListSourceRepositoryBranchesItems_member = _ListSourceRepositoryBranchesItems.AddMember("member", ListSourceRepositoryBranchesItem)
-
-	PersistentStorageConfiguration_sizeInGiB = PersistentStorageConfiguration.AddMember("sizeInGiB", smithyprelude.Integer)
-
-	ProjectListFilter_key = ProjectListFilter.AddMember("key", _FilterKey)
-
-	ProjectListFilter_values = ProjectListFilter.AddMember("values", _StringList)
-
-	ProjectListFilter_comparisonOperator = ProjectListFilter.AddMember("comparisonOperator", _ComparisonOperator)
-
-	_ProjectListFilters_member = _ProjectListFilters.AddMember("member", ProjectListFilter)
-
-	ProjectSummary_name = ProjectSummary.AddMember("name", smithyprelude.String)
-
-	ProjectSummary_displayName = ProjectSummary.AddMember("displayName", smithyprelude.String)
-
-	ProjectSummary_description = ProjectSummary.AddMember("description", smithyprelude.String)
-
-	_ProjectSummaries_member = _ProjectSummaries.AddMember("member", ProjectSummary)
-
-	RepositoryInput_repositoryName = RepositoryInput.AddMember("repositoryName", _SourceRepositoryNameString)
-
-	RepositoryInput_branchName = RepositoryInput.AddMember("branchName", _SourceRepositoryBranchString)
-
-	_RepositoriesInput_member = _RepositoriesInput.AddMember("member", RepositoryInput)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	SpaceSummary_name = SpaceSummary.AddMember("name", _NameString)
-
-	SpaceSummary_regionName = SpaceSummary.AddMember("regionName", _RegionString)
-
-	SpaceSummary_displayName = SpaceSummary.AddMember("displayName", smithyprelude.String)
-
-	SpaceSummary_description = SpaceSummary.AddMember("description", smithyprelude.String)
-
-	_SpaceSummaries_member = _SpaceSummaries.AddMember("member", SpaceSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	WorkflowDefinition_path = WorkflowDefinition.AddMember("path", smithyprelude.String)
-
-	WorkflowDefinitionSummary_path = WorkflowDefinitionSummary.AddMember("path", smithyprelude.String)
-
-	_WorkflowRunSortCriteriaList_member = _WorkflowRunSortCriteriaList.AddMember("member", WorkflowRunSortCriteria)
-
-	_WorkflowRunStatusReasons_member = _WorkflowRunStatusReasons.AddMember("member", WorkflowRunStatusReason)
-
-	WorkflowRunSummary_id = WorkflowRunSummary.AddMember("id", _Uuid)
-
-	WorkflowRunSummary_workflowId = WorkflowRunSummary.AddMember("workflowId", _Uuid)
-
-	WorkflowRunSummary_workflowName = WorkflowRunSummary.AddMember("workflowName", smithyprelude.String)
-
-	WorkflowRunSummary_status = WorkflowRunSummary.AddMember("status", _WorkflowRunStatus)
-
-	WorkflowRunSummary_statusReasons = WorkflowRunSummary.AddMember("statusReasons", _WorkflowRunStatusReasons)
-
-	WorkflowRunSummary_startTime = WorkflowRunSummary.AddMember("startTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	WorkflowRunSummary_endTime = WorkflowRunSummary.AddMember("endTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	WorkflowRunSummary_lastUpdatedTime = WorkflowRunSummary.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_WorkflowRunSummaries_member = _WorkflowRunSummaries.AddMember("member", WorkflowRunSummary)
-
-	_WorkflowSortCriteriaList_member = _WorkflowSortCriteriaList.AddMember("member", WorkflowSortCriteria)
-
-	WorkflowSummary_id = WorkflowSummary.AddMember("id", _Uuid)
-
-	WorkflowSummary_name = WorkflowSummary.AddMember("name", smithyprelude.String)
-
-	WorkflowSummary_sourceRepositoryName = WorkflowSummary.AddMember("sourceRepositoryName", _SourceRepositoryNameString)
-
-	WorkflowSummary_sourceBranchName = WorkflowSummary.AddMember("sourceBranchName", _SourceRepositoryBranchString)
-
-	WorkflowSummary_definition = WorkflowSummary.AddMember("definition", WorkflowDefinitionSummary)
-
-	WorkflowSummary_createdTime = WorkflowSummary.AddMember("createdTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	WorkflowSummary_lastUpdatedTime = WorkflowSummary.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	WorkflowSummary_runMode = WorkflowSummary.AddMember("runMode", _WorkflowRunMode)
-
-	WorkflowSummary_status = WorkflowSummary.AddMember("status", _WorkflowStatus)
-
-	_WorkflowSummaries_member = _WorkflowSummaries.AddMember("member", WorkflowSummary)
-
-	CreateAccessTokenRequest_name = CreateAccessTokenRequest.AddMember("name", _AccessTokenName)
-
-	CreateAccessTokenRequest_expiresTime = CreateAccessTokenRequest.AddMember("expiresTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateAccessTokenResponse_secret = CreateAccessTokenResponse.AddMember("secret", _AccessTokenSecret)
-
-	CreateAccessTokenResponse_name = CreateAccessTokenResponse.AddMember("name", _AccessTokenName)
-
-	CreateAccessTokenResponse_expiresTime = CreateAccessTokenResponse.AddMember("expiresTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateAccessTokenResponse_accessTokenId = CreateAccessTokenResponse.AddMember("accessTokenId", _AccessTokenId)
-
-	CreateDevEnvironmentRequest_spaceName = CreateDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateDevEnvironmentRequest_projectName = CreateDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateDevEnvironmentRequest_repositories = CreateDevEnvironmentRequest.AddMember("repositories", _RepositoriesInput)
-
-	CreateDevEnvironmentRequest_clientToken = CreateDevEnvironmentRequest.AddMember("clientToken", _ClientToken)
-
-	CreateDevEnvironmentRequest_alias = CreateDevEnvironmentRequest.AddMember("alias", smithyprelude.String)
-
-	CreateDevEnvironmentRequest_ides = CreateDevEnvironmentRequest.AddMember("ides", _IdeConfigurationList)
-
-	CreateDevEnvironmentRequest_instanceType = CreateDevEnvironmentRequest.AddMember("instanceType", _InstanceType)
-
-	CreateDevEnvironmentRequest_inactivityTimeoutMinutes = CreateDevEnvironmentRequest.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	CreateDevEnvironmentRequest_persistentStorage = CreateDevEnvironmentRequest.AddMember("persistentStorage", PersistentStorageConfiguration)
-
-	CreateDevEnvironmentRequest_vpcConnectionName = CreateDevEnvironmentRequest.AddMember("vpcConnectionName", _NameString)
-
-	CreateDevEnvironmentResponse_spaceName = CreateDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	CreateDevEnvironmentResponse_projectName = CreateDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	CreateDevEnvironmentResponse_id = CreateDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	CreateDevEnvironmentResponse_vpcConnectionName = CreateDevEnvironmentResponse.AddMember("vpcConnectionName", _NameString)
-
-	CreateProjectRequest_spaceName = CreateProjectRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateProjectRequest_displayName = CreateProjectRequest.AddMember("displayName", _ProjectDisplayName)
-
-	CreateProjectRequest_description = CreateProjectRequest.AddMember("description", _ProjectDescription)
-
-	CreateProjectResponse_spaceName = CreateProjectResponse.AddMember("spaceName", _NameString)
-
-	CreateProjectResponse_name = CreateProjectResponse.AddMember("name", _NameString)
-
-	CreateProjectResponse_displayName = CreateProjectResponse.AddMember("displayName", smithyprelude.String)
-
-	CreateProjectResponse_description = CreateProjectResponse.AddMember("description", smithyprelude.String)
-
-	CreateSourceRepositoryBranchRequest_spaceName = CreateSourceRepositoryBranchRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryBranchRequest_projectName = CreateSourceRepositoryBranchRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryBranchRequest_sourceRepositoryName = CreateSourceRepositoryBranchRequest.AddMember("sourceRepositoryName", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryBranchRequest_name = CreateSourceRepositoryBranchRequest.AddMember("name", _SourceRepositoryBranchString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryBranchRequest_headCommitId = CreateSourceRepositoryBranchRequest.AddMember("headCommitId", smithyprelude.String)
-
-	CreateSourceRepositoryBranchResponse_ref = CreateSourceRepositoryBranchResponse.AddMember("ref", _SourceRepositoryBranchRefString)
-
-	CreateSourceRepositoryBranchResponse_name = CreateSourceRepositoryBranchResponse.AddMember("name", _SourceRepositoryBranchString)
-
-	CreateSourceRepositoryBranchResponse_lastUpdatedTime = CreateSourceRepositoryBranchResponse.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateSourceRepositoryBranchResponse_headCommitId = CreateSourceRepositoryBranchResponse.AddMember("headCommitId", smithyprelude.String)
-
-	CreateSourceRepositoryRequest_spaceName = CreateSourceRepositoryRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryRequest_projectName = CreateSourceRepositoryRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryRequest_name = CreateSourceRepositoryRequest.AddMember("name", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	CreateSourceRepositoryRequest_description = CreateSourceRepositoryRequest.AddMember("description", _SourceRepositoryDescriptionString)
-
-	CreateSourceRepositoryResponse_spaceName = CreateSourceRepositoryResponse.AddMember("spaceName", _NameString)
-
-	CreateSourceRepositoryResponse_projectName = CreateSourceRepositoryResponse.AddMember("projectName", _NameString)
-
-	CreateSourceRepositoryResponse_name = CreateSourceRepositoryResponse.AddMember("name", _SourceRepositoryNameString)
-
-	CreateSourceRepositoryResponse_description = CreateSourceRepositoryResponse.AddMember("description", _SourceRepositoryDescriptionString)
-
-	DeleteAccessTokenRequest_id = DeleteAccessTokenRequest.AddMember("id", _AccessTokenId, &smithytraits.HTTPLabel{})
-
-	DeleteDevEnvironmentRequest_spaceName = DeleteDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteDevEnvironmentRequest_projectName = DeleteDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteDevEnvironmentRequest_id = DeleteDevEnvironmentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteDevEnvironmentResponse_spaceName = DeleteDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	DeleteDevEnvironmentResponse_projectName = DeleteDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	DeleteDevEnvironmentResponse_id = DeleteDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	DeleteProjectRequest_spaceName = DeleteProjectRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteProjectRequest_name = DeleteProjectRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteProjectResponse_spaceName = DeleteProjectResponse.AddMember("spaceName", _NameString)
-
-	DeleteProjectResponse_name = DeleteProjectResponse.AddMember("name", _NameString)
-
-	DeleteProjectResponse_displayName = DeleteProjectResponse.AddMember("displayName", smithyprelude.String)
-
-	DeleteSourceRepositoryRequest_spaceName = DeleteSourceRepositoryRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteSourceRepositoryRequest_projectName = DeleteSourceRepositoryRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteSourceRepositoryRequest_name = DeleteSourceRepositoryRequest.AddMember("name", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	DeleteSourceRepositoryResponse_spaceName = DeleteSourceRepositoryResponse.AddMember("spaceName", _NameString)
-
-	DeleteSourceRepositoryResponse_projectName = DeleteSourceRepositoryResponse.AddMember("projectName", _NameString)
-
-	DeleteSourceRepositoryResponse_name = DeleteSourceRepositoryResponse.AddMember("name", _SourceRepositoryNameString)
-
-	DeleteSpaceRequest_name = DeleteSpaceRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	DeleteSpaceResponse_name = DeleteSpaceResponse.AddMember("name", _NameString)
-
-	DeleteSpaceResponse_displayName = DeleteSpaceResponse.AddMember("displayName", smithyprelude.String)
-
-	GetDevEnvironmentRequest_spaceName = GetDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetDevEnvironmentRequest_projectName = GetDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetDevEnvironmentRequest_id = GetDevEnvironmentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetDevEnvironmentResponse_spaceName = GetDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	GetDevEnvironmentResponse_projectName = GetDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	GetDevEnvironmentResponse_id = GetDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	GetDevEnvironmentResponse_lastUpdatedTime = GetDevEnvironmentResponse.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetDevEnvironmentResponse_creatorId = GetDevEnvironmentResponse.AddMember("creatorId", smithyprelude.String)
-
-	GetDevEnvironmentResponse_status = GetDevEnvironmentResponse.AddMember("status", _DevEnvironmentStatus)
-
-	GetDevEnvironmentResponse_statusReason = GetDevEnvironmentResponse.AddMember("statusReason", _StatusReason)
-
-	GetDevEnvironmentResponse_repositories = GetDevEnvironmentResponse.AddMember("repositories", _DevEnvironmentRepositorySummaries)
-
-	GetDevEnvironmentResponse_alias = GetDevEnvironmentResponse.AddMember("alias", smithyprelude.String)
-
-	GetDevEnvironmentResponse_ides = GetDevEnvironmentResponse.AddMember("ides", _Ides)
-
-	GetDevEnvironmentResponse_instanceType = GetDevEnvironmentResponse.AddMember("instanceType", _InstanceType)
-
-	GetDevEnvironmentResponse_inactivityTimeoutMinutes = GetDevEnvironmentResponse.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	GetDevEnvironmentResponse_persistentStorage = GetDevEnvironmentResponse.AddMember("persistentStorage", PersistentStorage)
-
-	GetDevEnvironmentResponse_vpcConnectionName = GetDevEnvironmentResponse.AddMember("vpcConnectionName", _NameString)
-
-	GetProjectRequest_spaceName = GetProjectRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetProjectRequest_name = GetProjectRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	GetProjectResponse_spaceName = GetProjectResponse.AddMember("spaceName", _NameString)
-
-	GetProjectResponse_name = GetProjectResponse.AddMember("name", smithyprelude.String)
-
-	GetProjectResponse_displayName = GetProjectResponse.AddMember("displayName", smithyprelude.String)
-
-	GetProjectResponse_description = GetProjectResponse.AddMember("description", smithyprelude.String)
-
-	GetSourceRepositoryCloneUrlsRequest_spaceName = GetSourceRepositoryCloneUrlsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryCloneUrlsRequest_projectName = GetSourceRepositoryCloneUrlsRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryCloneUrlsRequest_sourceRepositoryName = GetSourceRepositoryCloneUrlsRequest.AddMember("sourceRepositoryName", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryCloneUrlsResponse_https = GetSourceRepositoryCloneUrlsResponse.AddMember("https", smithyprelude.String)
-
-	GetSourceRepositoryRequest_spaceName = GetSourceRepositoryRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryRequest_projectName = GetSourceRepositoryRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryRequest_name = GetSourceRepositoryRequest.AddMember("name", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	GetSourceRepositoryResponse_spaceName = GetSourceRepositoryResponse.AddMember("spaceName", _NameString)
-
-	GetSourceRepositoryResponse_projectName = GetSourceRepositoryResponse.AddMember("projectName", _NameString)
-
-	GetSourceRepositoryResponse_name = GetSourceRepositoryResponse.AddMember("name", _SourceRepositoryNameString)
-
-	GetSourceRepositoryResponse_description = GetSourceRepositoryResponse.AddMember("description", _SourceRepositoryDescriptionString)
-
-	GetSourceRepositoryResponse_lastUpdatedTime = GetSourceRepositoryResponse.AddMember("lastUpdatedTime", _Timestamp)
-
-	GetSourceRepositoryResponse_createdTime = GetSourceRepositoryResponse.AddMember("createdTime", _Timestamp)
-
-	GetSpaceRequest_name = GetSpaceRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSpaceResponse_name = GetSpaceResponse.AddMember("name", _NameString)
-
-	GetSpaceResponse_regionName = GetSpaceResponse.AddMember("regionName", _RegionString)
-
-	GetSpaceResponse_displayName = GetSpaceResponse.AddMember("displayName", smithyprelude.String)
-
-	GetSpaceResponse_description = GetSpaceResponse.AddMember("description", smithyprelude.String)
-
-	GetSubscriptionRequest_spaceName = GetSubscriptionRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetSubscriptionResponse_subscriptionType = GetSubscriptionResponse.AddMember("subscriptionType", smithyprelude.String)
-
-	GetSubscriptionResponse_awsAccountName = GetSubscriptionResponse.AddMember("awsAccountName", _NameString)
-
-	GetSubscriptionResponse_pendingSubscriptionType = GetSubscriptionResponse.AddMember("pendingSubscriptionType", smithyprelude.String)
-
-	GetSubscriptionResponse_pendingSubscriptionStartTime = GetSubscriptionResponse.AddMember("pendingSubscriptionStartTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetUserDetailsRequest_id = GetUserDetailsRequest.AddMember("id", smithyprelude.String, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetUserDetailsRequest_userName = GetUserDetailsRequest.AddMember("userName", smithyprelude.String, &smithytraits.HTTPQuery{Name: "userName"})
-
-	GetUserDetailsResponse_userId = GetUserDetailsResponse.AddMember("userId", smithyprelude.String)
-
-	GetUserDetailsResponse_userName = GetUserDetailsResponse.AddMember("userName", smithyprelude.String)
-
-	GetUserDetailsResponse_displayName = GetUserDetailsResponse.AddMember("displayName", smithyprelude.String)
-
-	GetUserDetailsResponse_primaryEmail = GetUserDetailsResponse.AddMember("primaryEmail", EmailAddress)
-
-	GetUserDetailsResponse_version = GetUserDetailsResponse.AddMember("version", smithyprelude.String)
-
-	GetWorkflowRequest_spaceName = GetWorkflowRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRequest_id = GetWorkflowRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRequest_projectName = GetWorkflowRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetWorkflowResponse_spaceName = GetWorkflowResponse.AddMember("spaceName", _NameString)
-
-	GetWorkflowResponse_projectName = GetWorkflowResponse.AddMember("projectName", _NameString)
-
-	GetWorkflowResponse_id = GetWorkflowResponse.AddMember("id", _Uuid)
-
-	GetWorkflowResponse_name = GetWorkflowResponse.AddMember("name", smithyprelude.String)
-
-	GetWorkflowResponse_sourceRepositoryName = GetWorkflowResponse.AddMember("sourceRepositoryName", _SourceRepositoryNameString)
-
-	GetWorkflowResponse_sourceBranchName = GetWorkflowResponse.AddMember("sourceBranchName", _SourceRepositoryBranchString)
-
-	GetWorkflowResponse_definition = GetWorkflowResponse.AddMember("definition", WorkflowDefinition)
-
-	GetWorkflowResponse_createdTime = GetWorkflowResponse.AddMember("createdTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetWorkflowResponse_lastUpdatedTime = GetWorkflowResponse.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetWorkflowResponse_runMode = GetWorkflowResponse.AddMember("runMode", _WorkflowRunMode)
-
-	GetWorkflowResponse_status = GetWorkflowResponse.AddMember("status", _WorkflowStatus)
-
-	GetWorkflowRunRequest_spaceName = GetWorkflowRunRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRunRequest_id = GetWorkflowRunRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRunRequest_projectName = GetWorkflowRunRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRunResponse_spaceName = GetWorkflowRunResponse.AddMember("spaceName", _NameString)
-
-	GetWorkflowRunResponse_projectName = GetWorkflowRunResponse.AddMember("projectName", _NameString)
-
-	GetWorkflowRunResponse_id = GetWorkflowRunResponse.AddMember("id", _Uuid)
-
-	GetWorkflowRunResponse_workflowId = GetWorkflowRunResponse.AddMember("workflowId", _Uuid)
-
-	GetWorkflowRunResponse_status = GetWorkflowRunResponse.AddMember("status", _WorkflowRunStatus)
-
-	GetWorkflowRunResponse_statusReasons = GetWorkflowRunResponse.AddMember("statusReasons", _WorkflowRunStatusReasons)
-
-	GetWorkflowRunResponse_startTime = GetWorkflowRunResponse.AddMember("startTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetWorkflowRunResponse_endTime = GetWorkflowRunResponse.AddMember("endTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetWorkflowRunResponse_lastUpdatedTime = GetWorkflowRunResponse.AddMember("lastUpdatedTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListAccessTokensRequest_maxResults = ListAccessTokensRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAccessTokensRequest_nextToken = ListAccessTokensRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListAccessTokensResponse_items = ListAccessTokensResponse.AddMember("items", _AccessTokenSummaries)
-
-	ListAccessTokensResponse_nextToken = ListAccessTokensResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListDevEnvironmentSessionsRequest_spaceName = ListDevEnvironmentSessionsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListDevEnvironmentSessionsRequest_projectName = ListDevEnvironmentSessionsRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListDevEnvironmentSessionsRequest_devEnvironmentId = ListDevEnvironmentSessionsRequest.AddMember("devEnvironmentId", _Uuid, &smithytraits.HTTPLabel{})
-
-	ListDevEnvironmentSessionsRequest_nextToken = ListDevEnvironmentSessionsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListDevEnvironmentSessionsRequest_maxResults = ListDevEnvironmentSessionsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListDevEnvironmentSessionsResponse_items = ListDevEnvironmentSessionsResponse.AddMember("items", _DevEnvironmentSessionsSummaryList)
-
-	ListDevEnvironmentSessionsResponse_nextToken = ListDevEnvironmentSessionsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListDevEnvironmentsRequest_spaceName = ListDevEnvironmentsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListDevEnvironmentsRequest_projectName = ListDevEnvironmentsRequest.AddMember("projectName", _NameString)
-
-	ListDevEnvironmentsRequest_filters = ListDevEnvironmentsRequest.AddMember("filters", _Filters)
-
-	ListDevEnvironmentsRequest_nextToken = ListDevEnvironmentsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListDevEnvironmentsRequest_maxResults = ListDevEnvironmentsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListDevEnvironmentsResponse_items = ListDevEnvironmentsResponse.AddMember("items", _DevEnvironmentSummaryList)
-
-	ListDevEnvironmentsResponse_nextToken = ListDevEnvironmentsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListEventLogsRequest_spaceName = ListEventLogsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListEventLogsRequest_startTime = ListEventLogsRequest.AddMember("startTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListEventLogsRequest_endTime = ListEventLogsRequest.AddMember("endTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListEventLogsRequest_eventName = ListEventLogsRequest.AddMember("eventName", smithyprelude.String)
-
-	ListEventLogsRequest_nextToken = ListEventLogsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListEventLogsRequest_maxResults = ListEventLogsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListEventLogsResponse_nextToken = ListEventLogsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListEventLogsResponse_items = ListEventLogsResponse.AddMember("items", _EventLogEntries)
-
-	ListProjectsRequest_spaceName = ListProjectsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListProjectsRequest_nextToken = ListProjectsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListProjectsRequest_maxResults = ListProjectsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListProjectsRequest_filters = ListProjectsRequest.AddMember("filters", _ProjectListFilters)
-
-	ListProjectsResponse_nextToken = ListProjectsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListProjectsResponse_items = ListProjectsResponse.AddMember("items", _ProjectSummaries)
-
-	ListSourceRepositoriesRequest_spaceName = ListSourceRepositoriesRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListSourceRepositoriesRequest_projectName = ListSourceRepositoriesRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListSourceRepositoriesRequest_nextToken = ListSourceRepositoriesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListSourceRepositoriesRequest_maxResults = ListSourceRepositoriesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListSourceRepositoriesResponse_items = ListSourceRepositoriesResponse.AddMember("items", _ListSourceRepositoriesItems)
-
-	ListSourceRepositoriesResponse_nextToken = ListSourceRepositoriesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListSourceRepositoryBranchesRequest_spaceName = ListSourceRepositoryBranchesRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListSourceRepositoryBranchesRequest_projectName = ListSourceRepositoryBranchesRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListSourceRepositoryBranchesRequest_sourceRepositoryName = ListSourceRepositoryBranchesRequest.AddMember("sourceRepositoryName", _SourceRepositoryNameString, &smithytraits.HTTPLabel{})
-
-	ListSourceRepositoryBranchesRequest_nextToken = ListSourceRepositoryBranchesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListSourceRepositoryBranchesRequest_maxResults = ListSourceRepositoryBranchesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListSourceRepositoryBranchesResponse_nextToken = ListSourceRepositoryBranchesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListSourceRepositoryBranchesResponse_items = ListSourceRepositoryBranchesResponse.AddMember("items", _ListSourceRepositoryBranchesItems)
-
-	ListSpacesRequest_nextToken = ListSpacesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListSpacesResponse_nextToken = ListSpacesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListSpacesResponse_items = ListSpacesResponse.AddMember("items", _SpaceSummaries)
-
-	ListWorkflowRunsRequest_spaceName = ListWorkflowRunsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListWorkflowRunsRequest_workflowId = ListWorkflowRunsRequest.AddMember("workflowId", _Uuid, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	ListWorkflowRunsRequest_projectName = ListWorkflowRunsRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListWorkflowRunsRequest_nextToken = ListWorkflowRunsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowRunsRequest_maxResults = ListWorkflowRunsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowRunsRequest_sortBy = ListWorkflowRunsRequest.AddMember("sortBy", _WorkflowRunSortCriteriaList)
-
-	ListWorkflowRunsResponse_nextToken = ListWorkflowRunsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListWorkflowRunsResponse_items = ListWorkflowRunsResponse.AddMember("items", _WorkflowRunSummaries)
-
-	ListWorkflowsRequest_spaceName = ListWorkflowsRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListWorkflowsRequest_projectName = ListWorkflowsRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	ListWorkflowsRequest_nextToken = ListWorkflowsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowsRequest_maxResults = ListWorkflowsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowsRequest_sortBy = ListWorkflowsRequest.AddMember("sortBy", _WorkflowSortCriteriaList)
-
-	ListWorkflowsResponse_nextToken = ListWorkflowsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListWorkflowsResponse_items = ListWorkflowsResponse.AddMember("items", _WorkflowSummaries)
-
-	StartDevEnvironmentRequest_spaceName = StartDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentRequest_projectName = StartDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentRequest_id = StartDevEnvironmentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentRequest_ides = StartDevEnvironmentRequest.AddMember("ides", _IdeConfigurationList)
-
-	StartDevEnvironmentRequest_instanceType = StartDevEnvironmentRequest.AddMember("instanceType", _InstanceType)
-
-	StartDevEnvironmentRequest_inactivityTimeoutMinutes = StartDevEnvironmentRequest.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	StartDevEnvironmentResponse_spaceName = StartDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	StartDevEnvironmentResponse_projectName = StartDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	StartDevEnvironmentResponse_id = StartDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	StartDevEnvironmentResponse_status = StartDevEnvironmentResponse.AddMember("status", _DevEnvironmentStatus)
-
-	StartDevEnvironmentSessionRequest_spaceName = StartDevEnvironmentSessionRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentSessionRequest_projectName = StartDevEnvironmentSessionRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentSessionRequest_id = StartDevEnvironmentSessionRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	StartDevEnvironmentSessionRequest_sessionConfiguration = StartDevEnvironmentSessionRequest.AddMember("sessionConfiguration", DevEnvironmentSessionConfiguration)
-
-	StartDevEnvironmentSessionResponse_accessDetails = StartDevEnvironmentSessionResponse.AddMember("accessDetails", DevEnvironmentAccessDetails)
-
-	StartDevEnvironmentSessionResponse_sessionId = StartDevEnvironmentSessionResponse.AddMember("sessionId", smithyprelude.String)
-
-	StartDevEnvironmentSessionResponse_spaceName = StartDevEnvironmentSessionResponse.AddMember("spaceName", _NameString)
-
-	StartDevEnvironmentSessionResponse_projectName = StartDevEnvironmentSessionResponse.AddMember("projectName", _NameString)
-
-	StartDevEnvironmentSessionResponse_id = StartDevEnvironmentSessionResponse.AddMember("id", _Uuid)
-
-	StartWorkflowRunRequest_spaceName = StartWorkflowRunRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartWorkflowRunRequest_projectName = StartWorkflowRunRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	StartWorkflowRunRequest_workflowId = StartWorkflowRunRequest.AddMember("workflowId", _Uuid, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	StartWorkflowRunRequest_clientToken = StartWorkflowRunRequest.AddMember("clientToken", smithyprelude.String)
-
-	StartWorkflowRunResponse_spaceName = StartWorkflowRunResponse.AddMember("spaceName", _NameString)
-
-	StartWorkflowRunResponse_projectName = StartWorkflowRunResponse.AddMember("projectName", _NameString)
-
-	StartWorkflowRunResponse_id = StartWorkflowRunResponse.AddMember("id", _Uuid)
-
-	StartWorkflowRunResponse_workflowId = StartWorkflowRunResponse.AddMember("workflowId", _Uuid)
-
-	StopDevEnvironmentRequest_spaceName = StopDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentRequest_projectName = StopDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentRequest_id = StopDevEnvironmentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentResponse_spaceName = StopDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	StopDevEnvironmentResponse_projectName = StopDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	StopDevEnvironmentResponse_id = StopDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	StopDevEnvironmentResponse_status = StopDevEnvironmentResponse.AddMember("status", _DevEnvironmentStatus)
-
-	StopDevEnvironmentSessionRequest_spaceName = StopDevEnvironmentSessionRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentSessionRequest_projectName = StopDevEnvironmentSessionRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentSessionRequest_id = StopDevEnvironmentSessionRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentSessionRequest_sessionId = StopDevEnvironmentSessionRequest.AddMember("sessionId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	StopDevEnvironmentSessionResponse_spaceName = StopDevEnvironmentSessionResponse.AddMember("spaceName", _NameString)
-
-	StopDevEnvironmentSessionResponse_projectName = StopDevEnvironmentSessionResponse.AddMember("projectName", _NameString)
-
-	StopDevEnvironmentSessionResponse_id = StopDevEnvironmentSessionResponse.AddMember("id", _Uuid)
-
-	StopDevEnvironmentSessionResponse_sessionId = StopDevEnvironmentSessionResponse.AddMember("sessionId", smithyprelude.String)
-
-	UpdateDevEnvironmentRequest_spaceName = UpdateDevEnvironmentRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	UpdateDevEnvironmentRequest_projectName = UpdateDevEnvironmentRequest.AddMember("projectName", _NameString, &smithytraits.HTTPLabel{})
-
-	UpdateDevEnvironmentRequest_id = UpdateDevEnvironmentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateDevEnvironmentRequest_alias = UpdateDevEnvironmentRequest.AddMember("alias", smithyprelude.String)
-
-	UpdateDevEnvironmentRequest_ides = UpdateDevEnvironmentRequest.AddMember("ides", _IdeConfigurationList)
-
-	UpdateDevEnvironmentRequest_instanceType = UpdateDevEnvironmentRequest.AddMember("instanceType", _InstanceType)
-
-	UpdateDevEnvironmentRequest_inactivityTimeoutMinutes = UpdateDevEnvironmentRequest.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	UpdateDevEnvironmentRequest_clientToken = UpdateDevEnvironmentRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateDevEnvironmentResponse_id = UpdateDevEnvironmentResponse.AddMember("id", _Uuid)
-
-	UpdateDevEnvironmentResponse_spaceName = UpdateDevEnvironmentResponse.AddMember("spaceName", _NameString)
-
-	UpdateDevEnvironmentResponse_projectName = UpdateDevEnvironmentResponse.AddMember("projectName", _NameString)
-
-	UpdateDevEnvironmentResponse_alias = UpdateDevEnvironmentResponse.AddMember("alias", smithyprelude.String)
-
-	UpdateDevEnvironmentResponse_ides = UpdateDevEnvironmentResponse.AddMember("ides", _IdeConfigurationList)
-
-	UpdateDevEnvironmentResponse_instanceType = UpdateDevEnvironmentResponse.AddMember("instanceType", _InstanceType)
-
-	UpdateDevEnvironmentResponse_inactivityTimeoutMinutes = UpdateDevEnvironmentResponse.AddMember("inactivityTimeoutMinutes", _InactivityTimeoutMinutes)
-
-	UpdateDevEnvironmentResponse_clientToken = UpdateDevEnvironmentResponse.AddMember("clientToken", _ClientToken)
-
-	UpdateProjectRequest_spaceName = UpdateProjectRequest.AddMember("spaceName", _NameString, &smithytraits.HTTPLabel{})
-
-	UpdateProjectRequest_name = UpdateProjectRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	UpdateProjectRequest_description = UpdateProjectRequest.AddMember("description", _ProjectDescription)
-
-	UpdateProjectResponse_spaceName = UpdateProjectResponse.AddMember("spaceName", _NameString)
-
-	UpdateProjectResponse_name = UpdateProjectResponse.AddMember("name", _NameString)
-
-	UpdateProjectResponse_displayName = UpdateProjectResponse.AddMember("displayName", smithyprelude.String)
-
-	UpdateProjectResponse_description = UpdateProjectResponse.AddMember("description", smithyprelude.String)
-
-	UpdateSpaceRequest_name = UpdateSpaceRequest.AddMember("name", _NameString, &smithytraits.HTTPLabel{})
-
-	UpdateSpaceRequest_description = UpdateSpaceRequest.AddMember("description", _SpaceDescription)
-
-	UpdateSpaceResponse_name = UpdateSpaceResponse.AddMember("name", _NameString)
-
-	UpdateSpaceResponse_displayName = UpdateSpaceResponse.AddMember("displayName", smithyprelude.String)
-
-	UpdateSpaceResponse_description = UpdateSpaceResponse.AddMember("description", smithyprelude.String)
-
-	VerifySessionResponse_identity = VerifySessionResponse.AddMember("identity", smithyprelude.String)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "id"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "userName"}}, DirectMask: 0x10}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "workflowId"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AccessTokenSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessTokenSummaries_member}}
+var mAccessTokenSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessTokenSummary_id, &sAccessTokenSummary_name, &sAccessTokenSummary_expiresTime}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mDevEnvironmentAccessDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDevEnvironmentAccessDetails_streamUrl, &sDevEnvironmentAccessDetails_tokenValue}}
+var m_DevEnvironmentRepositorySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DevEnvironmentRepositorySummaries_member}}
+var mDevEnvironmentRepositorySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDevEnvironmentRepositorySummary_repositoryName, &sDevEnvironmentRepositorySummary_branchName}}
+var mDevEnvironmentSessionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDevEnvironmentSessionConfiguration_sessionType, &sDevEnvironmentSessionConfiguration_executeCommandSessionConfiguration}}
+var m_DevEnvironmentSessionsSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DevEnvironmentSessionsSummaryList_member}}
+var mDevEnvironmentSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDevEnvironmentSessionSummary_spaceName, &sDevEnvironmentSessionSummary_projectName, &sDevEnvironmentSessionSummary_devEnvironmentId, &sDevEnvironmentSessionSummary_startedTime, &sDevEnvironmentSessionSummary_id}}
+var mDevEnvironmentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDevEnvironmentSummary_spaceName, &sDevEnvironmentSummary_projectName, &sDevEnvironmentSummary_id, &sDevEnvironmentSummary_lastUpdatedTime, &sDevEnvironmentSummary_creatorId, &sDevEnvironmentSummary_status, &sDevEnvironmentSummary_statusReason, &sDevEnvironmentSummary_repositories, &sDevEnvironmentSummary_alias, &sDevEnvironmentSummary_ides, &sDevEnvironmentSummary_instanceType, &sDevEnvironmentSummary_inactivityTimeoutMinutes, &sDevEnvironmentSummary_persistentStorage, &sDevEnvironmentSummary_vpcConnectionName}, Hash: &hDevEnvironmentSummary}
+var m_DevEnvironmentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DevEnvironmentSummaryList_member}}
+var mEmailAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailAddress_email, &sEmailAddress_verified}}
+var m_EventLogEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventLogEntries_member}}
+var mEventLogEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sEventLogEntry_id, &sEventLogEntry_eventName, &sEventLogEntry_eventType, &sEventLogEntry_eventCategory, &sEventLogEntry_eventSource, &sEventLogEntry_eventTime, &sEventLogEntry_operationType, &sEventLogEntry_userIdentity, &sEventLogEntry_projectInformation, &sEventLogEntry_requestId, &sEventLogEntry_requestPayload, &sEventLogEntry_responsePayload, &sEventLogEntry_errorCode, &sEventLogEntry_sourceIpAddress, &sEventLogEntry_userAgent}, Hash: &hEventLogEntry}
+var mEventPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sEventPayload_contentType, &sEventPayload_data}}
+var mExecuteCommandSessionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteCommandSessionConfiguration_command, &sExecuteCommandSessionConfiguration_arguments}}
+var m_ExecuteCommandSessionConfigurationArguments = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecuteCommandSessionConfigurationArguments_member}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_key, &sFilter_values, &sFilter_comparisonOperator}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var mIde = smithy.SchemaMembers{List: []*smithy.Schema{&sIde_runtime, &sIde_name}}
+var mIdeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIdeConfiguration_runtime, &sIdeConfiguration_name}}
+var m_IdeConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdeConfigurationList_member}}
+var m_Ides = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ides_member}}
+var mListSourceRepositoriesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoriesItem_id, &sListSourceRepositoriesItem_name, &sListSourceRepositoriesItem_description, &sListSourceRepositoriesItem_lastUpdatedTime, &sListSourceRepositoriesItem_createdTime}}
+var m_ListSourceRepositoriesItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListSourceRepositoriesItems_member}}
+var mListSourceRepositoryBranchesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoryBranchesItem_ref, &sListSourceRepositoryBranchesItem_name, &sListSourceRepositoryBranchesItem_lastUpdatedTime, &sListSourceRepositoryBranchesItem_headCommitId}}
+var m_ListSourceRepositoryBranchesItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListSourceRepositoryBranchesItems_member}}
+var mPersistentStorage = smithy.SchemaMembers{List: []*smithy.Schema{&sPersistentStorage_sizeInGiB}}
+var mPersistentStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPersistentStorageConfiguration_sizeInGiB}}
+var mProjectInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectInformation_name, &sProjectInformation_projectId}}
+var mProjectListFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectListFilter_key, &sProjectListFilter_values, &sProjectListFilter_comparisonOperator}}
+var m_ProjectListFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectListFilters_member}}
+var m_ProjectSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectSummaries_member}}
+var mProjectSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectSummary_name, &sProjectSummary_displayName, &sProjectSummary_description}}
+var m_RepositoriesInput = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoriesInput_member}}
+var mRepositoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryInput_repositoryName, &sRepositoryInput_branchName}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var m_SpaceSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpaceSummaries_member}}
+var mSpaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSpaceSummary_name, &sSpaceSummary_regionName, &sSpaceSummary_displayName, &sSpaceSummary_description}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUserIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sUserIdentity_userType, &sUserIdentity_principalId, &sUserIdentity_userName, &sUserIdentity_awsAccountId}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWorkflowDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDefinition_path}}
+var mWorkflowDefinitionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDefinitionSummary_path}}
+var m_WorkflowRunSortCriteriaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowRunSortCriteriaList_member}}
+var m_WorkflowRunStatusReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowRunStatusReasons_member}}
+var m_WorkflowRunSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowRunSummaries_member}}
+var mWorkflowRunSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowRunSummary_id, &sWorkflowRunSummary_workflowId, &sWorkflowRunSummary_workflowName, &sWorkflowRunSummary_status, &sWorkflowRunSummary_statusReasons, &sWorkflowRunSummary_startTime, &sWorkflowRunSummary_endTime, &sWorkflowRunSummary_lastUpdatedTime}}
+var m_WorkflowSortCriteriaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowSortCriteriaList_member}}
+var m_WorkflowSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowSummaries_member}}
+var mWorkflowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowSummary_id, &sWorkflowSummary_name, &sWorkflowSummary_sourceRepositoryName, &sWorkflowSummary_sourceBranchName, &sWorkflowSummary_definition, &sWorkflowSummary_createdTime, &sWorkflowSummary_lastUpdatedTime, &sWorkflowSummary_runMode, &sWorkflowSummary_status}, Hash: &hWorkflowSummary}
+var mCreateAccessTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessTokenRequest_name, &sCreateAccessTokenRequest_expiresTime}}
+var mCreateAccessTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessTokenResponse_secret, &sCreateAccessTokenResponse_name, &sCreateAccessTokenResponse_expiresTime, &sCreateAccessTokenResponse_accessTokenId}}
+var mCreateDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDevEnvironmentRequest_spaceName, &sCreateDevEnvironmentRequest_projectName, &sCreateDevEnvironmentRequest_repositories, &sCreateDevEnvironmentRequest_clientToken, &sCreateDevEnvironmentRequest_alias, &sCreateDevEnvironmentRequest_ides, &sCreateDevEnvironmentRequest_instanceType, &sCreateDevEnvironmentRequest_inactivityTimeoutMinutes, &sCreateDevEnvironmentRequest_persistentStorage, &sCreateDevEnvironmentRequest_vpcConnectionName}, Hash: &hCreateDevEnvironmentRequest}
+var mCreateDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDevEnvironmentResponse_spaceName, &sCreateDevEnvironmentResponse_projectName, &sCreateDevEnvironmentResponse_id, &sCreateDevEnvironmentResponse_vpcConnectionName}}
+var mCreateProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectRequest_spaceName, &sCreateProjectRequest_displayName, &sCreateProjectRequest_description}}
+var mCreateProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectResponse_spaceName, &sCreateProjectResponse_name, &sCreateProjectResponse_displayName, &sCreateProjectResponse_description}}
+var mCreateSourceRepositoryBranchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceRepositoryBranchRequest_spaceName, &sCreateSourceRepositoryBranchRequest_projectName, &sCreateSourceRepositoryBranchRequest_sourceRepositoryName, &sCreateSourceRepositoryBranchRequest_name, &sCreateSourceRepositoryBranchRequest_headCommitId}}
+var mCreateSourceRepositoryBranchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceRepositoryBranchResponse_ref, &sCreateSourceRepositoryBranchResponse_name, &sCreateSourceRepositoryBranchResponse_lastUpdatedTime, &sCreateSourceRepositoryBranchResponse_headCommitId}}
+var mCreateSourceRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceRepositoryRequest_spaceName, &sCreateSourceRepositoryRequest_projectName, &sCreateSourceRepositoryRequest_name, &sCreateSourceRepositoryRequest_description}}
+var mCreateSourceRepositoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceRepositoryResponse_spaceName, &sCreateSourceRepositoryResponse_projectName, &sCreateSourceRepositoryResponse_name, &sCreateSourceRepositoryResponse_description}}
+var mDeleteAccessTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessTokenRequest_id}}
+var mDeleteDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDevEnvironmentRequest_spaceName, &sDeleteDevEnvironmentRequest_projectName, &sDeleteDevEnvironmentRequest_id}}
+var mDeleteDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDevEnvironmentResponse_spaceName, &sDeleteDevEnvironmentResponse_projectName, &sDeleteDevEnvironmentResponse_id}}
+var mDeleteProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProjectRequest_spaceName, &sDeleteProjectRequest_name}}
+var mDeleteProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProjectResponse_spaceName, &sDeleteProjectResponse_name, &sDeleteProjectResponse_displayName}}
+var mDeleteSourceRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceRepositoryRequest_spaceName, &sDeleteSourceRepositoryRequest_projectName, &sDeleteSourceRepositoryRequest_name}}
+var mDeleteSourceRepositoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceRepositoryResponse_spaceName, &sDeleteSourceRepositoryResponse_projectName, &sDeleteSourceRepositoryResponse_name}}
+var mDeleteSpaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSpaceRequest_name}}
+var mDeleteSpaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSpaceResponse_name, &sDeleteSpaceResponse_displayName}}
+var mGetDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDevEnvironmentRequest_spaceName, &sGetDevEnvironmentRequest_projectName, &sGetDevEnvironmentRequest_id}}
+var mGetDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDevEnvironmentResponse_spaceName, &sGetDevEnvironmentResponse_projectName, &sGetDevEnvironmentResponse_id, &sGetDevEnvironmentResponse_lastUpdatedTime, &sGetDevEnvironmentResponse_creatorId, &sGetDevEnvironmentResponse_status, &sGetDevEnvironmentResponse_statusReason, &sGetDevEnvironmentResponse_repositories, &sGetDevEnvironmentResponse_alias, &sGetDevEnvironmentResponse_ides, &sGetDevEnvironmentResponse_instanceType, &sGetDevEnvironmentResponse_inactivityTimeoutMinutes, &sGetDevEnvironmentResponse_persistentStorage, &sGetDevEnvironmentResponse_vpcConnectionName}, Hash: &hGetDevEnvironmentResponse}
+var mGetProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProjectRequest_spaceName, &sGetProjectRequest_name}}
+var mGetProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProjectResponse_spaceName, &sGetProjectResponse_name, &sGetProjectResponse_displayName, &sGetProjectResponse_description}}
+var mGetSourceRepositoryCloneUrlsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceRepositoryCloneUrlsRequest_spaceName, &sGetSourceRepositoryCloneUrlsRequest_projectName, &sGetSourceRepositoryCloneUrlsRequest_sourceRepositoryName}}
+var mGetSourceRepositoryCloneUrlsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceRepositoryCloneUrlsResponse_https}}
+var mGetSourceRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceRepositoryRequest_spaceName, &sGetSourceRepositoryRequest_projectName, &sGetSourceRepositoryRequest_name}}
+var mGetSourceRepositoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSourceRepositoryResponse_spaceName, &sGetSourceRepositoryResponse_projectName, &sGetSourceRepositoryResponse_name, &sGetSourceRepositoryResponse_description, &sGetSourceRepositoryResponse_lastUpdatedTime, &sGetSourceRepositoryResponse_createdTime}}
+var mGetSpaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpaceRequest_name}}
+var mGetSpaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpaceResponse_name, &sGetSpaceResponse_regionName, &sGetSpaceResponse_displayName, &sGetSpaceResponse_description}}
+var mGetSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionRequest_spaceName}}
+var mGetSubscriptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionResponse_subscriptionType, &sGetSubscriptionResponse_awsAccountName, &sGetSubscriptionResponse_pendingSubscriptionType, &sGetSubscriptionResponse_pendingSubscriptionStartTime}}
+var mGetUserDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserDetailsRequest_id, &sGetUserDetailsRequest_userName}}
+var mGetUserDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserDetailsResponse_userId, &sGetUserDetailsResponse_userName, &sGetUserDetailsResponse_displayName, &sGetUserDetailsResponse_primaryEmail, &sGetUserDetailsResponse_version}}
+var mGetWorkflowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowRequest_spaceName, &sGetWorkflowRequest_id, &sGetWorkflowRequest_projectName}}
+var mGetWorkflowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowResponse_spaceName, &sGetWorkflowResponse_projectName, &sGetWorkflowResponse_id, &sGetWorkflowResponse_name, &sGetWorkflowResponse_sourceRepositoryName, &sGetWorkflowResponse_sourceBranchName, &sGetWorkflowResponse_definition, &sGetWorkflowResponse_createdTime, &sGetWorkflowResponse_lastUpdatedTime, &sGetWorkflowResponse_runMode, &sGetWorkflowResponse_status}, Hash: &hGetWorkflowResponse}
+var mGetWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowRunRequest_spaceName, &sGetWorkflowRunRequest_id, &sGetWorkflowRunRequest_projectName}}
+var mGetWorkflowRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowRunResponse_spaceName, &sGetWorkflowRunResponse_projectName, &sGetWorkflowRunResponse_id, &sGetWorkflowRunResponse_workflowId, &sGetWorkflowRunResponse_status, &sGetWorkflowRunResponse_statusReasons, &sGetWorkflowRunResponse_startTime, &sGetWorkflowRunResponse_endTime, &sGetWorkflowRunResponse_lastUpdatedTime}, Hash: &hGetWorkflowRunResponse}
+var mListAccessTokensRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessTokensRequest_maxResults, &sListAccessTokensRequest_nextToken}}
+var mListAccessTokensResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessTokensResponse_items, &sListAccessTokensResponse_nextToken}}
+var mListDevEnvironmentSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevEnvironmentSessionsRequest_spaceName, &sListDevEnvironmentSessionsRequest_projectName, &sListDevEnvironmentSessionsRequest_devEnvironmentId, &sListDevEnvironmentSessionsRequest_nextToken, &sListDevEnvironmentSessionsRequest_maxResults}}
+var mListDevEnvironmentSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevEnvironmentSessionsResponse_items, &sListDevEnvironmentSessionsResponse_nextToken}}
+var mListDevEnvironmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevEnvironmentsRequest_spaceName, &sListDevEnvironmentsRequest_projectName, &sListDevEnvironmentsRequest_filters, &sListDevEnvironmentsRequest_nextToken, &sListDevEnvironmentsRequest_maxResults}}
+var mListDevEnvironmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevEnvironmentsResponse_items, &sListDevEnvironmentsResponse_nextToken}}
+var mListEventLogsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventLogsRequest_spaceName, &sListEventLogsRequest_startTime, &sListEventLogsRequest_endTime, &sListEventLogsRequest_eventName, &sListEventLogsRequest_nextToken, &sListEventLogsRequest_maxResults}}
+var mListEventLogsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventLogsResponse_nextToken, &sListEventLogsResponse_items}}
+var mListProjectsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsRequest_spaceName, &sListProjectsRequest_nextToken, &sListProjectsRequest_maxResults, &sListProjectsRequest_filters}}
+var mListProjectsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsResponse_nextToken, &sListProjectsResponse_items}}
+var mListSourceRepositoriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoriesRequest_spaceName, &sListSourceRepositoriesRequest_projectName, &sListSourceRepositoriesRequest_nextToken, &sListSourceRepositoriesRequest_maxResults}}
+var mListSourceRepositoriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoriesResponse_items, &sListSourceRepositoriesResponse_nextToken}}
+var mListSourceRepositoryBranchesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoryBranchesRequest_spaceName, &sListSourceRepositoryBranchesRequest_projectName, &sListSourceRepositoryBranchesRequest_sourceRepositoryName, &sListSourceRepositoryBranchesRequest_nextToken, &sListSourceRepositoryBranchesRequest_maxResults}}
+var mListSourceRepositoryBranchesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceRepositoryBranchesResponse_nextToken, &sListSourceRepositoryBranchesResponse_items}}
+var mListSpacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpacesRequest_nextToken}}
+var mListSpacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpacesResponse_nextToken, &sListSpacesResponse_items}}
+var mListWorkflowRunsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowRunsRequest_spaceName, &sListWorkflowRunsRequest_workflowId, &sListWorkflowRunsRequest_projectName, &sListWorkflowRunsRequest_nextToken, &sListWorkflowRunsRequest_maxResults, &sListWorkflowRunsRequest_sortBy}}
+var mListWorkflowRunsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowRunsResponse_nextToken, &sListWorkflowRunsResponse_items}}
+var mListWorkflowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowsRequest_spaceName, &sListWorkflowsRequest_projectName, &sListWorkflowsRequest_nextToken, &sListWorkflowsRequest_maxResults, &sListWorkflowsRequest_sortBy}}
+var mListWorkflowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowsResponse_nextToken, &sListWorkflowsResponse_items}}
+var mStartDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDevEnvironmentRequest_spaceName, &sStartDevEnvironmentRequest_projectName, &sStartDevEnvironmentRequest_id, &sStartDevEnvironmentRequest_ides, &sStartDevEnvironmentRequest_instanceType, &sStartDevEnvironmentRequest_inactivityTimeoutMinutes}}
+var mStartDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDevEnvironmentResponse_spaceName, &sStartDevEnvironmentResponse_projectName, &sStartDevEnvironmentResponse_id, &sStartDevEnvironmentResponse_status}}
+var mStartDevEnvironmentSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDevEnvironmentSessionRequest_spaceName, &sStartDevEnvironmentSessionRequest_projectName, &sStartDevEnvironmentSessionRequest_id, &sStartDevEnvironmentSessionRequest_sessionConfiguration}}
+var mStartDevEnvironmentSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDevEnvironmentSessionResponse_accessDetails, &sStartDevEnvironmentSessionResponse_sessionId, &sStartDevEnvironmentSessionResponse_spaceName, &sStartDevEnvironmentSessionResponse_projectName, &sStartDevEnvironmentSessionResponse_id}}
+var mStartWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartWorkflowRunRequest_spaceName, &sStartWorkflowRunRequest_projectName, &sStartWorkflowRunRequest_workflowId, &sStartWorkflowRunRequest_clientToken}}
+var mStartWorkflowRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartWorkflowRunResponse_spaceName, &sStartWorkflowRunResponse_projectName, &sStartWorkflowRunResponse_id, &sStartWorkflowRunResponse_workflowId}}
+var mStopDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDevEnvironmentRequest_spaceName, &sStopDevEnvironmentRequest_projectName, &sStopDevEnvironmentRequest_id}}
+var mStopDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDevEnvironmentResponse_spaceName, &sStopDevEnvironmentResponse_projectName, &sStopDevEnvironmentResponse_id, &sStopDevEnvironmentResponse_status}}
+var mStopDevEnvironmentSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDevEnvironmentSessionRequest_spaceName, &sStopDevEnvironmentSessionRequest_projectName, &sStopDevEnvironmentSessionRequest_id, &sStopDevEnvironmentSessionRequest_sessionId}}
+var mStopDevEnvironmentSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDevEnvironmentSessionResponse_spaceName, &sStopDevEnvironmentSessionResponse_projectName, &sStopDevEnvironmentSessionResponse_id, &sStopDevEnvironmentSessionResponse_sessionId}}
+var mUpdateDevEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDevEnvironmentRequest_spaceName, &sUpdateDevEnvironmentRequest_projectName, &sUpdateDevEnvironmentRequest_id, &sUpdateDevEnvironmentRequest_alias, &sUpdateDevEnvironmentRequest_ides, &sUpdateDevEnvironmentRequest_instanceType, &sUpdateDevEnvironmentRequest_inactivityTimeoutMinutes, &sUpdateDevEnvironmentRequest_clientToken}}
+var mUpdateDevEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDevEnvironmentResponse_id, &sUpdateDevEnvironmentResponse_spaceName, &sUpdateDevEnvironmentResponse_projectName, &sUpdateDevEnvironmentResponse_alias, &sUpdateDevEnvironmentResponse_ides, &sUpdateDevEnvironmentResponse_instanceType, &sUpdateDevEnvironmentResponse_inactivityTimeoutMinutes, &sUpdateDevEnvironmentResponse_clientToken}}
+var mUpdateProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectRequest_spaceName, &sUpdateProjectRequest_name, &sUpdateProjectRequest_description}}
+var mUpdateProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectResponse_spaceName, &sUpdateProjectResponse_name, &sUpdateProjectResponse_displayName, &sUpdateProjectResponse_description}}
+var mUpdateSpaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSpaceRequest_name, &sUpdateSpaceRequest_description}}
+var mUpdateSpaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSpaceResponse_name, &sUpdateSpaceResponse_displayName, &sUpdateSpaceResponse_description}}
+var mVerifySessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifySessionResponse_identity}}
+
+var hDevEnvironmentSummary = smithy.MemberHash{Seed: 36, Slots: []uint16{
+	0, 11, 0, 0, 0, 6, 8, 13, 0, 0, 0, 0, 0, 12, 0, 0, 0, 9, 1, 0, 2, 14, 0, 0,
+	7, 0, 0, 10, 3, 5, 0, 4,
+}}
+var hEventLogEntry = smithy.MemberHash{Seed: 33, Slots: []uint16{
+	0, 0, 10, 8, 11, 0, 6, 0, 0, 0, 9, 3, 0, 0, 0, 12, 2, 14, 0, 0, 5, 4, 0, 0,
+	0, 15, 0, 0, 0, 1, 7, 13,
+}}
+var hWorkflowSummary = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 7, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 3, 0, 0, 1, 4, 0, 6,
+	0, 0, 5, 0, 0, 0, 8, 0,
+}}
+var hCreateDevEnvironmentRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	4, 0, 9, 0, 0, 0, 0, 1, 0, 7, 0, 6, 0, 0, 0, 10, 0, 0, 0, 0, 0, 5, 8, 3,
+	0, 0, 0, 0, 2, 0, 0, 0,
+}}
+var hGetDevEnvironmentResponse = smithy.MemberHash{Seed: 36, Slots: []uint16{
+	0, 11, 0, 0, 0, 6, 8, 13, 0, 0, 0, 0, 0, 12, 0, 0, 0, 9, 1, 0, 2, 14, 0, 0,
+	7, 0, 0, 10, 3, 5, 0, 4,
+}}
+var hGetWorkflowResponse = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 0, 0, 0, 5, 4, 0, 10, 0, 0, 6, 0, 0, 9, 0, 0, 0, 0, 0,
+	0, 0, 2, 8, 0, 1, 11, 7,
+}}
+var hGetWorkflowRunResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	7, 3, 0, 6, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0,
+	0, 0, 9, 0, 2, 0, 0, 0,
+}}
+
+var sCreateAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateAccessToken})
+var sCreateDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDevEnvironment, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateDevEnvironment})
+var sCreateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProject, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateProject})
+var sCreateSourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepository, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateSourceRepository})
+var sCreateSourceRepositoryBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepositoryBranch, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateSourceRepositoryBranch})
+var sDeleteAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessToken, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAccessToken})
+var sDeleteDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDevEnvironment, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDevEnvironment})
+var sDeleteProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProject, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProject})
+var sDeleteSourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceRepository, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSourceRepository})
+var sDeleteSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpace, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSpace})
+var sGetDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevEnvironment, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetDevEnvironment})
+var sGetProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProject, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetProject})
+var sGetSourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepository, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetSourceRepository})
+var sGetSourceRepositoryCloneUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepositoryCloneUrls, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetSourceRepositoryCloneUrls})
+var sGetSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpace, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetSpace})
+var sGetSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscription, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetSubscription})
+var sGetUserDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserDetails, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetUserDetails})
+var sGetWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflow, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkflow})
+var sGetWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRun, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkflowRun})
+var sListAccessTokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokens, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListAccessTokens})
+var sListDevEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironments, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListDevEnvironments})
+var sListDevEnvironmentSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironmentSessions, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListDevEnvironmentSessions})
+var sListEventLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventLogs, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListEventLogs})
+var sListProjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjects, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListProjects})
+var sListSourceRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositories, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListSourceRepositories})
+var sListSourceRepositoryBranches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoryBranches, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListSourceRepositoryBranches})
+var sListSpaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpaces, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListSpaces})
+var sListWorkflowRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRuns, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListWorkflowRuns})
+var sListWorkflows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflows, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListWorkflows})
+var sStartDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironment, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eStartDevEnvironment})
+var sStartDevEnvironmentSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironmentSession, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eStartDevEnvironmentSession})
+var sStartWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflowRun, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eStartWorkflowRun})
+var sStopDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironment, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eStopDevEnvironment})
+var sStopDevEnvironmentSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironmentSession, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eStopDevEnvironmentSession})
+var sUpdateDevEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDevEnvironment, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDevEnvironment})
+var sUpdateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProject, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProject})
+var sUpdateSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpace, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSpace})
+var sVerifySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifySession, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eVerifySession})
+var s_CodeCatalyst = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeCatalyst, Type: smithy.ShapeTypeService, Ext: &e_CodeCatalyst})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenId, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenId})
+var s_AccessTokenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenName, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenName})
+var s_AccessTokenSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenSecret, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenSecret})
+var s_AccessTokenSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenSummaries, Members: &m_AccessTokenSummaries, Type: smithy.ShapeTypeList, Ext: &e_AccessTokenSummaries})
+var s_AccessTokenSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessTokenSummary, Members: &mAccessTokenSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AccessTokenSummaries_member})
+var sAccessTokenSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessTokenSummary, Members: &mAccessTokenSummary, Type: smithy.ShapeTypeStructure, Ext: &eAccessTokenSummary})
+var sAccessTokenSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AccessTokenId, Type: smithy.ShapeTypeString, Ext: &eAccessTokenSummary_id})
+var sAccessTokenSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AccessTokenName, Type: smithy.ShapeTypeString, Ext: &eAccessTokenSummary_name})
+var sAccessTokenSummary_expiresTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessTokenSummary_expiresTime})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var s_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &e_ComparisonOperator})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDevEnvironmentAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevEnvironmentAccessDetails, Members: &mDevEnvironmentAccessDetails, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentAccessDetails})
+var sDevEnvironmentAccessDetails_streamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamUrl", ID: &i_SensitiveString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentAccessDetails_streamUrl})
+var sDevEnvironmentAccessDetails_tokenValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenValue", ID: &i_SensitiveString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentAccessDetails_tokenValue})
+var s_DevEnvironmentRepositorySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevEnvironmentRepositorySummaries, Members: &m_DevEnvironmentRepositorySummaries, Type: smithy.ShapeTypeList, Ext: &e_DevEnvironmentRepositorySummaries})
+var s_DevEnvironmentRepositorySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDevEnvironmentRepositorySummary, Members: &mDevEnvironmentRepositorySummary, Type: smithy.ShapeTypeStructure, Ext: &e_DevEnvironmentRepositorySummaries_member})
+var sDevEnvironmentRepositorySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevEnvironmentRepositorySummary, Members: &mDevEnvironmentRepositorySummary, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentRepositorySummary})
+var sDevEnvironmentRepositorySummary_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentRepositorySummary_repositoryName})
+var sDevEnvironmentRepositorySummary_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentRepositorySummary_branchName})
+var sDevEnvironmentSessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevEnvironmentSessionConfiguration, Members: &mDevEnvironmentSessionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentSessionConfiguration})
+var sDevEnvironmentSessionConfiguration_sessionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionType", ID: &i_DevEnvironmentSessionType, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSessionConfiguration_sessionType})
+var sDevEnvironmentSessionConfiguration_executeCommandSessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executeCommandSessionConfiguration", ID: &iExecuteCommandSessionConfiguration, Members: &mExecuteCommandSessionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentSessionConfiguration_executeCommandSessionConfiguration})
+var s_DevEnvironmentSessionsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevEnvironmentSessionsSummaryList, Members: &m_DevEnvironmentSessionsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DevEnvironmentSessionsSummaryList})
+var s_DevEnvironmentSessionsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDevEnvironmentSessionSummary, Members: &mDevEnvironmentSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DevEnvironmentSessionsSummaryList_member})
+var sDevEnvironmentSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevEnvironmentSessionSummary, Members: &mDevEnvironmentSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentSessionSummary})
+var sDevEnvironmentSessionSummary_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSessionSummary_spaceName})
+var sDevEnvironmentSessionSummary_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSessionSummary_projectName})
+var sDevEnvironmentSessionSummary_devEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devEnvironmentId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSessionSummary_devEnvironmentId})
+var sDevEnvironmentSessionSummary_startedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eDevEnvironmentSessionSummary_startedTime})
+var sDevEnvironmentSessionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSessionSummary_id})
+var s_DevEnvironmentSessionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevEnvironmentSessionType, Type: smithy.ShapeTypeString, Ext: &e_DevEnvironmentSessionType})
+var s_DevEnvironmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevEnvironmentStatus, Type: smithy.ShapeTypeString, Ext: &e_DevEnvironmentStatus})
+var sDevEnvironmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevEnvironmentSummary, Members: &mDevEnvironmentSummary, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentSummary})
+var sDevEnvironmentSummary_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_spaceName})
+var sDevEnvironmentSummary_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_projectName})
+var sDevEnvironmentSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_id})
+var sDevEnvironmentSummary_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eDevEnvironmentSummary_lastUpdatedTime})
+var sDevEnvironmentSummary_creatorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_creatorId})
+var sDevEnvironmentSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_DevEnvironmentStatus, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_status})
+var sDevEnvironmentSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_statusReason})
+var sDevEnvironmentSummary_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_DevEnvironmentRepositorySummaries, Members: &m_DevEnvironmentRepositorySummaries, Type: smithy.ShapeTypeList, Ext: &eDevEnvironmentSummary_repositories})
+var sDevEnvironmentSummary_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_alias})
+var sDevEnvironmentSummary_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_Ides, Members: &m_Ides, Type: smithy.ShapeTypeList, Ext: &eDevEnvironmentSummary_ides})
+var sDevEnvironmentSummary_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_instanceType})
+var sDevEnvironmentSummary_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eDevEnvironmentSummary_inactivityTimeoutMinutes})
+var sDevEnvironmentSummary_persistentStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "persistentStorage", ID: &iPersistentStorage, Members: &mPersistentStorage, Type: smithy.ShapeTypeStructure, Ext: &eDevEnvironmentSummary_persistentStorage})
+var sDevEnvironmentSummary_vpcConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConnectionName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDevEnvironmentSummary_vpcConnectionName})
+var s_DevEnvironmentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevEnvironmentSummaryList, Members: &m_DevEnvironmentSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DevEnvironmentSummaryList})
+var s_DevEnvironmentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDevEnvironmentSummary, Members: &mDevEnvironmentSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DevEnvironmentSummaryList_member})
+var sEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailAddress, Members: &mEmailAddress, Type: smithy.ShapeTypeStructure, Ext: &eEmailAddress})
+var sEmailAddress_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEmailAddress_email})
+var sEmailAddress_verified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verified", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eEmailAddress_verified})
+var s_EventLogEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventLogEntries, Members: &m_EventLogEntries, Type: smithy.ShapeTypeList, Ext: &e_EventLogEntries})
+var s_EventLogEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventLogEntry, Members: &mEventLogEntry, Type: smithy.ShapeTypeStructure, Ext: &e_EventLogEntries_member})
+var sEventLogEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventLogEntry, Members: &mEventLogEntry, Type: smithy.ShapeTypeStructure, Ext: &eEventLogEntry})
+var sEventLogEntry_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_id})
+var sEventLogEntry_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_eventName})
+var sEventLogEntry_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_eventType})
+var sEventLogEntry_eventCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventCategory", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_eventCategory})
+var sEventLogEntry_eventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSource", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_eventSource})
+var sEventLogEntry_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eEventLogEntry_eventTime})
+var sEventLogEntry_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &i_OperationType, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_operationType})
+var sEventLogEntry_userIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIdentity", ID: &iUserIdentity, Members: &mUserIdentity, Type: smithy.ShapeTypeStructure, Ext: &eEventLogEntry_userIdentity})
+var sEventLogEntry_projectInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectInformation", ID: &iProjectInformation, Members: &mProjectInformation, Type: smithy.ShapeTypeStructure, Ext: &eEventLogEntry_projectInformation})
+var sEventLogEntry_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_requestId})
+var sEventLogEntry_requestPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestPayload", ID: &iEventPayload, Members: &mEventPayload, Type: smithy.ShapeTypeStructure, Ext: &eEventLogEntry_requestPayload})
+var sEventLogEntry_responsePayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responsePayload", ID: &iEventPayload, Members: &mEventPayload, Type: smithy.ShapeTypeStructure, Ext: &eEventLogEntry_responsePayload})
+var sEventLogEntry_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_errorCode})
+var sEventLogEntry_sourceIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_sourceIpAddress})
+var sEventLogEntry_userAgent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAgent", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventLogEntry_userAgent})
+var sEventPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventPayload, Members: &mEventPayload, Type: smithy.ShapeTypeStructure, Ext: &eEventPayload})
+var sEventPayload_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventPayload_contentType})
+var sEventPayload_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEventPayload_data})
+var sExecuteCommandSessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteCommandSessionConfiguration, Members: &mExecuteCommandSessionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExecuteCommandSessionConfiguration})
+var sExecuteCommandSessionConfiguration_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExecuteCommandSessionConfiguration_command})
+var sExecuteCommandSessionConfiguration_arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arguments", ID: &i_ExecuteCommandSessionConfigurationArguments, Members: &m_ExecuteCommandSessionConfigurationArguments, Type: smithy.ShapeTypeList, Ext: &eExecuteCommandSessionConfiguration_arguments})
+var s_ExecuteCommandSessionConfigurationArguments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecuteCommandSessionConfigurationArguments, Members: &m_ExecuteCommandSessionConfigurationArguments, Type: smithy.ShapeTypeList, Ext: &e_ExecuteCommandSessionConfigurationArguments})
+var s_ExecuteCommandSessionConfigurationArguments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ExecuteCommandSessionConfigurationArguments_member})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_key})
+var sFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eFilter_values})
+var sFilter_comparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparisonOperator", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_comparisonOperator})
+var s_FilterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterKey, Type: smithy.ShapeTypeString, Ext: &e_FilterKey})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &e_Filters})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_Filters_member})
+var sIde = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIde, Members: &mIde, Type: smithy.ShapeTypeStructure, Ext: &eIde})
+var sIde_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIde_runtime})
+var sIde_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIde_name})
+var sIdeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdeConfiguration, Members: &mIdeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIdeConfiguration})
+var sIdeConfiguration_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIdeConfiguration_runtime})
+var sIdeConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIdeConfiguration_name})
+var s_IdeConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdeConfigurationList, Members: &m_IdeConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_IdeConfigurationList})
+var s_IdeConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdeConfiguration, Members: &mIdeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_IdeConfigurationList_member})
+var s_Ides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ides, Members: &m_Ides, Type: smithy.ShapeTypeList, Ext: &e_Ides})
+var s_Ides_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIde, Members: &mIde, Type: smithy.ShapeTypeStructure, Ext: &e_Ides_member})
+var s_InactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_InactivityTimeoutMinutes})
+var s_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &e_InstanceType})
+var sListSourceRepositoriesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoriesItem, Members: &mListSourceRepositoriesItem, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoriesItem})
+var sListSourceRepositoriesItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SourceRepositoryIdString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesItem_id})
+var sListSourceRepositoriesItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesItem_name})
+var sListSourceRepositoriesItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SourceRepositoryDescriptionString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesItem_description})
+var sListSourceRepositoriesItem_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eListSourceRepositoriesItem_lastUpdatedTime})
+var sListSourceRepositoriesItem_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eListSourceRepositoriesItem_createdTime})
+var s_ListSourceRepositoriesItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSourceRepositoriesItems, Members: &m_ListSourceRepositoriesItems, Type: smithy.ShapeTypeList, Ext: &e_ListSourceRepositoriesItems})
+var s_ListSourceRepositoriesItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListSourceRepositoriesItem, Members: &mListSourceRepositoriesItem, Type: smithy.ShapeTypeStructure, Ext: &e_ListSourceRepositoriesItems_member})
+var sListSourceRepositoryBranchesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoryBranchesItem, Members: &mListSourceRepositoryBranchesItem, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoryBranchesItem})
+var sListSourceRepositoryBranchesItem_ref = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ref", ID: &i_SourceRepositoryBranchRefString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesItem_ref})
+var sListSourceRepositoryBranchesItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesItem_name})
+var sListSourceRepositoryBranchesItem_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eListSourceRepositoryBranchesItem_lastUpdatedTime})
+var sListSourceRepositoryBranchesItem_headCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headCommitId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesItem_headCommitId})
+var s_ListSourceRepositoryBranchesItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSourceRepositoryBranchesItems, Members: &m_ListSourceRepositoryBranchesItems, Type: smithy.ShapeTypeList, Ext: &e_ListSourceRepositoryBranchesItems})
+var s_ListSourceRepositoryBranchesItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListSourceRepositoryBranchesItem, Members: &mListSourceRepositoryBranchesItem, Type: smithy.ShapeTypeStructure, Ext: &e_ListSourceRepositoryBranchesItems_member})
+var s_NameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &e_NameString})
+var s_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationType, Type: smithy.ShapeTypeString, Ext: &e_OperationType})
+var sPersistentStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersistentStorage, Members: &mPersistentStorage, Type: smithy.ShapeTypeStructure, Ext: &ePersistentStorage})
+var sPersistentStorage_sizeInGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGiB", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ePersistentStorage_sizeInGiB})
+var sPersistentStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersistentStorageConfiguration, Members: &mPersistentStorageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePersistentStorageConfiguration})
+var sPersistentStorageConfiguration_sizeInGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGiB", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ePersistentStorageConfiguration_sizeInGiB})
+var s_ProjectDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &e_ProjectDescription})
+var s_ProjectDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ProjectDisplayName})
+var sProjectInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectInformation, Members: &mProjectInformation, Type: smithy.ShapeTypeStructure, Ext: &eProjectInformation})
+var sProjectInformation_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProjectInformation_name})
+var sProjectInformation_projectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProjectInformation_projectId})
+var sProjectListFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectListFilter, Members: &mProjectListFilter, Type: smithy.ShapeTypeStructure, Ext: &eProjectListFilter})
+var sProjectListFilter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_FilterKey, Type: smithy.ShapeTypeString, Ext: &eProjectListFilter_key})
+var sProjectListFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eProjectListFilter_values})
+var sProjectListFilter_comparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparisonOperator", ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &eProjectListFilter_comparisonOperator})
+var s_ProjectListFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectListFilters, Members: &m_ProjectListFilters, Type: smithy.ShapeTypeList, Ext: &e_ProjectListFilters})
+var s_ProjectListFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectListFilter, Members: &mProjectListFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectListFilters_member})
+var s_ProjectSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectSummaries, Members: &m_ProjectSummaries, Type: smithy.ShapeTypeList, Ext: &e_ProjectSummaries})
+var s_ProjectSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProjectSummary, Members: &mProjectSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ProjectSummaries_member})
+var sProjectSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectSummary, Members: &mProjectSummary, Type: smithy.ShapeTypeStructure, Ext: &eProjectSummary})
+var sProjectSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProjectSummary_name})
+var sProjectSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProjectSummary_displayName})
+var sProjectSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProjectSummary_description})
+var s_RegionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionString, Type: smithy.ShapeTypeString, Ext: &e_RegionString})
+var s_RepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoriesInput, Members: &m_RepositoriesInput, Type: smithy.ShapeTypeList, Ext: &e_RepositoriesInput})
+var s_RepositoriesInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryInput, Members: &mRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoriesInput_member})
+var sRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryInput, Members: &mRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryInput})
+var sRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eRepositoryInput_repositoryName})
+var sRepositoryInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eRepositoryInput_branchName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_SourceRepositoryBranchRefString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRepositoryBranchRefString, Type: smithy.ShapeTypeString, Ext: &e_SourceRepositoryBranchRefString})
+var s_SourceRepositoryBranchString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &e_SourceRepositoryBranchString})
+var s_SourceRepositoryDescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRepositoryDescriptionString, Type: smithy.ShapeTypeString, Ext: &e_SourceRepositoryDescriptionString})
+var s_SourceRepositoryIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRepositoryIdString, Type: smithy.ShapeTypeString, Ext: &e_SourceRepositoryIdString})
+var s_SourceRepositoryNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &e_SourceRepositoryNameString})
+var s_SpaceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceDescription, Type: smithy.ShapeTypeString, Ext: &e_SpaceDescription})
+var s_SpaceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceSummaries, Members: &m_SpaceSummaries, Type: smithy.ShapeTypeList, Ext: &e_SpaceSummaries})
+var s_SpaceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpaceSummary, Members: &mSpaceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SpaceSummaries_member})
+var sSpaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpaceSummary, Members: &mSpaceSummary, Type: smithy.ShapeTypeStructure, Ext: &eSpaceSummary})
+var sSpaceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eSpaceSummary_name})
+var sSpaceSummary_regionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionName", ID: &i_RegionString, Type: smithy.ShapeTypeString, Ext: &eSpaceSummary_regionName})
+var sSpaceSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSpaceSummary_displayName})
+var sSpaceSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSpaceSummary_description})
+var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &e_StatusReason})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserIdentity, Members: &mUserIdentity, Type: smithy.ShapeTypeStructure, Ext: &eUserIdentity})
+var sUserIdentity_userType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userType", ID: &i_UserType, Type: smithy.ShapeTypeString, Ext: &eUserIdentity_userType})
+var sUserIdentity_principalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUserIdentity_principalId})
+var sUserIdentity_userName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUserIdentity_userName})
+var sUserIdentity_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUserIdentity_awsAccountId})
+var s_UserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserType, Type: smithy.ShapeTypeString, Ext: &e_UserType})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sWorkflowDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDefinition, Members: &mWorkflowDefinition, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowDefinition})
+var sWorkflowDefinition_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowDefinition_path})
+var sWorkflowDefinitionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDefinitionSummary, Members: &mWorkflowDefinitionSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowDefinitionSummary})
+var sWorkflowDefinitionSummary_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowDefinitionSummary_path})
+var s_WorkflowRunMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunMode, Type: smithy.ShapeTypeString, Ext: &e_WorkflowRunMode})
+var sWorkflowRunSortCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowRunSortCriteria, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowRunSortCriteria})
+var s_WorkflowRunSortCriteriaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunSortCriteriaList, Members: &m_WorkflowRunSortCriteriaList, Type: smithy.ShapeTypeList, Ext: &e_WorkflowRunSortCriteriaList})
+var s_WorkflowRunSortCriteriaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowRunSortCriteria, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowRunSortCriteriaList_member})
+var s_WorkflowRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunStatus, Type: smithy.ShapeTypeString, Ext: &e_WorkflowRunStatus})
+var sWorkflowRunStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowRunStatusReason, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowRunStatusReason})
+var s_WorkflowRunStatusReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunStatusReasons, Members: &m_WorkflowRunStatusReasons, Type: smithy.ShapeTypeList, Ext: &e_WorkflowRunStatusReasons})
+var s_WorkflowRunStatusReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowRunStatusReason, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowRunStatusReasons_member})
+var s_WorkflowRunSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunSummaries, Members: &m_WorkflowRunSummaries, Type: smithy.ShapeTypeList, Ext: &e_WorkflowRunSummaries})
+var s_WorkflowRunSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowRunSummary, Members: &mWorkflowRunSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowRunSummaries_member})
+var sWorkflowRunSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowRunSummary, Members: &mWorkflowRunSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowRunSummary})
+var sWorkflowRunSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eWorkflowRunSummary_id})
+var sWorkflowRunSummary_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eWorkflowRunSummary_workflowId})
+var sWorkflowRunSummary_workflowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowRunSummary_workflowName})
+var sWorkflowRunSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WorkflowRunStatus, Type: smithy.ShapeTypeString, Ext: &eWorkflowRunSummary_status})
+var sWorkflowRunSummary_statusReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReasons", ID: &i_WorkflowRunStatusReasons, Members: &m_WorkflowRunStatusReasons, Type: smithy.ShapeTypeList, Ext: &eWorkflowRunSummary_statusReasons})
+var sWorkflowRunSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkflowRunSummary_startTime})
+var sWorkflowRunSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkflowRunSummary_endTime})
+var sWorkflowRunSummary_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkflowRunSummary_lastUpdatedTime})
+var sWorkflowSortCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowSortCriteria, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowSortCriteria})
+var s_WorkflowSortCriteriaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowSortCriteriaList, Members: &m_WorkflowSortCriteriaList, Type: smithy.ShapeTypeList, Ext: &e_WorkflowSortCriteriaList})
+var s_WorkflowSortCriteriaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowSortCriteria, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowSortCriteriaList_member})
+var s_WorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStatus, Type: smithy.ShapeTypeString, Ext: &e_WorkflowStatus})
+var s_WorkflowSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowSummaries, Members: &m_WorkflowSummaries, Type: smithy.ShapeTypeList, Ext: &e_WorkflowSummaries})
+var s_WorkflowSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowSummary, Members: &mWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowSummaries_member})
+var sWorkflowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowSummary, Members: &mWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowSummary})
+var sWorkflowSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_id})
+var sWorkflowSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_name})
+var sWorkflowSummary_sourceRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepositoryName", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_sourceRepositoryName})
+var sWorkflowSummary_sourceBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceBranchName", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_sourceBranchName})
+var sWorkflowSummary_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iWorkflowDefinitionSummary, Members: &mWorkflowDefinitionSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowSummary_definition})
+var sWorkflowSummary_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkflowSummary_createdTime})
+var sWorkflowSummary_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkflowSummary_lastUpdatedTime})
+var sWorkflowSummary_runMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runMode", ID: &i_WorkflowRunMode, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_runMode})
+var sWorkflowSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WorkflowStatus, Type: smithy.ShapeTypeString, Ext: &eWorkflowSummary_status})
+var sCreateAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenRequest, Members: &mCreateAccessTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenRequest})
+var sCreateAccessTokenRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AccessTokenName, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenRequest_name})
+var sCreateAccessTokenRequest_expiresTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAccessTokenRequest_expiresTime})
+var sCreateAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenResponse, Members: &mCreateAccessTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenResponse})
+var sCreateAccessTokenResponse_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_AccessTokenSecret, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenResponse_secret})
+var sCreateAccessTokenResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AccessTokenName, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenResponse_name})
+var sCreateAccessTokenResponse_expiresTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAccessTokenResponse_expiresTime})
+var sCreateAccessTokenResponse_accessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenId", ID: &i_AccessTokenId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenResponse_accessTokenId})
+var sCreateDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDevEnvironmentRequest, Members: &mCreateDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDevEnvironmentRequest})
+var sCreateDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_spaceName})
+var sCreateDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_projectName})
+var sCreateDevEnvironmentRequest_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositoriesInput, Members: &m_RepositoriesInput, Type: smithy.ShapeTypeList, Ext: &eCreateDevEnvironmentRequest_repositories})
+var sCreateDevEnvironmentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_clientToken})
+var sCreateDevEnvironmentRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_alias})
+var sCreateDevEnvironmentRequest_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_IdeConfigurationList, Members: &m_IdeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateDevEnvironmentRequest_ides})
+var sCreateDevEnvironmentRequest_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_instanceType})
+var sCreateDevEnvironmentRequest_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eCreateDevEnvironmentRequest_inactivityTimeoutMinutes})
+var sCreateDevEnvironmentRequest_persistentStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "persistentStorage", ID: &iPersistentStorageConfiguration, Members: &mPersistentStorageConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDevEnvironmentRequest_persistentStorage})
+var sCreateDevEnvironmentRequest_vpcConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConnectionName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentRequest_vpcConnectionName})
+var sCreateDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDevEnvironmentResponse, Members: &mCreateDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDevEnvironmentResponse})
+var sCreateDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentResponse_spaceName})
+var sCreateDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentResponse_projectName})
+var sCreateDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentResponse_id})
+var sCreateDevEnvironmentResponse_vpcConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConnectionName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateDevEnvironmentResponse_vpcConnectionName})
+var sCreateProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectRequest, Members: &mCreateProjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectRequest})
+var sCreateProjectRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateProjectRequest_spaceName})
+var sCreateProjectRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProjectDisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateProjectRequest_displayName})
+var sCreateProjectRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &eCreateProjectRequest_description})
+var sCreateProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectResponse, Members: &mCreateProjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProjectResponse})
+var sCreateProjectResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectResponse_spaceName})
+var sCreateProjectResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectResponse_name})
+var sCreateProjectResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectResponse_displayName})
+var sCreateProjectResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateProjectResponse_description})
+var sCreateSourceRepositoryBranchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepositoryBranchRequest, Members: &mCreateSourceRepositoryBranchRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceRepositoryBranchRequest})
+var sCreateSourceRepositoryBranchRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchRequest_spaceName})
+var sCreateSourceRepositoryBranchRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchRequest_projectName})
+var sCreateSourceRepositoryBranchRequest_sourceRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepositoryName", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchRequest_sourceRepositoryName})
+var sCreateSourceRepositoryBranchRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryBranchString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchRequest_name})
+var sCreateSourceRepositoryBranchRequest_headCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headCommitId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchRequest_headCommitId})
+var sCreateSourceRepositoryBranchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepositoryBranchResponse, Members: &mCreateSourceRepositoryBranchResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceRepositoryBranchResponse})
+var sCreateSourceRepositoryBranchResponse_ref = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ref", ID: &i_SourceRepositoryBranchRefString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchResponse_ref})
+var sCreateSourceRepositoryBranchResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchResponse_name})
+var sCreateSourceRepositoryBranchResponse_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSourceRepositoryBranchResponse_lastUpdatedTime})
+var sCreateSourceRepositoryBranchResponse_headCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headCommitId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryBranchResponse_headCommitId})
+var sCreateSourceRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepositoryRequest, Members: &mCreateSourceRepositoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceRepositoryRequest})
+var sCreateSourceRepositoryRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryRequest_spaceName})
+var sCreateSourceRepositoryRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryRequest_projectName})
+var sCreateSourceRepositoryRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryRequest_name})
+var sCreateSourceRepositoryRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SourceRepositoryDescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryRequest_description})
+var sCreateSourceRepositoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceRepositoryResponse, Members: &mCreateSourceRepositoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceRepositoryResponse})
+var sCreateSourceRepositoryResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryResponse_spaceName})
+var sCreateSourceRepositoryResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryResponse_projectName})
+var sCreateSourceRepositoryResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryResponse_name})
+var sCreateSourceRepositoryResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SourceRepositoryDescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateSourceRepositoryResponse_description})
+var sDeleteAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenRequest, Members: &mDeleteAccessTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenRequest})
+var sDeleteAccessTokenRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AccessTokenId, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessTokenRequest_id})
+var sDeleteAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenResponse})
+var sDeleteDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDevEnvironmentRequest, Members: &mDeleteDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDevEnvironmentRequest})
+var sDeleteDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentRequest_spaceName})
+var sDeleteDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentRequest_projectName})
+var sDeleteDevEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentRequest_id})
+var sDeleteDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDevEnvironmentResponse, Members: &mDeleteDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDevEnvironmentResponse})
+var sDeleteDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentResponse_spaceName})
+var sDeleteDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentResponse_projectName})
+var sDeleteDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDeleteDevEnvironmentResponse_id})
+var sDeleteProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectRequest, Members: &mDeleteProjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProjectRequest})
+var sDeleteProjectRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectRequest_spaceName})
+var sDeleteProjectRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectRequest_name})
+var sDeleteProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectResponse, Members: &mDeleteProjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProjectResponse})
+var sDeleteProjectResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectResponse_spaceName})
+var sDeleteProjectResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectResponse_name})
+var sDeleteProjectResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteProjectResponse_displayName})
+var sDeleteSourceRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceRepositoryRequest, Members: &mDeleteSourceRepositoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceRepositoryRequest})
+var sDeleteSourceRepositoryRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryRequest_spaceName})
+var sDeleteSourceRepositoryRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryRequest_projectName})
+var sDeleteSourceRepositoryRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryRequest_name})
+var sDeleteSourceRepositoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceRepositoryResponse, Members: &mDeleteSourceRepositoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceRepositoryResponse})
+var sDeleteSourceRepositoryResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryResponse_spaceName})
+var sDeleteSourceRepositoryResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryResponse_projectName})
+var sDeleteSourceRepositoryResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceRepositoryResponse_name})
+var sDeleteSpaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpaceRequest, Members: &mDeleteSpaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSpaceRequest})
+var sDeleteSpaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eDeleteSpaceRequest_name})
+var sDeleteSpaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpaceResponse, Members: &mDeleteSpaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSpaceResponse})
+var sDeleteSpaceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eDeleteSpaceResponse_name})
+var sDeleteSpaceResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteSpaceResponse_displayName})
+var sGetDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevEnvironmentRequest, Members: &mGetDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDevEnvironmentRequest})
+var sGetDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentRequest_spaceName})
+var sGetDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentRequest_projectName})
+var sGetDevEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentRequest_id})
+var sGetDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevEnvironmentResponse, Members: &mGetDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDevEnvironmentResponse})
+var sGetDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_spaceName})
+var sGetDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_projectName})
+var sGetDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_id})
+var sGetDevEnvironmentResponse_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDevEnvironmentResponse_lastUpdatedTime})
+var sGetDevEnvironmentResponse_creatorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_creatorId})
+var sGetDevEnvironmentResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_DevEnvironmentStatus, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_status})
+var sGetDevEnvironmentResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_statusReason})
+var sGetDevEnvironmentResponse_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_DevEnvironmentRepositorySummaries, Members: &m_DevEnvironmentRepositorySummaries, Type: smithy.ShapeTypeList, Ext: &eGetDevEnvironmentResponse_repositories})
+var sGetDevEnvironmentResponse_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_alias})
+var sGetDevEnvironmentResponse_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_Ides, Members: &m_Ides, Type: smithy.ShapeTypeList, Ext: &eGetDevEnvironmentResponse_ides})
+var sGetDevEnvironmentResponse_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_instanceType})
+var sGetDevEnvironmentResponse_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eGetDevEnvironmentResponse_inactivityTimeoutMinutes})
+var sGetDevEnvironmentResponse_persistentStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "persistentStorage", ID: &iPersistentStorage, Members: &mPersistentStorage, Type: smithy.ShapeTypeStructure, Ext: &eGetDevEnvironmentResponse_persistentStorage})
+var sGetDevEnvironmentResponse_vpcConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConnectionName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetDevEnvironmentResponse_vpcConnectionName})
+var sGetProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProjectRequest, Members: &mGetProjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetProjectRequest})
+var sGetProjectRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetProjectRequest_spaceName})
+var sGetProjectRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetProjectRequest_name})
+var sGetProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProjectResponse, Members: &mGetProjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetProjectResponse})
+var sGetProjectResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetProjectResponse_spaceName})
+var sGetProjectResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetProjectResponse_name})
+var sGetProjectResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetProjectResponse_displayName})
+var sGetProjectResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetProjectResponse_description})
+var sGetSourceRepositoryCloneUrlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepositoryCloneUrlsRequest, Members: &mGetSourceRepositoryCloneUrlsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceRepositoryCloneUrlsRequest})
+var sGetSourceRepositoryCloneUrlsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryCloneUrlsRequest_spaceName})
+var sGetSourceRepositoryCloneUrlsRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryCloneUrlsRequest_projectName})
+var sGetSourceRepositoryCloneUrlsRequest_sourceRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepositoryName", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryCloneUrlsRequest_sourceRepositoryName})
+var sGetSourceRepositoryCloneUrlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepositoryCloneUrlsResponse, Members: &mGetSourceRepositoryCloneUrlsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceRepositoryCloneUrlsResponse})
+var sGetSourceRepositoryCloneUrlsResponse_https = smithy.NewStaticSchema(smithy.StaticSchema{Member: "https", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryCloneUrlsResponse_https})
+var sGetSourceRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepositoryRequest, Members: &mGetSourceRepositoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceRepositoryRequest})
+var sGetSourceRepositoryRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryRequest_spaceName})
+var sGetSourceRepositoryRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryRequest_projectName})
+var sGetSourceRepositoryRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryRequest_name})
+var sGetSourceRepositoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSourceRepositoryResponse, Members: &mGetSourceRepositoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSourceRepositoryResponse})
+var sGetSourceRepositoryResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryResponse_spaceName})
+var sGetSourceRepositoryResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryResponse_projectName})
+var sGetSourceRepositoryResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryResponse_name})
+var sGetSourceRepositoryResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SourceRepositoryDescriptionString, Type: smithy.ShapeTypeString, Ext: &eGetSourceRepositoryResponse_description})
+var sGetSourceRepositoryResponse_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSourceRepositoryResponse_lastUpdatedTime})
+var sGetSourceRepositoryResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSourceRepositoryResponse_createdTime})
+var sGetSpaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpaceRequest, Members: &mGetSpaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSpaceRequest})
+var sGetSpaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSpaceRequest_name})
+var sGetSpaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpaceResponse, Members: &mGetSpaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSpaceResponse})
+var sGetSpaceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetSpaceResponse_name})
+var sGetSpaceResponse_regionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionName", ID: &i_RegionString, Type: smithy.ShapeTypeString, Ext: &eGetSpaceResponse_regionName})
+var sGetSpaceResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSpaceResponse_displayName})
+var sGetSpaceResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSpaceResponse_description})
+var sGetSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionRequest, Members: &mGetSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionRequest})
+var sGetSubscriptionRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionRequest_spaceName})
+var sGetSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionResponse, Members: &mGetSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionResponse})
+var sGetSubscriptionResponse_subscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionResponse_subscriptionType})
+var sGetSubscriptionResponse_awsAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionResponse_awsAccountName})
+var sGetSubscriptionResponse_pendingSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pendingSubscriptionType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionResponse_pendingSubscriptionType})
+var sGetSubscriptionResponse_pendingSubscriptionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pendingSubscriptionStartTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSubscriptionResponse_pendingSubscriptionStartTime})
+var sGetUserDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserDetailsRequest, Members: &mGetUserDetailsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetUserDetailsRequest})
+var sGetUserDetailsRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsRequest_id})
+var sGetUserDetailsRequest_userName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userName", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsRequest_userName})
+var sGetUserDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserDetailsResponse, Members: &mGetUserDetailsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetUserDetailsResponse})
+var sGetUserDetailsResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsResponse_userId})
+var sGetUserDetailsResponse_userName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsResponse_userName})
+var sGetUserDetailsResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsResponse_displayName})
+var sGetUserDetailsResponse_primaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primaryEmail", ID: &iEmailAddress, Members: &mEmailAddress, Type: smithy.ShapeTypeStructure, Ext: &eGetUserDetailsResponse_primaryEmail})
+var sGetUserDetailsResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetUserDetailsResponse_version})
+var sGetWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRequest, Members: &mGetWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowRequest})
+var sGetWorkflowRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRequest_spaceName})
+var sGetWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRequest_id})
+var sGetWorkflowRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRequest_projectName})
+var sGetWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowResponse, Members: &mGetWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowResponse})
+var sGetWorkflowResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_spaceName})
+var sGetWorkflowResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_projectName})
+var sGetWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_id})
+var sGetWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_name})
+var sGetWorkflowResponse_sourceRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepositoryName", ID: &i_SourceRepositoryNameString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_sourceRepositoryName})
+var sGetWorkflowResponse_sourceBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceBranchName", ID: &i_SourceRepositoryBranchString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_sourceBranchName})
+var sGetWorkflowResponse_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iWorkflowDefinition, Members: &mWorkflowDefinition, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowResponse_definition})
+var sGetWorkflowResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowResponse_createdTime})
+var sGetWorkflowResponse_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowResponse_lastUpdatedTime})
+var sGetWorkflowResponse_runMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runMode", ID: &i_WorkflowRunMode, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_runMode})
+var sGetWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WorkflowStatus, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowResponse_status})
+var sGetWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRunRequest, Members: &mGetWorkflowRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowRunRequest})
+var sGetWorkflowRunRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunRequest_spaceName})
+var sGetWorkflowRunRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunRequest_id})
+var sGetWorkflowRunRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunRequest_projectName})
+var sGetWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRunResponse, Members: &mGetWorkflowRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowRunResponse})
+var sGetWorkflowRunResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunResponse_spaceName})
+var sGetWorkflowRunResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunResponse_projectName})
+var sGetWorkflowRunResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunResponse_id})
+var sGetWorkflowRunResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunResponse_workflowId})
+var sGetWorkflowRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WorkflowRunStatus, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowRunResponse_status})
+var sGetWorkflowRunResponse_statusReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReasons", ID: &i_WorkflowRunStatusReasons, Members: &m_WorkflowRunStatusReasons, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowRunResponse_statusReasons})
+var sGetWorkflowRunResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowRunResponse_startTime})
+var sGetWorkflowRunResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowRunResponse_endTime})
+var sGetWorkflowRunResponse_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowRunResponse_lastUpdatedTime})
+var sListAccessTokensRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensRequest, Members: &mListAccessTokensRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensRequest})
+var sListAccessTokensRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListAccessTokensRequest_maxResults})
+var sListAccessTokensRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAccessTokensRequest_nextToken})
+var sListAccessTokensResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensResponse, Members: &mListAccessTokensResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensResponse})
+var sListAccessTokensResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_AccessTokenSummaries, Members: &m_AccessTokenSummaries, Type: smithy.ShapeTypeList, Ext: &eListAccessTokensResponse_items})
+var sListAccessTokensResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAccessTokensResponse_nextToken})
+var sListDevEnvironmentSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironmentSessionsRequest, Members: &mListDevEnvironmentSessionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDevEnvironmentSessionsRequest})
+var sListDevEnvironmentSessionsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentSessionsRequest_spaceName})
+var sListDevEnvironmentSessionsRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentSessionsRequest_projectName})
+var sListDevEnvironmentSessionsRequest_devEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devEnvironmentId", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentSessionsRequest_devEnvironmentId})
+var sListDevEnvironmentSessionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentSessionsRequest_nextToken})
+var sListDevEnvironmentSessionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListDevEnvironmentSessionsRequest_maxResults})
+var sListDevEnvironmentSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironmentSessionsResponse, Members: &mListDevEnvironmentSessionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDevEnvironmentSessionsResponse})
+var sListDevEnvironmentSessionsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_DevEnvironmentSessionsSummaryList, Members: &m_DevEnvironmentSessionsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDevEnvironmentSessionsResponse_items})
+var sListDevEnvironmentSessionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentSessionsResponse_nextToken})
+var sListDevEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironmentsRequest, Members: &mListDevEnvironmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDevEnvironmentsRequest})
+var sListDevEnvironmentsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentsRequest_spaceName})
+var sListDevEnvironmentsRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentsRequest_projectName})
+var sListDevEnvironmentsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListDevEnvironmentsRequest_filters})
+var sListDevEnvironmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentsRequest_nextToken})
+var sListDevEnvironmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListDevEnvironmentsRequest_maxResults})
+var sListDevEnvironmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevEnvironmentsResponse, Members: &mListDevEnvironmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDevEnvironmentsResponse})
+var sListDevEnvironmentsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_DevEnvironmentSummaryList, Members: &m_DevEnvironmentSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDevEnvironmentsResponse_items})
+var sListDevEnvironmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDevEnvironmentsResponse_nextToken})
+var sListEventLogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventLogsRequest, Members: &mListEventLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEventLogsRequest})
+var sListEventLogsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListEventLogsRequest_spaceName})
+var sListEventLogsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eListEventLogsRequest_startTime})
+var sListEventLogsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eListEventLogsRequest_endTime})
+var sListEventLogsRequest_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEventLogsRequest_eventName})
+var sListEventLogsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEventLogsRequest_nextToken})
+var sListEventLogsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListEventLogsRequest_maxResults})
+var sListEventLogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventLogsResponse, Members: &mListEventLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEventLogsResponse})
+var sListEventLogsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEventLogsResponse_nextToken})
+var sListEventLogsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_EventLogEntries, Members: &m_EventLogEntries, Type: smithy.ShapeTypeList, Ext: &eListEventLogsResponse_items})
+var sListProjectsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsRequest, Members: &mListProjectsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProjectsRequest})
+var sListProjectsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListProjectsRequest_spaceName})
+var sListProjectsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListProjectsRequest_nextToken})
+var sListProjectsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListProjectsRequest_maxResults})
+var sListProjectsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ProjectListFilters, Members: &m_ProjectListFilters, Type: smithy.ShapeTypeList, Ext: &eListProjectsRequest_filters})
+var sListProjectsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsResponse, Members: &mListProjectsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProjectsResponse})
+var sListProjectsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListProjectsResponse_nextToken})
+var sListProjectsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ProjectSummaries, Members: &m_ProjectSummaries, Type: smithy.ShapeTypeList, Ext: &eListProjectsResponse_items})
+var sListSourceRepositoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoriesRequest, Members: &mListSourceRepositoriesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoriesRequest})
+var sListSourceRepositoriesRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesRequest_spaceName})
+var sListSourceRepositoriesRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesRequest_projectName})
+var sListSourceRepositoriesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesRequest_nextToken})
+var sListSourceRepositoriesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListSourceRepositoriesRequest_maxResults})
+var sListSourceRepositoriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoriesResponse, Members: &mListSourceRepositoriesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoriesResponse})
+var sListSourceRepositoriesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ListSourceRepositoriesItems, Members: &m_ListSourceRepositoriesItems, Type: smithy.ShapeTypeList, Ext: &eListSourceRepositoriesResponse_items})
+var sListSourceRepositoriesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoriesResponse_nextToken})
+var sListSourceRepositoryBranchesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoryBranchesRequest, Members: &mListSourceRepositoryBranchesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoryBranchesRequest})
+var sListSourceRepositoryBranchesRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesRequest_spaceName})
+var sListSourceRepositoryBranchesRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesRequest_projectName})
+var sListSourceRepositoryBranchesRequest_sourceRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepositoryName", ID: &i_SourceRepositoryNameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesRequest_sourceRepositoryName})
+var sListSourceRepositoryBranchesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesRequest_nextToken})
+var sListSourceRepositoryBranchesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListSourceRepositoryBranchesRequest_maxResults})
+var sListSourceRepositoryBranchesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceRepositoryBranchesResponse, Members: &mListSourceRepositoryBranchesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSourceRepositoryBranchesResponse})
+var sListSourceRepositoryBranchesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSourceRepositoryBranchesResponse_nextToken})
+var sListSourceRepositoryBranchesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ListSourceRepositoryBranchesItems, Members: &m_ListSourceRepositoryBranchesItems, Type: smithy.ShapeTypeList, Ext: &eListSourceRepositoryBranchesResponse_items})
+var sListSpacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpacesRequest, Members: &mListSpacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSpacesRequest})
+var sListSpacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSpacesRequest_nextToken})
+var sListSpacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpacesResponse, Members: &mListSpacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSpacesResponse})
+var sListSpacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSpacesResponse_nextToken})
+var sListSpacesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_SpaceSummaries, Members: &m_SpaceSummaries, Type: smithy.ShapeTypeList, Ext: &eListSpacesResponse_items})
+var sListWorkflowRunsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRunsRequest, Members: &mListWorkflowRunsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowRunsRequest})
+var sListWorkflowRunsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListWorkflowRunsRequest_spaceName})
+var sListWorkflowRunsRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_Uuid, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eListWorkflowRunsRequest_workflowId})
+var sListWorkflowRunsRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListWorkflowRunsRequest_projectName})
+var sListWorkflowRunsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListWorkflowRunsRequest_nextToken})
+var sListWorkflowRunsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t53, Type: smithy.ShapeTypeInteger, Ext: &eListWorkflowRunsRequest_maxResults})
+var sListWorkflowRunsRequest_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_WorkflowRunSortCriteriaList, Members: &m_WorkflowRunSortCriteriaList, Type: smithy.ShapeTypeList, Ext: &eListWorkflowRunsRequest_sortBy})
+var sListWorkflowRunsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRunsResponse, Members: &mListWorkflowRunsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowRunsResponse})
+var sListWorkflowRunsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListWorkflowRunsResponse_nextToken})
+var sListWorkflowRunsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_WorkflowRunSummaries, Members: &m_WorkflowRunSummaries, Type: smithy.ShapeTypeList, Ext: &eListWorkflowRunsResponse_items})
+var sListWorkflowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowsRequest, Members: &mListWorkflowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowsRequest})
+var sListWorkflowsRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListWorkflowsRequest_spaceName})
+var sListWorkflowsRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eListWorkflowsRequest_projectName})
+var sListWorkflowsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListWorkflowsRequest_nextToken})
+var sListWorkflowsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t53, Type: smithy.ShapeTypeInteger, Ext: &eListWorkflowsRequest_maxResults})
+var sListWorkflowsRequest_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_WorkflowSortCriteriaList, Members: &m_WorkflowSortCriteriaList, Type: smithy.ShapeTypeList, Ext: &eListWorkflowsRequest_sortBy})
+var sListWorkflowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowsResponse, Members: &mListWorkflowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowsResponse})
+var sListWorkflowsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListWorkflowsResponse_nextToken})
+var sListWorkflowsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_WorkflowSummaries, Members: &m_WorkflowSummaries, Type: smithy.ShapeTypeList, Ext: &eListWorkflowsResponse_items})
+var sStartDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironmentRequest, Members: &mStartDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentRequest})
+var sStartDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentRequest_spaceName})
+var sStartDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentRequest_projectName})
+var sStartDevEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentRequest_id})
+var sStartDevEnvironmentRequest_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_IdeConfigurationList, Members: &m_IdeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eStartDevEnvironmentRequest_ides})
+var sStartDevEnvironmentRequest_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentRequest_instanceType})
+var sStartDevEnvironmentRequest_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eStartDevEnvironmentRequest_inactivityTimeoutMinutes})
+var sStartDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironmentResponse, Members: &mStartDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentResponse})
+var sStartDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentResponse_spaceName})
+var sStartDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentResponse_projectName})
+var sStartDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentResponse_id})
+var sStartDevEnvironmentResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_DevEnvironmentStatus, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentResponse_status})
+var sStartDevEnvironmentSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironmentSessionRequest, Members: &mStartDevEnvironmentSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentSessionRequest})
+var sStartDevEnvironmentSessionRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionRequest_spaceName})
+var sStartDevEnvironmentSessionRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionRequest_projectName})
+var sStartDevEnvironmentSessionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionRequest_id})
+var sStartDevEnvironmentSessionRequest_sessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionConfiguration", ID: &iDevEnvironmentSessionConfiguration, Members: &mDevEnvironmentSessionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentSessionRequest_sessionConfiguration})
+var sStartDevEnvironmentSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDevEnvironmentSessionResponse, Members: &mStartDevEnvironmentSessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentSessionResponse})
+var sStartDevEnvironmentSessionResponse_accessDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessDetails", ID: &iDevEnvironmentAccessDetails, Members: &mDevEnvironmentAccessDetails, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eStartDevEnvironmentSessionResponse_accessDetails})
+var sStartDevEnvironmentSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionResponse_sessionId})
+var sStartDevEnvironmentSessionResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionResponse_spaceName})
+var sStartDevEnvironmentSessionResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionResponse_projectName})
+var sStartDevEnvironmentSessionResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStartDevEnvironmentSessionResponse_id})
+var sStartWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflowRunRequest, Members: &mStartWorkflowRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartWorkflowRunRequest})
+var sStartWorkflowRunRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunRequest_spaceName})
+var sStartWorkflowRunRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunRequest_projectName})
+var sStartWorkflowRunRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_Uuid, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunRequest_workflowId})
+var sStartWorkflowRunRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunRequest_clientToken})
+var sStartWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflowRunResponse, Members: &mStartWorkflowRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartWorkflowRunResponse})
+var sStartWorkflowRunResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunResponse_spaceName})
+var sStartWorkflowRunResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunResponse_projectName})
+var sStartWorkflowRunResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunResponse_id})
+var sStartWorkflowRunResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStartWorkflowRunResponse_workflowId})
+var sStopDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironmentRequest, Members: &mStopDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopDevEnvironmentRequest})
+var sStopDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentRequest_spaceName})
+var sStopDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentRequest_projectName})
+var sStopDevEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentRequest_id})
+var sStopDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironmentResponse, Members: &mStopDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopDevEnvironmentResponse})
+var sStopDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentResponse_spaceName})
+var sStopDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentResponse_projectName})
+var sStopDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentResponse_id})
+var sStopDevEnvironmentResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_DevEnvironmentStatus, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentResponse_status})
+var sStopDevEnvironmentSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironmentSessionRequest, Members: &mStopDevEnvironmentSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopDevEnvironmentSessionRequest})
+var sStopDevEnvironmentSessionRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionRequest_spaceName})
+var sStopDevEnvironmentSessionRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionRequest_projectName})
+var sStopDevEnvironmentSessionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionRequest_id})
+var sStopDevEnvironmentSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionRequest_sessionId})
+var sStopDevEnvironmentSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDevEnvironmentSessionResponse, Members: &mStopDevEnvironmentSessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopDevEnvironmentSessionResponse})
+var sStopDevEnvironmentSessionResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionResponse_spaceName})
+var sStopDevEnvironmentSessionResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionResponse_projectName})
+var sStopDevEnvironmentSessionResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionResponse_id})
+var sStopDevEnvironmentSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStopDevEnvironmentSessionResponse_sessionId})
+var sUpdateDevEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDevEnvironmentRequest, Members: &mUpdateDevEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDevEnvironmentRequest})
+var sUpdateDevEnvironmentRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_spaceName})
+var sUpdateDevEnvironmentRequest_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_projectName})
+var sUpdateDevEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_id})
+var sUpdateDevEnvironmentRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_alias})
+var sUpdateDevEnvironmentRequest_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_IdeConfigurationList, Members: &m_IdeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateDevEnvironmentRequest_ides})
+var sUpdateDevEnvironmentRequest_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_instanceType})
+var sUpdateDevEnvironmentRequest_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eUpdateDevEnvironmentRequest_inactivityTimeoutMinutes})
+var sUpdateDevEnvironmentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentRequest_clientToken})
+var sUpdateDevEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDevEnvironmentResponse, Members: &mUpdateDevEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDevEnvironmentResponse})
+var sUpdateDevEnvironmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_id})
+var sUpdateDevEnvironmentResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_spaceName})
+var sUpdateDevEnvironmentResponse_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_projectName})
+var sUpdateDevEnvironmentResponse_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_alias})
+var sUpdateDevEnvironmentResponse_ides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ides", ID: &i_IdeConfigurationList, Members: &m_IdeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateDevEnvironmentResponse_ides})
+var sUpdateDevEnvironmentResponse_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_instanceType})
+var sUpdateDevEnvironmentResponse_inactivityTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inactivityTimeoutMinutes", ID: &i_InactivityTimeoutMinutes, Type: smithy.ShapeTypeInteger, Ext: &eUpdateDevEnvironmentResponse_inactivityTimeoutMinutes})
+var sUpdateDevEnvironmentResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateDevEnvironmentResponse_clientToken})
+var sUpdateProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectRequest, Members: &mUpdateProjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectRequest})
+var sUpdateProjectRequest_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectRequest_spaceName})
+var sUpdateProjectRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectRequest_name})
+var sUpdateProjectRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ProjectDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectRequest_description})
+var sUpdateProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectResponse, Members: &mUpdateProjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProjectResponse})
+var sUpdateProjectResponse_spaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceName", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectResponse_spaceName})
+var sUpdateProjectResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectResponse_name})
+var sUpdateProjectResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectResponse_displayName})
+var sUpdateProjectResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateProjectResponse_description})
+var sUpdateSpaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpaceRequest, Members: &mUpdateSpaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSpaceRequest})
+var sUpdateSpaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eUpdateSpaceRequest_name})
+var sUpdateSpaceRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SpaceDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateSpaceRequest_description})
+var sUpdateSpaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpaceResponse, Members: &mUpdateSpaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSpaceResponse})
+var sUpdateSpaceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString, Ext: &eUpdateSpaceResponse_name})
+var sUpdateSpaceResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSpaceResponse_displayName})
+var sUpdateSpaceResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSpaceResponse_description})
+var sVerifySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifySessionResponse, Members: &mVerifySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eVerifySessionResponse})
+var sVerifySessionResponse_identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identity", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVerifySessionResponse_identity})
+
+var CreateAccessToken = &sCreateAccessToken
+
+var CreateDevEnvironment = &sCreateDevEnvironment
+
+var CreateProject = &sCreateProject
+
+var CreateSourceRepository = &sCreateSourceRepository
+
+var CreateSourceRepositoryBranch = &sCreateSourceRepositoryBranch
+
+var DeleteAccessToken = &sDeleteAccessToken
+
+var DeleteDevEnvironment = &sDeleteDevEnvironment
+
+var DeleteProject = &sDeleteProject
+
+var DeleteSourceRepository = &sDeleteSourceRepository
+
+var DeleteSpace = &sDeleteSpace
+
+var GetDevEnvironment = &sGetDevEnvironment
+
+var GetProject = &sGetProject
+
+var GetSourceRepository = &sGetSourceRepository
+
+var GetSourceRepositoryCloneUrls = &sGetSourceRepositoryCloneUrls
+
+var GetSpace = &sGetSpace
+
+var GetSubscription = &sGetSubscription
+
+var GetUserDetails = &sGetUserDetails
+
+var GetWorkflow = &sGetWorkflow
+
+var GetWorkflowRun = &sGetWorkflowRun
+
+var ListAccessTokens = &sListAccessTokens
+
+var ListDevEnvironments = &sListDevEnvironments
+
+var ListDevEnvironmentSessions = &sListDevEnvironmentSessions
+
+var ListEventLogs = &sListEventLogs
+
+var ListProjects = &sListProjects
+
+var ListSourceRepositories = &sListSourceRepositories
+
+var ListSourceRepositoryBranches = &sListSourceRepositoryBranches
+
+var ListSpaces = &sListSpaces
+
+var ListWorkflowRuns = &sListWorkflowRuns
+
+var ListWorkflows = &sListWorkflows
+
+var StartDevEnvironment = &sStartDevEnvironment
+
+var StartDevEnvironmentSession = &sStartDevEnvironmentSession
+
+var StartWorkflowRun = &sStartWorkflowRun
+
+var StopDevEnvironment = &sStopDevEnvironment
+
+var StopDevEnvironmentSession = &sStopDevEnvironmentSession
+
+var UpdateDevEnvironment = &sUpdateDevEnvironment
+
+var UpdateProject = &sUpdateProject
+
+var UpdateSpace = &sUpdateSpace
+
+var VerifySession = &sVerifySession
+
+var _CodeCatalyst = &s_CodeCatalyst
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccessTokenId = &s_AccessTokenId
+
+var _AccessTokenName = &s_AccessTokenName
+
+var _AccessTokenSecret = &s_AccessTokenSecret
+
+var _AccessTokenSummaries = &s_AccessTokenSummaries
+var _AccessTokenSummaries_member = &s_AccessTokenSummaries_member
+
+var AccessTokenSummary = &sAccessTokenSummary
+var AccessTokenSummary_id = &sAccessTokenSummary_id
+var AccessTokenSummary_name = &sAccessTokenSummary_name
+var AccessTokenSummary_expiresTime = &sAccessTokenSummary_expiresTime
+
+var _ClientToken = &s_ClientToken
+
+var _ComparisonOperator = &s_ComparisonOperator
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var DevEnvironmentAccessDetails = &sDevEnvironmentAccessDetails
+var DevEnvironmentAccessDetails_streamUrl = &sDevEnvironmentAccessDetails_streamUrl
+var DevEnvironmentAccessDetails_tokenValue = &sDevEnvironmentAccessDetails_tokenValue
+
+var _DevEnvironmentRepositorySummaries = &s_DevEnvironmentRepositorySummaries
+var _DevEnvironmentRepositorySummaries_member = &s_DevEnvironmentRepositorySummaries_member
+
+var DevEnvironmentRepositorySummary = &sDevEnvironmentRepositorySummary
+var DevEnvironmentRepositorySummary_repositoryName = &sDevEnvironmentRepositorySummary_repositoryName
+var DevEnvironmentRepositorySummary_branchName = &sDevEnvironmentRepositorySummary_branchName
+
+var DevEnvironmentSessionConfiguration = &sDevEnvironmentSessionConfiguration
+var DevEnvironmentSessionConfiguration_sessionType = &sDevEnvironmentSessionConfiguration_sessionType
+var DevEnvironmentSessionConfiguration_executeCommandSessionConfiguration = &sDevEnvironmentSessionConfiguration_executeCommandSessionConfiguration
+
+var _DevEnvironmentSessionsSummaryList = &s_DevEnvironmentSessionsSummaryList
+var _DevEnvironmentSessionsSummaryList_member = &s_DevEnvironmentSessionsSummaryList_member
+
+var DevEnvironmentSessionSummary = &sDevEnvironmentSessionSummary
+var DevEnvironmentSessionSummary_spaceName = &sDevEnvironmentSessionSummary_spaceName
+var DevEnvironmentSessionSummary_projectName = &sDevEnvironmentSessionSummary_projectName
+var DevEnvironmentSessionSummary_devEnvironmentId = &sDevEnvironmentSessionSummary_devEnvironmentId
+var DevEnvironmentSessionSummary_startedTime = &sDevEnvironmentSessionSummary_startedTime
+var DevEnvironmentSessionSummary_id = &sDevEnvironmentSessionSummary_id
+
+var _DevEnvironmentSessionType = &s_DevEnvironmentSessionType
+
+var _DevEnvironmentStatus = &s_DevEnvironmentStatus
+
+var DevEnvironmentSummary = &sDevEnvironmentSummary
+var DevEnvironmentSummary_spaceName = &sDevEnvironmentSummary_spaceName
+var DevEnvironmentSummary_projectName = &sDevEnvironmentSummary_projectName
+var DevEnvironmentSummary_id = &sDevEnvironmentSummary_id
+var DevEnvironmentSummary_lastUpdatedTime = &sDevEnvironmentSummary_lastUpdatedTime
+var DevEnvironmentSummary_creatorId = &sDevEnvironmentSummary_creatorId
+var DevEnvironmentSummary_status = &sDevEnvironmentSummary_status
+var DevEnvironmentSummary_statusReason = &sDevEnvironmentSummary_statusReason
+var DevEnvironmentSummary_repositories = &sDevEnvironmentSummary_repositories
+var DevEnvironmentSummary_alias = &sDevEnvironmentSummary_alias
+var DevEnvironmentSummary_ides = &sDevEnvironmentSummary_ides
+var DevEnvironmentSummary_instanceType = &sDevEnvironmentSummary_instanceType
+var DevEnvironmentSummary_inactivityTimeoutMinutes = &sDevEnvironmentSummary_inactivityTimeoutMinutes
+var DevEnvironmentSummary_persistentStorage = &sDevEnvironmentSummary_persistentStorage
+var DevEnvironmentSummary_vpcConnectionName = &sDevEnvironmentSummary_vpcConnectionName
+
+var _DevEnvironmentSummaryList = &s_DevEnvironmentSummaryList
+var _DevEnvironmentSummaryList_member = &s_DevEnvironmentSummaryList_member
+
+var EmailAddress = &sEmailAddress
+var EmailAddress_email = &sEmailAddress_email
+var EmailAddress_verified = &sEmailAddress_verified
+
+var _EventLogEntries = &s_EventLogEntries
+var _EventLogEntries_member = &s_EventLogEntries_member
+
+var EventLogEntry = &sEventLogEntry
+var EventLogEntry_id = &sEventLogEntry_id
+var EventLogEntry_eventName = &sEventLogEntry_eventName
+var EventLogEntry_eventType = &sEventLogEntry_eventType
+var EventLogEntry_eventCategory = &sEventLogEntry_eventCategory
+var EventLogEntry_eventSource = &sEventLogEntry_eventSource
+var EventLogEntry_eventTime = &sEventLogEntry_eventTime
+var EventLogEntry_operationType = &sEventLogEntry_operationType
+var EventLogEntry_userIdentity = &sEventLogEntry_userIdentity
+var EventLogEntry_projectInformation = &sEventLogEntry_projectInformation
+var EventLogEntry_requestId = &sEventLogEntry_requestId
+var EventLogEntry_requestPayload = &sEventLogEntry_requestPayload
+var EventLogEntry_responsePayload = &sEventLogEntry_responsePayload
+var EventLogEntry_errorCode = &sEventLogEntry_errorCode
+var EventLogEntry_sourceIpAddress = &sEventLogEntry_sourceIpAddress
+var EventLogEntry_userAgent = &sEventLogEntry_userAgent
+
+var EventPayload = &sEventPayload
+var EventPayload_contentType = &sEventPayload_contentType
+var EventPayload_data = &sEventPayload_data
+
+var ExecuteCommandSessionConfiguration = &sExecuteCommandSessionConfiguration
+var ExecuteCommandSessionConfiguration_command = &sExecuteCommandSessionConfiguration_command
+var ExecuteCommandSessionConfiguration_arguments = &sExecuteCommandSessionConfiguration_arguments
+
+var _ExecuteCommandSessionConfigurationArguments = &s_ExecuteCommandSessionConfigurationArguments
+var _ExecuteCommandSessionConfigurationArguments_member = &s_ExecuteCommandSessionConfigurationArguments_member
+
+var Filter = &sFilter
+var Filter_key = &sFilter_key
+var Filter_values = &sFilter_values
+var Filter_comparisonOperator = &sFilter_comparisonOperator
+
+var _FilterKey = &s_FilterKey
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var Ide = &sIde
+var Ide_runtime = &sIde_runtime
+var Ide_name = &sIde_name
+
+var IdeConfiguration = &sIdeConfiguration
+var IdeConfiguration_runtime = &sIdeConfiguration_runtime
+var IdeConfiguration_name = &sIdeConfiguration_name
+
+var _IdeConfigurationList = &s_IdeConfigurationList
+var _IdeConfigurationList_member = &s_IdeConfigurationList_member
+
+var _Ides = &s_Ides
+var _Ides_member = &s_Ides_member
+
+var _InactivityTimeoutMinutes = &s_InactivityTimeoutMinutes
+
+var _InstanceType = &s_InstanceType
+
+var ListSourceRepositoriesItem = &sListSourceRepositoriesItem
+var ListSourceRepositoriesItem_id = &sListSourceRepositoriesItem_id
+var ListSourceRepositoriesItem_name = &sListSourceRepositoriesItem_name
+var ListSourceRepositoriesItem_description = &sListSourceRepositoriesItem_description
+var ListSourceRepositoriesItem_lastUpdatedTime = &sListSourceRepositoriesItem_lastUpdatedTime
+var ListSourceRepositoriesItem_createdTime = &sListSourceRepositoriesItem_createdTime
+
+var _ListSourceRepositoriesItems = &s_ListSourceRepositoriesItems
+var _ListSourceRepositoriesItems_member = &s_ListSourceRepositoriesItems_member
+
+var ListSourceRepositoryBranchesItem = &sListSourceRepositoryBranchesItem
+var ListSourceRepositoryBranchesItem_ref = &sListSourceRepositoryBranchesItem_ref
+var ListSourceRepositoryBranchesItem_name = &sListSourceRepositoryBranchesItem_name
+var ListSourceRepositoryBranchesItem_lastUpdatedTime = &sListSourceRepositoryBranchesItem_lastUpdatedTime
+var ListSourceRepositoryBranchesItem_headCommitId = &sListSourceRepositoryBranchesItem_headCommitId
+
+var _ListSourceRepositoryBranchesItems = &s_ListSourceRepositoryBranchesItems
+var _ListSourceRepositoryBranchesItems_member = &s_ListSourceRepositoryBranchesItems_member
+
+var _NameString = &s_NameString
+
+var _OperationType = &s_OperationType
+
+var PersistentStorage = &sPersistentStorage
+var PersistentStorage_sizeInGiB = &sPersistentStorage_sizeInGiB
+
+var PersistentStorageConfiguration = &sPersistentStorageConfiguration
+var PersistentStorageConfiguration_sizeInGiB = &sPersistentStorageConfiguration_sizeInGiB
+
+var _ProjectDescription = &s_ProjectDescription
+
+var _ProjectDisplayName = &s_ProjectDisplayName
+
+var ProjectInformation = &sProjectInformation
+var ProjectInformation_name = &sProjectInformation_name
+var ProjectInformation_projectId = &sProjectInformation_projectId
+
+var ProjectListFilter = &sProjectListFilter
+var ProjectListFilter_key = &sProjectListFilter_key
+var ProjectListFilter_values = &sProjectListFilter_values
+var ProjectListFilter_comparisonOperator = &sProjectListFilter_comparisonOperator
+
+var _ProjectListFilters = &s_ProjectListFilters
+var _ProjectListFilters_member = &s_ProjectListFilters_member
+
+var _ProjectSummaries = &s_ProjectSummaries
+var _ProjectSummaries_member = &s_ProjectSummaries_member
+
+var ProjectSummary = &sProjectSummary
+var ProjectSummary_name = &sProjectSummary_name
+var ProjectSummary_displayName = &sProjectSummary_displayName
+var ProjectSummary_description = &sProjectSummary_description
+
+var _RegionString = &s_RegionString
+
+var _RepositoriesInput = &s_RepositoriesInput
+var _RepositoriesInput_member = &s_RepositoriesInput_member
+
+var RepositoryInput = &sRepositoryInput
+var RepositoryInput_repositoryName = &sRepositoryInput_repositoryName
+var RepositoryInput_branchName = &sRepositoryInput_branchName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _SensitiveString = &s_SensitiveString
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SourceRepositoryBranchRefString = &s_SourceRepositoryBranchRefString
+
+var _SourceRepositoryBranchString = &s_SourceRepositoryBranchString
+
+var _SourceRepositoryDescriptionString = &s_SourceRepositoryDescriptionString
+
+var _SourceRepositoryIdString = &s_SourceRepositoryIdString
+
+var _SourceRepositoryNameString = &s_SourceRepositoryNameString
+
+var _SpaceDescription = &s_SpaceDescription
+
+var _SpaceSummaries = &s_SpaceSummaries
+var _SpaceSummaries_member = &s_SpaceSummaries_member
+
+var SpaceSummary = &sSpaceSummary
+var SpaceSummary_name = &sSpaceSummary_name
+var SpaceSummary_regionName = &sSpaceSummary_regionName
+var SpaceSummary_displayName = &sSpaceSummary_displayName
+var SpaceSummary_description = &sSpaceSummary_description
+
+var _StatusReason = &s_StatusReason
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timestamp = &s_Timestamp
+
+var UserIdentity = &sUserIdentity
+var UserIdentity_userType = &sUserIdentity_userType
+var UserIdentity_principalId = &sUserIdentity_principalId
+var UserIdentity_userName = &sUserIdentity_userName
+var UserIdentity_awsAccountId = &sUserIdentity_awsAccountId
+
+var _UserType = &s_UserType
+
+var _Uuid = &s_Uuid
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var WorkflowDefinition = &sWorkflowDefinition
+var WorkflowDefinition_path = &sWorkflowDefinition_path
+
+var WorkflowDefinitionSummary = &sWorkflowDefinitionSummary
+var WorkflowDefinitionSummary_path = &sWorkflowDefinitionSummary_path
+
+var _WorkflowRunMode = &s_WorkflowRunMode
+
+var WorkflowRunSortCriteria = &sWorkflowRunSortCriteria
+
+var _WorkflowRunSortCriteriaList = &s_WorkflowRunSortCriteriaList
+var _WorkflowRunSortCriteriaList_member = &s_WorkflowRunSortCriteriaList_member
+
+var _WorkflowRunStatus = &s_WorkflowRunStatus
+
+var WorkflowRunStatusReason = &sWorkflowRunStatusReason
+
+var _WorkflowRunStatusReasons = &s_WorkflowRunStatusReasons
+var _WorkflowRunStatusReasons_member = &s_WorkflowRunStatusReasons_member
+
+var _WorkflowRunSummaries = &s_WorkflowRunSummaries
+var _WorkflowRunSummaries_member = &s_WorkflowRunSummaries_member
+
+var WorkflowRunSummary = &sWorkflowRunSummary
+var WorkflowRunSummary_id = &sWorkflowRunSummary_id
+var WorkflowRunSummary_workflowId = &sWorkflowRunSummary_workflowId
+var WorkflowRunSummary_workflowName = &sWorkflowRunSummary_workflowName
+var WorkflowRunSummary_status = &sWorkflowRunSummary_status
+var WorkflowRunSummary_statusReasons = &sWorkflowRunSummary_statusReasons
+var WorkflowRunSummary_startTime = &sWorkflowRunSummary_startTime
+var WorkflowRunSummary_endTime = &sWorkflowRunSummary_endTime
+var WorkflowRunSummary_lastUpdatedTime = &sWorkflowRunSummary_lastUpdatedTime
+
+var WorkflowSortCriteria = &sWorkflowSortCriteria
+
+var _WorkflowSortCriteriaList = &s_WorkflowSortCriteriaList
+var _WorkflowSortCriteriaList_member = &s_WorkflowSortCriteriaList_member
+
+var _WorkflowStatus = &s_WorkflowStatus
+
+var _WorkflowSummaries = &s_WorkflowSummaries
+var _WorkflowSummaries_member = &s_WorkflowSummaries_member
+
+var WorkflowSummary = &sWorkflowSummary
+var WorkflowSummary_id = &sWorkflowSummary_id
+var WorkflowSummary_name = &sWorkflowSummary_name
+var WorkflowSummary_sourceRepositoryName = &sWorkflowSummary_sourceRepositoryName
+var WorkflowSummary_sourceBranchName = &sWorkflowSummary_sourceBranchName
+var WorkflowSummary_definition = &sWorkflowSummary_definition
+var WorkflowSummary_createdTime = &sWorkflowSummary_createdTime
+var WorkflowSummary_lastUpdatedTime = &sWorkflowSummary_lastUpdatedTime
+var WorkflowSummary_runMode = &sWorkflowSummary_runMode
+var WorkflowSummary_status = &sWorkflowSummary_status
+
+var CreateAccessTokenRequest = &sCreateAccessTokenRequest
+var CreateAccessTokenRequest_name = &sCreateAccessTokenRequest_name
+var CreateAccessTokenRequest_expiresTime = &sCreateAccessTokenRequest_expiresTime
+
+var CreateAccessTokenResponse = &sCreateAccessTokenResponse
+var CreateAccessTokenResponse_secret = &sCreateAccessTokenResponse_secret
+var CreateAccessTokenResponse_name = &sCreateAccessTokenResponse_name
+var CreateAccessTokenResponse_expiresTime = &sCreateAccessTokenResponse_expiresTime
+var CreateAccessTokenResponse_accessTokenId = &sCreateAccessTokenResponse_accessTokenId
+
+var CreateDevEnvironmentRequest = &sCreateDevEnvironmentRequest
+var CreateDevEnvironmentRequest_spaceName = &sCreateDevEnvironmentRequest_spaceName
+var CreateDevEnvironmentRequest_projectName = &sCreateDevEnvironmentRequest_projectName
+var CreateDevEnvironmentRequest_repositories = &sCreateDevEnvironmentRequest_repositories
+var CreateDevEnvironmentRequest_clientToken = &sCreateDevEnvironmentRequest_clientToken
+var CreateDevEnvironmentRequest_alias = &sCreateDevEnvironmentRequest_alias
+var CreateDevEnvironmentRequest_ides = &sCreateDevEnvironmentRequest_ides
+var CreateDevEnvironmentRequest_instanceType = &sCreateDevEnvironmentRequest_instanceType
+var CreateDevEnvironmentRequest_inactivityTimeoutMinutes = &sCreateDevEnvironmentRequest_inactivityTimeoutMinutes
+var CreateDevEnvironmentRequest_persistentStorage = &sCreateDevEnvironmentRequest_persistentStorage
+var CreateDevEnvironmentRequest_vpcConnectionName = &sCreateDevEnvironmentRequest_vpcConnectionName
+
+var CreateDevEnvironmentResponse = &sCreateDevEnvironmentResponse
+var CreateDevEnvironmentResponse_spaceName = &sCreateDevEnvironmentResponse_spaceName
+var CreateDevEnvironmentResponse_projectName = &sCreateDevEnvironmentResponse_projectName
+var CreateDevEnvironmentResponse_id = &sCreateDevEnvironmentResponse_id
+var CreateDevEnvironmentResponse_vpcConnectionName = &sCreateDevEnvironmentResponse_vpcConnectionName
+
+var CreateProjectRequest = &sCreateProjectRequest
+var CreateProjectRequest_spaceName = &sCreateProjectRequest_spaceName
+var CreateProjectRequest_displayName = &sCreateProjectRequest_displayName
+var CreateProjectRequest_description = &sCreateProjectRequest_description
+
+var CreateProjectResponse = &sCreateProjectResponse
+var CreateProjectResponse_spaceName = &sCreateProjectResponse_spaceName
+var CreateProjectResponse_name = &sCreateProjectResponse_name
+var CreateProjectResponse_displayName = &sCreateProjectResponse_displayName
+var CreateProjectResponse_description = &sCreateProjectResponse_description
+
+var CreateSourceRepositoryBranchRequest = &sCreateSourceRepositoryBranchRequest
+var CreateSourceRepositoryBranchRequest_spaceName = &sCreateSourceRepositoryBranchRequest_spaceName
+var CreateSourceRepositoryBranchRequest_projectName = &sCreateSourceRepositoryBranchRequest_projectName
+var CreateSourceRepositoryBranchRequest_sourceRepositoryName = &sCreateSourceRepositoryBranchRequest_sourceRepositoryName
+var CreateSourceRepositoryBranchRequest_name = &sCreateSourceRepositoryBranchRequest_name
+var CreateSourceRepositoryBranchRequest_headCommitId = &sCreateSourceRepositoryBranchRequest_headCommitId
+
+var CreateSourceRepositoryBranchResponse = &sCreateSourceRepositoryBranchResponse
+var CreateSourceRepositoryBranchResponse_ref = &sCreateSourceRepositoryBranchResponse_ref
+var CreateSourceRepositoryBranchResponse_name = &sCreateSourceRepositoryBranchResponse_name
+var CreateSourceRepositoryBranchResponse_lastUpdatedTime = &sCreateSourceRepositoryBranchResponse_lastUpdatedTime
+var CreateSourceRepositoryBranchResponse_headCommitId = &sCreateSourceRepositoryBranchResponse_headCommitId
+
+var CreateSourceRepositoryRequest = &sCreateSourceRepositoryRequest
+var CreateSourceRepositoryRequest_spaceName = &sCreateSourceRepositoryRequest_spaceName
+var CreateSourceRepositoryRequest_projectName = &sCreateSourceRepositoryRequest_projectName
+var CreateSourceRepositoryRequest_name = &sCreateSourceRepositoryRequest_name
+var CreateSourceRepositoryRequest_description = &sCreateSourceRepositoryRequest_description
+
+var CreateSourceRepositoryResponse = &sCreateSourceRepositoryResponse
+var CreateSourceRepositoryResponse_spaceName = &sCreateSourceRepositoryResponse_spaceName
+var CreateSourceRepositoryResponse_projectName = &sCreateSourceRepositoryResponse_projectName
+var CreateSourceRepositoryResponse_name = &sCreateSourceRepositoryResponse_name
+var CreateSourceRepositoryResponse_description = &sCreateSourceRepositoryResponse_description
+
+var DeleteAccessTokenRequest = &sDeleteAccessTokenRequest
+var DeleteAccessTokenRequest_id = &sDeleteAccessTokenRequest_id
+
+var DeleteAccessTokenResponse = &sDeleteAccessTokenResponse
+
+var DeleteDevEnvironmentRequest = &sDeleteDevEnvironmentRequest
+var DeleteDevEnvironmentRequest_spaceName = &sDeleteDevEnvironmentRequest_spaceName
+var DeleteDevEnvironmentRequest_projectName = &sDeleteDevEnvironmentRequest_projectName
+var DeleteDevEnvironmentRequest_id = &sDeleteDevEnvironmentRequest_id
+
+var DeleteDevEnvironmentResponse = &sDeleteDevEnvironmentResponse
+var DeleteDevEnvironmentResponse_spaceName = &sDeleteDevEnvironmentResponse_spaceName
+var DeleteDevEnvironmentResponse_projectName = &sDeleteDevEnvironmentResponse_projectName
+var DeleteDevEnvironmentResponse_id = &sDeleteDevEnvironmentResponse_id
+
+var DeleteProjectRequest = &sDeleteProjectRequest
+var DeleteProjectRequest_spaceName = &sDeleteProjectRequest_spaceName
+var DeleteProjectRequest_name = &sDeleteProjectRequest_name
+
+var DeleteProjectResponse = &sDeleteProjectResponse
+var DeleteProjectResponse_spaceName = &sDeleteProjectResponse_spaceName
+var DeleteProjectResponse_name = &sDeleteProjectResponse_name
+var DeleteProjectResponse_displayName = &sDeleteProjectResponse_displayName
+
+var DeleteSourceRepositoryRequest = &sDeleteSourceRepositoryRequest
+var DeleteSourceRepositoryRequest_spaceName = &sDeleteSourceRepositoryRequest_spaceName
+var DeleteSourceRepositoryRequest_projectName = &sDeleteSourceRepositoryRequest_projectName
+var DeleteSourceRepositoryRequest_name = &sDeleteSourceRepositoryRequest_name
+
+var DeleteSourceRepositoryResponse = &sDeleteSourceRepositoryResponse
+var DeleteSourceRepositoryResponse_spaceName = &sDeleteSourceRepositoryResponse_spaceName
+var DeleteSourceRepositoryResponse_projectName = &sDeleteSourceRepositoryResponse_projectName
+var DeleteSourceRepositoryResponse_name = &sDeleteSourceRepositoryResponse_name
+
+var DeleteSpaceRequest = &sDeleteSpaceRequest
+var DeleteSpaceRequest_name = &sDeleteSpaceRequest_name
+
+var DeleteSpaceResponse = &sDeleteSpaceResponse
+var DeleteSpaceResponse_name = &sDeleteSpaceResponse_name
+var DeleteSpaceResponse_displayName = &sDeleteSpaceResponse_displayName
+
+var GetDevEnvironmentRequest = &sGetDevEnvironmentRequest
+var GetDevEnvironmentRequest_spaceName = &sGetDevEnvironmentRequest_spaceName
+var GetDevEnvironmentRequest_projectName = &sGetDevEnvironmentRequest_projectName
+var GetDevEnvironmentRequest_id = &sGetDevEnvironmentRequest_id
+
+var GetDevEnvironmentResponse = &sGetDevEnvironmentResponse
+var GetDevEnvironmentResponse_spaceName = &sGetDevEnvironmentResponse_spaceName
+var GetDevEnvironmentResponse_projectName = &sGetDevEnvironmentResponse_projectName
+var GetDevEnvironmentResponse_id = &sGetDevEnvironmentResponse_id
+var GetDevEnvironmentResponse_lastUpdatedTime = &sGetDevEnvironmentResponse_lastUpdatedTime
+var GetDevEnvironmentResponse_creatorId = &sGetDevEnvironmentResponse_creatorId
+var GetDevEnvironmentResponse_status = &sGetDevEnvironmentResponse_status
+var GetDevEnvironmentResponse_statusReason = &sGetDevEnvironmentResponse_statusReason
+var GetDevEnvironmentResponse_repositories = &sGetDevEnvironmentResponse_repositories
+var GetDevEnvironmentResponse_alias = &sGetDevEnvironmentResponse_alias
+var GetDevEnvironmentResponse_ides = &sGetDevEnvironmentResponse_ides
+var GetDevEnvironmentResponse_instanceType = &sGetDevEnvironmentResponse_instanceType
+var GetDevEnvironmentResponse_inactivityTimeoutMinutes = &sGetDevEnvironmentResponse_inactivityTimeoutMinutes
+var GetDevEnvironmentResponse_persistentStorage = &sGetDevEnvironmentResponse_persistentStorage
+var GetDevEnvironmentResponse_vpcConnectionName = &sGetDevEnvironmentResponse_vpcConnectionName
+
+var GetProjectRequest = &sGetProjectRequest
+var GetProjectRequest_spaceName = &sGetProjectRequest_spaceName
+var GetProjectRequest_name = &sGetProjectRequest_name
+
+var GetProjectResponse = &sGetProjectResponse
+var GetProjectResponse_spaceName = &sGetProjectResponse_spaceName
+var GetProjectResponse_name = &sGetProjectResponse_name
+var GetProjectResponse_displayName = &sGetProjectResponse_displayName
+var GetProjectResponse_description = &sGetProjectResponse_description
+
+var GetSourceRepositoryCloneUrlsRequest = &sGetSourceRepositoryCloneUrlsRequest
+var GetSourceRepositoryCloneUrlsRequest_spaceName = &sGetSourceRepositoryCloneUrlsRequest_spaceName
+var GetSourceRepositoryCloneUrlsRequest_projectName = &sGetSourceRepositoryCloneUrlsRequest_projectName
+var GetSourceRepositoryCloneUrlsRequest_sourceRepositoryName = &sGetSourceRepositoryCloneUrlsRequest_sourceRepositoryName
+
+var GetSourceRepositoryCloneUrlsResponse = &sGetSourceRepositoryCloneUrlsResponse
+var GetSourceRepositoryCloneUrlsResponse_https = &sGetSourceRepositoryCloneUrlsResponse_https
+
+var GetSourceRepositoryRequest = &sGetSourceRepositoryRequest
+var GetSourceRepositoryRequest_spaceName = &sGetSourceRepositoryRequest_spaceName
+var GetSourceRepositoryRequest_projectName = &sGetSourceRepositoryRequest_projectName
+var GetSourceRepositoryRequest_name = &sGetSourceRepositoryRequest_name
+
+var GetSourceRepositoryResponse = &sGetSourceRepositoryResponse
+var GetSourceRepositoryResponse_spaceName = &sGetSourceRepositoryResponse_spaceName
+var GetSourceRepositoryResponse_projectName = &sGetSourceRepositoryResponse_projectName
+var GetSourceRepositoryResponse_name = &sGetSourceRepositoryResponse_name
+var GetSourceRepositoryResponse_description = &sGetSourceRepositoryResponse_description
+var GetSourceRepositoryResponse_lastUpdatedTime = &sGetSourceRepositoryResponse_lastUpdatedTime
+var GetSourceRepositoryResponse_createdTime = &sGetSourceRepositoryResponse_createdTime
+
+var GetSpaceRequest = &sGetSpaceRequest
+var GetSpaceRequest_name = &sGetSpaceRequest_name
+
+var GetSpaceResponse = &sGetSpaceResponse
+var GetSpaceResponse_name = &sGetSpaceResponse_name
+var GetSpaceResponse_regionName = &sGetSpaceResponse_regionName
+var GetSpaceResponse_displayName = &sGetSpaceResponse_displayName
+var GetSpaceResponse_description = &sGetSpaceResponse_description
+
+var GetSubscriptionRequest = &sGetSubscriptionRequest
+var GetSubscriptionRequest_spaceName = &sGetSubscriptionRequest_spaceName
+
+var GetSubscriptionResponse = &sGetSubscriptionResponse
+var GetSubscriptionResponse_subscriptionType = &sGetSubscriptionResponse_subscriptionType
+var GetSubscriptionResponse_awsAccountName = &sGetSubscriptionResponse_awsAccountName
+var GetSubscriptionResponse_pendingSubscriptionType = &sGetSubscriptionResponse_pendingSubscriptionType
+var GetSubscriptionResponse_pendingSubscriptionStartTime = &sGetSubscriptionResponse_pendingSubscriptionStartTime
+
+var GetUserDetailsRequest = &sGetUserDetailsRequest
+var GetUserDetailsRequest_id = &sGetUserDetailsRequest_id
+var GetUserDetailsRequest_userName = &sGetUserDetailsRequest_userName
+
+var GetUserDetailsResponse = &sGetUserDetailsResponse
+var GetUserDetailsResponse_userId = &sGetUserDetailsResponse_userId
+var GetUserDetailsResponse_userName = &sGetUserDetailsResponse_userName
+var GetUserDetailsResponse_displayName = &sGetUserDetailsResponse_displayName
+var GetUserDetailsResponse_primaryEmail = &sGetUserDetailsResponse_primaryEmail
+var GetUserDetailsResponse_version = &sGetUserDetailsResponse_version
+
+var GetWorkflowRequest = &sGetWorkflowRequest
+var GetWorkflowRequest_spaceName = &sGetWorkflowRequest_spaceName
+var GetWorkflowRequest_id = &sGetWorkflowRequest_id
+var GetWorkflowRequest_projectName = &sGetWorkflowRequest_projectName
+
+var GetWorkflowResponse = &sGetWorkflowResponse
+var GetWorkflowResponse_spaceName = &sGetWorkflowResponse_spaceName
+var GetWorkflowResponse_projectName = &sGetWorkflowResponse_projectName
+var GetWorkflowResponse_id = &sGetWorkflowResponse_id
+var GetWorkflowResponse_name = &sGetWorkflowResponse_name
+var GetWorkflowResponse_sourceRepositoryName = &sGetWorkflowResponse_sourceRepositoryName
+var GetWorkflowResponse_sourceBranchName = &sGetWorkflowResponse_sourceBranchName
+var GetWorkflowResponse_definition = &sGetWorkflowResponse_definition
+var GetWorkflowResponse_createdTime = &sGetWorkflowResponse_createdTime
+var GetWorkflowResponse_lastUpdatedTime = &sGetWorkflowResponse_lastUpdatedTime
+var GetWorkflowResponse_runMode = &sGetWorkflowResponse_runMode
+var GetWorkflowResponse_status = &sGetWorkflowResponse_status
+
+var GetWorkflowRunRequest = &sGetWorkflowRunRequest
+var GetWorkflowRunRequest_spaceName = &sGetWorkflowRunRequest_spaceName
+var GetWorkflowRunRequest_id = &sGetWorkflowRunRequest_id
+var GetWorkflowRunRequest_projectName = &sGetWorkflowRunRequest_projectName
+
+var GetWorkflowRunResponse = &sGetWorkflowRunResponse
+var GetWorkflowRunResponse_spaceName = &sGetWorkflowRunResponse_spaceName
+var GetWorkflowRunResponse_projectName = &sGetWorkflowRunResponse_projectName
+var GetWorkflowRunResponse_id = &sGetWorkflowRunResponse_id
+var GetWorkflowRunResponse_workflowId = &sGetWorkflowRunResponse_workflowId
+var GetWorkflowRunResponse_status = &sGetWorkflowRunResponse_status
+var GetWorkflowRunResponse_statusReasons = &sGetWorkflowRunResponse_statusReasons
+var GetWorkflowRunResponse_startTime = &sGetWorkflowRunResponse_startTime
+var GetWorkflowRunResponse_endTime = &sGetWorkflowRunResponse_endTime
+var GetWorkflowRunResponse_lastUpdatedTime = &sGetWorkflowRunResponse_lastUpdatedTime
+
+var ListAccessTokensRequest = &sListAccessTokensRequest
+var ListAccessTokensRequest_maxResults = &sListAccessTokensRequest_maxResults
+var ListAccessTokensRequest_nextToken = &sListAccessTokensRequest_nextToken
+
+var ListAccessTokensResponse = &sListAccessTokensResponse
+var ListAccessTokensResponse_items = &sListAccessTokensResponse_items
+var ListAccessTokensResponse_nextToken = &sListAccessTokensResponse_nextToken
+
+var ListDevEnvironmentSessionsRequest = &sListDevEnvironmentSessionsRequest
+var ListDevEnvironmentSessionsRequest_spaceName = &sListDevEnvironmentSessionsRequest_spaceName
+var ListDevEnvironmentSessionsRequest_projectName = &sListDevEnvironmentSessionsRequest_projectName
+var ListDevEnvironmentSessionsRequest_devEnvironmentId = &sListDevEnvironmentSessionsRequest_devEnvironmentId
+var ListDevEnvironmentSessionsRequest_nextToken = &sListDevEnvironmentSessionsRequest_nextToken
+var ListDevEnvironmentSessionsRequest_maxResults = &sListDevEnvironmentSessionsRequest_maxResults
+
+var ListDevEnvironmentSessionsResponse = &sListDevEnvironmentSessionsResponse
+var ListDevEnvironmentSessionsResponse_items = &sListDevEnvironmentSessionsResponse_items
+var ListDevEnvironmentSessionsResponse_nextToken = &sListDevEnvironmentSessionsResponse_nextToken
+
+var ListDevEnvironmentsRequest = &sListDevEnvironmentsRequest
+var ListDevEnvironmentsRequest_spaceName = &sListDevEnvironmentsRequest_spaceName
+var ListDevEnvironmentsRequest_projectName = &sListDevEnvironmentsRequest_projectName
+var ListDevEnvironmentsRequest_filters = &sListDevEnvironmentsRequest_filters
+var ListDevEnvironmentsRequest_nextToken = &sListDevEnvironmentsRequest_nextToken
+var ListDevEnvironmentsRequest_maxResults = &sListDevEnvironmentsRequest_maxResults
+
+var ListDevEnvironmentsResponse = &sListDevEnvironmentsResponse
+var ListDevEnvironmentsResponse_items = &sListDevEnvironmentsResponse_items
+var ListDevEnvironmentsResponse_nextToken = &sListDevEnvironmentsResponse_nextToken
+
+var ListEventLogsRequest = &sListEventLogsRequest
+var ListEventLogsRequest_spaceName = &sListEventLogsRequest_spaceName
+var ListEventLogsRequest_startTime = &sListEventLogsRequest_startTime
+var ListEventLogsRequest_endTime = &sListEventLogsRequest_endTime
+var ListEventLogsRequest_eventName = &sListEventLogsRequest_eventName
+var ListEventLogsRequest_nextToken = &sListEventLogsRequest_nextToken
+var ListEventLogsRequest_maxResults = &sListEventLogsRequest_maxResults
+
+var ListEventLogsResponse = &sListEventLogsResponse
+var ListEventLogsResponse_nextToken = &sListEventLogsResponse_nextToken
+var ListEventLogsResponse_items = &sListEventLogsResponse_items
+
+var ListProjectsRequest = &sListProjectsRequest
+var ListProjectsRequest_spaceName = &sListProjectsRequest_spaceName
+var ListProjectsRequest_nextToken = &sListProjectsRequest_nextToken
+var ListProjectsRequest_maxResults = &sListProjectsRequest_maxResults
+var ListProjectsRequest_filters = &sListProjectsRequest_filters
+
+var ListProjectsResponse = &sListProjectsResponse
+var ListProjectsResponse_nextToken = &sListProjectsResponse_nextToken
+var ListProjectsResponse_items = &sListProjectsResponse_items
+
+var ListSourceRepositoriesRequest = &sListSourceRepositoriesRequest
+var ListSourceRepositoriesRequest_spaceName = &sListSourceRepositoriesRequest_spaceName
+var ListSourceRepositoriesRequest_projectName = &sListSourceRepositoriesRequest_projectName
+var ListSourceRepositoriesRequest_nextToken = &sListSourceRepositoriesRequest_nextToken
+var ListSourceRepositoriesRequest_maxResults = &sListSourceRepositoriesRequest_maxResults
+
+var ListSourceRepositoriesResponse = &sListSourceRepositoriesResponse
+var ListSourceRepositoriesResponse_items = &sListSourceRepositoriesResponse_items
+var ListSourceRepositoriesResponse_nextToken = &sListSourceRepositoriesResponse_nextToken
+
+var ListSourceRepositoryBranchesRequest = &sListSourceRepositoryBranchesRequest
+var ListSourceRepositoryBranchesRequest_spaceName = &sListSourceRepositoryBranchesRequest_spaceName
+var ListSourceRepositoryBranchesRequest_projectName = &sListSourceRepositoryBranchesRequest_projectName
+var ListSourceRepositoryBranchesRequest_sourceRepositoryName = &sListSourceRepositoryBranchesRequest_sourceRepositoryName
+var ListSourceRepositoryBranchesRequest_nextToken = &sListSourceRepositoryBranchesRequest_nextToken
+var ListSourceRepositoryBranchesRequest_maxResults = &sListSourceRepositoryBranchesRequest_maxResults
+
+var ListSourceRepositoryBranchesResponse = &sListSourceRepositoryBranchesResponse
+var ListSourceRepositoryBranchesResponse_nextToken = &sListSourceRepositoryBranchesResponse_nextToken
+var ListSourceRepositoryBranchesResponse_items = &sListSourceRepositoryBranchesResponse_items
+
+var ListSpacesRequest = &sListSpacesRequest
+var ListSpacesRequest_nextToken = &sListSpacesRequest_nextToken
+
+var ListSpacesResponse = &sListSpacesResponse
+var ListSpacesResponse_nextToken = &sListSpacesResponse_nextToken
+var ListSpacesResponse_items = &sListSpacesResponse_items
+
+var ListWorkflowRunsRequest = &sListWorkflowRunsRequest
+var ListWorkflowRunsRequest_spaceName = &sListWorkflowRunsRequest_spaceName
+var ListWorkflowRunsRequest_workflowId = &sListWorkflowRunsRequest_workflowId
+var ListWorkflowRunsRequest_projectName = &sListWorkflowRunsRequest_projectName
+var ListWorkflowRunsRequest_nextToken = &sListWorkflowRunsRequest_nextToken
+var ListWorkflowRunsRequest_maxResults = &sListWorkflowRunsRequest_maxResults
+var ListWorkflowRunsRequest_sortBy = &sListWorkflowRunsRequest_sortBy
+
+var ListWorkflowRunsResponse = &sListWorkflowRunsResponse
+var ListWorkflowRunsResponse_nextToken = &sListWorkflowRunsResponse_nextToken
+var ListWorkflowRunsResponse_items = &sListWorkflowRunsResponse_items
+
+var ListWorkflowsRequest = &sListWorkflowsRequest
+var ListWorkflowsRequest_spaceName = &sListWorkflowsRequest_spaceName
+var ListWorkflowsRequest_projectName = &sListWorkflowsRequest_projectName
+var ListWorkflowsRequest_nextToken = &sListWorkflowsRequest_nextToken
+var ListWorkflowsRequest_maxResults = &sListWorkflowsRequest_maxResults
+var ListWorkflowsRequest_sortBy = &sListWorkflowsRequest_sortBy
+
+var ListWorkflowsResponse = &sListWorkflowsResponse
+var ListWorkflowsResponse_nextToken = &sListWorkflowsResponse_nextToken
+var ListWorkflowsResponse_items = &sListWorkflowsResponse_items
+
+var StartDevEnvironmentRequest = &sStartDevEnvironmentRequest
+var StartDevEnvironmentRequest_spaceName = &sStartDevEnvironmentRequest_spaceName
+var StartDevEnvironmentRequest_projectName = &sStartDevEnvironmentRequest_projectName
+var StartDevEnvironmentRequest_id = &sStartDevEnvironmentRequest_id
+var StartDevEnvironmentRequest_ides = &sStartDevEnvironmentRequest_ides
+var StartDevEnvironmentRequest_instanceType = &sStartDevEnvironmentRequest_instanceType
+var StartDevEnvironmentRequest_inactivityTimeoutMinutes = &sStartDevEnvironmentRequest_inactivityTimeoutMinutes
+
+var StartDevEnvironmentResponse = &sStartDevEnvironmentResponse
+var StartDevEnvironmentResponse_spaceName = &sStartDevEnvironmentResponse_spaceName
+var StartDevEnvironmentResponse_projectName = &sStartDevEnvironmentResponse_projectName
+var StartDevEnvironmentResponse_id = &sStartDevEnvironmentResponse_id
+var StartDevEnvironmentResponse_status = &sStartDevEnvironmentResponse_status
+
+var StartDevEnvironmentSessionRequest = &sStartDevEnvironmentSessionRequest
+var StartDevEnvironmentSessionRequest_spaceName = &sStartDevEnvironmentSessionRequest_spaceName
+var StartDevEnvironmentSessionRequest_projectName = &sStartDevEnvironmentSessionRequest_projectName
+var StartDevEnvironmentSessionRequest_id = &sStartDevEnvironmentSessionRequest_id
+var StartDevEnvironmentSessionRequest_sessionConfiguration = &sStartDevEnvironmentSessionRequest_sessionConfiguration
+
+var StartDevEnvironmentSessionResponse = &sStartDevEnvironmentSessionResponse
+var StartDevEnvironmentSessionResponse_accessDetails = &sStartDevEnvironmentSessionResponse_accessDetails
+var StartDevEnvironmentSessionResponse_sessionId = &sStartDevEnvironmentSessionResponse_sessionId
+var StartDevEnvironmentSessionResponse_spaceName = &sStartDevEnvironmentSessionResponse_spaceName
+var StartDevEnvironmentSessionResponse_projectName = &sStartDevEnvironmentSessionResponse_projectName
+var StartDevEnvironmentSessionResponse_id = &sStartDevEnvironmentSessionResponse_id
+
+var StartWorkflowRunRequest = &sStartWorkflowRunRequest
+var StartWorkflowRunRequest_spaceName = &sStartWorkflowRunRequest_spaceName
+var StartWorkflowRunRequest_projectName = &sStartWorkflowRunRequest_projectName
+var StartWorkflowRunRequest_workflowId = &sStartWorkflowRunRequest_workflowId
+var StartWorkflowRunRequest_clientToken = &sStartWorkflowRunRequest_clientToken
+
+var StartWorkflowRunResponse = &sStartWorkflowRunResponse
+var StartWorkflowRunResponse_spaceName = &sStartWorkflowRunResponse_spaceName
+var StartWorkflowRunResponse_projectName = &sStartWorkflowRunResponse_projectName
+var StartWorkflowRunResponse_id = &sStartWorkflowRunResponse_id
+var StartWorkflowRunResponse_workflowId = &sStartWorkflowRunResponse_workflowId
+
+var StopDevEnvironmentRequest = &sStopDevEnvironmentRequest
+var StopDevEnvironmentRequest_spaceName = &sStopDevEnvironmentRequest_spaceName
+var StopDevEnvironmentRequest_projectName = &sStopDevEnvironmentRequest_projectName
+var StopDevEnvironmentRequest_id = &sStopDevEnvironmentRequest_id
+
+var StopDevEnvironmentResponse = &sStopDevEnvironmentResponse
+var StopDevEnvironmentResponse_spaceName = &sStopDevEnvironmentResponse_spaceName
+var StopDevEnvironmentResponse_projectName = &sStopDevEnvironmentResponse_projectName
+var StopDevEnvironmentResponse_id = &sStopDevEnvironmentResponse_id
+var StopDevEnvironmentResponse_status = &sStopDevEnvironmentResponse_status
+
+var StopDevEnvironmentSessionRequest = &sStopDevEnvironmentSessionRequest
+var StopDevEnvironmentSessionRequest_spaceName = &sStopDevEnvironmentSessionRequest_spaceName
+var StopDevEnvironmentSessionRequest_projectName = &sStopDevEnvironmentSessionRequest_projectName
+var StopDevEnvironmentSessionRequest_id = &sStopDevEnvironmentSessionRequest_id
+var StopDevEnvironmentSessionRequest_sessionId = &sStopDevEnvironmentSessionRequest_sessionId
+
+var StopDevEnvironmentSessionResponse = &sStopDevEnvironmentSessionResponse
+var StopDevEnvironmentSessionResponse_spaceName = &sStopDevEnvironmentSessionResponse_spaceName
+var StopDevEnvironmentSessionResponse_projectName = &sStopDevEnvironmentSessionResponse_projectName
+var StopDevEnvironmentSessionResponse_id = &sStopDevEnvironmentSessionResponse_id
+var StopDevEnvironmentSessionResponse_sessionId = &sStopDevEnvironmentSessionResponse_sessionId
+
+var UpdateDevEnvironmentRequest = &sUpdateDevEnvironmentRequest
+var UpdateDevEnvironmentRequest_spaceName = &sUpdateDevEnvironmentRequest_spaceName
+var UpdateDevEnvironmentRequest_projectName = &sUpdateDevEnvironmentRequest_projectName
+var UpdateDevEnvironmentRequest_id = &sUpdateDevEnvironmentRequest_id
+var UpdateDevEnvironmentRequest_alias = &sUpdateDevEnvironmentRequest_alias
+var UpdateDevEnvironmentRequest_ides = &sUpdateDevEnvironmentRequest_ides
+var UpdateDevEnvironmentRequest_instanceType = &sUpdateDevEnvironmentRequest_instanceType
+var UpdateDevEnvironmentRequest_inactivityTimeoutMinutes = &sUpdateDevEnvironmentRequest_inactivityTimeoutMinutes
+var UpdateDevEnvironmentRequest_clientToken = &sUpdateDevEnvironmentRequest_clientToken
+
+var UpdateDevEnvironmentResponse = &sUpdateDevEnvironmentResponse
+var UpdateDevEnvironmentResponse_id = &sUpdateDevEnvironmentResponse_id
+var UpdateDevEnvironmentResponse_spaceName = &sUpdateDevEnvironmentResponse_spaceName
+var UpdateDevEnvironmentResponse_projectName = &sUpdateDevEnvironmentResponse_projectName
+var UpdateDevEnvironmentResponse_alias = &sUpdateDevEnvironmentResponse_alias
+var UpdateDevEnvironmentResponse_ides = &sUpdateDevEnvironmentResponse_ides
+var UpdateDevEnvironmentResponse_instanceType = &sUpdateDevEnvironmentResponse_instanceType
+var UpdateDevEnvironmentResponse_inactivityTimeoutMinutes = &sUpdateDevEnvironmentResponse_inactivityTimeoutMinutes
+var UpdateDevEnvironmentResponse_clientToken = &sUpdateDevEnvironmentResponse_clientToken
+
+var UpdateProjectRequest = &sUpdateProjectRequest
+var UpdateProjectRequest_spaceName = &sUpdateProjectRequest_spaceName
+var UpdateProjectRequest_name = &sUpdateProjectRequest_name
+var UpdateProjectRequest_description = &sUpdateProjectRequest_description
+
+var UpdateProjectResponse = &sUpdateProjectResponse
+var UpdateProjectResponse_spaceName = &sUpdateProjectResponse_spaceName
+var UpdateProjectResponse_name = &sUpdateProjectResponse_name
+var UpdateProjectResponse_displayName = &sUpdateProjectResponse_displayName
+var UpdateProjectResponse_description = &sUpdateProjectResponse_description
+
+var UpdateSpaceRequest = &sUpdateSpaceRequest
+var UpdateSpaceRequest_name = &sUpdateSpaceRequest_name
+var UpdateSpaceRequest_description = &sUpdateSpaceRequest_description
+
+var UpdateSpaceResponse = &sUpdateSpaceResponse
+var UpdateSpaceResponse_name = &sUpdateSpaceResponse_name
+var UpdateSpaceResponse_displayName = &sUpdateSpaceResponse_displayName
+var UpdateSpaceResponse_description = &sUpdateSpaceResponse_description
+
+var VerifySessionResponse = &sVerifySessionResponse
+var VerifySessionResponse_identity = &sVerifySessionResponse_identity
+
+var CodeCatalyst = &smithy.ServiceSchema{Schema: &s_CodeCatalyst, Version: "2022-09-28"}

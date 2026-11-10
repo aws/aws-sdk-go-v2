@@ -4,4865 +4,4782 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddListenerCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddListenerCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTrustStoreRevocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTrustStoreRevocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTargetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTargetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTrustStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteLoadBalancer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSharedTrustStoreAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteSharedTrustStoreAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTargetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTargetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTrustStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeregisterTargets",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccountLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeAccountLimits",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeListenerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeListenerCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListeners",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoadBalancers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancers",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSSLPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeSSLPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTargetGroupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroupAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTargetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTargetHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetHealth",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTrustStoreAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTrustStoreRevocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreRevocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTrustStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStores",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTrustStoreCaCertificatesBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreCaCertificatesBundle",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTrustStoreRevocationContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreRevocationContent",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyIpPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyIpPools",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyListenerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListenerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyLoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyLoadBalancerAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyTargetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyTargetGroupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroupAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTrustStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RegisterTargets",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveListenerCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveListenerCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTrustStoreRevocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTrustStoreRevocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetIpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetIpAddressType",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetRulePriorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetRulePriorities",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSecurityGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSubnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSubnets",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ElasticLoadBalancing_v10 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ElasticLoadBalancing_v10",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"})
-
-var ElasticLoadBalancing_v10 = smithy.NewServiceSchema(_ElasticLoadBalancing_v10, "2015-12-01")
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Action",
-}, smithy.ShapeTypeStructure, 9)
-var Action_Type *smithy.Schema
-
-var Action_TargetGroupArn *smithy.Schema
-
-var Action_AuthenticateOidcConfig *smithy.Schema
-
-var Action_AuthenticateCognitoConfig *smithy.Schema
-
-var Action_Order *smithy.Schema
-
-var Action_RedirectConfig *smithy.Schema
-
-var Action_FixedResponseConfig *smithy.Schema
-
-var Action_ForwardConfig *smithy.Schema
-
-var Action_JwtValidationConfig *smithy.Schema
-
-var _ActionOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ActionOrder",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Actions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Actions",
-}, smithy.ShapeTypeList, 1)
-var _Actions_member *smithy.Schema
-
-var ActionTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ActionTypeEnum",
-}, smithy.ShapeTypeEnum, 6)
-var ActionTypeEnum_FORWARD *smithy.Schema
-
-var ActionTypeEnum_AUTHENTICATE_OIDC *smithy.Schema
-
-var ActionTypeEnum_AUTHENTICATE_COGNITO *smithy.Schema
-
-var ActionTypeEnum_REDIRECT *smithy.Schema
-
-var ActionTypeEnum_FIXED_RESPONSE *smithy.Schema
-
-var ActionTypeEnum_JWT_VALIDATION *smithy.Schema
-
-var AdministrativeOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AdministrativeOverride",
-}, smithy.ShapeTypeStructure, 3)
-var AdministrativeOverride_State *smithy.Schema
-
-var AdministrativeOverride_Reason *smithy.Schema
-
-var AdministrativeOverride_Description *smithy.Schema
-
-var AdvertiseTrustStoreCaNamesEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AdvertiseTrustStoreCaNamesEnum",
-}, smithy.ShapeTypeEnum, 2)
-var AdvertiseTrustStoreCaNamesEnum_on *smithy.Schema
-
-var AdvertiseTrustStoreCaNamesEnum_off *smithy.Schema
-
-var _AllocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AllocationId",
-}, smithy.ShapeTypeString, 0)
-
-var AllocationIdNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AllocationIdNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AllocationIdNotFound",
-		StatusCode: 400})
-var AllocationIdNotFoundException_Message *smithy.Schema
-
-var _AlpnPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AlpnPolicyName",
-}, smithy.ShapeTypeList, 1)
-var _AlpnPolicyName_member *smithy.Schema
-
-var ALPNPolicyNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ALPNPolicyNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ALPNPolicyNotFound",
-		StatusCode: 400})
-var ALPNPolicyNotSupportedException_Message *smithy.Schema
-
-var _AlpnPolicyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AlpnPolicyValue",
-}, smithy.ShapeTypeString, 0)
-
-var AnomalyDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AnomalyDetection",
-}, smithy.ShapeTypeStructure, 2)
-var AnomalyDetection_Result *smithy.Schema
-
-var AnomalyDetection_MitigationInEffect *smithy.Schema
-
-var AnomalyResultEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AnomalyResultEnum",
-}, smithy.ShapeTypeEnum, 2)
-var AnomalyResultEnum_ANOMALOUS *smithy.Schema
-
-var AnomalyResultEnum_NORMAL *smithy.Schema
-
-var _AuthenticateCognitoActionAuthenticationRequestExtraParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionAuthenticationRequestExtraParams",
-}, smithy.ShapeTypeMap, 2)
-var _AuthenticateCognitoActionAuthenticationRequestExtraParams_key *smithy.Schema
-
-var _AuthenticateCognitoActionAuthenticationRequestExtraParams_value *smithy.Schema
-
-var _AuthenticateCognitoActionAuthenticationRequestParamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionAuthenticationRequestParamName",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateCognitoActionAuthenticationRequestParamValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionAuthenticationRequestParamValue",
-}, smithy.ShapeTypeString, 0)
-
-var AuthenticateCognitoActionConditionalBehaviorEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionConditionalBehaviorEnum",
-}, smithy.ShapeTypeEnum, 3)
-var AuthenticateCognitoActionConditionalBehaviorEnum_DENY *smithy.Schema
-
-var AuthenticateCognitoActionConditionalBehaviorEnum_ALLOW *smithy.Schema
-
-var AuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE *smithy.Schema
-
-var AuthenticateCognitoActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionConfig",
-}, smithy.ShapeTypeStructure, 8)
-var AuthenticateCognitoActionConfig_UserPoolArn *smithy.Schema
-
-var AuthenticateCognitoActionConfig_UserPoolClientId *smithy.Schema
-
-var AuthenticateCognitoActionConfig_UserPoolDomain *smithy.Schema
-
-var AuthenticateCognitoActionConfig_SessionCookieName *smithy.Schema
-
-var AuthenticateCognitoActionConfig_Scope *smithy.Schema
-
-var AuthenticateCognitoActionConfig_SessionTimeout *smithy.Schema
-
-var AuthenticateCognitoActionConfig_AuthenticationRequestExtraParams *smithy.Schema
-
-var AuthenticateCognitoActionConfig_OnUnauthenticatedRequest *smithy.Schema
-
-var _AuthenticateCognitoActionScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionScope",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateCognitoActionSessionCookieName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionSessionCookieName",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateCognitoActionSessionTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionSessionTimeout",
-}, smithy.ShapeTypeLong, 0)
-
-var _AuthenticateCognitoActionUserPoolArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionUserPoolArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateCognitoActionUserPoolClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionUserPoolClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateCognitoActionUserPoolDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateCognitoActionUserPoolDomain",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionAuthenticationRequestExtraParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionAuthenticationRequestExtraParams",
-}, smithy.ShapeTypeMap, 2)
-var _AuthenticateOidcActionAuthenticationRequestExtraParams_key *smithy.Schema
-
-var _AuthenticateOidcActionAuthenticationRequestExtraParams_value *smithy.Schema
-
-var _AuthenticateOidcActionAuthenticationRequestParamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionAuthenticationRequestParamName",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionAuthenticationRequestParamValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionAuthenticationRequestParamValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionAuthorizationEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionAuthorizationEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionClientSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionClientSecret",
-}, smithy.ShapeTypeString, 0)
-
-var AuthenticateOidcActionConditionalBehaviorEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionConditionalBehaviorEnum",
-}, smithy.ShapeTypeEnum, 3)
-var AuthenticateOidcActionConditionalBehaviorEnum_DENY *smithy.Schema
-
-var AuthenticateOidcActionConditionalBehaviorEnum_ALLOW *smithy.Schema
-
-var AuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE *smithy.Schema
-
-var AuthenticateOidcActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionConfig",
-}, smithy.ShapeTypeStructure, 12)
-var AuthenticateOidcActionConfig_Issuer *smithy.Schema
-
-var AuthenticateOidcActionConfig_AuthorizationEndpoint *smithy.Schema
-
-var AuthenticateOidcActionConfig_TokenEndpoint *smithy.Schema
-
-var AuthenticateOidcActionConfig_UserInfoEndpoint *smithy.Schema
-
-var AuthenticateOidcActionConfig_ClientId *smithy.Schema
-
-var AuthenticateOidcActionConfig_ClientSecret *smithy.Schema
-
-var AuthenticateOidcActionConfig_SessionCookieName *smithy.Schema
-
-var AuthenticateOidcActionConfig_Scope *smithy.Schema
-
-var AuthenticateOidcActionConfig_SessionTimeout *smithy.Schema
-
-var AuthenticateOidcActionConfig_AuthenticationRequestExtraParams *smithy.Schema
-
-var AuthenticateOidcActionConfig_OnUnauthenticatedRequest *smithy.Schema
-
-var AuthenticateOidcActionConfig_UseExistingClientSecret *smithy.Schema
-
-var _AuthenticateOidcActionIssuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionIssuer",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionScope",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionSessionCookieName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionSessionCookieName",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionSessionTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionSessionTimeout",
-}, smithy.ShapeTypeLong, 0)
-
-var _AuthenticateOidcActionTokenEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionTokenEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthenticateOidcActionUseExistingClientSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionUseExistingClientSecret",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AuthenticateOidcActionUserInfoEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AuthenticateOidcActionUserInfoEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeStructure, 5)
-var AvailabilityZone_ZoneName *smithy.Schema
-
-var AvailabilityZone_SubnetId *smithy.Schema
-
-var AvailabilityZone_OutpostId *smithy.Schema
-
-var AvailabilityZone_LoadBalancerAddresses *smithy.Schema
-
-var AvailabilityZone_SourceNatIpv6Prefixes *smithy.Schema
-
-var AvailabilityZoneNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AvailabilityZoneNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AvailabilityZoneNotSupported",
-		StatusCode: 400})
-var AvailabilityZoneNotSupportedException_Message *smithy.Schema
-
-var _AvailabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AvailabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZones_member *smithy.Schema
-
-var CaCertificatesBundleNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CaCertificatesBundleNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CaCertificatesBundleNotFound",
-		StatusCode: 400})
-var CaCertificatesBundleNotFoundException_Message *smithy.Schema
-
-var _CanonicalHostedZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CanonicalHostedZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var CapacityDecreaseRequestsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityDecreaseRequestsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CapacityDecreaseRequestLimitExceeded",
-		StatusCode: 400})
-var CapacityDecreaseRequestsLimitExceededException_Message *smithy.Schema
-
-var CapacityReservationPendingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityReservationPendingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CapacityReservationPending",
-		StatusCode: 400})
-var CapacityReservationPendingException_Message *smithy.Schema
-
-var CapacityReservationStateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityReservationStateEnum",
-}, smithy.ShapeTypeEnum, 4)
-var CapacityReservationStateEnum_PROVISIONED *smithy.Schema
-
-var CapacityReservationStateEnum_PENDING *smithy.Schema
-
-var CapacityReservationStateEnum_REBALANCING *smithy.Schema
-
-var CapacityReservationStateEnum_FAILED *smithy.Schema
-
-var CapacityReservationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityReservationStatus",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityReservationStatus_Code *smithy.Schema
-
-var CapacityReservationStatus_Reason *smithy.Schema
-
-var _CapacityUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityUnits",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CapacityUnitsDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityUnitsDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var CapacityUnitsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CapacityUnitsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CapacityUnitsLimitExceeded",
-		StatusCode: 400})
-var CapacityUnitsLimitExceededException_Message *smithy.Schema
-
-var Certificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Certificate",
-}, smithy.ShapeTypeStructure, 2)
-var Certificate_CertificateArn *smithy.Schema
-
-var Certificate_IsDefault *smithy.Schema
-
-var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CertificateArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CertificateList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateList_member *smithy.Schema
-
-var CertificateNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CertificateNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
-		StatusCode: 400})
-var CertificateNotFoundException_Message *smithy.Schema
-
-var Cipher = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Cipher",
-}, smithy.ShapeTypeStructure, 2)
-var Cipher_Name *smithy.Schema
-
-var Cipher_Priority *smithy.Schema
-
-var _CipherName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CipherName",
-}, smithy.ShapeTypeString, 0)
-
-var _CipherPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CipherPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Ciphers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Ciphers",
-}, smithy.ShapeTypeList, 1)
-var _Ciphers_member *smithy.Schema
-
-var _ConditionFieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ConditionFieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreatedTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CustomerOwnedIpv4Pool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CustomerOwnedIpv4Pool",
-}, smithy.ShapeTypeString, 0)
-
-var _DecreaseRequestsRemaining = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DecreaseRequestsRemaining",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Default = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Default",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DeleteAssociationSameAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteAssociationSameAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DeleteAssociationSameAccount",
-		StatusCode: 400})
-var DeleteAssociationSameAccountException_Message *smithy.Schema
-
-var DescribeTargetHealthInputIncludeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetHealthInputIncludeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var DescribeTargetHealthInputIncludeEnum_ANOMALY *smithy.Schema
-
-var DescribeTargetHealthInputIncludeEnum_ALL *smithy.Schema
-
-var DescribeTrustStoreRevocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreRevocation",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTrustStoreRevocation_TrustStoreArn *smithy.Schema
-
-var DescribeTrustStoreRevocation_RevocationId *smithy.Schema
-
-var DescribeTrustStoreRevocation_RevocationType *smithy.Schema
-
-var DescribeTrustStoreRevocation_NumberOfRevokedEntries *smithy.Schema
-
-var _DescribeTrustStoreRevocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreRevocationResponse",
-}, smithy.ShapeTypeList, 1)
-var _DescribeTrustStoreRevocationResponse_member *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DNSName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DNSName",
-}, smithy.ShapeTypeString, 0)
-
-var DuplicateListenerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DuplicateListenerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateListener",
-		StatusCode: 400})
-var DuplicateListenerException_Message *smithy.Schema
-
-var DuplicateLoadBalancerNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DuplicateLoadBalancerNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateLoadBalancerName",
-		StatusCode: 400})
-var DuplicateLoadBalancerNameException_Message *smithy.Schema
-
-var DuplicateTagKeysException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DuplicateTagKeysException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateTagKeys",
-		StatusCode: 400})
-var DuplicateTagKeysException_Message *smithy.Schema
-
-var DuplicateTargetGroupNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DuplicateTargetGroupNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateTargetGroupName",
-		StatusCode: 400})
-var DuplicateTargetGroupNameException_Message *smithy.Schema
-
-var DuplicateTrustStoreNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DuplicateTrustStoreNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateTrustStoreName",
-		StatusCode: 400})
-var DuplicateTrustStoreNameException_Message *smithy.Schema
-
-var EnablePrefixForIpv6SourceNatEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "EnablePrefixForIpv6SourceNatEnum",
-}, smithy.ShapeTypeEnum, 2)
-var EnablePrefixForIpv6SourceNatEnum_ON *smithy.Schema
-
-var EnablePrefixForIpv6SourceNatEnum_OFF *smithy.Schema
-
-var _EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
-}, smithy.ShapeTypeString, 0)
-
-var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum",
-}, smithy.ShapeTypeEnum, 2)
-var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on *smithy.Schema
-
-var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off *smithy.Schema
-
-var _ErrorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ErrorDescription",
-}, smithy.ShapeTypeString, 0)
-
-var FixedResponseActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "FixedResponseActionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var FixedResponseActionConfig_MessageBody *smithy.Schema
-
-var FixedResponseActionConfig_StatusCode *smithy.Schema
-
-var FixedResponseActionConfig_ContentType *smithy.Schema
-
-var _FixedResponseActionContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "FixedResponseActionContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _FixedResponseActionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "FixedResponseActionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FixedResponseActionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "FixedResponseActionStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var ForwardActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ForwardActionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ForwardActionConfig_TargetGroups *smithy.Schema
-
-var ForwardActionConfig_TargetGroupStickinessConfig *smithy.Schema
-
-var _GrpcCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GrpcCode",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthCheckEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _HealthCheckIntervalSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthCheckIntervalSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthCheckPort",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckThresholdCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthCheckThresholdCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthCheckTimeoutSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var HealthUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HealthUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "HealthUnavailable",
-		StatusCode: 500})
-var HealthUnavailableException_Message *smithy.Schema
-
-var HostHeaderConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HostHeaderConditionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var HostHeaderConditionConfig_Values *smithy.Schema
-
-var HostHeaderConditionConfig_RegexValues *smithy.Schema
-
-var HostHeaderRewriteConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HostHeaderRewriteConfig",
-}, smithy.ShapeTypeStructure, 1)
-var HostHeaderRewriteConfig_Rewrites *smithy.Schema
-
-var _HttpCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HttpCode",
-}, smithy.ShapeTypeString, 0)
-
-var HttpHeaderConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HttpHeaderConditionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var HttpHeaderConditionConfig_HttpHeaderName *smithy.Schema
-
-var HttpHeaderConditionConfig_Values *smithy.Schema
-
-var HttpHeaderConditionConfig_RegexValues *smithy.Schema
-
-var _HttpHeaderConditionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HttpHeaderConditionName",
-}, smithy.ShapeTypeString, 0)
-
-var HttpRequestMethodConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "HttpRequestMethodConditionConfig",
-}, smithy.ShapeTypeStructure, 1)
-var HttpRequestMethodConditionConfig_Values *smithy.Schema
-
-var _IgnoreClientCertificateExpiry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IgnoreClientCertificateExpiry",
-}, smithy.ShapeTypeBoolean, 0)
-
-var IncompatibleProtocolsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IncompatibleProtocolsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "IncompatibleProtocols",
-		StatusCode: 400})
-var IncompatibleProtocolsException_Message *smithy.Schema
-
-var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InsufficientCapacityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientCapacity",
-		StatusCode: 500})
-var InsufficientCapacityException_Message *smithy.Schema
-
-var InvalidCaCertificatesBundleException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidCaCertificatesBundleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidCaCertificatesBundle",
-		StatusCode: 400})
-var InvalidCaCertificatesBundleException_Message *smithy.Schema
-
-var InvalidConfigurationRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidConfigurationRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidConfigurationRequest",
-		StatusCode: 400})
-var InvalidConfigurationRequestException_Message *smithy.Schema
-
-var InvalidLoadBalancerActionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidLoadBalancerActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidLoadBalancerAction",
-		StatusCode: 400})
-var InvalidLoadBalancerActionException_Message *smithy.Schema
-
-var InvalidRevocationContentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidRevocationContentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRevocationContent",
-		StatusCode: 400})
-var InvalidRevocationContentException_Message *smithy.Schema
-
-var InvalidSchemeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidSchemeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidScheme",
-		StatusCode: 400})
-var InvalidSchemeException_Message *smithy.Schema
-
-var InvalidSecurityGroupException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidSecurityGroupException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSecurityGroup",
-		StatusCode: 400})
-var InvalidSecurityGroupException_Message *smithy.Schema
-
-var InvalidSubnetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidSubnetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
-		StatusCode: 400})
-var InvalidSubnetException_Message *smithy.Schema
-
-var InvalidTargetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "InvalidTargetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidTarget",
-		StatusCode: 400})
-var InvalidTargetException_Message *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 3)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_DUALSTACK *smithy.Schema
-
-var IpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 *smithy.Schema
-
-var _IpamPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IpamPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var IpamPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IpamPools",
-}, smithy.ShapeTypeStructure, 1)
-var IpamPools_Ipv4IpamPoolId *smithy.Schema
-
-var _IPv6Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IPv6Address",
-}, smithy.ShapeTypeString, 0)
-
-var _IsDefault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "IsDefault",
-}, smithy.ShapeTypeBoolean, 0)
-
-var JwtValidationActionAdditionalClaim = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaim",
-}, smithy.ShapeTypeStructure, 3)
-var JwtValidationActionAdditionalClaim_Format *smithy.Schema
-
-var JwtValidationActionAdditionalClaim_Name *smithy.Schema
-
-var JwtValidationActionAdditionalClaim_Values *smithy.Schema
-
-var JwtValidationActionAdditionalClaimFormatEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaimFormatEnum",
-}, smithy.ShapeTypeEnum, 3)
-var JwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING *smithy.Schema
-
-var JwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY *smithy.Schema
-
-var JwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES *smithy.Schema
-
-var _JwtValidationActionAdditionalClaimName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaimName",
-}, smithy.ShapeTypeString, 0)
-
-var _JwtValidationActionAdditionalClaims = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaims",
-}, smithy.ShapeTypeList, 1)
-var _JwtValidationActionAdditionalClaims_member *smithy.Schema
-
-var _JwtValidationActionAdditionalClaimValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaimValue",
-}, smithy.ShapeTypeString, 0)
-
-var _JwtValidationActionAdditionalClaimValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionAdditionalClaimValues",
-}, smithy.ShapeTypeList, 1)
-var _JwtValidationActionAdditionalClaimValues_member *smithy.Schema
-
-var JwtValidationActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var JwtValidationActionConfig_JwksEndpoint *smithy.Schema
-
-var JwtValidationActionConfig_Issuer *smithy.Schema
-
-var JwtValidationActionConfig_AdditionalClaims *smithy.Schema
-
-var _JwtValidationActionIssuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionIssuer",
-}, smithy.ShapeTypeString, 0)
-
-var _JwtValidationActionJwksEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "JwtValidationActionJwksEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _LastModifiedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LastModifiedTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Limit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Limit",
-}, smithy.ShapeTypeStructure, 2)
-var Limit_Name *smithy.Schema
-
-var Limit_Max *smithy.Schema
-
-var _Limits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Limits",
-}, smithy.ShapeTypeList, 1)
-var _Limits_member *smithy.Schema
-
-var Listener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Listener",
-}, smithy.ShapeTypeStructure, 9)
-var Listener_ListenerArn *smithy.Schema
-
-var Listener_LoadBalancerArn *smithy.Schema
-
-var Listener_Port *smithy.Schema
-
-var Listener_Protocol *smithy.Schema
-
-var Listener_Certificates *smithy.Schema
-
-var Listener_SslPolicy *smithy.Schema
-
-var Listener_DefaultActions *smithy.Schema
-
-var Listener_AlpnPolicy *smithy.Schema
-
-var Listener_MutualAuthentication *smithy.Schema
-
-var _ListenerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ListenerArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerArns",
-}, smithy.ShapeTypeList, 1)
-var _ListenerArns_member *smithy.Schema
-
-var ListenerAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var ListenerAttribute_Key *smithy.Schema
-
-var ListenerAttribute_Value *smithy.Schema
-
-var _ListenerAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ListenerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerAttributes",
-}, smithy.ShapeTypeList, 1)
-var _ListenerAttributes_member *smithy.Schema
-
-var _ListenerAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var ListenerNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListenerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ListenerNotFound",
-		StatusCode: 400})
-var ListenerNotFoundException_Message *smithy.Schema
-
-var _Listeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Listeners",
-}, smithy.ShapeTypeList, 1)
-var _Listeners_member *smithy.Schema
-
-var _ListOfDescribeTargetHealthIncludeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListOfDescribeTargetHealthIncludeOptions",
-}, smithy.ShapeTypeList, 1)
-var _ListOfDescribeTargetHealthIncludeOptions_member *smithy.Schema
-
-var _ListOfString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ListOfString",
-}, smithy.ShapeTypeList, 1)
-var _ListOfString_member *smithy.Schema
-
-var LoadBalancer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancer",
-}, smithy.ShapeTypeStructure, 16)
-var LoadBalancer_LoadBalancerArn *smithy.Schema
-
-var LoadBalancer_DNSName *smithy.Schema
-
-var LoadBalancer_CanonicalHostedZoneId *smithy.Schema
-
-var LoadBalancer_CreatedTime *smithy.Schema
-
-var LoadBalancer_LoadBalancerName *smithy.Schema
-
-var LoadBalancer_Scheme *smithy.Schema
-
-var LoadBalancer_VpcId *smithy.Schema
-
-var LoadBalancer_State *smithy.Schema
-
-var LoadBalancer_Type *smithy.Schema
-
-var LoadBalancer_AvailabilityZones *smithy.Schema
-
-var LoadBalancer_SecurityGroups *smithy.Schema
-
-var LoadBalancer_IpAddressType *smithy.Schema
-
-var LoadBalancer_CustomerOwnedIpv4Pool *smithy.Schema
-
-var LoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *smithy.Schema
-
-var LoadBalancer_EnablePrefixForIpv6SourceNat *smithy.Schema
-
-var LoadBalancer_IpamPools *smithy.Schema
-
-var LoadBalancerAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAddress",
-}, smithy.ShapeTypeStructure, 4)
-var LoadBalancerAddress_IpAddress *smithy.Schema
-
-var LoadBalancerAddress_AllocationId *smithy.Schema
-
-var LoadBalancerAddress_PrivateIPv4Address *smithy.Schema
-
-var LoadBalancerAddress_IPv6Address *smithy.Schema
-
-var _LoadBalancerAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAddresses",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerAddresses_member *smithy.Schema
-
-var _LoadBalancerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LoadBalancerArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerArns",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerArns_member *smithy.Schema
-
-var LoadBalancerAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var LoadBalancerAttribute_Key *smithy.Schema
-
-var LoadBalancerAttribute_Value *smithy.Schema
-
-var _LoadBalancerAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LoadBalancerAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAttributes",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerAttributes_member *smithy.Schema
-
-var _LoadBalancerAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _LoadBalancerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerName",
-}, smithy.ShapeTypeString, 0)
-
-var _LoadBalancerNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerNames",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancerNames_member *smithy.Schema
-
-var LoadBalancerNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LoadBalancerNotFound",
-		StatusCode: 400})
-var LoadBalancerNotFoundException_Message *smithy.Schema
-
-var _LoadBalancers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancers",
-}, smithy.ShapeTypeList, 1)
-var _LoadBalancers_member *smithy.Schema
-
-var LoadBalancerSchemeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerSchemeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var LoadBalancerSchemeEnum_INTERNET_FACING *smithy.Schema
-
-var LoadBalancerSchemeEnum_INTERNAL *smithy.Schema
-
-var LoadBalancerState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerState",
-}, smithy.ShapeTypeStructure, 2)
-var LoadBalancerState_Code *smithy.Schema
-
-var LoadBalancerState_Reason *smithy.Schema
-
-var LoadBalancerStateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerStateEnum",
-}, smithy.ShapeTypeEnum, 4)
-var LoadBalancerStateEnum_ACTIVE *smithy.Schema
-
-var LoadBalancerStateEnum_PROVISIONING *smithy.Schema
-
-var LoadBalancerStateEnum_ACTIVE_IMPAIRED *smithy.Schema
-
-var LoadBalancerStateEnum_FAILED *smithy.Schema
-
-var LoadBalancerTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "LoadBalancerTypeEnum",
-}, smithy.ShapeTypeEnum, 3)
-var LoadBalancerTypeEnum_APPLICATION *smithy.Schema
-
-var LoadBalancerTypeEnum_NETWORK *smithy.Schema
-
-var LoadBalancerTypeEnum_GATEWAY *smithy.Schema
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _Marker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Marker",
-}, smithy.ShapeTypeString, 0)
-
-var Matcher = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Matcher",
-}, smithy.ShapeTypeStructure, 2)
-var Matcher_HttpCode *smithy.Schema
-
-var Matcher_GrpcCode *smithy.Schema
-
-var _Max = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Max",
-}, smithy.ShapeTypeString, 0)
-
-var MinimumLoadBalancerCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "MinimumLoadBalancerCapacity",
-}, smithy.ShapeTypeStructure, 1)
-var MinimumLoadBalancerCapacity_CapacityUnits *smithy.Schema
-
-var MitigationInEffectEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "MitigationInEffectEnum",
-}, smithy.ShapeTypeEnum, 2)
-var MitigationInEffectEnum_YES *smithy.Schema
-
-var MitigationInEffectEnum_NO *smithy.Schema
-
-var _Mode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Mode",
-}, smithy.ShapeTypeString, 0)
-
-var MutualAuthenticationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "MutualAuthenticationAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var MutualAuthenticationAttributes_Mode *smithy.Schema
-
-var MutualAuthenticationAttributes_TrustStoreArn *smithy.Schema
-
-var MutualAuthenticationAttributes_IgnoreClientCertificateExpiry *smithy.Schema
-
-var MutualAuthenticationAttributes_TrustStoreAssociationStatus *smithy.Schema
-
-var MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NumberOfCaCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "NumberOfCaCertificates",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NumberOfRevokedEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "NumberOfRevokedEntries",
-}, smithy.ShapeTypeLong, 0)
-
-var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
-		StatusCode: 400})
-var OperationNotPermittedException_Message *smithy.Schema
-
-var _OutpostId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "OutpostId",
-}, smithy.ShapeTypeString, 0)
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var PathPatternConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "PathPatternConditionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var PathPatternConditionConfig_Values *smithy.Schema
-
-var PathPatternConditionConfig_RegexValues *smithy.Schema
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _Port = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Port",
-}, smithy.ShapeTypeInteger, 0)
-
-var PriorityInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "PriorityInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PriorityInUse",
-		StatusCode: 400})
-var PriorityInUseException_Message *smithy.Schema
-
-var PriorRequestNotCompleteException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "PriorRequestNotCompleteException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "PriorRequestNotComplete",
-		StatusCode: 429})
-var PriorRequestNotCompleteException_Message *smithy.Schema
-
-var _PrivateIPv4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "PrivateIPv4Address",
-}, smithy.ShapeTypeString, 0)
-
-var ProtocolEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ProtocolEnum",
-}, smithy.ShapeTypeEnum, 9)
-var ProtocolEnum_HTTP *smithy.Schema
-
-var ProtocolEnum_HTTPS *smithy.Schema
-
-var ProtocolEnum_TCP *smithy.Schema
-
-var ProtocolEnum_TLS *smithy.Schema
-
-var ProtocolEnum_UDP *smithy.Schema
-
-var ProtocolEnum_TCP_UDP *smithy.Schema
-
-var ProtocolEnum_GENEVE *smithy.Schema
-
-var ProtocolEnum_QUIC *smithy.Schema
-
-var ProtocolEnum_TCP_QUIC *smithy.Schema
-
-var _ProtocolVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ProtocolVersion",
-}, smithy.ShapeTypeString, 0)
-
-var QueryStringConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "QueryStringConditionConfig",
-}, smithy.ShapeTypeStructure, 1)
-var QueryStringConditionConfig_Values *smithy.Schema
-
-var QueryStringKeyValuePair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "QueryStringKeyValuePair",
-}, smithy.ShapeTypeStructure, 2)
-var QueryStringKeyValuePair_Key *smithy.Schema
-
-var QueryStringKeyValuePair_Value *smithy.Schema
-
-var _QueryStringKeyValuePairList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "QueryStringKeyValuePairList",
-}, smithy.ShapeTypeList, 1)
-var _QueryStringKeyValuePairList_member *smithy.Schema
-
-var _QuicServerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "QuicServerId",
-}, smithy.ShapeTypeString, 0)
-
-var RedirectActionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionConfig",
-}, smithy.ShapeTypeStructure, 6)
-var RedirectActionConfig_Protocol *smithy.Schema
-
-var RedirectActionConfig_Port *smithy.Schema
-
-var RedirectActionConfig_Host *smithy.Schema
-
-var RedirectActionConfig_Path *smithy.Schema
-
-var RedirectActionConfig_Query *smithy.Schema
-
-var RedirectActionConfig_StatusCode *smithy.Schema
-
-var _RedirectActionHost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionHost",
-}, smithy.ShapeTypeString, 0)
-
-var _RedirectActionPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionPath",
-}, smithy.ShapeTypeString, 0)
-
-var _RedirectActionPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionPort",
-}, smithy.ShapeTypeString, 0)
-
-var _RedirectActionProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var _RedirectActionQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionQuery",
-}, smithy.ShapeTypeString, 0)
-
-var RedirectActionStatusCodeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RedirectActionStatusCodeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var RedirectActionStatusCodeEnum_HTTP_301 *smithy.Schema
-
-var RedirectActionStatusCodeEnum_HTTP_302 *smithy.Schema
-
-var RemoveIpamPoolEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveIpamPoolEnum",
-}, smithy.ShapeTypeEnum, 1)
-var RemoveIpamPoolEnum_ipv4 *smithy.Schema
-
-var _RemoveIpamPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveIpamPools",
-}, smithy.ShapeTypeList, 1)
-var _RemoveIpamPools_member *smithy.Schema
-
-var _ResetCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResetCapacityReservation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ResetTransforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResetTransforms",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResourceArns",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArns_member *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceInUse",
-		StatusCode: 400})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 400})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RevocationContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationContent",
-}, smithy.ShapeTypeStructure, 4)
-var RevocationContent_S3Bucket *smithy.Schema
-
-var RevocationContent_S3Key *smithy.Schema
-
-var RevocationContent_S3ObjectVersion *smithy.Schema
-
-var RevocationContent_RevocationType *smithy.Schema
-
-var RevocationContentNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationContentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "RevocationContentNotFound",
-		StatusCode: 400})
-var RevocationContentNotFoundException_Message *smithy.Schema
-
-var _RevocationContents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationContents",
-}, smithy.ShapeTypeList, 1)
-var _RevocationContents_member *smithy.Schema
-
-var _RevocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationId",
-}, smithy.ShapeTypeLong, 0)
-
-var RevocationIdNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationIdNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "RevocationIdNotFound",
-		StatusCode: 400})
-var RevocationIdNotFoundException_Message *smithy.Schema
-
-var _RevocationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationIds",
-}, smithy.ShapeTypeList, 1)
-var _RevocationIds_member *smithy.Schema
-
-var RevocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RevocationType",
-}, smithy.ShapeTypeEnum, 1)
-var RevocationType_CRL *smithy.Schema
-
-var RewriteConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RewriteConfig",
-}, smithy.ShapeTypeStructure, 2)
-var RewriteConfig_Regex *smithy.Schema
-
-var RewriteConfig_Replace *smithy.Schema
-
-var _RewriteConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RewriteConfigList",
-}, smithy.ShapeTypeList, 1)
-var _RewriteConfigList_member *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 6)
-var Rule_RuleArn *smithy.Schema
-
-var Rule_Priority *smithy.Schema
-
-var Rule_Conditions *smithy.Schema
-
-var Rule_Actions *smithy.Schema
-
-var Rule_IsDefault *smithy.Schema
-
-var Rule_Transforms *smithy.Schema
-
-var _RuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleArns",
-}, smithy.ShapeTypeList, 1)
-var _RuleArns_member *smithy.Schema
-
-var RuleCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleCondition",
-}, smithy.ShapeTypeStructure, 9)
-var RuleCondition_Field *smithy.Schema
-
-var RuleCondition_Values *smithy.Schema
-
-var RuleCondition_HostHeaderConfig *smithy.Schema
-
-var RuleCondition_PathPatternConfig *smithy.Schema
-
-var RuleCondition_HttpHeaderConfig *smithy.Schema
-
-var RuleCondition_QueryStringConfig *smithy.Schema
-
-var RuleCondition_HttpRequestMethodConfig *smithy.Schema
-
-var RuleCondition_SourceIpConfig *smithy.Schema
-
-var RuleCondition_RegexValues *smithy.Schema
-
-var _RuleConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleConditionList",
-}, smithy.ShapeTypeList, 1)
-var _RuleConditionList_member *smithy.Schema
-
-var RuleNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "RuleNotFound",
-		StatusCode: 400})
-var RuleNotFoundException_Message *smithy.Schema
-
-var _RulePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RulePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RulePriorityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RulePriorityList",
-}, smithy.ShapeTypeList, 1)
-var _RulePriorityList_member *smithy.Schema
-
-var RulePriorityPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RulePriorityPair",
-}, smithy.ShapeTypeStructure, 2)
-var RulePriorityPair_RuleArn *smithy.Schema
-
-var RulePriorityPair_Priority *smithy.Schema
-
-var _Rules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Rules",
-}, smithy.ShapeTypeList, 1)
-var _Rules_member *smithy.Schema
-
-var RuleTransform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleTransform",
-}, smithy.ShapeTypeStructure, 3)
-var RuleTransform_Type *smithy.Schema
-
-var RuleTransform_HostHeaderRewriteConfig *smithy.Schema
-
-var RuleTransform_UrlRewriteConfig *smithy.Schema
-
-var _RuleTransformList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RuleTransformList",
-}, smithy.ShapeTypeList, 1)
-var _RuleTransformList_member *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "S3ObjectVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SecurityGroups",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroups_member *smithy.Schema
-
-var SourceIpAddressTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SourceIpAddressTypeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var SourceIpAddressTypeEnum_IPV4 *smithy.Schema
-
-var SourceIpAddressTypeEnum_IPV6 *smithy.Schema
-
-var SourceIpConditionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SourceIpConditionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var SourceIpConditionConfig_Values *smithy.Schema
-
-var SourceIpConditionConfig_IpAddressType *smithy.Schema
-
-var _SourceNatIpv6Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SourceNatIpv6Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceNatIpv6Prefixes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SourceNatIpv6Prefixes",
-}, smithy.ShapeTypeList, 1)
-var _SourceNatIpv6Prefixes_member *smithy.Schema
-
-var _SslPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslPolicies",
-}, smithy.ShapeTypeList, 1)
-var _SslPolicies_member *smithy.Schema
-
-var SslPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslPolicy",
-}, smithy.ShapeTypeStructure, 4)
-var SslPolicy_SslProtocols *smithy.Schema
-
-var SslPolicy_Ciphers *smithy.Schema
-
-var SslPolicy_Name *smithy.Schema
-
-var SslPolicy_SupportedLoadBalancerTypes *smithy.Schema
-
-var _SslPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _SslPolicyNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslPolicyNames",
-}, smithy.ShapeTypeList, 1)
-var _SslPolicyNames_member *smithy.Schema
-
-var SSLPolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SSLPolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SSLPolicyNotFound",
-		StatusCode: 400})
-var SSLPolicyNotFoundException_Message *smithy.Schema
-
-var _SslProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var _SslProtocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SslProtocols",
-}, smithy.ShapeTypeList, 1)
-var _SslProtocols_member *smithy.Schema
-
-var _StateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "StateReason",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "StringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var SubnetMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SubnetMapping",
-}, smithy.ShapeTypeStructure, 5)
-var SubnetMapping_SubnetId *smithy.Schema
-
-var SubnetMapping_AllocationId *smithy.Schema
-
-var SubnetMapping_PrivateIPv4Address *smithy.Schema
-
-var SubnetMapping_IPv6Address *smithy.Schema
-
-var SubnetMapping_SourceNatIpv6Prefix *smithy.Schema
-
-var _SubnetMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SubnetMappings",
-}, smithy.ShapeTypeList, 1)
-var _SubnetMappings_member *smithy.Schema
-
-var SubnetNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SubnetNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SubnetNotFound",
-		StatusCode: 400})
-var SubnetNotFoundException_Message *smithy.Schema
-
-var _Subnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Subnets",
-}, smithy.ShapeTypeList, 1)
-var _Subnets_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var TagDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagDescription",
-}, smithy.ShapeTypeStructure, 2)
-var TagDescription_ResourceArn *smithy.Schema
-
-var TagDescription_Tags *smithy.Schema
-
-var _TagDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _TagDescriptions_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetAdministrativeOverrideReasonEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetAdministrativeOverrideReasonEnum",
-}, smithy.ShapeTypeEnum, 4)
-var TargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR *smithy.Schema
-
-var TargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED *smithy.Schema
-
-var TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED *smithy.Schema
-
-var TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS *smithy.Schema
-
-var TargetAdministrativeOverrideStateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetAdministrativeOverrideStateEnum",
-}, smithy.ShapeTypeEnum, 4)
-var TargetAdministrativeOverrideStateEnum_UNKNOWN *smithy.Schema
-
-var TargetAdministrativeOverrideStateEnum_NO_OVERRIDE *smithy.Schema
-
-var TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE *smithy.Schema
-
-var TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS *smithy.Schema
-
-var _TargetControlPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetControlPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var TargetDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetDescription",
-}, smithy.ShapeTypeStructure, 4)
-var TargetDescription_Id *smithy.Schema
-
-var TargetDescription_Port *smithy.Schema
-
-var TargetDescription_AvailabilityZone *smithy.Schema
-
-var TargetDescription_QuicServerId *smithy.Schema
-
-var _TargetDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _TargetDescriptions_member *smithy.Schema
-
-var TargetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroup",
-}, smithy.ShapeTypeStructure, 19)
-var TargetGroup_TargetGroupArn *smithy.Schema
-
-var TargetGroup_TargetGroupName *smithy.Schema
-
-var TargetGroup_Protocol *smithy.Schema
-
-var TargetGroup_Port *smithy.Schema
-
-var TargetGroup_VpcId *smithy.Schema
-
-var TargetGroup_HealthCheckProtocol *smithy.Schema
-
-var TargetGroup_HealthCheckPort *smithy.Schema
-
-var TargetGroup_HealthCheckEnabled *smithy.Schema
-
-var TargetGroup_HealthCheckIntervalSeconds *smithy.Schema
-
-var TargetGroup_HealthCheckTimeoutSeconds *smithy.Schema
-
-var TargetGroup_HealthyThresholdCount *smithy.Schema
-
-var TargetGroup_UnhealthyThresholdCount *smithy.Schema
-
-var TargetGroup_HealthCheckPath *smithy.Schema
-
-var TargetGroup_Matcher *smithy.Schema
-
-var TargetGroup_LoadBalancerArns *smithy.Schema
-
-var TargetGroup_TargetType *smithy.Schema
-
-var TargetGroup_ProtocolVersion *smithy.Schema
-
-var TargetGroup_IpAddressType *smithy.Schema
-
-var TargetGroup_TargetControlPort *smithy.Schema
-
-var _TargetGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetGroupArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupArns",
-}, smithy.ShapeTypeList, 1)
-var _TargetGroupArns_member *smithy.Schema
-
-var TargetGroupAssociationLimitException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupAssociationLimitException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TargetGroupAssociationLimit",
-		StatusCode: 400})
-var TargetGroupAssociationLimitException_Message *smithy.Schema
-
-var TargetGroupAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var TargetGroupAttribute_Key *smithy.Schema
-
-var TargetGroupAttribute_Value *smithy.Schema
-
-var _TargetGroupAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetGroupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupAttributes",
-}, smithy.ShapeTypeList, 1)
-var _TargetGroupAttributes_member *smithy.Schema
-
-var _TargetGroupAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetGroupIpAddressTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupIpAddressTypeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var TargetGroupIpAddressTypeEnum_IPV4 *smithy.Schema
-
-var TargetGroupIpAddressTypeEnum_IPV6 *smithy.Schema
-
-var _TargetGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupList",
-}, smithy.ShapeTypeList, 1)
-var _TargetGroupList_member *smithy.Schema
-
-var _TargetGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetGroupNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupNames",
-}, smithy.ShapeTypeList, 1)
-var _TargetGroupNames_member *smithy.Schema
-
-var TargetGroupNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TargetGroupNotFound",
-		StatusCode: 400})
-var TargetGroupNotFoundException_Message *smithy.Schema
-
-var _TargetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroups",
-}, smithy.ShapeTypeList, 1)
-var _TargetGroups_member *smithy.Schema
-
-var TargetGroupStickinessConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupStickinessConfig",
-}, smithy.ShapeTypeStructure, 2)
-var TargetGroupStickinessConfig_Enabled *smithy.Schema
-
-var TargetGroupStickinessConfig_DurationSeconds *smithy.Schema
-
-var _TargetGroupStickinessDurationSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupStickinessDurationSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TargetGroupStickinessEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupStickinessEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var TargetGroupTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupTuple",
-}, smithy.ShapeTypeStructure, 2)
-var TargetGroupTuple_TargetGroupArn *smithy.Schema
-
-var TargetGroupTuple_Weight *smithy.Schema
-
-var _TargetGroupWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetGroupWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var TargetHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetHealth",
-}, smithy.ShapeTypeStructure, 3)
-var TargetHealth_State *smithy.Schema
-
-var TargetHealth_Reason *smithy.Schema
-
-var TargetHealth_Description *smithy.Schema
-
-var TargetHealthDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetHealthDescription",
-}, smithy.ShapeTypeStructure, 5)
-var TargetHealthDescription_Target *smithy.Schema
-
-var TargetHealthDescription_HealthCheckPort *smithy.Schema
-
-var TargetHealthDescription_TargetHealth *smithy.Schema
-
-var TargetHealthDescription_AnomalyDetection *smithy.Schema
-
-var TargetHealthDescription_AdministrativeOverride *smithy.Schema
-
-var _TargetHealthDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetHealthDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _TargetHealthDescriptions_member *smithy.Schema
-
-var TargetHealthReasonEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetHealthReasonEnum",
-}, smithy.ShapeTypeEnum, 12)
-var TargetHealthReasonEnum_REGISTRATION_IN_PROGRESS *smithy.Schema
-
-var TargetHealthReasonEnum_INITIAL_HEALTH_CHECKING *smithy.Schema
-
-var TargetHealthReasonEnum_RESPONSE_CODE_MISMATCH *smithy.Schema
-
-var TargetHealthReasonEnum_TIMEOUT *smithy.Schema
-
-var TargetHealthReasonEnum_FAILED_HEALTH_CHECKS *smithy.Schema
-
-var TargetHealthReasonEnum_NOT_REGISTERED *smithy.Schema
-
-var TargetHealthReasonEnum_NOT_IN_USE *smithy.Schema
-
-var TargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS *smithy.Schema
-
-var TargetHealthReasonEnum_INVALID_STATE *smithy.Schema
-
-var TargetHealthReasonEnum_IP_UNUSABLE *smithy.Schema
-
-var TargetHealthReasonEnum_HEALTH_CHECK_DISABLED *smithy.Schema
-
-var TargetHealthReasonEnum_INTERNAL_ERROR *smithy.Schema
-
-var TargetHealthStateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetHealthStateEnum",
-}, smithy.ShapeTypeEnum, 7)
-var TargetHealthStateEnum_INITIAL *smithy.Schema
-
-var TargetHealthStateEnum_HEALTHY *smithy.Schema
-
-var TargetHealthStateEnum_UNHEALTHY *smithy.Schema
-
-var TargetHealthStateEnum_UNHEALTHY_DRAINING *smithy.Schema
-
-var TargetHealthStateEnum_UNUSED *smithy.Schema
-
-var TargetHealthStateEnum_DRAINING *smithy.Schema
-
-var TargetHealthStateEnum_UNAVAILABLE *smithy.Schema
-
-var _TargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetId",
-}, smithy.ShapeTypeString, 0)
-
-var TargetTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TargetTypeEnum",
-}, smithy.ShapeTypeEnum, 4)
-var TargetTypeEnum_INSTANCE *smithy.Schema
-
-var TargetTypeEnum_IP *smithy.Schema
-
-var TargetTypeEnum_LAMBDA *smithy.Schema
-
-var TargetTypeEnum_ALB *smithy.Schema
-
-var TooManyActionsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyActionsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyActions",
-		StatusCode: 400})
-var TooManyActionsException_Message *smithy.Schema
-
-var TooManyCertificatesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyCertificatesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyCertificates",
-		StatusCode: 400})
-var TooManyCertificatesException_Message *smithy.Schema
-
-var TooManyListenersException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyListenersException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyListeners",
-		StatusCode: 400})
-var TooManyListenersException_Message *smithy.Schema
-
-var TooManyLoadBalancersException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyLoadBalancersException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyLoadBalancers",
-		StatusCode: 400})
-var TooManyLoadBalancersException_Message *smithy.Schema
-
-var TooManyRegistrationsForTargetIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyRegistrationsForTargetIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyRegistrationsForTargetId",
-		StatusCode: 400})
-var TooManyRegistrationsForTargetIdException_Message *smithy.Schema
-
-var TooManyRulesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyRulesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyRules",
-		StatusCode: 400})
-var TooManyRulesException_Message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTags",
-		StatusCode: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTargetGroupsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyTargetGroupsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTargetGroups",
-		StatusCode: 400})
-var TooManyTargetGroupsException_Message *smithy.Schema
-
-var TooManyTargetsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyTargetsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTargets",
-		StatusCode: 400})
-var TooManyTargetsException_Message *smithy.Schema
-
-var TooManyTrustStoreRevocationEntriesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyTrustStoreRevocationEntriesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTrustStoreRevocationEntries",
-		StatusCode: 400})
-var TooManyTrustStoreRevocationEntriesException_Message *smithy.Schema
-
-var TooManyTrustStoresException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyTrustStoresException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyTrustStores",
-		StatusCode: 400})
-var TooManyTrustStoresException_Message *smithy.Schema
-
-var TooManyUniqueTargetGroupsPerLoadBalancerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TooManyUniqueTargetGroupsPerLoadBalancerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyUniqueTargetGroupsPerLoadBalancer",
-		StatusCode: 400})
-var TooManyUniqueTargetGroupsPerLoadBalancerException_Message *smithy.Schema
-
-var _TotalRevokedEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TotalRevokedEntries",
-}, smithy.ShapeTypeLong, 0)
-
-var TransformTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TransformTypeEnum",
-}, smithy.ShapeTypeEnum, 2)
-var TransformTypeEnum_HOST_HEADER_REWRITE *smithy.Schema
-
-var TransformTypeEnum_URL_REWRITE *smithy.Schema
-
-var TrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStore",
-}, smithy.ShapeTypeStructure, 5)
-var TrustStore_Name *smithy.Schema
-
-var TrustStore_TrustStoreArn *smithy.Schema
-
-var TrustStore_Status *smithy.Schema
-
-var TrustStore_NumberOfCaCertificates *smithy.Schema
-
-var TrustStore_TotalRevokedEntries *smithy.Schema
-
-var _TrustStoreArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TrustStoreArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreArns",
-}, smithy.ShapeTypeList, 1)
-var _TrustStoreArns_member *smithy.Schema
-
-var TrustStoreAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreAssociation",
-}, smithy.ShapeTypeStructure, 1)
-var TrustStoreAssociation_ResourceArn *smithy.Schema
-
-var TrustStoreAssociationNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreAssociationNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AssociationNotFound",
-		StatusCode: 400})
-var TrustStoreAssociationNotFoundException_Message *smithy.Schema
-
-var _TrustStoreAssociationResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreAssociationResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TrustStoreAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreAssociations",
-}, smithy.ShapeTypeList, 1)
-var _TrustStoreAssociations_member *smithy.Schema
-
-var TrustStoreAssociationStatusEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreAssociationStatusEnum",
-}, smithy.ShapeTypeEnum, 2)
-var TrustStoreAssociationStatusEnum_ACTIVE *smithy.Schema
-
-var TrustStoreAssociationStatusEnum_REMOVED *smithy.Schema
-
-var TrustStoreInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TrustStoreInUse",
-		StatusCode: 400})
-var TrustStoreInUseException_Message *smithy.Schema
-
-var _TrustStoreName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreName",
-}, smithy.ShapeTypeString, 0)
-
-var _TrustStoreNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreNames",
-}, smithy.ShapeTypeList, 1)
-var _TrustStoreNames_member *smithy.Schema
-
-var TrustStoreNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TrustStoreNotFound",
-		StatusCode: 400})
-var TrustStoreNotFoundException_Message *smithy.Schema
-
-var TrustStoreNotReadyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TrustStoreNotReady",
-		StatusCode: 400})
-var TrustStoreNotReadyException_Message *smithy.Schema
-
-var TrustStoreRevocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreRevocation",
-}, smithy.ShapeTypeStructure, 4)
-var TrustStoreRevocation_TrustStoreArn *smithy.Schema
-
-var TrustStoreRevocation_RevocationId *smithy.Schema
-
-var TrustStoreRevocation_RevocationType *smithy.Schema
-
-var TrustStoreRevocation_NumberOfRevokedEntries *smithy.Schema
-
-var _TrustStoreRevocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreRevocations",
-}, smithy.ShapeTypeList, 1)
-var _TrustStoreRevocations_member *smithy.Schema
-
-var _TrustStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStores",
-}, smithy.ShapeTypeList, 1)
-var _TrustStores_member *smithy.Schema
-
-var TrustStoreStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "TrustStoreStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TrustStoreStatus_ACTIVE *smithy.Schema
-
-var TrustStoreStatus_CREATING *smithy.Schema
-
-var UnsupportedProtocolException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "UnsupportedProtocolException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedProtocol",
-		StatusCode: 400})
-var UnsupportedProtocolException_Message *smithy.Schema
-
-var UrlRewriteConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "UrlRewriteConfig",
-}, smithy.ShapeTypeStructure, 1)
-var UrlRewriteConfig_Rewrites *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var ZonalCapacityReservationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ZonalCapacityReservationState",
-}, smithy.ShapeTypeStructure, 3)
-var ZonalCapacityReservationState_State *smithy.Schema
-
-var ZonalCapacityReservationState_AvailabilityZone *smithy.Schema
-
-var ZonalCapacityReservationState_EffectiveCapacityUnits *smithy.Schema
-
-var _ZonalCapacityReservationStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ZonalCapacityReservationStates",
-}, smithy.ShapeTypeList, 1)
-var _ZonalCapacityReservationStates_member *smithy.Schema
-
-var _ZoneName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ZoneName",
-}, smithy.ShapeTypeString, 0)
-
-var AddListenerCertificatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddListenerCertificatesInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddListenerCertificatesInput_ListenerArn *smithy.Schema
-
-var AddListenerCertificatesInput_Certificates *smithy.Schema
-
-var AddListenerCertificatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddListenerCertificatesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddListenerCertificatesOutput_Certificates *smithy.Schema
-
-var AddTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsInput_ResourceArns *smithy.Schema
-
-var AddTagsInput_Tags *smithy.Schema
-
-var AddTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var AddTrustStoreRevocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTrustStoreRevocationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTrustStoreRevocationsInput_TrustStoreArn *smithy.Schema
-
-var AddTrustStoreRevocationsInput_RevocationContents *smithy.Schema
-
-var AddTrustStoreRevocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "AddTrustStoreRevocationsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddTrustStoreRevocationsOutput_TrustStoreRevocations *smithy.Schema
-
-var CreateListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateListenerInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateListenerInput_LoadBalancerArn *smithy.Schema
-
-var CreateListenerInput_Protocol *smithy.Schema
-
-var CreateListenerInput_Port *smithy.Schema
-
-var CreateListenerInput_SslPolicy *smithy.Schema
-
-var CreateListenerInput_Certificates *smithy.Schema
-
-var CreateListenerInput_DefaultActions *smithy.Schema
-
-var CreateListenerInput_AlpnPolicy *smithy.Schema
-
-var CreateListenerInput_Tags *smithy.Schema
-
-var CreateListenerInput_MutualAuthentication *smithy.Schema
-
-var CreateListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateListenerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateListenerOutput_Listeners *smithy.Schema
-
-var CreateLoadBalancerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateLoadBalancerInput",
-}, smithy.ShapeTypeStructure, 11)
-var CreateLoadBalancerInput_Name *smithy.Schema
-
-var CreateLoadBalancerInput_Subnets *smithy.Schema
-
-var CreateLoadBalancerInput_SubnetMappings *smithy.Schema
-
-var CreateLoadBalancerInput_SecurityGroups *smithy.Schema
-
-var CreateLoadBalancerInput_Scheme *smithy.Schema
-
-var CreateLoadBalancerInput_Tags *smithy.Schema
-
-var CreateLoadBalancerInput_Type *smithy.Schema
-
-var CreateLoadBalancerInput_IpAddressType *smithy.Schema
-
-var CreateLoadBalancerInput_CustomerOwnedIpv4Pool *smithy.Schema
-
-var CreateLoadBalancerInput_EnablePrefixForIpv6SourceNat *smithy.Schema
-
-var CreateLoadBalancerInput_IpamPools *smithy.Schema
-
-var CreateLoadBalancerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateLoadBalancerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLoadBalancerOutput_LoadBalancers *smithy.Schema
-
-var CreateRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateRuleInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRuleInput_ListenerArn *smithy.Schema
-
-var CreateRuleInput_Conditions *smithy.Schema
-
-var CreateRuleInput_Priority *smithy.Schema
-
-var CreateRuleInput_Actions *smithy.Schema
-
-var CreateRuleInput_Tags *smithy.Schema
-
-var CreateRuleInput_Transforms *smithy.Schema
-
-var CreateRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateRuleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRuleOutput_Rules *smithy.Schema
-
-var CreateTargetGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTargetGroupInput",
-}, smithy.ShapeTypeStructure, 18)
-var CreateTargetGroupInput_Name *smithy.Schema
-
-var CreateTargetGroupInput_Protocol *smithy.Schema
-
-var CreateTargetGroupInput_ProtocolVersion *smithy.Schema
-
-var CreateTargetGroupInput_Port *smithy.Schema
-
-var CreateTargetGroupInput_VpcId *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckProtocol *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckPort *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckEnabled *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckPath *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckIntervalSeconds *smithy.Schema
-
-var CreateTargetGroupInput_HealthCheckTimeoutSeconds *smithy.Schema
-
-var CreateTargetGroupInput_HealthyThresholdCount *smithy.Schema
-
-var CreateTargetGroupInput_UnhealthyThresholdCount *smithy.Schema
-
-var CreateTargetGroupInput_Matcher *smithy.Schema
-
-var CreateTargetGroupInput_TargetType *smithy.Schema
-
-var CreateTargetGroupInput_Tags *smithy.Schema
-
-var CreateTargetGroupInput_IpAddressType *smithy.Schema
-
-var CreateTargetGroupInput_TargetControlPort *smithy.Schema
-
-var CreateTargetGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTargetGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTargetGroupOutput_TargetGroups *smithy.Schema
-
-var CreateTrustStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTrustStoreInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTrustStoreInput_Name *smithy.Schema
-
-var CreateTrustStoreInput_CaCertificatesBundleS3Bucket *smithy.Schema
-
-var CreateTrustStoreInput_CaCertificatesBundleS3Key *smithy.Schema
-
-var CreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion *smithy.Schema
-
-var CreateTrustStoreInput_Tags *smithy.Schema
-
-var CreateTrustStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "CreateTrustStoreOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTrustStoreOutput_TrustStores *smithy.Schema
-
-var DeleteListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteListenerInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteListenerInput_ListenerArn *smithy.Schema
-
-var DeleteListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteListenerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLoadBalancerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteLoadBalancerInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLoadBalancerInput_LoadBalancerArn *smithy.Schema
-
-var DeleteLoadBalancerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteLoadBalancerOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleInput_RuleArn *smithy.Schema
-
-var DeleteRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteRuleOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSharedTrustStoreAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteSharedTrustStoreAssociationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSharedTrustStoreAssociationInput_TrustStoreArn *smithy.Schema
-
-var DeleteSharedTrustStoreAssociationInput_ResourceArn *smithy.Schema
-
-var DeleteSharedTrustStoreAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteSharedTrustStoreAssociationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTargetGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTargetGroupInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTargetGroupInput_TargetGroupArn *smithy.Schema
-
-var DeleteTargetGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTargetGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTrustStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTrustStoreInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrustStoreInput_TrustStoreArn *smithy.Schema
-
-var DeleteTrustStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeleteTrustStoreOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterTargetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeregisterTargetsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterTargetsInput_TargetGroupArn *smithy.Schema
-
-var DeregisterTargetsInput_Targets *smithy.Schema
-
-var DeregisterTargetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DeregisterTargetsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAccountLimitsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeAccountLimitsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccountLimitsInput_Marker *smithy.Schema
-
-var DescribeAccountLimitsInput_PageSize *smithy.Schema
-
-var DescribeAccountLimitsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeAccountLimitsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccountLimitsOutput_Limits *smithy.Schema
-
-var DescribeAccountLimitsOutput_NextMarker *smithy.Schema
-
-var DescribeCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCapacityReservationInput_LoadBalancerArn *smithy.Schema
-
-var DescribeCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeCapacityReservationOutput_LastModifiedTime *smithy.Schema
-
-var DescribeCapacityReservationOutput_DecreaseRequestsRemaining *smithy.Schema
-
-var DescribeCapacityReservationOutput_MinimumLoadBalancerCapacity *smithy.Schema
-
-var DescribeCapacityReservationOutput_CapacityReservationState *smithy.Schema
-
-var DescribeListenerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeListenerAttributesInput_ListenerArn *smithy.Schema
-
-var DescribeListenerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeListenerAttributesOutput_Attributes *smithy.Schema
-
-var DescribeListenerCertificatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerCertificatesInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeListenerCertificatesInput_ListenerArn *smithy.Schema
-
-var DescribeListenerCertificatesInput_Marker *smithy.Schema
-
-var DescribeListenerCertificatesInput_PageSize *smithy.Schema
-
-var DescribeListenerCertificatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenerCertificatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeListenerCertificatesOutput_Certificates *smithy.Schema
-
-var DescribeListenerCertificatesOutput_NextMarker *smithy.Schema
-
-var DescribeListenersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenersInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeListenersInput_LoadBalancerArn *smithy.Schema
-
-var DescribeListenersInput_ListenerArns *smithy.Schema
-
-var DescribeListenersInput_Marker *smithy.Schema
-
-var DescribeListenersInput_PageSize *smithy.Schema
-
-var DescribeListenersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeListenersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeListenersOutput_Listeners *smithy.Schema
-
-var DescribeListenersOutput_NextMarker *smithy.Schema
-
-var DescribeLoadBalancerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancerAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerAttributesInput_LoadBalancerArn *smithy.Schema
-
-var DescribeLoadBalancerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancerAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoadBalancerAttributesOutput_Attributes *smithy.Schema
-
-var DescribeLoadBalancersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancersInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeLoadBalancersInput_LoadBalancerArns *smithy.Schema
-
-var DescribeLoadBalancersInput_Names *smithy.Schema
-
-var DescribeLoadBalancersInput_Marker *smithy.Schema
-
-var DescribeLoadBalancersInput_PageSize *smithy.Schema
-
-var DescribeLoadBalancersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeLoadBalancersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLoadBalancersOutput_LoadBalancers *smithy.Schema
-
-var DescribeLoadBalancersOutput_NextMarker *smithy.Schema
-
-var DescribeRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeRulesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeRulesInput_ListenerArn *smithy.Schema
-
-var DescribeRulesInput_RuleArns *smithy.Schema
-
-var DescribeRulesInput_Marker *smithy.Schema
-
-var DescribeRulesInput_PageSize *smithy.Schema
-
-var DescribeRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRulesOutput_Rules *smithy.Schema
-
-var DescribeRulesOutput_NextMarker *smithy.Schema
-
-var DescribeSSLPoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeSSLPoliciesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeSSLPoliciesInput_Names *smithy.Schema
-
-var DescribeSSLPoliciesInput_Marker *smithy.Schema
-
-var DescribeSSLPoliciesInput_PageSize *smithy.Schema
-
-var DescribeSSLPoliciesInput_LoadBalancerType *smithy.Schema
-
-var DescribeSSLPoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeSSLPoliciesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSSLPoliciesOutput_SslPolicies *smithy.Schema
-
-var DescribeSSLPoliciesOutput_NextMarker *smithy.Schema
-
-var DescribeTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTagsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsInput_ResourceArns *smithy.Schema
-
-var DescribeTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTagsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsOutput_TagDescriptions *smithy.Schema
-
-var DescribeTargetGroupAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroupAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTargetGroupAttributesInput_TargetGroupArn *smithy.Schema
-
-var DescribeTargetGroupAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroupAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTargetGroupAttributesOutput_Attributes *smithy.Schema
-
-var DescribeTargetGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroupsInput",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeTargetGroupsInput_LoadBalancerArn *smithy.Schema
-
-var DescribeTargetGroupsInput_TargetGroupArns *smithy.Schema
-
-var DescribeTargetGroupsInput_Names *smithy.Schema
-
-var DescribeTargetGroupsInput_Marker *smithy.Schema
-
-var DescribeTargetGroupsInput_PageSize *smithy.Schema
-
-var DescribeTargetGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTargetGroupsOutput_TargetGroups *smithy.Schema
-
-var DescribeTargetGroupsOutput_NextMarker *smithy.Schema
-
-var DescribeTargetHealthInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetHealthInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTargetHealthInput_TargetGroupArn *smithy.Schema
-
-var DescribeTargetHealthInput_Targets *smithy.Schema
-
-var DescribeTargetHealthInput_Include *smithy.Schema
-
-var DescribeTargetHealthOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTargetHealthOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTargetHealthOutput_TargetHealthDescriptions *smithy.Schema
-
-var DescribeTrustStoreAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreAssociationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTrustStoreAssociationsInput_TrustStoreArn *smithy.Schema
-
-var DescribeTrustStoreAssociationsInput_Marker *smithy.Schema
-
-var DescribeTrustStoreAssociationsInput_PageSize *smithy.Schema
-
-var DescribeTrustStoreAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreAssociationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTrustStoreAssociationsOutput_TrustStoreAssociations *smithy.Schema
-
-var DescribeTrustStoreAssociationsOutput_NextMarker *smithy.Schema
-
-var DescribeTrustStoreRevocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreRevocationsInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTrustStoreRevocationsInput_TrustStoreArn *smithy.Schema
-
-var DescribeTrustStoreRevocationsInput_RevocationIds *smithy.Schema
-
-var DescribeTrustStoreRevocationsInput_Marker *smithy.Schema
-
-var DescribeTrustStoreRevocationsInput_PageSize *smithy.Schema
-
-var DescribeTrustStoreRevocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoreRevocationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTrustStoreRevocationsOutput_TrustStoreRevocations *smithy.Schema
-
-var DescribeTrustStoreRevocationsOutput_NextMarker *smithy.Schema
-
-var DescribeTrustStoresInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoresInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTrustStoresInput_TrustStoreArns *smithy.Schema
-
-var DescribeTrustStoresInput_Names *smithy.Schema
-
-var DescribeTrustStoresInput_Marker *smithy.Schema
-
-var DescribeTrustStoresInput_PageSize *smithy.Schema
-
-var DescribeTrustStoresOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "DescribeTrustStoresOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTrustStoresOutput_TrustStores *smithy.Schema
-
-var DescribeTrustStoresOutput_NextMarker *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyInput_ResourceArn *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyOutput_Policy *smithy.Schema
-
-var GetTrustStoreCaCertificatesBundleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreCaCertificatesBundleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrustStoreCaCertificatesBundleInput_TrustStoreArn *smithy.Schema
-
-var GetTrustStoreCaCertificatesBundleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreCaCertificatesBundleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrustStoreCaCertificatesBundleOutput_Location *smithy.Schema
-
-var GetTrustStoreRevocationContentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreRevocationContentInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTrustStoreRevocationContentInput_TrustStoreArn *smithy.Schema
-
-var GetTrustStoreRevocationContentInput_RevocationId *smithy.Schema
-
-var GetTrustStoreRevocationContentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "GetTrustStoreRevocationContentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrustStoreRevocationContentOutput_Location *smithy.Schema
-
-var ModifyCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 3)
-var ModifyCapacityReservationInput_LoadBalancerArn *smithy.Schema
-
-var ModifyCapacityReservationInput_MinimumLoadBalancerCapacity *smithy.Schema
-
-var ModifyCapacityReservationInput_ResetCapacityReservation *smithy.Schema
-
-var ModifyCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ModifyCapacityReservationOutput_LastModifiedTime *smithy.Schema
-
-var ModifyCapacityReservationOutput_DecreaseRequestsRemaining *smithy.Schema
-
-var ModifyCapacityReservationOutput_MinimumLoadBalancerCapacity *smithy.Schema
-
-var ModifyCapacityReservationOutput_CapacityReservationState *smithy.Schema
-
-var ModifyIpPoolsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyIpPoolsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ModifyIpPoolsInput_LoadBalancerArn *smithy.Schema
-
-var ModifyIpPoolsInput_IpamPools *smithy.Schema
-
-var ModifyIpPoolsInput_RemoveIpamPools *smithy.Schema
-
-var ModifyIpPoolsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyIpPoolsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyIpPoolsOutput_IpamPools *smithy.Schema
-
-var ModifyListenerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListenerAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyListenerAttributesInput_ListenerArn *smithy.Schema
-
-var ModifyListenerAttributesInput_Attributes *smithy.Schema
-
-var ModifyListenerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListenerAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyListenerAttributesOutput_Attributes *smithy.Schema
-
-var ModifyListenerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListenerInput",
-}, smithy.ShapeTypeStructure, 8)
-var ModifyListenerInput_ListenerArn *smithy.Schema
-
-var ModifyListenerInput_Port *smithy.Schema
-
-var ModifyListenerInput_Protocol *smithy.Schema
-
-var ModifyListenerInput_SslPolicy *smithy.Schema
-
-var ModifyListenerInput_Certificates *smithy.Schema
-
-var ModifyListenerInput_DefaultActions *smithy.Schema
-
-var ModifyListenerInput_AlpnPolicy *smithy.Schema
-
-var ModifyListenerInput_MutualAuthentication *smithy.Schema
-
-var ModifyListenerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyListenerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyListenerOutput_Listeners *smithy.Schema
-
-var ModifyLoadBalancerAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyLoadBalancerAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyLoadBalancerAttributesInput_LoadBalancerArn *smithy.Schema
-
-var ModifyLoadBalancerAttributesInput_Attributes *smithy.Schema
-
-var ModifyLoadBalancerAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyLoadBalancerAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyLoadBalancerAttributesOutput_Attributes *smithy.Schema
-
-var ModifyRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyRuleInput",
-}, smithy.ShapeTypeStructure, 5)
-var ModifyRuleInput_RuleArn *smithy.Schema
-
-var ModifyRuleInput_Conditions *smithy.Schema
-
-var ModifyRuleInput_Actions *smithy.Schema
-
-var ModifyRuleInput_Transforms *smithy.Schema
-
-var ModifyRuleInput_ResetTransforms *smithy.Schema
-
-var ModifyRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyRuleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyRuleOutput_Rules *smithy.Schema
-
-var ModifyTargetGroupAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroupAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyTargetGroupAttributesInput_TargetGroupArn *smithy.Schema
-
-var ModifyTargetGroupAttributesInput_Attributes *smithy.Schema
-
-var ModifyTargetGroupAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroupAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyTargetGroupAttributesOutput_Attributes *smithy.Schema
-
-var ModifyTargetGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroupInput",
-}, smithy.ShapeTypeStructure, 10)
-var ModifyTargetGroupInput_TargetGroupArn *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckProtocol *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckPort *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckPath *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckEnabled *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckIntervalSeconds *smithy.Schema
-
-var ModifyTargetGroupInput_HealthCheckTimeoutSeconds *smithy.Schema
-
-var ModifyTargetGroupInput_HealthyThresholdCount *smithy.Schema
-
-var ModifyTargetGroupInput_UnhealthyThresholdCount *smithy.Schema
-
-var ModifyTargetGroupInput_Matcher *smithy.Schema
-
-var ModifyTargetGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTargetGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyTargetGroupOutput_TargetGroups *smithy.Schema
-
-var ModifyTrustStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTrustStoreInput",
-}, smithy.ShapeTypeStructure, 4)
-var ModifyTrustStoreInput_TrustStoreArn *smithy.Schema
-
-var ModifyTrustStoreInput_CaCertificatesBundleS3Bucket *smithy.Schema
-
-var ModifyTrustStoreInput_CaCertificatesBundleS3Key *smithy.Schema
-
-var ModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion *smithy.Schema
-
-var ModifyTrustStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "ModifyTrustStoreOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyTrustStoreOutput_TrustStores *smithy.Schema
-
-var RegisterTargetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RegisterTargetsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterTargetsInput_TargetGroupArn *smithy.Schema
-
-var RegisterTargetsInput_Targets *smithy.Schema
-
-var RegisterTargetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RegisterTargetsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveListenerCertificatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveListenerCertificatesInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveListenerCertificatesInput_ListenerArn *smithy.Schema
-
-var RemoveListenerCertificatesInput_Certificates *smithy.Schema
-
-var RemoveListenerCertificatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveListenerCertificatesOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsInput_ResourceArns *smithy.Schema
-
-var RemoveTagsInput_TagKeys *smithy.Schema
-
-var RemoveTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTagsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveTrustStoreRevocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTrustStoreRevocationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTrustStoreRevocationsInput_TrustStoreArn *smithy.Schema
-
-var RemoveTrustStoreRevocationsInput_RevocationIds *smithy.Schema
-
-var RemoveTrustStoreRevocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "RemoveTrustStoreRevocationsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SetIpAddressTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetIpAddressTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetIpAddressTypeInput_LoadBalancerArn *smithy.Schema
-
-var SetIpAddressTypeInput_IpAddressType *smithy.Schema
-
-var SetIpAddressTypeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetIpAddressTypeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetIpAddressTypeOutput_IpAddressType *smithy.Schema
-
-var SetRulePrioritiesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetRulePrioritiesInput",
-}, smithy.ShapeTypeStructure, 1)
-var SetRulePrioritiesInput_RulePriorities *smithy.Schema
-
-var SetRulePrioritiesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetRulePrioritiesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetRulePrioritiesOutput_Rules *smithy.Schema
-
-var SetSecurityGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSecurityGroupsInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetSecurityGroupsInput_LoadBalancerArn *smithy.Schema
-
-var SetSecurityGroupsInput_SecurityGroups *smithy.Schema
-
-var SetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *smithy.Schema
-
-var SetSecurityGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSecurityGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var SetSecurityGroupsOutput_SecurityGroupIds *smithy.Schema
-
-var SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *smithy.Schema
-
-var SetSubnetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSubnetsInput",
-}, smithy.ShapeTypeStructure, 5)
-var SetSubnetsInput_LoadBalancerArn *smithy.Schema
-
-var SetSubnetsInput_Subnets *smithy.Schema
-
-var SetSubnetsInput_SubnetMappings *smithy.Schema
-
-var SetSubnetsInput_IpAddressType *smithy.Schema
-
-var SetSubnetsInput_EnablePrefixForIpv6SourceNat *smithy.Schema
-
-var SetSubnetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.elasticloadbalancingv2",
-	Name:      "SetSubnetsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SetSubnetsOutput_AvailabilityZones *smithy.Schema
-
-var SetSubnetsOutput_IpAddressType *smithy.Schema
-
-var SetSubnetsOutput_EnablePrefixForIpv6SourceNat *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActionTypeEnum_FORWARD = ActionTypeEnum.AddMember("FORWARD", smithyprelude.Unit)
-
-	ActionTypeEnum_AUTHENTICATE_OIDC = ActionTypeEnum.AddMember("AUTHENTICATE_OIDC", smithyprelude.Unit)
-
-	ActionTypeEnum_AUTHENTICATE_COGNITO = ActionTypeEnum.AddMember("AUTHENTICATE_COGNITO", smithyprelude.Unit)
-
-	ActionTypeEnum_REDIRECT = ActionTypeEnum.AddMember("REDIRECT", smithyprelude.Unit)
-
-	ActionTypeEnum_FIXED_RESPONSE = ActionTypeEnum.AddMember("FIXED_RESPONSE", smithyprelude.Unit)
-
-	ActionTypeEnum_JWT_VALIDATION = ActionTypeEnum.AddMember("JWT_VALIDATION", smithyprelude.Unit)
-
-	_AuthenticateOidcActionAuthenticationRequestExtraParams_key = _AuthenticateOidcActionAuthenticationRequestExtraParams.AddMember("key", _AuthenticateOidcActionAuthenticationRequestParamName)
-
-	_AuthenticateOidcActionAuthenticationRequestExtraParams_value = _AuthenticateOidcActionAuthenticationRequestExtraParams.AddMember("value", _AuthenticateOidcActionAuthenticationRequestParamValue)
-
-	AuthenticateOidcActionConditionalBehaviorEnum_DENY = AuthenticateOidcActionConditionalBehaviorEnum.AddMember("DENY", smithyprelude.Unit)
-
-	AuthenticateOidcActionConditionalBehaviorEnum_ALLOW = AuthenticateOidcActionConditionalBehaviorEnum.AddMember("ALLOW", smithyprelude.Unit)
-
-	AuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE = AuthenticateOidcActionConditionalBehaviorEnum.AddMember("AUTHENTICATE", smithyprelude.Unit)
-
-	AuthenticateOidcActionConfig_Issuer = AuthenticateOidcActionConfig.AddMember("Issuer", _AuthenticateOidcActionIssuer)
-
-	AuthenticateOidcActionConfig_AuthorizationEndpoint = AuthenticateOidcActionConfig.AddMember("AuthorizationEndpoint", _AuthenticateOidcActionAuthorizationEndpoint)
-
-	AuthenticateOidcActionConfig_TokenEndpoint = AuthenticateOidcActionConfig.AddMember("TokenEndpoint", _AuthenticateOidcActionTokenEndpoint)
-
-	AuthenticateOidcActionConfig_UserInfoEndpoint = AuthenticateOidcActionConfig.AddMember("UserInfoEndpoint", _AuthenticateOidcActionUserInfoEndpoint)
-
-	AuthenticateOidcActionConfig_ClientId = AuthenticateOidcActionConfig.AddMember("ClientId", _AuthenticateOidcActionClientId)
-
-	AuthenticateOidcActionConfig_ClientSecret = AuthenticateOidcActionConfig.AddMember("ClientSecret", _AuthenticateOidcActionClientSecret)
-
-	AuthenticateOidcActionConfig_SessionCookieName = AuthenticateOidcActionConfig.AddMember("SessionCookieName", _AuthenticateOidcActionSessionCookieName)
-
-	AuthenticateOidcActionConfig_Scope = AuthenticateOidcActionConfig.AddMember("Scope", _AuthenticateOidcActionScope)
-
-	AuthenticateOidcActionConfig_SessionTimeout = AuthenticateOidcActionConfig.AddMember("SessionTimeout", _AuthenticateOidcActionSessionTimeout)
-
-	AuthenticateOidcActionConfig_AuthenticationRequestExtraParams = AuthenticateOidcActionConfig.AddMember("AuthenticationRequestExtraParams", _AuthenticateOidcActionAuthenticationRequestExtraParams)
-
-	AuthenticateOidcActionConfig_OnUnauthenticatedRequest = AuthenticateOidcActionConfig.AddMember("OnUnauthenticatedRequest", AuthenticateOidcActionConditionalBehaviorEnum)
-
-	AuthenticateOidcActionConfig_UseExistingClientSecret = AuthenticateOidcActionConfig.AddMember("UseExistingClientSecret", _AuthenticateOidcActionUseExistingClientSecret)
-
-	_AuthenticateCognitoActionAuthenticationRequestExtraParams_key = _AuthenticateCognitoActionAuthenticationRequestExtraParams.AddMember("key", _AuthenticateCognitoActionAuthenticationRequestParamName)
-
-	_AuthenticateCognitoActionAuthenticationRequestExtraParams_value = _AuthenticateCognitoActionAuthenticationRequestExtraParams.AddMember("value", _AuthenticateCognitoActionAuthenticationRequestParamValue)
-
-	AuthenticateCognitoActionConditionalBehaviorEnum_DENY = AuthenticateCognitoActionConditionalBehaviorEnum.AddMember("DENY", smithyprelude.Unit)
-
-	AuthenticateCognitoActionConditionalBehaviorEnum_ALLOW = AuthenticateCognitoActionConditionalBehaviorEnum.AddMember("ALLOW", smithyprelude.Unit)
-
-	AuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE = AuthenticateCognitoActionConditionalBehaviorEnum.AddMember("AUTHENTICATE", smithyprelude.Unit)
-
-	AuthenticateCognitoActionConfig_UserPoolArn = AuthenticateCognitoActionConfig.AddMember("UserPoolArn", _AuthenticateCognitoActionUserPoolArn)
-
-	AuthenticateCognitoActionConfig_UserPoolClientId = AuthenticateCognitoActionConfig.AddMember("UserPoolClientId", _AuthenticateCognitoActionUserPoolClientId)
-
-	AuthenticateCognitoActionConfig_UserPoolDomain = AuthenticateCognitoActionConfig.AddMember("UserPoolDomain", _AuthenticateCognitoActionUserPoolDomain)
-
-	AuthenticateCognitoActionConfig_SessionCookieName = AuthenticateCognitoActionConfig.AddMember("SessionCookieName", _AuthenticateCognitoActionSessionCookieName)
-
-	AuthenticateCognitoActionConfig_Scope = AuthenticateCognitoActionConfig.AddMember("Scope", _AuthenticateCognitoActionScope)
-
-	AuthenticateCognitoActionConfig_SessionTimeout = AuthenticateCognitoActionConfig.AddMember("SessionTimeout", _AuthenticateCognitoActionSessionTimeout)
-
-	AuthenticateCognitoActionConfig_AuthenticationRequestExtraParams = AuthenticateCognitoActionConfig.AddMember("AuthenticationRequestExtraParams", _AuthenticateCognitoActionAuthenticationRequestExtraParams)
-
-	AuthenticateCognitoActionConfig_OnUnauthenticatedRequest = AuthenticateCognitoActionConfig.AddMember("OnUnauthenticatedRequest", AuthenticateCognitoActionConditionalBehaviorEnum)
-
-	RedirectActionStatusCodeEnum_HTTP_301 = RedirectActionStatusCodeEnum.AddMember("HTTP_301", smithyprelude.Unit)
-
-	RedirectActionStatusCodeEnum_HTTP_302 = RedirectActionStatusCodeEnum.AddMember("HTTP_302", smithyprelude.Unit)
-
-	RedirectActionConfig_Protocol = RedirectActionConfig.AddMember("Protocol", _RedirectActionProtocol)
-
-	RedirectActionConfig_Port = RedirectActionConfig.AddMember("Port", _RedirectActionPort)
-
-	RedirectActionConfig_Host = RedirectActionConfig.AddMember("Host", _RedirectActionHost)
-
-	RedirectActionConfig_Path = RedirectActionConfig.AddMember("Path", _RedirectActionPath)
-
-	RedirectActionConfig_Query = RedirectActionConfig.AddMember("Query", _RedirectActionQuery)
-
-	RedirectActionConfig_StatusCode = RedirectActionConfig.AddMember("StatusCode", RedirectActionStatusCodeEnum)
-
-	FixedResponseActionConfig_MessageBody = FixedResponseActionConfig.AddMember("MessageBody", _FixedResponseActionMessage)
-
-	FixedResponseActionConfig_StatusCode = FixedResponseActionConfig.AddMember("StatusCode", _FixedResponseActionStatusCode)
-
-	FixedResponseActionConfig_ContentType = FixedResponseActionConfig.AddMember("ContentType", _FixedResponseActionContentType)
-
-	TargetGroupTuple_TargetGroupArn = TargetGroupTuple.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	TargetGroupTuple_Weight = TargetGroupTuple.AddMember("Weight", _TargetGroupWeight)
-
-	_TargetGroupList_member = _TargetGroupList.AddMember("member", TargetGroupTuple)
-
-	TargetGroupStickinessConfig_Enabled = TargetGroupStickinessConfig.AddMember("Enabled", _TargetGroupStickinessEnabled)
-
-	TargetGroupStickinessConfig_DurationSeconds = TargetGroupStickinessConfig.AddMember("DurationSeconds", _TargetGroupStickinessDurationSeconds)
-
-	ForwardActionConfig_TargetGroups = ForwardActionConfig.AddMember("TargetGroups", _TargetGroupList)
-
-	ForwardActionConfig_TargetGroupStickinessConfig = ForwardActionConfig.AddMember("TargetGroupStickinessConfig", TargetGroupStickinessConfig)
-
-	JwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING = JwtValidationActionAdditionalClaimFormatEnum.AddMember("SINGLE_STRING", smithyprelude.Unit)
-
-	JwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY = JwtValidationActionAdditionalClaimFormatEnum.AddMember("STRING_ARRAY", smithyprelude.Unit)
-
-	JwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES = JwtValidationActionAdditionalClaimFormatEnum.AddMember("SPACE_SEPARATED_VALUES", smithyprelude.Unit)
-
-	_JwtValidationActionAdditionalClaimValues_member = _JwtValidationActionAdditionalClaimValues.AddMember("member", _JwtValidationActionAdditionalClaimValue)
-
-	JwtValidationActionAdditionalClaim_Format = JwtValidationActionAdditionalClaim.AddMember("Format", JwtValidationActionAdditionalClaimFormatEnum)
-
-	JwtValidationActionAdditionalClaim_Name = JwtValidationActionAdditionalClaim.AddMember("Name", _JwtValidationActionAdditionalClaimName)
-
-	JwtValidationActionAdditionalClaim_Values = JwtValidationActionAdditionalClaim.AddMember("Values", _JwtValidationActionAdditionalClaimValues)
-
-	_JwtValidationActionAdditionalClaims_member = _JwtValidationActionAdditionalClaims.AddMember("member", JwtValidationActionAdditionalClaim)
-
-	JwtValidationActionConfig_JwksEndpoint = JwtValidationActionConfig.AddMember("JwksEndpoint", _JwtValidationActionJwksEndpoint)
-
-	JwtValidationActionConfig_Issuer = JwtValidationActionConfig.AddMember("Issuer", _JwtValidationActionIssuer)
-
-	JwtValidationActionConfig_AdditionalClaims = JwtValidationActionConfig.AddMember("AdditionalClaims", _JwtValidationActionAdditionalClaims)
-
-	Action_Type = Action.AddMember("Type", ActionTypeEnum)
-
-	Action_TargetGroupArn = Action.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	Action_AuthenticateOidcConfig = Action.AddMember("AuthenticateOidcConfig", AuthenticateOidcActionConfig)
-
-	Action_AuthenticateCognitoConfig = Action.AddMember("AuthenticateCognitoConfig", AuthenticateCognitoActionConfig)
-
-	Action_Order = Action.AddMember("Order", _ActionOrder)
-
-	Action_RedirectConfig = Action.AddMember("RedirectConfig", RedirectActionConfig)
-
-	Action_FixedResponseConfig = Action.AddMember("FixedResponseConfig", FixedResponseActionConfig)
-
-	Action_ForwardConfig = Action.AddMember("ForwardConfig", ForwardActionConfig)
-
-	Action_JwtValidationConfig = Action.AddMember("JwtValidationConfig", JwtValidationActionConfig)
-
-	_Actions_member = _Actions.AddMember("member", Action)
-
-	TargetAdministrativeOverrideStateEnum_UNKNOWN = TargetAdministrativeOverrideStateEnum.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideStateEnum_NO_OVERRIDE = TargetAdministrativeOverrideStateEnum.AddMember("NO_OVERRIDE", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE = TargetAdministrativeOverrideStateEnum.AddMember("ZONAL_SHIFT_ACTIVE", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = TargetAdministrativeOverrideStateEnum.AddMember("ZONAL_SHIFT_DELEGATED_TO_DNS", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR = TargetAdministrativeOverrideReasonEnum.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED = TargetAdministrativeOverrideReasonEnum.AddMember("NO_OVERRIDE_ENGAGED", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED = TargetAdministrativeOverrideReasonEnum.AddMember("ZONAL_SHIFT_ENGAGED", smithyprelude.Unit)
-
-	TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = TargetAdministrativeOverrideReasonEnum.AddMember("ZONAL_SHIFT_DELEGATED_TO_DNS", smithyprelude.Unit)
-
-	AdministrativeOverride_State = AdministrativeOverride.AddMember("State", TargetAdministrativeOverrideStateEnum)
-
-	AdministrativeOverride_Reason = AdministrativeOverride.AddMember("Reason", TargetAdministrativeOverrideReasonEnum)
-
-	AdministrativeOverride_Description = AdministrativeOverride.AddMember("Description", _Description)
-
-	AdvertiseTrustStoreCaNamesEnum_on = AdvertiseTrustStoreCaNamesEnum.AddMember("on", smithyprelude.Unit)
-
-	AdvertiseTrustStoreCaNamesEnum_off = AdvertiseTrustStoreCaNamesEnum.AddMember("off", smithyprelude.Unit)
-
-	AllocationIdNotFoundException_Message = AllocationIdNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_AlpnPolicyName_member = _AlpnPolicyName.AddMember("member", _AlpnPolicyValue)
-
-	ALPNPolicyNotSupportedException_Message = ALPNPolicyNotSupportedException.AddMember("Message", _ErrorDescription)
-
-	AnomalyResultEnum_ANOMALOUS = AnomalyResultEnum.AddMember("ANOMALOUS", smithyprelude.Unit)
-
-	AnomalyResultEnum_NORMAL = AnomalyResultEnum.AddMember("NORMAL", smithyprelude.Unit)
-
-	MitigationInEffectEnum_YES = MitigationInEffectEnum.AddMember("YES", smithyprelude.Unit)
-
-	MitigationInEffectEnum_NO = MitigationInEffectEnum.AddMember("NO", smithyprelude.Unit)
-
-	AnomalyDetection_Result = AnomalyDetection.AddMember("Result", AnomalyResultEnum)
-
-	AnomalyDetection_MitigationInEffect = AnomalyDetection.AddMember("MitigationInEffect", MitigationInEffectEnum)
-
-	LoadBalancerAddress_IpAddress = LoadBalancerAddress.AddMember("IpAddress", _IpAddress)
-
-	LoadBalancerAddress_AllocationId = LoadBalancerAddress.AddMember("AllocationId", _AllocationId)
-
-	LoadBalancerAddress_PrivateIPv4Address = LoadBalancerAddress.AddMember("PrivateIPv4Address", _PrivateIPv4Address)
-
-	LoadBalancerAddress_IPv6Address = LoadBalancerAddress.AddMember("IPv6Address", _IPv6Address)
-
-	_LoadBalancerAddresses_member = _LoadBalancerAddresses.AddMember("member", LoadBalancerAddress)
-
-	_SourceNatIpv6Prefixes_member = _SourceNatIpv6Prefixes.AddMember("member", _SourceNatIpv6Prefix)
-
-	AvailabilityZone_ZoneName = AvailabilityZone.AddMember("ZoneName", _ZoneName)
-
-	AvailabilityZone_SubnetId = AvailabilityZone.AddMember("SubnetId", _SubnetId)
-
-	AvailabilityZone_OutpostId = AvailabilityZone.AddMember("OutpostId", _OutpostId)
-
-	AvailabilityZone_LoadBalancerAddresses = AvailabilityZone.AddMember("LoadBalancerAddresses", _LoadBalancerAddresses)
-
-	AvailabilityZone_SourceNatIpv6Prefixes = AvailabilityZone.AddMember("SourceNatIpv6Prefixes", _SourceNatIpv6Prefixes)
-
-	AvailabilityZoneNotSupportedException_Message = AvailabilityZoneNotSupportedException.AddMember("Message", _ErrorDescription)
-
-	_AvailabilityZones_member = _AvailabilityZones.AddMember("member", AvailabilityZone)
-
-	CaCertificatesBundleNotFoundException_Message = CaCertificatesBundleNotFoundException.AddMember("Message", _ErrorDescription)
-
-	CapacityDecreaseRequestsLimitExceededException_Message = CapacityDecreaseRequestsLimitExceededException.AddMember("Message", _ErrorDescription)
-
-	CapacityReservationPendingException_Message = CapacityReservationPendingException.AddMember("Message", _ErrorDescription)
-
-	CapacityReservationStateEnum_PROVISIONED = CapacityReservationStateEnum.AddMember("PROVISIONED", smithyprelude.Unit)
-
-	CapacityReservationStateEnum_PENDING = CapacityReservationStateEnum.AddMember("PENDING", smithyprelude.Unit)
-
-	CapacityReservationStateEnum_REBALANCING = CapacityReservationStateEnum.AddMember("REBALANCING", smithyprelude.Unit)
-
-	CapacityReservationStateEnum_FAILED = CapacityReservationStateEnum.AddMember("FAILED", smithyprelude.Unit)
-
-	CapacityReservationStatus_Code = CapacityReservationStatus.AddMember("Code", CapacityReservationStateEnum)
-
-	CapacityReservationStatus_Reason = CapacityReservationStatus.AddMember("Reason", _StateReason)
-
-	CapacityUnitsLimitExceededException_Message = CapacityUnitsLimitExceededException.AddMember("Message", _ErrorDescription)
-
-	Certificate_CertificateArn = Certificate.AddMember("CertificateArn", _CertificateArn)
-
-	Certificate_IsDefault = Certificate.AddMember("IsDefault", _Default)
-
-	_CertificateList_member = _CertificateList.AddMember("member", Certificate)
-
-	CertificateNotFoundException_Message = CertificateNotFoundException.AddMember("Message", _ErrorDescription)
-
-	Cipher_Name = Cipher.AddMember("Name", _CipherName)
-
-	Cipher_Priority = Cipher.AddMember("Priority", _CipherPriority)
-
-	_Ciphers_member = _Ciphers.AddMember("member", Cipher)
-
-	DeleteAssociationSameAccountException_Message = DeleteAssociationSameAccountException.AddMember("Message", _ErrorDescription)
-
-	DescribeTargetHealthInputIncludeEnum_ANOMALY = DescribeTargetHealthInputIncludeEnum.AddMember("ANOMALY", smithyprelude.Unit)
-
-	DescribeTargetHealthInputIncludeEnum_ALL = DescribeTargetHealthInputIncludeEnum.AddMember("ALL", smithyprelude.Unit)
-
-	RevocationType_CRL = RevocationType.AddMember("CRL", smithyprelude.Unit)
-
-	DescribeTrustStoreRevocation_TrustStoreArn = DescribeTrustStoreRevocation.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	DescribeTrustStoreRevocation_RevocationId = DescribeTrustStoreRevocation.AddMember("RevocationId", _RevocationId)
-
-	DescribeTrustStoreRevocation_RevocationType = DescribeTrustStoreRevocation.AddMember("RevocationType", RevocationType)
-
-	DescribeTrustStoreRevocation_NumberOfRevokedEntries = DescribeTrustStoreRevocation.AddMember("NumberOfRevokedEntries", _NumberOfRevokedEntries)
-
-	_DescribeTrustStoreRevocationResponse_member = _DescribeTrustStoreRevocationResponse.AddMember("member", DescribeTrustStoreRevocation)
-
-	DuplicateListenerException_Message = DuplicateListenerException.AddMember("Message", _ErrorDescription)
-
-	DuplicateLoadBalancerNameException_Message = DuplicateLoadBalancerNameException.AddMember("Message", _ErrorDescription)
-
-	DuplicateTagKeysException_Message = DuplicateTagKeysException.AddMember("Message", _ErrorDescription)
-
-	DuplicateTargetGroupNameException_Message = DuplicateTargetGroupNameException.AddMember("Message", _ErrorDescription)
-
-	DuplicateTrustStoreNameException_Message = DuplicateTrustStoreNameException.AddMember("Message", _ErrorDescription)
-
-	EnablePrefixForIpv6SourceNatEnum_ON = EnablePrefixForIpv6SourceNatEnum.AddMember("ON", smithyprelude.Unit)
-
-	EnablePrefixForIpv6SourceNatEnum_OFF = EnablePrefixForIpv6SourceNatEnum.AddMember("OFF", smithyprelude.Unit)
-
-	EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on = EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum.AddMember("on", smithyprelude.Unit)
-
-	EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off = EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum.AddMember("off", smithyprelude.Unit)
-
-	HealthUnavailableException_Message = HealthUnavailableException.AddMember("Message", _ErrorDescription)
-
-	_ListOfString_member = _ListOfString.AddMember("member", _StringValue)
-
-	HostHeaderConditionConfig_Values = HostHeaderConditionConfig.AddMember("Values", _ListOfString)
-
-	HostHeaderConditionConfig_RegexValues = HostHeaderConditionConfig.AddMember("RegexValues", _ListOfString)
-
-	RewriteConfig_Regex = RewriteConfig.AddMember("Regex", _StringValue)
-
-	RewriteConfig_Replace = RewriteConfig.AddMember("Replace", _StringValue)
-
-	_RewriteConfigList_member = _RewriteConfigList.AddMember("member", RewriteConfig)
-
-	HostHeaderRewriteConfig_Rewrites = HostHeaderRewriteConfig.AddMember("Rewrites", _RewriteConfigList)
-
-	HttpHeaderConditionConfig_HttpHeaderName = HttpHeaderConditionConfig.AddMember("HttpHeaderName", _HttpHeaderConditionName)
-
-	HttpHeaderConditionConfig_Values = HttpHeaderConditionConfig.AddMember("Values", _ListOfString)
-
-	HttpHeaderConditionConfig_RegexValues = HttpHeaderConditionConfig.AddMember("RegexValues", _ListOfString)
-
-	HttpRequestMethodConditionConfig_Values = HttpRequestMethodConditionConfig.AddMember("Values", _ListOfString)
-
-	IncompatibleProtocolsException_Message = IncompatibleProtocolsException.AddMember("Message", _ErrorDescription)
-
-	InsufficientCapacityException_Message = InsufficientCapacityException.AddMember("Message", _ErrorDescription)
-
-	InvalidCaCertificatesBundleException_Message = InvalidCaCertificatesBundleException.AddMember("Message", _ErrorDescription)
-
-	InvalidConfigurationRequestException_Message = InvalidConfigurationRequestException.AddMember("Message", _ErrorDescription)
-
-	InvalidLoadBalancerActionException_Message = InvalidLoadBalancerActionException.AddMember("Message", _ErrorDescription)
-
-	InvalidRevocationContentException_Message = InvalidRevocationContentException.AddMember("Message", _ErrorDescription)
-
-	InvalidSchemeException_Message = InvalidSchemeException.AddMember("Message", _ErrorDescription)
-
-	InvalidSecurityGroupException_Message = InvalidSecurityGroupException.AddMember("Message", _ErrorDescription)
-
-	InvalidSubnetException_Message = InvalidSubnetException.AddMember("Message", _ErrorDescription)
-
-	InvalidTargetException_Message = InvalidTargetException.AddMember("Message", _ErrorDescription)
-
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_DUALSTACK = IpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	IpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 = IpAddressType.AddMember("DUALSTACK_WITHOUT_PUBLIC_IPV4", smithyprelude.Unit)
-
-	IpamPools_Ipv4IpamPoolId = IpamPools.AddMember("Ipv4IpamPoolId", _IpamPoolId)
-
-	Limit_Name = Limit.AddMember("Name", _Name)
-
-	Limit_Max = Limit.AddMember("Max", _Max)
-
-	_Limits_member = _Limits.AddMember("member", Limit)
-
-	ProtocolEnum_HTTP = ProtocolEnum.AddMember("HTTP", smithyprelude.Unit)
-
-	ProtocolEnum_HTTPS = ProtocolEnum.AddMember("HTTPS", smithyprelude.Unit)
-
-	ProtocolEnum_TCP = ProtocolEnum.AddMember("TCP", smithyprelude.Unit)
-
-	ProtocolEnum_TLS = ProtocolEnum.AddMember("TLS", smithyprelude.Unit)
-
-	ProtocolEnum_UDP = ProtocolEnum.AddMember("UDP", smithyprelude.Unit)
-
-	ProtocolEnum_TCP_UDP = ProtocolEnum.AddMember("TCP_UDP", smithyprelude.Unit)
-
-	ProtocolEnum_GENEVE = ProtocolEnum.AddMember("GENEVE", smithyprelude.Unit)
-
-	ProtocolEnum_QUIC = ProtocolEnum.AddMember("QUIC", smithyprelude.Unit)
-
-	ProtocolEnum_TCP_QUIC = ProtocolEnum.AddMember("TCP_QUIC", smithyprelude.Unit)
-
-	TrustStoreAssociationStatusEnum_ACTIVE = TrustStoreAssociationStatusEnum.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TrustStoreAssociationStatusEnum_REMOVED = TrustStoreAssociationStatusEnum.AddMember("REMOVED", smithyprelude.Unit)
-
-	MutualAuthenticationAttributes_Mode = MutualAuthenticationAttributes.AddMember("Mode", _Mode)
-
-	MutualAuthenticationAttributes_TrustStoreArn = MutualAuthenticationAttributes.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	MutualAuthenticationAttributes_IgnoreClientCertificateExpiry = MutualAuthenticationAttributes.AddMember("IgnoreClientCertificateExpiry", _IgnoreClientCertificateExpiry)
-
-	MutualAuthenticationAttributes_TrustStoreAssociationStatus = MutualAuthenticationAttributes.AddMember("TrustStoreAssociationStatus", TrustStoreAssociationStatusEnum)
-
-	MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames = MutualAuthenticationAttributes.AddMember("AdvertiseTrustStoreCaNames", AdvertiseTrustStoreCaNamesEnum)
-
-	Listener_ListenerArn = Listener.AddMember("ListenerArn", _ListenerArn)
-
-	Listener_LoadBalancerArn = Listener.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	Listener_Port = Listener.AddMember("Port", _Port)
-
-	Listener_Protocol = Listener.AddMember("Protocol", ProtocolEnum)
-
-	Listener_Certificates = Listener.AddMember("Certificates", _CertificateList)
-
-	Listener_SslPolicy = Listener.AddMember("SslPolicy", _SslPolicyName)
-
-	Listener_DefaultActions = Listener.AddMember("DefaultActions", _Actions)
-
-	Listener_AlpnPolicy = Listener.AddMember("AlpnPolicy", _AlpnPolicyName)
-
-	Listener_MutualAuthentication = Listener.AddMember("MutualAuthentication", MutualAuthenticationAttributes)
-
-	_ListenerArns_member = _ListenerArns.AddMember("member", _ListenerArn)
-
-	ListenerAttribute_Key = ListenerAttribute.AddMember("Key", _ListenerAttributeKey)
-
-	ListenerAttribute_Value = ListenerAttribute.AddMember("Value", _ListenerAttributeValue)
-
-	_ListenerAttributes_member = _ListenerAttributes.AddMember("member", ListenerAttribute)
-
-	ListenerNotFoundException_Message = ListenerNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_Listeners_member = _Listeners.AddMember("member", Listener)
-
-	_ListOfDescribeTargetHealthIncludeOptions_member = _ListOfDescribeTargetHealthIncludeOptions.AddMember("member", DescribeTargetHealthInputIncludeEnum)
-
-	LoadBalancerSchemeEnum_INTERNET_FACING = LoadBalancerSchemeEnum.AddMember("INTERNET_FACING", smithyprelude.Unit)
-
-	LoadBalancerSchemeEnum_INTERNAL = LoadBalancerSchemeEnum.AddMember("INTERNAL", smithyprelude.Unit)
-
-	LoadBalancerStateEnum_ACTIVE = LoadBalancerStateEnum.AddMember("ACTIVE", smithyprelude.Unit)
-
-	LoadBalancerStateEnum_PROVISIONING = LoadBalancerStateEnum.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	LoadBalancerStateEnum_ACTIVE_IMPAIRED = LoadBalancerStateEnum.AddMember("ACTIVE_IMPAIRED", smithyprelude.Unit)
-
-	LoadBalancerStateEnum_FAILED = LoadBalancerStateEnum.AddMember("FAILED", smithyprelude.Unit)
-
-	LoadBalancerState_Code = LoadBalancerState.AddMember("Code", LoadBalancerStateEnum)
-
-	LoadBalancerState_Reason = LoadBalancerState.AddMember("Reason", _StateReason)
-
-	LoadBalancerTypeEnum_APPLICATION = LoadBalancerTypeEnum.AddMember("APPLICATION", smithyprelude.Unit)
-
-	LoadBalancerTypeEnum_NETWORK = LoadBalancerTypeEnum.AddMember("NETWORK", smithyprelude.Unit)
-
-	LoadBalancerTypeEnum_GATEWAY = LoadBalancerTypeEnum.AddMember("GATEWAY", smithyprelude.Unit)
-
-	_SecurityGroups_member = _SecurityGroups.AddMember("member", _SecurityGroupId)
-
-	LoadBalancer_LoadBalancerArn = LoadBalancer.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	LoadBalancer_DNSName = LoadBalancer.AddMember("DNSName", _DNSName)
-
-	LoadBalancer_CanonicalHostedZoneId = LoadBalancer.AddMember("CanonicalHostedZoneId", _CanonicalHostedZoneId)
-
-	LoadBalancer_CreatedTime = LoadBalancer.AddMember("CreatedTime", _CreatedTime)
-
-	LoadBalancer_LoadBalancerName = LoadBalancer.AddMember("LoadBalancerName", _LoadBalancerName)
-
-	LoadBalancer_Scheme = LoadBalancer.AddMember("Scheme", LoadBalancerSchemeEnum)
-
-	LoadBalancer_VpcId = LoadBalancer.AddMember("VpcId", _VpcId)
-
-	LoadBalancer_State = LoadBalancer.AddMember("State", LoadBalancerState)
-
-	LoadBalancer_Type = LoadBalancer.AddMember("Type", LoadBalancerTypeEnum)
-
-	LoadBalancer_AvailabilityZones = LoadBalancer.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	LoadBalancer_SecurityGroups = LoadBalancer.AddMember("SecurityGroups", _SecurityGroups)
-
-	LoadBalancer_IpAddressType = LoadBalancer.AddMember("IpAddressType", IpAddressType)
-
-	LoadBalancer_CustomerOwnedIpv4Pool = LoadBalancer.AddMember("CustomerOwnedIpv4Pool", _CustomerOwnedIpv4Pool)
-
-	LoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = LoadBalancer.AddMember("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", _EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic)
-
-	LoadBalancer_EnablePrefixForIpv6SourceNat = LoadBalancer.AddMember("EnablePrefixForIpv6SourceNat", EnablePrefixForIpv6SourceNatEnum)
-
-	LoadBalancer_IpamPools = LoadBalancer.AddMember("IpamPools", IpamPools)
-
-	_LoadBalancerArns_member = _LoadBalancerArns.AddMember("member", _LoadBalancerArn)
-
-	LoadBalancerAttribute_Key = LoadBalancerAttribute.AddMember("Key", _LoadBalancerAttributeKey)
-
-	LoadBalancerAttribute_Value = LoadBalancerAttribute.AddMember("Value", _LoadBalancerAttributeValue)
-
-	_LoadBalancerAttributes_member = _LoadBalancerAttributes.AddMember("member", LoadBalancerAttribute)
-
-	_LoadBalancerNames_member = _LoadBalancerNames.AddMember("member", _LoadBalancerName)
-
-	LoadBalancerNotFoundException_Message = LoadBalancerNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_LoadBalancers_member = _LoadBalancers.AddMember("member", LoadBalancer)
-
-	Matcher_HttpCode = Matcher.AddMember("HttpCode", _HttpCode)
-
-	Matcher_GrpcCode = Matcher.AddMember("GrpcCode", _GrpcCode)
-
-	MinimumLoadBalancerCapacity_CapacityUnits = MinimumLoadBalancerCapacity.AddMember("CapacityUnits", _CapacityUnits)
-
-	OperationNotPermittedException_Message = OperationNotPermittedException.AddMember("Message", _ErrorDescription)
-
-	PathPatternConditionConfig_Values = PathPatternConditionConfig.AddMember("Values", _ListOfString)
-
-	PathPatternConditionConfig_RegexValues = PathPatternConditionConfig.AddMember("RegexValues", _ListOfString)
-
-	PriorityInUseException_Message = PriorityInUseException.AddMember("Message", _ErrorDescription)
-
-	PriorRequestNotCompleteException_Message = PriorRequestNotCompleteException.AddMember("Message", _ErrorDescription)
-
-	QueryStringKeyValuePair_Key = QueryStringKeyValuePair.AddMember("Key", _StringValue)
-
-	QueryStringKeyValuePair_Value = QueryStringKeyValuePair.AddMember("Value", _StringValue)
-
-	_QueryStringKeyValuePairList_member = _QueryStringKeyValuePairList.AddMember("member", QueryStringKeyValuePair)
-
-	QueryStringConditionConfig_Values = QueryStringConditionConfig.AddMember("Values", _QueryStringKeyValuePairList)
-
-	RemoveIpamPoolEnum_ipv4 = RemoveIpamPoolEnum.AddMember("ipv4", smithyprelude.Unit)
-
-	_RemoveIpamPools_member = _RemoveIpamPools.AddMember("member", RemoveIpamPoolEnum)
-
-	_ResourceArns_member = _ResourceArns.AddMember("member", _ResourceArn)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorDescription)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorDescription)
-
-	RevocationContent_S3Bucket = RevocationContent.AddMember("S3Bucket", _S3Bucket)
-
-	RevocationContent_S3Key = RevocationContent.AddMember("S3Key", _S3Key)
-
-	RevocationContent_S3ObjectVersion = RevocationContent.AddMember("S3ObjectVersion", _S3ObjectVersion)
-
-	RevocationContent_RevocationType = RevocationContent.AddMember("RevocationType", RevocationType)
-
-	RevocationContentNotFoundException_Message = RevocationContentNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_RevocationContents_member = _RevocationContents.AddMember("member", RevocationContent)
-
-	RevocationIdNotFoundException_Message = RevocationIdNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_RevocationIds_member = _RevocationIds.AddMember("member", _RevocationId)
-
-	SourceIpAddressTypeEnum_IPV4 = SourceIpAddressTypeEnum.AddMember("IPV4", smithyprelude.Unit)
-
-	SourceIpAddressTypeEnum_IPV6 = SourceIpAddressTypeEnum.AddMember("IPV6", smithyprelude.Unit)
-
-	SourceIpConditionConfig_Values = SourceIpConditionConfig.AddMember("Values", _ListOfString)
-
-	SourceIpConditionConfig_IpAddressType = SourceIpConditionConfig.AddMember("IpAddressType", SourceIpAddressTypeEnum)
-
-	RuleCondition_Field = RuleCondition.AddMember("Field", _ConditionFieldName)
-
-	RuleCondition_Values = RuleCondition.AddMember("Values", _ListOfString)
-
-	RuleCondition_HostHeaderConfig = RuleCondition.AddMember("HostHeaderConfig", HostHeaderConditionConfig)
-
-	RuleCondition_PathPatternConfig = RuleCondition.AddMember("PathPatternConfig", PathPatternConditionConfig)
-
-	RuleCondition_HttpHeaderConfig = RuleCondition.AddMember("HttpHeaderConfig", HttpHeaderConditionConfig)
-
-	RuleCondition_QueryStringConfig = RuleCondition.AddMember("QueryStringConfig", QueryStringConditionConfig)
-
-	RuleCondition_HttpRequestMethodConfig = RuleCondition.AddMember("HttpRequestMethodConfig", HttpRequestMethodConditionConfig)
-
-	RuleCondition_SourceIpConfig = RuleCondition.AddMember("SourceIpConfig", SourceIpConditionConfig)
-
-	RuleCondition_RegexValues = RuleCondition.AddMember("RegexValues", _ListOfString)
-
-	_RuleConditionList_member = _RuleConditionList.AddMember("member", RuleCondition)
-
-	TransformTypeEnum_HOST_HEADER_REWRITE = TransformTypeEnum.AddMember("HOST_HEADER_REWRITE", smithyprelude.Unit)
-
-	TransformTypeEnum_URL_REWRITE = TransformTypeEnum.AddMember("URL_REWRITE", smithyprelude.Unit)
-
-	UrlRewriteConfig_Rewrites = UrlRewriteConfig.AddMember("Rewrites", _RewriteConfigList)
-
-	RuleTransform_Type = RuleTransform.AddMember("Type", TransformTypeEnum)
-
-	RuleTransform_HostHeaderRewriteConfig = RuleTransform.AddMember("HostHeaderRewriteConfig", HostHeaderRewriteConfig)
-
-	RuleTransform_UrlRewriteConfig = RuleTransform.AddMember("UrlRewriteConfig", UrlRewriteConfig)
-
-	_RuleTransformList_member = _RuleTransformList.AddMember("member", RuleTransform)
-
-	Rule_RuleArn = Rule.AddMember("RuleArn", _RuleArn)
-
-	Rule_Priority = Rule.AddMember("Priority", _String)
-
-	Rule_Conditions = Rule.AddMember("Conditions", _RuleConditionList)
-
-	Rule_Actions = Rule.AddMember("Actions", _Actions)
-
-	Rule_IsDefault = Rule.AddMember("IsDefault", _IsDefault)
-
-	Rule_Transforms = Rule.AddMember("Transforms", _RuleTransformList)
-
-	_RuleArns_member = _RuleArns.AddMember("member", _RuleArn)
-
-	RuleNotFoundException_Message = RuleNotFoundException.AddMember("Message", _ErrorDescription)
-
-	RulePriorityPair_RuleArn = RulePriorityPair.AddMember("RuleArn", _RuleArn)
-
-	RulePriorityPair_Priority = RulePriorityPair.AddMember("Priority", _RulePriority)
-
-	_RulePriorityList_member = _RulePriorityList.AddMember("member", RulePriorityPair)
-
-	_Rules_member = _Rules.AddMember("member", Rule)
-
-	_SslProtocols_member = _SslProtocols.AddMember("member", _SslProtocol)
-
-	SslPolicy_SslProtocols = SslPolicy.AddMember("SslProtocols", _SslProtocols)
-
-	SslPolicy_Ciphers = SslPolicy.AddMember("Ciphers", _Ciphers)
-
-	SslPolicy_Name = SslPolicy.AddMember("Name", _SslPolicyName)
-
-	SslPolicy_SupportedLoadBalancerTypes = SslPolicy.AddMember("SupportedLoadBalancerTypes", _ListOfString)
-
-	_SslPolicies_member = _SslPolicies.AddMember("member", SslPolicy)
-
-	_SslPolicyNames_member = _SslPolicyNames.AddMember("member", _SslPolicyName)
-
-	SSLPolicyNotFoundException_Message = SSLPolicyNotFoundException.AddMember("Message", _ErrorDescription)
-
-	SubnetMapping_SubnetId = SubnetMapping.AddMember("SubnetId", _SubnetId)
-
-	SubnetMapping_AllocationId = SubnetMapping.AddMember("AllocationId", _AllocationId)
-
-	SubnetMapping_PrivateIPv4Address = SubnetMapping.AddMember("PrivateIPv4Address", _PrivateIPv4Address)
-
-	SubnetMapping_IPv6Address = SubnetMapping.AddMember("IPv6Address", _IPv6Address)
-
-	SubnetMapping_SourceNatIpv6Prefix = SubnetMapping.AddMember("SourceNatIpv6Prefix", _SourceNatIpv6Prefix)
-
-	_SubnetMappings_member = _SubnetMappings.AddMember("member", SubnetMapping)
-
-	SubnetNotFoundException_Message = SubnetNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_Subnets_member = _Subnets.AddMember("member", _SubnetId)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TagDescription_ResourceArn = TagDescription.AddMember("ResourceArn", _ResourceArn)
-
-	TagDescription_Tags = TagDescription.AddMember("Tags", _TagList)
-
-	_TagDescriptions_member = _TagDescriptions.AddMember("member", TagDescription)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	TargetDescription_Id = TargetDescription.AddMember("Id", _TargetId)
-
-	TargetDescription_Port = TargetDescription.AddMember("Port", _Port)
-
-	TargetDescription_AvailabilityZone = TargetDescription.AddMember("AvailabilityZone", _ZoneName)
-
-	TargetDescription_QuicServerId = TargetDescription.AddMember("QuicServerId", _QuicServerId)
-
-	_TargetDescriptions_member = _TargetDescriptions.AddMember("member", TargetDescription)
-
-	TargetTypeEnum_INSTANCE = TargetTypeEnum.AddMember("INSTANCE", smithyprelude.Unit)
-
-	TargetTypeEnum_IP = TargetTypeEnum.AddMember("IP", smithyprelude.Unit)
-
-	TargetTypeEnum_LAMBDA = TargetTypeEnum.AddMember("LAMBDA", smithyprelude.Unit)
-
-	TargetTypeEnum_ALB = TargetTypeEnum.AddMember("ALB", smithyprelude.Unit)
-
-	TargetGroupIpAddressTypeEnum_IPV4 = TargetGroupIpAddressTypeEnum.AddMember("IPV4", smithyprelude.Unit)
-
-	TargetGroupIpAddressTypeEnum_IPV6 = TargetGroupIpAddressTypeEnum.AddMember("IPV6", smithyprelude.Unit)
-
-	TargetGroup_TargetGroupArn = TargetGroup.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	TargetGroup_TargetGroupName = TargetGroup.AddMember("TargetGroupName", _TargetGroupName)
-
-	TargetGroup_Protocol = TargetGroup.AddMember("Protocol", ProtocolEnum)
-
-	TargetGroup_Port = TargetGroup.AddMember("Port", _Port)
-
-	TargetGroup_VpcId = TargetGroup.AddMember("VpcId", _VpcId)
-
-	TargetGroup_HealthCheckProtocol = TargetGroup.AddMember("HealthCheckProtocol", ProtocolEnum)
-
-	TargetGroup_HealthCheckPort = TargetGroup.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	TargetGroup_HealthCheckEnabled = TargetGroup.AddMember("HealthCheckEnabled", _HealthCheckEnabled)
-
-	TargetGroup_HealthCheckIntervalSeconds = TargetGroup.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	TargetGroup_HealthCheckTimeoutSeconds = TargetGroup.AddMember("HealthCheckTimeoutSeconds", _HealthCheckTimeoutSeconds)
-
-	TargetGroup_HealthyThresholdCount = TargetGroup.AddMember("HealthyThresholdCount", _HealthCheckThresholdCount)
-
-	TargetGroup_UnhealthyThresholdCount = TargetGroup.AddMember("UnhealthyThresholdCount", _HealthCheckThresholdCount)
-
-	TargetGroup_HealthCheckPath = TargetGroup.AddMember("HealthCheckPath", _Path)
-
-	TargetGroup_Matcher = TargetGroup.AddMember("Matcher", Matcher)
-
-	TargetGroup_LoadBalancerArns = TargetGroup.AddMember("LoadBalancerArns", _LoadBalancerArns)
-
-	TargetGroup_TargetType = TargetGroup.AddMember("TargetType", TargetTypeEnum)
-
-	TargetGroup_ProtocolVersion = TargetGroup.AddMember("ProtocolVersion", _ProtocolVersion)
-
-	TargetGroup_IpAddressType = TargetGroup.AddMember("IpAddressType", TargetGroupIpAddressTypeEnum)
-
-	TargetGroup_TargetControlPort = TargetGroup.AddMember("TargetControlPort", _TargetControlPort)
-
-	_TargetGroupArns_member = _TargetGroupArns.AddMember("member", _TargetGroupArn)
-
-	TargetGroupAssociationLimitException_Message = TargetGroupAssociationLimitException.AddMember("Message", _ErrorDescription)
-
-	TargetGroupAttribute_Key = TargetGroupAttribute.AddMember("Key", _TargetGroupAttributeKey)
-
-	TargetGroupAttribute_Value = TargetGroupAttribute.AddMember("Value", _TargetGroupAttributeValue)
-
-	_TargetGroupAttributes_member = _TargetGroupAttributes.AddMember("member", TargetGroupAttribute)
-
-	_TargetGroupNames_member = _TargetGroupNames.AddMember("member", _TargetGroupName)
-
-	TargetGroupNotFoundException_Message = TargetGroupNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_TargetGroups_member = _TargetGroups.AddMember("member", TargetGroup)
-
-	TargetHealthStateEnum_INITIAL = TargetHealthStateEnum.AddMember("INITIAL", smithyprelude.Unit)
-
-	TargetHealthStateEnum_HEALTHY = TargetHealthStateEnum.AddMember("HEALTHY", smithyprelude.Unit)
-
-	TargetHealthStateEnum_UNHEALTHY = TargetHealthStateEnum.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	TargetHealthStateEnum_UNHEALTHY_DRAINING = TargetHealthStateEnum.AddMember("UNHEALTHY_DRAINING", smithyprelude.Unit)
-
-	TargetHealthStateEnum_UNUSED = TargetHealthStateEnum.AddMember("UNUSED", smithyprelude.Unit)
-
-	TargetHealthStateEnum_DRAINING = TargetHealthStateEnum.AddMember("DRAINING", smithyprelude.Unit)
-
-	TargetHealthStateEnum_UNAVAILABLE = TargetHealthStateEnum.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_REGISTRATION_IN_PROGRESS = TargetHealthReasonEnum.AddMember("REGISTRATION_IN_PROGRESS", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_INITIAL_HEALTH_CHECKING = TargetHealthReasonEnum.AddMember("INITIAL_HEALTH_CHECKING", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_RESPONSE_CODE_MISMATCH = TargetHealthReasonEnum.AddMember("RESPONSE_CODE_MISMATCH", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_TIMEOUT = TargetHealthReasonEnum.AddMember("TIMEOUT", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_FAILED_HEALTH_CHECKS = TargetHealthReasonEnum.AddMember("FAILED_HEALTH_CHECKS", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_NOT_REGISTERED = TargetHealthReasonEnum.AddMember("NOT_REGISTERED", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_NOT_IN_USE = TargetHealthReasonEnum.AddMember("NOT_IN_USE", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS = TargetHealthReasonEnum.AddMember("DEREGISTRATION_IN_PROGRESS", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_INVALID_STATE = TargetHealthReasonEnum.AddMember("INVALID_STATE", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_IP_UNUSABLE = TargetHealthReasonEnum.AddMember("IP_UNUSABLE", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_HEALTH_CHECK_DISABLED = TargetHealthReasonEnum.AddMember("HEALTH_CHECK_DISABLED", smithyprelude.Unit)
-
-	TargetHealthReasonEnum_INTERNAL_ERROR = TargetHealthReasonEnum.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	TargetHealth_State = TargetHealth.AddMember("State", TargetHealthStateEnum)
-
-	TargetHealth_Reason = TargetHealth.AddMember("Reason", TargetHealthReasonEnum)
-
-	TargetHealth_Description = TargetHealth.AddMember("Description", _Description)
-
-	TargetHealthDescription_Target = TargetHealthDescription.AddMember("Target", TargetDescription)
-
-	TargetHealthDescription_HealthCheckPort = TargetHealthDescription.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	TargetHealthDescription_TargetHealth = TargetHealthDescription.AddMember("TargetHealth", TargetHealth)
-
-	TargetHealthDescription_AnomalyDetection = TargetHealthDescription.AddMember("AnomalyDetection", AnomalyDetection)
-
-	TargetHealthDescription_AdministrativeOverride = TargetHealthDescription.AddMember("AdministrativeOverride", AdministrativeOverride)
-
-	_TargetHealthDescriptions_member = _TargetHealthDescriptions.AddMember("member", TargetHealthDescription)
-
-	TooManyActionsException_Message = TooManyActionsException.AddMember("Message", _ErrorDescription)
-
-	TooManyCertificatesException_Message = TooManyCertificatesException.AddMember("Message", _ErrorDescription)
-
-	TooManyListenersException_Message = TooManyListenersException.AddMember("Message", _ErrorDescription)
-
-	TooManyLoadBalancersException_Message = TooManyLoadBalancersException.AddMember("Message", _ErrorDescription)
-
-	TooManyRegistrationsForTargetIdException_Message = TooManyRegistrationsForTargetIdException.AddMember("Message", _ErrorDescription)
-
-	TooManyRulesException_Message = TooManyRulesException.AddMember("Message", _ErrorDescription)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ErrorDescription)
-
-	TooManyTargetGroupsException_Message = TooManyTargetGroupsException.AddMember("Message", _ErrorDescription)
-
-	TooManyTargetsException_Message = TooManyTargetsException.AddMember("Message", _ErrorDescription)
-
-	TooManyTrustStoreRevocationEntriesException_Message = TooManyTrustStoreRevocationEntriesException.AddMember("Message", _ErrorDescription)
-
-	TooManyTrustStoresException_Message = TooManyTrustStoresException.AddMember("Message", _ErrorDescription)
-
-	TooManyUniqueTargetGroupsPerLoadBalancerException_Message = TooManyUniqueTargetGroupsPerLoadBalancerException.AddMember("Message", _ErrorDescription)
-
-	TrustStoreStatus_ACTIVE = TrustStoreStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TrustStoreStatus_CREATING = TrustStoreStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	TrustStore_Name = TrustStore.AddMember("Name", _TrustStoreName)
-
-	TrustStore_TrustStoreArn = TrustStore.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	TrustStore_Status = TrustStore.AddMember("Status", TrustStoreStatus)
-
-	TrustStore_NumberOfCaCertificates = TrustStore.AddMember("NumberOfCaCertificates", _NumberOfCaCertificates)
-
-	TrustStore_TotalRevokedEntries = TrustStore.AddMember("TotalRevokedEntries", _TotalRevokedEntries)
-
-	_TrustStoreArns_member = _TrustStoreArns.AddMember("member", _TrustStoreArn)
-
-	TrustStoreAssociation_ResourceArn = TrustStoreAssociation.AddMember("ResourceArn", _TrustStoreAssociationResourceArn)
-
-	TrustStoreAssociationNotFoundException_Message = TrustStoreAssociationNotFoundException.AddMember("Message", _ErrorDescription)
-
-	_TrustStoreAssociations_member = _TrustStoreAssociations.AddMember("member", TrustStoreAssociation)
-
-	TrustStoreInUseException_Message = TrustStoreInUseException.AddMember("Message", _ErrorDescription)
-
-	_TrustStoreNames_member = _TrustStoreNames.AddMember("member", _TrustStoreName)
-
-	TrustStoreNotFoundException_Message = TrustStoreNotFoundException.AddMember("Message", _ErrorDescription)
-
-	TrustStoreNotReadyException_Message = TrustStoreNotReadyException.AddMember("Message", _ErrorDescription)
-
-	TrustStoreRevocation_TrustStoreArn = TrustStoreRevocation.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	TrustStoreRevocation_RevocationId = TrustStoreRevocation.AddMember("RevocationId", _RevocationId)
-
-	TrustStoreRevocation_RevocationType = TrustStoreRevocation.AddMember("RevocationType", RevocationType)
-
-	TrustStoreRevocation_NumberOfRevokedEntries = TrustStoreRevocation.AddMember("NumberOfRevokedEntries", _NumberOfRevokedEntries)
-
-	_TrustStoreRevocations_member = _TrustStoreRevocations.AddMember("member", TrustStoreRevocation)
-
-	_TrustStores_member = _TrustStores.AddMember("member", TrustStore)
-
-	UnsupportedProtocolException_Message = UnsupportedProtocolException.AddMember("Message", _ErrorDescription)
-
-	ZonalCapacityReservationState_State = ZonalCapacityReservationState.AddMember("State", CapacityReservationStatus)
-
-	ZonalCapacityReservationState_AvailabilityZone = ZonalCapacityReservationState.AddMember("AvailabilityZone", _ZoneName)
-
-	ZonalCapacityReservationState_EffectiveCapacityUnits = ZonalCapacityReservationState.AddMember("EffectiveCapacityUnits", _CapacityUnitsDouble)
-
-	_ZonalCapacityReservationStates_member = _ZonalCapacityReservationStates.AddMember("member", ZonalCapacityReservationState)
-
-	AddListenerCertificatesInput_ListenerArn = AddListenerCertificatesInput.AddMember("ListenerArn", _ListenerArn)
-
-	AddListenerCertificatesInput_Certificates = AddListenerCertificatesInput.AddMember("Certificates", _CertificateList)
-
-	AddListenerCertificatesOutput_Certificates = AddListenerCertificatesOutput.AddMember("Certificates", _CertificateList)
-
-	AddTagsInput_ResourceArns = AddTagsInput.AddMember("ResourceArns", _ResourceArns)
-
-	AddTagsInput_Tags = AddTagsInput.AddMember("Tags", _TagList)
-
-	AddTrustStoreRevocationsInput_TrustStoreArn = AddTrustStoreRevocationsInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	AddTrustStoreRevocationsInput_RevocationContents = AddTrustStoreRevocationsInput.AddMember("RevocationContents", _RevocationContents)
-
-	AddTrustStoreRevocationsOutput_TrustStoreRevocations = AddTrustStoreRevocationsOutput.AddMember("TrustStoreRevocations", _TrustStoreRevocations)
-
-	CreateListenerInput_LoadBalancerArn = CreateListenerInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	CreateListenerInput_Protocol = CreateListenerInput.AddMember("Protocol", ProtocolEnum)
-
-	CreateListenerInput_Port = CreateListenerInput.AddMember("Port", _Port)
-
-	CreateListenerInput_SslPolicy = CreateListenerInput.AddMember("SslPolicy", _SslPolicyName)
-
-	CreateListenerInput_Certificates = CreateListenerInput.AddMember("Certificates", _CertificateList)
-
-	CreateListenerInput_DefaultActions = CreateListenerInput.AddMember("DefaultActions", _Actions)
-
-	CreateListenerInput_AlpnPolicy = CreateListenerInput.AddMember("AlpnPolicy", _AlpnPolicyName)
-
-	CreateListenerInput_Tags = CreateListenerInput.AddMember("Tags", _TagList)
-
-	CreateListenerInput_MutualAuthentication = CreateListenerInput.AddMember("MutualAuthentication", MutualAuthenticationAttributes)
-
-	CreateListenerOutput_Listeners = CreateListenerOutput.AddMember("Listeners", _Listeners)
-
-	CreateLoadBalancerInput_Name = CreateLoadBalancerInput.AddMember("Name", _LoadBalancerName)
-
-	CreateLoadBalancerInput_Subnets = CreateLoadBalancerInput.AddMember("Subnets", _Subnets)
-
-	CreateLoadBalancerInput_SubnetMappings = CreateLoadBalancerInput.AddMember("SubnetMappings", _SubnetMappings)
-
-	CreateLoadBalancerInput_SecurityGroups = CreateLoadBalancerInput.AddMember("SecurityGroups", _SecurityGroups)
-
-	CreateLoadBalancerInput_Scheme = CreateLoadBalancerInput.AddMember("Scheme", LoadBalancerSchemeEnum)
-
-	CreateLoadBalancerInput_Tags = CreateLoadBalancerInput.AddMember("Tags", _TagList)
-
-	CreateLoadBalancerInput_Type = CreateLoadBalancerInput.AddMember("Type", LoadBalancerTypeEnum)
-
-	CreateLoadBalancerInput_IpAddressType = CreateLoadBalancerInput.AddMember("IpAddressType", IpAddressType)
-
-	CreateLoadBalancerInput_CustomerOwnedIpv4Pool = CreateLoadBalancerInput.AddMember("CustomerOwnedIpv4Pool", _CustomerOwnedIpv4Pool)
-
-	CreateLoadBalancerInput_EnablePrefixForIpv6SourceNat = CreateLoadBalancerInput.AddMember("EnablePrefixForIpv6SourceNat", EnablePrefixForIpv6SourceNatEnum)
-
-	CreateLoadBalancerInput_IpamPools = CreateLoadBalancerInput.AddMember("IpamPools", IpamPools)
-
-	CreateLoadBalancerOutput_LoadBalancers = CreateLoadBalancerOutput.AddMember("LoadBalancers", _LoadBalancers)
-
-	CreateRuleInput_ListenerArn = CreateRuleInput.AddMember("ListenerArn", _ListenerArn)
-
-	CreateRuleInput_Conditions = CreateRuleInput.AddMember("Conditions", _RuleConditionList)
-
-	CreateRuleInput_Priority = CreateRuleInput.AddMember("Priority", _RulePriority)
-
-	CreateRuleInput_Actions = CreateRuleInput.AddMember("Actions", _Actions)
-
-	CreateRuleInput_Tags = CreateRuleInput.AddMember("Tags", _TagList)
-
-	CreateRuleInput_Transforms = CreateRuleInput.AddMember("Transforms", _RuleTransformList)
-
-	CreateRuleOutput_Rules = CreateRuleOutput.AddMember("Rules", _Rules)
-
-	CreateTargetGroupInput_Name = CreateTargetGroupInput.AddMember("Name", _TargetGroupName)
-
-	CreateTargetGroupInput_Protocol = CreateTargetGroupInput.AddMember("Protocol", ProtocolEnum)
-
-	CreateTargetGroupInput_ProtocolVersion = CreateTargetGroupInput.AddMember("ProtocolVersion", _ProtocolVersion)
-
-	CreateTargetGroupInput_Port = CreateTargetGroupInput.AddMember("Port", _Port)
-
-	CreateTargetGroupInput_VpcId = CreateTargetGroupInput.AddMember("VpcId", _VpcId)
-
-	CreateTargetGroupInput_HealthCheckProtocol = CreateTargetGroupInput.AddMember("HealthCheckProtocol", ProtocolEnum)
-
-	CreateTargetGroupInput_HealthCheckPort = CreateTargetGroupInput.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	CreateTargetGroupInput_HealthCheckEnabled = CreateTargetGroupInput.AddMember("HealthCheckEnabled", _HealthCheckEnabled)
-
-	CreateTargetGroupInput_HealthCheckPath = CreateTargetGroupInput.AddMember("HealthCheckPath", _Path)
-
-	CreateTargetGroupInput_HealthCheckIntervalSeconds = CreateTargetGroupInput.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	CreateTargetGroupInput_HealthCheckTimeoutSeconds = CreateTargetGroupInput.AddMember("HealthCheckTimeoutSeconds", _HealthCheckTimeoutSeconds)
-
-	CreateTargetGroupInput_HealthyThresholdCount = CreateTargetGroupInput.AddMember("HealthyThresholdCount", _HealthCheckThresholdCount)
-
-	CreateTargetGroupInput_UnhealthyThresholdCount = CreateTargetGroupInput.AddMember("UnhealthyThresholdCount", _HealthCheckThresholdCount)
-
-	CreateTargetGroupInput_Matcher = CreateTargetGroupInput.AddMember("Matcher", Matcher)
-
-	CreateTargetGroupInput_TargetType = CreateTargetGroupInput.AddMember("TargetType", TargetTypeEnum)
-
-	CreateTargetGroupInput_Tags = CreateTargetGroupInput.AddMember("Tags", _TagList)
-
-	CreateTargetGroupInput_IpAddressType = CreateTargetGroupInput.AddMember("IpAddressType", TargetGroupIpAddressTypeEnum)
-
-	CreateTargetGroupInput_TargetControlPort = CreateTargetGroupInput.AddMember("TargetControlPort", _TargetControlPort)
-
-	CreateTargetGroupOutput_TargetGroups = CreateTargetGroupOutput.AddMember("TargetGroups", _TargetGroups)
-
-	CreateTrustStoreInput_Name = CreateTrustStoreInput.AddMember("Name", _TrustStoreName)
-
-	CreateTrustStoreInput_CaCertificatesBundleS3Bucket = CreateTrustStoreInput.AddMember("CaCertificatesBundleS3Bucket", _S3Bucket)
-
-	CreateTrustStoreInput_CaCertificatesBundleS3Key = CreateTrustStoreInput.AddMember("CaCertificatesBundleS3Key", _S3Key)
-
-	CreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion = CreateTrustStoreInput.AddMember("CaCertificatesBundleS3ObjectVersion", _S3ObjectVersion)
-
-	CreateTrustStoreInput_Tags = CreateTrustStoreInput.AddMember("Tags", _TagList)
-
-	CreateTrustStoreOutput_TrustStores = CreateTrustStoreOutput.AddMember("TrustStores", _TrustStores)
-
-	DeleteListenerInput_ListenerArn = DeleteListenerInput.AddMember("ListenerArn", _ListenerArn)
-
-	DeleteLoadBalancerInput_LoadBalancerArn = DeleteLoadBalancerInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	DeleteRuleInput_RuleArn = DeleteRuleInput.AddMember("RuleArn", _RuleArn)
-
-	DeleteSharedTrustStoreAssociationInput_TrustStoreArn = DeleteSharedTrustStoreAssociationInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	DeleteSharedTrustStoreAssociationInput_ResourceArn = DeleteSharedTrustStoreAssociationInput.AddMember("ResourceArn", _ResourceArn)
-
-	DeleteTargetGroupInput_TargetGroupArn = DeleteTargetGroupInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	DeleteTrustStoreInput_TrustStoreArn = DeleteTrustStoreInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	DeregisterTargetsInput_TargetGroupArn = DeregisterTargetsInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	DeregisterTargetsInput_Targets = DeregisterTargetsInput.AddMember("Targets", _TargetDescriptions)
-
-	DescribeAccountLimitsInput_Marker = DescribeAccountLimitsInput.AddMember("Marker", _Marker)
-
-	DescribeAccountLimitsInput_PageSize = DescribeAccountLimitsInput.AddMember("PageSize", _PageSize)
-
-	DescribeAccountLimitsOutput_Limits = DescribeAccountLimitsOutput.AddMember("Limits", _Limits)
-
-	DescribeAccountLimitsOutput_NextMarker = DescribeAccountLimitsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeCapacityReservationInput_LoadBalancerArn = DescribeCapacityReservationInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	DescribeCapacityReservationOutput_LastModifiedTime = DescribeCapacityReservationOutput.AddMember("LastModifiedTime", _LastModifiedTime)
-
-	DescribeCapacityReservationOutput_DecreaseRequestsRemaining = DescribeCapacityReservationOutput.AddMember("DecreaseRequestsRemaining", _DecreaseRequestsRemaining)
-
-	DescribeCapacityReservationOutput_MinimumLoadBalancerCapacity = DescribeCapacityReservationOutput.AddMember("MinimumLoadBalancerCapacity", MinimumLoadBalancerCapacity)
-
-	DescribeCapacityReservationOutput_CapacityReservationState = DescribeCapacityReservationOutput.AddMember("CapacityReservationState", _ZonalCapacityReservationStates)
-
-	DescribeListenerAttributesInput_ListenerArn = DescribeListenerAttributesInput.AddMember("ListenerArn", _ListenerArn)
-
-	DescribeListenerAttributesOutput_Attributes = DescribeListenerAttributesOutput.AddMember("Attributes", _ListenerAttributes)
-
-	DescribeListenerCertificatesInput_ListenerArn = DescribeListenerCertificatesInput.AddMember("ListenerArn", _ListenerArn)
-
-	DescribeListenerCertificatesInput_Marker = DescribeListenerCertificatesInput.AddMember("Marker", _Marker)
-
-	DescribeListenerCertificatesInput_PageSize = DescribeListenerCertificatesInput.AddMember("PageSize", _PageSize)
-
-	DescribeListenerCertificatesOutput_Certificates = DescribeListenerCertificatesOutput.AddMember("Certificates", _CertificateList)
-
-	DescribeListenerCertificatesOutput_NextMarker = DescribeListenerCertificatesOutput.AddMember("NextMarker", _Marker)
-
-	DescribeListenersInput_LoadBalancerArn = DescribeListenersInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	DescribeListenersInput_ListenerArns = DescribeListenersInput.AddMember("ListenerArns", _ListenerArns)
-
-	DescribeListenersInput_Marker = DescribeListenersInput.AddMember("Marker", _Marker)
-
-	DescribeListenersInput_PageSize = DescribeListenersInput.AddMember("PageSize", _PageSize)
-
-	DescribeListenersOutput_Listeners = DescribeListenersOutput.AddMember("Listeners", _Listeners)
-
-	DescribeListenersOutput_NextMarker = DescribeListenersOutput.AddMember("NextMarker", _Marker)
-
-	DescribeLoadBalancerAttributesInput_LoadBalancerArn = DescribeLoadBalancerAttributesInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	DescribeLoadBalancerAttributesOutput_Attributes = DescribeLoadBalancerAttributesOutput.AddMember("Attributes", _LoadBalancerAttributes)
-
-	DescribeLoadBalancersInput_LoadBalancerArns = DescribeLoadBalancersInput.AddMember("LoadBalancerArns", _LoadBalancerArns)
-
-	DescribeLoadBalancersInput_Names = DescribeLoadBalancersInput.AddMember("Names", _LoadBalancerNames)
-
-	DescribeLoadBalancersInput_Marker = DescribeLoadBalancersInput.AddMember("Marker", _Marker)
-
-	DescribeLoadBalancersInput_PageSize = DescribeLoadBalancersInput.AddMember("PageSize", _PageSize)
-
-	DescribeLoadBalancersOutput_LoadBalancers = DescribeLoadBalancersOutput.AddMember("LoadBalancers", _LoadBalancers)
-
-	DescribeLoadBalancersOutput_NextMarker = DescribeLoadBalancersOutput.AddMember("NextMarker", _Marker)
-
-	DescribeRulesInput_ListenerArn = DescribeRulesInput.AddMember("ListenerArn", _ListenerArn)
-
-	DescribeRulesInput_RuleArns = DescribeRulesInput.AddMember("RuleArns", _RuleArns)
-
-	DescribeRulesInput_Marker = DescribeRulesInput.AddMember("Marker", _Marker)
-
-	DescribeRulesInput_PageSize = DescribeRulesInput.AddMember("PageSize", _PageSize)
-
-	DescribeRulesOutput_Rules = DescribeRulesOutput.AddMember("Rules", _Rules)
-
-	DescribeRulesOutput_NextMarker = DescribeRulesOutput.AddMember("NextMarker", _Marker)
-
-	DescribeSSLPoliciesInput_Names = DescribeSSLPoliciesInput.AddMember("Names", _SslPolicyNames)
-
-	DescribeSSLPoliciesInput_Marker = DescribeSSLPoliciesInput.AddMember("Marker", _Marker)
-
-	DescribeSSLPoliciesInput_PageSize = DescribeSSLPoliciesInput.AddMember("PageSize", _PageSize)
-
-	DescribeSSLPoliciesInput_LoadBalancerType = DescribeSSLPoliciesInput.AddMember("LoadBalancerType", LoadBalancerTypeEnum)
-
-	DescribeSSLPoliciesOutput_SslPolicies = DescribeSSLPoliciesOutput.AddMember("SslPolicies", _SslPolicies)
-
-	DescribeSSLPoliciesOutput_NextMarker = DescribeSSLPoliciesOutput.AddMember("NextMarker", _Marker)
-
-	DescribeTagsInput_ResourceArns = DescribeTagsInput.AddMember("ResourceArns", _ResourceArns)
-
-	DescribeTagsOutput_TagDescriptions = DescribeTagsOutput.AddMember("TagDescriptions", _TagDescriptions)
-
-	DescribeTargetGroupAttributesInput_TargetGroupArn = DescribeTargetGroupAttributesInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	DescribeTargetGroupAttributesOutput_Attributes = DescribeTargetGroupAttributesOutput.AddMember("Attributes", _TargetGroupAttributes)
-
-	DescribeTargetGroupsInput_LoadBalancerArn = DescribeTargetGroupsInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	DescribeTargetGroupsInput_TargetGroupArns = DescribeTargetGroupsInput.AddMember("TargetGroupArns", _TargetGroupArns)
-
-	DescribeTargetGroupsInput_Names = DescribeTargetGroupsInput.AddMember("Names", _TargetGroupNames)
-
-	DescribeTargetGroupsInput_Marker = DescribeTargetGroupsInput.AddMember("Marker", _Marker)
-
-	DescribeTargetGroupsInput_PageSize = DescribeTargetGroupsInput.AddMember("PageSize", _PageSize)
-
-	DescribeTargetGroupsOutput_TargetGroups = DescribeTargetGroupsOutput.AddMember("TargetGroups", _TargetGroups)
-
-	DescribeTargetGroupsOutput_NextMarker = DescribeTargetGroupsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeTargetHealthInput_TargetGroupArn = DescribeTargetHealthInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	DescribeTargetHealthInput_Targets = DescribeTargetHealthInput.AddMember("Targets", _TargetDescriptions)
-
-	DescribeTargetHealthInput_Include = DescribeTargetHealthInput.AddMember("Include", _ListOfDescribeTargetHealthIncludeOptions)
-
-	DescribeTargetHealthOutput_TargetHealthDescriptions = DescribeTargetHealthOutput.AddMember("TargetHealthDescriptions", _TargetHealthDescriptions)
-
-	DescribeTrustStoreAssociationsInput_TrustStoreArn = DescribeTrustStoreAssociationsInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	DescribeTrustStoreAssociationsInput_Marker = DescribeTrustStoreAssociationsInput.AddMember("Marker", _Marker)
-
-	DescribeTrustStoreAssociationsInput_PageSize = DescribeTrustStoreAssociationsInput.AddMember("PageSize", _PageSize)
-
-	DescribeTrustStoreAssociationsOutput_TrustStoreAssociations = DescribeTrustStoreAssociationsOutput.AddMember("TrustStoreAssociations", _TrustStoreAssociations)
-
-	DescribeTrustStoreAssociationsOutput_NextMarker = DescribeTrustStoreAssociationsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeTrustStoreRevocationsInput_TrustStoreArn = DescribeTrustStoreRevocationsInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	DescribeTrustStoreRevocationsInput_RevocationIds = DescribeTrustStoreRevocationsInput.AddMember("RevocationIds", _RevocationIds)
-
-	DescribeTrustStoreRevocationsInput_Marker = DescribeTrustStoreRevocationsInput.AddMember("Marker", _Marker)
-
-	DescribeTrustStoreRevocationsInput_PageSize = DescribeTrustStoreRevocationsInput.AddMember("PageSize", _PageSize)
-
-	DescribeTrustStoreRevocationsOutput_TrustStoreRevocations = DescribeTrustStoreRevocationsOutput.AddMember("TrustStoreRevocations", _DescribeTrustStoreRevocationResponse)
-
-	DescribeTrustStoreRevocationsOutput_NextMarker = DescribeTrustStoreRevocationsOutput.AddMember("NextMarker", _Marker)
-
-	DescribeTrustStoresInput_TrustStoreArns = DescribeTrustStoresInput.AddMember("TrustStoreArns", _TrustStoreArns)
-
-	DescribeTrustStoresInput_Names = DescribeTrustStoresInput.AddMember("Names", _TrustStoreNames)
-
-	DescribeTrustStoresInput_Marker = DescribeTrustStoresInput.AddMember("Marker", _Marker)
-
-	DescribeTrustStoresInput_PageSize = DescribeTrustStoresInput.AddMember("PageSize", _PageSize)
-
-	DescribeTrustStoresOutput_TrustStores = DescribeTrustStoresOutput.AddMember("TrustStores", _TrustStores)
-
-	DescribeTrustStoresOutput_NextMarker = DescribeTrustStoresOutput.AddMember("NextMarker", _Marker)
-
-	GetResourcePolicyInput_ResourceArn = GetResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyOutput_Policy = GetResourcePolicyOutput.AddMember("Policy", _Policy)
-
-	GetTrustStoreCaCertificatesBundleInput_TrustStoreArn = GetTrustStoreCaCertificatesBundleInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	GetTrustStoreCaCertificatesBundleOutput_Location = GetTrustStoreCaCertificatesBundleOutput.AddMember("Location", _Location)
-
-	GetTrustStoreRevocationContentInput_TrustStoreArn = GetTrustStoreRevocationContentInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	GetTrustStoreRevocationContentInput_RevocationId = GetTrustStoreRevocationContentInput.AddMember("RevocationId", _RevocationId)
-
-	GetTrustStoreRevocationContentOutput_Location = GetTrustStoreRevocationContentOutput.AddMember("Location", _Location)
-
-	ModifyCapacityReservationInput_LoadBalancerArn = ModifyCapacityReservationInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	ModifyCapacityReservationInput_MinimumLoadBalancerCapacity = ModifyCapacityReservationInput.AddMember("MinimumLoadBalancerCapacity", MinimumLoadBalancerCapacity)
-
-	ModifyCapacityReservationInput_ResetCapacityReservation = ModifyCapacityReservationInput.AddMember("ResetCapacityReservation", _ResetCapacityReservation)
-
-	ModifyCapacityReservationOutput_LastModifiedTime = ModifyCapacityReservationOutput.AddMember("LastModifiedTime", _LastModifiedTime)
-
-	ModifyCapacityReservationOutput_DecreaseRequestsRemaining = ModifyCapacityReservationOutput.AddMember("DecreaseRequestsRemaining", _DecreaseRequestsRemaining)
-
-	ModifyCapacityReservationOutput_MinimumLoadBalancerCapacity = ModifyCapacityReservationOutput.AddMember("MinimumLoadBalancerCapacity", MinimumLoadBalancerCapacity)
-
-	ModifyCapacityReservationOutput_CapacityReservationState = ModifyCapacityReservationOutput.AddMember("CapacityReservationState", _ZonalCapacityReservationStates)
-
-	ModifyIpPoolsInput_LoadBalancerArn = ModifyIpPoolsInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	ModifyIpPoolsInput_IpamPools = ModifyIpPoolsInput.AddMember("IpamPools", IpamPools)
-
-	ModifyIpPoolsInput_RemoveIpamPools = ModifyIpPoolsInput.AddMember("RemoveIpamPools", _RemoveIpamPools)
-
-	ModifyIpPoolsOutput_IpamPools = ModifyIpPoolsOutput.AddMember("IpamPools", IpamPools)
-
-	ModifyListenerAttributesInput_ListenerArn = ModifyListenerAttributesInput.AddMember("ListenerArn", _ListenerArn)
-
-	ModifyListenerAttributesInput_Attributes = ModifyListenerAttributesInput.AddMember("Attributes", _ListenerAttributes)
-
-	ModifyListenerAttributesOutput_Attributes = ModifyListenerAttributesOutput.AddMember("Attributes", _ListenerAttributes)
-
-	ModifyListenerInput_ListenerArn = ModifyListenerInput.AddMember("ListenerArn", _ListenerArn)
-
-	ModifyListenerInput_Port = ModifyListenerInput.AddMember("Port", _Port)
-
-	ModifyListenerInput_Protocol = ModifyListenerInput.AddMember("Protocol", ProtocolEnum)
-
-	ModifyListenerInput_SslPolicy = ModifyListenerInput.AddMember("SslPolicy", _SslPolicyName)
-
-	ModifyListenerInput_Certificates = ModifyListenerInput.AddMember("Certificates", _CertificateList)
-
-	ModifyListenerInput_DefaultActions = ModifyListenerInput.AddMember("DefaultActions", _Actions)
-
-	ModifyListenerInput_AlpnPolicy = ModifyListenerInput.AddMember("AlpnPolicy", _AlpnPolicyName)
-
-	ModifyListenerInput_MutualAuthentication = ModifyListenerInput.AddMember("MutualAuthentication", MutualAuthenticationAttributes)
-
-	ModifyListenerOutput_Listeners = ModifyListenerOutput.AddMember("Listeners", _Listeners)
-
-	ModifyLoadBalancerAttributesInput_LoadBalancerArn = ModifyLoadBalancerAttributesInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	ModifyLoadBalancerAttributesInput_Attributes = ModifyLoadBalancerAttributesInput.AddMember("Attributes", _LoadBalancerAttributes)
-
-	ModifyLoadBalancerAttributesOutput_Attributes = ModifyLoadBalancerAttributesOutput.AddMember("Attributes", _LoadBalancerAttributes)
-
-	ModifyRuleInput_RuleArn = ModifyRuleInput.AddMember("RuleArn", _RuleArn)
-
-	ModifyRuleInput_Conditions = ModifyRuleInput.AddMember("Conditions", _RuleConditionList)
-
-	ModifyRuleInput_Actions = ModifyRuleInput.AddMember("Actions", _Actions)
-
-	ModifyRuleInput_Transforms = ModifyRuleInput.AddMember("Transforms", _RuleTransformList)
-
-	ModifyRuleInput_ResetTransforms = ModifyRuleInput.AddMember("ResetTransforms", _ResetTransforms)
-
-	ModifyRuleOutput_Rules = ModifyRuleOutput.AddMember("Rules", _Rules)
-
-	ModifyTargetGroupAttributesInput_TargetGroupArn = ModifyTargetGroupAttributesInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	ModifyTargetGroupAttributesInput_Attributes = ModifyTargetGroupAttributesInput.AddMember("Attributes", _TargetGroupAttributes)
-
-	ModifyTargetGroupAttributesOutput_Attributes = ModifyTargetGroupAttributesOutput.AddMember("Attributes", _TargetGroupAttributes)
-
-	ModifyTargetGroupInput_TargetGroupArn = ModifyTargetGroupInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	ModifyTargetGroupInput_HealthCheckProtocol = ModifyTargetGroupInput.AddMember("HealthCheckProtocol", ProtocolEnum)
-
-	ModifyTargetGroupInput_HealthCheckPort = ModifyTargetGroupInput.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	ModifyTargetGroupInput_HealthCheckPath = ModifyTargetGroupInput.AddMember("HealthCheckPath", _Path)
-
-	ModifyTargetGroupInput_HealthCheckEnabled = ModifyTargetGroupInput.AddMember("HealthCheckEnabled", _HealthCheckEnabled)
-
-	ModifyTargetGroupInput_HealthCheckIntervalSeconds = ModifyTargetGroupInput.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	ModifyTargetGroupInput_HealthCheckTimeoutSeconds = ModifyTargetGroupInput.AddMember("HealthCheckTimeoutSeconds", _HealthCheckTimeoutSeconds)
-
-	ModifyTargetGroupInput_HealthyThresholdCount = ModifyTargetGroupInput.AddMember("HealthyThresholdCount", _HealthCheckThresholdCount)
-
-	ModifyTargetGroupInput_UnhealthyThresholdCount = ModifyTargetGroupInput.AddMember("UnhealthyThresholdCount", _HealthCheckThresholdCount)
-
-	ModifyTargetGroupInput_Matcher = ModifyTargetGroupInput.AddMember("Matcher", Matcher)
-
-	ModifyTargetGroupOutput_TargetGroups = ModifyTargetGroupOutput.AddMember("TargetGroups", _TargetGroups)
-
-	ModifyTrustStoreInput_TrustStoreArn = ModifyTrustStoreInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	ModifyTrustStoreInput_CaCertificatesBundleS3Bucket = ModifyTrustStoreInput.AddMember("CaCertificatesBundleS3Bucket", _S3Bucket)
-
-	ModifyTrustStoreInput_CaCertificatesBundleS3Key = ModifyTrustStoreInput.AddMember("CaCertificatesBundleS3Key", _S3Key)
-
-	ModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion = ModifyTrustStoreInput.AddMember("CaCertificatesBundleS3ObjectVersion", _S3ObjectVersion)
-
-	ModifyTrustStoreOutput_TrustStores = ModifyTrustStoreOutput.AddMember("TrustStores", _TrustStores)
-
-	RegisterTargetsInput_TargetGroupArn = RegisterTargetsInput.AddMember("TargetGroupArn", _TargetGroupArn)
-
-	RegisterTargetsInput_Targets = RegisterTargetsInput.AddMember("Targets", _TargetDescriptions)
-
-	RemoveListenerCertificatesInput_ListenerArn = RemoveListenerCertificatesInput.AddMember("ListenerArn", _ListenerArn)
-
-	RemoveListenerCertificatesInput_Certificates = RemoveListenerCertificatesInput.AddMember("Certificates", _CertificateList)
-
-	RemoveTagsInput_ResourceArns = RemoveTagsInput.AddMember("ResourceArns", _ResourceArns)
-
-	RemoveTagsInput_TagKeys = RemoveTagsInput.AddMember("TagKeys", _TagKeys)
-
-	RemoveTrustStoreRevocationsInput_TrustStoreArn = RemoveTrustStoreRevocationsInput.AddMember("TrustStoreArn", _TrustStoreArn)
-
-	RemoveTrustStoreRevocationsInput_RevocationIds = RemoveTrustStoreRevocationsInput.AddMember("RevocationIds", _RevocationIds)
-
-	SetIpAddressTypeInput_LoadBalancerArn = SetIpAddressTypeInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	SetIpAddressTypeInput_IpAddressType = SetIpAddressTypeInput.AddMember("IpAddressType", IpAddressType)
-
-	SetIpAddressTypeOutput_IpAddressType = SetIpAddressTypeOutput.AddMember("IpAddressType", IpAddressType)
-
-	SetRulePrioritiesInput_RulePriorities = SetRulePrioritiesInput.AddMember("RulePriorities", _RulePriorityList)
-
-	SetRulePrioritiesOutput_Rules = SetRulePrioritiesOutput.AddMember("Rules", _Rules)
-
-	SetSecurityGroupsInput_LoadBalancerArn = SetSecurityGroupsInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	SetSecurityGroupsInput_SecurityGroups = SetSecurityGroupsInput.AddMember("SecurityGroups", _SecurityGroups)
-
-	SetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = SetSecurityGroupsInput.AddMember("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum)
-
-	SetSecurityGroupsOutput_SecurityGroupIds = SetSecurityGroupsOutput.AddMember("SecurityGroupIds", _SecurityGroups)
-
-	SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = SetSecurityGroupsOutput.AddMember("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum)
-
-	SetSubnetsInput_LoadBalancerArn = SetSubnetsInput.AddMember("LoadBalancerArn", _LoadBalancerArn)
-
-	SetSubnetsInput_Subnets = SetSubnetsInput.AddMember("Subnets", _Subnets)
-
-	SetSubnetsInput_SubnetMappings = SetSubnetsInput.AddMember("SubnetMappings", _SubnetMappings)
-
-	SetSubnetsInput_IpAddressType = SetSubnetsInput.AddMember("IpAddressType", IpAddressType)
-
-	SetSubnetsInput_EnablePrefixForIpv6SourceNat = SetSubnetsInput.AddMember("EnablePrefixForIpv6SourceNat", EnablePrefixForIpv6SourceNatEnum)
-
-	SetSubnetsOutput_AvailabilityZones = SetSubnetsOutput.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	SetSubnetsOutput_IpAddressType = SetSubnetsOutput.AddMember("IpAddressType", IpAddressType)
-
-	SetSubnetsOutput_EnablePrefixForIpv6SourceNat = SetSubnetsOutput.AddMember("EnablePrefixForIpv6SourceNat", EnablePrefixForIpv6SourceNatEnum)
-
-}
+var (
+	eAddListenerCertificates                                                      smithy.SchemaExtensions
+	eAddTags                                                                      smithy.SchemaExtensions
+	eAddTrustStoreRevocations                                                     smithy.SchemaExtensions
+	eCreateListener                                                               smithy.SchemaExtensions
+	eCreateLoadBalancer                                                           smithy.SchemaExtensions
+	eCreateRule                                                                   smithy.SchemaExtensions
+	eCreateTargetGroup                                                            smithy.SchemaExtensions
+	eCreateTrustStore                                                             smithy.SchemaExtensions
+	eDeleteListener                                                               smithy.SchemaExtensions
+	eDeleteLoadBalancer                                                           smithy.SchemaExtensions
+	eDeleteRule                                                                   smithy.SchemaExtensions
+	eDeleteSharedTrustStoreAssociation                                            smithy.SchemaExtensions
+	eDeleteTargetGroup                                                            smithy.SchemaExtensions
+	eDeleteTrustStore                                                             smithy.SchemaExtensions
+	eDeregisterTargets                                                            smithy.SchemaExtensions
+	eDescribeAccountLimits                                                        smithy.SchemaExtensions
+	eDescribeCapacityReservation                                                  smithy.SchemaExtensions
+	eDescribeListenerAttributes                                                   smithy.SchemaExtensions
+	eDescribeListenerCertificates                                                 smithy.SchemaExtensions
+	eDescribeListeners                                                            smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributes                                               smithy.SchemaExtensions
+	eDescribeLoadBalancers                                                        smithy.SchemaExtensions
+	eDescribeRules                                                                smithy.SchemaExtensions
+	eDescribeSSLPolicies                                                          smithy.SchemaExtensions
+	eDescribeTags                                                                 smithy.SchemaExtensions
+	eDescribeTargetGroupAttributes                                                smithy.SchemaExtensions
+	eDescribeTargetGroups                                                         smithy.SchemaExtensions
+	eDescribeTargetHealth                                                         smithy.SchemaExtensions
+	eDescribeTrustStoreAssociations                                               smithy.SchemaExtensions
+	eDescribeTrustStoreRevocations                                                smithy.SchemaExtensions
+	eDescribeTrustStores                                                          smithy.SchemaExtensions
+	eGetResourcePolicy                                                            smithy.SchemaExtensions
+	eGetTrustStoreCaCertificatesBundle                                            smithy.SchemaExtensions
+	eGetTrustStoreRevocationContent                                               smithy.SchemaExtensions
+	eModifyCapacityReservation                                                    smithy.SchemaExtensions
+	eModifyIpPools                                                                smithy.SchemaExtensions
+	eModifyListener                                                               smithy.SchemaExtensions
+	eModifyListenerAttributes                                                     smithy.SchemaExtensions
+	eModifyLoadBalancerAttributes                                                 smithy.SchemaExtensions
+	eModifyRule                                                                   smithy.SchemaExtensions
+	eModifyTargetGroup                                                            smithy.SchemaExtensions
+	eModifyTargetGroupAttributes                                                  smithy.SchemaExtensions
+	eModifyTrustStore                                                             smithy.SchemaExtensions
+	eRegisterTargets                                                              smithy.SchemaExtensions
+	eRemoveListenerCertificates                                                   smithy.SchemaExtensions
+	eRemoveTags                                                                   smithy.SchemaExtensions
+	eRemoveTrustStoreRevocations                                                  smithy.SchemaExtensions
+	eSetIpAddressType                                                             smithy.SchemaExtensions
+	eSetRulePriorities                                                            smithy.SchemaExtensions
+	eSetSecurityGroups                                                            smithy.SchemaExtensions
+	eSetSubnets                                                                   smithy.SchemaExtensions
+	e_ElasticLoadBalancing_v10                                                    smithy.SchemaExtensions
+	eAction                                                                       smithy.SchemaExtensions
+	eAction_Type                                                                  smithy.SchemaExtensions
+	eAction_TargetGroupArn                                                        smithy.SchemaExtensions
+	eAction_AuthenticateOidcConfig                                                smithy.SchemaExtensions
+	eAction_AuthenticateCognitoConfig                                             smithy.SchemaExtensions
+	eAction_Order                                                                 smithy.SchemaExtensions
+	eAction_RedirectConfig                                                        smithy.SchemaExtensions
+	eAction_FixedResponseConfig                                                   smithy.SchemaExtensions
+	eAction_ForwardConfig                                                         smithy.SchemaExtensions
+	eAction_JwtValidationConfig                                                   smithy.SchemaExtensions
+	e_ActionOrder                                                                 smithy.SchemaExtensions
+	e_Actions                                                                     smithy.SchemaExtensions
+	e_Actions_member                                                              smithy.SchemaExtensions
+	eActionTypeEnum                                                               smithy.SchemaExtensions
+	eActionTypeEnum_FORWARD                                                       smithy.SchemaExtensions
+	eActionTypeEnum_AUTHENTICATE_OIDC                                             smithy.SchemaExtensions
+	eActionTypeEnum_AUTHENTICATE_COGNITO                                          smithy.SchemaExtensions
+	eActionTypeEnum_REDIRECT                                                      smithy.SchemaExtensions
+	eActionTypeEnum_FIXED_RESPONSE                                                smithy.SchemaExtensions
+	eActionTypeEnum_JWT_VALIDATION                                                smithy.SchemaExtensions
+	eAdministrativeOverride                                                       smithy.SchemaExtensions
+	eAdministrativeOverride_State                                                 smithy.SchemaExtensions
+	eAdministrativeOverride_Reason                                                smithy.SchemaExtensions
+	eAdministrativeOverride_Description                                           smithy.SchemaExtensions
+	eAdvertiseTrustStoreCaNamesEnum                                               smithy.SchemaExtensions
+	eAdvertiseTrustStoreCaNamesEnum_on                                            smithy.SchemaExtensions
+	eAdvertiseTrustStoreCaNamesEnum_off                                           smithy.SchemaExtensions
+	e_AllocationId                                                                smithy.SchemaExtensions
+	eAllocationIdNotFoundException                                                smithy.SchemaExtensions
+	eAllocationIdNotFoundException_Message                                        smithy.SchemaExtensions
+	e_AlpnPolicyName                                                              smithy.SchemaExtensions
+	e_AlpnPolicyName_member                                                       smithy.SchemaExtensions
+	eALPNPolicyNotSupportedException                                              smithy.SchemaExtensions
+	eALPNPolicyNotSupportedException_Message                                      smithy.SchemaExtensions
+	e_AlpnPolicyValue                                                             smithy.SchemaExtensions
+	eAnomalyDetection                                                             smithy.SchemaExtensions
+	eAnomalyDetection_Result                                                      smithy.SchemaExtensions
+	eAnomalyDetection_MitigationInEffect                                          smithy.SchemaExtensions
+	eAnomalyResultEnum                                                            smithy.SchemaExtensions
+	eAnomalyResultEnum_ANOMALOUS                                                  smithy.SchemaExtensions
+	eAnomalyResultEnum_NORMAL                                                     smithy.SchemaExtensions
+	e_AuthenticateCognitoActionAuthenticationRequestExtraParams                   smithy.SchemaExtensions
+	e_AuthenticateCognitoActionAuthenticationRequestExtraParams_key               smithy.SchemaExtensions
+	e_AuthenticateCognitoActionAuthenticationRequestExtraParams_value             smithy.SchemaExtensions
+	e_AuthenticateCognitoActionAuthenticationRequestParamName                     smithy.SchemaExtensions
+	e_AuthenticateCognitoActionAuthenticationRequestParamValue                    smithy.SchemaExtensions
+	eAuthenticateCognitoActionConditionalBehaviorEnum                             smithy.SchemaExtensions
+	eAuthenticateCognitoActionConditionalBehaviorEnum_DENY                        smithy.SchemaExtensions
+	eAuthenticateCognitoActionConditionalBehaviorEnum_ALLOW                       smithy.SchemaExtensions
+	eAuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE                smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig                                              smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_UserPoolArn                                  smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_UserPoolClientId                             smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_UserPoolDomain                               smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_SessionCookieName                            smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_Scope                                        smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_SessionTimeout                               smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_AuthenticationRequestExtraParams             smithy.SchemaExtensions
+	eAuthenticateCognitoActionConfig_OnUnauthenticatedRequest                     smithy.SchemaExtensions
+	e_AuthenticateCognitoActionScope                                              smithy.SchemaExtensions
+	e_AuthenticateCognitoActionSessionCookieName                                  smithy.SchemaExtensions
+	e_AuthenticateCognitoActionSessionTimeout                                     smithy.SchemaExtensions
+	e_AuthenticateCognitoActionUserPoolArn                                        smithy.SchemaExtensions
+	e_AuthenticateCognitoActionUserPoolClientId                                   smithy.SchemaExtensions
+	e_AuthenticateCognitoActionUserPoolDomain                                     smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthenticationRequestExtraParams                      smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthenticationRequestExtraParams_key                  smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthenticationRequestExtraParams_value                smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthenticationRequestParamName                        smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthenticationRequestParamValue                       smithy.SchemaExtensions
+	e_AuthenticateOidcActionAuthorizationEndpoint                                 smithy.SchemaExtensions
+	e_AuthenticateOidcActionClientId                                              smithy.SchemaExtensions
+	e_AuthenticateOidcActionClientSecret                                          smithy.SchemaExtensions
+	eAuthenticateOidcActionConditionalBehaviorEnum                                smithy.SchemaExtensions
+	eAuthenticateOidcActionConditionalBehaviorEnum_DENY                           smithy.SchemaExtensions
+	eAuthenticateOidcActionConditionalBehaviorEnum_ALLOW                          smithy.SchemaExtensions
+	eAuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE                   smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig                                                 smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_Issuer                                          smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_AuthorizationEndpoint                           smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_TokenEndpoint                                   smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_UserInfoEndpoint                                smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_ClientId                                        smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_ClientSecret                                    smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_SessionCookieName                               smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_Scope                                           smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_SessionTimeout                                  smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_AuthenticationRequestExtraParams                smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_OnUnauthenticatedRequest                        smithy.SchemaExtensions
+	eAuthenticateOidcActionConfig_UseExistingClientSecret                         smithy.SchemaExtensions
+	e_AuthenticateOidcActionIssuer                                                smithy.SchemaExtensions
+	e_AuthenticateOidcActionScope                                                 smithy.SchemaExtensions
+	e_AuthenticateOidcActionSessionCookieName                                     smithy.SchemaExtensions
+	e_AuthenticateOidcActionSessionTimeout                                        smithy.SchemaExtensions
+	e_AuthenticateOidcActionTokenEndpoint                                         smithy.SchemaExtensions
+	e_AuthenticateOidcActionUseExistingClientSecret                               smithy.SchemaExtensions
+	e_AuthenticateOidcActionUserInfoEndpoint                                      smithy.SchemaExtensions
+	eAvailabilityZone                                                             smithy.SchemaExtensions
+	eAvailabilityZone_ZoneName                                                    smithy.SchemaExtensions
+	eAvailabilityZone_SubnetId                                                    smithy.SchemaExtensions
+	eAvailabilityZone_OutpostId                                                   smithy.SchemaExtensions
+	eAvailabilityZone_LoadBalancerAddresses                                       smithy.SchemaExtensions
+	eAvailabilityZone_SourceNatIpv6Prefixes                                       smithy.SchemaExtensions
+	eAvailabilityZoneNotSupportedException                                        smithy.SchemaExtensions
+	eAvailabilityZoneNotSupportedException_Message                                smithy.SchemaExtensions
+	e_AvailabilityZones                                                           smithy.SchemaExtensions
+	e_AvailabilityZones_member                                                    smithy.SchemaExtensions
+	eCaCertificatesBundleNotFoundException                                        smithy.SchemaExtensions
+	eCaCertificatesBundleNotFoundException_Message                                smithy.SchemaExtensions
+	e_CanonicalHostedZoneId                                                       smithy.SchemaExtensions
+	eCapacityDecreaseRequestsLimitExceededException                               smithy.SchemaExtensions
+	eCapacityDecreaseRequestsLimitExceededException_Message                       smithy.SchemaExtensions
+	eCapacityReservationPendingException                                          smithy.SchemaExtensions
+	eCapacityReservationPendingException_Message                                  smithy.SchemaExtensions
+	eCapacityReservationStateEnum                                                 smithy.SchemaExtensions
+	eCapacityReservationStateEnum_PROVISIONED                                     smithy.SchemaExtensions
+	eCapacityReservationStateEnum_PENDING                                         smithy.SchemaExtensions
+	eCapacityReservationStateEnum_REBALANCING                                     smithy.SchemaExtensions
+	eCapacityReservationStateEnum_FAILED                                          smithy.SchemaExtensions
+	eCapacityReservationStatus                                                    smithy.SchemaExtensions
+	eCapacityReservationStatus_Code                                               smithy.SchemaExtensions
+	eCapacityReservationStatus_Reason                                             smithy.SchemaExtensions
+	e_CapacityUnits                                                               smithy.SchemaExtensions
+	e_CapacityUnitsDouble                                                         smithy.SchemaExtensions
+	eCapacityUnitsLimitExceededException                                          smithy.SchemaExtensions
+	eCapacityUnitsLimitExceededException_Message                                  smithy.SchemaExtensions
+	eCertificate                                                                  smithy.SchemaExtensions
+	eCertificate_CertificateArn                                                   smithy.SchemaExtensions
+	eCertificate_IsDefault                                                        smithy.SchemaExtensions
+	e_CertificateArn                                                              smithy.SchemaExtensions
+	e_CertificateList                                                             smithy.SchemaExtensions
+	e_CertificateList_member                                                      smithy.SchemaExtensions
+	eCertificateNotFoundException                                                 smithy.SchemaExtensions
+	eCertificateNotFoundException_Message                                         smithy.SchemaExtensions
+	eCipher                                                                       smithy.SchemaExtensions
+	eCipher_Name                                                                  smithy.SchemaExtensions
+	eCipher_Priority                                                              smithy.SchemaExtensions
+	e_CipherName                                                                  smithy.SchemaExtensions
+	e_CipherPriority                                                              smithy.SchemaExtensions
+	e_Ciphers                                                                     smithy.SchemaExtensions
+	e_Ciphers_member                                                              smithy.SchemaExtensions
+	e_ConditionFieldName                                                          smithy.SchemaExtensions
+	e_CreatedTime                                                                 smithy.SchemaExtensions
+	e_CustomerOwnedIpv4Pool                                                       smithy.SchemaExtensions
+	e_DecreaseRequestsRemaining                                                   smithy.SchemaExtensions
+	e_Default                                                                     smithy.SchemaExtensions
+	eDeleteAssociationSameAccountException                                        smithy.SchemaExtensions
+	eDeleteAssociationSameAccountException_Message                                smithy.SchemaExtensions
+	eDescribeTargetHealthInputIncludeEnum                                         smithy.SchemaExtensions
+	eDescribeTargetHealthInputIncludeEnum_ANOMALY                                 smithy.SchemaExtensions
+	eDescribeTargetHealthInputIncludeEnum_ALL                                     smithy.SchemaExtensions
+	eDescribeTrustStoreRevocation                                                 smithy.SchemaExtensions
+	eDescribeTrustStoreRevocation_TrustStoreArn                                   smithy.SchemaExtensions
+	eDescribeTrustStoreRevocation_RevocationId                                    smithy.SchemaExtensions
+	eDescribeTrustStoreRevocation_RevocationType                                  smithy.SchemaExtensions
+	eDescribeTrustStoreRevocation_NumberOfRevokedEntries                          smithy.SchemaExtensions
+	e_DescribeTrustStoreRevocationResponse                                        smithy.SchemaExtensions
+	e_DescribeTrustStoreRevocationResponse_member                                 smithy.SchemaExtensions
+	e_Description                                                                 smithy.SchemaExtensions
+	e_DNSName                                                                     smithy.SchemaExtensions
+	eDuplicateListenerException                                                   smithy.SchemaExtensions
+	eDuplicateListenerException_Message                                           smithy.SchemaExtensions
+	eDuplicateLoadBalancerNameException                                           smithy.SchemaExtensions
+	eDuplicateLoadBalancerNameException_Message                                   smithy.SchemaExtensions
+	eDuplicateTagKeysException                                                    smithy.SchemaExtensions
+	eDuplicateTagKeysException_Message                                            smithy.SchemaExtensions
+	eDuplicateTargetGroupNameException                                            smithy.SchemaExtensions
+	eDuplicateTargetGroupNameException_Message                                    smithy.SchemaExtensions
+	eDuplicateTrustStoreNameException                                             smithy.SchemaExtensions
+	eDuplicateTrustStoreNameException_Message                                     smithy.SchemaExtensions
+	eEnablePrefixForIpv6SourceNatEnum                                             smithy.SchemaExtensions
+	eEnablePrefixForIpv6SourceNatEnum_ON                                          smithy.SchemaExtensions
+	eEnablePrefixForIpv6SourceNatEnum_OFF                                         smithy.SchemaExtensions
+	e_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic                        smithy.SchemaExtensions
+	eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum                     smithy.SchemaExtensions
+	eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on                  smithy.SchemaExtensions
+	eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off                 smithy.SchemaExtensions
+	e_ErrorDescription                                                            smithy.SchemaExtensions
+	eFixedResponseActionConfig                                                    smithy.SchemaExtensions
+	eFixedResponseActionConfig_MessageBody                                        smithy.SchemaExtensions
+	eFixedResponseActionConfig_StatusCode                                         smithy.SchemaExtensions
+	eFixedResponseActionConfig_ContentType                                        smithy.SchemaExtensions
+	e_FixedResponseActionContentType                                              smithy.SchemaExtensions
+	e_FixedResponseActionMessage                                                  smithy.SchemaExtensions
+	e_FixedResponseActionStatusCode                                               smithy.SchemaExtensions
+	eForwardActionConfig                                                          smithy.SchemaExtensions
+	eForwardActionConfig_TargetGroups                                             smithy.SchemaExtensions
+	eForwardActionConfig_TargetGroupStickinessConfig                              smithy.SchemaExtensions
+	e_GrpcCode                                                                    smithy.SchemaExtensions
+	e_HealthCheckEnabled                                                          smithy.SchemaExtensions
+	e_HealthCheckIntervalSeconds                                                  smithy.SchemaExtensions
+	e_HealthCheckPort                                                             smithy.SchemaExtensions
+	e_HealthCheckThresholdCount                                                   smithy.SchemaExtensions
+	e_HealthCheckTimeoutSeconds                                                   smithy.SchemaExtensions
+	eHealthUnavailableException                                                   smithy.SchemaExtensions
+	eHealthUnavailableException_Message                                           smithy.SchemaExtensions
+	eHostHeaderConditionConfig                                                    smithy.SchemaExtensions
+	eHostHeaderConditionConfig_Values                                             smithy.SchemaExtensions
+	eHostHeaderConditionConfig_RegexValues                                        smithy.SchemaExtensions
+	eHostHeaderRewriteConfig                                                      smithy.SchemaExtensions
+	eHostHeaderRewriteConfig_Rewrites                                             smithy.SchemaExtensions
+	e_HttpCode                                                                    smithy.SchemaExtensions
+	eHttpHeaderConditionConfig                                                    smithy.SchemaExtensions
+	eHttpHeaderConditionConfig_HttpHeaderName                                     smithy.SchemaExtensions
+	eHttpHeaderConditionConfig_Values                                             smithy.SchemaExtensions
+	eHttpHeaderConditionConfig_RegexValues                                        smithy.SchemaExtensions
+	e_HttpHeaderConditionName                                                     smithy.SchemaExtensions
+	eHttpRequestMethodConditionConfig                                             smithy.SchemaExtensions
+	eHttpRequestMethodConditionConfig_Values                                      smithy.SchemaExtensions
+	e_IgnoreClientCertificateExpiry                                               smithy.SchemaExtensions
+	eIncompatibleProtocolsException                                               smithy.SchemaExtensions
+	eIncompatibleProtocolsException_Message                                       smithy.SchemaExtensions
+	eInsufficientCapacityException                                                smithy.SchemaExtensions
+	eInsufficientCapacityException_Message                                        smithy.SchemaExtensions
+	eInvalidCaCertificatesBundleException                                         smithy.SchemaExtensions
+	eInvalidCaCertificatesBundleException_Message                                 smithy.SchemaExtensions
+	eInvalidConfigurationRequestException                                         smithy.SchemaExtensions
+	eInvalidConfigurationRequestException_Message                                 smithy.SchemaExtensions
+	eInvalidLoadBalancerActionException                                           smithy.SchemaExtensions
+	eInvalidLoadBalancerActionException_Message                                   smithy.SchemaExtensions
+	eInvalidRevocationContentException                                            smithy.SchemaExtensions
+	eInvalidRevocationContentException_Message                                    smithy.SchemaExtensions
+	eInvalidSchemeException                                                       smithy.SchemaExtensions
+	eInvalidSchemeException_Message                                               smithy.SchemaExtensions
+	eInvalidSecurityGroupException                                                smithy.SchemaExtensions
+	eInvalidSecurityGroupException_Message                                        smithy.SchemaExtensions
+	eInvalidSubnetException                                                       smithy.SchemaExtensions
+	eInvalidSubnetException_Message                                               smithy.SchemaExtensions
+	eInvalidTargetException                                                       smithy.SchemaExtensions
+	eInvalidTargetException_Message                                               smithy.SchemaExtensions
+	e_IpAddress                                                                   smithy.SchemaExtensions
+	eIpAddressType                                                                smithy.SchemaExtensions
+	eIpAddressType_IPV4                                                           smithy.SchemaExtensions
+	eIpAddressType_DUALSTACK                                                      smithy.SchemaExtensions
+	eIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4                                  smithy.SchemaExtensions
+	e_IpamPoolId                                                                  smithy.SchemaExtensions
+	eIpamPools                                                                    smithy.SchemaExtensions
+	eIpamPools_Ipv4IpamPoolId                                                     smithy.SchemaExtensions
+	e_IPv6Address                                                                 smithy.SchemaExtensions
+	e_IsDefault                                                                   smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaim                                           smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaim_Format                                    smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaim_Name                                      smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaim_Values                                    smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaimFormatEnum                                 smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING                   smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY                    smithy.SchemaExtensions
+	eJwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES          smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaimName                                      smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaims                                         smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaims_member                                  smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaimValue                                     smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaimValues                                    smithy.SchemaExtensions
+	e_JwtValidationActionAdditionalClaimValues_member                             smithy.SchemaExtensions
+	eJwtValidationActionConfig                                                    smithy.SchemaExtensions
+	eJwtValidationActionConfig_JwksEndpoint                                       smithy.SchemaExtensions
+	eJwtValidationActionConfig_Issuer                                             smithy.SchemaExtensions
+	eJwtValidationActionConfig_AdditionalClaims                                   smithy.SchemaExtensions
+	e_JwtValidationActionIssuer                                                   smithy.SchemaExtensions
+	e_JwtValidationActionJwksEndpoint                                             smithy.SchemaExtensions
+	e_LastModifiedTime                                                            smithy.SchemaExtensions
+	eLimit                                                                        smithy.SchemaExtensions
+	eLimit_Name                                                                   smithy.SchemaExtensions
+	eLimit_Max                                                                    smithy.SchemaExtensions
+	e_Limits                                                                      smithy.SchemaExtensions
+	e_Limits_member                                                               smithy.SchemaExtensions
+	eListener                                                                     smithy.SchemaExtensions
+	eListener_ListenerArn                                                         smithy.SchemaExtensions
+	eListener_LoadBalancerArn                                                     smithy.SchemaExtensions
+	eListener_Port                                                                smithy.SchemaExtensions
+	eListener_Protocol                                                            smithy.SchemaExtensions
+	eListener_Certificates                                                        smithy.SchemaExtensions
+	eListener_SslPolicy                                                           smithy.SchemaExtensions
+	eListener_DefaultActions                                                      smithy.SchemaExtensions
+	eListener_AlpnPolicy                                                          smithy.SchemaExtensions
+	eListener_MutualAuthentication                                                smithy.SchemaExtensions
+	e_ListenerArn                                                                 smithy.SchemaExtensions
+	e_ListenerArns                                                                smithy.SchemaExtensions
+	e_ListenerArns_member                                                         smithy.SchemaExtensions
+	eListenerAttribute                                                            smithy.SchemaExtensions
+	eListenerAttribute_Key                                                        smithy.SchemaExtensions
+	eListenerAttribute_Value                                                      smithy.SchemaExtensions
+	e_ListenerAttributeKey                                                        smithy.SchemaExtensions
+	e_ListenerAttributes                                                          smithy.SchemaExtensions
+	e_ListenerAttributes_member                                                   smithy.SchemaExtensions
+	e_ListenerAttributeValue                                                      smithy.SchemaExtensions
+	eListenerNotFoundException                                                    smithy.SchemaExtensions
+	eListenerNotFoundException_Message                                            smithy.SchemaExtensions
+	e_Listeners                                                                   smithy.SchemaExtensions
+	e_Listeners_member                                                            smithy.SchemaExtensions
+	e_ListOfDescribeTargetHealthIncludeOptions                                    smithy.SchemaExtensions
+	e_ListOfDescribeTargetHealthIncludeOptions_member                             smithy.SchemaExtensions
+	e_ListOfString                                                                smithy.SchemaExtensions
+	e_ListOfString_member                                                         smithy.SchemaExtensions
+	eLoadBalancer                                                                 smithy.SchemaExtensions
+	eLoadBalancer_LoadBalancerArn                                                 smithy.SchemaExtensions
+	eLoadBalancer_DNSName                                                         smithy.SchemaExtensions
+	eLoadBalancer_CanonicalHostedZoneId                                           smithy.SchemaExtensions
+	eLoadBalancer_CreatedTime                                                     smithy.SchemaExtensions
+	eLoadBalancer_LoadBalancerName                                                smithy.SchemaExtensions
+	eLoadBalancer_Scheme                                                          smithy.SchemaExtensions
+	eLoadBalancer_VpcId                                                           smithy.SchemaExtensions
+	eLoadBalancer_State                                                           smithy.SchemaExtensions
+	eLoadBalancer_Type                                                            smithy.SchemaExtensions
+	eLoadBalancer_AvailabilityZones                                               smithy.SchemaExtensions
+	eLoadBalancer_SecurityGroups                                                  smithy.SchemaExtensions
+	eLoadBalancer_IpAddressType                                                   smithy.SchemaExtensions
+	eLoadBalancer_CustomerOwnedIpv4Pool                                           smithy.SchemaExtensions
+	eLoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic            smithy.SchemaExtensions
+	eLoadBalancer_EnablePrefixForIpv6SourceNat                                    smithy.SchemaExtensions
+	eLoadBalancer_IpamPools                                                       smithy.SchemaExtensions
+	eLoadBalancerAddress                                                          smithy.SchemaExtensions
+	eLoadBalancerAddress_IpAddress                                                smithy.SchemaExtensions
+	eLoadBalancerAddress_AllocationId                                             smithy.SchemaExtensions
+	eLoadBalancerAddress_PrivateIPv4Address                                       smithy.SchemaExtensions
+	eLoadBalancerAddress_IPv6Address                                              smithy.SchemaExtensions
+	e_LoadBalancerAddresses                                                       smithy.SchemaExtensions
+	e_LoadBalancerAddresses_member                                                smithy.SchemaExtensions
+	e_LoadBalancerArn                                                             smithy.SchemaExtensions
+	e_LoadBalancerArns                                                            smithy.SchemaExtensions
+	e_LoadBalancerArns_member                                                     smithy.SchemaExtensions
+	eLoadBalancerAttribute                                                        smithy.SchemaExtensions
+	eLoadBalancerAttribute_Key                                                    smithy.SchemaExtensions
+	eLoadBalancerAttribute_Value                                                  smithy.SchemaExtensions
+	e_LoadBalancerAttributeKey                                                    smithy.SchemaExtensions
+	e_LoadBalancerAttributes                                                      smithy.SchemaExtensions
+	e_LoadBalancerAttributes_member                                               smithy.SchemaExtensions
+	e_LoadBalancerAttributeValue                                                  smithy.SchemaExtensions
+	e_LoadBalancerName                                                            smithy.SchemaExtensions
+	e_LoadBalancerNames                                                           smithy.SchemaExtensions
+	e_LoadBalancerNames_member                                                    smithy.SchemaExtensions
+	eLoadBalancerNotFoundException                                                smithy.SchemaExtensions
+	eLoadBalancerNotFoundException_Message                                        smithy.SchemaExtensions
+	e_LoadBalancers                                                               smithy.SchemaExtensions
+	e_LoadBalancers_member                                                        smithy.SchemaExtensions
+	eLoadBalancerSchemeEnum                                                       smithy.SchemaExtensions
+	eLoadBalancerSchemeEnum_INTERNET_FACING                                       smithy.SchemaExtensions
+	eLoadBalancerSchemeEnum_INTERNAL                                              smithy.SchemaExtensions
+	eLoadBalancerState                                                            smithy.SchemaExtensions
+	eLoadBalancerState_Code                                                       smithy.SchemaExtensions
+	eLoadBalancerState_Reason                                                     smithy.SchemaExtensions
+	eLoadBalancerStateEnum                                                        smithy.SchemaExtensions
+	eLoadBalancerStateEnum_ACTIVE                                                 smithy.SchemaExtensions
+	eLoadBalancerStateEnum_PROVISIONING                                           smithy.SchemaExtensions
+	eLoadBalancerStateEnum_ACTIVE_IMPAIRED                                        smithy.SchemaExtensions
+	eLoadBalancerStateEnum_FAILED                                                 smithy.SchemaExtensions
+	eLoadBalancerTypeEnum                                                         smithy.SchemaExtensions
+	eLoadBalancerTypeEnum_APPLICATION                                             smithy.SchemaExtensions
+	eLoadBalancerTypeEnum_NETWORK                                                 smithy.SchemaExtensions
+	eLoadBalancerTypeEnum_GATEWAY                                                 smithy.SchemaExtensions
+	e_Location                                                                    smithy.SchemaExtensions
+	e_Marker                                                                      smithy.SchemaExtensions
+	eMatcher                                                                      smithy.SchemaExtensions
+	eMatcher_HttpCode                                                             smithy.SchemaExtensions
+	eMatcher_GrpcCode                                                             smithy.SchemaExtensions
+	e_Max                                                                         smithy.SchemaExtensions
+	eMinimumLoadBalancerCapacity                                                  smithy.SchemaExtensions
+	eMinimumLoadBalancerCapacity_CapacityUnits                                    smithy.SchemaExtensions
+	eMitigationInEffectEnum                                                       smithy.SchemaExtensions
+	eMitigationInEffectEnum_YES                                                   smithy.SchemaExtensions
+	eMitigationInEffectEnum_NO                                                    smithy.SchemaExtensions
+	e_Mode                                                                        smithy.SchemaExtensions
+	eMutualAuthenticationAttributes                                               smithy.SchemaExtensions
+	eMutualAuthenticationAttributes_Mode                                          smithy.SchemaExtensions
+	eMutualAuthenticationAttributes_TrustStoreArn                                 smithy.SchemaExtensions
+	eMutualAuthenticationAttributes_IgnoreClientCertificateExpiry                 smithy.SchemaExtensions
+	eMutualAuthenticationAttributes_TrustStoreAssociationStatus                   smithy.SchemaExtensions
+	eMutualAuthenticationAttributes_AdvertiseTrustStoreCaNames                    smithy.SchemaExtensions
+	e_Name                                                                        smithy.SchemaExtensions
+	e_NumberOfCaCertificates                                                      smithy.SchemaExtensions
+	e_NumberOfRevokedEntries                                                      smithy.SchemaExtensions
+	eOperationNotPermittedException                                               smithy.SchemaExtensions
+	eOperationNotPermittedException_Message                                       smithy.SchemaExtensions
+	e_OutpostId                                                                   smithy.SchemaExtensions
+	e_PageSize                                                                    smithy.SchemaExtensions
+	e_Path                                                                        smithy.SchemaExtensions
+	ePathPatternConditionConfig                                                   smithy.SchemaExtensions
+	ePathPatternConditionConfig_Values                                            smithy.SchemaExtensions
+	ePathPatternConditionConfig_RegexValues                                       smithy.SchemaExtensions
+	e_Policy                                                                      smithy.SchemaExtensions
+	e_Port                                                                        smithy.SchemaExtensions
+	ePriorityInUseException                                                       smithy.SchemaExtensions
+	ePriorityInUseException_Message                                               smithy.SchemaExtensions
+	ePriorRequestNotCompleteException                                             smithy.SchemaExtensions
+	ePriorRequestNotCompleteException_Message                                     smithy.SchemaExtensions
+	e_PrivateIPv4Address                                                          smithy.SchemaExtensions
+	eProtocolEnum                                                                 smithy.SchemaExtensions
+	eProtocolEnum_HTTP                                                            smithy.SchemaExtensions
+	eProtocolEnum_HTTPS                                                           smithy.SchemaExtensions
+	eProtocolEnum_TCP                                                             smithy.SchemaExtensions
+	eProtocolEnum_TLS                                                             smithy.SchemaExtensions
+	eProtocolEnum_UDP                                                             smithy.SchemaExtensions
+	eProtocolEnum_TCP_UDP                                                         smithy.SchemaExtensions
+	eProtocolEnum_GENEVE                                                          smithy.SchemaExtensions
+	eProtocolEnum_QUIC                                                            smithy.SchemaExtensions
+	eProtocolEnum_TCP_QUIC                                                        smithy.SchemaExtensions
+	e_ProtocolVersion                                                             smithy.SchemaExtensions
+	eQueryStringConditionConfig                                                   smithy.SchemaExtensions
+	eQueryStringConditionConfig_Values                                            smithy.SchemaExtensions
+	eQueryStringKeyValuePair                                                      smithy.SchemaExtensions
+	eQueryStringKeyValuePair_Key                                                  smithy.SchemaExtensions
+	eQueryStringKeyValuePair_Value                                                smithy.SchemaExtensions
+	e_QueryStringKeyValuePairList                                                 smithy.SchemaExtensions
+	e_QueryStringKeyValuePairList_member                                          smithy.SchemaExtensions
+	e_QuicServerId                                                                smithy.SchemaExtensions
+	eRedirectActionConfig                                                         smithy.SchemaExtensions
+	eRedirectActionConfig_Protocol                                                smithy.SchemaExtensions
+	eRedirectActionConfig_Port                                                    smithy.SchemaExtensions
+	eRedirectActionConfig_Host                                                    smithy.SchemaExtensions
+	eRedirectActionConfig_Path                                                    smithy.SchemaExtensions
+	eRedirectActionConfig_Query                                                   smithy.SchemaExtensions
+	eRedirectActionConfig_StatusCode                                              smithy.SchemaExtensions
+	e_RedirectActionHost                                                          smithy.SchemaExtensions
+	e_RedirectActionPath                                                          smithy.SchemaExtensions
+	e_RedirectActionPort                                                          smithy.SchemaExtensions
+	e_RedirectActionProtocol                                                      smithy.SchemaExtensions
+	e_RedirectActionQuery                                                         smithy.SchemaExtensions
+	eRedirectActionStatusCodeEnum                                                 smithy.SchemaExtensions
+	eRedirectActionStatusCodeEnum_HTTP_301                                        smithy.SchemaExtensions
+	eRedirectActionStatusCodeEnum_HTTP_302                                        smithy.SchemaExtensions
+	eRemoveIpamPoolEnum                                                           smithy.SchemaExtensions
+	eRemoveIpamPoolEnum_ipv4                                                      smithy.SchemaExtensions
+	e_RemoveIpamPools                                                             smithy.SchemaExtensions
+	e_RemoveIpamPools_member                                                      smithy.SchemaExtensions
+	e_ResetCapacityReservation                                                    smithy.SchemaExtensions
+	e_ResetTransforms                                                             smithy.SchemaExtensions
+	e_ResourceArn                                                                 smithy.SchemaExtensions
+	e_ResourceArns                                                                smithy.SchemaExtensions
+	e_ResourceArns_member                                                         smithy.SchemaExtensions
+	eResourceInUseException                                                       smithy.SchemaExtensions
+	eResourceInUseException_Message                                               smithy.SchemaExtensions
+	eResourceNotFoundException                                                    smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                            smithy.SchemaExtensions
+	eRevocationContent                                                            smithy.SchemaExtensions
+	eRevocationContent_S3Bucket                                                   smithy.SchemaExtensions
+	eRevocationContent_S3Key                                                      smithy.SchemaExtensions
+	eRevocationContent_S3ObjectVersion                                            smithy.SchemaExtensions
+	eRevocationContent_RevocationType                                             smithy.SchemaExtensions
+	eRevocationContentNotFoundException                                           smithy.SchemaExtensions
+	eRevocationContentNotFoundException_Message                                   smithy.SchemaExtensions
+	e_RevocationContents                                                          smithy.SchemaExtensions
+	e_RevocationContents_member                                                   smithy.SchemaExtensions
+	e_RevocationId                                                                smithy.SchemaExtensions
+	eRevocationIdNotFoundException                                                smithy.SchemaExtensions
+	eRevocationIdNotFoundException_Message                                        smithy.SchemaExtensions
+	e_RevocationIds                                                               smithy.SchemaExtensions
+	e_RevocationIds_member                                                        smithy.SchemaExtensions
+	eRevocationType                                                               smithy.SchemaExtensions
+	eRevocationType_CRL                                                           smithy.SchemaExtensions
+	eRewriteConfig                                                                smithy.SchemaExtensions
+	eRewriteConfig_Regex                                                          smithy.SchemaExtensions
+	eRewriteConfig_Replace                                                        smithy.SchemaExtensions
+	e_RewriteConfigList                                                           smithy.SchemaExtensions
+	e_RewriteConfigList_member                                                    smithy.SchemaExtensions
+	eRule                                                                         smithy.SchemaExtensions
+	eRule_RuleArn                                                                 smithy.SchemaExtensions
+	eRule_Priority                                                                smithy.SchemaExtensions
+	eRule_Conditions                                                              smithy.SchemaExtensions
+	eRule_Actions                                                                 smithy.SchemaExtensions
+	eRule_IsDefault                                                               smithy.SchemaExtensions
+	eRule_Transforms                                                              smithy.SchemaExtensions
+	e_RuleArn                                                                     smithy.SchemaExtensions
+	e_RuleArns                                                                    smithy.SchemaExtensions
+	e_RuleArns_member                                                             smithy.SchemaExtensions
+	eRuleCondition                                                                smithy.SchemaExtensions
+	eRuleCondition_Field                                                          smithy.SchemaExtensions
+	eRuleCondition_Values                                                         smithy.SchemaExtensions
+	eRuleCondition_HostHeaderConfig                                               smithy.SchemaExtensions
+	eRuleCondition_PathPatternConfig                                              smithy.SchemaExtensions
+	eRuleCondition_HttpHeaderConfig                                               smithy.SchemaExtensions
+	eRuleCondition_QueryStringConfig                                              smithy.SchemaExtensions
+	eRuleCondition_HttpRequestMethodConfig                                        smithy.SchemaExtensions
+	eRuleCondition_SourceIpConfig                                                 smithy.SchemaExtensions
+	eRuleCondition_RegexValues                                                    smithy.SchemaExtensions
+	e_RuleConditionList                                                           smithy.SchemaExtensions
+	e_RuleConditionList_member                                                    smithy.SchemaExtensions
+	eRuleNotFoundException                                                        smithy.SchemaExtensions
+	eRuleNotFoundException_Message                                                smithy.SchemaExtensions
+	e_RulePriority                                                                smithy.SchemaExtensions
+	e_RulePriorityList                                                            smithy.SchemaExtensions
+	e_RulePriorityList_member                                                     smithy.SchemaExtensions
+	eRulePriorityPair                                                             smithy.SchemaExtensions
+	eRulePriorityPair_RuleArn                                                     smithy.SchemaExtensions
+	eRulePriorityPair_Priority                                                    smithy.SchemaExtensions
+	e_Rules                                                                       smithy.SchemaExtensions
+	e_Rules_member                                                                smithy.SchemaExtensions
+	eRuleTransform                                                                smithy.SchemaExtensions
+	eRuleTransform_Type                                                           smithy.SchemaExtensions
+	eRuleTransform_HostHeaderRewriteConfig                                        smithy.SchemaExtensions
+	eRuleTransform_UrlRewriteConfig                                               smithy.SchemaExtensions
+	e_RuleTransformList                                                           smithy.SchemaExtensions
+	e_RuleTransformList_member                                                    smithy.SchemaExtensions
+	e_S3Bucket                                                                    smithy.SchemaExtensions
+	e_S3Key                                                                       smithy.SchemaExtensions
+	e_S3ObjectVersion                                                             smithy.SchemaExtensions
+	e_SecurityGroupId                                                             smithy.SchemaExtensions
+	e_SecurityGroups                                                              smithy.SchemaExtensions
+	e_SecurityGroups_member                                                       smithy.SchemaExtensions
+	eSourceIpAddressTypeEnum                                                      smithy.SchemaExtensions
+	eSourceIpAddressTypeEnum_IPV4                                                 smithy.SchemaExtensions
+	eSourceIpAddressTypeEnum_IPV6                                                 smithy.SchemaExtensions
+	eSourceIpConditionConfig                                                      smithy.SchemaExtensions
+	eSourceIpConditionConfig_Values                                               smithy.SchemaExtensions
+	eSourceIpConditionConfig_IpAddressType                                        smithy.SchemaExtensions
+	e_SourceNatIpv6Prefix                                                         smithy.SchemaExtensions
+	e_SourceNatIpv6Prefixes                                                       smithy.SchemaExtensions
+	e_SourceNatIpv6Prefixes_member                                                smithy.SchemaExtensions
+	e_SslPolicies                                                                 smithy.SchemaExtensions
+	e_SslPolicies_member                                                          smithy.SchemaExtensions
+	eSslPolicy                                                                    smithy.SchemaExtensions
+	eSslPolicy_SslProtocols                                                       smithy.SchemaExtensions
+	eSslPolicy_Ciphers                                                            smithy.SchemaExtensions
+	eSslPolicy_Name                                                               smithy.SchemaExtensions
+	eSslPolicy_SupportedLoadBalancerTypes                                         smithy.SchemaExtensions
+	e_SslPolicyName                                                               smithy.SchemaExtensions
+	e_SslPolicyNames                                                              smithy.SchemaExtensions
+	e_SslPolicyNames_member                                                       smithy.SchemaExtensions
+	eSSLPolicyNotFoundException                                                   smithy.SchemaExtensions
+	eSSLPolicyNotFoundException_Message                                           smithy.SchemaExtensions
+	e_SslProtocol                                                                 smithy.SchemaExtensions
+	e_SslProtocols                                                                smithy.SchemaExtensions
+	e_SslProtocols_member                                                         smithy.SchemaExtensions
+	e_StateReason                                                                 smithy.SchemaExtensions
+	e_String                                                                      smithy.SchemaExtensions
+	e_StringValue                                                                 smithy.SchemaExtensions
+	e_SubnetId                                                                    smithy.SchemaExtensions
+	eSubnetMapping                                                                smithy.SchemaExtensions
+	eSubnetMapping_SubnetId                                                       smithy.SchemaExtensions
+	eSubnetMapping_AllocationId                                                   smithy.SchemaExtensions
+	eSubnetMapping_PrivateIPv4Address                                             smithy.SchemaExtensions
+	eSubnetMapping_IPv6Address                                                    smithy.SchemaExtensions
+	eSubnetMapping_SourceNatIpv6Prefix                                            smithy.SchemaExtensions
+	e_SubnetMappings                                                              smithy.SchemaExtensions
+	e_SubnetMappings_member                                                       smithy.SchemaExtensions
+	eSubnetNotFoundException                                                      smithy.SchemaExtensions
+	eSubnetNotFoundException_Message                                              smithy.SchemaExtensions
+	e_Subnets                                                                     smithy.SchemaExtensions
+	e_Subnets_member                                                              smithy.SchemaExtensions
+	eTag                                                                          smithy.SchemaExtensions
+	eTag_Key                                                                      smithy.SchemaExtensions
+	eTag_Value                                                                    smithy.SchemaExtensions
+	eTagDescription                                                               smithy.SchemaExtensions
+	eTagDescription_ResourceArn                                                   smithy.SchemaExtensions
+	eTagDescription_Tags                                                          smithy.SchemaExtensions
+	e_TagDescriptions                                                             smithy.SchemaExtensions
+	e_TagDescriptions_member                                                      smithy.SchemaExtensions
+	e_TagKey                                                                      smithy.SchemaExtensions
+	e_TagKeys                                                                     smithy.SchemaExtensions
+	e_TagKeys_member                                                              smithy.SchemaExtensions
+	e_TagList                                                                     smithy.SchemaExtensions
+	e_TagList_member                                                              smithy.SchemaExtensions
+	e_TagValue                                                                    smithy.SchemaExtensions
+	eTargetAdministrativeOverrideReasonEnum                                       smithy.SchemaExtensions
+	eTargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR                        smithy.SchemaExtensions
+	eTargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED                   smithy.SchemaExtensions
+	eTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED                   smithy.SchemaExtensions
+	eTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS          smithy.SchemaExtensions
+	eTargetAdministrativeOverrideStateEnum                                        smithy.SchemaExtensions
+	eTargetAdministrativeOverrideStateEnum_UNKNOWN                                smithy.SchemaExtensions
+	eTargetAdministrativeOverrideStateEnum_NO_OVERRIDE                            smithy.SchemaExtensions
+	eTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE                     smithy.SchemaExtensions
+	eTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS           smithy.SchemaExtensions
+	e_TargetControlPort                                                           smithy.SchemaExtensions
+	eTargetDescription                                                            smithy.SchemaExtensions
+	eTargetDescription_Id                                                         smithy.SchemaExtensions
+	eTargetDescription_Port                                                       smithy.SchemaExtensions
+	eTargetDescription_AvailabilityZone                                           smithy.SchemaExtensions
+	eTargetDescription_QuicServerId                                               smithy.SchemaExtensions
+	e_TargetDescriptions                                                          smithy.SchemaExtensions
+	e_TargetDescriptions_member                                                   smithy.SchemaExtensions
+	eTargetGroup                                                                  smithy.SchemaExtensions
+	eTargetGroup_TargetGroupArn                                                   smithy.SchemaExtensions
+	eTargetGroup_TargetGroupName                                                  smithy.SchemaExtensions
+	eTargetGroup_Protocol                                                         smithy.SchemaExtensions
+	eTargetGroup_Port                                                             smithy.SchemaExtensions
+	eTargetGroup_VpcId                                                            smithy.SchemaExtensions
+	eTargetGroup_HealthCheckProtocol                                              smithy.SchemaExtensions
+	eTargetGroup_HealthCheckPort                                                  smithy.SchemaExtensions
+	eTargetGroup_HealthCheckEnabled                                               smithy.SchemaExtensions
+	eTargetGroup_HealthCheckIntervalSeconds                                       smithy.SchemaExtensions
+	eTargetGroup_HealthCheckTimeoutSeconds                                        smithy.SchemaExtensions
+	eTargetGroup_HealthyThresholdCount                                            smithy.SchemaExtensions
+	eTargetGroup_UnhealthyThresholdCount                                          smithy.SchemaExtensions
+	eTargetGroup_HealthCheckPath                                                  smithy.SchemaExtensions
+	eTargetGroup_Matcher                                                          smithy.SchemaExtensions
+	eTargetGroup_LoadBalancerArns                                                 smithy.SchemaExtensions
+	eTargetGroup_TargetType                                                       smithy.SchemaExtensions
+	eTargetGroup_ProtocolVersion                                                  smithy.SchemaExtensions
+	eTargetGroup_IpAddressType                                                    smithy.SchemaExtensions
+	eTargetGroup_TargetControlPort                                                smithy.SchemaExtensions
+	e_TargetGroupArn                                                              smithy.SchemaExtensions
+	e_TargetGroupArns                                                             smithy.SchemaExtensions
+	e_TargetGroupArns_member                                                      smithy.SchemaExtensions
+	eTargetGroupAssociationLimitException                                         smithy.SchemaExtensions
+	eTargetGroupAssociationLimitException_Message                                 smithy.SchemaExtensions
+	eTargetGroupAttribute                                                         smithy.SchemaExtensions
+	eTargetGroupAttribute_Key                                                     smithy.SchemaExtensions
+	eTargetGroupAttribute_Value                                                   smithy.SchemaExtensions
+	e_TargetGroupAttributeKey                                                     smithy.SchemaExtensions
+	e_TargetGroupAttributes                                                       smithy.SchemaExtensions
+	e_TargetGroupAttributes_member                                                smithy.SchemaExtensions
+	e_TargetGroupAttributeValue                                                   smithy.SchemaExtensions
+	eTargetGroupIpAddressTypeEnum                                                 smithy.SchemaExtensions
+	eTargetGroupIpAddressTypeEnum_IPV4                                            smithy.SchemaExtensions
+	eTargetGroupIpAddressTypeEnum_IPV6                                            smithy.SchemaExtensions
+	e_TargetGroupList                                                             smithy.SchemaExtensions
+	e_TargetGroupList_member                                                      smithy.SchemaExtensions
+	e_TargetGroupName                                                             smithy.SchemaExtensions
+	e_TargetGroupNames                                                            smithy.SchemaExtensions
+	e_TargetGroupNames_member                                                     smithy.SchemaExtensions
+	eTargetGroupNotFoundException                                                 smithy.SchemaExtensions
+	eTargetGroupNotFoundException_Message                                         smithy.SchemaExtensions
+	e_TargetGroups                                                                smithy.SchemaExtensions
+	e_TargetGroups_member                                                         smithy.SchemaExtensions
+	eTargetGroupStickinessConfig                                                  smithy.SchemaExtensions
+	eTargetGroupStickinessConfig_Enabled                                          smithy.SchemaExtensions
+	eTargetGroupStickinessConfig_DurationSeconds                                  smithy.SchemaExtensions
+	e_TargetGroupStickinessDurationSeconds                                        smithy.SchemaExtensions
+	e_TargetGroupStickinessEnabled                                                smithy.SchemaExtensions
+	eTargetGroupTuple                                                             smithy.SchemaExtensions
+	eTargetGroupTuple_TargetGroupArn                                              smithy.SchemaExtensions
+	eTargetGroupTuple_Weight                                                      smithy.SchemaExtensions
+	e_TargetGroupWeight                                                           smithy.SchemaExtensions
+	eTargetHealth                                                                 smithy.SchemaExtensions
+	eTargetHealth_State                                                           smithy.SchemaExtensions
+	eTargetHealth_Reason                                                          smithy.SchemaExtensions
+	eTargetHealth_Description                                                     smithy.SchemaExtensions
+	eTargetHealthDescription                                                      smithy.SchemaExtensions
+	eTargetHealthDescription_Target                                               smithy.SchemaExtensions
+	eTargetHealthDescription_HealthCheckPort                                      smithy.SchemaExtensions
+	eTargetHealthDescription_TargetHealth                                         smithy.SchemaExtensions
+	eTargetHealthDescription_AnomalyDetection                                     smithy.SchemaExtensions
+	eTargetHealthDescription_AdministrativeOverride                               smithy.SchemaExtensions
+	e_TargetHealthDescriptions                                                    smithy.SchemaExtensions
+	e_TargetHealthDescriptions_member                                             smithy.SchemaExtensions
+	eTargetHealthReasonEnum                                                       smithy.SchemaExtensions
+	eTargetHealthReasonEnum_REGISTRATION_IN_PROGRESS                              smithy.SchemaExtensions
+	eTargetHealthReasonEnum_INITIAL_HEALTH_CHECKING                               smithy.SchemaExtensions
+	eTargetHealthReasonEnum_RESPONSE_CODE_MISMATCH                                smithy.SchemaExtensions
+	eTargetHealthReasonEnum_TIMEOUT                                               smithy.SchemaExtensions
+	eTargetHealthReasonEnum_FAILED_HEALTH_CHECKS                                  smithy.SchemaExtensions
+	eTargetHealthReasonEnum_NOT_REGISTERED                                        smithy.SchemaExtensions
+	eTargetHealthReasonEnum_NOT_IN_USE                                            smithy.SchemaExtensions
+	eTargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS                            smithy.SchemaExtensions
+	eTargetHealthReasonEnum_INVALID_STATE                                         smithy.SchemaExtensions
+	eTargetHealthReasonEnum_IP_UNUSABLE                                           smithy.SchemaExtensions
+	eTargetHealthReasonEnum_HEALTH_CHECK_DISABLED                                 smithy.SchemaExtensions
+	eTargetHealthReasonEnum_INTERNAL_ERROR                                        smithy.SchemaExtensions
+	eTargetHealthStateEnum                                                        smithy.SchemaExtensions
+	eTargetHealthStateEnum_INITIAL                                                smithy.SchemaExtensions
+	eTargetHealthStateEnum_HEALTHY                                                smithy.SchemaExtensions
+	eTargetHealthStateEnum_UNHEALTHY                                              smithy.SchemaExtensions
+	eTargetHealthStateEnum_UNHEALTHY_DRAINING                                     smithy.SchemaExtensions
+	eTargetHealthStateEnum_UNUSED                                                 smithy.SchemaExtensions
+	eTargetHealthStateEnum_DRAINING                                               smithy.SchemaExtensions
+	eTargetHealthStateEnum_UNAVAILABLE                                            smithy.SchemaExtensions
+	e_TargetId                                                                    smithy.SchemaExtensions
+	eTargetTypeEnum                                                               smithy.SchemaExtensions
+	eTargetTypeEnum_INSTANCE                                                      smithy.SchemaExtensions
+	eTargetTypeEnum_IP                                                            smithy.SchemaExtensions
+	eTargetTypeEnum_LAMBDA                                                        smithy.SchemaExtensions
+	eTargetTypeEnum_ALB                                                           smithy.SchemaExtensions
+	eTooManyActionsException                                                      smithy.SchemaExtensions
+	eTooManyActionsException_Message                                              smithy.SchemaExtensions
+	eTooManyCertificatesException                                                 smithy.SchemaExtensions
+	eTooManyCertificatesException_Message                                         smithy.SchemaExtensions
+	eTooManyListenersException                                                    smithy.SchemaExtensions
+	eTooManyListenersException_Message                                            smithy.SchemaExtensions
+	eTooManyLoadBalancersException                                                smithy.SchemaExtensions
+	eTooManyLoadBalancersException_Message                                        smithy.SchemaExtensions
+	eTooManyRegistrationsForTargetIdException                                     smithy.SchemaExtensions
+	eTooManyRegistrationsForTargetIdException_Message                             smithy.SchemaExtensions
+	eTooManyRulesException                                                        smithy.SchemaExtensions
+	eTooManyRulesException_Message                                                smithy.SchemaExtensions
+	eTooManyTagsException                                                         smithy.SchemaExtensions
+	eTooManyTagsException_Message                                                 smithy.SchemaExtensions
+	eTooManyTargetGroupsException                                                 smithy.SchemaExtensions
+	eTooManyTargetGroupsException_Message                                         smithy.SchemaExtensions
+	eTooManyTargetsException                                                      smithy.SchemaExtensions
+	eTooManyTargetsException_Message                                              smithy.SchemaExtensions
+	eTooManyTrustStoreRevocationEntriesException                                  smithy.SchemaExtensions
+	eTooManyTrustStoreRevocationEntriesException_Message                          smithy.SchemaExtensions
+	eTooManyTrustStoresException                                                  smithy.SchemaExtensions
+	eTooManyTrustStoresException_Message                                          smithy.SchemaExtensions
+	eTooManyUniqueTargetGroupsPerLoadBalancerException                            smithy.SchemaExtensions
+	eTooManyUniqueTargetGroupsPerLoadBalancerException_Message                    smithy.SchemaExtensions
+	e_TotalRevokedEntries                                                         smithy.SchemaExtensions
+	eTransformTypeEnum                                                            smithy.SchemaExtensions
+	eTransformTypeEnum_HOST_HEADER_REWRITE                                        smithy.SchemaExtensions
+	eTransformTypeEnum_URL_REWRITE                                                smithy.SchemaExtensions
+	eTrustStore                                                                   smithy.SchemaExtensions
+	eTrustStore_Name                                                              smithy.SchemaExtensions
+	eTrustStore_TrustStoreArn                                                     smithy.SchemaExtensions
+	eTrustStore_Status                                                            smithy.SchemaExtensions
+	eTrustStore_NumberOfCaCertificates                                            smithy.SchemaExtensions
+	eTrustStore_TotalRevokedEntries                                               smithy.SchemaExtensions
+	e_TrustStoreArn                                                               smithy.SchemaExtensions
+	e_TrustStoreArns                                                              smithy.SchemaExtensions
+	e_TrustStoreArns_member                                                       smithy.SchemaExtensions
+	eTrustStoreAssociation                                                        smithy.SchemaExtensions
+	eTrustStoreAssociation_ResourceArn                                            smithy.SchemaExtensions
+	eTrustStoreAssociationNotFoundException                                       smithy.SchemaExtensions
+	eTrustStoreAssociationNotFoundException_Message                               smithy.SchemaExtensions
+	e_TrustStoreAssociationResourceArn                                            smithy.SchemaExtensions
+	e_TrustStoreAssociations                                                      smithy.SchemaExtensions
+	e_TrustStoreAssociations_member                                               smithy.SchemaExtensions
+	eTrustStoreAssociationStatusEnum                                              smithy.SchemaExtensions
+	eTrustStoreAssociationStatusEnum_ACTIVE                                       smithy.SchemaExtensions
+	eTrustStoreAssociationStatusEnum_REMOVED                                      smithy.SchemaExtensions
+	eTrustStoreInUseException                                                     smithy.SchemaExtensions
+	eTrustStoreInUseException_Message                                             smithy.SchemaExtensions
+	e_TrustStoreName                                                              smithy.SchemaExtensions
+	e_TrustStoreNames                                                             smithy.SchemaExtensions
+	e_TrustStoreNames_member                                                      smithy.SchemaExtensions
+	eTrustStoreNotFoundException                                                  smithy.SchemaExtensions
+	eTrustStoreNotFoundException_Message                                          smithy.SchemaExtensions
+	eTrustStoreNotReadyException                                                  smithy.SchemaExtensions
+	eTrustStoreNotReadyException_Message                                          smithy.SchemaExtensions
+	eTrustStoreRevocation                                                         smithy.SchemaExtensions
+	eTrustStoreRevocation_TrustStoreArn                                           smithy.SchemaExtensions
+	eTrustStoreRevocation_RevocationId                                            smithy.SchemaExtensions
+	eTrustStoreRevocation_RevocationType                                          smithy.SchemaExtensions
+	eTrustStoreRevocation_NumberOfRevokedEntries                                  smithy.SchemaExtensions
+	e_TrustStoreRevocations                                                       smithy.SchemaExtensions
+	e_TrustStoreRevocations_member                                                smithy.SchemaExtensions
+	e_TrustStores                                                                 smithy.SchemaExtensions
+	e_TrustStores_member                                                          smithy.SchemaExtensions
+	eTrustStoreStatus                                                             smithy.SchemaExtensions
+	eTrustStoreStatus_ACTIVE                                                      smithy.SchemaExtensions
+	eTrustStoreStatus_CREATING                                                    smithy.SchemaExtensions
+	eUnsupportedProtocolException                                                 smithy.SchemaExtensions
+	eUnsupportedProtocolException_Message                                         smithy.SchemaExtensions
+	eUrlRewriteConfig                                                             smithy.SchemaExtensions
+	eUrlRewriteConfig_Rewrites                                                    smithy.SchemaExtensions
+	e_VpcId                                                                       smithy.SchemaExtensions
+	eZonalCapacityReservationState                                                smithy.SchemaExtensions
+	eZonalCapacityReservationState_State                                          smithy.SchemaExtensions
+	eZonalCapacityReservationState_AvailabilityZone                               smithy.SchemaExtensions
+	eZonalCapacityReservationState_EffectiveCapacityUnits                         smithy.SchemaExtensions
+	e_ZonalCapacityReservationStates                                              smithy.SchemaExtensions
+	e_ZonalCapacityReservationStates_member                                       smithy.SchemaExtensions
+	e_ZoneName                                                                    smithy.SchemaExtensions
+	eAddListenerCertificatesInput                                                 smithy.SchemaExtensions
+	eAddListenerCertificatesInput_ListenerArn                                     smithy.SchemaExtensions
+	eAddListenerCertificatesInput_Certificates                                    smithy.SchemaExtensions
+	eAddListenerCertificatesOutput                                                smithy.SchemaExtensions
+	eAddListenerCertificatesOutput_Certificates                                   smithy.SchemaExtensions
+	eAddTagsInput                                                                 smithy.SchemaExtensions
+	eAddTagsInput_ResourceArns                                                    smithy.SchemaExtensions
+	eAddTagsInput_Tags                                                            smithy.SchemaExtensions
+	eAddTagsOutput                                                                smithy.SchemaExtensions
+	eAddTrustStoreRevocationsInput                                                smithy.SchemaExtensions
+	eAddTrustStoreRevocationsInput_TrustStoreArn                                  smithy.SchemaExtensions
+	eAddTrustStoreRevocationsInput_RevocationContents                             smithy.SchemaExtensions
+	eAddTrustStoreRevocationsOutput                                               smithy.SchemaExtensions
+	eAddTrustStoreRevocationsOutput_TrustStoreRevocations                         smithy.SchemaExtensions
+	eCreateListenerInput                                                          smithy.SchemaExtensions
+	eCreateListenerInput_LoadBalancerArn                                          smithy.SchemaExtensions
+	eCreateListenerInput_Protocol                                                 smithy.SchemaExtensions
+	eCreateListenerInput_Port                                                     smithy.SchemaExtensions
+	eCreateListenerInput_SslPolicy                                                smithy.SchemaExtensions
+	eCreateListenerInput_Certificates                                             smithy.SchemaExtensions
+	eCreateListenerInput_DefaultActions                                           smithy.SchemaExtensions
+	eCreateListenerInput_AlpnPolicy                                               smithy.SchemaExtensions
+	eCreateListenerInput_Tags                                                     smithy.SchemaExtensions
+	eCreateListenerInput_MutualAuthentication                                     smithy.SchemaExtensions
+	eCreateListenerOutput                                                         smithy.SchemaExtensions
+	eCreateListenerOutput_Listeners                                               smithy.SchemaExtensions
+	eCreateLoadBalancerInput                                                      smithy.SchemaExtensions
+	eCreateLoadBalancerInput_Name                                                 smithy.SchemaExtensions
+	eCreateLoadBalancerInput_Subnets                                              smithy.SchemaExtensions
+	eCreateLoadBalancerInput_SubnetMappings                                       smithy.SchemaExtensions
+	eCreateLoadBalancerInput_SecurityGroups                                       smithy.SchemaExtensions
+	eCreateLoadBalancerInput_Scheme                                               smithy.SchemaExtensions
+	eCreateLoadBalancerInput_Tags                                                 smithy.SchemaExtensions
+	eCreateLoadBalancerInput_Type                                                 smithy.SchemaExtensions
+	eCreateLoadBalancerInput_IpAddressType                                        smithy.SchemaExtensions
+	eCreateLoadBalancerInput_CustomerOwnedIpv4Pool                                smithy.SchemaExtensions
+	eCreateLoadBalancerInput_EnablePrefixForIpv6SourceNat                         smithy.SchemaExtensions
+	eCreateLoadBalancerInput_IpamPools                                            smithy.SchemaExtensions
+	eCreateLoadBalancerOutput                                                     smithy.SchemaExtensions
+	eCreateLoadBalancerOutput_LoadBalancers                                       smithy.SchemaExtensions
+	eCreateRuleInput                                                              smithy.SchemaExtensions
+	eCreateRuleInput_ListenerArn                                                  smithy.SchemaExtensions
+	eCreateRuleInput_Conditions                                                   smithy.SchemaExtensions
+	eCreateRuleInput_Priority                                                     smithy.SchemaExtensions
+	eCreateRuleInput_Actions                                                      smithy.SchemaExtensions
+	eCreateRuleInput_Tags                                                         smithy.SchemaExtensions
+	eCreateRuleInput_Transforms                                                   smithy.SchemaExtensions
+	eCreateRuleOutput                                                             smithy.SchemaExtensions
+	eCreateRuleOutput_Rules                                                       smithy.SchemaExtensions
+	eCreateTargetGroupInput                                                       smithy.SchemaExtensions
+	eCreateTargetGroupInput_Name                                                  smithy.SchemaExtensions
+	eCreateTargetGroupInput_Protocol                                              smithy.SchemaExtensions
+	eCreateTargetGroupInput_ProtocolVersion                                       smithy.SchemaExtensions
+	eCreateTargetGroupInput_Port                                                  smithy.SchemaExtensions
+	eCreateTargetGroupInput_VpcId                                                 smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckProtocol                                   smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckPort                                       smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckEnabled                                    smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckPath                                       smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckIntervalSeconds                            smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthCheckTimeoutSeconds                             smithy.SchemaExtensions
+	eCreateTargetGroupInput_HealthyThresholdCount                                 smithy.SchemaExtensions
+	eCreateTargetGroupInput_UnhealthyThresholdCount                               smithy.SchemaExtensions
+	eCreateTargetGroupInput_Matcher                                               smithy.SchemaExtensions
+	eCreateTargetGroupInput_TargetType                                            smithy.SchemaExtensions
+	eCreateTargetGroupInput_Tags                                                  smithy.SchemaExtensions
+	eCreateTargetGroupInput_IpAddressType                                         smithy.SchemaExtensions
+	eCreateTargetGroupInput_TargetControlPort                                     smithy.SchemaExtensions
+	eCreateTargetGroupOutput                                                      smithy.SchemaExtensions
+	eCreateTargetGroupOutput_TargetGroups                                         smithy.SchemaExtensions
+	eCreateTrustStoreInput                                                        smithy.SchemaExtensions
+	eCreateTrustStoreInput_Name                                                   smithy.SchemaExtensions
+	eCreateTrustStoreInput_CaCertificatesBundleS3Bucket                           smithy.SchemaExtensions
+	eCreateTrustStoreInput_CaCertificatesBundleS3Key                              smithy.SchemaExtensions
+	eCreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion                    smithy.SchemaExtensions
+	eCreateTrustStoreInput_Tags                                                   smithy.SchemaExtensions
+	eCreateTrustStoreOutput                                                       smithy.SchemaExtensions
+	eCreateTrustStoreOutput_TrustStores                                           smithy.SchemaExtensions
+	eDeleteListenerInput                                                          smithy.SchemaExtensions
+	eDeleteListenerInput_ListenerArn                                              smithy.SchemaExtensions
+	eDeleteListenerOutput                                                         smithy.SchemaExtensions
+	eDeleteLoadBalancerInput                                                      smithy.SchemaExtensions
+	eDeleteLoadBalancerInput_LoadBalancerArn                                      smithy.SchemaExtensions
+	eDeleteLoadBalancerOutput                                                     smithy.SchemaExtensions
+	eDeleteRuleInput                                                              smithy.SchemaExtensions
+	eDeleteRuleInput_RuleArn                                                      smithy.SchemaExtensions
+	eDeleteRuleOutput                                                             smithy.SchemaExtensions
+	eDeleteSharedTrustStoreAssociationInput                                       smithy.SchemaExtensions
+	eDeleteSharedTrustStoreAssociationInput_TrustStoreArn                         smithy.SchemaExtensions
+	eDeleteSharedTrustStoreAssociationInput_ResourceArn                           smithy.SchemaExtensions
+	eDeleteSharedTrustStoreAssociationOutput                                      smithy.SchemaExtensions
+	eDeleteTargetGroupInput                                                       smithy.SchemaExtensions
+	eDeleteTargetGroupInput_TargetGroupArn                                        smithy.SchemaExtensions
+	eDeleteTargetGroupOutput                                                      smithy.SchemaExtensions
+	eDeleteTrustStoreInput                                                        smithy.SchemaExtensions
+	eDeleteTrustStoreInput_TrustStoreArn                                          smithy.SchemaExtensions
+	eDeleteTrustStoreOutput                                                       smithy.SchemaExtensions
+	eDeregisterTargetsInput                                                       smithy.SchemaExtensions
+	eDeregisterTargetsInput_TargetGroupArn                                        smithy.SchemaExtensions
+	eDeregisterTargetsInput_Targets                                               smithy.SchemaExtensions
+	eDeregisterTargetsOutput                                                      smithy.SchemaExtensions
+	eDescribeAccountLimitsInput                                                   smithy.SchemaExtensions
+	eDescribeAccountLimitsInput_Marker                                            smithy.SchemaExtensions
+	eDescribeAccountLimitsInput_PageSize                                          smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput                                                  smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput_Limits                                           smithy.SchemaExtensions
+	eDescribeAccountLimitsOutput_NextMarker                                       smithy.SchemaExtensions
+	eDescribeCapacityReservationInput                                             smithy.SchemaExtensions
+	eDescribeCapacityReservationInput_LoadBalancerArn                             smithy.SchemaExtensions
+	eDescribeCapacityReservationOutput                                            smithy.SchemaExtensions
+	eDescribeCapacityReservationOutput_LastModifiedTime                           smithy.SchemaExtensions
+	eDescribeCapacityReservationOutput_DecreaseRequestsRemaining                  smithy.SchemaExtensions
+	eDescribeCapacityReservationOutput_MinimumLoadBalancerCapacity                smithy.SchemaExtensions
+	eDescribeCapacityReservationOutput_CapacityReservationState                   smithy.SchemaExtensions
+	eDescribeListenerAttributesInput                                              smithy.SchemaExtensions
+	eDescribeListenerAttributesInput_ListenerArn                                  smithy.SchemaExtensions
+	eDescribeListenerAttributesOutput                                             smithy.SchemaExtensions
+	eDescribeListenerAttributesOutput_Attributes                                  smithy.SchemaExtensions
+	eDescribeListenerCertificatesInput                                            smithy.SchemaExtensions
+	eDescribeListenerCertificatesInput_ListenerArn                                smithy.SchemaExtensions
+	eDescribeListenerCertificatesInput_Marker                                     smithy.SchemaExtensions
+	eDescribeListenerCertificatesInput_PageSize                                   smithy.SchemaExtensions
+	eDescribeListenerCertificatesOutput                                           smithy.SchemaExtensions
+	eDescribeListenerCertificatesOutput_Certificates                              smithy.SchemaExtensions
+	eDescribeListenerCertificatesOutput_NextMarker                                smithy.SchemaExtensions
+	eDescribeListenersInput                                                       smithy.SchemaExtensions
+	eDescribeListenersInput_LoadBalancerArn                                       smithy.SchemaExtensions
+	eDescribeListenersInput_ListenerArns                                          smithy.SchemaExtensions
+	eDescribeListenersInput_Marker                                                smithy.SchemaExtensions
+	eDescribeListenersInput_PageSize                                              smithy.SchemaExtensions
+	eDescribeListenersOutput                                                      smithy.SchemaExtensions
+	eDescribeListenersOutput_Listeners                                            smithy.SchemaExtensions
+	eDescribeListenersOutput_NextMarker                                           smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesInput                                          smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesInput_LoadBalancerArn                          smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesOutput                                         smithy.SchemaExtensions
+	eDescribeLoadBalancerAttributesOutput_Attributes                              smithy.SchemaExtensions
+	eDescribeLoadBalancersInput                                                   smithy.SchemaExtensions
+	eDescribeLoadBalancersInput_LoadBalancerArns                                  smithy.SchemaExtensions
+	eDescribeLoadBalancersInput_Names                                             smithy.SchemaExtensions
+	eDescribeLoadBalancersInput_Marker                                            smithy.SchemaExtensions
+	eDescribeLoadBalancersInput_PageSize                                          smithy.SchemaExtensions
+	eDescribeLoadBalancersOutput                                                  smithy.SchemaExtensions
+	eDescribeLoadBalancersOutput_LoadBalancers                                    smithy.SchemaExtensions
+	eDescribeLoadBalancersOutput_NextMarker                                       smithy.SchemaExtensions
+	eDescribeRulesInput                                                           smithy.SchemaExtensions
+	eDescribeRulesInput_ListenerArn                                               smithy.SchemaExtensions
+	eDescribeRulesInput_RuleArns                                                  smithy.SchemaExtensions
+	eDescribeRulesInput_Marker                                                    smithy.SchemaExtensions
+	eDescribeRulesInput_PageSize                                                  smithy.SchemaExtensions
+	eDescribeRulesOutput                                                          smithy.SchemaExtensions
+	eDescribeRulesOutput_Rules                                                    smithy.SchemaExtensions
+	eDescribeRulesOutput_NextMarker                                               smithy.SchemaExtensions
+	eDescribeSSLPoliciesInput                                                     smithy.SchemaExtensions
+	eDescribeSSLPoliciesInput_Names                                               smithy.SchemaExtensions
+	eDescribeSSLPoliciesInput_Marker                                              smithy.SchemaExtensions
+	eDescribeSSLPoliciesInput_PageSize                                            smithy.SchemaExtensions
+	eDescribeSSLPoliciesInput_LoadBalancerType                                    smithy.SchemaExtensions
+	eDescribeSSLPoliciesOutput                                                    smithy.SchemaExtensions
+	eDescribeSSLPoliciesOutput_SslPolicies                                        smithy.SchemaExtensions
+	eDescribeSSLPoliciesOutput_NextMarker                                         smithy.SchemaExtensions
+	eDescribeTagsInput                                                            smithy.SchemaExtensions
+	eDescribeTagsInput_ResourceArns                                               smithy.SchemaExtensions
+	eDescribeTagsOutput                                                           smithy.SchemaExtensions
+	eDescribeTagsOutput_TagDescriptions                                           smithy.SchemaExtensions
+	eDescribeTargetGroupAttributesInput                                           smithy.SchemaExtensions
+	eDescribeTargetGroupAttributesInput_TargetGroupArn                            smithy.SchemaExtensions
+	eDescribeTargetGroupAttributesOutput                                          smithy.SchemaExtensions
+	eDescribeTargetGroupAttributesOutput_Attributes                               smithy.SchemaExtensions
+	eDescribeTargetGroupsInput                                                    smithy.SchemaExtensions
+	eDescribeTargetGroupsInput_LoadBalancerArn                                    smithy.SchemaExtensions
+	eDescribeTargetGroupsInput_TargetGroupArns                                    smithy.SchemaExtensions
+	eDescribeTargetGroupsInput_Names                                              smithy.SchemaExtensions
+	eDescribeTargetGroupsInput_Marker                                             smithy.SchemaExtensions
+	eDescribeTargetGroupsInput_PageSize                                           smithy.SchemaExtensions
+	eDescribeTargetGroupsOutput                                                   smithy.SchemaExtensions
+	eDescribeTargetGroupsOutput_TargetGroups                                      smithy.SchemaExtensions
+	eDescribeTargetGroupsOutput_NextMarker                                        smithy.SchemaExtensions
+	eDescribeTargetHealthInput                                                    smithy.SchemaExtensions
+	eDescribeTargetHealthInput_TargetGroupArn                                     smithy.SchemaExtensions
+	eDescribeTargetHealthInput_Targets                                            smithy.SchemaExtensions
+	eDescribeTargetHealthInput_Include                                            smithy.SchemaExtensions
+	eDescribeTargetHealthOutput                                                   smithy.SchemaExtensions
+	eDescribeTargetHealthOutput_TargetHealthDescriptions                          smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsInput                                          smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsInput_TrustStoreArn                            smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsInput_Marker                                   smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsInput_PageSize                                 smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsOutput                                         smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsOutput_TrustStoreAssociations                  smithy.SchemaExtensions
+	eDescribeTrustStoreAssociationsOutput_NextMarker                              smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsInput                                           smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsInput_TrustStoreArn                             smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsInput_RevocationIds                             smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsInput_Marker                                    smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsInput_PageSize                                  smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsOutput                                          smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsOutput_TrustStoreRevocations                    smithy.SchemaExtensions
+	eDescribeTrustStoreRevocationsOutput_NextMarker                               smithy.SchemaExtensions
+	eDescribeTrustStoresInput                                                     smithy.SchemaExtensions
+	eDescribeTrustStoresInput_TrustStoreArns                                      smithy.SchemaExtensions
+	eDescribeTrustStoresInput_Names                                               smithy.SchemaExtensions
+	eDescribeTrustStoresInput_Marker                                              smithy.SchemaExtensions
+	eDescribeTrustStoresInput_PageSize                                            smithy.SchemaExtensions
+	eDescribeTrustStoresOutput                                                    smithy.SchemaExtensions
+	eDescribeTrustStoresOutput_TrustStores                                        smithy.SchemaExtensions
+	eDescribeTrustStoresOutput_NextMarker                                         smithy.SchemaExtensions
+	eGetResourcePolicyInput                                                       smithy.SchemaExtensions
+	eGetResourcePolicyInput_ResourceArn                                           smithy.SchemaExtensions
+	eGetResourcePolicyOutput                                                      smithy.SchemaExtensions
+	eGetResourcePolicyOutput_Policy                                               smithy.SchemaExtensions
+	eGetTrustStoreCaCertificatesBundleInput                                       smithy.SchemaExtensions
+	eGetTrustStoreCaCertificatesBundleInput_TrustStoreArn                         smithy.SchemaExtensions
+	eGetTrustStoreCaCertificatesBundleOutput                                      smithy.SchemaExtensions
+	eGetTrustStoreCaCertificatesBundleOutput_Location                             smithy.SchemaExtensions
+	eGetTrustStoreRevocationContentInput                                          smithy.SchemaExtensions
+	eGetTrustStoreRevocationContentInput_TrustStoreArn                            smithy.SchemaExtensions
+	eGetTrustStoreRevocationContentInput_RevocationId                             smithy.SchemaExtensions
+	eGetTrustStoreRevocationContentOutput                                         smithy.SchemaExtensions
+	eGetTrustStoreRevocationContentOutput_Location                                smithy.SchemaExtensions
+	eModifyCapacityReservationInput                                               smithy.SchemaExtensions
+	eModifyCapacityReservationInput_LoadBalancerArn                               smithy.SchemaExtensions
+	eModifyCapacityReservationInput_MinimumLoadBalancerCapacity                   smithy.SchemaExtensions
+	eModifyCapacityReservationInput_ResetCapacityReservation                      smithy.SchemaExtensions
+	eModifyCapacityReservationOutput                                              smithy.SchemaExtensions
+	eModifyCapacityReservationOutput_LastModifiedTime                             smithy.SchemaExtensions
+	eModifyCapacityReservationOutput_DecreaseRequestsRemaining                    smithy.SchemaExtensions
+	eModifyCapacityReservationOutput_MinimumLoadBalancerCapacity                  smithy.SchemaExtensions
+	eModifyCapacityReservationOutput_CapacityReservationState                     smithy.SchemaExtensions
+	eModifyIpPoolsInput                                                           smithy.SchemaExtensions
+	eModifyIpPoolsInput_LoadBalancerArn                                           smithy.SchemaExtensions
+	eModifyIpPoolsInput_IpamPools                                                 smithy.SchemaExtensions
+	eModifyIpPoolsInput_RemoveIpamPools                                           smithy.SchemaExtensions
+	eModifyIpPoolsOutput                                                          smithy.SchemaExtensions
+	eModifyIpPoolsOutput_IpamPools                                                smithy.SchemaExtensions
+	eModifyListenerAttributesInput                                                smithy.SchemaExtensions
+	eModifyListenerAttributesInput_ListenerArn                                    smithy.SchemaExtensions
+	eModifyListenerAttributesInput_Attributes                                     smithy.SchemaExtensions
+	eModifyListenerAttributesOutput                                               smithy.SchemaExtensions
+	eModifyListenerAttributesOutput_Attributes                                    smithy.SchemaExtensions
+	eModifyListenerInput                                                          smithy.SchemaExtensions
+	eModifyListenerInput_ListenerArn                                              smithy.SchemaExtensions
+	eModifyListenerInput_Port                                                     smithy.SchemaExtensions
+	eModifyListenerInput_Protocol                                                 smithy.SchemaExtensions
+	eModifyListenerInput_SslPolicy                                                smithy.SchemaExtensions
+	eModifyListenerInput_Certificates                                             smithy.SchemaExtensions
+	eModifyListenerInput_DefaultActions                                           smithy.SchemaExtensions
+	eModifyListenerInput_AlpnPolicy                                               smithy.SchemaExtensions
+	eModifyListenerInput_MutualAuthentication                                     smithy.SchemaExtensions
+	eModifyListenerOutput                                                         smithy.SchemaExtensions
+	eModifyListenerOutput_Listeners                                               smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput                                            smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput_LoadBalancerArn                            smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesInput_Attributes                                 smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesOutput                                           smithy.SchemaExtensions
+	eModifyLoadBalancerAttributesOutput_Attributes                                smithy.SchemaExtensions
+	eModifyRuleInput                                                              smithy.SchemaExtensions
+	eModifyRuleInput_RuleArn                                                      smithy.SchemaExtensions
+	eModifyRuleInput_Conditions                                                   smithy.SchemaExtensions
+	eModifyRuleInput_Actions                                                      smithy.SchemaExtensions
+	eModifyRuleInput_Transforms                                                   smithy.SchemaExtensions
+	eModifyRuleInput_ResetTransforms                                              smithy.SchemaExtensions
+	eModifyRuleOutput                                                             smithy.SchemaExtensions
+	eModifyRuleOutput_Rules                                                       smithy.SchemaExtensions
+	eModifyTargetGroupAttributesInput                                             smithy.SchemaExtensions
+	eModifyTargetGroupAttributesInput_TargetGroupArn                              smithy.SchemaExtensions
+	eModifyTargetGroupAttributesInput_Attributes                                  smithy.SchemaExtensions
+	eModifyTargetGroupAttributesOutput                                            smithy.SchemaExtensions
+	eModifyTargetGroupAttributesOutput_Attributes                                 smithy.SchemaExtensions
+	eModifyTargetGroupInput                                                       smithy.SchemaExtensions
+	eModifyTargetGroupInput_TargetGroupArn                                        smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckProtocol                                   smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckPort                                       smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckPath                                       smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckEnabled                                    smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckIntervalSeconds                            smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthCheckTimeoutSeconds                             smithy.SchemaExtensions
+	eModifyTargetGroupInput_HealthyThresholdCount                                 smithy.SchemaExtensions
+	eModifyTargetGroupInput_UnhealthyThresholdCount                               smithy.SchemaExtensions
+	eModifyTargetGroupInput_Matcher                                               smithy.SchemaExtensions
+	eModifyTargetGroupOutput                                                      smithy.SchemaExtensions
+	eModifyTargetGroupOutput_TargetGroups                                         smithy.SchemaExtensions
+	eModifyTrustStoreInput                                                        smithy.SchemaExtensions
+	eModifyTrustStoreInput_TrustStoreArn                                          smithy.SchemaExtensions
+	eModifyTrustStoreInput_CaCertificatesBundleS3Bucket                           smithy.SchemaExtensions
+	eModifyTrustStoreInput_CaCertificatesBundleS3Key                              smithy.SchemaExtensions
+	eModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion                    smithy.SchemaExtensions
+	eModifyTrustStoreOutput                                                       smithy.SchemaExtensions
+	eModifyTrustStoreOutput_TrustStores                                           smithy.SchemaExtensions
+	eRegisterTargetsInput                                                         smithy.SchemaExtensions
+	eRegisterTargetsInput_TargetGroupArn                                          smithy.SchemaExtensions
+	eRegisterTargetsInput_Targets                                                 smithy.SchemaExtensions
+	eRegisterTargetsOutput                                                        smithy.SchemaExtensions
+	eRemoveListenerCertificatesInput                                              smithy.SchemaExtensions
+	eRemoveListenerCertificatesInput_ListenerArn                                  smithy.SchemaExtensions
+	eRemoveListenerCertificatesInput_Certificates                                 smithy.SchemaExtensions
+	eRemoveListenerCertificatesOutput                                             smithy.SchemaExtensions
+	eRemoveTagsInput                                                              smithy.SchemaExtensions
+	eRemoveTagsInput_ResourceArns                                                 smithy.SchemaExtensions
+	eRemoveTagsInput_TagKeys                                                      smithy.SchemaExtensions
+	eRemoveTagsOutput                                                             smithy.SchemaExtensions
+	eRemoveTrustStoreRevocationsInput                                             smithy.SchemaExtensions
+	eRemoveTrustStoreRevocationsInput_TrustStoreArn                               smithy.SchemaExtensions
+	eRemoveTrustStoreRevocationsInput_RevocationIds                               smithy.SchemaExtensions
+	eRemoveTrustStoreRevocationsOutput                                            smithy.SchemaExtensions
+	eSetIpAddressTypeInput                                                        smithy.SchemaExtensions
+	eSetIpAddressTypeInput_LoadBalancerArn                                        smithy.SchemaExtensions
+	eSetIpAddressTypeInput_IpAddressType                                          smithy.SchemaExtensions
+	eSetIpAddressTypeOutput                                                       smithy.SchemaExtensions
+	eSetIpAddressTypeOutput_IpAddressType                                         smithy.SchemaExtensions
+	eSetRulePrioritiesInput                                                       smithy.SchemaExtensions
+	eSetRulePrioritiesInput_RulePriorities                                        smithy.SchemaExtensions
+	eSetRulePrioritiesOutput                                                      smithy.SchemaExtensions
+	eSetRulePrioritiesOutput_Rules                                                smithy.SchemaExtensions
+	eSetSecurityGroupsInput                                                       smithy.SchemaExtensions
+	eSetSecurityGroupsInput_LoadBalancerArn                                       smithy.SchemaExtensions
+	eSetSecurityGroupsInput_SecurityGroups                                        smithy.SchemaExtensions
+	eSetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic  smithy.SchemaExtensions
+	eSetSecurityGroupsOutput                                                      smithy.SchemaExtensions
+	eSetSecurityGroupsOutput_SecurityGroupIds                                     smithy.SchemaExtensions
+	eSetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic smithy.SchemaExtensions
+	eSetSubnetsInput                                                              smithy.SchemaExtensions
+	eSetSubnetsInput_LoadBalancerArn                                              smithy.SchemaExtensions
+	eSetSubnetsInput_Subnets                                                      smithy.SchemaExtensions
+	eSetSubnetsInput_SubnetMappings                                               smithy.SchemaExtensions
+	eSetSubnetsInput_IpAddressType                                                smithy.SchemaExtensions
+	eSetSubnetsInput_EnablePrefixForIpv6SourceNat                                 smithy.SchemaExtensions
+	eSetSubnetsOutput                                                             smithy.SchemaExtensions
+	eSetSubnetsOutput_AvailabilityZones                                           smithy.SchemaExtensions
+	eSetSubnetsOutput_IpAddressType                                               smithy.SchemaExtensions
+	eSetSubnetsOutput_EnablePrefixForIpv6SourceNat                                smithy.SchemaExtensions
+)
+
+var (
+	iAddListenerCertificates                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddListenerCertificates"}
+	iAddTags                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTags"}
+	iAddTrustStoreRevocations                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTrustStoreRevocations"}
+	iCreateListener                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateListener"}
+	iCreateLoadBalancer                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateLoadBalancer"}
+	iCreateRule                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateRule"}
+	iCreateTargetGroup                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTargetGroup"}
+	iCreateTrustStore                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTrustStore"}
+	iDeleteListener                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteListener"}
+	iDeleteLoadBalancer                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteLoadBalancer"}
+	iDeleteRule                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteRule"}
+	iDeleteSharedTrustStoreAssociation                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteSharedTrustStoreAssociation"}
+	iDeleteTargetGroup                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTargetGroup"}
+	iDeleteTrustStore                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTrustStore"}
+	iDeregisterTargets                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeregisterTargets"}
+	iDescribeAccountLimits                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeAccountLimits"}
+	iDescribeCapacityReservation                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeCapacityReservation"}
+	iDescribeListenerAttributes                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerAttributes"}
+	iDescribeListenerCertificates                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerCertificates"}
+	iDescribeListeners                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListeners"}
+	iDescribeLoadBalancerAttributes                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancerAttributes"}
+	iDescribeLoadBalancers                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancers"}
+	iDescribeRules                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeRules"}
+	iDescribeSSLPolicies                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeSSLPolicies"}
+	iDescribeTags                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTags"}
+	iDescribeTargetGroupAttributes                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroupAttributes"}
+	iDescribeTargetGroups                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroups"}
+	iDescribeTargetHealth                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetHealth"}
+	iDescribeTrustStoreAssociations                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreAssociations"}
+	iDescribeTrustStoreRevocations                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreRevocations"}
+	iDescribeTrustStores                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStores"}
+	iGetResourcePolicy                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetResourcePolicy"}
+	iGetTrustStoreCaCertificatesBundle                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreCaCertificatesBundle"}
+	iGetTrustStoreRevocationContent                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreRevocationContent"}
+	iModifyCapacityReservation                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyCapacityReservation"}
+	iModifyIpPools                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyIpPools"}
+	iModifyListener                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListener"}
+	iModifyListenerAttributes                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListenerAttributes"}
+	iModifyLoadBalancerAttributes                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyLoadBalancerAttributes"}
+	iModifyRule                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyRule"}
+	iModifyTargetGroup                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroup"}
+	iModifyTargetGroupAttributes                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroupAttributes"}
+	iModifyTrustStore                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTrustStore"}
+	iRegisterTargets                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RegisterTargets"}
+	iRemoveListenerCertificates                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveListenerCertificates"}
+	iRemoveTags                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTags"}
+	iRemoveTrustStoreRevocations                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTrustStoreRevocations"}
+	iSetIpAddressType                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetIpAddressType"}
+	iSetRulePriorities                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetRulePriorities"}
+	iSetSecurityGroups                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSecurityGroups"}
+	iSetSubnets                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSubnets"}
+	i_ElasticLoadBalancing_v10                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ElasticLoadBalancing_v10"}
+	iAction                                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Action"}
+	i_ActionOrder                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ActionOrder"}
+	i_Actions                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Actions"}
+	iActionTypeEnum                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ActionTypeEnum"}
+	iAdministrativeOverride                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AdministrativeOverride"}
+	iAdvertiseTrustStoreCaNamesEnum                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AdvertiseTrustStoreCaNamesEnum"}
+	i_AllocationId                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AllocationId"}
+	iAllocationIdNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AllocationIdNotFoundException"}
+	i_AlpnPolicyName                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AlpnPolicyName"}
+	iALPNPolicyNotSupportedException                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ALPNPolicyNotSupportedException"}
+	i_AlpnPolicyValue                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AlpnPolicyValue"}
+	iAnomalyDetection                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AnomalyDetection"}
+	iAnomalyResultEnum                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AnomalyResultEnum"}
+	i_AuthenticateCognitoActionAuthenticationRequestExtraParams = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionAuthenticationRequestExtraParams"}
+	i_AuthenticateCognitoActionAuthenticationRequestParamName   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionAuthenticationRequestParamName"}
+	i_AuthenticateCognitoActionAuthenticationRequestParamValue  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionAuthenticationRequestParamValue"}
+	iAuthenticateCognitoActionConditionalBehaviorEnum           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionConditionalBehaviorEnum"}
+	iAuthenticateCognitoActionConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionConfig"}
+	i_AuthenticateCognitoActionScope                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionScope"}
+	i_AuthenticateCognitoActionSessionCookieName                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionSessionCookieName"}
+	i_AuthenticateCognitoActionSessionTimeout                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionSessionTimeout"}
+	i_AuthenticateCognitoActionUserPoolArn                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionUserPoolArn"}
+	i_AuthenticateCognitoActionUserPoolClientId                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionUserPoolClientId"}
+	i_AuthenticateCognitoActionUserPoolDomain                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateCognitoActionUserPoolDomain"}
+	i_AuthenticateOidcActionAuthenticationRequestExtraParams    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionAuthenticationRequestExtraParams"}
+	i_AuthenticateOidcActionAuthenticationRequestParamName      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionAuthenticationRequestParamName"}
+	i_AuthenticateOidcActionAuthenticationRequestParamValue     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionAuthenticationRequestParamValue"}
+	i_AuthenticateOidcActionAuthorizationEndpoint               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionAuthorizationEndpoint"}
+	i_AuthenticateOidcActionClientId                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionClientId"}
+	i_AuthenticateOidcActionClientSecret                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionClientSecret"}
+	iAuthenticateOidcActionConditionalBehaviorEnum              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionConditionalBehaviorEnum"}
+	iAuthenticateOidcActionConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionConfig"}
+	i_AuthenticateOidcActionIssuer                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionIssuer"}
+	i_AuthenticateOidcActionScope                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionScope"}
+	i_AuthenticateOidcActionSessionCookieName                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionSessionCookieName"}
+	i_AuthenticateOidcActionSessionTimeout                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionSessionTimeout"}
+	i_AuthenticateOidcActionTokenEndpoint                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionTokenEndpoint"}
+	i_AuthenticateOidcActionUseExistingClientSecret             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionUseExistingClientSecret"}
+	i_AuthenticateOidcActionUserInfoEndpoint                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AuthenticateOidcActionUserInfoEndpoint"}
+	iAvailabilityZone                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AvailabilityZone"}
+	iAvailabilityZoneNotSupportedException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AvailabilityZoneNotSupportedException"}
+	i_AvailabilityZones                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AvailabilityZones"}
+	iCaCertificatesBundleNotFoundException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CaCertificatesBundleNotFoundException"}
+	i_CanonicalHostedZoneId                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CanonicalHostedZoneId"}
+	iCapacityDecreaseRequestsLimitExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityDecreaseRequestsLimitExceededException"}
+	iCapacityReservationPendingException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityReservationPendingException"}
+	iCapacityReservationStateEnum                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityReservationStateEnum"}
+	iCapacityReservationStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityReservationStatus"}
+	i_CapacityUnits                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityUnits"}
+	i_CapacityUnitsDouble                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityUnitsDouble"}
+	iCapacityUnitsLimitExceededException                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CapacityUnitsLimitExceededException"}
+	iCertificate                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Certificate"}
+	i_CertificateArn                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CertificateArn"}
+	i_CertificateList                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CertificateList"}
+	iCertificateNotFoundException                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CertificateNotFoundException"}
+	iCipher                                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Cipher"}
+	i_CipherName                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CipherName"}
+	i_CipherPriority                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CipherPriority"}
+	i_Ciphers                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Ciphers"}
+	i_ConditionFieldName                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ConditionFieldName"}
+	i_CreatedTime                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreatedTime"}
+	i_CustomerOwnedIpv4Pool                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CustomerOwnedIpv4Pool"}
+	i_DecreaseRequestsRemaining                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DecreaseRequestsRemaining"}
+	i_Default                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Default"}
+	iDeleteAssociationSameAccountException                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteAssociationSameAccountException"}
+	iDescribeTargetHealthInputIncludeEnum                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetHealthInputIncludeEnum"}
+	iDescribeTrustStoreRevocation                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreRevocation"}
+	i_DescribeTrustStoreRevocationResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreRevocationResponse"}
+	i_Description                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Description"}
+	i_DNSName                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DNSName"}
+	iDuplicateListenerException                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DuplicateListenerException"}
+	iDuplicateLoadBalancerNameException                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DuplicateLoadBalancerNameException"}
+	iDuplicateTagKeysException                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DuplicateTagKeysException"}
+	iDuplicateTargetGroupNameException                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DuplicateTargetGroupNameException"}
+	iDuplicateTrustStoreNameException                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DuplicateTrustStoreNameException"}
+	iEnablePrefixForIpv6SourceNatEnum                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "EnablePrefixForIpv6SourceNatEnum"}
+	i_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic"}
+	iEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum"}
+	i_ErrorDescription                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ErrorDescription"}
+	iFixedResponseActionConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "FixedResponseActionConfig"}
+	i_FixedResponseActionContentType                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "FixedResponseActionContentType"}
+	i_FixedResponseActionMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "FixedResponseActionMessage"}
+	i_FixedResponseActionStatusCode                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "FixedResponseActionStatusCode"}
+	iForwardActionConfig                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ForwardActionConfig"}
+	i_GrpcCode                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GrpcCode"}
+	i_HealthCheckEnabled                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthCheckEnabled"}
+	i_HealthCheckIntervalSeconds                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthCheckIntervalSeconds"}
+	i_HealthCheckPort                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthCheckPort"}
+	i_HealthCheckThresholdCount                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthCheckThresholdCount"}
+	i_HealthCheckTimeoutSeconds                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthCheckTimeoutSeconds"}
+	iHealthUnavailableException                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HealthUnavailableException"}
+	iHostHeaderConditionConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HostHeaderConditionConfig"}
+	iHostHeaderRewriteConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HostHeaderRewriteConfig"}
+	i_HttpCode                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HttpCode"}
+	iHttpHeaderConditionConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HttpHeaderConditionConfig"}
+	i_HttpHeaderConditionName                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HttpHeaderConditionName"}
+	iHttpRequestMethodConditionConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "HttpRequestMethodConditionConfig"}
+	i_IgnoreClientCertificateExpiry                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IgnoreClientCertificateExpiry"}
+	iIncompatibleProtocolsException                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IncompatibleProtocolsException"}
+	iInsufficientCapacityException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InsufficientCapacityException"}
+	iInvalidCaCertificatesBundleException                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidCaCertificatesBundleException"}
+	iInvalidConfigurationRequestException                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidConfigurationRequestException"}
+	iInvalidLoadBalancerActionException                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidLoadBalancerActionException"}
+	iInvalidRevocationContentException                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidRevocationContentException"}
+	iInvalidSchemeException                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidSchemeException"}
+	iInvalidSecurityGroupException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidSecurityGroupException"}
+	iInvalidSubnetException                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidSubnetException"}
+	iInvalidTargetException                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "InvalidTargetException"}
+	i_IpAddress                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IpAddress"}
+	iIpAddressType                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IpAddressType"}
+	i_IpamPoolId                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IpamPoolId"}
+	iIpamPools                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IpamPools"}
+	i_IPv6Address                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IPv6Address"}
+	i_IsDefault                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "IsDefault"}
+	iJwtValidationActionAdditionalClaim                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaim"}
+	iJwtValidationActionAdditionalClaimFormatEnum               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaimFormatEnum"}
+	i_JwtValidationActionAdditionalClaimName                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaimName"}
+	i_JwtValidationActionAdditionalClaims                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaims"}
+	i_JwtValidationActionAdditionalClaimValue                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaimValue"}
+	i_JwtValidationActionAdditionalClaimValues                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionAdditionalClaimValues"}
+	iJwtValidationActionConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionConfig"}
+	i_JwtValidationActionIssuer                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionIssuer"}
+	i_JwtValidationActionJwksEndpoint                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "JwtValidationActionJwksEndpoint"}
+	i_LastModifiedTime                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LastModifiedTime"}
+	iLimit                                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Limit"}
+	i_Limits                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Limits"}
+	iListener                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Listener"}
+	i_ListenerArn                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerArn"}
+	i_ListenerArns                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerArns"}
+	iListenerAttribute                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerAttribute"}
+	i_ListenerAttributeKey                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerAttributeKey"}
+	i_ListenerAttributes                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerAttributes"}
+	i_ListenerAttributeValue                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerAttributeValue"}
+	iListenerNotFoundException                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListenerNotFoundException"}
+	i_Listeners                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Listeners"}
+	i_ListOfDescribeTargetHealthIncludeOptions                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListOfDescribeTargetHealthIncludeOptions"}
+	i_ListOfString                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ListOfString"}
+	iLoadBalancer                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancer"}
+	iLoadBalancerAddress                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAddress"}
+	i_LoadBalancerAddresses                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAddresses"}
+	i_LoadBalancerArn                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerArn"}
+	i_LoadBalancerArns                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerArns"}
+	iLoadBalancerAttribute                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAttribute"}
+	i_LoadBalancerAttributeKey                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAttributeKey"}
+	i_LoadBalancerAttributes                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAttributes"}
+	i_LoadBalancerAttributeValue                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerAttributeValue"}
+	i_LoadBalancerName                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerName"}
+	i_LoadBalancerNames                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerNames"}
+	iLoadBalancerNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerNotFoundException"}
+	i_LoadBalancers                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancers"}
+	iLoadBalancerSchemeEnum                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerSchemeEnum"}
+	iLoadBalancerState                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerState"}
+	iLoadBalancerStateEnum                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerStateEnum"}
+	iLoadBalancerTypeEnum                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "LoadBalancerTypeEnum"}
+	i_Location                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Location"}
+	i_Marker                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Marker"}
+	iMatcher                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Matcher"}
+	i_Max                                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Max"}
+	iMinimumLoadBalancerCapacity                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "MinimumLoadBalancerCapacity"}
+	iMitigationInEffectEnum                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "MitigationInEffectEnum"}
+	i_Mode                                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Mode"}
+	iMutualAuthenticationAttributes                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "MutualAuthenticationAttributes"}
+	i_Name                                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Name"}
+	i_NumberOfCaCertificates                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "NumberOfCaCertificates"}
+	i_NumberOfRevokedEntries                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "NumberOfRevokedEntries"}
+	iOperationNotPermittedException                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "OperationNotPermittedException"}
+	i_OutpostId                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "OutpostId"}
+	i_PageSize                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "PageSize"}
+	i_Path                                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Path"}
+	iPathPatternConditionConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "PathPatternConditionConfig"}
+	i_Policy                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Policy"}
+	i_Port                                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Port"}
+	iPriorityInUseException                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "PriorityInUseException"}
+	iPriorRequestNotCompleteException                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "PriorRequestNotCompleteException"}
+	i_PrivateIPv4Address                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "PrivateIPv4Address"}
+	iProtocolEnum                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ProtocolEnum"}
+	i_ProtocolVersion                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ProtocolVersion"}
+	iQueryStringConditionConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "QueryStringConditionConfig"}
+	iQueryStringKeyValuePair                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "QueryStringKeyValuePair"}
+	i_QueryStringKeyValuePairList                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "QueryStringKeyValuePairList"}
+	i_QuicServerId                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "QuicServerId"}
+	iRedirectActionConfig                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionConfig"}
+	i_RedirectActionHost                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionHost"}
+	i_RedirectActionPath                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionPath"}
+	i_RedirectActionPort                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionPort"}
+	i_RedirectActionProtocol                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionProtocol"}
+	i_RedirectActionQuery                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionQuery"}
+	iRedirectActionStatusCodeEnum                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RedirectActionStatusCodeEnum"}
+	iRemoveIpamPoolEnum                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveIpamPoolEnum"}
+	i_RemoveIpamPools                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveIpamPools"}
+	i_ResetCapacityReservation                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResetCapacityReservation"}
+	i_ResetTransforms                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResetTransforms"}
+	i_ResourceArn                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResourceArn"}
+	i_ResourceArns                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResourceArns"}
+	iResourceInUseException                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResourceInUseException"}
+	iResourceNotFoundException                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ResourceNotFoundException"}
+	iRevocationContent                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationContent"}
+	iRevocationContentNotFoundException                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationContentNotFoundException"}
+	i_RevocationContents                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationContents"}
+	i_RevocationId                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationId"}
+	iRevocationIdNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationIdNotFoundException"}
+	i_RevocationIds                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationIds"}
+	iRevocationType                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RevocationType"}
+	iRewriteConfig                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RewriteConfig"}
+	i_RewriteConfigList                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RewriteConfigList"}
+	iRule                                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Rule"}
+	i_RuleArn                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleArn"}
+	i_RuleArns                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleArns"}
+	iRuleCondition                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleCondition"}
+	i_RuleConditionList                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleConditionList"}
+	iRuleNotFoundException                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleNotFoundException"}
+	i_RulePriority                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RulePriority"}
+	i_RulePriorityList                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RulePriorityList"}
+	iRulePriorityPair                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RulePriorityPair"}
+	i_Rules                                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Rules"}
+	iRuleTransform                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleTransform"}
+	i_RuleTransformList                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RuleTransformList"}
+	i_S3Bucket                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "S3Bucket"}
+	i_S3Key                                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "S3Key"}
+	i_S3ObjectVersion                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "S3ObjectVersion"}
+	i_SecurityGroupId                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SecurityGroupId"}
+	i_SecurityGroups                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SecurityGroups"}
+	iSourceIpAddressTypeEnum                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SourceIpAddressTypeEnum"}
+	iSourceIpConditionConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SourceIpConditionConfig"}
+	i_SourceNatIpv6Prefix                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SourceNatIpv6Prefix"}
+	i_SourceNatIpv6Prefixes                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SourceNatIpv6Prefixes"}
+	i_SslPolicies                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslPolicies"}
+	iSslPolicy                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslPolicy"}
+	i_SslPolicyName                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslPolicyName"}
+	i_SslPolicyNames                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslPolicyNames"}
+	iSSLPolicyNotFoundException                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SSLPolicyNotFoundException"}
+	i_SslProtocol                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslProtocol"}
+	i_SslProtocols                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SslProtocols"}
+	i_StateReason                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "StateReason"}
+	i_String                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "String"}
+	i_StringValue                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "StringValue"}
+	i_SubnetId                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SubnetId"}
+	iSubnetMapping                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SubnetMapping"}
+	i_SubnetMappings                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SubnetMappings"}
+	iSubnetNotFoundException                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SubnetNotFoundException"}
+	i_Subnets                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Subnets"}
+	iTag                                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "Tag"}
+	iTagDescription                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagDescription"}
+	i_TagDescriptions                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagDescriptions"}
+	i_TagKey                                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagKey"}
+	i_TagKeys                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagKeys"}
+	i_TagList                                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagList"}
+	i_TagValue                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TagValue"}
+	iTargetAdministrativeOverrideReasonEnum                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetAdministrativeOverrideReasonEnum"}
+	iTargetAdministrativeOverrideStateEnum                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetAdministrativeOverrideStateEnum"}
+	i_TargetControlPort                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetControlPort"}
+	iTargetDescription                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetDescription"}
+	i_TargetDescriptions                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetDescriptions"}
+	iTargetGroup                                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroup"}
+	i_TargetGroupArn                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupArn"}
+	i_TargetGroupArns                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupArns"}
+	iTargetGroupAssociationLimitException                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupAssociationLimitException"}
+	iTargetGroupAttribute                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupAttribute"}
+	i_TargetGroupAttributeKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupAttributeKey"}
+	i_TargetGroupAttributes                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupAttributes"}
+	i_TargetGroupAttributeValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupAttributeValue"}
+	iTargetGroupIpAddressTypeEnum                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupIpAddressTypeEnum"}
+	i_TargetGroupList                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupList"}
+	i_TargetGroupName                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupName"}
+	i_TargetGroupNames                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupNames"}
+	iTargetGroupNotFoundException                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupNotFoundException"}
+	i_TargetGroups                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroups"}
+	iTargetGroupStickinessConfig                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupStickinessConfig"}
+	i_TargetGroupStickinessDurationSeconds                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupStickinessDurationSeconds"}
+	i_TargetGroupStickinessEnabled                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupStickinessEnabled"}
+	iTargetGroupTuple                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupTuple"}
+	i_TargetGroupWeight                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetGroupWeight"}
+	iTargetHealth                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetHealth"}
+	iTargetHealthDescription                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetHealthDescription"}
+	i_TargetHealthDescriptions                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetHealthDescriptions"}
+	iTargetHealthReasonEnum                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetHealthReasonEnum"}
+	iTargetHealthStateEnum                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetHealthStateEnum"}
+	i_TargetId                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetId"}
+	iTargetTypeEnum                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TargetTypeEnum"}
+	iTooManyActionsException                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyActionsException"}
+	iTooManyCertificatesException                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyCertificatesException"}
+	iTooManyListenersException                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyListenersException"}
+	iTooManyLoadBalancersException                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyLoadBalancersException"}
+	iTooManyRegistrationsForTargetIdException                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyRegistrationsForTargetIdException"}
+	iTooManyRulesException                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyRulesException"}
+	iTooManyTagsException                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyTagsException"}
+	iTooManyTargetGroupsException                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyTargetGroupsException"}
+	iTooManyTargetsException                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyTargetsException"}
+	iTooManyTrustStoreRevocationEntriesException                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyTrustStoreRevocationEntriesException"}
+	iTooManyTrustStoresException                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyTrustStoresException"}
+	iTooManyUniqueTargetGroupsPerLoadBalancerException          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TooManyUniqueTargetGroupsPerLoadBalancerException"}
+	i_TotalRevokedEntries                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TotalRevokedEntries"}
+	iTransformTypeEnum                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TransformTypeEnum"}
+	iTrustStore                                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStore"}
+	i_TrustStoreArn                                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreArn"}
+	i_TrustStoreArns                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreArns"}
+	iTrustStoreAssociation                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreAssociation"}
+	iTrustStoreAssociationNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreAssociationNotFoundException"}
+	i_TrustStoreAssociationResourceArn                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreAssociationResourceArn"}
+	i_TrustStoreAssociations                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreAssociations"}
+	iTrustStoreAssociationStatusEnum                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreAssociationStatusEnum"}
+	iTrustStoreInUseException                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreInUseException"}
+	i_TrustStoreName                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreName"}
+	i_TrustStoreNames                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreNames"}
+	iTrustStoreNotFoundException                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreNotFoundException"}
+	iTrustStoreNotReadyException                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreNotReadyException"}
+	iTrustStoreRevocation                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreRevocation"}
+	i_TrustStoreRevocations                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreRevocations"}
+	i_TrustStores                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStores"}
+	iTrustStoreStatus                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "TrustStoreStatus"}
+	iUnsupportedProtocolException                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "UnsupportedProtocolException"}
+	iUrlRewriteConfig                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "UrlRewriteConfig"}
+	i_VpcId                                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "VpcId"}
+	iZonalCapacityReservationState                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ZonalCapacityReservationState"}
+	i_ZonalCapacityReservationStates                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ZonalCapacityReservationStates"}
+	i_ZoneName                                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ZoneName"}
+	iAddListenerCertificatesInput                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddListenerCertificatesInput"}
+	iAddListenerCertificatesOutput                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddListenerCertificatesOutput"}
+	iAddTagsInput                                               = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTagsInput"}
+	iAddTagsOutput                                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTagsOutput"}
+	iAddTrustStoreRevocationsInput                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTrustStoreRevocationsInput"}
+	iAddTrustStoreRevocationsOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "AddTrustStoreRevocationsOutput"}
+	iCreateListenerInput                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateListenerInput"}
+	iCreateListenerOutput                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateListenerOutput"}
+	iCreateLoadBalancerInput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateLoadBalancerInput"}
+	iCreateLoadBalancerOutput                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateLoadBalancerOutput"}
+	iCreateRuleInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateRuleInput"}
+	iCreateRuleOutput                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateRuleOutput"}
+	iCreateTargetGroupInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTargetGroupInput"}
+	iCreateTargetGroupOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTargetGroupOutput"}
+	iCreateTrustStoreInput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTrustStoreInput"}
+	iCreateTrustStoreOutput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "CreateTrustStoreOutput"}
+	iDeleteListenerInput                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteListenerInput"}
+	iDeleteListenerOutput                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteListenerOutput"}
+	iDeleteLoadBalancerInput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteLoadBalancerInput"}
+	iDeleteLoadBalancerOutput                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteLoadBalancerOutput"}
+	iDeleteRuleInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteRuleInput"}
+	iDeleteRuleOutput                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteRuleOutput"}
+	iDeleteSharedTrustStoreAssociationInput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteSharedTrustStoreAssociationInput"}
+	iDeleteSharedTrustStoreAssociationOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteSharedTrustStoreAssociationOutput"}
+	iDeleteTargetGroupInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTargetGroupInput"}
+	iDeleteTargetGroupOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTargetGroupOutput"}
+	iDeleteTrustStoreInput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTrustStoreInput"}
+	iDeleteTrustStoreOutput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeleteTrustStoreOutput"}
+	iDeregisterTargetsInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeregisterTargetsInput"}
+	iDeregisterTargetsOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DeregisterTargetsOutput"}
+	iDescribeAccountLimitsInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeAccountLimitsInput"}
+	iDescribeAccountLimitsOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeAccountLimitsOutput"}
+	iDescribeCapacityReservationInput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeCapacityReservationInput"}
+	iDescribeCapacityReservationOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeCapacityReservationOutput"}
+	iDescribeListenerAttributesInput                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerAttributesInput"}
+	iDescribeListenerAttributesOutput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerAttributesOutput"}
+	iDescribeListenerCertificatesInput                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerCertificatesInput"}
+	iDescribeListenerCertificatesOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenerCertificatesOutput"}
+	iDescribeListenersInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenersInput"}
+	iDescribeListenersOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeListenersOutput"}
+	iDescribeLoadBalancerAttributesInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancerAttributesInput"}
+	iDescribeLoadBalancerAttributesOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancerAttributesOutput"}
+	iDescribeLoadBalancersInput                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancersInput"}
+	iDescribeLoadBalancersOutput                                = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeLoadBalancersOutput"}
+	iDescribeRulesInput                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeRulesInput"}
+	iDescribeRulesOutput                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeRulesOutput"}
+	iDescribeSSLPoliciesInput                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeSSLPoliciesInput"}
+	iDescribeSSLPoliciesOutput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeSSLPoliciesOutput"}
+	iDescribeTagsInput                                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTagsInput"}
+	iDescribeTagsOutput                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTagsOutput"}
+	iDescribeTargetGroupAttributesInput                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroupAttributesInput"}
+	iDescribeTargetGroupAttributesOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroupAttributesOutput"}
+	iDescribeTargetGroupsInput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroupsInput"}
+	iDescribeTargetGroupsOutput                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetGroupsOutput"}
+	iDescribeTargetHealthInput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetHealthInput"}
+	iDescribeTargetHealthOutput                                 = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTargetHealthOutput"}
+	iDescribeTrustStoreAssociationsInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreAssociationsInput"}
+	iDescribeTrustStoreAssociationsOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreAssociationsOutput"}
+	iDescribeTrustStoreRevocationsInput                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreRevocationsInput"}
+	iDescribeTrustStoreRevocationsOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoreRevocationsOutput"}
+	iDescribeTrustStoresInput                                   = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoresInput"}
+	iDescribeTrustStoresOutput                                  = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "DescribeTrustStoresOutput"}
+	iGetResourcePolicyInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetResourcePolicyInput"}
+	iGetResourcePolicyOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetResourcePolicyOutput"}
+	iGetTrustStoreCaCertificatesBundleInput                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreCaCertificatesBundleInput"}
+	iGetTrustStoreCaCertificatesBundleOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreCaCertificatesBundleOutput"}
+	iGetTrustStoreRevocationContentInput                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreRevocationContentInput"}
+	iGetTrustStoreRevocationContentOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "GetTrustStoreRevocationContentOutput"}
+	iModifyCapacityReservationInput                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyCapacityReservationInput"}
+	iModifyCapacityReservationOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyCapacityReservationOutput"}
+	iModifyIpPoolsInput                                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyIpPoolsInput"}
+	iModifyIpPoolsOutput                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyIpPoolsOutput"}
+	iModifyListenerAttributesInput                              = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListenerAttributesInput"}
+	iModifyListenerAttributesOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListenerAttributesOutput"}
+	iModifyListenerInput                                        = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListenerInput"}
+	iModifyListenerOutput                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyListenerOutput"}
+	iModifyLoadBalancerAttributesInput                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyLoadBalancerAttributesInput"}
+	iModifyLoadBalancerAttributesOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyLoadBalancerAttributesOutput"}
+	iModifyRuleInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyRuleInput"}
+	iModifyRuleOutput                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyRuleOutput"}
+	iModifyTargetGroupAttributesInput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroupAttributesInput"}
+	iModifyTargetGroupAttributesOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroupAttributesOutput"}
+	iModifyTargetGroupInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroupInput"}
+	iModifyTargetGroupOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTargetGroupOutput"}
+	iModifyTrustStoreInput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTrustStoreInput"}
+	iModifyTrustStoreOutput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "ModifyTrustStoreOutput"}
+	iRegisterTargetsInput                                       = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RegisterTargetsInput"}
+	iRegisterTargetsOutput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RegisterTargetsOutput"}
+	iRemoveListenerCertificatesInput                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveListenerCertificatesInput"}
+	iRemoveListenerCertificatesOutput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveListenerCertificatesOutput"}
+	iRemoveTagsInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTagsInput"}
+	iRemoveTagsOutput                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTagsOutput"}
+	iRemoveTrustStoreRevocationsInput                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTrustStoreRevocationsInput"}
+	iRemoveTrustStoreRevocationsOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "RemoveTrustStoreRevocationsOutput"}
+	iSetIpAddressTypeInput                                      = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetIpAddressTypeInput"}
+	iSetIpAddressTypeOutput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetIpAddressTypeOutput"}
+	iSetRulePrioritiesInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetRulePrioritiesInput"}
+	iSetRulePrioritiesOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetRulePrioritiesOutput"}
+	iSetSecurityGroupsInput                                     = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSecurityGroupsInput"}
+	iSetSecurityGroupsOutput                                    = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSecurityGroupsOutput"}
+	iSetSubnetsInput                                            = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSubnetsInput"}
+	iSetSubnetsOutput                                           = smithy.ShapeName{Namespace: "com.amazonaws.elasticloadbalancingv2", Name: "SetSubnetsOutput"}
+	pUnit                                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AllocationIdNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ALPNPolicyNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AvailabilityZoneNotSupported",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CaCertificatesBundleNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CapacityDecreaseRequestLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CapacityReservationPending",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CapacityUnitsLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DeleteAssociationSameAccount",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateListener",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateLoadBalancerName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateTagKeys",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateTargetGroupName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateTrustStoreName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "HealthUnavailable",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "IncompatibleProtocols",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientCapacity",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidCaCertificatesBundle",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidConfigurationRequest",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidLoadBalancerAction",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRevocationContent",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidScheme",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSecurityGroup",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidTarget",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ListenerNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LoadBalancerNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PriorityInUse",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PriorRequestNotComplete",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceInUse",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RevocationContentNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RevocationIdNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RuleNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SSLPolicyNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubnetNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TargetGroupAssociationLimit",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TargetGroupNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyActions",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyCertificates",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyListeners",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyLoadBalancers",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyRegistrationsForTargetId",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyRules",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTags",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTargetGroups",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTargets",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTrustStoreRevocationEntries",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyTrustStores",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyUniqueTargetGroupsPerLoadBalancer",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AssociationNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrustStoreInUse",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrustStoreNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrustStoreNotReady",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnsupportedProtocol",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_Type, &sAction_TargetGroupArn, &sAction_AuthenticateOidcConfig, &sAction_AuthenticateCognitoConfig, &sAction_Order, &sAction_RedirectConfig, &sAction_FixedResponseConfig, &sAction_ForwardConfig, &sAction_JwtValidationConfig}, Hash: &hAction}
+var m_Actions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Actions_member}}
+var mActionTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sActionTypeEnum_FORWARD, &sActionTypeEnum_AUTHENTICATE_OIDC, &sActionTypeEnum_AUTHENTICATE_COGNITO, &sActionTypeEnum_REDIRECT, &sActionTypeEnum_FIXED_RESPONSE, &sActionTypeEnum_JWT_VALIDATION}}
+var mAdministrativeOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sAdministrativeOverride_State, &sAdministrativeOverride_Reason, &sAdministrativeOverride_Description}}
+var mAdvertiseTrustStoreCaNamesEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvertiseTrustStoreCaNamesEnum_on, &sAdvertiseTrustStoreCaNamesEnum_off}}
+var mAllocationIdNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocationIdNotFoundException_Message}}
+var m_AlpnPolicyName = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlpnPolicyName_member}}
+var mALPNPolicyNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sALPNPolicyNotSupportedException_Message}}
+var mAnomalyDetection = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetection_Result, &sAnomalyDetection_MitigationInEffect}}
+var mAnomalyResultEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyResultEnum_ANOMALOUS, &sAnomalyResultEnum_NORMAL}}
+var m_AuthenticateCognitoActionAuthenticationRequestExtraParams = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthenticateCognitoActionAuthenticationRequestExtraParams_key, &s_AuthenticateCognitoActionAuthenticationRequestExtraParams_value}}
+var mAuthenticateCognitoActionConditionalBehaviorEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticateCognitoActionConditionalBehaviorEnum_DENY, &sAuthenticateCognitoActionConditionalBehaviorEnum_ALLOW, &sAuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE}}
+var mAuthenticateCognitoActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticateCognitoActionConfig_UserPoolArn, &sAuthenticateCognitoActionConfig_UserPoolClientId, &sAuthenticateCognitoActionConfig_UserPoolDomain, &sAuthenticateCognitoActionConfig_SessionCookieName, &sAuthenticateCognitoActionConfig_Scope, &sAuthenticateCognitoActionConfig_SessionTimeout, &sAuthenticateCognitoActionConfig_AuthenticationRequestExtraParams, &sAuthenticateCognitoActionConfig_OnUnauthenticatedRequest}}
+var m_AuthenticateOidcActionAuthenticationRequestExtraParams = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthenticateOidcActionAuthenticationRequestExtraParams_key, &s_AuthenticateOidcActionAuthenticationRequestExtraParams_value}}
+var mAuthenticateOidcActionConditionalBehaviorEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticateOidcActionConditionalBehaviorEnum_DENY, &sAuthenticateOidcActionConditionalBehaviorEnum_ALLOW, &sAuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE}}
+var mAuthenticateOidcActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticateOidcActionConfig_Issuer, &sAuthenticateOidcActionConfig_AuthorizationEndpoint, &sAuthenticateOidcActionConfig_TokenEndpoint, &sAuthenticateOidcActionConfig_UserInfoEndpoint, &sAuthenticateOidcActionConfig_ClientId, &sAuthenticateOidcActionConfig_ClientSecret, &sAuthenticateOidcActionConfig_SessionCookieName, &sAuthenticateOidcActionConfig_Scope, &sAuthenticateOidcActionConfig_SessionTimeout, &sAuthenticateOidcActionConfig_AuthenticationRequestExtraParams, &sAuthenticateOidcActionConfig_OnUnauthenticatedRequest, &sAuthenticateOidcActionConfig_UseExistingClientSecret}, Hash: &hAuthenticateOidcActionConfig}
+var mAvailabilityZone = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityZone_ZoneName, &sAvailabilityZone_SubnetId, &sAvailabilityZone_OutpostId, &sAvailabilityZone_LoadBalancerAddresses, &sAvailabilityZone_SourceNatIpv6Prefixes}}
+var mAvailabilityZoneNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityZoneNotSupportedException_Message}}
+var m_AvailabilityZones = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityZones_member}}
+var mCaCertificatesBundleNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sCaCertificatesBundleNotFoundException_Message}}
+var mCapacityDecreaseRequestsLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityDecreaseRequestsLimitExceededException_Message}}
+var mCapacityReservationPendingException = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservationPendingException_Message}}
+var mCapacityReservationStateEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservationStateEnum_PROVISIONED, &sCapacityReservationStateEnum_PENDING, &sCapacityReservationStateEnum_REBALANCING, &sCapacityReservationStateEnum_FAILED}}
+var mCapacityReservationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservationStatus_Code, &sCapacityReservationStatus_Reason}}
+var mCapacityUnitsLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityUnitsLimitExceededException_Message}}
+var mCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificate_CertificateArn, &sCertificate_IsDefault}}
+var m_CertificateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateList_member}}
+var mCertificateNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateNotFoundException_Message}}
+var mCipher = smithy.SchemaMembers{List: []*smithy.Schema{&sCipher_Name, &sCipher_Priority}}
+var m_Ciphers = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ciphers_member}}
+var mDeleteAssociationSameAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAssociationSameAccountException_Message}}
+var mDescribeTargetHealthInputIncludeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetHealthInputIncludeEnum_ANOMALY, &sDescribeTargetHealthInputIncludeEnum_ALL}}
+var mDescribeTrustStoreRevocation = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoreRevocation_TrustStoreArn, &sDescribeTrustStoreRevocation_RevocationId, &sDescribeTrustStoreRevocation_RevocationType, &sDescribeTrustStoreRevocation_NumberOfRevokedEntries}}
+var m_DescribeTrustStoreRevocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeTrustStoreRevocationResponse_member}}
+var mDuplicateListenerException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateListenerException_Message}}
+var mDuplicateLoadBalancerNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateLoadBalancerNameException_Message}}
+var mDuplicateTagKeysException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTagKeysException_Message}}
+var mDuplicateTargetGroupNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTargetGroupNameException_Message}}
+var mDuplicateTrustStoreNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTrustStoreNameException_Message}}
+var mEnablePrefixForIpv6SourceNatEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sEnablePrefixForIpv6SourceNatEnum_ON, &sEnablePrefixForIpv6SourceNatEnum_OFF}}
+var mEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on, &sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off}}
+var mFixedResponseActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFixedResponseActionConfig_MessageBody, &sFixedResponseActionConfig_StatusCode, &sFixedResponseActionConfig_ContentType}}
+var mForwardActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sForwardActionConfig_TargetGroups, &sForwardActionConfig_TargetGroupStickinessConfig}}
+var mHealthUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthUnavailableException_Message}}
+var mHostHeaderConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHostHeaderConditionConfig_Values, &sHostHeaderConditionConfig_RegexValues}}
+var mHostHeaderRewriteConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHostHeaderRewriteConfig_Rewrites}}
+var mHttpHeaderConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpHeaderConditionConfig_HttpHeaderName, &sHttpHeaderConditionConfig_Values, &sHttpHeaderConditionConfig_RegexValues}}
+var mHttpRequestMethodConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpRequestMethodConditionConfig_Values}}
+var mIncompatibleProtocolsException = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleProtocolsException_Message}}
+var mInsufficientCapacityException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientCapacityException_Message}}
+var mInvalidCaCertificatesBundleException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCaCertificatesBundleException_Message}}
+var mInvalidConfigurationRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidConfigurationRequestException_Message}}
+var mInvalidLoadBalancerActionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidLoadBalancerActionException_Message}}
+var mInvalidRevocationContentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRevocationContentException_Message}}
+var mInvalidSchemeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSchemeException_Message}}
+var mInvalidSecurityGroupException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSecurityGroupException_Message}}
+var mInvalidSubnetException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSubnetException_Message}}
+var mInvalidTargetException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTargetException_Message}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4, &sIpAddressType_DUALSTACK, &sIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4}}
+var mIpamPools = smithy.SchemaMembers{List: []*smithy.Schema{&sIpamPools_Ipv4IpamPoolId}}
+var mJwtValidationActionAdditionalClaim = smithy.SchemaMembers{List: []*smithy.Schema{&sJwtValidationActionAdditionalClaim_Format, &sJwtValidationActionAdditionalClaim_Name, &sJwtValidationActionAdditionalClaim_Values}}
+var mJwtValidationActionAdditionalClaimFormatEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sJwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING, &sJwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY, &sJwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES}}
+var m_JwtValidationActionAdditionalClaims = smithy.SchemaMembers{List: []*smithy.Schema{&s_JwtValidationActionAdditionalClaims_member}}
+var m_JwtValidationActionAdditionalClaimValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_JwtValidationActionAdditionalClaimValues_member}}
+var mJwtValidationActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sJwtValidationActionConfig_JwksEndpoint, &sJwtValidationActionConfig_Issuer, &sJwtValidationActionConfig_AdditionalClaims}}
+var mLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sLimit_Name, &sLimit_Max}}
+var m_Limits = smithy.SchemaMembers{List: []*smithy.Schema{&s_Limits_member}}
+var mListener = smithy.SchemaMembers{List: []*smithy.Schema{&sListener_ListenerArn, &sListener_LoadBalancerArn, &sListener_Port, &sListener_Protocol, &sListener_Certificates, &sListener_SslPolicy, &sListener_DefaultActions, &sListener_AlpnPolicy, &sListener_MutualAuthentication}, Hash: &hListener}
+var m_ListenerArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListenerArns_member}}
+var mListenerAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerAttribute_Key, &sListenerAttribute_Value}}
+var m_ListenerAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListenerAttributes_member}}
+var mListenerNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerNotFoundException_Message}}
+var m_Listeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_Listeners_member}}
+var m_ListOfDescribeTargetHealthIncludeOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfDescribeTargetHealthIncludeOptions_member}}
+var m_ListOfString = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfString_member}}
+var mLoadBalancer = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancer_LoadBalancerArn, &sLoadBalancer_DNSName, &sLoadBalancer_CanonicalHostedZoneId, &sLoadBalancer_CreatedTime, &sLoadBalancer_LoadBalancerName, &sLoadBalancer_Scheme, &sLoadBalancer_VpcId, &sLoadBalancer_State, &sLoadBalancer_Type, &sLoadBalancer_AvailabilityZones, &sLoadBalancer_SecurityGroups, &sLoadBalancer_IpAddressType, &sLoadBalancer_CustomerOwnedIpv4Pool, &sLoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, &sLoadBalancer_EnablePrefixForIpv6SourceNat, &sLoadBalancer_IpamPools}, Hash: &hLoadBalancer}
+var mLoadBalancerAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerAddress_IpAddress, &sLoadBalancerAddress_AllocationId, &sLoadBalancerAddress_PrivateIPv4Address, &sLoadBalancerAddress_IPv6Address}}
+var m_LoadBalancerAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerAddresses_member}}
+var m_LoadBalancerArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerArns_member}}
+var mLoadBalancerAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerAttribute_Key, &sLoadBalancerAttribute_Value}}
+var m_LoadBalancerAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerAttributes_member}}
+var m_LoadBalancerNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancerNames_member}}
+var mLoadBalancerNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerNotFoundException_Message}}
+var m_LoadBalancers = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadBalancers_member}}
+var mLoadBalancerSchemeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerSchemeEnum_INTERNET_FACING, &sLoadBalancerSchemeEnum_INTERNAL}}
+var mLoadBalancerState = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerState_Code, &sLoadBalancerState_Reason}}
+var mLoadBalancerStateEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerStateEnum_ACTIVE, &sLoadBalancerStateEnum_PROVISIONING, &sLoadBalancerStateEnum_ACTIVE_IMPAIRED, &sLoadBalancerStateEnum_FAILED}}
+var mLoadBalancerTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadBalancerTypeEnum_APPLICATION, &sLoadBalancerTypeEnum_NETWORK, &sLoadBalancerTypeEnum_GATEWAY}}
+var mMatcher = smithy.SchemaMembers{List: []*smithy.Schema{&sMatcher_HttpCode, &sMatcher_GrpcCode}}
+var mMinimumLoadBalancerCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sMinimumLoadBalancerCapacity_CapacityUnits}}
+var mMitigationInEffectEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sMitigationInEffectEnum_YES, &sMitigationInEffectEnum_NO}}
+var mMutualAuthenticationAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sMutualAuthenticationAttributes_Mode, &sMutualAuthenticationAttributes_TrustStoreArn, &sMutualAuthenticationAttributes_IgnoreClientCertificateExpiry, &sMutualAuthenticationAttributes_TrustStoreAssociationStatus, &sMutualAuthenticationAttributes_AdvertiseTrustStoreCaNames}}
+var mOperationNotPermittedException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedException_Message}}
+var mPathPatternConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sPathPatternConditionConfig_Values, &sPathPatternConditionConfig_RegexValues}}
+var mPriorityInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sPriorityInUseException_Message}}
+var mPriorRequestNotCompleteException = smithy.SchemaMembers{List: []*smithy.Schema{&sPriorRequestNotCompleteException_Message}}
+var mProtocolEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocolEnum_HTTP, &sProtocolEnum_HTTPS, &sProtocolEnum_TCP, &sProtocolEnum_TLS, &sProtocolEnum_UDP, &sProtocolEnum_TCP_UDP, &sProtocolEnum_GENEVE, &sProtocolEnum_QUIC, &sProtocolEnum_TCP_QUIC}, Hash: &hProtocolEnum}
+var mQueryStringConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStringConditionConfig_Values}}
+var mQueryStringKeyValuePair = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStringKeyValuePair_Key, &sQueryStringKeyValuePair_Value}}
+var m_QueryStringKeyValuePairList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStringKeyValuePairList_member}}
+var mRedirectActionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRedirectActionConfig_Protocol, &sRedirectActionConfig_Port, &sRedirectActionConfig_Host, &sRedirectActionConfig_Path, &sRedirectActionConfig_Query, &sRedirectActionConfig_StatusCode}}
+var mRedirectActionStatusCodeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sRedirectActionStatusCodeEnum_HTTP_301, &sRedirectActionStatusCodeEnum_HTTP_302}}
+var mRemoveIpamPoolEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveIpamPoolEnum_ipv4}}
+var m_RemoveIpamPools = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemoveIpamPools_member}}
+var m_ResourceArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArns_member}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRevocationContent = smithy.SchemaMembers{List: []*smithy.Schema{&sRevocationContent_S3Bucket, &sRevocationContent_S3Key, &sRevocationContent_S3ObjectVersion, &sRevocationContent_RevocationType}}
+var mRevocationContentNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sRevocationContentNotFoundException_Message}}
+var m_RevocationContents = smithy.SchemaMembers{List: []*smithy.Schema{&s_RevocationContents_member}}
+var mRevocationIdNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sRevocationIdNotFoundException_Message}}
+var m_RevocationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_RevocationIds_member}}
+var mRevocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sRevocationType_CRL}}
+var mRewriteConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRewriteConfig_Regex, &sRewriteConfig_Replace}}
+var m_RewriteConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RewriteConfigList_member}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_RuleArn, &sRule_Priority, &sRule_Conditions, &sRule_Actions, &sRule_IsDefault, &sRule_Transforms}}
+var m_RuleArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleArns_member}}
+var mRuleCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleCondition_Field, &sRuleCondition_Values, &sRuleCondition_HostHeaderConfig, &sRuleCondition_PathPatternConfig, &sRuleCondition_HttpHeaderConfig, &sRuleCondition_QueryStringConfig, &sRuleCondition_HttpRequestMethodConfig, &sRuleCondition_SourceIpConfig, &sRuleCondition_RegexValues}, Hash: &hRuleCondition}
+var m_RuleConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleConditionList_member}}
+var mRuleNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleNotFoundException_Message}}
+var m_RulePriorityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RulePriorityList_member}}
+var mRulePriorityPair = smithy.SchemaMembers{List: []*smithy.Schema{&sRulePriorityPair_RuleArn, &sRulePriorityPair_Priority}}
+var m_Rules = smithy.SchemaMembers{List: []*smithy.Schema{&s_Rules_member}}
+var mRuleTransform = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleTransform_Type, &sRuleTransform_HostHeaderRewriteConfig, &sRuleTransform_UrlRewriteConfig}}
+var m_RuleTransformList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleTransformList_member}}
+var m_SecurityGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroups_member}}
+var mSourceIpAddressTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceIpAddressTypeEnum_IPV4, &sSourceIpAddressTypeEnum_IPV6}}
+var mSourceIpConditionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceIpConditionConfig_Values, &sSourceIpConditionConfig_IpAddressType}}
+var m_SourceNatIpv6Prefixes = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceNatIpv6Prefixes_member}}
+var m_SslPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_SslPolicies_member}}
+var mSslPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sSslPolicy_SslProtocols, &sSslPolicy_Ciphers, &sSslPolicy_Name, &sSslPolicy_SupportedLoadBalancerTypes}}
+var m_SslPolicyNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_SslPolicyNames_member}}
+var mSSLPolicyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sSSLPolicyNotFoundException_Message}}
+var m_SslProtocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_SslProtocols_member}}
+var mSubnetMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sSubnetMapping_SubnetId, &sSubnetMapping_AllocationId, &sSubnetMapping_PrivateIPv4Address, &sSubnetMapping_IPv6Address, &sSubnetMapping_SourceNatIpv6Prefix}}
+var m_SubnetMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetMappings_member}}
+var mSubnetNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sSubnetNotFoundException_Message}}
+var m_Subnets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Subnets_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTagDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sTagDescription_ResourceArn, &sTagDescription_Tags}}
+var m_TagDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagDescriptions_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetAdministrativeOverrideReasonEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR, &sTargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED, &sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED, &sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS}}
+var mTargetAdministrativeOverrideStateEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetAdministrativeOverrideStateEnum_UNKNOWN, &sTargetAdministrativeOverrideStateEnum_NO_OVERRIDE, &sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE, &sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS}}
+var mTargetDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetDescription_Id, &sTargetDescription_Port, &sTargetDescription_AvailabilityZone, &sTargetDescription_QuicServerId}}
+var m_TargetDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetDescriptions_member}}
+var mTargetGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroup_TargetGroupArn, &sTargetGroup_TargetGroupName, &sTargetGroup_Protocol, &sTargetGroup_Port, &sTargetGroup_VpcId, &sTargetGroup_HealthCheckProtocol, &sTargetGroup_HealthCheckPort, &sTargetGroup_HealthCheckEnabled, &sTargetGroup_HealthCheckIntervalSeconds, &sTargetGroup_HealthCheckTimeoutSeconds, &sTargetGroup_HealthyThresholdCount, &sTargetGroup_UnhealthyThresholdCount, &sTargetGroup_HealthCheckPath, &sTargetGroup_Matcher, &sTargetGroup_LoadBalancerArns, &sTargetGroup_TargetType, &sTargetGroup_ProtocolVersion, &sTargetGroup_IpAddressType, &sTargetGroup_TargetControlPort}, Hash: &hTargetGroup}
+var m_TargetGroupArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetGroupArns_member}}
+var mTargetGroupAssociationLimitException = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupAssociationLimitException_Message}}
+var mTargetGroupAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupAttribute_Key, &sTargetGroupAttribute_Value}}
+var m_TargetGroupAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetGroupAttributes_member}}
+var mTargetGroupIpAddressTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupIpAddressTypeEnum_IPV4, &sTargetGroupIpAddressTypeEnum_IPV6}}
+var m_TargetGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetGroupList_member}}
+var m_TargetGroupNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetGroupNames_member}}
+var mTargetGroupNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupNotFoundException_Message}}
+var m_TargetGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetGroups_member}}
+var mTargetGroupStickinessConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupStickinessConfig_Enabled, &sTargetGroupStickinessConfig_DurationSeconds}}
+var mTargetGroupTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetGroupTuple_TargetGroupArn, &sTargetGroupTuple_Weight}}
+var mTargetHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetHealth_State, &sTargetHealth_Reason, &sTargetHealth_Description}}
+var mTargetHealthDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetHealthDescription_Target, &sTargetHealthDescription_HealthCheckPort, &sTargetHealthDescription_TargetHealth, &sTargetHealthDescription_AnomalyDetection, &sTargetHealthDescription_AdministrativeOverride}}
+var m_TargetHealthDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetHealthDescriptions_member}}
+var mTargetHealthReasonEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetHealthReasonEnum_REGISTRATION_IN_PROGRESS, &sTargetHealthReasonEnum_INITIAL_HEALTH_CHECKING, &sTargetHealthReasonEnum_RESPONSE_CODE_MISMATCH, &sTargetHealthReasonEnum_TIMEOUT, &sTargetHealthReasonEnum_FAILED_HEALTH_CHECKS, &sTargetHealthReasonEnum_NOT_REGISTERED, &sTargetHealthReasonEnum_NOT_IN_USE, &sTargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS, &sTargetHealthReasonEnum_INVALID_STATE, &sTargetHealthReasonEnum_IP_UNUSABLE, &sTargetHealthReasonEnum_HEALTH_CHECK_DISABLED, &sTargetHealthReasonEnum_INTERNAL_ERROR}, Hash: &hTargetHealthReasonEnum}
+var mTargetHealthStateEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetHealthStateEnum_INITIAL, &sTargetHealthStateEnum_HEALTHY, &sTargetHealthStateEnum_UNHEALTHY, &sTargetHealthStateEnum_UNHEALTHY_DRAINING, &sTargetHealthStateEnum_UNUSED, &sTargetHealthStateEnum_DRAINING, &sTargetHealthStateEnum_UNAVAILABLE}}
+var mTargetTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTypeEnum_INSTANCE, &sTargetTypeEnum_IP, &sTargetTypeEnum_LAMBDA, &sTargetTypeEnum_ALB}}
+var mTooManyActionsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyActionsException_Message}}
+var mTooManyCertificatesException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyCertificatesException_Message}}
+var mTooManyListenersException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyListenersException_Message}}
+var mTooManyLoadBalancersException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyLoadBalancersException_Message}}
+var mTooManyRegistrationsForTargetIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRegistrationsForTargetIdException_Message}}
+var mTooManyRulesException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRulesException_Message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message}}
+var mTooManyTargetGroupsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTargetGroupsException_Message}}
+var mTooManyTargetsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTargetsException_Message}}
+var mTooManyTrustStoreRevocationEntriesException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTrustStoreRevocationEntriesException_Message}}
+var mTooManyTrustStoresException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTrustStoresException_Message}}
+var mTooManyUniqueTargetGroupsPerLoadBalancerException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyUniqueTargetGroupsPerLoadBalancerException_Message}}
+var mTransformTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTransformTypeEnum_HOST_HEADER_REWRITE, &sTransformTypeEnum_URL_REWRITE}}
+var mTrustStore = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStore_Name, &sTrustStore_TrustStoreArn, &sTrustStore_Status, &sTrustStore_NumberOfCaCertificates, &sTrustStore_TotalRevokedEntries}}
+var m_TrustStoreArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStoreArns_member}}
+var mTrustStoreAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreAssociation_ResourceArn}}
+var mTrustStoreAssociationNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreAssociationNotFoundException_Message}}
+var m_TrustStoreAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStoreAssociations_member}}
+var mTrustStoreAssociationStatusEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreAssociationStatusEnum_ACTIVE, &sTrustStoreAssociationStatusEnum_REMOVED}}
+var mTrustStoreInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreInUseException_Message}}
+var m_TrustStoreNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStoreNames_member}}
+var mTrustStoreNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreNotFoundException_Message}}
+var mTrustStoreNotReadyException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreNotReadyException_Message}}
+var mTrustStoreRevocation = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreRevocation_TrustStoreArn, &sTrustStoreRevocation_RevocationId, &sTrustStoreRevocation_RevocationType, &sTrustStoreRevocation_NumberOfRevokedEntries}}
+var m_TrustStoreRevocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStoreRevocations_member}}
+var m_TrustStores = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStores_member}}
+var mTrustStoreStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreStatus_ACTIVE, &sTrustStoreStatus_CREATING}}
+var mUnsupportedProtocolException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedProtocolException_Message}}
+var mUrlRewriteConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUrlRewriteConfig_Rewrites}}
+var mZonalCapacityReservationState = smithy.SchemaMembers{List: []*smithy.Schema{&sZonalCapacityReservationState_State, &sZonalCapacityReservationState_AvailabilityZone, &sZonalCapacityReservationState_EffectiveCapacityUnits}}
+var m_ZonalCapacityReservationStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ZonalCapacityReservationStates_member}}
+var mAddListenerCertificatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddListenerCertificatesInput_ListenerArn, &sAddListenerCertificatesInput_Certificates}}
+var mAddListenerCertificatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddListenerCertificatesOutput_Certificates}}
+var mAddTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsInput_ResourceArns, &sAddTagsInput_Tags}}
+var mAddTrustStoreRevocationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTrustStoreRevocationsInput_TrustStoreArn, &sAddTrustStoreRevocationsInput_RevocationContents}}
+var mAddTrustStoreRevocationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTrustStoreRevocationsOutput_TrustStoreRevocations}}
+var mCreateListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateListenerInput_LoadBalancerArn, &sCreateListenerInput_Protocol, &sCreateListenerInput_Port, &sCreateListenerInput_SslPolicy, &sCreateListenerInput_Certificates, &sCreateListenerInput_DefaultActions, &sCreateListenerInput_AlpnPolicy, &sCreateListenerInput_Tags, &sCreateListenerInput_MutualAuthentication}, Hash: &hCreateListenerInput}
+var mCreateListenerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateListenerOutput_Listeners}}
+var mCreateLoadBalancerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoadBalancerInput_Name, &sCreateLoadBalancerInput_Subnets, &sCreateLoadBalancerInput_SubnetMappings, &sCreateLoadBalancerInput_SecurityGroups, &sCreateLoadBalancerInput_Scheme, &sCreateLoadBalancerInput_Tags, &sCreateLoadBalancerInput_Type, &sCreateLoadBalancerInput_IpAddressType, &sCreateLoadBalancerInput_CustomerOwnedIpv4Pool, &sCreateLoadBalancerInput_EnablePrefixForIpv6SourceNat, &sCreateLoadBalancerInput_IpamPools}, Hash: &hCreateLoadBalancerInput}
+var mCreateLoadBalancerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoadBalancerOutput_LoadBalancers}}
+var mCreateRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleInput_ListenerArn, &sCreateRuleInput_Conditions, &sCreateRuleInput_Priority, &sCreateRuleInput_Actions, &sCreateRuleInput_Tags, &sCreateRuleInput_Transforms}}
+var mCreateRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleOutput_Rules}}
+var mCreateTargetGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTargetGroupInput_Name, &sCreateTargetGroupInput_Protocol, &sCreateTargetGroupInput_ProtocolVersion, &sCreateTargetGroupInput_Port, &sCreateTargetGroupInput_VpcId, &sCreateTargetGroupInput_HealthCheckProtocol, &sCreateTargetGroupInput_HealthCheckPort, &sCreateTargetGroupInput_HealthCheckEnabled, &sCreateTargetGroupInput_HealthCheckPath, &sCreateTargetGroupInput_HealthCheckIntervalSeconds, &sCreateTargetGroupInput_HealthCheckTimeoutSeconds, &sCreateTargetGroupInput_HealthyThresholdCount, &sCreateTargetGroupInput_UnhealthyThresholdCount, &sCreateTargetGroupInput_Matcher, &sCreateTargetGroupInput_TargetType, &sCreateTargetGroupInput_Tags, &sCreateTargetGroupInput_IpAddressType, &sCreateTargetGroupInput_TargetControlPort}, Hash: &hCreateTargetGroupInput}
+var mCreateTargetGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTargetGroupOutput_TargetGroups}}
+var mCreateTrustStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustStoreInput_Name, &sCreateTrustStoreInput_CaCertificatesBundleS3Bucket, &sCreateTrustStoreInput_CaCertificatesBundleS3Key, &sCreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion, &sCreateTrustStoreInput_Tags}}
+var mCreateTrustStoreOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustStoreOutput_TrustStores}}
+var mDeleteListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteListenerInput_ListenerArn}}
+var mDeleteLoadBalancerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLoadBalancerInput_LoadBalancerArn}}
+var mDeleteRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleInput_RuleArn}}
+var mDeleteSharedTrustStoreAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSharedTrustStoreAssociationInput_TrustStoreArn, &sDeleteSharedTrustStoreAssociationInput_ResourceArn}}
+var mDeleteTargetGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTargetGroupInput_TargetGroupArn}}
+var mDeleteTrustStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrustStoreInput_TrustStoreArn}}
+var mDeregisterTargetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterTargetsInput_TargetGroupArn, &sDeregisterTargetsInput_Targets}}
+var mDescribeAccountLimitsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountLimitsInput_Marker, &sDescribeAccountLimitsInput_PageSize}}
+var mDescribeAccountLimitsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountLimitsOutput_Limits, &sDescribeAccountLimitsOutput_NextMarker}}
+var mDescribeCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCapacityReservationInput_LoadBalancerArn}}
+var mDescribeCapacityReservationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCapacityReservationOutput_LastModifiedTime, &sDescribeCapacityReservationOutput_DecreaseRequestsRemaining, &sDescribeCapacityReservationOutput_MinimumLoadBalancerCapacity, &sDescribeCapacityReservationOutput_CapacityReservationState}}
+var mDescribeListenerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerAttributesInput_ListenerArn}}
+var mDescribeListenerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerAttributesOutput_Attributes}}
+var mDescribeListenerCertificatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerCertificatesInput_ListenerArn, &sDescribeListenerCertificatesInput_Marker, &sDescribeListenerCertificatesInput_PageSize}}
+var mDescribeListenerCertificatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerCertificatesOutput_Certificates, &sDescribeListenerCertificatesOutput_NextMarker}}
+var mDescribeListenersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenersInput_LoadBalancerArn, &sDescribeListenersInput_ListenerArns, &sDescribeListenersInput_Marker, &sDescribeListenersInput_PageSize}}
+var mDescribeListenersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenersOutput_Listeners, &sDescribeListenersOutput_NextMarker}}
+var mDescribeLoadBalancerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerAttributesInput_LoadBalancerArn}}
+var mDescribeLoadBalancerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancerAttributesOutput_Attributes}}
+var mDescribeLoadBalancersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancersInput_LoadBalancerArns, &sDescribeLoadBalancersInput_Names, &sDescribeLoadBalancersInput_Marker, &sDescribeLoadBalancersInput_PageSize}}
+var mDescribeLoadBalancersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoadBalancersOutput_LoadBalancers, &sDescribeLoadBalancersOutput_NextMarker}}
+var mDescribeRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRulesInput_ListenerArn, &sDescribeRulesInput_RuleArns, &sDescribeRulesInput_Marker, &sDescribeRulesInput_PageSize}}
+var mDescribeRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRulesOutput_Rules, &sDescribeRulesOutput_NextMarker}}
+var mDescribeSSLPoliciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSSLPoliciesInput_Names, &sDescribeSSLPoliciesInput_Marker, &sDescribeSSLPoliciesInput_PageSize, &sDescribeSSLPoliciesInput_LoadBalancerType}}
+var mDescribeSSLPoliciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSSLPoliciesOutput_SslPolicies, &sDescribeSSLPoliciesOutput_NextMarker}}
+var mDescribeTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsInput_ResourceArns}}
+var mDescribeTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsOutput_TagDescriptions}}
+var mDescribeTargetGroupAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetGroupAttributesInput_TargetGroupArn}}
+var mDescribeTargetGroupAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetGroupAttributesOutput_Attributes}}
+var mDescribeTargetGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetGroupsInput_LoadBalancerArn, &sDescribeTargetGroupsInput_TargetGroupArns, &sDescribeTargetGroupsInput_Names, &sDescribeTargetGroupsInput_Marker, &sDescribeTargetGroupsInput_PageSize}}
+var mDescribeTargetGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetGroupsOutput_TargetGroups, &sDescribeTargetGroupsOutput_NextMarker}}
+var mDescribeTargetHealthInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetHealthInput_TargetGroupArn, &sDescribeTargetHealthInput_Targets, &sDescribeTargetHealthInput_Include}}
+var mDescribeTargetHealthOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTargetHealthOutput_TargetHealthDescriptions}}
+var mDescribeTrustStoreAssociationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoreAssociationsInput_TrustStoreArn, &sDescribeTrustStoreAssociationsInput_Marker, &sDescribeTrustStoreAssociationsInput_PageSize}}
+var mDescribeTrustStoreAssociationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoreAssociationsOutput_TrustStoreAssociations, &sDescribeTrustStoreAssociationsOutput_NextMarker}}
+var mDescribeTrustStoreRevocationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoreRevocationsInput_TrustStoreArn, &sDescribeTrustStoreRevocationsInput_RevocationIds, &sDescribeTrustStoreRevocationsInput_Marker, &sDescribeTrustStoreRevocationsInput_PageSize}}
+var mDescribeTrustStoreRevocationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoreRevocationsOutput_TrustStoreRevocations, &sDescribeTrustStoreRevocationsOutput_NextMarker}}
+var mDescribeTrustStoresInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoresInput_TrustStoreArns, &sDescribeTrustStoresInput_Names, &sDescribeTrustStoresInput_Marker, &sDescribeTrustStoresInput_PageSize}}
+var mDescribeTrustStoresOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustStoresOutput_TrustStores, &sDescribeTrustStoresOutput_NextMarker}}
+var mGetResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyInput_ResourceArn}}
+var mGetResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyOutput_Policy}}
+var mGetTrustStoreCaCertificatesBundleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreCaCertificatesBundleInput_TrustStoreArn}}
+var mGetTrustStoreCaCertificatesBundleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreCaCertificatesBundleOutput_Location}}
+var mGetTrustStoreRevocationContentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreRevocationContentInput_TrustStoreArn, &sGetTrustStoreRevocationContentInput_RevocationId}}
+var mGetTrustStoreRevocationContentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreRevocationContentOutput_Location}}
+var mModifyCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyCapacityReservationInput_LoadBalancerArn, &sModifyCapacityReservationInput_MinimumLoadBalancerCapacity, &sModifyCapacityReservationInput_ResetCapacityReservation}}
+var mModifyCapacityReservationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyCapacityReservationOutput_LastModifiedTime, &sModifyCapacityReservationOutput_DecreaseRequestsRemaining, &sModifyCapacityReservationOutput_MinimumLoadBalancerCapacity, &sModifyCapacityReservationOutput_CapacityReservationState}}
+var mModifyIpPoolsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyIpPoolsInput_LoadBalancerArn, &sModifyIpPoolsInput_IpamPools, &sModifyIpPoolsInput_RemoveIpamPools}}
+var mModifyIpPoolsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyIpPoolsOutput_IpamPools}}
+var mModifyListenerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyListenerAttributesInput_ListenerArn, &sModifyListenerAttributesInput_Attributes}}
+var mModifyListenerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyListenerAttributesOutput_Attributes}}
+var mModifyListenerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyListenerInput_ListenerArn, &sModifyListenerInput_Port, &sModifyListenerInput_Protocol, &sModifyListenerInput_SslPolicy, &sModifyListenerInput_Certificates, &sModifyListenerInput_DefaultActions, &sModifyListenerInput_AlpnPolicy, &sModifyListenerInput_MutualAuthentication}}
+var mModifyListenerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyListenerOutput_Listeners}}
+var mModifyLoadBalancerAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLoadBalancerAttributesInput_LoadBalancerArn, &sModifyLoadBalancerAttributesInput_Attributes}}
+var mModifyLoadBalancerAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLoadBalancerAttributesOutput_Attributes}}
+var mModifyRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyRuleInput_RuleArn, &sModifyRuleInput_Conditions, &sModifyRuleInput_Actions, &sModifyRuleInput_Transforms, &sModifyRuleInput_ResetTransforms}}
+var mModifyRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyRuleOutput_Rules}}
+var mModifyTargetGroupAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTargetGroupAttributesInput_TargetGroupArn, &sModifyTargetGroupAttributesInput_Attributes}}
+var mModifyTargetGroupAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTargetGroupAttributesOutput_Attributes}}
+var mModifyTargetGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTargetGroupInput_TargetGroupArn, &sModifyTargetGroupInput_HealthCheckProtocol, &sModifyTargetGroupInput_HealthCheckPort, &sModifyTargetGroupInput_HealthCheckPath, &sModifyTargetGroupInput_HealthCheckEnabled, &sModifyTargetGroupInput_HealthCheckIntervalSeconds, &sModifyTargetGroupInput_HealthCheckTimeoutSeconds, &sModifyTargetGroupInput_HealthyThresholdCount, &sModifyTargetGroupInput_UnhealthyThresholdCount, &sModifyTargetGroupInput_Matcher}, Hash: &hModifyTargetGroupInput}
+var mModifyTargetGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTargetGroupOutput_TargetGroups}}
+var mModifyTrustStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTrustStoreInput_TrustStoreArn, &sModifyTrustStoreInput_CaCertificatesBundleS3Bucket, &sModifyTrustStoreInput_CaCertificatesBundleS3Key, &sModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion}}
+var mModifyTrustStoreOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyTrustStoreOutput_TrustStores}}
+var mRegisterTargetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterTargetsInput_TargetGroupArn, &sRegisterTargetsInput_Targets}}
+var mRemoveListenerCertificatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveListenerCertificatesInput_ListenerArn, &sRemoveListenerCertificatesInput_Certificates}}
+var mRemoveTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsInput_ResourceArns, &sRemoveTagsInput_TagKeys}}
+var mRemoveTrustStoreRevocationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTrustStoreRevocationsInput_TrustStoreArn, &sRemoveTrustStoreRevocationsInput_RevocationIds}}
+var mSetIpAddressTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetIpAddressTypeInput_LoadBalancerArn, &sSetIpAddressTypeInput_IpAddressType}}
+var mSetIpAddressTypeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetIpAddressTypeOutput_IpAddressType}}
+var mSetRulePrioritiesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetRulePrioritiesInput_RulePriorities}}
+var mSetRulePrioritiesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetRulePrioritiesOutput_Rules}}
+var mSetSecurityGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSecurityGroupsInput_LoadBalancerArn, &sSetSecurityGroupsInput_SecurityGroups, &sSetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic}}
+var mSetSecurityGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSecurityGroupsOutput_SecurityGroupIds, &sSetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic}}
+var mSetSubnetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSubnetsInput_LoadBalancerArn, &sSetSubnetsInput_Subnets, &sSetSubnetsInput_SubnetMappings, &sSetSubnetsInput_IpAddressType, &sSetSubnetsInput_EnablePrefixForIpv6SourceNat}}
+var mSetSubnetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSubnetsOutput_AvailabilityZones, &sSetSubnetsOutput_IpAddressType, &sSetSubnetsOutput_EnablePrefixForIpv6SourceNat}}
+
+var hAction = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 9, 0, 0, 0, 0, 2, 0, 0, 3, 4, 0, 0, 7, 0, 0, 0, 1, 6, 0, 0, 0, 0,
+	0, 0, 0, 5, 0, 0, 8, 0,
+}}
+var hAuthenticateOidcActionConfig = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 6, 0, 0, 10, 0, 12, 8, 0, 11, 0, 0, 3, 0, 0, 0, 0, 5, 4, 0, 0, 7, 0, 1,
+	0, 0, 0, 0, 0, 0, 2, 9,
+}}
+var hListener = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 9, 0, 2, 0, 4, 0, 6, 0, 0, 0, 0, 0, 0, 0, 7, 5, 0, 0, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 0, 3, 0,
+}}
+var hLoadBalancer = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 0, 0, 0, 1, 10, 14, 0, 8, 4, 0, 0, 5, 2, 0, 6, 0, 0, 0, 3, 0, 13, 12, 11,
+	0, 0, 0, 16, 15, 7, 9, 0,
+}}
+var hProtocolEnum = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 5, 3, 0, 0, 0, 4, 0, 0, 7, 0, 0,
+	1, 0, 0, 2, 0, 6, 0, 0,
+}}
+var hRuleCondition = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0,
+	3, 0, 5, 9, 7, 0, 4, 0,
+}}
+var hTargetGroup = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 7, 2, 0, 0, 12, 16, 15, 10, 0, 0, 3, 8, 9, 0, 0, 0, 0, 11, 13, 0, 14, 18, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+}}
+var hTargetHealthReasonEnum = smithy.MemberHash{Seed: 19, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 1, 2, 9, 0, 0, 0, 12, 10, 0, 0, 11,
+	0, 3, 0, 4, 5, 0, 0, 0,
+}}
+var hCreateListenerInput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 6, 0, 8, 0, 7, 0, 4, 0, 0, 0, 0, 0, 5,
+	1, 0, 0, 0, 3, 0, 0, 9,
+}}
+var hCreateLoadBalancerInput = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 9, 0, 1, 0, 0, 0, 4, 11, 0, 3, 8, 0, 0, 10, 6, 0, 7, 2, 0, 0, 0, 0,
+	0, 0, 0, 0, 5, 0, 0, 0,
+}}
+var hCreateTargetGroupInput = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 7, 0, 0, 0, 13, 15, 0, 11, 0, 0, 2, 8, 10, 0, 0, 0, 0, 12, 9, 0, 14, 17, 0,
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 4, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	16, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+}}
+var hModifyTargetGroupInput = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 6, 0, 0, 0, 3, 10, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 9, 7, 0, 4, 0,
+	0, 0, 2, 0, 0, 5, 0, 1,
+}}
+
+var sAddListenerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddListenerCertificates, Type: smithy.ShapeTypeOperation, Ext: &eAddListenerCertificates})
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Type: smithy.ShapeTypeOperation, Ext: &eAddTags})
+var sAddTrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTrustStoreRevocations, Type: smithy.ShapeTypeOperation, Ext: &eAddTrustStoreRevocations})
+var sCreateListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListener, Type: smithy.ShapeTypeOperation, Ext: &eCreateListener})
+var sCreateLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoadBalancer})
+var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Type: smithy.ShapeTypeOperation, Ext: &eCreateRule})
+var sCreateTargetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateTargetGroup})
+var sCreateTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStore, Type: smithy.ShapeTypeOperation, Ext: &eCreateTrustStore})
+var sDeleteListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListener, Type: smithy.ShapeTypeOperation, Ext: &eDeleteListener})
+var sDeleteLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancer, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoadBalancer})
+var sDeleteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRule, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRule})
+var sDeleteSharedTrustStoreAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSharedTrustStoreAssociation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSharedTrustStoreAssociation})
+var sDeleteTargetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTargetGroup})
+var sDeleteTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStore, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTrustStore})
+var sDeregisterTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTargets, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterTargets})
+var sDescribeAccountLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimits, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAccountLimits})
+var sDescribeCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCapacityReservation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCapacityReservation})
+var sDescribeListenerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeListenerAttributes})
+var sDescribeListenerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerCertificates, Type: smithy.ShapeTypeOperation, Ext: &eDescribeListenerCertificates})
+var sDescribeListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListeners, Type: smithy.ShapeTypeOperation, Ext: &eDescribeListeners})
+var sDescribeLoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancerAttributes})
+var sDescribeLoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancers, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoadBalancers})
+var sDescribeRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRules, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRules})
+var sDescribeSSLPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSSLPolicies, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSSLPolicies})
+var sDescribeTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTags, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTags})
+var sDescribeTargetGroupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroupAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTargetGroupAttributes})
+var sDescribeTargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroups, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTargetGroups})
+var sDescribeTargetHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetHealth, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTargetHealth})
+var sDescribeTrustStoreAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreAssociations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustStoreAssociations})
+var sDescribeTrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreRevocations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustStoreRevocations})
+var sDescribeTrustStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStores, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustStores})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sGetTrustStoreCaCertificatesBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCaCertificatesBundle, Type: smithy.ShapeTypeOperation, Ext: &eGetTrustStoreCaCertificatesBundle})
+var sGetTrustStoreRevocationContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreRevocationContent, Type: smithy.ShapeTypeOperation, Ext: &eGetTrustStoreRevocationContent})
+var sModifyCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyCapacityReservation, Type: smithy.ShapeTypeOperation, Ext: &eModifyCapacityReservation})
+var sModifyIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyIpPools, Type: smithy.ShapeTypeOperation, Ext: &eModifyIpPools})
+var sModifyListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListener, Type: smithy.ShapeTypeOperation, Ext: &eModifyListener})
+var sModifyListenerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListenerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eModifyListenerAttributes})
+var sModifyLoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributes, Type: smithy.ShapeTypeOperation, Ext: &eModifyLoadBalancerAttributes})
+var sModifyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyRule, Type: smithy.ShapeTypeOperation, Ext: &eModifyRule})
+var sModifyTargetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroup, Type: smithy.ShapeTypeOperation, Ext: &eModifyTargetGroup})
+var sModifyTargetGroupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroupAttributes, Type: smithy.ShapeTypeOperation, Ext: &eModifyTargetGroupAttributes})
+var sModifyTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTrustStore, Type: smithy.ShapeTypeOperation, Ext: &eModifyTrustStore})
+var sRegisterTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTargets, Type: smithy.ShapeTypeOperation, Ext: &eRegisterTargets})
+var sRemoveListenerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveListenerCertificates, Type: smithy.ShapeTypeOperation, Ext: &eRemoveListenerCertificates})
+var sRemoveTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTags, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTags})
+var sRemoveTrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTrustStoreRevocations, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTrustStoreRevocations})
+var sSetIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIpAddressType, Type: smithy.ShapeTypeOperation, Ext: &eSetIpAddressType})
+var sSetRulePriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetRulePriorities, Type: smithy.ShapeTypeOperation, Ext: &eSetRulePriorities})
+var sSetSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSecurityGroups, Type: smithy.ShapeTypeOperation, Ext: &eSetSecurityGroups})
+var sSetSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSubnets, Type: smithy.ShapeTypeOperation, Ext: &eSetSubnets})
+var s_ElasticLoadBalancing_v10 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticLoadBalancing_v10, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_ElasticLoadBalancing_v10})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var sAction_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iActionTypeEnum, Members: &mActionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eAction_Type})
+var sAction_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eAction_TargetGroupArn})
+var sAction_AuthenticateOidcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticateOidcConfig", ID: &iAuthenticateOidcActionConfig, Members: &mAuthenticateOidcActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_AuthenticateOidcConfig})
+var sAction_AuthenticateCognitoConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticateCognitoConfig", ID: &iAuthenticateCognitoActionConfig, Members: &mAuthenticateCognitoActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_AuthenticateCognitoConfig})
+var sAction_Order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Order", ID: &i_ActionOrder, Type: smithy.ShapeTypeInteger, Ext: &eAction_Order})
+var sAction_RedirectConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectConfig", ID: &iRedirectActionConfig, Members: &mRedirectActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_RedirectConfig})
+var sAction_FixedResponseConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FixedResponseConfig", ID: &iFixedResponseActionConfig, Members: &mFixedResponseActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_FixedResponseConfig})
+var sAction_ForwardConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardConfig", ID: &iForwardActionConfig, Members: &mForwardActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_ForwardConfig})
+var sAction_JwtValidationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtValidationConfig", ID: &iJwtValidationActionConfig, Members: &mJwtValidationActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAction_JwtValidationConfig})
+var s_ActionOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionOrder, Type: smithy.ShapeTypeInteger, Ext: &e_ActionOrder})
+var s_Actions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &e_Actions})
+var s_Actions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &e_Actions_member})
+var sActionTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeEnum, Members: &mActionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eActionTypeEnum})
+var sActionTypeEnum_FORWARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORWARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_FORWARD})
+var sActionTypeEnum_AUTHENTICATE_OIDC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATE_OIDC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_AUTHENTICATE_OIDC})
+var sActionTypeEnum_AUTHENTICATE_COGNITO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATE_COGNITO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_AUTHENTICATE_COGNITO})
+var sActionTypeEnum_REDIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_REDIRECT})
+var sActionTypeEnum_FIXED_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_FIXED_RESPONSE})
+var sActionTypeEnum_JWT_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JWT_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeEnum_JWT_VALIDATION})
+var sAdministrativeOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdministrativeOverride, Members: &mAdministrativeOverride, Type: smithy.ShapeTypeStructure, Ext: &eAdministrativeOverride})
+var sAdministrativeOverride_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iTargetAdministrativeOverrideStateEnum, Members: &mTargetAdministrativeOverrideStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eAdministrativeOverride_State})
+var sAdministrativeOverride_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iTargetAdministrativeOverrideReasonEnum, Members: &mTargetAdministrativeOverrideReasonEnum, Type: smithy.ShapeTypeEnum, Ext: &eAdministrativeOverride_Reason})
+var sAdministrativeOverride_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eAdministrativeOverride_Description})
+var sAdvertiseTrustStoreCaNamesEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvertiseTrustStoreCaNamesEnum, Members: &mAdvertiseTrustStoreCaNamesEnum, Type: smithy.ShapeTypeEnum, Ext: &eAdvertiseTrustStoreCaNamesEnum})
+var sAdvertiseTrustStoreCaNamesEnum_on = smithy.NewStaticSchema(smithy.StaticSchema{Member: "on", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdvertiseTrustStoreCaNamesEnum_on})
+var sAdvertiseTrustStoreCaNamesEnum_off = smithy.NewStaticSchema(smithy.StaticSchema{Member: "off", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdvertiseTrustStoreCaNamesEnum_off})
+var s_AllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocationId, Type: smithy.ShapeTypeString, Ext: &e_AllocationId})
+var sAllocationIdNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocationIdNotFoundException, Members: &mAllocationIdNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAllocationIdNotFoundException})
+var sAllocationIdNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eAllocationIdNotFoundException_Message})
+var s_AlpnPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlpnPolicyName, Members: &m_AlpnPolicyName, Type: smithy.ShapeTypeList, Ext: &e_AlpnPolicyName})
+var s_AlpnPolicyName_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlpnPolicyValue, Type: smithy.ShapeTypeString, Ext: &e_AlpnPolicyName_member})
+var sALPNPolicyNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iALPNPolicyNotSupportedException, Members: &mALPNPolicyNotSupportedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eALPNPolicyNotSupportedException})
+var sALPNPolicyNotSupportedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eALPNPolicyNotSupportedException_Message})
+var s_AlpnPolicyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlpnPolicyValue, Type: smithy.ShapeTypeString, Ext: &e_AlpnPolicyValue})
+var sAnomalyDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetection, Members: &mAnomalyDetection, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetection})
+var sAnomalyDetection_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &iAnomalyResultEnum, Members: &mAnomalyResultEnum, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetection_Result})
+var sAnomalyDetection_MitigationInEffect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MitigationInEffect", ID: &iMitigationInEffectEnum, Members: &mMitigationInEffectEnum, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetection_MitigationInEffect})
+var sAnomalyResultEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyResultEnum, Members: &mAnomalyResultEnum, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyResultEnum})
+var sAnomalyResultEnum_ANOMALOUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANOMALOUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyResultEnum_ANOMALOUS})
+var sAnomalyResultEnum_NORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyResultEnum_NORMAL})
+var s_AuthenticateCognitoActionAuthenticationRequestExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionAuthenticationRequestExtraParams, Members: &m_AuthenticateCognitoActionAuthenticationRequestExtraParams, Type: smithy.ShapeTypeMap, Ext: &e_AuthenticateCognitoActionAuthenticationRequestExtraParams})
+var s_AuthenticateCognitoActionAuthenticationRequestExtraParams_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AuthenticateCognitoActionAuthenticationRequestParamName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionAuthenticationRequestExtraParams_key})
+var s_AuthenticateCognitoActionAuthenticationRequestExtraParams_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AuthenticateCognitoActionAuthenticationRequestParamValue, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionAuthenticationRequestExtraParams_value})
+var s_AuthenticateCognitoActionAuthenticationRequestParamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionAuthenticationRequestParamName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionAuthenticationRequestParamName})
+var s_AuthenticateCognitoActionAuthenticationRequestParamValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionAuthenticationRequestParamValue, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionAuthenticationRequestParamValue})
+var sAuthenticateCognitoActionConditionalBehaviorEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticateCognitoActionConditionalBehaviorEnum, Members: &mAuthenticateCognitoActionConditionalBehaviorEnum, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticateCognitoActionConditionalBehaviorEnum})
+var sAuthenticateCognitoActionConditionalBehaviorEnum_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateCognitoActionConditionalBehaviorEnum_DENY})
+var sAuthenticateCognitoActionConditionalBehaviorEnum_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateCognitoActionConditionalBehaviorEnum_ALLOW})
+var sAuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE})
+var sAuthenticateCognitoActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticateCognitoActionConfig, Members: &mAuthenticateCognitoActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateCognitoActionConfig})
+var sAuthenticateCognitoActionConfig_UserPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolArn", ID: &i_AuthenticateCognitoActionUserPoolArn, Type: smithy.ShapeTypeString, Ext: &eAuthenticateCognitoActionConfig_UserPoolArn})
+var sAuthenticateCognitoActionConfig_UserPoolClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolClientId", ID: &i_AuthenticateCognitoActionUserPoolClientId, Type: smithy.ShapeTypeString, Ext: &eAuthenticateCognitoActionConfig_UserPoolClientId})
+var sAuthenticateCognitoActionConfig_UserPoolDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolDomain", ID: &i_AuthenticateCognitoActionUserPoolDomain, Type: smithy.ShapeTypeString, Ext: &eAuthenticateCognitoActionConfig_UserPoolDomain})
+var sAuthenticateCognitoActionConfig_SessionCookieName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionCookieName", ID: &i_AuthenticateCognitoActionSessionCookieName, Type: smithy.ShapeTypeString, Ext: &eAuthenticateCognitoActionConfig_SessionCookieName})
+var sAuthenticateCognitoActionConfig_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i_AuthenticateCognitoActionScope, Type: smithy.ShapeTypeString, Ext: &eAuthenticateCognitoActionConfig_Scope})
+var sAuthenticateCognitoActionConfig_SessionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTimeout", ID: &i_AuthenticateCognitoActionSessionTimeout, Type: smithy.ShapeTypeLong, Ext: &eAuthenticateCognitoActionConfig_SessionTimeout})
+var sAuthenticateCognitoActionConfig_AuthenticationRequestExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationRequestExtraParams", ID: &i_AuthenticateCognitoActionAuthenticationRequestExtraParams, Members: &m_AuthenticateCognitoActionAuthenticationRequestExtraParams, Type: smithy.ShapeTypeMap, Ext: &eAuthenticateCognitoActionConfig_AuthenticationRequestExtraParams})
+var sAuthenticateCognitoActionConfig_OnUnauthenticatedRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnUnauthenticatedRequest", ID: &iAuthenticateCognitoActionConditionalBehaviorEnum, Members: &mAuthenticateCognitoActionConditionalBehaviorEnum, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticateCognitoActionConfig_OnUnauthenticatedRequest})
+var s_AuthenticateCognitoActionScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionScope, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionScope})
+var s_AuthenticateCognitoActionSessionCookieName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionSessionCookieName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionSessionCookieName})
+var s_AuthenticateCognitoActionSessionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionSessionTimeout, Type: smithy.ShapeTypeLong, Ext: &e_AuthenticateCognitoActionSessionTimeout})
+var s_AuthenticateCognitoActionUserPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionUserPoolArn, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionUserPoolArn})
+var s_AuthenticateCognitoActionUserPoolClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionUserPoolClientId, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionUserPoolClientId})
+var s_AuthenticateCognitoActionUserPoolDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateCognitoActionUserPoolDomain, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateCognitoActionUserPoolDomain})
+var s_AuthenticateOidcActionAuthenticationRequestExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionAuthenticationRequestExtraParams, Members: &m_AuthenticateOidcActionAuthenticationRequestExtraParams, Type: smithy.ShapeTypeMap, Ext: &e_AuthenticateOidcActionAuthenticationRequestExtraParams})
+var s_AuthenticateOidcActionAuthenticationRequestExtraParams_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AuthenticateOidcActionAuthenticationRequestParamName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionAuthenticationRequestExtraParams_key})
+var s_AuthenticateOidcActionAuthenticationRequestExtraParams_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AuthenticateOidcActionAuthenticationRequestParamValue, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionAuthenticationRequestExtraParams_value})
+var s_AuthenticateOidcActionAuthenticationRequestParamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionAuthenticationRequestParamName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionAuthenticationRequestParamName})
+var s_AuthenticateOidcActionAuthenticationRequestParamValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionAuthenticationRequestParamValue, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionAuthenticationRequestParamValue})
+var s_AuthenticateOidcActionAuthorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionAuthorizationEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionAuthorizationEndpoint})
+var s_AuthenticateOidcActionClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionClientId, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionClientId})
+var s_AuthenticateOidcActionClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionClientSecret, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionClientSecret})
+var sAuthenticateOidcActionConditionalBehaviorEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticateOidcActionConditionalBehaviorEnum, Members: &mAuthenticateOidcActionConditionalBehaviorEnum, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticateOidcActionConditionalBehaviorEnum})
+var sAuthenticateOidcActionConditionalBehaviorEnum_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateOidcActionConditionalBehaviorEnum_DENY})
+var sAuthenticateOidcActionConditionalBehaviorEnum_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateOidcActionConditionalBehaviorEnum_ALLOW})
+var sAuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE})
+var sAuthenticateOidcActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticateOidcActionConfig, Members: &mAuthenticateOidcActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticateOidcActionConfig})
+var sAuthenticateOidcActionConfig_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_AuthenticateOidcActionIssuer, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_Issuer})
+var sAuthenticateOidcActionConfig_AuthorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationEndpoint", ID: &i_AuthenticateOidcActionAuthorizationEndpoint, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_AuthorizationEndpoint})
+var sAuthenticateOidcActionConfig_TokenEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenEndpoint", ID: &i_AuthenticateOidcActionTokenEndpoint, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_TokenEndpoint})
+var sAuthenticateOidcActionConfig_UserInfoEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserInfoEndpoint", ID: &i_AuthenticateOidcActionUserInfoEndpoint, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_UserInfoEndpoint})
+var sAuthenticateOidcActionConfig_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientId", ID: &i_AuthenticateOidcActionClientId, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_ClientId})
+var sAuthenticateOidcActionConfig_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSecret", ID: &i_AuthenticateOidcActionClientSecret, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_ClientSecret})
+var sAuthenticateOidcActionConfig_SessionCookieName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionCookieName", ID: &i_AuthenticateOidcActionSessionCookieName, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_SessionCookieName})
+var sAuthenticateOidcActionConfig_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i_AuthenticateOidcActionScope, Type: smithy.ShapeTypeString, Ext: &eAuthenticateOidcActionConfig_Scope})
+var sAuthenticateOidcActionConfig_SessionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionTimeout", ID: &i_AuthenticateOidcActionSessionTimeout, Type: smithy.ShapeTypeLong, Ext: &eAuthenticateOidcActionConfig_SessionTimeout})
+var sAuthenticateOidcActionConfig_AuthenticationRequestExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationRequestExtraParams", ID: &i_AuthenticateOidcActionAuthenticationRequestExtraParams, Members: &m_AuthenticateOidcActionAuthenticationRequestExtraParams, Type: smithy.ShapeTypeMap, Ext: &eAuthenticateOidcActionConfig_AuthenticationRequestExtraParams})
+var sAuthenticateOidcActionConfig_OnUnauthenticatedRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnUnauthenticatedRequest", ID: &iAuthenticateOidcActionConditionalBehaviorEnum, Members: &mAuthenticateOidcActionConditionalBehaviorEnum, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticateOidcActionConfig_OnUnauthenticatedRequest})
+var sAuthenticateOidcActionConfig_UseExistingClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseExistingClientSecret", ID: &i_AuthenticateOidcActionUseExistingClientSecret, Type: smithy.ShapeTypeBoolean, Ext: &eAuthenticateOidcActionConfig_UseExistingClientSecret})
+var s_AuthenticateOidcActionIssuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionIssuer, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionIssuer})
+var s_AuthenticateOidcActionScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionScope, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionScope})
+var s_AuthenticateOidcActionSessionCookieName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionSessionCookieName, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionSessionCookieName})
+var s_AuthenticateOidcActionSessionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionSessionTimeout, Type: smithy.ShapeTypeLong, Ext: &e_AuthenticateOidcActionSessionTimeout})
+var s_AuthenticateOidcActionTokenEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionTokenEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionTokenEndpoint})
+var s_AuthenticateOidcActionUseExistingClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionUseExistingClientSecret, Type: smithy.ShapeTypeBoolean, Ext: &e_AuthenticateOidcActionUseExistingClientSecret})
+var s_AuthenticateOidcActionUserInfoEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticateOidcActionUserInfoEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AuthenticateOidcActionUserInfoEndpoint})
+var sAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZone})
+var sAvailabilityZone_ZoneName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneName", ID: &i_ZoneName, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZone_ZoneName})
+var sAvailabilityZone_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZone_SubnetId})
+var sAvailabilityZone_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZone_OutpostId})
+var sAvailabilityZone_LoadBalancerAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerAddresses", ID: &i_LoadBalancerAddresses, Members: &m_LoadBalancerAddresses, Type: smithy.ShapeTypeList, Ext: &eAvailabilityZone_LoadBalancerAddresses})
+var sAvailabilityZone_SourceNatIpv6Prefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceNatIpv6Prefixes", ID: &i_SourceNatIpv6Prefixes, Members: &m_SourceNatIpv6Prefixes, Type: smithy.ShapeTypeList, Ext: &eAvailabilityZone_SourceNatIpv6Prefixes})
+var sAvailabilityZoneNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZoneNotSupportedException, Members: &mAvailabilityZoneNotSupportedException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZoneNotSupportedException})
+var sAvailabilityZoneNotSupportedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZoneNotSupportedException_Message})
+var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZones})
+var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &e_AvailabilityZones_member})
+var sCaCertificatesBundleNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaCertificatesBundleNotFoundException, Members: &mCaCertificatesBundleNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eCaCertificatesBundleNotFoundException})
+var sCaCertificatesBundleNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCaCertificatesBundleNotFoundException_Message})
+var s_CanonicalHostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanonicalHostedZoneId, Type: smithy.ShapeTypeString, Ext: &e_CanonicalHostedZoneId})
+var sCapacityDecreaseRequestsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityDecreaseRequestsLimitExceededException, Members: &mCapacityDecreaseRequestsLimitExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eCapacityDecreaseRequestsLimitExceededException})
+var sCapacityDecreaseRequestsLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCapacityDecreaseRequestsLimitExceededException_Message})
+var sCapacityReservationPendingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservationPendingException, Members: &mCapacityReservationPendingException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationPendingException})
+var sCapacityReservationPendingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCapacityReservationPendingException_Message})
+var sCapacityReservationStateEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservationStateEnum, Members: &mCapacityReservationStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eCapacityReservationStateEnum})
+var sCapacityReservationStateEnum_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationStateEnum_PROVISIONED})
+var sCapacityReservationStateEnum_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationStateEnum_PENDING})
+var sCapacityReservationStateEnum_REBALANCING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REBALANCING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationStateEnum_REBALANCING})
+var sCapacityReservationStateEnum_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationStateEnum_FAILED})
+var sCapacityReservationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservationStatus, Members: &mCapacityReservationStatus, Type: smithy.ShapeTypeStructure, Ext: &eCapacityReservationStatus})
+var sCapacityReservationStatus_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iCapacityReservationStateEnum, Members: &mCapacityReservationStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eCapacityReservationStatus_Code})
+var sCapacityReservationStatus_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eCapacityReservationStatus_Reason})
+var s_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityUnits, Type: smithy.ShapeTypeInteger, Ext: &e_CapacityUnits})
+var s_CapacityUnitsDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityUnitsDouble, Type: smithy.ShapeTypeDouble, Ext: &e_CapacityUnitsDouble})
+var sCapacityUnitsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUnitsLimitExceededException, Members: &mCapacityUnitsLimitExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUnitsLimitExceededException})
+var sCapacityUnitsLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCapacityUnitsLimitExceededException_Message})
+var sCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure, Ext: &eCertificate})
+var sCertificate_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &eCertificate_CertificateArn})
+var sCertificate_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &i_Default, Type: smithy.ShapeTypeBoolean, Ext: &eCertificate_IsDefault})
+var s_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateArn, Type: smithy.ShapeTypeString, Ext: &e_CertificateArn})
+var s_CertificateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &e_CertificateList})
+var s_CertificateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure, Ext: &e_CertificateList_member})
+var sCertificateNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateNotFoundException, Members: &mCertificateNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eCertificateNotFoundException})
+var sCertificateNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eCertificateNotFoundException_Message})
+var sCipher = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCipher, Members: &mCipher, Type: smithy.ShapeTypeStructure, Ext: &eCipher})
+var sCipher_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CipherName, Type: smithy.ShapeTypeString, Ext: &eCipher_Name})
+var sCipher_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_CipherPriority, Type: smithy.ShapeTypeInteger, Ext: &eCipher_Priority})
+var s_CipherName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CipherName, Type: smithy.ShapeTypeString, Ext: &e_CipherName})
+var s_CipherPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CipherPriority, Type: smithy.ShapeTypeInteger, Ext: &e_CipherPriority})
+var s_Ciphers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ciphers, Members: &m_Ciphers, Type: smithy.ShapeTypeList, Ext: &e_Ciphers})
+var s_Ciphers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCipher, Members: &mCipher, Type: smithy.ShapeTypeStructure, Ext: &e_Ciphers_member})
+var s_ConditionFieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionFieldName, Type: smithy.ShapeTypeString, Ext: &e_ConditionFieldName})
+var s_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreatedTime})
+var s_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &e_CustomerOwnedIpv4Pool})
+var s_DecreaseRequestsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DecreaseRequestsRemaining, Type: smithy.ShapeTypeInteger, Ext: &e_DecreaseRequestsRemaining})
+var s_Default = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Default, Type: smithy.ShapeTypeBoolean, Ext: &e_Default})
+var sDeleteAssociationSameAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssociationSameAccountException, Members: &mDeleteAssociationSameAccountException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssociationSameAccountException})
+var sDeleteAssociationSameAccountException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDeleteAssociationSameAccountException_Message})
+var sDescribeTargetHealthInputIncludeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetHealthInputIncludeEnum, Members: &mDescribeTargetHealthInputIncludeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTargetHealthInputIncludeEnum})
+var sDescribeTargetHealthInputIncludeEnum_ANOMALY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANOMALY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetHealthInputIncludeEnum_ANOMALY})
+var sDescribeTargetHealthInputIncludeEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetHealthInputIncludeEnum_ALL})
+var sDescribeTrustStoreRevocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreRevocation, Members: &mDescribeTrustStoreRevocation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoreRevocation})
+var sDescribeTrustStoreRevocation_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreRevocation_TrustStoreArn})
+var sDescribeTrustStoreRevocation_RevocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationId", ID: &i_RevocationId, Type: smithy.ShapeTypeLong, Ext: &eDescribeTrustStoreRevocation_RevocationId})
+var sDescribeTrustStoreRevocation_RevocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationType", ID: &iRevocationType, Members: &mRevocationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTrustStoreRevocation_RevocationType})
+var sDescribeTrustStoreRevocation_NumberOfRevokedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfRevokedEntries", ID: &i_NumberOfRevokedEntries, Type: smithy.ShapeTypeLong, Ext: &eDescribeTrustStoreRevocation_NumberOfRevokedEntries})
+var s_DescribeTrustStoreRevocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeTrustStoreRevocationResponse, Members: &m_DescribeTrustStoreRevocationResponse, Type: smithy.ShapeTypeList, Ext: &e_DescribeTrustStoreRevocationResponse})
+var s_DescribeTrustStoreRevocationResponse_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDescribeTrustStoreRevocation, Members: &mDescribeTrustStoreRevocation, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeTrustStoreRevocationResponse_member})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &e_DNSName})
+var sDuplicateListenerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateListenerException, Members: &mDuplicateListenerException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateListenerException})
+var sDuplicateListenerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateListenerException_Message})
+var sDuplicateLoadBalancerNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateLoadBalancerNameException, Members: &mDuplicateLoadBalancerNameException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateLoadBalancerNameException})
+var sDuplicateLoadBalancerNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateLoadBalancerNameException_Message})
+var sDuplicateTagKeysException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTagKeysException, Members: &mDuplicateTagKeysException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateTagKeysException})
+var sDuplicateTagKeysException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateTagKeysException_Message})
+var sDuplicateTargetGroupNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTargetGroupNameException, Members: &mDuplicateTargetGroupNameException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateTargetGroupNameException})
+var sDuplicateTargetGroupNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateTargetGroupNameException_Message})
+var sDuplicateTrustStoreNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTrustStoreNameException, Members: &mDuplicateTrustStoreNameException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateTrustStoreNameException})
+var sDuplicateTrustStoreNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eDuplicateTrustStoreNameException_Message})
+var sEnablePrefixForIpv6SourceNatEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablePrefixForIpv6SourceNatEnum, Members: &mEnablePrefixForIpv6SourceNatEnum, Type: smithy.ShapeTypeEnum, Ext: &eEnablePrefixForIpv6SourceNatEnum})
+var sEnablePrefixForIpv6SourceNatEnum_ON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnablePrefixForIpv6SourceNatEnum_ON})
+var sEnablePrefixForIpv6SourceNatEnum_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnablePrefixForIpv6SourceNatEnum_OFF})
+var s_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, Type: smithy.ShapeTypeString, Ext: &e_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic})
+var sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Members: &mEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Type: smithy.ShapeTypeEnum, Ext: &eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum})
+var sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on = smithy.NewStaticSchema(smithy.StaticSchema{Member: "on", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on})
+var sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off = smithy.NewStaticSchema(smithy.StaticSchema{Member: "off", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off})
+var s_ErrorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &e_ErrorDescription})
+var sFixedResponseActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFixedResponseActionConfig, Members: &mFixedResponseActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eFixedResponseActionConfig})
+var sFixedResponseActionConfig_MessageBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageBody", ID: &i_FixedResponseActionMessage, Type: smithy.ShapeTypeString, Ext: &eFixedResponseActionConfig_MessageBody})
+var sFixedResponseActionConfig_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_FixedResponseActionStatusCode, Type: smithy.ShapeTypeString, Ext: &eFixedResponseActionConfig_StatusCode})
+var sFixedResponseActionConfig_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_FixedResponseActionContentType, Type: smithy.ShapeTypeString, Ext: &eFixedResponseActionConfig_ContentType})
+var s_FixedResponseActionContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FixedResponseActionContentType, Type: smithy.ShapeTypeString, Ext: &e_FixedResponseActionContentType})
+var s_FixedResponseActionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FixedResponseActionMessage, Type: smithy.ShapeTypeString, Ext: &e_FixedResponseActionMessage})
+var s_FixedResponseActionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FixedResponseActionStatusCode, Type: smithy.ShapeTypeString, Ext: &e_FixedResponseActionStatusCode})
+var sForwardActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardActionConfig, Members: &mForwardActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eForwardActionConfig})
+var sForwardActionConfig_TargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroups", ID: &i_TargetGroupList, Members: &m_TargetGroupList, Type: smithy.ShapeTypeList, Ext: &eForwardActionConfig_TargetGroups})
+var sForwardActionConfig_TargetGroupStickinessConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupStickinessConfig", ID: &iTargetGroupStickinessConfig, Members: &mTargetGroupStickinessConfig, Type: smithy.ShapeTypeStructure, Ext: &eForwardActionConfig_TargetGroupStickinessConfig})
+var s_GrpcCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrpcCode, Type: smithy.ShapeTypeString, Ext: &e_GrpcCode})
+var s_HealthCheckEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_HealthCheckEnabled})
+var s_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckIntervalSeconds})
+var s_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckPort, Type: smithy.ShapeTypeString, Ext: &e_HealthCheckPort})
+var s_HealthCheckThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckThresholdCount})
+var s_HealthCheckTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HealthCheckTimeoutSeconds})
+var sHealthUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthUnavailableException, Members: &mHealthUnavailableException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eHealthUnavailableException})
+var sHealthUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eHealthUnavailableException_Message})
+var sHostHeaderConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostHeaderConditionConfig, Members: &mHostHeaderConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eHostHeaderConditionConfig})
+var sHostHeaderConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eHostHeaderConditionConfig_Values})
+var sHostHeaderConditionConfig_RegexValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexValues", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eHostHeaderConditionConfig_RegexValues})
+var sHostHeaderRewriteConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostHeaderRewriteConfig, Members: &mHostHeaderRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &eHostHeaderRewriteConfig})
+var sHostHeaderRewriteConfig_Rewrites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rewrites", ID: &i_RewriteConfigList, Members: &m_RewriteConfigList, Type: smithy.ShapeTypeList, Ext: &eHostHeaderRewriteConfig_Rewrites})
+var s_HttpCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpCode, Type: smithy.ShapeTypeString, Ext: &e_HttpCode})
+var sHttpHeaderConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpHeaderConditionConfig, Members: &mHttpHeaderConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eHttpHeaderConditionConfig})
+var sHttpHeaderConditionConfig_HttpHeaderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpHeaderName", ID: &i_HttpHeaderConditionName, Type: smithy.ShapeTypeString, Ext: &eHttpHeaderConditionConfig_HttpHeaderName})
+var sHttpHeaderConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eHttpHeaderConditionConfig_Values})
+var sHttpHeaderConditionConfig_RegexValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexValues", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eHttpHeaderConditionConfig_RegexValues})
+var s_HttpHeaderConditionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpHeaderConditionName, Type: smithy.ShapeTypeString, Ext: &e_HttpHeaderConditionName})
+var sHttpRequestMethodConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestMethodConditionConfig, Members: &mHttpRequestMethodConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestMethodConditionConfig})
+var sHttpRequestMethodConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eHttpRequestMethodConditionConfig_Values})
+var s_IgnoreClientCertificateExpiry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IgnoreClientCertificateExpiry, Type: smithy.ShapeTypeBoolean, Ext: &e_IgnoreClientCertificateExpiry})
+var sIncompatibleProtocolsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleProtocolsException, Members: &mIncompatibleProtocolsException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eIncompatibleProtocolsException})
+var sIncompatibleProtocolsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eIncompatibleProtocolsException_Message})
+var sInsufficientCapacityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientCapacityException, Members: &mInsufficientCapacityException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientCapacityException})
+var sInsufficientCapacityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInsufficientCapacityException_Message})
+var sInvalidCaCertificatesBundleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCaCertificatesBundleException, Members: &mInvalidCaCertificatesBundleException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCaCertificatesBundleException})
+var sInvalidCaCertificatesBundleException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidCaCertificatesBundleException_Message})
+var sInvalidConfigurationRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationRequestException, Members: &mInvalidConfigurationRequestException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConfigurationRequestException})
+var sInvalidConfigurationRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationRequestException_Message})
+var sInvalidLoadBalancerActionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLoadBalancerActionException, Members: &mInvalidLoadBalancerActionException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInvalidLoadBalancerActionException})
+var sInvalidLoadBalancerActionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidLoadBalancerActionException_Message})
+var sInvalidRevocationContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRevocationContentException, Members: &mInvalidRevocationContentException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRevocationContentException})
+var sInvalidRevocationContentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidRevocationContentException_Message})
+var sInvalidSchemeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSchemeException, Members: &mInvalidSchemeException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSchemeException})
+var sInvalidSchemeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSchemeException_Message})
+var sInvalidSecurityGroupException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSecurityGroupException, Members: &mInvalidSecurityGroupException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSecurityGroupException})
+var sInvalidSecurityGroupException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSecurityGroupException_Message})
+var sInvalidSubnetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSubnetException, Members: &mInvalidSubnetException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSubnetException})
+var sInvalidSubnetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidSubnetException_Message})
+var sInvalidTargetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetException, Members: &mInvalidTargetException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTargetException})
+var sInvalidTargetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidTargetException_Message})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &e_IpAddress})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eIpAddressType})
+var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_IPV4})
+var sIpAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_DUALSTACK})
+var sIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK_WITHOUT_PUBLIC_IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4})
+var s_IpamPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpamPoolId, Type: smithy.ShapeTypeString, Ext: &e_IpamPoolId})
+var sIpamPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpamPools, Members: &mIpamPools, Type: smithy.ShapeTypeStructure, Ext: &eIpamPools})
+var sIpamPools_Ipv4IpamPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4IpamPoolId", ID: &i_IpamPoolId, Type: smithy.ShapeTypeString, Ext: &eIpamPools_Ipv4IpamPoolId})
+var s_IPv6Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &e_IPv6Address})
+var s_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsDefault, Type: smithy.ShapeTypeBoolean, Ext: &e_IsDefault})
+var sJwtValidationActionAdditionalClaim = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtValidationActionAdditionalClaim, Members: &mJwtValidationActionAdditionalClaim, Type: smithy.ShapeTypeStructure, Ext: &eJwtValidationActionAdditionalClaim})
+var sJwtValidationActionAdditionalClaim_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iJwtValidationActionAdditionalClaimFormatEnum, Members: &mJwtValidationActionAdditionalClaimFormatEnum, Type: smithy.ShapeTypeEnum, Ext: &eJwtValidationActionAdditionalClaim_Format})
+var sJwtValidationActionAdditionalClaim_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JwtValidationActionAdditionalClaimName, Type: smithy.ShapeTypeString, Ext: &eJwtValidationActionAdditionalClaim_Name})
+var sJwtValidationActionAdditionalClaim_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_JwtValidationActionAdditionalClaimValues, Members: &m_JwtValidationActionAdditionalClaimValues, Type: smithy.ShapeTypeList, Ext: &eJwtValidationActionAdditionalClaim_Values})
+var sJwtValidationActionAdditionalClaimFormatEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtValidationActionAdditionalClaimFormatEnum, Members: &mJwtValidationActionAdditionalClaimFormatEnum, Type: smithy.ShapeTypeEnum, Ext: &eJwtValidationActionAdditionalClaimFormatEnum})
+var sJwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING})
+var sJwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY})
+var sJwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPACE_SEPARATED_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES})
+var s_JwtValidationActionAdditionalClaimName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionAdditionalClaimName, Type: smithy.ShapeTypeString, Ext: &e_JwtValidationActionAdditionalClaimName})
+var s_JwtValidationActionAdditionalClaims = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionAdditionalClaims, Members: &m_JwtValidationActionAdditionalClaims, Type: smithy.ShapeTypeList, Ext: &e_JwtValidationActionAdditionalClaims})
+var s_JwtValidationActionAdditionalClaims_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJwtValidationActionAdditionalClaim, Members: &mJwtValidationActionAdditionalClaim, Type: smithy.ShapeTypeStructure, Ext: &e_JwtValidationActionAdditionalClaims_member})
+var s_JwtValidationActionAdditionalClaimValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionAdditionalClaimValue, Type: smithy.ShapeTypeString, Ext: &e_JwtValidationActionAdditionalClaimValue})
+var s_JwtValidationActionAdditionalClaimValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionAdditionalClaimValues, Members: &m_JwtValidationActionAdditionalClaimValues, Type: smithy.ShapeTypeList, Ext: &e_JwtValidationActionAdditionalClaimValues})
+var s_JwtValidationActionAdditionalClaimValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_JwtValidationActionAdditionalClaimValue, Type: smithy.ShapeTypeString, Ext: &e_JwtValidationActionAdditionalClaimValues_member})
+var sJwtValidationActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtValidationActionConfig, Members: &mJwtValidationActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eJwtValidationActionConfig})
+var sJwtValidationActionConfig_JwksEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwksEndpoint", ID: &i_JwtValidationActionJwksEndpoint, Type: smithy.ShapeTypeString, Ext: &eJwtValidationActionConfig_JwksEndpoint})
+var sJwtValidationActionConfig_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_JwtValidationActionIssuer, Type: smithy.ShapeTypeString, Ext: &eJwtValidationActionConfig_Issuer})
+var sJwtValidationActionConfig_AdditionalClaims = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalClaims", ID: &i_JwtValidationActionAdditionalClaims, Members: &m_JwtValidationActionAdditionalClaims, Type: smithy.ShapeTypeList, Ext: &eJwtValidationActionConfig_AdditionalClaims})
+var s_JwtValidationActionIssuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionIssuer, Type: smithy.ShapeTypeString, Ext: &e_JwtValidationActionIssuer})
+var s_JwtValidationActionJwksEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtValidationActionJwksEndpoint, Type: smithy.ShapeTypeString, Ext: &e_JwtValidationActionJwksEndpoint})
+var s_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModifiedTime})
+var sLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimit, Members: &mLimit, Type: smithy.ShapeTypeStructure, Ext: &eLimit})
+var sLimit_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eLimit_Name})
+var sLimit_Max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max", ID: &i_Max, Type: smithy.ShapeTypeString, Ext: &eLimit_Max})
+var s_Limits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limits, Members: &m_Limits, Type: smithy.ShapeTypeList, Ext: &e_Limits})
+var s_Limits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLimit, Members: &mLimit, Type: smithy.ShapeTypeStructure, Ext: &e_Limits_member})
+var sListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &eListener})
+var sListener_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eListener_ListenerArn})
+var sListener_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eListener_LoadBalancerArn})
+var sListener_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eListener_Port})
+var sListener_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eListener_Protocol})
+var sListener_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eListener_Certificates})
+var sListener_SslPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SslPolicy", ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &eListener_SslPolicy})
+var sListener_DefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultActions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eListener_DefaultActions})
+var sListener_AlpnPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlpnPolicy", ID: &i_AlpnPolicyName, Members: &m_AlpnPolicyName, Type: smithy.ShapeTypeList, Ext: &eListener_AlpnPolicy})
+var sListener_MutualAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualAuthentication", ID: &iMutualAuthenticationAttributes, Members: &mMutualAuthenticationAttributes, Type: smithy.ShapeTypeStructure, Ext: &eListener_MutualAuthentication})
+var s_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &e_ListenerArn})
+var s_ListenerArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerArns, Members: &m_ListenerArns, Type: smithy.ShapeTypeList, Ext: &e_ListenerArns})
+var s_ListenerArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &e_ListenerArns_member})
+var sListenerAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerAttribute, Members: &mListenerAttribute, Type: smithy.ShapeTypeStructure, Ext: &eListenerAttribute})
+var sListenerAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ListenerAttributeKey, Type: smithy.ShapeTypeString, Ext: &eListenerAttribute_Key})
+var sListenerAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ListenerAttributeValue, Type: smithy.ShapeTypeString, Ext: &eListenerAttribute_Value})
+var s_ListenerAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_ListenerAttributeKey})
+var s_ListenerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerAttributes, Members: &m_ListenerAttributes, Type: smithy.ShapeTypeList, Ext: &e_ListenerAttributes})
+var s_ListenerAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerAttribute, Members: &mListenerAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_ListenerAttributes_member})
+var s_ListenerAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_ListenerAttributeValue})
+var sListenerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerNotFoundException, Members: &mListenerNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eListenerNotFoundException})
+var sListenerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eListenerNotFoundException_Message})
+var s_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &e_Listeners})
+var s_Listeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure, Ext: &e_Listeners_member})
+var s_ListOfDescribeTargetHealthIncludeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfDescribeTargetHealthIncludeOptions, Members: &m_ListOfDescribeTargetHealthIncludeOptions, Type: smithy.ShapeTypeList, Ext: &e_ListOfDescribeTargetHealthIncludeOptions})
+var s_ListOfDescribeTargetHealthIncludeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDescribeTargetHealthInputIncludeEnum, Members: &mDescribeTargetHealthInputIncludeEnum, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfDescribeTargetHealthIncludeOptions_member})
+var s_ListOfString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &e_ListOfString})
+var s_ListOfString_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &e_ListOfString_member})
+var sLoadBalancer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancer, Members: &mLoadBalancer, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancer})
+var sLoadBalancer_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_LoadBalancerArn})
+var sLoadBalancer_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_DNSName})
+var sLoadBalancer_CanonicalHostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanonicalHostedZoneId", ID: &i_CanonicalHostedZoneId, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_CanonicalHostedZoneId})
+var sLoadBalancer_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_CreatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &eLoadBalancer_CreatedTime})
+var sLoadBalancer_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerName", ID: &i_LoadBalancerName, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_LoadBalancerName})
+var sLoadBalancer_Scheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheme", ID: &iLoadBalancerSchemeEnum, Members: &mLoadBalancerSchemeEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancer_Scheme})
+var sLoadBalancer_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_VpcId})
+var sLoadBalancer_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iLoadBalancerState, Members: &mLoadBalancerState, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancer_State})
+var sLoadBalancer_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iLoadBalancerTypeEnum, Members: &mLoadBalancerTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancer_Type})
+var sLoadBalancer_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eLoadBalancer_AvailabilityZones})
+var sLoadBalancer_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eLoadBalancer_SecurityGroups})
+var sLoadBalancer_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancer_IpAddressType})
+var sLoadBalancer_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_CustomerOwnedIpv4Pool})
+var sLoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", ID: &i_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, Type: smithy.ShapeTypeString, Ext: &eLoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic})
+var sLoadBalancer_EnablePrefixForIpv6SourceNat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePrefixForIpv6SourceNat", ID: &iEnablePrefixForIpv6SourceNatEnum, Members: &mEnablePrefixForIpv6SourceNatEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancer_EnablePrefixForIpv6SourceNat})
+var sLoadBalancer_IpamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpamPools", ID: &iIpamPools, Members: &mIpamPools, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancer_IpamPools})
+var sLoadBalancerAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerAddress, Members: &mLoadBalancerAddress, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAddress})
+var sLoadBalancerAddress_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAddress_IpAddress})
+var sLoadBalancerAddress_AllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationId", ID: &i_AllocationId, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAddress_AllocationId})
+var sLoadBalancerAddress_PrivateIPv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateIPv4Address", ID: &i_PrivateIPv4Address, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAddress_PrivateIPv4Address})
+var sLoadBalancerAddress_IPv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv6Address", ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAddress_IPv6Address})
+var s_LoadBalancerAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerAddresses, Members: &m_LoadBalancerAddresses, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerAddresses})
+var s_LoadBalancerAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadBalancerAddress, Members: &mLoadBalancerAddress, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancerAddresses_member})
+var s_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerArn})
+var s_LoadBalancerArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerArns, Members: &m_LoadBalancerArns, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerArns})
+var s_LoadBalancerArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerArns_member})
+var sLoadBalancerAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerAttribute, Members: &mLoadBalancerAttribute, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerAttribute})
+var sLoadBalancerAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_LoadBalancerAttributeKey, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAttribute_Key})
+var sLoadBalancerAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_LoadBalancerAttributeValue, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerAttribute_Value})
+var s_LoadBalancerAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerAttributeKey})
+var s_LoadBalancerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerAttributes, Members: &m_LoadBalancerAttributes, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerAttributes})
+var s_LoadBalancerAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadBalancerAttribute, Members: &mLoadBalancerAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancerAttributes_member})
+var s_LoadBalancerAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerAttributeValue})
+var s_LoadBalancerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerName, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerName})
+var s_LoadBalancerNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancerNames})
+var s_LoadBalancerNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LoadBalancerName, Type: smithy.ShapeTypeString, Ext: &e_LoadBalancerNames_member})
+var sLoadBalancerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerNotFoundException, Members: &mLoadBalancerNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerNotFoundException})
+var sLoadBalancerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerNotFoundException_Message})
+var s_LoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadBalancers, Members: &m_LoadBalancers, Type: smithy.ShapeTypeList, Ext: &e_LoadBalancers})
+var s_LoadBalancers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadBalancer, Members: &mLoadBalancer, Type: smithy.ShapeTypeStructure, Ext: &e_LoadBalancers_member})
+var sLoadBalancerSchemeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerSchemeEnum, Members: &mLoadBalancerSchemeEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancerSchemeEnum})
+var sLoadBalancerSchemeEnum_INTERNET_FACING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNET_FACING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerSchemeEnum_INTERNET_FACING})
+var sLoadBalancerSchemeEnum_INTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerSchemeEnum_INTERNAL})
+var sLoadBalancerState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerState, Members: &mLoadBalancerState, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerState})
+var sLoadBalancerState_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iLoadBalancerStateEnum, Members: &mLoadBalancerStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancerState_Code})
+var sLoadBalancerState_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eLoadBalancerState_Reason})
+var sLoadBalancerStateEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerStateEnum, Members: &mLoadBalancerStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancerStateEnum})
+var sLoadBalancerStateEnum_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerStateEnum_ACTIVE})
+var sLoadBalancerStateEnum_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerStateEnum_PROVISIONING})
+var sLoadBalancerStateEnum_ACTIVE_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerStateEnum_ACTIVE_IMPAIRED})
+var sLoadBalancerStateEnum_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerStateEnum_FAILED})
+var sLoadBalancerTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadBalancerTypeEnum, Members: &mLoadBalancerTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eLoadBalancerTypeEnum})
+var sLoadBalancerTypeEnum_APPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerTypeEnum_APPLICATION})
+var sLoadBalancerTypeEnum_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerTypeEnum_NETWORK})
+var sLoadBalancerTypeEnum_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLoadBalancerTypeEnum_GATEWAY})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &e_Location})
+var s_Marker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &e_Marker})
+var sMatcher = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatcher, Members: &mMatcher, Type: smithy.ShapeTypeStructure, Ext: &eMatcher})
+var sMatcher_HttpCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpCode", ID: &i_HttpCode, Type: smithy.ShapeTypeString, Ext: &eMatcher_HttpCode})
+var sMatcher_GrpcCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrpcCode", ID: &i_GrpcCode, Type: smithy.ShapeTypeString, Ext: &eMatcher_GrpcCode})
+var s_Max = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Max, Type: smithy.ShapeTypeString, Ext: &e_Max})
+var sMinimumLoadBalancerCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMinimumLoadBalancerCapacity, Members: &mMinimumLoadBalancerCapacity, Type: smithy.ShapeTypeStructure, Ext: &eMinimumLoadBalancerCapacity})
+var sMinimumLoadBalancerCapacity_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeInteger, Ext: &eMinimumLoadBalancerCapacity_CapacityUnits})
+var sMitigationInEffectEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMitigationInEffectEnum, Members: &mMitigationInEffectEnum, Type: smithy.ShapeTypeEnum, Ext: &eMitigationInEffectEnum})
+var sMitigationInEffectEnum_YES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMitigationInEffectEnum_YES})
+var sMitigationInEffectEnum_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMitigationInEffectEnum_NO})
+var s_Mode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &e_Mode})
+var sMutualAuthenticationAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMutualAuthenticationAttributes, Members: &mMutualAuthenticationAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMutualAuthenticationAttributes})
+var sMutualAuthenticationAttributes_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &eMutualAuthenticationAttributes_Mode})
+var sMutualAuthenticationAttributes_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eMutualAuthenticationAttributes_TrustStoreArn})
+var sMutualAuthenticationAttributes_IgnoreClientCertificateExpiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IgnoreClientCertificateExpiry", ID: &i_IgnoreClientCertificateExpiry, Type: smithy.ShapeTypeBoolean, Ext: &eMutualAuthenticationAttributes_IgnoreClientCertificateExpiry})
+var sMutualAuthenticationAttributes_TrustStoreAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreAssociationStatus", ID: &iTrustStoreAssociationStatusEnum, Members: &mTrustStoreAssociationStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &eMutualAuthenticationAttributes_TrustStoreAssociationStatus})
+var sMutualAuthenticationAttributes_AdvertiseTrustStoreCaNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvertiseTrustStoreCaNames", ID: &iAdvertiseTrustStoreCaNamesEnum, Members: &mAdvertiseTrustStoreCaNamesEnum, Type: smithy.ShapeTypeEnum, Ext: &eMutualAuthenticationAttributes_AdvertiseTrustStoreCaNames})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NumberOfCaCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfCaCertificates, Type: smithy.ShapeTypeInteger, Ext: &e_NumberOfCaCertificates})
+var s_NumberOfRevokedEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfRevokedEntries, Type: smithy.ShapeTypeLong, Ext: &e_NumberOfRevokedEntries})
+var sOperationNotPermittedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedException, Members: &mOperationNotPermittedException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotPermittedException})
+var sOperationNotPermittedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eOperationNotPermittedException_Message})
+var s_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &e_OutpostId})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &e_PageSize})
+var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &e_Path})
+var sPathPatternConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathPatternConditionConfig, Members: &mPathPatternConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &ePathPatternConditionConfig})
+var sPathPatternConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &ePathPatternConditionConfig_Values})
+var sPathPatternConditionConfig_RegexValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexValues", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &ePathPatternConditionConfig_RegexValues})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &e_Policy})
+var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &e_Port})
+var sPriorityInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriorityInUseException, Members: &mPriorityInUseException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ePriorityInUseException})
+var sPriorityInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ePriorityInUseException_Message})
+var sPriorRequestNotCompleteException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriorRequestNotCompleteException, Members: &mPriorRequestNotCompleteException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ePriorRequestNotCompleteException})
+var sPriorRequestNotCompleteException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ePriorRequestNotCompleteException_Message})
+var s_PrivateIPv4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateIPv4Address, Type: smithy.ShapeTypeString, Ext: &e_PrivateIPv4Address})
+var sProtocolEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eProtocolEnum})
+var sProtocolEnum_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_HTTP})
+var sProtocolEnum_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_HTTPS})
+var sProtocolEnum_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_TCP})
+var sProtocolEnum_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_TLS})
+var sProtocolEnum_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_UDP})
+var sProtocolEnum_TCP_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP_UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_TCP_UDP})
+var sProtocolEnum_GENEVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENEVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_GENEVE})
+var sProtocolEnum_QUIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_QUIC})
+var sProtocolEnum_TCP_QUIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP_QUIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocolEnum_TCP_QUIC})
+var s_ProtocolVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolVersion, Type: smithy.ShapeTypeString, Ext: &e_ProtocolVersion})
+var sQueryStringConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStringConditionConfig, Members: &mQueryStringConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eQueryStringConditionConfig})
+var sQueryStringConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_QueryStringKeyValuePairList, Members: &m_QueryStringKeyValuePairList, Type: smithy.ShapeTypeList, Ext: &eQueryStringConditionConfig_Values})
+var sQueryStringKeyValuePair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStringKeyValuePair, Members: &mQueryStringKeyValuePair, Type: smithy.ShapeTypeStructure, Ext: &eQueryStringKeyValuePair})
+var sQueryStringKeyValuePair_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &eQueryStringKeyValuePair_Key})
+var sQueryStringKeyValuePair_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &eQueryStringKeyValuePair_Value})
+var s_QueryStringKeyValuePairList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringKeyValuePairList, Members: &m_QueryStringKeyValuePairList, Type: smithy.ShapeTypeList, Ext: &e_QueryStringKeyValuePairList})
+var s_QueryStringKeyValuePairList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryStringKeyValuePair, Members: &mQueryStringKeyValuePair, Type: smithy.ShapeTypeStructure, Ext: &e_QueryStringKeyValuePairList_member})
+var s_QuicServerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuicServerId, Type: smithy.ShapeTypeString, Ext: &e_QuicServerId})
+var sRedirectActionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedirectActionConfig, Members: &mRedirectActionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRedirectActionConfig})
+var sRedirectActionConfig_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_RedirectActionProtocol, Type: smithy.ShapeTypeString, Ext: &eRedirectActionConfig_Protocol})
+var sRedirectActionConfig_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_RedirectActionPort, Type: smithy.ShapeTypeString, Ext: &eRedirectActionConfig_Port})
+var sRedirectActionConfig_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_RedirectActionHost, Type: smithy.ShapeTypeString, Ext: &eRedirectActionConfig_Host})
+var sRedirectActionConfig_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_RedirectActionPath, Type: smithy.ShapeTypeString, Ext: &eRedirectActionConfig_Path})
+var sRedirectActionConfig_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &i_RedirectActionQuery, Type: smithy.ShapeTypeString, Ext: &eRedirectActionConfig_Query})
+var sRedirectActionConfig_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iRedirectActionStatusCodeEnum, Members: &mRedirectActionStatusCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &eRedirectActionConfig_StatusCode})
+var s_RedirectActionHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectActionHost, Type: smithy.ShapeTypeString, Ext: &e_RedirectActionHost})
+var s_RedirectActionPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectActionPath, Type: smithy.ShapeTypeString, Ext: &e_RedirectActionPath})
+var s_RedirectActionPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectActionPort, Type: smithy.ShapeTypeString, Ext: &e_RedirectActionPort})
+var s_RedirectActionProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectActionProtocol, Type: smithy.ShapeTypeString, Ext: &e_RedirectActionProtocol})
+var s_RedirectActionQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectActionQuery, Type: smithy.ShapeTypeString, Ext: &e_RedirectActionQuery})
+var sRedirectActionStatusCodeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedirectActionStatusCodeEnum, Members: &mRedirectActionStatusCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &eRedirectActionStatusCodeEnum})
+var sRedirectActionStatusCodeEnum_HTTP_301 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_301", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRedirectActionStatusCodeEnum_HTTP_301})
+var sRedirectActionStatusCodeEnum_HTTP_302 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_302", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRedirectActionStatusCodeEnum_HTTP_302})
+var sRemoveIpamPoolEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveIpamPoolEnum, Members: &mRemoveIpamPoolEnum, Type: smithy.ShapeTypeEnum, Ext: &eRemoveIpamPoolEnum})
+var sRemoveIpamPoolEnum_ipv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoveIpamPoolEnum_ipv4})
+var s_RemoveIpamPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveIpamPools, Members: &m_RemoveIpamPools, Type: smithy.ShapeTypeList, Ext: &e_RemoveIpamPools})
+var s_RemoveIpamPools_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemoveIpamPoolEnum, Members: &mRemoveIpamPoolEnum, Type: smithy.ShapeTypeEnum, Ext: &e_RemoveIpamPools_member})
+var s_ResetCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResetCapacityReservation, Type: smithy.ShapeTypeBoolean, Ext: &e_ResetCapacityReservation})
+var s_ResetTransforms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResetTransforms, Type: smithy.ShapeTypeBoolean, Ext: &e_ResetTransforms})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &e_ResourceArns})
+var s_ResourceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArns_member})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRevocationContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationContent, Members: &mRevocationContent, Type: smithy.ShapeTypeStructure, Ext: &eRevocationContent})
+var sRevocationContent_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eRevocationContent_S3Bucket})
+var sRevocationContent_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eRevocationContent_S3Key})
+var sRevocationContent_S3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString, Ext: &eRevocationContent_S3ObjectVersion})
+var sRevocationContent_RevocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationType", ID: &iRevocationType, Members: &mRevocationType, Type: smithy.ShapeTypeEnum, Ext: &eRevocationContent_RevocationType})
+var sRevocationContentNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationContentNotFoundException, Members: &mRevocationContentNotFoundException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eRevocationContentNotFoundException})
+var sRevocationContentNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eRevocationContentNotFoundException_Message})
+var s_RevocationContents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationContents, Members: &m_RevocationContents, Type: smithy.ShapeTypeList, Ext: &e_RevocationContents})
+var s_RevocationContents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevocationContent, Members: &mRevocationContent, Type: smithy.ShapeTypeStructure, Ext: &e_RevocationContents_member})
+var s_RevocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationId, Type: smithy.ShapeTypeLong, Ext: &e_RevocationId})
+var sRevocationIdNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationIdNotFoundException, Members: &mRevocationIdNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eRevocationIdNotFoundException})
+var sRevocationIdNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eRevocationIdNotFoundException_Message})
+var s_RevocationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationIds, Members: &m_RevocationIds, Type: smithy.ShapeTypeList, Ext: &e_RevocationIds})
+var s_RevocationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevocationId, Type: smithy.ShapeTypeLong, Ext: &e_RevocationIds_member})
+var sRevocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationType, Members: &mRevocationType, Type: smithy.ShapeTypeEnum, Ext: &eRevocationType})
+var sRevocationType_CRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationType_CRL})
+var sRewriteConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRewriteConfig, Members: &mRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &eRewriteConfig})
+var sRewriteConfig_Regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regex", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &eRewriteConfig_Regex})
+var sRewriteConfig_Replace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replace", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &eRewriteConfig_Replace})
+var s_RewriteConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RewriteConfigList, Members: &m_RewriteConfigList, Type: smithy.ShapeTypeList, Ext: &e_RewriteConfigList})
+var s_RewriteConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRewriteConfig, Members: &mRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &e_RewriteConfigList_member})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eRule_RuleArn})
+var sRule_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRule_Priority})
+var sRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_RuleConditionList, Members: &m_RuleConditionList, Type: smithy.ShapeTypeList, Ext: &eRule_Conditions})
+var sRule_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eRule_Actions})
+var sRule_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &i_IsDefault, Type: smithy.ShapeTypeBoolean, Ext: &eRule_IsDefault})
+var sRule_Transforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transforms", ID: &i_RuleTransformList, Members: &m_RuleTransformList, Type: smithy.ShapeTypeList, Ext: &eRule_Transforms})
+var s_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &e_RuleArn})
+var s_RuleArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleArns, Members: &m_RuleArns, Type: smithy.ShapeTypeList, Ext: &e_RuleArns})
+var s_RuleArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &e_RuleArns_member})
+var sRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleCondition, Members: &mRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition})
+var sRuleCondition_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &i_ConditionFieldName, Type: smithy.ShapeTypeString, Ext: &eRuleCondition_Field})
+var sRuleCondition_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eRuleCondition_Values})
+var sRuleCondition_HostHeaderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostHeaderConfig", ID: &iHostHeaderConditionConfig, Members: &mHostHeaderConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_HostHeaderConfig})
+var sRuleCondition_PathPatternConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathPatternConfig", ID: &iPathPatternConditionConfig, Members: &mPathPatternConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_PathPatternConfig})
+var sRuleCondition_HttpHeaderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpHeaderConfig", ID: &iHttpHeaderConditionConfig, Members: &mHttpHeaderConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_HttpHeaderConfig})
+var sRuleCondition_QueryStringConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringConfig", ID: &iQueryStringConditionConfig, Members: &mQueryStringConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_QueryStringConfig})
+var sRuleCondition_HttpRequestMethodConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpRequestMethodConfig", ID: &iHttpRequestMethodConditionConfig, Members: &mHttpRequestMethodConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_HttpRequestMethodConfig})
+var sRuleCondition_SourceIpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIpConfig", ID: &iSourceIpConditionConfig, Members: &mSourceIpConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_SourceIpConfig})
+var sRuleCondition_RegexValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegexValues", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eRuleCondition_RegexValues})
+var s_RuleConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConditionList, Members: &m_RuleConditionList, Type: smithy.ShapeTypeList, Ext: &e_RuleConditionList})
+var s_RuleConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleCondition, Members: &mRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &e_RuleConditionList_member})
+var sRuleNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleNotFoundException, Members: &mRuleNotFoundException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eRuleNotFoundException})
+var sRuleNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eRuleNotFoundException_Message})
+var s_RulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulePriority, Type: smithy.ShapeTypeInteger, Ext: &e_RulePriority})
+var s_RulePriorityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulePriorityList, Members: &m_RulePriorityList, Type: smithy.ShapeTypeList, Ext: &e_RulePriorityList})
+var s_RulePriorityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRulePriorityPair, Members: &mRulePriorityPair, Type: smithy.ShapeTypeStructure, Ext: &e_RulePriorityList_member})
+var sRulePriorityPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulePriorityPair, Members: &mRulePriorityPair, Type: smithy.ShapeTypeStructure, Ext: &eRulePriorityPair})
+var sRulePriorityPair_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eRulePriorityPair_RuleArn})
+var sRulePriorityPair_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RulePriority, Type: smithy.ShapeTypeInteger, Ext: &eRulePriorityPair_Priority})
+var s_Rules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &e_Rules})
+var s_Rules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &e_Rules_member})
+var sRuleTransform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleTransform, Members: &mRuleTransform, Type: smithy.ShapeTypeStructure, Ext: &eRuleTransform})
+var sRuleTransform_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTransformTypeEnum, Members: &mTransformTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eRuleTransform_Type})
+var sRuleTransform_HostHeaderRewriteConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostHeaderRewriteConfig", ID: &iHostHeaderRewriteConfig, Members: &mHostHeaderRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleTransform_HostHeaderRewriteConfig})
+var sRuleTransform_UrlRewriteConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlRewriteConfig", ID: &iUrlRewriteConfig, Members: &mUrlRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleTransform_UrlRewriteConfig})
+var s_RuleTransformList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTransformList, Members: &m_RuleTransformList, Type: smithy.ShapeTypeList, Ext: &e_RuleTransformList})
+var s_RuleTransformList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleTransform, Members: &mRuleTransform, Type: smithy.ShapeTypeStructure, Ext: &e_RuleTransformList_member})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var s_S3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectVersion})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroups})
+var s_SecurityGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroups_member})
+var sSourceIpAddressTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceIpAddressTypeEnum, Members: &mSourceIpAddressTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eSourceIpAddressTypeEnum})
+var sSourceIpAddressTypeEnum_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceIpAddressTypeEnum_IPV4})
+var sSourceIpAddressTypeEnum_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceIpAddressTypeEnum_IPV6})
+var sSourceIpConditionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceIpConditionConfig, Members: &mSourceIpConditionConfig, Type: smithy.ShapeTypeStructure, Ext: &eSourceIpConditionConfig})
+var sSourceIpConditionConfig_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eSourceIpConditionConfig_Values})
+var sSourceIpConditionConfig_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iSourceIpAddressTypeEnum, Members: &mSourceIpAddressTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eSourceIpConditionConfig_IpAddressType})
+var s_SourceNatIpv6Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceNatIpv6Prefix, Type: smithy.ShapeTypeString, Ext: &e_SourceNatIpv6Prefix})
+var s_SourceNatIpv6Prefixes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceNatIpv6Prefixes, Members: &m_SourceNatIpv6Prefixes, Type: smithy.ShapeTypeList, Ext: &e_SourceNatIpv6Prefixes})
+var s_SourceNatIpv6Prefixes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SourceNatIpv6Prefix, Type: smithy.ShapeTypeString, Ext: &e_SourceNatIpv6Prefixes_member})
+var s_SslPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SslPolicies, Members: &m_SslPolicies, Type: smithy.ShapeTypeList, Ext: &e_SslPolicies})
+var s_SslPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSslPolicy, Members: &mSslPolicy, Type: smithy.ShapeTypeStructure, Ext: &e_SslPolicies_member})
+var sSslPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSslPolicy, Members: &mSslPolicy, Type: smithy.ShapeTypeStructure, Ext: &eSslPolicy})
+var sSslPolicy_SslProtocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SslProtocols", ID: &i_SslProtocols, Members: &m_SslProtocols, Type: smithy.ShapeTypeList, Ext: &eSslPolicy_SslProtocols})
+var sSslPolicy_Ciphers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ciphers", ID: &i_Ciphers, Members: &m_Ciphers, Type: smithy.ShapeTypeList, Ext: &eSslPolicy_Ciphers})
+var sSslPolicy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &eSslPolicy_Name})
+var sSslPolicy_SupportedLoadBalancerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedLoadBalancerTypes", ID: &i_ListOfString, Members: &m_ListOfString, Type: smithy.ShapeTypeList, Ext: &eSslPolicy_SupportedLoadBalancerTypes})
+var s_SslPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &e_SslPolicyName})
+var s_SslPolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SslPolicyNames, Members: &m_SslPolicyNames, Type: smithy.ShapeTypeList, Ext: &e_SslPolicyNames})
+var s_SslPolicyNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &e_SslPolicyNames_member})
+var sSSLPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSLPolicyNotFoundException, Members: &mSSLPolicyNotFoundException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eSSLPolicyNotFoundException})
+var sSSLPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eSSLPolicyNotFoundException_Message})
+var s_SslProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SslProtocol, Type: smithy.ShapeTypeString, Ext: &e_SslProtocol})
+var s_SslProtocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SslProtocols, Members: &m_SslProtocols, Type: smithy.ShapeTypeList, Ext: &e_SslProtocols})
+var s_SslProtocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SslProtocol, Type: smithy.ShapeTypeString, Ext: &e_SslProtocols_member})
+var s_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &e_StateReason})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &e_StringValue})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var sSubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &eSubnetMapping})
+var sSubnetMapping_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_SubnetId})
+var sSubnetMapping_AllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationId", ID: &i_AllocationId, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_AllocationId})
+var sSubnetMapping_PrivateIPv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateIPv4Address", ID: &i_PrivateIPv4Address, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_PrivateIPv4Address})
+var sSubnetMapping_IPv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv6Address", ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_IPv6Address})
+var sSubnetMapping_SourceNatIpv6Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceNatIpv6Prefix", ID: &i_SourceNatIpv6Prefix, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_SourceNatIpv6Prefix})
+var s_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &e_SubnetMappings})
+var s_SubnetMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &e_SubnetMappings_member})
+var sSubnetNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetNotFoundException, Members: &mSubnetNotFoundException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eSubnetNotFoundException})
+var sSubnetNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eSubnetNotFoundException_Message})
+var s_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &e_Subnets})
+var s_Subnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_Subnets_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var sTagDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDescription, Members: &mTagDescription, Type: smithy.ShapeTypeStructure, Ext: &eTagDescription})
+var sTagDescription_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagDescription_ResourceArn})
+var sTagDescription_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagDescription_Tags})
+var s_TagDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagDescriptions, Members: &m_TagDescriptions, Type: smithy.ShapeTypeList, Ext: &e_TagDescriptions})
+var s_TagDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagDescription, Members: &mTagDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TagDescriptions_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTargetAdministrativeOverrideReasonEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAdministrativeOverrideReasonEnum, Members: &mTargetAdministrativeOverrideReasonEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetAdministrativeOverrideReasonEnum})
+var sTargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR})
+var sTargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OVERRIDE_ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED})
+var sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED})
+var sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_DELEGATED_TO_DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS})
+var sTargetAdministrativeOverrideStateEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAdministrativeOverrideStateEnum, Members: &mTargetAdministrativeOverrideStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetAdministrativeOverrideStateEnum})
+var sTargetAdministrativeOverrideStateEnum_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideStateEnum_UNKNOWN})
+var sTargetAdministrativeOverrideStateEnum_NO_OVERRIDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OVERRIDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideStateEnum_NO_OVERRIDE})
+var sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE})
+var sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_DELEGATED_TO_DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS})
+var s_TargetControlPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetControlPort, Type: smithy.ShapeTypeInteger, Ext: &e_TargetControlPort})
+var sTargetDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetDescription, Members: &mTargetDescription, Type: smithy.ShapeTypeStructure, Ext: &eTargetDescription})
+var sTargetDescription_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eTargetDescription_Id})
+var sTargetDescription_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eTargetDescription_Port})
+var sTargetDescription_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_ZoneName, Type: smithy.ShapeTypeString, Ext: &eTargetDescription_AvailabilityZone})
+var sTargetDescription_QuicServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuicServerId", ID: &i_QuicServerId, Type: smithy.ShapeTypeString, Ext: &eTargetDescription_QuicServerId})
+var s_TargetDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetDescriptions, Members: &m_TargetDescriptions, Type: smithy.ShapeTypeList, Ext: &e_TargetDescriptions})
+var s_TargetDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetDescription, Members: &mTargetDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TargetDescriptions_member})
+var sTargetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroup, Members: &mTargetGroup, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroup})
+var sTargetGroup_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_TargetGroupArn})
+var sTargetGroup_TargetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupName", ID: &i_TargetGroupName, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_TargetGroupName})
+var sTargetGroup_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetGroup_Protocol})
+var sTargetGroup_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_Port})
+var sTargetGroup_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_VpcId})
+var sTargetGroup_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetGroup_HealthCheckProtocol})
+var sTargetGroup_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_HealthCheckPort})
+var sTargetGroup_HealthCheckEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckEnabled", ID: &i_HealthCheckEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eTargetGroup_HealthCheckEnabled})
+var sTargetGroup_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_HealthCheckIntervalSeconds})
+var sTargetGroup_HealthCheckTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckTimeoutSeconds", ID: &i_HealthCheckTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_HealthCheckTimeoutSeconds})
+var sTargetGroup_HealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_HealthyThresholdCount})
+var sTargetGroup_UnhealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnhealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_UnhealthyThresholdCount})
+var sTargetGroup_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_HealthCheckPath})
+var sTargetGroup_Matcher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Matcher", ID: &iMatcher, Members: &mMatcher, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroup_Matcher})
+var sTargetGroup_LoadBalancerArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArns", ID: &i_LoadBalancerArns, Members: &m_LoadBalancerArns, Type: smithy.ShapeTypeList, Ext: &eTargetGroup_LoadBalancerArns})
+var sTargetGroup_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &iTargetTypeEnum, Members: &mTargetTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetGroup_TargetType})
+var sTargetGroup_ProtocolVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolVersion", ID: &i_ProtocolVersion, Type: smithy.ShapeTypeString, Ext: &eTargetGroup_ProtocolVersion})
+var sTargetGroup_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iTargetGroupIpAddressTypeEnum, Members: &mTargetGroupIpAddressTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetGroup_IpAddressType})
+var sTargetGroup_TargetControlPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControlPort", ID: &i_TargetControlPort, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroup_TargetControlPort})
+var s_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupArn})
+var s_TargetGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupArns, Members: &m_TargetGroupArns, Type: smithy.ShapeTypeList, Ext: &e_TargetGroupArns})
+var s_TargetGroupArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupArns_member})
+var sTargetGroupAssociationLimitException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupAssociationLimitException, Members: &mTargetGroupAssociationLimitException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupAssociationLimitException})
+var sTargetGroupAssociationLimitException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTargetGroupAssociationLimitException_Message})
+var sTargetGroupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupAttribute, Members: &mTargetGroupAttribute, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupAttribute})
+var sTargetGroupAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TargetGroupAttributeKey, Type: smithy.ShapeTypeString, Ext: &eTargetGroupAttribute_Key})
+var sTargetGroupAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TargetGroupAttributeValue, Type: smithy.ShapeTypeString, Ext: &eTargetGroupAttribute_Value})
+var s_TargetGroupAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupAttributeKey})
+var s_TargetGroupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupAttributes, Members: &m_TargetGroupAttributes, Type: smithy.ShapeTypeList, Ext: &e_TargetGroupAttributes})
+var s_TargetGroupAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetGroupAttribute, Members: &mTargetGroupAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_TargetGroupAttributes_member})
+var s_TargetGroupAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupAttributeValue})
+var sTargetGroupIpAddressTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupIpAddressTypeEnum, Members: &mTargetGroupIpAddressTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetGroupIpAddressTypeEnum})
+var sTargetGroupIpAddressTypeEnum_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupIpAddressTypeEnum_IPV4})
+var sTargetGroupIpAddressTypeEnum_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupIpAddressTypeEnum_IPV6})
+var s_TargetGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupList, Members: &m_TargetGroupList, Type: smithy.ShapeTypeList, Ext: &e_TargetGroupList})
+var s_TargetGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetGroupTuple, Members: &mTargetGroupTuple, Type: smithy.ShapeTypeStructure, Ext: &e_TargetGroupList_member})
+var s_TargetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupName, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupName})
+var s_TargetGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupNames, Members: &m_TargetGroupNames, Type: smithy.ShapeTypeList, Ext: &e_TargetGroupNames})
+var s_TargetGroupNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetGroupName, Type: smithy.ShapeTypeString, Ext: &e_TargetGroupNames_member})
+var sTargetGroupNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupNotFoundException, Members: &mTargetGroupNotFoundException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupNotFoundException})
+var sTargetGroupNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTargetGroupNotFoundException_Message})
+var s_TargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroups, Members: &m_TargetGroups, Type: smithy.ShapeTypeList, Ext: &e_TargetGroups})
+var s_TargetGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetGroup, Members: &mTargetGroup, Type: smithy.ShapeTypeStructure, Ext: &e_TargetGroups_member})
+var sTargetGroupStickinessConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupStickinessConfig, Members: &mTargetGroupStickinessConfig, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupStickinessConfig})
+var sTargetGroupStickinessConfig_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_TargetGroupStickinessEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eTargetGroupStickinessConfig_Enabled})
+var sTargetGroupStickinessConfig_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSeconds", ID: &i_TargetGroupStickinessDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroupStickinessConfig_DurationSeconds})
+var s_TargetGroupStickinessDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupStickinessDurationSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_TargetGroupStickinessDurationSeconds})
+var s_TargetGroupStickinessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupStickinessEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_TargetGroupStickinessEnabled})
+var sTargetGroupTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetGroupTuple, Members: &mTargetGroupTuple, Type: smithy.ShapeTypeStructure, Ext: &eTargetGroupTuple})
+var sTargetGroupTuple_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eTargetGroupTuple_TargetGroupArn})
+var sTargetGroupTuple_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_TargetGroupWeight, Type: smithy.ShapeTypeInteger, Ext: &eTargetGroupTuple_Weight})
+var s_TargetGroupWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetGroupWeight, Type: smithy.ShapeTypeInteger, Ext: &e_TargetGroupWeight})
+var sTargetHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetHealth, Members: &mTargetHealth, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealth})
+var sTargetHealth_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iTargetHealthStateEnum, Members: &mTargetHealthStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetHealth_State})
+var sTargetHealth_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iTargetHealthReasonEnum, Members: &mTargetHealthReasonEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetHealth_Reason})
+var sTargetHealth_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTargetHealth_Description})
+var sTargetHealthDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetHealthDescription, Members: &mTargetHealthDescription, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthDescription})
+var sTargetHealthDescription_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTargetDescription, Members: &mTargetDescription, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthDescription_Target})
+var sTargetHealthDescription_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeString, Ext: &eTargetHealthDescription_HealthCheckPort})
+var sTargetHealthDescription_TargetHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetHealth", ID: &iTargetHealth, Members: &mTargetHealth, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthDescription_TargetHealth})
+var sTargetHealthDescription_AnomalyDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetection", ID: &iAnomalyDetection, Members: &mAnomalyDetection, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthDescription_AnomalyDetection})
+var sTargetHealthDescription_AdministrativeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeOverride", ID: &iAdministrativeOverride, Members: &mAdministrativeOverride, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthDescription_AdministrativeOverride})
+var s_TargetHealthDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetHealthDescriptions, Members: &m_TargetHealthDescriptions, Type: smithy.ShapeTypeList, Ext: &e_TargetHealthDescriptions})
+var s_TargetHealthDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetHealthDescription, Members: &mTargetHealthDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TargetHealthDescriptions_member})
+var sTargetHealthReasonEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetHealthReasonEnum, Members: &mTargetHealthReasonEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetHealthReasonEnum})
+var sTargetHealthReasonEnum_REGISTRATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_REGISTRATION_IN_PROGRESS})
+var sTargetHealthReasonEnum_INITIAL_HEALTH_CHECKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIAL_HEALTH_CHECKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_INITIAL_HEALTH_CHECKING})
+var sTargetHealthReasonEnum_RESPONSE_CODE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESPONSE_CODE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_RESPONSE_CODE_MISMATCH})
+var sTargetHealthReasonEnum_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_TIMEOUT})
+var sTargetHealthReasonEnum_FAILED_HEALTH_CHECKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_HEALTH_CHECKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_FAILED_HEALTH_CHECKS})
+var sTargetHealthReasonEnum_NOT_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_NOT_REGISTERED})
+var sTargetHealthReasonEnum_NOT_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_NOT_IN_USE})
+var sTargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTRATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS})
+var sTargetHealthReasonEnum_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_INVALID_STATE})
+var sTargetHealthReasonEnum_IP_UNUSABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_UNUSABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_IP_UNUSABLE})
+var sTargetHealthReasonEnum_HEALTH_CHECK_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTH_CHECK_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_HEALTH_CHECK_DISABLED})
+var sTargetHealthReasonEnum_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthReasonEnum_INTERNAL_ERROR})
+var sTargetHealthStateEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetHealthStateEnum, Members: &mTargetHealthStateEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetHealthStateEnum})
+var sTargetHealthStateEnum_INITIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_INITIAL})
+var sTargetHealthStateEnum_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_HEALTHY})
+var sTargetHealthStateEnum_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_UNHEALTHY})
+var sTargetHealthStateEnum_UNHEALTHY_DRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY_DRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_UNHEALTHY_DRAINING})
+var sTargetHealthStateEnum_UNUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_UNUSED})
+var sTargetHealthStateEnum_DRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_DRAINING})
+var sTargetHealthStateEnum_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetHealthStateEnum_UNAVAILABLE})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetId})
+var sTargetTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTypeEnum, Members: &mTargetTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eTargetTypeEnum})
+var sTargetTypeEnum_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetTypeEnum_INSTANCE})
+var sTargetTypeEnum_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetTypeEnum_IP})
+var sTargetTypeEnum_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetTypeEnum_LAMBDA})
+var sTargetTypeEnum_ALB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetTypeEnum_ALB})
+var sTooManyActionsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyActionsException, Members: &mTooManyActionsException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eTooManyActionsException})
+var sTooManyActionsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyActionsException_Message})
+var sTooManyCertificatesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyCertificatesException, Members: &mTooManyCertificatesException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eTooManyCertificatesException})
+var sTooManyCertificatesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyCertificatesException_Message})
+var sTooManyListenersException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyListenersException, Members: &mTooManyListenersException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eTooManyListenersException})
+var sTooManyListenersException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyListenersException_Message})
+var sTooManyLoadBalancersException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyLoadBalancersException, Members: &mTooManyLoadBalancersException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eTooManyLoadBalancersException})
+var sTooManyLoadBalancersException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyLoadBalancersException_Message})
+var sTooManyRegistrationsForTargetIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRegistrationsForTargetIdException, Members: &mTooManyRegistrationsForTargetIdException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRegistrationsForTargetIdException})
+var sTooManyRegistrationsForTargetIdException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyRegistrationsForTargetIdException_Message})
+var sTooManyRulesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRulesException, Members: &mTooManyRulesException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRulesException})
+var sTooManyRulesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyRulesException_Message})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var sTooManyTargetGroupsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTargetGroupsException, Members: &mTooManyTargetGroupsException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTargetGroupsException})
+var sTooManyTargetGroupsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTargetGroupsException_Message})
+var sTooManyTargetsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTargetsException, Members: &mTooManyTargetsException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTargetsException})
+var sTooManyTargetsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTargetsException_Message})
+var sTooManyTrustStoreRevocationEntriesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTrustStoreRevocationEntriesException, Members: &mTooManyTrustStoreRevocationEntriesException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTrustStoreRevocationEntriesException})
+var sTooManyTrustStoreRevocationEntriesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTrustStoreRevocationEntriesException_Message})
+var sTooManyTrustStoresException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTrustStoresException, Members: &mTooManyTrustStoresException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTrustStoresException})
+var sTooManyTrustStoresException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyTrustStoresException_Message})
+var sTooManyUniqueTargetGroupsPerLoadBalancerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyUniqueTargetGroupsPerLoadBalancerException, Members: &mTooManyUniqueTargetGroupsPerLoadBalancerException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eTooManyUniqueTargetGroupsPerLoadBalancerException})
+var sTooManyUniqueTargetGroupsPerLoadBalancerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyUniqueTargetGroupsPerLoadBalancerException_Message})
+var s_TotalRevokedEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalRevokedEntries, Type: smithy.ShapeTypeLong, Ext: &e_TotalRevokedEntries})
+var sTransformTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransformTypeEnum, Members: &mTransformTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eTransformTypeEnum})
+var sTransformTypeEnum_HOST_HEADER_REWRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOST_HEADER_REWRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransformTypeEnum_HOST_HEADER_REWRITE})
+var sTransformTypeEnum_URL_REWRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_REWRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransformTypeEnum_URL_REWRITE})
+var sTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure, Ext: &eTrustStore})
+var sTrustStore_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TrustStoreName, Type: smithy.ShapeTypeString, Ext: &eTrustStore_Name})
+var sTrustStore_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eTrustStore_TrustStoreArn})
+var sTrustStore_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTrustStoreStatus, Members: &mTrustStoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eTrustStore_Status})
+var sTrustStore_NumberOfCaCertificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfCaCertificates", ID: &i_NumberOfCaCertificates, Type: smithy.ShapeTypeInteger, Ext: &eTrustStore_NumberOfCaCertificates})
+var sTrustStore_TotalRevokedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevokedEntries", ID: &i_TotalRevokedEntries, Type: smithy.ShapeTypeLong, Ext: &eTrustStore_TotalRevokedEntries})
+var s_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &e_TrustStoreArn})
+var s_TrustStoreArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreArns, Members: &m_TrustStoreArns, Type: smithy.ShapeTypeList, Ext: &e_TrustStoreArns})
+var s_TrustStoreArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &e_TrustStoreArns_member})
+var sTrustStoreAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreAssociation, Members: &mTrustStoreAssociation, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreAssociation})
+var sTrustStoreAssociation_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TrustStoreAssociationResourceArn, Type: smithy.ShapeTypeString, Ext: &eTrustStoreAssociation_ResourceArn})
+var sTrustStoreAssociationNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreAssociationNotFoundException, Members: &mTrustStoreAssociationNotFoundException, Traits: &t52, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreAssociationNotFoundException})
+var sTrustStoreAssociationNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTrustStoreAssociationNotFoundException_Message})
+var s_TrustStoreAssociationResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreAssociationResourceArn, Type: smithy.ShapeTypeString, Ext: &e_TrustStoreAssociationResourceArn})
+var s_TrustStoreAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreAssociations, Members: &m_TrustStoreAssociations, Type: smithy.ShapeTypeList, Ext: &e_TrustStoreAssociations})
+var s_TrustStoreAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustStoreAssociation, Members: &mTrustStoreAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_TrustStoreAssociations_member})
+var sTrustStoreAssociationStatusEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreAssociationStatusEnum, Members: &mTrustStoreAssociationStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &eTrustStoreAssociationStatusEnum})
+var sTrustStoreAssociationStatusEnum_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreAssociationStatusEnum_ACTIVE})
+var sTrustStoreAssociationStatusEnum_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreAssociationStatusEnum_REMOVED})
+var sTrustStoreInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreInUseException, Members: &mTrustStoreInUseException, Traits: &t53, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreInUseException})
+var sTrustStoreInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTrustStoreInUseException_Message})
+var s_TrustStoreName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreName, Type: smithy.ShapeTypeString, Ext: &e_TrustStoreName})
+var s_TrustStoreNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreNames, Members: &m_TrustStoreNames, Type: smithy.ShapeTypeList, Ext: &e_TrustStoreNames})
+var s_TrustStoreNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TrustStoreName, Type: smithy.ShapeTypeString, Ext: &e_TrustStoreNames_member})
+var sTrustStoreNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreNotFoundException, Members: &mTrustStoreNotFoundException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreNotFoundException})
+var sTrustStoreNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTrustStoreNotFoundException_Message})
+var sTrustStoreNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreNotReadyException, Members: &mTrustStoreNotReadyException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreNotReadyException})
+var sTrustStoreNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTrustStoreNotReadyException_Message})
+var sTrustStoreRevocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreRevocation, Members: &mTrustStoreRevocation, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreRevocation})
+var sTrustStoreRevocation_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eTrustStoreRevocation_TrustStoreArn})
+var sTrustStoreRevocation_RevocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationId", ID: &i_RevocationId, Type: smithy.ShapeTypeLong, Ext: &eTrustStoreRevocation_RevocationId})
+var sTrustStoreRevocation_RevocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationType", ID: &iRevocationType, Members: &mRevocationType, Type: smithy.ShapeTypeEnum, Ext: &eTrustStoreRevocation_RevocationType})
+var sTrustStoreRevocation_NumberOfRevokedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfRevokedEntries", ID: &i_NumberOfRevokedEntries, Type: smithy.ShapeTypeLong, Ext: &eTrustStoreRevocation_NumberOfRevokedEntries})
+var s_TrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreRevocations, Members: &m_TrustStoreRevocations, Type: smithy.ShapeTypeList, Ext: &e_TrustStoreRevocations})
+var s_TrustStoreRevocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustStoreRevocation, Members: &mTrustStoreRevocation, Type: smithy.ShapeTypeStructure, Ext: &e_TrustStoreRevocations_member})
+var s_TrustStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStores, Members: &m_TrustStores, Type: smithy.ShapeTypeList, Ext: &e_TrustStores})
+var s_TrustStores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure, Ext: &e_TrustStores_member})
+var sTrustStoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreStatus, Members: &mTrustStoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eTrustStoreStatus})
+var sTrustStoreStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreStatus_ACTIVE})
+var sTrustStoreStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreStatus_CREATING})
+var sUnsupportedProtocolException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedProtocolException, Members: &mUnsupportedProtocolException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedProtocolException})
+var sUnsupportedProtocolException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eUnsupportedProtocolException_Message})
+var sUrlRewriteConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUrlRewriteConfig, Members: &mUrlRewriteConfig, Type: smithy.ShapeTypeStructure, Ext: &eUrlRewriteConfig})
+var sUrlRewriteConfig_Rewrites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rewrites", ID: &i_RewriteConfigList, Members: &m_RewriteConfigList, Type: smithy.ShapeTypeList, Ext: &eUrlRewriteConfig_Rewrites})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sZonalCapacityReservationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalCapacityReservationState, Members: &mZonalCapacityReservationState, Type: smithy.ShapeTypeStructure, Ext: &eZonalCapacityReservationState})
+var sZonalCapacityReservationState_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCapacityReservationStatus, Members: &mCapacityReservationStatus, Type: smithy.ShapeTypeStructure, Ext: &eZonalCapacityReservationState_State})
+var sZonalCapacityReservationState_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_ZoneName, Type: smithy.ShapeTypeString, Ext: &eZonalCapacityReservationState_AvailabilityZone})
+var sZonalCapacityReservationState_EffectiveCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveCapacityUnits", ID: &i_CapacityUnitsDouble, Type: smithy.ShapeTypeDouble, Ext: &eZonalCapacityReservationState_EffectiveCapacityUnits})
+var s_ZonalCapacityReservationStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalCapacityReservationStates, Members: &m_ZonalCapacityReservationStates, Type: smithy.ShapeTypeList, Ext: &e_ZonalCapacityReservationStates})
+var s_ZonalCapacityReservationStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iZonalCapacityReservationState, Members: &mZonalCapacityReservationState, Type: smithy.ShapeTypeStructure, Ext: &e_ZonalCapacityReservationStates_member})
+var s_ZoneName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZoneName, Type: smithy.ShapeTypeString, Ext: &e_ZoneName})
+var sAddListenerCertificatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddListenerCertificatesInput, Members: &mAddListenerCertificatesInput, Type: smithy.ShapeTypeStructure, Ext: &eAddListenerCertificatesInput})
+var sAddListenerCertificatesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eAddListenerCertificatesInput_ListenerArn})
+var sAddListenerCertificatesInput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eAddListenerCertificatesInput_Certificates})
+var sAddListenerCertificatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddListenerCertificatesOutput, Members: &mAddListenerCertificatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddListenerCertificatesOutput})
+var sAddListenerCertificatesOutput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eAddListenerCertificatesOutput_Certificates})
+var sAddTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsInput, Members: &mAddTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsInput})
+var sAddTagsInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eAddTagsInput_ResourceArns})
+var sAddTagsInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsInput_Tags})
+var sAddTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsOutput})
+var sAddTrustStoreRevocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTrustStoreRevocationsInput, Members: &mAddTrustStoreRevocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eAddTrustStoreRevocationsInput})
+var sAddTrustStoreRevocationsInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eAddTrustStoreRevocationsInput_TrustStoreArn})
+var sAddTrustStoreRevocationsInput_RevocationContents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationContents", ID: &i_RevocationContents, Members: &m_RevocationContents, Type: smithy.ShapeTypeList, Ext: &eAddTrustStoreRevocationsInput_RevocationContents})
+var sAddTrustStoreRevocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTrustStoreRevocationsOutput, Members: &mAddTrustStoreRevocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddTrustStoreRevocationsOutput})
+var sAddTrustStoreRevocationsOutput_TrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreRevocations", ID: &i_TrustStoreRevocations, Members: &m_TrustStoreRevocations, Type: smithy.ShapeTypeList, Ext: &eAddTrustStoreRevocationsOutput_TrustStoreRevocations})
+var sCreateListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListenerInput, Members: &mCreateListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateListenerInput})
+var sCreateListenerInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eCreateListenerInput_LoadBalancerArn})
+var sCreateListenerInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateListenerInput_Protocol})
+var sCreateListenerInput_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eCreateListenerInput_Port})
+var sCreateListenerInput_SslPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SslPolicy", ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &eCreateListenerInput_SslPolicy})
+var sCreateListenerInput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eCreateListenerInput_Certificates})
+var sCreateListenerInput_DefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultActions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eCreateListenerInput_DefaultActions})
+var sCreateListenerInput_AlpnPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlpnPolicy", ID: &i_AlpnPolicyName, Members: &m_AlpnPolicyName, Type: smithy.ShapeTypeList, Ext: &eCreateListenerInput_AlpnPolicy})
+var sCreateListenerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateListenerInput_Tags})
+var sCreateListenerInput_MutualAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualAuthentication", ID: &iMutualAuthenticationAttributes, Members: &mMutualAuthenticationAttributes, Type: smithy.ShapeTypeStructure, Ext: &eCreateListenerInput_MutualAuthentication})
+var sCreateListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListenerOutput, Members: &mCreateListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateListenerOutput})
+var sCreateListenerOutput_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eCreateListenerOutput_Listeners})
+var sCreateLoadBalancerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerInput, Members: &mCreateLoadBalancerInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerInput})
+var sCreateLoadBalancerInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_LoadBalancerName, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerInput_Name})
+var sCreateLoadBalancerInput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerInput_Subnets})
+var sCreateLoadBalancerInput_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerInput_SubnetMappings})
+var sCreateLoadBalancerInput_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerInput_SecurityGroups})
+var sCreateLoadBalancerInput_Scheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheme", ID: &iLoadBalancerSchemeEnum, Members: &mLoadBalancerSchemeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateLoadBalancerInput_Scheme})
+var sCreateLoadBalancerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerInput_Tags})
+var sCreateLoadBalancerInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iLoadBalancerTypeEnum, Members: &mLoadBalancerTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateLoadBalancerInput_Type})
+var sCreateLoadBalancerInput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLoadBalancerInput_IpAddressType})
+var sCreateLoadBalancerInput_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &eCreateLoadBalancerInput_CustomerOwnedIpv4Pool})
+var sCreateLoadBalancerInput_EnablePrefixForIpv6SourceNat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePrefixForIpv6SourceNat", ID: &iEnablePrefixForIpv6SourceNatEnum, Members: &mEnablePrefixForIpv6SourceNatEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateLoadBalancerInput_EnablePrefixForIpv6SourceNat})
+var sCreateLoadBalancerInput_IpamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpamPools", ID: &iIpamPools, Members: &mIpamPools, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerInput_IpamPools})
+var sCreateLoadBalancerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoadBalancerOutput, Members: &mCreateLoadBalancerOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoadBalancerOutput})
+var sCreateLoadBalancerOutput_LoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancers", ID: &i_LoadBalancers, Members: &m_LoadBalancers, Type: smithy.ShapeTypeList, Ext: &eCreateLoadBalancerOutput_LoadBalancers})
+var sCreateRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleInput, Members: &mCreateRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleInput})
+var sCreateRuleInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eCreateRuleInput_ListenerArn})
+var sCreateRuleInput_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_RuleConditionList, Members: &m_RuleConditionList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleInput_Conditions})
+var sCreateRuleInput_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RulePriority, Type: smithy.ShapeTypeInteger, Ext: &eCreateRuleInput_Priority})
+var sCreateRuleInput_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eCreateRuleInput_Actions})
+var sCreateRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleInput_Tags})
+var sCreateRuleInput_Transforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transforms", ID: &i_RuleTransformList, Members: &m_RuleTransformList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleInput_Transforms})
+var sCreateRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleOutput, Members: &mCreateRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleOutput})
+var sCreateRuleOutput_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eCreateRuleOutput_Rules})
+var sCreateTargetGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetGroupInput, Members: &mCreateTargetGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetGroupInput})
+var sCreateTargetGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TargetGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateTargetGroupInput_Name})
+var sCreateTargetGroupInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateTargetGroupInput_Protocol})
+var sCreateTargetGroupInput_ProtocolVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolVersion", ID: &i_ProtocolVersion, Type: smithy.ShapeTypeString, Ext: &eCreateTargetGroupInput_ProtocolVersion})
+var sCreateTargetGroupInput_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_Port})
+var sCreateTargetGroupInput_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eCreateTargetGroupInput_VpcId})
+var sCreateTargetGroupInput_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateTargetGroupInput_HealthCheckProtocol})
+var sCreateTargetGroupInput_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeString, Ext: &eCreateTargetGroupInput_HealthCheckPort})
+var sCreateTargetGroupInput_HealthCheckEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckEnabled", ID: &i_HealthCheckEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCreateTargetGroupInput_HealthCheckEnabled})
+var sCreateTargetGroupInput_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eCreateTargetGroupInput_HealthCheckPath})
+var sCreateTargetGroupInput_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_HealthCheckIntervalSeconds})
+var sCreateTargetGroupInput_HealthCheckTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckTimeoutSeconds", ID: &i_HealthCheckTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_HealthCheckTimeoutSeconds})
+var sCreateTargetGroupInput_HealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_HealthyThresholdCount})
+var sCreateTargetGroupInput_UnhealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnhealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_UnhealthyThresholdCount})
+var sCreateTargetGroupInput_Matcher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Matcher", ID: &iMatcher, Members: &mMatcher, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetGroupInput_Matcher})
+var sCreateTargetGroupInput_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &iTargetTypeEnum, Members: &mTargetTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateTargetGroupInput_TargetType})
+var sCreateTargetGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTargetGroupInput_Tags})
+var sCreateTargetGroupInput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iTargetGroupIpAddressTypeEnum, Members: &mTargetGroupIpAddressTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateTargetGroupInput_IpAddressType})
+var sCreateTargetGroupInput_TargetControlPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControlPort", ID: &i_TargetControlPort, Type: smithy.ShapeTypeInteger, Ext: &eCreateTargetGroupInput_TargetControlPort})
+var sCreateTargetGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetGroupOutput, Members: &mCreateTargetGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetGroupOutput})
+var sCreateTargetGroupOutput_TargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroups", ID: &i_TargetGroups, Members: &m_TargetGroups, Type: smithy.ShapeTypeList, Ext: &eCreateTargetGroupOutput_TargetGroups})
+var sCreateTrustStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStoreInput, Members: &mCreateTrustStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrustStoreInput})
+var sCreateTrustStoreInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TrustStoreName, Type: smithy.ShapeTypeString, Ext: &eCreateTrustStoreInput_Name})
+var sCreateTrustStoreInput_CaCertificatesBundleS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eCreateTrustStoreInput_CaCertificatesBundleS3Bucket})
+var sCreateTrustStoreInput_CaCertificatesBundleS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eCreateTrustStoreInput_CaCertificatesBundleS3Key})
+var sCreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString, Ext: &eCreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion})
+var sCreateTrustStoreInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTrustStoreInput_Tags})
+var sCreateTrustStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStoreOutput, Members: &mCreateTrustStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrustStoreOutput})
+var sCreateTrustStoreOutput_TrustStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStores", ID: &i_TrustStores, Members: &m_TrustStores, Type: smithy.ShapeTypeList, Ext: &eCreateTrustStoreOutput_TrustStores})
+var sDeleteListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListenerInput, Members: &mDeleteListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteListenerInput})
+var sDeleteListenerInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eDeleteListenerInput_ListenerArn})
+var sDeleteListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteListenerOutput})
+var sDeleteLoadBalancerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerInput, Members: &mDeleteLoadBalancerInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerInput})
+var sDeleteLoadBalancerInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eDeleteLoadBalancerInput_LoadBalancerArn})
+var sDeleteLoadBalancerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoadBalancerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoadBalancerOutput})
+var sDeleteRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleInput, Members: &mDeleteRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleInput})
+var sDeleteRuleInput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleInput_RuleArn})
+var sDeleteRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleOutput})
+var sDeleteSharedTrustStoreAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSharedTrustStoreAssociationInput, Members: &mDeleteSharedTrustStoreAssociationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSharedTrustStoreAssociationInput})
+var sDeleteSharedTrustStoreAssociationInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eDeleteSharedTrustStoreAssociationInput_TrustStoreArn})
+var sDeleteSharedTrustStoreAssociationInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteSharedTrustStoreAssociationInput_ResourceArn})
+var sDeleteSharedTrustStoreAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSharedTrustStoreAssociationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSharedTrustStoreAssociationOutput})
+var sDeleteTargetGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetGroupInput, Members: &mDeleteTargetGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetGroupInput})
+var sDeleteTargetGroupInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eDeleteTargetGroupInput_TargetGroupArn})
+var sDeleteTargetGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetGroupOutput})
+var sDeleteTrustStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStoreInput, Members: &mDeleteTrustStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTrustStoreInput})
+var sDeleteTrustStoreInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eDeleteTrustStoreInput_TrustStoreArn})
+var sDeleteTrustStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTrustStoreOutput})
+var sDeregisterTargetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTargetsInput, Members: &mDeregisterTargetsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterTargetsInput})
+var sDeregisterTargetsInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eDeregisterTargetsInput_TargetGroupArn})
+var sDeregisterTargetsInput_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetDescriptions, Members: &m_TargetDescriptions, Type: smithy.ShapeTypeList, Ext: &eDeregisterTargetsInput_Targets})
+var sDeregisterTargetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTargetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterTargetsOutput})
+var sDescribeAccountLimitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimitsInput, Members: &mDescribeAccountLimitsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountLimitsInput})
+var sDescribeAccountLimitsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccountLimitsInput_Marker})
+var sDescribeAccountLimitsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAccountLimitsInput_PageSize})
+var sDescribeAccountLimitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountLimitsOutput, Members: &mDescribeAccountLimitsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAccountLimitsOutput})
+var sDescribeAccountLimitsOutput_Limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limits", ID: &i_Limits, Members: &m_Limits, Type: smithy.ShapeTypeList, Ext: &eDescribeAccountLimitsOutput_Limits})
+var sDescribeAccountLimitsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeAccountLimitsOutput_NextMarker})
+var sDescribeCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCapacityReservationInput, Members: &mDescribeCapacityReservationInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCapacityReservationInput})
+var sDescribeCapacityReservationInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeCapacityReservationInput_LoadBalancerArn})
+var sDescribeCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCapacityReservationOutput, Members: &mDescribeCapacityReservationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCapacityReservationOutput})
+var sDescribeCapacityReservationOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastModifiedTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeCapacityReservationOutput_LastModifiedTime})
+var sDescribeCapacityReservationOutput_DecreaseRequestsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecreaseRequestsRemaining", ID: &i_DecreaseRequestsRemaining, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCapacityReservationOutput_DecreaseRequestsRemaining})
+var sDescribeCapacityReservationOutput_MinimumLoadBalancerCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumLoadBalancerCapacity", ID: &iMinimumLoadBalancerCapacity, Members: &mMinimumLoadBalancerCapacity, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCapacityReservationOutput_MinimumLoadBalancerCapacity})
+var sDescribeCapacityReservationOutput_CapacityReservationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservationState", ID: &i_ZonalCapacityReservationStates, Members: &m_ZonalCapacityReservationStates, Type: smithy.ShapeTypeList, Ext: &eDescribeCapacityReservationOutput_CapacityReservationState})
+var sDescribeListenerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerAttributesInput, Members: &mDescribeListenerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenerAttributesInput})
+var sDescribeListenerAttributesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeListenerAttributesInput_ListenerArn})
+var sDescribeListenerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerAttributesOutput, Members: &mDescribeListenerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenerAttributesOutput})
+var sDescribeListenerAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ListenerAttributes, Members: &m_ListenerAttributes, Type: smithy.ShapeTypeList, Ext: &eDescribeListenerAttributesOutput_Attributes})
+var sDescribeListenerCertificatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerCertificatesInput, Members: &mDescribeListenerCertificatesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenerCertificatesInput})
+var sDescribeListenerCertificatesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeListenerCertificatesInput_ListenerArn})
+var sDescribeListenerCertificatesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeListenerCertificatesInput_Marker})
+var sDescribeListenerCertificatesInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeListenerCertificatesInput_PageSize})
+var sDescribeListenerCertificatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerCertificatesOutput, Members: &mDescribeListenerCertificatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenerCertificatesOutput})
+var sDescribeListenerCertificatesOutput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eDescribeListenerCertificatesOutput_Certificates})
+var sDescribeListenerCertificatesOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeListenerCertificatesOutput_NextMarker})
+var sDescribeListenersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenersInput, Members: &mDescribeListenersInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenersInput})
+var sDescribeListenersInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeListenersInput_LoadBalancerArn})
+var sDescribeListenersInput_ListenerArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArns", ID: &i_ListenerArns, Members: &m_ListenerArns, Type: smithy.ShapeTypeList, Ext: &eDescribeListenersInput_ListenerArns})
+var sDescribeListenersInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeListenersInput_Marker})
+var sDescribeListenersInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeListenersInput_PageSize})
+var sDescribeListenersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenersOutput, Members: &mDescribeListenersOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeListenersOutput})
+var sDescribeListenersOutput_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eDescribeListenersOutput_Listeners})
+var sDescribeListenersOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeListenersOutput_NextMarker})
+var sDescribeLoadBalancerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributesInput, Members: &mDescribeLoadBalancerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerAttributesInput})
+var sDescribeLoadBalancerAttributesInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLoadBalancerAttributesInput_LoadBalancerArn})
+var sDescribeLoadBalancerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancerAttributesOutput, Members: &mDescribeLoadBalancerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancerAttributesOutput})
+var sDescribeLoadBalancerAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_LoadBalancerAttributes, Members: &m_LoadBalancerAttributes, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancerAttributesOutput_Attributes})
+var sDescribeLoadBalancersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancersInput, Members: &mDescribeLoadBalancersInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancersInput})
+var sDescribeLoadBalancersInput_LoadBalancerArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArns", ID: &i_LoadBalancerArns, Members: &m_LoadBalancerArns, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancersInput_LoadBalancerArns})
+var sDescribeLoadBalancersInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_LoadBalancerNames, Members: &m_LoadBalancerNames, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancersInput_Names})
+var sDescribeLoadBalancersInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeLoadBalancersInput_Marker})
+var sDescribeLoadBalancersInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeLoadBalancersInput_PageSize})
+var sDescribeLoadBalancersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoadBalancersOutput, Members: &mDescribeLoadBalancersOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoadBalancersOutput})
+var sDescribeLoadBalancersOutput_LoadBalancers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancers", ID: &i_LoadBalancers, Members: &m_LoadBalancers, Type: smithy.ShapeTypeList, Ext: &eDescribeLoadBalancersOutput_LoadBalancers})
+var sDescribeLoadBalancersOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeLoadBalancersOutput_NextMarker})
+var sDescribeRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRulesInput, Members: &mDescribeRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRulesInput})
+var sDescribeRulesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRulesInput_ListenerArn})
+var sDescribeRulesInput_RuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArns", ID: &i_RuleArns, Members: &m_RuleArns, Type: smithy.ShapeTypeList, Ext: &eDescribeRulesInput_RuleArns})
+var sDescribeRulesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeRulesInput_Marker})
+var sDescribeRulesInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeRulesInput_PageSize})
+var sDescribeRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRulesOutput, Members: &mDescribeRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRulesOutput})
+var sDescribeRulesOutput_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eDescribeRulesOutput_Rules})
+var sDescribeRulesOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeRulesOutput_NextMarker})
+var sDescribeSSLPoliciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSSLPoliciesInput, Members: &mDescribeSSLPoliciesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSSLPoliciesInput})
+var sDescribeSSLPoliciesInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_SslPolicyNames, Members: &m_SslPolicyNames, Type: smithy.ShapeTypeList, Ext: &eDescribeSSLPoliciesInput_Names})
+var sDescribeSSLPoliciesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeSSLPoliciesInput_Marker})
+var sDescribeSSLPoliciesInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSSLPoliciesInput_PageSize})
+var sDescribeSSLPoliciesInput_LoadBalancerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerType", ID: &iLoadBalancerTypeEnum, Members: &mLoadBalancerTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeSSLPoliciesInput_LoadBalancerType})
+var sDescribeSSLPoliciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSSLPoliciesOutput, Members: &mDescribeSSLPoliciesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSSLPoliciesOutput})
+var sDescribeSSLPoliciesOutput_SslPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SslPolicies", ID: &i_SslPolicies, Members: &m_SslPolicies, Type: smithy.ShapeTypeList, Ext: &eDescribeSSLPoliciesOutput_SslPolicies})
+var sDescribeSSLPoliciesOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeSSLPoliciesOutput_NextMarker})
+var sDescribeTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsInput, Members: &mDescribeTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTagsInput})
+var sDescribeTagsInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eDescribeTagsInput_ResourceArns})
+var sDescribeTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsOutput, Members: &mDescribeTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTagsOutput})
+var sDescribeTagsOutput_TagDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagDescriptions", ID: &i_TagDescriptions, Members: &m_TagDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeTagsOutput_TagDescriptions})
+var sDescribeTargetGroupAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroupAttributesInput, Members: &mDescribeTargetGroupAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetGroupAttributesInput})
+var sDescribeTargetGroupAttributesInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTargetGroupAttributesInput_TargetGroupArn})
+var sDescribeTargetGroupAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroupAttributesOutput, Members: &mDescribeTargetGroupAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetGroupAttributesOutput})
+var sDescribeTargetGroupAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TargetGroupAttributes, Members: &m_TargetGroupAttributes, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetGroupAttributesOutput_Attributes})
+var sDescribeTargetGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroupsInput, Members: &mDescribeTargetGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetGroupsInput})
+var sDescribeTargetGroupsInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTargetGroupsInput_LoadBalancerArn})
+var sDescribeTargetGroupsInput_TargetGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArns", ID: &i_TargetGroupArns, Members: &m_TargetGroupArns, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetGroupsInput_TargetGroupArns})
+var sDescribeTargetGroupsInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_TargetGroupNames, Members: &m_TargetGroupNames, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetGroupsInput_Names})
+var sDescribeTargetGroupsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTargetGroupsInput_Marker})
+var sDescribeTargetGroupsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTargetGroupsInput_PageSize})
+var sDescribeTargetGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetGroupsOutput, Members: &mDescribeTargetGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetGroupsOutput})
+var sDescribeTargetGroupsOutput_TargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroups", ID: &i_TargetGroups, Members: &m_TargetGroups, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetGroupsOutput_TargetGroups})
+var sDescribeTargetGroupsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTargetGroupsOutput_NextMarker})
+var sDescribeTargetHealthInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetHealthInput, Members: &mDescribeTargetHealthInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetHealthInput})
+var sDescribeTargetHealthInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTargetHealthInput_TargetGroupArn})
+var sDescribeTargetHealthInput_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetDescriptions, Members: &m_TargetDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetHealthInput_Targets})
+var sDescribeTargetHealthInput_Include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Include", ID: &i_ListOfDescribeTargetHealthIncludeOptions, Members: &m_ListOfDescribeTargetHealthIncludeOptions, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetHealthInput_Include})
+var sDescribeTargetHealthOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTargetHealthOutput, Members: &mDescribeTargetHealthOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTargetHealthOutput})
+var sDescribeTargetHealthOutput_TargetHealthDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetHealthDescriptions", ID: &i_TargetHealthDescriptions, Members: &m_TargetHealthDescriptions, Type: smithy.ShapeTypeList, Ext: &eDescribeTargetHealthOutput_TargetHealthDescriptions})
+var sDescribeTrustStoreAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreAssociationsInput, Members: &mDescribeTrustStoreAssociationsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoreAssociationsInput})
+var sDescribeTrustStoreAssociationsInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreAssociationsInput_TrustStoreArn})
+var sDescribeTrustStoreAssociationsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreAssociationsInput_Marker})
+var sDescribeTrustStoreAssociationsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTrustStoreAssociationsInput_PageSize})
+var sDescribeTrustStoreAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreAssociationsOutput, Members: &mDescribeTrustStoreAssociationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoreAssociationsOutput})
+var sDescribeTrustStoreAssociationsOutput_TrustStoreAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreAssociations", ID: &i_TrustStoreAssociations, Members: &m_TrustStoreAssociations, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoreAssociationsOutput_TrustStoreAssociations})
+var sDescribeTrustStoreAssociationsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreAssociationsOutput_NextMarker})
+var sDescribeTrustStoreRevocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreRevocationsInput, Members: &mDescribeTrustStoreRevocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoreRevocationsInput})
+var sDescribeTrustStoreRevocationsInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreRevocationsInput_TrustStoreArn})
+var sDescribeTrustStoreRevocationsInput_RevocationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationIds", ID: &i_RevocationIds, Members: &m_RevocationIds, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoreRevocationsInput_RevocationIds})
+var sDescribeTrustStoreRevocationsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreRevocationsInput_Marker})
+var sDescribeTrustStoreRevocationsInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTrustStoreRevocationsInput_PageSize})
+var sDescribeTrustStoreRevocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoreRevocationsOutput, Members: &mDescribeTrustStoreRevocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoreRevocationsOutput})
+var sDescribeTrustStoreRevocationsOutput_TrustStoreRevocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreRevocations", ID: &i_DescribeTrustStoreRevocationResponse, Members: &m_DescribeTrustStoreRevocationResponse, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoreRevocationsOutput_TrustStoreRevocations})
+var sDescribeTrustStoreRevocationsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoreRevocationsOutput_NextMarker})
+var sDescribeTrustStoresInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoresInput, Members: &mDescribeTrustStoresInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoresInput})
+var sDescribeTrustStoresInput_TrustStoreArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArns", ID: &i_TrustStoreArns, Members: &m_TrustStoreArns, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoresInput_TrustStoreArns})
+var sDescribeTrustStoresInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_TrustStoreNames, Members: &m_TrustStoreNames, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoresInput_Names})
+var sDescribeTrustStoresInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoresInput_Marker})
+var sDescribeTrustStoresInput_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTrustStoresInput_PageSize})
+var sDescribeTrustStoresOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustStoresOutput, Members: &mDescribeTrustStoresOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustStoresOutput})
+var sDescribeTrustStoresOutput_TrustStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStores", ID: &i_TrustStores, Members: &m_TrustStores, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustStoresOutput_TrustStores})
+var sDescribeTrustStoresOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustStoresOutput_NextMarker})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Members: &mGetResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyInput})
+var sGetResourcePolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyInput_ResourceArn})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyOutput})
+var sGetResourcePolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyOutput_Policy})
+var sGetTrustStoreCaCertificatesBundleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCaCertificatesBundleInput, Members: &mGetTrustStoreCaCertificatesBundleInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrustStoreCaCertificatesBundleInput})
+var sGetTrustStoreCaCertificatesBundleInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eGetTrustStoreCaCertificatesBundleInput_TrustStoreArn})
+var sGetTrustStoreCaCertificatesBundleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCaCertificatesBundleOutput, Members: &mGetTrustStoreCaCertificatesBundleOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrustStoreCaCertificatesBundleOutput})
+var sGetTrustStoreCaCertificatesBundleOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eGetTrustStoreCaCertificatesBundleOutput_Location})
+var sGetTrustStoreRevocationContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreRevocationContentInput, Members: &mGetTrustStoreRevocationContentInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrustStoreRevocationContentInput})
+var sGetTrustStoreRevocationContentInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eGetTrustStoreRevocationContentInput_TrustStoreArn})
+var sGetTrustStoreRevocationContentInput_RevocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationId", ID: &i_RevocationId, Type: smithy.ShapeTypeLong, Ext: &eGetTrustStoreRevocationContentInput_RevocationId})
+var sGetTrustStoreRevocationContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreRevocationContentOutput, Members: &mGetTrustStoreRevocationContentOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrustStoreRevocationContentOutput})
+var sGetTrustStoreRevocationContentOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eGetTrustStoreRevocationContentOutput_Location})
+var sModifyCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyCapacityReservationInput, Members: &mModifyCapacityReservationInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyCapacityReservationInput})
+var sModifyCapacityReservationInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eModifyCapacityReservationInput_LoadBalancerArn})
+var sModifyCapacityReservationInput_MinimumLoadBalancerCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumLoadBalancerCapacity", ID: &iMinimumLoadBalancerCapacity, Members: &mMinimumLoadBalancerCapacity, Type: smithy.ShapeTypeStructure, Ext: &eModifyCapacityReservationInput_MinimumLoadBalancerCapacity})
+var sModifyCapacityReservationInput_ResetCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetCapacityReservation", ID: &i_ResetCapacityReservation, Type: smithy.ShapeTypeBoolean, Ext: &eModifyCapacityReservationInput_ResetCapacityReservation})
+var sModifyCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyCapacityReservationOutput, Members: &mModifyCapacityReservationOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyCapacityReservationOutput})
+var sModifyCapacityReservationOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastModifiedTime, Type: smithy.ShapeTypeTimestamp, Ext: &eModifyCapacityReservationOutput_LastModifiedTime})
+var sModifyCapacityReservationOutput_DecreaseRequestsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecreaseRequestsRemaining", ID: &i_DecreaseRequestsRemaining, Type: smithy.ShapeTypeInteger, Ext: &eModifyCapacityReservationOutput_DecreaseRequestsRemaining})
+var sModifyCapacityReservationOutput_MinimumLoadBalancerCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumLoadBalancerCapacity", ID: &iMinimumLoadBalancerCapacity, Members: &mMinimumLoadBalancerCapacity, Type: smithy.ShapeTypeStructure, Ext: &eModifyCapacityReservationOutput_MinimumLoadBalancerCapacity})
+var sModifyCapacityReservationOutput_CapacityReservationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservationState", ID: &i_ZonalCapacityReservationStates, Members: &m_ZonalCapacityReservationStates, Type: smithy.ShapeTypeList, Ext: &eModifyCapacityReservationOutput_CapacityReservationState})
+var sModifyIpPoolsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyIpPoolsInput, Members: &mModifyIpPoolsInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyIpPoolsInput})
+var sModifyIpPoolsInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eModifyIpPoolsInput_LoadBalancerArn})
+var sModifyIpPoolsInput_IpamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpamPools", ID: &iIpamPools, Members: &mIpamPools, Type: smithy.ShapeTypeStructure, Ext: &eModifyIpPoolsInput_IpamPools})
+var sModifyIpPoolsInput_RemoveIpamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveIpamPools", ID: &i_RemoveIpamPools, Members: &m_RemoveIpamPools, Type: smithy.ShapeTypeList, Ext: &eModifyIpPoolsInput_RemoveIpamPools})
+var sModifyIpPoolsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyIpPoolsOutput, Members: &mModifyIpPoolsOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyIpPoolsOutput})
+var sModifyIpPoolsOutput_IpamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpamPools", ID: &iIpamPools, Members: &mIpamPools, Type: smithy.ShapeTypeStructure, Ext: &eModifyIpPoolsOutput_IpamPools})
+var sModifyListenerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListenerAttributesInput, Members: &mModifyListenerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyListenerAttributesInput})
+var sModifyListenerAttributesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eModifyListenerAttributesInput_ListenerArn})
+var sModifyListenerAttributesInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ListenerAttributes, Members: &m_ListenerAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyListenerAttributesInput_Attributes})
+var sModifyListenerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListenerAttributesOutput, Members: &mModifyListenerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyListenerAttributesOutput})
+var sModifyListenerAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ListenerAttributes, Members: &m_ListenerAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyListenerAttributesOutput_Attributes})
+var sModifyListenerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListenerInput, Members: &mModifyListenerInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyListenerInput})
+var sModifyListenerInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eModifyListenerInput_ListenerArn})
+var sModifyListenerInput_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eModifyListenerInput_Port})
+var sModifyListenerInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eModifyListenerInput_Protocol})
+var sModifyListenerInput_SslPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SslPolicy", ID: &i_SslPolicyName, Type: smithy.ShapeTypeString, Ext: &eModifyListenerInput_SslPolicy})
+var sModifyListenerInput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eModifyListenerInput_Certificates})
+var sModifyListenerInput_DefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultActions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eModifyListenerInput_DefaultActions})
+var sModifyListenerInput_AlpnPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlpnPolicy", ID: &i_AlpnPolicyName, Members: &m_AlpnPolicyName, Type: smithy.ShapeTypeList, Ext: &eModifyListenerInput_AlpnPolicy})
+var sModifyListenerInput_MutualAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualAuthentication", ID: &iMutualAuthenticationAttributes, Members: &mMutualAuthenticationAttributes, Type: smithy.ShapeTypeStructure, Ext: &eModifyListenerInput_MutualAuthentication})
+var sModifyListenerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyListenerOutput, Members: &mModifyListenerOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyListenerOutput})
+var sModifyListenerOutput_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList, Ext: &eModifyListenerOutput_Listeners})
+var sModifyLoadBalancerAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributesInput, Members: &mModifyLoadBalancerAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesInput})
+var sModifyLoadBalancerAttributesInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eModifyLoadBalancerAttributesInput_LoadBalancerArn})
+var sModifyLoadBalancerAttributesInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_LoadBalancerAttributes, Members: &m_LoadBalancerAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyLoadBalancerAttributesInput_Attributes})
+var sModifyLoadBalancerAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLoadBalancerAttributesOutput, Members: &mModifyLoadBalancerAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyLoadBalancerAttributesOutput})
+var sModifyLoadBalancerAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_LoadBalancerAttributes, Members: &m_LoadBalancerAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyLoadBalancerAttributesOutput_Attributes})
+var sModifyRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyRuleInput, Members: &mModifyRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyRuleInput})
+var sModifyRuleInput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eModifyRuleInput_RuleArn})
+var sModifyRuleInput_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_RuleConditionList, Members: &m_RuleConditionList, Type: smithy.ShapeTypeList, Ext: &eModifyRuleInput_Conditions})
+var sModifyRuleInput_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eModifyRuleInput_Actions})
+var sModifyRuleInput_Transforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transforms", ID: &i_RuleTransformList, Members: &m_RuleTransformList, Type: smithy.ShapeTypeList, Ext: &eModifyRuleInput_Transforms})
+var sModifyRuleInput_ResetTransforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetTransforms", ID: &i_ResetTransforms, Type: smithy.ShapeTypeBoolean, Ext: &eModifyRuleInput_ResetTransforms})
+var sModifyRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyRuleOutput, Members: &mModifyRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyRuleOutput})
+var sModifyRuleOutput_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eModifyRuleOutput_Rules})
+var sModifyTargetGroupAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroupAttributesInput, Members: &mModifyTargetGroupAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTargetGroupAttributesInput})
+var sModifyTargetGroupAttributesInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eModifyTargetGroupAttributesInput_TargetGroupArn})
+var sModifyTargetGroupAttributesInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TargetGroupAttributes, Members: &m_TargetGroupAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyTargetGroupAttributesInput_Attributes})
+var sModifyTargetGroupAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroupAttributesOutput, Members: &mModifyTargetGroupAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTargetGroupAttributesOutput})
+var sModifyTargetGroupAttributesOutput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TargetGroupAttributes, Members: &m_TargetGroupAttributes, Type: smithy.ShapeTypeList, Ext: &eModifyTargetGroupAttributesOutput_Attributes})
+var sModifyTargetGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroupInput, Members: &mModifyTargetGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTargetGroupInput})
+var sModifyTargetGroupInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eModifyTargetGroupInput_TargetGroupArn})
+var sModifyTargetGroupInput_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iProtocolEnum, Members: &mProtocolEnum, Type: smithy.ShapeTypeEnum, Ext: &eModifyTargetGroupInput_HealthCheckProtocol})
+var sModifyTargetGroupInput_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeString, Ext: &eModifyTargetGroupInput_HealthCheckPort})
+var sModifyTargetGroupInput_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eModifyTargetGroupInput_HealthCheckPath})
+var sModifyTargetGroupInput_HealthCheckEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckEnabled", ID: &i_HealthCheckEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eModifyTargetGroupInput_HealthCheckEnabled})
+var sModifyTargetGroupInput_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger, Ext: &eModifyTargetGroupInput_HealthCheckIntervalSeconds})
+var sModifyTargetGroupInput_HealthCheckTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckTimeoutSeconds", ID: &i_HealthCheckTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eModifyTargetGroupInput_HealthCheckTimeoutSeconds})
+var sModifyTargetGroupInput_HealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eModifyTargetGroupInput_HealthyThresholdCount})
+var sModifyTargetGroupInput_UnhealthyThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnhealthyThresholdCount", ID: &i_HealthCheckThresholdCount, Type: smithy.ShapeTypeInteger, Ext: &eModifyTargetGroupInput_UnhealthyThresholdCount})
+var sModifyTargetGroupInput_Matcher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Matcher", ID: &iMatcher, Members: &mMatcher, Type: smithy.ShapeTypeStructure, Ext: &eModifyTargetGroupInput_Matcher})
+var sModifyTargetGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTargetGroupOutput, Members: &mModifyTargetGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTargetGroupOutput})
+var sModifyTargetGroupOutput_TargetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroups", ID: &i_TargetGroups, Members: &m_TargetGroups, Type: smithy.ShapeTypeList, Ext: &eModifyTargetGroupOutput_TargetGroups})
+var sModifyTrustStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTrustStoreInput, Members: &mModifyTrustStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTrustStoreInput})
+var sModifyTrustStoreInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eModifyTrustStoreInput_TrustStoreArn})
+var sModifyTrustStoreInput_CaCertificatesBundleS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eModifyTrustStoreInput_CaCertificatesBundleS3Bucket})
+var sModifyTrustStoreInput_CaCertificatesBundleS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eModifyTrustStoreInput_CaCertificatesBundleS3Key})
+var sModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaCertificatesBundleS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString, Ext: &eModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion})
+var sModifyTrustStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyTrustStoreOutput, Members: &mModifyTrustStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyTrustStoreOutput})
+var sModifyTrustStoreOutput_TrustStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStores", ID: &i_TrustStores, Members: &m_TrustStores, Type: smithy.ShapeTypeList, Ext: &eModifyTrustStoreOutput_TrustStores})
+var sRegisterTargetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTargetsInput, Members: &mRegisterTargetsInput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterTargetsInput})
+var sRegisterTargetsInput_TargetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetGroupArn", ID: &i_TargetGroupArn, Type: smithy.ShapeTypeString, Ext: &eRegisterTargetsInput_TargetGroupArn})
+var sRegisterTargetsInput_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetDescriptions, Members: &m_TargetDescriptions, Type: smithy.ShapeTypeList, Ext: &eRegisterTargetsInput_Targets})
+var sRegisterTargetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTargetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterTargetsOutput})
+var sRemoveListenerCertificatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveListenerCertificatesInput, Members: &mRemoveListenerCertificatesInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveListenerCertificatesInput})
+var sRemoveListenerCertificatesInput_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_ListenerArn, Type: smithy.ShapeTypeString, Ext: &eRemoveListenerCertificatesInput_ListenerArn})
+var sRemoveListenerCertificatesInput_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList, Ext: &eRemoveListenerCertificatesInput_Certificates})
+var sRemoveListenerCertificatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveListenerCertificatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveListenerCertificatesOutput})
+var sRemoveTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsInput, Members: &mRemoveTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsInput})
+var sRemoveTagsInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsInput_ResourceArns})
+var sRemoveTagsInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsInput_TagKeys})
+var sRemoveTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsOutput})
+var sRemoveTrustStoreRevocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTrustStoreRevocationsInput, Members: &mRemoveTrustStoreRevocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTrustStoreRevocationsInput})
+var sRemoveTrustStoreRevocationsInput_TrustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStoreArn", ID: &i_TrustStoreArn, Type: smithy.ShapeTypeString, Ext: &eRemoveTrustStoreRevocationsInput_TrustStoreArn})
+var sRemoveTrustStoreRevocationsInput_RevocationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationIds", ID: &i_RevocationIds, Members: &m_RevocationIds, Type: smithy.ShapeTypeList, Ext: &eRemoveTrustStoreRevocationsInput_RevocationIds})
+var sRemoveTrustStoreRevocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTrustStoreRevocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTrustStoreRevocationsOutput})
+var sSetIpAddressTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIpAddressTypeInput, Members: &mSetIpAddressTypeInput, Type: smithy.ShapeTypeStructure, Ext: &eSetIpAddressTypeInput})
+var sSetIpAddressTypeInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eSetIpAddressTypeInput_LoadBalancerArn})
+var sSetIpAddressTypeInput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eSetIpAddressTypeInput_IpAddressType})
+var sSetIpAddressTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIpAddressTypeOutput, Members: &mSetIpAddressTypeOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetIpAddressTypeOutput})
+var sSetIpAddressTypeOutput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eSetIpAddressTypeOutput_IpAddressType})
+var sSetRulePrioritiesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetRulePrioritiesInput, Members: &mSetRulePrioritiesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetRulePrioritiesInput})
+var sSetRulePrioritiesInput_RulePriorities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulePriorities", ID: &i_RulePriorityList, Members: &m_RulePriorityList, Type: smithy.ShapeTypeList, Ext: &eSetRulePrioritiesInput_RulePriorities})
+var sSetRulePrioritiesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetRulePrioritiesOutput, Members: &mSetRulePrioritiesOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetRulePrioritiesOutput})
+var sSetRulePrioritiesOutput_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eSetRulePrioritiesOutput_Rules})
+var sSetSecurityGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSecurityGroupsInput, Members: &mSetSecurityGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eSetSecurityGroupsInput})
+var sSetSecurityGroupsInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eSetSecurityGroupsInput_LoadBalancerArn})
+var sSetSecurityGroupsInput_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eSetSecurityGroupsInput_SecurityGroups})
+var sSetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", ID: &iEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Members: &mEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Type: smithy.ShapeTypeEnum, Ext: &eSetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic})
+var sSetSecurityGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSecurityGroupsOutput, Members: &mSetSecurityGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetSecurityGroupsOutput})
+var sSetSecurityGroupsOutput_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eSetSecurityGroupsOutput_SecurityGroupIds})
+var sSetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", ID: &iEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Members: &mEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, Type: smithy.ShapeTypeEnum, Ext: &eSetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic})
+var sSetSubnetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSubnetsInput, Members: &mSetSubnetsInput, Type: smithy.ShapeTypeStructure, Ext: &eSetSubnetsInput})
+var sSetSubnetsInput_LoadBalancerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancerArn", ID: &i_LoadBalancerArn, Type: smithy.ShapeTypeString, Ext: &eSetSubnetsInput_LoadBalancerArn})
+var sSetSubnetsInput_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList, Ext: &eSetSubnetsInput_Subnets})
+var sSetSubnetsInput_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eSetSubnetsInput_SubnetMappings})
+var sSetSubnetsInput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eSetSubnetsInput_IpAddressType})
+var sSetSubnetsInput_EnablePrefixForIpv6SourceNat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePrefixForIpv6SourceNat", ID: &iEnablePrefixForIpv6SourceNatEnum, Members: &mEnablePrefixForIpv6SourceNatEnum, Type: smithy.ShapeTypeEnum, Ext: &eSetSubnetsInput_EnablePrefixForIpv6SourceNat})
+var sSetSubnetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSubnetsOutput, Members: &mSetSubnetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSetSubnetsOutput})
+var sSetSubnetsOutput_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eSetSubnetsOutput_AvailabilityZones})
+var sSetSubnetsOutput_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eSetSubnetsOutput_IpAddressType})
+var sSetSubnetsOutput_EnablePrefixForIpv6SourceNat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePrefixForIpv6SourceNat", ID: &iEnablePrefixForIpv6SourceNatEnum, Members: &mEnablePrefixForIpv6SourceNatEnum, Type: smithy.ShapeTypeEnum, Ext: &eSetSubnetsOutput_EnablePrefixForIpv6SourceNat})
+
+var AddListenerCertificates = &sAddListenerCertificates
+
+var AddTags = &sAddTags
+
+var AddTrustStoreRevocations = &sAddTrustStoreRevocations
+
+var CreateListener = &sCreateListener
+
+var CreateLoadBalancer = &sCreateLoadBalancer
+
+var CreateRule = &sCreateRule
+
+var CreateTargetGroup = &sCreateTargetGroup
+
+var CreateTrustStore = &sCreateTrustStore
+
+var DeleteListener = &sDeleteListener
+
+var DeleteLoadBalancer = &sDeleteLoadBalancer
+
+var DeleteRule = &sDeleteRule
+
+var DeleteSharedTrustStoreAssociation = &sDeleteSharedTrustStoreAssociation
+
+var DeleteTargetGroup = &sDeleteTargetGroup
+
+var DeleteTrustStore = &sDeleteTrustStore
+
+var DeregisterTargets = &sDeregisterTargets
+
+var DescribeAccountLimits = &sDescribeAccountLimits
+
+var DescribeCapacityReservation = &sDescribeCapacityReservation
+
+var DescribeListenerAttributes = &sDescribeListenerAttributes
+
+var DescribeListenerCertificates = &sDescribeListenerCertificates
+
+var DescribeListeners = &sDescribeListeners
+
+var DescribeLoadBalancerAttributes = &sDescribeLoadBalancerAttributes
+
+var DescribeLoadBalancers = &sDescribeLoadBalancers
+
+var DescribeRules = &sDescribeRules
+
+var DescribeSSLPolicies = &sDescribeSSLPolicies
+
+var DescribeTags = &sDescribeTags
+
+var DescribeTargetGroupAttributes = &sDescribeTargetGroupAttributes
+
+var DescribeTargetGroups = &sDescribeTargetGroups
+
+var DescribeTargetHealth = &sDescribeTargetHealth
+
+var DescribeTrustStoreAssociations = &sDescribeTrustStoreAssociations
+
+var DescribeTrustStoreRevocations = &sDescribeTrustStoreRevocations
+
+var DescribeTrustStores = &sDescribeTrustStores
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetTrustStoreCaCertificatesBundle = &sGetTrustStoreCaCertificatesBundle
+
+var GetTrustStoreRevocationContent = &sGetTrustStoreRevocationContent
+
+var ModifyCapacityReservation = &sModifyCapacityReservation
+
+var ModifyIpPools = &sModifyIpPools
+
+var ModifyListener = &sModifyListener
+
+var ModifyListenerAttributes = &sModifyListenerAttributes
+
+var ModifyLoadBalancerAttributes = &sModifyLoadBalancerAttributes
+
+var ModifyRule = &sModifyRule
+
+var ModifyTargetGroup = &sModifyTargetGroup
+
+var ModifyTargetGroupAttributes = &sModifyTargetGroupAttributes
+
+var ModifyTrustStore = &sModifyTrustStore
+
+var RegisterTargets = &sRegisterTargets
+
+var RemoveListenerCertificates = &sRemoveListenerCertificates
+
+var RemoveTags = &sRemoveTags
+
+var RemoveTrustStoreRevocations = &sRemoveTrustStoreRevocations
+
+var SetIpAddressType = &sSetIpAddressType
+
+var SetRulePriorities = &sSetRulePriorities
+
+var SetSecurityGroups = &sSetSecurityGroups
+
+var SetSubnets = &sSetSubnets
+
+var _ElasticLoadBalancing_v10 = &s_ElasticLoadBalancing_v10
+
+var Action = &sAction
+var Action_Type = &sAction_Type
+var Action_TargetGroupArn = &sAction_TargetGroupArn
+var Action_AuthenticateOidcConfig = &sAction_AuthenticateOidcConfig
+var Action_AuthenticateCognitoConfig = &sAction_AuthenticateCognitoConfig
+var Action_Order = &sAction_Order
+var Action_RedirectConfig = &sAction_RedirectConfig
+var Action_FixedResponseConfig = &sAction_FixedResponseConfig
+var Action_ForwardConfig = &sAction_ForwardConfig
+var Action_JwtValidationConfig = &sAction_JwtValidationConfig
+
+var _ActionOrder = &s_ActionOrder
+
+var _Actions = &s_Actions
+var _Actions_member = &s_Actions_member
+
+var ActionTypeEnum = &sActionTypeEnum
+var ActionTypeEnum_FORWARD = &sActionTypeEnum_FORWARD
+var ActionTypeEnum_AUTHENTICATE_OIDC = &sActionTypeEnum_AUTHENTICATE_OIDC
+var ActionTypeEnum_AUTHENTICATE_COGNITO = &sActionTypeEnum_AUTHENTICATE_COGNITO
+var ActionTypeEnum_REDIRECT = &sActionTypeEnum_REDIRECT
+var ActionTypeEnum_FIXED_RESPONSE = &sActionTypeEnum_FIXED_RESPONSE
+var ActionTypeEnum_JWT_VALIDATION = &sActionTypeEnum_JWT_VALIDATION
+
+var AdministrativeOverride = &sAdministrativeOverride
+var AdministrativeOverride_State = &sAdministrativeOverride_State
+var AdministrativeOverride_Reason = &sAdministrativeOverride_Reason
+var AdministrativeOverride_Description = &sAdministrativeOverride_Description
+
+var AdvertiseTrustStoreCaNamesEnum = &sAdvertiseTrustStoreCaNamesEnum
+var AdvertiseTrustStoreCaNamesEnum_on = &sAdvertiseTrustStoreCaNamesEnum_on
+var AdvertiseTrustStoreCaNamesEnum_off = &sAdvertiseTrustStoreCaNamesEnum_off
+
+var _AllocationId = &s_AllocationId
+
+var AllocationIdNotFoundException = &sAllocationIdNotFoundException
+var AllocationIdNotFoundException_Message = &sAllocationIdNotFoundException_Message
+
+var _AlpnPolicyName = &s_AlpnPolicyName
+var _AlpnPolicyName_member = &s_AlpnPolicyName_member
+
+var ALPNPolicyNotSupportedException = &sALPNPolicyNotSupportedException
+var ALPNPolicyNotSupportedException_Message = &sALPNPolicyNotSupportedException_Message
+
+var _AlpnPolicyValue = &s_AlpnPolicyValue
+
+var AnomalyDetection = &sAnomalyDetection
+var AnomalyDetection_Result = &sAnomalyDetection_Result
+var AnomalyDetection_MitigationInEffect = &sAnomalyDetection_MitigationInEffect
+
+var AnomalyResultEnum = &sAnomalyResultEnum
+var AnomalyResultEnum_ANOMALOUS = &sAnomalyResultEnum_ANOMALOUS
+var AnomalyResultEnum_NORMAL = &sAnomalyResultEnum_NORMAL
+
+var _AuthenticateCognitoActionAuthenticationRequestExtraParams = &s_AuthenticateCognitoActionAuthenticationRequestExtraParams
+var _AuthenticateCognitoActionAuthenticationRequestExtraParams_key = &s_AuthenticateCognitoActionAuthenticationRequestExtraParams_key
+var _AuthenticateCognitoActionAuthenticationRequestExtraParams_value = &s_AuthenticateCognitoActionAuthenticationRequestExtraParams_value
+
+var _AuthenticateCognitoActionAuthenticationRequestParamName = &s_AuthenticateCognitoActionAuthenticationRequestParamName
+
+var _AuthenticateCognitoActionAuthenticationRequestParamValue = &s_AuthenticateCognitoActionAuthenticationRequestParamValue
+
+var AuthenticateCognitoActionConditionalBehaviorEnum = &sAuthenticateCognitoActionConditionalBehaviorEnum
+var AuthenticateCognitoActionConditionalBehaviorEnum_DENY = &sAuthenticateCognitoActionConditionalBehaviorEnum_DENY
+var AuthenticateCognitoActionConditionalBehaviorEnum_ALLOW = &sAuthenticateCognitoActionConditionalBehaviorEnum_ALLOW
+var AuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE = &sAuthenticateCognitoActionConditionalBehaviorEnum_AUTHENTICATE
+
+var AuthenticateCognitoActionConfig = &sAuthenticateCognitoActionConfig
+var AuthenticateCognitoActionConfig_UserPoolArn = &sAuthenticateCognitoActionConfig_UserPoolArn
+var AuthenticateCognitoActionConfig_UserPoolClientId = &sAuthenticateCognitoActionConfig_UserPoolClientId
+var AuthenticateCognitoActionConfig_UserPoolDomain = &sAuthenticateCognitoActionConfig_UserPoolDomain
+var AuthenticateCognitoActionConfig_SessionCookieName = &sAuthenticateCognitoActionConfig_SessionCookieName
+var AuthenticateCognitoActionConfig_Scope = &sAuthenticateCognitoActionConfig_Scope
+var AuthenticateCognitoActionConfig_SessionTimeout = &sAuthenticateCognitoActionConfig_SessionTimeout
+var AuthenticateCognitoActionConfig_AuthenticationRequestExtraParams = &sAuthenticateCognitoActionConfig_AuthenticationRequestExtraParams
+var AuthenticateCognitoActionConfig_OnUnauthenticatedRequest = &sAuthenticateCognitoActionConfig_OnUnauthenticatedRequest
+
+var _AuthenticateCognitoActionScope = &s_AuthenticateCognitoActionScope
+
+var _AuthenticateCognitoActionSessionCookieName = &s_AuthenticateCognitoActionSessionCookieName
+
+var _AuthenticateCognitoActionSessionTimeout = &s_AuthenticateCognitoActionSessionTimeout
+
+var _AuthenticateCognitoActionUserPoolArn = &s_AuthenticateCognitoActionUserPoolArn
+
+var _AuthenticateCognitoActionUserPoolClientId = &s_AuthenticateCognitoActionUserPoolClientId
+
+var _AuthenticateCognitoActionUserPoolDomain = &s_AuthenticateCognitoActionUserPoolDomain
+
+var _AuthenticateOidcActionAuthenticationRequestExtraParams = &s_AuthenticateOidcActionAuthenticationRequestExtraParams
+var _AuthenticateOidcActionAuthenticationRequestExtraParams_key = &s_AuthenticateOidcActionAuthenticationRequestExtraParams_key
+var _AuthenticateOidcActionAuthenticationRequestExtraParams_value = &s_AuthenticateOidcActionAuthenticationRequestExtraParams_value
+
+var _AuthenticateOidcActionAuthenticationRequestParamName = &s_AuthenticateOidcActionAuthenticationRequestParamName
+
+var _AuthenticateOidcActionAuthenticationRequestParamValue = &s_AuthenticateOidcActionAuthenticationRequestParamValue
+
+var _AuthenticateOidcActionAuthorizationEndpoint = &s_AuthenticateOidcActionAuthorizationEndpoint
+
+var _AuthenticateOidcActionClientId = &s_AuthenticateOidcActionClientId
+
+var _AuthenticateOidcActionClientSecret = &s_AuthenticateOidcActionClientSecret
+
+var AuthenticateOidcActionConditionalBehaviorEnum = &sAuthenticateOidcActionConditionalBehaviorEnum
+var AuthenticateOidcActionConditionalBehaviorEnum_DENY = &sAuthenticateOidcActionConditionalBehaviorEnum_DENY
+var AuthenticateOidcActionConditionalBehaviorEnum_ALLOW = &sAuthenticateOidcActionConditionalBehaviorEnum_ALLOW
+var AuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE = &sAuthenticateOidcActionConditionalBehaviorEnum_AUTHENTICATE
+
+var AuthenticateOidcActionConfig = &sAuthenticateOidcActionConfig
+var AuthenticateOidcActionConfig_Issuer = &sAuthenticateOidcActionConfig_Issuer
+var AuthenticateOidcActionConfig_AuthorizationEndpoint = &sAuthenticateOidcActionConfig_AuthorizationEndpoint
+var AuthenticateOidcActionConfig_TokenEndpoint = &sAuthenticateOidcActionConfig_TokenEndpoint
+var AuthenticateOidcActionConfig_UserInfoEndpoint = &sAuthenticateOidcActionConfig_UserInfoEndpoint
+var AuthenticateOidcActionConfig_ClientId = &sAuthenticateOidcActionConfig_ClientId
+var AuthenticateOidcActionConfig_ClientSecret = &sAuthenticateOidcActionConfig_ClientSecret
+var AuthenticateOidcActionConfig_SessionCookieName = &sAuthenticateOidcActionConfig_SessionCookieName
+var AuthenticateOidcActionConfig_Scope = &sAuthenticateOidcActionConfig_Scope
+var AuthenticateOidcActionConfig_SessionTimeout = &sAuthenticateOidcActionConfig_SessionTimeout
+var AuthenticateOidcActionConfig_AuthenticationRequestExtraParams = &sAuthenticateOidcActionConfig_AuthenticationRequestExtraParams
+var AuthenticateOidcActionConfig_OnUnauthenticatedRequest = &sAuthenticateOidcActionConfig_OnUnauthenticatedRequest
+var AuthenticateOidcActionConfig_UseExistingClientSecret = &sAuthenticateOidcActionConfig_UseExistingClientSecret
+
+var _AuthenticateOidcActionIssuer = &s_AuthenticateOidcActionIssuer
+
+var _AuthenticateOidcActionScope = &s_AuthenticateOidcActionScope
+
+var _AuthenticateOidcActionSessionCookieName = &s_AuthenticateOidcActionSessionCookieName
+
+var _AuthenticateOidcActionSessionTimeout = &s_AuthenticateOidcActionSessionTimeout
+
+var _AuthenticateOidcActionTokenEndpoint = &s_AuthenticateOidcActionTokenEndpoint
+
+var _AuthenticateOidcActionUseExistingClientSecret = &s_AuthenticateOidcActionUseExistingClientSecret
+
+var _AuthenticateOidcActionUserInfoEndpoint = &s_AuthenticateOidcActionUserInfoEndpoint
+
+var AvailabilityZone = &sAvailabilityZone
+var AvailabilityZone_ZoneName = &sAvailabilityZone_ZoneName
+var AvailabilityZone_SubnetId = &sAvailabilityZone_SubnetId
+var AvailabilityZone_OutpostId = &sAvailabilityZone_OutpostId
+var AvailabilityZone_LoadBalancerAddresses = &sAvailabilityZone_LoadBalancerAddresses
+var AvailabilityZone_SourceNatIpv6Prefixes = &sAvailabilityZone_SourceNatIpv6Prefixes
+
+var AvailabilityZoneNotSupportedException = &sAvailabilityZoneNotSupportedException
+var AvailabilityZoneNotSupportedException_Message = &sAvailabilityZoneNotSupportedException_Message
+
+var _AvailabilityZones = &s_AvailabilityZones
+var _AvailabilityZones_member = &s_AvailabilityZones_member
+
+var CaCertificatesBundleNotFoundException = &sCaCertificatesBundleNotFoundException
+var CaCertificatesBundleNotFoundException_Message = &sCaCertificatesBundleNotFoundException_Message
+
+var _CanonicalHostedZoneId = &s_CanonicalHostedZoneId
+
+var CapacityDecreaseRequestsLimitExceededException = &sCapacityDecreaseRequestsLimitExceededException
+var CapacityDecreaseRequestsLimitExceededException_Message = &sCapacityDecreaseRequestsLimitExceededException_Message
+
+var CapacityReservationPendingException = &sCapacityReservationPendingException
+var CapacityReservationPendingException_Message = &sCapacityReservationPendingException_Message
+
+var CapacityReservationStateEnum = &sCapacityReservationStateEnum
+var CapacityReservationStateEnum_PROVISIONED = &sCapacityReservationStateEnum_PROVISIONED
+var CapacityReservationStateEnum_PENDING = &sCapacityReservationStateEnum_PENDING
+var CapacityReservationStateEnum_REBALANCING = &sCapacityReservationStateEnum_REBALANCING
+var CapacityReservationStateEnum_FAILED = &sCapacityReservationStateEnum_FAILED
+
+var CapacityReservationStatus = &sCapacityReservationStatus
+var CapacityReservationStatus_Code = &sCapacityReservationStatus_Code
+var CapacityReservationStatus_Reason = &sCapacityReservationStatus_Reason
+
+var _CapacityUnits = &s_CapacityUnits
+
+var _CapacityUnitsDouble = &s_CapacityUnitsDouble
+
+var CapacityUnitsLimitExceededException = &sCapacityUnitsLimitExceededException
+var CapacityUnitsLimitExceededException_Message = &sCapacityUnitsLimitExceededException_Message
+
+var Certificate = &sCertificate
+var Certificate_CertificateArn = &sCertificate_CertificateArn
+var Certificate_IsDefault = &sCertificate_IsDefault
+
+var _CertificateArn = &s_CertificateArn
+
+var _CertificateList = &s_CertificateList
+var _CertificateList_member = &s_CertificateList_member
+
+var CertificateNotFoundException = &sCertificateNotFoundException
+var CertificateNotFoundException_Message = &sCertificateNotFoundException_Message
+
+var Cipher = &sCipher
+var Cipher_Name = &sCipher_Name
+var Cipher_Priority = &sCipher_Priority
+
+var _CipherName = &s_CipherName
+
+var _CipherPriority = &s_CipherPriority
+
+var _Ciphers = &s_Ciphers
+var _Ciphers_member = &s_Ciphers_member
+
+var _ConditionFieldName = &s_ConditionFieldName
+
+var _CreatedTime = &s_CreatedTime
+
+var _CustomerOwnedIpv4Pool = &s_CustomerOwnedIpv4Pool
+
+var _DecreaseRequestsRemaining = &s_DecreaseRequestsRemaining
+
+var _Default = &s_Default
+
+var DeleteAssociationSameAccountException = &sDeleteAssociationSameAccountException
+var DeleteAssociationSameAccountException_Message = &sDeleteAssociationSameAccountException_Message
+
+var DescribeTargetHealthInputIncludeEnum = &sDescribeTargetHealthInputIncludeEnum
+var DescribeTargetHealthInputIncludeEnum_ANOMALY = &sDescribeTargetHealthInputIncludeEnum_ANOMALY
+var DescribeTargetHealthInputIncludeEnum_ALL = &sDescribeTargetHealthInputIncludeEnum_ALL
+
+var DescribeTrustStoreRevocation = &sDescribeTrustStoreRevocation
+var DescribeTrustStoreRevocation_TrustStoreArn = &sDescribeTrustStoreRevocation_TrustStoreArn
+var DescribeTrustStoreRevocation_RevocationId = &sDescribeTrustStoreRevocation_RevocationId
+var DescribeTrustStoreRevocation_RevocationType = &sDescribeTrustStoreRevocation_RevocationType
+var DescribeTrustStoreRevocation_NumberOfRevokedEntries = &sDescribeTrustStoreRevocation_NumberOfRevokedEntries
+
+var _DescribeTrustStoreRevocationResponse = &s_DescribeTrustStoreRevocationResponse
+var _DescribeTrustStoreRevocationResponse_member = &s_DescribeTrustStoreRevocationResponse_member
+
+var _Description = &s_Description
+
+var _DNSName = &s_DNSName
+
+var DuplicateListenerException = &sDuplicateListenerException
+var DuplicateListenerException_Message = &sDuplicateListenerException_Message
+
+var DuplicateLoadBalancerNameException = &sDuplicateLoadBalancerNameException
+var DuplicateLoadBalancerNameException_Message = &sDuplicateLoadBalancerNameException_Message
+
+var DuplicateTagKeysException = &sDuplicateTagKeysException
+var DuplicateTagKeysException_Message = &sDuplicateTagKeysException_Message
+
+var DuplicateTargetGroupNameException = &sDuplicateTargetGroupNameException
+var DuplicateTargetGroupNameException_Message = &sDuplicateTargetGroupNameException_Message
+
+var DuplicateTrustStoreNameException = &sDuplicateTrustStoreNameException
+var DuplicateTrustStoreNameException_Message = &sDuplicateTrustStoreNameException_Message
+
+var EnablePrefixForIpv6SourceNatEnum = &sEnablePrefixForIpv6SourceNatEnum
+var EnablePrefixForIpv6SourceNatEnum_ON = &sEnablePrefixForIpv6SourceNatEnum_ON
+var EnablePrefixForIpv6SourceNatEnum_OFF = &sEnablePrefixForIpv6SourceNatEnum_OFF
+
+var _EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = &s_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+
+var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = &sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
+var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on = &sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_on
+var EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off = &sEnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum_off
+
+var _ErrorDescription = &s_ErrorDescription
+
+var FixedResponseActionConfig = &sFixedResponseActionConfig
+var FixedResponseActionConfig_MessageBody = &sFixedResponseActionConfig_MessageBody
+var FixedResponseActionConfig_StatusCode = &sFixedResponseActionConfig_StatusCode
+var FixedResponseActionConfig_ContentType = &sFixedResponseActionConfig_ContentType
+
+var _FixedResponseActionContentType = &s_FixedResponseActionContentType
+
+var _FixedResponseActionMessage = &s_FixedResponseActionMessage
+
+var _FixedResponseActionStatusCode = &s_FixedResponseActionStatusCode
+
+var ForwardActionConfig = &sForwardActionConfig
+var ForwardActionConfig_TargetGroups = &sForwardActionConfig_TargetGroups
+var ForwardActionConfig_TargetGroupStickinessConfig = &sForwardActionConfig_TargetGroupStickinessConfig
+
+var _GrpcCode = &s_GrpcCode
+
+var _HealthCheckEnabled = &s_HealthCheckEnabled
+
+var _HealthCheckIntervalSeconds = &s_HealthCheckIntervalSeconds
+
+var _HealthCheckPort = &s_HealthCheckPort
+
+var _HealthCheckThresholdCount = &s_HealthCheckThresholdCount
+
+var _HealthCheckTimeoutSeconds = &s_HealthCheckTimeoutSeconds
+
+var HealthUnavailableException = &sHealthUnavailableException
+var HealthUnavailableException_Message = &sHealthUnavailableException_Message
+
+var HostHeaderConditionConfig = &sHostHeaderConditionConfig
+var HostHeaderConditionConfig_Values = &sHostHeaderConditionConfig_Values
+var HostHeaderConditionConfig_RegexValues = &sHostHeaderConditionConfig_RegexValues
+
+var HostHeaderRewriteConfig = &sHostHeaderRewriteConfig
+var HostHeaderRewriteConfig_Rewrites = &sHostHeaderRewriteConfig_Rewrites
+
+var _HttpCode = &s_HttpCode
+
+var HttpHeaderConditionConfig = &sHttpHeaderConditionConfig
+var HttpHeaderConditionConfig_HttpHeaderName = &sHttpHeaderConditionConfig_HttpHeaderName
+var HttpHeaderConditionConfig_Values = &sHttpHeaderConditionConfig_Values
+var HttpHeaderConditionConfig_RegexValues = &sHttpHeaderConditionConfig_RegexValues
+
+var _HttpHeaderConditionName = &s_HttpHeaderConditionName
+
+var HttpRequestMethodConditionConfig = &sHttpRequestMethodConditionConfig
+var HttpRequestMethodConditionConfig_Values = &sHttpRequestMethodConditionConfig_Values
+
+var _IgnoreClientCertificateExpiry = &s_IgnoreClientCertificateExpiry
+
+var IncompatibleProtocolsException = &sIncompatibleProtocolsException
+var IncompatibleProtocolsException_Message = &sIncompatibleProtocolsException_Message
+
+var InsufficientCapacityException = &sInsufficientCapacityException
+var InsufficientCapacityException_Message = &sInsufficientCapacityException_Message
+
+var InvalidCaCertificatesBundleException = &sInvalidCaCertificatesBundleException
+var InvalidCaCertificatesBundleException_Message = &sInvalidCaCertificatesBundleException_Message
+
+var InvalidConfigurationRequestException = &sInvalidConfigurationRequestException
+var InvalidConfigurationRequestException_Message = &sInvalidConfigurationRequestException_Message
+
+var InvalidLoadBalancerActionException = &sInvalidLoadBalancerActionException
+var InvalidLoadBalancerActionException_Message = &sInvalidLoadBalancerActionException_Message
+
+var InvalidRevocationContentException = &sInvalidRevocationContentException
+var InvalidRevocationContentException_Message = &sInvalidRevocationContentException_Message
+
+var InvalidSchemeException = &sInvalidSchemeException
+var InvalidSchemeException_Message = &sInvalidSchemeException_Message
+
+var InvalidSecurityGroupException = &sInvalidSecurityGroupException
+var InvalidSecurityGroupException_Message = &sInvalidSecurityGroupException_Message
+
+var InvalidSubnetException = &sInvalidSubnetException
+var InvalidSubnetException_Message = &sInvalidSubnetException_Message
+
+var InvalidTargetException = &sInvalidTargetException
+var InvalidTargetException_Message = &sInvalidTargetException_Message
+
+var _IpAddress = &s_IpAddress
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4 = &sIpAddressType_IPV4
+var IpAddressType_DUALSTACK = &sIpAddressType_DUALSTACK
+var IpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 = &sIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4
+
+var _IpamPoolId = &s_IpamPoolId
+
+var IpamPools = &sIpamPools
+var IpamPools_Ipv4IpamPoolId = &sIpamPools_Ipv4IpamPoolId
+
+var _IPv6Address = &s_IPv6Address
+
+var _IsDefault = &s_IsDefault
+
+var JwtValidationActionAdditionalClaim = &sJwtValidationActionAdditionalClaim
+var JwtValidationActionAdditionalClaim_Format = &sJwtValidationActionAdditionalClaim_Format
+var JwtValidationActionAdditionalClaim_Name = &sJwtValidationActionAdditionalClaim_Name
+var JwtValidationActionAdditionalClaim_Values = &sJwtValidationActionAdditionalClaim_Values
+
+var JwtValidationActionAdditionalClaimFormatEnum = &sJwtValidationActionAdditionalClaimFormatEnum
+var JwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING = &sJwtValidationActionAdditionalClaimFormatEnum_SINGLE_STRING
+var JwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY = &sJwtValidationActionAdditionalClaimFormatEnum_STRING_ARRAY
+var JwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES = &sJwtValidationActionAdditionalClaimFormatEnum_SPACE_SEPARATED_VALUES
+
+var _JwtValidationActionAdditionalClaimName = &s_JwtValidationActionAdditionalClaimName
+
+var _JwtValidationActionAdditionalClaims = &s_JwtValidationActionAdditionalClaims
+var _JwtValidationActionAdditionalClaims_member = &s_JwtValidationActionAdditionalClaims_member
+
+var _JwtValidationActionAdditionalClaimValue = &s_JwtValidationActionAdditionalClaimValue
+
+var _JwtValidationActionAdditionalClaimValues = &s_JwtValidationActionAdditionalClaimValues
+var _JwtValidationActionAdditionalClaimValues_member = &s_JwtValidationActionAdditionalClaimValues_member
+
+var JwtValidationActionConfig = &sJwtValidationActionConfig
+var JwtValidationActionConfig_JwksEndpoint = &sJwtValidationActionConfig_JwksEndpoint
+var JwtValidationActionConfig_Issuer = &sJwtValidationActionConfig_Issuer
+var JwtValidationActionConfig_AdditionalClaims = &sJwtValidationActionConfig_AdditionalClaims
+
+var _JwtValidationActionIssuer = &s_JwtValidationActionIssuer
+
+var _JwtValidationActionJwksEndpoint = &s_JwtValidationActionJwksEndpoint
+
+var _LastModifiedTime = &s_LastModifiedTime
+
+var Limit = &sLimit
+var Limit_Name = &sLimit_Name
+var Limit_Max = &sLimit_Max
+
+var _Limits = &s_Limits
+var _Limits_member = &s_Limits_member
+
+var Listener = &sListener
+var Listener_ListenerArn = &sListener_ListenerArn
+var Listener_LoadBalancerArn = &sListener_LoadBalancerArn
+var Listener_Port = &sListener_Port
+var Listener_Protocol = &sListener_Protocol
+var Listener_Certificates = &sListener_Certificates
+var Listener_SslPolicy = &sListener_SslPolicy
+var Listener_DefaultActions = &sListener_DefaultActions
+var Listener_AlpnPolicy = &sListener_AlpnPolicy
+var Listener_MutualAuthentication = &sListener_MutualAuthentication
+
+var _ListenerArn = &s_ListenerArn
+
+var _ListenerArns = &s_ListenerArns
+var _ListenerArns_member = &s_ListenerArns_member
+
+var ListenerAttribute = &sListenerAttribute
+var ListenerAttribute_Key = &sListenerAttribute_Key
+var ListenerAttribute_Value = &sListenerAttribute_Value
+
+var _ListenerAttributeKey = &s_ListenerAttributeKey
+
+var _ListenerAttributes = &s_ListenerAttributes
+var _ListenerAttributes_member = &s_ListenerAttributes_member
+
+var _ListenerAttributeValue = &s_ListenerAttributeValue
+
+var ListenerNotFoundException = &sListenerNotFoundException
+var ListenerNotFoundException_Message = &sListenerNotFoundException_Message
+
+var _Listeners = &s_Listeners
+var _Listeners_member = &s_Listeners_member
+
+var _ListOfDescribeTargetHealthIncludeOptions = &s_ListOfDescribeTargetHealthIncludeOptions
+var _ListOfDescribeTargetHealthIncludeOptions_member = &s_ListOfDescribeTargetHealthIncludeOptions_member
+
+var _ListOfString = &s_ListOfString
+var _ListOfString_member = &s_ListOfString_member
+
+var LoadBalancer = &sLoadBalancer
+var LoadBalancer_LoadBalancerArn = &sLoadBalancer_LoadBalancerArn
+var LoadBalancer_DNSName = &sLoadBalancer_DNSName
+var LoadBalancer_CanonicalHostedZoneId = &sLoadBalancer_CanonicalHostedZoneId
+var LoadBalancer_CreatedTime = &sLoadBalancer_CreatedTime
+var LoadBalancer_LoadBalancerName = &sLoadBalancer_LoadBalancerName
+var LoadBalancer_Scheme = &sLoadBalancer_Scheme
+var LoadBalancer_VpcId = &sLoadBalancer_VpcId
+var LoadBalancer_State = &sLoadBalancer_State
+var LoadBalancer_Type = &sLoadBalancer_Type
+var LoadBalancer_AvailabilityZones = &sLoadBalancer_AvailabilityZones
+var LoadBalancer_SecurityGroups = &sLoadBalancer_SecurityGroups
+var LoadBalancer_IpAddressType = &sLoadBalancer_IpAddressType
+var LoadBalancer_CustomerOwnedIpv4Pool = &sLoadBalancer_CustomerOwnedIpv4Pool
+var LoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = &sLoadBalancer_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+var LoadBalancer_EnablePrefixForIpv6SourceNat = &sLoadBalancer_EnablePrefixForIpv6SourceNat
+var LoadBalancer_IpamPools = &sLoadBalancer_IpamPools
+
+var LoadBalancerAddress = &sLoadBalancerAddress
+var LoadBalancerAddress_IpAddress = &sLoadBalancerAddress_IpAddress
+var LoadBalancerAddress_AllocationId = &sLoadBalancerAddress_AllocationId
+var LoadBalancerAddress_PrivateIPv4Address = &sLoadBalancerAddress_PrivateIPv4Address
+var LoadBalancerAddress_IPv6Address = &sLoadBalancerAddress_IPv6Address
+
+var _LoadBalancerAddresses = &s_LoadBalancerAddresses
+var _LoadBalancerAddresses_member = &s_LoadBalancerAddresses_member
+
+var _LoadBalancerArn = &s_LoadBalancerArn
+
+var _LoadBalancerArns = &s_LoadBalancerArns
+var _LoadBalancerArns_member = &s_LoadBalancerArns_member
+
+var LoadBalancerAttribute = &sLoadBalancerAttribute
+var LoadBalancerAttribute_Key = &sLoadBalancerAttribute_Key
+var LoadBalancerAttribute_Value = &sLoadBalancerAttribute_Value
+
+var _LoadBalancerAttributeKey = &s_LoadBalancerAttributeKey
+
+var _LoadBalancerAttributes = &s_LoadBalancerAttributes
+var _LoadBalancerAttributes_member = &s_LoadBalancerAttributes_member
+
+var _LoadBalancerAttributeValue = &s_LoadBalancerAttributeValue
+
+var _LoadBalancerName = &s_LoadBalancerName
+
+var _LoadBalancerNames = &s_LoadBalancerNames
+var _LoadBalancerNames_member = &s_LoadBalancerNames_member
+
+var LoadBalancerNotFoundException = &sLoadBalancerNotFoundException
+var LoadBalancerNotFoundException_Message = &sLoadBalancerNotFoundException_Message
+
+var _LoadBalancers = &s_LoadBalancers
+var _LoadBalancers_member = &s_LoadBalancers_member
+
+var LoadBalancerSchemeEnum = &sLoadBalancerSchemeEnum
+var LoadBalancerSchemeEnum_INTERNET_FACING = &sLoadBalancerSchemeEnum_INTERNET_FACING
+var LoadBalancerSchemeEnum_INTERNAL = &sLoadBalancerSchemeEnum_INTERNAL
+
+var LoadBalancerState = &sLoadBalancerState
+var LoadBalancerState_Code = &sLoadBalancerState_Code
+var LoadBalancerState_Reason = &sLoadBalancerState_Reason
+
+var LoadBalancerStateEnum = &sLoadBalancerStateEnum
+var LoadBalancerStateEnum_ACTIVE = &sLoadBalancerStateEnum_ACTIVE
+var LoadBalancerStateEnum_PROVISIONING = &sLoadBalancerStateEnum_PROVISIONING
+var LoadBalancerStateEnum_ACTIVE_IMPAIRED = &sLoadBalancerStateEnum_ACTIVE_IMPAIRED
+var LoadBalancerStateEnum_FAILED = &sLoadBalancerStateEnum_FAILED
+
+var LoadBalancerTypeEnum = &sLoadBalancerTypeEnum
+var LoadBalancerTypeEnum_APPLICATION = &sLoadBalancerTypeEnum_APPLICATION
+var LoadBalancerTypeEnum_NETWORK = &sLoadBalancerTypeEnum_NETWORK
+var LoadBalancerTypeEnum_GATEWAY = &sLoadBalancerTypeEnum_GATEWAY
+
+var _Location = &s_Location
+
+var _Marker = &s_Marker
+
+var Matcher = &sMatcher
+var Matcher_HttpCode = &sMatcher_HttpCode
+var Matcher_GrpcCode = &sMatcher_GrpcCode
+
+var _Max = &s_Max
+
+var MinimumLoadBalancerCapacity = &sMinimumLoadBalancerCapacity
+var MinimumLoadBalancerCapacity_CapacityUnits = &sMinimumLoadBalancerCapacity_CapacityUnits
+
+var MitigationInEffectEnum = &sMitigationInEffectEnum
+var MitigationInEffectEnum_YES = &sMitigationInEffectEnum_YES
+var MitigationInEffectEnum_NO = &sMitigationInEffectEnum_NO
+
+var _Mode = &s_Mode
+
+var MutualAuthenticationAttributes = &sMutualAuthenticationAttributes
+var MutualAuthenticationAttributes_Mode = &sMutualAuthenticationAttributes_Mode
+var MutualAuthenticationAttributes_TrustStoreArn = &sMutualAuthenticationAttributes_TrustStoreArn
+var MutualAuthenticationAttributes_IgnoreClientCertificateExpiry = &sMutualAuthenticationAttributes_IgnoreClientCertificateExpiry
+var MutualAuthenticationAttributes_TrustStoreAssociationStatus = &sMutualAuthenticationAttributes_TrustStoreAssociationStatus
+var MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames = &sMutualAuthenticationAttributes_AdvertiseTrustStoreCaNames
+
+var _Name = &s_Name
+
+var _NumberOfCaCertificates = &s_NumberOfCaCertificates
+
+var _NumberOfRevokedEntries = &s_NumberOfRevokedEntries
+
+var OperationNotPermittedException = &sOperationNotPermittedException
+var OperationNotPermittedException_Message = &sOperationNotPermittedException_Message
+
+var _OutpostId = &s_OutpostId
+
+var _PageSize = &s_PageSize
+
+var _Path = &s_Path
+
+var PathPatternConditionConfig = &sPathPatternConditionConfig
+var PathPatternConditionConfig_Values = &sPathPatternConditionConfig_Values
+var PathPatternConditionConfig_RegexValues = &sPathPatternConditionConfig_RegexValues
+
+var _Policy = &s_Policy
+
+var _Port = &s_Port
+
+var PriorityInUseException = &sPriorityInUseException
+var PriorityInUseException_Message = &sPriorityInUseException_Message
+
+var PriorRequestNotCompleteException = &sPriorRequestNotCompleteException
+var PriorRequestNotCompleteException_Message = &sPriorRequestNotCompleteException_Message
+
+var _PrivateIPv4Address = &s_PrivateIPv4Address
+
+var ProtocolEnum = &sProtocolEnum
+var ProtocolEnum_HTTP = &sProtocolEnum_HTTP
+var ProtocolEnum_HTTPS = &sProtocolEnum_HTTPS
+var ProtocolEnum_TCP = &sProtocolEnum_TCP
+var ProtocolEnum_TLS = &sProtocolEnum_TLS
+var ProtocolEnum_UDP = &sProtocolEnum_UDP
+var ProtocolEnum_TCP_UDP = &sProtocolEnum_TCP_UDP
+var ProtocolEnum_GENEVE = &sProtocolEnum_GENEVE
+var ProtocolEnum_QUIC = &sProtocolEnum_QUIC
+var ProtocolEnum_TCP_QUIC = &sProtocolEnum_TCP_QUIC
+
+var _ProtocolVersion = &s_ProtocolVersion
+
+var QueryStringConditionConfig = &sQueryStringConditionConfig
+var QueryStringConditionConfig_Values = &sQueryStringConditionConfig_Values
+
+var QueryStringKeyValuePair = &sQueryStringKeyValuePair
+var QueryStringKeyValuePair_Key = &sQueryStringKeyValuePair_Key
+var QueryStringKeyValuePair_Value = &sQueryStringKeyValuePair_Value
+
+var _QueryStringKeyValuePairList = &s_QueryStringKeyValuePairList
+var _QueryStringKeyValuePairList_member = &s_QueryStringKeyValuePairList_member
+
+var _QuicServerId = &s_QuicServerId
+
+var RedirectActionConfig = &sRedirectActionConfig
+var RedirectActionConfig_Protocol = &sRedirectActionConfig_Protocol
+var RedirectActionConfig_Port = &sRedirectActionConfig_Port
+var RedirectActionConfig_Host = &sRedirectActionConfig_Host
+var RedirectActionConfig_Path = &sRedirectActionConfig_Path
+var RedirectActionConfig_Query = &sRedirectActionConfig_Query
+var RedirectActionConfig_StatusCode = &sRedirectActionConfig_StatusCode
+
+var _RedirectActionHost = &s_RedirectActionHost
+
+var _RedirectActionPath = &s_RedirectActionPath
+
+var _RedirectActionPort = &s_RedirectActionPort
+
+var _RedirectActionProtocol = &s_RedirectActionProtocol
+
+var _RedirectActionQuery = &s_RedirectActionQuery
+
+var RedirectActionStatusCodeEnum = &sRedirectActionStatusCodeEnum
+var RedirectActionStatusCodeEnum_HTTP_301 = &sRedirectActionStatusCodeEnum_HTTP_301
+var RedirectActionStatusCodeEnum_HTTP_302 = &sRedirectActionStatusCodeEnum_HTTP_302
+
+var RemoveIpamPoolEnum = &sRemoveIpamPoolEnum
+var RemoveIpamPoolEnum_ipv4 = &sRemoveIpamPoolEnum_ipv4
+
+var _RemoveIpamPools = &s_RemoveIpamPools
+var _RemoveIpamPools_member = &s_RemoveIpamPools_member
+
+var _ResetCapacityReservation = &s_ResetCapacityReservation
+
+var _ResetTransforms = &s_ResetTransforms
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceArns = &s_ResourceArns
+var _ResourceArns_member = &s_ResourceArns_member
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RevocationContent = &sRevocationContent
+var RevocationContent_S3Bucket = &sRevocationContent_S3Bucket
+var RevocationContent_S3Key = &sRevocationContent_S3Key
+var RevocationContent_S3ObjectVersion = &sRevocationContent_S3ObjectVersion
+var RevocationContent_RevocationType = &sRevocationContent_RevocationType
+
+var RevocationContentNotFoundException = &sRevocationContentNotFoundException
+var RevocationContentNotFoundException_Message = &sRevocationContentNotFoundException_Message
+
+var _RevocationContents = &s_RevocationContents
+var _RevocationContents_member = &s_RevocationContents_member
+
+var _RevocationId = &s_RevocationId
+
+var RevocationIdNotFoundException = &sRevocationIdNotFoundException
+var RevocationIdNotFoundException_Message = &sRevocationIdNotFoundException_Message
+
+var _RevocationIds = &s_RevocationIds
+var _RevocationIds_member = &s_RevocationIds_member
+
+var RevocationType = &sRevocationType
+var RevocationType_CRL = &sRevocationType_CRL
+
+var RewriteConfig = &sRewriteConfig
+var RewriteConfig_Regex = &sRewriteConfig_Regex
+var RewriteConfig_Replace = &sRewriteConfig_Replace
+
+var _RewriteConfigList = &s_RewriteConfigList
+var _RewriteConfigList_member = &s_RewriteConfigList_member
+
+var Rule = &sRule
+var Rule_RuleArn = &sRule_RuleArn
+var Rule_Priority = &sRule_Priority
+var Rule_Conditions = &sRule_Conditions
+var Rule_Actions = &sRule_Actions
+var Rule_IsDefault = &sRule_IsDefault
+var Rule_Transforms = &sRule_Transforms
+
+var _RuleArn = &s_RuleArn
+
+var _RuleArns = &s_RuleArns
+var _RuleArns_member = &s_RuleArns_member
+
+var RuleCondition = &sRuleCondition
+var RuleCondition_Field = &sRuleCondition_Field
+var RuleCondition_Values = &sRuleCondition_Values
+var RuleCondition_HostHeaderConfig = &sRuleCondition_HostHeaderConfig
+var RuleCondition_PathPatternConfig = &sRuleCondition_PathPatternConfig
+var RuleCondition_HttpHeaderConfig = &sRuleCondition_HttpHeaderConfig
+var RuleCondition_QueryStringConfig = &sRuleCondition_QueryStringConfig
+var RuleCondition_HttpRequestMethodConfig = &sRuleCondition_HttpRequestMethodConfig
+var RuleCondition_SourceIpConfig = &sRuleCondition_SourceIpConfig
+var RuleCondition_RegexValues = &sRuleCondition_RegexValues
+
+var _RuleConditionList = &s_RuleConditionList
+var _RuleConditionList_member = &s_RuleConditionList_member
+
+var RuleNotFoundException = &sRuleNotFoundException
+var RuleNotFoundException_Message = &sRuleNotFoundException_Message
+
+var _RulePriority = &s_RulePriority
+
+var _RulePriorityList = &s_RulePriorityList
+var _RulePriorityList_member = &s_RulePriorityList_member
+
+var RulePriorityPair = &sRulePriorityPair
+var RulePriorityPair_RuleArn = &sRulePriorityPair_RuleArn
+var RulePriorityPair_Priority = &sRulePriorityPair_Priority
+
+var _Rules = &s_Rules
+var _Rules_member = &s_Rules_member
+
+var RuleTransform = &sRuleTransform
+var RuleTransform_Type = &sRuleTransform_Type
+var RuleTransform_HostHeaderRewriteConfig = &sRuleTransform_HostHeaderRewriteConfig
+var RuleTransform_UrlRewriteConfig = &sRuleTransform_UrlRewriteConfig
+
+var _RuleTransformList = &s_RuleTransformList
+var _RuleTransformList_member = &s_RuleTransformList_member
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var _S3ObjectVersion = &s_S3ObjectVersion
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroups = &s_SecurityGroups
+var _SecurityGroups_member = &s_SecurityGroups_member
+
+var SourceIpAddressTypeEnum = &sSourceIpAddressTypeEnum
+var SourceIpAddressTypeEnum_IPV4 = &sSourceIpAddressTypeEnum_IPV4
+var SourceIpAddressTypeEnum_IPV6 = &sSourceIpAddressTypeEnum_IPV6
+
+var SourceIpConditionConfig = &sSourceIpConditionConfig
+var SourceIpConditionConfig_Values = &sSourceIpConditionConfig_Values
+var SourceIpConditionConfig_IpAddressType = &sSourceIpConditionConfig_IpAddressType
+
+var _SourceNatIpv6Prefix = &s_SourceNatIpv6Prefix
+
+var _SourceNatIpv6Prefixes = &s_SourceNatIpv6Prefixes
+var _SourceNatIpv6Prefixes_member = &s_SourceNatIpv6Prefixes_member
+
+var _SslPolicies = &s_SslPolicies
+var _SslPolicies_member = &s_SslPolicies_member
+
+var SslPolicy = &sSslPolicy
+var SslPolicy_SslProtocols = &sSslPolicy_SslProtocols
+var SslPolicy_Ciphers = &sSslPolicy_Ciphers
+var SslPolicy_Name = &sSslPolicy_Name
+var SslPolicy_SupportedLoadBalancerTypes = &sSslPolicy_SupportedLoadBalancerTypes
+
+var _SslPolicyName = &s_SslPolicyName
+
+var _SslPolicyNames = &s_SslPolicyNames
+var _SslPolicyNames_member = &s_SslPolicyNames_member
+
+var SSLPolicyNotFoundException = &sSSLPolicyNotFoundException
+var SSLPolicyNotFoundException_Message = &sSSLPolicyNotFoundException_Message
+
+var _SslProtocol = &s_SslProtocol
+
+var _SslProtocols = &s_SslProtocols
+var _SslProtocols_member = &s_SslProtocols_member
+
+var _StateReason = &s_StateReason
+
+var _String = &s_String
+
+var _StringValue = &s_StringValue
+
+var _SubnetId = &s_SubnetId
+
+var SubnetMapping = &sSubnetMapping
+var SubnetMapping_SubnetId = &sSubnetMapping_SubnetId
+var SubnetMapping_AllocationId = &sSubnetMapping_AllocationId
+var SubnetMapping_PrivateIPv4Address = &sSubnetMapping_PrivateIPv4Address
+var SubnetMapping_IPv6Address = &sSubnetMapping_IPv6Address
+var SubnetMapping_SourceNatIpv6Prefix = &sSubnetMapping_SourceNatIpv6Prefix
+
+var _SubnetMappings = &s_SubnetMappings
+var _SubnetMappings_member = &s_SubnetMappings_member
+
+var SubnetNotFoundException = &sSubnetNotFoundException
+var SubnetNotFoundException_Message = &sSubnetNotFoundException_Message
+
+var _Subnets = &s_Subnets
+var _Subnets_member = &s_Subnets_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var TagDescription = &sTagDescription
+var TagDescription_ResourceArn = &sTagDescription_ResourceArn
+var TagDescription_Tags = &sTagDescription_Tags
+
+var _TagDescriptions = &s_TagDescriptions
+var _TagDescriptions_member = &s_TagDescriptions_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TargetAdministrativeOverrideReasonEnum = &sTargetAdministrativeOverrideReasonEnum
+var TargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR = &sTargetAdministrativeOverrideReasonEnum_INTERNAL_ERROR
+var TargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED = &sTargetAdministrativeOverrideReasonEnum_NO_OVERRIDE_ENGAGED
+var TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED = &sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_ENGAGED
+var TargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = &sTargetAdministrativeOverrideReasonEnum_ZONAL_SHIFT_DELEGATED_TO_DNS
+
+var TargetAdministrativeOverrideStateEnum = &sTargetAdministrativeOverrideStateEnum
+var TargetAdministrativeOverrideStateEnum_UNKNOWN = &sTargetAdministrativeOverrideStateEnum_UNKNOWN
+var TargetAdministrativeOverrideStateEnum_NO_OVERRIDE = &sTargetAdministrativeOverrideStateEnum_NO_OVERRIDE
+var TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE = &sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_ACTIVE
+var TargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS = &sTargetAdministrativeOverrideStateEnum_ZONAL_SHIFT_DELEGATED_TO_DNS
+
+var _TargetControlPort = &s_TargetControlPort
+
+var TargetDescription = &sTargetDescription
+var TargetDescription_Id = &sTargetDescription_Id
+var TargetDescription_Port = &sTargetDescription_Port
+var TargetDescription_AvailabilityZone = &sTargetDescription_AvailabilityZone
+var TargetDescription_QuicServerId = &sTargetDescription_QuicServerId
+
+var _TargetDescriptions = &s_TargetDescriptions
+var _TargetDescriptions_member = &s_TargetDescriptions_member
+
+var TargetGroup = &sTargetGroup
+var TargetGroup_TargetGroupArn = &sTargetGroup_TargetGroupArn
+var TargetGroup_TargetGroupName = &sTargetGroup_TargetGroupName
+var TargetGroup_Protocol = &sTargetGroup_Protocol
+var TargetGroup_Port = &sTargetGroup_Port
+var TargetGroup_VpcId = &sTargetGroup_VpcId
+var TargetGroup_HealthCheckProtocol = &sTargetGroup_HealthCheckProtocol
+var TargetGroup_HealthCheckPort = &sTargetGroup_HealthCheckPort
+var TargetGroup_HealthCheckEnabled = &sTargetGroup_HealthCheckEnabled
+var TargetGroup_HealthCheckIntervalSeconds = &sTargetGroup_HealthCheckIntervalSeconds
+var TargetGroup_HealthCheckTimeoutSeconds = &sTargetGroup_HealthCheckTimeoutSeconds
+var TargetGroup_HealthyThresholdCount = &sTargetGroup_HealthyThresholdCount
+var TargetGroup_UnhealthyThresholdCount = &sTargetGroup_UnhealthyThresholdCount
+var TargetGroup_HealthCheckPath = &sTargetGroup_HealthCheckPath
+var TargetGroup_Matcher = &sTargetGroup_Matcher
+var TargetGroup_LoadBalancerArns = &sTargetGroup_LoadBalancerArns
+var TargetGroup_TargetType = &sTargetGroup_TargetType
+var TargetGroup_ProtocolVersion = &sTargetGroup_ProtocolVersion
+var TargetGroup_IpAddressType = &sTargetGroup_IpAddressType
+var TargetGroup_TargetControlPort = &sTargetGroup_TargetControlPort
+
+var _TargetGroupArn = &s_TargetGroupArn
+
+var _TargetGroupArns = &s_TargetGroupArns
+var _TargetGroupArns_member = &s_TargetGroupArns_member
+
+var TargetGroupAssociationLimitException = &sTargetGroupAssociationLimitException
+var TargetGroupAssociationLimitException_Message = &sTargetGroupAssociationLimitException_Message
+
+var TargetGroupAttribute = &sTargetGroupAttribute
+var TargetGroupAttribute_Key = &sTargetGroupAttribute_Key
+var TargetGroupAttribute_Value = &sTargetGroupAttribute_Value
+
+var _TargetGroupAttributeKey = &s_TargetGroupAttributeKey
+
+var _TargetGroupAttributes = &s_TargetGroupAttributes
+var _TargetGroupAttributes_member = &s_TargetGroupAttributes_member
+
+var _TargetGroupAttributeValue = &s_TargetGroupAttributeValue
+
+var TargetGroupIpAddressTypeEnum = &sTargetGroupIpAddressTypeEnum
+var TargetGroupIpAddressTypeEnum_IPV4 = &sTargetGroupIpAddressTypeEnum_IPV4
+var TargetGroupIpAddressTypeEnum_IPV6 = &sTargetGroupIpAddressTypeEnum_IPV6
+
+var _TargetGroupList = &s_TargetGroupList
+var _TargetGroupList_member = &s_TargetGroupList_member
+
+var _TargetGroupName = &s_TargetGroupName
+
+var _TargetGroupNames = &s_TargetGroupNames
+var _TargetGroupNames_member = &s_TargetGroupNames_member
+
+var TargetGroupNotFoundException = &sTargetGroupNotFoundException
+var TargetGroupNotFoundException_Message = &sTargetGroupNotFoundException_Message
+
+var _TargetGroups = &s_TargetGroups
+var _TargetGroups_member = &s_TargetGroups_member
+
+var TargetGroupStickinessConfig = &sTargetGroupStickinessConfig
+var TargetGroupStickinessConfig_Enabled = &sTargetGroupStickinessConfig_Enabled
+var TargetGroupStickinessConfig_DurationSeconds = &sTargetGroupStickinessConfig_DurationSeconds
+
+var _TargetGroupStickinessDurationSeconds = &s_TargetGroupStickinessDurationSeconds
+
+var _TargetGroupStickinessEnabled = &s_TargetGroupStickinessEnabled
+
+var TargetGroupTuple = &sTargetGroupTuple
+var TargetGroupTuple_TargetGroupArn = &sTargetGroupTuple_TargetGroupArn
+var TargetGroupTuple_Weight = &sTargetGroupTuple_Weight
+
+var _TargetGroupWeight = &s_TargetGroupWeight
+
+var TargetHealth = &sTargetHealth
+var TargetHealth_State = &sTargetHealth_State
+var TargetHealth_Reason = &sTargetHealth_Reason
+var TargetHealth_Description = &sTargetHealth_Description
+
+var TargetHealthDescription = &sTargetHealthDescription
+var TargetHealthDescription_Target = &sTargetHealthDescription_Target
+var TargetHealthDescription_HealthCheckPort = &sTargetHealthDescription_HealthCheckPort
+var TargetHealthDescription_TargetHealth = &sTargetHealthDescription_TargetHealth
+var TargetHealthDescription_AnomalyDetection = &sTargetHealthDescription_AnomalyDetection
+var TargetHealthDescription_AdministrativeOverride = &sTargetHealthDescription_AdministrativeOverride
+
+var _TargetHealthDescriptions = &s_TargetHealthDescriptions
+var _TargetHealthDescriptions_member = &s_TargetHealthDescriptions_member
+
+var TargetHealthReasonEnum = &sTargetHealthReasonEnum
+var TargetHealthReasonEnum_REGISTRATION_IN_PROGRESS = &sTargetHealthReasonEnum_REGISTRATION_IN_PROGRESS
+var TargetHealthReasonEnum_INITIAL_HEALTH_CHECKING = &sTargetHealthReasonEnum_INITIAL_HEALTH_CHECKING
+var TargetHealthReasonEnum_RESPONSE_CODE_MISMATCH = &sTargetHealthReasonEnum_RESPONSE_CODE_MISMATCH
+var TargetHealthReasonEnum_TIMEOUT = &sTargetHealthReasonEnum_TIMEOUT
+var TargetHealthReasonEnum_FAILED_HEALTH_CHECKS = &sTargetHealthReasonEnum_FAILED_HEALTH_CHECKS
+var TargetHealthReasonEnum_NOT_REGISTERED = &sTargetHealthReasonEnum_NOT_REGISTERED
+var TargetHealthReasonEnum_NOT_IN_USE = &sTargetHealthReasonEnum_NOT_IN_USE
+var TargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS = &sTargetHealthReasonEnum_DEREGISTRATION_IN_PROGRESS
+var TargetHealthReasonEnum_INVALID_STATE = &sTargetHealthReasonEnum_INVALID_STATE
+var TargetHealthReasonEnum_IP_UNUSABLE = &sTargetHealthReasonEnum_IP_UNUSABLE
+var TargetHealthReasonEnum_HEALTH_CHECK_DISABLED = &sTargetHealthReasonEnum_HEALTH_CHECK_DISABLED
+var TargetHealthReasonEnum_INTERNAL_ERROR = &sTargetHealthReasonEnum_INTERNAL_ERROR
+
+var TargetHealthStateEnum = &sTargetHealthStateEnum
+var TargetHealthStateEnum_INITIAL = &sTargetHealthStateEnum_INITIAL
+var TargetHealthStateEnum_HEALTHY = &sTargetHealthStateEnum_HEALTHY
+var TargetHealthStateEnum_UNHEALTHY = &sTargetHealthStateEnum_UNHEALTHY
+var TargetHealthStateEnum_UNHEALTHY_DRAINING = &sTargetHealthStateEnum_UNHEALTHY_DRAINING
+var TargetHealthStateEnum_UNUSED = &sTargetHealthStateEnum_UNUSED
+var TargetHealthStateEnum_DRAINING = &sTargetHealthStateEnum_DRAINING
+var TargetHealthStateEnum_UNAVAILABLE = &sTargetHealthStateEnum_UNAVAILABLE
+
+var _TargetId = &s_TargetId
+
+var TargetTypeEnum = &sTargetTypeEnum
+var TargetTypeEnum_INSTANCE = &sTargetTypeEnum_INSTANCE
+var TargetTypeEnum_IP = &sTargetTypeEnum_IP
+var TargetTypeEnum_LAMBDA = &sTargetTypeEnum_LAMBDA
+var TargetTypeEnum_ALB = &sTargetTypeEnum_ALB
+
+var TooManyActionsException = &sTooManyActionsException
+var TooManyActionsException_Message = &sTooManyActionsException_Message
+
+var TooManyCertificatesException = &sTooManyCertificatesException
+var TooManyCertificatesException_Message = &sTooManyCertificatesException_Message
+
+var TooManyListenersException = &sTooManyListenersException
+var TooManyListenersException_Message = &sTooManyListenersException_Message
+
+var TooManyLoadBalancersException = &sTooManyLoadBalancersException
+var TooManyLoadBalancersException_Message = &sTooManyLoadBalancersException_Message
+
+var TooManyRegistrationsForTargetIdException = &sTooManyRegistrationsForTargetIdException
+var TooManyRegistrationsForTargetIdException_Message = &sTooManyRegistrationsForTargetIdException_Message
+
+var TooManyRulesException = &sTooManyRulesException
+var TooManyRulesException_Message = &sTooManyRulesException_Message
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+
+var TooManyTargetGroupsException = &sTooManyTargetGroupsException
+var TooManyTargetGroupsException_Message = &sTooManyTargetGroupsException_Message
+
+var TooManyTargetsException = &sTooManyTargetsException
+var TooManyTargetsException_Message = &sTooManyTargetsException_Message
+
+var TooManyTrustStoreRevocationEntriesException = &sTooManyTrustStoreRevocationEntriesException
+var TooManyTrustStoreRevocationEntriesException_Message = &sTooManyTrustStoreRevocationEntriesException_Message
+
+var TooManyTrustStoresException = &sTooManyTrustStoresException
+var TooManyTrustStoresException_Message = &sTooManyTrustStoresException_Message
+
+var TooManyUniqueTargetGroupsPerLoadBalancerException = &sTooManyUniqueTargetGroupsPerLoadBalancerException
+var TooManyUniqueTargetGroupsPerLoadBalancerException_Message = &sTooManyUniqueTargetGroupsPerLoadBalancerException_Message
+
+var _TotalRevokedEntries = &s_TotalRevokedEntries
+
+var TransformTypeEnum = &sTransformTypeEnum
+var TransformTypeEnum_HOST_HEADER_REWRITE = &sTransformTypeEnum_HOST_HEADER_REWRITE
+var TransformTypeEnum_URL_REWRITE = &sTransformTypeEnum_URL_REWRITE
+
+var TrustStore = &sTrustStore
+var TrustStore_Name = &sTrustStore_Name
+var TrustStore_TrustStoreArn = &sTrustStore_TrustStoreArn
+var TrustStore_Status = &sTrustStore_Status
+var TrustStore_NumberOfCaCertificates = &sTrustStore_NumberOfCaCertificates
+var TrustStore_TotalRevokedEntries = &sTrustStore_TotalRevokedEntries
+
+var _TrustStoreArn = &s_TrustStoreArn
+
+var _TrustStoreArns = &s_TrustStoreArns
+var _TrustStoreArns_member = &s_TrustStoreArns_member
+
+var TrustStoreAssociation = &sTrustStoreAssociation
+var TrustStoreAssociation_ResourceArn = &sTrustStoreAssociation_ResourceArn
+
+var TrustStoreAssociationNotFoundException = &sTrustStoreAssociationNotFoundException
+var TrustStoreAssociationNotFoundException_Message = &sTrustStoreAssociationNotFoundException_Message
+
+var _TrustStoreAssociationResourceArn = &s_TrustStoreAssociationResourceArn
+
+var _TrustStoreAssociations = &s_TrustStoreAssociations
+var _TrustStoreAssociations_member = &s_TrustStoreAssociations_member
+
+var TrustStoreAssociationStatusEnum = &sTrustStoreAssociationStatusEnum
+var TrustStoreAssociationStatusEnum_ACTIVE = &sTrustStoreAssociationStatusEnum_ACTIVE
+var TrustStoreAssociationStatusEnum_REMOVED = &sTrustStoreAssociationStatusEnum_REMOVED
+
+var TrustStoreInUseException = &sTrustStoreInUseException
+var TrustStoreInUseException_Message = &sTrustStoreInUseException_Message
+
+var _TrustStoreName = &s_TrustStoreName
+
+var _TrustStoreNames = &s_TrustStoreNames
+var _TrustStoreNames_member = &s_TrustStoreNames_member
+
+var TrustStoreNotFoundException = &sTrustStoreNotFoundException
+var TrustStoreNotFoundException_Message = &sTrustStoreNotFoundException_Message
+
+var TrustStoreNotReadyException = &sTrustStoreNotReadyException
+var TrustStoreNotReadyException_Message = &sTrustStoreNotReadyException_Message
+
+var TrustStoreRevocation = &sTrustStoreRevocation
+var TrustStoreRevocation_TrustStoreArn = &sTrustStoreRevocation_TrustStoreArn
+var TrustStoreRevocation_RevocationId = &sTrustStoreRevocation_RevocationId
+var TrustStoreRevocation_RevocationType = &sTrustStoreRevocation_RevocationType
+var TrustStoreRevocation_NumberOfRevokedEntries = &sTrustStoreRevocation_NumberOfRevokedEntries
+
+var _TrustStoreRevocations = &s_TrustStoreRevocations
+var _TrustStoreRevocations_member = &s_TrustStoreRevocations_member
+
+var _TrustStores = &s_TrustStores
+var _TrustStores_member = &s_TrustStores_member
+
+var TrustStoreStatus = &sTrustStoreStatus
+var TrustStoreStatus_ACTIVE = &sTrustStoreStatus_ACTIVE
+var TrustStoreStatus_CREATING = &sTrustStoreStatus_CREATING
+
+var UnsupportedProtocolException = &sUnsupportedProtocolException
+var UnsupportedProtocolException_Message = &sUnsupportedProtocolException_Message
+
+var UrlRewriteConfig = &sUrlRewriteConfig
+var UrlRewriteConfig_Rewrites = &sUrlRewriteConfig_Rewrites
+
+var _VpcId = &s_VpcId
+
+var ZonalCapacityReservationState = &sZonalCapacityReservationState
+var ZonalCapacityReservationState_State = &sZonalCapacityReservationState_State
+var ZonalCapacityReservationState_AvailabilityZone = &sZonalCapacityReservationState_AvailabilityZone
+var ZonalCapacityReservationState_EffectiveCapacityUnits = &sZonalCapacityReservationState_EffectiveCapacityUnits
+
+var _ZonalCapacityReservationStates = &s_ZonalCapacityReservationStates
+var _ZonalCapacityReservationStates_member = &s_ZonalCapacityReservationStates_member
+
+var _ZoneName = &s_ZoneName
+
+var AddListenerCertificatesInput = &sAddListenerCertificatesInput
+var AddListenerCertificatesInput_ListenerArn = &sAddListenerCertificatesInput_ListenerArn
+var AddListenerCertificatesInput_Certificates = &sAddListenerCertificatesInput_Certificates
+
+var AddListenerCertificatesOutput = &sAddListenerCertificatesOutput
+var AddListenerCertificatesOutput_Certificates = &sAddListenerCertificatesOutput_Certificates
+
+var AddTagsInput = &sAddTagsInput
+var AddTagsInput_ResourceArns = &sAddTagsInput_ResourceArns
+var AddTagsInput_Tags = &sAddTagsInput_Tags
+
+var AddTagsOutput = &sAddTagsOutput
+
+var AddTrustStoreRevocationsInput = &sAddTrustStoreRevocationsInput
+var AddTrustStoreRevocationsInput_TrustStoreArn = &sAddTrustStoreRevocationsInput_TrustStoreArn
+var AddTrustStoreRevocationsInput_RevocationContents = &sAddTrustStoreRevocationsInput_RevocationContents
+
+var AddTrustStoreRevocationsOutput = &sAddTrustStoreRevocationsOutput
+var AddTrustStoreRevocationsOutput_TrustStoreRevocations = &sAddTrustStoreRevocationsOutput_TrustStoreRevocations
+
+var CreateListenerInput = &sCreateListenerInput
+var CreateListenerInput_LoadBalancerArn = &sCreateListenerInput_LoadBalancerArn
+var CreateListenerInput_Protocol = &sCreateListenerInput_Protocol
+var CreateListenerInput_Port = &sCreateListenerInput_Port
+var CreateListenerInput_SslPolicy = &sCreateListenerInput_SslPolicy
+var CreateListenerInput_Certificates = &sCreateListenerInput_Certificates
+var CreateListenerInput_DefaultActions = &sCreateListenerInput_DefaultActions
+var CreateListenerInput_AlpnPolicy = &sCreateListenerInput_AlpnPolicy
+var CreateListenerInput_Tags = &sCreateListenerInput_Tags
+var CreateListenerInput_MutualAuthentication = &sCreateListenerInput_MutualAuthentication
+
+var CreateListenerOutput = &sCreateListenerOutput
+var CreateListenerOutput_Listeners = &sCreateListenerOutput_Listeners
+
+var CreateLoadBalancerInput = &sCreateLoadBalancerInput
+var CreateLoadBalancerInput_Name = &sCreateLoadBalancerInput_Name
+var CreateLoadBalancerInput_Subnets = &sCreateLoadBalancerInput_Subnets
+var CreateLoadBalancerInput_SubnetMappings = &sCreateLoadBalancerInput_SubnetMappings
+var CreateLoadBalancerInput_SecurityGroups = &sCreateLoadBalancerInput_SecurityGroups
+var CreateLoadBalancerInput_Scheme = &sCreateLoadBalancerInput_Scheme
+var CreateLoadBalancerInput_Tags = &sCreateLoadBalancerInput_Tags
+var CreateLoadBalancerInput_Type = &sCreateLoadBalancerInput_Type
+var CreateLoadBalancerInput_IpAddressType = &sCreateLoadBalancerInput_IpAddressType
+var CreateLoadBalancerInput_CustomerOwnedIpv4Pool = &sCreateLoadBalancerInput_CustomerOwnedIpv4Pool
+var CreateLoadBalancerInput_EnablePrefixForIpv6SourceNat = &sCreateLoadBalancerInput_EnablePrefixForIpv6SourceNat
+var CreateLoadBalancerInput_IpamPools = &sCreateLoadBalancerInput_IpamPools
+
+var CreateLoadBalancerOutput = &sCreateLoadBalancerOutput
+var CreateLoadBalancerOutput_LoadBalancers = &sCreateLoadBalancerOutput_LoadBalancers
+
+var CreateRuleInput = &sCreateRuleInput
+var CreateRuleInput_ListenerArn = &sCreateRuleInput_ListenerArn
+var CreateRuleInput_Conditions = &sCreateRuleInput_Conditions
+var CreateRuleInput_Priority = &sCreateRuleInput_Priority
+var CreateRuleInput_Actions = &sCreateRuleInput_Actions
+var CreateRuleInput_Tags = &sCreateRuleInput_Tags
+var CreateRuleInput_Transforms = &sCreateRuleInput_Transforms
+
+var CreateRuleOutput = &sCreateRuleOutput
+var CreateRuleOutput_Rules = &sCreateRuleOutput_Rules
+
+var CreateTargetGroupInput = &sCreateTargetGroupInput
+var CreateTargetGroupInput_Name = &sCreateTargetGroupInput_Name
+var CreateTargetGroupInput_Protocol = &sCreateTargetGroupInput_Protocol
+var CreateTargetGroupInput_ProtocolVersion = &sCreateTargetGroupInput_ProtocolVersion
+var CreateTargetGroupInput_Port = &sCreateTargetGroupInput_Port
+var CreateTargetGroupInput_VpcId = &sCreateTargetGroupInput_VpcId
+var CreateTargetGroupInput_HealthCheckProtocol = &sCreateTargetGroupInput_HealthCheckProtocol
+var CreateTargetGroupInput_HealthCheckPort = &sCreateTargetGroupInput_HealthCheckPort
+var CreateTargetGroupInput_HealthCheckEnabled = &sCreateTargetGroupInput_HealthCheckEnabled
+var CreateTargetGroupInput_HealthCheckPath = &sCreateTargetGroupInput_HealthCheckPath
+var CreateTargetGroupInput_HealthCheckIntervalSeconds = &sCreateTargetGroupInput_HealthCheckIntervalSeconds
+var CreateTargetGroupInput_HealthCheckTimeoutSeconds = &sCreateTargetGroupInput_HealthCheckTimeoutSeconds
+var CreateTargetGroupInput_HealthyThresholdCount = &sCreateTargetGroupInput_HealthyThresholdCount
+var CreateTargetGroupInput_UnhealthyThresholdCount = &sCreateTargetGroupInput_UnhealthyThresholdCount
+var CreateTargetGroupInput_Matcher = &sCreateTargetGroupInput_Matcher
+var CreateTargetGroupInput_TargetType = &sCreateTargetGroupInput_TargetType
+var CreateTargetGroupInput_Tags = &sCreateTargetGroupInput_Tags
+var CreateTargetGroupInput_IpAddressType = &sCreateTargetGroupInput_IpAddressType
+var CreateTargetGroupInput_TargetControlPort = &sCreateTargetGroupInput_TargetControlPort
+
+var CreateTargetGroupOutput = &sCreateTargetGroupOutput
+var CreateTargetGroupOutput_TargetGroups = &sCreateTargetGroupOutput_TargetGroups
+
+var CreateTrustStoreInput = &sCreateTrustStoreInput
+var CreateTrustStoreInput_Name = &sCreateTrustStoreInput_Name
+var CreateTrustStoreInput_CaCertificatesBundleS3Bucket = &sCreateTrustStoreInput_CaCertificatesBundleS3Bucket
+var CreateTrustStoreInput_CaCertificatesBundleS3Key = &sCreateTrustStoreInput_CaCertificatesBundleS3Key
+var CreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion = &sCreateTrustStoreInput_CaCertificatesBundleS3ObjectVersion
+var CreateTrustStoreInput_Tags = &sCreateTrustStoreInput_Tags
+
+var CreateTrustStoreOutput = &sCreateTrustStoreOutput
+var CreateTrustStoreOutput_TrustStores = &sCreateTrustStoreOutput_TrustStores
+
+var DeleteListenerInput = &sDeleteListenerInput
+var DeleteListenerInput_ListenerArn = &sDeleteListenerInput_ListenerArn
+
+var DeleteListenerOutput = &sDeleteListenerOutput
+
+var DeleteLoadBalancerInput = &sDeleteLoadBalancerInput
+var DeleteLoadBalancerInput_LoadBalancerArn = &sDeleteLoadBalancerInput_LoadBalancerArn
+
+var DeleteLoadBalancerOutput = &sDeleteLoadBalancerOutput
+
+var DeleteRuleInput = &sDeleteRuleInput
+var DeleteRuleInput_RuleArn = &sDeleteRuleInput_RuleArn
+
+var DeleteRuleOutput = &sDeleteRuleOutput
+
+var DeleteSharedTrustStoreAssociationInput = &sDeleteSharedTrustStoreAssociationInput
+var DeleteSharedTrustStoreAssociationInput_TrustStoreArn = &sDeleteSharedTrustStoreAssociationInput_TrustStoreArn
+var DeleteSharedTrustStoreAssociationInput_ResourceArn = &sDeleteSharedTrustStoreAssociationInput_ResourceArn
+
+var DeleteSharedTrustStoreAssociationOutput = &sDeleteSharedTrustStoreAssociationOutput
+
+var DeleteTargetGroupInput = &sDeleteTargetGroupInput
+var DeleteTargetGroupInput_TargetGroupArn = &sDeleteTargetGroupInput_TargetGroupArn
+
+var DeleteTargetGroupOutput = &sDeleteTargetGroupOutput
+
+var DeleteTrustStoreInput = &sDeleteTrustStoreInput
+var DeleteTrustStoreInput_TrustStoreArn = &sDeleteTrustStoreInput_TrustStoreArn
+
+var DeleteTrustStoreOutput = &sDeleteTrustStoreOutput
+
+var DeregisterTargetsInput = &sDeregisterTargetsInput
+var DeregisterTargetsInput_TargetGroupArn = &sDeregisterTargetsInput_TargetGroupArn
+var DeregisterTargetsInput_Targets = &sDeregisterTargetsInput_Targets
+
+var DeregisterTargetsOutput = &sDeregisterTargetsOutput
+
+var DescribeAccountLimitsInput = &sDescribeAccountLimitsInput
+var DescribeAccountLimitsInput_Marker = &sDescribeAccountLimitsInput_Marker
+var DescribeAccountLimitsInput_PageSize = &sDescribeAccountLimitsInput_PageSize
+
+var DescribeAccountLimitsOutput = &sDescribeAccountLimitsOutput
+var DescribeAccountLimitsOutput_Limits = &sDescribeAccountLimitsOutput_Limits
+var DescribeAccountLimitsOutput_NextMarker = &sDescribeAccountLimitsOutput_NextMarker
+
+var DescribeCapacityReservationInput = &sDescribeCapacityReservationInput
+var DescribeCapacityReservationInput_LoadBalancerArn = &sDescribeCapacityReservationInput_LoadBalancerArn
+
+var DescribeCapacityReservationOutput = &sDescribeCapacityReservationOutput
+var DescribeCapacityReservationOutput_LastModifiedTime = &sDescribeCapacityReservationOutput_LastModifiedTime
+var DescribeCapacityReservationOutput_DecreaseRequestsRemaining = &sDescribeCapacityReservationOutput_DecreaseRequestsRemaining
+var DescribeCapacityReservationOutput_MinimumLoadBalancerCapacity = &sDescribeCapacityReservationOutput_MinimumLoadBalancerCapacity
+var DescribeCapacityReservationOutput_CapacityReservationState = &sDescribeCapacityReservationOutput_CapacityReservationState
+
+var DescribeListenerAttributesInput = &sDescribeListenerAttributesInput
+var DescribeListenerAttributesInput_ListenerArn = &sDescribeListenerAttributesInput_ListenerArn
+
+var DescribeListenerAttributesOutput = &sDescribeListenerAttributesOutput
+var DescribeListenerAttributesOutput_Attributes = &sDescribeListenerAttributesOutput_Attributes
+
+var DescribeListenerCertificatesInput = &sDescribeListenerCertificatesInput
+var DescribeListenerCertificatesInput_ListenerArn = &sDescribeListenerCertificatesInput_ListenerArn
+var DescribeListenerCertificatesInput_Marker = &sDescribeListenerCertificatesInput_Marker
+var DescribeListenerCertificatesInput_PageSize = &sDescribeListenerCertificatesInput_PageSize
+
+var DescribeListenerCertificatesOutput = &sDescribeListenerCertificatesOutput
+var DescribeListenerCertificatesOutput_Certificates = &sDescribeListenerCertificatesOutput_Certificates
+var DescribeListenerCertificatesOutput_NextMarker = &sDescribeListenerCertificatesOutput_NextMarker
+
+var DescribeListenersInput = &sDescribeListenersInput
+var DescribeListenersInput_LoadBalancerArn = &sDescribeListenersInput_LoadBalancerArn
+var DescribeListenersInput_ListenerArns = &sDescribeListenersInput_ListenerArns
+var DescribeListenersInput_Marker = &sDescribeListenersInput_Marker
+var DescribeListenersInput_PageSize = &sDescribeListenersInput_PageSize
+
+var DescribeListenersOutput = &sDescribeListenersOutput
+var DescribeListenersOutput_Listeners = &sDescribeListenersOutput_Listeners
+var DescribeListenersOutput_NextMarker = &sDescribeListenersOutput_NextMarker
+
+var DescribeLoadBalancerAttributesInput = &sDescribeLoadBalancerAttributesInput
+var DescribeLoadBalancerAttributesInput_LoadBalancerArn = &sDescribeLoadBalancerAttributesInput_LoadBalancerArn
+
+var DescribeLoadBalancerAttributesOutput = &sDescribeLoadBalancerAttributesOutput
+var DescribeLoadBalancerAttributesOutput_Attributes = &sDescribeLoadBalancerAttributesOutput_Attributes
+
+var DescribeLoadBalancersInput = &sDescribeLoadBalancersInput
+var DescribeLoadBalancersInput_LoadBalancerArns = &sDescribeLoadBalancersInput_LoadBalancerArns
+var DescribeLoadBalancersInput_Names = &sDescribeLoadBalancersInput_Names
+var DescribeLoadBalancersInput_Marker = &sDescribeLoadBalancersInput_Marker
+var DescribeLoadBalancersInput_PageSize = &sDescribeLoadBalancersInput_PageSize
+
+var DescribeLoadBalancersOutput = &sDescribeLoadBalancersOutput
+var DescribeLoadBalancersOutput_LoadBalancers = &sDescribeLoadBalancersOutput_LoadBalancers
+var DescribeLoadBalancersOutput_NextMarker = &sDescribeLoadBalancersOutput_NextMarker
+
+var DescribeRulesInput = &sDescribeRulesInput
+var DescribeRulesInput_ListenerArn = &sDescribeRulesInput_ListenerArn
+var DescribeRulesInput_RuleArns = &sDescribeRulesInput_RuleArns
+var DescribeRulesInput_Marker = &sDescribeRulesInput_Marker
+var DescribeRulesInput_PageSize = &sDescribeRulesInput_PageSize
+
+var DescribeRulesOutput = &sDescribeRulesOutput
+var DescribeRulesOutput_Rules = &sDescribeRulesOutput_Rules
+var DescribeRulesOutput_NextMarker = &sDescribeRulesOutput_NextMarker
+
+var DescribeSSLPoliciesInput = &sDescribeSSLPoliciesInput
+var DescribeSSLPoliciesInput_Names = &sDescribeSSLPoliciesInput_Names
+var DescribeSSLPoliciesInput_Marker = &sDescribeSSLPoliciesInput_Marker
+var DescribeSSLPoliciesInput_PageSize = &sDescribeSSLPoliciesInput_PageSize
+var DescribeSSLPoliciesInput_LoadBalancerType = &sDescribeSSLPoliciesInput_LoadBalancerType
+
+var DescribeSSLPoliciesOutput = &sDescribeSSLPoliciesOutput
+var DescribeSSLPoliciesOutput_SslPolicies = &sDescribeSSLPoliciesOutput_SslPolicies
+var DescribeSSLPoliciesOutput_NextMarker = &sDescribeSSLPoliciesOutput_NextMarker
+
+var DescribeTagsInput = &sDescribeTagsInput
+var DescribeTagsInput_ResourceArns = &sDescribeTagsInput_ResourceArns
+
+var DescribeTagsOutput = &sDescribeTagsOutput
+var DescribeTagsOutput_TagDescriptions = &sDescribeTagsOutput_TagDescriptions
+
+var DescribeTargetGroupAttributesInput = &sDescribeTargetGroupAttributesInput
+var DescribeTargetGroupAttributesInput_TargetGroupArn = &sDescribeTargetGroupAttributesInput_TargetGroupArn
+
+var DescribeTargetGroupAttributesOutput = &sDescribeTargetGroupAttributesOutput
+var DescribeTargetGroupAttributesOutput_Attributes = &sDescribeTargetGroupAttributesOutput_Attributes
+
+var DescribeTargetGroupsInput = &sDescribeTargetGroupsInput
+var DescribeTargetGroupsInput_LoadBalancerArn = &sDescribeTargetGroupsInput_LoadBalancerArn
+var DescribeTargetGroupsInput_TargetGroupArns = &sDescribeTargetGroupsInput_TargetGroupArns
+var DescribeTargetGroupsInput_Names = &sDescribeTargetGroupsInput_Names
+var DescribeTargetGroupsInput_Marker = &sDescribeTargetGroupsInput_Marker
+var DescribeTargetGroupsInput_PageSize = &sDescribeTargetGroupsInput_PageSize
+
+var DescribeTargetGroupsOutput = &sDescribeTargetGroupsOutput
+var DescribeTargetGroupsOutput_TargetGroups = &sDescribeTargetGroupsOutput_TargetGroups
+var DescribeTargetGroupsOutput_NextMarker = &sDescribeTargetGroupsOutput_NextMarker
+
+var DescribeTargetHealthInput = &sDescribeTargetHealthInput
+var DescribeTargetHealthInput_TargetGroupArn = &sDescribeTargetHealthInput_TargetGroupArn
+var DescribeTargetHealthInput_Targets = &sDescribeTargetHealthInput_Targets
+var DescribeTargetHealthInput_Include = &sDescribeTargetHealthInput_Include
+
+var DescribeTargetHealthOutput = &sDescribeTargetHealthOutput
+var DescribeTargetHealthOutput_TargetHealthDescriptions = &sDescribeTargetHealthOutput_TargetHealthDescriptions
+
+var DescribeTrustStoreAssociationsInput = &sDescribeTrustStoreAssociationsInput
+var DescribeTrustStoreAssociationsInput_TrustStoreArn = &sDescribeTrustStoreAssociationsInput_TrustStoreArn
+var DescribeTrustStoreAssociationsInput_Marker = &sDescribeTrustStoreAssociationsInput_Marker
+var DescribeTrustStoreAssociationsInput_PageSize = &sDescribeTrustStoreAssociationsInput_PageSize
+
+var DescribeTrustStoreAssociationsOutput = &sDescribeTrustStoreAssociationsOutput
+var DescribeTrustStoreAssociationsOutput_TrustStoreAssociations = &sDescribeTrustStoreAssociationsOutput_TrustStoreAssociations
+var DescribeTrustStoreAssociationsOutput_NextMarker = &sDescribeTrustStoreAssociationsOutput_NextMarker
+
+var DescribeTrustStoreRevocationsInput = &sDescribeTrustStoreRevocationsInput
+var DescribeTrustStoreRevocationsInput_TrustStoreArn = &sDescribeTrustStoreRevocationsInput_TrustStoreArn
+var DescribeTrustStoreRevocationsInput_RevocationIds = &sDescribeTrustStoreRevocationsInput_RevocationIds
+var DescribeTrustStoreRevocationsInput_Marker = &sDescribeTrustStoreRevocationsInput_Marker
+var DescribeTrustStoreRevocationsInput_PageSize = &sDescribeTrustStoreRevocationsInput_PageSize
+
+var DescribeTrustStoreRevocationsOutput = &sDescribeTrustStoreRevocationsOutput
+var DescribeTrustStoreRevocationsOutput_TrustStoreRevocations = &sDescribeTrustStoreRevocationsOutput_TrustStoreRevocations
+var DescribeTrustStoreRevocationsOutput_NextMarker = &sDescribeTrustStoreRevocationsOutput_NextMarker
+
+var DescribeTrustStoresInput = &sDescribeTrustStoresInput
+var DescribeTrustStoresInput_TrustStoreArns = &sDescribeTrustStoresInput_TrustStoreArns
+var DescribeTrustStoresInput_Names = &sDescribeTrustStoresInput_Names
+var DescribeTrustStoresInput_Marker = &sDescribeTrustStoresInput_Marker
+var DescribeTrustStoresInput_PageSize = &sDescribeTrustStoresInput_PageSize
+
+var DescribeTrustStoresOutput = &sDescribeTrustStoresOutput
+var DescribeTrustStoresOutput_TrustStores = &sDescribeTrustStoresOutput_TrustStores
+var DescribeTrustStoresOutput_NextMarker = &sDescribeTrustStoresOutput_NextMarker
+
+var GetResourcePolicyInput = &sGetResourcePolicyInput
+var GetResourcePolicyInput_ResourceArn = &sGetResourcePolicyInput_ResourceArn
+
+var GetResourcePolicyOutput = &sGetResourcePolicyOutput
+var GetResourcePolicyOutput_Policy = &sGetResourcePolicyOutput_Policy
+
+var GetTrustStoreCaCertificatesBundleInput = &sGetTrustStoreCaCertificatesBundleInput
+var GetTrustStoreCaCertificatesBundleInput_TrustStoreArn = &sGetTrustStoreCaCertificatesBundleInput_TrustStoreArn
+
+var GetTrustStoreCaCertificatesBundleOutput = &sGetTrustStoreCaCertificatesBundleOutput
+var GetTrustStoreCaCertificatesBundleOutput_Location = &sGetTrustStoreCaCertificatesBundleOutput_Location
+
+var GetTrustStoreRevocationContentInput = &sGetTrustStoreRevocationContentInput
+var GetTrustStoreRevocationContentInput_TrustStoreArn = &sGetTrustStoreRevocationContentInput_TrustStoreArn
+var GetTrustStoreRevocationContentInput_RevocationId = &sGetTrustStoreRevocationContentInput_RevocationId
+
+var GetTrustStoreRevocationContentOutput = &sGetTrustStoreRevocationContentOutput
+var GetTrustStoreRevocationContentOutput_Location = &sGetTrustStoreRevocationContentOutput_Location
+
+var ModifyCapacityReservationInput = &sModifyCapacityReservationInput
+var ModifyCapacityReservationInput_LoadBalancerArn = &sModifyCapacityReservationInput_LoadBalancerArn
+var ModifyCapacityReservationInput_MinimumLoadBalancerCapacity = &sModifyCapacityReservationInput_MinimumLoadBalancerCapacity
+var ModifyCapacityReservationInput_ResetCapacityReservation = &sModifyCapacityReservationInput_ResetCapacityReservation
+
+var ModifyCapacityReservationOutput = &sModifyCapacityReservationOutput
+var ModifyCapacityReservationOutput_LastModifiedTime = &sModifyCapacityReservationOutput_LastModifiedTime
+var ModifyCapacityReservationOutput_DecreaseRequestsRemaining = &sModifyCapacityReservationOutput_DecreaseRequestsRemaining
+var ModifyCapacityReservationOutput_MinimumLoadBalancerCapacity = &sModifyCapacityReservationOutput_MinimumLoadBalancerCapacity
+var ModifyCapacityReservationOutput_CapacityReservationState = &sModifyCapacityReservationOutput_CapacityReservationState
+
+var ModifyIpPoolsInput = &sModifyIpPoolsInput
+var ModifyIpPoolsInput_LoadBalancerArn = &sModifyIpPoolsInput_LoadBalancerArn
+var ModifyIpPoolsInput_IpamPools = &sModifyIpPoolsInput_IpamPools
+var ModifyIpPoolsInput_RemoveIpamPools = &sModifyIpPoolsInput_RemoveIpamPools
+
+var ModifyIpPoolsOutput = &sModifyIpPoolsOutput
+var ModifyIpPoolsOutput_IpamPools = &sModifyIpPoolsOutput_IpamPools
+
+var ModifyListenerAttributesInput = &sModifyListenerAttributesInput
+var ModifyListenerAttributesInput_ListenerArn = &sModifyListenerAttributesInput_ListenerArn
+var ModifyListenerAttributesInput_Attributes = &sModifyListenerAttributesInput_Attributes
+
+var ModifyListenerAttributesOutput = &sModifyListenerAttributesOutput
+var ModifyListenerAttributesOutput_Attributes = &sModifyListenerAttributesOutput_Attributes
+
+var ModifyListenerInput = &sModifyListenerInput
+var ModifyListenerInput_ListenerArn = &sModifyListenerInput_ListenerArn
+var ModifyListenerInput_Port = &sModifyListenerInput_Port
+var ModifyListenerInput_Protocol = &sModifyListenerInput_Protocol
+var ModifyListenerInput_SslPolicy = &sModifyListenerInput_SslPolicy
+var ModifyListenerInput_Certificates = &sModifyListenerInput_Certificates
+var ModifyListenerInput_DefaultActions = &sModifyListenerInput_DefaultActions
+var ModifyListenerInput_AlpnPolicy = &sModifyListenerInput_AlpnPolicy
+var ModifyListenerInput_MutualAuthentication = &sModifyListenerInput_MutualAuthentication
+
+var ModifyListenerOutput = &sModifyListenerOutput
+var ModifyListenerOutput_Listeners = &sModifyListenerOutput_Listeners
+
+var ModifyLoadBalancerAttributesInput = &sModifyLoadBalancerAttributesInput
+var ModifyLoadBalancerAttributesInput_LoadBalancerArn = &sModifyLoadBalancerAttributesInput_LoadBalancerArn
+var ModifyLoadBalancerAttributesInput_Attributes = &sModifyLoadBalancerAttributesInput_Attributes
+
+var ModifyLoadBalancerAttributesOutput = &sModifyLoadBalancerAttributesOutput
+var ModifyLoadBalancerAttributesOutput_Attributes = &sModifyLoadBalancerAttributesOutput_Attributes
+
+var ModifyRuleInput = &sModifyRuleInput
+var ModifyRuleInput_RuleArn = &sModifyRuleInput_RuleArn
+var ModifyRuleInput_Conditions = &sModifyRuleInput_Conditions
+var ModifyRuleInput_Actions = &sModifyRuleInput_Actions
+var ModifyRuleInput_Transforms = &sModifyRuleInput_Transforms
+var ModifyRuleInput_ResetTransforms = &sModifyRuleInput_ResetTransforms
+
+var ModifyRuleOutput = &sModifyRuleOutput
+var ModifyRuleOutput_Rules = &sModifyRuleOutput_Rules
+
+var ModifyTargetGroupAttributesInput = &sModifyTargetGroupAttributesInput
+var ModifyTargetGroupAttributesInput_TargetGroupArn = &sModifyTargetGroupAttributesInput_TargetGroupArn
+var ModifyTargetGroupAttributesInput_Attributes = &sModifyTargetGroupAttributesInput_Attributes
+
+var ModifyTargetGroupAttributesOutput = &sModifyTargetGroupAttributesOutput
+var ModifyTargetGroupAttributesOutput_Attributes = &sModifyTargetGroupAttributesOutput_Attributes
+
+var ModifyTargetGroupInput = &sModifyTargetGroupInput
+var ModifyTargetGroupInput_TargetGroupArn = &sModifyTargetGroupInput_TargetGroupArn
+var ModifyTargetGroupInput_HealthCheckProtocol = &sModifyTargetGroupInput_HealthCheckProtocol
+var ModifyTargetGroupInput_HealthCheckPort = &sModifyTargetGroupInput_HealthCheckPort
+var ModifyTargetGroupInput_HealthCheckPath = &sModifyTargetGroupInput_HealthCheckPath
+var ModifyTargetGroupInput_HealthCheckEnabled = &sModifyTargetGroupInput_HealthCheckEnabled
+var ModifyTargetGroupInput_HealthCheckIntervalSeconds = &sModifyTargetGroupInput_HealthCheckIntervalSeconds
+var ModifyTargetGroupInput_HealthCheckTimeoutSeconds = &sModifyTargetGroupInput_HealthCheckTimeoutSeconds
+var ModifyTargetGroupInput_HealthyThresholdCount = &sModifyTargetGroupInput_HealthyThresholdCount
+var ModifyTargetGroupInput_UnhealthyThresholdCount = &sModifyTargetGroupInput_UnhealthyThresholdCount
+var ModifyTargetGroupInput_Matcher = &sModifyTargetGroupInput_Matcher
+
+var ModifyTargetGroupOutput = &sModifyTargetGroupOutput
+var ModifyTargetGroupOutput_TargetGroups = &sModifyTargetGroupOutput_TargetGroups
+
+var ModifyTrustStoreInput = &sModifyTrustStoreInput
+var ModifyTrustStoreInput_TrustStoreArn = &sModifyTrustStoreInput_TrustStoreArn
+var ModifyTrustStoreInput_CaCertificatesBundleS3Bucket = &sModifyTrustStoreInput_CaCertificatesBundleS3Bucket
+var ModifyTrustStoreInput_CaCertificatesBundleS3Key = &sModifyTrustStoreInput_CaCertificatesBundleS3Key
+var ModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion = &sModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion
+
+var ModifyTrustStoreOutput = &sModifyTrustStoreOutput
+var ModifyTrustStoreOutput_TrustStores = &sModifyTrustStoreOutput_TrustStores
+
+var RegisterTargetsInput = &sRegisterTargetsInput
+var RegisterTargetsInput_TargetGroupArn = &sRegisterTargetsInput_TargetGroupArn
+var RegisterTargetsInput_Targets = &sRegisterTargetsInput_Targets
+
+var RegisterTargetsOutput = &sRegisterTargetsOutput
+
+var RemoveListenerCertificatesInput = &sRemoveListenerCertificatesInput
+var RemoveListenerCertificatesInput_ListenerArn = &sRemoveListenerCertificatesInput_ListenerArn
+var RemoveListenerCertificatesInput_Certificates = &sRemoveListenerCertificatesInput_Certificates
+
+var RemoveListenerCertificatesOutput = &sRemoveListenerCertificatesOutput
+
+var RemoveTagsInput = &sRemoveTagsInput
+var RemoveTagsInput_ResourceArns = &sRemoveTagsInput_ResourceArns
+var RemoveTagsInput_TagKeys = &sRemoveTagsInput_TagKeys
+
+var RemoveTagsOutput = &sRemoveTagsOutput
+
+var RemoveTrustStoreRevocationsInput = &sRemoveTrustStoreRevocationsInput
+var RemoveTrustStoreRevocationsInput_TrustStoreArn = &sRemoveTrustStoreRevocationsInput_TrustStoreArn
+var RemoveTrustStoreRevocationsInput_RevocationIds = &sRemoveTrustStoreRevocationsInput_RevocationIds
+
+var RemoveTrustStoreRevocationsOutput = &sRemoveTrustStoreRevocationsOutput
+
+var SetIpAddressTypeInput = &sSetIpAddressTypeInput
+var SetIpAddressTypeInput_LoadBalancerArn = &sSetIpAddressTypeInput_LoadBalancerArn
+var SetIpAddressTypeInput_IpAddressType = &sSetIpAddressTypeInput_IpAddressType
+
+var SetIpAddressTypeOutput = &sSetIpAddressTypeOutput
+var SetIpAddressTypeOutput_IpAddressType = &sSetIpAddressTypeOutput_IpAddressType
+
+var SetRulePrioritiesInput = &sSetRulePrioritiesInput
+var SetRulePrioritiesInput_RulePriorities = &sSetRulePrioritiesInput_RulePriorities
+
+var SetRulePrioritiesOutput = &sSetRulePrioritiesOutput
+var SetRulePrioritiesOutput_Rules = &sSetRulePrioritiesOutput_Rules
+
+var SetSecurityGroupsInput = &sSetSecurityGroupsInput
+var SetSecurityGroupsInput_LoadBalancerArn = &sSetSecurityGroupsInput_LoadBalancerArn
+var SetSecurityGroupsInput_SecurityGroups = &sSetSecurityGroupsInput_SecurityGroups
+var SetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = &sSetSecurityGroupsInput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+
+var SetSecurityGroupsOutput = &sSetSecurityGroupsOutput
+var SetSecurityGroupsOutput_SecurityGroupIds = &sSetSecurityGroupsOutput_SecurityGroupIds
+var SetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = &sSetSecurityGroupsOutput_EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+
+var SetSubnetsInput = &sSetSubnetsInput
+var SetSubnetsInput_LoadBalancerArn = &sSetSubnetsInput_LoadBalancerArn
+var SetSubnetsInput_Subnets = &sSetSubnetsInput_Subnets
+var SetSubnetsInput_SubnetMappings = &sSetSubnetsInput_SubnetMappings
+var SetSubnetsInput_IpAddressType = &sSetSubnetsInput_IpAddressType
+var SetSubnetsInput_EnablePrefixForIpv6SourceNat = &sSetSubnetsInput_EnablePrefixForIpv6SourceNat
+
+var SetSubnetsOutput = &sSetSubnetsOutput
+var SetSubnetsOutput_AvailabilityZones = &sSetSubnetsOutput_AvailabilityZones
+var SetSubnetsOutput_IpAddressType = &sSetSubnetsOutput_IpAddressType
+var SetSubnetsOutput_EnablePrefixForIpv6SourceNat = &sSetSubnetsOutput_EnablePrefixForIpv6SourceNat
+
+var ElasticLoadBalancing_v10 = &smithy.ServiceSchema{Schema: &s_ElasticLoadBalancing_v10, Version: "2015-12-01"}

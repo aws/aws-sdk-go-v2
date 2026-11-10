@@ -4,2585 +4,2447 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AddWorkload",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLogPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateLogPattern",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLogPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteLogPattern",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeComponentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeComponentConfigurationRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfigurationRecommendation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLogPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeLogPattern",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeObservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeObservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeProblem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblem",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeProblemObservations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblemObservations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeWorkload",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListApplications",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConfigurationHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListConfigurationHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLogPatterns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatterns",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLogPatternSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatternSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProblems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListProblems",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWorkloads = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListWorkloads",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RemoveWorkload",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateComponentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLogPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateLogPattern",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProblem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateProblem",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateWorkload",
-}, smithy.ShapeTypeOperation, 0)
-
-var _EC2WindowsBarleyService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EC2WindowsBarleyService",
-}, smithy.ShapeTypeService, 0)
-
-var EC2WindowsBarleyService = smithy.NewServiceSchema(_EC2WindowsBarleyService, "2018-11-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
-		StatusCode: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AffectedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AffectedResource",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ApplicationComponent",
-}, smithy.ShapeTypeStructure, 7)
-var ApplicationComponent_ComponentName *smithy.Schema
-
-var ApplicationComponent_ComponentRemarks *smithy.Schema
-
-var ApplicationComponent_ResourceType *smithy.Schema
-
-var ApplicationComponent_OsType *smithy.Schema
-
-var ApplicationComponent_Tier *smithy.Schema
-
-var ApplicationComponent_Monitor *smithy.Schema
-
-var ApplicationComponent_DetectedWorkload *smithy.Schema
-
-var _ApplicationComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ApplicationComponentList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationComponentList_member *smithy.Schema
-
-var ApplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ApplicationInfo",
-}, smithy.ShapeTypeStructure, 11)
-var ApplicationInfo_AccountId *smithy.Schema
-
-var ApplicationInfo_ResourceGroupName *smithy.Schema
-
-var ApplicationInfo_LifeCycle *smithy.Schema
-
-var ApplicationInfo_OpsItemSNSTopicArn *smithy.Schema
-
-var ApplicationInfo_SNSNotificationArn *smithy.Schema
-
-var ApplicationInfo_OpsCenterEnabled *smithy.Schema
-
-var ApplicationInfo_CWEMonitorEnabled *smithy.Schema
-
-var ApplicationInfo_Remarks *smithy.Schema
-
-var ApplicationInfo_AutoConfigEnabled *smithy.Schema
-
-var ApplicationInfo_DiscoveryType *smithy.Schema
-
-var ApplicationInfo_AttachMissingPermission *smithy.Schema
-
-var _ApplicationInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ApplicationInfoList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationInfoList_member *smithy.Schema
-
-var _AttachMissingPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AttachMissingPermission",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AutoConfigEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AutoConfigEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AutoCreate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AutoCreate",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "BadRequestException",
-		StatusCode: 400})
-var BadRequestException_Message *smithy.Schema
-
-var _CloudWatchEventDetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CloudWatchEventDetailType",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudWatchEventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CloudWatchEventId",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CloudWatchEventSource",
-}, smithy.ShapeTypeEnum, 4)
-var CloudWatchEventSource_EC2 *smithy.Schema
-
-var CloudWatchEventSource_CODE_DEPLOY *smithy.Schema
-
-var CloudWatchEventSource_HEALTH *smithy.Schema
-
-var CloudWatchEventSource_RDS *smithy.Schema
-
-var _CodeDeployApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CodeDeployApplication",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeDeployDeploymentGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CodeDeployDeploymentGroup",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeDeployDeploymentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CodeDeployDeploymentId",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeDeployInstanceGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CodeDeployInstanceGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeDeployState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CodeDeployState",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ComponentConfiguration",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ComponentName",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEvent",
-}, smithy.ShapeTypeStructure, 8)
-var ConfigurationEvent_ResourceGroupName *smithy.Schema
-
-var ConfigurationEvent_AccountId *smithy.Schema
-
-var ConfigurationEvent_MonitoredResourceARN *smithy.Schema
-
-var ConfigurationEvent_EventStatus *smithy.Schema
-
-var ConfigurationEvent_EventResourceType *smithy.Schema
-
-var ConfigurationEvent_EventTime *smithy.Schema
-
-var ConfigurationEvent_EventDetail *smithy.Schema
-
-var ConfigurationEvent_EventResourceName *smithy.Schema
-
-var _ConfigurationEventDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventDetail",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationEventList_member *smithy.Schema
-
-var _ConfigurationEventMonitoredResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventMonitoredResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationEventResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationEventResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventResourceType",
-}, smithy.ShapeTypeEnum, 4)
-var ConfigurationEventResourceType_CLOUDWATCH_ALARM *smithy.Schema
-
-var ConfigurationEventResourceType_CLOUDWATCH_LOG *smithy.Schema
-
-var ConfigurationEventResourceType_CLOUDFORMATION *smithy.Schema
-
-var ConfigurationEventResourceType_SSM_ASSOCIATION *smithy.Schema
-
-var ConfigurationEventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConfigurationEventStatus_INFO *smithy.Schema
-
-var ConfigurationEventStatus_WARN *smithy.Schema
-
-var ConfigurationEventStatus_ERROR *smithy.Schema
-
-var _ConfigurationEventTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ConfigurationEventTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CustomComponentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CustomComponentName",
-}, smithy.ShapeTypeString, 0)
-
-var _CWEMonitorEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CWEMonitorEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DetectedWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DetectedWorkload",
-}, smithy.ShapeTypeMap, 2)
-var _DetectedWorkload_key *smithy.Schema
-
-var _DetectedWorkload_value *smithy.Schema
-
-var DiscoveryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DiscoveryType",
-}, smithy.ShapeTypeEnum, 2)
-var DiscoveryType_RESOURCE_GROUP_BASED *smithy.Schema
-
-var DiscoveryType_ACCOUNT_BASED *smithy.Schema
-
-var _EbsCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EbsCause",
-}, smithy.ShapeTypeString, 0)
-
-var _EbsEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EbsEvent",
-}, smithy.ShapeTypeString, 0)
-
-var _EbsRequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EbsRequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _EbsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EbsResult",
-}, smithy.ShapeTypeString, 0)
-
-var _Ec2State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Ec2State",
-}, smithy.ShapeTypeString, 0)
-
-var _EndTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "EndTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMsg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ErrorMsg",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Feedback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Feedback",
-}, smithy.ShapeTypeMap, 2)
-var _Feedback_key *smithy.Schema
-
-var _Feedback_value *smithy.Schema
-
-var FeedbackKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "FeedbackKey",
-}, smithy.ShapeTypeEnum, 1)
-var FeedbackKey_INSIGHTS_FEEDBACK *smithy.Schema
-
-var FeedbackValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "FeedbackValue",
-}, smithy.ShapeTypeEnum, 3)
-var FeedbackValue_NOT_SPECIFIED *smithy.Schema
-
-var FeedbackValue_USEFUL *smithy.Schema
-
-var FeedbackValue_NOT_USEFUL *smithy.Schema
-
-var GroupingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "GroupingType",
-}, smithy.ShapeTypeEnum, 1)
-var GroupingType_ACCOUNT_BASED *smithy.Schema
-
-var _HealthEventArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "HealthEventArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthEventDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "HealthEventDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthEventTypeCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "HealthEventTypeCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthEventTypeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "HealthEventTypeCode",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "HealthService",
-}, smithy.ShapeTypeString, 0)
-
-var _Insights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Insights",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
-		StatusCode: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _LastRecurrenceTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LastRecurrenceTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LifeCycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LifeCycle",
-}, smithy.ShapeTypeString, 0)
-
-var _LineTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LineTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LogFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogFilter",
-}, smithy.ShapeTypeEnum, 3)
-var LogFilter_ERROR *smithy.Schema
-
-var LogFilter_WARN *smithy.Schema
-
-var LogFilter_INFO *smithy.Schema
-
-var _LogGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogGroup",
-}, smithy.ShapeTypeString, 0)
-
-var LogPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPattern",
-}, smithy.ShapeTypeStructure, 4)
-var LogPattern_PatternSetName *smithy.Schema
-
-var LogPattern_PatternName *smithy.Schema
-
-var LogPattern_Pattern *smithy.Schema
-
-var LogPattern_Rank *smithy.Schema
-
-var _LogPatternList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternList",
-}, smithy.ShapeTypeList, 1)
-var _LogPatternList_member *smithy.Schema
-
-var _LogPatternName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternName",
-}, smithy.ShapeTypeString, 0)
-
-var _LogPatternRank = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternRank",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LogPatternRegex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternRegex",
-}, smithy.ShapeTypeString, 0)
-
-var _LogPatternSetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternSetList",
-}, smithy.ShapeTypeList, 1)
-var _LogPatternSetList_member *smithy.Schema
-
-var _LogPatternSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogPatternSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _LogText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "LogText",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MaxEntities",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetaDataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MetaDataKey",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaDataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MetaDataValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _MissingWorkloadConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "MissingWorkloadConfig",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Monitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Monitor",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Observation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Observation",
-}, smithy.ShapeTypeStructure, 45)
-var Observation_Id *smithy.Schema
-
-var Observation_StartTime *smithy.Schema
-
-var Observation_EndTime *smithy.Schema
-
-var Observation_SourceType *smithy.Schema
-
-var Observation_SourceARN *smithy.Schema
-
-var Observation_LogGroup *smithy.Schema
-
-var Observation_LineTime *smithy.Schema
-
-var Observation_LogText *smithy.Schema
-
-var Observation_LogFilter *smithy.Schema
-
-var Observation_MetricNamespace *smithy.Schema
-
-var Observation_MetricName *smithy.Schema
-
-var Observation_Unit *smithy.Schema
-
-var Observation_Value *smithy.Schema
-
-var Observation_CloudWatchEventId *smithy.Schema
-
-var Observation_CloudWatchEventSource *smithy.Schema
-
-var Observation_CloudWatchEventDetailType *smithy.Schema
-
-var Observation_HealthEventArn *smithy.Schema
-
-var Observation_HealthService *smithy.Schema
-
-var Observation_HealthEventTypeCode *smithy.Schema
-
-var Observation_HealthEventTypeCategory *smithy.Schema
-
-var Observation_HealthEventDescription *smithy.Schema
-
-var Observation_CodeDeployDeploymentId *smithy.Schema
-
-var Observation_CodeDeployDeploymentGroup *smithy.Schema
-
-var Observation_CodeDeployState *smithy.Schema
-
-var Observation_CodeDeployApplication *smithy.Schema
-
-var Observation_CodeDeployInstanceGroupId *smithy.Schema
-
-var Observation_Ec2State *smithy.Schema
-
-var Observation_RdsEventCategories *smithy.Schema
-
-var Observation_RdsEventMessage *smithy.Schema
-
-var Observation_S3EventName *smithy.Schema
-
-var Observation_StatesExecutionArn *smithy.Schema
-
-var Observation_StatesArn *smithy.Schema
-
-var Observation_StatesStatus *smithy.Schema
-
-var Observation_StatesInput *smithy.Schema
-
-var Observation_EbsEvent *smithy.Schema
-
-var Observation_EbsResult *smithy.Schema
-
-var Observation_EbsCause *smithy.Schema
-
-var Observation_EbsRequestId *smithy.Schema
-
-var Observation_XRayFaultPercent *smithy.Schema
-
-var Observation_XRayThrottlePercent *smithy.Schema
-
-var Observation_XRayErrorPercent *smithy.Schema
-
-var Observation_XRayRequestCount *smithy.Schema
-
-var Observation_XRayRequestAverageLatency *smithy.Schema
-
-var Observation_XRayNodeName *smithy.Schema
-
-var Observation_XRayNodeType *smithy.Schema
-
-var _ObservationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ObservationId",
-}, smithy.ShapeTypeString, 0)
-
-var _ObservationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ObservationList",
-}, smithy.ShapeTypeList, 1)
-var _ObservationList_member *smithy.Schema
-
-var _OpsCenterEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "OpsCenterEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _OpsItemSNSTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "OpsItemSNSTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var OsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "OsType",
-}, smithy.ShapeTypeEnum, 2)
-var OsType_WINDOWS *smithy.Schema
-
-var OsType_LINUX *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var Problem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Problem",
-}, smithy.ShapeTypeStructure, 16)
-var Problem_Id *smithy.Schema
-
-var Problem_Title *smithy.Schema
-
-var Problem_ShortName *smithy.Schema
-
-var Problem_Insights *smithy.Schema
-
-var Problem_Status *smithy.Schema
-
-var Problem_AffectedResource *smithy.Schema
-
-var Problem_StartTime *smithy.Schema
-
-var Problem_EndTime *smithy.Schema
-
-var Problem_SeverityLevel *smithy.Schema
-
-var Problem_AccountId *smithy.Schema
-
-var Problem_ResourceGroupName *smithy.Schema
-
-var Problem_Feedback *smithy.Schema
-
-var Problem_RecurringCount *smithy.Schema
-
-var Problem_LastRecurrenceTime *smithy.Schema
-
-var Problem_Visibility *smithy.Schema
-
-var Problem_ResolutionMethod *smithy.Schema
-
-var _ProblemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ProblemId",
-}, smithy.ShapeTypeString, 0)
-
-var _ProblemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ProblemList",
-}, smithy.ShapeTypeList, 1)
-var _ProblemList_member *smithy.Schema
-
-var _RdsEventCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RdsEventCategories",
-}, smithy.ShapeTypeString, 0)
-
-var _RdsEventMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RdsEventMessage",
-}, smithy.ShapeTypeString, 0)
-
-var RecommendationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RecommendationType",
-}, smithy.ShapeTypeEnum, 3)
-var RecommendationType_INFRA_ONLY *smithy.Schema
-
-var RecommendationType_WORKLOAD_ONLY *smithy.Schema
-
-var RecommendationType_ALL *smithy.Schema
-
-var _RecurringCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RecurringCount",
-}, smithy.ShapeTypeLong, 0)
-
-var RelatedObservations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RelatedObservations",
-}, smithy.ShapeTypeStructure, 1)
-var RelatedObservations_ObservationList *smithy.Schema
-
-var _Remarks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Remarks",
-}, smithy.ShapeTypeString, 0)
-
-var _RemoveSNSTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RemoveSNSTopic",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ResolutionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResolutionMethod",
-}, smithy.ShapeTypeEnum, 3)
-var ResolutionMethod_MANUAL *smithy.Schema
-
-var ResolutionMethod_AUTOMATIC *smithy.Schema
-
-var ResolutionMethod_UNRESOLVED *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceInUseException",
-		StatusCode: 400})
-var ResourceInUseException_Message *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _S3EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "S3EventName",
-}, smithy.ShapeTypeString, 0)
-
-var SeverityLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "SeverityLevel",
-}, smithy.ShapeTypeEnum, 4)
-var SeverityLevel_Informative *smithy.Schema
-
-var SeverityLevel_Low *smithy.Schema
-
-var SeverityLevel_Medium *smithy.Schema
-
-var SeverityLevel_High *smithy.Schema
-
-var _ShortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ShortName",
-}, smithy.ShapeTypeString, 0)
-
-var _SNSNotificationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "SNSNotificationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "SourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "SourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _StartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "StartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _StatesArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "StatesArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StatesExecutionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "StatesExecutionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "StatesInput",
-}, smithy.ShapeTypeString, 0)
-
-var _StatesStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "StatesStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 5)
-var Status_IGNORE *smithy.Schema
-
-var Status_RESOLVED *smithy.Schema
-
-var Status_PENDING *smithy.Schema
-
-var Status_RECURRING *smithy.Schema
-
-var Status_RECOVERING *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TagsAlreadyExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagsAlreadyExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TagsAlreadyExistException_Message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Tier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Tier",
-}, smithy.ShapeTypeEnum, 23)
-var Tier_CUSTOM *smithy.Schema
-
-var Tier_DEFAULT *smithy.Schema
-
-var Tier_DOT_NET_CORE *smithy.Schema
-
-var Tier_DOT_NET_WORKER *smithy.Schema
-
-var Tier_DOT_NET_WEB_TIER *smithy.Schema
-
-var Tier_DOT_NET_WEB *smithy.Schema
-
-var Tier_SQL_SERVER *smithy.Schema
-
-var Tier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP *smithy.Schema
-
-var Tier_MYSQL *smithy.Schema
-
-var Tier_POSTGRESQL *smithy.Schema
-
-var Tier_JAVA_JMX *smithy.Schema
-
-var Tier_ORACLE *smithy.Schema
-
-var Tier_SAP_HANA_MULTI_NODE *smithy.Schema
-
-var Tier_SAP_HANA_SINGLE_NODE *smithy.Schema
-
-var Tier_SAP_HANA_HIGH_AVAILABILITY *smithy.Schema
-
-var Tier_SAP_ASE_SINGLE_NODE *smithy.Schema
-
-var Tier_SAP_ASE_HIGH_AVAILABILITY *smithy.Schema
-
-var Tier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE *smithy.Schema
-
-var Tier_SHAREPOINT *smithy.Schema
-
-var Tier_ACTIVE_DIRECTORY *smithy.Schema
-
-var Tier_SAP_NETWEAVER_STANDARD *smithy.Schema
-
-var Tier_SAP_NETWEAVER_DISTRIBUTED *smithy.Schema
-
-var Tier_SAP_NETWEAVER_HIGH_AVAILABILITY *smithy.Schema
-
-var _Title = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Title",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTagsException_ResourceName *smithy.Schema
-
-var _Unit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Unit",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateStatus",
-}, smithy.ShapeTypeEnum, 1)
-var UpdateStatus_RESOLVED *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_Message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Value",
-}, smithy.ShapeTypeDouble, 0)
-
-var Visibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Visibility",
-}, smithy.ShapeTypeEnum, 2)
-var Visibility_IGNORED *smithy.Schema
-
-var Visibility_VISIBLE *smithy.Schema
-
-var Workload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "Workload",
-}, smithy.ShapeTypeStructure, 6)
-var Workload_WorkloadId *smithy.Schema
-
-var Workload_ComponentName *smithy.Schema
-
-var Workload_WorkloadName *smithy.Schema
-
-var Workload_Tier *smithy.Schema
-
-var Workload_WorkloadRemarks *smithy.Schema
-
-var Workload_MissingWorkloadConfig *smithy.Schema
-
-var WorkloadConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "WorkloadConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WorkloadConfiguration_WorkloadName *smithy.Schema
-
-var WorkloadConfiguration_Tier *smithy.Schema
-
-var WorkloadConfiguration_Configuration *smithy.Schema
-
-var _WorkloadId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "WorkloadId",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkloadList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "WorkloadList",
-}, smithy.ShapeTypeList, 1)
-var _WorkloadList_member *smithy.Schema
-
-var _WorkloadMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "WorkloadMetaData",
-}, smithy.ShapeTypeMap, 2)
-var _WorkloadMetaData_key *smithy.Schema
-
-var _WorkloadMetaData_value *smithy.Schema
-
-var _WorkloadName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "WorkloadName",
-}, smithy.ShapeTypeString, 0)
-
-var _XRayErrorPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayErrorPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _XRayFaultPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayFaultPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _XRayNodeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayNodeName",
-}, smithy.ShapeTypeString, 0)
-
-var _XRayNodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayNodeType",
-}, smithy.ShapeTypeString, 0)
-
-var _XRayRequestAverageLatency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayRequestAverageLatency",
-}, smithy.ShapeTypeLong, 0)
-
-var _XRayRequestCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayRequestCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _XRayThrottlePercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "XRayThrottlePercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var AddWorkloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AddWorkloadRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AddWorkloadRequest_ResourceGroupName *smithy.Schema
-
-var AddWorkloadRequest_ComponentName *smithy.Schema
-
-var AddWorkloadRequest_WorkloadConfiguration *smithy.Schema
-
-var AddWorkloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "AddWorkloadResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AddWorkloadResponse_WorkloadId *smithy.Schema
-
-var AddWorkloadResponse_WorkloadConfiguration *smithy.Schema
-
-var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateApplicationRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateApplicationRequest_ResourceGroupName *smithy.Schema
-
-var CreateApplicationRequest_OpsCenterEnabled *smithy.Schema
-
-var CreateApplicationRequest_CWEMonitorEnabled *smithy.Schema
-
-var CreateApplicationRequest_OpsItemSNSTopicArn *smithy.Schema
-
-var CreateApplicationRequest_SNSNotificationArn *smithy.Schema
-
-var CreateApplicationRequest_Tags *smithy.Schema
-
-var CreateApplicationRequest_AutoConfigEnabled *smithy.Schema
-
-var CreateApplicationRequest_AutoCreate *smithy.Schema
-
-var CreateApplicationRequest_GroupingType *smithy.Schema
-
-var CreateApplicationRequest_AttachMissingPermission *smithy.Schema
-
-var CreateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApplicationResponse_ApplicationInfo *smithy.Schema
-
-var CreateComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateComponentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateComponentRequest_ResourceGroupName *smithy.Schema
-
-var CreateComponentRequest_ComponentName *smithy.Schema
-
-var CreateComponentRequest_ResourceList *smithy.Schema
-
-var CreateComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateComponentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateLogPatternRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateLogPatternRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLogPatternRequest_ResourceGroupName *smithy.Schema
-
-var CreateLogPatternRequest_PatternSetName *smithy.Schema
-
-var CreateLogPatternRequest_PatternName *smithy.Schema
-
-var CreateLogPatternRequest_Pattern *smithy.Schema
-
-var CreateLogPatternRequest_Rank *smithy.Schema
-
-var CreateLogPatternResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "CreateLogPatternResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLogPatternResponse_LogPattern *smithy.Schema
-
-var CreateLogPatternResponse_ResourceGroupName *smithy.Schema
-
-var DeleteApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApplicationRequest_ResourceGroupName *smithy.Schema
-
-var DeleteApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteApplicationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteComponentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteComponentRequest_ResourceGroupName *smithy.Schema
-
-var DeleteComponentRequest_ComponentName *smithy.Schema
-
-var DeleteComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteComponentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLogPatternRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteLogPatternRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteLogPatternRequest_ResourceGroupName *smithy.Schema
-
-var DeleteLogPatternRequest_PatternSetName *smithy.Schema
-
-var DeleteLogPatternRequest_PatternName *smithy.Schema
-
-var DeleteLogPatternResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DeleteLogPatternResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeApplicationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeApplicationRequest_ResourceGroupName *smithy.Schema
-
-var DescribeApplicationRequest_AccountId *smithy.Schema
-
-var DescribeApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeApplicationResponse_ApplicationInfo *smithy.Schema
-
-var DescribeComponentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeComponentConfigurationRequest_ResourceGroupName *smithy.Schema
-
-var DescribeComponentConfigurationRequest_ComponentName *smithy.Schema
-
-var DescribeComponentConfigurationRequest_AccountId *smithy.Schema
-
-var DescribeComponentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeComponentConfigurationResponse_Monitor *smithy.Schema
-
-var DescribeComponentConfigurationResponse_Tier *smithy.Schema
-
-var DescribeComponentConfigurationResponse_ComponentConfiguration *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfigurationRecommendationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeComponentConfigurationRecommendationRequest_ResourceGroupName *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationRequest_ComponentName *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationRequest_Tier *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationRequest_WorkloadName *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationRequest_RecommendationType *smithy.Schema
-
-var DescribeComponentConfigurationRecommendationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentConfigurationRecommendationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration *smithy.Schema
-
-var DescribeComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeComponentRequest_ResourceGroupName *smithy.Schema
-
-var DescribeComponentRequest_ComponentName *smithy.Schema
-
-var DescribeComponentRequest_AccountId *smithy.Schema
-
-var DescribeComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeComponentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeComponentResponse_ApplicationComponent *smithy.Schema
-
-var DescribeComponentResponse_ResourceList *smithy.Schema
-
-var DescribeLogPatternRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeLogPatternRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeLogPatternRequest_ResourceGroupName *smithy.Schema
-
-var DescribeLogPatternRequest_PatternSetName *smithy.Schema
-
-var DescribeLogPatternRequest_PatternName *smithy.Schema
-
-var DescribeLogPatternRequest_AccountId *smithy.Schema
-
-var DescribeLogPatternResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeLogPatternResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeLogPatternResponse_ResourceGroupName *smithy.Schema
-
-var DescribeLogPatternResponse_AccountId *smithy.Schema
-
-var DescribeLogPatternResponse_LogPattern *smithy.Schema
-
-var DescribeObservationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeObservationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeObservationRequest_ObservationId *smithy.Schema
-
-var DescribeObservationRequest_AccountId *smithy.Schema
-
-var DescribeObservationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeObservationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeObservationResponse_Observation *smithy.Schema
-
-var DescribeProblemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblemRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProblemRequest_ProblemId *smithy.Schema
-
-var DescribeProblemRequest_AccountId *smithy.Schema
-
-var DescribeProblemObservationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblemObservationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProblemObservationsRequest_ProblemId *smithy.Schema
-
-var DescribeProblemObservationsRequest_AccountId *smithy.Schema
-
-var DescribeProblemObservationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblemObservationsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeProblemObservationsResponse_RelatedObservations *smithy.Schema
-
-var DescribeProblemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeProblemResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProblemResponse_Problem *smithy.Schema
-
-var DescribeProblemResponse_SNSNotificationArn *smithy.Schema
-
-var DescribeWorkloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeWorkloadRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeWorkloadRequest_ResourceGroupName *smithy.Schema
-
-var DescribeWorkloadRequest_ComponentName *smithy.Schema
-
-var DescribeWorkloadRequest_WorkloadId *smithy.Schema
-
-var DescribeWorkloadRequest_AccountId *smithy.Schema
-
-var DescribeWorkloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "DescribeWorkloadResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeWorkloadResponse_WorkloadId *smithy.Schema
-
-var DescribeWorkloadResponse_WorkloadRemarks *smithy.Schema
-
-var DescribeWorkloadResponse_WorkloadConfiguration *smithy.Schema
-
-var ListApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListApplicationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListApplicationsRequest_MaxResults *smithy.Schema
-
-var ListApplicationsRequest_NextToken *smithy.Schema
-
-var ListApplicationsRequest_AccountId *smithy.Schema
-
-var ListApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListApplicationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationsResponse_ApplicationInfoList *smithy.Schema
-
-var ListApplicationsResponse_NextToken *smithy.Schema
-
-var ListComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListComponentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListComponentsRequest_ResourceGroupName *smithy.Schema
-
-var ListComponentsRequest_MaxResults *smithy.Schema
-
-var ListComponentsRequest_NextToken *smithy.Schema
-
-var ListComponentsRequest_AccountId *smithy.Schema
-
-var ListComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsResponse_ApplicationComponentList *smithy.Schema
-
-var ListComponentsResponse_NextToken *smithy.Schema
-
-var ListConfigurationHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListConfigurationHistoryRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListConfigurationHistoryRequest_ResourceGroupName *smithy.Schema
-
-var ListConfigurationHistoryRequest_StartTime *smithy.Schema
-
-var ListConfigurationHistoryRequest_EndTime *smithy.Schema
-
-var ListConfigurationHistoryRequest_EventStatus *smithy.Schema
-
-var ListConfigurationHistoryRequest_MaxResults *smithy.Schema
-
-var ListConfigurationHistoryRequest_NextToken *smithy.Schema
-
-var ListConfigurationHistoryRequest_AccountId *smithy.Schema
-
-var ListConfigurationHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListConfigurationHistoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationHistoryResponse_EventList *smithy.Schema
-
-var ListConfigurationHistoryResponse_NextToken *smithy.Schema
-
-var ListLogPatternSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatternSetsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListLogPatternSetsRequest_ResourceGroupName *smithy.Schema
-
-var ListLogPatternSetsRequest_MaxResults *smithy.Schema
-
-var ListLogPatternSetsRequest_NextToken *smithy.Schema
-
-var ListLogPatternSetsRequest_AccountId *smithy.Schema
-
-var ListLogPatternSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatternSetsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListLogPatternSetsResponse_ResourceGroupName *smithy.Schema
-
-var ListLogPatternSetsResponse_AccountId *smithy.Schema
-
-var ListLogPatternSetsResponse_LogPatternSets *smithy.Schema
-
-var ListLogPatternSetsResponse_NextToken *smithy.Schema
-
-var ListLogPatternsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatternsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListLogPatternsRequest_ResourceGroupName *smithy.Schema
-
-var ListLogPatternsRequest_PatternSetName *smithy.Schema
-
-var ListLogPatternsRequest_MaxResults *smithy.Schema
-
-var ListLogPatternsRequest_NextToken *smithy.Schema
-
-var ListLogPatternsRequest_AccountId *smithy.Schema
-
-var ListLogPatternsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListLogPatternsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListLogPatternsResponse_ResourceGroupName *smithy.Schema
-
-var ListLogPatternsResponse_AccountId *smithy.Schema
-
-var ListLogPatternsResponse_LogPatterns *smithy.Schema
-
-var ListLogPatternsResponse_NextToken *smithy.Schema
-
-var ListProblemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListProblemsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListProblemsRequest_AccountId *smithy.Schema
-
-var ListProblemsRequest_ResourceGroupName *smithy.Schema
-
-var ListProblemsRequest_StartTime *smithy.Schema
-
-var ListProblemsRequest_EndTime *smithy.Schema
-
-var ListProblemsRequest_MaxResults *smithy.Schema
-
-var ListProblemsRequest_NextToken *smithy.Schema
-
-var ListProblemsRequest_ComponentName *smithy.Schema
-
-var ListProblemsRequest_Visibility *smithy.Schema
-
-var ListProblemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListProblemsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListProblemsResponse_ProblemList *smithy.Schema
-
-var ListProblemsResponse_NextToken *smithy.Schema
-
-var ListProblemsResponse_ResourceGroupName *smithy.Schema
-
-var ListProblemsResponse_AccountId *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListWorkloadsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListWorkloadsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListWorkloadsRequest_ResourceGroupName *smithy.Schema
-
-var ListWorkloadsRequest_ComponentName *smithy.Schema
-
-var ListWorkloadsRequest_MaxResults *smithy.Schema
-
-var ListWorkloadsRequest_NextToken *smithy.Schema
-
-var ListWorkloadsRequest_AccountId *smithy.Schema
-
-var ListWorkloadsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "ListWorkloadsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkloadsResponse_WorkloadList *smithy.Schema
-
-var ListWorkloadsResponse_NextToken *smithy.Schema
-
-var RemoveWorkloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RemoveWorkloadRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveWorkloadRequest_ResourceGroupName *smithy.Schema
-
-var RemoveWorkloadRequest_ComponentName *smithy.Schema
-
-var RemoveWorkloadRequest_WorkloadId *smithy.Schema
-
-var RemoveWorkloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "RemoveWorkloadResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateApplicationRequest_ResourceGroupName *smithy.Schema
-
-var UpdateApplicationRequest_OpsCenterEnabled *smithy.Schema
-
-var UpdateApplicationRequest_CWEMonitorEnabled *smithy.Schema
-
-var UpdateApplicationRequest_OpsItemSNSTopicArn *smithy.Schema
-
-var UpdateApplicationRequest_SNSNotificationArn *smithy.Schema
-
-var UpdateApplicationRequest_RemoveSNSTopic *smithy.Schema
-
-var UpdateApplicationRequest_AutoConfigEnabled *smithy.Schema
-
-var UpdateApplicationRequest_AttachMissingPermission *smithy.Schema
-
-var UpdateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApplicationResponse_ApplicationInfo *smithy.Schema
-
-var UpdateComponentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponentConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateComponentConfigurationRequest_ResourceGroupName *smithy.Schema
-
-var UpdateComponentConfigurationRequest_ComponentName *smithy.Schema
-
-var UpdateComponentConfigurationRequest_Monitor *smithy.Schema
-
-var UpdateComponentConfigurationRequest_Tier *smithy.Schema
-
-var UpdateComponentConfigurationRequest_ComponentConfiguration *smithy.Schema
-
-var UpdateComponentConfigurationRequest_AutoConfigEnabled *smithy.Schema
-
-var UpdateComponentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateComponentRequest_ResourceGroupName *smithy.Schema
-
-var UpdateComponentRequest_ComponentName *smithy.Schema
-
-var UpdateComponentRequest_NewComponentName *smithy.Schema
-
-var UpdateComponentRequest_ResourceList *smithy.Schema
-
-var UpdateComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateComponentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLogPatternRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateLogPatternRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateLogPatternRequest_ResourceGroupName *smithy.Schema
-
-var UpdateLogPatternRequest_PatternSetName *smithy.Schema
-
-var UpdateLogPatternRequest_PatternName *smithy.Schema
-
-var UpdateLogPatternRequest_Pattern *smithy.Schema
-
-var UpdateLogPatternRequest_Rank *smithy.Schema
-
-var UpdateLogPatternResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateLogPatternResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateLogPatternResponse_ResourceGroupName *smithy.Schema
-
-var UpdateLogPatternResponse_LogPattern *smithy.Schema
-
-var UpdateProblemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateProblemRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProblemRequest_ProblemId *smithy.Schema
-
-var UpdateProblemRequest_UpdateStatus *smithy.Schema
-
-var UpdateProblemRequest_Visibility *smithy.Schema
-
-var UpdateProblemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateProblemResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateWorkloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateWorkloadRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWorkloadRequest_ResourceGroupName *smithy.Schema
-
-var UpdateWorkloadRequest_ComponentName *smithy.Schema
-
-var UpdateWorkloadRequest_WorkloadId *smithy.Schema
-
-var UpdateWorkloadRequest_WorkloadConfiguration *smithy.Schema
-
-var UpdateWorkloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationinsights",
-	Name:      "UpdateWorkloadResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateWorkloadResponse_WorkloadId *smithy.Schema
-
-var UpdateWorkloadResponse_WorkloadConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMsg)
-
-	OsType_WINDOWS = OsType.AddMember("WINDOWS", smithyprelude.Unit)
-
-	OsType_LINUX = OsType.AddMember("LINUX", smithyprelude.Unit)
-
-	Tier_CUSTOM = Tier.AddMember("CUSTOM", smithyprelude.Unit)
-
-	Tier_DEFAULT = Tier.AddMember("DEFAULT", smithyprelude.Unit)
-
-	Tier_DOT_NET_CORE = Tier.AddMember("DOT_NET_CORE", smithyprelude.Unit)
-
-	Tier_DOT_NET_WORKER = Tier.AddMember("DOT_NET_WORKER", smithyprelude.Unit)
-
-	Tier_DOT_NET_WEB_TIER = Tier.AddMember("DOT_NET_WEB_TIER", smithyprelude.Unit)
-
-	Tier_DOT_NET_WEB = Tier.AddMember("DOT_NET_WEB", smithyprelude.Unit)
-
-	Tier_SQL_SERVER = Tier.AddMember("SQL_SERVER", smithyprelude.Unit)
-
-	Tier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP = Tier.AddMember("SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", smithyprelude.Unit)
-
-	Tier_MYSQL = Tier.AddMember("MYSQL", smithyprelude.Unit)
-
-	Tier_POSTGRESQL = Tier.AddMember("POSTGRESQL", smithyprelude.Unit)
-
-	Tier_JAVA_JMX = Tier.AddMember("JAVA_JMX", smithyprelude.Unit)
-
-	Tier_ORACLE = Tier.AddMember("ORACLE", smithyprelude.Unit)
-
-	Tier_SAP_HANA_MULTI_NODE = Tier.AddMember("SAP_HANA_MULTI_NODE", smithyprelude.Unit)
-
-	Tier_SAP_HANA_SINGLE_NODE = Tier.AddMember("SAP_HANA_SINGLE_NODE", smithyprelude.Unit)
-
-	Tier_SAP_HANA_HIGH_AVAILABILITY = Tier.AddMember("SAP_HANA_HIGH_AVAILABILITY", smithyprelude.Unit)
-
-	Tier_SAP_ASE_SINGLE_NODE = Tier.AddMember("SAP_ASE_SINGLE_NODE", smithyprelude.Unit)
-
-	Tier_SAP_ASE_HIGH_AVAILABILITY = Tier.AddMember("SAP_ASE_HIGH_AVAILABILITY", smithyprelude.Unit)
-
-	Tier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE = Tier.AddMember("SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", smithyprelude.Unit)
-
-	Tier_SHAREPOINT = Tier.AddMember("SHAREPOINT", smithyprelude.Unit)
-
-	Tier_ACTIVE_DIRECTORY = Tier.AddMember("ACTIVE_DIRECTORY", smithyprelude.Unit)
-
-	Tier_SAP_NETWEAVER_STANDARD = Tier.AddMember("SAP_NETWEAVER_STANDARD", smithyprelude.Unit)
-
-	Tier_SAP_NETWEAVER_DISTRIBUTED = Tier.AddMember("SAP_NETWEAVER_DISTRIBUTED", smithyprelude.Unit)
-
-	Tier_SAP_NETWEAVER_HIGH_AVAILABILITY = Tier.AddMember("SAP_NETWEAVER_HIGH_AVAILABILITY", smithyprelude.Unit)
-
-	_WorkloadMetaData_key = _WorkloadMetaData.AddMember("key", _MetaDataKey)
-
-	_WorkloadMetaData_value = _WorkloadMetaData.AddMember("value", _MetaDataValue)
-
-	_DetectedWorkload_key = _DetectedWorkload.AddMember("key", Tier)
-
-	_DetectedWorkload_value = _DetectedWorkload.AddMember("value", _WorkloadMetaData)
-
-	ApplicationComponent_ComponentName = ApplicationComponent.AddMember("ComponentName", _ComponentName)
-
-	ApplicationComponent_ComponentRemarks = ApplicationComponent.AddMember("ComponentRemarks", _Remarks)
-
-	ApplicationComponent_ResourceType = ApplicationComponent.AddMember("ResourceType", _ResourceType)
-
-	ApplicationComponent_OsType = ApplicationComponent.AddMember("OsType", OsType)
-
-	ApplicationComponent_Tier = ApplicationComponent.AddMember("Tier", Tier)
-
-	ApplicationComponent_Monitor = ApplicationComponent.AddMember("Monitor", _Monitor)
-
-	ApplicationComponent_DetectedWorkload = ApplicationComponent.AddMember("DetectedWorkload", _DetectedWorkload)
-
-	_ApplicationComponentList_member = _ApplicationComponentList.AddMember("member", ApplicationComponent)
-
-	DiscoveryType_RESOURCE_GROUP_BASED = DiscoveryType.AddMember("RESOURCE_GROUP_BASED", smithyprelude.Unit)
-
-	DiscoveryType_ACCOUNT_BASED = DiscoveryType.AddMember("ACCOUNT_BASED", smithyprelude.Unit)
-
-	ApplicationInfo_AccountId = ApplicationInfo.AddMember("AccountId", _AccountId)
-
-	ApplicationInfo_ResourceGroupName = ApplicationInfo.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ApplicationInfo_LifeCycle = ApplicationInfo.AddMember("LifeCycle", _LifeCycle)
-
-	ApplicationInfo_OpsItemSNSTopicArn = ApplicationInfo.AddMember("OpsItemSNSTopicArn", _OpsItemSNSTopicArn)
-
-	ApplicationInfo_SNSNotificationArn = ApplicationInfo.AddMember("SNSNotificationArn", _SNSNotificationArn)
-
-	ApplicationInfo_OpsCenterEnabled = ApplicationInfo.AddMember("OpsCenterEnabled", _OpsCenterEnabled)
-
-	ApplicationInfo_CWEMonitorEnabled = ApplicationInfo.AddMember("CWEMonitorEnabled", _CWEMonitorEnabled)
-
-	ApplicationInfo_Remarks = ApplicationInfo.AddMember("Remarks", _Remarks)
-
-	ApplicationInfo_AutoConfigEnabled = ApplicationInfo.AddMember("AutoConfigEnabled", _AutoConfigEnabled)
-
-	ApplicationInfo_DiscoveryType = ApplicationInfo.AddMember("DiscoveryType", DiscoveryType)
-
-	ApplicationInfo_AttachMissingPermission = ApplicationInfo.AddMember("AttachMissingPermission", _AttachMissingPermission)
-
-	_ApplicationInfoList_member = _ApplicationInfoList.AddMember("member", ApplicationInfo)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _ErrorMsg)
-
-	CloudWatchEventSource_EC2 = CloudWatchEventSource.AddMember("EC2", smithyprelude.Unit)
-
-	CloudWatchEventSource_CODE_DEPLOY = CloudWatchEventSource.AddMember("CODE_DEPLOY", smithyprelude.Unit)
-
-	CloudWatchEventSource_HEALTH = CloudWatchEventSource.AddMember("HEALTH", smithyprelude.Unit)
-
-	CloudWatchEventSource_RDS = CloudWatchEventSource.AddMember("RDS", smithyprelude.Unit)
-
-	ConfigurationEventStatus_INFO = ConfigurationEventStatus.AddMember("INFO", smithyprelude.Unit)
-
-	ConfigurationEventStatus_WARN = ConfigurationEventStatus.AddMember("WARN", smithyprelude.Unit)
-
-	ConfigurationEventStatus_ERROR = ConfigurationEventStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	ConfigurationEventResourceType_CLOUDWATCH_ALARM = ConfigurationEventResourceType.AddMember("CLOUDWATCH_ALARM", smithyprelude.Unit)
-
-	ConfigurationEventResourceType_CLOUDWATCH_LOG = ConfigurationEventResourceType.AddMember("CLOUDWATCH_LOG", smithyprelude.Unit)
-
-	ConfigurationEventResourceType_CLOUDFORMATION = ConfigurationEventResourceType.AddMember("CLOUDFORMATION", smithyprelude.Unit)
-
-	ConfigurationEventResourceType_SSM_ASSOCIATION = ConfigurationEventResourceType.AddMember("SSM_ASSOCIATION", smithyprelude.Unit)
-
-	ConfigurationEvent_ResourceGroupName = ConfigurationEvent.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ConfigurationEvent_AccountId = ConfigurationEvent.AddMember("AccountId", _AccountId)
-
-	ConfigurationEvent_MonitoredResourceARN = ConfigurationEvent.AddMember("MonitoredResourceARN", _ConfigurationEventMonitoredResourceARN)
-
-	ConfigurationEvent_EventStatus = ConfigurationEvent.AddMember("EventStatus", ConfigurationEventStatus)
-
-	ConfigurationEvent_EventResourceType = ConfigurationEvent.AddMember("EventResourceType", ConfigurationEventResourceType)
-
-	ConfigurationEvent_EventTime = ConfigurationEvent.AddMember("EventTime", _ConfigurationEventTime)
-
-	ConfigurationEvent_EventDetail = ConfigurationEvent.AddMember("EventDetail", _ConfigurationEventDetail)
-
-	ConfigurationEvent_EventResourceName = ConfigurationEvent.AddMember("EventResourceName", _ConfigurationEventResourceName)
-
-	_ConfigurationEventList_member = _ConfigurationEventList.AddMember("member", ConfigurationEvent)
-
-	FeedbackKey_INSIGHTS_FEEDBACK = FeedbackKey.AddMember("INSIGHTS_FEEDBACK", smithyprelude.Unit)
-
-	FeedbackValue_NOT_SPECIFIED = FeedbackValue.AddMember("NOT_SPECIFIED", smithyprelude.Unit)
-
-	FeedbackValue_USEFUL = FeedbackValue.AddMember("USEFUL", smithyprelude.Unit)
-
-	FeedbackValue_NOT_USEFUL = FeedbackValue.AddMember("NOT_USEFUL", smithyprelude.Unit)
-
-	_Feedback_key = _Feedback.AddMember("key", FeedbackKey)
-
-	_Feedback_value = _Feedback.AddMember("value", FeedbackValue)
-
-	GroupingType_ACCOUNT_BASED = GroupingType.AddMember("ACCOUNT_BASED", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMsg)
-
-	LogFilter_ERROR = LogFilter.AddMember("ERROR", smithyprelude.Unit)
-
-	LogFilter_WARN = LogFilter.AddMember("WARN", smithyprelude.Unit)
-
-	LogFilter_INFO = LogFilter.AddMember("INFO", smithyprelude.Unit)
-
-	LogPattern_PatternSetName = LogPattern.AddMember("PatternSetName", _LogPatternSetName)
-
-	LogPattern_PatternName = LogPattern.AddMember("PatternName", _LogPatternName)
-
-	LogPattern_Pattern = LogPattern.AddMember("Pattern", _LogPatternRegex)
-
-	LogPattern_Rank = LogPattern.AddMember("Rank", _LogPatternRank)
-
-	_LogPatternList_member = _LogPatternList.AddMember("member", LogPattern)
-
-	_LogPatternSetList_member = _LogPatternSetList.AddMember("member", _LogPatternSetName)
-
-	Observation_Id = Observation.AddMember("Id", _ObservationId)
-
-	Observation_StartTime = Observation.AddMember("StartTime", _StartTime)
-
-	Observation_EndTime = Observation.AddMember("EndTime", _EndTime)
-
-	Observation_SourceType = Observation.AddMember("SourceType", _SourceType)
-
-	Observation_SourceARN = Observation.AddMember("SourceARN", _SourceARN)
-
-	Observation_LogGroup = Observation.AddMember("LogGroup", _LogGroup)
-
-	Observation_LineTime = Observation.AddMember("LineTime", _LineTime)
-
-	Observation_LogText = Observation.AddMember("LogText", _LogText)
-
-	Observation_LogFilter = Observation.AddMember("LogFilter", LogFilter)
-
-	Observation_MetricNamespace = Observation.AddMember("MetricNamespace", _MetricNamespace)
-
-	Observation_MetricName = Observation.AddMember("MetricName", _MetricName)
-
-	Observation_Unit = Observation.AddMember("Unit", _Unit)
-
-	Observation_Value = Observation.AddMember("Value", _Value)
-
-	Observation_CloudWatchEventId = Observation.AddMember("CloudWatchEventId", _CloudWatchEventId)
-
-	Observation_CloudWatchEventSource = Observation.AddMember("CloudWatchEventSource", CloudWatchEventSource)
-
-	Observation_CloudWatchEventDetailType = Observation.AddMember("CloudWatchEventDetailType", _CloudWatchEventDetailType)
-
-	Observation_HealthEventArn = Observation.AddMember("HealthEventArn", _HealthEventArn)
-
-	Observation_HealthService = Observation.AddMember("HealthService", _HealthService)
-
-	Observation_HealthEventTypeCode = Observation.AddMember("HealthEventTypeCode", _HealthEventTypeCode)
-
-	Observation_HealthEventTypeCategory = Observation.AddMember("HealthEventTypeCategory", _HealthEventTypeCategory)
-
-	Observation_HealthEventDescription = Observation.AddMember("HealthEventDescription", _HealthEventDescription)
-
-	Observation_CodeDeployDeploymentId = Observation.AddMember("CodeDeployDeploymentId", _CodeDeployDeploymentId)
-
-	Observation_CodeDeployDeploymentGroup = Observation.AddMember("CodeDeployDeploymentGroup", _CodeDeployDeploymentGroup)
-
-	Observation_CodeDeployState = Observation.AddMember("CodeDeployState", _CodeDeployState)
-
-	Observation_CodeDeployApplication = Observation.AddMember("CodeDeployApplication", _CodeDeployApplication)
-
-	Observation_CodeDeployInstanceGroupId = Observation.AddMember("CodeDeployInstanceGroupId", _CodeDeployInstanceGroupId)
-
-	Observation_Ec2State = Observation.AddMember("Ec2State", _Ec2State)
-
-	Observation_RdsEventCategories = Observation.AddMember("RdsEventCategories", _RdsEventCategories)
-
-	Observation_RdsEventMessage = Observation.AddMember("RdsEventMessage", _RdsEventMessage)
-
-	Observation_S3EventName = Observation.AddMember("S3EventName", _S3EventName)
-
-	Observation_StatesExecutionArn = Observation.AddMember("StatesExecutionArn", _StatesExecutionArn)
-
-	Observation_StatesArn = Observation.AddMember("StatesArn", _StatesArn)
-
-	Observation_StatesStatus = Observation.AddMember("StatesStatus", _StatesStatus)
-
-	Observation_StatesInput = Observation.AddMember("StatesInput", _StatesInput)
-
-	Observation_EbsEvent = Observation.AddMember("EbsEvent", _EbsEvent)
-
-	Observation_EbsResult = Observation.AddMember("EbsResult", _EbsResult)
-
-	Observation_EbsCause = Observation.AddMember("EbsCause", _EbsCause)
-
-	Observation_EbsRequestId = Observation.AddMember("EbsRequestId", _EbsRequestId)
-
-	Observation_XRayFaultPercent = Observation.AddMember("XRayFaultPercent", _XRayFaultPercent)
-
-	Observation_XRayThrottlePercent = Observation.AddMember("XRayThrottlePercent", _XRayThrottlePercent)
-
-	Observation_XRayErrorPercent = Observation.AddMember("XRayErrorPercent", _XRayErrorPercent)
-
-	Observation_XRayRequestCount = Observation.AddMember("XRayRequestCount", _XRayRequestCount)
-
-	Observation_XRayRequestAverageLatency = Observation.AddMember("XRayRequestAverageLatency", _XRayRequestAverageLatency)
-
-	Observation_XRayNodeName = Observation.AddMember("XRayNodeName", _XRayNodeName)
-
-	Observation_XRayNodeType = Observation.AddMember("XRayNodeType", _XRayNodeType)
-
-	_ObservationList_member = _ObservationList.AddMember("member", Observation)
-
-	Status_IGNORE = Status.AddMember("IGNORE", smithyprelude.Unit)
-
-	Status_RESOLVED = Status.AddMember("RESOLVED", smithyprelude.Unit)
-
-	Status_PENDING = Status.AddMember("PENDING", smithyprelude.Unit)
-
-	Status_RECURRING = Status.AddMember("RECURRING", smithyprelude.Unit)
-
-	Status_RECOVERING = Status.AddMember("RECOVERING", smithyprelude.Unit)
-
-	SeverityLevel_Informative = SeverityLevel.AddMember("Informative", smithyprelude.Unit)
-
-	SeverityLevel_Low = SeverityLevel.AddMember("Low", smithyprelude.Unit)
-
-	SeverityLevel_Medium = SeverityLevel.AddMember("Medium", smithyprelude.Unit)
-
-	SeverityLevel_High = SeverityLevel.AddMember("High", smithyprelude.Unit)
-
-	Visibility_IGNORED = Visibility.AddMember("IGNORED", smithyprelude.Unit)
-
-	Visibility_VISIBLE = Visibility.AddMember("VISIBLE", smithyprelude.Unit)
-
-	ResolutionMethod_MANUAL = ResolutionMethod.AddMember("MANUAL", smithyprelude.Unit)
-
-	ResolutionMethod_AUTOMATIC = ResolutionMethod.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	ResolutionMethod_UNRESOLVED = ResolutionMethod.AddMember("UNRESOLVED", smithyprelude.Unit)
-
-	Problem_Id = Problem.AddMember("Id", _ProblemId)
-
-	Problem_Title = Problem.AddMember("Title", _Title)
-
-	Problem_ShortName = Problem.AddMember("ShortName", _ShortName)
-
-	Problem_Insights = Problem.AddMember("Insights", _Insights)
-
-	Problem_Status = Problem.AddMember("Status", Status)
-
-	Problem_AffectedResource = Problem.AddMember("AffectedResource", _AffectedResource)
-
-	Problem_StartTime = Problem.AddMember("StartTime", _StartTime)
-
-	Problem_EndTime = Problem.AddMember("EndTime", _EndTime)
-
-	Problem_SeverityLevel = Problem.AddMember("SeverityLevel", SeverityLevel)
-
-	Problem_AccountId = Problem.AddMember("AccountId", _AccountId)
-
-	Problem_ResourceGroupName = Problem.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	Problem_Feedback = Problem.AddMember("Feedback", _Feedback)
-
-	Problem_RecurringCount = Problem.AddMember("RecurringCount", _RecurringCount)
-
-	Problem_LastRecurrenceTime = Problem.AddMember("LastRecurrenceTime", _LastRecurrenceTime)
-
-	Problem_Visibility = Problem.AddMember("Visibility", Visibility)
-
-	Problem_ResolutionMethod = Problem.AddMember("ResolutionMethod", ResolutionMethod)
-
-	_ProblemList_member = _ProblemList.AddMember("member", Problem)
-
-	RecommendationType_INFRA_ONLY = RecommendationType.AddMember("INFRA_ONLY", smithyprelude.Unit)
-
-	RecommendationType_WORKLOAD_ONLY = RecommendationType.AddMember("WORKLOAD_ONLY", smithyprelude.Unit)
-
-	RecommendationType_ALL = RecommendationType.AddMember("ALL", smithyprelude.Unit)
-
-	RelatedObservations_ObservationList = RelatedObservations.AddMember("ObservationList", _ObservationList)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorMsg)
-
-	_ResourceList_member = _ResourceList.AddMember("member", _ResourceARN)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMsg)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TagsAlreadyExistException_Message = TagsAlreadyExistException.AddMember("Message", _ExceptionMessage)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ExceptionMessage)
-
-	TooManyTagsException_ResourceName = TooManyTagsException.AddMember("ResourceName", _AmazonResourceName)
-
-	UpdateStatus_RESOLVED = UpdateStatus.AddMember("RESOLVED", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMsg)
-
-	Workload_WorkloadId = Workload.AddMember("WorkloadId", _WorkloadId)
-
-	Workload_ComponentName = Workload.AddMember("ComponentName", _ComponentName)
-
-	Workload_WorkloadName = Workload.AddMember("WorkloadName", _WorkloadName)
-
-	Workload_Tier = Workload.AddMember("Tier", Tier)
-
-	Workload_WorkloadRemarks = Workload.AddMember("WorkloadRemarks", _Remarks)
-
-	Workload_MissingWorkloadConfig = Workload.AddMember("MissingWorkloadConfig", _MissingWorkloadConfig)
-
-	WorkloadConfiguration_WorkloadName = WorkloadConfiguration.AddMember("WorkloadName", _WorkloadName)
-
-	WorkloadConfiguration_Tier = WorkloadConfiguration.AddMember("Tier", Tier)
-
-	WorkloadConfiguration_Configuration = WorkloadConfiguration.AddMember("Configuration", _ComponentConfiguration)
-
-	_WorkloadList_member = _WorkloadList.AddMember("member", Workload)
-
-	AddWorkloadRequest_ResourceGroupName = AddWorkloadRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	AddWorkloadRequest_ComponentName = AddWorkloadRequest.AddMember("ComponentName", _ComponentName)
-
-	AddWorkloadRequest_WorkloadConfiguration = AddWorkloadRequest.AddMember("WorkloadConfiguration", WorkloadConfiguration)
-
-	AddWorkloadResponse_WorkloadId = AddWorkloadResponse.AddMember("WorkloadId", _WorkloadId)
-
-	AddWorkloadResponse_WorkloadConfiguration = AddWorkloadResponse.AddMember("WorkloadConfiguration", WorkloadConfiguration)
-
-	CreateApplicationRequest_ResourceGroupName = CreateApplicationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	CreateApplicationRequest_OpsCenterEnabled = CreateApplicationRequest.AddMember("OpsCenterEnabled", _OpsCenterEnabled)
-
-	CreateApplicationRequest_CWEMonitorEnabled = CreateApplicationRequest.AddMember("CWEMonitorEnabled", _CWEMonitorEnabled)
-
-	CreateApplicationRequest_OpsItemSNSTopicArn = CreateApplicationRequest.AddMember("OpsItemSNSTopicArn", _OpsItemSNSTopicArn)
-
-	CreateApplicationRequest_SNSNotificationArn = CreateApplicationRequest.AddMember("SNSNotificationArn", _SNSNotificationArn)
-
-	CreateApplicationRequest_Tags = CreateApplicationRequest.AddMember("Tags", _TagList)
-
-	CreateApplicationRequest_AutoConfigEnabled = CreateApplicationRequest.AddMember("AutoConfigEnabled", _AutoConfigEnabled)
-
-	CreateApplicationRequest_AutoCreate = CreateApplicationRequest.AddMember("AutoCreate", _AutoCreate)
-
-	CreateApplicationRequest_GroupingType = CreateApplicationRequest.AddMember("GroupingType", GroupingType)
-
-	CreateApplicationRequest_AttachMissingPermission = CreateApplicationRequest.AddMember("AttachMissingPermission", _AttachMissingPermission)
-
-	CreateApplicationResponse_ApplicationInfo = CreateApplicationResponse.AddMember("ApplicationInfo", ApplicationInfo)
-
-	CreateComponentRequest_ResourceGroupName = CreateComponentRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	CreateComponentRequest_ComponentName = CreateComponentRequest.AddMember("ComponentName", _CustomComponentName)
-
-	CreateComponentRequest_ResourceList = CreateComponentRequest.AddMember("ResourceList", _ResourceList)
-
-	CreateLogPatternRequest_ResourceGroupName = CreateLogPatternRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	CreateLogPatternRequest_PatternSetName = CreateLogPatternRequest.AddMember("PatternSetName", _LogPatternSetName)
-
-	CreateLogPatternRequest_PatternName = CreateLogPatternRequest.AddMember("PatternName", _LogPatternName)
-
-	CreateLogPatternRequest_Pattern = CreateLogPatternRequest.AddMember("Pattern", _LogPatternRegex)
-
-	CreateLogPatternRequest_Rank = CreateLogPatternRequest.AddMember("Rank", _LogPatternRank)
-
-	CreateLogPatternResponse_LogPattern = CreateLogPatternResponse.AddMember("LogPattern", LogPattern)
-
-	CreateLogPatternResponse_ResourceGroupName = CreateLogPatternResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DeleteApplicationRequest_ResourceGroupName = DeleteApplicationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DeleteComponentRequest_ResourceGroupName = DeleteComponentRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DeleteComponentRequest_ComponentName = DeleteComponentRequest.AddMember("ComponentName", _CustomComponentName)
-
-	DeleteLogPatternRequest_ResourceGroupName = DeleteLogPatternRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DeleteLogPatternRequest_PatternSetName = DeleteLogPatternRequest.AddMember("PatternSetName", _LogPatternSetName)
-
-	DeleteLogPatternRequest_PatternName = DeleteLogPatternRequest.AddMember("PatternName", _LogPatternName)
-
-	DescribeApplicationRequest_ResourceGroupName = DescribeApplicationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeApplicationRequest_AccountId = DescribeApplicationRequest.AddMember("AccountId", _AccountId)
-
-	DescribeApplicationResponse_ApplicationInfo = DescribeApplicationResponse.AddMember("ApplicationInfo", ApplicationInfo)
-
-	DescribeComponentConfigurationRequest_ResourceGroupName = DescribeComponentConfigurationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeComponentConfigurationRequest_ComponentName = DescribeComponentConfigurationRequest.AddMember("ComponentName", _ComponentName)
-
-	DescribeComponentConfigurationRequest_AccountId = DescribeComponentConfigurationRequest.AddMember("AccountId", _AccountId)
-
-	DescribeComponentConfigurationResponse_Monitor = DescribeComponentConfigurationResponse.AddMember("Monitor", _Monitor)
-
-	DescribeComponentConfigurationResponse_Tier = DescribeComponentConfigurationResponse.AddMember("Tier", Tier)
-
-	DescribeComponentConfigurationResponse_ComponentConfiguration = DescribeComponentConfigurationResponse.AddMember("ComponentConfiguration", _ComponentConfiguration)
-
-	DescribeComponentConfigurationRecommendationRequest_ResourceGroupName = DescribeComponentConfigurationRecommendationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeComponentConfigurationRecommendationRequest_ComponentName = DescribeComponentConfigurationRecommendationRequest.AddMember("ComponentName", _ComponentName)
-
-	DescribeComponentConfigurationRecommendationRequest_Tier = DescribeComponentConfigurationRecommendationRequest.AddMember("Tier", Tier)
-
-	DescribeComponentConfigurationRecommendationRequest_WorkloadName = DescribeComponentConfigurationRecommendationRequest.AddMember("WorkloadName", _WorkloadName)
-
-	DescribeComponentConfigurationRecommendationRequest_RecommendationType = DescribeComponentConfigurationRecommendationRequest.AddMember("RecommendationType", RecommendationType)
-
-	DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration = DescribeComponentConfigurationRecommendationResponse.AddMember("ComponentConfiguration", _ComponentConfiguration)
-
-	DescribeComponentRequest_ResourceGroupName = DescribeComponentRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeComponentRequest_ComponentName = DescribeComponentRequest.AddMember("ComponentName", _ComponentName)
-
-	DescribeComponentRequest_AccountId = DescribeComponentRequest.AddMember("AccountId", _AccountId)
-
-	DescribeComponentResponse_ApplicationComponent = DescribeComponentResponse.AddMember("ApplicationComponent", ApplicationComponent)
-
-	DescribeComponentResponse_ResourceList = DescribeComponentResponse.AddMember("ResourceList", _ResourceList)
-
-	DescribeLogPatternRequest_ResourceGroupName = DescribeLogPatternRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeLogPatternRequest_PatternSetName = DescribeLogPatternRequest.AddMember("PatternSetName", _LogPatternSetName)
-
-	DescribeLogPatternRequest_PatternName = DescribeLogPatternRequest.AddMember("PatternName", _LogPatternName)
-
-	DescribeLogPatternRequest_AccountId = DescribeLogPatternRequest.AddMember("AccountId", _AccountId)
-
-	DescribeLogPatternResponse_ResourceGroupName = DescribeLogPatternResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeLogPatternResponse_AccountId = DescribeLogPatternResponse.AddMember("AccountId", _AccountId)
-
-	DescribeLogPatternResponse_LogPattern = DescribeLogPatternResponse.AddMember("LogPattern", LogPattern)
-
-	DescribeObservationRequest_ObservationId = DescribeObservationRequest.AddMember("ObservationId", _ObservationId)
-
-	DescribeObservationRequest_AccountId = DescribeObservationRequest.AddMember("AccountId", _AccountId)
-
-	DescribeObservationResponse_Observation = DescribeObservationResponse.AddMember("Observation", Observation)
-
-	DescribeProblemRequest_ProblemId = DescribeProblemRequest.AddMember("ProblemId", _ProblemId)
-
-	DescribeProblemRequest_AccountId = DescribeProblemRequest.AddMember("AccountId", _AccountId)
-
-	DescribeProblemObservationsRequest_ProblemId = DescribeProblemObservationsRequest.AddMember("ProblemId", _ProblemId)
-
-	DescribeProblemObservationsRequest_AccountId = DescribeProblemObservationsRequest.AddMember("AccountId", _AccountId)
-
-	DescribeProblemObservationsResponse_RelatedObservations = DescribeProblemObservationsResponse.AddMember("RelatedObservations", RelatedObservations)
-
-	DescribeProblemResponse_Problem = DescribeProblemResponse.AddMember("Problem", Problem)
-
-	DescribeProblemResponse_SNSNotificationArn = DescribeProblemResponse.AddMember("SNSNotificationArn", _SNSNotificationArn)
-
-	DescribeWorkloadRequest_ResourceGroupName = DescribeWorkloadRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	DescribeWorkloadRequest_ComponentName = DescribeWorkloadRequest.AddMember("ComponentName", _ComponentName)
-
-	DescribeWorkloadRequest_WorkloadId = DescribeWorkloadRequest.AddMember("WorkloadId", _WorkloadId)
-
-	DescribeWorkloadRequest_AccountId = DescribeWorkloadRequest.AddMember("AccountId", _AccountId)
-
-	DescribeWorkloadResponse_WorkloadId = DescribeWorkloadResponse.AddMember("WorkloadId", _WorkloadId)
-
-	DescribeWorkloadResponse_WorkloadRemarks = DescribeWorkloadResponse.AddMember("WorkloadRemarks", _Remarks)
-
-	DescribeWorkloadResponse_WorkloadConfiguration = DescribeWorkloadResponse.AddMember("WorkloadConfiguration", WorkloadConfiguration)
-
-	ListApplicationsRequest_MaxResults = ListApplicationsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListApplicationsRequest_NextToken = ListApplicationsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListApplicationsRequest_AccountId = ListApplicationsRequest.AddMember("AccountId", _AccountId)
-
-	ListApplicationsResponse_ApplicationInfoList = ListApplicationsResponse.AddMember("ApplicationInfoList", _ApplicationInfoList)
-
-	ListApplicationsResponse_NextToken = ListApplicationsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListComponentsRequest_ResourceGroupName = ListComponentsRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListComponentsRequest_MaxResults = ListComponentsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListComponentsRequest_NextToken = ListComponentsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListComponentsRequest_AccountId = ListComponentsRequest.AddMember("AccountId", _AccountId)
-
-	ListComponentsResponse_ApplicationComponentList = ListComponentsResponse.AddMember("ApplicationComponentList", _ApplicationComponentList)
-
-	ListComponentsResponse_NextToken = ListComponentsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListConfigurationHistoryRequest_ResourceGroupName = ListConfigurationHistoryRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListConfigurationHistoryRequest_StartTime = ListConfigurationHistoryRequest.AddMember("StartTime", _StartTime)
-
-	ListConfigurationHistoryRequest_EndTime = ListConfigurationHistoryRequest.AddMember("EndTime", _EndTime)
-
-	ListConfigurationHistoryRequest_EventStatus = ListConfigurationHistoryRequest.AddMember("EventStatus", ConfigurationEventStatus)
-
-	ListConfigurationHistoryRequest_MaxResults = ListConfigurationHistoryRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListConfigurationHistoryRequest_NextToken = ListConfigurationHistoryRequest.AddMember("NextToken", _PaginationToken)
-
-	ListConfigurationHistoryRequest_AccountId = ListConfigurationHistoryRequest.AddMember("AccountId", _AccountId)
-
-	ListConfigurationHistoryResponse_EventList = ListConfigurationHistoryResponse.AddMember("EventList", _ConfigurationEventList)
-
-	ListConfigurationHistoryResponse_NextToken = ListConfigurationHistoryResponse.AddMember("NextToken", _PaginationToken)
-
-	ListLogPatternSetsRequest_ResourceGroupName = ListLogPatternSetsRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListLogPatternSetsRequest_MaxResults = ListLogPatternSetsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListLogPatternSetsRequest_NextToken = ListLogPatternSetsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListLogPatternSetsRequest_AccountId = ListLogPatternSetsRequest.AddMember("AccountId", _AccountId)
-
-	ListLogPatternSetsResponse_ResourceGroupName = ListLogPatternSetsResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListLogPatternSetsResponse_AccountId = ListLogPatternSetsResponse.AddMember("AccountId", _AccountId)
-
-	ListLogPatternSetsResponse_LogPatternSets = ListLogPatternSetsResponse.AddMember("LogPatternSets", _LogPatternSetList)
-
-	ListLogPatternSetsResponse_NextToken = ListLogPatternSetsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListLogPatternsRequest_ResourceGroupName = ListLogPatternsRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListLogPatternsRequest_PatternSetName = ListLogPatternsRequest.AddMember("PatternSetName", _LogPatternSetName)
-
-	ListLogPatternsRequest_MaxResults = ListLogPatternsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListLogPatternsRequest_NextToken = ListLogPatternsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListLogPatternsRequest_AccountId = ListLogPatternsRequest.AddMember("AccountId", _AccountId)
-
-	ListLogPatternsResponse_ResourceGroupName = ListLogPatternsResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListLogPatternsResponse_AccountId = ListLogPatternsResponse.AddMember("AccountId", _AccountId)
-
-	ListLogPatternsResponse_LogPatterns = ListLogPatternsResponse.AddMember("LogPatterns", _LogPatternList)
-
-	ListLogPatternsResponse_NextToken = ListLogPatternsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProblemsRequest_AccountId = ListProblemsRequest.AddMember("AccountId", _AccountId)
-
-	ListProblemsRequest_ResourceGroupName = ListProblemsRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListProblemsRequest_StartTime = ListProblemsRequest.AddMember("StartTime", _StartTime)
-
-	ListProblemsRequest_EndTime = ListProblemsRequest.AddMember("EndTime", _EndTime)
-
-	ListProblemsRequest_MaxResults = ListProblemsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListProblemsRequest_NextToken = ListProblemsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListProblemsRequest_ComponentName = ListProblemsRequest.AddMember("ComponentName", _ComponentName)
-
-	ListProblemsRequest_Visibility = ListProblemsRequest.AddMember("Visibility", Visibility)
-
-	ListProblemsResponse_ProblemList = ListProblemsResponse.AddMember("ProblemList", _ProblemList)
-
-	ListProblemsResponse_NextToken = ListProblemsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProblemsResponse_ResourceGroupName = ListProblemsResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListProblemsResponse_AccountId = ListProblemsResponse.AddMember("AccountId", _AccountId)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListWorkloadsRequest_ResourceGroupName = ListWorkloadsRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	ListWorkloadsRequest_ComponentName = ListWorkloadsRequest.AddMember("ComponentName", _ComponentName)
-
-	ListWorkloadsRequest_MaxResults = ListWorkloadsRequest.AddMember("MaxResults", _MaxEntities)
-
-	ListWorkloadsRequest_NextToken = ListWorkloadsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListWorkloadsRequest_AccountId = ListWorkloadsRequest.AddMember("AccountId", _AccountId)
-
-	ListWorkloadsResponse_WorkloadList = ListWorkloadsResponse.AddMember("WorkloadList", _WorkloadList)
-
-	ListWorkloadsResponse_NextToken = ListWorkloadsResponse.AddMember("NextToken", _PaginationToken)
-
-	RemoveWorkloadRequest_ResourceGroupName = RemoveWorkloadRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	RemoveWorkloadRequest_ComponentName = RemoveWorkloadRequest.AddMember("ComponentName", _ComponentName)
-
-	RemoveWorkloadRequest_WorkloadId = RemoveWorkloadRequest.AddMember("WorkloadId", _WorkloadId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateApplicationRequest_ResourceGroupName = UpdateApplicationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateApplicationRequest_OpsCenterEnabled = UpdateApplicationRequest.AddMember("OpsCenterEnabled", _OpsCenterEnabled)
-
-	UpdateApplicationRequest_CWEMonitorEnabled = UpdateApplicationRequest.AddMember("CWEMonitorEnabled", _CWEMonitorEnabled)
-
-	UpdateApplicationRequest_OpsItemSNSTopicArn = UpdateApplicationRequest.AddMember("OpsItemSNSTopicArn", _OpsItemSNSTopicArn)
-
-	UpdateApplicationRequest_SNSNotificationArn = UpdateApplicationRequest.AddMember("SNSNotificationArn", _SNSNotificationArn)
-
-	UpdateApplicationRequest_RemoveSNSTopic = UpdateApplicationRequest.AddMember("RemoveSNSTopic", _RemoveSNSTopic)
-
-	UpdateApplicationRequest_AutoConfigEnabled = UpdateApplicationRequest.AddMember("AutoConfigEnabled", _AutoConfigEnabled)
-
-	UpdateApplicationRequest_AttachMissingPermission = UpdateApplicationRequest.AddMember("AttachMissingPermission", _AttachMissingPermission)
-
-	UpdateApplicationResponse_ApplicationInfo = UpdateApplicationResponse.AddMember("ApplicationInfo", ApplicationInfo)
-
-	UpdateComponentConfigurationRequest_ResourceGroupName = UpdateComponentConfigurationRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateComponentConfigurationRequest_ComponentName = UpdateComponentConfigurationRequest.AddMember("ComponentName", _ComponentName)
-
-	UpdateComponentConfigurationRequest_Monitor = UpdateComponentConfigurationRequest.AddMember("Monitor", _Monitor)
-
-	UpdateComponentConfigurationRequest_Tier = UpdateComponentConfigurationRequest.AddMember("Tier", Tier)
-
-	UpdateComponentConfigurationRequest_ComponentConfiguration = UpdateComponentConfigurationRequest.AddMember("ComponentConfiguration", _ComponentConfiguration)
-
-	UpdateComponentConfigurationRequest_AutoConfigEnabled = UpdateComponentConfigurationRequest.AddMember("AutoConfigEnabled", _AutoConfigEnabled)
-
-	UpdateComponentRequest_ResourceGroupName = UpdateComponentRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateComponentRequest_ComponentName = UpdateComponentRequest.AddMember("ComponentName", _CustomComponentName)
-
-	UpdateComponentRequest_NewComponentName = UpdateComponentRequest.AddMember("NewComponentName", _CustomComponentName)
-
-	UpdateComponentRequest_ResourceList = UpdateComponentRequest.AddMember("ResourceList", _ResourceList)
-
-	UpdateLogPatternRequest_ResourceGroupName = UpdateLogPatternRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateLogPatternRequest_PatternSetName = UpdateLogPatternRequest.AddMember("PatternSetName", _LogPatternSetName)
-
-	UpdateLogPatternRequest_PatternName = UpdateLogPatternRequest.AddMember("PatternName", _LogPatternName)
-
-	UpdateLogPatternRequest_Pattern = UpdateLogPatternRequest.AddMember("Pattern", _LogPatternRegex)
-
-	UpdateLogPatternRequest_Rank = UpdateLogPatternRequest.AddMember("Rank", _LogPatternRank)
-
-	UpdateLogPatternResponse_ResourceGroupName = UpdateLogPatternResponse.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateLogPatternResponse_LogPattern = UpdateLogPatternResponse.AddMember("LogPattern", LogPattern)
-
-	UpdateProblemRequest_ProblemId = UpdateProblemRequest.AddMember("ProblemId", _ProblemId)
-
-	UpdateProblemRequest_UpdateStatus = UpdateProblemRequest.AddMember("UpdateStatus", UpdateStatus)
-
-	UpdateProblemRequest_Visibility = UpdateProblemRequest.AddMember("Visibility", Visibility)
-
-	UpdateWorkloadRequest_ResourceGroupName = UpdateWorkloadRequest.AddMember("ResourceGroupName", _ResourceGroupName)
-
-	UpdateWorkloadRequest_ComponentName = UpdateWorkloadRequest.AddMember("ComponentName", _ComponentName)
-
-	UpdateWorkloadRequest_WorkloadId = UpdateWorkloadRequest.AddMember("WorkloadId", _WorkloadId)
-
-	UpdateWorkloadRequest_WorkloadConfiguration = UpdateWorkloadRequest.AddMember("WorkloadConfiguration", WorkloadConfiguration)
-
-	UpdateWorkloadResponse_WorkloadId = UpdateWorkloadResponse.AddMember("WorkloadId", _WorkloadId)
-
-	UpdateWorkloadResponse_WorkloadConfiguration = UpdateWorkloadResponse.AddMember("WorkloadConfiguration", WorkloadConfiguration)
-
-}
+var (
+	eAddWorkload                                                                 smithy.SchemaExtensions
+	eCreateApplication                                                           smithy.SchemaExtensions
+	eCreateComponent                                                             smithy.SchemaExtensions
+	eCreateLogPattern                                                            smithy.SchemaExtensions
+	eDeleteApplication                                                           smithy.SchemaExtensions
+	eDeleteComponent                                                             smithy.SchemaExtensions
+	eDeleteLogPattern                                                            smithy.SchemaExtensions
+	eDescribeApplication                                                         smithy.SchemaExtensions
+	eDescribeComponent                                                           smithy.SchemaExtensions
+	eDescribeComponentConfiguration                                              smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendation                                smithy.SchemaExtensions
+	eDescribeLogPattern                                                          smithy.SchemaExtensions
+	eDescribeObservation                                                         smithy.SchemaExtensions
+	eDescribeProblem                                                             smithy.SchemaExtensions
+	eDescribeProblemObservations                                                 smithy.SchemaExtensions
+	eDescribeWorkload                                                            smithy.SchemaExtensions
+	eListApplications                                                            smithy.SchemaExtensions
+	eListComponents                                                              smithy.SchemaExtensions
+	eListConfigurationHistory                                                    smithy.SchemaExtensions
+	eListLogPatterns                                                             smithy.SchemaExtensions
+	eListLogPatternSets                                                          smithy.SchemaExtensions
+	eListProblems                                                                smithy.SchemaExtensions
+	eListTagsForResource                                                         smithy.SchemaExtensions
+	eListWorkloads                                                               smithy.SchemaExtensions
+	eRemoveWorkload                                                              smithy.SchemaExtensions
+	eTagResource                                                                 smithy.SchemaExtensions
+	eUntagResource                                                               smithy.SchemaExtensions
+	eUpdateApplication                                                           smithy.SchemaExtensions
+	eUpdateComponent                                                             smithy.SchemaExtensions
+	eUpdateComponentConfiguration                                                smithy.SchemaExtensions
+	eUpdateLogPattern                                                            smithy.SchemaExtensions
+	eUpdateProblem                                                               smithy.SchemaExtensions
+	eUpdateWorkload                                                              smithy.SchemaExtensions
+	e_EC2WindowsBarleyService                                                    smithy.SchemaExtensions
+	eAccessDeniedException                                                       smithy.SchemaExtensions
+	eAccessDeniedException_Message                                               smithy.SchemaExtensions
+	e_AccountId                                                                  smithy.SchemaExtensions
+	e_AffectedResource                                                           smithy.SchemaExtensions
+	e_AmazonResourceName                                                         smithy.SchemaExtensions
+	eApplicationComponent                                                        smithy.SchemaExtensions
+	eApplicationComponent_ComponentName                                          smithy.SchemaExtensions
+	eApplicationComponent_ComponentRemarks                                       smithy.SchemaExtensions
+	eApplicationComponent_ResourceType                                           smithy.SchemaExtensions
+	eApplicationComponent_OsType                                                 smithy.SchemaExtensions
+	eApplicationComponent_Tier                                                   smithy.SchemaExtensions
+	eApplicationComponent_Monitor                                                smithy.SchemaExtensions
+	eApplicationComponent_DetectedWorkload                                       smithy.SchemaExtensions
+	e_ApplicationComponentList                                                   smithy.SchemaExtensions
+	e_ApplicationComponentList_member                                            smithy.SchemaExtensions
+	eApplicationInfo                                                             smithy.SchemaExtensions
+	eApplicationInfo_AccountId                                                   smithy.SchemaExtensions
+	eApplicationInfo_ResourceGroupName                                           smithy.SchemaExtensions
+	eApplicationInfo_LifeCycle                                                   smithy.SchemaExtensions
+	eApplicationInfo_OpsItemSNSTopicArn                                          smithy.SchemaExtensions
+	eApplicationInfo_SNSNotificationArn                                          smithy.SchemaExtensions
+	eApplicationInfo_OpsCenterEnabled                                            smithy.SchemaExtensions
+	eApplicationInfo_CWEMonitorEnabled                                           smithy.SchemaExtensions
+	eApplicationInfo_Remarks                                                     smithy.SchemaExtensions
+	eApplicationInfo_AutoConfigEnabled                                           smithy.SchemaExtensions
+	eApplicationInfo_DiscoveryType                                               smithy.SchemaExtensions
+	eApplicationInfo_AttachMissingPermission                                     smithy.SchemaExtensions
+	e_ApplicationInfoList                                                        smithy.SchemaExtensions
+	e_ApplicationInfoList_member                                                 smithy.SchemaExtensions
+	e_AttachMissingPermission                                                    smithy.SchemaExtensions
+	e_AutoConfigEnabled                                                          smithy.SchemaExtensions
+	e_AutoCreate                                                                 smithy.SchemaExtensions
+	eBadRequestException                                                         smithy.SchemaExtensions
+	eBadRequestException_Message                                                 smithy.SchemaExtensions
+	e_CloudWatchEventDetailType                                                  smithy.SchemaExtensions
+	e_CloudWatchEventId                                                          smithy.SchemaExtensions
+	eCloudWatchEventSource                                                       smithy.SchemaExtensions
+	eCloudWatchEventSource_EC2                                                   smithy.SchemaExtensions
+	eCloudWatchEventSource_CODE_DEPLOY                                           smithy.SchemaExtensions
+	eCloudWatchEventSource_HEALTH                                                smithy.SchemaExtensions
+	eCloudWatchEventSource_RDS                                                   smithy.SchemaExtensions
+	e_CodeDeployApplication                                                      smithy.SchemaExtensions
+	e_CodeDeployDeploymentGroup                                                  smithy.SchemaExtensions
+	e_CodeDeployDeploymentId                                                     smithy.SchemaExtensions
+	e_CodeDeployInstanceGroupId                                                  smithy.SchemaExtensions
+	e_CodeDeployState                                                            smithy.SchemaExtensions
+	e_ComponentConfiguration                                                     smithy.SchemaExtensions
+	e_ComponentName                                                              smithy.SchemaExtensions
+	eConfigurationEvent                                                          smithy.SchemaExtensions
+	eConfigurationEvent_ResourceGroupName                                        smithy.SchemaExtensions
+	eConfigurationEvent_AccountId                                                smithy.SchemaExtensions
+	eConfigurationEvent_MonitoredResourceARN                                     smithy.SchemaExtensions
+	eConfigurationEvent_EventStatus                                              smithy.SchemaExtensions
+	eConfigurationEvent_EventResourceType                                        smithy.SchemaExtensions
+	eConfigurationEvent_EventTime                                                smithy.SchemaExtensions
+	eConfigurationEvent_EventDetail                                              smithy.SchemaExtensions
+	eConfigurationEvent_EventResourceName                                        smithy.SchemaExtensions
+	e_ConfigurationEventDetail                                                   smithy.SchemaExtensions
+	e_ConfigurationEventList                                                     smithy.SchemaExtensions
+	e_ConfigurationEventList_member                                              smithy.SchemaExtensions
+	e_ConfigurationEventMonitoredResourceARN                                     smithy.SchemaExtensions
+	e_ConfigurationEventResourceName                                             smithy.SchemaExtensions
+	eConfigurationEventResourceType                                              smithy.SchemaExtensions
+	eConfigurationEventResourceType_CLOUDWATCH_ALARM                             smithy.SchemaExtensions
+	eConfigurationEventResourceType_CLOUDWATCH_LOG                               smithy.SchemaExtensions
+	eConfigurationEventResourceType_CLOUDFORMATION                               smithy.SchemaExtensions
+	eConfigurationEventResourceType_SSM_ASSOCIATION                              smithy.SchemaExtensions
+	eConfigurationEventStatus                                                    smithy.SchemaExtensions
+	eConfigurationEventStatus_INFO                                               smithy.SchemaExtensions
+	eConfigurationEventStatus_WARN                                               smithy.SchemaExtensions
+	eConfigurationEventStatus_ERROR                                              smithy.SchemaExtensions
+	e_ConfigurationEventTime                                                     smithy.SchemaExtensions
+	e_CustomComponentName                                                        smithy.SchemaExtensions
+	e_CWEMonitorEnabled                                                          smithy.SchemaExtensions
+	e_DetectedWorkload                                                           smithy.SchemaExtensions
+	e_DetectedWorkload_key                                                       smithy.SchemaExtensions
+	e_DetectedWorkload_value                                                     smithy.SchemaExtensions
+	eDiscoveryType                                                               smithy.SchemaExtensions
+	eDiscoveryType_RESOURCE_GROUP_BASED                                          smithy.SchemaExtensions
+	eDiscoveryType_ACCOUNT_BASED                                                 smithy.SchemaExtensions
+	e_EbsCause                                                                   smithy.SchemaExtensions
+	e_EbsEvent                                                                   smithy.SchemaExtensions
+	e_EbsRequestId                                                               smithy.SchemaExtensions
+	e_EbsResult                                                                  smithy.SchemaExtensions
+	e_Ec2State                                                                   smithy.SchemaExtensions
+	e_EndTime                                                                    smithy.SchemaExtensions
+	e_ErrorMsg                                                                   smithy.SchemaExtensions
+	e_ExceptionMessage                                                           smithy.SchemaExtensions
+	e_Feedback                                                                   smithy.SchemaExtensions
+	e_Feedback_key                                                               smithy.SchemaExtensions
+	e_Feedback_value                                                             smithy.SchemaExtensions
+	eFeedbackKey                                                                 smithy.SchemaExtensions
+	eFeedbackKey_INSIGHTS_FEEDBACK                                               smithy.SchemaExtensions
+	eFeedbackValue                                                               smithy.SchemaExtensions
+	eFeedbackValue_NOT_SPECIFIED                                                 smithy.SchemaExtensions
+	eFeedbackValue_USEFUL                                                        smithy.SchemaExtensions
+	eFeedbackValue_NOT_USEFUL                                                    smithy.SchemaExtensions
+	eGroupingType                                                                smithy.SchemaExtensions
+	eGroupingType_ACCOUNT_BASED                                                  smithy.SchemaExtensions
+	e_HealthEventArn                                                             smithy.SchemaExtensions
+	e_HealthEventDescription                                                     smithy.SchemaExtensions
+	e_HealthEventTypeCategory                                                    smithy.SchemaExtensions
+	e_HealthEventTypeCode                                                        smithy.SchemaExtensions
+	e_HealthService                                                              smithy.SchemaExtensions
+	e_Insights                                                                   smithy.SchemaExtensions
+	eInternalServerException                                                     smithy.SchemaExtensions
+	eInternalServerException_Message                                             smithy.SchemaExtensions
+	e_LastRecurrenceTime                                                         smithy.SchemaExtensions
+	e_LifeCycle                                                                  smithy.SchemaExtensions
+	e_LineTime                                                                   smithy.SchemaExtensions
+	eLogFilter                                                                   smithy.SchemaExtensions
+	eLogFilter_ERROR                                                             smithy.SchemaExtensions
+	eLogFilter_WARN                                                              smithy.SchemaExtensions
+	eLogFilter_INFO                                                              smithy.SchemaExtensions
+	e_LogGroup                                                                   smithy.SchemaExtensions
+	eLogPattern                                                                  smithy.SchemaExtensions
+	eLogPattern_PatternSetName                                                   smithy.SchemaExtensions
+	eLogPattern_PatternName                                                      smithy.SchemaExtensions
+	eLogPattern_Pattern                                                          smithy.SchemaExtensions
+	eLogPattern_Rank                                                             smithy.SchemaExtensions
+	e_LogPatternList                                                             smithy.SchemaExtensions
+	e_LogPatternList_member                                                      smithy.SchemaExtensions
+	e_LogPatternName                                                             smithy.SchemaExtensions
+	e_LogPatternRank                                                             smithy.SchemaExtensions
+	e_LogPatternRegex                                                            smithy.SchemaExtensions
+	e_LogPatternSetList                                                          smithy.SchemaExtensions
+	e_LogPatternSetList_member                                                   smithy.SchemaExtensions
+	e_LogPatternSetName                                                          smithy.SchemaExtensions
+	e_LogText                                                                    smithy.SchemaExtensions
+	e_MaxEntities                                                                smithy.SchemaExtensions
+	e_MetaDataKey                                                                smithy.SchemaExtensions
+	e_MetaDataValue                                                              smithy.SchemaExtensions
+	e_MetricName                                                                 smithy.SchemaExtensions
+	e_MetricNamespace                                                            smithy.SchemaExtensions
+	e_MissingWorkloadConfig                                                      smithy.SchemaExtensions
+	e_Monitor                                                                    smithy.SchemaExtensions
+	eObservation                                                                 smithy.SchemaExtensions
+	eObservation_Id                                                              smithy.SchemaExtensions
+	eObservation_StartTime                                                       smithy.SchemaExtensions
+	eObservation_EndTime                                                         smithy.SchemaExtensions
+	eObservation_SourceType                                                      smithy.SchemaExtensions
+	eObservation_SourceARN                                                       smithy.SchemaExtensions
+	eObservation_LogGroup                                                        smithy.SchemaExtensions
+	eObservation_LineTime                                                        smithy.SchemaExtensions
+	eObservation_LogText                                                         smithy.SchemaExtensions
+	eObservation_LogFilter                                                       smithy.SchemaExtensions
+	eObservation_MetricNamespace                                                 smithy.SchemaExtensions
+	eObservation_MetricName                                                      smithy.SchemaExtensions
+	eObservation_Unit                                                            smithy.SchemaExtensions
+	eObservation_Value                                                           smithy.SchemaExtensions
+	eObservation_CloudWatchEventId                                               smithy.SchemaExtensions
+	eObservation_CloudWatchEventSource                                           smithy.SchemaExtensions
+	eObservation_CloudWatchEventDetailType                                       smithy.SchemaExtensions
+	eObservation_HealthEventArn                                                  smithy.SchemaExtensions
+	eObservation_HealthService                                                   smithy.SchemaExtensions
+	eObservation_HealthEventTypeCode                                             smithy.SchemaExtensions
+	eObservation_HealthEventTypeCategory                                         smithy.SchemaExtensions
+	eObservation_HealthEventDescription                                          smithy.SchemaExtensions
+	eObservation_CodeDeployDeploymentId                                          smithy.SchemaExtensions
+	eObservation_CodeDeployDeploymentGroup                                       smithy.SchemaExtensions
+	eObservation_CodeDeployState                                                 smithy.SchemaExtensions
+	eObservation_CodeDeployApplication                                           smithy.SchemaExtensions
+	eObservation_CodeDeployInstanceGroupId                                       smithy.SchemaExtensions
+	eObservation_Ec2State                                                        smithy.SchemaExtensions
+	eObservation_RdsEventCategories                                              smithy.SchemaExtensions
+	eObservation_RdsEventMessage                                                 smithy.SchemaExtensions
+	eObservation_S3EventName                                                     smithy.SchemaExtensions
+	eObservation_StatesExecutionArn                                              smithy.SchemaExtensions
+	eObservation_StatesArn                                                       smithy.SchemaExtensions
+	eObservation_StatesStatus                                                    smithy.SchemaExtensions
+	eObservation_StatesInput                                                     smithy.SchemaExtensions
+	eObservation_EbsEvent                                                        smithy.SchemaExtensions
+	eObservation_EbsResult                                                       smithy.SchemaExtensions
+	eObservation_EbsCause                                                        smithy.SchemaExtensions
+	eObservation_EbsRequestId                                                    smithy.SchemaExtensions
+	eObservation_XRayFaultPercent                                                smithy.SchemaExtensions
+	eObservation_XRayThrottlePercent                                             smithy.SchemaExtensions
+	eObservation_XRayErrorPercent                                                smithy.SchemaExtensions
+	eObservation_XRayRequestCount                                                smithy.SchemaExtensions
+	eObservation_XRayRequestAverageLatency                                       smithy.SchemaExtensions
+	eObservation_XRayNodeName                                                    smithy.SchemaExtensions
+	eObservation_XRayNodeType                                                    smithy.SchemaExtensions
+	e_ObservationId                                                              smithy.SchemaExtensions
+	e_ObservationList                                                            smithy.SchemaExtensions
+	e_ObservationList_member                                                     smithy.SchemaExtensions
+	e_OpsCenterEnabled                                                           smithy.SchemaExtensions
+	e_OpsItemSNSTopicArn                                                         smithy.SchemaExtensions
+	eOsType                                                                      smithy.SchemaExtensions
+	eOsType_WINDOWS                                                              smithy.SchemaExtensions
+	eOsType_LINUX                                                                smithy.SchemaExtensions
+	e_PaginationToken                                                            smithy.SchemaExtensions
+	eProblem                                                                     smithy.SchemaExtensions
+	eProblem_Id                                                                  smithy.SchemaExtensions
+	eProblem_Title                                                               smithy.SchemaExtensions
+	eProblem_ShortName                                                           smithy.SchemaExtensions
+	eProblem_Insights                                                            smithy.SchemaExtensions
+	eProblem_Status                                                              smithy.SchemaExtensions
+	eProblem_AffectedResource                                                    smithy.SchemaExtensions
+	eProblem_StartTime                                                           smithy.SchemaExtensions
+	eProblem_EndTime                                                             smithy.SchemaExtensions
+	eProblem_SeverityLevel                                                       smithy.SchemaExtensions
+	eProblem_AccountId                                                           smithy.SchemaExtensions
+	eProblem_ResourceGroupName                                                   smithy.SchemaExtensions
+	eProblem_Feedback                                                            smithy.SchemaExtensions
+	eProblem_RecurringCount                                                      smithy.SchemaExtensions
+	eProblem_LastRecurrenceTime                                                  smithy.SchemaExtensions
+	eProblem_Visibility                                                          smithy.SchemaExtensions
+	eProblem_ResolutionMethod                                                    smithy.SchemaExtensions
+	e_ProblemId                                                                  smithy.SchemaExtensions
+	e_ProblemList                                                                smithy.SchemaExtensions
+	e_ProblemList_member                                                         smithy.SchemaExtensions
+	e_RdsEventCategories                                                         smithy.SchemaExtensions
+	e_RdsEventMessage                                                            smithy.SchemaExtensions
+	eRecommendationType                                                          smithy.SchemaExtensions
+	eRecommendationType_INFRA_ONLY                                               smithy.SchemaExtensions
+	eRecommendationType_WORKLOAD_ONLY                                            smithy.SchemaExtensions
+	eRecommendationType_ALL                                                      smithy.SchemaExtensions
+	e_RecurringCount                                                             smithy.SchemaExtensions
+	eRelatedObservations                                                         smithy.SchemaExtensions
+	eRelatedObservations_ObservationList                                         smithy.SchemaExtensions
+	e_Remarks                                                                    smithy.SchemaExtensions
+	e_RemoveSNSTopic                                                             smithy.SchemaExtensions
+	eResolutionMethod                                                            smithy.SchemaExtensions
+	eResolutionMethod_MANUAL                                                     smithy.SchemaExtensions
+	eResolutionMethod_AUTOMATIC                                                  smithy.SchemaExtensions
+	eResolutionMethod_UNRESOLVED                                                 smithy.SchemaExtensions
+	e_ResourceARN                                                                smithy.SchemaExtensions
+	e_ResourceGroupName                                                          smithy.SchemaExtensions
+	eResourceInUseException                                                      smithy.SchemaExtensions
+	eResourceInUseException_Message                                              smithy.SchemaExtensions
+	e_ResourceList                                                               smithy.SchemaExtensions
+	e_ResourceList_member                                                        smithy.SchemaExtensions
+	eResourceNotFoundException                                                   smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                           smithy.SchemaExtensions
+	e_ResourceType                                                               smithy.SchemaExtensions
+	e_S3EventName                                                                smithy.SchemaExtensions
+	eSeverityLevel                                                               smithy.SchemaExtensions
+	eSeverityLevel_Informative                                                   smithy.SchemaExtensions
+	eSeverityLevel_Low                                                           smithy.SchemaExtensions
+	eSeverityLevel_Medium                                                        smithy.SchemaExtensions
+	eSeverityLevel_High                                                          smithy.SchemaExtensions
+	e_ShortName                                                                  smithy.SchemaExtensions
+	e_SNSNotificationArn                                                         smithy.SchemaExtensions
+	e_SourceARN                                                                  smithy.SchemaExtensions
+	e_SourceType                                                                 smithy.SchemaExtensions
+	e_StartTime                                                                  smithy.SchemaExtensions
+	e_StatesArn                                                                  smithy.SchemaExtensions
+	e_StatesExecutionArn                                                         smithy.SchemaExtensions
+	e_StatesInput                                                                smithy.SchemaExtensions
+	e_StatesStatus                                                               smithy.SchemaExtensions
+	eStatus                                                                      smithy.SchemaExtensions
+	eStatus_IGNORE                                                               smithy.SchemaExtensions
+	eStatus_RESOLVED                                                             smithy.SchemaExtensions
+	eStatus_PENDING                                                              smithy.SchemaExtensions
+	eStatus_RECURRING                                                            smithy.SchemaExtensions
+	eStatus_RECOVERING                                                           smithy.SchemaExtensions
+	eTag                                                                         smithy.SchemaExtensions
+	eTag_Key                                                                     smithy.SchemaExtensions
+	eTag_Value                                                                   smithy.SchemaExtensions
+	e_TagKey                                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                                          smithy.SchemaExtensions
+	e_TagList                                                                    smithy.SchemaExtensions
+	e_TagList_member                                                             smithy.SchemaExtensions
+	eTagsAlreadyExistException                                                   smithy.SchemaExtensions
+	eTagsAlreadyExistException_Message                                           smithy.SchemaExtensions
+	e_TagValue                                                                   smithy.SchemaExtensions
+	eTier                                                                        smithy.SchemaExtensions
+	eTier_CUSTOM                                                                 smithy.SchemaExtensions
+	eTier_DEFAULT                                                                smithy.SchemaExtensions
+	eTier_DOT_NET_CORE                                                           smithy.SchemaExtensions
+	eTier_DOT_NET_WORKER                                                         smithy.SchemaExtensions
+	eTier_DOT_NET_WEB_TIER                                                       smithy.SchemaExtensions
+	eTier_DOT_NET_WEB                                                            smithy.SchemaExtensions
+	eTier_SQL_SERVER                                                             smithy.SchemaExtensions
+	eTier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP                                 smithy.SchemaExtensions
+	eTier_MYSQL                                                                  smithy.SchemaExtensions
+	eTier_POSTGRESQL                                                             smithy.SchemaExtensions
+	eTier_JAVA_JMX                                                               smithy.SchemaExtensions
+	eTier_ORACLE                                                                 smithy.SchemaExtensions
+	eTier_SAP_HANA_MULTI_NODE                                                    smithy.SchemaExtensions
+	eTier_SAP_HANA_SINGLE_NODE                                                   smithy.SchemaExtensions
+	eTier_SAP_HANA_HIGH_AVAILABILITY                                             smithy.SchemaExtensions
+	eTier_SAP_ASE_SINGLE_NODE                                                    smithy.SchemaExtensions
+	eTier_SAP_ASE_HIGH_AVAILABILITY                                              smithy.SchemaExtensions
+	eTier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE                                   smithy.SchemaExtensions
+	eTier_SHAREPOINT                                                             smithy.SchemaExtensions
+	eTier_ACTIVE_DIRECTORY                                                       smithy.SchemaExtensions
+	eTier_SAP_NETWEAVER_STANDARD                                                 smithy.SchemaExtensions
+	eTier_SAP_NETWEAVER_DISTRIBUTED                                              smithy.SchemaExtensions
+	eTier_SAP_NETWEAVER_HIGH_AVAILABILITY                                        smithy.SchemaExtensions
+	e_Title                                                                      smithy.SchemaExtensions
+	eTooManyTagsException                                                        smithy.SchemaExtensions
+	eTooManyTagsException_Message                                                smithy.SchemaExtensions
+	eTooManyTagsException_ResourceName                                           smithy.SchemaExtensions
+	e_Unit                                                                       smithy.SchemaExtensions
+	eUpdateStatus                                                                smithy.SchemaExtensions
+	eUpdateStatus_RESOLVED                                                       smithy.SchemaExtensions
+	eValidationException                                                         smithy.SchemaExtensions
+	eValidationException_Message                                                 smithy.SchemaExtensions
+	e_Value                                                                      smithy.SchemaExtensions
+	eVisibility                                                                  smithy.SchemaExtensions
+	eVisibility_IGNORED                                                          smithy.SchemaExtensions
+	eVisibility_VISIBLE                                                          smithy.SchemaExtensions
+	eWorkload                                                                    smithy.SchemaExtensions
+	eWorkload_WorkloadId                                                         smithy.SchemaExtensions
+	eWorkload_ComponentName                                                      smithy.SchemaExtensions
+	eWorkload_WorkloadName                                                       smithy.SchemaExtensions
+	eWorkload_Tier                                                               smithy.SchemaExtensions
+	eWorkload_WorkloadRemarks                                                    smithy.SchemaExtensions
+	eWorkload_MissingWorkloadConfig                                              smithy.SchemaExtensions
+	eWorkloadConfiguration                                                       smithy.SchemaExtensions
+	eWorkloadConfiguration_WorkloadName                                          smithy.SchemaExtensions
+	eWorkloadConfiguration_Tier                                                  smithy.SchemaExtensions
+	eWorkloadConfiguration_Configuration                                         smithy.SchemaExtensions
+	e_WorkloadId                                                                 smithy.SchemaExtensions
+	e_WorkloadList                                                               smithy.SchemaExtensions
+	e_WorkloadList_member                                                        smithy.SchemaExtensions
+	e_WorkloadMetaData                                                           smithy.SchemaExtensions
+	e_WorkloadMetaData_key                                                       smithy.SchemaExtensions
+	e_WorkloadMetaData_value                                                     smithy.SchemaExtensions
+	e_WorkloadName                                                               smithy.SchemaExtensions
+	e_XRayErrorPercent                                                           smithy.SchemaExtensions
+	e_XRayFaultPercent                                                           smithy.SchemaExtensions
+	e_XRayNodeName                                                               smithy.SchemaExtensions
+	e_XRayNodeType                                                               smithy.SchemaExtensions
+	e_XRayRequestAverageLatency                                                  smithy.SchemaExtensions
+	e_XRayRequestCount                                                           smithy.SchemaExtensions
+	e_XRayThrottlePercent                                                        smithy.SchemaExtensions
+	eAddWorkloadRequest                                                          smithy.SchemaExtensions
+	eAddWorkloadRequest_ResourceGroupName                                        smithy.SchemaExtensions
+	eAddWorkloadRequest_ComponentName                                            smithy.SchemaExtensions
+	eAddWorkloadRequest_WorkloadConfiguration                                    smithy.SchemaExtensions
+	eAddWorkloadResponse                                                         smithy.SchemaExtensions
+	eAddWorkloadResponse_WorkloadId                                              smithy.SchemaExtensions
+	eAddWorkloadResponse_WorkloadConfiguration                                   smithy.SchemaExtensions
+	eCreateApplicationRequest                                                    smithy.SchemaExtensions
+	eCreateApplicationRequest_ResourceGroupName                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_OpsCenterEnabled                                   smithy.SchemaExtensions
+	eCreateApplicationRequest_CWEMonitorEnabled                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_OpsItemSNSTopicArn                                 smithy.SchemaExtensions
+	eCreateApplicationRequest_SNSNotificationArn                                 smithy.SchemaExtensions
+	eCreateApplicationRequest_Tags                                               smithy.SchemaExtensions
+	eCreateApplicationRequest_AutoConfigEnabled                                  smithy.SchemaExtensions
+	eCreateApplicationRequest_AutoCreate                                         smithy.SchemaExtensions
+	eCreateApplicationRequest_GroupingType                                       smithy.SchemaExtensions
+	eCreateApplicationRequest_AttachMissingPermission                            smithy.SchemaExtensions
+	eCreateApplicationResponse                                                   smithy.SchemaExtensions
+	eCreateApplicationResponse_ApplicationInfo                                   smithy.SchemaExtensions
+	eCreateComponentRequest                                                      smithy.SchemaExtensions
+	eCreateComponentRequest_ResourceGroupName                                    smithy.SchemaExtensions
+	eCreateComponentRequest_ComponentName                                        smithy.SchemaExtensions
+	eCreateComponentRequest_ResourceList                                         smithy.SchemaExtensions
+	eCreateComponentResponse                                                     smithy.SchemaExtensions
+	eCreateLogPatternRequest                                                     smithy.SchemaExtensions
+	eCreateLogPatternRequest_ResourceGroupName                                   smithy.SchemaExtensions
+	eCreateLogPatternRequest_PatternSetName                                      smithy.SchemaExtensions
+	eCreateLogPatternRequest_PatternName                                         smithy.SchemaExtensions
+	eCreateLogPatternRequest_Pattern                                             smithy.SchemaExtensions
+	eCreateLogPatternRequest_Rank                                                smithy.SchemaExtensions
+	eCreateLogPatternResponse                                                    smithy.SchemaExtensions
+	eCreateLogPatternResponse_LogPattern                                         smithy.SchemaExtensions
+	eCreateLogPatternResponse_ResourceGroupName                                  smithy.SchemaExtensions
+	eDeleteApplicationRequest                                                    smithy.SchemaExtensions
+	eDeleteApplicationRequest_ResourceGroupName                                  smithy.SchemaExtensions
+	eDeleteApplicationResponse                                                   smithy.SchemaExtensions
+	eDeleteComponentRequest                                                      smithy.SchemaExtensions
+	eDeleteComponentRequest_ResourceGroupName                                    smithy.SchemaExtensions
+	eDeleteComponentRequest_ComponentName                                        smithy.SchemaExtensions
+	eDeleteComponentResponse                                                     smithy.SchemaExtensions
+	eDeleteLogPatternRequest                                                     smithy.SchemaExtensions
+	eDeleteLogPatternRequest_ResourceGroupName                                   smithy.SchemaExtensions
+	eDeleteLogPatternRequest_PatternSetName                                      smithy.SchemaExtensions
+	eDeleteLogPatternRequest_PatternName                                         smithy.SchemaExtensions
+	eDeleteLogPatternResponse                                                    smithy.SchemaExtensions
+	eDescribeApplicationRequest                                                  smithy.SchemaExtensions
+	eDescribeApplicationRequest_ResourceGroupName                                smithy.SchemaExtensions
+	eDescribeApplicationRequest_AccountId                                        smithy.SchemaExtensions
+	eDescribeApplicationResponse                                                 smithy.SchemaExtensions
+	eDescribeApplicationResponse_ApplicationInfo                                 smithy.SchemaExtensions
+	eDescribeComponentConfigurationRequest                                       smithy.SchemaExtensions
+	eDescribeComponentConfigurationRequest_ResourceGroupName                     smithy.SchemaExtensions
+	eDescribeComponentConfigurationRequest_ComponentName                         smithy.SchemaExtensions
+	eDescribeComponentConfigurationRequest_AccountId                             smithy.SchemaExtensions
+	eDescribeComponentConfigurationResponse                                      smithy.SchemaExtensions
+	eDescribeComponentConfigurationResponse_Monitor                              smithy.SchemaExtensions
+	eDescribeComponentConfigurationResponse_Tier                                 smithy.SchemaExtensions
+	eDescribeComponentConfigurationResponse_ComponentConfiguration               smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest                         smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest_ResourceGroupName       smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest_ComponentName           smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest_Tier                    smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest_WorkloadName            smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationRequest_RecommendationType      smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationResponse                        smithy.SchemaExtensions
+	eDescribeComponentConfigurationRecommendationResponse_ComponentConfiguration smithy.SchemaExtensions
+	eDescribeComponentRequest                                                    smithy.SchemaExtensions
+	eDescribeComponentRequest_ResourceGroupName                                  smithy.SchemaExtensions
+	eDescribeComponentRequest_ComponentName                                      smithy.SchemaExtensions
+	eDescribeComponentRequest_AccountId                                          smithy.SchemaExtensions
+	eDescribeComponentResponse                                                   smithy.SchemaExtensions
+	eDescribeComponentResponse_ApplicationComponent                              smithy.SchemaExtensions
+	eDescribeComponentResponse_ResourceList                                      smithy.SchemaExtensions
+	eDescribeLogPatternRequest                                                   smithy.SchemaExtensions
+	eDescribeLogPatternRequest_ResourceGroupName                                 smithy.SchemaExtensions
+	eDescribeLogPatternRequest_PatternSetName                                    smithy.SchemaExtensions
+	eDescribeLogPatternRequest_PatternName                                       smithy.SchemaExtensions
+	eDescribeLogPatternRequest_AccountId                                         smithy.SchemaExtensions
+	eDescribeLogPatternResponse                                                  smithy.SchemaExtensions
+	eDescribeLogPatternResponse_ResourceGroupName                                smithy.SchemaExtensions
+	eDescribeLogPatternResponse_AccountId                                        smithy.SchemaExtensions
+	eDescribeLogPatternResponse_LogPattern                                       smithy.SchemaExtensions
+	eDescribeObservationRequest                                                  smithy.SchemaExtensions
+	eDescribeObservationRequest_ObservationId                                    smithy.SchemaExtensions
+	eDescribeObservationRequest_AccountId                                        smithy.SchemaExtensions
+	eDescribeObservationResponse                                                 smithy.SchemaExtensions
+	eDescribeObservationResponse_Observation                                     smithy.SchemaExtensions
+	eDescribeProblemRequest                                                      smithy.SchemaExtensions
+	eDescribeProblemRequest_ProblemId                                            smithy.SchemaExtensions
+	eDescribeProblemRequest_AccountId                                            smithy.SchemaExtensions
+	eDescribeProblemObservationsRequest                                          smithy.SchemaExtensions
+	eDescribeProblemObservationsRequest_ProblemId                                smithy.SchemaExtensions
+	eDescribeProblemObservationsRequest_AccountId                                smithy.SchemaExtensions
+	eDescribeProblemObservationsResponse                                         smithy.SchemaExtensions
+	eDescribeProblemObservationsResponse_RelatedObservations                     smithy.SchemaExtensions
+	eDescribeProblemResponse                                                     smithy.SchemaExtensions
+	eDescribeProblemResponse_Problem                                             smithy.SchemaExtensions
+	eDescribeProblemResponse_SNSNotificationArn                                  smithy.SchemaExtensions
+	eDescribeWorkloadRequest                                                     smithy.SchemaExtensions
+	eDescribeWorkloadRequest_ResourceGroupName                                   smithy.SchemaExtensions
+	eDescribeWorkloadRequest_ComponentName                                       smithy.SchemaExtensions
+	eDescribeWorkloadRequest_WorkloadId                                          smithy.SchemaExtensions
+	eDescribeWorkloadRequest_AccountId                                           smithy.SchemaExtensions
+	eDescribeWorkloadResponse                                                    smithy.SchemaExtensions
+	eDescribeWorkloadResponse_WorkloadId                                         smithy.SchemaExtensions
+	eDescribeWorkloadResponse_WorkloadRemarks                                    smithy.SchemaExtensions
+	eDescribeWorkloadResponse_WorkloadConfiguration                              smithy.SchemaExtensions
+	eListApplicationsRequest                                                     smithy.SchemaExtensions
+	eListApplicationsRequest_MaxResults                                          smithy.SchemaExtensions
+	eListApplicationsRequest_NextToken                                           smithy.SchemaExtensions
+	eListApplicationsRequest_AccountId                                           smithy.SchemaExtensions
+	eListApplicationsResponse                                                    smithy.SchemaExtensions
+	eListApplicationsResponse_ApplicationInfoList                                smithy.SchemaExtensions
+	eListApplicationsResponse_NextToken                                          smithy.SchemaExtensions
+	eListComponentsRequest                                                       smithy.SchemaExtensions
+	eListComponentsRequest_ResourceGroupName                                     smithy.SchemaExtensions
+	eListComponentsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListComponentsRequest_NextToken                                             smithy.SchemaExtensions
+	eListComponentsRequest_AccountId                                             smithy.SchemaExtensions
+	eListComponentsResponse                                                      smithy.SchemaExtensions
+	eListComponentsResponse_ApplicationComponentList                             smithy.SchemaExtensions
+	eListComponentsResponse_NextToken                                            smithy.SchemaExtensions
+	eListConfigurationHistoryRequest                                             smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_ResourceGroupName                           smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_StartTime                                   smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_EndTime                                     smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_EventStatus                                 smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_MaxResults                                  smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_NextToken                                   smithy.SchemaExtensions
+	eListConfigurationHistoryRequest_AccountId                                   smithy.SchemaExtensions
+	eListConfigurationHistoryResponse                                            smithy.SchemaExtensions
+	eListConfigurationHistoryResponse_EventList                                  smithy.SchemaExtensions
+	eListConfigurationHistoryResponse_NextToken                                  smithy.SchemaExtensions
+	eListLogPatternSetsRequest                                                   smithy.SchemaExtensions
+	eListLogPatternSetsRequest_ResourceGroupName                                 smithy.SchemaExtensions
+	eListLogPatternSetsRequest_MaxResults                                        smithy.SchemaExtensions
+	eListLogPatternSetsRequest_NextToken                                         smithy.SchemaExtensions
+	eListLogPatternSetsRequest_AccountId                                         smithy.SchemaExtensions
+	eListLogPatternSetsResponse                                                  smithy.SchemaExtensions
+	eListLogPatternSetsResponse_ResourceGroupName                                smithy.SchemaExtensions
+	eListLogPatternSetsResponse_AccountId                                        smithy.SchemaExtensions
+	eListLogPatternSetsResponse_LogPatternSets                                   smithy.SchemaExtensions
+	eListLogPatternSetsResponse_NextToken                                        smithy.SchemaExtensions
+	eListLogPatternsRequest                                                      smithy.SchemaExtensions
+	eListLogPatternsRequest_ResourceGroupName                                    smithy.SchemaExtensions
+	eListLogPatternsRequest_PatternSetName                                       smithy.SchemaExtensions
+	eListLogPatternsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListLogPatternsRequest_NextToken                                            smithy.SchemaExtensions
+	eListLogPatternsRequest_AccountId                                            smithy.SchemaExtensions
+	eListLogPatternsResponse                                                     smithy.SchemaExtensions
+	eListLogPatternsResponse_ResourceGroupName                                   smithy.SchemaExtensions
+	eListLogPatternsResponse_AccountId                                           smithy.SchemaExtensions
+	eListLogPatternsResponse_LogPatterns                                         smithy.SchemaExtensions
+	eListLogPatternsResponse_NextToken                                           smithy.SchemaExtensions
+	eListProblemsRequest                                                         smithy.SchemaExtensions
+	eListProblemsRequest_AccountId                                               smithy.SchemaExtensions
+	eListProblemsRequest_ResourceGroupName                                       smithy.SchemaExtensions
+	eListProblemsRequest_StartTime                                               smithy.SchemaExtensions
+	eListProblemsRequest_EndTime                                                 smithy.SchemaExtensions
+	eListProblemsRequest_MaxResults                                              smithy.SchemaExtensions
+	eListProblemsRequest_NextToken                                               smithy.SchemaExtensions
+	eListProblemsRequest_ComponentName                                           smithy.SchemaExtensions
+	eListProblemsRequest_Visibility                                              smithy.SchemaExtensions
+	eListProblemsResponse                                                        smithy.SchemaExtensions
+	eListProblemsResponse_ProblemList                                            smithy.SchemaExtensions
+	eListProblemsResponse_NextToken                                              smithy.SchemaExtensions
+	eListProblemsResponse_ResourceGroupName                                      smithy.SchemaExtensions
+	eListProblemsResponse_AccountId                                              smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                            smithy.SchemaExtensions
+	eListWorkloadsRequest                                                        smithy.SchemaExtensions
+	eListWorkloadsRequest_ResourceGroupName                                      smithy.SchemaExtensions
+	eListWorkloadsRequest_ComponentName                                          smithy.SchemaExtensions
+	eListWorkloadsRequest_MaxResults                                             smithy.SchemaExtensions
+	eListWorkloadsRequest_NextToken                                              smithy.SchemaExtensions
+	eListWorkloadsRequest_AccountId                                              smithy.SchemaExtensions
+	eListWorkloadsResponse                                                       smithy.SchemaExtensions
+	eListWorkloadsResponse_WorkloadList                                          smithy.SchemaExtensions
+	eListWorkloadsResponse_NextToken                                             smithy.SchemaExtensions
+	eRemoveWorkloadRequest                                                       smithy.SchemaExtensions
+	eRemoveWorkloadRequest_ResourceGroupName                                     smithy.SchemaExtensions
+	eRemoveWorkloadRequest_ComponentName                                         smithy.SchemaExtensions
+	eRemoveWorkloadRequest_WorkloadId                                            smithy.SchemaExtensions
+	eRemoveWorkloadResponse                                                      smithy.SchemaExtensions
+	eTagResourceRequest                                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                              smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                     smithy.SchemaExtensions
+	eTagResourceResponse                                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                            smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                smithy.SchemaExtensions
+	eUntagResourceResponse                                                       smithy.SchemaExtensions
+	eUpdateApplicationRequest                                                    smithy.SchemaExtensions
+	eUpdateApplicationRequest_ResourceGroupName                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_OpsCenterEnabled                                   smithy.SchemaExtensions
+	eUpdateApplicationRequest_CWEMonitorEnabled                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_OpsItemSNSTopicArn                                 smithy.SchemaExtensions
+	eUpdateApplicationRequest_SNSNotificationArn                                 smithy.SchemaExtensions
+	eUpdateApplicationRequest_RemoveSNSTopic                                     smithy.SchemaExtensions
+	eUpdateApplicationRequest_AutoConfigEnabled                                  smithy.SchemaExtensions
+	eUpdateApplicationRequest_AttachMissingPermission                            smithy.SchemaExtensions
+	eUpdateApplicationResponse                                                   smithy.SchemaExtensions
+	eUpdateApplicationResponse_ApplicationInfo                                   smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest                                         smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_ResourceGroupName                       smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_ComponentName                           smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_Monitor                                 smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_Tier                                    smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_ComponentConfiguration                  smithy.SchemaExtensions
+	eUpdateComponentConfigurationRequest_AutoConfigEnabled                       smithy.SchemaExtensions
+	eUpdateComponentConfigurationResponse                                        smithy.SchemaExtensions
+	eUpdateComponentRequest                                                      smithy.SchemaExtensions
+	eUpdateComponentRequest_ResourceGroupName                                    smithy.SchemaExtensions
+	eUpdateComponentRequest_ComponentName                                        smithy.SchemaExtensions
+	eUpdateComponentRequest_NewComponentName                                     smithy.SchemaExtensions
+	eUpdateComponentRequest_ResourceList                                         smithy.SchemaExtensions
+	eUpdateComponentResponse                                                     smithy.SchemaExtensions
+	eUpdateLogPatternRequest                                                     smithy.SchemaExtensions
+	eUpdateLogPatternRequest_ResourceGroupName                                   smithy.SchemaExtensions
+	eUpdateLogPatternRequest_PatternSetName                                      smithy.SchemaExtensions
+	eUpdateLogPatternRequest_PatternName                                         smithy.SchemaExtensions
+	eUpdateLogPatternRequest_Pattern                                             smithy.SchemaExtensions
+	eUpdateLogPatternRequest_Rank                                                smithy.SchemaExtensions
+	eUpdateLogPatternResponse                                                    smithy.SchemaExtensions
+	eUpdateLogPatternResponse_ResourceGroupName                                  smithy.SchemaExtensions
+	eUpdateLogPatternResponse_LogPattern                                         smithy.SchemaExtensions
+	eUpdateProblemRequest                                                        smithy.SchemaExtensions
+	eUpdateProblemRequest_ProblemId                                              smithy.SchemaExtensions
+	eUpdateProblemRequest_UpdateStatus                                           smithy.SchemaExtensions
+	eUpdateProblemRequest_Visibility                                             smithy.SchemaExtensions
+	eUpdateProblemResponse                                                       smithy.SchemaExtensions
+	eUpdateWorkloadRequest                                                       smithy.SchemaExtensions
+	eUpdateWorkloadRequest_ResourceGroupName                                     smithy.SchemaExtensions
+	eUpdateWorkloadRequest_ComponentName                                         smithy.SchemaExtensions
+	eUpdateWorkloadRequest_WorkloadId                                            smithy.SchemaExtensions
+	eUpdateWorkloadRequest_WorkloadConfiguration                                 smithy.SchemaExtensions
+	eUpdateWorkloadResponse                                                      smithy.SchemaExtensions
+	eUpdateWorkloadResponse_WorkloadId                                           smithy.SchemaExtensions
+	eUpdateWorkloadResponse_WorkloadConfiguration                                smithy.SchemaExtensions
+)
+
+var (
+	iAddWorkload                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AddWorkload"}
+	iCreateApplication                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateApplication"}
+	iCreateComponent                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateComponent"}
+	iCreateLogPattern                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateLogPattern"}
+	iDeleteApplication                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteApplication"}
+	iDeleteComponent                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteComponent"}
+	iDeleteLogPattern                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteLogPattern"}
+	iDescribeApplication                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeApplication"}
+	iDescribeComponent                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponent"}
+	iDescribeComponentConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfiguration"}
+	iDescribeComponentConfigurationRecommendation         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfigurationRecommendation"}
+	iDescribeLogPattern                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeLogPattern"}
+	iDescribeObservation                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeObservation"}
+	iDescribeProblem                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblem"}
+	iDescribeProblemObservations                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblemObservations"}
+	iDescribeWorkload                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeWorkload"}
+	iListApplications                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListApplications"}
+	iListComponents                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListComponents"}
+	iListConfigurationHistory                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListConfigurationHistory"}
+	iListLogPatterns                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatterns"}
+	iListLogPatternSets                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatternSets"}
+	iListProblems                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListProblems"}
+	iListTagsForResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListTagsForResource"}
+	iListWorkloads                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListWorkloads"}
+	iRemoveWorkload                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RemoveWorkload"}
+	iTagResource                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagResource"}
+	iUntagResource                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UntagResource"}
+	iUpdateApplication                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateApplication"}
+	iUpdateComponent                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponent"}
+	iUpdateComponentConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponentConfiguration"}
+	iUpdateLogPattern                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateLogPattern"}
+	iUpdateProblem                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateProblem"}
+	iUpdateWorkload                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateWorkload"}
+	i_EC2WindowsBarleyService                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EC2WindowsBarleyService"}
+	iAccessDeniedException                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AccessDeniedException"}
+	i_AccountId                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AccountId"}
+	i_AffectedResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AffectedResource"}
+	i_AmazonResourceName                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AmazonResourceName"}
+	iApplicationComponent                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ApplicationComponent"}
+	i_ApplicationComponentList                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ApplicationComponentList"}
+	iApplicationInfo                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ApplicationInfo"}
+	i_ApplicationInfoList                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ApplicationInfoList"}
+	i_AttachMissingPermission                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AttachMissingPermission"}
+	i_AutoConfigEnabled                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AutoConfigEnabled"}
+	i_AutoCreate                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AutoCreate"}
+	iBadRequestException                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "BadRequestException"}
+	i_CloudWatchEventDetailType                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CloudWatchEventDetailType"}
+	i_CloudWatchEventId                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CloudWatchEventId"}
+	iCloudWatchEventSource                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CloudWatchEventSource"}
+	i_CodeDeployApplication                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CodeDeployApplication"}
+	i_CodeDeployDeploymentGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CodeDeployDeploymentGroup"}
+	i_CodeDeployDeploymentId                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CodeDeployDeploymentId"}
+	i_CodeDeployInstanceGroupId                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CodeDeployInstanceGroupId"}
+	i_CodeDeployState                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CodeDeployState"}
+	i_ComponentConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ComponentConfiguration"}
+	i_ComponentName                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ComponentName"}
+	iConfigurationEvent                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEvent"}
+	i_ConfigurationEventDetail                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventDetail"}
+	i_ConfigurationEventList                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventList"}
+	i_ConfigurationEventMonitoredResourceARN              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventMonitoredResourceARN"}
+	i_ConfigurationEventResourceName                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventResourceName"}
+	iConfigurationEventResourceType                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventResourceType"}
+	iConfigurationEventStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventStatus"}
+	i_ConfigurationEventTime                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ConfigurationEventTime"}
+	i_CustomComponentName                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CustomComponentName"}
+	i_CWEMonitorEnabled                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CWEMonitorEnabled"}
+	i_DetectedWorkload                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DetectedWorkload"}
+	iDiscoveryType                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DiscoveryType"}
+	i_EbsCause                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EbsCause"}
+	i_EbsEvent                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EbsEvent"}
+	i_EbsRequestId                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EbsRequestId"}
+	i_EbsResult                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EbsResult"}
+	i_Ec2State                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Ec2State"}
+	i_EndTime                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "EndTime"}
+	i_ErrorMsg                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ErrorMsg"}
+	i_ExceptionMessage                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ExceptionMessage"}
+	i_Feedback                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Feedback"}
+	iFeedbackKey                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "FeedbackKey"}
+	iFeedbackValue                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "FeedbackValue"}
+	iGroupingType                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "GroupingType"}
+	i_HealthEventArn                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "HealthEventArn"}
+	i_HealthEventDescription                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "HealthEventDescription"}
+	i_HealthEventTypeCategory                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "HealthEventTypeCategory"}
+	i_HealthEventTypeCode                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "HealthEventTypeCode"}
+	i_HealthService                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "HealthService"}
+	i_Insights                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Insights"}
+	iInternalServerException                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "InternalServerException"}
+	i_LastRecurrenceTime                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LastRecurrenceTime"}
+	i_LifeCycle                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LifeCycle"}
+	i_LineTime                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LineTime"}
+	iLogFilter                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogFilter"}
+	i_LogGroup                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogGroup"}
+	iLogPattern                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPattern"}
+	i_LogPatternList                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternList"}
+	i_LogPatternName                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternName"}
+	i_LogPatternRank                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternRank"}
+	i_LogPatternRegex                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternRegex"}
+	i_LogPatternSetList                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternSetList"}
+	i_LogPatternSetName                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogPatternSetName"}
+	i_LogText                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "LogText"}
+	i_MaxEntities                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MaxEntities"}
+	i_MetaDataKey                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MetaDataKey"}
+	i_MetaDataValue                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MetaDataValue"}
+	i_MetricName                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MetricName"}
+	i_MetricNamespace                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MetricNamespace"}
+	i_MissingWorkloadConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "MissingWorkloadConfig"}
+	i_Monitor                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Monitor"}
+	iObservation                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Observation"}
+	i_ObservationId                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ObservationId"}
+	i_ObservationList                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ObservationList"}
+	i_OpsCenterEnabled                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "OpsCenterEnabled"}
+	i_OpsItemSNSTopicArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "OpsItemSNSTopicArn"}
+	iOsType                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "OsType"}
+	i_PaginationToken                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "PaginationToken"}
+	iProblem                                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Problem"}
+	i_ProblemId                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ProblemId"}
+	i_ProblemList                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ProblemList"}
+	i_RdsEventCategories                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RdsEventCategories"}
+	i_RdsEventMessage                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RdsEventMessage"}
+	iRecommendationType                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RecommendationType"}
+	i_RecurringCount                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RecurringCount"}
+	iRelatedObservations                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RelatedObservations"}
+	i_Remarks                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Remarks"}
+	i_RemoveSNSTopic                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RemoveSNSTopic"}
+	iResolutionMethod                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResolutionMethod"}
+	i_ResourceARN                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceARN"}
+	i_ResourceGroupName                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceGroupName"}
+	iResourceInUseException                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceInUseException"}
+	i_ResourceList                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceList"}
+	iResourceNotFoundException                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceNotFoundException"}
+	i_ResourceType                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ResourceType"}
+	i_S3EventName                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "S3EventName"}
+	iSeverityLevel                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "SeverityLevel"}
+	i_ShortName                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ShortName"}
+	i_SNSNotificationArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "SNSNotificationArn"}
+	i_SourceARN                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "SourceARN"}
+	i_SourceType                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "SourceType"}
+	i_StartTime                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "StartTime"}
+	i_StatesArn                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "StatesArn"}
+	i_StatesExecutionArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "StatesExecutionArn"}
+	i_StatesInput                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "StatesInput"}
+	i_StatesStatus                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "StatesStatus"}
+	iStatus                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Status"}
+	iTag                                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Tag"}
+	i_TagKey                                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagKey"}
+	i_TagKeyList                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagKeyList"}
+	i_TagList                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagList"}
+	iTagsAlreadyExistException                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagsAlreadyExistException"}
+	i_TagValue                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagValue"}
+	iTier                                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Tier"}
+	i_Title                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Title"}
+	iTooManyTagsException                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TooManyTagsException"}
+	i_Unit                                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Unit"}
+	iUpdateStatus                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateStatus"}
+	iValidationException                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ValidationException"}
+	i_Value                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Value"}
+	iVisibility                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Visibility"}
+	iWorkload                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "Workload"}
+	iWorkloadConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "WorkloadConfiguration"}
+	i_WorkloadId                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "WorkloadId"}
+	i_WorkloadList                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "WorkloadList"}
+	i_WorkloadMetaData                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "WorkloadMetaData"}
+	i_WorkloadName                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "WorkloadName"}
+	i_XRayErrorPercent                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayErrorPercent"}
+	i_XRayFaultPercent                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayFaultPercent"}
+	i_XRayNodeName                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayNodeName"}
+	i_XRayNodeType                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayNodeType"}
+	i_XRayRequestAverageLatency                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayRequestAverageLatency"}
+	i_XRayRequestCount                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayRequestCount"}
+	i_XRayThrottlePercent                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "XRayThrottlePercent"}
+	iAddWorkloadRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AddWorkloadRequest"}
+	iAddWorkloadResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "AddWorkloadResponse"}
+	iCreateApplicationRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateApplicationRequest"}
+	iCreateApplicationResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateApplicationResponse"}
+	iCreateComponentRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateComponentRequest"}
+	iCreateComponentResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateComponentResponse"}
+	iCreateLogPatternRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateLogPatternRequest"}
+	iCreateLogPatternResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "CreateLogPatternResponse"}
+	iDeleteApplicationRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteApplicationRequest"}
+	iDeleteApplicationResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteApplicationResponse"}
+	iDeleteComponentRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteComponentRequest"}
+	iDeleteComponentResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteComponentResponse"}
+	iDeleteLogPatternRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteLogPatternRequest"}
+	iDeleteLogPatternResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DeleteLogPatternResponse"}
+	iDescribeApplicationRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeApplicationRequest"}
+	iDescribeApplicationResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeApplicationResponse"}
+	iDescribeComponentConfigurationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfigurationRequest"}
+	iDescribeComponentConfigurationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfigurationResponse"}
+	iDescribeComponentConfigurationRecommendationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfigurationRecommendationRequest"}
+	iDescribeComponentConfigurationRecommendationResponse = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentConfigurationRecommendationResponse"}
+	iDescribeComponentRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentRequest"}
+	iDescribeComponentResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeComponentResponse"}
+	iDescribeLogPatternRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeLogPatternRequest"}
+	iDescribeLogPatternResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeLogPatternResponse"}
+	iDescribeObservationRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeObservationRequest"}
+	iDescribeObservationResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeObservationResponse"}
+	iDescribeProblemRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblemRequest"}
+	iDescribeProblemObservationsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblemObservationsRequest"}
+	iDescribeProblemObservationsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblemObservationsResponse"}
+	iDescribeProblemResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeProblemResponse"}
+	iDescribeWorkloadRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeWorkloadRequest"}
+	iDescribeWorkloadResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "DescribeWorkloadResponse"}
+	iListApplicationsRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListApplicationsRequest"}
+	iListApplicationsResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListApplicationsResponse"}
+	iListComponentsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListComponentsRequest"}
+	iListComponentsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListComponentsResponse"}
+	iListConfigurationHistoryRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListConfigurationHistoryRequest"}
+	iListConfigurationHistoryResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListConfigurationHistoryResponse"}
+	iListLogPatternSetsRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatternSetsRequest"}
+	iListLogPatternSetsResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatternSetsResponse"}
+	iListLogPatternsRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatternsRequest"}
+	iListLogPatternsResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListLogPatternsResponse"}
+	iListProblemsRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListProblemsRequest"}
+	iListProblemsResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListProblemsResponse"}
+	iListTagsForResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListTagsForResourceResponse"}
+	iListWorkloadsRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListWorkloadsRequest"}
+	iListWorkloadsResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "ListWorkloadsResponse"}
+	iRemoveWorkloadRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RemoveWorkloadRequest"}
+	iRemoveWorkloadResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "RemoveWorkloadResponse"}
+	iTagResourceRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagResourceRequest"}
+	iTagResourceResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UntagResourceResponse"}
+	iUpdateApplicationRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateApplicationRequest"}
+	iUpdateApplicationResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateApplicationResponse"}
+	iUpdateComponentConfigurationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponentConfigurationRequest"}
+	iUpdateComponentConfigurationResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponentConfigurationResponse"}
+	iUpdateComponentRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponentRequest"}
+	iUpdateComponentResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateComponentResponse"}
+	iUpdateLogPatternRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateLogPatternRequest"}
+	iUpdateLogPatternResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateLogPatternResponse"}
+	iUpdateProblemRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateProblemRequest"}
+	iUpdateProblemResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateProblemResponse"}
+	iUpdateWorkloadRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateWorkloadRequest"}
+	iUpdateWorkloadResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationinsights", Name: "UpdateWorkloadResponse"}
+	pUnit                                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BadRequestException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceInUseException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mApplicationComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationComponent_ComponentName, &sApplicationComponent_ComponentRemarks, &sApplicationComponent_ResourceType, &sApplicationComponent_OsType, &sApplicationComponent_Tier, &sApplicationComponent_Monitor, &sApplicationComponent_DetectedWorkload}}
+var m_ApplicationComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationComponentList_member}}
+var mApplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationInfo_AccountId, &sApplicationInfo_ResourceGroupName, &sApplicationInfo_LifeCycle, &sApplicationInfo_OpsItemSNSTopicArn, &sApplicationInfo_SNSNotificationArn, &sApplicationInfo_OpsCenterEnabled, &sApplicationInfo_CWEMonitorEnabled, &sApplicationInfo_Remarks, &sApplicationInfo_AutoConfigEnabled, &sApplicationInfo_DiscoveryType, &sApplicationInfo_AttachMissingPermission}, Hash: &hApplicationInfo}
+var m_ApplicationInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationInfoList_member}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message}}
+var mCloudWatchEventSource = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchEventSource_EC2, &sCloudWatchEventSource_CODE_DEPLOY, &sCloudWatchEventSource_HEALTH, &sCloudWatchEventSource_RDS}}
+var mConfigurationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationEvent_ResourceGroupName, &sConfigurationEvent_AccountId, &sConfigurationEvent_MonitoredResourceARN, &sConfigurationEvent_EventStatus, &sConfigurationEvent_EventResourceType, &sConfigurationEvent_EventTime, &sConfigurationEvent_EventDetail, &sConfigurationEvent_EventResourceName}}
+var m_ConfigurationEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationEventList_member}}
+var mConfigurationEventResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationEventResourceType_CLOUDWATCH_ALARM, &sConfigurationEventResourceType_CLOUDWATCH_LOG, &sConfigurationEventResourceType_CLOUDFORMATION, &sConfigurationEventResourceType_SSM_ASSOCIATION}}
+var mConfigurationEventStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationEventStatus_INFO, &sConfigurationEventStatus_WARN, &sConfigurationEventStatus_ERROR}}
+var m_DetectedWorkload = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetectedWorkload_key, &s_DetectedWorkload_value}}
+var mDiscoveryType = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoveryType_RESOURCE_GROUP_BASED, &sDiscoveryType_ACCOUNT_BASED}}
+var m_Feedback = smithy.SchemaMembers{List: []*smithy.Schema{&s_Feedback_key, &s_Feedback_value}}
+var mFeedbackKey = smithy.SchemaMembers{List: []*smithy.Schema{&sFeedbackKey_INSIGHTS_FEEDBACK}}
+var mFeedbackValue = smithy.SchemaMembers{List: []*smithy.Schema{&sFeedbackValue_NOT_SPECIFIED, &sFeedbackValue_USEFUL, &sFeedbackValue_NOT_USEFUL}}
+var mGroupingType = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupingType_ACCOUNT_BASED}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mLogFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sLogFilter_ERROR, &sLogFilter_WARN, &sLogFilter_INFO}}
+var mLogPattern = smithy.SchemaMembers{List: []*smithy.Schema{&sLogPattern_PatternSetName, &sLogPattern_PatternName, &sLogPattern_Pattern, &sLogPattern_Rank}}
+var m_LogPatternList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogPatternList_member}}
+var m_LogPatternSetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogPatternSetList_member}}
+var mObservation = smithy.SchemaMembers{List: []*smithy.Schema{&sObservation_Id, &sObservation_StartTime, &sObservation_EndTime, &sObservation_SourceType, &sObservation_SourceARN, &sObservation_LogGroup, &sObservation_LineTime, &sObservation_LogText, &sObservation_LogFilter, &sObservation_MetricNamespace, &sObservation_MetricName, &sObservation_Unit, &sObservation_Value, &sObservation_CloudWatchEventId, &sObservation_CloudWatchEventSource, &sObservation_CloudWatchEventDetailType, &sObservation_HealthEventArn, &sObservation_HealthService, &sObservation_HealthEventTypeCode, &sObservation_HealthEventTypeCategory, &sObservation_HealthEventDescription, &sObservation_CodeDeployDeploymentId, &sObservation_CodeDeployDeploymentGroup, &sObservation_CodeDeployState, &sObservation_CodeDeployApplication, &sObservation_CodeDeployInstanceGroupId, &sObservation_Ec2State, &sObservation_RdsEventCategories, &sObservation_RdsEventMessage, &sObservation_S3EventName, &sObservation_StatesExecutionArn, &sObservation_StatesArn, &sObservation_StatesStatus, &sObservation_StatesInput, &sObservation_EbsEvent, &sObservation_EbsResult, &sObservation_EbsCause, &sObservation_EbsRequestId, &sObservation_XRayFaultPercent, &sObservation_XRayThrottlePercent, &sObservation_XRayErrorPercent, &sObservation_XRayRequestCount, &sObservation_XRayRequestAverageLatency, &sObservation_XRayNodeName, &sObservation_XRayNodeType}, Hash: &hObservation}
+var m_ObservationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObservationList_member}}
+var mOsType = smithy.SchemaMembers{List: []*smithy.Schema{&sOsType_WINDOWS, &sOsType_LINUX}}
+var mProblem = smithy.SchemaMembers{List: []*smithy.Schema{&sProblem_Id, &sProblem_Title, &sProblem_ShortName, &sProblem_Insights, &sProblem_Status, &sProblem_AffectedResource, &sProblem_StartTime, &sProblem_EndTime, &sProblem_SeverityLevel, &sProblem_AccountId, &sProblem_ResourceGroupName, &sProblem_Feedback, &sProblem_RecurringCount, &sProblem_LastRecurrenceTime, &sProblem_Visibility, &sProblem_ResolutionMethod}, Hash: &hProblem}
+var m_ProblemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProblemList_member}}
+var mRecommendationType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationType_INFRA_ONLY, &sRecommendationType_WORKLOAD_ONLY, &sRecommendationType_ALL}}
+var mRelatedObservations = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedObservations_ObservationList}}
+var mResolutionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sResolutionMethod_MANUAL, &sResolutionMethod_AUTOMATIC, &sResolutionMethod_UNRESOLVED}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mSeverityLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sSeverityLevel_Informative, &sSeverityLevel_Low, &sSeverityLevel_Medium, &sSeverityLevel_High}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_IGNORE, &sStatus_RESOLVED, &sStatus_PENDING, &sStatus_RECURRING, &sStatus_RECOVERING}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTagsAlreadyExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagsAlreadyExistException_Message}}
+var mTier = smithy.SchemaMembers{List: []*smithy.Schema{&sTier_CUSTOM, &sTier_DEFAULT, &sTier_DOT_NET_CORE, &sTier_DOT_NET_WORKER, &sTier_DOT_NET_WEB_TIER, &sTier_DOT_NET_WEB, &sTier_SQL_SERVER, &sTier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, &sTier_MYSQL, &sTier_POSTGRESQL, &sTier_JAVA_JMX, &sTier_ORACLE, &sTier_SAP_HANA_MULTI_NODE, &sTier_SAP_HANA_SINGLE_NODE, &sTier_SAP_HANA_HIGH_AVAILABILITY, &sTier_SAP_ASE_SINGLE_NODE, &sTier_SAP_ASE_HIGH_AVAILABILITY, &sTier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, &sTier_SHAREPOINT, &sTier_ACTIVE_DIRECTORY, &sTier_SAP_NETWEAVER_STANDARD, &sTier_SAP_NETWEAVER_DISTRIBUTED, &sTier_SAP_NETWEAVER_HIGH_AVAILABILITY}, Hash: &hTier}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message, &sTooManyTagsException_ResourceName}}
+var mUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStatus_RESOLVED}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mVisibility = smithy.SchemaMembers{List: []*smithy.Schema{&sVisibility_IGNORED, &sVisibility_VISIBLE}}
+var mWorkload = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkload_WorkloadId, &sWorkload_ComponentName, &sWorkload_WorkloadName, &sWorkload_Tier, &sWorkload_WorkloadRemarks, &sWorkload_MissingWorkloadConfig}}
+var mWorkloadConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadConfiguration_WorkloadName, &sWorkloadConfiguration_Tier, &sWorkloadConfiguration_Configuration}}
+var m_WorkloadList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkloadList_member}}
+var m_WorkloadMetaData = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkloadMetaData_key, &s_WorkloadMetaData_value}}
+var mAddWorkloadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddWorkloadRequest_ResourceGroupName, &sAddWorkloadRequest_ComponentName, &sAddWorkloadRequest_WorkloadConfiguration}}
+var mAddWorkloadResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAddWorkloadResponse_WorkloadId, &sAddWorkloadResponse_WorkloadConfiguration}}
+var mCreateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationRequest_ResourceGroupName, &sCreateApplicationRequest_OpsCenterEnabled, &sCreateApplicationRequest_CWEMonitorEnabled, &sCreateApplicationRequest_OpsItemSNSTopicArn, &sCreateApplicationRequest_SNSNotificationArn, &sCreateApplicationRequest_Tags, &sCreateApplicationRequest_AutoConfigEnabled, &sCreateApplicationRequest_AutoCreate, &sCreateApplicationRequest_GroupingType, &sCreateApplicationRequest_AttachMissingPermission}, Hash: &hCreateApplicationRequest}
+var mCreateApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationResponse_ApplicationInfo}}
+var mCreateComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentRequest_ResourceGroupName, &sCreateComponentRequest_ComponentName, &sCreateComponentRequest_ResourceList}}
+var mCreateLogPatternRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLogPatternRequest_ResourceGroupName, &sCreateLogPatternRequest_PatternSetName, &sCreateLogPatternRequest_PatternName, &sCreateLogPatternRequest_Pattern, &sCreateLogPatternRequest_Rank}}
+var mCreateLogPatternResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLogPatternResponse_LogPattern, &sCreateLogPatternResponse_ResourceGroupName}}
+var mDeleteApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationRequest_ResourceGroupName}}
+var mDeleteComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentRequest_ResourceGroupName, &sDeleteComponentRequest_ComponentName}}
+var mDeleteLogPatternRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLogPatternRequest_ResourceGroupName, &sDeleteLogPatternRequest_PatternSetName, &sDeleteLogPatternRequest_PatternName}}
+var mDescribeApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationRequest_ResourceGroupName, &sDescribeApplicationRequest_AccountId}}
+var mDescribeApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationResponse_ApplicationInfo}}
+var mDescribeComponentConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentConfigurationRequest_ResourceGroupName, &sDescribeComponentConfigurationRequest_ComponentName, &sDescribeComponentConfigurationRequest_AccountId}}
+var mDescribeComponentConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentConfigurationResponse_Monitor, &sDescribeComponentConfigurationResponse_Tier, &sDescribeComponentConfigurationResponse_ComponentConfiguration}}
+var mDescribeComponentConfigurationRecommendationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentConfigurationRecommendationRequest_ResourceGroupName, &sDescribeComponentConfigurationRecommendationRequest_ComponentName, &sDescribeComponentConfigurationRecommendationRequest_Tier, &sDescribeComponentConfigurationRecommendationRequest_WorkloadName, &sDescribeComponentConfigurationRecommendationRequest_RecommendationType}}
+var mDescribeComponentConfigurationRecommendationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentConfigurationRecommendationResponse_ComponentConfiguration}}
+var mDescribeComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentRequest_ResourceGroupName, &sDescribeComponentRequest_ComponentName, &sDescribeComponentRequest_AccountId}}
+var mDescribeComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentResponse_ApplicationComponent, &sDescribeComponentResponse_ResourceList}}
+var mDescribeLogPatternRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLogPatternRequest_ResourceGroupName, &sDescribeLogPatternRequest_PatternSetName, &sDescribeLogPatternRequest_PatternName, &sDescribeLogPatternRequest_AccountId}}
+var mDescribeLogPatternResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLogPatternResponse_ResourceGroupName, &sDescribeLogPatternResponse_AccountId, &sDescribeLogPatternResponse_LogPattern}}
+var mDescribeObservationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObservationRequest_ObservationId, &sDescribeObservationRequest_AccountId}}
+var mDescribeObservationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObservationResponse_Observation}}
+var mDescribeProblemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProblemRequest_ProblemId, &sDescribeProblemRequest_AccountId}}
+var mDescribeProblemObservationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProblemObservationsRequest_ProblemId, &sDescribeProblemObservationsRequest_AccountId}}
+var mDescribeProblemObservationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProblemObservationsResponse_RelatedObservations}}
+var mDescribeProblemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProblemResponse_Problem, &sDescribeProblemResponse_SNSNotificationArn}}
+var mDescribeWorkloadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkloadRequest_ResourceGroupName, &sDescribeWorkloadRequest_ComponentName, &sDescribeWorkloadRequest_WorkloadId, &sDescribeWorkloadRequest_AccountId}}
+var mDescribeWorkloadResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkloadResponse_WorkloadId, &sDescribeWorkloadResponse_WorkloadRemarks, &sDescribeWorkloadResponse_WorkloadConfiguration}}
+var mListApplicationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationsRequest_MaxResults, &sListApplicationsRequest_NextToken, &sListApplicationsRequest_AccountId}}
+var mListApplicationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationsResponse_ApplicationInfoList, &sListApplicationsResponse_NextToken}}
+var mListComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsRequest_ResourceGroupName, &sListComponentsRequest_MaxResults, &sListComponentsRequest_NextToken, &sListComponentsRequest_AccountId}}
+var mListComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsResponse_ApplicationComponentList, &sListComponentsResponse_NextToken}}
+var mListConfigurationHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationHistoryRequest_ResourceGroupName, &sListConfigurationHistoryRequest_StartTime, &sListConfigurationHistoryRequest_EndTime, &sListConfigurationHistoryRequest_EventStatus, &sListConfigurationHistoryRequest_MaxResults, &sListConfigurationHistoryRequest_NextToken, &sListConfigurationHistoryRequest_AccountId}}
+var mListConfigurationHistoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationHistoryResponse_EventList, &sListConfigurationHistoryResponse_NextToken}}
+var mListLogPatternSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogPatternSetsRequest_ResourceGroupName, &sListLogPatternSetsRequest_MaxResults, &sListLogPatternSetsRequest_NextToken, &sListLogPatternSetsRequest_AccountId}}
+var mListLogPatternSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogPatternSetsResponse_ResourceGroupName, &sListLogPatternSetsResponse_AccountId, &sListLogPatternSetsResponse_LogPatternSets, &sListLogPatternSetsResponse_NextToken}}
+var mListLogPatternsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogPatternsRequest_ResourceGroupName, &sListLogPatternsRequest_PatternSetName, &sListLogPatternsRequest_MaxResults, &sListLogPatternsRequest_NextToken, &sListLogPatternsRequest_AccountId}}
+var mListLogPatternsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogPatternsResponse_ResourceGroupName, &sListLogPatternsResponse_AccountId, &sListLogPatternsResponse_LogPatterns, &sListLogPatternsResponse_NextToken}}
+var mListProblemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProblemsRequest_AccountId, &sListProblemsRequest_ResourceGroupName, &sListProblemsRequest_StartTime, &sListProblemsRequest_EndTime, &sListProblemsRequest_MaxResults, &sListProblemsRequest_NextToken, &sListProblemsRequest_ComponentName, &sListProblemsRequest_Visibility}}
+var mListProblemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProblemsResponse_ProblemList, &sListProblemsResponse_NextToken, &sListProblemsResponse_ResourceGroupName, &sListProblemsResponse_AccountId}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListWorkloadsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadsRequest_ResourceGroupName, &sListWorkloadsRequest_ComponentName, &sListWorkloadsRequest_MaxResults, &sListWorkloadsRequest_NextToken, &sListWorkloadsRequest_AccountId}}
+var mListWorkloadsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadsResponse_WorkloadList, &sListWorkloadsResponse_NextToken}}
+var mRemoveWorkloadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveWorkloadRequest_ResourceGroupName, &sRemoveWorkloadRequest_ComponentName, &sRemoveWorkloadRequest_WorkloadId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationRequest_ResourceGroupName, &sUpdateApplicationRequest_OpsCenterEnabled, &sUpdateApplicationRequest_CWEMonitorEnabled, &sUpdateApplicationRequest_OpsItemSNSTopicArn, &sUpdateApplicationRequest_SNSNotificationArn, &sUpdateApplicationRequest_RemoveSNSTopic, &sUpdateApplicationRequest_AutoConfigEnabled, &sUpdateApplicationRequest_AttachMissingPermission}}
+var mUpdateApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationResponse_ApplicationInfo}}
+var mUpdateComponentConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentConfigurationRequest_ResourceGroupName, &sUpdateComponentConfigurationRequest_ComponentName, &sUpdateComponentConfigurationRequest_Monitor, &sUpdateComponentConfigurationRequest_Tier, &sUpdateComponentConfigurationRequest_ComponentConfiguration, &sUpdateComponentConfigurationRequest_AutoConfigEnabled}}
+var mUpdateComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentRequest_ResourceGroupName, &sUpdateComponentRequest_ComponentName, &sUpdateComponentRequest_NewComponentName, &sUpdateComponentRequest_ResourceList}}
+var mUpdateLogPatternRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLogPatternRequest_ResourceGroupName, &sUpdateLogPatternRequest_PatternSetName, &sUpdateLogPatternRequest_PatternName, &sUpdateLogPatternRequest_Pattern, &sUpdateLogPatternRequest_Rank}}
+var mUpdateLogPatternResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLogPatternResponse_ResourceGroupName, &sUpdateLogPatternResponse_LogPattern}}
+var mUpdateProblemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProblemRequest_ProblemId, &sUpdateProblemRequest_UpdateStatus, &sUpdateProblemRequest_Visibility}}
+var mUpdateWorkloadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkloadRequest_ResourceGroupName, &sUpdateWorkloadRequest_ComponentName, &sUpdateWorkloadRequest_WorkloadId, &sUpdateWorkloadRequest_WorkloadConfiguration}}
+var mUpdateWorkloadResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkloadResponse_WorkloadId, &sUpdateWorkloadResponse_WorkloadConfiguration}}
+
+var hApplicationInfo = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 0, 9, 6, 0, 0, 0, 8, 0, 10, 0, 0, 0, 4, 5, 11, 3, 0, 0,
+	0, 7, 0, 0, 0, 0, 0, 1,
+}}
+var hObservation = smithy.MemberHash{Seed: 2143, Slots: []uint16{
+	0, 0, 37, 0, 45, 23, 0, 0, 8, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 19, 0, 17,
+	0, 0, 13, 0, 0, 0, 0, 22, 29, 0, 42, 0, 31, 0, 0, 0, 0, 27, 18, 16, 0, 0, 30, 0,
+	33, 0, 12, 0, 6, 0, 11, 0, 0, 0, 0, 0, 21, 34, 0, 5, 0, 43, 0, 0, 2, 0, 14, 0,
+	0, 4, 24, 0, 32, 0, 25, 0, 15, 0, 3, 44, 0, 40, 0, 0, 0, 0, 0, 10, 0, 0, 0, 28,
+	35, 0, 0, 26, 9, 0, 1, 0, 0, 20, 0, 38, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 36, 0, 0, 39, 0, 0, 0,
+}}
+var hProblem = smithy.MemberHash{Seed: 78, Slots: []uint16{
+	13, 0, 0, 10, 0, 3, 0, 8, 15, 5, 0, 9, 0, 7, 11, 2, 0, 0, 16, 0, 0, 0, 1, 0,
+	0, 12, 0, 0, 4, 0, 14, 6,
+}}
+var hTier = smithy.MemberHash{Seed: 35, Slots: []uint16{
+	20, 0, 11, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 18, 7, 0, 6, 0, 0, 4, 12, 2, 0, 0,
+	0, 0, 9, 0, 0, 14, 19, 3, 0, 0, 0, 0, 16, 17, 15, 0, 0, 8, 0, 0, 0, 0, 0, 0,
+	0, 22, 0, 0, 0, 0, 0, 21, 1, 0, 0, 5, 0, 23, 13, 0,
+}}
+var hCreateApplicationRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 7, 2, 0, 0, 9, 0, 6, 0, 0, 0, 0, 4, 5, 10, 0, 0, 0,
+	0, 3, 0, 0, 8, 0, 0, 0,
+}}
+
+var sAddWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkload, Type: smithy.ShapeTypeOperation, Ext: &eAddWorkload})
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplication})
+var sCreateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponent, Type: smithy.ShapeTypeOperation, Ext: &eCreateComponent})
+var sCreateLogPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogPattern, Type: smithy.ShapeTypeOperation, Ext: &eCreateLogPattern})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplication})
+var sDeleteComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponent, Type: smithy.ShapeTypeOperation, Ext: &eDeleteComponent})
+var sDeleteLogPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogPattern, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLogPattern})
+var sDescribeApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplication, Type: smithy.ShapeTypeOperation, Ext: &eDescribeApplication})
+var sDescribeComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponent, Type: smithy.ShapeTypeOperation, Ext: &eDescribeComponent})
+var sDescribeComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDescribeComponentConfiguration})
+var sDescribeComponentConfigurationRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfigurationRecommendation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeComponentConfigurationRecommendation})
+var sDescribeLogPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLogPattern, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLogPattern})
+var sDescribeObservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeObservation})
+var sDescribeProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblem, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProblem})
+var sDescribeProblemObservations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblemObservations, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProblemObservations})
+var sDescribeWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkload, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWorkload})
+var sListApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplications, Type: smithy.ShapeTypeOperation, Ext: &eListApplications})
+var sListComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponents, Type: smithy.ShapeTypeOperation, Ext: &eListComponents})
+var sListConfigurationHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationHistory, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurationHistory})
+var sListLogPatterns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatterns, Type: smithy.ShapeTypeOperation, Ext: &eListLogPatterns})
+var sListLogPatternSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatternSets, Type: smithy.ShapeTypeOperation, Ext: &eListLogPatternSets})
+var sListProblems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProblems, Type: smithy.ShapeTypeOperation, Ext: &eListProblems})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWorkloads = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloads, Type: smithy.ShapeTypeOperation, Ext: &eListWorkloads})
+var sRemoveWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveWorkload, Type: smithy.ShapeTypeOperation, Ext: &eRemoveWorkload})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplication})
+var sUpdateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponent, Type: smithy.ShapeTypeOperation, Ext: &eUpdateComponent})
+var sUpdateComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateComponentConfiguration})
+var sUpdateLogPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLogPattern, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLogPattern})
+var sUpdateProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProblem, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProblem})
+var sUpdateWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkload, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkload})
+var s_EC2WindowsBarleyService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2WindowsBarleyService, Type: smithy.ShapeTypeService, Ext: &e_EC2WindowsBarleyService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AffectedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AffectedResource, Type: smithy.ShapeTypeString, Ext: &e_AffectedResource})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sApplicationComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationComponent, Members: &mApplicationComponent, Type: smithy.ShapeTypeStructure, Ext: &eApplicationComponent})
+var sApplicationComponent_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eApplicationComponent_ComponentName})
+var sApplicationComponent_ComponentRemarks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentRemarks", ID: &i_Remarks, Type: smithy.ShapeTypeString, Ext: &eApplicationComponent_ComponentRemarks})
+var sApplicationComponent_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eApplicationComponent_ResourceType})
+var sApplicationComponent_OsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OsType", ID: &iOsType, Members: &mOsType, Type: smithy.ShapeTypeEnum, Ext: &eApplicationComponent_OsType})
+var sApplicationComponent_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eApplicationComponent_Tier})
+var sApplicationComponent_Monitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitor", ID: &i_Monitor, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationComponent_Monitor})
+var sApplicationComponent_DetectedWorkload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectedWorkload", ID: &i_DetectedWorkload, Members: &m_DetectedWorkload, Type: smithy.ShapeTypeMap, Ext: &eApplicationComponent_DetectedWorkload})
+var s_ApplicationComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationComponentList, Members: &m_ApplicationComponentList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationComponentList})
+var s_ApplicationComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationComponent, Members: &mApplicationComponent, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationComponentList_member})
+var sApplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationInfo, Members: &mApplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eApplicationInfo})
+var sApplicationInfo_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_AccountId})
+var sApplicationInfo_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_ResourceGroupName})
+var sApplicationInfo_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &i_LifeCycle, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_LifeCycle})
+var sApplicationInfo_OpsItemSNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsItemSNSTopicArn", ID: &i_OpsItemSNSTopicArn, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_OpsItemSNSTopicArn})
+var sApplicationInfo_SNSNotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNSNotificationArn", ID: &i_SNSNotificationArn, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_SNSNotificationArn})
+var sApplicationInfo_OpsCenterEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsCenterEnabled", ID: &i_OpsCenterEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationInfo_OpsCenterEnabled})
+var sApplicationInfo_CWEMonitorEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CWEMonitorEnabled", ID: &i_CWEMonitorEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationInfo_CWEMonitorEnabled})
+var sApplicationInfo_Remarks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Remarks", ID: &i_Remarks, Type: smithy.ShapeTypeString, Ext: &eApplicationInfo_Remarks})
+var sApplicationInfo_AutoConfigEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoConfigEnabled", ID: &i_AutoConfigEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationInfo_AutoConfigEnabled})
+var sApplicationInfo_DiscoveryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscoveryType", ID: &iDiscoveryType, Members: &mDiscoveryType, Type: smithy.ShapeTypeEnum, Ext: &eApplicationInfo_DiscoveryType})
+var sApplicationInfo_AttachMissingPermission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachMissingPermission", ID: &i_AttachMissingPermission, Type: smithy.ShapeTypeBoolean, Ext: &eApplicationInfo_AttachMissingPermission})
+var s_ApplicationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationInfoList, Members: &m_ApplicationInfoList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationInfoList})
+var s_ApplicationInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationInfo, Members: &mApplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationInfoList_member})
+var s_AttachMissingPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachMissingPermission, Type: smithy.ShapeTypeBoolean, Ext: &e_AttachMissingPermission})
+var s_AutoConfigEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoConfigEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_AutoConfigEnabled})
+var s_AutoCreate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoCreate, Type: smithy.ShapeTypeBoolean, Ext: &e_AutoCreate})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var s_CloudWatchEventDetailType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchEventDetailType, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchEventDetailType})
+var s_CloudWatchEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchEventId, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchEventId})
+var sCloudWatchEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchEventSource, Members: &mCloudWatchEventSource, Type: smithy.ShapeTypeEnum, Ext: &eCloudWatchEventSource})
+var sCloudWatchEventSource_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchEventSource_EC2})
+var sCloudWatchEventSource_CODE_DEPLOY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_DEPLOY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchEventSource_CODE_DEPLOY})
+var sCloudWatchEventSource_HEALTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchEventSource_HEALTH})
+var sCloudWatchEventSource_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchEventSource_RDS})
+var s_CodeDeployApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeDeployApplication, Type: smithy.ShapeTypeString, Ext: &e_CodeDeployApplication})
+var s_CodeDeployDeploymentGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeDeployDeploymentGroup, Type: smithy.ShapeTypeString, Ext: &e_CodeDeployDeploymentGroup})
+var s_CodeDeployDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeDeployDeploymentId, Type: smithy.ShapeTypeString, Ext: &e_CodeDeployDeploymentId})
+var s_CodeDeployInstanceGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeDeployInstanceGroupId, Type: smithy.ShapeTypeString, Ext: &e_CodeDeployInstanceGroupId})
+var s_CodeDeployState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeDeployState, Type: smithy.ShapeTypeString, Ext: &e_CodeDeployState})
+var s_ComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentConfiguration, Type: smithy.ShapeTypeString, Ext: &e_ComponentConfiguration})
+var s_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &e_ComponentName})
+var sConfigurationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationEvent, Members: &mConfigurationEvent, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEvent})
+var sConfigurationEvent_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eConfigurationEvent_ResourceGroupName})
+var sConfigurationEvent_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eConfigurationEvent_AccountId})
+var sConfigurationEvent_MonitoredResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoredResourceARN", ID: &i_ConfigurationEventMonitoredResourceARN, Type: smithy.ShapeTypeString, Ext: &eConfigurationEvent_MonitoredResourceARN})
+var sConfigurationEvent_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &iConfigurationEventStatus, Members: &mConfigurationEventStatus, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationEvent_EventStatus})
+var sConfigurationEvent_EventResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventResourceType", ID: &iConfigurationEventResourceType, Members: &mConfigurationEventResourceType, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationEvent_EventResourceType})
+var sConfigurationEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_ConfigurationEventTime, Type: smithy.ShapeTypeTimestamp, Ext: &eConfigurationEvent_EventTime})
+var sConfigurationEvent_EventDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDetail", ID: &i_ConfigurationEventDetail, Type: smithy.ShapeTypeString, Ext: &eConfigurationEvent_EventDetail})
+var sConfigurationEvent_EventResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventResourceName", ID: &i_ConfigurationEventResourceName, Type: smithy.ShapeTypeString, Ext: &eConfigurationEvent_EventResourceName})
+var s_ConfigurationEventDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationEventDetail, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationEventDetail})
+var s_ConfigurationEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationEventList, Members: &m_ConfigurationEventList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationEventList})
+var s_ConfigurationEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationEvent, Members: &mConfigurationEvent, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurationEventList_member})
+var s_ConfigurationEventMonitoredResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationEventMonitoredResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationEventMonitoredResourceARN})
+var s_ConfigurationEventResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationEventResourceName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationEventResourceName})
+var sConfigurationEventResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationEventResourceType, Members: &mConfigurationEventResourceType, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationEventResourceType})
+var sConfigurationEventResourceType_CLOUDWATCH_ALARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_ALARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventResourceType_CLOUDWATCH_ALARM})
+var sConfigurationEventResourceType_CLOUDWATCH_LOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_LOG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventResourceType_CLOUDWATCH_LOG})
+var sConfigurationEventResourceType_CLOUDFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventResourceType_CLOUDFORMATION})
+var sConfigurationEventResourceType_SSM_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSM_ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventResourceType_SSM_ASSOCIATION})
+var sConfigurationEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationEventStatus, Members: &mConfigurationEventStatus, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationEventStatus})
+var sConfigurationEventStatus_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventStatus_INFO})
+var sConfigurationEventStatus_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventStatus_WARN})
+var sConfigurationEventStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationEventStatus_ERROR})
+var s_ConfigurationEventTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationEventTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ConfigurationEventTime})
+var s_CustomComponentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomComponentName, Type: smithy.ShapeTypeString, Ext: &e_CustomComponentName})
+var s_CWEMonitorEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CWEMonitorEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_CWEMonitorEnabled})
+var s_DetectedWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectedWorkload, Members: &m_DetectedWorkload, Type: smithy.ShapeTypeMap, Ext: &e_DetectedWorkload})
+var s_DetectedWorkload_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &e_DetectedWorkload_key})
+var s_DetectedWorkload_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_WorkloadMetaData, Members: &m_WorkloadMetaData, Type: smithy.ShapeTypeMap, Ext: &e_DetectedWorkload_value})
+var sDiscoveryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoveryType, Members: &mDiscoveryType, Type: smithy.ShapeTypeEnum, Ext: &eDiscoveryType})
+var sDiscoveryType_RESOURCE_GROUP_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_GROUP_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiscoveryType_RESOURCE_GROUP_BASED})
+var sDiscoveryType_ACCOUNT_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiscoveryType_ACCOUNT_BASED})
+var s_EbsCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsCause, Type: smithy.ShapeTypeString, Ext: &e_EbsCause})
+var s_EbsEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsEvent, Type: smithy.ShapeTypeString, Ext: &e_EbsEvent})
+var s_EbsRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsRequestId, Type: smithy.ShapeTypeString, Ext: &e_EbsRequestId})
+var s_EbsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsResult, Type: smithy.ShapeTypeString, Ext: &e_EbsResult})
+var s_Ec2State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2State, Type: smithy.ShapeTypeString, Ext: &e_Ec2State})
+var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_EndTime})
+var s_ErrorMsg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &e_ErrorMsg})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_Feedback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Feedback, Members: &m_Feedback, Type: smithy.ShapeTypeMap, Ext: &e_Feedback})
+var s_Feedback_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iFeedbackKey, Members: &mFeedbackKey, Type: smithy.ShapeTypeEnum, Ext: &e_Feedback_key})
+var s_Feedback_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFeedbackValue, Members: &mFeedbackValue, Type: smithy.ShapeTypeEnum, Ext: &e_Feedback_value})
+var sFeedbackKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeedbackKey, Members: &mFeedbackKey, Type: smithy.ShapeTypeEnum, Ext: &eFeedbackKey})
+var sFeedbackKey_INSIGHTS_FEEDBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSIGHTS_FEEDBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeedbackKey_INSIGHTS_FEEDBACK})
+var sFeedbackValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeedbackValue, Members: &mFeedbackValue, Type: smithy.ShapeTypeEnum, Ext: &eFeedbackValue})
+var sFeedbackValue_NOT_SPECIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SPECIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeedbackValue_NOT_SPECIFIED})
+var sFeedbackValue_USEFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USEFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeedbackValue_USEFUL})
+var sFeedbackValue_NOT_USEFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_USEFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeedbackValue_NOT_USEFUL})
+var sGroupingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupingType, Members: &mGroupingType, Type: smithy.ShapeTypeEnum, Ext: &eGroupingType})
+var sGroupingType_ACCOUNT_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupingType_ACCOUNT_BASED})
+var s_HealthEventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventArn, Type: smithy.ShapeTypeString, Ext: &e_HealthEventArn})
+var s_HealthEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventDescription, Type: smithy.ShapeTypeString, Ext: &e_HealthEventDescription})
+var s_HealthEventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventTypeCategory, Type: smithy.ShapeTypeString, Ext: &e_HealthEventTypeCategory})
+var s_HealthEventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventTypeCode, Type: smithy.ShapeTypeString, Ext: &e_HealthEventTypeCode})
+var s_HealthService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthService, Type: smithy.ShapeTypeString, Ext: &e_HealthService})
+var s_Insights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Insights, Type: smithy.ShapeTypeString, Ext: &e_Insights})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_LastRecurrenceTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastRecurrenceTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastRecurrenceTime})
+var s_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifeCycle, Type: smithy.ShapeTypeString, Ext: &e_LifeCycle})
+var s_LineTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_LineTime})
+var sLogFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogFilter, Members: &mLogFilter, Type: smithy.ShapeTypeEnum, Ext: &eLogFilter})
+var sLogFilter_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogFilter_ERROR})
+var sLogFilter_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogFilter_WARN})
+var sLogFilter_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogFilter_INFO})
+var s_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &e_LogGroup})
+var sLogPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogPattern, Members: &mLogPattern, Type: smithy.ShapeTypeStructure, Ext: &eLogPattern})
+var sLogPattern_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eLogPattern_PatternSetName})
+var sLogPattern_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternName", ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &eLogPattern_PatternName})
+var sLogPattern_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_LogPatternRegex, Type: smithy.ShapeTypeString, Ext: &eLogPattern_Pattern})
+var sLogPattern_Rank = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rank", ID: &i_LogPatternRank, Type: smithy.ShapeTypeInteger, Ext: &eLogPattern_Rank})
+var s_LogPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternList, Members: &m_LogPatternList, Type: smithy.ShapeTypeList, Ext: &e_LogPatternList})
+var s_LogPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogPattern, Members: &mLogPattern, Type: smithy.ShapeTypeStructure, Ext: &e_LogPatternList_member})
+var s_LogPatternName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &e_LogPatternName})
+var s_LogPatternRank = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternRank, Type: smithy.ShapeTypeInteger, Ext: &e_LogPatternRank})
+var s_LogPatternRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternRegex, Type: smithy.ShapeTypeString, Ext: &e_LogPatternRegex})
+var s_LogPatternSetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternSetList, Members: &m_LogPatternSetList, Type: smithy.ShapeTypeList, Ext: &e_LogPatternSetList})
+var s_LogPatternSetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &e_LogPatternSetList_member})
+var s_LogPatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &e_LogPatternSetName})
+var s_LogText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogText, Type: smithy.ShapeTypeString, Ext: &e_LogText})
+var s_MaxEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &e_MaxEntities})
+var s_MetaDataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaDataKey, Type: smithy.ShapeTypeString, Ext: &e_MetaDataKey})
+var s_MetaDataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaDataValue, Type: smithy.ShapeTypeString, Ext: &e_MetaDataValue})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var s_MetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricNamespace, Type: smithy.ShapeTypeString, Ext: &e_MetricNamespace})
+var s_MissingWorkloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MissingWorkloadConfig, Type: smithy.ShapeTypeBoolean, Ext: &e_MissingWorkloadConfig})
+var s_Monitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Monitor, Type: smithy.ShapeTypeBoolean, Ext: &e_Monitor})
+var sObservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObservation, Members: &mObservation, Type: smithy.ShapeTypeStructure, Ext: &eObservation})
+var sObservation_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ObservationId, Type: smithy.ShapeTypeString, Ext: &eObservation_Id})
+var sObservation_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eObservation_StartTime})
+var sObservation_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eObservation_EndTime})
+var sObservation_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_SourceType, Type: smithy.ShapeTypeString, Ext: &eObservation_SourceType})
+var sObservation_SourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceARN", ID: &i_SourceARN, Type: smithy.ShapeTypeString, Ext: &eObservation_SourceARN})
+var sObservation_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &eObservation_LogGroup})
+var sObservation_LineTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineTime", ID: &i_LineTime, Type: smithy.ShapeTypeTimestamp, Ext: &eObservation_LineTime})
+var sObservation_LogText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogText", ID: &i_LogText, Type: smithy.ShapeTypeString, Ext: &eObservation_LogText})
+var sObservation_LogFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFilter", ID: &iLogFilter, Members: &mLogFilter, Type: smithy.ShapeTypeEnum, Ext: &eObservation_LogFilter})
+var sObservation_MetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricNamespace", ID: &i_MetricNamespace, Type: smithy.ShapeTypeString, Ext: &eObservation_MetricNamespace})
+var sObservation_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eObservation_MetricName})
+var sObservation_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &eObservation_Unit})
+var sObservation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Type: smithy.ShapeTypeDouble, Ext: &eObservation_Value})
+var sObservation_CloudWatchEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchEventId", ID: &i_CloudWatchEventId, Type: smithy.ShapeTypeString, Ext: &eObservation_CloudWatchEventId})
+var sObservation_CloudWatchEventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchEventSource", ID: &iCloudWatchEventSource, Members: &mCloudWatchEventSource, Type: smithy.ShapeTypeEnum, Ext: &eObservation_CloudWatchEventSource})
+var sObservation_CloudWatchEventDetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchEventDetailType", ID: &i_CloudWatchEventDetailType, Type: smithy.ShapeTypeString, Ext: &eObservation_CloudWatchEventDetailType})
+var sObservation_HealthEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventArn", ID: &i_HealthEventArn, Type: smithy.ShapeTypeString, Ext: &eObservation_HealthEventArn})
+var sObservation_HealthService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthService", ID: &i_HealthService, Type: smithy.ShapeTypeString, Ext: &eObservation_HealthService})
+var sObservation_HealthEventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventTypeCode", ID: &i_HealthEventTypeCode, Type: smithy.ShapeTypeString, Ext: &eObservation_HealthEventTypeCode})
+var sObservation_HealthEventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventTypeCategory", ID: &i_HealthEventTypeCategory, Type: smithy.ShapeTypeString, Ext: &eObservation_HealthEventTypeCategory})
+var sObservation_HealthEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventDescription", ID: &i_HealthEventDescription, Type: smithy.ShapeTypeString, Ext: &eObservation_HealthEventDescription})
+var sObservation_CodeDeployDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeDeployDeploymentId", ID: &i_CodeDeployDeploymentId, Type: smithy.ShapeTypeString, Ext: &eObservation_CodeDeployDeploymentId})
+var sObservation_CodeDeployDeploymentGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeDeployDeploymentGroup", ID: &i_CodeDeployDeploymentGroup, Type: smithy.ShapeTypeString, Ext: &eObservation_CodeDeployDeploymentGroup})
+var sObservation_CodeDeployState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeDeployState", ID: &i_CodeDeployState, Type: smithy.ShapeTypeString, Ext: &eObservation_CodeDeployState})
+var sObservation_CodeDeployApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeDeployApplication", ID: &i_CodeDeployApplication, Type: smithy.ShapeTypeString, Ext: &eObservation_CodeDeployApplication})
+var sObservation_CodeDeployInstanceGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeDeployInstanceGroupId", ID: &i_CodeDeployInstanceGroupId, Type: smithy.ShapeTypeString, Ext: &eObservation_CodeDeployInstanceGroupId})
+var sObservation_Ec2State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2State", ID: &i_Ec2State, Type: smithy.ShapeTypeString, Ext: &eObservation_Ec2State})
+var sObservation_RdsEventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RdsEventCategories", ID: &i_RdsEventCategories, Type: smithy.ShapeTypeString, Ext: &eObservation_RdsEventCategories})
+var sObservation_RdsEventMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RdsEventMessage", ID: &i_RdsEventMessage, Type: smithy.ShapeTypeString, Ext: &eObservation_RdsEventMessage})
+var sObservation_S3EventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3EventName", ID: &i_S3EventName, Type: smithy.ShapeTypeString, Ext: &eObservation_S3EventName})
+var sObservation_StatesExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatesExecutionArn", ID: &i_StatesExecutionArn, Type: smithy.ShapeTypeString, Ext: &eObservation_StatesExecutionArn})
+var sObservation_StatesArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatesArn", ID: &i_StatesArn, Type: smithy.ShapeTypeString, Ext: &eObservation_StatesArn})
+var sObservation_StatesStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatesStatus", ID: &i_StatesStatus, Type: smithy.ShapeTypeString, Ext: &eObservation_StatesStatus})
+var sObservation_StatesInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatesInput", ID: &i_StatesInput, Type: smithy.ShapeTypeString, Ext: &eObservation_StatesInput})
+var sObservation_EbsEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EbsEvent", ID: &i_EbsEvent, Type: smithy.ShapeTypeString, Ext: &eObservation_EbsEvent})
+var sObservation_EbsResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EbsResult", ID: &i_EbsResult, Type: smithy.ShapeTypeString, Ext: &eObservation_EbsResult})
+var sObservation_EbsCause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EbsCause", ID: &i_EbsCause, Type: smithy.ShapeTypeString, Ext: &eObservation_EbsCause})
+var sObservation_EbsRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EbsRequestId", ID: &i_EbsRequestId, Type: smithy.ShapeTypeString, Ext: &eObservation_EbsRequestId})
+var sObservation_XRayFaultPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayFaultPercent", ID: &i_XRayFaultPercent, Type: smithy.ShapeTypeInteger, Ext: &eObservation_XRayFaultPercent})
+var sObservation_XRayThrottlePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayThrottlePercent", ID: &i_XRayThrottlePercent, Type: smithy.ShapeTypeInteger, Ext: &eObservation_XRayThrottlePercent})
+var sObservation_XRayErrorPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayErrorPercent", ID: &i_XRayErrorPercent, Type: smithy.ShapeTypeInteger, Ext: &eObservation_XRayErrorPercent})
+var sObservation_XRayRequestCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayRequestCount", ID: &i_XRayRequestCount, Type: smithy.ShapeTypeInteger, Ext: &eObservation_XRayRequestCount})
+var sObservation_XRayRequestAverageLatency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayRequestAverageLatency", ID: &i_XRayRequestAverageLatency, Type: smithy.ShapeTypeLong, Ext: &eObservation_XRayRequestAverageLatency})
+var sObservation_XRayNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayNodeName", ID: &i_XRayNodeName, Type: smithy.ShapeTypeString, Ext: &eObservation_XRayNodeName})
+var sObservation_XRayNodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XRayNodeType", ID: &i_XRayNodeType, Type: smithy.ShapeTypeString, Ext: &eObservation_XRayNodeType})
+var s_ObservationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObservationId, Type: smithy.ShapeTypeString, Ext: &e_ObservationId})
+var s_ObservationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObservationList, Members: &m_ObservationList, Type: smithy.ShapeTypeList, Ext: &e_ObservationList})
+var s_ObservationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iObservation, Members: &mObservation, Type: smithy.ShapeTypeStructure, Ext: &e_ObservationList_member})
+var s_OpsCenterEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpsCenterEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_OpsCenterEnabled})
+var s_OpsItemSNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpsItemSNSTopicArn, Type: smithy.ShapeTypeString, Ext: &e_OpsItemSNSTopicArn})
+var sOsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOsType, Members: &mOsType, Type: smithy.ShapeTypeEnum, Ext: &eOsType})
+var sOsType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOsType_WINDOWS})
+var sOsType_LINUX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINUX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOsType_LINUX})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProblem, Members: &mProblem, Type: smithy.ShapeTypeStructure, Ext: &eProblem})
+var sProblem_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ProblemId, Type: smithy.ShapeTypeString, Ext: &eProblem_Id})
+var sProblem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &eProblem_Title})
+var sProblem_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortName", ID: &i_ShortName, Type: smithy.ShapeTypeString, Ext: &eProblem_ShortName})
+var sProblem_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &i_Insights, Type: smithy.ShapeTypeString, Ext: &eProblem_Insights})
+var sProblem_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eProblem_Status})
+var sProblem_AffectedResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedResource", ID: &i_AffectedResource, Type: smithy.ShapeTypeString, Ext: &eProblem_AffectedResource})
+var sProblem_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProblem_StartTime})
+var sProblem_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProblem_EndTime})
+var sProblem_SeverityLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SeverityLevel", ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeEnum, Ext: &eProblem_SeverityLevel})
+var sProblem_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eProblem_AccountId})
+var sProblem_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eProblem_ResourceGroupName})
+var sProblem_Feedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Feedback", ID: &i_Feedback, Members: &m_Feedback, Type: smithy.ShapeTypeMap, Ext: &eProblem_Feedback})
+var sProblem_RecurringCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurringCount", ID: &i_RecurringCount, Type: smithy.ShapeTypeLong, Ext: &eProblem_RecurringCount})
+var sProblem_LastRecurrenceTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRecurrenceTime", ID: &i_LastRecurrenceTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProblem_LastRecurrenceTime})
+var sProblem_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum, Ext: &eProblem_Visibility})
+var sProblem_ResolutionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolutionMethod", ID: &iResolutionMethod, Members: &mResolutionMethod, Type: smithy.ShapeTypeEnum, Ext: &eProblem_ResolutionMethod})
+var s_ProblemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProblemId, Type: smithy.ShapeTypeString, Ext: &e_ProblemId})
+var s_ProblemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProblemList, Members: &m_ProblemList, Type: smithy.ShapeTypeList, Ext: &e_ProblemList})
+var s_ProblemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProblem, Members: &mProblem, Type: smithy.ShapeTypeStructure, Ext: &e_ProblemList_member})
+var s_RdsEventCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsEventCategories, Type: smithy.ShapeTypeString, Ext: &e_RdsEventCategories})
+var s_RdsEventMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsEventMessage, Type: smithy.ShapeTypeString, Ext: &e_RdsEventMessage})
+var sRecommendationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationType, Members: &mRecommendationType, Type: smithy.ShapeTypeEnum, Ext: &eRecommendationType})
+var sRecommendationType_INFRA_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFRA_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationType_INFRA_ONLY})
+var sRecommendationType_WORKLOAD_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKLOAD_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationType_WORKLOAD_ONLY})
+var sRecommendationType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationType_ALL})
+var s_RecurringCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecurringCount, Type: smithy.ShapeTypeLong, Ext: &e_RecurringCount})
+var sRelatedObservations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedObservations, Members: &mRelatedObservations, Type: smithy.ShapeTypeStructure, Ext: &eRelatedObservations})
+var sRelatedObservations_ObservationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservationList", ID: &i_ObservationList, Members: &m_ObservationList, Type: smithy.ShapeTypeList, Ext: &eRelatedObservations_ObservationList})
+var s_Remarks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Remarks, Type: smithy.ShapeTypeString, Ext: &e_Remarks})
+var s_RemoveSNSTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveSNSTopic, Type: smithy.ShapeTypeBoolean, Ext: &e_RemoveSNSTopic})
+var sResolutionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolutionMethod, Members: &mResolutionMethod, Type: smithy.ShapeTypeEnum, Ext: &eResolutionMethod})
+var sResolutionMethod_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionMethod_MANUAL})
+var sResolutionMethod_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionMethod_AUTOMATIC})
+var sResolutionMethod_UNRESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionMethod_UNRESOLVED})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var s_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &e_ResourceGroupName})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_Message})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &e_ResourceList})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_S3EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3EventName, Type: smithy.ShapeTypeString, Ext: &e_S3EventName})
+var sSeverityLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeEnum, Ext: &eSeverityLevel})
+var sSeverityLevel_Informative = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Informative", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverityLevel_Informative})
+var sSeverityLevel_Low = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Low", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverityLevel_Low})
+var sSeverityLevel_Medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Medium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverityLevel_Medium})
+var sSeverityLevel_High = smithy.NewStaticSchema(smithy.StaticSchema{Member: "High", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverityLevel_High})
+var s_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShortName, Type: smithy.ShapeTypeString, Ext: &e_ShortName})
+var s_SNSNotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNSNotificationArn, Type: smithy.ShapeTypeString, Ext: &e_SNSNotificationArn})
+var s_SourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceARN, Type: smithy.ShapeTypeString, Ext: &e_SourceARN})
+var s_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceType, Type: smithy.ShapeTypeString, Ext: &e_SourceType})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_StartTime})
+var s_StatesArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatesArn, Type: smithy.ShapeTypeString, Ext: &e_StatesArn})
+var s_StatesExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatesExecutionArn, Type: smithy.ShapeTypeString, Ext: &e_StatesExecutionArn})
+var s_StatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatesInput, Type: smithy.ShapeTypeString, Ext: &e_StatesInput})
+var s_StatesStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatesStatus, Type: smithy.ShapeTypeString, Ext: &e_StatesStatus})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sStatus_IGNORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_IGNORE})
+var sStatus_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_RESOLVED})
+var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PENDING})
+var sStatus_RECURRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_RECURRING})
+var sStatus_RECOVERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECOVERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_RECOVERING})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTagsAlreadyExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagsAlreadyExistException, Members: &mTagsAlreadyExistException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eTagsAlreadyExistException})
+var sTagsAlreadyExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTagsAlreadyExistException_Message})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eTier})
+var sTier_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_CUSTOM})
+var sTier_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_DEFAULT})
+var sTier_DOT_NET_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOT_NET_CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_DOT_NET_CORE})
+var sTier_DOT_NET_WORKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOT_NET_WORKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_DOT_NET_WORKER})
+var sTier_DOT_NET_WEB_TIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOT_NET_WEB_TIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_DOT_NET_WEB_TIER})
+var sTier_DOT_NET_WEB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOT_NET_WEB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_DOT_NET_WEB})
+var sTier_SQL_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SQL_SERVER})
+var sTier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP})
+var sTier_MYSQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MYSQL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_MYSQL})
+var sTier_POSTGRESQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTGRESQL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_POSTGRESQL})
+var sTier_JAVA_JMX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAVA_JMX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_JAVA_JMX})
+var sTier_ORACLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORACLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_ORACLE})
+var sTier_SAP_HANA_MULTI_NODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_HANA_MULTI_NODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_HANA_MULTI_NODE})
+var sTier_SAP_HANA_SINGLE_NODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_HANA_SINGLE_NODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_HANA_SINGLE_NODE})
+var sTier_SAP_HANA_HIGH_AVAILABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_HANA_HIGH_AVAILABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_HANA_HIGH_AVAILABILITY})
+var sTier_SAP_ASE_SINGLE_NODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_ASE_SINGLE_NODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_ASE_SINGLE_NODE})
+var sTier_SAP_ASE_HIGH_AVAILABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_ASE_HIGH_AVAILABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_ASE_HIGH_AVAILABILITY})
+var sTier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE})
+var sTier_SHAREPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHAREPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SHAREPOINT})
+var sTier_ACTIVE_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_ACTIVE_DIRECTORY})
+var sTier_SAP_NETWEAVER_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_NETWEAVER_STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_NETWEAVER_STANDARD})
+var sTier_SAP_NETWEAVER_DISTRIBUTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_NETWEAVER_DISTRIBUTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_NETWEAVER_DISTRIBUTED})
+var sTier_SAP_NETWEAVER_HIGH_AVAILABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_NETWEAVER_HIGH_AVAILABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTier_SAP_NETWEAVER_HIGH_AVAILABILITY})
+var s_Title = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &e_Title})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var sTooManyTagsException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_ResourceName})
+var s_Unit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &e_Unit})
+var sUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStatus})
+var sUpdateStatus_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStatus_RESOLVED})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMsg, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeDouble, Ext: &e_Value})
+var sVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum, Ext: &eVisibility})
+var sVisibility_IGNORED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVisibility_IGNORED})
+var sVisibility_VISIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VISIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVisibility_VISIBLE})
+var sWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkload, Members: &mWorkload, Type: smithy.ShapeTypeStructure, Ext: &eWorkload})
+var sWorkload_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eWorkload_WorkloadId})
+var sWorkload_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eWorkload_ComponentName})
+var sWorkload_WorkloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkload_WorkloadName})
+var sWorkload_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eWorkload_Tier})
+var sWorkload_WorkloadRemarks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadRemarks", ID: &i_Remarks, Type: smithy.ShapeTypeString, Ext: &eWorkload_WorkloadRemarks})
+var sWorkload_MissingWorkloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingWorkloadConfig", ID: &i_MissingWorkloadConfig, Type: smithy.ShapeTypeBoolean, Ext: &eWorkload_MissingWorkloadConfig})
+var sWorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadConfiguration})
+var sWorkloadConfiguration_WorkloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkloadConfiguration_WorkloadName})
+var sWorkloadConfiguration_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadConfiguration_Tier})
+var sWorkloadConfiguration_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &i_ComponentConfiguration, Type: smithy.ShapeTypeString, Ext: &eWorkloadConfiguration_Configuration})
+var s_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &e_WorkloadId})
+var s_WorkloadList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadList, Members: &m_WorkloadList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadList})
+var s_WorkloadList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkload, Members: &mWorkload, Type: smithy.ShapeTypeStructure, Ext: &e_WorkloadList_member})
+var s_WorkloadMetaData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadMetaData, Members: &m_WorkloadMetaData, Type: smithy.ShapeTypeMap, Ext: &e_WorkloadMetaData})
+var s_WorkloadMetaData_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MetaDataKey, Type: smithy.ShapeTypeString, Ext: &e_WorkloadMetaData_key})
+var s_WorkloadMetaData_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_MetaDataValue, Type: smithy.ShapeTypeString, Ext: &e_WorkloadMetaData_value})
+var s_WorkloadName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &e_WorkloadName})
+var s_XRayErrorPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayErrorPercent, Type: smithy.ShapeTypeInteger, Ext: &e_XRayErrorPercent})
+var s_XRayFaultPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayFaultPercent, Type: smithy.ShapeTypeInteger, Ext: &e_XRayFaultPercent})
+var s_XRayNodeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayNodeName, Type: smithy.ShapeTypeString, Ext: &e_XRayNodeName})
+var s_XRayNodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayNodeType, Type: smithy.ShapeTypeString, Ext: &e_XRayNodeType})
+var s_XRayRequestAverageLatency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayRequestAverageLatency, Type: smithy.ShapeTypeLong, Ext: &e_XRayRequestAverageLatency})
+var s_XRayRequestCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayRequestCount, Type: smithy.ShapeTypeInteger, Ext: &e_XRayRequestCount})
+var s_XRayThrottlePercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XRayThrottlePercent, Type: smithy.ShapeTypeInteger, Ext: &e_XRayThrottlePercent})
+var sAddWorkloadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkloadRequest, Members: &mAddWorkloadRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddWorkloadRequest})
+var sAddWorkloadRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eAddWorkloadRequest_ResourceGroupName})
+var sAddWorkloadRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eAddWorkloadRequest_ComponentName})
+var sAddWorkloadRequest_WorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadConfiguration", ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAddWorkloadRequest_WorkloadConfiguration})
+var sAddWorkloadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkloadResponse, Members: &mAddWorkloadResponse, Type: smithy.ShapeTypeStructure, Ext: &eAddWorkloadResponse})
+var sAddWorkloadResponse_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eAddWorkloadResponse_WorkloadId})
+var sAddWorkloadResponse_WorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadConfiguration", ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAddWorkloadResponse_WorkloadConfiguration})
+var sCreateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationRequest, Members: &mCreateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationRequest})
+var sCreateApplicationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_ResourceGroupName})
+var sCreateApplicationRequest_OpsCenterEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsCenterEnabled", ID: &i_OpsCenterEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationRequest_OpsCenterEnabled})
+var sCreateApplicationRequest_CWEMonitorEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CWEMonitorEnabled", ID: &i_CWEMonitorEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationRequest_CWEMonitorEnabled})
+var sCreateApplicationRequest_OpsItemSNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsItemSNSTopicArn", ID: &i_OpsItemSNSTopicArn, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_OpsItemSNSTopicArn})
+var sCreateApplicationRequest_SNSNotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNSNotificationArn", ID: &i_SNSNotificationArn, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationRequest_SNSNotificationArn})
+var sCreateApplicationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationRequest_Tags})
+var sCreateApplicationRequest_AutoConfigEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoConfigEnabled", ID: &i_AutoConfigEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationRequest_AutoConfigEnabled})
+var sCreateApplicationRequest_AutoCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoCreate", ID: &i_AutoCreate, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationRequest_AutoCreate})
+var sCreateApplicationRequest_GroupingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingType", ID: &iGroupingType, Members: &mGroupingType, Type: smithy.ShapeTypeEnum, Ext: &eCreateApplicationRequest_GroupingType})
+var sCreateApplicationRequest_AttachMissingPermission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachMissingPermission", ID: &i_AttachMissingPermission, Type: smithy.ShapeTypeBoolean, Ext: &eCreateApplicationRequest_AttachMissingPermission})
+var sCreateApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationResponse, Members: &mCreateApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationResponse})
+var sCreateApplicationResponse_ApplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationInfo", ID: &iApplicationInfo, Members: &mApplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationResponse_ApplicationInfo})
+var sCreateComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentRequest, Members: &mCreateComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentRequest})
+var sCreateComponentRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateComponentRequest_ResourceGroupName})
+var sCreateComponentRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_CustomComponentName, Type: smithy.ShapeTypeString, Ext: &eCreateComponentRequest_ComponentName})
+var sCreateComponentRequest_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceList", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eCreateComponentRequest_ResourceList})
+var sCreateComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentResponse})
+var sCreateLogPatternRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogPatternRequest, Members: &mCreateLogPatternRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLogPatternRequest})
+var sCreateLogPatternRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateLogPatternRequest_ResourceGroupName})
+var sCreateLogPatternRequest_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eCreateLogPatternRequest_PatternSetName})
+var sCreateLogPatternRequest_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternName", ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &eCreateLogPatternRequest_PatternName})
+var sCreateLogPatternRequest_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_LogPatternRegex, Type: smithy.ShapeTypeString, Ext: &eCreateLogPatternRequest_Pattern})
+var sCreateLogPatternRequest_Rank = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rank", ID: &i_LogPatternRank, Type: smithy.ShapeTypeInteger, Ext: &eCreateLogPatternRequest_Rank})
+var sCreateLogPatternResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogPatternResponse, Members: &mCreateLogPatternResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLogPatternResponse})
+var sCreateLogPatternResponse_LogPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPattern", ID: &iLogPattern, Members: &mLogPattern, Type: smithy.ShapeTypeStructure, Ext: &eCreateLogPatternResponse_LogPattern})
+var sCreateLogPatternResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateLogPatternResponse_ResourceGroupName})
+var sDeleteApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationRequest, Members: &mDeleteApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationRequest})
+var sDeleteApplicationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationRequest_ResourceGroupName})
+var sDeleteApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationResponse})
+var sDeleteComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentRequest, Members: &mDeleteComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteComponentRequest})
+var sDeleteComponentRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDeleteComponentRequest_ResourceGroupName})
+var sDeleteComponentRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_CustomComponentName, Type: smithy.ShapeTypeString, Ext: &eDeleteComponentRequest_ComponentName})
+var sDeleteComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteComponentResponse})
+var sDeleteLogPatternRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogPatternRequest, Members: &mDeleteLogPatternRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLogPatternRequest})
+var sDeleteLogPatternRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDeleteLogPatternRequest_ResourceGroupName})
+var sDeleteLogPatternRequest_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eDeleteLogPatternRequest_PatternSetName})
+var sDeleteLogPatternRequest_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternName", ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &eDeleteLogPatternRequest_PatternName})
+var sDeleteLogPatternResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogPatternResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLogPatternResponse})
+var sDescribeApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationRequest, Members: &mDescribeApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationRequest})
+var sDescribeApplicationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationRequest_ResourceGroupName})
+var sDescribeApplicationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeApplicationRequest_AccountId})
+var sDescribeApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationResponse, Members: &mDescribeApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationResponse})
+var sDescribeApplicationResponse_ApplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationInfo", ID: &iApplicationInfo, Members: &mApplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eDescribeApplicationResponse_ApplicationInfo})
+var sDescribeComponentConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfigurationRequest, Members: &mDescribeComponentConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentConfigurationRequest})
+var sDescribeComponentConfigurationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRequest_ResourceGroupName})
+var sDescribeComponentConfigurationRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRequest_ComponentName})
+var sDescribeComponentConfigurationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRequest_AccountId})
+var sDescribeComponentConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfigurationResponse, Members: &mDescribeComponentConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentConfigurationResponse})
+var sDescribeComponentConfigurationResponse_Monitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitor", ID: &i_Monitor, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeComponentConfigurationResponse_Monitor})
+var sDescribeComponentConfigurationResponse_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eDescribeComponentConfigurationResponse_Tier})
+var sDescribeComponentConfigurationResponse_ComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentConfiguration", ID: &i_ComponentConfiguration, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationResponse_ComponentConfiguration})
+var sDescribeComponentConfigurationRecommendationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfigurationRecommendationRequest, Members: &mDescribeComponentConfigurationRecommendationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentConfigurationRecommendationRequest})
+var sDescribeComponentConfigurationRecommendationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRecommendationRequest_ResourceGroupName})
+var sDescribeComponentConfigurationRecommendationRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRecommendationRequest_ComponentName})
+var sDescribeComponentConfigurationRecommendationRequest_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eDescribeComponentConfigurationRecommendationRequest_Tier})
+var sDescribeComponentConfigurationRecommendationRequest_WorkloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRecommendationRequest_WorkloadName})
+var sDescribeComponentConfigurationRecommendationRequest_RecommendationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationType", ID: &iRecommendationType, Members: &mRecommendationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeComponentConfigurationRecommendationRequest_RecommendationType})
+var sDescribeComponentConfigurationRecommendationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentConfigurationRecommendationResponse, Members: &mDescribeComponentConfigurationRecommendationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentConfigurationRecommendationResponse})
+var sDescribeComponentConfigurationRecommendationResponse_ComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentConfiguration", ID: &i_ComponentConfiguration, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentConfigurationRecommendationResponse_ComponentConfiguration})
+var sDescribeComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentRequest, Members: &mDescribeComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentRequest})
+var sDescribeComponentRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentRequest_ResourceGroupName})
+var sDescribeComponentRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentRequest_ComponentName})
+var sDescribeComponentRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeComponentRequest_AccountId})
+var sDescribeComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentResponse, Members: &mDescribeComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentResponse})
+var sDescribeComponentResponse_ApplicationComponent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationComponent", ID: &iApplicationComponent, Members: &mApplicationComponent, Type: smithy.ShapeTypeStructure, Ext: &eDescribeComponentResponse_ApplicationComponent})
+var sDescribeComponentResponse_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceList", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eDescribeComponentResponse_ResourceList})
+var sDescribeLogPatternRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLogPatternRequest, Members: &mDescribeLogPatternRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLogPatternRequest})
+var sDescribeLogPatternRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternRequest_ResourceGroupName})
+var sDescribeLogPatternRequest_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternRequest_PatternSetName})
+var sDescribeLogPatternRequest_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternName", ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternRequest_PatternName})
+var sDescribeLogPatternRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternRequest_AccountId})
+var sDescribeLogPatternResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLogPatternResponse, Members: &mDescribeLogPatternResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLogPatternResponse})
+var sDescribeLogPatternResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternResponse_ResourceGroupName})
+var sDescribeLogPatternResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeLogPatternResponse_AccountId})
+var sDescribeLogPatternResponse_LogPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPattern", ID: &iLogPattern, Members: &mLogPattern, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLogPatternResponse_LogPattern})
+var sDescribeObservationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservationRequest, Members: &mDescribeObservationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObservationRequest})
+var sDescribeObservationRequest_ObservationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservationId", ID: &i_ObservationId, Type: smithy.ShapeTypeString, Ext: &eDescribeObservationRequest_ObservationId})
+var sDescribeObservationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeObservationRequest_AccountId})
+var sDescribeObservationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservationResponse, Members: &mDescribeObservationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObservationResponse})
+var sDescribeObservationResponse_Observation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Observation", ID: &iObservation, Members: &mObservation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeObservationResponse_Observation})
+var sDescribeProblemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblemRequest, Members: &mDescribeProblemRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemRequest})
+var sDescribeProblemRequest_ProblemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProblemId", ID: &i_ProblemId, Type: smithy.ShapeTypeString, Ext: &eDescribeProblemRequest_ProblemId})
+var sDescribeProblemRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeProblemRequest_AccountId})
+var sDescribeProblemObservationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblemObservationsRequest, Members: &mDescribeProblemObservationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemObservationsRequest})
+var sDescribeProblemObservationsRequest_ProblemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProblemId", ID: &i_ProblemId, Type: smithy.ShapeTypeString, Ext: &eDescribeProblemObservationsRequest_ProblemId})
+var sDescribeProblemObservationsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeProblemObservationsRequest_AccountId})
+var sDescribeProblemObservationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblemObservationsResponse, Members: &mDescribeProblemObservationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemObservationsResponse})
+var sDescribeProblemObservationsResponse_RelatedObservations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedObservations", ID: &iRelatedObservations, Members: &mRelatedObservations, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemObservationsResponse_RelatedObservations})
+var sDescribeProblemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProblemResponse, Members: &mDescribeProblemResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemResponse})
+var sDescribeProblemResponse_Problem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Problem", ID: &iProblem, Members: &mProblem, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProblemResponse_Problem})
+var sDescribeProblemResponse_SNSNotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNSNotificationArn", ID: &i_SNSNotificationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProblemResponse_SNSNotificationArn})
+var sDescribeWorkloadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkloadRequest, Members: &mDescribeWorkloadRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkloadRequest})
+var sDescribeWorkloadRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadRequest_ResourceGroupName})
+var sDescribeWorkloadRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadRequest_ComponentName})
+var sDescribeWorkloadRequest_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadRequest_WorkloadId})
+var sDescribeWorkloadRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadRequest_AccountId})
+var sDescribeWorkloadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkloadResponse, Members: &mDescribeWorkloadResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkloadResponse})
+var sDescribeWorkloadResponse_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadResponse_WorkloadId})
+var sDescribeWorkloadResponse_WorkloadRemarks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadRemarks", ID: &i_Remarks, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkloadResponse_WorkloadRemarks})
+var sDescribeWorkloadResponse_WorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadConfiguration", ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkloadResponse_WorkloadConfiguration})
+var sListApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsRequest, Members: &mListApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationsRequest})
+var sListApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListApplicationsRequest_MaxResults})
+var sListApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListApplicationsRequest_NextToken})
+var sListApplicationsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListApplicationsRequest_AccountId})
+var sListApplicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsResponse, Members: &mListApplicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationsResponse})
+var sListApplicationsResponse_ApplicationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationInfoList", ID: &i_ApplicationInfoList, Members: &m_ApplicationInfoList, Type: smithy.ShapeTypeList, Ext: &eListApplicationsResponse_ApplicationInfoList})
+var sListApplicationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListApplicationsResponse_NextToken})
+var sListComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsRequest, Members: &mListComponentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListComponentsRequest})
+var sListComponentsRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_ResourceGroupName})
+var sListComponentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListComponentsRequest_MaxResults})
+var sListComponentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_NextToken})
+var sListComponentsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_AccountId})
+var sListComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsResponse, Members: &mListComponentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListComponentsResponse})
+var sListComponentsResponse_ApplicationComponentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationComponentList", ID: &i_ApplicationComponentList, Members: &m_ApplicationComponentList, Type: smithy.ShapeTypeList, Ext: &eListComponentsResponse_ApplicationComponentList})
+var sListComponentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListComponentsResponse_NextToken})
+var sListConfigurationHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationHistoryRequest, Members: &mListConfigurationHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationHistoryRequest})
+var sListConfigurationHistoryRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListConfigurationHistoryRequest_ResourceGroupName})
+var sListConfigurationHistoryRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListConfigurationHistoryRequest_StartTime})
+var sListConfigurationHistoryRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListConfigurationHistoryRequest_EndTime})
+var sListConfigurationHistoryRequest_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &iConfigurationEventStatus, Members: &mConfigurationEventStatus, Type: smithy.ShapeTypeEnum, Ext: &eListConfigurationHistoryRequest_EventStatus})
+var sListConfigurationHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationHistoryRequest_MaxResults})
+var sListConfigurationHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListConfigurationHistoryRequest_NextToken})
+var sListConfigurationHistoryRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListConfigurationHistoryRequest_AccountId})
+var sListConfigurationHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationHistoryResponse, Members: &mListConfigurationHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationHistoryResponse})
+var sListConfigurationHistoryResponse_EventList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventList", ID: &i_ConfigurationEventList, Members: &m_ConfigurationEventList, Type: smithy.ShapeTypeList, Ext: &eListConfigurationHistoryResponse_EventList})
+var sListConfigurationHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListConfigurationHistoryResponse_NextToken})
+var sListLogPatternSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatternSetsRequest, Members: &mListLogPatternSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLogPatternSetsRequest})
+var sListLogPatternSetsRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsRequest_ResourceGroupName})
+var sListLogPatternSetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListLogPatternSetsRequest_MaxResults})
+var sListLogPatternSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsRequest_NextToken})
+var sListLogPatternSetsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsRequest_AccountId})
+var sListLogPatternSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatternSetsResponse, Members: &mListLogPatternSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLogPatternSetsResponse})
+var sListLogPatternSetsResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsResponse_ResourceGroupName})
+var sListLogPatternSetsResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsResponse_AccountId})
+var sListLogPatternSetsResponse_LogPatternSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPatternSets", ID: &i_LogPatternSetList, Members: &m_LogPatternSetList, Type: smithy.ShapeTypeList, Ext: &eListLogPatternSetsResponse_LogPatternSets})
+var sListLogPatternSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLogPatternSetsResponse_NextToken})
+var sListLogPatternsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatternsRequest, Members: &mListLogPatternsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLogPatternsRequest})
+var sListLogPatternsRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsRequest_ResourceGroupName})
+var sListLogPatternsRequest_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsRequest_PatternSetName})
+var sListLogPatternsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListLogPatternsRequest_MaxResults})
+var sListLogPatternsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsRequest_NextToken})
+var sListLogPatternsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsRequest_AccountId})
+var sListLogPatternsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogPatternsResponse, Members: &mListLogPatternsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLogPatternsResponse})
+var sListLogPatternsResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsResponse_ResourceGroupName})
+var sListLogPatternsResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsResponse_AccountId})
+var sListLogPatternsResponse_LogPatterns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPatterns", ID: &i_LogPatternList, Members: &m_LogPatternList, Type: smithy.ShapeTypeList, Ext: &eListLogPatternsResponse_LogPatterns})
+var sListLogPatternsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLogPatternsResponse_NextToken})
+var sListProblemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProblemsRequest, Members: &mListProblemsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProblemsRequest})
+var sListProblemsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListProblemsRequest_AccountId})
+var sListProblemsRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListProblemsRequest_ResourceGroupName})
+var sListProblemsRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListProblemsRequest_StartTime})
+var sListProblemsRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eListProblemsRequest_EndTime})
+var sListProblemsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListProblemsRequest_MaxResults})
+var sListProblemsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProblemsRequest_NextToken})
+var sListProblemsRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eListProblemsRequest_ComponentName})
+var sListProblemsRequest_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum, Ext: &eListProblemsRequest_Visibility})
+var sListProblemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProblemsResponse, Members: &mListProblemsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProblemsResponse})
+var sListProblemsResponse_ProblemList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProblemList", ID: &i_ProblemList, Members: &m_ProblemList, Type: smithy.ShapeTypeList, Ext: &eListProblemsResponse_ProblemList})
+var sListProblemsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProblemsResponse_NextToken})
+var sListProblemsResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListProblemsResponse_ResourceGroupName})
+var sListProblemsResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListProblemsResponse_AccountId})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListWorkloadsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadsRequest, Members: &mListWorkloadsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadsRequest})
+var sListWorkloadsRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsRequest_ResourceGroupName})
+var sListWorkloadsRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsRequest_ComponentName})
+var sListWorkloadsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEntities, Type: smithy.ShapeTypeInteger, Ext: &eListWorkloadsRequest_MaxResults})
+var sListWorkloadsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsRequest_NextToken})
+var sListWorkloadsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsRequest_AccountId})
+var sListWorkloadsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadsResponse, Members: &mListWorkloadsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadsResponse})
+var sListWorkloadsResponse_WorkloadList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadList", ID: &i_WorkloadList, Members: &m_WorkloadList, Type: smithy.ShapeTypeList, Ext: &eListWorkloadsResponse_WorkloadList})
+var sListWorkloadsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsResponse_NextToken})
+var sRemoveWorkloadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveWorkloadRequest, Members: &mRemoveWorkloadRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveWorkloadRequest})
+var sRemoveWorkloadRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eRemoveWorkloadRequest_ResourceGroupName})
+var sRemoveWorkloadRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eRemoveWorkloadRequest_ComponentName})
+var sRemoveWorkloadRequest_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eRemoveWorkloadRequest_WorkloadId})
+var sRemoveWorkloadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveWorkloadResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveWorkloadResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationRequest, Members: &mUpdateApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationRequest})
+var sUpdateApplicationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_ResourceGroupName})
+var sUpdateApplicationRequest_OpsCenterEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsCenterEnabled", ID: &i_OpsCenterEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateApplicationRequest_OpsCenterEnabled})
+var sUpdateApplicationRequest_CWEMonitorEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CWEMonitorEnabled", ID: &i_CWEMonitorEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateApplicationRequest_CWEMonitorEnabled})
+var sUpdateApplicationRequest_OpsItemSNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpsItemSNSTopicArn", ID: &i_OpsItemSNSTopicArn, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_OpsItemSNSTopicArn})
+var sUpdateApplicationRequest_SNSNotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNSNotificationArn", ID: &i_SNSNotificationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationRequest_SNSNotificationArn})
+var sUpdateApplicationRequest_RemoveSNSTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveSNSTopic", ID: &i_RemoveSNSTopic, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateApplicationRequest_RemoveSNSTopic})
+var sUpdateApplicationRequest_AutoConfigEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoConfigEnabled", ID: &i_AutoConfigEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateApplicationRequest_AutoConfigEnabled})
+var sUpdateApplicationRequest_AttachMissingPermission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachMissingPermission", ID: &i_AttachMissingPermission, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateApplicationRequest_AttachMissingPermission})
+var sUpdateApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationResponse, Members: &mUpdateApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResponse})
+var sUpdateApplicationResponse_ApplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationInfo", ID: &iApplicationInfo, Members: &mApplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationResponse_ApplicationInfo})
+var sUpdateComponentConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentConfigurationRequest, Members: &mUpdateComponentConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentConfigurationRequest})
+var sUpdateComponentConfigurationRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentConfigurationRequest_ResourceGroupName})
+var sUpdateComponentConfigurationRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentConfigurationRequest_ComponentName})
+var sUpdateComponentConfigurationRequest_Monitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitor", ID: &i_Monitor, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateComponentConfigurationRequest_Monitor})
+var sUpdateComponentConfigurationRequest_Tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tier", ID: &iTier, Members: &mTier, Type: smithy.ShapeTypeEnum, Ext: &eUpdateComponentConfigurationRequest_Tier})
+var sUpdateComponentConfigurationRequest_ComponentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentConfiguration", ID: &i_ComponentConfiguration, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentConfigurationRequest_ComponentConfiguration})
+var sUpdateComponentConfigurationRequest_AutoConfigEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoConfigEnabled", ID: &i_AutoConfigEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateComponentConfigurationRequest_AutoConfigEnabled})
+var sUpdateComponentConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentConfigurationResponse})
+var sUpdateComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentRequest, Members: &mUpdateComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentRequest})
+var sUpdateComponentRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_ResourceGroupName})
+var sUpdateComponentRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_CustomComponentName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_ComponentName})
+var sUpdateComponentRequest_NewComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewComponentName", ID: &i_CustomComponentName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_NewComponentName})
+var sUpdateComponentRequest_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceList", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eUpdateComponentRequest_ResourceList})
+var sUpdateComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentResponse})
+var sUpdateLogPatternRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLogPatternRequest, Members: &mUpdateLogPatternRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLogPatternRequest})
+var sUpdateLogPatternRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateLogPatternRequest_ResourceGroupName})
+var sUpdateLogPatternRequest_PatternSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternSetName", ID: &i_LogPatternSetName, Type: smithy.ShapeTypeString, Ext: &eUpdateLogPatternRequest_PatternSetName})
+var sUpdateLogPatternRequest_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatternName", ID: &i_LogPatternName, Type: smithy.ShapeTypeString, Ext: &eUpdateLogPatternRequest_PatternName})
+var sUpdateLogPatternRequest_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_LogPatternRegex, Type: smithy.ShapeTypeString, Ext: &eUpdateLogPatternRequest_Pattern})
+var sUpdateLogPatternRequest_Rank = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rank", ID: &i_LogPatternRank, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLogPatternRequest_Rank})
+var sUpdateLogPatternResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLogPatternResponse, Members: &mUpdateLogPatternResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLogPatternResponse})
+var sUpdateLogPatternResponse_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateLogPatternResponse_ResourceGroupName})
+var sUpdateLogPatternResponse_LogPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPattern", ID: &iLogPattern, Members: &mLogPattern, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLogPatternResponse_LogPattern})
+var sUpdateProblemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProblemRequest, Members: &mUpdateProblemRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProblemRequest})
+var sUpdateProblemRequest_ProblemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProblemId", ID: &i_ProblemId, Type: smithy.ShapeTypeString, Ext: &eUpdateProblemRequest_ProblemId})
+var sUpdateProblemRequest_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateStatus", ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProblemRequest_UpdateStatus})
+var sUpdateProblemRequest_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProblemRequest_Visibility})
+var sUpdateProblemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProblemResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProblemResponse})
+var sUpdateWorkloadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkloadRequest, Members: &mUpdateWorkloadRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkloadRequest})
+var sUpdateWorkloadRequest_ResourceGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceGroupName", ID: &i_ResourceGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkloadRequest_ResourceGroupName})
+var sUpdateWorkloadRequest_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkloadRequest_ComponentName})
+var sUpdateWorkloadRequest_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkloadRequest_WorkloadId})
+var sUpdateWorkloadRequest_WorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadConfiguration", ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkloadRequest_WorkloadConfiguration})
+var sUpdateWorkloadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkloadResponse, Members: &mUpdateWorkloadResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkloadResponse})
+var sUpdateWorkloadResponse_WorkloadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadId", ID: &i_WorkloadId, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkloadResponse_WorkloadId})
+var sUpdateWorkloadResponse_WorkloadConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkloadConfiguration", ID: &iWorkloadConfiguration, Members: &mWorkloadConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkloadResponse_WorkloadConfiguration})
+
+var AddWorkload = &sAddWorkload
+
+var CreateApplication = &sCreateApplication
+
+var CreateComponent = &sCreateComponent
+
+var CreateLogPattern = &sCreateLogPattern
+
+var DeleteApplication = &sDeleteApplication
+
+var DeleteComponent = &sDeleteComponent
+
+var DeleteLogPattern = &sDeleteLogPattern
+
+var DescribeApplication = &sDescribeApplication
+
+var DescribeComponent = &sDescribeComponent
+
+var DescribeComponentConfiguration = &sDescribeComponentConfiguration
+
+var DescribeComponentConfigurationRecommendation = &sDescribeComponentConfigurationRecommendation
+
+var DescribeLogPattern = &sDescribeLogPattern
+
+var DescribeObservation = &sDescribeObservation
+
+var DescribeProblem = &sDescribeProblem
+
+var DescribeProblemObservations = &sDescribeProblemObservations
+
+var DescribeWorkload = &sDescribeWorkload
+
+var ListApplications = &sListApplications
+
+var ListComponents = &sListComponents
+
+var ListConfigurationHistory = &sListConfigurationHistory
+
+var ListLogPatterns = &sListLogPatterns
+
+var ListLogPatternSets = &sListLogPatternSets
+
+var ListProblems = &sListProblems
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkloads = &sListWorkloads
+
+var RemoveWorkload = &sRemoveWorkload
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateApplication = &sUpdateApplication
+
+var UpdateComponent = &sUpdateComponent
+
+var UpdateComponentConfiguration = &sUpdateComponentConfiguration
+
+var UpdateLogPattern = &sUpdateLogPattern
+
+var UpdateProblem = &sUpdateProblem
+
+var UpdateWorkload = &sUpdateWorkload
+
+var _EC2WindowsBarleyService = &s_EC2WindowsBarleyService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _AffectedResource = &s_AffectedResource
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var ApplicationComponent = &sApplicationComponent
+var ApplicationComponent_ComponentName = &sApplicationComponent_ComponentName
+var ApplicationComponent_ComponentRemarks = &sApplicationComponent_ComponentRemarks
+var ApplicationComponent_ResourceType = &sApplicationComponent_ResourceType
+var ApplicationComponent_OsType = &sApplicationComponent_OsType
+var ApplicationComponent_Tier = &sApplicationComponent_Tier
+var ApplicationComponent_Monitor = &sApplicationComponent_Monitor
+var ApplicationComponent_DetectedWorkload = &sApplicationComponent_DetectedWorkload
+
+var _ApplicationComponentList = &s_ApplicationComponentList
+var _ApplicationComponentList_member = &s_ApplicationComponentList_member
+
+var ApplicationInfo = &sApplicationInfo
+var ApplicationInfo_AccountId = &sApplicationInfo_AccountId
+var ApplicationInfo_ResourceGroupName = &sApplicationInfo_ResourceGroupName
+var ApplicationInfo_LifeCycle = &sApplicationInfo_LifeCycle
+var ApplicationInfo_OpsItemSNSTopicArn = &sApplicationInfo_OpsItemSNSTopicArn
+var ApplicationInfo_SNSNotificationArn = &sApplicationInfo_SNSNotificationArn
+var ApplicationInfo_OpsCenterEnabled = &sApplicationInfo_OpsCenterEnabled
+var ApplicationInfo_CWEMonitorEnabled = &sApplicationInfo_CWEMonitorEnabled
+var ApplicationInfo_Remarks = &sApplicationInfo_Remarks
+var ApplicationInfo_AutoConfigEnabled = &sApplicationInfo_AutoConfigEnabled
+var ApplicationInfo_DiscoveryType = &sApplicationInfo_DiscoveryType
+var ApplicationInfo_AttachMissingPermission = &sApplicationInfo_AttachMissingPermission
+
+var _ApplicationInfoList = &s_ApplicationInfoList
+var _ApplicationInfoList_member = &s_ApplicationInfoList_member
+
+var _AttachMissingPermission = &s_AttachMissingPermission
+
+var _AutoConfigEnabled = &s_AutoConfigEnabled
+
+var _AutoCreate = &s_AutoCreate
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+
+var _CloudWatchEventDetailType = &s_CloudWatchEventDetailType
+
+var _CloudWatchEventId = &s_CloudWatchEventId
+
+var CloudWatchEventSource = &sCloudWatchEventSource
+var CloudWatchEventSource_EC2 = &sCloudWatchEventSource_EC2
+var CloudWatchEventSource_CODE_DEPLOY = &sCloudWatchEventSource_CODE_DEPLOY
+var CloudWatchEventSource_HEALTH = &sCloudWatchEventSource_HEALTH
+var CloudWatchEventSource_RDS = &sCloudWatchEventSource_RDS
+
+var _CodeDeployApplication = &s_CodeDeployApplication
+
+var _CodeDeployDeploymentGroup = &s_CodeDeployDeploymentGroup
+
+var _CodeDeployDeploymentId = &s_CodeDeployDeploymentId
+
+var _CodeDeployInstanceGroupId = &s_CodeDeployInstanceGroupId
+
+var _CodeDeployState = &s_CodeDeployState
+
+var _ComponentConfiguration = &s_ComponentConfiguration
+
+var _ComponentName = &s_ComponentName
+
+var ConfigurationEvent = &sConfigurationEvent
+var ConfigurationEvent_ResourceGroupName = &sConfigurationEvent_ResourceGroupName
+var ConfigurationEvent_AccountId = &sConfigurationEvent_AccountId
+var ConfigurationEvent_MonitoredResourceARN = &sConfigurationEvent_MonitoredResourceARN
+var ConfigurationEvent_EventStatus = &sConfigurationEvent_EventStatus
+var ConfigurationEvent_EventResourceType = &sConfigurationEvent_EventResourceType
+var ConfigurationEvent_EventTime = &sConfigurationEvent_EventTime
+var ConfigurationEvent_EventDetail = &sConfigurationEvent_EventDetail
+var ConfigurationEvent_EventResourceName = &sConfigurationEvent_EventResourceName
+
+var _ConfigurationEventDetail = &s_ConfigurationEventDetail
+
+var _ConfigurationEventList = &s_ConfigurationEventList
+var _ConfigurationEventList_member = &s_ConfigurationEventList_member
+
+var _ConfigurationEventMonitoredResourceARN = &s_ConfigurationEventMonitoredResourceARN
+
+var _ConfigurationEventResourceName = &s_ConfigurationEventResourceName
+
+var ConfigurationEventResourceType = &sConfigurationEventResourceType
+var ConfigurationEventResourceType_CLOUDWATCH_ALARM = &sConfigurationEventResourceType_CLOUDWATCH_ALARM
+var ConfigurationEventResourceType_CLOUDWATCH_LOG = &sConfigurationEventResourceType_CLOUDWATCH_LOG
+var ConfigurationEventResourceType_CLOUDFORMATION = &sConfigurationEventResourceType_CLOUDFORMATION
+var ConfigurationEventResourceType_SSM_ASSOCIATION = &sConfigurationEventResourceType_SSM_ASSOCIATION
+
+var ConfigurationEventStatus = &sConfigurationEventStatus
+var ConfigurationEventStatus_INFO = &sConfigurationEventStatus_INFO
+var ConfigurationEventStatus_WARN = &sConfigurationEventStatus_WARN
+var ConfigurationEventStatus_ERROR = &sConfigurationEventStatus_ERROR
+
+var _ConfigurationEventTime = &s_ConfigurationEventTime
+
+var _CustomComponentName = &s_CustomComponentName
+
+var _CWEMonitorEnabled = &s_CWEMonitorEnabled
+
+var _DetectedWorkload = &s_DetectedWorkload
+var _DetectedWorkload_key = &s_DetectedWorkload_key
+var _DetectedWorkload_value = &s_DetectedWorkload_value
+
+var DiscoveryType = &sDiscoveryType
+var DiscoveryType_RESOURCE_GROUP_BASED = &sDiscoveryType_RESOURCE_GROUP_BASED
+var DiscoveryType_ACCOUNT_BASED = &sDiscoveryType_ACCOUNT_BASED
+
+var _EbsCause = &s_EbsCause
+
+var _EbsEvent = &s_EbsEvent
+
+var _EbsRequestId = &s_EbsRequestId
+
+var _EbsResult = &s_EbsResult
+
+var _Ec2State = &s_Ec2State
+
+var _EndTime = &s_EndTime
+
+var _ErrorMsg = &s_ErrorMsg
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _Feedback = &s_Feedback
+var _Feedback_key = &s_Feedback_key
+var _Feedback_value = &s_Feedback_value
+
+var FeedbackKey = &sFeedbackKey
+var FeedbackKey_INSIGHTS_FEEDBACK = &sFeedbackKey_INSIGHTS_FEEDBACK
+
+var FeedbackValue = &sFeedbackValue
+var FeedbackValue_NOT_SPECIFIED = &sFeedbackValue_NOT_SPECIFIED
+var FeedbackValue_USEFUL = &sFeedbackValue_USEFUL
+var FeedbackValue_NOT_USEFUL = &sFeedbackValue_NOT_USEFUL
+
+var GroupingType = &sGroupingType
+var GroupingType_ACCOUNT_BASED = &sGroupingType_ACCOUNT_BASED
+
+var _HealthEventArn = &s_HealthEventArn
+
+var _HealthEventDescription = &s_HealthEventDescription
+
+var _HealthEventTypeCategory = &s_HealthEventTypeCategory
+
+var _HealthEventTypeCode = &s_HealthEventTypeCode
+
+var _HealthService = &s_HealthService
+
+var _Insights = &s_Insights
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _LastRecurrenceTime = &s_LastRecurrenceTime
+
+var _LifeCycle = &s_LifeCycle
+
+var _LineTime = &s_LineTime
+
+var LogFilter = &sLogFilter
+var LogFilter_ERROR = &sLogFilter_ERROR
+var LogFilter_WARN = &sLogFilter_WARN
+var LogFilter_INFO = &sLogFilter_INFO
+
+var _LogGroup = &s_LogGroup
+
+var LogPattern = &sLogPattern
+var LogPattern_PatternSetName = &sLogPattern_PatternSetName
+var LogPattern_PatternName = &sLogPattern_PatternName
+var LogPattern_Pattern = &sLogPattern_Pattern
+var LogPattern_Rank = &sLogPattern_Rank
+
+var _LogPatternList = &s_LogPatternList
+var _LogPatternList_member = &s_LogPatternList_member
+
+var _LogPatternName = &s_LogPatternName
+
+var _LogPatternRank = &s_LogPatternRank
+
+var _LogPatternRegex = &s_LogPatternRegex
+
+var _LogPatternSetList = &s_LogPatternSetList
+var _LogPatternSetList_member = &s_LogPatternSetList_member
+
+var _LogPatternSetName = &s_LogPatternSetName
+
+var _LogText = &s_LogText
+
+var _MaxEntities = &s_MaxEntities
+
+var _MetaDataKey = &s_MetaDataKey
+
+var _MetaDataValue = &s_MetaDataValue
+
+var _MetricName = &s_MetricName
+
+var _MetricNamespace = &s_MetricNamespace
+
+var _MissingWorkloadConfig = &s_MissingWorkloadConfig
+
+var _Monitor = &s_Monitor
+
+var Observation = &sObservation
+var Observation_Id = &sObservation_Id
+var Observation_StartTime = &sObservation_StartTime
+var Observation_EndTime = &sObservation_EndTime
+var Observation_SourceType = &sObservation_SourceType
+var Observation_SourceARN = &sObservation_SourceARN
+var Observation_LogGroup = &sObservation_LogGroup
+var Observation_LineTime = &sObservation_LineTime
+var Observation_LogText = &sObservation_LogText
+var Observation_LogFilter = &sObservation_LogFilter
+var Observation_MetricNamespace = &sObservation_MetricNamespace
+var Observation_MetricName = &sObservation_MetricName
+var Observation_Unit = &sObservation_Unit
+var Observation_Value = &sObservation_Value
+var Observation_CloudWatchEventId = &sObservation_CloudWatchEventId
+var Observation_CloudWatchEventSource = &sObservation_CloudWatchEventSource
+var Observation_CloudWatchEventDetailType = &sObservation_CloudWatchEventDetailType
+var Observation_HealthEventArn = &sObservation_HealthEventArn
+var Observation_HealthService = &sObservation_HealthService
+var Observation_HealthEventTypeCode = &sObservation_HealthEventTypeCode
+var Observation_HealthEventTypeCategory = &sObservation_HealthEventTypeCategory
+var Observation_HealthEventDescription = &sObservation_HealthEventDescription
+var Observation_CodeDeployDeploymentId = &sObservation_CodeDeployDeploymentId
+var Observation_CodeDeployDeploymentGroup = &sObservation_CodeDeployDeploymentGroup
+var Observation_CodeDeployState = &sObservation_CodeDeployState
+var Observation_CodeDeployApplication = &sObservation_CodeDeployApplication
+var Observation_CodeDeployInstanceGroupId = &sObservation_CodeDeployInstanceGroupId
+var Observation_Ec2State = &sObservation_Ec2State
+var Observation_RdsEventCategories = &sObservation_RdsEventCategories
+var Observation_RdsEventMessage = &sObservation_RdsEventMessage
+var Observation_S3EventName = &sObservation_S3EventName
+var Observation_StatesExecutionArn = &sObservation_StatesExecutionArn
+var Observation_StatesArn = &sObservation_StatesArn
+var Observation_StatesStatus = &sObservation_StatesStatus
+var Observation_StatesInput = &sObservation_StatesInput
+var Observation_EbsEvent = &sObservation_EbsEvent
+var Observation_EbsResult = &sObservation_EbsResult
+var Observation_EbsCause = &sObservation_EbsCause
+var Observation_EbsRequestId = &sObservation_EbsRequestId
+var Observation_XRayFaultPercent = &sObservation_XRayFaultPercent
+var Observation_XRayThrottlePercent = &sObservation_XRayThrottlePercent
+var Observation_XRayErrorPercent = &sObservation_XRayErrorPercent
+var Observation_XRayRequestCount = &sObservation_XRayRequestCount
+var Observation_XRayRequestAverageLatency = &sObservation_XRayRequestAverageLatency
+var Observation_XRayNodeName = &sObservation_XRayNodeName
+var Observation_XRayNodeType = &sObservation_XRayNodeType
+
+var _ObservationId = &s_ObservationId
+
+var _ObservationList = &s_ObservationList
+var _ObservationList_member = &s_ObservationList_member
+
+var _OpsCenterEnabled = &s_OpsCenterEnabled
+
+var _OpsItemSNSTopicArn = &s_OpsItemSNSTopicArn
+
+var OsType = &sOsType
+var OsType_WINDOWS = &sOsType_WINDOWS
+var OsType_LINUX = &sOsType_LINUX
+
+var _PaginationToken = &s_PaginationToken
+
+var Problem = &sProblem
+var Problem_Id = &sProblem_Id
+var Problem_Title = &sProblem_Title
+var Problem_ShortName = &sProblem_ShortName
+var Problem_Insights = &sProblem_Insights
+var Problem_Status = &sProblem_Status
+var Problem_AffectedResource = &sProblem_AffectedResource
+var Problem_StartTime = &sProblem_StartTime
+var Problem_EndTime = &sProblem_EndTime
+var Problem_SeverityLevel = &sProblem_SeverityLevel
+var Problem_AccountId = &sProblem_AccountId
+var Problem_ResourceGroupName = &sProblem_ResourceGroupName
+var Problem_Feedback = &sProblem_Feedback
+var Problem_RecurringCount = &sProblem_RecurringCount
+var Problem_LastRecurrenceTime = &sProblem_LastRecurrenceTime
+var Problem_Visibility = &sProblem_Visibility
+var Problem_ResolutionMethod = &sProblem_ResolutionMethod
+
+var _ProblemId = &s_ProblemId
+
+var _ProblemList = &s_ProblemList
+var _ProblemList_member = &s_ProblemList_member
+
+var _RdsEventCategories = &s_RdsEventCategories
+
+var _RdsEventMessage = &s_RdsEventMessage
+
+var RecommendationType = &sRecommendationType
+var RecommendationType_INFRA_ONLY = &sRecommendationType_INFRA_ONLY
+var RecommendationType_WORKLOAD_ONLY = &sRecommendationType_WORKLOAD_ONLY
+var RecommendationType_ALL = &sRecommendationType_ALL
+
+var _RecurringCount = &s_RecurringCount
+
+var RelatedObservations = &sRelatedObservations
+var RelatedObservations_ObservationList = &sRelatedObservations_ObservationList
+
+var _Remarks = &s_Remarks
+
+var _RemoveSNSTopic = &s_RemoveSNSTopic
+
+var ResolutionMethod = &sResolutionMethod
+var ResolutionMethod_MANUAL = &sResolutionMethod_MANUAL
+var ResolutionMethod_AUTOMATIC = &sResolutionMethod_AUTOMATIC
+var ResolutionMethod_UNRESOLVED = &sResolutionMethod_UNRESOLVED
+
+var _ResourceARN = &s_ResourceARN
+
+var _ResourceGroupName = &s_ResourceGroupName
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceType = &s_ResourceType
+
+var _S3EventName = &s_S3EventName
+
+var SeverityLevel = &sSeverityLevel
+var SeverityLevel_Informative = &sSeverityLevel_Informative
+var SeverityLevel_Low = &sSeverityLevel_Low
+var SeverityLevel_Medium = &sSeverityLevel_Medium
+var SeverityLevel_High = &sSeverityLevel_High
+
+var _ShortName = &s_ShortName
+
+var _SNSNotificationArn = &s_SNSNotificationArn
+
+var _SourceARN = &s_SourceARN
+
+var _SourceType = &s_SourceType
+
+var _StartTime = &s_StartTime
+
+var _StatesArn = &s_StatesArn
+
+var _StatesExecutionArn = &s_StatesExecutionArn
+
+var _StatesInput = &s_StatesInput
+
+var _StatesStatus = &s_StatesStatus
+
+var Status = &sStatus
+var Status_IGNORE = &sStatus_IGNORE
+var Status_RESOLVED = &sStatus_RESOLVED
+var Status_PENDING = &sStatus_PENDING
+var Status_RECURRING = &sStatus_RECURRING
+var Status_RECOVERING = &sStatus_RECOVERING
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TagsAlreadyExistException = &sTagsAlreadyExistException
+var TagsAlreadyExistException_Message = &sTagsAlreadyExistException_Message
+
+var _TagValue = &s_TagValue
+
+var Tier = &sTier
+var Tier_CUSTOM = &sTier_CUSTOM
+var Tier_DEFAULT = &sTier_DEFAULT
+var Tier_DOT_NET_CORE = &sTier_DOT_NET_CORE
+var Tier_DOT_NET_WORKER = &sTier_DOT_NET_WORKER
+var Tier_DOT_NET_WEB_TIER = &sTier_DOT_NET_WEB_TIER
+var Tier_DOT_NET_WEB = &sTier_DOT_NET_WEB
+var Tier_SQL_SERVER = &sTier_SQL_SERVER
+var Tier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP = &sTier_SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP
+var Tier_MYSQL = &sTier_MYSQL
+var Tier_POSTGRESQL = &sTier_POSTGRESQL
+var Tier_JAVA_JMX = &sTier_JAVA_JMX
+var Tier_ORACLE = &sTier_ORACLE
+var Tier_SAP_HANA_MULTI_NODE = &sTier_SAP_HANA_MULTI_NODE
+var Tier_SAP_HANA_SINGLE_NODE = &sTier_SAP_HANA_SINGLE_NODE
+var Tier_SAP_HANA_HIGH_AVAILABILITY = &sTier_SAP_HANA_HIGH_AVAILABILITY
+var Tier_SAP_ASE_SINGLE_NODE = &sTier_SAP_ASE_SINGLE_NODE
+var Tier_SAP_ASE_HIGH_AVAILABILITY = &sTier_SAP_ASE_HIGH_AVAILABILITY
+var Tier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE = &sTier_SQL_SERVER_FAILOVER_CLUSTER_INSTANCE
+var Tier_SHAREPOINT = &sTier_SHAREPOINT
+var Tier_ACTIVE_DIRECTORY = &sTier_ACTIVE_DIRECTORY
+var Tier_SAP_NETWEAVER_STANDARD = &sTier_SAP_NETWEAVER_STANDARD
+var Tier_SAP_NETWEAVER_DISTRIBUTED = &sTier_SAP_NETWEAVER_DISTRIBUTED
+var Tier_SAP_NETWEAVER_HIGH_AVAILABILITY = &sTier_SAP_NETWEAVER_HIGH_AVAILABILITY
+
+var _Title = &s_Title
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+var TooManyTagsException_ResourceName = &sTooManyTagsException_ResourceName
+
+var _Unit = &s_Unit
+
+var UpdateStatus = &sUpdateStatus
+var UpdateStatus_RESOLVED = &sUpdateStatus_RESOLVED
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var _Value = &s_Value
+
+var Visibility = &sVisibility
+var Visibility_IGNORED = &sVisibility_IGNORED
+var Visibility_VISIBLE = &sVisibility_VISIBLE
+
+var Workload = &sWorkload
+var Workload_WorkloadId = &sWorkload_WorkloadId
+var Workload_ComponentName = &sWorkload_ComponentName
+var Workload_WorkloadName = &sWorkload_WorkloadName
+var Workload_Tier = &sWorkload_Tier
+var Workload_WorkloadRemarks = &sWorkload_WorkloadRemarks
+var Workload_MissingWorkloadConfig = &sWorkload_MissingWorkloadConfig
+
+var WorkloadConfiguration = &sWorkloadConfiguration
+var WorkloadConfiguration_WorkloadName = &sWorkloadConfiguration_WorkloadName
+var WorkloadConfiguration_Tier = &sWorkloadConfiguration_Tier
+var WorkloadConfiguration_Configuration = &sWorkloadConfiguration_Configuration
+
+var _WorkloadId = &s_WorkloadId
+
+var _WorkloadList = &s_WorkloadList
+var _WorkloadList_member = &s_WorkloadList_member
+
+var _WorkloadMetaData = &s_WorkloadMetaData
+var _WorkloadMetaData_key = &s_WorkloadMetaData_key
+var _WorkloadMetaData_value = &s_WorkloadMetaData_value
+
+var _WorkloadName = &s_WorkloadName
+
+var _XRayErrorPercent = &s_XRayErrorPercent
+
+var _XRayFaultPercent = &s_XRayFaultPercent
+
+var _XRayNodeName = &s_XRayNodeName
+
+var _XRayNodeType = &s_XRayNodeType
+
+var _XRayRequestAverageLatency = &s_XRayRequestAverageLatency
+
+var _XRayRequestCount = &s_XRayRequestCount
+
+var _XRayThrottlePercent = &s_XRayThrottlePercent
+
+var AddWorkloadRequest = &sAddWorkloadRequest
+var AddWorkloadRequest_ResourceGroupName = &sAddWorkloadRequest_ResourceGroupName
+var AddWorkloadRequest_ComponentName = &sAddWorkloadRequest_ComponentName
+var AddWorkloadRequest_WorkloadConfiguration = &sAddWorkloadRequest_WorkloadConfiguration
+
+var AddWorkloadResponse = &sAddWorkloadResponse
+var AddWorkloadResponse_WorkloadId = &sAddWorkloadResponse_WorkloadId
+var AddWorkloadResponse_WorkloadConfiguration = &sAddWorkloadResponse_WorkloadConfiguration
+
+var CreateApplicationRequest = &sCreateApplicationRequest
+var CreateApplicationRequest_ResourceGroupName = &sCreateApplicationRequest_ResourceGroupName
+var CreateApplicationRequest_OpsCenterEnabled = &sCreateApplicationRequest_OpsCenterEnabled
+var CreateApplicationRequest_CWEMonitorEnabled = &sCreateApplicationRequest_CWEMonitorEnabled
+var CreateApplicationRequest_OpsItemSNSTopicArn = &sCreateApplicationRequest_OpsItemSNSTopicArn
+var CreateApplicationRequest_SNSNotificationArn = &sCreateApplicationRequest_SNSNotificationArn
+var CreateApplicationRequest_Tags = &sCreateApplicationRequest_Tags
+var CreateApplicationRequest_AutoConfigEnabled = &sCreateApplicationRequest_AutoConfigEnabled
+var CreateApplicationRequest_AutoCreate = &sCreateApplicationRequest_AutoCreate
+var CreateApplicationRequest_GroupingType = &sCreateApplicationRequest_GroupingType
+var CreateApplicationRequest_AttachMissingPermission = &sCreateApplicationRequest_AttachMissingPermission
+
+var CreateApplicationResponse = &sCreateApplicationResponse
+var CreateApplicationResponse_ApplicationInfo = &sCreateApplicationResponse_ApplicationInfo
+
+var CreateComponentRequest = &sCreateComponentRequest
+var CreateComponentRequest_ResourceGroupName = &sCreateComponentRequest_ResourceGroupName
+var CreateComponentRequest_ComponentName = &sCreateComponentRequest_ComponentName
+var CreateComponentRequest_ResourceList = &sCreateComponentRequest_ResourceList
+
+var CreateComponentResponse = &sCreateComponentResponse
+
+var CreateLogPatternRequest = &sCreateLogPatternRequest
+var CreateLogPatternRequest_ResourceGroupName = &sCreateLogPatternRequest_ResourceGroupName
+var CreateLogPatternRequest_PatternSetName = &sCreateLogPatternRequest_PatternSetName
+var CreateLogPatternRequest_PatternName = &sCreateLogPatternRequest_PatternName
+var CreateLogPatternRequest_Pattern = &sCreateLogPatternRequest_Pattern
+var CreateLogPatternRequest_Rank = &sCreateLogPatternRequest_Rank
+
+var CreateLogPatternResponse = &sCreateLogPatternResponse
+var CreateLogPatternResponse_LogPattern = &sCreateLogPatternResponse_LogPattern
+var CreateLogPatternResponse_ResourceGroupName = &sCreateLogPatternResponse_ResourceGroupName
+
+var DeleteApplicationRequest = &sDeleteApplicationRequest
+var DeleteApplicationRequest_ResourceGroupName = &sDeleteApplicationRequest_ResourceGroupName
+
+var DeleteApplicationResponse = &sDeleteApplicationResponse
+
+var DeleteComponentRequest = &sDeleteComponentRequest
+var DeleteComponentRequest_ResourceGroupName = &sDeleteComponentRequest_ResourceGroupName
+var DeleteComponentRequest_ComponentName = &sDeleteComponentRequest_ComponentName
+
+var DeleteComponentResponse = &sDeleteComponentResponse
+
+var DeleteLogPatternRequest = &sDeleteLogPatternRequest
+var DeleteLogPatternRequest_ResourceGroupName = &sDeleteLogPatternRequest_ResourceGroupName
+var DeleteLogPatternRequest_PatternSetName = &sDeleteLogPatternRequest_PatternSetName
+var DeleteLogPatternRequest_PatternName = &sDeleteLogPatternRequest_PatternName
+
+var DeleteLogPatternResponse = &sDeleteLogPatternResponse
+
+var DescribeApplicationRequest = &sDescribeApplicationRequest
+var DescribeApplicationRequest_ResourceGroupName = &sDescribeApplicationRequest_ResourceGroupName
+var DescribeApplicationRequest_AccountId = &sDescribeApplicationRequest_AccountId
+
+var DescribeApplicationResponse = &sDescribeApplicationResponse
+var DescribeApplicationResponse_ApplicationInfo = &sDescribeApplicationResponse_ApplicationInfo
+
+var DescribeComponentConfigurationRequest = &sDescribeComponentConfigurationRequest
+var DescribeComponentConfigurationRequest_ResourceGroupName = &sDescribeComponentConfigurationRequest_ResourceGroupName
+var DescribeComponentConfigurationRequest_ComponentName = &sDescribeComponentConfigurationRequest_ComponentName
+var DescribeComponentConfigurationRequest_AccountId = &sDescribeComponentConfigurationRequest_AccountId
+
+var DescribeComponentConfigurationResponse = &sDescribeComponentConfigurationResponse
+var DescribeComponentConfigurationResponse_Monitor = &sDescribeComponentConfigurationResponse_Monitor
+var DescribeComponentConfigurationResponse_Tier = &sDescribeComponentConfigurationResponse_Tier
+var DescribeComponentConfigurationResponse_ComponentConfiguration = &sDescribeComponentConfigurationResponse_ComponentConfiguration
+
+var DescribeComponentConfigurationRecommendationRequest = &sDescribeComponentConfigurationRecommendationRequest
+var DescribeComponentConfigurationRecommendationRequest_ResourceGroupName = &sDescribeComponentConfigurationRecommendationRequest_ResourceGroupName
+var DescribeComponentConfigurationRecommendationRequest_ComponentName = &sDescribeComponentConfigurationRecommendationRequest_ComponentName
+var DescribeComponentConfigurationRecommendationRequest_Tier = &sDescribeComponentConfigurationRecommendationRequest_Tier
+var DescribeComponentConfigurationRecommendationRequest_WorkloadName = &sDescribeComponentConfigurationRecommendationRequest_WorkloadName
+var DescribeComponentConfigurationRecommendationRequest_RecommendationType = &sDescribeComponentConfigurationRecommendationRequest_RecommendationType
+
+var DescribeComponentConfigurationRecommendationResponse = &sDescribeComponentConfigurationRecommendationResponse
+var DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration = &sDescribeComponentConfigurationRecommendationResponse_ComponentConfiguration
+
+var DescribeComponentRequest = &sDescribeComponentRequest
+var DescribeComponentRequest_ResourceGroupName = &sDescribeComponentRequest_ResourceGroupName
+var DescribeComponentRequest_ComponentName = &sDescribeComponentRequest_ComponentName
+var DescribeComponentRequest_AccountId = &sDescribeComponentRequest_AccountId
+
+var DescribeComponentResponse = &sDescribeComponentResponse
+var DescribeComponentResponse_ApplicationComponent = &sDescribeComponentResponse_ApplicationComponent
+var DescribeComponentResponse_ResourceList = &sDescribeComponentResponse_ResourceList
+
+var DescribeLogPatternRequest = &sDescribeLogPatternRequest
+var DescribeLogPatternRequest_ResourceGroupName = &sDescribeLogPatternRequest_ResourceGroupName
+var DescribeLogPatternRequest_PatternSetName = &sDescribeLogPatternRequest_PatternSetName
+var DescribeLogPatternRequest_PatternName = &sDescribeLogPatternRequest_PatternName
+var DescribeLogPatternRequest_AccountId = &sDescribeLogPatternRequest_AccountId
+
+var DescribeLogPatternResponse = &sDescribeLogPatternResponse
+var DescribeLogPatternResponse_ResourceGroupName = &sDescribeLogPatternResponse_ResourceGroupName
+var DescribeLogPatternResponse_AccountId = &sDescribeLogPatternResponse_AccountId
+var DescribeLogPatternResponse_LogPattern = &sDescribeLogPatternResponse_LogPattern
+
+var DescribeObservationRequest = &sDescribeObservationRequest
+var DescribeObservationRequest_ObservationId = &sDescribeObservationRequest_ObservationId
+var DescribeObservationRequest_AccountId = &sDescribeObservationRequest_AccountId
+
+var DescribeObservationResponse = &sDescribeObservationResponse
+var DescribeObservationResponse_Observation = &sDescribeObservationResponse_Observation
+
+var DescribeProblemRequest = &sDescribeProblemRequest
+var DescribeProblemRequest_ProblemId = &sDescribeProblemRequest_ProblemId
+var DescribeProblemRequest_AccountId = &sDescribeProblemRequest_AccountId
+
+var DescribeProblemObservationsRequest = &sDescribeProblemObservationsRequest
+var DescribeProblemObservationsRequest_ProblemId = &sDescribeProblemObservationsRequest_ProblemId
+var DescribeProblemObservationsRequest_AccountId = &sDescribeProblemObservationsRequest_AccountId
+
+var DescribeProblemObservationsResponse = &sDescribeProblemObservationsResponse
+var DescribeProblemObservationsResponse_RelatedObservations = &sDescribeProblemObservationsResponse_RelatedObservations
+
+var DescribeProblemResponse = &sDescribeProblemResponse
+var DescribeProblemResponse_Problem = &sDescribeProblemResponse_Problem
+var DescribeProblemResponse_SNSNotificationArn = &sDescribeProblemResponse_SNSNotificationArn
+
+var DescribeWorkloadRequest = &sDescribeWorkloadRequest
+var DescribeWorkloadRequest_ResourceGroupName = &sDescribeWorkloadRequest_ResourceGroupName
+var DescribeWorkloadRequest_ComponentName = &sDescribeWorkloadRequest_ComponentName
+var DescribeWorkloadRequest_WorkloadId = &sDescribeWorkloadRequest_WorkloadId
+var DescribeWorkloadRequest_AccountId = &sDescribeWorkloadRequest_AccountId
+
+var DescribeWorkloadResponse = &sDescribeWorkloadResponse
+var DescribeWorkloadResponse_WorkloadId = &sDescribeWorkloadResponse_WorkloadId
+var DescribeWorkloadResponse_WorkloadRemarks = &sDescribeWorkloadResponse_WorkloadRemarks
+var DescribeWorkloadResponse_WorkloadConfiguration = &sDescribeWorkloadResponse_WorkloadConfiguration
+
+var ListApplicationsRequest = &sListApplicationsRequest
+var ListApplicationsRequest_MaxResults = &sListApplicationsRequest_MaxResults
+var ListApplicationsRequest_NextToken = &sListApplicationsRequest_NextToken
+var ListApplicationsRequest_AccountId = &sListApplicationsRequest_AccountId
+
+var ListApplicationsResponse = &sListApplicationsResponse
+var ListApplicationsResponse_ApplicationInfoList = &sListApplicationsResponse_ApplicationInfoList
+var ListApplicationsResponse_NextToken = &sListApplicationsResponse_NextToken
+
+var ListComponentsRequest = &sListComponentsRequest
+var ListComponentsRequest_ResourceGroupName = &sListComponentsRequest_ResourceGroupName
+var ListComponentsRequest_MaxResults = &sListComponentsRequest_MaxResults
+var ListComponentsRequest_NextToken = &sListComponentsRequest_NextToken
+var ListComponentsRequest_AccountId = &sListComponentsRequest_AccountId
+
+var ListComponentsResponse = &sListComponentsResponse
+var ListComponentsResponse_ApplicationComponentList = &sListComponentsResponse_ApplicationComponentList
+var ListComponentsResponse_NextToken = &sListComponentsResponse_NextToken
+
+var ListConfigurationHistoryRequest = &sListConfigurationHistoryRequest
+var ListConfigurationHistoryRequest_ResourceGroupName = &sListConfigurationHistoryRequest_ResourceGroupName
+var ListConfigurationHistoryRequest_StartTime = &sListConfigurationHistoryRequest_StartTime
+var ListConfigurationHistoryRequest_EndTime = &sListConfigurationHistoryRequest_EndTime
+var ListConfigurationHistoryRequest_EventStatus = &sListConfigurationHistoryRequest_EventStatus
+var ListConfigurationHistoryRequest_MaxResults = &sListConfigurationHistoryRequest_MaxResults
+var ListConfigurationHistoryRequest_NextToken = &sListConfigurationHistoryRequest_NextToken
+var ListConfigurationHistoryRequest_AccountId = &sListConfigurationHistoryRequest_AccountId
+
+var ListConfigurationHistoryResponse = &sListConfigurationHistoryResponse
+var ListConfigurationHistoryResponse_EventList = &sListConfigurationHistoryResponse_EventList
+var ListConfigurationHistoryResponse_NextToken = &sListConfigurationHistoryResponse_NextToken
+
+var ListLogPatternSetsRequest = &sListLogPatternSetsRequest
+var ListLogPatternSetsRequest_ResourceGroupName = &sListLogPatternSetsRequest_ResourceGroupName
+var ListLogPatternSetsRequest_MaxResults = &sListLogPatternSetsRequest_MaxResults
+var ListLogPatternSetsRequest_NextToken = &sListLogPatternSetsRequest_NextToken
+var ListLogPatternSetsRequest_AccountId = &sListLogPatternSetsRequest_AccountId
+
+var ListLogPatternSetsResponse = &sListLogPatternSetsResponse
+var ListLogPatternSetsResponse_ResourceGroupName = &sListLogPatternSetsResponse_ResourceGroupName
+var ListLogPatternSetsResponse_AccountId = &sListLogPatternSetsResponse_AccountId
+var ListLogPatternSetsResponse_LogPatternSets = &sListLogPatternSetsResponse_LogPatternSets
+var ListLogPatternSetsResponse_NextToken = &sListLogPatternSetsResponse_NextToken
+
+var ListLogPatternsRequest = &sListLogPatternsRequest
+var ListLogPatternsRequest_ResourceGroupName = &sListLogPatternsRequest_ResourceGroupName
+var ListLogPatternsRequest_PatternSetName = &sListLogPatternsRequest_PatternSetName
+var ListLogPatternsRequest_MaxResults = &sListLogPatternsRequest_MaxResults
+var ListLogPatternsRequest_NextToken = &sListLogPatternsRequest_NextToken
+var ListLogPatternsRequest_AccountId = &sListLogPatternsRequest_AccountId
+
+var ListLogPatternsResponse = &sListLogPatternsResponse
+var ListLogPatternsResponse_ResourceGroupName = &sListLogPatternsResponse_ResourceGroupName
+var ListLogPatternsResponse_AccountId = &sListLogPatternsResponse_AccountId
+var ListLogPatternsResponse_LogPatterns = &sListLogPatternsResponse_LogPatterns
+var ListLogPatternsResponse_NextToken = &sListLogPatternsResponse_NextToken
+
+var ListProblemsRequest = &sListProblemsRequest
+var ListProblemsRequest_AccountId = &sListProblemsRequest_AccountId
+var ListProblemsRequest_ResourceGroupName = &sListProblemsRequest_ResourceGroupName
+var ListProblemsRequest_StartTime = &sListProblemsRequest_StartTime
+var ListProblemsRequest_EndTime = &sListProblemsRequest_EndTime
+var ListProblemsRequest_MaxResults = &sListProblemsRequest_MaxResults
+var ListProblemsRequest_NextToken = &sListProblemsRequest_NextToken
+var ListProblemsRequest_ComponentName = &sListProblemsRequest_ComponentName
+var ListProblemsRequest_Visibility = &sListProblemsRequest_Visibility
+
+var ListProblemsResponse = &sListProblemsResponse
+var ListProblemsResponse_ProblemList = &sListProblemsResponse_ProblemList
+var ListProblemsResponse_NextToken = &sListProblemsResponse_NextToken
+var ListProblemsResponse_ResourceGroupName = &sListProblemsResponse_ResourceGroupName
+var ListProblemsResponse_AccountId = &sListProblemsResponse_AccountId
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListWorkloadsRequest = &sListWorkloadsRequest
+var ListWorkloadsRequest_ResourceGroupName = &sListWorkloadsRequest_ResourceGroupName
+var ListWorkloadsRequest_ComponentName = &sListWorkloadsRequest_ComponentName
+var ListWorkloadsRequest_MaxResults = &sListWorkloadsRequest_MaxResults
+var ListWorkloadsRequest_NextToken = &sListWorkloadsRequest_NextToken
+var ListWorkloadsRequest_AccountId = &sListWorkloadsRequest_AccountId
+
+var ListWorkloadsResponse = &sListWorkloadsResponse
+var ListWorkloadsResponse_WorkloadList = &sListWorkloadsResponse_WorkloadList
+var ListWorkloadsResponse_NextToken = &sListWorkloadsResponse_NextToken
+
+var RemoveWorkloadRequest = &sRemoveWorkloadRequest
+var RemoveWorkloadRequest_ResourceGroupName = &sRemoveWorkloadRequest_ResourceGroupName
+var RemoveWorkloadRequest_ComponentName = &sRemoveWorkloadRequest_ComponentName
+var RemoveWorkloadRequest_WorkloadId = &sRemoveWorkloadRequest_WorkloadId
+
+var RemoveWorkloadResponse = &sRemoveWorkloadResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateApplicationRequest = &sUpdateApplicationRequest
+var UpdateApplicationRequest_ResourceGroupName = &sUpdateApplicationRequest_ResourceGroupName
+var UpdateApplicationRequest_OpsCenterEnabled = &sUpdateApplicationRequest_OpsCenterEnabled
+var UpdateApplicationRequest_CWEMonitorEnabled = &sUpdateApplicationRequest_CWEMonitorEnabled
+var UpdateApplicationRequest_OpsItemSNSTopicArn = &sUpdateApplicationRequest_OpsItemSNSTopicArn
+var UpdateApplicationRequest_SNSNotificationArn = &sUpdateApplicationRequest_SNSNotificationArn
+var UpdateApplicationRequest_RemoveSNSTopic = &sUpdateApplicationRequest_RemoveSNSTopic
+var UpdateApplicationRequest_AutoConfigEnabled = &sUpdateApplicationRequest_AutoConfigEnabled
+var UpdateApplicationRequest_AttachMissingPermission = &sUpdateApplicationRequest_AttachMissingPermission
+
+var UpdateApplicationResponse = &sUpdateApplicationResponse
+var UpdateApplicationResponse_ApplicationInfo = &sUpdateApplicationResponse_ApplicationInfo
+
+var UpdateComponentConfigurationRequest = &sUpdateComponentConfigurationRequest
+var UpdateComponentConfigurationRequest_ResourceGroupName = &sUpdateComponentConfigurationRequest_ResourceGroupName
+var UpdateComponentConfigurationRequest_ComponentName = &sUpdateComponentConfigurationRequest_ComponentName
+var UpdateComponentConfigurationRequest_Monitor = &sUpdateComponentConfigurationRequest_Monitor
+var UpdateComponentConfigurationRequest_Tier = &sUpdateComponentConfigurationRequest_Tier
+var UpdateComponentConfigurationRequest_ComponentConfiguration = &sUpdateComponentConfigurationRequest_ComponentConfiguration
+var UpdateComponentConfigurationRequest_AutoConfigEnabled = &sUpdateComponentConfigurationRequest_AutoConfigEnabled
+
+var UpdateComponentConfigurationResponse = &sUpdateComponentConfigurationResponse
+
+var UpdateComponentRequest = &sUpdateComponentRequest
+var UpdateComponentRequest_ResourceGroupName = &sUpdateComponentRequest_ResourceGroupName
+var UpdateComponentRequest_ComponentName = &sUpdateComponentRequest_ComponentName
+var UpdateComponentRequest_NewComponentName = &sUpdateComponentRequest_NewComponentName
+var UpdateComponentRequest_ResourceList = &sUpdateComponentRequest_ResourceList
+
+var UpdateComponentResponse = &sUpdateComponentResponse
+
+var UpdateLogPatternRequest = &sUpdateLogPatternRequest
+var UpdateLogPatternRequest_ResourceGroupName = &sUpdateLogPatternRequest_ResourceGroupName
+var UpdateLogPatternRequest_PatternSetName = &sUpdateLogPatternRequest_PatternSetName
+var UpdateLogPatternRequest_PatternName = &sUpdateLogPatternRequest_PatternName
+var UpdateLogPatternRequest_Pattern = &sUpdateLogPatternRequest_Pattern
+var UpdateLogPatternRequest_Rank = &sUpdateLogPatternRequest_Rank
+
+var UpdateLogPatternResponse = &sUpdateLogPatternResponse
+var UpdateLogPatternResponse_ResourceGroupName = &sUpdateLogPatternResponse_ResourceGroupName
+var UpdateLogPatternResponse_LogPattern = &sUpdateLogPatternResponse_LogPattern
+
+var UpdateProblemRequest = &sUpdateProblemRequest
+var UpdateProblemRequest_ProblemId = &sUpdateProblemRequest_ProblemId
+var UpdateProblemRequest_UpdateStatus = &sUpdateProblemRequest_UpdateStatus
+var UpdateProblemRequest_Visibility = &sUpdateProblemRequest_Visibility
+
+var UpdateProblemResponse = &sUpdateProblemResponse
+
+var UpdateWorkloadRequest = &sUpdateWorkloadRequest
+var UpdateWorkloadRequest_ResourceGroupName = &sUpdateWorkloadRequest_ResourceGroupName
+var UpdateWorkloadRequest_ComponentName = &sUpdateWorkloadRequest_ComponentName
+var UpdateWorkloadRequest_WorkloadId = &sUpdateWorkloadRequest_WorkloadId
+var UpdateWorkloadRequest_WorkloadConfiguration = &sUpdateWorkloadRequest_WorkloadConfiguration
+
+var UpdateWorkloadResponse = &sUpdateWorkloadResponse
+var UpdateWorkloadResponse_WorkloadId = &sUpdateWorkloadResponse_WorkloadId
+var UpdateWorkloadResponse_WorkloadConfiguration = &sUpdateWorkloadResponse_WorkloadConfiguration
+
+var EC2WindowsBarleyService = &smithy.ServiceSchema{Schema: &s_EC2WindowsBarleyService, Version: "2018-11-25"}

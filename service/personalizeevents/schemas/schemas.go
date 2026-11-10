@@ -7,409 +7,416 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var PutActionInteractions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionInteractions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	ePutActionInteractions                           smithy.SchemaExtensions
+	ePutActions                                      smithy.SchemaExtensions
+	ePutEvents                                       smithy.SchemaExtensions
+	ePutItems                                        smithy.SchemaExtensions
+	ePutUsers                                        smithy.SchemaExtensions
+	e_AmazonPersonalizeEvents                        smithy.SchemaExtensions
+	eAction                                          smithy.SchemaExtensions
+	eAction_actionId                                 smithy.SchemaExtensions
+	eAction_properties                               smithy.SchemaExtensions
+	e_ActionId                                       smithy.SchemaExtensions
+	e_ActionImpression                               smithy.SchemaExtensions
+	e_ActionImpression_member                        smithy.SchemaExtensions
+	eActionInteraction                               smithy.SchemaExtensions
+	eActionInteraction_actionId                      smithy.SchemaExtensions
+	eActionInteraction_userId                        smithy.SchemaExtensions
+	eActionInteraction_sessionId                     smithy.SchemaExtensions
+	eActionInteraction_timestamp                     smithy.SchemaExtensions
+	eActionInteraction_eventType                     smithy.SchemaExtensions
+	eActionInteraction_eventId                       smithy.SchemaExtensions
+	eActionInteraction_recommendationId              smithy.SchemaExtensions
+	eActionInteraction_impression                    smithy.SchemaExtensions
+	eActionInteraction_properties                    smithy.SchemaExtensions
+	e_ActionInteractionsList                         smithy.SchemaExtensions
+	e_ActionInteractionsList_member                  smithy.SchemaExtensions
+	e_ActionList                                     smithy.SchemaExtensions
+	e_ActionList_member                              smithy.SchemaExtensions
+	e_Arn                                            smithy.SchemaExtensions
+	e_Date                                           smithy.SchemaExtensions
+	e_ErrorMessage                                   smithy.SchemaExtensions
+	eEvent                                           smithy.SchemaExtensions
+	eEvent_eventId                                   smithy.SchemaExtensions
+	eEvent_eventType                                 smithy.SchemaExtensions
+	eEvent_eventValue                                smithy.SchemaExtensions
+	eEvent_itemId                                    smithy.SchemaExtensions
+	eEvent_properties                                smithy.SchemaExtensions
+	eEvent_sentAt                                    smithy.SchemaExtensions
+	eEvent_recommendationId                          smithy.SchemaExtensions
+	eEvent_impression                                smithy.SchemaExtensions
+	eEvent_metricAttribution                         smithy.SchemaExtensions
+	e_EventAttributionSource                         smithy.SchemaExtensions
+	e_EventList                                      smithy.SchemaExtensions
+	e_EventList_member                               smithy.SchemaExtensions
+	e_FloatType                                      smithy.SchemaExtensions
+	e_Impression                                     smithy.SchemaExtensions
+	e_Impression_member                              smithy.SchemaExtensions
+	eInvalidInputException                           smithy.SchemaExtensions
+	eInvalidInputException_message                   smithy.SchemaExtensions
+	eItem                                            smithy.SchemaExtensions
+	eItem_itemId                                     smithy.SchemaExtensions
+	eItem_properties                                 smithy.SchemaExtensions
+	e_ItemId                                         smithy.SchemaExtensions
+	e_ItemList                                       smithy.SchemaExtensions
+	e_ItemList_member                                smithy.SchemaExtensions
+	eMetricAttribution                               smithy.SchemaExtensions
+	eMetricAttribution_eventAttributionSource        smithy.SchemaExtensions
+	e_RecommendationId                               smithy.SchemaExtensions
+	eResourceInUseException                          smithy.SchemaExtensions
+	eResourceInUseException_message                  smithy.SchemaExtensions
+	eResourceNotFoundException                       smithy.SchemaExtensions
+	eResourceNotFoundException_message               smithy.SchemaExtensions
+	e_StringType                                     smithy.SchemaExtensions
+	e_SynthesizedJsonActionInteractionProperties     smithy.SchemaExtensions
+	e_SynthesizedJsonActionProperties                smithy.SchemaExtensions
+	e_SynthesizedJsonEventPropertiesJSON             smithy.SchemaExtensions
+	e_SynthesizedJsonItemProperties                  smithy.SchemaExtensions
+	e_SynthesizedJsonUserProperties                  smithy.SchemaExtensions
+	eUser                                            smithy.SchemaExtensions
+	eUser_userId                                     smithy.SchemaExtensions
+	eUser_properties                                 smithy.SchemaExtensions
+	e_UserId                                         smithy.SchemaExtensions
+	e_UserList                                       smithy.SchemaExtensions
+	e_UserList_member                                smithy.SchemaExtensions
+	ePutActionInteractionsRequest                    smithy.SchemaExtensions
+	ePutActionInteractionsRequest_trackingId         smithy.SchemaExtensions
+	ePutActionInteractionsRequest_actionInteractions smithy.SchemaExtensions
+	ePutActionsRequest                               smithy.SchemaExtensions
+	ePutActionsRequest_datasetArn                    smithy.SchemaExtensions
+	ePutActionsRequest_actions                       smithy.SchemaExtensions
+	ePutEventsRequest                                smithy.SchemaExtensions
+	ePutEventsRequest_trackingId                     smithy.SchemaExtensions
+	ePutEventsRequest_userId                         smithy.SchemaExtensions
+	ePutEventsRequest_sessionId                      smithy.SchemaExtensions
+	ePutEventsRequest_eventList                      smithy.SchemaExtensions
+	ePutItemsRequest                                 smithy.SchemaExtensions
+	ePutItemsRequest_datasetArn                      smithy.SchemaExtensions
+	ePutItemsRequest_items                           smithy.SchemaExtensions
+	ePutUsersRequest                                 smithy.SchemaExtensions
+	ePutUsersRequest_datasetArn                      smithy.SchemaExtensions
+	ePutUsersRequest_users                           smithy.SchemaExtensions
+)
+
+var (
+	iPutActionInteractions                       = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutActionInteractions"}
+	iPutActions                                  = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutActions"}
+	iPutEvents                                   = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutEvents"}
+	iPutItems                                    = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutItems"}
+	iPutUsers                                    = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutUsers"}
+	i_AmazonPersonalizeEvents                    = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "AmazonPersonalizeEvents"}
+	iAction                                      = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Action"}
+	i_ActionId                                   = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ActionId"}
+	i_ActionImpression                           = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ActionImpression"}
+	iActionInteraction                           = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ActionInteraction"}
+	i_ActionInteractionsList                     = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ActionInteractionsList"}
+	i_ActionList                                 = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ActionList"}
+	i_Arn                                        = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Arn"}
+	i_Date                                       = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Date"}
+	i_ErrorMessage                               = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ErrorMessage"}
+	iEvent                                       = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Event"}
+	i_EventAttributionSource                     = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "EventAttributionSource"}
+	i_EventList                                  = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "EventList"}
+	i_FloatType                                  = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "FloatType"}
+	i_Impression                                 = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Impression"}
+	iInvalidInputException                       = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "InvalidInputException"}
+	iItem                                        = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "Item"}
+	i_ItemId                                     = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ItemId"}
+	i_ItemList                                   = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ItemList"}
+	iMetricAttribution                           = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "MetricAttribution"}
+	i_RecommendationId                           = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "RecommendationId"}
+	iResourceInUseException                      = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ResourceInUseException"}
+	iResourceNotFoundException                   = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "ResourceNotFoundException"}
+	i_StringType                                 = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "StringType"}
+	i_SynthesizedJsonActionInteractionProperties = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "SynthesizedJsonActionInteractionProperties"}
+	i_SynthesizedJsonActionProperties            = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "SynthesizedJsonActionProperties"}
+	i_SynthesizedJsonEventPropertiesJSON         = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "SynthesizedJsonEventPropertiesJSON"}
+	i_SynthesizedJsonItemProperties              = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "SynthesizedJsonItemProperties"}
+	i_SynthesizedJsonUserProperties              = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "SynthesizedJsonUserProperties"}
+	iUser                                        = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "User"}
+	i_UserId                                     = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "UserId"}
+	i_UserList                                   = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "UserList"}
+	iPutActionInteractionsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutActionInteractionsRequest"}
+	iPutActionsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutActionsRequest"}
+	iPutEventsRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutEventsRequest"}
+	iPutItemsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutItemsRequest"}
+	iPutUsersRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.personalizeevents", Name: "PutUsersRequest"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/action-interactions",
-	Code: 200})
-
-var PutActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/actions",
-	Code: 200})
-
-var PutEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/events",
-	Code: 200})
-
-var PutItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/items",
-	Code: 200})
-
-var PutUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/users",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40100}
+
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_actionId, &sAction_properties}}
+var m_ActionImpression = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionImpression_member}}
+var mActionInteraction = smithy.SchemaMembers{List: []*smithy.Schema{&sActionInteraction_actionId, &sActionInteraction_userId, &sActionInteraction_sessionId, &sActionInteraction_timestamp, &sActionInteraction_eventType, &sActionInteraction_eventId, &sActionInteraction_recommendationId, &sActionInteraction_impression, &sActionInteraction_properties}, Hash: &hActionInteraction}
+var m_ActionInteractionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionInteractionsList_member}}
+var m_ActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionList_member}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_eventId, &sEvent_eventType, &sEvent_eventValue, &sEvent_itemId, &sEvent_properties, &sEvent_sentAt, &sEvent_recommendationId, &sEvent_impression, &sEvent_metricAttribution}, Hash: &hEvent}
+var m_EventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventList_member}}
+var m_Impression = smithy.SchemaMembers{List: []*smithy.Schema{&s_Impression_member}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_message}}
+var mItem = smithy.SchemaMembers{List: []*smithy.Schema{&sItem_itemId, &sItem_properties}}
+var m_ItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ItemList_member}}
+var mMetricAttribution = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricAttribution_eventAttributionSource}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_userId, &sUser_properties}}
+var m_UserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserList_member}}
+var mPutActionInteractionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutActionInteractionsRequest_trackingId, &sPutActionInteractionsRequest_actionInteractions}}
+var mPutActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutActionsRequest_datasetArn, &sPutActionsRequest_actions}}
+var mPutEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsRequest_trackingId, &sPutEventsRequest_userId, &sPutEventsRequest_sessionId, &sPutEventsRequest_eventList}}
+var mPutItemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutItemsRequest_datasetArn, &sPutItemsRequest_items}}
+var mPutUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutUsersRequest_datasetArn, &sPutUsersRequest_users}}
+
+var hActionInteraction = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 0, 0, 1, 0, 6, 0, 0, 3, 0, 0, 8, 0, 0, 5, 0, 0, 0, 4, 0, 0, 0, 7, 0,
+	0, 0, 9, 0, 0, 2, 0, 0,
+}}
+var hEvent = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 4, 0, 0, 0, 0, 0, 0, 8, 3, 2, 0, 0, 0, 5, 7, 0, 0, 6,
+	0, 0, 0, 0, 0, 0, 1, 0,
+}}
+
+var sPutActionInteractions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionInteractions, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ePutActionInteractions})
+var sPutActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActions, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ePutActions})
+var sPutEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEvents, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ePutEvents})
+var sPutItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutItems, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ePutItems})
+var sPutUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutUsers, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ePutUsers})
+var s_AmazonPersonalizeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPersonalizeEvents, Type: smithy.ShapeTypeService, Ext: &e_AmazonPersonalizeEvents})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var sAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eAction_actionId})
+var sAction_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SynthesizedJsonActionProperties, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eAction_properties})
+var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &e_ActionId})
+var s_ActionImpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionImpression, Members: &m_ActionImpression, Type: smithy.ShapeTypeList, Ext: &e_ActionImpression})
+var s_ActionImpression_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ActionId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &e_ActionImpression_member})
+var sActionInteraction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionInteraction, Members: &mActionInteraction, Type: smithy.ShapeTypeStructure, Ext: &eActionInteraction})
+var sActionInteraction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_actionId})
+var sActionInteraction_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_userId})
+var sActionInteraction_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_sessionId})
+var sActionInteraction_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eActionInteraction_timestamp})
+var sActionInteraction_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_eventType})
+var sActionInteraction_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_eventId})
+var sActionInteraction_recommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_recommendationId})
+var sActionInteraction_impression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impression", ID: &i_ActionImpression, Members: &m_ActionImpression, Type: smithy.ShapeTypeList, Ext: &eActionInteraction_impression})
+var sActionInteraction_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SynthesizedJsonActionInteractionProperties, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eActionInteraction_properties})
+var s_ActionInteractionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionInteractionsList, Members: &m_ActionInteractionsList, Type: smithy.ShapeTypeList, Ext: &e_ActionInteractionsList})
+var s_ActionInteractionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionInteraction, Members: &mActionInteraction, Type: smithy.ShapeTypeStructure, Ext: &e_ActionInteractionsList_member})
+var s_ActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &e_ActionList})
+var s_ActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &e_ActionList_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eEvent})
+var sEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eEvent_eventId})
+var sEvent_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eEvent_eventType})
+var sEvent_eventValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventValue", ID: &i_FloatType, Type: smithy.ShapeTypeFloat, Ext: &eEvent_eventValue})
+var sEvent_itemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemId", ID: &i_ItemId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eEvent_itemId})
+var sEvent_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SynthesizedJsonEventPropertiesJSON, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eEvent_properties})
+var sEvent_sentAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eEvent_sentAt})
+var sEvent_recommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &eEvent_recommendationId})
+var sEvent_impression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impression", ID: &i_Impression, Members: &m_Impression, Type: smithy.ShapeTypeList, Ext: &eEvent_impression})
+var sEvent_metricAttribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricAttribution", ID: &iMetricAttribution, Members: &mMetricAttribution, Type: smithy.ShapeTypeStructure, Ext: &eEvent_metricAttribution})
+var s_EventAttributionSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAttributionSource, Type: smithy.ShapeTypeString, Ext: &e_EventAttributionSource})
+var s_EventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &e_EventList})
+var s_EventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &e_EventList_member})
+var s_FloatType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FloatType, Type: smithy.ShapeTypeFloat, Ext: &e_FloatType})
+var s_Impression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Impression, Members: &m_Impression, Type: smithy.ShapeTypeList, Ext: &e_Impression})
+var s_Impression_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ItemId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &e_Impression_member})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInputException})
+var sInvalidInputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidInputException_message})
+var sItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItem, Members: &mItem, Type: smithy.ShapeTypeStructure, Ext: &eItem})
+var sItem_itemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eItem_itemId})
+var sItem_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SynthesizedJsonItemProperties, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eItem_properties})
+var s_ItemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemId, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &e_ItemId})
+var s_ItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList, Ext: &e_ItemList})
+var s_ItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iItem, Members: &mItem, Type: smithy.ShapeTypeStructure, Ext: &e_ItemList_member})
+var sMetricAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricAttribution, Members: &mMetricAttribution, Type: smithy.ShapeTypeStructure, Ext: &eMetricAttribution})
+var sMetricAttribution_eventAttributionSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventAttributionSource", ID: &i_EventAttributionSource, Type: smithy.ShapeTypeString, Ext: &eMetricAttribution_eventAttributionSource})
+var s_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &e_RecommendationId})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_StringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &e_StringType})
+var s_SynthesizedJsonActionInteractionProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonActionInteractionProperties, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonActionInteractionProperties})
+var s_SynthesizedJsonActionProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonActionProperties, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonActionProperties})
+var s_SynthesizedJsonEventPropertiesJSON = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonEventPropertiesJSON, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonEventPropertiesJSON})
+var s_SynthesizedJsonItemProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonItemProperties, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonItemProperties})
+var s_SynthesizedJsonUserProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonUserProperties, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &e_SynthesizedJsonUserProperties})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &eUser})
+var sUser_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eUser_userId})
+var sUser_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SynthesizedJsonUserProperties, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eUser_properties})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &e_UserId})
+var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &e_UserList})
+var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &e_UserList_member})
+var sPutActionInteractionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionInteractionsRequest, Members: &mPutActionInteractionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutActionInteractionsRequest})
+var sPutActionInteractionsRequest_trackingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &ePutActionInteractionsRequest_trackingId})
+var sPutActionInteractionsRequest_actionInteractions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionInteractions", ID: &i_ActionInteractionsList, Members: &m_ActionInteractionsList, Type: smithy.ShapeTypeList, Ext: &ePutActionInteractionsRequest_actionInteractions})
+var sPutActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionsRequest, Members: &mPutActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutActionsRequest})
+var sPutActionsRequest_datasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutActionsRequest_datasetArn})
+var sPutActionsRequest_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &ePutActionsRequest_actions})
+var sPutEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsRequest, Members: &mPutEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEventsRequest})
+var sPutEventsRequest_trackingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &ePutEventsRequest_trackingId})
+var sPutEventsRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ePutEventsRequest_userId})
+var sPutEventsRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &ePutEventsRequest_sessionId})
+var sPutEventsRequest_eventList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventList", ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &ePutEventsRequest_eventList})
+var sPutItemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutItemsRequest, Members: &mPutItemsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutItemsRequest})
+var sPutItemsRequest_datasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutItemsRequest_datasetArn})
+var sPutItemsRequest_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList, Ext: &ePutItemsRequest_items})
+var sPutUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutUsersRequest, Members: &mPutUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutUsersRequest})
+var sPutUsersRequest_datasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutUsersRequest_datasetArn})
+var sPutUsersRequest_users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "users", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &ePutUsersRequest_users})
 
-var _AmazonPersonalizeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "AmazonPersonalizeEvents",
-}, smithy.ShapeTypeService, 0)
+var PutActionInteractions = &sPutActionInteractions
 
-var AmazonPersonalizeEvents = smithy.NewServiceSchema(_AmazonPersonalizeEvents, "2018-03-22")
+var PutActions = &sPutActions
 
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Action",
-}, smithy.ShapeTypeStructure, 2)
-var Action_actionId *smithy.Schema
+var PutEvents = &sPutEvents
 
-var Action_properties *smithy.Schema
+var PutItems = &sPutItems
 
-var _ActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+var PutUsers = &sPutUsers
 
-var _ActionImpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionImpression",
-}, smithy.ShapeTypeList, 1)
-var _ActionImpression_member *smithy.Schema
+var _AmazonPersonalizeEvents = &s_AmazonPersonalizeEvents
 
-var ActionInteraction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionInteraction",
-}, smithy.ShapeTypeStructure, 9)
-var ActionInteraction_actionId *smithy.Schema
+var Action = &sAction
+var Action_actionId = &sAction_actionId
+var Action_properties = &sAction_properties
 
-var ActionInteraction_userId *smithy.Schema
+var _ActionId = &s_ActionId
 
-var ActionInteraction_sessionId *smithy.Schema
+var _ActionImpression = &s_ActionImpression
+var _ActionImpression_member = &s_ActionImpression_member
 
-var ActionInteraction_timestamp *smithy.Schema
+var ActionInteraction = &sActionInteraction
+var ActionInteraction_actionId = &sActionInteraction_actionId
+var ActionInteraction_userId = &sActionInteraction_userId
+var ActionInteraction_sessionId = &sActionInteraction_sessionId
+var ActionInteraction_timestamp = &sActionInteraction_timestamp
+var ActionInteraction_eventType = &sActionInteraction_eventType
+var ActionInteraction_eventId = &sActionInteraction_eventId
+var ActionInteraction_recommendationId = &sActionInteraction_recommendationId
+var ActionInteraction_impression = &sActionInteraction_impression
+var ActionInteraction_properties = &sActionInteraction_properties
 
-var ActionInteraction_eventType *smithy.Schema
+var _ActionInteractionsList = &s_ActionInteractionsList
+var _ActionInteractionsList_member = &s_ActionInteractionsList_member
 
-var ActionInteraction_eventId *smithy.Schema
+var _ActionList = &s_ActionList
+var _ActionList_member = &s_ActionList_member
 
-var ActionInteraction_recommendationId *smithy.Schema
+var _Arn = &s_Arn
 
-var ActionInteraction_impression *smithy.Schema
+var _Date = &s_Date
 
-var ActionInteraction_properties *smithy.Schema
+var _ErrorMessage = &s_ErrorMessage
 
-var _ActionInteractionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionInteractionsList",
-}, smithy.ShapeTypeList, 1)
-var _ActionInteractionsList_member *smithy.Schema
+var Event = &sEvent
+var Event_eventId = &sEvent_eventId
+var Event_eventType = &sEvent_eventType
+var Event_eventValue = &sEvent_eventValue
+var Event_itemId = &sEvent_itemId
+var Event_properties = &sEvent_properties
+var Event_sentAt = &sEvent_sentAt
+var Event_recommendationId = &sEvent_recommendationId
+var Event_impression = &sEvent_impression
+var Event_metricAttribution = &sEvent_metricAttribution
 
-var _ActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionList",
-}, smithy.ShapeTypeList, 1)
-var _ActionList_member *smithy.Schema
+var _EventAttributionSource = &s_EventAttributionSource
 
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
+var _EventList = &s_EventList
+var _EventList_member = &s_EventList_member
 
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
-var Event_eventId *smithy.Schema
-
-var Event_eventType *smithy.Schema
+var _FloatType = &s_FloatType
 
-var Event_eventValue *smithy.Schema
-
-var Event_itemId *smithy.Schema
-
-var Event_properties *smithy.Schema
-
-var Event_sentAt *smithy.Schema
+var _Impression = &s_Impression
+var _Impression_member = &s_Impression_member
 
-var Event_recommendationId *smithy.Schema
-
-var Event_impression *smithy.Schema
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_message = &sInvalidInputException_message
 
-var Event_metricAttribution *smithy.Schema
+var Item = &sItem
+var Item_itemId = &sItem_itemId
+var Item_properties = &sItem_properties
 
-var _EventAttributionSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "EventAttributionSource",
-}, smithy.ShapeTypeString, 0)
-
-var _EventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "EventList",
-}, smithy.ShapeTypeList, 1)
-var _EventList_member *smithy.Schema
-
-var _FloatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "FloatType",
-}, smithy.ShapeTypeFloat, 0)
-
-var _Impression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Impression",
-}, smithy.ShapeTypeList, 1)
-var _Impression_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_message *smithy.Schema
-
-var Item = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Item",
-}, smithy.ShapeTypeStructure, 2)
-var Item_itemId *smithy.Schema
-
-var Item_properties *smithy.Schema
-
-var _ItemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ItemId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ItemList",
-}, smithy.ShapeTypeList, 1)
-var _ItemList_member *smithy.Schema
-
-var MetricAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "MetricAttribution",
-}, smithy.ShapeTypeStructure, 1)
-var MetricAttribution_eventAttributionSource *smithy.Schema
-
-var _RecommendationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "RecommendationId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _StringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "StringType",
-}, smithy.ShapeTypeString, 0)
-
-var _SynthesizedJsonActionInteractionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonActionInteractionProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonActionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonActionProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonEventPropertiesJSON = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonEventPropertiesJSON",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonItemProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonItemProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
+var _ItemId = &s_ItemId
 
-	&smithytraits.Sensitive{})
+var _ItemList = &s_ItemList
+var _ItemList_member = &s_ItemList_member
 
-var _SynthesizedJsonUserProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonUserProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
+var MetricAttribution = &sMetricAttribution
+var MetricAttribution_eventAttributionSource = &sMetricAttribution_eventAttributionSource
 
-	&smithytraits.Sensitive{})
+var _RecommendationId = &s_RecommendationId
 
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 2)
-var User_userId *smithy.Schema
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_message = &sResourceInUseException_message
 
-var User_properties *smithy.Schema
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
 
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+var _StringType = &s_StringType
 
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
+var _SynthesizedJsonActionInteractionProperties = &s_SynthesizedJsonActionInteractionProperties
 
-var PutActionInteractionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionInteractionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutActionInteractionsRequest_trackingId *smithy.Schema
+var _SynthesizedJsonActionProperties = &s_SynthesizedJsonActionProperties
 
-var PutActionInteractionsRequest_actionInteractions *smithy.Schema
+var _SynthesizedJsonEventPropertiesJSON = &s_SynthesizedJsonEventPropertiesJSON
 
-var PutActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutActionsRequest_datasetArn *smithy.Schema
+var _SynthesizedJsonItemProperties = &s_SynthesizedJsonItemProperties
 
-var PutActionsRequest_actions *smithy.Schema
+var _SynthesizedJsonUserProperties = &s_SynthesizedJsonUserProperties
 
-var PutEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutEventsRequest_trackingId *smithy.Schema
+var User = &sUser
+var User_userId = &sUser_userId
+var User_properties = &sUser_properties
 
-var PutEventsRequest_userId *smithy.Schema
+var _UserId = &s_UserId
 
-var PutEventsRequest_sessionId *smithy.Schema
+var _UserList = &s_UserList
+var _UserList_member = &s_UserList_member
 
-var PutEventsRequest_eventList *smithy.Schema
+var PutActionInteractionsRequest = &sPutActionInteractionsRequest
+var PutActionInteractionsRequest_trackingId = &sPutActionInteractionsRequest_trackingId
+var PutActionInteractionsRequest_actionInteractions = &sPutActionInteractionsRequest_actionInteractions
 
-var PutItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutItemsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutItemsRequest_datasetArn *smithy.Schema
+var PutActionsRequest = &sPutActionsRequest
+var PutActionsRequest_datasetArn = &sPutActionsRequest_datasetArn
+var PutActionsRequest_actions = &sPutActionsRequest_actions
 
-var PutItemsRequest_items *smithy.Schema
+var PutEventsRequest = &sPutEventsRequest
+var PutEventsRequest_trackingId = &sPutEventsRequest_trackingId
+var PutEventsRequest_userId = &sPutEventsRequest_userId
+var PutEventsRequest_sessionId = &sPutEventsRequest_sessionId
+var PutEventsRequest_eventList = &sPutEventsRequest_eventList
 
-var PutUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutUsersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutUsersRequest_datasetArn *smithy.Schema
+var PutItemsRequest = &sPutItemsRequest
+var PutItemsRequest_datasetArn = &sPutItemsRequest_datasetArn
+var PutItemsRequest_items = &sPutItemsRequest_items
 
-var PutUsersRequest_users *smithy.Schema
+var PutUsersRequest = &sPutUsersRequest
+var PutUsersRequest_datasetArn = &sPutUsersRequest_datasetArn
+var PutUsersRequest_users = &sPutUsersRequest_users
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Action_actionId = Action.AddMember("actionId", _StringType)
-
-	Action_properties = Action.AddMember("properties", _SynthesizedJsonActionProperties)
-
-	_ActionImpression_member = _ActionImpression.AddMember("member", _ActionId)
-
-	ActionInteraction_actionId = ActionInteraction.AddMember("actionId", _ActionId)
-
-	ActionInteraction_userId = ActionInteraction.AddMember("userId", _UserId)
-
-	ActionInteraction_sessionId = ActionInteraction.AddMember("sessionId", _StringType)
-
-	ActionInteraction_timestamp = ActionInteraction.AddMember("timestamp", _Date)
-
-	ActionInteraction_eventType = ActionInteraction.AddMember("eventType", _StringType)
-
-	ActionInteraction_eventId = ActionInteraction.AddMember("eventId", _StringType)
-
-	ActionInteraction_recommendationId = ActionInteraction.AddMember("recommendationId", _RecommendationId)
-
-	ActionInteraction_impression = ActionInteraction.AddMember("impression", _ActionImpression)
-
-	ActionInteraction_properties = ActionInteraction.AddMember("properties", _SynthesizedJsonActionInteractionProperties)
-
-	_ActionInteractionsList_member = _ActionInteractionsList.AddMember("member", ActionInteraction)
-
-	_ActionList_member = _ActionList.AddMember("member", Action)
-
-	_Impression_member = _Impression.AddMember("member", _ItemId)
-
-	MetricAttribution_eventAttributionSource = MetricAttribution.AddMember("eventAttributionSource", _EventAttributionSource)
-
-	Event_eventId = Event.AddMember("eventId", _StringType)
-
-	Event_eventType = Event.AddMember("eventType", _StringType)
-
-	Event_eventValue = Event.AddMember("eventValue", _FloatType)
-
-	Event_itemId = Event.AddMember("itemId", _ItemId)
-
-	Event_properties = Event.AddMember("properties", _SynthesizedJsonEventPropertiesJSON)
-
-	Event_sentAt = Event.AddMember("sentAt", _Date)
-
-	Event_recommendationId = Event.AddMember("recommendationId", _RecommendationId)
-
-	Event_impression = Event.AddMember("impression", _Impression)
-
-	Event_metricAttribution = Event.AddMember("metricAttribution", MetricAttribution)
-
-	_EventList_member = _EventList.AddMember("member", Event)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _ErrorMessage)
-
-	Item_itemId = Item.AddMember("itemId", _StringType)
-
-	Item_properties = Item.AddMember("properties", _SynthesizedJsonItemProperties)
-
-	_ItemList_member = _ItemList.AddMember("member", Item)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	User_userId = User.AddMember("userId", _StringType)
-
-	User_properties = User.AddMember("properties", _SynthesizedJsonUserProperties)
-
-	_UserList_member = _UserList.AddMember("member", User)
-
-	PutActionInteractionsRequest_trackingId = PutActionInteractionsRequest.AddMember("trackingId", _StringType)
-
-	PutActionInteractionsRequest_actionInteractions = PutActionInteractionsRequest.AddMember("actionInteractions", _ActionInteractionsList)
-
-	PutActionsRequest_datasetArn = PutActionsRequest.AddMember("datasetArn", _Arn)
-
-	PutActionsRequest_actions = PutActionsRequest.AddMember("actions", _ActionList)
-
-	PutEventsRequest_trackingId = PutEventsRequest.AddMember("trackingId", _StringType)
-
-	PutEventsRequest_userId = PutEventsRequest.AddMember("userId", _UserId)
-
-	PutEventsRequest_sessionId = PutEventsRequest.AddMember("sessionId", _StringType)
-
-	PutEventsRequest_eventList = PutEventsRequest.AddMember("eventList", _EventList)
-
-	PutItemsRequest_datasetArn = PutItemsRequest.AddMember("datasetArn", _Arn)
-
-	PutItemsRequest_items = PutItemsRequest.AddMember("items", _ItemList)
-
-	PutUsersRequest_datasetArn = PutUsersRequest.AddMember("datasetArn", _Arn)
-
-	PutUsersRequest_users = PutUsersRequest.AddMember("users", _UserList)
-
-}
+var AmazonPersonalizeEvents = &smithy.ServiceSchema{Schema: &s_AmazonPersonalizeEvents, Version: "2018-03-22"}

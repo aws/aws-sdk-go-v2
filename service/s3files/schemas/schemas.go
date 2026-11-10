@@ -4,1470 +4,1453 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateAccessPoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eCreateAccessPoint                                           smithy.SchemaExtensions
+	eCreateFileSystem                                            smithy.SchemaExtensions
+	eCreateMountTarget                                           smithy.SchemaExtensions
+	eDeleteAccessPoint                                           smithy.SchemaExtensions
+	eDeleteFileSystem                                            smithy.SchemaExtensions
+	eDeleteFileSystemPolicy                                      smithy.SchemaExtensions
+	eDeleteMountTarget                                           smithy.SchemaExtensions
+	eGetAccessPoint                                              smithy.SchemaExtensions
+	eGetFileSystem                                               smithy.SchemaExtensions
+	eGetFileSystemPolicy                                         smithy.SchemaExtensions
+	eGetMountTarget                                              smithy.SchemaExtensions
+	eGetSynchronizationConfiguration                             smithy.SchemaExtensions
+	eListAccessPoints                                            smithy.SchemaExtensions
+	eListFileSystems                                             smithy.SchemaExtensions
+	eListMountTargets                                            smithy.SchemaExtensions
+	eListTagsForResource                                         smithy.SchemaExtensions
+	ePutFileSystemPolicy                                         smithy.SchemaExtensions
+	ePutSynchronizationConfiguration                             smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateMountTarget                                           smithy.SchemaExtensions
+	e_S3Files                                                    smithy.SchemaExtensions
+	e_AccessPointArn                                             smithy.SchemaExtensions
+	e_AccessPointId                                              smithy.SchemaExtensions
+	e_AccessPoints                                               smithy.SchemaExtensions
+	e_AccessPoints_member                                        smithy.SchemaExtensions
+	e_AvailabilityZoneId                                         smithy.SchemaExtensions
+	e_AwsAccountId                                               smithy.SchemaExtensions
+	e_BucketArn                                                  smithy.SchemaExtensions
+	e_ClientToken                                                smithy.SchemaExtensions
+	eConflictException                                           smithy.SchemaExtensions
+	eConflictException_errorCode                                 smithy.SchemaExtensions
+	eConflictException_message                                   smithy.SchemaExtensions
+	eConflictException_resourceId                                smithy.SchemaExtensions
+	eConflictException_resourceType                              smithy.SchemaExtensions
+	eCreationPermissions                                         smithy.SchemaExtensions
+	eCreationPermissions_ownerUid                                smithy.SchemaExtensions
+	eCreationPermissions_ownerGid                                smithy.SchemaExtensions
+	eCreationPermissions_permissions                             smithy.SchemaExtensions
+	e_CreationToken                                              smithy.SchemaExtensions
+	e_ErrorCode                                                  smithy.SchemaExtensions
+	eExpirationDataRule                                          smithy.SchemaExtensions
+	eExpirationDataRule_daysAfterLastAccess                      smithy.SchemaExtensions
+	e_ExpirationDataRuleList                                     smithy.SchemaExtensions
+	e_ExpirationDataRuleList_member                              smithy.SchemaExtensions
+	e_FileSystemArn                                              smithy.SchemaExtensions
+	e_FileSystemId                                               smithy.SchemaExtensions
+	e_FileSystems                                                smithy.SchemaExtensions
+	e_FileSystems_member                                         smithy.SchemaExtensions
+	e_Gid                                                        smithy.SchemaExtensions
+	eImportDataRule                                              smithy.SchemaExtensions
+	eImportDataRule_prefix                                       smithy.SchemaExtensions
+	eImportDataRule_trigger                                      smithy.SchemaExtensions
+	eImportDataRule_sizeLessThan                                 smithy.SchemaExtensions
+	e_ImportDataRuleList                                         smithy.SchemaExtensions
+	e_ImportDataRuleList_member                                  smithy.SchemaExtensions
+	eImportTrigger                                               smithy.SchemaExtensions
+	eImportTrigger_ON_DIRECTORY_FIRST_ACCESS                     smithy.SchemaExtensions
+	eImportTrigger_ON_FILE_ACCESS                                smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_errorCode                           smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	eIpAddressType                                               smithy.SchemaExtensions
+	eIpAddressType_IPV4_ONLY                                     smithy.SchemaExtensions
+	eIpAddressType_IPV6_ONLY                                     smithy.SchemaExtensions
+	eIpAddressType_DUAL_STACK                                    smithy.SchemaExtensions
+	e_Ipv4Address                                                smithy.SchemaExtensions
+	e_Ipv6Address                                                smithy.SchemaExtensions
+	e_KmsKeyId                                                   smithy.SchemaExtensions
+	eLifeCycleState                                              smithy.SchemaExtensions
+	eLifeCycleState_available                                    smithy.SchemaExtensions
+	eLifeCycleState_creating                                     smithy.SchemaExtensions
+	eLifeCycleState_deleting                                     smithy.SchemaExtensions
+	eLifeCycleState_deleted                                      smithy.SchemaExtensions
+	eLifeCycleState_error                                        smithy.SchemaExtensions
+	eLifeCycleState_updating                                     smithy.SchemaExtensions
+	eLifeCycleState_misconfigured                                smithy.SchemaExtensions
+	eListAccessPointsDescription                                 smithy.SchemaExtensions
+	eListAccessPointsDescription_accessPointArn                  smithy.SchemaExtensions
+	eListAccessPointsDescription_accessPointId                   smithy.SchemaExtensions
+	eListAccessPointsDescription_fileSystemId                    smithy.SchemaExtensions
+	eListAccessPointsDescription_status                          smithy.SchemaExtensions
+	eListAccessPointsDescription_ownerId                         smithy.SchemaExtensions
+	eListAccessPointsDescription_posixUser                       smithy.SchemaExtensions
+	eListAccessPointsDescription_rootDirectory                   smithy.SchemaExtensions
+	eListAccessPointsDescription_name                            smithy.SchemaExtensions
+	eListFileSystemsDescription                                  smithy.SchemaExtensions
+	eListFileSystemsDescription_creationTime                     smithy.SchemaExtensions
+	eListFileSystemsDescription_fileSystemArn                    smithy.SchemaExtensions
+	eListFileSystemsDescription_fileSystemId                     smithy.SchemaExtensions
+	eListFileSystemsDescription_name                             smithy.SchemaExtensions
+	eListFileSystemsDescription_bucket                           smithy.SchemaExtensions
+	eListFileSystemsDescription_status                           smithy.SchemaExtensions
+	eListFileSystemsDescription_statusMessage                    smithy.SchemaExtensions
+	eListFileSystemsDescription_roleArn                          smithy.SchemaExtensions
+	eListFileSystemsDescription_ownerId                          smithy.SchemaExtensions
+	eListMountTargetsDescription                                 smithy.SchemaExtensions
+	eListMountTargetsDescription_availabilityZoneId              smithy.SchemaExtensions
+	eListMountTargetsDescription_fileSystemId                    smithy.SchemaExtensions
+	eListMountTargetsDescription_ipv4Address                     smithy.SchemaExtensions
+	eListMountTargetsDescription_ipv6Address                     smithy.SchemaExtensions
+	eListMountTargetsDescription_status                          smithy.SchemaExtensions
+	eListMountTargetsDescription_statusMessage                   smithy.SchemaExtensions
+	eListMountTargetsDescription_mountTargetId                   smithy.SchemaExtensions
+	eListMountTargetsDescription_networkInterfaceId              smithy.SchemaExtensions
+	eListMountTargetsDescription_ownerId                         smithy.SchemaExtensions
+	eListMountTargetsDescription_subnetId                        smithy.SchemaExtensions
+	eListMountTargetsDescription_vpcId                           smithy.SchemaExtensions
+	e_MountTargetId                                              smithy.SchemaExtensions
+	e_MountTargets                                               smithy.SchemaExtensions
+	e_MountTargets_member                                        smithy.SchemaExtensions
+	e_NetworkInterfaceId                                         smithy.SchemaExtensions
+	e_OwnerGid                                                   smithy.SchemaExtensions
+	e_OwnerUid                                                   smithy.SchemaExtensions
+	e_Path                                                       smithy.SchemaExtensions
+	e_Permissions                                                smithy.SchemaExtensions
+	ePosixUser                                                   smithy.SchemaExtensions
+	ePosixUser_uid                                               smithy.SchemaExtensions
+	ePosixUser_gid                                               smithy.SchemaExtensions
+	ePosixUser_secondaryGids                                     smithy.SchemaExtensions
+	e_ResourceId                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_errorCode                         smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	e_RoleArn                                                    smithy.SchemaExtensions
+	eRootDirectory                                               smithy.SchemaExtensions
+	eRootDirectory_path                                          smithy.SchemaExtensions
+	eRootDirectory_creationPermissions                           smithy.SchemaExtensions
+	e_SecondaryGids                                              smithy.SchemaExtensions
+	e_SecondaryGids_member                                       smithy.SchemaExtensions
+	e_SecurityGroup                                              smithy.SchemaExtensions
+	e_SecurityGroups                                             smithy.SchemaExtensions
+	e_SecurityGroups_member                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_errorCode                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                       smithy.SchemaExtensions
+	e_StatusMessage                                              smithy.SchemaExtensions
+	e_SubnetId                                                   smithy.SchemaExtensions
+	eTag                                                         smithy.SchemaExtensions
+	eTag_key                                                     smithy.SchemaExtensions
+	eTag_value                                                   smithy.SchemaExtensions
+	e_TagKey                                                     smithy.SchemaExtensions
+	e_TagKeys                                                    smithy.SchemaExtensions
+	e_TagKeys_member                                             smithy.SchemaExtensions
+	e_TagList                                                    smithy.SchemaExtensions
+	e_TagList_member                                             smithy.SchemaExtensions
+	e_TagValue                                                   smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_errorCode                               smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	e_Uid                                                        smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_errorCode                               smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	e_VpcId                                                      smithy.SchemaExtensions
+	eCreateAccessPointRequest                                    smithy.SchemaExtensions
+	eCreateAccessPointRequest_clientToken                        smithy.SchemaExtensions
+	eCreateAccessPointRequest_tags                               smithy.SchemaExtensions
+	eCreateAccessPointRequest_fileSystemId                       smithy.SchemaExtensions
+	eCreateAccessPointRequest_posixUser                          smithy.SchemaExtensions
+	eCreateAccessPointRequest_rootDirectory                      smithy.SchemaExtensions
+	eCreateAccessPointResponse                                   smithy.SchemaExtensions
+	eCreateAccessPointResponse_accessPointArn                    smithy.SchemaExtensions
+	eCreateAccessPointResponse_accessPointId                     smithy.SchemaExtensions
+	eCreateAccessPointResponse_clientToken                       smithy.SchemaExtensions
+	eCreateAccessPointResponse_fileSystemId                      smithy.SchemaExtensions
+	eCreateAccessPointResponse_status                            smithy.SchemaExtensions
+	eCreateAccessPointResponse_ownerId                           smithy.SchemaExtensions
+	eCreateAccessPointResponse_posixUser                         smithy.SchemaExtensions
+	eCreateAccessPointResponse_rootDirectory                     smithy.SchemaExtensions
+	eCreateAccessPointResponse_tags                              smithy.SchemaExtensions
+	eCreateAccessPointResponse_name                              smithy.SchemaExtensions
+	eCreateFileSystemRequest                                     smithy.SchemaExtensions
+	eCreateFileSystemRequest_bucket                              smithy.SchemaExtensions
+	eCreateFileSystemRequest_prefix                              smithy.SchemaExtensions
+	eCreateFileSystemRequest_clientToken                         smithy.SchemaExtensions
+	eCreateFileSystemRequest_kmsKeyId                            smithy.SchemaExtensions
+	eCreateFileSystemRequest_roleArn                             smithy.SchemaExtensions
+	eCreateFileSystemRequest_tags                                smithy.SchemaExtensions
+	eCreateFileSystemRequest_acceptBucketWarning                 smithy.SchemaExtensions
+	eCreateFileSystemResponse                                    smithy.SchemaExtensions
+	eCreateFileSystemResponse_creationTime                       smithy.SchemaExtensions
+	eCreateFileSystemResponse_fileSystemArn                      smithy.SchemaExtensions
+	eCreateFileSystemResponse_fileSystemId                       smithy.SchemaExtensions
+	eCreateFileSystemResponse_bucket                             smithy.SchemaExtensions
+	eCreateFileSystemResponse_prefix                             smithy.SchemaExtensions
+	eCreateFileSystemResponse_clientToken                        smithy.SchemaExtensions
+	eCreateFileSystemResponse_kmsKeyId                           smithy.SchemaExtensions
+	eCreateFileSystemResponse_status                             smithy.SchemaExtensions
+	eCreateFileSystemResponse_statusMessage                      smithy.SchemaExtensions
+	eCreateFileSystemResponse_roleArn                            smithy.SchemaExtensions
+	eCreateFileSystemResponse_ownerId                            smithy.SchemaExtensions
+	eCreateFileSystemResponse_tags                               smithy.SchemaExtensions
+	eCreateFileSystemResponse_name                               smithy.SchemaExtensions
+	eCreateMountTargetRequest                                    smithy.SchemaExtensions
+	eCreateMountTargetRequest_fileSystemId                       smithy.SchemaExtensions
+	eCreateMountTargetRequest_subnetId                           smithy.SchemaExtensions
+	eCreateMountTargetRequest_ipv4Address                        smithy.SchemaExtensions
+	eCreateMountTargetRequest_ipv6Address                        smithy.SchemaExtensions
+	eCreateMountTargetRequest_ipAddressType                      smithy.SchemaExtensions
+	eCreateMountTargetRequest_securityGroups                     smithy.SchemaExtensions
+	eCreateMountTargetResponse                                   smithy.SchemaExtensions
+	eCreateMountTargetResponse_availabilityZoneId                smithy.SchemaExtensions
+	eCreateMountTargetResponse_ownerId                           smithy.SchemaExtensions
+	eCreateMountTargetResponse_mountTargetId                     smithy.SchemaExtensions
+	eCreateMountTargetResponse_fileSystemId                      smithy.SchemaExtensions
+	eCreateMountTargetResponse_subnetId                          smithy.SchemaExtensions
+	eCreateMountTargetResponse_ipv4Address                       smithy.SchemaExtensions
+	eCreateMountTargetResponse_ipv6Address                       smithy.SchemaExtensions
+	eCreateMountTargetResponse_networkInterfaceId                smithy.SchemaExtensions
+	eCreateMountTargetResponse_vpcId                             smithy.SchemaExtensions
+	eCreateMountTargetResponse_securityGroups                    smithy.SchemaExtensions
+	eCreateMountTargetResponse_status                            smithy.SchemaExtensions
+	eCreateMountTargetResponse_statusMessage                     smithy.SchemaExtensions
+	eDeleteAccessPointRequest                                    smithy.SchemaExtensions
+	eDeleteAccessPointRequest_accessPointId                      smithy.SchemaExtensions
+	eDeleteFileSystemRequest                                     smithy.SchemaExtensions
+	eDeleteFileSystemRequest_fileSystemId                        smithy.SchemaExtensions
+	eDeleteFileSystemRequest_forceDelete                         smithy.SchemaExtensions
+	eDeleteFileSystemPolicyRequest                               smithy.SchemaExtensions
+	eDeleteFileSystemPolicyRequest_fileSystemId                  smithy.SchemaExtensions
+	eDeleteMountTargetRequest                                    smithy.SchemaExtensions
+	eDeleteMountTargetRequest_mountTargetId                      smithy.SchemaExtensions
+	eGetAccessPointRequest                                       smithy.SchemaExtensions
+	eGetAccessPointRequest_accessPointId                         smithy.SchemaExtensions
+	eGetAccessPointResponse                                      smithy.SchemaExtensions
+	eGetAccessPointResponse_accessPointArn                       smithy.SchemaExtensions
+	eGetAccessPointResponse_accessPointId                        smithy.SchemaExtensions
+	eGetAccessPointResponse_clientToken                          smithy.SchemaExtensions
+	eGetAccessPointResponse_fileSystemId                         smithy.SchemaExtensions
+	eGetAccessPointResponse_status                               smithy.SchemaExtensions
+	eGetAccessPointResponse_ownerId                              smithy.SchemaExtensions
+	eGetAccessPointResponse_posixUser                            smithy.SchemaExtensions
+	eGetAccessPointResponse_rootDirectory                        smithy.SchemaExtensions
+	eGetAccessPointResponse_tags                                 smithy.SchemaExtensions
+	eGetAccessPointResponse_name                                 smithy.SchemaExtensions
+	eGetFileSystemRequest                                        smithy.SchemaExtensions
+	eGetFileSystemRequest_fileSystemId                           smithy.SchemaExtensions
+	eGetFileSystemResponse                                       smithy.SchemaExtensions
+	eGetFileSystemResponse_creationTime                          smithy.SchemaExtensions
+	eGetFileSystemResponse_fileSystemArn                         smithy.SchemaExtensions
+	eGetFileSystemResponse_fileSystemId                          smithy.SchemaExtensions
+	eGetFileSystemResponse_bucket                                smithy.SchemaExtensions
+	eGetFileSystemResponse_prefix                                smithy.SchemaExtensions
+	eGetFileSystemResponse_clientToken                           smithy.SchemaExtensions
+	eGetFileSystemResponse_kmsKeyId                              smithy.SchemaExtensions
+	eGetFileSystemResponse_status                                smithy.SchemaExtensions
+	eGetFileSystemResponse_statusMessage                         smithy.SchemaExtensions
+	eGetFileSystemResponse_roleArn                               smithy.SchemaExtensions
+	eGetFileSystemResponse_ownerId                               smithy.SchemaExtensions
+	eGetFileSystemResponse_tags                                  smithy.SchemaExtensions
+	eGetFileSystemResponse_name                                  smithy.SchemaExtensions
+	eGetFileSystemPolicyRequest                                  smithy.SchemaExtensions
+	eGetFileSystemPolicyRequest_fileSystemId                     smithy.SchemaExtensions
+	eGetFileSystemPolicyResponse                                 smithy.SchemaExtensions
+	eGetFileSystemPolicyResponse_fileSystemId                    smithy.SchemaExtensions
+	eGetFileSystemPolicyResponse_policy                          smithy.SchemaExtensions
+	eGetMountTargetRequest                                       smithy.SchemaExtensions
+	eGetMountTargetRequest_mountTargetId                         smithy.SchemaExtensions
+	eGetMountTargetResponse                                      smithy.SchemaExtensions
+	eGetMountTargetResponse_availabilityZoneId                   smithy.SchemaExtensions
+	eGetMountTargetResponse_ownerId                              smithy.SchemaExtensions
+	eGetMountTargetResponse_mountTargetId                        smithy.SchemaExtensions
+	eGetMountTargetResponse_fileSystemId                         smithy.SchemaExtensions
+	eGetMountTargetResponse_subnetId                             smithy.SchemaExtensions
+	eGetMountTargetResponse_ipv4Address                          smithy.SchemaExtensions
+	eGetMountTargetResponse_ipv6Address                          smithy.SchemaExtensions
+	eGetMountTargetResponse_networkInterfaceId                   smithy.SchemaExtensions
+	eGetMountTargetResponse_vpcId                                smithy.SchemaExtensions
+	eGetMountTargetResponse_securityGroups                       smithy.SchemaExtensions
+	eGetMountTargetResponse_status                               smithy.SchemaExtensions
+	eGetMountTargetResponse_statusMessage                        smithy.SchemaExtensions
+	eGetSynchronizationConfigurationRequest                      smithy.SchemaExtensions
+	eGetSynchronizationConfigurationRequest_fileSystemId         smithy.SchemaExtensions
+	eGetSynchronizationConfigurationResponse                     smithy.SchemaExtensions
+	eGetSynchronizationConfigurationResponse_latestVersionNumber smithy.SchemaExtensions
+	eGetSynchronizationConfigurationResponse_importDataRules     smithy.SchemaExtensions
+	eGetSynchronizationConfigurationResponse_expirationDataRules smithy.SchemaExtensions
+	eListAccessPointsRequest                                     smithy.SchemaExtensions
+	eListAccessPointsRequest_fileSystemId                        smithy.SchemaExtensions
+	eListAccessPointsRequest_maxResults                          smithy.SchemaExtensions
+	eListAccessPointsRequest_nextToken                           smithy.SchemaExtensions
+	eListAccessPointsResponse                                    smithy.SchemaExtensions
+	eListAccessPointsResponse_nextToken                          smithy.SchemaExtensions
+	eListAccessPointsResponse_accessPoints                       smithy.SchemaExtensions
+	eListFileSystemsRequest                                      smithy.SchemaExtensions
+	eListFileSystemsRequest_bucket                               smithy.SchemaExtensions
+	eListFileSystemsRequest_maxResults                           smithy.SchemaExtensions
+	eListFileSystemsRequest_nextToken                            smithy.SchemaExtensions
+	eListFileSystemsResponse                                     smithy.SchemaExtensions
+	eListFileSystemsResponse_nextToken                           smithy.SchemaExtensions
+	eListFileSystemsResponse_fileSystems                         smithy.SchemaExtensions
+	eListMountTargetsRequest                                     smithy.SchemaExtensions
+	eListMountTargetsRequest_fileSystemId                        smithy.SchemaExtensions
+	eListMountTargetsRequest_accessPointId                       smithy.SchemaExtensions
+	eListMountTargetsRequest_maxResults                          smithy.SchemaExtensions
+	eListMountTargetsRequest_nextToken                           smithy.SchemaExtensions
+	eListMountTargetsResponse                                    smithy.SchemaExtensions
+	eListMountTargetsResponse_nextToken                          smithy.SchemaExtensions
+	eListMountTargetsResponse_mountTargets                       smithy.SchemaExtensions
+	eListTagsForResourceRequest                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceId                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_maxResults                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_nextToken                        smithy.SchemaExtensions
+	eListTagsForResourceResponse                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                            smithy.SchemaExtensions
+	eListTagsForResourceResponse_nextToken                       smithy.SchemaExtensions
+	ePutFileSystemPolicyRequest                                  smithy.SchemaExtensions
+	ePutFileSystemPolicyRequest_fileSystemId                     smithy.SchemaExtensions
+	ePutFileSystemPolicyRequest_policy                           smithy.SchemaExtensions
+	ePutFileSystemPolicyResponse                                 smithy.SchemaExtensions
+	ePutSynchronizationConfigurationRequest                      smithy.SchemaExtensions
+	ePutSynchronizationConfigurationRequest_fileSystemId         smithy.SchemaExtensions
+	ePutSynchronizationConfigurationRequest_latestVersionNumber  smithy.SchemaExtensions
+	ePutSynchronizationConfigurationRequest_importDataRules      smithy.SchemaExtensions
+	ePutSynchronizationConfigurationRequest_expirationDataRules  smithy.SchemaExtensions
+	ePutSynchronizationConfigurationResponse                     smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_resourceId                               smithy.SchemaExtensions
+	eTagResourceRequest_tags                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_resourceId                             smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                smithy.SchemaExtensions
+	eUpdateMountTargetRequest                                    smithy.SchemaExtensions
+	eUpdateMountTargetRequest_mountTargetId                      smithy.SchemaExtensions
+	eUpdateMountTargetRequest_securityGroups                     smithy.SchemaExtensions
+	eUpdateMountTargetResponse                                   smithy.SchemaExtensions
+	eUpdateMountTargetResponse_availabilityZoneId                smithy.SchemaExtensions
+	eUpdateMountTargetResponse_ownerId                           smithy.SchemaExtensions
+	eUpdateMountTargetResponse_mountTargetId                     smithy.SchemaExtensions
+	eUpdateMountTargetResponse_fileSystemId                      smithy.SchemaExtensions
+	eUpdateMountTargetResponse_subnetId                          smithy.SchemaExtensions
+	eUpdateMountTargetResponse_ipv4Address                       smithy.SchemaExtensions
+	eUpdateMountTargetResponse_ipv6Address                       smithy.SchemaExtensions
+	eUpdateMountTargetResponse_networkInterfaceId                smithy.SchemaExtensions
+	eUpdateMountTargetResponse_vpcId                             smithy.SchemaExtensions
+	eUpdateMountTargetResponse_securityGroups                    smithy.SchemaExtensions
+	eUpdateMountTargetResponse_status                            smithy.SchemaExtensions
+	eUpdateMountTargetResponse_statusMessage                     smithy.SchemaExtensions
+)
+
+var (
+	iCreateAccessPoint                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateAccessPoint"}
+	iCreateFileSystem                        = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateFileSystem"}
+	iCreateMountTarget                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateMountTarget"}
+	iDeleteAccessPoint                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteAccessPoint"}
+	iDeleteFileSystem                        = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteFileSystem"}
+	iDeleteFileSystemPolicy                  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteFileSystemPolicy"}
+	iDeleteMountTarget                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteMountTarget"}
+	iGetAccessPoint                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetAccessPoint"}
+	iGetFileSystem                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystem"}
+	iGetFileSystemPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystemPolicy"}
+	iGetMountTarget                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetMountTarget"}
+	iGetSynchronizationConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetSynchronizationConfiguration"}
+	iListAccessPoints                        = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListAccessPoints"}
+	iListFileSystems                         = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListFileSystems"}
+	iListMountTargets                        = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListMountTargets"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListTagsForResource"}
+	iPutFileSystemPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutFileSystemPolicy"}
+	iPutSynchronizationConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutSynchronizationConfiguration"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "UntagResource"}
+	iUpdateMountTarget                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "UpdateMountTarget"}
+	i_S3Files                                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "S3Files"}
+	i_AccessPointArn                         = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "AccessPointArn"}
+	i_AccessPointId                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "AccessPointId"}
+	i_AccessPoints                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "AccessPoints"}
+	i_AvailabilityZoneId                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "AvailabilityZoneId"}
+	i_AwsAccountId                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "AwsAccountId"}
+	i_BucketArn                              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "BucketArn"}
+	i_ClientToken                            = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ClientToken"}
+	iConflictException                       = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ConflictException"}
+	iCreationPermissions                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreationPermissions"}
+	i_CreationToken                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreationToken"}
+	i_ErrorCode                              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ErrorCode"}
+	iExpirationDataRule                      = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ExpirationDataRule"}
+	i_ExpirationDataRuleList                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ExpirationDataRuleList"}
+	i_FileSystemArn                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "FileSystemArn"}
+	i_FileSystemId                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "FileSystemId"}
+	i_FileSystems                            = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "FileSystems"}
+	i_Gid                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Gid"}
+	iImportDataRule                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ImportDataRule"}
+	i_ImportDataRuleList                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ImportDataRuleList"}
+	iImportTrigger                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ImportTrigger"}
+	iInternalServerException                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "InternalServerException"}
+	iIpAddressType                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "IpAddressType"}
+	i_Ipv4Address                            = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Ipv4Address"}
+	i_Ipv6Address                            = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Ipv6Address"}
+	i_KmsKeyId                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "KmsKeyId"}
+	iLifeCycleState                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "LifeCycleState"}
+	iListAccessPointsDescription             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListAccessPointsDescription"}
+	iListFileSystemsDescription              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListFileSystemsDescription"}
+	iListMountTargetsDescription             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListMountTargetsDescription"}
+	i_MountTargetId                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "MountTargetId"}
+	i_MountTargets                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "MountTargets"}
+	i_NetworkInterfaceId                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "NetworkInterfaceId"}
+	i_OwnerGid                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "OwnerGid"}
+	i_OwnerUid                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "OwnerUid"}
+	i_Path                                   = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Path"}
+	i_Permissions                            = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Permissions"}
+	iPosixUser                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PosixUser"}
+	i_ResourceId                             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ResourceId"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ResourceNotFoundException"}
+	i_RoleArn                                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "RoleArn"}
+	iRootDirectory                           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "RootDirectory"}
+	i_SecondaryGids                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "SecondaryGids"}
+	i_SecurityGroup                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "SecurityGroup"}
+	i_SecurityGroups                         = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "SecurityGroups"}
+	iServiceQuotaExceededException           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ServiceQuotaExceededException"}
+	i_StatusMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "StatusMessage"}
+	i_SubnetId                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "SubnetId"}
+	iTag                                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Tag"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagKey"}
+	i_TagKeys                                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagKeys"}
+	i_TagList                                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagList"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagValue"}
+	iThrottlingException                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ThrottlingException"}
+	i_Uid                                    = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "Uid"}
+	iValidationException                     = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ValidationException"}
+	i_VpcId                                  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "VpcId"}
+	iCreateAccessPointRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateAccessPointRequest"}
+	iCreateAccessPointResponse               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateAccessPointResponse"}
+	iCreateFileSystemRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateFileSystemRequest"}
+	iCreateFileSystemResponse                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateFileSystemResponse"}
+	iCreateMountTargetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateMountTargetRequest"}
+	iCreateMountTargetResponse               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "CreateMountTargetResponse"}
+	iDeleteAccessPointRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteAccessPointRequest"}
+	iDeleteFileSystemRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteFileSystemRequest"}
+	iDeleteFileSystemPolicyRequest           = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteFileSystemPolicyRequest"}
+	iDeleteMountTargetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "DeleteMountTargetRequest"}
+	iGetAccessPointRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetAccessPointRequest"}
+	iGetAccessPointResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetAccessPointResponse"}
+	iGetFileSystemRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystemRequest"}
+	iGetFileSystemResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystemResponse"}
+	iGetFileSystemPolicyRequest              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystemPolicyRequest"}
+	iGetFileSystemPolicyResponse             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetFileSystemPolicyResponse"}
+	iGetMountTargetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetMountTargetRequest"}
+	iGetMountTargetResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetMountTargetResponse"}
+	iGetSynchronizationConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetSynchronizationConfigurationRequest"}
+	iGetSynchronizationConfigurationResponse = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "GetSynchronizationConfigurationResponse"}
+	iListAccessPointsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListAccessPointsRequest"}
+	iListAccessPointsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListAccessPointsResponse"}
+	iListFileSystemsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListFileSystemsRequest"}
+	iListFileSystemsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListFileSystemsResponse"}
+	iListMountTargetsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListMountTargetsRequest"}
+	iListMountTargetsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListMountTargetsResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "ListTagsForResourceResponse"}
+	iPutFileSystemPolicyRequest              = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutFileSystemPolicyRequest"}
+	iPutFileSystemPolicyResponse             = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutFileSystemPolicyResponse"}
+	iPutSynchronizationConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutSynchronizationConfigurationRequest"}
+	iPutSynchronizationConfigurationResponse = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "PutSynchronizationConfigurationResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "TagResourceRequest"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "UntagResourceRequest"}
+	iUpdateMountTargetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "UpdateMountTargetRequest"}
+	iUpdateMountTargetResponse               = smithy.ShapeName{Namespace: "com.amazonaws.s3files", Name: "UpdateMountTargetResponse"}
+	pString                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/access-points",
-	Code: 200})
-
-var CreateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateFileSystem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/file-systems",
-	Code: 201})
-
-var CreateMountTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateMountTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/mount-targets",
-	Code: 200})
-
-var DeleteAccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteAccessPoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/access-points/{accessPointId}",
-	Code: 204})
-
-var DeleteFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteFileSystem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/file-systems/{fileSystemId}",
-	Code: 204})
-
-var DeleteFileSystemPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteFileSystemPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/file-systems/{fileSystemId}/policy",
-	Code: 204})
-
-var DeleteMountTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteMountTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/mount-targets/{mountTargetId}",
-	Code: 204})
-
-var GetAccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetAccessPoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/access-points/{accessPointId}",
-	Code: 200})
-
-var GetFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/file-systems/{fileSystemId}",
-	Code: 200})
-
-var GetFileSystemPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystemPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/file-systems/{fileSystemId}/policy",
-	Code: 200})
-
-var GetMountTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetMountTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/mount-targets/{mountTargetId}",
-	Code: 200})
-
-var GetSynchronizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetSynchronizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/file-systems/{fileSystemId}/synchronization-configuration",
-	Code: 200})
-
-var ListAccessPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListAccessPoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/access-points",
-	Code: 200})
-
-var ListFileSystems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListFileSystems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/file-systems",
-	Code: 200})
-
-var ListMountTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListMountTargets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/mount-targets",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource-tags/{resourceId}",
-	Code: 200})
-
-var PutFileSystemPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutFileSystemPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/file-systems/{fileSystemId}/policy",
-	Code: 200})
-
-var PutSynchronizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutSynchronizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/file-systems/{fileSystemId}/synchronization-configuration",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resource-tags/{resourceId}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resource-tags/{resourceId}",
-	Code: 200})
-
-var UpdateMountTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "UpdateMountTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/mount-targets/{mountTargetId}",
-	Code: 200})
-
-var _S3Files = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "S3Files",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "s3files"})
-
-var S3Files = smithy.NewServiceSchema(_S3Files, "2025-05-05")
-
-var _AccessPointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "AccessPointArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessPointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "AccessPointId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "AccessPoints",
-}, smithy.ShapeTypeList, 1)
-var _AccessPoints_member *smithy.Schema
-
-var _AvailabilityZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "AvailabilityZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_errorCode *smithy.Schema
-
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CreationPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreationPermissions",
-}, smithy.ShapeTypeStructure, 3)
-var CreationPermissions_ownerUid *smithy.Schema
-
-var CreationPermissions_ownerGid *smithy.Schema
-
-var CreationPermissions_permissions *smithy.Schema
-
-var _CreationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var ExpirationDataRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ExpirationDataRule",
-}, smithy.ShapeTypeStructure, 1)
-var ExpirationDataRule_daysAfterLastAccess *smithy.Schema
-
-var _ExpirationDataRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ExpirationDataRuleList",
-}, smithy.ShapeTypeList, 1)
-var _ExpirationDataRuleList_member *smithy.Schema
-
-var _FileSystemArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "FileSystemArn",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "FileSystemId",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "FileSystems",
-}, smithy.ShapeTypeList, 1)
-var _FileSystems_member *smithy.Schema
-
-var _Gid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Gid",
-}, smithy.ShapeTypeLong, 0)
-
-var ImportDataRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ImportDataRule",
-}, smithy.ShapeTypeStructure, 3)
-var ImportDataRule_prefix *smithy.Schema
-
-var ImportDataRule_trigger *smithy.Schema
-
-var ImportDataRule_sizeLessThan *smithy.Schema
-
-var _ImportDataRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ImportDataRuleList",
-}, smithy.ShapeTypeList, 1)
-var _ImportDataRuleList_member *smithy.Schema
-
-var ImportTrigger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ImportTrigger",
-}, smithy.ShapeTypeEnum, 2)
-var ImportTrigger_ON_DIRECTORY_FIRST_ACCESS *smithy.Schema
-
-var ImportTrigger_ON_FILE_ACCESS *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_errorCode *smithy.Schema
-
-var InternalServerException_message *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 3)
-var IpAddressType_IPV4_ONLY *smithy.Schema
-
-var IpAddressType_IPV6_ONLY *smithy.Schema
-
-var IpAddressType_DUAL_STACK *smithy.Schema
-
-var _Ipv4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Ipv4Address",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv6Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Ipv6Address",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var LifeCycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "LifeCycleState",
-}, smithy.ShapeTypeEnum, 7)
-var LifeCycleState_available *smithy.Schema
-
-var LifeCycleState_creating *smithy.Schema
-
-var LifeCycleState_deleting *smithy.Schema
-
-var LifeCycleState_deleted *smithy.Schema
-
-var LifeCycleState_error *smithy.Schema
-
-var LifeCycleState_updating *smithy.Schema
-
-var LifeCycleState_misconfigured *smithy.Schema
-
-var ListAccessPointsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListAccessPointsDescription",
-}, smithy.ShapeTypeStructure, 8)
-var ListAccessPointsDescription_accessPointArn *smithy.Schema
-
-var ListAccessPointsDescription_accessPointId *smithy.Schema
-
-var ListAccessPointsDescription_fileSystemId *smithy.Schema
-
-var ListAccessPointsDescription_status *smithy.Schema
-
-var ListAccessPointsDescription_ownerId *smithy.Schema
-
-var ListAccessPointsDescription_posixUser *smithy.Schema
-
-var ListAccessPointsDescription_rootDirectory *smithy.Schema
-
-var ListAccessPointsDescription_name *smithy.Schema
-
-var ListFileSystemsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListFileSystemsDescription",
-}, smithy.ShapeTypeStructure, 9)
-var ListFileSystemsDescription_creationTime *smithy.Schema
-
-var ListFileSystemsDescription_fileSystemArn *smithy.Schema
-
-var ListFileSystemsDescription_fileSystemId *smithy.Schema
-
-var ListFileSystemsDescription_name *smithy.Schema
-
-var ListFileSystemsDescription_bucket *smithy.Schema
-
-var ListFileSystemsDescription_status *smithy.Schema
-
-var ListFileSystemsDescription_statusMessage *smithy.Schema
-
-var ListFileSystemsDescription_roleArn *smithy.Schema
-
-var ListFileSystemsDescription_ownerId *smithy.Schema
-
-var ListMountTargetsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListMountTargetsDescription",
-}, smithy.ShapeTypeStructure, 11)
-var ListMountTargetsDescription_availabilityZoneId *smithy.Schema
-
-var ListMountTargetsDescription_fileSystemId *smithy.Schema
-
-var ListMountTargetsDescription_ipv4Address *smithy.Schema
-
-var ListMountTargetsDescription_ipv6Address *smithy.Schema
-
-var ListMountTargetsDescription_status *smithy.Schema
-
-var ListMountTargetsDescription_statusMessage *smithy.Schema
-
-var ListMountTargetsDescription_mountTargetId *smithy.Schema
-
-var ListMountTargetsDescription_networkInterfaceId *smithy.Schema
-
-var ListMountTargetsDescription_ownerId *smithy.Schema
-
-var ListMountTargetsDescription_subnetId *smithy.Schema
-
-var ListMountTargetsDescription_vpcId *smithy.Schema
-
-var _MountTargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "MountTargetId",
-}, smithy.ShapeTypeString, 0)
-
-var _MountTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "MountTargets",
-}, smithy.ShapeTypeList, 1)
-var _MountTargets_member *smithy.Schema
-
-var _NetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "NetworkInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _OwnerGid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "OwnerGid",
-}, smithy.ShapeTypeLong, 0)
-
-var _OwnerUid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "OwnerUid",
-}, smithy.ShapeTypeLong, 0)
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var _Permissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Permissions",
-}, smithy.ShapeTypeString, 0)
-
-var PosixUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PosixUser",
-}, smithy.ShapeTypeStructure, 3)
-var PosixUser_uid *smithy.Schema
-
-var PosixUser_gid *smithy.Schema
-
-var PosixUser_secondaryGids *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_errorCode *smithy.Schema
-
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var RootDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "RootDirectory",
-}, smithy.ShapeTypeStructure, 2)
-var RootDirectory_path *smithy.Schema
-
-var RootDirectory_creationPermissions *smithy.Schema
-
-var _SecondaryGids = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "SecondaryGids",
-}, smithy.ShapeTypeList, 1)
-var _SecondaryGids_member *smithy.Schema
-
-var _SecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "SecurityGroup",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "SecurityGroups",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroups_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_errorCode *smithy.Schema
-
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_errorCode *smithy.Schema
-
-var ThrottlingException_message *smithy.Schema
-
-var _Uid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "Uid",
-}, smithy.ShapeTypeLong, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_errorCode *smithy.Schema
-
-var ValidationException_message *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateAccessPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateAccessPointRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAccessPointRequest_clientToken *smithy.Schema
-
-var CreateAccessPointRequest_tags *smithy.Schema
-
-var CreateAccessPointRequest_fileSystemId *smithy.Schema
-
-var CreateAccessPointRequest_posixUser *smithy.Schema
-
-var CreateAccessPointRequest_rootDirectory *smithy.Schema
-
-var CreateAccessPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateAccessPointResponse",
-}, smithy.ShapeTypeStructure, 10)
-var CreateAccessPointResponse_accessPointArn *smithy.Schema
-
-var CreateAccessPointResponse_accessPointId *smithy.Schema
-
-var CreateAccessPointResponse_clientToken *smithy.Schema
-
-var CreateAccessPointResponse_fileSystemId *smithy.Schema
-
-var CreateAccessPointResponse_status *smithy.Schema
-
-var CreateAccessPointResponse_ownerId *smithy.Schema
-
-var CreateAccessPointResponse_posixUser *smithy.Schema
-
-var CreateAccessPointResponse_rootDirectory *smithy.Schema
-
-var CreateAccessPointResponse_tags *smithy.Schema
-
-var CreateAccessPointResponse_name *smithy.Schema
-
-var CreateFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateFileSystemRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateFileSystemRequest_bucket *smithy.Schema
-
-var CreateFileSystemRequest_prefix *smithy.Schema
-
-var CreateFileSystemRequest_clientToken *smithy.Schema
-
-var CreateFileSystemRequest_kmsKeyId *smithy.Schema
-
-var CreateFileSystemRequest_roleArn *smithy.Schema
-
-var CreateFileSystemRequest_tags *smithy.Schema
-
-var CreateFileSystemRequest_acceptBucketWarning *smithy.Schema
-
-var CreateFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateFileSystemResponse",
-}, smithy.ShapeTypeStructure, 13)
-var CreateFileSystemResponse_creationTime *smithy.Schema
-
-var CreateFileSystemResponse_fileSystemArn *smithy.Schema
-
-var CreateFileSystemResponse_fileSystemId *smithy.Schema
-
-var CreateFileSystemResponse_bucket *smithy.Schema
-
-var CreateFileSystemResponse_prefix *smithy.Schema
-
-var CreateFileSystemResponse_clientToken *smithy.Schema
-
-var CreateFileSystemResponse_kmsKeyId *smithy.Schema
-
-var CreateFileSystemResponse_status *smithy.Schema
-
-var CreateFileSystemResponse_statusMessage *smithy.Schema
-
-var CreateFileSystemResponse_roleArn *smithy.Schema
-
-var CreateFileSystemResponse_ownerId *smithy.Schema
-
-var CreateFileSystemResponse_tags *smithy.Schema
-
-var CreateFileSystemResponse_name *smithy.Schema
-
-var CreateMountTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateMountTargetRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateMountTargetRequest_fileSystemId *smithy.Schema
-
-var CreateMountTargetRequest_subnetId *smithy.Schema
-
-var CreateMountTargetRequest_ipv4Address *smithy.Schema
-
-var CreateMountTargetRequest_ipv6Address *smithy.Schema
-
-var CreateMountTargetRequest_ipAddressType *smithy.Schema
-
-var CreateMountTargetRequest_securityGroups *smithy.Schema
-
-var CreateMountTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "CreateMountTargetResponse",
-}, smithy.ShapeTypeStructure, 12)
-var CreateMountTargetResponse_availabilityZoneId *smithy.Schema
-
-var CreateMountTargetResponse_ownerId *smithy.Schema
-
-var CreateMountTargetResponse_mountTargetId *smithy.Schema
-
-var CreateMountTargetResponse_fileSystemId *smithy.Schema
-
-var CreateMountTargetResponse_subnetId *smithy.Schema
-
-var CreateMountTargetResponse_ipv4Address *smithy.Schema
-
-var CreateMountTargetResponse_ipv6Address *smithy.Schema
-
-var CreateMountTargetResponse_networkInterfaceId *smithy.Schema
-
-var CreateMountTargetResponse_vpcId *smithy.Schema
-
-var CreateMountTargetResponse_securityGroups *smithy.Schema
-
-var CreateMountTargetResponse_status *smithy.Schema
-
-var CreateMountTargetResponse_statusMessage *smithy.Schema
-
-var DeleteAccessPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteAccessPointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessPointRequest_accessPointId *smithy.Schema
-
-var DeleteFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteFileSystemRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemRequest_fileSystemId *smithy.Schema
-
-var DeleteFileSystemRequest_forceDelete *smithy.Schema
-
-var DeleteFileSystemPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteFileSystemPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFileSystemPolicyRequest_fileSystemId *smithy.Schema
-
-var DeleteMountTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "DeleteMountTargetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMountTargetRequest_mountTargetId *smithy.Schema
-
-var GetAccessPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetAccessPointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessPointRequest_accessPointId *smithy.Schema
-
-var GetAccessPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetAccessPointResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetAccessPointResponse_accessPointArn *smithy.Schema
-
-var GetAccessPointResponse_accessPointId *smithy.Schema
-
-var GetAccessPointResponse_clientToken *smithy.Schema
-
-var GetAccessPointResponse_fileSystemId *smithy.Schema
-
-var GetAccessPointResponse_status *smithy.Schema
-
-var GetAccessPointResponse_ownerId *smithy.Schema
-
-var GetAccessPointResponse_posixUser *smithy.Schema
-
-var GetAccessPointResponse_rootDirectory *smithy.Schema
-
-var GetAccessPointResponse_tags *smithy.Schema
-
-var GetAccessPointResponse_name *smithy.Schema
-
-var GetFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystemRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFileSystemRequest_fileSystemId *smithy.Schema
-
-var GetFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystemResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetFileSystemResponse_creationTime *smithy.Schema
-
-var GetFileSystemResponse_fileSystemArn *smithy.Schema
-
-var GetFileSystemResponse_fileSystemId *smithy.Schema
-
-var GetFileSystemResponse_bucket *smithy.Schema
-
-var GetFileSystemResponse_prefix *smithy.Schema
-
-var GetFileSystemResponse_clientToken *smithy.Schema
-
-var GetFileSystemResponse_kmsKeyId *smithy.Schema
-
-var GetFileSystemResponse_status *smithy.Schema
-
-var GetFileSystemResponse_statusMessage *smithy.Schema
-
-var GetFileSystemResponse_roleArn *smithy.Schema
-
-var GetFileSystemResponse_ownerId *smithy.Schema
-
-var GetFileSystemResponse_tags *smithy.Schema
-
-var GetFileSystemResponse_name *smithy.Schema
-
-var GetFileSystemPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystemPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFileSystemPolicyRequest_fileSystemId *smithy.Schema
-
-var GetFileSystemPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetFileSystemPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetFileSystemPolicyResponse_fileSystemId *smithy.Schema
-
-var GetFileSystemPolicyResponse_policy *smithy.Schema
-
-var GetMountTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetMountTargetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMountTargetRequest_mountTargetId *smithy.Schema
-
-var GetMountTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetMountTargetResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetMountTargetResponse_availabilityZoneId *smithy.Schema
-
-var GetMountTargetResponse_ownerId *smithy.Schema
-
-var GetMountTargetResponse_mountTargetId *smithy.Schema
-
-var GetMountTargetResponse_fileSystemId *smithy.Schema
-
-var GetMountTargetResponse_subnetId *smithy.Schema
-
-var GetMountTargetResponse_ipv4Address *smithy.Schema
-
-var GetMountTargetResponse_ipv6Address *smithy.Schema
-
-var GetMountTargetResponse_networkInterfaceId *smithy.Schema
-
-var GetMountTargetResponse_vpcId *smithy.Schema
-
-var GetMountTargetResponse_securityGroups *smithy.Schema
-
-var GetMountTargetResponse_status *smithy.Schema
-
-var GetMountTargetResponse_statusMessage *smithy.Schema
-
-var GetSynchronizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetSynchronizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSynchronizationConfigurationRequest_fileSystemId *smithy.Schema
-
-var GetSynchronizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "GetSynchronizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetSynchronizationConfigurationResponse_latestVersionNumber *smithy.Schema
-
-var GetSynchronizationConfigurationResponse_importDataRules *smithy.Schema
-
-var GetSynchronizationConfigurationResponse_expirationDataRules *smithy.Schema
-
-var ListAccessPointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListAccessPointsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccessPointsRequest_fileSystemId *smithy.Schema
-
-var ListAccessPointsRequest_maxResults *smithy.Schema
-
-var ListAccessPointsRequest_nextToken *smithy.Schema
-
-var ListAccessPointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListAccessPointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessPointsResponse_nextToken *smithy.Schema
-
-var ListAccessPointsResponse_accessPoints *smithy.Schema
-
-var ListFileSystemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListFileSystemsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSystemsRequest_bucket *smithy.Schema
-
-var ListFileSystemsRequest_maxResults *smithy.Schema
-
-var ListFileSystemsRequest_nextToken *smithy.Schema
-
-var ListFileSystemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListFileSystemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFileSystemsResponse_nextToken *smithy.Schema
-
-var ListFileSystemsResponse_fileSystems *smithy.Schema
-
-var ListMountTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListMountTargetsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMountTargetsRequest_fileSystemId *smithy.Schema
-
-var ListMountTargetsRequest_accessPointId *smithy.Schema
-
-var ListMountTargetsRequest_maxResults *smithy.Schema
-
-var ListMountTargetsRequest_nextToken *smithy.Schema
-
-var ListMountTargetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListMountTargetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMountTargetsResponse_nextToken *smithy.Schema
-
-var ListMountTargetsResponse_mountTargets *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_resourceId *smithy.Schema
-
-var ListTagsForResourceRequest_maxResults *smithy.Schema
-
-var ListTagsForResourceRequest_nextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTagsForResourceResponse_nextToken *smithy.Schema
-
-var PutFileSystemPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutFileSystemPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutFileSystemPolicyRequest_fileSystemId *smithy.Schema
-
-var PutFileSystemPolicyRequest_policy *smithy.Schema
-
-var PutFileSystemPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutFileSystemPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutSynchronizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutSynchronizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutSynchronizationConfigurationRequest_fileSystemId *smithy.Schema
-
-var PutSynchronizationConfigurationRequest_latestVersionNumber *smithy.Schema
-
-var PutSynchronizationConfigurationRequest_importDataRules *smithy.Schema
-
-var PutSynchronizationConfigurationRequest_expirationDataRules *smithy.Schema
-
-var PutSynchronizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "PutSynchronizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceId *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceId *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UpdateMountTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "UpdateMountTargetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMountTargetRequest_mountTargetId *smithy.Schema
-
-var UpdateMountTargetRequest_securityGroups *smithy.Schema
-
-var UpdateMountTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3files",
-	Name:      "UpdateMountTargetResponse",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateMountTargetResponse_availabilityZoneId *smithy.Schema
-
-var UpdateMountTargetResponse_ownerId *smithy.Schema
-
-var UpdateMountTargetResponse_mountTargetId *smithy.Schema
-
-var UpdateMountTargetResponse_fileSystemId *smithy.Schema
-
-var UpdateMountTargetResponse_subnetId *smithy.Schema
-
-var UpdateMountTargetResponse_ipv4Address *smithy.Schema
-
-var UpdateMountTargetResponse_ipv6Address *smithy.Schema
-
-var UpdateMountTargetResponse_networkInterfaceId *smithy.Schema
-
-var UpdateMountTargetResponse_vpcId *smithy.Schema
-
-var UpdateMountTargetResponse_securityGroups *smithy.Schema
-
-var UpdateMountTargetResponse_status *smithy.Schema
-
-var UpdateMountTargetResponse_statusMessage *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	LifeCycleState_available = LifeCycleState.AddMember("available", smithyprelude.Unit)
-
-	LifeCycleState_creating = LifeCycleState.AddMember("creating", smithyprelude.Unit)
-
-	LifeCycleState_deleting = LifeCycleState.AddMember("deleting", smithyprelude.Unit)
-
-	LifeCycleState_deleted = LifeCycleState.AddMember("deleted", smithyprelude.Unit)
-
-	LifeCycleState_error = LifeCycleState.AddMember("error", smithyprelude.Unit)
-
-	LifeCycleState_updating = LifeCycleState.AddMember("updating", smithyprelude.Unit)
-
-	LifeCycleState_misconfigured = LifeCycleState.AddMember("misconfigured", smithyprelude.Unit)
-
-	_SecondaryGids_member = _SecondaryGids.AddMember("member", _Gid)
-
-	PosixUser_uid = PosixUser.AddMember("uid", _Uid)
-
-	PosixUser_gid = PosixUser.AddMember("gid", _Gid)
-
-	PosixUser_secondaryGids = PosixUser.AddMember("secondaryGids", _SecondaryGids)
-
-	CreationPermissions_ownerUid = CreationPermissions.AddMember("ownerUid", _OwnerUid)
-
-	CreationPermissions_ownerGid = CreationPermissions.AddMember("ownerGid", _OwnerGid)
-
-	CreationPermissions_permissions = CreationPermissions.AddMember("permissions", _Permissions)
-
-	RootDirectory_path = RootDirectory.AddMember("path", _Path)
-
-	RootDirectory_creationPermissions = RootDirectory.AddMember("creationPermissions", CreationPermissions)
-
-	ListAccessPointsDescription_accessPointArn = ListAccessPointsDescription.AddMember("accessPointArn", _AccessPointArn)
-
-	ListAccessPointsDescription_accessPointId = ListAccessPointsDescription.AddMember("accessPointId", _AccessPointId)
-
-	ListAccessPointsDescription_fileSystemId = ListAccessPointsDescription.AddMember("fileSystemId", _FileSystemId)
-
-	ListAccessPointsDescription_status = ListAccessPointsDescription.AddMember("status", LifeCycleState)
-
-	ListAccessPointsDescription_ownerId = ListAccessPointsDescription.AddMember("ownerId", _AwsAccountId)
-
-	ListAccessPointsDescription_posixUser = ListAccessPointsDescription.AddMember("posixUser", PosixUser)
-
-	ListAccessPointsDescription_rootDirectory = ListAccessPointsDescription.AddMember("rootDirectory", RootDirectory)
-
-	ListAccessPointsDescription_name = ListAccessPointsDescription.AddMember("name", _TagValue)
-
-	_AccessPoints_member = _AccessPoints.AddMember("member", ListAccessPointsDescription)
-
-	ConflictException_errorCode = ConflictException.AddMember("errorCode", _ErrorCode)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	ExpirationDataRule_daysAfterLastAccess = ExpirationDataRule.AddMember("daysAfterLastAccess", smithyprelude.Integer, &smithytraits.JSONName{Name: "daysAfterLastAccess"})
-
-	_ExpirationDataRuleList_member = _ExpirationDataRuleList.AddMember("member", ExpirationDataRule)
-
-	ListFileSystemsDescription_creationTime = ListFileSystemsDescription.AddMember("creationTime", smithyprelude.Timestamp)
-
-	ListFileSystemsDescription_fileSystemArn = ListFileSystemsDescription.AddMember("fileSystemArn", _FileSystemArn)
-
-	ListFileSystemsDescription_fileSystemId = ListFileSystemsDescription.AddMember("fileSystemId", _FileSystemId)
-
-	ListFileSystemsDescription_name = ListFileSystemsDescription.AddMember("name", _TagValue)
-
-	ListFileSystemsDescription_bucket = ListFileSystemsDescription.AddMember("bucket", _BucketArn)
-
-	ListFileSystemsDescription_status = ListFileSystemsDescription.AddMember("status", LifeCycleState)
-
-	ListFileSystemsDescription_statusMessage = ListFileSystemsDescription.AddMember("statusMessage", _StatusMessage)
-
-	ListFileSystemsDescription_roleArn = ListFileSystemsDescription.AddMember("roleArn", _RoleArn)
-
-	ListFileSystemsDescription_ownerId = ListFileSystemsDescription.AddMember("ownerId", _AwsAccountId)
-
-	_FileSystems_member = _FileSystems.AddMember("member", ListFileSystemsDescription)
-
-	ImportTrigger_ON_DIRECTORY_FIRST_ACCESS = ImportTrigger.AddMember("ON_DIRECTORY_FIRST_ACCESS", smithyprelude.Unit)
-
-	ImportTrigger_ON_FILE_ACCESS = ImportTrigger.AddMember("ON_FILE_ACCESS", smithyprelude.Unit)
-
-	ImportDataRule_prefix = ImportDataRule.AddMember("prefix", smithyprelude.String, &smithytraits.JSONName{Name: "prefix"})
-
-	ImportDataRule_trigger = ImportDataRule.AddMember("trigger", ImportTrigger, &smithytraits.JSONName{Name: "trigger"})
-
-	ImportDataRule_sizeLessThan = ImportDataRule.AddMember("sizeLessThan", smithyprelude.Long, &smithytraits.JSONName{Name: "sizeLessThan"})
-
-	_ImportDataRuleList_member = _ImportDataRuleList.AddMember("member", ImportDataRule)
-
-	InternalServerException_errorCode = InternalServerException.AddMember("errorCode", _ErrorCode)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	IpAddressType_IPV4_ONLY = IpAddressType.AddMember("IPV4_ONLY", smithyprelude.Unit)
-
-	IpAddressType_IPV6_ONLY = IpAddressType.AddMember("IPV6_ONLY", smithyprelude.Unit)
-
-	IpAddressType_DUAL_STACK = IpAddressType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	ListMountTargetsDescription_availabilityZoneId = ListMountTargetsDescription.AddMember("availabilityZoneId", _AvailabilityZoneId)
-
-	ListMountTargetsDescription_fileSystemId = ListMountTargetsDescription.AddMember("fileSystemId", _FileSystemId)
-
-	ListMountTargetsDescription_ipv4Address = ListMountTargetsDescription.AddMember("ipv4Address", _Ipv4Address)
-
-	ListMountTargetsDescription_ipv6Address = ListMountTargetsDescription.AddMember("ipv6Address", _Ipv6Address)
-
-	ListMountTargetsDescription_status = ListMountTargetsDescription.AddMember("status", LifeCycleState)
-
-	ListMountTargetsDescription_statusMessage = ListMountTargetsDescription.AddMember("statusMessage", _StatusMessage)
-
-	ListMountTargetsDescription_mountTargetId = ListMountTargetsDescription.AddMember("mountTargetId", _MountTargetId)
-
-	ListMountTargetsDescription_networkInterfaceId = ListMountTargetsDescription.AddMember("networkInterfaceId", _NetworkInterfaceId)
-
-	ListMountTargetsDescription_ownerId = ListMountTargetsDescription.AddMember("ownerId", _AwsAccountId)
-
-	ListMountTargetsDescription_subnetId = ListMountTargetsDescription.AddMember("subnetId", _SubnetId)
-
-	ListMountTargetsDescription_vpcId = ListMountTargetsDescription.AddMember("vpcId", _VpcId)
-
-	_MountTargets_member = _MountTargets.AddMember("member", ListMountTargetsDescription)
-
-	ResourceNotFoundException_errorCode = ResourceNotFoundException.AddMember("errorCode", _ErrorCode)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	_SecurityGroups_member = _SecurityGroups.AddMember("member", _SecurityGroup)
-
-	ServiceQuotaExceededException_errorCode = ServiceQuotaExceededException.AddMember("errorCode", _ErrorCode)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_errorCode = ThrottlingException.AddMember("errorCode", _ErrorCode)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_errorCode = ValidationException.AddMember("errorCode", _ErrorCode)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateAccessPointRequest_clientToken = CreateAccessPointRequest.AddMember("clientToken", _ClientToken)
-
-	CreateAccessPointRequest_tags = CreateAccessPointRequest.AddMember("tags", _TagList)
-
-	CreateAccessPointRequest_fileSystemId = CreateAccessPointRequest.AddMember("fileSystemId", _FileSystemId)
-
-	CreateAccessPointRequest_posixUser = CreateAccessPointRequest.AddMember("posixUser", PosixUser)
-
-	CreateAccessPointRequest_rootDirectory = CreateAccessPointRequest.AddMember("rootDirectory", RootDirectory)
-
-	CreateAccessPointResponse_accessPointArn = CreateAccessPointResponse.AddMember("accessPointArn", _AccessPointArn)
-
-	CreateAccessPointResponse_accessPointId = CreateAccessPointResponse.AddMember("accessPointId", _AccessPointId)
-
-	CreateAccessPointResponse_clientToken = CreateAccessPointResponse.AddMember("clientToken", _ClientToken)
-
-	CreateAccessPointResponse_fileSystemId = CreateAccessPointResponse.AddMember("fileSystemId", _FileSystemId)
-
-	CreateAccessPointResponse_status = CreateAccessPointResponse.AddMember("status", LifeCycleState)
-
-	CreateAccessPointResponse_ownerId = CreateAccessPointResponse.AddMember("ownerId", _AwsAccountId)
-
-	CreateAccessPointResponse_posixUser = CreateAccessPointResponse.AddMember("posixUser", PosixUser)
-
-	CreateAccessPointResponse_rootDirectory = CreateAccessPointResponse.AddMember("rootDirectory", RootDirectory)
-
-	CreateAccessPointResponse_tags = CreateAccessPointResponse.AddMember("tags", _TagList)
-
-	CreateAccessPointResponse_name = CreateAccessPointResponse.AddMember("name", _TagValue)
-
-	CreateFileSystemRequest_bucket = CreateFileSystemRequest.AddMember("bucket", _BucketArn)
-
-	CreateFileSystemRequest_prefix = CreateFileSystemRequest.AddMember("prefix", smithyprelude.String)
-
-	CreateFileSystemRequest_clientToken = CreateFileSystemRequest.AddMember("clientToken", _CreationToken)
-
-	CreateFileSystemRequest_kmsKeyId = CreateFileSystemRequest.AddMember("kmsKeyId", _KmsKeyId)
-
-	CreateFileSystemRequest_roleArn = CreateFileSystemRequest.AddMember("roleArn", _RoleArn)
-
-	CreateFileSystemRequest_tags = CreateFileSystemRequest.AddMember("tags", _TagList)
-
-	CreateFileSystemRequest_acceptBucketWarning = CreateFileSystemRequest.AddMember("acceptBucketWarning", smithyprelude.Boolean)
-
-	CreateFileSystemResponse_creationTime = CreateFileSystemResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	CreateFileSystemResponse_fileSystemArn = CreateFileSystemResponse.AddMember("fileSystemArn", _FileSystemArn)
-
-	CreateFileSystemResponse_fileSystemId = CreateFileSystemResponse.AddMember("fileSystemId", _FileSystemId)
-
-	CreateFileSystemResponse_bucket = CreateFileSystemResponse.AddMember("bucket", _BucketArn)
-
-	CreateFileSystemResponse_prefix = CreateFileSystemResponse.AddMember("prefix", smithyprelude.String)
-
-	CreateFileSystemResponse_clientToken = CreateFileSystemResponse.AddMember("clientToken", _ClientToken)
-
-	CreateFileSystemResponse_kmsKeyId = CreateFileSystemResponse.AddMember("kmsKeyId", _KmsKeyId)
-
-	CreateFileSystemResponse_status = CreateFileSystemResponse.AddMember("status", LifeCycleState)
-
-	CreateFileSystemResponse_statusMessage = CreateFileSystemResponse.AddMember("statusMessage", _StatusMessage)
-
-	CreateFileSystemResponse_roleArn = CreateFileSystemResponse.AddMember("roleArn", _RoleArn)
-
-	CreateFileSystemResponse_ownerId = CreateFileSystemResponse.AddMember("ownerId", _AwsAccountId)
-
-	CreateFileSystemResponse_tags = CreateFileSystemResponse.AddMember("tags", _TagList)
-
-	CreateFileSystemResponse_name = CreateFileSystemResponse.AddMember("name", _TagValue)
-
-	CreateMountTargetRequest_fileSystemId = CreateMountTargetRequest.AddMember("fileSystemId", _FileSystemId)
-
-	CreateMountTargetRequest_subnetId = CreateMountTargetRequest.AddMember("subnetId", _SubnetId)
-
-	CreateMountTargetRequest_ipv4Address = CreateMountTargetRequest.AddMember("ipv4Address", _Ipv4Address)
-
-	CreateMountTargetRequest_ipv6Address = CreateMountTargetRequest.AddMember("ipv6Address", _Ipv6Address)
-
-	CreateMountTargetRequest_ipAddressType = CreateMountTargetRequest.AddMember("ipAddressType", IpAddressType)
-
-	CreateMountTargetRequest_securityGroups = CreateMountTargetRequest.AddMember("securityGroups", _SecurityGroups)
-
-	CreateMountTargetResponse_availabilityZoneId = CreateMountTargetResponse.AddMember("availabilityZoneId", _AvailabilityZoneId)
-
-	CreateMountTargetResponse_ownerId = CreateMountTargetResponse.AddMember("ownerId", _AwsAccountId)
-
-	CreateMountTargetResponse_mountTargetId = CreateMountTargetResponse.AddMember("mountTargetId", _MountTargetId)
-
-	CreateMountTargetResponse_fileSystemId = CreateMountTargetResponse.AddMember("fileSystemId", _FileSystemId)
-
-	CreateMountTargetResponse_subnetId = CreateMountTargetResponse.AddMember("subnetId", _SubnetId)
-
-	CreateMountTargetResponse_ipv4Address = CreateMountTargetResponse.AddMember("ipv4Address", _Ipv4Address)
-
-	CreateMountTargetResponse_ipv6Address = CreateMountTargetResponse.AddMember("ipv6Address", _Ipv6Address)
-
-	CreateMountTargetResponse_networkInterfaceId = CreateMountTargetResponse.AddMember("networkInterfaceId", _NetworkInterfaceId)
-
-	CreateMountTargetResponse_vpcId = CreateMountTargetResponse.AddMember("vpcId", _VpcId)
-
-	CreateMountTargetResponse_securityGroups = CreateMountTargetResponse.AddMember("securityGroups", _SecurityGroups)
-
-	CreateMountTargetResponse_status = CreateMountTargetResponse.AddMember("status", LifeCycleState)
-
-	CreateMountTargetResponse_statusMessage = CreateMountTargetResponse.AddMember("statusMessage", _StatusMessage)
-
-	DeleteAccessPointRequest_accessPointId = DeleteAccessPointRequest.AddMember("accessPointId", _AccessPointId, &smithytraits.HTTPLabel{})
-
-	DeleteFileSystemRequest_fileSystemId = DeleteFileSystemRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	DeleteFileSystemRequest_forceDelete = DeleteFileSystemRequest.AddMember("forceDelete", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "forceDelete"})
-
-	DeleteFileSystemPolicyRequest_fileSystemId = DeleteFileSystemPolicyRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	DeleteMountTargetRequest_mountTargetId = DeleteMountTargetRequest.AddMember("mountTargetId", _MountTargetId, &smithytraits.HTTPLabel{})
-
-	GetAccessPointRequest_accessPointId = GetAccessPointRequest.AddMember("accessPointId", _AccessPointId, &smithytraits.HTTPLabel{})
-
-	GetAccessPointResponse_accessPointArn = GetAccessPointResponse.AddMember("accessPointArn", _AccessPointArn)
-
-	GetAccessPointResponse_accessPointId = GetAccessPointResponse.AddMember("accessPointId", _AccessPointId)
-
-	GetAccessPointResponse_clientToken = GetAccessPointResponse.AddMember("clientToken", _ClientToken)
-
-	GetAccessPointResponse_fileSystemId = GetAccessPointResponse.AddMember("fileSystemId", _FileSystemId)
-
-	GetAccessPointResponse_status = GetAccessPointResponse.AddMember("status", LifeCycleState)
-
-	GetAccessPointResponse_ownerId = GetAccessPointResponse.AddMember("ownerId", _AwsAccountId)
-
-	GetAccessPointResponse_posixUser = GetAccessPointResponse.AddMember("posixUser", PosixUser)
-
-	GetAccessPointResponse_rootDirectory = GetAccessPointResponse.AddMember("rootDirectory", RootDirectory)
-
-	GetAccessPointResponse_tags = GetAccessPointResponse.AddMember("tags", _TagList)
-
-	GetAccessPointResponse_name = GetAccessPointResponse.AddMember("name", _TagValue)
-
-	GetFileSystemRequest_fileSystemId = GetFileSystemRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	GetFileSystemResponse_creationTime = GetFileSystemResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetFileSystemResponse_fileSystemArn = GetFileSystemResponse.AddMember("fileSystemArn", _FileSystemArn)
-
-	GetFileSystemResponse_fileSystemId = GetFileSystemResponse.AddMember("fileSystemId", _FileSystemId)
-
-	GetFileSystemResponse_bucket = GetFileSystemResponse.AddMember("bucket", _BucketArn)
-
-	GetFileSystemResponse_prefix = GetFileSystemResponse.AddMember("prefix", smithyprelude.String)
-
-	GetFileSystemResponse_clientToken = GetFileSystemResponse.AddMember("clientToken", _ClientToken)
-
-	GetFileSystemResponse_kmsKeyId = GetFileSystemResponse.AddMember("kmsKeyId", _KmsKeyId)
-
-	GetFileSystemResponse_status = GetFileSystemResponse.AddMember("status", LifeCycleState)
-
-	GetFileSystemResponse_statusMessage = GetFileSystemResponse.AddMember("statusMessage", _StatusMessage)
-
-	GetFileSystemResponse_roleArn = GetFileSystemResponse.AddMember("roleArn", _RoleArn)
-
-	GetFileSystemResponse_ownerId = GetFileSystemResponse.AddMember("ownerId", _AwsAccountId)
-
-	GetFileSystemResponse_tags = GetFileSystemResponse.AddMember("tags", _TagList)
-
-	GetFileSystemResponse_name = GetFileSystemResponse.AddMember("name", _TagValue)
-
-	GetFileSystemPolicyRequest_fileSystemId = GetFileSystemPolicyRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	GetFileSystemPolicyResponse_fileSystemId = GetFileSystemPolicyResponse.AddMember("fileSystemId", _FileSystemId)
-
-	GetFileSystemPolicyResponse_policy = GetFileSystemPolicyResponse.AddMember("policy", smithyprelude.String, &smithytraits.JSONName{Name: "policy"})
-
-	GetMountTargetRequest_mountTargetId = GetMountTargetRequest.AddMember("mountTargetId", _MountTargetId, &smithytraits.HTTPLabel{})
-
-	GetMountTargetResponse_availabilityZoneId = GetMountTargetResponse.AddMember("availabilityZoneId", _AvailabilityZoneId)
-
-	GetMountTargetResponse_ownerId = GetMountTargetResponse.AddMember("ownerId", _AwsAccountId)
-
-	GetMountTargetResponse_mountTargetId = GetMountTargetResponse.AddMember("mountTargetId", _MountTargetId)
-
-	GetMountTargetResponse_fileSystemId = GetMountTargetResponse.AddMember("fileSystemId", _FileSystemId)
-
-	GetMountTargetResponse_subnetId = GetMountTargetResponse.AddMember("subnetId", _SubnetId)
-
-	GetMountTargetResponse_ipv4Address = GetMountTargetResponse.AddMember("ipv4Address", _Ipv4Address)
-
-	GetMountTargetResponse_ipv6Address = GetMountTargetResponse.AddMember("ipv6Address", _Ipv6Address)
-
-	GetMountTargetResponse_networkInterfaceId = GetMountTargetResponse.AddMember("networkInterfaceId", _NetworkInterfaceId)
-
-	GetMountTargetResponse_vpcId = GetMountTargetResponse.AddMember("vpcId", _VpcId)
-
-	GetMountTargetResponse_securityGroups = GetMountTargetResponse.AddMember("securityGroups", _SecurityGroups)
-
-	GetMountTargetResponse_status = GetMountTargetResponse.AddMember("status", LifeCycleState)
-
-	GetMountTargetResponse_statusMessage = GetMountTargetResponse.AddMember("statusMessage", _StatusMessage)
-
-	GetSynchronizationConfigurationRequest_fileSystemId = GetSynchronizationConfigurationRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	GetSynchronizationConfigurationResponse_latestVersionNumber = GetSynchronizationConfigurationResponse.AddMember("latestVersionNumber", smithyprelude.Integer, &smithytraits.JSONName{Name: "latestVersionNumber"})
-
-	GetSynchronizationConfigurationResponse_importDataRules = GetSynchronizationConfigurationResponse.AddMember("importDataRules", _ImportDataRuleList, &smithytraits.JSONName{Name: "importDataRules"})
-
-	GetSynchronizationConfigurationResponse_expirationDataRules = GetSynchronizationConfigurationResponse.AddMember("expirationDataRules", _ExpirationDataRuleList, &smithytraits.JSONName{Name: "expirationDataRules"})
-
-	ListAccessPointsRequest_fileSystemId = ListAccessPointsRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPQuery{Name: "fileSystemId"})
-
-	ListAccessPointsRequest_maxResults = ListAccessPointsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAccessPointsRequest_nextToken = ListAccessPointsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAccessPointsResponse_nextToken = ListAccessPointsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListAccessPointsResponse_accessPoints = ListAccessPointsResponse.AddMember("accessPoints", _AccessPoints)
-
-	ListFileSystemsRequest_bucket = ListFileSystemsRequest.AddMember("bucket", _BucketArn, &smithytraits.HTTPQuery{Name: "bucket"})
-
-	ListFileSystemsRequest_maxResults = ListFileSystemsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFileSystemsRequest_nextToken = ListFileSystemsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFileSystemsResponse_nextToken = ListFileSystemsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListFileSystemsResponse_fileSystems = ListFileSystemsResponse.AddMember("fileSystems", _FileSystems)
-
-	ListMountTargetsRequest_fileSystemId = ListMountTargetsRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPQuery{Name: "fileSystemId"})
-
-	ListMountTargetsRequest_accessPointId = ListMountTargetsRequest.AddMember("accessPointId", _AccessPointId, &smithytraits.HTTPQuery{Name: "accessPointId"})
-
-	ListMountTargetsRequest_maxResults = ListMountTargetsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMountTargetsRequest_nextToken = ListMountTargetsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMountTargetsResponse_nextToken = ListMountTargetsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListMountTargetsResponse_mountTargets = ListMountTargetsResponse.AddMember("mountTargets", _MountTargets)
-
-	ListTagsForResourceRequest_resourceId = ListTagsForResourceRequest.AddMember("resourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceRequest_maxResults = ListTagsForResourceRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListTagsForResourceRequest_nextToken = ListTagsForResourceRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	ListTagsForResourceResponse_nextToken = ListTagsForResourceResponse.AddMember("nextToken", smithyprelude.String)
-
-	PutFileSystemPolicyRequest_fileSystemId = PutFileSystemPolicyRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	PutFileSystemPolicyRequest_policy = PutFileSystemPolicyRequest.AddMember("policy", smithyprelude.String, &smithytraits.JSONName{Name: "policy"})
-
-	PutSynchronizationConfigurationRequest_fileSystemId = PutSynchronizationConfigurationRequest.AddMember("fileSystemId", _FileSystemId, &smithytraits.HTTPLabel{})
-
-	PutSynchronizationConfigurationRequest_latestVersionNumber = PutSynchronizationConfigurationRequest.AddMember("latestVersionNumber", smithyprelude.Integer, &smithytraits.JSONName{Name: "latestVersionNumber"})
-
-	PutSynchronizationConfigurationRequest_importDataRules = PutSynchronizationConfigurationRequest.AddMember("importDataRules", _ImportDataRuleList, &smithytraits.JSONName{Name: "importDataRules"})
-
-	PutSynchronizationConfigurationRequest_expirationDataRules = PutSynchronizationConfigurationRequest.AddMember("expirationDataRules", _ExpirationDataRuleList, &smithytraits.JSONName{Name: "expirationDataRules"})
-
-	TagResourceRequest_resourceId = TagResourceRequest.AddMember("resourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceId = UntagResourceRequest.AddMember("resourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateMountTargetRequest_mountTargetId = UpdateMountTargetRequest.AddMember("mountTargetId", _MountTargetId, &smithytraits.HTTPLabel{})
-
-	UpdateMountTargetRequest_securityGroups = UpdateMountTargetRequest.AddMember("securityGroups", _SecurityGroups)
-
-	UpdateMountTargetResponse_availabilityZoneId = UpdateMountTargetResponse.AddMember("availabilityZoneId", _AvailabilityZoneId)
-
-	UpdateMountTargetResponse_ownerId = UpdateMountTargetResponse.AddMember("ownerId", _AwsAccountId)
-
-	UpdateMountTargetResponse_mountTargetId = UpdateMountTargetResponse.AddMember("mountTargetId", _MountTargetId)
-
-	UpdateMountTargetResponse_fileSystemId = UpdateMountTargetResponse.AddMember("fileSystemId", _FileSystemId)
-
-	UpdateMountTargetResponse_subnetId = UpdateMountTargetResponse.AddMember("subnetId", _SubnetId)
-
-	UpdateMountTargetResponse_ipv4Address = UpdateMountTargetResponse.AddMember("ipv4Address", _Ipv4Address)
-
-	UpdateMountTargetResponse_ipv6Address = UpdateMountTargetResponse.AddMember("ipv6Address", _Ipv6Address)
-
-	UpdateMountTargetResponse_networkInterfaceId = UpdateMountTargetResponse.AddMember("networkInterfaceId", _NetworkInterfaceId)
-
-	UpdateMountTargetResponse_vpcId = UpdateMountTargetResponse.AddMember("vpcId", _VpcId)
-
-	UpdateMountTargetResponse_securityGroups = UpdateMountTargetResponse.AddMember("securityGroups", _SecurityGroups)
-
-	UpdateMountTargetResponse_status = UpdateMountTargetResponse.AddMember("status", LifeCycleState)
-
-	UpdateMountTargetResponse_statusMessage = UpdateMountTargetResponse.AddMember("statusMessage", _StatusMessage)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "s3files"}}, DirectMask: 0x8000}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "daysAfterLastAccess"}}, DirectMask: 0x1}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "prefix"}}, DirectMask: 0x1}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "trigger"}}, DirectMask: 0x1}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sizeLessThan"}}, DirectMask: 0x1}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "forceDelete"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "policy"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "latestVersionNumber"}}, DirectMask: 0x1}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "importDataRules"}}, DirectMask: 0x1}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "expirationDataRules"}}, DirectMask: 0x1}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "fileSystemId"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bucket"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "accessPointId"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m_AccessPoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessPoints_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_errorCode, &sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mCreationPermissions = smithy.SchemaMembers{List: []*smithy.Schema{&sCreationPermissions_ownerUid, &sCreationPermissions_ownerGid, &sCreationPermissions_permissions}}
+var mExpirationDataRule = smithy.SchemaMembers{List: []*smithy.Schema{&sExpirationDataRule_daysAfterLastAccess}}
+var m_ExpirationDataRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpirationDataRuleList_member}}
+var m_FileSystems = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystems_member}}
+var mImportDataRule = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDataRule_prefix, &sImportDataRule_trigger, &sImportDataRule_sizeLessThan}}
+var m_ImportDataRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImportDataRuleList_member}}
+var mImportTrigger = smithy.SchemaMembers{List: []*smithy.Schema{&sImportTrigger_ON_DIRECTORY_FIRST_ACCESS, &sImportTrigger_ON_FILE_ACCESS}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_errorCode, &sInternalServerException_message}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4_ONLY, &sIpAddressType_IPV6_ONLY, &sIpAddressType_DUAL_STACK}}
+var mLifeCycleState = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycleState_available, &sLifeCycleState_creating, &sLifeCycleState_deleting, &sLifeCycleState_deleted, &sLifeCycleState_error, &sLifeCycleState_updating, &sLifeCycleState_misconfigured}}
+var mListAccessPointsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessPointsDescription_accessPointArn, &sListAccessPointsDescription_accessPointId, &sListAccessPointsDescription_fileSystemId, &sListAccessPointsDescription_status, &sListAccessPointsDescription_ownerId, &sListAccessPointsDescription_posixUser, &sListAccessPointsDescription_rootDirectory, &sListAccessPointsDescription_name}}
+var mListFileSystemsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSystemsDescription_creationTime, &sListFileSystemsDescription_fileSystemArn, &sListFileSystemsDescription_fileSystemId, &sListFileSystemsDescription_name, &sListFileSystemsDescription_bucket, &sListFileSystemsDescription_status, &sListFileSystemsDescription_statusMessage, &sListFileSystemsDescription_roleArn, &sListFileSystemsDescription_ownerId}, Hash: &hListFileSystemsDescription}
+var mListMountTargetsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sListMountTargetsDescription_availabilityZoneId, &sListMountTargetsDescription_fileSystemId, &sListMountTargetsDescription_ipv4Address, &sListMountTargetsDescription_ipv6Address, &sListMountTargetsDescription_status, &sListMountTargetsDescription_statusMessage, &sListMountTargetsDescription_mountTargetId, &sListMountTargetsDescription_networkInterfaceId, &sListMountTargetsDescription_ownerId, &sListMountTargetsDescription_subnetId, &sListMountTargetsDescription_vpcId}, Hash: &hListMountTargetsDescription}
+var m_MountTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_MountTargets_member}}
+var mPosixUser = smithy.SchemaMembers{List: []*smithy.Schema{&sPosixUser_uid, &sPosixUser_gid, &sPosixUser_secondaryGids}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_errorCode, &sResourceNotFoundException_message}}
+var mRootDirectory = smithy.SchemaMembers{List: []*smithy.Schema{&sRootDirectory_path, &sRootDirectory_creationPermissions}}
+var m_SecondaryGids = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecondaryGids_member}}
+var m_SecurityGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroups_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_errorCode, &sServiceQuotaExceededException_message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_errorCode, &sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_errorCode, &sValidationException_message}}
+var mCreateAccessPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPointRequest_clientToken, &sCreateAccessPointRequest_tags, &sCreateAccessPointRequest_fileSystemId, &sCreateAccessPointRequest_posixUser, &sCreateAccessPointRequest_rootDirectory}}
+var mCreateAccessPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPointResponse_accessPointArn, &sCreateAccessPointResponse_accessPointId, &sCreateAccessPointResponse_clientToken, &sCreateAccessPointResponse_fileSystemId, &sCreateAccessPointResponse_status, &sCreateAccessPointResponse_ownerId, &sCreateAccessPointResponse_posixUser, &sCreateAccessPointResponse_rootDirectory, &sCreateAccessPointResponse_tags, &sCreateAccessPointResponse_name}, Hash: &hCreateAccessPointResponse}
+var mCreateFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemRequest_bucket, &sCreateFileSystemRequest_prefix, &sCreateFileSystemRequest_clientToken, &sCreateFileSystemRequest_kmsKeyId, &sCreateFileSystemRequest_roleArn, &sCreateFileSystemRequest_tags, &sCreateFileSystemRequest_acceptBucketWarning}}
+var mCreateFileSystemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemResponse_creationTime, &sCreateFileSystemResponse_fileSystemArn, &sCreateFileSystemResponse_fileSystemId, &sCreateFileSystemResponse_bucket, &sCreateFileSystemResponse_prefix, &sCreateFileSystemResponse_clientToken, &sCreateFileSystemResponse_kmsKeyId, &sCreateFileSystemResponse_status, &sCreateFileSystemResponse_statusMessage, &sCreateFileSystemResponse_roleArn, &sCreateFileSystemResponse_ownerId, &sCreateFileSystemResponse_tags, &sCreateFileSystemResponse_name}, Hash: &hCreateFileSystemResponse}
+var mCreateMountTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMountTargetRequest_fileSystemId, &sCreateMountTargetRequest_subnetId, &sCreateMountTargetRequest_ipv4Address, &sCreateMountTargetRequest_ipv6Address, &sCreateMountTargetRequest_ipAddressType, &sCreateMountTargetRequest_securityGroups}}
+var mCreateMountTargetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMountTargetResponse_availabilityZoneId, &sCreateMountTargetResponse_ownerId, &sCreateMountTargetResponse_mountTargetId, &sCreateMountTargetResponse_fileSystemId, &sCreateMountTargetResponse_subnetId, &sCreateMountTargetResponse_ipv4Address, &sCreateMountTargetResponse_ipv6Address, &sCreateMountTargetResponse_networkInterfaceId, &sCreateMountTargetResponse_vpcId, &sCreateMountTargetResponse_securityGroups, &sCreateMountTargetResponse_status, &sCreateMountTargetResponse_statusMessage}, Hash: &hCreateMountTargetResponse}
+var mDeleteAccessPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessPointRequest_accessPointId}}
+var mDeleteFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemRequest_fileSystemId, &sDeleteFileSystemRequest_forceDelete}}
+var mDeleteFileSystemPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemPolicyRequest_fileSystemId}}
+var mDeleteMountTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMountTargetRequest_mountTargetId}}
+var mGetAccessPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessPointRequest_accessPointId}}
+var mGetAccessPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessPointResponse_accessPointArn, &sGetAccessPointResponse_accessPointId, &sGetAccessPointResponse_clientToken, &sGetAccessPointResponse_fileSystemId, &sGetAccessPointResponse_status, &sGetAccessPointResponse_ownerId, &sGetAccessPointResponse_posixUser, &sGetAccessPointResponse_rootDirectory, &sGetAccessPointResponse_tags, &sGetAccessPointResponse_name}, Hash: &hGetAccessPointResponse}
+var mGetFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFileSystemRequest_fileSystemId}}
+var mGetFileSystemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFileSystemResponse_creationTime, &sGetFileSystemResponse_fileSystemArn, &sGetFileSystemResponse_fileSystemId, &sGetFileSystemResponse_bucket, &sGetFileSystemResponse_prefix, &sGetFileSystemResponse_clientToken, &sGetFileSystemResponse_kmsKeyId, &sGetFileSystemResponse_status, &sGetFileSystemResponse_statusMessage, &sGetFileSystemResponse_roleArn, &sGetFileSystemResponse_ownerId, &sGetFileSystemResponse_tags, &sGetFileSystemResponse_name}, Hash: &hGetFileSystemResponse}
+var mGetFileSystemPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFileSystemPolicyRequest_fileSystemId}}
+var mGetFileSystemPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFileSystemPolicyResponse_fileSystemId, &sGetFileSystemPolicyResponse_policy}}
+var mGetMountTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMountTargetRequest_mountTargetId}}
+var mGetMountTargetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMountTargetResponse_availabilityZoneId, &sGetMountTargetResponse_ownerId, &sGetMountTargetResponse_mountTargetId, &sGetMountTargetResponse_fileSystemId, &sGetMountTargetResponse_subnetId, &sGetMountTargetResponse_ipv4Address, &sGetMountTargetResponse_ipv6Address, &sGetMountTargetResponse_networkInterfaceId, &sGetMountTargetResponse_vpcId, &sGetMountTargetResponse_securityGroups, &sGetMountTargetResponse_status, &sGetMountTargetResponse_statusMessage}, Hash: &hGetMountTargetResponse}
+var mGetSynchronizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSynchronizationConfigurationRequest_fileSystemId}}
+var mGetSynchronizationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSynchronizationConfigurationResponse_latestVersionNumber, &sGetSynchronizationConfigurationResponse_importDataRules, &sGetSynchronizationConfigurationResponse_expirationDataRules}}
+var mListAccessPointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessPointsRequest_fileSystemId, &sListAccessPointsRequest_maxResults, &sListAccessPointsRequest_nextToken}}
+var mListAccessPointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessPointsResponse_nextToken, &sListAccessPointsResponse_accessPoints}}
+var mListFileSystemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSystemsRequest_bucket, &sListFileSystemsRequest_maxResults, &sListFileSystemsRequest_nextToken}}
+var mListFileSystemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSystemsResponse_nextToken, &sListFileSystemsResponse_fileSystems}}
+var mListMountTargetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMountTargetsRequest_fileSystemId, &sListMountTargetsRequest_accessPointId, &sListMountTargetsRequest_maxResults, &sListMountTargetsRequest_nextToken}}
+var mListMountTargetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMountTargetsResponse_nextToken, &sListMountTargetsResponse_mountTargets}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceId, &sListTagsForResourceRequest_maxResults, &sListTagsForResourceRequest_nextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags, &sListTagsForResourceResponse_nextToken}}
+var mPutFileSystemPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutFileSystemPolicyRequest_fileSystemId, &sPutFileSystemPolicyRequest_policy}}
+var mPutSynchronizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSynchronizationConfigurationRequest_fileSystemId, &sPutSynchronizationConfigurationRequest_latestVersionNumber, &sPutSynchronizationConfigurationRequest_importDataRules, &sPutSynchronizationConfigurationRequest_expirationDataRules}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceId, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceId, &sUntagResourceRequest_tagKeys}}
+var mUpdateMountTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMountTargetRequest_mountTargetId, &sUpdateMountTargetRequest_securityGroups}}
+var mUpdateMountTargetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMountTargetResponse_availabilityZoneId, &sUpdateMountTargetResponse_ownerId, &sUpdateMountTargetResponse_mountTargetId, &sUpdateMountTargetResponse_fileSystemId, &sUpdateMountTargetResponse_subnetId, &sUpdateMountTargetResponse_ipv4Address, &sUpdateMountTargetResponse_ipv6Address, &sUpdateMountTargetResponse_networkInterfaceId, &sUpdateMountTargetResponse_vpcId, &sUpdateMountTargetResponse_securityGroups, &sUpdateMountTargetResponse_status, &sUpdateMountTargetResponse_statusMessage}, Hash: &hUpdateMountTargetResponse}
+
+var hListFileSystemsDescription = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 0, 1, 0, 9, 4, 0, 8, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 6, 0, 0,
+	0, 0, 0, 7, 0, 2, 3, 0,
+}}
+var hListMountTargetsDescription = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	9, 0, 0, 3, 0, 0, 0, 0, 10, 0, 1, 7, 0, 0, 0, 2, 0, 0, 5, 0, 4, 6, 0, 0,
+	8, 0, 0, 11, 0, 0, 0, 0,
+}}
+var hCreateAccessPointResponse = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 8, 4, 6, 1, 2, 0, 0, 0, 0, 0, 10, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0,
+	9, 0, 3, 0, 0, 7, 0, 0,
+}}
+var hCreateFileSystemResponse = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 10, 0, 9, 0, 4, 0, 13, 0, 0, 0, 1, 12, 7, 0, 0, 6, 0, 0,
+	0, 0, 5, 11, 0, 3, 2, 0,
+}}
+var hCreateMountTargetResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 1, 3, 10, 0, 0, 0, 7, 12, 0, 0, 8, 9, 5, 0, 0, 0, 0, 0, 0, 11, 0, 6,
+	0, 0, 2, 0, 4, 0, 0, 0,
+}}
+var hGetAccessPointResponse = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 8, 4, 6, 1, 2, 0, 0, 0, 0, 0, 10, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0,
+	9, 0, 3, 0, 0, 7, 0, 0,
+}}
+var hGetFileSystemResponse = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 10, 0, 9, 0, 4, 0, 13, 0, 0, 0, 1, 12, 7, 0, 0, 6, 0, 0,
+	0, 0, 5, 11, 0, 3, 2, 0,
+}}
+var hGetMountTargetResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 1, 3, 10, 0, 0, 0, 7, 12, 0, 0, 8, 9, 5, 0, 0, 0, 0, 0, 0, 11, 0, 6,
+	0, 0, 2, 0, 4, 0, 0, 0,
+}}
+var hUpdateMountTargetResponse = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 1, 3, 10, 0, 0, 0, 7, 12, 0, 0, 8, 9, 5, 0, 0, 0, 0, 0, 0, 11, 0, 6,
+	0, 0, 2, 0, 4, 0, 0, 0,
+}}
+
+var sCreateAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPoint, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateAccessPoint})
+var sCreateFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystem, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateFileSystem})
+var sCreateMountTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMountTarget, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateMountTarget})
+var sDeleteAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPoint, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAccessPoint})
+var sDeleteFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystem, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFileSystem})
+var sDeleteFileSystemPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemPolicy, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFileSystemPolicy})
+var sDeleteMountTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMountTarget, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMountTarget})
+var sGetAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPoint, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetAccessPoint})
+var sGetFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystem, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetFileSystem})
+var sGetFileSystemPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystemPolicy, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetFileSystemPolicy})
+var sGetMountTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMountTarget, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetMountTarget})
+var sGetSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSynchronizationConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetSynchronizationConfiguration})
+var sListAccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPoints, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListAccessPoints})
+var sListFileSystems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystems, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListFileSystems})
+var sListMountTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMountTargets, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListMountTargets})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutFileSystemPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileSystemPolicy, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ePutFileSystemPolicy})
+var sPutSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSynchronizationConfiguration, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ePutSynchronizationConfiguration})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMountTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMountTarget, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMountTarget})
+var s_S3Files = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Files, Traits: &t21, Type: smithy.ShapeTypeService, Ext: &e_S3Files})
+var s_AccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointArn, Type: smithy.ShapeTypeString, Ext: &e_AccessPointArn})
+var s_AccessPointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointId, Type: smithy.ShapeTypeString, Ext: &e_AccessPointId})
+var s_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPoints, Members: &m_AccessPoints, Type: smithy.ShapeTypeList, Ext: &e_AccessPoints})
+var s_AccessPoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListAccessPointsDescription, Members: &mListAccessPointsDescription, Type: smithy.ShapeTypeStructure, Ext: &e_AccessPoints_member})
+var s_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneId})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var s_BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &e_BucketArn})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eConflictException_errorCode})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCreationPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreationPermissions, Members: &mCreationPermissions, Type: smithy.ShapeTypeStructure, Ext: &eCreationPermissions})
+var sCreationPermissions_ownerUid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerUid", ID: &i_OwnerUid, Type: smithy.ShapeTypeLong, Ext: &eCreationPermissions_ownerUid})
+var sCreationPermissions_ownerGid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerGid", ID: &i_OwnerGid, Type: smithy.ShapeTypeLong, Ext: &eCreationPermissions_ownerGid})
+var sCreationPermissions_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_Permissions, Type: smithy.ShapeTypeString, Ext: &eCreationPermissions_permissions})
+var s_CreationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationToken, Type: smithy.ShapeTypeString, Ext: &e_CreationToken})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var sExpirationDataRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationDataRule, Members: &mExpirationDataRule, Type: smithy.ShapeTypeStructure, Ext: &eExpirationDataRule})
+var sExpirationDataRule_daysAfterLastAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "daysAfterLastAccess", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eExpirationDataRule_daysAfterLastAccess})
+var s_ExpirationDataRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpirationDataRuleList, Members: &m_ExpirationDataRuleList, Type: smithy.ShapeTypeList, Ext: &e_ExpirationDataRuleList})
+var s_ExpirationDataRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpirationDataRule, Members: &mExpirationDataRule, Type: smithy.ShapeTypeStructure, Ext: &e_ExpirationDataRuleList_member})
+var s_FileSystemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemArn, Type: smithy.ShapeTypeString, Ext: &e_FileSystemArn})
+var s_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &e_FileSystemId})
+var s_FileSystems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystems, Members: &m_FileSystems, Type: smithy.ShapeTypeList, Ext: &e_FileSystems})
+var s_FileSystems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListFileSystemsDescription, Members: &mListFileSystemsDescription, Type: smithy.ShapeTypeStructure, Ext: &e_FileSystems_member})
+var s_Gid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Gid, Type: smithy.ShapeTypeLong, Ext: &e_Gid})
+var sImportDataRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDataRule, Members: &mImportDataRule, Type: smithy.ShapeTypeStructure, Ext: &eImportDataRule})
+var sImportDataRule_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eImportDataRule_prefix})
+var sImportDataRule_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &iImportTrigger, Members: &mImportTrigger, Traits: &t25, Type: smithy.ShapeTypeEnum, Ext: &eImportDataRule_trigger})
+var sImportDataRule_sizeLessThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeLessThan", ID: &pLong, Traits: &t26, Type: smithy.ShapeTypeLong, Ext: &eImportDataRule_sizeLessThan})
+var s_ImportDataRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportDataRuleList, Members: &m_ImportDataRuleList, Type: smithy.ShapeTypeList, Ext: &e_ImportDataRuleList})
+var s_ImportDataRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImportDataRule, Members: &mImportDataRule, Type: smithy.ShapeTypeStructure, Ext: &e_ImportDataRuleList_member})
+var sImportTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTrigger, Members: &mImportTrigger, Type: smithy.ShapeTypeEnum, Ext: &eImportTrigger})
+var sImportTrigger_ON_DIRECTORY_FIRST_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DIRECTORY_FIRST_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportTrigger_ON_DIRECTORY_FIRST_ACCESS})
+var sImportTrigger_ON_FILE_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_FILE_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportTrigger_ON_FILE_ACCESS})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_errorCode})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eIpAddressType})
+var sIpAddressType_IPV4_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_IPV4_ONLY})
+var sIpAddressType_IPV6_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_IPV6_ONLY})
+var sIpAddressType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_DUAL_STACK})
+var s_Ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &e_Ipv4Address})
+var s_Ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &e_Ipv6Address})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var sLifeCycleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eLifeCycleState})
+var sLifeCycleState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_available})
+var sLifeCycleState_creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_creating})
+var sLifeCycleState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_deleting})
+var sLifeCycleState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_deleted})
+var sLifeCycleState_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_error})
+var sLifeCycleState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_updating})
+var sLifeCycleState_misconfigured = smithy.NewStaticSchema(smithy.StaticSchema{Member: "misconfigured", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleState_misconfigured})
+var sListAccessPointsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPointsDescription, Members: &mListAccessPointsDescription, Type: smithy.ShapeTypeStructure, Ext: &eListAccessPointsDescription})
+var sListAccessPointsDescription_accessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointArn", ID: &i_AccessPointArn, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsDescription_accessPointArn})
+var sListAccessPointsDescription_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsDescription_accessPointId})
+var sListAccessPointsDescription_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsDescription_fileSystemId})
+var sListAccessPointsDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eListAccessPointsDescription_status})
+var sListAccessPointsDescription_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsDescription_ownerId})
+var sListAccessPointsDescription_posixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posixUser", ID: &iPosixUser, Members: &mPosixUser, Type: smithy.ShapeTypeStructure, Ext: &eListAccessPointsDescription_posixUser})
+var sListAccessPointsDescription_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &iRootDirectory, Members: &mRootDirectory, Type: smithy.ShapeTypeStructure, Ext: &eListAccessPointsDescription_rootDirectory})
+var sListAccessPointsDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsDescription_name})
+var sListFileSystemsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemsDescription, Members: &mListFileSystemsDescription, Type: smithy.ShapeTypeStructure, Ext: &eListFileSystemsDescription})
+var sListFileSystemsDescription_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListFileSystemsDescription_creationTime})
+var sListFileSystemsDescription_fileSystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemArn", ID: &i_FileSystemArn, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_fileSystemArn})
+var sListFileSystemsDescription_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_fileSystemId})
+var sListFileSystemsDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_name})
+var sListFileSystemsDescription_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_bucket})
+var sListFileSystemsDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eListFileSystemsDescription_status})
+var sListFileSystemsDescription_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_statusMessage})
+var sListFileSystemsDescription_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_roleArn})
+var sListFileSystemsDescription_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsDescription_ownerId})
+var sListMountTargetsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMountTargetsDescription, Members: &mListMountTargetsDescription, Type: smithy.ShapeTypeStructure, Ext: &eListMountTargetsDescription})
+var sListMountTargetsDescription_availabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_availabilityZoneId})
+var sListMountTargetsDescription_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_fileSystemId})
+var sListMountTargetsDescription_ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Address", ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_ipv4Address})
+var sListMountTargetsDescription_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_ipv6Address})
+var sListMountTargetsDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eListMountTargetsDescription_status})
+var sListMountTargetsDescription_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_statusMessage})
+var sListMountTargetsDescription_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_mountTargetId})
+var sListMountTargetsDescription_networkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_networkInterfaceId})
+var sListMountTargetsDescription_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_ownerId})
+var sListMountTargetsDescription_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_subnetId})
+var sListMountTargetsDescription_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsDescription_vpcId})
+var s_MountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MountTargetId, Type: smithy.ShapeTypeString, Ext: &e_MountTargetId})
+var s_MountTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MountTargets, Members: &m_MountTargets, Type: smithy.ShapeTypeList, Ext: &e_MountTargets})
+var s_MountTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListMountTargetsDescription, Members: &mListMountTargetsDescription, Type: smithy.ShapeTypeStructure, Ext: &e_MountTargets_member})
+var s_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &e_NetworkInterfaceId})
+var s_OwnerGid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerGid, Type: smithy.ShapeTypeLong, Ext: &e_OwnerGid})
+var s_OwnerUid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerUid, Type: smithy.ShapeTypeLong, Ext: &e_OwnerUid})
+var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &e_Path})
+var s_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Permissions, Type: smithy.ShapeTypeString, Ext: &e_Permissions})
+var sPosixUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPosixUser, Members: &mPosixUser, Type: smithy.ShapeTypeStructure, Ext: &ePosixUser})
+var sPosixUser_uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uid", ID: &i_Uid, Type: smithy.ShapeTypeLong, Ext: &ePosixUser_uid})
+var sPosixUser_gid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gid", ID: &i_Gid, Type: smithy.ShapeTypeLong, Ext: &ePosixUser_gid})
+var sPosixUser_secondaryGids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryGids", ID: &i_SecondaryGids, Members: &m_SecondaryGids, Type: smithy.ShapeTypeList, Ext: &ePosixUser_secondaryGids})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_errorCode})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sRootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRootDirectory, Members: &mRootDirectory, Type: smithy.ShapeTypeStructure, Ext: &eRootDirectory})
+var sRootDirectory_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eRootDirectory_path})
+var sRootDirectory_creationPermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationPermissions", ID: &iCreationPermissions, Members: &mCreationPermissions, Type: smithy.ShapeTypeStructure, Ext: &eRootDirectory_creationPermissions})
+var s_SecondaryGids = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryGids, Members: &m_SecondaryGids, Type: smithy.ShapeTypeList, Ext: &e_SecondaryGids})
+var s_SecondaryGids_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Gid, Type: smithy.ShapeTypeLong, Ext: &e_SecondaryGids_member})
+var s_SecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroup, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroup})
+var s_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroups})
+var s_SecurityGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroup, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroups_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_errorCode})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &e_StatusMessage})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_errorCode})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Uid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uid, Type: smithy.ShapeTypeLong, Ext: &e_Uid})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eValidationException_errorCode})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sCreateAccessPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPointRequest, Members: &mCreateAccessPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointRequest})
+var sCreateAccessPointRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointRequest_clientToken})
+var sCreateAccessPointRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointRequest_tags})
+var sCreateAccessPointRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointRequest_fileSystemId})
+var sCreateAccessPointRequest_posixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posixUser", ID: &iPosixUser, Members: &mPosixUser, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointRequest_posixUser})
+var sCreateAccessPointRequest_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &iRootDirectory, Members: &mRootDirectory, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointRequest_rootDirectory})
+var sCreateAccessPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPointResponse, Members: &mCreateAccessPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointResponse})
+var sCreateAccessPointResponse_accessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointArn", ID: &i_AccessPointArn, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_accessPointArn})
+var sCreateAccessPointResponse_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_accessPointId})
+var sCreateAccessPointResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_clientToken})
+var sCreateAccessPointResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_fileSystemId})
+var sCreateAccessPointResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessPointResponse_status})
+var sCreateAccessPointResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_ownerId})
+var sCreateAccessPointResponse_posixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posixUser", ID: &iPosixUser, Members: &mPosixUser, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointResponse_posixUser})
+var sCreateAccessPointResponse_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &iRootDirectory, Members: &mRootDirectory, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessPointResponse_rootDirectory})
+var sCreateAccessPointResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAccessPointResponse_tags})
+var sCreateAccessPointResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eCreateAccessPointResponse_name})
+var sCreateFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemRequest, Members: &mCreateFileSystemRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFileSystemRequest})
+var sCreateFileSystemRequest_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemRequest_bucket})
+var sCreateFileSystemRequest_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemRequest_prefix})
+var sCreateFileSystemRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_CreationToken, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemRequest_clientToken})
+var sCreateFileSystemRequest_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemRequest_kmsKeyId})
+var sCreateFileSystemRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemRequest_roleArn})
+var sCreateFileSystemRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFileSystemRequest_tags})
+var sCreateFileSystemRequest_acceptBucketWarning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acceptBucketWarning", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFileSystemRequest_acceptBucketWarning})
+var sCreateFileSystemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemResponse, Members: &mCreateFileSystemResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFileSystemResponse})
+var sCreateFileSystemResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateFileSystemResponse_creationTime})
+var sCreateFileSystemResponse_fileSystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemArn", ID: &i_FileSystemArn, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_fileSystemArn})
+var sCreateFileSystemResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_fileSystemId})
+var sCreateFileSystemResponse_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_bucket})
+var sCreateFileSystemResponse_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_prefix})
+var sCreateFileSystemResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_clientToken})
+var sCreateFileSystemResponse_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_kmsKeyId})
+var sCreateFileSystemResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eCreateFileSystemResponse_status})
+var sCreateFileSystemResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_statusMessage})
+var sCreateFileSystemResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_roleArn})
+var sCreateFileSystemResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_ownerId})
+var sCreateFileSystemResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFileSystemResponse_tags})
+var sCreateFileSystemResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eCreateFileSystemResponse_name})
+var sCreateMountTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMountTargetRequest, Members: &mCreateMountTargetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMountTargetRequest})
+var sCreateMountTargetRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetRequest_fileSystemId})
+var sCreateMountTargetRequest_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetRequest_subnetId})
+var sCreateMountTargetRequest_ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Address", ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetRequest_ipv4Address})
+var sCreateMountTargetRequest_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetRequest_ipv6Address})
+var sCreateMountTargetRequest_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eCreateMountTargetRequest_ipAddressType})
+var sCreateMountTargetRequest_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eCreateMountTargetRequest_securityGroups})
+var sCreateMountTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMountTargetResponse, Members: &mCreateMountTargetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMountTargetResponse})
+var sCreateMountTargetResponse_availabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_availabilityZoneId})
+var sCreateMountTargetResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_ownerId})
+var sCreateMountTargetResponse_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_mountTargetId})
+var sCreateMountTargetResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_fileSystemId})
+var sCreateMountTargetResponse_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_subnetId})
+var sCreateMountTargetResponse_ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Address", ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_ipv4Address})
+var sCreateMountTargetResponse_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_ipv6Address})
+var sCreateMountTargetResponse_networkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_networkInterfaceId})
+var sCreateMountTargetResponse_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_vpcId})
+var sCreateMountTargetResponse_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eCreateMountTargetResponse_securityGroups})
+var sCreateMountTargetResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eCreateMountTargetResponse_status})
+var sCreateMountTargetResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eCreateMountTargetResponse_statusMessage})
+var sDeleteAccessPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPointRequest, Members: &mDeleteAccessPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessPointRequest})
+var sDeleteAccessPointRequest_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessPointRequest_accessPointId})
+var sDeleteFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemRequest, Members: &mDeleteFileSystemRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFileSystemRequest})
+var sDeleteFileSystemRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteFileSystemRequest_fileSystemId})
+var sDeleteFileSystemRequest_forceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceDelete", ID: &pBoolean, Traits: &t33, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteFileSystemRequest_forceDelete})
+var sDeleteFileSystemPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemPolicyRequest, Members: &mDeleteFileSystemPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFileSystemPolicyRequest})
+var sDeleteFileSystemPolicyRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteFileSystemPolicyRequest_fileSystemId})
+var sDeleteMountTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMountTargetRequest, Members: &mDeleteMountTargetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMountTargetRequest})
+var sDeleteMountTargetRequest_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteMountTargetRequest_mountTargetId})
+var sGetAccessPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPointRequest, Members: &mGetAccessPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessPointRequest})
+var sGetAccessPointRequest_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointRequest_accessPointId})
+var sGetAccessPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPointResponse, Members: &mGetAccessPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessPointResponse})
+var sGetAccessPointResponse_accessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointArn", ID: &i_AccessPointArn, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_accessPointArn})
+var sGetAccessPointResponse_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_accessPointId})
+var sGetAccessPointResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_clientToken})
+var sGetAccessPointResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_fileSystemId})
+var sGetAccessPointResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eGetAccessPointResponse_status})
+var sGetAccessPointResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_ownerId})
+var sGetAccessPointResponse_posixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posixUser", ID: &iPosixUser, Members: &mPosixUser, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessPointResponse_posixUser})
+var sGetAccessPointResponse_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &iRootDirectory, Members: &mRootDirectory, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessPointResponse_rootDirectory})
+var sGetAccessPointResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGetAccessPointResponse_tags})
+var sGetAccessPointResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eGetAccessPointResponse_name})
+var sGetFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystemRequest, Members: &mGetFileSystemRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFileSystemRequest})
+var sGetFileSystemRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemRequest_fileSystemId})
+var sGetFileSystemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystemResponse, Members: &mGetFileSystemResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFileSystemResponse})
+var sGetFileSystemResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetFileSystemResponse_creationTime})
+var sGetFileSystemResponse_fileSystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemArn", ID: &i_FileSystemArn, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_fileSystemArn})
+var sGetFileSystemResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_fileSystemId})
+var sGetFileSystemResponse_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_bucket})
+var sGetFileSystemResponse_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_prefix})
+var sGetFileSystemResponse_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_clientToken})
+var sGetFileSystemResponse_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_kmsKeyId})
+var sGetFileSystemResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eGetFileSystemResponse_status})
+var sGetFileSystemResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_statusMessage})
+var sGetFileSystemResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_roleArn})
+var sGetFileSystemResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_ownerId})
+var sGetFileSystemResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGetFileSystemResponse_tags})
+var sGetFileSystemResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemResponse_name})
+var sGetFileSystemPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystemPolicyRequest, Members: &mGetFileSystemPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFileSystemPolicyRequest})
+var sGetFileSystemPolicyRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemPolicyRequest_fileSystemId})
+var sGetFileSystemPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileSystemPolicyResponse, Members: &mGetFileSystemPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFileSystemPolicyResponse})
+var sGetFileSystemPolicyResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemPolicyResponse_fileSystemId})
+var sGetFileSystemPolicyResponse_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetFileSystemPolicyResponse_policy})
+var sGetMountTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMountTargetRequest, Members: &mGetMountTargetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMountTargetRequest})
+var sGetMountTargetRequest_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetRequest_mountTargetId})
+var sGetMountTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMountTargetResponse, Members: &mGetMountTargetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMountTargetResponse})
+var sGetMountTargetResponse_availabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_availabilityZoneId})
+var sGetMountTargetResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_ownerId})
+var sGetMountTargetResponse_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_mountTargetId})
+var sGetMountTargetResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_fileSystemId})
+var sGetMountTargetResponse_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_subnetId})
+var sGetMountTargetResponse_ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Address", ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_ipv4Address})
+var sGetMountTargetResponse_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_ipv6Address})
+var sGetMountTargetResponse_networkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_networkInterfaceId})
+var sGetMountTargetResponse_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_vpcId})
+var sGetMountTargetResponse_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eGetMountTargetResponse_securityGroups})
+var sGetMountTargetResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eGetMountTargetResponse_status})
+var sGetMountTargetResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eGetMountTargetResponse_statusMessage})
+var sGetSynchronizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSynchronizationConfigurationRequest, Members: &mGetSynchronizationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSynchronizationConfigurationRequest})
+var sGetSynchronizationConfigurationRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetSynchronizationConfigurationRequest_fileSystemId})
+var sGetSynchronizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSynchronizationConfigurationResponse, Members: &mGetSynchronizationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSynchronizationConfigurationResponse})
+var sGetSynchronizationConfigurationResponse_latestVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionNumber", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eGetSynchronizationConfigurationResponse_latestVersionNumber})
+var sGetSynchronizationConfigurationResponse_importDataRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importDataRules", ID: &i_ImportDataRuleList, Members: &m_ImportDataRuleList, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &eGetSynchronizationConfigurationResponse_importDataRules})
+var sGetSynchronizationConfigurationResponse_expirationDataRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationDataRules", ID: &i_ExpirationDataRuleList, Members: &m_ExpirationDataRuleList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eGetSynchronizationConfigurationResponse_expirationDataRules})
+var sListAccessPointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPointsRequest, Members: &mListAccessPointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAccessPointsRequest})
+var sListAccessPointsRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsRequest_fileSystemId})
+var sListAccessPointsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListAccessPointsRequest_maxResults})
+var sListAccessPointsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsRequest_nextToken})
+var sListAccessPointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPointsResponse, Members: &mListAccessPointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAccessPointsResponse})
+var sListAccessPointsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAccessPointsResponse_nextToken})
+var sListAccessPointsResponse_accessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPoints", ID: &i_AccessPoints, Members: &m_AccessPoints, Type: smithy.ShapeTypeList, Ext: &eListAccessPointsResponse_accessPoints})
+var sListFileSystemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemsRequest, Members: &mListFileSystemsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFileSystemsRequest})
+var sListFileSystemsRequest_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_BucketArn, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsRequest_bucket})
+var sListFileSystemsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListFileSystemsRequest_maxResults})
+var sListFileSystemsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsRequest_nextToken})
+var sListFileSystemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemsResponse, Members: &mListFileSystemsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFileSystemsResponse})
+var sListFileSystemsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFileSystemsResponse_nextToken})
+var sListFileSystemsResponse_fileSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystems", ID: &i_FileSystems, Members: &m_FileSystems, Type: smithy.ShapeTypeList, Ext: &eListFileSystemsResponse_fileSystems})
+var sListMountTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMountTargetsRequest, Members: &mListMountTargetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMountTargetsRequest})
+var sListMountTargetsRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsRequest_fileSystemId})
+var sListMountTargetsRequest_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_AccessPointId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsRequest_accessPointId})
+var sListMountTargetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListMountTargetsRequest_maxResults})
+var sListMountTargetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsRequest_nextToken})
+var sListMountTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMountTargetsResponse, Members: &mListMountTargetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMountTargetsResponse})
+var sListMountTargetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMountTargetsResponse_nextToken})
+var sListMountTargetsResponse_mountTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargets", ID: &i_MountTargets, Members: &m_MountTargets, Type: smithy.ShapeTypeList, Ext: &eListMountTargetsResponse_mountTargets})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceId})
+var sListTagsForResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_maxResults})
+var sListTagsForResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_nextToken})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sListTagsForResourceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_nextToken})
+var sPutFileSystemPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileSystemPolicyRequest, Members: &mPutFileSystemPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutFileSystemPolicyRequest})
+var sPutFileSystemPolicyRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePutFileSystemPolicyRequest_fileSystemId})
+var sPutFileSystemPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutFileSystemPolicyRequest_policy})
+var sPutFileSystemPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileSystemPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutFileSystemPolicyResponse})
+var sPutSynchronizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSynchronizationConfigurationRequest, Members: &mPutSynchronizationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSynchronizationConfigurationRequest})
+var sPutSynchronizationConfigurationRequest_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePutSynchronizationConfigurationRequest_fileSystemId})
+var sPutSynchronizationConfigurationRequest_latestVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionNumber", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ePutSynchronizationConfigurationRequest_latestVersionNumber})
+var sPutSynchronizationConfigurationRequest_importDataRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importDataRules", ID: &i_ImportDataRuleList, Members: &m_ImportDataRuleList, Traits: &t36, Type: smithy.ShapeTypeList, Ext: &ePutSynchronizationConfigurationRequest_importDataRules})
+var sPutSynchronizationConfigurationRequest_expirationDataRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationDataRules", ID: &i_ExpirationDataRuleList, Members: &m_ExpirationDataRuleList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &ePutSynchronizationConfigurationRequest_expirationDataRules})
+var sPutSynchronizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSynchronizationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSynchronizationConfigurationResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceId})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceId})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t45, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateMountTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMountTargetRequest, Members: &mUpdateMountTargetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMountTargetRequest})
+var sUpdateMountTargetRequest_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetRequest_mountTargetId})
+var sUpdateMountTargetRequest_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eUpdateMountTargetRequest_securityGroups})
+var sUpdateMountTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMountTargetResponse, Members: &mUpdateMountTargetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMountTargetResponse})
+var sUpdateMountTargetResponse_availabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_availabilityZoneId})
+var sUpdateMountTargetResponse_ownerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_ownerId})
+var sUpdateMountTargetResponse_mountTargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountTargetId", ID: &i_MountTargetId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_mountTargetId})
+var sUpdateMountTargetResponse_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_fileSystemId})
+var sUpdateMountTargetResponse_subnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_subnetId})
+var sUpdateMountTargetResponse_ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Address", ID: &i_Ipv4Address, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_ipv4Address})
+var sUpdateMountTargetResponse_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_Ipv6Address, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_ipv6Address})
+var sUpdateMountTargetResponse_networkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_networkInterfaceId})
+var sUpdateMountTargetResponse_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_vpcId})
+var sUpdateMountTargetResponse_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList, Ext: &eUpdateMountTargetResponse_securityGroups})
+var sUpdateMountTargetResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLifeCycleState, Members: &mLifeCycleState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMountTargetResponse_status})
+var sUpdateMountTargetResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eUpdateMountTargetResponse_statusMessage})
+
+var CreateAccessPoint = &sCreateAccessPoint
+
+var CreateFileSystem = &sCreateFileSystem
+
+var CreateMountTarget = &sCreateMountTarget
+
+var DeleteAccessPoint = &sDeleteAccessPoint
+
+var DeleteFileSystem = &sDeleteFileSystem
+
+var DeleteFileSystemPolicy = &sDeleteFileSystemPolicy
+
+var DeleteMountTarget = &sDeleteMountTarget
+
+var GetAccessPoint = &sGetAccessPoint
+
+var GetFileSystem = &sGetFileSystem
+
+var GetFileSystemPolicy = &sGetFileSystemPolicy
+
+var GetMountTarget = &sGetMountTarget
+
+var GetSynchronizationConfiguration = &sGetSynchronizationConfiguration
+
+var ListAccessPoints = &sListAccessPoints
+
+var ListFileSystems = &sListFileSystems
+
+var ListMountTargets = &sListMountTargets
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutFileSystemPolicy = &sPutFileSystemPolicy
+
+var PutSynchronizationConfiguration = &sPutSynchronizationConfiguration
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateMountTarget = &sUpdateMountTarget
+
+var _S3Files = &s_S3Files
+
+var _AccessPointArn = &s_AccessPointArn
+
+var _AccessPointId = &s_AccessPointId
+
+var _AccessPoints = &s_AccessPoints
+var _AccessPoints_member = &s_AccessPoints_member
+
+var _AvailabilityZoneId = &s_AvailabilityZoneId
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _BucketArn = &s_BucketArn
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_errorCode = &sConflictException_errorCode
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var CreationPermissions = &sCreationPermissions
+var CreationPermissions_ownerUid = &sCreationPermissions_ownerUid
+var CreationPermissions_ownerGid = &sCreationPermissions_ownerGid
+var CreationPermissions_permissions = &sCreationPermissions_permissions
+
+var _CreationToken = &s_CreationToken
+
+var _ErrorCode = &s_ErrorCode
+
+var ExpirationDataRule = &sExpirationDataRule
+var ExpirationDataRule_daysAfterLastAccess = &sExpirationDataRule_daysAfterLastAccess
+
+var _ExpirationDataRuleList = &s_ExpirationDataRuleList
+var _ExpirationDataRuleList_member = &s_ExpirationDataRuleList_member
+
+var _FileSystemArn = &s_FileSystemArn
+
+var _FileSystemId = &s_FileSystemId
+
+var _FileSystems = &s_FileSystems
+var _FileSystems_member = &s_FileSystems_member
+
+var _Gid = &s_Gid
+
+var ImportDataRule = &sImportDataRule
+var ImportDataRule_prefix = &sImportDataRule_prefix
+var ImportDataRule_trigger = &sImportDataRule_trigger
+var ImportDataRule_sizeLessThan = &sImportDataRule_sizeLessThan
+
+var _ImportDataRuleList = &s_ImportDataRuleList
+var _ImportDataRuleList_member = &s_ImportDataRuleList_member
+
+var ImportTrigger = &sImportTrigger
+var ImportTrigger_ON_DIRECTORY_FIRST_ACCESS = &sImportTrigger_ON_DIRECTORY_FIRST_ACCESS
+var ImportTrigger_ON_FILE_ACCESS = &sImportTrigger_ON_FILE_ACCESS
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_errorCode = &sInternalServerException_errorCode
+var InternalServerException_message = &sInternalServerException_message
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4_ONLY = &sIpAddressType_IPV4_ONLY
+var IpAddressType_IPV6_ONLY = &sIpAddressType_IPV6_ONLY
+var IpAddressType_DUAL_STACK = &sIpAddressType_DUAL_STACK
+
+var _Ipv4Address = &s_Ipv4Address
+
+var _Ipv6Address = &s_Ipv6Address
+
+var _KmsKeyId = &s_KmsKeyId
+
+var LifeCycleState = &sLifeCycleState
+var LifeCycleState_available = &sLifeCycleState_available
+var LifeCycleState_creating = &sLifeCycleState_creating
+var LifeCycleState_deleting = &sLifeCycleState_deleting
+var LifeCycleState_deleted = &sLifeCycleState_deleted
+var LifeCycleState_error = &sLifeCycleState_error
+var LifeCycleState_updating = &sLifeCycleState_updating
+var LifeCycleState_misconfigured = &sLifeCycleState_misconfigured
+
+var ListAccessPointsDescription = &sListAccessPointsDescription
+var ListAccessPointsDescription_accessPointArn = &sListAccessPointsDescription_accessPointArn
+var ListAccessPointsDescription_accessPointId = &sListAccessPointsDescription_accessPointId
+var ListAccessPointsDescription_fileSystemId = &sListAccessPointsDescription_fileSystemId
+var ListAccessPointsDescription_status = &sListAccessPointsDescription_status
+var ListAccessPointsDescription_ownerId = &sListAccessPointsDescription_ownerId
+var ListAccessPointsDescription_posixUser = &sListAccessPointsDescription_posixUser
+var ListAccessPointsDescription_rootDirectory = &sListAccessPointsDescription_rootDirectory
+var ListAccessPointsDescription_name = &sListAccessPointsDescription_name
+
+var ListFileSystemsDescription = &sListFileSystemsDescription
+var ListFileSystemsDescription_creationTime = &sListFileSystemsDescription_creationTime
+var ListFileSystemsDescription_fileSystemArn = &sListFileSystemsDescription_fileSystemArn
+var ListFileSystemsDescription_fileSystemId = &sListFileSystemsDescription_fileSystemId
+var ListFileSystemsDescription_name = &sListFileSystemsDescription_name
+var ListFileSystemsDescription_bucket = &sListFileSystemsDescription_bucket
+var ListFileSystemsDescription_status = &sListFileSystemsDescription_status
+var ListFileSystemsDescription_statusMessage = &sListFileSystemsDescription_statusMessage
+var ListFileSystemsDescription_roleArn = &sListFileSystemsDescription_roleArn
+var ListFileSystemsDescription_ownerId = &sListFileSystemsDescription_ownerId
+
+var ListMountTargetsDescription = &sListMountTargetsDescription
+var ListMountTargetsDescription_availabilityZoneId = &sListMountTargetsDescription_availabilityZoneId
+var ListMountTargetsDescription_fileSystemId = &sListMountTargetsDescription_fileSystemId
+var ListMountTargetsDescription_ipv4Address = &sListMountTargetsDescription_ipv4Address
+var ListMountTargetsDescription_ipv6Address = &sListMountTargetsDescription_ipv6Address
+var ListMountTargetsDescription_status = &sListMountTargetsDescription_status
+var ListMountTargetsDescription_statusMessage = &sListMountTargetsDescription_statusMessage
+var ListMountTargetsDescription_mountTargetId = &sListMountTargetsDescription_mountTargetId
+var ListMountTargetsDescription_networkInterfaceId = &sListMountTargetsDescription_networkInterfaceId
+var ListMountTargetsDescription_ownerId = &sListMountTargetsDescription_ownerId
+var ListMountTargetsDescription_subnetId = &sListMountTargetsDescription_subnetId
+var ListMountTargetsDescription_vpcId = &sListMountTargetsDescription_vpcId
+
+var _MountTargetId = &s_MountTargetId
+
+var _MountTargets = &s_MountTargets
+var _MountTargets_member = &s_MountTargets_member
+
+var _NetworkInterfaceId = &s_NetworkInterfaceId
+
+var _OwnerGid = &s_OwnerGid
+
+var _OwnerUid = &s_OwnerUid
+
+var _Path = &s_Path
+
+var _Permissions = &s_Permissions
+
+var PosixUser = &sPosixUser
+var PosixUser_uid = &sPosixUser_uid
+var PosixUser_gid = &sPosixUser_gid
+var PosixUser_secondaryGids = &sPosixUser_secondaryGids
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_errorCode = &sResourceNotFoundException_errorCode
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var RootDirectory = &sRootDirectory
+var RootDirectory_path = &sRootDirectory_path
+var RootDirectory_creationPermissions = &sRootDirectory_creationPermissions
+
+var _SecondaryGids = &s_SecondaryGids
+var _SecondaryGids_member = &s_SecondaryGids_member
+
+var _SecurityGroup = &s_SecurityGroup
+
+var _SecurityGroups = &s_SecurityGroups
+var _SecurityGroups_member = &s_SecurityGroups_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_errorCode = &sServiceQuotaExceededException_errorCode
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _StatusMessage = &s_StatusMessage
+
+var _SubnetId = &s_SubnetId
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_errorCode = &sThrottlingException_errorCode
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Uid = &s_Uid
+
+var ValidationException = &sValidationException
+var ValidationException_errorCode = &sValidationException_errorCode
+var ValidationException_message = &sValidationException_message
+
+var _VpcId = &s_VpcId
+
+var CreateAccessPointRequest = &sCreateAccessPointRequest
+var CreateAccessPointRequest_clientToken = &sCreateAccessPointRequest_clientToken
+var CreateAccessPointRequest_tags = &sCreateAccessPointRequest_tags
+var CreateAccessPointRequest_fileSystemId = &sCreateAccessPointRequest_fileSystemId
+var CreateAccessPointRequest_posixUser = &sCreateAccessPointRequest_posixUser
+var CreateAccessPointRequest_rootDirectory = &sCreateAccessPointRequest_rootDirectory
+
+var CreateAccessPointResponse = &sCreateAccessPointResponse
+var CreateAccessPointResponse_accessPointArn = &sCreateAccessPointResponse_accessPointArn
+var CreateAccessPointResponse_accessPointId = &sCreateAccessPointResponse_accessPointId
+var CreateAccessPointResponse_clientToken = &sCreateAccessPointResponse_clientToken
+var CreateAccessPointResponse_fileSystemId = &sCreateAccessPointResponse_fileSystemId
+var CreateAccessPointResponse_status = &sCreateAccessPointResponse_status
+var CreateAccessPointResponse_ownerId = &sCreateAccessPointResponse_ownerId
+var CreateAccessPointResponse_posixUser = &sCreateAccessPointResponse_posixUser
+var CreateAccessPointResponse_rootDirectory = &sCreateAccessPointResponse_rootDirectory
+var CreateAccessPointResponse_tags = &sCreateAccessPointResponse_tags
+var CreateAccessPointResponse_name = &sCreateAccessPointResponse_name
+
+var CreateFileSystemRequest = &sCreateFileSystemRequest
+var CreateFileSystemRequest_bucket = &sCreateFileSystemRequest_bucket
+var CreateFileSystemRequest_prefix = &sCreateFileSystemRequest_prefix
+var CreateFileSystemRequest_clientToken = &sCreateFileSystemRequest_clientToken
+var CreateFileSystemRequest_kmsKeyId = &sCreateFileSystemRequest_kmsKeyId
+var CreateFileSystemRequest_roleArn = &sCreateFileSystemRequest_roleArn
+var CreateFileSystemRequest_tags = &sCreateFileSystemRequest_tags
+var CreateFileSystemRequest_acceptBucketWarning = &sCreateFileSystemRequest_acceptBucketWarning
+
+var CreateFileSystemResponse = &sCreateFileSystemResponse
+var CreateFileSystemResponse_creationTime = &sCreateFileSystemResponse_creationTime
+var CreateFileSystemResponse_fileSystemArn = &sCreateFileSystemResponse_fileSystemArn
+var CreateFileSystemResponse_fileSystemId = &sCreateFileSystemResponse_fileSystemId
+var CreateFileSystemResponse_bucket = &sCreateFileSystemResponse_bucket
+var CreateFileSystemResponse_prefix = &sCreateFileSystemResponse_prefix
+var CreateFileSystemResponse_clientToken = &sCreateFileSystemResponse_clientToken
+var CreateFileSystemResponse_kmsKeyId = &sCreateFileSystemResponse_kmsKeyId
+var CreateFileSystemResponse_status = &sCreateFileSystemResponse_status
+var CreateFileSystemResponse_statusMessage = &sCreateFileSystemResponse_statusMessage
+var CreateFileSystemResponse_roleArn = &sCreateFileSystemResponse_roleArn
+var CreateFileSystemResponse_ownerId = &sCreateFileSystemResponse_ownerId
+var CreateFileSystemResponse_tags = &sCreateFileSystemResponse_tags
+var CreateFileSystemResponse_name = &sCreateFileSystemResponse_name
+
+var CreateMountTargetRequest = &sCreateMountTargetRequest
+var CreateMountTargetRequest_fileSystemId = &sCreateMountTargetRequest_fileSystemId
+var CreateMountTargetRequest_subnetId = &sCreateMountTargetRequest_subnetId
+var CreateMountTargetRequest_ipv4Address = &sCreateMountTargetRequest_ipv4Address
+var CreateMountTargetRequest_ipv6Address = &sCreateMountTargetRequest_ipv6Address
+var CreateMountTargetRequest_ipAddressType = &sCreateMountTargetRequest_ipAddressType
+var CreateMountTargetRequest_securityGroups = &sCreateMountTargetRequest_securityGroups
+
+var CreateMountTargetResponse = &sCreateMountTargetResponse
+var CreateMountTargetResponse_availabilityZoneId = &sCreateMountTargetResponse_availabilityZoneId
+var CreateMountTargetResponse_ownerId = &sCreateMountTargetResponse_ownerId
+var CreateMountTargetResponse_mountTargetId = &sCreateMountTargetResponse_mountTargetId
+var CreateMountTargetResponse_fileSystemId = &sCreateMountTargetResponse_fileSystemId
+var CreateMountTargetResponse_subnetId = &sCreateMountTargetResponse_subnetId
+var CreateMountTargetResponse_ipv4Address = &sCreateMountTargetResponse_ipv4Address
+var CreateMountTargetResponse_ipv6Address = &sCreateMountTargetResponse_ipv6Address
+var CreateMountTargetResponse_networkInterfaceId = &sCreateMountTargetResponse_networkInterfaceId
+var CreateMountTargetResponse_vpcId = &sCreateMountTargetResponse_vpcId
+var CreateMountTargetResponse_securityGroups = &sCreateMountTargetResponse_securityGroups
+var CreateMountTargetResponse_status = &sCreateMountTargetResponse_status
+var CreateMountTargetResponse_statusMessage = &sCreateMountTargetResponse_statusMessage
+
+var DeleteAccessPointRequest = &sDeleteAccessPointRequest
+var DeleteAccessPointRequest_accessPointId = &sDeleteAccessPointRequest_accessPointId
+
+var DeleteFileSystemRequest = &sDeleteFileSystemRequest
+var DeleteFileSystemRequest_fileSystemId = &sDeleteFileSystemRequest_fileSystemId
+var DeleteFileSystemRequest_forceDelete = &sDeleteFileSystemRequest_forceDelete
+
+var DeleteFileSystemPolicyRequest = &sDeleteFileSystemPolicyRequest
+var DeleteFileSystemPolicyRequest_fileSystemId = &sDeleteFileSystemPolicyRequest_fileSystemId
+
+var DeleteMountTargetRequest = &sDeleteMountTargetRequest
+var DeleteMountTargetRequest_mountTargetId = &sDeleteMountTargetRequest_mountTargetId
+
+var GetAccessPointRequest = &sGetAccessPointRequest
+var GetAccessPointRequest_accessPointId = &sGetAccessPointRequest_accessPointId
+
+var GetAccessPointResponse = &sGetAccessPointResponse
+var GetAccessPointResponse_accessPointArn = &sGetAccessPointResponse_accessPointArn
+var GetAccessPointResponse_accessPointId = &sGetAccessPointResponse_accessPointId
+var GetAccessPointResponse_clientToken = &sGetAccessPointResponse_clientToken
+var GetAccessPointResponse_fileSystemId = &sGetAccessPointResponse_fileSystemId
+var GetAccessPointResponse_status = &sGetAccessPointResponse_status
+var GetAccessPointResponse_ownerId = &sGetAccessPointResponse_ownerId
+var GetAccessPointResponse_posixUser = &sGetAccessPointResponse_posixUser
+var GetAccessPointResponse_rootDirectory = &sGetAccessPointResponse_rootDirectory
+var GetAccessPointResponse_tags = &sGetAccessPointResponse_tags
+var GetAccessPointResponse_name = &sGetAccessPointResponse_name
+
+var GetFileSystemRequest = &sGetFileSystemRequest
+var GetFileSystemRequest_fileSystemId = &sGetFileSystemRequest_fileSystemId
+
+var GetFileSystemResponse = &sGetFileSystemResponse
+var GetFileSystemResponse_creationTime = &sGetFileSystemResponse_creationTime
+var GetFileSystemResponse_fileSystemArn = &sGetFileSystemResponse_fileSystemArn
+var GetFileSystemResponse_fileSystemId = &sGetFileSystemResponse_fileSystemId
+var GetFileSystemResponse_bucket = &sGetFileSystemResponse_bucket
+var GetFileSystemResponse_prefix = &sGetFileSystemResponse_prefix
+var GetFileSystemResponse_clientToken = &sGetFileSystemResponse_clientToken
+var GetFileSystemResponse_kmsKeyId = &sGetFileSystemResponse_kmsKeyId
+var GetFileSystemResponse_status = &sGetFileSystemResponse_status
+var GetFileSystemResponse_statusMessage = &sGetFileSystemResponse_statusMessage
+var GetFileSystemResponse_roleArn = &sGetFileSystemResponse_roleArn
+var GetFileSystemResponse_ownerId = &sGetFileSystemResponse_ownerId
+var GetFileSystemResponse_tags = &sGetFileSystemResponse_tags
+var GetFileSystemResponse_name = &sGetFileSystemResponse_name
+
+var GetFileSystemPolicyRequest = &sGetFileSystemPolicyRequest
+var GetFileSystemPolicyRequest_fileSystemId = &sGetFileSystemPolicyRequest_fileSystemId
+
+var GetFileSystemPolicyResponse = &sGetFileSystemPolicyResponse
+var GetFileSystemPolicyResponse_fileSystemId = &sGetFileSystemPolicyResponse_fileSystemId
+var GetFileSystemPolicyResponse_policy = &sGetFileSystemPolicyResponse_policy
+
+var GetMountTargetRequest = &sGetMountTargetRequest
+var GetMountTargetRequest_mountTargetId = &sGetMountTargetRequest_mountTargetId
+
+var GetMountTargetResponse = &sGetMountTargetResponse
+var GetMountTargetResponse_availabilityZoneId = &sGetMountTargetResponse_availabilityZoneId
+var GetMountTargetResponse_ownerId = &sGetMountTargetResponse_ownerId
+var GetMountTargetResponse_mountTargetId = &sGetMountTargetResponse_mountTargetId
+var GetMountTargetResponse_fileSystemId = &sGetMountTargetResponse_fileSystemId
+var GetMountTargetResponse_subnetId = &sGetMountTargetResponse_subnetId
+var GetMountTargetResponse_ipv4Address = &sGetMountTargetResponse_ipv4Address
+var GetMountTargetResponse_ipv6Address = &sGetMountTargetResponse_ipv6Address
+var GetMountTargetResponse_networkInterfaceId = &sGetMountTargetResponse_networkInterfaceId
+var GetMountTargetResponse_vpcId = &sGetMountTargetResponse_vpcId
+var GetMountTargetResponse_securityGroups = &sGetMountTargetResponse_securityGroups
+var GetMountTargetResponse_status = &sGetMountTargetResponse_status
+var GetMountTargetResponse_statusMessage = &sGetMountTargetResponse_statusMessage
+
+var GetSynchronizationConfigurationRequest = &sGetSynchronizationConfigurationRequest
+var GetSynchronizationConfigurationRequest_fileSystemId = &sGetSynchronizationConfigurationRequest_fileSystemId
+
+var GetSynchronizationConfigurationResponse = &sGetSynchronizationConfigurationResponse
+var GetSynchronizationConfigurationResponse_latestVersionNumber = &sGetSynchronizationConfigurationResponse_latestVersionNumber
+var GetSynchronizationConfigurationResponse_importDataRules = &sGetSynchronizationConfigurationResponse_importDataRules
+var GetSynchronizationConfigurationResponse_expirationDataRules = &sGetSynchronizationConfigurationResponse_expirationDataRules
+
+var ListAccessPointsRequest = &sListAccessPointsRequest
+var ListAccessPointsRequest_fileSystemId = &sListAccessPointsRequest_fileSystemId
+var ListAccessPointsRequest_maxResults = &sListAccessPointsRequest_maxResults
+var ListAccessPointsRequest_nextToken = &sListAccessPointsRequest_nextToken
+
+var ListAccessPointsResponse = &sListAccessPointsResponse
+var ListAccessPointsResponse_nextToken = &sListAccessPointsResponse_nextToken
+var ListAccessPointsResponse_accessPoints = &sListAccessPointsResponse_accessPoints
+
+var ListFileSystemsRequest = &sListFileSystemsRequest
+var ListFileSystemsRequest_bucket = &sListFileSystemsRequest_bucket
+var ListFileSystemsRequest_maxResults = &sListFileSystemsRequest_maxResults
+var ListFileSystemsRequest_nextToken = &sListFileSystemsRequest_nextToken
+
+var ListFileSystemsResponse = &sListFileSystemsResponse
+var ListFileSystemsResponse_nextToken = &sListFileSystemsResponse_nextToken
+var ListFileSystemsResponse_fileSystems = &sListFileSystemsResponse_fileSystems
+
+var ListMountTargetsRequest = &sListMountTargetsRequest
+var ListMountTargetsRequest_fileSystemId = &sListMountTargetsRequest_fileSystemId
+var ListMountTargetsRequest_accessPointId = &sListMountTargetsRequest_accessPointId
+var ListMountTargetsRequest_maxResults = &sListMountTargetsRequest_maxResults
+var ListMountTargetsRequest_nextToken = &sListMountTargetsRequest_nextToken
+
+var ListMountTargetsResponse = &sListMountTargetsResponse
+var ListMountTargetsResponse_nextToken = &sListMountTargetsResponse_nextToken
+var ListMountTargetsResponse_mountTargets = &sListMountTargetsResponse_mountTargets
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceId = &sListTagsForResourceRequest_resourceId
+var ListTagsForResourceRequest_maxResults = &sListTagsForResourceRequest_maxResults
+var ListTagsForResourceRequest_nextToken = &sListTagsForResourceRequest_nextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+var ListTagsForResourceResponse_nextToken = &sListTagsForResourceResponse_nextToken
+
+var PutFileSystemPolicyRequest = &sPutFileSystemPolicyRequest
+var PutFileSystemPolicyRequest_fileSystemId = &sPutFileSystemPolicyRequest_fileSystemId
+var PutFileSystemPolicyRequest_policy = &sPutFileSystemPolicyRequest_policy
+
+var PutFileSystemPolicyResponse = &sPutFileSystemPolicyResponse
+
+var PutSynchronizationConfigurationRequest = &sPutSynchronizationConfigurationRequest
+var PutSynchronizationConfigurationRequest_fileSystemId = &sPutSynchronizationConfigurationRequest_fileSystemId
+var PutSynchronizationConfigurationRequest_latestVersionNumber = &sPutSynchronizationConfigurationRequest_latestVersionNumber
+var PutSynchronizationConfigurationRequest_importDataRules = &sPutSynchronizationConfigurationRequest_importDataRules
+var PutSynchronizationConfigurationRequest_expirationDataRules = &sPutSynchronizationConfigurationRequest_expirationDataRules
+
+var PutSynchronizationConfigurationResponse = &sPutSynchronizationConfigurationResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceId = &sTagResourceRequest_resourceId
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceId = &sUntagResourceRequest_resourceId
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UpdateMountTargetRequest = &sUpdateMountTargetRequest
+var UpdateMountTargetRequest_mountTargetId = &sUpdateMountTargetRequest_mountTargetId
+var UpdateMountTargetRequest_securityGroups = &sUpdateMountTargetRequest_securityGroups
+
+var UpdateMountTargetResponse = &sUpdateMountTargetResponse
+var UpdateMountTargetResponse_availabilityZoneId = &sUpdateMountTargetResponse_availabilityZoneId
+var UpdateMountTargetResponse_ownerId = &sUpdateMountTargetResponse_ownerId
+var UpdateMountTargetResponse_mountTargetId = &sUpdateMountTargetResponse_mountTargetId
+var UpdateMountTargetResponse_fileSystemId = &sUpdateMountTargetResponse_fileSystemId
+var UpdateMountTargetResponse_subnetId = &sUpdateMountTargetResponse_subnetId
+var UpdateMountTargetResponse_ipv4Address = &sUpdateMountTargetResponse_ipv4Address
+var UpdateMountTargetResponse_ipv6Address = &sUpdateMountTargetResponse_ipv6Address
+var UpdateMountTargetResponse_networkInterfaceId = &sUpdateMountTargetResponse_networkInterfaceId
+var UpdateMountTargetResponse_vpcId = &sUpdateMountTargetResponse_vpcId
+var UpdateMountTargetResponse_securityGroups = &sUpdateMountTargetResponse_securityGroups
+var UpdateMountTargetResponse_status = &sUpdateMountTargetResponse_status
+var UpdateMountTargetResponse_statusMessage = &sUpdateMountTargetResponse_statusMessage
+
+var S3Files = &smithy.ServiceSchema{Schema: &s_S3Files, Version: "2025-05-05"}

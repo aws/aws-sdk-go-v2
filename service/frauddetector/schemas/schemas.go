@@ -4,4804 +4,4618 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchCreateVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchCreateVariable",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchGetVariable",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelBatchImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelBatchPredictionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchPredictionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateBatchImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateBatchPredictionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchPredictionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDetectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateDetectorVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateList",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateVariable",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBatchImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBatchPredictionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchPredictionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDetectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetectorVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEntityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventsByEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventsByEventType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExternalModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteExternalModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteList",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteOutcome = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteOutcome",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteVariable",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeDetector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeModelVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeModelVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetBatchImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchImportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetBatchPredictionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchPredictionJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDeleteEventsByEventTypeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDeleteEventsByEventTypeStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDetectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDetectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectorVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEntityTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEntityTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPrediction",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventPredictionMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPredictionMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExternalModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetExternalModels",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetKMSEncryptionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetKMSEncryptionKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLabels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetLabels",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetListElements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListElements",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetListsMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListsMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModels",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOutcomes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetOutcomes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetVariables",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventPredictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListEventPredictions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutDetector",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEntityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEventType",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutExternalModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutExternalModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutKMSEncryptionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutKMSEncryptionKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutOutcome = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutOutcome",
-}, smithy.ShapeTypeOperation, 0)
-
-var SendEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "SendEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDetectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDetectorVersionMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDetectorVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEventLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateEventLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateList",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateModelVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersionStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRuleMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRuleVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateVariable",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSHawksNestServiceFacade = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AWSHawksNestServiceFacade",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://hawksnest.amazonaws.com/doc/2019-11-15"})
-
-var AWSHawksNestServiceFacade = smithy.NewServiceSchema(_AWSHawksNestServiceFacade, "2019-11-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AggregatedLogOddsMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AggregatedLogOddsMetric",
-}, smithy.ShapeTypeStructure, 2)
-var AggregatedLogOddsMetric_variableNames *smithy.Schema
-
-var AggregatedLogOddsMetric_aggregatedVariablesImportance *smithy.Schema
-
-var AggregatedVariablesImpactExplanation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AggregatedVariablesImpactExplanation",
-}, smithy.ShapeTypeStructure, 3)
-var AggregatedVariablesImpactExplanation_eventVariableNames *smithy.Schema
-
-var AggregatedVariablesImpactExplanation_relativeImpact *smithy.Schema
-
-var AggregatedVariablesImpactExplanation_logOddsImpact *smithy.Schema
-
-var AggregatedVariablesImportanceMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AggregatedVariablesImportanceMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var AggregatedVariablesImportanceMetrics_logOddsMetrics *smithy.Schema
-
-var AllowDenyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AllowDenyList",
-}, smithy.ShapeTypeStructure, 6)
-var AllowDenyList_name *smithy.Schema
-
-var AllowDenyList_description *smithy.Schema
-
-var AllowDenyList_variableType *smithy.Schema
-
-var AllowDenyList_createdTime *smithy.Schema
-
-var AllowDenyList_updatedTime *smithy.Schema
-
-var AllowDenyList_arn *smithy.Schema
-
-var _AllowDenyLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AllowDenyLists",
-}, smithy.ShapeTypeList, 1)
-var _AllowDenyLists_member *smithy.Schema
-
-var AsyncJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "AsyncJobStatus",
-}, smithy.ShapeTypeEnum, 6)
-var AsyncJobStatus_IN_PROGRESS_INITIALIZING *smithy.Schema
-
-var AsyncJobStatus_IN_PROGRESS *smithy.Schema
-
-var AsyncJobStatus_CANCEL_IN_PROGRESS *smithy.Schema
-
-var AsyncJobStatus_CANCELED *smithy.Schema
-
-var AsyncJobStatus_COMPLETE *smithy.Schema
-
-var AsyncJobStatus_FAILED *smithy.Schema
-
-var ATIMetricDataPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ATIMetricDataPoint",
-}, smithy.ShapeTypeStructure, 4)
-var ATIMetricDataPoint_cr *smithy.Schema
-
-var ATIMetricDataPoint_adr *smithy.Schema
-
-var ATIMetricDataPoint_threshold *smithy.Schema
-
-var ATIMetricDataPoint_atodr *smithy.Schema
-
-var _ATIMetricDataPointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ATIMetricDataPointsList",
-}, smithy.ShapeTypeList, 1)
-var _ATIMetricDataPointsList_member *smithy.Schema
-
-var ATIModelPerformance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ATIModelPerformance",
-}, smithy.ShapeTypeStructure, 1)
-var ATIModelPerformance_asi *smithy.Schema
-
-var ATITrainingMetricsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ATITrainingMetricsValue",
-}, smithy.ShapeTypeStructure, 2)
-var ATITrainingMetricsValue_metricDataPoints *smithy.Schema
-
-var ATITrainingMetricsValue_modelPerformance *smithy.Schema
-
-var _attributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "attributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "attributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BatchCreateVariableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchCreateVariableError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateVariableError_name *smithy.Schema
-
-var BatchCreateVariableError_code *smithy.Schema
-
-var BatchCreateVariableError_message *smithy.Schema
-
-var _BatchCreateVariableErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchCreateVariableErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateVariableErrorList_member *smithy.Schema
-
-var BatchGetVariableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchGetVariableError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetVariableError_name *smithy.Schema
-
-var BatchGetVariableError_code *smithy.Schema
-
-var BatchGetVariableError_message *smithy.Schema
-
-var _BatchGetVariableErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchGetVariableErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetVariableErrorList_member *smithy.Schema
-
-var BatchImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchImport",
-}, smithy.ShapeTypeStructure, 13)
-var BatchImport_jobId *smithy.Schema
-
-var BatchImport_status *smithy.Schema
-
-var BatchImport_failureReason *smithy.Schema
-
-var BatchImport_startTime *smithy.Schema
-
-var BatchImport_completionTime *smithy.Schema
-
-var BatchImport_inputPath *smithy.Schema
-
-var BatchImport_outputPath *smithy.Schema
-
-var BatchImport_eventTypeName *smithy.Schema
-
-var BatchImport_iamRoleArn *smithy.Schema
-
-var BatchImport_arn *smithy.Schema
-
-var BatchImport_processedRecordsCount *smithy.Schema
-
-var BatchImport_failedRecordsCount *smithy.Schema
-
-var BatchImport_totalRecordsCount *smithy.Schema
-
-var _BatchImportList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchImportList",
-}, smithy.ShapeTypeList, 1)
-var _BatchImportList_member *smithy.Schema
-
-var _batchImportsMaxPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "batchImportsMaxPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchPrediction",
-}, smithy.ShapeTypeStructure, 15)
-var BatchPrediction_jobId *smithy.Schema
-
-var BatchPrediction_status *smithy.Schema
-
-var BatchPrediction_failureReason *smithy.Schema
-
-var BatchPrediction_startTime *smithy.Schema
-
-var BatchPrediction_completionTime *smithy.Schema
-
-var BatchPrediction_lastHeartbeatTime *smithy.Schema
-
-var BatchPrediction_inputPath *smithy.Schema
-
-var BatchPrediction_outputPath *smithy.Schema
-
-var BatchPrediction_eventTypeName *smithy.Schema
-
-var BatchPrediction_detectorName *smithy.Schema
-
-var BatchPrediction_detectorVersion *smithy.Schema
-
-var BatchPrediction_iamRoleArn *smithy.Schema
-
-var BatchPrediction_arn *smithy.Schema
-
-var BatchPrediction_processedRecordsCount *smithy.Schema
-
-var BatchPrediction_totalRecordsCount *smithy.Schema
-
-var _BatchPredictionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchPredictionList",
-}, smithy.ShapeTypeList, 1)
-var _BatchPredictionList_member *smithy.Schema
-
-var _batchPredictionsMaxPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "batchPredictionsMaxPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _contentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "contentType",
-}, smithy.ShapeTypeString, 0)
-
-var _CsvIndexToVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CsvIndexToVariableMap",
-}, smithy.ShapeTypeMap, 2)
-var _CsvIndexToVariableMap_key *smithy.Schema
-
-var _CsvIndexToVariableMap_value *smithy.Schema
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DataSource",
-}, smithy.ShapeTypeEnum, 3)
-var DataSource_EVENT *smithy.Schema
-
-var DataSource_MODEL_SCORE *smithy.Schema
-
-var DataSource_EXTERNAL_MODEL_SCORE *smithy.Schema
-
-var DataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DataType",
-}, smithy.ShapeTypeEnum, 5)
-var DataType_STRING *smithy.Schema
-
-var DataType_INTEGER *smithy.Schema
-
-var DataType_FLOAT *smithy.Schema
-
-var DataType_BOOLEAN *smithy.Schema
-
-var DataType_DATETIME *smithy.Schema
-
-var DataValidationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DataValidationMetrics",
-}, smithy.ShapeTypeStructure, 2)
-var DataValidationMetrics_fileLevelMessages *smithy.Schema
-
-var DataValidationMetrics_fieldLevelMessages *smithy.Schema
-
-var _DeleteAuditHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteAuditHistory",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "description",
-}, smithy.ShapeTypeString, 0)
-
-var Detector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Detector",
-}, smithy.ShapeTypeStructure, 6)
-var Detector_detectorId *smithy.Schema
-
-var Detector_description *smithy.Schema
-
-var Detector_eventTypeName *smithy.Schema
-
-var Detector_lastUpdatedTime *smithy.Schema
-
-var Detector_createdTime *smithy.Schema
-
-var Detector_arn *smithy.Schema
-
-var _DetectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorList",
-}, smithy.ShapeTypeList, 1)
-var _DetectorList_member *smithy.Schema
-
-var _DetectorsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DetectorVersionMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorVersionMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var DetectorVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorVersionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DetectorVersionStatus_DRAFT *smithy.Schema
-
-var DetectorVersionStatus_ACTIVE *smithy.Schema
-
-var DetectorVersionStatus_INACTIVE *smithy.Schema
-
-var DetectorVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorVersionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DetectorVersionSummary_detectorVersionId *smithy.Schema
-
-var DetectorVersionSummary_status *smithy.Schema
-
-var DetectorVersionSummary_description *smithy.Schema
-
-var DetectorVersionSummary_lastUpdatedTime *smithy.Schema
-
-var _DetectorVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DetectorVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DetectorVersionSummaryList_member *smithy.Schema
-
-var _Elements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Elements",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ElementsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ElementsList",
-}, smithy.ShapeTypeList, 1)
-var _ElementsList_member *smithy.Schema
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Entity_entityType *smithy.Schema
-
-var Entity_entityId *smithy.Schema
-
-var _entityRestrictedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "entityRestrictedString",
-}, smithy.ShapeTypeString, 0)
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EntityType",
-}, smithy.ShapeTypeStructure, 5)
-var EntityType_name *smithy.Schema
-
-var EntityType_description *smithy.Schema
-
-var EntityType_lastUpdatedTime *smithy.Schema
-
-var EntityType_createdTime *smithy.Schema
-
-var EntityType_arn *smithy.Schema
-
-var _entityTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "entityTypeList",
-}, smithy.ShapeTypeList, 1)
-var _entityTypeList_member *smithy.Schema
-
-var _entityTypesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "entityTypesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var EvaluatedExternalModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EvaluatedExternalModel",
-}, smithy.ShapeTypeStructure, 4)
-var EvaluatedExternalModel_modelEndpoint *smithy.Schema
-
-var EvaluatedExternalModel_useEventVariables *smithy.Schema
-
-var EvaluatedExternalModel_inputVariables *smithy.Schema
-
-var EvaluatedExternalModel_outputVariables *smithy.Schema
-
-var EvaluatedModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EvaluatedModelVersion",
-}, smithy.ShapeTypeStructure, 4)
-var EvaluatedModelVersion_modelId *smithy.Schema
-
-var EvaluatedModelVersion_modelVersion *smithy.Schema
-
-var EvaluatedModelVersion_modelType *smithy.Schema
-
-var EvaluatedModelVersion_evaluations *smithy.Schema
-
-var EvaluatedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EvaluatedRule",
-}, smithy.ShapeTypeStructure, 7)
-var EvaluatedRule_ruleId *smithy.Schema
-
-var EvaluatedRule_ruleVersion *smithy.Schema
-
-var EvaluatedRule_expression *smithy.Schema
-
-var EvaluatedRule_expressionWithValues *smithy.Schema
-
-var EvaluatedRule_outcomes *smithy.Schema
-
-var EvaluatedRule_evaluated *smithy.Schema
-
-var EvaluatedRule_matched *smithy.Schema
-
-var _EvaluatedRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EvaluatedRuleList",
-}, smithy.ShapeTypeList, 1)
-var _EvaluatedRuleList_member *smithy.Schema
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 7)
-var Event_eventId *smithy.Schema
-
-var Event_eventTypeName *smithy.Schema
-
-var Event_eventTimestamp *smithy.Schema
-
-var Event_eventVariables *smithy.Schema
-
-var Event_currentLabel *smithy.Schema
-
-var Event_labelTimestamp *smithy.Schema
-
-var Event_entities *smithy.Schema
-
-var _EventAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _EventAttributeMap_key *smithy.Schema
-
-var _EventAttributeMap_value *smithy.Schema
-
-var EventIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventIngestion",
-}, smithy.ShapeTypeEnum, 2)
-var EventIngestion_ENABLED *smithy.Schema
-
-var EventIngestion_DISABLED *smithy.Schema
-
-var EventOrchestration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventOrchestration",
-}, smithy.ShapeTypeStructure, 1)
-var EventOrchestration_eventBridgeEnabled *smithy.Schema
-
-var _EventPredictionsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventPredictionsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var EventPredictionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventPredictionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var EventPredictionSummary_eventId *smithy.Schema
-
-var EventPredictionSummary_eventTypeName *smithy.Schema
-
-var EventPredictionSummary_eventTimestamp *smithy.Schema
-
-var EventPredictionSummary_predictionTimestamp *smithy.Schema
-
-var EventPredictionSummary_detectorId *smithy.Schema
-
-var EventPredictionSummary_detectorVersionId *smithy.Schema
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventType",
-}, smithy.ShapeTypeStructure, 11, &smithytraits.Sensitive{})
-var EventType_name *smithy.Schema
-
-var EventType_description *smithy.Schema
-
-var EventType_eventVariables *smithy.Schema
-
-var EventType_labels *smithy.Schema
-
-var EventType_entityTypes *smithy.Schema
-
-var EventType_eventIngestion *smithy.Schema
-
-var EventType_ingestedEventStatistics *smithy.Schema
-
-var EventType_lastUpdatedTime *smithy.Schema
-
-var EventType_createdTime *smithy.Schema
-
-var EventType_arn *smithy.Schema
-
-var EventType_eventOrchestration *smithy.Schema
-
-var _eventTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "eventTypeList",
-}, smithy.ShapeTypeList, 1)
-var _eventTypeList_member *smithy.Schema
-
-var _eventTypesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "eventTypesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _EventVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventVariableMap",
-}, smithy.ShapeTypeMap, 2)
-var _EventVariableMap_key *smithy.Schema
-
-var _EventVariableMap_value *smithy.Schema
-
-var EventVariableSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "EventVariableSummary",
-}, smithy.ShapeTypeStructure, 3)
-var EventVariableSummary_name *smithy.Schema
-
-var EventVariableSummary_value *smithy.Schema
-
-var EventVariableSummary_source *smithy.Schema
-
-var ExternalEventsDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalEventsDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalEventsDetail_dataLocation *smithy.Schema
-
-var ExternalEventsDetail_dataAccessRoleArn *smithy.Schema
-
-var ExternalModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModel",
-}, smithy.ShapeTypeStructure, 9)
-var ExternalModel_modelEndpoint *smithy.Schema
-
-var ExternalModel_modelSource *smithy.Schema
-
-var ExternalModel_invokeModelEndpointRoleArn *smithy.Schema
-
-var ExternalModel_inputConfiguration *smithy.Schema
-
-var ExternalModel_outputConfiguration *smithy.Schema
-
-var ExternalModel_modelEndpointStatus *smithy.Schema
-
-var ExternalModel_lastUpdatedTime *smithy.Schema
-
-var ExternalModel_createdTime *smithy.Schema
-
-var ExternalModel_arn *smithy.Schema
-
-var _ExternalModelEndpointDataBlobMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelEndpointDataBlobMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ExternalModelEndpointDataBlobMap_key *smithy.Schema
-
-var _ExternalModelEndpointDataBlobMap_value *smithy.Schema
-
-var _ExternalModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelList",
-}, smithy.ShapeTypeList, 1)
-var _ExternalModelList_member *smithy.Schema
-
-var ExternalModelOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelOutputs",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalModelOutputs_externalModel *smithy.Schema
-
-var ExternalModelOutputs_outputs *smithy.Schema
-
-var _ExternalModelPredictionMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelPredictionMap",
-}, smithy.ShapeTypeMap, 2)
-var _ExternalModelPredictionMap_key *smithy.Schema
-
-var _ExternalModelPredictionMap_value *smithy.Schema
-
-var _ExternalModelsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ExternalModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ExternalModelSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalModelSummary_modelEndpoint *smithy.Schema
-
-var ExternalModelSummary_modelSource *smithy.Schema
-
-var FieldValidationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "FieldValidationMessage",
-}, smithy.ShapeTypeStructure, 5)
-var FieldValidationMessage_fieldName *smithy.Schema
-
-var FieldValidationMessage_identifier *smithy.Schema
-
-var FieldValidationMessage_title *smithy.Schema
-
-var FieldValidationMessage_content *smithy.Schema
-
-var FieldValidationMessage_type *smithy.Schema
-
-var _fieldValidationMessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "fieldValidationMessageList",
-}, smithy.ShapeTypeList, 1)
-var _fieldValidationMessageList_member *smithy.Schema
-
-var FileValidationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "FileValidationMessage",
-}, smithy.ShapeTypeStructure, 3)
-var FileValidationMessage_title *smithy.Schema
-
-var FileValidationMessage_content *smithy.Schema
-
-var FileValidationMessage_type *smithy.Schema
-
-var _fileValidationMessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "fileValidationMessageList",
-}, smithy.ShapeTypeList, 1)
-var _fileValidationMessageList_member *smithy.Schema
-
-var FilterCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "FilterCondition",
-}, smithy.ShapeTypeStructure, 1)
-var FilterCondition_value *smithy.Schema
-
-var _filterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "filterString",
-}, smithy.ShapeTypeString, 0)
-
-var _float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _floatVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "floatVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var _fraudDetectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "fraudDetectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _iamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "iamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "identifier",
-}, smithy.ShapeTypeString, 0)
-
-var IngestedEventsDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "IngestedEventsDetail",
-}, smithy.ShapeTypeStructure, 1)
-var IngestedEventsDetail_ingestedEventsTimeWindow *smithy.Schema
-
-var IngestedEventStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "IngestedEventStatistics",
-}, smithy.ShapeTypeStructure, 5)
-var IngestedEventStatistics_numberOfEvents *smithy.Schema
-
-var IngestedEventStatistics_eventDataSizeInBytes *smithy.Schema
-
-var IngestedEventStatistics_leastRecentEvent *smithy.Schema
-
-var IngestedEventStatistics_mostRecentEvent *smithy.Schema
-
-var IngestedEventStatistics_lastUpdatedTime *smithy.Schema
-
-var IngestedEventsTimeWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "IngestedEventsTimeWindow",
-}, smithy.ShapeTypeStructure, 2)
-var IngestedEventsTimeWindow_startTime *smithy.Schema
-
-var IngestedEventsTimeWindow_endTime *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Integer2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Integer2",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JsonKeyToVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "JsonKeyToVariableMap",
-}, smithy.ShapeTypeMap, 2)
-var _JsonKeyToVariableMap_key *smithy.Schema
-
-var _JsonKeyToVariableMap_value *smithy.Schema
-
-var _KmsEncryptionKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "KmsEncryptionKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeStructure, 1)
-var KMSKey_kmsEncryptionKeyArn *smithy.Schema
-
-var Label = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Label",
-}, smithy.ShapeTypeStructure, 5)
-var Label_name *smithy.Schema
-
-var Label_description *smithy.Schema
-
-var Label_lastUpdatedTime *smithy.Schema
-
-var Label_createdTime *smithy.Schema
-
-var Label_arn *smithy.Schema
-
-var _labelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "labelList",
-}, smithy.ShapeTypeList, 1)
-var _labelList_member *smithy.Schema
-
-var _labelMapper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "labelMapper",
-}, smithy.ShapeTypeMap, 2)
-var _labelMapper_key *smithy.Schema
-
-var _labelMapper_value *smithy.Schema
-
-var LabelSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "LabelSchema",
-}, smithy.ShapeTypeStructure, 2)
-var LabelSchema_labelMapper *smithy.Schema
-
-var LabelSchema_unlabeledEventsTreatment *smithy.Schema
-
-var _labelsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "labelsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Language = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Language",
-}, smithy.ShapeTypeEnum, 1)
-var Language_DETECTORPL *smithy.Schema
-
-var _ListOfAggregatedLogOddsMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfAggregatedLogOddsMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ListOfAggregatedLogOddsMetrics_member *smithy.Schema
-
-var _ListOfAggregatedVariablesImpactExplanations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfAggregatedVariablesImpactExplanations",
-}, smithy.ShapeTypeList, 1)
-var _ListOfAggregatedVariablesImpactExplanations_member *smithy.Schema
-
-var _listOfEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "listOfEntities",
-}, smithy.ShapeTypeList, 1)
-var _listOfEntities_member *smithy.Schema
-
-var _ListOfEvaluatedExternalModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfEvaluatedExternalModels",
-}, smithy.ShapeTypeList, 1)
-var _ListOfEvaluatedExternalModels_member *smithy.Schema
-
-var _ListOfEvaluatedModelVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfEvaluatedModelVersions",
-}, smithy.ShapeTypeList, 1)
-var _ListOfEvaluatedModelVersions_member *smithy.Schema
-
-var _ListOfEventPredictionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfEventPredictionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ListOfEventPredictionSummaries_member *smithy.Schema
-
-var _ListOfEventVariableSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfEventVariableSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ListOfEventVariableSummaries_member *smithy.Schema
-
-var _ListOfExternalModelOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfExternalModelOutputs",
-}, smithy.ShapeTypeList, 1)
-var _ListOfExternalModelOutputs_member *smithy.Schema
-
-var _ListOfLogOddsMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfLogOddsMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ListOfLogOddsMetrics_member *smithy.Schema
-
-var _ListOfModelScores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfModelScores",
-}, smithy.ShapeTypeList, 1)
-var _ListOfModelScores_member *smithy.Schema
-
-var _ListOfModelVersionEvaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfModelVersionEvaluations",
-}, smithy.ShapeTypeList, 1)
-var _ListOfModelVersionEvaluations_member *smithy.Schema
-
-var _ListOfModelVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfModelVersions",
-}, smithy.ShapeTypeList, 1)
-var _ListOfModelVersions_member *smithy.Schema
-
-var _ListOfRuleResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfRuleResults",
-}, smithy.ShapeTypeList, 1)
-var _ListOfRuleResults_member *smithy.Schema
-
-var _ListOfStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListOfStrings",
-}, smithy.ShapeTypeList, 1)
-var _ListOfStrings_member *smithy.Schema
-
-var _listOfVariableImpactExplanations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "listOfVariableImpactExplanations",
-}, smithy.ShapeTypeList, 1)
-var _listOfVariableImpactExplanations_member *smithy.Schema
-
-var _ListsElementsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListsElementsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListsMetadataMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListsMetadataMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListUpdateMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListUpdateMode",
-}, smithy.ShapeTypeEnum, 3)
-var ListUpdateMode_REPLACE *smithy.Schema
-
-var ListUpdateMode_APPEND *smithy.Schema
-
-var ListUpdateMode_REMOVE *smithy.Schema
-
-var LogOddsMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "LogOddsMetric",
-}, smithy.ShapeTypeStructure, 3)
-var LogOddsMetric_variableName *smithy.Schema
-
-var LogOddsMetric_variableType *smithy.Schema
-
-var LogOddsMetric_variableImportance *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MapOfStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "MapOfStrings",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _MapOfStrings_key *smithy.Schema
-
-var _MapOfStrings_value *smithy.Schema
-
-var MetricDataPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "MetricDataPoint",
-}, smithy.ShapeTypeStructure, 4)
-var MetricDataPoint_fpr *smithy.Schema
-
-var MetricDataPoint_precision *smithy.Schema
-
-var MetricDataPoint_tpr *smithy.Schema
-
-var MetricDataPoint_threshold *smithy.Schema
-
-var _metricDataPointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "metricDataPointsList",
-}, smithy.ShapeTypeList, 1)
-var _metricDataPointsList_member *smithy.Schema
-
-var Model = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Model",
-}, smithy.ShapeTypeStructure, 7)
-var Model_modelId *smithy.Schema
-
-var Model_modelType *smithy.Schema
-
-var Model_description *smithy.Schema
-
-var Model_eventTypeName *smithy.Schema
-
-var Model_createdTime *smithy.Schema
-
-var Model_lastUpdatedTime *smithy.Schema
-
-var Model_arn *smithy.Schema
-
-var ModelEndpointDataBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelEndpointDataBlob",
-}, smithy.ShapeTypeStructure, 2)
-var ModelEndpointDataBlob_byteBuffer *smithy.Schema
-
-var ModelEndpointDataBlob_contentType *smithy.Schema
-
-var ModelEndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelEndpointStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ModelEndpointStatus_ASSOCIATED *smithy.Schema
-
-var ModelEndpointStatus_DISSOCIATED *smithy.Schema
-
-var _modelIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "modelIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ModelInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelInputConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ModelInputConfiguration_eventTypeName *smithy.Schema
-
-var ModelInputConfiguration_format *smithy.Schema
-
-var ModelInputConfiguration_useEventVariables *smithy.Schema
-
-var ModelInputConfiguration_jsonInputTemplate *smithy.Schema
-
-var ModelInputConfiguration_csvInputTemplate *smithy.Schema
-
-var ModelInputDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelInputDataFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ModelInputDataFormat_CSV *smithy.Schema
-
-var ModelInputDataFormat_JSON *smithy.Schema
-
-var _modelInputTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "modelInputTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var _modelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "modelList",
-}, smithy.ShapeTypeList, 1)
-var _modelList_member *smithy.Schema
-
-var ModelOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelOutputConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ModelOutputConfiguration_format *smithy.Schema
-
-var ModelOutputConfiguration_jsonKeyToVariableMap *smithy.Schema
-
-var ModelOutputConfiguration_csvIndexToVariableMap *smithy.Schema
-
-var ModelOutputDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelOutputDataFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ModelOutputDataFormat_CSV *smithy.Schema
-
-var ModelOutputDataFormat_JSONLINES *smithy.Schema
-
-var _ModelPredictionMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelPredictionMap",
-}, smithy.ShapeTypeMap, 2)
-var _ModelPredictionMap_key *smithy.Schema
-
-var _ModelPredictionMap_value *smithy.Schema
-
-var ModelScores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelScores",
-}, smithy.ShapeTypeStructure, 2)
-var ModelScores_modelVersion *smithy.Schema
-
-var ModelScores_scores *smithy.Schema
-
-var _modelsMaxPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "modelsMaxPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var ModelSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelSource",
-}, smithy.ShapeTypeEnum, 1)
-var ModelSource_SAGEMAKER *smithy.Schema
-
-var ModelTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelTypeEnum",
-}, smithy.ShapeTypeEnum, 3)
-var ModelTypeEnum_ONLINE_FRAUD_INSIGHTS *smithy.Schema
-
-var ModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS *smithy.Schema
-
-var ModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS *smithy.Schema
-
-var ModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelVersion",
-}, smithy.ShapeTypeStructure, 4)
-var ModelVersion_modelId *smithy.Schema
-
-var ModelVersion_modelType *smithy.Schema
-
-var ModelVersion_modelVersionNumber *smithy.Schema
-
-var ModelVersion_arn *smithy.Schema
-
-var ModelVersionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelVersionDetail",
-}, smithy.ShapeTypeStructure, 13)
-var ModelVersionDetail_modelId *smithy.Schema
-
-var ModelVersionDetail_modelType *smithy.Schema
-
-var ModelVersionDetail_modelVersionNumber *smithy.Schema
-
-var ModelVersionDetail_status *smithy.Schema
-
-var ModelVersionDetail_trainingDataSource *smithy.Schema
-
-var ModelVersionDetail_trainingDataSchema *smithy.Schema
-
-var ModelVersionDetail_externalEventsDetail *smithy.Schema
-
-var ModelVersionDetail_ingestedEventsDetail *smithy.Schema
-
-var ModelVersionDetail_trainingResult *smithy.Schema
-
-var ModelVersionDetail_lastUpdatedTime *smithy.Schema
-
-var ModelVersionDetail_createdTime *smithy.Schema
-
-var ModelVersionDetail_arn *smithy.Schema
-
-var ModelVersionDetail_trainingResultV2 *smithy.Schema
-
-var _modelVersionDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "modelVersionDetailList",
-}, smithy.ShapeTypeList, 1)
-var _modelVersionDetailList_member *smithy.Schema
-
-var ModelVersionEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelVersionEvaluation",
-}, smithy.ShapeTypeStructure, 3)
-var ModelVersionEvaluation_outputVariableName *smithy.Schema
-
-var ModelVersionEvaluation_evaluationScore *smithy.Schema
-
-var ModelVersionEvaluation_predictionExplanations *smithy.Schema
-
-var ModelVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ModelVersionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ModelVersionStatus_ACTIVE *smithy.Schema
-
-var ModelVersionStatus_INACTIVE *smithy.Schema
-
-var ModelVersionStatus_TRAINING_CANCELLED *smithy.Schema
-
-var _NameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "NameList",
-}, smithy.ShapeTypeList, 1)
-var _NameList_member *smithy.Schema
-
-var _nextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "nextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _noDashIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "noDashIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyListOfStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "NonEmptyListOfStrings",
-}, smithy.ShapeTypeList, 1)
-var _NonEmptyListOfStrings_member *smithy.Schema
-
-var OFIMetricDataPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OFIMetricDataPoint",
-}, smithy.ShapeTypeStructure, 4)
-var OFIMetricDataPoint_fpr *smithy.Schema
-
-var OFIMetricDataPoint_precision *smithy.Schema
-
-var OFIMetricDataPoint_tpr *smithy.Schema
-
-var OFIMetricDataPoint_threshold *smithy.Schema
-
-var _OFIMetricDataPointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OFIMetricDataPointsList",
-}, smithy.ShapeTypeList, 1)
-var _OFIMetricDataPointsList_member *smithy.Schema
-
-var OFIModelPerformance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OFIModelPerformance",
-}, smithy.ShapeTypeStructure, 2)
-var OFIModelPerformance_auc *smithy.Schema
-
-var OFIModelPerformance_uncertaintyRange *smithy.Schema
-
-var OFITrainingMetricsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OFITrainingMetricsValue",
-}, smithy.ShapeTypeStructure, 2)
-var OFITrainingMetricsValue_metricDataPoints *smithy.Schema
-
-var OFITrainingMetricsValue_modelPerformance *smithy.Schema
-
-var Outcome = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Outcome",
-}, smithy.ShapeTypeStructure, 5)
-var Outcome_name *smithy.Schema
-
-var Outcome_description *smithy.Schema
-
-var Outcome_lastUpdatedTime *smithy.Schema
-
-var Outcome_createdTime *smithy.Schema
-
-var Outcome_arn *smithy.Schema
-
-var _OutcomeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OutcomeList",
-}, smithy.ShapeTypeList, 1)
-var _OutcomeList_member *smithy.Schema
-
-var _OutcomesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "OutcomesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var PredictionExplanations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PredictionExplanations",
-}, smithy.ShapeTypeStructure, 2)
-var PredictionExplanations_variableImpactExplanations *smithy.Schema
-
-var PredictionExplanations_aggregatedVariablesImpactExplanations *smithy.Schema
-
-var PredictionTimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PredictionTimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var PredictionTimeRange_startTime *smithy.Schema
-
-var PredictionTimeRange_endTime *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceUnavailableException_message *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 3)
-var Rule_detectorId *smithy.Schema
-
-var Rule_ruleId *smithy.Schema
-
-var Rule_ruleVersion *smithy.Schema
-
-var RuleDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RuleDetail",
-}, smithy.ShapeTypeStructure, 10)
-var RuleDetail_ruleId *smithy.Schema
-
-var RuleDetail_description *smithy.Schema
-
-var RuleDetail_detectorId *smithy.Schema
-
-var RuleDetail_ruleVersion *smithy.Schema
-
-var RuleDetail_expression *smithy.Schema
-
-var RuleDetail_language *smithy.Schema
-
-var RuleDetail_outcomes *smithy.Schema
-
-var RuleDetail_lastUpdatedTime *smithy.Schema
-
-var RuleDetail_createdTime *smithy.Schema
-
-var RuleDetail_arn *smithy.Schema
-
-var _RuleDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RuleDetailList",
-}, smithy.ShapeTypeList, 1)
-var _RuleDetailList_member *smithy.Schema
-
-var RuleExecutionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RuleExecutionMode",
-}, smithy.ShapeTypeEnum, 2)
-var RuleExecutionMode_ALL_MATCHED *smithy.Schema
-
-var RuleExecutionMode_FIRST_MATCHED *smithy.Schema
-
-var _ruleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ruleExpression",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RuleList",
-}, smithy.ShapeTypeList, 1)
-var _RuleList_member *smithy.Schema
-
-var RuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RuleResult",
-}, smithy.ShapeTypeStructure, 2)
-var RuleResult_ruleId *smithy.Schema
-
-var RuleResult_outcomes *smithy.Schema
-
-var _RulesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "RulesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _s3BucketLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "s3BucketLocation",
-}, smithy.ShapeTypeString, 0)
-
-var _sageMakerEndpointIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "sageMakerEndpointIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _sensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "sensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _tagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "tagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _tagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "tagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _tagKeyList_member *smithy.Schema
-
-var _tagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "tagList",
-}, smithy.ShapeTypeList, 1)
-var _tagList_member *smithy.Schema
-
-var _TagsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TagsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _tagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "tagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TFIMetricDataPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TFIMetricDataPoint",
-}, smithy.ShapeTypeStructure, 4)
-var TFIMetricDataPoint_fpr *smithy.Schema
-
-var TFIMetricDataPoint_precision *smithy.Schema
-
-var TFIMetricDataPoint_tpr *smithy.Schema
-
-var TFIMetricDataPoint_threshold *smithy.Schema
-
-var _TFIMetricDataPointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TFIMetricDataPointsList",
-}, smithy.ShapeTypeList, 1)
-var _TFIMetricDataPointsList_member *smithy.Schema
-
-var TFIModelPerformance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TFIModelPerformance",
-}, smithy.ShapeTypeStructure, 2)
-var TFIModelPerformance_auc *smithy.Schema
-
-var TFIModelPerformance_uncertaintyRange *smithy.Schema
-
-var TFITrainingMetricsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TFITrainingMetricsValue",
-}, smithy.ShapeTypeStructure, 2)
-var TFITrainingMetricsValue_metricDataPoints *smithy.Schema
-
-var TFITrainingMetricsValue_modelPerformance *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "time",
-}, smithy.ShapeTypeString, 0)
-
-var TrainingDataSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingDataSchema",
-}, smithy.ShapeTypeStructure, 2)
-var TrainingDataSchema_modelVariables *smithy.Schema
-
-var TrainingDataSchema_labelSchema *smithy.Schema
-
-var TrainingDataSourceEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingDataSourceEnum",
-}, smithy.ShapeTypeEnum, 2)
-var TrainingDataSourceEnum_EXTERNAL_EVENTS *smithy.Schema
-
-var TrainingDataSourceEnum_INGESTED_EVENTS *smithy.Schema
-
-var TrainingMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingMetrics",
-}, smithy.ShapeTypeStructure, 2)
-var TrainingMetrics_auc *smithy.Schema
-
-var TrainingMetrics_metricDataPoints *smithy.Schema
-
-var TrainingMetricsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingMetricsV2",
-}, smithy.ShapeTypeStructure, 3)
-var TrainingMetricsV2_ofi *smithy.Schema
-
-var TrainingMetricsV2_tfi *smithy.Schema
-
-var TrainingMetricsV2_ati *smithy.Schema
-
-var TrainingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingResult",
-}, smithy.ShapeTypeStructure, 3)
-var TrainingResult_dataValidationMetrics *smithy.Schema
-
-var TrainingResult_trainingMetrics *smithy.Schema
-
-var TrainingResult_variableImportanceMetrics *smithy.Schema
-
-var TrainingResultV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TrainingResultV2",
-}, smithy.ShapeTypeStructure, 4)
-var TrainingResultV2_dataValidationMetrics *smithy.Schema
-
-var TrainingResultV2_trainingMetricsV2 *smithy.Schema
-
-var TrainingResultV2_variableImportanceMetrics *smithy.Schema
-
-var TrainingResultV2_aggregatedVariablesImportanceMetrics *smithy.Schema
-
-var UncertaintyRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UncertaintyRange",
-}, smithy.ShapeTypeStructure, 2)
-var UncertaintyRange_lowerBoundValue *smithy.Schema
-
-var UncertaintyRange_upperBoundValue *smithy.Schema
-
-var UnlabeledEventsTreatment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UnlabeledEventsTreatment",
-}, smithy.ShapeTypeEnum, 4)
-var UnlabeledEventsTreatment_IGNORE *smithy.Schema
-
-var UnlabeledEventsTreatment_FRAUD *smithy.Schema
-
-var UnlabeledEventsTreatment_LEGIT *smithy.Schema
-
-var UnlabeledEventsTreatment_AUTO *smithy.Schema
-
-var _UseEventVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UseEventVariables",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _utcTimestampISO8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "utcTimestampISO8601",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var Variable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "Variable",
-}, smithy.ShapeTypeStructure, 9)
-var Variable_name *smithy.Schema
-
-var Variable_dataType *smithy.Schema
-
-var Variable_dataSource *smithy.Schema
-
-var Variable_defaultValue *smithy.Schema
-
-var Variable_description *smithy.Schema
-
-var Variable_variableType *smithy.Schema
-
-var Variable_lastUpdatedTime *smithy.Schema
-
-var Variable_createdTime *smithy.Schema
-
-var Variable_arn *smithy.Schema
-
-var VariableEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariableEntry",
-}, smithy.ShapeTypeStructure, 6)
-var VariableEntry_name *smithy.Schema
-
-var VariableEntry_dataType *smithy.Schema
-
-var VariableEntry_dataSource *smithy.Schema
-
-var VariableEntry_defaultValue *smithy.Schema
-
-var VariableEntry_description *smithy.Schema
-
-var VariableEntry_variableType *smithy.Schema
-
-var _VariableEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariableEntryList",
-}, smithy.ShapeTypeList, 1)
-var _VariableEntryList_member *smithy.Schema
-
-var VariableImpactExplanation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariableImpactExplanation",
-}, smithy.ShapeTypeStructure, 3)
-var VariableImpactExplanation_eventVariableName *smithy.Schema
-
-var VariableImpactExplanation_relativeImpact *smithy.Schema
-
-var VariableImpactExplanation_logOddsImpact *smithy.Schema
-
-var VariableImportanceMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariableImportanceMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var VariableImportanceMetrics_logOddsMetrics *smithy.Schema
-
-var _VariableList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariableList",
-}, smithy.ShapeTypeList, 1)
-var _VariableList_member *smithy.Schema
-
-var _variableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "variableName",
-}, smithy.ShapeTypeString, 0)
-
-var _VariablesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "VariablesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _variableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "variableType",
-}, smithy.ShapeTypeString, 0)
-
-var _variableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "variableValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _wholeNumberVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "wholeNumberVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateVariableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchCreateVariableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateVariableRequest_variableEntries *smithy.Schema
-
-var BatchCreateVariableRequest_tags *smithy.Schema
-
-var BatchCreateVariableResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchCreateVariableResult",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateVariableResult_errors *smithy.Schema
-
-var BatchGetVariableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchGetVariableRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetVariableRequest_names *smithy.Schema
-
-var BatchGetVariableResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "BatchGetVariableResult",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetVariableResult_variables *smithy.Schema
-
-var BatchGetVariableResult_errors *smithy.Schema
-
-var CancelBatchImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelBatchImportJobRequest_jobId *smithy.Schema
-
-var CancelBatchImportJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchImportJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CancelBatchPredictionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchPredictionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelBatchPredictionJobRequest_jobId *smithy.Schema
-
-var CancelBatchPredictionJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CancelBatchPredictionJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateBatchImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchImportJobRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBatchImportJobRequest_jobId *smithy.Schema
-
-var CreateBatchImportJobRequest_inputPath *smithy.Schema
-
-var CreateBatchImportJobRequest_outputPath *smithy.Schema
-
-var CreateBatchImportJobRequest_eventTypeName *smithy.Schema
-
-var CreateBatchImportJobRequest_iamRoleArn *smithy.Schema
-
-var CreateBatchImportJobRequest_tags *smithy.Schema
-
-var CreateBatchImportJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchImportJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateBatchPredictionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchPredictionJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateBatchPredictionJobRequest_jobId *smithy.Schema
-
-var CreateBatchPredictionJobRequest_inputPath *smithy.Schema
-
-var CreateBatchPredictionJobRequest_outputPath *smithy.Schema
-
-var CreateBatchPredictionJobRequest_eventTypeName *smithy.Schema
-
-var CreateBatchPredictionJobRequest_detectorName *smithy.Schema
-
-var CreateBatchPredictionJobRequest_detectorVersion *smithy.Schema
-
-var CreateBatchPredictionJobRequest_iamRoleArn *smithy.Schema
-
-var CreateBatchPredictionJobRequest_tags *smithy.Schema
-
-var CreateBatchPredictionJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateBatchPredictionJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDetectorVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateDetectorVersionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDetectorVersionRequest_detectorId *smithy.Schema
-
-var CreateDetectorVersionRequest_description *smithy.Schema
-
-var CreateDetectorVersionRequest_externalModelEndpoints *smithy.Schema
-
-var CreateDetectorVersionRequest_rules *smithy.Schema
-
-var CreateDetectorVersionRequest_modelVersions *smithy.Schema
-
-var CreateDetectorVersionRequest_ruleExecutionMode *smithy.Schema
-
-var CreateDetectorVersionRequest_tags *smithy.Schema
-
-var CreateDetectorVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateDetectorVersionResult",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDetectorVersionResult_detectorId *smithy.Schema
-
-var CreateDetectorVersionResult_detectorVersionId *smithy.Schema
-
-var CreateDetectorVersionResult_status *smithy.Schema
-
-var CreateListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateListRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateListRequest_name *smithy.Schema
-
-var CreateListRequest_elements *smithy.Schema
-
-var CreateListRequest_variableType *smithy.Schema
-
-var CreateListRequest_description *smithy.Schema
-
-var CreateListRequest_tags *smithy.Schema
-
-var CreateListResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateListResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModelRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateModelRequest_modelId *smithy.Schema
-
-var CreateModelRequest_modelType *smithy.Schema
-
-var CreateModelRequest_description *smithy.Schema
-
-var CreateModelRequest_eventTypeName *smithy.Schema
-
-var CreateModelRequest_tags *smithy.Schema
-
-var CreateModelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModelVersionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateModelVersionRequest_modelId *smithy.Schema
-
-var CreateModelVersionRequest_modelType *smithy.Schema
-
-var CreateModelVersionRequest_trainingDataSource *smithy.Schema
-
-var CreateModelVersionRequest_trainingDataSchema *smithy.Schema
-
-var CreateModelVersionRequest_externalEventsDetail *smithy.Schema
-
-var CreateModelVersionRequest_ingestedEventsDetail *smithy.Schema
-
-var CreateModelVersionRequest_tags *smithy.Schema
-
-var CreateModelVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateModelVersionResult",
-}, smithy.ShapeTypeStructure, 4)
-var CreateModelVersionResult_modelId *smithy.Schema
-
-var CreateModelVersionResult_modelType *smithy.Schema
-
-var CreateModelVersionResult_modelVersionNumber *smithy.Schema
-
-var CreateModelVersionResult_status *smithy.Schema
-
-var CreateRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateRuleRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRuleRequest_ruleId *smithy.Schema
-
-var CreateRuleRequest_detectorId *smithy.Schema
-
-var CreateRuleRequest_description *smithy.Schema
-
-var CreateRuleRequest_expression *smithy.Schema
-
-var CreateRuleRequest_language *smithy.Schema
-
-var CreateRuleRequest_outcomes *smithy.Schema
-
-var CreateRuleRequest_tags *smithy.Schema
-
-var CreateRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateRuleResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRuleResult_rule *smithy.Schema
-
-var CreateVariableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateVariableRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVariableRequest_name *smithy.Schema
-
-var CreateVariableRequest_dataType *smithy.Schema
-
-var CreateVariableRequest_dataSource *smithy.Schema
-
-var CreateVariableRequest_defaultValue *smithy.Schema
-
-var CreateVariableRequest_description *smithy.Schema
-
-var CreateVariableRequest_variableType *smithy.Schema
-
-var CreateVariableRequest_tags *smithy.Schema
-
-var CreateVariableResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "CreateVariableResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteBatchImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBatchImportJobRequest_jobId *smithy.Schema
-
-var DeleteBatchImportJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchImportJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteBatchPredictionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchPredictionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBatchPredictionJobRequest_jobId *smithy.Schema
-
-var DeleteBatchPredictionJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteBatchPredictionJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDetectorRequest_detectorId *smithy.Schema
-
-var DeleteDetectorResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetectorResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDetectorVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetectorVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDetectorVersionRequest_detectorId *smithy.Schema
-
-var DeleteDetectorVersionRequest_detectorVersionId *smithy.Schema
-
-var DeleteDetectorVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteDetectorVersionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEntityTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEntityTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEntityTypeRequest_name *smithy.Schema
-
-var DeleteEntityTypeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEntityTypeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteEventRequest_eventId *smithy.Schema
-
-var DeleteEventRequest_eventTypeName *smithy.Schema
-
-var DeleteEventRequest_deleteAuditHistory *smithy.Schema
-
-var DeleteEventResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEventsByEventTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventsByEventTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventsByEventTypeRequest_eventTypeName *smithy.Schema
-
-var DeleteEventsByEventTypeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventsByEventTypeResult",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEventsByEventTypeResult_eventTypeName *smithy.Schema
-
-var DeleteEventsByEventTypeResult_eventsDeletionStatus *smithy.Schema
-
-var DeleteEventTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventTypeRequest_name *smithy.Schema
-
-var DeleteEventTypeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteEventTypeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteExternalModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteExternalModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExternalModelRequest_modelEndpoint *smithy.Schema
-
-var DeleteExternalModelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteExternalModelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteLabelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLabelRequest_name *smithy.Schema
-
-var DeleteLabelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteLabelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteListRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteListRequest_name *smithy.Schema
-
-var DeleteListResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteListResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteModelRequest_modelId *smithy.Schema
-
-var DeleteModelRequest_modelType *smithy.Schema
-
-var DeleteModelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModelVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteModelVersionRequest_modelId *smithy.Schema
-
-var DeleteModelVersionRequest_modelType *smithy.Schema
-
-var DeleteModelVersionRequest_modelVersionNumber *smithy.Schema
-
-var DeleteModelVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteModelVersionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOutcomeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteOutcomeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteOutcomeRequest_name *smithy.Schema
-
-var DeleteOutcomeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteOutcomeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleRequest_rule *smithy.Schema
-
-var DeleteRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteRuleResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteVariableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteVariableRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVariableRequest_name *smithy.Schema
-
-var DeleteVariableResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DeleteVariableResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeDetectorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDetectorRequest_detectorId *smithy.Schema
-
-var DescribeDetectorRequest_nextToken *smithy.Schema
-
-var DescribeDetectorRequest_maxResults *smithy.Schema
-
-var DescribeDetectorResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeDetectorResult",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDetectorResult_detectorId *smithy.Schema
-
-var DescribeDetectorResult_detectorVersionSummaries *smithy.Schema
-
-var DescribeDetectorResult_nextToken *smithy.Schema
-
-var DescribeDetectorResult_arn *smithy.Schema
-
-var DescribeModelVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeModelVersionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeModelVersionsRequest_modelId *smithy.Schema
-
-var DescribeModelVersionsRequest_modelVersionNumber *smithy.Schema
-
-var DescribeModelVersionsRequest_modelType *smithy.Schema
-
-var DescribeModelVersionsRequest_nextToken *smithy.Schema
-
-var DescribeModelVersionsRequest_maxResults *smithy.Schema
-
-var DescribeModelVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "DescribeModelVersionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeModelVersionsResult_modelVersionDetails *smithy.Schema
-
-var DescribeModelVersionsResult_nextToken *smithy.Schema
-
-var GetBatchImportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchImportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBatchImportJobsRequest_jobId *smithy.Schema
-
-var GetBatchImportJobsRequest_maxResults *smithy.Schema
-
-var GetBatchImportJobsRequest_nextToken *smithy.Schema
-
-var GetBatchImportJobsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchImportJobsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetBatchImportJobsResult_batchImports *smithy.Schema
-
-var GetBatchImportJobsResult_nextToken *smithy.Schema
-
-var GetBatchPredictionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchPredictionJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBatchPredictionJobsRequest_jobId *smithy.Schema
-
-var GetBatchPredictionJobsRequest_maxResults *smithy.Schema
-
-var GetBatchPredictionJobsRequest_nextToken *smithy.Schema
-
-var GetBatchPredictionJobsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetBatchPredictionJobsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetBatchPredictionJobsResult_batchPredictions *smithy.Schema
-
-var GetBatchPredictionJobsResult_nextToken *smithy.Schema
-
-var GetDeleteEventsByEventTypeStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDeleteEventsByEventTypeStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeleteEventsByEventTypeStatusRequest_eventTypeName *smithy.Schema
-
-var GetDeleteEventsByEventTypeStatusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDeleteEventsByEventTypeStatusResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeleteEventsByEventTypeStatusResult_eventTypeName *smithy.Schema
-
-var GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus *smithy.Schema
-
-var GetDetectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDetectorsRequest_detectorId *smithy.Schema
-
-var GetDetectorsRequest_nextToken *smithy.Schema
-
-var GetDetectorsRequest_maxResults *smithy.Schema
-
-var GetDetectorsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectorsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetDetectorsResult_detectors *smithy.Schema
-
-var GetDetectorsResult_nextToken *smithy.Schema
-
-var GetDetectorVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectorVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDetectorVersionRequest_detectorId *smithy.Schema
-
-var GetDetectorVersionRequest_detectorVersionId *smithy.Schema
-
-var GetDetectorVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetDetectorVersionResult",
-}, smithy.ShapeTypeStructure, 11)
-var GetDetectorVersionResult_detectorId *smithy.Schema
-
-var GetDetectorVersionResult_detectorVersionId *smithy.Schema
-
-var GetDetectorVersionResult_description *smithy.Schema
-
-var GetDetectorVersionResult_externalModelEndpoints *smithy.Schema
-
-var GetDetectorVersionResult_modelVersions *smithy.Schema
-
-var GetDetectorVersionResult_rules *smithy.Schema
-
-var GetDetectorVersionResult_status *smithy.Schema
-
-var GetDetectorVersionResult_lastUpdatedTime *smithy.Schema
-
-var GetDetectorVersionResult_createdTime *smithy.Schema
-
-var GetDetectorVersionResult_ruleExecutionMode *smithy.Schema
-
-var GetDetectorVersionResult_arn *smithy.Schema
-
-var GetEntityTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEntityTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetEntityTypesRequest_name *smithy.Schema
-
-var GetEntityTypesRequest_nextToken *smithy.Schema
-
-var GetEntityTypesRequest_maxResults *smithy.Schema
-
-var GetEntityTypesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEntityTypesResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetEntityTypesResult_entityTypes *smithy.Schema
-
-var GetEntityTypesResult_nextToken *smithy.Schema
-
-var GetEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEventRequest_eventId *smithy.Schema
-
-var GetEventRequest_eventTypeName *smithy.Schema
-
-var GetEventResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetEventResult_event *smithy.Schema
-
-var GetEventPredictionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPredictionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var GetEventPredictionRequest_detectorId *smithy.Schema
-
-var GetEventPredictionRequest_detectorVersionId *smithy.Schema
-
-var GetEventPredictionRequest_eventId *smithy.Schema
-
-var GetEventPredictionRequest_eventTypeName *smithy.Schema
-
-var GetEventPredictionRequest_entities *smithy.Schema
-
-var GetEventPredictionRequest_eventTimestamp *smithy.Schema
-
-var GetEventPredictionRequest_eventVariables *smithy.Schema
-
-var GetEventPredictionRequest_externalModelEndpointDataBlobs *smithy.Schema
-
-var GetEventPredictionMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPredictionMetadataRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetEventPredictionMetadataRequest_eventId *smithy.Schema
-
-var GetEventPredictionMetadataRequest_eventTypeName *smithy.Schema
-
-var GetEventPredictionMetadataRequest_detectorId *smithy.Schema
-
-var GetEventPredictionMetadataRequest_detectorVersionId *smithy.Schema
-
-var GetEventPredictionMetadataRequest_predictionTimestamp *smithy.Schema
-
-var GetEventPredictionMetadataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPredictionMetadataResult",
-}, smithy.ShapeTypeStructure, 15)
-var GetEventPredictionMetadataResult_eventId *smithy.Schema
-
-var GetEventPredictionMetadataResult_eventTypeName *smithy.Schema
-
-var GetEventPredictionMetadataResult_entityId *smithy.Schema
-
-var GetEventPredictionMetadataResult_entityType *smithy.Schema
-
-var GetEventPredictionMetadataResult_eventTimestamp *smithy.Schema
-
-var GetEventPredictionMetadataResult_detectorId *smithy.Schema
-
-var GetEventPredictionMetadataResult_detectorVersionId *smithy.Schema
-
-var GetEventPredictionMetadataResult_detectorVersionStatus *smithy.Schema
-
-var GetEventPredictionMetadataResult_eventVariables *smithy.Schema
-
-var GetEventPredictionMetadataResult_rules *smithy.Schema
-
-var GetEventPredictionMetadataResult_ruleExecutionMode *smithy.Schema
-
-var GetEventPredictionMetadataResult_outcomes *smithy.Schema
-
-var GetEventPredictionMetadataResult_evaluatedModelVersions *smithy.Schema
-
-var GetEventPredictionMetadataResult_evaluatedExternalModels *smithy.Schema
-
-var GetEventPredictionMetadataResult_predictionTimestamp *smithy.Schema
-
-var GetEventPredictionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventPredictionResult",
-}, smithy.ShapeTypeStructure, 3)
-var GetEventPredictionResult_modelScores *smithy.Schema
-
-var GetEventPredictionResult_ruleResults *smithy.Schema
-
-var GetEventPredictionResult_externalModelOutputs *smithy.Schema
-
-var GetEventTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetEventTypesRequest_name *smithy.Schema
-
-var GetEventTypesRequest_nextToken *smithy.Schema
-
-var GetEventTypesRequest_maxResults *smithy.Schema
-
-var GetEventTypesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetEventTypesResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetEventTypesResult_eventTypes *smithy.Schema
-
-var GetEventTypesResult_nextToken *smithy.Schema
-
-var GetExternalModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetExternalModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetExternalModelsRequest_modelEndpoint *smithy.Schema
-
-var GetExternalModelsRequest_nextToken *smithy.Schema
-
-var GetExternalModelsRequest_maxResults *smithy.Schema
-
-var GetExternalModelsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetExternalModelsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetExternalModelsResult_externalModels *smithy.Schema
-
-var GetExternalModelsResult_nextToken *smithy.Schema
-
-var GetKMSEncryptionKeyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetKMSEncryptionKeyResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetKMSEncryptionKeyResult_kmsKey *smithy.Schema
-
-var GetLabelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetLabelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetLabelsRequest_name *smithy.Schema
-
-var GetLabelsRequest_nextToken *smithy.Schema
-
-var GetLabelsRequest_maxResults *smithy.Schema
-
-var GetLabelsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetLabelsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetLabelsResult_labels *smithy.Schema
-
-var GetLabelsResult_nextToken *smithy.Schema
-
-var GetListElementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListElementsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetListElementsRequest_name *smithy.Schema
-
-var GetListElementsRequest_nextToken *smithy.Schema
-
-var GetListElementsRequest_maxResults *smithy.Schema
-
-var GetListElementsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListElementsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetListElementsResult_elements *smithy.Schema
-
-var GetListElementsResult_nextToken *smithy.Schema
-
-var GetListsMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListsMetadataRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetListsMetadataRequest_name *smithy.Schema
-
-var GetListsMetadataRequest_nextToken *smithy.Schema
-
-var GetListsMetadataRequest_maxResults *smithy.Schema
-
-var GetListsMetadataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetListsMetadataResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetListsMetadataResult_lists *smithy.Schema
-
-var GetListsMetadataResult_nextToken *smithy.Schema
-
-var GetModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModelsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetModelsRequest_modelId *smithy.Schema
-
-var GetModelsRequest_modelType *smithy.Schema
-
-var GetModelsRequest_nextToken *smithy.Schema
-
-var GetModelsRequest_maxResults *smithy.Schema
-
-var GetModelsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModelsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetModelsResult_nextToken *smithy.Schema
-
-var GetModelsResult_models *smithy.Schema
-
-var GetModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModelVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetModelVersionRequest_modelId *smithy.Schema
-
-var GetModelVersionRequest_modelType *smithy.Schema
-
-var GetModelVersionRequest_modelVersionNumber *smithy.Schema
-
-var GetModelVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetModelVersionResult",
-}, smithy.ShapeTypeStructure, 9)
-var GetModelVersionResult_modelId *smithy.Schema
-
-var GetModelVersionResult_modelType *smithy.Schema
-
-var GetModelVersionResult_modelVersionNumber *smithy.Schema
-
-var GetModelVersionResult_trainingDataSource *smithy.Schema
-
-var GetModelVersionResult_trainingDataSchema *smithy.Schema
-
-var GetModelVersionResult_externalEventsDetail *smithy.Schema
-
-var GetModelVersionResult_ingestedEventsDetail *smithy.Schema
-
-var GetModelVersionResult_status *smithy.Schema
-
-var GetModelVersionResult_arn *smithy.Schema
-
-var GetOutcomesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetOutcomesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetOutcomesRequest_name *smithy.Schema
-
-var GetOutcomesRequest_nextToken *smithy.Schema
-
-var GetOutcomesRequest_maxResults *smithy.Schema
-
-var GetOutcomesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetOutcomesResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetOutcomesResult_outcomes *smithy.Schema
-
-var GetOutcomesResult_nextToken *smithy.Schema
-
-var GetRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetRulesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetRulesRequest_ruleId *smithy.Schema
-
-var GetRulesRequest_detectorId *smithy.Schema
-
-var GetRulesRequest_ruleVersion *smithy.Schema
-
-var GetRulesRequest_nextToken *smithy.Schema
-
-var GetRulesRequest_maxResults *smithy.Schema
-
-var GetRulesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetRulesResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetRulesResult_ruleDetails *smithy.Schema
-
-var GetRulesResult_nextToken *smithy.Schema
-
-var GetVariablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetVariablesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetVariablesRequest_name *smithy.Schema
-
-var GetVariablesRequest_nextToken *smithy.Schema
-
-var GetVariablesRequest_maxResults *smithy.Schema
-
-var GetVariablesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "GetVariablesResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetVariablesResult_variables *smithy.Schema
-
-var GetVariablesResult_nextToken *smithy.Schema
-
-var ListEventPredictionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListEventPredictionsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListEventPredictionsRequest_eventId *smithy.Schema
-
-var ListEventPredictionsRequest_eventType *smithy.Schema
-
-var ListEventPredictionsRequest_detectorId *smithy.Schema
-
-var ListEventPredictionsRequest_detectorVersionId *smithy.Schema
-
-var ListEventPredictionsRequest_predictionTimeRange *smithy.Schema
-
-var ListEventPredictionsRequest_nextToken *smithy.Schema
-
-var ListEventPredictionsRequest_maxResults *smithy.Schema
-
-var ListEventPredictionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListEventPredictionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventPredictionsResult_eventPredictionSummaries *smithy.Schema
-
-var ListEventPredictionsResult_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_resourceARN *smithy.Schema
-
-var ListTagsForResourceRequest_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest_maxResults *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResult_tags *smithy.Schema
-
-var ListTagsForResourceResult_nextToken *smithy.Schema
-
-var PutDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutDetectorRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutDetectorRequest_detectorId *smithy.Schema
-
-var PutDetectorRequest_description *smithy.Schema
-
-var PutDetectorRequest_eventTypeName *smithy.Schema
-
-var PutDetectorRequest_tags *smithy.Schema
-
-var PutDetectorResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutDetectorResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEntityTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEntityTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutEntityTypeRequest_name *smithy.Schema
-
-var PutEntityTypeRequest_description *smithy.Schema
-
-var PutEntityTypeRequest_tags *smithy.Schema
-
-var PutEntityTypeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEntityTypeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEventTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEventTypeRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutEventTypeRequest_name *smithy.Schema
-
-var PutEventTypeRequest_description *smithy.Schema
-
-var PutEventTypeRequest_eventVariables *smithy.Schema
-
-var PutEventTypeRequest_labels *smithy.Schema
-
-var PutEventTypeRequest_entityTypes *smithy.Schema
-
-var PutEventTypeRequest_eventIngestion *smithy.Schema
-
-var PutEventTypeRequest_tags *smithy.Schema
-
-var PutEventTypeRequest_eventOrchestration *smithy.Schema
-
-var PutEventTypeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutEventTypeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutExternalModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutExternalModelRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutExternalModelRequest_modelEndpoint *smithy.Schema
-
-var PutExternalModelRequest_modelSource *smithy.Schema
-
-var PutExternalModelRequest_invokeModelEndpointRoleArn *smithy.Schema
-
-var PutExternalModelRequest_inputConfiguration *smithy.Schema
-
-var PutExternalModelRequest_outputConfiguration *smithy.Schema
-
-var PutExternalModelRequest_modelEndpointStatus *smithy.Schema
-
-var PutExternalModelRequest_tags *smithy.Schema
-
-var PutExternalModelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutExternalModelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutKMSEncryptionKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutKMSEncryptionKeyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutKMSEncryptionKeyRequest_kmsEncryptionKeyArn *smithy.Schema
-
-var PutKMSEncryptionKeyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutKMSEncryptionKeyResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutLabelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutLabelRequest_name *smithy.Schema
-
-var PutLabelRequest_description *smithy.Schema
-
-var PutLabelRequest_tags *smithy.Schema
-
-var PutLabelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutLabelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutOutcomeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutOutcomeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutOutcomeRequest_name *smithy.Schema
-
-var PutOutcomeRequest_description *smithy.Schema
-
-var PutOutcomeRequest_tags *smithy.Schema
-
-var PutOutcomeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "PutOutcomeResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var SendEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "SendEventRequest",
-}, smithy.ShapeTypeStructure, 7)
-var SendEventRequest_eventId *smithy.Schema
-
-var SendEventRequest_eventTypeName *smithy.Schema
-
-var SendEventRequest_eventTimestamp *smithy.Schema
-
-var SendEventRequest_eventVariables *smithy.Schema
-
-var SendEventRequest_assignedLabel *smithy.Schema
-
-var SendEventRequest_labelTimestamp *smithy.Schema
-
-var SendEventRequest_entities *smithy.Schema
-
-var SendEventResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "SendEventResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceARN *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "TagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceARN *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UntagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDetectorVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateDetectorVersionRequest_detectorId *smithy.Schema
-
-var UpdateDetectorVersionRequest_detectorVersionId *smithy.Schema
-
-var UpdateDetectorVersionRequest_externalModelEndpoints *smithy.Schema
-
-var UpdateDetectorVersionRequest_rules *smithy.Schema
-
-var UpdateDetectorVersionRequest_description *smithy.Schema
-
-var UpdateDetectorVersionRequest_modelVersions *smithy.Schema
-
-var UpdateDetectorVersionRequest_ruleExecutionMode *smithy.Schema
-
-var UpdateDetectorVersionMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionMetadataRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDetectorVersionMetadataRequest_detectorId *smithy.Schema
-
-var UpdateDetectorVersionMetadataRequest_detectorVersionId *smithy.Schema
-
-var UpdateDetectorVersionMetadataRequest_description *smithy.Schema
-
-var UpdateDetectorVersionMetadataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionMetadataResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDetectorVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDetectorVersionStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDetectorVersionStatusRequest_detectorId *smithy.Schema
-
-var UpdateDetectorVersionStatusRequest_detectorVersionId *smithy.Schema
-
-var UpdateDetectorVersionStatusRequest_status *smithy.Schema
-
-var UpdateDetectorVersionStatusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateDetectorVersionStatusResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEventLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateEventLabelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateEventLabelRequest_eventId *smithy.Schema
-
-var UpdateEventLabelRequest_eventTypeName *smithy.Schema
-
-var UpdateEventLabelRequest_assignedLabel *smithy.Schema
-
-var UpdateEventLabelRequest_labelTimestamp *smithy.Schema
-
-var UpdateEventLabelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateEventLabelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateListRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateListRequest_name *smithy.Schema
-
-var UpdateListRequest_elements *smithy.Schema
-
-var UpdateListRequest_description *smithy.Schema
-
-var UpdateListRequest_updateMode *smithy.Schema
-
-var UpdateListRequest_variableType *smithy.Schema
-
-var UpdateListResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateListResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateModelRequest_modelId *smithy.Schema
-
-var UpdateModelRequest_modelType *smithy.Schema
-
-var UpdateModelRequest_description *smithy.Schema
-
-var UpdateModelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateModelVersionRequest_modelId *smithy.Schema
-
-var UpdateModelVersionRequest_modelType *smithy.Schema
-
-var UpdateModelVersionRequest_majorVersionNumber *smithy.Schema
-
-var UpdateModelVersionRequest_externalEventsDetail *smithy.Schema
-
-var UpdateModelVersionRequest_ingestedEventsDetail *smithy.Schema
-
-var UpdateModelVersionRequest_tags *smithy.Schema
-
-var UpdateModelVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersionResult",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateModelVersionResult_modelId *smithy.Schema
-
-var UpdateModelVersionResult_modelType *smithy.Schema
-
-var UpdateModelVersionResult_modelVersionNumber *smithy.Schema
-
-var UpdateModelVersionResult_status *smithy.Schema
-
-var UpdateModelVersionStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersionStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateModelVersionStatusRequest_modelId *smithy.Schema
-
-var UpdateModelVersionStatusRequest_modelType *smithy.Schema
-
-var UpdateModelVersionStatusRequest_modelVersionNumber *smithy.Schema
-
-var UpdateModelVersionStatusRequest_status *smithy.Schema
-
-var UpdateModelVersionStatusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateModelVersionStatusResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRuleMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleMetadataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRuleMetadataRequest_rule *smithy.Schema
-
-var UpdateRuleMetadataRequest_description *smithy.Schema
-
-var UpdateRuleMetadataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleMetadataResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRuleVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleVersionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateRuleVersionRequest_rule *smithy.Schema
-
-var UpdateRuleVersionRequest_description *smithy.Schema
-
-var UpdateRuleVersionRequest_expression *smithy.Schema
-
-var UpdateRuleVersionRequest_language *smithy.Schema
-
-var UpdateRuleVersionRequest_outcomes *smithy.Schema
-
-var UpdateRuleVersionRequest_tags *smithy.Schema
-
-var UpdateRuleVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateRuleVersionResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRuleVersionResult_rule *smithy.Schema
-
-var UpdateVariableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateVariableRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateVariableRequest_name *smithy.Schema
-
-var UpdateVariableRequest_defaultValue *smithy.Schema
-
-var UpdateVariableRequest_description *smithy.Schema
-
-var UpdateVariableRequest_variableType *smithy.Schema
-
-var UpdateVariableResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.frauddetector",
-	Name:      "UpdateVariableResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _string)
-
-	_ListOfStrings_member = _ListOfStrings.AddMember("member", _string)
-
-	AggregatedLogOddsMetric_variableNames = AggregatedLogOddsMetric.AddMember("variableNames", _ListOfStrings)
-
-	AggregatedLogOddsMetric_aggregatedVariablesImportance = AggregatedLogOddsMetric.AddMember("aggregatedVariablesImportance", _float)
-
-	AggregatedVariablesImpactExplanation_eventVariableNames = AggregatedVariablesImpactExplanation.AddMember("eventVariableNames", _ListOfStrings)
-
-	AggregatedVariablesImpactExplanation_relativeImpact = AggregatedVariablesImpactExplanation.AddMember("relativeImpact", _string)
-
-	AggregatedVariablesImpactExplanation_logOddsImpact = AggregatedVariablesImpactExplanation.AddMember("logOddsImpact", _float)
-
-	_ListOfAggregatedLogOddsMetrics_member = _ListOfAggregatedLogOddsMetrics.AddMember("member", AggregatedLogOddsMetric)
-
-	AggregatedVariablesImportanceMetrics_logOddsMetrics = AggregatedVariablesImportanceMetrics.AddMember("logOddsMetrics", _ListOfAggregatedLogOddsMetrics)
-
-	AllowDenyList_name = AllowDenyList.AddMember("name", _noDashIdentifier)
-
-	AllowDenyList_description = AllowDenyList.AddMember("description", _description)
-
-	AllowDenyList_variableType = AllowDenyList.AddMember("variableType", _variableType)
-
-	AllowDenyList_createdTime = AllowDenyList.AddMember("createdTime", _time)
-
-	AllowDenyList_updatedTime = AllowDenyList.AddMember("updatedTime", _time)
-
-	AllowDenyList_arn = AllowDenyList.AddMember("arn", _fraudDetectorArn)
-
-	_AllowDenyLists_member = _AllowDenyLists.AddMember("member", AllowDenyList)
-
-	AsyncJobStatus_IN_PROGRESS_INITIALIZING = AsyncJobStatus.AddMember("IN_PROGRESS_INITIALIZING", smithyprelude.Unit)
-
-	AsyncJobStatus_IN_PROGRESS = AsyncJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AsyncJobStatus_CANCEL_IN_PROGRESS = AsyncJobStatus.AddMember("CANCEL_IN_PROGRESS", smithyprelude.Unit)
-
-	AsyncJobStatus_CANCELED = AsyncJobStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	AsyncJobStatus_COMPLETE = AsyncJobStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	AsyncJobStatus_FAILED = AsyncJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ATIMetricDataPoint_cr = ATIMetricDataPoint.AddMember("cr", _float)
-
-	ATIMetricDataPoint_adr = ATIMetricDataPoint.AddMember("adr", _float)
-
-	ATIMetricDataPoint_threshold = ATIMetricDataPoint.AddMember("threshold", _float)
-
-	ATIMetricDataPoint_atodr = ATIMetricDataPoint.AddMember("atodr", _float)
-
-	_ATIMetricDataPointsList_member = _ATIMetricDataPointsList.AddMember("member", ATIMetricDataPoint)
-
-	ATIModelPerformance_asi = ATIModelPerformance.AddMember("asi", _float)
-
-	ATITrainingMetricsValue_metricDataPoints = ATITrainingMetricsValue.AddMember("metricDataPoints", _ATIMetricDataPointsList)
-
-	ATITrainingMetricsValue_modelPerformance = ATITrainingMetricsValue.AddMember("modelPerformance", ATIModelPerformance)
-
-	BatchCreateVariableError_name = BatchCreateVariableError.AddMember("name", _string)
-
-	BatchCreateVariableError_code = BatchCreateVariableError.AddMember("code", _Integer2)
-
-	BatchCreateVariableError_message = BatchCreateVariableError.AddMember("message", _string)
-
-	_BatchCreateVariableErrorList_member = _BatchCreateVariableErrorList.AddMember("member", BatchCreateVariableError)
-
-	BatchGetVariableError_name = BatchGetVariableError.AddMember("name", _string)
-
-	BatchGetVariableError_code = BatchGetVariableError.AddMember("code", _Integer2)
-
-	BatchGetVariableError_message = BatchGetVariableError.AddMember("message", _string)
-
-	_BatchGetVariableErrorList_member = _BatchGetVariableErrorList.AddMember("member", BatchGetVariableError)
-
-	BatchImport_jobId = BatchImport.AddMember("jobId", _identifier)
-
-	BatchImport_status = BatchImport.AddMember("status", AsyncJobStatus)
-
-	BatchImport_failureReason = BatchImport.AddMember("failureReason", _string)
-
-	BatchImport_startTime = BatchImport.AddMember("startTime", _time)
-
-	BatchImport_completionTime = BatchImport.AddMember("completionTime", _time)
-
-	BatchImport_inputPath = BatchImport.AddMember("inputPath", _s3BucketLocation)
-
-	BatchImport_outputPath = BatchImport.AddMember("outputPath", _s3BucketLocation)
-
-	BatchImport_eventTypeName = BatchImport.AddMember("eventTypeName", _identifier)
-
-	BatchImport_iamRoleArn = BatchImport.AddMember("iamRoleArn", _iamRoleArn)
-
-	BatchImport_arn = BatchImport.AddMember("arn", _fraudDetectorArn)
-
-	BatchImport_processedRecordsCount = BatchImport.AddMember("processedRecordsCount", _Integer)
-
-	BatchImport_failedRecordsCount = BatchImport.AddMember("failedRecordsCount", _Integer)
-
-	BatchImport_totalRecordsCount = BatchImport.AddMember("totalRecordsCount", _Integer)
-
-	_BatchImportList_member = _BatchImportList.AddMember("member", BatchImport)
-
-	BatchPrediction_jobId = BatchPrediction.AddMember("jobId", _identifier)
-
-	BatchPrediction_status = BatchPrediction.AddMember("status", AsyncJobStatus)
-
-	BatchPrediction_failureReason = BatchPrediction.AddMember("failureReason", _string)
-
-	BatchPrediction_startTime = BatchPrediction.AddMember("startTime", _time)
-
-	BatchPrediction_completionTime = BatchPrediction.AddMember("completionTime", _time)
-
-	BatchPrediction_lastHeartbeatTime = BatchPrediction.AddMember("lastHeartbeatTime", _time)
-
-	BatchPrediction_inputPath = BatchPrediction.AddMember("inputPath", _s3BucketLocation)
-
-	BatchPrediction_outputPath = BatchPrediction.AddMember("outputPath", _s3BucketLocation)
-
-	BatchPrediction_eventTypeName = BatchPrediction.AddMember("eventTypeName", _identifier)
-
-	BatchPrediction_detectorName = BatchPrediction.AddMember("detectorName", _identifier)
-
-	BatchPrediction_detectorVersion = BatchPrediction.AddMember("detectorVersion", _floatVersionString)
-
-	BatchPrediction_iamRoleArn = BatchPrediction.AddMember("iamRoleArn", _iamRoleArn)
-
-	BatchPrediction_arn = BatchPrediction.AddMember("arn", _fraudDetectorArn)
-
-	BatchPrediction_processedRecordsCount = BatchPrediction.AddMember("processedRecordsCount", _Integer)
-
-	BatchPrediction_totalRecordsCount = BatchPrediction.AddMember("totalRecordsCount", _Integer)
-
-	_BatchPredictionList_member = _BatchPredictionList.AddMember("member", BatchPrediction)
-
-	ConflictException_message = ConflictException.AddMember("message", _string)
-
-	_CsvIndexToVariableMap_key = _CsvIndexToVariableMap.AddMember("key", _string)
-
-	_CsvIndexToVariableMap_value = _CsvIndexToVariableMap.AddMember("value", _string)
-
-	DataSource_EVENT = DataSource.AddMember("EVENT", smithyprelude.Unit)
-
-	DataSource_MODEL_SCORE = DataSource.AddMember("MODEL_SCORE", smithyprelude.Unit)
-
-	DataSource_EXTERNAL_MODEL_SCORE = DataSource.AddMember("EXTERNAL_MODEL_SCORE", smithyprelude.Unit)
-
-	DataType_STRING = DataType.AddMember("STRING", smithyprelude.Unit)
-
-	DataType_INTEGER = DataType.AddMember("INTEGER", smithyprelude.Unit)
-
-	DataType_FLOAT = DataType.AddMember("FLOAT", smithyprelude.Unit)
-
-	DataType_BOOLEAN = DataType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	DataType_DATETIME = DataType.AddMember("DATETIME", smithyprelude.Unit)
-
-	FileValidationMessage_title = FileValidationMessage.AddMember("title", _string)
-
-	FileValidationMessage_content = FileValidationMessage.AddMember("content", _string)
-
-	FileValidationMessage_type = FileValidationMessage.AddMember("type", _string)
-
-	_fileValidationMessageList_member = _fileValidationMessageList.AddMember("member", FileValidationMessage)
-
-	FieldValidationMessage_fieldName = FieldValidationMessage.AddMember("fieldName", _string)
-
-	FieldValidationMessage_identifier = FieldValidationMessage.AddMember("identifier", _string)
-
-	FieldValidationMessage_title = FieldValidationMessage.AddMember("title", _string)
-
-	FieldValidationMessage_content = FieldValidationMessage.AddMember("content", _string)
-
-	FieldValidationMessage_type = FieldValidationMessage.AddMember("type", _string)
-
-	_fieldValidationMessageList_member = _fieldValidationMessageList.AddMember("member", FieldValidationMessage)
-
-	DataValidationMetrics_fileLevelMessages = DataValidationMetrics.AddMember("fileLevelMessages", _fileValidationMessageList)
-
-	DataValidationMetrics_fieldLevelMessages = DataValidationMetrics.AddMember("fieldLevelMessages", _fieldValidationMessageList)
-
-	Detector_detectorId = Detector.AddMember("detectorId", _identifier)
-
-	Detector_description = Detector.AddMember("description", _description)
-
-	Detector_eventTypeName = Detector.AddMember("eventTypeName", _identifier)
-
-	Detector_lastUpdatedTime = Detector.AddMember("lastUpdatedTime", _time)
-
-	Detector_createdTime = Detector.AddMember("createdTime", _time)
-
-	Detector_arn = Detector.AddMember("arn", _fraudDetectorArn)
-
-	_DetectorList_member = _DetectorList.AddMember("member", Detector)
-
-	DetectorVersionStatus_DRAFT = DetectorVersionStatus.AddMember("DRAFT", smithyprelude.Unit)
-
-	DetectorVersionStatus_ACTIVE = DetectorVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DetectorVersionStatus_INACTIVE = DetectorVersionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	DetectorVersionSummary_detectorVersionId = DetectorVersionSummary.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	DetectorVersionSummary_status = DetectorVersionSummary.AddMember("status", DetectorVersionStatus)
-
-	DetectorVersionSummary_description = DetectorVersionSummary.AddMember("description", _description)
-
-	DetectorVersionSummary_lastUpdatedTime = DetectorVersionSummary.AddMember("lastUpdatedTime", _time)
-
-	_DetectorVersionSummaryList_member = _DetectorVersionSummaryList.AddMember("member", DetectorVersionSummary)
-
-	_ElementsList_member = _ElementsList.AddMember("member", _Elements)
-
-	Entity_entityType = Entity.AddMember("entityType", _string)
-
-	Entity_entityId = Entity.AddMember("entityId", _entityRestrictedString)
-
-	EntityType_name = EntityType.AddMember("name", _string)
-
-	EntityType_description = EntityType.AddMember("description", _description)
-
-	EntityType_lastUpdatedTime = EntityType.AddMember("lastUpdatedTime", _time)
-
-	EntityType_createdTime = EntityType.AddMember("createdTime", _time)
-
-	EntityType_arn = EntityType.AddMember("arn", _fraudDetectorArn)
-
-	_entityTypeList_member = _entityTypeList.AddMember("member", EntityType)
-
-	_MapOfStrings_key = _MapOfStrings.AddMember("key", _string)
-
-	_MapOfStrings_value = _MapOfStrings.AddMember("value", _string)
-
-	EvaluatedExternalModel_modelEndpoint = EvaluatedExternalModel.AddMember("modelEndpoint", _string)
-
-	EvaluatedExternalModel_useEventVariables = EvaluatedExternalModel.AddMember("useEventVariables", _Boolean)
-
-	EvaluatedExternalModel_inputVariables = EvaluatedExternalModel.AddMember("inputVariables", _MapOfStrings)
-
-	EvaluatedExternalModel_outputVariables = EvaluatedExternalModel.AddMember("outputVariables", _MapOfStrings)
-
-	VariableImpactExplanation_eventVariableName = VariableImpactExplanation.AddMember("eventVariableName", _string)
-
-	VariableImpactExplanation_relativeImpact = VariableImpactExplanation.AddMember("relativeImpact", _string)
-
-	VariableImpactExplanation_logOddsImpact = VariableImpactExplanation.AddMember("logOddsImpact", _float)
-
-	_listOfVariableImpactExplanations_member = _listOfVariableImpactExplanations.AddMember("member", VariableImpactExplanation)
-
-	_ListOfAggregatedVariablesImpactExplanations_member = _ListOfAggregatedVariablesImpactExplanations.AddMember("member", AggregatedVariablesImpactExplanation)
-
-	PredictionExplanations_variableImpactExplanations = PredictionExplanations.AddMember("variableImpactExplanations", _listOfVariableImpactExplanations)
-
-	PredictionExplanations_aggregatedVariablesImpactExplanations = PredictionExplanations.AddMember("aggregatedVariablesImpactExplanations", _ListOfAggregatedVariablesImpactExplanations)
-
-	ModelVersionEvaluation_outputVariableName = ModelVersionEvaluation.AddMember("outputVariableName", _string)
-
-	ModelVersionEvaluation_evaluationScore = ModelVersionEvaluation.AddMember("evaluationScore", _string)
-
-	ModelVersionEvaluation_predictionExplanations = ModelVersionEvaluation.AddMember("predictionExplanations", PredictionExplanations)
-
-	_ListOfModelVersionEvaluations_member = _ListOfModelVersionEvaluations.AddMember("member", ModelVersionEvaluation)
-
-	EvaluatedModelVersion_modelId = EvaluatedModelVersion.AddMember("modelId", _string)
-
-	EvaluatedModelVersion_modelVersion = EvaluatedModelVersion.AddMember("modelVersion", _string)
-
-	EvaluatedModelVersion_modelType = EvaluatedModelVersion.AddMember("modelType", _string)
-
-	EvaluatedModelVersion_evaluations = EvaluatedModelVersion.AddMember("evaluations", _ListOfModelVersionEvaluations)
-
-	EvaluatedRule_ruleId = EvaluatedRule.AddMember("ruleId", _identifier)
-
-	EvaluatedRule_ruleVersion = EvaluatedRule.AddMember("ruleVersion", _wholeNumberVersionString)
-
-	EvaluatedRule_expression = EvaluatedRule.AddMember("expression", _sensitiveString)
-
-	EvaluatedRule_expressionWithValues = EvaluatedRule.AddMember("expressionWithValues", _sensitiveString)
-
-	EvaluatedRule_outcomes = EvaluatedRule.AddMember("outcomes", _ListOfStrings)
-
-	EvaluatedRule_evaluated = EvaluatedRule.AddMember("evaluated", _Boolean)
-
-	EvaluatedRule_matched = EvaluatedRule.AddMember("matched", _Boolean)
-
-	_EvaluatedRuleList_member = _EvaluatedRuleList.AddMember("member", EvaluatedRule)
-
-	_EventAttributeMap_key = _EventAttributeMap.AddMember("key", _attributeKey)
-
-	_EventAttributeMap_value = _EventAttributeMap.AddMember("value", _attributeValue)
-
-	_listOfEntities_member = _listOfEntities.AddMember("member", Entity)
-
-	Event_eventId = Event.AddMember("eventId", _string)
-
-	Event_eventTypeName = Event.AddMember("eventTypeName", _string)
-
-	Event_eventTimestamp = Event.AddMember("eventTimestamp", _string)
-
-	Event_eventVariables = Event.AddMember("eventVariables", _EventAttributeMap)
-
-	Event_currentLabel = Event.AddMember("currentLabel", _string)
-
-	Event_labelTimestamp = Event.AddMember("labelTimestamp", _string)
-
-	Event_entities = Event.AddMember("entities", _listOfEntities)
-
-	EventIngestion_ENABLED = EventIngestion.AddMember("ENABLED", smithyprelude.Unit)
-
-	EventIngestion_DISABLED = EventIngestion.AddMember("DISABLED", smithyprelude.Unit)
-
-	EventOrchestration_eventBridgeEnabled = EventOrchestration.AddMember("eventBridgeEnabled", _Boolean)
-
-	EventPredictionSummary_eventId = EventPredictionSummary.AddMember("eventId", _identifier)
-
-	EventPredictionSummary_eventTypeName = EventPredictionSummary.AddMember("eventTypeName", _identifier)
-
-	EventPredictionSummary_eventTimestamp = EventPredictionSummary.AddMember("eventTimestamp", _time)
-
-	EventPredictionSummary_predictionTimestamp = EventPredictionSummary.AddMember("predictionTimestamp", _time)
-
-	EventPredictionSummary_detectorId = EventPredictionSummary.AddMember("detectorId", _identifier)
-
-	EventPredictionSummary_detectorVersionId = EventPredictionSummary.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	_NonEmptyListOfStrings_member = _NonEmptyListOfStrings.AddMember("member", _string)
-
-	IngestedEventStatistics_numberOfEvents = IngestedEventStatistics.AddMember("numberOfEvents", _Long)
-
-	IngestedEventStatistics_eventDataSizeInBytes = IngestedEventStatistics.AddMember("eventDataSizeInBytes", _Long)
-
-	IngestedEventStatistics_leastRecentEvent = IngestedEventStatistics.AddMember("leastRecentEvent", _time)
-
-	IngestedEventStatistics_mostRecentEvent = IngestedEventStatistics.AddMember("mostRecentEvent", _time)
-
-	IngestedEventStatistics_lastUpdatedTime = IngestedEventStatistics.AddMember("lastUpdatedTime", _time)
-
-	EventType_name = EventType.AddMember("name", _string)
-
-	EventType_description = EventType.AddMember("description", _description)
-
-	EventType_eventVariables = EventType.AddMember("eventVariables", _ListOfStrings)
-
-	EventType_labels = EventType.AddMember("labels", _ListOfStrings)
-
-	EventType_entityTypes = EventType.AddMember("entityTypes", _NonEmptyListOfStrings)
-
-	EventType_eventIngestion = EventType.AddMember("eventIngestion", EventIngestion)
-
-	EventType_ingestedEventStatistics = EventType.AddMember("ingestedEventStatistics", IngestedEventStatistics)
-
-	EventType_lastUpdatedTime = EventType.AddMember("lastUpdatedTime", _time)
-
-	EventType_createdTime = EventType.AddMember("createdTime", _time)
-
-	EventType_arn = EventType.AddMember("arn", _fraudDetectorArn)
-
-	EventType_eventOrchestration = EventType.AddMember("eventOrchestration", EventOrchestration)
-
-	_eventTypeList_member = _eventTypeList.AddMember("member", EventType)
-
-	_EventVariableMap_key = _EventVariableMap.AddMember("key", _variableName)
-
-	_EventVariableMap_value = _EventVariableMap.AddMember("value", _variableValue)
-
-	EventVariableSummary_name = EventVariableSummary.AddMember("name", _sensitiveString)
-
-	EventVariableSummary_value = EventVariableSummary.AddMember("value", _sensitiveString)
-
-	EventVariableSummary_source = EventVariableSummary.AddMember("source", _sensitiveString)
-
-	ExternalEventsDetail_dataLocation = ExternalEventsDetail.AddMember("dataLocation", _s3BucketLocation)
-
-	ExternalEventsDetail_dataAccessRoleArn = ExternalEventsDetail.AddMember("dataAccessRoleArn", _iamRoleArn)
-
-	ModelSource_SAGEMAKER = ModelSource.AddMember("SAGEMAKER", smithyprelude.Unit)
-
-	ModelInputDataFormat_CSV = ModelInputDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ModelInputDataFormat_JSON = ModelInputDataFormat.AddMember("JSON", smithyprelude.Unit)
-
-	ModelInputConfiguration_eventTypeName = ModelInputConfiguration.AddMember("eventTypeName", _identifier)
-
-	ModelInputConfiguration_format = ModelInputConfiguration.AddMember("format", ModelInputDataFormat)
-
-	ModelInputConfiguration_useEventVariables = ModelInputConfiguration.AddMember("useEventVariables", _UseEventVariables)
-
-	ModelInputConfiguration_jsonInputTemplate = ModelInputConfiguration.AddMember("jsonInputTemplate", _modelInputTemplate)
-
-	ModelInputConfiguration_csvInputTemplate = ModelInputConfiguration.AddMember("csvInputTemplate", _modelInputTemplate)
-
-	ModelOutputDataFormat_CSV = ModelOutputDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ModelOutputDataFormat_JSONLINES = ModelOutputDataFormat.AddMember("JSONLINES", smithyprelude.Unit)
-
-	_JsonKeyToVariableMap_key = _JsonKeyToVariableMap.AddMember("key", _string)
-
-	_JsonKeyToVariableMap_value = _JsonKeyToVariableMap.AddMember("value", _string)
-
-	ModelOutputConfiguration_format = ModelOutputConfiguration.AddMember("format", ModelOutputDataFormat)
-
-	ModelOutputConfiguration_jsonKeyToVariableMap = ModelOutputConfiguration.AddMember("jsonKeyToVariableMap", _JsonKeyToVariableMap)
-
-	ModelOutputConfiguration_csvIndexToVariableMap = ModelOutputConfiguration.AddMember("csvIndexToVariableMap", _CsvIndexToVariableMap)
-
-	ModelEndpointStatus_ASSOCIATED = ModelEndpointStatus.AddMember("ASSOCIATED", smithyprelude.Unit)
-
-	ModelEndpointStatus_DISSOCIATED = ModelEndpointStatus.AddMember("DISSOCIATED", smithyprelude.Unit)
-
-	ExternalModel_modelEndpoint = ExternalModel.AddMember("modelEndpoint", _string)
-
-	ExternalModel_modelSource = ExternalModel.AddMember("modelSource", ModelSource)
-
-	ExternalModel_invokeModelEndpointRoleArn = ExternalModel.AddMember("invokeModelEndpointRoleArn", _string)
-
-	ExternalModel_inputConfiguration = ExternalModel.AddMember("inputConfiguration", ModelInputConfiguration)
-
-	ExternalModel_outputConfiguration = ExternalModel.AddMember("outputConfiguration", ModelOutputConfiguration)
-
-	ExternalModel_modelEndpointStatus = ExternalModel.AddMember("modelEndpointStatus", ModelEndpointStatus)
-
-	ExternalModel_lastUpdatedTime = ExternalModel.AddMember("lastUpdatedTime", _time)
-
-	ExternalModel_createdTime = ExternalModel.AddMember("createdTime", _time)
-
-	ExternalModel_arn = ExternalModel.AddMember("arn", _fraudDetectorArn)
-
-	ModelEndpointDataBlob_byteBuffer = ModelEndpointDataBlob.AddMember("byteBuffer", _blob)
-
-	ModelEndpointDataBlob_contentType = ModelEndpointDataBlob.AddMember("contentType", _contentType)
-
-	_ExternalModelEndpointDataBlobMap_key = _ExternalModelEndpointDataBlobMap.AddMember("key", _sageMakerEndpointIdentifier)
-
-	_ExternalModelEndpointDataBlobMap_value = _ExternalModelEndpointDataBlobMap.AddMember("value", ModelEndpointDataBlob)
-
-	_ExternalModelList_member = _ExternalModelList.AddMember("member", ExternalModel)
-
-	ExternalModelSummary_modelEndpoint = ExternalModelSummary.AddMember("modelEndpoint", _string)
-
-	ExternalModelSummary_modelSource = ExternalModelSummary.AddMember("modelSource", ModelSource)
-
-	_ExternalModelPredictionMap_key = _ExternalModelPredictionMap.AddMember("key", _string)
-
-	_ExternalModelPredictionMap_value = _ExternalModelPredictionMap.AddMember("value", _string)
-
-	ExternalModelOutputs_externalModel = ExternalModelOutputs.AddMember("externalModel", ExternalModelSummary)
-
-	ExternalModelOutputs_outputs = ExternalModelOutputs.AddMember("outputs", _ExternalModelPredictionMap)
-
-	FilterCondition_value = FilterCondition.AddMember("value", _filterString)
-
-	IngestedEventsTimeWindow_startTime = IngestedEventsTimeWindow.AddMember("startTime", _time)
-
-	IngestedEventsTimeWindow_endTime = IngestedEventsTimeWindow.AddMember("endTime", _time)
-
-	IngestedEventsDetail_ingestedEventsTimeWindow = IngestedEventsDetail.AddMember("ingestedEventsTimeWindow", IngestedEventsTimeWindow)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _string)
-
-	KMSKey_kmsEncryptionKeyArn = KMSKey.AddMember("kmsEncryptionKeyArn", _KmsEncryptionKeyArn)
-
-	Label_name = Label.AddMember("name", _string)
-
-	Label_description = Label.AddMember("description", _description)
-
-	Label_lastUpdatedTime = Label.AddMember("lastUpdatedTime", _time)
-
-	Label_createdTime = Label.AddMember("createdTime", _time)
-
-	Label_arn = Label.AddMember("arn", _fraudDetectorArn)
-
-	_labelList_member = _labelList.AddMember("member", Label)
-
-	_labelMapper_key = _labelMapper.AddMember("key", _string)
-
-	_labelMapper_value = _labelMapper.AddMember("value", _ListOfStrings)
-
-	UnlabeledEventsTreatment_IGNORE = UnlabeledEventsTreatment.AddMember("IGNORE", smithyprelude.Unit)
-
-	UnlabeledEventsTreatment_FRAUD = UnlabeledEventsTreatment.AddMember("FRAUD", smithyprelude.Unit)
-
-	UnlabeledEventsTreatment_LEGIT = UnlabeledEventsTreatment.AddMember("LEGIT", smithyprelude.Unit)
-
-	UnlabeledEventsTreatment_AUTO = UnlabeledEventsTreatment.AddMember("AUTO", smithyprelude.Unit)
-
-	LabelSchema_labelMapper = LabelSchema.AddMember("labelMapper", _labelMapper)
-
-	LabelSchema_unlabeledEventsTreatment = LabelSchema.AddMember("unlabeledEventsTreatment", UnlabeledEventsTreatment)
-
-	Language_DETECTORPL = Language.AddMember("DETECTORPL", smithyprelude.Unit)
-
-	_ListOfEvaluatedExternalModels_member = _ListOfEvaluatedExternalModels.AddMember("member", EvaluatedExternalModel)
-
-	_ListOfEvaluatedModelVersions_member = _ListOfEvaluatedModelVersions.AddMember("member", EvaluatedModelVersion)
-
-	_ListOfEventPredictionSummaries_member = _ListOfEventPredictionSummaries.AddMember("member", EventPredictionSummary)
-
-	_ListOfEventVariableSummaries_member = _ListOfEventVariableSummaries.AddMember("member", EventVariableSummary)
-
-	_ListOfExternalModelOutputs_member = _ListOfExternalModelOutputs.AddMember("member", ExternalModelOutputs)
-
-	LogOddsMetric_variableName = LogOddsMetric.AddMember("variableName", _string)
-
-	LogOddsMetric_variableType = LogOddsMetric.AddMember("variableType", _string)
-
-	LogOddsMetric_variableImportance = LogOddsMetric.AddMember("variableImportance", _float)
-
-	_ListOfLogOddsMetrics_member = _ListOfLogOddsMetrics.AddMember("member", LogOddsMetric)
-
-	ModelTypeEnum_ONLINE_FRAUD_INSIGHTS = ModelTypeEnum.AddMember("ONLINE_FRAUD_INSIGHTS", smithyprelude.Unit)
-
-	ModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS = ModelTypeEnum.AddMember("TRANSACTION_FRAUD_INSIGHTS", smithyprelude.Unit)
-
-	ModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS = ModelTypeEnum.AddMember("ACCOUNT_TAKEOVER_INSIGHTS", smithyprelude.Unit)
-
-	ModelVersion_modelId = ModelVersion.AddMember("modelId", _modelIdentifier)
-
-	ModelVersion_modelType = ModelVersion.AddMember("modelType", ModelTypeEnum)
-
-	ModelVersion_modelVersionNumber = ModelVersion.AddMember("modelVersionNumber", _floatVersionString)
-
-	ModelVersion_arn = ModelVersion.AddMember("arn", _fraudDetectorArn)
-
-	_ModelPredictionMap_key = _ModelPredictionMap.AddMember("key", _string)
-
-	_ModelPredictionMap_value = _ModelPredictionMap.AddMember("value", _float)
-
-	ModelScores_modelVersion = ModelScores.AddMember("modelVersion", ModelVersion)
-
-	ModelScores_scores = ModelScores.AddMember("scores", _ModelPredictionMap)
-
-	_ListOfModelScores_member = _ListOfModelScores.AddMember("member", ModelScores)
-
-	_ListOfModelVersions_member = _ListOfModelVersions.AddMember("member", ModelVersion)
-
-	RuleResult_ruleId = RuleResult.AddMember("ruleId", _string)
-
-	RuleResult_outcomes = RuleResult.AddMember("outcomes", _ListOfStrings)
-
-	_ListOfRuleResults_member = _ListOfRuleResults.AddMember("member", RuleResult)
-
-	ListUpdateMode_REPLACE = ListUpdateMode.AddMember("REPLACE", smithyprelude.Unit)
-
-	ListUpdateMode_APPEND = ListUpdateMode.AddMember("APPEND", smithyprelude.Unit)
-
-	ListUpdateMode_REMOVE = ListUpdateMode.AddMember("REMOVE", smithyprelude.Unit)
-
-	MetricDataPoint_fpr = MetricDataPoint.AddMember("fpr", _float)
-
-	MetricDataPoint_precision = MetricDataPoint.AddMember("precision", _float)
-
-	MetricDataPoint_tpr = MetricDataPoint.AddMember("tpr", _float)
-
-	MetricDataPoint_threshold = MetricDataPoint.AddMember("threshold", _float)
-
-	_metricDataPointsList_member = _metricDataPointsList.AddMember("member", MetricDataPoint)
-
-	Model_modelId = Model.AddMember("modelId", _modelIdentifier)
-
-	Model_modelType = Model.AddMember("modelType", ModelTypeEnum)
-
-	Model_description = Model.AddMember("description", _description)
-
-	Model_eventTypeName = Model.AddMember("eventTypeName", _string)
-
-	Model_createdTime = Model.AddMember("createdTime", _time)
-
-	Model_lastUpdatedTime = Model.AddMember("lastUpdatedTime", _time)
-
-	Model_arn = Model.AddMember("arn", _fraudDetectorArn)
-
-	_modelList_member = _modelList.AddMember("member", Model)
-
-	TrainingDataSourceEnum_EXTERNAL_EVENTS = TrainingDataSourceEnum.AddMember("EXTERNAL_EVENTS", smithyprelude.Unit)
-
-	TrainingDataSourceEnum_INGESTED_EVENTS = TrainingDataSourceEnum.AddMember("INGESTED_EVENTS", smithyprelude.Unit)
-
-	TrainingDataSchema_modelVariables = TrainingDataSchema.AddMember("modelVariables", _ListOfStrings)
-
-	TrainingDataSchema_labelSchema = TrainingDataSchema.AddMember("labelSchema", LabelSchema)
-
-	TrainingMetrics_auc = TrainingMetrics.AddMember("auc", _float)
-
-	TrainingMetrics_metricDataPoints = TrainingMetrics.AddMember("metricDataPoints", _metricDataPointsList)
-
-	VariableImportanceMetrics_logOddsMetrics = VariableImportanceMetrics.AddMember("logOddsMetrics", _ListOfLogOddsMetrics)
-
-	TrainingResult_dataValidationMetrics = TrainingResult.AddMember("dataValidationMetrics", DataValidationMetrics)
-
-	TrainingResult_trainingMetrics = TrainingResult.AddMember("trainingMetrics", TrainingMetrics)
-
-	TrainingResult_variableImportanceMetrics = TrainingResult.AddMember("variableImportanceMetrics", VariableImportanceMetrics)
-
-	OFIMetricDataPoint_fpr = OFIMetricDataPoint.AddMember("fpr", _float)
-
-	OFIMetricDataPoint_precision = OFIMetricDataPoint.AddMember("precision", _float)
-
-	OFIMetricDataPoint_tpr = OFIMetricDataPoint.AddMember("tpr", _float)
-
-	OFIMetricDataPoint_threshold = OFIMetricDataPoint.AddMember("threshold", _float)
-
-	_OFIMetricDataPointsList_member = _OFIMetricDataPointsList.AddMember("member", OFIMetricDataPoint)
-
-	UncertaintyRange_lowerBoundValue = UncertaintyRange.AddMember("lowerBoundValue", _float)
-
-	UncertaintyRange_upperBoundValue = UncertaintyRange.AddMember("upperBoundValue", _float)
-
-	OFIModelPerformance_auc = OFIModelPerformance.AddMember("auc", _float)
-
-	OFIModelPerformance_uncertaintyRange = OFIModelPerformance.AddMember("uncertaintyRange", UncertaintyRange)
-
-	OFITrainingMetricsValue_metricDataPoints = OFITrainingMetricsValue.AddMember("metricDataPoints", _OFIMetricDataPointsList)
-
-	OFITrainingMetricsValue_modelPerformance = OFITrainingMetricsValue.AddMember("modelPerformance", OFIModelPerformance)
-
-	TFIMetricDataPoint_fpr = TFIMetricDataPoint.AddMember("fpr", _float)
-
-	TFIMetricDataPoint_precision = TFIMetricDataPoint.AddMember("precision", _float)
-
-	TFIMetricDataPoint_tpr = TFIMetricDataPoint.AddMember("tpr", _float)
-
-	TFIMetricDataPoint_threshold = TFIMetricDataPoint.AddMember("threshold", _float)
-
-	_TFIMetricDataPointsList_member = _TFIMetricDataPointsList.AddMember("member", TFIMetricDataPoint)
-
-	TFIModelPerformance_auc = TFIModelPerformance.AddMember("auc", _float)
-
-	TFIModelPerformance_uncertaintyRange = TFIModelPerformance.AddMember("uncertaintyRange", UncertaintyRange)
-
-	TFITrainingMetricsValue_metricDataPoints = TFITrainingMetricsValue.AddMember("metricDataPoints", _TFIMetricDataPointsList)
-
-	TFITrainingMetricsValue_modelPerformance = TFITrainingMetricsValue.AddMember("modelPerformance", TFIModelPerformance)
-
-	TrainingMetricsV2_ofi = TrainingMetricsV2.AddMember("ofi", OFITrainingMetricsValue)
-
-	TrainingMetricsV2_tfi = TrainingMetricsV2.AddMember("tfi", TFITrainingMetricsValue)
-
-	TrainingMetricsV2_ati = TrainingMetricsV2.AddMember("ati", ATITrainingMetricsValue)
-
-	TrainingResultV2_dataValidationMetrics = TrainingResultV2.AddMember("dataValidationMetrics", DataValidationMetrics)
-
-	TrainingResultV2_trainingMetricsV2 = TrainingResultV2.AddMember("trainingMetricsV2", TrainingMetricsV2)
-
-	TrainingResultV2_variableImportanceMetrics = TrainingResultV2.AddMember("variableImportanceMetrics", VariableImportanceMetrics)
-
-	TrainingResultV2_aggregatedVariablesImportanceMetrics = TrainingResultV2.AddMember("aggregatedVariablesImportanceMetrics", AggregatedVariablesImportanceMetrics)
-
-	ModelVersionDetail_modelId = ModelVersionDetail.AddMember("modelId", _modelIdentifier)
-
-	ModelVersionDetail_modelType = ModelVersionDetail.AddMember("modelType", ModelTypeEnum)
-
-	ModelVersionDetail_modelVersionNumber = ModelVersionDetail.AddMember("modelVersionNumber", _floatVersionString)
-
-	ModelVersionDetail_status = ModelVersionDetail.AddMember("status", _string)
-
-	ModelVersionDetail_trainingDataSource = ModelVersionDetail.AddMember("trainingDataSource", TrainingDataSourceEnum)
-
-	ModelVersionDetail_trainingDataSchema = ModelVersionDetail.AddMember("trainingDataSchema", TrainingDataSchema)
-
-	ModelVersionDetail_externalEventsDetail = ModelVersionDetail.AddMember("externalEventsDetail", ExternalEventsDetail)
-
-	ModelVersionDetail_ingestedEventsDetail = ModelVersionDetail.AddMember("ingestedEventsDetail", IngestedEventsDetail)
-
-	ModelVersionDetail_trainingResult = ModelVersionDetail.AddMember("trainingResult", TrainingResult)
-
-	ModelVersionDetail_lastUpdatedTime = ModelVersionDetail.AddMember("lastUpdatedTime", _time)
-
-	ModelVersionDetail_createdTime = ModelVersionDetail.AddMember("createdTime", _time)
-
-	ModelVersionDetail_arn = ModelVersionDetail.AddMember("arn", _fraudDetectorArn)
-
-	ModelVersionDetail_trainingResultV2 = ModelVersionDetail.AddMember("trainingResultV2", TrainingResultV2)
-
-	_modelVersionDetailList_member = _modelVersionDetailList.AddMember("member", ModelVersionDetail)
-
-	ModelVersionStatus_ACTIVE = ModelVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ModelVersionStatus_INACTIVE = ModelVersionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ModelVersionStatus_TRAINING_CANCELLED = ModelVersionStatus.AddMember("TRAINING_CANCELLED", smithyprelude.Unit)
-
-	_NameList_member = _NameList.AddMember("member", _string)
-
-	Outcome_name = Outcome.AddMember("name", _identifier)
-
-	Outcome_description = Outcome.AddMember("description", _description)
-
-	Outcome_lastUpdatedTime = Outcome.AddMember("lastUpdatedTime", _time)
-
-	Outcome_createdTime = Outcome.AddMember("createdTime", _time)
-
-	Outcome_arn = Outcome.AddMember("arn", _fraudDetectorArn)
-
-	_OutcomeList_member = _OutcomeList.AddMember("member", Outcome)
-
-	PredictionTimeRange_startTime = PredictionTimeRange.AddMember("startTime", _time)
-
-	PredictionTimeRange_endTime = PredictionTimeRange.AddMember("endTime", _time)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _string)
-
-	ResourceUnavailableException_message = ResourceUnavailableException.AddMember("message", _string)
-
-	Rule_detectorId = Rule.AddMember("detectorId", _identifier)
-
-	Rule_ruleId = Rule.AddMember("ruleId", _identifier)
-
-	Rule_ruleVersion = Rule.AddMember("ruleVersion", _wholeNumberVersionString)
-
-	RuleDetail_ruleId = RuleDetail.AddMember("ruleId", _identifier)
-
-	RuleDetail_description = RuleDetail.AddMember("description", _description)
-
-	RuleDetail_detectorId = RuleDetail.AddMember("detectorId", _identifier)
-
-	RuleDetail_ruleVersion = RuleDetail.AddMember("ruleVersion", _wholeNumberVersionString)
-
-	RuleDetail_expression = RuleDetail.AddMember("expression", _ruleExpression)
-
-	RuleDetail_language = RuleDetail.AddMember("language", Language)
-
-	RuleDetail_outcomes = RuleDetail.AddMember("outcomes", _NonEmptyListOfStrings)
-
-	RuleDetail_lastUpdatedTime = RuleDetail.AddMember("lastUpdatedTime", _time)
-
-	RuleDetail_createdTime = RuleDetail.AddMember("createdTime", _time)
-
-	RuleDetail_arn = RuleDetail.AddMember("arn", _fraudDetectorArn)
-
-	_RuleDetailList_member = _RuleDetailList.AddMember("member", RuleDetail)
-
-	RuleExecutionMode_ALL_MATCHED = RuleExecutionMode.AddMember("ALL_MATCHED", smithyprelude.Unit)
-
-	RuleExecutionMode_FIRST_MATCHED = RuleExecutionMode.AddMember("FIRST_MATCHED", smithyprelude.Unit)
-
-	_RuleList_member = _RuleList.AddMember("member", Rule)
-
-	Tag_key = Tag.AddMember("key", _tagKey)
-
-	Tag_value = Tag.AddMember("value", _tagValue)
-
-	_tagKeyList_member = _tagKeyList.AddMember("member", _tagKey)
-
-	_tagList_member = _tagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _string)
-
-	ValidationException_message = ValidationException.AddMember("message", _string)
-
-	Variable_name = Variable.AddMember("name", _string)
-
-	Variable_dataType = Variable.AddMember("dataType", DataType)
-
-	Variable_dataSource = Variable.AddMember("dataSource", DataSource)
-
-	Variable_defaultValue = Variable.AddMember("defaultValue", _string)
-
-	Variable_description = Variable.AddMember("description", _string)
-
-	Variable_variableType = Variable.AddMember("variableType", _string)
-
-	Variable_lastUpdatedTime = Variable.AddMember("lastUpdatedTime", _time)
-
-	Variable_createdTime = Variable.AddMember("createdTime", _time)
-
-	Variable_arn = Variable.AddMember("arn", _fraudDetectorArn)
-
-	VariableEntry_name = VariableEntry.AddMember("name", _string)
-
-	VariableEntry_dataType = VariableEntry.AddMember("dataType", _string)
-
-	VariableEntry_dataSource = VariableEntry.AddMember("dataSource", _string)
-
-	VariableEntry_defaultValue = VariableEntry.AddMember("defaultValue", _string)
-
-	VariableEntry_description = VariableEntry.AddMember("description", _string)
-
-	VariableEntry_variableType = VariableEntry.AddMember("variableType", _string)
-
-	_VariableEntryList_member = _VariableEntryList.AddMember("member", VariableEntry)
-
-	_VariableList_member = _VariableList.AddMember("member", Variable)
-
-	BatchCreateVariableRequest_variableEntries = BatchCreateVariableRequest.AddMember("variableEntries", _VariableEntryList)
-
-	BatchCreateVariableRequest_tags = BatchCreateVariableRequest.AddMember("tags", _tagList)
-
-	BatchCreateVariableResult_errors = BatchCreateVariableResult.AddMember("errors", _BatchCreateVariableErrorList)
-
-	BatchGetVariableRequest_names = BatchGetVariableRequest.AddMember("names", _NameList)
-
-	BatchGetVariableResult_variables = BatchGetVariableResult.AddMember("variables", _VariableList)
-
-	BatchGetVariableResult_errors = BatchGetVariableResult.AddMember("errors", _BatchGetVariableErrorList)
-
-	CancelBatchImportJobRequest_jobId = CancelBatchImportJobRequest.AddMember("jobId", _identifier)
-
-	CancelBatchPredictionJobRequest_jobId = CancelBatchPredictionJobRequest.AddMember("jobId", _identifier)
-
-	CreateBatchImportJobRequest_jobId = CreateBatchImportJobRequest.AddMember("jobId", _identifier)
-
-	CreateBatchImportJobRequest_inputPath = CreateBatchImportJobRequest.AddMember("inputPath", _s3BucketLocation)
-
-	CreateBatchImportJobRequest_outputPath = CreateBatchImportJobRequest.AddMember("outputPath", _s3BucketLocation)
-
-	CreateBatchImportJobRequest_eventTypeName = CreateBatchImportJobRequest.AddMember("eventTypeName", _identifier)
-
-	CreateBatchImportJobRequest_iamRoleArn = CreateBatchImportJobRequest.AddMember("iamRoleArn", _iamRoleArn)
-
-	CreateBatchImportJobRequest_tags = CreateBatchImportJobRequest.AddMember("tags", _tagList)
-
-	CreateBatchPredictionJobRequest_jobId = CreateBatchPredictionJobRequest.AddMember("jobId", _identifier)
-
-	CreateBatchPredictionJobRequest_inputPath = CreateBatchPredictionJobRequest.AddMember("inputPath", _s3BucketLocation)
-
-	CreateBatchPredictionJobRequest_outputPath = CreateBatchPredictionJobRequest.AddMember("outputPath", _s3BucketLocation)
-
-	CreateBatchPredictionJobRequest_eventTypeName = CreateBatchPredictionJobRequest.AddMember("eventTypeName", _identifier)
-
-	CreateBatchPredictionJobRequest_detectorName = CreateBatchPredictionJobRequest.AddMember("detectorName", _identifier)
-
-	CreateBatchPredictionJobRequest_detectorVersion = CreateBatchPredictionJobRequest.AddMember("detectorVersion", _wholeNumberVersionString)
-
-	CreateBatchPredictionJobRequest_iamRoleArn = CreateBatchPredictionJobRequest.AddMember("iamRoleArn", _iamRoleArn)
-
-	CreateBatchPredictionJobRequest_tags = CreateBatchPredictionJobRequest.AddMember("tags", _tagList)
-
-	CreateDetectorVersionRequest_detectorId = CreateDetectorVersionRequest.AddMember("detectorId", _identifier)
-
-	CreateDetectorVersionRequest_description = CreateDetectorVersionRequest.AddMember("description", _description)
-
-	CreateDetectorVersionRequest_externalModelEndpoints = CreateDetectorVersionRequest.AddMember("externalModelEndpoints", _ListOfStrings)
-
-	CreateDetectorVersionRequest_rules = CreateDetectorVersionRequest.AddMember("rules", _RuleList)
-
-	CreateDetectorVersionRequest_modelVersions = CreateDetectorVersionRequest.AddMember("modelVersions", _ListOfModelVersions)
-
-	CreateDetectorVersionRequest_ruleExecutionMode = CreateDetectorVersionRequest.AddMember("ruleExecutionMode", RuleExecutionMode)
-
-	CreateDetectorVersionRequest_tags = CreateDetectorVersionRequest.AddMember("tags", _tagList)
-
-	CreateDetectorVersionResult_detectorId = CreateDetectorVersionResult.AddMember("detectorId", _identifier)
-
-	CreateDetectorVersionResult_detectorVersionId = CreateDetectorVersionResult.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	CreateDetectorVersionResult_status = CreateDetectorVersionResult.AddMember("status", DetectorVersionStatus)
-
-	CreateListRequest_name = CreateListRequest.AddMember("name", _noDashIdentifier)
-
-	CreateListRequest_elements = CreateListRequest.AddMember("elements", _ElementsList)
-
-	CreateListRequest_variableType = CreateListRequest.AddMember("variableType", _variableType)
-
-	CreateListRequest_description = CreateListRequest.AddMember("description", _description)
-
-	CreateListRequest_tags = CreateListRequest.AddMember("tags", _tagList)
-
-	CreateModelRequest_modelId = CreateModelRequest.AddMember("modelId", _modelIdentifier)
-
-	CreateModelRequest_modelType = CreateModelRequest.AddMember("modelType", ModelTypeEnum)
-
-	CreateModelRequest_description = CreateModelRequest.AddMember("description", _description)
-
-	CreateModelRequest_eventTypeName = CreateModelRequest.AddMember("eventTypeName", _string)
-
-	CreateModelRequest_tags = CreateModelRequest.AddMember("tags", _tagList)
-
-	CreateModelVersionRequest_modelId = CreateModelVersionRequest.AddMember("modelId", _modelIdentifier)
-
-	CreateModelVersionRequest_modelType = CreateModelVersionRequest.AddMember("modelType", ModelTypeEnum)
-
-	CreateModelVersionRequest_trainingDataSource = CreateModelVersionRequest.AddMember("trainingDataSource", TrainingDataSourceEnum)
-
-	CreateModelVersionRequest_trainingDataSchema = CreateModelVersionRequest.AddMember("trainingDataSchema", TrainingDataSchema)
-
-	CreateModelVersionRequest_externalEventsDetail = CreateModelVersionRequest.AddMember("externalEventsDetail", ExternalEventsDetail)
-
-	CreateModelVersionRequest_ingestedEventsDetail = CreateModelVersionRequest.AddMember("ingestedEventsDetail", IngestedEventsDetail)
-
-	CreateModelVersionRequest_tags = CreateModelVersionRequest.AddMember("tags", _tagList)
-
-	CreateModelVersionResult_modelId = CreateModelVersionResult.AddMember("modelId", _modelIdentifier)
-
-	CreateModelVersionResult_modelType = CreateModelVersionResult.AddMember("modelType", ModelTypeEnum)
-
-	CreateModelVersionResult_modelVersionNumber = CreateModelVersionResult.AddMember("modelVersionNumber", _floatVersionString)
-
-	CreateModelVersionResult_status = CreateModelVersionResult.AddMember("status", _string)
-
-	CreateRuleRequest_ruleId = CreateRuleRequest.AddMember("ruleId", _identifier)
-
-	CreateRuleRequest_detectorId = CreateRuleRequest.AddMember("detectorId", _identifier)
-
-	CreateRuleRequest_description = CreateRuleRequest.AddMember("description", _description)
-
-	CreateRuleRequest_expression = CreateRuleRequest.AddMember("expression", _ruleExpression)
-
-	CreateRuleRequest_language = CreateRuleRequest.AddMember("language", Language)
-
-	CreateRuleRequest_outcomes = CreateRuleRequest.AddMember("outcomes", _NonEmptyListOfStrings)
-
-	CreateRuleRequest_tags = CreateRuleRequest.AddMember("tags", _tagList)
-
-	CreateRuleResult_rule = CreateRuleResult.AddMember("rule", Rule)
-
-	CreateVariableRequest_name = CreateVariableRequest.AddMember("name", _string)
-
-	CreateVariableRequest_dataType = CreateVariableRequest.AddMember("dataType", DataType)
-
-	CreateVariableRequest_dataSource = CreateVariableRequest.AddMember("dataSource", DataSource)
-
-	CreateVariableRequest_defaultValue = CreateVariableRequest.AddMember("defaultValue", _string)
-
-	CreateVariableRequest_description = CreateVariableRequest.AddMember("description", _string)
-
-	CreateVariableRequest_variableType = CreateVariableRequest.AddMember("variableType", _string)
-
-	CreateVariableRequest_tags = CreateVariableRequest.AddMember("tags", _tagList)
-
-	DeleteBatchImportJobRequest_jobId = DeleteBatchImportJobRequest.AddMember("jobId", _identifier)
-
-	DeleteBatchPredictionJobRequest_jobId = DeleteBatchPredictionJobRequest.AddMember("jobId", _identifier)
-
-	DeleteDetectorRequest_detectorId = DeleteDetectorRequest.AddMember("detectorId", _identifier)
-
-	DeleteDetectorVersionRequest_detectorId = DeleteDetectorVersionRequest.AddMember("detectorId", _identifier)
-
-	DeleteDetectorVersionRequest_detectorVersionId = DeleteDetectorVersionRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	DeleteEntityTypeRequest_name = DeleteEntityTypeRequest.AddMember("name", _identifier)
-
-	DeleteEventRequest_eventId = DeleteEventRequest.AddMember("eventId", _identifier)
-
-	DeleteEventRequest_eventTypeName = DeleteEventRequest.AddMember("eventTypeName", _identifier)
-
-	DeleteEventRequest_deleteAuditHistory = DeleteEventRequest.AddMember("deleteAuditHistory", _DeleteAuditHistory)
-
-	DeleteEventsByEventTypeRequest_eventTypeName = DeleteEventsByEventTypeRequest.AddMember("eventTypeName", _identifier)
-
-	DeleteEventsByEventTypeResult_eventTypeName = DeleteEventsByEventTypeResult.AddMember("eventTypeName", _identifier)
-
-	DeleteEventsByEventTypeResult_eventsDeletionStatus = DeleteEventsByEventTypeResult.AddMember("eventsDeletionStatus", _string)
-
-	DeleteEventTypeRequest_name = DeleteEventTypeRequest.AddMember("name", _identifier)
-
-	DeleteExternalModelRequest_modelEndpoint = DeleteExternalModelRequest.AddMember("modelEndpoint", _sageMakerEndpointIdentifier)
-
-	DeleteLabelRequest_name = DeleteLabelRequest.AddMember("name", _identifier)
-
-	DeleteListRequest_name = DeleteListRequest.AddMember("name", _noDashIdentifier)
-
-	DeleteModelRequest_modelId = DeleteModelRequest.AddMember("modelId", _modelIdentifier)
-
-	DeleteModelRequest_modelType = DeleteModelRequest.AddMember("modelType", ModelTypeEnum)
-
-	DeleteModelVersionRequest_modelId = DeleteModelVersionRequest.AddMember("modelId", _modelIdentifier)
-
-	DeleteModelVersionRequest_modelType = DeleteModelVersionRequest.AddMember("modelType", ModelTypeEnum)
-
-	DeleteModelVersionRequest_modelVersionNumber = DeleteModelVersionRequest.AddMember("modelVersionNumber", _floatVersionString)
-
-	DeleteOutcomeRequest_name = DeleteOutcomeRequest.AddMember("name", _identifier)
-
-	DeleteRuleRequest_rule = DeleteRuleRequest.AddMember("rule", Rule)
-
-	DeleteVariableRequest_name = DeleteVariableRequest.AddMember("name", _string)
-
-	DescribeDetectorRequest_detectorId = DescribeDetectorRequest.AddMember("detectorId", _identifier)
-
-	DescribeDetectorRequest_nextToken = DescribeDetectorRequest.AddMember("nextToken", _string)
-
-	DescribeDetectorRequest_maxResults = DescribeDetectorRequest.AddMember("maxResults", _DetectorVersionMaxResults)
-
-	DescribeDetectorResult_detectorId = DescribeDetectorResult.AddMember("detectorId", _identifier)
-
-	DescribeDetectorResult_detectorVersionSummaries = DescribeDetectorResult.AddMember("detectorVersionSummaries", _DetectorVersionSummaryList)
-
-	DescribeDetectorResult_nextToken = DescribeDetectorResult.AddMember("nextToken", _string)
-
-	DescribeDetectorResult_arn = DescribeDetectorResult.AddMember("arn", _fraudDetectorArn)
-
-	DescribeModelVersionsRequest_modelId = DescribeModelVersionsRequest.AddMember("modelId", _modelIdentifier)
-
-	DescribeModelVersionsRequest_modelVersionNumber = DescribeModelVersionsRequest.AddMember("modelVersionNumber", _floatVersionString)
-
-	DescribeModelVersionsRequest_modelType = DescribeModelVersionsRequest.AddMember("modelType", ModelTypeEnum)
-
-	DescribeModelVersionsRequest_nextToken = DescribeModelVersionsRequest.AddMember("nextToken", _string)
-
-	DescribeModelVersionsRequest_maxResults = DescribeModelVersionsRequest.AddMember("maxResults", _modelsMaxPageSize)
-
-	DescribeModelVersionsResult_modelVersionDetails = DescribeModelVersionsResult.AddMember("modelVersionDetails", _modelVersionDetailList)
-
-	DescribeModelVersionsResult_nextToken = DescribeModelVersionsResult.AddMember("nextToken", _string)
-
-	GetBatchImportJobsRequest_jobId = GetBatchImportJobsRequest.AddMember("jobId", _identifier)
-
-	GetBatchImportJobsRequest_maxResults = GetBatchImportJobsRequest.AddMember("maxResults", _batchImportsMaxPageSize)
-
-	GetBatchImportJobsRequest_nextToken = GetBatchImportJobsRequest.AddMember("nextToken", _string)
-
-	GetBatchImportJobsResult_batchImports = GetBatchImportJobsResult.AddMember("batchImports", _BatchImportList)
-
-	GetBatchImportJobsResult_nextToken = GetBatchImportJobsResult.AddMember("nextToken", _string)
-
-	GetBatchPredictionJobsRequest_jobId = GetBatchPredictionJobsRequest.AddMember("jobId", _identifier)
-
-	GetBatchPredictionJobsRequest_maxResults = GetBatchPredictionJobsRequest.AddMember("maxResults", _batchPredictionsMaxPageSize)
-
-	GetBatchPredictionJobsRequest_nextToken = GetBatchPredictionJobsRequest.AddMember("nextToken", _string)
-
-	GetBatchPredictionJobsResult_batchPredictions = GetBatchPredictionJobsResult.AddMember("batchPredictions", _BatchPredictionList)
-
-	GetBatchPredictionJobsResult_nextToken = GetBatchPredictionJobsResult.AddMember("nextToken", _string)
-
-	GetDeleteEventsByEventTypeStatusRequest_eventTypeName = GetDeleteEventsByEventTypeStatusRequest.AddMember("eventTypeName", _identifier)
-
-	GetDeleteEventsByEventTypeStatusResult_eventTypeName = GetDeleteEventsByEventTypeStatusResult.AddMember("eventTypeName", _identifier)
-
-	GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus = GetDeleteEventsByEventTypeStatusResult.AddMember("eventsDeletionStatus", AsyncJobStatus)
-
-	GetDetectorsRequest_detectorId = GetDetectorsRequest.AddMember("detectorId", _identifier)
-
-	GetDetectorsRequest_nextToken = GetDetectorsRequest.AddMember("nextToken", _string)
-
-	GetDetectorsRequest_maxResults = GetDetectorsRequest.AddMember("maxResults", _DetectorsMaxResults)
-
-	GetDetectorsResult_detectors = GetDetectorsResult.AddMember("detectors", _DetectorList)
-
-	GetDetectorsResult_nextToken = GetDetectorsResult.AddMember("nextToken", _string)
-
-	GetDetectorVersionRequest_detectorId = GetDetectorVersionRequest.AddMember("detectorId", _identifier)
-
-	GetDetectorVersionRequest_detectorVersionId = GetDetectorVersionRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	GetDetectorVersionResult_detectorId = GetDetectorVersionResult.AddMember("detectorId", _identifier)
-
-	GetDetectorVersionResult_detectorVersionId = GetDetectorVersionResult.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	GetDetectorVersionResult_description = GetDetectorVersionResult.AddMember("description", _description)
-
-	GetDetectorVersionResult_externalModelEndpoints = GetDetectorVersionResult.AddMember("externalModelEndpoints", _ListOfStrings)
-
-	GetDetectorVersionResult_modelVersions = GetDetectorVersionResult.AddMember("modelVersions", _ListOfModelVersions)
-
-	GetDetectorVersionResult_rules = GetDetectorVersionResult.AddMember("rules", _RuleList)
-
-	GetDetectorVersionResult_status = GetDetectorVersionResult.AddMember("status", DetectorVersionStatus)
-
-	GetDetectorVersionResult_lastUpdatedTime = GetDetectorVersionResult.AddMember("lastUpdatedTime", _time)
-
-	GetDetectorVersionResult_createdTime = GetDetectorVersionResult.AddMember("createdTime", _time)
-
-	GetDetectorVersionResult_ruleExecutionMode = GetDetectorVersionResult.AddMember("ruleExecutionMode", RuleExecutionMode)
-
-	GetDetectorVersionResult_arn = GetDetectorVersionResult.AddMember("arn", _fraudDetectorArn)
-
-	GetEntityTypesRequest_name = GetEntityTypesRequest.AddMember("name", _identifier)
-
-	GetEntityTypesRequest_nextToken = GetEntityTypesRequest.AddMember("nextToken", _string)
-
-	GetEntityTypesRequest_maxResults = GetEntityTypesRequest.AddMember("maxResults", _entityTypesMaxResults)
-
-	GetEntityTypesResult_entityTypes = GetEntityTypesResult.AddMember("entityTypes", _entityTypeList)
-
-	GetEntityTypesResult_nextToken = GetEntityTypesResult.AddMember("nextToken", _string)
-
-	GetEventRequest_eventId = GetEventRequest.AddMember("eventId", _string)
-
-	GetEventRequest_eventTypeName = GetEventRequest.AddMember("eventTypeName", _string)
-
-	GetEventResult_event = GetEventResult.AddMember("event", Event)
-
-	GetEventPredictionRequest_detectorId = GetEventPredictionRequest.AddMember("detectorId", _string)
-
-	GetEventPredictionRequest_detectorVersionId = GetEventPredictionRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	GetEventPredictionRequest_eventId = GetEventPredictionRequest.AddMember("eventId", _string)
-
-	GetEventPredictionRequest_eventTypeName = GetEventPredictionRequest.AddMember("eventTypeName", _string)
-
-	GetEventPredictionRequest_entities = GetEventPredictionRequest.AddMember("entities", _listOfEntities)
-
-	GetEventPredictionRequest_eventTimestamp = GetEventPredictionRequest.AddMember("eventTimestamp", _utcTimestampISO8601)
-
-	GetEventPredictionRequest_eventVariables = GetEventPredictionRequest.AddMember("eventVariables", _EventVariableMap)
-
-	GetEventPredictionRequest_externalModelEndpointDataBlobs = GetEventPredictionRequest.AddMember("externalModelEndpointDataBlobs", _ExternalModelEndpointDataBlobMap)
-
-	GetEventPredictionMetadataRequest_eventId = GetEventPredictionMetadataRequest.AddMember("eventId", _identifier)
-
-	GetEventPredictionMetadataRequest_eventTypeName = GetEventPredictionMetadataRequest.AddMember("eventTypeName", _identifier)
-
-	GetEventPredictionMetadataRequest_detectorId = GetEventPredictionMetadataRequest.AddMember("detectorId", _identifier)
-
-	GetEventPredictionMetadataRequest_detectorVersionId = GetEventPredictionMetadataRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	GetEventPredictionMetadataRequest_predictionTimestamp = GetEventPredictionMetadataRequest.AddMember("predictionTimestamp", _time)
-
-	GetEventPredictionMetadataResult_eventId = GetEventPredictionMetadataResult.AddMember("eventId", _identifier)
-
-	GetEventPredictionMetadataResult_eventTypeName = GetEventPredictionMetadataResult.AddMember("eventTypeName", _identifier)
-
-	GetEventPredictionMetadataResult_entityId = GetEventPredictionMetadataResult.AddMember("entityId", _string)
-
-	GetEventPredictionMetadataResult_entityType = GetEventPredictionMetadataResult.AddMember("entityType", _string)
-
-	GetEventPredictionMetadataResult_eventTimestamp = GetEventPredictionMetadataResult.AddMember("eventTimestamp", _time)
-
-	GetEventPredictionMetadataResult_detectorId = GetEventPredictionMetadataResult.AddMember("detectorId", _identifier)
-
-	GetEventPredictionMetadataResult_detectorVersionId = GetEventPredictionMetadataResult.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	GetEventPredictionMetadataResult_detectorVersionStatus = GetEventPredictionMetadataResult.AddMember("detectorVersionStatus", _string)
-
-	GetEventPredictionMetadataResult_eventVariables = GetEventPredictionMetadataResult.AddMember("eventVariables", _ListOfEventVariableSummaries)
-
-	GetEventPredictionMetadataResult_rules = GetEventPredictionMetadataResult.AddMember("rules", _EvaluatedRuleList)
-
-	GetEventPredictionMetadataResult_ruleExecutionMode = GetEventPredictionMetadataResult.AddMember("ruleExecutionMode", RuleExecutionMode)
-
-	GetEventPredictionMetadataResult_outcomes = GetEventPredictionMetadataResult.AddMember("outcomes", _ListOfStrings)
-
-	GetEventPredictionMetadataResult_evaluatedModelVersions = GetEventPredictionMetadataResult.AddMember("evaluatedModelVersions", _ListOfEvaluatedModelVersions)
-
-	GetEventPredictionMetadataResult_evaluatedExternalModels = GetEventPredictionMetadataResult.AddMember("evaluatedExternalModels", _ListOfEvaluatedExternalModels)
-
-	GetEventPredictionMetadataResult_predictionTimestamp = GetEventPredictionMetadataResult.AddMember("predictionTimestamp", _time)
-
-	GetEventPredictionResult_modelScores = GetEventPredictionResult.AddMember("modelScores", _ListOfModelScores)
-
-	GetEventPredictionResult_ruleResults = GetEventPredictionResult.AddMember("ruleResults", _ListOfRuleResults)
-
-	GetEventPredictionResult_externalModelOutputs = GetEventPredictionResult.AddMember("externalModelOutputs", _ListOfExternalModelOutputs)
-
-	GetEventTypesRequest_name = GetEventTypesRequest.AddMember("name", _identifier)
-
-	GetEventTypesRequest_nextToken = GetEventTypesRequest.AddMember("nextToken", _string)
-
-	GetEventTypesRequest_maxResults = GetEventTypesRequest.AddMember("maxResults", _eventTypesMaxResults)
-
-	GetEventTypesResult_eventTypes = GetEventTypesResult.AddMember("eventTypes", _eventTypeList)
-
-	GetEventTypesResult_nextToken = GetEventTypesResult.AddMember("nextToken", _string)
-
-	GetExternalModelsRequest_modelEndpoint = GetExternalModelsRequest.AddMember("modelEndpoint", _string)
-
-	GetExternalModelsRequest_nextToken = GetExternalModelsRequest.AddMember("nextToken", _string)
-
-	GetExternalModelsRequest_maxResults = GetExternalModelsRequest.AddMember("maxResults", _ExternalModelsMaxResults)
-
-	GetExternalModelsResult_externalModels = GetExternalModelsResult.AddMember("externalModels", _ExternalModelList)
-
-	GetExternalModelsResult_nextToken = GetExternalModelsResult.AddMember("nextToken", _string)
-
-	GetKMSEncryptionKeyResult_kmsKey = GetKMSEncryptionKeyResult.AddMember("kmsKey", KMSKey)
-
-	GetLabelsRequest_name = GetLabelsRequest.AddMember("name", _identifier)
-
-	GetLabelsRequest_nextToken = GetLabelsRequest.AddMember("nextToken", _string)
-
-	GetLabelsRequest_maxResults = GetLabelsRequest.AddMember("maxResults", _labelsMaxResults)
-
-	GetLabelsResult_labels = GetLabelsResult.AddMember("labels", _labelList)
-
-	GetLabelsResult_nextToken = GetLabelsResult.AddMember("nextToken", _string)
-
-	GetListElementsRequest_name = GetListElementsRequest.AddMember("name", _noDashIdentifier)
-
-	GetListElementsRequest_nextToken = GetListElementsRequest.AddMember("nextToken", _nextToken)
-
-	GetListElementsRequest_maxResults = GetListElementsRequest.AddMember("maxResults", _ListsElementsMaxResults)
-
-	GetListElementsResult_elements = GetListElementsResult.AddMember("elements", _ElementsList)
-
-	GetListElementsResult_nextToken = GetListElementsResult.AddMember("nextToken", _nextToken)
-
-	GetListsMetadataRequest_name = GetListsMetadataRequest.AddMember("name", _noDashIdentifier)
-
-	GetListsMetadataRequest_nextToken = GetListsMetadataRequest.AddMember("nextToken", _nextToken)
-
-	GetListsMetadataRequest_maxResults = GetListsMetadataRequest.AddMember("maxResults", _ListsMetadataMaxResults)
-
-	GetListsMetadataResult_lists = GetListsMetadataResult.AddMember("lists", _AllowDenyLists)
-
-	GetListsMetadataResult_nextToken = GetListsMetadataResult.AddMember("nextToken", _nextToken)
-
-	GetModelsRequest_modelId = GetModelsRequest.AddMember("modelId", _modelIdentifier)
-
-	GetModelsRequest_modelType = GetModelsRequest.AddMember("modelType", ModelTypeEnum)
-
-	GetModelsRequest_nextToken = GetModelsRequest.AddMember("nextToken", _string)
-
-	GetModelsRequest_maxResults = GetModelsRequest.AddMember("maxResults", _modelsMaxPageSize)
-
-	GetModelsResult_nextToken = GetModelsResult.AddMember("nextToken", _string)
-
-	GetModelsResult_models = GetModelsResult.AddMember("models", _modelList)
-
-	GetModelVersionRequest_modelId = GetModelVersionRequest.AddMember("modelId", _modelIdentifier)
-
-	GetModelVersionRequest_modelType = GetModelVersionRequest.AddMember("modelType", ModelTypeEnum)
-
-	GetModelVersionRequest_modelVersionNumber = GetModelVersionRequest.AddMember("modelVersionNumber", _floatVersionString)
-
-	GetModelVersionResult_modelId = GetModelVersionResult.AddMember("modelId", _modelIdentifier)
-
-	GetModelVersionResult_modelType = GetModelVersionResult.AddMember("modelType", ModelTypeEnum)
-
-	GetModelVersionResult_modelVersionNumber = GetModelVersionResult.AddMember("modelVersionNumber", _floatVersionString)
-
-	GetModelVersionResult_trainingDataSource = GetModelVersionResult.AddMember("trainingDataSource", TrainingDataSourceEnum)
-
-	GetModelVersionResult_trainingDataSchema = GetModelVersionResult.AddMember("trainingDataSchema", TrainingDataSchema)
-
-	GetModelVersionResult_externalEventsDetail = GetModelVersionResult.AddMember("externalEventsDetail", ExternalEventsDetail)
-
-	GetModelVersionResult_ingestedEventsDetail = GetModelVersionResult.AddMember("ingestedEventsDetail", IngestedEventsDetail)
-
-	GetModelVersionResult_status = GetModelVersionResult.AddMember("status", _string)
-
-	GetModelVersionResult_arn = GetModelVersionResult.AddMember("arn", _fraudDetectorArn)
-
-	GetOutcomesRequest_name = GetOutcomesRequest.AddMember("name", _identifier)
-
-	GetOutcomesRequest_nextToken = GetOutcomesRequest.AddMember("nextToken", _string)
-
-	GetOutcomesRequest_maxResults = GetOutcomesRequest.AddMember("maxResults", _OutcomesMaxResults)
-
-	GetOutcomesResult_outcomes = GetOutcomesResult.AddMember("outcomes", _OutcomeList)
-
-	GetOutcomesResult_nextToken = GetOutcomesResult.AddMember("nextToken", _string)
-
-	GetRulesRequest_ruleId = GetRulesRequest.AddMember("ruleId", _identifier)
-
-	GetRulesRequest_detectorId = GetRulesRequest.AddMember("detectorId", _identifier)
-
-	GetRulesRequest_ruleVersion = GetRulesRequest.AddMember("ruleVersion", _wholeNumberVersionString)
-
-	GetRulesRequest_nextToken = GetRulesRequest.AddMember("nextToken", _string)
-
-	GetRulesRequest_maxResults = GetRulesRequest.AddMember("maxResults", _RulesMaxResults)
-
-	GetRulesResult_ruleDetails = GetRulesResult.AddMember("ruleDetails", _RuleDetailList)
-
-	GetRulesResult_nextToken = GetRulesResult.AddMember("nextToken", _string)
-
-	GetVariablesRequest_name = GetVariablesRequest.AddMember("name", _string)
-
-	GetVariablesRequest_nextToken = GetVariablesRequest.AddMember("nextToken", _string)
-
-	GetVariablesRequest_maxResults = GetVariablesRequest.AddMember("maxResults", _VariablesMaxResults)
-
-	GetVariablesResult_variables = GetVariablesResult.AddMember("variables", _VariableList)
-
-	GetVariablesResult_nextToken = GetVariablesResult.AddMember("nextToken", _string)
-
-	ListEventPredictionsRequest_eventId = ListEventPredictionsRequest.AddMember("eventId", FilterCondition)
-
-	ListEventPredictionsRequest_eventType = ListEventPredictionsRequest.AddMember("eventType", FilterCondition)
-
-	ListEventPredictionsRequest_detectorId = ListEventPredictionsRequest.AddMember("detectorId", FilterCondition)
-
-	ListEventPredictionsRequest_detectorVersionId = ListEventPredictionsRequest.AddMember("detectorVersionId", FilterCondition)
-
-	ListEventPredictionsRequest_predictionTimeRange = ListEventPredictionsRequest.AddMember("predictionTimeRange", PredictionTimeRange)
-
-	ListEventPredictionsRequest_nextToken = ListEventPredictionsRequest.AddMember("nextToken", _string)
-
-	ListEventPredictionsRequest_maxResults = ListEventPredictionsRequest.AddMember("maxResults", _EventPredictionsMaxResults)
-
-	ListEventPredictionsResult_eventPredictionSummaries = ListEventPredictionsResult.AddMember("eventPredictionSummaries", _ListOfEventPredictionSummaries)
-
-	ListEventPredictionsResult_nextToken = ListEventPredictionsResult.AddMember("nextToken", _string)
-
-	ListTagsForResourceRequest_resourceARN = ListTagsForResourceRequest.AddMember("resourceARN", _fraudDetectorArn)
-
-	ListTagsForResourceRequest_nextToken = ListTagsForResourceRequest.AddMember("nextToken", _string)
-
-	ListTagsForResourceRequest_maxResults = ListTagsForResourceRequest.AddMember("maxResults", _TagsMaxResults)
-
-	ListTagsForResourceResult_tags = ListTagsForResourceResult.AddMember("tags", _tagList)
-
-	ListTagsForResourceResult_nextToken = ListTagsForResourceResult.AddMember("nextToken", _string)
-
-	PutDetectorRequest_detectorId = PutDetectorRequest.AddMember("detectorId", _identifier)
-
-	PutDetectorRequest_description = PutDetectorRequest.AddMember("description", _description)
-
-	PutDetectorRequest_eventTypeName = PutDetectorRequest.AddMember("eventTypeName", _identifier)
-
-	PutDetectorRequest_tags = PutDetectorRequest.AddMember("tags", _tagList)
-
-	PutEntityTypeRequest_name = PutEntityTypeRequest.AddMember("name", _identifier)
-
-	PutEntityTypeRequest_description = PutEntityTypeRequest.AddMember("description", _description)
-
-	PutEntityTypeRequest_tags = PutEntityTypeRequest.AddMember("tags", _tagList)
-
-	PutEventTypeRequest_name = PutEventTypeRequest.AddMember("name", _identifier)
-
-	PutEventTypeRequest_description = PutEventTypeRequest.AddMember("description", _description)
-
-	PutEventTypeRequest_eventVariables = PutEventTypeRequest.AddMember("eventVariables", _NonEmptyListOfStrings)
-
-	PutEventTypeRequest_labels = PutEventTypeRequest.AddMember("labels", _ListOfStrings)
-
-	PutEventTypeRequest_entityTypes = PutEventTypeRequest.AddMember("entityTypes", _NonEmptyListOfStrings)
-
-	PutEventTypeRequest_eventIngestion = PutEventTypeRequest.AddMember("eventIngestion", EventIngestion)
-
-	PutEventTypeRequest_tags = PutEventTypeRequest.AddMember("tags", _tagList)
-
-	PutEventTypeRequest_eventOrchestration = PutEventTypeRequest.AddMember("eventOrchestration", EventOrchestration)
-
-	PutExternalModelRequest_modelEndpoint = PutExternalModelRequest.AddMember("modelEndpoint", _sageMakerEndpointIdentifier)
-
-	PutExternalModelRequest_modelSource = PutExternalModelRequest.AddMember("modelSource", ModelSource)
-
-	PutExternalModelRequest_invokeModelEndpointRoleArn = PutExternalModelRequest.AddMember("invokeModelEndpointRoleArn", _string)
-
-	PutExternalModelRequest_inputConfiguration = PutExternalModelRequest.AddMember("inputConfiguration", ModelInputConfiguration)
-
-	PutExternalModelRequest_outputConfiguration = PutExternalModelRequest.AddMember("outputConfiguration", ModelOutputConfiguration)
-
-	PutExternalModelRequest_modelEndpointStatus = PutExternalModelRequest.AddMember("modelEndpointStatus", ModelEndpointStatus)
-
-	PutExternalModelRequest_tags = PutExternalModelRequest.AddMember("tags", _tagList)
-
-	PutKMSEncryptionKeyRequest_kmsEncryptionKeyArn = PutKMSEncryptionKeyRequest.AddMember("kmsEncryptionKeyArn", _KmsEncryptionKeyArn)
-
-	PutLabelRequest_name = PutLabelRequest.AddMember("name", _identifier)
-
-	PutLabelRequest_description = PutLabelRequest.AddMember("description", _description)
-
-	PutLabelRequest_tags = PutLabelRequest.AddMember("tags", _tagList)
-
-	PutOutcomeRequest_name = PutOutcomeRequest.AddMember("name", _identifier)
-
-	PutOutcomeRequest_description = PutOutcomeRequest.AddMember("description", _description)
-
-	PutOutcomeRequest_tags = PutOutcomeRequest.AddMember("tags", _tagList)
-
-	SendEventRequest_eventId = SendEventRequest.AddMember("eventId", _identifier)
-
-	SendEventRequest_eventTypeName = SendEventRequest.AddMember("eventTypeName", _identifier)
-
-	SendEventRequest_eventTimestamp = SendEventRequest.AddMember("eventTimestamp", _utcTimestampISO8601)
-
-	SendEventRequest_eventVariables = SendEventRequest.AddMember("eventVariables", _EventVariableMap)
-
-	SendEventRequest_assignedLabel = SendEventRequest.AddMember("assignedLabel", _identifier)
-
-	SendEventRequest_labelTimestamp = SendEventRequest.AddMember("labelTimestamp", _utcTimestampISO8601)
-
-	SendEventRequest_entities = SendEventRequest.AddMember("entities", _listOfEntities)
-
-	TagResourceRequest_resourceARN = TagResourceRequest.AddMember("resourceARN", _fraudDetectorArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _tagList)
-
-	UntagResourceRequest_resourceARN = UntagResourceRequest.AddMember("resourceARN", _fraudDetectorArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _tagKeyList)
-
-	UpdateDetectorVersionRequest_detectorId = UpdateDetectorVersionRequest.AddMember("detectorId", _identifier)
-
-	UpdateDetectorVersionRequest_detectorVersionId = UpdateDetectorVersionRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	UpdateDetectorVersionRequest_externalModelEndpoints = UpdateDetectorVersionRequest.AddMember("externalModelEndpoints", _ListOfStrings)
-
-	UpdateDetectorVersionRequest_rules = UpdateDetectorVersionRequest.AddMember("rules", _RuleList)
-
-	UpdateDetectorVersionRequest_description = UpdateDetectorVersionRequest.AddMember("description", _description)
-
-	UpdateDetectorVersionRequest_modelVersions = UpdateDetectorVersionRequest.AddMember("modelVersions", _ListOfModelVersions)
-
-	UpdateDetectorVersionRequest_ruleExecutionMode = UpdateDetectorVersionRequest.AddMember("ruleExecutionMode", RuleExecutionMode)
-
-	UpdateDetectorVersionMetadataRequest_detectorId = UpdateDetectorVersionMetadataRequest.AddMember("detectorId", _identifier)
-
-	UpdateDetectorVersionMetadataRequest_detectorVersionId = UpdateDetectorVersionMetadataRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	UpdateDetectorVersionMetadataRequest_description = UpdateDetectorVersionMetadataRequest.AddMember("description", _description)
-
-	UpdateDetectorVersionStatusRequest_detectorId = UpdateDetectorVersionStatusRequest.AddMember("detectorId", _identifier)
-
-	UpdateDetectorVersionStatusRequest_detectorVersionId = UpdateDetectorVersionStatusRequest.AddMember("detectorVersionId", _wholeNumberVersionString)
-
-	UpdateDetectorVersionStatusRequest_status = UpdateDetectorVersionStatusRequest.AddMember("status", DetectorVersionStatus)
-
-	UpdateEventLabelRequest_eventId = UpdateEventLabelRequest.AddMember("eventId", _identifier)
-
-	UpdateEventLabelRequest_eventTypeName = UpdateEventLabelRequest.AddMember("eventTypeName", _identifier)
-
-	UpdateEventLabelRequest_assignedLabel = UpdateEventLabelRequest.AddMember("assignedLabel", _identifier)
-
-	UpdateEventLabelRequest_labelTimestamp = UpdateEventLabelRequest.AddMember("labelTimestamp", _utcTimestampISO8601)
-
-	UpdateListRequest_name = UpdateListRequest.AddMember("name", _noDashIdentifier)
-
-	UpdateListRequest_elements = UpdateListRequest.AddMember("elements", _ElementsList)
-
-	UpdateListRequest_description = UpdateListRequest.AddMember("description", _description)
-
-	UpdateListRequest_updateMode = UpdateListRequest.AddMember("updateMode", ListUpdateMode)
-
-	UpdateListRequest_variableType = UpdateListRequest.AddMember("variableType", _variableType)
-
-	UpdateModelRequest_modelId = UpdateModelRequest.AddMember("modelId", _modelIdentifier)
-
-	UpdateModelRequest_modelType = UpdateModelRequest.AddMember("modelType", ModelTypeEnum)
-
-	UpdateModelRequest_description = UpdateModelRequest.AddMember("description", _description)
-
-	UpdateModelVersionRequest_modelId = UpdateModelVersionRequest.AddMember("modelId", _modelIdentifier)
-
-	UpdateModelVersionRequest_modelType = UpdateModelVersionRequest.AddMember("modelType", ModelTypeEnum)
-
-	UpdateModelVersionRequest_majorVersionNumber = UpdateModelVersionRequest.AddMember("majorVersionNumber", _wholeNumberVersionString)
-
-	UpdateModelVersionRequest_externalEventsDetail = UpdateModelVersionRequest.AddMember("externalEventsDetail", ExternalEventsDetail)
-
-	UpdateModelVersionRequest_ingestedEventsDetail = UpdateModelVersionRequest.AddMember("ingestedEventsDetail", IngestedEventsDetail)
-
-	UpdateModelVersionRequest_tags = UpdateModelVersionRequest.AddMember("tags", _tagList)
-
-	UpdateModelVersionResult_modelId = UpdateModelVersionResult.AddMember("modelId", _modelIdentifier)
-
-	UpdateModelVersionResult_modelType = UpdateModelVersionResult.AddMember("modelType", ModelTypeEnum)
-
-	UpdateModelVersionResult_modelVersionNumber = UpdateModelVersionResult.AddMember("modelVersionNumber", _floatVersionString)
-
-	UpdateModelVersionResult_status = UpdateModelVersionResult.AddMember("status", _string)
-
-	UpdateModelVersionStatusRequest_modelId = UpdateModelVersionStatusRequest.AddMember("modelId", _modelIdentifier)
-
-	UpdateModelVersionStatusRequest_modelType = UpdateModelVersionStatusRequest.AddMember("modelType", ModelTypeEnum)
-
-	UpdateModelVersionStatusRequest_modelVersionNumber = UpdateModelVersionStatusRequest.AddMember("modelVersionNumber", _floatVersionString)
-
-	UpdateModelVersionStatusRequest_status = UpdateModelVersionStatusRequest.AddMember("status", ModelVersionStatus)
-
-	UpdateRuleMetadataRequest_rule = UpdateRuleMetadataRequest.AddMember("rule", Rule)
-
-	UpdateRuleMetadataRequest_description = UpdateRuleMetadataRequest.AddMember("description", _description)
-
-	UpdateRuleVersionRequest_rule = UpdateRuleVersionRequest.AddMember("rule", Rule)
-
-	UpdateRuleVersionRequest_description = UpdateRuleVersionRequest.AddMember("description", _description)
-
-	UpdateRuleVersionRequest_expression = UpdateRuleVersionRequest.AddMember("expression", _ruleExpression)
-
-	UpdateRuleVersionRequest_language = UpdateRuleVersionRequest.AddMember("language", Language)
-
-	UpdateRuleVersionRequest_outcomes = UpdateRuleVersionRequest.AddMember("outcomes", _NonEmptyListOfStrings)
-
-	UpdateRuleVersionRequest_tags = UpdateRuleVersionRequest.AddMember("tags", _tagList)
-
-	UpdateRuleVersionResult_rule = UpdateRuleVersionResult.AddMember("rule", Rule)
-
-	UpdateVariableRequest_name = UpdateVariableRequest.AddMember("name", _string)
-
-	UpdateVariableRequest_defaultValue = UpdateVariableRequest.AddMember("defaultValue", _string)
-
-	UpdateVariableRequest_description = UpdateVariableRequest.AddMember("description", _string)
-
-	UpdateVariableRequest_variableType = UpdateVariableRequest.AddMember("variableType", _string)
-
-}
+var (
+	eBatchCreateVariable                                          smithy.SchemaExtensions
+	eBatchGetVariable                                             smithy.SchemaExtensions
+	eCancelBatchImportJob                                         smithy.SchemaExtensions
+	eCancelBatchPredictionJob                                     smithy.SchemaExtensions
+	eCreateBatchImportJob                                         smithy.SchemaExtensions
+	eCreateBatchPredictionJob                                     smithy.SchemaExtensions
+	eCreateDetectorVersion                                        smithy.SchemaExtensions
+	eCreateList                                                   smithy.SchemaExtensions
+	eCreateModel                                                  smithy.SchemaExtensions
+	eCreateModelVersion                                           smithy.SchemaExtensions
+	eCreateRule                                                   smithy.SchemaExtensions
+	eCreateVariable                                               smithy.SchemaExtensions
+	eDeleteBatchImportJob                                         smithy.SchemaExtensions
+	eDeleteBatchPredictionJob                                     smithy.SchemaExtensions
+	eDeleteDetector                                               smithy.SchemaExtensions
+	eDeleteDetectorVersion                                        smithy.SchemaExtensions
+	eDeleteEntityType                                             smithy.SchemaExtensions
+	eDeleteEvent                                                  smithy.SchemaExtensions
+	eDeleteEventsByEventType                                      smithy.SchemaExtensions
+	eDeleteEventType                                              smithy.SchemaExtensions
+	eDeleteExternalModel                                          smithy.SchemaExtensions
+	eDeleteLabel                                                  smithy.SchemaExtensions
+	eDeleteList                                                   smithy.SchemaExtensions
+	eDeleteModel                                                  smithy.SchemaExtensions
+	eDeleteModelVersion                                           smithy.SchemaExtensions
+	eDeleteOutcome                                                smithy.SchemaExtensions
+	eDeleteRule                                                   smithy.SchemaExtensions
+	eDeleteVariable                                               smithy.SchemaExtensions
+	eDescribeDetector                                             smithy.SchemaExtensions
+	eDescribeModelVersions                                        smithy.SchemaExtensions
+	eGetBatchImportJobs                                           smithy.SchemaExtensions
+	eGetBatchPredictionJobs                                       smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatus                             smithy.SchemaExtensions
+	eGetDetectors                                                 smithy.SchemaExtensions
+	eGetDetectorVersion                                           smithy.SchemaExtensions
+	eGetEntityTypes                                               smithy.SchemaExtensions
+	eGetEvent                                                     smithy.SchemaExtensions
+	eGetEventPrediction                                           smithy.SchemaExtensions
+	eGetEventPredictionMetadata                                   smithy.SchemaExtensions
+	eGetEventTypes                                                smithy.SchemaExtensions
+	eGetExternalModels                                            smithy.SchemaExtensions
+	eGetKMSEncryptionKey                                          smithy.SchemaExtensions
+	eGetLabels                                                    smithy.SchemaExtensions
+	eGetListElements                                              smithy.SchemaExtensions
+	eGetListsMetadata                                             smithy.SchemaExtensions
+	eGetModels                                                    smithy.SchemaExtensions
+	eGetModelVersion                                              smithy.SchemaExtensions
+	eGetOutcomes                                                  smithy.SchemaExtensions
+	eGetRules                                                     smithy.SchemaExtensions
+	eGetVariables                                                 smithy.SchemaExtensions
+	eListEventPredictions                                         smithy.SchemaExtensions
+	eListTagsForResource                                          smithy.SchemaExtensions
+	ePutDetector                                                  smithy.SchemaExtensions
+	ePutEntityType                                                smithy.SchemaExtensions
+	ePutEventType                                                 smithy.SchemaExtensions
+	ePutExternalModel                                             smithy.SchemaExtensions
+	ePutKMSEncryptionKey                                          smithy.SchemaExtensions
+	ePutLabel                                                     smithy.SchemaExtensions
+	ePutOutcome                                                   smithy.SchemaExtensions
+	eSendEvent                                                    smithy.SchemaExtensions
+	eTagResource                                                  smithy.SchemaExtensions
+	eUntagResource                                                smithy.SchemaExtensions
+	eUpdateDetectorVersion                                        smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadata                                smithy.SchemaExtensions
+	eUpdateDetectorVersionStatus                                  smithy.SchemaExtensions
+	eUpdateEventLabel                                             smithy.SchemaExtensions
+	eUpdateList                                                   smithy.SchemaExtensions
+	eUpdateModel                                                  smithy.SchemaExtensions
+	eUpdateModelVersion                                           smithy.SchemaExtensions
+	eUpdateModelVersionStatus                                     smithy.SchemaExtensions
+	eUpdateRuleMetadata                                           smithy.SchemaExtensions
+	eUpdateRuleVersion                                            smithy.SchemaExtensions
+	eUpdateVariable                                               smithy.SchemaExtensions
+	e_AWSHawksNestServiceFacade                                   smithy.SchemaExtensions
+	eAccessDeniedException                                        smithy.SchemaExtensions
+	eAccessDeniedException_message                                smithy.SchemaExtensions
+	eAggregatedLogOddsMetric                                      smithy.SchemaExtensions
+	eAggregatedLogOddsMetric_variableNames                        smithy.SchemaExtensions
+	eAggregatedLogOddsMetric_aggregatedVariablesImportance        smithy.SchemaExtensions
+	eAggregatedVariablesImpactExplanation                         smithy.SchemaExtensions
+	eAggregatedVariablesImpactExplanation_eventVariableNames      smithy.SchemaExtensions
+	eAggregatedVariablesImpactExplanation_relativeImpact          smithy.SchemaExtensions
+	eAggregatedVariablesImpactExplanation_logOddsImpact           smithy.SchemaExtensions
+	eAggregatedVariablesImportanceMetrics                         smithy.SchemaExtensions
+	eAggregatedVariablesImportanceMetrics_logOddsMetrics          smithy.SchemaExtensions
+	eAllowDenyList                                                smithy.SchemaExtensions
+	eAllowDenyList_name                                           smithy.SchemaExtensions
+	eAllowDenyList_description                                    smithy.SchemaExtensions
+	eAllowDenyList_variableType                                   smithy.SchemaExtensions
+	eAllowDenyList_createdTime                                    smithy.SchemaExtensions
+	eAllowDenyList_updatedTime                                    smithy.SchemaExtensions
+	eAllowDenyList_arn                                            smithy.SchemaExtensions
+	e_AllowDenyLists                                              smithy.SchemaExtensions
+	e_AllowDenyLists_member                                       smithy.SchemaExtensions
+	eAsyncJobStatus                                               smithy.SchemaExtensions
+	eAsyncJobStatus_IN_PROGRESS_INITIALIZING                      smithy.SchemaExtensions
+	eAsyncJobStatus_IN_PROGRESS                                   smithy.SchemaExtensions
+	eAsyncJobStatus_CANCEL_IN_PROGRESS                            smithy.SchemaExtensions
+	eAsyncJobStatus_CANCELED                                      smithy.SchemaExtensions
+	eAsyncJobStatus_COMPLETE                                      smithy.SchemaExtensions
+	eAsyncJobStatus_FAILED                                        smithy.SchemaExtensions
+	eATIMetricDataPoint                                           smithy.SchemaExtensions
+	eATIMetricDataPoint_cr                                        smithy.SchemaExtensions
+	eATIMetricDataPoint_adr                                       smithy.SchemaExtensions
+	eATIMetricDataPoint_threshold                                 smithy.SchemaExtensions
+	eATIMetricDataPoint_atodr                                     smithy.SchemaExtensions
+	e_ATIMetricDataPointsList                                     smithy.SchemaExtensions
+	e_ATIMetricDataPointsList_member                              smithy.SchemaExtensions
+	eATIModelPerformance                                          smithy.SchemaExtensions
+	eATIModelPerformance_asi                                      smithy.SchemaExtensions
+	eATITrainingMetricsValue                                      smithy.SchemaExtensions
+	eATITrainingMetricsValue_metricDataPoints                     smithy.SchemaExtensions
+	eATITrainingMetricsValue_modelPerformance                     smithy.SchemaExtensions
+	e_attributeKey                                                smithy.SchemaExtensions
+	e_attributeValue                                              smithy.SchemaExtensions
+	eBatchCreateVariableError                                     smithy.SchemaExtensions
+	eBatchCreateVariableError_name                                smithy.SchemaExtensions
+	eBatchCreateVariableError_code                                smithy.SchemaExtensions
+	eBatchCreateVariableError_message                             smithy.SchemaExtensions
+	e_BatchCreateVariableErrorList                                smithy.SchemaExtensions
+	e_BatchCreateVariableErrorList_member                         smithy.SchemaExtensions
+	eBatchGetVariableError                                        smithy.SchemaExtensions
+	eBatchGetVariableError_name                                   smithy.SchemaExtensions
+	eBatchGetVariableError_code                                   smithy.SchemaExtensions
+	eBatchGetVariableError_message                                smithy.SchemaExtensions
+	e_BatchGetVariableErrorList                                   smithy.SchemaExtensions
+	e_BatchGetVariableErrorList_member                            smithy.SchemaExtensions
+	eBatchImport                                                  smithy.SchemaExtensions
+	eBatchImport_jobId                                            smithy.SchemaExtensions
+	eBatchImport_status                                           smithy.SchemaExtensions
+	eBatchImport_failureReason                                    smithy.SchemaExtensions
+	eBatchImport_startTime                                        smithy.SchemaExtensions
+	eBatchImport_completionTime                                   smithy.SchemaExtensions
+	eBatchImport_inputPath                                        smithy.SchemaExtensions
+	eBatchImport_outputPath                                       smithy.SchemaExtensions
+	eBatchImport_eventTypeName                                    smithy.SchemaExtensions
+	eBatchImport_iamRoleArn                                       smithy.SchemaExtensions
+	eBatchImport_arn                                              smithy.SchemaExtensions
+	eBatchImport_processedRecordsCount                            smithy.SchemaExtensions
+	eBatchImport_failedRecordsCount                               smithy.SchemaExtensions
+	eBatchImport_totalRecordsCount                                smithy.SchemaExtensions
+	e_BatchImportList                                             smithy.SchemaExtensions
+	e_BatchImportList_member                                      smithy.SchemaExtensions
+	e_batchImportsMaxPageSize                                     smithy.SchemaExtensions
+	eBatchPrediction                                              smithy.SchemaExtensions
+	eBatchPrediction_jobId                                        smithy.SchemaExtensions
+	eBatchPrediction_status                                       smithy.SchemaExtensions
+	eBatchPrediction_failureReason                                smithy.SchemaExtensions
+	eBatchPrediction_startTime                                    smithy.SchemaExtensions
+	eBatchPrediction_completionTime                               smithy.SchemaExtensions
+	eBatchPrediction_lastHeartbeatTime                            smithy.SchemaExtensions
+	eBatchPrediction_inputPath                                    smithy.SchemaExtensions
+	eBatchPrediction_outputPath                                   smithy.SchemaExtensions
+	eBatchPrediction_eventTypeName                                smithy.SchemaExtensions
+	eBatchPrediction_detectorName                                 smithy.SchemaExtensions
+	eBatchPrediction_detectorVersion                              smithy.SchemaExtensions
+	eBatchPrediction_iamRoleArn                                   smithy.SchemaExtensions
+	eBatchPrediction_arn                                          smithy.SchemaExtensions
+	eBatchPrediction_processedRecordsCount                        smithy.SchemaExtensions
+	eBatchPrediction_totalRecordsCount                            smithy.SchemaExtensions
+	e_BatchPredictionList                                         smithy.SchemaExtensions
+	e_BatchPredictionList_member                                  smithy.SchemaExtensions
+	e_batchPredictionsMaxPageSize                                 smithy.SchemaExtensions
+	e_blob                                                        smithy.SchemaExtensions
+	e_Boolean                                                     smithy.SchemaExtensions
+	eConflictException                                            smithy.SchemaExtensions
+	eConflictException_message                                    smithy.SchemaExtensions
+	e_contentType                                                 smithy.SchemaExtensions
+	e_CsvIndexToVariableMap                                       smithy.SchemaExtensions
+	e_CsvIndexToVariableMap_key                                   smithy.SchemaExtensions
+	e_CsvIndexToVariableMap_value                                 smithy.SchemaExtensions
+	eDataSource                                                   smithy.SchemaExtensions
+	eDataSource_EVENT                                             smithy.SchemaExtensions
+	eDataSource_MODEL_SCORE                                       smithy.SchemaExtensions
+	eDataSource_EXTERNAL_MODEL_SCORE                              smithy.SchemaExtensions
+	eDataType                                                     smithy.SchemaExtensions
+	eDataType_STRING                                              smithy.SchemaExtensions
+	eDataType_INTEGER                                             smithy.SchemaExtensions
+	eDataType_FLOAT                                               smithy.SchemaExtensions
+	eDataType_BOOLEAN                                             smithy.SchemaExtensions
+	eDataType_DATETIME                                            smithy.SchemaExtensions
+	eDataValidationMetrics                                        smithy.SchemaExtensions
+	eDataValidationMetrics_fileLevelMessages                      smithy.SchemaExtensions
+	eDataValidationMetrics_fieldLevelMessages                     smithy.SchemaExtensions
+	e_DeleteAuditHistory                                          smithy.SchemaExtensions
+	e_description                                                 smithy.SchemaExtensions
+	eDetector                                                     smithy.SchemaExtensions
+	eDetector_detectorId                                          smithy.SchemaExtensions
+	eDetector_description                                         smithy.SchemaExtensions
+	eDetector_eventTypeName                                       smithy.SchemaExtensions
+	eDetector_lastUpdatedTime                                     smithy.SchemaExtensions
+	eDetector_createdTime                                         smithy.SchemaExtensions
+	eDetector_arn                                                 smithy.SchemaExtensions
+	e_DetectorList                                                smithy.SchemaExtensions
+	e_DetectorList_member                                         smithy.SchemaExtensions
+	e_DetectorsMaxResults                                         smithy.SchemaExtensions
+	e_DetectorVersionMaxResults                                   smithy.SchemaExtensions
+	eDetectorVersionStatus                                        smithy.SchemaExtensions
+	eDetectorVersionStatus_DRAFT                                  smithy.SchemaExtensions
+	eDetectorVersionStatus_ACTIVE                                 smithy.SchemaExtensions
+	eDetectorVersionStatus_INACTIVE                               smithy.SchemaExtensions
+	eDetectorVersionSummary                                       smithy.SchemaExtensions
+	eDetectorVersionSummary_detectorVersionId                     smithy.SchemaExtensions
+	eDetectorVersionSummary_status                                smithy.SchemaExtensions
+	eDetectorVersionSummary_description                           smithy.SchemaExtensions
+	eDetectorVersionSummary_lastUpdatedTime                       smithy.SchemaExtensions
+	e_DetectorVersionSummaryList                                  smithy.SchemaExtensions
+	e_DetectorVersionSummaryList_member                           smithy.SchemaExtensions
+	e_Elements                                                    smithy.SchemaExtensions
+	e_ElementsList                                                smithy.SchemaExtensions
+	e_ElementsList_member                                         smithy.SchemaExtensions
+	eEntity                                                       smithy.SchemaExtensions
+	eEntity_entityType                                            smithy.SchemaExtensions
+	eEntity_entityId                                              smithy.SchemaExtensions
+	e_entityRestrictedString                                      smithy.SchemaExtensions
+	eEntityType                                                   smithy.SchemaExtensions
+	eEntityType_name                                              smithy.SchemaExtensions
+	eEntityType_description                                       smithy.SchemaExtensions
+	eEntityType_lastUpdatedTime                                   smithy.SchemaExtensions
+	eEntityType_createdTime                                       smithy.SchemaExtensions
+	eEntityType_arn                                               smithy.SchemaExtensions
+	e_entityTypeList                                              smithy.SchemaExtensions
+	e_entityTypeList_member                                       smithy.SchemaExtensions
+	e_entityTypesMaxResults                                       smithy.SchemaExtensions
+	eEvaluatedExternalModel                                       smithy.SchemaExtensions
+	eEvaluatedExternalModel_modelEndpoint                         smithy.SchemaExtensions
+	eEvaluatedExternalModel_useEventVariables                     smithy.SchemaExtensions
+	eEvaluatedExternalModel_inputVariables                        smithy.SchemaExtensions
+	eEvaluatedExternalModel_outputVariables                       smithy.SchemaExtensions
+	eEvaluatedModelVersion                                        smithy.SchemaExtensions
+	eEvaluatedModelVersion_modelId                                smithy.SchemaExtensions
+	eEvaluatedModelVersion_modelVersion                           smithy.SchemaExtensions
+	eEvaluatedModelVersion_modelType                              smithy.SchemaExtensions
+	eEvaluatedModelVersion_evaluations                            smithy.SchemaExtensions
+	eEvaluatedRule                                                smithy.SchemaExtensions
+	eEvaluatedRule_ruleId                                         smithy.SchemaExtensions
+	eEvaluatedRule_ruleVersion                                    smithy.SchemaExtensions
+	eEvaluatedRule_expression                                     smithy.SchemaExtensions
+	eEvaluatedRule_expressionWithValues                           smithy.SchemaExtensions
+	eEvaluatedRule_outcomes                                       smithy.SchemaExtensions
+	eEvaluatedRule_evaluated                                      smithy.SchemaExtensions
+	eEvaluatedRule_matched                                        smithy.SchemaExtensions
+	e_EvaluatedRuleList                                           smithy.SchemaExtensions
+	e_EvaluatedRuleList_member                                    smithy.SchemaExtensions
+	eEvent                                                        smithy.SchemaExtensions
+	eEvent_eventId                                                smithy.SchemaExtensions
+	eEvent_eventTypeName                                          smithy.SchemaExtensions
+	eEvent_eventTimestamp                                         smithy.SchemaExtensions
+	eEvent_eventVariables                                         smithy.SchemaExtensions
+	eEvent_currentLabel                                           smithy.SchemaExtensions
+	eEvent_labelTimestamp                                         smithy.SchemaExtensions
+	eEvent_entities                                               smithy.SchemaExtensions
+	e_EventAttributeMap                                           smithy.SchemaExtensions
+	e_EventAttributeMap_key                                       smithy.SchemaExtensions
+	e_EventAttributeMap_value                                     smithy.SchemaExtensions
+	eEventIngestion                                               smithy.SchemaExtensions
+	eEventIngestion_ENABLED                                       smithy.SchemaExtensions
+	eEventIngestion_DISABLED                                      smithy.SchemaExtensions
+	eEventOrchestration                                           smithy.SchemaExtensions
+	eEventOrchestration_eventBridgeEnabled                        smithy.SchemaExtensions
+	e_EventPredictionsMaxResults                                  smithy.SchemaExtensions
+	eEventPredictionSummary                                       smithy.SchemaExtensions
+	eEventPredictionSummary_eventId                               smithy.SchemaExtensions
+	eEventPredictionSummary_eventTypeName                         smithy.SchemaExtensions
+	eEventPredictionSummary_eventTimestamp                        smithy.SchemaExtensions
+	eEventPredictionSummary_predictionTimestamp                   smithy.SchemaExtensions
+	eEventPredictionSummary_detectorId                            smithy.SchemaExtensions
+	eEventPredictionSummary_detectorVersionId                     smithy.SchemaExtensions
+	eEventType                                                    smithy.SchemaExtensions
+	eEventType_name                                               smithy.SchemaExtensions
+	eEventType_description                                        smithy.SchemaExtensions
+	eEventType_eventVariables                                     smithy.SchemaExtensions
+	eEventType_labels                                             smithy.SchemaExtensions
+	eEventType_entityTypes                                        smithy.SchemaExtensions
+	eEventType_eventIngestion                                     smithy.SchemaExtensions
+	eEventType_ingestedEventStatistics                            smithy.SchemaExtensions
+	eEventType_lastUpdatedTime                                    smithy.SchemaExtensions
+	eEventType_createdTime                                        smithy.SchemaExtensions
+	eEventType_arn                                                smithy.SchemaExtensions
+	eEventType_eventOrchestration                                 smithy.SchemaExtensions
+	e_eventTypeList                                               smithy.SchemaExtensions
+	e_eventTypeList_member                                        smithy.SchemaExtensions
+	e_eventTypesMaxResults                                        smithy.SchemaExtensions
+	e_EventVariableMap                                            smithy.SchemaExtensions
+	e_EventVariableMap_key                                        smithy.SchemaExtensions
+	e_EventVariableMap_value                                      smithy.SchemaExtensions
+	eEventVariableSummary                                         smithy.SchemaExtensions
+	eEventVariableSummary_name                                    smithy.SchemaExtensions
+	eEventVariableSummary_value                                   smithy.SchemaExtensions
+	eEventVariableSummary_source                                  smithy.SchemaExtensions
+	eExternalEventsDetail                                         smithy.SchemaExtensions
+	eExternalEventsDetail_dataLocation                            smithy.SchemaExtensions
+	eExternalEventsDetail_dataAccessRoleArn                       smithy.SchemaExtensions
+	eExternalModel                                                smithy.SchemaExtensions
+	eExternalModel_modelEndpoint                                  smithy.SchemaExtensions
+	eExternalModel_modelSource                                    smithy.SchemaExtensions
+	eExternalModel_invokeModelEndpointRoleArn                     smithy.SchemaExtensions
+	eExternalModel_inputConfiguration                             smithy.SchemaExtensions
+	eExternalModel_outputConfiguration                            smithy.SchemaExtensions
+	eExternalModel_modelEndpointStatus                            smithy.SchemaExtensions
+	eExternalModel_lastUpdatedTime                                smithy.SchemaExtensions
+	eExternalModel_createdTime                                    smithy.SchemaExtensions
+	eExternalModel_arn                                            smithy.SchemaExtensions
+	e_ExternalModelEndpointDataBlobMap                            smithy.SchemaExtensions
+	e_ExternalModelEndpointDataBlobMap_key                        smithy.SchemaExtensions
+	e_ExternalModelEndpointDataBlobMap_value                      smithy.SchemaExtensions
+	e_ExternalModelList                                           smithy.SchemaExtensions
+	e_ExternalModelList_member                                    smithy.SchemaExtensions
+	eExternalModelOutputs                                         smithy.SchemaExtensions
+	eExternalModelOutputs_externalModel                           smithy.SchemaExtensions
+	eExternalModelOutputs_outputs                                 smithy.SchemaExtensions
+	e_ExternalModelPredictionMap                                  smithy.SchemaExtensions
+	e_ExternalModelPredictionMap_key                              smithy.SchemaExtensions
+	e_ExternalModelPredictionMap_value                            smithy.SchemaExtensions
+	e_ExternalModelsMaxResults                                    smithy.SchemaExtensions
+	eExternalModelSummary                                         smithy.SchemaExtensions
+	eExternalModelSummary_modelEndpoint                           smithy.SchemaExtensions
+	eExternalModelSummary_modelSource                             smithy.SchemaExtensions
+	eFieldValidationMessage                                       smithy.SchemaExtensions
+	eFieldValidationMessage_fieldName                             smithy.SchemaExtensions
+	eFieldValidationMessage_identifier                            smithy.SchemaExtensions
+	eFieldValidationMessage_title                                 smithy.SchemaExtensions
+	eFieldValidationMessage_content                               smithy.SchemaExtensions
+	eFieldValidationMessage_type                                  smithy.SchemaExtensions
+	e_fieldValidationMessageList                                  smithy.SchemaExtensions
+	e_fieldValidationMessageList_member                           smithy.SchemaExtensions
+	eFileValidationMessage                                        smithy.SchemaExtensions
+	eFileValidationMessage_title                                  smithy.SchemaExtensions
+	eFileValidationMessage_content                                smithy.SchemaExtensions
+	eFileValidationMessage_type                                   smithy.SchemaExtensions
+	e_fileValidationMessageList                                   smithy.SchemaExtensions
+	e_fileValidationMessageList_member                            smithy.SchemaExtensions
+	eFilterCondition                                              smithy.SchemaExtensions
+	eFilterCondition_value                                        smithy.SchemaExtensions
+	e_filterString                                                smithy.SchemaExtensions
+	e_float                                                       smithy.SchemaExtensions
+	e_floatVersionString                                          smithy.SchemaExtensions
+	e_fraudDetectorArn                                            smithy.SchemaExtensions
+	e_iamRoleArn                                                  smithy.SchemaExtensions
+	e_identifier                                                  smithy.SchemaExtensions
+	eIngestedEventsDetail                                         smithy.SchemaExtensions
+	eIngestedEventsDetail_ingestedEventsTimeWindow                smithy.SchemaExtensions
+	eIngestedEventStatistics                                      smithy.SchemaExtensions
+	eIngestedEventStatistics_numberOfEvents                       smithy.SchemaExtensions
+	eIngestedEventStatistics_eventDataSizeInBytes                 smithy.SchemaExtensions
+	eIngestedEventStatistics_leastRecentEvent                     smithy.SchemaExtensions
+	eIngestedEventStatistics_mostRecentEvent                      smithy.SchemaExtensions
+	eIngestedEventStatistics_lastUpdatedTime                      smithy.SchemaExtensions
+	eIngestedEventsTimeWindow                                     smithy.SchemaExtensions
+	eIngestedEventsTimeWindow_startTime                           smithy.SchemaExtensions
+	eIngestedEventsTimeWindow_endTime                             smithy.SchemaExtensions
+	e_Integer                                                     smithy.SchemaExtensions
+	e_Integer2                                                    smithy.SchemaExtensions
+	eInternalServerException                                      smithy.SchemaExtensions
+	eInternalServerException_message                              smithy.SchemaExtensions
+	e_JsonKeyToVariableMap                                        smithy.SchemaExtensions
+	e_JsonKeyToVariableMap_key                                    smithy.SchemaExtensions
+	e_JsonKeyToVariableMap_value                                  smithy.SchemaExtensions
+	e_KmsEncryptionKeyArn                                         smithy.SchemaExtensions
+	eKMSKey                                                       smithy.SchemaExtensions
+	eKMSKey_kmsEncryptionKeyArn                                   smithy.SchemaExtensions
+	eLabel                                                        smithy.SchemaExtensions
+	eLabel_name                                                   smithy.SchemaExtensions
+	eLabel_description                                            smithy.SchemaExtensions
+	eLabel_lastUpdatedTime                                        smithy.SchemaExtensions
+	eLabel_createdTime                                            smithy.SchemaExtensions
+	eLabel_arn                                                    smithy.SchemaExtensions
+	e_labelList                                                   smithy.SchemaExtensions
+	e_labelList_member                                            smithy.SchemaExtensions
+	e_labelMapper                                                 smithy.SchemaExtensions
+	e_labelMapper_key                                             smithy.SchemaExtensions
+	e_labelMapper_value                                           smithy.SchemaExtensions
+	eLabelSchema                                                  smithy.SchemaExtensions
+	eLabelSchema_labelMapper                                      smithy.SchemaExtensions
+	eLabelSchema_unlabeledEventsTreatment                         smithy.SchemaExtensions
+	e_labelsMaxResults                                            smithy.SchemaExtensions
+	eLanguage                                                     smithy.SchemaExtensions
+	eLanguage_DETECTORPL                                          smithy.SchemaExtensions
+	e_ListOfAggregatedLogOddsMetrics                              smithy.SchemaExtensions
+	e_ListOfAggregatedLogOddsMetrics_member                       smithy.SchemaExtensions
+	e_ListOfAggregatedVariablesImpactExplanations                 smithy.SchemaExtensions
+	e_ListOfAggregatedVariablesImpactExplanations_member          smithy.SchemaExtensions
+	e_listOfEntities                                              smithy.SchemaExtensions
+	e_listOfEntities_member                                       smithy.SchemaExtensions
+	e_ListOfEvaluatedExternalModels                               smithy.SchemaExtensions
+	e_ListOfEvaluatedExternalModels_member                        smithy.SchemaExtensions
+	e_ListOfEvaluatedModelVersions                                smithy.SchemaExtensions
+	e_ListOfEvaluatedModelVersions_member                         smithy.SchemaExtensions
+	e_ListOfEventPredictionSummaries                              smithy.SchemaExtensions
+	e_ListOfEventPredictionSummaries_member                       smithy.SchemaExtensions
+	e_ListOfEventVariableSummaries                                smithy.SchemaExtensions
+	e_ListOfEventVariableSummaries_member                         smithy.SchemaExtensions
+	e_ListOfExternalModelOutputs                                  smithy.SchemaExtensions
+	e_ListOfExternalModelOutputs_member                           smithy.SchemaExtensions
+	e_ListOfLogOddsMetrics                                        smithy.SchemaExtensions
+	e_ListOfLogOddsMetrics_member                                 smithy.SchemaExtensions
+	e_ListOfModelScores                                           smithy.SchemaExtensions
+	e_ListOfModelScores_member                                    smithy.SchemaExtensions
+	e_ListOfModelVersionEvaluations                               smithy.SchemaExtensions
+	e_ListOfModelVersionEvaluations_member                        smithy.SchemaExtensions
+	e_ListOfModelVersions                                         smithy.SchemaExtensions
+	e_ListOfModelVersions_member                                  smithy.SchemaExtensions
+	e_ListOfRuleResults                                           smithy.SchemaExtensions
+	e_ListOfRuleResults_member                                    smithy.SchemaExtensions
+	e_ListOfStrings                                               smithy.SchemaExtensions
+	e_ListOfStrings_member                                        smithy.SchemaExtensions
+	e_listOfVariableImpactExplanations                            smithy.SchemaExtensions
+	e_listOfVariableImpactExplanations_member                     smithy.SchemaExtensions
+	e_ListsElementsMaxResults                                     smithy.SchemaExtensions
+	e_ListsMetadataMaxResults                                     smithy.SchemaExtensions
+	eListUpdateMode                                               smithy.SchemaExtensions
+	eListUpdateMode_REPLACE                                       smithy.SchemaExtensions
+	eListUpdateMode_APPEND                                        smithy.SchemaExtensions
+	eListUpdateMode_REMOVE                                        smithy.SchemaExtensions
+	eLogOddsMetric                                                smithy.SchemaExtensions
+	eLogOddsMetric_variableName                                   smithy.SchemaExtensions
+	eLogOddsMetric_variableType                                   smithy.SchemaExtensions
+	eLogOddsMetric_variableImportance                             smithy.SchemaExtensions
+	e_Long                                                        smithy.SchemaExtensions
+	e_MapOfStrings                                                smithy.SchemaExtensions
+	e_MapOfStrings_key                                            smithy.SchemaExtensions
+	e_MapOfStrings_value                                          smithy.SchemaExtensions
+	eMetricDataPoint                                              smithy.SchemaExtensions
+	eMetricDataPoint_fpr                                          smithy.SchemaExtensions
+	eMetricDataPoint_precision                                    smithy.SchemaExtensions
+	eMetricDataPoint_tpr                                          smithy.SchemaExtensions
+	eMetricDataPoint_threshold                                    smithy.SchemaExtensions
+	e_metricDataPointsList                                        smithy.SchemaExtensions
+	e_metricDataPointsList_member                                 smithy.SchemaExtensions
+	eModel                                                        smithy.SchemaExtensions
+	eModel_modelId                                                smithy.SchemaExtensions
+	eModel_modelType                                              smithy.SchemaExtensions
+	eModel_description                                            smithy.SchemaExtensions
+	eModel_eventTypeName                                          smithy.SchemaExtensions
+	eModel_createdTime                                            smithy.SchemaExtensions
+	eModel_lastUpdatedTime                                        smithy.SchemaExtensions
+	eModel_arn                                                    smithy.SchemaExtensions
+	eModelEndpointDataBlob                                        smithy.SchemaExtensions
+	eModelEndpointDataBlob_byteBuffer                             smithy.SchemaExtensions
+	eModelEndpointDataBlob_contentType                            smithy.SchemaExtensions
+	eModelEndpointStatus                                          smithy.SchemaExtensions
+	eModelEndpointStatus_ASSOCIATED                               smithy.SchemaExtensions
+	eModelEndpointStatus_DISSOCIATED                              smithy.SchemaExtensions
+	e_modelIdentifier                                             smithy.SchemaExtensions
+	eModelInputConfiguration                                      smithy.SchemaExtensions
+	eModelInputConfiguration_eventTypeName                        smithy.SchemaExtensions
+	eModelInputConfiguration_format                               smithy.SchemaExtensions
+	eModelInputConfiguration_useEventVariables                    smithy.SchemaExtensions
+	eModelInputConfiguration_jsonInputTemplate                    smithy.SchemaExtensions
+	eModelInputConfiguration_csvInputTemplate                     smithy.SchemaExtensions
+	eModelInputDataFormat                                         smithy.SchemaExtensions
+	eModelInputDataFormat_CSV                                     smithy.SchemaExtensions
+	eModelInputDataFormat_JSON                                    smithy.SchemaExtensions
+	e_modelInputTemplate                                          smithy.SchemaExtensions
+	e_modelList                                                   smithy.SchemaExtensions
+	e_modelList_member                                            smithy.SchemaExtensions
+	eModelOutputConfiguration                                     smithy.SchemaExtensions
+	eModelOutputConfiguration_format                              smithy.SchemaExtensions
+	eModelOutputConfiguration_jsonKeyToVariableMap                smithy.SchemaExtensions
+	eModelOutputConfiguration_csvIndexToVariableMap               smithy.SchemaExtensions
+	eModelOutputDataFormat                                        smithy.SchemaExtensions
+	eModelOutputDataFormat_CSV                                    smithy.SchemaExtensions
+	eModelOutputDataFormat_JSONLINES                              smithy.SchemaExtensions
+	e_ModelPredictionMap                                          smithy.SchemaExtensions
+	e_ModelPredictionMap_key                                      smithy.SchemaExtensions
+	e_ModelPredictionMap_value                                    smithy.SchemaExtensions
+	eModelScores                                                  smithy.SchemaExtensions
+	eModelScores_modelVersion                                     smithy.SchemaExtensions
+	eModelScores_scores                                           smithy.SchemaExtensions
+	e_modelsMaxPageSize                                           smithy.SchemaExtensions
+	eModelSource                                                  smithy.SchemaExtensions
+	eModelSource_SAGEMAKER                                        smithy.SchemaExtensions
+	eModelTypeEnum                                                smithy.SchemaExtensions
+	eModelTypeEnum_ONLINE_FRAUD_INSIGHTS                          smithy.SchemaExtensions
+	eModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS                     smithy.SchemaExtensions
+	eModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS                      smithy.SchemaExtensions
+	eModelVersion                                                 smithy.SchemaExtensions
+	eModelVersion_modelId                                         smithy.SchemaExtensions
+	eModelVersion_modelType                                       smithy.SchemaExtensions
+	eModelVersion_modelVersionNumber                              smithy.SchemaExtensions
+	eModelVersion_arn                                             smithy.SchemaExtensions
+	eModelVersionDetail                                           smithy.SchemaExtensions
+	eModelVersionDetail_modelId                                   smithy.SchemaExtensions
+	eModelVersionDetail_modelType                                 smithy.SchemaExtensions
+	eModelVersionDetail_modelVersionNumber                        smithy.SchemaExtensions
+	eModelVersionDetail_status                                    smithy.SchemaExtensions
+	eModelVersionDetail_trainingDataSource                        smithy.SchemaExtensions
+	eModelVersionDetail_trainingDataSchema                        smithy.SchemaExtensions
+	eModelVersionDetail_externalEventsDetail                      smithy.SchemaExtensions
+	eModelVersionDetail_ingestedEventsDetail                      smithy.SchemaExtensions
+	eModelVersionDetail_trainingResult                            smithy.SchemaExtensions
+	eModelVersionDetail_lastUpdatedTime                           smithy.SchemaExtensions
+	eModelVersionDetail_createdTime                               smithy.SchemaExtensions
+	eModelVersionDetail_arn                                       smithy.SchemaExtensions
+	eModelVersionDetail_trainingResultV2                          smithy.SchemaExtensions
+	e_modelVersionDetailList                                      smithy.SchemaExtensions
+	e_modelVersionDetailList_member                               smithy.SchemaExtensions
+	eModelVersionEvaluation                                       smithy.SchemaExtensions
+	eModelVersionEvaluation_outputVariableName                    smithy.SchemaExtensions
+	eModelVersionEvaluation_evaluationScore                       smithy.SchemaExtensions
+	eModelVersionEvaluation_predictionExplanations                smithy.SchemaExtensions
+	eModelVersionStatus                                           smithy.SchemaExtensions
+	eModelVersionStatus_ACTIVE                                    smithy.SchemaExtensions
+	eModelVersionStatus_INACTIVE                                  smithy.SchemaExtensions
+	eModelVersionStatus_TRAINING_CANCELLED                        smithy.SchemaExtensions
+	e_NameList                                                    smithy.SchemaExtensions
+	e_NameList_member                                             smithy.SchemaExtensions
+	e_nextToken                                                   smithy.SchemaExtensions
+	e_noDashIdentifier                                            smithy.SchemaExtensions
+	e_NonEmptyListOfStrings                                       smithy.SchemaExtensions
+	e_NonEmptyListOfStrings_member                                smithy.SchemaExtensions
+	eOFIMetricDataPoint                                           smithy.SchemaExtensions
+	eOFIMetricDataPoint_fpr                                       smithy.SchemaExtensions
+	eOFIMetricDataPoint_precision                                 smithy.SchemaExtensions
+	eOFIMetricDataPoint_tpr                                       smithy.SchemaExtensions
+	eOFIMetricDataPoint_threshold                                 smithy.SchemaExtensions
+	e_OFIMetricDataPointsList                                     smithy.SchemaExtensions
+	e_OFIMetricDataPointsList_member                              smithy.SchemaExtensions
+	eOFIModelPerformance                                          smithy.SchemaExtensions
+	eOFIModelPerformance_auc                                      smithy.SchemaExtensions
+	eOFIModelPerformance_uncertaintyRange                         smithy.SchemaExtensions
+	eOFITrainingMetricsValue                                      smithy.SchemaExtensions
+	eOFITrainingMetricsValue_metricDataPoints                     smithy.SchemaExtensions
+	eOFITrainingMetricsValue_modelPerformance                     smithy.SchemaExtensions
+	eOutcome                                                      smithy.SchemaExtensions
+	eOutcome_name                                                 smithy.SchemaExtensions
+	eOutcome_description                                          smithy.SchemaExtensions
+	eOutcome_lastUpdatedTime                                      smithy.SchemaExtensions
+	eOutcome_createdTime                                          smithy.SchemaExtensions
+	eOutcome_arn                                                  smithy.SchemaExtensions
+	e_OutcomeList                                                 smithy.SchemaExtensions
+	e_OutcomeList_member                                          smithy.SchemaExtensions
+	e_OutcomesMaxResults                                          smithy.SchemaExtensions
+	ePredictionExplanations                                       smithy.SchemaExtensions
+	ePredictionExplanations_variableImpactExplanations            smithy.SchemaExtensions
+	ePredictionExplanations_aggregatedVariablesImpactExplanations smithy.SchemaExtensions
+	ePredictionTimeRange                                          smithy.SchemaExtensions
+	ePredictionTimeRange_startTime                                smithy.SchemaExtensions
+	ePredictionTimeRange_endTime                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                    smithy.SchemaExtensions
+	eResourceNotFoundException_message                            smithy.SchemaExtensions
+	eResourceUnavailableException                                 smithy.SchemaExtensions
+	eResourceUnavailableException_message                         smithy.SchemaExtensions
+	eRule                                                         smithy.SchemaExtensions
+	eRule_detectorId                                              smithy.SchemaExtensions
+	eRule_ruleId                                                  smithy.SchemaExtensions
+	eRule_ruleVersion                                             smithy.SchemaExtensions
+	eRuleDetail                                                   smithy.SchemaExtensions
+	eRuleDetail_ruleId                                            smithy.SchemaExtensions
+	eRuleDetail_description                                       smithy.SchemaExtensions
+	eRuleDetail_detectorId                                        smithy.SchemaExtensions
+	eRuleDetail_ruleVersion                                       smithy.SchemaExtensions
+	eRuleDetail_expression                                        smithy.SchemaExtensions
+	eRuleDetail_language                                          smithy.SchemaExtensions
+	eRuleDetail_outcomes                                          smithy.SchemaExtensions
+	eRuleDetail_lastUpdatedTime                                   smithy.SchemaExtensions
+	eRuleDetail_createdTime                                       smithy.SchemaExtensions
+	eRuleDetail_arn                                               smithy.SchemaExtensions
+	e_RuleDetailList                                              smithy.SchemaExtensions
+	e_RuleDetailList_member                                       smithy.SchemaExtensions
+	eRuleExecutionMode                                            smithy.SchemaExtensions
+	eRuleExecutionMode_ALL_MATCHED                                smithy.SchemaExtensions
+	eRuleExecutionMode_FIRST_MATCHED                              smithy.SchemaExtensions
+	e_ruleExpression                                              smithy.SchemaExtensions
+	e_RuleList                                                    smithy.SchemaExtensions
+	e_RuleList_member                                             smithy.SchemaExtensions
+	eRuleResult                                                   smithy.SchemaExtensions
+	eRuleResult_ruleId                                            smithy.SchemaExtensions
+	eRuleResult_outcomes                                          smithy.SchemaExtensions
+	e_RulesMaxResults                                             smithy.SchemaExtensions
+	e_s3BucketLocation                                            smithy.SchemaExtensions
+	e_sageMakerEndpointIdentifier                                 smithy.SchemaExtensions
+	e_sensitiveString                                             smithy.SchemaExtensions
+	e_string                                                      smithy.SchemaExtensions
+	eTag                                                          smithy.SchemaExtensions
+	eTag_key                                                      smithy.SchemaExtensions
+	eTag_value                                                    smithy.SchemaExtensions
+	e_tagKey                                                      smithy.SchemaExtensions
+	e_tagKeyList                                                  smithy.SchemaExtensions
+	e_tagKeyList_member                                           smithy.SchemaExtensions
+	e_tagList                                                     smithy.SchemaExtensions
+	e_tagList_member                                              smithy.SchemaExtensions
+	e_TagsMaxResults                                              smithy.SchemaExtensions
+	e_tagValue                                                    smithy.SchemaExtensions
+	eTFIMetricDataPoint                                           smithy.SchemaExtensions
+	eTFIMetricDataPoint_fpr                                       smithy.SchemaExtensions
+	eTFIMetricDataPoint_precision                                 smithy.SchemaExtensions
+	eTFIMetricDataPoint_tpr                                       smithy.SchemaExtensions
+	eTFIMetricDataPoint_threshold                                 smithy.SchemaExtensions
+	e_TFIMetricDataPointsList                                     smithy.SchemaExtensions
+	e_TFIMetricDataPointsList_member                              smithy.SchemaExtensions
+	eTFIModelPerformance                                          smithy.SchemaExtensions
+	eTFIModelPerformance_auc                                      smithy.SchemaExtensions
+	eTFIModelPerformance_uncertaintyRange                         smithy.SchemaExtensions
+	eTFITrainingMetricsValue                                      smithy.SchemaExtensions
+	eTFITrainingMetricsValue_metricDataPoints                     smithy.SchemaExtensions
+	eTFITrainingMetricsValue_modelPerformance                     smithy.SchemaExtensions
+	eThrottlingException                                          smithy.SchemaExtensions
+	eThrottlingException_message                                  smithy.SchemaExtensions
+	e_time                                                        smithy.SchemaExtensions
+	eTrainingDataSchema                                           smithy.SchemaExtensions
+	eTrainingDataSchema_modelVariables                            smithy.SchemaExtensions
+	eTrainingDataSchema_labelSchema                               smithy.SchemaExtensions
+	eTrainingDataSourceEnum                                       smithy.SchemaExtensions
+	eTrainingDataSourceEnum_EXTERNAL_EVENTS                       smithy.SchemaExtensions
+	eTrainingDataSourceEnum_INGESTED_EVENTS                       smithy.SchemaExtensions
+	eTrainingMetrics                                              smithy.SchemaExtensions
+	eTrainingMetrics_auc                                          smithy.SchemaExtensions
+	eTrainingMetrics_metricDataPoints                             smithy.SchemaExtensions
+	eTrainingMetricsV2                                            smithy.SchemaExtensions
+	eTrainingMetricsV2_ofi                                        smithy.SchemaExtensions
+	eTrainingMetricsV2_tfi                                        smithy.SchemaExtensions
+	eTrainingMetricsV2_ati                                        smithy.SchemaExtensions
+	eTrainingResult                                               smithy.SchemaExtensions
+	eTrainingResult_dataValidationMetrics                         smithy.SchemaExtensions
+	eTrainingResult_trainingMetrics                               smithy.SchemaExtensions
+	eTrainingResult_variableImportanceMetrics                     smithy.SchemaExtensions
+	eTrainingResultV2                                             smithy.SchemaExtensions
+	eTrainingResultV2_dataValidationMetrics                       smithy.SchemaExtensions
+	eTrainingResultV2_trainingMetricsV2                           smithy.SchemaExtensions
+	eTrainingResultV2_variableImportanceMetrics                   smithy.SchemaExtensions
+	eTrainingResultV2_aggregatedVariablesImportanceMetrics        smithy.SchemaExtensions
+	eUncertaintyRange                                             smithy.SchemaExtensions
+	eUncertaintyRange_lowerBoundValue                             smithy.SchemaExtensions
+	eUncertaintyRange_upperBoundValue                             smithy.SchemaExtensions
+	eUnlabeledEventsTreatment                                     smithy.SchemaExtensions
+	eUnlabeledEventsTreatment_IGNORE                              smithy.SchemaExtensions
+	eUnlabeledEventsTreatment_FRAUD                               smithy.SchemaExtensions
+	eUnlabeledEventsTreatment_LEGIT                               smithy.SchemaExtensions
+	eUnlabeledEventsTreatment_AUTO                                smithy.SchemaExtensions
+	e_UseEventVariables                                           smithy.SchemaExtensions
+	e_utcTimestampISO8601                                         smithy.SchemaExtensions
+	eValidationException                                          smithy.SchemaExtensions
+	eValidationException_message                                  smithy.SchemaExtensions
+	eVariable                                                     smithy.SchemaExtensions
+	eVariable_name                                                smithy.SchemaExtensions
+	eVariable_dataType                                            smithy.SchemaExtensions
+	eVariable_dataSource                                          smithy.SchemaExtensions
+	eVariable_defaultValue                                        smithy.SchemaExtensions
+	eVariable_description                                         smithy.SchemaExtensions
+	eVariable_variableType                                        smithy.SchemaExtensions
+	eVariable_lastUpdatedTime                                     smithy.SchemaExtensions
+	eVariable_createdTime                                         smithy.SchemaExtensions
+	eVariable_arn                                                 smithy.SchemaExtensions
+	eVariableEntry                                                smithy.SchemaExtensions
+	eVariableEntry_name                                           smithy.SchemaExtensions
+	eVariableEntry_dataType                                       smithy.SchemaExtensions
+	eVariableEntry_dataSource                                     smithy.SchemaExtensions
+	eVariableEntry_defaultValue                                   smithy.SchemaExtensions
+	eVariableEntry_description                                    smithy.SchemaExtensions
+	eVariableEntry_variableType                                   smithy.SchemaExtensions
+	e_VariableEntryList                                           smithy.SchemaExtensions
+	e_VariableEntryList_member                                    smithy.SchemaExtensions
+	eVariableImpactExplanation                                    smithy.SchemaExtensions
+	eVariableImpactExplanation_eventVariableName                  smithy.SchemaExtensions
+	eVariableImpactExplanation_relativeImpact                     smithy.SchemaExtensions
+	eVariableImpactExplanation_logOddsImpact                      smithy.SchemaExtensions
+	eVariableImportanceMetrics                                    smithy.SchemaExtensions
+	eVariableImportanceMetrics_logOddsMetrics                     smithy.SchemaExtensions
+	e_VariableList                                                smithy.SchemaExtensions
+	e_VariableList_member                                         smithy.SchemaExtensions
+	e_variableName                                                smithy.SchemaExtensions
+	e_VariablesMaxResults                                         smithy.SchemaExtensions
+	e_variableType                                                smithy.SchemaExtensions
+	e_variableValue                                               smithy.SchemaExtensions
+	e_wholeNumberVersionString                                    smithy.SchemaExtensions
+	eBatchCreateVariableRequest                                   smithy.SchemaExtensions
+	eBatchCreateVariableRequest_variableEntries                   smithy.SchemaExtensions
+	eBatchCreateVariableRequest_tags                              smithy.SchemaExtensions
+	eBatchCreateVariableResult                                    smithy.SchemaExtensions
+	eBatchCreateVariableResult_errors                             smithy.SchemaExtensions
+	eBatchGetVariableRequest                                      smithy.SchemaExtensions
+	eBatchGetVariableRequest_names                                smithy.SchemaExtensions
+	eBatchGetVariableResult                                       smithy.SchemaExtensions
+	eBatchGetVariableResult_variables                             smithy.SchemaExtensions
+	eBatchGetVariableResult_errors                                smithy.SchemaExtensions
+	eCancelBatchImportJobRequest                                  smithy.SchemaExtensions
+	eCancelBatchImportJobRequest_jobId                            smithy.SchemaExtensions
+	eCancelBatchImportJobResult                                   smithy.SchemaExtensions
+	eCancelBatchPredictionJobRequest                              smithy.SchemaExtensions
+	eCancelBatchPredictionJobRequest_jobId                        smithy.SchemaExtensions
+	eCancelBatchPredictionJobResult                               smithy.SchemaExtensions
+	eCreateBatchImportJobRequest                                  smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_jobId                            smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_inputPath                        smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_outputPath                       smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_eventTypeName                    smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_iamRoleArn                       smithy.SchemaExtensions
+	eCreateBatchImportJobRequest_tags                             smithy.SchemaExtensions
+	eCreateBatchImportJobResult                                   smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest                              smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_jobId                        smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_inputPath                    smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_outputPath                   smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_eventTypeName                smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_detectorName                 smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_detectorVersion              smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_iamRoleArn                   smithy.SchemaExtensions
+	eCreateBatchPredictionJobRequest_tags                         smithy.SchemaExtensions
+	eCreateBatchPredictionJobResult                               smithy.SchemaExtensions
+	eCreateDetectorVersionRequest                                 smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_detectorId                      smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_description                     smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_externalModelEndpoints          smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_rules                           smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_modelVersions                   smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_ruleExecutionMode               smithy.SchemaExtensions
+	eCreateDetectorVersionRequest_tags                            smithy.SchemaExtensions
+	eCreateDetectorVersionResult                                  smithy.SchemaExtensions
+	eCreateDetectorVersionResult_detectorId                       smithy.SchemaExtensions
+	eCreateDetectorVersionResult_detectorVersionId                smithy.SchemaExtensions
+	eCreateDetectorVersionResult_status                           smithy.SchemaExtensions
+	eCreateListRequest                                            smithy.SchemaExtensions
+	eCreateListRequest_name                                       smithy.SchemaExtensions
+	eCreateListRequest_elements                                   smithy.SchemaExtensions
+	eCreateListRequest_variableType                               smithy.SchemaExtensions
+	eCreateListRequest_description                                smithy.SchemaExtensions
+	eCreateListRequest_tags                                       smithy.SchemaExtensions
+	eCreateListResult                                             smithy.SchemaExtensions
+	eCreateModelRequest                                           smithy.SchemaExtensions
+	eCreateModelRequest_modelId                                   smithy.SchemaExtensions
+	eCreateModelRequest_modelType                                 smithy.SchemaExtensions
+	eCreateModelRequest_description                               smithy.SchemaExtensions
+	eCreateModelRequest_eventTypeName                             smithy.SchemaExtensions
+	eCreateModelRequest_tags                                      smithy.SchemaExtensions
+	eCreateModelResult                                            smithy.SchemaExtensions
+	eCreateModelVersionRequest                                    smithy.SchemaExtensions
+	eCreateModelVersionRequest_modelId                            smithy.SchemaExtensions
+	eCreateModelVersionRequest_modelType                          smithy.SchemaExtensions
+	eCreateModelVersionRequest_trainingDataSource                 smithy.SchemaExtensions
+	eCreateModelVersionRequest_trainingDataSchema                 smithy.SchemaExtensions
+	eCreateModelVersionRequest_externalEventsDetail               smithy.SchemaExtensions
+	eCreateModelVersionRequest_ingestedEventsDetail               smithy.SchemaExtensions
+	eCreateModelVersionRequest_tags                               smithy.SchemaExtensions
+	eCreateModelVersionResult                                     smithy.SchemaExtensions
+	eCreateModelVersionResult_modelId                             smithy.SchemaExtensions
+	eCreateModelVersionResult_modelType                           smithy.SchemaExtensions
+	eCreateModelVersionResult_modelVersionNumber                  smithy.SchemaExtensions
+	eCreateModelVersionResult_status                              smithy.SchemaExtensions
+	eCreateRuleRequest                                            smithy.SchemaExtensions
+	eCreateRuleRequest_ruleId                                     smithy.SchemaExtensions
+	eCreateRuleRequest_detectorId                                 smithy.SchemaExtensions
+	eCreateRuleRequest_description                                smithy.SchemaExtensions
+	eCreateRuleRequest_expression                                 smithy.SchemaExtensions
+	eCreateRuleRequest_language                                   smithy.SchemaExtensions
+	eCreateRuleRequest_outcomes                                   smithy.SchemaExtensions
+	eCreateRuleRequest_tags                                       smithy.SchemaExtensions
+	eCreateRuleResult                                             smithy.SchemaExtensions
+	eCreateRuleResult_rule                                        smithy.SchemaExtensions
+	eCreateVariableRequest                                        smithy.SchemaExtensions
+	eCreateVariableRequest_name                                   smithy.SchemaExtensions
+	eCreateVariableRequest_dataType                               smithy.SchemaExtensions
+	eCreateVariableRequest_dataSource                             smithy.SchemaExtensions
+	eCreateVariableRequest_defaultValue                           smithy.SchemaExtensions
+	eCreateVariableRequest_description                            smithy.SchemaExtensions
+	eCreateVariableRequest_variableType                           smithy.SchemaExtensions
+	eCreateVariableRequest_tags                                   smithy.SchemaExtensions
+	eCreateVariableResult                                         smithy.SchemaExtensions
+	eDeleteBatchImportJobRequest                                  smithy.SchemaExtensions
+	eDeleteBatchImportJobRequest_jobId                            smithy.SchemaExtensions
+	eDeleteBatchImportJobResult                                   smithy.SchemaExtensions
+	eDeleteBatchPredictionJobRequest                              smithy.SchemaExtensions
+	eDeleteBatchPredictionJobRequest_jobId                        smithy.SchemaExtensions
+	eDeleteBatchPredictionJobResult                               smithy.SchemaExtensions
+	eDeleteDetectorRequest                                        smithy.SchemaExtensions
+	eDeleteDetectorRequest_detectorId                             smithy.SchemaExtensions
+	eDeleteDetectorResult                                         smithy.SchemaExtensions
+	eDeleteDetectorVersionRequest                                 smithy.SchemaExtensions
+	eDeleteDetectorVersionRequest_detectorId                      smithy.SchemaExtensions
+	eDeleteDetectorVersionRequest_detectorVersionId               smithy.SchemaExtensions
+	eDeleteDetectorVersionResult                                  smithy.SchemaExtensions
+	eDeleteEntityTypeRequest                                      smithy.SchemaExtensions
+	eDeleteEntityTypeRequest_name                                 smithy.SchemaExtensions
+	eDeleteEntityTypeResult                                       smithy.SchemaExtensions
+	eDeleteEventRequest                                           smithy.SchemaExtensions
+	eDeleteEventRequest_eventId                                   smithy.SchemaExtensions
+	eDeleteEventRequest_eventTypeName                             smithy.SchemaExtensions
+	eDeleteEventRequest_deleteAuditHistory                        smithy.SchemaExtensions
+	eDeleteEventResult                                            smithy.SchemaExtensions
+	eDeleteEventsByEventTypeRequest                               smithy.SchemaExtensions
+	eDeleteEventsByEventTypeRequest_eventTypeName                 smithy.SchemaExtensions
+	eDeleteEventsByEventTypeResult                                smithy.SchemaExtensions
+	eDeleteEventsByEventTypeResult_eventTypeName                  smithy.SchemaExtensions
+	eDeleteEventsByEventTypeResult_eventsDeletionStatus           smithy.SchemaExtensions
+	eDeleteEventTypeRequest                                       smithy.SchemaExtensions
+	eDeleteEventTypeRequest_name                                  smithy.SchemaExtensions
+	eDeleteEventTypeResult                                        smithy.SchemaExtensions
+	eDeleteExternalModelRequest                                   smithy.SchemaExtensions
+	eDeleteExternalModelRequest_modelEndpoint                     smithy.SchemaExtensions
+	eDeleteExternalModelResult                                    smithy.SchemaExtensions
+	eDeleteLabelRequest                                           smithy.SchemaExtensions
+	eDeleteLabelRequest_name                                      smithy.SchemaExtensions
+	eDeleteLabelResult                                            smithy.SchemaExtensions
+	eDeleteListRequest                                            smithy.SchemaExtensions
+	eDeleteListRequest_name                                       smithy.SchemaExtensions
+	eDeleteListResult                                             smithy.SchemaExtensions
+	eDeleteModelRequest                                           smithy.SchemaExtensions
+	eDeleteModelRequest_modelId                                   smithy.SchemaExtensions
+	eDeleteModelRequest_modelType                                 smithy.SchemaExtensions
+	eDeleteModelResult                                            smithy.SchemaExtensions
+	eDeleteModelVersionRequest                                    smithy.SchemaExtensions
+	eDeleteModelVersionRequest_modelId                            smithy.SchemaExtensions
+	eDeleteModelVersionRequest_modelType                          smithy.SchemaExtensions
+	eDeleteModelVersionRequest_modelVersionNumber                 smithy.SchemaExtensions
+	eDeleteModelVersionResult                                     smithy.SchemaExtensions
+	eDeleteOutcomeRequest                                         smithy.SchemaExtensions
+	eDeleteOutcomeRequest_name                                    smithy.SchemaExtensions
+	eDeleteOutcomeResult                                          smithy.SchemaExtensions
+	eDeleteRuleRequest                                            smithy.SchemaExtensions
+	eDeleteRuleRequest_rule                                       smithy.SchemaExtensions
+	eDeleteRuleResult                                             smithy.SchemaExtensions
+	eDeleteVariableRequest                                        smithy.SchemaExtensions
+	eDeleteVariableRequest_name                                   smithy.SchemaExtensions
+	eDeleteVariableResult                                         smithy.SchemaExtensions
+	eDescribeDetectorRequest                                      smithy.SchemaExtensions
+	eDescribeDetectorRequest_detectorId                           smithy.SchemaExtensions
+	eDescribeDetectorRequest_nextToken                            smithy.SchemaExtensions
+	eDescribeDetectorRequest_maxResults                           smithy.SchemaExtensions
+	eDescribeDetectorResult                                       smithy.SchemaExtensions
+	eDescribeDetectorResult_detectorId                            smithy.SchemaExtensions
+	eDescribeDetectorResult_detectorVersionSummaries              smithy.SchemaExtensions
+	eDescribeDetectorResult_nextToken                             smithy.SchemaExtensions
+	eDescribeDetectorResult_arn                                   smithy.SchemaExtensions
+	eDescribeModelVersionsRequest                                 smithy.SchemaExtensions
+	eDescribeModelVersionsRequest_modelId                         smithy.SchemaExtensions
+	eDescribeModelVersionsRequest_modelVersionNumber              smithy.SchemaExtensions
+	eDescribeModelVersionsRequest_modelType                       smithy.SchemaExtensions
+	eDescribeModelVersionsRequest_nextToken                       smithy.SchemaExtensions
+	eDescribeModelVersionsRequest_maxResults                      smithy.SchemaExtensions
+	eDescribeModelVersionsResult                                  smithy.SchemaExtensions
+	eDescribeModelVersionsResult_modelVersionDetails              smithy.SchemaExtensions
+	eDescribeModelVersionsResult_nextToken                        smithy.SchemaExtensions
+	eGetBatchImportJobsRequest                                    smithy.SchemaExtensions
+	eGetBatchImportJobsRequest_jobId                              smithy.SchemaExtensions
+	eGetBatchImportJobsRequest_maxResults                         smithy.SchemaExtensions
+	eGetBatchImportJobsRequest_nextToken                          smithy.SchemaExtensions
+	eGetBatchImportJobsResult                                     smithy.SchemaExtensions
+	eGetBatchImportJobsResult_batchImports                        smithy.SchemaExtensions
+	eGetBatchImportJobsResult_nextToken                           smithy.SchemaExtensions
+	eGetBatchPredictionJobsRequest                                smithy.SchemaExtensions
+	eGetBatchPredictionJobsRequest_jobId                          smithy.SchemaExtensions
+	eGetBatchPredictionJobsRequest_maxResults                     smithy.SchemaExtensions
+	eGetBatchPredictionJobsRequest_nextToken                      smithy.SchemaExtensions
+	eGetBatchPredictionJobsResult                                 smithy.SchemaExtensions
+	eGetBatchPredictionJobsResult_batchPredictions                smithy.SchemaExtensions
+	eGetBatchPredictionJobsResult_nextToken                       smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatusRequest                      smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatusRequest_eventTypeName        smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatusResult                       smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatusResult_eventTypeName         smithy.SchemaExtensions
+	eGetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus  smithy.SchemaExtensions
+	eGetDetectorsRequest                                          smithy.SchemaExtensions
+	eGetDetectorsRequest_detectorId                               smithy.SchemaExtensions
+	eGetDetectorsRequest_nextToken                                smithy.SchemaExtensions
+	eGetDetectorsRequest_maxResults                               smithy.SchemaExtensions
+	eGetDetectorsResult                                           smithy.SchemaExtensions
+	eGetDetectorsResult_detectors                                 smithy.SchemaExtensions
+	eGetDetectorsResult_nextToken                                 smithy.SchemaExtensions
+	eGetDetectorVersionRequest                                    smithy.SchemaExtensions
+	eGetDetectorVersionRequest_detectorId                         smithy.SchemaExtensions
+	eGetDetectorVersionRequest_detectorVersionId                  smithy.SchemaExtensions
+	eGetDetectorVersionResult                                     smithy.SchemaExtensions
+	eGetDetectorVersionResult_detectorId                          smithy.SchemaExtensions
+	eGetDetectorVersionResult_detectorVersionId                   smithy.SchemaExtensions
+	eGetDetectorVersionResult_description                         smithy.SchemaExtensions
+	eGetDetectorVersionResult_externalModelEndpoints              smithy.SchemaExtensions
+	eGetDetectorVersionResult_modelVersions                       smithy.SchemaExtensions
+	eGetDetectorVersionResult_rules                               smithy.SchemaExtensions
+	eGetDetectorVersionResult_status                              smithy.SchemaExtensions
+	eGetDetectorVersionResult_lastUpdatedTime                     smithy.SchemaExtensions
+	eGetDetectorVersionResult_createdTime                         smithy.SchemaExtensions
+	eGetDetectorVersionResult_ruleExecutionMode                   smithy.SchemaExtensions
+	eGetDetectorVersionResult_arn                                 smithy.SchemaExtensions
+	eGetEntityTypesRequest                                        smithy.SchemaExtensions
+	eGetEntityTypesRequest_name                                   smithy.SchemaExtensions
+	eGetEntityTypesRequest_nextToken                              smithy.SchemaExtensions
+	eGetEntityTypesRequest_maxResults                             smithy.SchemaExtensions
+	eGetEntityTypesResult                                         smithy.SchemaExtensions
+	eGetEntityTypesResult_entityTypes                             smithy.SchemaExtensions
+	eGetEntityTypesResult_nextToken                               smithy.SchemaExtensions
+	eGetEventRequest                                              smithy.SchemaExtensions
+	eGetEventRequest_eventId                                      smithy.SchemaExtensions
+	eGetEventRequest_eventTypeName                                smithy.SchemaExtensions
+	eGetEventResult                                               smithy.SchemaExtensions
+	eGetEventResult_event                                         smithy.SchemaExtensions
+	eGetEventPredictionRequest                                    smithy.SchemaExtensions
+	eGetEventPredictionRequest_detectorId                         smithy.SchemaExtensions
+	eGetEventPredictionRequest_detectorVersionId                  smithy.SchemaExtensions
+	eGetEventPredictionRequest_eventId                            smithy.SchemaExtensions
+	eGetEventPredictionRequest_eventTypeName                      smithy.SchemaExtensions
+	eGetEventPredictionRequest_entities                           smithy.SchemaExtensions
+	eGetEventPredictionRequest_eventTimestamp                     smithy.SchemaExtensions
+	eGetEventPredictionRequest_eventVariables                     smithy.SchemaExtensions
+	eGetEventPredictionRequest_externalModelEndpointDataBlobs     smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest                            smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest_eventId                    smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest_eventTypeName              smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest_detectorId                 smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest_detectorVersionId          smithy.SchemaExtensions
+	eGetEventPredictionMetadataRequest_predictionTimestamp        smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult                             smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_eventId                     smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_eventTypeName               smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_entityId                    smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_entityType                  smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_eventTimestamp              smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_detectorId                  smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_detectorVersionId           smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_detectorVersionStatus       smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_eventVariables              smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_rules                       smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_ruleExecutionMode           smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_outcomes                    smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_evaluatedModelVersions      smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_evaluatedExternalModels     smithy.SchemaExtensions
+	eGetEventPredictionMetadataResult_predictionTimestamp         smithy.SchemaExtensions
+	eGetEventPredictionResult                                     smithy.SchemaExtensions
+	eGetEventPredictionResult_modelScores                         smithy.SchemaExtensions
+	eGetEventPredictionResult_ruleResults                         smithy.SchemaExtensions
+	eGetEventPredictionResult_externalModelOutputs                smithy.SchemaExtensions
+	eGetEventTypesRequest                                         smithy.SchemaExtensions
+	eGetEventTypesRequest_name                                    smithy.SchemaExtensions
+	eGetEventTypesRequest_nextToken                               smithy.SchemaExtensions
+	eGetEventTypesRequest_maxResults                              smithy.SchemaExtensions
+	eGetEventTypesResult                                          smithy.SchemaExtensions
+	eGetEventTypesResult_eventTypes                               smithy.SchemaExtensions
+	eGetEventTypesResult_nextToken                                smithy.SchemaExtensions
+	eGetExternalModelsRequest                                     smithy.SchemaExtensions
+	eGetExternalModelsRequest_modelEndpoint                       smithy.SchemaExtensions
+	eGetExternalModelsRequest_nextToken                           smithy.SchemaExtensions
+	eGetExternalModelsRequest_maxResults                          smithy.SchemaExtensions
+	eGetExternalModelsResult                                      smithy.SchemaExtensions
+	eGetExternalModelsResult_externalModels                       smithy.SchemaExtensions
+	eGetExternalModelsResult_nextToken                            smithy.SchemaExtensions
+	eGetKMSEncryptionKeyResult                                    smithy.SchemaExtensions
+	eGetKMSEncryptionKeyResult_kmsKey                             smithy.SchemaExtensions
+	eGetLabelsRequest                                             smithy.SchemaExtensions
+	eGetLabelsRequest_name                                        smithy.SchemaExtensions
+	eGetLabelsRequest_nextToken                                   smithy.SchemaExtensions
+	eGetLabelsRequest_maxResults                                  smithy.SchemaExtensions
+	eGetLabelsResult                                              smithy.SchemaExtensions
+	eGetLabelsResult_labels                                       smithy.SchemaExtensions
+	eGetLabelsResult_nextToken                                    smithy.SchemaExtensions
+	eGetListElementsRequest                                       smithy.SchemaExtensions
+	eGetListElementsRequest_name                                  smithy.SchemaExtensions
+	eGetListElementsRequest_nextToken                             smithy.SchemaExtensions
+	eGetListElementsRequest_maxResults                            smithy.SchemaExtensions
+	eGetListElementsResult                                        smithy.SchemaExtensions
+	eGetListElementsResult_elements                               smithy.SchemaExtensions
+	eGetListElementsResult_nextToken                              smithy.SchemaExtensions
+	eGetListsMetadataRequest                                      smithy.SchemaExtensions
+	eGetListsMetadataRequest_name                                 smithy.SchemaExtensions
+	eGetListsMetadataRequest_nextToken                            smithy.SchemaExtensions
+	eGetListsMetadataRequest_maxResults                           smithy.SchemaExtensions
+	eGetListsMetadataResult                                       smithy.SchemaExtensions
+	eGetListsMetadataResult_lists                                 smithy.SchemaExtensions
+	eGetListsMetadataResult_nextToken                             smithy.SchemaExtensions
+	eGetModelsRequest                                             smithy.SchemaExtensions
+	eGetModelsRequest_modelId                                     smithy.SchemaExtensions
+	eGetModelsRequest_modelType                                   smithy.SchemaExtensions
+	eGetModelsRequest_nextToken                                   smithy.SchemaExtensions
+	eGetModelsRequest_maxResults                                  smithy.SchemaExtensions
+	eGetModelsResult                                              smithy.SchemaExtensions
+	eGetModelsResult_nextToken                                    smithy.SchemaExtensions
+	eGetModelsResult_models                                       smithy.SchemaExtensions
+	eGetModelVersionRequest                                       smithy.SchemaExtensions
+	eGetModelVersionRequest_modelId                               smithy.SchemaExtensions
+	eGetModelVersionRequest_modelType                             smithy.SchemaExtensions
+	eGetModelVersionRequest_modelVersionNumber                    smithy.SchemaExtensions
+	eGetModelVersionResult                                        smithy.SchemaExtensions
+	eGetModelVersionResult_modelId                                smithy.SchemaExtensions
+	eGetModelVersionResult_modelType                              smithy.SchemaExtensions
+	eGetModelVersionResult_modelVersionNumber                     smithy.SchemaExtensions
+	eGetModelVersionResult_trainingDataSource                     smithy.SchemaExtensions
+	eGetModelVersionResult_trainingDataSchema                     smithy.SchemaExtensions
+	eGetModelVersionResult_externalEventsDetail                   smithy.SchemaExtensions
+	eGetModelVersionResult_ingestedEventsDetail                   smithy.SchemaExtensions
+	eGetModelVersionResult_status                                 smithy.SchemaExtensions
+	eGetModelVersionResult_arn                                    smithy.SchemaExtensions
+	eGetOutcomesRequest                                           smithy.SchemaExtensions
+	eGetOutcomesRequest_name                                      smithy.SchemaExtensions
+	eGetOutcomesRequest_nextToken                                 smithy.SchemaExtensions
+	eGetOutcomesRequest_maxResults                                smithy.SchemaExtensions
+	eGetOutcomesResult                                            smithy.SchemaExtensions
+	eGetOutcomesResult_outcomes                                   smithy.SchemaExtensions
+	eGetOutcomesResult_nextToken                                  smithy.SchemaExtensions
+	eGetRulesRequest                                              smithy.SchemaExtensions
+	eGetRulesRequest_ruleId                                       smithy.SchemaExtensions
+	eGetRulesRequest_detectorId                                   smithy.SchemaExtensions
+	eGetRulesRequest_ruleVersion                                  smithy.SchemaExtensions
+	eGetRulesRequest_nextToken                                    smithy.SchemaExtensions
+	eGetRulesRequest_maxResults                                   smithy.SchemaExtensions
+	eGetRulesResult                                               smithy.SchemaExtensions
+	eGetRulesResult_ruleDetails                                   smithy.SchemaExtensions
+	eGetRulesResult_nextToken                                     smithy.SchemaExtensions
+	eGetVariablesRequest                                          smithy.SchemaExtensions
+	eGetVariablesRequest_name                                     smithy.SchemaExtensions
+	eGetVariablesRequest_nextToken                                smithy.SchemaExtensions
+	eGetVariablesRequest_maxResults                               smithy.SchemaExtensions
+	eGetVariablesResult                                           smithy.SchemaExtensions
+	eGetVariablesResult_variables                                 smithy.SchemaExtensions
+	eGetVariablesResult_nextToken                                 smithy.SchemaExtensions
+	eListEventPredictionsRequest                                  smithy.SchemaExtensions
+	eListEventPredictionsRequest_eventId                          smithy.SchemaExtensions
+	eListEventPredictionsRequest_eventType                        smithy.SchemaExtensions
+	eListEventPredictionsRequest_detectorId                       smithy.SchemaExtensions
+	eListEventPredictionsRequest_detectorVersionId                smithy.SchemaExtensions
+	eListEventPredictionsRequest_predictionTimeRange              smithy.SchemaExtensions
+	eListEventPredictionsRequest_nextToken                        smithy.SchemaExtensions
+	eListEventPredictionsRequest_maxResults                       smithy.SchemaExtensions
+	eListEventPredictionsResult                                   smithy.SchemaExtensions
+	eListEventPredictionsResult_eventPredictionSummaries          smithy.SchemaExtensions
+	eListEventPredictionsResult_nextToken                         smithy.SchemaExtensions
+	eListTagsForResourceRequest                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceARN                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_nextToken                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_maxResults                        smithy.SchemaExtensions
+	eListTagsForResourceResult                                    smithy.SchemaExtensions
+	eListTagsForResourceResult_tags                               smithy.SchemaExtensions
+	eListTagsForResourceResult_nextToken                          smithy.SchemaExtensions
+	ePutDetectorRequest                                           smithy.SchemaExtensions
+	ePutDetectorRequest_detectorId                                smithy.SchemaExtensions
+	ePutDetectorRequest_description                               smithy.SchemaExtensions
+	ePutDetectorRequest_eventTypeName                             smithy.SchemaExtensions
+	ePutDetectorRequest_tags                                      smithy.SchemaExtensions
+	ePutDetectorResult                                            smithy.SchemaExtensions
+	ePutEntityTypeRequest                                         smithy.SchemaExtensions
+	ePutEntityTypeRequest_name                                    smithy.SchemaExtensions
+	ePutEntityTypeRequest_description                             smithy.SchemaExtensions
+	ePutEntityTypeRequest_tags                                    smithy.SchemaExtensions
+	ePutEntityTypeResult                                          smithy.SchemaExtensions
+	ePutEventTypeRequest                                          smithy.SchemaExtensions
+	ePutEventTypeRequest_name                                     smithy.SchemaExtensions
+	ePutEventTypeRequest_description                              smithy.SchemaExtensions
+	ePutEventTypeRequest_eventVariables                           smithy.SchemaExtensions
+	ePutEventTypeRequest_labels                                   smithy.SchemaExtensions
+	ePutEventTypeRequest_entityTypes                              smithy.SchemaExtensions
+	ePutEventTypeRequest_eventIngestion                           smithy.SchemaExtensions
+	ePutEventTypeRequest_tags                                     smithy.SchemaExtensions
+	ePutEventTypeRequest_eventOrchestration                       smithy.SchemaExtensions
+	ePutEventTypeResult                                           smithy.SchemaExtensions
+	ePutExternalModelRequest                                      smithy.SchemaExtensions
+	ePutExternalModelRequest_modelEndpoint                        smithy.SchemaExtensions
+	ePutExternalModelRequest_modelSource                          smithy.SchemaExtensions
+	ePutExternalModelRequest_invokeModelEndpointRoleArn           smithy.SchemaExtensions
+	ePutExternalModelRequest_inputConfiguration                   smithy.SchemaExtensions
+	ePutExternalModelRequest_outputConfiguration                  smithy.SchemaExtensions
+	ePutExternalModelRequest_modelEndpointStatus                  smithy.SchemaExtensions
+	ePutExternalModelRequest_tags                                 smithy.SchemaExtensions
+	ePutExternalModelResult                                       smithy.SchemaExtensions
+	ePutKMSEncryptionKeyRequest                                   smithy.SchemaExtensions
+	ePutKMSEncryptionKeyRequest_kmsEncryptionKeyArn               smithy.SchemaExtensions
+	ePutKMSEncryptionKeyResult                                    smithy.SchemaExtensions
+	ePutLabelRequest                                              smithy.SchemaExtensions
+	ePutLabelRequest_name                                         smithy.SchemaExtensions
+	ePutLabelRequest_description                                  smithy.SchemaExtensions
+	ePutLabelRequest_tags                                         smithy.SchemaExtensions
+	ePutLabelResult                                               smithy.SchemaExtensions
+	ePutOutcomeRequest                                            smithy.SchemaExtensions
+	ePutOutcomeRequest_name                                       smithy.SchemaExtensions
+	ePutOutcomeRequest_description                                smithy.SchemaExtensions
+	ePutOutcomeRequest_tags                                       smithy.SchemaExtensions
+	ePutOutcomeResult                                             smithy.SchemaExtensions
+	eSendEventRequest                                             smithy.SchemaExtensions
+	eSendEventRequest_eventId                                     smithy.SchemaExtensions
+	eSendEventRequest_eventTypeName                               smithy.SchemaExtensions
+	eSendEventRequest_eventTimestamp                              smithy.SchemaExtensions
+	eSendEventRequest_eventVariables                              smithy.SchemaExtensions
+	eSendEventRequest_assignedLabel                               smithy.SchemaExtensions
+	eSendEventRequest_labelTimestamp                              smithy.SchemaExtensions
+	eSendEventRequest_entities                                    smithy.SchemaExtensions
+	eSendEventResult                                              smithy.SchemaExtensions
+	eTagResourceRequest                                           smithy.SchemaExtensions
+	eTagResourceRequest_resourceARN                               smithy.SchemaExtensions
+	eTagResourceRequest_tags                                      smithy.SchemaExtensions
+	eTagResourceResult                                            smithy.SchemaExtensions
+	eUntagResourceRequest                                         smithy.SchemaExtensions
+	eUntagResourceRequest_resourceARN                             smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                 smithy.SchemaExtensions
+	eUntagResourceResult                                          smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest                                 smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_detectorId                      smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_detectorVersionId               smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_externalModelEndpoints          smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_rules                           smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_description                     smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_modelVersions                   smithy.SchemaExtensions
+	eUpdateDetectorVersionRequest_ruleExecutionMode               smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadataRequest                         smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadataRequest_detectorId              smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadataRequest_detectorVersionId       smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadataRequest_description             smithy.SchemaExtensions
+	eUpdateDetectorVersionMetadataResult                          smithy.SchemaExtensions
+	eUpdateDetectorVersionResult                                  smithy.SchemaExtensions
+	eUpdateDetectorVersionStatusRequest                           smithy.SchemaExtensions
+	eUpdateDetectorVersionStatusRequest_detectorId                smithy.SchemaExtensions
+	eUpdateDetectorVersionStatusRequest_detectorVersionId         smithy.SchemaExtensions
+	eUpdateDetectorVersionStatusRequest_status                    smithy.SchemaExtensions
+	eUpdateDetectorVersionStatusResult                            smithy.SchemaExtensions
+	eUpdateEventLabelRequest                                      smithy.SchemaExtensions
+	eUpdateEventLabelRequest_eventId                              smithy.SchemaExtensions
+	eUpdateEventLabelRequest_eventTypeName                        smithy.SchemaExtensions
+	eUpdateEventLabelRequest_assignedLabel                        smithy.SchemaExtensions
+	eUpdateEventLabelRequest_labelTimestamp                       smithy.SchemaExtensions
+	eUpdateEventLabelResult                                       smithy.SchemaExtensions
+	eUpdateListRequest                                            smithy.SchemaExtensions
+	eUpdateListRequest_name                                       smithy.SchemaExtensions
+	eUpdateListRequest_elements                                   smithy.SchemaExtensions
+	eUpdateListRequest_description                                smithy.SchemaExtensions
+	eUpdateListRequest_updateMode                                 smithy.SchemaExtensions
+	eUpdateListRequest_variableType                               smithy.SchemaExtensions
+	eUpdateListResult                                             smithy.SchemaExtensions
+	eUpdateModelRequest                                           smithy.SchemaExtensions
+	eUpdateModelRequest_modelId                                   smithy.SchemaExtensions
+	eUpdateModelRequest_modelType                                 smithy.SchemaExtensions
+	eUpdateModelRequest_description                               smithy.SchemaExtensions
+	eUpdateModelResult                                            smithy.SchemaExtensions
+	eUpdateModelVersionRequest                                    smithy.SchemaExtensions
+	eUpdateModelVersionRequest_modelId                            smithy.SchemaExtensions
+	eUpdateModelVersionRequest_modelType                          smithy.SchemaExtensions
+	eUpdateModelVersionRequest_majorVersionNumber                 smithy.SchemaExtensions
+	eUpdateModelVersionRequest_externalEventsDetail               smithy.SchemaExtensions
+	eUpdateModelVersionRequest_ingestedEventsDetail               smithy.SchemaExtensions
+	eUpdateModelVersionRequest_tags                               smithy.SchemaExtensions
+	eUpdateModelVersionResult                                     smithy.SchemaExtensions
+	eUpdateModelVersionResult_modelId                             smithy.SchemaExtensions
+	eUpdateModelVersionResult_modelType                           smithy.SchemaExtensions
+	eUpdateModelVersionResult_modelVersionNumber                  smithy.SchemaExtensions
+	eUpdateModelVersionResult_status                              smithy.SchemaExtensions
+	eUpdateModelVersionStatusRequest                              smithy.SchemaExtensions
+	eUpdateModelVersionStatusRequest_modelId                      smithy.SchemaExtensions
+	eUpdateModelVersionStatusRequest_modelType                    smithy.SchemaExtensions
+	eUpdateModelVersionStatusRequest_modelVersionNumber           smithy.SchemaExtensions
+	eUpdateModelVersionStatusRequest_status                       smithy.SchemaExtensions
+	eUpdateModelVersionStatusResult                               smithy.SchemaExtensions
+	eUpdateRuleMetadataRequest                                    smithy.SchemaExtensions
+	eUpdateRuleMetadataRequest_rule                               smithy.SchemaExtensions
+	eUpdateRuleMetadataRequest_description                        smithy.SchemaExtensions
+	eUpdateRuleMetadataResult                                     smithy.SchemaExtensions
+	eUpdateRuleVersionRequest                                     smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_rule                                smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_description                         smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_expression                          smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_language                            smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_outcomes                            smithy.SchemaExtensions
+	eUpdateRuleVersionRequest_tags                                smithy.SchemaExtensions
+	eUpdateRuleVersionResult                                      smithy.SchemaExtensions
+	eUpdateRuleVersionResult_rule                                 smithy.SchemaExtensions
+	eUpdateVariableRequest                                        smithy.SchemaExtensions
+	eUpdateVariableRequest_name                                   smithy.SchemaExtensions
+	eUpdateVariableRequest_defaultValue                           smithy.SchemaExtensions
+	eUpdateVariableRequest_description                            smithy.SchemaExtensions
+	eUpdateVariableRequest_variableType                           smithy.SchemaExtensions
+	eUpdateVariableResult                                         smithy.SchemaExtensions
+)
+
+var (
+	iBatchCreateVariable                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchCreateVariable"}
+	iBatchGetVariable                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchGetVariable"}
+	iCancelBatchImportJob                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchImportJob"}
+	iCancelBatchPredictionJob                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchPredictionJob"}
+	iCreateBatchImportJob                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchImportJob"}
+	iCreateBatchPredictionJob                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchPredictionJob"}
+	iCreateDetectorVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateDetectorVersion"}
+	iCreateList                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateList"}
+	iCreateModel                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModel"}
+	iCreateModelVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModelVersion"}
+	iCreateRule                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateRule"}
+	iCreateVariable                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateVariable"}
+	iDeleteBatchImportJob                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchImportJob"}
+	iDeleteBatchPredictionJob                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchPredictionJob"}
+	iDeleteDetector                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetector"}
+	iDeleteDetectorVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetectorVersion"}
+	iDeleteEntityType                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEntityType"}
+	iDeleteEvent                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEvent"}
+	iDeleteEventsByEventType                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventsByEventType"}
+	iDeleteEventType                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventType"}
+	iDeleteExternalModel                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteExternalModel"}
+	iDeleteLabel                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteLabel"}
+	iDeleteList                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteList"}
+	iDeleteModel                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModel"}
+	iDeleteModelVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModelVersion"}
+	iDeleteOutcome                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteOutcome"}
+	iDeleteRule                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteRule"}
+	iDeleteVariable                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteVariable"}
+	iDescribeDetector                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeDetector"}
+	iDescribeModelVersions                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeModelVersions"}
+	iGetBatchImportJobs                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchImportJobs"}
+	iGetBatchPredictionJobs                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchPredictionJobs"}
+	iGetDeleteEventsByEventTypeStatus             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDeleteEventsByEventTypeStatus"}
+	iGetDetectors                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectors"}
+	iGetDetectorVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectorVersion"}
+	iGetEntityTypes                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEntityTypes"}
+	iGetEvent                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEvent"}
+	iGetEventPrediction                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPrediction"}
+	iGetEventPredictionMetadata                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPredictionMetadata"}
+	iGetEventTypes                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventTypes"}
+	iGetExternalModels                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetExternalModels"}
+	iGetKMSEncryptionKey                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetKMSEncryptionKey"}
+	iGetLabels                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetLabels"}
+	iGetListElements                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListElements"}
+	iGetListsMetadata                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListsMetadata"}
+	iGetModels                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModels"}
+	iGetModelVersion                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModelVersion"}
+	iGetOutcomes                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetOutcomes"}
+	iGetRules                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetRules"}
+	iGetVariables                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetVariables"}
+	iListEventPredictions                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListEventPredictions"}
+	iListTagsForResource                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListTagsForResource"}
+	iPutDetector                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutDetector"}
+	iPutEntityType                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEntityType"}
+	iPutEventType                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEventType"}
+	iPutExternalModel                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutExternalModel"}
+	iPutKMSEncryptionKey                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutKMSEncryptionKey"}
+	iPutLabel                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutLabel"}
+	iPutOutcome                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutOutcome"}
+	iSendEvent                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "SendEvent"}
+	iTagResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TagResource"}
+	iUntagResource                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UntagResource"}
+	iUpdateDetectorVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersion"}
+	iUpdateDetectorVersionMetadata                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionMetadata"}
+	iUpdateDetectorVersionStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionStatus"}
+	iUpdateEventLabel                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateEventLabel"}
+	iUpdateList                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateList"}
+	iUpdateModel                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModel"}
+	iUpdateModelVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersion"}
+	iUpdateModelVersionStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersionStatus"}
+	iUpdateRuleMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleMetadata"}
+	iUpdateRuleVersion                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleVersion"}
+	iUpdateVariable                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateVariable"}
+	i_AWSHawksNestServiceFacade                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AWSHawksNestServiceFacade"}
+	iAccessDeniedException                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AccessDeniedException"}
+	iAggregatedLogOddsMetric                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AggregatedLogOddsMetric"}
+	iAggregatedVariablesImpactExplanation         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AggregatedVariablesImpactExplanation"}
+	iAggregatedVariablesImportanceMetrics         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AggregatedVariablesImportanceMetrics"}
+	iAllowDenyList                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AllowDenyList"}
+	i_AllowDenyLists                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AllowDenyLists"}
+	iAsyncJobStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "AsyncJobStatus"}
+	iATIMetricDataPoint                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ATIMetricDataPoint"}
+	i_ATIMetricDataPointsList                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ATIMetricDataPointsList"}
+	iATIModelPerformance                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ATIModelPerformance"}
+	iATITrainingMetricsValue                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ATITrainingMetricsValue"}
+	i_attributeKey                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "attributeKey"}
+	i_attributeValue                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "attributeValue"}
+	iBatchCreateVariableError                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchCreateVariableError"}
+	i_BatchCreateVariableErrorList                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchCreateVariableErrorList"}
+	iBatchGetVariableError                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchGetVariableError"}
+	i_BatchGetVariableErrorList                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchGetVariableErrorList"}
+	iBatchImport                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchImport"}
+	i_BatchImportList                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchImportList"}
+	i_batchImportsMaxPageSize                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "batchImportsMaxPageSize"}
+	iBatchPrediction                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchPrediction"}
+	i_BatchPredictionList                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchPredictionList"}
+	i_batchPredictionsMaxPageSize                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "batchPredictionsMaxPageSize"}
+	i_blob                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "blob"}
+	i_Boolean                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Boolean"}
+	iConflictException                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ConflictException"}
+	i_contentType                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "contentType"}
+	i_CsvIndexToVariableMap                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CsvIndexToVariableMap"}
+	iDataSource                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DataSource"}
+	iDataType                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DataType"}
+	iDataValidationMetrics                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DataValidationMetrics"}
+	i_DeleteAuditHistory                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteAuditHistory"}
+	i_description                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "description"}
+	iDetector                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Detector"}
+	i_DetectorList                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorList"}
+	i_DetectorsMaxResults                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorsMaxResults"}
+	i_DetectorVersionMaxResults                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorVersionMaxResults"}
+	iDetectorVersionStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorVersionStatus"}
+	iDetectorVersionSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorVersionSummary"}
+	i_DetectorVersionSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DetectorVersionSummaryList"}
+	i_Elements                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Elements"}
+	i_ElementsList                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ElementsList"}
+	iEntity                                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Entity"}
+	i_entityRestrictedString                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "entityRestrictedString"}
+	iEntityType                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EntityType"}
+	i_entityTypeList                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "entityTypeList"}
+	i_entityTypesMaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "entityTypesMaxResults"}
+	iEvaluatedExternalModel                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EvaluatedExternalModel"}
+	iEvaluatedModelVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EvaluatedModelVersion"}
+	iEvaluatedRule                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EvaluatedRule"}
+	i_EvaluatedRuleList                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EvaluatedRuleList"}
+	iEvent                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Event"}
+	i_EventAttributeMap                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventAttributeMap"}
+	iEventIngestion                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventIngestion"}
+	iEventOrchestration                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventOrchestration"}
+	i_EventPredictionsMaxResults                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventPredictionsMaxResults"}
+	iEventPredictionSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventPredictionSummary"}
+	iEventType                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventType"}
+	i_eventTypeList                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "eventTypeList"}
+	i_eventTypesMaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "eventTypesMaxResults"}
+	i_EventVariableMap                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventVariableMap"}
+	iEventVariableSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "EventVariableSummary"}
+	iExternalEventsDetail                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalEventsDetail"}
+	iExternalModel                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModel"}
+	i_ExternalModelEndpointDataBlobMap            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelEndpointDataBlobMap"}
+	i_ExternalModelList                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelList"}
+	iExternalModelOutputs                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelOutputs"}
+	i_ExternalModelPredictionMap                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelPredictionMap"}
+	i_ExternalModelsMaxResults                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelsMaxResults"}
+	iExternalModelSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ExternalModelSummary"}
+	iFieldValidationMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "FieldValidationMessage"}
+	i_fieldValidationMessageList                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "fieldValidationMessageList"}
+	iFileValidationMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "FileValidationMessage"}
+	i_fileValidationMessageList                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "fileValidationMessageList"}
+	iFilterCondition                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "FilterCondition"}
+	i_filterString                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "filterString"}
+	i_float                                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "float"}
+	i_floatVersionString                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "floatVersionString"}
+	i_fraudDetectorArn                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "fraudDetectorArn"}
+	i_iamRoleArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "iamRoleArn"}
+	i_identifier                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "identifier"}
+	iIngestedEventsDetail                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "IngestedEventsDetail"}
+	iIngestedEventStatistics                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "IngestedEventStatistics"}
+	iIngestedEventsTimeWindow                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "IngestedEventsTimeWindow"}
+	i_Integer                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Integer"}
+	i_Integer2                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Integer2"}
+	iInternalServerException                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "InternalServerException"}
+	i_JsonKeyToVariableMap                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "JsonKeyToVariableMap"}
+	i_KmsEncryptionKeyArn                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "KmsEncryptionKeyArn"}
+	iKMSKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "KMSKey"}
+	iLabel                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Label"}
+	i_labelList                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "labelList"}
+	i_labelMapper                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "labelMapper"}
+	iLabelSchema                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "LabelSchema"}
+	i_labelsMaxResults                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "labelsMaxResults"}
+	iLanguage                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Language"}
+	i_ListOfAggregatedLogOddsMetrics              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfAggregatedLogOddsMetrics"}
+	i_ListOfAggregatedVariablesImpactExplanations = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfAggregatedVariablesImpactExplanations"}
+	i_listOfEntities                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "listOfEntities"}
+	i_ListOfEvaluatedExternalModels               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfEvaluatedExternalModels"}
+	i_ListOfEvaluatedModelVersions                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfEvaluatedModelVersions"}
+	i_ListOfEventPredictionSummaries              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfEventPredictionSummaries"}
+	i_ListOfEventVariableSummaries                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfEventVariableSummaries"}
+	i_ListOfExternalModelOutputs                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfExternalModelOutputs"}
+	i_ListOfLogOddsMetrics                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfLogOddsMetrics"}
+	i_ListOfModelScores                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfModelScores"}
+	i_ListOfModelVersionEvaluations               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfModelVersionEvaluations"}
+	i_ListOfModelVersions                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfModelVersions"}
+	i_ListOfRuleResults                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfRuleResults"}
+	i_ListOfStrings                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListOfStrings"}
+	i_listOfVariableImpactExplanations            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "listOfVariableImpactExplanations"}
+	i_ListsElementsMaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListsElementsMaxResults"}
+	i_ListsMetadataMaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListsMetadataMaxResults"}
+	iListUpdateMode                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListUpdateMode"}
+	iLogOddsMetric                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "LogOddsMetric"}
+	i_Long                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Long"}
+	i_MapOfStrings                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "MapOfStrings"}
+	iMetricDataPoint                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "MetricDataPoint"}
+	i_metricDataPointsList                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "metricDataPointsList"}
+	iModel                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Model"}
+	iModelEndpointDataBlob                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelEndpointDataBlob"}
+	iModelEndpointStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelEndpointStatus"}
+	i_modelIdentifier                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "modelIdentifier"}
+	iModelInputConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelInputConfiguration"}
+	iModelInputDataFormat                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelInputDataFormat"}
+	i_modelInputTemplate                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "modelInputTemplate"}
+	i_modelList                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "modelList"}
+	iModelOutputConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelOutputConfiguration"}
+	iModelOutputDataFormat                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelOutputDataFormat"}
+	i_ModelPredictionMap                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelPredictionMap"}
+	iModelScores                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelScores"}
+	i_modelsMaxPageSize                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "modelsMaxPageSize"}
+	iModelSource                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelSource"}
+	iModelTypeEnum                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelTypeEnum"}
+	iModelVersion                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelVersion"}
+	iModelVersionDetail                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelVersionDetail"}
+	i_modelVersionDetailList                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "modelVersionDetailList"}
+	iModelVersionEvaluation                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelVersionEvaluation"}
+	iModelVersionStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ModelVersionStatus"}
+	i_NameList                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "NameList"}
+	i_nextToken                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "nextToken"}
+	i_noDashIdentifier                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "noDashIdentifier"}
+	i_NonEmptyListOfStrings                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "NonEmptyListOfStrings"}
+	iOFIMetricDataPoint                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OFIMetricDataPoint"}
+	i_OFIMetricDataPointsList                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OFIMetricDataPointsList"}
+	iOFIModelPerformance                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OFIModelPerformance"}
+	iOFITrainingMetricsValue                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OFITrainingMetricsValue"}
+	iOutcome                                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Outcome"}
+	i_OutcomeList                                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OutcomeList"}
+	i_OutcomesMaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "OutcomesMaxResults"}
+	iPredictionExplanations                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PredictionExplanations"}
+	iPredictionTimeRange                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PredictionTimeRange"}
+	iResourceNotFoundException                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ResourceNotFoundException"}
+	iResourceUnavailableException                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ResourceUnavailableException"}
+	iRule                                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Rule"}
+	iRuleDetail                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RuleDetail"}
+	i_RuleDetailList                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RuleDetailList"}
+	iRuleExecutionMode                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RuleExecutionMode"}
+	i_ruleExpression                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ruleExpression"}
+	i_RuleList                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RuleList"}
+	iRuleResult                                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RuleResult"}
+	i_RulesMaxResults                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "RulesMaxResults"}
+	i_s3BucketLocation                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "s3BucketLocation"}
+	i_sageMakerEndpointIdentifier                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "sageMakerEndpointIdentifier"}
+	i_sensitiveString                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "sensitiveString"}
+	i_string                                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "string"}
+	iTag                                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Tag"}
+	i_tagKey                                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "tagKey"}
+	i_tagKeyList                                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "tagKeyList"}
+	i_tagList                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "tagList"}
+	i_TagsMaxResults                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TagsMaxResults"}
+	i_tagValue                                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "tagValue"}
+	iTFIMetricDataPoint                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TFIMetricDataPoint"}
+	i_TFIMetricDataPointsList                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TFIMetricDataPointsList"}
+	iTFIModelPerformance                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TFIModelPerformance"}
+	iTFITrainingMetricsValue                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TFITrainingMetricsValue"}
+	iThrottlingException                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ThrottlingException"}
+	i_time                                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "time"}
+	iTrainingDataSchema                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingDataSchema"}
+	iTrainingDataSourceEnum                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingDataSourceEnum"}
+	iTrainingMetrics                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingMetrics"}
+	iTrainingMetricsV2                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingMetricsV2"}
+	iTrainingResult                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingResult"}
+	iTrainingResultV2                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TrainingResultV2"}
+	iUncertaintyRange                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UncertaintyRange"}
+	iUnlabeledEventsTreatment                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UnlabeledEventsTreatment"}
+	i_UseEventVariables                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UseEventVariables"}
+	i_utcTimestampISO8601                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "utcTimestampISO8601"}
+	iValidationException                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ValidationException"}
+	iVariable                                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "Variable"}
+	iVariableEntry                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariableEntry"}
+	i_VariableEntryList                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariableEntryList"}
+	iVariableImpactExplanation                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariableImpactExplanation"}
+	iVariableImportanceMetrics                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariableImportanceMetrics"}
+	i_VariableList                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariableList"}
+	i_variableName                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "variableName"}
+	i_VariablesMaxResults                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "VariablesMaxResults"}
+	i_variableType                                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "variableType"}
+	i_variableValue                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "variableValue"}
+	i_wholeNumberVersionString                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "wholeNumberVersionString"}
+	iBatchCreateVariableRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchCreateVariableRequest"}
+	iBatchCreateVariableResult                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchCreateVariableResult"}
+	iBatchGetVariableRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchGetVariableRequest"}
+	iBatchGetVariableResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "BatchGetVariableResult"}
+	iCancelBatchImportJobRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchImportJobRequest"}
+	iCancelBatchImportJobResult                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchImportJobResult"}
+	iCancelBatchPredictionJobRequest              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchPredictionJobRequest"}
+	iCancelBatchPredictionJobResult               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CancelBatchPredictionJobResult"}
+	iCreateBatchImportJobRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchImportJobRequest"}
+	iCreateBatchImportJobResult                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchImportJobResult"}
+	iCreateBatchPredictionJobRequest              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchPredictionJobRequest"}
+	iCreateBatchPredictionJobResult               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateBatchPredictionJobResult"}
+	iCreateDetectorVersionRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateDetectorVersionRequest"}
+	iCreateDetectorVersionResult                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateDetectorVersionResult"}
+	iCreateListRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateListRequest"}
+	iCreateListResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateListResult"}
+	iCreateModelRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModelRequest"}
+	iCreateModelResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModelResult"}
+	iCreateModelVersionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModelVersionRequest"}
+	iCreateModelVersionResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateModelVersionResult"}
+	iCreateRuleRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateRuleRequest"}
+	iCreateRuleResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateRuleResult"}
+	iCreateVariableRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateVariableRequest"}
+	iCreateVariableResult                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "CreateVariableResult"}
+	iDeleteBatchImportJobRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchImportJobRequest"}
+	iDeleteBatchImportJobResult                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchImportJobResult"}
+	iDeleteBatchPredictionJobRequest              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchPredictionJobRequest"}
+	iDeleteBatchPredictionJobResult               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteBatchPredictionJobResult"}
+	iDeleteDetectorRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetectorRequest"}
+	iDeleteDetectorResult                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetectorResult"}
+	iDeleteDetectorVersionRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetectorVersionRequest"}
+	iDeleteDetectorVersionResult                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteDetectorVersionResult"}
+	iDeleteEntityTypeRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEntityTypeRequest"}
+	iDeleteEntityTypeResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEntityTypeResult"}
+	iDeleteEventRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventRequest"}
+	iDeleteEventResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventResult"}
+	iDeleteEventsByEventTypeRequest               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventsByEventTypeRequest"}
+	iDeleteEventsByEventTypeResult                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventsByEventTypeResult"}
+	iDeleteEventTypeRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventTypeRequest"}
+	iDeleteEventTypeResult                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteEventTypeResult"}
+	iDeleteExternalModelRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteExternalModelRequest"}
+	iDeleteExternalModelResult                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteExternalModelResult"}
+	iDeleteLabelRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteLabelRequest"}
+	iDeleteLabelResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteLabelResult"}
+	iDeleteListRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteListRequest"}
+	iDeleteListResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteListResult"}
+	iDeleteModelRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModelRequest"}
+	iDeleteModelResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModelResult"}
+	iDeleteModelVersionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModelVersionRequest"}
+	iDeleteModelVersionResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteModelVersionResult"}
+	iDeleteOutcomeRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteOutcomeRequest"}
+	iDeleteOutcomeResult                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteOutcomeResult"}
+	iDeleteRuleRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteRuleRequest"}
+	iDeleteRuleResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteRuleResult"}
+	iDeleteVariableRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteVariableRequest"}
+	iDeleteVariableResult                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DeleteVariableResult"}
+	iDescribeDetectorRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeDetectorRequest"}
+	iDescribeDetectorResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeDetectorResult"}
+	iDescribeModelVersionsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeModelVersionsRequest"}
+	iDescribeModelVersionsResult                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "DescribeModelVersionsResult"}
+	iGetBatchImportJobsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchImportJobsRequest"}
+	iGetBatchImportJobsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchImportJobsResult"}
+	iGetBatchPredictionJobsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchPredictionJobsRequest"}
+	iGetBatchPredictionJobsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetBatchPredictionJobsResult"}
+	iGetDeleteEventsByEventTypeStatusRequest      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDeleteEventsByEventTypeStatusRequest"}
+	iGetDeleteEventsByEventTypeStatusResult       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDeleteEventsByEventTypeStatusResult"}
+	iGetDetectorsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectorsRequest"}
+	iGetDetectorsResult                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectorsResult"}
+	iGetDetectorVersionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectorVersionRequest"}
+	iGetDetectorVersionResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetDetectorVersionResult"}
+	iGetEntityTypesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEntityTypesRequest"}
+	iGetEntityTypesResult                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEntityTypesResult"}
+	iGetEventRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventRequest"}
+	iGetEventResult                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventResult"}
+	iGetEventPredictionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPredictionRequest"}
+	iGetEventPredictionMetadataRequest            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPredictionMetadataRequest"}
+	iGetEventPredictionMetadataResult             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPredictionMetadataResult"}
+	iGetEventPredictionResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventPredictionResult"}
+	iGetEventTypesRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventTypesRequest"}
+	iGetEventTypesResult                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetEventTypesResult"}
+	iGetExternalModelsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetExternalModelsRequest"}
+	iGetExternalModelsResult                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetExternalModelsResult"}
+	iGetKMSEncryptionKeyResult                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetKMSEncryptionKeyResult"}
+	iGetLabelsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetLabelsRequest"}
+	iGetLabelsResult                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetLabelsResult"}
+	iGetListElementsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListElementsRequest"}
+	iGetListElementsResult                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListElementsResult"}
+	iGetListsMetadataRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListsMetadataRequest"}
+	iGetListsMetadataResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetListsMetadataResult"}
+	iGetModelsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModelsRequest"}
+	iGetModelsResult                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModelsResult"}
+	iGetModelVersionRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModelVersionRequest"}
+	iGetModelVersionResult                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetModelVersionResult"}
+	iGetOutcomesRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetOutcomesRequest"}
+	iGetOutcomesResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetOutcomesResult"}
+	iGetRulesRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetRulesRequest"}
+	iGetRulesResult                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetRulesResult"}
+	iGetVariablesRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetVariablesRequest"}
+	iGetVariablesResult                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "GetVariablesResult"}
+	iListEventPredictionsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListEventPredictionsRequest"}
+	iListEventPredictionsResult                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListEventPredictionsResult"}
+	iListTagsForResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResult                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "ListTagsForResourceResult"}
+	iPutDetectorRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutDetectorRequest"}
+	iPutDetectorResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutDetectorResult"}
+	iPutEntityTypeRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEntityTypeRequest"}
+	iPutEntityTypeResult                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEntityTypeResult"}
+	iPutEventTypeRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEventTypeRequest"}
+	iPutEventTypeResult                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutEventTypeResult"}
+	iPutExternalModelRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutExternalModelRequest"}
+	iPutExternalModelResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutExternalModelResult"}
+	iPutKMSEncryptionKeyRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutKMSEncryptionKeyRequest"}
+	iPutKMSEncryptionKeyResult                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutKMSEncryptionKeyResult"}
+	iPutLabelRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutLabelRequest"}
+	iPutLabelResult                               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutLabelResult"}
+	iPutOutcomeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutOutcomeRequest"}
+	iPutOutcomeResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "PutOutcomeResult"}
+	iSendEventRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "SendEventRequest"}
+	iSendEventResult                              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "SendEventResult"}
+	iTagResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TagResourceRequest"}
+	iTagResourceResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "TagResourceResult"}
+	iUntagResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UntagResourceRequest"}
+	iUntagResourceResult                          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UntagResourceResult"}
+	iUpdateDetectorVersionRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionRequest"}
+	iUpdateDetectorVersionMetadataRequest         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionMetadataRequest"}
+	iUpdateDetectorVersionMetadataResult          = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionMetadataResult"}
+	iUpdateDetectorVersionResult                  = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionResult"}
+	iUpdateDetectorVersionStatusRequest           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionStatusRequest"}
+	iUpdateDetectorVersionStatusResult            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateDetectorVersionStatusResult"}
+	iUpdateEventLabelRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateEventLabelRequest"}
+	iUpdateEventLabelResult                       = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateEventLabelResult"}
+	iUpdateListRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateListRequest"}
+	iUpdateListResult                             = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateListResult"}
+	iUpdateModelRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelRequest"}
+	iUpdateModelResult                            = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelResult"}
+	iUpdateModelVersionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersionRequest"}
+	iUpdateModelVersionResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersionResult"}
+	iUpdateModelVersionStatusRequest              = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersionStatusRequest"}
+	iUpdateModelVersionStatusResult               = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateModelVersionStatusResult"}
+	iUpdateRuleMetadataRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleMetadataRequest"}
+	iUpdateRuleMetadataResult                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleMetadataResult"}
+	iUpdateRuleVersionRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleVersionRequest"}
+	iUpdateRuleVersionResult                      = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateRuleVersionResult"}
+	iUpdateVariableRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateVariableRequest"}
+	iUpdateVariableResult                         = smithy.ShapeName{Namespace: "com.amazonaws.frauddetector", Name: "UpdateVariableResult"}
+	pUnit                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://hawksnest.amazonaws.com/doc/2019-11-15"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAggregatedLogOddsMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregatedLogOddsMetric_variableNames, &sAggregatedLogOddsMetric_aggregatedVariablesImportance}}
+var mAggregatedVariablesImpactExplanation = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregatedVariablesImpactExplanation_eventVariableNames, &sAggregatedVariablesImpactExplanation_relativeImpact, &sAggregatedVariablesImpactExplanation_logOddsImpact}}
+var mAggregatedVariablesImportanceMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregatedVariablesImportanceMetrics_logOddsMetrics}}
+var mAllowDenyList = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowDenyList_name, &sAllowDenyList_description, &sAllowDenyList_variableType, &sAllowDenyList_createdTime, &sAllowDenyList_updatedTime, &sAllowDenyList_arn}}
+var m_AllowDenyLists = smithy.SchemaMembers{List: []*smithy.Schema{&s_AllowDenyLists_member}}
+var mAsyncJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAsyncJobStatus_IN_PROGRESS_INITIALIZING, &sAsyncJobStatus_IN_PROGRESS, &sAsyncJobStatus_CANCEL_IN_PROGRESS, &sAsyncJobStatus_CANCELED, &sAsyncJobStatus_COMPLETE, &sAsyncJobStatus_FAILED}}
+var mATIMetricDataPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sATIMetricDataPoint_cr, &sATIMetricDataPoint_adr, &sATIMetricDataPoint_threshold, &sATIMetricDataPoint_atodr}}
+var m_ATIMetricDataPointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ATIMetricDataPointsList_member}}
+var mATIModelPerformance = smithy.SchemaMembers{List: []*smithy.Schema{&sATIModelPerformance_asi}}
+var mATITrainingMetricsValue = smithy.SchemaMembers{List: []*smithy.Schema{&sATITrainingMetricsValue_metricDataPoints, &sATITrainingMetricsValue_modelPerformance}}
+var mBatchCreateVariableError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateVariableError_name, &sBatchCreateVariableError_code, &sBatchCreateVariableError_message}}
+var m_BatchCreateVariableErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateVariableErrorList_member}}
+var mBatchGetVariableError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetVariableError_name, &sBatchGetVariableError_code, &sBatchGetVariableError_message}}
+var m_BatchGetVariableErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetVariableErrorList_member}}
+var mBatchImport = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchImport_jobId, &sBatchImport_status, &sBatchImport_failureReason, &sBatchImport_startTime, &sBatchImport_completionTime, &sBatchImport_inputPath, &sBatchImport_outputPath, &sBatchImport_eventTypeName, &sBatchImport_iamRoleArn, &sBatchImport_arn, &sBatchImport_processedRecordsCount, &sBatchImport_failedRecordsCount, &sBatchImport_totalRecordsCount}, Hash: &hBatchImport}
+var m_BatchImportList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchImportList_member}}
+var mBatchPrediction = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPrediction_jobId, &sBatchPrediction_status, &sBatchPrediction_failureReason, &sBatchPrediction_startTime, &sBatchPrediction_completionTime, &sBatchPrediction_lastHeartbeatTime, &sBatchPrediction_inputPath, &sBatchPrediction_outputPath, &sBatchPrediction_eventTypeName, &sBatchPrediction_detectorName, &sBatchPrediction_detectorVersion, &sBatchPrediction_iamRoleArn, &sBatchPrediction_arn, &sBatchPrediction_processedRecordsCount, &sBatchPrediction_totalRecordsCount}, Hash: &hBatchPrediction}
+var m_BatchPredictionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchPredictionList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_CsvIndexToVariableMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_CsvIndexToVariableMap_key, &s_CsvIndexToVariableMap_value}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_EVENT, &sDataSource_MODEL_SCORE, &sDataSource_EXTERNAL_MODEL_SCORE}}
+var mDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataType_STRING, &sDataType_INTEGER, &sDataType_FLOAT, &sDataType_BOOLEAN, &sDataType_DATETIME}}
+var mDataValidationMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sDataValidationMetrics_fileLevelMessages, &sDataValidationMetrics_fieldLevelMessages}}
+var mDetector = smithy.SchemaMembers{List: []*smithy.Schema{&sDetector_detectorId, &sDetector_description, &sDetector_eventTypeName, &sDetector_lastUpdatedTime, &sDetector_createdTime, &sDetector_arn}}
+var m_DetectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetectorList_member}}
+var mDetectorVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectorVersionStatus_DRAFT, &sDetectorVersionStatus_ACTIVE, &sDetectorVersionStatus_INACTIVE}}
+var mDetectorVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectorVersionSummary_detectorVersionId, &sDetectorVersionSummary_status, &sDetectorVersionSummary_description, &sDetectorVersionSummary_lastUpdatedTime}}
+var m_DetectorVersionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetectorVersionSummaryList_member}}
+var m_ElementsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ElementsList_member}}
+var mEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sEntity_entityType, &sEntity_entityId}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_name, &sEntityType_description, &sEntityType_lastUpdatedTime, &sEntityType_createdTime, &sEntityType_arn}}
+var m_entityTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityTypeList_member}}
+var mEvaluatedExternalModel = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluatedExternalModel_modelEndpoint, &sEvaluatedExternalModel_useEventVariables, &sEvaluatedExternalModel_inputVariables, &sEvaluatedExternalModel_outputVariables}}
+var mEvaluatedModelVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluatedModelVersion_modelId, &sEvaluatedModelVersion_modelVersion, &sEvaluatedModelVersion_modelType, &sEvaluatedModelVersion_evaluations}}
+var mEvaluatedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluatedRule_ruleId, &sEvaluatedRule_ruleVersion, &sEvaluatedRule_expression, &sEvaluatedRule_expressionWithValues, &sEvaluatedRule_outcomes, &sEvaluatedRule_evaluated, &sEvaluatedRule_matched}}
+var m_EvaluatedRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvaluatedRuleList_member}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_eventId, &sEvent_eventTypeName, &sEvent_eventTimestamp, &sEvent_eventVariables, &sEvent_currentLabel, &sEvent_labelTimestamp, &sEvent_entities}}
+var m_EventAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventAttributeMap_key, &s_EventAttributeMap_value}}
+var mEventIngestion = smithy.SchemaMembers{List: []*smithy.Schema{&sEventIngestion_ENABLED, &sEventIngestion_DISABLED}}
+var mEventOrchestration = smithy.SchemaMembers{List: []*smithy.Schema{&sEventOrchestration_eventBridgeEnabled}}
+var mEventPredictionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventPredictionSummary_eventId, &sEventPredictionSummary_eventTypeName, &sEventPredictionSummary_eventTimestamp, &sEventPredictionSummary_predictionTimestamp, &sEventPredictionSummary_detectorId, &sEventPredictionSummary_detectorVersionId}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_name, &sEventType_description, &sEventType_eventVariables, &sEventType_labels, &sEventType_entityTypes, &sEventType_eventIngestion, &sEventType_ingestedEventStatistics, &sEventType_lastUpdatedTime, &sEventType_createdTime, &sEventType_arn, &sEventType_eventOrchestration}, Hash: &hEventType}
+var m_eventTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventTypeList_member}}
+var m_EventVariableMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventVariableMap_key, &s_EventVariableMap_value}}
+var mEventVariableSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventVariableSummary_name, &sEventVariableSummary_value, &sEventVariableSummary_source}}
+var mExternalEventsDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalEventsDetail_dataLocation, &sExternalEventsDetail_dataAccessRoleArn}}
+var mExternalModel = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalModel_modelEndpoint, &sExternalModel_modelSource, &sExternalModel_invokeModelEndpointRoleArn, &sExternalModel_inputConfiguration, &sExternalModel_outputConfiguration, &sExternalModel_modelEndpointStatus, &sExternalModel_lastUpdatedTime, &sExternalModel_createdTime, &sExternalModel_arn}, Hash: &hExternalModel}
+var m_ExternalModelEndpointDataBlobMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalModelEndpointDataBlobMap_key, &s_ExternalModelEndpointDataBlobMap_value}}
+var m_ExternalModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalModelList_member}}
+var mExternalModelOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalModelOutputs_externalModel, &sExternalModelOutputs_outputs}}
+var m_ExternalModelPredictionMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalModelPredictionMap_key, &s_ExternalModelPredictionMap_value}}
+var mExternalModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalModelSummary_modelEndpoint, &sExternalModelSummary_modelSource}}
+var mFieldValidationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldValidationMessage_fieldName, &sFieldValidationMessage_identifier, &sFieldValidationMessage_title, &sFieldValidationMessage_content, &sFieldValidationMessage_type}}
+var m_fieldValidationMessageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_fieldValidationMessageList_member}}
+var mFileValidationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sFileValidationMessage_title, &sFileValidationMessage_content, &sFileValidationMessage_type}}
+var m_fileValidationMessageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_fileValidationMessageList_member}}
+var mFilterCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterCondition_value}}
+var mIngestedEventsDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestedEventsDetail_ingestedEventsTimeWindow}}
+var mIngestedEventStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestedEventStatistics_numberOfEvents, &sIngestedEventStatistics_eventDataSizeInBytes, &sIngestedEventStatistics_leastRecentEvent, &sIngestedEventStatistics_mostRecentEvent, &sIngestedEventStatistics_lastUpdatedTime}}
+var mIngestedEventsTimeWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestedEventsTimeWindow_startTime, &sIngestedEventsTimeWindow_endTime}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_JsonKeyToVariableMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_JsonKeyToVariableMap_key, &s_JsonKeyToVariableMap_value}}
+var mKMSKey = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSKey_kmsEncryptionKeyArn}}
+var mLabel = smithy.SchemaMembers{List: []*smithy.Schema{&sLabel_name, &sLabel_description, &sLabel_lastUpdatedTime, &sLabel_createdTime, &sLabel_arn}}
+var m_labelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_labelList_member}}
+var m_labelMapper = smithy.SchemaMembers{List: []*smithy.Schema{&s_labelMapper_key, &s_labelMapper_value}}
+var mLabelSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelSchema_labelMapper, &sLabelSchema_unlabeledEventsTreatment}}
+var mLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguage_DETECTORPL}}
+var m_ListOfAggregatedLogOddsMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfAggregatedLogOddsMetrics_member}}
+var m_ListOfAggregatedVariablesImpactExplanations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfAggregatedVariablesImpactExplanations_member}}
+var m_listOfEntities = smithy.SchemaMembers{List: []*smithy.Schema{&s_listOfEntities_member}}
+var m_ListOfEvaluatedExternalModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfEvaluatedExternalModels_member}}
+var m_ListOfEvaluatedModelVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfEvaluatedModelVersions_member}}
+var m_ListOfEventPredictionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfEventPredictionSummaries_member}}
+var m_ListOfEventVariableSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfEventVariableSummaries_member}}
+var m_ListOfExternalModelOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfExternalModelOutputs_member}}
+var m_ListOfLogOddsMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfLogOddsMetrics_member}}
+var m_ListOfModelScores = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfModelScores_member}}
+var m_ListOfModelVersionEvaluations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfModelVersionEvaluations_member}}
+var m_ListOfModelVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfModelVersions_member}}
+var m_ListOfRuleResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfRuleResults_member}}
+var m_ListOfStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfStrings_member}}
+var m_listOfVariableImpactExplanations = smithy.SchemaMembers{List: []*smithy.Schema{&s_listOfVariableImpactExplanations_member}}
+var mListUpdateMode = smithy.SchemaMembers{List: []*smithy.Schema{&sListUpdateMode_REPLACE, &sListUpdateMode_APPEND, &sListUpdateMode_REMOVE}}
+var mLogOddsMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sLogOddsMetric_variableName, &sLogOddsMetric_variableType, &sLogOddsMetric_variableImportance}}
+var m_MapOfStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_MapOfStrings_key, &s_MapOfStrings_value}}
+var mMetricDataPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataPoint_fpr, &sMetricDataPoint_precision, &sMetricDataPoint_tpr, &sMetricDataPoint_threshold}}
+var m_metricDataPointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_metricDataPointsList_member}}
+var mModel = smithy.SchemaMembers{List: []*smithy.Schema{&sModel_modelId, &sModel_modelType, &sModel_description, &sModel_eventTypeName, &sModel_createdTime, &sModel_lastUpdatedTime, &sModel_arn}}
+var mModelEndpointDataBlob = smithy.SchemaMembers{List: []*smithy.Schema{&sModelEndpointDataBlob_byteBuffer, &sModelEndpointDataBlob_contentType}}
+var mModelEndpointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sModelEndpointStatus_ASSOCIATED, &sModelEndpointStatus_DISSOCIATED}}
+var mModelInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sModelInputConfiguration_eventTypeName, &sModelInputConfiguration_format, &sModelInputConfiguration_useEventVariables, &sModelInputConfiguration_jsonInputTemplate, &sModelInputConfiguration_csvInputTemplate}}
+var mModelInputDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sModelInputDataFormat_CSV, &sModelInputDataFormat_JSON}}
+var m_modelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_modelList_member}}
+var mModelOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sModelOutputConfiguration_format, &sModelOutputConfiguration_jsonKeyToVariableMap, &sModelOutputConfiguration_csvIndexToVariableMap}}
+var mModelOutputDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sModelOutputDataFormat_CSV, &sModelOutputDataFormat_JSONLINES}}
+var m_ModelPredictionMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelPredictionMap_key, &s_ModelPredictionMap_value}}
+var mModelScores = smithy.SchemaMembers{List: []*smithy.Schema{&sModelScores_modelVersion, &sModelScores_scores}}
+var mModelSource = smithy.SchemaMembers{List: []*smithy.Schema{&sModelSource_SAGEMAKER}}
+var mModelTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sModelTypeEnum_ONLINE_FRAUD_INSIGHTS, &sModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS, &sModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS}}
+var mModelVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersion_modelId, &sModelVersion_modelType, &sModelVersion_modelVersionNumber, &sModelVersion_arn}}
+var mModelVersionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionDetail_modelId, &sModelVersionDetail_modelType, &sModelVersionDetail_modelVersionNumber, &sModelVersionDetail_status, &sModelVersionDetail_trainingDataSource, &sModelVersionDetail_trainingDataSchema, &sModelVersionDetail_externalEventsDetail, &sModelVersionDetail_ingestedEventsDetail, &sModelVersionDetail_trainingResult, &sModelVersionDetail_lastUpdatedTime, &sModelVersionDetail_createdTime, &sModelVersionDetail_arn, &sModelVersionDetail_trainingResultV2}, Hash: &hModelVersionDetail}
+var m_modelVersionDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_modelVersionDetailList_member}}
+var mModelVersionEvaluation = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionEvaluation_outputVariableName, &sModelVersionEvaluation_evaluationScore, &sModelVersionEvaluation_predictionExplanations}}
+var mModelVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionStatus_ACTIVE, &sModelVersionStatus_INACTIVE, &sModelVersionStatus_TRAINING_CANCELLED}}
+var m_NameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NameList_member}}
+var m_NonEmptyListOfStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_NonEmptyListOfStrings_member}}
+var mOFIMetricDataPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sOFIMetricDataPoint_fpr, &sOFIMetricDataPoint_precision, &sOFIMetricDataPoint_tpr, &sOFIMetricDataPoint_threshold}}
+var m_OFIMetricDataPointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OFIMetricDataPointsList_member}}
+var mOFIModelPerformance = smithy.SchemaMembers{List: []*smithy.Schema{&sOFIModelPerformance_auc, &sOFIModelPerformance_uncertaintyRange}}
+var mOFITrainingMetricsValue = smithy.SchemaMembers{List: []*smithy.Schema{&sOFITrainingMetricsValue_metricDataPoints, &sOFITrainingMetricsValue_modelPerformance}}
+var mOutcome = smithy.SchemaMembers{List: []*smithy.Schema{&sOutcome_name, &sOutcome_description, &sOutcome_lastUpdatedTime, &sOutcome_createdTime, &sOutcome_arn}}
+var m_OutcomeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutcomeList_member}}
+var mPredictionExplanations = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictionExplanations_variableImpactExplanations, &sPredictionExplanations_aggregatedVariablesImpactExplanations}}
+var mPredictionTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictionTimeRange_startTime, &sPredictionTimeRange_endTime}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceUnavailableException_message}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_detectorId, &sRule_ruleId, &sRule_ruleVersion}}
+var mRuleDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleDetail_ruleId, &sRuleDetail_description, &sRuleDetail_detectorId, &sRuleDetail_ruleVersion, &sRuleDetail_expression, &sRuleDetail_language, &sRuleDetail_outcomes, &sRuleDetail_lastUpdatedTime, &sRuleDetail_createdTime, &sRuleDetail_arn}, Hash: &hRuleDetail}
+var m_RuleDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleDetailList_member}}
+var mRuleExecutionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleExecutionMode_ALL_MATCHED, &sRuleExecutionMode_FIRST_MATCHED}}
+var m_RuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleList_member}}
+var mRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleResult_ruleId, &sRuleResult_outcomes}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_tagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagKeyList_member}}
+var m_tagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagList_member}}
+var mTFIMetricDataPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sTFIMetricDataPoint_fpr, &sTFIMetricDataPoint_precision, &sTFIMetricDataPoint_tpr, &sTFIMetricDataPoint_threshold}}
+var m_TFIMetricDataPointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TFIMetricDataPointsList_member}}
+var mTFIModelPerformance = smithy.SchemaMembers{List: []*smithy.Schema{&sTFIModelPerformance_auc, &sTFIModelPerformance_uncertaintyRange}}
+var mTFITrainingMetricsValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTFITrainingMetricsValue_metricDataPoints, &sTFITrainingMetricsValue_modelPerformance}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTrainingDataSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingDataSchema_modelVariables, &sTrainingDataSchema_labelSchema}}
+var mTrainingDataSourceEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingDataSourceEnum_EXTERNAL_EVENTS, &sTrainingDataSourceEnum_INGESTED_EVENTS}}
+var mTrainingMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingMetrics_auc, &sTrainingMetrics_metricDataPoints}}
+var mTrainingMetricsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingMetricsV2_ofi, &sTrainingMetricsV2_tfi, &sTrainingMetricsV2_ati}}
+var mTrainingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingResult_dataValidationMetrics, &sTrainingResult_trainingMetrics, &sTrainingResult_variableImportanceMetrics}}
+var mTrainingResultV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingResultV2_dataValidationMetrics, &sTrainingResultV2_trainingMetricsV2, &sTrainingResultV2_variableImportanceMetrics, &sTrainingResultV2_aggregatedVariablesImportanceMetrics}}
+var mUncertaintyRange = smithy.SchemaMembers{List: []*smithy.Schema{&sUncertaintyRange_lowerBoundValue, &sUncertaintyRange_upperBoundValue}}
+var mUnlabeledEventsTreatment = smithy.SchemaMembers{List: []*smithy.Schema{&sUnlabeledEventsTreatment_IGNORE, &sUnlabeledEventsTreatment_FRAUD, &sUnlabeledEventsTreatment_LEGIT, &sUnlabeledEventsTreatment_AUTO}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sVariable_name, &sVariable_dataType, &sVariable_dataSource, &sVariable_defaultValue, &sVariable_description, &sVariable_variableType, &sVariable_lastUpdatedTime, &sVariable_createdTime, &sVariable_arn}, Hash: &hVariable}
+var mVariableEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sVariableEntry_name, &sVariableEntry_dataType, &sVariableEntry_dataSource, &sVariableEntry_defaultValue, &sVariableEntry_description, &sVariableEntry_variableType}}
+var m_VariableEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VariableEntryList_member}}
+var mVariableImpactExplanation = smithy.SchemaMembers{List: []*smithy.Schema{&sVariableImpactExplanation_eventVariableName, &sVariableImpactExplanation_relativeImpact, &sVariableImpactExplanation_logOddsImpact}}
+var mVariableImportanceMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sVariableImportanceMetrics_logOddsMetrics}}
+var m_VariableList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VariableList_member}}
+var mBatchCreateVariableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateVariableRequest_variableEntries, &sBatchCreateVariableRequest_tags}}
+var mBatchCreateVariableResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateVariableResult_errors}}
+var mBatchGetVariableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetVariableRequest_names}}
+var mBatchGetVariableResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetVariableResult_variables, &sBatchGetVariableResult_errors}}
+var mCancelBatchImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelBatchImportJobRequest_jobId}}
+var mCancelBatchPredictionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelBatchPredictionJobRequest_jobId}}
+var mCreateBatchImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchImportJobRequest_jobId, &sCreateBatchImportJobRequest_inputPath, &sCreateBatchImportJobRequest_outputPath, &sCreateBatchImportJobRequest_eventTypeName, &sCreateBatchImportJobRequest_iamRoleArn, &sCreateBatchImportJobRequest_tags}}
+var mCreateBatchPredictionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchPredictionJobRequest_jobId, &sCreateBatchPredictionJobRequest_inputPath, &sCreateBatchPredictionJobRequest_outputPath, &sCreateBatchPredictionJobRequest_eventTypeName, &sCreateBatchPredictionJobRequest_detectorName, &sCreateBatchPredictionJobRequest_detectorVersion, &sCreateBatchPredictionJobRequest_iamRoleArn, &sCreateBatchPredictionJobRequest_tags}}
+var mCreateDetectorVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDetectorVersionRequest_detectorId, &sCreateDetectorVersionRequest_description, &sCreateDetectorVersionRequest_externalModelEndpoints, &sCreateDetectorVersionRequest_rules, &sCreateDetectorVersionRequest_modelVersions, &sCreateDetectorVersionRequest_ruleExecutionMode, &sCreateDetectorVersionRequest_tags}}
+var mCreateDetectorVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDetectorVersionResult_detectorId, &sCreateDetectorVersionResult_detectorVersionId, &sCreateDetectorVersionResult_status}}
+var mCreateListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateListRequest_name, &sCreateListRequest_elements, &sCreateListRequest_variableType, &sCreateListRequest_description, &sCreateListRequest_tags}}
+var mCreateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelRequest_modelId, &sCreateModelRequest_modelType, &sCreateModelRequest_description, &sCreateModelRequest_eventTypeName, &sCreateModelRequest_tags}}
+var mCreateModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelVersionRequest_modelId, &sCreateModelVersionRequest_modelType, &sCreateModelVersionRequest_trainingDataSource, &sCreateModelVersionRequest_trainingDataSchema, &sCreateModelVersionRequest_externalEventsDetail, &sCreateModelVersionRequest_ingestedEventsDetail, &sCreateModelVersionRequest_tags}}
+var mCreateModelVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelVersionResult_modelId, &sCreateModelVersionResult_modelType, &sCreateModelVersionResult_modelVersionNumber, &sCreateModelVersionResult_status}}
+var mCreateRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleRequest_ruleId, &sCreateRuleRequest_detectorId, &sCreateRuleRequest_description, &sCreateRuleRequest_expression, &sCreateRuleRequest_language, &sCreateRuleRequest_outcomes, &sCreateRuleRequest_tags}}
+var mCreateRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleResult_rule}}
+var mCreateVariableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVariableRequest_name, &sCreateVariableRequest_dataType, &sCreateVariableRequest_dataSource, &sCreateVariableRequest_defaultValue, &sCreateVariableRequest_description, &sCreateVariableRequest_variableType, &sCreateVariableRequest_tags}}
+var mDeleteBatchImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBatchImportJobRequest_jobId}}
+var mDeleteBatchPredictionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBatchPredictionJobRequest_jobId}}
+var mDeleteDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDetectorRequest_detectorId}}
+var mDeleteDetectorVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDetectorVersionRequest_detectorId, &sDeleteDetectorVersionRequest_detectorVersionId}}
+var mDeleteEntityTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEntityTypeRequest_name}}
+var mDeleteEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventRequest_eventId, &sDeleteEventRequest_eventTypeName, &sDeleteEventRequest_deleteAuditHistory}}
+var mDeleteEventsByEventTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventsByEventTypeRequest_eventTypeName}}
+var mDeleteEventsByEventTypeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventsByEventTypeResult_eventTypeName, &sDeleteEventsByEventTypeResult_eventsDeletionStatus}}
+var mDeleteEventTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventTypeRequest_name}}
+var mDeleteExternalModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExternalModelRequest_modelEndpoint}}
+var mDeleteLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLabelRequest_name}}
+var mDeleteListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteListRequest_name}}
+var mDeleteModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelRequest_modelId, &sDeleteModelRequest_modelType}}
+var mDeleteModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelVersionRequest_modelId, &sDeleteModelVersionRequest_modelType, &sDeleteModelVersionRequest_modelVersionNumber}}
+var mDeleteOutcomeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOutcomeRequest_name}}
+var mDeleteRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleRequest_rule}}
+var mDeleteVariableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVariableRequest_name}}
+var mDescribeDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDetectorRequest_detectorId, &sDescribeDetectorRequest_nextToken, &sDescribeDetectorRequest_maxResults}}
+var mDescribeDetectorResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDetectorResult_detectorId, &sDescribeDetectorResult_detectorVersionSummaries, &sDescribeDetectorResult_nextToken, &sDescribeDetectorResult_arn}}
+var mDescribeModelVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelVersionsRequest_modelId, &sDescribeModelVersionsRequest_modelVersionNumber, &sDescribeModelVersionsRequest_modelType, &sDescribeModelVersionsRequest_nextToken, &sDescribeModelVersionsRequest_maxResults}}
+var mDescribeModelVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelVersionsResult_modelVersionDetails, &sDescribeModelVersionsResult_nextToken}}
+var mGetBatchImportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchImportJobsRequest_jobId, &sGetBatchImportJobsRequest_maxResults, &sGetBatchImportJobsRequest_nextToken}}
+var mGetBatchImportJobsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchImportJobsResult_batchImports, &sGetBatchImportJobsResult_nextToken}}
+var mGetBatchPredictionJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchPredictionJobsRequest_jobId, &sGetBatchPredictionJobsRequest_maxResults, &sGetBatchPredictionJobsRequest_nextToken}}
+var mGetBatchPredictionJobsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchPredictionJobsResult_batchPredictions, &sGetBatchPredictionJobsResult_nextToken}}
+var mGetDeleteEventsByEventTypeStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeleteEventsByEventTypeStatusRequest_eventTypeName}}
+var mGetDeleteEventsByEventTypeStatusResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeleteEventsByEventTypeStatusResult_eventTypeName, &sGetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus}}
+var mGetDetectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDetectorsRequest_detectorId, &sGetDetectorsRequest_nextToken, &sGetDetectorsRequest_maxResults}}
+var mGetDetectorsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDetectorsResult_detectors, &sGetDetectorsResult_nextToken}}
+var mGetDetectorVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDetectorVersionRequest_detectorId, &sGetDetectorVersionRequest_detectorVersionId}}
+var mGetDetectorVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDetectorVersionResult_detectorId, &sGetDetectorVersionResult_detectorVersionId, &sGetDetectorVersionResult_description, &sGetDetectorVersionResult_externalModelEndpoints, &sGetDetectorVersionResult_modelVersions, &sGetDetectorVersionResult_rules, &sGetDetectorVersionResult_status, &sGetDetectorVersionResult_lastUpdatedTime, &sGetDetectorVersionResult_createdTime, &sGetDetectorVersionResult_ruleExecutionMode, &sGetDetectorVersionResult_arn}, Hash: &hGetDetectorVersionResult}
+var mGetEntityTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntityTypesRequest_name, &sGetEntityTypesRequest_nextToken, &sGetEntityTypesRequest_maxResults}}
+var mGetEntityTypesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntityTypesResult_entityTypes, &sGetEntityTypesResult_nextToken}}
+var mGetEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventRequest_eventId, &sGetEventRequest_eventTypeName}}
+var mGetEventResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventResult_event}}
+var mGetEventPredictionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventPredictionRequest_detectorId, &sGetEventPredictionRequest_detectorVersionId, &sGetEventPredictionRequest_eventId, &sGetEventPredictionRequest_eventTypeName, &sGetEventPredictionRequest_entities, &sGetEventPredictionRequest_eventTimestamp, &sGetEventPredictionRequest_eventVariables, &sGetEventPredictionRequest_externalModelEndpointDataBlobs}}
+var mGetEventPredictionMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventPredictionMetadataRequest_eventId, &sGetEventPredictionMetadataRequest_eventTypeName, &sGetEventPredictionMetadataRequest_detectorId, &sGetEventPredictionMetadataRequest_detectorVersionId, &sGetEventPredictionMetadataRequest_predictionTimestamp}}
+var mGetEventPredictionMetadataResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventPredictionMetadataResult_eventId, &sGetEventPredictionMetadataResult_eventTypeName, &sGetEventPredictionMetadataResult_entityId, &sGetEventPredictionMetadataResult_entityType, &sGetEventPredictionMetadataResult_eventTimestamp, &sGetEventPredictionMetadataResult_detectorId, &sGetEventPredictionMetadataResult_detectorVersionId, &sGetEventPredictionMetadataResult_detectorVersionStatus, &sGetEventPredictionMetadataResult_eventVariables, &sGetEventPredictionMetadataResult_rules, &sGetEventPredictionMetadataResult_ruleExecutionMode, &sGetEventPredictionMetadataResult_outcomes, &sGetEventPredictionMetadataResult_evaluatedModelVersions, &sGetEventPredictionMetadataResult_evaluatedExternalModels, &sGetEventPredictionMetadataResult_predictionTimestamp}, Hash: &hGetEventPredictionMetadataResult}
+var mGetEventPredictionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventPredictionResult_modelScores, &sGetEventPredictionResult_ruleResults, &sGetEventPredictionResult_externalModelOutputs}}
+var mGetEventTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventTypesRequest_name, &sGetEventTypesRequest_nextToken, &sGetEventTypesRequest_maxResults}}
+var mGetEventTypesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventTypesResult_eventTypes, &sGetEventTypesResult_nextToken}}
+var mGetExternalModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExternalModelsRequest_modelEndpoint, &sGetExternalModelsRequest_nextToken, &sGetExternalModelsRequest_maxResults}}
+var mGetExternalModelsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExternalModelsResult_externalModels, &sGetExternalModelsResult_nextToken}}
+var mGetKMSEncryptionKeyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetKMSEncryptionKeyResult_kmsKey}}
+var mGetLabelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLabelsRequest_name, &sGetLabelsRequest_nextToken, &sGetLabelsRequest_maxResults}}
+var mGetLabelsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLabelsResult_labels, &sGetLabelsResult_nextToken}}
+var mGetListElementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListElementsRequest_name, &sGetListElementsRequest_nextToken, &sGetListElementsRequest_maxResults}}
+var mGetListElementsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListElementsResult_elements, &sGetListElementsResult_nextToken}}
+var mGetListsMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListsMetadataRequest_name, &sGetListsMetadataRequest_nextToken, &sGetListsMetadataRequest_maxResults}}
+var mGetListsMetadataResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListsMetadataResult_lists, &sGetListsMetadataResult_nextToken}}
+var mGetModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelsRequest_modelId, &sGetModelsRequest_modelType, &sGetModelsRequest_nextToken, &sGetModelsRequest_maxResults}}
+var mGetModelsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelsResult_nextToken, &sGetModelsResult_models}}
+var mGetModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelVersionRequest_modelId, &sGetModelVersionRequest_modelType, &sGetModelVersionRequest_modelVersionNumber}}
+var mGetModelVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelVersionResult_modelId, &sGetModelVersionResult_modelType, &sGetModelVersionResult_modelVersionNumber, &sGetModelVersionResult_trainingDataSource, &sGetModelVersionResult_trainingDataSchema, &sGetModelVersionResult_externalEventsDetail, &sGetModelVersionResult_ingestedEventsDetail, &sGetModelVersionResult_status, &sGetModelVersionResult_arn}, Hash: &hGetModelVersionResult}
+var mGetOutcomesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOutcomesRequest_name, &sGetOutcomesRequest_nextToken, &sGetOutcomesRequest_maxResults}}
+var mGetOutcomesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOutcomesResult_outcomes, &sGetOutcomesResult_nextToken}}
+var mGetRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRulesRequest_ruleId, &sGetRulesRequest_detectorId, &sGetRulesRequest_ruleVersion, &sGetRulesRequest_nextToken, &sGetRulesRequest_maxResults}}
+var mGetRulesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRulesResult_ruleDetails, &sGetRulesResult_nextToken}}
+var mGetVariablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVariablesRequest_name, &sGetVariablesRequest_nextToken, &sGetVariablesRequest_maxResults}}
+var mGetVariablesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVariablesResult_variables, &sGetVariablesResult_nextToken}}
+var mListEventPredictionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventPredictionsRequest_eventId, &sListEventPredictionsRequest_eventType, &sListEventPredictionsRequest_detectorId, &sListEventPredictionsRequest_detectorVersionId, &sListEventPredictionsRequest_predictionTimeRange, &sListEventPredictionsRequest_nextToken, &sListEventPredictionsRequest_maxResults}}
+var mListEventPredictionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventPredictionsResult_eventPredictionSummaries, &sListEventPredictionsResult_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceARN, &sListTagsForResourceRequest_nextToken, &sListTagsForResourceRequest_maxResults}}
+var mListTagsForResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResult_tags, &sListTagsForResourceResult_nextToken}}
+var mPutDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDetectorRequest_detectorId, &sPutDetectorRequest_description, &sPutDetectorRequest_eventTypeName, &sPutDetectorRequest_tags}}
+var mPutEntityTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEntityTypeRequest_name, &sPutEntityTypeRequest_description, &sPutEntityTypeRequest_tags}}
+var mPutEventTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventTypeRequest_name, &sPutEventTypeRequest_description, &sPutEventTypeRequest_eventVariables, &sPutEventTypeRequest_labels, &sPutEventTypeRequest_entityTypes, &sPutEventTypeRequest_eventIngestion, &sPutEventTypeRequest_tags, &sPutEventTypeRequest_eventOrchestration}}
+var mPutExternalModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutExternalModelRequest_modelEndpoint, &sPutExternalModelRequest_modelSource, &sPutExternalModelRequest_invokeModelEndpointRoleArn, &sPutExternalModelRequest_inputConfiguration, &sPutExternalModelRequest_outputConfiguration, &sPutExternalModelRequest_modelEndpointStatus, &sPutExternalModelRequest_tags}}
+var mPutKMSEncryptionKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutKMSEncryptionKeyRequest_kmsEncryptionKeyArn}}
+var mPutLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLabelRequest_name, &sPutLabelRequest_description, &sPutLabelRequest_tags}}
+var mPutOutcomeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutOutcomeRequest_name, &sPutOutcomeRequest_description, &sPutOutcomeRequest_tags}}
+var mSendEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendEventRequest_eventId, &sSendEventRequest_eventTypeName, &sSendEventRequest_eventTimestamp, &sSendEventRequest_eventVariables, &sSendEventRequest_assignedLabel, &sSendEventRequest_labelTimestamp, &sSendEventRequest_entities}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceARN, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceARN, &sUntagResourceRequest_tagKeys}}
+var mUpdateDetectorVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDetectorVersionRequest_detectorId, &sUpdateDetectorVersionRequest_detectorVersionId, &sUpdateDetectorVersionRequest_externalModelEndpoints, &sUpdateDetectorVersionRequest_rules, &sUpdateDetectorVersionRequest_description, &sUpdateDetectorVersionRequest_modelVersions, &sUpdateDetectorVersionRequest_ruleExecutionMode}}
+var mUpdateDetectorVersionMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDetectorVersionMetadataRequest_detectorId, &sUpdateDetectorVersionMetadataRequest_detectorVersionId, &sUpdateDetectorVersionMetadataRequest_description}}
+var mUpdateDetectorVersionStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDetectorVersionStatusRequest_detectorId, &sUpdateDetectorVersionStatusRequest_detectorVersionId, &sUpdateDetectorVersionStatusRequest_status}}
+var mUpdateEventLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventLabelRequest_eventId, &sUpdateEventLabelRequest_eventTypeName, &sUpdateEventLabelRequest_assignedLabel, &sUpdateEventLabelRequest_labelTimestamp}}
+var mUpdateListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateListRequest_name, &sUpdateListRequest_elements, &sUpdateListRequest_description, &sUpdateListRequest_updateMode, &sUpdateListRequest_variableType}}
+var mUpdateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelRequest_modelId, &sUpdateModelRequest_modelType, &sUpdateModelRequest_description}}
+var mUpdateModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelVersionRequest_modelId, &sUpdateModelVersionRequest_modelType, &sUpdateModelVersionRequest_majorVersionNumber, &sUpdateModelVersionRequest_externalEventsDetail, &sUpdateModelVersionRequest_ingestedEventsDetail, &sUpdateModelVersionRequest_tags}}
+var mUpdateModelVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelVersionResult_modelId, &sUpdateModelVersionResult_modelType, &sUpdateModelVersionResult_modelVersionNumber, &sUpdateModelVersionResult_status}}
+var mUpdateModelVersionStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelVersionStatusRequest_modelId, &sUpdateModelVersionStatusRequest_modelType, &sUpdateModelVersionStatusRequest_modelVersionNumber, &sUpdateModelVersionStatusRequest_status}}
+var mUpdateRuleMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleMetadataRequest_rule, &sUpdateRuleMetadataRequest_description}}
+var mUpdateRuleVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleVersionRequest_rule, &sUpdateRuleVersionRequest_description, &sUpdateRuleVersionRequest_expression, &sUpdateRuleVersionRequest_language, &sUpdateRuleVersionRequest_outcomes, &sUpdateRuleVersionRequest_tags}}
+var mUpdateRuleVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleVersionResult_rule}}
+var mUpdateVariableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVariableRequest_name, &sUpdateVariableRequest_defaultValue, &sUpdateVariableRequest_description, &sUpdateVariableRequest_variableType}}
+
+var hBatchImport = smithy.MemberHash{Seed: 37, Slots: []uint16{
+	0, 3, 0, 7, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 12, 1, 8, 5, 0, 0, 0, 0, 9, 11,
+	0, 13, 0, 0, 0, 10, 6, 0,
+}}
+var hBatchPrediction = smithy.MemberHash{Seed: 74, Slots: []uint16{
+	0, 0, 0, 0, 12, 0, 1, 0, 0, 0, 3, 0, 6, 2, 0, 10, 14, 0, 8, 15, 0, 13, 11, 0,
+	9, 0, 5, 7, 0, 4, 0, 0,
+}}
+var hEventType = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	2, 10, 0, 0, 0, 11, 0, 0, 7, 5, 0, 0, 0, 9, 0, 0, 0, 4, 0, 8, 0, 0, 0, 6,
+	0, 3, 0, 0, 0, 0, 0, 1,
+}}
+var hExternalModel = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	6, 0, 1, 3, 4, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 8, 5, 0, 0, 0, 0, 0, 7,
+	0, 0, 0, 0, 0, 0, 2, 0,
+}}
+var hModelVersionDetail = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 0, 5, 0, 0, 10, 1, 0, 0, 11, 9, 0, 13, 0, 0, 2, 0, 8, 0, 0, 0, 0, 7, 0,
+	4, 0, 0, 0, 6, 0, 12, 3,
+}}
+var hRuleDetail = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	10, 0, 0, 0, 0, 7, 0, 0, 0, 5, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+	2, 9, 8, 0, 0, 3, 0, 0,
+}}
+var hVariable = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	9, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 4, 0, 0, 0,
+	5, 8, 7, 0, 0, 0, 0, 0,
+}}
+var hGetDetectorVersionResult = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	11, 8, 1, 0, 4, 0, 0, 0, 0, 5, 0, 0, 0, 3, 2, 0, 6, 0, 7, 0, 0, 0, 10, 0,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var hGetEventPredictionMetadataResult = smithy.MemberHash{Seed: 69, Slots: []uint16{
+	7, 1, 2, 6, 8, 0, 5, 0, 0, 0, 0, 0, 9, 12, 10, 0, 0, 14, 0, 0, 11, 15, 0, 0,
+	3, 0, 13, 0, 0, 4, 0, 0,
+}}
+var hGetModelVersionResult = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	9, 0, 0, 0, 6, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 1, 3, 8, 0,
+	0, 2, 0, 0, 0, 4, 0, 0,
+}}
+
+var sBatchCreateVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVariable, Type: smithy.ShapeTypeOperation, Ext: &eBatchCreateVariable})
+var sBatchGetVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVariable, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetVariable})
+var sCancelBatchImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchImportJob, Type: smithy.ShapeTypeOperation, Ext: &eCancelBatchImportJob})
+var sCancelBatchPredictionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchPredictionJob, Type: smithy.ShapeTypeOperation, Ext: &eCancelBatchPredictionJob})
+var sCreateBatchImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchImportJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateBatchImportJob})
+var sCreateBatchPredictionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPredictionJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateBatchPredictionJob})
+var sCreateDetectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDetectorVersion, Type: smithy.ShapeTypeOperation, Ext: &eCreateDetectorVersion})
+var sCreateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateList, Type: smithy.ShapeTypeOperation, Ext: &eCreateList})
+var sCreateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModel, Type: smithy.ShapeTypeOperation, Ext: &eCreateModel})
+var sCreateModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelVersion, Type: smithy.ShapeTypeOperation, Ext: &eCreateModelVersion})
+var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Type: smithy.ShapeTypeOperation, Ext: &eCreateRule})
+var sCreateVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVariable, Type: smithy.ShapeTypeOperation, Ext: &eCreateVariable})
+var sDeleteBatchImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchImportJob, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBatchImportJob})
+var sDeleteBatchPredictionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPredictionJob, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBatchPredictionJob})
+var sDeleteDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetector, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDetector})
+var sDeleteDetectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetectorVersion, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDetectorVersion})
+var sDeleteEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntityType, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEntityType})
+var sDeleteEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEvent, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEvent})
+var sDeleteEventsByEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventsByEventType, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEventsByEventType})
+var sDeleteEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventType, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEventType})
+var sDeleteExternalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExternalModel, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExternalModel})
+var sDeleteLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabel, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLabel})
+var sDeleteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteList, Type: smithy.ShapeTypeOperation, Ext: &eDeleteList})
+var sDeleteModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModel, Type: smithy.ShapeTypeOperation, Ext: &eDeleteModel})
+var sDeleteModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelVersion, Type: smithy.ShapeTypeOperation, Ext: &eDeleteModelVersion})
+var sDeleteOutcome = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutcome, Type: smithy.ShapeTypeOperation, Ext: &eDeleteOutcome})
+var sDeleteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRule, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRule})
+var sDeleteVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVariable, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVariable})
+var sDescribeDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDetector, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDetector})
+var sDescribeModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeModelVersions})
+var sGetBatchImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchImportJobs, Type: smithy.ShapeTypeOperation, Ext: &eGetBatchImportJobs})
+var sGetBatchPredictionJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPredictionJobs, Type: smithy.ShapeTypeOperation, Ext: &eGetBatchPredictionJobs})
+var sGetDeleteEventsByEventTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeleteEventsByEventTypeStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetDeleteEventsByEventTypeStatus})
+var sGetDetectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectors, Type: smithy.ShapeTypeOperation, Ext: &eGetDetectors})
+var sGetDetectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectorVersion, Type: smithy.ShapeTypeOperation, Ext: &eGetDetectorVersion})
+var sGetEntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntityTypes, Type: smithy.ShapeTypeOperation, Ext: &eGetEntityTypes})
+var sGetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvent, Type: smithy.ShapeTypeOperation, Ext: &eGetEvent})
+var sGetEventPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPrediction, Type: smithy.ShapeTypeOperation, Ext: &eGetEventPrediction})
+var sGetEventPredictionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPredictionMetadata, Type: smithy.ShapeTypeOperation, Ext: &eGetEventPredictionMetadata})
+var sGetEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventTypes, Type: smithy.ShapeTypeOperation, Ext: &eGetEventTypes})
+var sGetExternalModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExternalModels, Type: smithy.ShapeTypeOperation, Ext: &eGetExternalModels})
+var sGetKMSEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKMSEncryptionKey, Type: smithy.ShapeTypeOperation, Ext: &eGetKMSEncryptionKey})
+var sGetLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLabels, Type: smithy.ShapeTypeOperation, Ext: &eGetLabels})
+var sGetListElements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListElements, Type: smithy.ShapeTypeOperation, Ext: &eGetListElements})
+var sGetListsMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsMetadata, Type: smithy.ShapeTypeOperation, Ext: &eGetListsMetadata})
+var sGetModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModels, Type: smithy.ShapeTypeOperation, Ext: &eGetModels})
+var sGetModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelVersion, Type: smithy.ShapeTypeOperation, Ext: &eGetModelVersion})
+var sGetOutcomes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOutcomes, Type: smithy.ShapeTypeOperation, Ext: &eGetOutcomes})
+var sGetRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRules, Type: smithy.ShapeTypeOperation, Ext: &eGetRules})
+var sGetVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVariables, Type: smithy.ShapeTypeOperation, Ext: &eGetVariables})
+var sListEventPredictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventPredictions, Type: smithy.ShapeTypeOperation, Ext: &eListEventPredictions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDetector, Type: smithy.ShapeTypeOperation, Ext: &ePutDetector})
+var sPutEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEntityType, Type: smithy.ShapeTypeOperation, Ext: &ePutEntityType})
+var sPutEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventType, Type: smithy.ShapeTypeOperation, Ext: &ePutEventType})
+var sPutExternalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutExternalModel, Type: smithy.ShapeTypeOperation, Ext: &ePutExternalModel})
+var sPutKMSEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKMSEncryptionKey, Type: smithy.ShapeTypeOperation, Ext: &ePutKMSEncryptionKey})
+var sPutLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLabel, Type: smithy.ShapeTypeOperation, Ext: &ePutLabel})
+var sPutOutcome = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOutcome, Type: smithy.ShapeTypeOperation, Ext: &ePutOutcome})
+var sSendEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEvent, Type: smithy.ShapeTypeOperation, Ext: &eSendEvent})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDetectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersion, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDetectorVersion})
+var sUpdateDetectorVersionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionMetadata, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDetectorVersionMetadata})
+var sUpdateDetectorVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDetectorVersionStatus})
+var sUpdateEventLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventLabel, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEventLabel})
+var sUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateList, Type: smithy.ShapeTypeOperation, Ext: &eUpdateList})
+var sUpdateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModel, Type: smithy.ShapeTypeOperation, Ext: &eUpdateModel})
+var sUpdateModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersion, Type: smithy.ShapeTypeOperation, Ext: &eUpdateModelVersion})
+var sUpdateModelVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersionStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdateModelVersionStatus})
+var sUpdateRuleMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleMetadata, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRuleMetadata})
+var sUpdateRuleVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleVersion, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRuleVersion})
+var sUpdateVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVariable, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVariable})
+var s_AWSHawksNestServiceFacade = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSHawksNestServiceFacade, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AWSHawksNestServiceFacade})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAggregatedLogOddsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregatedLogOddsMetric, Members: &mAggregatedLogOddsMetric, Type: smithy.ShapeTypeStructure, Ext: &eAggregatedLogOddsMetric})
+var sAggregatedLogOddsMetric_variableNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableNames", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eAggregatedLogOddsMetric_variableNames})
+var sAggregatedLogOddsMetric_aggregatedVariablesImportance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedVariablesImportance", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eAggregatedLogOddsMetric_aggregatedVariablesImportance})
+var sAggregatedVariablesImpactExplanation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregatedVariablesImpactExplanation, Members: &mAggregatedVariablesImpactExplanation, Type: smithy.ShapeTypeStructure, Ext: &eAggregatedVariablesImpactExplanation})
+var sAggregatedVariablesImpactExplanation_eventVariableNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariableNames", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eAggregatedVariablesImpactExplanation_eventVariableNames})
+var sAggregatedVariablesImpactExplanation_relativeImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativeImpact", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eAggregatedVariablesImpactExplanation_relativeImpact})
+var sAggregatedVariablesImpactExplanation_logOddsImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logOddsImpact", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eAggregatedVariablesImpactExplanation_logOddsImpact})
+var sAggregatedVariablesImportanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregatedVariablesImportanceMetrics, Members: &mAggregatedVariablesImportanceMetrics, Type: smithy.ShapeTypeStructure, Ext: &eAggregatedVariablesImportanceMetrics})
+var sAggregatedVariablesImportanceMetrics_logOddsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logOddsMetrics", ID: &i_ListOfAggregatedLogOddsMetrics, Members: &m_ListOfAggregatedLogOddsMetrics, Type: smithy.ShapeTypeList, Ext: &eAggregatedVariablesImportanceMetrics_logOddsMetrics})
+var sAllowDenyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowDenyList, Members: &mAllowDenyList, Type: smithy.ShapeTypeStructure, Ext: &eAllowDenyList})
+var sAllowDenyList_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_name})
+var sAllowDenyList_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_description})
+var sAllowDenyList_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_variableType, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_variableType})
+var sAllowDenyList_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_createdTime})
+var sAllowDenyList_updatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_updatedTime})
+var sAllowDenyList_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eAllowDenyList_arn})
+var s_AllowDenyLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowDenyLists, Members: &m_AllowDenyLists, Type: smithy.ShapeTypeList, Ext: &e_AllowDenyLists})
+var s_AllowDenyLists_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAllowDenyList, Members: &mAllowDenyList, Type: smithy.ShapeTypeStructure, Ext: &e_AllowDenyLists_member})
+var sAsyncJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsyncJobStatus, Members: &mAsyncJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eAsyncJobStatus})
+var sAsyncJobStatus_IN_PROGRESS_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS_INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_IN_PROGRESS_INITIALIZING})
+var sAsyncJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_IN_PROGRESS})
+var sAsyncJobStatus_CANCEL_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_CANCEL_IN_PROGRESS})
+var sAsyncJobStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_CANCELED})
+var sAsyncJobStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_COMPLETE})
+var sAsyncJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAsyncJobStatus_FAILED})
+var sATIMetricDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iATIMetricDataPoint, Members: &mATIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eATIMetricDataPoint})
+var sATIMetricDataPoint_cr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eATIMetricDataPoint_cr})
+var sATIMetricDataPoint_adr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eATIMetricDataPoint_adr})
+var sATIMetricDataPoint_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eATIMetricDataPoint_threshold})
+var sATIMetricDataPoint_atodr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atodr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eATIMetricDataPoint_atodr})
+var s_ATIMetricDataPointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ATIMetricDataPointsList, Members: &m_ATIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &e_ATIMetricDataPointsList})
+var s_ATIMetricDataPointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iATIMetricDataPoint, Members: &mATIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_ATIMetricDataPointsList_member})
+var sATIModelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iATIModelPerformance, Members: &mATIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eATIModelPerformance})
+var sATIModelPerformance_asi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asi", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eATIModelPerformance_asi})
+var sATITrainingMetricsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iATITrainingMetricsValue, Members: &mATITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eATITrainingMetricsValue})
+var sATITrainingMetricsValue_metricDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDataPoints", ID: &i_ATIMetricDataPointsList, Members: &m_ATIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &eATITrainingMetricsValue_metricDataPoints})
+var sATITrainingMetricsValue_modelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPerformance", ID: &iATIModelPerformance, Members: &mATIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eATITrainingMetricsValue_modelPerformance})
+var s_attributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeKey, Type: smithy.ShapeTypeString, Ext: &e_attributeKey})
+var s_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_attributeValue})
+var sBatchCreateVariableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVariableError, Members: &mBatchCreateVariableError, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateVariableError})
+var sBatchCreateVariableError_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchCreateVariableError_name})
+var sBatchCreateVariableError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Integer2, Type: smithy.ShapeTypeInteger, Ext: &eBatchCreateVariableError_code})
+var sBatchCreateVariableError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchCreateVariableError_message})
+var s_BatchCreateVariableErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateVariableErrorList, Members: &m_BatchCreateVariableErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateVariableErrorList})
+var s_BatchCreateVariableErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateVariableError, Members: &mBatchCreateVariableError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchCreateVariableErrorList_member})
+var sBatchGetVariableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVariableError, Members: &mBatchGetVariableError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetVariableError})
+var sBatchGetVariableError_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchGetVariableError_name})
+var sBatchGetVariableError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Integer2, Type: smithy.ShapeTypeInteger, Ext: &eBatchGetVariableError_code})
+var sBatchGetVariableError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchGetVariableError_message})
+var s_BatchGetVariableErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetVariableErrorList, Members: &m_BatchGetVariableErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetVariableErrorList})
+var s_BatchGetVariableErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetVariableError, Members: &mBatchGetVariableError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetVariableErrorList_member})
+var sBatchImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchImport, Members: &mBatchImport, Type: smithy.ShapeTypeStructure, Ext: &eBatchImport})
+var sBatchImport_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eBatchImport_jobId})
+var sBatchImport_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAsyncJobStatus, Members: &mAsyncJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchImport_status})
+var sBatchImport_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchImport_failureReason})
+var sBatchImport_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eBatchImport_startTime})
+var sBatchImport_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eBatchImport_completionTime})
+var sBatchImport_inputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eBatchImport_inputPath})
+var sBatchImport_outputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eBatchImport_outputPath})
+var sBatchImport_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eBatchImport_eventTypeName})
+var sBatchImport_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &eBatchImport_iamRoleArn})
+var sBatchImport_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eBatchImport_arn})
+var sBatchImport_processedRecordsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "processedRecordsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchImport_processedRecordsCount})
+var sBatchImport_failedRecordsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedRecordsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchImport_failedRecordsCount})
+var sBatchImport_totalRecordsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalRecordsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchImport_totalRecordsCount})
+var s_BatchImportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchImportList, Members: &m_BatchImportList, Type: smithy.ShapeTypeList, Ext: &e_BatchImportList})
+var s_BatchImportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchImport, Members: &mBatchImport, Type: smithy.ShapeTypeStructure, Ext: &e_BatchImportList_member})
+var s_batchImportsMaxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_batchImportsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &e_batchImportsMaxPageSize})
+var sBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPrediction, Members: &mBatchPrediction, Type: smithy.ShapeTypeStructure, Ext: &eBatchPrediction})
+var sBatchPrediction_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_jobId})
+var sBatchPrediction_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAsyncJobStatus, Members: &mAsyncJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchPrediction_status})
+var sBatchPrediction_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_failureReason})
+var sBatchPrediction_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_startTime})
+var sBatchPrediction_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_completionTime})
+var sBatchPrediction_lastHeartbeatTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastHeartbeatTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_lastHeartbeatTime})
+var sBatchPrediction_inputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_inputPath})
+var sBatchPrediction_outputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_outputPath})
+var sBatchPrediction_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_eventTypeName})
+var sBatchPrediction_detectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_detectorName})
+var sBatchPrediction_detectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersion", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_detectorVersion})
+var sBatchPrediction_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_iamRoleArn})
+var sBatchPrediction_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eBatchPrediction_arn})
+var sBatchPrediction_processedRecordsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "processedRecordsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchPrediction_processedRecordsCount})
+var sBatchPrediction_totalRecordsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalRecordsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchPrediction_totalRecordsCount})
+var s_BatchPredictionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchPredictionList, Members: &m_BatchPredictionList, Type: smithy.ShapeTypeList, Ext: &e_BatchPredictionList})
+var s_BatchPredictionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPrediction, Members: &mBatchPrediction, Type: smithy.ShapeTypeStructure, Ext: &e_BatchPredictionList_member})
+var s_batchPredictionsMaxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_batchPredictionsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &e_batchPredictionsMaxPageSize})
+var s_blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &e_blob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_contentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_contentType, Type: smithy.ShapeTypeString, Ext: &e_contentType})
+var s_CsvIndexToVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CsvIndexToVariableMap, Members: &m_CsvIndexToVariableMap, Type: smithy.ShapeTypeMap, Ext: &e_CsvIndexToVariableMap})
+var s_CsvIndexToVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_CsvIndexToVariableMap_key})
+var s_CsvIndexToVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_CsvIndexToVariableMap_value})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeEnum, Ext: &eDataSource})
+var sDataSource_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_EVENT})
+var sDataSource_MODEL_SCORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL_SCORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_MODEL_SCORE})
+var sDataSource_EXTERNAL_MODEL_SCORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_MODEL_SCORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_EXTERNAL_MODEL_SCORE})
+var sDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eDataType})
+var sDataType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_STRING})
+var sDataType_INTEGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTEGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_INTEGER})
+var sDataType_FLOAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_FLOAT})
+var sDataType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_BOOLEAN})
+var sDataType_DATETIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATETIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_DATETIME})
+var sDataValidationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataValidationMetrics, Members: &mDataValidationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eDataValidationMetrics})
+var sDataValidationMetrics_fileLevelMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileLevelMessages", ID: &i_fileValidationMessageList, Members: &m_fileValidationMessageList, Type: smithy.ShapeTypeList, Ext: &eDataValidationMetrics_fileLevelMessages})
+var sDataValidationMetrics_fieldLevelMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldLevelMessages", ID: &i_fieldValidationMessageList, Members: &m_fieldValidationMessageList, Type: smithy.ShapeTypeList, Ext: &eDataValidationMetrics_fieldLevelMessages})
+var s_DeleteAuditHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteAuditHistory, Type: smithy.ShapeTypeBoolean, Ext: &e_DeleteAuditHistory})
+var s_description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_description, Type: smithy.ShapeTypeString, Ext: &e_description})
+var sDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetector, Members: &mDetector, Type: smithy.ShapeTypeStructure, Ext: &eDetector})
+var sDetector_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDetector_detectorId})
+var sDetector_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eDetector_description})
+var sDetector_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDetector_eventTypeName})
+var sDetector_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eDetector_lastUpdatedTime})
+var sDetector_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eDetector_createdTime})
+var sDetector_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eDetector_arn})
+var s_DetectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorList, Members: &m_DetectorList, Type: smithy.ShapeTypeList, Ext: &e_DetectorList})
+var s_DetectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDetector, Members: &mDetector, Type: smithy.ShapeTypeStructure, Ext: &e_DetectorList_member})
+var s_DetectorsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_DetectorsMaxResults})
+var s_DetectorVersionMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorVersionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_DetectorVersionMaxResults})
+var sDetectorVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectorVersionStatus, Members: &mDetectorVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDetectorVersionStatus})
+var sDetectorVersionStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetectorVersionStatus_DRAFT})
+var sDetectorVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetectorVersionStatus_ACTIVE})
+var sDetectorVersionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetectorVersionStatus_INACTIVE})
+var sDetectorVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectorVersionSummary, Members: &mDetectorVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &eDetectorVersionSummary})
+var sDetectorVersionSummary_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eDetectorVersionSummary_detectorVersionId})
+var sDetectorVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDetectorVersionStatus, Members: &mDetectorVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDetectorVersionSummary_status})
+var sDetectorVersionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eDetectorVersionSummary_description})
+var sDetectorVersionSummary_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eDetectorVersionSummary_lastUpdatedTime})
+var s_DetectorVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorVersionSummaryList, Members: &m_DetectorVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DetectorVersionSummaryList})
+var s_DetectorVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDetectorVersionSummary, Members: &mDetectorVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DetectorVersionSummaryList_member})
+var s_Elements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Elements, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Elements})
+var s_ElementsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElementsList, Members: &m_ElementsList, Type: smithy.ShapeTypeList, Ext: &e_ElementsList})
+var s_ElementsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Elements, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_ElementsList_member})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEntity})
+var sEntity_entityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEntity_entityType})
+var sEntity_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_entityRestrictedString, Type: smithy.ShapeTypeString, Ext: &eEntity_entityId})
+var s_entityRestrictedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityRestrictedString, Type: smithy.ShapeTypeString, Ext: &e_entityRestrictedString})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeStructure, Ext: &eEntityType})
+var sEntityType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEntityType_name})
+var sEntityType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eEntityType_description})
+var sEntityType_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEntityType_lastUpdatedTime})
+var sEntityType_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEntityType_createdTime})
+var sEntityType_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eEntityType_arn})
+var s_entityTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityTypeList, Members: &m_entityTypeList, Type: smithy.ShapeTypeList, Ext: &e_entityTypeList})
+var s_entityTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeStructure, Ext: &e_entityTypeList_member})
+var s_entityTypesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_entityTypesMaxResults})
+var sEvaluatedExternalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatedExternalModel, Members: &mEvaluatedExternalModel, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedExternalModel})
+var sEvaluatedExternalModel_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvaluatedExternalModel_modelEndpoint})
+var sEvaluatedExternalModel_useEventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useEventVariables", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEvaluatedExternalModel_useEventVariables})
+var sEvaluatedExternalModel_inputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputVariables", ID: &i_MapOfStrings, Members: &m_MapOfStrings, Traits: &t4, Type: smithy.ShapeTypeMap, Ext: &eEvaluatedExternalModel_inputVariables})
+var sEvaluatedExternalModel_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_MapOfStrings, Members: &m_MapOfStrings, Traits: &t4, Type: smithy.ShapeTypeMap, Ext: &eEvaluatedExternalModel_outputVariables})
+var sEvaluatedModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatedModelVersion, Members: &mEvaluatedModelVersion, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedModelVersion})
+var sEvaluatedModelVersion_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvaluatedModelVersion_modelId})
+var sEvaluatedModelVersion_modelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersion", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvaluatedModelVersion_modelVersion})
+var sEvaluatedModelVersion_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvaluatedModelVersion_modelType})
+var sEvaluatedModelVersion_evaluations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluations", ID: &i_ListOfModelVersionEvaluations, Members: &m_ListOfModelVersionEvaluations, Type: smithy.ShapeTypeList, Ext: &eEvaluatedModelVersion_evaluations})
+var sEvaluatedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatedRule, Members: &mEvaluatedRule, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatedRule})
+var sEvaluatedRule_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eEvaluatedRule_ruleId})
+var sEvaluatedRule_ruleVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleVersion", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eEvaluatedRule_ruleVersion})
+var sEvaluatedRule_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_sensitiveString, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eEvaluatedRule_expression})
+var sEvaluatedRule_expressionWithValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expressionWithValues", ID: &i_sensitiveString, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eEvaluatedRule_expressionWithValues})
+var sEvaluatedRule_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eEvaluatedRule_outcomes})
+var sEvaluatedRule_evaluated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEvaluatedRule_evaluated})
+var sEvaluatedRule_matched = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matched", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEvaluatedRule_matched})
+var s_EvaluatedRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluatedRuleList, Members: &m_EvaluatedRuleList, Type: smithy.ShapeTypeList, Ext: &e_EvaluatedRuleList})
+var s_EvaluatedRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluatedRule, Members: &mEvaluatedRule, Type: smithy.ShapeTypeStructure, Ext: &e_EvaluatedRuleList_member})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eEvent})
+var sEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvent_eventId})
+var sEvent_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvent_eventTypeName})
+var sEvent_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvent_eventTimestamp})
+var sEvent_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_EventAttributeMap, Members: &m_EventAttributeMap, Type: smithy.ShapeTypeMap, Ext: &eEvent_eventVariables})
+var sEvent_currentLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentLabel", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvent_currentLabel})
+var sEvent_labelTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelTimestamp", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEvent_labelTimestamp})
+var sEvent_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_listOfEntities, Members: &m_listOfEntities, Type: smithy.ShapeTypeList, Ext: &eEvent_entities})
+var s_EventAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAttributeMap, Members: &m_EventAttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_EventAttributeMap})
+var s_EventAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_attributeKey, Type: smithy.ShapeTypeString, Ext: &e_EventAttributeMap_key})
+var s_EventAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_attributeValue, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_EventAttributeMap_value})
+var sEventIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventIngestion, Members: &mEventIngestion, Type: smithy.ShapeTypeEnum, Ext: &eEventIngestion})
+var sEventIngestion_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventIngestion_ENABLED})
+var sEventIngestion_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventIngestion_DISABLED})
+var sEventOrchestration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventOrchestration, Members: &mEventOrchestration, Type: smithy.ShapeTypeStructure, Ext: &eEventOrchestration})
+var sEventOrchestration_eventBridgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEventOrchestration_eventBridgeEnabled})
+var s_EventPredictionsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPredictionsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_EventPredictionsMaxResults})
+var sEventPredictionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventPredictionSummary, Members: &mEventPredictionSummary, Type: smithy.ShapeTypeStructure, Ext: &eEventPredictionSummary})
+var sEventPredictionSummary_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_eventId})
+var sEventPredictionSummary_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_eventTypeName})
+var sEventPredictionSummary_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_eventTimestamp})
+var sEventPredictionSummary_predictionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictionTimestamp", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_predictionTimestamp})
+var sEventPredictionSummary_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_detectorId})
+var sEventPredictionSummary_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eEventPredictionSummary_detectorVersionId})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEventType})
+var sEventType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEventType_name})
+var sEventType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eEventType_description})
+var sEventType_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eEventType_eventVariables})
+var sEventType_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eEventType_labels})
+var sEventType_entityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityTypes", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &eEventType_entityTypes})
+var sEventType_eventIngestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventIngestion", ID: &iEventIngestion, Members: &mEventIngestion, Type: smithy.ShapeTypeEnum, Ext: &eEventType_eventIngestion})
+var sEventType_ingestedEventStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventStatistics", ID: &iIngestedEventStatistics, Members: &mIngestedEventStatistics, Type: smithy.ShapeTypeStructure, Ext: &eEventType_ingestedEventStatistics})
+var sEventType_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEventType_lastUpdatedTime})
+var sEventType_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eEventType_createdTime})
+var sEventType_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eEventType_arn})
+var sEventType_eventOrchestration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOrchestration", ID: &iEventOrchestration, Members: &mEventOrchestration, Type: smithy.ShapeTypeStructure, Ext: &eEventType_eventOrchestration})
+var s_eventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeList, Members: &m_eventTypeList, Type: smithy.ShapeTypeList, Ext: &e_eventTypeList})
+var s_eventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &e_eventTypeList_member})
+var s_eventTypesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_eventTypesMaxResults})
+var s_EventVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventVariableMap, Members: &m_EventVariableMap, Type: smithy.ShapeTypeMap, Ext: &e_EventVariableMap})
+var s_EventVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_variableName, Type: smithy.ShapeTypeString, Ext: &e_EventVariableMap_key})
+var s_EventVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_variableValue, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_EventVariableMap_value})
+var sEventVariableSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventVariableSummary, Members: &mEventVariableSummary, Type: smithy.ShapeTypeStructure, Ext: &eEventVariableSummary})
+var sEventVariableSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_sensitiveString, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eEventVariableSummary_name})
+var sEventVariableSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_sensitiveString, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eEventVariableSummary_value})
+var sEventVariableSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_sensitiveString, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eEventVariableSummary_source})
+var sExternalEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalEventsDetail, Members: &mExternalEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eExternalEventsDetail})
+var sExternalEventsDetail_dataLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLocation", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eExternalEventsDetail_dataLocation})
+var sExternalEventsDetail_dataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAccessRoleArn", ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &eExternalEventsDetail_dataAccessRoleArn})
+var sExternalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalModel, Members: &mExternalModel, Type: smithy.ShapeTypeStructure, Ext: &eExternalModel})
+var sExternalModel_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eExternalModel_modelEndpoint})
+var sExternalModel_modelSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelSource", ID: &iModelSource, Members: &mModelSource, Type: smithy.ShapeTypeEnum, Ext: &eExternalModel_modelSource})
+var sExternalModel_invokeModelEndpointRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokeModelEndpointRoleArn", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eExternalModel_invokeModelEndpointRoleArn})
+var sExternalModel_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iModelInputConfiguration, Members: &mModelInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExternalModel_inputConfiguration})
+var sExternalModel_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iModelOutputConfiguration, Members: &mModelOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExternalModel_outputConfiguration})
+var sExternalModel_modelEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpointStatus", ID: &iModelEndpointStatus, Members: &mModelEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eExternalModel_modelEndpointStatus})
+var sExternalModel_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eExternalModel_lastUpdatedTime})
+var sExternalModel_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eExternalModel_createdTime})
+var sExternalModel_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eExternalModel_arn})
+var s_ExternalModelEndpointDataBlobMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalModelEndpointDataBlobMap, Members: &m_ExternalModelEndpointDataBlobMap, Traits: &t2, Type: smithy.ShapeTypeMap, Ext: &e_ExternalModelEndpointDataBlobMap})
+var s_ExternalModelEndpointDataBlobMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_sageMakerEndpointIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ExternalModelEndpointDataBlobMap_key})
+var s_ExternalModelEndpointDataBlobMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iModelEndpointDataBlob, Members: &mModelEndpointDataBlob, Type: smithy.ShapeTypeStructure, Ext: &e_ExternalModelEndpointDataBlobMap_value})
+var s_ExternalModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalModelList, Members: &m_ExternalModelList, Type: smithy.ShapeTypeList, Ext: &e_ExternalModelList})
+var s_ExternalModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExternalModel, Members: &mExternalModel, Type: smithy.ShapeTypeStructure, Ext: &e_ExternalModelList_member})
+var sExternalModelOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalModelOutputs, Members: &mExternalModelOutputs, Type: smithy.ShapeTypeStructure, Ext: &eExternalModelOutputs})
+var sExternalModelOutputs_externalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModel", ID: &iExternalModelSummary, Members: &mExternalModelSummary, Type: smithy.ShapeTypeStructure, Ext: &eExternalModelOutputs_externalModel})
+var sExternalModelOutputs_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_ExternalModelPredictionMap, Members: &m_ExternalModelPredictionMap, Type: smithy.ShapeTypeMap, Ext: &eExternalModelOutputs_outputs})
+var s_ExternalModelPredictionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalModelPredictionMap, Members: &m_ExternalModelPredictionMap, Type: smithy.ShapeTypeMap, Ext: &e_ExternalModelPredictionMap})
+var s_ExternalModelPredictionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ExternalModelPredictionMap_key})
+var s_ExternalModelPredictionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ExternalModelPredictionMap_value})
+var s_ExternalModelsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalModelsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ExternalModelsMaxResults})
+var sExternalModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalModelSummary, Members: &mExternalModelSummary, Type: smithy.ShapeTypeStructure, Ext: &eExternalModelSummary})
+var sExternalModelSummary_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eExternalModelSummary_modelEndpoint})
+var sExternalModelSummary_modelSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelSource", ID: &iModelSource, Members: &mModelSource, Type: smithy.ShapeTypeEnum, Ext: &eExternalModelSummary_modelSource})
+var sFieldValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValidationMessage, Members: &mFieldValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationMessage})
+var sFieldValidationMessage_fieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFieldValidationMessage_fieldName})
+var sFieldValidationMessage_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFieldValidationMessage_identifier})
+var sFieldValidationMessage_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFieldValidationMessage_title})
+var sFieldValidationMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFieldValidationMessage_content})
+var sFieldValidationMessage_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFieldValidationMessage_type})
+var s_fieldValidationMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fieldValidationMessageList, Members: &m_fieldValidationMessageList, Type: smithy.ShapeTypeList, Ext: &e_fieldValidationMessageList})
+var s_fieldValidationMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldValidationMessage, Members: &mFieldValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &e_fieldValidationMessageList_member})
+var sFileValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileValidationMessage, Members: &mFileValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &eFileValidationMessage})
+var sFileValidationMessage_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFileValidationMessage_title})
+var sFileValidationMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFileValidationMessage_content})
+var sFileValidationMessage_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eFileValidationMessage_type})
+var s_fileValidationMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fileValidationMessageList, Members: &m_fileValidationMessageList, Type: smithy.ShapeTypeList, Ext: &e_fileValidationMessageList})
+var s_fileValidationMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileValidationMessage, Members: &mFileValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &e_fileValidationMessageList_member})
+var sFilterCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition})
+var sFilterCondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_filterString, Type: smithy.ShapeTypeString, Ext: &eFilterCondition_value})
+var s_filterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_filterString, Type: smithy.ShapeTypeString, Ext: &e_filterString})
+var s_float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &e_float})
+var s_floatVersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &e_floatVersionString})
+var s_fraudDetectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &e_fraudDetectorArn})
+var s_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_iamRoleArn})
+var s_identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &e_identifier})
+var sIngestedEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestedEventsDetail, Members: &mIngestedEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eIngestedEventsDetail})
+var sIngestedEventsDetail_ingestedEventsTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventsTimeWindow", ID: &iIngestedEventsTimeWindow, Members: &mIngestedEventsTimeWindow, Type: smithy.ShapeTypeStructure, Ext: &eIngestedEventsDetail_ingestedEventsTimeWindow})
+var sIngestedEventStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestedEventStatistics, Members: &mIngestedEventStatistics, Type: smithy.ShapeTypeStructure, Ext: &eIngestedEventStatistics})
+var sIngestedEventStatistics_numberOfEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfEvents", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIngestedEventStatistics_numberOfEvents})
+var sIngestedEventStatistics_eventDataSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDataSizeInBytes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIngestedEventStatistics_eventDataSizeInBytes})
+var sIngestedEventStatistics_leastRecentEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "leastRecentEvent", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eIngestedEventStatistics_leastRecentEvent})
+var sIngestedEventStatistics_mostRecentEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mostRecentEvent", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eIngestedEventStatistics_mostRecentEvent})
+var sIngestedEventStatistics_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eIngestedEventStatistics_lastUpdatedTime})
+var sIngestedEventsTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestedEventsTimeWindow, Members: &mIngestedEventsTimeWindow, Type: smithy.ShapeTypeStructure, Ext: &eIngestedEventsTimeWindow})
+var sIngestedEventsTimeWindow_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eIngestedEventsTimeWindow_startTime})
+var sIngestedEventsTimeWindow_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eIngestedEventsTimeWindow_endTime})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_Integer2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer2, Type: smithy.ShapeTypeInteger, Ext: &e_Integer2})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_JsonKeyToVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonKeyToVariableMap, Members: &m_JsonKeyToVariableMap, Type: smithy.ShapeTypeMap, Ext: &e_JsonKeyToVariableMap})
+var s_JsonKeyToVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_JsonKeyToVariableMap_key})
+var s_JsonKeyToVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_JsonKeyToVariableMap_value})
+var s_KmsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsEncryptionKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsEncryptionKeyArn})
+var sKMSKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSKey, Members: &mKMSKey, Type: smithy.ShapeTypeStructure, Ext: &eKMSKey})
+var sKMSKey_kmsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionKeyArn", ID: &i_KmsEncryptionKeyArn, Type: smithy.ShapeTypeString, Ext: &eKMSKey_kmsEncryptionKeyArn})
+var sLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabel, Members: &mLabel, Type: smithy.ShapeTypeStructure, Ext: &eLabel})
+var sLabel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLabel_name})
+var sLabel_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eLabel_description})
+var sLabel_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eLabel_lastUpdatedTime})
+var sLabel_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eLabel_createdTime})
+var sLabel_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eLabel_arn})
+var s_labelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_labelList, Members: &m_labelList, Type: smithy.ShapeTypeList, Ext: &e_labelList})
+var s_labelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLabel, Members: &mLabel, Type: smithy.ShapeTypeStructure, Ext: &e_labelList_member})
+var s_labelMapper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_labelMapper, Members: &m_labelMapper, Type: smithy.ShapeTypeMap, Ext: &e_labelMapper})
+var s_labelMapper_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_labelMapper_key})
+var s_labelMapper_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &e_labelMapper_value})
+var sLabelSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelSchema, Members: &mLabelSchema, Type: smithy.ShapeTypeStructure, Ext: &eLabelSchema})
+var sLabelSchema_labelMapper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelMapper", ID: &i_labelMapper, Members: &m_labelMapper, Type: smithy.ShapeTypeMap, Ext: &eLabelSchema_labelMapper})
+var sLabelSchema_unlabeledEventsTreatment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unlabeledEventsTreatment", ID: &iUnlabeledEventsTreatment, Members: &mUnlabeledEventsTreatment, Type: smithy.ShapeTypeEnum, Ext: &eLabelSchema_unlabeledEventsTreatment})
+var s_labelsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_labelsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_labelsMaxResults})
+var sLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeEnum, Ext: &eLanguage})
+var sLanguage_DETECTORPL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETECTORPL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguage_DETECTORPL})
+var s_ListOfAggregatedLogOddsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfAggregatedLogOddsMetrics, Members: &m_ListOfAggregatedLogOddsMetrics, Type: smithy.ShapeTypeList, Ext: &e_ListOfAggregatedLogOddsMetrics})
+var s_ListOfAggregatedLogOddsMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAggregatedLogOddsMetric, Members: &mAggregatedLogOddsMetric, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfAggregatedLogOddsMetrics_member})
+var s_ListOfAggregatedVariablesImpactExplanations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfAggregatedVariablesImpactExplanations, Members: &m_ListOfAggregatedVariablesImpactExplanations, Type: smithy.ShapeTypeList, Ext: &e_ListOfAggregatedVariablesImpactExplanations})
+var s_ListOfAggregatedVariablesImpactExplanations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAggregatedVariablesImpactExplanation, Members: &mAggregatedVariablesImpactExplanation, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfAggregatedVariablesImpactExplanations_member})
+var s_listOfEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_listOfEntities, Members: &m_listOfEntities, Type: smithy.ShapeTypeList, Ext: &e_listOfEntities})
+var s_listOfEntities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntity, Members: &mEntity, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &e_listOfEntities_member})
+var s_ListOfEvaluatedExternalModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfEvaluatedExternalModels, Members: &m_ListOfEvaluatedExternalModels, Type: smithy.ShapeTypeList, Ext: &e_ListOfEvaluatedExternalModels})
+var s_ListOfEvaluatedExternalModels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluatedExternalModel, Members: &mEvaluatedExternalModel, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfEvaluatedExternalModels_member})
+var s_ListOfEvaluatedModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfEvaluatedModelVersions, Members: &m_ListOfEvaluatedModelVersions, Type: smithy.ShapeTypeList, Ext: &e_ListOfEvaluatedModelVersions})
+var s_ListOfEvaluatedModelVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluatedModelVersion, Members: &mEvaluatedModelVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfEvaluatedModelVersions_member})
+var s_ListOfEventPredictionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfEventPredictionSummaries, Members: &m_ListOfEventPredictionSummaries, Type: smithy.ShapeTypeList, Ext: &e_ListOfEventPredictionSummaries})
+var s_ListOfEventPredictionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventPredictionSummary, Members: &mEventPredictionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfEventPredictionSummaries_member})
+var s_ListOfEventVariableSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfEventVariableSummaries, Members: &m_ListOfEventVariableSummaries, Type: smithy.ShapeTypeList, Ext: &e_ListOfEventVariableSummaries})
+var s_ListOfEventVariableSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventVariableSummary, Members: &mEventVariableSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfEventVariableSummaries_member})
+var s_ListOfExternalModelOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfExternalModelOutputs, Members: &m_ListOfExternalModelOutputs, Type: smithy.ShapeTypeList, Ext: &e_ListOfExternalModelOutputs})
+var s_ListOfExternalModelOutputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExternalModelOutputs, Members: &mExternalModelOutputs, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfExternalModelOutputs_member})
+var s_ListOfLogOddsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfLogOddsMetrics, Members: &m_ListOfLogOddsMetrics, Type: smithy.ShapeTypeList, Ext: &e_ListOfLogOddsMetrics})
+var s_ListOfLogOddsMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogOddsMetric, Members: &mLogOddsMetric, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfLogOddsMetrics_member})
+var s_ListOfModelScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfModelScores, Members: &m_ListOfModelScores, Type: smithy.ShapeTypeList, Ext: &e_ListOfModelScores})
+var s_ListOfModelScores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelScores, Members: &mModelScores, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfModelScores_member})
+var s_ListOfModelVersionEvaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfModelVersionEvaluations, Members: &m_ListOfModelVersionEvaluations, Type: smithy.ShapeTypeList, Ext: &e_ListOfModelVersionEvaluations})
+var s_ListOfModelVersionEvaluations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelVersionEvaluation, Members: &mModelVersionEvaluation, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfModelVersionEvaluations_member})
+var s_ListOfModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfModelVersions, Members: &m_ListOfModelVersions, Type: smithy.ShapeTypeList, Ext: &e_ListOfModelVersions})
+var s_ListOfModelVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelVersion, Members: &mModelVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfModelVersions_member})
+var s_ListOfRuleResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfRuleResults, Members: &m_ListOfRuleResults, Type: smithy.ShapeTypeList, Ext: &e_ListOfRuleResults})
+var s_ListOfRuleResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleResult, Members: &mRuleResult, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfRuleResults_member})
+var s_ListOfStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &e_ListOfStrings})
+var s_ListOfStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ListOfStrings_member})
+var s_listOfVariableImpactExplanations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_listOfVariableImpactExplanations, Members: &m_listOfVariableImpactExplanations, Type: smithy.ShapeTypeList, Ext: &e_listOfVariableImpactExplanations})
+var s_listOfVariableImpactExplanations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVariableImpactExplanation, Members: &mVariableImpactExplanation, Type: smithy.ShapeTypeStructure, Ext: &e_listOfVariableImpactExplanations_member})
+var s_ListsElementsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListsElementsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListsElementsMaxResults})
+var s_ListsMetadataMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListsMetadataMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListsMetadataMaxResults})
+var sListUpdateMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUpdateMode, Members: &mListUpdateMode, Type: smithy.ShapeTypeEnum, Ext: &eListUpdateMode})
+var sListUpdateMode_REPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListUpdateMode_REPLACE})
+var sListUpdateMode_APPEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPEND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListUpdateMode_APPEND})
+var sListUpdateMode_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListUpdateMode_REMOVE})
+var sLogOddsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogOddsMetric, Members: &mLogOddsMetric, Type: smithy.ShapeTypeStructure, Ext: &eLogOddsMetric})
+var sLogOddsMetric_variableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLogOddsMetric_variableName})
+var sLogOddsMetric_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLogOddsMetric_variableType})
+var sLogOddsMetric_variableImportance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableImportance", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eLogOddsMetric_variableImportance})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MapOfStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapOfStrings, Members: &m_MapOfStrings, Traits: &t2, Type: smithy.ShapeTypeMap, Ext: &e_MapOfStrings})
+var s_MapOfStrings_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_MapOfStrings_key})
+var s_MapOfStrings_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_MapOfStrings_value})
+var sMetricDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataPoint, Members: &mMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataPoint})
+var sMetricDataPoint_fpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eMetricDataPoint_fpr})
+var sMetricDataPoint_precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "precision", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eMetricDataPoint_precision})
+var sMetricDataPoint_tpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eMetricDataPoint_tpr})
+var sMetricDataPoint_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eMetricDataPoint_threshold})
+var s_metricDataPointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metricDataPointsList, Members: &m_metricDataPointsList, Type: smithy.ShapeTypeList, Ext: &e_metricDataPointsList})
+var s_metricDataPointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataPoint, Members: &mMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_metricDataPointsList_member})
+var sModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModel, Members: &mModel, Type: smithy.ShapeTypeStructure, Ext: &eModel})
+var sModel_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eModel_modelId})
+var sModel_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eModel_modelType})
+var sModel_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eModel_description})
+var sModel_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eModel_eventTypeName})
+var sModel_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eModel_createdTime})
+var sModel_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eModel_lastUpdatedTime})
+var sModel_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eModel_arn})
+var sModelEndpointDataBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelEndpointDataBlob, Members: &mModelEndpointDataBlob, Type: smithy.ShapeTypeStructure, Ext: &eModelEndpointDataBlob})
+var sModelEndpointDataBlob_byteBuffer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteBuffer", ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &eModelEndpointDataBlob_byteBuffer})
+var sModelEndpointDataBlob_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_contentType, Type: smithy.ShapeTypeString, Ext: &eModelEndpointDataBlob_contentType})
+var sModelEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelEndpointStatus, Members: &mModelEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eModelEndpointStatus})
+var sModelEndpointStatus_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelEndpointStatus_ASSOCIATED})
+var sModelEndpointStatus_DISSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelEndpointStatus_DISSOCIATED})
+var s_modelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &e_modelIdentifier})
+var sModelInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelInputConfiguration, Members: &mModelInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eModelInputConfiguration})
+var sModelInputConfiguration_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eModelInputConfiguration_eventTypeName})
+var sModelInputConfiguration_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iModelInputDataFormat, Members: &mModelInputDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eModelInputConfiguration_format})
+var sModelInputConfiguration_useEventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useEventVariables", ID: &i_UseEventVariables, Type: smithy.ShapeTypeBoolean, Ext: &eModelInputConfiguration_useEventVariables})
+var sModelInputConfiguration_jsonInputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonInputTemplate", ID: &i_modelInputTemplate, Type: smithy.ShapeTypeString, Ext: &eModelInputConfiguration_jsonInputTemplate})
+var sModelInputConfiguration_csvInputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "csvInputTemplate", ID: &i_modelInputTemplate, Type: smithy.ShapeTypeString, Ext: &eModelInputConfiguration_csvInputTemplate})
+var sModelInputDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelInputDataFormat, Members: &mModelInputDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eModelInputDataFormat})
+var sModelInputDataFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelInputDataFormat_CSV})
+var sModelInputDataFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelInputDataFormat_JSON})
+var s_modelInputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelInputTemplate, Type: smithy.ShapeTypeString, Ext: &e_modelInputTemplate})
+var s_modelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelList, Members: &m_modelList, Type: smithy.ShapeTypeList, Ext: &e_modelList})
+var s_modelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModel, Members: &mModel, Type: smithy.ShapeTypeStructure, Ext: &e_modelList_member})
+var sModelOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelOutputConfiguration, Members: &mModelOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eModelOutputConfiguration})
+var sModelOutputConfiguration_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iModelOutputDataFormat, Members: &mModelOutputDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eModelOutputConfiguration_format})
+var sModelOutputConfiguration_jsonKeyToVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonKeyToVariableMap", ID: &i_JsonKeyToVariableMap, Members: &m_JsonKeyToVariableMap, Type: smithy.ShapeTypeMap, Ext: &eModelOutputConfiguration_jsonKeyToVariableMap})
+var sModelOutputConfiguration_csvIndexToVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "csvIndexToVariableMap", ID: &i_CsvIndexToVariableMap, Members: &m_CsvIndexToVariableMap, Type: smithy.ShapeTypeMap, Ext: &eModelOutputConfiguration_csvIndexToVariableMap})
+var sModelOutputDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelOutputDataFormat, Members: &mModelOutputDataFormat, Type: smithy.ShapeTypeEnum, Ext: &eModelOutputDataFormat})
+var sModelOutputDataFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelOutputDataFormat_CSV})
+var sModelOutputDataFormat_JSONLINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONLINES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelOutputDataFormat_JSONLINES})
+var s_ModelPredictionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelPredictionMap, Members: &m_ModelPredictionMap, Type: smithy.ShapeTypeMap, Ext: &e_ModelPredictionMap})
+var s_ModelPredictionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ModelPredictionMap_key})
+var s_ModelPredictionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &e_ModelPredictionMap_value})
+var sModelScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelScores, Members: &mModelScores, Type: smithy.ShapeTypeStructure, Ext: &eModelScores})
+var sModelScores_modelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersion", ID: &iModelVersion, Members: &mModelVersion, Type: smithy.ShapeTypeStructure, Ext: &eModelScores_modelVersion})
+var sModelScores_scores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scores", ID: &i_ModelPredictionMap, Members: &m_ModelPredictionMap, Type: smithy.ShapeTypeMap, Ext: &eModelScores_scores})
+var s_modelsMaxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &e_modelsMaxPageSize})
+var sModelSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelSource, Members: &mModelSource, Type: smithy.ShapeTypeEnum, Ext: &eModelSource})
+var sModelSource_SAGEMAKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelSource_SAGEMAKER})
+var sModelTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eModelTypeEnum})
+var sModelTypeEnum_ONLINE_FRAUD_INSIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLINE_FRAUD_INSIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelTypeEnum_ONLINE_FRAUD_INSIGHTS})
+var sModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSACTION_FRAUD_INSIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS})
+var sModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_TAKEOVER_INSIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS})
+var sModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersion, Members: &mModelVersion, Type: smithy.ShapeTypeStructure, Ext: &eModelVersion})
+var sModelVersion_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eModelVersion_modelId})
+var sModelVersion_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eModelVersion_modelType})
+var sModelVersion_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eModelVersion_modelVersionNumber})
+var sModelVersion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eModelVersion_arn})
+var sModelVersionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionDetail, Members: &mModelVersionDetail, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail})
+var sModelVersionDetail_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_modelId})
+var sModelVersionDetail_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eModelVersionDetail_modelType})
+var sModelVersionDetail_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_modelVersionNumber})
+var sModelVersionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_status})
+var sModelVersionDetail_trainingDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSource", ID: &iTrainingDataSourceEnum, Members: &mTrainingDataSourceEnum, Type: smithy.ShapeTypeEnum, Ext: &eModelVersionDetail_trainingDataSource})
+var sModelVersionDetail_trainingDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSchema", ID: &iTrainingDataSchema, Members: &mTrainingDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail_trainingDataSchema})
+var sModelVersionDetail_externalEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalEventsDetail", ID: &iExternalEventsDetail, Members: &mExternalEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail_externalEventsDetail})
+var sModelVersionDetail_ingestedEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventsDetail", ID: &iIngestedEventsDetail, Members: &mIngestedEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail_ingestedEventsDetail})
+var sModelVersionDetail_trainingResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingResult", ID: &iTrainingResult, Members: &mTrainingResult, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail_trainingResult})
+var sModelVersionDetail_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_lastUpdatedTime})
+var sModelVersionDetail_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_createdTime})
+var sModelVersionDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eModelVersionDetail_arn})
+var sModelVersionDetail_trainingResultV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingResultV2", ID: &iTrainingResultV2, Members: &mTrainingResultV2, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionDetail_trainingResultV2})
+var s_modelVersionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_modelVersionDetailList, Members: &m_modelVersionDetailList, Type: smithy.ShapeTypeList, Ext: &e_modelVersionDetailList})
+var s_modelVersionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelVersionDetail, Members: &mModelVersionDetail, Type: smithy.ShapeTypeStructure, Ext: &e_modelVersionDetailList_member})
+var sModelVersionEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionEvaluation, Members: &mModelVersionEvaluation, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionEvaluation})
+var sModelVersionEvaluation_outputVariableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariableName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eModelVersionEvaluation_outputVariableName})
+var sModelVersionEvaluation_evaluationScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationScore", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eModelVersionEvaluation_evaluationScore})
+var sModelVersionEvaluation_predictionExplanations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictionExplanations", ID: &iPredictionExplanations, Members: &mPredictionExplanations, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionEvaluation_predictionExplanations})
+var sModelVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eModelVersionStatus})
+var sModelVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionStatus_ACTIVE})
+var sModelVersionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionStatus_INACTIVE})
+var sModelVersionStatus_TRAINING_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING_CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eModelVersionStatus_TRAINING_CANCELLED})
+var s_NameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameList, Members: &m_NameList, Type: smithy.ShapeTypeList, Ext: &e_NameList})
+var s_NameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_NameList_member})
+var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &e_nextToken})
+var s_noDashIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &e_noDashIdentifier})
+var s_NonEmptyListOfStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &e_NonEmptyListOfStrings})
+var s_NonEmptyListOfStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyListOfStrings_member})
+var sOFIMetricDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOFIMetricDataPoint, Members: &mOFIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eOFIMetricDataPoint})
+var sOFIMetricDataPoint_fpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eOFIMetricDataPoint_fpr})
+var sOFIMetricDataPoint_precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "precision", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eOFIMetricDataPoint_precision})
+var sOFIMetricDataPoint_tpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eOFIMetricDataPoint_tpr})
+var sOFIMetricDataPoint_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eOFIMetricDataPoint_threshold})
+var s_OFIMetricDataPointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OFIMetricDataPointsList, Members: &m_OFIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &e_OFIMetricDataPointsList})
+var s_OFIMetricDataPointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOFIMetricDataPoint, Members: &mOFIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_OFIMetricDataPointsList_member})
+var sOFIModelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOFIModelPerformance, Members: &mOFIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eOFIModelPerformance})
+var sOFIModelPerformance_auc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auc", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eOFIModelPerformance_auc})
+var sOFIModelPerformance_uncertaintyRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uncertaintyRange", ID: &iUncertaintyRange, Members: &mUncertaintyRange, Type: smithy.ShapeTypeStructure, Ext: &eOFIModelPerformance_uncertaintyRange})
+var sOFITrainingMetricsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOFITrainingMetricsValue, Members: &mOFITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eOFITrainingMetricsValue})
+var sOFITrainingMetricsValue_metricDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDataPoints", ID: &i_OFIMetricDataPointsList, Members: &m_OFIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &eOFITrainingMetricsValue_metricDataPoints})
+var sOFITrainingMetricsValue_modelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPerformance", ID: &iOFIModelPerformance, Members: &mOFIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eOFITrainingMetricsValue_modelPerformance})
+var sOutcome = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutcome, Members: &mOutcome, Type: smithy.ShapeTypeStructure, Ext: &eOutcome})
+var sOutcome_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eOutcome_name})
+var sOutcome_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eOutcome_description})
+var sOutcome_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eOutcome_lastUpdatedTime})
+var sOutcome_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eOutcome_createdTime})
+var sOutcome_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eOutcome_arn})
+var s_OutcomeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutcomeList, Members: &m_OutcomeList, Type: smithy.ShapeTypeList, Ext: &e_OutcomeList})
+var s_OutcomeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutcome, Members: &mOutcome, Type: smithy.ShapeTypeStructure, Ext: &e_OutcomeList_member})
+var s_OutcomesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutcomesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_OutcomesMaxResults})
+var sPredictionExplanations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictionExplanations, Members: &mPredictionExplanations, Type: smithy.ShapeTypeStructure, Ext: &ePredictionExplanations})
+var sPredictionExplanations_variableImpactExplanations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableImpactExplanations", ID: &i_listOfVariableImpactExplanations, Members: &m_listOfVariableImpactExplanations, Type: smithy.ShapeTypeList, Ext: &ePredictionExplanations_variableImpactExplanations})
+var sPredictionExplanations_aggregatedVariablesImpactExplanations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedVariablesImpactExplanations", ID: &i_ListOfAggregatedVariablesImpactExplanations, Members: &m_ListOfAggregatedVariablesImpactExplanations, Type: smithy.ShapeTypeList, Ext: &ePredictionExplanations_aggregatedVariablesImpactExplanations})
+var sPredictionTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictionTimeRange, Members: &mPredictionTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ePredictionTimeRange})
+var sPredictionTimeRange_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &ePredictionTimeRange_startTime})
+var sPredictionTimeRange_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &ePredictionTimeRange_endTime})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eResourceUnavailableException})
+var sResourceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eResourceUnavailableException_message})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eRule_detectorId})
+var sRule_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eRule_ruleId})
+var sRule_ruleVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleVersion", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eRule_ruleVersion})
+var sRuleDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDetail, Members: &mRuleDetail, Type: smithy.ShapeTypeStructure, Ext: &eRuleDetail})
+var sRuleDetail_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_ruleId})
+var sRuleDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_description})
+var sRuleDetail_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_detectorId})
+var sRuleDetail_ruleVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleVersion", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_ruleVersion})
+var sRuleDetail_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_ruleExpression, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_expression})
+var sRuleDetail_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeEnum, Ext: &eRuleDetail_language})
+var sRuleDetail_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &eRuleDetail_outcomes})
+var sRuleDetail_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_lastUpdatedTime})
+var sRuleDetail_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_createdTime})
+var sRuleDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eRuleDetail_arn})
+var s_RuleDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDetailList, Members: &m_RuleDetailList, Type: smithy.ShapeTypeList, Ext: &e_RuleDetailList})
+var s_RuleDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleDetail, Members: &mRuleDetail, Type: smithy.ShapeTypeStructure, Ext: &e_RuleDetailList_member})
+var sRuleExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionMode, Members: &mRuleExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eRuleExecutionMode})
+var sRuleExecutionMode_ALL_MATCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_MATCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionMode_ALL_MATCHED})
+var sRuleExecutionMode_FIRST_MATCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST_MATCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionMode_FIRST_MATCHED})
+var s_ruleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ruleExpression, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_ruleExpression})
+var s_RuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList, Ext: &e_RuleList})
+var s_RuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &e_RuleList_member})
+var sRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleResult, Members: &mRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eRuleResult})
+var sRuleResult_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eRuleResult_ruleId})
+var sRuleResult_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eRuleResult_outcomes})
+var s_RulesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_RulesMaxResults})
+var s_s3BucketLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &e_s3BucketLocation})
+var s_sageMakerEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sageMakerEndpointIdentifier, Type: smithy.ShapeTypeString, Ext: &e_sageMakerEndpointIdentifier})
+var s_sensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_sensitiveString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_sensitiveString})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &e_tagKey})
+var s_tagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKeyList, Members: &m_tagKeyList, Type: smithy.ShapeTypeList, Ext: &e_tagKeyList})
+var s_tagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &e_tagKeyList_member})
+var s_tagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &e_tagList})
+var s_tagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_tagList_member})
+var s_TagsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_TagsMaxResults})
+var s_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &e_tagValue})
+var sTFIMetricDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTFIMetricDataPoint, Members: &mTFIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eTFIMetricDataPoint})
+var sTFIMetricDataPoint_fpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTFIMetricDataPoint_fpr})
+var sTFIMetricDataPoint_precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "precision", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTFIMetricDataPoint_precision})
+var sTFIMetricDataPoint_tpr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tpr", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTFIMetricDataPoint_tpr})
+var sTFIMetricDataPoint_threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threshold", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTFIMetricDataPoint_threshold})
+var s_TFIMetricDataPointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TFIMetricDataPointsList, Members: &m_TFIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &e_TFIMetricDataPointsList})
+var s_TFIMetricDataPointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTFIMetricDataPoint, Members: &mTFIMetricDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_TFIMetricDataPointsList_member})
+var sTFIModelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTFIModelPerformance, Members: &mTFIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eTFIModelPerformance})
+var sTFIModelPerformance_auc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auc", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTFIModelPerformance_auc})
+var sTFIModelPerformance_uncertaintyRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uncertaintyRange", ID: &iUncertaintyRange, Members: &mUncertaintyRange, Type: smithy.ShapeTypeStructure, Ext: &eTFIModelPerformance_uncertaintyRange})
+var sTFITrainingMetricsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTFITrainingMetricsValue, Members: &mTFITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eTFITrainingMetricsValue})
+var sTFITrainingMetricsValue_metricDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDataPoints", ID: &i_TFIMetricDataPointsList, Members: &m_TFIMetricDataPointsList, Type: smithy.ShapeTypeList, Ext: &eTFITrainingMetricsValue_metricDataPoints})
+var sTFITrainingMetricsValue_modelPerformance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPerformance", ID: &iTFIModelPerformance, Members: &mTFIModelPerformance, Type: smithy.ShapeTypeStructure, Ext: &eTFITrainingMetricsValue_modelPerformance})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_time, Type: smithy.ShapeTypeString, Ext: &e_time})
+var sTrainingDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingDataSchema, Members: &mTrainingDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eTrainingDataSchema})
+var sTrainingDataSchema_modelVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVariables", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eTrainingDataSchema_modelVariables})
+var sTrainingDataSchema_labelSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelSchema", ID: &iLabelSchema, Members: &mLabelSchema, Type: smithy.ShapeTypeStructure, Ext: &eTrainingDataSchema_labelSchema})
+var sTrainingDataSourceEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingDataSourceEnum, Members: &mTrainingDataSourceEnum, Type: smithy.ShapeTypeEnum, Ext: &eTrainingDataSourceEnum})
+var sTrainingDataSourceEnum_EXTERNAL_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrainingDataSourceEnum_EXTERNAL_EVENTS})
+var sTrainingDataSourceEnum_INGESTED_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INGESTED_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrainingDataSourceEnum_INGESTED_EVENTS})
+var sTrainingMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingMetrics, Members: &mTrainingMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingMetrics})
+var sTrainingMetrics_auc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auc", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eTrainingMetrics_auc})
+var sTrainingMetrics_metricDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDataPoints", ID: &i_metricDataPointsList, Members: &m_metricDataPointsList, Type: smithy.ShapeTypeList, Ext: &eTrainingMetrics_metricDataPoints})
+var sTrainingMetricsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingMetricsV2, Members: &mTrainingMetricsV2, Type: smithy.ShapeTypeStructure, Ext: &eTrainingMetricsV2})
+var sTrainingMetricsV2_ofi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ofi", ID: &iOFITrainingMetricsValue, Members: &mOFITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eTrainingMetricsV2_ofi})
+var sTrainingMetricsV2_tfi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tfi", ID: &iTFITrainingMetricsValue, Members: &mTFITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eTrainingMetricsV2_tfi})
+var sTrainingMetricsV2_ati = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ati", ID: &iATITrainingMetricsValue, Members: &mATITrainingMetricsValue, Type: smithy.ShapeTypeStructure, Ext: &eTrainingMetricsV2_ati})
+var sTrainingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingResult, Members: &mTrainingResult, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResult})
+var sTrainingResult_dataValidationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataValidationMetrics", ID: &iDataValidationMetrics, Members: &mDataValidationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResult_dataValidationMetrics})
+var sTrainingResult_trainingMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingMetrics", ID: &iTrainingMetrics, Members: &mTrainingMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResult_trainingMetrics})
+var sTrainingResult_variableImportanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableImportanceMetrics", ID: &iVariableImportanceMetrics, Members: &mVariableImportanceMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResult_variableImportanceMetrics})
+var sTrainingResultV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingResultV2, Members: &mTrainingResultV2, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResultV2})
+var sTrainingResultV2_dataValidationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataValidationMetrics", ID: &iDataValidationMetrics, Members: &mDataValidationMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResultV2_dataValidationMetrics})
+var sTrainingResultV2_trainingMetricsV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingMetricsV2", ID: &iTrainingMetricsV2, Members: &mTrainingMetricsV2, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResultV2_trainingMetricsV2})
+var sTrainingResultV2_variableImportanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableImportanceMetrics", ID: &iVariableImportanceMetrics, Members: &mVariableImportanceMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResultV2_variableImportanceMetrics})
+var sTrainingResultV2_aggregatedVariablesImportanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedVariablesImportanceMetrics", ID: &iAggregatedVariablesImportanceMetrics, Members: &mAggregatedVariablesImportanceMetrics, Type: smithy.ShapeTypeStructure, Ext: &eTrainingResultV2_aggregatedVariablesImportanceMetrics})
+var sUncertaintyRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUncertaintyRange, Members: &mUncertaintyRange, Type: smithy.ShapeTypeStructure, Ext: &eUncertaintyRange})
+var sUncertaintyRange_lowerBoundValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lowerBoundValue", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eUncertaintyRange_lowerBoundValue})
+var sUncertaintyRange_upperBoundValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upperBoundValue", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eUncertaintyRange_upperBoundValue})
+var sUnlabeledEventsTreatment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlabeledEventsTreatment, Members: &mUnlabeledEventsTreatment, Type: smithy.ShapeTypeEnum, Ext: &eUnlabeledEventsTreatment})
+var sUnlabeledEventsTreatment_IGNORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnlabeledEventsTreatment_IGNORE})
+var sUnlabeledEventsTreatment_FRAUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRAUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnlabeledEventsTreatment_FRAUD})
+var sUnlabeledEventsTreatment_LEGIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnlabeledEventsTreatment_LEGIT})
+var sUnlabeledEventsTreatment_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnlabeledEventsTreatment_AUTO})
+var s_UseEventVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UseEventVariables, Type: smithy.ShapeTypeBoolean, Ext: &e_UseEventVariables})
+var s_utcTimestampISO8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_utcTimestampISO8601, Type: smithy.ShapeTypeString, Ext: &e_utcTimestampISO8601})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariable, Members: &mVariable, Type: smithy.ShapeTypeStructure, Ext: &eVariable})
+var sVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariable_name})
+var sVariable_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eVariable_dataType})
+var sVariable_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeEnum, Ext: &eVariable_dataSource})
+var sVariable_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariable_defaultValue})
+var sVariable_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariable_description})
+var sVariable_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariable_variableType})
+var sVariable_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eVariable_lastUpdatedTime})
+var sVariable_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eVariable_createdTime})
+var sVariable_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eVariable_arn})
+var sVariableEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariableEntry, Members: &mVariableEntry, Type: smithy.ShapeTypeStructure, Ext: &eVariableEntry})
+var sVariableEntry_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_name})
+var sVariableEntry_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_dataType})
+var sVariableEntry_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_dataSource})
+var sVariableEntry_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_defaultValue})
+var sVariableEntry_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_description})
+var sVariableEntry_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableEntry_variableType})
+var s_VariableEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableEntryList, Members: &m_VariableEntryList, Type: smithy.ShapeTypeList, Ext: &e_VariableEntryList})
+var s_VariableEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVariableEntry, Members: &mVariableEntry, Type: smithy.ShapeTypeStructure, Ext: &e_VariableEntryList_member})
+var sVariableImpactExplanation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariableImpactExplanation, Members: &mVariableImpactExplanation, Type: smithy.ShapeTypeStructure, Ext: &eVariableImpactExplanation})
+var sVariableImpactExplanation_eventVariableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariableName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableImpactExplanation_eventVariableName})
+var sVariableImpactExplanation_relativeImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativeImpact", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eVariableImpactExplanation_relativeImpact})
+var sVariableImpactExplanation_logOddsImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logOddsImpact", ID: &i_float, Type: smithy.ShapeTypeFloat, Ext: &eVariableImpactExplanation_logOddsImpact})
+var sVariableImportanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariableImportanceMetrics, Members: &mVariableImportanceMetrics, Type: smithy.ShapeTypeStructure, Ext: &eVariableImportanceMetrics})
+var sVariableImportanceMetrics_logOddsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logOddsMetrics", ID: &i_ListOfLogOddsMetrics, Members: &m_ListOfLogOddsMetrics, Type: smithy.ShapeTypeList, Ext: &eVariableImportanceMetrics_logOddsMetrics})
+var s_VariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableList, Members: &m_VariableList, Type: smithy.ShapeTypeList, Ext: &e_VariableList})
+var s_VariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVariable, Members: &mVariable, Type: smithy.ShapeTypeStructure, Ext: &e_VariableList_member})
+var s_variableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_variableName, Type: smithy.ShapeTypeString, Ext: &e_variableName})
+var s_VariablesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariablesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_VariablesMaxResults})
+var s_variableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_variableType, Type: smithy.ShapeTypeString, Ext: &e_variableType})
+var s_variableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_variableValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_variableValue})
+var s_wholeNumberVersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &e_wholeNumberVersionString})
+var sBatchCreateVariableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVariableRequest, Members: &mBatchCreateVariableRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateVariableRequest})
+var sBatchCreateVariableRequest_variableEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableEntries", ID: &i_VariableEntryList, Members: &m_VariableEntryList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVariableRequest_variableEntries})
+var sBatchCreateVariableRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVariableRequest_tags})
+var sBatchCreateVariableResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateVariableResult, Members: &mBatchCreateVariableResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateVariableResult})
+var sBatchCreateVariableResult_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchCreateVariableErrorList, Members: &m_BatchCreateVariableErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateVariableResult_errors})
+var sBatchGetVariableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVariableRequest, Members: &mBatchGetVariableRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetVariableRequest})
+var sBatchGetVariableRequest_names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "names", ID: &i_NameList, Members: &m_NameList, Type: smithy.ShapeTypeList, Ext: &eBatchGetVariableRequest_names})
+var sBatchGetVariableResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVariableResult, Members: &mBatchGetVariableResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetVariableResult})
+var sBatchGetVariableResult_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_VariableList, Members: &m_VariableList, Type: smithy.ShapeTypeList, Ext: &eBatchGetVariableResult_variables})
+var sBatchGetVariableResult_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetVariableErrorList, Members: &m_BatchGetVariableErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchGetVariableResult_errors})
+var sCancelBatchImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchImportJobRequest, Members: &mCancelBatchImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelBatchImportJobRequest})
+var sCancelBatchImportJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCancelBatchImportJobRequest_jobId})
+var sCancelBatchImportJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchImportJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCancelBatchImportJobResult})
+var sCancelBatchPredictionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchPredictionJobRequest, Members: &mCancelBatchPredictionJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelBatchPredictionJobRequest})
+var sCancelBatchPredictionJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCancelBatchPredictionJobRequest_jobId})
+var sCancelBatchPredictionJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBatchPredictionJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCancelBatchPredictionJobResult})
+var sCreateBatchImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchImportJobRequest, Members: &mCreateBatchImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchImportJobRequest})
+var sCreateBatchImportJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateBatchImportJobRequest_jobId})
+var sCreateBatchImportJobRequest_inputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eCreateBatchImportJobRequest_inputPath})
+var sCreateBatchImportJobRequest_outputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eCreateBatchImportJobRequest_outputPath})
+var sCreateBatchImportJobRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateBatchImportJobRequest_eventTypeName})
+var sCreateBatchImportJobRequest_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateBatchImportJobRequest_iamRoleArn})
+var sCreateBatchImportJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateBatchImportJobRequest_tags})
+var sCreateBatchImportJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchImportJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchImportJobResult})
+var sCreateBatchPredictionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPredictionJobRequest, Members: &mCreateBatchPredictionJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchPredictionJobRequest})
+var sCreateBatchPredictionJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_jobId})
+var sCreateBatchPredictionJobRequest_inputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_inputPath})
+var sCreateBatchPredictionJobRequest_outputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputPath", ID: &i_s3BucketLocation, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_outputPath})
+var sCreateBatchPredictionJobRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_eventTypeName})
+var sCreateBatchPredictionJobRequest_detectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_detectorName})
+var sCreateBatchPredictionJobRequest_detectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersion", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_detectorVersion})
+var sCreateBatchPredictionJobRequest_iamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamRoleArn", ID: &i_iamRoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateBatchPredictionJobRequest_iamRoleArn})
+var sCreateBatchPredictionJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateBatchPredictionJobRequest_tags})
+var sCreateBatchPredictionJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPredictionJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateBatchPredictionJobResult})
+var sCreateDetectorVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDetectorVersionRequest, Members: &mCreateDetectorVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDetectorVersionRequest})
+var sCreateDetectorVersionRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateDetectorVersionRequest_detectorId})
+var sCreateDetectorVersionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateDetectorVersionRequest_description})
+var sCreateDetectorVersionRequest_externalModelEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModelEndpoints", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eCreateDetectorVersionRequest_externalModelEndpoints})
+var sCreateDetectorVersionRequest_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList, Ext: &eCreateDetectorVersionRequest_rules})
+var sCreateDetectorVersionRequest_modelVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersions", ID: &i_ListOfModelVersions, Members: &m_ListOfModelVersions, Type: smithy.ShapeTypeList, Ext: &eCreateDetectorVersionRequest_modelVersions})
+var sCreateDetectorVersionRequest_ruleExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionMode", ID: &iRuleExecutionMode, Members: &mRuleExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateDetectorVersionRequest_ruleExecutionMode})
+var sCreateDetectorVersionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateDetectorVersionRequest_tags})
+var sCreateDetectorVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDetectorVersionResult, Members: &mCreateDetectorVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDetectorVersionResult})
+var sCreateDetectorVersionResult_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateDetectorVersionResult_detectorId})
+var sCreateDetectorVersionResult_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eCreateDetectorVersionResult_detectorVersionId})
+var sCreateDetectorVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDetectorVersionStatus, Members: &mDetectorVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateDetectorVersionResult_status})
+var sCreateListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListRequest, Members: &mCreateListRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateListRequest})
+var sCreateListRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateListRequest_name})
+var sCreateListRequest_elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elements", ID: &i_ElementsList, Members: &m_ElementsList, Type: smithy.ShapeTypeList, Ext: &eCreateListRequest_elements})
+var sCreateListRequest_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_variableType, Type: smithy.ShapeTypeString, Ext: &eCreateListRequest_variableType})
+var sCreateListRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateListRequest_description})
+var sCreateListRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateListRequest_tags})
+var sCreateListResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateListResult})
+var sCreateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelRequest, Members: &mCreateModelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelRequest})
+var sCreateModelRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateModelRequest_modelId})
+var sCreateModelRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateModelRequest_modelType})
+var sCreateModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateModelRequest_description})
+var sCreateModelRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateModelRequest_eventTypeName})
+var sCreateModelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateModelRequest_tags})
+var sCreateModelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelResult})
+var sCreateModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelVersionRequest, Members: &mCreateModelVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelVersionRequest})
+var sCreateModelVersionRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateModelVersionRequest_modelId})
+var sCreateModelVersionRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateModelVersionRequest_modelType})
+var sCreateModelVersionRequest_trainingDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSource", ID: &iTrainingDataSourceEnum, Members: &mTrainingDataSourceEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateModelVersionRequest_trainingDataSource})
+var sCreateModelVersionRequest_trainingDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSchema", ID: &iTrainingDataSchema, Members: &mTrainingDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelVersionRequest_trainingDataSchema})
+var sCreateModelVersionRequest_externalEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalEventsDetail", ID: &iExternalEventsDetail, Members: &mExternalEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelVersionRequest_externalEventsDetail})
+var sCreateModelVersionRequest_ingestedEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventsDetail", ID: &iIngestedEventsDetail, Members: &mIngestedEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelVersionRequest_ingestedEventsDetail})
+var sCreateModelVersionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateModelVersionRequest_tags})
+var sCreateModelVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelVersionResult, Members: &mCreateModelVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateModelVersionResult})
+var sCreateModelVersionResult_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateModelVersionResult_modelId})
+var sCreateModelVersionResult_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateModelVersionResult_modelType})
+var sCreateModelVersionResult_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eCreateModelVersionResult_modelVersionNumber})
+var sCreateModelVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateModelVersionResult_status})
+var sCreateRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleRequest, Members: &mCreateRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleRequest})
+var sCreateRuleRequest_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_ruleId})
+var sCreateRuleRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_detectorId})
+var sCreateRuleRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_description})
+var sCreateRuleRequest_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_ruleExpression, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_expression})
+var sCreateRuleRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleRequest_language})
+var sCreateRuleRequest_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_outcomes})
+var sCreateRuleRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_tags})
+var sCreateRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleResult, Members: &mCreateRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResult})
+var sCreateRuleResult_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResult_rule})
+var sCreateVariableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVariableRequest, Members: &mCreateVariableRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVariableRequest})
+var sCreateVariableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVariableRequest_name})
+var sCreateVariableRequest_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eCreateVariableRequest_dataType})
+var sCreateVariableRequest_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeEnum, Ext: &eCreateVariableRequest_dataSource})
+var sCreateVariableRequest_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVariableRequest_defaultValue})
+var sCreateVariableRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVariableRequest_description})
+var sCreateVariableRequest_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eCreateVariableRequest_variableType})
+var sCreateVariableRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eCreateVariableRequest_tags})
+var sCreateVariableResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVariableResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateVariableResult})
+var sDeleteBatchImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchImportJobRequest, Members: &mDeleteBatchImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBatchImportJobRequest})
+var sDeleteBatchImportJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteBatchImportJobRequest_jobId})
+var sDeleteBatchImportJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchImportJobResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBatchImportJobResult})
+var sDeleteBatchPredictionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPredictionJobRequest, Members: &mDeleteBatchPredictionJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBatchPredictionJobRequest})
+var sDeleteBatchPredictionJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteBatchPredictionJobRequest_jobId})
+var sDeleteBatchPredictionJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPredictionJobResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBatchPredictionJobResult})
+var sDeleteDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetectorRequest, Members: &mDeleteDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDetectorRequest})
+var sDeleteDetectorRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteDetectorRequest_detectorId})
+var sDeleteDetectorResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetectorResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDetectorResult})
+var sDeleteDetectorVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetectorVersionRequest, Members: &mDeleteDetectorVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDetectorVersionRequest})
+var sDeleteDetectorVersionRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteDetectorVersionRequest_detectorId})
+var sDeleteDetectorVersionRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eDeleteDetectorVersionRequest_detectorVersionId})
+var sDeleteDetectorVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDetectorVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDetectorVersionResult})
+var sDeleteEntityTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntityTypeRequest, Members: &mDeleteEntityTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEntityTypeRequest})
+var sDeleteEntityTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEntityTypeRequest_name})
+var sDeleteEntityTypeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntityTypeResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEntityTypeResult})
+var sDeleteEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventRequest, Members: &mDeleteEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventRequest})
+var sDeleteEventRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEventRequest_eventId})
+var sDeleteEventRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEventRequest_eventTypeName})
+var sDeleteEventRequest_deleteAuditHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteAuditHistory", ID: &i_DeleteAuditHistory, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteEventRequest_deleteAuditHistory})
+var sDeleteEventResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventResult})
+var sDeleteEventsByEventTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventsByEventTypeRequest, Members: &mDeleteEventsByEventTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventsByEventTypeRequest})
+var sDeleteEventsByEventTypeRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEventsByEventTypeRequest_eventTypeName})
+var sDeleteEventsByEventTypeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventsByEventTypeResult, Members: &mDeleteEventsByEventTypeResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventsByEventTypeResult})
+var sDeleteEventsByEventTypeResult_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEventsByEventTypeResult_eventTypeName})
+var sDeleteEventsByEventTypeResult_eventsDeletionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventsDeletionStatus", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDeleteEventsByEventTypeResult_eventsDeletionStatus})
+var sDeleteEventTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventTypeRequest, Members: &mDeleteEventTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventTypeRequest})
+var sDeleteEventTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteEventTypeRequest_name})
+var sDeleteEventTypeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventTypeResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventTypeResult})
+var sDeleteExternalModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExternalModelRequest, Members: &mDeleteExternalModelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExternalModelRequest})
+var sDeleteExternalModelRequest_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_sageMakerEndpointIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteExternalModelRequest_modelEndpoint})
+var sDeleteExternalModelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExternalModelResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExternalModelResult})
+var sDeleteLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabelRequest, Members: &mDeleteLabelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLabelRequest})
+var sDeleteLabelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteLabelRequest_name})
+var sDeleteLabelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabelResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLabelResult})
+var sDeleteListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListRequest, Members: &mDeleteListRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteListRequest})
+var sDeleteListRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteListRequest_name})
+var sDeleteListResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteListResult})
+var sDeleteModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelRequest, Members: &mDeleteModelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelRequest})
+var sDeleteModelRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteModelRequest_modelId})
+var sDeleteModelRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDeleteModelRequest_modelType})
+var sDeleteModelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelResult})
+var sDeleteModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelVersionRequest, Members: &mDeleteModelVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelVersionRequest})
+var sDeleteModelVersionRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteModelVersionRequest_modelId})
+var sDeleteModelVersionRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDeleteModelVersionRequest_modelType})
+var sDeleteModelVersionRequest_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eDeleteModelVersionRequest_modelVersionNumber})
+var sDeleteModelVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteModelVersionResult})
+var sDeleteOutcomeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutcomeRequest, Members: &mDeleteOutcomeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOutcomeRequest})
+var sDeleteOutcomeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteOutcomeRequest_name})
+var sDeleteOutcomeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOutcomeResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOutcomeResult})
+var sDeleteRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleRequest, Members: &mDeleteRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleRequest})
+var sDeleteRuleRequest_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleRequest_rule})
+var sDeleteRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleResult})
+var sDeleteVariableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVariableRequest, Members: &mDeleteVariableRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVariableRequest})
+var sDeleteVariableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDeleteVariableRequest_name})
+var sDeleteVariableResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVariableResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVariableResult})
+var sDescribeDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDetectorRequest, Members: &mDescribeDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDetectorRequest})
+var sDescribeDetectorRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDescribeDetectorRequest_detectorId})
+var sDescribeDetectorRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeDetectorRequest_nextToken})
+var sDescribeDetectorRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DetectorVersionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDetectorRequest_maxResults})
+var sDescribeDetectorResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDetectorResult, Members: &mDescribeDetectorResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDetectorResult})
+var sDescribeDetectorResult_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eDescribeDetectorResult_detectorId})
+var sDescribeDetectorResult_detectorVersionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionSummaries", ID: &i_DetectorVersionSummaryList, Members: &m_DetectorVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &eDescribeDetectorResult_detectorVersionSummaries})
+var sDescribeDetectorResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeDetectorResult_nextToken})
+var sDescribeDetectorResult_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eDescribeDetectorResult_arn})
+var sDescribeModelVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersionsRequest, Members: &mDescribeModelVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeModelVersionsRequest})
+var sDescribeModelVersionsRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eDescribeModelVersionsRequest_modelId})
+var sDescribeModelVersionsRequest_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eDescribeModelVersionsRequest_modelVersionNumber})
+var sDescribeModelVersionsRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeModelVersionsRequest_modelType})
+var sDescribeModelVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeModelVersionsRequest_nextToken})
+var sDescribeModelVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_modelsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeModelVersionsRequest_maxResults})
+var sDescribeModelVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersionsResult, Members: &mDescribeModelVersionsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeModelVersionsResult})
+var sDescribeModelVersionsResult_modelVersionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionDetails", ID: &i_modelVersionDetailList, Members: &m_modelVersionDetailList, Type: smithy.ShapeTypeList, Ext: &eDescribeModelVersionsResult_modelVersionDetails})
+var sDescribeModelVersionsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeModelVersionsResult_nextToken})
+var sGetBatchImportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchImportJobsRequest, Members: &mGetBatchImportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBatchImportJobsRequest})
+var sGetBatchImportJobsRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetBatchImportJobsRequest_jobId})
+var sGetBatchImportJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_batchImportsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &eGetBatchImportJobsRequest_maxResults})
+var sGetBatchImportJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetBatchImportJobsRequest_nextToken})
+var sGetBatchImportJobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchImportJobsResult, Members: &mGetBatchImportJobsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetBatchImportJobsResult})
+var sGetBatchImportJobsResult_batchImports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "batchImports", ID: &i_BatchImportList, Members: &m_BatchImportList, Type: smithy.ShapeTypeList, Ext: &eGetBatchImportJobsResult_batchImports})
+var sGetBatchImportJobsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetBatchImportJobsResult_nextToken})
+var sGetBatchPredictionJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPredictionJobsRequest, Members: &mGetBatchPredictionJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBatchPredictionJobsRequest})
+var sGetBatchPredictionJobsRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetBatchPredictionJobsRequest_jobId})
+var sGetBatchPredictionJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_batchPredictionsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &eGetBatchPredictionJobsRequest_maxResults})
+var sGetBatchPredictionJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetBatchPredictionJobsRequest_nextToken})
+var sGetBatchPredictionJobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPredictionJobsResult, Members: &mGetBatchPredictionJobsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetBatchPredictionJobsResult})
+var sGetBatchPredictionJobsResult_batchPredictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "batchPredictions", ID: &i_BatchPredictionList, Members: &m_BatchPredictionList, Type: smithy.ShapeTypeList, Ext: &eGetBatchPredictionJobsResult_batchPredictions})
+var sGetBatchPredictionJobsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetBatchPredictionJobsResult_nextToken})
+var sGetDeleteEventsByEventTypeStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeleteEventsByEventTypeStatusRequest, Members: &mGetDeleteEventsByEventTypeStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeleteEventsByEventTypeStatusRequest})
+var sGetDeleteEventsByEventTypeStatusRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetDeleteEventsByEventTypeStatusRequest_eventTypeName})
+var sGetDeleteEventsByEventTypeStatusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeleteEventsByEventTypeStatusResult, Members: &mGetDeleteEventsByEventTypeStatusResult, Type: smithy.ShapeTypeStructure, Ext: &eGetDeleteEventsByEventTypeStatusResult})
+var sGetDeleteEventsByEventTypeStatusResult_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetDeleteEventsByEventTypeStatusResult_eventTypeName})
+var sGetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventsDeletionStatus", ID: &iAsyncJobStatus, Members: &mAsyncJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus})
+var sGetDetectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectorsRequest, Members: &mGetDetectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDetectorsRequest})
+var sGetDetectorsRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetDetectorsRequest_detectorId})
+var sGetDetectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetDetectorsRequest_nextToken})
+var sGetDetectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DetectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetDetectorsRequest_maxResults})
+var sGetDetectorsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectorsResult, Members: &mGetDetectorsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetDetectorsResult})
+var sGetDetectorsResult_detectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectors", ID: &i_DetectorList, Members: &m_DetectorList, Type: smithy.ShapeTypeList, Ext: &eGetDetectorsResult_detectors})
+var sGetDetectorsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetDetectorsResult_nextToken})
+var sGetDetectorVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectorVersionRequest, Members: &mGetDetectorVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDetectorVersionRequest})
+var sGetDetectorVersionRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionRequest_detectorId})
+var sGetDetectorVersionRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionRequest_detectorVersionId})
+var sGetDetectorVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDetectorVersionResult, Members: &mGetDetectorVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eGetDetectorVersionResult})
+var sGetDetectorVersionResult_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_detectorId})
+var sGetDetectorVersionResult_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_detectorVersionId})
+var sGetDetectorVersionResult_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_description})
+var sGetDetectorVersionResult_externalModelEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModelEndpoints", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eGetDetectorVersionResult_externalModelEndpoints})
+var sGetDetectorVersionResult_modelVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersions", ID: &i_ListOfModelVersions, Members: &m_ListOfModelVersions, Type: smithy.ShapeTypeList, Ext: &eGetDetectorVersionResult_modelVersions})
+var sGetDetectorVersionResult_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList, Ext: &eGetDetectorVersionResult_rules})
+var sGetDetectorVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDetectorVersionStatus, Members: &mDetectorVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDetectorVersionResult_status})
+var sGetDetectorVersionResult_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_lastUpdatedTime})
+var sGetDetectorVersionResult_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_createdTime})
+var sGetDetectorVersionResult_ruleExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionMode", ID: &iRuleExecutionMode, Members: &mRuleExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eGetDetectorVersionResult_ruleExecutionMode})
+var sGetDetectorVersionResult_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eGetDetectorVersionResult_arn})
+var sGetEntityTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntityTypesRequest, Members: &mGetEntityTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEntityTypesRequest})
+var sGetEntityTypesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEntityTypesRequest_name})
+var sGetEntityTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEntityTypesRequest_nextToken})
+var sGetEntityTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_entityTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEntityTypesRequest_maxResults})
+var sGetEntityTypesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntityTypesResult, Members: &mGetEntityTypesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEntityTypesResult})
+var sGetEntityTypesResult_entityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityTypes", ID: &i_entityTypeList, Members: &m_entityTypeList, Type: smithy.ShapeTypeList, Ext: &eGetEntityTypesResult_entityTypes})
+var sGetEntityTypesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEntityTypesResult_nextToken})
+var sGetEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventRequest, Members: &mGetEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEventRequest})
+var sGetEventRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventRequest_eventId})
+var sGetEventRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventRequest_eventTypeName})
+var sGetEventResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventResult, Members: &mGetEventResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEventResult})
+var sGetEventResult_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eGetEventResult_event})
+var sGetEventPredictionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPredictionRequest, Members: &mGetEventPredictionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEventPredictionRequest})
+var sGetEventPredictionRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionRequest_detectorId})
+var sGetEventPredictionRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionRequest_detectorVersionId})
+var sGetEventPredictionRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionRequest_eventId})
+var sGetEventPredictionRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionRequest_eventTypeName})
+var sGetEventPredictionRequest_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_listOfEntities, Members: &m_listOfEntities, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionRequest_entities})
+var sGetEventPredictionRequest_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_utcTimestampISO8601, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionRequest_eventTimestamp})
+var sGetEventPredictionRequest_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_EventVariableMap, Members: &m_EventVariableMap, Type: smithy.ShapeTypeMap, Ext: &eGetEventPredictionRequest_eventVariables})
+var sGetEventPredictionRequest_externalModelEndpointDataBlobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModelEndpointDataBlobs", ID: &i_ExternalModelEndpointDataBlobMap, Members: &m_ExternalModelEndpointDataBlobMap, Traits: &t4, Type: smithy.ShapeTypeMap, Ext: &eGetEventPredictionRequest_externalModelEndpointDataBlobs})
+var sGetEventPredictionMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPredictionMetadataRequest, Members: &mGetEventPredictionMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEventPredictionMetadataRequest})
+var sGetEventPredictionMetadataRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataRequest_eventId})
+var sGetEventPredictionMetadataRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataRequest_eventTypeName})
+var sGetEventPredictionMetadataRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataRequest_detectorId})
+var sGetEventPredictionMetadataRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataRequest_detectorVersionId})
+var sGetEventPredictionMetadataRequest_predictionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictionTimestamp", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataRequest_predictionTimestamp})
+var sGetEventPredictionMetadataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPredictionMetadataResult, Members: &mGetEventPredictionMetadataResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEventPredictionMetadataResult})
+var sGetEventPredictionMetadataResult_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_eventId})
+var sGetEventPredictionMetadataResult_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_eventTypeName})
+var sGetEventPredictionMetadataResult_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_entityId})
+var sGetEventPredictionMetadataResult_entityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_entityType})
+var sGetEventPredictionMetadataResult_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_eventTimestamp})
+var sGetEventPredictionMetadataResult_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_detectorId})
+var sGetEventPredictionMetadataResult_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_detectorVersionId})
+var sGetEventPredictionMetadataResult_detectorVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionStatus", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_detectorVersionStatus})
+var sGetEventPredictionMetadataResult_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_ListOfEventVariableSummaries, Members: &m_ListOfEventVariableSummaries, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionMetadataResult_eventVariables})
+var sGetEventPredictionMetadataResult_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_EvaluatedRuleList, Members: &m_EvaluatedRuleList, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionMetadataResult_rules})
+var sGetEventPredictionMetadataResult_ruleExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionMode", ID: &iRuleExecutionMode, Members: &mRuleExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eGetEventPredictionMetadataResult_ruleExecutionMode})
+var sGetEventPredictionMetadataResult_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionMetadataResult_outcomes})
+var sGetEventPredictionMetadataResult_evaluatedModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluatedModelVersions", ID: &i_ListOfEvaluatedModelVersions, Members: &m_ListOfEvaluatedModelVersions, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionMetadataResult_evaluatedModelVersions})
+var sGetEventPredictionMetadataResult_evaluatedExternalModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluatedExternalModels", ID: &i_ListOfEvaluatedExternalModels, Members: &m_ListOfEvaluatedExternalModels, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionMetadataResult_evaluatedExternalModels})
+var sGetEventPredictionMetadataResult_predictionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictionTimestamp", ID: &i_time, Type: smithy.ShapeTypeString, Ext: &eGetEventPredictionMetadataResult_predictionTimestamp})
+var sGetEventPredictionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventPredictionResult, Members: &mGetEventPredictionResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEventPredictionResult})
+var sGetEventPredictionResult_modelScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelScores", ID: &i_ListOfModelScores, Members: &m_ListOfModelScores, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionResult_modelScores})
+var sGetEventPredictionResult_ruleResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleResults", ID: &i_ListOfRuleResults, Members: &m_ListOfRuleResults, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionResult_ruleResults})
+var sGetEventPredictionResult_externalModelOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModelOutputs", ID: &i_ListOfExternalModelOutputs, Members: &m_ListOfExternalModelOutputs, Type: smithy.ShapeTypeList, Ext: &eGetEventPredictionResult_externalModelOutputs})
+var sGetEventTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventTypesRequest, Members: &mGetEventTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEventTypesRequest})
+var sGetEventTypesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetEventTypesRequest_name})
+var sGetEventTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventTypesRequest_nextToken})
+var sGetEventTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_eventTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEventTypesRequest_maxResults})
+var sGetEventTypesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventTypesResult, Members: &mGetEventTypesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEventTypesResult})
+var sGetEventTypesResult_eventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypes", ID: &i_eventTypeList, Members: &m_eventTypeList, Type: smithy.ShapeTypeList, Ext: &eGetEventTypesResult_eventTypes})
+var sGetEventTypesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetEventTypesResult_nextToken})
+var sGetExternalModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExternalModelsRequest, Members: &mGetExternalModelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExternalModelsRequest})
+var sGetExternalModelsRequest_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetExternalModelsRequest_modelEndpoint})
+var sGetExternalModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetExternalModelsRequest_nextToken})
+var sGetExternalModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ExternalModelsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetExternalModelsRequest_maxResults})
+var sGetExternalModelsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExternalModelsResult, Members: &mGetExternalModelsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetExternalModelsResult})
+var sGetExternalModelsResult_externalModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModels", ID: &i_ExternalModelList, Members: &m_ExternalModelList, Type: smithy.ShapeTypeList, Ext: &eGetExternalModelsResult_externalModels})
+var sGetExternalModelsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetExternalModelsResult_nextToken})
+var sGetKMSEncryptionKeyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKMSEncryptionKeyResult, Members: &mGetKMSEncryptionKeyResult, Type: smithy.ShapeTypeStructure, Ext: &eGetKMSEncryptionKeyResult})
+var sGetKMSEncryptionKeyResult_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &iKMSKey, Members: &mKMSKey, Type: smithy.ShapeTypeStructure, Ext: &eGetKMSEncryptionKeyResult_kmsKey})
+var sGetLabelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLabelsRequest, Members: &mGetLabelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLabelsRequest})
+var sGetLabelsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetLabelsRequest_name})
+var sGetLabelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetLabelsRequest_nextToken})
+var sGetLabelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_labelsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetLabelsRequest_maxResults})
+var sGetLabelsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLabelsResult, Members: &mGetLabelsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetLabelsResult})
+var sGetLabelsResult_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_labelList, Members: &m_labelList, Type: smithy.ShapeTypeList, Ext: &eGetLabelsResult_labels})
+var sGetLabelsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetLabelsResult_nextToken})
+var sGetListElementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListElementsRequest, Members: &mGetListElementsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetListElementsRequest})
+var sGetListElementsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetListElementsRequest_name})
+var sGetListElementsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eGetListElementsRequest_nextToken})
+var sGetListElementsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListsElementsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetListElementsRequest_maxResults})
+var sGetListElementsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListElementsResult, Members: &mGetListElementsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetListElementsResult})
+var sGetListElementsResult_elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elements", ID: &i_ElementsList, Members: &m_ElementsList, Type: smithy.ShapeTypeList, Ext: &eGetListElementsResult_elements})
+var sGetListElementsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eGetListElementsResult_nextToken})
+var sGetListsMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsMetadataRequest, Members: &mGetListsMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetListsMetadataRequest})
+var sGetListsMetadataRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetListsMetadataRequest_name})
+var sGetListsMetadataRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eGetListsMetadataRequest_nextToken})
+var sGetListsMetadataRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListsMetadataMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetListsMetadataRequest_maxResults})
+var sGetListsMetadataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsMetadataResult, Members: &mGetListsMetadataResult, Type: smithy.ShapeTypeStructure, Ext: &eGetListsMetadataResult})
+var sGetListsMetadataResult_lists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lists", ID: &i_AllowDenyLists, Members: &m_AllowDenyLists, Type: smithy.ShapeTypeList, Ext: &eGetListsMetadataResult_lists})
+var sGetListsMetadataResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eGetListsMetadataResult_nextToken})
+var sGetModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelsRequest, Members: &mGetModelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetModelsRequest})
+var sGetModelsRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetModelsRequest_modelId})
+var sGetModelsRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetModelsRequest_modelType})
+var sGetModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetModelsRequest_nextToken})
+var sGetModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_modelsMaxPageSize, Type: smithy.ShapeTypeInteger, Ext: &eGetModelsRequest_maxResults})
+var sGetModelsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelsResult, Members: &mGetModelsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetModelsResult})
+var sGetModelsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetModelsResult_nextToken})
+var sGetModelsResult_models = smithy.NewStaticSchema(smithy.StaticSchema{Member: "models", ID: &i_modelList, Members: &m_modelList, Type: smithy.ShapeTypeList, Ext: &eGetModelsResult_models})
+var sGetModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelVersionRequest, Members: &mGetModelVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetModelVersionRequest})
+var sGetModelVersionRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionRequest_modelId})
+var sGetModelVersionRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetModelVersionRequest_modelType})
+var sGetModelVersionRequest_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionRequest_modelVersionNumber})
+var sGetModelVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelVersionResult, Members: &mGetModelVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eGetModelVersionResult})
+var sGetModelVersionResult_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionResult_modelId})
+var sGetModelVersionResult_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetModelVersionResult_modelType})
+var sGetModelVersionResult_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionResult_modelVersionNumber})
+var sGetModelVersionResult_trainingDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSource", ID: &iTrainingDataSourceEnum, Members: &mTrainingDataSourceEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetModelVersionResult_trainingDataSource})
+var sGetModelVersionResult_trainingDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataSchema", ID: &iTrainingDataSchema, Members: &mTrainingDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eGetModelVersionResult_trainingDataSchema})
+var sGetModelVersionResult_externalEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalEventsDetail", ID: &iExternalEventsDetail, Members: &mExternalEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetModelVersionResult_externalEventsDetail})
+var sGetModelVersionResult_ingestedEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventsDetail", ID: &iIngestedEventsDetail, Members: &mIngestedEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetModelVersionResult_ingestedEventsDetail})
+var sGetModelVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionResult_status})
+var sGetModelVersionResult_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eGetModelVersionResult_arn})
+var sGetOutcomesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOutcomesRequest, Members: &mGetOutcomesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetOutcomesRequest})
+var sGetOutcomesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetOutcomesRequest_name})
+var sGetOutcomesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetOutcomesRequest_nextToken})
+var sGetOutcomesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_OutcomesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetOutcomesRequest_maxResults})
+var sGetOutcomesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOutcomesResult, Members: &mGetOutcomesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetOutcomesResult})
+var sGetOutcomesResult_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_OutcomeList, Members: &m_OutcomeList, Type: smithy.ShapeTypeList, Ext: &eGetOutcomesResult_outcomes})
+var sGetOutcomesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetOutcomesResult_nextToken})
+var sGetRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRulesRequest, Members: &mGetRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRulesRequest})
+var sGetRulesRequest_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetRulesRequest_ruleId})
+var sGetRulesRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eGetRulesRequest_detectorId})
+var sGetRulesRequest_ruleVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleVersion", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eGetRulesRequest_ruleVersion})
+var sGetRulesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetRulesRequest_nextToken})
+var sGetRulesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_RulesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetRulesRequest_maxResults})
+var sGetRulesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRulesResult, Members: &mGetRulesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetRulesResult})
+var sGetRulesResult_ruleDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleDetails", ID: &i_RuleDetailList, Members: &m_RuleDetailList, Type: smithy.ShapeTypeList, Ext: &eGetRulesResult_ruleDetails})
+var sGetRulesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetRulesResult_nextToken})
+var sGetVariablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVariablesRequest, Members: &mGetVariablesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVariablesRequest})
+var sGetVariablesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetVariablesRequest_name})
+var sGetVariablesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetVariablesRequest_nextToken})
+var sGetVariablesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_VariablesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetVariablesRequest_maxResults})
+var sGetVariablesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVariablesResult, Members: &mGetVariablesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetVariablesResult})
+var sGetVariablesResult_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_VariableList, Members: &m_VariableList, Type: smithy.ShapeTypeList, Ext: &eGetVariablesResult_variables})
+var sGetVariablesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eGetVariablesResult_nextToken})
+var sListEventPredictionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventPredictionsRequest, Members: &mListEventPredictionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest})
+var sListEventPredictionsRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest_eventId})
+var sListEventPredictionsRequest_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest_eventType})
+var sListEventPredictionsRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest_detectorId})
+var sListEventPredictionsRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest_detectorVersionId})
+var sListEventPredictionsRequest_predictionTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictionTimeRange", ID: &iPredictionTimeRange, Members: &mPredictionTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsRequest_predictionTimeRange})
+var sListEventPredictionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListEventPredictionsRequest_nextToken})
+var sListEventPredictionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_EventPredictionsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEventPredictionsRequest_maxResults})
+var sListEventPredictionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventPredictionsResult, Members: &mListEventPredictionsResult, Type: smithy.ShapeTypeStructure, Ext: &eListEventPredictionsResult})
+var sListEventPredictionsResult_eventPredictionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventPredictionSummaries", ID: &i_ListOfEventPredictionSummaries, Members: &m_ListOfEventPredictionSummaries, Type: smithy.ShapeTypeList, Ext: &eListEventPredictionsResult_eventPredictionSummaries})
+var sListEventPredictionsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListEventPredictionsResult_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceARN})
+var sListTagsForResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_nextToken})
+var sListTagsForResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_TagsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_maxResults})
+var sListTagsForResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResult, Members: &mListTagsForResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResult})
+var sListTagsForResourceResult_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResult_tags})
+var sListTagsForResourceResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResult_nextToken})
+var sPutDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDetectorRequest, Members: &mPutDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutDetectorRequest})
+var sPutDetectorRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutDetectorRequest_detectorId})
+var sPutDetectorRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &ePutDetectorRequest_description})
+var sPutDetectorRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutDetectorRequest_eventTypeName})
+var sPutDetectorRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutDetectorRequest_tags})
+var sPutDetectorResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDetectorResult, Type: smithy.ShapeTypeStructure, Ext: &ePutDetectorResult})
+var sPutEntityTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEntityTypeRequest, Members: &mPutEntityTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEntityTypeRequest})
+var sPutEntityTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutEntityTypeRequest_name})
+var sPutEntityTypeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &ePutEntityTypeRequest_description})
+var sPutEntityTypeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutEntityTypeRequest_tags})
+var sPutEntityTypeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEntityTypeResult, Type: smithy.ShapeTypeStructure, Ext: &ePutEntityTypeResult})
+var sPutEventTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventTypeRequest, Members: &mPutEventTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEventTypeRequest})
+var sPutEventTypeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutEventTypeRequest_name})
+var sPutEventTypeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &ePutEventTypeRequest_description})
+var sPutEventTypeRequest_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &ePutEventTypeRequest_eventVariables})
+var sPutEventTypeRequest_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &ePutEventTypeRequest_labels})
+var sPutEventTypeRequest_entityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityTypes", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &ePutEventTypeRequest_entityTypes})
+var sPutEventTypeRequest_eventIngestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventIngestion", ID: &iEventIngestion, Members: &mEventIngestion, Type: smithy.ShapeTypeEnum, Ext: &ePutEventTypeRequest_eventIngestion})
+var sPutEventTypeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutEventTypeRequest_tags})
+var sPutEventTypeRequest_eventOrchestration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOrchestration", ID: &iEventOrchestration, Members: &mEventOrchestration, Type: smithy.ShapeTypeStructure, Ext: &ePutEventTypeRequest_eventOrchestration})
+var sPutEventTypeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventTypeResult, Type: smithy.ShapeTypeStructure, Ext: &ePutEventTypeResult})
+var sPutExternalModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutExternalModelRequest, Members: &mPutExternalModelRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutExternalModelRequest})
+var sPutExternalModelRequest_modelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpoint", ID: &i_sageMakerEndpointIdentifier, Type: smithy.ShapeTypeString, Ext: &ePutExternalModelRequest_modelEndpoint})
+var sPutExternalModelRequest_modelSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelSource", ID: &iModelSource, Members: &mModelSource, Type: smithy.ShapeTypeEnum, Ext: &ePutExternalModelRequest_modelSource})
+var sPutExternalModelRequest_invokeModelEndpointRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invokeModelEndpointRoleArn", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ePutExternalModelRequest_invokeModelEndpointRoleArn})
+var sPutExternalModelRequest_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iModelInputConfiguration, Members: &mModelInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutExternalModelRequest_inputConfiguration})
+var sPutExternalModelRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iModelOutputConfiguration, Members: &mModelOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutExternalModelRequest_outputConfiguration})
+var sPutExternalModelRequest_modelEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelEndpointStatus", ID: &iModelEndpointStatus, Members: &mModelEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutExternalModelRequest_modelEndpointStatus})
+var sPutExternalModelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutExternalModelRequest_tags})
+var sPutExternalModelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutExternalModelResult, Type: smithy.ShapeTypeStructure, Ext: &ePutExternalModelResult})
+var sPutKMSEncryptionKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKMSEncryptionKeyRequest, Members: &mPutKMSEncryptionKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutKMSEncryptionKeyRequest})
+var sPutKMSEncryptionKeyRequest_kmsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionKeyArn", ID: &i_KmsEncryptionKeyArn, Type: smithy.ShapeTypeString, Ext: &ePutKMSEncryptionKeyRequest_kmsEncryptionKeyArn})
+var sPutKMSEncryptionKeyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKMSEncryptionKeyResult, Type: smithy.ShapeTypeStructure, Ext: &ePutKMSEncryptionKeyResult})
+var sPutLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLabelRequest, Members: &mPutLabelRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutLabelRequest})
+var sPutLabelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutLabelRequest_name})
+var sPutLabelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &ePutLabelRequest_description})
+var sPutLabelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutLabelRequest_tags})
+var sPutLabelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLabelResult, Type: smithy.ShapeTypeStructure, Ext: &ePutLabelResult})
+var sPutOutcomeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOutcomeRequest, Members: &mPutOutcomeRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutOutcomeRequest})
+var sPutOutcomeRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &ePutOutcomeRequest_name})
+var sPutOutcomeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &ePutOutcomeRequest_description})
+var sPutOutcomeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &ePutOutcomeRequest_tags})
+var sPutOutcomeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOutcomeResult, Type: smithy.ShapeTypeStructure, Ext: &ePutOutcomeResult})
+var sSendEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventRequest, Members: &mSendEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendEventRequest})
+var sSendEventRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_eventId})
+var sSendEventRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_eventTypeName})
+var sSendEventRequest_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_utcTimestampISO8601, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_eventTimestamp})
+var sSendEventRequest_eventVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVariables", ID: &i_EventVariableMap, Members: &m_EventVariableMap, Type: smithy.ShapeTypeMap, Ext: &eSendEventRequest_eventVariables})
+var sSendEventRequest_assignedLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assignedLabel", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_assignedLabel})
+var sSendEventRequest_labelTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelTimestamp", ID: &i_utcTimestampISO8601, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_labelTimestamp})
+var sSendEventRequest_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_listOfEntities, Members: &m_listOfEntities, Type: smithy.ShapeTypeList, Ext: &eSendEventRequest_entities})
+var sSendEventResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventResult, Type: smithy.ShapeTypeStructure, Ext: &eSendEventResult})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceARN})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResult})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_fraudDetectorArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceARN})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_tagKeyList, Members: &m_tagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResult})
+var sUpdateDetectorVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionRequest, Members: &mUpdateDetectorVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionRequest})
+var sUpdateDetectorVersionRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionRequest_detectorId})
+var sUpdateDetectorVersionRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionRequest_detectorVersionId})
+var sUpdateDetectorVersionRequest_externalModelEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalModelEndpoints", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList, Ext: &eUpdateDetectorVersionRequest_externalModelEndpoints})
+var sUpdateDetectorVersionRequest_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList, Ext: &eUpdateDetectorVersionRequest_rules})
+var sUpdateDetectorVersionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionRequest_description})
+var sUpdateDetectorVersionRequest_modelVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersions", ID: &i_ListOfModelVersions, Members: &m_ListOfModelVersions, Type: smithy.ShapeTypeList, Ext: &eUpdateDetectorVersionRequest_modelVersions})
+var sUpdateDetectorVersionRequest_ruleExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionMode", ID: &iRuleExecutionMode, Members: &mRuleExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDetectorVersionRequest_ruleExecutionMode})
+var sUpdateDetectorVersionMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionMetadataRequest, Members: &mUpdateDetectorVersionMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionMetadataRequest})
+var sUpdateDetectorVersionMetadataRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionMetadataRequest_detectorId})
+var sUpdateDetectorVersionMetadataRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionMetadataRequest_detectorVersionId})
+var sUpdateDetectorVersionMetadataRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionMetadataRequest_description})
+var sUpdateDetectorVersionMetadataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionMetadataResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionMetadataResult})
+var sUpdateDetectorVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionResult})
+var sUpdateDetectorVersionStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionStatusRequest, Members: &mUpdateDetectorVersionStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionStatusRequest})
+var sUpdateDetectorVersionStatusRequest_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionStatusRequest_detectorId})
+var sUpdateDetectorVersionStatusRequest_detectorVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorVersionId", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateDetectorVersionStatusRequest_detectorVersionId})
+var sUpdateDetectorVersionStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDetectorVersionStatus, Members: &mDetectorVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDetectorVersionStatusRequest_status})
+var sUpdateDetectorVersionStatusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDetectorVersionStatusResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDetectorVersionStatusResult})
+var sUpdateEventLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventLabelRequest, Members: &mUpdateEventLabelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEventLabelRequest})
+var sUpdateEventLabelRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateEventLabelRequest_eventId})
+var sUpdateEventLabelRequest_eventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeName", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateEventLabelRequest_eventTypeName})
+var sUpdateEventLabelRequest_assignedLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assignedLabel", ID: &i_identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateEventLabelRequest_assignedLabel})
+var sUpdateEventLabelRequest_labelTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelTimestamp", ID: &i_utcTimestampISO8601, Type: smithy.ShapeTypeString, Ext: &eUpdateEventLabelRequest_labelTimestamp})
+var sUpdateEventLabelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventLabelResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEventLabelResult})
+var sUpdateListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateListRequest, Members: &mUpdateListRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateListRequest})
+var sUpdateListRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_noDashIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateListRequest_name})
+var sUpdateListRequest_elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elements", ID: &i_ElementsList, Members: &m_ElementsList, Type: smithy.ShapeTypeList, Ext: &eUpdateListRequest_elements})
+var sUpdateListRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateListRequest_description})
+var sUpdateListRequest_updateMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateMode", ID: &iListUpdateMode, Members: &mListUpdateMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateListRequest_updateMode})
+var sUpdateListRequest_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_variableType, Type: smithy.ShapeTypeString, Ext: &eUpdateListRequest_variableType})
+var sUpdateListResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateListResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateListResult})
+var sUpdateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelRequest, Members: &mUpdateModelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelRequest})
+var sUpdateModelRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateModelRequest_modelId})
+var sUpdateModelRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelRequest_modelType})
+var sUpdateModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateModelRequest_description})
+var sUpdateModelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelResult})
+var sUpdateModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersionRequest, Members: &mUpdateModelVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionRequest})
+var sUpdateModelVersionRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionRequest_modelId})
+var sUpdateModelVersionRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelVersionRequest_modelType})
+var sUpdateModelVersionRequest_majorVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersionNumber", ID: &i_wholeNumberVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionRequest_majorVersionNumber})
+var sUpdateModelVersionRequest_externalEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalEventsDetail", ID: &iExternalEventsDetail, Members: &mExternalEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionRequest_externalEventsDetail})
+var sUpdateModelVersionRequest_ingestedEventsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestedEventsDetail", ID: &iIngestedEventsDetail, Members: &mIngestedEventsDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionRequest_ingestedEventsDetail})
+var sUpdateModelVersionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eUpdateModelVersionRequest_tags})
+var sUpdateModelVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersionResult, Members: &mUpdateModelVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionResult})
+var sUpdateModelVersionResult_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionResult_modelId})
+var sUpdateModelVersionResult_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelVersionResult_modelType})
+var sUpdateModelVersionResult_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionResult_modelVersionNumber})
+var sUpdateModelVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionResult_status})
+var sUpdateModelVersionStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersionStatusRequest, Members: &mUpdateModelVersionStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionStatusRequest})
+var sUpdateModelVersionStatusRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_modelIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionStatusRequest_modelId})
+var sUpdateModelVersionStatusRequest_modelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelType", ID: &iModelTypeEnum, Members: &mModelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelVersionStatusRequest_modelType})
+var sUpdateModelVersionStatusRequest_modelVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelVersionNumber", ID: &i_floatVersionString, Type: smithy.ShapeTypeString, Ext: &eUpdateModelVersionStatusRequest_modelVersionNumber})
+var sUpdateModelVersionStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateModelVersionStatusRequest_status})
+var sUpdateModelVersionStatusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelVersionStatusResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateModelVersionStatusResult})
+var sUpdateRuleMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleMetadataRequest, Members: &mUpdateRuleMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleMetadataRequest})
+var sUpdateRuleMetadataRequest_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleMetadataRequest_rule})
+var sUpdateRuleMetadataRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleMetadataRequest_description})
+var sUpdateRuleMetadataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleMetadataResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleMetadataResult})
+var sUpdateRuleVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleVersionRequest, Members: &mUpdateRuleVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleVersionRequest})
+var sUpdateRuleVersionRequest_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleVersionRequest_rule})
+var sUpdateRuleVersionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_description, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleVersionRequest_description})
+var sUpdateRuleVersionRequest_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_ruleExpression, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleVersionRequest_expression})
+var sUpdateRuleVersionRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &iLanguage, Members: &mLanguage, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleVersionRequest_language})
+var sUpdateRuleVersionRequest_outcomes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomes", ID: &i_NonEmptyListOfStrings, Members: &m_NonEmptyListOfStrings, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleVersionRequest_outcomes})
+var sUpdateRuleVersionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagList, Members: &m_tagList, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleVersionRequest_tags})
+var sUpdateRuleVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleVersionResult, Members: &mUpdateRuleVersionResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleVersionResult})
+var sUpdateRuleVersionResult_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleVersionResult_rule})
+var sUpdateVariableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVariableRequest, Members: &mUpdateVariableRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVariableRequest})
+var sUpdateVariableRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateVariableRequest_name})
+var sUpdateVariableRequest_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateVariableRequest_defaultValue})
+var sUpdateVariableRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateVariableRequest_description})
+var sUpdateVariableRequest_variableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variableType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUpdateVariableRequest_variableType})
+var sUpdateVariableResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVariableResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVariableResult})
+
+var BatchCreateVariable = &sBatchCreateVariable
+
+var BatchGetVariable = &sBatchGetVariable
+
+var CancelBatchImportJob = &sCancelBatchImportJob
+
+var CancelBatchPredictionJob = &sCancelBatchPredictionJob
+
+var CreateBatchImportJob = &sCreateBatchImportJob
+
+var CreateBatchPredictionJob = &sCreateBatchPredictionJob
+
+var CreateDetectorVersion = &sCreateDetectorVersion
+
+var CreateList = &sCreateList
+
+var CreateModel = &sCreateModel
+
+var CreateModelVersion = &sCreateModelVersion
+
+var CreateRule = &sCreateRule
+
+var CreateVariable = &sCreateVariable
+
+var DeleteBatchImportJob = &sDeleteBatchImportJob
+
+var DeleteBatchPredictionJob = &sDeleteBatchPredictionJob
+
+var DeleteDetector = &sDeleteDetector
+
+var DeleteDetectorVersion = &sDeleteDetectorVersion
+
+var DeleteEntityType = &sDeleteEntityType
+
+var DeleteEvent = &sDeleteEvent
+
+var DeleteEventsByEventType = &sDeleteEventsByEventType
+
+var DeleteEventType = &sDeleteEventType
+
+var DeleteExternalModel = &sDeleteExternalModel
+
+var DeleteLabel = &sDeleteLabel
+
+var DeleteList = &sDeleteList
+
+var DeleteModel = &sDeleteModel
+
+var DeleteModelVersion = &sDeleteModelVersion
+
+var DeleteOutcome = &sDeleteOutcome
+
+var DeleteRule = &sDeleteRule
+
+var DeleteVariable = &sDeleteVariable
+
+var DescribeDetector = &sDescribeDetector
+
+var DescribeModelVersions = &sDescribeModelVersions
+
+var GetBatchImportJobs = &sGetBatchImportJobs
+
+var GetBatchPredictionJobs = &sGetBatchPredictionJobs
+
+var GetDeleteEventsByEventTypeStatus = &sGetDeleteEventsByEventTypeStatus
+
+var GetDetectors = &sGetDetectors
+
+var GetDetectorVersion = &sGetDetectorVersion
+
+var GetEntityTypes = &sGetEntityTypes
+
+var GetEvent = &sGetEvent
+
+var GetEventPrediction = &sGetEventPrediction
+
+var GetEventPredictionMetadata = &sGetEventPredictionMetadata
+
+var GetEventTypes = &sGetEventTypes
+
+var GetExternalModels = &sGetExternalModels
+
+var GetKMSEncryptionKey = &sGetKMSEncryptionKey
+
+var GetLabels = &sGetLabels
+
+var GetListElements = &sGetListElements
+
+var GetListsMetadata = &sGetListsMetadata
+
+var GetModels = &sGetModels
+
+var GetModelVersion = &sGetModelVersion
+
+var GetOutcomes = &sGetOutcomes
+
+var GetRules = &sGetRules
+
+var GetVariables = &sGetVariables
+
+var ListEventPredictions = &sListEventPredictions
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutDetector = &sPutDetector
+
+var PutEntityType = &sPutEntityType
+
+var PutEventType = &sPutEventType
+
+var PutExternalModel = &sPutExternalModel
+
+var PutKMSEncryptionKey = &sPutKMSEncryptionKey
+
+var PutLabel = &sPutLabel
+
+var PutOutcome = &sPutOutcome
+
+var SendEvent = &sSendEvent
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDetectorVersion = &sUpdateDetectorVersion
+
+var UpdateDetectorVersionMetadata = &sUpdateDetectorVersionMetadata
+
+var UpdateDetectorVersionStatus = &sUpdateDetectorVersionStatus
+
+var UpdateEventLabel = &sUpdateEventLabel
+
+var UpdateList = &sUpdateList
+
+var UpdateModel = &sUpdateModel
+
+var UpdateModelVersion = &sUpdateModelVersion
+
+var UpdateModelVersionStatus = &sUpdateModelVersionStatus
+
+var UpdateRuleMetadata = &sUpdateRuleMetadata
+
+var UpdateRuleVersion = &sUpdateRuleVersion
+
+var UpdateVariable = &sUpdateVariable
+
+var _AWSHawksNestServiceFacade = &s_AWSHawksNestServiceFacade
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AggregatedLogOddsMetric = &sAggregatedLogOddsMetric
+var AggregatedLogOddsMetric_variableNames = &sAggregatedLogOddsMetric_variableNames
+var AggregatedLogOddsMetric_aggregatedVariablesImportance = &sAggregatedLogOddsMetric_aggregatedVariablesImportance
+
+var AggregatedVariablesImpactExplanation = &sAggregatedVariablesImpactExplanation
+var AggregatedVariablesImpactExplanation_eventVariableNames = &sAggregatedVariablesImpactExplanation_eventVariableNames
+var AggregatedVariablesImpactExplanation_relativeImpact = &sAggregatedVariablesImpactExplanation_relativeImpact
+var AggregatedVariablesImpactExplanation_logOddsImpact = &sAggregatedVariablesImpactExplanation_logOddsImpact
+
+var AggregatedVariablesImportanceMetrics = &sAggregatedVariablesImportanceMetrics
+var AggregatedVariablesImportanceMetrics_logOddsMetrics = &sAggregatedVariablesImportanceMetrics_logOddsMetrics
+
+var AllowDenyList = &sAllowDenyList
+var AllowDenyList_name = &sAllowDenyList_name
+var AllowDenyList_description = &sAllowDenyList_description
+var AllowDenyList_variableType = &sAllowDenyList_variableType
+var AllowDenyList_createdTime = &sAllowDenyList_createdTime
+var AllowDenyList_updatedTime = &sAllowDenyList_updatedTime
+var AllowDenyList_arn = &sAllowDenyList_arn
+
+var _AllowDenyLists = &s_AllowDenyLists
+var _AllowDenyLists_member = &s_AllowDenyLists_member
+
+var AsyncJobStatus = &sAsyncJobStatus
+var AsyncJobStatus_IN_PROGRESS_INITIALIZING = &sAsyncJobStatus_IN_PROGRESS_INITIALIZING
+var AsyncJobStatus_IN_PROGRESS = &sAsyncJobStatus_IN_PROGRESS
+var AsyncJobStatus_CANCEL_IN_PROGRESS = &sAsyncJobStatus_CANCEL_IN_PROGRESS
+var AsyncJobStatus_CANCELED = &sAsyncJobStatus_CANCELED
+var AsyncJobStatus_COMPLETE = &sAsyncJobStatus_COMPLETE
+var AsyncJobStatus_FAILED = &sAsyncJobStatus_FAILED
+
+var ATIMetricDataPoint = &sATIMetricDataPoint
+var ATIMetricDataPoint_cr = &sATIMetricDataPoint_cr
+var ATIMetricDataPoint_adr = &sATIMetricDataPoint_adr
+var ATIMetricDataPoint_threshold = &sATIMetricDataPoint_threshold
+var ATIMetricDataPoint_atodr = &sATIMetricDataPoint_atodr
+
+var _ATIMetricDataPointsList = &s_ATIMetricDataPointsList
+var _ATIMetricDataPointsList_member = &s_ATIMetricDataPointsList_member
+
+var ATIModelPerformance = &sATIModelPerformance
+var ATIModelPerformance_asi = &sATIModelPerformance_asi
+
+var ATITrainingMetricsValue = &sATITrainingMetricsValue
+var ATITrainingMetricsValue_metricDataPoints = &sATITrainingMetricsValue_metricDataPoints
+var ATITrainingMetricsValue_modelPerformance = &sATITrainingMetricsValue_modelPerformance
+
+var _attributeKey = &s_attributeKey
+
+var _attributeValue = &s_attributeValue
+
+var BatchCreateVariableError = &sBatchCreateVariableError
+var BatchCreateVariableError_name = &sBatchCreateVariableError_name
+var BatchCreateVariableError_code = &sBatchCreateVariableError_code
+var BatchCreateVariableError_message = &sBatchCreateVariableError_message
+
+var _BatchCreateVariableErrorList = &s_BatchCreateVariableErrorList
+var _BatchCreateVariableErrorList_member = &s_BatchCreateVariableErrorList_member
+
+var BatchGetVariableError = &sBatchGetVariableError
+var BatchGetVariableError_name = &sBatchGetVariableError_name
+var BatchGetVariableError_code = &sBatchGetVariableError_code
+var BatchGetVariableError_message = &sBatchGetVariableError_message
+
+var _BatchGetVariableErrorList = &s_BatchGetVariableErrorList
+var _BatchGetVariableErrorList_member = &s_BatchGetVariableErrorList_member
+
+var BatchImport = &sBatchImport
+var BatchImport_jobId = &sBatchImport_jobId
+var BatchImport_status = &sBatchImport_status
+var BatchImport_failureReason = &sBatchImport_failureReason
+var BatchImport_startTime = &sBatchImport_startTime
+var BatchImport_completionTime = &sBatchImport_completionTime
+var BatchImport_inputPath = &sBatchImport_inputPath
+var BatchImport_outputPath = &sBatchImport_outputPath
+var BatchImport_eventTypeName = &sBatchImport_eventTypeName
+var BatchImport_iamRoleArn = &sBatchImport_iamRoleArn
+var BatchImport_arn = &sBatchImport_arn
+var BatchImport_processedRecordsCount = &sBatchImport_processedRecordsCount
+var BatchImport_failedRecordsCount = &sBatchImport_failedRecordsCount
+var BatchImport_totalRecordsCount = &sBatchImport_totalRecordsCount
+
+var _BatchImportList = &s_BatchImportList
+var _BatchImportList_member = &s_BatchImportList_member
+
+var _batchImportsMaxPageSize = &s_batchImportsMaxPageSize
+
+var BatchPrediction = &sBatchPrediction
+var BatchPrediction_jobId = &sBatchPrediction_jobId
+var BatchPrediction_status = &sBatchPrediction_status
+var BatchPrediction_failureReason = &sBatchPrediction_failureReason
+var BatchPrediction_startTime = &sBatchPrediction_startTime
+var BatchPrediction_completionTime = &sBatchPrediction_completionTime
+var BatchPrediction_lastHeartbeatTime = &sBatchPrediction_lastHeartbeatTime
+var BatchPrediction_inputPath = &sBatchPrediction_inputPath
+var BatchPrediction_outputPath = &sBatchPrediction_outputPath
+var BatchPrediction_eventTypeName = &sBatchPrediction_eventTypeName
+var BatchPrediction_detectorName = &sBatchPrediction_detectorName
+var BatchPrediction_detectorVersion = &sBatchPrediction_detectorVersion
+var BatchPrediction_iamRoleArn = &sBatchPrediction_iamRoleArn
+var BatchPrediction_arn = &sBatchPrediction_arn
+var BatchPrediction_processedRecordsCount = &sBatchPrediction_processedRecordsCount
+var BatchPrediction_totalRecordsCount = &sBatchPrediction_totalRecordsCount
+
+var _BatchPredictionList = &s_BatchPredictionList
+var _BatchPredictionList_member = &s_BatchPredictionList_member
+
+var _batchPredictionsMaxPageSize = &s_batchPredictionsMaxPageSize
+
+var _blob = &s_blob
+
+var _Boolean = &s_Boolean
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _contentType = &s_contentType
+
+var _CsvIndexToVariableMap = &s_CsvIndexToVariableMap
+var _CsvIndexToVariableMap_key = &s_CsvIndexToVariableMap_key
+var _CsvIndexToVariableMap_value = &s_CsvIndexToVariableMap_value
+
+var DataSource = &sDataSource
+var DataSource_EVENT = &sDataSource_EVENT
+var DataSource_MODEL_SCORE = &sDataSource_MODEL_SCORE
+var DataSource_EXTERNAL_MODEL_SCORE = &sDataSource_EXTERNAL_MODEL_SCORE
+
+var DataType = &sDataType
+var DataType_STRING = &sDataType_STRING
+var DataType_INTEGER = &sDataType_INTEGER
+var DataType_FLOAT = &sDataType_FLOAT
+var DataType_BOOLEAN = &sDataType_BOOLEAN
+var DataType_DATETIME = &sDataType_DATETIME
+
+var DataValidationMetrics = &sDataValidationMetrics
+var DataValidationMetrics_fileLevelMessages = &sDataValidationMetrics_fileLevelMessages
+var DataValidationMetrics_fieldLevelMessages = &sDataValidationMetrics_fieldLevelMessages
+
+var _DeleteAuditHistory = &s_DeleteAuditHistory
+
+var _description = &s_description
+
+var Detector = &sDetector
+var Detector_detectorId = &sDetector_detectorId
+var Detector_description = &sDetector_description
+var Detector_eventTypeName = &sDetector_eventTypeName
+var Detector_lastUpdatedTime = &sDetector_lastUpdatedTime
+var Detector_createdTime = &sDetector_createdTime
+var Detector_arn = &sDetector_arn
+
+var _DetectorList = &s_DetectorList
+var _DetectorList_member = &s_DetectorList_member
+
+var _DetectorsMaxResults = &s_DetectorsMaxResults
+
+var _DetectorVersionMaxResults = &s_DetectorVersionMaxResults
+
+var DetectorVersionStatus = &sDetectorVersionStatus
+var DetectorVersionStatus_DRAFT = &sDetectorVersionStatus_DRAFT
+var DetectorVersionStatus_ACTIVE = &sDetectorVersionStatus_ACTIVE
+var DetectorVersionStatus_INACTIVE = &sDetectorVersionStatus_INACTIVE
+
+var DetectorVersionSummary = &sDetectorVersionSummary
+var DetectorVersionSummary_detectorVersionId = &sDetectorVersionSummary_detectorVersionId
+var DetectorVersionSummary_status = &sDetectorVersionSummary_status
+var DetectorVersionSummary_description = &sDetectorVersionSummary_description
+var DetectorVersionSummary_lastUpdatedTime = &sDetectorVersionSummary_lastUpdatedTime
+
+var _DetectorVersionSummaryList = &s_DetectorVersionSummaryList
+var _DetectorVersionSummaryList_member = &s_DetectorVersionSummaryList_member
+
+var _Elements = &s_Elements
+
+var _ElementsList = &s_ElementsList
+var _ElementsList_member = &s_ElementsList_member
+
+var Entity = &sEntity
+var Entity_entityType = &sEntity_entityType
+var Entity_entityId = &sEntity_entityId
+
+var _entityRestrictedString = &s_entityRestrictedString
+
+var EntityType = &sEntityType
+var EntityType_name = &sEntityType_name
+var EntityType_description = &sEntityType_description
+var EntityType_lastUpdatedTime = &sEntityType_lastUpdatedTime
+var EntityType_createdTime = &sEntityType_createdTime
+var EntityType_arn = &sEntityType_arn
+
+var _entityTypeList = &s_entityTypeList
+var _entityTypeList_member = &s_entityTypeList_member
+
+var _entityTypesMaxResults = &s_entityTypesMaxResults
+
+var EvaluatedExternalModel = &sEvaluatedExternalModel
+var EvaluatedExternalModel_modelEndpoint = &sEvaluatedExternalModel_modelEndpoint
+var EvaluatedExternalModel_useEventVariables = &sEvaluatedExternalModel_useEventVariables
+var EvaluatedExternalModel_inputVariables = &sEvaluatedExternalModel_inputVariables
+var EvaluatedExternalModel_outputVariables = &sEvaluatedExternalModel_outputVariables
+
+var EvaluatedModelVersion = &sEvaluatedModelVersion
+var EvaluatedModelVersion_modelId = &sEvaluatedModelVersion_modelId
+var EvaluatedModelVersion_modelVersion = &sEvaluatedModelVersion_modelVersion
+var EvaluatedModelVersion_modelType = &sEvaluatedModelVersion_modelType
+var EvaluatedModelVersion_evaluations = &sEvaluatedModelVersion_evaluations
+
+var EvaluatedRule = &sEvaluatedRule
+var EvaluatedRule_ruleId = &sEvaluatedRule_ruleId
+var EvaluatedRule_ruleVersion = &sEvaluatedRule_ruleVersion
+var EvaluatedRule_expression = &sEvaluatedRule_expression
+var EvaluatedRule_expressionWithValues = &sEvaluatedRule_expressionWithValues
+var EvaluatedRule_outcomes = &sEvaluatedRule_outcomes
+var EvaluatedRule_evaluated = &sEvaluatedRule_evaluated
+var EvaluatedRule_matched = &sEvaluatedRule_matched
+
+var _EvaluatedRuleList = &s_EvaluatedRuleList
+var _EvaluatedRuleList_member = &s_EvaluatedRuleList_member
+
+var Event = &sEvent
+var Event_eventId = &sEvent_eventId
+var Event_eventTypeName = &sEvent_eventTypeName
+var Event_eventTimestamp = &sEvent_eventTimestamp
+var Event_eventVariables = &sEvent_eventVariables
+var Event_currentLabel = &sEvent_currentLabel
+var Event_labelTimestamp = &sEvent_labelTimestamp
+var Event_entities = &sEvent_entities
+
+var _EventAttributeMap = &s_EventAttributeMap
+var _EventAttributeMap_key = &s_EventAttributeMap_key
+var _EventAttributeMap_value = &s_EventAttributeMap_value
+
+var EventIngestion = &sEventIngestion
+var EventIngestion_ENABLED = &sEventIngestion_ENABLED
+var EventIngestion_DISABLED = &sEventIngestion_DISABLED
+
+var EventOrchestration = &sEventOrchestration
+var EventOrchestration_eventBridgeEnabled = &sEventOrchestration_eventBridgeEnabled
+
+var _EventPredictionsMaxResults = &s_EventPredictionsMaxResults
+
+var EventPredictionSummary = &sEventPredictionSummary
+var EventPredictionSummary_eventId = &sEventPredictionSummary_eventId
+var EventPredictionSummary_eventTypeName = &sEventPredictionSummary_eventTypeName
+var EventPredictionSummary_eventTimestamp = &sEventPredictionSummary_eventTimestamp
+var EventPredictionSummary_predictionTimestamp = &sEventPredictionSummary_predictionTimestamp
+var EventPredictionSummary_detectorId = &sEventPredictionSummary_detectorId
+var EventPredictionSummary_detectorVersionId = &sEventPredictionSummary_detectorVersionId
+
+var EventType = &sEventType
+var EventType_name = &sEventType_name
+var EventType_description = &sEventType_description
+var EventType_eventVariables = &sEventType_eventVariables
+var EventType_labels = &sEventType_labels
+var EventType_entityTypes = &sEventType_entityTypes
+var EventType_eventIngestion = &sEventType_eventIngestion
+var EventType_ingestedEventStatistics = &sEventType_ingestedEventStatistics
+var EventType_lastUpdatedTime = &sEventType_lastUpdatedTime
+var EventType_createdTime = &sEventType_createdTime
+var EventType_arn = &sEventType_arn
+var EventType_eventOrchestration = &sEventType_eventOrchestration
+
+var _eventTypeList = &s_eventTypeList
+var _eventTypeList_member = &s_eventTypeList_member
+
+var _eventTypesMaxResults = &s_eventTypesMaxResults
+
+var _EventVariableMap = &s_EventVariableMap
+var _EventVariableMap_key = &s_EventVariableMap_key
+var _EventVariableMap_value = &s_EventVariableMap_value
+
+var EventVariableSummary = &sEventVariableSummary
+var EventVariableSummary_name = &sEventVariableSummary_name
+var EventVariableSummary_value = &sEventVariableSummary_value
+var EventVariableSummary_source = &sEventVariableSummary_source
+
+var ExternalEventsDetail = &sExternalEventsDetail
+var ExternalEventsDetail_dataLocation = &sExternalEventsDetail_dataLocation
+var ExternalEventsDetail_dataAccessRoleArn = &sExternalEventsDetail_dataAccessRoleArn
+
+var ExternalModel = &sExternalModel
+var ExternalModel_modelEndpoint = &sExternalModel_modelEndpoint
+var ExternalModel_modelSource = &sExternalModel_modelSource
+var ExternalModel_invokeModelEndpointRoleArn = &sExternalModel_invokeModelEndpointRoleArn
+var ExternalModel_inputConfiguration = &sExternalModel_inputConfiguration
+var ExternalModel_outputConfiguration = &sExternalModel_outputConfiguration
+var ExternalModel_modelEndpointStatus = &sExternalModel_modelEndpointStatus
+var ExternalModel_lastUpdatedTime = &sExternalModel_lastUpdatedTime
+var ExternalModel_createdTime = &sExternalModel_createdTime
+var ExternalModel_arn = &sExternalModel_arn
+
+var _ExternalModelEndpointDataBlobMap = &s_ExternalModelEndpointDataBlobMap
+var _ExternalModelEndpointDataBlobMap_key = &s_ExternalModelEndpointDataBlobMap_key
+var _ExternalModelEndpointDataBlobMap_value = &s_ExternalModelEndpointDataBlobMap_value
+
+var _ExternalModelList = &s_ExternalModelList
+var _ExternalModelList_member = &s_ExternalModelList_member
+
+var ExternalModelOutputs = &sExternalModelOutputs
+var ExternalModelOutputs_externalModel = &sExternalModelOutputs_externalModel
+var ExternalModelOutputs_outputs = &sExternalModelOutputs_outputs
+
+var _ExternalModelPredictionMap = &s_ExternalModelPredictionMap
+var _ExternalModelPredictionMap_key = &s_ExternalModelPredictionMap_key
+var _ExternalModelPredictionMap_value = &s_ExternalModelPredictionMap_value
+
+var _ExternalModelsMaxResults = &s_ExternalModelsMaxResults
+
+var ExternalModelSummary = &sExternalModelSummary
+var ExternalModelSummary_modelEndpoint = &sExternalModelSummary_modelEndpoint
+var ExternalModelSummary_modelSource = &sExternalModelSummary_modelSource
+
+var FieldValidationMessage = &sFieldValidationMessage
+var FieldValidationMessage_fieldName = &sFieldValidationMessage_fieldName
+var FieldValidationMessage_identifier = &sFieldValidationMessage_identifier
+var FieldValidationMessage_title = &sFieldValidationMessage_title
+var FieldValidationMessage_content = &sFieldValidationMessage_content
+var FieldValidationMessage_type = &sFieldValidationMessage_type
+
+var _fieldValidationMessageList = &s_fieldValidationMessageList
+var _fieldValidationMessageList_member = &s_fieldValidationMessageList_member
+
+var FileValidationMessage = &sFileValidationMessage
+var FileValidationMessage_title = &sFileValidationMessage_title
+var FileValidationMessage_content = &sFileValidationMessage_content
+var FileValidationMessage_type = &sFileValidationMessage_type
+
+var _fileValidationMessageList = &s_fileValidationMessageList
+var _fileValidationMessageList_member = &s_fileValidationMessageList_member
+
+var FilterCondition = &sFilterCondition
+var FilterCondition_value = &sFilterCondition_value
+
+var _filterString = &s_filterString
+
+var _float = &s_float
+
+var _floatVersionString = &s_floatVersionString
+
+var _fraudDetectorArn = &s_fraudDetectorArn
+
+var _iamRoleArn = &s_iamRoleArn
+
+var _identifier = &s_identifier
+
+var IngestedEventsDetail = &sIngestedEventsDetail
+var IngestedEventsDetail_ingestedEventsTimeWindow = &sIngestedEventsDetail_ingestedEventsTimeWindow
+
+var IngestedEventStatistics = &sIngestedEventStatistics
+var IngestedEventStatistics_numberOfEvents = &sIngestedEventStatistics_numberOfEvents
+var IngestedEventStatistics_eventDataSizeInBytes = &sIngestedEventStatistics_eventDataSizeInBytes
+var IngestedEventStatistics_leastRecentEvent = &sIngestedEventStatistics_leastRecentEvent
+var IngestedEventStatistics_mostRecentEvent = &sIngestedEventStatistics_mostRecentEvent
+var IngestedEventStatistics_lastUpdatedTime = &sIngestedEventStatistics_lastUpdatedTime
+
+var IngestedEventsTimeWindow = &sIngestedEventsTimeWindow
+var IngestedEventsTimeWindow_startTime = &sIngestedEventsTimeWindow_startTime
+var IngestedEventsTimeWindow_endTime = &sIngestedEventsTimeWindow_endTime
+
+var _Integer = &s_Integer
+
+var _Integer2 = &s_Integer2
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JsonKeyToVariableMap = &s_JsonKeyToVariableMap
+var _JsonKeyToVariableMap_key = &s_JsonKeyToVariableMap_key
+var _JsonKeyToVariableMap_value = &s_JsonKeyToVariableMap_value
+
+var _KmsEncryptionKeyArn = &s_KmsEncryptionKeyArn
+
+var KMSKey = &sKMSKey
+var KMSKey_kmsEncryptionKeyArn = &sKMSKey_kmsEncryptionKeyArn
+
+var Label = &sLabel
+var Label_name = &sLabel_name
+var Label_description = &sLabel_description
+var Label_lastUpdatedTime = &sLabel_lastUpdatedTime
+var Label_createdTime = &sLabel_createdTime
+var Label_arn = &sLabel_arn
+
+var _labelList = &s_labelList
+var _labelList_member = &s_labelList_member
+
+var _labelMapper = &s_labelMapper
+var _labelMapper_key = &s_labelMapper_key
+var _labelMapper_value = &s_labelMapper_value
+
+var LabelSchema = &sLabelSchema
+var LabelSchema_labelMapper = &sLabelSchema_labelMapper
+var LabelSchema_unlabeledEventsTreatment = &sLabelSchema_unlabeledEventsTreatment
+
+var _labelsMaxResults = &s_labelsMaxResults
+
+var Language = &sLanguage
+var Language_DETECTORPL = &sLanguage_DETECTORPL
+
+var _ListOfAggregatedLogOddsMetrics = &s_ListOfAggregatedLogOddsMetrics
+var _ListOfAggregatedLogOddsMetrics_member = &s_ListOfAggregatedLogOddsMetrics_member
+
+var _ListOfAggregatedVariablesImpactExplanations = &s_ListOfAggregatedVariablesImpactExplanations
+var _ListOfAggregatedVariablesImpactExplanations_member = &s_ListOfAggregatedVariablesImpactExplanations_member
+
+var _listOfEntities = &s_listOfEntities
+var _listOfEntities_member = &s_listOfEntities_member
+
+var _ListOfEvaluatedExternalModels = &s_ListOfEvaluatedExternalModels
+var _ListOfEvaluatedExternalModels_member = &s_ListOfEvaluatedExternalModels_member
+
+var _ListOfEvaluatedModelVersions = &s_ListOfEvaluatedModelVersions
+var _ListOfEvaluatedModelVersions_member = &s_ListOfEvaluatedModelVersions_member
+
+var _ListOfEventPredictionSummaries = &s_ListOfEventPredictionSummaries
+var _ListOfEventPredictionSummaries_member = &s_ListOfEventPredictionSummaries_member
+
+var _ListOfEventVariableSummaries = &s_ListOfEventVariableSummaries
+var _ListOfEventVariableSummaries_member = &s_ListOfEventVariableSummaries_member
+
+var _ListOfExternalModelOutputs = &s_ListOfExternalModelOutputs
+var _ListOfExternalModelOutputs_member = &s_ListOfExternalModelOutputs_member
+
+var _ListOfLogOddsMetrics = &s_ListOfLogOddsMetrics
+var _ListOfLogOddsMetrics_member = &s_ListOfLogOddsMetrics_member
+
+var _ListOfModelScores = &s_ListOfModelScores
+var _ListOfModelScores_member = &s_ListOfModelScores_member
+
+var _ListOfModelVersionEvaluations = &s_ListOfModelVersionEvaluations
+var _ListOfModelVersionEvaluations_member = &s_ListOfModelVersionEvaluations_member
+
+var _ListOfModelVersions = &s_ListOfModelVersions
+var _ListOfModelVersions_member = &s_ListOfModelVersions_member
+
+var _ListOfRuleResults = &s_ListOfRuleResults
+var _ListOfRuleResults_member = &s_ListOfRuleResults_member
+
+var _ListOfStrings = &s_ListOfStrings
+var _ListOfStrings_member = &s_ListOfStrings_member
+
+var _listOfVariableImpactExplanations = &s_listOfVariableImpactExplanations
+var _listOfVariableImpactExplanations_member = &s_listOfVariableImpactExplanations_member
+
+var _ListsElementsMaxResults = &s_ListsElementsMaxResults
+
+var _ListsMetadataMaxResults = &s_ListsMetadataMaxResults
+
+var ListUpdateMode = &sListUpdateMode
+var ListUpdateMode_REPLACE = &sListUpdateMode_REPLACE
+var ListUpdateMode_APPEND = &sListUpdateMode_APPEND
+var ListUpdateMode_REMOVE = &sListUpdateMode_REMOVE
+
+var LogOddsMetric = &sLogOddsMetric
+var LogOddsMetric_variableName = &sLogOddsMetric_variableName
+var LogOddsMetric_variableType = &sLogOddsMetric_variableType
+var LogOddsMetric_variableImportance = &sLogOddsMetric_variableImportance
+
+var _Long = &s_Long
+
+var _MapOfStrings = &s_MapOfStrings
+var _MapOfStrings_key = &s_MapOfStrings_key
+var _MapOfStrings_value = &s_MapOfStrings_value
+
+var MetricDataPoint = &sMetricDataPoint
+var MetricDataPoint_fpr = &sMetricDataPoint_fpr
+var MetricDataPoint_precision = &sMetricDataPoint_precision
+var MetricDataPoint_tpr = &sMetricDataPoint_tpr
+var MetricDataPoint_threshold = &sMetricDataPoint_threshold
+
+var _metricDataPointsList = &s_metricDataPointsList
+var _metricDataPointsList_member = &s_metricDataPointsList_member
+
+var Model = &sModel
+var Model_modelId = &sModel_modelId
+var Model_modelType = &sModel_modelType
+var Model_description = &sModel_description
+var Model_eventTypeName = &sModel_eventTypeName
+var Model_createdTime = &sModel_createdTime
+var Model_lastUpdatedTime = &sModel_lastUpdatedTime
+var Model_arn = &sModel_arn
+
+var ModelEndpointDataBlob = &sModelEndpointDataBlob
+var ModelEndpointDataBlob_byteBuffer = &sModelEndpointDataBlob_byteBuffer
+var ModelEndpointDataBlob_contentType = &sModelEndpointDataBlob_contentType
+
+var ModelEndpointStatus = &sModelEndpointStatus
+var ModelEndpointStatus_ASSOCIATED = &sModelEndpointStatus_ASSOCIATED
+var ModelEndpointStatus_DISSOCIATED = &sModelEndpointStatus_DISSOCIATED
+
+var _modelIdentifier = &s_modelIdentifier
+
+var ModelInputConfiguration = &sModelInputConfiguration
+var ModelInputConfiguration_eventTypeName = &sModelInputConfiguration_eventTypeName
+var ModelInputConfiguration_format = &sModelInputConfiguration_format
+var ModelInputConfiguration_useEventVariables = &sModelInputConfiguration_useEventVariables
+var ModelInputConfiguration_jsonInputTemplate = &sModelInputConfiguration_jsonInputTemplate
+var ModelInputConfiguration_csvInputTemplate = &sModelInputConfiguration_csvInputTemplate
+
+var ModelInputDataFormat = &sModelInputDataFormat
+var ModelInputDataFormat_CSV = &sModelInputDataFormat_CSV
+var ModelInputDataFormat_JSON = &sModelInputDataFormat_JSON
+
+var _modelInputTemplate = &s_modelInputTemplate
+
+var _modelList = &s_modelList
+var _modelList_member = &s_modelList_member
+
+var ModelOutputConfiguration = &sModelOutputConfiguration
+var ModelOutputConfiguration_format = &sModelOutputConfiguration_format
+var ModelOutputConfiguration_jsonKeyToVariableMap = &sModelOutputConfiguration_jsonKeyToVariableMap
+var ModelOutputConfiguration_csvIndexToVariableMap = &sModelOutputConfiguration_csvIndexToVariableMap
+
+var ModelOutputDataFormat = &sModelOutputDataFormat
+var ModelOutputDataFormat_CSV = &sModelOutputDataFormat_CSV
+var ModelOutputDataFormat_JSONLINES = &sModelOutputDataFormat_JSONLINES
+
+var _ModelPredictionMap = &s_ModelPredictionMap
+var _ModelPredictionMap_key = &s_ModelPredictionMap_key
+var _ModelPredictionMap_value = &s_ModelPredictionMap_value
+
+var ModelScores = &sModelScores
+var ModelScores_modelVersion = &sModelScores_modelVersion
+var ModelScores_scores = &sModelScores_scores
+
+var _modelsMaxPageSize = &s_modelsMaxPageSize
+
+var ModelSource = &sModelSource
+var ModelSource_SAGEMAKER = &sModelSource_SAGEMAKER
+
+var ModelTypeEnum = &sModelTypeEnum
+var ModelTypeEnum_ONLINE_FRAUD_INSIGHTS = &sModelTypeEnum_ONLINE_FRAUD_INSIGHTS
+var ModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS = &sModelTypeEnum_TRANSACTION_FRAUD_INSIGHTS
+var ModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS = &sModelTypeEnum_ACCOUNT_TAKEOVER_INSIGHTS
+
+var ModelVersion = &sModelVersion
+var ModelVersion_modelId = &sModelVersion_modelId
+var ModelVersion_modelType = &sModelVersion_modelType
+var ModelVersion_modelVersionNumber = &sModelVersion_modelVersionNumber
+var ModelVersion_arn = &sModelVersion_arn
+
+var ModelVersionDetail = &sModelVersionDetail
+var ModelVersionDetail_modelId = &sModelVersionDetail_modelId
+var ModelVersionDetail_modelType = &sModelVersionDetail_modelType
+var ModelVersionDetail_modelVersionNumber = &sModelVersionDetail_modelVersionNumber
+var ModelVersionDetail_status = &sModelVersionDetail_status
+var ModelVersionDetail_trainingDataSource = &sModelVersionDetail_trainingDataSource
+var ModelVersionDetail_trainingDataSchema = &sModelVersionDetail_trainingDataSchema
+var ModelVersionDetail_externalEventsDetail = &sModelVersionDetail_externalEventsDetail
+var ModelVersionDetail_ingestedEventsDetail = &sModelVersionDetail_ingestedEventsDetail
+var ModelVersionDetail_trainingResult = &sModelVersionDetail_trainingResult
+var ModelVersionDetail_lastUpdatedTime = &sModelVersionDetail_lastUpdatedTime
+var ModelVersionDetail_createdTime = &sModelVersionDetail_createdTime
+var ModelVersionDetail_arn = &sModelVersionDetail_arn
+var ModelVersionDetail_trainingResultV2 = &sModelVersionDetail_trainingResultV2
+
+var _modelVersionDetailList = &s_modelVersionDetailList
+var _modelVersionDetailList_member = &s_modelVersionDetailList_member
+
+var ModelVersionEvaluation = &sModelVersionEvaluation
+var ModelVersionEvaluation_outputVariableName = &sModelVersionEvaluation_outputVariableName
+var ModelVersionEvaluation_evaluationScore = &sModelVersionEvaluation_evaluationScore
+var ModelVersionEvaluation_predictionExplanations = &sModelVersionEvaluation_predictionExplanations
+
+var ModelVersionStatus = &sModelVersionStatus
+var ModelVersionStatus_ACTIVE = &sModelVersionStatus_ACTIVE
+var ModelVersionStatus_INACTIVE = &sModelVersionStatus_INACTIVE
+var ModelVersionStatus_TRAINING_CANCELLED = &sModelVersionStatus_TRAINING_CANCELLED
+
+var _NameList = &s_NameList
+var _NameList_member = &s_NameList_member
+
+var _nextToken = &s_nextToken
+
+var _noDashIdentifier = &s_noDashIdentifier
+
+var _NonEmptyListOfStrings = &s_NonEmptyListOfStrings
+var _NonEmptyListOfStrings_member = &s_NonEmptyListOfStrings_member
+
+var OFIMetricDataPoint = &sOFIMetricDataPoint
+var OFIMetricDataPoint_fpr = &sOFIMetricDataPoint_fpr
+var OFIMetricDataPoint_precision = &sOFIMetricDataPoint_precision
+var OFIMetricDataPoint_tpr = &sOFIMetricDataPoint_tpr
+var OFIMetricDataPoint_threshold = &sOFIMetricDataPoint_threshold
+
+var _OFIMetricDataPointsList = &s_OFIMetricDataPointsList
+var _OFIMetricDataPointsList_member = &s_OFIMetricDataPointsList_member
+
+var OFIModelPerformance = &sOFIModelPerformance
+var OFIModelPerformance_auc = &sOFIModelPerformance_auc
+var OFIModelPerformance_uncertaintyRange = &sOFIModelPerformance_uncertaintyRange
+
+var OFITrainingMetricsValue = &sOFITrainingMetricsValue
+var OFITrainingMetricsValue_metricDataPoints = &sOFITrainingMetricsValue_metricDataPoints
+var OFITrainingMetricsValue_modelPerformance = &sOFITrainingMetricsValue_modelPerformance
+
+var Outcome = &sOutcome
+var Outcome_name = &sOutcome_name
+var Outcome_description = &sOutcome_description
+var Outcome_lastUpdatedTime = &sOutcome_lastUpdatedTime
+var Outcome_createdTime = &sOutcome_createdTime
+var Outcome_arn = &sOutcome_arn
+
+var _OutcomeList = &s_OutcomeList
+var _OutcomeList_member = &s_OutcomeList_member
+
+var _OutcomesMaxResults = &s_OutcomesMaxResults
+
+var PredictionExplanations = &sPredictionExplanations
+var PredictionExplanations_variableImpactExplanations = &sPredictionExplanations_variableImpactExplanations
+var PredictionExplanations_aggregatedVariablesImpactExplanations = &sPredictionExplanations_aggregatedVariablesImpactExplanations
+
+var PredictionTimeRange = &sPredictionTimeRange
+var PredictionTimeRange_startTime = &sPredictionTimeRange_startTime
+var PredictionTimeRange_endTime = &sPredictionTimeRange_endTime
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceUnavailableException = &sResourceUnavailableException
+var ResourceUnavailableException_message = &sResourceUnavailableException_message
+
+var Rule = &sRule
+var Rule_detectorId = &sRule_detectorId
+var Rule_ruleId = &sRule_ruleId
+var Rule_ruleVersion = &sRule_ruleVersion
+
+var RuleDetail = &sRuleDetail
+var RuleDetail_ruleId = &sRuleDetail_ruleId
+var RuleDetail_description = &sRuleDetail_description
+var RuleDetail_detectorId = &sRuleDetail_detectorId
+var RuleDetail_ruleVersion = &sRuleDetail_ruleVersion
+var RuleDetail_expression = &sRuleDetail_expression
+var RuleDetail_language = &sRuleDetail_language
+var RuleDetail_outcomes = &sRuleDetail_outcomes
+var RuleDetail_lastUpdatedTime = &sRuleDetail_lastUpdatedTime
+var RuleDetail_createdTime = &sRuleDetail_createdTime
+var RuleDetail_arn = &sRuleDetail_arn
+
+var _RuleDetailList = &s_RuleDetailList
+var _RuleDetailList_member = &s_RuleDetailList_member
+
+var RuleExecutionMode = &sRuleExecutionMode
+var RuleExecutionMode_ALL_MATCHED = &sRuleExecutionMode_ALL_MATCHED
+var RuleExecutionMode_FIRST_MATCHED = &sRuleExecutionMode_FIRST_MATCHED
+
+var _ruleExpression = &s_ruleExpression
+
+var _RuleList = &s_RuleList
+var _RuleList_member = &s_RuleList_member
+
+var RuleResult = &sRuleResult
+var RuleResult_ruleId = &sRuleResult_ruleId
+var RuleResult_outcomes = &sRuleResult_outcomes
+
+var _RulesMaxResults = &s_RulesMaxResults
+
+var _s3BucketLocation = &s_s3BucketLocation
+
+var _sageMakerEndpointIdentifier = &s_sageMakerEndpointIdentifier
+
+var _sensitiveString = &s_sensitiveString
+
+var _string = &s_string
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _tagKey = &s_tagKey
+
+var _tagKeyList = &s_tagKeyList
+var _tagKeyList_member = &s_tagKeyList_member
+
+var _tagList = &s_tagList
+var _tagList_member = &s_tagList_member
+
+var _TagsMaxResults = &s_TagsMaxResults
+
+var _tagValue = &s_tagValue
+
+var TFIMetricDataPoint = &sTFIMetricDataPoint
+var TFIMetricDataPoint_fpr = &sTFIMetricDataPoint_fpr
+var TFIMetricDataPoint_precision = &sTFIMetricDataPoint_precision
+var TFIMetricDataPoint_tpr = &sTFIMetricDataPoint_tpr
+var TFIMetricDataPoint_threshold = &sTFIMetricDataPoint_threshold
+
+var _TFIMetricDataPointsList = &s_TFIMetricDataPointsList
+var _TFIMetricDataPointsList_member = &s_TFIMetricDataPointsList_member
+
+var TFIModelPerformance = &sTFIModelPerformance
+var TFIModelPerformance_auc = &sTFIModelPerformance_auc
+var TFIModelPerformance_uncertaintyRange = &sTFIModelPerformance_uncertaintyRange
+
+var TFITrainingMetricsValue = &sTFITrainingMetricsValue
+var TFITrainingMetricsValue_metricDataPoints = &sTFITrainingMetricsValue_metricDataPoints
+var TFITrainingMetricsValue_modelPerformance = &sTFITrainingMetricsValue_modelPerformance
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _time = &s_time
+
+var TrainingDataSchema = &sTrainingDataSchema
+var TrainingDataSchema_modelVariables = &sTrainingDataSchema_modelVariables
+var TrainingDataSchema_labelSchema = &sTrainingDataSchema_labelSchema
+
+var TrainingDataSourceEnum = &sTrainingDataSourceEnum
+var TrainingDataSourceEnum_EXTERNAL_EVENTS = &sTrainingDataSourceEnum_EXTERNAL_EVENTS
+var TrainingDataSourceEnum_INGESTED_EVENTS = &sTrainingDataSourceEnum_INGESTED_EVENTS
+
+var TrainingMetrics = &sTrainingMetrics
+var TrainingMetrics_auc = &sTrainingMetrics_auc
+var TrainingMetrics_metricDataPoints = &sTrainingMetrics_metricDataPoints
+
+var TrainingMetricsV2 = &sTrainingMetricsV2
+var TrainingMetricsV2_ofi = &sTrainingMetricsV2_ofi
+var TrainingMetricsV2_tfi = &sTrainingMetricsV2_tfi
+var TrainingMetricsV2_ati = &sTrainingMetricsV2_ati
+
+var TrainingResult = &sTrainingResult
+var TrainingResult_dataValidationMetrics = &sTrainingResult_dataValidationMetrics
+var TrainingResult_trainingMetrics = &sTrainingResult_trainingMetrics
+var TrainingResult_variableImportanceMetrics = &sTrainingResult_variableImportanceMetrics
+
+var TrainingResultV2 = &sTrainingResultV2
+var TrainingResultV2_dataValidationMetrics = &sTrainingResultV2_dataValidationMetrics
+var TrainingResultV2_trainingMetricsV2 = &sTrainingResultV2_trainingMetricsV2
+var TrainingResultV2_variableImportanceMetrics = &sTrainingResultV2_variableImportanceMetrics
+var TrainingResultV2_aggregatedVariablesImportanceMetrics = &sTrainingResultV2_aggregatedVariablesImportanceMetrics
+
+var UncertaintyRange = &sUncertaintyRange
+var UncertaintyRange_lowerBoundValue = &sUncertaintyRange_lowerBoundValue
+var UncertaintyRange_upperBoundValue = &sUncertaintyRange_upperBoundValue
+
+var UnlabeledEventsTreatment = &sUnlabeledEventsTreatment
+var UnlabeledEventsTreatment_IGNORE = &sUnlabeledEventsTreatment_IGNORE
+var UnlabeledEventsTreatment_FRAUD = &sUnlabeledEventsTreatment_FRAUD
+var UnlabeledEventsTreatment_LEGIT = &sUnlabeledEventsTreatment_LEGIT
+var UnlabeledEventsTreatment_AUTO = &sUnlabeledEventsTreatment_AUTO
+
+var _UseEventVariables = &s_UseEventVariables
+
+var _utcTimestampISO8601 = &s_utcTimestampISO8601
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var Variable = &sVariable
+var Variable_name = &sVariable_name
+var Variable_dataType = &sVariable_dataType
+var Variable_dataSource = &sVariable_dataSource
+var Variable_defaultValue = &sVariable_defaultValue
+var Variable_description = &sVariable_description
+var Variable_variableType = &sVariable_variableType
+var Variable_lastUpdatedTime = &sVariable_lastUpdatedTime
+var Variable_createdTime = &sVariable_createdTime
+var Variable_arn = &sVariable_arn
+
+var VariableEntry = &sVariableEntry
+var VariableEntry_name = &sVariableEntry_name
+var VariableEntry_dataType = &sVariableEntry_dataType
+var VariableEntry_dataSource = &sVariableEntry_dataSource
+var VariableEntry_defaultValue = &sVariableEntry_defaultValue
+var VariableEntry_description = &sVariableEntry_description
+var VariableEntry_variableType = &sVariableEntry_variableType
+
+var _VariableEntryList = &s_VariableEntryList
+var _VariableEntryList_member = &s_VariableEntryList_member
+
+var VariableImpactExplanation = &sVariableImpactExplanation
+var VariableImpactExplanation_eventVariableName = &sVariableImpactExplanation_eventVariableName
+var VariableImpactExplanation_relativeImpact = &sVariableImpactExplanation_relativeImpact
+var VariableImpactExplanation_logOddsImpact = &sVariableImpactExplanation_logOddsImpact
+
+var VariableImportanceMetrics = &sVariableImportanceMetrics
+var VariableImportanceMetrics_logOddsMetrics = &sVariableImportanceMetrics_logOddsMetrics
+
+var _VariableList = &s_VariableList
+var _VariableList_member = &s_VariableList_member
+
+var _variableName = &s_variableName
+
+var _VariablesMaxResults = &s_VariablesMaxResults
+
+var _variableType = &s_variableType
+
+var _variableValue = &s_variableValue
+
+var _wholeNumberVersionString = &s_wholeNumberVersionString
+
+var BatchCreateVariableRequest = &sBatchCreateVariableRequest
+var BatchCreateVariableRequest_variableEntries = &sBatchCreateVariableRequest_variableEntries
+var BatchCreateVariableRequest_tags = &sBatchCreateVariableRequest_tags
+
+var BatchCreateVariableResult = &sBatchCreateVariableResult
+var BatchCreateVariableResult_errors = &sBatchCreateVariableResult_errors
+
+var BatchGetVariableRequest = &sBatchGetVariableRequest
+var BatchGetVariableRequest_names = &sBatchGetVariableRequest_names
+
+var BatchGetVariableResult = &sBatchGetVariableResult
+var BatchGetVariableResult_variables = &sBatchGetVariableResult_variables
+var BatchGetVariableResult_errors = &sBatchGetVariableResult_errors
+
+var CancelBatchImportJobRequest = &sCancelBatchImportJobRequest
+var CancelBatchImportJobRequest_jobId = &sCancelBatchImportJobRequest_jobId
+
+var CancelBatchImportJobResult = &sCancelBatchImportJobResult
+
+var CancelBatchPredictionJobRequest = &sCancelBatchPredictionJobRequest
+var CancelBatchPredictionJobRequest_jobId = &sCancelBatchPredictionJobRequest_jobId
+
+var CancelBatchPredictionJobResult = &sCancelBatchPredictionJobResult
+
+var CreateBatchImportJobRequest = &sCreateBatchImportJobRequest
+var CreateBatchImportJobRequest_jobId = &sCreateBatchImportJobRequest_jobId
+var CreateBatchImportJobRequest_inputPath = &sCreateBatchImportJobRequest_inputPath
+var CreateBatchImportJobRequest_outputPath = &sCreateBatchImportJobRequest_outputPath
+var CreateBatchImportJobRequest_eventTypeName = &sCreateBatchImportJobRequest_eventTypeName
+var CreateBatchImportJobRequest_iamRoleArn = &sCreateBatchImportJobRequest_iamRoleArn
+var CreateBatchImportJobRequest_tags = &sCreateBatchImportJobRequest_tags
+
+var CreateBatchImportJobResult = &sCreateBatchImportJobResult
+
+var CreateBatchPredictionJobRequest = &sCreateBatchPredictionJobRequest
+var CreateBatchPredictionJobRequest_jobId = &sCreateBatchPredictionJobRequest_jobId
+var CreateBatchPredictionJobRequest_inputPath = &sCreateBatchPredictionJobRequest_inputPath
+var CreateBatchPredictionJobRequest_outputPath = &sCreateBatchPredictionJobRequest_outputPath
+var CreateBatchPredictionJobRequest_eventTypeName = &sCreateBatchPredictionJobRequest_eventTypeName
+var CreateBatchPredictionJobRequest_detectorName = &sCreateBatchPredictionJobRequest_detectorName
+var CreateBatchPredictionJobRequest_detectorVersion = &sCreateBatchPredictionJobRequest_detectorVersion
+var CreateBatchPredictionJobRequest_iamRoleArn = &sCreateBatchPredictionJobRequest_iamRoleArn
+var CreateBatchPredictionJobRequest_tags = &sCreateBatchPredictionJobRequest_tags
+
+var CreateBatchPredictionJobResult = &sCreateBatchPredictionJobResult
+
+var CreateDetectorVersionRequest = &sCreateDetectorVersionRequest
+var CreateDetectorVersionRequest_detectorId = &sCreateDetectorVersionRequest_detectorId
+var CreateDetectorVersionRequest_description = &sCreateDetectorVersionRequest_description
+var CreateDetectorVersionRequest_externalModelEndpoints = &sCreateDetectorVersionRequest_externalModelEndpoints
+var CreateDetectorVersionRequest_rules = &sCreateDetectorVersionRequest_rules
+var CreateDetectorVersionRequest_modelVersions = &sCreateDetectorVersionRequest_modelVersions
+var CreateDetectorVersionRequest_ruleExecutionMode = &sCreateDetectorVersionRequest_ruleExecutionMode
+var CreateDetectorVersionRequest_tags = &sCreateDetectorVersionRequest_tags
+
+var CreateDetectorVersionResult = &sCreateDetectorVersionResult
+var CreateDetectorVersionResult_detectorId = &sCreateDetectorVersionResult_detectorId
+var CreateDetectorVersionResult_detectorVersionId = &sCreateDetectorVersionResult_detectorVersionId
+var CreateDetectorVersionResult_status = &sCreateDetectorVersionResult_status
+
+var CreateListRequest = &sCreateListRequest
+var CreateListRequest_name = &sCreateListRequest_name
+var CreateListRequest_elements = &sCreateListRequest_elements
+var CreateListRequest_variableType = &sCreateListRequest_variableType
+var CreateListRequest_description = &sCreateListRequest_description
+var CreateListRequest_tags = &sCreateListRequest_tags
+
+var CreateListResult = &sCreateListResult
+
+var CreateModelRequest = &sCreateModelRequest
+var CreateModelRequest_modelId = &sCreateModelRequest_modelId
+var CreateModelRequest_modelType = &sCreateModelRequest_modelType
+var CreateModelRequest_description = &sCreateModelRequest_description
+var CreateModelRequest_eventTypeName = &sCreateModelRequest_eventTypeName
+var CreateModelRequest_tags = &sCreateModelRequest_tags
+
+var CreateModelResult = &sCreateModelResult
+
+var CreateModelVersionRequest = &sCreateModelVersionRequest
+var CreateModelVersionRequest_modelId = &sCreateModelVersionRequest_modelId
+var CreateModelVersionRequest_modelType = &sCreateModelVersionRequest_modelType
+var CreateModelVersionRequest_trainingDataSource = &sCreateModelVersionRequest_trainingDataSource
+var CreateModelVersionRequest_trainingDataSchema = &sCreateModelVersionRequest_trainingDataSchema
+var CreateModelVersionRequest_externalEventsDetail = &sCreateModelVersionRequest_externalEventsDetail
+var CreateModelVersionRequest_ingestedEventsDetail = &sCreateModelVersionRequest_ingestedEventsDetail
+var CreateModelVersionRequest_tags = &sCreateModelVersionRequest_tags
+
+var CreateModelVersionResult = &sCreateModelVersionResult
+var CreateModelVersionResult_modelId = &sCreateModelVersionResult_modelId
+var CreateModelVersionResult_modelType = &sCreateModelVersionResult_modelType
+var CreateModelVersionResult_modelVersionNumber = &sCreateModelVersionResult_modelVersionNumber
+var CreateModelVersionResult_status = &sCreateModelVersionResult_status
+
+var CreateRuleRequest = &sCreateRuleRequest
+var CreateRuleRequest_ruleId = &sCreateRuleRequest_ruleId
+var CreateRuleRequest_detectorId = &sCreateRuleRequest_detectorId
+var CreateRuleRequest_description = &sCreateRuleRequest_description
+var CreateRuleRequest_expression = &sCreateRuleRequest_expression
+var CreateRuleRequest_language = &sCreateRuleRequest_language
+var CreateRuleRequest_outcomes = &sCreateRuleRequest_outcomes
+var CreateRuleRequest_tags = &sCreateRuleRequest_tags
+
+var CreateRuleResult = &sCreateRuleResult
+var CreateRuleResult_rule = &sCreateRuleResult_rule
+
+var CreateVariableRequest = &sCreateVariableRequest
+var CreateVariableRequest_name = &sCreateVariableRequest_name
+var CreateVariableRequest_dataType = &sCreateVariableRequest_dataType
+var CreateVariableRequest_dataSource = &sCreateVariableRequest_dataSource
+var CreateVariableRequest_defaultValue = &sCreateVariableRequest_defaultValue
+var CreateVariableRequest_description = &sCreateVariableRequest_description
+var CreateVariableRequest_variableType = &sCreateVariableRequest_variableType
+var CreateVariableRequest_tags = &sCreateVariableRequest_tags
+
+var CreateVariableResult = &sCreateVariableResult
+
+var DeleteBatchImportJobRequest = &sDeleteBatchImportJobRequest
+var DeleteBatchImportJobRequest_jobId = &sDeleteBatchImportJobRequest_jobId
+
+var DeleteBatchImportJobResult = &sDeleteBatchImportJobResult
+
+var DeleteBatchPredictionJobRequest = &sDeleteBatchPredictionJobRequest
+var DeleteBatchPredictionJobRequest_jobId = &sDeleteBatchPredictionJobRequest_jobId
+
+var DeleteBatchPredictionJobResult = &sDeleteBatchPredictionJobResult
+
+var DeleteDetectorRequest = &sDeleteDetectorRequest
+var DeleteDetectorRequest_detectorId = &sDeleteDetectorRequest_detectorId
+
+var DeleteDetectorResult = &sDeleteDetectorResult
+
+var DeleteDetectorVersionRequest = &sDeleteDetectorVersionRequest
+var DeleteDetectorVersionRequest_detectorId = &sDeleteDetectorVersionRequest_detectorId
+var DeleteDetectorVersionRequest_detectorVersionId = &sDeleteDetectorVersionRequest_detectorVersionId
+
+var DeleteDetectorVersionResult = &sDeleteDetectorVersionResult
+
+var DeleteEntityTypeRequest = &sDeleteEntityTypeRequest
+var DeleteEntityTypeRequest_name = &sDeleteEntityTypeRequest_name
+
+var DeleteEntityTypeResult = &sDeleteEntityTypeResult
+
+var DeleteEventRequest = &sDeleteEventRequest
+var DeleteEventRequest_eventId = &sDeleteEventRequest_eventId
+var DeleteEventRequest_eventTypeName = &sDeleteEventRequest_eventTypeName
+var DeleteEventRequest_deleteAuditHistory = &sDeleteEventRequest_deleteAuditHistory
+
+var DeleteEventResult = &sDeleteEventResult
+
+var DeleteEventsByEventTypeRequest = &sDeleteEventsByEventTypeRequest
+var DeleteEventsByEventTypeRequest_eventTypeName = &sDeleteEventsByEventTypeRequest_eventTypeName
+
+var DeleteEventsByEventTypeResult = &sDeleteEventsByEventTypeResult
+var DeleteEventsByEventTypeResult_eventTypeName = &sDeleteEventsByEventTypeResult_eventTypeName
+var DeleteEventsByEventTypeResult_eventsDeletionStatus = &sDeleteEventsByEventTypeResult_eventsDeletionStatus
+
+var DeleteEventTypeRequest = &sDeleteEventTypeRequest
+var DeleteEventTypeRequest_name = &sDeleteEventTypeRequest_name
+
+var DeleteEventTypeResult = &sDeleteEventTypeResult
+
+var DeleteExternalModelRequest = &sDeleteExternalModelRequest
+var DeleteExternalModelRequest_modelEndpoint = &sDeleteExternalModelRequest_modelEndpoint
+
+var DeleteExternalModelResult = &sDeleteExternalModelResult
+
+var DeleteLabelRequest = &sDeleteLabelRequest
+var DeleteLabelRequest_name = &sDeleteLabelRequest_name
+
+var DeleteLabelResult = &sDeleteLabelResult
+
+var DeleteListRequest = &sDeleteListRequest
+var DeleteListRequest_name = &sDeleteListRequest_name
+
+var DeleteListResult = &sDeleteListResult
+
+var DeleteModelRequest = &sDeleteModelRequest
+var DeleteModelRequest_modelId = &sDeleteModelRequest_modelId
+var DeleteModelRequest_modelType = &sDeleteModelRequest_modelType
+
+var DeleteModelResult = &sDeleteModelResult
+
+var DeleteModelVersionRequest = &sDeleteModelVersionRequest
+var DeleteModelVersionRequest_modelId = &sDeleteModelVersionRequest_modelId
+var DeleteModelVersionRequest_modelType = &sDeleteModelVersionRequest_modelType
+var DeleteModelVersionRequest_modelVersionNumber = &sDeleteModelVersionRequest_modelVersionNumber
+
+var DeleteModelVersionResult = &sDeleteModelVersionResult
+
+var DeleteOutcomeRequest = &sDeleteOutcomeRequest
+var DeleteOutcomeRequest_name = &sDeleteOutcomeRequest_name
+
+var DeleteOutcomeResult = &sDeleteOutcomeResult
+
+var DeleteRuleRequest = &sDeleteRuleRequest
+var DeleteRuleRequest_rule = &sDeleteRuleRequest_rule
+
+var DeleteRuleResult = &sDeleteRuleResult
+
+var DeleteVariableRequest = &sDeleteVariableRequest
+var DeleteVariableRequest_name = &sDeleteVariableRequest_name
+
+var DeleteVariableResult = &sDeleteVariableResult
+
+var DescribeDetectorRequest = &sDescribeDetectorRequest
+var DescribeDetectorRequest_detectorId = &sDescribeDetectorRequest_detectorId
+var DescribeDetectorRequest_nextToken = &sDescribeDetectorRequest_nextToken
+var DescribeDetectorRequest_maxResults = &sDescribeDetectorRequest_maxResults
+
+var DescribeDetectorResult = &sDescribeDetectorResult
+var DescribeDetectorResult_detectorId = &sDescribeDetectorResult_detectorId
+var DescribeDetectorResult_detectorVersionSummaries = &sDescribeDetectorResult_detectorVersionSummaries
+var DescribeDetectorResult_nextToken = &sDescribeDetectorResult_nextToken
+var DescribeDetectorResult_arn = &sDescribeDetectorResult_arn
+
+var DescribeModelVersionsRequest = &sDescribeModelVersionsRequest
+var DescribeModelVersionsRequest_modelId = &sDescribeModelVersionsRequest_modelId
+var DescribeModelVersionsRequest_modelVersionNumber = &sDescribeModelVersionsRequest_modelVersionNumber
+var DescribeModelVersionsRequest_modelType = &sDescribeModelVersionsRequest_modelType
+var DescribeModelVersionsRequest_nextToken = &sDescribeModelVersionsRequest_nextToken
+var DescribeModelVersionsRequest_maxResults = &sDescribeModelVersionsRequest_maxResults
+
+var DescribeModelVersionsResult = &sDescribeModelVersionsResult
+var DescribeModelVersionsResult_modelVersionDetails = &sDescribeModelVersionsResult_modelVersionDetails
+var DescribeModelVersionsResult_nextToken = &sDescribeModelVersionsResult_nextToken
+
+var GetBatchImportJobsRequest = &sGetBatchImportJobsRequest
+var GetBatchImportJobsRequest_jobId = &sGetBatchImportJobsRequest_jobId
+var GetBatchImportJobsRequest_maxResults = &sGetBatchImportJobsRequest_maxResults
+var GetBatchImportJobsRequest_nextToken = &sGetBatchImportJobsRequest_nextToken
+
+var GetBatchImportJobsResult = &sGetBatchImportJobsResult
+var GetBatchImportJobsResult_batchImports = &sGetBatchImportJobsResult_batchImports
+var GetBatchImportJobsResult_nextToken = &sGetBatchImportJobsResult_nextToken
+
+var GetBatchPredictionJobsRequest = &sGetBatchPredictionJobsRequest
+var GetBatchPredictionJobsRequest_jobId = &sGetBatchPredictionJobsRequest_jobId
+var GetBatchPredictionJobsRequest_maxResults = &sGetBatchPredictionJobsRequest_maxResults
+var GetBatchPredictionJobsRequest_nextToken = &sGetBatchPredictionJobsRequest_nextToken
+
+var GetBatchPredictionJobsResult = &sGetBatchPredictionJobsResult
+var GetBatchPredictionJobsResult_batchPredictions = &sGetBatchPredictionJobsResult_batchPredictions
+var GetBatchPredictionJobsResult_nextToken = &sGetBatchPredictionJobsResult_nextToken
+
+var GetDeleteEventsByEventTypeStatusRequest = &sGetDeleteEventsByEventTypeStatusRequest
+var GetDeleteEventsByEventTypeStatusRequest_eventTypeName = &sGetDeleteEventsByEventTypeStatusRequest_eventTypeName
+
+var GetDeleteEventsByEventTypeStatusResult = &sGetDeleteEventsByEventTypeStatusResult
+var GetDeleteEventsByEventTypeStatusResult_eventTypeName = &sGetDeleteEventsByEventTypeStatusResult_eventTypeName
+var GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus = &sGetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus
+
+var GetDetectorsRequest = &sGetDetectorsRequest
+var GetDetectorsRequest_detectorId = &sGetDetectorsRequest_detectorId
+var GetDetectorsRequest_nextToken = &sGetDetectorsRequest_nextToken
+var GetDetectorsRequest_maxResults = &sGetDetectorsRequest_maxResults
+
+var GetDetectorsResult = &sGetDetectorsResult
+var GetDetectorsResult_detectors = &sGetDetectorsResult_detectors
+var GetDetectorsResult_nextToken = &sGetDetectorsResult_nextToken
+
+var GetDetectorVersionRequest = &sGetDetectorVersionRequest
+var GetDetectorVersionRequest_detectorId = &sGetDetectorVersionRequest_detectorId
+var GetDetectorVersionRequest_detectorVersionId = &sGetDetectorVersionRequest_detectorVersionId
+
+var GetDetectorVersionResult = &sGetDetectorVersionResult
+var GetDetectorVersionResult_detectorId = &sGetDetectorVersionResult_detectorId
+var GetDetectorVersionResult_detectorVersionId = &sGetDetectorVersionResult_detectorVersionId
+var GetDetectorVersionResult_description = &sGetDetectorVersionResult_description
+var GetDetectorVersionResult_externalModelEndpoints = &sGetDetectorVersionResult_externalModelEndpoints
+var GetDetectorVersionResult_modelVersions = &sGetDetectorVersionResult_modelVersions
+var GetDetectorVersionResult_rules = &sGetDetectorVersionResult_rules
+var GetDetectorVersionResult_status = &sGetDetectorVersionResult_status
+var GetDetectorVersionResult_lastUpdatedTime = &sGetDetectorVersionResult_lastUpdatedTime
+var GetDetectorVersionResult_createdTime = &sGetDetectorVersionResult_createdTime
+var GetDetectorVersionResult_ruleExecutionMode = &sGetDetectorVersionResult_ruleExecutionMode
+var GetDetectorVersionResult_arn = &sGetDetectorVersionResult_arn
+
+var GetEntityTypesRequest = &sGetEntityTypesRequest
+var GetEntityTypesRequest_name = &sGetEntityTypesRequest_name
+var GetEntityTypesRequest_nextToken = &sGetEntityTypesRequest_nextToken
+var GetEntityTypesRequest_maxResults = &sGetEntityTypesRequest_maxResults
+
+var GetEntityTypesResult = &sGetEntityTypesResult
+var GetEntityTypesResult_entityTypes = &sGetEntityTypesResult_entityTypes
+var GetEntityTypesResult_nextToken = &sGetEntityTypesResult_nextToken
+
+var GetEventRequest = &sGetEventRequest
+var GetEventRequest_eventId = &sGetEventRequest_eventId
+var GetEventRequest_eventTypeName = &sGetEventRequest_eventTypeName
+
+var GetEventResult = &sGetEventResult
+var GetEventResult_event = &sGetEventResult_event
+
+var GetEventPredictionRequest = &sGetEventPredictionRequest
+var GetEventPredictionRequest_detectorId = &sGetEventPredictionRequest_detectorId
+var GetEventPredictionRequest_detectorVersionId = &sGetEventPredictionRequest_detectorVersionId
+var GetEventPredictionRequest_eventId = &sGetEventPredictionRequest_eventId
+var GetEventPredictionRequest_eventTypeName = &sGetEventPredictionRequest_eventTypeName
+var GetEventPredictionRequest_entities = &sGetEventPredictionRequest_entities
+var GetEventPredictionRequest_eventTimestamp = &sGetEventPredictionRequest_eventTimestamp
+var GetEventPredictionRequest_eventVariables = &sGetEventPredictionRequest_eventVariables
+var GetEventPredictionRequest_externalModelEndpointDataBlobs = &sGetEventPredictionRequest_externalModelEndpointDataBlobs
+
+var GetEventPredictionMetadataRequest = &sGetEventPredictionMetadataRequest
+var GetEventPredictionMetadataRequest_eventId = &sGetEventPredictionMetadataRequest_eventId
+var GetEventPredictionMetadataRequest_eventTypeName = &sGetEventPredictionMetadataRequest_eventTypeName
+var GetEventPredictionMetadataRequest_detectorId = &sGetEventPredictionMetadataRequest_detectorId
+var GetEventPredictionMetadataRequest_detectorVersionId = &sGetEventPredictionMetadataRequest_detectorVersionId
+var GetEventPredictionMetadataRequest_predictionTimestamp = &sGetEventPredictionMetadataRequest_predictionTimestamp
+
+var GetEventPredictionMetadataResult = &sGetEventPredictionMetadataResult
+var GetEventPredictionMetadataResult_eventId = &sGetEventPredictionMetadataResult_eventId
+var GetEventPredictionMetadataResult_eventTypeName = &sGetEventPredictionMetadataResult_eventTypeName
+var GetEventPredictionMetadataResult_entityId = &sGetEventPredictionMetadataResult_entityId
+var GetEventPredictionMetadataResult_entityType = &sGetEventPredictionMetadataResult_entityType
+var GetEventPredictionMetadataResult_eventTimestamp = &sGetEventPredictionMetadataResult_eventTimestamp
+var GetEventPredictionMetadataResult_detectorId = &sGetEventPredictionMetadataResult_detectorId
+var GetEventPredictionMetadataResult_detectorVersionId = &sGetEventPredictionMetadataResult_detectorVersionId
+var GetEventPredictionMetadataResult_detectorVersionStatus = &sGetEventPredictionMetadataResult_detectorVersionStatus
+var GetEventPredictionMetadataResult_eventVariables = &sGetEventPredictionMetadataResult_eventVariables
+var GetEventPredictionMetadataResult_rules = &sGetEventPredictionMetadataResult_rules
+var GetEventPredictionMetadataResult_ruleExecutionMode = &sGetEventPredictionMetadataResult_ruleExecutionMode
+var GetEventPredictionMetadataResult_outcomes = &sGetEventPredictionMetadataResult_outcomes
+var GetEventPredictionMetadataResult_evaluatedModelVersions = &sGetEventPredictionMetadataResult_evaluatedModelVersions
+var GetEventPredictionMetadataResult_evaluatedExternalModels = &sGetEventPredictionMetadataResult_evaluatedExternalModels
+var GetEventPredictionMetadataResult_predictionTimestamp = &sGetEventPredictionMetadataResult_predictionTimestamp
+
+var GetEventPredictionResult = &sGetEventPredictionResult
+var GetEventPredictionResult_modelScores = &sGetEventPredictionResult_modelScores
+var GetEventPredictionResult_ruleResults = &sGetEventPredictionResult_ruleResults
+var GetEventPredictionResult_externalModelOutputs = &sGetEventPredictionResult_externalModelOutputs
+
+var GetEventTypesRequest = &sGetEventTypesRequest
+var GetEventTypesRequest_name = &sGetEventTypesRequest_name
+var GetEventTypesRequest_nextToken = &sGetEventTypesRequest_nextToken
+var GetEventTypesRequest_maxResults = &sGetEventTypesRequest_maxResults
+
+var GetEventTypesResult = &sGetEventTypesResult
+var GetEventTypesResult_eventTypes = &sGetEventTypesResult_eventTypes
+var GetEventTypesResult_nextToken = &sGetEventTypesResult_nextToken
+
+var GetExternalModelsRequest = &sGetExternalModelsRequest
+var GetExternalModelsRequest_modelEndpoint = &sGetExternalModelsRequest_modelEndpoint
+var GetExternalModelsRequest_nextToken = &sGetExternalModelsRequest_nextToken
+var GetExternalModelsRequest_maxResults = &sGetExternalModelsRequest_maxResults
+
+var GetExternalModelsResult = &sGetExternalModelsResult
+var GetExternalModelsResult_externalModels = &sGetExternalModelsResult_externalModels
+var GetExternalModelsResult_nextToken = &sGetExternalModelsResult_nextToken
+
+var GetKMSEncryptionKeyResult = &sGetKMSEncryptionKeyResult
+var GetKMSEncryptionKeyResult_kmsKey = &sGetKMSEncryptionKeyResult_kmsKey
+
+var GetLabelsRequest = &sGetLabelsRequest
+var GetLabelsRequest_name = &sGetLabelsRequest_name
+var GetLabelsRequest_nextToken = &sGetLabelsRequest_nextToken
+var GetLabelsRequest_maxResults = &sGetLabelsRequest_maxResults
+
+var GetLabelsResult = &sGetLabelsResult
+var GetLabelsResult_labels = &sGetLabelsResult_labels
+var GetLabelsResult_nextToken = &sGetLabelsResult_nextToken
+
+var GetListElementsRequest = &sGetListElementsRequest
+var GetListElementsRequest_name = &sGetListElementsRequest_name
+var GetListElementsRequest_nextToken = &sGetListElementsRequest_nextToken
+var GetListElementsRequest_maxResults = &sGetListElementsRequest_maxResults
+
+var GetListElementsResult = &sGetListElementsResult
+var GetListElementsResult_elements = &sGetListElementsResult_elements
+var GetListElementsResult_nextToken = &sGetListElementsResult_nextToken
+
+var GetListsMetadataRequest = &sGetListsMetadataRequest
+var GetListsMetadataRequest_name = &sGetListsMetadataRequest_name
+var GetListsMetadataRequest_nextToken = &sGetListsMetadataRequest_nextToken
+var GetListsMetadataRequest_maxResults = &sGetListsMetadataRequest_maxResults
+
+var GetListsMetadataResult = &sGetListsMetadataResult
+var GetListsMetadataResult_lists = &sGetListsMetadataResult_lists
+var GetListsMetadataResult_nextToken = &sGetListsMetadataResult_nextToken
+
+var GetModelsRequest = &sGetModelsRequest
+var GetModelsRequest_modelId = &sGetModelsRequest_modelId
+var GetModelsRequest_modelType = &sGetModelsRequest_modelType
+var GetModelsRequest_nextToken = &sGetModelsRequest_nextToken
+var GetModelsRequest_maxResults = &sGetModelsRequest_maxResults
+
+var GetModelsResult = &sGetModelsResult
+var GetModelsResult_nextToken = &sGetModelsResult_nextToken
+var GetModelsResult_models = &sGetModelsResult_models
+
+var GetModelVersionRequest = &sGetModelVersionRequest
+var GetModelVersionRequest_modelId = &sGetModelVersionRequest_modelId
+var GetModelVersionRequest_modelType = &sGetModelVersionRequest_modelType
+var GetModelVersionRequest_modelVersionNumber = &sGetModelVersionRequest_modelVersionNumber
+
+var GetModelVersionResult = &sGetModelVersionResult
+var GetModelVersionResult_modelId = &sGetModelVersionResult_modelId
+var GetModelVersionResult_modelType = &sGetModelVersionResult_modelType
+var GetModelVersionResult_modelVersionNumber = &sGetModelVersionResult_modelVersionNumber
+var GetModelVersionResult_trainingDataSource = &sGetModelVersionResult_trainingDataSource
+var GetModelVersionResult_trainingDataSchema = &sGetModelVersionResult_trainingDataSchema
+var GetModelVersionResult_externalEventsDetail = &sGetModelVersionResult_externalEventsDetail
+var GetModelVersionResult_ingestedEventsDetail = &sGetModelVersionResult_ingestedEventsDetail
+var GetModelVersionResult_status = &sGetModelVersionResult_status
+var GetModelVersionResult_arn = &sGetModelVersionResult_arn
+
+var GetOutcomesRequest = &sGetOutcomesRequest
+var GetOutcomesRequest_name = &sGetOutcomesRequest_name
+var GetOutcomesRequest_nextToken = &sGetOutcomesRequest_nextToken
+var GetOutcomesRequest_maxResults = &sGetOutcomesRequest_maxResults
+
+var GetOutcomesResult = &sGetOutcomesResult
+var GetOutcomesResult_outcomes = &sGetOutcomesResult_outcomes
+var GetOutcomesResult_nextToken = &sGetOutcomesResult_nextToken
+
+var GetRulesRequest = &sGetRulesRequest
+var GetRulesRequest_ruleId = &sGetRulesRequest_ruleId
+var GetRulesRequest_detectorId = &sGetRulesRequest_detectorId
+var GetRulesRequest_ruleVersion = &sGetRulesRequest_ruleVersion
+var GetRulesRequest_nextToken = &sGetRulesRequest_nextToken
+var GetRulesRequest_maxResults = &sGetRulesRequest_maxResults
+
+var GetRulesResult = &sGetRulesResult
+var GetRulesResult_ruleDetails = &sGetRulesResult_ruleDetails
+var GetRulesResult_nextToken = &sGetRulesResult_nextToken
+
+var GetVariablesRequest = &sGetVariablesRequest
+var GetVariablesRequest_name = &sGetVariablesRequest_name
+var GetVariablesRequest_nextToken = &sGetVariablesRequest_nextToken
+var GetVariablesRequest_maxResults = &sGetVariablesRequest_maxResults
+
+var GetVariablesResult = &sGetVariablesResult
+var GetVariablesResult_variables = &sGetVariablesResult_variables
+var GetVariablesResult_nextToken = &sGetVariablesResult_nextToken
+
+var ListEventPredictionsRequest = &sListEventPredictionsRequest
+var ListEventPredictionsRequest_eventId = &sListEventPredictionsRequest_eventId
+var ListEventPredictionsRequest_eventType = &sListEventPredictionsRequest_eventType
+var ListEventPredictionsRequest_detectorId = &sListEventPredictionsRequest_detectorId
+var ListEventPredictionsRequest_detectorVersionId = &sListEventPredictionsRequest_detectorVersionId
+var ListEventPredictionsRequest_predictionTimeRange = &sListEventPredictionsRequest_predictionTimeRange
+var ListEventPredictionsRequest_nextToken = &sListEventPredictionsRequest_nextToken
+var ListEventPredictionsRequest_maxResults = &sListEventPredictionsRequest_maxResults
+
+var ListEventPredictionsResult = &sListEventPredictionsResult
+var ListEventPredictionsResult_eventPredictionSummaries = &sListEventPredictionsResult_eventPredictionSummaries
+var ListEventPredictionsResult_nextToken = &sListEventPredictionsResult_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceARN = &sListTagsForResourceRequest_resourceARN
+var ListTagsForResourceRequest_nextToken = &sListTagsForResourceRequest_nextToken
+var ListTagsForResourceRequest_maxResults = &sListTagsForResourceRequest_maxResults
+
+var ListTagsForResourceResult = &sListTagsForResourceResult
+var ListTagsForResourceResult_tags = &sListTagsForResourceResult_tags
+var ListTagsForResourceResult_nextToken = &sListTagsForResourceResult_nextToken
+
+var PutDetectorRequest = &sPutDetectorRequest
+var PutDetectorRequest_detectorId = &sPutDetectorRequest_detectorId
+var PutDetectorRequest_description = &sPutDetectorRequest_description
+var PutDetectorRequest_eventTypeName = &sPutDetectorRequest_eventTypeName
+var PutDetectorRequest_tags = &sPutDetectorRequest_tags
+
+var PutDetectorResult = &sPutDetectorResult
+
+var PutEntityTypeRequest = &sPutEntityTypeRequest
+var PutEntityTypeRequest_name = &sPutEntityTypeRequest_name
+var PutEntityTypeRequest_description = &sPutEntityTypeRequest_description
+var PutEntityTypeRequest_tags = &sPutEntityTypeRequest_tags
+
+var PutEntityTypeResult = &sPutEntityTypeResult
+
+var PutEventTypeRequest = &sPutEventTypeRequest
+var PutEventTypeRequest_name = &sPutEventTypeRequest_name
+var PutEventTypeRequest_description = &sPutEventTypeRequest_description
+var PutEventTypeRequest_eventVariables = &sPutEventTypeRequest_eventVariables
+var PutEventTypeRequest_labels = &sPutEventTypeRequest_labels
+var PutEventTypeRequest_entityTypes = &sPutEventTypeRequest_entityTypes
+var PutEventTypeRequest_eventIngestion = &sPutEventTypeRequest_eventIngestion
+var PutEventTypeRequest_tags = &sPutEventTypeRequest_tags
+var PutEventTypeRequest_eventOrchestration = &sPutEventTypeRequest_eventOrchestration
+
+var PutEventTypeResult = &sPutEventTypeResult
+
+var PutExternalModelRequest = &sPutExternalModelRequest
+var PutExternalModelRequest_modelEndpoint = &sPutExternalModelRequest_modelEndpoint
+var PutExternalModelRequest_modelSource = &sPutExternalModelRequest_modelSource
+var PutExternalModelRequest_invokeModelEndpointRoleArn = &sPutExternalModelRequest_invokeModelEndpointRoleArn
+var PutExternalModelRequest_inputConfiguration = &sPutExternalModelRequest_inputConfiguration
+var PutExternalModelRequest_outputConfiguration = &sPutExternalModelRequest_outputConfiguration
+var PutExternalModelRequest_modelEndpointStatus = &sPutExternalModelRequest_modelEndpointStatus
+var PutExternalModelRequest_tags = &sPutExternalModelRequest_tags
+
+var PutExternalModelResult = &sPutExternalModelResult
+
+var PutKMSEncryptionKeyRequest = &sPutKMSEncryptionKeyRequest
+var PutKMSEncryptionKeyRequest_kmsEncryptionKeyArn = &sPutKMSEncryptionKeyRequest_kmsEncryptionKeyArn
+
+var PutKMSEncryptionKeyResult = &sPutKMSEncryptionKeyResult
+
+var PutLabelRequest = &sPutLabelRequest
+var PutLabelRequest_name = &sPutLabelRequest_name
+var PutLabelRequest_description = &sPutLabelRequest_description
+var PutLabelRequest_tags = &sPutLabelRequest_tags
+
+var PutLabelResult = &sPutLabelResult
+
+var PutOutcomeRequest = &sPutOutcomeRequest
+var PutOutcomeRequest_name = &sPutOutcomeRequest_name
+var PutOutcomeRequest_description = &sPutOutcomeRequest_description
+var PutOutcomeRequest_tags = &sPutOutcomeRequest_tags
+
+var PutOutcomeResult = &sPutOutcomeResult
+
+var SendEventRequest = &sSendEventRequest
+var SendEventRequest_eventId = &sSendEventRequest_eventId
+var SendEventRequest_eventTypeName = &sSendEventRequest_eventTypeName
+var SendEventRequest_eventTimestamp = &sSendEventRequest_eventTimestamp
+var SendEventRequest_eventVariables = &sSendEventRequest_eventVariables
+var SendEventRequest_assignedLabel = &sSendEventRequest_assignedLabel
+var SendEventRequest_labelTimestamp = &sSendEventRequest_labelTimestamp
+var SendEventRequest_entities = &sSendEventRequest_entities
+
+var SendEventResult = &sSendEventResult
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceARN = &sTagResourceRequest_resourceARN
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResult = &sTagResourceResult
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceARN = &sUntagResourceRequest_resourceARN
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResult = &sUntagResourceResult
+
+var UpdateDetectorVersionRequest = &sUpdateDetectorVersionRequest
+var UpdateDetectorVersionRequest_detectorId = &sUpdateDetectorVersionRequest_detectorId
+var UpdateDetectorVersionRequest_detectorVersionId = &sUpdateDetectorVersionRequest_detectorVersionId
+var UpdateDetectorVersionRequest_externalModelEndpoints = &sUpdateDetectorVersionRequest_externalModelEndpoints
+var UpdateDetectorVersionRequest_rules = &sUpdateDetectorVersionRequest_rules
+var UpdateDetectorVersionRequest_description = &sUpdateDetectorVersionRequest_description
+var UpdateDetectorVersionRequest_modelVersions = &sUpdateDetectorVersionRequest_modelVersions
+var UpdateDetectorVersionRequest_ruleExecutionMode = &sUpdateDetectorVersionRequest_ruleExecutionMode
+
+var UpdateDetectorVersionMetadataRequest = &sUpdateDetectorVersionMetadataRequest
+var UpdateDetectorVersionMetadataRequest_detectorId = &sUpdateDetectorVersionMetadataRequest_detectorId
+var UpdateDetectorVersionMetadataRequest_detectorVersionId = &sUpdateDetectorVersionMetadataRequest_detectorVersionId
+var UpdateDetectorVersionMetadataRequest_description = &sUpdateDetectorVersionMetadataRequest_description
+
+var UpdateDetectorVersionMetadataResult = &sUpdateDetectorVersionMetadataResult
+
+var UpdateDetectorVersionResult = &sUpdateDetectorVersionResult
+
+var UpdateDetectorVersionStatusRequest = &sUpdateDetectorVersionStatusRequest
+var UpdateDetectorVersionStatusRequest_detectorId = &sUpdateDetectorVersionStatusRequest_detectorId
+var UpdateDetectorVersionStatusRequest_detectorVersionId = &sUpdateDetectorVersionStatusRequest_detectorVersionId
+var UpdateDetectorVersionStatusRequest_status = &sUpdateDetectorVersionStatusRequest_status
+
+var UpdateDetectorVersionStatusResult = &sUpdateDetectorVersionStatusResult
+
+var UpdateEventLabelRequest = &sUpdateEventLabelRequest
+var UpdateEventLabelRequest_eventId = &sUpdateEventLabelRequest_eventId
+var UpdateEventLabelRequest_eventTypeName = &sUpdateEventLabelRequest_eventTypeName
+var UpdateEventLabelRequest_assignedLabel = &sUpdateEventLabelRequest_assignedLabel
+var UpdateEventLabelRequest_labelTimestamp = &sUpdateEventLabelRequest_labelTimestamp
+
+var UpdateEventLabelResult = &sUpdateEventLabelResult
+
+var UpdateListRequest = &sUpdateListRequest
+var UpdateListRequest_name = &sUpdateListRequest_name
+var UpdateListRequest_elements = &sUpdateListRequest_elements
+var UpdateListRequest_description = &sUpdateListRequest_description
+var UpdateListRequest_updateMode = &sUpdateListRequest_updateMode
+var UpdateListRequest_variableType = &sUpdateListRequest_variableType
+
+var UpdateListResult = &sUpdateListResult
+
+var UpdateModelRequest = &sUpdateModelRequest
+var UpdateModelRequest_modelId = &sUpdateModelRequest_modelId
+var UpdateModelRequest_modelType = &sUpdateModelRequest_modelType
+var UpdateModelRequest_description = &sUpdateModelRequest_description
+
+var UpdateModelResult = &sUpdateModelResult
+
+var UpdateModelVersionRequest = &sUpdateModelVersionRequest
+var UpdateModelVersionRequest_modelId = &sUpdateModelVersionRequest_modelId
+var UpdateModelVersionRequest_modelType = &sUpdateModelVersionRequest_modelType
+var UpdateModelVersionRequest_majorVersionNumber = &sUpdateModelVersionRequest_majorVersionNumber
+var UpdateModelVersionRequest_externalEventsDetail = &sUpdateModelVersionRequest_externalEventsDetail
+var UpdateModelVersionRequest_ingestedEventsDetail = &sUpdateModelVersionRequest_ingestedEventsDetail
+var UpdateModelVersionRequest_tags = &sUpdateModelVersionRequest_tags
+
+var UpdateModelVersionResult = &sUpdateModelVersionResult
+var UpdateModelVersionResult_modelId = &sUpdateModelVersionResult_modelId
+var UpdateModelVersionResult_modelType = &sUpdateModelVersionResult_modelType
+var UpdateModelVersionResult_modelVersionNumber = &sUpdateModelVersionResult_modelVersionNumber
+var UpdateModelVersionResult_status = &sUpdateModelVersionResult_status
+
+var UpdateModelVersionStatusRequest = &sUpdateModelVersionStatusRequest
+var UpdateModelVersionStatusRequest_modelId = &sUpdateModelVersionStatusRequest_modelId
+var UpdateModelVersionStatusRequest_modelType = &sUpdateModelVersionStatusRequest_modelType
+var UpdateModelVersionStatusRequest_modelVersionNumber = &sUpdateModelVersionStatusRequest_modelVersionNumber
+var UpdateModelVersionStatusRequest_status = &sUpdateModelVersionStatusRequest_status
+
+var UpdateModelVersionStatusResult = &sUpdateModelVersionStatusResult
+
+var UpdateRuleMetadataRequest = &sUpdateRuleMetadataRequest
+var UpdateRuleMetadataRequest_rule = &sUpdateRuleMetadataRequest_rule
+var UpdateRuleMetadataRequest_description = &sUpdateRuleMetadataRequest_description
+
+var UpdateRuleMetadataResult = &sUpdateRuleMetadataResult
+
+var UpdateRuleVersionRequest = &sUpdateRuleVersionRequest
+var UpdateRuleVersionRequest_rule = &sUpdateRuleVersionRequest_rule
+var UpdateRuleVersionRequest_description = &sUpdateRuleVersionRequest_description
+var UpdateRuleVersionRequest_expression = &sUpdateRuleVersionRequest_expression
+var UpdateRuleVersionRequest_language = &sUpdateRuleVersionRequest_language
+var UpdateRuleVersionRequest_outcomes = &sUpdateRuleVersionRequest_outcomes
+var UpdateRuleVersionRequest_tags = &sUpdateRuleVersionRequest_tags
+
+var UpdateRuleVersionResult = &sUpdateRuleVersionResult
+var UpdateRuleVersionResult_rule = &sUpdateRuleVersionResult_rule
+
+var UpdateVariableRequest = &sUpdateVariableRequest
+var UpdateVariableRequest_name = &sUpdateVariableRequest_name
+var UpdateVariableRequest_defaultValue = &sUpdateVariableRequest_defaultValue
+var UpdateVariableRequest_description = &sUpdateVariableRequest_description
+var UpdateVariableRequest_variableType = &sUpdateVariableRequest_variableType
+
+var UpdateVariableResult = &sUpdateVariableResult
+
+var AWSHawksNestServiceFacade = &smithy.ServiceSchema{Schema: &s_AWSHawksNestServiceFacade, Version: "2019-11-15"}

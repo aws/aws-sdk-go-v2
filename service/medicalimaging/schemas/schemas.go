@@ -4,1855 +4,1812 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CopyImageSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyImageSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCopyImageSet                                                smithy.SchemaExtensions
+	eCreateDatastore                                             smithy.SchemaExtensions
+	eDeleteDatastore                                             smithy.SchemaExtensions
+	eDeleteImageSet                                              smithy.SchemaExtensions
+	eGetDatastore                                                smithy.SchemaExtensions
+	eGetDICOMImportJob                                           smithy.SchemaExtensions
+	eGetImageFrame                                               smithy.SchemaExtensions
+	eGetImageSet                                                 smithy.SchemaExtensions
+	eGetImageSetMetadata                                         smithy.SchemaExtensions
+	eListDatastores                                              smithy.SchemaExtensions
+	eListDICOMImportJobs                                         smithy.SchemaExtensions
+	eListImageSetVersions                                        smithy.SchemaExtensions
+	eListTagsForResource                                         smithy.SchemaExtensions
+	eSearchImageSets                                             smithy.SchemaExtensions
+	eStartDICOMImportJob                                         smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateImageSetMetadata                                      smithy.SchemaExtensions
+	e_AHIGatewayService                                          smithy.SchemaExtensions
+	eAccessDeniedException                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                               smithy.SchemaExtensions
+	e_Arn                                                        smithy.SchemaExtensions
+	e_AwsAccountId                                               smithy.SchemaExtensions
+	eBadRequestException                                         smithy.SchemaExtensions
+	eBadRequestException_message                                 smithy.SchemaExtensions
+	e_ClientToken                                                smithy.SchemaExtensions
+	eConflictException                                           smithy.SchemaExtensions
+	eConflictException_message                                   smithy.SchemaExtensions
+	e_CopiableAttributes                                         smithy.SchemaExtensions
+	eCopyDestinationImageSet                                     smithy.SchemaExtensions
+	eCopyDestinationImageSet_imageSetId                          smithy.SchemaExtensions
+	eCopyDestinationImageSet_latestVersionId                     smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties                           smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_imageSetId                smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_latestVersionId           smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_imageSetState             smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_imageSetWorkflowStatus    smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_createdAt                 smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_updatedAt                 smithy.SchemaExtensions
+	eCopyDestinationImageSetProperties_imageSetArn               smithy.SchemaExtensions
+	eCopyImageSetInformation                                     smithy.SchemaExtensions
+	eCopyImageSetInformation_sourceImageSet                      smithy.SchemaExtensions
+	eCopyImageSetInformation_destinationImageSet                 smithy.SchemaExtensions
+	eCopySourceImageSetInformation                               smithy.SchemaExtensions
+	eCopySourceImageSetInformation_latestVersionId               smithy.SchemaExtensions
+	eCopySourceImageSetInformation_DICOMCopies                   smithy.SchemaExtensions
+	eCopySourceImageSetProperties                                smithy.SchemaExtensions
+	eCopySourceImageSetProperties_imageSetId                     smithy.SchemaExtensions
+	eCopySourceImageSetProperties_latestVersionId                smithy.SchemaExtensions
+	eCopySourceImageSetProperties_imageSetState                  smithy.SchemaExtensions
+	eCopySourceImageSetProperties_imageSetWorkflowStatus         smithy.SchemaExtensions
+	eCopySourceImageSetProperties_createdAt                      smithy.SchemaExtensions
+	eCopySourceImageSetProperties_updatedAt                      smithy.SchemaExtensions
+	eCopySourceImageSetProperties_imageSetArn                    smithy.SchemaExtensions
+	e_DatastoreId                                                smithy.SchemaExtensions
+	e_DatastoreName                                              smithy.SchemaExtensions
+	eDatastoreProperties                                         smithy.SchemaExtensions
+	eDatastoreProperties_datastoreId                             smithy.SchemaExtensions
+	eDatastoreProperties_datastoreName                           smithy.SchemaExtensions
+	eDatastoreProperties_datastoreStatus                         smithy.SchemaExtensions
+	eDatastoreProperties_kmsKeyArn                               smithy.SchemaExtensions
+	eDatastoreProperties_lambdaAuthorizerArn                     smithy.SchemaExtensions
+	eDatastoreProperties_losslessStorageFormat                   smithy.SchemaExtensions
+	eDatastoreProperties_datastoreArn                            smithy.SchemaExtensions
+	eDatastoreProperties_createdAt                               smithy.SchemaExtensions
+	eDatastoreProperties_updatedAt                               smithy.SchemaExtensions
+	eDatastoreStatus                                             smithy.SchemaExtensions
+	eDatastoreStatus_CREATING                                    smithy.SchemaExtensions
+	eDatastoreStatus_CREATE_FAILED                               smithy.SchemaExtensions
+	eDatastoreStatus_ACTIVE                                      smithy.SchemaExtensions
+	eDatastoreStatus_DELETING                                    smithy.SchemaExtensions
+	eDatastoreStatus_DELETED                                     smithy.SchemaExtensions
+	e_DatastoreSummaries                                         smithy.SchemaExtensions
+	e_DatastoreSummaries_member                                  smithy.SchemaExtensions
+	eDatastoreSummary                                            smithy.SchemaExtensions
+	eDatastoreSummary_datastoreId                                smithy.SchemaExtensions
+	eDatastoreSummary_datastoreName                              smithy.SchemaExtensions
+	eDatastoreSummary_datastoreStatus                            smithy.SchemaExtensions
+	eDatastoreSummary_datastoreArn                               smithy.SchemaExtensions
+	eDatastoreSummary_createdAt                                  smithy.SchemaExtensions
+	eDatastoreSummary_updatedAt                                  smithy.SchemaExtensions
+	e_Date                                                       smithy.SchemaExtensions
+	e_DICOMAccessionNumber                                       smithy.SchemaExtensions
+	e_DICOMAttribute                                             smithy.SchemaExtensions
+	eDICOMImportJobProperties                                    smithy.SchemaExtensions
+	eDICOMImportJobProperties_jobId                              smithy.SchemaExtensions
+	eDICOMImportJobProperties_jobName                            smithy.SchemaExtensions
+	eDICOMImportJobProperties_jobStatus                          smithy.SchemaExtensions
+	eDICOMImportJobProperties_datastoreId                        smithy.SchemaExtensions
+	eDICOMImportJobProperties_dataAccessRoleArn                  smithy.SchemaExtensions
+	eDICOMImportJobProperties_endedAt                            smithy.SchemaExtensions
+	eDICOMImportJobProperties_submittedAt                        smithy.SchemaExtensions
+	eDICOMImportJobProperties_inputS3Uri                         smithy.SchemaExtensions
+	eDICOMImportJobProperties_outputS3Uri                        smithy.SchemaExtensions
+	eDICOMImportJobProperties_message                            smithy.SchemaExtensions
+	eDICOMImportJobProperties_importConfiguration                smithy.SchemaExtensions
+	e_DICOMImportJobSummaries                                    smithy.SchemaExtensions
+	e_DICOMImportJobSummaries_member                             smithy.SchemaExtensions
+	eDICOMImportJobSummary                                       smithy.SchemaExtensions
+	eDICOMImportJobSummary_jobId                                 smithy.SchemaExtensions
+	eDICOMImportJobSummary_jobName                               smithy.SchemaExtensions
+	eDICOMImportJobSummary_jobStatus                             smithy.SchemaExtensions
+	eDICOMImportJobSummary_datastoreId                           smithy.SchemaExtensions
+	eDICOMImportJobSummary_dataAccessRoleArn                     smithy.SchemaExtensions
+	eDICOMImportJobSummary_endedAt                               smithy.SchemaExtensions
+	eDICOMImportJobSummary_submittedAt                           smithy.SchemaExtensions
+	eDICOMImportJobSummary_message                               smithy.SchemaExtensions
+	eDicomJsonMetadataImportConfiguration                        smithy.SchemaExtensions
+	eDicomJsonMetadataImportConfiguration_dicomMetadataMappings  smithy.SchemaExtensions
+	eDicomMetadataMapping                                        smithy.SchemaExtensions
+	eDicomMetadataMapping_studyInstanceUID                       smithy.SchemaExtensions
+	eDicomMetadataMapping_seriesInstanceUID                      smithy.SchemaExtensions
+	eDicomMetadataMapping_metadataFilePath                       smithy.SchemaExtensions
+	e_DicomMetadataMappings                                      smithy.SchemaExtensions
+	e_DicomMetadataMappings_member                               smithy.SchemaExtensions
+	e_DICOMNumberOfStudyRelatedInstances                         smithy.SchemaExtensions
+	e_DICOMNumberOfStudyRelatedSeries                            smithy.SchemaExtensions
+	e_DICOMPatientBirthDate                                      smithy.SchemaExtensions
+	e_DICOMPatientId                                             smithy.SchemaExtensions
+	e_DICOMPatientName                                           smithy.SchemaExtensions
+	e_DICOMPatientSex                                            smithy.SchemaExtensions
+	e_DICOMSeriesBodyPart                                        smithy.SchemaExtensions
+	e_DICOMSeriesInstanceUID                                     smithy.SchemaExtensions
+	e_DICOMSeriesModality                                        smithy.SchemaExtensions
+	e_DICOMSeriesNumber                                          smithy.SchemaExtensions
+	e_DICOMStudyDate                                             smithy.SchemaExtensions
+	eDICOMStudyDateAndTime                                       smithy.SchemaExtensions
+	eDICOMStudyDateAndTime_DICOMStudyDate                        smithy.SchemaExtensions
+	eDICOMStudyDateAndTime_DICOMStudyTime                        smithy.SchemaExtensions
+	e_DICOMStudyDescription                                      smithy.SchemaExtensions
+	e_DICOMStudyId                                               smithy.SchemaExtensions
+	e_DICOMStudyInstanceUID                                      smithy.SchemaExtensions
+	e_DICOMStudyTime                                             smithy.SchemaExtensions
+	eDICOMTags                                                   smithy.SchemaExtensions
+	eDICOMTags_DICOMPatientId                                    smithy.SchemaExtensions
+	eDICOMTags_DICOMPatientName                                  smithy.SchemaExtensions
+	eDICOMTags_DICOMPatientBirthDate                             smithy.SchemaExtensions
+	eDICOMTags_DICOMPatientSex                                   smithy.SchemaExtensions
+	eDICOMTags_DICOMStudyInstanceUID                             smithy.SchemaExtensions
+	eDICOMTags_DICOMStudyId                                      smithy.SchemaExtensions
+	eDICOMTags_DICOMStudyDescription                             smithy.SchemaExtensions
+	eDICOMTags_DICOMNumberOfStudyRelatedSeries                   smithy.SchemaExtensions
+	eDICOMTags_DICOMNumberOfStudyRelatedInstances                smithy.SchemaExtensions
+	eDICOMTags_DICOMAccessionNumber                              smithy.SchemaExtensions
+	eDICOMTags_DICOMSeriesInstanceUID                            smithy.SchemaExtensions
+	eDICOMTags_DICOMSeriesModality                               smithy.SchemaExtensions
+	eDICOMTags_DICOMSeriesBodyPart                               smithy.SchemaExtensions
+	eDICOMTags_DICOMSeriesNumber                                 smithy.SchemaExtensions
+	eDICOMTags_DICOMStudyDate                                    smithy.SchemaExtensions
+	eDICOMTags_DICOMStudyTime                                    smithy.SchemaExtensions
+	eDICOMUpdates                                                smithy.SchemaExtensions
+	eDICOMUpdates_removableAttributes                            smithy.SchemaExtensions
+	eDICOMUpdates_updatableAttributes                            smithy.SchemaExtensions
+	e_ImageFrameId                                               smithy.SchemaExtensions
+	eImageFrameInformation                                       smithy.SchemaExtensions
+	eImageFrameInformation_imageFrameId                          smithy.SchemaExtensions
+	e_ImageSetExternalVersionId                                  smithy.SchemaExtensions
+	e_ImageSetId                                                 smithy.SchemaExtensions
+	e_ImageSetMetadataBlob                                       smithy.SchemaExtensions
+	eImageSetProperties                                          smithy.SchemaExtensions
+	eImageSetProperties_imageSetId                               smithy.SchemaExtensions
+	eImageSetProperties_versionId                                smithy.SchemaExtensions
+	eImageSetProperties_imageSetState                            smithy.SchemaExtensions
+	eImageSetProperties_ImageSetWorkflowStatus                   smithy.SchemaExtensions
+	eImageSetProperties_createdAt                                smithy.SchemaExtensions
+	eImageSetProperties_updatedAt                                smithy.SchemaExtensions
+	eImageSetProperties_deletedAt                                smithy.SchemaExtensions
+	eImageSetProperties_message                                  smithy.SchemaExtensions
+	eImageSetProperties_overrides                                smithy.SchemaExtensions
+	eImageSetProperties_isPrimary                                smithy.SchemaExtensions
+	e_ImageSetPropertiesList                                     smithy.SchemaExtensions
+	e_ImageSetPropertiesList_member                              smithy.SchemaExtensions
+	e_ImageSetsMetadataSummaries                                 smithy.SchemaExtensions
+	e_ImageSetsMetadataSummaries_member                          smithy.SchemaExtensions
+	eImageSetsMetadataSummary                                    smithy.SchemaExtensions
+	eImageSetsMetadataSummary_imageSetId                         smithy.SchemaExtensions
+	eImageSetsMetadataSummary_version                            smithy.SchemaExtensions
+	eImageSetsMetadataSummary_createdAt                          smithy.SchemaExtensions
+	eImageSetsMetadataSummary_updatedAt                          smithy.SchemaExtensions
+	eImageSetsMetadataSummary_lastAccessedAt                     smithy.SchemaExtensions
+	eImageSetsMetadataSummary_storageTier                        smithy.SchemaExtensions
+	eImageSetsMetadataSummary_DICOMTags                          smithy.SchemaExtensions
+	eImageSetsMetadataSummary_isPrimary                          smithy.SchemaExtensions
+	eImageSetState                                               smithy.SchemaExtensions
+	eImageSetState_ACTIVE                                        smithy.SchemaExtensions
+	eImageSetState_LOCKED                                        smithy.SchemaExtensions
+	eImageSetState_DELETED                                       smithy.SchemaExtensions
+	eImageSetWorkflowStatus                                      smithy.SchemaExtensions
+	eImageSetWorkflowStatus_CREATED                              smithy.SchemaExtensions
+	eImageSetWorkflowStatus_COPIED                               smithy.SchemaExtensions
+	eImageSetWorkflowStatus_COPYING                              smithy.SchemaExtensions
+	eImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS        smithy.SchemaExtensions
+	eImageSetWorkflowStatus_COPY_FAILED                          smithy.SchemaExtensions
+	eImageSetWorkflowStatus_UPDATING                             smithy.SchemaExtensions
+	eImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY       smithy.SchemaExtensions
+	eImageSetWorkflowStatus_UPDATED                              smithy.SchemaExtensions
+	eImageSetWorkflowStatus_UPDATE_FAILED                        smithy.SchemaExtensions
+	eImageSetWorkflowStatus_DELETING                             smithy.SchemaExtensions
+	eImageSetWorkflowStatus_DELETED                              smithy.SchemaExtensions
+	eImageSetWorkflowStatus_IMPORTING                            smithy.SchemaExtensions
+	eImageSetWorkflowStatus_IMPORTED                             smithy.SchemaExtensions
+	eImageSetWorkflowStatus_IMPORT_FAILED                        smithy.SchemaExtensions
+	eImportConfiguration                                         smithy.SchemaExtensions
+	eImportConfiguration_dicomJsonMetadataImportConfiguration    smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	e_JobId                                                      smithy.SchemaExtensions
+	e_JobName                                                    smithy.SchemaExtensions
+	eJobStatus                                                   smithy.SchemaExtensions
+	eJobStatus_SUBMITTED                                         smithy.SchemaExtensions
+	eJobStatus_IN_PROGRESS                                       smithy.SchemaExtensions
+	eJobStatus_COMPLETED                                         smithy.SchemaExtensions
+	eJobStatus_FAILED                                            smithy.SchemaExtensions
+	e_KmsKeyArn                                                  smithy.SchemaExtensions
+	e_LambdaArn                                                  smithy.SchemaExtensions
+	eLosslessStorageFormat                                       smithy.SchemaExtensions
+	eLosslessStorageFormat_HTJ2K                                 smithy.SchemaExtensions
+	eLosslessStorageFormat_JPEG_2000_LOSSLESS                    smithy.SchemaExtensions
+	e_Message                                                    smithy.SchemaExtensions
+	eMetadataCopies                                              smithy.SchemaExtensions
+	eMetadataCopies_copiableAttributes                           smithy.SchemaExtensions
+	e_MetadataFilePath                                           smithy.SchemaExtensions
+	eMetadataUpdates                                             smithy.SchemaExtensions
+	eMetadataUpdates_DICOMUpdates                                smithy.SchemaExtensions
+	eMetadataUpdates_revertToVersionId                           smithy.SchemaExtensions
+	e_NextToken                                                  smithy.SchemaExtensions
+	eNotAcceptableException                                      smithy.SchemaExtensions
+	eNotAcceptableException_message                              smithy.SchemaExtensions
+	eOperator                                                    smithy.SchemaExtensions
+	eOperator_EQUAL                                              smithy.SchemaExtensions
+	eOperator_BETWEEN                                            smithy.SchemaExtensions
+	eOverrides                                                   smithy.SchemaExtensions
+	eOverrides_forced                                            smithy.SchemaExtensions
+	e_PayloadBlob                                                smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	e_RoleArn                                                    smithy.SchemaExtensions
+	e_S3Uri                                                      smithy.SchemaExtensions
+	eSearchByAttributeValue                                      smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMPatientId                       smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMAccessionNumber                 smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMStudyId                         smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMStudyInstanceUID                smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMSeriesInstanceUID               smithy.SchemaExtensions
+	eSearchByAttributeValue_createdAt                            smithy.SchemaExtensions
+	eSearchByAttributeValue_updatedAt                            smithy.SchemaExtensions
+	eSearchByAttributeValue_DICOMStudyDateAndTime                smithy.SchemaExtensions
+	eSearchByAttributeValue_isPrimary                            smithy.SchemaExtensions
+	e_SearchByAttributeValues                                    smithy.SchemaExtensions
+	e_SearchByAttributeValues_member                             smithy.SchemaExtensions
+	eSearchCriteria                                              smithy.SchemaExtensions
+	eSearchCriteria_filters                                      smithy.SchemaExtensions
+	eSearchCriteria_sort                                         smithy.SchemaExtensions
+	eSearchFilter                                                smithy.SchemaExtensions
+	eSearchFilter_values                                         smithy.SchemaExtensions
+	eSearchFilter_operator                                       smithy.SchemaExtensions
+	e_SearchFilters                                              smithy.SchemaExtensions
+	e_SearchFilters_member                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                       smithy.SchemaExtensions
+	eSort                                                        smithy.SchemaExtensions
+	eSort_sortOrder                                              smithy.SchemaExtensions
+	eSort_sortField                                              smithy.SchemaExtensions
+	eSortField                                                   smithy.SchemaExtensions
+	eSortField_updatedAt                                         smithy.SchemaExtensions
+	eSortField_createdAt                                         smithy.SchemaExtensions
+	eSortField_DICOMStudyDateAndTime                             smithy.SchemaExtensions
+	eSortOrder                                                   smithy.SchemaExtensions
+	eSortOrder_ASC                                               smithy.SchemaExtensions
+	eSortOrder_DESC                                              smithy.SchemaExtensions
+	eStorageTier                                                 smithy.SchemaExtensions
+	eStorageTier_FREQUENT_ACCESS                                 smithy.SchemaExtensions
+	eStorageTier_ARCHIVE_INSTANT_ACCESS                          smithy.SchemaExtensions
+	e_TagKey                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                          smithy.SchemaExtensions
+	e_TagMap                                                     smithy.SchemaExtensions
+	e_TagMap_key                                                 smithy.SchemaExtensions
+	e_TagMap_value                                               smithy.SchemaExtensions
+	e_TagValue                                                   smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	eCopyImageSetRequest                                         smithy.SchemaExtensions
+	eCopyImageSetRequest_datastoreId                             smithy.SchemaExtensions
+	eCopyImageSetRequest_sourceImageSetId                        smithy.SchemaExtensions
+	eCopyImageSetRequest_copyImageSetInformation                 smithy.SchemaExtensions
+	eCopyImageSetRequest_force                                   smithy.SchemaExtensions
+	eCopyImageSetRequest_promoteToPrimary                        smithy.SchemaExtensions
+	eCopyImageSetResponse                                        smithy.SchemaExtensions
+	eCopyImageSetResponse_datastoreId                            smithy.SchemaExtensions
+	eCopyImageSetResponse_sourceImageSetProperties               smithy.SchemaExtensions
+	eCopyImageSetResponse_destinationImageSetProperties          smithy.SchemaExtensions
+	eCreateDatastoreRequest                                      smithy.SchemaExtensions
+	eCreateDatastoreRequest_datastoreName                        smithy.SchemaExtensions
+	eCreateDatastoreRequest_clientToken                          smithy.SchemaExtensions
+	eCreateDatastoreRequest_tags                                 smithy.SchemaExtensions
+	eCreateDatastoreRequest_kmsKeyArn                            smithy.SchemaExtensions
+	eCreateDatastoreRequest_lambdaAuthorizerArn                  smithy.SchemaExtensions
+	eCreateDatastoreRequest_losslessStorageFormat                smithy.SchemaExtensions
+	eCreateDatastoreResponse                                     smithy.SchemaExtensions
+	eCreateDatastoreResponse_datastoreId                         smithy.SchemaExtensions
+	eCreateDatastoreResponse_datastoreStatus                     smithy.SchemaExtensions
+	eDeleteDatastoreRequest                                      smithy.SchemaExtensions
+	eDeleteDatastoreRequest_datastoreId                          smithy.SchemaExtensions
+	eDeleteDatastoreResponse                                     smithy.SchemaExtensions
+	eDeleteDatastoreResponse_datastoreId                         smithy.SchemaExtensions
+	eDeleteDatastoreResponse_datastoreStatus                     smithy.SchemaExtensions
+	eDeleteImageSetRequest                                       smithy.SchemaExtensions
+	eDeleteImageSetRequest_datastoreId                           smithy.SchemaExtensions
+	eDeleteImageSetRequest_imageSetId                            smithy.SchemaExtensions
+	eDeleteImageSetResponse                                      smithy.SchemaExtensions
+	eDeleteImageSetResponse_datastoreId                          smithy.SchemaExtensions
+	eDeleteImageSetResponse_imageSetId                           smithy.SchemaExtensions
+	eDeleteImageSetResponse_imageSetState                        smithy.SchemaExtensions
+	eDeleteImageSetResponse_imageSetWorkflowStatus               smithy.SchemaExtensions
+	eGetDatastoreRequest                                         smithy.SchemaExtensions
+	eGetDatastoreRequest_datastoreId                             smithy.SchemaExtensions
+	eGetDatastoreResponse                                        smithy.SchemaExtensions
+	eGetDatastoreResponse_datastoreProperties                    smithy.SchemaExtensions
+	eGetDICOMImportJobRequest                                    smithy.SchemaExtensions
+	eGetDICOMImportJobRequest_datastoreId                        smithy.SchemaExtensions
+	eGetDICOMImportJobRequest_jobId                              smithy.SchemaExtensions
+	eGetDICOMImportJobResponse                                   smithy.SchemaExtensions
+	eGetDICOMImportJobResponse_jobProperties                     smithy.SchemaExtensions
+	eGetImageFrameRequest                                        smithy.SchemaExtensions
+	eGetImageFrameRequest_datastoreId                            smithy.SchemaExtensions
+	eGetImageFrameRequest_imageSetId                             smithy.SchemaExtensions
+	eGetImageFrameRequest_imageFrameInformation                  smithy.SchemaExtensions
+	eGetImageFrameResponse                                       smithy.SchemaExtensions
+	eGetImageFrameResponse_imageFrameBlob                        smithy.SchemaExtensions
+	eGetImageFrameResponse_contentType                           smithy.SchemaExtensions
+	eGetImageSetRequest                                          smithy.SchemaExtensions
+	eGetImageSetRequest_datastoreId                              smithy.SchemaExtensions
+	eGetImageSetRequest_imageSetId                               smithy.SchemaExtensions
+	eGetImageSetRequest_versionId                                smithy.SchemaExtensions
+	eGetImageSetMetadataRequest                                  smithy.SchemaExtensions
+	eGetImageSetMetadataRequest_datastoreId                      smithy.SchemaExtensions
+	eGetImageSetMetadataRequest_imageSetId                       smithy.SchemaExtensions
+	eGetImageSetMetadataRequest_versionId                        smithy.SchemaExtensions
+	eGetImageSetMetadataResponse                                 smithy.SchemaExtensions
+	eGetImageSetMetadataResponse_imageSetMetadataBlob            smithy.SchemaExtensions
+	eGetImageSetMetadataResponse_contentType                     smithy.SchemaExtensions
+	eGetImageSetMetadataResponse_contentEncoding                 smithy.SchemaExtensions
+	eGetImageSetResponse                                         smithy.SchemaExtensions
+	eGetImageSetResponse_datastoreId                             smithy.SchemaExtensions
+	eGetImageSetResponse_imageSetId                              smithy.SchemaExtensions
+	eGetImageSetResponse_versionId                               smithy.SchemaExtensions
+	eGetImageSetResponse_imageSetState                           smithy.SchemaExtensions
+	eGetImageSetResponse_imageSetWorkflowStatus                  smithy.SchemaExtensions
+	eGetImageSetResponse_createdAt                               smithy.SchemaExtensions
+	eGetImageSetResponse_updatedAt                               smithy.SchemaExtensions
+	eGetImageSetResponse_deletedAt                               smithy.SchemaExtensions
+	eGetImageSetResponse_message                                 smithy.SchemaExtensions
+	eGetImageSetResponse_imageSetArn                             smithy.SchemaExtensions
+	eGetImageSetResponse_overrides                               smithy.SchemaExtensions
+	eGetImageSetResponse_isPrimary                               smithy.SchemaExtensions
+	eGetImageSetResponse_lastAccessedAt                          smithy.SchemaExtensions
+	eGetImageSetResponse_storageTier                             smithy.SchemaExtensions
+	eListDatastoresRequest                                       smithy.SchemaExtensions
+	eListDatastoresRequest_datastoreStatus                       smithy.SchemaExtensions
+	eListDatastoresRequest_nextToken                             smithy.SchemaExtensions
+	eListDatastoresRequest_maxResults                            smithy.SchemaExtensions
+	eListDatastoresResponse                                      smithy.SchemaExtensions
+	eListDatastoresResponse_datastoreSummaries                   smithy.SchemaExtensions
+	eListDatastoresResponse_nextToken                            smithy.SchemaExtensions
+	eListDICOMImportJobsRequest                                  smithy.SchemaExtensions
+	eListDICOMImportJobsRequest_datastoreId                      smithy.SchemaExtensions
+	eListDICOMImportJobsRequest_jobStatus                        smithy.SchemaExtensions
+	eListDICOMImportJobsRequest_nextToken                        smithy.SchemaExtensions
+	eListDICOMImportJobsRequest_maxResults                       smithy.SchemaExtensions
+	eListDICOMImportJobsResponse                                 smithy.SchemaExtensions
+	eListDICOMImportJobsResponse_jobSummaries                    smithy.SchemaExtensions
+	eListDICOMImportJobsResponse_nextToken                       smithy.SchemaExtensions
+	eListImageSetVersionsRequest                                 smithy.SchemaExtensions
+	eListImageSetVersionsRequest_datastoreId                     smithy.SchemaExtensions
+	eListImageSetVersionsRequest_imageSetId                      smithy.SchemaExtensions
+	eListImageSetVersionsRequest_nextToken                       smithy.SchemaExtensions
+	eListImageSetVersionsRequest_maxResults                      smithy.SchemaExtensions
+	eListImageSetVersionsResponse                                smithy.SchemaExtensions
+	eListImageSetVersionsResponse_imageSetPropertiesList         smithy.SchemaExtensions
+	eListImageSetVersionsResponse_nextToken                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                            smithy.SchemaExtensions
+	eSearchImageSetsRequest                                      smithy.SchemaExtensions
+	eSearchImageSetsRequest_datastoreId                          smithy.SchemaExtensions
+	eSearchImageSetsRequest_searchCriteria                       smithy.SchemaExtensions
+	eSearchImageSetsRequest_maxResults                           smithy.SchemaExtensions
+	eSearchImageSetsRequest_nextToken                            smithy.SchemaExtensions
+	eSearchImageSetsResponse                                     smithy.SchemaExtensions
+	eSearchImageSetsResponse_imageSetsMetadataSummaries          smithy.SchemaExtensions
+	eSearchImageSetsResponse_sort                                smithy.SchemaExtensions
+	eSearchImageSetsResponse_nextToken                           smithy.SchemaExtensions
+	eStartDICOMImportJobRequest                                  smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_jobName                          smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_dataAccessRoleArn                smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_clientToken                      smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_datastoreId                      smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_inputS3Uri                       smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_outputS3Uri                      smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_inputOwnerAccountId              smithy.SchemaExtensions
+	eStartDICOMImportJobRequest_importConfiguration              smithy.SchemaExtensions
+	eStartDICOMImportJobResponse                                 smithy.SchemaExtensions
+	eStartDICOMImportJobResponse_datastoreId                     smithy.SchemaExtensions
+	eStartDICOMImportJobResponse_jobId                           smithy.SchemaExtensions
+	eStartDICOMImportJobResponse_jobStatus                       smithy.SchemaExtensions
+	eStartDICOMImportJobResponse_submittedAt                     smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eTagResourceRequest_tags                                     smithy.SchemaExtensions
+	eTagResourceResponse                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                            smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                smithy.SchemaExtensions
+	eUntagResourceResponse                                       smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest                               smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_datastoreId                   smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_imageSetId                    smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_latestVersionId               smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_force                         smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_includeStudyImageSets         smithy.SchemaExtensions
+	eUpdateImageSetMetadataRequest_updateImageSetMetadataUpdates smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse                              smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_datastoreId                  smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_imageSetId                   smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_latestVersionId              smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_imageSetState                smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_imageSetWorkflowStatus       smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_createdAt                    smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_updatedAt                    smithy.SchemaExtensions
+	eUpdateImageSetMetadataResponse_message                      smithy.SchemaExtensions
+)
+
+var (
+	iCopyImageSet                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyImageSet"}
+	iCreateDatastore                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CreateDatastore"}
+	iDeleteDatastore                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteDatastore"}
+	iDeleteImageSet                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteImageSet"}
+	iGetDatastore                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDatastore"}
+	iGetDICOMImportJob                    = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDICOMImportJob"}
+	iGetImageFrame                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageFrame"}
+	iGetImageSet                          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSet"}
+	iGetImageSetMetadata                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSetMetadata"}
+	iListDatastores                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDatastores"}
+	iListDICOMImportJobs                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDICOMImportJobs"}
+	iListImageSetVersions                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListImageSetVersions"}
+	iListTagsForResource                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListTagsForResource"}
+	iSearchImageSets                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchImageSets"}
+	iStartDICOMImportJob                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "StartDICOMImportJob"}
+	iTagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagResource"}
+	iUntagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UntagResource"}
+	iUpdateImageSetMetadata               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UpdateImageSetMetadata"}
+	i_AHIGatewayService                   = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "AHIGatewayService"}
+	iAccessDeniedException                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "AccessDeniedException"}
+	i_Arn                                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Arn"}
+	i_AwsAccountId                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "AwsAccountId"}
+	iBadRequestException                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "BadRequestException"}
+	i_ClientToken                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ClientToken"}
+	iConflictException                    = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ConflictException"}
+	i_CopiableAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopiableAttributes"}
+	iCopyDestinationImageSet              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyDestinationImageSet"}
+	iCopyDestinationImageSetProperties    = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyDestinationImageSetProperties"}
+	iCopyImageSetInformation              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyImageSetInformation"}
+	iCopySourceImageSetInformation        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopySourceImageSetInformation"}
+	iCopySourceImageSetProperties         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopySourceImageSetProperties"}
+	i_DatastoreId                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreId"}
+	i_DatastoreName                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreName"}
+	iDatastoreProperties                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreProperties"}
+	iDatastoreStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreStatus"}
+	i_DatastoreSummaries                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreSummaries"}
+	iDatastoreSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DatastoreSummary"}
+	i_Date                                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Date"}
+	i_DICOMAccessionNumber                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMAccessionNumber"}
+	i_DICOMAttribute                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMAttribute"}
+	iDICOMImportJobProperties             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMImportJobProperties"}
+	i_DICOMImportJobSummaries             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMImportJobSummaries"}
+	iDICOMImportJobSummary                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMImportJobSummary"}
+	iDicomJsonMetadataImportConfiguration = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DicomJsonMetadataImportConfiguration"}
+	iDicomMetadataMapping                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DicomMetadataMapping"}
+	i_DicomMetadataMappings               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DicomMetadataMappings"}
+	i_DICOMNumberOfStudyRelatedInstances  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMNumberOfStudyRelatedInstances"}
+	i_DICOMNumberOfStudyRelatedSeries     = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMNumberOfStudyRelatedSeries"}
+	i_DICOMPatientBirthDate               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMPatientBirthDate"}
+	i_DICOMPatientId                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMPatientId"}
+	i_DICOMPatientName                    = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMPatientName"}
+	i_DICOMPatientSex                     = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMPatientSex"}
+	i_DICOMSeriesBodyPart                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMSeriesBodyPart"}
+	i_DICOMSeriesInstanceUID              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMSeriesInstanceUID"}
+	i_DICOMSeriesModality                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMSeriesModality"}
+	i_DICOMSeriesNumber                   = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMSeriesNumber"}
+	i_DICOMStudyDate                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyDate"}
+	iDICOMStudyDateAndTime                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyDateAndTime"}
+	i_DICOMStudyDescription               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyDescription"}
+	i_DICOMStudyId                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyId"}
+	i_DICOMStudyInstanceUID               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyInstanceUID"}
+	i_DICOMStudyTime                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMStudyTime"}
+	iDICOMTags                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMTags"}
+	iDICOMUpdates                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DICOMUpdates"}
+	i_ImageFrameId                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageFrameId"}
+	iImageFrameInformation                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageFrameInformation"}
+	i_ImageSetExternalVersionId           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetExternalVersionId"}
+	i_ImageSetId                          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetId"}
+	i_ImageSetMetadataBlob                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetMetadataBlob"}
+	iImageSetProperties                   = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetProperties"}
+	i_ImageSetPropertiesList              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetPropertiesList"}
+	i_ImageSetsMetadataSummaries          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetsMetadataSummaries"}
+	iImageSetsMetadataSummary             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetsMetadataSummary"}
+	iImageSetState                        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetState"}
+	iImageSetWorkflowStatus               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImageSetWorkflowStatus"}
+	iImportConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ImportConfiguration"}
+	iInternalServerException              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "InternalServerException"}
+	i_JobId                               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "JobId"}
+	i_JobName                             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "JobName"}
+	iJobStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "JobStatus"}
+	i_KmsKeyArn                           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "KmsKeyArn"}
+	i_LambdaArn                           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "LambdaArn"}
+	iLosslessStorageFormat                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "LosslessStorageFormat"}
+	i_Message                             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Message"}
+	iMetadataCopies                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "MetadataCopies"}
+	i_MetadataFilePath                    = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "MetadataFilePath"}
+	iMetadataUpdates                      = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "MetadataUpdates"}
+	i_NextToken                           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "NextToken"}
+	iNotAcceptableException               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "NotAcceptableException"}
+	iOperator                             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Operator"}
+	iOverrides                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Overrides"}
+	i_PayloadBlob                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "PayloadBlob"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ResourceNotFoundException"}
+	i_RoleArn                             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "RoleArn"}
+	i_S3Uri                               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "S3Uri"}
+	iSearchByAttributeValue               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchByAttributeValue"}
+	i_SearchByAttributeValues             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchByAttributeValues"}
+	iSearchCriteria                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchCriteria"}
+	iSearchFilter                         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchFilter"}
+	i_SearchFilters                       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchFilters"}
+	iServiceQuotaExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ServiceQuotaExceededException"}
+	iSort                                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "Sort"}
+	iSortField                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SortField"}
+	iSortOrder                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SortOrder"}
+	iStorageTier                          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "StorageTier"}
+	i_TagKey                              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagKey"}
+	i_TagKeyList                          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagKeyList"}
+	i_TagMap                              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagMap"}
+	i_TagValue                            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagValue"}
+	iThrottlingException                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ThrottlingException"}
+	iValidationException                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ValidationException"}
+	iCopyImageSetRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyImageSetRequest"}
+	iCopyImageSetResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CopyImageSetResponse"}
+	iCreateDatastoreRequest               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CreateDatastoreRequest"}
+	iCreateDatastoreResponse              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "CreateDatastoreResponse"}
+	iDeleteDatastoreRequest               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteDatastoreRequest"}
+	iDeleteDatastoreResponse              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteDatastoreResponse"}
+	iDeleteImageSetRequest                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteImageSetRequest"}
+	iDeleteImageSetResponse               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "DeleteImageSetResponse"}
+	iGetDatastoreRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDatastoreRequest"}
+	iGetDatastoreResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDatastoreResponse"}
+	iGetDICOMImportJobRequest             = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDICOMImportJobRequest"}
+	iGetDICOMImportJobResponse            = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetDICOMImportJobResponse"}
+	iGetImageFrameRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageFrameRequest"}
+	iGetImageFrameResponse                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageFrameResponse"}
+	iGetImageSetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSetRequest"}
+	iGetImageSetMetadataRequest           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSetMetadataRequest"}
+	iGetImageSetMetadataResponse          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSetMetadataResponse"}
+	iGetImageSetResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "GetImageSetResponse"}
+	iListDatastoresRequest                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDatastoresRequest"}
+	iListDatastoresResponse               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDatastoresResponse"}
+	iListDICOMImportJobsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDICOMImportJobsRequest"}
+	iListDICOMImportJobsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListDICOMImportJobsResponse"}
+	iListImageSetVersionsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListImageSetVersionsRequest"}
+	iListImageSetVersionsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListImageSetVersionsResponse"}
+	iListTagsForResourceRequest           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "ListTagsForResourceResponse"}
+	iSearchImageSetsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchImageSetsRequest"}
+	iSearchImageSetsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "SearchImageSetsResponse"}
+	iStartDICOMImportJobRequest           = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "StartDICOMImportJobRequest"}
+	iStartDICOMImportJobResponse          = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "StartDICOMImportJobResponse"}
+	iTagResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagResourceRequest"}
+	iTagResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "TagResourceResponse"}
+	iUntagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UntagResourceResponse"}
+	iUpdateImageSetMetadataRequest        = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UpdateImageSetMetadataRequest"}
+	iUpdateImageSetMetadataResponse       = smithy.ShapeName{Namespace: "com.amazonaws.medicalimaging", Name: "UpdateImageSetMetadataResponse"}
+	pString                               = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{sourceImageSetId}/copyImageSet",
-	Code: 200})
-
-var CreateDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CreateDatastore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore",
-	Code: 200})
-
-var DeleteDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteDatastore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/datastore/{datastoreId}",
-	Code: 200})
-
-var DeleteImageSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteImageSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/deleteImageSet",
-	Code: 200})
-
-var GetDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDatastore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/datastore/{datastoreId}",
-	Code: 200})
-
-var GetDICOMImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDICOMImportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getDICOMImportJob/datastore/{datastoreId}/job/{jobId}",
-	Code: 200})
-
-var GetImageFrame = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageFrame",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageFrame",
-	Code: 200})
-
-var GetImageSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSet",
-	Code: 200})
-
-var GetImageSetMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSetMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSetMetadata",
-	Code: 200})
-
-var ListDatastores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDatastores",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/datastore",
-	Code: 200})
-
-var ListDICOMImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDICOMImportJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/listDICOMImportJobs/datastore/{datastoreId}",
-	Code: 200})
-
-var ListImageSetVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListImageSetVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/listImageSetVersions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var SearchImageSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchImageSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/searchImageSets",
-	Code: 200})
-
-var StartDICOMImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "StartDICOMImportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startDICOMImportJob/datastore/{datastoreId}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateImageSetMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UpdateImageSetMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datastore/{datastoreId}/imageSet/{imageSetId}/updateImageSetMetadata",
-	Code: 200})
-
-var _AHIGatewayService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "AHIGatewayService",
-}, smithy.ShapeTypeService, 0)
-
-var AHIGatewayService = smithy.NewServiceSchema(_AHIGatewayService, "2023-07-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _CopiableAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopiableAttributes",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CopyDestinationImageSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyDestinationImageSet",
-}, smithy.ShapeTypeStructure, 2)
-var CopyDestinationImageSet_imageSetId *smithy.Schema
-
-var CopyDestinationImageSet_latestVersionId *smithy.Schema
-
-var CopyDestinationImageSetProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyDestinationImageSetProperties",
-}, smithy.ShapeTypeStructure, 7)
-var CopyDestinationImageSetProperties_imageSetId *smithy.Schema
-
-var CopyDestinationImageSetProperties_latestVersionId *smithy.Schema
-
-var CopyDestinationImageSetProperties_imageSetState *smithy.Schema
-
-var CopyDestinationImageSetProperties_imageSetWorkflowStatus *smithy.Schema
-
-var CopyDestinationImageSetProperties_createdAt *smithy.Schema
-
-var CopyDestinationImageSetProperties_updatedAt *smithy.Schema
-
-var CopyDestinationImageSetProperties_imageSetArn *smithy.Schema
-
-var CopyImageSetInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyImageSetInformation",
-}, smithy.ShapeTypeStructure, 2)
-var CopyImageSetInformation_sourceImageSet *smithy.Schema
-
-var CopyImageSetInformation_destinationImageSet *smithy.Schema
-
-var CopySourceImageSetInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopySourceImageSetInformation",
-}, smithy.ShapeTypeStructure, 2)
-var CopySourceImageSetInformation_latestVersionId *smithy.Schema
-
-var CopySourceImageSetInformation_DICOMCopies *smithy.Schema
-
-var CopySourceImageSetProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopySourceImageSetProperties",
-}, smithy.ShapeTypeStructure, 7)
-var CopySourceImageSetProperties_imageSetId *smithy.Schema
-
-var CopySourceImageSetProperties_latestVersionId *smithy.Schema
-
-var CopySourceImageSetProperties_imageSetState *smithy.Schema
-
-var CopySourceImageSetProperties_imageSetWorkflowStatus *smithy.Schema
-
-var CopySourceImageSetProperties_createdAt *smithy.Schema
-
-var CopySourceImageSetProperties_updatedAt *smithy.Schema
-
-var CopySourceImageSetProperties_imageSetArn *smithy.Schema
-
-var _DatastoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreId",
-}, smithy.ShapeTypeString, 0)
-
-var _DatastoreName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreName",
-}, smithy.ShapeTypeString, 0)
-
-var DatastoreProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreProperties",
-}, smithy.ShapeTypeStructure, 9)
-var DatastoreProperties_datastoreId *smithy.Schema
-
-var DatastoreProperties_datastoreName *smithy.Schema
-
-var DatastoreProperties_datastoreStatus *smithy.Schema
-
-var DatastoreProperties_kmsKeyArn *smithy.Schema
-
-var DatastoreProperties_lambdaAuthorizerArn *smithy.Schema
-
-var DatastoreProperties_losslessStorageFormat *smithy.Schema
-
-var DatastoreProperties_datastoreArn *smithy.Schema
-
-var DatastoreProperties_createdAt *smithy.Schema
-
-var DatastoreProperties_updatedAt *smithy.Schema
-
-var DatastoreStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DatastoreStatus_CREATING *smithy.Schema
-
-var DatastoreStatus_CREATE_FAILED *smithy.Schema
-
-var DatastoreStatus_ACTIVE *smithy.Schema
-
-var DatastoreStatus_DELETING *smithy.Schema
-
-var DatastoreStatus_DELETED *smithy.Schema
-
-var _DatastoreSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DatastoreSummaries_member *smithy.Schema
-
-var DatastoreSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DatastoreSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DatastoreSummary_datastoreId *smithy.Schema
-
-var DatastoreSummary_datastoreName *smithy.Schema
-
-var DatastoreSummary_datastoreStatus *smithy.Schema
-
-var DatastoreSummary_datastoreArn *smithy.Schema
-
-var DatastoreSummary_createdAt *smithy.Schema
-
-var DatastoreSummary_updatedAt *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DICOMAccessionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMAccessionNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMAttribute",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var DICOMImportJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMImportJobProperties",
-}, smithy.ShapeTypeStructure, 11)
-var DICOMImportJobProperties_jobId *smithy.Schema
-
-var DICOMImportJobProperties_jobName *smithy.Schema
-
-var DICOMImportJobProperties_jobStatus *smithy.Schema
-
-var DICOMImportJobProperties_datastoreId *smithy.Schema
-
-var DICOMImportJobProperties_dataAccessRoleArn *smithy.Schema
-
-var DICOMImportJobProperties_endedAt *smithy.Schema
-
-var DICOMImportJobProperties_submittedAt *smithy.Schema
-
-var DICOMImportJobProperties_inputS3Uri *smithy.Schema
-
-var DICOMImportJobProperties_outputS3Uri *smithy.Schema
-
-var DICOMImportJobProperties_message *smithy.Schema
-
-var DICOMImportJobProperties_importConfiguration *smithy.Schema
-
-var _DICOMImportJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMImportJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DICOMImportJobSummaries_member *smithy.Schema
-
-var DICOMImportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMImportJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var DICOMImportJobSummary_jobId *smithy.Schema
-
-var DICOMImportJobSummary_jobName *smithy.Schema
-
-var DICOMImportJobSummary_jobStatus *smithy.Schema
-
-var DICOMImportJobSummary_datastoreId *smithy.Schema
-
-var DICOMImportJobSummary_dataAccessRoleArn *smithy.Schema
-
-var DICOMImportJobSummary_endedAt *smithy.Schema
-
-var DICOMImportJobSummary_submittedAt *smithy.Schema
-
-var DICOMImportJobSummary_message *smithy.Schema
-
-var DicomJsonMetadataImportConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DicomJsonMetadataImportConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DicomJsonMetadataImportConfiguration_dicomMetadataMappings *smithy.Schema
-
-var DicomMetadataMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DicomMetadataMapping",
-}, smithy.ShapeTypeStructure, 3)
-var DicomMetadataMapping_studyInstanceUID *smithy.Schema
-
-var DicomMetadataMapping_seriesInstanceUID *smithy.Schema
-
-var DicomMetadataMapping_metadataFilePath *smithy.Schema
-
-var _DicomMetadataMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DicomMetadataMappings",
-}, smithy.ShapeTypeList, 1)
-var _DicomMetadataMappings_member *smithy.Schema
-
-var _DICOMNumberOfStudyRelatedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMNumberOfStudyRelatedInstances",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DICOMNumberOfStudyRelatedSeries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMNumberOfStudyRelatedSeries",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DICOMPatientBirthDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMPatientBirthDate",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMPatientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMPatientId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMPatientName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMPatientName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMPatientSex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMPatientSex",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMSeriesBodyPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMSeriesBodyPart",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMSeriesInstanceUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMSeriesInstanceUID",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMSeriesModality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMSeriesModality",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMSeriesNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMSeriesNumber",
-}, smithy.ShapeTypeInteger, 0, &smithytraits.Sensitive{})
-
-var _DICOMStudyDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyDate",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DICOMStudyDateAndTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyDateAndTime",
-}, smithy.ShapeTypeStructure, 2)
-var DICOMStudyDateAndTime_DICOMStudyDate *smithy.Schema
-
-var DICOMStudyDateAndTime_DICOMStudyTime *smithy.Schema
-
-var _DICOMStudyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMStudyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMStudyInstanceUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyInstanceUID",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DICOMStudyTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMStudyTime",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DICOMTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMTags",
-}, smithy.ShapeTypeStructure, 16)
-var DICOMTags_DICOMPatientId *smithy.Schema
-
-var DICOMTags_DICOMPatientName *smithy.Schema
-
-var DICOMTags_DICOMPatientBirthDate *smithy.Schema
-
-var DICOMTags_DICOMPatientSex *smithy.Schema
-
-var DICOMTags_DICOMStudyInstanceUID *smithy.Schema
-
-var DICOMTags_DICOMStudyId *smithy.Schema
-
-var DICOMTags_DICOMStudyDescription *smithy.Schema
-
-var DICOMTags_DICOMNumberOfStudyRelatedSeries *smithy.Schema
-
-var DICOMTags_DICOMNumberOfStudyRelatedInstances *smithy.Schema
-
-var DICOMTags_DICOMAccessionNumber *smithy.Schema
-
-var DICOMTags_DICOMSeriesInstanceUID *smithy.Schema
-
-var DICOMTags_DICOMSeriesModality *smithy.Schema
-
-var DICOMTags_DICOMSeriesBodyPart *smithy.Schema
-
-var DICOMTags_DICOMSeriesNumber *smithy.Schema
-
-var DICOMTags_DICOMStudyDate *smithy.Schema
-
-var DICOMTags_DICOMStudyTime *smithy.Schema
-
-var DICOMUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DICOMUpdates",
-}, smithy.ShapeTypeStructure, 2)
-var DICOMUpdates_removableAttributes *smithy.Schema
-
-var DICOMUpdates_updatableAttributes *smithy.Schema
-
-var _ImageFrameId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageFrameId",
-}, smithy.ShapeTypeString, 0)
-
-var ImageFrameInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageFrameInformation",
-}, smithy.ShapeTypeStructure, 1)
-var ImageFrameInformation_imageFrameId *smithy.Schema
-
-var _ImageSetExternalVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetExternalVersionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ImageSetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetId",
-}, smithy.ShapeTypeString, 0)
-
-var _ImageSetMetadataBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetMetadataBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var ImageSetProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetProperties",
-}, smithy.ShapeTypeStructure, 10)
-var ImageSetProperties_imageSetId *smithy.Schema
-
-var ImageSetProperties_versionId *smithy.Schema
-
-var ImageSetProperties_imageSetState *smithy.Schema
-
-var ImageSetProperties_ImageSetWorkflowStatus *smithy.Schema
-
-var ImageSetProperties_createdAt *smithy.Schema
-
-var ImageSetProperties_updatedAt *smithy.Schema
-
-var ImageSetProperties_deletedAt *smithy.Schema
-
-var ImageSetProperties_message *smithy.Schema
-
-var ImageSetProperties_overrides *smithy.Schema
-
-var ImageSetProperties_isPrimary *smithy.Schema
-
-var _ImageSetPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ImageSetPropertiesList_member *smithy.Schema
-
-var _ImageSetsMetadataSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetsMetadataSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ImageSetsMetadataSummaries_member *smithy.Schema
-
-var ImageSetsMetadataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetsMetadataSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ImageSetsMetadataSummary_imageSetId *smithy.Schema
-
-var ImageSetsMetadataSummary_version *smithy.Schema
-
-var ImageSetsMetadataSummary_createdAt *smithy.Schema
-
-var ImageSetsMetadataSummary_updatedAt *smithy.Schema
-
-var ImageSetsMetadataSummary_lastAccessedAt *smithy.Schema
-
-var ImageSetsMetadataSummary_storageTier *smithy.Schema
-
-var ImageSetsMetadataSummary_DICOMTags *smithy.Schema
-
-var ImageSetsMetadataSummary_isPrimary *smithy.Schema
-
-var ImageSetState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetState",
-}, smithy.ShapeTypeEnum, 3)
-var ImageSetState_ACTIVE *smithy.Schema
-
-var ImageSetState_LOCKED *smithy.Schema
-
-var ImageSetState_DELETED *smithy.Schema
-
-var ImageSetWorkflowStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImageSetWorkflowStatus",
-}, smithy.ShapeTypeEnum, 14)
-var ImageSetWorkflowStatus_CREATED *smithy.Schema
-
-var ImageSetWorkflowStatus_COPIED *smithy.Schema
-
-var ImageSetWorkflowStatus_COPYING *smithy.Schema
-
-var ImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS *smithy.Schema
-
-var ImageSetWorkflowStatus_COPY_FAILED *smithy.Schema
-
-var ImageSetWorkflowStatus_UPDATING *smithy.Schema
-
-var ImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY *smithy.Schema
-
-var ImageSetWorkflowStatus_UPDATED *smithy.Schema
-
-var ImageSetWorkflowStatus_UPDATE_FAILED *smithy.Schema
-
-var ImageSetWorkflowStatus_DELETING *smithy.Schema
-
-var ImageSetWorkflowStatus_DELETED *smithy.Schema
-
-var ImageSetWorkflowStatus_IMPORTING *smithy.Schema
-
-var ImageSetWorkflowStatus_IMPORTED *smithy.Schema
-
-var ImageSetWorkflowStatus_IMPORT_FAILED *smithy.Schema
-
-var ImportConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ImportConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var ImportConfiguration_dicomJsonMetadataImportConfiguration *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "LambdaArn",
-}, smithy.ShapeTypeString, 0)
-
-var LosslessStorageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "LosslessStorageFormat",
-}, smithy.ShapeTypeEnum, 2)
-var LosslessStorageFormat_HTJ2K *smithy.Schema
-
-var LosslessStorageFormat_JPEG_2000_LOSSLESS *smithy.Schema
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var MetadataCopies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "MetadataCopies",
-}, smithy.ShapeTypeStructure, 1)
-var MetadataCopies_copiableAttributes *smithy.Schema
-
-var _MetadataFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "MetadataFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var MetadataUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "MetadataUpdates",
-}, smithy.ShapeTypeUnion, 2)
-var MetadataUpdates_DICOMUpdates *smithy.Schema
-
-var MetadataUpdates_revertToVersionId *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotAcceptableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "NotAcceptableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 406})
-var NotAcceptableException_message *smithy.Schema
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Operator",
-}, smithy.ShapeTypeEnum, 2)
-var Operator_EQUAL *smithy.Schema
-
-var Operator_BETWEEN *smithy.Schema
-
-var Overrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Overrides",
-}, smithy.ShapeTypeStructure, 1)
-var Overrides_forced *smithy.Schema
-
-var _PayloadBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "PayloadBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var SearchByAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchByAttributeValue",
-}, smithy.ShapeTypeUnion, 9)
-var SearchByAttributeValue_DICOMPatientId *smithy.Schema
-
-var SearchByAttributeValue_DICOMAccessionNumber *smithy.Schema
-
-var SearchByAttributeValue_DICOMStudyId *smithy.Schema
-
-var SearchByAttributeValue_DICOMStudyInstanceUID *smithy.Schema
-
-var SearchByAttributeValue_DICOMSeriesInstanceUID *smithy.Schema
-
-var SearchByAttributeValue_createdAt *smithy.Schema
-
-var SearchByAttributeValue_updatedAt *smithy.Schema
-
-var SearchByAttributeValue_DICOMStudyDateAndTime *smithy.Schema
-
-var SearchByAttributeValue_isPrimary *smithy.Schema
-
-var _SearchByAttributeValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchByAttributeValues",
-}, smithy.ShapeTypeList, 1)
-var _SearchByAttributeValues_member *smithy.Schema
-
-var SearchCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchCriteria",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var SearchCriteria_filters *smithy.Schema
-
-var SearchCriteria_sort *smithy.Schema
-
-var SearchFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SearchFilter_values *smithy.Schema
-
-var SearchFilter_operator *smithy.Schema
-
-var _SearchFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchFilters",
-}, smithy.ShapeTypeList, 1)
-var _SearchFilters_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Sort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "Sort",
-}, smithy.ShapeTypeStructure, 2)
-var Sort_sortOrder *smithy.Schema
-
-var Sort_sortField *smithy.Schema
-
-var SortField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SortField",
-}, smithy.ShapeTypeEnum, 3)
-var SortField_updatedAt *smithy.Schema
-
-var SortField_createdAt *smithy.Schema
-
-var SortField_DICOMStudyDateAndTime *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASC *smithy.Schema
-
-var SortOrder_DESC *smithy.Schema
-
-var StorageTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "StorageTier",
-}, smithy.ShapeTypeEnum, 2)
-var StorageTier_FREQUENT_ACCESS *smithy.Schema
-
-var StorageTier_ARCHIVE_INSTANT_ACCESS *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CopyImageSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyImageSetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CopyImageSetRequest_datastoreId *smithy.Schema
-
-var CopyImageSetRequest_sourceImageSetId *smithy.Schema
-
-var CopyImageSetRequest_copyImageSetInformation *smithy.Schema
-
-var CopyImageSetRequest_force *smithy.Schema
-
-var CopyImageSetRequest_promoteToPrimary *smithy.Schema
-
-var CopyImageSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CopyImageSetResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CopyImageSetResponse_datastoreId *smithy.Schema
-
-var CopyImageSetResponse_sourceImageSetProperties *smithy.Schema
-
-var CopyImageSetResponse_destinationImageSetProperties *smithy.Schema
-
-var CreateDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CreateDatastoreRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDatastoreRequest_datastoreName *smithy.Schema
-
-var CreateDatastoreRequest_clientToken *smithy.Schema
-
-var CreateDatastoreRequest_tags *smithy.Schema
-
-var CreateDatastoreRequest_kmsKeyArn *smithy.Schema
-
-var CreateDatastoreRequest_lambdaAuthorizerArn *smithy.Schema
-
-var CreateDatastoreRequest_losslessStorageFormat *smithy.Schema
-
-var CreateDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "CreateDatastoreResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDatastoreResponse_datastoreId *smithy.Schema
-
-var CreateDatastoreResponse_datastoreStatus *smithy.Schema
-
-var DeleteDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteDatastoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatastoreRequest_datastoreId *smithy.Schema
-
-var DeleteDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteDatastoreResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDatastoreResponse_datastoreId *smithy.Schema
-
-var DeleteDatastoreResponse_datastoreStatus *smithy.Schema
-
-var DeleteImageSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteImageSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteImageSetRequest_datastoreId *smithy.Schema
-
-var DeleteImageSetRequest_imageSetId *smithy.Schema
-
-var DeleteImageSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "DeleteImageSetResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteImageSetResponse_datastoreId *smithy.Schema
-
-var DeleteImageSetResponse_imageSetId *smithy.Schema
-
-var DeleteImageSetResponse_imageSetState *smithy.Schema
-
-var DeleteImageSetResponse_imageSetWorkflowStatus *smithy.Schema
-
-var GetDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDatastoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDatastoreRequest_datastoreId *smithy.Schema
-
-var GetDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDatastoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDatastoreResponse_datastoreProperties *smithy.Schema
-
-var GetDICOMImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDICOMImportJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDICOMImportJobRequest_datastoreId *smithy.Schema
-
-var GetDICOMImportJobRequest_jobId *smithy.Schema
-
-var GetDICOMImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetDICOMImportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDICOMImportJobResponse_jobProperties *smithy.Schema
-
-var GetImageFrameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageFrameRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetImageFrameRequest_datastoreId *smithy.Schema
-
-var GetImageFrameRequest_imageSetId *smithy.Schema
-
-var GetImageFrameRequest_imageFrameInformation *smithy.Schema
-
-var GetImageFrameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageFrameResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetImageFrameResponse_imageFrameBlob *smithy.Schema
-
-var GetImageFrameResponse_contentType *smithy.Schema
-
-var GetImageSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetImageSetRequest_datastoreId *smithy.Schema
-
-var GetImageSetRequest_imageSetId *smithy.Schema
-
-var GetImageSetRequest_versionId *smithy.Schema
-
-var GetImageSetMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSetMetadataRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetImageSetMetadataRequest_datastoreId *smithy.Schema
-
-var GetImageSetMetadataRequest_imageSetId *smithy.Schema
-
-var GetImageSetMetadataRequest_versionId *smithy.Schema
-
-var GetImageSetMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSetMetadataResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetImageSetMetadataResponse_imageSetMetadataBlob *smithy.Schema
-
-var GetImageSetMetadataResponse_contentType *smithy.Schema
-
-var GetImageSetMetadataResponse_contentEncoding *smithy.Schema
-
-var GetImageSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "GetImageSetResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetImageSetResponse_datastoreId *smithy.Schema
-
-var GetImageSetResponse_imageSetId *smithy.Schema
-
-var GetImageSetResponse_versionId *smithy.Schema
-
-var GetImageSetResponse_imageSetState *smithy.Schema
-
-var GetImageSetResponse_imageSetWorkflowStatus *smithy.Schema
-
-var GetImageSetResponse_createdAt *smithy.Schema
-
-var GetImageSetResponse_updatedAt *smithy.Schema
-
-var GetImageSetResponse_deletedAt *smithy.Schema
-
-var GetImageSetResponse_message *smithy.Schema
-
-var GetImageSetResponse_imageSetArn *smithy.Schema
-
-var GetImageSetResponse_overrides *smithy.Schema
-
-var GetImageSetResponse_isPrimary *smithy.Schema
-
-var GetImageSetResponse_lastAccessedAt *smithy.Schema
-
-var GetImageSetResponse_storageTier *smithy.Schema
-
-var ListDatastoresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDatastoresRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDatastoresRequest_datastoreStatus *smithy.Schema
-
-var ListDatastoresRequest_nextToken *smithy.Schema
-
-var ListDatastoresRequest_maxResults *smithy.Schema
-
-var ListDatastoresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDatastoresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatastoresResponse_datastoreSummaries *smithy.Schema
-
-var ListDatastoresResponse_nextToken *smithy.Schema
-
-var ListDICOMImportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDICOMImportJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDICOMImportJobsRequest_datastoreId *smithy.Schema
-
-var ListDICOMImportJobsRequest_jobStatus *smithy.Schema
-
-var ListDICOMImportJobsRequest_nextToken *smithy.Schema
-
-var ListDICOMImportJobsRequest_maxResults *smithy.Schema
-
-var ListDICOMImportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListDICOMImportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDICOMImportJobsResponse_jobSummaries *smithy.Schema
-
-var ListDICOMImportJobsResponse_nextToken *smithy.Schema
-
-var ListImageSetVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListImageSetVersionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListImageSetVersionsRequest_datastoreId *smithy.Schema
-
-var ListImageSetVersionsRequest_imageSetId *smithy.Schema
-
-var ListImageSetVersionsRequest_nextToken *smithy.Schema
-
-var ListImageSetVersionsRequest_maxResults *smithy.Schema
-
-var ListImageSetVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListImageSetVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListImageSetVersionsResponse_imageSetPropertiesList *smithy.Schema
-
-var ListImageSetVersionsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var SearchImageSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchImageSetsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SearchImageSetsRequest_datastoreId *smithy.Schema
-
-var SearchImageSetsRequest_searchCriteria *smithy.Schema
-
-var SearchImageSetsRequest_maxResults *smithy.Schema
-
-var SearchImageSetsRequest_nextToken *smithy.Schema
-
-var SearchImageSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "SearchImageSetsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SearchImageSetsResponse_imageSetsMetadataSummaries *smithy.Schema
-
-var SearchImageSetsResponse_sort *smithy.Schema
-
-var SearchImageSetsResponse_nextToken *smithy.Schema
-
-var StartDICOMImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "StartDICOMImportJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartDICOMImportJobRequest_jobName *smithy.Schema
-
-var StartDICOMImportJobRequest_dataAccessRoleArn *smithy.Schema
-
-var StartDICOMImportJobRequest_clientToken *smithy.Schema
-
-var StartDICOMImportJobRequest_datastoreId *smithy.Schema
-
-var StartDICOMImportJobRequest_inputS3Uri *smithy.Schema
-
-var StartDICOMImportJobRequest_outputS3Uri *smithy.Schema
-
-var StartDICOMImportJobRequest_inputOwnerAccountId *smithy.Schema
-
-var StartDICOMImportJobRequest_importConfiguration *smithy.Schema
-
-var StartDICOMImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "StartDICOMImportJobResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StartDICOMImportJobResponse_datastoreId *smithy.Schema
-
-var StartDICOMImportJobResponse_jobId *smithy.Schema
-
-var StartDICOMImportJobResponse_jobStatus *smithy.Schema
-
-var StartDICOMImportJobResponse_submittedAt *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateImageSetMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UpdateImageSetMetadataRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateImageSetMetadataRequest_datastoreId *smithy.Schema
-
-var UpdateImageSetMetadataRequest_imageSetId *smithy.Schema
-
-var UpdateImageSetMetadataRequest_latestVersionId *smithy.Schema
-
-var UpdateImageSetMetadataRequest_force *smithy.Schema
-
-var UpdateImageSetMetadataRequest_includeStudyImageSets *smithy.Schema
-
-var UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates *smithy.Schema
-
-var UpdateImageSetMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.medicalimaging",
-	Name:      "UpdateImageSetMetadataResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateImageSetMetadataResponse_datastoreId *smithy.Schema
-
-var UpdateImageSetMetadataResponse_imageSetId *smithy.Schema
-
-var UpdateImageSetMetadataResponse_latestVersionId *smithy.Schema
-
-var UpdateImageSetMetadataResponse_imageSetState *smithy.Schema
-
-var UpdateImageSetMetadataResponse_imageSetWorkflowStatus *smithy.Schema
-
-var UpdateImageSetMetadataResponse_createdAt *smithy.Schema
-
-var UpdateImageSetMetadataResponse_updatedAt *smithy.Schema
-
-var UpdateImageSetMetadataResponse_message *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	BadRequestException_message = BadRequestException.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CopyDestinationImageSet_imageSetId = CopyDestinationImageSet.AddMember("imageSetId", _ImageSetId)
-
-	CopyDestinationImageSet_latestVersionId = CopyDestinationImageSet.AddMember("latestVersionId", _ImageSetExternalVersionId)
-
-	ImageSetState_ACTIVE = ImageSetState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ImageSetState_LOCKED = ImageSetState.AddMember("LOCKED", smithyprelude.Unit)
-
-	ImageSetState_DELETED = ImageSetState.AddMember("DELETED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_CREATED = ImageSetWorkflowStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_COPIED = ImageSetWorkflowStatus.AddMember("COPIED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_COPYING = ImageSetWorkflowStatus.AddMember("COPYING", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS = ImageSetWorkflowStatus.AddMember("COPYING_WITH_READ_ONLY_ACCESS", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_COPY_FAILED = ImageSetWorkflowStatus.AddMember("COPY_FAILED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_UPDATING = ImageSetWorkflowStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY = ImageSetWorkflowStatus.AddMember("UPDATING_FOR_STUDY_CONSISTENCY", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_UPDATED = ImageSetWorkflowStatus.AddMember("UPDATED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_UPDATE_FAILED = ImageSetWorkflowStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_DELETING = ImageSetWorkflowStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_DELETED = ImageSetWorkflowStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_IMPORTING = ImageSetWorkflowStatus.AddMember("IMPORTING", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_IMPORTED = ImageSetWorkflowStatus.AddMember("IMPORTED", smithyprelude.Unit)
-
-	ImageSetWorkflowStatus_IMPORT_FAILED = ImageSetWorkflowStatus.AddMember("IMPORT_FAILED", smithyprelude.Unit)
-
-	CopyDestinationImageSetProperties_imageSetId = CopyDestinationImageSetProperties.AddMember("imageSetId", _ImageSetId)
-
-	CopyDestinationImageSetProperties_latestVersionId = CopyDestinationImageSetProperties.AddMember("latestVersionId", _ImageSetExternalVersionId)
-
-	CopyDestinationImageSetProperties_imageSetState = CopyDestinationImageSetProperties.AddMember("imageSetState", ImageSetState)
-
-	CopyDestinationImageSetProperties_imageSetWorkflowStatus = CopyDestinationImageSetProperties.AddMember("imageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	CopyDestinationImageSetProperties_createdAt = CopyDestinationImageSetProperties.AddMember("createdAt", _Date)
-
-	CopyDestinationImageSetProperties_updatedAt = CopyDestinationImageSetProperties.AddMember("updatedAt", _Date)
-
-	CopyDestinationImageSetProperties_imageSetArn = CopyDestinationImageSetProperties.AddMember("imageSetArn", _Arn)
-
-	MetadataCopies_copiableAttributes = MetadataCopies.AddMember("copiableAttributes", _CopiableAttributes)
-
-	CopySourceImageSetInformation_latestVersionId = CopySourceImageSetInformation.AddMember("latestVersionId", _ImageSetExternalVersionId)
-
-	CopySourceImageSetInformation_DICOMCopies = CopySourceImageSetInformation.AddMember("DICOMCopies", MetadataCopies)
-
-	CopyImageSetInformation_sourceImageSet = CopyImageSetInformation.AddMember("sourceImageSet", CopySourceImageSetInformation)
-
-	CopyImageSetInformation_destinationImageSet = CopyImageSetInformation.AddMember("destinationImageSet", CopyDestinationImageSet)
-
-	CopySourceImageSetProperties_imageSetId = CopySourceImageSetProperties.AddMember("imageSetId", _ImageSetId)
-
-	CopySourceImageSetProperties_latestVersionId = CopySourceImageSetProperties.AddMember("latestVersionId", _ImageSetExternalVersionId)
-
-	CopySourceImageSetProperties_imageSetState = CopySourceImageSetProperties.AddMember("imageSetState", ImageSetState)
-
-	CopySourceImageSetProperties_imageSetWorkflowStatus = CopySourceImageSetProperties.AddMember("imageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	CopySourceImageSetProperties_createdAt = CopySourceImageSetProperties.AddMember("createdAt", _Date)
-
-	CopySourceImageSetProperties_updatedAt = CopySourceImageSetProperties.AddMember("updatedAt", _Date)
-
-	CopySourceImageSetProperties_imageSetArn = CopySourceImageSetProperties.AddMember("imageSetArn", _Arn)
-
-	DatastoreStatus_CREATING = DatastoreStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DatastoreStatus_CREATE_FAILED = DatastoreStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	DatastoreStatus_ACTIVE = DatastoreStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DatastoreStatus_DELETING = DatastoreStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DatastoreStatus_DELETED = DatastoreStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	LosslessStorageFormat_HTJ2K = LosslessStorageFormat.AddMember("HTJ2K", smithyprelude.Unit)
-
-	LosslessStorageFormat_JPEG_2000_LOSSLESS = LosslessStorageFormat.AddMember("JPEG_2000_LOSSLESS", smithyprelude.Unit)
-
-	DatastoreProperties_datastoreId = DatastoreProperties.AddMember("datastoreId", _DatastoreId)
-
-	DatastoreProperties_datastoreName = DatastoreProperties.AddMember("datastoreName", _DatastoreName)
-
-	DatastoreProperties_datastoreStatus = DatastoreProperties.AddMember("datastoreStatus", DatastoreStatus)
-
-	DatastoreProperties_kmsKeyArn = DatastoreProperties.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	DatastoreProperties_lambdaAuthorizerArn = DatastoreProperties.AddMember("lambdaAuthorizerArn", _LambdaArn)
-
-	DatastoreProperties_losslessStorageFormat = DatastoreProperties.AddMember("losslessStorageFormat", LosslessStorageFormat)
-
-	DatastoreProperties_datastoreArn = DatastoreProperties.AddMember("datastoreArn", _Arn)
-
-	DatastoreProperties_createdAt = DatastoreProperties.AddMember("createdAt", _Date)
-
-	DatastoreProperties_updatedAt = DatastoreProperties.AddMember("updatedAt", _Date)
-
-	DatastoreSummary_datastoreId = DatastoreSummary.AddMember("datastoreId", _DatastoreId)
-
-	DatastoreSummary_datastoreName = DatastoreSummary.AddMember("datastoreName", _DatastoreName)
-
-	DatastoreSummary_datastoreStatus = DatastoreSummary.AddMember("datastoreStatus", DatastoreStatus)
-
-	DatastoreSummary_datastoreArn = DatastoreSummary.AddMember("datastoreArn", _Arn)
-
-	DatastoreSummary_createdAt = DatastoreSummary.AddMember("createdAt", _Date)
-
-	DatastoreSummary_updatedAt = DatastoreSummary.AddMember("updatedAt", _Date)
-
-	_DatastoreSummaries_member = _DatastoreSummaries.AddMember("member", DatastoreSummary)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DicomMetadataMapping_studyInstanceUID = DicomMetadataMapping.AddMember("studyInstanceUID", _DICOMStudyInstanceUID)
-
-	DicomMetadataMapping_seriesInstanceUID = DicomMetadataMapping.AddMember("seriesInstanceUID", _DICOMSeriesInstanceUID)
-
-	DicomMetadataMapping_metadataFilePath = DicomMetadataMapping.AddMember("metadataFilePath", _MetadataFilePath)
-
-	_DicomMetadataMappings_member = _DicomMetadataMappings.AddMember("member", DicomMetadataMapping)
-
-	DicomJsonMetadataImportConfiguration_dicomMetadataMappings = DicomJsonMetadataImportConfiguration.AddMember("dicomMetadataMappings", _DicomMetadataMappings)
-
-	ImportConfiguration_dicomJsonMetadataImportConfiguration = ImportConfiguration.AddMember("dicomJsonMetadataImportConfiguration", DicomJsonMetadataImportConfiguration)
-
-	DICOMImportJobProperties_jobId = DICOMImportJobProperties.AddMember("jobId", _JobId)
-
-	DICOMImportJobProperties_jobName = DICOMImportJobProperties.AddMember("jobName", _JobName)
-
-	DICOMImportJobProperties_jobStatus = DICOMImportJobProperties.AddMember("jobStatus", JobStatus)
-
-	DICOMImportJobProperties_datastoreId = DICOMImportJobProperties.AddMember("datastoreId", _DatastoreId)
-
-	DICOMImportJobProperties_dataAccessRoleArn = DICOMImportJobProperties.AddMember("dataAccessRoleArn", _RoleArn)
-
-	DICOMImportJobProperties_endedAt = DICOMImportJobProperties.AddMember("endedAt", _Date)
-
-	DICOMImportJobProperties_submittedAt = DICOMImportJobProperties.AddMember("submittedAt", _Date)
-
-	DICOMImportJobProperties_inputS3Uri = DICOMImportJobProperties.AddMember("inputS3Uri", _S3Uri)
-
-	DICOMImportJobProperties_outputS3Uri = DICOMImportJobProperties.AddMember("outputS3Uri", _S3Uri)
-
-	DICOMImportJobProperties_message = DICOMImportJobProperties.AddMember("message", _Message)
-
-	DICOMImportJobProperties_importConfiguration = DICOMImportJobProperties.AddMember("importConfiguration", ImportConfiguration)
-
-	DICOMImportJobSummary_jobId = DICOMImportJobSummary.AddMember("jobId", _JobId)
-
-	DICOMImportJobSummary_jobName = DICOMImportJobSummary.AddMember("jobName", _JobName)
-
-	DICOMImportJobSummary_jobStatus = DICOMImportJobSummary.AddMember("jobStatus", JobStatus)
-
-	DICOMImportJobSummary_datastoreId = DICOMImportJobSummary.AddMember("datastoreId", _DatastoreId)
-
-	DICOMImportJobSummary_dataAccessRoleArn = DICOMImportJobSummary.AddMember("dataAccessRoleArn", _RoleArn)
-
-	DICOMImportJobSummary_endedAt = DICOMImportJobSummary.AddMember("endedAt", _Date)
-
-	DICOMImportJobSummary_submittedAt = DICOMImportJobSummary.AddMember("submittedAt", _Date)
-
-	DICOMImportJobSummary_message = DICOMImportJobSummary.AddMember("message", _Message)
-
-	_DICOMImportJobSummaries_member = _DICOMImportJobSummaries.AddMember("member", DICOMImportJobSummary)
-
-	DICOMStudyDateAndTime_DICOMStudyDate = DICOMStudyDateAndTime.AddMember("DICOMStudyDate", _DICOMStudyDate)
-
-	DICOMStudyDateAndTime_DICOMStudyTime = DICOMStudyDateAndTime.AddMember("DICOMStudyTime", _DICOMStudyTime)
-
-	DICOMTags_DICOMPatientId = DICOMTags.AddMember("DICOMPatientId", _DICOMPatientId)
-
-	DICOMTags_DICOMPatientName = DICOMTags.AddMember("DICOMPatientName", _DICOMPatientName)
-
-	DICOMTags_DICOMPatientBirthDate = DICOMTags.AddMember("DICOMPatientBirthDate", _DICOMPatientBirthDate)
-
-	DICOMTags_DICOMPatientSex = DICOMTags.AddMember("DICOMPatientSex", _DICOMPatientSex)
-
-	DICOMTags_DICOMStudyInstanceUID = DICOMTags.AddMember("DICOMStudyInstanceUID", _DICOMStudyInstanceUID)
-
-	DICOMTags_DICOMStudyId = DICOMTags.AddMember("DICOMStudyId", _DICOMStudyId)
-
-	DICOMTags_DICOMStudyDescription = DICOMTags.AddMember("DICOMStudyDescription", _DICOMStudyDescription)
-
-	DICOMTags_DICOMNumberOfStudyRelatedSeries = DICOMTags.AddMember("DICOMNumberOfStudyRelatedSeries", _DICOMNumberOfStudyRelatedSeries)
-
-	DICOMTags_DICOMNumberOfStudyRelatedInstances = DICOMTags.AddMember("DICOMNumberOfStudyRelatedInstances", _DICOMNumberOfStudyRelatedInstances)
-
-	DICOMTags_DICOMAccessionNumber = DICOMTags.AddMember("DICOMAccessionNumber", _DICOMAccessionNumber)
-
-	DICOMTags_DICOMSeriesInstanceUID = DICOMTags.AddMember("DICOMSeriesInstanceUID", _DICOMSeriesInstanceUID)
-
-	DICOMTags_DICOMSeriesModality = DICOMTags.AddMember("DICOMSeriesModality", _DICOMSeriesModality)
-
-	DICOMTags_DICOMSeriesBodyPart = DICOMTags.AddMember("DICOMSeriesBodyPart", _DICOMSeriesBodyPart)
-
-	DICOMTags_DICOMSeriesNumber = DICOMTags.AddMember("DICOMSeriesNumber", _DICOMSeriesNumber)
-
-	DICOMTags_DICOMStudyDate = DICOMTags.AddMember("DICOMStudyDate", _DICOMStudyDate)
-
-	DICOMTags_DICOMStudyTime = DICOMTags.AddMember("DICOMStudyTime", _DICOMStudyTime)
-
-	DICOMUpdates_removableAttributes = DICOMUpdates.AddMember("removableAttributes", _DICOMAttribute)
-
-	DICOMUpdates_updatableAttributes = DICOMUpdates.AddMember("updatableAttributes", _DICOMAttribute)
-
-	ImageFrameInformation_imageFrameId = ImageFrameInformation.AddMember("imageFrameId", _ImageFrameId)
-
-	Overrides_forced = Overrides.AddMember("forced", smithyprelude.Boolean)
-
-	ImageSetProperties_imageSetId = ImageSetProperties.AddMember("imageSetId", _ImageSetId)
-
-	ImageSetProperties_versionId = ImageSetProperties.AddMember("versionId", _ImageSetExternalVersionId)
-
-	ImageSetProperties_imageSetState = ImageSetProperties.AddMember("imageSetState", ImageSetState)
-
-	ImageSetProperties_ImageSetWorkflowStatus = ImageSetProperties.AddMember("ImageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	ImageSetProperties_createdAt = ImageSetProperties.AddMember("createdAt", _Date)
-
-	ImageSetProperties_updatedAt = ImageSetProperties.AddMember("updatedAt", _Date)
-
-	ImageSetProperties_deletedAt = ImageSetProperties.AddMember("deletedAt", _Date)
-
-	ImageSetProperties_message = ImageSetProperties.AddMember("message", _Message)
-
-	ImageSetProperties_overrides = ImageSetProperties.AddMember("overrides", Overrides)
-
-	ImageSetProperties_isPrimary = ImageSetProperties.AddMember("isPrimary", smithyprelude.Boolean)
-
-	_ImageSetPropertiesList_member = _ImageSetPropertiesList.AddMember("member", ImageSetProperties)
-
-	StorageTier_FREQUENT_ACCESS = StorageTier.AddMember("FREQUENT_ACCESS", smithyprelude.Unit)
-
-	StorageTier_ARCHIVE_INSTANT_ACCESS = StorageTier.AddMember("ARCHIVE_INSTANT_ACCESS", smithyprelude.Unit)
-
-	ImageSetsMetadataSummary_imageSetId = ImageSetsMetadataSummary.AddMember("imageSetId", _ImageSetId)
-
-	ImageSetsMetadataSummary_version = ImageSetsMetadataSummary.AddMember("version", smithyprelude.Integer)
-
-	ImageSetsMetadataSummary_createdAt = ImageSetsMetadataSummary.AddMember("createdAt", _Date)
-
-	ImageSetsMetadataSummary_updatedAt = ImageSetsMetadataSummary.AddMember("updatedAt", _Date)
-
-	ImageSetsMetadataSummary_lastAccessedAt = ImageSetsMetadataSummary.AddMember("lastAccessedAt", _Date)
-
-	ImageSetsMetadataSummary_storageTier = ImageSetsMetadataSummary.AddMember("storageTier", StorageTier)
-
-	ImageSetsMetadataSummary_DICOMTags = ImageSetsMetadataSummary.AddMember("DICOMTags", DICOMTags)
-
-	ImageSetsMetadataSummary_isPrimary = ImageSetsMetadataSummary.AddMember("isPrimary", smithyprelude.Boolean)
-
-	_ImageSetsMetadataSummaries_member = _ImageSetsMetadataSummaries.AddMember("member", ImageSetsMetadataSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	MetadataUpdates_DICOMUpdates = MetadataUpdates.AddMember("DICOMUpdates", DICOMUpdates)
-
-	MetadataUpdates_revertToVersionId = MetadataUpdates.AddMember("revertToVersionId", _ImageSetExternalVersionId)
-
-	NotAcceptableException_message = NotAcceptableException.AddMember("message", smithyprelude.String)
-
-	Operator_EQUAL = Operator.AddMember("EQUAL", smithyprelude.Unit)
-
-	Operator_BETWEEN = Operator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	SearchByAttributeValue_DICOMPatientId = SearchByAttributeValue.AddMember("DICOMPatientId", _DICOMPatientId)
-
-	SearchByAttributeValue_DICOMAccessionNumber = SearchByAttributeValue.AddMember("DICOMAccessionNumber", _DICOMAccessionNumber)
-
-	SearchByAttributeValue_DICOMStudyId = SearchByAttributeValue.AddMember("DICOMStudyId", _DICOMStudyId)
-
-	SearchByAttributeValue_DICOMStudyInstanceUID = SearchByAttributeValue.AddMember("DICOMStudyInstanceUID", _DICOMStudyInstanceUID)
-
-	SearchByAttributeValue_DICOMSeriesInstanceUID = SearchByAttributeValue.AddMember("DICOMSeriesInstanceUID", _DICOMSeriesInstanceUID)
-
-	SearchByAttributeValue_createdAt = SearchByAttributeValue.AddMember("createdAt", _Date)
-
-	SearchByAttributeValue_updatedAt = SearchByAttributeValue.AddMember("updatedAt", _Date)
-
-	SearchByAttributeValue_DICOMStudyDateAndTime = SearchByAttributeValue.AddMember("DICOMStudyDateAndTime", DICOMStudyDateAndTime)
-
-	SearchByAttributeValue_isPrimary = SearchByAttributeValue.AddMember("isPrimary", smithyprelude.Boolean)
-
-	_SearchByAttributeValues_member = _SearchByAttributeValues.AddMember("member", SearchByAttributeValue)
-
-	SearchFilter_values = SearchFilter.AddMember("values", _SearchByAttributeValues)
-
-	SearchFilter_operator = SearchFilter.AddMember("operator", Operator)
-
-	_SearchFilters_member = _SearchFilters.AddMember("member", SearchFilter)
-
-	SortOrder_ASC = SortOrder.AddMember("ASC", smithyprelude.Unit)
-
-	SortOrder_DESC = SortOrder.AddMember("DESC", smithyprelude.Unit)
-
-	SortField_updatedAt = SortField.AddMember("updatedAt", smithyprelude.Unit)
-
-	SortField_createdAt = SortField.AddMember("createdAt", smithyprelude.Unit)
-
-	SortField_DICOMStudyDateAndTime = SortField.AddMember("DICOMStudyDateAndTime", smithyprelude.Unit)
-
-	Sort_sortOrder = Sort.AddMember("sortOrder", SortOrder)
-
-	Sort_sortField = Sort.AddMember("sortField", SortField)
-
-	SearchCriteria_filters = SearchCriteria.AddMember("filters", _SearchFilters)
-
-	SearchCriteria_sort = SearchCriteria.AddMember("sort", Sort)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CopyImageSetRequest_datastoreId = CopyImageSetRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	CopyImageSetRequest_sourceImageSetId = CopyImageSetRequest.AddMember("sourceImageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	CopyImageSetRequest_copyImageSetInformation = CopyImageSetRequest.AddMember("copyImageSetInformation", CopyImageSetInformation, &smithytraits.HTTPPayload{})
-
-	CopyImageSetRequest_force = CopyImageSetRequest.AddMember("force", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "force"})
-
-	CopyImageSetRequest_promoteToPrimary = CopyImageSetRequest.AddMember("promoteToPrimary", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "promoteToPrimary"})
-
-	CopyImageSetResponse_datastoreId = CopyImageSetResponse.AddMember("datastoreId", _DatastoreId)
-
-	CopyImageSetResponse_sourceImageSetProperties = CopyImageSetResponse.AddMember("sourceImageSetProperties", CopySourceImageSetProperties)
-
-	CopyImageSetResponse_destinationImageSetProperties = CopyImageSetResponse.AddMember("destinationImageSetProperties", CopyDestinationImageSetProperties)
-
-	CreateDatastoreRequest_datastoreName = CreateDatastoreRequest.AddMember("datastoreName", _DatastoreName)
-
-	CreateDatastoreRequest_clientToken = CreateDatastoreRequest.AddMember("clientToken", _ClientToken)
-
-	CreateDatastoreRequest_tags = CreateDatastoreRequest.AddMember("tags", _TagMap)
-
-	CreateDatastoreRequest_kmsKeyArn = CreateDatastoreRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateDatastoreRequest_lambdaAuthorizerArn = CreateDatastoreRequest.AddMember("lambdaAuthorizerArn", _LambdaArn)
-
-	CreateDatastoreRequest_losslessStorageFormat = CreateDatastoreRequest.AddMember("losslessStorageFormat", LosslessStorageFormat)
-
-	CreateDatastoreResponse_datastoreId = CreateDatastoreResponse.AddMember("datastoreId", _DatastoreId)
-
-	CreateDatastoreResponse_datastoreStatus = CreateDatastoreResponse.AddMember("datastoreStatus", DatastoreStatus)
-
-	DeleteDatastoreRequest_datastoreId = DeleteDatastoreRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	DeleteDatastoreResponse_datastoreId = DeleteDatastoreResponse.AddMember("datastoreId", _DatastoreId)
-
-	DeleteDatastoreResponse_datastoreStatus = DeleteDatastoreResponse.AddMember("datastoreStatus", DatastoreStatus)
-
-	DeleteImageSetRequest_datastoreId = DeleteImageSetRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	DeleteImageSetRequest_imageSetId = DeleteImageSetRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	DeleteImageSetResponse_datastoreId = DeleteImageSetResponse.AddMember("datastoreId", _DatastoreId)
-
-	DeleteImageSetResponse_imageSetId = DeleteImageSetResponse.AddMember("imageSetId", _ImageSetId)
-
-	DeleteImageSetResponse_imageSetState = DeleteImageSetResponse.AddMember("imageSetState", ImageSetState)
-
-	DeleteImageSetResponse_imageSetWorkflowStatus = DeleteImageSetResponse.AddMember("imageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	GetDatastoreRequest_datastoreId = GetDatastoreRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	GetDatastoreResponse_datastoreProperties = GetDatastoreResponse.AddMember("datastoreProperties", DatastoreProperties)
-
-	GetDICOMImportJobRequest_datastoreId = GetDICOMImportJobRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	GetDICOMImportJobRequest_jobId = GetDICOMImportJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	GetDICOMImportJobResponse_jobProperties = GetDICOMImportJobResponse.AddMember("jobProperties", DICOMImportJobProperties)
-
-	GetImageFrameRequest_datastoreId = GetImageFrameRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	GetImageFrameRequest_imageSetId = GetImageFrameRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	GetImageFrameRequest_imageFrameInformation = GetImageFrameRequest.AddMember("imageFrameInformation", ImageFrameInformation, &smithytraits.HTTPPayload{})
-
-	GetImageFrameResponse_imageFrameBlob = GetImageFrameResponse.AddMember("imageFrameBlob", _PayloadBlob, &smithytraits.HTTPPayload{})
-
-	GetImageFrameResponse_contentType = GetImageFrameResponse.AddMember("contentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetImageSetRequest_datastoreId = GetImageSetRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	GetImageSetRequest_imageSetId = GetImageSetRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	GetImageSetRequest_versionId = GetImageSetRequest.AddMember("versionId", _ImageSetExternalVersionId, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetImageSetMetadataRequest_datastoreId = GetImageSetMetadataRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	GetImageSetMetadataRequest_imageSetId = GetImageSetMetadataRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	GetImageSetMetadataRequest_versionId = GetImageSetMetadataRequest.AddMember("versionId", _ImageSetExternalVersionId, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetImageSetMetadataResponse_imageSetMetadataBlob = GetImageSetMetadataResponse.AddMember("imageSetMetadataBlob", _ImageSetMetadataBlob, &smithytraits.HTTPPayload{})
-
-	GetImageSetMetadataResponse_contentType = GetImageSetMetadataResponse.AddMember("contentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetImageSetMetadataResponse_contentEncoding = GetImageSetMetadataResponse.AddMember("contentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	GetImageSetResponse_datastoreId = GetImageSetResponse.AddMember("datastoreId", _DatastoreId)
-
-	GetImageSetResponse_imageSetId = GetImageSetResponse.AddMember("imageSetId", _ImageSetId)
-
-	GetImageSetResponse_versionId = GetImageSetResponse.AddMember("versionId", _ImageSetExternalVersionId)
-
-	GetImageSetResponse_imageSetState = GetImageSetResponse.AddMember("imageSetState", ImageSetState)
-
-	GetImageSetResponse_imageSetWorkflowStatus = GetImageSetResponse.AddMember("imageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	GetImageSetResponse_createdAt = GetImageSetResponse.AddMember("createdAt", _Date)
-
-	GetImageSetResponse_updatedAt = GetImageSetResponse.AddMember("updatedAt", _Date)
-
-	GetImageSetResponse_deletedAt = GetImageSetResponse.AddMember("deletedAt", _Date)
-
-	GetImageSetResponse_message = GetImageSetResponse.AddMember("message", _Message)
-
-	GetImageSetResponse_imageSetArn = GetImageSetResponse.AddMember("imageSetArn", _Arn)
-
-	GetImageSetResponse_overrides = GetImageSetResponse.AddMember("overrides", Overrides)
-
-	GetImageSetResponse_isPrimary = GetImageSetResponse.AddMember("isPrimary", smithyprelude.Boolean)
-
-	GetImageSetResponse_lastAccessedAt = GetImageSetResponse.AddMember("lastAccessedAt", _Date)
-
-	GetImageSetResponse_storageTier = GetImageSetResponse.AddMember("storageTier", StorageTier)
-
-	ListDatastoresRequest_datastoreStatus = ListDatastoresRequest.AddMember("datastoreStatus", DatastoreStatus, &smithytraits.HTTPQuery{Name: "datastoreStatus"})
-
-	ListDatastoresRequest_nextToken = ListDatastoresRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDatastoresRequest_maxResults = ListDatastoresRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDatastoresResponse_datastoreSummaries = ListDatastoresResponse.AddMember("datastoreSummaries", _DatastoreSummaries)
-
-	ListDatastoresResponse_nextToken = ListDatastoresResponse.AddMember("nextToken", _NextToken)
-
-	ListDICOMImportJobsRequest_datastoreId = ListDICOMImportJobsRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	ListDICOMImportJobsRequest_jobStatus = ListDICOMImportJobsRequest.AddMember("jobStatus", JobStatus, &smithytraits.HTTPQuery{Name: "jobStatus"})
-
-	ListDICOMImportJobsRequest_nextToken = ListDICOMImportJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDICOMImportJobsRequest_maxResults = ListDICOMImportJobsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDICOMImportJobsResponse_jobSummaries = ListDICOMImportJobsResponse.AddMember("jobSummaries", _DICOMImportJobSummaries)
-
-	ListDICOMImportJobsResponse_nextToken = ListDICOMImportJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListImageSetVersionsRequest_datastoreId = ListImageSetVersionsRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	ListImageSetVersionsRequest_imageSetId = ListImageSetVersionsRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	ListImageSetVersionsRequest_nextToken = ListImageSetVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListImageSetVersionsRequest_maxResults = ListImageSetVersionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListImageSetVersionsResponse_imageSetPropertiesList = ListImageSetVersionsResponse.AddMember("imageSetPropertiesList", _ImageSetPropertiesList)
-
-	ListImageSetVersionsResponse_nextToken = ListImageSetVersionsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	SearchImageSetsRequest_datastoreId = SearchImageSetsRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	SearchImageSetsRequest_searchCriteria = SearchImageSetsRequest.AddMember("searchCriteria", SearchCriteria, &smithytraits.HTTPPayload{})
-
-	SearchImageSetsRequest_maxResults = SearchImageSetsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	SearchImageSetsRequest_nextToken = SearchImageSetsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	SearchImageSetsResponse_imageSetsMetadataSummaries = SearchImageSetsResponse.AddMember("imageSetsMetadataSummaries", _ImageSetsMetadataSummaries)
-
-	SearchImageSetsResponse_sort = SearchImageSetsResponse.AddMember("sort", Sort)
-
-	SearchImageSetsResponse_nextToken = SearchImageSetsResponse.AddMember("nextToken", _NextToken)
-
-	StartDICOMImportJobRequest_jobName = StartDICOMImportJobRequest.AddMember("jobName", _JobName)
-
-	StartDICOMImportJobRequest_dataAccessRoleArn = StartDICOMImportJobRequest.AddMember("dataAccessRoleArn", _RoleArn)
-
-	StartDICOMImportJobRequest_clientToken = StartDICOMImportJobRequest.AddMember("clientToken", _ClientToken)
-
-	StartDICOMImportJobRequest_datastoreId = StartDICOMImportJobRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	StartDICOMImportJobRequest_inputS3Uri = StartDICOMImportJobRequest.AddMember("inputS3Uri", _S3Uri)
-
-	StartDICOMImportJobRequest_outputS3Uri = StartDICOMImportJobRequest.AddMember("outputS3Uri", _S3Uri)
-
-	StartDICOMImportJobRequest_inputOwnerAccountId = StartDICOMImportJobRequest.AddMember("inputOwnerAccountId", _AwsAccountId)
-
-	StartDICOMImportJobRequest_importConfiguration = StartDICOMImportJobRequest.AddMember("importConfiguration", ImportConfiguration)
-
-	StartDICOMImportJobResponse_datastoreId = StartDICOMImportJobResponse.AddMember("datastoreId", _DatastoreId)
-
-	StartDICOMImportJobResponse_jobId = StartDICOMImportJobResponse.AddMember("jobId", _JobId)
-
-	StartDICOMImportJobResponse_jobStatus = StartDICOMImportJobResponse.AddMember("jobStatus", JobStatus)
-
-	StartDICOMImportJobResponse_submittedAt = StartDICOMImportJobResponse.AddMember("submittedAt", _Date)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateImageSetMetadataRequest_datastoreId = UpdateImageSetMetadataRequest.AddMember("datastoreId", _DatastoreId, &smithytraits.HTTPLabel{})
-
-	UpdateImageSetMetadataRequest_imageSetId = UpdateImageSetMetadataRequest.AddMember("imageSetId", _ImageSetId, &smithytraits.HTTPLabel{})
-
-	UpdateImageSetMetadataRequest_latestVersionId = UpdateImageSetMetadataRequest.AddMember("latestVersionId", _ImageSetExternalVersionId, &smithytraits.HTTPQuery{Name: "latestVersion"})
-
-	UpdateImageSetMetadataRequest_force = UpdateImageSetMetadataRequest.AddMember("force", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "force"})
-
-	UpdateImageSetMetadataRequest_includeStudyImageSets = UpdateImageSetMetadataRequest.AddMember("includeStudyImageSets", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "includeStudyImageSets"})
-
-	UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates = UpdateImageSetMetadataRequest.AddMember("updateImageSetMetadataUpdates", MetadataUpdates, &smithytraits.HTTPPayload{})
-
-	UpdateImageSetMetadataResponse_datastoreId = UpdateImageSetMetadataResponse.AddMember("datastoreId", _DatastoreId)
-
-	UpdateImageSetMetadataResponse_imageSetId = UpdateImageSetMetadataResponse.AddMember("imageSetId", _ImageSetId)
-
-	UpdateImageSetMetadataResponse_latestVersionId = UpdateImageSetMetadataResponse.AddMember("latestVersionId", _ImageSetExternalVersionId)
-
-	UpdateImageSetMetadataResponse_imageSetState = UpdateImageSetMetadataResponse.AddMember("imageSetState", ImageSetState)
-
-	UpdateImageSetMetadataResponse_imageSetWorkflowStatus = UpdateImageSetMetadataResponse.AddMember("imageSetWorkflowStatus", ImageSetWorkflowStatus)
-
-	UpdateImageSetMetadataResponse_createdAt = UpdateImageSetMetadataResponse.AddMember("createdAt", _Date)
-
-	UpdateImageSetMetadataResponse_updatedAt = UpdateImageSetMetadataResponse.AddMember("updatedAt", _Date)
-
-	UpdateImageSetMetadataResponse_message = UpdateImageSetMetadataResponse.AddMember("message", _Message)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 406}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "force"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "promoteToPrimary"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Encoding"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "datastoreStatus"}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobStatus"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "latestVersion"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeStudyImageSets"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCopyDestinationImageSet = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDestinationImageSet_imageSetId, &sCopyDestinationImageSet_latestVersionId}}
+var mCopyDestinationImageSetProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDestinationImageSetProperties_imageSetId, &sCopyDestinationImageSetProperties_latestVersionId, &sCopyDestinationImageSetProperties_imageSetState, &sCopyDestinationImageSetProperties_imageSetWorkflowStatus, &sCopyDestinationImageSetProperties_createdAt, &sCopyDestinationImageSetProperties_updatedAt, &sCopyDestinationImageSetProperties_imageSetArn}}
+var mCopyImageSetInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyImageSetInformation_sourceImageSet, &sCopyImageSetInformation_destinationImageSet}}
+var mCopySourceImageSetInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sCopySourceImageSetInformation_latestVersionId, &sCopySourceImageSetInformation_DICOMCopies}}
+var mCopySourceImageSetProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCopySourceImageSetProperties_imageSetId, &sCopySourceImageSetProperties_latestVersionId, &sCopySourceImageSetProperties_imageSetState, &sCopySourceImageSetProperties_imageSetWorkflowStatus, &sCopySourceImageSetProperties_createdAt, &sCopySourceImageSetProperties_updatedAt, &sCopySourceImageSetProperties_imageSetArn}}
+var mDatastoreProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDatastoreProperties_datastoreId, &sDatastoreProperties_datastoreName, &sDatastoreProperties_datastoreStatus, &sDatastoreProperties_kmsKeyArn, &sDatastoreProperties_lambdaAuthorizerArn, &sDatastoreProperties_losslessStorageFormat, &sDatastoreProperties_datastoreArn, &sDatastoreProperties_createdAt, &sDatastoreProperties_updatedAt}, Hash: &hDatastoreProperties}
+var mDatastoreStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDatastoreStatus_CREATING, &sDatastoreStatus_CREATE_FAILED, &sDatastoreStatus_ACTIVE, &sDatastoreStatus_DELETING, &sDatastoreStatus_DELETED}}
+var m_DatastoreSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatastoreSummaries_member}}
+var mDatastoreSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatastoreSummary_datastoreId, &sDatastoreSummary_datastoreName, &sDatastoreSummary_datastoreStatus, &sDatastoreSummary_datastoreArn, &sDatastoreSummary_createdAt, &sDatastoreSummary_updatedAt}}
+var mDICOMImportJobProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDICOMImportJobProperties_jobId, &sDICOMImportJobProperties_jobName, &sDICOMImportJobProperties_jobStatus, &sDICOMImportJobProperties_datastoreId, &sDICOMImportJobProperties_dataAccessRoleArn, &sDICOMImportJobProperties_endedAt, &sDICOMImportJobProperties_submittedAt, &sDICOMImportJobProperties_inputS3Uri, &sDICOMImportJobProperties_outputS3Uri, &sDICOMImportJobProperties_message, &sDICOMImportJobProperties_importConfiguration}, Hash: &hDICOMImportJobProperties}
+var m_DICOMImportJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DICOMImportJobSummaries_member}}
+var mDICOMImportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDICOMImportJobSummary_jobId, &sDICOMImportJobSummary_jobName, &sDICOMImportJobSummary_jobStatus, &sDICOMImportJobSummary_datastoreId, &sDICOMImportJobSummary_dataAccessRoleArn, &sDICOMImportJobSummary_endedAt, &sDICOMImportJobSummary_submittedAt, &sDICOMImportJobSummary_message}}
+var mDicomJsonMetadataImportConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDicomJsonMetadataImportConfiguration_dicomMetadataMappings}}
+var mDicomMetadataMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sDicomMetadataMapping_studyInstanceUID, &sDicomMetadataMapping_seriesInstanceUID, &sDicomMetadataMapping_metadataFilePath}}
+var m_DicomMetadataMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DicomMetadataMappings_member}}
+var mDICOMStudyDateAndTime = smithy.SchemaMembers{List: []*smithy.Schema{&sDICOMStudyDateAndTime_DICOMStudyDate, &sDICOMStudyDateAndTime_DICOMStudyTime}}
+var mDICOMTags = smithy.SchemaMembers{List: []*smithy.Schema{&sDICOMTags_DICOMPatientId, &sDICOMTags_DICOMPatientName, &sDICOMTags_DICOMPatientBirthDate, &sDICOMTags_DICOMPatientSex, &sDICOMTags_DICOMStudyInstanceUID, &sDICOMTags_DICOMStudyId, &sDICOMTags_DICOMStudyDescription, &sDICOMTags_DICOMNumberOfStudyRelatedSeries, &sDICOMTags_DICOMNumberOfStudyRelatedInstances, &sDICOMTags_DICOMAccessionNumber, &sDICOMTags_DICOMSeriesInstanceUID, &sDICOMTags_DICOMSeriesModality, &sDICOMTags_DICOMSeriesBodyPart, &sDICOMTags_DICOMSeriesNumber, &sDICOMTags_DICOMStudyDate, &sDICOMTags_DICOMStudyTime}, Hash: &hDICOMTags}
+var mDICOMUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sDICOMUpdates_removableAttributes, &sDICOMUpdates_updatableAttributes}}
+var mImageFrameInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sImageFrameInformation_imageFrameId}}
+var mImageSetProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSetProperties_imageSetId, &sImageSetProperties_versionId, &sImageSetProperties_imageSetState, &sImageSetProperties_ImageSetWorkflowStatus, &sImageSetProperties_createdAt, &sImageSetProperties_updatedAt, &sImageSetProperties_deletedAt, &sImageSetProperties_message, &sImageSetProperties_overrides, &sImageSetProperties_isPrimary}, Hash: &hImageSetProperties}
+var m_ImageSetPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageSetPropertiesList_member}}
+var m_ImageSetsMetadataSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageSetsMetadataSummaries_member}}
+var mImageSetsMetadataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSetsMetadataSummary_imageSetId, &sImageSetsMetadataSummary_version, &sImageSetsMetadataSummary_createdAt, &sImageSetsMetadataSummary_updatedAt, &sImageSetsMetadataSummary_lastAccessedAt, &sImageSetsMetadataSummary_storageTier, &sImageSetsMetadataSummary_DICOMTags, &sImageSetsMetadataSummary_isPrimary}}
+var mImageSetState = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSetState_ACTIVE, &sImageSetState_LOCKED, &sImageSetState_DELETED}}
+var mImageSetWorkflowStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSetWorkflowStatus_CREATED, &sImageSetWorkflowStatus_COPIED, &sImageSetWorkflowStatus_COPYING, &sImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS, &sImageSetWorkflowStatus_COPY_FAILED, &sImageSetWorkflowStatus_UPDATING, &sImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY, &sImageSetWorkflowStatus_UPDATED, &sImageSetWorkflowStatus_UPDATE_FAILED, &sImageSetWorkflowStatus_DELETING, &sImageSetWorkflowStatus_DELETED, &sImageSetWorkflowStatus_IMPORTING, &sImageSetWorkflowStatus_IMPORTED, &sImageSetWorkflowStatus_IMPORT_FAILED}, Hash: &hImageSetWorkflowStatus}
+var mImportConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sImportConfiguration_dicomJsonMetadataImportConfiguration}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUBMITTED, &sJobStatus_IN_PROGRESS, &sJobStatus_COMPLETED, &sJobStatus_FAILED}}
+var mLosslessStorageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sLosslessStorageFormat_HTJ2K, &sLosslessStorageFormat_JPEG_2000_LOSSLESS}}
+var mMetadataCopies = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataCopies_copiableAttributes}}
+var mMetadataUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataUpdates_DICOMUpdates, &sMetadataUpdates_revertToVersionId}}
+var mNotAcceptableException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotAcceptableException_message}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_EQUAL, &sOperator_BETWEEN}}
+var mOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sOverrides_forced}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mSearchByAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchByAttributeValue_DICOMPatientId, &sSearchByAttributeValue_DICOMAccessionNumber, &sSearchByAttributeValue_DICOMStudyId, &sSearchByAttributeValue_DICOMStudyInstanceUID, &sSearchByAttributeValue_DICOMSeriesInstanceUID, &sSearchByAttributeValue_createdAt, &sSearchByAttributeValue_updatedAt, &sSearchByAttributeValue_DICOMStudyDateAndTime, &sSearchByAttributeValue_isPrimary}, Hash: &hSearchByAttributeValue}
+var m_SearchByAttributeValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchByAttributeValues_member}}
+var mSearchCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCriteria_filters, &sSearchCriteria_sort}}
+var mSearchFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFilter_values, &sSearchFilter_operator}}
+var m_SearchFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFilters_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSort_sortOrder, &sSort_sortField}}
+var mSortField = smithy.SchemaMembers{List: []*smithy.Schema{&sSortField_updatedAt, &sSortField_createdAt, &sSortField_DICOMStudyDateAndTime}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASC, &sSortOrder_DESC}}
+var mStorageTier = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageTier_FREQUENT_ACCESS, &sStorageTier_ARCHIVE_INSTANT_ACCESS}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCopyImageSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyImageSetRequest_datastoreId, &sCopyImageSetRequest_sourceImageSetId, &sCopyImageSetRequest_copyImageSetInformation, &sCopyImageSetRequest_force, &sCopyImageSetRequest_promoteToPrimary}}
+var mCopyImageSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyImageSetResponse_datastoreId, &sCopyImageSetResponse_sourceImageSetProperties, &sCopyImageSetResponse_destinationImageSetProperties}}
+var mCreateDatastoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatastoreRequest_datastoreName, &sCreateDatastoreRequest_clientToken, &sCreateDatastoreRequest_tags, &sCreateDatastoreRequest_kmsKeyArn, &sCreateDatastoreRequest_lambdaAuthorizerArn, &sCreateDatastoreRequest_losslessStorageFormat}}
+var mCreateDatastoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatastoreResponse_datastoreId, &sCreateDatastoreResponse_datastoreStatus}}
+var mDeleteDatastoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatastoreRequest_datastoreId}}
+var mDeleteDatastoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatastoreResponse_datastoreId, &sDeleteDatastoreResponse_datastoreStatus}}
+var mDeleteImageSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageSetRequest_datastoreId, &sDeleteImageSetRequest_imageSetId}}
+var mDeleteImageSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImageSetResponse_datastoreId, &sDeleteImageSetResponse_imageSetId, &sDeleteImageSetResponse_imageSetState, &sDeleteImageSetResponse_imageSetWorkflowStatus}}
+var mGetDatastoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatastoreRequest_datastoreId}}
+var mGetDatastoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatastoreResponse_datastoreProperties}}
+var mGetDICOMImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDICOMImportJobRequest_datastoreId, &sGetDICOMImportJobRequest_jobId}}
+var mGetDICOMImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDICOMImportJobResponse_jobProperties}}
+var mGetImageFrameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageFrameRequest_datastoreId, &sGetImageFrameRequest_imageSetId, &sGetImageFrameRequest_imageFrameInformation}}
+var mGetImageFrameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageFrameResponse_imageFrameBlob, &sGetImageFrameResponse_contentType}}
+var mGetImageSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageSetRequest_datastoreId, &sGetImageSetRequest_imageSetId, &sGetImageSetRequest_versionId}}
+var mGetImageSetMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageSetMetadataRequest_datastoreId, &sGetImageSetMetadataRequest_imageSetId, &sGetImageSetMetadataRequest_versionId}}
+var mGetImageSetMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageSetMetadataResponse_imageSetMetadataBlob, &sGetImageSetMetadataResponse_contentType, &sGetImageSetMetadataResponse_contentEncoding}}
+var mGetImageSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImageSetResponse_datastoreId, &sGetImageSetResponse_imageSetId, &sGetImageSetResponse_versionId, &sGetImageSetResponse_imageSetState, &sGetImageSetResponse_imageSetWorkflowStatus, &sGetImageSetResponse_createdAt, &sGetImageSetResponse_updatedAt, &sGetImageSetResponse_deletedAt, &sGetImageSetResponse_message, &sGetImageSetResponse_imageSetArn, &sGetImageSetResponse_overrides, &sGetImageSetResponse_isPrimary, &sGetImageSetResponse_lastAccessedAt, &sGetImageSetResponse_storageTier}, Hash: &hGetImageSetResponse}
+var mListDatastoresRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatastoresRequest_datastoreStatus, &sListDatastoresRequest_nextToken, &sListDatastoresRequest_maxResults}}
+var mListDatastoresResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatastoresResponse_datastoreSummaries, &sListDatastoresResponse_nextToken}}
+var mListDICOMImportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDICOMImportJobsRequest_datastoreId, &sListDICOMImportJobsRequest_jobStatus, &sListDICOMImportJobsRequest_nextToken, &sListDICOMImportJobsRequest_maxResults}}
+var mListDICOMImportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDICOMImportJobsResponse_jobSummaries, &sListDICOMImportJobsResponse_nextToken}}
+var mListImageSetVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListImageSetVersionsRequest_datastoreId, &sListImageSetVersionsRequest_imageSetId, &sListImageSetVersionsRequest_nextToken, &sListImageSetVersionsRequest_maxResults}}
+var mListImageSetVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListImageSetVersionsResponse_imageSetPropertiesList, &sListImageSetVersionsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mSearchImageSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchImageSetsRequest_datastoreId, &sSearchImageSetsRequest_searchCriteria, &sSearchImageSetsRequest_maxResults, &sSearchImageSetsRequest_nextToken}}
+var mSearchImageSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchImageSetsResponse_imageSetsMetadataSummaries, &sSearchImageSetsResponse_sort, &sSearchImageSetsResponse_nextToken}}
+var mStartDICOMImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDICOMImportJobRequest_jobName, &sStartDICOMImportJobRequest_dataAccessRoleArn, &sStartDICOMImportJobRequest_clientToken, &sStartDICOMImportJobRequest_datastoreId, &sStartDICOMImportJobRequest_inputS3Uri, &sStartDICOMImportJobRequest_outputS3Uri, &sStartDICOMImportJobRequest_inputOwnerAccountId, &sStartDICOMImportJobRequest_importConfiguration}}
+var mStartDICOMImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDICOMImportJobResponse_datastoreId, &sStartDICOMImportJobResponse_jobId, &sStartDICOMImportJobResponse_jobStatus, &sStartDICOMImportJobResponse_submittedAt}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateImageSetMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateImageSetMetadataRequest_datastoreId, &sUpdateImageSetMetadataRequest_imageSetId, &sUpdateImageSetMetadataRequest_latestVersionId, &sUpdateImageSetMetadataRequest_force, &sUpdateImageSetMetadataRequest_includeStudyImageSets, &sUpdateImageSetMetadataRequest_updateImageSetMetadataUpdates}}
+var mUpdateImageSetMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateImageSetMetadataResponse_datastoreId, &sUpdateImageSetMetadataResponse_imageSetId, &sUpdateImageSetMetadataResponse_latestVersionId, &sUpdateImageSetMetadataResponse_imageSetState, &sUpdateImageSetMetadataResponse_imageSetWorkflowStatus, &sUpdateImageSetMetadataResponse_createdAt, &sUpdateImageSetMetadataResponse_updatedAt, &sUpdateImageSetMetadataResponse_message}}
+
+var hDatastoreProperties = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 8, 0, 3, 0, 0, 0, 0, 6,
+	0, 7, 0, 0, 0, 9, 4, 0,
+}}
+var hDICOMImportJobProperties = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 10, 5, 0, 6, 2, 0, 0, 0, 0, 9, 1, 0, 0, 0,
+	0, 4, 0, 11, 8, 0, 3, 0,
+}}
+var hDICOMTags = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 6, 13, 7, 0, 11, 0, 0, 2, 12, 3, 10, 15,
+	0, 16, 9, 8, 0, 14, 0, 5,
+}}
+var hImageSetProperties = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 4, 6, 8, 0, 0, 3, 0, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 7, 0, 0, 2, 10, 9,
+}}
+var hImageSetWorkflowStatus = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 10, 5, 4, 0, 12, 0, 0, 14, 0, 0, 13, 11, 6, 0,
+	7, 0, 0, 9, 2, 0, 8, 3,
+}}
+var hSearchByAttributeValue = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 5, 8, 0, 4, 2, 0, 6, 0, 0, 7, 0, 9, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 3, 1, 0, 0,
+}}
+var hGetImageSetResponse = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 3, 12, 0, 0, 0, 9, 5, 0, 0, 10, 13, 0, 0, 0, 7, 0, 2, 6, 11, 14, 0, 8,
+	0, 4, 1, 0, 0, 0, 0, 0,
+}}
+
+var sCopyImageSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageSet, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCopyImageSet})
+var sCreateDatastore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatastore, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateDatastore})
+var sDeleteDatastore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatastore, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDatastore})
+var sDeleteImageSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageSet, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteImageSet})
+var sGetDatastore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatastore, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetDatastore})
+var sGetDICOMImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDICOMImportJob, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetDICOMImportJob})
+var sGetImageFrame = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageFrame, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetImageFrame})
+var sGetImageSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSet, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetImageSet})
+var sGetImageSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSetMetadata, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetImageSetMetadata})
+var sListDatastores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatastores, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListDatastores})
+var sListDICOMImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDICOMImportJobs, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListDICOMImportJobs})
+var sListImageSetVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImageSetVersions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListImageSetVersions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sSearchImageSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchImageSets, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eSearchImageSets})
+var sStartDICOMImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDICOMImportJob, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eStartDICOMImportJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateImageSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageSetMetadata, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eUpdateImageSetMetadata})
+var s_AHIGatewayService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AHIGatewayService, Type: smithy.ShapeTypeService, Ext: &e_AHIGatewayService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_CopiableAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopiableAttributes, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_CopiableAttributes})
+var sCopyDestinationImageSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDestinationImageSet, Members: &mCopyDestinationImageSet, Type: smithy.ShapeTypeStructure, Ext: &eCopyDestinationImageSet})
+var sCopyDestinationImageSet_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eCopyDestinationImageSet_imageSetId})
+var sCopyDestinationImageSet_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eCopyDestinationImageSet_latestVersionId})
+var sCopyDestinationImageSetProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDestinationImageSetProperties, Members: &mCopyDestinationImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &eCopyDestinationImageSetProperties})
+var sCopyDestinationImageSetProperties_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eCopyDestinationImageSetProperties_imageSetId})
+var sCopyDestinationImageSetProperties_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eCopyDestinationImageSetProperties_latestVersionId})
+var sCopyDestinationImageSetProperties_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eCopyDestinationImageSetProperties_imageSetState})
+var sCopyDestinationImageSetProperties_imageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eCopyDestinationImageSetProperties_imageSetWorkflowStatus})
+var sCopyDestinationImageSetProperties_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyDestinationImageSetProperties_createdAt})
+var sCopyDestinationImageSetProperties_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyDestinationImageSetProperties_updatedAt})
+var sCopyDestinationImageSetProperties_imageSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCopyDestinationImageSetProperties_imageSetArn})
+var sCopyImageSetInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageSetInformation, Members: &mCopyImageSetInformation, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetInformation})
+var sCopyImageSetInformation_sourceImageSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceImageSet", ID: &iCopySourceImageSetInformation, Members: &mCopySourceImageSetInformation, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetInformation_sourceImageSet})
+var sCopyImageSetInformation_destinationImageSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationImageSet", ID: &iCopyDestinationImageSet, Members: &mCopyDestinationImageSet, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetInformation_destinationImageSet})
+var sCopySourceImageSetInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopySourceImageSetInformation, Members: &mCopySourceImageSetInformation, Type: smithy.ShapeTypeStructure, Ext: &eCopySourceImageSetInformation})
+var sCopySourceImageSetInformation_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eCopySourceImageSetInformation_latestVersionId})
+var sCopySourceImageSetInformation_DICOMCopies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMCopies", ID: &iMetadataCopies, Members: &mMetadataCopies, Type: smithy.ShapeTypeStructure, Ext: &eCopySourceImageSetInformation_DICOMCopies})
+var sCopySourceImageSetProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopySourceImageSetProperties, Members: &mCopySourceImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &eCopySourceImageSetProperties})
+var sCopySourceImageSetProperties_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eCopySourceImageSetProperties_imageSetId})
+var sCopySourceImageSetProperties_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eCopySourceImageSetProperties_latestVersionId})
+var sCopySourceImageSetProperties_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eCopySourceImageSetProperties_imageSetState})
+var sCopySourceImageSetProperties_imageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eCopySourceImageSetProperties_imageSetWorkflowStatus})
+var sCopySourceImageSetProperties_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eCopySourceImageSetProperties_createdAt})
+var sCopySourceImageSetProperties_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eCopySourceImageSetProperties_updatedAt})
+var sCopySourceImageSetProperties_imageSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCopySourceImageSetProperties_imageSetArn})
+var s_DatastoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &e_DatastoreId})
+var s_DatastoreName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatastoreName, Type: smithy.ShapeTypeString, Ext: &e_DatastoreName})
+var sDatastoreProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatastoreProperties, Members: &mDatastoreProperties, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreProperties})
+var sDatastoreProperties_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDatastoreProperties_datastoreId})
+var sDatastoreProperties_datastoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreName", ID: &i_DatastoreName, Type: smithy.ShapeTypeString, Ext: &eDatastoreProperties_datastoreName})
+var sDatastoreProperties_datastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreStatus", ID: &iDatastoreStatus, Members: &mDatastoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eDatastoreProperties_datastoreStatus})
+var sDatastoreProperties_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eDatastoreProperties_kmsKeyArn})
+var sDatastoreProperties_lambdaAuthorizerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerArn", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &eDatastoreProperties_lambdaAuthorizerArn})
+var sDatastoreProperties_losslessStorageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "losslessStorageFormat", ID: &iLosslessStorageFormat, Members: &mLosslessStorageFormat, Type: smithy.ShapeTypeEnum, Ext: &eDatastoreProperties_losslessStorageFormat})
+var sDatastoreProperties_datastoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDatastoreProperties_datastoreArn})
+var sDatastoreProperties_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatastoreProperties_createdAt})
+var sDatastoreProperties_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatastoreProperties_updatedAt})
+var sDatastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatastoreStatus, Members: &mDatastoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eDatastoreStatus})
+var sDatastoreStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreStatus_CREATING})
+var sDatastoreStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreStatus_CREATE_FAILED})
+var sDatastoreStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreStatus_ACTIVE})
+var sDatastoreStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreStatus_DELETING})
+var sDatastoreStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreStatus_DELETED})
+var s_DatastoreSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatastoreSummaries, Members: &m_DatastoreSummaries, Type: smithy.ShapeTypeList, Ext: &e_DatastoreSummaries})
+var s_DatastoreSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatastoreSummary, Members: &mDatastoreSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DatastoreSummaries_member})
+var sDatastoreSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatastoreSummary, Members: &mDatastoreSummary, Type: smithy.ShapeTypeStructure, Ext: &eDatastoreSummary})
+var sDatastoreSummary_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDatastoreSummary_datastoreId})
+var sDatastoreSummary_datastoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreName", ID: &i_DatastoreName, Type: smithy.ShapeTypeString, Ext: &eDatastoreSummary_datastoreName})
+var sDatastoreSummary_datastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreStatus", ID: &iDatastoreStatus, Members: &mDatastoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eDatastoreSummary_datastoreStatus})
+var sDatastoreSummary_datastoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDatastoreSummary_datastoreArn})
+var sDatastoreSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatastoreSummary_createdAt})
+var sDatastoreSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDatastoreSummary_updatedAt})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var s_DICOMAccessionNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMAccessionNumber, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMAccessionNumber})
+var s_DICOMAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMAttribute, Traits: &t21, Type: smithy.ShapeTypeBlob, Ext: &e_DICOMAttribute})
+var sDICOMImportJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDICOMImportJobProperties, Members: &mDICOMImportJobProperties, Type: smithy.ShapeTypeStructure, Ext: &eDICOMImportJobProperties})
+var sDICOMImportJobProperties_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_jobId})
+var sDICOMImportJobProperties_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_jobName})
+var sDICOMImportJobProperties_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eDICOMImportJobProperties_jobStatus})
+var sDICOMImportJobProperties_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_datastoreId})
+var sDICOMImportJobProperties_dataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAccessRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_dataAccessRoleArn})
+var sDICOMImportJobProperties_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDICOMImportJobProperties_endedAt})
+var sDICOMImportJobProperties_submittedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDICOMImportJobProperties_submittedAt})
+var sDICOMImportJobProperties_inputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_inputS3Uri})
+var sDICOMImportJobProperties_outputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_outputS3Uri})
+var sDICOMImportJobProperties_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobProperties_message})
+var sDICOMImportJobProperties_importConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importConfiguration", ID: &iImportConfiguration, Members: &mImportConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eDICOMImportJobProperties_importConfiguration})
+var s_DICOMImportJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMImportJobSummaries, Members: &m_DICOMImportJobSummaries, Type: smithy.ShapeTypeList, Ext: &e_DICOMImportJobSummaries})
+var s_DICOMImportJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDICOMImportJobSummary, Members: &mDICOMImportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DICOMImportJobSummaries_member})
+var sDICOMImportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDICOMImportJobSummary, Members: &mDICOMImportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eDICOMImportJobSummary})
+var sDICOMImportJobSummary_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobSummary_jobId})
+var sDICOMImportJobSummary_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobSummary_jobName})
+var sDICOMImportJobSummary_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eDICOMImportJobSummary_jobStatus})
+var sDICOMImportJobSummary_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobSummary_datastoreId})
+var sDICOMImportJobSummary_dataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAccessRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobSummary_dataAccessRoleArn})
+var sDICOMImportJobSummary_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDICOMImportJobSummary_endedAt})
+var sDICOMImportJobSummary_submittedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDICOMImportJobSummary_submittedAt})
+var sDICOMImportJobSummary_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDICOMImportJobSummary_message})
+var sDicomJsonMetadataImportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDicomJsonMetadataImportConfiguration, Members: &mDicomJsonMetadataImportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDicomJsonMetadataImportConfiguration})
+var sDicomJsonMetadataImportConfiguration_dicomMetadataMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dicomMetadataMappings", ID: &i_DicomMetadataMappings, Members: &m_DicomMetadataMappings, Type: smithy.ShapeTypeList, Ext: &eDicomJsonMetadataImportConfiguration_dicomMetadataMappings})
+var sDicomMetadataMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDicomMetadataMapping, Members: &mDicomMetadataMapping, Type: smithy.ShapeTypeStructure, Ext: &eDicomMetadataMapping})
+var sDicomMetadataMapping_studyInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "studyInstanceUID", ID: &i_DICOMStudyInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDicomMetadataMapping_studyInstanceUID})
+var sDicomMetadataMapping_seriesInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seriesInstanceUID", ID: &i_DICOMSeriesInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDicomMetadataMapping_seriesInstanceUID})
+var sDicomMetadataMapping_metadataFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataFilePath", ID: &i_MetadataFilePath, Type: smithy.ShapeTypeString, Ext: &eDicomMetadataMapping_metadataFilePath})
+var s_DicomMetadataMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DicomMetadataMappings, Members: &m_DicomMetadataMappings, Type: smithy.ShapeTypeList, Ext: &e_DicomMetadataMappings})
+var s_DicomMetadataMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDicomMetadataMapping, Members: &mDicomMetadataMapping, Type: smithy.ShapeTypeStructure, Ext: &e_DicomMetadataMappings_member})
+var s_DICOMNumberOfStudyRelatedInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMNumberOfStudyRelatedInstances, Type: smithy.ShapeTypeInteger, Ext: &e_DICOMNumberOfStudyRelatedInstances})
+var s_DICOMNumberOfStudyRelatedSeries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMNumberOfStudyRelatedSeries, Type: smithy.ShapeTypeInteger, Ext: &e_DICOMNumberOfStudyRelatedSeries})
+var s_DICOMPatientBirthDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMPatientBirthDate, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMPatientBirthDate})
+var s_DICOMPatientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMPatientId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMPatientId})
+var s_DICOMPatientName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMPatientName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMPatientName})
+var s_DICOMPatientSex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMPatientSex, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMPatientSex})
+var s_DICOMSeriesBodyPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMSeriesBodyPart, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMSeriesBodyPart})
+var s_DICOMSeriesInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMSeriesInstanceUID, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMSeriesInstanceUID})
+var s_DICOMSeriesModality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMSeriesModality, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMSeriesModality})
+var s_DICOMSeriesNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMSeriesNumber, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &e_DICOMSeriesNumber})
+var s_DICOMStudyDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMStudyDate, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMStudyDate})
+var sDICOMStudyDateAndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDICOMStudyDateAndTime, Members: &mDICOMStudyDateAndTime, Type: smithy.ShapeTypeStructure, Ext: &eDICOMStudyDateAndTime})
+var sDICOMStudyDateAndTime_DICOMStudyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyDate", ID: &i_DICOMStudyDate, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMStudyDateAndTime_DICOMStudyDate})
+var sDICOMStudyDateAndTime_DICOMStudyTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyTime", ID: &i_DICOMStudyTime, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMStudyDateAndTime_DICOMStudyTime})
+var s_DICOMStudyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMStudyDescription, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMStudyDescription})
+var s_DICOMStudyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMStudyId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMStudyId})
+var s_DICOMStudyInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMStudyInstanceUID, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMStudyInstanceUID})
+var s_DICOMStudyTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DICOMStudyTime, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DICOMStudyTime})
+var sDICOMTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDICOMTags, Members: &mDICOMTags, Type: smithy.ShapeTypeStructure, Ext: &eDICOMTags})
+var sDICOMTags_DICOMPatientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMPatientId", ID: &i_DICOMPatientId, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMPatientId})
+var sDICOMTags_DICOMPatientName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMPatientName", ID: &i_DICOMPatientName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMPatientName})
+var sDICOMTags_DICOMPatientBirthDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMPatientBirthDate", ID: &i_DICOMPatientBirthDate, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMPatientBirthDate})
+var sDICOMTags_DICOMPatientSex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMPatientSex", ID: &i_DICOMPatientSex, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMPatientSex})
+var sDICOMTags_DICOMStudyInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyInstanceUID", ID: &i_DICOMStudyInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMStudyInstanceUID})
+var sDICOMTags_DICOMStudyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyId", ID: &i_DICOMStudyId, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMStudyId})
+var sDICOMTags_DICOMStudyDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyDescription", ID: &i_DICOMStudyDescription, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMStudyDescription})
+var sDICOMTags_DICOMNumberOfStudyRelatedSeries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMNumberOfStudyRelatedSeries", ID: &i_DICOMNumberOfStudyRelatedSeries, Type: smithy.ShapeTypeInteger, Ext: &eDICOMTags_DICOMNumberOfStudyRelatedSeries})
+var sDICOMTags_DICOMNumberOfStudyRelatedInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMNumberOfStudyRelatedInstances", ID: &i_DICOMNumberOfStudyRelatedInstances, Type: smithy.ShapeTypeInteger, Ext: &eDICOMTags_DICOMNumberOfStudyRelatedInstances})
+var sDICOMTags_DICOMAccessionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMAccessionNumber", ID: &i_DICOMAccessionNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMAccessionNumber})
+var sDICOMTags_DICOMSeriesInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMSeriesInstanceUID", ID: &i_DICOMSeriesInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMSeriesInstanceUID})
+var sDICOMTags_DICOMSeriesModality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMSeriesModality", ID: &i_DICOMSeriesModality, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMSeriesModality})
+var sDICOMTags_DICOMSeriesBodyPart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMSeriesBodyPart", ID: &i_DICOMSeriesBodyPart, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMSeriesBodyPart})
+var sDICOMTags_DICOMSeriesNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMSeriesNumber", ID: &i_DICOMSeriesNumber, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &eDICOMTags_DICOMSeriesNumber})
+var sDICOMTags_DICOMStudyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyDate", ID: &i_DICOMStudyDate, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMStudyDate})
+var sDICOMTags_DICOMStudyTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyTime", ID: &i_DICOMStudyTime, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDICOMTags_DICOMStudyTime})
+var sDICOMUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDICOMUpdates, Members: &mDICOMUpdates, Type: smithy.ShapeTypeStructure, Ext: &eDICOMUpdates})
+var sDICOMUpdates_removableAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removableAttributes", ID: &i_DICOMAttribute, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &eDICOMUpdates_removableAttributes})
+var sDICOMUpdates_updatableAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatableAttributes", ID: &i_DICOMAttribute, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &eDICOMUpdates_updatableAttributes})
+var s_ImageFrameId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageFrameId, Type: smithy.ShapeTypeString, Ext: &e_ImageFrameId})
+var sImageFrameInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageFrameInformation, Members: &mImageFrameInformation, Type: smithy.ShapeTypeStructure, Ext: &eImageFrameInformation})
+var sImageFrameInformation_imageFrameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageFrameId", ID: &i_ImageFrameId, Type: smithy.ShapeTypeString, Ext: &eImageFrameInformation_imageFrameId})
+var s_ImageSetExternalVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &e_ImageSetExternalVersionId})
+var s_ImageSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &e_ImageSetId})
+var s_ImageSetMetadataBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSetMetadataBlob, Traits: &t23, Type: smithy.ShapeTypeBlob, Ext: &e_ImageSetMetadataBlob})
+var sImageSetProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSetProperties, Members: &mImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &eImageSetProperties})
+var sImageSetProperties_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eImageSetProperties_imageSetId})
+var sImageSetProperties_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eImageSetProperties_versionId})
+var sImageSetProperties_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eImageSetProperties_imageSetState})
+var sImageSetProperties_ImageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eImageSetProperties_ImageSetWorkflowStatus})
+var sImageSetProperties_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetProperties_createdAt})
+var sImageSetProperties_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetProperties_updatedAt})
+var sImageSetProperties_deletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetProperties_deletedAt})
+var sImageSetProperties_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eImageSetProperties_message})
+var sImageSetProperties_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &iOverrides, Members: &mOverrides, Type: smithy.ShapeTypeStructure, Ext: &eImageSetProperties_overrides})
+var sImageSetProperties_isPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimary", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eImageSetProperties_isPrimary})
+var s_ImageSetPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSetPropertiesList, Members: &m_ImageSetPropertiesList, Type: smithy.ShapeTypeList, Ext: &e_ImageSetPropertiesList})
+var s_ImageSetPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImageSetProperties, Members: &mImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &e_ImageSetPropertiesList_member})
+var s_ImageSetsMetadataSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSetsMetadataSummaries, Members: &m_ImageSetsMetadataSummaries, Type: smithy.ShapeTypeList, Ext: &e_ImageSetsMetadataSummaries})
+var s_ImageSetsMetadataSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImageSetsMetadataSummary, Members: &mImageSetsMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ImageSetsMetadataSummaries_member})
+var sImageSetsMetadataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSetsMetadataSummary, Members: &mImageSetsMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eImageSetsMetadataSummary})
+var sImageSetsMetadataSummary_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eImageSetsMetadataSummary_imageSetId})
+var sImageSetsMetadataSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eImageSetsMetadataSummary_version})
+var sImageSetsMetadataSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetsMetadataSummary_createdAt})
+var sImageSetsMetadataSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetsMetadataSummary_updatedAt})
+var sImageSetsMetadataSummary_lastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAccessedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eImageSetsMetadataSummary_lastAccessedAt})
+var sImageSetsMetadataSummary_storageTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageTier", ID: &iStorageTier, Members: &mStorageTier, Type: smithy.ShapeTypeEnum, Ext: &eImageSetsMetadataSummary_storageTier})
+var sImageSetsMetadataSummary_DICOMTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMTags", ID: &iDICOMTags, Members: &mDICOMTags, Type: smithy.ShapeTypeStructure, Ext: &eImageSetsMetadataSummary_DICOMTags})
+var sImageSetsMetadataSummary_isPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimary", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eImageSetsMetadataSummary_isPrimary})
+var sImageSetState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eImageSetState})
+var sImageSetState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetState_ACTIVE})
+var sImageSetState_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetState_LOCKED})
+var sImageSetState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetState_DELETED})
+var sImageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eImageSetWorkflowStatus})
+var sImageSetWorkflowStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_CREATED})
+var sImageSetWorkflowStatus_COPIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_COPIED})
+var sImageSetWorkflowStatus_COPYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_COPYING})
+var sImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPYING_WITH_READ_ONLY_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS})
+var sImageSetWorkflowStatus_COPY_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPY_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_COPY_FAILED})
+var sImageSetWorkflowStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_UPDATING})
+var sImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING_FOR_STUDY_CONSISTENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY})
+var sImageSetWorkflowStatus_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_UPDATED})
+var sImageSetWorkflowStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_UPDATE_FAILED})
+var sImageSetWorkflowStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_DELETING})
+var sImageSetWorkflowStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_DELETED})
+var sImageSetWorkflowStatus_IMPORTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_IMPORTING})
+var sImageSetWorkflowStatus_IMPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_IMPORTED})
+var sImageSetWorkflowStatus_IMPORT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImageSetWorkflowStatus_IMPORT_FAILED})
+var sImportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportConfiguration, Members: &mImportConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eImportConfiguration})
+var sImportConfiguration_dicomJsonMetadataImportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dicomJsonMetadataImportConfiguration", ID: &iDicomJsonMetadataImportConfiguration, Members: &mDicomJsonMetadataImportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eImportConfiguration_dicomJsonMetadataImportConfiguration})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &e_JobName})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var sJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUBMITTED})
+var sJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_IN_PROGRESS})
+var sJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_COMPLETED})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_FAILED})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaArn})
+var sLosslessStorageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLosslessStorageFormat, Members: &mLosslessStorageFormat, Type: smithy.ShapeTypeEnum, Ext: &eLosslessStorageFormat})
+var sLosslessStorageFormat_HTJ2K = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTJ2K", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLosslessStorageFormat_HTJ2K})
+var sLosslessStorageFormat_JPEG_2000_LOSSLESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG_2000_LOSSLESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLosslessStorageFormat_JPEG_2000_LOSSLESS})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sMetadataCopies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataCopies, Members: &mMetadataCopies, Type: smithy.ShapeTypeStructure, Ext: &eMetadataCopies})
+var sMetadataCopies_copiableAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copiableAttributes", ID: &i_CopiableAttributes, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eMetadataCopies_copiableAttributes})
+var s_MetadataFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataFilePath, Type: smithy.ShapeTypeString, Ext: &e_MetadataFilePath})
+var sMetadataUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataUpdates, Members: &mMetadataUpdates, Type: smithy.ShapeTypeUnion, Ext: &eMetadataUpdates})
+var sMetadataUpdates_DICOMUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMUpdates", ID: &iDICOMUpdates, Members: &mDICOMUpdates, Type: smithy.ShapeTypeStructure, Ext: &eMetadataUpdates_DICOMUpdates})
+var sMetadataUpdates_revertToVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revertToVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eMetadataUpdates_revertToVersionId})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotAcceptableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAcceptableException, Members: &mNotAcceptableException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eNotAcceptableException})
+var sNotAcceptableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotAcceptableException_message})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eOperator})
+var sOperator_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_EQUAL})
+var sOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_BETWEEN})
+var sOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrides, Members: &mOverrides, Type: smithy.ShapeTypeStructure, Ext: &eOverrides})
+var sOverrides_forced = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forced", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eOverrides_forced})
+var s_PayloadBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PayloadBlob, Traits: &t23, Type: smithy.ShapeTypeBlob, Ext: &e_PayloadBlob})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var sSearchByAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchByAttributeValue, Members: &mSearchByAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eSearchByAttributeValue})
+var sSearchByAttributeValue_DICOMPatientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMPatientId", ID: &i_DICOMPatientId, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eSearchByAttributeValue_DICOMPatientId})
+var sSearchByAttributeValue_DICOMAccessionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMAccessionNumber", ID: &i_DICOMAccessionNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eSearchByAttributeValue_DICOMAccessionNumber})
+var sSearchByAttributeValue_DICOMStudyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyId", ID: &i_DICOMStudyId, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eSearchByAttributeValue_DICOMStudyId})
+var sSearchByAttributeValue_DICOMStudyInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyInstanceUID", ID: &i_DICOMStudyInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eSearchByAttributeValue_DICOMStudyInstanceUID})
+var sSearchByAttributeValue_DICOMSeriesInstanceUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMSeriesInstanceUID", ID: &i_DICOMSeriesInstanceUID, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eSearchByAttributeValue_DICOMSeriesInstanceUID})
+var sSearchByAttributeValue_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eSearchByAttributeValue_createdAt})
+var sSearchByAttributeValue_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eSearchByAttributeValue_updatedAt})
+var sSearchByAttributeValue_DICOMStudyDateAndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyDateAndTime", ID: &iDICOMStudyDateAndTime, Members: &mDICOMStudyDateAndTime, Type: smithy.ShapeTypeStructure, Ext: &eSearchByAttributeValue_DICOMStudyDateAndTime})
+var sSearchByAttributeValue_isPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimary", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSearchByAttributeValue_isPrimary})
+var s_SearchByAttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchByAttributeValues, Members: &m_SearchByAttributeValues, Type: smithy.ShapeTypeList, Ext: &e_SearchByAttributeValues})
+var s_SearchByAttributeValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchByAttributeValue, Members: &mSearchByAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_SearchByAttributeValues_member})
+var sSearchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCriteria, Members: &mSearchCriteria, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eSearchCriteria})
+var sSearchCriteria_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchFilters, Members: &m_SearchFilters, Type: smithy.ShapeTypeList, Ext: &eSearchCriteria_filters})
+var sSearchCriteria_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure, Ext: &eSearchCriteria_sort})
+var sSearchFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilter})
+var sSearchFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_SearchByAttributeValues, Members: &m_SearchByAttributeValues, Type: smithy.ShapeTypeList, Ext: &eSearchFilter_values})
+var sSearchFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eSearchFilter_operator})
+var s_SearchFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilters, Members: &m_SearchFilters, Type: smithy.ShapeTypeList, Ext: &e_SearchFilters})
+var s_SearchFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchFilters_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure, Ext: &eSort})
+var sSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSort_sortOrder})
+var sSort_sortField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortField", ID: &iSortField, Members: &mSortField, Type: smithy.ShapeTypeEnum, Ext: &eSort_sortField})
+var sSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortField, Members: &mSortField, Type: smithy.ShapeTypeEnum, Ext: &eSortField})
+var sSortField_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortField_updatedAt})
+var sSortField_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortField_createdAt})
+var sSortField_DICOMStudyDateAndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICOMStudyDateAndTime", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortField_DICOMStudyDateAndTime})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASC})
+var sSortOrder_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESC})
+var sStorageTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageTier, Members: &mStorageTier, Type: smithy.ShapeTypeEnum, Ext: &eStorageTier})
+var sStorageTier_FREQUENT_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREQUENT_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageTier_FREQUENT_ACCESS})
+var sStorageTier_ARCHIVE_INSTANT_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVE_INSTANT_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageTier_ARCHIVE_INSTANT_ACCESS})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCopyImageSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageSetRequest, Members: &mCopyImageSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetRequest})
+var sCopyImageSetRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCopyImageSetRequest_datastoreId})
+var sCopyImageSetRequest_sourceImageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceImageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCopyImageSetRequest_sourceImageSetId})
+var sCopyImageSetRequest_copyImageSetInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyImageSetInformation", ID: &iCopyImageSetInformation, Members: &mCopyImageSetInformation, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetRequest_copyImageSetInformation})
+var sCopyImageSetRequest_force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "force", ID: &pBoolean, Traits: &t31, Type: smithy.ShapeTypeBoolean, Ext: &eCopyImageSetRequest_force})
+var sCopyImageSetRequest_promoteToPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promoteToPrimary", ID: &pBoolean, Traits: &t32, Type: smithy.ShapeTypeBoolean, Ext: &eCopyImageSetRequest_promoteToPrimary})
+var sCopyImageSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyImageSetResponse, Members: &mCopyImageSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetResponse})
+var sCopyImageSetResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eCopyImageSetResponse_datastoreId})
+var sCopyImageSetResponse_sourceImageSetProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceImageSetProperties", ID: &iCopySourceImageSetProperties, Members: &mCopySourceImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetResponse_sourceImageSetProperties})
+var sCopyImageSetResponse_destinationImageSetProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationImageSetProperties", ID: &iCopyDestinationImageSetProperties, Members: &mCopyDestinationImageSetProperties, Type: smithy.ShapeTypeStructure, Ext: &eCopyImageSetResponse_destinationImageSetProperties})
+var sCreateDatastoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatastoreRequest, Members: &mCreateDatastoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatastoreRequest})
+var sCreateDatastoreRequest_datastoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreName", ID: &i_DatastoreName, Type: smithy.ShapeTypeString, Ext: &eCreateDatastoreRequest_datastoreName})
+var sCreateDatastoreRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateDatastoreRequest_clientToken})
+var sCreateDatastoreRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDatastoreRequest_tags})
+var sCreateDatastoreRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateDatastoreRequest_kmsKeyArn})
+var sCreateDatastoreRequest_lambdaAuthorizerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaAuthorizerArn", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &eCreateDatastoreRequest_lambdaAuthorizerArn})
+var sCreateDatastoreRequest_losslessStorageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "losslessStorageFormat", ID: &iLosslessStorageFormat, Members: &mLosslessStorageFormat, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatastoreRequest_losslessStorageFormat})
+var sCreateDatastoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatastoreResponse, Members: &mCreateDatastoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatastoreResponse})
+var sCreateDatastoreResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eCreateDatastoreResponse_datastoreId})
+var sCreateDatastoreResponse_datastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreStatus", ID: &iDatastoreStatus, Members: &mDatastoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatastoreResponse_datastoreStatus})
+var sDeleteDatastoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatastoreRequest, Members: &mDeleteDatastoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatastoreRequest})
+var sDeleteDatastoreRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteDatastoreRequest_datastoreId})
+var sDeleteDatastoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatastoreResponse, Members: &mDeleteDatastoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatastoreResponse})
+var sDeleteDatastoreResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteDatastoreResponse_datastoreId})
+var sDeleteDatastoreResponse_datastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreStatus", ID: &iDatastoreStatus, Members: &mDatastoreStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteDatastoreResponse_datastoreStatus})
+var sDeleteImageSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageSetRequest, Members: &mDeleteImageSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageSetRequest})
+var sDeleteImageSetRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteImageSetRequest_datastoreId})
+var sDeleteImageSetRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteImageSetRequest_imageSetId})
+var sDeleteImageSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImageSetResponse, Members: &mDeleteImageSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImageSetResponse})
+var sDeleteImageSetResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteImageSetResponse_datastoreId})
+var sDeleteImageSetResponse_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eDeleteImageSetResponse_imageSetId})
+var sDeleteImageSetResponse_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eDeleteImageSetResponse_imageSetState})
+var sDeleteImageSetResponse_imageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteImageSetResponse_imageSetWorkflowStatus})
+var sGetDatastoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatastoreRequest, Members: &mGetDatastoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDatastoreRequest})
+var sGetDatastoreRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetDatastoreRequest_datastoreId})
+var sGetDatastoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatastoreResponse, Members: &mGetDatastoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDatastoreResponse})
+var sGetDatastoreResponse_datastoreProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreProperties", ID: &iDatastoreProperties, Members: &mDatastoreProperties, Type: smithy.ShapeTypeStructure, Ext: &eGetDatastoreResponse_datastoreProperties})
+var sGetDICOMImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDICOMImportJobRequest, Members: &mGetDICOMImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDICOMImportJobRequest})
+var sGetDICOMImportJobRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetDICOMImportJobRequest_datastoreId})
+var sGetDICOMImportJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetDICOMImportJobRequest_jobId})
+var sGetDICOMImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDICOMImportJobResponse, Members: &mGetDICOMImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDICOMImportJobResponse})
+var sGetDICOMImportJobResponse_jobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobProperties", ID: &iDICOMImportJobProperties, Members: &mDICOMImportJobProperties, Type: smithy.ShapeTypeStructure, Ext: &eGetDICOMImportJobResponse_jobProperties})
+var sGetImageFrameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageFrameRequest, Members: &mGetImageFrameRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetImageFrameRequest})
+var sGetImageFrameRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageFrameRequest_datastoreId})
+var sGetImageFrameRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageFrameRequest_imageSetId})
+var sGetImageFrameRequest_imageFrameInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageFrameInformation", ID: &iImageFrameInformation, Members: &mImageFrameInformation, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eGetImageFrameRequest_imageFrameInformation})
+var sGetImageFrameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageFrameResponse, Members: &mGetImageFrameResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetImageFrameResponse})
+var sGetImageFrameResponse_imageFrameBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageFrameBlob", ID: &i_PayloadBlob, Traits: &t33, Type: smithy.ShapeTypeBlob, Ext: &eGetImageFrameResponse_imageFrameBlob})
+var sGetImageFrameResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetImageFrameResponse_contentType})
+var sGetImageSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSetRequest, Members: &mGetImageSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetImageSetRequest})
+var sGetImageSetRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageSetRequest_datastoreId})
+var sGetImageSetRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageSetRequest_imageSetId})
+var sGetImageSetRequest_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_ImageSetExternalVersionId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetImageSetRequest_versionId})
+var sGetImageSetMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSetMetadataRequest, Members: &mGetImageSetMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetImageSetMetadataRequest})
+var sGetImageSetMetadataRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageSetMetadataRequest_datastoreId})
+var sGetImageSetMetadataRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetImageSetMetadataRequest_imageSetId})
+var sGetImageSetMetadataRequest_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_ImageSetExternalVersionId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetImageSetMetadataRequest_versionId})
+var sGetImageSetMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSetMetadataResponse, Members: &mGetImageSetMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetImageSetMetadataResponse})
+var sGetImageSetMetadataResponse_imageSetMetadataBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetMetadataBlob", ID: &i_ImageSetMetadataBlob, Traits: &t33, Type: smithy.ShapeTypeBlob, Ext: &eGetImageSetMetadataResponse_imageSetMetadataBlob})
+var sGetImageSetMetadataResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetImageSetMetadataResponse_contentType})
+var sGetImageSetMetadataResponse_contentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentEncoding", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetImageSetMetadataResponse_contentEncoding})
+var sGetImageSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImageSetResponse, Members: &mGetImageSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetImageSetResponse})
+var sGetImageSetResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eGetImageSetResponse_datastoreId})
+var sGetImageSetResponse_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eGetImageSetResponse_imageSetId})
+var sGetImageSetResponse_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eGetImageSetResponse_versionId})
+var sGetImageSetResponse_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eGetImageSetResponse_imageSetState})
+var sGetImageSetResponse_imageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetImageSetResponse_imageSetWorkflowStatus})
+var sGetImageSetResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetImageSetResponse_createdAt})
+var sGetImageSetResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetImageSetResponse_updatedAt})
+var sGetImageSetResponse_deletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetImageSetResponse_deletedAt})
+var sGetImageSetResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eGetImageSetResponse_message})
+var sGetImageSetResponse_imageSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetImageSetResponse_imageSetArn})
+var sGetImageSetResponse_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &iOverrides, Members: &mOverrides, Type: smithy.ShapeTypeStructure, Ext: &eGetImageSetResponse_overrides})
+var sGetImageSetResponse_isPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimary", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetImageSetResponse_isPrimary})
+var sGetImageSetResponse_lastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAccessedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetImageSetResponse_lastAccessedAt})
+var sGetImageSetResponse_storageTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageTier", ID: &iStorageTier, Members: &mStorageTier, Type: smithy.ShapeTypeEnum, Ext: &eGetImageSetResponse_storageTier})
+var sListDatastoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatastoresRequest, Members: &mListDatastoresRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatastoresRequest})
+var sListDatastoresRequest_datastoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreStatus", ID: &iDatastoreStatus, Members: &mDatastoreStatus, Traits: &t37, Type: smithy.ShapeTypeEnum, Ext: &eListDatastoresRequest_datastoreStatus})
+var sListDatastoresRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListDatastoresRequest_nextToken})
+var sListDatastoresRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListDatastoresRequest_maxResults})
+var sListDatastoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatastoresResponse, Members: &mListDatastoresResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatastoresResponse})
+var sListDatastoresResponse_datastoreSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreSummaries", ID: &i_DatastoreSummaries, Members: &m_DatastoreSummaries, Type: smithy.ShapeTypeList, Ext: &eListDatastoresResponse_datastoreSummaries})
+var sListDatastoresResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatastoresResponse_nextToken})
+var sListDICOMImportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDICOMImportJobsRequest, Members: &mListDICOMImportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDICOMImportJobsRequest})
+var sListDICOMImportJobsRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListDICOMImportJobsRequest_datastoreId})
+var sListDICOMImportJobsRequest_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eListDICOMImportJobsRequest_jobStatus})
+var sListDICOMImportJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListDICOMImportJobsRequest_nextToken})
+var sListDICOMImportJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListDICOMImportJobsRequest_maxResults})
+var sListDICOMImportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDICOMImportJobsResponse, Members: &mListDICOMImportJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDICOMImportJobsResponse})
+var sListDICOMImportJobsResponse_jobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobSummaries", ID: &i_DICOMImportJobSummaries, Members: &m_DICOMImportJobSummaries, Type: smithy.ShapeTypeList, Ext: &eListDICOMImportJobsResponse_jobSummaries})
+var sListDICOMImportJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDICOMImportJobsResponse_nextToken})
+var sListImageSetVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImageSetVersionsRequest, Members: &mListImageSetVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListImageSetVersionsRequest})
+var sListImageSetVersionsRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListImageSetVersionsRequest_datastoreId})
+var sListImageSetVersionsRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListImageSetVersionsRequest_imageSetId})
+var sListImageSetVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListImageSetVersionsRequest_nextToken})
+var sListImageSetVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListImageSetVersionsRequest_maxResults})
+var sListImageSetVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImageSetVersionsResponse, Members: &mListImageSetVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListImageSetVersionsResponse})
+var sListImageSetVersionsResponse_imageSetPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetPropertiesList", ID: &i_ImageSetPropertiesList, Members: &m_ImageSetPropertiesList, Type: smithy.ShapeTypeList, Ext: &eListImageSetVersionsResponse_imageSetPropertiesList})
+var sListImageSetVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListImageSetVersionsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sSearchImageSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchImageSetsRequest, Members: &mSearchImageSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchImageSetsRequest})
+var sSearchImageSetsRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eSearchImageSetsRequest_datastoreId})
+var sSearchImageSetsRequest_searchCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchCriteria", ID: &iSearchCriteria, Members: &mSearchCriteria, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eSearchImageSetsRequest_searchCriteria})
+var sSearchImageSetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eSearchImageSetsRequest_maxResults})
+var sSearchImageSetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eSearchImageSetsRequest_nextToken})
+var sSearchImageSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchImageSetsResponse, Members: &mSearchImageSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchImageSetsResponse})
+var sSearchImageSetsResponse_imageSetsMetadataSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetsMetadataSummaries", ID: &i_ImageSetsMetadataSummaries, Members: &m_ImageSetsMetadataSummaries, Type: smithy.ShapeTypeList, Ext: &eSearchImageSetsResponse_imageSetsMetadataSummaries})
+var sSearchImageSetsResponse_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure, Ext: &eSearchImageSetsResponse_sort})
+var sSearchImageSetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchImageSetsResponse_nextToken})
+var sStartDICOMImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDICOMImportJobRequest, Members: &mStartDICOMImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDICOMImportJobRequest})
+var sStartDICOMImportJobRequest_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_jobName})
+var sStartDICOMImportJobRequest_dataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAccessRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_dataAccessRoleArn})
+var sStartDICOMImportJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_clientToken})
+var sStartDICOMImportJobRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_datastoreId})
+var sStartDICOMImportJobRequest_inputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_inputS3Uri})
+var sStartDICOMImportJobRequest_outputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_outputS3Uri})
+var sStartDICOMImportJobRequest_inputOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputOwnerAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobRequest_inputOwnerAccountId})
+var sStartDICOMImportJobRequest_importConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importConfiguration", ID: &iImportConfiguration, Members: &mImportConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eStartDICOMImportJobRequest_importConfiguration})
+var sStartDICOMImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDICOMImportJobResponse, Members: &mStartDICOMImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartDICOMImportJobResponse})
+var sStartDICOMImportJobResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobResponse_datastoreId})
+var sStartDICOMImportJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStartDICOMImportJobResponse_jobId})
+var sStartDICOMImportJobResponse_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartDICOMImportJobResponse_jobStatus})
+var sStartDICOMImportJobResponse_submittedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eStartDICOMImportJobResponse_submittedAt})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t42, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateImageSetMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageSetMetadataRequest, Members: &mUpdateImageSetMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateImageSetMetadataRequest})
+var sUpdateImageSetMetadataRequest_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataRequest_datastoreId})
+var sUpdateImageSetMetadataRequest_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataRequest_imageSetId})
+var sUpdateImageSetMetadataRequest_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataRequest_latestVersionId})
+var sUpdateImageSetMetadataRequest_force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "force", ID: &pBoolean, Traits: &t31, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateImageSetMetadataRequest_force})
+var sUpdateImageSetMetadataRequest_includeStudyImageSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeStudyImageSets", ID: &pBoolean, Traits: &t44, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateImageSetMetadataRequest_includeStudyImageSets})
+var sUpdateImageSetMetadataRequest_updateImageSetMetadataUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateImageSetMetadataUpdates", ID: &iMetadataUpdates, Members: &mMetadataUpdates, Traits: &t30, Type: smithy.ShapeTypeUnion, Ext: &eUpdateImageSetMetadataRequest_updateImageSetMetadataUpdates})
+var sUpdateImageSetMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageSetMetadataResponse, Members: &mUpdateImageSetMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateImageSetMetadataResponse})
+var sUpdateImageSetMetadataResponse_datastoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datastoreId", ID: &i_DatastoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataResponse_datastoreId})
+var sUpdateImageSetMetadataResponse_imageSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetId", ID: &i_ImageSetId, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataResponse_imageSetId})
+var sUpdateImageSetMetadataResponse_latestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersionId", ID: &i_ImageSetExternalVersionId, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataResponse_latestVersionId})
+var sUpdateImageSetMetadataResponse_imageSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetState", ID: &iImageSetState, Members: &mImageSetState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateImageSetMetadataResponse_imageSetState})
+var sUpdateImageSetMetadataResponse_imageSetWorkflowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageSetWorkflowStatus", ID: &iImageSetWorkflowStatus, Members: &mImageSetWorkflowStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateImageSetMetadataResponse_imageSetWorkflowStatus})
+var sUpdateImageSetMetadataResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateImageSetMetadataResponse_createdAt})
+var sUpdateImageSetMetadataResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateImageSetMetadataResponse_updatedAt})
+var sUpdateImageSetMetadataResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eUpdateImageSetMetadataResponse_message})
+
+var CopyImageSet = &sCopyImageSet
+
+var CreateDatastore = &sCreateDatastore
+
+var DeleteDatastore = &sDeleteDatastore
+
+var DeleteImageSet = &sDeleteImageSet
+
+var GetDatastore = &sGetDatastore
+
+var GetDICOMImportJob = &sGetDICOMImportJob
+
+var GetImageFrame = &sGetImageFrame
+
+var GetImageSet = &sGetImageSet
+
+var GetImageSetMetadata = &sGetImageSetMetadata
+
+var ListDatastores = &sListDatastores
+
+var ListDICOMImportJobs = &sListDICOMImportJobs
+
+var ListImageSetVersions = &sListImageSetVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var SearchImageSets = &sSearchImageSets
+
+var StartDICOMImportJob = &sStartDICOMImportJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateImageSetMetadata = &sUpdateImageSetMetadata
+
+var _AHIGatewayService = &s_AHIGatewayService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Arn = &s_Arn
+
+var _AwsAccountId = &s_AwsAccountId
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _CopiableAttributes = &s_CopiableAttributes
+
+var CopyDestinationImageSet = &sCopyDestinationImageSet
+var CopyDestinationImageSet_imageSetId = &sCopyDestinationImageSet_imageSetId
+var CopyDestinationImageSet_latestVersionId = &sCopyDestinationImageSet_latestVersionId
+
+var CopyDestinationImageSetProperties = &sCopyDestinationImageSetProperties
+var CopyDestinationImageSetProperties_imageSetId = &sCopyDestinationImageSetProperties_imageSetId
+var CopyDestinationImageSetProperties_latestVersionId = &sCopyDestinationImageSetProperties_latestVersionId
+var CopyDestinationImageSetProperties_imageSetState = &sCopyDestinationImageSetProperties_imageSetState
+var CopyDestinationImageSetProperties_imageSetWorkflowStatus = &sCopyDestinationImageSetProperties_imageSetWorkflowStatus
+var CopyDestinationImageSetProperties_createdAt = &sCopyDestinationImageSetProperties_createdAt
+var CopyDestinationImageSetProperties_updatedAt = &sCopyDestinationImageSetProperties_updatedAt
+var CopyDestinationImageSetProperties_imageSetArn = &sCopyDestinationImageSetProperties_imageSetArn
+
+var CopyImageSetInformation = &sCopyImageSetInformation
+var CopyImageSetInformation_sourceImageSet = &sCopyImageSetInformation_sourceImageSet
+var CopyImageSetInformation_destinationImageSet = &sCopyImageSetInformation_destinationImageSet
+
+var CopySourceImageSetInformation = &sCopySourceImageSetInformation
+var CopySourceImageSetInformation_latestVersionId = &sCopySourceImageSetInformation_latestVersionId
+var CopySourceImageSetInformation_DICOMCopies = &sCopySourceImageSetInformation_DICOMCopies
+
+var CopySourceImageSetProperties = &sCopySourceImageSetProperties
+var CopySourceImageSetProperties_imageSetId = &sCopySourceImageSetProperties_imageSetId
+var CopySourceImageSetProperties_latestVersionId = &sCopySourceImageSetProperties_latestVersionId
+var CopySourceImageSetProperties_imageSetState = &sCopySourceImageSetProperties_imageSetState
+var CopySourceImageSetProperties_imageSetWorkflowStatus = &sCopySourceImageSetProperties_imageSetWorkflowStatus
+var CopySourceImageSetProperties_createdAt = &sCopySourceImageSetProperties_createdAt
+var CopySourceImageSetProperties_updatedAt = &sCopySourceImageSetProperties_updatedAt
+var CopySourceImageSetProperties_imageSetArn = &sCopySourceImageSetProperties_imageSetArn
+
+var _DatastoreId = &s_DatastoreId
+
+var _DatastoreName = &s_DatastoreName
+
+var DatastoreProperties = &sDatastoreProperties
+var DatastoreProperties_datastoreId = &sDatastoreProperties_datastoreId
+var DatastoreProperties_datastoreName = &sDatastoreProperties_datastoreName
+var DatastoreProperties_datastoreStatus = &sDatastoreProperties_datastoreStatus
+var DatastoreProperties_kmsKeyArn = &sDatastoreProperties_kmsKeyArn
+var DatastoreProperties_lambdaAuthorizerArn = &sDatastoreProperties_lambdaAuthorizerArn
+var DatastoreProperties_losslessStorageFormat = &sDatastoreProperties_losslessStorageFormat
+var DatastoreProperties_datastoreArn = &sDatastoreProperties_datastoreArn
+var DatastoreProperties_createdAt = &sDatastoreProperties_createdAt
+var DatastoreProperties_updatedAt = &sDatastoreProperties_updatedAt
+
+var DatastoreStatus = &sDatastoreStatus
+var DatastoreStatus_CREATING = &sDatastoreStatus_CREATING
+var DatastoreStatus_CREATE_FAILED = &sDatastoreStatus_CREATE_FAILED
+var DatastoreStatus_ACTIVE = &sDatastoreStatus_ACTIVE
+var DatastoreStatus_DELETING = &sDatastoreStatus_DELETING
+var DatastoreStatus_DELETED = &sDatastoreStatus_DELETED
+
+var _DatastoreSummaries = &s_DatastoreSummaries
+var _DatastoreSummaries_member = &s_DatastoreSummaries_member
+
+var DatastoreSummary = &sDatastoreSummary
+var DatastoreSummary_datastoreId = &sDatastoreSummary_datastoreId
+var DatastoreSummary_datastoreName = &sDatastoreSummary_datastoreName
+var DatastoreSummary_datastoreStatus = &sDatastoreSummary_datastoreStatus
+var DatastoreSummary_datastoreArn = &sDatastoreSummary_datastoreArn
+var DatastoreSummary_createdAt = &sDatastoreSummary_createdAt
+var DatastoreSummary_updatedAt = &sDatastoreSummary_updatedAt
+
+var _Date = &s_Date
+
+var _DICOMAccessionNumber = &s_DICOMAccessionNumber
+
+var _DICOMAttribute = &s_DICOMAttribute
+
+var DICOMImportJobProperties = &sDICOMImportJobProperties
+var DICOMImportJobProperties_jobId = &sDICOMImportJobProperties_jobId
+var DICOMImportJobProperties_jobName = &sDICOMImportJobProperties_jobName
+var DICOMImportJobProperties_jobStatus = &sDICOMImportJobProperties_jobStatus
+var DICOMImportJobProperties_datastoreId = &sDICOMImportJobProperties_datastoreId
+var DICOMImportJobProperties_dataAccessRoleArn = &sDICOMImportJobProperties_dataAccessRoleArn
+var DICOMImportJobProperties_endedAt = &sDICOMImportJobProperties_endedAt
+var DICOMImportJobProperties_submittedAt = &sDICOMImportJobProperties_submittedAt
+var DICOMImportJobProperties_inputS3Uri = &sDICOMImportJobProperties_inputS3Uri
+var DICOMImportJobProperties_outputS3Uri = &sDICOMImportJobProperties_outputS3Uri
+var DICOMImportJobProperties_message = &sDICOMImportJobProperties_message
+var DICOMImportJobProperties_importConfiguration = &sDICOMImportJobProperties_importConfiguration
+
+var _DICOMImportJobSummaries = &s_DICOMImportJobSummaries
+var _DICOMImportJobSummaries_member = &s_DICOMImportJobSummaries_member
+
+var DICOMImportJobSummary = &sDICOMImportJobSummary
+var DICOMImportJobSummary_jobId = &sDICOMImportJobSummary_jobId
+var DICOMImportJobSummary_jobName = &sDICOMImportJobSummary_jobName
+var DICOMImportJobSummary_jobStatus = &sDICOMImportJobSummary_jobStatus
+var DICOMImportJobSummary_datastoreId = &sDICOMImportJobSummary_datastoreId
+var DICOMImportJobSummary_dataAccessRoleArn = &sDICOMImportJobSummary_dataAccessRoleArn
+var DICOMImportJobSummary_endedAt = &sDICOMImportJobSummary_endedAt
+var DICOMImportJobSummary_submittedAt = &sDICOMImportJobSummary_submittedAt
+var DICOMImportJobSummary_message = &sDICOMImportJobSummary_message
+
+var DicomJsonMetadataImportConfiguration = &sDicomJsonMetadataImportConfiguration
+var DicomJsonMetadataImportConfiguration_dicomMetadataMappings = &sDicomJsonMetadataImportConfiguration_dicomMetadataMappings
+
+var DicomMetadataMapping = &sDicomMetadataMapping
+var DicomMetadataMapping_studyInstanceUID = &sDicomMetadataMapping_studyInstanceUID
+var DicomMetadataMapping_seriesInstanceUID = &sDicomMetadataMapping_seriesInstanceUID
+var DicomMetadataMapping_metadataFilePath = &sDicomMetadataMapping_metadataFilePath
+
+var _DicomMetadataMappings = &s_DicomMetadataMappings
+var _DicomMetadataMappings_member = &s_DicomMetadataMappings_member
+
+var _DICOMNumberOfStudyRelatedInstances = &s_DICOMNumberOfStudyRelatedInstances
+
+var _DICOMNumberOfStudyRelatedSeries = &s_DICOMNumberOfStudyRelatedSeries
+
+var _DICOMPatientBirthDate = &s_DICOMPatientBirthDate
+
+var _DICOMPatientId = &s_DICOMPatientId
+
+var _DICOMPatientName = &s_DICOMPatientName
+
+var _DICOMPatientSex = &s_DICOMPatientSex
+
+var _DICOMSeriesBodyPart = &s_DICOMSeriesBodyPart
+
+var _DICOMSeriesInstanceUID = &s_DICOMSeriesInstanceUID
+
+var _DICOMSeriesModality = &s_DICOMSeriesModality
+
+var _DICOMSeriesNumber = &s_DICOMSeriesNumber
+
+var _DICOMStudyDate = &s_DICOMStudyDate
+
+var DICOMStudyDateAndTime = &sDICOMStudyDateAndTime
+var DICOMStudyDateAndTime_DICOMStudyDate = &sDICOMStudyDateAndTime_DICOMStudyDate
+var DICOMStudyDateAndTime_DICOMStudyTime = &sDICOMStudyDateAndTime_DICOMStudyTime
+
+var _DICOMStudyDescription = &s_DICOMStudyDescription
+
+var _DICOMStudyId = &s_DICOMStudyId
+
+var _DICOMStudyInstanceUID = &s_DICOMStudyInstanceUID
+
+var _DICOMStudyTime = &s_DICOMStudyTime
+
+var DICOMTags = &sDICOMTags
+var DICOMTags_DICOMPatientId = &sDICOMTags_DICOMPatientId
+var DICOMTags_DICOMPatientName = &sDICOMTags_DICOMPatientName
+var DICOMTags_DICOMPatientBirthDate = &sDICOMTags_DICOMPatientBirthDate
+var DICOMTags_DICOMPatientSex = &sDICOMTags_DICOMPatientSex
+var DICOMTags_DICOMStudyInstanceUID = &sDICOMTags_DICOMStudyInstanceUID
+var DICOMTags_DICOMStudyId = &sDICOMTags_DICOMStudyId
+var DICOMTags_DICOMStudyDescription = &sDICOMTags_DICOMStudyDescription
+var DICOMTags_DICOMNumberOfStudyRelatedSeries = &sDICOMTags_DICOMNumberOfStudyRelatedSeries
+var DICOMTags_DICOMNumberOfStudyRelatedInstances = &sDICOMTags_DICOMNumberOfStudyRelatedInstances
+var DICOMTags_DICOMAccessionNumber = &sDICOMTags_DICOMAccessionNumber
+var DICOMTags_DICOMSeriesInstanceUID = &sDICOMTags_DICOMSeriesInstanceUID
+var DICOMTags_DICOMSeriesModality = &sDICOMTags_DICOMSeriesModality
+var DICOMTags_DICOMSeriesBodyPart = &sDICOMTags_DICOMSeriesBodyPart
+var DICOMTags_DICOMSeriesNumber = &sDICOMTags_DICOMSeriesNumber
+var DICOMTags_DICOMStudyDate = &sDICOMTags_DICOMStudyDate
+var DICOMTags_DICOMStudyTime = &sDICOMTags_DICOMStudyTime
+
+var DICOMUpdates = &sDICOMUpdates
+var DICOMUpdates_removableAttributes = &sDICOMUpdates_removableAttributes
+var DICOMUpdates_updatableAttributes = &sDICOMUpdates_updatableAttributes
+
+var _ImageFrameId = &s_ImageFrameId
+
+var ImageFrameInformation = &sImageFrameInformation
+var ImageFrameInformation_imageFrameId = &sImageFrameInformation_imageFrameId
+
+var _ImageSetExternalVersionId = &s_ImageSetExternalVersionId
+
+var _ImageSetId = &s_ImageSetId
+
+var _ImageSetMetadataBlob = &s_ImageSetMetadataBlob
+
+var ImageSetProperties = &sImageSetProperties
+var ImageSetProperties_imageSetId = &sImageSetProperties_imageSetId
+var ImageSetProperties_versionId = &sImageSetProperties_versionId
+var ImageSetProperties_imageSetState = &sImageSetProperties_imageSetState
+var ImageSetProperties_ImageSetWorkflowStatus = &sImageSetProperties_ImageSetWorkflowStatus
+var ImageSetProperties_createdAt = &sImageSetProperties_createdAt
+var ImageSetProperties_updatedAt = &sImageSetProperties_updatedAt
+var ImageSetProperties_deletedAt = &sImageSetProperties_deletedAt
+var ImageSetProperties_message = &sImageSetProperties_message
+var ImageSetProperties_overrides = &sImageSetProperties_overrides
+var ImageSetProperties_isPrimary = &sImageSetProperties_isPrimary
+
+var _ImageSetPropertiesList = &s_ImageSetPropertiesList
+var _ImageSetPropertiesList_member = &s_ImageSetPropertiesList_member
+
+var _ImageSetsMetadataSummaries = &s_ImageSetsMetadataSummaries
+var _ImageSetsMetadataSummaries_member = &s_ImageSetsMetadataSummaries_member
+
+var ImageSetsMetadataSummary = &sImageSetsMetadataSummary
+var ImageSetsMetadataSummary_imageSetId = &sImageSetsMetadataSummary_imageSetId
+var ImageSetsMetadataSummary_version = &sImageSetsMetadataSummary_version
+var ImageSetsMetadataSummary_createdAt = &sImageSetsMetadataSummary_createdAt
+var ImageSetsMetadataSummary_updatedAt = &sImageSetsMetadataSummary_updatedAt
+var ImageSetsMetadataSummary_lastAccessedAt = &sImageSetsMetadataSummary_lastAccessedAt
+var ImageSetsMetadataSummary_storageTier = &sImageSetsMetadataSummary_storageTier
+var ImageSetsMetadataSummary_DICOMTags = &sImageSetsMetadataSummary_DICOMTags
+var ImageSetsMetadataSummary_isPrimary = &sImageSetsMetadataSummary_isPrimary
+
+var ImageSetState = &sImageSetState
+var ImageSetState_ACTIVE = &sImageSetState_ACTIVE
+var ImageSetState_LOCKED = &sImageSetState_LOCKED
+var ImageSetState_DELETED = &sImageSetState_DELETED
+
+var ImageSetWorkflowStatus = &sImageSetWorkflowStatus
+var ImageSetWorkflowStatus_CREATED = &sImageSetWorkflowStatus_CREATED
+var ImageSetWorkflowStatus_COPIED = &sImageSetWorkflowStatus_COPIED
+var ImageSetWorkflowStatus_COPYING = &sImageSetWorkflowStatus_COPYING
+var ImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS = &sImageSetWorkflowStatus_COPYING_WITH_READ_ONLY_ACCESS
+var ImageSetWorkflowStatus_COPY_FAILED = &sImageSetWorkflowStatus_COPY_FAILED
+var ImageSetWorkflowStatus_UPDATING = &sImageSetWorkflowStatus_UPDATING
+var ImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY = &sImageSetWorkflowStatus_UPDATING_FOR_STUDY_CONSISTENCY
+var ImageSetWorkflowStatus_UPDATED = &sImageSetWorkflowStatus_UPDATED
+var ImageSetWorkflowStatus_UPDATE_FAILED = &sImageSetWorkflowStatus_UPDATE_FAILED
+var ImageSetWorkflowStatus_DELETING = &sImageSetWorkflowStatus_DELETING
+var ImageSetWorkflowStatus_DELETED = &sImageSetWorkflowStatus_DELETED
+var ImageSetWorkflowStatus_IMPORTING = &sImageSetWorkflowStatus_IMPORTING
+var ImageSetWorkflowStatus_IMPORTED = &sImageSetWorkflowStatus_IMPORTED
+var ImageSetWorkflowStatus_IMPORT_FAILED = &sImageSetWorkflowStatus_IMPORT_FAILED
+
+var ImportConfiguration = &sImportConfiguration
+var ImportConfiguration_dicomJsonMetadataImportConfiguration = &sImportConfiguration_dicomJsonMetadataImportConfiguration
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JobId = &s_JobId
+
+var _JobName = &s_JobName
+
+var JobStatus = &sJobStatus
+var JobStatus_SUBMITTED = &sJobStatus_SUBMITTED
+var JobStatus_IN_PROGRESS = &sJobStatus_IN_PROGRESS
+var JobStatus_COMPLETED = &sJobStatus_COMPLETED
+var JobStatus_FAILED = &sJobStatus_FAILED
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LambdaArn = &s_LambdaArn
+
+var LosslessStorageFormat = &sLosslessStorageFormat
+var LosslessStorageFormat_HTJ2K = &sLosslessStorageFormat_HTJ2K
+var LosslessStorageFormat_JPEG_2000_LOSSLESS = &sLosslessStorageFormat_JPEG_2000_LOSSLESS
+
+var _Message = &s_Message
+
+var MetadataCopies = &sMetadataCopies
+var MetadataCopies_copiableAttributes = &sMetadataCopies_copiableAttributes
+
+var _MetadataFilePath = &s_MetadataFilePath
+
+var MetadataUpdates = &sMetadataUpdates
+var MetadataUpdates_DICOMUpdates = &sMetadataUpdates_DICOMUpdates
+var MetadataUpdates_revertToVersionId = &sMetadataUpdates_revertToVersionId
+
+var _NextToken = &s_NextToken
+
+var NotAcceptableException = &sNotAcceptableException
+var NotAcceptableException_message = &sNotAcceptableException_message
+
+var Operator = &sOperator
+var Operator_EQUAL = &sOperator_EQUAL
+var Operator_BETWEEN = &sOperator_BETWEEN
+
+var Overrides = &sOverrides
+var Overrides_forced = &sOverrides_forced
+
+var _PayloadBlob = &s_PayloadBlob
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var _S3Uri = &s_S3Uri
+
+var SearchByAttributeValue = &sSearchByAttributeValue
+var SearchByAttributeValue_DICOMPatientId = &sSearchByAttributeValue_DICOMPatientId
+var SearchByAttributeValue_DICOMAccessionNumber = &sSearchByAttributeValue_DICOMAccessionNumber
+var SearchByAttributeValue_DICOMStudyId = &sSearchByAttributeValue_DICOMStudyId
+var SearchByAttributeValue_DICOMStudyInstanceUID = &sSearchByAttributeValue_DICOMStudyInstanceUID
+var SearchByAttributeValue_DICOMSeriesInstanceUID = &sSearchByAttributeValue_DICOMSeriesInstanceUID
+var SearchByAttributeValue_createdAt = &sSearchByAttributeValue_createdAt
+var SearchByAttributeValue_updatedAt = &sSearchByAttributeValue_updatedAt
+var SearchByAttributeValue_DICOMStudyDateAndTime = &sSearchByAttributeValue_DICOMStudyDateAndTime
+var SearchByAttributeValue_isPrimary = &sSearchByAttributeValue_isPrimary
+
+var _SearchByAttributeValues = &s_SearchByAttributeValues
+var _SearchByAttributeValues_member = &s_SearchByAttributeValues_member
+
+var SearchCriteria = &sSearchCriteria
+var SearchCriteria_filters = &sSearchCriteria_filters
+var SearchCriteria_sort = &sSearchCriteria_sort
+
+var SearchFilter = &sSearchFilter
+var SearchFilter_values = &sSearchFilter_values
+var SearchFilter_operator = &sSearchFilter_operator
+
+var _SearchFilters = &s_SearchFilters
+var _SearchFilters_member = &s_SearchFilters_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var Sort = &sSort
+var Sort_sortOrder = &sSort_sortOrder
+var Sort_sortField = &sSort_sortField
+
+var SortField = &sSortField
+var SortField_updatedAt = &sSortField_updatedAt
+var SortField_createdAt = &sSortField_createdAt
+var SortField_DICOMStudyDateAndTime = &sSortField_DICOMStudyDateAndTime
+
+var SortOrder = &sSortOrder
+var SortOrder_ASC = &sSortOrder_ASC
+var SortOrder_DESC = &sSortOrder_DESC
+
+var StorageTier = &sStorageTier
+var StorageTier_FREQUENT_ACCESS = &sStorageTier_FREQUENT_ACCESS
+var StorageTier_ARCHIVE_INSTANT_ACCESS = &sStorageTier_ARCHIVE_INSTANT_ACCESS
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CopyImageSetRequest = &sCopyImageSetRequest
+var CopyImageSetRequest_datastoreId = &sCopyImageSetRequest_datastoreId
+var CopyImageSetRequest_sourceImageSetId = &sCopyImageSetRequest_sourceImageSetId
+var CopyImageSetRequest_copyImageSetInformation = &sCopyImageSetRequest_copyImageSetInformation
+var CopyImageSetRequest_force = &sCopyImageSetRequest_force
+var CopyImageSetRequest_promoteToPrimary = &sCopyImageSetRequest_promoteToPrimary
+
+var CopyImageSetResponse = &sCopyImageSetResponse
+var CopyImageSetResponse_datastoreId = &sCopyImageSetResponse_datastoreId
+var CopyImageSetResponse_sourceImageSetProperties = &sCopyImageSetResponse_sourceImageSetProperties
+var CopyImageSetResponse_destinationImageSetProperties = &sCopyImageSetResponse_destinationImageSetProperties
+
+var CreateDatastoreRequest = &sCreateDatastoreRequest
+var CreateDatastoreRequest_datastoreName = &sCreateDatastoreRequest_datastoreName
+var CreateDatastoreRequest_clientToken = &sCreateDatastoreRequest_clientToken
+var CreateDatastoreRequest_tags = &sCreateDatastoreRequest_tags
+var CreateDatastoreRequest_kmsKeyArn = &sCreateDatastoreRequest_kmsKeyArn
+var CreateDatastoreRequest_lambdaAuthorizerArn = &sCreateDatastoreRequest_lambdaAuthorizerArn
+var CreateDatastoreRequest_losslessStorageFormat = &sCreateDatastoreRequest_losslessStorageFormat
+
+var CreateDatastoreResponse = &sCreateDatastoreResponse
+var CreateDatastoreResponse_datastoreId = &sCreateDatastoreResponse_datastoreId
+var CreateDatastoreResponse_datastoreStatus = &sCreateDatastoreResponse_datastoreStatus
+
+var DeleteDatastoreRequest = &sDeleteDatastoreRequest
+var DeleteDatastoreRequest_datastoreId = &sDeleteDatastoreRequest_datastoreId
+
+var DeleteDatastoreResponse = &sDeleteDatastoreResponse
+var DeleteDatastoreResponse_datastoreId = &sDeleteDatastoreResponse_datastoreId
+var DeleteDatastoreResponse_datastoreStatus = &sDeleteDatastoreResponse_datastoreStatus
+
+var DeleteImageSetRequest = &sDeleteImageSetRequest
+var DeleteImageSetRequest_datastoreId = &sDeleteImageSetRequest_datastoreId
+var DeleteImageSetRequest_imageSetId = &sDeleteImageSetRequest_imageSetId
+
+var DeleteImageSetResponse = &sDeleteImageSetResponse
+var DeleteImageSetResponse_datastoreId = &sDeleteImageSetResponse_datastoreId
+var DeleteImageSetResponse_imageSetId = &sDeleteImageSetResponse_imageSetId
+var DeleteImageSetResponse_imageSetState = &sDeleteImageSetResponse_imageSetState
+var DeleteImageSetResponse_imageSetWorkflowStatus = &sDeleteImageSetResponse_imageSetWorkflowStatus
+
+var GetDatastoreRequest = &sGetDatastoreRequest
+var GetDatastoreRequest_datastoreId = &sGetDatastoreRequest_datastoreId
+
+var GetDatastoreResponse = &sGetDatastoreResponse
+var GetDatastoreResponse_datastoreProperties = &sGetDatastoreResponse_datastoreProperties
+
+var GetDICOMImportJobRequest = &sGetDICOMImportJobRequest
+var GetDICOMImportJobRequest_datastoreId = &sGetDICOMImportJobRequest_datastoreId
+var GetDICOMImportJobRequest_jobId = &sGetDICOMImportJobRequest_jobId
+
+var GetDICOMImportJobResponse = &sGetDICOMImportJobResponse
+var GetDICOMImportJobResponse_jobProperties = &sGetDICOMImportJobResponse_jobProperties
+
+var GetImageFrameRequest = &sGetImageFrameRequest
+var GetImageFrameRequest_datastoreId = &sGetImageFrameRequest_datastoreId
+var GetImageFrameRequest_imageSetId = &sGetImageFrameRequest_imageSetId
+var GetImageFrameRequest_imageFrameInformation = &sGetImageFrameRequest_imageFrameInformation
+
+var GetImageFrameResponse = &sGetImageFrameResponse
+var GetImageFrameResponse_imageFrameBlob = &sGetImageFrameResponse_imageFrameBlob
+var GetImageFrameResponse_contentType = &sGetImageFrameResponse_contentType
+
+var GetImageSetRequest = &sGetImageSetRequest
+var GetImageSetRequest_datastoreId = &sGetImageSetRequest_datastoreId
+var GetImageSetRequest_imageSetId = &sGetImageSetRequest_imageSetId
+var GetImageSetRequest_versionId = &sGetImageSetRequest_versionId
+
+var GetImageSetMetadataRequest = &sGetImageSetMetadataRequest
+var GetImageSetMetadataRequest_datastoreId = &sGetImageSetMetadataRequest_datastoreId
+var GetImageSetMetadataRequest_imageSetId = &sGetImageSetMetadataRequest_imageSetId
+var GetImageSetMetadataRequest_versionId = &sGetImageSetMetadataRequest_versionId
+
+var GetImageSetMetadataResponse = &sGetImageSetMetadataResponse
+var GetImageSetMetadataResponse_imageSetMetadataBlob = &sGetImageSetMetadataResponse_imageSetMetadataBlob
+var GetImageSetMetadataResponse_contentType = &sGetImageSetMetadataResponse_contentType
+var GetImageSetMetadataResponse_contentEncoding = &sGetImageSetMetadataResponse_contentEncoding
+
+var GetImageSetResponse = &sGetImageSetResponse
+var GetImageSetResponse_datastoreId = &sGetImageSetResponse_datastoreId
+var GetImageSetResponse_imageSetId = &sGetImageSetResponse_imageSetId
+var GetImageSetResponse_versionId = &sGetImageSetResponse_versionId
+var GetImageSetResponse_imageSetState = &sGetImageSetResponse_imageSetState
+var GetImageSetResponse_imageSetWorkflowStatus = &sGetImageSetResponse_imageSetWorkflowStatus
+var GetImageSetResponse_createdAt = &sGetImageSetResponse_createdAt
+var GetImageSetResponse_updatedAt = &sGetImageSetResponse_updatedAt
+var GetImageSetResponse_deletedAt = &sGetImageSetResponse_deletedAt
+var GetImageSetResponse_message = &sGetImageSetResponse_message
+var GetImageSetResponse_imageSetArn = &sGetImageSetResponse_imageSetArn
+var GetImageSetResponse_overrides = &sGetImageSetResponse_overrides
+var GetImageSetResponse_isPrimary = &sGetImageSetResponse_isPrimary
+var GetImageSetResponse_lastAccessedAt = &sGetImageSetResponse_lastAccessedAt
+var GetImageSetResponse_storageTier = &sGetImageSetResponse_storageTier
+
+var ListDatastoresRequest = &sListDatastoresRequest
+var ListDatastoresRequest_datastoreStatus = &sListDatastoresRequest_datastoreStatus
+var ListDatastoresRequest_nextToken = &sListDatastoresRequest_nextToken
+var ListDatastoresRequest_maxResults = &sListDatastoresRequest_maxResults
+
+var ListDatastoresResponse = &sListDatastoresResponse
+var ListDatastoresResponse_datastoreSummaries = &sListDatastoresResponse_datastoreSummaries
+var ListDatastoresResponse_nextToken = &sListDatastoresResponse_nextToken
+
+var ListDICOMImportJobsRequest = &sListDICOMImportJobsRequest
+var ListDICOMImportJobsRequest_datastoreId = &sListDICOMImportJobsRequest_datastoreId
+var ListDICOMImportJobsRequest_jobStatus = &sListDICOMImportJobsRequest_jobStatus
+var ListDICOMImportJobsRequest_nextToken = &sListDICOMImportJobsRequest_nextToken
+var ListDICOMImportJobsRequest_maxResults = &sListDICOMImportJobsRequest_maxResults
+
+var ListDICOMImportJobsResponse = &sListDICOMImportJobsResponse
+var ListDICOMImportJobsResponse_jobSummaries = &sListDICOMImportJobsResponse_jobSummaries
+var ListDICOMImportJobsResponse_nextToken = &sListDICOMImportJobsResponse_nextToken
+
+var ListImageSetVersionsRequest = &sListImageSetVersionsRequest
+var ListImageSetVersionsRequest_datastoreId = &sListImageSetVersionsRequest_datastoreId
+var ListImageSetVersionsRequest_imageSetId = &sListImageSetVersionsRequest_imageSetId
+var ListImageSetVersionsRequest_nextToken = &sListImageSetVersionsRequest_nextToken
+var ListImageSetVersionsRequest_maxResults = &sListImageSetVersionsRequest_maxResults
+
+var ListImageSetVersionsResponse = &sListImageSetVersionsResponse
+var ListImageSetVersionsResponse_imageSetPropertiesList = &sListImageSetVersionsResponse_imageSetPropertiesList
+var ListImageSetVersionsResponse_nextToken = &sListImageSetVersionsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var SearchImageSetsRequest = &sSearchImageSetsRequest
+var SearchImageSetsRequest_datastoreId = &sSearchImageSetsRequest_datastoreId
+var SearchImageSetsRequest_searchCriteria = &sSearchImageSetsRequest_searchCriteria
+var SearchImageSetsRequest_maxResults = &sSearchImageSetsRequest_maxResults
+var SearchImageSetsRequest_nextToken = &sSearchImageSetsRequest_nextToken
+
+var SearchImageSetsResponse = &sSearchImageSetsResponse
+var SearchImageSetsResponse_imageSetsMetadataSummaries = &sSearchImageSetsResponse_imageSetsMetadataSummaries
+var SearchImageSetsResponse_sort = &sSearchImageSetsResponse_sort
+var SearchImageSetsResponse_nextToken = &sSearchImageSetsResponse_nextToken
+
+var StartDICOMImportJobRequest = &sStartDICOMImportJobRequest
+var StartDICOMImportJobRequest_jobName = &sStartDICOMImportJobRequest_jobName
+var StartDICOMImportJobRequest_dataAccessRoleArn = &sStartDICOMImportJobRequest_dataAccessRoleArn
+var StartDICOMImportJobRequest_clientToken = &sStartDICOMImportJobRequest_clientToken
+var StartDICOMImportJobRequest_datastoreId = &sStartDICOMImportJobRequest_datastoreId
+var StartDICOMImportJobRequest_inputS3Uri = &sStartDICOMImportJobRequest_inputS3Uri
+var StartDICOMImportJobRequest_outputS3Uri = &sStartDICOMImportJobRequest_outputS3Uri
+var StartDICOMImportJobRequest_inputOwnerAccountId = &sStartDICOMImportJobRequest_inputOwnerAccountId
+var StartDICOMImportJobRequest_importConfiguration = &sStartDICOMImportJobRequest_importConfiguration
+
+var StartDICOMImportJobResponse = &sStartDICOMImportJobResponse
+var StartDICOMImportJobResponse_datastoreId = &sStartDICOMImportJobResponse_datastoreId
+var StartDICOMImportJobResponse_jobId = &sStartDICOMImportJobResponse_jobId
+var StartDICOMImportJobResponse_jobStatus = &sStartDICOMImportJobResponse_jobStatus
+var StartDICOMImportJobResponse_submittedAt = &sStartDICOMImportJobResponse_submittedAt
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateImageSetMetadataRequest = &sUpdateImageSetMetadataRequest
+var UpdateImageSetMetadataRequest_datastoreId = &sUpdateImageSetMetadataRequest_datastoreId
+var UpdateImageSetMetadataRequest_imageSetId = &sUpdateImageSetMetadataRequest_imageSetId
+var UpdateImageSetMetadataRequest_latestVersionId = &sUpdateImageSetMetadataRequest_latestVersionId
+var UpdateImageSetMetadataRequest_force = &sUpdateImageSetMetadataRequest_force
+var UpdateImageSetMetadataRequest_includeStudyImageSets = &sUpdateImageSetMetadataRequest_includeStudyImageSets
+var UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates = &sUpdateImageSetMetadataRequest_updateImageSetMetadataUpdates
+
+var UpdateImageSetMetadataResponse = &sUpdateImageSetMetadataResponse
+var UpdateImageSetMetadataResponse_datastoreId = &sUpdateImageSetMetadataResponse_datastoreId
+var UpdateImageSetMetadataResponse_imageSetId = &sUpdateImageSetMetadataResponse_imageSetId
+var UpdateImageSetMetadataResponse_latestVersionId = &sUpdateImageSetMetadataResponse_latestVersionId
+var UpdateImageSetMetadataResponse_imageSetState = &sUpdateImageSetMetadataResponse_imageSetState
+var UpdateImageSetMetadataResponse_imageSetWorkflowStatus = &sUpdateImageSetMetadataResponse_imageSetWorkflowStatus
+var UpdateImageSetMetadataResponse_createdAt = &sUpdateImageSetMetadataResponse_createdAt
+var UpdateImageSetMetadataResponse_updatedAt = &sUpdateImageSetMetadataResponse_updatedAt
+var UpdateImageSetMetadataResponse_message = &sUpdateImageSetMetadataResponse_message
+
+var AHIGatewayService = &smithy.ServiceSchema{Schema: &s_AHIGatewayService, Version: "2023-07-19"}

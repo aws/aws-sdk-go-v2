@@ -4,2768 +4,2742 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAlertManagerDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAlertManagerDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/workspaces/{workspaceId}/alertmanager/definition",
-	Code: 202})
+var (
+	eCreateAlertManagerDefinition                                        smithy.SchemaExtensions
+	eCreateAnomalyDetector                                               smithy.SchemaExtensions
+	eCreateLoggingConfiguration                                          smithy.SchemaExtensions
+	eCreateQueryLoggingConfiguration                                     smithy.SchemaExtensions
+	eCreateRuleGroupsNamespace                                           smithy.SchemaExtensions
+	eCreateScraper                                                       smithy.SchemaExtensions
+	eCreateWorkspace                                                     smithy.SchemaExtensions
+	eDeleteAlertManagerDefinition                                        smithy.SchemaExtensions
+	eDeleteAnomalyDetector                                               smithy.SchemaExtensions
+	eDeleteLoggingConfiguration                                          smithy.SchemaExtensions
+	eDeleteQueryLoggingConfiguration                                     smithy.SchemaExtensions
+	eDeleteResourcePolicy                                                smithy.SchemaExtensions
+	eDeleteRuleGroupsNamespace                                           smithy.SchemaExtensions
+	eDeleteScraper                                                       smithy.SchemaExtensions
+	eDeleteScraperLoggingConfiguration                                   smithy.SchemaExtensions
+	eDeleteWorkspace                                                     smithy.SchemaExtensions
+	eDescribeAlertManagerDefinition                                      smithy.SchemaExtensions
+	eDescribeAnomalyDetector                                             smithy.SchemaExtensions
+	eDescribeLoggingConfiguration                                        smithy.SchemaExtensions
+	eDescribeQueryLoggingConfiguration                                   smithy.SchemaExtensions
+	eDescribeResourcePolicy                                              smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespace                                         smithy.SchemaExtensions
+	eDescribeScraper                                                     smithy.SchemaExtensions
+	eDescribeScraperLoggingConfiguration                                 smithy.SchemaExtensions
+	eDescribeWorkspace                                                   smithy.SchemaExtensions
+	eDescribeWorkspaceConfiguration                                      smithy.SchemaExtensions
+	eGetDefaultScraperConfiguration                                      smithy.SchemaExtensions
+	eListAnomalyDetectors                                                smithy.SchemaExtensions
+	eListRuleGroupsNamespaces                                            smithy.SchemaExtensions
+	eListScrapers                                                        smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	eListWorkspaces                                                      smithy.SchemaExtensions
+	ePutAlertManagerDefinition                                           smithy.SchemaExtensions
+	ePutAnomalyDetector                                                  smithy.SchemaExtensions
+	ePutResourcePolicy                                                   smithy.SchemaExtensions
+	ePutRuleGroupsNamespace                                              smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdateLoggingConfiguration                                          smithy.SchemaExtensions
+	eUpdateQueryLoggingConfiguration                                     smithy.SchemaExtensions
+	eUpdateScraper                                                       smithy.SchemaExtensions
+	eUpdateScraperLoggingConfiguration                                   smithy.SchemaExtensions
+	eUpdateWorkspaceAlias                                                smithy.SchemaExtensions
+	eUpdateWorkspaceConfiguration                                        smithy.SchemaExtensions
+	e_AmazonPrometheusService                                            smithy.SchemaExtensions
+	eAccessDeniedException                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                       smithy.SchemaExtensions
+	e_AlertManagerDefinitionData                                         smithy.SchemaExtensions
+	eAlertManagerDefinitionDescription                                   smithy.SchemaExtensions
+	eAlertManagerDefinitionDescription_status                            smithy.SchemaExtensions
+	eAlertManagerDefinitionDescription_data                              smithy.SchemaExtensions
+	eAlertManagerDefinitionDescription_createdAt                         smithy.SchemaExtensions
+	eAlertManagerDefinitionDescription_modifiedAt                        smithy.SchemaExtensions
+	eAlertManagerDefinitionStatus                                        smithy.SchemaExtensions
+	eAlertManagerDefinitionStatus_statusCode                             smithy.SchemaExtensions
+	eAlertManagerDefinitionStatus_statusReason                           smithy.SchemaExtensions
+	e_AlertManagerDefinitionStatusCode                                   smithy.SchemaExtensions
+	eAmpConfiguration                                                    smithy.SchemaExtensions
+	eAmpConfiguration_workspaceArn                                       smithy.SchemaExtensions
+	e_AnomalyDetectorAlias                                               smithy.SchemaExtensions
+	e_AnomalyDetectorArn                                                 smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration                                        smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration_randomCutForest                        smithy.SchemaExtensions
+	eAnomalyDetectorDescription                                          smithy.SchemaExtensions
+	eAnomalyDetectorDescription_arn                                      smithy.SchemaExtensions
+	eAnomalyDetectorDescription_anomalyDetectorId                        smithy.SchemaExtensions
+	eAnomalyDetectorDescription_alias                                    smithy.SchemaExtensions
+	eAnomalyDetectorDescription_evaluationIntervalInSeconds              smithy.SchemaExtensions
+	eAnomalyDetectorDescription_missingDataAction                        smithy.SchemaExtensions
+	eAnomalyDetectorDescription_configuration                            smithy.SchemaExtensions
+	eAnomalyDetectorDescription_labels                                   smithy.SchemaExtensions
+	eAnomalyDetectorDescription_status                                   smithy.SchemaExtensions
+	eAnomalyDetectorDescription_createdAt                                smithy.SchemaExtensions
+	eAnomalyDetectorDescription_modifiedAt                               smithy.SchemaExtensions
+	eAnomalyDetectorDescription_tags                                     smithy.SchemaExtensions
+	e_AnomalyDetectorEvaluationInterval                                  smithy.SchemaExtensions
+	e_AnomalyDetectorId                                                  smithy.SchemaExtensions
+	eAnomalyDetectorMissingDataAction                                    smithy.SchemaExtensions
+	eAnomalyDetectorMissingDataAction_markAsAnomaly                      smithy.SchemaExtensions
+	eAnomalyDetectorMissingDataAction_skip                               smithy.SchemaExtensions
+	eAnomalyDetectorStatus                                               smithy.SchemaExtensions
+	eAnomalyDetectorStatus_statusCode                                    smithy.SchemaExtensions
+	eAnomalyDetectorStatus_statusReason                                  smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode                                           smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_CREATING                                  smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_ACTIVE                                    smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_UPDATING                                  smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_DELETING                                  smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_CREATION_FAILED                           smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_UPDATE_FAILED                             smithy.SchemaExtensions
+	eAnomalyDetectorStatusCode_DELETION_FAILED                           smithy.SchemaExtensions
+	eAnomalyDetectorSummary                                              smithy.SchemaExtensions
+	eAnomalyDetectorSummary_arn                                          smithy.SchemaExtensions
+	eAnomalyDetectorSummary_anomalyDetectorId                            smithy.SchemaExtensions
+	eAnomalyDetectorSummary_alias                                        smithy.SchemaExtensions
+	eAnomalyDetectorSummary_status                                       smithy.SchemaExtensions
+	eAnomalyDetectorSummary_createdAt                                    smithy.SchemaExtensions
+	eAnomalyDetectorSummary_modifiedAt                                   smithy.SchemaExtensions
+	eAnomalyDetectorSummary_tags                                         smithy.SchemaExtensions
+	e_AnomalyDetectorSummaryList                                         smithy.SchemaExtensions
+	e_AnomalyDetectorSummaryList_member                                  smithy.SchemaExtensions
+	eCloudWatchConfiguration                                             smithy.SchemaExtensions
+	eCloudWatchConfiguration_datasetArn                                  smithy.SchemaExtensions
+	e_CloudWatchDatasetArn                                               smithy.SchemaExtensions
+	eCloudWatchLogDestination                                            smithy.SchemaExtensions
+	eCloudWatchLogDestination_logGroupArn                                smithy.SchemaExtensions
+	e_ClusterArn                                                         smithy.SchemaExtensions
+	eComponentConfig                                                     smithy.SchemaExtensions
+	eComponentConfig_options                                             smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	eConflictException_resourceId                                        smithy.SchemaExtensions
+	eConflictException_resourceType                                      smithy.SchemaExtensions
+	eDestination                                                         smithy.SchemaExtensions
+	eDestination_ampConfiguration                                        smithy.SchemaExtensions
+	eDestination_cloudWatchConfiguration                                 smithy.SchemaExtensions
+	eEksConfiguration                                                    smithy.SchemaExtensions
+	eEksConfiguration_clusterArn                                         smithy.SchemaExtensions
+	eEksConfiguration_securityGroupIds                                   smithy.SchemaExtensions
+	eEksConfiguration_subnetIds                                          smithy.SchemaExtensions
+	eExporterConfiguration                                               smithy.SchemaExtensions
+	eExporterConfiguration_openSearchConfiguration                       smithy.SchemaExtensions
+	eExporterConfiguration_kafkaConfiguration                            smithy.SchemaExtensions
+	e_ExporterList                                                       smithy.SchemaExtensions
+	e_ExporterList_member                                                smithy.SchemaExtensions
+	e_FilterKey                                                          smithy.SchemaExtensions
+	e_FilterValue                                                        smithy.SchemaExtensions
+	e_FilterValues                                                       smithy.SchemaExtensions
+	e_FilterValues_member                                                smithy.SchemaExtensions
+	e_IamRoleArn                                                         smithy.SchemaExtensions
+	e_IdempotencyToken                                                   smithy.SchemaExtensions
+	eIgnoreNearExpected                                                  smithy.SchemaExtensions
+	eIgnoreNearExpected_amount                                           smithy.SchemaExtensions
+	eIgnoreNearExpected_ratio                                            smithy.SchemaExtensions
+	eInternalServerException                                             smithy.SchemaExtensions
+	eInternalServerException_message                                     smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                           smithy.SchemaExtensions
+	eKafkaExporterConfiguration                                          smithy.SchemaExtensions
+	eKafkaExporterConfiguration_clusterArn                               smithy.SchemaExtensions
+	eKafkaExporterConfiguration_topicFilter                              smithy.SchemaExtensions
+	eKafkaExporterConfiguration_consumerGroupFilter                      smithy.SchemaExtensions
+	e_KafkaExporterFilter                                                smithy.SchemaExtensions
+	e_KmsKeyArn                                                          smithy.SchemaExtensions
+	e_LabelName                                                          smithy.SchemaExtensions
+	e_LabelSet                                                           smithy.SchemaExtensions
+	e_LabelSet_key                                                       smithy.SchemaExtensions
+	e_LabelSet_value                                                     smithy.SchemaExtensions
+	e_LabelValue                                                         smithy.SchemaExtensions
+	eLimitsPerLabelSet                                                   smithy.SchemaExtensions
+	eLimitsPerLabelSet_limits                                            smithy.SchemaExtensions
+	eLimitsPerLabelSet_labelSet                                          smithy.SchemaExtensions
+	eLimitsPerLabelSetEntry                                              smithy.SchemaExtensions
+	eLimitsPerLabelSetEntry_maxSeries                                    smithy.SchemaExtensions
+	e_LimitsPerLabelSetList                                              smithy.SchemaExtensions
+	e_LimitsPerLabelSetList_member                                       smithy.SchemaExtensions
+	eLoggingConfigurationMetadata                                        smithy.SchemaExtensions
+	eLoggingConfigurationMetadata_status                                 smithy.SchemaExtensions
+	eLoggingConfigurationMetadata_workspace                              smithy.SchemaExtensions
+	eLoggingConfigurationMetadata_logGroupArn                            smithy.SchemaExtensions
+	eLoggingConfigurationMetadata_createdAt                              smithy.SchemaExtensions
+	eLoggingConfigurationMetadata_modifiedAt                             smithy.SchemaExtensions
+	eLoggingConfigurationStatus                                          smithy.SchemaExtensions
+	eLoggingConfigurationStatus_statusCode                               smithy.SchemaExtensions
+	eLoggingConfigurationStatus_statusReason                             smithy.SchemaExtensions
+	e_LoggingConfigurationStatusCode                                     smithy.SchemaExtensions
+	eLoggingDestination                                                  smithy.SchemaExtensions
+	eLoggingDestination_cloudWatchLogs                                   smithy.SchemaExtensions
+	eLoggingDestination_filters                                          smithy.SchemaExtensions
+	e_LoggingDestinations                                                smithy.SchemaExtensions
+	e_LoggingDestinations_member                                         smithy.SchemaExtensions
+	eLoggingFilter                                                       smithy.SchemaExtensions
+	eLoggingFilter_qspThreshold                                          smithy.SchemaExtensions
+	e_LogGroupArn                                                        smithy.SchemaExtensions
+	e_MskClusterArn                                                      smithy.SchemaExtensions
+	e_OpenSearchDomainArn                                                smithy.SchemaExtensions
+	eOpenSearchExporterConfiguration                                     smithy.SchemaExtensions
+	eOpenSearchExporterConfiguration_domainArn                           smithy.SchemaExtensions
+	e_PaginationToken                                                    smithy.SchemaExtensions
+	e_PrometheusMetricLabelKey                                           smithy.SchemaExtensions
+	e_PrometheusMetricLabelMap                                           smithy.SchemaExtensions
+	e_PrometheusMetricLabelMap_key                                       smithy.SchemaExtensions
+	e_PrometheusMetricLabelMap_value                                     smithy.SchemaExtensions
+	e_PrometheusMetricLabelValue                                         smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata                                   smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata_status                            smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata_workspace                         smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata_destinations                      smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata_createdAt                         smithy.SchemaExtensions
+	eQueryLoggingConfigurationMetadata_modifiedAt                        smithy.SchemaExtensions
+	eQueryLoggingConfigurationStatus                                     smithy.SchemaExtensions
+	eQueryLoggingConfigurationStatus_statusCode                          smithy.SchemaExtensions
+	eQueryLoggingConfigurationStatus_statusReason                        smithy.SchemaExtensions
+	e_QueryLoggingConfigurationStatusCode                                smithy.SchemaExtensions
+	eRandomCutForestConfiguration                                        smithy.SchemaExtensions
+	eRandomCutForestConfiguration_query                                  smithy.SchemaExtensions
+	eRandomCutForestConfiguration_shingleSize                            smithy.SchemaExtensions
+	eRandomCutForestConfiguration_sampleSize                             smithy.SchemaExtensions
+	eRandomCutForestConfiguration_ignoreNearExpectedFromAbove            smithy.SchemaExtensions
+	eRandomCutForestConfiguration_ignoreNearExpectedFromBelow            smithy.SchemaExtensions
+	e_RandomCutForestQuery                                               smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                              smithy.SchemaExtensions
+	eRoleConfiguration                                                   smithy.SchemaExtensions
+	eRoleConfiguration_sourceRoleArn                                     smithy.SchemaExtensions
+	eRoleConfiguration_targetRoleArn                                     smithy.SchemaExtensions
+	e_RuleGroupsNamespaceArn                                             smithy.SchemaExtensions
+	e_RuleGroupsNamespaceData                                            smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription                                      smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_arn                                  smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_name                                 smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_status                               smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_data                                 smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_createdAt                            smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_modifiedAt                           smithy.SchemaExtensions
+	eRuleGroupsNamespaceDescription_tags                                 smithy.SchemaExtensions
+	e_RuleGroupsNamespaceName                                            smithy.SchemaExtensions
+	eRuleGroupsNamespaceStatus                                           smithy.SchemaExtensions
+	eRuleGroupsNamespaceStatus_statusCode                                smithy.SchemaExtensions
+	eRuleGroupsNamespaceStatus_statusReason                              smithy.SchemaExtensions
+	e_RuleGroupsNamespaceStatusCode                                      smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary                                          smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_arn                                      smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_name                                     smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_status                                   smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_createdAt                                smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_modifiedAt                               smithy.SchemaExtensions
+	eRuleGroupsNamespaceSummary_tags                                     smithy.SchemaExtensions
+	e_RuleGroupsNamespaceSummaryList                                     smithy.SchemaExtensions
+	e_RuleGroupsNamespaceSummaryList_member                              smithy.SchemaExtensions
+	eScrapeConfiguration                                                 smithy.SchemaExtensions
+	eScrapeConfiguration_configurationBlob                               smithy.SchemaExtensions
+	e_ScraperAlias                                                       smithy.SchemaExtensions
+	e_ScraperArn                                                         smithy.SchemaExtensions
+	eScraperComponent                                                    smithy.SchemaExtensions
+	eScraperComponent_type                                               smithy.SchemaExtensions
+	eScraperComponent_config                                             smithy.SchemaExtensions
+	e_ScraperComponents                                                  smithy.SchemaExtensions
+	e_ScraperComponents_member                                           smithy.SchemaExtensions
+	e_ScraperComponentType                                               smithy.SchemaExtensions
+	eScraperDescription                                                  smithy.SchemaExtensions
+	eScraperDescription_alias                                            smithy.SchemaExtensions
+	eScraperDescription_scraperId                                        smithy.SchemaExtensions
+	eScraperDescription_arn                                              smithy.SchemaExtensions
+	eScraperDescription_roleArn                                          smithy.SchemaExtensions
+	eScraperDescription_status                                           smithy.SchemaExtensions
+	eScraperDescription_createdAt                                        smithy.SchemaExtensions
+	eScraperDescription_lastModifiedAt                                   smithy.SchemaExtensions
+	eScraperDescription_tags                                             smithy.SchemaExtensions
+	eScraperDescription_statusReason                                     smithy.SchemaExtensions
+	eScraperDescription_scrapeConfiguration                              smithy.SchemaExtensions
+	eScraperDescription_source                                           smithy.SchemaExtensions
+	eScraperDescription_destination                                      smithy.SchemaExtensions
+	eScraperDescription_roleConfiguration                                smithy.SchemaExtensions
+	eScraperDescription_exporters                                        smithy.SchemaExtensions
+	e_ScraperFilters                                                     smithy.SchemaExtensions
+	e_ScraperFilters_key                                                 smithy.SchemaExtensions
+	e_ScraperFilters_value                                               smithy.SchemaExtensions
+	e_ScraperId                                                          smithy.SchemaExtensions
+	eScraperLoggingConfigurationStatus                                   smithy.SchemaExtensions
+	eScraperLoggingConfigurationStatus_statusCode                        smithy.SchemaExtensions
+	eScraperLoggingConfigurationStatus_statusReason                      smithy.SchemaExtensions
+	e_ScraperLoggingConfigurationStatusCode                              smithy.SchemaExtensions
+	eScraperLoggingDestination                                           smithy.SchemaExtensions
+	eScraperLoggingDestination_cloudWatchLogs                            smithy.SchemaExtensions
+	eScraperStatus                                                       smithy.SchemaExtensions
+	eScraperStatus_statusCode                                            smithy.SchemaExtensions
+	e_ScraperStatusCode                                                  smithy.SchemaExtensions
+	eScraperSummary                                                      smithy.SchemaExtensions
+	eScraperSummary_alias                                                smithy.SchemaExtensions
+	eScraperSummary_scraperId                                            smithy.SchemaExtensions
+	eScraperSummary_arn                                                  smithy.SchemaExtensions
+	eScraperSummary_roleArn                                              smithy.SchemaExtensions
+	eScraperSummary_status                                               smithy.SchemaExtensions
+	eScraperSummary_createdAt                                            smithy.SchemaExtensions
+	eScraperSummary_lastModifiedAt                                       smithy.SchemaExtensions
+	eScraperSummary_tags                                                 smithy.SchemaExtensions
+	eScraperSummary_statusReason                                         smithy.SchemaExtensions
+	eScraperSummary_source                                               smithy.SchemaExtensions
+	eScraperSummary_destination                                          smithy.SchemaExtensions
+	eScraperSummary_roleConfiguration                                    smithy.SchemaExtensions
+	eScraperSummary_exporters                                            smithy.SchemaExtensions
+	e_ScraperSummaryList                                                 smithy.SchemaExtensions
+	e_ScraperSummaryList_member                                          smithy.SchemaExtensions
+	e_SecurityGroupId                                                    smithy.SchemaExtensions
+	e_SecurityGroupIds                                                   smithy.SchemaExtensions
+	e_SecurityGroupIds_member                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                          smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                             smithy.SchemaExtensions
+	eSource                                                              smithy.SchemaExtensions
+	eSource_eksConfiguration                                             smithy.SchemaExtensions
+	eSource_vpcConfiguration                                             smithy.SchemaExtensions
+	e_StatusReason                                                       smithy.SchemaExtensions
+	e_StringMap                                                          smithy.SchemaExtensions
+	e_StringMap_key                                                      smithy.SchemaExtensions
+	e_StringMap_value                                                    smithy.SchemaExtensions
+	e_SubnetId                                                           smithy.SchemaExtensions
+	e_SubnetIds                                                          smithy.SchemaExtensions
+	e_SubnetIds_member                                                   smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagKeys                                                            smithy.SchemaExtensions
+	e_TagKeys_member                                                     smithy.SchemaExtensions
+	e_TagMap                                                             smithy.SchemaExtensions
+	e_TagMap_key                                                         smithy.SchemaExtensions
+	e_TagMap_value                                                       smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	eThrottlingException                                                 smithy.SchemaExtensions
+	eThrottlingException_message                                         smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                     smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                       smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                               smithy.SchemaExtensions
+	e_Uri                                                                smithy.SchemaExtensions
+	eValidationException                                                 smithy.SchemaExtensions
+	eValidationException_message                                         smithy.SchemaExtensions
+	eValidationException_reason                                          smithy.SchemaExtensions
+	eValidationException_fieldList                                       smithy.SchemaExtensions
+	eValidationExceptionField                                            smithy.SchemaExtensions
+	eValidationExceptionField_name                                       smithy.SchemaExtensions
+	eValidationExceptionField_message                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                smithy.SchemaExtensions
+	e_ValidationExceptionReason                                          smithy.SchemaExtensions
+	eVpcConfiguration                                                    smithy.SchemaExtensions
+	eVpcConfiguration_securityGroupIds                                   smithy.SchemaExtensions
+	eVpcConfiguration_subnetIds                                          smithy.SchemaExtensions
+	e_WorkspaceAlias                                                     smithy.SchemaExtensions
+	e_WorkspaceArn                                                       smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription                                   smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription_status                            smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription_limitsPerLabelSet                 smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription_retentionPeriodInDays             smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds     smithy.SchemaExtensions
+	eWorkspaceConfigurationDescription_ruleQueryOffsetInSeconds          smithy.SchemaExtensions
+	eWorkspaceConfigurationStatus                                        smithy.SchemaExtensions
+	eWorkspaceConfigurationStatus_statusCode                             smithy.SchemaExtensions
+	eWorkspaceConfigurationStatus_statusReason                           smithy.SchemaExtensions
+	e_WorkspaceConfigurationStatusCode                                   smithy.SchemaExtensions
+	eWorkspaceDescription                                                smithy.SchemaExtensions
+	eWorkspaceDescription_workspaceId                                    smithy.SchemaExtensions
+	eWorkspaceDescription_alias                                          smithy.SchemaExtensions
+	eWorkspaceDescription_arn                                            smithy.SchemaExtensions
+	eWorkspaceDescription_status                                         smithy.SchemaExtensions
+	eWorkspaceDescription_prometheusEndpoint                             smithy.SchemaExtensions
+	eWorkspaceDescription_createdAt                                      smithy.SchemaExtensions
+	eWorkspaceDescription_tags                                           smithy.SchemaExtensions
+	eWorkspaceDescription_kmsKeyArn                                      smithy.SchemaExtensions
+	e_WorkspaceId                                                        smithy.SchemaExtensions
+	e_WorkspacePolicyStatusCode                                          smithy.SchemaExtensions
+	eWorkspaceStatus                                                     smithy.SchemaExtensions
+	eWorkspaceStatus_statusCode                                          smithy.SchemaExtensions
+	e_WorkspaceStatusCode                                                smithy.SchemaExtensions
+	eWorkspaceSummary                                                    smithy.SchemaExtensions
+	eWorkspaceSummary_workspaceId                                        smithy.SchemaExtensions
+	eWorkspaceSummary_alias                                              smithy.SchemaExtensions
+	eWorkspaceSummary_arn                                                smithy.SchemaExtensions
+	eWorkspaceSummary_status                                             smithy.SchemaExtensions
+	eWorkspaceSummary_createdAt                                          smithy.SchemaExtensions
+	eWorkspaceSummary_tags                                               smithy.SchemaExtensions
+	eWorkspaceSummary_kmsKeyArn                                          smithy.SchemaExtensions
+	e_WorkspaceSummaryList                                               smithy.SchemaExtensions
+	e_WorkspaceSummaryList_member                                        smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionRequest                                 smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionRequest_workspaceId                     smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionRequest_data                            smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionRequest_clientToken                     smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionResponse                                smithy.SchemaExtensions
+	eCreateAlertManagerDefinitionResponse_status                         smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest                                        smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_workspaceId                            smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_alias                                  smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_evaluationIntervalInSeconds            smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_missingDataAction                      smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_configuration                          smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_labels                                 smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_clientToken                            smithy.SchemaExtensions
+	eCreateAnomalyDetectorRequest_tags                                   smithy.SchemaExtensions
+	eCreateAnomalyDetectorResponse                                       smithy.SchemaExtensions
+	eCreateAnomalyDetectorResponse_anomalyDetectorId                     smithy.SchemaExtensions
+	eCreateAnomalyDetectorResponse_arn                                   smithy.SchemaExtensions
+	eCreateAnomalyDetectorResponse_status                                smithy.SchemaExtensions
+	eCreateAnomalyDetectorResponse_tags                                  smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest                                   smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_workspaceId                       smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_logGroupArn                       smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_clientToken                       smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse                                  smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_status                           smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationRequest                              smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationRequest_workspaceId                  smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationRequest_destinations                 smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationRequest_clientToken                  smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationResponse                             smithy.SchemaExtensions
+	eCreateQueryLoggingConfigurationResponse_status                      smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest                                    smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest_workspaceId                        smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest_name                               smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest_data                               smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest_clientToken                        smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceRequest_tags                               smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceResponse                                   smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceResponse_name                              smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceResponse_arn                               smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceResponse_status                            smithy.SchemaExtensions
+	eCreateRuleGroupsNamespaceResponse_tags                              smithy.SchemaExtensions
+	eCreateScraperRequest                                                smithy.SchemaExtensions
+	eCreateScraperRequest_alias                                          smithy.SchemaExtensions
+	eCreateScraperRequest_scrapeConfiguration                            smithy.SchemaExtensions
+	eCreateScraperRequest_source                                         smithy.SchemaExtensions
+	eCreateScraperRequest_destination                                    smithy.SchemaExtensions
+	eCreateScraperRequest_roleConfiguration                              smithy.SchemaExtensions
+	eCreateScraperRequest_clientToken                                    smithy.SchemaExtensions
+	eCreateScraperRequest_tags                                           smithy.SchemaExtensions
+	eCreateScraperRequest_exporters                                      smithy.SchemaExtensions
+	eCreateScraperResponse                                               smithy.SchemaExtensions
+	eCreateScraperResponse_scraperId                                     smithy.SchemaExtensions
+	eCreateScraperResponse_arn                                           smithy.SchemaExtensions
+	eCreateScraperResponse_status                                        smithy.SchemaExtensions
+	eCreateScraperResponse_tags                                          smithy.SchemaExtensions
+	eCreateWorkspaceRequest                                              smithy.SchemaExtensions
+	eCreateWorkspaceRequest_alias                                        smithy.SchemaExtensions
+	eCreateWorkspaceRequest_clientToken                                  smithy.SchemaExtensions
+	eCreateWorkspaceRequest_tags                                         smithy.SchemaExtensions
+	eCreateWorkspaceRequest_kmsKeyArn                                    smithy.SchemaExtensions
+	eCreateWorkspaceResponse                                             smithy.SchemaExtensions
+	eCreateWorkspaceResponse_workspaceId                                 smithy.SchemaExtensions
+	eCreateWorkspaceResponse_arn                                         smithy.SchemaExtensions
+	eCreateWorkspaceResponse_status                                      smithy.SchemaExtensions
+	eCreateWorkspaceResponse_tags                                        smithy.SchemaExtensions
+	eCreateWorkspaceResponse_kmsKeyArn                                   smithy.SchemaExtensions
+	eDeleteAlertManagerDefinitionRequest                                 smithy.SchemaExtensions
+	eDeleteAlertManagerDefinitionRequest_workspaceId                     smithy.SchemaExtensions
+	eDeleteAlertManagerDefinitionRequest_clientToken                     smithy.SchemaExtensions
+	eDeleteAnomalyDetectorRequest                                        smithy.SchemaExtensions
+	eDeleteAnomalyDetectorRequest_workspaceId                            smithy.SchemaExtensions
+	eDeleteAnomalyDetectorRequest_anomalyDetectorId                      smithy.SchemaExtensions
+	eDeleteAnomalyDetectorRequest_clientToken                            smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest                                   smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest_workspaceId                       smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest_clientToken                       smithy.SchemaExtensions
+	eDeleteQueryLoggingConfigurationRequest                              smithy.SchemaExtensions
+	eDeleteQueryLoggingConfigurationRequest_workspaceId                  smithy.SchemaExtensions
+	eDeleteQueryLoggingConfigurationRequest_clientToken                  smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest                                         smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_workspaceId                             smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_clientToken                             smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_revisionId                              smithy.SchemaExtensions
+	eDeleteRuleGroupsNamespaceRequest                                    smithy.SchemaExtensions
+	eDeleteRuleGroupsNamespaceRequest_workspaceId                        smithy.SchemaExtensions
+	eDeleteRuleGroupsNamespaceRequest_name                               smithy.SchemaExtensions
+	eDeleteRuleGroupsNamespaceRequest_clientToken                        smithy.SchemaExtensions
+	eDeleteScraperRequest                                                smithy.SchemaExtensions
+	eDeleteScraperRequest_scraperId                                      smithy.SchemaExtensions
+	eDeleteScraperRequest_clientToken                                    smithy.SchemaExtensions
+	eDeleteScraperLoggingConfigurationRequest                            smithy.SchemaExtensions
+	eDeleteScraperLoggingConfigurationRequest_scraperId                  smithy.SchemaExtensions
+	eDeleteScraperLoggingConfigurationRequest_clientToken                smithy.SchemaExtensions
+	eDeleteScraperResponse                                               smithy.SchemaExtensions
+	eDeleteScraperResponse_scraperId                                     smithy.SchemaExtensions
+	eDeleteScraperResponse_status                                        smithy.SchemaExtensions
+	eDeleteWorkspaceRequest                                              smithy.SchemaExtensions
+	eDeleteWorkspaceRequest_workspaceId                                  smithy.SchemaExtensions
+	eDeleteWorkspaceRequest_clientToken                                  smithy.SchemaExtensions
+	eDescribeAlertManagerDefinitionRequest                               smithy.SchemaExtensions
+	eDescribeAlertManagerDefinitionRequest_workspaceId                   smithy.SchemaExtensions
+	eDescribeAlertManagerDefinitionResponse                              smithy.SchemaExtensions
+	eDescribeAlertManagerDefinitionResponse_alertManagerDefinition       smithy.SchemaExtensions
+	eDescribeAnomalyDetectorRequest                                      smithy.SchemaExtensions
+	eDescribeAnomalyDetectorRequest_workspaceId                          smithy.SchemaExtensions
+	eDescribeAnomalyDetectorRequest_anomalyDetectorId                    smithy.SchemaExtensions
+	eDescribeAnomalyDetectorResponse                                     smithy.SchemaExtensions
+	eDescribeAnomalyDetectorResponse_anomalyDetector                     smithy.SchemaExtensions
+	eDescribeLoggingConfigurationRequest                                 smithy.SchemaExtensions
+	eDescribeLoggingConfigurationRequest_workspaceId                     smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse                                smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse_loggingConfiguration           smithy.SchemaExtensions
+	eDescribeQueryLoggingConfigurationRequest                            smithy.SchemaExtensions
+	eDescribeQueryLoggingConfigurationRequest_workspaceId                smithy.SchemaExtensions
+	eDescribeQueryLoggingConfigurationResponse                           smithy.SchemaExtensions
+	eDescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration smithy.SchemaExtensions
+	eDescribeResourcePolicyRequest                                       smithy.SchemaExtensions
+	eDescribeResourcePolicyRequest_workspaceId                           smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse                                      smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse_policyDocument                       smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse_policyStatus                         smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse_revisionId                           smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespaceRequest                                  smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespaceRequest_workspaceId                      smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespaceRequest_name                             smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespaceResponse                                 smithy.SchemaExtensions
+	eDescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace             smithy.SchemaExtensions
+	eDescribeScraperRequest                                              smithy.SchemaExtensions
+	eDescribeScraperRequest_scraperId                                    smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationRequest                          smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationRequest_scraperId                smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse                         smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse_status                  smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse_scraperId               smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse_loggingDestination      smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse_scraperComponents       smithy.SchemaExtensions
+	eDescribeScraperLoggingConfigurationResponse_modifiedAt              smithy.SchemaExtensions
+	eDescribeScraperResponse                                             smithy.SchemaExtensions
+	eDescribeScraperResponse_scraper                                     smithy.SchemaExtensions
+	eDescribeWorkspaceConfigurationRequest                               smithy.SchemaExtensions
+	eDescribeWorkspaceConfigurationRequest_workspaceId                   smithy.SchemaExtensions
+	eDescribeWorkspaceConfigurationResponse                              smithy.SchemaExtensions
+	eDescribeWorkspaceConfigurationResponse_workspaceConfiguration       smithy.SchemaExtensions
+	eDescribeWorkspaceRequest                                            smithy.SchemaExtensions
+	eDescribeWorkspaceRequest_workspaceId                                smithy.SchemaExtensions
+	eDescribeWorkspaceResponse                                           smithy.SchemaExtensions
+	eDescribeWorkspaceResponse_workspace                                 smithy.SchemaExtensions
+	eGetDefaultScraperConfigurationRequest                               smithy.SchemaExtensions
+	eGetDefaultScraperConfigurationResponse                              smithy.SchemaExtensions
+	eGetDefaultScraperConfigurationResponse_configuration                smithy.SchemaExtensions
+	eListAnomalyDetectorsRequest                                         smithy.SchemaExtensions
+	eListAnomalyDetectorsRequest_workspaceId                             smithy.SchemaExtensions
+	eListAnomalyDetectorsRequest_alias                                   smithy.SchemaExtensions
+	eListAnomalyDetectorsRequest_maxResults                              smithy.SchemaExtensions
+	eListAnomalyDetectorsRequest_nextToken                               smithy.SchemaExtensions
+	eListAnomalyDetectorsResponse                                        smithy.SchemaExtensions
+	eListAnomalyDetectorsResponse_anomalyDetectors                       smithy.SchemaExtensions
+	eListAnomalyDetectorsResponse_nextToken                              smithy.SchemaExtensions
+	eListRuleGroupsNamespacesRequest                                     smithy.SchemaExtensions
+	eListRuleGroupsNamespacesRequest_workspaceId                         smithy.SchemaExtensions
+	eListRuleGroupsNamespacesRequest_name                                smithy.SchemaExtensions
+	eListRuleGroupsNamespacesRequest_nextToken                           smithy.SchemaExtensions
+	eListRuleGroupsNamespacesRequest_maxResults                          smithy.SchemaExtensions
+	eListRuleGroupsNamespacesResponse                                    smithy.SchemaExtensions
+	eListRuleGroupsNamespacesResponse_ruleGroupsNamespaces               smithy.SchemaExtensions
+	eListRuleGroupsNamespacesResponse_nextToken                          smithy.SchemaExtensions
+	eListScrapersRequest                                                 smithy.SchemaExtensions
+	eListScrapersRequest_filters                                         smithy.SchemaExtensions
+	eListScrapersRequest_nextToken                                       smithy.SchemaExtensions
+	eListScrapersRequest_maxResults                                      smithy.SchemaExtensions
+	eListScrapersResponse                                                smithy.SchemaExtensions
+	eListScrapersResponse_scrapers                                       smithy.SchemaExtensions
+	eListScrapersResponse_nextToken                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eListTagsForResourceResponse                                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                    smithy.SchemaExtensions
+	eListWorkspacesRequest                                               smithy.SchemaExtensions
+	eListWorkspacesRequest_nextToken                                     smithy.SchemaExtensions
+	eListWorkspacesRequest_alias                                         smithy.SchemaExtensions
+	eListWorkspacesRequest_maxResults                                    smithy.SchemaExtensions
+	eListWorkspacesResponse                                              smithy.SchemaExtensions
+	eListWorkspacesResponse_workspaces                                   smithy.SchemaExtensions
+	eListWorkspacesResponse_nextToken                                    smithy.SchemaExtensions
+	ePutAlertManagerDefinitionRequest                                    smithy.SchemaExtensions
+	ePutAlertManagerDefinitionRequest_workspaceId                        smithy.SchemaExtensions
+	ePutAlertManagerDefinitionRequest_data                               smithy.SchemaExtensions
+	ePutAlertManagerDefinitionRequest_clientToken                        smithy.SchemaExtensions
+	ePutAlertManagerDefinitionResponse                                   smithy.SchemaExtensions
+	ePutAlertManagerDefinitionResponse_status                            smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest                                           smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_workspaceId                               smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_anomalyDetectorId                         smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_evaluationIntervalInSeconds               smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_missingDataAction                         smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_configuration                             smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_labels                                    smithy.SchemaExtensions
+	ePutAnomalyDetectorRequest_clientToken                               smithy.SchemaExtensions
+	ePutAnomalyDetectorResponse                                          smithy.SchemaExtensions
+	ePutAnomalyDetectorResponse_anomalyDetectorId                        smithy.SchemaExtensions
+	ePutAnomalyDetectorResponse_arn                                      smithy.SchemaExtensions
+	ePutAnomalyDetectorResponse_status                                   smithy.SchemaExtensions
+	ePutAnomalyDetectorResponse_tags                                     smithy.SchemaExtensions
+	ePutResourcePolicyRequest                                            smithy.SchemaExtensions
+	ePutResourcePolicyRequest_workspaceId                                smithy.SchemaExtensions
+	ePutResourcePolicyRequest_policyDocument                             smithy.SchemaExtensions
+	ePutResourcePolicyRequest_clientToken                                smithy.SchemaExtensions
+	ePutResourcePolicyRequest_revisionId                                 smithy.SchemaExtensions
+	ePutResourcePolicyResponse                                           smithy.SchemaExtensions
+	ePutResourcePolicyResponse_policyStatus                              smithy.SchemaExtensions
+	ePutResourcePolicyResponse_revisionId                                smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceRequest                                       smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceRequest_workspaceId                           smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceRequest_name                                  smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceRequest_data                                  smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceRequest_clientToken                           smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceResponse                                      smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceResponse_name                                 smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceResponse_arn                                  smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceResponse_status                               smithy.SchemaExtensions
+	ePutRuleGroupsNamespaceResponse_tags                                 smithy.SchemaExtensions
+	eTagResourceRequest                                                  smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                      smithy.SchemaExtensions
+	eTagResourceRequest_tags                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                                smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                    smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                               smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest                                   smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_workspaceId                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_logGroupArn                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_clientToken                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse                                  smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_status                           smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationRequest                              smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationRequest_workspaceId                  smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationRequest_destinations                 smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationRequest_clientToken                  smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationResponse                             smithy.SchemaExtensions
+	eUpdateQueryLoggingConfigurationResponse_status                      smithy.SchemaExtensions
+	eUpdateScraperRequest                                                smithy.SchemaExtensions
+	eUpdateScraperRequest_scraperId                                      smithy.SchemaExtensions
+	eUpdateScraperRequest_alias                                          smithy.SchemaExtensions
+	eUpdateScraperRequest_scrapeConfiguration                            smithy.SchemaExtensions
+	eUpdateScraperRequest_destination                                    smithy.SchemaExtensions
+	eUpdateScraperRequest_roleConfiguration                              smithy.SchemaExtensions
+	eUpdateScraperRequest_clientToken                                    smithy.SchemaExtensions
+	eUpdateScraperRequest_exporters                                      smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationRequest                            smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationRequest_scraperId                  smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationRequest_loggingDestination         smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationRequest_scraperComponents          smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationResponse                           smithy.SchemaExtensions
+	eUpdateScraperLoggingConfigurationResponse_status                    smithy.SchemaExtensions
+	eUpdateScraperResponse                                               smithy.SchemaExtensions
+	eUpdateScraperResponse_scraperId                                     smithy.SchemaExtensions
+	eUpdateScraperResponse_arn                                           smithy.SchemaExtensions
+	eUpdateScraperResponse_status                                        smithy.SchemaExtensions
+	eUpdateScraperResponse_tags                                          smithy.SchemaExtensions
+	eUpdateWorkspaceAliasRequest                                         smithy.SchemaExtensions
+	eUpdateWorkspaceAliasRequest_workspaceId                             smithy.SchemaExtensions
+	eUpdateWorkspaceAliasRequest_alias                                   smithy.SchemaExtensions
+	eUpdateWorkspaceAliasRequest_clientToken                             smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest                                 smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_workspaceId                     smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_clientToken                     smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_limitsPerLabelSet               smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_retentionPeriodInDays           smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds   smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds        smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationResponse                                smithy.SchemaExtensions
+	eUpdateWorkspaceConfigurationResponse_status                         smithy.SchemaExtensions
+)
 
-var CreateAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateAlertManagerDefinition                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAlertManagerDefinition"}
+	iCreateAnomalyDetector                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAnomalyDetector"}
+	iCreateLoggingConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateLoggingConfiguration"}
+	iCreateQueryLoggingConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateQueryLoggingConfiguration"}
+	iCreateRuleGroupsNamespace                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateRuleGroupsNamespace"}
+	iCreateScraper                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateScraper"}
+	iCreateWorkspace                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateWorkspace"}
+	iDeleteAlertManagerDefinition                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteAlertManagerDefinition"}
+	iDeleteAnomalyDetector                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteAnomalyDetector"}
+	iDeleteLoggingConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteLoggingConfiguration"}
+	iDeleteQueryLoggingConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteQueryLoggingConfiguration"}
+	iDeleteResourcePolicy                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteResourcePolicy"}
+	iDeleteRuleGroupsNamespace                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteRuleGroupsNamespace"}
+	iDeleteScraper                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteScraper"}
+	iDeleteScraperLoggingConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteScraperLoggingConfiguration"}
+	iDeleteWorkspace                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteWorkspace"}
+	iDescribeAlertManagerDefinition              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAlertManagerDefinition"}
+	iDescribeAnomalyDetector                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAnomalyDetector"}
+	iDescribeLoggingConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeLoggingConfiguration"}
+	iDescribeQueryLoggingConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeQueryLoggingConfiguration"}
+	iDescribeResourcePolicy                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeResourcePolicy"}
+	iDescribeRuleGroupsNamespace                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeRuleGroupsNamespace"}
+	iDescribeScraper                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraper"}
+	iDescribeScraperLoggingConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraperLoggingConfiguration"}
+	iDescribeWorkspace                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspace"}
+	iDescribeWorkspaceConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspaceConfiguration"}
+	iGetDefaultScraperConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "GetDefaultScraperConfiguration"}
+	iListAnomalyDetectors                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListAnomalyDetectors"}
+	iListRuleGroupsNamespaces                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListRuleGroupsNamespaces"}
+	iListScrapers                                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListScrapers"}
+	iListTagsForResource                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListTagsForResource"}
+	iListWorkspaces                              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListWorkspaces"}
+	iPutAlertManagerDefinition                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAlertManagerDefinition"}
+	iPutAnomalyDetector                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAnomalyDetector"}
+	iPutResourcePolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutResourcePolicy"}
+	iPutRuleGroupsNamespace                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutRuleGroupsNamespace"}
+	iTagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UntagResource"}
+	iUpdateLoggingConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateLoggingConfiguration"}
+	iUpdateQueryLoggingConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateQueryLoggingConfiguration"}
+	iUpdateScraper                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraper"}
+	iUpdateScraperLoggingConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraperLoggingConfiguration"}
+	iUpdateWorkspaceAlias                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateWorkspaceAlias"}
+	iUpdateWorkspaceConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateWorkspaceConfiguration"}
+	i_AmazonPrometheusService                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AmazonPrometheusService"}
+	iAccessDeniedException                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AccessDeniedException"}
+	i_AlertManagerDefinitionData                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AlertManagerDefinitionData"}
+	iAlertManagerDefinitionDescription           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AlertManagerDefinitionDescription"}
+	iAlertManagerDefinitionStatus                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AlertManagerDefinitionStatus"}
+	i_AlertManagerDefinitionStatusCode           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AlertManagerDefinitionStatusCode"}
+	iAmpConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AmpConfiguration"}
+	i_AnomalyDetectorAlias                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorAlias"}
+	i_AnomalyDetectorArn                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorArn"}
+	iAnomalyDetectorConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorConfiguration"}
+	iAnomalyDetectorDescription                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorDescription"}
+	i_AnomalyDetectorEvaluationInterval          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorEvaluationInterval"}
+	i_AnomalyDetectorId                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorId"}
+	iAnomalyDetectorMissingDataAction            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorMissingDataAction"}
+	iAnomalyDetectorStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorStatus"}
+	iAnomalyDetectorStatusCode                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorStatusCode"}
+	iAnomalyDetectorSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorSummary"}
+	i_AnomalyDetectorSummaryList                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "AnomalyDetectorSummaryList"}
+	iCloudWatchConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CloudWatchConfiguration"}
+	i_CloudWatchDatasetArn                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CloudWatchDatasetArn"}
+	iCloudWatchLogDestination                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CloudWatchLogDestination"}
+	i_ClusterArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ClusterArn"}
+	iComponentConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ComponentConfig"}
+	iConflictException                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ConflictException"}
+	iDestination                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "Destination"}
+	iEksConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "EksConfiguration"}
+	iExporterConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ExporterConfiguration"}
+	i_ExporterList                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ExporterList"}
+	i_FilterKey                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "FilterKey"}
+	i_FilterValue                                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "FilterValue"}
+	i_FilterValues                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "FilterValues"}
+	i_IamRoleArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "IamRoleArn"}
+	i_IdempotencyToken                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "IdempotencyToken"}
+	iIgnoreNearExpected                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "IgnoreNearExpected"}
+	iInternalServerException                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "InternalServerException"}
+	iKafkaExporterConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "KafkaExporterConfiguration"}
+	i_KafkaExporterFilter                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "KafkaExporterFilter"}
+	i_KmsKeyArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "KmsKeyArn"}
+	i_LabelName                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LabelName"}
+	i_LabelSet                                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LabelSet"}
+	i_LabelValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LabelValue"}
+	iLimitsPerLabelSet                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LimitsPerLabelSet"}
+	iLimitsPerLabelSetEntry                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LimitsPerLabelSetEntry"}
+	i_LimitsPerLabelSetList                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LimitsPerLabelSetList"}
+	iLoggingConfigurationMetadata                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingConfigurationMetadata"}
+	iLoggingConfigurationStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingConfigurationStatus"}
+	i_LoggingConfigurationStatusCode             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingConfigurationStatusCode"}
+	iLoggingDestination                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingDestination"}
+	i_LoggingDestinations                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingDestinations"}
+	iLoggingFilter                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LoggingFilter"}
+	i_LogGroupArn                                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "LogGroupArn"}
+	i_MskClusterArn                              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "MskClusterArn"}
+	i_OpenSearchDomainArn                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "OpenSearchDomainArn"}
+	iOpenSearchExporterConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "OpenSearchExporterConfiguration"}
+	i_PaginationToken                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PaginationToken"}
+	i_PrometheusMetricLabelKey                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PrometheusMetricLabelKey"}
+	i_PrometheusMetricLabelMap                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PrometheusMetricLabelMap"}
+	i_PrometheusMetricLabelValue                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PrometheusMetricLabelValue"}
+	iQueryLoggingConfigurationMetadata           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "QueryLoggingConfigurationMetadata"}
+	iQueryLoggingConfigurationStatus             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "QueryLoggingConfigurationStatus"}
+	i_QueryLoggingConfigurationStatusCode        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "QueryLoggingConfigurationStatusCode"}
+	iRandomCutForestConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RandomCutForestConfiguration"}
+	i_RandomCutForestQuery                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RandomCutForestQuery"}
+	iResourceNotFoundException                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ResourceNotFoundException"}
+	iRoleConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RoleConfiguration"}
+	i_RuleGroupsNamespaceArn                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceArn"}
+	i_RuleGroupsNamespaceData                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceData"}
+	iRuleGroupsNamespaceDescription              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceDescription"}
+	i_RuleGroupsNamespaceName                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceName"}
+	iRuleGroupsNamespaceStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceStatus"}
+	i_RuleGroupsNamespaceStatusCode              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceStatusCode"}
+	iRuleGroupsNamespaceSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceSummary"}
+	i_RuleGroupsNamespaceSummaryList             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "RuleGroupsNamespaceSummaryList"}
+	iScrapeConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScrapeConfiguration"}
+	i_ScraperAlias                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperAlias"}
+	i_ScraperArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperArn"}
+	iScraperComponent                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperComponent"}
+	i_ScraperComponents                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperComponents"}
+	i_ScraperComponentType                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperComponentType"}
+	iScraperDescription                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperDescription"}
+	i_ScraperFilters                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperFilters"}
+	i_ScraperId                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperId"}
+	iScraperLoggingConfigurationStatus           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperLoggingConfigurationStatus"}
+	i_ScraperLoggingConfigurationStatusCode      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperLoggingConfigurationStatusCode"}
+	iScraperLoggingDestination                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperLoggingDestination"}
+	iScraperStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperStatus"}
+	i_ScraperStatusCode                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperStatusCode"}
+	iScraperSummary                              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperSummary"}
+	i_ScraperSummaryList                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ScraperSummaryList"}
+	i_SecurityGroupId                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "SecurityGroupIds"}
+	iServiceQuotaExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ServiceQuotaExceededException"}
+	iSource                                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "Source"}
+	i_StatusReason                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "StatusReason"}
+	i_StringMap                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "StringMap"}
+	i_SubnetId                                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "SubnetId"}
+	i_SubnetIds                                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "SubnetIds"}
+	i_TagKey                                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagKey"}
+	i_TagKeys                                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagKeys"}
+	i_TagMap                                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagMap"}
+	i_TagValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagValue"}
+	iThrottlingException                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ThrottlingException"}
+	i_Uri                                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "Uri"}
+	iValidationException                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ValidationException"}
+	iValidationExceptionField                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ValidationExceptionReason"}
+	iVpcConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "VpcConfiguration"}
+	i_WorkspaceAlias                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceAlias"}
+	i_WorkspaceArn                               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceArn"}
+	iWorkspaceConfigurationDescription           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceConfigurationDescription"}
+	iWorkspaceConfigurationStatus                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceConfigurationStatus"}
+	i_WorkspaceConfigurationStatusCode           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceConfigurationStatusCode"}
+	iWorkspaceDescription                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceDescription"}
+	i_WorkspaceId                                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceId"}
+	i_WorkspacePolicyStatusCode                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspacePolicyStatusCode"}
+	iWorkspaceStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceStatus"}
+	i_WorkspaceStatusCode                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceStatusCode"}
+	iWorkspaceSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceSummary"}
+	i_WorkspaceSummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "WorkspaceSummaryList"}
+	iCreateAlertManagerDefinitionRequest         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAlertManagerDefinitionRequest"}
+	iCreateAlertManagerDefinitionResponse        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAlertManagerDefinitionResponse"}
+	iCreateAnomalyDetectorRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAnomalyDetectorRequest"}
+	iCreateAnomalyDetectorResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateAnomalyDetectorResponse"}
+	iCreateLoggingConfigurationRequest           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateLoggingConfigurationRequest"}
+	iCreateLoggingConfigurationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateLoggingConfigurationResponse"}
+	iCreateQueryLoggingConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateQueryLoggingConfigurationRequest"}
+	iCreateQueryLoggingConfigurationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateQueryLoggingConfigurationResponse"}
+	iCreateRuleGroupsNamespaceRequest            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateRuleGroupsNamespaceRequest"}
+	iCreateRuleGroupsNamespaceResponse           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateRuleGroupsNamespaceResponse"}
+	iCreateScraperRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateScraperRequest"}
+	iCreateScraperResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateScraperResponse"}
+	iCreateWorkspaceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateWorkspaceRequest"}
+	iCreateWorkspaceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "CreateWorkspaceResponse"}
+	iDeleteAlertManagerDefinitionRequest         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteAlertManagerDefinitionRequest"}
+	iDeleteAnomalyDetectorRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteAnomalyDetectorRequest"}
+	iDeleteLoggingConfigurationRequest           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteLoggingConfigurationRequest"}
+	iDeleteQueryLoggingConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteQueryLoggingConfigurationRequest"}
+	iDeleteResourcePolicyRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteResourcePolicyRequest"}
+	iDeleteRuleGroupsNamespaceRequest            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteRuleGroupsNamespaceRequest"}
+	iDeleteScraperRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteScraperRequest"}
+	iDeleteScraperLoggingConfigurationRequest    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteScraperLoggingConfigurationRequest"}
+	iDeleteScraperResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteScraperResponse"}
+	iDeleteWorkspaceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DeleteWorkspaceRequest"}
+	iDescribeAlertManagerDefinitionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAlertManagerDefinitionRequest"}
+	iDescribeAlertManagerDefinitionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAlertManagerDefinitionResponse"}
+	iDescribeAnomalyDetectorRequest              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAnomalyDetectorRequest"}
+	iDescribeAnomalyDetectorResponse             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeAnomalyDetectorResponse"}
+	iDescribeLoggingConfigurationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeLoggingConfigurationRequest"}
+	iDescribeLoggingConfigurationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeLoggingConfigurationResponse"}
+	iDescribeQueryLoggingConfigurationRequest    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeQueryLoggingConfigurationRequest"}
+	iDescribeQueryLoggingConfigurationResponse   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeQueryLoggingConfigurationResponse"}
+	iDescribeResourcePolicyRequest               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeResourcePolicyRequest"}
+	iDescribeResourcePolicyResponse              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeResourcePolicyResponse"}
+	iDescribeRuleGroupsNamespaceRequest          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeRuleGroupsNamespaceRequest"}
+	iDescribeRuleGroupsNamespaceResponse         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeRuleGroupsNamespaceResponse"}
+	iDescribeScraperRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraperRequest"}
+	iDescribeScraperLoggingConfigurationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraperLoggingConfigurationRequest"}
+	iDescribeScraperLoggingConfigurationResponse = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraperLoggingConfigurationResponse"}
+	iDescribeScraperResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeScraperResponse"}
+	iDescribeWorkspaceConfigurationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspaceConfigurationRequest"}
+	iDescribeWorkspaceConfigurationResponse      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspaceConfigurationResponse"}
+	iDescribeWorkspaceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspaceRequest"}
+	iDescribeWorkspaceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "DescribeWorkspaceResponse"}
+	iGetDefaultScraperConfigurationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "GetDefaultScraperConfigurationRequest"}
+	iGetDefaultScraperConfigurationResponse      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "GetDefaultScraperConfigurationResponse"}
+	iListAnomalyDetectorsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListAnomalyDetectorsRequest"}
+	iListAnomalyDetectorsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListAnomalyDetectorsResponse"}
+	iListRuleGroupsNamespacesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListRuleGroupsNamespacesRequest"}
+	iListRuleGroupsNamespacesResponse            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListRuleGroupsNamespacesResponse"}
+	iListScrapersRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListScrapersRequest"}
+	iListScrapersResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListScrapersResponse"}
+	iListTagsForResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListTagsForResourceResponse"}
+	iListWorkspacesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListWorkspacesRequest"}
+	iListWorkspacesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "ListWorkspacesResponse"}
+	iPutAlertManagerDefinitionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAlertManagerDefinitionRequest"}
+	iPutAlertManagerDefinitionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAlertManagerDefinitionResponse"}
+	iPutAnomalyDetectorRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAnomalyDetectorRequest"}
+	iPutAnomalyDetectorResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutAnomalyDetectorResponse"}
+	iPutResourcePolicyRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutResourcePolicyResponse"}
+	iPutRuleGroupsNamespaceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutRuleGroupsNamespaceRequest"}
+	iPutRuleGroupsNamespaceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "PutRuleGroupsNamespaceResponse"}
+	iTagResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "TagResourceResponse"}
+	iUntagResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UntagResourceResponse"}
+	iUpdateLoggingConfigurationRequest           = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateLoggingConfigurationRequest"}
+	iUpdateLoggingConfigurationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateLoggingConfigurationResponse"}
+	iUpdateQueryLoggingConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateQueryLoggingConfigurationRequest"}
+	iUpdateQueryLoggingConfigurationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateQueryLoggingConfigurationResponse"}
+	iUpdateScraperRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraperRequest"}
+	iUpdateScraperLoggingConfigurationRequest    = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraperLoggingConfigurationRequest"}
+	iUpdateScraperLoggingConfigurationResponse   = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraperLoggingConfigurationResponse"}
+	iUpdateScraperResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateScraperResponse"}
+	iUpdateWorkspaceAliasRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateWorkspaceAliasRequest"}
+	iUpdateWorkspaceConfigurationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateWorkspaceConfigurationRequest"}
+	iUpdateWorkspaceConfigurationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.amp", Name: "UpdateWorkspaceConfigurationResponse"}
+	pString                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pUnit                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pDouble                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+	pInteger                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pBlob                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/workspaces/{workspaceId}/alertmanager/definition",
+	Code: 202}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/anomalydetectors",
-	Code: 202})
-
-var CreateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/logging",
-	Code: 202})
-
-var CreateQueryLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateQueryLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/logging/query",
-	Code: 202})
-
-var CreateRuleGroupsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateRuleGroupsNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/rulegroupsnamespaces",
-	Code: 202})
-
-var CreateScraper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateScraper",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/scrapers",
-	Code: 202})
-
-var CreateWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces",
-	Code: 202})
-
-var DeleteAlertManagerDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteAlertManagerDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/alertmanager/definition",
-	Code: 202})
-
-var DeleteAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}",
-	Code: 202})
-
-var DeleteLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/logging",
-	Code: 202})
-
-var DeleteQueryLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteQueryLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/logging/query",
-	Code: 202})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/policy",
-	Code: 202})
-
-var DeleteRuleGroupsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteRuleGroupsNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/rulegroupsnamespaces/{name}",
-	Code: 202})
-
-var DeleteScraper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteScraper",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/scrapers/{scraperId}",
-	Code: 202})
-
-var DeleteScraperLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteScraperLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/scrapers/{scraperId}/logging-configuration",
-	Code: 202})
-
-var DeleteWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 202})
-
-var DescribeAlertManagerDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAlertManagerDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 202}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/alertmanager/definition",
-	Code: 200})
-
-var DescribeAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}",
-	Code: 200})
-
-var DescribeLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/logging",
-	Code: 200})
-
-var DescribeQueryLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeQueryLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/logging/query",
-	Code: 200})
-
-var DescribeResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/policy",
-	Code: 200})
-
-var DescribeRuleGroupsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeRuleGroupsNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/rulegroupsnamespaces/{name}",
-	Code: 200})
-
-var DescribeScraper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraper",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/scrapers/{scraperId}",
-	Code: 200})
-
-var DescribeScraperLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraperLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/scrapers/{scraperId}/logging-configuration",
-	Code: 200})
-
-var DescribeWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 200})
-
-var DescribeWorkspaceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspaceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/configuration",
-	Code: 200})
-
-var GetDefaultScraperConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "GetDefaultScraperConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/scraperconfiguration",
-	Code: 200})
-
-var ListAnomalyDetectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListAnomalyDetectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/anomalydetectors",
-	Code: 200})
-
-var ListRuleGroupsNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListRuleGroupsNamespaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/rulegroupsnamespaces",
-	Code: 200})
-
-var ListScrapers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListScrapers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/scrapers",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListWorkspaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListWorkspaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces",
-	Code: 200})
-
-var PutAlertManagerDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAlertManagerDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/alertmanager/definition",
-	Code: 202})
-
-var PutAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}",
-	Code: 202})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/policy",
-	Code: 202})
-
-var PutRuleGroupsNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutRuleGroupsNamespace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/rulegroupsnamespaces/{name}",
-	Code: 202})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/logging",
-	Code: 202})
-
-var UpdateQueryLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateQueryLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/logging/query",
-	Code: 202})
-
-var UpdateScraper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraper",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/scrapers/{scraperId}",
-	Code: 202})
-
-var UpdateScraperLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraperLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/scrapers/{scraperId}/logging-configuration",
-	Code: 202})
-
-var UpdateWorkspaceAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateWorkspaceAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/alias",
-	Code: 204})
-
-var UpdateWorkspaceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateWorkspaceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/workspaces/{workspaceId}/configuration",
-	Code: 202})
-
-var _AmazonPrometheusService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AmazonPrometheusService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonPrometheusService = smithy.NewServiceSchema(_AmazonPrometheusService, "2020-08-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AlertManagerDefinitionData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AlertManagerDefinitionData",
-}, smithy.ShapeTypeBlob, 0)
-
-var AlertManagerDefinitionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AlertManagerDefinitionDescription",
-}, smithy.ShapeTypeStructure, 4)
-var AlertManagerDefinitionDescription_status *smithy.Schema
-
-var AlertManagerDefinitionDescription_data *smithy.Schema
-
-var AlertManagerDefinitionDescription_createdAt *smithy.Schema
-
-var AlertManagerDefinitionDescription_modifiedAt *smithy.Schema
-
-var AlertManagerDefinitionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AlertManagerDefinitionStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AlertManagerDefinitionStatus_statusCode *smithy.Schema
-
-var AlertManagerDefinitionStatus_statusReason *smithy.Schema
-
-var _AlertManagerDefinitionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AlertManagerDefinitionStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var AmpConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AmpConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AmpConfiguration_workspaceArn *smithy.Schema
-
-var _AnomalyDetectorAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _AnomalyDetectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var AnomalyDetectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var AnomalyDetectorConfiguration_randomCutForest *smithy.Schema
-
-var AnomalyDetectorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorDescription",
-}, smithy.ShapeTypeStructure, 11)
-var AnomalyDetectorDescription_arn *smithy.Schema
-
-var AnomalyDetectorDescription_anomalyDetectorId *smithy.Schema
-
-var AnomalyDetectorDescription_alias *smithy.Schema
-
-var AnomalyDetectorDescription_evaluationIntervalInSeconds *smithy.Schema
-
-var AnomalyDetectorDescription_missingDataAction *smithy.Schema
-
-var AnomalyDetectorDescription_configuration *smithy.Schema
-
-var AnomalyDetectorDescription_labels *smithy.Schema
-
-var AnomalyDetectorDescription_status *smithy.Schema
-
-var AnomalyDetectorDescription_createdAt *smithy.Schema
-
-var AnomalyDetectorDescription_modifiedAt *smithy.Schema
-
-var AnomalyDetectorDescription_tags *smithy.Schema
-
-var _AnomalyDetectorEvaluationInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorEvaluationInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AnomalyDetectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorId",
-}, smithy.ShapeTypeString, 0)
-
-var AnomalyDetectorMissingDataAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorMissingDataAction",
-}, smithy.ShapeTypeUnion, 2)
-var AnomalyDetectorMissingDataAction_markAsAnomaly *smithy.Schema
-
-var AnomalyDetectorMissingDataAction_skip *smithy.Schema
-
-var AnomalyDetectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AnomalyDetectorStatus_statusCode *smithy.Schema
-
-var AnomalyDetectorStatus_statusReason *smithy.Schema
-
-var AnomalyDetectorStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorStatusCode",
-}, smithy.ShapeTypeEnum, 7)
-var AnomalyDetectorStatusCode_CREATING *smithy.Schema
-
-var AnomalyDetectorStatusCode_ACTIVE *smithy.Schema
-
-var AnomalyDetectorStatusCode_UPDATING *smithy.Schema
-
-var AnomalyDetectorStatusCode_DELETING *smithy.Schema
-
-var AnomalyDetectorStatusCode_CREATION_FAILED *smithy.Schema
-
-var AnomalyDetectorStatusCode_UPDATE_FAILED *smithy.Schema
-
-var AnomalyDetectorStatusCode_DELETION_FAILED *smithy.Schema
-
-var AnomalyDetectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorSummary",
-}, smithy.ShapeTypeStructure, 7)
-var AnomalyDetectorSummary_arn *smithy.Schema
-
-var AnomalyDetectorSummary_anomalyDetectorId *smithy.Schema
-
-var AnomalyDetectorSummary_alias *smithy.Schema
-
-var AnomalyDetectorSummary_status *smithy.Schema
-
-var AnomalyDetectorSummary_createdAt *smithy.Schema
-
-var AnomalyDetectorSummary_modifiedAt *smithy.Schema
-
-var AnomalyDetectorSummary_tags *smithy.Schema
-
-var _AnomalyDetectorSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "AnomalyDetectorSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AnomalyDetectorSummaryList_member *smithy.Schema
-
-var CloudWatchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CloudWatchConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CloudWatchConfiguration_datasetArn *smithy.Schema
-
-var _CloudWatchDatasetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CloudWatchDatasetArn",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLogDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CloudWatchLogDestination",
-}, smithy.ShapeTypeStructure, 1)
-var CloudWatchLogDestination_logGroupArn *smithy.Schema
-
-var _ClusterArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ClusterArn",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ComponentConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ComponentConfig_options *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "Destination",
-}, smithy.ShapeTypeUnion, 2)
-var Destination_ampConfiguration *smithy.Schema
-
-var Destination_cloudWatchConfiguration *smithy.Schema
-
-var EksConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "EksConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var EksConfiguration_clusterArn *smithy.Schema
-
-var EksConfiguration_securityGroupIds *smithy.Schema
-
-var EksConfiguration_subnetIds *smithy.Schema
-
-var ExporterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ExporterConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var ExporterConfiguration_openSearchConfiguration *smithy.Schema
-
-var ExporterConfiguration_kafkaConfiguration *smithy.Schema
-
-var _ExporterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ExporterList",
-}, smithy.ShapeTypeList, 1)
-var _ExporterList_member *smithy.Schema
-
-var _FilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "FilterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var IgnoreNearExpected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "IgnoreNearExpected",
-}, smithy.ShapeTypeUnion, 2)
-var IgnoreNearExpected_amount *smithy.Schema
-
-var IgnoreNearExpected_ratio *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var KafkaExporterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "KafkaExporterConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KafkaExporterConfiguration_clusterArn *smithy.Schema
-
-var KafkaExporterConfiguration_topicFilter *smithy.Schema
-
-var KafkaExporterConfiguration_consumerGroupFilter *smithy.Schema
-
-var _KafkaExporterFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "KafkaExporterFilter",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LabelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LabelName",
-}, smithy.ShapeTypeString, 0)
-
-var _LabelSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LabelSet",
-}, smithy.ShapeTypeMap, 2)
-var _LabelSet_key *smithy.Schema
-
-var _LabelSet_value *smithy.Schema
-
-var _LabelValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LabelValue",
-}, smithy.ShapeTypeString, 0)
-
-var LimitsPerLabelSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LimitsPerLabelSet",
-}, smithy.ShapeTypeStructure, 2)
-var LimitsPerLabelSet_limits *smithy.Schema
-
-var LimitsPerLabelSet_labelSet *smithy.Schema
-
-var LimitsPerLabelSetEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LimitsPerLabelSetEntry",
-}, smithy.ShapeTypeStructure, 1)
-var LimitsPerLabelSetEntry_maxSeries *smithy.Schema
-
-var _LimitsPerLabelSetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LimitsPerLabelSetList",
-}, smithy.ShapeTypeList, 1)
-var _LimitsPerLabelSetList_member *smithy.Schema
-
-var LoggingConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingConfigurationMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var LoggingConfigurationMetadata_status *smithy.Schema
-
-var LoggingConfigurationMetadata_workspace *smithy.Schema
-
-var LoggingConfigurationMetadata_logGroupArn *smithy.Schema
-
-var LoggingConfigurationMetadata_createdAt *smithy.Schema
-
-var LoggingConfigurationMetadata_modifiedAt *smithy.Schema
-
-var LoggingConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingConfigurationStatus",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingConfigurationStatus_statusCode *smithy.Schema
-
-var LoggingConfigurationStatus_statusReason *smithy.Schema
-
-var _LoggingConfigurationStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingConfigurationStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var LoggingDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingDestination",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingDestination_cloudWatchLogs *smithy.Schema
-
-var LoggingDestination_filters *smithy.Schema
-
-var _LoggingDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingDestinations",
-}, smithy.ShapeTypeList, 1)
-var _LoggingDestinations_member *smithy.Schema
-
-var LoggingFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LoggingFilter",
-}, smithy.ShapeTypeStructure, 1)
-var LoggingFilter_qspThreshold *smithy.Schema
-
-var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "LogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MskClusterArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "MskClusterArn",
-}, smithy.ShapeTypeString, 0)
-
-var _OpenSearchDomainArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "OpenSearchDomainArn",
-}, smithy.ShapeTypeString, 0)
-
-var OpenSearchExporterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "OpenSearchExporterConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var OpenSearchExporterConfiguration_domainArn *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PrometheusMetricLabelKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PrometheusMetricLabelKey",
-}, smithy.ShapeTypeString, 0)
-
-var _PrometheusMetricLabelMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PrometheusMetricLabelMap",
-}, smithy.ShapeTypeMap, 2)
-var _PrometheusMetricLabelMap_key *smithy.Schema
-
-var _PrometheusMetricLabelMap_value *smithy.Schema
-
-var _PrometheusMetricLabelValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PrometheusMetricLabelValue",
-}, smithy.ShapeTypeString, 0)
-
-var QueryLoggingConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "QueryLoggingConfigurationMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var QueryLoggingConfigurationMetadata_status *smithy.Schema
-
-var QueryLoggingConfigurationMetadata_workspace *smithy.Schema
-
-var QueryLoggingConfigurationMetadata_destinations *smithy.Schema
-
-var QueryLoggingConfigurationMetadata_createdAt *smithy.Schema
-
-var QueryLoggingConfigurationMetadata_modifiedAt *smithy.Schema
-
-var QueryLoggingConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "QueryLoggingConfigurationStatus",
-}, smithy.ShapeTypeStructure, 2)
-var QueryLoggingConfigurationStatus_statusCode *smithy.Schema
-
-var QueryLoggingConfigurationStatus_statusReason *smithy.Schema
-
-var _QueryLoggingConfigurationStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "QueryLoggingConfigurationStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var RandomCutForestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RandomCutForestConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var RandomCutForestConfiguration_query *smithy.Schema
-
-var RandomCutForestConfiguration_shingleSize *smithy.Schema
-
-var RandomCutForestConfiguration_sampleSize *smithy.Schema
-
-var RandomCutForestConfiguration_ignoreNearExpectedFromAbove *smithy.Schema
-
-var RandomCutForestConfiguration_ignoreNearExpectedFromBelow *smithy.Schema
-
-var _RandomCutForestQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RandomCutForestQuery",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var RoleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RoleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var RoleConfiguration_sourceRoleArn *smithy.Schema
-
-var RoleConfiguration_targetRoleArn *smithy.Schema
-
-var _RuleGroupsNamespaceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleGroupsNamespaceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceData",
-}, smithy.ShapeTypeBlob, 0)
-
-var RuleGroupsNamespaceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceDescription",
-}, smithy.ShapeTypeStructure, 7)
-var RuleGroupsNamespaceDescription_arn *smithy.Schema
-
-var RuleGroupsNamespaceDescription_name *smithy.Schema
-
-var RuleGroupsNamespaceDescription_status *smithy.Schema
-
-var RuleGroupsNamespaceDescription_data *smithy.Schema
-
-var RuleGroupsNamespaceDescription_createdAt *smithy.Schema
-
-var RuleGroupsNamespaceDescription_modifiedAt *smithy.Schema
-
-var RuleGroupsNamespaceDescription_tags *smithy.Schema
-
-var _RuleGroupsNamespaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceName",
-}, smithy.ShapeTypeString, 0)
-
-var RuleGroupsNamespaceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceStatus",
-}, smithy.ShapeTypeStructure, 2)
-var RuleGroupsNamespaceStatus_statusCode *smithy.Schema
-
-var RuleGroupsNamespaceStatus_statusReason *smithy.Schema
-
-var _RuleGroupsNamespaceStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var RuleGroupsNamespaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceSummary",
-}, smithy.ShapeTypeStructure, 6)
-var RuleGroupsNamespaceSummary_arn *smithy.Schema
-
-var RuleGroupsNamespaceSummary_name *smithy.Schema
-
-var RuleGroupsNamespaceSummary_status *smithy.Schema
-
-var RuleGroupsNamespaceSummary_createdAt *smithy.Schema
-
-var RuleGroupsNamespaceSummary_modifiedAt *smithy.Schema
-
-var RuleGroupsNamespaceSummary_tags *smithy.Schema
-
-var _RuleGroupsNamespaceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "RuleGroupsNamespaceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RuleGroupsNamespaceSummaryList_member *smithy.Schema
-
-var ScrapeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScrapeConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var ScrapeConfiguration_configurationBlob *smithy.Schema
-
-var _ScraperAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _ScraperArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperArn",
-}, smithy.ShapeTypeString, 0)
-
-var ScraperComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperComponent",
-}, smithy.ShapeTypeStructure, 2)
-var ScraperComponent_type *smithy.Schema
-
-var ScraperComponent_config *smithy.Schema
-
-var _ScraperComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperComponents",
-}, smithy.ShapeTypeList, 1)
-var _ScraperComponents_member *smithy.Schema
-
-var _ScraperComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperComponentType",
-}, smithy.ShapeTypeString, 0)
-
-var ScraperDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperDescription",
-}, smithy.ShapeTypeStructure, 14)
-var ScraperDescription_alias *smithy.Schema
-
-var ScraperDescription_scraperId *smithy.Schema
-
-var ScraperDescription_arn *smithy.Schema
-
-var ScraperDescription_roleArn *smithy.Schema
-
-var ScraperDescription_status *smithy.Schema
-
-var ScraperDescription_createdAt *smithy.Schema
-
-var ScraperDescription_lastModifiedAt *smithy.Schema
-
-var ScraperDescription_tags *smithy.Schema
-
-var ScraperDescription_statusReason *smithy.Schema
-
-var ScraperDescription_scrapeConfiguration *smithy.Schema
-
-var ScraperDescription_source *smithy.Schema
-
-var ScraperDescription_destination *smithy.Schema
-
-var ScraperDescription_roleConfiguration *smithy.Schema
-
-var ScraperDescription_exporters *smithy.Schema
-
-var _ScraperFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperFilters",
-}, smithy.ShapeTypeMap, 2)
-var _ScraperFilters_key *smithy.Schema
-
-var _ScraperFilters_value *smithy.Schema
-
-var _ScraperId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperId",
-}, smithy.ShapeTypeString, 0)
-
-var ScraperLoggingConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperLoggingConfigurationStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ScraperLoggingConfigurationStatus_statusCode *smithy.Schema
-
-var ScraperLoggingConfigurationStatus_statusReason *smithy.Schema
-
-var _ScraperLoggingConfigurationStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperLoggingConfigurationStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var ScraperLoggingDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperLoggingDestination",
-}, smithy.ShapeTypeUnion, 1)
-var ScraperLoggingDestination_cloudWatchLogs *smithy.Schema
-
-var ScraperStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperStatus",
-}, smithy.ShapeTypeStructure, 1)
-var ScraperStatus_statusCode *smithy.Schema
-
-var _ScraperStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var ScraperSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperSummary",
-}, smithy.ShapeTypeStructure, 13)
-var ScraperSummary_alias *smithy.Schema
-
-var ScraperSummary_scraperId *smithy.Schema
-
-var ScraperSummary_arn *smithy.Schema
-
-var ScraperSummary_roleArn *smithy.Schema
-
-var ScraperSummary_status *smithy.Schema
-
-var ScraperSummary_createdAt *smithy.Schema
-
-var ScraperSummary_lastModifiedAt *smithy.Schema
-
-var ScraperSummary_tags *smithy.Schema
-
-var ScraperSummary_statusReason *smithy.Schema
-
-var ScraperSummary_source *smithy.Schema
-
-var ScraperSummary_destination *smithy.Schema
-
-var ScraperSummary_roleConfiguration *smithy.Schema
-
-var ScraperSummary_exporters *smithy.Schema
-
-var _ScraperSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ScraperSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ScraperSummaryList_member *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "Source",
-}, smithy.ShapeTypeUnion, 2)
-var Source_eksConfiguration *smithy.Schema
-
-var Source_vpcConfiguration *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var VpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "VpcConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var VpcConfiguration_securityGroupIds *smithy.Schema
-
-var VpcConfiguration_subnetIds *smithy.Schema
-
-var _WorkspaceAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkspaceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceArn",
-}, smithy.ShapeTypeString, 0)
-
-var WorkspaceConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceConfigurationDescription",
-}, smithy.ShapeTypeStructure, 5)
-var WorkspaceConfigurationDescription_status *smithy.Schema
-
-var WorkspaceConfigurationDescription_limitsPerLabelSet *smithy.Schema
-
-var WorkspaceConfigurationDescription_retentionPeriodInDays *smithy.Schema
-
-var WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds *smithy.Schema
-
-var WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds *smithy.Schema
-
-var WorkspaceConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceConfigurationStatus",
-}, smithy.ShapeTypeStructure, 2)
-var WorkspaceConfigurationStatus_statusCode *smithy.Schema
-
-var WorkspaceConfigurationStatus_statusReason *smithy.Schema
-
-var _WorkspaceConfigurationStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceConfigurationStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var WorkspaceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceDescription",
-}, smithy.ShapeTypeStructure, 8)
-var WorkspaceDescription_workspaceId *smithy.Schema
-
-var WorkspaceDescription_alias *smithy.Schema
-
-var WorkspaceDescription_arn *smithy.Schema
-
-var WorkspaceDescription_status *smithy.Schema
-
-var WorkspaceDescription_prometheusEndpoint *smithy.Schema
-
-var WorkspaceDescription_createdAt *smithy.Schema
-
-var WorkspaceDescription_tags *smithy.Schema
-
-var WorkspaceDescription_kmsKeyArn *smithy.Schema
-
-var _WorkspaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkspacePolicyStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspacePolicyStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var WorkspaceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceStatus",
-}, smithy.ShapeTypeStructure, 1)
-var WorkspaceStatus_statusCode *smithy.Schema
-
-var _WorkspaceStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var WorkspaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceSummary",
-}, smithy.ShapeTypeStructure, 7)
-var WorkspaceSummary_workspaceId *smithy.Schema
-
-var WorkspaceSummary_alias *smithy.Schema
-
-var WorkspaceSummary_arn *smithy.Schema
-
-var WorkspaceSummary_status *smithy.Schema
-
-var WorkspaceSummary_createdAt *smithy.Schema
-
-var WorkspaceSummary_tags *smithy.Schema
-
-var WorkspaceSummary_kmsKeyArn *smithy.Schema
-
-var _WorkspaceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "WorkspaceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WorkspaceSummaryList_member *smithy.Schema
-
-var CreateAlertManagerDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAlertManagerDefinitionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAlertManagerDefinitionRequest_workspaceId *smithy.Schema
-
-var CreateAlertManagerDefinitionRequest_data *smithy.Schema
-
-var CreateAlertManagerDefinitionRequest_clientToken *smithy.Schema
-
-var CreateAlertManagerDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAlertManagerDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAlertManagerDefinitionResponse_status *smithy.Schema
-
-var CreateAnomalyDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAnomalyDetectorRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateAnomalyDetectorRequest_workspaceId *smithy.Schema
-
-var CreateAnomalyDetectorRequest_alias *smithy.Schema
-
-var CreateAnomalyDetectorRequest_evaluationIntervalInSeconds *smithy.Schema
-
-var CreateAnomalyDetectorRequest_missingDataAction *smithy.Schema
-
-var CreateAnomalyDetectorRequest_configuration *smithy.Schema
-
-var CreateAnomalyDetectorRequest_labels *smithy.Schema
-
-var CreateAnomalyDetectorRequest_clientToken *smithy.Schema
-
-var CreateAnomalyDetectorRequest_tags *smithy.Schema
-
-var CreateAnomalyDetectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateAnomalyDetectorResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAnomalyDetectorResponse_anomalyDetectorId *smithy.Schema
-
-var CreateAnomalyDetectorResponse_arn *smithy.Schema
-
-var CreateAnomalyDetectorResponse_status *smithy.Schema
-
-var CreateAnomalyDetectorResponse_tags *smithy.Schema
-
-var CreateLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var CreateLoggingConfigurationRequest_logGroupArn *smithy.Schema
-
-var CreateLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var CreateLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLoggingConfigurationResponse_status *smithy.Schema
-
-var CreateQueryLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateQueryLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateQueryLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var CreateQueryLoggingConfigurationRequest_destinations *smithy.Schema
-
-var CreateQueryLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var CreateQueryLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateQueryLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateQueryLoggingConfigurationResponse_status *smithy.Schema
-
-var CreateRuleGroupsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateRuleGroupsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRuleGroupsNamespaceRequest_workspaceId *smithy.Schema
-
-var CreateRuleGroupsNamespaceRequest_name *smithy.Schema
-
-var CreateRuleGroupsNamespaceRequest_data *smithy.Schema
-
-var CreateRuleGroupsNamespaceRequest_clientToken *smithy.Schema
-
-var CreateRuleGroupsNamespaceRequest_tags *smithy.Schema
-
-var CreateRuleGroupsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateRuleGroupsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRuleGroupsNamespaceResponse_name *smithy.Schema
-
-var CreateRuleGroupsNamespaceResponse_arn *smithy.Schema
-
-var CreateRuleGroupsNamespaceResponse_status *smithy.Schema
-
-var CreateRuleGroupsNamespaceResponse_tags *smithy.Schema
-
-var CreateScraperRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateScraperRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateScraperRequest_alias *smithy.Schema
-
-var CreateScraperRequest_scrapeConfiguration *smithy.Schema
-
-var CreateScraperRequest_source *smithy.Schema
-
-var CreateScraperRequest_destination *smithy.Schema
-
-var CreateScraperRequest_roleConfiguration *smithy.Schema
-
-var CreateScraperRequest_clientToken *smithy.Schema
-
-var CreateScraperRequest_tags *smithy.Schema
-
-var CreateScraperRequest_exporters *smithy.Schema
-
-var CreateScraperResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateScraperResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateScraperResponse_scraperId *smithy.Schema
-
-var CreateScraperResponse_arn *smithy.Schema
-
-var CreateScraperResponse_status *smithy.Schema
-
-var CreateScraperResponse_tags *smithy.Schema
-
-var CreateWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkspaceRequest_alias *smithy.Schema
-
-var CreateWorkspaceRequest_clientToken *smithy.Schema
-
-var CreateWorkspaceRequest_tags *smithy.Schema
-
-var CreateWorkspaceRequest_kmsKeyArn *smithy.Schema
-
-var CreateWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "CreateWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkspaceResponse_workspaceId *smithy.Schema
-
-var CreateWorkspaceResponse_arn *smithy.Schema
-
-var CreateWorkspaceResponse_status *smithy.Schema
-
-var CreateWorkspaceResponse_tags *smithy.Schema
-
-var CreateWorkspaceResponse_kmsKeyArn *smithy.Schema
-
-var DeleteAlertManagerDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteAlertManagerDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAlertManagerDefinitionRequest_workspaceId *smithy.Schema
-
-var DeleteAlertManagerDefinitionRequest_clientToken *smithy.Schema
-
-var DeleteAnomalyDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteAnomalyDetectorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAnomalyDetectorRequest_workspaceId *smithy.Schema
-
-var DeleteAnomalyDetectorRequest_anomalyDetectorId *smithy.Schema
-
-var DeleteAnomalyDetectorRequest_clientToken *smithy.Schema
-
-var DeleteLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var DeleteLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var DeleteQueryLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteQueryLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteQueryLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var DeleteQueryLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteResourcePolicyRequest_workspaceId *smithy.Schema
-
-var DeleteResourcePolicyRequest_clientToken *smithy.Schema
-
-var DeleteResourcePolicyRequest_revisionId *smithy.Schema
-
-var DeleteRuleGroupsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteRuleGroupsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRuleGroupsNamespaceRequest_workspaceId *smithy.Schema
-
-var DeleteRuleGroupsNamespaceRequest_name *smithy.Schema
-
-var DeleteRuleGroupsNamespaceRequest_clientToken *smithy.Schema
-
-var DeleteScraperRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteScraperRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteScraperRequest_scraperId *smithy.Schema
-
-var DeleteScraperRequest_clientToken *smithy.Schema
-
-var DeleteScraperLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteScraperLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteScraperLoggingConfigurationRequest_scraperId *smithy.Schema
-
-var DeleteScraperLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var DeleteScraperResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteScraperResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteScraperResponse_scraperId *smithy.Schema
-
-var DeleteScraperResponse_status *smithy.Schema
-
-var DeleteWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DeleteWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkspaceRequest_workspaceId *smithy.Schema
-
-var DeleteWorkspaceRequest_clientToken *smithy.Schema
-
-var DescribeAlertManagerDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAlertManagerDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAlertManagerDefinitionRequest_workspaceId *smithy.Schema
-
-var DescribeAlertManagerDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAlertManagerDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAlertManagerDefinitionResponse_alertManagerDefinition *smithy.Schema
-
-var DescribeAnomalyDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAnomalyDetectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAnomalyDetectorRequest_workspaceId *smithy.Schema
-
-var DescribeAnomalyDetectorRequest_anomalyDetectorId *smithy.Schema
-
-var DescribeAnomalyDetectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeAnomalyDetectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAnomalyDetectorResponse_anomalyDetector *smithy.Schema
-
-var DescribeLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var DescribeLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLoggingConfigurationResponse_loggingConfiguration *smithy.Schema
-
-var DescribeQueryLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeQueryLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeQueryLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var DescribeQueryLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeQueryLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration *smithy.Schema
-
-var DescribeResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeResourcePolicyRequest_workspaceId *smithy.Schema
-
-var DescribeResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeResourcePolicyResponse_policyDocument *smithy.Schema
-
-var DescribeResourcePolicyResponse_policyStatus *smithy.Schema
-
-var DescribeResourcePolicyResponse_revisionId *smithy.Schema
-
-var DescribeRuleGroupsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeRuleGroupsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRuleGroupsNamespaceRequest_workspaceId *smithy.Schema
-
-var DescribeRuleGroupsNamespaceRequest_name *smithy.Schema
-
-var DescribeRuleGroupsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeRuleGroupsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace *smithy.Schema
-
-var DescribeScraperRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraperRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScraperRequest_scraperId *smithy.Schema
-
-var DescribeScraperLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraperLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScraperLoggingConfigurationRequest_scraperId *smithy.Schema
-
-var DescribeScraperLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraperLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeScraperLoggingConfigurationResponse_status *smithy.Schema
-
-var DescribeScraperLoggingConfigurationResponse_scraperId *smithy.Schema
-
-var DescribeScraperLoggingConfigurationResponse_loggingDestination *smithy.Schema
-
-var DescribeScraperLoggingConfigurationResponse_scraperComponents *smithy.Schema
-
-var DescribeScraperLoggingConfigurationResponse_modifiedAt *smithy.Schema
-
-var DescribeScraperResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeScraperResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScraperResponse_scraper *smithy.Schema
-
-var DescribeWorkspaceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspaceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkspaceConfigurationRequest_workspaceId *smithy.Schema
-
-var DescribeWorkspaceConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspaceConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkspaceConfigurationResponse_workspaceConfiguration *smithy.Schema
-
-var DescribeWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkspaceRequest_workspaceId *smithy.Schema
-
-var DescribeWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "DescribeWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkspaceResponse_workspace *smithy.Schema
-
-var GetDefaultScraperConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "GetDefaultScraperConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDefaultScraperConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "GetDefaultScraperConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDefaultScraperConfigurationResponse_configuration *smithy.Schema
-
-var ListAnomalyDetectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListAnomalyDetectorsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAnomalyDetectorsRequest_workspaceId *smithy.Schema
-
-var ListAnomalyDetectorsRequest_alias *smithy.Schema
-
-var ListAnomalyDetectorsRequest_maxResults *smithy.Schema
-
-var ListAnomalyDetectorsRequest_nextToken *smithy.Schema
-
-var ListAnomalyDetectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListAnomalyDetectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAnomalyDetectorsResponse_anomalyDetectors *smithy.Schema
-
-var ListAnomalyDetectorsResponse_nextToken *smithy.Schema
-
-var ListRuleGroupsNamespacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListRuleGroupsNamespacesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRuleGroupsNamespacesRequest_workspaceId *smithy.Schema
-
-var ListRuleGroupsNamespacesRequest_name *smithy.Schema
-
-var ListRuleGroupsNamespacesRequest_nextToken *smithy.Schema
-
-var ListRuleGroupsNamespacesRequest_maxResults *smithy.Schema
-
-var ListRuleGroupsNamespacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListRuleGroupsNamespacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleGroupsNamespacesResponse_ruleGroupsNamespaces *smithy.Schema
-
-var ListRuleGroupsNamespacesResponse_nextToken *smithy.Schema
-
-var ListScrapersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListScrapersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListScrapersRequest_filters *smithy.Schema
-
-var ListScrapersRequest_nextToken *smithy.Schema
-
-var ListScrapersRequest_maxResults *smithy.Schema
-
-var ListScrapersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListScrapersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListScrapersResponse_scrapers *smithy.Schema
-
-var ListScrapersResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListWorkspacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListWorkspacesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkspacesRequest_nextToken *smithy.Schema
-
-var ListWorkspacesRequest_alias *smithy.Schema
-
-var ListWorkspacesRequest_maxResults *smithy.Schema
-
-var ListWorkspacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "ListWorkspacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkspacesResponse_workspaces *smithy.Schema
-
-var ListWorkspacesResponse_nextToken *smithy.Schema
-
-var PutAlertManagerDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAlertManagerDefinitionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutAlertManagerDefinitionRequest_workspaceId *smithy.Schema
-
-var PutAlertManagerDefinitionRequest_data *smithy.Schema
-
-var PutAlertManagerDefinitionRequest_clientToken *smithy.Schema
-
-var PutAlertManagerDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAlertManagerDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutAlertManagerDefinitionResponse_status *smithy.Schema
-
-var PutAnomalyDetectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAnomalyDetectorRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutAnomalyDetectorRequest_workspaceId *smithy.Schema
-
-var PutAnomalyDetectorRequest_anomalyDetectorId *smithy.Schema
-
-var PutAnomalyDetectorRequest_evaluationIntervalInSeconds *smithy.Schema
-
-var PutAnomalyDetectorRequest_missingDataAction *smithy.Schema
-
-var PutAnomalyDetectorRequest_configuration *smithy.Schema
-
-var PutAnomalyDetectorRequest_labels *smithy.Schema
-
-var PutAnomalyDetectorRequest_clientToken *smithy.Schema
-
-var PutAnomalyDetectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutAnomalyDetectorResponse",
-}, smithy.ShapeTypeStructure, 4)
-var PutAnomalyDetectorResponse_anomalyDetectorId *smithy.Schema
-
-var PutAnomalyDetectorResponse_arn *smithy.Schema
-
-var PutAnomalyDetectorResponse_status *smithy.Schema
-
-var PutAnomalyDetectorResponse_tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutResourcePolicyRequest_workspaceId *smithy.Schema
-
-var PutResourcePolicyRequest_policyDocument *smithy.Schema
-
-var PutResourcePolicyRequest_clientToken *smithy.Schema
-
-var PutResourcePolicyRequest_revisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_policyStatus *smithy.Schema
-
-var PutResourcePolicyResponse_revisionId *smithy.Schema
-
-var PutRuleGroupsNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutRuleGroupsNamespaceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutRuleGroupsNamespaceRequest_workspaceId *smithy.Schema
-
-var PutRuleGroupsNamespaceRequest_name *smithy.Schema
-
-var PutRuleGroupsNamespaceRequest_data *smithy.Schema
-
-var PutRuleGroupsNamespaceRequest_clientToken *smithy.Schema
-
-var PutRuleGroupsNamespaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "PutRuleGroupsNamespaceResponse",
-}, smithy.ShapeTypeStructure, 4)
-var PutRuleGroupsNamespaceResponse_name *smithy.Schema
-
-var PutRuleGroupsNamespaceResponse_arn *smithy.Schema
-
-var PutRuleGroupsNamespaceResponse_status *smithy.Schema
-
-var PutRuleGroupsNamespaceResponse_tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var UpdateLoggingConfigurationRequest_logGroupArn *smithy.Schema
-
-var UpdateLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var UpdateLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLoggingConfigurationResponse_status *smithy.Schema
-
-var UpdateQueryLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateQueryLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateQueryLoggingConfigurationRequest_workspaceId *smithy.Schema
-
-var UpdateQueryLoggingConfigurationRequest_destinations *smithy.Schema
-
-var UpdateQueryLoggingConfigurationRequest_clientToken *smithy.Schema
-
-var UpdateQueryLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateQueryLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateQueryLoggingConfigurationResponse_status *smithy.Schema
-
-var UpdateScraperRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraperRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateScraperRequest_scraperId *smithy.Schema
-
-var UpdateScraperRequest_alias *smithy.Schema
-
-var UpdateScraperRequest_scrapeConfiguration *smithy.Schema
-
-var UpdateScraperRequest_destination *smithy.Schema
-
-var UpdateScraperRequest_roleConfiguration *smithy.Schema
-
-var UpdateScraperRequest_clientToken *smithy.Schema
-
-var UpdateScraperRequest_exporters *smithy.Schema
-
-var UpdateScraperLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraperLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateScraperLoggingConfigurationRequest_scraperId *smithy.Schema
-
-var UpdateScraperLoggingConfigurationRequest_loggingDestination *smithy.Schema
-
-var UpdateScraperLoggingConfigurationRequest_scraperComponents *smithy.Schema
-
-var UpdateScraperLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraperLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateScraperLoggingConfigurationResponse_status *smithy.Schema
-
-var UpdateScraperResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateScraperResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateScraperResponse_scraperId *smithy.Schema
-
-var UpdateScraperResponse_arn *smithy.Schema
-
-var UpdateScraperResponse_status *smithy.Schema
-
-var UpdateScraperResponse_tags *smithy.Schema
-
-var UpdateWorkspaceAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateWorkspaceAliasRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateWorkspaceAliasRequest_workspaceId *smithy.Schema
-
-var UpdateWorkspaceAliasRequest_alias *smithy.Schema
-
-var UpdateWorkspaceAliasRequest_clientToken *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateWorkspaceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateWorkspaceConfigurationRequest_workspaceId *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest_clientToken *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest_limitsPerLabelSet *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest_retentionPeriodInDays *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds *smithy.Schema
-
-var UpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds *smithy.Schema
-
-var UpdateWorkspaceConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amp",
-	Name:      "UpdateWorkspaceConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWorkspaceConfigurationResponse_status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AlertManagerDefinitionStatus_statusCode = AlertManagerDefinitionStatus.AddMember("statusCode", _AlertManagerDefinitionStatusCode)
-
-	AlertManagerDefinitionStatus_statusReason = AlertManagerDefinitionStatus.AddMember("statusReason", smithyprelude.String)
-
-	AlertManagerDefinitionDescription_status = AlertManagerDefinitionDescription.AddMember("status", AlertManagerDefinitionStatus)
-
-	AlertManagerDefinitionDescription_data = AlertManagerDefinitionDescription.AddMember("data", _AlertManagerDefinitionData)
-
-	AlertManagerDefinitionDescription_createdAt = AlertManagerDefinitionDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	AlertManagerDefinitionDescription_modifiedAt = AlertManagerDefinitionDescription.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	AmpConfiguration_workspaceArn = AmpConfiguration.AddMember("workspaceArn", _WorkspaceArn)
-
-	IgnoreNearExpected_amount = IgnoreNearExpected.AddMember("amount", smithyprelude.Double)
-
-	IgnoreNearExpected_ratio = IgnoreNearExpected.AddMember("ratio", smithyprelude.Double)
-
-	RandomCutForestConfiguration_query = RandomCutForestConfiguration.AddMember("query", _RandomCutForestQuery)
-
-	RandomCutForestConfiguration_shingleSize = RandomCutForestConfiguration.AddMember("shingleSize", smithyprelude.Integer)
-
-	RandomCutForestConfiguration_sampleSize = RandomCutForestConfiguration.AddMember("sampleSize", smithyprelude.Integer)
-
-	RandomCutForestConfiguration_ignoreNearExpectedFromAbove = RandomCutForestConfiguration.AddMember("ignoreNearExpectedFromAbove", IgnoreNearExpected)
-
-	RandomCutForestConfiguration_ignoreNearExpectedFromBelow = RandomCutForestConfiguration.AddMember("ignoreNearExpectedFromBelow", IgnoreNearExpected)
-
-	AnomalyDetectorConfiguration_randomCutForest = AnomalyDetectorConfiguration.AddMember("randomCutForest", RandomCutForestConfiguration)
-
-	AnomalyDetectorMissingDataAction_markAsAnomaly = AnomalyDetectorMissingDataAction.AddMember("markAsAnomaly", smithyprelude.Boolean)
-
-	AnomalyDetectorMissingDataAction_skip = AnomalyDetectorMissingDataAction.AddMember("skip", smithyprelude.Boolean)
-
-	_PrometheusMetricLabelMap_key = _PrometheusMetricLabelMap.AddMember("key", _PrometheusMetricLabelKey)
-
-	_PrometheusMetricLabelMap_value = _PrometheusMetricLabelMap.AddMember("value", _PrometheusMetricLabelValue)
-
-	AnomalyDetectorStatusCode_CREATING = AnomalyDetectorStatusCode.AddMember("CREATING", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_ACTIVE = AnomalyDetectorStatusCode.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_UPDATING = AnomalyDetectorStatusCode.AddMember("UPDATING", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_DELETING = AnomalyDetectorStatusCode.AddMember("DELETING", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_CREATION_FAILED = AnomalyDetectorStatusCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_UPDATE_FAILED = AnomalyDetectorStatusCode.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	AnomalyDetectorStatusCode_DELETION_FAILED = AnomalyDetectorStatusCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	AnomalyDetectorStatus_statusCode = AnomalyDetectorStatus.AddMember("statusCode", AnomalyDetectorStatusCode)
-
-	AnomalyDetectorStatus_statusReason = AnomalyDetectorStatus.AddMember("statusReason", smithyprelude.String)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	AnomalyDetectorDescription_arn = AnomalyDetectorDescription.AddMember("arn", _AnomalyDetectorArn)
-
-	AnomalyDetectorDescription_anomalyDetectorId = AnomalyDetectorDescription.AddMember("anomalyDetectorId", _AnomalyDetectorId)
-
-	AnomalyDetectorDescription_alias = AnomalyDetectorDescription.AddMember("alias", _AnomalyDetectorAlias)
-
-	AnomalyDetectorDescription_evaluationIntervalInSeconds = AnomalyDetectorDescription.AddMember("evaluationIntervalInSeconds", _AnomalyDetectorEvaluationInterval)
-
-	AnomalyDetectorDescription_missingDataAction = AnomalyDetectorDescription.AddMember("missingDataAction", AnomalyDetectorMissingDataAction)
-
-	AnomalyDetectorDescription_configuration = AnomalyDetectorDescription.AddMember("configuration", AnomalyDetectorConfiguration)
-
-	AnomalyDetectorDescription_labels = AnomalyDetectorDescription.AddMember("labels", _PrometheusMetricLabelMap)
-
-	AnomalyDetectorDescription_status = AnomalyDetectorDescription.AddMember("status", AnomalyDetectorStatus)
-
-	AnomalyDetectorDescription_createdAt = AnomalyDetectorDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	AnomalyDetectorDescription_modifiedAt = AnomalyDetectorDescription.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	AnomalyDetectorDescription_tags = AnomalyDetectorDescription.AddMember("tags", _TagMap)
-
-	AnomalyDetectorSummary_arn = AnomalyDetectorSummary.AddMember("arn", _AnomalyDetectorArn)
-
-	AnomalyDetectorSummary_anomalyDetectorId = AnomalyDetectorSummary.AddMember("anomalyDetectorId", _AnomalyDetectorId)
-
-	AnomalyDetectorSummary_alias = AnomalyDetectorSummary.AddMember("alias", _AnomalyDetectorAlias)
-
-	AnomalyDetectorSummary_status = AnomalyDetectorSummary.AddMember("status", AnomalyDetectorStatus)
-
-	AnomalyDetectorSummary_createdAt = AnomalyDetectorSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	AnomalyDetectorSummary_modifiedAt = AnomalyDetectorSummary.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	AnomalyDetectorSummary_tags = AnomalyDetectorSummary.AddMember("tags", _TagMap)
-
-	_AnomalyDetectorSummaryList_member = _AnomalyDetectorSummaryList.AddMember("member", AnomalyDetectorSummary)
-
-	CloudWatchConfiguration_datasetArn = CloudWatchConfiguration.AddMember("datasetArn", _CloudWatchDatasetArn)
-
-	CloudWatchLogDestination_logGroupArn = CloudWatchLogDestination.AddMember("logGroupArn", _LogGroupArn)
-
-	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
-
-	_StringMap_value = _StringMap.AddMember("value", smithyprelude.String)
-
-	ComponentConfig_options = ComponentConfig.AddMember("options", _StringMap)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	Destination_ampConfiguration = Destination.AddMember("ampConfiguration", AmpConfiguration)
-
-	Destination_cloudWatchConfiguration = Destination.AddMember("cloudWatchConfiguration", CloudWatchConfiguration)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	EksConfiguration_clusterArn = EksConfiguration.AddMember("clusterArn", _ClusterArn)
-
-	EksConfiguration_securityGroupIds = EksConfiguration.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	EksConfiguration_subnetIds = EksConfiguration.AddMember("subnetIds", _SubnetIds)
-
-	OpenSearchExporterConfiguration_domainArn = OpenSearchExporterConfiguration.AddMember("domainArn", _OpenSearchDomainArn)
-
-	KafkaExporterConfiguration_clusterArn = KafkaExporterConfiguration.AddMember("clusterArn", _MskClusterArn)
-
-	KafkaExporterConfiguration_topicFilter = KafkaExporterConfiguration.AddMember("topicFilter", _KafkaExporterFilter)
-
-	KafkaExporterConfiguration_consumerGroupFilter = KafkaExporterConfiguration.AddMember("consumerGroupFilter", _KafkaExporterFilter)
-
-	ExporterConfiguration_openSearchConfiguration = ExporterConfiguration.AddMember("openSearchConfiguration", OpenSearchExporterConfiguration)
-
-	ExporterConfiguration_kafkaConfiguration = ExporterConfiguration.AddMember("kafkaConfiguration", KafkaExporterConfiguration)
-
-	_ExporterList_member = _ExporterList.AddMember("member", ExporterConfiguration)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_LabelSet_key = _LabelSet.AddMember("key", _LabelName)
-
-	_LabelSet_value = _LabelSet.AddMember("value", _LabelValue)
-
-	LimitsPerLabelSetEntry_maxSeries = LimitsPerLabelSetEntry.AddMember("maxSeries", smithyprelude.Long)
-
-	LimitsPerLabelSet_limits = LimitsPerLabelSet.AddMember("limits", LimitsPerLabelSetEntry)
-
-	LimitsPerLabelSet_labelSet = LimitsPerLabelSet.AddMember("labelSet", _LabelSet)
-
-	_LimitsPerLabelSetList_member = _LimitsPerLabelSetList.AddMember("member", LimitsPerLabelSet)
-
-	LoggingConfigurationStatus_statusCode = LoggingConfigurationStatus.AddMember("statusCode", _LoggingConfigurationStatusCode)
-
-	LoggingConfigurationStatus_statusReason = LoggingConfigurationStatus.AddMember("statusReason", smithyprelude.String)
-
-	LoggingConfigurationMetadata_status = LoggingConfigurationMetadata.AddMember("status", LoggingConfigurationStatus)
-
-	LoggingConfigurationMetadata_workspace = LoggingConfigurationMetadata.AddMember("workspace", _WorkspaceId)
-
-	LoggingConfigurationMetadata_logGroupArn = LoggingConfigurationMetadata.AddMember("logGroupArn", _LogGroupArn)
-
-	LoggingConfigurationMetadata_createdAt = LoggingConfigurationMetadata.AddMember("createdAt", smithyprelude.Timestamp)
-
-	LoggingConfigurationMetadata_modifiedAt = LoggingConfigurationMetadata.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	LoggingFilter_qspThreshold = LoggingFilter.AddMember("qspThreshold", smithyprelude.Long)
-
-	LoggingDestination_cloudWatchLogs = LoggingDestination.AddMember("cloudWatchLogs", CloudWatchLogDestination)
-
-	LoggingDestination_filters = LoggingDestination.AddMember("filters", LoggingFilter)
-
-	_LoggingDestinations_member = _LoggingDestinations.AddMember("member", LoggingDestination)
-
-	QueryLoggingConfigurationStatus_statusCode = QueryLoggingConfigurationStatus.AddMember("statusCode", _QueryLoggingConfigurationStatusCode)
-
-	QueryLoggingConfigurationStatus_statusReason = QueryLoggingConfigurationStatus.AddMember("statusReason", smithyprelude.String)
-
-	QueryLoggingConfigurationMetadata_status = QueryLoggingConfigurationMetadata.AddMember("status", QueryLoggingConfigurationStatus)
-
-	QueryLoggingConfigurationMetadata_workspace = QueryLoggingConfigurationMetadata.AddMember("workspace", _WorkspaceId)
-
-	QueryLoggingConfigurationMetadata_destinations = QueryLoggingConfigurationMetadata.AddMember("destinations", _LoggingDestinations)
-
-	QueryLoggingConfigurationMetadata_createdAt = QueryLoggingConfigurationMetadata.AddMember("createdAt", smithyprelude.Timestamp)
-
-	QueryLoggingConfigurationMetadata_modifiedAt = QueryLoggingConfigurationMetadata.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	RoleConfiguration_sourceRoleArn = RoleConfiguration.AddMember("sourceRoleArn", _IamRoleArn)
-
-	RoleConfiguration_targetRoleArn = RoleConfiguration.AddMember("targetRoleArn", _IamRoleArn)
-
-	RuleGroupsNamespaceStatus_statusCode = RuleGroupsNamespaceStatus.AddMember("statusCode", _RuleGroupsNamespaceStatusCode)
-
-	RuleGroupsNamespaceStatus_statusReason = RuleGroupsNamespaceStatus.AddMember("statusReason", smithyprelude.String)
-
-	RuleGroupsNamespaceDescription_arn = RuleGroupsNamespaceDescription.AddMember("arn", _RuleGroupsNamespaceArn)
-
-	RuleGroupsNamespaceDescription_name = RuleGroupsNamespaceDescription.AddMember("name", _RuleGroupsNamespaceName)
-
-	RuleGroupsNamespaceDescription_status = RuleGroupsNamespaceDescription.AddMember("status", RuleGroupsNamespaceStatus)
-
-	RuleGroupsNamespaceDescription_data = RuleGroupsNamespaceDescription.AddMember("data", _RuleGroupsNamespaceData)
-
-	RuleGroupsNamespaceDescription_createdAt = RuleGroupsNamespaceDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	RuleGroupsNamespaceDescription_modifiedAt = RuleGroupsNamespaceDescription.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	RuleGroupsNamespaceDescription_tags = RuleGroupsNamespaceDescription.AddMember("tags", _TagMap)
-
-	RuleGroupsNamespaceSummary_arn = RuleGroupsNamespaceSummary.AddMember("arn", _RuleGroupsNamespaceArn)
-
-	RuleGroupsNamespaceSummary_name = RuleGroupsNamespaceSummary.AddMember("name", _RuleGroupsNamespaceName)
-
-	RuleGroupsNamespaceSummary_status = RuleGroupsNamespaceSummary.AddMember("status", RuleGroupsNamespaceStatus)
-
-	RuleGroupsNamespaceSummary_createdAt = RuleGroupsNamespaceSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	RuleGroupsNamespaceSummary_modifiedAt = RuleGroupsNamespaceSummary.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	RuleGroupsNamespaceSummary_tags = RuleGroupsNamespaceSummary.AddMember("tags", _TagMap)
-
-	_RuleGroupsNamespaceSummaryList_member = _RuleGroupsNamespaceSummaryList.AddMember("member", RuleGroupsNamespaceSummary)
-
-	ScrapeConfiguration_configurationBlob = ScrapeConfiguration.AddMember("configurationBlob", smithyprelude.Blob)
-
-	ScraperComponent_type = ScraperComponent.AddMember("type", _ScraperComponentType)
-
-	ScraperComponent_config = ScraperComponent.AddMember("config", ComponentConfig)
-
-	_ScraperComponents_member = _ScraperComponents.AddMember("member", ScraperComponent)
-
-	ScraperStatus_statusCode = ScraperStatus.AddMember("statusCode", _ScraperStatusCode)
-
-	VpcConfiguration_securityGroupIds = VpcConfiguration.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	VpcConfiguration_subnetIds = VpcConfiguration.AddMember("subnetIds", _SubnetIds)
-
-	Source_eksConfiguration = Source.AddMember("eksConfiguration", EksConfiguration)
-
-	Source_vpcConfiguration = Source.AddMember("vpcConfiguration", VpcConfiguration)
-
-	ScraperDescription_alias = ScraperDescription.AddMember("alias", _ScraperAlias)
-
-	ScraperDescription_scraperId = ScraperDescription.AddMember("scraperId", _ScraperId)
-
-	ScraperDescription_arn = ScraperDescription.AddMember("arn", _ScraperArn)
-
-	ScraperDescription_roleArn = ScraperDescription.AddMember("roleArn", _IamRoleArn)
-
-	ScraperDescription_status = ScraperDescription.AddMember("status", ScraperStatus)
-
-	ScraperDescription_createdAt = ScraperDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ScraperDescription_lastModifiedAt = ScraperDescription.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ScraperDescription_tags = ScraperDescription.AddMember("tags", _TagMap)
-
-	ScraperDescription_statusReason = ScraperDescription.AddMember("statusReason", _StatusReason)
-
-	ScraperDescription_scrapeConfiguration = ScraperDescription.AddMember("scrapeConfiguration", ScrapeConfiguration)
-
-	ScraperDescription_source = ScraperDescription.AddMember("source", Source)
-
-	ScraperDescription_destination = ScraperDescription.AddMember("destination", Destination)
-
-	ScraperDescription_roleConfiguration = ScraperDescription.AddMember("roleConfiguration", RoleConfiguration)
-
-	ScraperDescription_exporters = ScraperDescription.AddMember("exporters", _ExporterList)
-
-	_ScraperFilters_key = _ScraperFilters.AddMember("key", _FilterKey)
-
-	_ScraperFilters_value = _ScraperFilters.AddMember("value", _FilterValues)
-
-	ScraperLoggingConfigurationStatus_statusCode = ScraperLoggingConfigurationStatus.AddMember("statusCode", _ScraperLoggingConfigurationStatusCode)
-
-	ScraperLoggingConfigurationStatus_statusReason = ScraperLoggingConfigurationStatus.AddMember("statusReason", smithyprelude.String)
-
-	ScraperLoggingDestination_cloudWatchLogs = ScraperLoggingDestination.AddMember("cloudWatchLogs", CloudWatchLogDestination)
-
-	ScraperSummary_alias = ScraperSummary.AddMember("alias", _ScraperAlias)
-
-	ScraperSummary_scraperId = ScraperSummary.AddMember("scraperId", _ScraperId)
-
-	ScraperSummary_arn = ScraperSummary.AddMember("arn", _ScraperArn)
-
-	ScraperSummary_roleArn = ScraperSummary.AddMember("roleArn", _IamRoleArn)
-
-	ScraperSummary_status = ScraperSummary.AddMember("status", ScraperStatus)
-
-	ScraperSummary_createdAt = ScraperSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ScraperSummary_lastModifiedAt = ScraperSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ScraperSummary_tags = ScraperSummary.AddMember("tags", _TagMap)
-
-	ScraperSummary_statusReason = ScraperSummary.AddMember("statusReason", _StatusReason)
-
-	ScraperSummary_source = ScraperSummary.AddMember("source", Source)
-
-	ScraperSummary_destination = ScraperSummary.AddMember("destination", Destination)
-
-	ScraperSummary_roleConfiguration = ScraperSummary.AddMember("roleConfiguration", RoleConfiguration)
-
-	ScraperSummary_exporters = ScraperSummary.AddMember("exporters", _ExporterList)
-
-	_ScraperSummaryList_member = _ScraperSummaryList.AddMember("member", ScraperSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	WorkspaceConfigurationStatus_statusCode = WorkspaceConfigurationStatus.AddMember("statusCode", _WorkspaceConfigurationStatusCode)
-
-	WorkspaceConfigurationStatus_statusReason = WorkspaceConfigurationStatus.AddMember("statusReason", smithyprelude.String)
-
-	WorkspaceConfigurationDescription_status = WorkspaceConfigurationDescription.AddMember("status", WorkspaceConfigurationStatus)
-
-	WorkspaceConfigurationDescription_limitsPerLabelSet = WorkspaceConfigurationDescription.AddMember("limitsPerLabelSet", _LimitsPerLabelSetList)
-
-	WorkspaceConfigurationDescription_retentionPeriodInDays = WorkspaceConfigurationDescription.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds = WorkspaceConfigurationDescription.AddMember("outOfOrderTimeWindowInSeconds", smithyprelude.Integer)
-
-	WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds = WorkspaceConfigurationDescription.AddMember("ruleQueryOffsetInSeconds", smithyprelude.Integer)
-
-	WorkspaceStatus_statusCode = WorkspaceStatus.AddMember("statusCode", _WorkspaceStatusCode)
-
-	WorkspaceDescription_workspaceId = WorkspaceDescription.AddMember("workspaceId", _WorkspaceId)
-
-	WorkspaceDescription_alias = WorkspaceDescription.AddMember("alias", _WorkspaceAlias)
-
-	WorkspaceDescription_arn = WorkspaceDescription.AddMember("arn", _WorkspaceArn)
-
-	WorkspaceDescription_status = WorkspaceDescription.AddMember("status", WorkspaceStatus)
-
-	WorkspaceDescription_prometheusEndpoint = WorkspaceDescription.AddMember("prometheusEndpoint", _Uri)
-
-	WorkspaceDescription_createdAt = WorkspaceDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	WorkspaceDescription_tags = WorkspaceDescription.AddMember("tags", _TagMap)
-
-	WorkspaceDescription_kmsKeyArn = WorkspaceDescription.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	WorkspaceSummary_workspaceId = WorkspaceSummary.AddMember("workspaceId", _WorkspaceId)
-
-	WorkspaceSummary_alias = WorkspaceSummary.AddMember("alias", _WorkspaceAlias)
-
-	WorkspaceSummary_arn = WorkspaceSummary.AddMember("arn", _WorkspaceArn)
-
-	WorkspaceSummary_status = WorkspaceSummary.AddMember("status", WorkspaceStatus)
-
-	WorkspaceSummary_createdAt = WorkspaceSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	WorkspaceSummary_tags = WorkspaceSummary.AddMember("tags", _TagMap)
-
-	WorkspaceSummary_kmsKeyArn = WorkspaceSummary.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	_WorkspaceSummaryList_member = _WorkspaceSummaryList.AddMember("member", WorkspaceSummary)
-
-	CreateAlertManagerDefinitionRequest_workspaceId = CreateAlertManagerDefinitionRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	CreateAlertManagerDefinitionRequest_data = CreateAlertManagerDefinitionRequest.AddMember("data", _AlertManagerDefinitionData)
-
-	CreateAlertManagerDefinitionRequest_clientToken = CreateAlertManagerDefinitionRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateAlertManagerDefinitionResponse_status = CreateAlertManagerDefinitionResponse.AddMember("status", AlertManagerDefinitionStatus)
-
-	CreateAnomalyDetectorRequest_workspaceId = CreateAnomalyDetectorRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	CreateAnomalyDetectorRequest_alias = CreateAnomalyDetectorRequest.AddMember("alias", _AnomalyDetectorAlias)
-
-	CreateAnomalyDetectorRequest_evaluationIntervalInSeconds = CreateAnomalyDetectorRequest.AddMember("evaluationIntervalInSeconds", _AnomalyDetectorEvaluationInterval)
-
-	CreateAnomalyDetectorRequest_missingDataAction = CreateAnomalyDetectorRequest.AddMember("missingDataAction", AnomalyDetectorMissingDataAction)
-
-	CreateAnomalyDetectorRequest_configuration = CreateAnomalyDetectorRequest.AddMember("configuration", AnomalyDetectorConfiguration)
-
-	CreateAnomalyDetectorRequest_labels = CreateAnomalyDetectorRequest.AddMember("labels", _PrometheusMetricLabelMap)
-
-	CreateAnomalyDetectorRequest_clientToken = CreateAnomalyDetectorRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateAnomalyDetectorRequest_tags = CreateAnomalyDetectorRequest.AddMember("tags", _TagMap)
-
-	CreateAnomalyDetectorResponse_anomalyDetectorId = CreateAnomalyDetectorResponse.AddMember("anomalyDetectorId", _AnomalyDetectorId)
-
-	CreateAnomalyDetectorResponse_arn = CreateAnomalyDetectorResponse.AddMember("arn", _AnomalyDetectorArn)
-
-	CreateAnomalyDetectorResponse_status = CreateAnomalyDetectorResponse.AddMember("status", AnomalyDetectorStatus)
-
-	CreateAnomalyDetectorResponse_tags = CreateAnomalyDetectorResponse.AddMember("tags", _TagMap)
-
-	CreateLoggingConfigurationRequest_workspaceId = CreateLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	CreateLoggingConfigurationRequest_logGroupArn = CreateLoggingConfigurationRequest.AddMember("logGroupArn", _LogGroupArn)
-
-	CreateLoggingConfigurationRequest_clientToken = CreateLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateLoggingConfigurationResponse_status = CreateLoggingConfigurationResponse.AddMember("status", LoggingConfigurationStatus)
-
-	CreateQueryLoggingConfigurationRequest_workspaceId = CreateQueryLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	CreateQueryLoggingConfigurationRequest_destinations = CreateQueryLoggingConfigurationRequest.AddMember("destinations", _LoggingDestinations)
-
-	CreateQueryLoggingConfigurationRequest_clientToken = CreateQueryLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateQueryLoggingConfigurationResponse_status = CreateQueryLoggingConfigurationResponse.AddMember("status", QueryLoggingConfigurationStatus)
-
-	CreateRuleGroupsNamespaceRequest_workspaceId = CreateRuleGroupsNamespaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	CreateRuleGroupsNamespaceRequest_name = CreateRuleGroupsNamespaceRequest.AddMember("name", _RuleGroupsNamespaceName)
-
-	CreateRuleGroupsNamespaceRequest_data = CreateRuleGroupsNamespaceRequest.AddMember("data", _RuleGroupsNamespaceData)
-
-	CreateRuleGroupsNamespaceRequest_clientToken = CreateRuleGroupsNamespaceRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateRuleGroupsNamespaceRequest_tags = CreateRuleGroupsNamespaceRequest.AddMember("tags", _TagMap)
-
-	CreateRuleGroupsNamespaceResponse_name = CreateRuleGroupsNamespaceResponse.AddMember("name", _RuleGroupsNamespaceName)
-
-	CreateRuleGroupsNamespaceResponse_arn = CreateRuleGroupsNamespaceResponse.AddMember("arn", _RuleGroupsNamespaceArn)
-
-	CreateRuleGroupsNamespaceResponse_status = CreateRuleGroupsNamespaceResponse.AddMember("status", RuleGroupsNamespaceStatus)
-
-	CreateRuleGroupsNamespaceResponse_tags = CreateRuleGroupsNamespaceResponse.AddMember("tags", _TagMap)
-
-	CreateScraperRequest_alias = CreateScraperRequest.AddMember("alias", _ScraperAlias)
-
-	CreateScraperRequest_scrapeConfiguration = CreateScraperRequest.AddMember("scrapeConfiguration", ScrapeConfiguration)
-
-	CreateScraperRequest_source = CreateScraperRequest.AddMember("source", Source)
-
-	CreateScraperRequest_destination = CreateScraperRequest.AddMember("destination", Destination)
-
-	CreateScraperRequest_roleConfiguration = CreateScraperRequest.AddMember("roleConfiguration", RoleConfiguration)
-
-	CreateScraperRequest_clientToken = CreateScraperRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateScraperRequest_tags = CreateScraperRequest.AddMember("tags", _TagMap)
-
-	CreateScraperRequest_exporters = CreateScraperRequest.AddMember("exporters", _ExporterList)
-
-	CreateScraperResponse_scraperId = CreateScraperResponse.AddMember("scraperId", _ScraperId)
-
-	CreateScraperResponse_arn = CreateScraperResponse.AddMember("arn", _ScraperArn)
-
-	CreateScraperResponse_status = CreateScraperResponse.AddMember("status", ScraperStatus)
-
-	CreateScraperResponse_tags = CreateScraperResponse.AddMember("tags", _TagMap)
-
-	CreateWorkspaceRequest_alias = CreateWorkspaceRequest.AddMember("alias", _WorkspaceAlias)
-
-	CreateWorkspaceRequest_clientToken = CreateWorkspaceRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateWorkspaceRequest_tags = CreateWorkspaceRequest.AddMember("tags", _TagMap)
-
-	CreateWorkspaceRequest_kmsKeyArn = CreateWorkspaceRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateWorkspaceResponse_workspaceId = CreateWorkspaceResponse.AddMember("workspaceId", _WorkspaceId)
-
-	CreateWorkspaceResponse_arn = CreateWorkspaceResponse.AddMember("arn", _WorkspaceArn)
-
-	CreateWorkspaceResponse_status = CreateWorkspaceResponse.AddMember("status", WorkspaceStatus)
-
-	CreateWorkspaceResponse_tags = CreateWorkspaceResponse.AddMember("tags", _TagMap)
-
-	CreateWorkspaceResponse_kmsKeyArn = CreateWorkspaceResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	DeleteAlertManagerDefinitionRequest_workspaceId = DeleteAlertManagerDefinitionRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteAlertManagerDefinitionRequest_clientToken = DeleteAlertManagerDefinitionRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteAnomalyDetectorRequest_workspaceId = DeleteAnomalyDetectorRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteAnomalyDetectorRequest_anomalyDetectorId = DeleteAnomalyDetectorRequest.AddMember("anomalyDetectorId", _AnomalyDetectorId, &smithytraits.HTTPLabel{})
-
-	DeleteAnomalyDetectorRequest_clientToken = DeleteAnomalyDetectorRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteLoggingConfigurationRequest_workspaceId = DeleteLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteLoggingConfigurationRequest_clientToken = DeleteLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteQueryLoggingConfigurationRequest_workspaceId = DeleteQueryLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteQueryLoggingConfigurationRequest_clientToken = DeleteQueryLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteResourcePolicyRequest_workspaceId = DeleteResourcePolicyRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_clientToken = DeleteResourcePolicyRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteResourcePolicyRequest_revisionId = DeleteResourcePolicyRequest.AddMember("revisionId", smithyprelude.String, &smithytraits.HTTPQuery{Name: "revisionId"})
-
-	DeleteRuleGroupsNamespaceRequest_workspaceId = DeleteRuleGroupsNamespaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteRuleGroupsNamespaceRequest_name = DeleteRuleGroupsNamespaceRequest.AddMember("name", _RuleGroupsNamespaceName, &smithytraits.HTTPLabel{})
-
-	DeleteRuleGroupsNamespaceRequest_clientToken = DeleteRuleGroupsNamespaceRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteScraperRequest_scraperId = DeleteScraperRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	DeleteScraperRequest_clientToken = DeleteScraperRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteScraperLoggingConfigurationRequest_scraperId = DeleteScraperLoggingConfigurationRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	DeleteScraperLoggingConfigurationRequest_clientToken = DeleteScraperLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteScraperResponse_scraperId = DeleteScraperResponse.AddMember("scraperId", _ScraperId)
-
-	DeleteScraperResponse_status = DeleteScraperResponse.AddMember("status", ScraperStatus)
-
-	DeleteWorkspaceRequest_workspaceId = DeleteWorkspaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DeleteWorkspaceRequest_clientToken = DeleteWorkspaceRequest.AddMember("clientToken", _IdempotencyToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DescribeAlertManagerDefinitionRequest_workspaceId = DescribeAlertManagerDefinitionRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeAlertManagerDefinitionResponse_alertManagerDefinition = DescribeAlertManagerDefinitionResponse.AddMember("alertManagerDefinition", AlertManagerDefinitionDescription)
-
-	DescribeAnomalyDetectorRequest_workspaceId = DescribeAnomalyDetectorRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeAnomalyDetectorRequest_anomalyDetectorId = DescribeAnomalyDetectorRequest.AddMember("anomalyDetectorId", _AnomalyDetectorId, &smithytraits.HTTPLabel{})
-
-	DescribeAnomalyDetectorResponse_anomalyDetector = DescribeAnomalyDetectorResponse.AddMember("anomalyDetector", AnomalyDetectorDescription)
-
-	DescribeLoggingConfigurationRequest_workspaceId = DescribeLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeLoggingConfigurationResponse_loggingConfiguration = DescribeLoggingConfigurationResponse.AddMember("loggingConfiguration", LoggingConfigurationMetadata)
-
-	DescribeQueryLoggingConfigurationRequest_workspaceId = DescribeQueryLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration = DescribeQueryLoggingConfigurationResponse.AddMember("queryLoggingConfiguration", QueryLoggingConfigurationMetadata)
-
-	DescribeResourcePolicyRequest_workspaceId = DescribeResourcePolicyRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeResourcePolicyResponse_policyDocument = DescribeResourcePolicyResponse.AddMember("policyDocument", smithyprelude.String)
-
-	DescribeResourcePolicyResponse_policyStatus = DescribeResourcePolicyResponse.AddMember("policyStatus", _WorkspacePolicyStatusCode)
-
-	DescribeResourcePolicyResponse_revisionId = DescribeResourcePolicyResponse.AddMember("revisionId", smithyprelude.String)
-
-	DescribeRuleGroupsNamespaceRequest_workspaceId = DescribeRuleGroupsNamespaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeRuleGroupsNamespaceRequest_name = DescribeRuleGroupsNamespaceRequest.AddMember("name", _RuleGroupsNamespaceName, &smithytraits.HTTPLabel{})
-
-	DescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace = DescribeRuleGroupsNamespaceResponse.AddMember("ruleGroupsNamespace", RuleGroupsNamespaceDescription)
-
-	DescribeScraperRequest_scraperId = DescribeScraperRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	DescribeScraperLoggingConfigurationRequest_scraperId = DescribeScraperLoggingConfigurationRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	DescribeScraperLoggingConfigurationResponse_status = DescribeScraperLoggingConfigurationResponse.AddMember("status", ScraperLoggingConfigurationStatus)
-
-	DescribeScraperLoggingConfigurationResponse_scraperId = DescribeScraperLoggingConfigurationResponse.AddMember("scraperId", _ScraperId)
-
-	DescribeScraperLoggingConfigurationResponse_loggingDestination = DescribeScraperLoggingConfigurationResponse.AddMember("loggingDestination", ScraperLoggingDestination)
-
-	DescribeScraperLoggingConfigurationResponse_scraperComponents = DescribeScraperLoggingConfigurationResponse.AddMember("scraperComponents", _ScraperComponents)
-
-	DescribeScraperLoggingConfigurationResponse_modifiedAt = DescribeScraperLoggingConfigurationResponse.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	DescribeScraperResponse_scraper = DescribeScraperResponse.AddMember("scraper", ScraperDescription)
-
-	DescribeWorkspaceConfigurationRequest_workspaceId = DescribeWorkspaceConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeWorkspaceConfigurationResponse_workspaceConfiguration = DescribeWorkspaceConfigurationResponse.AddMember("workspaceConfiguration", WorkspaceConfigurationDescription)
-
-	DescribeWorkspaceRequest_workspaceId = DescribeWorkspaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	DescribeWorkspaceResponse_workspace = DescribeWorkspaceResponse.AddMember("workspace", WorkspaceDescription)
-
-	GetDefaultScraperConfigurationResponse_configuration = GetDefaultScraperConfigurationResponse.AddMember("configuration", smithyprelude.Blob)
-
-	ListAnomalyDetectorsRequest_workspaceId = ListAnomalyDetectorsRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	ListAnomalyDetectorsRequest_alias = ListAnomalyDetectorsRequest.AddMember("alias", _AnomalyDetectorAlias, &smithytraits.HTTPQuery{Name: "alias"})
-
-	ListAnomalyDetectorsRequest_maxResults = ListAnomalyDetectorsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAnomalyDetectorsRequest_nextToken = ListAnomalyDetectorsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAnomalyDetectorsResponse_anomalyDetectors = ListAnomalyDetectorsResponse.AddMember("anomalyDetectors", _AnomalyDetectorSummaryList)
-
-	ListAnomalyDetectorsResponse_nextToken = ListAnomalyDetectorsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRuleGroupsNamespacesRequest_workspaceId = ListRuleGroupsNamespacesRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	ListRuleGroupsNamespacesRequest_name = ListRuleGroupsNamespacesRequest.AddMember("name", _RuleGroupsNamespaceName, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListRuleGroupsNamespacesRequest_nextToken = ListRuleGroupsNamespacesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRuleGroupsNamespacesRequest_maxResults = ListRuleGroupsNamespacesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRuleGroupsNamespacesResponse_ruleGroupsNamespaces = ListRuleGroupsNamespacesResponse.AddMember("ruleGroupsNamespaces", _RuleGroupsNamespaceSummaryList)
-
-	ListRuleGroupsNamespacesResponse_nextToken = ListRuleGroupsNamespacesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListScrapersRequest_filters = ListScrapersRequest.AddMember("filters", _ScraperFilters, &smithytraits.HTTPQueryParams{})
-
-	ListScrapersRequest_nextToken = ListScrapersRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListScrapersRequest_maxResults = ListScrapersRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListScrapersResponse_scrapers = ListScrapersResponse.AddMember("scrapers", _ScraperSummaryList)
-
-	ListScrapersResponse_nextToken = ListScrapersResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListWorkspacesRequest_nextToken = ListWorkspacesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkspacesRequest_alias = ListWorkspacesRequest.AddMember("alias", _WorkspaceAlias, &smithytraits.HTTPQuery{Name: "alias"})
-
-	ListWorkspacesRequest_maxResults = ListWorkspacesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkspacesResponse_workspaces = ListWorkspacesResponse.AddMember("workspaces", _WorkspaceSummaryList)
-
-	ListWorkspacesResponse_nextToken = ListWorkspacesResponse.AddMember("nextToken", _PaginationToken)
-
-	PutAlertManagerDefinitionRequest_workspaceId = PutAlertManagerDefinitionRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	PutAlertManagerDefinitionRequest_data = PutAlertManagerDefinitionRequest.AddMember("data", _AlertManagerDefinitionData)
-
-	PutAlertManagerDefinitionRequest_clientToken = PutAlertManagerDefinitionRequest.AddMember("clientToken", _IdempotencyToken)
-
-	PutAlertManagerDefinitionResponse_status = PutAlertManagerDefinitionResponse.AddMember("status", AlertManagerDefinitionStatus)
-
-	PutAnomalyDetectorRequest_workspaceId = PutAnomalyDetectorRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	PutAnomalyDetectorRequest_anomalyDetectorId = PutAnomalyDetectorRequest.AddMember("anomalyDetectorId", _AnomalyDetectorId, &smithytraits.HTTPLabel{})
-
-	PutAnomalyDetectorRequest_evaluationIntervalInSeconds = PutAnomalyDetectorRequest.AddMember("evaluationIntervalInSeconds", _AnomalyDetectorEvaluationInterval)
-
-	PutAnomalyDetectorRequest_missingDataAction = PutAnomalyDetectorRequest.AddMember("missingDataAction", AnomalyDetectorMissingDataAction)
-
-	PutAnomalyDetectorRequest_configuration = PutAnomalyDetectorRequest.AddMember("configuration", AnomalyDetectorConfiguration)
-
-	PutAnomalyDetectorRequest_labels = PutAnomalyDetectorRequest.AddMember("labels", _PrometheusMetricLabelMap)
-
-	PutAnomalyDetectorRequest_clientToken = PutAnomalyDetectorRequest.AddMember("clientToken", _IdempotencyToken)
-
-	PutAnomalyDetectorResponse_anomalyDetectorId = PutAnomalyDetectorResponse.AddMember("anomalyDetectorId", _AnomalyDetectorId)
-
-	PutAnomalyDetectorResponse_arn = PutAnomalyDetectorResponse.AddMember("arn", _AnomalyDetectorArn)
-
-	PutAnomalyDetectorResponse_status = PutAnomalyDetectorResponse.AddMember("status", AnomalyDetectorStatus)
-
-	PutAnomalyDetectorResponse_tags = PutAnomalyDetectorResponse.AddMember("tags", _TagMap)
-
-	PutResourcePolicyRequest_workspaceId = PutResourcePolicyRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	PutResourcePolicyRequest_policyDocument = PutResourcePolicyRequest.AddMember("policyDocument", smithyprelude.String)
-
-	PutResourcePolicyRequest_clientToken = PutResourcePolicyRequest.AddMember("clientToken", _IdempotencyToken)
-
-	PutResourcePolicyRequest_revisionId = PutResourcePolicyRequest.AddMember("revisionId", smithyprelude.String)
-
-	PutResourcePolicyResponse_policyStatus = PutResourcePolicyResponse.AddMember("policyStatus", _WorkspacePolicyStatusCode)
-
-	PutResourcePolicyResponse_revisionId = PutResourcePolicyResponse.AddMember("revisionId", smithyprelude.String)
-
-	PutRuleGroupsNamespaceRequest_workspaceId = PutRuleGroupsNamespaceRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	PutRuleGroupsNamespaceRequest_name = PutRuleGroupsNamespaceRequest.AddMember("name", _RuleGroupsNamespaceName, &smithytraits.HTTPLabel{})
-
-	PutRuleGroupsNamespaceRequest_data = PutRuleGroupsNamespaceRequest.AddMember("data", _RuleGroupsNamespaceData)
-
-	PutRuleGroupsNamespaceRequest_clientToken = PutRuleGroupsNamespaceRequest.AddMember("clientToken", _IdempotencyToken)
-
-	PutRuleGroupsNamespaceResponse_name = PutRuleGroupsNamespaceResponse.AddMember("name", _RuleGroupsNamespaceName)
-
-	PutRuleGroupsNamespaceResponse_arn = PutRuleGroupsNamespaceResponse.AddMember("arn", _RuleGroupsNamespaceArn)
-
-	PutRuleGroupsNamespaceResponse_status = PutRuleGroupsNamespaceResponse.AddMember("status", RuleGroupsNamespaceStatus)
-
-	PutRuleGroupsNamespaceResponse_tags = PutRuleGroupsNamespaceResponse.AddMember("tags", _TagMap)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateLoggingConfigurationRequest_workspaceId = UpdateLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	UpdateLoggingConfigurationRequest_logGroupArn = UpdateLoggingConfigurationRequest.AddMember("logGroupArn", _LogGroupArn)
-
-	UpdateLoggingConfigurationRequest_clientToken = UpdateLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateLoggingConfigurationResponse_status = UpdateLoggingConfigurationResponse.AddMember("status", LoggingConfigurationStatus)
-
-	UpdateQueryLoggingConfigurationRequest_workspaceId = UpdateQueryLoggingConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	UpdateQueryLoggingConfigurationRequest_destinations = UpdateQueryLoggingConfigurationRequest.AddMember("destinations", _LoggingDestinations)
-
-	UpdateQueryLoggingConfigurationRequest_clientToken = UpdateQueryLoggingConfigurationRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateQueryLoggingConfigurationResponse_status = UpdateQueryLoggingConfigurationResponse.AddMember("status", QueryLoggingConfigurationStatus)
-
-	UpdateScraperRequest_scraperId = UpdateScraperRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	UpdateScraperRequest_alias = UpdateScraperRequest.AddMember("alias", _ScraperAlias)
-
-	UpdateScraperRequest_scrapeConfiguration = UpdateScraperRequest.AddMember("scrapeConfiguration", ScrapeConfiguration)
-
-	UpdateScraperRequest_destination = UpdateScraperRequest.AddMember("destination", Destination)
-
-	UpdateScraperRequest_roleConfiguration = UpdateScraperRequest.AddMember("roleConfiguration", RoleConfiguration)
-
-	UpdateScraperRequest_clientToken = UpdateScraperRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateScraperRequest_exporters = UpdateScraperRequest.AddMember("exporters", _ExporterList)
-
-	UpdateScraperLoggingConfigurationRequest_scraperId = UpdateScraperLoggingConfigurationRequest.AddMember("scraperId", _ScraperId, &smithytraits.HTTPLabel{})
-
-	UpdateScraperLoggingConfigurationRequest_loggingDestination = UpdateScraperLoggingConfigurationRequest.AddMember("loggingDestination", ScraperLoggingDestination)
-
-	UpdateScraperLoggingConfigurationRequest_scraperComponents = UpdateScraperLoggingConfigurationRequest.AddMember("scraperComponents", _ScraperComponents)
-
-	UpdateScraperLoggingConfigurationResponse_status = UpdateScraperLoggingConfigurationResponse.AddMember("status", ScraperLoggingConfigurationStatus)
-
-	UpdateScraperResponse_scraperId = UpdateScraperResponse.AddMember("scraperId", _ScraperId)
-
-	UpdateScraperResponse_arn = UpdateScraperResponse.AddMember("arn", _ScraperArn)
-
-	UpdateScraperResponse_status = UpdateScraperResponse.AddMember("status", ScraperStatus)
-
-	UpdateScraperResponse_tags = UpdateScraperResponse.AddMember("tags", _TagMap)
-
-	UpdateWorkspaceAliasRequest_workspaceId = UpdateWorkspaceAliasRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	UpdateWorkspaceAliasRequest_alias = UpdateWorkspaceAliasRequest.AddMember("alias", _WorkspaceAlias)
-
-	UpdateWorkspaceAliasRequest_clientToken = UpdateWorkspaceAliasRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateWorkspaceConfigurationRequest_workspaceId = UpdateWorkspaceConfigurationRequest.AddMember("workspaceId", _WorkspaceId, &smithytraits.HTTPLabel{})
-
-	UpdateWorkspaceConfigurationRequest_clientToken = UpdateWorkspaceConfigurationRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateWorkspaceConfigurationRequest_limitsPerLabelSet = UpdateWorkspaceConfigurationRequest.AddMember("limitsPerLabelSet", _LimitsPerLabelSetList)
-
-	UpdateWorkspaceConfigurationRequest_retentionPeriodInDays = UpdateWorkspaceConfigurationRequest.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds = UpdateWorkspaceConfigurationRequest.AddMember("outOfOrderTimeWindowInSeconds", smithyprelude.Integer)
-
-	UpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds = UpdateWorkspaceConfigurationRequest.AddMember("ruleQueryOffsetInSeconds", smithyprelude.Integer)
-
-	UpdateWorkspaceConfigurationResponse_status = UpdateWorkspaceConfigurationResponse.AddMember("status", WorkspaceConfigurationStatus)
-
-}
+	Code: 202}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientToken"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "revisionId"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "alias"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPQueryParams{}}, DirectMask: 0x80000}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAlertManagerDefinitionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAlertManagerDefinitionDescription_status, &sAlertManagerDefinitionDescription_data, &sAlertManagerDefinitionDescription_createdAt, &sAlertManagerDefinitionDescription_modifiedAt}}
+var mAlertManagerDefinitionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAlertManagerDefinitionStatus_statusCode, &sAlertManagerDefinitionStatus_statusReason}}
+var mAmpConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmpConfiguration_workspaceArn}}
+var mAnomalyDetectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorConfiguration_randomCutForest}}
+var mAnomalyDetectorDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorDescription_arn, &sAnomalyDetectorDescription_anomalyDetectorId, &sAnomalyDetectorDescription_alias, &sAnomalyDetectorDescription_evaluationIntervalInSeconds, &sAnomalyDetectorDescription_missingDataAction, &sAnomalyDetectorDescription_configuration, &sAnomalyDetectorDescription_labels, &sAnomalyDetectorDescription_status, &sAnomalyDetectorDescription_createdAt, &sAnomalyDetectorDescription_modifiedAt, &sAnomalyDetectorDescription_tags}, Hash: &hAnomalyDetectorDescription}
+var mAnomalyDetectorMissingDataAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorMissingDataAction_markAsAnomaly, &sAnomalyDetectorMissingDataAction_skip}}
+var mAnomalyDetectorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorStatus_statusCode, &sAnomalyDetectorStatus_statusReason}}
+var mAnomalyDetectorStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorStatusCode_CREATING, &sAnomalyDetectorStatusCode_ACTIVE, &sAnomalyDetectorStatusCode_UPDATING, &sAnomalyDetectorStatusCode_DELETING, &sAnomalyDetectorStatusCode_CREATION_FAILED, &sAnomalyDetectorStatusCode_UPDATE_FAILED, &sAnomalyDetectorStatusCode_DELETION_FAILED}}
+var mAnomalyDetectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorSummary_arn, &sAnomalyDetectorSummary_anomalyDetectorId, &sAnomalyDetectorSummary_alias, &sAnomalyDetectorSummary_status, &sAnomalyDetectorSummary_createdAt, &sAnomalyDetectorSummary_modifiedAt, &sAnomalyDetectorSummary_tags}}
+var m_AnomalyDetectorSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnomalyDetectorSummaryList_member}}
+var mCloudWatchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchConfiguration_datasetArn}}
+var mCloudWatchLogDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogDestination_logGroupArn}}
+var mComponentConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentConfig_options}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_ampConfiguration, &sDestination_cloudWatchConfiguration}}
+var mEksConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEksConfiguration_clusterArn, &sEksConfiguration_securityGroupIds, &sEksConfiguration_subnetIds}}
+var mExporterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExporterConfiguration_openSearchConfiguration, &sExporterConfiguration_kafkaConfiguration}}
+var m_ExporterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExporterList_member}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mIgnoreNearExpected = smithy.SchemaMembers{List: []*smithy.Schema{&sIgnoreNearExpected_amount, &sIgnoreNearExpected_ratio}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mKafkaExporterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaExporterConfiguration_clusterArn, &sKafkaExporterConfiguration_topicFilter, &sKafkaExporterConfiguration_consumerGroupFilter}}
+var m_LabelSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_LabelSet_key, &s_LabelSet_value}}
+var mLimitsPerLabelSet = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitsPerLabelSet_limits, &sLimitsPerLabelSet_labelSet}}
+var mLimitsPerLabelSetEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitsPerLabelSetEntry_maxSeries}}
+var m_LimitsPerLabelSetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LimitsPerLabelSetList_member}}
+var mLoggingConfigurationMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfigurationMetadata_status, &sLoggingConfigurationMetadata_workspace, &sLoggingConfigurationMetadata_logGroupArn, &sLoggingConfigurationMetadata_createdAt, &sLoggingConfigurationMetadata_modifiedAt}}
+var mLoggingConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfigurationStatus_statusCode, &sLoggingConfigurationStatus_statusReason}}
+var mLoggingDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingDestination_cloudWatchLogs, &sLoggingDestination_filters}}
+var m_LoggingDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoggingDestinations_member}}
+var mLoggingFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingFilter_qspThreshold}}
+var mOpenSearchExporterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenSearchExporterConfiguration_domainArn}}
+var m_PrometheusMetricLabelMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrometheusMetricLabelMap_key, &s_PrometheusMetricLabelMap_value}}
+var mQueryLoggingConfigurationMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryLoggingConfigurationMetadata_status, &sQueryLoggingConfigurationMetadata_workspace, &sQueryLoggingConfigurationMetadata_destinations, &sQueryLoggingConfigurationMetadata_createdAt, &sQueryLoggingConfigurationMetadata_modifiedAt}}
+var mQueryLoggingConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryLoggingConfigurationStatus_statusCode, &sQueryLoggingConfigurationStatus_statusReason}}
+var mRandomCutForestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRandomCutForestConfiguration_query, &sRandomCutForestConfiguration_shingleSize, &sRandomCutForestConfiguration_sampleSize, &sRandomCutForestConfiguration_ignoreNearExpectedFromAbove, &sRandomCutForestConfiguration_ignoreNearExpectedFromBelow}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mRoleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRoleConfiguration_sourceRoleArn, &sRoleConfiguration_targetRoleArn}}
+var mRuleGroupsNamespaceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroupsNamespaceDescription_arn, &sRuleGroupsNamespaceDescription_name, &sRuleGroupsNamespaceDescription_status, &sRuleGroupsNamespaceDescription_data, &sRuleGroupsNamespaceDescription_createdAt, &sRuleGroupsNamespaceDescription_modifiedAt, &sRuleGroupsNamespaceDescription_tags}}
+var mRuleGroupsNamespaceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroupsNamespaceStatus_statusCode, &sRuleGroupsNamespaceStatus_statusReason}}
+var mRuleGroupsNamespaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleGroupsNamespaceSummary_arn, &sRuleGroupsNamespaceSummary_name, &sRuleGroupsNamespaceSummary_status, &sRuleGroupsNamespaceSummary_createdAt, &sRuleGroupsNamespaceSummary_modifiedAt, &sRuleGroupsNamespaceSummary_tags}}
+var m_RuleGroupsNamespaceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleGroupsNamespaceSummaryList_member}}
+var mScrapeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sScrapeConfiguration_configurationBlob}}
+var mScraperComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperComponent_type, &sScraperComponent_config}}
+var m_ScraperComponents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScraperComponents_member}}
+var mScraperDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperDescription_alias, &sScraperDescription_scraperId, &sScraperDescription_arn, &sScraperDescription_roleArn, &sScraperDescription_status, &sScraperDescription_createdAt, &sScraperDescription_lastModifiedAt, &sScraperDescription_tags, &sScraperDescription_statusReason, &sScraperDescription_scrapeConfiguration, &sScraperDescription_source, &sScraperDescription_destination, &sScraperDescription_roleConfiguration, &sScraperDescription_exporters}, Hash: &hScraperDescription}
+var m_ScraperFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScraperFilters_key, &s_ScraperFilters_value}}
+var mScraperLoggingConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperLoggingConfigurationStatus_statusCode, &sScraperLoggingConfigurationStatus_statusReason}}
+var mScraperLoggingDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperLoggingDestination_cloudWatchLogs}}
+var mScraperStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperStatus_statusCode}}
+var mScraperSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sScraperSummary_alias, &sScraperSummary_scraperId, &sScraperSummary_arn, &sScraperSummary_roleArn, &sScraperSummary_status, &sScraperSummary_createdAt, &sScraperSummary_lastModifiedAt, &sScraperSummary_tags, &sScraperSummary_statusReason, &sScraperSummary_source, &sScraperSummary_destination, &sScraperSummary_roleConfiguration, &sScraperSummary_exporters}, Hash: &hScraperSummary}
+var m_ScraperSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScraperSummaryList_member}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_eksConfiguration, &sSource_vpcConfiguration}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfiguration_securityGroupIds, &sVpcConfiguration_subnetIds}}
+var mWorkspaceConfigurationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceConfigurationDescription_status, &sWorkspaceConfigurationDescription_limitsPerLabelSet, &sWorkspaceConfigurationDescription_retentionPeriodInDays, &sWorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds, &sWorkspaceConfigurationDescription_ruleQueryOffsetInSeconds}}
+var mWorkspaceConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceConfigurationStatus_statusCode, &sWorkspaceConfigurationStatus_statusReason}}
+var mWorkspaceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceDescription_workspaceId, &sWorkspaceDescription_alias, &sWorkspaceDescription_arn, &sWorkspaceDescription_status, &sWorkspaceDescription_prometheusEndpoint, &sWorkspaceDescription_createdAt, &sWorkspaceDescription_tags, &sWorkspaceDescription_kmsKeyArn}}
+var mWorkspaceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceStatus_statusCode}}
+var mWorkspaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceSummary_workspaceId, &sWorkspaceSummary_alias, &sWorkspaceSummary_arn, &sWorkspaceSummary_status, &sWorkspaceSummary_createdAt, &sWorkspaceSummary_tags, &sWorkspaceSummary_kmsKeyArn}}
+var m_WorkspaceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkspaceSummaryList_member}}
+var mCreateAlertManagerDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAlertManagerDefinitionRequest_workspaceId, &sCreateAlertManagerDefinitionRequest_data, &sCreateAlertManagerDefinitionRequest_clientToken}}
+var mCreateAlertManagerDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAlertManagerDefinitionResponse_status}}
+var mCreateAnomalyDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAnomalyDetectorRequest_workspaceId, &sCreateAnomalyDetectorRequest_alias, &sCreateAnomalyDetectorRequest_evaluationIntervalInSeconds, &sCreateAnomalyDetectorRequest_missingDataAction, &sCreateAnomalyDetectorRequest_configuration, &sCreateAnomalyDetectorRequest_labels, &sCreateAnomalyDetectorRequest_clientToken, &sCreateAnomalyDetectorRequest_tags}}
+var mCreateAnomalyDetectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAnomalyDetectorResponse_anomalyDetectorId, &sCreateAnomalyDetectorResponse_arn, &sCreateAnomalyDetectorResponse_status, &sCreateAnomalyDetectorResponse_tags}}
+var mCreateLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoggingConfigurationRequest_workspaceId, &sCreateLoggingConfigurationRequest_logGroupArn, &sCreateLoggingConfigurationRequest_clientToken}}
+var mCreateLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLoggingConfigurationResponse_status}}
+var mCreateQueryLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQueryLoggingConfigurationRequest_workspaceId, &sCreateQueryLoggingConfigurationRequest_destinations, &sCreateQueryLoggingConfigurationRequest_clientToken}}
+var mCreateQueryLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQueryLoggingConfigurationResponse_status}}
+var mCreateRuleGroupsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleGroupsNamespaceRequest_workspaceId, &sCreateRuleGroupsNamespaceRequest_name, &sCreateRuleGroupsNamespaceRequest_data, &sCreateRuleGroupsNamespaceRequest_clientToken, &sCreateRuleGroupsNamespaceRequest_tags}}
+var mCreateRuleGroupsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleGroupsNamespaceResponse_name, &sCreateRuleGroupsNamespaceResponse_arn, &sCreateRuleGroupsNamespaceResponse_status, &sCreateRuleGroupsNamespaceResponse_tags}}
+var mCreateScraperRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScraperRequest_alias, &sCreateScraperRequest_scrapeConfiguration, &sCreateScraperRequest_source, &sCreateScraperRequest_destination, &sCreateScraperRequest_roleConfiguration, &sCreateScraperRequest_clientToken, &sCreateScraperRequest_tags, &sCreateScraperRequest_exporters}}
+var mCreateScraperResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScraperResponse_scraperId, &sCreateScraperResponse_arn, &sCreateScraperResponse_status, &sCreateScraperResponse_tags}}
+var mCreateWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkspaceRequest_alias, &sCreateWorkspaceRequest_clientToken, &sCreateWorkspaceRequest_tags, &sCreateWorkspaceRequest_kmsKeyArn}}
+var mCreateWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkspaceResponse_workspaceId, &sCreateWorkspaceResponse_arn, &sCreateWorkspaceResponse_status, &sCreateWorkspaceResponse_tags, &sCreateWorkspaceResponse_kmsKeyArn}}
+var mDeleteAlertManagerDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAlertManagerDefinitionRequest_workspaceId, &sDeleteAlertManagerDefinitionRequest_clientToken}}
+var mDeleteAnomalyDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAnomalyDetectorRequest_workspaceId, &sDeleteAnomalyDetectorRequest_anomalyDetectorId, &sDeleteAnomalyDetectorRequest_clientToken}}
+var mDeleteLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLoggingConfigurationRequest_workspaceId, &sDeleteLoggingConfigurationRequest_clientToken}}
+var mDeleteQueryLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteQueryLoggingConfigurationRequest_workspaceId, &sDeleteQueryLoggingConfigurationRequest_clientToken}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_workspaceId, &sDeleteResourcePolicyRequest_clientToken, &sDeleteResourcePolicyRequest_revisionId}}
+var mDeleteRuleGroupsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleGroupsNamespaceRequest_workspaceId, &sDeleteRuleGroupsNamespaceRequest_name, &sDeleteRuleGroupsNamespaceRequest_clientToken}}
+var mDeleteScraperRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScraperRequest_scraperId, &sDeleteScraperRequest_clientToken}}
+var mDeleteScraperLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScraperLoggingConfigurationRequest_scraperId, &sDeleteScraperLoggingConfigurationRequest_clientToken}}
+var mDeleteScraperResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScraperResponse_scraperId, &sDeleteScraperResponse_status}}
+var mDeleteWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkspaceRequest_workspaceId, &sDeleteWorkspaceRequest_clientToken}}
+var mDescribeAlertManagerDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlertManagerDefinitionRequest_workspaceId}}
+var mDescribeAlertManagerDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlertManagerDefinitionResponse_alertManagerDefinition}}
+var mDescribeAnomalyDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnomalyDetectorRequest_workspaceId, &sDescribeAnomalyDetectorRequest_anomalyDetectorId}}
+var mDescribeAnomalyDetectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnomalyDetectorResponse_anomalyDetector}}
+var mDescribeLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoggingConfigurationRequest_workspaceId}}
+var mDescribeLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoggingConfigurationResponse_loggingConfiguration}}
+var mDescribeQueryLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQueryLoggingConfigurationRequest_workspaceId}}
+var mDescribeQueryLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration}}
+var mDescribeResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourcePolicyRequest_workspaceId}}
+var mDescribeResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourcePolicyResponse_policyDocument, &sDescribeResourcePolicyResponse_policyStatus, &sDescribeResourcePolicyResponse_revisionId}}
+var mDescribeRuleGroupsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuleGroupsNamespaceRequest_workspaceId, &sDescribeRuleGroupsNamespaceRequest_name}}
+var mDescribeRuleGroupsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace}}
+var mDescribeScraperRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScraperRequest_scraperId}}
+var mDescribeScraperLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScraperLoggingConfigurationRequest_scraperId}}
+var mDescribeScraperLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScraperLoggingConfigurationResponse_status, &sDescribeScraperLoggingConfigurationResponse_scraperId, &sDescribeScraperLoggingConfigurationResponse_loggingDestination, &sDescribeScraperLoggingConfigurationResponse_scraperComponents, &sDescribeScraperLoggingConfigurationResponse_modifiedAt}}
+var mDescribeScraperResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScraperResponse_scraper}}
+var mDescribeWorkspaceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkspaceConfigurationRequest_workspaceId}}
+var mDescribeWorkspaceConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkspaceConfigurationResponse_workspaceConfiguration}}
+var mDescribeWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkspaceRequest_workspaceId}}
+var mDescribeWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkspaceResponse_workspace}}
+var mGetDefaultScraperConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDefaultScraperConfigurationResponse_configuration}}
+var mListAnomalyDetectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAnomalyDetectorsRequest_workspaceId, &sListAnomalyDetectorsRequest_alias, &sListAnomalyDetectorsRequest_maxResults, &sListAnomalyDetectorsRequest_nextToken}}
+var mListAnomalyDetectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAnomalyDetectorsResponse_anomalyDetectors, &sListAnomalyDetectorsResponse_nextToken}}
+var mListRuleGroupsNamespacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleGroupsNamespacesRequest_workspaceId, &sListRuleGroupsNamespacesRequest_name, &sListRuleGroupsNamespacesRequest_nextToken, &sListRuleGroupsNamespacesRequest_maxResults}}
+var mListRuleGroupsNamespacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleGroupsNamespacesResponse_ruleGroupsNamespaces, &sListRuleGroupsNamespacesResponse_nextToken}}
+var mListScrapersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListScrapersRequest_filters, &sListScrapersRequest_nextToken, &sListScrapersRequest_maxResults}}
+var mListScrapersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListScrapersResponse_scrapers, &sListScrapersResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListWorkspacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkspacesRequest_nextToken, &sListWorkspacesRequest_alias, &sListWorkspacesRequest_maxResults}}
+var mListWorkspacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkspacesResponse_workspaces, &sListWorkspacesResponse_nextToken}}
+var mPutAlertManagerDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAlertManagerDefinitionRequest_workspaceId, &sPutAlertManagerDefinitionRequest_data, &sPutAlertManagerDefinitionRequest_clientToken}}
+var mPutAlertManagerDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAlertManagerDefinitionResponse_status}}
+var mPutAnomalyDetectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAnomalyDetectorRequest_workspaceId, &sPutAnomalyDetectorRequest_anomalyDetectorId, &sPutAnomalyDetectorRequest_evaluationIntervalInSeconds, &sPutAnomalyDetectorRequest_missingDataAction, &sPutAnomalyDetectorRequest_configuration, &sPutAnomalyDetectorRequest_labels, &sPutAnomalyDetectorRequest_clientToken}}
+var mPutAnomalyDetectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAnomalyDetectorResponse_anomalyDetectorId, &sPutAnomalyDetectorResponse_arn, &sPutAnomalyDetectorResponse_status, &sPutAnomalyDetectorResponse_tags}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_workspaceId, &sPutResourcePolicyRequest_policyDocument, &sPutResourcePolicyRequest_clientToken, &sPutResourcePolicyRequest_revisionId}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_policyStatus, &sPutResourcePolicyResponse_revisionId}}
+var mPutRuleGroupsNamespaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRuleGroupsNamespaceRequest_workspaceId, &sPutRuleGroupsNamespaceRequest_name, &sPutRuleGroupsNamespaceRequest_data, &sPutRuleGroupsNamespaceRequest_clientToken}}
+var mPutRuleGroupsNamespaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRuleGroupsNamespaceResponse_name, &sPutRuleGroupsNamespaceResponse_arn, &sPutRuleGroupsNamespaceResponse_status, &sPutRuleGroupsNamespaceResponse_tags}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLoggingConfigurationRequest_workspaceId, &sUpdateLoggingConfigurationRequest_logGroupArn, &sUpdateLoggingConfigurationRequest_clientToken}}
+var mUpdateLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLoggingConfigurationResponse_status}}
+var mUpdateQueryLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQueryLoggingConfigurationRequest_workspaceId, &sUpdateQueryLoggingConfigurationRequest_destinations, &sUpdateQueryLoggingConfigurationRequest_clientToken}}
+var mUpdateQueryLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQueryLoggingConfigurationResponse_status}}
+var mUpdateScraperRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScraperRequest_scraperId, &sUpdateScraperRequest_alias, &sUpdateScraperRequest_scrapeConfiguration, &sUpdateScraperRequest_destination, &sUpdateScraperRequest_roleConfiguration, &sUpdateScraperRequest_clientToken, &sUpdateScraperRequest_exporters}}
+var mUpdateScraperLoggingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScraperLoggingConfigurationRequest_scraperId, &sUpdateScraperLoggingConfigurationRequest_loggingDestination, &sUpdateScraperLoggingConfigurationRequest_scraperComponents}}
+var mUpdateScraperLoggingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScraperLoggingConfigurationResponse_status}}
+var mUpdateScraperResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScraperResponse_scraperId, &sUpdateScraperResponse_arn, &sUpdateScraperResponse_status, &sUpdateScraperResponse_tags}}
+var mUpdateWorkspaceAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkspaceAliasRequest_workspaceId, &sUpdateWorkspaceAliasRequest_alias, &sUpdateWorkspaceAliasRequest_clientToken}}
+var mUpdateWorkspaceConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkspaceConfigurationRequest_workspaceId, &sUpdateWorkspaceConfigurationRequest_clientToken, &sUpdateWorkspaceConfigurationRequest_limitsPerLabelSet, &sUpdateWorkspaceConfigurationRequest_retentionPeriodInDays, &sUpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds, &sUpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds}}
+var mUpdateWorkspaceConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkspaceConfigurationResponse_status}}
+
+var hAnomalyDetectorDescription = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 8, 3, 9, 0, 0, 0, 0, 0, 0, 5, 0, 0, 6, 2,
+	10, 0, 0, 0, 0, 11, 4, 0,
+}}
+var hScraperDescription = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	11, 10, 8, 0, 3, 0, 6, 0, 7, 14, 12, 0, 5, 0, 1, 13, 4, 0, 0, 0, 0, 0, 0, 0,
+	0, 9, 0, 0, 0, 2, 0, 0,
+}}
+var hScraperSummary = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 0, 0, 0, 7, 1, 9, 4, 11, 0, 8, 0, 3, 13, 0, 0, 0, 0, 0, 0, 5, 0, 2,
+	0, 0, 0, 12, 10, 0, 0, 6,
+}}
+
+var sCreateAlertManagerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlertManagerDefinition, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateAlertManagerDefinition})
+var sCreateAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAnomalyDetector, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateAnomalyDetector})
+var sCreateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoggingConfiguration})
+var sCreateQueryLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueryLoggingConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateQueryLoggingConfiguration})
+var sCreateRuleGroupsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupsNamespace, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateRuleGroupsNamespace})
+var sCreateScraper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScraper, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateScraper})
+var sCreateWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspace, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkspace})
+var sDeleteAlertManagerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlertManagerDefinition, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAlertManagerDefinition})
+var sDeleteAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnomalyDetector, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAnomalyDetector})
+var sDeleteLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoggingConfiguration})
+var sDeleteQueryLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueryLoggingConfiguration, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteQueryLoggingConfiguration})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteRuleGroupsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupsNamespace, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRuleGroupsNamespace})
+var sDeleteScraper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScraper, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteScraper})
+var sDeleteScraperLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScraperLoggingConfiguration, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteScraperLoggingConfiguration})
+var sDeleteWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkspace, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkspace})
+var sDescribeAlertManagerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlertManagerDefinition, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAlertManagerDefinition})
+var sDescribeAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetector, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAnomalyDetector})
+var sDescribeLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoggingConfiguration})
+var sDescribeQueryLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQueryLoggingConfiguration, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeQueryLoggingConfiguration})
+var sDescribeResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicy, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeResourcePolicy})
+var sDescribeRuleGroupsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupsNamespace, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRuleGroupsNamespace})
+var sDescribeScraper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraper, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDescribeScraper})
+var sDescribeScraperLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraperLoggingConfiguration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDescribeScraperLoggingConfiguration})
+var sDescribeWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspace, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWorkspace})
+var sDescribeWorkspaceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspaceConfiguration, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWorkspaceConfiguration})
+var sGetDefaultScraperConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultScraperConfiguration, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetDefaultScraperConfiguration})
+var sListAnomalyDetectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnomalyDetectors, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListAnomalyDetectors})
+var sListRuleGroupsNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsNamespaces, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListRuleGroupsNamespaces})
+var sListScrapers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScrapers, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListScrapers})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWorkspaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspaces, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListWorkspaces})
+var sPutAlertManagerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlertManagerDefinition, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ePutAlertManagerDefinition})
+var sPutAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetector, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ePutAnomalyDetector})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sPutRuleGroupsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRuleGroupsNamespace, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ePutRuleGroupsNamespace})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfiguration, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLoggingConfiguration})
+var sUpdateQueryLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueryLoggingConfiguration, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eUpdateQueryLoggingConfiguration})
+var sUpdateScraper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraper, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eUpdateScraper})
+var sUpdateScraperLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraperLoggingConfiguration, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eUpdateScraperLoggingConfiguration})
+var sUpdateWorkspaceAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceAlias, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkspaceAlias})
+var sUpdateWorkspaceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceConfiguration, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkspaceConfiguration})
+var s_AmazonPrometheusService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPrometheusService, Type: smithy.ShapeTypeService, Ext: &e_AmazonPrometheusService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AlertManagerDefinitionData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlertManagerDefinitionData, Type: smithy.ShapeTypeBlob, Ext: &e_AlertManagerDefinitionData})
+var sAlertManagerDefinitionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlertManagerDefinitionDescription, Members: &mAlertManagerDefinitionDescription, Type: smithy.ShapeTypeStructure, Ext: &eAlertManagerDefinitionDescription})
+var sAlertManagerDefinitionDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAlertManagerDefinitionStatus, Members: &mAlertManagerDefinitionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAlertManagerDefinitionDescription_status})
+var sAlertManagerDefinitionDescription_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_AlertManagerDefinitionData, Type: smithy.ShapeTypeBlob, Ext: &eAlertManagerDefinitionDescription_data})
+var sAlertManagerDefinitionDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlertManagerDefinitionDescription_createdAt})
+var sAlertManagerDefinitionDescription_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlertManagerDefinitionDescription_modifiedAt})
+var sAlertManagerDefinitionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlertManagerDefinitionStatus, Members: &mAlertManagerDefinitionStatus, Type: smithy.ShapeTypeStructure, Ext: &eAlertManagerDefinitionStatus})
+var sAlertManagerDefinitionStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_AlertManagerDefinitionStatusCode, Type: smithy.ShapeTypeString, Ext: &eAlertManagerDefinitionStatus_statusCode})
+var sAlertManagerDefinitionStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAlertManagerDefinitionStatus_statusReason})
+var s_AlertManagerDefinitionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlertManagerDefinitionStatusCode, Type: smithy.ShapeTypeString, Ext: &e_AlertManagerDefinitionStatusCode})
+var sAmpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmpConfiguration, Members: &mAmpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmpConfiguration})
+var sAmpConfiguration_workspaceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceArn", ID: &i_WorkspaceArn, Type: smithy.ShapeTypeString, Ext: &eAmpConfiguration_workspaceArn})
+var s_AnomalyDetectorAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorAlias, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorAlias})
+var s_AnomalyDetectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorArn, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorArn})
+var sAnomalyDetectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eAnomalyDetectorConfiguration})
+var sAnomalyDetectorConfiguration_randomCutForest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "randomCutForest", ID: &iRandomCutForestConfiguration, Members: &mRandomCutForestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorConfiguration_randomCutForest})
+var sAnomalyDetectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorDescription, Members: &mAnomalyDetectorDescription, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorDescription})
+var sAnomalyDetectorDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AnomalyDetectorArn, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorDescription_arn})
+var sAnomalyDetectorDescription_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorDescription_anomalyDetectorId})
+var sAnomalyDetectorDescription_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_AnomalyDetectorAlias, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorDescription_alias})
+var sAnomalyDetectorDescription_evaluationIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationIntervalInSeconds", ID: &i_AnomalyDetectorEvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &eAnomalyDetectorDescription_evaluationIntervalInSeconds})
+var sAnomalyDetectorDescription_missingDataAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingDataAction", ID: &iAnomalyDetectorMissingDataAction, Members: &mAnomalyDetectorMissingDataAction, Type: smithy.ShapeTypeUnion, Ext: &eAnomalyDetectorDescription_missingDataAction})
+var sAnomalyDetectorDescription_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eAnomalyDetectorDescription_configuration})
+var sAnomalyDetectorDescription_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_PrometheusMetricLabelMap, Members: &m_PrometheusMetricLabelMap, Type: smithy.ShapeTypeMap, Ext: &eAnomalyDetectorDescription_labels})
+var sAnomalyDetectorDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAnomalyDetectorStatus, Members: &mAnomalyDetectorStatus, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorDescription_status})
+var sAnomalyDetectorDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAnomalyDetectorDescription_createdAt})
+var sAnomalyDetectorDescription_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAnomalyDetectorDescription_modifiedAt})
+var sAnomalyDetectorDescription_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAnomalyDetectorDescription_tags})
+var s_AnomalyDetectorEvaluationInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorEvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &e_AnomalyDetectorEvaluationInterval})
+var s_AnomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorId})
+var sAnomalyDetectorMissingDataAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorMissingDataAction, Members: &mAnomalyDetectorMissingDataAction, Type: smithy.ShapeTypeUnion, Ext: &eAnomalyDetectorMissingDataAction})
+var sAnomalyDetectorMissingDataAction_markAsAnomaly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markAsAnomaly", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAnomalyDetectorMissingDataAction_markAsAnomaly})
+var sAnomalyDetectorMissingDataAction_skip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skip", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAnomalyDetectorMissingDataAction_skip})
+var sAnomalyDetectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorStatus, Members: &mAnomalyDetectorStatus, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatus})
+var sAnomalyDetectorStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &iAnomalyDetectorStatusCode, Members: &mAnomalyDetectorStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorStatus_statusCode})
+var sAnomalyDetectorStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorStatus_statusReason})
+var sAnomalyDetectorStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorStatusCode, Members: &mAnomalyDetectorStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorStatusCode})
+var sAnomalyDetectorStatusCode_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_CREATING})
+var sAnomalyDetectorStatusCode_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_ACTIVE})
+var sAnomalyDetectorStatusCode_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_UPDATING})
+var sAnomalyDetectorStatusCode_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_DELETING})
+var sAnomalyDetectorStatusCode_CREATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_CREATION_FAILED})
+var sAnomalyDetectorStatusCode_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_UPDATE_FAILED})
+var sAnomalyDetectorStatusCode_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStatusCode_DELETION_FAILED})
+var sAnomalyDetectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorSummary, Members: &mAnomalyDetectorSummary, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorSummary})
+var sAnomalyDetectorSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AnomalyDetectorArn, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorSummary_arn})
+var sAnomalyDetectorSummary_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorSummary_anomalyDetectorId})
+var sAnomalyDetectorSummary_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_AnomalyDetectorAlias, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorSummary_alias})
+var sAnomalyDetectorSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAnomalyDetectorStatus, Members: &mAnomalyDetectorStatus, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorSummary_status})
+var sAnomalyDetectorSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAnomalyDetectorSummary_createdAt})
+var sAnomalyDetectorSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAnomalyDetectorSummary_modifiedAt})
+var sAnomalyDetectorSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAnomalyDetectorSummary_tags})
+var s_AnomalyDetectorSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorSummaryList, Members: &m_AnomalyDetectorSummaryList, Type: smithy.ShapeTypeList, Ext: &e_AnomalyDetectorSummaryList})
+var s_AnomalyDetectorSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnomalyDetectorSummary, Members: &mAnomalyDetectorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AnomalyDetectorSummaryList_member})
+var sCloudWatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchConfiguration, Members: &mCloudWatchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchConfiguration})
+var sCloudWatchConfiguration_datasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetArn", ID: &i_CloudWatchDatasetArn, Type: smithy.ShapeTypeString, Ext: &eCloudWatchConfiguration_datasetArn})
+var s_CloudWatchDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchDatasetArn, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchDatasetArn})
+var sCloudWatchLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogDestination})
+var sCloudWatchLogDestination_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogDestination_logGroupArn})
+var s_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterArn, Type: smithy.ShapeTypeString, Ext: &e_ClusterArn})
+var sComponentConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentConfig, Members: &mComponentConfig, Type: smithy.ShapeTypeStructure, Ext: &eComponentConfig})
+var sComponentConfig_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eComponentConfig_options})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eDestination})
+var sDestination_ampConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ampConfiguration", ID: &iAmpConfiguration, Members: &mAmpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestination_ampConfiguration})
+var sDestination_cloudWatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchConfiguration", ID: &iCloudWatchConfiguration, Members: &mCloudWatchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestination_cloudWatchConfiguration})
+var sEksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksConfiguration, Members: &mEksConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEksConfiguration})
+var sEksConfiguration_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &i_ClusterArn, Type: smithy.ShapeTypeString, Ext: &eEksConfiguration_clusterArn})
+var sEksConfiguration_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eEksConfiguration_securityGroupIds})
+var sEksConfiguration_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &eEksConfiguration_subnetIds})
+var sExporterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExporterConfiguration, Members: &mExporterConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eExporterConfiguration})
+var sExporterConfiguration_openSearchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openSearchConfiguration", ID: &iOpenSearchExporterConfiguration, Members: &mOpenSearchExporterConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExporterConfiguration_openSearchConfiguration})
+var sExporterConfiguration_kafkaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kafkaConfiguration", ID: &iKafkaExporterConfiguration, Members: &mKafkaExporterConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExporterConfiguration_kafkaConfiguration})
+var s_ExporterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExporterList, Members: &m_ExporterList, Type: smithy.ShapeTypeList, Ext: &e_ExporterList})
+var s_ExporterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExporterConfiguration, Members: &mExporterConfiguration, Type: smithy.ShapeTypeUnion, Ext: &e_ExporterList_member})
+var s_FilterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterKey, Type: smithy.ShapeTypeString, Ext: &e_FilterKey})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValues_member})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sIgnoreNearExpected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIgnoreNearExpected, Members: &mIgnoreNearExpected, Type: smithy.ShapeTypeUnion, Ext: &eIgnoreNearExpected})
+var sIgnoreNearExpected_amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amount", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eIgnoreNearExpected_amount})
+var sIgnoreNearExpected_ratio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ratio", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eIgnoreNearExpected_ratio})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t47, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sKafkaExporterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaExporterConfiguration, Members: &mKafkaExporterConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eKafkaExporterConfiguration})
+var sKafkaExporterConfiguration_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &i_MskClusterArn, Type: smithy.ShapeTypeString, Ext: &eKafkaExporterConfiguration_clusterArn})
+var sKafkaExporterConfiguration_topicFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topicFilter", ID: &i_KafkaExporterFilter, Type: smithy.ShapeTypeString, Ext: &eKafkaExporterConfiguration_topicFilter})
+var sKafkaExporterConfiguration_consumerGroupFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumerGroupFilter", ID: &i_KafkaExporterFilter, Type: smithy.ShapeTypeString, Ext: &eKafkaExporterConfiguration_consumerGroupFilter})
+var s_KafkaExporterFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaExporterFilter, Type: smithy.ShapeTypeString, Ext: &e_KafkaExporterFilter})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_LabelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelName, Type: smithy.ShapeTypeString, Ext: &e_LabelName})
+var s_LabelSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelSet, Members: &m_LabelSet, Type: smithy.ShapeTypeMap, Ext: &e_LabelSet})
+var s_LabelSet_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LabelName, Type: smithy.ShapeTypeString, Ext: &e_LabelSet_key})
+var s_LabelSet_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LabelValue, Type: smithy.ShapeTypeString, Ext: &e_LabelSet_value})
+var s_LabelValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelValue, Type: smithy.ShapeTypeString, Ext: &e_LabelValue})
+var sLimitsPerLabelSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitsPerLabelSet, Members: &mLimitsPerLabelSet, Type: smithy.ShapeTypeStructure, Ext: &eLimitsPerLabelSet})
+var sLimitsPerLabelSet_limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limits", ID: &iLimitsPerLabelSetEntry, Members: &mLimitsPerLabelSetEntry, Type: smithy.ShapeTypeStructure, Ext: &eLimitsPerLabelSet_limits})
+var sLimitsPerLabelSet_labelSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelSet", ID: &i_LabelSet, Members: &m_LabelSet, Type: smithy.ShapeTypeMap, Ext: &eLimitsPerLabelSet_labelSet})
+var sLimitsPerLabelSetEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitsPerLabelSetEntry, Members: &mLimitsPerLabelSetEntry, Type: smithy.ShapeTypeStructure, Ext: &eLimitsPerLabelSetEntry})
+var sLimitsPerLabelSetEntry_maxSeries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSeries", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eLimitsPerLabelSetEntry_maxSeries})
+var s_LimitsPerLabelSetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitsPerLabelSetList, Members: &m_LimitsPerLabelSetList, Type: smithy.ShapeTypeList, Ext: &e_LimitsPerLabelSetList})
+var s_LimitsPerLabelSetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLimitsPerLabelSet, Members: &mLimitsPerLabelSet, Type: smithy.ShapeTypeStructure, Ext: &e_LimitsPerLabelSetList_member})
+var sLoggingConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfigurationMetadata, Members: &mLoggingConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfigurationMetadata})
+var sLoggingConfigurationMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLoggingConfigurationStatus, Members: &mLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfigurationMetadata_status})
+var sLoggingConfigurationMetadata_workspace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspace", ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationMetadata_workspace})
+var sLoggingConfigurationMetadata_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationMetadata_logGroupArn})
+var sLoggingConfigurationMetadata_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLoggingConfigurationMetadata_createdAt})
+var sLoggingConfigurationMetadata_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLoggingConfigurationMetadata_modifiedAt})
+var sLoggingConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfigurationStatus, Members: &mLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfigurationStatus})
+var sLoggingConfigurationStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_LoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationStatus_statusCode})
+var sLoggingConfigurationStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationStatus_statusReason})
+var s_LoggingConfigurationStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationStatusCode})
+var sLoggingDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingDestination, Members: &mLoggingDestination, Type: smithy.ShapeTypeStructure, Ext: &eLoggingDestination})
+var sLoggingDestination_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &eLoggingDestination_cloudWatchLogs})
+var sLoggingDestination_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iLoggingFilter, Members: &mLoggingFilter, Type: smithy.ShapeTypeStructure, Ext: &eLoggingDestination_filters})
+var s_LoggingDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingDestinations, Members: &m_LoggingDestinations, Type: smithy.ShapeTypeList, Ext: &e_LoggingDestinations})
+var s_LoggingDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoggingDestination, Members: &mLoggingDestination, Type: smithy.ShapeTypeStructure, Ext: &e_LoggingDestinations_member})
+var sLoggingFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingFilter, Members: &mLoggingFilter, Type: smithy.ShapeTypeStructure, Ext: &eLoggingFilter})
+var sLoggingFilter_qspThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qspThreshold", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eLoggingFilter_qspThreshold})
+var s_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &e_LogGroupArn})
+var s_MskClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MskClusterArn, Type: smithy.ShapeTypeString, Ext: &e_MskClusterArn})
+var s_OpenSearchDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenSearchDomainArn, Type: smithy.ShapeTypeString, Ext: &e_OpenSearchDomainArn})
+var sOpenSearchExporterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenSearchExporterConfiguration, Members: &mOpenSearchExporterConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenSearchExporterConfiguration})
+var sOpenSearchExporterConfiguration_domainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainArn", ID: &i_OpenSearchDomainArn, Type: smithy.ShapeTypeString, Ext: &eOpenSearchExporterConfiguration_domainArn})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_PrometheusMetricLabelKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrometheusMetricLabelKey, Type: smithy.ShapeTypeString, Ext: &e_PrometheusMetricLabelKey})
+var s_PrometheusMetricLabelMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrometheusMetricLabelMap, Members: &m_PrometheusMetricLabelMap, Type: smithy.ShapeTypeMap, Ext: &e_PrometheusMetricLabelMap})
+var s_PrometheusMetricLabelMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PrometheusMetricLabelKey, Type: smithy.ShapeTypeString, Ext: &e_PrometheusMetricLabelMap_key})
+var s_PrometheusMetricLabelMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PrometheusMetricLabelValue, Type: smithy.ShapeTypeString, Ext: &e_PrometheusMetricLabelMap_value})
+var s_PrometheusMetricLabelValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrometheusMetricLabelValue, Type: smithy.ShapeTypeString, Ext: &e_PrometheusMetricLabelValue})
+var sQueryLoggingConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryLoggingConfigurationMetadata, Members: &mQueryLoggingConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eQueryLoggingConfigurationMetadata})
+var sQueryLoggingConfigurationMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryLoggingConfigurationStatus, Members: &mQueryLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eQueryLoggingConfigurationMetadata_status})
+var sQueryLoggingConfigurationMetadata_workspace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspace", ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &eQueryLoggingConfigurationMetadata_workspace})
+var sQueryLoggingConfigurationMetadata_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_LoggingDestinations, Members: &m_LoggingDestinations, Type: smithy.ShapeTypeList, Ext: &eQueryLoggingConfigurationMetadata_destinations})
+var sQueryLoggingConfigurationMetadata_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eQueryLoggingConfigurationMetadata_createdAt})
+var sQueryLoggingConfigurationMetadata_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eQueryLoggingConfigurationMetadata_modifiedAt})
+var sQueryLoggingConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryLoggingConfigurationStatus, Members: &mQueryLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eQueryLoggingConfigurationStatus})
+var sQueryLoggingConfigurationStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_QueryLoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &eQueryLoggingConfigurationStatus_statusCode})
+var sQueryLoggingConfigurationStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryLoggingConfigurationStatus_statusReason})
+var s_QueryLoggingConfigurationStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryLoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &e_QueryLoggingConfigurationStatusCode})
+var sRandomCutForestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRandomCutForestConfiguration, Members: &mRandomCutForestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRandomCutForestConfiguration})
+var sRandomCutForestConfiguration_query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "query", ID: &i_RandomCutForestQuery, Type: smithy.ShapeTypeString, Ext: &eRandomCutForestConfiguration_query})
+var sRandomCutForestConfiguration_shingleSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shingleSize", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRandomCutForestConfiguration_shingleSize})
+var sRandomCutForestConfiguration_sampleSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleSize", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRandomCutForestConfiguration_sampleSize})
+var sRandomCutForestConfiguration_ignoreNearExpectedFromAbove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ignoreNearExpectedFromAbove", ID: &iIgnoreNearExpected, Members: &mIgnoreNearExpected, Type: smithy.ShapeTypeUnion, Ext: &eRandomCutForestConfiguration_ignoreNearExpectedFromAbove})
+var sRandomCutForestConfiguration_ignoreNearExpectedFromBelow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ignoreNearExpectedFromBelow", ID: &iIgnoreNearExpected, Members: &mIgnoreNearExpected, Type: smithy.ShapeTypeUnion, Ext: &eRandomCutForestConfiguration_ignoreNearExpectedFromBelow})
+var s_RandomCutForestQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RandomCutForestQuery, Type: smithy.ShapeTypeString, Ext: &e_RandomCutForestQuery})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sRoleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleConfiguration, Members: &mRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRoleConfiguration})
+var sRoleConfiguration_sourceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eRoleConfiguration_sourceRoleArn})
+var sRoleConfiguration_targetRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eRoleConfiguration_targetRoleArn})
+var s_RuleGroupsNamespaceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupsNamespaceArn, Type: smithy.ShapeTypeString, Ext: &e_RuleGroupsNamespaceArn})
+var s_RuleGroupsNamespaceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupsNamespaceData, Type: smithy.ShapeTypeBlob, Ext: &e_RuleGroupsNamespaceData})
+var sRuleGroupsNamespaceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupsNamespaceDescription, Members: &mRuleGroupsNamespaceDescription, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupsNamespaceDescription})
+var sRuleGroupsNamespaceDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RuleGroupsNamespaceArn, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceDescription_arn})
+var sRuleGroupsNamespaceDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceDescription_name})
+var sRuleGroupsNamespaceDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleGroupsNamespaceStatus, Members: &mRuleGroupsNamespaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupsNamespaceDescription_status})
+var sRuleGroupsNamespaceDescription_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_RuleGroupsNamespaceData, Type: smithy.ShapeTypeBlob, Ext: &eRuleGroupsNamespaceDescription_data})
+var sRuleGroupsNamespaceDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleGroupsNamespaceDescription_createdAt})
+var sRuleGroupsNamespaceDescription_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleGroupsNamespaceDescription_modifiedAt})
+var sRuleGroupsNamespaceDescription_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eRuleGroupsNamespaceDescription_tags})
+var s_RuleGroupsNamespaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &e_RuleGroupsNamespaceName})
+var sRuleGroupsNamespaceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupsNamespaceStatus, Members: &mRuleGroupsNamespaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupsNamespaceStatus})
+var sRuleGroupsNamespaceStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_RuleGroupsNamespaceStatusCode, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceStatus_statusCode})
+var sRuleGroupsNamespaceStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceStatus_statusReason})
+var s_RuleGroupsNamespaceStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupsNamespaceStatusCode, Type: smithy.ShapeTypeString, Ext: &e_RuleGroupsNamespaceStatusCode})
+var sRuleGroupsNamespaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupsNamespaceSummary, Members: &mRuleGroupsNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupsNamespaceSummary})
+var sRuleGroupsNamespaceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RuleGroupsNamespaceArn, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceSummary_arn})
+var sRuleGroupsNamespaceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupsNamespaceSummary_name})
+var sRuleGroupsNamespaceSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleGroupsNamespaceStatus, Members: &mRuleGroupsNamespaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupsNamespaceSummary_status})
+var sRuleGroupsNamespaceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleGroupsNamespaceSummary_createdAt})
+var sRuleGroupsNamespaceSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleGroupsNamespaceSummary_modifiedAt})
+var sRuleGroupsNamespaceSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eRuleGroupsNamespaceSummary_tags})
+var s_RuleGroupsNamespaceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroupsNamespaceSummaryList, Members: &m_RuleGroupsNamespaceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RuleGroupsNamespaceSummaryList})
+var s_RuleGroupsNamespaceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleGroupsNamespaceSummary, Members: &mRuleGroupsNamespaceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RuleGroupsNamespaceSummaryList_member})
+var sScrapeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScrapeConfiguration, Members: &mScrapeConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eScrapeConfiguration})
+var sScrapeConfiguration_configurationBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eScrapeConfiguration_configurationBlob})
+var s_ScraperAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperAlias, Type: smithy.ShapeTypeString, Ext: &e_ScraperAlias})
+var s_ScraperArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperArn, Type: smithy.ShapeTypeString, Ext: &e_ScraperArn})
+var sScraperComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperComponent, Members: &mScraperComponent, Type: smithy.ShapeTypeStructure, Ext: &eScraperComponent})
+var sScraperComponent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ScraperComponentType, Type: smithy.ShapeTypeString, Ext: &eScraperComponent_type})
+var sScraperComponent_config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "config", ID: &iComponentConfig, Members: &mComponentConfig, Type: smithy.ShapeTypeStructure, Ext: &eScraperComponent_config})
+var s_ScraperComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperComponents, Members: &m_ScraperComponents, Type: smithy.ShapeTypeList, Ext: &e_ScraperComponents})
+var s_ScraperComponents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScraperComponent, Members: &mScraperComponent, Type: smithy.ShapeTypeStructure, Ext: &e_ScraperComponents_member})
+var s_ScraperComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperComponentType, Type: smithy.ShapeTypeString, Ext: &e_ScraperComponentType})
+var sScraperDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperDescription, Members: &mScraperDescription, Type: smithy.ShapeTypeStructure, Ext: &eScraperDescription})
+var sScraperDescription_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_ScraperAlias, Type: smithy.ShapeTypeString, Ext: &eScraperDescription_alias})
+var sScraperDescription_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eScraperDescription_scraperId})
+var sScraperDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScraperArn, Type: smithy.ShapeTypeString, Ext: &eScraperDescription_arn})
+var sScraperDescription_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eScraperDescription_roleArn})
+var sScraperDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eScraperDescription_status})
+var sScraperDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScraperDescription_createdAt})
+var sScraperDescription_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScraperDescription_lastModifiedAt})
+var sScraperDescription_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eScraperDescription_tags})
+var sScraperDescription_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eScraperDescription_statusReason})
+var sScraperDescription_scrapeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scrapeConfiguration", ID: &iScrapeConfiguration, Members: &mScrapeConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eScraperDescription_scrapeConfiguration})
+var sScraperDescription_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeUnion, Ext: &eScraperDescription_source})
+var sScraperDescription_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eScraperDescription_destination})
+var sScraperDescription_roleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleConfiguration", ID: &iRoleConfiguration, Members: &mRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScraperDescription_roleConfiguration})
+var sScraperDescription_exporters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exporters", ID: &i_ExporterList, Members: &m_ExporterList, Type: smithy.ShapeTypeList, Ext: &eScraperDescription_exporters})
+var s_ScraperFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperFilters, Members: &m_ScraperFilters, Type: smithy.ShapeTypeMap, Ext: &e_ScraperFilters})
+var s_ScraperFilters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_FilterKey, Type: smithy.ShapeTypeString, Ext: &e_ScraperFilters_key})
+var s_ScraperFilters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_ScraperFilters_value})
+var s_ScraperId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &e_ScraperId})
+var sScraperLoggingConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperLoggingConfigurationStatus, Members: &mScraperLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eScraperLoggingConfigurationStatus})
+var sScraperLoggingConfigurationStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_ScraperLoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &eScraperLoggingConfigurationStatus_statusCode})
+var sScraperLoggingConfigurationStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScraperLoggingConfigurationStatus_statusReason})
+var s_ScraperLoggingConfigurationStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperLoggingConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &e_ScraperLoggingConfigurationStatusCode})
+var sScraperLoggingDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperLoggingDestination, Members: &mScraperLoggingDestination, Type: smithy.ShapeTypeUnion, Ext: &eScraperLoggingDestination})
+var sScraperLoggingDestination_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &eScraperLoggingDestination_cloudWatchLogs})
+var sScraperStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eScraperStatus})
+var sScraperStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_ScraperStatusCode, Type: smithy.ShapeTypeString, Ext: &eScraperStatus_statusCode})
+var s_ScraperStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperStatusCode, Type: smithy.ShapeTypeString, Ext: &e_ScraperStatusCode})
+var sScraperSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScraperSummary, Members: &mScraperSummary, Type: smithy.ShapeTypeStructure, Ext: &eScraperSummary})
+var sScraperSummary_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_ScraperAlias, Type: smithy.ShapeTypeString, Ext: &eScraperSummary_alias})
+var sScraperSummary_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eScraperSummary_scraperId})
+var sScraperSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScraperArn, Type: smithy.ShapeTypeString, Ext: &eScraperSummary_arn})
+var sScraperSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eScraperSummary_roleArn})
+var sScraperSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eScraperSummary_status})
+var sScraperSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScraperSummary_createdAt})
+var sScraperSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScraperSummary_lastModifiedAt})
+var sScraperSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eScraperSummary_tags})
+var sScraperSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eScraperSummary_statusReason})
+var sScraperSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeUnion, Ext: &eScraperSummary_source})
+var sScraperSummary_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eScraperSummary_destination})
+var sScraperSummary_roleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleConfiguration", ID: &iRoleConfiguration, Members: &mRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScraperSummary_roleConfiguration})
+var sScraperSummary_exporters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exporters", ID: &i_ExporterList, Members: &m_ExporterList, Type: smithy.ShapeTypeList, Ext: &eScraperSummary_exporters})
+var s_ScraperSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScraperSummaryList, Members: &m_ScraperSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ScraperSummaryList})
+var s_ScraperSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScraperSummary, Members: &mScraperSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ScraperSummaryList_member})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIds})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIds_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeUnion, Ext: &eSource})
+var sSource_eksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksConfiguration", ID: &iEksConfiguration, Members: &mEksConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSource_eksConfiguration})
+var sSource_vpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSource_vpcConfiguration})
+var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &e_StatusReason})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &e_StringMap})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringMap_key})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringMap_value})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &e_SubnetIds})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetIds_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t47, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var s_Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &e_Uri})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var sVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfiguration})
+var sVpcConfiguration_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfiguration_securityGroupIds})
+var sVpcConfiguration_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfiguration_subnetIds})
+var s_WorkspaceAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceAlias, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceAlias})
+var s_WorkspaceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceArn, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceArn})
+var sWorkspaceConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceConfigurationDescription, Members: &mWorkspaceConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceConfigurationDescription})
+var sWorkspaceConfigurationDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkspaceConfigurationStatus, Members: &mWorkspaceConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceConfigurationDescription_status})
+var sWorkspaceConfigurationDescription_limitsPerLabelSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limitsPerLabelSet", ID: &i_LimitsPerLabelSetList, Members: &m_LimitsPerLabelSetList, Type: smithy.ShapeTypeList, Ext: &eWorkspaceConfigurationDescription_limitsPerLabelSet})
+var sWorkspaceConfigurationDescription_retentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionPeriodInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkspaceConfigurationDescription_retentionPeriodInDays})
+var sWorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outOfOrderTimeWindowInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds})
+var sWorkspaceConfigurationDescription_ruleQueryOffsetInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleQueryOffsetInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkspaceConfigurationDescription_ruleQueryOffsetInSeconds})
+var sWorkspaceConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceConfigurationStatus, Members: &mWorkspaceConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceConfigurationStatus})
+var sWorkspaceConfigurationStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_WorkspaceConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &eWorkspaceConfigurationStatus_statusCode})
+var sWorkspaceConfigurationStatus_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkspaceConfigurationStatus_statusReason})
+var s_WorkspaceConfigurationStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceConfigurationStatusCode, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceConfigurationStatusCode})
+var sWorkspaceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceDescription, Members: &mWorkspaceDescription, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceDescription})
+var sWorkspaceDescription_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &eWorkspaceDescription_workspaceId})
+var sWorkspaceDescription_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_WorkspaceAlias, Type: smithy.ShapeTypeString, Ext: &eWorkspaceDescription_alias})
+var sWorkspaceDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WorkspaceArn, Type: smithy.ShapeTypeString, Ext: &eWorkspaceDescription_arn})
+var sWorkspaceDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkspaceStatus, Members: &mWorkspaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceDescription_status})
+var sWorkspaceDescription_prometheusEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prometheusEndpoint", ID: &i_Uri, Type: smithy.ShapeTypeString, Ext: &eWorkspaceDescription_prometheusEndpoint})
+var sWorkspaceDescription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkspaceDescription_createdAt})
+var sWorkspaceDescription_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eWorkspaceDescription_tags})
+var sWorkspaceDescription_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eWorkspaceDescription_kmsKeyArn})
+var s_WorkspaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceId})
+var s_WorkspacePolicyStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspacePolicyStatusCode, Type: smithy.ShapeTypeString, Ext: &e_WorkspacePolicyStatusCode})
+var sWorkspaceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceStatus, Members: &mWorkspaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceStatus})
+var sWorkspaceStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &i_WorkspaceStatusCode, Type: smithy.ShapeTypeString, Ext: &eWorkspaceStatus_statusCode})
+var s_WorkspaceStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceStatusCode, Type: smithy.ShapeTypeString, Ext: &e_WorkspaceStatusCode})
+var sWorkspaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceSummary, Members: &mWorkspaceSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceSummary})
+var sWorkspaceSummary_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &eWorkspaceSummary_workspaceId})
+var sWorkspaceSummary_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_WorkspaceAlias, Type: smithy.ShapeTypeString, Ext: &eWorkspaceSummary_alias})
+var sWorkspaceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WorkspaceArn, Type: smithy.ShapeTypeString, Ext: &eWorkspaceSummary_arn})
+var sWorkspaceSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkspaceStatus, Members: &mWorkspaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eWorkspaceSummary_status})
+var sWorkspaceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWorkspaceSummary_createdAt})
+var sWorkspaceSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eWorkspaceSummary_tags})
+var sWorkspaceSummary_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eWorkspaceSummary_kmsKeyArn})
+var s_WorkspaceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceSummaryList, Members: &m_WorkspaceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_WorkspaceSummaryList})
+var s_WorkspaceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkspaceSummary, Members: &mWorkspaceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkspaceSummaryList_member})
+var sCreateAlertManagerDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlertManagerDefinitionRequest, Members: &mCreateAlertManagerDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAlertManagerDefinitionRequest})
+var sCreateAlertManagerDefinitionRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateAlertManagerDefinitionRequest_workspaceId})
+var sCreateAlertManagerDefinitionRequest_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_AlertManagerDefinitionData, Type: smithy.ShapeTypeBlob, Ext: &eCreateAlertManagerDefinitionRequest_data})
+var sCreateAlertManagerDefinitionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAlertManagerDefinitionRequest_clientToken})
+var sCreateAlertManagerDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlertManagerDefinitionResponse, Members: &mCreateAlertManagerDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAlertManagerDefinitionResponse})
+var sCreateAlertManagerDefinitionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAlertManagerDefinitionStatus, Members: &mAlertManagerDefinitionStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateAlertManagerDefinitionResponse_status})
+var sCreateAnomalyDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAnomalyDetectorRequest, Members: &mCreateAnomalyDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAnomalyDetectorRequest})
+var sCreateAnomalyDetectorRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateAnomalyDetectorRequest_workspaceId})
+var sCreateAnomalyDetectorRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_AnomalyDetectorAlias, Type: smithy.ShapeTypeString, Ext: &eCreateAnomalyDetectorRequest_alias})
+var sCreateAnomalyDetectorRequest_evaluationIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationIntervalInSeconds", ID: &i_AnomalyDetectorEvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &eCreateAnomalyDetectorRequest_evaluationIntervalInSeconds})
+var sCreateAnomalyDetectorRequest_missingDataAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingDataAction", ID: &iAnomalyDetectorMissingDataAction, Members: &mAnomalyDetectorMissingDataAction, Type: smithy.ShapeTypeUnion, Ext: &eCreateAnomalyDetectorRequest_missingDataAction})
+var sCreateAnomalyDetectorRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateAnomalyDetectorRequest_configuration})
+var sCreateAnomalyDetectorRequest_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_PrometheusMetricLabelMap, Members: &m_PrometheusMetricLabelMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAnomalyDetectorRequest_labels})
+var sCreateAnomalyDetectorRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAnomalyDetectorRequest_clientToken})
+var sCreateAnomalyDetectorRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAnomalyDetectorRequest_tags})
+var sCreateAnomalyDetectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAnomalyDetectorResponse, Members: &mCreateAnomalyDetectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAnomalyDetectorResponse})
+var sCreateAnomalyDetectorResponse_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &eCreateAnomalyDetectorResponse_anomalyDetectorId})
+var sCreateAnomalyDetectorResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AnomalyDetectorArn, Type: smithy.ShapeTypeString, Ext: &eCreateAnomalyDetectorResponse_arn})
+var sCreateAnomalyDetectorResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAnomalyDetectorStatus, Members: &mAnomalyDetectorStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateAnomalyDetectorResponse_status})
+var sCreateAnomalyDetectorResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAnomalyDetectorResponse_tags})
+var sCreateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationRequest, Members: &mCreateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoggingConfigurationRequest})
+var sCreateLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationRequest_workspaceId})
+var sCreateLoggingConfigurationRequest_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationRequest_logGroupArn})
+var sCreateLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationRequest_clientToken})
+var sCreateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationResponse, Members: &mCreateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoggingConfigurationResponse})
+var sCreateLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLoggingConfigurationStatus, Members: &mLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoggingConfigurationResponse_status})
+var sCreateQueryLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueryLoggingConfigurationRequest, Members: &mCreateQueryLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueryLoggingConfigurationRequest})
+var sCreateQueryLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateQueryLoggingConfigurationRequest_workspaceId})
+var sCreateQueryLoggingConfigurationRequest_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_LoggingDestinations, Members: &m_LoggingDestinations, Type: smithy.ShapeTypeList, Ext: &eCreateQueryLoggingConfigurationRequest_destinations})
+var sCreateQueryLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateQueryLoggingConfigurationRequest_clientToken})
+var sCreateQueryLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueryLoggingConfigurationResponse, Members: &mCreateQueryLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueryLoggingConfigurationResponse})
+var sCreateQueryLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryLoggingConfigurationStatus, Members: &mQueryLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueryLoggingConfigurationResponse_status})
+var sCreateRuleGroupsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupsNamespaceRequest, Members: &mCreateRuleGroupsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupsNamespaceRequest})
+var sCreateRuleGroupsNamespaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupsNamespaceRequest_workspaceId})
+var sCreateRuleGroupsNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupsNamespaceRequest_name})
+var sCreateRuleGroupsNamespaceRequest_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_RuleGroupsNamespaceData, Type: smithy.ShapeTypeBlob, Ext: &eCreateRuleGroupsNamespaceRequest_data})
+var sCreateRuleGroupsNamespaceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupsNamespaceRequest_clientToken})
+var sCreateRuleGroupsNamespaceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateRuleGroupsNamespaceRequest_tags})
+var sCreateRuleGroupsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupsNamespaceResponse, Members: &mCreateRuleGroupsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupsNamespaceResponse})
+var sCreateRuleGroupsNamespaceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupsNamespaceResponse_name})
+var sCreateRuleGroupsNamespaceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RuleGroupsNamespaceArn, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupsNamespaceResponse_arn})
+var sCreateRuleGroupsNamespaceResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleGroupsNamespaceStatus, Members: &mRuleGroupsNamespaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupsNamespaceResponse_status})
+var sCreateRuleGroupsNamespaceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateRuleGroupsNamespaceResponse_tags})
+var sCreateScraperRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScraperRequest, Members: &mCreateScraperRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateScraperRequest})
+var sCreateScraperRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_ScraperAlias, Type: smithy.ShapeTypeString, Ext: &eCreateScraperRequest_alias})
+var sCreateScraperRequest_scrapeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scrapeConfiguration", ID: &iScrapeConfiguration, Members: &mScrapeConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateScraperRequest_scrapeConfiguration})
+var sCreateScraperRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeUnion, Ext: &eCreateScraperRequest_source})
+var sCreateScraperRequest_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eCreateScraperRequest_destination})
+var sCreateScraperRequest_roleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleConfiguration", ID: &iRoleConfiguration, Members: &mRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateScraperRequest_roleConfiguration})
+var sCreateScraperRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateScraperRequest_clientToken})
+var sCreateScraperRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateScraperRequest_tags})
+var sCreateScraperRequest_exporters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exporters", ID: &i_ExporterList, Members: &m_ExporterList, Type: smithy.ShapeTypeList, Ext: &eCreateScraperRequest_exporters})
+var sCreateScraperResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScraperResponse, Members: &mCreateScraperResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateScraperResponse})
+var sCreateScraperResponse_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eCreateScraperResponse_scraperId})
+var sCreateScraperResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScraperArn, Type: smithy.ShapeTypeString, Ext: &eCreateScraperResponse_arn})
+var sCreateScraperResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateScraperResponse_status})
+var sCreateScraperResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateScraperResponse_tags})
+var sCreateWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspaceRequest, Members: &mCreateWorkspaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkspaceRequest})
+var sCreateWorkspaceRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_WorkspaceAlias, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceRequest_alias})
+var sCreateWorkspaceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceRequest_clientToken})
+var sCreateWorkspaceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateWorkspaceRequest_tags})
+var sCreateWorkspaceRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceRequest_kmsKeyArn})
+var sCreateWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspaceResponse, Members: &mCreateWorkspaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkspaceResponse})
+var sCreateWorkspaceResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceResponse_workspaceId})
+var sCreateWorkspaceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WorkspaceArn, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceResponse_arn})
+var sCreateWorkspaceResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkspaceStatus, Members: &mWorkspaceStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkspaceResponse_status})
+var sCreateWorkspaceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateWorkspaceResponse_tags})
+var sCreateWorkspaceResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateWorkspaceResponse_kmsKeyArn})
+var sDeleteAlertManagerDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlertManagerDefinitionRequest, Members: &mDeleteAlertManagerDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAlertManagerDefinitionRequest})
+var sDeleteAlertManagerDefinitionRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteAlertManagerDefinitionRequest_workspaceId})
+var sDeleteAlertManagerDefinitionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteAlertManagerDefinitionRequest_clientToken})
+var sDeleteAnomalyDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnomalyDetectorRequest, Members: &mDeleteAnomalyDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnomalyDetectorRequest})
+var sDeleteAnomalyDetectorRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorRequest_workspaceId})
+var sDeleteAnomalyDetectorRequest_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorRequest_anomalyDetectorId})
+var sDeleteAnomalyDetectorRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorRequest_clientToken})
+var sDeleteLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfigurationRequest, Members: &mDeleteLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoggingConfigurationRequest})
+var sDeleteLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteLoggingConfigurationRequest_workspaceId})
+var sDeleteLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteLoggingConfigurationRequest_clientToken})
+var sDeleteQueryLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueryLoggingConfigurationRequest, Members: &mDeleteQueryLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteQueryLoggingConfigurationRequest})
+var sDeleteQueryLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteQueryLoggingConfigurationRequest_workspaceId})
+var sDeleteQueryLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteQueryLoggingConfigurationRequest_clientToken})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyRequest})
+var sDeleteResourcePolicyRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_workspaceId})
+var sDeleteResourcePolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_clientToken})
+var sDeleteResourcePolicyRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &pString, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_revisionId})
+var sDeleteRuleGroupsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupsNamespaceRequest, Members: &mDeleteRuleGroupsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupsNamespaceRequest})
+var sDeleteRuleGroupsNamespaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupsNamespaceRequest_workspaceId})
+var sDeleteRuleGroupsNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupsNamespaceRequest_name})
+var sDeleteRuleGroupsNamespaceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupsNamespaceRequest_clientToken})
+var sDeleteScraperRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScraperRequest, Members: &mDeleteScraperRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScraperRequest})
+var sDeleteScraperRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteScraperRequest_scraperId})
+var sDeleteScraperRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteScraperRequest_clientToken})
+var sDeleteScraperLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScraperLoggingConfigurationRequest, Members: &mDeleteScraperLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScraperLoggingConfigurationRequest})
+var sDeleteScraperLoggingConfigurationRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteScraperLoggingConfigurationRequest_scraperId})
+var sDeleteScraperLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteScraperLoggingConfigurationRequest_clientToken})
+var sDeleteScraperResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScraperResponse, Members: &mDeleteScraperResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScraperResponse})
+var sDeleteScraperResponse_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eDeleteScraperResponse_scraperId})
+var sDeleteScraperResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScraperResponse_status})
+var sDeleteWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkspaceRequest, Members: &mDeleteWorkspaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkspaceRequest})
+var sDeleteWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkspaceRequest_workspaceId})
+var sDeleteWorkspaceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkspaceRequest_clientToken})
+var sDescribeAlertManagerDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlertManagerDefinitionRequest, Members: &mDescribeAlertManagerDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlertManagerDefinitionRequest})
+var sDescribeAlertManagerDefinitionRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeAlertManagerDefinitionRequest_workspaceId})
+var sDescribeAlertManagerDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlertManagerDefinitionResponse, Members: &mDescribeAlertManagerDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlertManagerDefinitionResponse})
+var sDescribeAlertManagerDefinitionResponse_alertManagerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alertManagerDefinition", ID: &iAlertManagerDefinitionDescription, Members: &mAlertManagerDefinitionDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlertManagerDefinitionResponse_alertManagerDefinition})
+var sDescribeAnomalyDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetectorRequest, Members: &mDescribeAnomalyDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnomalyDetectorRequest})
+var sDescribeAnomalyDetectorRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorRequest_workspaceId})
+var sDescribeAnomalyDetectorRequest_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorRequest_anomalyDetectorId})
+var sDescribeAnomalyDetectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetectorResponse, Members: &mDescribeAnomalyDetectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnomalyDetectorResponse})
+var sDescribeAnomalyDetectorResponse_anomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetector", ID: &iAnomalyDetectorDescription, Members: &mAnomalyDetectorDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnomalyDetectorResponse_anomalyDetector})
+var sDescribeLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationRequest, Members: &mDescribeLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationRequest})
+var sDescribeLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeLoggingConfigurationRequest_workspaceId})
+var sDescribeLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationResponse, Members: &mDescribeLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationResponse})
+var sDescribeLoggingConfigurationResponse_loggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfiguration", ID: &iLoggingConfigurationMetadata, Members: &mLoggingConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationResponse_loggingConfiguration})
+var sDescribeQueryLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQueryLoggingConfigurationRequest, Members: &mDescribeQueryLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeQueryLoggingConfigurationRequest})
+var sDescribeQueryLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeQueryLoggingConfigurationRequest_workspaceId})
+var sDescribeQueryLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQueryLoggingConfigurationResponse, Members: &mDescribeQueryLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeQueryLoggingConfigurationResponse})
+var sDescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryLoggingConfiguration", ID: &iQueryLoggingConfigurationMetadata, Members: &mQueryLoggingConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration})
+var sDescribeResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyRequest, Members: &mDescribeResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeResourcePolicyRequest})
+var sDescribeResourcePolicyRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyRequest_workspaceId})
+var sDescribeResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyResponse, Members: &mDescribeResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeResourcePolicyResponse})
+var sDescribeResourcePolicyResponse_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyResponse_policyDocument})
+var sDescribeResourcePolicyResponse_policyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStatus", ID: &i_WorkspacePolicyStatusCode, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyResponse_policyStatus})
+var sDescribeResourcePolicyResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyResponse_revisionId})
+var sDescribeRuleGroupsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupsNamespaceRequest, Members: &mDescribeRuleGroupsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupsNamespaceRequest})
+var sDescribeRuleGroupsNamespaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupsNamespaceRequest_workspaceId})
+var sDescribeRuleGroupsNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupsNamespaceRequest_name})
+var sDescribeRuleGroupsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupsNamespaceResponse, Members: &mDescribeRuleGroupsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupsNamespaceResponse})
+var sDescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleGroupsNamespace", ID: &iRuleGroupsNamespaceDescription, Members: &mRuleGroupsNamespaceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace})
+var sDescribeScraperRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraperRequest, Members: &mDescribeScraperRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperRequest})
+var sDescribeScraperRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeScraperRequest_scraperId})
+var sDescribeScraperLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraperLoggingConfigurationRequest, Members: &mDescribeScraperLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperLoggingConfigurationRequest})
+var sDescribeScraperLoggingConfigurationRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeScraperLoggingConfigurationRequest_scraperId})
+var sDescribeScraperLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraperLoggingConfigurationResponse, Members: &mDescribeScraperLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperLoggingConfigurationResponse})
+var sDescribeScraperLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperLoggingConfigurationStatus, Members: &mScraperLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperLoggingConfigurationResponse_status})
+var sDescribeScraperLoggingConfigurationResponse_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eDescribeScraperLoggingConfigurationResponse_scraperId})
+var sDescribeScraperLoggingConfigurationResponse_loggingDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingDestination", ID: &iScraperLoggingDestination, Members: &mScraperLoggingDestination, Type: smithy.ShapeTypeUnion, Ext: &eDescribeScraperLoggingConfigurationResponse_loggingDestination})
+var sDescribeScraperLoggingConfigurationResponse_scraperComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperComponents", ID: &i_ScraperComponents, Members: &m_ScraperComponents, Type: smithy.ShapeTypeList, Ext: &eDescribeScraperLoggingConfigurationResponse_scraperComponents})
+var sDescribeScraperLoggingConfigurationResponse_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeScraperLoggingConfigurationResponse_modifiedAt})
+var sDescribeScraperResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScraperResponse, Members: &mDescribeScraperResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperResponse})
+var sDescribeScraperResponse_scraper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraper", ID: &iScraperDescription, Members: &mScraperDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeScraperResponse_scraper})
+var sDescribeWorkspaceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspaceConfigurationRequest, Members: &mDescribeWorkspaceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceConfigurationRequest})
+var sDescribeWorkspaceConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkspaceConfigurationRequest_workspaceId})
+var sDescribeWorkspaceConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspaceConfigurationResponse, Members: &mDescribeWorkspaceConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceConfigurationResponse})
+var sDescribeWorkspaceConfigurationResponse_workspaceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceConfiguration", ID: &iWorkspaceConfigurationDescription, Members: &mWorkspaceConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceConfigurationResponse_workspaceConfiguration})
+var sDescribeWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspaceRequest, Members: &mDescribeWorkspaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceRequest})
+var sDescribeWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDescribeWorkspaceRequest_workspaceId})
+var sDescribeWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkspaceResponse, Members: &mDescribeWorkspaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceResponse})
+var sDescribeWorkspaceResponse_workspace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspace", ID: &iWorkspaceDescription, Members: &mWorkspaceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWorkspaceResponse_workspace})
+var sGetDefaultScraperConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultScraperConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDefaultScraperConfigurationRequest})
+var sGetDefaultScraperConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultScraperConfigurationResponse, Members: &mGetDefaultScraperConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDefaultScraperConfigurationResponse})
+var sGetDefaultScraperConfigurationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eGetDefaultScraperConfigurationResponse_configuration})
+var sListAnomalyDetectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnomalyDetectorsRequest, Members: &mListAnomalyDetectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAnomalyDetectorsRequest})
+var sListAnomalyDetectorsRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListAnomalyDetectorsRequest_workspaceId})
+var sListAnomalyDetectorsRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_AnomalyDetectorAlias, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListAnomalyDetectorsRequest_alias})
+var sListAnomalyDetectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eListAnomalyDetectorsRequest_maxResults})
+var sListAnomalyDetectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListAnomalyDetectorsRequest_nextToken})
+var sListAnomalyDetectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnomalyDetectorsResponse, Members: &mListAnomalyDetectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAnomalyDetectorsResponse})
+var sListAnomalyDetectorsResponse_anomalyDetectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectors", ID: &i_AnomalyDetectorSummaryList, Members: &m_AnomalyDetectorSummaryList, Type: smithy.ShapeTypeList, Ext: &eListAnomalyDetectorsResponse_anomalyDetectors})
+var sListAnomalyDetectorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAnomalyDetectorsResponse_nextToken})
+var sListRuleGroupsNamespacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsNamespacesRequest, Members: &mListRuleGroupsNamespacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsNamespacesRequest})
+var sListRuleGroupsNamespacesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsNamespacesRequest_workspaceId})
+var sListRuleGroupsNamespacesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsNamespacesRequest_name})
+var sListRuleGroupsNamespacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsNamespacesRequest_nextToken})
+var sListRuleGroupsNamespacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eListRuleGroupsNamespacesRequest_maxResults})
+var sListRuleGroupsNamespacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsNamespacesResponse, Members: &mListRuleGroupsNamespacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsNamespacesResponse})
+var sListRuleGroupsNamespacesResponse_ruleGroupsNamespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleGroupsNamespaces", ID: &i_RuleGroupsNamespaceSummaryList, Members: &m_RuleGroupsNamespaceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRuleGroupsNamespacesResponse_ruleGroupsNamespaces})
+var sListRuleGroupsNamespacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsNamespacesResponse_nextToken})
+var sListScrapersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScrapersRequest, Members: &mListScrapersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListScrapersRequest})
+var sListScrapersRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ScraperFilters, Members: &m_ScraperFilters, Traits: &t59, Type: smithy.ShapeTypeMap, Ext: &eListScrapersRequest_filters})
+var sListScrapersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListScrapersRequest_nextToken})
+var sListScrapersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eListScrapersRequest_maxResults})
+var sListScrapersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScrapersResponse, Members: &mListScrapersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListScrapersResponse})
+var sListScrapersResponse_scrapers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scrapers", ID: &i_ScraperSummaryList, Members: &m_ScraperSummaryList, Type: smithy.ShapeTypeList, Ext: &eListScrapersResponse_scrapers})
+var sListScrapersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListScrapersResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListWorkspacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspacesRequest, Members: &mListWorkspacesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkspacesRequest})
+var sListWorkspacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListWorkspacesRequest_nextToken})
+var sListWorkspacesRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_WorkspaceAlias, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eListWorkspacesRequest_alias})
+var sListWorkspacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t56, Type: smithy.ShapeTypeInteger, Ext: &eListWorkspacesRequest_maxResults})
+var sListWorkspacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspacesResponse, Members: &mListWorkspacesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkspacesResponse})
+var sListWorkspacesResponse_workspaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaces", ID: &i_WorkspaceSummaryList, Members: &m_WorkspaceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWorkspacesResponse_workspaces})
+var sListWorkspacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkspacesResponse_nextToken})
+var sPutAlertManagerDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlertManagerDefinitionRequest, Members: &mPutAlertManagerDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAlertManagerDefinitionRequest})
+var sPutAlertManagerDefinitionRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutAlertManagerDefinitionRequest_workspaceId})
+var sPutAlertManagerDefinitionRequest_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_AlertManagerDefinitionData, Type: smithy.ShapeTypeBlob, Ext: &ePutAlertManagerDefinitionRequest_data})
+var sPutAlertManagerDefinitionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ePutAlertManagerDefinitionRequest_clientToken})
+var sPutAlertManagerDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlertManagerDefinitionResponse, Members: &mPutAlertManagerDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutAlertManagerDefinitionResponse})
+var sPutAlertManagerDefinitionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAlertManagerDefinitionStatus, Members: &mAlertManagerDefinitionStatus, Type: smithy.ShapeTypeStructure, Ext: &ePutAlertManagerDefinitionResponse_status})
+var sPutAnomalyDetectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetectorRequest, Members: &mPutAnomalyDetectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorRequest})
+var sPutAnomalyDetectorRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorRequest_workspaceId})
+var sPutAnomalyDetectorRequest_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorRequest_anomalyDetectorId})
+var sPutAnomalyDetectorRequest_evaluationIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluationIntervalInSeconds", ID: &i_AnomalyDetectorEvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &ePutAnomalyDetectorRequest_evaluationIntervalInSeconds})
+var sPutAnomalyDetectorRequest_missingDataAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingDataAction", ID: &iAnomalyDetectorMissingDataAction, Members: &mAnomalyDetectorMissingDataAction, Type: smithy.ShapeTypeUnion, Ext: &ePutAnomalyDetectorRequest_missingDataAction})
+var sPutAnomalyDetectorRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ePutAnomalyDetectorRequest_configuration})
+var sPutAnomalyDetectorRequest_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_PrometheusMetricLabelMap, Members: &m_PrometheusMetricLabelMap, Type: smithy.ShapeTypeMap, Ext: &ePutAnomalyDetectorRequest_labels})
+var sPutAnomalyDetectorRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorRequest_clientToken})
+var sPutAnomalyDetectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetectorResponse, Members: &mPutAnomalyDetectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorResponse})
+var sPutAnomalyDetectorResponse_anomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorResponse_anomalyDetectorId})
+var sPutAnomalyDetectorResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AnomalyDetectorArn, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorResponse_arn})
+var sPutAnomalyDetectorResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAnomalyDetectorStatus, Members: &mAnomalyDetectorStatus, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorResponse_status})
+var sPutAnomalyDetectorResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ePutAnomalyDetectorResponse_tags})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyRequest})
+var sPutResourcePolicyRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_workspaceId})
+var sPutResourcePolicyRequest_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_policyDocument})
+var sPutResourcePolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_clientToken})
+var sPutResourcePolicyRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_revisionId})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyResponse})
+var sPutResourcePolicyResponse_policyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStatus", ID: &i_WorkspacePolicyStatusCode, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_policyStatus})
+var sPutResourcePolicyResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_revisionId})
+var sPutRuleGroupsNamespaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRuleGroupsNamespaceRequest, Members: &mPutRuleGroupsNamespaceRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutRuleGroupsNamespaceRequest})
+var sPutRuleGroupsNamespaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutRuleGroupsNamespaceRequest_workspaceId})
+var sPutRuleGroupsNamespaceRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &ePutRuleGroupsNamespaceRequest_name})
+var sPutRuleGroupsNamespaceRequest_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_RuleGroupsNamespaceData, Type: smithy.ShapeTypeBlob, Ext: &ePutRuleGroupsNamespaceRequest_data})
+var sPutRuleGroupsNamespaceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ePutRuleGroupsNamespaceRequest_clientToken})
+var sPutRuleGroupsNamespaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRuleGroupsNamespaceResponse, Members: &mPutRuleGroupsNamespaceResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutRuleGroupsNamespaceResponse})
+var sPutRuleGroupsNamespaceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleGroupsNamespaceName, Type: smithy.ShapeTypeString, Ext: &ePutRuleGroupsNamespaceResponse_name})
+var sPutRuleGroupsNamespaceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RuleGroupsNamespaceArn, Type: smithy.ShapeTypeString, Ext: &ePutRuleGroupsNamespaceResponse_arn})
+var sPutRuleGroupsNamespaceResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleGroupsNamespaceStatus, Members: &mRuleGroupsNamespaceStatus, Type: smithy.ShapeTypeStructure, Ext: &ePutRuleGroupsNamespaceResponse_status})
+var sPutRuleGroupsNamespaceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ePutRuleGroupsNamespaceResponse_tags})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t60, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationRequest, Members: &mUpdateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationRequest})
+var sUpdateLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_workspaceId})
+var sUpdateLoggingConfigurationRequest_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_logGroupArn})
+var sUpdateLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_clientToken})
+var sUpdateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationResponse, Members: &mUpdateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationResponse})
+var sUpdateLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLoggingConfigurationStatus, Members: &mLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationResponse_status})
+var sUpdateQueryLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueryLoggingConfigurationRequest, Members: &mUpdateQueryLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueryLoggingConfigurationRequest})
+var sUpdateQueryLoggingConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateQueryLoggingConfigurationRequest_workspaceId})
+var sUpdateQueryLoggingConfigurationRequest_destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinations", ID: &i_LoggingDestinations, Members: &m_LoggingDestinations, Type: smithy.ShapeTypeList, Ext: &eUpdateQueryLoggingConfigurationRequest_destinations})
+var sUpdateQueryLoggingConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateQueryLoggingConfigurationRequest_clientToken})
+var sUpdateQueryLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueryLoggingConfigurationResponse, Members: &mUpdateQueryLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueryLoggingConfigurationResponse})
+var sUpdateQueryLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryLoggingConfigurationStatus, Members: &mQueryLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueryLoggingConfigurationResponse_status})
+var sUpdateScraperRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraperRequest, Members: &mUpdateScraperRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperRequest})
+var sUpdateScraperRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperRequest_scraperId})
+var sUpdateScraperRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_ScraperAlias, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperRequest_alias})
+var sUpdateScraperRequest_scrapeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scrapeConfiguration", ID: &iScrapeConfiguration, Members: &mScrapeConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateScraperRequest_scrapeConfiguration})
+var sUpdateScraperRequest_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eUpdateScraperRequest_destination})
+var sUpdateScraperRequest_roleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleConfiguration", ID: &iRoleConfiguration, Members: &mRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperRequest_roleConfiguration})
+var sUpdateScraperRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperRequest_clientToken})
+var sUpdateScraperRequest_exporters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exporters", ID: &i_ExporterList, Members: &m_ExporterList, Type: smithy.ShapeTypeList, Ext: &eUpdateScraperRequest_exporters})
+var sUpdateScraperLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraperLoggingConfigurationRequest, Members: &mUpdateScraperLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperLoggingConfigurationRequest})
+var sUpdateScraperLoggingConfigurationRequest_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperLoggingConfigurationRequest_scraperId})
+var sUpdateScraperLoggingConfigurationRequest_loggingDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingDestination", ID: &iScraperLoggingDestination, Members: &mScraperLoggingDestination, Type: smithy.ShapeTypeUnion, Ext: &eUpdateScraperLoggingConfigurationRequest_loggingDestination})
+var sUpdateScraperLoggingConfigurationRequest_scraperComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperComponents", ID: &i_ScraperComponents, Members: &m_ScraperComponents, Type: smithy.ShapeTypeList, Ext: &eUpdateScraperLoggingConfigurationRequest_scraperComponents})
+var sUpdateScraperLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraperLoggingConfigurationResponse, Members: &mUpdateScraperLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperLoggingConfigurationResponse})
+var sUpdateScraperLoggingConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperLoggingConfigurationStatus, Members: &mScraperLoggingConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperLoggingConfigurationResponse_status})
+var sUpdateScraperResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScraperResponse, Members: &mUpdateScraperResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperResponse})
+var sUpdateScraperResponse_scraperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scraperId", ID: &i_ScraperId, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperResponse_scraperId})
+var sUpdateScraperResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScraperArn, Type: smithy.ShapeTypeString, Ext: &eUpdateScraperResponse_arn})
+var sUpdateScraperResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScraperStatus, Members: &mScraperStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScraperResponse_status})
+var sUpdateScraperResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateScraperResponse_tags})
+var sUpdateWorkspaceAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceAliasRequest, Members: &mUpdateWorkspaceAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkspaceAliasRequest})
+var sUpdateWorkspaceAliasRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkspaceAliasRequest_workspaceId})
+var sUpdateWorkspaceAliasRequest_alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alias", ID: &i_WorkspaceAlias, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkspaceAliasRequest_alias})
+var sUpdateWorkspaceAliasRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkspaceAliasRequest_clientToken})
+var sUpdateWorkspaceConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceConfigurationRequest, Members: &mUpdateWorkspaceConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkspaceConfigurationRequest})
+var sUpdateWorkspaceConfigurationRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_WorkspaceId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkspaceConfigurationRequest_workspaceId})
+var sUpdateWorkspaceConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkspaceConfigurationRequest_clientToken})
+var sUpdateWorkspaceConfigurationRequest_limitsPerLabelSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limitsPerLabelSet", ID: &i_LimitsPerLabelSetList, Members: &m_LimitsPerLabelSetList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkspaceConfigurationRequest_limitsPerLabelSet})
+var sUpdateWorkspaceConfigurationRequest_retentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionPeriodInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateWorkspaceConfigurationRequest_retentionPeriodInDays})
+var sUpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outOfOrderTimeWindowInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds})
+var sUpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleQueryOffsetInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds})
+var sUpdateWorkspaceConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceConfigurationResponse, Members: &mUpdateWorkspaceConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkspaceConfigurationResponse})
+var sUpdateWorkspaceConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkspaceConfigurationStatus, Members: &mWorkspaceConfigurationStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkspaceConfigurationResponse_status})
+
+var CreateAlertManagerDefinition = &sCreateAlertManagerDefinition
+
+var CreateAnomalyDetector = &sCreateAnomalyDetector
+
+var CreateLoggingConfiguration = &sCreateLoggingConfiguration
+
+var CreateQueryLoggingConfiguration = &sCreateQueryLoggingConfiguration
+
+var CreateRuleGroupsNamespace = &sCreateRuleGroupsNamespace
+
+var CreateScraper = &sCreateScraper
+
+var CreateWorkspace = &sCreateWorkspace
+
+var DeleteAlertManagerDefinition = &sDeleteAlertManagerDefinition
+
+var DeleteAnomalyDetector = &sDeleteAnomalyDetector
+
+var DeleteLoggingConfiguration = &sDeleteLoggingConfiguration
+
+var DeleteQueryLoggingConfiguration = &sDeleteQueryLoggingConfiguration
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteRuleGroupsNamespace = &sDeleteRuleGroupsNamespace
+
+var DeleteScraper = &sDeleteScraper
+
+var DeleteScraperLoggingConfiguration = &sDeleteScraperLoggingConfiguration
+
+var DeleteWorkspace = &sDeleteWorkspace
+
+var DescribeAlertManagerDefinition = &sDescribeAlertManagerDefinition
+
+var DescribeAnomalyDetector = &sDescribeAnomalyDetector
+
+var DescribeLoggingConfiguration = &sDescribeLoggingConfiguration
+
+var DescribeQueryLoggingConfiguration = &sDescribeQueryLoggingConfiguration
+
+var DescribeResourcePolicy = &sDescribeResourcePolicy
+
+var DescribeRuleGroupsNamespace = &sDescribeRuleGroupsNamespace
+
+var DescribeScraper = &sDescribeScraper
+
+var DescribeScraperLoggingConfiguration = &sDescribeScraperLoggingConfiguration
+
+var DescribeWorkspace = &sDescribeWorkspace
+
+var DescribeWorkspaceConfiguration = &sDescribeWorkspaceConfiguration
+
+var GetDefaultScraperConfiguration = &sGetDefaultScraperConfiguration
+
+var ListAnomalyDetectors = &sListAnomalyDetectors
+
+var ListRuleGroupsNamespaces = &sListRuleGroupsNamespaces
+
+var ListScrapers = &sListScrapers
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkspaces = &sListWorkspaces
+
+var PutAlertManagerDefinition = &sPutAlertManagerDefinition
+
+var PutAnomalyDetector = &sPutAnomalyDetector
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var PutRuleGroupsNamespace = &sPutRuleGroupsNamespace
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateLoggingConfiguration = &sUpdateLoggingConfiguration
+
+var UpdateQueryLoggingConfiguration = &sUpdateQueryLoggingConfiguration
+
+var UpdateScraper = &sUpdateScraper
+
+var UpdateScraperLoggingConfiguration = &sUpdateScraperLoggingConfiguration
+
+var UpdateWorkspaceAlias = &sUpdateWorkspaceAlias
+
+var UpdateWorkspaceConfiguration = &sUpdateWorkspaceConfiguration
+
+var _AmazonPrometheusService = &s_AmazonPrometheusService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AlertManagerDefinitionData = &s_AlertManagerDefinitionData
+
+var AlertManagerDefinitionDescription = &sAlertManagerDefinitionDescription
+var AlertManagerDefinitionDescription_status = &sAlertManagerDefinitionDescription_status
+var AlertManagerDefinitionDescription_data = &sAlertManagerDefinitionDescription_data
+var AlertManagerDefinitionDescription_createdAt = &sAlertManagerDefinitionDescription_createdAt
+var AlertManagerDefinitionDescription_modifiedAt = &sAlertManagerDefinitionDescription_modifiedAt
+
+var AlertManagerDefinitionStatus = &sAlertManagerDefinitionStatus
+var AlertManagerDefinitionStatus_statusCode = &sAlertManagerDefinitionStatus_statusCode
+var AlertManagerDefinitionStatus_statusReason = &sAlertManagerDefinitionStatus_statusReason
+
+var _AlertManagerDefinitionStatusCode = &s_AlertManagerDefinitionStatusCode
+
+var AmpConfiguration = &sAmpConfiguration
+var AmpConfiguration_workspaceArn = &sAmpConfiguration_workspaceArn
+
+var _AnomalyDetectorAlias = &s_AnomalyDetectorAlias
+
+var _AnomalyDetectorArn = &s_AnomalyDetectorArn
+
+var AnomalyDetectorConfiguration = &sAnomalyDetectorConfiguration
+var AnomalyDetectorConfiguration_randomCutForest = &sAnomalyDetectorConfiguration_randomCutForest
+
+var AnomalyDetectorDescription = &sAnomalyDetectorDescription
+var AnomalyDetectorDescription_arn = &sAnomalyDetectorDescription_arn
+var AnomalyDetectorDescription_anomalyDetectorId = &sAnomalyDetectorDescription_anomalyDetectorId
+var AnomalyDetectorDescription_alias = &sAnomalyDetectorDescription_alias
+var AnomalyDetectorDescription_evaluationIntervalInSeconds = &sAnomalyDetectorDescription_evaluationIntervalInSeconds
+var AnomalyDetectorDescription_missingDataAction = &sAnomalyDetectorDescription_missingDataAction
+var AnomalyDetectorDescription_configuration = &sAnomalyDetectorDescription_configuration
+var AnomalyDetectorDescription_labels = &sAnomalyDetectorDescription_labels
+var AnomalyDetectorDescription_status = &sAnomalyDetectorDescription_status
+var AnomalyDetectorDescription_createdAt = &sAnomalyDetectorDescription_createdAt
+var AnomalyDetectorDescription_modifiedAt = &sAnomalyDetectorDescription_modifiedAt
+var AnomalyDetectorDescription_tags = &sAnomalyDetectorDescription_tags
+
+var _AnomalyDetectorEvaluationInterval = &s_AnomalyDetectorEvaluationInterval
+
+var _AnomalyDetectorId = &s_AnomalyDetectorId
+
+var AnomalyDetectorMissingDataAction = &sAnomalyDetectorMissingDataAction
+var AnomalyDetectorMissingDataAction_markAsAnomaly = &sAnomalyDetectorMissingDataAction_markAsAnomaly
+var AnomalyDetectorMissingDataAction_skip = &sAnomalyDetectorMissingDataAction_skip
+
+var AnomalyDetectorStatus = &sAnomalyDetectorStatus
+var AnomalyDetectorStatus_statusCode = &sAnomalyDetectorStatus_statusCode
+var AnomalyDetectorStatus_statusReason = &sAnomalyDetectorStatus_statusReason
+
+var AnomalyDetectorStatusCode = &sAnomalyDetectorStatusCode
+var AnomalyDetectorStatusCode_CREATING = &sAnomalyDetectorStatusCode_CREATING
+var AnomalyDetectorStatusCode_ACTIVE = &sAnomalyDetectorStatusCode_ACTIVE
+var AnomalyDetectorStatusCode_UPDATING = &sAnomalyDetectorStatusCode_UPDATING
+var AnomalyDetectorStatusCode_DELETING = &sAnomalyDetectorStatusCode_DELETING
+var AnomalyDetectorStatusCode_CREATION_FAILED = &sAnomalyDetectorStatusCode_CREATION_FAILED
+var AnomalyDetectorStatusCode_UPDATE_FAILED = &sAnomalyDetectorStatusCode_UPDATE_FAILED
+var AnomalyDetectorStatusCode_DELETION_FAILED = &sAnomalyDetectorStatusCode_DELETION_FAILED
+
+var AnomalyDetectorSummary = &sAnomalyDetectorSummary
+var AnomalyDetectorSummary_arn = &sAnomalyDetectorSummary_arn
+var AnomalyDetectorSummary_anomalyDetectorId = &sAnomalyDetectorSummary_anomalyDetectorId
+var AnomalyDetectorSummary_alias = &sAnomalyDetectorSummary_alias
+var AnomalyDetectorSummary_status = &sAnomalyDetectorSummary_status
+var AnomalyDetectorSummary_createdAt = &sAnomalyDetectorSummary_createdAt
+var AnomalyDetectorSummary_modifiedAt = &sAnomalyDetectorSummary_modifiedAt
+var AnomalyDetectorSummary_tags = &sAnomalyDetectorSummary_tags
+
+var _AnomalyDetectorSummaryList = &s_AnomalyDetectorSummaryList
+var _AnomalyDetectorSummaryList_member = &s_AnomalyDetectorSummaryList_member
+
+var CloudWatchConfiguration = &sCloudWatchConfiguration
+var CloudWatchConfiguration_datasetArn = &sCloudWatchConfiguration_datasetArn
+
+var _CloudWatchDatasetArn = &s_CloudWatchDatasetArn
+
+var CloudWatchLogDestination = &sCloudWatchLogDestination
+var CloudWatchLogDestination_logGroupArn = &sCloudWatchLogDestination_logGroupArn
+
+var _ClusterArn = &s_ClusterArn
+
+var ComponentConfig = &sComponentConfig
+var ComponentConfig_options = &sComponentConfig_options
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var Destination = &sDestination
+var Destination_ampConfiguration = &sDestination_ampConfiguration
+var Destination_cloudWatchConfiguration = &sDestination_cloudWatchConfiguration
+
+var EksConfiguration = &sEksConfiguration
+var EksConfiguration_clusterArn = &sEksConfiguration_clusterArn
+var EksConfiguration_securityGroupIds = &sEksConfiguration_securityGroupIds
+var EksConfiguration_subnetIds = &sEksConfiguration_subnetIds
+
+var ExporterConfiguration = &sExporterConfiguration
+var ExporterConfiguration_openSearchConfiguration = &sExporterConfiguration_openSearchConfiguration
+var ExporterConfiguration_kafkaConfiguration = &sExporterConfiguration_kafkaConfiguration
+
+var _ExporterList = &s_ExporterList
+var _ExporterList_member = &s_ExporterList_member
+
+var _FilterKey = &s_FilterKey
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var IgnoreNearExpected = &sIgnoreNearExpected
+var IgnoreNearExpected_amount = &sIgnoreNearExpected_amount
+var IgnoreNearExpected_ratio = &sIgnoreNearExpected_ratio
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var KafkaExporterConfiguration = &sKafkaExporterConfiguration
+var KafkaExporterConfiguration_clusterArn = &sKafkaExporterConfiguration_clusterArn
+var KafkaExporterConfiguration_topicFilter = &sKafkaExporterConfiguration_topicFilter
+var KafkaExporterConfiguration_consumerGroupFilter = &sKafkaExporterConfiguration_consumerGroupFilter
+
+var _KafkaExporterFilter = &s_KafkaExporterFilter
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LabelName = &s_LabelName
+
+var _LabelSet = &s_LabelSet
+var _LabelSet_key = &s_LabelSet_key
+var _LabelSet_value = &s_LabelSet_value
+
+var _LabelValue = &s_LabelValue
+
+var LimitsPerLabelSet = &sLimitsPerLabelSet
+var LimitsPerLabelSet_limits = &sLimitsPerLabelSet_limits
+var LimitsPerLabelSet_labelSet = &sLimitsPerLabelSet_labelSet
+
+var LimitsPerLabelSetEntry = &sLimitsPerLabelSetEntry
+var LimitsPerLabelSetEntry_maxSeries = &sLimitsPerLabelSetEntry_maxSeries
+
+var _LimitsPerLabelSetList = &s_LimitsPerLabelSetList
+var _LimitsPerLabelSetList_member = &s_LimitsPerLabelSetList_member
+
+var LoggingConfigurationMetadata = &sLoggingConfigurationMetadata
+var LoggingConfigurationMetadata_status = &sLoggingConfigurationMetadata_status
+var LoggingConfigurationMetadata_workspace = &sLoggingConfigurationMetadata_workspace
+var LoggingConfigurationMetadata_logGroupArn = &sLoggingConfigurationMetadata_logGroupArn
+var LoggingConfigurationMetadata_createdAt = &sLoggingConfigurationMetadata_createdAt
+var LoggingConfigurationMetadata_modifiedAt = &sLoggingConfigurationMetadata_modifiedAt
+
+var LoggingConfigurationStatus = &sLoggingConfigurationStatus
+var LoggingConfigurationStatus_statusCode = &sLoggingConfigurationStatus_statusCode
+var LoggingConfigurationStatus_statusReason = &sLoggingConfigurationStatus_statusReason
+
+var _LoggingConfigurationStatusCode = &s_LoggingConfigurationStatusCode
+
+var LoggingDestination = &sLoggingDestination
+var LoggingDestination_cloudWatchLogs = &sLoggingDestination_cloudWatchLogs
+var LoggingDestination_filters = &sLoggingDestination_filters
+
+var _LoggingDestinations = &s_LoggingDestinations
+var _LoggingDestinations_member = &s_LoggingDestinations_member
+
+var LoggingFilter = &sLoggingFilter
+var LoggingFilter_qspThreshold = &sLoggingFilter_qspThreshold
+
+var _LogGroupArn = &s_LogGroupArn
+
+var _MskClusterArn = &s_MskClusterArn
+
+var _OpenSearchDomainArn = &s_OpenSearchDomainArn
+
+var OpenSearchExporterConfiguration = &sOpenSearchExporterConfiguration
+var OpenSearchExporterConfiguration_domainArn = &sOpenSearchExporterConfiguration_domainArn
+
+var _PaginationToken = &s_PaginationToken
+
+var _PrometheusMetricLabelKey = &s_PrometheusMetricLabelKey
+
+var _PrometheusMetricLabelMap = &s_PrometheusMetricLabelMap
+var _PrometheusMetricLabelMap_key = &s_PrometheusMetricLabelMap_key
+var _PrometheusMetricLabelMap_value = &s_PrometheusMetricLabelMap_value
+
+var _PrometheusMetricLabelValue = &s_PrometheusMetricLabelValue
+
+var QueryLoggingConfigurationMetadata = &sQueryLoggingConfigurationMetadata
+var QueryLoggingConfigurationMetadata_status = &sQueryLoggingConfigurationMetadata_status
+var QueryLoggingConfigurationMetadata_workspace = &sQueryLoggingConfigurationMetadata_workspace
+var QueryLoggingConfigurationMetadata_destinations = &sQueryLoggingConfigurationMetadata_destinations
+var QueryLoggingConfigurationMetadata_createdAt = &sQueryLoggingConfigurationMetadata_createdAt
+var QueryLoggingConfigurationMetadata_modifiedAt = &sQueryLoggingConfigurationMetadata_modifiedAt
+
+var QueryLoggingConfigurationStatus = &sQueryLoggingConfigurationStatus
+var QueryLoggingConfigurationStatus_statusCode = &sQueryLoggingConfigurationStatus_statusCode
+var QueryLoggingConfigurationStatus_statusReason = &sQueryLoggingConfigurationStatus_statusReason
+
+var _QueryLoggingConfigurationStatusCode = &s_QueryLoggingConfigurationStatusCode
+
+var RandomCutForestConfiguration = &sRandomCutForestConfiguration
+var RandomCutForestConfiguration_query = &sRandomCutForestConfiguration_query
+var RandomCutForestConfiguration_shingleSize = &sRandomCutForestConfiguration_shingleSize
+var RandomCutForestConfiguration_sampleSize = &sRandomCutForestConfiguration_sampleSize
+var RandomCutForestConfiguration_ignoreNearExpectedFromAbove = &sRandomCutForestConfiguration_ignoreNearExpectedFromAbove
+var RandomCutForestConfiguration_ignoreNearExpectedFromBelow = &sRandomCutForestConfiguration_ignoreNearExpectedFromBelow
+
+var _RandomCutForestQuery = &s_RandomCutForestQuery
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var RoleConfiguration = &sRoleConfiguration
+var RoleConfiguration_sourceRoleArn = &sRoleConfiguration_sourceRoleArn
+var RoleConfiguration_targetRoleArn = &sRoleConfiguration_targetRoleArn
+
+var _RuleGroupsNamespaceArn = &s_RuleGroupsNamespaceArn
+
+var _RuleGroupsNamespaceData = &s_RuleGroupsNamespaceData
+
+var RuleGroupsNamespaceDescription = &sRuleGroupsNamespaceDescription
+var RuleGroupsNamespaceDescription_arn = &sRuleGroupsNamespaceDescription_arn
+var RuleGroupsNamespaceDescription_name = &sRuleGroupsNamespaceDescription_name
+var RuleGroupsNamespaceDescription_status = &sRuleGroupsNamespaceDescription_status
+var RuleGroupsNamespaceDescription_data = &sRuleGroupsNamespaceDescription_data
+var RuleGroupsNamespaceDescription_createdAt = &sRuleGroupsNamespaceDescription_createdAt
+var RuleGroupsNamespaceDescription_modifiedAt = &sRuleGroupsNamespaceDescription_modifiedAt
+var RuleGroupsNamespaceDescription_tags = &sRuleGroupsNamespaceDescription_tags
+
+var _RuleGroupsNamespaceName = &s_RuleGroupsNamespaceName
+
+var RuleGroupsNamespaceStatus = &sRuleGroupsNamespaceStatus
+var RuleGroupsNamespaceStatus_statusCode = &sRuleGroupsNamespaceStatus_statusCode
+var RuleGroupsNamespaceStatus_statusReason = &sRuleGroupsNamespaceStatus_statusReason
+
+var _RuleGroupsNamespaceStatusCode = &s_RuleGroupsNamespaceStatusCode
+
+var RuleGroupsNamespaceSummary = &sRuleGroupsNamespaceSummary
+var RuleGroupsNamespaceSummary_arn = &sRuleGroupsNamespaceSummary_arn
+var RuleGroupsNamespaceSummary_name = &sRuleGroupsNamespaceSummary_name
+var RuleGroupsNamespaceSummary_status = &sRuleGroupsNamespaceSummary_status
+var RuleGroupsNamespaceSummary_createdAt = &sRuleGroupsNamespaceSummary_createdAt
+var RuleGroupsNamespaceSummary_modifiedAt = &sRuleGroupsNamespaceSummary_modifiedAt
+var RuleGroupsNamespaceSummary_tags = &sRuleGroupsNamespaceSummary_tags
+
+var _RuleGroupsNamespaceSummaryList = &s_RuleGroupsNamespaceSummaryList
+var _RuleGroupsNamespaceSummaryList_member = &s_RuleGroupsNamespaceSummaryList_member
+
+var ScrapeConfiguration = &sScrapeConfiguration
+var ScrapeConfiguration_configurationBlob = &sScrapeConfiguration_configurationBlob
+
+var _ScraperAlias = &s_ScraperAlias
+
+var _ScraperArn = &s_ScraperArn
+
+var ScraperComponent = &sScraperComponent
+var ScraperComponent_type = &sScraperComponent_type
+var ScraperComponent_config = &sScraperComponent_config
+
+var _ScraperComponents = &s_ScraperComponents
+var _ScraperComponents_member = &s_ScraperComponents_member
+
+var _ScraperComponentType = &s_ScraperComponentType
+
+var ScraperDescription = &sScraperDescription
+var ScraperDescription_alias = &sScraperDescription_alias
+var ScraperDescription_scraperId = &sScraperDescription_scraperId
+var ScraperDescription_arn = &sScraperDescription_arn
+var ScraperDescription_roleArn = &sScraperDescription_roleArn
+var ScraperDescription_status = &sScraperDescription_status
+var ScraperDescription_createdAt = &sScraperDescription_createdAt
+var ScraperDescription_lastModifiedAt = &sScraperDescription_lastModifiedAt
+var ScraperDescription_tags = &sScraperDescription_tags
+var ScraperDescription_statusReason = &sScraperDescription_statusReason
+var ScraperDescription_scrapeConfiguration = &sScraperDescription_scrapeConfiguration
+var ScraperDescription_source = &sScraperDescription_source
+var ScraperDescription_destination = &sScraperDescription_destination
+var ScraperDescription_roleConfiguration = &sScraperDescription_roleConfiguration
+var ScraperDescription_exporters = &sScraperDescription_exporters
+
+var _ScraperFilters = &s_ScraperFilters
+var _ScraperFilters_key = &s_ScraperFilters_key
+var _ScraperFilters_value = &s_ScraperFilters_value
+
+var _ScraperId = &s_ScraperId
+
+var ScraperLoggingConfigurationStatus = &sScraperLoggingConfigurationStatus
+var ScraperLoggingConfigurationStatus_statusCode = &sScraperLoggingConfigurationStatus_statusCode
+var ScraperLoggingConfigurationStatus_statusReason = &sScraperLoggingConfigurationStatus_statusReason
+
+var _ScraperLoggingConfigurationStatusCode = &s_ScraperLoggingConfigurationStatusCode
+
+var ScraperLoggingDestination = &sScraperLoggingDestination
+var ScraperLoggingDestination_cloudWatchLogs = &sScraperLoggingDestination_cloudWatchLogs
+
+var ScraperStatus = &sScraperStatus
+var ScraperStatus_statusCode = &sScraperStatus_statusCode
+
+var _ScraperStatusCode = &s_ScraperStatusCode
+
+var ScraperSummary = &sScraperSummary
+var ScraperSummary_alias = &sScraperSummary_alias
+var ScraperSummary_scraperId = &sScraperSummary_scraperId
+var ScraperSummary_arn = &sScraperSummary_arn
+var ScraperSummary_roleArn = &sScraperSummary_roleArn
+var ScraperSummary_status = &sScraperSummary_status
+var ScraperSummary_createdAt = &sScraperSummary_createdAt
+var ScraperSummary_lastModifiedAt = &sScraperSummary_lastModifiedAt
+var ScraperSummary_tags = &sScraperSummary_tags
+var ScraperSummary_statusReason = &sScraperSummary_statusReason
+var ScraperSummary_source = &sScraperSummary_source
+var ScraperSummary_destination = &sScraperSummary_destination
+var ScraperSummary_roleConfiguration = &sScraperSummary_roleConfiguration
+var ScraperSummary_exporters = &sScraperSummary_exporters
+
+var _ScraperSummaryList = &s_ScraperSummaryList
+var _ScraperSummaryList_member = &s_ScraperSummaryList_member
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var Source = &sSource
+var Source_eksConfiguration = &sSource_eksConfiguration
+var Source_vpcConfiguration = &sSource_vpcConfiguration
+
+var _StatusReason = &s_StatusReason
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Uri = &s_Uri
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var VpcConfiguration = &sVpcConfiguration
+var VpcConfiguration_securityGroupIds = &sVpcConfiguration_securityGroupIds
+var VpcConfiguration_subnetIds = &sVpcConfiguration_subnetIds
+
+var _WorkspaceAlias = &s_WorkspaceAlias
+
+var _WorkspaceArn = &s_WorkspaceArn
+
+var WorkspaceConfigurationDescription = &sWorkspaceConfigurationDescription
+var WorkspaceConfigurationDescription_status = &sWorkspaceConfigurationDescription_status
+var WorkspaceConfigurationDescription_limitsPerLabelSet = &sWorkspaceConfigurationDescription_limitsPerLabelSet
+var WorkspaceConfigurationDescription_retentionPeriodInDays = &sWorkspaceConfigurationDescription_retentionPeriodInDays
+var WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds = &sWorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds
+var WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds = &sWorkspaceConfigurationDescription_ruleQueryOffsetInSeconds
+
+var WorkspaceConfigurationStatus = &sWorkspaceConfigurationStatus
+var WorkspaceConfigurationStatus_statusCode = &sWorkspaceConfigurationStatus_statusCode
+var WorkspaceConfigurationStatus_statusReason = &sWorkspaceConfigurationStatus_statusReason
+
+var _WorkspaceConfigurationStatusCode = &s_WorkspaceConfigurationStatusCode
+
+var WorkspaceDescription = &sWorkspaceDescription
+var WorkspaceDescription_workspaceId = &sWorkspaceDescription_workspaceId
+var WorkspaceDescription_alias = &sWorkspaceDescription_alias
+var WorkspaceDescription_arn = &sWorkspaceDescription_arn
+var WorkspaceDescription_status = &sWorkspaceDescription_status
+var WorkspaceDescription_prometheusEndpoint = &sWorkspaceDescription_prometheusEndpoint
+var WorkspaceDescription_createdAt = &sWorkspaceDescription_createdAt
+var WorkspaceDescription_tags = &sWorkspaceDescription_tags
+var WorkspaceDescription_kmsKeyArn = &sWorkspaceDescription_kmsKeyArn
+
+var _WorkspaceId = &s_WorkspaceId
+
+var _WorkspacePolicyStatusCode = &s_WorkspacePolicyStatusCode
+
+var WorkspaceStatus = &sWorkspaceStatus
+var WorkspaceStatus_statusCode = &sWorkspaceStatus_statusCode
+
+var _WorkspaceStatusCode = &s_WorkspaceStatusCode
+
+var WorkspaceSummary = &sWorkspaceSummary
+var WorkspaceSummary_workspaceId = &sWorkspaceSummary_workspaceId
+var WorkspaceSummary_alias = &sWorkspaceSummary_alias
+var WorkspaceSummary_arn = &sWorkspaceSummary_arn
+var WorkspaceSummary_status = &sWorkspaceSummary_status
+var WorkspaceSummary_createdAt = &sWorkspaceSummary_createdAt
+var WorkspaceSummary_tags = &sWorkspaceSummary_tags
+var WorkspaceSummary_kmsKeyArn = &sWorkspaceSummary_kmsKeyArn
+
+var _WorkspaceSummaryList = &s_WorkspaceSummaryList
+var _WorkspaceSummaryList_member = &s_WorkspaceSummaryList_member
+
+var CreateAlertManagerDefinitionRequest = &sCreateAlertManagerDefinitionRequest
+var CreateAlertManagerDefinitionRequest_workspaceId = &sCreateAlertManagerDefinitionRequest_workspaceId
+var CreateAlertManagerDefinitionRequest_data = &sCreateAlertManagerDefinitionRequest_data
+var CreateAlertManagerDefinitionRequest_clientToken = &sCreateAlertManagerDefinitionRequest_clientToken
+
+var CreateAlertManagerDefinitionResponse = &sCreateAlertManagerDefinitionResponse
+var CreateAlertManagerDefinitionResponse_status = &sCreateAlertManagerDefinitionResponse_status
+
+var CreateAnomalyDetectorRequest = &sCreateAnomalyDetectorRequest
+var CreateAnomalyDetectorRequest_workspaceId = &sCreateAnomalyDetectorRequest_workspaceId
+var CreateAnomalyDetectorRequest_alias = &sCreateAnomalyDetectorRequest_alias
+var CreateAnomalyDetectorRequest_evaluationIntervalInSeconds = &sCreateAnomalyDetectorRequest_evaluationIntervalInSeconds
+var CreateAnomalyDetectorRequest_missingDataAction = &sCreateAnomalyDetectorRequest_missingDataAction
+var CreateAnomalyDetectorRequest_configuration = &sCreateAnomalyDetectorRequest_configuration
+var CreateAnomalyDetectorRequest_labels = &sCreateAnomalyDetectorRequest_labels
+var CreateAnomalyDetectorRequest_clientToken = &sCreateAnomalyDetectorRequest_clientToken
+var CreateAnomalyDetectorRequest_tags = &sCreateAnomalyDetectorRequest_tags
+
+var CreateAnomalyDetectorResponse = &sCreateAnomalyDetectorResponse
+var CreateAnomalyDetectorResponse_anomalyDetectorId = &sCreateAnomalyDetectorResponse_anomalyDetectorId
+var CreateAnomalyDetectorResponse_arn = &sCreateAnomalyDetectorResponse_arn
+var CreateAnomalyDetectorResponse_status = &sCreateAnomalyDetectorResponse_status
+var CreateAnomalyDetectorResponse_tags = &sCreateAnomalyDetectorResponse_tags
+
+var CreateLoggingConfigurationRequest = &sCreateLoggingConfigurationRequest
+var CreateLoggingConfigurationRequest_workspaceId = &sCreateLoggingConfigurationRequest_workspaceId
+var CreateLoggingConfigurationRequest_logGroupArn = &sCreateLoggingConfigurationRequest_logGroupArn
+var CreateLoggingConfigurationRequest_clientToken = &sCreateLoggingConfigurationRequest_clientToken
+
+var CreateLoggingConfigurationResponse = &sCreateLoggingConfigurationResponse
+var CreateLoggingConfigurationResponse_status = &sCreateLoggingConfigurationResponse_status
+
+var CreateQueryLoggingConfigurationRequest = &sCreateQueryLoggingConfigurationRequest
+var CreateQueryLoggingConfigurationRequest_workspaceId = &sCreateQueryLoggingConfigurationRequest_workspaceId
+var CreateQueryLoggingConfigurationRequest_destinations = &sCreateQueryLoggingConfigurationRequest_destinations
+var CreateQueryLoggingConfigurationRequest_clientToken = &sCreateQueryLoggingConfigurationRequest_clientToken
+
+var CreateQueryLoggingConfigurationResponse = &sCreateQueryLoggingConfigurationResponse
+var CreateQueryLoggingConfigurationResponse_status = &sCreateQueryLoggingConfigurationResponse_status
+
+var CreateRuleGroupsNamespaceRequest = &sCreateRuleGroupsNamespaceRequest
+var CreateRuleGroupsNamespaceRequest_workspaceId = &sCreateRuleGroupsNamespaceRequest_workspaceId
+var CreateRuleGroupsNamespaceRequest_name = &sCreateRuleGroupsNamespaceRequest_name
+var CreateRuleGroupsNamespaceRequest_data = &sCreateRuleGroupsNamespaceRequest_data
+var CreateRuleGroupsNamespaceRequest_clientToken = &sCreateRuleGroupsNamespaceRequest_clientToken
+var CreateRuleGroupsNamespaceRequest_tags = &sCreateRuleGroupsNamespaceRequest_tags
+
+var CreateRuleGroupsNamespaceResponse = &sCreateRuleGroupsNamespaceResponse
+var CreateRuleGroupsNamespaceResponse_name = &sCreateRuleGroupsNamespaceResponse_name
+var CreateRuleGroupsNamespaceResponse_arn = &sCreateRuleGroupsNamespaceResponse_arn
+var CreateRuleGroupsNamespaceResponse_status = &sCreateRuleGroupsNamespaceResponse_status
+var CreateRuleGroupsNamespaceResponse_tags = &sCreateRuleGroupsNamespaceResponse_tags
+
+var CreateScraperRequest = &sCreateScraperRequest
+var CreateScraperRequest_alias = &sCreateScraperRequest_alias
+var CreateScraperRequest_scrapeConfiguration = &sCreateScraperRequest_scrapeConfiguration
+var CreateScraperRequest_source = &sCreateScraperRequest_source
+var CreateScraperRequest_destination = &sCreateScraperRequest_destination
+var CreateScraperRequest_roleConfiguration = &sCreateScraperRequest_roleConfiguration
+var CreateScraperRequest_clientToken = &sCreateScraperRequest_clientToken
+var CreateScraperRequest_tags = &sCreateScraperRequest_tags
+var CreateScraperRequest_exporters = &sCreateScraperRequest_exporters
+
+var CreateScraperResponse = &sCreateScraperResponse
+var CreateScraperResponse_scraperId = &sCreateScraperResponse_scraperId
+var CreateScraperResponse_arn = &sCreateScraperResponse_arn
+var CreateScraperResponse_status = &sCreateScraperResponse_status
+var CreateScraperResponse_tags = &sCreateScraperResponse_tags
+
+var CreateWorkspaceRequest = &sCreateWorkspaceRequest
+var CreateWorkspaceRequest_alias = &sCreateWorkspaceRequest_alias
+var CreateWorkspaceRequest_clientToken = &sCreateWorkspaceRequest_clientToken
+var CreateWorkspaceRequest_tags = &sCreateWorkspaceRequest_tags
+var CreateWorkspaceRequest_kmsKeyArn = &sCreateWorkspaceRequest_kmsKeyArn
+
+var CreateWorkspaceResponse = &sCreateWorkspaceResponse
+var CreateWorkspaceResponse_workspaceId = &sCreateWorkspaceResponse_workspaceId
+var CreateWorkspaceResponse_arn = &sCreateWorkspaceResponse_arn
+var CreateWorkspaceResponse_status = &sCreateWorkspaceResponse_status
+var CreateWorkspaceResponse_tags = &sCreateWorkspaceResponse_tags
+var CreateWorkspaceResponse_kmsKeyArn = &sCreateWorkspaceResponse_kmsKeyArn
+
+var DeleteAlertManagerDefinitionRequest = &sDeleteAlertManagerDefinitionRequest
+var DeleteAlertManagerDefinitionRequest_workspaceId = &sDeleteAlertManagerDefinitionRequest_workspaceId
+var DeleteAlertManagerDefinitionRequest_clientToken = &sDeleteAlertManagerDefinitionRequest_clientToken
+
+var DeleteAnomalyDetectorRequest = &sDeleteAnomalyDetectorRequest
+var DeleteAnomalyDetectorRequest_workspaceId = &sDeleteAnomalyDetectorRequest_workspaceId
+var DeleteAnomalyDetectorRequest_anomalyDetectorId = &sDeleteAnomalyDetectorRequest_anomalyDetectorId
+var DeleteAnomalyDetectorRequest_clientToken = &sDeleteAnomalyDetectorRequest_clientToken
+
+var DeleteLoggingConfigurationRequest = &sDeleteLoggingConfigurationRequest
+var DeleteLoggingConfigurationRequest_workspaceId = &sDeleteLoggingConfigurationRequest_workspaceId
+var DeleteLoggingConfigurationRequest_clientToken = &sDeleteLoggingConfigurationRequest_clientToken
+
+var DeleteQueryLoggingConfigurationRequest = &sDeleteQueryLoggingConfigurationRequest
+var DeleteQueryLoggingConfigurationRequest_workspaceId = &sDeleteQueryLoggingConfigurationRequest_workspaceId
+var DeleteQueryLoggingConfigurationRequest_clientToken = &sDeleteQueryLoggingConfigurationRequest_clientToken
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_workspaceId = &sDeleteResourcePolicyRequest_workspaceId
+var DeleteResourcePolicyRequest_clientToken = &sDeleteResourcePolicyRequest_clientToken
+var DeleteResourcePolicyRequest_revisionId = &sDeleteResourcePolicyRequest_revisionId
+
+var DeleteRuleGroupsNamespaceRequest = &sDeleteRuleGroupsNamespaceRequest
+var DeleteRuleGroupsNamespaceRequest_workspaceId = &sDeleteRuleGroupsNamespaceRequest_workspaceId
+var DeleteRuleGroupsNamespaceRequest_name = &sDeleteRuleGroupsNamespaceRequest_name
+var DeleteRuleGroupsNamespaceRequest_clientToken = &sDeleteRuleGroupsNamespaceRequest_clientToken
+
+var DeleteScraperRequest = &sDeleteScraperRequest
+var DeleteScraperRequest_scraperId = &sDeleteScraperRequest_scraperId
+var DeleteScraperRequest_clientToken = &sDeleteScraperRequest_clientToken
+
+var DeleteScraperLoggingConfigurationRequest = &sDeleteScraperLoggingConfigurationRequest
+var DeleteScraperLoggingConfigurationRequest_scraperId = &sDeleteScraperLoggingConfigurationRequest_scraperId
+var DeleteScraperLoggingConfigurationRequest_clientToken = &sDeleteScraperLoggingConfigurationRequest_clientToken
+
+var DeleteScraperResponse = &sDeleteScraperResponse
+var DeleteScraperResponse_scraperId = &sDeleteScraperResponse_scraperId
+var DeleteScraperResponse_status = &sDeleteScraperResponse_status
+
+var DeleteWorkspaceRequest = &sDeleteWorkspaceRequest
+var DeleteWorkspaceRequest_workspaceId = &sDeleteWorkspaceRequest_workspaceId
+var DeleteWorkspaceRequest_clientToken = &sDeleteWorkspaceRequest_clientToken
+
+var DescribeAlertManagerDefinitionRequest = &sDescribeAlertManagerDefinitionRequest
+var DescribeAlertManagerDefinitionRequest_workspaceId = &sDescribeAlertManagerDefinitionRequest_workspaceId
+
+var DescribeAlertManagerDefinitionResponse = &sDescribeAlertManagerDefinitionResponse
+var DescribeAlertManagerDefinitionResponse_alertManagerDefinition = &sDescribeAlertManagerDefinitionResponse_alertManagerDefinition
+
+var DescribeAnomalyDetectorRequest = &sDescribeAnomalyDetectorRequest
+var DescribeAnomalyDetectorRequest_workspaceId = &sDescribeAnomalyDetectorRequest_workspaceId
+var DescribeAnomalyDetectorRequest_anomalyDetectorId = &sDescribeAnomalyDetectorRequest_anomalyDetectorId
+
+var DescribeAnomalyDetectorResponse = &sDescribeAnomalyDetectorResponse
+var DescribeAnomalyDetectorResponse_anomalyDetector = &sDescribeAnomalyDetectorResponse_anomalyDetector
+
+var DescribeLoggingConfigurationRequest = &sDescribeLoggingConfigurationRequest
+var DescribeLoggingConfigurationRequest_workspaceId = &sDescribeLoggingConfigurationRequest_workspaceId
+
+var DescribeLoggingConfigurationResponse = &sDescribeLoggingConfigurationResponse
+var DescribeLoggingConfigurationResponse_loggingConfiguration = &sDescribeLoggingConfigurationResponse_loggingConfiguration
+
+var DescribeQueryLoggingConfigurationRequest = &sDescribeQueryLoggingConfigurationRequest
+var DescribeQueryLoggingConfigurationRequest_workspaceId = &sDescribeQueryLoggingConfigurationRequest_workspaceId
+
+var DescribeQueryLoggingConfigurationResponse = &sDescribeQueryLoggingConfigurationResponse
+var DescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration = &sDescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration
+
+var DescribeResourcePolicyRequest = &sDescribeResourcePolicyRequest
+var DescribeResourcePolicyRequest_workspaceId = &sDescribeResourcePolicyRequest_workspaceId
+
+var DescribeResourcePolicyResponse = &sDescribeResourcePolicyResponse
+var DescribeResourcePolicyResponse_policyDocument = &sDescribeResourcePolicyResponse_policyDocument
+var DescribeResourcePolicyResponse_policyStatus = &sDescribeResourcePolicyResponse_policyStatus
+var DescribeResourcePolicyResponse_revisionId = &sDescribeResourcePolicyResponse_revisionId
+
+var DescribeRuleGroupsNamespaceRequest = &sDescribeRuleGroupsNamespaceRequest
+var DescribeRuleGroupsNamespaceRequest_workspaceId = &sDescribeRuleGroupsNamespaceRequest_workspaceId
+var DescribeRuleGroupsNamespaceRequest_name = &sDescribeRuleGroupsNamespaceRequest_name
+
+var DescribeRuleGroupsNamespaceResponse = &sDescribeRuleGroupsNamespaceResponse
+var DescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace = &sDescribeRuleGroupsNamespaceResponse_ruleGroupsNamespace
+
+var DescribeScraperRequest = &sDescribeScraperRequest
+var DescribeScraperRequest_scraperId = &sDescribeScraperRequest_scraperId
+
+var DescribeScraperLoggingConfigurationRequest = &sDescribeScraperLoggingConfigurationRequest
+var DescribeScraperLoggingConfigurationRequest_scraperId = &sDescribeScraperLoggingConfigurationRequest_scraperId
+
+var DescribeScraperLoggingConfigurationResponse = &sDescribeScraperLoggingConfigurationResponse
+var DescribeScraperLoggingConfigurationResponse_status = &sDescribeScraperLoggingConfigurationResponse_status
+var DescribeScraperLoggingConfigurationResponse_scraperId = &sDescribeScraperLoggingConfigurationResponse_scraperId
+var DescribeScraperLoggingConfigurationResponse_loggingDestination = &sDescribeScraperLoggingConfigurationResponse_loggingDestination
+var DescribeScraperLoggingConfigurationResponse_scraperComponents = &sDescribeScraperLoggingConfigurationResponse_scraperComponents
+var DescribeScraperLoggingConfigurationResponse_modifiedAt = &sDescribeScraperLoggingConfigurationResponse_modifiedAt
+
+var DescribeScraperResponse = &sDescribeScraperResponse
+var DescribeScraperResponse_scraper = &sDescribeScraperResponse_scraper
+
+var DescribeWorkspaceConfigurationRequest = &sDescribeWorkspaceConfigurationRequest
+var DescribeWorkspaceConfigurationRequest_workspaceId = &sDescribeWorkspaceConfigurationRequest_workspaceId
+
+var DescribeWorkspaceConfigurationResponse = &sDescribeWorkspaceConfigurationResponse
+var DescribeWorkspaceConfigurationResponse_workspaceConfiguration = &sDescribeWorkspaceConfigurationResponse_workspaceConfiguration
+
+var DescribeWorkspaceRequest = &sDescribeWorkspaceRequest
+var DescribeWorkspaceRequest_workspaceId = &sDescribeWorkspaceRequest_workspaceId
+
+var DescribeWorkspaceResponse = &sDescribeWorkspaceResponse
+var DescribeWorkspaceResponse_workspace = &sDescribeWorkspaceResponse_workspace
+
+var GetDefaultScraperConfigurationRequest = &sGetDefaultScraperConfigurationRequest
+
+var GetDefaultScraperConfigurationResponse = &sGetDefaultScraperConfigurationResponse
+var GetDefaultScraperConfigurationResponse_configuration = &sGetDefaultScraperConfigurationResponse_configuration
+
+var ListAnomalyDetectorsRequest = &sListAnomalyDetectorsRequest
+var ListAnomalyDetectorsRequest_workspaceId = &sListAnomalyDetectorsRequest_workspaceId
+var ListAnomalyDetectorsRequest_alias = &sListAnomalyDetectorsRequest_alias
+var ListAnomalyDetectorsRequest_maxResults = &sListAnomalyDetectorsRequest_maxResults
+var ListAnomalyDetectorsRequest_nextToken = &sListAnomalyDetectorsRequest_nextToken
+
+var ListAnomalyDetectorsResponse = &sListAnomalyDetectorsResponse
+var ListAnomalyDetectorsResponse_anomalyDetectors = &sListAnomalyDetectorsResponse_anomalyDetectors
+var ListAnomalyDetectorsResponse_nextToken = &sListAnomalyDetectorsResponse_nextToken
+
+var ListRuleGroupsNamespacesRequest = &sListRuleGroupsNamespacesRequest
+var ListRuleGroupsNamespacesRequest_workspaceId = &sListRuleGroupsNamespacesRequest_workspaceId
+var ListRuleGroupsNamespacesRequest_name = &sListRuleGroupsNamespacesRequest_name
+var ListRuleGroupsNamespacesRequest_nextToken = &sListRuleGroupsNamespacesRequest_nextToken
+var ListRuleGroupsNamespacesRequest_maxResults = &sListRuleGroupsNamespacesRequest_maxResults
+
+var ListRuleGroupsNamespacesResponse = &sListRuleGroupsNamespacesResponse
+var ListRuleGroupsNamespacesResponse_ruleGroupsNamespaces = &sListRuleGroupsNamespacesResponse_ruleGroupsNamespaces
+var ListRuleGroupsNamespacesResponse_nextToken = &sListRuleGroupsNamespacesResponse_nextToken
+
+var ListScrapersRequest = &sListScrapersRequest
+var ListScrapersRequest_filters = &sListScrapersRequest_filters
+var ListScrapersRequest_nextToken = &sListScrapersRequest_nextToken
+var ListScrapersRequest_maxResults = &sListScrapersRequest_maxResults
+
+var ListScrapersResponse = &sListScrapersResponse
+var ListScrapersResponse_scrapers = &sListScrapersResponse_scrapers
+var ListScrapersResponse_nextToken = &sListScrapersResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListWorkspacesRequest = &sListWorkspacesRequest
+var ListWorkspacesRequest_nextToken = &sListWorkspacesRequest_nextToken
+var ListWorkspacesRequest_alias = &sListWorkspacesRequest_alias
+var ListWorkspacesRequest_maxResults = &sListWorkspacesRequest_maxResults
+
+var ListWorkspacesResponse = &sListWorkspacesResponse
+var ListWorkspacesResponse_workspaces = &sListWorkspacesResponse_workspaces
+var ListWorkspacesResponse_nextToken = &sListWorkspacesResponse_nextToken
+
+var PutAlertManagerDefinitionRequest = &sPutAlertManagerDefinitionRequest
+var PutAlertManagerDefinitionRequest_workspaceId = &sPutAlertManagerDefinitionRequest_workspaceId
+var PutAlertManagerDefinitionRequest_data = &sPutAlertManagerDefinitionRequest_data
+var PutAlertManagerDefinitionRequest_clientToken = &sPutAlertManagerDefinitionRequest_clientToken
+
+var PutAlertManagerDefinitionResponse = &sPutAlertManagerDefinitionResponse
+var PutAlertManagerDefinitionResponse_status = &sPutAlertManagerDefinitionResponse_status
+
+var PutAnomalyDetectorRequest = &sPutAnomalyDetectorRequest
+var PutAnomalyDetectorRequest_workspaceId = &sPutAnomalyDetectorRequest_workspaceId
+var PutAnomalyDetectorRequest_anomalyDetectorId = &sPutAnomalyDetectorRequest_anomalyDetectorId
+var PutAnomalyDetectorRequest_evaluationIntervalInSeconds = &sPutAnomalyDetectorRequest_evaluationIntervalInSeconds
+var PutAnomalyDetectorRequest_missingDataAction = &sPutAnomalyDetectorRequest_missingDataAction
+var PutAnomalyDetectorRequest_configuration = &sPutAnomalyDetectorRequest_configuration
+var PutAnomalyDetectorRequest_labels = &sPutAnomalyDetectorRequest_labels
+var PutAnomalyDetectorRequest_clientToken = &sPutAnomalyDetectorRequest_clientToken
+
+var PutAnomalyDetectorResponse = &sPutAnomalyDetectorResponse
+var PutAnomalyDetectorResponse_anomalyDetectorId = &sPutAnomalyDetectorResponse_anomalyDetectorId
+var PutAnomalyDetectorResponse_arn = &sPutAnomalyDetectorResponse_arn
+var PutAnomalyDetectorResponse_status = &sPutAnomalyDetectorResponse_status
+var PutAnomalyDetectorResponse_tags = &sPutAnomalyDetectorResponse_tags
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_workspaceId = &sPutResourcePolicyRequest_workspaceId
+var PutResourcePolicyRequest_policyDocument = &sPutResourcePolicyRequest_policyDocument
+var PutResourcePolicyRequest_clientToken = &sPutResourcePolicyRequest_clientToken
+var PutResourcePolicyRequest_revisionId = &sPutResourcePolicyRequest_revisionId
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_policyStatus = &sPutResourcePolicyResponse_policyStatus
+var PutResourcePolicyResponse_revisionId = &sPutResourcePolicyResponse_revisionId
+
+var PutRuleGroupsNamespaceRequest = &sPutRuleGroupsNamespaceRequest
+var PutRuleGroupsNamespaceRequest_workspaceId = &sPutRuleGroupsNamespaceRequest_workspaceId
+var PutRuleGroupsNamespaceRequest_name = &sPutRuleGroupsNamespaceRequest_name
+var PutRuleGroupsNamespaceRequest_data = &sPutRuleGroupsNamespaceRequest_data
+var PutRuleGroupsNamespaceRequest_clientToken = &sPutRuleGroupsNamespaceRequest_clientToken
+
+var PutRuleGroupsNamespaceResponse = &sPutRuleGroupsNamespaceResponse
+var PutRuleGroupsNamespaceResponse_name = &sPutRuleGroupsNamespaceResponse_name
+var PutRuleGroupsNamespaceResponse_arn = &sPutRuleGroupsNamespaceResponse_arn
+var PutRuleGroupsNamespaceResponse_status = &sPutRuleGroupsNamespaceResponse_status
+var PutRuleGroupsNamespaceResponse_tags = &sPutRuleGroupsNamespaceResponse_tags
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateLoggingConfigurationRequest = &sUpdateLoggingConfigurationRequest
+var UpdateLoggingConfigurationRequest_workspaceId = &sUpdateLoggingConfigurationRequest_workspaceId
+var UpdateLoggingConfigurationRequest_logGroupArn = &sUpdateLoggingConfigurationRequest_logGroupArn
+var UpdateLoggingConfigurationRequest_clientToken = &sUpdateLoggingConfigurationRequest_clientToken
+
+var UpdateLoggingConfigurationResponse = &sUpdateLoggingConfigurationResponse
+var UpdateLoggingConfigurationResponse_status = &sUpdateLoggingConfigurationResponse_status
+
+var UpdateQueryLoggingConfigurationRequest = &sUpdateQueryLoggingConfigurationRequest
+var UpdateQueryLoggingConfigurationRequest_workspaceId = &sUpdateQueryLoggingConfigurationRequest_workspaceId
+var UpdateQueryLoggingConfigurationRequest_destinations = &sUpdateQueryLoggingConfigurationRequest_destinations
+var UpdateQueryLoggingConfigurationRequest_clientToken = &sUpdateQueryLoggingConfigurationRequest_clientToken
+
+var UpdateQueryLoggingConfigurationResponse = &sUpdateQueryLoggingConfigurationResponse
+var UpdateQueryLoggingConfigurationResponse_status = &sUpdateQueryLoggingConfigurationResponse_status
+
+var UpdateScraperRequest = &sUpdateScraperRequest
+var UpdateScraperRequest_scraperId = &sUpdateScraperRequest_scraperId
+var UpdateScraperRequest_alias = &sUpdateScraperRequest_alias
+var UpdateScraperRequest_scrapeConfiguration = &sUpdateScraperRequest_scrapeConfiguration
+var UpdateScraperRequest_destination = &sUpdateScraperRequest_destination
+var UpdateScraperRequest_roleConfiguration = &sUpdateScraperRequest_roleConfiguration
+var UpdateScraperRequest_clientToken = &sUpdateScraperRequest_clientToken
+var UpdateScraperRequest_exporters = &sUpdateScraperRequest_exporters
+
+var UpdateScraperLoggingConfigurationRequest = &sUpdateScraperLoggingConfigurationRequest
+var UpdateScraperLoggingConfigurationRequest_scraperId = &sUpdateScraperLoggingConfigurationRequest_scraperId
+var UpdateScraperLoggingConfigurationRequest_loggingDestination = &sUpdateScraperLoggingConfigurationRequest_loggingDestination
+var UpdateScraperLoggingConfigurationRequest_scraperComponents = &sUpdateScraperLoggingConfigurationRequest_scraperComponents
+
+var UpdateScraperLoggingConfigurationResponse = &sUpdateScraperLoggingConfigurationResponse
+var UpdateScraperLoggingConfigurationResponse_status = &sUpdateScraperLoggingConfigurationResponse_status
+
+var UpdateScraperResponse = &sUpdateScraperResponse
+var UpdateScraperResponse_scraperId = &sUpdateScraperResponse_scraperId
+var UpdateScraperResponse_arn = &sUpdateScraperResponse_arn
+var UpdateScraperResponse_status = &sUpdateScraperResponse_status
+var UpdateScraperResponse_tags = &sUpdateScraperResponse_tags
+
+var UpdateWorkspaceAliasRequest = &sUpdateWorkspaceAliasRequest
+var UpdateWorkspaceAliasRequest_workspaceId = &sUpdateWorkspaceAliasRequest_workspaceId
+var UpdateWorkspaceAliasRequest_alias = &sUpdateWorkspaceAliasRequest_alias
+var UpdateWorkspaceAliasRequest_clientToken = &sUpdateWorkspaceAliasRequest_clientToken
+
+var UpdateWorkspaceConfigurationRequest = &sUpdateWorkspaceConfigurationRequest
+var UpdateWorkspaceConfigurationRequest_workspaceId = &sUpdateWorkspaceConfigurationRequest_workspaceId
+var UpdateWorkspaceConfigurationRequest_clientToken = &sUpdateWorkspaceConfigurationRequest_clientToken
+var UpdateWorkspaceConfigurationRequest_limitsPerLabelSet = &sUpdateWorkspaceConfigurationRequest_limitsPerLabelSet
+var UpdateWorkspaceConfigurationRequest_retentionPeriodInDays = &sUpdateWorkspaceConfigurationRequest_retentionPeriodInDays
+var UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds = &sUpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds
+var UpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds = &sUpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds
+
+var UpdateWorkspaceConfigurationResponse = &sUpdateWorkspaceConfigurationResponse
+var UpdateWorkspaceConfigurationResponse_status = &sUpdateWorkspaceConfigurationResponse_status
+
+var AmazonPrometheusService = &smithy.ServiceSchema{Schema: &s_AmazonPrometheusService, Version: "2020-08-01"}

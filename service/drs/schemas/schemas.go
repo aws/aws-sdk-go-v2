@@ -4,5157 +4,5088 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateSourceNetworkStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AssociateSourceNetworkStack",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eAssociateSourceNetworkStack                                                          smithy.SchemaExtensions
+	eCancelRecoveryPlanExecution                                                          smithy.SchemaExtensions
+	eCreateExtendedSourceServer                                                           smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplate                                                    smithy.SchemaExtensions
+	eCreateRecoveryPlan                                                                   smithy.SchemaExtensions
+	eCreateRecoveryPlanStep                                                               smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplate                                               smithy.SchemaExtensions
+	eCreateSourceNetwork                                                                  smithy.SchemaExtensions
+	eDeleteJob                                                                            smithy.SchemaExtensions
+	eDeleteLaunchAction                                                                   smithy.SchemaExtensions
+	eDeleteLaunchConfigurationTemplate                                                    smithy.SchemaExtensions
+	eDeleteRecoveryInstance                                                               smithy.SchemaExtensions
+	eDeleteRecoveryPlan                                                                   smithy.SchemaExtensions
+	eDeleteRecoveryPlanExecution                                                          smithy.SchemaExtensions
+	eDeleteRecoveryPlanStep                                                               smithy.SchemaExtensions
+	eDeleteReplicationConfigurationTemplate                                               smithy.SchemaExtensions
+	eDeleteSourceNetwork                                                                  smithy.SchemaExtensions
+	eDeleteSourceServer                                                                   smithy.SchemaExtensions
+	eDescribeJobLogItems                                                                  smithy.SchemaExtensions
+	eDescribeJobs                                                                         smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplates                                                 smithy.SchemaExtensions
+	eDescribeRecoveryInstances                                                            smithy.SchemaExtensions
+	eDescribeRecoverySnapshots                                                            smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplates                                            smithy.SchemaExtensions
+	eDescribeSourceNetworks                                                               smithy.SchemaExtensions
+	eDescribeSourceServers                                                                smithy.SchemaExtensions
+	eDisconnectRecoveryInstance                                                           smithy.SchemaExtensions
+	eDisconnectSourceServer                                                               smithy.SchemaExtensions
+	eExportSourceNetworkCfnTemplate                                                       smithy.SchemaExtensions
+	eGetFailbackReplicationConfiguration                                                  smithy.SchemaExtensions
+	eGetLaunchConfiguration                                                               smithy.SchemaExtensions
+	eGetRecoveryPlan                                                                      smithy.SchemaExtensions
+	eGetRecoveryPlanExecution                                                             smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionStep                                                         smithy.SchemaExtensions
+	eGetRecoveryPlanStep                                                                  smithy.SchemaExtensions
+	eGetReplicationConfiguration                                                          smithy.SchemaExtensions
+	eInitializeService                                                                    smithy.SchemaExtensions
+	eListExtensibleSourceServers                                                          smithy.SchemaExtensions
+	eListLaunchActions                                                                    smithy.SchemaExtensions
+	eListRecoveryPlanExecutions                                                           smithy.SchemaExtensions
+	eListRecoveryPlanExecutionSteps                                                       smithy.SchemaExtensions
+	eListRecoveryPlans                                                                    smithy.SchemaExtensions
+	eListRecoveryPlanSteps                                                                smithy.SchemaExtensions
+	eListStagingAccounts                                                                  smithy.SchemaExtensions
+	eListTagsForResource                                                                  smithy.SchemaExtensions
+	ePutLaunchAction                                                                      smithy.SchemaExtensions
+	eReorderRecoveryPlanSteps                                                             smithy.SchemaExtensions
+	eRetryDataReplication                                                                 smithy.SchemaExtensions
+	eRetryRecoveryPlanExecutionStep                                                       smithy.SchemaExtensions
+	eReverseReplication                                                                   smithy.SchemaExtensions
+	eStartFailbackLaunch                                                                  smithy.SchemaExtensions
+	eStartRecovery                                                                        smithy.SchemaExtensions
+	eStartRecoveryPlanExecution                                                           smithy.SchemaExtensions
+	eStartReplication                                                                     smithy.SchemaExtensions
+	eStartSourceNetworkRecovery                                                           smithy.SchemaExtensions
+	eStartSourceNetworkReplication                                                        smithy.SchemaExtensions
+	eStopFailback                                                                         smithy.SchemaExtensions
+	eStopReplication                                                                      smithy.SchemaExtensions
+	eStopSourceNetworkReplication                                                         smithy.SchemaExtensions
+	eTagResource                                                                          smithy.SchemaExtensions
+	eTerminateRecoveryInstances                                                           smithy.SchemaExtensions
+	eUntagResource                                                                        smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfiguration                                               smithy.SchemaExtensions
+	eUpdateLaunchConfiguration                                                            smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplate                                                    smithy.SchemaExtensions
+	eUpdateRecoveryPlan                                                                   smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStep                                                      smithy.SchemaExtensions
+	eUpdateRecoveryPlanStep                                                               smithy.SchemaExtensions
+	eUpdateReplicationConfiguration                                                       smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplate                                               smithy.SchemaExtensions
+	e_ElasticDisasterRecoveryService                                                      smithy.SchemaExtensions
+	eAccessDeniedException                                                                smithy.SchemaExtensions
+	eAccessDeniedException_message                                                        smithy.SchemaExtensions
+	eAccessDeniedException_code                                                           smithy.SchemaExtensions
+	eAccount                                                                              smithy.SchemaExtensions
+	eAccount_accountID                                                                    smithy.SchemaExtensions
+	e_AccountID                                                                           smithy.SchemaExtensions
+	e_AccountIDs                                                                          smithy.SchemaExtensions
+	e_AccountIDs_member                                                                   smithy.SchemaExtensions
+	e_Accounts                                                                            smithy.SchemaExtensions
+	e_Accounts_member                                                                     smithy.SchemaExtensions
+	e_AgentVersion                                                                        smithy.SchemaExtensions
+	e_ARN                                                                                 smithy.SchemaExtensions
+	e_AwsAvailabilityZone                                                                 smithy.SchemaExtensions
+	e_AwsRegion                                                                           smithy.SchemaExtensions
+	e_BoundedString                                                                       smithy.SchemaExtensions
+	e_CfnStackName                                                                        smithy.SchemaExtensions
+	e_ClientIdempotencyToken                                                              smithy.SchemaExtensions
+	eConflictException                                                                    smithy.SchemaExtensions
+	eConflictException_message                                                            smithy.SchemaExtensions
+	eConflictException_code                                                               smithy.SchemaExtensions
+	eConflictException_resourceId                                                         smithy.SchemaExtensions
+	eConflictException_resourceType                                                       smithy.SchemaExtensions
+	e_ConversionMap                                                                       smithy.SchemaExtensions
+	e_ConversionMap_key                                                                   smithy.SchemaExtensions
+	e_ConversionMap_value                                                                 smithy.SchemaExtensions
+	eConversionProperties                                                                 smithy.SchemaExtensions
+	eConversionProperties_volumeToConversionMap                                           smithy.SchemaExtensions
+	eConversionProperties_rootVolumeName                                                  smithy.SchemaExtensions
+	eConversionProperties_forceUefi                                                       smithy.SchemaExtensions
+	eConversionProperties_dataTimestamp                                                   smithy.SchemaExtensions
+	eConversionProperties_volumeToVolumeSize                                              smithy.SchemaExtensions
+	eConversionProperties_volumeToProductCodes                                            smithy.SchemaExtensions
+	eCPU                                                                                  smithy.SchemaExtensions
+	eCPU_cores                                                                            smithy.SchemaExtensions
+	eCPU_modelName                                                                        smithy.SchemaExtensions
+	e_Cpus                                                                                smithy.SchemaExtensions
+	e_Cpus_member                                                                         smithy.SchemaExtensions
+	eDataReplicationError                                                                 smithy.SchemaExtensions
+	eDataReplicationError_error                                                           smithy.SchemaExtensions
+	eDataReplicationError_rawError                                                        smithy.SchemaExtensions
+	e_DataReplicationErrorString                                                          smithy.SchemaExtensions
+	eDataReplicationInfo                                                                  smithy.SchemaExtensions
+	eDataReplicationInfo_lagDuration                                                      smithy.SchemaExtensions
+	eDataReplicationInfo_etaDateTime                                                      smithy.SchemaExtensions
+	eDataReplicationInfo_replicatedDisks                                                  smithy.SchemaExtensions
+	eDataReplicationInfo_dataReplicationState                                             smithy.SchemaExtensions
+	eDataReplicationInfo_dataReplicationInitiation                                        smithy.SchemaExtensions
+	eDataReplicationInfo_dataReplicationError                                             smithy.SchemaExtensions
+	eDataReplicationInfo_stagingAvailabilityZone                                          smithy.SchemaExtensions
+	eDataReplicationInfo_stagingOutpostArn                                                smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk                                                    smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_deviceName                                         smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_totalStorageBytes                                  smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_replicatedStorageBytes                             smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_rescannedStorageBytes                              smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_backloggedStorageBytes                             smithy.SchemaExtensions
+	eDataReplicationInfoReplicatedDisk_volumeStatus                                       smithy.SchemaExtensions
+	e_DataReplicationInfoReplicatedDisks                                                  smithy.SchemaExtensions
+	e_DataReplicationInfoReplicatedDisks_member                                           smithy.SchemaExtensions
+	eDataReplicationInitiation                                                            smithy.SchemaExtensions
+	eDataReplicationInitiation_startDateTime                                              smithy.SchemaExtensions
+	eDataReplicationInitiation_nextAttemptDateTime                                        smithy.SchemaExtensions
+	eDataReplicationInitiation_steps                                                      smithy.SchemaExtensions
+	eDataReplicationInitiationStep                                                        smithy.SchemaExtensions
+	eDataReplicationInitiationStep_name                                                   smithy.SchemaExtensions
+	eDataReplicationInitiationStep_status                                                 smithy.SchemaExtensions
+	e_DataReplicationInitiationStepName                                                   smithy.SchemaExtensions
+	e_DataReplicationInitiationSteps                                                      smithy.SchemaExtensions
+	e_DataReplicationInitiationSteps_member                                               smithy.SchemaExtensions
+	e_DataReplicationInitiationStepStatus                                                 smithy.SchemaExtensions
+	e_DataReplicationState                                                                smithy.SchemaExtensions
+	eDescribeJobsRequestFilters                                                           smithy.SchemaExtensions
+	eDescribeJobsRequestFilters_jobIDs                                                    smithy.SchemaExtensions
+	eDescribeJobsRequestFilters_fromDate                                                  smithy.SchemaExtensions
+	eDescribeJobsRequestFilters_toDate                                                    smithy.SchemaExtensions
+	e_DescribeJobsRequestFiltersJobIDs                                                    smithy.SchemaExtensions
+	e_DescribeJobsRequestFiltersJobIDs_member                                             smithy.SchemaExtensions
+	e_DescribeRecoveryInstancesItems                                                      smithy.SchemaExtensions
+	e_DescribeRecoveryInstancesItems_member                                               smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequestFilters                                              smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs                          smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequestFilters_sourceServerIDs                              smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequestFilters                                              smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequestFilters_fromDateTime                                 smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequestFilters_toDateTime                                   smithy.SchemaExtensions
+	eDescribeSourceNetworksRequestFilters                                                 smithy.SchemaExtensions
+	eDescribeSourceNetworksRequestFilters_sourceNetworkIDs                                smithy.SchemaExtensions
+	eDescribeSourceNetworksRequestFilters_originAccountID                                 smithy.SchemaExtensions
+	eDescribeSourceNetworksRequestFilters_originRegion                                    smithy.SchemaExtensions
+	e_DescribeSourceNetworksRequestFiltersIDs                                             smithy.SchemaExtensions
+	e_DescribeSourceNetworksRequestFiltersIDs_member                                      smithy.SchemaExtensions
+	eDescribeSourceServersRequestFilters                                                  smithy.SchemaExtensions
+	eDescribeSourceServersRequestFilters_sourceServerIDs                                  smithy.SchemaExtensions
+	eDescribeSourceServersRequestFilters_hardwareId                                       smithy.SchemaExtensions
+	eDescribeSourceServersRequestFilters_stagingAccountIDs                                smithy.SchemaExtensions
+	e_DescribeSourceServersRequestFiltersIDs                                              smithy.SchemaExtensions
+	e_DescribeSourceServersRequestFiltersIDs_member                                       smithy.SchemaExtensions
+	eDisk                                                                                 smithy.SchemaExtensions
+	eDisk_deviceName                                                                      smithy.SchemaExtensions
+	eDisk_bytes                                                                           smithy.SchemaExtensions
+	e_Disks                                                                               smithy.SchemaExtensions
+	e_Disks_member                                                                        smithy.SchemaExtensions
+	e_EbsSnapshot                                                                         smithy.SchemaExtensions
+	e_EbsSnapshotsList                                                                    smithy.SchemaExtensions
+	e_EbsSnapshotsList_member                                                             smithy.SchemaExtensions
+	e_EbsVolumeID                                                                         smithy.SchemaExtensions
+	e_EC2InstanceID                                                                       smithy.SchemaExtensions
+	e_EC2InstanceState                                                                    smithy.SchemaExtensions
+	e_EC2InstanceType                                                                     smithy.SchemaExtensions
+	eErrorDetail                                                                          smithy.SchemaExtensions
+	eErrorDetail_message                                                                  smithy.SchemaExtensions
+	eErrorDetail_code                                                                     smithy.SchemaExtensions
+	eEventResourceData                                                                    smithy.SchemaExtensions
+	eEventResourceData_sourceNetworkData                                                  smithy.SchemaExtensions
+	eExecutionServerStepConfiguration                                                     smithy.SchemaExtensions
+	eExecutionServerStepConfiguration_servers                                             smithy.SchemaExtensions
+	e_ExtensionStatus                                                                     smithy.SchemaExtensions
+	e_FailbackLaunchType                                                                  smithy.SchemaExtensions
+	e_FailbackReplicationError                                                            smithy.SchemaExtensions
+	e_FailbackState                                                                       smithy.SchemaExtensions
+	e_FailureReason                                                                       smithy.SchemaExtensions
+	eIdentificationHints                                                                  smithy.SchemaExtensions
+	eIdentificationHints_fqdn                                                             smithy.SchemaExtensions
+	eIdentificationHints_hostname                                                         smithy.SchemaExtensions
+	eIdentificationHints_vmWareUuid                                                       smithy.SchemaExtensions
+	eIdentificationHints_awsInstanceID                                                    smithy.SchemaExtensions
+	e_InitiatedBy                                                                         smithy.SchemaExtensions
+	eInternalServerException                                                              smithy.SchemaExtensions
+	eInternalServerException_message                                                      smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                                            smithy.SchemaExtensions
+	e_InternetProtocol                                                                    smithy.SchemaExtensions
+	e_IPsList                                                                             smithy.SchemaExtensions
+	e_IPsList_member                                                                      smithy.SchemaExtensions
+	e_ISO8601DatetimeString                                                               smithy.SchemaExtensions
+	e_ISO8601DurationString                                                               smithy.SchemaExtensions
+	eJob                                                                                  smithy.SchemaExtensions
+	eJob_jobID                                                                            smithy.SchemaExtensions
+	eJob_arn                                                                              smithy.SchemaExtensions
+	eJob_type                                                                             smithy.SchemaExtensions
+	eJob_initiatedBy                                                                      smithy.SchemaExtensions
+	eJob_creationDateTime                                                                 smithy.SchemaExtensions
+	eJob_endDateTime                                                                      smithy.SchemaExtensions
+	eJob_status                                                                           smithy.SchemaExtensions
+	eJob_participatingServers                                                             smithy.SchemaExtensions
+	eJob_tags                                                                             smithy.SchemaExtensions
+	eJob_participatingResources                                                           smithy.SchemaExtensions
+	e_JobEventAttemptCount                                                                smithy.SchemaExtensions
+	e_JobID                                                                               smithy.SchemaExtensions
+	eJobLog                                                                               smithy.SchemaExtensions
+	eJobLog_logDateTime                                                                   smithy.SchemaExtensions
+	eJobLog_event                                                                         smithy.SchemaExtensions
+	eJobLog_eventData                                                                     smithy.SchemaExtensions
+	e_JobLogEvent                                                                         smithy.SchemaExtensions
+	eJobLogEventData                                                                      smithy.SchemaExtensions
+	eJobLogEventData_sourceServerID                                                       smithy.SchemaExtensions
+	eJobLogEventData_conversionServerID                                                   smithy.SchemaExtensions
+	eJobLogEventData_targetInstanceID                                                     smithy.SchemaExtensions
+	eJobLogEventData_rawError                                                             smithy.SchemaExtensions
+	eJobLogEventData_conversionProperties                                                 smithy.SchemaExtensions
+	eJobLogEventData_eventResourceData                                                    smithy.SchemaExtensions
+	eJobLogEventData_attemptCount                                                         smithy.SchemaExtensions
+	eJobLogEventData_maxAttemptsCount                                                     smithy.SchemaExtensions
+	e_JobLogs                                                                             smithy.SchemaExtensions
+	e_JobLogs_member                                                                      smithy.SchemaExtensions
+	e_JobsList                                                                            smithy.SchemaExtensions
+	e_JobsList_member                                                                     smithy.SchemaExtensions
+	e_JobStatus                                                                           smithy.SchemaExtensions
+	e_JobType                                                                             smithy.SchemaExtensions
+	e_LargeBoundedString                                                                  smithy.SchemaExtensions
+	e_LastLaunchResult                                                                    smithy.SchemaExtensions
+	e_LastLaunchType                                                                      smithy.SchemaExtensions
+	eLaunchAction                                                                         smithy.SchemaExtensions
+	eLaunchAction_actionId                                                                smithy.SchemaExtensions
+	eLaunchAction_actionCode                                                              smithy.SchemaExtensions
+	eLaunchAction_type                                                                    smithy.SchemaExtensions
+	eLaunchAction_name                                                                    smithy.SchemaExtensions
+	eLaunchAction_active                                                                  smithy.SchemaExtensions
+	eLaunchAction_order                                                                   smithy.SchemaExtensions
+	eLaunchAction_actionVersion                                                           smithy.SchemaExtensions
+	eLaunchAction_optional                                                                smithy.SchemaExtensions
+	eLaunchAction_parameters                                                              smithy.SchemaExtensions
+	eLaunchAction_description                                                             smithy.SchemaExtensions
+	eLaunchAction_category                                                                smithy.SchemaExtensions
+	e_LaunchActionCategory                                                                smithy.SchemaExtensions
+	e_LaunchActionDescription                                                             smithy.SchemaExtensions
+	e_LaunchActionId                                                                      smithy.SchemaExtensions
+	e_LaunchActionIds                                                                     smithy.SchemaExtensions
+	e_LaunchActionIds_member                                                              smithy.SchemaExtensions
+	e_LaunchActionName                                                                    smithy.SchemaExtensions
+	e_LaunchActionOrder                                                                   smithy.SchemaExtensions
+	eLaunchActionParameter                                                                smithy.SchemaExtensions
+	eLaunchActionParameter_value                                                          smithy.SchemaExtensions
+	eLaunchActionParameter_type                                                           smithy.SchemaExtensions
+	e_LaunchActionParameterName                                                           smithy.SchemaExtensions
+	e_LaunchActionParameters                                                              smithy.SchemaExtensions
+	e_LaunchActionParameters_key                                                          smithy.SchemaExtensions
+	e_LaunchActionParameters_value                                                        smithy.SchemaExtensions
+	e_LaunchActionParameterType                                                           smithy.SchemaExtensions
+	e_LaunchActionParameterValue                                                          smithy.SchemaExtensions
+	e_LaunchActionResourceId                                                              smithy.SchemaExtensions
+	eLaunchActionRun                                                                      smithy.SchemaExtensions
+	eLaunchActionRun_action                                                               smithy.SchemaExtensions
+	eLaunchActionRun_runId                                                                smithy.SchemaExtensions
+	eLaunchActionRun_status                                                               smithy.SchemaExtensions
+	eLaunchActionRun_failureReason                                                        smithy.SchemaExtensions
+	e_LaunchActionRunId                                                                   smithy.SchemaExtensions
+	e_LaunchActionRuns                                                                    smithy.SchemaExtensions
+	e_LaunchActionRuns_member                                                             smithy.SchemaExtensions
+	e_LaunchActionRunStatus                                                               smithy.SchemaExtensions
+	e_LaunchActions                                                                       smithy.SchemaExtensions
+	e_LaunchActions_member                                                                smithy.SchemaExtensions
+	eLaunchActionsRequestFilters                                                          smithy.SchemaExtensions
+	eLaunchActionsRequestFilters_actionIds                                                smithy.SchemaExtensions
+	eLaunchActionsStatus                                                                  smithy.SchemaExtensions
+	eLaunchActionsStatus_ssmAgentDiscoveryDatetime                                        smithy.SchemaExtensions
+	eLaunchActionsStatus_runs                                                             smithy.SchemaExtensions
+	e_LaunchActionType                                                                    smithy.SchemaExtensions
+	e_LaunchActionVersion                                                                 smithy.SchemaExtensions
+	eLaunchConfigurationTemplate                                                          smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_launchConfigurationTemplateID                            smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_arn                                                      smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_tags                                                     smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_launchDisposition                                        smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod                      smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_copyPrivateIp                                            smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_copyTags                                                 smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_licensing                                                smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_exportBucketArn                                          smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_postLaunchEnabled                                        smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_launchIntoSourceInstance                                 smithy.SchemaExtensions
+	eLaunchConfigurationTemplate_recoveryMode                                             smithy.SchemaExtensions
+	e_LaunchConfigurationTemplateID                                                       smithy.SchemaExtensions
+	e_LaunchConfigurationTemplateIDs                                                      smithy.SchemaExtensions
+	e_LaunchConfigurationTemplateIDs_member                                               smithy.SchemaExtensions
+	e_LaunchConfigurationTemplates                                                        smithy.SchemaExtensions
+	e_LaunchConfigurationTemplates_member                                                 smithy.SchemaExtensions
+	e_LaunchDisposition                                                                   smithy.SchemaExtensions
+	eLaunchIntoInstanceProperties                                                         smithy.SchemaExtensions
+	eLaunchIntoInstanceProperties_launchIntoEC2InstanceID                                 smithy.SchemaExtensions
+	e_LaunchStatus                                                                        smithy.SchemaExtensions
+	eLicensing                                                                            smithy.SchemaExtensions
+	eLicensing_osByol                                                                     smithy.SchemaExtensions
+	eLifeCycle                                                                            smithy.SchemaExtensions
+	eLifeCycle_addedToServiceDateTime                                                     smithy.SchemaExtensions
+	eLifeCycle_firstByteDateTime                                                          smithy.SchemaExtensions
+	eLifeCycle_elapsedReplicationDuration                                                 smithy.SchemaExtensions
+	eLifeCycle_lastSeenByServiceDateTime                                                  smithy.SchemaExtensions
+	eLifeCycle_lastLaunch                                                                 smithy.SchemaExtensions
+	eLifeCycleLastLaunch                                                                  smithy.SchemaExtensions
+	eLifeCycleLastLaunch_initiated                                                        smithy.SchemaExtensions
+	eLifeCycleLastLaunch_status                                                           smithy.SchemaExtensions
+	eLifeCycleLastLaunchInitiated                                                         smithy.SchemaExtensions
+	eLifeCycleLastLaunchInitiated_apiCallDateTime                                         smithy.SchemaExtensions
+	eLifeCycleLastLaunchInitiated_jobID                                                   smithy.SchemaExtensions
+	eLifeCycleLastLaunchInitiated_type                                                    smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsFilter                                                 smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsFilter_status                                          smithy.SchemaExtensions
+	e_MaxResultsReplicatingSourceServers                                                  smithy.SchemaExtensions
+	e_MaxResultsType                                                                      smithy.SchemaExtensions
+	eNetworkInterface                                                                     smithy.SchemaExtensions
+	eNetworkInterface_macAddress                                                          smithy.SchemaExtensions
+	eNetworkInterface_ips                                                                 smithy.SchemaExtensions
+	eNetworkInterface_isPrimary                                                           smithy.SchemaExtensions
+	e_NetworkInterfaces                                                                   smithy.SchemaExtensions
+	e_NetworkInterfaces_member                                                            smithy.SchemaExtensions
+	e_OriginEnvironment                                                                   smithy.SchemaExtensions
+	eOS                                                                                   smithy.SchemaExtensions
+	eOS_fullString                                                                        smithy.SchemaExtensions
+	e_OutpostARN                                                                          smithy.SchemaExtensions
+	e_PaginationToken                                                                     smithy.SchemaExtensions
+	eParticipatingResource                                                                smithy.SchemaExtensions
+	eParticipatingResource_participatingResourceID                                        smithy.SchemaExtensions
+	eParticipatingResource_launchStatus                                                   smithy.SchemaExtensions
+	eParticipatingResourceID                                                              smithy.SchemaExtensions
+	eParticipatingResourceID_sourceNetworkID                                              smithy.SchemaExtensions
+	e_ParticipatingResources                                                              smithy.SchemaExtensions
+	e_ParticipatingResources_member                                                       smithy.SchemaExtensions
+	eParticipatingServer                                                                  smithy.SchemaExtensions
+	eParticipatingServer_sourceServerID                                                   smithy.SchemaExtensions
+	eParticipatingServer_recoveryInstanceID                                               smithy.SchemaExtensions
+	eParticipatingServer_launchStatus                                                     smithy.SchemaExtensions
+	eParticipatingServer_launchActionsStatus                                              smithy.SchemaExtensions
+	e_ParticipatingServers                                                                smithy.SchemaExtensions
+	e_ParticipatingServers_member                                                         smithy.SchemaExtensions
+	e_PITPolicy                                                                           smithy.SchemaExtensions
+	e_PITPolicy_member                                                                    smithy.SchemaExtensions
+	ePITPolicyRule                                                                        smithy.SchemaExtensions
+	ePITPolicyRule_ruleID                                                                 smithy.SchemaExtensions
+	ePITPolicyRule_units                                                                  smithy.SchemaExtensions
+	ePITPolicyRule_interval                                                               smithy.SchemaExtensions
+	ePITPolicyRule_retentionDuration                                                      smithy.SchemaExtensions
+	ePITPolicyRule_enabled                                                                smithy.SchemaExtensions
+	e_PITPolicyRuleUnits                                                                  smithy.SchemaExtensions
+	e_PositiveInteger                                                                     smithy.SchemaExtensions
+	eProductCode                                                                          smithy.SchemaExtensions
+	eProductCode_productCodeId                                                            smithy.SchemaExtensions
+	eProductCode_productCodeMode                                                          smithy.SchemaExtensions
+	e_ProductCodeId                                                                       smithy.SchemaExtensions
+	e_ProductCodeMode                                                                     smithy.SchemaExtensions
+	e_ProductCodes                                                                        smithy.SchemaExtensions
+	e_ProductCodes_member                                                                 smithy.SchemaExtensions
+	eRecoveryInstance                                                                     smithy.SchemaExtensions
+	eRecoveryInstance_ec2InstanceID                                                       smithy.SchemaExtensions
+	eRecoveryInstance_ec2InstanceState                                                    smithy.SchemaExtensions
+	eRecoveryInstance_jobID                                                               smithy.SchemaExtensions
+	eRecoveryInstance_recoveryInstanceID                                                  smithy.SchemaExtensions
+	eRecoveryInstance_sourceServerID                                                      smithy.SchemaExtensions
+	eRecoveryInstance_arn                                                                 smithy.SchemaExtensions
+	eRecoveryInstance_tags                                                                smithy.SchemaExtensions
+	eRecoveryInstance_failback                                                            smithy.SchemaExtensions
+	eRecoveryInstance_dataReplicationInfo                                                 smithy.SchemaExtensions
+	eRecoveryInstance_recoveryInstanceProperties                                          smithy.SchemaExtensions
+	eRecoveryInstance_pointInTimeSnapshotDateTime                                         smithy.SchemaExtensions
+	eRecoveryInstance_isDrill                                                             smithy.SchemaExtensions
+	eRecoveryInstance_originEnvironment                                                   smithy.SchemaExtensions
+	eRecoveryInstance_originAvailabilityZone                                              smithy.SchemaExtensions
+	eRecoveryInstance_agentVersion                                                        smithy.SchemaExtensions
+	eRecoveryInstance_sourceOutpostArn                                                    smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationError                                                 smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationError_error                                           smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationError_rawError                                        smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo                                                  smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_lagDuration                                      smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_etaDateTime                                      smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_replicatedDisks                                  smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_dataReplicationState                             smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_dataReplicationInitiation                        smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_dataReplicationError                             smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_stagingAvailabilityZone                          smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfo_stagingOutpostArn                                smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk                                    smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName                         smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes                  smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes             smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes              smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes             smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInfoReplicatedDisks                                  smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInfoReplicatedDisks_member                           smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiation                                            smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiation_startDateTime                              smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiation_steps                                      smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiationStep                                        smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiationStep_name                                   smithy.SchemaExtensions
+	eRecoveryInstanceDataReplicationInitiationStep_status                                 smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInitiationStepName                                   smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInitiationSteps                                      smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInitiationSteps_member                               smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationInitiationStepStatus                                 smithy.SchemaExtensions
+	e_RecoveryInstanceDataReplicationState                                                smithy.SchemaExtensions
+	eRecoveryInstanceDisk                                                                 smithy.SchemaExtensions
+	eRecoveryInstanceDisk_internalDeviceName                                              smithy.SchemaExtensions
+	eRecoveryInstanceDisk_bytes                                                           smithy.SchemaExtensions
+	eRecoveryInstanceDisk_ebsVolumeID                                                     smithy.SchemaExtensions
+	e_RecoveryInstanceDisks                                                               smithy.SchemaExtensions
+	e_RecoveryInstanceDisks_member                                                        smithy.SchemaExtensions
+	eRecoveryInstanceFailback                                                             smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackClientID                                            smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackJobID                                               smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackInitiationTime                                      smithy.SchemaExtensions
+	eRecoveryInstanceFailback_state                                                       smithy.SchemaExtensions
+	eRecoveryInstanceFailback_agentLastSeenByServiceDateTime                              smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime                     smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackToOriginalServer                                    smithy.SchemaExtensions
+	eRecoveryInstanceFailback_firstByteDateTime                                           smithy.SchemaExtensions
+	eRecoveryInstanceFailback_elapsedReplicationDuration                                  smithy.SchemaExtensions
+	eRecoveryInstanceFailback_failbackLaunchType                                          smithy.SchemaExtensions
+	e_RecoveryInstanceID                                                                  smithy.SchemaExtensions
+	e_RecoveryInstanceIDs                                                                 smithy.SchemaExtensions
+	e_RecoveryInstanceIDs_member                                                          smithy.SchemaExtensions
+	eRecoveryInstanceProperties                                                           smithy.SchemaExtensions
+	eRecoveryInstanceProperties_lastUpdatedDateTime                                       smithy.SchemaExtensions
+	eRecoveryInstanceProperties_identificationHints                                       smithy.SchemaExtensions
+	eRecoveryInstanceProperties_networkInterfaces                                         smithy.SchemaExtensions
+	eRecoveryInstanceProperties_disks                                                     smithy.SchemaExtensions
+	eRecoveryInstanceProperties_cpus                                                      smithy.SchemaExtensions
+	eRecoveryInstanceProperties_ramBytes                                                  smithy.SchemaExtensions
+	eRecoveryInstanceProperties_os                                                        smithy.SchemaExtensions
+	e_RecoveryInstancesForTerminationRequest                                              smithy.SchemaExtensions
+	e_RecoveryInstancesForTerminationRequest_member                                       smithy.SchemaExtensions
+	eRecoveryLifeCycle                                                                    smithy.SchemaExtensions
+	eRecoveryLifeCycle_apiCallDateTime                                                    smithy.SchemaExtensions
+	eRecoveryLifeCycle_jobID                                                              smithy.SchemaExtensions
+	eRecoveryLifeCycle_lastRecoveryResult                                                 smithy.SchemaExtensions
+	e_RecoveryMode                                                                        smithy.SchemaExtensions
+	eRecoveryPlan                                                                         smithy.SchemaExtensions
+	eRecoveryPlan_recoveryPlanArn                                                         smithy.SchemaExtensions
+	eRecoveryPlan_name                                                                    smithy.SchemaExtensions
+	eRecoveryPlan_description                                                             smithy.SchemaExtensions
+	eRecoveryPlan_status                                                                  smithy.SchemaExtensions
+	eRecoveryPlan_createdAt                                                               smithy.SchemaExtensions
+	eRecoveryPlan_updatedAt                                                               smithy.SchemaExtensions
+	eRecoveryPlan_tags                                                                    smithy.SchemaExtensions
+	e_RecoveryPlanDescription                                                             smithy.SchemaExtensions
+	eRecoveryPlanExecution                                                                smithy.SchemaExtensions
+	eRecoveryPlanExecution_recoveryPlanExecutionArn                                       smithy.SchemaExtensions
+	eRecoveryPlanExecution_recoveryPlanArn                                                smithy.SchemaExtensions
+	eRecoveryPlanExecution_mode                                                           smithy.SchemaExtensions
+	eRecoveryPlanExecution_status                                                         smithy.SchemaExtensions
+	eRecoveryPlanExecution_startedAt                                                      smithy.SchemaExtensions
+	eRecoveryPlanExecution_completedAt                                                    smithy.SchemaExtensions
+	eRecoveryPlanExecution_errorDetail                                                    smithy.SchemaExtensions
+	eRecoveryPlanExecution_tags                                                           smithy.SchemaExtensions
+	e_RecoveryPlanExecutionMode                                                           smithy.SchemaExtensions
+	eRecoveryPlanExecutionServer                                                          smithy.SchemaExtensions
+	eRecoveryPlanExecutionServer_serverArn                                                smithy.SchemaExtensions
+	eRecoveryPlanExecutionServer_impactLevel                                              smithy.SchemaExtensions
+	eRecoveryPlanExecutionServer_jobID                                                    smithy.SchemaExtensions
+	e_RecoveryPlanExecutionServers                                                        smithy.SchemaExtensions
+	e_RecoveryPlanExecutionServers_member                                                 smithy.SchemaExtensions
+	eRecoveryPlanExecutionSourceServer                                                    smithy.SchemaExtensions
+	eRecoveryPlanExecutionSourceServer_sourceServerID                                     smithy.SchemaExtensions
+	eRecoveryPlanExecutionSourceServer_recoverySnapshotID                                 smithy.SchemaExtensions
+	e_RecoveryPlanExecutionSourceServerList                                               smithy.SchemaExtensions
+	e_RecoveryPlanExecutionSourceServerList_member                                        smithy.SchemaExtensions
+	e_RecoveryPlanExecutionStatus                                                         smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep                                                            smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_recoveryPlanExecutionStepArn                               smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_stepIndex                                                  smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_status                                                     smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_stepName                                                   smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_configuration                                              smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_errorDetail                                                smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_attempt                                                    smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_createdAt                                                  smithy.SchemaExtensions
+	eRecoveryPlanExecutionStep_updatedAt                                                  smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepConfiguration                                               smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration              smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepConfiguration_waitStepConfiguration                         smithy.SchemaExtensions
+	e_RecoveryPlanExecutionStepStatus                                                     smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary                                                     smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn                        smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_stepName                                            smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_stepIndex                                           smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_status                                              smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_configuration                                       smithy.SchemaExtensions
+	eRecoveryPlanExecutionStepSummary_errorDetail                                         smithy.SchemaExtensions
+	e_RecoveryPlanExecutionStepSummaryList                                                smithy.SchemaExtensions
+	e_RecoveryPlanExecutionStepSummaryList_member                                         smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary                                                         smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_recoveryPlanExecutionArn                                smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_recoveryPlanArn                                         smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_mode                                                    smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_status                                                  smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_startedAt                                               smithy.SchemaExtensions
+	eRecoveryPlanExecutionSummary_errorDetail                                             smithy.SchemaExtensions
+	e_RecoveryPlanExecutionSummaryList                                                    smithy.SchemaExtensions
+	e_RecoveryPlanExecutionSummaryList_member                                             smithy.SchemaExtensions
+	e_RecoveryPlanName                                                                    smithy.SchemaExtensions
+	eRecoveryPlanServer                                                                   smithy.SchemaExtensions
+	eRecoveryPlanServer_serverArn                                                         smithy.SchemaExtensions
+	eRecoveryPlanServer_impactLevel                                                       smithy.SchemaExtensions
+	e_RecoveryPlanServerImpactLevel                                                       smithy.SchemaExtensions
+	e_RecoveryPlanServers                                                                 smithy.SchemaExtensions
+	e_RecoveryPlanServers_member                                                          smithy.SchemaExtensions
+	e_RecoveryPlanStatus                                                                  smithy.SchemaExtensions
+	eRecoveryPlanStep                                                                     smithy.SchemaExtensions
+	eRecoveryPlanStep_recoveryPlanStepArn                                                 smithy.SchemaExtensions
+	eRecoveryPlanStep_stepOrder                                                           smithy.SchemaExtensions
+	eRecoveryPlanStep_stepName                                                            smithy.SchemaExtensions
+	eRecoveryPlanStep_configuration                                                       smithy.SchemaExtensions
+	eRecoveryPlanStep_createdAt                                                           smithy.SchemaExtensions
+	eRecoveryPlanStep_updatedAt                                                           smithy.SchemaExtensions
+	e_RecoveryPlanStepArnList                                                             smithy.SchemaExtensions
+	e_RecoveryPlanStepArnList_member                                                      smithy.SchemaExtensions
+	eRecoveryPlanStepConfiguration                                                        smithy.SchemaExtensions
+	eRecoveryPlanStepConfiguration_serverStepConfiguration                                smithy.SchemaExtensions
+	eRecoveryPlanStepConfiguration_waitStepConfiguration                                  smithy.SchemaExtensions
+	e_RecoveryPlanStepList                                                                smithy.SchemaExtensions
+	e_RecoveryPlanStepList_member                                                         smithy.SchemaExtensions
+	e_RecoveryPlanStepName                                                                smithy.SchemaExtensions
+	e_RecoveryPlanStepOrder                                                               smithy.SchemaExtensions
+	eRecoveryPlanSummary                                                                  smithy.SchemaExtensions
+	eRecoveryPlanSummary_recoveryPlanArn                                                  smithy.SchemaExtensions
+	eRecoveryPlanSummary_name                                                             smithy.SchemaExtensions
+	eRecoveryPlanSummary_status                                                           smithy.SchemaExtensions
+	eRecoveryPlanSummary_createdAt                                                        smithy.SchemaExtensions
+	eRecoveryPlanSummary_updatedAt                                                        smithy.SchemaExtensions
+	e_RecoveryPlanSummaryList                                                             smithy.SchemaExtensions
+	e_RecoveryPlanSummaryList_member                                                      smithy.SchemaExtensions
+	e_RecoveryResult                                                                      smithy.SchemaExtensions
+	eRecoverySnapshot                                                                     smithy.SchemaExtensions
+	eRecoverySnapshot_snapshotID                                                          smithy.SchemaExtensions
+	eRecoverySnapshot_sourceServerID                                                      smithy.SchemaExtensions
+	eRecoverySnapshot_expectedTimestamp                                                   smithy.SchemaExtensions
+	eRecoverySnapshot_timestamp                                                           smithy.SchemaExtensions
+	eRecoverySnapshot_ebsSnapshots                                                        smithy.SchemaExtensions
+	e_RecoverySnapshotID                                                                  smithy.SchemaExtensions
+	e_RecoverySnapshotsList                                                               smithy.SchemaExtensions
+	e_RecoverySnapshotsList_member                                                        smithy.SchemaExtensions
+	e_RecoverySnapshotsOrder                                                              smithy.SchemaExtensions
+	e_ReplicationConfigurationDataPlaneRouting                                            smithy.SchemaExtensions
+	e_ReplicationConfigurationDefaultLargeStagingDiskType                                 smithy.SchemaExtensions
+	e_ReplicationConfigurationEbsEncryption                                               smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk                                               smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_deviceName                                    smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_isBootDisk                                    smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_stagingDiskType                               smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_iops                                          smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_throughput                                    smithy.SchemaExtensions
+	eReplicationConfigurationReplicatedDisk_optimizedStagingDiskType                      smithy.SchemaExtensions
+	e_ReplicationConfigurationReplicatedDisks                                             smithy.SchemaExtensions
+	e_ReplicationConfigurationReplicatedDisks_member                                      smithy.SchemaExtensions
+	e_ReplicationConfigurationReplicatedDiskStagingDiskType                               smithy.SchemaExtensions
+	eReplicationConfigurationTemplate                                                     smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_replicationConfigurationTemplateID                  smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_arn                                                 smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_stagingAreaSubnetId                                 smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_associateDefaultSecurityGroup                       smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs                 smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_replicationServerInstanceType                       smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_useDedicatedReplicationServer                       smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_defaultLargeStagingDiskType                         smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_ebsEncryption                                       smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_ebsEncryptionKeyArn                                 smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_bandwidthThrottling                                 smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_dataPlaneRouting                                    smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_createPublicIP                                      smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_stagingAreaTags                                     smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_tags                                                smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_pitPolicy                                           smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_autoReplicateNewDisks                               smithy.SchemaExtensions
+	eReplicationConfigurationTemplate_internetProtocol                                    smithy.SchemaExtensions
+	e_ReplicationConfigurationTemplateID                                                  smithy.SchemaExtensions
+	e_ReplicationConfigurationTemplateIDs                                                 smithy.SchemaExtensions
+	e_ReplicationConfigurationTemplateIDs_member                                          smithy.SchemaExtensions
+	e_ReplicationConfigurationTemplates                                                   smithy.SchemaExtensions
+	e_ReplicationConfigurationTemplates_member                                            smithy.SchemaExtensions
+	e_ReplicationDirection                                                                smithy.SchemaExtensions
+	e_ReplicationServersSecurityGroupsIDs                                                 smithy.SchemaExtensions
+	e_ReplicationServersSecurityGroupsIDs_member                                          smithy.SchemaExtensions
+	e_ReplicationStatus                                                                   smithy.SchemaExtensions
+	eResourceNotFoundException                                                            smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                    smithy.SchemaExtensions
+	eResourceNotFoundException_code                                                       smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                                               smithy.SchemaExtensions
+	e_SecurityGroupID                                                                     smithy.SchemaExtensions
+	e_SensitiveBoundedString                                                              smithy.SchemaExtensions
+	eServerStepConfiguration                                                              smithy.SchemaExtensions
+	eServerStepConfiguration_servers                                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                        smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException_code                                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                                             smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                                              smithy.SchemaExtensions
+	e_SmallBoundedString                                                                  smithy.SchemaExtensions
+	eSourceCloudProperties                                                                smithy.SchemaExtensions
+	eSourceCloudProperties_originAccountID                                                smithy.SchemaExtensions
+	eSourceCloudProperties_originRegion                                                   smithy.SchemaExtensions
+	eSourceCloudProperties_originAvailabilityZone                                         smithy.SchemaExtensions
+	eSourceCloudProperties_sourceOutpostArn                                               smithy.SchemaExtensions
+	eSourceNetwork                                                                        smithy.SchemaExtensions
+	eSourceNetwork_sourceNetworkID                                                        smithy.SchemaExtensions
+	eSourceNetwork_sourceVpcID                                                            smithy.SchemaExtensions
+	eSourceNetwork_arn                                                                    smithy.SchemaExtensions
+	eSourceNetwork_tags                                                                   smithy.SchemaExtensions
+	eSourceNetwork_replicationStatus                                                      smithy.SchemaExtensions
+	eSourceNetwork_replicationStatusDetails                                               smithy.SchemaExtensions
+	eSourceNetwork_cfnStackName                                                           smithy.SchemaExtensions
+	eSourceNetwork_sourceRegion                                                           smithy.SchemaExtensions
+	eSourceNetwork_sourceAccountID                                                        smithy.SchemaExtensions
+	eSourceNetwork_lastRecovery                                                           smithy.SchemaExtensions
+	eSourceNetwork_launchedVpcID                                                          smithy.SchemaExtensions
+	eSourceNetworkData                                                                    smithy.SchemaExtensions
+	eSourceNetworkData_sourceNetworkID                                                    smithy.SchemaExtensions
+	eSourceNetworkData_sourceVpc                                                          smithy.SchemaExtensions
+	eSourceNetworkData_targetVpc                                                          smithy.SchemaExtensions
+	eSourceNetworkData_stackName                                                          smithy.SchemaExtensions
+	e_SourceNetworkID                                                                     smithy.SchemaExtensions
+	e_SourceNetworksList                                                                  smithy.SchemaExtensions
+	e_SourceNetworksList_member                                                           smithy.SchemaExtensions
+	eSourceProperties                                                                     smithy.SchemaExtensions
+	eSourceProperties_lastUpdatedDateTime                                                 smithy.SchemaExtensions
+	eSourceProperties_recommendedInstanceType                                             smithy.SchemaExtensions
+	eSourceProperties_identificationHints                                                 smithy.SchemaExtensions
+	eSourceProperties_networkInterfaces                                                   smithy.SchemaExtensions
+	eSourceProperties_disks                                                               smithy.SchemaExtensions
+	eSourceProperties_cpus                                                                smithy.SchemaExtensions
+	eSourceProperties_ramBytes                                                            smithy.SchemaExtensions
+	eSourceProperties_os                                                                  smithy.SchemaExtensions
+	eSourceProperties_supportsNitroInstances                                              smithy.SchemaExtensions
+	eSourceProperties_architecture                                                        smithy.SchemaExtensions
+	eSourceServer                                                                         smithy.SchemaExtensions
+	eSourceServer_sourceServerID                                                          smithy.SchemaExtensions
+	eSourceServer_arn                                                                     smithy.SchemaExtensions
+	eSourceServer_tags                                                                    smithy.SchemaExtensions
+	eSourceServer_recoveryInstanceId                                                      smithy.SchemaExtensions
+	eSourceServer_lastLaunchResult                                                        smithy.SchemaExtensions
+	eSourceServer_dataReplicationInfo                                                     smithy.SchemaExtensions
+	eSourceServer_lifeCycle                                                               smithy.SchemaExtensions
+	eSourceServer_sourceProperties                                                        smithy.SchemaExtensions
+	eSourceServer_stagingArea                                                             smithy.SchemaExtensions
+	eSourceServer_sourceCloudProperties                                                   smithy.SchemaExtensions
+	eSourceServer_replicationDirection                                                    smithy.SchemaExtensions
+	eSourceServer_reversedDirectionSourceServerArn                                        smithy.SchemaExtensions
+	eSourceServer_sourceNetworkID                                                         smithy.SchemaExtensions
+	eSourceServer_agentVersion                                                            smithy.SchemaExtensions
+	e_SourceServerArchitecture                                                            smithy.SchemaExtensions
+	e_SourceServerARN                                                                     smithy.SchemaExtensions
+	e_SourceServerID                                                                      smithy.SchemaExtensions
+	e_SourceServerIDs                                                                     smithy.SchemaExtensions
+	e_SourceServerIDs_member                                                              smithy.SchemaExtensions
+	e_SourceServersList                                                                   smithy.SchemaExtensions
+	e_SourceServersList_member                                                            smithy.SchemaExtensions
+	e_SsmDocumentName                                                                     smithy.SchemaExtensions
+	eStagingArea                                                                          smithy.SchemaExtensions
+	eStagingArea_status                                                                   smithy.SchemaExtensions
+	eStagingArea_stagingAccountID                                                         smithy.SchemaExtensions
+	eStagingArea_stagingSourceServerArn                                                   smithy.SchemaExtensions
+	eStagingArea_errorMessage                                                             smithy.SchemaExtensions
+	eStagingSourceServer                                                                  smithy.SchemaExtensions
+	eStagingSourceServer_hostname                                                         smithy.SchemaExtensions
+	eStagingSourceServer_arn                                                              smithy.SchemaExtensions
+	eStagingSourceServer_tags                                                             smithy.SchemaExtensions
+	e_StagingSourceServersList                                                            smithy.SchemaExtensions
+	e_StagingSourceServersList_member                                                     smithy.SchemaExtensions
+	e_StartFailbackRequestRecoveryInstanceIDs                                             smithy.SchemaExtensions
+	e_StartFailbackRequestRecoveryInstanceIDs_member                                      smithy.SchemaExtensions
+	eStartRecoveryRequestSourceServer                                                     smithy.SchemaExtensions
+	eStartRecoveryRequestSourceServer_sourceServerID                                      smithy.SchemaExtensions
+	eStartRecoveryRequestSourceServer_recoverySnapshotID                                  smithy.SchemaExtensions
+	e_StartRecoveryRequestSourceServers                                                   smithy.SchemaExtensions
+	e_StartRecoveryRequestSourceServers_member                                            smithy.SchemaExtensions
+	e_StartSourceNetworkRecoveryRequestNetworkEntries                                     smithy.SchemaExtensions
+	e_StartSourceNetworkRecoveryRequestNetworkEntries_member                              smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequestNetworkEntry                                        smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID                        smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName                           smithy.SchemaExtensions
+	e_StrictDRSARN                                                                        smithy.SchemaExtensions
+	e_StrictlyPositiveInteger                                                             smithy.SchemaExtensions
+	e_SubnetID                                                                            smithy.SchemaExtensions
+	e_TagKey                                                                              smithy.SchemaExtensions
+	e_TagKeys                                                                             smithy.SchemaExtensions
+	e_TagKeys_member                                                                      smithy.SchemaExtensions
+	e_TagsMap                                                                             smithy.SchemaExtensions
+	e_TagsMap_key                                                                         smithy.SchemaExtensions
+	e_TagsMap_value                                                                       smithy.SchemaExtensions
+	e_TagValue                                                                            smithy.SchemaExtensions
+	e_TargetInstanceTypeRightSizingMethod                                                 smithy.SchemaExtensions
+	eThrottlingException                                                                  smithy.SchemaExtensions
+	eThrottlingException_message                                                          smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                                      smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                                        smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                                                smithy.SchemaExtensions
+	eUninitializedAccountException                                                        smithy.SchemaExtensions
+	eUninitializedAccountException_message                                                smithy.SchemaExtensions
+	eUninitializedAccountException_code                                                   smithy.SchemaExtensions
+	eValidationException                                                                  smithy.SchemaExtensions
+	eValidationException_message                                                          smithy.SchemaExtensions
+	eValidationException_code                                                             smithy.SchemaExtensions
+	eValidationException_reason                                                           smithy.SchemaExtensions
+	eValidationException_fieldList                                                        smithy.SchemaExtensions
+	eValidationExceptionField                                                             smithy.SchemaExtensions
+	eValidationExceptionField_name                                                        smithy.SchemaExtensions
+	eValidationExceptionField_message                                                     smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                        smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                 smithy.SchemaExtensions
+	e_ValidationExceptionReason                                                           smithy.SchemaExtensions
+	e_VolumeStatus                                                                        smithy.SchemaExtensions
+	e_VolumeToConversionMap                                                               smithy.SchemaExtensions
+	e_VolumeToConversionMap_key                                                           smithy.SchemaExtensions
+	e_VolumeToConversionMap_value                                                         smithy.SchemaExtensions
+	e_VolumeToProductCodes                                                                smithy.SchemaExtensions
+	e_VolumeToProductCodes_key                                                            smithy.SchemaExtensions
+	e_VolumeToProductCodes_value                                                          smithy.SchemaExtensions
+	e_VolumeToSizeMap                                                                     smithy.SchemaExtensions
+	e_VolumeToSizeMap_key                                                                 smithy.SchemaExtensions
+	e_VolumeToSizeMap_value                                                               smithy.SchemaExtensions
+	e_VpcID                                                                               smithy.SchemaExtensions
+	e_WaitDurationMinutes                                                                 smithy.SchemaExtensions
+	eWaitStepConfiguration                                                                smithy.SchemaExtensions
+	eWaitStepConfiguration_waitDurationMinutes                                            smithy.SchemaExtensions
+	eAssociateSourceNetworkStackRequest                                                   smithy.SchemaExtensions
+	eAssociateSourceNetworkStackRequest_sourceNetworkID                                   smithy.SchemaExtensions
+	eAssociateSourceNetworkStackRequest_cfnStackName                                      smithy.SchemaExtensions
+	eAssociateSourceNetworkStackResponse                                                  smithy.SchemaExtensions
+	eAssociateSourceNetworkStackResponse_job                                              smithy.SchemaExtensions
+	eCancelRecoveryPlanExecutionRequest                                                   smithy.SchemaExtensions
+	eCancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn                          smithy.SchemaExtensions
+	eCancelRecoveryPlanExecutionResponse                                                  smithy.SchemaExtensions
+	eCancelRecoveryPlanExecutionResponse_recoveryPlanExecution                            smithy.SchemaExtensions
+	eCreateExtendedSourceServerRequest                                                    smithy.SchemaExtensions
+	eCreateExtendedSourceServerRequest_sourceServerArn                                    smithy.SchemaExtensions
+	eCreateExtendedSourceServerRequest_tags                                               smithy.SchemaExtensions
+	eCreateExtendedSourceServerResponse                                                   smithy.SchemaExtensions
+	eCreateExtendedSourceServerResponse_sourceServer                                      smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest                                             smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_tags                                        smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_launchDisposition                           smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod         smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_copyPrivateIp                               smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_copyTags                                    smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_licensing                                   smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_exportBucketArn                             smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_postLaunchEnabled                           smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance                    smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateRequest_recoveryMode                                smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateResponse                                            smithy.SchemaExtensions
+	eCreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate                smithy.SchemaExtensions
+	eCreateRecoveryPlanRequest                                                            smithy.SchemaExtensions
+	eCreateRecoveryPlanRequest_name                                                       smithy.SchemaExtensions
+	eCreateRecoveryPlanRequest_description                                                smithy.SchemaExtensions
+	eCreateRecoveryPlanRequest_clientToken                                                smithy.SchemaExtensions
+	eCreateRecoveryPlanRequest_tags                                                       smithy.SchemaExtensions
+	eCreateRecoveryPlanResponse                                                           smithy.SchemaExtensions
+	eCreateRecoveryPlanResponse_recoveryPlan                                              smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest                                                        smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest_recoveryPlanArn                                        smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest_stepName                                               smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest_stepOrder                                              smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest_configuration                                          smithy.SchemaExtensions
+	eCreateRecoveryPlanStepRequest_clientToken                                            smithy.SchemaExtensions
+	eCreateRecoveryPlanStepResponse                                                       smithy.SchemaExtensions
+	eCreateRecoveryPlanStepResponse_recoveryPlanStep                                      smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest                                        smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId                    smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup          smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs    smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_replicationServerInstanceType          smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer          smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType            smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_ebsEncryption                          smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn                    smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_bandwidthThrottling                    smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_dataPlaneRouting                       smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_createPublicIP                         smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_stagingAreaTags                        smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_pitPolicy                              smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_tags                                   smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks                  smithy.SchemaExtensions
+	eCreateReplicationConfigurationTemplateRequest_internetProtocol                       smithy.SchemaExtensions
+	eCreateSourceNetworkRequest                                                           smithy.SchemaExtensions
+	eCreateSourceNetworkRequest_vpcID                                                     smithy.SchemaExtensions
+	eCreateSourceNetworkRequest_originAccountID                                           smithy.SchemaExtensions
+	eCreateSourceNetworkRequest_originRegion                                              smithy.SchemaExtensions
+	eCreateSourceNetworkRequest_tags                                                      smithy.SchemaExtensions
+	eCreateSourceNetworkResponse                                                          smithy.SchemaExtensions
+	eCreateSourceNetworkResponse_sourceNetworkID                                          smithy.SchemaExtensions
+	eDeleteJobRequest                                                                     smithy.SchemaExtensions
+	eDeleteJobRequest_jobID                                                               smithy.SchemaExtensions
+	eDeleteJobResponse                                                                    smithy.SchemaExtensions
+	eDeleteLaunchActionRequest                                                            smithy.SchemaExtensions
+	eDeleteLaunchActionRequest_resourceId                                                 smithy.SchemaExtensions
+	eDeleteLaunchActionRequest_actionId                                                   smithy.SchemaExtensions
+	eDeleteLaunchActionResponse                                                           smithy.SchemaExtensions
+	eDeleteLaunchConfigurationTemplateRequest                                             smithy.SchemaExtensions
+	eDeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID               smithy.SchemaExtensions
+	eDeleteLaunchConfigurationTemplateResponse                                            smithy.SchemaExtensions
+	eDeleteRecoveryInstanceRequest                                                        smithy.SchemaExtensions
+	eDeleteRecoveryInstanceRequest_recoveryInstanceID                                     smithy.SchemaExtensions
+	eDeleteRecoveryPlanExecutionRequest                                                   smithy.SchemaExtensions
+	eDeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn                          smithy.SchemaExtensions
+	eDeleteRecoveryPlanExecutionResponse                                                  smithy.SchemaExtensions
+	eDeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn                         smithy.SchemaExtensions
+	eDeleteRecoveryPlanRequest                                                            smithy.SchemaExtensions
+	eDeleteRecoveryPlanRequest_recoveryPlanArn                                            smithy.SchemaExtensions
+	eDeleteRecoveryPlanResponse                                                           smithy.SchemaExtensions
+	eDeleteRecoveryPlanResponse_recoveryPlanArn                                           smithy.SchemaExtensions
+	eDeleteRecoveryPlanStepRequest                                                        smithy.SchemaExtensions
+	eDeleteRecoveryPlanStepRequest_recoveryPlanStepArn                                    smithy.SchemaExtensions
+	eDeleteRecoveryPlanStepResponse                                                       smithy.SchemaExtensions
+	eDeleteRecoveryPlanStepResponse_recoveryPlanStepArn                                   smithy.SchemaExtensions
+	eDeleteReplicationConfigurationTemplateRequest                                        smithy.SchemaExtensions
+	eDeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID     smithy.SchemaExtensions
+	eDeleteReplicationConfigurationTemplateResponse                                       smithy.SchemaExtensions
+	eDeleteSourceNetworkRequest                                                           smithy.SchemaExtensions
+	eDeleteSourceNetworkRequest_sourceNetworkID                                           smithy.SchemaExtensions
+	eDeleteSourceNetworkResponse                                                          smithy.SchemaExtensions
+	eDeleteSourceServerRequest                                                            smithy.SchemaExtensions
+	eDeleteSourceServerRequest_sourceServerID                                             smithy.SchemaExtensions
+	eDeleteSourceServerResponse                                                           smithy.SchemaExtensions
+	eDescribeJobLogItemsRequest                                                           smithy.SchemaExtensions
+	eDescribeJobLogItemsRequest_jobID                                                     smithy.SchemaExtensions
+	eDescribeJobLogItemsRequest_maxResults                                                smithy.SchemaExtensions
+	eDescribeJobLogItemsRequest_nextToken                                                 smithy.SchemaExtensions
+	eDescribeJobLogItemsResponse                                                          smithy.SchemaExtensions
+	eDescribeJobLogItemsResponse_items                                                    smithy.SchemaExtensions
+	eDescribeJobLogItemsResponse_nextToken                                                smithy.SchemaExtensions
+	eDescribeJobsRequest                                                                  smithy.SchemaExtensions
+	eDescribeJobsRequest_filters                                                          smithy.SchemaExtensions
+	eDescribeJobsRequest_maxResults                                                       smithy.SchemaExtensions
+	eDescribeJobsRequest_nextToken                                                        smithy.SchemaExtensions
+	eDescribeJobsResponse                                                                 smithy.SchemaExtensions
+	eDescribeJobsResponse_items                                                           smithy.SchemaExtensions
+	eDescribeJobsResponse_nextToken                                                       smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesRequest                                          smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs           smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesRequest_maxResults                               smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesRequest_nextToken                                smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesResponse                                         smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesResponse_items                                   smithy.SchemaExtensions
+	eDescribeLaunchConfigurationTemplatesResponse_nextToken                               smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequest                                                     smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequest_filters                                             smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequest_maxResults                                          smithy.SchemaExtensions
+	eDescribeRecoveryInstancesRequest_nextToken                                           smithy.SchemaExtensions
+	eDescribeRecoveryInstancesResponse                                                    smithy.SchemaExtensions
+	eDescribeRecoveryInstancesResponse_nextToken                                          smithy.SchemaExtensions
+	eDescribeRecoveryInstancesResponse_items                                              smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest                                                     smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest_sourceServerID                                      smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest_filters                                             smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest_order                                               smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest_maxResults                                          smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsRequest_nextToken                                           smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsResponse                                                    smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsResponse_items                                              smithy.SchemaExtensions
+	eDescribeRecoverySnapshotsResponse_nextToken                                          smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesRequest                                     smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesRequest_maxResults                          smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesRequest_nextToken                           smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesResponse                                    smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesResponse_items                              smithy.SchemaExtensions
+	eDescribeReplicationConfigurationTemplatesResponse_nextToken                          smithy.SchemaExtensions
+	eDescribeSourceNetworksRequest                                                        smithy.SchemaExtensions
+	eDescribeSourceNetworksRequest_filters                                                smithy.SchemaExtensions
+	eDescribeSourceNetworksRequest_maxResults                                             smithy.SchemaExtensions
+	eDescribeSourceNetworksRequest_nextToken                                              smithy.SchemaExtensions
+	eDescribeSourceNetworksResponse                                                       smithy.SchemaExtensions
+	eDescribeSourceNetworksResponse_items                                                 smithy.SchemaExtensions
+	eDescribeSourceNetworksResponse_nextToken                                             smithy.SchemaExtensions
+	eDescribeSourceServersRequest                                                         smithy.SchemaExtensions
+	eDescribeSourceServersRequest_filters                                                 smithy.SchemaExtensions
+	eDescribeSourceServersRequest_maxResults                                              smithy.SchemaExtensions
+	eDescribeSourceServersRequest_nextToken                                               smithy.SchemaExtensions
+	eDescribeSourceServersResponse                                                        smithy.SchemaExtensions
+	eDescribeSourceServersResponse_items                                                  smithy.SchemaExtensions
+	eDescribeSourceServersResponse_nextToken                                              smithy.SchemaExtensions
+	eDisconnectRecoveryInstanceRequest                                                    smithy.SchemaExtensions
+	eDisconnectRecoveryInstanceRequest_recoveryInstanceID                                 smithy.SchemaExtensions
+	eDisconnectSourceServerRequest                                                        smithy.SchemaExtensions
+	eDisconnectSourceServerRequest_sourceServerID                                         smithy.SchemaExtensions
+	eExportSourceNetworkCfnTemplateRequest                                                smithy.SchemaExtensions
+	eExportSourceNetworkCfnTemplateRequest_sourceNetworkID                                smithy.SchemaExtensions
+	eExportSourceNetworkCfnTemplateResponse                                               smithy.SchemaExtensions
+	eExportSourceNetworkCfnTemplateResponse_s3DestinationUrl                              smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationRequest                                           smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationRequest_recoveryInstanceID                        smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse                                          smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse_recoveryInstanceID                       smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse_name                                     smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse_bandwidthThrottling                      smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse_usePrivateIP                             smithy.SchemaExtensions
+	eGetFailbackReplicationConfigurationResponse_internetProtocol                         smithy.SchemaExtensions
+	eGetLaunchConfigurationRequest                                                        smithy.SchemaExtensions
+	eGetLaunchConfigurationRequest_sourceServerID                                         smithy.SchemaExtensions
+	eLaunchConfiguration                                                                  smithy.SchemaExtensions
+	eLaunchConfiguration_sourceServerID                                                   smithy.SchemaExtensions
+	eLaunchConfiguration_name                                                             smithy.SchemaExtensions
+	eLaunchConfiguration_ec2LaunchTemplateID                                              smithy.SchemaExtensions
+	eLaunchConfiguration_launchDisposition                                                smithy.SchemaExtensions
+	eLaunchConfiguration_targetInstanceTypeRightSizingMethod                              smithy.SchemaExtensions
+	eLaunchConfiguration_copyPrivateIp                                                    smithy.SchemaExtensions
+	eLaunchConfiguration_copyTags                                                         smithy.SchemaExtensions
+	eLaunchConfiguration_licensing                                                        smithy.SchemaExtensions
+	eLaunchConfiguration_postLaunchEnabled                                                smithy.SchemaExtensions
+	eLaunchConfiguration_launchIntoInstanceProperties                                     smithy.SchemaExtensions
+	eLaunchConfiguration_recoveryMode                                                     smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionRequest                                                      smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn                             smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionResponse                                                     smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionResponse_recoveryPlanExecution                               smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionStepRequest                                                  smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn                     smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionStepResponse                                                 smithy.SchemaExtensions
+	eGetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep                       smithy.SchemaExtensions
+	eGetRecoveryPlanRequest                                                               smithy.SchemaExtensions
+	eGetRecoveryPlanRequest_recoveryPlanArn                                               smithy.SchemaExtensions
+	eGetRecoveryPlanResponse                                                              smithy.SchemaExtensions
+	eGetRecoveryPlanResponse_recoveryPlan                                                 smithy.SchemaExtensions
+	eGetRecoveryPlanStepRequest                                                           smithy.SchemaExtensions
+	eGetRecoveryPlanStepRequest_recoveryPlanStepArn                                       smithy.SchemaExtensions
+	eGetRecoveryPlanStepResponse                                                          smithy.SchemaExtensions
+	eGetRecoveryPlanStepResponse_recoveryPlanStep                                         smithy.SchemaExtensions
+	eGetReplicationConfigurationRequest                                                   smithy.SchemaExtensions
+	eGetReplicationConfigurationRequest_sourceServerID                                    smithy.SchemaExtensions
+	eReplicationConfiguration                                                             smithy.SchemaExtensions
+	eReplicationConfiguration_sourceServerID                                              smithy.SchemaExtensions
+	eReplicationConfiguration_name                                                        smithy.SchemaExtensions
+	eReplicationConfiguration_stagingAreaSubnetId                                         smithy.SchemaExtensions
+	eReplicationConfiguration_associateDefaultSecurityGroup                               smithy.SchemaExtensions
+	eReplicationConfiguration_replicationServersSecurityGroupsIDs                         smithy.SchemaExtensions
+	eReplicationConfiguration_replicationServerInstanceType                               smithy.SchemaExtensions
+	eReplicationConfiguration_useDedicatedReplicationServer                               smithy.SchemaExtensions
+	eReplicationConfiguration_defaultLargeStagingDiskType                                 smithy.SchemaExtensions
+	eReplicationConfiguration_replicatedDisks                                             smithy.SchemaExtensions
+	eReplicationConfiguration_ebsEncryption                                               smithy.SchemaExtensions
+	eReplicationConfiguration_ebsEncryptionKeyArn                                         smithy.SchemaExtensions
+	eReplicationConfiguration_bandwidthThrottling                                         smithy.SchemaExtensions
+	eReplicationConfiguration_dataPlaneRouting                                            smithy.SchemaExtensions
+	eReplicationConfiguration_createPublicIP                                              smithy.SchemaExtensions
+	eReplicationConfiguration_stagingAreaTags                                             smithy.SchemaExtensions
+	eReplicationConfiguration_pitPolicy                                                   smithy.SchemaExtensions
+	eReplicationConfiguration_autoReplicateNewDisks                                       smithy.SchemaExtensions
+	eReplicationConfiguration_internetProtocol                                            smithy.SchemaExtensions
+	eInitializeServiceRequest                                                             smithy.SchemaExtensions
+	eInitializeServiceResponse                                                            smithy.SchemaExtensions
+	eListExtensibleSourceServersRequest                                                   smithy.SchemaExtensions
+	eListExtensibleSourceServersRequest_stagingAccountID                                  smithy.SchemaExtensions
+	eListExtensibleSourceServersRequest_maxResults                                        smithy.SchemaExtensions
+	eListExtensibleSourceServersRequest_nextToken                                         smithy.SchemaExtensions
+	eListExtensibleSourceServersResponse                                                  smithy.SchemaExtensions
+	eListExtensibleSourceServersResponse_items                                            smithy.SchemaExtensions
+	eListExtensibleSourceServersResponse_nextToken                                        smithy.SchemaExtensions
+	eListLaunchActionsRequest                                                             smithy.SchemaExtensions
+	eListLaunchActionsRequest_resourceId                                                  smithy.SchemaExtensions
+	eListLaunchActionsRequest_filters                                                     smithy.SchemaExtensions
+	eListLaunchActionsRequest_maxResults                                                  smithy.SchemaExtensions
+	eListLaunchActionsRequest_nextToken                                                   smithy.SchemaExtensions
+	eListLaunchActionsResponse                                                            smithy.SchemaExtensions
+	eListLaunchActionsResponse_items                                                      smithy.SchemaExtensions
+	eListLaunchActionsResponse_nextToken                                                  smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsRequest                                                    smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsRequest_recoveryPlanArn                                    smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsRequest_status                                             smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsRequest_maxResults                                         smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsRequest_nextToken                                          smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsResponse                                                   smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsResponse_recoveryPlanExecutions                            smithy.SchemaExtensions
+	eListRecoveryPlanExecutionsResponse_nextToken                                         smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsRequest                                                smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn                       smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsRequest_filter                                         smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsRequest_maxResults                                     smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsRequest_nextToken                                      smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsResponse                                               smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps                    smithy.SchemaExtensions
+	eListRecoveryPlanExecutionStepsResponse_nextToken                                     smithy.SchemaExtensions
+	eListRecoveryPlansRequest                                                             smithy.SchemaExtensions
+	eListRecoveryPlansRequest_maxResults                                                  smithy.SchemaExtensions
+	eListRecoveryPlansRequest_nextToken                                                   smithy.SchemaExtensions
+	eListRecoveryPlansResponse                                                            smithy.SchemaExtensions
+	eListRecoveryPlansResponse_recoveryPlans                                              smithy.SchemaExtensions
+	eListRecoveryPlansResponse_nextToken                                                  smithy.SchemaExtensions
+	eListRecoveryPlanStepsRequest                                                         smithy.SchemaExtensions
+	eListRecoveryPlanStepsRequest_recoveryPlanArn                                         smithy.SchemaExtensions
+	eListRecoveryPlanStepsRequest_maxResults                                              smithy.SchemaExtensions
+	eListRecoveryPlanStepsRequest_nextToken                                               smithy.SchemaExtensions
+	eListRecoveryPlanStepsResponse                                                        smithy.SchemaExtensions
+	eListRecoveryPlanStepsResponse_recoveryPlanSteps                                      smithy.SchemaExtensions
+	eListRecoveryPlanStepsResponse_nextToken                                              smithy.SchemaExtensions
+	eListStagingAccountsRequest                                                           smithy.SchemaExtensions
+	eListStagingAccountsRequest_maxResults                                                smithy.SchemaExtensions
+	eListStagingAccountsRequest_nextToken                                                 smithy.SchemaExtensions
+	eListStagingAccountsResponse                                                          smithy.SchemaExtensions
+	eListStagingAccountsResponse_accounts                                                 smithy.SchemaExtensions
+	eListStagingAccountsResponse_nextToken                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                           smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                               smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                          smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                                     smithy.SchemaExtensions
+	ePutLaunchActionRequest                                                               smithy.SchemaExtensions
+	ePutLaunchActionRequest_resourceId                                                    smithy.SchemaExtensions
+	ePutLaunchActionRequest_actionCode                                                    smithy.SchemaExtensions
+	ePutLaunchActionRequest_order                                                         smithy.SchemaExtensions
+	ePutLaunchActionRequest_actionId                                                      smithy.SchemaExtensions
+	ePutLaunchActionRequest_optional                                                      smithy.SchemaExtensions
+	ePutLaunchActionRequest_active                                                        smithy.SchemaExtensions
+	ePutLaunchActionRequest_name                                                          smithy.SchemaExtensions
+	ePutLaunchActionRequest_actionVersion                                                 smithy.SchemaExtensions
+	ePutLaunchActionRequest_category                                                      smithy.SchemaExtensions
+	ePutLaunchActionRequest_parameters                                                    smithy.SchemaExtensions
+	ePutLaunchActionRequest_description                                                   smithy.SchemaExtensions
+	ePutLaunchActionResponse                                                              smithy.SchemaExtensions
+	ePutLaunchActionResponse_resourceId                                                   smithy.SchemaExtensions
+	ePutLaunchActionResponse_actionId                                                     smithy.SchemaExtensions
+	ePutLaunchActionResponse_actionCode                                                   smithy.SchemaExtensions
+	ePutLaunchActionResponse_type                                                         smithy.SchemaExtensions
+	ePutLaunchActionResponse_name                                                         smithy.SchemaExtensions
+	ePutLaunchActionResponse_active                                                       smithy.SchemaExtensions
+	ePutLaunchActionResponse_order                                                        smithy.SchemaExtensions
+	ePutLaunchActionResponse_actionVersion                                                smithy.SchemaExtensions
+	ePutLaunchActionResponse_optional                                                     smithy.SchemaExtensions
+	ePutLaunchActionResponse_parameters                                                   smithy.SchemaExtensions
+	ePutLaunchActionResponse_description                                                  smithy.SchemaExtensions
+	ePutLaunchActionResponse_category                                                     smithy.SchemaExtensions
+	eReorderRecoveryPlanStepsRequest                                                      smithy.SchemaExtensions
+	eReorderRecoveryPlanStepsRequest_recoveryPlanArn                                      smithy.SchemaExtensions
+	eReorderRecoveryPlanStepsRequest_orderedStepArns                                      smithy.SchemaExtensions
+	eReorderRecoveryPlanStepsResponse                                                     smithy.SchemaExtensions
+	eReorderRecoveryPlanStepsResponse_recoveryPlanSteps                                   smithy.SchemaExtensions
+	eRetryDataReplicationRequest                                                          smithy.SchemaExtensions
+	eRetryDataReplicationRequest_sourceServerID                                           smithy.SchemaExtensions
+	eRetryRecoveryPlanExecutionStepRequest                                                smithy.SchemaExtensions
+	eRetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn                   smithy.SchemaExtensions
+	eRetryRecoveryPlanExecutionStepResponse                                               smithy.SchemaExtensions
+	eRetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep                     smithy.SchemaExtensions
+	eReverseReplicationRequest                                                            smithy.SchemaExtensions
+	eReverseReplicationRequest_recoveryInstanceID                                         smithy.SchemaExtensions
+	eReverseReplicationResponse                                                           smithy.SchemaExtensions
+	eReverseReplicationResponse_reversedDirectionSourceServerArn                          smithy.SchemaExtensions
+	eStartFailbackLaunchRequest                                                           smithy.SchemaExtensions
+	eStartFailbackLaunchRequest_recoveryInstanceIDs                                       smithy.SchemaExtensions
+	eStartFailbackLaunchRequest_tags                                                      smithy.SchemaExtensions
+	eStartFailbackLaunchResponse                                                          smithy.SchemaExtensions
+	eStartFailbackLaunchResponse_job                                                      smithy.SchemaExtensions
+	eStartRecoveryRequest                                                                 smithy.SchemaExtensions
+	eStartRecoveryRequest_sourceServers                                                   smithy.SchemaExtensions
+	eStartRecoveryRequest_isDrill                                                         smithy.SchemaExtensions
+	eStartRecoveryRequest_tags                                                            smithy.SchemaExtensions
+	eStartRecoveryResponse                                                                smithy.SchemaExtensions
+	eStartRecoveryResponse_job                                                            smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest                                                    smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest_recoveryPlanArn                                    smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest_mode                                               smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest_clientToken                                        smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest_sourceServers                                      smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionRequest_tags                                               smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionResponse                                                   smithy.SchemaExtensions
+	eStartRecoveryPlanExecutionResponse_recoveryPlanExecution                             smithy.SchemaExtensions
+	eStartReplicationRequest                                                              smithy.SchemaExtensions
+	eStartReplicationRequest_sourceServerID                                               smithy.SchemaExtensions
+	eStartReplicationResponse                                                             smithy.SchemaExtensions
+	eStartReplicationResponse_sourceServer                                                smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequest                                                    smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequest_sourceNetworks                                     smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequest_deployAsNew                                        smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryRequest_tags                                               smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryResponse                                                   smithy.SchemaExtensions
+	eStartSourceNetworkRecoveryResponse_job                                               smithy.SchemaExtensions
+	eStartSourceNetworkReplicationRequest                                                 smithy.SchemaExtensions
+	eStartSourceNetworkReplicationRequest_sourceNetworkID                                 smithy.SchemaExtensions
+	eStartSourceNetworkReplicationResponse                                                smithy.SchemaExtensions
+	eStartSourceNetworkReplicationResponse_sourceNetwork                                  smithy.SchemaExtensions
+	eStopFailbackRequest                                                                  smithy.SchemaExtensions
+	eStopFailbackRequest_recoveryInstanceID                                               smithy.SchemaExtensions
+	eStopReplicationRequest                                                               smithy.SchemaExtensions
+	eStopReplicationRequest_sourceServerID                                                smithy.SchemaExtensions
+	eStopReplicationResponse                                                              smithy.SchemaExtensions
+	eStopReplicationResponse_sourceServer                                                 smithy.SchemaExtensions
+	eStopSourceNetworkReplicationRequest                                                  smithy.SchemaExtensions
+	eStopSourceNetworkReplicationRequest_sourceNetworkID                                  smithy.SchemaExtensions
+	eStopSourceNetworkReplicationResponse                                                 smithy.SchemaExtensions
+	eStopSourceNetworkReplicationResponse_sourceNetwork                                   smithy.SchemaExtensions
+	eTagResourceRequest                                                                   smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                                       smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                              smithy.SchemaExtensions
+	eTerminateRecoveryInstancesRequest                                                    smithy.SchemaExtensions
+	eTerminateRecoveryInstancesRequest_recoveryInstanceIDs                                smithy.SchemaExtensions
+	eTerminateRecoveryInstancesResponse                                                   smithy.SchemaExtensions
+	eTerminateRecoveryInstancesResponse_job                                               smithy.SchemaExtensions
+	eUntagResourceRequest                                                                 smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                                     smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                         smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest                                        smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest_recoveryInstanceID                     smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest_name                                   smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest_bandwidthThrottling                    smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest_usePrivateIP                           smithy.SchemaExtensions
+	eUpdateFailbackReplicationConfigurationRequest_internetProtocol                       smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest                                                     smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_sourceServerID                                      smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_name                                                smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_launchDisposition                                   smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod                 smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_copyPrivateIp                                       smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_copyTags                                            smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_licensing                                           smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_postLaunchEnabled                                   smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_launchIntoInstanceProperties                        smithy.SchemaExtensions
+	eUpdateLaunchConfigurationRequest_recoveryMode                                        smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest                                             smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID               smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_launchDisposition                           smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod         smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_copyPrivateIp                               smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_copyTags                                    smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_licensing                                   smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_exportBucketArn                             smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_postLaunchEnabled                           smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance                    smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateRequest_recoveryMode                                smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateResponse                                            smithy.SchemaExtensions
+	eUpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate                smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepRequest                                               smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn                  smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepRequest_status                                        smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepRequest_servers                                       smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes                           smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepResponse                                              smithy.SchemaExtensions
+	eUpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep                    smithy.SchemaExtensions
+	eUpdateRecoveryPlanRequest                                                            smithy.SchemaExtensions
+	eUpdateRecoveryPlanRequest_recoveryPlanArn                                            smithy.SchemaExtensions
+	eUpdateRecoveryPlanRequest_name                                                       smithy.SchemaExtensions
+	eUpdateRecoveryPlanRequest_description                                                smithy.SchemaExtensions
+	eUpdateRecoveryPlanResponse                                                           smithy.SchemaExtensions
+	eUpdateRecoveryPlanResponse_recoveryPlan                                              smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepRequest                                                        smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepRequest_recoveryPlanStepArn                                    smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepRequest_stepName                                               smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepRequest_configuration                                          smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepResponse                                                       smithy.SchemaExtensions
+	eUpdateRecoveryPlanStepResponse_recoveryPlanStep                                      smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest                                                smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_sourceServerID                                 smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_name                                           smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_stagingAreaSubnetId                            smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_associateDefaultSecurityGroup                  smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs            smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_replicationServerInstanceType                  smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_useDedicatedReplicationServer                  smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_defaultLargeStagingDiskType                    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_replicatedDisks                                smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_ebsEncryption                                  smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_ebsEncryptionKeyArn                            smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_bandwidthThrottling                            smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_dataPlaneRouting                               smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_createPublicIP                                 smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_stagingAreaTags                                smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_pitPolicy                                      smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_autoReplicateNewDisks                          smithy.SchemaExtensions
+	eUpdateReplicationConfigurationRequest_internetProtocol                               smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest                                        smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID     smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_arn                                    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId                    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup          smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType          smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer          smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType            smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_ebsEncryption                          smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn                    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_bandwidthThrottling                    smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_dataPlaneRouting                       smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_createPublicIP                         smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_stagingAreaTags                        smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_pitPolicy                              smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks                  smithy.SchemaExtensions
+	eUpdateReplicationConfigurationTemplateRequest_internetProtocol                       smithy.SchemaExtensions
+)
+
+var (
+	iAssociateSourceNetworkStack                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AssociateSourceNetworkStack"}
+	iCancelRecoveryPlanExecution                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CancelRecoveryPlanExecution"}
+	iCreateExtendedSourceServer                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateExtendedSourceServer"}
+	iCreateLaunchConfigurationTemplate                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateLaunchConfigurationTemplate"}
+	iCreateRecoveryPlan                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlan"}
+	iCreateRecoveryPlanStep                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlanStep"}
+	iCreateReplicationConfigurationTemplate                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateReplicationConfigurationTemplate"}
+	iCreateSourceNetwork                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateSourceNetwork"}
+	iDeleteJob                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteJob"}
+	iDeleteLaunchAction                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchAction"}
+	iDeleteLaunchConfigurationTemplate                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchConfigurationTemplate"}
+	iDeleteRecoveryInstance                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryInstance"}
+	iDeleteRecoveryPlan                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlan"}
+	iDeleteRecoveryPlanExecution                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanExecution"}
+	iDeleteRecoveryPlanStep                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanStep"}
+	iDeleteReplicationConfigurationTemplate                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteReplicationConfigurationTemplate"}
+	iDeleteSourceNetwork                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceNetwork"}
+	iDeleteSourceServer                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceServer"}
+	iDescribeJobLogItems                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobLogItems"}
+	iDescribeJobs                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobs"}
+	iDescribeLaunchConfigurationTemplates                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeLaunchConfigurationTemplates"}
+	iDescribeRecoveryInstances                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoveryInstances"}
+	iDescribeRecoverySnapshots                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoverySnapshots"}
+	iDescribeReplicationConfigurationTemplates              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeReplicationConfigurationTemplates"}
+	iDescribeSourceNetworks                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceNetworks"}
+	iDescribeSourceServers                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceServers"}
+	iDisconnectRecoveryInstance                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DisconnectRecoveryInstance"}
+	iDisconnectSourceServer                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DisconnectSourceServer"}
+	iExportSourceNetworkCfnTemplate                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ExportSourceNetworkCfnTemplate"}
+	iGetFailbackReplicationConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetFailbackReplicationConfiguration"}
+	iGetLaunchConfiguration                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetLaunchConfiguration"}
+	iGetRecoveryPlan                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlan"}
+	iGetRecoveryPlanExecution                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecution"}
+	iGetRecoveryPlanExecutionStep                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecutionStep"}
+	iGetRecoveryPlanStep                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanStep"}
+	iGetReplicationConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetReplicationConfiguration"}
+	iInitializeService                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InitializeService"}
+	iListExtensibleSourceServers                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListExtensibleSourceServers"}
+	iListLaunchActions                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListLaunchActions"}
+	iListRecoveryPlanExecutions                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutions"}
+	iListRecoveryPlanExecutionSteps                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionSteps"}
+	iListRecoveryPlans                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlans"}
+	iListRecoveryPlanSteps                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanSteps"}
+	iListStagingAccounts                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListStagingAccounts"}
+	iListTagsForResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListTagsForResource"}
+	iPutLaunchAction                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PutLaunchAction"}
+	iReorderRecoveryPlanSteps                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReorderRecoveryPlanSteps"}
+	iRetryDataReplication                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RetryDataReplication"}
+	iRetryRecoveryPlanExecutionStep                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RetryRecoveryPlanExecutionStep"}
+	iReverseReplication                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReverseReplication"}
+	iStartFailbackLaunch                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartFailbackLaunch"}
+	iStartRecovery                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecovery"}
+	iStartRecoveryPlanExecution                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryPlanExecution"}
+	iStartReplication                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartReplication"}
+	iStartSourceNetworkRecovery                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkRecovery"}
+	iStartSourceNetworkReplication                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkReplication"}
+	iStopFailback                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopFailback"}
+	iStopReplication                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopReplication"}
+	iStopSourceNetworkReplication                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopSourceNetworkReplication"}
+	iTagResource                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagResource"}
+	iTerminateRecoveryInstances                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TerminateRecoveryInstances"}
+	iUntagResource                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UntagResource"}
+	iUpdateFailbackReplicationConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateFailbackReplicationConfiguration"}
+	iUpdateLaunchConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateLaunchConfiguration"}
+	iUpdateLaunchConfigurationTemplate                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateLaunchConfigurationTemplate"}
+	iUpdateRecoveryPlan                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlan"}
+	iUpdateRecoveryPlanExecutionStep                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanExecutionStep"}
+	iUpdateRecoveryPlanStep                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanStep"}
+	iUpdateReplicationConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateReplicationConfiguration"}
+	iUpdateReplicationConfigurationTemplate                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateReplicationConfigurationTemplate"}
+	i_ElasticDisasterRecoveryService                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ElasticDisasterRecoveryService"}
+	iAccessDeniedException                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AccessDeniedException"}
+	iAccount                                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Account"}
+	i_AccountID                                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AccountID"}
+	i_AccountIDs                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AccountIDs"}
+	i_Accounts                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Accounts"}
+	i_AgentVersion                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AgentVersion"}
+	i_ARN                                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ARN"}
+	i_AwsAvailabilityZone                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AwsAvailabilityZone"}
+	i_AwsRegion                                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AwsRegion"}
+	i_BoundedString                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "BoundedString"}
+	i_CfnStackName                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CfnStackName"}
+	i_ClientIdempotencyToken                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ClientIdempotencyToken"}
+	iConflictException                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ConflictException"}
+	i_ConversionMap                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ConversionMap"}
+	iConversionProperties                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ConversionProperties"}
+	iCPU                                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CPU"}
+	i_Cpus                                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Cpus"}
+	iDataReplicationError                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationError"}
+	i_DataReplicationErrorString                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationErrorString"}
+	iDataReplicationInfo                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInfo"}
+	iDataReplicationInfoReplicatedDisk                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInfoReplicatedDisk"}
+	i_DataReplicationInfoReplicatedDisks                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInfoReplicatedDisks"}
+	iDataReplicationInitiation                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInitiation"}
+	iDataReplicationInitiationStep                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInitiationStep"}
+	i_DataReplicationInitiationStepName                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInitiationStepName"}
+	i_DataReplicationInitiationSteps                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInitiationSteps"}
+	i_DataReplicationInitiationStepStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationInitiationStepStatus"}
+	i_DataReplicationState                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DataReplicationState"}
+	iDescribeJobsRequestFilters                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobsRequestFilters"}
+	i_DescribeJobsRequestFiltersJobIDs                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobsRequestFiltersJobIDs"}
+	i_DescribeRecoveryInstancesItems                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoveryInstancesItems"}
+	iDescribeRecoveryInstancesRequestFilters                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoveryInstancesRequestFilters"}
+	iDescribeRecoverySnapshotsRequestFilters                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoverySnapshotsRequestFilters"}
+	iDescribeSourceNetworksRequestFilters                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceNetworksRequestFilters"}
+	i_DescribeSourceNetworksRequestFiltersIDs               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceNetworksRequestFiltersIDs"}
+	iDescribeSourceServersRequestFilters                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceServersRequestFilters"}
+	i_DescribeSourceServersRequestFiltersIDs                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceServersRequestFiltersIDs"}
+	iDisk                                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Disk"}
+	i_Disks                                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Disks"}
+	i_EbsSnapshot                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EbsSnapshot"}
+	i_EbsSnapshotsList                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EbsSnapshotsList"}
+	i_EbsVolumeID                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EbsVolumeID"}
+	i_EC2InstanceID                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EC2InstanceID"}
+	i_EC2InstanceState                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EC2InstanceState"}
+	i_EC2InstanceType                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EC2InstanceType"}
+	iErrorDetail                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ErrorDetail"}
+	iEventResourceData                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "EventResourceData"}
+	iExecutionServerStepConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ExecutionServerStepConfiguration"}
+	i_ExtensionStatus                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ExtensionStatus"}
+	i_FailbackLaunchType                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "FailbackLaunchType"}
+	i_FailbackReplicationError                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "FailbackReplicationError"}
+	i_FailbackState                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "FailbackState"}
+	i_FailureReason                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "FailureReason"}
+	iIdentificationHints                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "IdentificationHints"}
+	i_InitiatedBy                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InitiatedBy"}
+	iInternalServerException                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InternalServerException"}
+	i_InternetProtocol                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InternetProtocol"}
+	i_IPsList                                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "IPsList"}
+	i_ISO8601DatetimeString                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ISO8601DatetimeString"}
+	i_ISO8601DurationString                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ISO8601DurationString"}
+	iJob                                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Job"}
+	i_JobEventAttemptCount                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobEventAttemptCount"}
+	i_JobID                                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobID"}
+	iJobLog                                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobLog"}
+	i_JobLogEvent                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobLogEvent"}
+	iJobLogEventData                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobLogEventData"}
+	i_JobLogs                                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobLogs"}
+	i_JobsList                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobsList"}
+	i_JobStatus                                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobStatus"}
+	i_JobType                                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "JobType"}
+	i_LargeBoundedString                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LargeBoundedString"}
+	i_LastLaunchResult                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LastLaunchResult"}
+	i_LastLaunchType                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LastLaunchType"}
+	iLaunchAction                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchAction"}
+	i_LaunchActionCategory                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionCategory"}
+	i_LaunchActionDescription                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionDescription"}
+	i_LaunchActionId                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionId"}
+	i_LaunchActionIds                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionIds"}
+	i_LaunchActionName                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionName"}
+	i_LaunchActionOrder                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionOrder"}
+	iLaunchActionParameter                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionParameter"}
+	i_LaunchActionParameterName                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionParameterName"}
+	i_LaunchActionParameters                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionParameters"}
+	i_LaunchActionParameterType                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionParameterType"}
+	i_LaunchActionParameterValue                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionParameterValue"}
+	i_LaunchActionResourceId                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionResourceId"}
+	iLaunchActionRun                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionRun"}
+	i_LaunchActionRunId                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionRunId"}
+	i_LaunchActionRuns                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionRuns"}
+	i_LaunchActionRunStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionRunStatus"}
+	i_LaunchActions                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActions"}
+	iLaunchActionsRequestFilters                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionsRequestFilters"}
+	iLaunchActionsStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionsStatus"}
+	i_LaunchActionType                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionType"}
+	i_LaunchActionVersion                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchActionVersion"}
+	iLaunchConfigurationTemplate                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchConfigurationTemplate"}
+	i_LaunchConfigurationTemplateID                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchConfigurationTemplateID"}
+	i_LaunchConfigurationTemplateIDs                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchConfigurationTemplateIDs"}
+	i_LaunchConfigurationTemplates                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchConfigurationTemplates"}
+	i_LaunchDisposition                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchDisposition"}
+	iLaunchIntoInstanceProperties                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchIntoInstanceProperties"}
+	i_LaunchStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchStatus"}
+	iLicensing                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "Licensing"}
+	iLifeCycle                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LifeCycle"}
+	iLifeCycleLastLaunch                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LifeCycleLastLaunch"}
+	iLifeCycleLastLaunchInitiated                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LifeCycleLastLaunchInitiated"}
+	iListRecoveryPlanExecutionStepsFilter                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionStepsFilter"}
+	i_MaxResultsReplicatingSourceServers                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "MaxResultsReplicatingSourceServers"}
+	i_MaxResultsType                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "MaxResultsType"}
+	iNetworkInterface                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "NetworkInterface"}
+	i_NetworkInterfaces                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "NetworkInterfaces"}
+	i_OriginEnvironment                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "OriginEnvironment"}
+	iOS                                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "OS"}
+	i_OutpostARN                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "OutpostARN"}
+	i_PaginationToken                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PaginationToken"}
+	iParticipatingResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ParticipatingResource"}
+	iParticipatingResourceID                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ParticipatingResourceID"}
+	i_ParticipatingResources                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ParticipatingResources"}
+	iParticipatingServer                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ParticipatingServer"}
+	i_ParticipatingServers                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ParticipatingServers"}
+	i_PITPolicy                                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PITPolicy"}
+	iPITPolicyRule                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PITPolicyRule"}
+	i_PITPolicyRuleUnits                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PITPolicyRuleUnits"}
+	i_PositiveInteger                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PositiveInteger"}
+	iProductCode                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ProductCode"}
+	i_ProductCodeId                                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ProductCodeId"}
+	i_ProductCodeMode                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ProductCodeMode"}
+	i_ProductCodes                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ProductCodes"}
+	iRecoveryInstance                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstance"}
+	iRecoveryInstanceDataReplicationError                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationError"}
+	iRecoveryInstanceDataReplicationInfo                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInfo"}
+	iRecoveryInstanceDataReplicationInfoReplicatedDisk      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInfoReplicatedDisk"}
+	i_RecoveryInstanceDataReplicationInfoReplicatedDisks    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInfoReplicatedDisks"}
+	iRecoveryInstanceDataReplicationInitiation              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInitiation"}
+	iRecoveryInstanceDataReplicationInitiationStep          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInitiationStep"}
+	i_RecoveryInstanceDataReplicationInitiationStepName     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInitiationStepName"}
+	i_RecoveryInstanceDataReplicationInitiationSteps        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInitiationSteps"}
+	i_RecoveryInstanceDataReplicationInitiationStepStatus   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationInitiationStepStatus"}
+	i_RecoveryInstanceDataReplicationState                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDataReplicationState"}
+	iRecoveryInstanceDisk                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDisk"}
+	i_RecoveryInstanceDisks                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceDisks"}
+	iRecoveryInstanceFailback                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceFailback"}
+	i_RecoveryInstanceID                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceID"}
+	i_RecoveryInstanceIDs                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceIDs"}
+	iRecoveryInstanceProperties                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstanceProperties"}
+	i_RecoveryInstancesForTerminationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryInstancesForTerminationRequest"}
+	iRecoveryLifeCycle                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryLifeCycle"}
+	i_RecoveryMode                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryMode"}
+	iRecoveryPlan                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlan"}
+	i_RecoveryPlanDescription                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanDescription"}
+	iRecoveryPlanExecution                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecution"}
+	i_RecoveryPlanExecutionMode                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionMode"}
+	iRecoveryPlanExecutionServer                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionServer"}
+	i_RecoveryPlanExecutionServers                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionServers"}
+	iRecoveryPlanExecutionSourceServer                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionSourceServer"}
+	i_RecoveryPlanExecutionSourceServerList                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionSourceServerList"}
+	i_RecoveryPlanExecutionStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStatus"}
+	iRecoveryPlanExecutionStep                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStep"}
+	iRecoveryPlanExecutionStepConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStepConfiguration"}
+	i_RecoveryPlanExecutionStepStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStepStatus"}
+	iRecoveryPlanExecutionStepSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStepSummary"}
+	i_RecoveryPlanExecutionStepSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionStepSummaryList"}
+	iRecoveryPlanExecutionSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionSummary"}
+	i_RecoveryPlanExecutionSummaryList                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanExecutionSummaryList"}
+	i_RecoveryPlanName                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanName"}
+	iRecoveryPlanServer                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanServer"}
+	i_RecoveryPlanServerImpactLevel                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanServerImpactLevel"}
+	i_RecoveryPlanServers                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanServers"}
+	i_RecoveryPlanStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStatus"}
+	iRecoveryPlanStep                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStep"}
+	i_RecoveryPlanStepArnList                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStepArnList"}
+	iRecoveryPlanStepConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStepConfiguration"}
+	i_RecoveryPlanStepList                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStepList"}
+	i_RecoveryPlanStepName                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStepName"}
+	i_RecoveryPlanStepOrder                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanStepOrder"}
+	iRecoveryPlanSummary                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanSummary"}
+	i_RecoveryPlanSummaryList                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryPlanSummaryList"}
+	i_RecoveryResult                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoveryResult"}
+	iRecoverySnapshot                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoverySnapshot"}
+	i_RecoverySnapshotID                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoverySnapshotID"}
+	i_RecoverySnapshotsList                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoverySnapshotsList"}
+	i_RecoverySnapshotsOrder                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RecoverySnapshotsOrder"}
+	i_ReplicationConfigurationDataPlaneRouting              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationDataPlaneRouting"}
+	i_ReplicationConfigurationDefaultLargeStagingDiskType   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationDefaultLargeStagingDiskType"}
+	i_ReplicationConfigurationEbsEncryption                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationEbsEncryption"}
+	iReplicationConfigurationReplicatedDisk                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationReplicatedDisk"}
+	i_ReplicationConfigurationReplicatedDisks               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationReplicatedDisks"}
+	i_ReplicationConfigurationReplicatedDiskStagingDiskType = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationReplicatedDiskStagingDiskType"}
+	iReplicationConfigurationTemplate                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationTemplate"}
+	i_ReplicationConfigurationTemplateID                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationTemplateID"}
+	i_ReplicationConfigurationTemplateIDs                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationTemplateIDs"}
+	i_ReplicationConfigurationTemplates                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfigurationTemplates"}
+	i_ReplicationDirection                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationDirection"}
+	i_ReplicationServersSecurityGroupsIDs                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationServersSecurityGroupsIDs"}
+	i_ReplicationStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationStatus"}
+	iResourceNotFoundException                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ResourceNotFoundException"}
+	i_SecurityGroupID                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SecurityGroupID"}
+	i_SensitiveBoundedString                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SensitiveBoundedString"}
+	iServerStepConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ServerStepConfiguration"}
+	iServiceQuotaExceededException                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ServiceQuotaExceededException"}
+	i_SmallBoundedString                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SmallBoundedString"}
+	iSourceCloudProperties                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceCloudProperties"}
+	iSourceNetwork                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceNetwork"}
+	iSourceNetworkData                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceNetworkData"}
+	i_SourceNetworkID                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceNetworkID"}
+	i_SourceNetworksList                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceNetworksList"}
+	iSourceProperties                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceProperties"}
+	iSourceServer                                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServer"}
+	i_SourceServerArchitecture                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServerArchitecture"}
+	i_SourceServerARN                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServerARN"}
+	i_SourceServerID                                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServerID"}
+	i_SourceServerIDs                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServerIDs"}
+	i_SourceServersList                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SourceServersList"}
+	i_SsmDocumentName                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SsmDocumentName"}
+	iStagingArea                                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StagingArea"}
+	iStagingSourceServer                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StagingSourceServer"}
+	i_StagingSourceServersList                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StagingSourceServersList"}
+	i_StartFailbackRequestRecoveryInstanceIDs               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartFailbackRequestRecoveryInstanceIDs"}
+	iStartRecoveryRequestSourceServer                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryRequestSourceServer"}
+	i_StartRecoveryRequestSourceServers                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryRequestSourceServers"}
+	i_StartSourceNetworkRecoveryRequestNetworkEntries       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkRecoveryRequestNetworkEntries"}
+	iStartSourceNetworkRecoveryRequestNetworkEntry          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkRecoveryRequestNetworkEntry"}
+	i_StrictDRSARN                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StrictDRSARN"}
+	i_StrictlyPositiveInteger                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StrictlyPositiveInteger"}
+	i_SubnetID                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "SubnetID"}
+	i_TagKey                                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagKey"}
+	i_TagKeys                                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagKeys"}
+	i_TagsMap                                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagsMap"}
+	i_TagValue                                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagValue"}
+	i_TargetInstanceTypeRightSizingMethod                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TargetInstanceTypeRightSizingMethod"}
+	iThrottlingException                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ThrottlingException"}
+	iUninitializedAccountException                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UninitializedAccountException"}
+	iValidationException                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ValidationException"}
+	iValidationExceptionField                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ValidationExceptionReason"}
+	i_VolumeStatus                                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "VolumeStatus"}
+	i_VolumeToConversionMap                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "VolumeToConversionMap"}
+	i_VolumeToProductCodes                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "VolumeToProductCodes"}
+	i_VolumeToSizeMap                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "VolumeToSizeMap"}
+	i_VpcID                                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "VpcID"}
+	i_WaitDurationMinutes                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "WaitDurationMinutes"}
+	iWaitStepConfiguration                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "WaitStepConfiguration"}
+	iAssociateSourceNetworkStackRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AssociateSourceNetworkStackRequest"}
+	iAssociateSourceNetworkStackResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "AssociateSourceNetworkStackResponse"}
+	iCancelRecoveryPlanExecutionRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CancelRecoveryPlanExecutionRequest"}
+	iCancelRecoveryPlanExecutionResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CancelRecoveryPlanExecutionResponse"}
+	iCreateExtendedSourceServerRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateExtendedSourceServerRequest"}
+	iCreateExtendedSourceServerResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateExtendedSourceServerResponse"}
+	iCreateLaunchConfigurationTemplateRequest               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateLaunchConfigurationTemplateRequest"}
+	iCreateLaunchConfigurationTemplateResponse              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateLaunchConfigurationTemplateResponse"}
+	iCreateRecoveryPlanRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlanRequest"}
+	iCreateRecoveryPlanResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlanResponse"}
+	iCreateRecoveryPlanStepRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlanStepRequest"}
+	iCreateRecoveryPlanStepResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateRecoveryPlanStepResponse"}
+	iCreateReplicationConfigurationTemplateRequest          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateReplicationConfigurationTemplateRequest"}
+	iCreateSourceNetworkRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateSourceNetworkRequest"}
+	iCreateSourceNetworkResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "CreateSourceNetworkResponse"}
+	iDeleteJobRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteJobRequest"}
+	iDeleteJobResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteJobResponse"}
+	iDeleteLaunchActionRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchActionRequest"}
+	iDeleteLaunchActionResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchActionResponse"}
+	iDeleteLaunchConfigurationTemplateRequest               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchConfigurationTemplateRequest"}
+	iDeleteLaunchConfigurationTemplateResponse              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteLaunchConfigurationTemplateResponse"}
+	iDeleteRecoveryInstanceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryInstanceRequest"}
+	iDeleteRecoveryPlanExecutionRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanExecutionRequest"}
+	iDeleteRecoveryPlanExecutionResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanExecutionResponse"}
+	iDeleteRecoveryPlanRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanRequest"}
+	iDeleteRecoveryPlanResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanResponse"}
+	iDeleteRecoveryPlanStepRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanStepRequest"}
+	iDeleteRecoveryPlanStepResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteRecoveryPlanStepResponse"}
+	iDeleteReplicationConfigurationTemplateRequest          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteReplicationConfigurationTemplateRequest"}
+	iDeleteReplicationConfigurationTemplateResponse         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteReplicationConfigurationTemplateResponse"}
+	iDeleteSourceNetworkRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceNetworkRequest"}
+	iDeleteSourceNetworkResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceNetworkResponse"}
+	iDeleteSourceServerRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceServerRequest"}
+	iDeleteSourceServerResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DeleteSourceServerResponse"}
+	iDescribeJobLogItemsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobLogItemsRequest"}
+	iDescribeJobLogItemsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobLogItemsResponse"}
+	iDescribeJobsRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobsRequest"}
+	iDescribeJobsResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeJobsResponse"}
+	iDescribeLaunchConfigurationTemplatesRequest            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeLaunchConfigurationTemplatesRequest"}
+	iDescribeLaunchConfigurationTemplatesResponse           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeLaunchConfigurationTemplatesResponse"}
+	iDescribeRecoveryInstancesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoveryInstancesRequest"}
+	iDescribeRecoveryInstancesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoveryInstancesResponse"}
+	iDescribeRecoverySnapshotsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoverySnapshotsRequest"}
+	iDescribeRecoverySnapshotsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeRecoverySnapshotsResponse"}
+	iDescribeReplicationConfigurationTemplatesRequest       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeReplicationConfigurationTemplatesRequest"}
+	iDescribeReplicationConfigurationTemplatesResponse      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeReplicationConfigurationTemplatesResponse"}
+	iDescribeSourceNetworksRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceNetworksRequest"}
+	iDescribeSourceNetworksResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceNetworksResponse"}
+	iDescribeSourceServersRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceServersRequest"}
+	iDescribeSourceServersResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DescribeSourceServersResponse"}
+	iDisconnectRecoveryInstanceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DisconnectRecoveryInstanceRequest"}
+	iDisconnectSourceServerRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "DisconnectSourceServerRequest"}
+	iExportSourceNetworkCfnTemplateRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ExportSourceNetworkCfnTemplateRequest"}
+	iExportSourceNetworkCfnTemplateResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ExportSourceNetworkCfnTemplateResponse"}
+	iGetFailbackReplicationConfigurationRequest             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetFailbackReplicationConfigurationRequest"}
+	iGetFailbackReplicationConfigurationResponse            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetFailbackReplicationConfigurationResponse"}
+	iGetLaunchConfigurationRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetLaunchConfigurationRequest"}
+	iLaunchConfiguration                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "LaunchConfiguration"}
+	iGetRecoveryPlanExecutionRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecutionRequest"}
+	iGetRecoveryPlanExecutionResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecutionResponse"}
+	iGetRecoveryPlanExecutionStepRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecutionStepRequest"}
+	iGetRecoveryPlanExecutionStepResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanExecutionStepResponse"}
+	iGetRecoveryPlanRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanRequest"}
+	iGetRecoveryPlanResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanResponse"}
+	iGetRecoveryPlanStepRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanStepRequest"}
+	iGetRecoveryPlanStepResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetRecoveryPlanStepResponse"}
+	iGetReplicationConfigurationRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "GetReplicationConfigurationRequest"}
+	iReplicationConfiguration                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReplicationConfiguration"}
+	iInitializeServiceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InitializeServiceRequest"}
+	iInitializeServiceResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "InitializeServiceResponse"}
+	iListExtensibleSourceServersRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListExtensibleSourceServersRequest"}
+	iListExtensibleSourceServersResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListExtensibleSourceServersResponse"}
+	iListLaunchActionsRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListLaunchActionsRequest"}
+	iListLaunchActionsResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListLaunchActionsResponse"}
+	iListRecoveryPlanExecutionsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionsRequest"}
+	iListRecoveryPlanExecutionsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionsResponse"}
+	iListRecoveryPlanExecutionStepsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionStepsRequest"}
+	iListRecoveryPlanExecutionStepsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanExecutionStepsResponse"}
+	iListRecoveryPlansRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlansRequest"}
+	iListRecoveryPlansResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlansResponse"}
+	iListRecoveryPlanStepsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanStepsRequest"}
+	iListRecoveryPlanStepsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListRecoveryPlanStepsResponse"}
+	iListStagingAccountsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListStagingAccountsRequest"}
+	iListStagingAccountsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListStagingAccountsResponse"}
+	iListTagsForResourceRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ListTagsForResourceResponse"}
+	iPutLaunchActionRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PutLaunchActionRequest"}
+	iPutLaunchActionResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "PutLaunchActionResponse"}
+	iReorderRecoveryPlanStepsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReorderRecoveryPlanStepsRequest"}
+	iReorderRecoveryPlanStepsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReorderRecoveryPlanStepsResponse"}
+	iRetryDataReplicationRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RetryDataReplicationRequest"}
+	iRetryRecoveryPlanExecutionStepRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RetryRecoveryPlanExecutionStepRequest"}
+	iRetryRecoveryPlanExecutionStepResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "RetryRecoveryPlanExecutionStepResponse"}
+	iReverseReplicationRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReverseReplicationRequest"}
+	iReverseReplicationResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "ReverseReplicationResponse"}
+	iStartFailbackLaunchRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartFailbackLaunchRequest"}
+	iStartFailbackLaunchResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartFailbackLaunchResponse"}
+	iStartRecoveryRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryRequest"}
+	iStartRecoveryResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryResponse"}
+	iStartRecoveryPlanExecutionRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryPlanExecutionRequest"}
+	iStartRecoveryPlanExecutionResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartRecoveryPlanExecutionResponse"}
+	iStartReplicationRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartReplicationRequest"}
+	iStartReplicationResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartReplicationResponse"}
+	iStartSourceNetworkRecoveryRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkRecoveryRequest"}
+	iStartSourceNetworkRecoveryResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkRecoveryResponse"}
+	iStartSourceNetworkReplicationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkReplicationRequest"}
+	iStartSourceNetworkReplicationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StartSourceNetworkReplicationResponse"}
+	iStopFailbackRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopFailbackRequest"}
+	iStopReplicationRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopReplicationRequest"}
+	iStopReplicationResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopReplicationResponse"}
+	iStopSourceNetworkReplicationRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopSourceNetworkReplicationRequest"}
+	iStopSourceNetworkReplicationResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "StopSourceNetworkReplicationResponse"}
+	iTagResourceRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TagResourceRequest"}
+	iTerminateRecoveryInstancesRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TerminateRecoveryInstancesRequest"}
+	iTerminateRecoveryInstancesResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "TerminateRecoveryInstancesResponse"}
+	iUntagResourceRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UntagResourceRequest"}
+	iUpdateFailbackReplicationConfigurationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateFailbackReplicationConfigurationRequest"}
+	iUpdateLaunchConfigurationRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateLaunchConfigurationRequest"}
+	iUpdateLaunchConfigurationTemplateRequest               = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateLaunchConfigurationTemplateRequest"}
+	iUpdateLaunchConfigurationTemplateResponse              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateLaunchConfigurationTemplateResponse"}
+	iUpdateRecoveryPlanExecutionStepRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanExecutionStepRequest"}
+	iUpdateRecoveryPlanExecutionStepResponse                = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanExecutionStepResponse"}
+	iUpdateRecoveryPlanRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanRequest"}
+	iUpdateRecoveryPlanResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanResponse"}
+	iUpdateRecoveryPlanStepRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanStepRequest"}
+	iUpdateRecoveryPlanStepResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateRecoveryPlanStepResponse"}
+	iUpdateReplicationConfigurationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateReplicationConfigurationRequest"}
+	iUpdateReplicationConfigurationTemplateRequest          = smithy.ShapeName{Namespace: "com.amazonaws.drs", Name: "UpdateReplicationConfigurationTemplateRequest"}
+	pBoolean                                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pString                                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/AssociateSourceNetworkStack",
-	Code: 202})
-
-var CancelRecoveryPlanExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CancelRecoveryPlanExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CancelRecoveryPlanExecution",
-	Code: 200})
-
-var CreateExtendedSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateExtendedSourceServer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateExtendedSourceServer",
-	Code: 201})
-
-var CreateLaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateLaunchConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateLaunchConfigurationTemplate",
-	Code: 201})
-
-var CreateRecoveryPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateRecoveryPlan",
-	Code: 201})
-
-var CreateRecoveryPlanStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlanStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateRecoveryPlanStep",
-	Code: 201})
-
-var CreateReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateReplicationConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateReplicationConfigurationTemplate",
-	Code: 201})
-
-var CreateSourceNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateSourceNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateSourceNetwork",
-	Code: 201})
-
-var DeleteJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteJob",
-	Code: 204})
-
-var DeleteLaunchAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteLaunchAction",
-	Code: 204})
-
-var DeleteLaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteLaunchConfigurationTemplate",
-	Code: 204})
-
-var DeleteRecoveryInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryInstance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteRecoveryInstance",
-	Code: 200})
-
-var DeleteRecoveryPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteRecoveryPlan",
-	Code: 200})
-
-var DeleteRecoveryPlanExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteRecoveryPlanExecution",
-	Code: 200})
-
-var DeleteRecoveryPlanStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteRecoveryPlanStep",
-	Code: 200})
-
-var DeleteReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteReplicationConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteReplicationConfigurationTemplate",
-	Code: 204})
-
-var DeleteSourceNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteSourceNetwork",
-	Code: 204})
-
-var DeleteSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceServer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteSourceServer",
-	Code: 204})
-
-var DescribeJobLogItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobLogItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeJobLogItems",
-	Code: 200})
-
-var DescribeJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeJobs",
-	Code: 200})
-
-var DescribeLaunchConfigurationTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeLaunchConfigurationTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeLaunchConfigurationTemplates",
-	Code: 200})
-
-var DescribeRecoveryInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoveryInstances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeRecoveryInstances",
-	Code: 200})
-
-var DescribeRecoverySnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoverySnapshots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeRecoverySnapshots",
-	Code: 200})
-
-var DescribeReplicationConfigurationTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeReplicationConfigurationTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeReplicationConfigurationTemplates",
-	Code: 200})
-
-var DescribeSourceNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceNetworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSourceNetworks",
-	Code: 200})
-
-var DescribeSourceServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceServers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSourceServers",
-	Code: 200})
-
-var DisconnectRecoveryInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DisconnectRecoveryInstance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DisconnectRecoveryInstance",
-	Code: 200})
-
-var DisconnectSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DisconnectSourceServer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DisconnectSourceServer",
-	Code: 200})
-
-var ExportSourceNetworkCfnTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ExportSourceNetworkCfnTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ExportSourceNetworkCfnTemplate",
-	Code: 200})
-
-var GetFailbackReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetFailbackReplicationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetFailbackReplicationConfiguration",
-	Code: 200})
-
-var GetLaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetLaunchConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetLaunchConfiguration",
-	Code: 200})
-
-var GetRecoveryPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRecoveryPlan",
-	Code: 200})
-
-var GetRecoveryPlanExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRecoveryPlanExecution",
-	Code: 200})
-
-var GetRecoveryPlanExecutionStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecutionStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRecoveryPlanExecutionStep",
-	Code: 200})
-
-var GetRecoveryPlanStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRecoveryPlanStep",
-	Code: 200})
-
-var GetReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetReplicationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetReplicationConfiguration",
-	Code: 200})
-
-var InitializeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InitializeService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/InitializeService",
-	Code: 204})
-
-var ListExtensibleSourceServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListExtensibleSourceServers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListExtensibleSourceServers",
-	Code: 200})
-
-var ListLaunchActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListLaunchActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListLaunchActions",
-	Code: 200})
-
-var ListRecoveryPlanExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRecoveryPlanExecutions",
-	Code: 200})
-
-var ListRecoveryPlanExecutionSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionSteps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRecoveryPlanExecutionSteps",
-	Code: 200})
-
-var ListRecoveryPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRecoveryPlans",
-	Code: 200})
-
-var ListRecoveryPlanSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanSteps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRecoveryPlanSteps",
-	Code: 200})
-
-var ListStagingAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListStagingAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/ListStagingAccounts",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutLaunchAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PutLaunchAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutLaunchAction",
-	Code: 200})
-
-var ReorderRecoveryPlanSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReorderRecoveryPlanSteps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ReorderRecoveryPlanSteps",
-	Code: 200})
-
-var RetryDataReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RetryDataReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/RetryDataReplication",
-	Code: 200})
-
-var RetryRecoveryPlanExecutionStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RetryRecoveryPlanExecutionStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/RetryRecoveryPlanExecutionStep",
-	Code: 200})
-
-var ReverseReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReverseReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ReverseReplication",
-	Code: 200})
-
-var StartFailbackLaunch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartFailbackLaunch",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartFailbackLaunch",
-	Code: 200})
-
-var StartRecovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecovery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartRecovery",
-	Code: 202})
-
-var StartRecoveryPlanExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryPlanExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartRecoveryPlanExecution",
-	Code: 201})
-
-var StartReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartReplication",
-	Code: 200})
-
-var StartSourceNetworkRecovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkRecovery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartSourceNetworkRecovery",
-	Code: 202})
-
-var StartSourceNetworkReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartSourceNetworkReplication",
-	Code: 200})
-
-var StopFailback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopFailback",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopFailback",
-	Code: 200})
-
-var StopReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopReplication",
-	Code: 200})
-
-var StopSourceNetworkReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopSourceNetworkReplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopSourceNetworkReplication",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var TerminateRecoveryInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TerminateRecoveryInstances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TerminateRecoveryInstances",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateFailbackReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateFailbackReplicationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateFailbackReplicationConfiguration",
-	Code: 200})
-
-var UpdateLaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateLaunchConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateLaunchConfiguration",
-	Code: 200})
-
-var UpdateLaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateLaunchConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateLaunchConfigurationTemplate",
-	Code: 200})
-
-var UpdateRecoveryPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateRecoveryPlan",
-	Code: 200})
-
-var UpdateRecoveryPlanExecutionStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanExecutionStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateRecoveryPlanExecutionStep",
-	Code: 200})
-
-var UpdateRecoveryPlanStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateRecoveryPlanStep",
-	Code: 200})
-
-var UpdateReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateReplicationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateReplicationConfiguration",
-	Code: 200})
-
-var UpdateReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateReplicationConfigurationTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateReplicationConfigurationTemplate",
-	Code: 200})
-
-var _ElasticDisasterRecoveryService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ElasticDisasterRecoveryService",
-}, smithy.ShapeTypeService, 0)
-
-var ElasticDisasterRecoveryService = smithy.NewServiceSchema(_ElasticDisasterRecoveryService, "2020-02-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_code *smithy.Schema
-
-var Account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Account",
-}, smithy.ShapeTypeStructure, 1)
-var Account_accountID *smithy.Schema
-
-var _AccountID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AccountID",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AccountIDs",
-}, smithy.ShapeTypeList, 1)
-var _AccountIDs_member *smithy.Schema
-
-var _Accounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Accounts",
-}, smithy.ShapeTypeList, 1)
-var _Accounts_member *smithy.Schema
-
-var _AgentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AgentVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AwsAvailabilityZone",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AwsRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _BoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "BoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var _CfnStackName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CfnStackName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientIdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ClientIdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_code *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ConversionMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ConversionMap",
-}, smithy.ShapeTypeMap, 2)
-var _ConversionMap_key *smithy.Schema
-
-var _ConversionMap_value *smithy.Schema
-
-var ConversionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ConversionProperties",
-}, smithy.ShapeTypeStructure, 6)
-var ConversionProperties_volumeToConversionMap *smithy.Schema
-
-var ConversionProperties_rootVolumeName *smithy.Schema
-
-var ConversionProperties_forceUefi *smithy.Schema
-
-var ConversionProperties_dataTimestamp *smithy.Schema
-
-var ConversionProperties_volumeToVolumeSize *smithy.Schema
-
-var ConversionProperties_volumeToProductCodes *smithy.Schema
-
-var CPU = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CPU",
-}, smithy.ShapeTypeStructure, 2)
-var CPU_cores *smithy.Schema
-
-var CPU_modelName *smithy.Schema
-
-var _Cpus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Cpus",
-}, smithy.ShapeTypeList, 1)
-var _Cpus_member *smithy.Schema
-
-var DataReplicationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationError",
-}, smithy.ShapeTypeStructure, 2)
-var DataReplicationError_error *smithy.Schema
-
-var DataReplicationError_rawError *smithy.Schema
-
-var _DataReplicationErrorString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationErrorString",
-}, smithy.ShapeTypeString, 0)
-
-var DataReplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInfo",
-}, smithy.ShapeTypeStructure, 8)
-var DataReplicationInfo_lagDuration *smithy.Schema
-
-var DataReplicationInfo_etaDateTime *smithy.Schema
-
-var DataReplicationInfo_replicatedDisks *smithy.Schema
-
-var DataReplicationInfo_dataReplicationState *smithy.Schema
-
-var DataReplicationInfo_dataReplicationInitiation *smithy.Schema
-
-var DataReplicationInfo_dataReplicationError *smithy.Schema
-
-var DataReplicationInfo_stagingAvailabilityZone *smithy.Schema
-
-var DataReplicationInfo_stagingOutpostArn *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInfoReplicatedDisk",
-}, smithy.ShapeTypeStructure, 6)
-var DataReplicationInfoReplicatedDisk_deviceName *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk_totalStorageBytes *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk_replicatedStorageBytes *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk_rescannedStorageBytes *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk_backloggedStorageBytes *smithy.Schema
-
-var DataReplicationInfoReplicatedDisk_volumeStatus *smithy.Schema
-
-var _DataReplicationInfoReplicatedDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInfoReplicatedDisks",
-}, smithy.ShapeTypeList, 1)
-var _DataReplicationInfoReplicatedDisks_member *smithy.Schema
-
-var DataReplicationInitiation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInitiation",
-}, smithy.ShapeTypeStructure, 3)
-var DataReplicationInitiation_startDateTime *smithy.Schema
-
-var DataReplicationInitiation_nextAttemptDateTime *smithy.Schema
-
-var DataReplicationInitiation_steps *smithy.Schema
-
-var DataReplicationInitiationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInitiationStep",
-}, smithy.ShapeTypeStructure, 2)
-var DataReplicationInitiationStep_name *smithy.Schema
-
-var DataReplicationInitiationStep_status *smithy.Schema
-
-var _DataReplicationInitiationStepName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInitiationStepName",
-}, smithy.ShapeTypeString, 0)
-
-var _DataReplicationInitiationSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInitiationSteps",
-}, smithy.ShapeTypeList, 1)
-var _DataReplicationInitiationSteps_member *smithy.Schema
-
-var _DataReplicationInitiationStepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationInitiationStepStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DataReplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DataReplicationState",
-}, smithy.ShapeTypeString, 0)
-
-var DescribeJobsRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobsRequestFilters",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeJobsRequestFilters_jobIDs *smithy.Schema
-
-var DescribeJobsRequestFilters_fromDate *smithy.Schema
-
-var DescribeJobsRequestFilters_toDate *smithy.Schema
-
-var _DescribeJobsRequestFiltersJobIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobsRequestFiltersJobIDs",
-}, smithy.ShapeTypeList, 1)
-var _DescribeJobsRequestFiltersJobIDs_member *smithy.Schema
-
-var _DescribeRecoveryInstancesItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoveryInstancesItems",
-}, smithy.ShapeTypeList, 1)
-var _DescribeRecoveryInstancesItems_member *smithy.Schema
-
-var DescribeRecoveryInstancesRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoveryInstancesRequestFilters",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs *smithy.Schema
-
-var DescribeRecoveryInstancesRequestFilters_sourceServerIDs *smithy.Schema
-
-var DescribeRecoverySnapshotsRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoverySnapshotsRequestFilters",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecoverySnapshotsRequestFilters_fromDateTime *smithy.Schema
-
-var DescribeRecoverySnapshotsRequestFilters_toDateTime *smithy.Schema
-
-var DescribeSourceNetworksRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceNetworksRequestFilters",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSourceNetworksRequestFilters_sourceNetworkIDs *smithy.Schema
-
-var DescribeSourceNetworksRequestFilters_originAccountID *smithy.Schema
-
-var DescribeSourceNetworksRequestFilters_originRegion *smithy.Schema
-
-var _DescribeSourceNetworksRequestFiltersIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceNetworksRequestFiltersIDs",
-}, smithy.ShapeTypeList, 1)
-var _DescribeSourceNetworksRequestFiltersIDs_member *smithy.Schema
-
-var DescribeSourceServersRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceServersRequestFilters",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSourceServersRequestFilters_sourceServerIDs *smithy.Schema
-
-var DescribeSourceServersRequestFilters_hardwareId *smithy.Schema
-
-var DescribeSourceServersRequestFilters_stagingAccountIDs *smithy.Schema
-
-var _DescribeSourceServersRequestFiltersIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceServersRequestFiltersIDs",
-}, smithy.ShapeTypeList, 1)
-var _DescribeSourceServersRequestFiltersIDs_member *smithy.Schema
-
-var Disk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Disk",
-}, smithy.ShapeTypeStructure, 2)
-var Disk_deviceName *smithy.Schema
-
-var Disk_bytes *smithy.Schema
-
-var _Disks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Disks",
-}, smithy.ShapeTypeList, 1)
-var _Disks_member *smithy.Schema
-
-var _EbsSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EbsSnapshot",
-}, smithy.ShapeTypeString, 0)
-
-var _EbsSnapshotsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EbsSnapshotsList",
-}, smithy.ShapeTypeList, 1)
-var _EbsSnapshotsList_member *smithy.Schema
-
-var _EbsVolumeID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EbsVolumeID",
-}, smithy.ShapeTypeString, 0)
-
-var _EC2InstanceID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EC2InstanceID",
-}, smithy.ShapeTypeString, 0)
-
-var _EC2InstanceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EC2InstanceState",
-}, smithy.ShapeTypeString, 0)
-
-var _EC2InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EC2InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetail_message *smithy.Schema
-
-var ErrorDetail_code *smithy.Schema
-
-var EventResourceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "EventResourceData",
-}, smithy.ShapeTypeUnion, 1)
-var EventResourceData_sourceNetworkData *smithy.Schema
-
-var ExecutionServerStepConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ExecutionServerStepConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ExecutionServerStepConfiguration_servers *smithy.Schema
-
-var _ExtensionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ExtensionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _FailbackLaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "FailbackLaunchType",
-}, smithy.ShapeTypeString, 0)
-
-var _FailbackReplicationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "FailbackReplicationError",
-}, smithy.ShapeTypeString, 0)
-
-var _FailbackState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "FailbackState",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var IdentificationHints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "IdentificationHints",
-}, smithy.ShapeTypeStructure, 4)
-var IdentificationHints_fqdn *smithy.Schema
-
-var IdentificationHints_hostname *smithy.Schema
-
-var IdentificationHints_vmWareUuid *smithy.Schema
-
-var IdentificationHints_awsInstanceID *smithy.Schema
-
-var _InitiatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InitiatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _InternetProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InternetProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var _IPsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "IPsList",
-}, smithy.ShapeTypeList, 1)
-var _IPsList_member *smithy.Schema
-
-var _ISO8601DatetimeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ISO8601DatetimeString",
-}, smithy.ShapeTypeString, 0)
-
-var _ISO8601DurationString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ISO8601DurationString",
-}, smithy.ShapeTypeString, 0)
-
-var Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Job",
-}, smithy.ShapeTypeStructure, 10)
-var Job_jobID *smithy.Schema
-
-var Job_arn *smithy.Schema
-
-var Job_type *smithy.Schema
-
-var Job_initiatedBy *smithy.Schema
-
-var Job_creationDateTime *smithy.Schema
-
-var Job_endDateTime *smithy.Schema
-
-var Job_status *smithy.Schema
-
-var Job_participatingServers *smithy.Schema
-
-var Job_tags *smithy.Schema
-
-var Job_participatingResources *smithy.Schema
-
-var _JobEventAttemptCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobEventAttemptCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _JobID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobID",
-}, smithy.ShapeTypeString, 0)
-
-var JobLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobLog",
-}, smithy.ShapeTypeStructure, 3)
-var JobLog_logDateTime *smithy.Schema
-
-var JobLog_event *smithy.Schema
-
-var JobLog_eventData *smithy.Schema
-
-var _JobLogEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobLogEvent",
-}, smithy.ShapeTypeString, 0)
-
-var JobLogEventData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobLogEventData",
-}, smithy.ShapeTypeStructure, 8)
-var JobLogEventData_sourceServerID *smithy.Schema
-
-var JobLogEventData_conversionServerID *smithy.Schema
-
-var JobLogEventData_targetInstanceID *smithy.Schema
-
-var JobLogEventData_rawError *smithy.Schema
-
-var JobLogEventData_conversionProperties *smithy.Schema
-
-var JobLogEventData_eventResourceData *smithy.Schema
-
-var JobLogEventData_attemptCount *smithy.Schema
-
-var JobLogEventData_maxAttemptsCount *smithy.Schema
-
-var _JobLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobLogs",
-}, smithy.ShapeTypeList, 1)
-var _JobLogs_member *smithy.Schema
-
-var _JobsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobsList",
-}, smithy.ShapeTypeList, 1)
-var _JobsList_member *smithy.Schema
-
-var _JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _JobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "JobType",
-}, smithy.ShapeTypeString, 0)
-
-var _LargeBoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LargeBoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var _LastLaunchResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LastLaunchResult",
-}, smithy.ShapeTypeString, 0)
-
-var _LastLaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LastLaunchType",
-}, smithy.ShapeTypeString, 0)
-
-var LaunchAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchAction",
-}, smithy.ShapeTypeStructure, 11)
-var LaunchAction_actionId *smithy.Schema
-
-var LaunchAction_actionCode *smithy.Schema
-
-var LaunchAction_type *smithy.Schema
-
-var LaunchAction_name *smithy.Schema
-
-var LaunchAction_active *smithy.Schema
-
-var LaunchAction_order *smithy.Schema
-
-var LaunchAction_actionVersion *smithy.Schema
-
-var LaunchAction_optional *smithy.Schema
-
-var LaunchAction_parameters *smithy.Schema
-
-var LaunchAction_description *smithy.Schema
-
-var LaunchAction_category *smithy.Schema
-
-var _LaunchActionCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionId",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionIds",
-}, smithy.ShapeTypeList, 1)
-var _LaunchActionIds_member *smithy.Schema
-
-var _LaunchActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionName",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionOrder",
-}, smithy.ShapeTypeInteger, 0)
-
-var LaunchActionParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionParameter",
-}, smithy.ShapeTypeStructure, 2)
-var LaunchActionParameter_value *smithy.Schema
-
-var LaunchActionParameter_type *smithy.Schema
-
-var _LaunchActionParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionParameters",
-}, smithy.ShapeTypeMap, 2)
-var _LaunchActionParameters_key *smithy.Schema
-
-var _LaunchActionParameters_value *smithy.Schema
-
-var _LaunchActionParameterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionParameterType",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var LaunchActionRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionRun",
-}, smithy.ShapeTypeStructure, 4)
-var LaunchActionRun_action *smithy.Schema
-
-var LaunchActionRun_runId *smithy.Schema
-
-var LaunchActionRun_status *smithy.Schema
-
-var LaunchActionRun_failureReason *smithy.Schema
-
-var _LaunchActionRunId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionRunId",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionRuns",
-}, smithy.ShapeTypeList, 1)
-var _LaunchActionRuns_member *smithy.Schema
-
-var _LaunchActionRunStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionRunStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActions",
-}, smithy.ShapeTypeList, 1)
-var _LaunchActions_member *smithy.Schema
-
-var LaunchActionsRequestFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionsRequestFilters",
-}, smithy.ShapeTypeStructure, 1)
-var LaunchActionsRequestFilters_actionIds *smithy.Schema
-
-var LaunchActionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var LaunchActionsStatus_ssmAgentDiscoveryDatetime *smithy.Schema
-
-var LaunchActionsStatus_runs *smithy.Schema
-
-var _LaunchActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionType",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchActionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchActionVersion",
-}, smithy.ShapeTypeString, 0)
-
-var LaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchConfigurationTemplate",
-}, smithy.ShapeTypeStructure, 12)
-var LaunchConfigurationTemplate_launchConfigurationTemplateID *smithy.Schema
-
-var LaunchConfigurationTemplate_arn *smithy.Schema
-
-var LaunchConfigurationTemplate_tags *smithy.Schema
-
-var LaunchConfigurationTemplate_launchDisposition *smithy.Schema
-
-var LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod *smithy.Schema
-
-var LaunchConfigurationTemplate_copyPrivateIp *smithy.Schema
-
-var LaunchConfigurationTemplate_copyTags *smithy.Schema
-
-var LaunchConfigurationTemplate_licensing *smithy.Schema
-
-var LaunchConfigurationTemplate_exportBucketArn *smithy.Schema
-
-var LaunchConfigurationTemplate_postLaunchEnabled *smithy.Schema
-
-var LaunchConfigurationTemplate_launchIntoSourceInstance *smithy.Schema
-
-var LaunchConfigurationTemplate_recoveryMode *smithy.Schema
-
-var _LaunchConfigurationTemplateID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchConfigurationTemplateID",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchConfigurationTemplateIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchConfigurationTemplateIDs",
-}, smithy.ShapeTypeList, 1)
-var _LaunchConfigurationTemplateIDs_member *smithy.Schema
-
-var _LaunchConfigurationTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchConfigurationTemplates",
-}, smithy.ShapeTypeList, 1)
-var _LaunchConfigurationTemplates_member *smithy.Schema
-
-var _LaunchDisposition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchDisposition",
-}, smithy.ShapeTypeString, 0)
-
-var LaunchIntoInstanceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchIntoInstanceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var LaunchIntoInstanceProperties_launchIntoEC2InstanceID *smithy.Schema
-
-var _LaunchStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Licensing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "Licensing",
-}, smithy.ShapeTypeStructure, 1)
-var Licensing_osByol *smithy.Schema
-
-var LifeCycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LifeCycle",
-}, smithy.ShapeTypeStructure, 5)
-var LifeCycle_addedToServiceDateTime *smithy.Schema
-
-var LifeCycle_firstByteDateTime *smithy.Schema
-
-var LifeCycle_elapsedReplicationDuration *smithy.Schema
-
-var LifeCycle_lastSeenByServiceDateTime *smithy.Schema
-
-var LifeCycle_lastLaunch *smithy.Schema
-
-var LifeCycleLastLaunch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LifeCycleLastLaunch",
-}, smithy.ShapeTypeStructure, 2)
-var LifeCycleLastLaunch_initiated *smithy.Schema
-
-var LifeCycleLastLaunch_status *smithy.Schema
-
-var LifeCycleLastLaunchInitiated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LifeCycleLastLaunchInitiated",
-}, smithy.ShapeTypeStructure, 3)
-var LifeCycleLastLaunchInitiated_apiCallDateTime *smithy.Schema
-
-var LifeCycleLastLaunchInitiated_jobID *smithy.Schema
-
-var LifeCycleLastLaunchInitiated_type *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionStepsFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ListRecoveryPlanExecutionStepsFilter_status *smithy.Schema
-
-var _MaxResultsReplicatingSourceServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "MaxResultsReplicatingSourceServers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "MaxResultsType",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkInterface_macAddress *smithy.Schema
-
-var NetworkInterface_ips *smithy.Schema
-
-var NetworkInterface_isPrimary *smithy.Schema
-
-var _NetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "NetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInterfaces_member *smithy.Schema
-
-var _OriginEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "OriginEnvironment",
-}, smithy.ShapeTypeString, 0)
-
-var OS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "OS",
-}, smithy.ShapeTypeStructure, 1)
-var OS_fullString *smithy.Schema
-
-var _OutpostARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "OutpostARN",
-}, smithy.ShapeTypeString, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var ParticipatingResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ParticipatingResource",
-}, smithy.ShapeTypeStructure, 2)
-var ParticipatingResource_participatingResourceID *smithy.Schema
-
-var ParticipatingResource_launchStatus *smithy.Schema
-
-var ParticipatingResourceID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ParticipatingResourceID",
-}, smithy.ShapeTypeUnion, 1)
-var ParticipatingResourceID_sourceNetworkID *smithy.Schema
-
-var _ParticipatingResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ParticipatingResources",
-}, smithy.ShapeTypeList, 1)
-var _ParticipatingResources_member *smithy.Schema
-
-var ParticipatingServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ParticipatingServer",
-}, smithy.ShapeTypeStructure, 4)
-var ParticipatingServer_sourceServerID *smithy.Schema
-
-var ParticipatingServer_recoveryInstanceID *smithy.Schema
-
-var ParticipatingServer_launchStatus *smithy.Schema
-
-var ParticipatingServer_launchActionsStatus *smithy.Schema
-
-var _ParticipatingServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ParticipatingServers",
-}, smithy.ShapeTypeList, 1)
-var _ParticipatingServers_member *smithy.Schema
-
-var _PITPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PITPolicy",
-}, smithy.ShapeTypeList, 1)
-var _PITPolicy_member *smithy.Schema
-
-var PITPolicyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PITPolicyRule",
-}, smithy.ShapeTypeStructure, 5)
-var PITPolicyRule_ruleID *smithy.Schema
-
-var PITPolicyRule_units *smithy.Schema
-
-var PITPolicyRule_interval *smithy.Schema
-
-var PITPolicyRule_retentionDuration *smithy.Schema
-
-var PITPolicyRule_enabled *smithy.Schema
-
-var _PITPolicyRuleUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PITPolicyRuleUnits",
-}, smithy.ShapeTypeString, 0)
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeLong, 0)
-
-var ProductCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ProductCode",
-}, smithy.ShapeTypeStructure, 2)
-var ProductCode_productCodeId *smithy.Schema
-
-var ProductCode_productCodeMode *smithy.Schema
-
-var _ProductCodeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ProductCodeId",
-}, smithy.ShapeTypeString, 0)
-
-var _ProductCodeMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ProductCodeMode",
-}, smithy.ShapeTypeString, 0)
-
-var _ProductCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ProductCodes",
-}, smithy.ShapeTypeList, 1)
-var _ProductCodes_member *smithy.Schema
-
-var RecoveryInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstance",
-}, smithy.ShapeTypeStructure, 16)
-var RecoveryInstance_ec2InstanceID *smithy.Schema
-
-var RecoveryInstance_ec2InstanceState *smithy.Schema
-
-var RecoveryInstance_jobID *smithy.Schema
-
-var RecoveryInstance_recoveryInstanceID *smithy.Schema
-
-var RecoveryInstance_sourceServerID *smithy.Schema
-
-var RecoveryInstance_arn *smithy.Schema
-
-var RecoveryInstance_tags *smithy.Schema
-
-var RecoveryInstance_failback *smithy.Schema
-
-var RecoveryInstance_dataReplicationInfo *smithy.Schema
-
-var RecoveryInstance_recoveryInstanceProperties *smithy.Schema
-
-var RecoveryInstance_pointInTimeSnapshotDateTime *smithy.Schema
-
-var RecoveryInstance_isDrill *smithy.Schema
-
-var RecoveryInstance_originEnvironment *smithy.Schema
-
-var RecoveryInstance_originAvailabilityZone *smithy.Schema
-
-var RecoveryInstance_agentVersion *smithy.Schema
-
-var RecoveryInstance_sourceOutpostArn *smithy.Schema
-
-var RecoveryInstanceDataReplicationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationError",
-}, smithy.ShapeTypeStructure, 2)
-var RecoveryInstanceDataReplicationError_error *smithy.Schema
-
-var RecoveryInstanceDataReplicationError_rawError *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInfo",
-}, smithy.ShapeTypeStructure, 8)
-var RecoveryInstanceDataReplicationInfo_lagDuration *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_etaDateTime *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_replicatedDisks *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_dataReplicationState *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_dataReplicationInitiation *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_dataReplicationError *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_stagingAvailabilityZone *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfo_stagingOutpostArn *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfoReplicatedDisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInfoReplicatedDisk",
-}, smithy.ShapeTypeStructure, 5)
-var RecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes *smithy.Schema
-
-var RecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes *smithy.Schema
-
-var _RecoveryInstanceDataReplicationInfoReplicatedDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInfoReplicatedDisks",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryInstanceDataReplicationInfoReplicatedDisks_member *smithy.Schema
-
-var RecoveryInstanceDataReplicationInitiation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInitiation",
-}, smithy.ShapeTypeStructure, 2)
-var RecoveryInstanceDataReplicationInitiation_startDateTime *smithy.Schema
-
-var RecoveryInstanceDataReplicationInitiation_steps *smithy.Schema
-
-var RecoveryInstanceDataReplicationInitiationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInitiationStep",
-}, smithy.ShapeTypeStructure, 2)
-var RecoveryInstanceDataReplicationInitiationStep_name *smithy.Schema
-
-var RecoveryInstanceDataReplicationInitiationStep_status *smithy.Schema
-
-var _RecoveryInstanceDataReplicationInitiationStepName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInitiationStepName",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryInstanceDataReplicationInitiationSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInitiationSteps",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryInstanceDataReplicationInitiationSteps_member *smithy.Schema
-
-var _RecoveryInstanceDataReplicationInitiationStepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationInitiationStepStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryInstanceDataReplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDataReplicationState",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryInstanceDisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDisk",
-}, smithy.ShapeTypeStructure, 3)
-var RecoveryInstanceDisk_internalDeviceName *smithy.Schema
-
-var RecoveryInstanceDisk_bytes *smithy.Schema
-
-var RecoveryInstanceDisk_ebsVolumeID *smithy.Schema
-
-var _RecoveryInstanceDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceDisks",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryInstanceDisks_member *smithy.Schema
-
-var RecoveryInstanceFailback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceFailback",
-}, smithy.ShapeTypeStructure, 10)
-var RecoveryInstanceFailback_failbackClientID *smithy.Schema
-
-var RecoveryInstanceFailback_failbackJobID *smithy.Schema
-
-var RecoveryInstanceFailback_failbackInitiationTime *smithy.Schema
-
-var RecoveryInstanceFailback_state *smithy.Schema
-
-var RecoveryInstanceFailback_agentLastSeenByServiceDateTime *smithy.Schema
-
-var RecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime *smithy.Schema
-
-var RecoveryInstanceFailback_failbackToOriginalServer *smithy.Schema
-
-var RecoveryInstanceFailback_firstByteDateTime *smithy.Schema
-
-var RecoveryInstanceFailback_elapsedReplicationDuration *smithy.Schema
-
-var RecoveryInstanceFailback_failbackLaunchType *smithy.Schema
-
-var _RecoveryInstanceID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceID",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryInstanceIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceIDs",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryInstanceIDs_member *smithy.Schema
-
-var RecoveryInstanceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstanceProperties",
-}, smithy.ShapeTypeStructure, 7)
-var RecoveryInstanceProperties_lastUpdatedDateTime *smithy.Schema
-
-var RecoveryInstanceProperties_identificationHints *smithy.Schema
-
-var RecoveryInstanceProperties_networkInterfaces *smithy.Schema
-
-var RecoveryInstanceProperties_disks *smithy.Schema
-
-var RecoveryInstanceProperties_cpus *smithy.Schema
-
-var RecoveryInstanceProperties_ramBytes *smithy.Schema
-
-var RecoveryInstanceProperties_os *smithy.Schema
-
-var _RecoveryInstancesForTerminationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryInstancesForTerminationRequest",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryInstancesForTerminationRequest_member *smithy.Schema
-
-var RecoveryLifeCycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryLifeCycle",
-}, smithy.ShapeTypeStructure, 3)
-var RecoveryLifeCycle_apiCallDateTime *smithy.Schema
-
-var RecoveryLifeCycle_jobID *smithy.Schema
-
-var RecoveryLifeCycle_lastRecoveryResult *smithy.Schema
-
-var _RecoveryMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryMode",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlan",
-}, smithy.ShapeTypeStructure, 7)
-var RecoveryPlan_recoveryPlanArn *smithy.Schema
-
-var RecoveryPlan_name *smithy.Schema
-
-var RecoveryPlan_description *smithy.Schema
-
-var RecoveryPlan_status *smithy.Schema
-
-var RecoveryPlan_createdAt *smithy.Schema
-
-var RecoveryPlan_updatedAt *smithy.Schema
-
-var RecoveryPlan_tags *smithy.Schema
-
-var _RecoveryPlanDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanDescription",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecution",
-}, smithy.ShapeTypeStructure, 8)
-var RecoveryPlanExecution_recoveryPlanExecutionArn *smithy.Schema
-
-var RecoveryPlanExecution_recoveryPlanArn *smithy.Schema
-
-var RecoveryPlanExecution_mode *smithy.Schema
-
-var RecoveryPlanExecution_status *smithy.Schema
-
-var RecoveryPlanExecution_startedAt *smithy.Schema
-
-var RecoveryPlanExecution_completedAt *smithy.Schema
-
-var RecoveryPlanExecution_errorDetail *smithy.Schema
-
-var RecoveryPlanExecution_tags *smithy.Schema
-
-var _RecoveryPlanExecutionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionMode",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanExecutionServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionServer",
-}, smithy.ShapeTypeStructure, 3)
-var RecoveryPlanExecutionServer_serverArn *smithy.Schema
-
-var RecoveryPlanExecutionServer_impactLevel *smithy.Schema
-
-var RecoveryPlanExecutionServer_jobID *smithy.Schema
-
-var _RecoveryPlanExecutionServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionServers",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanExecutionServers_member *smithy.Schema
-
-var RecoveryPlanExecutionSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionSourceServer",
-}, smithy.ShapeTypeStructure, 2)
-var RecoveryPlanExecutionSourceServer_sourceServerID *smithy.Schema
-
-var RecoveryPlanExecutionSourceServer_recoverySnapshotID *smithy.Schema
-
-var _RecoveryPlanExecutionSourceServerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionSourceServerList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanExecutionSourceServerList_member *smithy.Schema
-
-var _RecoveryPlanExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanExecutionStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStep",
-}, smithy.ShapeTypeStructure, 9)
-var RecoveryPlanExecutionStep_recoveryPlanExecutionStepArn *smithy.Schema
-
-var RecoveryPlanExecutionStep_stepIndex *smithy.Schema
-
-var RecoveryPlanExecutionStep_status *smithy.Schema
-
-var RecoveryPlanExecutionStep_stepName *smithy.Schema
-
-var RecoveryPlanExecutionStep_configuration *smithy.Schema
-
-var RecoveryPlanExecutionStep_errorDetail *smithy.Schema
-
-var RecoveryPlanExecutionStep_attempt *smithy.Schema
-
-var RecoveryPlanExecutionStep_createdAt *smithy.Schema
-
-var RecoveryPlanExecutionStep_updatedAt *smithy.Schema
-
-var RecoveryPlanExecutionStepConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStepConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var RecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration *smithy.Schema
-
-var RecoveryPlanExecutionStepConfiguration_waitStepConfiguration *smithy.Schema
-
-var _RecoveryPlanExecutionStepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStepStatus",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanExecutionStepSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStepSummary",
-}, smithy.ShapeTypeStructure, 6)
-var RecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn *smithy.Schema
-
-var RecoveryPlanExecutionStepSummary_stepName *smithy.Schema
-
-var RecoveryPlanExecutionStepSummary_stepIndex *smithy.Schema
-
-var RecoveryPlanExecutionStepSummary_status *smithy.Schema
-
-var RecoveryPlanExecutionStepSummary_configuration *smithy.Schema
-
-var RecoveryPlanExecutionStepSummary_errorDetail *smithy.Schema
-
-var _RecoveryPlanExecutionStepSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionStepSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanExecutionStepSummaryList_member *smithy.Schema
-
-var RecoveryPlanExecutionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var RecoveryPlanExecutionSummary_recoveryPlanExecutionArn *smithy.Schema
-
-var RecoveryPlanExecutionSummary_recoveryPlanArn *smithy.Schema
-
-var RecoveryPlanExecutionSummary_mode *smithy.Schema
-
-var RecoveryPlanExecutionSummary_status *smithy.Schema
-
-var RecoveryPlanExecutionSummary_startedAt *smithy.Schema
-
-var RecoveryPlanExecutionSummary_errorDetail *smithy.Schema
-
-var _RecoveryPlanExecutionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanExecutionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanExecutionSummaryList_member *smithy.Schema
-
-var _RecoveryPlanName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanName",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanServer",
-}, smithy.ShapeTypeStructure, 2)
-var RecoveryPlanServer_serverArn *smithy.Schema
-
-var RecoveryPlanServer_impactLevel *smithy.Schema
-
-var _RecoveryPlanServerImpactLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanServerImpactLevel",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryPlanServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanServers",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanServers_member *smithy.Schema
-
-var _RecoveryPlanStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStatus",
-}, smithy.ShapeTypeString, 0)
-
-var RecoveryPlanStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStep",
-}, smithy.ShapeTypeStructure, 6)
-var RecoveryPlanStep_recoveryPlanStepArn *smithy.Schema
-
-var RecoveryPlanStep_stepOrder *smithy.Schema
-
-var RecoveryPlanStep_stepName *smithy.Schema
-
-var RecoveryPlanStep_configuration *smithy.Schema
-
-var RecoveryPlanStep_createdAt *smithy.Schema
-
-var RecoveryPlanStep_updatedAt *smithy.Schema
-
-var _RecoveryPlanStepArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStepArnList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanStepArnList_member *smithy.Schema
-
-var RecoveryPlanStepConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStepConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var RecoveryPlanStepConfiguration_serverStepConfiguration *smithy.Schema
-
-var RecoveryPlanStepConfiguration_waitStepConfiguration *smithy.Schema
-
-var _RecoveryPlanStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStepList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanStepList_member *smithy.Schema
-
-var _RecoveryPlanStepName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStepName",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryPlanStepOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanStepOrder",
-}, smithy.ShapeTypeInteger, 0)
-
-var RecoveryPlanSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanSummary",
-}, smithy.ShapeTypeStructure, 5)
-var RecoveryPlanSummary_recoveryPlanArn *smithy.Schema
-
-var RecoveryPlanSummary_name *smithy.Schema
-
-var RecoveryPlanSummary_status *smithy.Schema
-
-var RecoveryPlanSummary_createdAt *smithy.Schema
-
-var RecoveryPlanSummary_updatedAt *smithy.Schema
-
-var _RecoveryPlanSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryPlanSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPlanSummaryList_member *smithy.Schema
-
-var _RecoveryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoveryResult",
-}, smithy.ShapeTypeString, 0)
-
-var RecoverySnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoverySnapshot",
-}, smithy.ShapeTypeStructure, 5)
-var RecoverySnapshot_snapshotID *smithy.Schema
-
-var RecoverySnapshot_sourceServerID *smithy.Schema
-
-var RecoverySnapshot_expectedTimestamp *smithy.Schema
-
-var RecoverySnapshot_timestamp *smithy.Schema
-
-var RecoverySnapshot_ebsSnapshots *smithy.Schema
-
-var _RecoverySnapshotID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoverySnapshotID",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoverySnapshotsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoverySnapshotsList",
-}, smithy.ShapeTypeList, 1)
-var _RecoverySnapshotsList_member *smithy.Schema
-
-var _RecoverySnapshotsOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RecoverySnapshotsOrder",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplicationConfigurationDataPlaneRouting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationDataPlaneRouting",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplicationConfigurationDefaultLargeStagingDiskType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationDefaultLargeStagingDiskType",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplicationConfigurationEbsEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationEbsEncryption",
-}, smithy.ShapeTypeString, 0)
-
-var ReplicationConfigurationReplicatedDisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationReplicatedDisk",
-}, smithy.ShapeTypeStructure, 6)
-var ReplicationConfigurationReplicatedDisk_deviceName *smithy.Schema
-
-var ReplicationConfigurationReplicatedDisk_isBootDisk *smithy.Schema
-
-var ReplicationConfigurationReplicatedDisk_stagingDiskType *smithy.Schema
-
-var ReplicationConfigurationReplicatedDisk_iops *smithy.Schema
-
-var ReplicationConfigurationReplicatedDisk_throughput *smithy.Schema
-
-var ReplicationConfigurationReplicatedDisk_optimizedStagingDiskType *smithy.Schema
-
-var _ReplicationConfigurationReplicatedDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationReplicatedDisks",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationConfigurationReplicatedDisks_member *smithy.Schema
-
-var _ReplicationConfigurationReplicatedDiskStagingDiskType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationReplicatedDiskStagingDiskType",
-}, smithy.ShapeTypeString, 0)
-
-var ReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationTemplate",
-}, smithy.ShapeTypeStructure, 18)
-var ReplicationConfigurationTemplate_replicationConfigurationTemplateID *smithy.Schema
-
-var ReplicationConfigurationTemplate_arn *smithy.Schema
-
-var ReplicationConfigurationTemplate_stagingAreaSubnetId *smithy.Schema
-
-var ReplicationConfigurationTemplate_associateDefaultSecurityGroup *smithy.Schema
-
-var ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs *smithy.Schema
-
-var ReplicationConfigurationTemplate_replicationServerInstanceType *smithy.Schema
-
-var ReplicationConfigurationTemplate_useDedicatedReplicationServer *smithy.Schema
-
-var ReplicationConfigurationTemplate_defaultLargeStagingDiskType *smithy.Schema
-
-var ReplicationConfigurationTemplate_ebsEncryption *smithy.Schema
-
-var ReplicationConfigurationTemplate_ebsEncryptionKeyArn *smithy.Schema
-
-var ReplicationConfigurationTemplate_bandwidthThrottling *smithy.Schema
-
-var ReplicationConfigurationTemplate_dataPlaneRouting *smithy.Schema
-
-var ReplicationConfigurationTemplate_createPublicIP *smithy.Schema
-
-var ReplicationConfigurationTemplate_stagingAreaTags *smithy.Schema
-
-var ReplicationConfigurationTemplate_tags *smithy.Schema
-
-var ReplicationConfigurationTemplate_pitPolicy *smithy.Schema
-
-var ReplicationConfigurationTemplate_autoReplicateNewDisks *smithy.Schema
-
-var ReplicationConfigurationTemplate_internetProtocol *smithy.Schema
-
-var _ReplicationConfigurationTemplateID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationTemplateID",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplicationConfigurationTemplateIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationTemplateIDs",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationConfigurationTemplateIDs_member *smithy.Schema
-
-var _ReplicationConfigurationTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfigurationTemplates",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationConfigurationTemplates_member *smithy.Schema
-
-var _ReplicationDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationDirection",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplicationServersSecurityGroupsIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationServersSecurityGroupsIDs",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationServersSecurityGroupsIDs_member *smithy.Schema
-
-var _ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_code *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _SecurityGroupID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SecurityGroupID",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveBoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SensitiveBoundedString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServerStepConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ServerStepConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ServerStepConfiguration_servers *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_code *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SmallBoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SmallBoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var SourceCloudProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceCloudProperties",
-}, smithy.ShapeTypeStructure, 4)
-var SourceCloudProperties_originAccountID *smithy.Schema
-
-var SourceCloudProperties_originRegion *smithy.Schema
-
-var SourceCloudProperties_originAvailabilityZone *smithy.Schema
-
-var SourceCloudProperties_sourceOutpostArn *smithy.Schema
-
-var SourceNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceNetwork",
-}, smithy.ShapeTypeStructure, 11)
-var SourceNetwork_sourceNetworkID *smithy.Schema
-
-var SourceNetwork_sourceVpcID *smithy.Schema
-
-var SourceNetwork_arn *smithy.Schema
-
-var SourceNetwork_tags *smithy.Schema
-
-var SourceNetwork_replicationStatus *smithy.Schema
-
-var SourceNetwork_replicationStatusDetails *smithy.Schema
-
-var SourceNetwork_cfnStackName *smithy.Schema
-
-var SourceNetwork_sourceRegion *smithy.Schema
-
-var SourceNetwork_sourceAccountID *smithy.Schema
-
-var SourceNetwork_lastRecovery *smithy.Schema
-
-var SourceNetwork_launchedVpcID *smithy.Schema
-
-var SourceNetworkData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceNetworkData",
-}, smithy.ShapeTypeStructure, 4)
-var SourceNetworkData_sourceNetworkID *smithy.Schema
-
-var SourceNetworkData_sourceVpc *smithy.Schema
-
-var SourceNetworkData_targetVpc *smithy.Schema
-
-var SourceNetworkData_stackName *smithy.Schema
-
-var _SourceNetworkID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceNetworkID",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceNetworksList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceNetworksList",
-}, smithy.ShapeTypeList, 1)
-var _SourceNetworksList_member *smithy.Schema
-
-var SourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceProperties",
-}, smithy.ShapeTypeStructure, 10)
-var SourceProperties_lastUpdatedDateTime *smithy.Schema
-
-var SourceProperties_recommendedInstanceType *smithy.Schema
-
-var SourceProperties_identificationHints *smithy.Schema
-
-var SourceProperties_networkInterfaces *smithy.Schema
-
-var SourceProperties_disks *smithy.Schema
-
-var SourceProperties_cpus *smithy.Schema
-
-var SourceProperties_ramBytes *smithy.Schema
-
-var SourceProperties_os *smithy.Schema
-
-var SourceProperties_supportsNitroInstances *smithy.Schema
-
-var SourceProperties_architecture *smithy.Schema
-
-var SourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServer",
-}, smithy.ShapeTypeStructure, 14)
-var SourceServer_sourceServerID *smithy.Schema
-
-var SourceServer_arn *smithy.Schema
-
-var SourceServer_tags *smithy.Schema
-
-var SourceServer_recoveryInstanceId *smithy.Schema
-
-var SourceServer_lastLaunchResult *smithy.Schema
-
-var SourceServer_dataReplicationInfo *smithy.Schema
-
-var SourceServer_lifeCycle *smithy.Schema
-
-var SourceServer_sourceProperties *smithy.Schema
-
-var SourceServer_stagingArea *smithy.Schema
-
-var SourceServer_sourceCloudProperties *smithy.Schema
-
-var SourceServer_replicationDirection *smithy.Schema
-
-var SourceServer_reversedDirectionSourceServerArn *smithy.Schema
-
-var SourceServer_sourceNetworkID *smithy.Schema
-
-var SourceServer_agentVersion *smithy.Schema
-
-var _SourceServerArchitecture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServerArchitecture",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceServerARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServerARN",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceServerID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServerID",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceServerIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServerIDs",
-}, smithy.ShapeTypeList, 1)
-var _SourceServerIDs_member *smithy.Schema
-
-var _SourceServersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SourceServersList",
-}, smithy.ShapeTypeList, 1)
-var _SourceServersList_member *smithy.Schema
-
-var _SsmDocumentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SsmDocumentName",
-}, smithy.ShapeTypeString, 0)
-
-var StagingArea = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StagingArea",
-}, smithy.ShapeTypeStructure, 4)
-var StagingArea_status *smithy.Schema
-
-var StagingArea_stagingAccountID *smithy.Schema
-
-var StagingArea_stagingSourceServerArn *smithy.Schema
-
-var StagingArea_errorMessage *smithy.Schema
-
-var StagingSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StagingSourceServer",
-}, smithy.ShapeTypeStructure, 3)
-var StagingSourceServer_hostname *smithy.Schema
-
-var StagingSourceServer_arn *smithy.Schema
-
-var StagingSourceServer_tags *smithy.Schema
-
-var _StagingSourceServersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StagingSourceServersList",
-}, smithy.ShapeTypeList, 1)
-var _StagingSourceServersList_member *smithy.Schema
-
-var _StartFailbackRequestRecoveryInstanceIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartFailbackRequestRecoveryInstanceIDs",
-}, smithy.ShapeTypeList, 1)
-var _StartFailbackRequestRecoveryInstanceIDs_member *smithy.Schema
-
-var StartRecoveryRequestSourceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryRequestSourceServer",
-}, smithy.ShapeTypeStructure, 2)
-var StartRecoveryRequestSourceServer_sourceServerID *smithy.Schema
-
-var StartRecoveryRequestSourceServer_recoverySnapshotID *smithy.Schema
-
-var _StartRecoveryRequestSourceServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryRequestSourceServers",
-}, smithy.ShapeTypeList, 1)
-var _StartRecoveryRequestSourceServers_member *smithy.Schema
-
-var _StartSourceNetworkRecoveryRequestNetworkEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkRecoveryRequestNetworkEntries",
-}, smithy.ShapeTypeList, 1)
-var _StartSourceNetworkRecoveryRequestNetworkEntries_member *smithy.Schema
-
-var StartSourceNetworkRecoveryRequestNetworkEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkRecoveryRequestNetworkEntry",
-}, smithy.ShapeTypeStructure, 2)
-var StartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID *smithy.Schema
-
-var StartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName *smithy.Schema
-
-var _StrictDRSARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StrictDRSARN",
-}, smithy.ShapeTypeString, 0)
-
-var _StrictlyPositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StrictlyPositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SubnetID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "SubnetID",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _TagKeys_member *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetInstanceTypeRightSizingMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TargetInstanceTypeRightSizingMethod",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var UninitializedAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UninitializedAccountException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UninitializedAccountException_message *smithy.Schema
-
-var UninitializedAccountException_code *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_code *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "VolumeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeToConversionMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "VolumeToConversionMap",
-}, smithy.ShapeTypeMap, 2)
-var _VolumeToConversionMap_key *smithy.Schema
-
-var _VolumeToConversionMap_value *smithy.Schema
-
-var _VolumeToProductCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "VolumeToProductCodes",
-}, smithy.ShapeTypeMap, 2)
-var _VolumeToProductCodes_key *smithy.Schema
-
-var _VolumeToProductCodes_value *smithy.Schema
-
-var _VolumeToSizeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "VolumeToSizeMap",
-}, smithy.ShapeTypeMap, 2)
-var _VolumeToSizeMap_key *smithy.Schema
-
-var _VolumeToSizeMap_value *smithy.Schema
-
-var _VpcID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "VpcID",
-}, smithy.ShapeTypeString, 0)
-
-var _WaitDurationMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "WaitDurationMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var WaitStepConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "WaitStepConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var WaitStepConfiguration_waitDurationMinutes *smithy.Schema
-
-var AssociateSourceNetworkStackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AssociateSourceNetworkStackRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateSourceNetworkStackRequest_sourceNetworkID *smithy.Schema
-
-var AssociateSourceNetworkStackRequest_cfnStackName *smithy.Schema
-
-var AssociateSourceNetworkStackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "AssociateSourceNetworkStackResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateSourceNetworkStackResponse_job *smithy.Schema
-
-var CancelRecoveryPlanExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CancelRecoveryPlanExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn *smithy.Schema
-
-var CancelRecoveryPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CancelRecoveryPlanExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelRecoveryPlanExecutionResponse_recoveryPlanExecution *smithy.Schema
-
-var CreateExtendedSourceServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateExtendedSourceServerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateExtendedSourceServerRequest_sourceServerArn *smithy.Schema
-
-var CreateExtendedSourceServerRequest_tags *smithy.Schema
-
-var CreateExtendedSourceServerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateExtendedSourceServerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateExtendedSourceServerResponse_sourceServer *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateLaunchConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateLaunchConfigurationTemplateRequest_tags *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_launchDisposition *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_copyPrivateIp *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_copyTags *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_licensing *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_exportBucketArn *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_postLaunchEnabled *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance *smithy.Schema
-
-var CreateLaunchConfigurationTemplateRequest_recoveryMode *smithy.Schema
-
-var CreateLaunchConfigurationTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateLaunchConfigurationTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate *smithy.Schema
-
-var CreateRecoveryPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlanRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRecoveryPlanRequest_name *smithy.Schema
-
-var CreateRecoveryPlanRequest_description *smithy.Schema
-
-var CreateRecoveryPlanRequest_clientToken *smithy.Schema
-
-var CreateRecoveryPlanRequest_tags *smithy.Schema
-
-var CreateRecoveryPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRecoveryPlanResponse_recoveryPlan *smithy.Schema
-
-var CreateRecoveryPlanStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlanStepRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRecoveryPlanStepRequest_recoveryPlanArn *smithy.Schema
-
-var CreateRecoveryPlanStepRequest_stepName *smithy.Schema
-
-var CreateRecoveryPlanStepRequest_stepOrder *smithy.Schema
-
-var CreateRecoveryPlanStepRequest_configuration *smithy.Schema
-
-var CreateRecoveryPlanStepRequest_clientToken *smithy.Schema
-
-var CreateRecoveryPlanStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateRecoveryPlanStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRecoveryPlanStepResponse_recoveryPlanStep *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateReplicationConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 16)
-var CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_ebsEncryption *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_bandwidthThrottling *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_dataPlaneRouting *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_createPublicIP *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_stagingAreaTags *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_pitPolicy *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_tags *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks *smithy.Schema
-
-var CreateReplicationConfigurationTemplateRequest_internetProtocol *smithy.Schema
-
-var CreateSourceNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateSourceNetworkRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSourceNetworkRequest_vpcID *smithy.Schema
-
-var CreateSourceNetworkRequest_originAccountID *smithy.Schema
-
-var CreateSourceNetworkRequest_originRegion *smithy.Schema
-
-var CreateSourceNetworkRequest_tags *smithy.Schema
-
-var CreateSourceNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "CreateSourceNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSourceNetworkResponse_sourceNetworkID *smithy.Schema
-
-var DeleteJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteJobRequest_jobID *smithy.Schema
-
-var DeleteJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLaunchActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchActionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLaunchActionRequest_resourceId *smithy.Schema
-
-var DeleteLaunchActionRequest_actionId *smithy.Schema
-
-var DeleteLaunchActionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchActionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLaunchConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID *smithy.Schema
-
-var DeleteLaunchConfigurationTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteLaunchConfigurationTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRecoveryInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryInstanceRequest_recoveryInstanceID *smithy.Schema
-
-var DeleteRecoveryPlanExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn *smithy.Schema
-
-var DeleteRecoveryPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn *smithy.Schema
-
-var DeleteRecoveryPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanRequest_recoveryPlanArn *smithy.Schema
-
-var DeleteRecoveryPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanResponse_recoveryPlanArn *smithy.Schema
-
-var DeleteRecoveryPlanStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanStepRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanStepRequest_recoveryPlanStepArn *smithy.Schema
-
-var DeleteRecoveryPlanStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteRecoveryPlanStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRecoveryPlanStepResponse_recoveryPlanStepArn *smithy.Schema
-
-var DeleteReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteReplicationConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID *smithy.Schema
-
-var DeleteReplicationConfigurationTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteReplicationConfigurationTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSourceNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceNetworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSourceNetworkRequest_sourceNetworkID *smithy.Schema
-
-var DeleteSourceNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceNetworkResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSourceServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSourceServerRequest_sourceServerID *smithy.Schema
-
-var DeleteSourceServerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DeleteSourceServerResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeJobLogItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobLogItemsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeJobLogItemsRequest_jobID *smithy.Schema
-
-var DescribeJobLogItemsRequest_maxResults *smithy.Schema
-
-var DescribeJobLogItemsRequest_nextToken *smithy.Schema
-
-var DescribeJobLogItemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobLogItemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobLogItemsResponse_items *smithy.Schema
-
-var DescribeJobLogItemsResponse_nextToken *smithy.Schema
-
-var DescribeJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeJobsRequest_filters *smithy.Schema
-
-var DescribeJobsRequest_maxResults *smithy.Schema
-
-var DescribeJobsRequest_nextToken *smithy.Schema
-
-var DescribeJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobsResponse_items *smithy.Schema
-
-var DescribeJobsResponse_nextToken *smithy.Schema
-
-var DescribeLaunchConfigurationTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeLaunchConfigurationTemplatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs *smithy.Schema
-
-var DescribeLaunchConfigurationTemplatesRequest_maxResults *smithy.Schema
-
-var DescribeLaunchConfigurationTemplatesRequest_nextToken *smithy.Schema
-
-var DescribeLaunchConfigurationTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeLaunchConfigurationTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLaunchConfigurationTemplatesResponse_items *smithy.Schema
-
-var DescribeLaunchConfigurationTemplatesResponse_nextToken *smithy.Schema
-
-var DescribeRecoveryInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoveryInstancesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeRecoveryInstancesRequest_filters *smithy.Schema
-
-var DescribeRecoveryInstancesRequest_maxResults *smithy.Schema
-
-var DescribeRecoveryInstancesRequest_nextToken *smithy.Schema
-
-var DescribeRecoveryInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoveryInstancesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecoveryInstancesResponse_nextToken *smithy.Schema
-
-var DescribeRecoveryInstancesResponse_items *smithy.Schema
-
-var DescribeRecoverySnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoverySnapshotsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeRecoverySnapshotsRequest_sourceServerID *smithy.Schema
-
-var DescribeRecoverySnapshotsRequest_filters *smithy.Schema
-
-var DescribeRecoverySnapshotsRequest_order *smithy.Schema
-
-var DescribeRecoverySnapshotsRequest_maxResults *smithy.Schema
-
-var DescribeRecoverySnapshotsRequest_nextToken *smithy.Schema
-
-var DescribeRecoverySnapshotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeRecoverySnapshotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecoverySnapshotsResponse_items *smithy.Schema
-
-var DescribeRecoverySnapshotsResponse_nextToken *smithy.Schema
-
-var DescribeReplicationConfigurationTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeReplicationConfigurationTemplatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs *smithy.Schema
-
-var DescribeReplicationConfigurationTemplatesRequest_maxResults *smithy.Schema
-
-var DescribeReplicationConfigurationTemplatesRequest_nextToken *smithy.Schema
-
-var DescribeReplicationConfigurationTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeReplicationConfigurationTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReplicationConfigurationTemplatesResponse_items *smithy.Schema
-
-var DescribeReplicationConfigurationTemplatesResponse_nextToken *smithy.Schema
-
-var DescribeSourceNetworksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceNetworksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSourceNetworksRequest_filters *smithy.Schema
-
-var DescribeSourceNetworksRequest_maxResults *smithy.Schema
-
-var DescribeSourceNetworksRequest_nextToken *smithy.Schema
-
-var DescribeSourceNetworksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceNetworksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSourceNetworksResponse_items *smithy.Schema
-
-var DescribeSourceNetworksResponse_nextToken *smithy.Schema
-
-var DescribeSourceServersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceServersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSourceServersRequest_filters *smithy.Schema
-
-var DescribeSourceServersRequest_maxResults *smithy.Schema
-
-var DescribeSourceServersRequest_nextToken *smithy.Schema
-
-var DescribeSourceServersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DescribeSourceServersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSourceServersResponse_items *smithy.Schema
-
-var DescribeSourceServersResponse_nextToken *smithy.Schema
-
-var DisconnectRecoveryInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DisconnectRecoveryInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisconnectRecoveryInstanceRequest_recoveryInstanceID *smithy.Schema
-
-var DisconnectSourceServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "DisconnectSourceServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisconnectSourceServerRequest_sourceServerID *smithy.Schema
-
-var ExportSourceNetworkCfnTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ExportSourceNetworkCfnTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ExportSourceNetworkCfnTemplateRequest_sourceNetworkID *smithy.Schema
-
-var ExportSourceNetworkCfnTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ExportSourceNetworkCfnTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl *smithy.Schema
-
-var GetFailbackReplicationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetFailbackReplicationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetFailbackReplicationConfigurationRequest_recoveryInstanceID *smithy.Schema
-
-var GetFailbackReplicationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetFailbackReplicationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetFailbackReplicationConfigurationResponse_recoveryInstanceID *smithy.Schema
-
-var GetFailbackReplicationConfigurationResponse_name *smithy.Schema
-
-var GetFailbackReplicationConfigurationResponse_bandwidthThrottling *smithy.Schema
-
-var GetFailbackReplicationConfigurationResponse_usePrivateIP *smithy.Schema
-
-var GetFailbackReplicationConfigurationResponse_internetProtocol *smithy.Schema
-
-var GetLaunchConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetLaunchConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetLaunchConfigurationRequest_sourceServerID *smithy.Schema
-
-var LaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "LaunchConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var LaunchConfiguration_sourceServerID *smithy.Schema
-
-var LaunchConfiguration_name *smithy.Schema
-
-var LaunchConfiguration_ec2LaunchTemplateID *smithy.Schema
-
-var LaunchConfiguration_launchDisposition *smithy.Schema
-
-var LaunchConfiguration_targetInstanceTypeRightSizingMethod *smithy.Schema
-
-var LaunchConfiguration_copyPrivateIp *smithy.Schema
-
-var LaunchConfiguration_copyTags *smithy.Schema
-
-var LaunchConfiguration_licensing *smithy.Schema
-
-var LaunchConfiguration_postLaunchEnabled *smithy.Schema
-
-var LaunchConfiguration_launchIntoInstanceProperties *smithy.Schema
-
-var LaunchConfiguration_recoveryMode *smithy.Schema
-
-var GetRecoveryPlanExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn *smithy.Schema
-
-var GetRecoveryPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanExecutionResponse_recoveryPlanExecution *smithy.Schema
-
-var GetRecoveryPlanExecutionStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecutionStepRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn *smithy.Schema
-
-var GetRecoveryPlanExecutionStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanExecutionStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep *smithy.Schema
-
-var GetRecoveryPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanRequest_recoveryPlanArn *smithy.Schema
-
-var GetRecoveryPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanResponse_recoveryPlan *smithy.Schema
-
-var GetRecoveryPlanStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanStepRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanStepRequest_recoveryPlanStepArn *smithy.Schema
-
-var GetRecoveryPlanStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetRecoveryPlanStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecoveryPlanStepResponse_recoveryPlanStep *smithy.Schema
-
-var GetReplicationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "GetReplicationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetReplicationConfigurationRequest_sourceServerID *smithy.Schema
-
-var ReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReplicationConfiguration",
-}, smithy.ShapeTypeStructure, 18)
-var ReplicationConfiguration_sourceServerID *smithy.Schema
-
-var ReplicationConfiguration_name *smithy.Schema
-
-var ReplicationConfiguration_stagingAreaSubnetId *smithy.Schema
-
-var ReplicationConfiguration_associateDefaultSecurityGroup *smithy.Schema
-
-var ReplicationConfiguration_replicationServersSecurityGroupsIDs *smithy.Schema
-
-var ReplicationConfiguration_replicationServerInstanceType *smithy.Schema
-
-var ReplicationConfiguration_useDedicatedReplicationServer *smithy.Schema
-
-var ReplicationConfiguration_defaultLargeStagingDiskType *smithy.Schema
-
-var ReplicationConfiguration_replicatedDisks *smithy.Schema
-
-var ReplicationConfiguration_ebsEncryption *smithy.Schema
-
-var ReplicationConfiguration_ebsEncryptionKeyArn *smithy.Schema
-
-var ReplicationConfiguration_bandwidthThrottling *smithy.Schema
-
-var ReplicationConfiguration_dataPlaneRouting *smithy.Schema
-
-var ReplicationConfiguration_createPublicIP *smithy.Schema
-
-var ReplicationConfiguration_stagingAreaTags *smithy.Schema
-
-var ReplicationConfiguration_pitPolicy *smithy.Schema
-
-var ReplicationConfiguration_autoReplicateNewDisks *smithy.Schema
-
-var ReplicationConfiguration_internetProtocol *smithy.Schema
-
-var InitializeServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InitializeServiceRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var InitializeServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "InitializeServiceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListExtensibleSourceServersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListExtensibleSourceServersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExtensibleSourceServersRequest_stagingAccountID *smithy.Schema
-
-var ListExtensibleSourceServersRequest_maxResults *smithy.Schema
-
-var ListExtensibleSourceServersRequest_nextToken *smithy.Schema
-
-var ListExtensibleSourceServersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListExtensibleSourceServersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExtensibleSourceServersResponse_items *smithy.Schema
-
-var ListExtensibleSourceServersResponse_nextToken *smithy.Schema
-
-var ListLaunchActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListLaunchActionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListLaunchActionsRequest_resourceId *smithy.Schema
-
-var ListLaunchActionsRequest_filters *smithy.Schema
-
-var ListLaunchActionsRequest_maxResults *smithy.Schema
-
-var ListLaunchActionsRequest_nextToken *smithy.Schema
-
-var ListLaunchActionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListLaunchActionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLaunchActionsResponse_items *smithy.Schema
-
-var ListLaunchActionsResponse_nextToken *smithy.Schema
-
-var ListRecoveryPlanExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRecoveryPlanExecutionsRequest_recoveryPlanArn *smithy.Schema
-
-var ListRecoveryPlanExecutionsRequest_status *smithy.Schema
-
-var ListRecoveryPlanExecutionsRequest_maxResults *smithy.Schema
-
-var ListRecoveryPlanExecutionsRequest_nextToken *smithy.Schema
-
-var ListRecoveryPlanExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions *smithy.Schema
-
-var ListRecoveryPlanExecutionsResponse_nextToken *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionStepsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsRequest_filter *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsRequest_maxResults *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsRequest_nextToken *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanExecutionStepsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps *smithy.Schema
-
-var ListRecoveryPlanExecutionStepsResponse_nextToken *smithy.Schema
-
-var ListRecoveryPlansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlansRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryPlansRequest_maxResults *smithy.Schema
-
-var ListRecoveryPlansRequest_nextToken *smithy.Schema
-
-var ListRecoveryPlansResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlansResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryPlansResponse_recoveryPlans *smithy.Schema
-
-var ListRecoveryPlansResponse_nextToken *smithy.Schema
-
-var ListRecoveryPlanStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanStepsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecoveryPlanStepsRequest_recoveryPlanArn *smithy.Schema
-
-var ListRecoveryPlanStepsRequest_maxResults *smithy.Schema
-
-var ListRecoveryPlanStepsRequest_nextToken *smithy.Schema
-
-var ListRecoveryPlanStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListRecoveryPlanStepsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecoveryPlanStepsResponse_recoveryPlanSteps *smithy.Schema
-
-var ListRecoveryPlanStepsResponse_nextToken *smithy.Schema
-
-var ListStagingAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListStagingAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListStagingAccountsRequest_maxResults *smithy.Schema
-
-var ListStagingAccountsRequest_nextToken *smithy.Schema
-
-var ListStagingAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListStagingAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListStagingAccountsResponse_accounts *smithy.Schema
-
-var ListStagingAccountsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutLaunchActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PutLaunchActionRequest",
-}, smithy.ShapeTypeStructure, 11)
-var PutLaunchActionRequest_resourceId *smithy.Schema
-
-var PutLaunchActionRequest_actionCode *smithy.Schema
-
-var PutLaunchActionRequest_order *smithy.Schema
-
-var PutLaunchActionRequest_actionId *smithy.Schema
-
-var PutLaunchActionRequest_optional *smithy.Schema
-
-var PutLaunchActionRequest_active *smithy.Schema
-
-var PutLaunchActionRequest_name *smithy.Schema
-
-var PutLaunchActionRequest_actionVersion *smithy.Schema
-
-var PutLaunchActionRequest_category *smithy.Schema
-
-var PutLaunchActionRequest_parameters *smithy.Schema
-
-var PutLaunchActionRequest_description *smithy.Schema
-
-var PutLaunchActionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "PutLaunchActionResponse",
-}, smithy.ShapeTypeStructure, 12)
-var PutLaunchActionResponse_resourceId *smithy.Schema
-
-var PutLaunchActionResponse_actionId *smithy.Schema
-
-var PutLaunchActionResponse_actionCode *smithy.Schema
-
-var PutLaunchActionResponse_type *smithy.Schema
-
-var PutLaunchActionResponse_name *smithy.Schema
-
-var PutLaunchActionResponse_active *smithy.Schema
-
-var PutLaunchActionResponse_order *smithy.Schema
-
-var PutLaunchActionResponse_actionVersion *smithy.Schema
-
-var PutLaunchActionResponse_optional *smithy.Schema
-
-var PutLaunchActionResponse_parameters *smithy.Schema
-
-var PutLaunchActionResponse_description *smithy.Schema
-
-var PutLaunchActionResponse_category *smithy.Schema
-
-var ReorderRecoveryPlanStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReorderRecoveryPlanStepsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ReorderRecoveryPlanStepsRequest_recoveryPlanArn *smithy.Schema
-
-var ReorderRecoveryPlanStepsRequest_orderedStepArns *smithy.Schema
-
-var ReorderRecoveryPlanStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReorderRecoveryPlanStepsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ReorderRecoveryPlanStepsResponse_recoveryPlanSteps *smithy.Schema
-
-var RetryDataReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RetryDataReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RetryDataReplicationRequest_sourceServerID *smithy.Schema
-
-var RetryRecoveryPlanExecutionStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RetryRecoveryPlanExecutionStepRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn *smithy.Schema
-
-var RetryRecoveryPlanExecutionStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "RetryRecoveryPlanExecutionStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep *smithy.Schema
-
-var ReverseReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReverseReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ReverseReplicationRequest_recoveryInstanceID *smithy.Schema
-
-var ReverseReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "ReverseReplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ReverseReplicationResponse_reversedDirectionSourceServerArn *smithy.Schema
-
-var StartFailbackLaunchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartFailbackLaunchRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartFailbackLaunchRequest_recoveryInstanceIDs *smithy.Schema
-
-var StartFailbackLaunchRequest_tags *smithy.Schema
-
-var StartFailbackLaunchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartFailbackLaunchResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartFailbackLaunchResponse_job *smithy.Schema
-
-var StartRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartRecoveryRequest_sourceServers *smithy.Schema
-
-var StartRecoveryRequest_isDrill *smithy.Schema
-
-var StartRecoveryRequest_tags *smithy.Schema
-
-var StartRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRecoveryResponse_job *smithy.Schema
-
-var StartRecoveryPlanExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryPlanExecutionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartRecoveryPlanExecutionRequest_recoveryPlanArn *smithy.Schema
-
-var StartRecoveryPlanExecutionRequest_mode *smithy.Schema
-
-var StartRecoveryPlanExecutionRequest_clientToken *smithy.Schema
-
-var StartRecoveryPlanExecutionRequest_sourceServers *smithy.Schema
-
-var StartRecoveryPlanExecutionRequest_tags *smithy.Schema
-
-var StartRecoveryPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartRecoveryPlanExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRecoveryPlanExecutionResponse_recoveryPlanExecution *smithy.Schema
-
-var StartReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartReplicationRequest_sourceServerID *smithy.Schema
-
-var StartReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartReplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartReplicationResponse_sourceServer *smithy.Schema
-
-var StartSourceNetworkRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkRecoveryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartSourceNetworkRecoveryRequest_sourceNetworks *smithy.Schema
-
-var StartSourceNetworkRecoveryRequest_deployAsNew *smithy.Schema
-
-var StartSourceNetworkRecoveryRequest_tags *smithy.Schema
-
-var StartSourceNetworkRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkRecoveryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSourceNetworkRecoveryResponse_job *smithy.Schema
-
-var StartSourceNetworkReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartSourceNetworkReplicationRequest_sourceNetworkID *smithy.Schema
-
-var StartSourceNetworkReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StartSourceNetworkReplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSourceNetworkReplicationResponse_sourceNetwork *smithy.Schema
-
-var StopFailbackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopFailbackRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopFailbackRequest_recoveryInstanceID *smithy.Schema
-
-var StopReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopReplicationRequest_sourceServerID *smithy.Schema
-
-var StopReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopReplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopReplicationResponse_sourceServer *smithy.Schema
-
-var StopSourceNetworkReplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopSourceNetworkReplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopSourceNetworkReplicationRequest_sourceNetworkID *smithy.Schema
-
-var StopSourceNetworkReplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "StopSourceNetworkReplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopSourceNetworkReplicationResponse_sourceNetwork *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TerminateRecoveryInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TerminateRecoveryInstancesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var TerminateRecoveryInstancesRequest_recoveryInstanceIDs *smithy.Schema
-
-var TerminateRecoveryInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "TerminateRecoveryInstancesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var TerminateRecoveryInstancesResponse_job *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UpdateFailbackReplicationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateFailbackReplicationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFailbackReplicationConfigurationRequest_recoveryInstanceID *smithy.Schema
-
-var UpdateFailbackReplicationConfigurationRequest_name *smithy.Schema
-
-var UpdateFailbackReplicationConfigurationRequest_bandwidthThrottling *smithy.Schema
-
-var UpdateFailbackReplicationConfigurationRequest_usePrivateIP *smithy.Schema
-
-var UpdateFailbackReplicationConfigurationRequest_internetProtocol *smithy.Schema
-
-var UpdateLaunchConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateLaunchConfigurationRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateLaunchConfigurationRequest_sourceServerID *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_name *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_launchDisposition *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_copyPrivateIp *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_copyTags *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_licensing *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_postLaunchEnabled *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_launchIntoInstanceProperties *smithy.Schema
-
-var UpdateLaunchConfigurationRequest_recoveryMode *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateLaunchConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_launchDisposition *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_copyPrivateIp *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_copyTags *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_licensing *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_exportBucketArn *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateRequest_recoveryMode *smithy.Schema
-
-var UpdateLaunchConfigurationTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateLaunchConfigurationTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate *smithy.Schema
-
-var UpdateRecoveryPlanExecutionStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanExecutionStepRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn *smithy.Schema
-
-var UpdateRecoveryPlanExecutionStepRequest_status *smithy.Schema
-
-var UpdateRecoveryPlanExecutionStepRequest_servers *smithy.Schema
-
-var UpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes *smithy.Schema
-
-var UpdateRecoveryPlanExecutionStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanExecutionStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep *smithy.Schema
-
-var UpdateRecoveryPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRecoveryPlanRequest_recoveryPlanArn *smithy.Schema
-
-var UpdateRecoveryPlanRequest_name *smithy.Schema
-
-var UpdateRecoveryPlanRequest_description *smithy.Schema
-
-var UpdateRecoveryPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecoveryPlanResponse_recoveryPlan *smithy.Schema
-
-var UpdateRecoveryPlanStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanStepRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRecoveryPlanStepRequest_recoveryPlanStepArn *smithy.Schema
-
-var UpdateRecoveryPlanStepRequest_stepName *smithy.Schema
-
-var UpdateRecoveryPlanStepRequest_configuration *smithy.Schema
-
-var UpdateRecoveryPlanStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateRecoveryPlanStepResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecoveryPlanStepResponse_recoveryPlanStep *smithy.Schema
-
-var UpdateReplicationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateReplicationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 18)
-var UpdateReplicationConfigurationRequest_sourceServerID *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_name *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_stagingAreaSubnetId *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_replicationServerInstanceType *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_useDedicatedReplicationServer *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_replicatedDisks *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_ebsEncryption *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_bandwidthThrottling *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_dataPlaneRouting *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_createPublicIP *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_stagingAreaTags *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_pitPolicy *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_autoReplicateNewDisks *smithy.Schema
-
-var UpdateReplicationConfigurationRequest_internetProtocol *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.drs",
-	Name:      "UpdateReplicationConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 17)
-var UpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_arn *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_ebsEncryption *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_bandwidthThrottling *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_dataPlaneRouting *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_createPublicIP *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_stagingAreaTags *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_pitPolicy *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks *smithy.Schema
-
-var UpdateReplicationConfigurationTemplateRequest_internetProtocol *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _LargeBoundedString)
-
-	AccessDeniedException_code = AccessDeniedException.AddMember("code", _LargeBoundedString)
-
-	Account_accountID = Account.AddMember("accountID", _AccountID)
-
-	_AccountIDs_member = _AccountIDs.AddMember("member", _AccountID)
-
-	_Accounts_member = _Accounts.AddMember("member", Account)
-
-	ConflictException_message = ConflictException.AddMember("message", _LargeBoundedString)
-
-	ConflictException_code = ConflictException.AddMember("code", _LargeBoundedString)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _LargeBoundedString)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _LargeBoundedString)
-
-	_ConversionMap_key = _ConversionMap.AddMember("key", _EbsSnapshot)
-
-	_ConversionMap_value = _ConversionMap.AddMember("value", _EbsSnapshot)
-
-	_VolumeToConversionMap_key = _VolumeToConversionMap.AddMember("key", _LargeBoundedString)
-
-	_VolumeToConversionMap_value = _VolumeToConversionMap.AddMember("value", _ConversionMap)
-
-	_VolumeToSizeMap_key = _VolumeToSizeMap.AddMember("key", _LargeBoundedString)
-
-	_VolumeToSizeMap_value = _VolumeToSizeMap.AddMember("value", _PositiveInteger)
-
-	ProductCode_productCodeId = ProductCode.AddMember("productCodeId", _ProductCodeId)
-
-	ProductCode_productCodeMode = ProductCode.AddMember("productCodeMode", _ProductCodeMode)
-
-	_ProductCodes_member = _ProductCodes.AddMember("member", ProductCode)
-
-	_VolumeToProductCodes_key = _VolumeToProductCodes.AddMember("key", _LargeBoundedString)
-
-	_VolumeToProductCodes_value = _VolumeToProductCodes.AddMember("value", _ProductCodes)
-
-	ConversionProperties_volumeToConversionMap = ConversionProperties.AddMember("volumeToConversionMap", _VolumeToConversionMap)
-
-	ConversionProperties_rootVolumeName = ConversionProperties.AddMember("rootVolumeName", _LargeBoundedString)
-
-	ConversionProperties_forceUefi = ConversionProperties.AddMember("forceUefi", smithyprelude.Boolean)
-
-	ConversionProperties_dataTimestamp = ConversionProperties.AddMember("dataTimestamp", _LargeBoundedString)
-
-	ConversionProperties_volumeToVolumeSize = ConversionProperties.AddMember("volumeToVolumeSize", _VolumeToSizeMap)
-
-	ConversionProperties_volumeToProductCodes = ConversionProperties.AddMember("volumeToProductCodes", _VolumeToProductCodes)
-
-	CPU_cores = CPU.AddMember("cores", _PositiveInteger)
-
-	CPU_modelName = CPU.AddMember("modelName", _BoundedString)
-
-	_Cpus_member = _Cpus.AddMember("member", CPU)
-
-	DataReplicationError_error = DataReplicationError.AddMember("error", _DataReplicationErrorString)
-
-	DataReplicationError_rawError = DataReplicationError.AddMember("rawError", _LargeBoundedString)
-
-	DataReplicationInfoReplicatedDisk_deviceName = DataReplicationInfoReplicatedDisk.AddMember("deviceName", _BoundedString)
-
-	DataReplicationInfoReplicatedDisk_totalStorageBytes = DataReplicationInfoReplicatedDisk.AddMember("totalStorageBytes", _PositiveInteger)
-
-	DataReplicationInfoReplicatedDisk_replicatedStorageBytes = DataReplicationInfoReplicatedDisk.AddMember("replicatedStorageBytes", _PositiveInteger)
-
-	DataReplicationInfoReplicatedDisk_rescannedStorageBytes = DataReplicationInfoReplicatedDisk.AddMember("rescannedStorageBytes", _PositiveInteger)
-
-	DataReplicationInfoReplicatedDisk_backloggedStorageBytes = DataReplicationInfoReplicatedDisk.AddMember("backloggedStorageBytes", _PositiveInteger)
-
-	DataReplicationInfoReplicatedDisk_volumeStatus = DataReplicationInfoReplicatedDisk.AddMember("volumeStatus", _VolumeStatus)
-
-	_DataReplicationInfoReplicatedDisks_member = _DataReplicationInfoReplicatedDisks.AddMember("member", DataReplicationInfoReplicatedDisk)
-
-	DataReplicationInitiationStep_name = DataReplicationInitiationStep.AddMember("name", _DataReplicationInitiationStepName)
-
-	DataReplicationInitiationStep_status = DataReplicationInitiationStep.AddMember("status", _DataReplicationInitiationStepStatus)
-
-	_DataReplicationInitiationSteps_member = _DataReplicationInitiationSteps.AddMember("member", DataReplicationInitiationStep)
-
-	DataReplicationInitiation_startDateTime = DataReplicationInitiation.AddMember("startDateTime", _ISO8601DatetimeString)
-
-	DataReplicationInitiation_nextAttemptDateTime = DataReplicationInitiation.AddMember("nextAttemptDateTime", _ISO8601DatetimeString)
-
-	DataReplicationInitiation_steps = DataReplicationInitiation.AddMember("steps", _DataReplicationInitiationSteps)
-
-	DataReplicationInfo_lagDuration = DataReplicationInfo.AddMember("lagDuration", _ISO8601DurationString)
-
-	DataReplicationInfo_etaDateTime = DataReplicationInfo.AddMember("etaDateTime", _ISO8601DatetimeString)
-
-	DataReplicationInfo_replicatedDisks = DataReplicationInfo.AddMember("replicatedDisks", _DataReplicationInfoReplicatedDisks)
-
-	DataReplicationInfo_dataReplicationState = DataReplicationInfo.AddMember("dataReplicationState", _DataReplicationState)
-
-	DataReplicationInfo_dataReplicationInitiation = DataReplicationInfo.AddMember("dataReplicationInitiation", DataReplicationInitiation)
-
-	DataReplicationInfo_dataReplicationError = DataReplicationInfo.AddMember("dataReplicationError", DataReplicationError)
-
-	DataReplicationInfo_stagingAvailabilityZone = DataReplicationInfo.AddMember("stagingAvailabilityZone", _AwsAvailabilityZone)
-
-	DataReplicationInfo_stagingOutpostArn = DataReplicationInfo.AddMember("stagingOutpostArn", _OutpostARN)
-
-	_DescribeJobsRequestFiltersJobIDs_member = _DescribeJobsRequestFiltersJobIDs.AddMember("member", _JobID)
-
-	DescribeJobsRequestFilters_jobIDs = DescribeJobsRequestFilters.AddMember("jobIDs", _DescribeJobsRequestFiltersJobIDs)
-
-	DescribeJobsRequestFilters_fromDate = DescribeJobsRequestFilters.AddMember("fromDate", _ISO8601DatetimeString)
-
-	DescribeJobsRequestFilters_toDate = DescribeJobsRequestFilters.AddMember("toDate", _ISO8601DatetimeString)
-
-	_TagsMap_key = _TagsMap.AddMember("key", _TagKey)
-
-	_TagsMap_value = _TagsMap.AddMember("value", _TagValue)
-
-	RecoveryInstanceFailback_failbackClientID = RecoveryInstanceFailback.AddMember("failbackClientID", _BoundedString)
-
-	RecoveryInstanceFailback_failbackJobID = RecoveryInstanceFailback.AddMember("failbackJobID", _JobID)
-
-	RecoveryInstanceFailback_failbackInitiationTime = RecoveryInstanceFailback.AddMember("failbackInitiationTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceFailback_state = RecoveryInstanceFailback.AddMember("state", _FailbackState)
-
-	RecoveryInstanceFailback_agentLastSeenByServiceDateTime = RecoveryInstanceFailback.AddMember("agentLastSeenByServiceDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime = RecoveryInstanceFailback.AddMember("failbackClientLastSeenByServiceDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceFailback_failbackToOriginalServer = RecoveryInstanceFailback.AddMember("failbackToOriginalServer", smithyprelude.Boolean)
-
-	RecoveryInstanceFailback_firstByteDateTime = RecoveryInstanceFailback.AddMember("firstByteDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceFailback_elapsedReplicationDuration = RecoveryInstanceFailback.AddMember("elapsedReplicationDuration", _ISO8601DatetimeString)
-
-	RecoveryInstanceFailback_failbackLaunchType = RecoveryInstanceFailback.AddMember("failbackLaunchType", _FailbackLaunchType)
-
-	RecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName = RecoveryInstanceDataReplicationInfoReplicatedDisk.AddMember("deviceName", _BoundedString)
-
-	RecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes = RecoveryInstanceDataReplicationInfoReplicatedDisk.AddMember("totalStorageBytes", _PositiveInteger)
-
-	RecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes = RecoveryInstanceDataReplicationInfoReplicatedDisk.AddMember("replicatedStorageBytes", _PositiveInteger)
-
-	RecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes = RecoveryInstanceDataReplicationInfoReplicatedDisk.AddMember("rescannedStorageBytes", _PositiveInteger)
-
-	RecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes = RecoveryInstanceDataReplicationInfoReplicatedDisk.AddMember("backloggedStorageBytes", _PositiveInteger)
-
-	_RecoveryInstanceDataReplicationInfoReplicatedDisks_member = _RecoveryInstanceDataReplicationInfoReplicatedDisks.AddMember("member", RecoveryInstanceDataReplicationInfoReplicatedDisk)
-
-	RecoveryInstanceDataReplicationInitiationStep_name = RecoveryInstanceDataReplicationInitiationStep.AddMember("name", _RecoveryInstanceDataReplicationInitiationStepName)
-
-	RecoveryInstanceDataReplicationInitiationStep_status = RecoveryInstanceDataReplicationInitiationStep.AddMember("status", _RecoveryInstanceDataReplicationInitiationStepStatus)
-
-	_RecoveryInstanceDataReplicationInitiationSteps_member = _RecoveryInstanceDataReplicationInitiationSteps.AddMember("member", RecoveryInstanceDataReplicationInitiationStep)
-
-	RecoveryInstanceDataReplicationInitiation_startDateTime = RecoveryInstanceDataReplicationInitiation.AddMember("startDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceDataReplicationInitiation_steps = RecoveryInstanceDataReplicationInitiation.AddMember("steps", _RecoveryInstanceDataReplicationInitiationSteps)
-
-	RecoveryInstanceDataReplicationError_error = RecoveryInstanceDataReplicationError.AddMember("error", _FailbackReplicationError)
-
-	RecoveryInstanceDataReplicationError_rawError = RecoveryInstanceDataReplicationError.AddMember("rawError", _LargeBoundedString)
-
-	RecoveryInstanceDataReplicationInfo_lagDuration = RecoveryInstanceDataReplicationInfo.AddMember("lagDuration", _ISO8601DatetimeString)
-
-	RecoveryInstanceDataReplicationInfo_etaDateTime = RecoveryInstanceDataReplicationInfo.AddMember("etaDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceDataReplicationInfo_replicatedDisks = RecoveryInstanceDataReplicationInfo.AddMember("replicatedDisks", _RecoveryInstanceDataReplicationInfoReplicatedDisks)
-
-	RecoveryInstanceDataReplicationInfo_dataReplicationState = RecoveryInstanceDataReplicationInfo.AddMember("dataReplicationState", _RecoveryInstanceDataReplicationState)
-
-	RecoveryInstanceDataReplicationInfo_dataReplicationInitiation = RecoveryInstanceDataReplicationInfo.AddMember("dataReplicationInitiation", RecoveryInstanceDataReplicationInitiation)
-
-	RecoveryInstanceDataReplicationInfo_dataReplicationError = RecoveryInstanceDataReplicationInfo.AddMember("dataReplicationError", RecoveryInstanceDataReplicationError)
-
-	RecoveryInstanceDataReplicationInfo_stagingAvailabilityZone = RecoveryInstanceDataReplicationInfo.AddMember("stagingAvailabilityZone", _AwsAvailabilityZone)
-
-	RecoveryInstanceDataReplicationInfo_stagingOutpostArn = RecoveryInstanceDataReplicationInfo.AddMember("stagingOutpostArn", _OutpostARN)
-
-	IdentificationHints_fqdn = IdentificationHints.AddMember("fqdn", _BoundedString)
-
-	IdentificationHints_hostname = IdentificationHints.AddMember("hostname", _BoundedString)
-
-	IdentificationHints_vmWareUuid = IdentificationHints.AddMember("vmWareUuid", _BoundedString)
-
-	IdentificationHints_awsInstanceID = IdentificationHints.AddMember("awsInstanceID", _EC2InstanceID)
-
-	_IPsList_member = _IPsList.AddMember("member", _BoundedString)
-
-	NetworkInterface_macAddress = NetworkInterface.AddMember("macAddress", _BoundedString)
-
-	NetworkInterface_ips = NetworkInterface.AddMember("ips", _IPsList)
-
-	NetworkInterface_isPrimary = NetworkInterface.AddMember("isPrimary", smithyprelude.Boolean)
-
-	_NetworkInterfaces_member = _NetworkInterfaces.AddMember("member", NetworkInterface)
-
-	RecoveryInstanceDisk_internalDeviceName = RecoveryInstanceDisk.AddMember("internalDeviceName", _BoundedString)
-
-	RecoveryInstanceDisk_bytes = RecoveryInstanceDisk.AddMember("bytes", _PositiveInteger)
-
-	RecoveryInstanceDisk_ebsVolumeID = RecoveryInstanceDisk.AddMember("ebsVolumeID", _EbsVolumeID)
-
-	_RecoveryInstanceDisks_member = _RecoveryInstanceDisks.AddMember("member", RecoveryInstanceDisk)
-
-	OS_fullString = OS.AddMember("fullString", _BoundedString)
-
-	RecoveryInstanceProperties_lastUpdatedDateTime = RecoveryInstanceProperties.AddMember("lastUpdatedDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstanceProperties_identificationHints = RecoveryInstanceProperties.AddMember("identificationHints", IdentificationHints)
-
-	RecoveryInstanceProperties_networkInterfaces = RecoveryInstanceProperties.AddMember("networkInterfaces", _NetworkInterfaces)
-
-	RecoveryInstanceProperties_disks = RecoveryInstanceProperties.AddMember("disks", _RecoveryInstanceDisks)
-
-	RecoveryInstanceProperties_cpus = RecoveryInstanceProperties.AddMember("cpus", _Cpus)
-
-	RecoveryInstanceProperties_ramBytes = RecoveryInstanceProperties.AddMember("ramBytes", _PositiveInteger)
-
-	RecoveryInstanceProperties_os = RecoveryInstanceProperties.AddMember("os", OS)
-
-	RecoveryInstance_ec2InstanceID = RecoveryInstance.AddMember("ec2InstanceID", _EC2InstanceID)
-
-	RecoveryInstance_ec2InstanceState = RecoveryInstance.AddMember("ec2InstanceState", _EC2InstanceState)
-
-	RecoveryInstance_jobID = RecoveryInstance.AddMember("jobID", _JobID)
-
-	RecoveryInstance_recoveryInstanceID = RecoveryInstance.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	RecoveryInstance_sourceServerID = RecoveryInstance.AddMember("sourceServerID", _SourceServerID)
-
-	RecoveryInstance_arn = RecoveryInstance.AddMember("arn", _ARN)
-
-	RecoveryInstance_tags = RecoveryInstance.AddMember("tags", _TagsMap)
-
-	RecoveryInstance_failback = RecoveryInstance.AddMember("failback", RecoveryInstanceFailback)
-
-	RecoveryInstance_dataReplicationInfo = RecoveryInstance.AddMember("dataReplicationInfo", RecoveryInstanceDataReplicationInfo)
-
-	RecoveryInstance_recoveryInstanceProperties = RecoveryInstance.AddMember("recoveryInstanceProperties", RecoveryInstanceProperties)
-
-	RecoveryInstance_pointInTimeSnapshotDateTime = RecoveryInstance.AddMember("pointInTimeSnapshotDateTime", _ISO8601DatetimeString)
-
-	RecoveryInstance_isDrill = RecoveryInstance.AddMember("isDrill", smithyprelude.Boolean)
-
-	RecoveryInstance_originEnvironment = RecoveryInstance.AddMember("originEnvironment", _OriginEnvironment)
-
-	RecoveryInstance_originAvailabilityZone = RecoveryInstance.AddMember("originAvailabilityZone", _AwsAvailabilityZone)
-
-	RecoveryInstance_agentVersion = RecoveryInstance.AddMember("agentVersion", _AgentVersion)
-
-	RecoveryInstance_sourceOutpostArn = RecoveryInstance.AddMember("sourceOutpostArn", _OutpostARN)
-
-	_DescribeRecoveryInstancesItems_member = _DescribeRecoveryInstancesItems.AddMember("member", RecoveryInstance)
-
-	_RecoveryInstanceIDs_member = _RecoveryInstanceIDs.AddMember("member", _RecoveryInstanceID)
-
-	_SourceServerIDs_member = _SourceServerIDs.AddMember("member", _SourceServerID)
-
-	DescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs = DescribeRecoveryInstancesRequestFilters.AddMember("recoveryInstanceIDs", _RecoveryInstanceIDs)
-
-	DescribeRecoveryInstancesRequestFilters_sourceServerIDs = DescribeRecoveryInstancesRequestFilters.AddMember("sourceServerIDs", _SourceServerIDs)
-
-	DescribeRecoverySnapshotsRequestFilters_fromDateTime = DescribeRecoverySnapshotsRequestFilters.AddMember("fromDateTime", _ISO8601DatetimeString)
-
-	DescribeRecoverySnapshotsRequestFilters_toDateTime = DescribeRecoverySnapshotsRequestFilters.AddMember("toDateTime", _ISO8601DatetimeString)
-
-	_DescribeSourceNetworksRequestFiltersIDs_member = _DescribeSourceNetworksRequestFiltersIDs.AddMember("member", _SourceNetworkID)
-
-	DescribeSourceNetworksRequestFilters_sourceNetworkIDs = DescribeSourceNetworksRequestFilters.AddMember("sourceNetworkIDs", _DescribeSourceNetworksRequestFiltersIDs)
-
-	DescribeSourceNetworksRequestFilters_originAccountID = DescribeSourceNetworksRequestFilters.AddMember("originAccountID", _AccountID)
-
-	DescribeSourceNetworksRequestFilters_originRegion = DescribeSourceNetworksRequestFilters.AddMember("originRegion", _AwsRegion)
-
-	_DescribeSourceServersRequestFiltersIDs_member = _DescribeSourceServersRequestFiltersIDs.AddMember("member", _SourceServerID)
-
-	DescribeSourceServersRequestFilters_sourceServerIDs = DescribeSourceServersRequestFilters.AddMember("sourceServerIDs", _DescribeSourceServersRequestFiltersIDs)
-
-	DescribeSourceServersRequestFilters_hardwareId = DescribeSourceServersRequestFilters.AddMember("hardwareId", _BoundedString)
-
-	DescribeSourceServersRequestFilters_stagingAccountIDs = DescribeSourceServersRequestFilters.AddMember("stagingAccountIDs", _AccountIDs)
-
-	Disk_deviceName = Disk.AddMember("deviceName", _BoundedString)
-
-	Disk_bytes = Disk.AddMember("bytes", _PositiveInteger)
-
-	_Disks_member = _Disks.AddMember("member", Disk)
-
-	_EbsSnapshotsList_member = _EbsSnapshotsList.AddMember("member", _EbsSnapshot)
-
-	ErrorDetail_message = ErrorDetail.AddMember("message", smithyprelude.String)
-
-	ErrorDetail_code = ErrorDetail.AddMember("code", smithyprelude.String)
-
-	SourceNetworkData_sourceNetworkID = SourceNetworkData.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	SourceNetworkData_sourceVpc = SourceNetworkData.AddMember("sourceVpc", _VpcID)
-
-	SourceNetworkData_targetVpc = SourceNetworkData.AddMember("targetVpc", _VpcID)
-
-	SourceNetworkData_stackName = SourceNetworkData.AddMember("stackName", _LargeBoundedString)
-
-	EventResourceData_sourceNetworkData = EventResourceData.AddMember("sourceNetworkData", SourceNetworkData)
-
-	RecoveryPlanExecutionServer_serverArn = RecoveryPlanExecutionServer.AddMember("serverArn", _SourceServerARN)
-
-	RecoveryPlanExecutionServer_impactLevel = RecoveryPlanExecutionServer.AddMember("impactLevel", _RecoveryPlanServerImpactLevel)
-
-	RecoveryPlanExecutionServer_jobID = RecoveryPlanExecutionServer.AddMember("jobID", _JobID)
-
-	_RecoveryPlanExecutionServers_member = _RecoveryPlanExecutionServers.AddMember("member", RecoveryPlanExecutionServer)
-
-	ExecutionServerStepConfiguration_servers = ExecutionServerStepConfiguration.AddMember("servers", _RecoveryPlanExecutionServers)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _LargeBoundedString)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _PositiveInteger, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LaunchActionParameter_value = LaunchActionParameter.AddMember("value", _LaunchActionParameterValue)
-
-	LaunchActionParameter_type = LaunchActionParameter.AddMember("type", _LaunchActionParameterType)
-
-	_LaunchActionParameters_key = _LaunchActionParameters.AddMember("key", _LaunchActionParameterName)
-
-	_LaunchActionParameters_value = _LaunchActionParameters.AddMember("value", LaunchActionParameter)
-
-	LaunchAction_actionId = LaunchAction.AddMember("actionId", _LaunchActionId)
-
-	LaunchAction_actionCode = LaunchAction.AddMember("actionCode", _SsmDocumentName)
-
-	LaunchAction_type = LaunchAction.AddMember("type", _LaunchActionType)
-
-	LaunchAction_name = LaunchAction.AddMember("name", _LaunchActionName)
-
-	LaunchAction_active = LaunchAction.AddMember("active", smithyprelude.Boolean)
-
-	LaunchAction_order = LaunchAction.AddMember("order", _LaunchActionOrder)
-
-	LaunchAction_actionVersion = LaunchAction.AddMember("actionVersion", _LaunchActionVersion)
-
-	LaunchAction_optional = LaunchAction.AddMember("optional", smithyprelude.Boolean)
-
-	LaunchAction_parameters = LaunchAction.AddMember("parameters", _LaunchActionParameters)
-
-	LaunchAction_description = LaunchAction.AddMember("description", _LaunchActionDescription)
-
-	LaunchAction_category = LaunchAction.AddMember("category", _LaunchActionCategory)
-
-	LaunchActionRun_action = LaunchActionRun.AddMember("action", LaunchAction)
-
-	LaunchActionRun_runId = LaunchActionRun.AddMember("runId", _LaunchActionRunId)
-
-	LaunchActionRun_status = LaunchActionRun.AddMember("status", _LaunchActionRunStatus)
-
-	LaunchActionRun_failureReason = LaunchActionRun.AddMember("failureReason", _FailureReason)
-
-	_LaunchActionRuns_member = _LaunchActionRuns.AddMember("member", LaunchActionRun)
-
-	LaunchActionsStatus_ssmAgentDiscoveryDatetime = LaunchActionsStatus.AddMember("ssmAgentDiscoveryDatetime", _ISO8601DatetimeString)
-
-	LaunchActionsStatus_runs = LaunchActionsStatus.AddMember("runs", _LaunchActionRuns)
-
-	ParticipatingServer_sourceServerID = ParticipatingServer.AddMember("sourceServerID", _SourceServerID)
-
-	ParticipatingServer_recoveryInstanceID = ParticipatingServer.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	ParticipatingServer_launchStatus = ParticipatingServer.AddMember("launchStatus", _LaunchStatus)
-
-	ParticipatingServer_launchActionsStatus = ParticipatingServer.AddMember("launchActionsStatus", LaunchActionsStatus)
-
-	_ParticipatingServers_member = _ParticipatingServers.AddMember("member", ParticipatingServer)
-
-	ParticipatingResourceID_sourceNetworkID = ParticipatingResourceID.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	ParticipatingResource_participatingResourceID = ParticipatingResource.AddMember("participatingResourceID", ParticipatingResourceID)
-
-	ParticipatingResource_launchStatus = ParticipatingResource.AddMember("launchStatus", _LaunchStatus)
-
-	_ParticipatingResources_member = _ParticipatingResources.AddMember("member", ParticipatingResource)
-
-	Job_jobID = Job.AddMember("jobID", _JobID)
-
-	Job_arn = Job.AddMember("arn", _ARN)
-
-	Job_type = Job.AddMember("type", _JobType)
-
-	Job_initiatedBy = Job.AddMember("initiatedBy", _InitiatedBy)
-
-	Job_creationDateTime = Job.AddMember("creationDateTime", _ISO8601DatetimeString)
-
-	Job_endDateTime = Job.AddMember("endDateTime", _ISO8601DatetimeString)
-
-	Job_status = Job.AddMember("status", _JobStatus)
-
-	Job_participatingServers = Job.AddMember("participatingServers", _ParticipatingServers)
-
-	Job_tags = Job.AddMember("tags", _TagsMap)
-
-	Job_participatingResources = Job.AddMember("participatingResources", _ParticipatingResources)
-
-	JobLogEventData_sourceServerID = JobLogEventData.AddMember("sourceServerID", _SourceServerID)
-
-	JobLogEventData_conversionServerID = JobLogEventData.AddMember("conversionServerID", _EC2InstanceID)
-
-	JobLogEventData_targetInstanceID = JobLogEventData.AddMember("targetInstanceID", _EC2InstanceID)
-
-	JobLogEventData_rawError = JobLogEventData.AddMember("rawError", _LargeBoundedString)
-
-	JobLogEventData_conversionProperties = JobLogEventData.AddMember("conversionProperties", ConversionProperties)
-
-	JobLogEventData_eventResourceData = JobLogEventData.AddMember("eventResourceData", EventResourceData)
-
-	JobLogEventData_attemptCount = JobLogEventData.AddMember("attemptCount", _JobEventAttemptCount)
-
-	JobLogEventData_maxAttemptsCount = JobLogEventData.AddMember("maxAttemptsCount", _JobEventAttemptCount)
-
-	JobLog_logDateTime = JobLog.AddMember("logDateTime", _ISO8601DatetimeString)
-
-	JobLog_event = JobLog.AddMember("event", _JobLogEvent)
-
-	JobLog_eventData = JobLog.AddMember("eventData", JobLogEventData)
-
-	_JobLogs_member = _JobLogs.AddMember("member", JobLog)
-
-	_JobsList_member = _JobsList.AddMember("member", Job)
-
-	_LaunchActionIds_member = _LaunchActionIds.AddMember("member", _LaunchActionId)
-
-	_LaunchActions_member = _LaunchActions.AddMember("member", LaunchAction)
-
-	LaunchActionsRequestFilters_actionIds = LaunchActionsRequestFilters.AddMember("actionIds", _LaunchActionIds)
-
-	Licensing_osByol = Licensing.AddMember("osByol", smithyprelude.Boolean)
-
-	LaunchConfigurationTemplate_launchConfigurationTemplateID = LaunchConfigurationTemplate.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
-
-	LaunchConfigurationTemplate_arn = LaunchConfigurationTemplate.AddMember("arn", _ARN)
-
-	LaunchConfigurationTemplate_tags = LaunchConfigurationTemplate.AddMember("tags", _TagsMap)
-
-	LaunchConfigurationTemplate_launchDisposition = LaunchConfigurationTemplate.AddMember("launchDisposition", _LaunchDisposition)
-
-	LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod = LaunchConfigurationTemplate.AddMember("targetInstanceTypeRightSizingMethod", _TargetInstanceTypeRightSizingMethod)
-
-	LaunchConfigurationTemplate_copyPrivateIp = LaunchConfigurationTemplate.AddMember("copyPrivateIp", smithyprelude.Boolean)
-
-	LaunchConfigurationTemplate_copyTags = LaunchConfigurationTemplate.AddMember("copyTags", smithyprelude.Boolean)
-
-	LaunchConfigurationTemplate_licensing = LaunchConfigurationTemplate.AddMember("licensing", Licensing)
-
-	LaunchConfigurationTemplate_exportBucketArn = LaunchConfigurationTemplate.AddMember("exportBucketArn", _ARN)
-
-	LaunchConfigurationTemplate_postLaunchEnabled = LaunchConfigurationTemplate.AddMember("postLaunchEnabled", smithyprelude.Boolean)
-
-	LaunchConfigurationTemplate_launchIntoSourceInstance = LaunchConfigurationTemplate.AddMember("launchIntoSourceInstance", smithyprelude.Boolean)
-
-	LaunchConfigurationTemplate_recoveryMode = LaunchConfigurationTemplate.AddMember("recoveryMode", _RecoveryMode)
-
-	_LaunchConfigurationTemplateIDs_member = _LaunchConfigurationTemplateIDs.AddMember("member", _LaunchConfigurationTemplateID)
-
-	_LaunchConfigurationTemplates_member = _LaunchConfigurationTemplates.AddMember("member", LaunchConfigurationTemplate)
-
-	LaunchIntoInstanceProperties_launchIntoEC2InstanceID = LaunchIntoInstanceProperties.AddMember("launchIntoEC2InstanceID", _EC2InstanceID)
-
-	LifeCycleLastLaunchInitiated_apiCallDateTime = LifeCycleLastLaunchInitiated.AddMember("apiCallDateTime", _ISO8601DatetimeString)
-
-	LifeCycleLastLaunchInitiated_jobID = LifeCycleLastLaunchInitiated.AddMember("jobID", _JobID)
-
-	LifeCycleLastLaunchInitiated_type = LifeCycleLastLaunchInitiated.AddMember("type", _LastLaunchType)
-
-	LifeCycleLastLaunch_initiated = LifeCycleLastLaunch.AddMember("initiated", LifeCycleLastLaunchInitiated)
-
-	LifeCycleLastLaunch_status = LifeCycleLastLaunch.AddMember("status", _LaunchStatus)
-
-	LifeCycle_addedToServiceDateTime = LifeCycle.AddMember("addedToServiceDateTime", _ISO8601DatetimeString)
-
-	LifeCycle_firstByteDateTime = LifeCycle.AddMember("firstByteDateTime", _ISO8601DatetimeString)
-
-	LifeCycle_elapsedReplicationDuration = LifeCycle.AddMember("elapsedReplicationDuration", _ISO8601DurationString)
-
-	LifeCycle_lastSeenByServiceDateTime = LifeCycle.AddMember("lastSeenByServiceDateTime", _ISO8601DatetimeString)
-
-	LifeCycle_lastLaunch = LifeCycle.AddMember("lastLaunch", LifeCycleLastLaunch)
-
-	ListRecoveryPlanExecutionStepsFilter_status = ListRecoveryPlanExecutionStepsFilter.AddMember("status", _RecoveryPlanExecutionStepStatus)
-
-	PITPolicyRule_ruleID = PITPolicyRule.AddMember("ruleID", _PositiveInteger)
-
-	PITPolicyRule_units = PITPolicyRule.AddMember("units", _PITPolicyRuleUnits)
-
-	PITPolicyRule_interval = PITPolicyRule.AddMember("interval", _StrictlyPositiveInteger)
-
-	PITPolicyRule_retentionDuration = PITPolicyRule.AddMember("retentionDuration", _StrictlyPositiveInteger)
-
-	PITPolicyRule_enabled = PITPolicyRule.AddMember("enabled", smithyprelude.Boolean)
-
-	_PITPolicy_member = _PITPolicy.AddMember("member", PITPolicyRule)
-
-	_RecoveryInstancesForTerminationRequest_member = _RecoveryInstancesForTerminationRequest.AddMember("member", _RecoveryInstanceID)
-
-	RecoveryLifeCycle_apiCallDateTime = RecoveryLifeCycle.AddMember("apiCallDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	RecoveryLifeCycle_jobID = RecoveryLifeCycle.AddMember("jobID", _JobID)
-
-	RecoveryLifeCycle_lastRecoveryResult = RecoveryLifeCycle.AddMember("lastRecoveryResult", _RecoveryResult)
-
-	RecoveryPlan_recoveryPlanArn = RecoveryPlan.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	RecoveryPlan_name = RecoveryPlan.AddMember("name", _RecoveryPlanName)
-
-	RecoveryPlan_description = RecoveryPlan.AddMember("description", _RecoveryPlanDescription)
-
-	RecoveryPlan_status = RecoveryPlan.AddMember("status", _RecoveryPlanStatus)
-
-	RecoveryPlan_createdAt = RecoveryPlan.AddMember("createdAt", _ISO8601DatetimeString)
-
-	RecoveryPlan_updatedAt = RecoveryPlan.AddMember("updatedAt", _ISO8601DatetimeString)
-
-	RecoveryPlan_tags = RecoveryPlan.AddMember("tags", _TagsMap)
-
-	RecoveryPlanExecution_recoveryPlanExecutionArn = RecoveryPlanExecution.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	RecoveryPlanExecution_recoveryPlanArn = RecoveryPlanExecution.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	RecoveryPlanExecution_mode = RecoveryPlanExecution.AddMember("mode", _RecoveryPlanExecutionMode)
-
-	RecoveryPlanExecution_status = RecoveryPlanExecution.AddMember("status", _RecoveryPlanExecutionStatus)
-
-	RecoveryPlanExecution_startedAt = RecoveryPlanExecution.AddMember("startedAt", _ISO8601DatetimeString)
-
-	RecoveryPlanExecution_completedAt = RecoveryPlanExecution.AddMember("completedAt", _ISO8601DatetimeString)
-
-	RecoveryPlanExecution_errorDetail = RecoveryPlanExecution.AddMember("errorDetail", ErrorDetail)
-
-	RecoveryPlanExecution_tags = RecoveryPlanExecution.AddMember("tags", _TagsMap)
-
-	RecoveryPlanExecutionSourceServer_sourceServerID = RecoveryPlanExecutionSourceServer.AddMember("sourceServerID", _SourceServerID)
-
-	RecoveryPlanExecutionSourceServer_recoverySnapshotID = RecoveryPlanExecutionSourceServer.AddMember("recoverySnapshotID", _RecoverySnapshotID)
-
-	_RecoveryPlanExecutionSourceServerList_member = _RecoveryPlanExecutionSourceServerList.AddMember("member", RecoveryPlanExecutionSourceServer)
-
-	WaitStepConfiguration_waitDurationMinutes = WaitStepConfiguration.AddMember("waitDurationMinutes", _WaitDurationMinutes)
-
-	RecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration = RecoveryPlanExecutionStepConfiguration.AddMember("executionServerStepConfiguration", ExecutionServerStepConfiguration)
-
-	RecoveryPlanExecutionStepConfiguration_waitStepConfiguration = RecoveryPlanExecutionStepConfiguration.AddMember("waitStepConfiguration", WaitStepConfiguration)
-
-	RecoveryPlanExecutionStep_recoveryPlanExecutionStepArn = RecoveryPlanExecutionStep.AddMember("recoveryPlanExecutionStepArn", _StrictDRSARN)
-
-	RecoveryPlanExecutionStep_stepIndex = RecoveryPlanExecutionStep.AddMember("stepIndex", _RecoveryPlanStepOrder)
-
-	RecoveryPlanExecutionStep_status = RecoveryPlanExecutionStep.AddMember("status", _RecoveryPlanExecutionStepStatus)
-
-	RecoveryPlanExecutionStep_stepName = RecoveryPlanExecutionStep.AddMember("stepName", _RecoveryPlanStepName)
-
-	RecoveryPlanExecutionStep_configuration = RecoveryPlanExecutionStep.AddMember("configuration", RecoveryPlanExecutionStepConfiguration)
-
-	RecoveryPlanExecutionStep_errorDetail = RecoveryPlanExecutionStep.AddMember("errorDetail", ErrorDetail)
-
-	RecoveryPlanExecutionStep_attempt = RecoveryPlanExecutionStep.AddMember("attempt", _StrictlyPositiveInteger)
-
-	RecoveryPlanExecutionStep_createdAt = RecoveryPlanExecutionStep.AddMember("createdAt", _ISO8601DatetimeString)
-
-	RecoveryPlanExecutionStep_updatedAt = RecoveryPlanExecutionStep.AddMember("updatedAt", _ISO8601DatetimeString)
-
-	RecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn = RecoveryPlanExecutionStepSummary.AddMember("recoveryPlanExecutionStepArn", _StrictDRSARN)
-
-	RecoveryPlanExecutionStepSummary_stepName = RecoveryPlanExecutionStepSummary.AddMember("stepName", _RecoveryPlanStepName)
-
-	RecoveryPlanExecutionStepSummary_stepIndex = RecoveryPlanExecutionStepSummary.AddMember("stepIndex", _RecoveryPlanStepOrder)
-
-	RecoveryPlanExecutionStepSummary_status = RecoveryPlanExecutionStepSummary.AddMember("status", _RecoveryPlanExecutionStepStatus)
-
-	RecoveryPlanExecutionStepSummary_configuration = RecoveryPlanExecutionStepSummary.AddMember("configuration", RecoveryPlanExecutionStepConfiguration)
-
-	RecoveryPlanExecutionStepSummary_errorDetail = RecoveryPlanExecutionStepSummary.AddMember("errorDetail", ErrorDetail)
-
-	_RecoveryPlanExecutionStepSummaryList_member = _RecoveryPlanExecutionStepSummaryList.AddMember("member", RecoveryPlanExecutionStepSummary)
-
-	RecoveryPlanExecutionSummary_recoveryPlanExecutionArn = RecoveryPlanExecutionSummary.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	RecoveryPlanExecutionSummary_recoveryPlanArn = RecoveryPlanExecutionSummary.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	RecoveryPlanExecutionSummary_mode = RecoveryPlanExecutionSummary.AddMember("mode", _RecoveryPlanExecutionMode)
-
-	RecoveryPlanExecutionSummary_status = RecoveryPlanExecutionSummary.AddMember("status", _RecoveryPlanExecutionStatus)
-
-	RecoveryPlanExecutionSummary_startedAt = RecoveryPlanExecutionSummary.AddMember("startedAt", _ISO8601DatetimeString)
-
-	RecoveryPlanExecutionSummary_errorDetail = RecoveryPlanExecutionSummary.AddMember("errorDetail", ErrorDetail)
-
-	_RecoveryPlanExecutionSummaryList_member = _RecoveryPlanExecutionSummaryList.AddMember("member", RecoveryPlanExecutionSummary)
-
-	RecoveryPlanServer_serverArn = RecoveryPlanServer.AddMember("serverArn", _SourceServerARN)
-
-	RecoveryPlanServer_impactLevel = RecoveryPlanServer.AddMember("impactLevel", _RecoveryPlanServerImpactLevel)
-
-	_RecoveryPlanServers_member = _RecoveryPlanServers.AddMember("member", RecoveryPlanServer)
-
-	ServerStepConfiguration_servers = ServerStepConfiguration.AddMember("servers", _RecoveryPlanServers)
-
-	RecoveryPlanStepConfiguration_serverStepConfiguration = RecoveryPlanStepConfiguration.AddMember("serverStepConfiguration", ServerStepConfiguration)
-
-	RecoveryPlanStepConfiguration_waitStepConfiguration = RecoveryPlanStepConfiguration.AddMember("waitStepConfiguration", WaitStepConfiguration)
-
-	RecoveryPlanStep_recoveryPlanStepArn = RecoveryPlanStep.AddMember("recoveryPlanStepArn", _StrictDRSARN)
-
-	RecoveryPlanStep_stepOrder = RecoveryPlanStep.AddMember("stepOrder", _RecoveryPlanStepOrder)
-
-	RecoveryPlanStep_stepName = RecoveryPlanStep.AddMember("stepName", _RecoveryPlanStepName)
-
-	RecoveryPlanStep_configuration = RecoveryPlanStep.AddMember("configuration", RecoveryPlanStepConfiguration)
-
-	RecoveryPlanStep_createdAt = RecoveryPlanStep.AddMember("createdAt", _ISO8601DatetimeString)
-
-	RecoveryPlanStep_updatedAt = RecoveryPlanStep.AddMember("updatedAt", _ISO8601DatetimeString)
-
-	_RecoveryPlanStepArnList_member = _RecoveryPlanStepArnList.AddMember("member", _StrictDRSARN)
-
-	_RecoveryPlanStepList_member = _RecoveryPlanStepList.AddMember("member", RecoveryPlanStep)
-
-	RecoveryPlanSummary_recoveryPlanArn = RecoveryPlanSummary.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	RecoveryPlanSummary_name = RecoveryPlanSummary.AddMember("name", _RecoveryPlanName)
-
-	RecoveryPlanSummary_status = RecoveryPlanSummary.AddMember("status", _RecoveryPlanStatus)
-
-	RecoveryPlanSummary_createdAt = RecoveryPlanSummary.AddMember("createdAt", _ISO8601DatetimeString)
-
-	RecoveryPlanSummary_updatedAt = RecoveryPlanSummary.AddMember("updatedAt", _ISO8601DatetimeString)
-
-	_RecoveryPlanSummaryList_member = _RecoveryPlanSummaryList.AddMember("member", RecoveryPlanSummary)
-
-	RecoverySnapshot_snapshotID = RecoverySnapshot.AddMember("snapshotID", _RecoverySnapshotID)
-
-	RecoverySnapshot_sourceServerID = RecoverySnapshot.AddMember("sourceServerID", _SourceServerID)
-
-	RecoverySnapshot_expectedTimestamp = RecoverySnapshot.AddMember("expectedTimestamp", _ISO8601DatetimeString)
-
-	RecoverySnapshot_timestamp = RecoverySnapshot.AddMember("timestamp", _ISO8601DatetimeString)
-
-	RecoverySnapshot_ebsSnapshots = RecoverySnapshot.AddMember("ebsSnapshots", _EbsSnapshotsList)
-
-	_RecoverySnapshotsList_member = _RecoverySnapshotsList.AddMember("member", RecoverySnapshot)
-
-	ReplicationConfigurationReplicatedDisk_deviceName = ReplicationConfigurationReplicatedDisk.AddMember("deviceName", _BoundedString)
-
-	ReplicationConfigurationReplicatedDisk_isBootDisk = ReplicationConfigurationReplicatedDisk.AddMember("isBootDisk", smithyprelude.Boolean)
-
-	ReplicationConfigurationReplicatedDisk_stagingDiskType = ReplicationConfigurationReplicatedDisk.AddMember("stagingDiskType", _ReplicationConfigurationReplicatedDiskStagingDiskType)
-
-	ReplicationConfigurationReplicatedDisk_iops = ReplicationConfigurationReplicatedDisk.AddMember("iops", _PositiveInteger)
-
-	ReplicationConfigurationReplicatedDisk_throughput = ReplicationConfigurationReplicatedDisk.AddMember("throughput", _PositiveInteger)
-
-	ReplicationConfigurationReplicatedDisk_optimizedStagingDiskType = ReplicationConfigurationReplicatedDisk.AddMember("optimizedStagingDiskType", _ReplicationConfigurationReplicatedDiskStagingDiskType)
-
-	_ReplicationConfigurationReplicatedDisks_member = _ReplicationConfigurationReplicatedDisks.AddMember("member", ReplicationConfigurationReplicatedDisk)
-
-	_ReplicationServersSecurityGroupsIDs_member = _ReplicationServersSecurityGroupsIDs.AddMember("member", _SecurityGroupID)
-
-	ReplicationConfigurationTemplate_replicationConfigurationTemplateID = ReplicationConfigurationTemplate.AddMember("replicationConfigurationTemplateID", _ReplicationConfigurationTemplateID)
-
-	ReplicationConfigurationTemplate_arn = ReplicationConfigurationTemplate.AddMember("arn", _ARN)
-
-	ReplicationConfigurationTemplate_stagingAreaSubnetId = ReplicationConfigurationTemplate.AddMember("stagingAreaSubnetId", _SubnetID)
-
-	ReplicationConfigurationTemplate_associateDefaultSecurityGroup = ReplicationConfigurationTemplate.AddMember("associateDefaultSecurityGroup", smithyprelude.Boolean)
-
-	ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs = ReplicationConfigurationTemplate.AddMember("replicationServersSecurityGroupsIDs", _ReplicationServersSecurityGroupsIDs)
-
-	ReplicationConfigurationTemplate_replicationServerInstanceType = ReplicationConfigurationTemplate.AddMember("replicationServerInstanceType", _EC2InstanceType)
-
-	ReplicationConfigurationTemplate_useDedicatedReplicationServer = ReplicationConfigurationTemplate.AddMember("useDedicatedReplicationServer", smithyprelude.Boolean)
-
-	ReplicationConfigurationTemplate_defaultLargeStagingDiskType = ReplicationConfigurationTemplate.AddMember("defaultLargeStagingDiskType", _ReplicationConfigurationDefaultLargeStagingDiskType)
-
-	ReplicationConfigurationTemplate_ebsEncryption = ReplicationConfigurationTemplate.AddMember("ebsEncryption", _ReplicationConfigurationEbsEncryption)
-
-	ReplicationConfigurationTemplate_ebsEncryptionKeyArn = ReplicationConfigurationTemplate.AddMember("ebsEncryptionKeyArn", _ARN)
-
-	ReplicationConfigurationTemplate_bandwidthThrottling = ReplicationConfigurationTemplate.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	ReplicationConfigurationTemplate_dataPlaneRouting = ReplicationConfigurationTemplate.AddMember("dataPlaneRouting", _ReplicationConfigurationDataPlaneRouting)
-
-	ReplicationConfigurationTemplate_createPublicIP = ReplicationConfigurationTemplate.AddMember("createPublicIP", smithyprelude.Boolean)
-
-	ReplicationConfigurationTemplate_stagingAreaTags = ReplicationConfigurationTemplate.AddMember("stagingAreaTags", _TagsMap)
-
-	ReplicationConfigurationTemplate_tags = ReplicationConfigurationTemplate.AddMember("tags", _TagsMap)
-
-	ReplicationConfigurationTemplate_pitPolicy = ReplicationConfigurationTemplate.AddMember("pitPolicy", _PITPolicy)
-
-	ReplicationConfigurationTemplate_autoReplicateNewDisks = ReplicationConfigurationTemplate.AddMember("autoReplicateNewDisks", smithyprelude.Boolean)
-
-	ReplicationConfigurationTemplate_internetProtocol = ReplicationConfigurationTemplate.AddMember("internetProtocol", _InternetProtocol)
-
-	_ReplicationConfigurationTemplateIDs_member = _ReplicationConfigurationTemplateIDs.AddMember("member", _ReplicationConfigurationTemplateID)
-
-	_ReplicationConfigurationTemplates_member = _ReplicationConfigurationTemplates.AddMember("member", ReplicationConfigurationTemplate)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _LargeBoundedString)
-
-	ResourceNotFoundException_code = ResourceNotFoundException.AddMember("code", _LargeBoundedString)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _LargeBoundedString)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _LargeBoundedString)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _LargeBoundedString)
-
-	ServiceQuotaExceededException_code = ServiceQuotaExceededException.AddMember("code", _LargeBoundedString)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _LargeBoundedString)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _LargeBoundedString)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _LargeBoundedString)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _LargeBoundedString)
-
-	SourceCloudProperties_originAccountID = SourceCloudProperties.AddMember("originAccountID", _AccountID)
-
-	SourceCloudProperties_originRegion = SourceCloudProperties.AddMember("originRegion", _AwsRegion)
-
-	SourceCloudProperties_originAvailabilityZone = SourceCloudProperties.AddMember("originAvailabilityZone", _AwsAvailabilityZone)
-
-	SourceCloudProperties_sourceOutpostArn = SourceCloudProperties.AddMember("sourceOutpostArn", _OutpostARN)
-
-	SourceNetwork_sourceNetworkID = SourceNetwork.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	SourceNetwork_sourceVpcID = SourceNetwork.AddMember("sourceVpcID", _VpcID)
-
-	SourceNetwork_arn = SourceNetwork.AddMember("arn", _ARN)
-
-	SourceNetwork_tags = SourceNetwork.AddMember("tags", _TagsMap)
-
-	SourceNetwork_replicationStatus = SourceNetwork.AddMember("replicationStatus", _ReplicationStatus)
-
-	SourceNetwork_replicationStatusDetails = SourceNetwork.AddMember("replicationStatusDetails", _SensitiveBoundedString)
-
-	SourceNetwork_cfnStackName = SourceNetwork.AddMember("cfnStackName", _CfnStackName)
-
-	SourceNetwork_sourceRegion = SourceNetwork.AddMember("sourceRegion", _AwsRegion)
-
-	SourceNetwork_sourceAccountID = SourceNetwork.AddMember("sourceAccountID", _AccountID)
-
-	SourceNetwork_lastRecovery = SourceNetwork.AddMember("lastRecovery", RecoveryLifeCycle)
-
-	SourceNetwork_launchedVpcID = SourceNetwork.AddMember("launchedVpcID", _VpcID)
-
-	_SourceNetworksList_member = _SourceNetworksList.AddMember("member", SourceNetwork)
-
-	SourceProperties_lastUpdatedDateTime = SourceProperties.AddMember("lastUpdatedDateTime", _ISO8601DatetimeString)
-
-	SourceProperties_recommendedInstanceType = SourceProperties.AddMember("recommendedInstanceType", _EC2InstanceType)
-
-	SourceProperties_identificationHints = SourceProperties.AddMember("identificationHints", IdentificationHints)
-
-	SourceProperties_networkInterfaces = SourceProperties.AddMember("networkInterfaces", _NetworkInterfaces)
-
-	SourceProperties_disks = SourceProperties.AddMember("disks", _Disks)
-
-	SourceProperties_cpus = SourceProperties.AddMember("cpus", _Cpus)
-
-	SourceProperties_ramBytes = SourceProperties.AddMember("ramBytes", _PositiveInteger)
-
-	SourceProperties_os = SourceProperties.AddMember("os", OS)
-
-	SourceProperties_supportsNitroInstances = SourceProperties.AddMember("supportsNitroInstances", smithyprelude.Boolean)
-
-	SourceProperties_architecture = SourceProperties.AddMember("architecture", _SourceServerArchitecture)
-
-	StagingArea_status = StagingArea.AddMember("status", _ExtensionStatus)
-
-	StagingArea_stagingAccountID = StagingArea.AddMember("stagingAccountID", _AccountID)
-
-	StagingArea_stagingSourceServerArn = StagingArea.AddMember("stagingSourceServerArn", _ARN)
-
-	StagingArea_errorMessage = StagingArea.AddMember("errorMessage", _LargeBoundedString)
-
-	SourceServer_sourceServerID = SourceServer.AddMember("sourceServerID", _SourceServerID)
-
-	SourceServer_arn = SourceServer.AddMember("arn", _ARN)
-
-	SourceServer_tags = SourceServer.AddMember("tags", _TagsMap)
-
-	SourceServer_recoveryInstanceId = SourceServer.AddMember("recoveryInstanceId", _RecoveryInstanceID)
-
-	SourceServer_lastLaunchResult = SourceServer.AddMember("lastLaunchResult", _LastLaunchResult)
-
-	SourceServer_dataReplicationInfo = SourceServer.AddMember("dataReplicationInfo", DataReplicationInfo)
-
-	SourceServer_lifeCycle = SourceServer.AddMember("lifeCycle", LifeCycle)
-
-	SourceServer_sourceProperties = SourceServer.AddMember("sourceProperties", SourceProperties)
-
-	SourceServer_stagingArea = SourceServer.AddMember("stagingArea", StagingArea)
-
-	SourceServer_sourceCloudProperties = SourceServer.AddMember("sourceCloudProperties", SourceCloudProperties)
-
-	SourceServer_replicationDirection = SourceServer.AddMember("replicationDirection", _ReplicationDirection)
-
-	SourceServer_reversedDirectionSourceServerArn = SourceServer.AddMember("reversedDirectionSourceServerArn", _SourceServerARN)
-
-	SourceServer_sourceNetworkID = SourceServer.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	SourceServer_agentVersion = SourceServer.AddMember("agentVersion", _AgentVersion)
-
-	_SourceServersList_member = _SourceServersList.AddMember("member", SourceServer)
-
-	StagingSourceServer_hostname = StagingSourceServer.AddMember("hostname", _BoundedString)
-
-	StagingSourceServer_arn = StagingSourceServer.AddMember("arn", _SourceServerARN)
-
-	StagingSourceServer_tags = StagingSourceServer.AddMember("tags", _TagsMap)
-
-	_StagingSourceServersList_member = _StagingSourceServersList.AddMember("member", StagingSourceServer)
-
-	_StartFailbackRequestRecoveryInstanceIDs_member = _StartFailbackRequestRecoveryInstanceIDs.AddMember("member", _RecoveryInstanceID)
-
-	StartRecoveryRequestSourceServer_sourceServerID = StartRecoveryRequestSourceServer.AddMember("sourceServerID", _SourceServerID)
-
-	StartRecoveryRequestSourceServer_recoverySnapshotID = StartRecoveryRequestSourceServer.AddMember("recoverySnapshotID", _RecoverySnapshotID)
-
-	_StartRecoveryRequestSourceServers_member = _StartRecoveryRequestSourceServers.AddMember("member", StartRecoveryRequestSourceServer)
-
-	StartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID = StartSourceNetworkRecoveryRequestNetworkEntry.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	StartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName = StartSourceNetworkRecoveryRequestNetworkEntry.AddMember("cfnStackName", _CfnStackName)
-
-	_StartSourceNetworkRecoveryRequestNetworkEntries_member = _StartSourceNetworkRecoveryRequestNetworkEntries.AddMember("member", StartSourceNetworkRecoveryRequestNetworkEntry)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _LargeBoundedString)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _LargeBoundedString)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _LargeBoundedString)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _LargeBoundedString, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UninitializedAccountException_message = UninitializedAccountException.AddMember("message", _LargeBoundedString)
-
-	UninitializedAccountException_code = UninitializedAccountException.AddMember("code", _LargeBoundedString)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _LargeBoundedString)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _LargeBoundedString)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _LargeBoundedString)
-
-	ValidationException_code = ValidationException.AddMember("code", _LargeBoundedString)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AssociateSourceNetworkStackRequest_sourceNetworkID = AssociateSourceNetworkStackRequest.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	AssociateSourceNetworkStackRequest_cfnStackName = AssociateSourceNetworkStackRequest.AddMember("cfnStackName", _CfnStackName)
-
-	AssociateSourceNetworkStackResponse_job = AssociateSourceNetworkStackResponse.AddMember("job", Job)
-
-	CancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = CancelRecoveryPlanExecutionRequest.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	CancelRecoveryPlanExecutionResponse_recoveryPlanExecution = CancelRecoveryPlanExecutionResponse.AddMember("recoveryPlanExecution", RecoveryPlanExecution)
-
-	CreateExtendedSourceServerRequest_sourceServerArn = CreateExtendedSourceServerRequest.AddMember("sourceServerArn", _SourceServerARN)
-
-	CreateExtendedSourceServerRequest_tags = CreateExtendedSourceServerRequest.AddMember("tags", _TagsMap)
-
-	CreateExtendedSourceServerResponse_sourceServer = CreateExtendedSourceServerResponse.AddMember("sourceServer", SourceServer)
-
-	CreateLaunchConfigurationTemplateRequest_tags = CreateLaunchConfigurationTemplateRequest.AddMember("tags", _TagsMap)
-
-	CreateLaunchConfigurationTemplateRequest_launchDisposition = CreateLaunchConfigurationTemplateRequest.AddMember("launchDisposition", _LaunchDisposition)
-
-	CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = CreateLaunchConfigurationTemplateRequest.AddMember("targetInstanceTypeRightSizingMethod", _TargetInstanceTypeRightSizingMethod)
-
-	CreateLaunchConfigurationTemplateRequest_copyPrivateIp = CreateLaunchConfigurationTemplateRequest.AddMember("copyPrivateIp", smithyprelude.Boolean)
-
-	CreateLaunchConfigurationTemplateRequest_copyTags = CreateLaunchConfigurationTemplateRequest.AddMember("copyTags", smithyprelude.Boolean)
-
-	CreateLaunchConfigurationTemplateRequest_licensing = CreateLaunchConfigurationTemplateRequest.AddMember("licensing", Licensing)
-
-	CreateLaunchConfigurationTemplateRequest_exportBucketArn = CreateLaunchConfigurationTemplateRequest.AddMember("exportBucketArn", _ARN)
-
-	CreateLaunchConfigurationTemplateRequest_postLaunchEnabled = CreateLaunchConfigurationTemplateRequest.AddMember("postLaunchEnabled", smithyprelude.Boolean)
-
-	CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = CreateLaunchConfigurationTemplateRequest.AddMember("launchIntoSourceInstance", smithyprelude.Boolean)
-
-	CreateLaunchConfigurationTemplateRequest_recoveryMode = CreateLaunchConfigurationTemplateRequest.AddMember("recoveryMode", _RecoveryMode)
-
-	CreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = CreateLaunchConfigurationTemplateResponse.AddMember("launchConfigurationTemplate", LaunchConfigurationTemplate)
-
-	CreateRecoveryPlanRequest_name = CreateRecoveryPlanRequest.AddMember("name", _RecoveryPlanName)
-
-	CreateRecoveryPlanRequest_description = CreateRecoveryPlanRequest.AddMember("description", _RecoveryPlanDescription)
-
-	CreateRecoveryPlanRequest_clientToken = CreateRecoveryPlanRequest.AddMember("clientToken", _ClientIdempotencyToken)
-
-	CreateRecoveryPlanRequest_tags = CreateRecoveryPlanRequest.AddMember("tags", _TagsMap)
-
-	CreateRecoveryPlanResponse_recoveryPlan = CreateRecoveryPlanResponse.AddMember("recoveryPlan", RecoveryPlan)
-
-	CreateRecoveryPlanStepRequest_recoveryPlanArn = CreateRecoveryPlanStepRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	CreateRecoveryPlanStepRequest_stepName = CreateRecoveryPlanStepRequest.AddMember("stepName", _RecoveryPlanStepName)
-
-	CreateRecoveryPlanStepRequest_stepOrder = CreateRecoveryPlanStepRequest.AddMember("stepOrder", _RecoveryPlanStepOrder)
-
-	CreateRecoveryPlanStepRequest_configuration = CreateRecoveryPlanStepRequest.AddMember("configuration", RecoveryPlanStepConfiguration)
-
-	CreateRecoveryPlanStepRequest_clientToken = CreateRecoveryPlanStepRequest.AddMember("clientToken", _ClientIdempotencyToken)
-
-	CreateRecoveryPlanStepResponse_recoveryPlanStep = CreateRecoveryPlanStepResponse.AddMember("recoveryPlanStep", RecoveryPlanStep)
-
-	CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = CreateReplicationConfigurationTemplateRequest.AddMember("stagingAreaSubnetId", _SubnetID)
-
-	CreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = CreateReplicationConfigurationTemplateRequest.AddMember("associateDefaultSecurityGroup", smithyprelude.Boolean)
-
-	CreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = CreateReplicationConfigurationTemplateRequest.AddMember("replicationServersSecurityGroupsIDs", _ReplicationServersSecurityGroupsIDs)
-
-	CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType = CreateReplicationConfigurationTemplateRequest.AddMember("replicationServerInstanceType", _EC2InstanceType)
-
-	CreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = CreateReplicationConfigurationTemplateRequest.AddMember("useDedicatedReplicationServer", smithyprelude.Boolean)
-
-	CreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = CreateReplicationConfigurationTemplateRequest.AddMember("defaultLargeStagingDiskType", _ReplicationConfigurationDefaultLargeStagingDiskType)
-
-	CreateReplicationConfigurationTemplateRequest_ebsEncryption = CreateReplicationConfigurationTemplateRequest.AddMember("ebsEncryption", _ReplicationConfigurationEbsEncryption)
-
-	CreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = CreateReplicationConfigurationTemplateRequest.AddMember("ebsEncryptionKeyArn", _ARN)
-
-	CreateReplicationConfigurationTemplateRequest_bandwidthThrottling = CreateReplicationConfigurationTemplateRequest.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	CreateReplicationConfigurationTemplateRequest_dataPlaneRouting = CreateReplicationConfigurationTemplateRequest.AddMember("dataPlaneRouting", _ReplicationConfigurationDataPlaneRouting)
-
-	CreateReplicationConfigurationTemplateRequest_createPublicIP = CreateReplicationConfigurationTemplateRequest.AddMember("createPublicIP", smithyprelude.Boolean)
-
-	CreateReplicationConfigurationTemplateRequest_stagingAreaTags = CreateReplicationConfigurationTemplateRequest.AddMember("stagingAreaTags", _TagsMap)
-
-	CreateReplicationConfigurationTemplateRequest_pitPolicy = CreateReplicationConfigurationTemplateRequest.AddMember("pitPolicy", _PITPolicy)
-
-	CreateReplicationConfigurationTemplateRequest_tags = CreateReplicationConfigurationTemplateRequest.AddMember("tags", _TagsMap)
-
-	CreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = CreateReplicationConfigurationTemplateRequest.AddMember("autoReplicateNewDisks", smithyprelude.Boolean)
-
-	CreateReplicationConfigurationTemplateRequest_internetProtocol = CreateReplicationConfigurationTemplateRequest.AddMember("internetProtocol", _InternetProtocol)
-
-	CreateSourceNetworkRequest_vpcID = CreateSourceNetworkRequest.AddMember("vpcID", _VpcID)
-
-	CreateSourceNetworkRequest_originAccountID = CreateSourceNetworkRequest.AddMember("originAccountID", _AccountID)
-
-	CreateSourceNetworkRequest_originRegion = CreateSourceNetworkRequest.AddMember("originRegion", _AwsRegion)
-
-	CreateSourceNetworkRequest_tags = CreateSourceNetworkRequest.AddMember("tags", _TagsMap)
-
-	CreateSourceNetworkResponse_sourceNetworkID = CreateSourceNetworkResponse.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	DeleteJobRequest_jobID = DeleteJobRequest.AddMember("jobID", _JobID)
-
-	DeleteLaunchActionRequest_resourceId = DeleteLaunchActionRequest.AddMember("resourceId", _LaunchActionResourceId)
-
-	DeleteLaunchActionRequest_actionId = DeleteLaunchActionRequest.AddMember("actionId", _LaunchActionId)
-
-	DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = DeleteLaunchConfigurationTemplateRequest.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
-
-	DeleteRecoveryInstanceRequest_recoveryInstanceID = DeleteRecoveryInstanceRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	DeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = DeleteRecoveryPlanExecutionRequest.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	DeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn = DeleteRecoveryPlanExecutionResponse.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	DeleteRecoveryPlanRequest_recoveryPlanArn = DeleteRecoveryPlanRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	DeleteRecoveryPlanResponse_recoveryPlanArn = DeleteRecoveryPlanResponse.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	DeleteRecoveryPlanStepRequest_recoveryPlanStepArn = DeleteRecoveryPlanStepRequest.AddMember("recoveryPlanStepArn", _StrictDRSARN)
-
-	DeleteRecoveryPlanStepResponse_recoveryPlanStepArn = DeleteRecoveryPlanStepResponse.AddMember("recoveryPlanStepArn", _StrictDRSARN)
-
-	DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = DeleteReplicationConfigurationTemplateRequest.AddMember("replicationConfigurationTemplateID", _ReplicationConfigurationTemplateID)
-
-	DeleteSourceNetworkRequest_sourceNetworkID = DeleteSourceNetworkRequest.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	DeleteSourceServerRequest_sourceServerID = DeleteSourceServerRequest.AddMember("sourceServerID", _SourceServerID)
-
-	DescribeJobLogItemsRequest_jobID = DescribeJobLogItemsRequest.AddMember("jobID", _JobID)
-
-	DescribeJobLogItemsRequest_maxResults = DescribeJobLogItemsRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeJobLogItemsRequest_nextToken = DescribeJobLogItemsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeJobLogItemsResponse_items = DescribeJobLogItemsResponse.AddMember("items", _JobLogs)
-
-	DescribeJobLogItemsResponse_nextToken = DescribeJobLogItemsResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeJobsRequest_filters = DescribeJobsRequest.AddMember("filters", DescribeJobsRequestFilters)
-
-	DescribeJobsRequest_maxResults = DescribeJobsRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeJobsRequest_nextToken = DescribeJobsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeJobsResponse_items = DescribeJobsResponse.AddMember("items", _JobsList)
-
-	DescribeJobsResponse_nextToken = DescribeJobsResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs = DescribeLaunchConfigurationTemplatesRequest.AddMember("launchConfigurationTemplateIDs", _LaunchConfigurationTemplateIDs)
-
-	DescribeLaunchConfigurationTemplatesRequest_maxResults = DescribeLaunchConfigurationTemplatesRequest.AddMember("maxResults", _MaxResultsType)
-
-	DescribeLaunchConfigurationTemplatesRequest_nextToken = DescribeLaunchConfigurationTemplatesRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeLaunchConfigurationTemplatesResponse_items = DescribeLaunchConfigurationTemplatesResponse.AddMember("items", _LaunchConfigurationTemplates)
-
-	DescribeLaunchConfigurationTemplatesResponse_nextToken = DescribeLaunchConfigurationTemplatesResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeRecoveryInstancesRequest_filters = DescribeRecoveryInstancesRequest.AddMember("filters", DescribeRecoveryInstancesRequestFilters)
-
-	DescribeRecoveryInstancesRequest_maxResults = DescribeRecoveryInstancesRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeRecoveryInstancesRequest_nextToken = DescribeRecoveryInstancesRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeRecoveryInstancesResponse_nextToken = DescribeRecoveryInstancesResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeRecoveryInstancesResponse_items = DescribeRecoveryInstancesResponse.AddMember("items", _DescribeRecoveryInstancesItems)
-
-	DescribeRecoverySnapshotsRequest_sourceServerID = DescribeRecoverySnapshotsRequest.AddMember("sourceServerID", _SourceServerID)
-
-	DescribeRecoverySnapshotsRequest_filters = DescribeRecoverySnapshotsRequest.AddMember("filters", DescribeRecoverySnapshotsRequestFilters)
-
-	DescribeRecoverySnapshotsRequest_order = DescribeRecoverySnapshotsRequest.AddMember("order", _RecoverySnapshotsOrder)
-
-	DescribeRecoverySnapshotsRequest_maxResults = DescribeRecoverySnapshotsRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeRecoverySnapshotsRequest_nextToken = DescribeRecoverySnapshotsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeRecoverySnapshotsResponse_items = DescribeRecoverySnapshotsResponse.AddMember("items", _RecoverySnapshotsList)
-
-	DescribeRecoverySnapshotsResponse_nextToken = DescribeRecoverySnapshotsResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs = DescribeReplicationConfigurationTemplatesRequest.AddMember("replicationConfigurationTemplateIDs", _ReplicationConfigurationTemplateIDs)
-
-	DescribeReplicationConfigurationTemplatesRequest_maxResults = DescribeReplicationConfigurationTemplatesRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeReplicationConfigurationTemplatesRequest_nextToken = DescribeReplicationConfigurationTemplatesRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeReplicationConfigurationTemplatesResponse_items = DescribeReplicationConfigurationTemplatesResponse.AddMember("items", _ReplicationConfigurationTemplates)
-
-	DescribeReplicationConfigurationTemplatesResponse_nextToken = DescribeReplicationConfigurationTemplatesResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeSourceNetworksRequest_filters = DescribeSourceNetworksRequest.AddMember("filters", DescribeSourceNetworksRequestFilters)
-
-	DescribeSourceNetworksRequest_maxResults = DescribeSourceNetworksRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeSourceNetworksRequest_nextToken = DescribeSourceNetworksRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSourceNetworksResponse_items = DescribeSourceNetworksResponse.AddMember("items", _SourceNetworksList)
-
-	DescribeSourceNetworksResponse_nextToken = DescribeSourceNetworksResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeSourceServersRequest_filters = DescribeSourceServersRequest.AddMember("filters", DescribeSourceServersRequestFilters)
-
-	DescribeSourceServersRequest_maxResults = DescribeSourceServersRequest.AddMember("maxResults", _StrictlyPositiveInteger)
-
-	DescribeSourceServersRequest_nextToken = DescribeSourceServersRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSourceServersResponse_items = DescribeSourceServersResponse.AddMember("items", _SourceServersList)
-
-	DescribeSourceServersResponse_nextToken = DescribeSourceServersResponse.AddMember("nextToken", _PaginationToken)
-
-	DisconnectRecoveryInstanceRequest_recoveryInstanceID = DisconnectRecoveryInstanceRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	DisconnectSourceServerRequest_sourceServerID = DisconnectSourceServerRequest.AddMember("sourceServerID", _SourceServerID)
-
-	ExportSourceNetworkCfnTemplateRequest_sourceNetworkID = ExportSourceNetworkCfnTemplateRequest.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl = ExportSourceNetworkCfnTemplateResponse.AddMember("s3DestinationUrl", _LargeBoundedString)
-
-	GetFailbackReplicationConfigurationRequest_recoveryInstanceID = GetFailbackReplicationConfigurationRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	GetFailbackReplicationConfigurationResponse_recoveryInstanceID = GetFailbackReplicationConfigurationResponse.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	GetFailbackReplicationConfigurationResponse_name = GetFailbackReplicationConfigurationResponse.AddMember("name", _BoundedString)
-
-	GetFailbackReplicationConfigurationResponse_bandwidthThrottling = GetFailbackReplicationConfigurationResponse.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	GetFailbackReplicationConfigurationResponse_usePrivateIP = GetFailbackReplicationConfigurationResponse.AddMember("usePrivateIP", smithyprelude.Boolean)
-
-	GetFailbackReplicationConfigurationResponse_internetProtocol = GetFailbackReplicationConfigurationResponse.AddMember("internetProtocol", _InternetProtocol)
-
-	GetLaunchConfigurationRequest_sourceServerID = GetLaunchConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	LaunchConfiguration_sourceServerID = LaunchConfiguration.AddMember("sourceServerID", _SourceServerID)
-
-	LaunchConfiguration_name = LaunchConfiguration.AddMember("name", _SmallBoundedString)
-
-	LaunchConfiguration_ec2LaunchTemplateID = LaunchConfiguration.AddMember("ec2LaunchTemplateID", _BoundedString)
-
-	LaunchConfiguration_launchDisposition = LaunchConfiguration.AddMember("launchDisposition", _LaunchDisposition)
-
-	LaunchConfiguration_targetInstanceTypeRightSizingMethod = LaunchConfiguration.AddMember("targetInstanceTypeRightSizingMethod", _TargetInstanceTypeRightSizingMethod)
-
-	LaunchConfiguration_copyPrivateIp = LaunchConfiguration.AddMember("copyPrivateIp", smithyprelude.Boolean)
-
-	LaunchConfiguration_copyTags = LaunchConfiguration.AddMember("copyTags", smithyprelude.Boolean)
-
-	LaunchConfiguration_licensing = LaunchConfiguration.AddMember("licensing", Licensing)
-
-	LaunchConfiguration_postLaunchEnabled = LaunchConfiguration.AddMember("postLaunchEnabled", smithyprelude.Boolean)
-
-	LaunchConfiguration_launchIntoInstanceProperties = LaunchConfiguration.AddMember("launchIntoInstanceProperties", LaunchIntoInstanceProperties)
-
-	LaunchConfiguration_recoveryMode = LaunchConfiguration.AddMember("recoveryMode", _RecoveryMode)
-
-	GetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = GetRecoveryPlanExecutionRequest.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	GetRecoveryPlanExecutionResponse_recoveryPlanExecution = GetRecoveryPlanExecutionResponse.AddMember("recoveryPlanExecution", RecoveryPlanExecution)
-
-	GetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = GetRecoveryPlanExecutionStepRequest.AddMember("recoveryPlanExecutionStepArn", _StrictDRSARN)
-
-	GetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = GetRecoveryPlanExecutionStepResponse.AddMember("recoveryPlanExecutionStep", RecoveryPlanExecutionStep)
-
-	GetRecoveryPlanRequest_recoveryPlanArn = GetRecoveryPlanRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	GetRecoveryPlanResponse_recoveryPlan = GetRecoveryPlanResponse.AddMember("recoveryPlan", RecoveryPlan)
-
-	GetRecoveryPlanStepRequest_recoveryPlanStepArn = GetRecoveryPlanStepRequest.AddMember("recoveryPlanStepArn", _StrictDRSARN)
-
-	GetRecoveryPlanStepResponse_recoveryPlanStep = GetRecoveryPlanStepResponse.AddMember("recoveryPlanStep", RecoveryPlanStep)
-
-	GetReplicationConfigurationRequest_sourceServerID = GetReplicationConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	ReplicationConfiguration_sourceServerID = ReplicationConfiguration.AddMember("sourceServerID", _SourceServerID)
-
-	ReplicationConfiguration_name = ReplicationConfiguration.AddMember("name", _SmallBoundedString)
-
-	ReplicationConfiguration_stagingAreaSubnetId = ReplicationConfiguration.AddMember("stagingAreaSubnetId", _SubnetID)
-
-	ReplicationConfiguration_associateDefaultSecurityGroup = ReplicationConfiguration.AddMember("associateDefaultSecurityGroup", smithyprelude.Boolean)
-
-	ReplicationConfiguration_replicationServersSecurityGroupsIDs = ReplicationConfiguration.AddMember("replicationServersSecurityGroupsIDs", _ReplicationServersSecurityGroupsIDs)
-
-	ReplicationConfiguration_replicationServerInstanceType = ReplicationConfiguration.AddMember("replicationServerInstanceType", _EC2InstanceType)
-
-	ReplicationConfiguration_useDedicatedReplicationServer = ReplicationConfiguration.AddMember("useDedicatedReplicationServer", smithyprelude.Boolean)
-
-	ReplicationConfiguration_defaultLargeStagingDiskType = ReplicationConfiguration.AddMember("defaultLargeStagingDiskType", _ReplicationConfigurationDefaultLargeStagingDiskType)
-
-	ReplicationConfiguration_replicatedDisks = ReplicationConfiguration.AddMember("replicatedDisks", _ReplicationConfigurationReplicatedDisks)
-
-	ReplicationConfiguration_ebsEncryption = ReplicationConfiguration.AddMember("ebsEncryption", _ReplicationConfigurationEbsEncryption)
-
-	ReplicationConfiguration_ebsEncryptionKeyArn = ReplicationConfiguration.AddMember("ebsEncryptionKeyArn", _ARN)
-
-	ReplicationConfiguration_bandwidthThrottling = ReplicationConfiguration.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	ReplicationConfiguration_dataPlaneRouting = ReplicationConfiguration.AddMember("dataPlaneRouting", _ReplicationConfigurationDataPlaneRouting)
-
-	ReplicationConfiguration_createPublicIP = ReplicationConfiguration.AddMember("createPublicIP", smithyprelude.Boolean)
-
-	ReplicationConfiguration_stagingAreaTags = ReplicationConfiguration.AddMember("stagingAreaTags", _TagsMap)
-
-	ReplicationConfiguration_pitPolicy = ReplicationConfiguration.AddMember("pitPolicy", _PITPolicy)
-
-	ReplicationConfiguration_autoReplicateNewDisks = ReplicationConfiguration.AddMember("autoReplicateNewDisks", smithyprelude.Boolean)
-
-	ReplicationConfiguration_internetProtocol = ReplicationConfiguration.AddMember("internetProtocol", _InternetProtocol)
-
-	ListExtensibleSourceServersRequest_stagingAccountID = ListExtensibleSourceServersRequest.AddMember("stagingAccountID", _AccountID)
-
-	ListExtensibleSourceServersRequest_maxResults = ListExtensibleSourceServersRequest.AddMember("maxResults", _MaxResultsReplicatingSourceServers)
-
-	ListExtensibleSourceServersRequest_nextToken = ListExtensibleSourceServersRequest.AddMember("nextToken", _PaginationToken)
-
-	ListExtensibleSourceServersResponse_items = ListExtensibleSourceServersResponse.AddMember("items", _StagingSourceServersList)
-
-	ListExtensibleSourceServersResponse_nextToken = ListExtensibleSourceServersResponse.AddMember("nextToken", _PaginationToken)
-
-	ListLaunchActionsRequest_resourceId = ListLaunchActionsRequest.AddMember("resourceId", _LaunchActionResourceId)
-
-	ListLaunchActionsRequest_filters = ListLaunchActionsRequest.AddMember("filters", LaunchActionsRequestFilters)
-
-	ListLaunchActionsRequest_maxResults = ListLaunchActionsRequest.AddMember("maxResults", _MaxResultsType)
-
-	ListLaunchActionsRequest_nextToken = ListLaunchActionsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListLaunchActionsResponse_items = ListLaunchActionsResponse.AddMember("items", _LaunchActions)
-
-	ListLaunchActionsResponse_nextToken = ListLaunchActionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanExecutionsRequest_recoveryPlanArn = ListRecoveryPlanExecutionsRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	ListRecoveryPlanExecutionsRequest_status = ListRecoveryPlanExecutionsRequest.AddMember("status", _RecoveryPlanExecutionStatus)
-
-	ListRecoveryPlanExecutionsRequest_maxResults = ListRecoveryPlanExecutionsRequest.AddMember("maxResults", _MaxResultsType)
-
-	ListRecoveryPlanExecutionsRequest_nextToken = ListRecoveryPlanExecutionsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions = ListRecoveryPlanExecutionsResponse.AddMember("recoveryPlanExecutions", _RecoveryPlanExecutionSummaryList)
-
-	ListRecoveryPlanExecutionsResponse_nextToken = ListRecoveryPlanExecutionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn = ListRecoveryPlanExecutionStepsRequest.AddMember("recoveryPlanExecutionArn", _StrictDRSARN)
-
-	ListRecoveryPlanExecutionStepsRequest_filter = ListRecoveryPlanExecutionStepsRequest.AddMember("filter", ListRecoveryPlanExecutionStepsFilter)
-
-	ListRecoveryPlanExecutionStepsRequest_maxResults = ListRecoveryPlanExecutionStepsRequest.AddMember("maxResults", _MaxResultsType)
-
-	ListRecoveryPlanExecutionStepsRequest_nextToken = ListRecoveryPlanExecutionStepsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps = ListRecoveryPlanExecutionStepsResponse.AddMember("recoveryPlanExecutionSteps", _RecoveryPlanExecutionStepSummaryList)
-
-	ListRecoveryPlanExecutionStepsResponse_nextToken = ListRecoveryPlanExecutionStepsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlansRequest_maxResults = ListRecoveryPlansRequest.AddMember("maxResults", _MaxResultsType)
-
-	ListRecoveryPlansRequest_nextToken = ListRecoveryPlansRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlansResponse_recoveryPlans = ListRecoveryPlansResponse.AddMember("recoveryPlans", _RecoveryPlanSummaryList)
-
-	ListRecoveryPlansResponse_nextToken = ListRecoveryPlansResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanStepsRequest_recoveryPlanArn = ListRecoveryPlanStepsRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	ListRecoveryPlanStepsRequest_maxResults = ListRecoveryPlanStepsRequest.AddMember("maxResults", _MaxResultsType)
-
-	ListRecoveryPlanStepsRequest_nextToken = ListRecoveryPlanStepsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRecoveryPlanStepsResponse_recoveryPlanSteps = ListRecoveryPlanStepsResponse.AddMember("recoveryPlanSteps", _RecoveryPlanStepList)
-
-	ListRecoveryPlanStepsResponse_nextToken = ListRecoveryPlanStepsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListStagingAccountsRequest_maxResults = ListStagingAccountsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListStagingAccountsRequest_nextToken = ListStagingAccountsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListStagingAccountsResponse_accounts = ListStagingAccountsResponse.AddMember("accounts", _Accounts)
-
-	ListStagingAccountsResponse_nextToken = ListStagingAccountsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagsMap)
-
-	PutLaunchActionRequest_resourceId = PutLaunchActionRequest.AddMember("resourceId", _LaunchActionResourceId)
-
-	PutLaunchActionRequest_actionCode = PutLaunchActionRequest.AddMember("actionCode", _SsmDocumentName)
-
-	PutLaunchActionRequest_order = PutLaunchActionRequest.AddMember("order", _LaunchActionOrder)
-
-	PutLaunchActionRequest_actionId = PutLaunchActionRequest.AddMember("actionId", _LaunchActionId)
-
-	PutLaunchActionRequest_optional = PutLaunchActionRequest.AddMember("optional", smithyprelude.Boolean)
-
-	PutLaunchActionRequest_active = PutLaunchActionRequest.AddMember("active", smithyprelude.Boolean)
-
-	PutLaunchActionRequest_name = PutLaunchActionRequest.AddMember("name", _LaunchActionName)
-
-	PutLaunchActionRequest_actionVersion = PutLaunchActionRequest.AddMember("actionVersion", _LaunchActionVersion)
-
-	PutLaunchActionRequest_category = PutLaunchActionRequest.AddMember("category", _LaunchActionCategory)
-
-	PutLaunchActionRequest_parameters = PutLaunchActionRequest.AddMember("parameters", _LaunchActionParameters)
-
-	PutLaunchActionRequest_description = PutLaunchActionRequest.AddMember("description", _LaunchActionDescription)
-
-	PutLaunchActionResponse_resourceId = PutLaunchActionResponse.AddMember("resourceId", _LaunchActionResourceId)
-
-	PutLaunchActionResponse_actionId = PutLaunchActionResponse.AddMember("actionId", _LaunchActionId)
-
-	PutLaunchActionResponse_actionCode = PutLaunchActionResponse.AddMember("actionCode", _SsmDocumentName)
-
-	PutLaunchActionResponse_type = PutLaunchActionResponse.AddMember("type", _LaunchActionType)
-
-	PutLaunchActionResponse_name = PutLaunchActionResponse.AddMember("name", _LaunchActionName)
-
-	PutLaunchActionResponse_active = PutLaunchActionResponse.AddMember("active", smithyprelude.Boolean)
-
-	PutLaunchActionResponse_order = PutLaunchActionResponse.AddMember("order", _LaunchActionOrder)
-
-	PutLaunchActionResponse_actionVersion = PutLaunchActionResponse.AddMember("actionVersion", _LaunchActionVersion)
-
-	PutLaunchActionResponse_optional = PutLaunchActionResponse.AddMember("optional", smithyprelude.Boolean)
-
-	PutLaunchActionResponse_parameters = PutLaunchActionResponse.AddMember("parameters", _LaunchActionParameters)
-
-	PutLaunchActionResponse_description = PutLaunchActionResponse.AddMember("description", _LaunchActionDescription)
-
-	PutLaunchActionResponse_category = PutLaunchActionResponse.AddMember("category", _LaunchActionCategory)
-
-	ReorderRecoveryPlanStepsRequest_recoveryPlanArn = ReorderRecoveryPlanStepsRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	ReorderRecoveryPlanStepsRequest_orderedStepArns = ReorderRecoveryPlanStepsRequest.AddMember("orderedStepArns", _RecoveryPlanStepArnList)
-
-	ReorderRecoveryPlanStepsResponse_recoveryPlanSteps = ReorderRecoveryPlanStepsResponse.AddMember("recoveryPlanSteps", _RecoveryPlanStepList)
-
-	RetryDataReplicationRequest_sourceServerID = RetryDataReplicationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	RetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = RetryRecoveryPlanExecutionStepRequest.AddMember("recoveryPlanExecutionStepArn", _StrictDRSARN)
-
-	RetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = RetryRecoveryPlanExecutionStepResponse.AddMember("recoveryPlanExecutionStep", RecoveryPlanExecutionStep)
-
-	ReverseReplicationRequest_recoveryInstanceID = ReverseReplicationRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	ReverseReplicationResponse_reversedDirectionSourceServerArn = ReverseReplicationResponse.AddMember("reversedDirectionSourceServerArn", _SourceServerARN)
-
-	StartFailbackLaunchRequest_recoveryInstanceIDs = StartFailbackLaunchRequest.AddMember("recoveryInstanceIDs", _StartFailbackRequestRecoveryInstanceIDs)
-
-	StartFailbackLaunchRequest_tags = StartFailbackLaunchRequest.AddMember("tags", _TagsMap)
-
-	StartFailbackLaunchResponse_job = StartFailbackLaunchResponse.AddMember("job", Job)
-
-	StartRecoveryRequest_sourceServers = StartRecoveryRequest.AddMember("sourceServers", _StartRecoveryRequestSourceServers)
-
-	StartRecoveryRequest_isDrill = StartRecoveryRequest.AddMember("isDrill", smithyprelude.Boolean)
-
-	StartRecoveryRequest_tags = StartRecoveryRequest.AddMember("tags", _TagsMap)
-
-	StartRecoveryResponse_job = StartRecoveryResponse.AddMember("job", Job)
-
-	StartRecoveryPlanExecutionRequest_recoveryPlanArn = StartRecoveryPlanExecutionRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	StartRecoveryPlanExecutionRequest_mode = StartRecoveryPlanExecutionRequest.AddMember("mode", _RecoveryPlanExecutionMode)
-
-	StartRecoveryPlanExecutionRequest_clientToken = StartRecoveryPlanExecutionRequest.AddMember("clientToken", _ClientIdempotencyToken)
-
-	StartRecoveryPlanExecutionRequest_sourceServers = StartRecoveryPlanExecutionRequest.AddMember("sourceServers", _RecoveryPlanExecutionSourceServerList)
-
-	StartRecoveryPlanExecutionRequest_tags = StartRecoveryPlanExecutionRequest.AddMember("tags", _TagsMap)
-
-	StartRecoveryPlanExecutionResponse_recoveryPlanExecution = StartRecoveryPlanExecutionResponse.AddMember("recoveryPlanExecution", RecoveryPlanExecution)
-
-	StartReplicationRequest_sourceServerID = StartReplicationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	StartReplicationResponse_sourceServer = StartReplicationResponse.AddMember("sourceServer", SourceServer)
-
-	StartSourceNetworkRecoveryRequest_sourceNetworks = StartSourceNetworkRecoveryRequest.AddMember("sourceNetworks", _StartSourceNetworkRecoveryRequestNetworkEntries)
-
-	StartSourceNetworkRecoveryRequest_deployAsNew = StartSourceNetworkRecoveryRequest.AddMember("deployAsNew", smithyprelude.Boolean)
-
-	StartSourceNetworkRecoveryRequest_tags = StartSourceNetworkRecoveryRequest.AddMember("tags", _TagsMap)
-
-	StartSourceNetworkRecoveryResponse_job = StartSourceNetworkRecoveryResponse.AddMember("job", Job)
-
-	StartSourceNetworkReplicationRequest_sourceNetworkID = StartSourceNetworkReplicationRequest.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	StartSourceNetworkReplicationResponse_sourceNetwork = StartSourceNetworkReplicationResponse.AddMember("sourceNetwork", SourceNetwork)
-
-	StopFailbackRequest_recoveryInstanceID = StopFailbackRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	StopReplicationRequest_sourceServerID = StopReplicationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	StopReplicationResponse_sourceServer = StopReplicationResponse.AddMember("sourceServer", SourceServer)
-
-	StopSourceNetworkReplicationRequest_sourceNetworkID = StopSourceNetworkReplicationRequest.AddMember("sourceNetworkID", _SourceNetworkID)
-
-	StopSourceNetworkReplicationResponse_sourceNetwork = StopSourceNetworkReplicationResponse.AddMember("sourceNetwork", SourceNetwork)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagsMap)
-
-	TerminateRecoveryInstancesRequest_recoveryInstanceIDs = TerminateRecoveryInstancesRequest.AddMember("recoveryInstanceIDs", _RecoveryInstancesForTerminationRequest)
-
-	TerminateRecoveryInstancesResponse_job = TerminateRecoveryInstancesResponse.AddMember("job", Job)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateFailbackReplicationConfigurationRequest_recoveryInstanceID = UpdateFailbackReplicationConfigurationRequest.AddMember("recoveryInstanceID", _RecoveryInstanceID)
-
-	UpdateFailbackReplicationConfigurationRequest_name = UpdateFailbackReplicationConfigurationRequest.AddMember("name", _BoundedString)
-
-	UpdateFailbackReplicationConfigurationRequest_bandwidthThrottling = UpdateFailbackReplicationConfigurationRequest.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	UpdateFailbackReplicationConfigurationRequest_usePrivateIP = UpdateFailbackReplicationConfigurationRequest.AddMember("usePrivateIP", smithyprelude.Boolean)
-
-	UpdateFailbackReplicationConfigurationRequest_internetProtocol = UpdateFailbackReplicationConfigurationRequest.AddMember("internetProtocol", _InternetProtocol)
-
-	UpdateLaunchConfigurationRequest_sourceServerID = UpdateLaunchConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	UpdateLaunchConfigurationRequest_name = UpdateLaunchConfigurationRequest.AddMember("name", _SmallBoundedString)
-
-	UpdateLaunchConfigurationRequest_launchDisposition = UpdateLaunchConfigurationRequest.AddMember("launchDisposition", _LaunchDisposition)
-
-	UpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod = UpdateLaunchConfigurationRequest.AddMember("targetInstanceTypeRightSizingMethod", _TargetInstanceTypeRightSizingMethod)
-
-	UpdateLaunchConfigurationRequest_copyPrivateIp = UpdateLaunchConfigurationRequest.AddMember("copyPrivateIp", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationRequest_copyTags = UpdateLaunchConfigurationRequest.AddMember("copyTags", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationRequest_licensing = UpdateLaunchConfigurationRequest.AddMember("licensing", Licensing)
-
-	UpdateLaunchConfigurationRequest_postLaunchEnabled = UpdateLaunchConfigurationRequest.AddMember("postLaunchEnabled", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationRequest_launchIntoInstanceProperties = UpdateLaunchConfigurationRequest.AddMember("launchIntoInstanceProperties", LaunchIntoInstanceProperties)
-
-	UpdateLaunchConfigurationRequest_recoveryMode = UpdateLaunchConfigurationRequest.AddMember("recoveryMode", _RecoveryMode)
-
-	UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = UpdateLaunchConfigurationTemplateRequest.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
-
-	UpdateLaunchConfigurationTemplateRequest_launchDisposition = UpdateLaunchConfigurationTemplateRequest.AddMember("launchDisposition", _LaunchDisposition)
-
-	UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = UpdateLaunchConfigurationTemplateRequest.AddMember("targetInstanceTypeRightSizingMethod", _TargetInstanceTypeRightSizingMethod)
-
-	UpdateLaunchConfigurationTemplateRequest_copyPrivateIp = UpdateLaunchConfigurationTemplateRequest.AddMember("copyPrivateIp", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationTemplateRequest_copyTags = UpdateLaunchConfigurationTemplateRequest.AddMember("copyTags", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationTemplateRequest_licensing = UpdateLaunchConfigurationTemplateRequest.AddMember("licensing", Licensing)
-
-	UpdateLaunchConfigurationTemplateRequest_exportBucketArn = UpdateLaunchConfigurationTemplateRequest.AddMember("exportBucketArn", _ARN)
-
-	UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled = UpdateLaunchConfigurationTemplateRequest.AddMember("postLaunchEnabled", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = UpdateLaunchConfigurationTemplateRequest.AddMember("launchIntoSourceInstance", smithyprelude.Boolean)
-
-	UpdateLaunchConfigurationTemplateRequest_recoveryMode = UpdateLaunchConfigurationTemplateRequest.AddMember("recoveryMode", _RecoveryMode)
-
-	UpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = UpdateLaunchConfigurationTemplateResponse.AddMember("launchConfigurationTemplate", LaunchConfigurationTemplate)
-
-	UpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = UpdateRecoveryPlanExecutionStepRequest.AddMember("recoveryPlanExecutionStepArn", _StrictDRSARN)
-
-	UpdateRecoveryPlanExecutionStepRequest_status = UpdateRecoveryPlanExecutionStepRequest.AddMember("status", _RecoveryPlanExecutionStepStatus)
-
-	UpdateRecoveryPlanExecutionStepRequest_servers = UpdateRecoveryPlanExecutionStepRequest.AddMember("servers", _RecoveryPlanServers)
-
-	UpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes = UpdateRecoveryPlanExecutionStepRequest.AddMember("waitDurationMinutes", _WaitDurationMinutes)
-
-	UpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = UpdateRecoveryPlanExecutionStepResponse.AddMember("recoveryPlanExecutionStep", RecoveryPlanExecutionStep)
-
-	UpdateRecoveryPlanRequest_recoveryPlanArn = UpdateRecoveryPlanRequest.AddMember("recoveryPlanArn", _StrictDRSARN)
-
-	UpdateRecoveryPlanRequest_name = UpdateRecoveryPlanRequest.AddMember("name", _RecoveryPlanName)
-
-	UpdateRecoveryPlanRequest_description = UpdateRecoveryPlanRequest.AddMember("description", _RecoveryPlanDescription)
-
-	UpdateRecoveryPlanResponse_recoveryPlan = UpdateRecoveryPlanResponse.AddMember("recoveryPlan", RecoveryPlan)
-
-	UpdateRecoveryPlanStepRequest_recoveryPlanStepArn = UpdateRecoveryPlanStepRequest.AddMember("recoveryPlanStepArn", _StrictDRSARN)
-
-	UpdateRecoveryPlanStepRequest_stepName = UpdateRecoveryPlanStepRequest.AddMember("stepName", _RecoveryPlanStepName)
-
-	UpdateRecoveryPlanStepRequest_configuration = UpdateRecoveryPlanStepRequest.AddMember("configuration", RecoveryPlanStepConfiguration)
-
-	UpdateRecoveryPlanStepResponse_recoveryPlanStep = UpdateRecoveryPlanStepResponse.AddMember("recoveryPlanStep", RecoveryPlanStep)
-
-	UpdateReplicationConfigurationRequest_sourceServerID = UpdateReplicationConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
-
-	UpdateReplicationConfigurationRequest_name = UpdateReplicationConfigurationRequest.AddMember("name", _SmallBoundedString)
-
-	UpdateReplicationConfigurationRequest_stagingAreaSubnetId = UpdateReplicationConfigurationRequest.AddMember("stagingAreaSubnetId", _SubnetID)
-
-	UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup = UpdateReplicationConfigurationRequest.AddMember("associateDefaultSecurityGroup", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs = UpdateReplicationConfigurationRequest.AddMember("replicationServersSecurityGroupsIDs", _ReplicationServersSecurityGroupsIDs)
-
-	UpdateReplicationConfigurationRequest_replicationServerInstanceType = UpdateReplicationConfigurationRequest.AddMember("replicationServerInstanceType", _EC2InstanceType)
-
-	UpdateReplicationConfigurationRequest_useDedicatedReplicationServer = UpdateReplicationConfigurationRequest.AddMember("useDedicatedReplicationServer", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType = UpdateReplicationConfigurationRequest.AddMember("defaultLargeStagingDiskType", _ReplicationConfigurationDefaultLargeStagingDiskType)
-
-	UpdateReplicationConfigurationRequest_replicatedDisks = UpdateReplicationConfigurationRequest.AddMember("replicatedDisks", _ReplicationConfigurationReplicatedDisks)
-
-	UpdateReplicationConfigurationRequest_ebsEncryption = UpdateReplicationConfigurationRequest.AddMember("ebsEncryption", _ReplicationConfigurationEbsEncryption)
-
-	UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn = UpdateReplicationConfigurationRequest.AddMember("ebsEncryptionKeyArn", _ARN)
-
-	UpdateReplicationConfigurationRequest_bandwidthThrottling = UpdateReplicationConfigurationRequest.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	UpdateReplicationConfigurationRequest_dataPlaneRouting = UpdateReplicationConfigurationRequest.AddMember("dataPlaneRouting", _ReplicationConfigurationDataPlaneRouting)
-
-	UpdateReplicationConfigurationRequest_createPublicIP = UpdateReplicationConfigurationRequest.AddMember("createPublicIP", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationRequest_stagingAreaTags = UpdateReplicationConfigurationRequest.AddMember("stagingAreaTags", _TagsMap)
-
-	UpdateReplicationConfigurationRequest_pitPolicy = UpdateReplicationConfigurationRequest.AddMember("pitPolicy", _PITPolicy)
-
-	UpdateReplicationConfigurationRequest_autoReplicateNewDisks = UpdateReplicationConfigurationRequest.AddMember("autoReplicateNewDisks", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationRequest_internetProtocol = UpdateReplicationConfigurationRequest.AddMember("internetProtocol", _InternetProtocol)
-
-	UpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = UpdateReplicationConfigurationTemplateRequest.AddMember("replicationConfigurationTemplateID", _ReplicationConfigurationTemplateID)
-
-	UpdateReplicationConfigurationTemplateRequest_arn = UpdateReplicationConfigurationTemplateRequest.AddMember("arn", _ARN)
-
-	UpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = UpdateReplicationConfigurationTemplateRequest.AddMember("stagingAreaSubnetId", _SubnetID)
-
-	UpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = UpdateReplicationConfigurationTemplateRequest.AddMember("associateDefaultSecurityGroup", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = UpdateReplicationConfigurationTemplateRequest.AddMember("replicationServersSecurityGroupsIDs", _ReplicationServersSecurityGroupsIDs)
-
-	UpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType = UpdateReplicationConfigurationTemplateRequest.AddMember("replicationServerInstanceType", _EC2InstanceType)
-
-	UpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = UpdateReplicationConfigurationTemplateRequest.AddMember("useDedicatedReplicationServer", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = UpdateReplicationConfigurationTemplateRequest.AddMember("defaultLargeStagingDiskType", _ReplicationConfigurationDefaultLargeStagingDiskType)
-
-	UpdateReplicationConfigurationTemplateRequest_ebsEncryption = UpdateReplicationConfigurationTemplateRequest.AddMember("ebsEncryption", _ReplicationConfigurationEbsEncryption)
-
-	UpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = UpdateReplicationConfigurationTemplateRequest.AddMember("ebsEncryptionKeyArn", _ARN)
-
-	UpdateReplicationConfigurationTemplateRequest_bandwidthThrottling = UpdateReplicationConfigurationTemplateRequest.AddMember("bandwidthThrottling", _PositiveInteger)
-
-	UpdateReplicationConfigurationTemplateRequest_dataPlaneRouting = UpdateReplicationConfigurationTemplateRequest.AddMember("dataPlaneRouting", _ReplicationConfigurationDataPlaneRouting)
-
-	UpdateReplicationConfigurationTemplateRequest_createPublicIP = UpdateReplicationConfigurationTemplateRequest.AddMember("createPublicIP", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationTemplateRequest_stagingAreaTags = UpdateReplicationConfigurationTemplateRequest.AddMember("stagingAreaTags", _TagsMap)
-
-	UpdateReplicationConfigurationTemplateRequest_pitPolicy = UpdateReplicationConfigurationTemplateRequest.AddMember("pitPolicy", _PITPolicy)
-
-	UpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = UpdateReplicationConfigurationTemplateRequest.AddMember("autoReplicateNewDisks", smithyprelude.Boolean)
-
-	UpdateReplicationConfigurationTemplateRequest_internetProtocol = UpdateReplicationConfigurationTemplateRequest.AddMember("internetProtocol", _InternetProtocol)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message, &sAccessDeniedException_code}}
+var mAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAccount_accountID}}
+var m_AccountIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIDs_member}}
+var m_Accounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Accounts_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_code, &sConflictException_resourceId, &sConflictException_resourceType}}
+var m_ConversionMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConversionMap_key, &s_ConversionMap_value}}
+var mConversionProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sConversionProperties_volumeToConversionMap, &sConversionProperties_rootVolumeName, &sConversionProperties_forceUefi, &sConversionProperties_dataTimestamp, &sConversionProperties_volumeToVolumeSize, &sConversionProperties_volumeToProductCodes}}
+var mCPU = smithy.SchemaMembers{List: []*smithy.Schema{&sCPU_cores, &sCPU_modelName}}
+var m_Cpus = smithy.SchemaMembers{List: []*smithy.Schema{&s_Cpus_member}}
+var mDataReplicationError = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationError_error, &sDataReplicationError_rawError}}
+var mDataReplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationInfo_lagDuration, &sDataReplicationInfo_etaDateTime, &sDataReplicationInfo_replicatedDisks, &sDataReplicationInfo_dataReplicationState, &sDataReplicationInfo_dataReplicationInitiation, &sDataReplicationInfo_dataReplicationError, &sDataReplicationInfo_stagingAvailabilityZone, &sDataReplicationInfo_stagingOutpostArn}}
+var mDataReplicationInfoReplicatedDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationInfoReplicatedDisk_deviceName, &sDataReplicationInfoReplicatedDisk_totalStorageBytes, &sDataReplicationInfoReplicatedDisk_replicatedStorageBytes, &sDataReplicationInfoReplicatedDisk_rescannedStorageBytes, &sDataReplicationInfoReplicatedDisk_backloggedStorageBytes, &sDataReplicationInfoReplicatedDisk_volumeStatus}}
+var m_DataReplicationInfoReplicatedDisks = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataReplicationInfoReplicatedDisks_member}}
+var mDataReplicationInitiation = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationInitiation_startDateTime, &sDataReplicationInitiation_nextAttemptDateTime, &sDataReplicationInitiation_steps}}
+var mDataReplicationInitiationStep = smithy.SchemaMembers{List: []*smithy.Schema{&sDataReplicationInitiationStep_name, &sDataReplicationInitiationStep_status}}
+var m_DataReplicationInitiationSteps = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataReplicationInitiationSteps_member}}
+var mDescribeJobsRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobsRequestFilters_jobIDs, &sDescribeJobsRequestFilters_fromDate, &sDescribeJobsRequestFilters_toDate}}
+var m_DescribeJobsRequestFiltersJobIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeJobsRequestFiltersJobIDs_member}}
+var m_DescribeRecoveryInstancesItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeRecoveryInstancesItems_member}}
+var mDescribeRecoveryInstancesRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs, &sDescribeRecoveryInstancesRequestFilters_sourceServerIDs}}
+var mDescribeRecoverySnapshotsRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoverySnapshotsRequestFilters_fromDateTime, &sDescribeRecoverySnapshotsRequestFilters_toDateTime}}
+var mDescribeSourceNetworksRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceNetworksRequestFilters_sourceNetworkIDs, &sDescribeSourceNetworksRequestFilters_originAccountID, &sDescribeSourceNetworksRequestFilters_originRegion}}
+var m_DescribeSourceNetworksRequestFiltersIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeSourceNetworksRequestFiltersIDs_member}}
+var mDescribeSourceServersRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceServersRequestFilters_sourceServerIDs, &sDescribeSourceServersRequestFilters_hardwareId, &sDescribeSourceServersRequestFilters_stagingAccountIDs}}
+var m_DescribeSourceServersRequestFiltersIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeSourceServersRequestFiltersIDs_member}}
+var mDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sDisk_deviceName, &sDisk_bytes}}
+var m_Disks = smithy.SchemaMembers{List: []*smithy.Schema{&s_Disks_member}}
+var m_EbsSnapshotsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EbsSnapshotsList_member}}
+var mErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetail_message, &sErrorDetail_code}}
+var mEventResourceData = smithy.SchemaMembers{List: []*smithy.Schema{&sEventResourceData_sourceNetworkData}}
+var mExecutionServerStepConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionServerStepConfiguration_servers}}
+var mIdentificationHints = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentificationHints_fqdn, &sIdentificationHints_hostname, &sIdentificationHints_vmWareUuid, &sIdentificationHints_awsInstanceID}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var m_IPsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IPsList_member}}
+var mJob = smithy.SchemaMembers{List: []*smithy.Schema{&sJob_jobID, &sJob_arn, &sJob_type, &sJob_initiatedBy, &sJob_creationDateTime, &sJob_endDateTime, &sJob_status, &sJob_participatingServers, &sJob_tags, &sJob_participatingResources}, Hash: &hJob}
+var mJobLog = smithy.SchemaMembers{List: []*smithy.Schema{&sJobLog_logDateTime, &sJobLog_event, &sJobLog_eventData}}
+var mJobLogEventData = smithy.SchemaMembers{List: []*smithy.Schema{&sJobLogEventData_sourceServerID, &sJobLogEventData_conversionServerID, &sJobLogEventData_targetInstanceID, &sJobLogEventData_rawError, &sJobLogEventData_conversionProperties, &sJobLogEventData_eventResourceData, &sJobLogEventData_attemptCount, &sJobLogEventData_maxAttemptsCount}}
+var m_JobLogs = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobLogs_member}}
+var m_JobsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobsList_member}}
+var mLaunchAction = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchAction_actionId, &sLaunchAction_actionCode, &sLaunchAction_type, &sLaunchAction_name, &sLaunchAction_active, &sLaunchAction_order, &sLaunchAction_actionVersion, &sLaunchAction_optional, &sLaunchAction_parameters, &sLaunchAction_description, &sLaunchAction_category}, Hash: &hLaunchAction}
+var m_LaunchActionIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchActionIds_member}}
+var mLaunchActionParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchActionParameter_value, &sLaunchActionParameter_type}}
+var m_LaunchActionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchActionParameters_key, &s_LaunchActionParameters_value}}
+var mLaunchActionRun = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchActionRun_action, &sLaunchActionRun_runId, &sLaunchActionRun_status, &sLaunchActionRun_failureReason}}
+var m_LaunchActionRuns = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchActionRuns_member}}
+var m_LaunchActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchActions_member}}
+var mLaunchActionsRequestFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchActionsRequestFilters_actionIds}}
+var mLaunchActionsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchActionsStatus_ssmAgentDiscoveryDatetime, &sLaunchActionsStatus_runs}}
+var mLaunchConfigurationTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchConfigurationTemplate_launchConfigurationTemplateID, &sLaunchConfigurationTemplate_arn, &sLaunchConfigurationTemplate_tags, &sLaunchConfigurationTemplate_launchDisposition, &sLaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod, &sLaunchConfigurationTemplate_copyPrivateIp, &sLaunchConfigurationTemplate_copyTags, &sLaunchConfigurationTemplate_licensing, &sLaunchConfigurationTemplate_exportBucketArn, &sLaunchConfigurationTemplate_postLaunchEnabled, &sLaunchConfigurationTemplate_launchIntoSourceInstance, &sLaunchConfigurationTemplate_recoveryMode}, Hash: &hLaunchConfigurationTemplate}
+var m_LaunchConfigurationTemplateIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchConfigurationTemplateIDs_member}}
+var m_LaunchConfigurationTemplates = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchConfigurationTemplates_member}}
+var mLaunchIntoInstanceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchIntoInstanceProperties_launchIntoEC2InstanceID}}
+var mLicensing = smithy.SchemaMembers{List: []*smithy.Schema{&sLicensing_osByol}}
+var mLifeCycle = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycle_addedToServiceDateTime, &sLifeCycle_firstByteDateTime, &sLifeCycle_elapsedReplicationDuration, &sLifeCycle_lastSeenByServiceDateTime, &sLifeCycle_lastLaunch}}
+var mLifeCycleLastLaunch = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycleLastLaunch_initiated, &sLifeCycleLastLaunch_status}}
+var mLifeCycleLastLaunchInitiated = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycleLastLaunchInitiated_apiCallDateTime, &sLifeCycleLastLaunchInitiated_jobID, &sLifeCycleLastLaunchInitiated_type}}
+var mListRecoveryPlanExecutionStepsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanExecutionStepsFilter_status}}
+var mNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterface_macAddress, &sNetworkInterface_ips, &sNetworkInterface_isPrimary}}
+var m_NetworkInterfaces = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkInterfaces_member}}
+var mOS = smithy.SchemaMembers{List: []*smithy.Schema{&sOS_fullString}}
+var mParticipatingResource = smithy.SchemaMembers{List: []*smithy.Schema{&sParticipatingResource_participatingResourceID, &sParticipatingResource_launchStatus}}
+var mParticipatingResourceID = smithy.SchemaMembers{List: []*smithy.Schema{&sParticipatingResourceID_sourceNetworkID}}
+var m_ParticipatingResources = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParticipatingResources_member}}
+var mParticipatingServer = smithy.SchemaMembers{List: []*smithy.Schema{&sParticipatingServer_sourceServerID, &sParticipatingServer_recoveryInstanceID, &sParticipatingServer_launchStatus, &sParticipatingServer_launchActionsStatus}}
+var m_ParticipatingServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParticipatingServers_member}}
+var m_PITPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&s_PITPolicy_member}}
+var mPITPolicyRule = smithy.SchemaMembers{List: []*smithy.Schema{&sPITPolicyRule_ruleID, &sPITPolicyRule_units, &sPITPolicyRule_interval, &sPITPolicyRule_retentionDuration, &sPITPolicyRule_enabled}}
+var mProductCode = smithy.SchemaMembers{List: []*smithy.Schema{&sProductCode_productCodeId, &sProductCode_productCodeMode}}
+var m_ProductCodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProductCodes_member}}
+var mRecoveryInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstance_ec2InstanceID, &sRecoveryInstance_ec2InstanceState, &sRecoveryInstance_jobID, &sRecoveryInstance_recoveryInstanceID, &sRecoveryInstance_sourceServerID, &sRecoveryInstance_arn, &sRecoveryInstance_tags, &sRecoveryInstance_failback, &sRecoveryInstance_dataReplicationInfo, &sRecoveryInstance_recoveryInstanceProperties, &sRecoveryInstance_pointInTimeSnapshotDateTime, &sRecoveryInstance_isDrill, &sRecoveryInstance_originEnvironment, &sRecoveryInstance_originAvailabilityZone, &sRecoveryInstance_agentVersion, &sRecoveryInstance_sourceOutpostArn}, Hash: &hRecoveryInstance}
+var mRecoveryInstanceDataReplicationError = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDataReplicationError_error, &sRecoveryInstanceDataReplicationError_rawError}}
+var mRecoveryInstanceDataReplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDataReplicationInfo_lagDuration, &sRecoveryInstanceDataReplicationInfo_etaDateTime, &sRecoveryInstanceDataReplicationInfo_replicatedDisks, &sRecoveryInstanceDataReplicationInfo_dataReplicationState, &sRecoveryInstanceDataReplicationInfo_dataReplicationInitiation, &sRecoveryInstanceDataReplicationInfo_dataReplicationError, &sRecoveryInstanceDataReplicationInfo_stagingAvailabilityZone, &sRecoveryInstanceDataReplicationInfo_stagingOutpostArn}}
+var mRecoveryInstanceDataReplicationInfoReplicatedDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName, &sRecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes, &sRecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes, &sRecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes, &sRecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes}}
+var m_RecoveryInstanceDataReplicationInfoReplicatedDisks = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryInstanceDataReplicationInfoReplicatedDisks_member}}
+var mRecoveryInstanceDataReplicationInitiation = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDataReplicationInitiation_startDateTime, &sRecoveryInstanceDataReplicationInitiation_steps}}
+var mRecoveryInstanceDataReplicationInitiationStep = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDataReplicationInitiationStep_name, &sRecoveryInstanceDataReplicationInitiationStep_status}}
+var m_RecoveryInstanceDataReplicationInitiationSteps = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryInstanceDataReplicationInitiationSteps_member}}
+var mRecoveryInstanceDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceDisk_internalDeviceName, &sRecoveryInstanceDisk_bytes, &sRecoveryInstanceDisk_ebsVolumeID}}
+var m_RecoveryInstanceDisks = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryInstanceDisks_member}}
+var mRecoveryInstanceFailback = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceFailback_failbackClientID, &sRecoveryInstanceFailback_failbackJobID, &sRecoveryInstanceFailback_failbackInitiationTime, &sRecoveryInstanceFailback_state, &sRecoveryInstanceFailback_agentLastSeenByServiceDateTime, &sRecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime, &sRecoveryInstanceFailback_failbackToOriginalServer, &sRecoveryInstanceFailback_firstByteDateTime, &sRecoveryInstanceFailback_elapsedReplicationDuration, &sRecoveryInstanceFailback_failbackLaunchType}, Hash: &hRecoveryInstanceFailback}
+var m_RecoveryInstanceIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryInstanceIDs_member}}
+var mRecoveryInstanceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryInstanceProperties_lastUpdatedDateTime, &sRecoveryInstanceProperties_identificationHints, &sRecoveryInstanceProperties_networkInterfaces, &sRecoveryInstanceProperties_disks, &sRecoveryInstanceProperties_cpus, &sRecoveryInstanceProperties_ramBytes, &sRecoveryInstanceProperties_os}}
+var m_RecoveryInstancesForTerminationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryInstancesForTerminationRequest_member}}
+var mRecoveryLifeCycle = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryLifeCycle_apiCallDateTime, &sRecoveryLifeCycle_jobID, &sRecoveryLifeCycle_lastRecoveryResult}}
+var mRecoveryPlan = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlan_recoveryPlanArn, &sRecoveryPlan_name, &sRecoveryPlan_description, &sRecoveryPlan_status, &sRecoveryPlan_createdAt, &sRecoveryPlan_updatedAt, &sRecoveryPlan_tags}}
+var mRecoveryPlanExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecution_recoveryPlanExecutionArn, &sRecoveryPlanExecution_recoveryPlanArn, &sRecoveryPlanExecution_mode, &sRecoveryPlanExecution_status, &sRecoveryPlanExecution_startedAt, &sRecoveryPlanExecution_completedAt, &sRecoveryPlanExecution_errorDetail, &sRecoveryPlanExecution_tags}}
+var mRecoveryPlanExecutionServer = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionServer_serverArn, &sRecoveryPlanExecutionServer_impactLevel, &sRecoveryPlanExecutionServer_jobID}}
+var m_RecoveryPlanExecutionServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanExecutionServers_member}}
+var mRecoveryPlanExecutionSourceServer = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionSourceServer_sourceServerID, &sRecoveryPlanExecutionSourceServer_recoverySnapshotID}}
+var m_RecoveryPlanExecutionSourceServerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanExecutionSourceServerList_member}}
+var mRecoveryPlanExecutionStep = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionStep_recoveryPlanExecutionStepArn, &sRecoveryPlanExecutionStep_stepIndex, &sRecoveryPlanExecutionStep_status, &sRecoveryPlanExecutionStep_stepName, &sRecoveryPlanExecutionStep_configuration, &sRecoveryPlanExecutionStep_errorDetail, &sRecoveryPlanExecutionStep_attempt, &sRecoveryPlanExecutionStep_createdAt, &sRecoveryPlanExecutionStep_updatedAt}, Hash: &hRecoveryPlanExecutionStep}
+var mRecoveryPlanExecutionStepConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration, &sRecoveryPlanExecutionStepConfiguration_waitStepConfiguration}}
+var mRecoveryPlanExecutionStepSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn, &sRecoveryPlanExecutionStepSummary_stepName, &sRecoveryPlanExecutionStepSummary_stepIndex, &sRecoveryPlanExecutionStepSummary_status, &sRecoveryPlanExecutionStepSummary_configuration, &sRecoveryPlanExecutionStepSummary_errorDetail}}
+var m_RecoveryPlanExecutionStepSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanExecutionStepSummaryList_member}}
+var mRecoveryPlanExecutionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanExecutionSummary_recoveryPlanExecutionArn, &sRecoveryPlanExecutionSummary_recoveryPlanArn, &sRecoveryPlanExecutionSummary_mode, &sRecoveryPlanExecutionSummary_status, &sRecoveryPlanExecutionSummary_startedAt, &sRecoveryPlanExecutionSummary_errorDetail}}
+var m_RecoveryPlanExecutionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanExecutionSummaryList_member}}
+var mRecoveryPlanServer = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanServer_serverArn, &sRecoveryPlanServer_impactLevel}}
+var m_RecoveryPlanServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanServers_member}}
+var mRecoveryPlanStep = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanStep_recoveryPlanStepArn, &sRecoveryPlanStep_stepOrder, &sRecoveryPlanStep_stepName, &sRecoveryPlanStep_configuration, &sRecoveryPlanStep_createdAt, &sRecoveryPlanStep_updatedAt}}
+var m_RecoveryPlanStepArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanStepArnList_member}}
+var mRecoveryPlanStepConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanStepConfiguration_serverStepConfiguration, &sRecoveryPlanStepConfiguration_waitStepConfiguration}}
+var m_RecoveryPlanStepList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanStepList_member}}
+var mRecoveryPlanSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoveryPlanSummary_recoveryPlanArn, &sRecoveryPlanSummary_name, &sRecoveryPlanSummary_status, &sRecoveryPlanSummary_createdAt, &sRecoveryPlanSummary_updatedAt}}
+var m_RecoveryPlanSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPlanSummaryList_member}}
+var mRecoverySnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sRecoverySnapshot_snapshotID, &sRecoverySnapshot_sourceServerID, &sRecoverySnapshot_expectedTimestamp, &sRecoverySnapshot_timestamp, &sRecoverySnapshot_ebsSnapshots}}
+var m_RecoverySnapshotsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoverySnapshotsList_member}}
+var mReplicationConfigurationReplicatedDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationConfigurationReplicatedDisk_deviceName, &sReplicationConfigurationReplicatedDisk_isBootDisk, &sReplicationConfigurationReplicatedDisk_stagingDiskType, &sReplicationConfigurationReplicatedDisk_iops, &sReplicationConfigurationReplicatedDisk_throughput, &sReplicationConfigurationReplicatedDisk_optimizedStagingDiskType}}
+var m_ReplicationConfigurationReplicatedDisks = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationConfigurationReplicatedDisks_member}}
+var mReplicationConfigurationTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationConfigurationTemplate_replicationConfigurationTemplateID, &sReplicationConfigurationTemplate_arn, &sReplicationConfigurationTemplate_stagingAreaSubnetId, &sReplicationConfigurationTemplate_associateDefaultSecurityGroup, &sReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs, &sReplicationConfigurationTemplate_replicationServerInstanceType, &sReplicationConfigurationTemplate_useDedicatedReplicationServer, &sReplicationConfigurationTemplate_defaultLargeStagingDiskType, &sReplicationConfigurationTemplate_ebsEncryption, &sReplicationConfigurationTemplate_ebsEncryptionKeyArn, &sReplicationConfigurationTemplate_bandwidthThrottling, &sReplicationConfigurationTemplate_dataPlaneRouting, &sReplicationConfigurationTemplate_createPublicIP, &sReplicationConfigurationTemplate_stagingAreaTags, &sReplicationConfigurationTemplate_tags, &sReplicationConfigurationTemplate_pitPolicy, &sReplicationConfigurationTemplate_autoReplicateNewDisks, &sReplicationConfigurationTemplate_internetProtocol}, Hash: &hReplicationConfigurationTemplate}
+var m_ReplicationConfigurationTemplateIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationConfigurationTemplateIDs_member}}
+var m_ReplicationConfigurationTemplates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationConfigurationTemplates_member}}
+var m_ReplicationServersSecurityGroupsIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationServersSecurityGroupsIDs_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_code, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mServerStepConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sServerStepConfiguration_servers}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_code, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSourceCloudProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCloudProperties_originAccountID, &sSourceCloudProperties_originRegion, &sSourceCloudProperties_originAvailabilityZone, &sSourceCloudProperties_sourceOutpostArn}}
+var mSourceNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceNetwork_sourceNetworkID, &sSourceNetwork_sourceVpcID, &sSourceNetwork_arn, &sSourceNetwork_tags, &sSourceNetwork_replicationStatus, &sSourceNetwork_replicationStatusDetails, &sSourceNetwork_cfnStackName, &sSourceNetwork_sourceRegion, &sSourceNetwork_sourceAccountID, &sSourceNetwork_lastRecovery, &sSourceNetwork_launchedVpcID}, Hash: &hSourceNetwork}
+var mSourceNetworkData = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceNetworkData_sourceNetworkID, &sSourceNetworkData_sourceVpc, &sSourceNetworkData_targetVpc, &sSourceNetworkData_stackName}}
+var m_SourceNetworksList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceNetworksList_member}}
+var mSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceProperties_lastUpdatedDateTime, &sSourceProperties_recommendedInstanceType, &sSourceProperties_identificationHints, &sSourceProperties_networkInterfaces, &sSourceProperties_disks, &sSourceProperties_cpus, &sSourceProperties_ramBytes, &sSourceProperties_os, &sSourceProperties_supportsNitroInstances, &sSourceProperties_architecture}, Hash: &hSourceProperties}
+var mSourceServer = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceServer_sourceServerID, &sSourceServer_arn, &sSourceServer_tags, &sSourceServer_recoveryInstanceId, &sSourceServer_lastLaunchResult, &sSourceServer_dataReplicationInfo, &sSourceServer_lifeCycle, &sSourceServer_sourceProperties, &sSourceServer_stagingArea, &sSourceServer_sourceCloudProperties, &sSourceServer_replicationDirection, &sSourceServer_reversedDirectionSourceServerArn, &sSourceServer_sourceNetworkID, &sSourceServer_agentVersion}, Hash: &hSourceServer}
+var m_SourceServerIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceServerIDs_member}}
+var m_SourceServersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceServersList_member}}
+var mStagingArea = smithy.SchemaMembers{List: []*smithy.Schema{&sStagingArea_status, &sStagingArea_stagingAccountID, &sStagingArea_stagingSourceServerArn, &sStagingArea_errorMessage}}
+var mStagingSourceServer = smithy.SchemaMembers{List: []*smithy.Schema{&sStagingSourceServer_hostname, &sStagingSourceServer_arn, &sStagingSourceServer_tags}}
+var m_StagingSourceServersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StagingSourceServersList_member}}
+var m_StartFailbackRequestRecoveryInstanceIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_StartFailbackRequestRecoveryInstanceIDs_member}}
+var mStartRecoveryRequestSourceServer = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecoveryRequestSourceServer_sourceServerID, &sStartRecoveryRequestSourceServer_recoverySnapshotID}}
+var m_StartRecoveryRequestSourceServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_StartRecoveryRequestSourceServers_member}}
+var m_StartSourceNetworkRecoveryRequestNetworkEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_StartSourceNetworkRecoveryRequestNetworkEntries_member}}
+var mStartSourceNetworkRecoveryRequestNetworkEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID, &sStartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsMap_key, &s_TagsMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mUninitializedAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sUninitializedAccountException_message, &sUninitializedAccountException_code}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_code, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var m_VolumeToConversionMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeToConversionMap_key, &s_VolumeToConversionMap_value}}
+var m_VolumeToProductCodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeToProductCodes_key, &s_VolumeToProductCodes_value}}
+var m_VolumeToSizeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeToSizeMap_key, &s_VolumeToSizeMap_value}}
+var mWaitStepConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWaitStepConfiguration_waitDurationMinutes}}
+var mAssociateSourceNetworkStackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSourceNetworkStackRequest_sourceNetworkID, &sAssociateSourceNetworkStackRequest_cfnStackName}}
+var mAssociateSourceNetworkStackResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSourceNetworkStackResponse_job}}
+var mCancelRecoveryPlanExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn}}
+var mCancelRecoveryPlanExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelRecoveryPlanExecutionResponse_recoveryPlanExecution}}
+var mCreateExtendedSourceServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExtendedSourceServerRequest_sourceServerArn, &sCreateExtendedSourceServerRequest_tags}}
+var mCreateExtendedSourceServerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExtendedSourceServerResponse_sourceServer}}
+var mCreateLaunchConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLaunchConfigurationTemplateRequest_tags, &sCreateLaunchConfigurationTemplateRequest_launchDisposition, &sCreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, &sCreateLaunchConfigurationTemplateRequest_copyPrivateIp, &sCreateLaunchConfigurationTemplateRequest_copyTags, &sCreateLaunchConfigurationTemplateRequest_licensing, &sCreateLaunchConfigurationTemplateRequest_exportBucketArn, &sCreateLaunchConfigurationTemplateRequest_postLaunchEnabled, &sCreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, &sCreateLaunchConfigurationTemplateRequest_recoveryMode}, Hash: &hCreateLaunchConfigurationTemplateRequest}
+var mCreateLaunchConfigurationTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate}}
+var mCreateRecoveryPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryPlanRequest_name, &sCreateRecoveryPlanRequest_description, &sCreateRecoveryPlanRequest_clientToken, &sCreateRecoveryPlanRequest_tags}}
+var mCreateRecoveryPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryPlanResponse_recoveryPlan}}
+var mCreateRecoveryPlanStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryPlanStepRequest_recoveryPlanArn, &sCreateRecoveryPlanStepRequest_stepName, &sCreateRecoveryPlanStepRequest_stepOrder, &sCreateRecoveryPlanStepRequest_configuration, &sCreateRecoveryPlanStepRequest_clientToken}}
+var mCreateRecoveryPlanStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecoveryPlanStepResponse_recoveryPlanStep}}
+var mCreateReplicationConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId, &sCreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup, &sCreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, &sCreateReplicationConfigurationTemplateRequest_replicationServerInstanceType, &sCreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer, &sCreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType, &sCreateReplicationConfigurationTemplateRequest_ebsEncryption, &sCreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn, &sCreateReplicationConfigurationTemplateRequest_bandwidthThrottling, &sCreateReplicationConfigurationTemplateRequest_dataPlaneRouting, &sCreateReplicationConfigurationTemplateRequest_createPublicIP, &sCreateReplicationConfigurationTemplateRequest_stagingAreaTags, &sCreateReplicationConfigurationTemplateRequest_pitPolicy, &sCreateReplicationConfigurationTemplateRequest_tags, &sCreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks, &sCreateReplicationConfigurationTemplateRequest_internetProtocol}, Hash: &hCreateReplicationConfigurationTemplateRequest}
+var mCreateSourceNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceNetworkRequest_vpcID, &sCreateSourceNetworkRequest_originAccountID, &sCreateSourceNetworkRequest_originRegion, &sCreateSourceNetworkRequest_tags}}
+var mCreateSourceNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSourceNetworkResponse_sourceNetworkID}}
+var mDeleteJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteJobRequest_jobID}}
+var mDeleteLaunchActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLaunchActionRequest_resourceId, &sDeleteLaunchActionRequest_actionId}}
+var mDeleteLaunchConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID}}
+var mDeleteRecoveryInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryInstanceRequest_recoveryInstanceID}}
+var mDeleteRecoveryPlanExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn}}
+var mDeleteRecoveryPlanExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn}}
+var mDeleteRecoveryPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanRequest_recoveryPlanArn}}
+var mDeleteRecoveryPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanResponse_recoveryPlanArn}}
+var mDeleteRecoveryPlanStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanStepRequest_recoveryPlanStepArn}}
+var mDeleteRecoveryPlanStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecoveryPlanStepResponse_recoveryPlanStepArn}}
+var mDeleteReplicationConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID}}
+var mDeleteSourceNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceNetworkRequest_sourceNetworkID}}
+var mDeleteSourceServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSourceServerRequest_sourceServerID}}
+var mDescribeJobLogItemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobLogItemsRequest_jobID, &sDescribeJobLogItemsRequest_maxResults, &sDescribeJobLogItemsRequest_nextToken}}
+var mDescribeJobLogItemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobLogItemsResponse_items, &sDescribeJobLogItemsResponse_nextToken}}
+var mDescribeJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobsRequest_filters, &sDescribeJobsRequest_maxResults, &sDescribeJobsRequest_nextToken}}
+var mDescribeJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobsResponse_items, &sDescribeJobsResponse_nextToken}}
+var mDescribeLaunchConfigurationTemplatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, &sDescribeLaunchConfigurationTemplatesRequest_maxResults, &sDescribeLaunchConfigurationTemplatesRequest_nextToken}}
+var mDescribeLaunchConfigurationTemplatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLaunchConfigurationTemplatesResponse_items, &sDescribeLaunchConfigurationTemplatesResponse_nextToken}}
+var mDescribeRecoveryInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoveryInstancesRequest_filters, &sDescribeRecoveryInstancesRequest_maxResults, &sDescribeRecoveryInstancesRequest_nextToken}}
+var mDescribeRecoveryInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoveryInstancesResponse_nextToken, &sDescribeRecoveryInstancesResponse_items}}
+var mDescribeRecoverySnapshotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoverySnapshotsRequest_sourceServerID, &sDescribeRecoverySnapshotsRequest_filters, &sDescribeRecoverySnapshotsRequest_order, &sDescribeRecoverySnapshotsRequest_maxResults, &sDescribeRecoverySnapshotsRequest_nextToken}}
+var mDescribeRecoverySnapshotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecoverySnapshotsResponse_items, &sDescribeRecoverySnapshotsResponse_nextToken}}
+var mDescribeReplicationConfigurationTemplatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs, &sDescribeReplicationConfigurationTemplatesRequest_maxResults, &sDescribeReplicationConfigurationTemplatesRequest_nextToken}}
+var mDescribeReplicationConfigurationTemplatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplicationConfigurationTemplatesResponse_items, &sDescribeReplicationConfigurationTemplatesResponse_nextToken}}
+var mDescribeSourceNetworksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceNetworksRequest_filters, &sDescribeSourceNetworksRequest_maxResults, &sDescribeSourceNetworksRequest_nextToken}}
+var mDescribeSourceNetworksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceNetworksResponse_items, &sDescribeSourceNetworksResponse_nextToken}}
+var mDescribeSourceServersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceServersRequest_filters, &sDescribeSourceServersRequest_maxResults, &sDescribeSourceServersRequest_nextToken}}
+var mDescribeSourceServersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSourceServersResponse_items, &sDescribeSourceServersResponse_nextToken}}
+var mDisconnectRecoveryInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisconnectRecoveryInstanceRequest_recoveryInstanceID}}
+var mDisconnectSourceServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisconnectSourceServerRequest_sourceServerID}}
+var mExportSourceNetworkCfnTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSourceNetworkCfnTemplateRequest_sourceNetworkID}}
+var mExportSourceNetworkCfnTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSourceNetworkCfnTemplateResponse_s3DestinationUrl}}
+var mGetFailbackReplicationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFailbackReplicationConfigurationRequest_recoveryInstanceID}}
+var mGetFailbackReplicationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFailbackReplicationConfigurationResponse_recoveryInstanceID, &sGetFailbackReplicationConfigurationResponse_name, &sGetFailbackReplicationConfigurationResponse_bandwidthThrottling, &sGetFailbackReplicationConfigurationResponse_usePrivateIP, &sGetFailbackReplicationConfigurationResponse_internetProtocol}}
+var mGetLaunchConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLaunchConfigurationRequest_sourceServerID}}
+var mLaunchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchConfiguration_sourceServerID, &sLaunchConfiguration_name, &sLaunchConfiguration_ec2LaunchTemplateID, &sLaunchConfiguration_launchDisposition, &sLaunchConfiguration_targetInstanceTypeRightSizingMethod, &sLaunchConfiguration_copyPrivateIp, &sLaunchConfiguration_copyTags, &sLaunchConfiguration_licensing, &sLaunchConfiguration_postLaunchEnabled, &sLaunchConfiguration_launchIntoInstanceProperties, &sLaunchConfiguration_recoveryMode}, Hash: &hLaunchConfiguration}
+var mGetRecoveryPlanExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn}}
+var mGetRecoveryPlanExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanExecutionResponse_recoveryPlanExecution}}
+var mGetRecoveryPlanExecutionStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn}}
+var mGetRecoveryPlanExecutionStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep}}
+var mGetRecoveryPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanRequest_recoveryPlanArn}}
+var mGetRecoveryPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanResponse_recoveryPlan}}
+var mGetRecoveryPlanStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanStepRequest_recoveryPlanStepArn}}
+var mGetRecoveryPlanStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecoveryPlanStepResponse_recoveryPlanStep}}
+var mGetReplicationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetReplicationConfigurationRequest_sourceServerID}}
+var mReplicationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationConfiguration_sourceServerID, &sReplicationConfiguration_name, &sReplicationConfiguration_stagingAreaSubnetId, &sReplicationConfiguration_associateDefaultSecurityGroup, &sReplicationConfiguration_replicationServersSecurityGroupsIDs, &sReplicationConfiguration_replicationServerInstanceType, &sReplicationConfiguration_useDedicatedReplicationServer, &sReplicationConfiguration_defaultLargeStagingDiskType, &sReplicationConfiguration_replicatedDisks, &sReplicationConfiguration_ebsEncryption, &sReplicationConfiguration_ebsEncryptionKeyArn, &sReplicationConfiguration_bandwidthThrottling, &sReplicationConfiguration_dataPlaneRouting, &sReplicationConfiguration_createPublicIP, &sReplicationConfiguration_stagingAreaTags, &sReplicationConfiguration_pitPolicy, &sReplicationConfiguration_autoReplicateNewDisks, &sReplicationConfiguration_internetProtocol}, Hash: &hReplicationConfiguration}
+var mListExtensibleSourceServersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExtensibleSourceServersRequest_stagingAccountID, &sListExtensibleSourceServersRequest_maxResults, &sListExtensibleSourceServersRequest_nextToken}}
+var mListExtensibleSourceServersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExtensibleSourceServersResponse_items, &sListExtensibleSourceServersResponse_nextToken}}
+var mListLaunchActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLaunchActionsRequest_resourceId, &sListLaunchActionsRequest_filters, &sListLaunchActionsRequest_maxResults, &sListLaunchActionsRequest_nextToken}}
+var mListLaunchActionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLaunchActionsResponse_items, &sListLaunchActionsResponse_nextToken}}
+var mListRecoveryPlanExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanExecutionsRequest_recoveryPlanArn, &sListRecoveryPlanExecutionsRequest_status, &sListRecoveryPlanExecutionsRequest_maxResults, &sListRecoveryPlanExecutionsRequest_nextToken}}
+var mListRecoveryPlanExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanExecutionsResponse_recoveryPlanExecutions, &sListRecoveryPlanExecutionsResponse_nextToken}}
+var mListRecoveryPlanExecutionStepsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn, &sListRecoveryPlanExecutionStepsRequest_filter, &sListRecoveryPlanExecutionStepsRequest_maxResults, &sListRecoveryPlanExecutionStepsRequest_nextToken}}
+var mListRecoveryPlanExecutionStepsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps, &sListRecoveryPlanExecutionStepsResponse_nextToken}}
+var mListRecoveryPlansRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlansRequest_maxResults, &sListRecoveryPlansRequest_nextToken}}
+var mListRecoveryPlansResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlansResponse_recoveryPlans, &sListRecoveryPlansResponse_nextToken}}
+var mListRecoveryPlanStepsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanStepsRequest_recoveryPlanArn, &sListRecoveryPlanStepsRequest_maxResults, &sListRecoveryPlanStepsRequest_nextToken}}
+var mListRecoveryPlanStepsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecoveryPlanStepsResponse_recoveryPlanSteps, &sListRecoveryPlanStepsResponse_nextToken}}
+var mListStagingAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListStagingAccountsRequest_maxResults, &sListStagingAccountsRequest_nextToken}}
+var mListStagingAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListStagingAccountsResponse_accounts, &sListStagingAccountsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutLaunchActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLaunchActionRequest_resourceId, &sPutLaunchActionRequest_actionCode, &sPutLaunchActionRequest_order, &sPutLaunchActionRequest_actionId, &sPutLaunchActionRequest_optional, &sPutLaunchActionRequest_active, &sPutLaunchActionRequest_name, &sPutLaunchActionRequest_actionVersion, &sPutLaunchActionRequest_category, &sPutLaunchActionRequest_parameters, &sPutLaunchActionRequest_description}, Hash: &hPutLaunchActionRequest}
+var mPutLaunchActionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLaunchActionResponse_resourceId, &sPutLaunchActionResponse_actionId, &sPutLaunchActionResponse_actionCode, &sPutLaunchActionResponse_type, &sPutLaunchActionResponse_name, &sPutLaunchActionResponse_active, &sPutLaunchActionResponse_order, &sPutLaunchActionResponse_actionVersion, &sPutLaunchActionResponse_optional, &sPutLaunchActionResponse_parameters, &sPutLaunchActionResponse_description, &sPutLaunchActionResponse_category}, Hash: &hPutLaunchActionResponse}
+var mReorderRecoveryPlanStepsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReorderRecoveryPlanStepsRequest_recoveryPlanArn, &sReorderRecoveryPlanStepsRequest_orderedStepArns}}
+var mReorderRecoveryPlanStepsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReorderRecoveryPlanStepsResponse_recoveryPlanSteps}}
+var mRetryDataReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryDataReplicationRequest_sourceServerID}}
+var mRetryRecoveryPlanExecutionStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn}}
+var mRetryRecoveryPlanExecutionStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep}}
+var mReverseReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReverseReplicationRequest_recoveryInstanceID}}
+var mReverseReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReverseReplicationResponse_reversedDirectionSourceServerArn}}
+var mStartFailbackLaunchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFailbackLaunchRequest_recoveryInstanceIDs, &sStartFailbackLaunchRequest_tags}}
+var mStartFailbackLaunchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFailbackLaunchResponse_job}}
+var mStartRecoveryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecoveryRequest_sourceServers, &sStartRecoveryRequest_isDrill, &sStartRecoveryRequest_tags}}
+var mStartRecoveryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecoveryResponse_job}}
+var mStartRecoveryPlanExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecoveryPlanExecutionRequest_recoveryPlanArn, &sStartRecoveryPlanExecutionRequest_mode, &sStartRecoveryPlanExecutionRequest_clientToken, &sStartRecoveryPlanExecutionRequest_sourceServers, &sStartRecoveryPlanExecutionRequest_tags}}
+var mStartRecoveryPlanExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecoveryPlanExecutionResponse_recoveryPlanExecution}}
+var mStartReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartReplicationRequest_sourceServerID}}
+var mStartReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartReplicationResponse_sourceServer}}
+var mStartSourceNetworkRecoveryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSourceNetworkRecoveryRequest_sourceNetworks, &sStartSourceNetworkRecoveryRequest_deployAsNew, &sStartSourceNetworkRecoveryRequest_tags}}
+var mStartSourceNetworkRecoveryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSourceNetworkRecoveryResponse_job}}
+var mStartSourceNetworkReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSourceNetworkReplicationRequest_sourceNetworkID}}
+var mStartSourceNetworkReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSourceNetworkReplicationResponse_sourceNetwork}}
+var mStopFailbackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopFailbackRequest_recoveryInstanceID}}
+var mStopReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopReplicationRequest_sourceServerID}}
+var mStopReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopReplicationResponse_sourceServer}}
+var mStopSourceNetworkReplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSourceNetworkReplicationRequest_sourceNetworkID}}
+var mStopSourceNetworkReplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSourceNetworkReplicationResponse_sourceNetwork}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mTerminateRecoveryInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateRecoveryInstancesRequest_recoveryInstanceIDs}}
+var mTerminateRecoveryInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateRecoveryInstancesResponse_job}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateFailbackReplicationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFailbackReplicationConfigurationRequest_recoveryInstanceID, &sUpdateFailbackReplicationConfigurationRequest_name, &sUpdateFailbackReplicationConfigurationRequest_bandwidthThrottling, &sUpdateFailbackReplicationConfigurationRequest_usePrivateIP, &sUpdateFailbackReplicationConfigurationRequest_internetProtocol}}
+var mUpdateLaunchConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLaunchConfigurationRequest_sourceServerID, &sUpdateLaunchConfigurationRequest_name, &sUpdateLaunchConfigurationRequest_launchDisposition, &sUpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod, &sUpdateLaunchConfigurationRequest_copyPrivateIp, &sUpdateLaunchConfigurationRequest_copyTags, &sUpdateLaunchConfigurationRequest_licensing, &sUpdateLaunchConfigurationRequest_postLaunchEnabled, &sUpdateLaunchConfigurationRequest_launchIntoInstanceProperties, &sUpdateLaunchConfigurationRequest_recoveryMode}, Hash: &hUpdateLaunchConfigurationRequest}
+var mUpdateLaunchConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID, &sUpdateLaunchConfigurationTemplateRequest_launchDisposition, &sUpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, &sUpdateLaunchConfigurationTemplateRequest_copyPrivateIp, &sUpdateLaunchConfigurationTemplateRequest_copyTags, &sUpdateLaunchConfigurationTemplateRequest_licensing, &sUpdateLaunchConfigurationTemplateRequest_exportBucketArn, &sUpdateLaunchConfigurationTemplateRequest_postLaunchEnabled, &sUpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, &sUpdateLaunchConfigurationTemplateRequest_recoveryMode}, Hash: &hUpdateLaunchConfigurationTemplateRequest}
+var mUpdateLaunchConfigurationTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate}}
+var mUpdateRecoveryPlanExecutionStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn, &sUpdateRecoveryPlanExecutionStepRequest_status, &sUpdateRecoveryPlanExecutionStepRequest_servers, &sUpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes}}
+var mUpdateRecoveryPlanExecutionStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep}}
+var mUpdateRecoveryPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanRequest_recoveryPlanArn, &sUpdateRecoveryPlanRequest_name, &sUpdateRecoveryPlanRequest_description}}
+var mUpdateRecoveryPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanResponse_recoveryPlan}}
+var mUpdateRecoveryPlanStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanStepRequest_recoveryPlanStepArn, &sUpdateRecoveryPlanStepRequest_stepName, &sUpdateRecoveryPlanStepRequest_configuration}}
+var mUpdateRecoveryPlanStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecoveryPlanStepResponse_recoveryPlanStep}}
+var mUpdateReplicationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationConfigurationRequest_sourceServerID, &sUpdateReplicationConfigurationRequest_name, &sUpdateReplicationConfigurationRequest_stagingAreaSubnetId, &sUpdateReplicationConfigurationRequest_associateDefaultSecurityGroup, &sUpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs, &sUpdateReplicationConfigurationRequest_replicationServerInstanceType, &sUpdateReplicationConfigurationRequest_useDedicatedReplicationServer, &sUpdateReplicationConfigurationRequest_defaultLargeStagingDiskType, &sUpdateReplicationConfigurationRequest_replicatedDisks, &sUpdateReplicationConfigurationRequest_ebsEncryption, &sUpdateReplicationConfigurationRequest_ebsEncryptionKeyArn, &sUpdateReplicationConfigurationRequest_bandwidthThrottling, &sUpdateReplicationConfigurationRequest_dataPlaneRouting, &sUpdateReplicationConfigurationRequest_createPublicIP, &sUpdateReplicationConfigurationRequest_stagingAreaTags, &sUpdateReplicationConfigurationRequest_pitPolicy, &sUpdateReplicationConfigurationRequest_autoReplicateNewDisks, &sUpdateReplicationConfigurationRequest_internetProtocol}, Hash: &hUpdateReplicationConfigurationRequest}
+var mUpdateReplicationConfigurationTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID, &sUpdateReplicationConfigurationTemplateRequest_arn, &sUpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId, &sUpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup, &sUpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, &sUpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType, &sUpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer, &sUpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType, &sUpdateReplicationConfigurationTemplateRequest_ebsEncryption, &sUpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn, &sUpdateReplicationConfigurationTemplateRequest_bandwidthThrottling, &sUpdateReplicationConfigurationTemplateRequest_dataPlaneRouting, &sUpdateReplicationConfigurationTemplateRequest_createPublicIP, &sUpdateReplicationConfigurationTemplateRequest_stagingAreaTags, &sUpdateReplicationConfigurationTemplateRequest_pitPolicy, &sUpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks, &sUpdateReplicationConfigurationTemplateRequest_internetProtocol}, Hash: &hUpdateReplicationConfigurationTemplateRequest}
+
+var hJob = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	2, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 8, 0, 5, 4, 7, 0,
+	1, 0, 3, 0, 0, 0, 0, 6,
+}}
+var hLaunchAction = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 11, 1, 0, 0, 4, 2, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 9,
+	10, 0, 3, 0, 0, 8, 7, 0,
+}}
+var hLaunchConfigurationTemplate = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 1, 9, 0, 8, 0, 6, 0, 0, 0, 0, 0, 3, 0, 0, 7, 0, 11, 0, 4, 0, 10, 0, 0,
+	0, 0, 0, 5, 12, 0, 2, 0,
+}}
+var hRecoveryInstance = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	6, 0, 12, 0, 0, 0, 2, 0, 0, 10, 13, 14, 9, 3, 4, 0, 0, 0, 5, 15, 0, 0, 7, 0,
+	0, 8, 1, 0, 16, 0, 0, 11,
+}}
+var hRecoveryInstanceFailback = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 10, 0, 0, 0, 0, 1, 8, 7, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+	0, 5, 9, 4, 0, 0, 0, 2,
+}}
+var hRecoveryPlanExecutionStep = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 2, 0, 0, 9, 0, 0, 0, 0, 3, 5, 0, 1, 8, 0, 0, 0, 4, 7, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 6, 0, 0, 0,
+}}
+var hReplicationConfigurationTemplate = smithy.MemberHash{Seed: 32, Slots: []uint16{
+	11, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 15, 0, 0, 3, 0, 0, 0, 0, 0, 12, 0, 0, 8,
+	0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 10, 14, 0, 0, 0, 17, 0, 7, 16, 0, 0, 0, 0,
+	0, 0, 6, 5, 4, 2, 0, 0, 0, 0, 0, 0, 9, 0, 18, 0,
+}}
+var hSourceNetwork = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 0, 0, 1, 9, 0, 0, 0, 0, 8, 0, 0, 11,
+	2, 0, 0, 10, 5, 6, 0, 0,
+}}
+var hSourceProperties = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 3, 10, 0, 8, 0, 5, 0, 7, 0, 0, 4, 0, 6, 0, 0, 9, 0, 0, 0, 1, 0, 2,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hSourceServer = smithy.MemberHash{Seed: 23, Slots: []uint16{
+	3, 5, 10, 14, 0, 13, 12, 0, 0, 0, 7, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0,
+	2, 0, 6, 0, 11, 0, 1, 0,
+}}
+var hCreateLaunchConfigurationTemplateRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 6, 0, 0, 2, 9, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 8, 4, 0, 0, 0, 7, 1, 0,
+	0, 0, 5, 0, 0, 0, 10, 0,
+}}
+var hCreateReplicationConfigurationTemplateRequest = smithy.MemberHash{Seed: 93, Slots: []uint16{
+	8, 13, 0, 5, 0, 0, 0, 0, 0, 6, 4, 12, 0, 10, 1, 9, 3, 0, 0, 0, 2, 11, 14, 0,
+	0, 15, 0, 0, 0, 7, 0, 16,
+}}
+var hLaunchConfiguration = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 8, 10, 2, 4, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 9, 6, 1, 0, 0, 0, 0, 0,
+	0, 0, 7, 0, 3, 0, 11, 0,
+}}
+var hReplicationConfiguration = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	3, 0, 16, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 8, 10, 0, 0, 0, 0, 0, 7, 0, 0, 11,
+	13, 0, 0, 0, 0, 0, 0, 4, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0,
+	0, 1, 0, 5, 0, 0, 18, 0, 15, 0, 9, 0, 0, 12, 0, 2,
+}}
+var hPutLaunchActionRequest = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	11, 6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 9, 0, 0,
+	3, 0, 5, 8, 0, 1, 4, 7,
+}}
+var hPutLaunchActionResponse = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	11, 6, 0, 4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 12, 0, 0,
+	7, 0, 9, 8, 0, 1, 2, 5,
+}}
+var hUpdateLaunchConfigurationRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 7, 9, 2, 3, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 8, 5, 1, 0, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 0, 10, 0,
+}}
+var hUpdateLaunchConfigurationTemplateRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 7, 0, 3, 0, 0, 0, 10, 0, 0, 5, 0, 0,
+	8, 0, 0, 0, 4, 0, 0, 2,
+}}
+var hUpdateReplicationConfigurationRequest = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	3, 0, 16, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 8, 10, 0, 0, 0, 0, 0, 7, 0, 0, 11,
+	13, 0, 0, 0, 0, 0, 0, 4, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0,
+	0, 1, 0, 5, 0, 0, 18, 0, 15, 0, 9, 0, 0, 12, 0, 2,
+}}
+var hUpdateReplicationConfigurationTemplateRequest = smithy.MemberHash{Seed: 32, Slots: []uint16{
+	11, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 12, 0, 0, 8,
+	0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 10, 14, 0, 0, 0, 16, 0, 7, 15, 0, 0, 0, 0,
+	0, 0, 6, 5, 4, 2, 0, 0, 0, 0, 0, 0, 9, 0, 17, 0,
+}}
+
+var sAssociateSourceNetworkStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceNetworkStack, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateSourceNetworkStack})
+var sCancelRecoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRecoveryPlanExecution, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCancelRecoveryPlanExecution})
+var sCreateExtendedSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtendedSourceServer, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateExtendedSourceServer})
+var sCreateLaunchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLaunchConfigurationTemplate, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateLaunchConfigurationTemplate})
+var sCreateRecoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlan, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateRecoveryPlan})
+var sCreateRecoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlanStep, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateRecoveryPlanStep})
+var sCreateReplicationConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicationConfigurationTemplate, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateReplicationConfigurationTemplate})
+var sCreateSourceNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceNetwork, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateSourceNetwork})
+var sDeleteJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJob, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteJob})
+var sDeleteLaunchAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchAction, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLaunchAction})
+var sDeleteLaunchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchConfigurationTemplate, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLaunchConfigurationTemplate})
+var sDeleteRecoveryInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryInstance, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecoveryInstance})
+var sDeleteRecoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlan, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecoveryPlan})
+var sDeleteRecoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanExecution, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecoveryPlanExecution})
+var sDeleteRecoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanStep, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecoveryPlanStep})
+var sDeleteReplicationConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationConfigurationTemplate, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReplicationConfigurationTemplate})
+var sDeleteSourceNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceNetwork, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSourceNetwork})
+var sDeleteSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceServer, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSourceServer})
+var sDescribeJobLogItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobLogItems, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeJobLogItems})
+var sDescribeJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobs, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeJobs})
+var sDescribeLaunchConfigurationTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLaunchConfigurationTemplates, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLaunchConfigurationTemplates})
+var sDescribeRecoveryInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoveryInstances, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRecoveryInstances})
+var sDescribeRecoverySnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoverySnapshots, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRecoverySnapshots})
+var sDescribeReplicationConfigurationTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicationConfigurationTemplates, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReplicationConfigurationTemplates})
+var sDescribeSourceNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceNetworks, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSourceNetworks})
+var sDescribeSourceServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceServers, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSourceServers})
+var sDisconnectRecoveryInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectRecoveryInstance, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eDisconnectRecoveryInstance})
+var sDisconnectSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectSourceServer, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eDisconnectSourceServer})
+var sExportSourceNetworkCfnTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSourceNetworkCfnTemplate, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eExportSourceNetworkCfnTemplate})
+var sGetFailbackReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailbackReplicationConfiguration, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetFailbackReplicationConfiguration})
+var sGetLaunchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLaunchConfiguration, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetLaunchConfiguration})
+var sGetRecoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlan, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryPlan})
+var sGetRecoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecution, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryPlanExecution})
+var sGetRecoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecutionStep, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryPlanExecutionStep})
+var sGetRecoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanStep, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eGetRecoveryPlanStep})
+var sGetReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReplicationConfiguration, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eGetReplicationConfiguration})
+var sInitializeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInitializeService, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eInitializeService})
+var sListExtensibleSourceServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensibleSourceServers, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListExtensibleSourceServers})
+var sListLaunchActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLaunchActions, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListLaunchActions})
+var sListRecoveryPlanExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutions, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListRecoveryPlanExecutions})
+var sListRecoveryPlanExecutionSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionSteps, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListRecoveryPlanExecutionSteps})
+var sListRecoveryPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlans, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListRecoveryPlans})
+var sListRecoveryPlanSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanSteps, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eListRecoveryPlanSteps})
+var sListStagingAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStagingAccounts, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eListStagingAccounts})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutLaunchAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLaunchAction, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ePutLaunchAction})
+var sReorderRecoveryPlanSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReorderRecoveryPlanSteps, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eReorderRecoveryPlanSteps})
+var sRetryDataReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryDataReplication, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eRetryDataReplication})
+var sRetryRecoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryRecoveryPlanExecutionStep, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eRetryRecoveryPlanExecutionStep})
+var sReverseReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseReplication, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eReverseReplication})
+var sStartFailbackLaunch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFailbackLaunch, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eStartFailbackLaunch})
+var sStartRecovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecovery, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eStartRecovery})
+var sStartRecoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryPlanExecution, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eStartRecoveryPlanExecution})
+var sStartReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplication, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eStartReplication})
+var sStartSourceNetworkRecovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkRecovery, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eStartSourceNetworkRecovery})
+var sStartSourceNetworkReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkReplication, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eStartSourceNetworkReplication})
+var sStopFailback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFailback, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eStopFailback})
+var sStopReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplication, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eStopReplication})
+var sStopSourceNetworkReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSourceNetworkReplication, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eStopSourceNetworkReplication})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTerminateRecoveryInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateRecoveryInstances, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eTerminateRecoveryInstances})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateFailbackReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFailbackReplicationConfiguration, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFailbackReplicationConfiguration})
+var sUpdateLaunchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLaunchConfiguration, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLaunchConfiguration})
+var sUpdateLaunchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLaunchConfigurationTemplate, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLaunchConfigurationTemplate})
+var sUpdateRecoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlan, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecoveryPlan})
+var sUpdateRecoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanExecutionStep, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecoveryPlanExecutionStep})
+var sUpdateRecoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanStep, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecoveryPlanStep})
+var sUpdateReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationConfiguration, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReplicationConfiguration})
+var sUpdateReplicationConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationConfigurationTemplate, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReplicationConfigurationTemplate})
+var s_ElasticDisasterRecoveryService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticDisasterRecoveryService, Type: smithy.ShapeTypeService, Ext: &e_ElasticDisasterRecoveryService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_code})
+var sAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure, Ext: &eAccount})
+var sAccount_accountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eAccount_accountID})
+var s_AccountID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &e_AccountID})
+var s_AccountIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIDs, Members: &m_AccountIDs, Type: smithy.ShapeTypeList, Ext: &e_AccountIDs})
+var s_AccountIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &e_AccountIDs_member})
+var s_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Accounts, Members: &m_Accounts, Type: smithy.ShapeTypeList, Ext: &e_Accounts})
+var s_Accounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure, Ext: &e_Accounts_member})
+var s_AgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentVersion, Type: smithy.ShapeTypeString, Ext: &e_AgentVersion})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &e_ARN})
+var s_AwsAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AwsAvailabilityZone})
+var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &e_AwsRegion})
+var s_BoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &e_BoundedString})
+var s_CfnStackName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CfnStackName, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &e_CfnStackName})
+var s_ClientIdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_ClientIdempotencyToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t72, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConflictException_code})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var s_ConversionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConversionMap, Members: &m_ConversionMap, Type: smithy.ShapeTypeMap, Ext: &e_ConversionMap})
+var s_ConversionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EbsSnapshot, Type: smithy.ShapeTypeString, Ext: &e_ConversionMap_key})
+var s_ConversionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EbsSnapshot, Type: smithy.ShapeTypeString, Ext: &e_ConversionMap_value})
+var sConversionProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversionProperties, Members: &mConversionProperties, Type: smithy.ShapeTypeStructure, Ext: &eConversionProperties})
+var sConversionProperties_volumeToConversionMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeToConversionMap", ID: &i_VolumeToConversionMap, Members: &m_VolumeToConversionMap, Type: smithy.ShapeTypeMap, Ext: &eConversionProperties_volumeToConversionMap})
+var sConversionProperties_rootVolumeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootVolumeName", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConversionProperties_rootVolumeName})
+var sConversionProperties_forceUefi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceUefi", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eConversionProperties_forceUefi})
+var sConversionProperties_dataTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTimestamp", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eConversionProperties_dataTimestamp})
+var sConversionProperties_volumeToVolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeToVolumeSize", ID: &i_VolumeToSizeMap, Members: &m_VolumeToSizeMap, Type: smithy.ShapeTypeMap, Ext: &eConversionProperties_volumeToVolumeSize})
+var sConversionProperties_volumeToProductCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeToProductCodes", ID: &i_VolumeToProductCodes, Members: &m_VolumeToProductCodes, Type: smithy.ShapeTypeMap, Ext: &eConversionProperties_volumeToProductCodes})
+var sCPU = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCPU, Members: &mCPU, Type: smithy.ShapeTypeStructure, Ext: &eCPU})
+var sCPU_cores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cores", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eCPU_cores})
+var sCPU_modelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eCPU_modelName})
+var s_Cpus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cpus, Members: &m_Cpus, Type: smithy.ShapeTypeList, Ext: &e_Cpus})
+var s_Cpus_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCPU, Members: &mCPU, Type: smithy.ShapeTypeStructure, Ext: &e_Cpus_member})
+var sDataReplicationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationError, Members: &mDataReplicationError, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationError})
+var sDataReplicationError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_DataReplicationErrorString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationError_error})
+var sDataReplicationError_rawError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rawError", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationError_rawError})
+var s_DataReplicationErrorString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationErrorString, Type: smithy.ShapeTypeString, Ext: &e_DataReplicationErrorString})
+var sDataReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationInfo, Members: &mDataReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInfo})
+var sDataReplicationInfo_lagDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagDuration", ID: &i_ISO8601DurationString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfo_lagDuration})
+var sDataReplicationInfo_etaDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "etaDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfo_etaDateTime})
+var sDataReplicationInfo_replicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedDisks", ID: &i_DataReplicationInfoReplicatedDisks, Members: &m_DataReplicationInfoReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &eDataReplicationInfo_replicatedDisks})
+var sDataReplicationInfo_dataReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationState", ID: &i_DataReplicationState, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfo_dataReplicationState})
+var sDataReplicationInfo_dataReplicationInitiation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationInitiation", ID: &iDataReplicationInitiation, Members: &mDataReplicationInitiation, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInfo_dataReplicationInitiation})
+var sDataReplicationInfo_dataReplicationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationError", ID: &iDataReplicationError, Members: &mDataReplicationError, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInfo_dataReplicationError})
+var sDataReplicationInfo_stagingAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAvailabilityZone", ID: &i_AwsAvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfo_stagingAvailabilityZone})
+var sDataReplicationInfo_stagingOutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingOutpostArn", ID: &i_OutpostARN, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfo_stagingOutpostArn})
+var sDataReplicationInfoReplicatedDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationInfoReplicatedDisk, Members: &mDataReplicationInfoReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInfoReplicatedDisk})
+var sDataReplicationInfoReplicatedDisk_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfoReplicatedDisk_deviceName})
+var sDataReplicationInfoReplicatedDisk_totalStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eDataReplicationInfoReplicatedDisk_totalStorageBytes})
+var sDataReplicationInfoReplicatedDisk_replicatedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eDataReplicationInfoReplicatedDisk_replicatedStorageBytes})
+var sDataReplicationInfoReplicatedDisk_rescannedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rescannedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eDataReplicationInfoReplicatedDisk_rescannedStorageBytes})
+var sDataReplicationInfoReplicatedDisk_backloggedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backloggedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eDataReplicationInfoReplicatedDisk_backloggedStorageBytes})
+var sDataReplicationInfoReplicatedDisk_volumeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeStatus", ID: &i_VolumeStatus, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInfoReplicatedDisk_volumeStatus})
+var s_DataReplicationInfoReplicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationInfoReplicatedDisks, Members: &m_DataReplicationInfoReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &e_DataReplicationInfoReplicatedDisks})
+var s_DataReplicationInfoReplicatedDisks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataReplicationInfoReplicatedDisk, Members: &mDataReplicationInfoReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &e_DataReplicationInfoReplicatedDisks_member})
+var sDataReplicationInitiation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationInitiation, Members: &mDataReplicationInitiation, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInitiation})
+var sDataReplicationInitiation_startDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInitiation_startDateTime})
+var sDataReplicationInitiation_nextAttemptDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextAttemptDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInitiation_nextAttemptDateTime})
+var sDataReplicationInitiation_steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "steps", ID: &i_DataReplicationInitiationSteps, Members: &m_DataReplicationInitiationSteps, Type: smithy.ShapeTypeList, Ext: &eDataReplicationInitiation_steps})
+var sDataReplicationInitiationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataReplicationInitiationStep, Members: &mDataReplicationInitiationStep, Type: smithy.ShapeTypeStructure, Ext: &eDataReplicationInitiationStep})
+var sDataReplicationInitiationStep_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DataReplicationInitiationStepName, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInitiationStep_name})
+var sDataReplicationInitiationStep_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_DataReplicationInitiationStepStatus, Type: smithy.ShapeTypeString, Ext: &eDataReplicationInitiationStep_status})
+var s_DataReplicationInitiationStepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationInitiationStepName, Type: smithy.ShapeTypeString, Ext: &e_DataReplicationInitiationStepName})
+var s_DataReplicationInitiationSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationInitiationSteps, Members: &m_DataReplicationInitiationSteps, Type: smithy.ShapeTypeList, Ext: &e_DataReplicationInitiationSteps})
+var s_DataReplicationInitiationSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataReplicationInitiationStep, Members: &mDataReplicationInitiationStep, Type: smithy.ShapeTypeStructure, Ext: &e_DataReplicationInitiationSteps_member})
+var s_DataReplicationInitiationStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationInitiationStepStatus, Type: smithy.ShapeTypeString, Ext: &e_DataReplicationInitiationStepStatus})
+var s_DataReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataReplicationState, Type: smithy.ShapeTypeString, Ext: &e_DataReplicationState})
+var sDescribeJobsRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobsRequestFilters, Members: &mDescribeJobsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobsRequestFilters})
+var sDescribeJobsRequestFilters_jobIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobIDs", ID: &i_DescribeJobsRequestFiltersJobIDs, Members: &m_DescribeJobsRequestFiltersJobIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeJobsRequestFilters_jobIDs})
+var sDescribeJobsRequestFilters_fromDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromDate", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDescribeJobsRequestFilters_fromDate})
+var sDescribeJobsRequestFilters_toDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toDate", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDescribeJobsRequestFilters_toDate})
+var s_DescribeJobsRequestFiltersJobIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeJobsRequestFiltersJobIDs, Members: &m_DescribeJobsRequestFiltersJobIDs, Type: smithy.ShapeTypeList, Ext: &e_DescribeJobsRequestFiltersJobIDs})
+var s_DescribeJobsRequestFiltersJobIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &e_DescribeJobsRequestFiltersJobIDs_member})
+var s_DescribeRecoveryInstancesItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeRecoveryInstancesItems, Members: &m_DescribeRecoveryInstancesItems, Type: smithy.ShapeTypeList, Ext: &e_DescribeRecoveryInstancesItems})
+var s_DescribeRecoveryInstancesItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryInstance, Members: &mRecoveryInstance, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeRecoveryInstancesItems_member})
+var sDescribeRecoveryInstancesRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoveryInstancesRequestFilters, Members: &mDescribeRecoveryInstancesRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoveryInstancesRequestFilters})
+var sDescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceIDs", ID: &i_RecoveryInstanceIDs, Members: &m_RecoveryInstanceIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs})
+var sDescribeRecoveryInstancesRequestFilters_sourceServerIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerIDs", ID: &i_SourceServerIDs, Members: &m_SourceServerIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeRecoveryInstancesRequestFilters_sourceServerIDs})
+var sDescribeRecoverySnapshotsRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoverySnapshotsRequestFilters, Members: &mDescribeRecoverySnapshotsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoverySnapshotsRequestFilters})
+var sDescribeRecoverySnapshotsRequestFilters_fromDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsRequestFilters_fromDateTime})
+var sDescribeRecoverySnapshotsRequestFilters_toDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsRequestFilters_toDateTime})
+var sDescribeSourceNetworksRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceNetworksRequestFilters, Members: &mDescribeSourceNetworksRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceNetworksRequestFilters})
+var sDescribeSourceNetworksRequestFilters_sourceNetworkIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkIDs", ID: &i_DescribeSourceNetworksRequestFiltersIDs, Members: &m_DescribeSourceNetworksRequestFiltersIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceNetworksRequestFilters_sourceNetworkIDs})
+var sDescribeSourceNetworksRequestFilters_originAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceNetworksRequestFilters_originAccountID})
+var sDescribeSourceNetworksRequestFilters_originRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceNetworksRequestFilters_originRegion})
+var s_DescribeSourceNetworksRequestFiltersIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeSourceNetworksRequestFiltersIDs, Members: &m_DescribeSourceNetworksRequestFiltersIDs, Type: smithy.ShapeTypeList, Ext: &e_DescribeSourceNetworksRequestFiltersIDs})
+var s_DescribeSourceNetworksRequestFiltersIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &e_DescribeSourceNetworksRequestFiltersIDs_member})
+var sDescribeSourceServersRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceServersRequestFilters, Members: &mDescribeSourceServersRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceServersRequestFilters})
+var sDescribeSourceServersRequestFilters_sourceServerIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerIDs", ID: &i_DescribeSourceServersRequestFiltersIDs, Members: &m_DescribeSourceServersRequestFiltersIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceServersRequestFilters_sourceServerIDs})
+var sDescribeSourceServersRequestFilters_hardwareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hardwareId", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceServersRequestFilters_hardwareId})
+var sDescribeSourceServersRequestFilters_stagingAccountIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAccountIDs", ID: &i_AccountIDs, Members: &m_AccountIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceServersRequestFilters_stagingAccountIDs})
+var s_DescribeSourceServersRequestFiltersIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeSourceServersRequestFiltersIDs, Members: &m_DescribeSourceServersRequestFiltersIDs, Type: smithy.ShapeTypeList, Ext: &e_DescribeSourceServersRequestFiltersIDs})
+var s_DescribeSourceServersRequestFiltersIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &e_DescribeSourceServersRequestFiltersIDs_member})
+var sDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisk, Members: &mDisk, Type: smithy.ShapeTypeStructure, Ext: &eDisk})
+var sDisk_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eDisk_deviceName})
+var sDisk_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eDisk_bytes})
+var s_Disks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Disks, Members: &m_Disks, Type: smithy.ShapeTypeList, Ext: &e_Disks})
+var s_Disks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisk, Members: &mDisk, Type: smithy.ShapeTypeStructure, Ext: &e_Disks_member})
+var s_EbsSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsSnapshot, Type: smithy.ShapeTypeString, Ext: &e_EbsSnapshot})
+var s_EbsSnapshotsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsSnapshotsList, Members: &m_EbsSnapshotsList, Type: smithy.ShapeTypeList, Ext: &e_EbsSnapshotsList})
+var s_EbsSnapshotsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EbsSnapshot, Type: smithy.ShapeTypeString, Ext: &e_EbsSnapshotsList_member})
+var s_EbsVolumeID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EbsVolumeID, Type: smithy.ShapeTypeString, Ext: &e_EbsVolumeID})
+var s_EC2InstanceID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &e_EC2InstanceID})
+var s_EC2InstanceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2InstanceState, Type: smithy.ShapeTypeString, Ext: &e_EC2InstanceState})
+var s_EC2InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &e_EC2InstanceType})
+var sErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eErrorDetail})
+var sErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorDetail_message})
+var sErrorDetail_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorDetail_code})
+var sEventResourceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventResourceData, Members: &mEventResourceData, Type: smithy.ShapeTypeUnion, Ext: &eEventResourceData})
+var sEventResourceData_sourceNetworkData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkData", ID: &iSourceNetworkData, Members: &mSourceNetworkData, Type: smithy.ShapeTypeStructure, Ext: &eEventResourceData_sourceNetworkData})
+var sExecutionServerStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionServerStepConfiguration, Members: &mExecutionServerStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExecutionServerStepConfiguration})
+var sExecutionServerStepConfiguration_servers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servers", ID: &i_RecoveryPlanExecutionServers, Members: &m_RecoveryPlanExecutionServers, Type: smithy.ShapeTypeList, Ext: &eExecutionServerStepConfiguration_servers})
+var s_ExtensionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionStatus, Type: smithy.ShapeTypeString, Ext: &e_ExtensionStatus})
+var s_FailbackLaunchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailbackLaunchType, Type: smithy.ShapeTypeString, Ext: &e_FailbackLaunchType})
+var s_FailbackReplicationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailbackReplicationError, Type: smithy.ShapeTypeString, Ext: &e_FailbackReplicationError})
+var s_FailbackState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailbackState, Type: smithy.ShapeTypeString, Ext: &e_FailbackState})
+var s_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureReason, Type: smithy.ShapeTypeString, Ext: &e_FailureReason})
+var sIdentificationHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentificationHints, Members: &mIdentificationHints, Type: smithy.ShapeTypeStructure, Ext: &eIdentificationHints})
+var sIdentificationHints_fqdn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fqdn", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eIdentificationHints_fqdn})
+var sIdentificationHints_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eIdentificationHints_hostname})
+var sIdentificationHints_vmWareUuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vmWareUuid", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eIdentificationHints_vmWareUuid})
+var sIdentificationHints_awsInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsInstanceID", ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &eIdentificationHints_awsInstanceID})
+var s_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InitiatedBy, Type: smithy.ShapeTypeString, Ext: &e_InitiatedBy})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t73, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_PositiveInteger, Traits: &t74, Type: smithy.ShapeTypeLong, Ext: &eInternalServerException_retryAfterSeconds})
+var s_InternetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &e_InternetProtocol})
+var s_IPsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPsList, Members: &m_IPsList, Type: smithy.ShapeTypeList, Ext: &e_IPsList})
+var s_IPsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &e_IPsList_member})
+var s_ISO8601DatetimeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &e_ISO8601DatetimeString})
+var s_ISO8601DurationString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ISO8601DurationString, Type: smithy.ShapeTypeString, Ext: &e_ISO8601DurationString})
+var sJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eJob})
+var sJob_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eJob_jobID})
+var sJob_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eJob_arn})
+var sJob_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_JobType, Type: smithy.ShapeTypeString, Ext: &eJob_type})
+var sJob_initiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedBy", ID: &i_InitiatedBy, Type: smithy.ShapeTypeString, Ext: &eJob_initiatedBy})
+var sJob_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eJob_creationDateTime})
+var sJob_endDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eJob_endDateTime})
+var sJob_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_JobStatus, Type: smithy.ShapeTypeString, Ext: &eJob_status})
+var sJob_participatingServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participatingServers", ID: &i_ParticipatingServers, Members: &m_ParticipatingServers, Type: smithy.ShapeTypeList, Ext: &eJob_participatingServers})
+var sJob_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eJob_tags})
+var sJob_participatingResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participatingResources", ID: &i_ParticipatingResources, Members: &m_ParticipatingResources, Type: smithy.ShapeTypeList, Ext: &eJob_participatingResources})
+var s_JobEventAttemptCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobEventAttemptCount, Type: smithy.ShapeTypeLong, Ext: &e_JobEventAttemptCount})
+var s_JobID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &e_JobID})
+var sJobLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobLog, Members: &mJobLog, Type: smithy.ShapeTypeStructure, Ext: &eJobLog})
+var sJobLog_logDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eJobLog_logDateTime})
+var sJobLog_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &i_JobLogEvent, Type: smithy.ShapeTypeString, Ext: &eJobLog_event})
+var sJobLog_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &iJobLogEventData, Members: &mJobLogEventData, Type: smithy.ShapeTypeStructure, Ext: &eJobLog_eventData})
+var s_JobLogEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobLogEvent, Type: smithy.ShapeTypeString, Ext: &e_JobLogEvent})
+var sJobLogEventData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobLogEventData, Members: &mJobLogEventData, Type: smithy.ShapeTypeStructure, Ext: &eJobLogEventData})
+var sJobLogEventData_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eJobLogEventData_sourceServerID})
+var sJobLogEventData_conversionServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversionServerID", ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &eJobLogEventData_conversionServerID})
+var sJobLogEventData_targetInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceID", ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &eJobLogEventData_targetInstanceID})
+var sJobLogEventData_rawError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rawError", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eJobLogEventData_rawError})
+var sJobLogEventData_conversionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversionProperties", ID: &iConversionProperties, Members: &mConversionProperties, Type: smithy.ShapeTypeStructure, Ext: &eJobLogEventData_conversionProperties})
+var sJobLogEventData_eventResourceData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventResourceData", ID: &iEventResourceData, Members: &mEventResourceData, Type: smithy.ShapeTypeUnion, Ext: &eJobLogEventData_eventResourceData})
+var sJobLogEventData_attemptCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attemptCount", ID: &i_JobEventAttemptCount, Type: smithy.ShapeTypeLong, Ext: &eJobLogEventData_attemptCount})
+var sJobLogEventData_maxAttemptsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAttemptsCount", ID: &i_JobEventAttemptCount, Type: smithy.ShapeTypeLong, Ext: &eJobLogEventData_maxAttemptsCount})
+var s_JobLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobLogs, Members: &m_JobLogs, Type: smithy.ShapeTypeList, Ext: &e_JobLogs})
+var s_JobLogs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobLog, Members: &mJobLog, Type: smithy.ShapeTypeStructure, Ext: &e_JobLogs_member})
+var s_JobsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobsList, Members: &m_JobsList, Type: smithy.ShapeTypeList, Ext: &e_JobsList})
+var s_JobsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &e_JobsList_member})
+var s_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobStatus, Type: smithy.ShapeTypeString, Ext: &e_JobStatus})
+var s_JobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobType, Type: smithy.ShapeTypeString, Ext: &e_JobType})
+var s_LargeBoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &e_LargeBoundedString})
+var s_LastLaunchResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastLaunchResult, Type: smithy.ShapeTypeString, Ext: &e_LastLaunchResult})
+var s_LastLaunchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastLaunchType, Type: smithy.ShapeTypeString, Ext: &e_LastLaunchType})
+var sLaunchAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchAction, Members: &mLaunchAction, Type: smithy.ShapeTypeStructure, Ext: &eLaunchAction})
+var sLaunchAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_actionId})
+var sLaunchAction_actionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionCode", ID: &i_SsmDocumentName, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_actionCode})
+var sLaunchAction_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LaunchActionType, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_type})
+var sLaunchAction_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LaunchActionName, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_name})
+var sLaunchAction_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchAction_active})
+var sLaunchAction_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_LaunchActionOrder, Type: smithy.ShapeTypeInteger, Ext: &eLaunchAction_order})
+var sLaunchAction_actionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionVersion", ID: &i_LaunchActionVersion, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_actionVersion})
+var sLaunchAction_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchAction_optional})
+var sLaunchAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_LaunchActionParameters, Members: &m_LaunchActionParameters, Type: smithy.ShapeTypeMap, Ext: &eLaunchAction_parameters})
+var sLaunchAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_LaunchActionDescription, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_description})
+var sLaunchAction_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_LaunchActionCategory, Type: smithy.ShapeTypeString, Ext: &eLaunchAction_category})
+var s_LaunchActionCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionCategory, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionCategory})
+var s_LaunchActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionDescription, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionDescription})
+var s_LaunchActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionId})
+var s_LaunchActionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionIds, Members: &m_LaunchActionIds, Type: smithy.ShapeTypeList, Ext: &e_LaunchActionIds})
+var s_LaunchActionIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionIds_member})
+var s_LaunchActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionName, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionName})
+var s_LaunchActionOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionOrder, Type: smithy.ShapeTypeInteger, Ext: &e_LaunchActionOrder})
+var sLaunchActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchActionParameter, Members: &mLaunchActionParameter, Type: smithy.ShapeTypeStructure, Ext: &eLaunchActionParameter})
+var sLaunchActionParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LaunchActionParameterValue, Type: smithy.ShapeTypeString, Ext: &eLaunchActionParameter_value})
+var sLaunchActionParameter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LaunchActionParameterType, Type: smithy.ShapeTypeString, Ext: &eLaunchActionParameter_type})
+var s_LaunchActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionParameterName})
+var s_LaunchActionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionParameters, Members: &m_LaunchActionParameters, Type: smithy.ShapeTypeMap, Ext: &e_LaunchActionParameters})
+var s_LaunchActionParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LaunchActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionParameters_key})
+var s_LaunchActionParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iLaunchActionParameter, Members: &mLaunchActionParameter, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchActionParameters_value})
+var s_LaunchActionParameterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionParameterType, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionParameterType})
+var s_LaunchActionParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionParameterValue, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionParameterValue})
+var s_LaunchActionResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionResourceId, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionResourceId})
+var sLaunchActionRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchActionRun, Members: &mLaunchActionRun, Type: smithy.ShapeTypeStructure, Ext: &eLaunchActionRun})
+var sLaunchActionRun_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iLaunchAction, Members: &mLaunchAction, Type: smithy.ShapeTypeStructure, Ext: &eLaunchActionRun_action})
+var sLaunchActionRun_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_LaunchActionRunId, Type: smithy.ShapeTypeString, Ext: &eLaunchActionRun_runId})
+var sLaunchActionRun_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_LaunchActionRunStatus, Type: smithy.ShapeTypeString, Ext: &eLaunchActionRun_status})
+var sLaunchActionRun_failureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReason", ID: &i_FailureReason, Type: smithy.ShapeTypeString, Ext: &eLaunchActionRun_failureReason})
+var s_LaunchActionRunId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionRunId, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionRunId})
+var s_LaunchActionRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionRuns, Members: &m_LaunchActionRuns, Type: smithy.ShapeTypeList, Ext: &e_LaunchActionRuns})
+var s_LaunchActionRuns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchActionRun, Members: &mLaunchActionRun, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchActionRuns_member})
+var s_LaunchActionRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionRunStatus, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionRunStatus})
+var s_LaunchActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActions, Members: &m_LaunchActions, Type: smithy.ShapeTypeList, Ext: &e_LaunchActions})
+var s_LaunchActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchAction, Members: &mLaunchAction, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchActions_member})
+var sLaunchActionsRequestFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchActionsRequestFilters, Members: &mLaunchActionsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eLaunchActionsRequestFilters})
+var sLaunchActionsRequestFilters_actionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionIds", ID: &i_LaunchActionIds, Members: &m_LaunchActionIds, Type: smithy.ShapeTypeList, Ext: &eLaunchActionsRequestFilters_actionIds})
+var sLaunchActionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchActionsStatus, Members: &mLaunchActionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eLaunchActionsStatus})
+var sLaunchActionsStatus_ssmAgentDiscoveryDatetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmAgentDiscoveryDatetime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eLaunchActionsStatus_ssmAgentDiscoveryDatetime})
+var sLaunchActionsStatus_runs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runs", ID: &i_LaunchActionRuns, Members: &m_LaunchActionRuns, Type: smithy.ShapeTypeList, Ext: &eLaunchActionsStatus_runs})
+var s_LaunchActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionType, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionType})
+var s_LaunchActionVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchActionVersion, Type: smithy.ShapeTypeString, Ext: &e_LaunchActionVersion})
+var sLaunchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchConfigurationTemplate, Members: &mLaunchConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfigurationTemplate})
+var sLaunchConfigurationTemplate_launchConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplateID", ID: &i_LaunchConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_launchConfigurationTemplateID})
+var sLaunchConfigurationTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_arn})
+var sLaunchConfigurationTemplate_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eLaunchConfigurationTemplate_tags})
+var sLaunchConfigurationTemplate_launchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchDisposition", ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_launchDisposition})
+var sLaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypeRightSizingMethod", ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod})
+var sLaunchConfigurationTemplate_copyPrivateIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyPrivateIp", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfigurationTemplate_copyPrivateIp})
+var sLaunchConfigurationTemplate_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfigurationTemplate_copyTags})
+var sLaunchConfigurationTemplate_licensing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licensing", ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfigurationTemplate_licensing})
+var sLaunchConfigurationTemplate_exportBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportBucketArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_exportBucketArn})
+var sLaunchConfigurationTemplate_postLaunchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postLaunchEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfigurationTemplate_postLaunchEnabled})
+var sLaunchConfigurationTemplate_launchIntoSourceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoSourceInstance", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfigurationTemplate_launchIntoSourceInstance})
+var sLaunchConfigurationTemplate_recoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryMode", ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &eLaunchConfigurationTemplate_recoveryMode})
+var s_LaunchConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &e_LaunchConfigurationTemplateID})
+var s_LaunchConfigurationTemplateIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchConfigurationTemplateIDs, Members: &m_LaunchConfigurationTemplateIDs, Type: smithy.ShapeTypeList, Ext: &e_LaunchConfigurationTemplateIDs})
+var s_LaunchConfigurationTemplateIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LaunchConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &e_LaunchConfigurationTemplateIDs_member})
+var s_LaunchConfigurationTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchConfigurationTemplates, Members: &m_LaunchConfigurationTemplates, Type: smithy.ShapeTypeList, Ext: &e_LaunchConfigurationTemplates})
+var s_LaunchConfigurationTemplates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchConfigurationTemplate, Members: &mLaunchConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &e_LaunchConfigurationTemplates_member})
+var s_LaunchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &e_LaunchDisposition})
+var sLaunchIntoInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchIntoInstanceProperties, Members: &mLaunchIntoInstanceProperties, Type: smithy.ShapeTypeStructure, Ext: &eLaunchIntoInstanceProperties})
+var sLaunchIntoInstanceProperties_launchIntoEC2InstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoEC2InstanceID", ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &eLaunchIntoInstanceProperties_launchIntoEC2InstanceID})
+var s_LaunchStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchStatus, Type: smithy.ShapeTypeString, Ext: &e_LaunchStatus})
+var sLicensing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eLicensing})
+var sLicensing_osByol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osByol", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLicensing_osByol})
+var sLifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycle})
+var sLifeCycle_addedToServiceDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addedToServiceDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eLifeCycle_addedToServiceDateTime})
+var sLifeCycle_firstByteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstByteDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eLifeCycle_firstByteDateTime})
+var sLifeCycle_elapsedReplicationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elapsedReplicationDuration", ID: &i_ISO8601DurationString, Type: smithy.ShapeTypeString, Ext: &eLifeCycle_elapsedReplicationDuration})
+var sLifeCycle_lastSeenByServiceDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSeenByServiceDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eLifeCycle_lastSeenByServiceDateTime})
+var sLifeCycle_lastLaunch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLaunch", ID: &iLifeCycleLastLaunch, Members: &mLifeCycleLastLaunch, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycle_lastLaunch})
+var sLifeCycleLastLaunch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycleLastLaunch, Members: &mLifeCycleLastLaunch, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleLastLaunch})
+var sLifeCycleLastLaunch_initiated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiated", ID: &iLifeCycleLastLaunchInitiated, Members: &mLifeCycleLastLaunchInitiated, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleLastLaunch_initiated})
+var sLifeCycleLastLaunch_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_LaunchStatus, Type: smithy.ShapeTypeString, Ext: &eLifeCycleLastLaunch_status})
+var sLifeCycleLastLaunchInitiated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycleLastLaunchInitiated, Members: &mLifeCycleLastLaunchInitiated, Type: smithy.ShapeTypeStructure, Ext: &eLifeCycleLastLaunchInitiated})
+var sLifeCycleLastLaunchInitiated_apiCallDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCallDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eLifeCycleLastLaunchInitiated_apiCallDateTime})
+var sLifeCycleLastLaunchInitiated_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eLifeCycleLastLaunchInitiated_jobID})
+var sLifeCycleLastLaunchInitiated_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LastLaunchType, Type: smithy.ShapeTypeString, Ext: &eLifeCycleLastLaunchInitiated_type})
+var sListRecoveryPlanExecutionStepsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionStepsFilter, Members: &mListRecoveryPlanExecutionStepsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionStepsFilter})
+var sListRecoveryPlanExecutionStepsFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStepStatus, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionStepsFilter_status})
+var s_MaxResultsReplicatingSourceServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsReplicatingSourceServers, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsReplicatingSourceServers})
+var s_MaxResultsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsType})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface})
+var sNetworkInterface_macAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macAddress", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eNetworkInterface_macAddress})
+var sNetworkInterface_ips = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ips", ID: &i_IPsList, Members: &m_IPsList, Type: smithy.ShapeTypeList, Ext: &eNetworkInterface_ips})
+var sNetworkInterface_isPrimary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimary", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eNetworkInterface_isPrimary})
+var s_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &e_NetworkInterfaces})
+var s_NetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkInterfaces_member})
+var s_OriginEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginEnvironment, Type: smithy.ShapeTypeString, Ext: &e_OriginEnvironment})
+var sOS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOS, Members: &mOS, Type: smithy.ShapeTypeStructure, Ext: &eOS})
+var sOS_fullString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fullString", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eOS_fullString})
+var s_OutpostARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostARN, Type: smithy.ShapeTypeString, Ext: &e_OutpostARN})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sParticipatingResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipatingResource, Members: &mParticipatingResource, Type: smithy.ShapeTypeStructure, Ext: &eParticipatingResource})
+var sParticipatingResource_participatingResourceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participatingResourceID", ID: &iParticipatingResourceID, Members: &mParticipatingResourceID, Type: smithy.ShapeTypeUnion, Ext: &eParticipatingResource_participatingResourceID})
+var sParticipatingResource_launchStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchStatus", ID: &i_LaunchStatus, Type: smithy.ShapeTypeString, Ext: &eParticipatingResource_launchStatus})
+var sParticipatingResourceID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipatingResourceID, Members: &mParticipatingResourceID, Type: smithy.ShapeTypeUnion, Ext: &eParticipatingResourceID})
+var sParticipatingResourceID_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eParticipatingResourceID_sourceNetworkID})
+var s_ParticipatingResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipatingResources, Members: &m_ParticipatingResources, Type: smithy.ShapeTypeList, Ext: &e_ParticipatingResources})
+var s_ParticipatingResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParticipatingResource, Members: &mParticipatingResource, Type: smithy.ShapeTypeStructure, Ext: &e_ParticipatingResources_member})
+var sParticipatingServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipatingServer, Members: &mParticipatingServer, Type: smithy.ShapeTypeStructure, Ext: &eParticipatingServer})
+var sParticipatingServer_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eParticipatingServer_sourceServerID})
+var sParticipatingServer_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eParticipatingServer_recoveryInstanceID})
+var sParticipatingServer_launchStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchStatus", ID: &i_LaunchStatus, Type: smithy.ShapeTypeString, Ext: &eParticipatingServer_launchStatus})
+var sParticipatingServer_launchActionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchActionsStatus", ID: &iLaunchActionsStatus, Members: &mLaunchActionsStatus, Type: smithy.ShapeTypeStructure, Ext: &eParticipatingServer_launchActionsStatus})
+var s_ParticipatingServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipatingServers, Members: &m_ParticipatingServers, Type: smithy.ShapeTypeList, Ext: &e_ParticipatingServers})
+var s_ParticipatingServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParticipatingServer, Members: &mParticipatingServer, Type: smithy.ShapeTypeStructure, Ext: &e_ParticipatingServers_member})
+var s_PITPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &e_PITPolicy})
+var s_PITPolicy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPITPolicyRule, Members: &mPITPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &e_PITPolicy_member})
+var sPITPolicyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPITPolicyRule, Members: &mPITPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &ePITPolicyRule})
+var sPITPolicyRule_ruleID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleID", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &ePITPolicyRule_ruleID})
+var sPITPolicyRule_units = smithy.NewStaticSchema(smithy.StaticSchema{Member: "units", ID: &i_PITPolicyRuleUnits, Type: smithy.ShapeTypeString, Ext: &ePITPolicyRule_units})
+var sPITPolicyRule_interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interval", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ePITPolicyRule_interval})
+var sPITPolicyRule_retentionDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionDuration", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ePITPolicyRule_retentionDuration})
+var sPITPolicyRule_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePITPolicyRule_enabled})
+var s_PITPolicyRuleUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PITPolicyRuleUnits, Type: smithy.ShapeTypeString, Ext: &e_PITPolicyRuleUnits})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &e_PositiveInteger})
+var sProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductCode, Members: &mProductCode, Type: smithy.ShapeTypeStructure, Ext: &eProductCode})
+var sProductCode_productCodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productCodeId", ID: &i_ProductCodeId, Type: smithy.ShapeTypeString, Ext: &eProductCode_productCodeId})
+var sProductCode_productCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productCodeMode", ID: &i_ProductCodeMode, Type: smithy.ShapeTypeString, Ext: &eProductCode_productCodeMode})
+var s_ProductCodeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodeId, Type: smithy.ShapeTypeString, Ext: &e_ProductCodeId})
+var s_ProductCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodeMode, Type: smithy.ShapeTypeString, Ext: &e_ProductCodeMode})
+var s_ProductCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodes, Members: &m_ProductCodes, Type: smithy.ShapeTypeList, Ext: &e_ProductCodes})
+var s_ProductCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProductCode, Members: &mProductCode, Type: smithy.ShapeTypeStructure, Ext: &e_ProductCodes_member})
+var sRecoveryInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstance, Members: &mRecoveryInstance, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstance})
+var sRecoveryInstance_ec2InstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2InstanceID", ID: &i_EC2InstanceID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_ec2InstanceID})
+var sRecoveryInstance_ec2InstanceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2InstanceState", ID: &i_EC2InstanceState, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_ec2InstanceState})
+var sRecoveryInstance_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_jobID})
+var sRecoveryInstance_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_recoveryInstanceID})
+var sRecoveryInstance_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_sourceServerID})
+var sRecoveryInstance_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_arn})
+var sRecoveryInstance_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eRecoveryInstance_tags})
+var sRecoveryInstance_failback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failback", ID: &iRecoveryInstanceFailback, Members: &mRecoveryInstanceFailback, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstance_failback})
+var sRecoveryInstance_dataReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationInfo", ID: &iRecoveryInstanceDataReplicationInfo, Members: &mRecoveryInstanceDataReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstance_dataReplicationInfo})
+var sRecoveryInstance_recoveryInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceProperties", ID: &iRecoveryInstanceProperties, Members: &mRecoveryInstanceProperties, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstance_recoveryInstanceProperties})
+var sRecoveryInstance_pointInTimeSnapshotDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pointInTimeSnapshotDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_pointInTimeSnapshotDateTime})
+var sRecoveryInstance_isDrill = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDrill", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eRecoveryInstance_isDrill})
+var sRecoveryInstance_originEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originEnvironment", ID: &i_OriginEnvironment, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_originEnvironment})
+var sRecoveryInstance_originAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originAvailabilityZone", ID: &i_AwsAvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_originAvailabilityZone})
+var sRecoveryInstance_agentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentVersion", ID: &i_AgentVersion, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_agentVersion})
+var sRecoveryInstance_sourceOutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceOutpostArn", ID: &i_OutpostARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstance_sourceOutpostArn})
+var sRecoveryInstanceDataReplicationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDataReplicationError, Members: &mRecoveryInstanceDataReplicationError, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationError})
+var sRecoveryInstanceDataReplicationError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_FailbackReplicationError, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationError_error})
+var sRecoveryInstanceDataReplicationError_rawError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rawError", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationError_rawError})
+var sRecoveryInstanceDataReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDataReplicationInfo, Members: &mRecoveryInstanceDataReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInfo})
+var sRecoveryInstanceDataReplicationInfo_lagDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagDuration", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfo_lagDuration})
+var sRecoveryInstanceDataReplicationInfo_etaDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "etaDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfo_etaDateTime})
+var sRecoveryInstanceDataReplicationInfo_replicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedDisks", ID: &i_RecoveryInstanceDataReplicationInfoReplicatedDisks, Members: &m_RecoveryInstanceDataReplicationInfoReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &eRecoveryInstanceDataReplicationInfo_replicatedDisks})
+var sRecoveryInstanceDataReplicationInfo_dataReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationState", ID: &i_RecoveryInstanceDataReplicationState, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfo_dataReplicationState})
+var sRecoveryInstanceDataReplicationInfo_dataReplicationInitiation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationInitiation", ID: &iRecoveryInstanceDataReplicationInitiation, Members: &mRecoveryInstanceDataReplicationInitiation, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInfo_dataReplicationInitiation})
+var sRecoveryInstanceDataReplicationInfo_dataReplicationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationError", ID: &iRecoveryInstanceDataReplicationError, Members: &mRecoveryInstanceDataReplicationError, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInfo_dataReplicationError})
+var sRecoveryInstanceDataReplicationInfo_stagingAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAvailabilityZone", ID: &i_AwsAvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfo_stagingAvailabilityZone})
+var sRecoveryInstanceDataReplicationInfo_stagingOutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingOutpostArn", ID: &i_OutpostARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfo_stagingOutpostArn})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDataReplicationInfoReplicatedDisk, Members: &mRecoveryInstanceDataReplicationInfoReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rescannedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes})
+var sRecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backloggedStorageBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes})
+var s_RecoveryInstanceDataReplicationInfoReplicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDataReplicationInfoReplicatedDisks, Members: &m_RecoveryInstanceDataReplicationInfoReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &e_RecoveryInstanceDataReplicationInfoReplicatedDisks})
+var s_RecoveryInstanceDataReplicationInfoReplicatedDisks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryInstanceDataReplicationInfoReplicatedDisk, Members: &mRecoveryInstanceDataReplicationInfoReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryInstanceDataReplicationInfoReplicatedDisks_member})
+var sRecoveryInstanceDataReplicationInitiation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDataReplicationInitiation, Members: &mRecoveryInstanceDataReplicationInitiation, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInitiation})
+var sRecoveryInstanceDataReplicationInitiation_startDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInitiation_startDateTime})
+var sRecoveryInstanceDataReplicationInitiation_steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "steps", ID: &i_RecoveryInstanceDataReplicationInitiationSteps, Members: &m_RecoveryInstanceDataReplicationInitiationSteps, Type: smithy.ShapeTypeList, Ext: &eRecoveryInstanceDataReplicationInitiation_steps})
+var sRecoveryInstanceDataReplicationInitiationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDataReplicationInitiationStep, Members: &mRecoveryInstanceDataReplicationInitiationStep, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDataReplicationInitiationStep})
+var sRecoveryInstanceDataReplicationInitiationStep_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecoveryInstanceDataReplicationInitiationStepName, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInitiationStep_name})
+var sRecoveryInstanceDataReplicationInitiationStep_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryInstanceDataReplicationInitiationStepStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDataReplicationInitiationStep_status})
+var s_RecoveryInstanceDataReplicationInitiationStepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDataReplicationInitiationStepName, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstanceDataReplicationInitiationStepName})
+var s_RecoveryInstanceDataReplicationInitiationSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDataReplicationInitiationSteps, Members: &m_RecoveryInstanceDataReplicationInitiationSteps, Type: smithy.ShapeTypeList, Ext: &e_RecoveryInstanceDataReplicationInitiationSteps})
+var s_RecoveryInstanceDataReplicationInitiationSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryInstanceDataReplicationInitiationStep, Members: &mRecoveryInstanceDataReplicationInitiationStep, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryInstanceDataReplicationInitiationSteps_member})
+var s_RecoveryInstanceDataReplicationInitiationStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDataReplicationInitiationStepStatus, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstanceDataReplicationInitiationStepStatus})
+var s_RecoveryInstanceDataReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDataReplicationState, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstanceDataReplicationState})
+var sRecoveryInstanceDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceDisk, Members: &mRecoveryInstanceDisk, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceDisk})
+var sRecoveryInstanceDisk_internalDeviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internalDeviceName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDisk_internalDeviceName})
+var sRecoveryInstanceDisk_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceDisk_bytes})
+var sRecoveryInstanceDisk_ebsVolumeID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsVolumeID", ID: &i_EbsVolumeID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceDisk_ebsVolumeID})
+var s_RecoveryInstanceDisks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceDisks, Members: &m_RecoveryInstanceDisks, Type: smithy.ShapeTypeList, Ext: &e_RecoveryInstanceDisks})
+var s_RecoveryInstanceDisks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryInstanceDisk, Members: &mRecoveryInstanceDisk, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryInstanceDisks_member})
+var sRecoveryInstanceFailback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceFailback, Members: &mRecoveryInstanceFailback, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceFailback})
+var sRecoveryInstanceFailback_failbackClientID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackClientID", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_failbackClientID})
+var sRecoveryInstanceFailback_failbackJobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackJobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_failbackJobID})
+var sRecoveryInstanceFailback_failbackInitiationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackInitiationTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_failbackInitiationTime})
+var sRecoveryInstanceFailback_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_FailbackState, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_state})
+var sRecoveryInstanceFailback_agentLastSeenByServiceDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentLastSeenByServiceDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_agentLastSeenByServiceDateTime})
+var sRecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackClientLastSeenByServiceDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime})
+var sRecoveryInstanceFailback_failbackToOriginalServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackToOriginalServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eRecoveryInstanceFailback_failbackToOriginalServer})
+var sRecoveryInstanceFailback_firstByteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstByteDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_firstByteDateTime})
+var sRecoveryInstanceFailback_elapsedReplicationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "elapsedReplicationDuration", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_elapsedReplicationDuration})
+var sRecoveryInstanceFailback_failbackLaunchType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failbackLaunchType", ID: &i_FailbackLaunchType, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceFailback_failbackLaunchType})
+var s_RecoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstanceID})
+var s_RecoveryInstanceIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstanceIDs, Members: &m_RecoveryInstanceIDs, Type: smithy.ShapeTypeList, Ext: &e_RecoveryInstanceIDs})
+var s_RecoveryInstanceIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstanceIDs_member})
+var sRecoveryInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryInstanceProperties, Members: &mRecoveryInstanceProperties, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceProperties})
+var sRecoveryInstanceProperties_lastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryInstanceProperties_lastUpdatedDateTime})
+var sRecoveryInstanceProperties_identificationHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identificationHints", ID: &iIdentificationHints, Members: &mIdentificationHints, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceProperties_identificationHints})
+var sRecoveryInstanceProperties_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eRecoveryInstanceProperties_networkInterfaces})
+var sRecoveryInstanceProperties_disks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disks", ID: &i_RecoveryInstanceDisks, Members: &m_RecoveryInstanceDisks, Type: smithy.ShapeTypeList, Ext: &eRecoveryInstanceProperties_disks})
+var sRecoveryInstanceProperties_cpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpus", ID: &i_Cpus, Members: &m_Cpus, Type: smithy.ShapeTypeList, Ext: &eRecoveryInstanceProperties_cpus})
+var sRecoveryInstanceProperties_ramBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ramBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eRecoveryInstanceProperties_ramBytes})
+var sRecoveryInstanceProperties_os = smithy.NewStaticSchema(smithy.StaticSchema{Member: "os", ID: &iOS, Members: &mOS, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryInstanceProperties_os})
+var s_RecoveryInstancesForTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryInstancesForTerminationRequest, Members: &m_RecoveryInstancesForTerminationRequest, Type: smithy.ShapeTypeList, Ext: &e_RecoveryInstancesForTerminationRequest})
+var s_RecoveryInstancesForTerminationRequest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &e_RecoveryInstancesForTerminationRequest_member})
+var sRecoveryLifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryLifeCycle, Members: &mRecoveryLifeCycle, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryLifeCycle})
+var sRecoveryLifeCycle_apiCallDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiCallDateTime", ID: &pTimestamp, Traits: &t76, Type: smithy.ShapeTypeTimestamp, Ext: &eRecoveryLifeCycle_apiCallDateTime})
+var sRecoveryLifeCycle_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eRecoveryLifeCycle_jobID})
+var sRecoveryLifeCycle_lastRecoveryResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRecoveryResult", ID: &i_RecoveryResult, Type: smithy.ShapeTypeString, Ext: &eRecoveryLifeCycle_lastRecoveryResult})
+var s_RecoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &e_RecoveryMode})
+var sRecoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlan, Members: &mRecoveryPlan, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlan})
+var sRecoveryPlan_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_recoveryPlanArn})
+var sRecoveryPlan_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecoveryPlanName, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_name})
+var sRecoveryPlan_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_RecoveryPlanDescription, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_description})
+var sRecoveryPlan_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_status})
+var sRecoveryPlan_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_createdAt})
+var sRecoveryPlan_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlan_updatedAt})
+var sRecoveryPlan_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eRecoveryPlan_tags})
+var s_RecoveryPlanDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanDescription, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanDescription})
+var sRecoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecution, Members: &mRecoveryPlanExecution, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecution})
+var sRecoveryPlanExecution_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_recoveryPlanExecutionArn})
+var sRecoveryPlanExecution_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_recoveryPlanArn})
+var sRecoveryPlanExecution_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_RecoveryPlanExecutionMode, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_mode})
+var sRecoveryPlanExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_status})
+var sRecoveryPlanExecution_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_startedAt})
+var sRecoveryPlanExecution_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecution_completedAt})
+var sRecoveryPlanExecution_errorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetail", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecution_errorDetail})
+var sRecoveryPlanExecution_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eRecoveryPlanExecution_tags})
+var s_RecoveryPlanExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionMode, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanExecutionMode})
+var sRecoveryPlanExecutionServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionServer, Members: &mRecoveryPlanExecutionServer, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionServer})
+var sRecoveryPlanExecutionServer_serverArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverArn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionServer_serverArn})
+var sRecoveryPlanExecutionServer_impactLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactLevel", ID: &i_RecoveryPlanServerImpactLevel, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionServer_impactLevel})
+var sRecoveryPlanExecutionServer_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionServer_jobID})
+var s_RecoveryPlanExecutionServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionServers, Members: &m_RecoveryPlanExecutionServers, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanExecutionServers})
+var s_RecoveryPlanExecutionServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanExecutionServer, Members: &mRecoveryPlanExecutionServer, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanExecutionServers_member})
+var sRecoveryPlanExecutionSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionSourceServer, Members: &mRecoveryPlanExecutionSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionSourceServer})
+var sRecoveryPlanExecutionSourceServer_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSourceServer_sourceServerID})
+var sRecoveryPlanExecutionSourceServer_recoverySnapshotID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoverySnapshotID", ID: &i_RecoverySnapshotID, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSourceServer_recoverySnapshotID})
+var s_RecoveryPlanExecutionSourceServerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionSourceServerList, Members: &m_RecoveryPlanExecutionSourceServerList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanExecutionSourceServerList})
+var s_RecoveryPlanExecutionSourceServerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanExecutionSourceServer, Members: &mRecoveryPlanExecutionSourceServer, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanExecutionSourceServerList_member})
+var s_RecoveryPlanExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionStatus, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanExecutionStatus})
+var sRecoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionStep, Members: &mRecoveryPlanExecutionStep, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStep})
+var sRecoveryPlanExecutionStep_recoveryPlanExecutionStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStep_recoveryPlanExecutionStepArn})
+var sRecoveryPlanExecutionStep_stepIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepIndex", ID: &i_RecoveryPlanStepOrder, Type: smithy.ShapeTypeInteger, Ext: &eRecoveryPlanExecutionStep_stepIndex})
+var sRecoveryPlanExecutionStep_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStepStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStep_status})
+var sRecoveryPlanExecutionStep_stepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepName", ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStep_stepName})
+var sRecoveryPlanExecutionStep_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iRecoveryPlanExecutionStepConfiguration, Members: &mRecoveryPlanExecutionStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eRecoveryPlanExecutionStep_configuration})
+var sRecoveryPlanExecutionStep_errorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetail", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStep_errorDetail})
+var sRecoveryPlanExecutionStep_attempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attempt", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eRecoveryPlanExecutionStep_attempt})
+var sRecoveryPlanExecutionStep_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStep_createdAt})
+var sRecoveryPlanExecutionStep_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStep_updatedAt})
+var sRecoveryPlanExecutionStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionStepConfiguration, Members: &mRecoveryPlanExecutionStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eRecoveryPlanExecutionStepConfiguration})
+var sRecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionServerStepConfiguration", ID: &iExecutionServerStepConfiguration, Members: &mExecutionServerStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration})
+var sRecoveryPlanExecutionStepConfiguration_waitStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "waitStepConfiguration", ID: &iWaitStepConfiguration, Members: &mWaitStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStepConfiguration_waitStepConfiguration})
+var s_RecoveryPlanExecutionStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionStepStatus, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanExecutionStepStatus})
+var sRecoveryPlanExecutionStepSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionStepSummary, Members: &mRecoveryPlanExecutionStepSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStepSummary})
+var sRecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn})
+var sRecoveryPlanExecutionStepSummary_stepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepName", ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStepSummary_stepName})
+var sRecoveryPlanExecutionStepSummary_stepIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepIndex", ID: &i_RecoveryPlanStepOrder, Type: smithy.ShapeTypeInteger, Ext: &eRecoveryPlanExecutionStepSummary_stepIndex})
+var sRecoveryPlanExecutionStepSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStepStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionStepSummary_status})
+var sRecoveryPlanExecutionStepSummary_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iRecoveryPlanExecutionStepConfiguration, Members: &mRecoveryPlanExecutionStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eRecoveryPlanExecutionStepSummary_configuration})
+var sRecoveryPlanExecutionStepSummary_errorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetail", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionStepSummary_errorDetail})
+var s_RecoveryPlanExecutionStepSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionStepSummaryList, Members: &m_RecoveryPlanExecutionStepSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanExecutionStepSummaryList})
+var s_RecoveryPlanExecutionStepSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanExecutionStepSummary, Members: &mRecoveryPlanExecutionStepSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanExecutionStepSummaryList_member})
+var sRecoveryPlanExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanExecutionSummary, Members: &mRecoveryPlanExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionSummary})
+var sRecoveryPlanExecutionSummary_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSummary_recoveryPlanExecutionArn})
+var sRecoveryPlanExecutionSummary_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSummary_recoveryPlanArn})
+var sRecoveryPlanExecutionSummary_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_RecoveryPlanExecutionMode, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSummary_mode})
+var sRecoveryPlanExecutionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSummary_status})
+var sRecoveryPlanExecutionSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanExecutionSummary_startedAt})
+var sRecoveryPlanExecutionSummary_errorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetail", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanExecutionSummary_errorDetail})
+var s_RecoveryPlanExecutionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanExecutionSummaryList, Members: &m_RecoveryPlanExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanExecutionSummaryList})
+var s_RecoveryPlanExecutionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanExecutionSummary, Members: &mRecoveryPlanExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanExecutionSummaryList_member})
+var s_RecoveryPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanName, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanName})
+var sRecoveryPlanServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanServer, Members: &mRecoveryPlanServer, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanServer})
+var sRecoveryPlanServer_serverArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverArn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanServer_serverArn})
+var sRecoveryPlanServer_impactLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactLevel", ID: &i_RecoveryPlanServerImpactLevel, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanServer_impactLevel})
+var s_RecoveryPlanServerImpactLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanServerImpactLevel, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanServerImpactLevel})
+var s_RecoveryPlanServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanServers, Members: &m_RecoveryPlanServers, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanServers})
+var s_RecoveryPlanServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanServer, Members: &mRecoveryPlanServer, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanServers_member})
+var s_RecoveryPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanStatus, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanStatus})
+var sRecoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanStep, Members: &mRecoveryPlanStep, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanStep})
+var sRecoveryPlanStep_recoveryPlanStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanStep_recoveryPlanStepArn})
+var sRecoveryPlanStep_stepOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepOrder", ID: &i_RecoveryPlanStepOrder, Type: smithy.ShapeTypeInteger, Ext: &eRecoveryPlanStep_stepOrder})
+var sRecoveryPlanStep_stepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepName", ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanStep_stepName})
+var sRecoveryPlanStep_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iRecoveryPlanStepConfiguration, Members: &mRecoveryPlanStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eRecoveryPlanStep_configuration})
+var sRecoveryPlanStep_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanStep_createdAt})
+var sRecoveryPlanStep_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanStep_updatedAt})
+var s_RecoveryPlanStepArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanStepArnList, Members: &m_RecoveryPlanStepArnList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanStepArnList})
+var s_RecoveryPlanStepArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanStepArnList_member})
+var sRecoveryPlanStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanStepConfiguration, Members: &mRecoveryPlanStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eRecoveryPlanStepConfiguration})
+var sRecoveryPlanStepConfiguration_serverStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverStepConfiguration", ID: &iServerStepConfiguration, Members: &mServerStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanStepConfiguration_serverStepConfiguration})
+var sRecoveryPlanStepConfiguration_waitStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "waitStepConfiguration", ID: &iWaitStepConfiguration, Members: &mWaitStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanStepConfiguration_waitStepConfiguration})
+var s_RecoveryPlanStepList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanStepList, Members: &m_RecoveryPlanStepList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanStepList})
+var s_RecoveryPlanStepList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanStep, Members: &mRecoveryPlanStep, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanStepList_member})
+var s_RecoveryPlanStepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &e_RecoveryPlanStepName})
+var s_RecoveryPlanStepOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanStepOrder, Type: smithy.ShapeTypeInteger, Ext: &e_RecoveryPlanStepOrder})
+var sRecoveryPlanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoveryPlanSummary, Members: &mRecoveryPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecoveryPlanSummary})
+var sRecoveryPlanSummary_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanSummary_recoveryPlanArn})
+var sRecoveryPlanSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecoveryPlanName, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanSummary_name})
+var sRecoveryPlanSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanStatus, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanSummary_status})
+var sRecoveryPlanSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanSummary_createdAt})
+var sRecoveryPlanSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoveryPlanSummary_updatedAt})
+var s_RecoveryPlanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPlanSummaryList, Members: &m_RecoveryPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RecoveryPlanSummaryList})
+var s_RecoveryPlanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoveryPlanSummary, Members: &mRecoveryPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecoveryPlanSummaryList_member})
+var s_RecoveryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryResult, Type: smithy.ShapeTypeString, Ext: &e_RecoveryResult})
+var sRecoverySnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecoverySnapshot, Members: &mRecoverySnapshot, Type: smithy.ShapeTypeStructure, Ext: &eRecoverySnapshot})
+var sRecoverySnapshot_snapshotID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotID", ID: &i_RecoverySnapshotID, Type: smithy.ShapeTypeString, Ext: &eRecoverySnapshot_snapshotID})
+var sRecoverySnapshot_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eRecoverySnapshot_sourceServerID})
+var sRecoverySnapshot_expectedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedTimestamp", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoverySnapshot_expectedTimestamp})
+var sRecoverySnapshot_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eRecoverySnapshot_timestamp})
+var sRecoverySnapshot_ebsSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsSnapshots", ID: &i_EbsSnapshotsList, Members: &m_EbsSnapshotsList, Type: smithy.ShapeTypeList, Ext: &eRecoverySnapshot_ebsSnapshots})
+var s_RecoverySnapshotID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoverySnapshotID, Type: smithy.ShapeTypeString, Ext: &e_RecoverySnapshotID})
+var s_RecoverySnapshotsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoverySnapshotsList, Members: &m_RecoverySnapshotsList, Type: smithy.ShapeTypeList, Ext: &e_RecoverySnapshotsList})
+var s_RecoverySnapshotsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecoverySnapshot, Members: &mRecoverySnapshot, Type: smithy.ShapeTypeStructure, Ext: &e_RecoverySnapshotsList_member})
+var s_RecoverySnapshotsOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoverySnapshotsOrder, Type: smithy.ShapeTypeString, Ext: &e_RecoverySnapshotsOrder})
+var s_ReplicationConfigurationDataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationDataPlaneRouting})
+var s_ReplicationConfigurationDefaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationDefaultLargeStagingDiskType})
+var s_ReplicationConfigurationEbsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationEbsEncryption})
+var sReplicationConfigurationReplicatedDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationConfigurationReplicatedDisk, Members: &mReplicationConfigurationReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &eReplicationConfigurationReplicatedDisk})
+var sReplicationConfigurationReplicatedDisk_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationReplicatedDisk_deviceName})
+var sReplicationConfigurationReplicatedDisk_isBootDisk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBootDisk", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfigurationReplicatedDisk_isBootDisk})
+var sReplicationConfigurationReplicatedDisk_stagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingDiskType", ID: &i_ReplicationConfigurationReplicatedDiskStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationReplicatedDisk_stagingDiskType})
+var sReplicationConfigurationReplicatedDisk_iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iops", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eReplicationConfigurationReplicatedDisk_iops})
+var sReplicationConfigurationReplicatedDisk_throughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throughput", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eReplicationConfigurationReplicatedDisk_throughput})
+var sReplicationConfigurationReplicatedDisk_optimizedStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optimizedStagingDiskType", ID: &i_ReplicationConfigurationReplicatedDiskStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationReplicatedDisk_optimizedStagingDiskType})
+var s_ReplicationConfigurationReplicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationReplicatedDisks, Members: &m_ReplicationConfigurationReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &e_ReplicationConfigurationReplicatedDisks})
+var s_ReplicationConfigurationReplicatedDisks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationConfigurationReplicatedDisk, Members: &mReplicationConfigurationReplicatedDisk, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationConfigurationReplicatedDisks_member})
+var s_ReplicationConfigurationReplicatedDiskStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationReplicatedDiskStagingDiskType, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationReplicatedDiskStagingDiskType})
+var sReplicationConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationConfigurationTemplate, Members: &mReplicationConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &eReplicationConfigurationTemplate})
+var sReplicationConfigurationTemplate_replicationConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfigurationTemplateID", ID: &i_ReplicationConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_replicationConfigurationTemplateID})
+var sReplicationConfigurationTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_arn})
+var sReplicationConfigurationTemplate_stagingAreaSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaSubnetId", ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_stagingAreaSubnetId})
+var sReplicationConfigurationTemplate_associateDefaultSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateDefaultSecurityGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfigurationTemplate_associateDefaultSecurityGroup})
+var sReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServersSecurityGroupsIDs", ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &eReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs})
+var sReplicationConfigurationTemplate_replicationServerInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServerInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_replicationServerInstanceType})
+var sReplicationConfigurationTemplate_useDedicatedReplicationServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDedicatedReplicationServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfigurationTemplate_useDedicatedReplicationServer})
+var sReplicationConfigurationTemplate_defaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLargeStagingDiskType", ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_defaultLargeStagingDiskType})
+var sReplicationConfigurationTemplate_ebsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryption", ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_ebsEncryption})
+var sReplicationConfigurationTemplate_ebsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryptionKeyArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_ebsEncryptionKeyArn})
+var sReplicationConfigurationTemplate_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eReplicationConfigurationTemplate_bandwidthThrottling})
+var sReplicationConfigurationTemplate_dataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPlaneRouting", ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_dataPlaneRouting})
+var sReplicationConfigurationTemplate_createPublicIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createPublicIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfigurationTemplate_createPublicIP})
+var sReplicationConfigurationTemplate_stagingAreaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaTags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eReplicationConfigurationTemplate_stagingAreaTags})
+var sReplicationConfigurationTemplate_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eReplicationConfigurationTemplate_tags})
+var sReplicationConfigurationTemplate_pitPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pitPolicy", ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &eReplicationConfigurationTemplate_pitPolicy})
+var sReplicationConfigurationTemplate_autoReplicateNewDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoReplicateNewDisks", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfigurationTemplate_autoReplicateNewDisks})
+var sReplicationConfigurationTemplate_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eReplicationConfigurationTemplate_internetProtocol})
+var s_ReplicationConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationTemplateID})
+var s_ReplicationConfigurationTemplateIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationTemplateIDs, Members: &m_ReplicationConfigurationTemplateIDs, Type: smithy.ShapeTypeList, Ext: &e_ReplicationConfigurationTemplateIDs})
+var s_ReplicationConfigurationTemplateIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ReplicationConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &e_ReplicationConfigurationTemplateIDs_member})
+var s_ReplicationConfigurationTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationConfigurationTemplates, Members: &m_ReplicationConfigurationTemplates, Type: smithy.ShapeTypeList, Ext: &e_ReplicationConfigurationTemplates})
+var s_ReplicationConfigurationTemplates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationConfigurationTemplate, Members: &mReplicationConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationConfigurationTemplates_member})
+var s_ReplicationDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationDirection, Type: smithy.ShapeTypeString, Ext: &e_ReplicationDirection})
+var s_ReplicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &e_ReplicationServersSecurityGroupsIDs})
+var s_ReplicationServersSecurityGroupsIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupID, Type: smithy.ShapeTypeString, Ext: &e_ReplicationServersSecurityGroupsIDs_member})
+var s_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatus, Type: smithy.ShapeTypeString, Ext: &e_ReplicationStatus})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_code})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_SecurityGroupID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupID, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupID})
+var s_SensitiveBoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBoundedString, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &e_SensitiveBoundedString})
+var sServerStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerStepConfiguration, Members: &mServerStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eServerStepConfiguration})
+var sServerStepConfiguration_servers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servers", ID: &i_RecoveryPlanServers, Members: &m_RecoveryPlanServers, Type: smithy.ShapeTypeList, Ext: &eServerStepConfiguration_servers})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_code})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SmallBoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmallBoundedString, Type: smithy.ShapeTypeString, Ext: &e_SmallBoundedString})
+var sSourceCloudProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCloudProperties, Members: &mSourceCloudProperties, Type: smithy.ShapeTypeStructure, Ext: &eSourceCloudProperties})
+var sSourceCloudProperties_originAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eSourceCloudProperties_originAccountID})
+var sSourceCloudProperties_originRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eSourceCloudProperties_originRegion})
+var sSourceCloudProperties_originAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originAvailabilityZone", ID: &i_AwsAvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eSourceCloudProperties_originAvailabilityZone})
+var sSourceCloudProperties_sourceOutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceOutpostArn", ID: &i_OutpostARN, Type: smithy.ShapeTypeString, Ext: &eSourceCloudProperties_sourceOutpostArn})
+var sSourceNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceNetwork, Members: &mSourceNetwork, Type: smithy.ShapeTypeStructure, Ext: &eSourceNetwork})
+var sSourceNetwork_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_sourceNetworkID})
+var sSourceNetwork_sourceVpcID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVpcID", ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_sourceVpcID})
+var sSourceNetwork_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_arn})
+var sSourceNetwork_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eSourceNetwork_tags})
+var sSourceNetwork_replicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStatus", ID: &i_ReplicationStatus, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_replicationStatus})
+var sSourceNetwork_replicationStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStatusDetails", ID: &i_SensitiveBoundedString, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_replicationStatusDetails})
+var sSourceNetwork_cfnStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cfnStackName", ID: &i_CfnStackName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_cfnStackName})
+var sSourceNetwork_sourceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_sourceRegion})
+var sSourceNetwork_sourceAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_sourceAccountID})
+var sSourceNetwork_lastRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRecovery", ID: &iRecoveryLifeCycle, Members: &mRecoveryLifeCycle, Type: smithy.ShapeTypeStructure, Ext: &eSourceNetwork_lastRecovery})
+var sSourceNetwork_launchedVpcID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchedVpcID", ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &eSourceNetwork_launchedVpcID})
+var sSourceNetworkData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceNetworkData, Members: &mSourceNetworkData, Type: smithy.ShapeTypeStructure, Ext: &eSourceNetworkData})
+var sSourceNetworkData_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eSourceNetworkData_sourceNetworkID})
+var sSourceNetworkData_sourceVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVpc", ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &eSourceNetworkData_sourceVpc})
+var sSourceNetworkData_targetVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetVpc", ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &eSourceNetworkData_targetVpc})
+var sSourceNetworkData_stackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stackName", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eSourceNetworkData_stackName})
+var s_SourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &e_SourceNetworkID})
+var s_SourceNetworksList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceNetworksList, Members: &m_SourceNetworksList, Type: smithy.ShapeTypeList, Ext: &e_SourceNetworksList})
+var s_SourceNetworksList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceNetwork, Members: &mSourceNetwork, Type: smithy.ShapeTypeStructure, Ext: &e_SourceNetworksList_member})
+var sSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceProperties, Members: &mSourceProperties, Type: smithy.ShapeTypeStructure, Ext: &eSourceProperties})
+var sSourceProperties_lastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDateTime", ID: &i_ISO8601DatetimeString, Type: smithy.ShapeTypeString, Ext: &eSourceProperties_lastUpdatedDateTime})
+var sSourceProperties_recommendedInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eSourceProperties_recommendedInstanceType})
+var sSourceProperties_identificationHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identificationHints", ID: &iIdentificationHints, Members: &mIdentificationHints, Type: smithy.ShapeTypeStructure, Ext: &eSourceProperties_identificationHints})
+var sSourceProperties_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eSourceProperties_networkInterfaces})
+var sSourceProperties_disks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disks", ID: &i_Disks, Members: &m_Disks, Type: smithy.ShapeTypeList, Ext: &eSourceProperties_disks})
+var sSourceProperties_cpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpus", ID: &i_Cpus, Members: &m_Cpus, Type: smithy.ShapeTypeList, Ext: &eSourceProperties_cpus})
+var sSourceProperties_ramBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ramBytes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eSourceProperties_ramBytes})
+var sSourceProperties_os = smithy.NewStaticSchema(smithy.StaticSchema{Member: "os", ID: &iOS, Members: &mOS, Type: smithy.ShapeTypeStructure, Ext: &eSourceProperties_os})
+var sSourceProperties_supportsNitroInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportsNitroInstances", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSourceProperties_supportsNitroInstances})
+var sSourceProperties_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &i_SourceServerArchitecture, Type: smithy.ShapeTypeString, Ext: &eSourceProperties_architecture})
+var sSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceServer, Members: &mSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer})
+var sSourceServer_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eSourceServer_sourceServerID})
+var sSourceServer_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eSourceServer_arn})
+var sSourceServer_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eSourceServer_tags})
+var sSourceServer_recoveryInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceId", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eSourceServer_recoveryInstanceId})
+var sSourceServer_lastLaunchResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLaunchResult", ID: &i_LastLaunchResult, Type: smithy.ShapeTypeString, Ext: &eSourceServer_lastLaunchResult})
+var sSourceServer_dataReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataReplicationInfo", ID: &iDataReplicationInfo, Members: &mDataReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer_dataReplicationInfo})
+var sSourceServer_lifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifeCycle", ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer_lifeCycle})
+var sSourceServer_sourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceProperties", ID: &iSourceProperties, Members: &mSourceProperties, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer_sourceProperties})
+var sSourceServer_stagingArea = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingArea", ID: &iStagingArea, Members: &mStagingArea, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer_stagingArea})
+var sSourceServer_sourceCloudProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCloudProperties", ID: &iSourceCloudProperties, Members: &mSourceCloudProperties, Type: smithy.ShapeTypeStructure, Ext: &eSourceServer_sourceCloudProperties})
+var sSourceServer_replicationDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationDirection", ID: &i_ReplicationDirection, Type: smithy.ShapeTypeString, Ext: &eSourceServer_replicationDirection})
+var sSourceServer_reversedDirectionSourceServerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reversedDirectionSourceServerArn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eSourceServer_reversedDirectionSourceServerArn})
+var sSourceServer_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eSourceServer_sourceNetworkID})
+var sSourceServer_agentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentVersion", ID: &i_AgentVersion, Type: smithy.ShapeTypeString, Ext: &eSourceServer_agentVersion})
+var s_SourceServerArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceServerArchitecture, Type: smithy.ShapeTypeString, Ext: &e_SourceServerArchitecture})
+var s_SourceServerARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &e_SourceServerARN})
+var s_SourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &e_SourceServerID})
+var s_SourceServerIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceServerIDs, Members: &m_SourceServerIDs, Type: smithy.ShapeTypeList, Ext: &e_SourceServerIDs})
+var s_SourceServerIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &e_SourceServerIDs_member})
+var s_SourceServersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceServersList, Members: &m_SourceServersList, Type: smithy.ShapeTypeList, Ext: &e_SourceServersList})
+var s_SourceServersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceServer, Members: &mSourceServer, Type: smithy.ShapeTypeStructure, Ext: &e_SourceServersList_member})
+var s_SsmDocumentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsmDocumentName, Type: smithy.ShapeTypeString, Ext: &e_SsmDocumentName})
+var sStagingArea = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStagingArea, Members: &mStagingArea, Type: smithy.ShapeTypeStructure, Ext: &eStagingArea})
+var sStagingArea_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ExtensionStatus, Type: smithy.ShapeTypeString, Ext: &eStagingArea_status})
+var sStagingArea_stagingAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eStagingArea_stagingAccountID})
+var sStagingArea_stagingSourceServerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingSourceServerArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eStagingArea_stagingSourceServerArn})
+var sStagingArea_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eStagingArea_errorMessage})
+var sStagingSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStagingSourceServer, Members: &mStagingSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eStagingSourceServer})
+var sStagingSourceServer_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eStagingSourceServer_hostname})
+var sStagingSourceServer_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eStagingSourceServer_arn})
+var sStagingSourceServer_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eStagingSourceServer_tags})
+var s_StagingSourceServersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StagingSourceServersList, Members: &m_StagingSourceServersList, Type: smithy.ShapeTypeList, Ext: &e_StagingSourceServersList})
+var s_StagingSourceServersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStagingSourceServer, Members: &mStagingSourceServer, Type: smithy.ShapeTypeStructure, Ext: &e_StagingSourceServersList_member})
+var s_StartFailbackRequestRecoveryInstanceIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartFailbackRequestRecoveryInstanceIDs, Members: &m_StartFailbackRequestRecoveryInstanceIDs, Type: smithy.ShapeTypeList, Ext: &e_StartFailbackRequestRecoveryInstanceIDs})
+var s_StartFailbackRequestRecoveryInstanceIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &e_StartFailbackRequestRecoveryInstanceIDs_member})
+var sStartRecoveryRequestSourceServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryRequestSourceServer, Members: &mStartRecoveryRequestSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryRequestSourceServer})
+var sStartRecoveryRequestSourceServer_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eStartRecoveryRequestSourceServer_sourceServerID})
+var sStartRecoveryRequestSourceServer_recoverySnapshotID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoverySnapshotID", ID: &i_RecoverySnapshotID, Type: smithy.ShapeTypeString, Ext: &eStartRecoveryRequestSourceServer_recoverySnapshotID})
+var s_StartRecoveryRequestSourceServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartRecoveryRequestSourceServers, Members: &m_StartRecoveryRequestSourceServers, Type: smithy.ShapeTypeList, Ext: &e_StartRecoveryRequestSourceServers})
+var s_StartRecoveryRequestSourceServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStartRecoveryRequestSourceServer, Members: &mStartRecoveryRequestSourceServer, Type: smithy.ShapeTypeStructure, Ext: &e_StartRecoveryRequestSourceServers_member})
+var s_StartSourceNetworkRecoveryRequestNetworkEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartSourceNetworkRecoveryRequestNetworkEntries, Members: &m_StartSourceNetworkRecoveryRequestNetworkEntries, Type: smithy.ShapeTypeList, Ext: &e_StartSourceNetworkRecoveryRequestNetworkEntries})
+var s_StartSourceNetworkRecoveryRequestNetworkEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStartSourceNetworkRecoveryRequestNetworkEntry, Members: &mStartSourceNetworkRecoveryRequestNetworkEntry, Type: smithy.ShapeTypeStructure, Ext: &e_StartSourceNetworkRecoveryRequestNetworkEntries_member})
+var sStartSourceNetworkRecoveryRequestNetworkEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkRecoveryRequestNetworkEntry, Members: &mStartSourceNetworkRecoveryRequestNetworkEntry, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkRecoveryRequestNetworkEntry})
+var sStartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eStartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID})
+var sStartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cfnStackName", ID: &i_CfnStackName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eStartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName})
+var s_StrictDRSARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &e_StrictDRSARN})
+var s_StrictlyPositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_StrictlyPositiveInteger})
+var s_SubnetID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &e_SubnetID})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t71, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t71, Type: smithy.ShapeTypeMap, Ext: &e_TagsMap})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_key})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &e_TargetInstanceTypeRightSizingMethod})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_LargeBoundedString, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_retryAfterSeconds})
+var sUninitializedAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUninitializedAccountException, Members: &mUninitializedAccountException, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eUninitializedAccountException})
+var sUninitializedAccountException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eUninitializedAccountException_message})
+var sUninitializedAccountException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eUninitializedAccountException_code})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eValidationException_code})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var s_VolumeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeStatus, Type: smithy.ShapeTypeString, Ext: &e_VolumeStatus})
+var s_VolumeToConversionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeToConversionMap, Members: &m_VolumeToConversionMap, Type: smithy.ShapeTypeMap, Ext: &e_VolumeToConversionMap})
+var s_VolumeToConversionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &e_VolumeToConversionMap_key})
+var s_VolumeToConversionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConversionMap, Members: &m_ConversionMap, Type: smithy.ShapeTypeMap, Ext: &e_VolumeToConversionMap_value})
+var s_VolumeToProductCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeToProductCodes, Members: &m_VolumeToProductCodes, Type: smithy.ShapeTypeMap, Ext: &e_VolumeToProductCodes})
+var s_VolumeToProductCodes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &e_VolumeToProductCodes_key})
+var s_VolumeToProductCodes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ProductCodes, Members: &m_ProductCodes, Type: smithy.ShapeTypeList, Ext: &e_VolumeToProductCodes_value})
+var s_VolumeToSizeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeToSizeMap, Members: &m_VolumeToSizeMap, Type: smithy.ShapeTypeMap, Ext: &e_VolumeToSizeMap})
+var s_VolumeToSizeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &e_VolumeToSizeMap_key})
+var s_VolumeToSizeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &e_VolumeToSizeMap_value})
+var s_VpcID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &e_VpcID})
+var s_WaitDurationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WaitDurationMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_WaitDurationMinutes})
+var sWaitStepConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaitStepConfiguration, Members: &mWaitStepConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWaitStepConfiguration})
+var sWaitStepConfiguration_waitDurationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "waitDurationMinutes", ID: &i_WaitDurationMinutes, Type: smithy.ShapeTypeInteger, Ext: &eWaitStepConfiguration_waitDurationMinutes})
+var sAssociateSourceNetworkStackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceNetworkStackRequest, Members: &mAssociateSourceNetworkStackRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceNetworkStackRequest})
+var sAssociateSourceNetworkStackRequest_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eAssociateSourceNetworkStackRequest_sourceNetworkID})
+var sAssociateSourceNetworkStackRequest_cfnStackName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cfnStackName", ID: &i_CfnStackName, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eAssociateSourceNetworkStackRequest_cfnStackName})
+var sAssociateSourceNetworkStackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceNetworkStackResponse, Members: &mAssociateSourceNetworkStackResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceNetworkStackResponse})
+var sAssociateSourceNetworkStackResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSourceNetworkStackResponse_job})
+var sCancelRecoveryPlanExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRecoveryPlanExecutionRequest, Members: &mCancelRecoveryPlanExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelRecoveryPlanExecutionRequest})
+var sCancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eCancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn})
+var sCancelRecoveryPlanExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRecoveryPlanExecutionResponse, Members: &mCancelRecoveryPlanExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelRecoveryPlanExecutionResponse})
+var sCancelRecoveryPlanExecutionResponse_recoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecution", ID: &iRecoveryPlanExecution, Members: &mRecoveryPlanExecution, Type: smithy.ShapeTypeStructure, Ext: &eCancelRecoveryPlanExecutionResponse_recoveryPlanExecution})
+var sCreateExtendedSourceServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtendedSourceServerRequest, Members: &mCreateExtendedSourceServerRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExtendedSourceServerRequest})
+var sCreateExtendedSourceServerRequest_sourceServerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerArn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eCreateExtendedSourceServerRequest_sourceServerArn})
+var sCreateExtendedSourceServerRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateExtendedSourceServerRequest_tags})
+var sCreateExtendedSourceServerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExtendedSourceServerResponse, Members: &mCreateExtendedSourceServerResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateExtendedSourceServerResponse})
+var sCreateExtendedSourceServerResponse_sourceServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServer", ID: &iSourceServer, Members: &mSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eCreateExtendedSourceServerResponse_sourceServer})
+var sCreateLaunchConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLaunchConfigurationTemplateRequest, Members: &mCreateLaunchConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLaunchConfigurationTemplateRequest})
+var sCreateLaunchConfigurationTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateLaunchConfigurationTemplateRequest_tags})
+var sCreateLaunchConfigurationTemplateRequest_launchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchDisposition", ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &eCreateLaunchConfigurationTemplateRequest_launchDisposition})
+var sCreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypeRightSizingMethod", ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &eCreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod})
+var sCreateLaunchConfigurationTemplateRequest_copyPrivateIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyPrivateIp", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLaunchConfigurationTemplateRequest_copyPrivateIp})
+var sCreateLaunchConfigurationTemplateRequest_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLaunchConfigurationTemplateRequest_copyTags})
+var sCreateLaunchConfigurationTemplateRequest_licensing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licensing", ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eCreateLaunchConfigurationTemplateRequest_licensing})
+var sCreateLaunchConfigurationTemplateRequest_exportBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportBucketArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eCreateLaunchConfigurationTemplateRequest_exportBucketArn})
+var sCreateLaunchConfigurationTemplateRequest_postLaunchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postLaunchEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLaunchConfigurationTemplateRequest_postLaunchEnabled})
+var sCreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoSourceInstance", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance})
+var sCreateLaunchConfigurationTemplateRequest_recoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryMode", ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &eCreateLaunchConfigurationTemplateRequest_recoveryMode})
+var sCreateLaunchConfigurationTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLaunchConfigurationTemplateResponse, Members: &mCreateLaunchConfigurationTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLaunchConfigurationTemplateResponse})
+var sCreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplate", ID: &iLaunchConfigurationTemplate, Members: &mLaunchConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate})
+var sCreateRecoveryPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlanRequest, Members: &mCreateRecoveryPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanRequest})
+var sCreateRecoveryPlanRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecoveryPlanName, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanRequest_name})
+var sCreateRecoveryPlanRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_RecoveryPlanDescription, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanRequest_description})
+var sCreateRecoveryPlanRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanRequest_clientToken})
+var sCreateRecoveryPlanRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateRecoveryPlanRequest_tags})
+var sCreateRecoveryPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlanResponse, Members: &mCreateRecoveryPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanResponse})
+var sCreateRecoveryPlanResponse_recoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlan", ID: &iRecoveryPlan, Members: &mRecoveryPlan, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanResponse_recoveryPlan})
+var sCreateRecoveryPlanStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlanStepRequest, Members: &mCreateRecoveryPlanStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanStepRequest})
+var sCreateRecoveryPlanStepRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanStepRequest_recoveryPlanArn})
+var sCreateRecoveryPlanStepRequest_stepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepName", ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanStepRequest_stepName})
+var sCreateRecoveryPlanStepRequest_stepOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepOrder", ID: &i_RecoveryPlanStepOrder, Type: smithy.ShapeTypeInteger, Ext: &eCreateRecoveryPlanStepRequest_stepOrder})
+var sCreateRecoveryPlanStepRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iRecoveryPlanStepConfiguration, Members: &mRecoveryPlanStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateRecoveryPlanStepRequest_configuration})
+var sCreateRecoveryPlanStepRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRecoveryPlanStepRequest_clientToken})
+var sCreateRecoveryPlanStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecoveryPlanStepResponse, Members: &mCreateRecoveryPlanStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanStepResponse})
+var sCreateRecoveryPlanStepResponse_recoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStep", ID: &iRecoveryPlanStep, Members: &mRecoveryPlanStep, Type: smithy.ShapeTypeStructure, Ext: &eCreateRecoveryPlanStepResponse_recoveryPlanStep})
+var sCreateReplicationConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicationConfigurationTemplateRequest, Members: &mCreateReplicationConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicationConfigurationTemplateRequest})
+var sCreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaSubnetId", ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId})
+var sCreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateDefaultSecurityGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup})
+var sCreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServersSecurityGroupsIDs", ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &eCreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs})
+var sCreateReplicationConfigurationTemplateRequest_replicationServerInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServerInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_replicationServerInstanceType})
+var sCreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDedicatedReplicationServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer})
+var sCreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLargeStagingDiskType", ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType})
+var sCreateReplicationConfigurationTemplateRequest_ebsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryption", ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_ebsEncryption})
+var sCreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryptionKeyArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn})
+var sCreateReplicationConfigurationTemplateRequest_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eCreateReplicationConfigurationTemplateRequest_bandwidthThrottling})
+var sCreateReplicationConfigurationTemplateRequest_dataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPlaneRouting", ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_dataPlaneRouting})
+var sCreateReplicationConfigurationTemplateRequest_createPublicIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createPublicIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateReplicationConfigurationTemplateRequest_createPublicIP})
+var sCreateReplicationConfigurationTemplateRequest_stagingAreaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaTags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateReplicationConfigurationTemplateRequest_stagingAreaTags})
+var sCreateReplicationConfigurationTemplateRequest_pitPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pitPolicy", ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &eCreateReplicationConfigurationTemplateRequest_pitPolicy})
+var sCreateReplicationConfigurationTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateReplicationConfigurationTemplateRequest_tags})
+var sCreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoReplicateNewDisks", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks})
+var sCreateReplicationConfigurationTemplateRequest_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eCreateReplicationConfigurationTemplateRequest_internetProtocol})
+var sCreateSourceNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceNetworkRequest, Members: &mCreateSourceNetworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceNetworkRequest})
+var sCreateSourceNetworkRequest_vpcID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcID", ID: &i_VpcID, Type: smithy.ShapeTypeString, Ext: &eCreateSourceNetworkRequest_vpcID})
+var sCreateSourceNetworkRequest_originAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eCreateSourceNetworkRequest_originAccountID})
+var sCreateSourceNetworkRequest_originRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eCreateSourceNetworkRequest_originRegion})
+var sCreateSourceNetworkRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eCreateSourceNetworkRequest_tags})
+var sCreateSourceNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSourceNetworkResponse, Members: &mCreateSourceNetworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSourceNetworkResponse})
+var sCreateSourceNetworkResponse_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eCreateSourceNetworkResponse_sourceNetworkID})
+var sDeleteJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobRequest, Members: &mDeleteJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteJobRequest})
+var sDeleteJobRequest_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eDeleteJobRequest_jobID})
+var sDeleteJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteJobResponse})
+var sDeleteLaunchActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchActionRequest, Members: &mDeleteLaunchActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLaunchActionRequest})
+var sDeleteLaunchActionRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LaunchActionResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteLaunchActionRequest_resourceId})
+var sDeleteLaunchActionRequest_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &eDeleteLaunchActionRequest_actionId})
+var sDeleteLaunchActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLaunchActionResponse})
+var sDeleteLaunchConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchConfigurationTemplateRequest, Members: &mDeleteLaunchConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLaunchConfigurationTemplateRequest})
+var sDeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplateID", ID: &i_LaunchConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eDeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID})
+var sDeleteLaunchConfigurationTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLaunchConfigurationTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLaunchConfigurationTemplateResponse})
+var sDeleteRecoveryInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryInstanceRequest, Members: &mDeleteRecoveryInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryInstanceRequest})
+var sDeleteRecoveryInstanceRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryInstanceRequest_recoveryInstanceID})
+var sDeleteRecoveryPlanExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanExecutionRequest, Members: &mDeleteRecoveryPlanExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanExecutionRequest})
+var sDeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn})
+var sDeleteRecoveryPlanExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanExecutionResponse, Members: &mDeleteRecoveryPlanExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanExecutionResponse})
+var sDeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn})
+var sDeleteRecoveryPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanRequest, Members: &mDeleteRecoveryPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanRequest})
+var sDeleteRecoveryPlanRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanRequest_recoveryPlanArn})
+var sDeleteRecoveryPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanResponse, Members: &mDeleteRecoveryPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanResponse})
+var sDeleteRecoveryPlanResponse_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanResponse_recoveryPlanArn})
+var sDeleteRecoveryPlanStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanStepRequest, Members: &mDeleteRecoveryPlanStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanStepRequest})
+var sDeleteRecoveryPlanStepRequest_recoveryPlanStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanStepRequest_recoveryPlanStepArn})
+var sDeleteRecoveryPlanStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecoveryPlanStepResponse, Members: &mDeleteRecoveryPlanStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecoveryPlanStepResponse})
+var sDeleteRecoveryPlanStepResponse_recoveryPlanStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eDeleteRecoveryPlanStepResponse_recoveryPlanStepArn})
+var sDeleteReplicationConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationConfigurationTemplateRequest, Members: &mDeleteReplicationConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicationConfigurationTemplateRequest})
+var sDeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfigurationTemplateID", ID: &i_ReplicationConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eDeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID})
+var sDeleteReplicationConfigurationTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicationConfigurationTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicationConfigurationTemplateResponse})
+var sDeleteSourceNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceNetworkRequest, Members: &mDeleteSourceNetworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceNetworkRequest})
+var sDeleteSourceNetworkRequest_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceNetworkRequest_sourceNetworkID})
+var sDeleteSourceNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceNetworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceNetworkResponse})
+var sDeleteSourceServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceServerRequest, Members: &mDeleteSourceServerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceServerRequest})
+var sDeleteSourceServerRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eDeleteSourceServerRequest_sourceServerID})
+var sDeleteSourceServerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSourceServerResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSourceServerResponse})
+var sDescribeJobLogItemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobLogItemsRequest, Members: &mDescribeJobLogItemsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobLogItemsRequest})
+var sDescribeJobLogItemsRequest_jobID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobID", ID: &i_JobID, Type: smithy.ShapeTypeString, Ext: &eDescribeJobLogItemsRequest_jobID})
+var sDescribeJobLogItemsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeJobLogItemsRequest_maxResults})
+var sDescribeJobLogItemsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeJobLogItemsRequest_nextToken})
+var sDescribeJobLogItemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobLogItemsResponse, Members: &mDescribeJobLogItemsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobLogItemsResponse})
+var sDescribeJobLogItemsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_JobLogs, Members: &m_JobLogs, Type: smithy.ShapeTypeList, Ext: &eDescribeJobLogItemsResponse_items})
+var sDescribeJobLogItemsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeJobLogItemsResponse_nextToken})
+var sDescribeJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobsRequest, Members: &mDescribeJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobsRequest})
+var sDescribeJobsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iDescribeJobsRequestFilters, Members: &mDescribeJobsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobsRequest_filters})
+var sDescribeJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeJobsRequest_maxResults})
+var sDescribeJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeJobsRequest_nextToken})
+var sDescribeJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobsResponse, Members: &mDescribeJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobsResponse})
+var sDescribeJobsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_JobsList, Members: &m_JobsList, Type: smithy.ShapeTypeList, Ext: &eDescribeJobsResponse_items})
+var sDescribeJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeJobsResponse_nextToken})
+var sDescribeLaunchConfigurationTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLaunchConfigurationTemplatesRequest, Members: &mDescribeLaunchConfigurationTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLaunchConfigurationTemplatesRequest})
+var sDescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplateIDs", ID: &i_LaunchConfigurationTemplateIDs, Members: &m_LaunchConfigurationTemplateIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs})
+var sDescribeLaunchConfigurationTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eDescribeLaunchConfigurationTemplatesRequest_maxResults})
+var sDescribeLaunchConfigurationTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeLaunchConfigurationTemplatesRequest_nextToken})
+var sDescribeLaunchConfigurationTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLaunchConfigurationTemplatesResponse, Members: &mDescribeLaunchConfigurationTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLaunchConfigurationTemplatesResponse})
+var sDescribeLaunchConfigurationTemplatesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_LaunchConfigurationTemplates, Members: &m_LaunchConfigurationTemplates, Type: smithy.ShapeTypeList, Ext: &eDescribeLaunchConfigurationTemplatesResponse_items})
+var sDescribeLaunchConfigurationTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeLaunchConfigurationTemplatesResponse_nextToken})
+var sDescribeRecoveryInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoveryInstancesRequest, Members: &mDescribeRecoveryInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoveryInstancesRequest})
+var sDescribeRecoveryInstancesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iDescribeRecoveryInstancesRequestFilters, Members: &mDescribeRecoveryInstancesRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoveryInstancesRequest_filters})
+var sDescribeRecoveryInstancesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeRecoveryInstancesRequest_maxResults})
+var sDescribeRecoveryInstancesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoveryInstancesRequest_nextToken})
+var sDescribeRecoveryInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoveryInstancesResponse, Members: &mDescribeRecoveryInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoveryInstancesResponse})
+var sDescribeRecoveryInstancesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoveryInstancesResponse_nextToken})
+var sDescribeRecoveryInstancesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_DescribeRecoveryInstancesItems, Members: &m_DescribeRecoveryInstancesItems, Type: smithy.ShapeTypeList, Ext: &eDescribeRecoveryInstancesResponse_items})
+var sDescribeRecoverySnapshotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoverySnapshotsRequest, Members: &mDescribeRecoverySnapshotsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoverySnapshotsRequest})
+var sDescribeRecoverySnapshotsRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsRequest_sourceServerID})
+var sDescribeRecoverySnapshotsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iDescribeRecoverySnapshotsRequestFilters, Members: &mDescribeRecoverySnapshotsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoverySnapshotsRequest_filters})
+var sDescribeRecoverySnapshotsRequest_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_RecoverySnapshotsOrder, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsRequest_order})
+var sDescribeRecoverySnapshotsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeRecoverySnapshotsRequest_maxResults})
+var sDescribeRecoverySnapshotsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsRequest_nextToken})
+var sDescribeRecoverySnapshotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecoverySnapshotsResponse, Members: &mDescribeRecoverySnapshotsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecoverySnapshotsResponse})
+var sDescribeRecoverySnapshotsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_RecoverySnapshotsList, Members: &m_RecoverySnapshotsList, Type: smithy.ShapeTypeList, Ext: &eDescribeRecoverySnapshotsResponse_items})
+var sDescribeRecoverySnapshotsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeRecoverySnapshotsResponse_nextToken})
+var sDescribeReplicationConfigurationTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicationConfigurationTemplatesRequest, Members: &mDescribeReplicationConfigurationTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicationConfigurationTemplatesRequest})
+var sDescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfigurationTemplateIDs", ID: &i_ReplicationConfigurationTemplateIDs, Members: &m_ReplicationConfigurationTemplateIDs, Type: smithy.ShapeTypeList, Ext: &eDescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs})
+var sDescribeReplicationConfigurationTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeReplicationConfigurationTemplatesRequest_maxResults})
+var sDescribeReplicationConfigurationTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicationConfigurationTemplatesRequest_nextToken})
+var sDescribeReplicationConfigurationTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicationConfigurationTemplatesResponse, Members: &mDescribeReplicationConfigurationTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicationConfigurationTemplatesResponse})
+var sDescribeReplicationConfigurationTemplatesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ReplicationConfigurationTemplates, Members: &m_ReplicationConfigurationTemplates, Type: smithy.ShapeTypeList, Ext: &eDescribeReplicationConfigurationTemplatesResponse_items})
+var sDescribeReplicationConfigurationTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicationConfigurationTemplatesResponse_nextToken})
+var sDescribeSourceNetworksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceNetworksRequest, Members: &mDescribeSourceNetworksRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceNetworksRequest})
+var sDescribeSourceNetworksRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iDescribeSourceNetworksRequestFilters, Members: &mDescribeSourceNetworksRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceNetworksRequest_filters})
+var sDescribeSourceNetworksRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSourceNetworksRequest_maxResults})
+var sDescribeSourceNetworksRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceNetworksRequest_nextToken})
+var sDescribeSourceNetworksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceNetworksResponse, Members: &mDescribeSourceNetworksResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceNetworksResponse})
+var sDescribeSourceNetworksResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_SourceNetworksList, Members: &m_SourceNetworksList, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceNetworksResponse_items})
+var sDescribeSourceNetworksResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceNetworksResponse_nextToken})
+var sDescribeSourceServersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceServersRequest, Members: &mDescribeSourceServersRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceServersRequest})
+var sDescribeSourceServersRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iDescribeSourceServersRequestFilters, Members: &mDescribeSourceServersRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceServersRequest_filters})
+var sDescribeSourceServersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_StrictlyPositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSourceServersRequest_maxResults})
+var sDescribeSourceServersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceServersRequest_nextToken})
+var sDescribeSourceServersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSourceServersResponse, Members: &mDescribeSourceServersResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSourceServersResponse})
+var sDescribeSourceServersResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_SourceServersList, Members: &m_SourceServersList, Type: smithy.ShapeTypeList, Ext: &eDescribeSourceServersResponse_items})
+var sDescribeSourceServersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eDescribeSourceServersResponse_nextToken})
+var sDisconnectRecoveryInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectRecoveryInstanceRequest, Members: &mDisconnectRecoveryInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectRecoveryInstanceRequest})
+var sDisconnectRecoveryInstanceRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eDisconnectRecoveryInstanceRequest_recoveryInstanceID})
+var sDisconnectSourceServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectSourceServerRequest, Members: &mDisconnectSourceServerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectSourceServerRequest})
+var sDisconnectSourceServerRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eDisconnectSourceServerRequest_sourceServerID})
+var sExportSourceNetworkCfnTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSourceNetworkCfnTemplateRequest, Members: &mExportSourceNetworkCfnTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eExportSourceNetworkCfnTemplateRequest})
+var sExportSourceNetworkCfnTemplateRequest_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eExportSourceNetworkCfnTemplateRequest_sourceNetworkID})
+var sExportSourceNetworkCfnTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSourceNetworkCfnTemplateResponse, Members: &mExportSourceNetworkCfnTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eExportSourceNetworkCfnTemplateResponse})
+var sExportSourceNetworkCfnTemplateResponse_s3DestinationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3DestinationUrl", ID: &i_LargeBoundedString, Type: smithy.ShapeTypeString, Ext: &eExportSourceNetworkCfnTemplateResponse_s3DestinationUrl})
+var sGetFailbackReplicationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailbackReplicationConfigurationRequest, Members: &mGetFailbackReplicationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFailbackReplicationConfigurationRequest})
+var sGetFailbackReplicationConfigurationRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eGetFailbackReplicationConfigurationRequest_recoveryInstanceID})
+var sGetFailbackReplicationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFailbackReplicationConfigurationResponse, Members: &mGetFailbackReplicationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFailbackReplicationConfigurationResponse})
+var sGetFailbackReplicationConfigurationResponse_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eGetFailbackReplicationConfigurationResponse_recoveryInstanceID})
+var sGetFailbackReplicationConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eGetFailbackReplicationConfigurationResponse_name})
+var sGetFailbackReplicationConfigurationResponse_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eGetFailbackReplicationConfigurationResponse_bandwidthThrottling})
+var sGetFailbackReplicationConfigurationResponse_usePrivateIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usePrivateIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetFailbackReplicationConfigurationResponse_usePrivateIP})
+var sGetFailbackReplicationConfigurationResponse_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eGetFailbackReplicationConfigurationResponse_internetProtocol})
+var sGetLaunchConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLaunchConfigurationRequest, Members: &mGetLaunchConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLaunchConfigurationRequest})
+var sGetLaunchConfigurationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eGetLaunchConfigurationRequest_sourceServerID})
+var sLaunchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchConfiguration, Members: &mLaunchConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfiguration})
+var sLaunchConfiguration_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_sourceServerID})
+var sLaunchConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SmallBoundedString, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_name})
+var sLaunchConfiguration_ec2LaunchTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2LaunchTemplateID", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_ec2LaunchTemplateID})
+var sLaunchConfiguration_launchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchDisposition", ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_launchDisposition})
+var sLaunchConfiguration_targetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypeRightSizingMethod", ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_targetInstanceTypeRightSizingMethod})
+var sLaunchConfiguration_copyPrivateIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyPrivateIp", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfiguration_copyPrivateIp})
+var sLaunchConfiguration_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfiguration_copyTags})
+var sLaunchConfiguration_licensing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licensing", ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfiguration_licensing})
+var sLaunchConfiguration_postLaunchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postLaunchEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLaunchConfiguration_postLaunchEnabled})
+var sLaunchConfiguration_launchIntoInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoInstanceProperties", ID: &iLaunchIntoInstanceProperties, Members: &mLaunchIntoInstanceProperties, Type: smithy.ShapeTypeStructure, Ext: &eLaunchConfiguration_launchIntoInstanceProperties})
+var sLaunchConfiguration_recoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryMode", ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &eLaunchConfiguration_recoveryMode})
+var sGetRecoveryPlanExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecutionRequest, Members: &mGetRecoveryPlanExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionRequest})
+var sGetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn})
+var sGetRecoveryPlanExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecutionResponse, Members: &mGetRecoveryPlanExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionResponse})
+var sGetRecoveryPlanExecutionResponse_recoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecution", ID: &iRecoveryPlanExecution, Members: &mRecoveryPlanExecution, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionResponse_recoveryPlanExecution})
+var sGetRecoveryPlanExecutionStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecutionStepRequest, Members: &mGetRecoveryPlanExecutionStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionStepRequest})
+var sGetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn})
+var sGetRecoveryPlanExecutionStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanExecutionStepResponse, Members: &mGetRecoveryPlanExecutionStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionStepResponse})
+var sGetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStep", ID: &iRecoveryPlanExecutionStep, Members: &mRecoveryPlanExecutionStep, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep})
+var sGetRecoveryPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanRequest, Members: &mGetRecoveryPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanRequest})
+var sGetRecoveryPlanRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryPlanRequest_recoveryPlanArn})
+var sGetRecoveryPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanResponse, Members: &mGetRecoveryPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanResponse})
+var sGetRecoveryPlanResponse_recoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlan", ID: &iRecoveryPlan, Members: &mRecoveryPlan, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanResponse_recoveryPlan})
+var sGetRecoveryPlanStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanStepRequest, Members: &mGetRecoveryPlanStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanStepRequest})
+var sGetRecoveryPlanStepRequest_recoveryPlanStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eGetRecoveryPlanStepRequest_recoveryPlanStepArn})
+var sGetRecoveryPlanStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecoveryPlanStepResponse, Members: &mGetRecoveryPlanStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanStepResponse})
+var sGetRecoveryPlanStepResponse_recoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStep", ID: &iRecoveryPlanStep, Members: &mRecoveryPlanStep, Type: smithy.ShapeTypeStructure, Ext: &eGetRecoveryPlanStepResponse_recoveryPlanStep})
+var sGetReplicationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetReplicationConfigurationRequest, Members: &mGetReplicationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetReplicationConfigurationRequest})
+var sGetReplicationConfigurationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eGetReplicationConfigurationRequest_sourceServerID})
+var sReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationConfiguration, Members: &mReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eReplicationConfiguration})
+var sReplicationConfiguration_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_sourceServerID})
+var sReplicationConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SmallBoundedString, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_name})
+var sReplicationConfiguration_stagingAreaSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaSubnetId", ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_stagingAreaSubnetId})
+var sReplicationConfiguration_associateDefaultSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateDefaultSecurityGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfiguration_associateDefaultSecurityGroup})
+var sReplicationConfiguration_replicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServersSecurityGroupsIDs", ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &eReplicationConfiguration_replicationServersSecurityGroupsIDs})
+var sReplicationConfiguration_replicationServerInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServerInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_replicationServerInstanceType})
+var sReplicationConfiguration_useDedicatedReplicationServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDedicatedReplicationServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfiguration_useDedicatedReplicationServer})
+var sReplicationConfiguration_defaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLargeStagingDiskType", ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_defaultLargeStagingDiskType})
+var sReplicationConfiguration_replicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedDisks", ID: &i_ReplicationConfigurationReplicatedDisks, Members: &m_ReplicationConfigurationReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &eReplicationConfiguration_replicatedDisks})
+var sReplicationConfiguration_ebsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryption", ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_ebsEncryption})
+var sReplicationConfiguration_ebsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryptionKeyArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_ebsEncryptionKeyArn})
+var sReplicationConfiguration_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eReplicationConfiguration_bandwidthThrottling})
+var sReplicationConfiguration_dataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPlaneRouting", ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_dataPlaneRouting})
+var sReplicationConfiguration_createPublicIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createPublicIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfiguration_createPublicIP})
+var sReplicationConfiguration_stagingAreaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaTags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eReplicationConfiguration_stagingAreaTags})
+var sReplicationConfiguration_pitPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pitPolicy", ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &eReplicationConfiguration_pitPolicy})
+var sReplicationConfiguration_autoReplicateNewDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoReplicateNewDisks", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReplicationConfiguration_autoReplicateNewDisks})
+var sReplicationConfiguration_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eReplicationConfiguration_internetProtocol})
+var sInitializeServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInitializeServiceRequest, Type: smithy.ShapeTypeStructure, Ext: &eInitializeServiceRequest})
+var sInitializeServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInitializeServiceResponse, Type: smithy.ShapeTypeStructure, Ext: &eInitializeServiceResponse})
+var sListExtensibleSourceServersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensibleSourceServersRequest, Members: &mListExtensibleSourceServersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExtensibleSourceServersRequest})
+var sListExtensibleSourceServersRequest_stagingAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAccountID", ID: &i_AccountID, Type: smithy.ShapeTypeString, Ext: &eListExtensibleSourceServersRequest_stagingAccountID})
+var sListExtensibleSourceServersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsReplicatingSourceServers, Type: smithy.ShapeTypeInteger, Ext: &eListExtensibleSourceServersRequest_maxResults})
+var sListExtensibleSourceServersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListExtensibleSourceServersRequest_nextToken})
+var sListExtensibleSourceServersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExtensibleSourceServersResponse, Members: &mListExtensibleSourceServersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExtensibleSourceServersResponse})
+var sListExtensibleSourceServersResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_StagingSourceServersList, Members: &m_StagingSourceServersList, Type: smithy.ShapeTypeList, Ext: &eListExtensibleSourceServersResponse_items})
+var sListExtensibleSourceServersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListExtensibleSourceServersResponse_nextToken})
+var sListLaunchActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLaunchActionsRequest, Members: &mListLaunchActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLaunchActionsRequest})
+var sListLaunchActionsRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LaunchActionResourceId, Type: smithy.ShapeTypeString, Ext: &eListLaunchActionsRequest_resourceId})
+var sListLaunchActionsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iLaunchActionsRequestFilters, Members: &mLaunchActionsRequestFilters, Type: smithy.ShapeTypeStructure, Ext: &eListLaunchActionsRequest_filters})
+var sListLaunchActionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListLaunchActionsRequest_maxResults})
+var sListLaunchActionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLaunchActionsRequest_nextToken})
+var sListLaunchActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLaunchActionsResponse, Members: &mListLaunchActionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLaunchActionsResponse})
+var sListLaunchActionsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_LaunchActions, Members: &m_LaunchActions, Type: smithy.ShapeTypeList, Ext: &eListLaunchActionsResponse_items})
+var sListLaunchActionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLaunchActionsResponse_nextToken})
+var sListRecoveryPlanExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionsRequest, Members: &mListRecoveryPlanExecutionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionsRequest})
+var sListRecoveryPlanExecutionsRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionsRequest_recoveryPlanArn})
+var sListRecoveryPlanExecutionsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStatus, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionsRequest_status})
+var sListRecoveryPlanExecutionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListRecoveryPlanExecutionsRequest_maxResults})
+var sListRecoveryPlanExecutionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionsRequest_nextToken})
+var sListRecoveryPlanExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionsResponse, Members: &mListRecoveryPlanExecutionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionsResponse})
+var sListRecoveryPlanExecutionsResponse_recoveryPlanExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutions", ID: &i_RecoveryPlanExecutionSummaryList, Members: &m_RecoveryPlanExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRecoveryPlanExecutionsResponse_recoveryPlanExecutions})
+var sListRecoveryPlanExecutionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionsResponse_nextToken})
+var sListRecoveryPlanExecutionStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionStepsRequest, Members: &mListRecoveryPlanExecutionStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionStepsRequest})
+var sListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn})
+var sListRecoveryPlanExecutionStepsRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iListRecoveryPlanExecutionStepsFilter, Members: &mListRecoveryPlanExecutionStepsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionStepsRequest_filter})
+var sListRecoveryPlanExecutionStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListRecoveryPlanExecutionStepsRequest_maxResults})
+var sListRecoveryPlanExecutionStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionStepsRequest_nextToken})
+var sListRecoveryPlanExecutionStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanExecutionStepsResponse, Members: &mListRecoveryPlanExecutionStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanExecutionStepsResponse})
+var sListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionSteps", ID: &i_RecoveryPlanExecutionStepSummaryList, Members: &m_RecoveryPlanExecutionStepSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps})
+var sListRecoveryPlanExecutionStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanExecutionStepsResponse_nextToken})
+var sListRecoveryPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlansRequest, Members: &mListRecoveryPlansRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlansRequest})
+var sListRecoveryPlansRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListRecoveryPlansRequest_maxResults})
+var sListRecoveryPlansRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlansRequest_nextToken})
+var sListRecoveryPlansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlansResponse, Members: &mListRecoveryPlansResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlansResponse})
+var sListRecoveryPlansResponse_recoveryPlans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlans", ID: &i_RecoveryPlanSummaryList, Members: &m_RecoveryPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRecoveryPlansResponse_recoveryPlans})
+var sListRecoveryPlansResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlansResponse_nextToken})
+var sListRecoveryPlanStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanStepsRequest, Members: &mListRecoveryPlanStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanStepsRequest})
+var sListRecoveryPlanStepsRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanStepsRequest_recoveryPlanArn})
+var sListRecoveryPlanStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListRecoveryPlanStepsRequest_maxResults})
+var sListRecoveryPlanStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanStepsRequest_nextToken})
+var sListRecoveryPlanStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecoveryPlanStepsResponse, Members: &mListRecoveryPlanStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecoveryPlanStepsResponse})
+var sListRecoveryPlanStepsResponse_recoveryPlanSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanSteps", ID: &i_RecoveryPlanStepList, Members: &m_RecoveryPlanStepList, Type: smithy.ShapeTypeList, Ext: &eListRecoveryPlanStepsResponse_recoveryPlanSteps})
+var sListRecoveryPlanStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRecoveryPlanStepsResponse_nextToken})
+var sListStagingAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStagingAccountsRequest, Members: &mListStagingAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListStagingAccountsRequest})
+var sListStagingAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t81, Type: smithy.ShapeTypeInteger, Ext: &eListStagingAccountsRequest_maxResults})
+var sListStagingAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t82, Type: smithy.ShapeTypeString, Ext: &eListStagingAccountsRequest_nextToken})
+var sListStagingAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStagingAccountsResponse, Members: &mListStagingAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListStagingAccountsResponse})
+var sListStagingAccountsResponse_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_Accounts, Members: &m_Accounts, Type: smithy.ShapeTypeList, Ext: &eListStagingAccountsResponse_accounts})
+var sListStagingAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListStagingAccountsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sPutLaunchActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLaunchActionRequest, Members: &mPutLaunchActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutLaunchActionRequest})
+var sPutLaunchActionRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LaunchActionResourceId, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_resourceId})
+var sPutLaunchActionRequest_actionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionCode", ID: &i_SsmDocumentName, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_actionCode})
+var sPutLaunchActionRequest_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_LaunchActionOrder, Type: smithy.ShapeTypeInteger, Ext: &ePutLaunchActionRequest_order})
+var sPutLaunchActionRequest_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_actionId})
+var sPutLaunchActionRequest_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutLaunchActionRequest_optional})
+var sPutLaunchActionRequest_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutLaunchActionRequest_active})
+var sPutLaunchActionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LaunchActionName, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_name})
+var sPutLaunchActionRequest_actionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionVersion", ID: &i_LaunchActionVersion, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_actionVersion})
+var sPutLaunchActionRequest_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_LaunchActionCategory, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_category})
+var sPutLaunchActionRequest_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_LaunchActionParameters, Members: &m_LaunchActionParameters, Type: smithy.ShapeTypeMap, Ext: &ePutLaunchActionRequest_parameters})
+var sPutLaunchActionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_LaunchActionDescription, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionRequest_description})
+var sPutLaunchActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLaunchActionResponse, Members: &mPutLaunchActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutLaunchActionResponse})
+var sPutLaunchActionResponse_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_LaunchActionResourceId, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_resourceId})
+var sPutLaunchActionResponse_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_LaunchActionId, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_actionId})
+var sPutLaunchActionResponse_actionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionCode", ID: &i_SsmDocumentName, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_actionCode})
+var sPutLaunchActionResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LaunchActionType, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_type})
+var sPutLaunchActionResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LaunchActionName, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_name})
+var sPutLaunchActionResponse_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutLaunchActionResponse_active})
+var sPutLaunchActionResponse_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_LaunchActionOrder, Type: smithy.ShapeTypeInteger, Ext: &ePutLaunchActionResponse_order})
+var sPutLaunchActionResponse_actionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionVersion", ID: &i_LaunchActionVersion, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_actionVersion})
+var sPutLaunchActionResponse_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutLaunchActionResponse_optional})
+var sPutLaunchActionResponse_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_LaunchActionParameters, Members: &m_LaunchActionParameters, Type: smithy.ShapeTypeMap, Ext: &ePutLaunchActionResponse_parameters})
+var sPutLaunchActionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_LaunchActionDescription, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_description})
+var sPutLaunchActionResponse_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_LaunchActionCategory, Type: smithy.ShapeTypeString, Ext: &ePutLaunchActionResponse_category})
+var sReorderRecoveryPlanStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReorderRecoveryPlanStepsRequest, Members: &mReorderRecoveryPlanStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &eReorderRecoveryPlanStepsRequest})
+var sReorderRecoveryPlanStepsRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eReorderRecoveryPlanStepsRequest_recoveryPlanArn})
+var sReorderRecoveryPlanStepsRequest_orderedStepArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderedStepArns", ID: &i_RecoveryPlanStepArnList, Members: &m_RecoveryPlanStepArnList, Type: smithy.ShapeTypeList, Ext: &eReorderRecoveryPlanStepsRequest_orderedStepArns})
+var sReorderRecoveryPlanStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReorderRecoveryPlanStepsResponse, Members: &mReorderRecoveryPlanStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &eReorderRecoveryPlanStepsResponse})
+var sReorderRecoveryPlanStepsResponse_recoveryPlanSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanSteps", ID: &i_RecoveryPlanStepList, Members: &m_RecoveryPlanStepList, Type: smithy.ShapeTypeList, Ext: &eReorderRecoveryPlanStepsResponse_recoveryPlanSteps})
+var sRetryDataReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryDataReplicationRequest, Members: &mRetryDataReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eRetryDataReplicationRequest})
+var sRetryDataReplicationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eRetryDataReplicationRequest_sourceServerID})
+var sRetryRecoveryPlanExecutionStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryRecoveryPlanExecutionStepRequest, Members: &mRetryRecoveryPlanExecutionStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eRetryRecoveryPlanExecutionStepRequest})
+var sRetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eRetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn})
+var sRetryRecoveryPlanExecutionStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryRecoveryPlanExecutionStepResponse, Members: &mRetryRecoveryPlanExecutionStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eRetryRecoveryPlanExecutionStepResponse})
+var sRetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStep", ID: &iRecoveryPlanExecutionStep, Members: &mRecoveryPlanExecutionStep, Type: smithy.ShapeTypeStructure, Ext: &eRetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep})
+var sReverseReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseReplicationRequest, Members: &mReverseReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eReverseReplicationRequest})
+var sReverseReplicationRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eReverseReplicationRequest_recoveryInstanceID})
+var sReverseReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseReplicationResponse, Members: &mReverseReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eReverseReplicationResponse})
+var sReverseReplicationResponse_reversedDirectionSourceServerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reversedDirectionSourceServerArn", ID: &i_SourceServerARN, Type: smithy.ShapeTypeString, Ext: &eReverseReplicationResponse_reversedDirectionSourceServerArn})
+var sStartFailbackLaunchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFailbackLaunchRequest, Members: &mStartFailbackLaunchRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartFailbackLaunchRequest})
+var sStartFailbackLaunchRequest_recoveryInstanceIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceIDs", ID: &i_StartFailbackRequestRecoveryInstanceIDs, Members: &m_StartFailbackRequestRecoveryInstanceIDs, Type: smithy.ShapeTypeList, Ext: &eStartFailbackLaunchRequest_recoveryInstanceIDs})
+var sStartFailbackLaunchRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eStartFailbackLaunchRequest_tags})
+var sStartFailbackLaunchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFailbackLaunchResponse, Members: &mStartFailbackLaunchResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartFailbackLaunchResponse})
+var sStartFailbackLaunchResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eStartFailbackLaunchResponse_job})
+var sStartRecoveryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryRequest, Members: &mStartRecoveryRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryRequest})
+var sStartRecoveryRequest_sourceServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServers", ID: &i_StartRecoveryRequestSourceServers, Members: &m_StartRecoveryRequestSourceServers, Type: smithy.ShapeTypeList, Ext: &eStartRecoveryRequest_sourceServers})
+var sStartRecoveryRequest_isDrill = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDrill", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartRecoveryRequest_isDrill})
+var sStartRecoveryRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eStartRecoveryRequest_tags})
+var sStartRecoveryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryResponse, Members: &mStartRecoveryResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryResponse})
+var sStartRecoveryResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryResponse_job})
+var sStartRecoveryPlanExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryPlanExecutionRequest, Members: &mStartRecoveryPlanExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryPlanExecutionRequest})
+var sStartRecoveryPlanExecutionRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eStartRecoveryPlanExecutionRequest_recoveryPlanArn})
+var sStartRecoveryPlanExecutionRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_RecoveryPlanExecutionMode, Type: smithy.ShapeTypeString, Ext: &eStartRecoveryPlanExecutionRequest_mode})
+var sStartRecoveryPlanExecutionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientIdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eStartRecoveryPlanExecutionRequest_clientToken})
+var sStartRecoveryPlanExecutionRequest_sourceServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServers", ID: &i_RecoveryPlanExecutionSourceServerList, Members: &m_RecoveryPlanExecutionSourceServerList, Type: smithy.ShapeTypeList, Ext: &eStartRecoveryPlanExecutionRequest_sourceServers})
+var sStartRecoveryPlanExecutionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eStartRecoveryPlanExecutionRequest_tags})
+var sStartRecoveryPlanExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecoveryPlanExecutionResponse, Members: &mStartRecoveryPlanExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryPlanExecutionResponse})
+var sStartRecoveryPlanExecutionResponse_recoveryPlanExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecution", ID: &iRecoveryPlanExecution, Members: &mRecoveryPlanExecution, Type: smithy.ShapeTypeStructure, Ext: &eStartRecoveryPlanExecutionResponse_recoveryPlanExecution})
+var sStartReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplicationRequest, Members: &mStartReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartReplicationRequest})
+var sStartReplicationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eStartReplicationRequest_sourceServerID})
+var sStartReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplicationResponse, Members: &mStartReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartReplicationResponse})
+var sStartReplicationResponse_sourceServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServer", ID: &iSourceServer, Members: &mSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eStartReplicationResponse_sourceServer})
+var sStartSourceNetworkRecoveryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkRecoveryRequest, Members: &mStartSourceNetworkRecoveryRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkRecoveryRequest})
+var sStartSourceNetworkRecoveryRequest_sourceNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworks", ID: &i_StartSourceNetworkRecoveryRequestNetworkEntries, Members: &m_StartSourceNetworkRecoveryRequestNetworkEntries, Type: smithy.ShapeTypeList, Ext: &eStartSourceNetworkRecoveryRequest_sourceNetworks})
+var sStartSourceNetworkRecoveryRequest_deployAsNew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployAsNew", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartSourceNetworkRecoveryRequest_deployAsNew})
+var sStartSourceNetworkRecoveryRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eStartSourceNetworkRecoveryRequest_tags})
+var sStartSourceNetworkRecoveryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkRecoveryResponse, Members: &mStartSourceNetworkRecoveryResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkRecoveryResponse})
+var sStartSourceNetworkRecoveryResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkRecoveryResponse_job})
+var sStartSourceNetworkReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkReplicationRequest, Members: &mStartSourceNetworkReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkReplicationRequest})
+var sStartSourceNetworkReplicationRequest_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eStartSourceNetworkReplicationRequest_sourceNetworkID})
+var sStartSourceNetworkReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSourceNetworkReplicationResponse, Members: &mStartSourceNetworkReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkReplicationResponse})
+var sStartSourceNetworkReplicationResponse_sourceNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetwork", ID: &iSourceNetwork, Members: &mSourceNetwork, Type: smithy.ShapeTypeStructure, Ext: &eStartSourceNetworkReplicationResponse_sourceNetwork})
+var sStopFailbackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFailbackRequest, Members: &mStopFailbackRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopFailbackRequest})
+var sStopFailbackRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eStopFailbackRequest_recoveryInstanceID})
+var sStopReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationRequest, Members: &mStopReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopReplicationRequest})
+var sStopReplicationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eStopReplicationRequest_sourceServerID})
+var sStopReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationResponse, Members: &mStopReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopReplicationResponse})
+var sStopReplicationResponse_sourceServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServer", ID: &iSourceServer, Members: &mSourceServer, Type: smithy.ShapeTypeStructure, Ext: &eStopReplicationResponse_sourceServer})
+var sStopSourceNetworkReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSourceNetworkReplicationRequest, Members: &mStopSourceNetworkReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopSourceNetworkReplicationRequest})
+var sStopSourceNetworkReplicationRequest_sourceNetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetworkID", ID: &i_SourceNetworkID, Type: smithy.ShapeTypeString, Ext: &eStopSourceNetworkReplicationRequest_sourceNetworkID})
+var sStopSourceNetworkReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSourceNetworkReplicationResponse, Members: &mStopSourceNetworkReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopSourceNetworkReplicationResponse})
+var sStopSourceNetworkReplicationResponse_sourceNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceNetwork", ID: &iSourceNetwork, Members: &mSourceNetwork, Type: smithy.ShapeTypeStructure, Ext: &eStopSourceNetworkReplicationResponse_sourceNetwork})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTerminateRecoveryInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateRecoveryInstancesRequest, Members: &mTerminateRecoveryInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eTerminateRecoveryInstancesRequest})
+var sTerminateRecoveryInstancesRequest_recoveryInstanceIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceIDs", ID: &i_RecoveryInstancesForTerminationRequest, Members: &m_RecoveryInstancesForTerminationRequest, Type: smithy.ShapeTypeList, Ext: &eTerminateRecoveryInstancesRequest_recoveryInstanceIDs})
+var sTerminateRecoveryInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateRecoveryInstancesResponse, Members: &mTerminateRecoveryInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eTerminateRecoveryInstancesResponse})
+var sTerminateRecoveryInstancesResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eTerminateRecoveryInstancesResponse_job})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateFailbackReplicationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFailbackReplicationConfigurationRequest, Members: &mUpdateFailbackReplicationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFailbackReplicationConfigurationRequest})
+var sUpdateFailbackReplicationConfigurationRequest_recoveryInstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryInstanceID", ID: &i_RecoveryInstanceID, Type: smithy.ShapeTypeString, Ext: &eUpdateFailbackReplicationConfigurationRequest_recoveryInstanceID})
+var sUpdateFailbackReplicationConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eUpdateFailbackReplicationConfigurationRequest_name})
+var sUpdateFailbackReplicationConfigurationRequest_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eUpdateFailbackReplicationConfigurationRequest_bandwidthThrottling})
+var sUpdateFailbackReplicationConfigurationRequest_usePrivateIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usePrivateIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFailbackReplicationConfigurationRequest_usePrivateIP})
+var sUpdateFailbackReplicationConfigurationRequest_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eUpdateFailbackReplicationConfigurationRequest_internetProtocol})
+var sUpdateLaunchConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLaunchConfigurationRequest, Members: &mUpdateLaunchConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationRequest})
+var sUpdateLaunchConfigurationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationRequest_sourceServerID})
+var sUpdateLaunchConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SmallBoundedString, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationRequest_name})
+var sUpdateLaunchConfigurationRequest_launchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchDisposition", ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationRequest_launchDisposition})
+var sUpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypeRightSizingMethod", ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod})
+var sUpdateLaunchConfigurationRequest_copyPrivateIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyPrivateIp", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationRequest_copyPrivateIp})
+var sUpdateLaunchConfigurationRequest_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationRequest_copyTags})
+var sUpdateLaunchConfigurationRequest_licensing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licensing", ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationRequest_licensing})
+var sUpdateLaunchConfigurationRequest_postLaunchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postLaunchEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationRequest_postLaunchEnabled})
+var sUpdateLaunchConfigurationRequest_launchIntoInstanceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoInstanceProperties", ID: &iLaunchIntoInstanceProperties, Members: &mLaunchIntoInstanceProperties, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationRequest_launchIntoInstanceProperties})
+var sUpdateLaunchConfigurationRequest_recoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryMode", ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationRequest_recoveryMode})
+var sUpdateLaunchConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLaunchConfigurationTemplateRequest, Members: &mUpdateLaunchConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationTemplateRequest})
+var sUpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplateID", ID: &i_LaunchConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID})
+var sUpdateLaunchConfigurationTemplateRequest_launchDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchDisposition", ID: &i_LaunchDisposition, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationTemplateRequest_launchDisposition})
+var sUpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypeRightSizingMethod", ID: &i_TargetInstanceTypeRightSizingMethod, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod})
+var sUpdateLaunchConfigurationTemplateRequest_copyPrivateIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyPrivateIp", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationTemplateRequest_copyPrivateIp})
+var sUpdateLaunchConfigurationTemplateRequest_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationTemplateRequest_copyTags})
+var sUpdateLaunchConfigurationTemplateRequest_licensing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licensing", ID: &iLicensing, Members: &mLicensing, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationTemplateRequest_licensing})
+var sUpdateLaunchConfigurationTemplateRequest_exportBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportBucketArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationTemplateRequest_exportBucketArn})
+var sUpdateLaunchConfigurationTemplateRequest_postLaunchEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postLaunchEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationTemplateRequest_postLaunchEnabled})
+var sUpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchIntoSourceInstance", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance})
+var sUpdateLaunchConfigurationTemplateRequest_recoveryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryMode", ID: &i_RecoveryMode, Type: smithy.ShapeTypeString, Ext: &eUpdateLaunchConfigurationTemplateRequest_recoveryMode})
+var sUpdateLaunchConfigurationTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLaunchConfigurationTemplateResponse, Members: &mUpdateLaunchConfigurationTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationTemplateResponse})
+var sUpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchConfigurationTemplate", ID: &iLaunchConfigurationTemplate, Members: &mLaunchConfigurationTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate})
+var sUpdateRecoveryPlanExecutionStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanExecutionStepRequest, Members: &mUpdateRecoveryPlanExecutionStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanExecutionStepRequest})
+var sUpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn})
+var sUpdateRecoveryPlanExecutionStepRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecoveryPlanExecutionStepStatus, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanExecutionStepRequest_status})
+var sUpdateRecoveryPlanExecutionStepRequest_servers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servers", ID: &i_RecoveryPlanServers, Members: &m_RecoveryPlanServers, Type: smithy.ShapeTypeList, Ext: &eUpdateRecoveryPlanExecutionStepRequest_servers})
+var sUpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "waitDurationMinutes", ID: &i_WaitDurationMinutes, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes})
+var sUpdateRecoveryPlanExecutionStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanExecutionStepResponse, Members: &mUpdateRecoveryPlanExecutionStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanExecutionStepResponse})
+var sUpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanExecutionStep", ID: &iRecoveryPlanExecutionStep, Members: &mRecoveryPlanExecutionStep, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep})
+var sUpdateRecoveryPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanRequest, Members: &mUpdateRecoveryPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanRequest})
+var sUpdateRecoveryPlanRequest_recoveryPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanRequest_recoveryPlanArn})
+var sUpdateRecoveryPlanRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecoveryPlanName, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanRequest_name})
+var sUpdateRecoveryPlanRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_RecoveryPlanDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanRequest_description})
+var sUpdateRecoveryPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanResponse, Members: &mUpdateRecoveryPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanResponse})
+var sUpdateRecoveryPlanResponse_recoveryPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlan", ID: &iRecoveryPlan, Members: &mRecoveryPlan, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanResponse_recoveryPlan})
+var sUpdateRecoveryPlanStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanStepRequest, Members: &mUpdateRecoveryPlanStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanStepRequest})
+var sUpdateRecoveryPlanStepRequest_recoveryPlanStepArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStepArn", ID: &i_StrictDRSARN, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanStepRequest_recoveryPlanStepArn})
+var sUpdateRecoveryPlanStepRequest_stepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepName", ID: &i_RecoveryPlanStepName, Type: smithy.ShapeTypeString, Ext: &eUpdateRecoveryPlanStepRequest_stepName})
+var sUpdateRecoveryPlanStepRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iRecoveryPlanStepConfiguration, Members: &mRecoveryPlanStepConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateRecoveryPlanStepRequest_configuration})
+var sUpdateRecoveryPlanStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecoveryPlanStepResponse, Members: &mUpdateRecoveryPlanStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanStepResponse})
+var sUpdateRecoveryPlanStepResponse_recoveryPlanStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recoveryPlanStep", ID: &iRecoveryPlanStep, Members: &mRecoveryPlanStep, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecoveryPlanStepResponse_recoveryPlanStep})
+var sUpdateReplicationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationConfigurationRequest, Members: &mUpdateReplicationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationConfigurationRequest})
+var sUpdateReplicationConfigurationRequest_sourceServerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceServerID", ID: &i_SourceServerID, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_sourceServerID})
+var sUpdateReplicationConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SmallBoundedString, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_name})
+var sUpdateReplicationConfigurationRequest_stagingAreaSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaSubnetId", ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_stagingAreaSubnetId})
+var sUpdateReplicationConfigurationRequest_associateDefaultSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateDefaultSecurityGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationRequest_associateDefaultSecurityGroup})
+var sUpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServersSecurityGroupsIDs", ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs})
+var sUpdateReplicationConfigurationRequest_replicationServerInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServerInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_replicationServerInstanceType})
+var sUpdateReplicationConfigurationRequest_useDedicatedReplicationServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDedicatedReplicationServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationRequest_useDedicatedReplicationServer})
+var sUpdateReplicationConfigurationRequest_defaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLargeStagingDiskType", ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_defaultLargeStagingDiskType})
+var sUpdateReplicationConfigurationRequest_replicatedDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicatedDisks", ID: &i_ReplicationConfigurationReplicatedDisks, Members: &m_ReplicationConfigurationReplicatedDisks, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationConfigurationRequest_replicatedDisks})
+var sUpdateReplicationConfigurationRequest_ebsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryption", ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_ebsEncryption})
+var sUpdateReplicationConfigurationRequest_ebsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryptionKeyArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_ebsEncryptionKeyArn})
+var sUpdateReplicationConfigurationRequest_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eUpdateReplicationConfigurationRequest_bandwidthThrottling})
+var sUpdateReplicationConfigurationRequest_dataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPlaneRouting", ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_dataPlaneRouting})
+var sUpdateReplicationConfigurationRequest_createPublicIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createPublicIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationRequest_createPublicIP})
+var sUpdateReplicationConfigurationRequest_stagingAreaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaTags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eUpdateReplicationConfigurationRequest_stagingAreaTags})
+var sUpdateReplicationConfigurationRequest_pitPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pitPolicy", ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationConfigurationRequest_pitPolicy})
+var sUpdateReplicationConfigurationRequest_autoReplicateNewDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoReplicateNewDisks", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationRequest_autoReplicateNewDisks})
+var sUpdateReplicationConfigurationRequest_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationRequest_internetProtocol})
+var sUpdateReplicationConfigurationTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationConfigurationTemplateRequest, Members: &mUpdateReplicationConfigurationTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationConfigurationTemplateRequest})
+var sUpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfigurationTemplateID", ID: &i_ReplicationConfigurationTemplateID, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID})
+var sUpdateReplicationConfigurationTemplateRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_arn})
+var sUpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaSubnetId", ID: &i_SubnetID, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId})
+var sUpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateDefaultSecurityGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup})
+var sUpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServersSecurityGroupsIDs", ID: &i_ReplicationServersSecurityGroupsIDs, Members: &m_ReplicationServersSecurityGroupsIDs, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs})
+var sUpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationServerInstanceType", ID: &i_EC2InstanceType, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType})
+var sUpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useDedicatedReplicationServer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer})
+var sUpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLargeStagingDiskType", ID: &i_ReplicationConfigurationDefaultLargeStagingDiskType, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType})
+var sUpdateReplicationConfigurationTemplateRequest_ebsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryption", ID: &i_ReplicationConfigurationEbsEncryption, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_ebsEncryption})
+var sUpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsEncryptionKeyArn", ID: &i_ARN, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn})
+var sUpdateReplicationConfigurationTemplateRequest_bandwidthThrottling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthThrottling", ID: &i_PositiveInteger, Type: smithy.ShapeTypeLong, Ext: &eUpdateReplicationConfigurationTemplateRequest_bandwidthThrottling})
+var sUpdateReplicationConfigurationTemplateRequest_dataPlaneRouting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPlaneRouting", ID: &i_ReplicationConfigurationDataPlaneRouting, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_dataPlaneRouting})
+var sUpdateReplicationConfigurationTemplateRequest_createPublicIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createPublicIP", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationTemplateRequest_createPublicIP})
+var sUpdateReplicationConfigurationTemplateRequest_stagingAreaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stagingAreaTags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t75, Type: smithy.ShapeTypeMap, Ext: &eUpdateReplicationConfigurationTemplateRequest_stagingAreaTags})
+var sUpdateReplicationConfigurationTemplateRequest_pitPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pitPolicy", ID: &i_PITPolicy, Members: &m_PITPolicy, Type: smithy.ShapeTypeList, Ext: &eUpdateReplicationConfigurationTemplateRequest_pitPolicy})
+var sUpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoReplicateNewDisks", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks})
+var sUpdateReplicationConfigurationTemplateRequest_internetProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "internetProtocol", ID: &i_InternetProtocol, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationConfigurationTemplateRequest_internetProtocol})
+
+var AssociateSourceNetworkStack = &sAssociateSourceNetworkStack
+
+var CancelRecoveryPlanExecution = &sCancelRecoveryPlanExecution
+
+var CreateExtendedSourceServer = &sCreateExtendedSourceServer
+
+var CreateLaunchConfigurationTemplate = &sCreateLaunchConfigurationTemplate
+
+var CreateRecoveryPlan = &sCreateRecoveryPlan
+
+var CreateRecoveryPlanStep = &sCreateRecoveryPlanStep
+
+var CreateReplicationConfigurationTemplate = &sCreateReplicationConfigurationTemplate
+
+var CreateSourceNetwork = &sCreateSourceNetwork
+
+var DeleteJob = &sDeleteJob
+
+var DeleteLaunchAction = &sDeleteLaunchAction
+
+var DeleteLaunchConfigurationTemplate = &sDeleteLaunchConfigurationTemplate
+
+var DeleteRecoveryInstance = &sDeleteRecoveryInstance
+
+var DeleteRecoveryPlan = &sDeleteRecoveryPlan
+
+var DeleteRecoveryPlanExecution = &sDeleteRecoveryPlanExecution
+
+var DeleteRecoveryPlanStep = &sDeleteRecoveryPlanStep
+
+var DeleteReplicationConfigurationTemplate = &sDeleteReplicationConfigurationTemplate
+
+var DeleteSourceNetwork = &sDeleteSourceNetwork
+
+var DeleteSourceServer = &sDeleteSourceServer
+
+var DescribeJobLogItems = &sDescribeJobLogItems
+
+var DescribeJobs = &sDescribeJobs
+
+var DescribeLaunchConfigurationTemplates = &sDescribeLaunchConfigurationTemplates
+
+var DescribeRecoveryInstances = &sDescribeRecoveryInstances
+
+var DescribeRecoverySnapshots = &sDescribeRecoverySnapshots
+
+var DescribeReplicationConfigurationTemplates = &sDescribeReplicationConfigurationTemplates
+
+var DescribeSourceNetworks = &sDescribeSourceNetworks
+
+var DescribeSourceServers = &sDescribeSourceServers
+
+var DisconnectRecoveryInstance = &sDisconnectRecoveryInstance
+
+var DisconnectSourceServer = &sDisconnectSourceServer
+
+var ExportSourceNetworkCfnTemplate = &sExportSourceNetworkCfnTemplate
+
+var GetFailbackReplicationConfiguration = &sGetFailbackReplicationConfiguration
+
+var GetLaunchConfiguration = &sGetLaunchConfiguration
+
+var GetRecoveryPlan = &sGetRecoveryPlan
+
+var GetRecoveryPlanExecution = &sGetRecoveryPlanExecution
+
+var GetRecoveryPlanExecutionStep = &sGetRecoveryPlanExecutionStep
+
+var GetRecoveryPlanStep = &sGetRecoveryPlanStep
+
+var GetReplicationConfiguration = &sGetReplicationConfiguration
+
+var InitializeService = &sInitializeService
+
+var ListExtensibleSourceServers = &sListExtensibleSourceServers
+
+var ListLaunchActions = &sListLaunchActions
+
+var ListRecoveryPlanExecutions = &sListRecoveryPlanExecutions
+
+var ListRecoveryPlanExecutionSteps = &sListRecoveryPlanExecutionSteps
+
+var ListRecoveryPlans = &sListRecoveryPlans
+
+var ListRecoveryPlanSteps = &sListRecoveryPlanSteps
+
+var ListStagingAccounts = &sListStagingAccounts
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutLaunchAction = &sPutLaunchAction
+
+var ReorderRecoveryPlanSteps = &sReorderRecoveryPlanSteps
+
+var RetryDataReplication = &sRetryDataReplication
+
+var RetryRecoveryPlanExecutionStep = &sRetryRecoveryPlanExecutionStep
+
+var ReverseReplication = &sReverseReplication
+
+var StartFailbackLaunch = &sStartFailbackLaunch
+
+var StartRecovery = &sStartRecovery
+
+var StartRecoveryPlanExecution = &sStartRecoveryPlanExecution
+
+var StartReplication = &sStartReplication
+
+var StartSourceNetworkRecovery = &sStartSourceNetworkRecovery
+
+var StartSourceNetworkReplication = &sStartSourceNetworkReplication
+
+var StopFailback = &sStopFailback
+
+var StopReplication = &sStopReplication
+
+var StopSourceNetworkReplication = &sStopSourceNetworkReplication
+
+var TagResource = &sTagResource
+
+var TerminateRecoveryInstances = &sTerminateRecoveryInstances
+
+var UntagResource = &sUntagResource
+
+var UpdateFailbackReplicationConfiguration = &sUpdateFailbackReplicationConfiguration
+
+var UpdateLaunchConfiguration = &sUpdateLaunchConfiguration
+
+var UpdateLaunchConfigurationTemplate = &sUpdateLaunchConfigurationTemplate
+
+var UpdateRecoveryPlan = &sUpdateRecoveryPlan
+
+var UpdateRecoveryPlanExecutionStep = &sUpdateRecoveryPlanExecutionStep
+
+var UpdateRecoveryPlanStep = &sUpdateRecoveryPlanStep
+
+var UpdateReplicationConfiguration = &sUpdateReplicationConfiguration
+
+var UpdateReplicationConfigurationTemplate = &sUpdateReplicationConfigurationTemplate
+
+var _ElasticDisasterRecoveryService = &s_ElasticDisasterRecoveryService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+var AccessDeniedException_code = &sAccessDeniedException_code
+
+var Account = &sAccount
+var Account_accountID = &sAccount_accountID
+
+var _AccountID = &s_AccountID
+
+var _AccountIDs = &s_AccountIDs
+var _AccountIDs_member = &s_AccountIDs_member
+
+var _Accounts = &s_Accounts
+var _Accounts_member = &s_Accounts_member
+
+var _AgentVersion = &s_AgentVersion
+
+var _ARN = &s_ARN
+
+var _AwsAvailabilityZone = &s_AwsAvailabilityZone
+
+var _AwsRegion = &s_AwsRegion
+
+var _BoundedString = &s_BoundedString
+
+var _CfnStackName = &s_CfnStackName
+
+var _ClientIdempotencyToken = &s_ClientIdempotencyToken
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_code = &sConflictException_code
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _ConversionMap = &s_ConversionMap
+var _ConversionMap_key = &s_ConversionMap_key
+var _ConversionMap_value = &s_ConversionMap_value
+
+var ConversionProperties = &sConversionProperties
+var ConversionProperties_volumeToConversionMap = &sConversionProperties_volumeToConversionMap
+var ConversionProperties_rootVolumeName = &sConversionProperties_rootVolumeName
+var ConversionProperties_forceUefi = &sConversionProperties_forceUefi
+var ConversionProperties_dataTimestamp = &sConversionProperties_dataTimestamp
+var ConversionProperties_volumeToVolumeSize = &sConversionProperties_volumeToVolumeSize
+var ConversionProperties_volumeToProductCodes = &sConversionProperties_volumeToProductCodes
+
+var CPU = &sCPU
+var CPU_cores = &sCPU_cores
+var CPU_modelName = &sCPU_modelName
+
+var _Cpus = &s_Cpus
+var _Cpus_member = &s_Cpus_member
+
+var DataReplicationError = &sDataReplicationError
+var DataReplicationError_error = &sDataReplicationError_error
+var DataReplicationError_rawError = &sDataReplicationError_rawError
+
+var _DataReplicationErrorString = &s_DataReplicationErrorString
+
+var DataReplicationInfo = &sDataReplicationInfo
+var DataReplicationInfo_lagDuration = &sDataReplicationInfo_lagDuration
+var DataReplicationInfo_etaDateTime = &sDataReplicationInfo_etaDateTime
+var DataReplicationInfo_replicatedDisks = &sDataReplicationInfo_replicatedDisks
+var DataReplicationInfo_dataReplicationState = &sDataReplicationInfo_dataReplicationState
+var DataReplicationInfo_dataReplicationInitiation = &sDataReplicationInfo_dataReplicationInitiation
+var DataReplicationInfo_dataReplicationError = &sDataReplicationInfo_dataReplicationError
+var DataReplicationInfo_stagingAvailabilityZone = &sDataReplicationInfo_stagingAvailabilityZone
+var DataReplicationInfo_stagingOutpostArn = &sDataReplicationInfo_stagingOutpostArn
+
+var DataReplicationInfoReplicatedDisk = &sDataReplicationInfoReplicatedDisk
+var DataReplicationInfoReplicatedDisk_deviceName = &sDataReplicationInfoReplicatedDisk_deviceName
+var DataReplicationInfoReplicatedDisk_totalStorageBytes = &sDataReplicationInfoReplicatedDisk_totalStorageBytes
+var DataReplicationInfoReplicatedDisk_replicatedStorageBytes = &sDataReplicationInfoReplicatedDisk_replicatedStorageBytes
+var DataReplicationInfoReplicatedDisk_rescannedStorageBytes = &sDataReplicationInfoReplicatedDisk_rescannedStorageBytes
+var DataReplicationInfoReplicatedDisk_backloggedStorageBytes = &sDataReplicationInfoReplicatedDisk_backloggedStorageBytes
+var DataReplicationInfoReplicatedDisk_volumeStatus = &sDataReplicationInfoReplicatedDisk_volumeStatus
+
+var _DataReplicationInfoReplicatedDisks = &s_DataReplicationInfoReplicatedDisks
+var _DataReplicationInfoReplicatedDisks_member = &s_DataReplicationInfoReplicatedDisks_member
+
+var DataReplicationInitiation = &sDataReplicationInitiation
+var DataReplicationInitiation_startDateTime = &sDataReplicationInitiation_startDateTime
+var DataReplicationInitiation_nextAttemptDateTime = &sDataReplicationInitiation_nextAttemptDateTime
+var DataReplicationInitiation_steps = &sDataReplicationInitiation_steps
+
+var DataReplicationInitiationStep = &sDataReplicationInitiationStep
+var DataReplicationInitiationStep_name = &sDataReplicationInitiationStep_name
+var DataReplicationInitiationStep_status = &sDataReplicationInitiationStep_status
+
+var _DataReplicationInitiationStepName = &s_DataReplicationInitiationStepName
+
+var _DataReplicationInitiationSteps = &s_DataReplicationInitiationSteps
+var _DataReplicationInitiationSteps_member = &s_DataReplicationInitiationSteps_member
+
+var _DataReplicationInitiationStepStatus = &s_DataReplicationInitiationStepStatus
+
+var _DataReplicationState = &s_DataReplicationState
+
+var DescribeJobsRequestFilters = &sDescribeJobsRequestFilters
+var DescribeJobsRequestFilters_jobIDs = &sDescribeJobsRequestFilters_jobIDs
+var DescribeJobsRequestFilters_fromDate = &sDescribeJobsRequestFilters_fromDate
+var DescribeJobsRequestFilters_toDate = &sDescribeJobsRequestFilters_toDate
+
+var _DescribeJobsRequestFiltersJobIDs = &s_DescribeJobsRequestFiltersJobIDs
+var _DescribeJobsRequestFiltersJobIDs_member = &s_DescribeJobsRequestFiltersJobIDs_member
+
+var _DescribeRecoveryInstancesItems = &s_DescribeRecoveryInstancesItems
+var _DescribeRecoveryInstancesItems_member = &s_DescribeRecoveryInstancesItems_member
+
+var DescribeRecoveryInstancesRequestFilters = &sDescribeRecoveryInstancesRequestFilters
+var DescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs = &sDescribeRecoveryInstancesRequestFilters_recoveryInstanceIDs
+var DescribeRecoveryInstancesRequestFilters_sourceServerIDs = &sDescribeRecoveryInstancesRequestFilters_sourceServerIDs
+
+var DescribeRecoverySnapshotsRequestFilters = &sDescribeRecoverySnapshotsRequestFilters
+var DescribeRecoverySnapshotsRequestFilters_fromDateTime = &sDescribeRecoverySnapshotsRequestFilters_fromDateTime
+var DescribeRecoverySnapshotsRequestFilters_toDateTime = &sDescribeRecoverySnapshotsRequestFilters_toDateTime
+
+var DescribeSourceNetworksRequestFilters = &sDescribeSourceNetworksRequestFilters
+var DescribeSourceNetworksRequestFilters_sourceNetworkIDs = &sDescribeSourceNetworksRequestFilters_sourceNetworkIDs
+var DescribeSourceNetworksRequestFilters_originAccountID = &sDescribeSourceNetworksRequestFilters_originAccountID
+var DescribeSourceNetworksRequestFilters_originRegion = &sDescribeSourceNetworksRequestFilters_originRegion
+
+var _DescribeSourceNetworksRequestFiltersIDs = &s_DescribeSourceNetworksRequestFiltersIDs
+var _DescribeSourceNetworksRequestFiltersIDs_member = &s_DescribeSourceNetworksRequestFiltersIDs_member
+
+var DescribeSourceServersRequestFilters = &sDescribeSourceServersRequestFilters
+var DescribeSourceServersRequestFilters_sourceServerIDs = &sDescribeSourceServersRequestFilters_sourceServerIDs
+var DescribeSourceServersRequestFilters_hardwareId = &sDescribeSourceServersRequestFilters_hardwareId
+var DescribeSourceServersRequestFilters_stagingAccountIDs = &sDescribeSourceServersRequestFilters_stagingAccountIDs
+
+var _DescribeSourceServersRequestFiltersIDs = &s_DescribeSourceServersRequestFiltersIDs
+var _DescribeSourceServersRequestFiltersIDs_member = &s_DescribeSourceServersRequestFiltersIDs_member
+
+var Disk = &sDisk
+var Disk_deviceName = &sDisk_deviceName
+var Disk_bytes = &sDisk_bytes
+
+var _Disks = &s_Disks
+var _Disks_member = &s_Disks_member
+
+var _EbsSnapshot = &s_EbsSnapshot
+
+var _EbsSnapshotsList = &s_EbsSnapshotsList
+var _EbsSnapshotsList_member = &s_EbsSnapshotsList_member
+
+var _EbsVolumeID = &s_EbsVolumeID
+
+var _EC2InstanceID = &s_EC2InstanceID
+
+var _EC2InstanceState = &s_EC2InstanceState
+
+var _EC2InstanceType = &s_EC2InstanceType
+
+var ErrorDetail = &sErrorDetail
+var ErrorDetail_message = &sErrorDetail_message
+var ErrorDetail_code = &sErrorDetail_code
+
+var EventResourceData = &sEventResourceData
+var EventResourceData_sourceNetworkData = &sEventResourceData_sourceNetworkData
+
+var ExecutionServerStepConfiguration = &sExecutionServerStepConfiguration
+var ExecutionServerStepConfiguration_servers = &sExecutionServerStepConfiguration_servers
+
+var _ExtensionStatus = &s_ExtensionStatus
+
+var _FailbackLaunchType = &s_FailbackLaunchType
+
+var _FailbackReplicationError = &s_FailbackReplicationError
+
+var _FailbackState = &s_FailbackState
+
+var _FailureReason = &s_FailureReason
+
+var IdentificationHints = &sIdentificationHints
+var IdentificationHints_fqdn = &sIdentificationHints_fqdn
+var IdentificationHints_hostname = &sIdentificationHints_hostname
+var IdentificationHints_vmWareUuid = &sIdentificationHints_vmWareUuid
+var IdentificationHints_awsInstanceID = &sIdentificationHints_awsInstanceID
+
+var _InitiatedBy = &s_InitiatedBy
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var _InternetProtocol = &s_InternetProtocol
+
+var _IPsList = &s_IPsList
+var _IPsList_member = &s_IPsList_member
+
+var _ISO8601DatetimeString = &s_ISO8601DatetimeString
+
+var _ISO8601DurationString = &s_ISO8601DurationString
+
+var Job = &sJob
+var Job_jobID = &sJob_jobID
+var Job_arn = &sJob_arn
+var Job_type = &sJob_type
+var Job_initiatedBy = &sJob_initiatedBy
+var Job_creationDateTime = &sJob_creationDateTime
+var Job_endDateTime = &sJob_endDateTime
+var Job_status = &sJob_status
+var Job_participatingServers = &sJob_participatingServers
+var Job_tags = &sJob_tags
+var Job_participatingResources = &sJob_participatingResources
+
+var _JobEventAttemptCount = &s_JobEventAttemptCount
+
+var _JobID = &s_JobID
+
+var JobLog = &sJobLog
+var JobLog_logDateTime = &sJobLog_logDateTime
+var JobLog_event = &sJobLog_event
+var JobLog_eventData = &sJobLog_eventData
+
+var _JobLogEvent = &s_JobLogEvent
+
+var JobLogEventData = &sJobLogEventData
+var JobLogEventData_sourceServerID = &sJobLogEventData_sourceServerID
+var JobLogEventData_conversionServerID = &sJobLogEventData_conversionServerID
+var JobLogEventData_targetInstanceID = &sJobLogEventData_targetInstanceID
+var JobLogEventData_rawError = &sJobLogEventData_rawError
+var JobLogEventData_conversionProperties = &sJobLogEventData_conversionProperties
+var JobLogEventData_eventResourceData = &sJobLogEventData_eventResourceData
+var JobLogEventData_attemptCount = &sJobLogEventData_attemptCount
+var JobLogEventData_maxAttemptsCount = &sJobLogEventData_maxAttemptsCount
+
+var _JobLogs = &s_JobLogs
+var _JobLogs_member = &s_JobLogs_member
+
+var _JobsList = &s_JobsList
+var _JobsList_member = &s_JobsList_member
+
+var _JobStatus = &s_JobStatus
+
+var _JobType = &s_JobType
+
+var _LargeBoundedString = &s_LargeBoundedString
+
+var _LastLaunchResult = &s_LastLaunchResult
+
+var _LastLaunchType = &s_LastLaunchType
+
+var LaunchAction = &sLaunchAction
+var LaunchAction_actionId = &sLaunchAction_actionId
+var LaunchAction_actionCode = &sLaunchAction_actionCode
+var LaunchAction_type = &sLaunchAction_type
+var LaunchAction_name = &sLaunchAction_name
+var LaunchAction_active = &sLaunchAction_active
+var LaunchAction_order = &sLaunchAction_order
+var LaunchAction_actionVersion = &sLaunchAction_actionVersion
+var LaunchAction_optional = &sLaunchAction_optional
+var LaunchAction_parameters = &sLaunchAction_parameters
+var LaunchAction_description = &sLaunchAction_description
+var LaunchAction_category = &sLaunchAction_category
+
+var _LaunchActionCategory = &s_LaunchActionCategory
+
+var _LaunchActionDescription = &s_LaunchActionDescription
+
+var _LaunchActionId = &s_LaunchActionId
+
+var _LaunchActionIds = &s_LaunchActionIds
+var _LaunchActionIds_member = &s_LaunchActionIds_member
+
+var _LaunchActionName = &s_LaunchActionName
+
+var _LaunchActionOrder = &s_LaunchActionOrder
+
+var LaunchActionParameter = &sLaunchActionParameter
+var LaunchActionParameter_value = &sLaunchActionParameter_value
+var LaunchActionParameter_type = &sLaunchActionParameter_type
+
+var _LaunchActionParameterName = &s_LaunchActionParameterName
+
+var _LaunchActionParameters = &s_LaunchActionParameters
+var _LaunchActionParameters_key = &s_LaunchActionParameters_key
+var _LaunchActionParameters_value = &s_LaunchActionParameters_value
+
+var _LaunchActionParameterType = &s_LaunchActionParameterType
+
+var _LaunchActionParameterValue = &s_LaunchActionParameterValue
+
+var _LaunchActionResourceId = &s_LaunchActionResourceId
+
+var LaunchActionRun = &sLaunchActionRun
+var LaunchActionRun_action = &sLaunchActionRun_action
+var LaunchActionRun_runId = &sLaunchActionRun_runId
+var LaunchActionRun_status = &sLaunchActionRun_status
+var LaunchActionRun_failureReason = &sLaunchActionRun_failureReason
+
+var _LaunchActionRunId = &s_LaunchActionRunId
+
+var _LaunchActionRuns = &s_LaunchActionRuns
+var _LaunchActionRuns_member = &s_LaunchActionRuns_member
+
+var _LaunchActionRunStatus = &s_LaunchActionRunStatus
+
+var _LaunchActions = &s_LaunchActions
+var _LaunchActions_member = &s_LaunchActions_member
+
+var LaunchActionsRequestFilters = &sLaunchActionsRequestFilters
+var LaunchActionsRequestFilters_actionIds = &sLaunchActionsRequestFilters_actionIds
+
+var LaunchActionsStatus = &sLaunchActionsStatus
+var LaunchActionsStatus_ssmAgentDiscoveryDatetime = &sLaunchActionsStatus_ssmAgentDiscoveryDatetime
+var LaunchActionsStatus_runs = &sLaunchActionsStatus_runs
+
+var _LaunchActionType = &s_LaunchActionType
+
+var _LaunchActionVersion = &s_LaunchActionVersion
+
+var LaunchConfigurationTemplate = &sLaunchConfigurationTemplate
+var LaunchConfigurationTemplate_launchConfigurationTemplateID = &sLaunchConfigurationTemplate_launchConfigurationTemplateID
+var LaunchConfigurationTemplate_arn = &sLaunchConfigurationTemplate_arn
+var LaunchConfigurationTemplate_tags = &sLaunchConfigurationTemplate_tags
+var LaunchConfigurationTemplate_launchDisposition = &sLaunchConfigurationTemplate_launchDisposition
+var LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod = &sLaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod
+var LaunchConfigurationTemplate_copyPrivateIp = &sLaunchConfigurationTemplate_copyPrivateIp
+var LaunchConfigurationTemplate_copyTags = &sLaunchConfigurationTemplate_copyTags
+var LaunchConfigurationTemplate_licensing = &sLaunchConfigurationTemplate_licensing
+var LaunchConfigurationTemplate_exportBucketArn = &sLaunchConfigurationTemplate_exportBucketArn
+var LaunchConfigurationTemplate_postLaunchEnabled = &sLaunchConfigurationTemplate_postLaunchEnabled
+var LaunchConfigurationTemplate_launchIntoSourceInstance = &sLaunchConfigurationTemplate_launchIntoSourceInstance
+var LaunchConfigurationTemplate_recoveryMode = &sLaunchConfigurationTemplate_recoveryMode
+
+var _LaunchConfigurationTemplateID = &s_LaunchConfigurationTemplateID
+
+var _LaunchConfigurationTemplateIDs = &s_LaunchConfigurationTemplateIDs
+var _LaunchConfigurationTemplateIDs_member = &s_LaunchConfigurationTemplateIDs_member
+
+var _LaunchConfigurationTemplates = &s_LaunchConfigurationTemplates
+var _LaunchConfigurationTemplates_member = &s_LaunchConfigurationTemplates_member
+
+var _LaunchDisposition = &s_LaunchDisposition
+
+var LaunchIntoInstanceProperties = &sLaunchIntoInstanceProperties
+var LaunchIntoInstanceProperties_launchIntoEC2InstanceID = &sLaunchIntoInstanceProperties_launchIntoEC2InstanceID
+
+var _LaunchStatus = &s_LaunchStatus
+
+var Licensing = &sLicensing
+var Licensing_osByol = &sLicensing_osByol
+
+var LifeCycle = &sLifeCycle
+var LifeCycle_addedToServiceDateTime = &sLifeCycle_addedToServiceDateTime
+var LifeCycle_firstByteDateTime = &sLifeCycle_firstByteDateTime
+var LifeCycle_elapsedReplicationDuration = &sLifeCycle_elapsedReplicationDuration
+var LifeCycle_lastSeenByServiceDateTime = &sLifeCycle_lastSeenByServiceDateTime
+var LifeCycle_lastLaunch = &sLifeCycle_lastLaunch
+
+var LifeCycleLastLaunch = &sLifeCycleLastLaunch
+var LifeCycleLastLaunch_initiated = &sLifeCycleLastLaunch_initiated
+var LifeCycleLastLaunch_status = &sLifeCycleLastLaunch_status
+
+var LifeCycleLastLaunchInitiated = &sLifeCycleLastLaunchInitiated
+var LifeCycleLastLaunchInitiated_apiCallDateTime = &sLifeCycleLastLaunchInitiated_apiCallDateTime
+var LifeCycleLastLaunchInitiated_jobID = &sLifeCycleLastLaunchInitiated_jobID
+var LifeCycleLastLaunchInitiated_type = &sLifeCycleLastLaunchInitiated_type
+
+var ListRecoveryPlanExecutionStepsFilter = &sListRecoveryPlanExecutionStepsFilter
+var ListRecoveryPlanExecutionStepsFilter_status = &sListRecoveryPlanExecutionStepsFilter_status
+
+var _MaxResultsReplicatingSourceServers = &s_MaxResultsReplicatingSourceServers
+
+var _MaxResultsType = &s_MaxResultsType
+
+var NetworkInterface = &sNetworkInterface
+var NetworkInterface_macAddress = &sNetworkInterface_macAddress
+var NetworkInterface_ips = &sNetworkInterface_ips
+var NetworkInterface_isPrimary = &sNetworkInterface_isPrimary
+
+var _NetworkInterfaces = &s_NetworkInterfaces
+var _NetworkInterfaces_member = &s_NetworkInterfaces_member
+
+var _OriginEnvironment = &s_OriginEnvironment
+
+var OS = &sOS
+var OS_fullString = &sOS_fullString
+
+var _OutpostARN = &s_OutpostARN
+
+var _PaginationToken = &s_PaginationToken
+
+var ParticipatingResource = &sParticipatingResource
+var ParticipatingResource_participatingResourceID = &sParticipatingResource_participatingResourceID
+var ParticipatingResource_launchStatus = &sParticipatingResource_launchStatus
+
+var ParticipatingResourceID = &sParticipatingResourceID
+var ParticipatingResourceID_sourceNetworkID = &sParticipatingResourceID_sourceNetworkID
+
+var _ParticipatingResources = &s_ParticipatingResources
+var _ParticipatingResources_member = &s_ParticipatingResources_member
+
+var ParticipatingServer = &sParticipatingServer
+var ParticipatingServer_sourceServerID = &sParticipatingServer_sourceServerID
+var ParticipatingServer_recoveryInstanceID = &sParticipatingServer_recoveryInstanceID
+var ParticipatingServer_launchStatus = &sParticipatingServer_launchStatus
+var ParticipatingServer_launchActionsStatus = &sParticipatingServer_launchActionsStatus
+
+var _ParticipatingServers = &s_ParticipatingServers
+var _ParticipatingServers_member = &s_ParticipatingServers_member
+
+var _PITPolicy = &s_PITPolicy
+var _PITPolicy_member = &s_PITPolicy_member
+
+var PITPolicyRule = &sPITPolicyRule
+var PITPolicyRule_ruleID = &sPITPolicyRule_ruleID
+var PITPolicyRule_units = &sPITPolicyRule_units
+var PITPolicyRule_interval = &sPITPolicyRule_interval
+var PITPolicyRule_retentionDuration = &sPITPolicyRule_retentionDuration
+var PITPolicyRule_enabled = &sPITPolicyRule_enabled
+
+var _PITPolicyRuleUnits = &s_PITPolicyRuleUnits
+
+var _PositiveInteger = &s_PositiveInteger
+
+var ProductCode = &sProductCode
+var ProductCode_productCodeId = &sProductCode_productCodeId
+var ProductCode_productCodeMode = &sProductCode_productCodeMode
+
+var _ProductCodeId = &s_ProductCodeId
+
+var _ProductCodeMode = &s_ProductCodeMode
+
+var _ProductCodes = &s_ProductCodes
+var _ProductCodes_member = &s_ProductCodes_member
+
+var RecoveryInstance = &sRecoveryInstance
+var RecoveryInstance_ec2InstanceID = &sRecoveryInstance_ec2InstanceID
+var RecoveryInstance_ec2InstanceState = &sRecoveryInstance_ec2InstanceState
+var RecoveryInstance_jobID = &sRecoveryInstance_jobID
+var RecoveryInstance_recoveryInstanceID = &sRecoveryInstance_recoveryInstanceID
+var RecoveryInstance_sourceServerID = &sRecoveryInstance_sourceServerID
+var RecoveryInstance_arn = &sRecoveryInstance_arn
+var RecoveryInstance_tags = &sRecoveryInstance_tags
+var RecoveryInstance_failback = &sRecoveryInstance_failback
+var RecoveryInstance_dataReplicationInfo = &sRecoveryInstance_dataReplicationInfo
+var RecoveryInstance_recoveryInstanceProperties = &sRecoveryInstance_recoveryInstanceProperties
+var RecoveryInstance_pointInTimeSnapshotDateTime = &sRecoveryInstance_pointInTimeSnapshotDateTime
+var RecoveryInstance_isDrill = &sRecoveryInstance_isDrill
+var RecoveryInstance_originEnvironment = &sRecoveryInstance_originEnvironment
+var RecoveryInstance_originAvailabilityZone = &sRecoveryInstance_originAvailabilityZone
+var RecoveryInstance_agentVersion = &sRecoveryInstance_agentVersion
+var RecoveryInstance_sourceOutpostArn = &sRecoveryInstance_sourceOutpostArn
+
+var RecoveryInstanceDataReplicationError = &sRecoveryInstanceDataReplicationError
+var RecoveryInstanceDataReplicationError_error = &sRecoveryInstanceDataReplicationError_error
+var RecoveryInstanceDataReplicationError_rawError = &sRecoveryInstanceDataReplicationError_rawError
+
+var RecoveryInstanceDataReplicationInfo = &sRecoveryInstanceDataReplicationInfo
+var RecoveryInstanceDataReplicationInfo_lagDuration = &sRecoveryInstanceDataReplicationInfo_lagDuration
+var RecoveryInstanceDataReplicationInfo_etaDateTime = &sRecoveryInstanceDataReplicationInfo_etaDateTime
+var RecoveryInstanceDataReplicationInfo_replicatedDisks = &sRecoveryInstanceDataReplicationInfo_replicatedDisks
+var RecoveryInstanceDataReplicationInfo_dataReplicationState = &sRecoveryInstanceDataReplicationInfo_dataReplicationState
+var RecoveryInstanceDataReplicationInfo_dataReplicationInitiation = &sRecoveryInstanceDataReplicationInfo_dataReplicationInitiation
+var RecoveryInstanceDataReplicationInfo_dataReplicationError = &sRecoveryInstanceDataReplicationInfo_dataReplicationError
+var RecoveryInstanceDataReplicationInfo_stagingAvailabilityZone = &sRecoveryInstanceDataReplicationInfo_stagingAvailabilityZone
+var RecoveryInstanceDataReplicationInfo_stagingOutpostArn = &sRecoveryInstanceDataReplicationInfo_stagingOutpostArn
+
+var RecoveryInstanceDataReplicationInfoReplicatedDisk = &sRecoveryInstanceDataReplicationInfoReplicatedDisk
+var RecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName = &sRecoveryInstanceDataReplicationInfoReplicatedDisk_deviceName
+var RecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes = &sRecoveryInstanceDataReplicationInfoReplicatedDisk_totalStorageBytes
+var RecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes = &sRecoveryInstanceDataReplicationInfoReplicatedDisk_replicatedStorageBytes
+var RecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes = &sRecoveryInstanceDataReplicationInfoReplicatedDisk_rescannedStorageBytes
+var RecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes = &sRecoveryInstanceDataReplicationInfoReplicatedDisk_backloggedStorageBytes
+
+var _RecoveryInstanceDataReplicationInfoReplicatedDisks = &s_RecoveryInstanceDataReplicationInfoReplicatedDisks
+var _RecoveryInstanceDataReplicationInfoReplicatedDisks_member = &s_RecoveryInstanceDataReplicationInfoReplicatedDisks_member
+
+var RecoveryInstanceDataReplicationInitiation = &sRecoveryInstanceDataReplicationInitiation
+var RecoveryInstanceDataReplicationInitiation_startDateTime = &sRecoveryInstanceDataReplicationInitiation_startDateTime
+var RecoveryInstanceDataReplicationInitiation_steps = &sRecoveryInstanceDataReplicationInitiation_steps
+
+var RecoveryInstanceDataReplicationInitiationStep = &sRecoveryInstanceDataReplicationInitiationStep
+var RecoveryInstanceDataReplicationInitiationStep_name = &sRecoveryInstanceDataReplicationInitiationStep_name
+var RecoveryInstanceDataReplicationInitiationStep_status = &sRecoveryInstanceDataReplicationInitiationStep_status
+
+var _RecoveryInstanceDataReplicationInitiationStepName = &s_RecoveryInstanceDataReplicationInitiationStepName
+
+var _RecoveryInstanceDataReplicationInitiationSteps = &s_RecoveryInstanceDataReplicationInitiationSteps
+var _RecoveryInstanceDataReplicationInitiationSteps_member = &s_RecoveryInstanceDataReplicationInitiationSteps_member
+
+var _RecoveryInstanceDataReplicationInitiationStepStatus = &s_RecoveryInstanceDataReplicationInitiationStepStatus
+
+var _RecoveryInstanceDataReplicationState = &s_RecoveryInstanceDataReplicationState
+
+var RecoveryInstanceDisk = &sRecoveryInstanceDisk
+var RecoveryInstanceDisk_internalDeviceName = &sRecoveryInstanceDisk_internalDeviceName
+var RecoveryInstanceDisk_bytes = &sRecoveryInstanceDisk_bytes
+var RecoveryInstanceDisk_ebsVolumeID = &sRecoveryInstanceDisk_ebsVolumeID
+
+var _RecoveryInstanceDisks = &s_RecoveryInstanceDisks
+var _RecoveryInstanceDisks_member = &s_RecoveryInstanceDisks_member
+
+var RecoveryInstanceFailback = &sRecoveryInstanceFailback
+var RecoveryInstanceFailback_failbackClientID = &sRecoveryInstanceFailback_failbackClientID
+var RecoveryInstanceFailback_failbackJobID = &sRecoveryInstanceFailback_failbackJobID
+var RecoveryInstanceFailback_failbackInitiationTime = &sRecoveryInstanceFailback_failbackInitiationTime
+var RecoveryInstanceFailback_state = &sRecoveryInstanceFailback_state
+var RecoveryInstanceFailback_agentLastSeenByServiceDateTime = &sRecoveryInstanceFailback_agentLastSeenByServiceDateTime
+var RecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime = &sRecoveryInstanceFailback_failbackClientLastSeenByServiceDateTime
+var RecoveryInstanceFailback_failbackToOriginalServer = &sRecoveryInstanceFailback_failbackToOriginalServer
+var RecoveryInstanceFailback_firstByteDateTime = &sRecoveryInstanceFailback_firstByteDateTime
+var RecoveryInstanceFailback_elapsedReplicationDuration = &sRecoveryInstanceFailback_elapsedReplicationDuration
+var RecoveryInstanceFailback_failbackLaunchType = &sRecoveryInstanceFailback_failbackLaunchType
+
+var _RecoveryInstanceID = &s_RecoveryInstanceID
+
+var _RecoveryInstanceIDs = &s_RecoveryInstanceIDs
+var _RecoveryInstanceIDs_member = &s_RecoveryInstanceIDs_member
+
+var RecoveryInstanceProperties = &sRecoveryInstanceProperties
+var RecoveryInstanceProperties_lastUpdatedDateTime = &sRecoveryInstanceProperties_lastUpdatedDateTime
+var RecoveryInstanceProperties_identificationHints = &sRecoveryInstanceProperties_identificationHints
+var RecoveryInstanceProperties_networkInterfaces = &sRecoveryInstanceProperties_networkInterfaces
+var RecoveryInstanceProperties_disks = &sRecoveryInstanceProperties_disks
+var RecoveryInstanceProperties_cpus = &sRecoveryInstanceProperties_cpus
+var RecoveryInstanceProperties_ramBytes = &sRecoveryInstanceProperties_ramBytes
+var RecoveryInstanceProperties_os = &sRecoveryInstanceProperties_os
+
+var _RecoveryInstancesForTerminationRequest = &s_RecoveryInstancesForTerminationRequest
+var _RecoveryInstancesForTerminationRequest_member = &s_RecoveryInstancesForTerminationRequest_member
+
+var RecoveryLifeCycle = &sRecoveryLifeCycle
+var RecoveryLifeCycle_apiCallDateTime = &sRecoveryLifeCycle_apiCallDateTime
+var RecoveryLifeCycle_jobID = &sRecoveryLifeCycle_jobID
+var RecoveryLifeCycle_lastRecoveryResult = &sRecoveryLifeCycle_lastRecoveryResult
+
+var _RecoveryMode = &s_RecoveryMode
+
+var RecoveryPlan = &sRecoveryPlan
+var RecoveryPlan_recoveryPlanArn = &sRecoveryPlan_recoveryPlanArn
+var RecoveryPlan_name = &sRecoveryPlan_name
+var RecoveryPlan_description = &sRecoveryPlan_description
+var RecoveryPlan_status = &sRecoveryPlan_status
+var RecoveryPlan_createdAt = &sRecoveryPlan_createdAt
+var RecoveryPlan_updatedAt = &sRecoveryPlan_updatedAt
+var RecoveryPlan_tags = &sRecoveryPlan_tags
+
+var _RecoveryPlanDescription = &s_RecoveryPlanDescription
+
+var RecoveryPlanExecution = &sRecoveryPlanExecution
+var RecoveryPlanExecution_recoveryPlanExecutionArn = &sRecoveryPlanExecution_recoveryPlanExecutionArn
+var RecoveryPlanExecution_recoveryPlanArn = &sRecoveryPlanExecution_recoveryPlanArn
+var RecoveryPlanExecution_mode = &sRecoveryPlanExecution_mode
+var RecoveryPlanExecution_status = &sRecoveryPlanExecution_status
+var RecoveryPlanExecution_startedAt = &sRecoveryPlanExecution_startedAt
+var RecoveryPlanExecution_completedAt = &sRecoveryPlanExecution_completedAt
+var RecoveryPlanExecution_errorDetail = &sRecoveryPlanExecution_errorDetail
+var RecoveryPlanExecution_tags = &sRecoveryPlanExecution_tags
+
+var _RecoveryPlanExecutionMode = &s_RecoveryPlanExecutionMode
+
+var RecoveryPlanExecutionServer = &sRecoveryPlanExecutionServer
+var RecoveryPlanExecutionServer_serverArn = &sRecoveryPlanExecutionServer_serverArn
+var RecoveryPlanExecutionServer_impactLevel = &sRecoveryPlanExecutionServer_impactLevel
+var RecoveryPlanExecutionServer_jobID = &sRecoveryPlanExecutionServer_jobID
+
+var _RecoveryPlanExecutionServers = &s_RecoveryPlanExecutionServers
+var _RecoveryPlanExecutionServers_member = &s_RecoveryPlanExecutionServers_member
+
+var RecoveryPlanExecutionSourceServer = &sRecoveryPlanExecutionSourceServer
+var RecoveryPlanExecutionSourceServer_sourceServerID = &sRecoveryPlanExecutionSourceServer_sourceServerID
+var RecoveryPlanExecutionSourceServer_recoverySnapshotID = &sRecoveryPlanExecutionSourceServer_recoverySnapshotID
+
+var _RecoveryPlanExecutionSourceServerList = &s_RecoveryPlanExecutionSourceServerList
+var _RecoveryPlanExecutionSourceServerList_member = &s_RecoveryPlanExecutionSourceServerList_member
+
+var _RecoveryPlanExecutionStatus = &s_RecoveryPlanExecutionStatus
+
+var RecoveryPlanExecutionStep = &sRecoveryPlanExecutionStep
+var RecoveryPlanExecutionStep_recoveryPlanExecutionStepArn = &sRecoveryPlanExecutionStep_recoveryPlanExecutionStepArn
+var RecoveryPlanExecutionStep_stepIndex = &sRecoveryPlanExecutionStep_stepIndex
+var RecoveryPlanExecutionStep_status = &sRecoveryPlanExecutionStep_status
+var RecoveryPlanExecutionStep_stepName = &sRecoveryPlanExecutionStep_stepName
+var RecoveryPlanExecutionStep_configuration = &sRecoveryPlanExecutionStep_configuration
+var RecoveryPlanExecutionStep_errorDetail = &sRecoveryPlanExecutionStep_errorDetail
+var RecoveryPlanExecutionStep_attempt = &sRecoveryPlanExecutionStep_attempt
+var RecoveryPlanExecutionStep_createdAt = &sRecoveryPlanExecutionStep_createdAt
+var RecoveryPlanExecutionStep_updatedAt = &sRecoveryPlanExecutionStep_updatedAt
+
+var RecoveryPlanExecutionStepConfiguration = &sRecoveryPlanExecutionStepConfiguration
+var RecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration = &sRecoveryPlanExecutionStepConfiguration_executionServerStepConfiguration
+var RecoveryPlanExecutionStepConfiguration_waitStepConfiguration = &sRecoveryPlanExecutionStepConfiguration_waitStepConfiguration
+
+var _RecoveryPlanExecutionStepStatus = &s_RecoveryPlanExecutionStepStatus
+
+var RecoveryPlanExecutionStepSummary = &sRecoveryPlanExecutionStepSummary
+var RecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn = &sRecoveryPlanExecutionStepSummary_recoveryPlanExecutionStepArn
+var RecoveryPlanExecutionStepSummary_stepName = &sRecoveryPlanExecutionStepSummary_stepName
+var RecoveryPlanExecutionStepSummary_stepIndex = &sRecoveryPlanExecutionStepSummary_stepIndex
+var RecoveryPlanExecutionStepSummary_status = &sRecoveryPlanExecutionStepSummary_status
+var RecoveryPlanExecutionStepSummary_configuration = &sRecoveryPlanExecutionStepSummary_configuration
+var RecoveryPlanExecutionStepSummary_errorDetail = &sRecoveryPlanExecutionStepSummary_errorDetail
+
+var _RecoveryPlanExecutionStepSummaryList = &s_RecoveryPlanExecutionStepSummaryList
+var _RecoveryPlanExecutionStepSummaryList_member = &s_RecoveryPlanExecutionStepSummaryList_member
+
+var RecoveryPlanExecutionSummary = &sRecoveryPlanExecutionSummary
+var RecoveryPlanExecutionSummary_recoveryPlanExecutionArn = &sRecoveryPlanExecutionSummary_recoveryPlanExecutionArn
+var RecoveryPlanExecutionSummary_recoveryPlanArn = &sRecoveryPlanExecutionSummary_recoveryPlanArn
+var RecoveryPlanExecutionSummary_mode = &sRecoveryPlanExecutionSummary_mode
+var RecoveryPlanExecutionSummary_status = &sRecoveryPlanExecutionSummary_status
+var RecoveryPlanExecutionSummary_startedAt = &sRecoveryPlanExecutionSummary_startedAt
+var RecoveryPlanExecutionSummary_errorDetail = &sRecoveryPlanExecutionSummary_errorDetail
+
+var _RecoveryPlanExecutionSummaryList = &s_RecoveryPlanExecutionSummaryList
+var _RecoveryPlanExecutionSummaryList_member = &s_RecoveryPlanExecutionSummaryList_member
+
+var _RecoveryPlanName = &s_RecoveryPlanName
+
+var RecoveryPlanServer = &sRecoveryPlanServer
+var RecoveryPlanServer_serverArn = &sRecoveryPlanServer_serverArn
+var RecoveryPlanServer_impactLevel = &sRecoveryPlanServer_impactLevel
+
+var _RecoveryPlanServerImpactLevel = &s_RecoveryPlanServerImpactLevel
+
+var _RecoveryPlanServers = &s_RecoveryPlanServers
+var _RecoveryPlanServers_member = &s_RecoveryPlanServers_member
+
+var _RecoveryPlanStatus = &s_RecoveryPlanStatus
+
+var RecoveryPlanStep = &sRecoveryPlanStep
+var RecoveryPlanStep_recoveryPlanStepArn = &sRecoveryPlanStep_recoveryPlanStepArn
+var RecoveryPlanStep_stepOrder = &sRecoveryPlanStep_stepOrder
+var RecoveryPlanStep_stepName = &sRecoveryPlanStep_stepName
+var RecoveryPlanStep_configuration = &sRecoveryPlanStep_configuration
+var RecoveryPlanStep_createdAt = &sRecoveryPlanStep_createdAt
+var RecoveryPlanStep_updatedAt = &sRecoveryPlanStep_updatedAt
+
+var _RecoveryPlanStepArnList = &s_RecoveryPlanStepArnList
+var _RecoveryPlanStepArnList_member = &s_RecoveryPlanStepArnList_member
+
+var RecoveryPlanStepConfiguration = &sRecoveryPlanStepConfiguration
+var RecoveryPlanStepConfiguration_serverStepConfiguration = &sRecoveryPlanStepConfiguration_serverStepConfiguration
+var RecoveryPlanStepConfiguration_waitStepConfiguration = &sRecoveryPlanStepConfiguration_waitStepConfiguration
+
+var _RecoveryPlanStepList = &s_RecoveryPlanStepList
+var _RecoveryPlanStepList_member = &s_RecoveryPlanStepList_member
+
+var _RecoveryPlanStepName = &s_RecoveryPlanStepName
+
+var _RecoveryPlanStepOrder = &s_RecoveryPlanStepOrder
+
+var RecoveryPlanSummary = &sRecoveryPlanSummary
+var RecoveryPlanSummary_recoveryPlanArn = &sRecoveryPlanSummary_recoveryPlanArn
+var RecoveryPlanSummary_name = &sRecoveryPlanSummary_name
+var RecoveryPlanSummary_status = &sRecoveryPlanSummary_status
+var RecoveryPlanSummary_createdAt = &sRecoveryPlanSummary_createdAt
+var RecoveryPlanSummary_updatedAt = &sRecoveryPlanSummary_updatedAt
+
+var _RecoveryPlanSummaryList = &s_RecoveryPlanSummaryList
+var _RecoveryPlanSummaryList_member = &s_RecoveryPlanSummaryList_member
+
+var _RecoveryResult = &s_RecoveryResult
+
+var RecoverySnapshot = &sRecoverySnapshot
+var RecoverySnapshot_snapshotID = &sRecoverySnapshot_snapshotID
+var RecoverySnapshot_sourceServerID = &sRecoverySnapshot_sourceServerID
+var RecoverySnapshot_expectedTimestamp = &sRecoverySnapshot_expectedTimestamp
+var RecoverySnapshot_timestamp = &sRecoverySnapshot_timestamp
+var RecoverySnapshot_ebsSnapshots = &sRecoverySnapshot_ebsSnapshots
+
+var _RecoverySnapshotID = &s_RecoverySnapshotID
+
+var _RecoverySnapshotsList = &s_RecoverySnapshotsList
+var _RecoverySnapshotsList_member = &s_RecoverySnapshotsList_member
+
+var _RecoverySnapshotsOrder = &s_RecoverySnapshotsOrder
+
+var _ReplicationConfigurationDataPlaneRouting = &s_ReplicationConfigurationDataPlaneRouting
+
+var _ReplicationConfigurationDefaultLargeStagingDiskType = &s_ReplicationConfigurationDefaultLargeStagingDiskType
+
+var _ReplicationConfigurationEbsEncryption = &s_ReplicationConfigurationEbsEncryption
+
+var ReplicationConfigurationReplicatedDisk = &sReplicationConfigurationReplicatedDisk
+var ReplicationConfigurationReplicatedDisk_deviceName = &sReplicationConfigurationReplicatedDisk_deviceName
+var ReplicationConfigurationReplicatedDisk_isBootDisk = &sReplicationConfigurationReplicatedDisk_isBootDisk
+var ReplicationConfigurationReplicatedDisk_stagingDiskType = &sReplicationConfigurationReplicatedDisk_stagingDiskType
+var ReplicationConfigurationReplicatedDisk_iops = &sReplicationConfigurationReplicatedDisk_iops
+var ReplicationConfigurationReplicatedDisk_throughput = &sReplicationConfigurationReplicatedDisk_throughput
+var ReplicationConfigurationReplicatedDisk_optimizedStagingDiskType = &sReplicationConfigurationReplicatedDisk_optimizedStagingDiskType
+
+var _ReplicationConfigurationReplicatedDisks = &s_ReplicationConfigurationReplicatedDisks
+var _ReplicationConfigurationReplicatedDisks_member = &s_ReplicationConfigurationReplicatedDisks_member
+
+var _ReplicationConfigurationReplicatedDiskStagingDiskType = &s_ReplicationConfigurationReplicatedDiskStagingDiskType
+
+var ReplicationConfigurationTemplate = &sReplicationConfigurationTemplate
+var ReplicationConfigurationTemplate_replicationConfigurationTemplateID = &sReplicationConfigurationTemplate_replicationConfigurationTemplateID
+var ReplicationConfigurationTemplate_arn = &sReplicationConfigurationTemplate_arn
+var ReplicationConfigurationTemplate_stagingAreaSubnetId = &sReplicationConfigurationTemplate_stagingAreaSubnetId
+var ReplicationConfigurationTemplate_associateDefaultSecurityGroup = &sReplicationConfigurationTemplate_associateDefaultSecurityGroup
+var ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs = &sReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs
+var ReplicationConfigurationTemplate_replicationServerInstanceType = &sReplicationConfigurationTemplate_replicationServerInstanceType
+var ReplicationConfigurationTemplate_useDedicatedReplicationServer = &sReplicationConfigurationTemplate_useDedicatedReplicationServer
+var ReplicationConfigurationTemplate_defaultLargeStagingDiskType = &sReplicationConfigurationTemplate_defaultLargeStagingDiskType
+var ReplicationConfigurationTemplate_ebsEncryption = &sReplicationConfigurationTemplate_ebsEncryption
+var ReplicationConfigurationTemplate_ebsEncryptionKeyArn = &sReplicationConfigurationTemplate_ebsEncryptionKeyArn
+var ReplicationConfigurationTemplate_bandwidthThrottling = &sReplicationConfigurationTemplate_bandwidthThrottling
+var ReplicationConfigurationTemplate_dataPlaneRouting = &sReplicationConfigurationTemplate_dataPlaneRouting
+var ReplicationConfigurationTemplate_createPublicIP = &sReplicationConfigurationTemplate_createPublicIP
+var ReplicationConfigurationTemplate_stagingAreaTags = &sReplicationConfigurationTemplate_stagingAreaTags
+var ReplicationConfigurationTemplate_tags = &sReplicationConfigurationTemplate_tags
+var ReplicationConfigurationTemplate_pitPolicy = &sReplicationConfigurationTemplate_pitPolicy
+var ReplicationConfigurationTemplate_autoReplicateNewDisks = &sReplicationConfigurationTemplate_autoReplicateNewDisks
+var ReplicationConfigurationTemplate_internetProtocol = &sReplicationConfigurationTemplate_internetProtocol
+
+var _ReplicationConfigurationTemplateID = &s_ReplicationConfigurationTemplateID
+
+var _ReplicationConfigurationTemplateIDs = &s_ReplicationConfigurationTemplateIDs
+var _ReplicationConfigurationTemplateIDs_member = &s_ReplicationConfigurationTemplateIDs_member
+
+var _ReplicationConfigurationTemplates = &s_ReplicationConfigurationTemplates
+var _ReplicationConfigurationTemplates_member = &s_ReplicationConfigurationTemplates_member
+
+var _ReplicationDirection = &s_ReplicationDirection
+
+var _ReplicationServersSecurityGroupsIDs = &s_ReplicationServersSecurityGroupsIDs
+var _ReplicationServersSecurityGroupsIDs_member = &s_ReplicationServersSecurityGroupsIDs_member
+
+var _ReplicationStatus = &s_ReplicationStatus
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_code = &sResourceNotFoundException_code
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _SecurityGroupID = &s_SecurityGroupID
+
+var _SensitiveBoundedString = &s_SensitiveBoundedString
+
+var ServerStepConfiguration = &sServerStepConfiguration
+var ServerStepConfiguration_servers = &sServerStepConfiguration_servers
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_code = &sServiceQuotaExceededException_code
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SmallBoundedString = &s_SmallBoundedString
+
+var SourceCloudProperties = &sSourceCloudProperties
+var SourceCloudProperties_originAccountID = &sSourceCloudProperties_originAccountID
+var SourceCloudProperties_originRegion = &sSourceCloudProperties_originRegion
+var SourceCloudProperties_originAvailabilityZone = &sSourceCloudProperties_originAvailabilityZone
+var SourceCloudProperties_sourceOutpostArn = &sSourceCloudProperties_sourceOutpostArn
+
+var SourceNetwork = &sSourceNetwork
+var SourceNetwork_sourceNetworkID = &sSourceNetwork_sourceNetworkID
+var SourceNetwork_sourceVpcID = &sSourceNetwork_sourceVpcID
+var SourceNetwork_arn = &sSourceNetwork_arn
+var SourceNetwork_tags = &sSourceNetwork_tags
+var SourceNetwork_replicationStatus = &sSourceNetwork_replicationStatus
+var SourceNetwork_replicationStatusDetails = &sSourceNetwork_replicationStatusDetails
+var SourceNetwork_cfnStackName = &sSourceNetwork_cfnStackName
+var SourceNetwork_sourceRegion = &sSourceNetwork_sourceRegion
+var SourceNetwork_sourceAccountID = &sSourceNetwork_sourceAccountID
+var SourceNetwork_lastRecovery = &sSourceNetwork_lastRecovery
+var SourceNetwork_launchedVpcID = &sSourceNetwork_launchedVpcID
+
+var SourceNetworkData = &sSourceNetworkData
+var SourceNetworkData_sourceNetworkID = &sSourceNetworkData_sourceNetworkID
+var SourceNetworkData_sourceVpc = &sSourceNetworkData_sourceVpc
+var SourceNetworkData_targetVpc = &sSourceNetworkData_targetVpc
+var SourceNetworkData_stackName = &sSourceNetworkData_stackName
+
+var _SourceNetworkID = &s_SourceNetworkID
+
+var _SourceNetworksList = &s_SourceNetworksList
+var _SourceNetworksList_member = &s_SourceNetworksList_member
+
+var SourceProperties = &sSourceProperties
+var SourceProperties_lastUpdatedDateTime = &sSourceProperties_lastUpdatedDateTime
+var SourceProperties_recommendedInstanceType = &sSourceProperties_recommendedInstanceType
+var SourceProperties_identificationHints = &sSourceProperties_identificationHints
+var SourceProperties_networkInterfaces = &sSourceProperties_networkInterfaces
+var SourceProperties_disks = &sSourceProperties_disks
+var SourceProperties_cpus = &sSourceProperties_cpus
+var SourceProperties_ramBytes = &sSourceProperties_ramBytes
+var SourceProperties_os = &sSourceProperties_os
+var SourceProperties_supportsNitroInstances = &sSourceProperties_supportsNitroInstances
+var SourceProperties_architecture = &sSourceProperties_architecture
+
+var SourceServer = &sSourceServer
+var SourceServer_sourceServerID = &sSourceServer_sourceServerID
+var SourceServer_arn = &sSourceServer_arn
+var SourceServer_tags = &sSourceServer_tags
+var SourceServer_recoveryInstanceId = &sSourceServer_recoveryInstanceId
+var SourceServer_lastLaunchResult = &sSourceServer_lastLaunchResult
+var SourceServer_dataReplicationInfo = &sSourceServer_dataReplicationInfo
+var SourceServer_lifeCycle = &sSourceServer_lifeCycle
+var SourceServer_sourceProperties = &sSourceServer_sourceProperties
+var SourceServer_stagingArea = &sSourceServer_stagingArea
+var SourceServer_sourceCloudProperties = &sSourceServer_sourceCloudProperties
+var SourceServer_replicationDirection = &sSourceServer_replicationDirection
+var SourceServer_reversedDirectionSourceServerArn = &sSourceServer_reversedDirectionSourceServerArn
+var SourceServer_sourceNetworkID = &sSourceServer_sourceNetworkID
+var SourceServer_agentVersion = &sSourceServer_agentVersion
+
+var _SourceServerArchitecture = &s_SourceServerArchitecture
+
+var _SourceServerARN = &s_SourceServerARN
+
+var _SourceServerID = &s_SourceServerID
+
+var _SourceServerIDs = &s_SourceServerIDs
+var _SourceServerIDs_member = &s_SourceServerIDs_member
+
+var _SourceServersList = &s_SourceServersList
+var _SourceServersList_member = &s_SourceServersList_member
+
+var _SsmDocumentName = &s_SsmDocumentName
+
+var StagingArea = &sStagingArea
+var StagingArea_status = &sStagingArea_status
+var StagingArea_stagingAccountID = &sStagingArea_stagingAccountID
+var StagingArea_stagingSourceServerArn = &sStagingArea_stagingSourceServerArn
+var StagingArea_errorMessage = &sStagingArea_errorMessage
+
+var StagingSourceServer = &sStagingSourceServer
+var StagingSourceServer_hostname = &sStagingSourceServer_hostname
+var StagingSourceServer_arn = &sStagingSourceServer_arn
+var StagingSourceServer_tags = &sStagingSourceServer_tags
+
+var _StagingSourceServersList = &s_StagingSourceServersList
+var _StagingSourceServersList_member = &s_StagingSourceServersList_member
+
+var _StartFailbackRequestRecoveryInstanceIDs = &s_StartFailbackRequestRecoveryInstanceIDs
+var _StartFailbackRequestRecoveryInstanceIDs_member = &s_StartFailbackRequestRecoveryInstanceIDs_member
+
+var StartRecoveryRequestSourceServer = &sStartRecoveryRequestSourceServer
+var StartRecoveryRequestSourceServer_sourceServerID = &sStartRecoveryRequestSourceServer_sourceServerID
+var StartRecoveryRequestSourceServer_recoverySnapshotID = &sStartRecoveryRequestSourceServer_recoverySnapshotID
+
+var _StartRecoveryRequestSourceServers = &s_StartRecoveryRequestSourceServers
+var _StartRecoveryRequestSourceServers_member = &s_StartRecoveryRequestSourceServers_member
+
+var _StartSourceNetworkRecoveryRequestNetworkEntries = &s_StartSourceNetworkRecoveryRequestNetworkEntries
+var _StartSourceNetworkRecoveryRequestNetworkEntries_member = &s_StartSourceNetworkRecoveryRequestNetworkEntries_member
+
+var StartSourceNetworkRecoveryRequestNetworkEntry = &sStartSourceNetworkRecoveryRequestNetworkEntry
+var StartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID = &sStartSourceNetworkRecoveryRequestNetworkEntry_sourceNetworkID
+var StartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName = &sStartSourceNetworkRecoveryRequestNetworkEntry_cfnStackName
+
+var _StrictDRSARN = &s_StrictDRSARN
+
+var _StrictlyPositiveInteger = &s_StrictlyPositiveInteger
+
+var _SubnetID = &s_SubnetID
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagsMap = &s_TagsMap
+var _TagsMap_key = &s_TagsMap_key
+var _TagsMap_value = &s_TagsMap_value
+
+var _TagValue = &s_TagValue
+
+var _TargetInstanceTypeRightSizingMethod = &s_TargetInstanceTypeRightSizingMethod
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var UninitializedAccountException = &sUninitializedAccountException
+var UninitializedAccountException_message = &sUninitializedAccountException_message
+var UninitializedAccountException_code = &sUninitializedAccountException_code
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_code = &sValidationException_code
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var _VolumeStatus = &s_VolumeStatus
+
+var _VolumeToConversionMap = &s_VolumeToConversionMap
+var _VolumeToConversionMap_key = &s_VolumeToConversionMap_key
+var _VolumeToConversionMap_value = &s_VolumeToConversionMap_value
+
+var _VolumeToProductCodes = &s_VolumeToProductCodes
+var _VolumeToProductCodes_key = &s_VolumeToProductCodes_key
+var _VolumeToProductCodes_value = &s_VolumeToProductCodes_value
+
+var _VolumeToSizeMap = &s_VolumeToSizeMap
+var _VolumeToSizeMap_key = &s_VolumeToSizeMap_key
+var _VolumeToSizeMap_value = &s_VolumeToSizeMap_value
+
+var _VpcID = &s_VpcID
+
+var _WaitDurationMinutes = &s_WaitDurationMinutes
+
+var WaitStepConfiguration = &sWaitStepConfiguration
+var WaitStepConfiguration_waitDurationMinutes = &sWaitStepConfiguration_waitDurationMinutes
+
+var AssociateSourceNetworkStackRequest = &sAssociateSourceNetworkStackRequest
+var AssociateSourceNetworkStackRequest_sourceNetworkID = &sAssociateSourceNetworkStackRequest_sourceNetworkID
+var AssociateSourceNetworkStackRequest_cfnStackName = &sAssociateSourceNetworkStackRequest_cfnStackName
+
+var AssociateSourceNetworkStackResponse = &sAssociateSourceNetworkStackResponse
+var AssociateSourceNetworkStackResponse_job = &sAssociateSourceNetworkStackResponse_job
+
+var CancelRecoveryPlanExecutionRequest = &sCancelRecoveryPlanExecutionRequest
+var CancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = &sCancelRecoveryPlanExecutionRequest_recoveryPlanExecutionArn
+
+var CancelRecoveryPlanExecutionResponse = &sCancelRecoveryPlanExecutionResponse
+var CancelRecoveryPlanExecutionResponse_recoveryPlanExecution = &sCancelRecoveryPlanExecutionResponse_recoveryPlanExecution
+
+var CreateExtendedSourceServerRequest = &sCreateExtendedSourceServerRequest
+var CreateExtendedSourceServerRequest_sourceServerArn = &sCreateExtendedSourceServerRequest_sourceServerArn
+var CreateExtendedSourceServerRequest_tags = &sCreateExtendedSourceServerRequest_tags
+
+var CreateExtendedSourceServerResponse = &sCreateExtendedSourceServerResponse
+var CreateExtendedSourceServerResponse_sourceServer = &sCreateExtendedSourceServerResponse_sourceServer
+
+var CreateLaunchConfigurationTemplateRequest = &sCreateLaunchConfigurationTemplateRequest
+var CreateLaunchConfigurationTemplateRequest_tags = &sCreateLaunchConfigurationTemplateRequest_tags
+var CreateLaunchConfigurationTemplateRequest_launchDisposition = &sCreateLaunchConfigurationTemplateRequest_launchDisposition
+var CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = &sCreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod
+var CreateLaunchConfigurationTemplateRequest_copyPrivateIp = &sCreateLaunchConfigurationTemplateRequest_copyPrivateIp
+var CreateLaunchConfigurationTemplateRequest_copyTags = &sCreateLaunchConfigurationTemplateRequest_copyTags
+var CreateLaunchConfigurationTemplateRequest_licensing = &sCreateLaunchConfigurationTemplateRequest_licensing
+var CreateLaunchConfigurationTemplateRequest_exportBucketArn = &sCreateLaunchConfigurationTemplateRequest_exportBucketArn
+var CreateLaunchConfigurationTemplateRequest_postLaunchEnabled = &sCreateLaunchConfigurationTemplateRequest_postLaunchEnabled
+var CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = &sCreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance
+var CreateLaunchConfigurationTemplateRequest_recoveryMode = &sCreateLaunchConfigurationTemplateRequest_recoveryMode
+
+var CreateLaunchConfigurationTemplateResponse = &sCreateLaunchConfigurationTemplateResponse
+var CreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = &sCreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate
+
+var CreateRecoveryPlanRequest = &sCreateRecoveryPlanRequest
+var CreateRecoveryPlanRequest_name = &sCreateRecoveryPlanRequest_name
+var CreateRecoveryPlanRequest_description = &sCreateRecoveryPlanRequest_description
+var CreateRecoveryPlanRequest_clientToken = &sCreateRecoveryPlanRequest_clientToken
+var CreateRecoveryPlanRequest_tags = &sCreateRecoveryPlanRequest_tags
+
+var CreateRecoveryPlanResponse = &sCreateRecoveryPlanResponse
+var CreateRecoveryPlanResponse_recoveryPlan = &sCreateRecoveryPlanResponse_recoveryPlan
+
+var CreateRecoveryPlanStepRequest = &sCreateRecoveryPlanStepRequest
+var CreateRecoveryPlanStepRequest_recoveryPlanArn = &sCreateRecoveryPlanStepRequest_recoveryPlanArn
+var CreateRecoveryPlanStepRequest_stepName = &sCreateRecoveryPlanStepRequest_stepName
+var CreateRecoveryPlanStepRequest_stepOrder = &sCreateRecoveryPlanStepRequest_stepOrder
+var CreateRecoveryPlanStepRequest_configuration = &sCreateRecoveryPlanStepRequest_configuration
+var CreateRecoveryPlanStepRequest_clientToken = &sCreateRecoveryPlanStepRequest_clientToken
+
+var CreateRecoveryPlanStepResponse = &sCreateRecoveryPlanStepResponse
+var CreateRecoveryPlanStepResponse_recoveryPlanStep = &sCreateRecoveryPlanStepResponse_recoveryPlanStep
+
+var CreateReplicationConfigurationTemplateRequest = &sCreateReplicationConfigurationTemplateRequest
+var CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = &sCreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId
+var CreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = &sCreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup
+var CreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = &sCreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs
+var CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType = &sCreateReplicationConfigurationTemplateRequest_replicationServerInstanceType
+var CreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = &sCreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer
+var CreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = &sCreateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType
+var CreateReplicationConfigurationTemplateRequest_ebsEncryption = &sCreateReplicationConfigurationTemplateRequest_ebsEncryption
+var CreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = &sCreateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn
+var CreateReplicationConfigurationTemplateRequest_bandwidthThrottling = &sCreateReplicationConfigurationTemplateRequest_bandwidthThrottling
+var CreateReplicationConfigurationTemplateRequest_dataPlaneRouting = &sCreateReplicationConfigurationTemplateRequest_dataPlaneRouting
+var CreateReplicationConfigurationTemplateRequest_createPublicIP = &sCreateReplicationConfigurationTemplateRequest_createPublicIP
+var CreateReplicationConfigurationTemplateRequest_stagingAreaTags = &sCreateReplicationConfigurationTemplateRequest_stagingAreaTags
+var CreateReplicationConfigurationTemplateRequest_pitPolicy = &sCreateReplicationConfigurationTemplateRequest_pitPolicy
+var CreateReplicationConfigurationTemplateRequest_tags = &sCreateReplicationConfigurationTemplateRequest_tags
+var CreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = &sCreateReplicationConfigurationTemplateRequest_autoReplicateNewDisks
+var CreateReplicationConfigurationTemplateRequest_internetProtocol = &sCreateReplicationConfigurationTemplateRequest_internetProtocol
+
+var CreateSourceNetworkRequest = &sCreateSourceNetworkRequest
+var CreateSourceNetworkRequest_vpcID = &sCreateSourceNetworkRequest_vpcID
+var CreateSourceNetworkRequest_originAccountID = &sCreateSourceNetworkRequest_originAccountID
+var CreateSourceNetworkRequest_originRegion = &sCreateSourceNetworkRequest_originRegion
+var CreateSourceNetworkRequest_tags = &sCreateSourceNetworkRequest_tags
+
+var CreateSourceNetworkResponse = &sCreateSourceNetworkResponse
+var CreateSourceNetworkResponse_sourceNetworkID = &sCreateSourceNetworkResponse_sourceNetworkID
+
+var DeleteJobRequest = &sDeleteJobRequest
+var DeleteJobRequest_jobID = &sDeleteJobRequest_jobID
+
+var DeleteJobResponse = &sDeleteJobResponse
+
+var DeleteLaunchActionRequest = &sDeleteLaunchActionRequest
+var DeleteLaunchActionRequest_resourceId = &sDeleteLaunchActionRequest_resourceId
+var DeleteLaunchActionRequest_actionId = &sDeleteLaunchActionRequest_actionId
+
+var DeleteLaunchActionResponse = &sDeleteLaunchActionResponse
+
+var DeleteLaunchConfigurationTemplateRequest = &sDeleteLaunchConfigurationTemplateRequest
+var DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = &sDeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID
+
+var DeleteLaunchConfigurationTemplateResponse = &sDeleteLaunchConfigurationTemplateResponse
+
+var DeleteRecoveryInstanceRequest = &sDeleteRecoveryInstanceRequest
+var DeleteRecoveryInstanceRequest_recoveryInstanceID = &sDeleteRecoveryInstanceRequest_recoveryInstanceID
+
+var DeleteRecoveryPlanExecutionRequest = &sDeleteRecoveryPlanExecutionRequest
+var DeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = &sDeleteRecoveryPlanExecutionRequest_recoveryPlanExecutionArn
+
+var DeleteRecoveryPlanExecutionResponse = &sDeleteRecoveryPlanExecutionResponse
+var DeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn = &sDeleteRecoveryPlanExecutionResponse_recoveryPlanExecutionArn
+
+var DeleteRecoveryPlanRequest = &sDeleteRecoveryPlanRequest
+var DeleteRecoveryPlanRequest_recoveryPlanArn = &sDeleteRecoveryPlanRequest_recoveryPlanArn
+
+var DeleteRecoveryPlanResponse = &sDeleteRecoveryPlanResponse
+var DeleteRecoveryPlanResponse_recoveryPlanArn = &sDeleteRecoveryPlanResponse_recoveryPlanArn
+
+var DeleteRecoveryPlanStepRequest = &sDeleteRecoveryPlanStepRequest
+var DeleteRecoveryPlanStepRequest_recoveryPlanStepArn = &sDeleteRecoveryPlanStepRequest_recoveryPlanStepArn
+
+var DeleteRecoveryPlanStepResponse = &sDeleteRecoveryPlanStepResponse
+var DeleteRecoveryPlanStepResponse_recoveryPlanStepArn = &sDeleteRecoveryPlanStepResponse_recoveryPlanStepArn
+
+var DeleteReplicationConfigurationTemplateRequest = &sDeleteReplicationConfigurationTemplateRequest
+var DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = &sDeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID
+
+var DeleteReplicationConfigurationTemplateResponse = &sDeleteReplicationConfigurationTemplateResponse
+
+var DeleteSourceNetworkRequest = &sDeleteSourceNetworkRequest
+var DeleteSourceNetworkRequest_sourceNetworkID = &sDeleteSourceNetworkRequest_sourceNetworkID
+
+var DeleteSourceNetworkResponse = &sDeleteSourceNetworkResponse
+
+var DeleteSourceServerRequest = &sDeleteSourceServerRequest
+var DeleteSourceServerRequest_sourceServerID = &sDeleteSourceServerRequest_sourceServerID
+
+var DeleteSourceServerResponse = &sDeleteSourceServerResponse
+
+var DescribeJobLogItemsRequest = &sDescribeJobLogItemsRequest
+var DescribeJobLogItemsRequest_jobID = &sDescribeJobLogItemsRequest_jobID
+var DescribeJobLogItemsRequest_maxResults = &sDescribeJobLogItemsRequest_maxResults
+var DescribeJobLogItemsRequest_nextToken = &sDescribeJobLogItemsRequest_nextToken
+
+var DescribeJobLogItemsResponse = &sDescribeJobLogItemsResponse
+var DescribeJobLogItemsResponse_items = &sDescribeJobLogItemsResponse_items
+var DescribeJobLogItemsResponse_nextToken = &sDescribeJobLogItemsResponse_nextToken
+
+var DescribeJobsRequest = &sDescribeJobsRequest
+var DescribeJobsRequest_filters = &sDescribeJobsRequest_filters
+var DescribeJobsRequest_maxResults = &sDescribeJobsRequest_maxResults
+var DescribeJobsRequest_nextToken = &sDescribeJobsRequest_nextToken
+
+var DescribeJobsResponse = &sDescribeJobsResponse
+var DescribeJobsResponse_items = &sDescribeJobsResponse_items
+var DescribeJobsResponse_nextToken = &sDescribeJobsResponse_nextToken
+
+var DescribeLaunchConfigurationTemplatesRequest = &sDescribeLaunchConfigurationTemplatesRequest
+var DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs = &sDescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs
+var DescribeLaunchConfigurationTemplatesRequest_maxResults = &sDescribeLaunchConfigurationTemplatesRequest_maxResults
+var DescribeLaunchConfigurationTemplatesRequest_nextToken = &sDescribeLaunchConfigurationTemplatesRequest_nextToken
+
+var DescribeLaunchConfigurationTemplatesResponse = &sDescribeLaunchConfigurationTemplatesResponse
+var DescribeLaunchConfigurationTemplatesResponse_items = &sDescribeLaunchConfigurationTemplatesResponse_items
+var DescribeLaunchConfigurationTemplatesResponse_nextToken = &sDescribeLaunchConfigurationTemplatesResponse_nextToken
+
+var DescribeRecoveryInstancesRequest = &sDescribeRecoveryInstancesRequest
+var DescribeRecoveryInstancesRequest_filters = &sDescribeRecoveryInstancesRequest_filters
+var DescribeRecoveryInstancesRequest_maxResults = &sDescribeRecoveryInstancesRequest_maxResults
+var DescribeRecoveryInstancesRequest_nextToken = &sDescribeRecoveryInstancesRequest_nextToken
+
+var DescribeRecoveryInstancesResponse = &sDescribeRecoveryInstancesResponse
+var DescribeRecoveryInstancesResponse_nextToken = &sDescribeRecoveryInstancesResponse_nextToken
+var DescribeRecoveryInstancesResponse_items = &sDescribeRecoveryInstancesResponse_items
+
+var DescribeRecoverySnapshotsRequest = &sDescribeRecoverySnapshotsRequest
+var DescribeRecoverySnapshotsRequest_sourceServerID = &sDescribeRecoverySnapshotsRequest_sourceServerID
+var DescribeRecoverySnapshotsRequest_filters = &sDescribeRecoverySnapshotsRequest_filters
+var DescribeRecoverySnapshotsRequest_order = &sDescribeRecoverySnapshotsRequest_order
+var DescribeRecoverySnapshotsRequest_maxResults = &sDescribeRecoverySnapshotsRequest_maxResults
+var DescribeRecoverySnapshotsRequest_nextToken = &sDescribeRecoverySnapshotsRequest_nextToken
+
+var DescribeRecoverySnapshotsResponse = &sDescribeRecoverySnapshotsResponse
+var DescribeRecoverySnapshotsResponse_items = &sDescribeRecoverySnapshotsResponse_items
+var DescribeRecoverySnapshotsResponse_nextToken = &sDescribeRecoverySnapshotsResponse_nextToken
+
+var DescribeReplicationConfigurationTemplatesRequest = &sDescribeReplicationConfigurationTemplatesRequest
+var DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs = &sDescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs
+var DescribeReplicationConfigurationTemplatesRequest_maxResults = &sDescribeReplicationConfigurationTemplatesRequest_maxResults
+var DescribeReplicationConfigurationTemplatesRequest_nextToken = &sDescribeReplicationConfigurationTemplatesRequest_nextToken
+
+var DescribeReplicationConfigurationTemplatesResponse = &sDescribeReplicationConfigurationTemplatesResponse
+var DescribeReplicationConfigurationTemplatesResponse_items = &sDescribeReplicationConfigurationTemplatesResponse_items
+var DescribeReplicationConfigurationTemplatesResponse_nextToken = &sDescribeReplicationConfigurationTemplatesResponse_nextToken
+
+var DescribeSourceNetworksRequest = &sDescribeSourceNetworksRequest
+var DescribeSourceNetworksRequest_filters = &sDescribeSourceNetworksRequest_filters
+var DescribeSourceNetworksRequest_maxResults = &sDescribeSourceNetworksRequest_maxResults
+var DescribeSourceNetworksRequest_nextToken = &sDescribeSourceNetworksRequest_nextToken
+
+var DescribeSourceNetworksResponse = &sDescribeSourceNetworksResponse
+var DescribeSourceNetworksResponse_items = &sDescribeSourceNetworksResponse_items
+var DescribeSourceNetworksResponse_nextToken = &sDescribeSourceNetworksResponse_nextToken
+
+var DescribeSourceServersRequest = &sDescribeSourceServersRequest
+var DescribeSourceServersRequest_filters = &sDescribeSourceServersRequest_filters
+var DescribeSourceServersRequest_maxResults = &sDescribeSourceServersRequest_maxResults
+var DescribeSourceServersRequest_nextToken = &sDescribeSourceServersRequest_nextToken
+
+var DescribeSourceServersResponse = &sDescribeSourceServersResponse
+var DescribeSourceServersResponse_items = &sDescribeSourceServersResponse_items
+var DescribeSourceServersResponse_nextToken = &sDescribeSourceServersResponse_nextToken
+
+var DisconnectRecoveryInstanceRequest = &sDisconnectRecoveryInstanceRequest
+var DisconnectRecoveryInstanceRequest_recoveryInstanceID = &sDisconnectRecoveryInstanceRequest_recoveryInstanceID
+
+var DisconnectSourceServerRequest = &sDisconnectSourceServerRequest
+var DisconnectSourceServerRequest_sourceServerID = &sDisconnectSourceServerRequest_sourceServerID
+
+var ExportSourceNetworkCfnTemplateRequest = &sExportSourceNetworkCfnTemplateRequest
+var ExportSourceNetworkCfnTemplateRequest_sourceNetworkID = &sExportSourceNetworkCfnTemplateRequest_sourceNetworkID
+
+var ExportSourceNetworkCfnTemplateResponse = &sExportSourceNetworkCfnTemplateResponse
+var ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl = &sExportSourceNetworkCfnTemplateResponse_s3DestinationUrl
+
+var GetFailbackReplicationConfigurationRequest = &sGetFailbackReplicationConfigurationRequest
+var GetFailbackReplicationConfigurationRequest_recoveryInstanceID = &sGetFailbackReplicationConfigurationRequest_recoveryInstanceID
+
+var GetFailbackReplicationConfigurationResponse = &sGetFailbackReplicationConfigurationResponse
+var GetFailbackReplicationConfigurationResponse_recoveryInstanceID = &sGetFailbackReplicationConfigurationResponse_recoveryInstanceID
+var GetFailbackReplicationConfigurationResponse_name = &sGetFailbackReplicationConfigurationResponse_name
+var GetFailbackReplicationConfigurationResponse_bandwidthThrottling = &sGetFailbackReplicationConfigurationResponse_bandwidthThrottling
+var GetFailbackReplicationConfigurationResponse_usePrivateIP = &sGetFailbackReplicationConfigurationResponse_usePrivateIP
+var GetFailbackReplicationConfigurationResponse_internetProtocol = &sGetFailbackReplicationConfigurationResponse_internetProtocol
+
+var GetLaunchConfigurationRequest = &sGetLaunchConfigurationRequest
+var GetLaunchConfigurationRequest_sourceServerID = &sGetLaunchConfigurationRequest_sourceServerID
+
+var LaunchConfiguration = &sLaunchConfiguration
+var LaunchConfiguration_sourceServerID = &sLaunchConfiguration_sourceServerID
+var LaunchConfiguration_name = &sLaunchConfiguration_name
+var LaunchConfiguration_ec2LaunchTemplateID = &sLaunchConfiguration_ec2LaunchTemplateID
+var LaunchConfiguration_launchDisposition = &sLaunchConfiguration_launchDisposition
+var LaunchConfiguration_targetInstanceTypeRightSizingMethod = &sLaunchConfiguration_targetInstanceTypeRightSizingMethod
+var LaunchConfiguration_copyPrivateIp = &sLaunchConfiguration_copyPrivateIp
+var LaunchConfiguration_copyTags = &sLaunchConfiguration_copyTags
+var LaunchConfiguration_licensing = &sLaunchConfiguration_licensing
+var LaunchConfiguration_postLaunchEnabled = &sLaunchConfiguration_postLaunchEnabled
+var LaunchConfiguration_launchIntoInstanceProperties = &sLaunchConfiguration_launchIntoInstanceProperties
+var LaunchConfiguration_recoveryMode = &sLaunchConfiguration_recoveryMode
+
+var GetRecoveryPlanExecutionRequest = &sGetRecoveryPlanExecutionRequest
+var GetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn = &sGetRecoveryPlanExecutionRequest_recoveryPlanExecutionArn
+
+var GetRecoveryPlanExecutionResponse = &sGetRecoveryPlanExecutionResponse
+var GetRecoveryPlanExecutionResponse_recoveryPlanExecution = &sGetRecoveryPlanExecutionResponse_recoveryPlanExecution
+
+var GetRecoveryPlanExecutionStepRequest = &sGetRecoveryPlanExecutionStepRequest
+var GetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = &sGetRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn
+
+var GetRecoveryPlanExecutionStepResponse = &sGetRecoveryPlanExecutionStepResponse
+var GetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = &sGetRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep
+
+var GetRecoveryPlanRequest = &sGetRecoveryPlanRequest
+var GetRecoveryPlanRequest_recoveryPlanArn = &sGetRecoveryPlanRequest_recoveryPlanArn
+
+var GetRecoveryPlanResponse = &sGetRecoveryPlanResponse
+var GetRecoveryPlanResponse_recoveryPlan = &sGetRecoveryPlanResponse_recoveryPlan
+
+var GetRecoveryPlanStepRequest = &sGetRecoveryPlanStepRequest
+var GetRecoveryPlanStepRequest_recoveryPlanStepArn = &sGetRecoveryPlanStepRequest_recoveryPlanStepArn
+
+var GetRecoveryPlanStepResponse = &sGetRecoveryPlanStepResponse
+var GetRecoveryPlanStepResponse_recoveryPlanStep = &sGetRecoveryPlanStepResponse_recoveryPlanStep
+
+var GetReplicationConfigurationRequest = &sGetReplicationConfigurationRequest
+var GetReplicationConfigurationRequest_sourceServerID = &sGetReplicationConfigurationRequest_sourceServerID
+
+var ReplicationConfiguration = &sReplicationConfiguration
+var ReplicationConfiguration_sourceServerID = &sReplicationConfiguration_sourceServerID
+var ReplicationConfiguration_name = &sReplicationConfiguration_name
+var ReplicationConfiguration_stagingAreaSubnetId = &sReplicationConfiguration_stagingAreaSubnetId
+var ReplicationConfiguration_associateDefaultSecurityGroup = &sReplicationConfiguration_associateDefaultSecurityGroup
+var ReplicationConfiguration_replicationServersSecurityGroupsIDs = &sReplicationConfiguration_replicationServersSecurityGroupsIDs
+var ReplicationConfiguration_replicationServerInstanceType = &sReplicationConfiguration_replicationServerInstanceType
+var ReplicationConfiguration_useDedicatedReplicationServer = &sReplicationConfiguration_useDedicatedReplicationServer
+var ReplicationConfiguration_defaultLargeStagingDiskType = &sReplicationConfiguration_defaultLargeStagingDiskType
+var ReplicationConfiguration_replicatedDisks = &sReplicationConfiguration_replicatedDisks
+var ReplicationConfiguration_ebsEncryption = &sReplicationConfiguration_ebsEncryption
+var ReplicationConfiguration_ebsEncryptionKeyArn = &sReplicationConfiguration_ebsEncryptionKeyArn
+var ReplicationConfiguration_bandwidthThrottling = &sReplicationConfiguration_bandwidthThrottling
+var ReplicationConfiguration_dataPlaneRouting = &sReplicationConfiguration_dataPlaneRouting
+var ReplicationConfiguration_createPublicIP = &sReplicationConfiguration_createPublicIP
+var ReplicationConfiguration_stagingAreaTags = &sReplicationConfiguration_stagingAreaTags
+var ReplicationConfiguration_pitPolicy = &sReplicationConfiguration_pitPolicy
+var ReplicationConfiguration_autoReplicateNewDisks = &sReplicationConfiguration_autoReplicateNewDisks
+var ReplicationConfiguration_internetProtocol = &sReplicationConfiguration_internetProtocol
+
+var InitializeServiceRequest = &sInitializeServiceRequest
+
+var InitializeServiceResponse = &sInitializeServiceResponse
+
+var ListExtensibleSourceServersRequest = &sListExtensibleSourceServersRequest
+var ListExtensibleSourceServersRequest_stagingAccountID = &sListExtensibleSourceServersRequest_stagingAccountID
+var ListExtensibleSourceServersRequest_maxResults = &sListExtensibleSourceServersRequest_maxResults
+var ListExtensibleSourceServersRequest_nextToken = &sListExtensibleSourceServersRequest_nextToken
+
+var ListExtensibleSourceServersResponse = &sListExtensibleSourceServersResponse
+var ListExtensibleSourceServersResponse_items = &sListExtensibleSourceServersResponse_items
+var ListExtensibleSourceServersResponse_nextToken = &sListExtensibleSourceServersResponse_nextToken
+
+var ListLaunchActionsRequest = &sListLaunchActionsRequest
+var ListLaunchActionsRequest_resourceId = &sListLaunchActionsRequest_resourceId
+var ListLaunchActionsRequest_filters = &sListLaunchActionsRequest_filters
+var ListLaunchActionsRequest_maxResults = &sListLaunchActionsRequest_maxResults
+var ListLaunchActionsRequest_nextToken = &sListLaunchActionsRequest_nextToken
+
+var ListLaunchActionsResponse = &sListLaunchActionsResponse
+var ListLaunchActionsResponse_items = &sListLaunchActionsResponse_items
+var ListLaunchActionsResponse_nextToken = &sListLaunchActionsResponse_nextToken
+
+var ListRecoveryPlanExecutionsRequest = &sListRecoveryPlanExecutionsRequest
+var ListRecoveryPlanExecutionsRequest_recoveryPlanArn = &sListRecoveryPlanExecutionsRequest_recoveryPlanArn
+var ListRecoveryPlanExecutionsRequest_status = &sListRecoveryPlanExecutionsRequest_status
+var ListRecoveryPlanExecutionsRequest_maxResults = &sListRecoveryPlanExecutionsRequest_maxResults
+var ListRecoveryPlanExecutionsRequest_nextToken = &sListRecoveryPlanExecutionsRequest_nextToken
+
+var ListRecoveryPlanExecutionsResponse = &sListRecoveryPlanExecutionsResponse
+var ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions = &sListRecoveryPlanExecutionsResponse_recoveryPlanExecutions
+var ListRecoveryPlanExecutionsResponse_nextToken = &sListRecoveryPlanExecutionsResponse_nextToken
+
+var ListRecoveryPlanExecutionStepsRequest = &sListRecoveryPlanExecutionStepsRequest
+var ListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn = &sListRecoveryPlanExecutionStepsRequest_recoveryPlanExecutionArn
+var ListRecoveryPlanExecutionStepsRequest_filter = &sListRecoveryPlanExecutionStepsRequest_filter
+var ListRecoveryPlanExecutionStepsRequest_maxResults = &sListRecoveryPlanExecutionStepsRequest_maxResults
+var ListRecoveryPlanExecutionStepsRequest_nextToken = &sListRecoveryPlanExecutionStepsRequest_nextToken
+
+var ListRecoveryPlanExecutionStepsResponse = &sListRecoveryPlanExecutionStepsResponse
+var ListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps = &sListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps
+var ListRecoveryPlanExecutionStepsResponse_nextToken = &sListRecoveryPlanExecutionStepsResponse_nextToken
+
+var ListRecoveryPlansRequest = &sListRecoveryPlansRequest
+var ListRecoveryPlansRequest_maxResults = &sListRecoveryPlansRequest_maxResults
+var ListRecoveryPlansRequest_nextToken = &sListRecoveryPlansRequest_nextToken
+
+var ListRecoveryPlansResponse = &sListRecoveryPlansResponse
+var ListRecoveryPlansResponse_recoveryPlans = &sListRecoveryPlansResponse_recoveryPlans
+var ListRecoveryPlansResponse_nextToken = &sListRecoveryPlansResponse_nextToken
+
+var ListRecoveryPlanStepsRequest = &sListRecoveryPlanStepsRequest
+var ListRecoveryPlanStepsRequest_recoveryPlanArn = &sListRecoveryPlanStepsRequest_recoveryPlanArn
+var ListRecoveryPlanStepsRequest_maxResults = &sListRecoveryPlanStepsRequest_maxResults
+var ListRecoveryPlanStepsRequest_nextToken = &sListRecoveryPlanStepsRequest_nextToken
+
+var ListRecoveryPlanStepsResponse = &sListRecoveryPlanStepsResponse
+var ListRecoveryPlanStepsResponse_recoveryPlanSteps = &sListRecoveryPlanStepsResponse_recoveryPlanSteps
+var ListRecoveryPlanStepsResponse_nextToken = &sListRecoveryPlanStepsResponse_nextToken
+
+var ListStagingAccountsRequest = &sListStagingAccountsRequest
+var ListStagingAccountsRequest_maxResults = &sListStagingAccountsRequest_maxResults
+var ListStagingAccountsRequest_nextToken = &sListStagingAccountsRequest_nextToken
+
+var ListStagingAccountsResponse = &sListStagingAccountsResponse
+var ListStagingAccountsResponse_accounts = &sListStagingAccountsResponse_accounts
+var ListStagingAccountsResponse_nextToken = &sListStagingAccountsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutLaunchActionRequest = &sPutLaunchActionRequest
+var PutLaunchActionRequest_resourceId = &sPutLaunchActionRequest_resourceId
+var PutLaunchActionRequest_actionCode = &sPutLaunchActionRequest_actionCode
+var PutLaunchActionRequest_order = &sPutLaunchActionRequest_order
+var PutLaunchActionRequest_actionId = &sPutLaunchActionRequest_actionId
+var PutLaunchActionRequest_optional = &sPutLaunchActionRequest_optional
+var PutLaunchActionRequest_active = &sPutLaunchActionRequest_active
+var PutLaunchActionRequest_name = &sPutLaunchActionRequest_name
+var PutLaunchActionRequest_actionVersion = &sPutLaunchActionRequest_actionVersion
+var PutLaunchActionRequest_category = &sPutLaunchActionRequest_category
+var PutLaunchActionRequest_parameters = &sPutLaunchActionRequest_parameters
+var PutLaunchActionRequest_description = &sPutLaunchActionRequest_description
+
+var PutLaunchActionResponse = &sPutLaunchActionResponse
+var PutLaunchActionResponse_resourceId = &sPutLaunchActionResponse_resourceId
+var PutLaunchActionResponse_actionId = &sPutLaunchActionResponse_actionId
+var PutLaunchActionResponse_actionCode = &sPutLaunchActionResponse_actionCode
+var PutLaunchActionResponse_type = &sPutLaunchActionResponse_type
+var PutLaunchActionResponse_name = &sPutLaunchActionResponse_name
+var PutLaunchActionResponse_active = &sPutLaunchActionResponse_active
+var PutLaunchActionResponse_order = &sPutLaunchActionResponse_order
+var PutLaunchActionResponse_actionVersion = &sPutLaunchActionResponse_actionVersion
+var PutLaunchActionResponse_optional = &sPutLaunchActionResponse_optional
+var PutLaunchActionResponse_parameters = &sPutLaunchActionResponse_parameters
+var PutLaunchActionResponse_description = &sPutLaunchActionResponse_description
+var PutLaunchActionResponse_category = &sPutLaunchActionResponse_category
+
+var ReorderRecoveryPlanStepsRequest = &sReorderRecoveryPlanStepsRequest
+var ReorderRecoveryPlanStepsRequest_recoveryPlanArn = &sReorderRecoveryPlanStepsRequest_recoveryPlanArn
+var ReorderRecoveryPlanStepsRequest_orderedStepArns = &sReorderRecoveryPlanStepsRequest_orderedStepArns
+
+var ReorderRecoveryPlanStepsResponse = &sReorderRecoveryPlanStepsResponse
+var ReorderRecoveryPlanStepsResponse_recoveryPlanSteps = &sReorderRecoveryPlanStepsResponse_recoveryPlanSteps
+
+var RetryDataReplicationRequest = &sRetryDataReplicationRequest
+var RetryDataReplicationRequest_sourceServerID = &sRetryDataReplicationRequest_sourceServerID
+
+var RetryRecoveryPlanExecutionStepRequest = &sRetryRecoveryPlanExecutionStepRequest
+var RetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = &sRetryRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn
+
+var RetryRecoveryPlanExecutionStepResponse = &sRetryRecoveryPlanExecutionStepResponse
+var RetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = &sRetryRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep
+
+var ReverseReplicationRequest = &sReverseReplicationRequest
+var ReverseReplicationRequest_recoveryInstanceID = &sReverseReplicationRequest_recoveryInstanceID
+
+var ReverseReplicationResponse = &sReverseReplicationResponse
+var ReverseReplicationResponse_reversedDirectionSourceServerArn = &sReverseReplicationResponse_reversedDirectionSourceServerArn
+
+var StartFailbackLaunchRequest = &sStartFailbackLaunchRequest
+var StartFailbackLaunchRequest_recoveryInstanceIDs = &sStartFailbackLaunchRequest_recoveryInstanceIDs
+var StartFailbackLaunchRequest_tags = &sStartFailbackLaunchRequest_tags
+
+var StartFailbackLaunchResponse = &sStartFailbackLaunchResponse
+var StartFailbackLaunchResponse_job = &sStartFailbackLaunchResponse_job
+
+var StartRecoveryRequest = &sStartRecoveryRequest
+var StartRecoveryRequest_sourceServers = &sStartRecoveryRequest_sourceServers
+var StartRecoveryRequest_isDrill = &sStartRecoveryRequest_isDrill
+var StartRecoveryRequest_tags = &sStartRecoveryRequest_tags
+
+var StartRecoveryResponse = &sStartRecoveryResponse
+var StartRecoveryResponse_job = &sStartRecoveryResponse_job
+
+var StartRecoveryPlanExecutionRequest = &sStartRecoveryPlanExecutionRequest
+var StartRecoveryPlanExecutionRequest_recoveryPlanArn = &sStartRecoveryPlanExecutionRequest_recoveryPlanArn
+var StartRecoveryPlanExecutionRequest_mode = &sStartRecoveryPlanExecutionRequest_mode
+var StartRecoveryPlanExecutionRequest_clientToken = &sStartRecoveryPlanExecutionRequest_clientToken
+var StartRecoveryPlanExecutionRequest_sourceServers = &sStartRecoveryPlanExecutionRequest_sourceServers
+var StartRecoveryPlanExecutionRequest_tags = &sStartRecoveryPlanExecutionRequest_tags
+
+var StartRecoveryPlanExecutionResponse = &sStartRecoveryPlanExecutionResponse
+var StartRecoveryPlanExecutionResponse_recoveryPlanExecution = &sStartRecoveryPlanExecutionResponse_recoveryPlanExecution
+
+var StartReplicationRequest = &sStartReplicationRequest
+var StartReplicationRequest_sourceServerID = &sStartReplicationRequest_sourceServerID
+
+var StartReplicationResponse = &sStartReplicationResponse
+var StartReplicationResponse_sourceServer = &sStartReplicationResponse_sourceServer
+
+var StartSourceNetworkRecoveryRequest = &sStartSourceNetworkRecoveryRequest
+var StartSourceNetworkRecoveryRequest_sourceNetworks = &sStartSourceNetworkRecoveryRequest_sourceNetworks
+var StartSourceNetworkRecoveryRequest_deployAsNew = &sStartSourceNetworkRecoveryRequest_deployAsNew
+var StartSourceNetworkRecoveryRequest_tags = &sStartSourceNetworkRecoveryRequest_tags
+
+var StartSourceNetworkRecoveryResponse = &sStartSourceNetworkRecoveryResponse
+var StartSourceNetworkRecoveryResponse_job = &sStartSourceNetworkRecoveryResponse_job
+
+var StartSourceNetworkReplicationRequest = &sStartSourceNetworkReplicationRequest
+var StartSourceNetworkReplicationRequest_sourceNetworkID = &sStartSourceNetworkReplicationRequest_sourceNetworkID
+
+var StartSourceNetworkReplicationResponse = &sStartSourceNetworkReplicationResponse
+var StartSourceNetworkReplicationResponse_sourceNetwork = &sStartSourceNetworkReplicationResponse_sourceNetwork
+
+var StopFailbackRequest = &sStopFailbackRequest
+var StopFailbackRequest_recoveryInstanceID = &sStopFailbackRequest_recoveryInstanceID
+
+var StopReplicationRequest = &sStopReplicationRequest
+var StopReplicationRequest_sourceServerID = &sStopReplicationRequest_sourceServerID
+
+var StopReplicationResponse = &sStopReplicationResponse
+var StopReplicationResponse_sourceServer = &sStopReplicationResponse_sourceServer
+
+var StopSourceNetworkReplicationRequest = &sStopSourceNetworkReplicationRequest
+var StopSourceNetworkReplicationRequest_sourceNetworkID = &sStopSourceNetworkReplicationRequest_sourceNetworkID
+
+var StopSourceNetworkReplicationResponse = &sStopSourceNetworkReplicationResponse
+var StopSourceNetworkReplicationResponse_sourceNetwork = &sStopSourceNetworkReplicationResponse_sourceNetwork
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TerminateRecoveryInstancesRequest = &sTerminateRecoveryInstancesRequest
+var TerminateRecoveryInstancesRequest_recoveryInstanceIDs = &sTerminateRecoveryInstancesRequest_recoveryInstanceIDs
+
+var TerminateRecoveryInstancesResponse = &sTerminateRecoveryInstancesResponse
+var TerminateRecoveryInstancesResponse_job = &sTerminateRecoveryInstancesResponse_job
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UpdateFailbackReplicationConfigurationRequest = &sUpdateFailbackReplicationConfigurationRequest
+var UpdateFailbackReplicationConfigurationRequest_recoveryInstanceID = &sUpdateFailbackReplicationConfigurationRequest_recoveryInstanceID
+var UpdateFailbackReplicationConfigurationRequest_name = &sUpdateFailbackReplicationConfigurationRequest_name
+var UpdateFailbackReplicationConfigurationRequest_bandwidthThrottling = &sUpdateFailbackReplicationConfigurationRequest_bandwidthThrottling
+var UpdateFailbackReplicationConfigurationRequest_usePrivateIP = &sUpdateFailbackReplicationConfigurationRequest_usePrivateIP
+var UpdateFailbackReplicationConfigurationRequest_internetProtocol = &sUpdateFailbackReplicationConfigurationRequest_internetProtocol
+
+var UpdateLaunchConfigurationRequest = &sUpdateLaunchConfigurationRequest
+var UpdateLaunchConfigurationRequest_sourceServerID = &sUpdateLaunchConfigurationRequest_sourceServerID
+var UpdateLaunchConfigurationRequest_name = &sUpdateLaunchConfigurationRequest_name
+var UpdateLaunchConfigurationRequest_launchDisposition = &sUpdateLaunchConfigurationRequest_launchDisposition
+var UpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod = &sUpdateLaunchConfigurationRequest_targetInstanceTypeRightSizingMethod
+var UpdateLaunchConfigurationRequest_copyPrivateIp = &sUpdateLaunchConfigurationRequest_copyPrivateIp
+var UpdateLaunchConfigurationRequest_copyTags = &sUpdateLaunchConfigurationRequest_copyTags
+var UpdateLaunchConfigurationRequest_licensing = &sUpdateLaunchConfigurationRequest_licensing
+var UpdateLaunchConfigurationRequest_postLaunchEnabled = &sUpdateLaunchConfigurationRequest_postLaunchEnabled
+var UpdateLaunchConfigurationRequest_launchIntoInstanceProperties = &sUpdateLaunchConfigurationRequest_launchIntoInstanceProperties
+var UpdateLaunchConfigurationRequest_recoveryMode = &sUpdateLaunchConfigurationRequest_recoveryMode
+
+var UpdateLaunchConfigurationTemplateRequest = &sUpdateLaunchConfigurationTemplateRequest
+var UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = &sUpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID
+var UpdateLaunchConfigurationTemplateRequest_launchDisposition = &sUpdateLaunchConfigurationTemplateRequest_launchDisposition
+var UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod = &sUpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod
+var UpdateLaunchConfigurationTemplateRequest_copyPrivateIp = &sUpdateLaunchConfigurationTemplateRequest_copyPrivateIp
+var UpdateLaunchConfigurationTemplateRequest_copyTags = &sUpdateLaunchConfigurationTemplateRequest_copyTags
+var UpdateLaunchConfigurationTemplateRequest_licensing = &sUpdateLaunchConfigurationTemplateRequest_licensing
+var UpdateLaunchConfigurationTemplateRequest_exportBucketArn = &sUpdateLaunchConfigurationTemplateRequest_exportBucketArn
+var UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled = &sUpdateLaunchConfigurationTemplateRequest_postLaunchEnabled
+var UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance = &sUpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance
+var UpdateLaunchConfigurationTemplateRequest_recoveryMode = &sUpdateLaunchConfigurationTemplateRequest_recoveryMode
+
+var UpdateLaunchConfigurationTemplateResponse = &sUpdateLaunchConfigurationTemplateResponse
+var UpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate = &sUpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate
+
+var UpdateRecoveryPlanExecutionStepRequest = &sUpdateRecoveryPlanExecutionStepRequest
+var UpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn = &sUpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn
+var UpdateRecoveryPlanExecutionStepRequest_status = &sUpdateRecoveryPlanExecutionStepRequest_status
+var UpdateRecoveryPlanExecutionStepRequest_servers = &sUpdateRecoveryPlanExecutionStepRequest_servers
+var UpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes = &sUpdateRecoveryPlanExecutionStepRequest_waitDurationMinutes
+
+var UpdateRecoveryPlanExecutionStepResponse = &sUpdateRecoveryPlanExecutionStepResponse
+var UpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep = &sUpdateRecoveryPlanExecutionStepResponse_recoveryPlanExecutionStep
+
+var UpdateRecoveryPlanRequest = &sUpdateRecoveryPlanRequest
+var UpdateRecoveryPlanRequest_recoveryPlanArn = &sUpdateRecoveryPlanRequest_recoveryPlanArn
+var UpdateRecoveryPlanRequest_name = &sUpdateRecoveryPlanRequest_name
+var UpdateRecoveryPlanRequest_description = &sUpdateRecoveryPlanRequest_description
+
+var UpdateRecoveryPlanResponse = &sUpdateRecoveryPlanResponse
+var UpdateRecoveryPlanResponse_recoveryPlan = &sUpdateRecoveryPlanResponse_recoveryPlan
+
+var UpdateRecoveryPlanStepRequest = &sUpdateRecoveryPlanStepRequest
+var UpdateRecoveryPlanStepRequest_recoveryPlanStepArn = &sUpdateRecoveryPlanStepRequest_recoveryPlanStepArn
+var UpdateRecoveryPlanStepRequest_stepName = &sUpdateRecoveryPlanStepRequest_stepName
+var UpdateRecoveryPlanStepRequest_configuration = &sUpdateRecoveryPlanStepRequest_configuration
+
+var UpdateRecoveryPlanStepResponse = &sUpdateRecoveryPlanStepResponse
+var UpdateRecoveryPlanStepResponse_recoveryPlanStep = &sUpdateRecoveryPlanStepResponse_recoveryPlanStep
+
+var UpdateReplicationConfigurationRequest = &sUpdateReplicationConfigurationRequest
+var UpdateReplicationConfigurationRequest_sourceServerID = &sUpdateReplicationConfigurationRequest_sourceServerID
+var UpdateReplicationConfigurationRequest_name = &sUpdateReplicationConfigurationRequest_name
+var UpdateReplicationConfigurationRequest_stagingAreaSubnetId = &sUpdateReplicationConfigurationRequest_stagingAreaSubnetId
+var UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup = &sUpdateReplicationConfigurationRequest_associateDefaultSecurityGroup
+var UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs = &sUpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs
+var UpdateReplicationConfigurationRequest_replicationServerInstanceType = &sUpdateReplicationConfigurationRequest_replicationServerInstanceType
+var UpdateReplicationConfigurationRequest_useDedicatedReplicationServer = &sUpdateReplicationConfigurationRequest_useDedicatedReplicationServer
+var UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType = &sUpdateReplicationConfigurationRequest_defaultLargeStagingDiskType
+var UpdateReplicationConfigurationRequest_replicatedDisks = &sUpdateReplicationConfigurationRequest_replicatedDisks
+var UpdateReplicationConfigurationRequest_ebsEncryption = &sUpdateReplicationConfigurationRequest_ebsEncryption
+var UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn = &sUpdateReplicationConfigurationRequest_ebsEncryptionKeyArn
+var UpdateReplicationConfigurationRequest_bandwidthThrottling = &sUpdateReplicationConfigurationRequest_bandwidthThrottling
+var UpdateReplicationConfigurationRequest_dataPlaneRouting = &sUpdateReplicationConfigurationRequest_dataPlaneRouting
+var UpdateReplicationConfigurationRequest_createPublicIP = &sUpdateReplicationConfigurationRequest_createPublicIP
+var UpdateReplicationConfigurationRequest_stagingAreaTags = &sUpdateReplicationConfigurationRequest_stagingAreaTags
+var UpdateReplicationConfigurationRequest_pitPolicy = &sUpdateReplicationConfigurationRequest_pitPolicy
+var UpdateReplicationConfigurationRequest_autoReplicateNewDisks = &sUpdateReplicationConfigurationRequest_autoReplicateNewDisks
+var UpdateReplicationConfigurationRequest_internetProtocol = &sUpdateReplicationConfigurationRequest_internetProtocol
+
+var UpdateReplicationConfigurationTemplateRequest = &sUpdateReplicationConfigurationTemplateRequest
+var UpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = &sUpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID
+var UpdateReplicationConfigurationTemplateRequest_arn = &sUpdateReplicationConfigurationTemplateRequest_arn
+var UpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = &sUpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId
+var UpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup = &sUpdateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup
+var UpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs = &sUpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs
+var UpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType = &sUpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType
+var UpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer = &sUpdateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer
+var UpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType = &sUpdateReplicationConfigurationTemplateRequest_defaultLargeStagingDiskType
+var UpdateReplicationConfigurationTemplateRequest_ebsEncryption = &sUpdateReplicationConfigurationTemplateRequest_ebsEncryption
+var UpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn = &sUpdateReplicationConfigurationTemplateRequest_ebsEncryptionKeyArn
+var UpdateReplicationConfigurationTemplateRequest_bandwidthThrottling = &sUpdateReplicationConfigurationTemplateRequest_bandwidthThrottling
+var UpdateReplicationConfigurationTemplateRequest_dataPlaneRouting = &sUpdateReplicationConfigurationTemplateRequest_dataPlaneRouting
+var UpdateReplicationConfigurationTemplateRequest_createPublicIP = &sUpdateReplicationConfigurationTemplateRequest_createPublicIP
+var UpdateReplicationConfigurationTemplateRequest_stagingAreaTags = &sUpdateReplicationConfigurationTemplateRequest_stagingAreaTags
+var UpdateReplicationConfigurationTemplateRequest_pitPolicy = &sUpdateReplicationConfigurationTemplateRequest_pitPolicy
+var UpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks = &sUpdateReplicationConfigurationTemplateRequest_autoReplicateNewDisks
+var UpdateReplicationConfigurationTemplateRequest_internetProtocol = &sUpdateReplicationConfigurationTemplateRequest_internetProtocol
+
+var ElasticDisasterRecoveryService = &smithy.ServiceSchema{Schema: &s_ElasticDisasterRecoveryService, Version: "2020-02-26"}

@@ -4,4463 +4,4233 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelTaskExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CancelTaskExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateAgent",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationAzureBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationAzureBlob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationEfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationEfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationFsxLustre = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxLustre",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationFsxOntap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOntap",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationFsxOpenZfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOpenZfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationFsxWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxWindows",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationHdfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationHdfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationNfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationNfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationObjectStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationObjectStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationS3",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLocationSmb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationSmb",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteAgent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteLocation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeAgent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationAzureBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationAzureBlob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationEfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationEfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationFsxLustre = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxLustre",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationFsxOntap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOntap",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationFsxOpenZfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOpenZfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationFsxWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxWindows",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationHdfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationHdfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationNfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationNfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationObjectStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationObjectStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationS3",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocationSmb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationSmb",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTaskExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTaskExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAgents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListAgents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListLocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTaskExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTaskExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartTaskExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "StartTaskExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateAgent",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationAzureBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationAzureBlob",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationEfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationEfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationFsxLustre = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxLustre",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationFsxOntap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOntap",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationFsxOpenZfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOpenZfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationFsxWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxWindows",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationHdfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationHdfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationNfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationNfs",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationObjectStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationObjectStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationS3",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLocationSmb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationSmb",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTaskExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTaskExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var _FmrsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FmrsService",
-}, smithy.ShapeTypeService, 0)
-
-var FmrsService = smithy.NewServiceSchema(_FmrsService, "2018-11-09")
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AgentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AgentArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentArnList",
-}, smithy.ShapeTypeList, 1)
-var _AgentArnList_member *smithy.Schema
-
-var _AgentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentList",
-}, smithy.ShapeTypeList, 1)
-var _AgentList_member *smithy.Schema
-
-var AgentListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentListEntry",
-}, smithy.ShapeTypeStructure, 4)
-var AgentListEntry_AgentArn *smithy.Schema
-
-var AgentListEntry_Name *smithy.Schema
-
-var AgentListEntry_Status *smithy.Schema
-
-var AgentListEntry_Platform *smithy.Schema
-
-var AgentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AgentStatus_ONLINE *smithy.Schema
-
-var AgentStatus_OFFLINE *smithy.Schema
-
-var _AgentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AgentVersion",
-}, smithy.ShapeTypeString, 0)
-
-var Atime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Atime",
-}, smithy.ShapeTypeEnum, 2)
-var Atime_NONE *smithy.Schema
-
-var Atime_BEST_EFFORT *smithy.Schema
-
-var AzureAccessTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureAccessTier",
-}, smithy.ShapeTypeEnum, 3)
-var AzureAccessTier_HOT *smithy.Schema
-
-var AzureAccessTier_COOL *smithy.Schema
-
-var AzureAccessTier_ARCHIVE *smithy.Schema
-
-var AzureBlobAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobAuthenticationType",
-}, smithy.ShapeTypeEnum, 3)
-var AzureBlobAuthenticationType_SAS *smithy.Schema
-
-var AzureBlobAuthenticationType_NONE *smithy.Schema
-
-var AzureBlobAuthenticationType_OIDC *smithy.Schema
-
-var _AzureBlobContainerUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobContainerUrl",
-}, smithy.ShapeTypeString, 0)
-
-var AzureBlobSasConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobSasConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AzureBlobSasConfiguration_Token *smithy.Schema
-
-var _AzureBlobSasToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobSasToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AzureBlobSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var AzureBlobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureBlobType",
-}, smithy.ShapeTypeEnum, 1)
-var AzureBlobType_BLOCK *smithy.Schema
-
-var AzureFederatedIdentityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureFederatedIdentityConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AzureFederatedIdentityConfig_AwsIamRole *smithy.Schema
-
-var AzureFederatedIdentityConfig_AzureOidc *smithy.Schema
-
-var _AzureGuidString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureGuidString",
-}, smithy.ShapeTypeString, 0)
-
-var AzureOidcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "AzureOidcConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AzureOidcConfig_TenantId *smithy.Schema
-
-var AzureOidcConfig_ClientId *smithy.Schema
-
-var _BytesPerSecond = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "BytesPerSecond",
-}, smithy.ShapeTypeLong, 0)
-
-var CmkSecretConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CmkSecretConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CmkSecretConfig_SecretArn *smithy.Schema
-
-var CmkSecretConfig_KmsKeyArn *smithy.Schema
-
-var CustomSecretConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CustomSecretConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CustomSecretConfig_SecretArn *smithy.Schema
-
-var CustomSecretConfig_SecretAccessRoleArn *smithy.Schema
-
-var _DestinationNetworkInterfaceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DestinationNetworkInterfaceArns",
-}, smithy.ShapeTypeList, 1)
-var _DestinationNetworkInterfaceArns_member *smithy.Schema
-
-var _DnsIpList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DnsIpList",
-}, smithy.ShapeTypeList, 1)
-var _DnsIpList_member *smithy.Schema
-
-var _Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Duration",
-}, smithy.ShapeTypeLong, 0)
-
-var Ec2Config = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Ec2Config",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2Config_SubnetArn *smithy.Schema
-
-var Ec2Config_SecurityGroupArns *smithy.Schema
-
-var _Ec2SecurityGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Ec2SecurityGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Ec2SecurityGroupArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Ec2SecurityGroupArnList",
-}, smithy.ShapeTypeList, 1)
-var _Ec2SecurityGroupArnList_member *smithy.Schema
-
-var _Ec2SubnetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Ec2SubnetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EfsAccessPointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "EfsAccessPointArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EfsFilesystemArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "EfsFilesystemArn",
-}, smithy.ShapeTypeString, 0)
-
-var EfsInTransitEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "EfsInTransitEncryption",
-}, smithy.ShapeTypeEnum, 2)
-var EfsInTransitEncryption_NONE *smithy.Schema
-
-var EfsInTransitEncryption_TLS1_2 *smithy.Schema
-
-var _EfsSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "EfsSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeString, 0)
-
-var EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeEnum, 4)
-var EndpointType_PUBLIC *smithy.Schema
-
-var EndpointType_PRIVATE_LINK *smithy.Schema
-
-var EndpointType_FIPS *smithy.Schema
-
-var EndpointType_FIPS_PRIVATE_LINK *smithy.Schema
-
-var _FilterAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var FilterRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterRule",
-}, smithy.ShapeTypeStructure, 2)
-var FilterRule_FilterType *smithy.Schema
-
-var FilterRule_Value *smithy.Schema
-
-var FilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterType",
-}, smithy.ShapeTypeEnum, 1)
-var FilterType_SIMPLE_PATTERN *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var _FsxFilesystemArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxFilesystemArn",
-}, smithy.ShapeTypeString, 0)
-
-var _FsxLustreSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxLustreSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _FsxOntapSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxOntapSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _FsxOpenZfsSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxOpenZfsSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var FsxProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxProtocol",
-}, smithy.ShapeTypeStructure, 2)
-var FsxProtocol_NFS *smithy.Schema
-
-var FsxProtocol_SMB *smithy.Schema
-
-var FsxProtocolNfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxProtocolNfs",
-}, smithy.ShapeTypeStructure, 1)
-var FsxProtocolNfs_MountOptions *smithy.Schema
-
-var FsxProtocolSmb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxProtocolSmb",
-}, smithy.ShapeTypeStructure, 7)
-var FsxProtocolSmb_Domain *smithy.Schema
-
-var FsxProtocolSmb_MountOptions *smithy.Schema
-
-var FsxProtocolSmb_Password *smithy.Schema
-
-var FsxProtocolSmb_User *smithy.Schema
-
-var FsxProtocolSmb_ManagedSecretConfig *smithy.Schema
-
-var FsxProtocolSmb_CmkSecretConfig *smithy.Schema
-
-var FsxProtocolSmb_CustomSecretConfig *smithy.Schema
-
-var FsxUpdateProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxUpdateProtocol",
-}, smithy.ShapeTypeStructure, 2)
-var FsxUpdateProtocol_NFS *smithy.Schema
-
-var FsxUpdateProtocol_SMB *smithy.Schema
-
-var FsxUpdateProtocolSmb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxUpdateProtocolSmb",
-}, smithy.ShapeTypeStructure, 6)
-var FsxUpdateProtocolSmb_Domain *smithy.Schema
-
-var FsxUpdateProtocolSmb_MountOptions *smithy.Schema
-
-var FsxUpdateProtocolSmb_Password *smithy.Schema
-
-var FsxUpdateProtocolSmb_User *smithy.Schema
-
-var FsxUpdateProtocolSmb_CmkSecretConfig *smithy.Schema
-
-var FsxUpdateProtocolSmb_CustomSecretConfig *smithy.Schema
-
-var _FsxWindowsSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "FsxWindowsSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var Gid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Gid",
-}, smithy.ShapeTypeEnum, 4)
-var Gid_NONE *smithy.Schema
-
-var Gid_INT_VALUE *smithy.Schema
-
-var Gid_NAME *smithy.Schema
-
-var Gid_BOTH *smithy.Schema
-
-var _GoogleIdentityFederationResourceString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "GoogleIdentityFederationResourceString",
-}, smithy.ShapeTypeString, 0)
-
-var GoogleOidcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "GoogleOidcConfig",
-}, smithy.ShapeTypeStructure, 4)
-var GoogleOidcConfig_ProjectName *smithy.Schema
-
-var GoogleOidcConfig_ProjectNumber *smithy.Schema
-
-var GoogleOidcConfig_IdentityPoolName *smithy.Schema
-
-var GoogleOidcConfig_IdentityProviderName *smithy.Schema
-
-var HdfsAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsAuthenticationType",
-}, smithy.ShapeTypeEnum, 2)
-var HdfsAuthenticationType_SIMPLE *smithy.Schema
-
-var HdfsAuthenticationType_KERBEROS *smithy.Schema
-
-var _HdfsBlockSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsBlockSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var HdfsDataTransferProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsDataTransferProtection",
-}, smithy.ShapeTypeEnum, 4)
-var HdfsDataTransferProtection_DISABLED *smithy.Schema
-
-var HdfsDataTransferProtection_AUTHENTICATION *smithy.Schema
-
-var HdfsDataTransferProtection_INTEGRITY *smithy.Schema
-
-var HdfsDataTransferProtection_PRIVACY *smithy.Schema
-
-var HdfsNameNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsNameNode",
-}, smithy.ShapeTypeStructure, 2)
-var HdfsNameNode_Hostname *smithy.Schema
-
-var HdfsNameNode_Port *smithy.Schema
-
-var _HdfsNameNodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsNameNodeList",
-}, smithy.ShapeTypeList, 1)
-var _HdfsNameNodeList_member *smithy.Schema
-
-var _HdfsReplicationFactor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsReplicationFactor",
-}, smithy.ShapeTypeInteger, 0)
-
-var HdfsRpcProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsRpcProtection",
-}, smithy.ShapeTypeEnum, 4)
-var HdfsRpcProtection_DISABLED *smithy.Schema
-
-var HdfsRpcProtection_AUTHENTICATION *smithy.Schema
-
-var HdfsRpcProtection_INTEGRITY *smithy.Schema
-
-var HdfsRpcProtection_PRIVACY *smithy.Schema
-
-var _HdfsServerHostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsServerHostname",
-}, smithy.ShapeTypeString, 0)
-
-var _HdfsServerPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsServerPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HdfsSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _HdfsUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "HdfsUser",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArnOrEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "IamRoleArnOrEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _InputTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "InputTagList",
-}, smithy.ShapeTypeList, 1)
-var _InputTagList_member *smithy.Schema
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
-var InternalException_message *smithy.Schema
-
-var InternalException_errorCode *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
-var InvalidRequestException_message *smithy.Schema
-
-var InvalidRequestException_errorCode *smithy.Schema
-
-var InvalidRequestException_datasyncErrorCode *smithy.Schema
-
-var _ItemCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ItemCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _KerberosKeytabFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "KerberosKeytabFile",
-}, smithy.ShapeTypeBlob, 0)
-
-var _KerberosKrb5ConfFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "KerberosKrb5ConfFile",
-}, smithy.ShapeTypeBlob, 0)
-
-var _KerberosPrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "KerberosPrincipal",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyProviderUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "KmsKeyProviderUri",
-}, smithy.ShapeTypeString, 0)
-
-var _LocationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationArn",
-}, smithy.ShapeTypeString, 0)
-
-var LocationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationFilter",
-}, smithy.ShapeTypeStructure, 3)
-var LocationFilter_Name *smithy.Schema
-
-var LocationFilter_Values *smithy.Schema
-
-var LocationFilter_Operator *smithy.Schema
-
-var LocationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var LocationFilterName_LocationUri *smithy.Schema
-
-var LocationFilterName_LocationType *smithy.Schema
-
-var LocationFilterName_CreationTime *smithy.Schema
-
-var _LocationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationFilters",
-}, smithy.ShapeTypeList, 1)
-var _LocationFilters_member *smithy.Schema
-
-var _LocationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationList",
-}, smithy.ShapeTypeList, 1)
-var _LocationList_member *smithy.Schema
-
-var LocationListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationListEntry",
-}, smithy.ShapeTypeStructure, 2)
-var LocationListEntry_LocationArn *smithy.Schema
-
-var LocationListEntry_LocationUri *smithy.Schema
-
-var _LocationUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LocationUri",
-}, smithy.ShapeTypeString, 0)
-
-var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var LogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "LogLevel",
-}, smithy.ShapeTypeEnum, 3)
-var LogLevel_OFF *smithy.Schema
-
-var LogLevel_BASIC *smithy.Schema
-
-var LogLevel_TRANSFER *smithy.Schema
-
-var _long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "long",
-}, smithy.ShapeTypeLong, 0)
-
-var ManagedSecretConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ManagedSecretConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedSecretConfig_SecretArn *smithy.Schema
-
-var ManifestAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ManifestAction",
-}, smithy.ShapeTypeEnum, 1)
-var ManifestAction_TRANSFER *smithy.Schema
-
-var ManifestConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ManifestConfig",
-}, smithy.ShapeTypeStructure, 3)
-var ManifestConfig_Action *smithy.Schema
-
-var ManifestConfig_Format *smithy.Schema
-
-var ManifestConfig_Source *smithy.Schema
-
-var ManifestFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ManifestFormat",
-}, smithy.ShapeTypeEnum, 1)
-var ManifestFormat_CSV *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Mtime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Mtime",
-}, smithy.ShapeTypeEnum, 2)
-var Mtime_NONE *smithy.Schema
-
-var Mtime_PRESERVE *smithy.Schema
-
-var _NetworkInterfaceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "NetworkInterfaceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NfsMountOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "NfsMountOptions",
-}, smithy.ShapeTypeStructure, 1)
-var NfsMountOptions_Version *smithy.Schema
-
-var _NfsSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "NfsSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var NfsVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "NfsVersion",
-}, smithy.ShapeTypeEnum, 5)
-var NfsVersion_AUTOMATIC *smithy.Schema
-
-var NfsVersion_NFS3 *smithy.Schema
-
-var NfsVersion_NFS4_0 *smithy.Schema
-
-var NfsVersion_NFS4_1 *smithy.Schema
-
-var NfsVersion_NFS4_2 *smithy.Schema
-
-var ObjectMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectMetadata",
-}, smithy.ShapeTypeEnum, 2)
-var ObjectMetadata_PRESERVE *smithy.Schema
-
-var ObjectMetadata_NONE *smithy.Schema
-
-var _ObjectStorageAccessKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageAccessKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ObjectStorageBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _ObjectStorageCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageCertificate",
-}, smithy.ShapeTypeBlob, 0)
-
-var ObjectStorageExternalIdentityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageExternalIdentityConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ObjectStorageExternalIdentityConfig_GoogleOidc *smithy.Schema
-
-var ObjectStorageFederatedIdentityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageFederatedIdentityConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ObjectStorageFederatedIdentityConfig_AwsIamRole *smithy.Schema
-
-var ObjectStorageFederatedIdentityConfig_ExternalIdentity *smithy.Schema
-
-var _ObjectStorageSecretKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageSecretKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ObjectStorageServerPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageServerPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObjectStorageServerProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectStorageServerProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var ObjectStorageServerProtocol_HTTPS *smithy.Schema
-
-var ObjectStorageServerProtocol_HTTP *smithy.Schema
-
-var ObjectTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectTags",
-}, smithy.ShapeTypeEnum, 2)
-var ObjectTags_PRESERVE *smithy.Schema
-
-var ObjectTags_NONE *smithy.Schema
-
-var ObjectVersionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ObjectVersionIds",
-}, smithy.ShapeTypeEnum, 2)
-var ObjectVersionIds_INCLUDE *smithy.Schema
-
-var ObjectVersionIds_NONE *smithy.Schema
-
-var OnPremConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "OnPremConfig",
-}, smithy.ShapeTypeStructure, 1)
-var OnPremConfig_AgentArns *smithy.Schema
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Operator",
-}, smithy.ShapeTypeEnum, 10)
-var Operator_EQ *smithy.Schema
-
-var Operator_NE *smithy.Schema
-
-var Operator_IN *smithy.Schema
-
-var Operator_LE *smithy.Schema
-
-var Operator_LT *smithy.Schema
-
-var Operator_GE *smithy.Schema
-
-var Operator_GT *smithy.Schema
-
-var Operator_CONTAINS *smithy.Schema
-
-var Operator_NOT_CONTAINS *smithy.Schema
-
-var Operator_BEGINS_WITH *smithy.Schema
-
-var Options = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Options",
-}, smithy.ShapeTypeStructure, 16)
-var Options_VerifyMode *smithy.Schema
-
-var Options_OverwriteMode *smithy.Schema
-
-var Options_Atime *smithy.Schema
-
-var Options_Mtime *smithy.Schema
-
-var Options_Uid *smithy.Schema
-
-var Options_Gid *smithy.Schema
-
-var Options_PreserveDeletedFiles *smithy.Schema
-
-var Options_PreserveDevices *smithy.Schema
-
-var Options_PosixPermissions *smithy.Schema
-
-var Options_BytesPerSecond *smithy.Schema
-
-var Options_TaskQueueing *smithy.Schema
-
-var Options_LogLevel *smithy.Schema
-
-var Options_TransferMode *smithy.Schema
-
-var Options_SecurityDescriptorCopyFlags *smithy.Schema
-
-var Options_ObjectTags *smithy.Schema
-
-var Options_ObjectMetadata *smithy.Schema
-
-var _OutputTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "OutputTagList",
-}, smithy.ShapeTypeList, 1)
-var _OutputTagList_member *smithy.Schema
-
-var OverwriteMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "OverwriteMode",
-}, smithy.ShapeTypeEnum, 2)
-var OverwriteMode_ALWAYS *smithy.Schema
-
-var OverwriteMode_NEVER *smithy.Schema
-
-var PhaseStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PhaseStatus",
-}, smithy.ShapeTypeEnum, 3)
-var PhaseStatus_PENDING *smithy.Schema
-
-var PhaseStatus_SUCCESS *smithy.Schema
-
-var PhaseStatus_ERROR *smithy.Schema
-
-var Platform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Platform",
-}, smithy.ShapeTypeStructure, 1)
-var Platform_Version *smithy.Schema
-
-var _PLSecurityGroupArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PLSecurityGroupArnList",
-}, smithy.ShapeTypeList, 1)
-var _PLSecurityGroupArnList_member *smithy.Schema
-
-var _PLSubnetArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PLSubnetArnList",
-}, smithy.ShapeTypeList, 1)
-var _PLSubnetArnList_member *smithy.Schema
-
-var PosixPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PosixPermissions",
-}, smithy.ShapeTypeEnum, 2)
-var PosixPermissions_NONE *smithy.Schema
-
-var PosixPermissions_PRESERVE *smithy.Schema
-
-var PreserveDeletedFiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PreserveDeletedFiles",
-}, smithy.ShapeTypeEnum, 2)
-var PreserveDeletedFiles_PRESERVE *smithy.Schema
-
-var PreserveDeletedFiles_REMOVE *smithy.Schema
-
-var PreserveDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PreserveDevices",
-}, smithy.ShapeTypeEnum, 2)
-var PreserveDevices_NONE *smithy.Schema
-
-var PreserveDevices_PRESERVE *smithy.Schema
-
-var PrivateLinkConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "PrivateLinkConfig",
-}, smithy.ShapeTypeStructure, 4)
-var PrivateLinkConfig_VpcEndpointId *smithy.Schema
-
-var PrivateLinkConfig_PrivateLinkEndpoint *smithy.Schema
-
-var PrivateLinkConfig_SubnetArns *smithy.Schema
-
-var PrivateLinkConfig_SecurityGroupArns *smithy.Schema
-
-var _ProjectNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ProjectNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _ProjectNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ProjectNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var QopConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "QopConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var QopConfiguration_RpcProtection *smithy.Schema
-
-var QopConfiguration_DataTransferProtection *smithy.Schema
-
-var ReportDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportDestination",
-}, smithy.ShapeTypeStructure, 1)
-var ReportDestination_S3 *smithy.Schema
-
-var ReportDestinationS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportDestinationS3",
-}, smithy.ShapeTypeStructure, 3)
-var ReportDestinationS3_Subdirectory *smithy.Schema
-
-var ReportDestinationS3_S3BucketArn *smithy.Schema
-
-var ReportDestinationS3_BucketAccessRoleArn *smithy.Schema
-
-var ReportLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportLevel",
-}, smithy.ShapeTypeEnum, 2)
-var ReportLevel_ERRORS_ONLY *smithy.Schema
-
-var ReportLevel_SUCCESSES_AND_ERRORS *smithy.Schema
-
-var ReportOutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportOutputType",
-}, smithy.ShapeTypeEnum, 2)
-var ReportOutputType_SUMMARY_ONLY *smithy.Schema
-
-var ReportOutputType_STANDARD *smithy.Schema
-
-var ReportOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportOverride",
-}, smithy.ShapeTypeStructure, 1)
-var ReportOverride_ReportLevel *smithy.Schema
-
-var ReportOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportOverrides",
-}, smithy.ShapeTypeStructure, 4)
-var ReportOverrides_Transferred *smithy.Schema
-
-var ReportOverrides_Verified *smithy.Schema
-
-var ReportOverrides_Deleted *smithy.Schema
-
-var ReportOverrides_Skipped *smithy.Schema
-
-var ReportResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ReportResult",
-}, smithy.ShapeTypeStructure, 3)
-var ReportResult_Status *smithy.Schema
-
-var ReportResult_ErrorCode *smithy.Schema
-
-var ReportResult_ErrorDetail *smithy.Schema
-
-var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3Config = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3Config",
-}, smithy.ShapeTypeStructure, 1)
-var S3Config_BucketAccessRoleArn *smithy.Schema
-
-var S3ManifestConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3ManifestConfig",
-}, smithy.ShapeTypeStructure, 4)
-var S3ManifestConfig_ManifestObjectPath *smithy.Schema
-
-var S3ManifestConfig_BucketAccessRoleArn *smithy.Schema
-
-var S3ManifestConfig_S3BucketArn *smithy.Schema
-
-var S3ManifestConfig_ManifestObjectVersionId *smithy.Schema
-
-var _S3ObjectVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3ObjectVersionId",
-}, smithy.ShapeTypeString, 0)
-
-var S3StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3StorageClass",
-}, smithy.ShapeTypeEnum, 8)
-var S3StorageClass_STANDARD *smithy.Schema
-
-var S3StorageClass_STANDARD_IA *smithy.Schema
-
-var S3StorageClass_ONEZONE_IA *smithy.Schema
-
-var S3StorageClass_INTELLIGENT_TIERING *smithy.Schema
-
-var S3StorageClass_GLACIER *smithy.Schema
-
-var S3StorageClass_DEEP_ARCHIVE *smithy.Schema
-
-var S3StorageClass_OUTPOSTS *smithy.Schema
-
-var S3StorageClass_GLACIER_INSTANT_RETRIEVAL *smithy.Schema
-
-var _S3Subdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "S3Subdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduleDisabledBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ScheduleDisabledBy",
-}, smithy.ShapeTypeEnum, 2)
-var ScheduleDisabledBy_USER *smithy.Schema
-
-var ScheduleDisabledBy_SERVICE *smithy.Schema
-
-var _ScheduleDisabledReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ScheduleDisabledReason",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleExpressionCron = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ScheduleExpressionCron",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ScheduleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ScheduleStatus_ENABLED *smithy.Schema
-
-var ScheduleStatus_DISABLED *smithy.Schema
-
-var _SecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerHostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ServerHostname",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerIpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ServerIpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var SmbAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbAuthenticationType",
-}, smithy.ShapeTypeEnum, 2)
-var SmbAuthenticationType_NTLM *smithy.Schema
-
-var SmbAuthenticationType_KERBEROS *smithy.Schema
-
-var _SmbDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbDomain",
-}, smithy.ShapeTypeString, 0)
-
-var SmbMountOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbMountOptions",
-}, smithy.ShapeTypeStructure, 1)
-var SmbMountOptions_Version *smithy.Schema
-
-var _SmbPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SmbSecurityDescriptorCopyFlags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbSecurityDescriptorCopyFlags",
-}, smithy.ShapeTypeEnum, 3)
-var SmbSecurityDescriptorCopyFlags_NONE *smithy.Schema
-
-var SmbSecurityDescriptorCopyFlags_OWNER_DACL *smithy.Schema
-
-var SmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL *smithy.Schema
-
-var _SmbSubdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbSubdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _SmbUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbUser",
-}, smithy.ShapeTypeString, 0)
-
-var SmbVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SmbVersion",
-}, smithy.ShapeTypeEnum, 5)
-var SmbVersion_AUTOMATIC *smithy.Schema
-
-var SmbVersion_SMB2 *smithy.Schema
-
-var SmbVersion_SMB3 *smithy.Schema
-
-var SmbVersion_SMB1 *smithy.Schema
-
-var SmbVersion_SMB2_0 *smithy.Schema
-
-var SourceManifestConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SourceManifestConfig",
-}, smithy.ShapeTypeStructure, 1)
-var SourceManifestConfig_S3 *smithy.Schema
-
-var _SourceNetworkInterfaceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "SourceNetworkInterfaceArns",
-}, smithy.ShapeTypeList, 1)
-var _SourceNetworkInterfaceArns_member *smithy.Schema
-
-var _StorageVirtualMachineArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "StorageVirtualMachineArn",
-}, smithy.ShapeTypeString, 0)
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagListEntry",
-}, smithy.ShapeTypeStructure, 2)
-var TagListEntry_Key *smithy.Schema
-
-var TagListEntry_Value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskExecutionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionArn",
-}, smithy.ShapeTypeString, 0)
-
-var TaskExecutionFilesFailedDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionFilesFailedDetail",
-}, smithy.ShapeTypeStructure, 4)
-var TaskExecutionFilesFailedDetail_Prepare *smithy.Schema
-
-var TaskExecutionFilesFailedDetail_Transfer *smithy.Schema
-
-var TaskExecutionFilesFailedDetail_Verify *smithy.Schema
-
-var TaskExecutionFilesFailedDetail_Delete *smithy.Schema
-
-var TaskExecutionFilesListedDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionFilesListedDetail",
-}, smithy.ShapeTypeStructure, 2)
-var TaskExecutionFilesListedDetail_AtSource *smithy.Schema
-
-var TaskExecutionFilesListedDetail_AtDestinationForDelete *smithy.Schema
-
-var TaskExecutionFoldersFailedDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionFoldersFailedDetail",
-}, smithy.ShapeTypeStructure, 5)
-var TaskExecutionFoldersFailedDetail_List *smithy.Schema
-
-var TaskExecutionFoldersFailedDetail_Prepare *smithy.Schema
-
-var TaskExecutionFoldersFailedDetail_Transfer *smithy.Schema
-
-var TaskExecutionFoldersFailedDetail_Verify *smithy.Schema
-
-var TaskExecutionFoldersFailedDetail_Delete *smithy.Schema
-
-var TaskExecutionFoldersListedDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionFoldersListedDetail",
-}, smithy.ShapeTypeStructure, 2)
-var TaskExecutionFoldersListedDetail_AtSource *smithy.Schema
-
-var TaskExecutionFoldersListedDetail_AtDestinationForDelete *smithy.Schema
-
-var _TaskExecutionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionList",
-}, smithy.ShapeTypeList, 1)
-var _TaskExecutionList_member *smithy.Schema
-
-var TaskExecutionListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionListEntry",
-}, smithy.ShapeTypeStructure, 3)
-var TaskExecutionListEntry_TaskExecutionArn *smithy.Schema
-
-var TaskExecutionListEntry_Status *smithy.Schema
-
-var TaskExecutionListEntry_TaskMode *smithy.Schema
-
-var TaskExecutionResultDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionResultDetail",
-}, smithy.ShapeTypeStructure, 9)
-var TaskExecutionResultDetail_PrepareDuration *smithy.Schema
-
-var TaskExecutionResultDetail_PrepareStatus *smithy.Schema
-
-var TaskExecutionResultDetail_TotalDuration *smithy.Schema
-
-var TaskExecutionResultDetail_TransferDuration *smithy.Schema
-
-var TaskExecutionResultDetail_TransferStatus *smithy.Schema
-
-var TaskExecutionResultDetail_VerifyDuration *smithy.Schema
-
-var TaskExecutionResultDetail_VerifyStatus *smithy.Schema
-
-var TaskExecutionResultDetail_ErrorCode *smithy.Schema
-
-var TaskExecutionResultDetail_ErrorDetail *smithy.Schema
-
-var TaskExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskExecutionStatus",
-}, smithy.ShapeTypeEnum, 8)
-var TaskExecutionStatus_QUEUED *smithy.Schema
-
-var TaskExecutionStatus_CANCELLING *smithy.Schema
-
-var TaskExecutionStatus_LAUNCHING *smithy.Schema
-
-var TaskExecutionStatus_PREPARING *smithy.Schema
-
-var TaskExecutionStatus_TRANSFERRING *smithy.Schema
-
-var TaskExecutionStatus_VERIFYING *smithy.Schema
-
-var TaskExecutionStatus_SUCCESS *smithy.Schema
-
-var TaskExecutionStatus_ERROR *smithy.Schema
-
-var TaskFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskFilter",
-}, smithy.ShapeTypeStructure, 3)
-var TaskFilter_Name *smithy.Schema
-
-var TaskFilter_Values *smithy.Schema
-
-var TaskFilter_Operator *smithy.Schema
-
-var TaskFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var TaskFilterName_LocationId *smithy.Schema
-
-var TaskFilterName_CreationTime *smithy.Schema
-
-var _TaskFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskFilters",
-}, smithy.ShapeTypeList, 1)
-var _TaskFilters_member *smithy.Schema
-
-var _TaskList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskList",
-}, smithy.ShapeTypeList, 1)
-var _TaskList_member *smithy.Schema
-
-var TaskListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskListEntry",
-}, smithy.ShapeTypeStructure, 4)
-var TaskListEntry_TaskArn *smithy.Schema
-
-var TaskListEntry_Status *smithy.Schema
-
-var TaskListEntry_Name *smithy.Schema
-
-var TaskListEntry_TaskMode *smithy.Schema
-
-var TaskMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskMode",
-}, smithy.ShapeTypeEnum, 2)
-var TaskMode_BASIC *smithy.Schema
-
-var TaskMode_ENHANCED *smithy.Schema
-
-var TaskQueueing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskQueueing",
-}, smithy.ShapeTypeEnum, 2)
-var TaskQueueing_ENABLED *smithy.Schema
-
-var TaskQueueing_DISABLED *smithy.Schema
-
-var TaskReportConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskReportConfig",
-}, smithy.ShapeTypeStructure, 5)
-var TaskReportConfig_Destination *smithy.Schema
-
-var TaskReportConfig_OutputType *smithy.Schema
-
-var TaskReportConfig_ReportLevel *smithy.Schema
-
-var TaskReportConfig_ObjectVersionIds *smithy.Schema
-
-var TaskReportConfig_Overrides *smithy.Schema
-
-var TaskSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskSchedule",
-}, smithy.ShapeTypeStructure, 2)
-var TaskSchedule_ScheduleExpression *smithy.Schema
-
-var TaskSchedule_Status *smithy.Schema
-
-var TaskScheduleDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskScheduleDetails",
-}, smithy.ShapeTypeStructure, 3)
-var TaskScheduleDetails_StatusUpdateTime *smithy.Schema
-
-var TaskScheduleDetails_DisabledReason *smithy.Schema
-
-var TaskScheduleDetails_DisabledBy *smithy.Schema
-
-var TaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TaskStatus",
-}, smithy.ShapeTypeEnum, 5)
-var TaskStatus_AVAILABLE *smithy.Schema
-
-var TaskStatus_CREATING *smithy.Schema
-
-var TaskStatus_QUEUED *smithy.Schema
-
-var TaskStatus_RUNNING *smithy.Schema
-
-var TaskStatus_UNAVAILABLE *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TransferMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TransferMode",
-}, smithy.ShapeTypeEnum, 2)
-var TransferMode_CHANGED *smithy.Schema
-
-var TransferMode_ALL *smithy.Schema
-
-var Uid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "Uid",
-}, smithy.ShapeTypeEnum, 4)
-var Uid_NONE *smithy.Schema
-
-var Uid_INT_VALUE *smithy.Schema
-
-var Uid_NAME *smithy.Schema
-
-var Uid_BOTH *smithy.Schema
-
-var _UpdatedEfsAccessPointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdatedEfsAccessPointArn",
-}, smithy.ShapeTypeString, 0)
-
-var _UpdatedEfsIamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdatedEfsIamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _UpdateSmbDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateSmbDomain",
-}, smithy.ShapeTypeString, 0)
-
-var VerifyMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "VerifyMode",
-}, smithy.ShapeTypeEnum, 3)
-var VerifyMode_POINT_IN_TIME_CONSISTENT *smithy.Schema
-
-var VerifyMode_ONLY_FILES_TRANSFERRED *smithy.Schema
-
-var VerifyMode_NONE *smithy.Schema
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var CancelTaskExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CancelTaskExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelTaskExecutionRequest_TaskExecutionArn *smithy.Schema
-
-var CancelTaskExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CancelTaskExecutionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateAgentRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAgentRequest_ActivationKey *smithy.Schema
-
-var CreateAgentRequest_AgentName *smithy.Schema
-
-var CreateAgentRequest_Tags *smithy.Schema
-
-var CreateAgentRequest_VpcEndpointId *smithy.Schema
-
-var CreateAgentRequest_SubnetArns *smithy.Schema
-
-var CreateAgentRequest_SecurityGroupArns *smithy.Schema
-
-var CreateAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateAgentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAgentResponse_AgentArn *smithy.Schema
-
-var CreateLocationAzureBlobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationAzureBlobRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateLocationAzureBlobRequest_ContainerUrl *smithy.Schema
-
-var CreateLocationAzureBlobRequest_AuthenticationType *smithy.Schema
-
-var CreateLocationAzureBlobRequest_SasConfiguration *smithy.Schema
-
-var CreateLocationAzureBlobRequest_FederatedIdentity *smithy.Schema
-
-var CreateLocationAzureBlobRequest_BlobType *smithy.Schema
-
-var CreateLocationAzureBlobRequest_AccessTier *smithy.Schema
-
-var CreateLocationAzureBlobRequest_Subdirectory *smithy.Schema
-
-var CreateLocationAzureBlobRequest_AgentArns *smithy.Schema
-
-var CreateLocationAzureBlobRequest_Tags *smithy.Schema
-
-var CreateLocationAzureBlobRequest_CmkSecretConfig *smithy.Schema
-
-var CreateLocationAzureBlobRequest_CustomSecretConfig *smithy.Schema
-
-var CreateLocationAzureBlobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationAzureBlobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationAzureBlobResponse_LocationArn *smithy.Schema
-
-var CreateLocationEfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationEfsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateLocationEfsRequest_Subdirectory *smithy.Schema
-
-var CreateLocationEfsRequest_EfsFilesystemArn *smithy.Schema
-
-var CreateLocationEfsRequest_Ec2Config *smithy.Schema
-
-var CreateLocationEfsRequest_Tags *smithy.Schema
-
-var CreateLocationEfsRequest_AccessPointArn *smithy.Schema
-
-var CreateLocationEfsRequest_FileSystemAccessRoleArn *smithy.Schema
-
-var CreateLocationEfsRequest_InTransitEncryption *smithy.Schema
-
-var CreateLocationEfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationEfsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationEfsResponse_LocationArn *smithy.Schema
-
-var CreateLocationFsxLustreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxLustreRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateLocationFsxLustreRequest_FsxFilesystemArn *smithy.Schema
-
-var CreateLocationFsxLustreRequest_SecurityGroupArns *smithy.Schema
-
-var CreateLocationFsxLustreRequest_Subdirectory *smithy.Schema
-
-var CreateLocationFsxLustreRequest_Tags *smithy.Schema
-
-var CreateLocationFsxLustreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxLustreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationFsxLustreResponse_LocationArn *smithy.Schema
-
-var CreateLocationFsxOntapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOntapRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLocationFsxOntapRequest_Protocol *smithy.Schema
-
-var CreateLocationFsxOntapRequest_SecurityGroupArns *smithy.Schema
-
-var CreateLocationFsxOntapRequest_StorageVirtualMachineArn *smithy.Schema
-
-var CreateLocationFsxOntapRequest_Subdirectory *smithy.Schema
-
-var CreateLocationFsxOntapRequest_Tags *smithy.Schema
-
-var CreateLocationFsxOntapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOntapResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationFsxOntapResponse_LocationArn *smithy.Schema
-
-var CreateLocationFsxOpenZfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOpenZfsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLocationFsxOpenZfsRequest_FsxFilesystemArn *smithy.Schema
-
-var CreateLocationFsxOpenZfsRequest_Protocol *smithy.Schema
-
-var CreateLocationFsxOpenZfsRequest_SecurityGroupArns *smithy.Schema
-
-var CreateLocationFsxOpenZfsRequest_Subdirectory *smithy.Schema
-
-var CreateLocationFsxOpenZfsRequest_Tags *smithy.Schema
-
-var CreateLocationFsxOpenZfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxOpenZfsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationFsxOpenZfsResponse_LocationArn *smithy.Schema
-
-var CreateLocationFsxWindowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxWindowsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateLocationFsxWindowsRequest_Subdirectory *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_FsxFilesystemArn *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_SecurityGroupArns *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_Tags *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_User *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_Domain *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_Password *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_CmkSecretConfig *smithy.Schema
-
-var CreateLocationFsxWindowsRequest_CustomSecretConfig *smithy.Schema
-
-var CreateLocationFsxWindowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationFsxWindowsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationFsxWindowsResponse_LocationArn *smithy.Schema
-
-var CreateLocationHdfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationHdfsRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateLocationHdfsRequest_Subdirectory *smithy.Schema
-
-var CreateLocationHdfsRequest_NameNodes *smithy.Schema
-
-var CreateLocationHdfsRequest_BlockSize *smithy.Schema
-
-var CreateLocationHdfsRequest_ReplicationFactor *smithy.Schema
-
-var CreateLocationHdfsRequest_KmsKeyProviderUri *smithy.Schema
-
-var CreateLocationHdfsRequest_QopConfiguration *smithy.Schema
-
-var CreateLocationHdfsRequest_AuthenticationType *smithy.Schema
-
-var CreateLocationHdfsRequest_SimpleUser *smithy.Schema
-
-var CreateLocationHdfsRequest_KerberosPrincipal *smithy.Schema
-
-var CreateLocationHdfsRequest_KerberosKeytab *smithy.Schema
-
-var CreateLocationHdfsRequest_KerberosKrb5Conf *smithy.Schema
-
-var CreateLocationHdfsRequest_AgentArns *smithy.Schema
-
-var CreateLocationHdfsRequest_Tags *smithy.Schema
-
-var CreateLocationHdfsRequest_CmkSecretConfig *smithy.Schema
-
-var CreateLocationHdfsRequest_CustomSecretConfig *smithy.Schema
-
-var CreateLocationHdfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationHdfsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationHdfsResponse_LocationArn *smithy.Schema
-
-var CreateLocationNfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationNfsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLocationNfsRequest_Subdirectory *smithy.Schema
-
-var CreateLocationNfsRequest_ServerHostname *smithy.Schema
-
-var CreateLocationNfsRequest_OnPremConfig *smithy.Schema
-
-var CreateLocationNfsRequest_MountOptions *smithy.Schema
-
-var CreateLocationNfsRequest_Tags *smithy.Schema
-
-var CreateLocationNfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationNfsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationNfsResponse_LocationArn *smithy.Schema
-
-var CreateLocationObjectStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationObjectStorageRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateLocationObjectStorageRequest_ServerHostname *smithy.Schema
-
-var CreateLocationObjectStorageRequest_ServerPort *smithy.Schema
-
-var CreateLocationObjectStorageRequest_ServerProtocol *smithy.Schema
-
-var CreateLocationObjectStorageRequest_Subdirectory *smithy.Schema
-
-var CreateLocationObjectStorageRequest_BucketName *smithy.Schema
-
-var CreateLocationObjectStorageRequest_AccessKey *smithy.Schema
-
-var CreateLocationObjectStorageRequest_SecretKey *smithy.Schema
-
-var CreateLocationObjectStorageRequest_FederatedIdentity *smithy.Schema
-
-var CreateLocationObjectStorageRequest_AgentArns *smithy.Schema
-
-var CreateLocationObjectStorageRequest_Tags *smithy.Schema
-
-var CreateLocationObjectStorageRequest_ServerCertificate *smithy.Schema
-
-var CreateLocationObjectStorageRequest_CmkSecretConfig *smithy.Schema
-
-var CreateLocationObjectStorageRequest_CustomSecretConfig *smithy.Schema
-
-var CreateLocationObjectStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationObjectStorageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationObjectStorageResponse_LocationArn *smithy.Schema
-
-var CreateLocationS3Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationS3Request",
-}, smithy.ShapeTypeStructure, 6)
-var CreateLocationS3Request_Subdirectory *smithy.Schema
-
-var CreateLocationS3Request_S3BucketArn *smithy.Schema
-
-var CreateLocationS3Request_S3StorageClass *smithy.Schema
-
-var CreateLocationS3Request_S3Config *smithy.Schema
-
-var CreateLocationS3Request_AgentArns *smithy.Schema
-
-var CreateLocationS3Request_Tags *smithy.Schema
-
-var CreateLocationS3Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationS3Response",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationS3Response_LocationArn *smithy.Schema
-
-var CreateLocationSmbRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationSmbRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateLocationSmbRequest_Subdirectory *smithy.Schema
-
-var CreateLocationSmbRequest_ServerHostname *smithy.Schema
-
-var CreateLocationSmbRequest_User *smithy.Schema
-
-var CreateLocationSmbRequest_Domain *smithy.Schema
-
-var CreateLocationSmbRequest_Password *smithy.Schema
-
-var CreateLocationSmbRequest_CmkSecretConfig *smithy.Schema
-
-var CreateLocationSmbRequest_CustomSecretConfig *smithy.Schema
-
-var CreateLocationSmbRequest_AgentArns *smithy.Schema
-
-var CreateLocationSmbRequest_MountOptions *smithy.Schema
-
-var CreateLocationSmbRequest_Tags *smithy.Schema
-
-var CreateLocationSmbRequest_AuthenticationType *smithy.Schema
-
-var CreateLocationSmbRequest_DnsIpAddresses *smithy.Schema
-
-var CreateLocationSmbRequest_KerberosPrincipal *smithy.Schema
-
-var CreateLocationSmbRequest_KerberosKeytab *smithy.Schema
-
-var CreateLocationSmbRequest_KerberosKrb5Conf *smithy.Schema
-
-var CreateLocationSmbResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateLocationSmbResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLocationSmbResponse_LocationArn *smithy.Schema
-
-var CreateTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateTaskRequest",
-}, smithy.ShapeTypeStructure, 12)
-var CreateTaskRequest_SourceLocationArn *smithy.Schema
-
-var CreateTaskRequest_DestinationLocationArn *smithy.Schema
-
-var CreateTaskRequest_CloudWatchLogGroupArn *smithy.Schema
-
-var CreateTaskRequest_Name *smithy.Schema
-
-var CreateTaskRequest_Options *smithy.Schema
-
-var CreateTaskRequest_Excludes *smithy.Schema
-
-var CreateTaskRequest_Schedule *smithy.Schema
-
-var CreateTaskRequest_Tags *smithy.Schema
-
-var CreateTaskRequest_Includes *smithy.Schema
-
-var CreateTaskRequest_ManifestConfig *smithy.Schema
-
-var CreateTaskRequest_TaskReportConfig *smithy.Schema
-
-var CreateTaskRequest_TaskMode *smithy.Schema
-
-var CreateTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "CreateTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTaskResponse_TaskArn *smithy.Schema
-
-var DeleteAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteAgentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAgentRequest_AgentArn *smithy.Schema
-
-var DeleteAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteAgentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteLocationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLocationRequest_LocationArn *smithy.Schema
-
-var DeleteLocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteLocationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTaskRequest_TaskArn *smithy.Schema
-
-var DeleteTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DeleteTaskResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeAgentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAgentRequest_AgentArn *smithy.Schema
-
-var DescribeAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeAgentResponse",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeAgentResponse_AgentArn *smithy.Schema
-
-var DescribeAgentResponse_Name *smithy.Schema
-
-var DescribeAgentResponse_Status *smithy.Schema
-
-var DescribeAgentResponse_LastConnectionTime *smithy.Schema
-
-var DescribeAgentResponse_CreationTime *smithy.Schema
-
-var DescribeAgentResponse_EndpointType *smithy.Schema
-
-var DescribeAgentResponse_PrivateLinkConfig *smithy.Schema
-
-var DescribeAgentResponse_Platform *smithy.Schema
-
-var DescribeLocationAzureBlobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationAzureBlobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationAzureBlobRequest_LocationArn *smithy.Schema
-
-var DescribeLocationAzureBlobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationAzureBlobResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeLocationAzureBlobResponse_LocationArn *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_LocationUri *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_AuthenticationType *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_FederatedIdentity *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_BlobType *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_AccessTier *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_AgentArns *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_CreationTime *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_ManagedSecretConfig *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_CmkSecretConfig *smithy.Schema
-
-var DescribeLocationAzureBlobResponse_CustomSecretConfig *smithy.Schema
-
-var DescribeLocationEfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationEfsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationEfsRequest_LocationArn *smithy.Schema
-
-var DescribeLocationEfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationEfsResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeLocationEfsResponse_LocationArn *smithy.Schema
-
-var DescribeLocationEfsResponse_LocationUri *smithy.Schema
-
-var DescribeLocationEfsResponse_Ec2Config *smithy.Schema
-
-var DescribeLocationEfsResponse_CreationTime *smithy.Schema
-
-var DescribeLocationEfsResponse_AccessPointArn *smithy.Schema
-
-var DescribeLocationEfsResponse_FileSystemAccessRoleArn *smithy.Schema
-
-var DescribeLocationEfsResponse_InTransitEncryption *smithy.Schema
-
-var DescribeLocationFsxLustreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxLustreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationFsxLustreRequest_LocationArn *smithy.Schema
-
-var DescribeLocationFsxLustreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxLustreResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeLocationFsxLustreResponse_LocationArn *smithy.Schema
-
-var DescribeLocationFsxLustreResponse_LocationUri *smithy.Schema
-
-var DescribeLocationFsxLustreResponse_SecurityGroupArns *smithy.Schema
-
-var DescribeLocationFsxLustreResponse_CreationTime *smithy.Schema
-
-var DescribeLocationFsxOntapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOntapRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationFsxOntapRequest_LocationArn *smithy.Schema
-
-var DescribeLocationFsxOntapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOntapResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeLocationFsxOntapResponse_CreationTime *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_LocationArn *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_LocationUri *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_Protocol *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_SecurityGroupArns *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_StorageVirtualMachineArn *smithy.Schema
-
-var DescribeLocationFsxOntapResponse_FsxFilesystemArn *smithy.Schema
-
-var DescribeLocationFsxOpenZfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOpenZfsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationFsxOpenZfsRequest_LocationArn *smithy.Schema
-
-var DescribeLocationFsxOpenZfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxOpenZfsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeLocationFsxOpenZfsResponse_LocationArn *smithy.Schema
-
-var DescribeLocationFsxOpenZfsResponse_LocationUri *smithy.Schema
-
-var DescribeLocationFsxOpenZfsResponse_SecurityGroupArns *smithy.Schema
-
-var DescribeLocationFsxOpenZfsResponse_Protocol *smithy.Schema
-
-var DescribeLocationFsxOpenZfsResponse_CreationTime *smithy.Schema
-
-var DescribeLocationFsxWindowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxWindowsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationFsxWindowsRequest_LocationArn *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationFsxWindowsResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeLocationFsxWindowsResponse_LocationArn *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_LocationUri *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_SecurityGroupArns *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_CreationTime *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_User *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_Domain *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_ManagedSecretConfig *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_CmkSecretConfig *smithy.Schema
-
-var DescribeLocationFsxWindowsResponse_CustomSecretConfig *smithy.Schema
-
-var DescribeLocationHdfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationHdfsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationHdfsRequest_LocationArn *smithy.Schema
-
-var DescribeLocationHdfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationHdfsResponse",
-}, smithy.ShapeTypeStructure, 15)
-var DescribeLocationHdfsResponse_LocationArn *smithy.Schema
-
-var DescribeLocationHdfsResponse_LocationUri *smithy.Schema
-
-var DescribeLocationHdfsResponse_NameNodes *smithy.Schema
-
-var DescribeLocationHdfsResponse_BlockSize *smithy.Schema
-
-var DescribeLocationHdfsResponse_ReplicationFactor *smithy.Schema
-
-var DescribeLocationHdfsResponse_KmsKeyProviderUri *smithy.Schema
-
-var DescribeLocationHdfsResponse_QopConfiguration *smithy.Schema
-
-var DescribeLocationHdfsResponse_AuthenticationType *smithy.Schema
-
-var DescribeLocationHdfsResponse_SimpleUser *smithy.Schema
-
-var DescribeLocationHdfsResponse_KerberosPrincipal *smithy.Schema
-
-var DescribeLocationHdfsResponse_AgentArns *smithy.Schema
-
-var DescribeLocationHdfsResponse_CreationTime *smithy.Schema
-
-var DescribeLocationHdfsResponse_ManagedSecretConfig *smithy.Schema
-
-var DescribeLocationHdfsResponse_CmkSecretConfig *smithy.Schema
-
-var DescribeLocationHdfsResponse_CustomSecretConfig *smithy.Schema
-
-var DescribeLocationNfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationNfsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationNfsRequest_LocationArn *smithy.Schema
-
-var DescribeLocationNfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationNfsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeLocationNfsResponse_LocationArn *smithy.Schema
-
-var DescribeLocationNfsResponse_LocationUri *smithy.Schema
-
-var DescribeLocationNfsResponse_OnPremConfig *smithy.Schema
-
-var DescribeLocationNfsResponse_MountOptions *smithy.Schema
-
-var DescribeLocationNfsResponse_CreationTime *smithy.Schema
-
-var DescribeLocationObjectStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationObjectStorageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationObjectStorageRequest_LocationArn *smithy.Schema
-
-var DescribeLocationObjectStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationObjectStorageResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeLocationObjectStorageResponse_LocationArn *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_LocationUri *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_AccessKey *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_FederatedIdentity *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_ServerPort *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_ServerProtocol *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_AgentArns *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_CreationTime *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_ServerCertificate *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_ManagedSecretConfig *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_CmkSecretConfig *smithy.Schema
-
-var DescribeLocationObjectStorageResponse_CustomSecretConfig *smithy.Schema
-
-var DescribeLocationS3Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationS3Request",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationS3Request_LocationArn *smithy.Schema
-
-var DescribeLocationS3Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationS3Response",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeLocationS3Response_LocationArn *smithy.Schema
-
-var DescribeLocationS3Response_LocationUri *smithy.Schema
-
-var DescribeLocationS3Response_S3StorageClass *smithy.Schema
-
-var DescribeLocationS3Response_S3Config *smithy.Schema
-
-var DescribeLocationS3Response_AgentArns *smithy.Schema
-
-var DescribeLocationS3Response_CreationTime *smithy.Schema
-
-var DescribeLocationSmbRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationSmbRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLocationSmbRequest_LocationArn *smithy.Schema
-
-var DescribeLocationSmbResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeLocationSmbResponse",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeLocationSmbResponse_LocationArn *smithy.Schema
-
-var DescribeLocationSmbResponse_LocationUri *smithy.Schema
-
-var DescribeLocationSmbResponse_AgentArns *smithy.Schema
-
-var DescribeLocationSmbResponse_User *smithy.Schema
-
-var DescribeLocationSmbResponse_Domain *smithy.Schema
-
-var DescribeLocationSmbResponse_MountOptions *smithy.Schema
-
-var DescribeLocationSmbResponse_CreationTime *smithy.Schema
-
-var DescribeLocationSmbResponse_DnsIpAddresses *smithy.Schema
-
-var DescribeLocationSmbResponse_KerberosPrincipal *smithy.Schema
-
-var DescribeLocationSmbResponse_AuthenticationType *smithy.Schema
-
-var DescribeLocationSmbResponse_ManagedSecretConfig *smithy.Schema
-
-var DescribeLocationSmbResponse_CmkSecretConfig *smithy.Schema
-
-var DescribeLocationSmbResponse_CustomSecretConfig *smithy.Schema
-
-var DescribeTaskExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTaskExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTaskExecutionRequest_TaskExecutionArn *smithy.Schema
-
-var DescribeTaskExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTaskExecutionResponse",
-}, smithy.ShapeTypeStructure, 35)
-var DescribeTaskExecutionResponse_TaskExecutionArn *smithy.Schema
-
-var DescribeTaskExecutionResponse_Status *smithy.Schema
-
-var DescribeTaskExecutionResponse_Options *smithy.Schema
-
-var DescribeTaskExecutionResponse_Excludes *smithy.Schema
-
-var DescribeTaskExecutionResponse_Includes *smithy.Schema
-
-var DescribeTaskExecutionResponse_ManifestConfig *smithy.Schema
-
-var DescribeTaskExecutionResponse_StartTime *smithy.Schema
-
-var DescribeTaskExecutionResponse_EstimatedFilesToTransfer *smithy.Schema
-
-var DescribeTaskExecutionResponse_EstimatedBytesToTransfer *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesTransferred *smithy.Schema
-
-var DescribeTaskExecutionResponse_BytesWritten *smithy.Schema
-
-var DescribeTaskExecutionResponse_BytesTransferred *smithy.Schema
-
-var DescribeTaskExecutionResponse_BytesCompressed *smithy.Schema
-
-var DescribeTaskExecutionResponse_Result *smithy.Schema
-
-var DescribeTaskExecutionResponse_TaskReportConfig *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesDeleted *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesSkipped *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesVerified *smithy.Schema
-
-var DescribeTaskExecutionResponse_ReportResult *smithy.Schema
-
-var DescribeTaskExecutionResponse_EstimatedFilesToDelete *smithy.Schema
-
-var DescribeTaskExecutionResponse_TaskMode *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesPrepared *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesListed *smithy.Schema
-
-var DescribeTaskExecutionResponse_FilesFailed *smithy.Schema
-
-var DescribeTaskExecutionResponse_EstimatedFoldersToDelete *smithy.Schema
-
-var DescribeTaskExecutionResponse_EstimatedFoldersToTransfer *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersSkipped *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersPrepared *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersTransferred *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersVerified *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersDeleted *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersListed *smithy.Schema
-
-var DescribeTaskExecutionResponse_FoldersFailed *smithy.Schema
-
-var DescribeTaskExecutionResponse_LaunchTime *smithy.Schema
-
-var DescribeTaskExecutionResponse_EndTime *smithy.Schema
-
-var DescribeTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTaskRequest_TaskArn *smithy.Schema
-
-var DescribeTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "DescribeTaskResponse",
-}, smithy.ShapeTypeStructure, 20)
-var DescribeTaskResponse_TaskArn *smithy.Schema
-
-var DescribeTaskResponse_Status *smithy.Schema
-
-var DescribeTaskResponse_Name *smithy.Schema
-
-var DescribeTaskResponse_CurrentTaskExecutionArn *smithy.Schema
-
-var DescribeTaskResponse_SourceLocationArn *smithy.Schema
-
-var DescribeTaskResponse_DestinationLocationArn *smithy.Schema
-
-var DescribeTaskResponse_CloudWatchLogGroupArn *smithy.Schema
-
-var DescribeTaskResponse_SourceNetworkInterfaceArns *smithy.Schema
-
-var DescribeTaskResponse_DestinationNetworkInterfaceArns *smithy.Schema
-
-var DescribeTaskResponse_Options *smithy.Schema
-
-var DescribeTaskResponse_Excludes *smithy.Schema
-
-var DescribeTaskResponse_Schedule *smithy.Schema
-
-var DescribeTaskResponse_ErrorCode *smithy.Schema
-
-var DescribeTaskResponse_ErrorDetail *smithy.Schema
-
-var DescribeTaskResponse_CreationTime *smithy.Schema
-
-var DescribeTaskResponse_Includes *smithy.Schema
-
-var DescribeTaskResponse_ManifestConfig *smithy.Schema
-
-var DescribeTaskResponse_TaskReportConfig *smithy.Schema
-
-var DescribeTaskResponse_ScheduleDetails *smithy.Schema
-
-var DescribeTaskResponse_TaskMode *smithy.Schema
-
-var ListAgentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListAgentsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAgentsRequest_MaxResults *smithy.Schema
-
-var ListAgentsRequest_NextToken *smithy.Schema
-
-var ListAgentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListAgentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAgentsResponse_Agents *smithy.Schema
-
-var ListAgentsResponse_NextToken *smithy.Schema
-
-var ListLocationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListLocationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLocationsRequest_MaxResults *smithy.Schema
-
-var ListLocationsRequest_NextToken *smithy.Schema
-
-var ListLocationsRequest_Filters *smithy.Schema
-
-var ListLocationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListLocationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLocationsResponse_Locations *smithy.Schema
-
-var ListLocationsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceRequest_MaxResults *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTagsForResourceResponse_NextToken *smithy.Schema
-
-var ListTaskExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTaskExecutionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTaskExecutionsRequest_TaskArn *smithy.Schema
-
-var ListTaskExecutionsRequest_MaxResults *smithy.Schema
-
-var ListTaskExecutionsRequest_NextToken *smithy.Schema
-
-var ListTaskExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTaskExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaskExecutionsResponse_TaskExecutions *smithy.Schema
-
-var ListTaskExecutionsResponse_NextToken *smithy.Schema
-
-var ListTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTasksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTasksRequest_MaxResults *smithy.Schema
-
-var ListTasksRequest_NextToken *smithy.Schema
-
-var ListTasksRequest_Filters *smithy.Schema
-
-var ListTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "ListTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTasksResponse_Tasks *smithy.Schema
-
-var ListTasksResponse_NextToken *smithy.Schema
-
-var StartTaskExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "StartTaskExecutionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartTaskExecutionRequest_TaskArn *smithy.Schema
-
-var StartTaskExecutionRequest_OverrideOptions *smithy.Schema
-
-var StartTaskExecutionRequest_Includes *smithy.Schema
-
-var StartTaskExecutionRequest_Excludes *smithy.Schema
-
-var StartTaskExecutionRequest_ManifestConfig *smithy.Schema
-
-var StartTaskExecutionRequest_TaskReportConfig *smithy.Schema
-
-var StartTaskExecutionRequest_Tags *smithy.Schema
-
-var StartTaskExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "StartTaskExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartTaskExecutionResponse_TaskExecutionArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_Keys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateAgentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAgentRequest_AgentArn *smithy.Schema
-
-var UpdateAgentRequest_Name *smithy.Schema
-
-var UpdateAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateAgentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationAzureBlobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationAzureBlobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateLocationAzureBlobRequest_LocationArn *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_AuthenticationType *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_SasConfiguration *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_FederatedIdentity *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_BlobType *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_AccessTier *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_AgentArns *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_CmkSecretConfig *smithy.Schema
-
-var UpdateLocationAzureBlobRequest_CustomSecretConfig *smithy.Schema
-
-var UpdateLocationAzureBlobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationAzureBlobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationEfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationEfsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateLocationEfsRequest_LocationArn *smithy.Schema
-
-var UpdateLocationEfsRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationEfsRequest_AccessPointArn *smithy.Schema
-
-var UpdateLocationEfsRequest_FileSystemAccessRoleArn *smithy.Schema
-
-var UpdateLocationEfsRequest_InTransitEncryption *smithy.Schema
-
-var UpdateLocationEfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationEfsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationFsxLustreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxLustreRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateLocationFsxLustreRequest_LocationArn *smithy.Schema
-
-var UpdateLocationFsxLustreRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationFsxLustreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxLustreResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationFsxOntapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOntapRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLocationFsxOntapRequest_LocationArn *smithy.Schema
-
-var UpdateLocationFsxOntapRequest_Protocol *smithy.Schema
-
-var UpdateLocationFsxOntapRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationFsxOntapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOntapResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationFsxOpenZfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOpenZfsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLocationFsxOpenZfsRequest_LocationArn *smithy.Schema
-
-var UpdateLocationFsxOpenZfsRequest_Protocol *smithy.Schema
-
-var UpdateLocationFsxOpenZfsRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationFsxOpenZfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxOpenZfsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationFsxWindowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxWindowsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateLocationFsxWindowsRequest_LocationArn *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_Domain *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_User *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_Password *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_CmkSecretConfig *smithy.Schema
-
-var UpdateLocationFsxWindowsRequest_CustomSecretConfig *smithy.Schema
-
-var UpdateLocationFsxWindowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationFsxWindowsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationHdfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationHdfsRequest",
-}, smithy.ShapeTypeStructure, 15)
-var UpdateLocationHdfsRequest_LocationArn *smithy.Schema
-
-var UpdateLocationHdfsRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationHdfsRequest_NameNodes *smithy.Schema
-
-var UpdateLocationHdfsRequest_BlockSize *smithy.Schema
-
-var UpdateLocationHdfsRequest_ReplicationFactor *smithy.Schema
-
-var UpdateLocationHdfsRequest_KmsKeyProviderUri *smithy.Schema
-
-var UpdateLocationHdfsRequest_QopConfiguration *smithy.Schema
-
-var UpdateLocationHdfsRequest_AuthenticationType *smithy.Schema
-
-var UpdateLocationHdfsRequest_SimpleUser *smithy.Schema
-
-var UpdateLocationHdfsRequest_KerberosPrincipal *smithy.Schema
-
-var UpdateLocationHdfsRequest_KerberosKeytab *smithy.Schema
-
-var UpdateLocationHdfsRequest_KerberosKrb5Conf *smithy.Schema
-
-var UpdateLocationHdfsRequest_AgentArns *smithy.Schema
-
-var UpdateLocationHdfsRequest_CmkSecretConfig *smithy.Schema
-
-var UpdateLocationHdfsRequest_CustomSecretConfig *smithy.Schema
-
-var UpdateLocationHdfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationHdfsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationNfsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationNfsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateLocationNfsRequest_LocationArn *smithy.Schema
-
-var UpdateLocationNfsRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationNfsRequest_ServerHostname *smithy.Schema
-
-var UpdateLocationNfsRequest_OnPremConfig *smithy.Schema
-
-var UpdateLocationNfsRequest_MountOptions *smithy.Schema
-
-var UpdateLocationNfsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationNfsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationObjectStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationObjectStorageRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateLocationObjectStorageRequest_LocationArn *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_ServerPort *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_ServerProtocol *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_ServerHostname *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_AccessKey *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_SecretKey *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_FederatedIdentity *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_AgentArns *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_ServerCertificate *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_CmkSecretConfig *smithy.Schema
-
-var UpdateLocationObjectStorageRequest_CustomSecretConfig *smithy.Schema
-
-var UpdateLocationObjectStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationObjectStorageResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationS3Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationS3Request",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLocationS3Request_LocationArn *smithy.Schema
-
-var UpdateLocationS3Request_Subdirectory *smithy.Schema
-
-var UpdateLocationS3Request_S3StorageClass *smithy.Schema
-
-var UpdateLocationS3Request_S3Config *smithy.Schema
-
-var UpdateLocationS3Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationS3Response",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLocationSmbRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationSmbRequest",
-}, smithy.ShapeTypeStructure, 15)
-var UpdateLocationSmbRequest_LocationArn *smithy.Schema
-
-var UpdateLocationSmbRequest_Subdirectory *smithy.Schema
-
-var UpdateLocationSmbRequest_ServerHostname *smithy.Schema
-
-var UpdateLocationSmbRequest_User *smithy.Schema
-
-var UpdateLocationSmbRequest_Domain *smithy.Schema
-
-var UpdateLocationSmbRequest_Password *smithy.Schema
-
-var UpdateLocationSmbRequest_CmkSecretConfig *smithy.Schema
-
-var UpdateLocationSmbRequest_CustomSecretConfig *smithy.Schema
-
-var UpdateLocationSmbRequest_AgentArns *smithy.Schema
-
-var UpdateLocationSmbRequest_MountOptions *smithy.Schema
-
-var UpdateLocationSmbRequest_AuthenticationType *smithy.Schema
-
-var UpdateLocationSmbRequest_DnsIpAddresses *smithy.Schema
-
-var UpdateLocationSmbRequest_KerberosPrincipal *smithy.Schema
-
-var UpdateLocationSmbRequest_KerberosKeytab *smithy.Schema
-
-var UpdateLocationSmbRequest_KerberosKrb5Conf *smithy.Schema
-
-var UpdateLocationSmbResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateLocationSmbResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTaskExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTaskExecutionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTaskExecutionRequest_TaskExecutionArn *smithy.Schema
-
-var UpdateTaskExecutionRequest_Options *smithy.Schema
-
-var UpdateTaskExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTaskExecutionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTaskRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateTaskRequest_TaskArn *smithy.Schema
-
-var UpdateTaskRequest_Options *smithy.Schema
-
-var UpdateTaskRequest_Excludes *smithy.Schema
-
-var UpdateTaskRequest_Schedule *smithy.Schema
-
-var UpdateTaskRequest_Name *smithy.Schema
-
-var UpdateTaskRequest_CloudWatchLogGroupArn *smithy.Schema
-
-var UpdateTaskRequest_Includes *smithy.Schema
-
-var UpdateTaskRequest_ManifestConfig *smithy.Schema
-
-var UpdateTaskRequest_TaskReportConfig *smithy.Schema
-
-var UpdateTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.datasync",
-	Name:      "UpdateTaskResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_AgentArnList_member = _AgentArnList.AddMember("member", _AgentArn)
-
-	AgentStatus_ONLINE = AgentStatus.AddMember("ONLINE", smithyprelude.Unit)
-
-	AgentStatus_OFFLINE = AgentStatus.AddMember("OFFLINE", smithyprelude.Unit)
-
-	Platform_Version = Platform.AddMember("Version", _AgentVersion)
-
-	AgentListEntry_AgentArn = AgentListEntry.AddMember("AgentArn", _AgentArn)
-
-	AgentListEntry_Name = AgentListEntry.AddMember("Name", _TagValue)
-
-	AgentListEntry_Status = AgentListEntry.AddMember("Status", AgentStatus)
-
-	AgentListEntry_Platform = AgentListEntry.AddMember("Platform", Platform)
-
-	_AgentList_member = _AgentList.AddMember("member", AgentListEntry)
-
-	Atime_NONE = Atime.AddMember("NONE", smithyprelude.Unit)
-
-	Atime_BEST_EFFORT = Atime.AddMember("BEST_EFFORT", smithyprelude.Unit)
-
-	AzureAccessTier_HOT = AzureAccessTier.AddMember("HOT", smithyprelude.Unit)
-
-	AzureAccessTier_COOL = AzureAccessTier.AddMember("COOL", smithyprelude.Unit)
-
-	AzureAccessTier_ARCHIVE = AzureAccessTier.AddMember("ARCHIVE", smithyprelude.Unit)
-
-	AzureBlobAuthenticationType_SAS = AzureBlobAuthenticationType.AddMember("SAS", smithyprelude.Unit)
-
-	AzureBlobAuthenticationType_NONE = AzureBlobAuthenticationType.AddMember("NONE", smithyprelude.Unit)
-
-	AzureBlobAuthenticationType_OIDC = AzureBlobAuthenticationType.AddMember("OIDC", smithyprelude.Unit)
-
-	AzureBlobSasConfiguration_Token = AzureBlobSasConfiguration.AddMember("Token", _AzureBlobSasToken)
-
-	AzureBlobType_BLOCK = AzureBlobType.AddMember("BLOCK", smithyprelude.Unit)
-
-	AzureOidcConfig_TenantId = AzureOidcConfig.AddMember("TenantId", _AzureGuidString)
-
-	AzureOidcConfig_ClientId = AzureOidcConfig.AddMember("ClientId", _AzureGuidString)
-
-	AzureFederatedIdentityConfig_AwsIamRole = AzureFederatedIdentityConfig.AddMember("AwsIamRole", _IamRoleArn)
-
-	AzureFederatedIdentityConfig_AzureOidc = AzureFederatedIdentityConfig.AddMember("AzureOidc", AzureOidcConfig)
-
-	CmkSecretConfig_SecretArn = CmkSecretConfig.AddMember("SecretArn", _SecretArn)
-
-	CmkSecretConfig_KmsKeyArn = CmkSecretConfig.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CustomSecretConfig_SecretArn = CustomSecretConfig.AddMember("SecretArn", _SecretArn)
-
-	CustomSecretConfig_SecretAccessRoleArn = CustomSecretConfig.AddMember("SecretAccessRoleArn", _IamRoleArnOrEmptyString)
-
-	_DestinationNetworkInterfaceArns_member = _DestinationNetworkInterfaceArns.AddMember("member", _NetworkInterfaceArn)
-
-	_DnsIpList_member = _DnsIpList.AddMember("member", _ServerIpAddress)
-
-	_Ec2SecurityGroupArnList_member = _Ec2SecurityGroupArnList.AddMember("member", _Ec2SecurityGroupArn)
-
-	Ec2Config_SubnetArn = Ec2Config.AddMember("SubnetArn", _Ec2SubnetArn)
-
-	Ec2Config_SecurityGroupArns = Ec2Config.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	EfsInTransitEncryption_NONE = EfsInTransitEncryption.AddMember("NONE", smithyprelude.Unit)
-
-	EfsInTransitEncryption_TLS1_2 = EfsInTransitEncryption.AddMember("TLS1_2", smithyprelude.Unit)
-
-	EndpointType_PUBLIC = EndpointType.AddMember("PUBLIC", smithyprelude.Unit)
-
-	EndpointType_PRIVATE_LINK = EndpointType.AddMember("PRIVATE_LINK", smithyprelude.Unit)
-
-	EndpointType_FIPS = EndpointType.AddMember("FIPS", smithyprelude.Unit)
-
-	EndpointType_FIPS_PRIVATE_LINK = EndpointType.AddMember("FIPS_PRIVATE_LINK", smithyprelude.Unit)
-
-	FilterType_SIMPLE_PATTERN = FilterType.AddMember("SIMPLE_PATTERN", smithyprelude.Unit)
-
-	FilterRule_FilterType = FilterRule.AddMember("FilterType", FilterType)
-
-	FilterRule_Value = FilterRule.AddMember("Value", _FilterValue)
-
-	_FilterList_member = _FilterList.AddMember("member", FilterRule)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterAttributeValue)
-
-	NfsVersion_AUTOMATIC = NfsVersion.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	NfsVersion_NFS3 = NfsVersion.AddMember("NFS3", smithyprelude.Unit)
-
-	NfsVersion_NFS4_0 = NfsVersion.AddMember("NFS4_0", smithyprelude.Unit)
-
-	NfsVersion_NFS4_1 = NfsVersion.AddMember("NFS4_1", smithyprelude.Unit)
-
-	NfsVersion_NFS4_2 = NfsVersion.AddMember("NFS4_2", smithyprelude.Unit)
-
-	NfsMountOptions_Version = NfsMountOptions.AddMember("Version", NfsVersion)
-
-	FsxProtocolNfs_MountOptions = FsxProtocolNfs.AddMember("MountOptions", NfsMountOptions)
-
-	SmbVersion_AUTOMATIC = SmbVersion.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	SmbVersion_SMB2 = SmbVersion.AddMember("SMB2", smithyprelude.Unit)
-
-	SmbVersion_SMB3 = SmbVersion.AddMember("SMB3", smithyprelude.Unit)
-
-	SmbVersion_SMB1 = SmbVersion.AddMember("SMB1", smithyprelude.Unit)
-
-	SmbVersion_SMB2_0 = SmbVersion.AddMember("SMB2_0", smithyprelude.Unit)
-
-	SmbMountOptions_Version = SmbMountOptions.AddMember("Version", SmbVersion)
-
-	ManagedSecretConfig_SecretArn = ManagedSecretConfig.AddMember("SecretArn", _SecretArn)
-
-	FsxProtocolSmb_Domain = FsxProtocolSmb.AddMember("Domain", _SmbDomain)
-
-	FsxProtocolSmb_MountOptions = FsxProtocolSmb.AddMember("MountOptions", SmbMountOptions)
-
-	FsxProtocolSmb_Password = FsxProtocolSmb.AddMember("Password", _SmbPassword)
-
-	FsxProtocolSmb_User = FsxProtocolSmb.AddMember("User", _SmbUser)
-
-	FsxProtocolSmb_ManagedSecretConfig = FsxProtocolSmb.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	FsxProtocolSmb_CmkSecretConfig = FsxProtocolSmb.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	FsxProtocolSmb_CustomSecretConfig = FsxProtocolSmb.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	FsxProtocol_NFS = FsxProtocol.AddMember("NFS", FsxProtocolNfs)
-
-	FsxProtocol_SMB = FsxProtocol.AddMember("SMB", FsxProtocolSmb)
-
-	FsxUpdateProtocolSmb_Domain = FsxUpdateProtocolSmb.AddMember("Domain", _UpdateSmbDomain)
-
-	FsxUpdateProtocolSmb_MountOptions = FsxUpdateProtocolSmb.AddMember("MountOptions", SmbMountOptions)
-
-	FsxUpdateProtocolSmb_Password = FsxUpdateProtocolSmb.AddMember("Password", _SmbPassword)
-
-	FsxUpdateProtocolSmb_User = FsxUpdateProtocolSmb.AddMember("User", _SmbUser)
-
-	FsxUpdateProtocolSmb_CmkSecretConfig = FsxUpdateProtocolSmb.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	FsxUpdateProtocolSmb_CustomSecretConfig = FsxUpdateProtocolSmb.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	FsxUpdateProtocol_NFS = FsxUpdateProtocol.AddMember("NFS", FsxProtocolNfs)
-
-	FsxUpdateProtocol_SMB = FsxUpdateProtocol.AddMember("SMB", FsxUpdateProtocolSmb)
-
-	Gid_NONE = Gid.AddMember("NONE", smithyprelude.Unit)
-
-	Gid_INT_VALUE = Gid.AddMember("INT_VALUE", smithyprelude.Unit)
-
-	Gid_NAME = Gid.AddMember("NAME", smithyprelude.Unit)
-
-	Gid_BOTH = Gid.AddMember("BOTH", smithyprelude.Unit)
-
-	GoogleOidcConfig_ProjectName = GoogleOidcConfig.AddMember("ProjectName", _ProjectNameString)
-
-	GoogleOidcConfig_ProjectNumber = GoogleOidcConfig.AddMember("ProjectNumber", _ProjectNumberString)
-
-	GoogleOidcConfig_IdentityPoolName = GoogleOidcConfig.AddMember("IdentityPoolName", _GoogleIdentityFederationResourceString)
-
-	GoogleOidcConfig_IdentityProviderName = GoogleOidcConfig.AddMember("IdentityProviderName", _GoogleIdentityFederationResourceString)
-
-	HdfsAuthenticationType_SIMPLE = HdfsAuthenticationType.AddMember("SIMPLE", smithyprelude.Unit)
-
-	HdfsAuthenticationType_KERBEROS = HdfsAuthenticationType.AddMember("KERBEROS", smithyprelude.Unit)
-
-	HdfsDataTransferProtection_DISABLED = HdfsDataTransferProtection.AddMember("DISABLED", smithyprelude.Unit)
-
-	HdfsDataTransferProtection_AUTHENTICATION = HdfsDataTransferProtection.AddMember("AUTHENTICATION", smithyprelude.Unit)
-
-	HdfsDataTransferProtection_INTEGRITY = HdfsDataTransferProtection.AddMember("INTEGRITY", smithyprelude.Unit)
-
-	HdfsDataTransferProtection_PRIVACY = HdfsDataTransferProtection.AddMember("PRIVACY", smithyprelude.Unit)
-
-	HdfsNameNode_Hostname = HdfsNameNode.AddMember("Hostname", _HdfsServerHostname)
-
-	HdfsNameNode_Port = HdfsNameNode.AddMember("Port", _HdfsServerPort)
-
-	_HdfsNameNodeList_member = _HdfsNameNodeList.AddMember("member", HdfsNameNode)
-
-	HdfsRpcProtection_DISABLED = HdfsRpcProtection.AddMember("DISABLED", smithyprelude.Unit)
-
-	HdfsRpcProtection_AUTHENTICATION = HdfsRpcProtection.AddMember("AUTHENTICATION", smithyprelude.Unit)
-
-	HdfsRpcProtection_INTEGRITY = HdfsRpcProtection.AddMember("INTEGRITY", smithyprelude.Unit)
-
-	HdfsRpcProtection_PRIVACY = HdfsRpcProtection.AddMember("PRIVACY", smithyprelude.Unit)
-
-	TagListEntry_Key = TagListEntry.AddMember("Key", _TagKey)
-
-	TagListEntry_Value = TagListEntry.AddMember("Value", _TagValue)
-
-	_InputTagList_member = _InputTagList.AddMember("member", TagListEntry)
-
-	InternalException_message = InternalException.AddMember("message", _string)
-
-	InternalException_errorCode = InternalException.AddMember("errorCode", _string)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _string)
-
-	InvalidRequestException_errorCode = InvalidRequestException.AddMember("errorCode", _string)
-
-	InvalidRequestException_datasyncErrorCode = InvalidRequestException.AddMember("datasyncErrorCode", _string)
-
-	LocationFilterName_LocationUri = LocationFilterName.AddMember("LocationUri", smithyprelude.Unit)
-
-	LocationFilterName_LocationType = LocationFilterName.AddMember("LocationType", smithyprelude.Unit)
-
-	LocationFilterName_CreationTime = LocationFilterName.AddMember("CreationTime", smithyprelude.Unit)
-
-	Operator_EQ = Operator.AddMember("EQ", smithyprelude.Unit)
-
-	Operator_NE = Operator.AddMember("NE", smithyprelude.Unit)
-
-	Operator_IN = Operator.AddMember("IN", smithyprelude.Unit)
-
-	Operator_LE = Operator.AddMember("LE", smithyprelude.Unit)
-
-	Operator_LT = Operator.AddMember("LT", smithyprelude.Unit)
-
-	Operator_GE = Operator.AddMember("GE", smithyprelude.Unit)
-
-	Operator_GT = Operator.AddMember("GT", smithyprelude.Unit)
-
-	Operator_CONTAINS = Operator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	Operator_NOT_CONTAINS = Operator.AddMember("NOT_CONTAINS", smithyprelude.Unit)
-
-	Operator_BEGINS_WITH = Operator.AddMember("BEGINS_WITH", smithyprelude.Unit)
-
-	LocationFilter_Name = LocationFilter.AddMember("Name", LocationFilterName)
-
-	LocationFilter_Values = LocationFilter.AddMember("Values", _FilterValues)
-
-	LocationFilter_Operator = LocationFilter.AddMember("Operator", Operator)
-
-	_LocationFilters_member = _LocationFilters.AddMember("member", LocationFilter)
-
-	LocationListEntry_LocationArn = LocationListEntry.AddMember("LocationArn", _LocationArn)
-
-	LocationListEntry_LocationUri = LocationListEntry.AddMember("LocationUri", _LocationUri)
-
-	_LocationList_member = _LocationList.AddMember("member", LocationListEntry)
-
-	LogLevel_OFF = LogLevel.AddMember("OFF", smithyprelude.Unit)
-
-	LogLevel_BASIC = LogLevel.AddMember("BASIC", smithyprelude.Unit)
-
-	LogLevel_TRANSFER = LogLevel.AddMember("TRANSFER", smithyprelude.Unit)
-
-	ManifestAction_TRANSFER = ManifestAction.AddMember("TRANSFER", smithyprelude.Unit)
-
-	ManifestFormat_CSV = ManifestFormat.AddMember("CSV", smithyprelude.Unit)
-
-	S3ManifestConfig_ManifestObjectPath = S3ManifestConfig.AddMember("ManifestObjectPath", _S3Subdirectory)
-
-	S3ManifestConfig_BucketAccessRoleArn = S3ManifestConfig.AddMember("BucketAccessRoleArn", _IamRoleArn)
-
-	S3ManifestConfig_S3BucketArn = S3ManifestConfig.AddMember("S3BucketArn", _S3BucketArn)
-
-	S3ManifestConfig_ManifestObjectVersionId = S3ManifestConfig.AddMember("ManifestObjectVersionId", _S3ObjectVersionId)
-
-	SourceManifestConfig_S3 = SourceManifestConfig.AddMember("S3", S3ManifestConfig)
-
-	ManifestConfig_Action = ManifestConfig.AddMember("Action", ManifestAction)
-
-	ManifestConfig_Format = ManifestConfig.AddMember("Format", ManifestFormat)
-
-	ManifestConfig_Source = ManifestConfig.AddMember("Source", SourceManifestConfig)
-
-	Mtime_NONE = Mtime.AddMember("NONE", smithyprelude.Unit)
-
-	Mtime_PRESERVE = Mtime.AddMember("PRESERVE", smithyprelude.Unit)
-
-	ObjectMetadata_PRESERVE = ObjectMetadata.AddMember("PRESERVE", smithyprelude.Unit)
-
-	ObjectMetadata_NONE = ObjectMetadata.AddMember("NONE", smithyprelude.Unit)
-
-	ObjectStorageExternalIdentityConfig_GoogleOidc = ObjectStorageExternalIdentityConfig.AddMember("GoogleOidc", GoogleOidcConfig)
-
-	ObjectStorageFederatedIdentityConfig_AwsIamRole = ObjectStorageFederatedIdentityConfig.AddMember("AwsIamRole", _IamRoleArn)
-
-	ObjectStorageFederatedIdentityConfig_ExternalIdentity = ObjectStorageFederatedIdentityConfig.AddMember("ExternalIdentity", ObjectStorageExternalIdentityConfig)
-
-	ObjectStorageServerProtocol_HTTPS = ObjectStorageServerProtocol.AddMember("HTTPS", smithyprelude.Unit)
-
-	ObjectStorageServerProtocol_HTTP = ObjectStorageServerProtocol.AddMember("HTTP", smithyprelude.Unit)
-
-	ObjectTags_PRESERVE = ObjectTags.AddMember("PRESERVE", smithyprelude.Unit)
-
-	ObjectTags_NONE = ObjectTags.AddMember("NONE", smithyprelude.Unit)
-
-	ObjectVersionIds_INCLUDE = ObjectVersionIds.AddMember("INCLUDE", smithyprelude.Unit)
-
-	ObjectVersionIds_NONE = ObjectVersionIds.AddMember("NONE", smithyprelude.Unit)
-
-	OnPremConfig_AgentArns = OnPremConfig.AddMember("AgentArns", _AgentArnList)
-
-	VerifyMode_POINT_IN_TIME_CONSISTENT = VerifyMode.AddMember("POINT_IN_TIME_CONSISTENT", smithyprelude.Unit)
-
-	VerifyMode_ONLY_FILES_TRANSFERRED = VerifyMode.AddMember("ONLY_FILES_TRANSFERRED", smithyprelude.Unit)
-
-	VerifyMode_NONE = VerifyMode.AddMember("NONE", smithyprelude.Unit)
-
-	OverwriteMode_ALWAYS = OverwriteMode.AddMember("ALWAYS", smithyprelude.Unit)
-
-	OverwriteMode_NEVER = OverwriteMode.AddMember("NEVER", smithyprelude.Unit)
-
-	Uid_NONE = Uid.AddMember("NONE", smithyprelude.Unit)
-
-	Uid_INT_VALUE = Uid.AddMember("INT_VALUE", smithyprelude.Unit)
-
-	Uid_NAME = Uid.AddMember("NAME", smithyprelude.Unit)
-
-	Uid_BOTH = Uid.AddMember("BOTH", smithyprelude.Unit)
-
-	PreserveDeletedFiles_PRESERVE = PreserveDeletedFiles.AddMember("PRESERVE", smithyprelude.Unit)
-
-	PreserveDeletedFiles_REMOVE = PreserveDeletedFiles.AddMember("REMOVE", smithyprelude.Unit)
-
-	PreserveDevices_NONE = PreserveDevices.AddMember("NONE", smithyprelude.Unit)
-
-	PreserveDevices_PRESERVE = PreserveDevices.AddMember("PRESERVE", smithyprelude.Unit)
-
-	PosixPermissions_NONE = PosixPermissions.AddMember("NONE", smithyprelude.Unit)
-
-	PosixPermissions_PRESERVE = PosixPermissions.AddMember("PRESERVE", smithyprelude.Unit)
-
-	TaskQueueing_ENABLED = TaskQueueing.AddMember("ENABLED", smithyprelude.Unit)
-
-	TaskQueueing_DISABLED = TaskQueueing.AddMember("DISABLED", smithyprelude.Unit)
-
-	TransferMode_CHANGED = TransferMode.AddMember("CHANGED", smithyprelude.Unit)
-
-	TransferMode_ALL = TransferMode.AddMember("ALL", smithyprelude.Unit)
-
-	SmbSecurityDescriptorCopyFlags_NONE = SmbSecurityDescriptorCopyFlags.AddMember("NONE", smithyprelude.Unit)
-
-	SmbSecurityDescriptorCopyFlags_OWNER_DACL = SmbSecurityDescriptorCopyFlags.AddMember("OWNER_DACL", smithyprelude.Unit)
-
-	SmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL = SmbSecurityDescriptorCopyFlags.AddMember("OWNER_DACL_SACL", smithyprelude.Unit)
-
-	Options_VerifyMode = Options.AddMember("VerifyMode", VerifyMode)
-
-	Options_OverwriteMode = Options.AddMember("OverwriteMode", OverwriteMode)
-
-	Options_Atime = Options.AddMember("Atime", Atime)
-
-	Options_Mtime = Options.AddMember("Mtime", Mtime)
-
-	Options_Uid = Options.AddMember("Uid", Uid)
-
-	Options_Gid = Options.AddMember("Gid", Gid)
-
-	Options_PreserveDeletedFiles = Options.AddMember("PreserveDeletedFiles", PreserveDeletedFiles)
-
-	Options_PreserveDevices = Options.AddMember("PreserveDevices", PreserveDevices)
-
-	Options_PosixPermissions = Options.AddMember("PosixPermissions", PosixPermissions)
-
-	Options_BytesPerSecond = Options.AddMember("BytesPerSecond", _BytesPerSecond)
-
-	Options_TaskQueueing = Options.AddMember("TaskQueueing", TaskQueueing)
-
-	Options_LogLevel = Options.AddMember("LogLevel", LogLevel)
-
-	Options_TransferMode = Options.AddMember("TransferMode", TransferMode)
-
-	Options_SecurityDescriptorCopyFlags = Options.AddMember("SecurityDescriptorCopyFlags", SmbSecurityDescriptorCopyFlags)
-
-	Options_ObjectTags = Options.AddMember("ObjectTags", ObjectTags)
-
-	Options_ObjectMetadata = Options.AddMember("ObjectMetadata", ObjectMetadata)
-
-	_OutputTagList_member = _OutputTagList.AddMember("member", TagListEntry)
-
-	PhaseStatus_PENDING = PhaseStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	PhaseStatus_SUCCESS = PhaseStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	PhaseStatus_ERROR = PhaseStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	_PLSecurityGroupArnList_member = _PLSecurityGroupArnList.AddMember("member", _Ec2SecurityGroupArn)
-
-	_PLSubnetArnList_member = _PLSubnetArnList.AddMember("member", _Ec2SubnetArn)
-
-	PrivateLinkConfig_VpcEndpointId = PrivateLinkConfig.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	PrivateLinkConfig_PrivateLinkEndpoint = PrivateLinkConfig.AddMember("PrivateLinkEndpoint", _Endpoint)
-
-	PrivateLinkConfig_SubnetArns = PrivateLinkConfig.AddMember("SubnetArns", _PLSubnetArnList)
-
-	PrivateLinkConfig_SecurityGroupArns = PrivateLinkConfig.AddMember("SecurityGroupArns", _PLSecurityGroupArnList)
-
-	QopConfiguration_RpcProtection = QopConfiguration.AddMember("RpcProtection", HdfsRpcProtection)
-
-	QopConfiguration_DataTransferProtection = QopConfiguration.AddMember("DataTransferProtection", HdfsDataTransferProtection)
-
-	ReportDestinationS3_Subdirectory = ReportDestinationS3.AddMember("Subdirectory", _S3Subdirectory)
-
-	ReportDestinationS3_S3BucketArn = ReportDestinationS3.AddMember("S3BucketArn", _S3BucketArn)
-
-	ReportDestinationS3_BucketAccessRoleArn = ReportDestinationS3.AddMember("BucketAccessRoleArn", _IamRoleArn)
-
-	ReportDestination_S3 = ReportDestination.AddMember("S3", ReportDestinationS3)
-
-	ReportLevel_ERRORS_ONLY = ReportLevel.AddMember("ERRORS_ONLY", smithyprelude.Unit)
-
-	ReportLevel_SUCCESSES_AND_ERRORS = ReportLevel.AddMember("SUCCESSES_AND_ERRORS", smithyprelude.Unit)
-
-	ReportOutputType_SUMMARY_ONLY = ReportOutputType.AddMember("SUMMARY_ONLY", smithyprelude.Unit)
-
-	ReportOutputType_STANDARD = ReportOutputType.AddMember("STANDARD", smithyprelude.Unit)
-
-	ReportOverride_ReportLevel = ReportOverride.AddMember("ReportLevel", ReportLevel)
-
-	ReportOverrides_Transferred = ReportOverrides.AddMember("Transferred", ReportOverride)
-
-	ReportOverrides_Verified = ReportOverrides.AddMember("Verified", ReportOverride)
-
-	ReportOverrides_Deleted = ReportOverrides.AddMember("Deleted", ReportOverride)
-
-	ReportOverrides_Skipped = ReportOverrides.AddMember("Skipped", ReportOverride)
-
-	ReportResult_Status = ReportResult.AddMember("Status", PhaseStatus)
-
-	ReportResult_ErrorCode = ReportResult.AddMember("ErrorCode", _string)
-
-	ReportResult_ErrorDetail = ReportResult.AddMember("ErrorDetail", _string)
-
-	S3Config_BucketAccessRoleArn = S3Config.AddMember("BucketAccessRoleArn", _IamRoleArn)
-
-	S3StorageClass_STANDARD = S3StorageClass.AddMember("STANDARD", smithyprelude.Unit)
-
-	S3StorageClass_STANDARD_IA = S3StorageClass.AddMember("STANDARD_IA", smithyprelude.Unit)
-
-	S3StorageClass_ONEZONE_IA = S3StorageClass.AddMember("ONEZONE_IA", smithyprelude.Unit)
-
-	S3StorageClass_INTELLIGENT_TIERING = S3StorageClass.AddMember("INTELLIGENT_TIERING", smithyprelude.Unit)
-
-	S3StorageClass_GLACIER = S3StorageClass.AddMember("GLACIER", smithyprelude.Unit)
-
-	S3StorageClass_DEEP_ARCHIVE = S3StorageClass.AddMember("DEEP_ARCHIVE", smithyprelude.Unit)
-
-	S3StorageClass_OUTPOSTS = S3StorageClass.AddMember("OUTPOSTS", smithyprelude.Unit)
-
-	S3StorageClass_GLACIER_INSTANT_RETRIEVAL = S3StorageClass.AddMember("GLACIER_INSTANT_RETRIEVAL", smithyprelude.Unit)
-
-	ScheduleDisabledBy_USER = ScheduleDisabledBy.AddMember("USER", smithyprelude.Unit)
-
-	ScheduleDisabledBy_SERVICE = ScheduleDisabledBy.AddMember("SERVICE", smithyprelude.Unit)
-
-	ScheduleStatus_ENABLED = ScheduleStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ScheduleStatus_DISABLED = ScheduleStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	SmbAuthenticationType_NTLM = SmbAuthenticationType.AddMember("NTLM", smithyprelude.Unit)
-
-	SmbAuthenticationType_KERBEROS = SmbAuthenticationType.AddMember("KERBEROS", smithyprelude.Unit)
-
-	_SourceNetworkInterfaceArns_member = _SourceNetworkInterfaceArns.AddMember("member", _NetworkInterfaceArn)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TaskExecutionFilesFailedDetail_Prepare = TaskExecutionFilesFailedDetail.AddMember("Prepare", _long)
-
-	TaskExecutionFilesFailedDetail_Transfer = TaskExecutionFilesFailedDetail.AddMember("Transfer", _long)
-
-	TaskExecutionFilesFailedDetail_Verify = TaskExecutionFilesFailedDetail.AddMember("Verify", _long)
-
-	TaskExecutionFilesFailedDetail_Delete = TaskExecutionFilesFailedDetail.AddMember("Delete", _long)
-
-	TaskExecutionFilesListedDetail_AtSource = TaskExecutionFilesListedDetail.AddMember("AtSource", _long)
-
-	TaskExecutionFilesListedDetail_AtDestinationForDelete = TaskExecutionFilesListedDetail.AddMember("AtDestinationForDelete", _long)
-
-	TaskExecutionFoldersFailedDetail_List = TaskExecutionFoldersFailedDetail.AddMember("List", _long)
-
-	TaskExecutionFoldersFailedDetail_Prepare = TaskExecutionFoldersFailedDetail.AddMember("Prepare", _long)
-
-	TaskExecutionFoldersFailedDetail_Transfer = TaskExecutionFoldersFailedDetail.AddMember("Transfer", _long)
-
-	TaskExecutionFoldersFailedDetail_Verify = TaskExecutionFoldersFailedDetail.AddMember("Verify", _long)
-
-	TaskExecutionFoldersFailedDetail_Delete = TaskExecutionFoldersFailedDetail.AddMember("Delete", _long)
-
-	TaskExecutionFoldersListedDetail_AtSource = TaskExecutionFoldersListedDetail.AddMember("AtSource", _long)
-
-	TaskExecutionFoldersListedDetail_AtDestinationForDelete = TaskExecutionFoldersListedDetail.AddMember("AtDestinationForDelete", _long)
-
-	TaskExecutionStatus_QUEUED = TaskExecutionStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	TaskExecutionStatus_CANCELLING = TaskExecutionStatus.AddMember("CANCELLING", smithyprelude.Unit)
-
-	TaskExecutionStatus_LAUNCHING = TaskExecutionStatus.AddMember("LAUNCHING", smithyprelude.Unit)
-
-	TaskExecutionStatus_PREPARING = TaskExecutionStatus.AddMember("PREPARING", smithyprelude.Unit)
-
-	TaskExecutionStatus_TRANSFERRING = TaskExecutionStatus.AddMember("TRANSFERRING", smithyprelude.Unit)
-
-	TaskExecutionStatus_VERIFYING = TaskExecutionStatus.AddMember("VERIFYING", smithyprelude.Unit)
-
-	TaskExecutionStatus_SUCCESS = TaskExecutionStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	TaskExecutionStatus_ERROR = TaskExecutionStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	TaskMode_BASIC = TaskMode.AddMember("BASIC", smithyprelude.Unit)
-
-	TaskMode_ENHANCED = TaskMode.AddMember("ENHANCED", smithyprelude.Unit)
-
-	TaskExecutionListEntry_TaskExecutionArn = TaskExecutionListEntry.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	TaskExecutionListEntry_Status = TaskExecutionListEntry.AddMember("Status", TaskExecutionStatus)
-
-	TaskExecutionListEntry_TaskMode = TaskExecutionListEntry.AddMember("TaskMode", TaskMode)
-
-	_TaskExecutionList_member = _TaskExecutionList.AddMember("member", TaskExecutionListEntry)
-
-	TaskExecutionResultDetail_PrepareDuration = TaskExecutionResultDetail.AddMember("PrepareDuration", _Duration)
-
-	TaskExecutionResultDetail_PrepareStatus = TaskExecutionResultDetail.AddMember("PrepareStatus", PhaseStatus)
-
-	TaskExecutionResultDetail_TotalDuration = TaskExecutionResultDetail.AddMember("TotalDuration", _Duration)
-
-	TaskExecutionResultDetail_TransferDuration = TaskExecutionResultDetail.AddMember("TransferDuration", _Duration)
-
-	TaskExecutionResultDetail_TransferStatus = TaskExecutionResultDetail.AddMember("TransferStatus", PhaseStatus)
-
-	TaskExecutionResultDetail_VerifyDuration = TaskExecutionResultDetail.AddMember("VerifyDuration", _Duration)
-
-	TaskExecutionResultDetail_VerifyStatus = TaskExecutionResultDetail.AddMember("VerifyStatus", PhaseStatus)
-
-	TaskExecutionResultDetail_ErrorCode = TaskExecutionResultDetail.AddMember("ErrorCode", _string)
-
-	TaskExecutionResultDetail_ErrorDetail = TaskExecutionResultDetail.AddMember("ErrorDetail", _string)
-
-	TaskFilterName_LocationId = TaskFilterName.AddMember("LocationId", smithyprelude.Unit)
-
-	TaskFilterName_CreationTime = TaskFilterName.AddMember("CreationTime", smithyprelude.Unit)
-
-	TaskFilter_Name = TaskFilter.AddMember("Name", TaskFilterName)
-
-	TaskFilter_Values = TaskFilter.AddMember("Values", _FilterValues)
-
-	TaskFilter_Operator = TaskFilter.AddMember("Operator", Operator)
-
-	_TaskFilters_member = _TaskFilters.AddMember("member", TaskFilter)
-
-	TaskStatus_AVAILABLE = TaskStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	TaskStatus_CREATING = TaskStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	TaskStatus_QUEUED = TaskStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	TaskStatus_RUNNING = TaskStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	TaskStatus_UNAVAILABLE = TaskStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	TaskListEntry_TaskArn = TaskListEntry.AddMember("TaskArn", _TaskArn)
-
-	TaskListEntry_Status = TaskListEntry.AddMember("Status", TaskStatus)
-
-	TaskListEntry_Name = TaskListEntry.AddMember("Name", _TagValue)
-
-	TaskListEntry_TaskMode = TaskListEntry.AddMember("TaskMode", TaskMode)
-
-	_TaskList_member = _TaskList.AddMember("member", TaskListEntry)
-
-	TaskReportConfig_Destination = TaskReportConfig.AddMember("Destination", ReportDestination)
-
-	TaskReportConfig_OutputType = TaskReportConfig.AddMember("OutputType", ReportOutputType)
-
-	TaskReportConfig_ReportLevel = TaskReportConfig.AddMember("ReportLevel", ReportLevel)
-
-	TaskReportConfig_ObjectVersionIds = TaskReportConfig.AddMember("ObjectVersionIds", ObjectVersionIds)
-
-	TaskReportConfig_Overrides = TaskReportConfig.AddMember("Overrides", ReportOverrides)
-
-	TaskSchedule_ScheduleExpression = TaskSchedule.AddMember("ScheduleExpression", _ScheduleExpressionCron)
-
-	TaskSchedule_Status = TaskSchedule.AddMember("Status", ScheduleStatus)
-
-	TaskScheduleDetails_StatusUpdateTime = TaskScheduleDetails.AddMember("StatusUpdateTime", _Time)
-
-	TaskScheduleDetails_DisabledReason = TaskScheduleDetails.AddMember("DisabledReason", _ScheduleDisabledReason)
-
-	TaskScheduleDetails_DisabledBy = TaskScheduleDetails.AddMember("DisabledBy", ScheduleDisabledBy)
-
-	CancelTaskExecutionRequest_TaskExecutionArn = CancelTaskExecutionRequest.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	CreateAgentRequest_ActivationKey = CreateAgentRequest.AddMember("ActivationKey", _ActivationKey)
-
-	CreateAgentRequest_AgentName = CreateAgentRequest.AddMember("AgentName", _TagValue)
-
-	CreateAgentRequest_Tags = CreateAgentRequest.AddMember("Tags", _InputTagList)
-
-	CreateAgentRequest_VpcEndpointId = CreateAgentRequest.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	CreateAgentRequest_SubnetArns = CreateAgentRequest.AddMember("SubnetArns", _PLSubnetArnList)
-
-	CreateAgentRequest_SecurityGroupArns = CreateAgentRequest.AddMember("SecurityGroupArns", _PLSecurityGroupArnList)
-
-	CreateAgentResponse_AgentArn = CreateAgentResponse.AddMember("AgentArn", _AgentArn)
-
-	CreateLocationAzureBlobRequest_ContainerUrl = CreateLocationAzureBlobRequest.AddMember("ContainerUrl", _AzureBlobContainerUrl)
-
-	CreateLocationAzureBlobRequest_AuthenticationType = CreateLocationAzureBlobRequest.AddMember("AuthenticationType", AzureBlobAuthenticationType)
-
-	CreateLocationAzureBlobRequest_SasConfiguration = CreateLocationAzureBlobRequest.AddMember("SasConfiguration", AzureBlobSasConfiguration)
-
-	CreateLocationAzureBlobRequest_FederatedIdentity = CreateLocationAzureBlobRequest.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
-
-	CreateLocationAzureBlobRequest_BlobType = CreateLocationAzureBlobRequest.AddMember("BlobType", AzureBlobType)
-
-	CreateLocationAzureBlobRequest_AccessTier = CreateLocationAzureBlobRequest.AddMember("AccessTier", AzureAccessTier)
-
-	CreateLocationAzureBlobRequest_Subdirectory = CreateLocationAzureBlobRequest.AddMember("Subdirectory", _AzureBlobSubdirectory)
-
-	CreateLocationAzureBlobRequest_AgentArns = CreateLocationAzureBlobRequest.AddMember("AgentArns", _AgentArnList)
-
-	CreateLocationAzureBlobRequest_Tags = CreateLocationAzureBlobRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationAzureBlobRequest_CmkSecretConfig = CreateLocationAzureBlobRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	CreateLocationAzureBlobRequest_CustomSecretConfig = CreateLocationAzureBlobRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	CreateLocationAzureBlobResponse_LocationArn = CreateLocationAzureBlobResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationEfsRequest_Subdirectory = CreateLocationEfsRequest.AddMember("Subdirectory", _EfsSubdirectory)
-
-	CreateLocationEfsRequest_EfsFilesystemArn = CreateLocationEfsRequest.AddMember("EfsFilesystemArn", _EfsFilesystemArn)
-
-	CreateLocationEfsRequest_Ec2Config = CreateLocationEfsRequest.AddMember("Ec2Config", Ec2Config)
-
-	CreateLocationEfsRequest_Tags = CreateLocationEfsRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationEfsRequest_AccessPointArn = CreateLocationEfsRequest.AddMember("AccessPointArn", _EfsAccessPointArn)
-
-	CreateLocationEfsRequest_FileSystemAccessRoleArn = CreateLocationEfsRequest.AddMember("FileSystemAccessRoleArn", _IamRoleArn)
-
-	CreateLocationEfsRequest_InTransitEncryption = CreateLocationEfsRequest.AddMember("InTransitEncryption", EfsInTransitEncryption)
-
-	CreateLocationEfsResponse_LocationArn = CreateLocationEfsResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationFsxLustreRequest_FsxFilesystemArn = CreateLocationFsxLustreRequest.AddMember("FsxFilesystemArn", _FsxFilesystemArn)
-
-	CreateLocationFsxLustreRequest_SecurityGroupArns = CreateLocationFsxLustreRequest.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	CreateLocationFsxLustreRequest_Subdirectory = CreateLocationFsxLustreRequest.AddMember("Subdirectory", _FsxLustreSubdirectory)
-
-	CreateLocationFsxLustreRequest_Tags = CreateLocationFsxLustreRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationFsxLustreResponse_LocationArn = CreateLocationFsxLustreResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationFsxOntapRequest_Protocol = CreateLocationFsxOntapRequest.AddMember("Protocol", FsxProtocol)
-
-	CreateLocationFsxOntapRequest_SecurityGroupArns = CreateLocationFsxOntapRequest.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	CreateLocationFsxOntapRequest_StorageVirtualMachineArn = CreateLocationFsxOntapRequest.AddMember("StorageVirtualMachineArn", _StorageVirtualMachineArn)
-
-	CreateLocationFsxOntapRequest_Subdirectory = CreateLocationFsxOntapRequest.AddMember("Subdirectory", _FsxOntapSubdirectory)
-
-	CreateLocationFsxOntapRequest_Tags = CreateLocationFsxOntapRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationFsxOntapResponse_LocationArn = CreateLocationFsxOntapResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationFsxOpenZfsRequest_FsxFilesystemArn = CreateLocationFsxOpenZfsRequest.AddMember("FsxFilesystemArn", _FsxFilesystemArn)
-
-	CreateLocationFsxOpenZfsRequest_Protocol = CreateLocationFsxOpenZfsRequest.AddMember("Protocol", FsxProtocol)
-
-	CreateLocationFsxOpenZfsRequest_SecurityGroupArns = CreateLocationFsxOpenZfsRequest.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	CreateLocationFsxOpenZfsRequest_Subdirectory = CreateLocationFsxOpenZfsRequest.AddMember("Subdirectory", _FsxOpenZfsSubdirectory)
-
-	CreateLocationFsxOpenZfsRequest_Tags = CreateLocationFsxOpenZfsRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationFsxOpenZfsResponse_LocationArn = CreateLocationFsxOpenZfsResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationFsxWindowsRequest_Subdirectory = CreateLocationFsxWindowsRequest.AddMember("Subdirectory", _FsxWindowsSubdirectory)
-
-	CreateLocationFsxWindowsRequest_FsxFilesystemArn = CreateLocationFsxWindowsRequest.AddMember("FsxFilesystemArn", _FsxFilesystemArn)
-
-	CreateLocationFsxWindowsRequest_SecurityGroupArns = CreateLocationFsxWindowsRequest.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	CreateLocationFsxWindowsRequest_Tags = CreateLocationFsxWindowsRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationFsxWindowsRequest_User = CreateLocationFsxWindowsRequest.AddMember("User", _SmbUser)
-
-	CreateLocationFsxWindowsRequest_Domain = CreateLocationFsxWindowsRequest.AddMember("Domain", _SmbDomain)
-
-	CreateLocationFsxWindowsRequest_Password = CreateLocationFsxWindowsRequest.AddMember("Password", _SmbPassword)
-
-	CreateLocationFsxWindowsRequest_CmkSecretConfig = CreateLocationFsxWindowsRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	CreateLocationFsxWindowsRequest_CustomSecretConfig = CreateLocationFsxWindowsRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	CreateLocationFsxWindowsResponse_LocationArn = CreateLocationFsxWindowsResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationHdfsRequest_Subdirectory = CreateLocationHdfsRequest.AddMember("Subdirectory", _HdfsSubdirectory)
-
-	CreateLocationHdfsRequest_NameNodes = CreateLocationHdfsRequest.AddMember("NameNodes", _HdfsNameNodeList)
-
-	CreateLocationHdfsRequest_BlockSize = CreateLocationHdfsRequest.AddMember("BlockSize", _HdfsBlockSize)
-
-	CreateLocationHdfsRequest_ReplicationFactor = CreateLocationHdfsRequest.AddMember("ReplicationFactor", _HdfsReplicationFactor)
-
-	CreateLocationHdfsRequest_KmsKeyProviderUri = CreateLocationHdfsRequest.AddMember("KmsKeyProviderUri", _KmsKeyProviderUri)
-
-	CreateLocationHdfsRequest_QopConfiguration = CreateLocationHdfsRequest.AddMember("QopConfiguration", QopConfiguration)
-
-	CreateLocationHdfsRequest_AuthenticationType = CreateLocationHdfsRequest.AddMember("AuthenticationType", HdfsAuthenticationType)
-
-	CreateLocationHdfsRequest_SimpleUser = CreateLocationHdfsRequest.AddMember("SimpleUser", _HdfsUser)
-
-	CreateLocationHdfsRequest_KerberosPrincipal = CreateLocationHdfsRequest.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	CreateLocationHdfsRequest_KerberosKeytab = CreateLocationHdfsRequest.AddMember("KerberosKeytab", _KerberosKeytabFile)
-
-	CreateLocationHdfsRequest_KerberosKrb5Conf = CreateLocationHdfsRequest.AddMember("KerberosKrb5Conf", _KerberosKrb5ConfFile)
-
-	CreateLocationHdfsRequest_AgentArns = CreateLocationHdfsRequest.AddMember("AgentArns", _AgentArnList)
-
-	CreateLocationHdfsRequest_Tags = CreateLocationHdfsRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationHdfsRequest_CmkSecretConfig = CreateLocationHdfsRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	CreateLocationHdfsRequest_CustomSecretConfig = CreateLocationHdfsRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	CreateLocationHdfsResponse_LocationArn = CreateLocationHdfsResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationNfsRequest_Subdirectory = CreateLocationNfsRequest.AddMember("Subdirectory", _NfsSubdirectory)
-
-	CreateLocationNfsRequest_ServerHostname = CreateLocationNfsRequest.AddMember("ServerHostname", _ServerHostname)
-
-	CreateLocationNfsRequest_OnPremConfig = CreateLocationNfsRequest.AddMember("OnPremConfig", OnPremConfig)
-
-	CreateLocationNfsRequest_MountOptions = CreateLocationNfsRequest.AddMember("MountOptions", NfsMountOptions)
-
-	CreateLocationNfsRequest_Tags = CreateLocationNfsRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationNfsResponse_LocationArn = CreateLocationNfsResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationObjectStorageRequest_ServerHostname = CreateLocationObjectStorageRequest.AddMember("ServerHostname", _ServerHostname)
-
-	CreateLocationObjectStorageRequest_ServerPort = CreateLocationObjectStorageRequest.AddMember("ServerPort", _ObjectStorageServerPort)
-
-	CreateLocationObjectStorageRequest_ServerProtocol = CreateLocationObjectStorageRequest.AddMember("ServerProtocol", ObjectStorageServerProtocol)
-
-	CreateLocationObjectStorageRequest_Subdirectory = CreateLocationObjectStorageRequest.AddMember("Subdirectory", _S3Subdirectory)
-
-	CreateLocationObjectStorageRequest_BucketName = CreateLocationObjectStorageRequest.AddMember("BucketName", _ObjectStorageBucketName)
-
-	CreateLocationObjectStorageRequest_AccessKey = CreateLocationObjectStorageRequest.AddMember("AccessKey", _ObjectStorageAccessKey)
-
-	CreateLocationObjectStorageRequest_SecretKey = CreateLocationObjectStorageRequest.AddMember("SecretKey", _ObjectStorageSecretKey)
-
-	CreateLocationObjectStorageRequest_FederatedIdentity = CreateLocationObjectStorageRequest.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
-
-	CreateLocationObjectStorageRequest_AgentArns = CreateLocationObjectStorageRequest.AddMember("AgentArns", _AgentArnList)
-
-	CreateLocationObjectStorageRequest_Tags = CreateLocationObjectStorageRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationObjectStorageRequest_ServerCertificate = CreateLocationObjectStorageRequest.AddMember("ServerCertificate", _ObjectStorageCertificate)
-
-	CreateLocationObjectStorageRequest_CmkSecretConfig = CreateLocationObjectStorageRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	CreateLocationObjectStorageRequest_CustomSecretConfig = CreateLocationObjectStorageRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	CreateLocationObjectStorageResponse_LocationArn = CreateLocationObjectStorageResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationS3Request_Subdirectory = CreateLocationS3Request.AddMember("Subdirectory", _S3Subdirectory)
-
-	CreateLocationS3Request_S3BucketArn = CreateLocationS3Request.AddMember("S3BucketArn", _S3BucketArn)
-
-	CreateLocationS3Request_S3StorageClass = CreateLocationS3Request.AddMember("S3StorageClass", S3StorageClass)
-
-	CreateLocationS3Request_S3Config = CreateLocationS3Request.AddMember("S3Config", S3Config)
-
-	CreateLocationS3Request_AgentArns = CreateLocationS3Request.AddMember("AgentArns", _AgentArnList)
-
-	CreateLocationS3Request_Tags = CreateLocationS3Request.AddMember("Tags", _InputTagList)
-
-	CreateLocationS3Response_LocationArn = CreateLocationS3Response.AddMember("LocationArn", _LocationArn)
-
-	CreateLocationSmbRequest_Subdirectory = CreateLocationSmbRequest.AddMember("Subdirectory", _SmbSubdirectory)
-
-	CreateLocationSmbRequest_ServerHostname = CreateLocationSmbRequest.AddMember("ServerHostname", _ServerHostname)
-
-	CreateLocationSmbRequest_User = CreateLocationSmbRequest.AddMember("User", _SmbUser)
-
-	CreateLocationSmbRequest_Domain = CreateLocationSmbRequest.AddMember("Domain", _SmbDomain)
-
-	CreateLocationSmbRequest_Password = CreateLocationSmbRequest.AddMember("Password", _SmbPassword)
-
-	CreateLocationSmbRequest_CmkSecretConfig = CreateLocationSmbRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	CreateLocationSmbRequest_CustomSecretConfig = CreateLocationSmbRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	CreateLocationSmbRequest_AgentArns = CreateLocationSmbRequest.AddMember("AgentArns", _AgentArnList)
-
-	CreateLocationSmbRequest_MountOptions = CreateLocationSmbRequest.AddMember("MountOptions", SmbMountOptions)
-
-	CreateLocationSmbRequest_Tags = CreateLocationSmbRequest.AddMember("Tags", _InputTagList)
-
-	CreateLocationSmbRequest_AuthenticationType = CreateLocationSmbRequest.AddMember("AuthenticationType", SmbAuthenticationType)
-
-	CreateLocationSmbRequest_DnsIpAddresses = CreateLocationSmbRequest.AddMember("DnsIpAddresses", _DnsIpList)
-
-	CreateLocationSmbRequest_KerberosPrincipal = CreateLocationSmbRequest.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	CreateLocationSmbRequest_KerberosKeytab = CreateLocationSmbRequest.AddMember("KerberosKeytab", _KerberosKeytabFile)
-
-	CreateLocationSmbRequest_KerberosKrb5Conf = CreateLocationSmbRequest.AddMember("KerberosKrb5Conf", _KerberosKrb5ConfFile)
-
-	CreateLocationSmbResponse_LocationArn = CreateLocationSmbResponse.AddMember("LocationArn", _LocationArn)
-
-	CreateTaskRequest_SourceLocationArn = CreateTaskRequest.AddMember("SourceLocationArn", _LocationArn)
-
-	CreateTaskRequest_DestinationLocationArn = CreateTaskRequest.AddMember("DestinationLocationArn", _LocationArn)
-
-	CreateTaskRequest_CloudWatchLogGroupArn = CreateTaskRequest.AddMember("CloudWatchLogGroupArn", _LogGroupArn)
-
-	CreateTaskRequest_Name = CreateTaskRequest.AddMember("Name", _TagValue)
-
-	CreateTaskRequest_Options = CreateTaskRequest.AddMember("Options", Options)
-
-	CreateTaskRequest_Excludes = CreateTaskRequest.AddMember("Excludes", _FilterList)
-
-	CreateTaskRequest_Schedule = CreateTaskRequest.AddMember("Schedule", TaskSchedule)
-
-	CreateTaskRequest_Tags = CreateTaskRequest.AddMember("Tags", _InputTagList)
-
-	CreateTaskRequest_Includes = CreateTaskRequest.AddMember("Includes", _FilterList)
-
-	CreateTaskRequest_ManifestConfig = CreateTaskRequest.AddMember("ManifestConfig", ManifestConfig)
-
-	CreateTaskRequest_TaskReportConfig = CreateTaskRequest.AddMember("TaskReportConfig", TaskReportConfig)
-
-	CreateTaskRequest_TaskMode = CreateTaskRequest.AddMember("TaskMode", TaskMode)
-
-	CreateTaskResponse_TaskArn = CreateTaskResponse.AddMember("TaskArn", _TaskArn)
-
-	DeleteAgentRequest_AgentArn = DeleteAgentRequest.AddMember("AgentArn", _AgentArn)
-
-	DeleteLocationRequest_LocationArn = DeleteLocationRequest.AddMember("LocationArn", _LocationArn)
-
-	DeleteTaskRequest_TaskArn = DeleteTaskRequest.AddMember("TaskArn", _TaskArn)
-
-	DescribeAgentRequest_AgentArn = DescribeAgentRequest.AddMember("AgentArn", _AgentArn)
-
-	DescribeAgentResponse_AgentArn = DescribeAgentResponse.AddMember("AgentArn", _AgentArn)
-
-	DescribeAgentResponse_Name = DescribeAgentResponse.AddMember("Name", _TagValue)
-
-	DescribeAgentResponse_Status = DescribeAgentResponse.AddMember("Status", AgentStatus)
-
-	DescribeAgentResponse_LastConnectionTime = DescribeAgentResponse.AddMember("LastConnectionTime", _Time)
-
-	DescribeAgentResponse_CreationTime = DescribeAgentResponse.AddMember("CreationTime", _Time)
-
-	DescribeAgentResponse_EndpointType = DescribeAgentResponse.AddMember("EndpointType", EndpointType)
-
-	DescribeAgentResponse_PrivateLinkConfig = DescribeAgentResponse.AddMember("PrivateLinkConfig", PrivateLinkConfig)
-
-	DescribeAgentResponse_Platform = DescribeAgentResponse.AddMember("Platform", Platform)
-
-	DescribeLocationAzureBlobRequest_LocationArn = DescribeLocationAzureBlobRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationAzureBlobResponse_LocationArn = DescribeLocationAzureBlobResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationAzureBlobResponse_LocationUri = DescribeLocationAzureBlobResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationAzureBlobResponse_AuthenticationType = DescribeLocationAzureBlobResponse.AddMember("AuthenticationType", AzureBlobAuthenticationType)
-
-	DescribeLocationAzureBlobResponse_FederatedIdentity = DescribeLocationAzureBlobResponse.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
-
-	DescribeLocationAzureBlobResponse_BlobType = DescribeLocationAzureBlobResponse.AddMember("BlobType", AzureBlobType)
-
-	DescribeLocationAzureBlobResponse_AccessTier = DescribeLocationAzureBlobResponse.AddMember("AccessTier", AzureAccessTier)
-
-	DescribeLocationAzureBlobResponse_AgentArns = DescribeLocationAzureBlobResponse.AddMember("AgentArns", _AgentArnList)
-
-	DescribeLocationAzureBlobResponse_CreationTime = DescribeLocationAzureBlobResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationAzureBlobResponse_ManagedSecretConfig = DescribeLocationAzureBlobResponse.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	DescribeLocationAzureBlobResponse_CmkSecretConfig = DescribeLocationAzureBlobResponse.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	DescribeLocationAzureBlobResponse_CustomSecretConfig = DescribeLocationAzureBlobResponse.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	DescribeLocationEfsRequest_LocationArn = DescribeLocationEfsRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationEfsResponse_LocationArn = DescribeLocationEfsResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationEfsResponse_LocationUri = DescribeLocationEfsResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationEfsResponse_Ec2Config = DescribeLocationEfsResponse.AddMember("Ec2Config", Ec2Config)
-
-	DescribeLocationEfsResponse_CreationTime = DescribeLocationEfsResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationEfsResponse_AccessPointArn = DescribeLocationEfsResponse.AddMember("AccessPointArn", _EfsAccessPointArn)
-
-	DescribeLocationEfsResponse_FileSystemAccessRoleArn = DescribeLocationEfsResponse.AddMember("FileSystemAccessRoleArn", _IamRoleArn)
-
-	DescribeLocationEfsResponse_InTransitEncryption = DescribeLocationEfsResponse.AddMember("InTransitEncryption", EfsInTransitEncryption)
-
-	DescribeLocationFsxLustreRequest_LocationArn = DescribeLocationFsxLustreRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxLustreResponse_LocationArn = DescribeLocationFsxLustreResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxLustreResponse_LocationUri = DescribeLocationFsxLustreResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationFsxLustreResponse_SecurityGroupArns = DescribeLocationFsxLustreResponse.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	DescribeLocationFsxLustreResponse_CreationTime = DescribeLocationFsxLustreResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationFsxOntapRequest_LocationArn = DescribeLocationFsxOntapRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxOntapResponse_CreationTime = DescribeLocationFsxOntapResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationFsxOntapResponse_LocationArn = DescribeLocationFsxOntapResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxOntapResponse_LocationUri = DescribeLocationFsxOntapResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationFsxOntapResponse_Protocol = DescribeLocationFsxOntapResponse.AddMember("Protocol", FsxProtocol)
-
-	DescribeLocationFsxOntapResponse_SecurityGroupArns = DescribeLocationFsxOntapResponse.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	DescribeLocationFsxOntapResponse_StorageVirtualMachineArn = DescribeLocationFsxOntapResponse.AddMember("StorageVirtualMachineArn", _StorageVirtualMachineArn)
-
-	DescribeLocationFsxOntapResponse_FsxFilesystemArn = DescribeLocationFsxOntapResponse.AddMember("FsxFilesystemArn", _FsxFilesystemArn)
-
-	DescribeLocationFsxOpenZfsRequest_LocationArn = DescribeLocationFsxOpenZfsRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxOpenZfsResponse_LocationArn = DescribeLocationFsxOpenZfsResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxOpenZfsResponse_LocationUri = DescribeLocationFsxOpenZfsResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationFsxOpenZfsResponse_SecurityGroupArns = DescribeLocationFsxOpenZfsResponse.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	DescribeLocationFsxOpenZfsResponse_Protocol = DescribeLocationFsxOpenZfsResponse.AddMember("Protocol", FsxProtocol)
-
-	DescribeLocationFsxOpenZfsResponse_CreationTime = DescribeLocationFsxOpenZfsResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationFsxWindowsRequest_LocationArn = DescribeLocationFsxWindowsRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxWindowsResponse_LocationArn = DescribeLocationFsxWindowsResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationFsxWindowsResponse_LocationUri = DescribeLocationFsxWindowsResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationFsxWindowsResponse_SecurityGroupArns = DescribeLocationFsxWindowsResponse.AddMember("SecurityGroupArns", _Ec2SecurityGroupArnList)
-
-	DescribeLocationFsxWindowsResponse_CreationTime = DescribeLocationFsxWindowsResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationFsxWindowsResponse_User = DescribeLocationFsxWindowsResponse.AddMember("User", _SmbUser)
-
-	DescribeLocationFsxWindowsResponse_Domain = DescribeLocationFsxWindowsResponse.AddMember("Domain", _SmbDomain)
-
-	DescribeLocationFsxWindowsResponse_ManagedSecretConfig = DescribeLocationFsxWindowsResponse.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	DescribeLocationFsxWindowsResponse_CmkSecretConfig = DescribeLocationFsxWindowsResponse.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	DescribeLocationFsxWindowsResponse_CustomSecretConfig = DescribeLocationFsxWindowsResponse.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	DescribeLocationHdfsRequest_LocationArn = DescribeLocationHdfsRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationHdfsResponse_LocationArn = DescribeLocationHdfsResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationHdfsResponse_LocationUri = DescribeLocationHdfsResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationHdfsResponse_NameNodes = DescribeLocationHdfsResponse.AddMember("NameNodes", _HdfsNameNodeList)
-
-	DescribeLocationHdfsResponse_BlockSize = DescribeLocationHdfsResponse.AddMember("BlockSize", _HdfsBlockSize)
-
-	DescribeLocationHdfsResponse_ReplicationFactor = DescribeLocationHdfsResponse.AddMember("ReplicationFactor", _HdfsReplicationFactor)
-
-	DescribeLocationHdfsResponse_KmsKeyProviderUri = DescribeLocationHdfsResponse.AddMember("KmsKeyProviderUri", _KmsKeyProviderUri)
-
-	DescribeLocationHdfsResponse_QopConfiguration = DescribeLocationHdfsResponse.AddMember("QopConfiguration", QopConfiguration)
-
-	DescribeLocationHdfsResponse_AuthenticationType = DescribeLocationHdfsResponse.AddMember("AuthenticationType", HdfsAuthenticationType)
-
-	DescribeLocationHdfsResponse_SimpleUser = DescribeLocationHdfsResponse.AddMember("SimpleUser", _HdfsUser)
-
-	DescribeLocationHdfsResponse_KerberosPrincipal = DescribeLocationHdfsResponse.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	DescribeLocationHdfsResponse_AgentArns = DescribeLocationHdfsResponse.AddMember("AgentArns", _AgentArnList)
-
-	DescribeLocationHdfsResponse_CreationTime = DescribeLocationHdfsResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationHdfsResponse_ManagedSecretConfig = DescribeLocationHdfsResponse.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	DescribeLocationHdfsResponse_CmkSecretConfig = DescribeLocationHdfsResponse.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	DescribeLocationHdfsResponse_CustomSecretConfig = DescribeLocationHdfsResponse.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	DescribeLocationNfsRequest_LocationArn = DescribeLocationNfsRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationNfsResponse_LocationArn = DescribeLocationNfsResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationNfsResponse_LocationUri = DescribeLocationNfsResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationNfsResponse_OnPremConfig = DescribeLocationNfsResponse.AddMember("OnPremConfig", OnPremConfig)
-
-	DescribeLocationNfsResponse_MountOptions = DescribeLocationNfsResponse.AddMember("MountOptions", NfsMountOptions)
-
-	DescribeLocationNfsResponse_CreationTime = DescribeLocationNfsResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationObjectStorageRequest_LocationArn = DescribeLocationObjectStorageRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationObjectStorageResponse_LocationArn = DescribeLocationObjectStorageResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationObjectStorageResponse_LocationUri = DescribeLocationObjectStorageResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationObjectStorageResponse_AccessKey = DescribeLocationObjectStorageResponse.AddMember("AccessKey", _ObjectStorageAccessKey)
-
-	DescribeLocationObjectStorageResponse_FederatedIdentity = DescribeLocationObjectStorageResponse.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
-
-	DescribeLocationObjectStorageResponse_ServerPort = DescribeLocationObjectStorageResponse.AddMember("ServerPort", _ObjectStorageServerPort)
-
-	DescribeLocationObjectStorageResponse_ServerProtocol = DescribeLocationObjectStorageResponse.AddMember("ServerProtocol", ObjectStorageServerProtocol)
-
-	DescribeLocationObjectStorageResponse_AgentArns = DescribeLocationObjectStorageResponse.AddMember("AgentArns", _AgentArnList)
-
-	DescribeLocationObjectStorageResponse_CreationTime = DescribeLocationObjectStorageResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationObjectStorageResponse_ServerCertificate = DescribeLocationObjectStorageResponse.AddMember("ServerCertificate", _ObjectStorageCertificate)
-
-	DescribeLocationObjectStorageResponse_ManagedSecretConfig = DescribeLocationObjectStorageResponse.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	DescribeLocationObjectStorageResponse_CmkSecretConfig = DescribeLocationObjectStorageResponse.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	DescribeLocationObjectStorageResponse_CustomSecretConfig = DescribeLocationObjectStorageResponse.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	DescribeLocationS3Request_LocationArn = DescribeLocationS3Request.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationS3Response_LocationArn = DescribeLocationS3Response.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationS3Response_LocationUri = DescribeLocationS3Response.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationS3Response_S3StorageClass = DescribeLocationS3Response.AddMember("S3StorageClass", S3StorageClass)
-
-	DescribeLocationS3Response_S3Config = DescribeLocationS3Response.AddMember("S3Config", S3Config)
-
-	DescribeLocationS3Response_AgentArns = DescribeLocationS3Response.AddMember("AgentArns", _AgentArnList)
-
-	DescribeLocationS3Response_CreationTime = DescribeLocationS3Response.AddMember("CreationTime", _Time)
-
-	DescribeLocationSmbRequest_LocationArn = DescribeLocationSmbRequest.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationSmbResponse_LocationArn = DescribeLocationSmbResponse.AddMember("LocationArn", _LocationArn)
-
-	DescribeLocationSmbResponse_LocationUri = DescribeLocationSmbResponse.AddMember("LocationUri", _LocationUri)
-
-	DescribeLocationSmbResponse_AgentArns = DescribeLocationSmbResponse.AddMember("AgentArns", _AgentArnList)
-
-	DescribeLocationSmbResponse_User = DescribeLocationSmbResponse.AddMember("User", _SmbUser)
-
-	DescribeLocationSmbResponse_Domain = DescribeLocationSmbResponse.AddMember("Domain", _SmbDomain)
-
-	DescribeLocationSmbResponse_MountOptions = DescribeLocationSmbResponse.AddMember("MountOptions", SmbMountOptions)
-
-	DescribeLocationSmbResponse_CreationTime = DescribeLocationSmbResponse.AddMember("CreationTime", _Time)
-
-	DescribeLocationSmbResponse_DnsIpAddresses = DescribeLocationSmbResponse.AddMember("DnsIpAddresses", _DnsIpList)
-
-	DescribeLocationSmbResponse_KerberosPrincipal = DescribeLocationSmbResponse.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	DescribeLocationSmbResponse_AuthenticationType = DescribeLocationSmbResponse.AddMember("AuthenticationType", SmbAuthenticationType)
-
-	DescribeLocationSmbResponse_ManagedSecretConfig = DescribeLocationSmbResponse.AddMember("ManagedSecretConfig", ManagedSecretConfig)
-
-	DescribeLocationSmbResponse_CmkSecretConfig = DescribeLocationSmbResponse.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	DescribeLocationSmbResponse_CustomSecretConfig = DescribeLocationSmbResponse.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	DescribeTaskExecutionRequest_TaskExecutionArn = DescribeTaskExecutionRequest.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	DescribeTaskExecutionResponse_TaskExecutionArn = DescribeTaskExecutionResponse.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	DescribeTaskExecutionResponse_Status = DescribeTaskExecutionResponse.AddMember("Status", TaskExecutionStatus)
-
-	DescribeTaskExecutionResponse_Options = DescribeTaskExecutionResponse.AddMember("Options", Options)
-
-	DescribeTaskExecutionResponse_Excludes = DescribeTaskExecutionResponse.AddMember("Excludes", _FilterList)
-
-	DescribeTaskExecutionResponse_Includes = DescribeTaskExecutionResponse.AddMember("Includes", _FilterList)
-
-	DescribeTaskExecutionResponse_ManifestConfig = DescribeTaskExecutionResponse.AddMember("ManifestConfig", ManifestConfig)
-
-	DescribeTaskExecutionResponse_StartTime = DescribeTaskExecutionResponse.AddMember("StartTime", _Time)
-
-	DescribeTaskExecutionResponse_EstimatedFilesToTransfer = DescribeTaskExecutionResponse.AddMember("EstimatedFilesToTransfer", _long)
-
-	DescribeTaskExecutionResponse_EstimatedBytesToTransfer = DescribeTaskExecutionResponse.AddMember("EstimatedBytesToTransfer", _long)
-
-	DescribeTaskExecutionResponse_FilesTransferred = DescribeTaskExecutionResponse.AddMember("FilesTransferred", _long)
-
-	DescribeTaskExecutionResponse_BytesWritten = DescribeTaskExecutionResponse.AddMember("BytesWritten", _long)
-
-	DescribeTaskExecutionResponse_BytesTransferred = DescribeTaskExecutionResponse.AddMember("BytesTransferred", _long)
-
-	DescribeTaskExecutionResponse_BytesCompressed = DescribeTaskExecutionResponse.AddMember("BytesCompressed", _long)
-
-	DescribeTaskExecutionResponse_Result = DescribeTaskExecutionResponse.AddMember("Result", TaskExecutionResultDetail)
-
-	DescribeTaskExecutionResponse_TaskReportConfig = DescribeTaskExecutionResponse.AddMember("TaskReportConfig", TaskReportConfig)
-
-	DescribeTaskExecutionResponse_FilesDeleted = DescribeTaskExecutionResponse.AddMember("FilesDeleted", _long)
-
-	DescribeTaskExecutionResponse_FilesSkipped = DescribeTaskExecutionResponse.AddMember("FilesSkipped", _long)
-
-	DescribeTaskExecutionResponse_FilesVerified = DescribeTaskExecutionResponse.AddMember("FilesVerified", _long)
-
-	DescribeTaskExecutionResponse_ReportResult = DescribeTaskExecutionResponse.AddMember("ReportResult", ReportResult)
-
-	DescribeTaskExecutionResponse_EstimatedFilesToDelete = DescribeTaskExecutionResponse.AddMember("EstimatedFilesToDelete", _long)
-
-	DescribeTaskExecutionResponse_TaskMode = DescribeTaskExecutionResponse.AddMember("TaskMode", TaskMode)
-
-	DescribeTaskExecutionResponse_FilesPrepared = DescribeTaskExecutionResponse.AddMember("FilesPrepared", _long)
-
-	DescribeTaskExecutionResponse_FilesListed = DescribeTaskExecutionResponse.AddMember("FilesListed", TaskExecutionFilesListedDetail)
-
-	DescribeTaskExecutionResponse_FilesFailed = DescribeTaskExecutionResponse.AddMember("FilesFailed", TaskExecutionFilesFailedDetail)
-
-	DescribeTaskExecutionResponse_EstimatedFoldersToDelete = DescribeTaskExecutionResponse.AddMember("EstimatedFoldersToDelete", _ItemCount)
-
-	DescribeTaskExecutionResponse_EstimatedFoldersToTransfer = DescribeTaskExecutionResponse.AddMember("EstimatedFoldersToTransfer", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersSkipped = DescribeTaskExecutionResponse.AddMember("FoldersSkipped", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersPrepared = DescribeTaskExecutionResponse.AddMember("FoldersPrepared", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersTransferred = DescribeTaskExecutionResponse.AddMember("FoldersTransferred", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersVerified = DescribeTaskExecutionResponse.AddMember("FoldersVerified", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersDeleted = DescribeTaskExecutionResponse.AddMember("FoldersDeleted", _ItemCount)
-
-	DescribeTaskExecutionResponse_FoldersListed = DescribeTaskExecutionResponse.AddMember("FoldersListed", TaskExecutionFoldersListedDetail)
-
-	DescribeTaskExecutionResponse_FoldersFailed = DescribeTaskExecutionResponse.AddMember("FoldersFailed", TaskExecutionFoldersFailedDetail)
-
-	DescribeTaskExecutionResponse_LaunchTime = DescribeTaskExecutionResponse.AddMember("LaunchTime", _Time)
-
-	DescribeTaskExecutionResponse_EndTime = DescribeTaskExecutionResponse.AddMember("EndTime", _Time)
-
-	DescribeTaskRequest_TaskArn = DescribeTaskRequest.AddMember("TaskArn", _TaskArn)
-
-	DescribeTaskResponse_TaskArn = DescribeTaskResponse.AddMember("TaskArn", _TaskArn)
-
-	DescribeTaskResponse_Status = DescribeTaskResponse.AddMember("Status", TaskStatus)
-
-	DescribeTaskResponse_Name = DescribeTaskResponse.AddMember("Name", _TagValue)
-
-	DescribeTaskResponse_CurrentTaskExecutionArn = DescribeTaskResponse.AddMember("CurrentTaskExecutionArn", _TaskExecutionArn)
-
-	DescribeTaskResponse_SourceLocationArn = DescribeTaskResponse.AddMember("SourceLocationArn", _LocationArn)
-
-	DescribeTaskResponse_DestinationLocationArn = DescribeTaskResponse.AddMember("DestinationLocationArn", _LocationArn)
-
-	DescribeTaskResponse_CloudWatchLogGroupArn = DescribeTaskResponse.AddMember("CloudWatchLogGroupArn", _LogGroupArn)
-
-	DescribeTaskResponse_SourceNetworkInterfaceArns = DescribeTaskResponse.AddMember("SourceNetworkInterfaceArns", _SourceNetworkInterfaceArns)
-
-	DescribeTaskResponse_DestinationNetworkInterfaceArns = DescribeTaskResponse.AddMember("DestinationNetworkInterfaceArns", _DestinationNetworkInterfaceArns)
-
-	DescribeTaskResponse_Options = DescribeTaskResponse.AddMember("Options", Options)
-
-	DescribeTaskResponse_Excludes = DescribeTaskResponse.AddMember("Excludes", _FilterList)
-
-	DescribeTaskResponse_Schedule = DescribeTaskResponse.AddMember("Schedule", TaskSchedule)
-
-	DescribeTaskResponse_ErrorCode = DescribeTaskResponse.AddMember("ErrorCode", _string)
-
-	DescribeTaskResponse_ErrorDetail = DescribeTaskResponse.AddMember("ErrorDetail", _string)
-
-	DescribeTaskResponse_CreationTime = DescribeTaskResponse.AddMember("CreationTime", _Time)
-
-	DescribeTaskResponse_Includes = DescribeTaskResponse.AddMember("Includes", _FilterList)
-
-	DescribeTaskResponse_ManifestConfig = DescribeTaskResponse.AddMember("ManifestConfig", ManifestConfig)
-
-	DescribeTaskResponse_TaskReportConfig = DescribeTaskResponse.AddMember("TaskReportConfig", TaskReportConfig)
-
-	DescribeTaskResponse_ScheduleDetails = DescribeTaskResponse.AddMember("ScheduleDetails", TaskScheduleDetails)
-
-	DescribeTaskResponse_TaskMode = DescribeTaskResponse.AddMember("TaskMode", TaskMode)
-
-	ListAgentsRequest_MaxResults = ListAgentsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAgentsRequest_NextToken = ListAgentsRequest.AddMember("NextToken", _NextToken)
-
-	ListAgentsResponse_Agents = ListAgentsResponse.AddMember("Agents", _AgentList)
-
-	ListAgentsResponse_NextToken = ListAgentsResponse.AddMember("NextToken", _NextToken)
-
-	ListLocationsRequest_MaxResults = ListLocationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListLocationsRequest_NextToken = ListLocationsRequest.AddMember("NextToken", _NextToken)
-
-	ListLocationsRequest_Filters = ListLocationsRequest.AddMember("Filters", _LocationFilters)
-
-	ListLocationsResponse_Locations = ListLocationsResponse.AddMember("Locations", _LocationList)
-
-	ListLocationsResponse_NextToken = ListLocationsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	ListTagsForResourceRequest_MaxResults = ListTagsForResourceRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _OutputTagList)
-
-	ListTagsForResourceResponse_NextToken = ListTagsForResourceResponse.AddMember("NextToken", _NextToken)
-
-	ListTaskExecutionsRequest_TaskArn = ListTaskExecutionsRequest.AddMember("TaskArn", _TaskArn)
-
-	ListTaskExecutionsRequest_MaxResults = ListTaskExecutionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTaskExecutionsRequest_NextToken = ListTaskExecutionsRequest.AddMember("NextToken", _NextToken)
-
-	ListTaskExecutionsResponse_TaskExecutions = ListTaskExecutionsResponse.AddMember("TaskExecutions", _TaskExecutionList)
-
-	ListTaskExecutionsResponse_NextToken = ListTaskExecutionsResponse.AddMember("NextToken", _NextToken)
-
-	ListTasksRequest_MaxResults = ListTasksRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTasksRequest_NextToken = ListTasksRequest.AddMember("NextToken", _NextToken)
-
-	ListTasksRequest_Filters = ListTasksRequest.AddMember("Filters", _TaskFilters)
-
-	ListTasksResponse_Tasks = ListTasksResponse.AddMember("Tasks", _TaskList)
-
-	ListTasksResponse_NextToken = ListTasksResponse.AddMember("NextToken", _NextToken)
-
-	StartTaskExecutionRequest_TaskArn = StartTaskExecutionRequest.AddMember("TaskArn", _TaskArn)
-
-	StartTaskExecutionRequest_OverrideOptions = StartTaskExecutionRequest.AddMember("OverrideOptions", Options)
-
-	StartTaskExecutionRequest_Includes = StartTaskExecutionRequest.AddMember("Includes", _FilterList)
-
-	StartTaskExecutionRequest_Excludes = StartTaskExecutionRequest.AddMember("Excludes", _FilterList)
-
-	StartTaskExecutionRequest_ManifestConfig = StartTaskExecutionRequest.AddMember("ManifestConfig", ManifestConfig)
-
-	StartTaskExecutionRequest_TaskReportConfig = StartTaskExecutionRequest.AddMember("TaskReportConfig", TaskReportConfig)
-
-	StartTaskExecutionRequest_Tags = StartTaskExecutionRequest.AddMember("Tags", _InputTagList)
-
-	StartTaskExecutionResponse_TaskExecutionArn = StartTaskExecutionResponse.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _InputTagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	UntagResourceRequest_Keys = UntagResourceRequest.AddMember("Keys", _TagKeyList)
-
-	UpdateAgentRequest_AgentArn = UpdateAgentRequest.AddMember("AgentArn", _AgentArn)
-
-	UpdateAgentRequest_Name = UpdateAgentRequest.AddMember("Name", _TagValue)
-
-	UpdateLocationAzureBlobRequest_LocationArn = UpdateLocationAzureBlobRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationAzureBlobRequest_Subdirectory = UpdateLocationAzureBlobRequest.AddMember("Subdirectory", _AzureBlobSubdirectory)
-
-	UpdateLocationAzureBlobRequest_AuthenticationType = UpdateLocationAzureBlobRequest.AddMember("AuthenticationType", AzureBlobAuthenticationType)
-
-	UpdateLocationAzureBlobRequest_SasConfiguration = UpdateLocationAzureBlobRequest.AddMember("SasConfiguration", AzureBlobSasConfiguration)
-
-	UpdateLocationAzureBlobRequest_FederatedIdentity = UpdateLocationAzureBlobRequest.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
-
-	UpdateLocationAzureBlobRequest_BlobType = UpdateLocationAzureBlobRequest.AddMember("BlobType", AzureBlobType)
-
-	UpdateLocationAzureBlobRequest_AccessTier = UpdateLocationAzureBlobRequest.AddMember("AccessTier", AzureAccessTier)
-
-	UpdateLocationAzureBlobRequest_AgentArns = UpdateLocationAzureBlobRequest.AddMember("AgentArns", _AgentArnList)
-
-	UpdateLocationAzureBlobRequest_CmkSecretConfig = UpdateLocationAzureBlobRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	UpdateLocationAzureBlobRequest_CustomSecretConfig = UpdateLocationAzureBlobRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	UpdateLocationEfsRequest_LocationArn = UpdateLocationEfsRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationEfsRequest_Subdirectory = UpdateLocationEfsRequest.AddMember("Subdirectory", _EfsSubdirectory)
-
-	UpdateLocationEfsRequest_AccessPointArn = UpdateLocationEfsRequest.AddMember("AccessPointArn", _UpdatedEfsAccessPointArn)
-
-	UpdateLocationEfsRequest_FileSystemAccessRoleArn = UpdateLocationEfsRequest.AddMember("FileSystemAccessRoleArn", _UpdatedEfsIamRoleArn)
-
-	UpdateLocationEfsRequest_InTransitEncryption = UpdateLocationEfsRequest.AddMember("InTransitEncryption", EfsInTransitEncryption)
-
-	UpdateLocationFsxLustreRequest_LocationArn = UpdateLocationFsxLustreRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationFsxLustreRequest_Subdirectory = UpdateLocationFsxLustreRequest.AddMember("Subdirectory", _SmbSubdirectory)
-
-	UpdateLocationFsxOntapRequest_LocationArn = UpdateLocationFsxOntapRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationFsxOntapRequest_Protocol = UpdateLocationFsxOntapRequest.AddMember("Protocol", FsxUpdateProtocol)
-
-	UpdateLocationFsxOntapRequest_Subdirectory = UpdateLocationFsxOntapRequest.AddMember("Subdirectory", _FsxOntapSubdirectory)
-
-	UpdateLocationFsxOpenZfsRequest_LocationArn = UpdateLocationFsxOpenZfsRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationFsxOpenZfsRequest_Protocol = UpdateLocationFsxOpenZfsRequest.AddMember("Protocol", FsxProtocol)
-
-	UpdateLocationFsxOpenZfsRequest_Subdirectory = UpdateLocationFsxOpenZfsRequest.AddMember("Subdirectory", _SmbSubdirectory)
-
-	UpdateLocationFsxWindowsRequest_LocationArn = UpdateLocationFsxWindowsRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationFsxWindowsRequest_Subdirectory = UpdateLocationFsxWindowsRequest.AddMember("Subdirectory", _FsxWindowsSubdirectory)
-
-	UpdateLocationFsxWindowsRequest_Domain = UpdateLocationFsxWindowsRequest.AddMember("Domain", _UpdateSmbDomain)
-
-	UpdateLocationFsxWindowsRequest_User = UpdateLocationFsxWindowsRequest.AddMember("User", _SmbUser)
-
-	UpdateLocationFsxWindowsRequest_Password = UpdateLocationFsxWindowsRequest.AddMember("Password", _SmbPassword)
-
-	UpdateLocationFsxWindowsRequest_CmkSecretConfig = UpdateLocationFsxWindowsRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	UpdateLocationFsxWindowsRequest_CustomSecretConfig = UpdateLocationFsxWindowsRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	UpdateLocationHdfsRequest_LocationArn = UpdateLocationHdfsRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationHdfsRequest_Subdirectory = UpdateLocationHdfsRequest.AddMember("Subdirectory", _HdfsSubdirectory)
-
-	UpdateLocationHdfsRequest_NameNodes = UpdateLocationHdfsRequest.AddMember("NameNodes", _HdfsNameNodeList)
-
-	UpdateLocationHdfsRequest_BlockSize = UpdateLocationHdfsRequest.AddMember("BlockSize", _HdfsBlockSize)
-
-	UpdateLocationHdfsRequest_ReplicationFactor = UpdateLocationHdfsRequest.AddMember("ReplicationFactor", _HdfsReplicationFactor)
-
-	UpdateLocationHdfsRequest_KmsKeyProviderUri = UpdateLocationHdfsRequest.AddMember("KmsKeyProviderUri", _KmsKeyProviderUri)
-
-	UpdateLocationHdfsRequest_QopConfiguration = UpdateLocationHdfsRequest.AddMember("QopConfiguration", QopConfiguration)
-
-	UpdateLocationHdfsRequest_AuthenticationType = UpdateLocationHdfsRequest.AddMember("AuthenticationType", HdfsAuthenticationType)
-
-	UpdateLocationHdfsRequest_SimpleUser = UpdateLocationHdfsRequest.AddMember("SimpleUser", _HdfsUser)
-
-	UpdateLocationHdfsRequest_KerberosPrincipal = UpdateLocationHdfsRequest.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	UpdateLocationHdfsRequest_KerberosKeytab = UpdateLocationHdfsRequest.AddMember("KerberosKeytab", _KerberosKeytabFile)
-
-	UpdateLocationHdfsRequest_KerberosKrb5Conf = UpdateLocationHdfsRequest.AddMember("KerberosKrb5Conf", _KerberosKrb5ConfFile)
-
-	UpdateLocationHdfsRequest_AgentArns = UpdateLocationHdfsRequest.AddMember("AgentArns", _AgentArnList)
-
-	UpdateLocationHdfsRequest_CmkSecretConfig = UpdateLocationHdfsRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	UpdateLocationHdfsRequest_CustomSecretConfig = UpdateLocationHdfsRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	UpdateLocationNfsRequest_LocationArn = UpdateLocationNfsRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationNfsRequest_Subdirectory = UpdateLocationNfsRequest.AddMember("Subdirectory", _NfsSubdirectory)
-
-	UpdateLocationNfsRequest_ServerHostname = UpdateLocationNfsRequest.AddMember("ServerHostname", _ServerHostname)
-
-	UpdateLocationNfsRequest_OnPremConfig = UpdateLocationNfsRequest.AddMember("OnPremConfig", OnPremConfig)
-
-	UpdateLocationNfsRequest_MountOptions = UpdateLocationNfsRequest.AddMember("MountOptions", NfsMountOptions)
-
-	UpdateLocationObjectStorageRequest_LocationArn = UpdateLocationObjectStorageRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationObjectStorageRequest_ServerPort = UpdateLocationObjectStorageRequest.AddMember("ServerPort", _ObjectStorageServerPort)
-
-	UpdateLocationObjectStorageRequest_ServerProtocol = UpdateLocationObjectStorageRequest.AddMember("ServerProtocol", ObjectStorageServerProtocol)
-
-	UpdateLocationObjectStorageRequest_Subdirectory = UpdateLocationObjectStorageRequest.AddMember("Subdirectory", _S3Subdirectory)
-
-	UpdateLocationObjectStorageRequest_ServerHostname = UpdateLocationObjectStorageRequest.AddMember("ServerHostname", _ServerHostname)
-
-	UpdateLocationObjectStorageRequest_AccessKey = UpdateLocationObjectStorageRequest.AddMember("AccessKey", _ObjectStorageAccessKey)
-
-	UpdateLocationObjectStorageRequest_SecretKey = UpdateLocationObjectStorageRequest.AddMember("SecretKey", _ObjectStorageSecretKey)
-
-	UpdateLocationObjectStorageRequest_FederatedIdentity = UpdateLocationObjectStorageRequest.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
-
-	UpdateLocationObjectStorageRequest_AgentArns = UpdateLocationObjectStorageRequest.AddMember("AgentArns", _AgentArnList)
-
-	UpdateLocationObjectStorageRequest_ServerCertificate = UpdateLocationObjectStorageRequest.AddMember("ServerCertificate", _ObjectStorageCertificate)
-
-	UpdateLocationObjectStorageRequest_CmkSecretConfig = UpdateLocationObjectStorageRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	UpdateLocationObjectStorageRequest_CustomSecretConfig = UpdateLocationObjectStorageRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	UpdateLocationS3Request_LocationArn = UpdateLocationS3Request.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationS3Request_Subdirectory = UpdateLocationS3Request.AddMember("Subdirectory", _S3Subdirectory)
-
-	UpdateLocationS3Request_S3StorageClass = UpdateLocationS3Request.AddMember("S3StorageClass", S3StorageClass)
-
-	UpdateLocationS3Request_S3Config = UpdateLocationS3Request.AddMember("S3Config", S3Config)
-
-	UpdateLocationSmbRequest_LocationArn = UpdateLocationSmbRequest.AddMember("LocationArn", _LocationArn)
-
-	UpdateLocationSmbRequest_Subdirectory = UpdateLocationSmbRequest.AddMember("Subdirectory", _SmbSubdirectory)
-
-	UpdateLocationSmbRequest_ServerHostname = UpdateLocationSmbRequest.AddMember("ServerHostname", _ServerHostname)
-
-	UpdateLocationSmbRequest_User = UpdateLocationSmbRequest.AddMember("User", _SmbUser)
-
-	UpdateLocationSmbRequest_Domain = UpdateLocationSmbRequest.AddMember("Domain", _SmbDomain)
-
-	UpdateLocationSmbRequest_Password = UpdateLocationSmbRequest.AddMember("Password", _SmbPassword)
-
-	UpdateLocationSmbRequest_CmkSecretConfig = UpdateLocationSmbRequest.AddMember("CmkSecretConfig", CmkSecretConfig)
-
-	UpdateLocationSmbRequest_CustomSecretConfig = UpdateLocationSmbRequest.AddMember("CustomSecretConfig", CustomSecretConfig)
-
-	UpdateLocationSmbRequest_AgentArns = UpdateLocationSmbRequest.AddMember("AgentArns", _AgentArnList)
-
-	UpdateLocationSmbRequest_MountOptions = UpdateLocationSmbRequest.AddMember("MountOptions", SmbMountOptions)
-
-	UpdateLocationSmbRequest_AuthenticationType = UpdateLocationSmbRequest.AddMember("AuthenticationType", SmbAuthenticationType)
-
-	UpdateLocationSmbRequest_DnsIpAddresses = UpdateLocationSmbRequest.AddMember("DnsIpAddresses", _DnsIpList)
-
-	UpdateLocationSmbRequest_KerberosPrincipal = UpdateLocationSmbRequest.AddMember("KerberosPrincipal", _KerberosPrincipal)
-
-	UpdateLocationSmbRequest_KerberosKeytab = UpdateLocationSmbRequest.AddMember("KerberosKeytab", _KerberosKeytabFile)
-
-	UpdateLocationSmbRequest_KerberosKrb5Conf = UpdateLocationSmbRequest.AddMember("KerberosKrb5Conf", _KerberosKrb5ConfFile)
-
-	UpdateTaskExecutionRequest_TaskExecutionArn = UpdateTaskExecutionRequest.AddMember("TaskExecutionArn", _TaskExecutionArn)
-
-	UpdateTaskExecutionRequest_Options = UpdateTaskExecutionRequest.AddMember("Options", Options)
-
-	UpdateTaskRequest_TaskArn = UpdateTaskRequest.AddMember("TaskArn", _TaskArn)
-
-	UpdateTaskRequest_Options = UpdateTaskRequest.AddMember("Options", Options)
-
-	UpdateTaskRequest_Excludes = UpdateTaskRequest.AddMember("Excludes", _FilterList)
-
-	UpdateTaskRequest_Schedule = UpdateTaskRequest.AddMember("Schedule", TaskSchedule)
-
-	UpdateTaskRequest_Name = UpdateTaskRequest.AddMember("Name", _TagValue)
-
-	UpdateTaskRequest_CloudWatchLogGroupArn = UpdateTaskRequest.AddMember("CloudWatchLogGroupArn", _LogGroupArn)
-
-	UpdateTaskRequest_Includes = UpdateTaskRequest.AddMember("Includes", _FilterList)
-
-	UpdateTaskRequest_ManifestConfig = UpdateTaskRequest.AddMember("ManifestConfig", ManifestConfig)
-
-	UpdateTaskRequest_TaskReportConfig = UpdateTaskRequest.AddMember("TaskReportConfig", TaskReportConfig)
-
-}
+var (
+	eCancelTaskExecution                                       smithy.SchemaExtensions
+	eCreateAgent                                               smithy.SchemaExtensions
+	eCreateLocationAzureBlob                                   smithy.SchemaExtensions
+	eCreateLocationEfs                                         smithy.SchemaExtensions
+	eCreateLocationFsxLustre                                   smithy.SchemaExtensions
+	eCreateLocationFsxOntap                                    smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfs                                  smithy.SchemaExtensions
+	eCreateLocationFsxWindows                                  smithy.SchemaExtensions
+	eCreateLocationHdfs                                        smithy.SchemaExtensions
+	eCreateLocationNfs                                         smithy.SchemaExtensions
+	eCreateLocationObjectStorage                               smithy.SchemaExtensions
+	eCreateLocationS3                                          smithy.SchemaExtensions
+	eCreateLocationSmb                                         smithy.SchemaExtensions
+	eCreateTask                                                smithy.SchemaExtensions
+	eDeleteAgent                                               smithy.SchemaExtensions
+	eDeleteLocation                                            smithy.SchemaExtensions
+	eDeleteTask                                                smithy.SchemaExtensions
+	eDescribeAgent                                             smithy.SchemaExtensions
+	eDescribeLocationAzureBlob                                 smithy.SchemaExtensions
+	eDescribeLocationEfs                                       smithy.SchemaExtensions
+	eDescribeLocationFsxLustre                                 smithy.SchemaExtensions
+	eDescribeLocationFsxOntap                                  smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfs                                smithy.SchemaExtensions
+	eDescribeLocationFsxWindows                                smithy.SchemaExtensions
+	eDescribeLocationHdfs                                      smithy.SchemaExtensions
+	eDescribeLocationNfs                                       smithy.SchemaExtensions
+	eDescribeLocationObjectStorage                             smithy.SchemaExtensions
+	eDescribeLocationS3                                        smithy.SchemaExtensions
+	eDescribeLocationSmb                                       smithy.SchemaExtensions
+	eDescribeTask                                              smithy.SchemaExtensions
+	eDescribeTaskExecution                                     smithy.SchemaExtensions
+	eListAgents                                                smithy.SchemaExtensions
+	eListLocations                                             smithy.SchemaExtensions
+	eListTagsForResource                                       smithy.SchemaExtensions
+	eListTaskExecutions                                        smithy.SchemaExtensions
+	eListTasks                                                 smithy.SchemaExtensions
+	eStartTaskExecution                                        smithy.SchemaExtensions
+	eTagResource                                               smithy.SchemaExtensions
+	eUntagResource                                             smithy.SchemaExtensions
+	eUpdateAgent                                               smithy.SchemaExtensions
+	eUpdateLocationAzureBlob                                   smithy.SchemaExtensions
+	eUpdateLocationEfs                                         smithy.SchemaExtensions
+	eUpdateLocationFsxLustre                                   smithy.SchemaExtensions
+	eUpdateLocationFsxOntap                                    smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfs                                  smithy.SchemaExtensions
+	eUpdateLocationFsxWindows                                  smithy.SchemaExtensions
+	eUpdateLocationHdfs                                        smithy.SchemaExtensions
+	eUpdateLocationNfs                                         smithy.SchemaExtensions
+	eUpdateLocationObjectStorage                               smithy.SchemaExtensions
+	eUpdateLocationS3                                          smithy.SchemaExtensions
+	eUpdateLocationSmb                                         smithy.SchemaExtensions
+	eUpdateTask                                                smithy.SchemaExtensions
+	eUpdateTaskExecution                                       smithy.SchemaExtensions
+	e_FmrsService                                              smithy.SchemaExtensions
+	e_ActivationKey                                            smithy.SchemaExtensions
+	e_AgentArn                                                 smithy.SchemaExtensions
+	e_AgentArnList                                             smithy.SchemaExtensions
+	e_AgentArnList_member                                      smithy.SchemaExtensions
+	e_AgentList                                                smithy.SchemaExtensions
+	e_AgentList_member                                         smithy.SchemaExtensions
+	eAgentListEntry                                            smithy.SchemaExtensions
+	eAgentListEntry_AgentArn                                   smithy.SchemaExtensions
+	eAgentListEntry_Name                                       smithy.SchemaExtensions
+	eAgentListEntry_Status                                     smithy.SchemaExtensions
+	eAgentListEntry_Platform                                   smithy.SchemaExtensions
+	eAgentStatus                                               smithy.SchemaExtensions
+	eAgentStatus_ONLINE                                        smithy.SchemaExtensions
+	eAgentStatus_OFFLINE                                       smithy.SchemaExtensions
+	e_AgentVersion                                             smithy.SchemaExtensions
+	eAtime                                                     smithy.SchemaExtensions
+	eAtime_NONE                                                smithy.SchemaExtensions
+	eAtime_BEST_EFFORT                                         smithy.SchemaExtensions
+	eAzureAccessTier                                           smithy.SchemaExtensions
+	eAzureAccessTier_HOT                                       smithy.SchemaExtensions
+	eAzureAccessTier_COOL                                      smithy.SchemaExtensions
+	eAzureAccessTier_ARCHIVE                                   smithy.SchemaExtensions
+	eAzureBlobAuthenticationType                               smithy.SchemaExtensions
+	eAzureBlobAuthenticationType_SAS                           smithy.SchemaExtensions
+	eAzureBlobAuthenticationType_NONE                          smithy.SchemaExtensions
+	eAzureBlobAuthenticationType_OIDC                          smithy.SchemaExtensions
+	e_AzureBlobContainerUrl                                    smithy.SchemaExtensions
+	eAzureBlobSasConfiguration                                 smithy.SchemaExtensions
+	eAzureBlobSasConfiguration_Token                           smithy.SchemaExtensions
+	e_AzureBlobSasToken                                        smithy.SchemaExtensions
+	e_AzureBlobSubdirectory                                    smithy.SchemaExtensions
+	eAzureBlobType                                             smithy.SchemaExtensions
+	eAzureBlobType_BLOCK                                       smithy.SchemaExtensions
+	eAzureFederatedIdentityConfig                              smithy.SchemaExtensions
+	eAzureFederatedIdentityConfig_AwsIamRole                   smithy.SchemaExtensions
+	eAzureFederatedIdentityConfig_AzureOidc                    smithy.SchemaExtensions
+	e_AzureGuidString                                          smithy.SchemaExtensions
+	eAzureOidcConfig                                           smithy.SchemaExtensions
+	eAzureOidcConfig_TenantId                                  smithy.SchemaExtensions
+	eAzureOidcConfig_ClientId                                  smithy.SchemaExtensions
+	e_BytesPerSecond                                           smithy.SchemaExtensions
+	eCmkSecretConfig                                           smithy.SchemaExtensions
+	eCmkSecretConfig_SecretArn                                 smithy.SchemaExtensions
+	eCmkSecretConfig_KmsKeyArn                                 smithy.SchemaExtensions
+	eCustomSecretConfig                                        smithy.SchemaExtensions
+	eCustomSecretConfig_SecretArn                              smithy.SchemaExtensions
+	eCustomSecretConfig_SecretAccessRoleArn                    smithy.SchemaExtensions
+	e_DestinationNetworkInterfaceArns                          smithy.SchemaExtensions
+	e_DestinationNetworkInterfaceArns_member                   smithy.SchemaExtensions
+	e_DnsIpList                                                smithy.SchemaExtensions
+	e_DnsIpList_member                                         smithy.SchemaExtensions
+	e_Duration                                                 smithy.SchemaExtensions
+	eEc2Config                                                 smithy.SchemaExtensions
+	eEc2Config_SubnetArn                                       smithy.SchemaExtensions
+	eEc2Config_SecurityGroupArns                               smithy.SchemaExtensions
+	e_Ec2SecurityGroupArn                                      smithy.SchemaExtensions
+	e_Ec2SecurityGroupArnList                                  smithy.SchemaExtensions
+	e_Ec2SecurityGroupArnList_member                           smithy.SchemaExtensions
+	e_Ec2SubnetArn                                             smithy.SchemaExtensions
+	e_EfsAccessPointArn                                        smithy.SchemaExtensions
+	e_EfsFilesystemArn                                         smithy.SchemaExtensions
+	eEfsInTransitEncryption                                    smithy.SchemaExtensions
+	eEfsInTransitEncryption_NONE                               smithy.SchemaExtensions
+	eEfsInTransitEncryption_TLS1_2                             smithy.SchemaExtensions
+	e_EfsSubdirectory                                          smithy.SchemaExtensions
+	e_Endpoint                                                 smithy.SchemaExtensions
+	eEndpointType                                              smithy.SchemaExtensions
+	eEndpointType_PUBLIC                                       smithy.SchemaExtensions
+	eEndpointType_PRIVATE_LINK                                 smithy.SchemaExtensions
+	eEndpointType_FIPS                                         smithy.SchemaExtensions
+	eEndpointType_FIPS_PRIVATE_LINK                            smithy.SchemaExtensions
+	e_FilterAttributeValue                                     smithy.SchemaExtensions
+	e_FilterList                                               smithy.SchemaExtensions
+	e_FilterList_member                                        smithy.SchemaExtensions
+	eFilterRule                                                smithy.SchemaExtensions
+	eFilterRule_FilterType                                     smithy.SchemaExtensions
+	eFilterRule_Value                                          smithy.SchemaExtensions
+	eFilterType                                                smithy.SchemaExtensions
+	eFilterType_SIMPLE_PATTERN                                 smithy.SchemaExtensions
+	e_FilterValue                                              smithy.SchemaExtensions
+	e_FilterValues                                             smithy.SchemaExtensions
+	e_FilterValues_member                                      smithy.SchemaExtensions
+	e_FsxFilesystemArn                                         smithy.SchemaExtensions
+	e_FsxLustreSubdirectory                                    smithy.SchemaExtensions
+	e_FsxOntapSubdirectory                                     smithy.SchemaExtensions
+	e_FsxOpenZfsSubdirectory                                   smithy.SchemaExtensions
+	eFsxProtocol                                               smithy.SchemaExtensions
+	eFsxProtocol_NFS                                           smithy.SchemaExtensions
+	eFsxProtocol_SMB                                           smithy.SchemaExtensions
+	eFsxProtocolNfs                                            smithy.SchemaExtensions
+	eFsxProtocolNfs_MountOptions                               smithy.SchemaExtensions
+	eFsxProtocolSmb                                            smithy.SchemaExtensions
+	eFsxProtocolSmb_Domain                                     smithy.SchemaExtensions
+	eFsxProtocolSmb_MountOptions                               smithy.SchemaExtensions
+	eFsxProtocolSmb_Password                                   smithy.SchemaExtensions
+	eFsxProtocolSmb_User                                       smithy.SchemaExtensions
+	eFsxProtocolSmb_ManagedSecretConfig                        smithy.SchemaExtensions
+	eFsxProtocolSmb_CmkSecretConfig                            smithy.SchemaExtensions
+	eFsxProtocolSmb_CustomSecretConfig                         smithy.SchemaExtensions
+	eFsxUpdateProtocol                                         smithy.SchemaExtensions
+	eFsxUpdateProtocol_NFS                                     smithy.SchemaExtensions
+	eFsxUpdateProtocol_SMB                                     smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb                                      smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_Domain                               smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_MountOptions                         smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_Password                             smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_User                                 smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_CmkSecretConfig                      smithy.SchemaExtensions
+	eFsxUpdateProtocolSmb_CustomSecretConfig                   smithy.SchemaExtensions
+	e_FsxWindowsSubdirectory                                   smithy.SchemaExtensions
+	eGid                                                       smithy.SchemaExtensions
+	eGid_NONE                                                  smithy.SchemaExtensions
+	eGid_INT_VALUE                                             smithy.SchemaExtensions
+	eGid_NAME                                                  smithy.SchemaExtensions
+	eGid_BOTH                                                  smithy.SchemaExtensions
+	e_GoogleIdentityFederationResourceString                   smithy.SchemaExtensions
+	eGoogleOidcConfig                                          smithy.SchemaExtensions
+	eGoogleOidcConfig_ProjectName                              smithy.SchemaExtensions
+	eGoogleOidcConfig_ProjectNumber                            smithy.SchemaExtensions
+	eGoogleOidcConfig_IdentityPoolName                         smithy.SchemaExtensions
+	eGoogleOidcConfig_IdentityProviderName                     smithy.SchemaExtensions
+	eHdfsAuthenticationType                                    smithy.SchemaExtensions
+	eHdfsAuthenticationType_SIMPLE                             smithy.SchemaExtensions
+	eHdfsAuthenticationType_KERBEROS                           smithy.SchemaExtensions
+	e_HdfsBlockSize                                            smithy.SchemaExtensions
+	eHdfsDataTransferProtection                                smithy.SchemaExtensions
+	eHdfsDataTransferProtection_DISABLED                       smithy.SchemaExtensions
+	eHdfsDataTransferProtection_AUTHENTICATION                 smithy.SchemaExtensions
+	eHdfsDataTransferProtection_INTEGRITY                      smithy.SchemaExtensions
+	eHdfsDataTransferProtection_PRIVACY                        smithy.SchemaExtensions
+	eHdfsNameNode                                              smithy.SchemaExtensions
+	eHdfsNameNode_Hostname                                     smithy.SchemaExtensions
+	eHdfsNameNode_Port                                         smithy.SchemaExtensions
+	e_HdfsNameNodeList                                         smithy.SchemaExtensions
+	e_HdfsNameNodeList_member                                  smithy.SchemaExtensions
+	e_HdfsReplicationFactor                                    smithy.SchemaExtensions
+	eHdfsRpcProtection                                         smithy.SchemaExtensions
+	eHdfsRpcProtection_DISABLED                                smithy.SchemaExtensions
+	eHdfsRpcProtection_AUTHENTICATION                          smithy.SchemaExtensions
+	eHdfsRpcProtection_INTEGRITY                               smithy.SchemaExtensions
+	eHdfsRpcProtection_PRIVACY                                 smithy.SchemaExtensions
+	e_HdfsServerHostname                                       smithy.SchemaExtensions
+	e_HdfsServerPort                                           smithy.SchemaExtensions
+	e_HdfsSubdirectory                                         smithy.SchemaExtensions
+	e_HdfsUser                                                 smithy.SchemaExtensions
+	e_IamRoleArn                                               smithy.SchemaExtensions
+	e_IamRoleArnOrEmptyString                                  smithy.SchemaExtensions
+	e_InputTagList                                             smithy.SchemaExtensions
+	e_InputTagList_member                                      smithy.SchemaExtensions
+	eInternalException                                         smithy.SchemaExtensions
+	eInternalException_message                                 smithy.SchemaExtensions
+	eInternalException_errorCode                               smithy.SchemaExtensions
+	eInvalidRequestException                                   smithy.SchemaExtensions
+	eInvalidRequestException_message                           smithy.SchemaExtensions
+	eInvalidRequestException_errorCode                         smithy.SchemaExtensions
+	eInvalidRequestException_datasyncErrorCode                 smithy.SchemaExtensions
+	e_ItemCount                                                smithy.SchemaExtensions
+	e_KerberosKeytabFile                                       smithy.SchemaExtensions
+	e_KerberosKrb5ConfFile                                     smithy.SchemaExtensions
+	e_KerberosPrincipal                                        smithy.SchemaExtensions
+	e_KmsKeyArn                                                smithy.SchemaExtensions
+	e_KmsKeyProviderUri                                        smithy.SchemaExtensions
+	e_LocationArn                                              smithy.SchemaExtensions
+	eLocationFilter                                            smithy.SchemaExtensions
+	eLocationFilter_Name                                       smithy.SchemaExtensions
+	eLocationFilter_Values                                     smithy.SchemaExtensions
+	eLocationFilter_Operator                                   smithy.SchemaExtensions
+	eLocationFilterName                                        smithy.SchemaExtensions
+	eLocationFilterName_LocationUri                            smithy.SchemaExtensions
+	eLocationFilterName_LocationType                           smithy.SchemaExtensions
+	eLocationFilterName_CreationTime                           smithy.SchemaExtensions
+	e_LocationFilters                                          smithy.SchemaExtensions
+	e_LocationFilters_member                                   smithy.SchemaExtensions
+	e_LocationList                                             smithy.SchemaExtensions
+	e_LocationList_member                                      smithy.SchemaExtensions
+	eLocationListEntry                                         smithy.SchemaExtensions
+	eLocationListEntry_LocationArn                             smithy.SchemaExtensions
+	eLocationListEntry_LocationUri                             smithy.SchemaExtensions
+	e_LocationUri                                              smithy.SchemaExtensions
+	e_LogGroupArn                                              smithy.SchemaExtensions
+	eLogLevel                                                  smithy.SchemaExtensions
+	eLogLevel_OFF                                              smithy.SchemaExtensions
+	eLogLevel_BASIC                                            smithy.SchemaExtensions
+	eLogLevel_TRANSFER                                         smithy.SchemaExtensions
+	e_long                                                     smithy.SchemaExtensions
+	eManagedSecretConfig                                       smithy.SchemaExtensions
+	eManagedSecretConfig_SecretArn                             smithy.SchemaExtensions
+	eManifestAction                                            smithy.SchemaExtensions
+	eManifestAction_TRANSFER                                   smithy.SchemaExtensions
+	eManifestConfig                                            smithy.SchemaExtensions
+	eManifestConfig_Action                                     smithy.SchemaExtensions
+	eManifestConfig_Format                                     smithy.SchemaExtensions
+	eManifestConfig_Source                                     smithy.SchemaExtensions
+	eManifestFormat                                            smithy.SchemaExtensions
+	eManifestFormat_CSV                                        smithy.SchemaExtensions
+	e_MaxResults                                               smithy.SchemaExtensions
+	eMtime                                                     smithy.SchemaExtensions
+	eMtime_NONE                                                smithy.SchemaExtensions
+	eMtime_PRESERVE                                            smithy.SchemaExtensions
+	e_NetworkInterfaceArn                                      smithy.SchemaExtensions
+	e_NextToken                                                smithy.SchemaExtensions
+	eNfsMountOptions                                           smithy.SchemaExtensions
+	eNfsMountOptions_Version                                   smithy.SchemaExtensions
+	e_NfsSubdirectory                                          smithy.SchemaExtensions
+	eNfsVersion                                                smithy.SchemaExtensions
+	eNfsVersion_AUTOMATIC                                      smithy.SchemaExtensions
+	eNfsVersion_NFS3                                           smithy.SchemaExtensions
+	eNfsVersion_NFS4_0                                         smithy.SchemaExtensions
+	eNfsVersion_NFS4_1                                         smithy.SchemaExtensions
+	eNfsVersion_NFS4_2                                         smithy.SchemaExtensions
+	eObjectMetadata                                            smithy.SchemaExtensions
+	eObjectMetadata_PRESERVE                                   smithy.SchemaExtensions
+	eObjectMetadata_NONE                                       smithy.SchemaExtensions
+	e_ObjectStorageAccessKey                                   smithy.SchemaExtensions
+	e_ObjectStorageBucketName                                  smithy.SchemaExtensions
+	e_ObjectStorageCertificate                                 smithy.SchemaExtensions
+	eObjectStorageExternalIdentityConfig                       smithy.SchemaExtensions
+	eObjectStorageExternalIdentityConfig_GoogleOidc            smithy.SchemaExtensions
+	eObjectStorageFederatedIdentityConfig                      smithy.SchemaExtensions
+	eObjectStorageFederatedIdentityConfig_AwsIamRole           smithy.SchemaExtensions
+	eObjectStorageFederatedIdentityConfig_ExternalIdentity     smithy.SchemaExtensions
+	e_ObjectStorageSecretKey                                   smithy.SchemaExtensions
+	e_ObjectStorageServerPort                                  smithy.SchemaExtensions
+	eObjectStorageServerProtocol                               smithy.SchemaExtensions
+	eObjectStorageServerProtocol_HTTPS                         smithy.SchemaExtensions
+	eObjectStorageServerProtocol_HTTP                          smithy.SchemaExtensions
+	eObjectTags                                                smithy.SchemaExtensions
+	eObjectTags_PRESERVE                                       smithy.SchemaExtensions
+	eObjectTags_NONE                                           smithy.SchemaExtensions
+	eObjectVersionIds                                          smithy.SchemaExtensions
+	eObjectVersionIds_INCLUDE                                  smithy.SchemaExtensions
+	eObjectVersionIds_NONE                                     smithy.SchemaExtensions
+	eOnPremConfig                                              smithy.SchemaExtensions
+	eOnPremConfig_AgentArns                                    smithy.SchemaExtensions
+	eOperator                                                  smithy.SchemaExtensions
+	eOperator_EQ                                               smithy.SchemaExtensions
+	eOperator_NE                                               smithy.SchemaExtensions
+	eOperator_IN                                               smithy.SchemaExtensions
+	eOperator_LE                                               smithy.SchemaExtensions
+	eOperator_LT                                               smithy.SchemaExtensions
+	eOperator_GE                                               smithy.SchemaExtensions
+	eOperator_GT                                               smithy.SchemaExtensions
+	eOperator_CONTAINS                                         smithy.SchemaExtensions
+	eOperator_NOT_CONTAINS                                     smithy.SchemaExtensions
+	eOperator_BEGINS_WITH                                      smithy.SchemaExtensions
+	eOptions                                                   smithy.SchemaExtensions
+	eOptions_VerifyMode                                        smithy.SchemaExtensions
+	eOptions_OverwriteMode                                     smithy.SchemaExtensions
+	eOptions_Atime                                             smithy.SchemaExtensions
+	eOptions_Mtime                                             smithy.SchemaExtensions
+	eOptions_Uid                                               smithy.SchemaExtensions
+	eOptions_Gid                                               smithy.SchemaExtensions
+	eOptions_PreserveDeletedFiles                              smithy.SchemaExtensions
+	eOptions_PreserveDevices                                   smithy.SchemaExtensions
+	eOptions_PosixPermissions                                  smithy.SchemaExtensions
+	eOptions_BytesPerSecond                                    smithy.SchemaExtensions
+	eOptions_TaskQueueing                                      smithy.SchemaExtensions
+	eOptions_LogLevel                                          smithy.SchemaExtensions
+	eOptions_TransferMode                                      smithy.SchemaExtensions
+	eOptions_SecurityDescriptorCopyFlags                       smithy.SchemaExtensions
+	eOptions_ObjectTags                                        smithy.SchemaExtensions
+	eOptions_ObjectMetadata                                    smithy.SchemaExtensions
+	e_OutputTagList                                            smithy.SchemaExtensions
+	e_OutputTagList_member                                     smithy.SchemaExtensions
+	eOverwriteMode                                             smithy.SchemaExtensions
+	eOverwriteMode_ALWAYS                                      smithy.SchemaExtensions
+	eOverwriteMode_NEVER                                       smithy.SchemaExtensions
+	ePhaseStatus                                               smithy.SchemaExtensions
+	ePhaseStatus_PENDING                                       smithy.SchemaExtensions
+	ePhaseStatus_SUCCESS                                       smithy.SchemaExtensions
+	ePhaseStatus_ERROR                                         smithy.SchemaExtensions
+	ePlatform                                                  smithy.SchemaExtensions
+	ePlatform_Version                                          smithy.SchemaExtensions
+	e_PLSecurityGroupArnList                                   smithy.SchemaExtensions
+	e_PLSecurityGroupArnList_member                            smithy.SchemaExtensions
+	e_PLSubnetArnList                                          smithy.SchemaExtensions
+	e_PLSubnetArnList_member                                   smithy.SchemaExtensions
+	ePosixPermissions                                          smithy.SchemaExtensions
+	ePosixPermissions_NONE                                     smithy.SchemaExtensions
+	ePosixPermissions_PRESERVE                                 smithy.SchemaExtensions
+	ePreserveDeletedFiles                                      smithy.SchemaExtensions
+	ePreserveDeletedFiles_PRESERVE                             smithy.SchemaExtensions
+	ePreserveDeletedFiles_REMOVE                               smithy.SchemaExtensions
+	ePreserveDevices                                           smithy.SchemaExtensions
+	ePreserveDevices_NONE                                      smithy.SchemaExtensions
+	ePreserveDevices_PRESERVE                                  smithy.SchemaExtensions
+	ePrivateLinkConfig                                         smithy.SchemaExtensions
+	ePrivateLinkConfig_VpcEndpointId                           smithy.SchemaExtensions
+	ePrivateLinkConfig_PrivateLinkEndpoint                     smithy.SchemaExtensions
+	ePrivateLinkConfig_SubnetArns                              smithy.SchemaExtensions
+	ePrivateLinkConfig_SecurityGroupArns                       smithy.SchemaExtensions
+	e_ProjectNameString                                        smithy.SchemaExtensions
+	e_ProjectNumberString                                      smithy.SchemaExtensions
+	eQopConfiguration                                          smithy.SchemaExtensions
+	eQopConfiguration_RpcProtection                            smithy.SchemaExtensions
+	eQopConfiguration_DataTransferProtection                   smithy.SchemaExtensions
+	eReportDestination                                         smithy.SchemaExtensions
+	eReportDestination_S3                                      smithy.SchemaExtensions
+	eReportDestinationS3                                       smithy.SchemaExtensions
+	eReportDestinationS3_Subdirectory                          smithy.SchemaExtensions
+	eReportDestinationS3_S3BucketArn                           smithy.SchemaExtensions
+	eReportDestinationS3_BucketAccessRoleArn                   smithy.SchemaExtensions
+	eReportLevel                                               smithy.SchemaExtensions
+	eReportLevel_ERRORS_ONLY                                   smithy.SchemaExtensions
+	eReportLevel_SUCCESSES_AND_ERRORS                          smithy.SchemaExtensions
+	eReportOutputType                                          smithy.SchemaExtensions
+	eReportOutputType_SUMMARY_ONLY                             smithy.SchemaExtensions
+	eReportOutputType_STANDARD                                 smithy.SchemaExtensions
+	eReportOverride                                            smithy.SchemaExtensions
+	eReportOverride_ReportLevel                                smithy.SchemaExtensions
+	eReportOverrides                                           smithy.SchemaExtensions
+	eReportOverrides_Transferred                               smithy.SchemaExtensions
+	eReportOverrides_Verified                                  smithy.SchemaExtensions
+	eReportOverrides_Deleted                                   smithy.SchemaExtensions
+	eReportOverrides_Skipped                                   smithy.SchemaExtensions
+	eReportResult                                              smithy.SchemaExtensions
+	eReportResult_Status                                       smithy.SchemaExtensions
+	eReportResult_ErrorCode                                    smithy.SchemaExtensions
+	eReportResult_ErrorDetail                                  smithy.SchemaExtensions
+	e_S3BucketArn                                              smithy.SchemaExtensions
+	eS3Config                                                  smithy.SchemaExtensions
+	eS3Config_BucketAccessRoleArn                              smithy.SchemaExtensions
+	eS3ManifestConfig                                          smithy.SchemaExtensions
+	eS3ManifestConfig_ManifestObjectPath                       smithy.SchemaExtensions
+	eS3ManifestConfig_BucketAccessRoleArn                      smithy.SchemaExtensions
+	eS3ManifestConfig_S3BucketArn                              smithy.SchemaExtensions
+	eS3ManifestConfig_ManifestObjectVersionId                  smithy.SchemaExtensions
+	e_S3ObjectVersionId                                        smithy.SchemaExtensions
+	eS3StorageClass                                            smithy.SchemaExtensions
+	eS3StorageClass_STANDARD                                   smithy.SchemaExtensions
+	eS3StorageClass_STANDARD_IA                                smithy.SchemaExtensions
+	eS3StorageClass_ONEZONE_IA                                 smithy.SchemaExtensions
+	eS3StorageClass_INTELLIGENT_TIERING                        smithy.SchemaExtensions
+	eS3StorageClass_GLACIER                                    smithy.SchemaExtensions
+	eS3StorageClass_DEEP_ARCHIVE                               smithy.SchemaExtensions
+	eS3StorageClass_OUTPOSTS                                   smithy.SchemaExtensions
+	eS3StorageClass_GLACIER_INSTANT_RETRIEVAL                  smithy.SchemaExtensions
+	e_S3Subdirectory                                           smithy.SchemaExtensions
+	eScheduleDisabledBy                                        smithy.SchemaExtensions
+	eScheduleDisabledBy_USER                                   smithy.SchemaExtensions
+	eScheduleDisabledBy_SERVICE                                smithy.SchemaExtensions
+	e_ScheduleDisabledReason                                   smithy.SchemaExtensions
+	e_ScheduleExpressionCron                                   smithy.SchemaExtensions
+	eScheduleStatus                                            smithy.SchemaExtensions
+	eScheduleStatus_ENABLED                                    smithy.SchemaExtensions
+	eScheduleStatus_DISABLED                                   smithy.SchemaExtensions
+	e_SecretArn                                                smithy.SchemaExtensions
+	e_ServerHostname                                           smithy.SchemaExtensions
+	e_ServerIpAddress                                          smithy.SchemaExtensions
+	eSmbAuthenticationType                                     smithy.SchemaExtensions
+	eSmbAuthenticationType_NTLM                                smithy.SchemaExtensions
+	eSmbAuthenticationType_KERBEROS                            smithy.SchemaExtensions
+	e_SmbDomain                                                smithy.SchemaExtensions
+	eSmbMountOptions                                           smithy.SchemaExtensions
+	eSmbMountOptions_Version                                   smithy.SchemaExtensions
+	e_SmbPassword                                              smithy.SchemaExtensions
+	eSmbSecurityDescriptorCopyFlags                            smithy.SchemaExtensions
+	eSmbSecurityDescriptorCopyFlags_NONE                       smithy.SchemaExtensions
+	eSmbSecurityDescriptorCopyFlags_OWNER_DACL                 smithy.SchemaExtensions
+	eSmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL            smithy.SchemaExtensions
+	e_SmbSubdirectory                                          smithy.SchemaExtensions
+	e_SmbUser                                                  smithy.SchemaExtensions
+	eSmbVersion                                                smithy.SchemaExtensions
+	eSmbVersion_AUTOMATIC                                      smithy.SchemaExtensions
+	eSmbVersion_SMB2                                           smithy.SchemaExtensions
+	eSmbVersion_SMB3                                           smithy.SchemaExtensions
+	eSmbVersion_SMB1                                           smithy.SchemaExtensions
+	eSmbVersion_SMB2_0                                         smithy.SchemaExtensions
+	eSourceManifestConfig                                      smithy.SchemaExtensions
+	eSourceManifestConfig_S3                                   smithy.SchemaExtensions
+	e_SourceNetworkInterfaceArns                               smithy.SchemaExtensions
+	e_SourceNetworkInterfaceArns_member                        smithy.SchemaExtensions
+	e_StorageVirtualMachineArn                                 smithy.SchemaExtensions
+	e_string                                                   smithy.SchemaExtensions
+	e_TaggableResourceArn                                      smithy.SchemaExtensions
+	e_TagKey                                                   smithy.SchemaExtensions
+	e_TagKeyList                                               smithy.SchemaExtensions
+	e_TagKeyList_member                                        smithy.SchemaExtensions
+	eTagListEntry                                              smithy.SchemaExtensions
+	eTagListEntry_Key                                          smithy.SchemaExtensions
+	eTagListEntry_Value                                        smithy.SchemaExtensions
+	e_TagValue                                                 smithy.SchemaExtensions
+	e_TaskArn                                                  smithy.SchemaExtensions
+	e_TaskExecutionArn                                         smithy.SchemaExtensions
+	eTaskExecutionFilesFailedDetail                            smithy.SchemaExtensions
+	eTaskExecutionFilesFailedDetail_Prepare                    smithy.SchemaExtensions
+	eTaskExecutionFilesFailedDetail_Transfer                   smithy.SchemaExtensions
+	eTaskExecutionFilesFailedDetail_Verify                     smithy.SchemaExtensions
+	eTaskExecutionFilesFailedDetail_Delete                     smithy.SchemaExtensions
+	eTaskExecutionFilesListedDetail                            smithy.SchemaExtensions
+	eTaskExecutionFilesListedDetail_AtSource                   smithy.SchemaExtensions
+	eTaskExecutionFilesListedDetail_AtDestinationForDelete     smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail                          smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail_List                     smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail_Prepare                  smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail_Transfer                 smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail_Verify                   smithy.SchemaExtensions
+	eTaskExecutionFoldersFailedDetail_Delete                   smithy.SchemaExtensions
+	eTaskExecutionFoldersListedDetail                          smithy.SchemaExtensions
+	eTaskExecutionFoldersListedDetail_AtSource                 smithy.SchemaExtensions
+	eTaskExecutionFoldersListedDetail_AtDestinationForDelete   smithy.SchemaExtensions
+	e_TaskExecutionList                                        smithy.SchemaExtensions
+	e_TaskExecutionList_member                                 smithy.SchemaExtensions
+	eTaskExecutionListEntry                                    smithy.SchemaExtensions
+	eTaskExecutionListEntry_TaskExecutionArn                   smithy.SchemaExtensions
+	eTaskExecutionListEntry_Status                             smithy.SchemaExtensions
+	eTaskExecutionListEntry_TaskMode                           smithy.SchemaExtensions
+	eTaskExecutionResultDetail                                 smithy.SchemaExtensions
+	eTaskExecutionResultDetail_PrepareDuration                 smithy.SchemaExtensions
+	eTaskExecutionResultDetail_PrepareStatus                   smithy.SchemaExtensions
+	eTaskExecutionResultDetail_TotalDuration                   smithy.SchemaExtensions
+	eTaskExecutionResultDetail_TransferDuration                smithy.SchemaExtensions
+	eTaskExecutionResultDetail_TransferStatus                  smithy.SchemaExtensions
+	eTaskExecutionResultDetail_VerifyDuration                  smithy.SchemaExtensions
+	eTaskExecutionResultDetail_VerifyStatus                    smithy.SchemaExtensions
+	eTaskExecutionResultDetail_ErrorCode                       smithy.SchemaExtensions
+	eTaskExecutionResultDetail_ErrorDetail                     smithy.SchemaExtensions
+	eTaskExecutionStatus                                       smithy.SchemaExtensions
+	eTaskExecutionStatus_QUEUED                                smithy.SchemaExtensions
+	eTaskExecutionStatus_CANCELLING                            smithy.SchemaExtensions
+	eTaskExecutionStatus_LAUNCHING                             smithy.SchemaExtensions
+	eTaskExecutionStatus_PREPARING                             smithy.SchemaExtensions
+	eTaskExecutionStatus_TRANSFERRING                          smithy.SchemaExtensions
+	eTaskExecutionStatus_VERIFYING                             smithy.SchemaExtensions
+	eTaskExecutionStatus_SUCCESS                               smithy.SchemaExtensions
+	eTaskExecutionStatus_ERROR                                 smithy.SchemaExtensions
+	eTaskFilter                                                smithy.SchemaExtensions
+	eTaskFilter_Name                                           smithy.SchemaExtensions
+	eTaskFilter_Values                                         smithy.SchemaExtensions
+	eTaskFilter_Operator                                       smithy.SchemaExtensions
+	eTaskFilterName                                            smithy.SchemaExtensions
+	eTaskFilterName_LocationId                                 smithy.SchemaExtensions
+	eTaskFilterName_CreationTime                               smithy.SchemaExtensions
+	e_TaskFilters                                              smithy.SchemaExtensions
+	e_TaskFilters_member                                       smithy.SchemaExtensions
+	e_TaskList                                                 smithy.SchemaExtensions
+	e_TaskList_member                                          smithy.SchemaExtensions
+	eTaskListEntry                                             smithy.SchemaExtensions
+	eTaskListEntry_TaskArn                                     smithy.SchemaExtensions
+	eTaskListEntry_Status                                      smithy.SchemaExtensions
+	eTaskListEntry_Name                                        smithy.SchemaExtensions
+	eTaskListEntry_TaskMode                                    smithy.SchemaExtensions
+	eTaskMode                                                  smithy.SchemaExtensions
+	eTaskMode_BASIC                                            smithy.SchemaExtensions
+	eTaskMode_ENHANCED                                         smithy.SchemaExtensions
+	eTaskQueueing                                              smithy.SchemaExtensions
+	eTaskQueueing_ENABLED                                      smithy.SchemaExtensions
+	eTaskQueueing_DISABLED                                     smithy.SchemaExtensions
+	eTaskReportConfig                                          smithy.SchemaExtensions
+	eTaskReportConfig_Destination                              smithy.SchemaExtensions
+	eTaskReportConfig_OutputType                               smithy.SchemaExtensions
+	eTaskReportConfig_ReportLevel                              smithy.SchemaExtensions
+	eTaskReportConfig_ObjectVersionIds                         smithy.SchemaExtensions
+	eTaskReportConfig_Overrides                                smithy.SchemaExtensions
+	eTaskSchedule                                              smithy.SchemaExtensions
+	eTaskSchedule_ScheduleExpression                           smithy.SchemaExtensions
+	eTaskSchedule_Status                                       smithy.SchemaExtensions
+	eTaskScheduleDetails                                       smithy.SchemaExtensions
+	eTaskScheduleDetails_StatusUpdateTime                      smithy.SchemaExtensions
+	eTaskScheduleDetails_DisabledReason                        smithy.SchemaExtensions
+	eTaskScheduleDetails_DisabledBy                            smithy.SchemaExtensions
+	eTaskStatus                                                smithy.SchemaExtensions
+	eTaskStatus_AVAILABLE                                      smithy.SchemaExtensions
+	eTaskStatus_CREATING                                       smithy.SchemaExtensions
+	eTaskStatus_QUEUED                                         smithy.SchemaExtensions
+	eTaskStatus_RUNNING                                        smithy.SchemaExtensions
+	eTaskStatus_UNAVAILABLE                                    smithy.SchemaExtensions
+	e_Time                                                     smithy.SchemaExtensions
+	eTransferMode                                              smithy.SchemaExtensions
+	eTransferMode_CHANGED                                      smithy.SchemaExtensions
+	eTransferMode_ALL                                          smithy.SchemaExtensions
+	eUid                                                       smithy.SchemaExtensions
+	eUid_NONE                                                  smithy.SchemaExtensions
+	eUid_INT_VALUE                                             smithy.SchemaExtensions
+	eUid_NAME                                                  smithy.SchemaExtensions
+	eUid_BOTH                                                  smithy.SchemaExtensions
+	e_UpdatedEfsAccessPointArn                                 smithy.SchemaExtensions
+	e_UpdatedEfsIamRoleArn                                     smithy.SchemaExtensions
+	e_UpdateSmbDomain                                          smithy.SchemaExtensions
+	eVerifyMode                                                smithy.SchemaExtensions
+	eVerifyMode_POINT_IN_TIME_CONSISTENT                       smithy.SchemaExtensions
+	eVerifyMode_ONLY_FILES_TRANSFERRED                         smithy.SchemaExtensions
+	eVerifyMode_NONE                                           smithy.SchemaExtensions
+	e_VpcEndpointId                                            smithy.SchemaExtensions
+	eCancelTaskExecutionRequest                                smithy.SchemaExtensions
+	eCancelTaskExecutionRequest_TaskExecutionArn               smithy.SchemaExtensions
+	eCancelTaskExecutionResponse                               smithy.SchemaExtensions
+	eCreateAgentRequest                                        smithy.SchemaExtensions
+	eCreateAgentRequest_ActivationKey                          smithy.SchemaExtensions
+	eCreateAgentRequest_AgentName                              smithy.SchemaExtensions
+	eCreateAgentRequest_Tags                                   smithy.SchemaExtensions
+	eCreateAgentRequest_VpcEndpointId                          smithy.SchemaExtensions
+	eCreateAgentRequest_SubnetArns                             smithy.SchemaExtensions
+	eCreateAgentRequest_SecurityGroupArns                      smithy.SchemaExtensions
+	eCreateAgentResponse                                       smithy.SchemaExtensions
+	eCreateAgentResponse_AgentArn                              smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest                            smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_ContainerUrl               smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_AuthenticationType         smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_SasConfiguration           smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_FederatedIdentity          smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_BlobType                   smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_AccessTier                 smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_Subdirectory               smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_AgentArns                  smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_Tags                       smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_CmkSecretConfig            smithy.SchemaExtensions
+	eCreateLocationAzureBlobRequest_CustomSecretConfig         smithy.SchemaExtensions
+	eCreateLocationAzureBlobResponse                           smithy.SchemaExtensions
+	eCreateLocationAzureBlobResponse_LocationArn               smithy.SchemaExtensions
+	eCreateLocationEfsRequest                                  smithy.SchemaExtensions
+	eCreateLocationEfsRequest_Subdirectory                     smithy.SchemaExtensions
+	eCreateLocationEfsRequest_EfsFilesystemArn                 smithy.SchemaExtensions
+	eCreateLocationEfsRequest_Ec2Config                        smithy.SchemaExtensions
+	eCreateLocationEfsRequest_Tags                             smithy.SchemaExtensions
+	eCreateLocationEfsRequest_AccessPointArn                   smithy.SchemaExtensions
+	eCreateLocationEfsRequest_FileSystemAccessRoleArn          smithy.SchemaExtensions
+	eCreateLocationEfsRequest_InTransitEncryption              smithy.SchemaExtensions
+	eCreateLocationEfsResponse                                 smithy.SchemaExtensions
+	eCreateLocationEfsResponse_LocationArn                     smithy.SchemaExtensions
+	eCreateLocationFsxLustreRequest                            smithy.SchemaExtensions
+	eCreateLocationFsxLustreRequest_FsxFilesystemArn           smithy.SchemaExtensions
+	eCreateLocationFsxLustreRequest_SecurityGroupArns          smithy.SchemaExtensions
+	eCreateLocationFsxLustreRequest_Subdirectory               smithy.SchemaExtensions
+	eCreateLocationFsxLustreRequest_Tags                       smithy.SchemaExtensions
+	eCreateLocationFsxLustreResponse                           smithy.SchemaExtensions
+	eCreateLocationFsxLustreResponse_LocationArn               smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest                             smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest_Protocol                    smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest_SecurityGroupArns           smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest_StorageVirtualMachineArn    smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest_Subdirectory                smithy.SchemaExtensions
+	eCreateLocationFsxOntapRequest_Tags                        smithy.SchemaExtensions
+	eCreateLocationFsxOntapResponse                            smithy.SchemaExtensions
+	eCreateLocationFsxOntapResponse_LocationArn                smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest                           smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest_FsxFilesystemArn          smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest_Protocol                  smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest_SecurityGroupArns         smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest_Subdirectory              smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsRequest_Tags                      smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsResponse                          smithy.SchemaExtensions
+	eCreateLocationFsxOpenZfsResponse_LocationArn              smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest                           smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_Subdirectory              smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_FsxFilesystemArn          smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_SecurityGroupArns         smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_Tags                      smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_User                      smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_Domain                    smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_Password                  smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_CmkSecretConfig           smithy.SchemaExtensions
+	eCreateLocationFsxWindowsRequest_CustomSecretConfig        smithy.SchemaExtensions
+	eCreateLocationFsxWindowsResponse                          smithy.SchemaExtensions
+	eCreateLocationFsxWindowsResponse_LocationArn              smithy.SchemaExtensions
+	eCreateLocationHdfsRequest                                 smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_Subdirectory                    smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_NameNodes                       smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_BlockSize                       smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_ReplicationFactor               smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_KmsKeyProviderUri               smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_QopConfiguration                smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_AuthenticationType              smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_SimpleUser                      smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_KerberosPrincipal               smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_KerberosKeytab                  smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_KerberosKrb5Conf                smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_AgentArns                       smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_Tags                            smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_CmkSecretConfig                 smithy.SchemaExtensions
+	eCreateLocationHdfsRequest_CustomSecretConfig              smithy.SchemaExtensions
+	eCreateLocationHdfsResponse                                smithy.SchemaExtensions
+	eCreateLocationHdfsResponse_LocationArn                    smithy.SchemaExtensions
+	eCreateLocationNfsRequest                                  smithy.SchemaExtensions
+	eCreateLocationNfsRequest_Subdirectory                     smithy.SchemaExtensions
+	eCreateLocationNfsRequest_ServerHostname                   smithy.SchemaExtensions
+	eCreateLocationNfsRequest_OnPremConfig                     smithy.SchemaExtensions
+	eCreateLocationNfsRequest_MountOptions                     smithy.SchemaExtensions
+	eCreateLocationNfsRequest_Tags                             smithy.SchemaExtensions
+	eCreateLocationNfsResponse                                 smithy.SchemaExtensions
+	eCreateLocationNfsResponse_LocationArn                     smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest                        smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_ServerHostname         smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_ServerPort             smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_ServerProtocol         smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_Subdirectory           smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_BucketName             smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_AccessKey              smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_SecretKey              smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_FederatedIdentity      smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_AgentArns              smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_Tags                   smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_ServerCertificate      smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_CmkSecretConfig        smithy.SchemaExtensions
+	eCreateLocationObjectStorageRequest_CustomSecretConfig     smithy.SchemaExtensions
+	eCreateLocationObjectStorageResponse                       smithy.SchemaExtensions
+	eCreateLocationObjectStorageResponse_LocationArn           smithy.SchemaExtensions
+	eCreateLocationS3Request                                   smithy.SchemaExtensions
+	eCreateLocationS3Request_Subdirectory                      smithy.SchemaExtensions
+	eCreateLocationS3Request_S3BucketArn                       smithy.SchemaExtensions
+	eCreateLocationS3Request_S3StorageClass                    smithy.SchemaExtensions
+	eCreateLocationS3Request_S3Config                          smithy.SchemaExtensions
+	eCreateLocationS3Request_AgentArns                         smithy.SchemaExtensions
+	eCreateLocationS3Request_Tags                              smithy.SchemaExtensions
+	eCreateLocationS3Response                                  smithy.SchemaExtensions
+	eCreateLocationS3Response_LocationArn                      smithy.SchemaExtensions
+	eCreateLocationSmbRequest                                  smithy.SchemaExtensions
+	eCreateLocationSmbRequest_Subdirectory                     smithy.SchemaExtensions
+	eCreateLocationSmbRequest_ServerHostname                   smithy.SchemaExtensions
+	eCreateLocationSmbRequest_User                             smithy.SchemaExtensions
+	eCreateLocationSmbRequest_Domain                           smithy.SchemaExtensions
+	eCreateLocationSmbRequest_Password                         smithy.SchemaExtensions
+	eCreateLocationSmbRequest_CmkSecretConfig                  smithy.SchemaExtensions
+	eCreateLocationSmbRequest_CustomSecretConfig               smithy.SchemaExtensions
+	eCreateLocationSmbRequest_AgentArns                        smithy.SchemaExtensions
+	eCreateLocationSmbRequest_MountOptions                     smithy.SchemaExtensions
+	eCreateLocationSmbRequest_Tags                             smithy.SchemaExtensions
+	eCreateLocationSmbRequest_AuthenticationType               smithy.SchemaExtensions
+	eCreateLocationSmbRequest_DnsIpAddresses                   smithy.SchemaExtensions
+	eCreateLocationSmbRequest_KerberosPrincipal                smithy.SchemaExtensions
+	eCreateLocationSmbRequest_KerberosKeytab                   smithy.SchemaExtensions
+	eCreateLocationSmbRequest_KerberosKrb5Conf                 smithy.SchemaExtensions
+	eCreateLocationSmbResponse                                 smithy.SchemaExtensions
+	eCreateLocationSmbResponse_LocationArn                     smithy.SchemaExtensions
+	eCreateTaskRequest                                         smithy.SchemaExtensions
+	eCreateTaskRequest_SourceLocationArn                       smithy.SchemaExtensions
+	eCreateTaskRequest_DestinationLocationArn                  smithy.SchemaExtensions
+	eCreateTaskRequest_CloudWatchLogGroupArn                   smithy.SchemaExtensions
+	eCreateTaskRequest_Name                                    smithy.SchemaExtensions
+	eCreateTaskRequest_Options                                 smithy.SchemaExtensions
+	eCreateTaskRequest_Excludes                                smithy.SchemaExtensions
+	eCreateTaskRequest_Schedule                                smithy.SchemaExtensions
+	eCreateTaskRequest_Tags                                    smithy.SchemaExtensions
+	eCreateTaskRequest_Includes                                smithy.SchemaExtensions
+	eCreateTaskRequest_ManifestConfig                          smithy.SchemaExtensions
+	eCreateTaskRequest_TaskReportConfig                        smithy.SchemaExtensions
+	eCreateTaskRequest_TaskMode                                smithy.SchemaExtensions
+	eCreateTaskResponse                                        smithy.SchemaExtensions
+	eCreateTaskResponse_TaskArn                                smithy.SchemaExtensions
+	eDeleteAgentRequest                                        smithy.SchemaExtensions
+	eDeleteAgentRequest_AgentArn                               smithy.SchemaExtensions
+	eDeleteAgentResponse                                       smithy.SchemaExtensions
+	eDeleteLocationRequest                                     smithy.SchemaExtensions
+	eDeleteLocationRequest_LocationArn                         smithy.SchemaExtensions
+	eDeleteLocationResponse                                    smithy.SchemaExtensions
+	eDeleteTaskRequest                                         smithy.SchemaExtensions
+	eDeleteTaskRequest_TaskArn                                 smithy.SchemaExtensions
+	eDeleteTaskResponse                                        smithy.SchemaExtensions
+	eDescribeAgentRequest                                      smithy.SchemaExtensions
+	eDescribeAgentRequest_AgentArn                             smithy.SchemaExtensions
+	eDescribeAgentResponse                                     smithy.SchemaExtensions
+	eDescribeAgentResponse_AgentArn                            smithy.SchemaExtensions
+	eDescribeAgentResponse_Name                                smithy.SchemaExtensions
+	eDescribeAgentResponse_Status                              smithy.SchemaExtensions
+	eDescribeAgentResponse_LastConnectionTime                  smithy.SchemaExtensions
+	eDescribeAgentResponse_CreationTime                        smithy.SchemaExtensions
+	eDescribeAgentResponse_EndpointType                        smithy.SchemaExtensions
+	eDescribeAgentResponse_PrivateLinkConfig                   smithy.SchemaExtensions
+	eDescribeAgentResponse_Platform                            smithy.SchemaExtensions
+	eDescribeLocationAzureBlobRequest                          smithy.SchemaExtensions
+	eDescribeLocationAzureBlobRequest_LocationArn              smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse                         smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_LocationArn             smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_LocationUri             smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_AuthenticationType      smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_FederatedIdentity       smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_BlobType                smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_AccessTier              smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_AgentArns               smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_CreationTime            smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_ManagedSecretConfig     smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_CmkSecretConfig         smithy.SchemaExtensions
+	eDescribeLocationAzureBlobResponse_CustomSecretConfig      smithy.SchemaExtensions
+	eDescribeLocationEfsRequest                                smithy.SchemaExtensions
+	eDescribeLocationEfsRequest_LocationArn                    smithy.SchemaExtensions
+	eDescribeLocationEfsResponse                               smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_LocationArn                   smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_LocationUri                   smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_Ec2Config                     smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_CreationTime                  smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_AccessPointArn                smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_FileSystemAccessRoleArn       smithy.SchemaExtensions
+	eDescribeLocationEfsResponse_InTransitEncryption           smithy.SchemaExtensions
+	eDescribeLocationFsxLustreRequest                          smithy.SchemaExtensions
+	eDescribeLocationFsxLustreRequest_LocationArn              smithy.SchemaExtensions
+	eDescribeLocationFsxLustreResponse                         smithy.SchemaExtensions
+	eDescribeLocationFsxLustreResponse_LocationArn             smithy.SchemaExtensions
+	eDescribeLocationFsxLustreResponse_LocationUri             smithy.SchemaExtensions
+	eDescribeLocationFsxLustreResponse_SecurityGroupArns       smithy.SchemaExtensions
+	eDescribeLocationFsxLustreResponse_CreationTime            smithy.SchemaExtensions
+	eDescribeLocationFsxOntapRequest                           smithy.SchemaExtensions
+	eDescribeLocationFsxOntapRequest_LocationArn               smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse                          smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_CreationTime             smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_LocationArn              smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_LocationUri              smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_Protocol                 smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_SecurityGroupArns        smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_StorageVirtualMachineArn smithy.SchemaExtensions
+	eDescribeLocationFsxOntapResponse_FsxFilesystemArn         smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsRequest                         smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsRequest_LocationArn             smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse                        smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse_LocationArn            smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse_LocationUri            smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse_SecurityGroupArns      smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse_Protocol               smithy.SchemaExtensions
+	eDescribeLocationFsxOpenZfsResponse_CreationTime           smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsRequest                         smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsRequest_LocationArn             smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse                        smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_LocationArn            smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_LocationUri            smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_SecurityGroupArns      smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_CreationTime           smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_User                   smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_Domain                 smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_ManagedSecretConfig    smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_CmkSecretConfig        smithy.SchemaExtensions
+	eDescribeLocationFsxWindowsResponse_CustomSecretConfig     smithy.SchemaExtensions
+	eDescribeLocationHdfsRequest                               smithy.SchemaExtensions
+	eDescribeLocationHdfsRequest_LocationArn                   smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse                              smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_LocationArn                  smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_LocationUri                  smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_NameNodes                    smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_BlockSize                    smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_ReplicationFactor            smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_KmsKeyProviderUri            smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_QopConfiguration             smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_AuthenticationType           smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_SimpleUser                   smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_KerberosPrincipal            smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_AgentArns                    smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_CreationTime                 smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_ManagedSecretConfig          smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_CmkSecretConfig              smithy.SchemaExtensions
+	eDescribeLocationHdfsResponse_CustomSecretConfig           smithy.SchemaExtensions
+	eDescribeLocationNfsRequest                                smithy.SchemaExtensions
+	eDescribeLocationNfsRequest_LocationArn                    smithy.SchemaExtensions
+	eDescribeLocationNfsResponse                               smithy.SchemaExtensions
+	eDescribeLocationNfsResponse_LocationArn                   smithy.SchemaExtensions
+	eDescribeLocationNfsResponse_LocationUri                   smithy.SchemaExtensions
+	eDescribeLocationNfsResponse_OnPremConfig                  smithy.SchemaExtensions
+	eDescribeLocationNfsResponse_MountOptions                  smithy.SchemaExtensions
+	eDescribeLocationNfsResponse_CreationTime                  smithy.SchemaExtensions
+	eDescribeLocationObjectStorageRequest                      smithy.SchemaExtensions
+	eDescribeLocationObjectStorageRequest_LocationArn          smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse                     smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_LocationArn         smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_LocationUri         smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_AccessKey           smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_FederatedIdentity   smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_ServerPort          smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_ServerProtocol      smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_AgentArns           smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_CreationTime        smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_ServerCertificate   smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_ManagedSecretConfig smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_CmkSecretConfig     smithy.SchemaExtensions
+	eDescribeLocationObjectStorageResponse_CustomSecretConfig  smithy.SchemaExtensions
+	eDescribeLocationS3Request                                 smithy.SchemaExtensions
+	eDescribeLocationS3Request_LocationArn                     smithy.SchemaExtensions
+	eDescribeLocationS3Response                                smithy.SchemaExtensions
+	eDescribeLocationS3Response_LocationArn                    smithy.SchemaExtensions
+	eDescribeLocationS3Response_LocationUri                    smithy.SchemaExtensions
+	eDescribeLocationS3Response_S3StorageClass                 smithy.SchemaExtensions
+	eDescribeLocationS3Response_S3Config                       smithy.SchemaExtensions
+	eDescribeLocationS3Response_AgentArns                      smithy.SchemaExtensions
+	eDescribeLocationS3Response_CreationTime                   smithy.SchemaExtensions
+	eDescribeLocationSmbRequest                                smithy.SchemaExtensions
+	eDescribeLocationSmbRequest_LocationArn                    smithy.SchemaExtensions
+	eDescribeLocationSmbResponse                               smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_LocationArn                   smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_LocationUri                   smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_AgentArns                     smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_User                          smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_Domain                        smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_MountOptions                  smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_CreationTime                  smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_DnsIpAddresses                smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_KerberosPrincipal             smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_AuthenticationType            smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_ManagedSecretConfig           smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_CmkSecretConfig               smithy.SchemaExtensions
+	eDescribeLocationSmbResponse_CustomSecretConfig            smithy.SchemaExtensions
+	eDescribeTaskExecutionRequest                              smithy.SchemaExtensions
+	eDescribeTaskExecutionRequest_TaskExecutionArn             smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse                             smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_TaskExecutionArn            smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_Status                      smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_Options                     smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_Excludes                    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_Includes                    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_ManifestConfig              smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_StartTime                   smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EstimatedFilesToTransfer    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EstimatedBytesToTransfer    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesTransferred            smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_BytesWritten                smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_BytesTransferred            smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_BytesCompressed             smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_Result                      smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_TaskReportConfig            smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesDeleted                smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesSkipped                smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesVerified               smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_ReportResult                smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EstimatedFilesToDelete      smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_TaskMode                    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesPrepared               smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesListed                 smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FilesFailed                 smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EstimatedFoldersToDelete    smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EstimatedFoldersToTransfer  smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersSkipped              smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersPrepared             smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersTransferred          smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersVerified             smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersDeleted              smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersListed               smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_FoldersFailed               smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_LaunchTime                  smithy.SchemaExtensions
+	eDescribeTaskExecutionResponse_EndTime                     smithy.SchemaExtensions
+	eDescribeTaskRequest                                       smithy.SchemaExtensions
+	eDescribeTaskRequest_TaskArn                               smithy.SchemaExtensions
+	eDescribeTaskResponse                                      smithy.SchemaExtensions
+	eDescribeTaskResponse_TaskArn                              smithy.SchemaExtensions
+	eDescribeTaskResponse_Status                               smithy.SchemaExtensions
+	eDescribeTaskResponse_Name                                 smithy.SchemaExtensions
+	eDescribeTaskResponse_CurrentTaskExecutionArn              smithy.SchemaExtensions
+	eDescribeTaskResponse_SourceLocationArn                    smithy.SchemaExtensions
+	eDescribeTaskResponse_DestinationLocationArn               smithy.SchemaExtensions
+	eDescribeTaskResponse_CloudWatchLogGroupArn                smithy.SchemaExtensions
+	eDescribeTaskResponse_SourceNetworkInterfaceArns           smithy.SchemaExtensions
+	eDescribeTaskResponse_DestinationNetworkInterfaceArns      smithy.SchemaExtensions
+	eDescribeTaskResponse_Options                              smithy.SchemaExtensions
+	eDescribeTaskResponse_Excludes                             smithy.SchemaExtensions
+	eDescribeTaskResponse_Schedule                             smithy.SchemaExtensions
+	eDescribeTaskResponse_ErrorCode                            smithy.SchemaExtensions
+	eDescribeTaskResponse_ErrorDetail                          smithy.SchemaExtensions
+	eDescribeTaskResponse_CreationTime                         smithy.SchemaExtensions
+	eDescribeTaskResponse_Includes                             smithy.SchemaExtensions
+	eDescribeTaskResponse_ManifestConfig                       smithy.SchemaExtensions
+	eDescribeTaskResponse_TaskReportConfig                     smithy.SchemaExtensions
+	eDescribeTaskResponse_ScheduleDetails                      smithy.SchemaExtensions
+	eDescribeTaskResponse_TaskMode                             smithy.SchemaExtensions
+	eListAgentsRequest                                         smithy.SchemaExtensions
+	eListAgentsRequest_MaxResults                              smithy.SchemaExtensions
+	eListAgentsRequest_NextToken                               smithy.SchemaExtensions
+	eListAgentsResponse                                        smithy.SchemaExtensions
+	eListAgentsResponse_Agents                                 smithy.SchemaExtensions
+	eListAgentsResponse_NextToken                              smithy.SchemaExtensions
+	eListLocationsRequest                                      smithy.SchemaExtensions
+	eListLocationsRequest_MaxResults                           smithy.SchemaExtensions
+	eListLocationsRequest_NextToken                            smithy.SchemaExtensions
+	eListLocationsRequest_Filters                              smithy.SchemaExtensions
+	eListLocationsResponse                                     smithy.SchemaExtensions
+	eListLocationsResponse_Locations                           smithy.SchemaExtensions
+	eListLocationsResponse_NextToken                           smithy.SchemaExtensions
+	eListTagsForResourceRequest                                smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                    smithy.SchemaExtensions
+	eListTagsForResourceRequest_MaxResults                     smithy.SchemaExtensions
+	eListTagsForResourceRequest_NextToken                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                               smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                          smithy.SchemaExtensions
+	eListTagsForResourceResponse_NextToken                     smithy.SchemaExtensions
+	eListTaskExecutionsRequest                                 smithy.SchemaExtensions
+	eListTaskExecutionsRequest_TaskArn                         smithy.SchemaExtensions
+	eListTaskExecutionsRequest_MaxResults                      smithy.SchemaExtensions
+	eListTaskExecutionsRequest_NextToken                       smithy.SchemaExtensions
+	eListTaskExecutionsResponse                                smithy.SchemaExtensions
+	eListTaskExecutionsResponse_TaskExecutions                 smithy.SchemaExtensions
+	eListTaskExecutionsResponse_NextToken                      smithy.SchemaExtensions
+	eListTasksRequest                                          smithy.SchemaExtensions
+	eListTasksRequest_MaxResults                               smithy.SchemaExtensions
+	eListTasksRequest_NextToken                                smithy.SchemaExtensions
+	eListTasksRequest_Filters                                  smithy.SchemaExtensions
+	eListTasksResponse                                         smithy.SchemaExtensions
+	eListTasksResponse_Tasks                                   smithy.SchemaExtensions
+	eListTasksResponse_NextToken                               smithy.SchemaExtensions
+	eStartTaskExecutionRequest                                 smithy.SchemaExtensions
+	eStartTaskExecutionRequest_TaskArn                         smithy.SchemaExtensions
+	eStartTaskExecutionRequest_OverrideOptions                 smithy.SchemaExtensions
+	eStartTaskExecutionRequest_Includes                        smithy.SchemaExtensions
+	eStartTaskExecutionRequest_Excludes                        smithy.SchemaExtensions
+	eStartTaskExecutionRequest_ManifestConfig                  smithy.SchemaExtensions
+	eStartTaskExecutionRequest_TaskReportConfig                smithy.SchemaExtensions
+	eStartTaskExecutionRequest_Tags                            smithy.SchemaExtensions
+	eStartTaskExecutionResponse                                smithy.SchemaExtensions
+	eStartTaskExecutionResponse_TaskExecutionArn               smithy.SchemaExtensions
+	eTagResourceRequest                                        smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                            smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                   smithy.SchemaExtensions
+	eTagResourceResponse                                       smithy.SchemaExtensions
+	eUntagResourceRequest                                      smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                          smithy.SchemaExtensions
+	eUntagResourceRequest_Keys                                 smithy.SchemaExtensions
+	eUntagResourceResponse                                     smithy.SchemaExtensions
+	eUpdateAgentRequest                                        smithy.SchemaExtensions
+	eUpdateAgentRequest_AgentArn                               smithy.SchemaExtensions
+	eUpdateAgentRequest_Name                                   smithy.SchemaExtensions
+	eUpdateAgentResponse                                       smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest                            smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_LocationArn                smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_Subdirectory               smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_AuthenticationType         smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_SasConfiguration           smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_FederatedIdentity          smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_BlobType                   smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_AccessTier                 smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_AgentArns                  smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_CmkSecretConfig            smithy.SchemaExtensions
+	eUpdateLocationAzureBlobRequest_CustomSecretConfig         smithy.SchemaExtensions
+	eUpdateLocationAzureBlobResponse                           smithy.SchemaExtensions
+	eUpdateLocationEfsRequest                                  smithy.SchemaExtensions
+	eUpdateLocationEfsRequest_LocationArn                      smithy.SchemaExtensions
+	eUpdateLocationEfsRequest_Subdirectory                     smithy.SchemaExtensions
+	eUpdateLocationEfsRequest_AccessPointArn                   smithy.SchemaExtensions
+	eUpdateLocationEfsRequest_FileSystemAccessRoleArn          smithy.SchemaExtensions
+	eUpdateLocationEfsRequest_InTransitEncryption              smithy.SchemaExtensions
+	eUpdateLocationEfsResponse                                 smithy.SchemaExtensions
+	eUpdateLocationFsxLustreRequest                            smithy.SchemaExtensions
+	eUpdateLocationFsxLustreRequest_LocationArn                smithy.SchemaExtensions
+	eUpdateLocationFsxLustreRequest_Subdirectory               smithy.SchemaExtensions
+	eUpdateLocationFsxLustreResponse                           smithy.SchemaExtensions
+	eUpdateLocationFsxOntapRequest                             smithy.SchemaExtensions
+	eUpdateLocationFsxOntapRequest_LocationArn                 smithy.SchemaExtensions
+	eUpdateLocationFsxOntapRequest_Protocol                    smithy.SchemaExtensions
+	eUpdateLocationFsxOntapRequest_Subdirectory                smithy.SchemaExtensions
+	eUpdateLocationFsxOntapResponse                            smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfsRequest                           smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfsRequest_LocationArn               smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfsRequest_Protocol                  smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfsRequest_Subdirectory              smithy.SchemaExtensions
+	eUpdateLocationFsxOpenZfsResponse                          smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest                           smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_LocationArn               smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_Subdirectory              smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_Domain                    smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_User                      smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_Password                  smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_CmkSecretConfig           smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsRequest_CustomSecretConfig        smithy.SchemaExtensions
+	eUpdateLocationFsxWindowsResponse                          smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest                                 smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_LocationArn                     smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_Subdirectory                    smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_NameNodes                       smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_BlockSize                       smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_ReplicationFactor               smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_KmsKeyProviderUri               smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_QopConfiguration                smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_AuthenticationType              smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_SimpleUser                      smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_KerberosPrincipal               smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_KerberosKeytab                  smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_KerberosKrb5Conf                smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_AgentArns                       smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_CmkSecretConfig                 smithy.SchemaExtensions
+	eUpdateLocationHdfsRequest_CustomSecretConfig              smithy.SchemaExtensions
+	eUpdateLocationHdfsResponse                                smithy.SchemaExtensions
+	eUpdateLocationNfsRequest                                  smithy.SchemaExtensions
+	eUpdateLocationNfsRequest_LocationArn                      smithy.SchemaExtensions
+	eUpdateLocationNfsRequest_Subdirectory                     smithy.SchemaExtensions
+	eUpdateLocationNfsRequest_ServerHostname                   smithy.SchemaExtensions
+	eUpdateLocationNfsRequest_OnPremConfig                     smithy.SchemaExtensions
+	eUpdateLocationNfsRequest_MountOptions                     smithy.SchemaExtensions
+	eUpdateLocationNfsResponse                                 smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest                        smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_LocationArn            smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_ServerPort             smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_ServerProtocol         smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_Subdirectory           smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_ServerHostname         smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_AccessKey              smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_SecretKey              smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_FederatedIdentity      smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_AgentArns              smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_ServerCertificate      smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_CmkSecretConfig        smithy.SchemaExtensions
+	eUpdateLocationObjectStorageRequest_CustomSecretConfig     smithy.SchemaExtensions
+	eUpdateLocationObjectStorageResponse                       smithy.SchemaExtensions
+	eUpdateLocationS3Request                                   smithy.SchemaExtensions
+	eUpdateLocationS3Request_LocationArn                       smithy.SchemaExtensions
+	eUpdateLocationS3Request_Subdirectory                      smithy.SchemaExtensions
+	eUpdateLocationS3Request_S3StorageClass                    smithy.SchemaExtensions
+	eUpdateLocationS3Request_S3Config                          smithy.SchemaExtensions
+	eUpdateLocationS3Response                                  smithy.SchemaExtensions
+	eUpdateLocationSmbRequest                                  smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_LocationArn                      smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_Subdirectory                     smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_ServerHostname                   smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_User                             smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_Domain                           smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_Password                         smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_CmkSecretConfig                  smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_CustomSecretConfig               smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_AgentArns                        smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_MountOptions                     smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_AuthenticationType               smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_DnsIpAddresses                   smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_KerberosPrincipal                smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_KerberosKeytab                   smithy.SchemaExtensions
+	eUpdateLocationSmbRequest_KerberosKrb5Conf                 smithy.SchemaExtensions
+	eUpdateLocationSmbResponse                                 smithy.SchemaExtensions
+	eUpdateTaskExecutionRequest                                smithy.SchemaExtensions
+	eUpdateTaskExecutionRequest_TaskExecutionArn               smithy.SchemaExtensions
+	eUpdateTaskExecutionRequest_Options                        smithy.SchemaExtensions
+	eUpdateTaskExecutionResponse                               smithy.SchemaExtensions
+	eUpdateTaskRequest                                         smithy.SchemaExtensions
+	eUpdateTaskRequest_TaskArn                                 smithy.SchemaExtensions
+	eUpdateTaskRequest_Options                                 smithy.SchemaExtensions
+	eUpdateTaskRequest_Excludes                                smithy.SchemaExtensions
+	eUpdateTaskRequest_Schedule                                smithy.SchemaExtensions
+	eUpdateTaskRequest_Name                                    smithy.SchemaExtensions
+	eUpdateTaskRequest_CloudWatchLogGroupArn                   smithy.SchemaExtensions
+	eUpdateTaskRequest_Includes                                smithy.SchemaExtensions
+	eUpdateTaskRequest_ManifestConfig                          smithy.SchemaExtensions
+	eUpdateTaskRequest_TaskReportConfig                        smithy.SchemaExtensions
+	eUpdateTaskResponse                                        smithy.SchemaExtensions
+)
+
+var (
+	iCancelTaskExecution                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CancelTaskExecution"}
+	iCreateAgent                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateAgent"}
+	iCreateLocationAzureBlob                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationAzureBlob"}
+	iCreateLocationEfs                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationEfs"}
+	iCreateLocationFsxLustre                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxLustre"}
+	iCreateLocationFsxOntap                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOntap"}
+	iCreateLocationFsxOpenZfs                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOpenZfs"}
+	iCreateLocationFsxWindows                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxWindows"}
+	iCreateLocationHdfs                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationHdfs"}
+	iCreateLocationNfs                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationNfs"}
+	iCreateLocationObjectStorage             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationObjectStorage"}
+	iCreateLocationS3                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationS3"}
+	iCreateLocationSmb                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationSmb"}
+	iCreateTask                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateTask"}
+	iDeleteAgent                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteAgent"}
+	iDeleteLocation                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteLocation"}
+	iDeleteTask                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteTask"}
+	iDescribeAgent                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeAgent"}
+	iDescribeLocationAzureBlob               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationAzureBlob"}
+	iDescribeLocationEfs                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationEfs"}
+	iDescribeLocationFsxLustre               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxLustre"}
+	iDescribeLocationFsxOntap                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOntap"}
+	iDescribeLocationFsxOpenZfs              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOpenZfs"}
+	iDescribeLocationFsxWindows              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxWindows"}
+	iDescribeLocationHdfs                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationHdfs"}
+	iDescribeLocationNfs                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationNfs"}
+	iDescribeLocationObjectStorage           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationObjectStorage"}
+	iDescribeLocationS3                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationS3"}
+	iDescribeLocationSmb                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationSmb"}
+	iDescribeTask                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTask"}
+	iDescribeTaskExecution                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTaskExecution"}
+	iListAgents                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListAgents"}
+	iListLocations                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListLocations"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTagsForResource"}
+	iListTaskExecutions                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTaskExecutions"}
+	iListTasks                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTasks"}
+	iStartTaskExecution                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "StartTaskExecution"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UntagResource"}
+	iUpdateAgent                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateAgent"}
+	iUpdateLocationAzureBlob                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationAzureBlob"}
+	iUpdateLocationEfs                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationEfs"}
+	iUpdateLocationFsxLustre                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxLustre"}
+	iUpdateLocationFsxOntap                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOntap"}
+	iUpdateLocationFsxOpenZfs                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOpenZfs"}
+	iUpdateLocationFsxWindows                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxWindows"}
+	iUpdateLocationHdfs                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationHdfs"}
+	iUpdateLocationNfs                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationNfs"}
+	iUpdateLocationObjectStorage             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationObjectStorage"}
+	iUpdateLocationS3                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationS3"}
+	iUpdateLocationSmb                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationSmb"}
+	iUpdateTask                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTask"}
+	iUpdateTaskExecution                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTaskExecution"}
+	i_FmrsService                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FmrsService"}
+	i_ActivationKey                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ActivationKey"}
+	i_AgentArn                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentArn"}
+	i_AgentArnList                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentArnList"}
+	i_AgentList                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentList"}
+	iAgentListEntry                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentListEntry"}
+	iAgentStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentStatus"}
+	i_AgentVersion                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AgentVersion"}
+	iAtime                                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Atime"}
+	iAzureAccessTier                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureAccessTier"}
+	iAzureBlobAuthenticationType             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobAuthenticationType"}
+	i_AzureBlobContainerUrl                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobContainerUrl"}
+	iAzureBlobSasConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobSasConfiguration"}
+	i_AzureBlobSasToken                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobSasToken"}
+	i_AzureBlobSubdirectory                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobSubdirectory"}
+	iAzureBlobType                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureBlobType"}
+	iAzureFederatedIdentityConfig            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureFederatedIdentityConfig"}
+	i_AzureGuidString                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureGuidString"}
+	iAzureOidcConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "AzureOidcConfig"}
+	i_BytesPerSecond                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "BytesPerSecond"}
+	iCmkSecretConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CmkSecretConfig"}
+	iCustomSecretConfig                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CustomSecretConfig"}
+	i_DestinationNetworkInterfaceArns        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DestinationNetworkInterfaceArns"}
+	i_DnsIpList                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DnsIpList"}
+	i_Duration                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Duration"}
+	iEc2Config                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Ec2Config"}
+	i_Ec2SecurityGroupArn                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Ec2SecurityGroupArn"}
+	i_Ec2SecurityGroupArnList                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Ec2SecurityGroupArnList"}
+	i_Ec2SubnetArn                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Ec2SubnetArn"}
+	i_EfsAccessPointArn                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "EfsAccessPointArn"}
+	i_EfsFilesystemArn                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "EfsFilesystemArn"}
+	iEfsInTransitEncryption                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "EfsInTransitEncryption"}
+	i_EfsSubdirectory                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "EfsSubdirectory"}
+	i_Endpoint                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Endpoint"}
+	iEndpointType                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "EndpointType"}
+	i_FilterAttributeValue                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterAttributeValue"}
+	i_FilterList                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterList"}
+	iFilterRule                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterRule"}
+	iFilterType                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterType"}
+	i_FilterValue                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterValue"}
+	i_FilterValues                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FilterValues"}
+	i_FsxFilesystemArn                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxFilesystemArn"}
+	i_FsxLustreSubdirectory                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxLustreSubdirectory"}
+	i_FsxOntapSubdirectory                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxOntapSubdirectory"}
+	i_FsxOpenZfsSubdirectory                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxOpenZfsSubdirectory"}
+	iFsxProtocol                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxProtocol"}
+	iFsxProtocolNfs                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxProtocolNfs"}
+	iFsxProtocolSmb                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxProtocolSmb"}
+	iFsxUpdateProtocol                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxUpdateProtocol"}
+	iFsxUpdateProtocolSmb                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxUpdateProtocolSmb"}
+	i_FsxWindowsSubdirectory                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "FsxWindowsSubdirectory"}
+	iGid                                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Gid"}
+	i_GoogleIdentityFederationResourceString = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "GoogleIdentityFederationResourceString"}
+	iGoogleOidcConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "GoogleOidcConfig"}
+	iHdfsAuthenticationType                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsAuthenticationType"}
+	i_HdfsBlockSize                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsBlockSize"}
+	iHdfsDataTransferProtection              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsDataTransferProtection"}
+	iHdfsNameNode                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsNameNode"}
+	i_HdfsNameNodeList                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsNameNodeList"}
+	i_HdfsReplicationFactor                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsReplicationFactor"}
+	iHdfsRpcProtection                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsRpcProtection"}
+	i_HdfsServerHostname                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsServerHostname"}
+	i_HdfsServerPort                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsServerPort"}
+	i_HdfsSubdirectory                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsSubdirectory"}
+	i_HdfsUser                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "HdfsUser"}
+	i_IamRoleArn                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "IamRoleArn"}
+	i_IamRoleArnOrEmptyString                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "IamRoleArnOrEmptyString"}
+	i_InputTagList                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "InputTagList"}
+	iInternalException                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "InternalException"}
+	iInvalidRequestException                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "InvalidRequestException"}
+	i_ItemCount                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ItemCount"}
+	i_KerberosKeytabFile                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "KerberosKeytabFile"}
+	i_KerberosKrb5ConfFile                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "KerberosKrb5ConfFile"}
+	i_KerberosPrincipal                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "KerberosPrincipal"}
+	i_KmsKeyArn                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "KmsKeyArn"}
+	i_KmsKeyProviderUri                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "KmsKeyProviderUri"}
+	i_LocationArn                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationArn"}
+	iLocationFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationFilter"}
+	iLocationFilterName                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationFilterName"}
+	i_LocationFilters                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationFilters"}
+	i_LocationList                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationList"}
+	iLocationListEntry                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationListEntry"}
+	i_LocationUri                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LocationUri"}
+	i_LogGroupArn                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LogGroupArn"}
+	iLogLevel                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "LogLevel"}
+	i_long                                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "long"}
+	iManagedSecretConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ManagedSecretConfig"}
+	iManifestAction                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ManifestAction"}
+	iManifestConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ManifestConfig"}
+	iManifestFormat                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ManifestFormat"}
+	i_MaxResults                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "MaxResults"}
+	iMtime                                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Mtime"}
+	i_NetworkInterfaceArn                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "NetworkInterfaceArn"}
+	i_NextToken                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "NextToken"}
+	iNfsMountOptions                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "NfsMountOptions"}
+	i_NfsSubdirectory                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "NfsSubdirectory"}
+	iNfsVersion                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "NfsVersion"}
+	iObjectMetadata                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectMetadata"}
+	i_ObjectStorageAccessKey                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageAccessKey"}
+	i_ObjectStorageBucketName                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageBucketName"}
+	i_ObjectStorageCertificate               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageCertificate"}
+	iObjectStorageExternalIdentityConfig     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageExternalIdentityConfig"}
+	iObjectStorageFederatedIdentityConfig    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageFederatedIdentityConfig"}
+	i_ObjectStorageSecretKey                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageSecretKey"}
+	i_ObjectStorageServerPort                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageServerPort"}
+	iObjectStorageServerProtocol             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectStorageServerProtocol"}
+	iObjectTags                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectTags"}
+	iObjectVersionIds                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ObjectVersionIds"}
+	iOnPremConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "OnPremConfig"}
+	iOperator                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Operator"}
+	iOptions                                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Options"}
+	i_OutputTagList                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "OutputTagList"}
+	iOverwriteMode                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "OverwriteMode"}
+	iPhaseStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PhaseStatus"}
+	iPlatform                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Platform"}
+	i_PLSecurityGroupArnList                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PLSecurityGroupArnList"}
+	i_PLSubnetArnList                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PLSubnetArnList"}
+	iPosixPermissions                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PosixPermissions"}
+	iPreserveDeletedFiles                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PreserveDeletedFiles"}
+	iPreserveDevices                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PreserveDevices"}
+	iPrivateLinkConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "PrivateLinkConfig"}
+	i_ProjectNameString                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ProjectNameString"}
+	i_ProjectNumberString                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ProjectNumberString"}
+	iQopConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "QopConfiguration"}
+	iReportDestination                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportDestination"}
+	iReportDestinationS3                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportDestinationS3"}
+	iReportLevel                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportLevel"}
+	iReportOutputType                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportOutputType"}
+	iReportOverride                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportOverride"}
+	iReportOverrides                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportOverrides"}
+	iReportResult                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ReportResult"}
+	i_S3BucketArn                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3BucketArn"}
+	iS3Config                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3Config"}
+	iS3ManifestConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3ManifestConfig"}
+	i_S3ObjectVersionId                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3ObjectVersionId"}
+	iS3StorageClass                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3StorageClass"}
+	i_S3Subdirectory                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "S3Subdirectory"}
+	iScheduleDisabledBy                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ScheduleDisabledBy"}
+	i_ScheduleDisabledReason                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ScheduleDisabledReason"}
+	i_ScheduleExpressionCron                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ScheduleExpressionCron"}
+	iScheduleStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ScheduleStatus"}
+	i_SecretArn                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SecretArn"}
+	i_ServerHostname                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ServerHostname"}
+	i_ServerIpAddress                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ServerIpAddress"}
+	iSmbAuthenticationType                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbAuthenticationType"}
+	i_SmbDomain                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbDomain"}
+	iSmbMountOptions                         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbMountOptions"}
+	i_SmbPassword                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbPassword"}
+	iSmbSecurityDescriptorCopyFlags          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbSecurityDescriptorCopyFlags"}
+	i_SmbSubdirectory                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbSubdirectory"}
+	i_SmbUser                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbUser"}
+	iSmbVersion                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SmbVersion"}
+	iSourceManifestConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SourceManifestConfig"}
+	i_SourceNetworkInterfaceArns             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "SourceNetworkInterfaceArns"}
+	i_StorageVirtualMachineArn               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "StorageVirtualMachineArn"}
+	i_string                                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "string"}
+	i_TaggableResourceArn                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaggableResourceArn"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagKeyList"}
+	iTagListEntry                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagListEntry"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagValue"}
+	i_TaskArn                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskArn"}
+	i_TaskExecutionArn                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionArn"}
+	iTaskExecutionFilesFailedDetail          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionFilesFailedDetail"}
+	iTaskExecutionFilesListedDetail          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionFilesListedDetail"}
+	iTaskExecutionFoldersFailedDetail        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionFoldersFailedDetail"}
+	iTaskExecutionFoldersListedDetail        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionFoldersListedDetail"}
+	i_TaskExecutionList                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionList"}
+	iTaskExecutionListEntry                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionListEntry"}
+	iTaskExecutionResultDetail               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionResultDetail"}
+	iTaskExecutionStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskExecutionStatus"}
+	iTaskFilter                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskFilter"}
+	iTaskFilterName                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskFilterName"}
+	i_TaskFilters                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskFilters"}
+	i_TaskList                               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskList"}
+	iTaskListEntry                           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskListEntry"}
+	iTaskMode                                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskMode"}
+	iTaskQueueing                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskQueueing"}
+	iTaskReportConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskReportConfig"}
+	iTaskSchedule                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskSchedule"}
+	iTaskScheduleDetails                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskScheduleDetails"}
+	iTaskStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TaskStatus"}
+	i_Time                                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Time"}
+	iTransferMode                            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TransferMode"}
+	iUid                                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "Uid"}
+	i_UpdatedEfsAccessPointArn               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdatedEfsAccessPointArn"}
+	i_UpdatedEfsIamRoleArn                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdatedEfsIamRoleArn"}
+	i_UpdateSmbDomain                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateSmbDomain"}
+	iVerifyMode                              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "VerifyMode"}
+	i_VpcEndpointId                          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "VpcEndpointId"}
+	iCancelTaskExecutionRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CancelTaskExecutionRequest"}
+	iCancelTaskExecutionResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CancelTaskExecutionResponse"}
+	iCreateAgentRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateAgentRequest"}
+	iCreateAgentResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateAgentResponse"}
+	iCreateLocationAzureBlobRequest          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationAzureBlobRequest"}
+	iCreateLocationAzureBlobResponse         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationAzureBlobResponse"}
+	iCreateLocationEfsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationEfsRequest"}
+	iCreateLocationEfsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationEfsResponse"}
+	iCreateLocationFsxLustreRequest          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxLustreRequest"}
+	iCreateLocationFsxLustreResponse         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxLustreResponse"}
+	iCreateLocationFsxOntapRequest           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOntapRequest"}
+	iCreateLocationFsxOntapResponse          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOntapResponse"}
+	iCreateLocationFsxOpenZfsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOpenZfsRequest"}
+	iCreateLocationFsxOpenZfsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxOpenZfsResponse"}
+	iCreateLocationFsxWindowsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxWindowsRequest"}
+	iCreateLocationFsxWindowsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationFsxWindowsResponse"}
+	iCreateLocationHdfsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationHdfsRequest"}
+	iCreateLocationHdfsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationHdfsResponse"}
+	iCreateLocationNfsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationNfsRequest"}
+	iCreateLocationNfsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationNfsResponse"}
+	iCreateLocationObjectStorageRequest      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationObjectStorageRequest"}
+	iCreateLocationObjectStorageResponse     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationObjectStorageResponse"}
+	iCreateLocationS3Request                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationS3Request"}
+	iCreateLocationS3Response                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationS3Response"}
+	iCreateLocationSmbRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationSmbRequest"}
+	iCreateLocationSmbResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateLocationSmbResponse"}
+	iCreateTaskRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateTaskRequest"}
+	iCreateTaskResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "CreateTaskResponse"}
+	iDeleteAgentRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteAgentRequest"}
+	iDeleteAgentResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteAgentResponse"}
+	iDeleteLocationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteLocationRequest"}
+	iDeleteLocationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteLocationResponse"}
+	iDeleteTaskRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteTaskRequest"}
+	iDeleteTaskResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DeleteTaskResponse"}
+	iDescribeAgentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeAgentRequest"}
+	iDescribeAgentResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeAgentResponse"}
+	iDescribeLocationAzureBlobRequest        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationAzureBlobRequest"}
+	iDescribeLocationAzureBlobResponse       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationAzureBlobResponse"}
+	iDescribeLocationEfsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationEfsRequest"}
+	iDescribeLocationEfsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationEfsResponse"}
+	iDescribeLocationFsxLustreRequest        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxLustreRequest"}
+	iDescribeLocationFsxLustreResponse       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxLustreResponse"}
+	iDescribeLocationFsxOntapRequest         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOntapRequest"}
+	iDescribeLocationFsxOntapResponse        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOntapResponse"}
+	iDescribeLocationFsxOpenZfsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOpenZfsRequest"}
+	iDescribeLocationFsxOpenZfsResponse      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxOpenZfsResponse"}
+	iDescribeLocationFsxWindowsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxWindowsRequest"}
+	iDescribeLocationFsxWindowsResponse      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationFsxWindowsResponse"}
+	iDescribeLocationHdfsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationHdfsRequest"}
+	iDescribeLocationHdfsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationHdfsResponse"}
+	iDescribeLocationNfsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationNfsRequest"}
+	iDescribeLocationNfsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationNfsResponse"}
+	iDescribeLocationObjectStorageRequest    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationObjectStorageRequest"}
+	iDescribeLocationObjectStorageResponse   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationObjectStorageResponse"}
+	iDescribeLocationS3Request               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationS3Request"}
+	iDescribeLocationS3Response              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationS3Response"}
+	iDescribeLocationSmbRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationSmbRequest"}
+	iDescribeLocationSmbResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeLocationSmbResponse"}
+	iDescribeTaskExecutionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTaskExecutionRequest"}
+	iDescribeTaskExecutionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTaskExecutionResponse"}
+	iDescribeTaskRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTaskRequest"}
+	iDescribeTaskResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "DescribeTaskResponse"}
+	iListAgentsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListAgentsRequest"}
+	iListAgentsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListAgentsResponse"}
+	iListLocationsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListLocationsRequest"}
+	iListLocationsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListLocationsResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTagsForResourceResponse"}
+	iListTaskExecutionsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTaskExecutionsRequest"}
+	iListTaskExecutionsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTaskExecutionsResponse"}
+	iListTasksRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTasksRequest"}
+	iListTasksResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "ListTasksResponse"}
+	iStartTaskExecutionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "StartTaskExecutionRequest"}
+	iStartTaskExecutionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "StartTaskExecutionResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UntagResourceResponse"}
+	iUpdateAgentRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateAgentRequest"}
+	iUpdateAgentResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateAgentResponse"}
+	iUpdateLocationAzureBlobRequest          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationAzureBlobRequest"}
+	iUpdateLocationAzureBlobResponse         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationAzureBlobResponse"}
+	iUpdateLocationEfsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationEfsRequest"}
+	iUpdateLocationEfsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationEfsResponse"}
+	iUpdateLocationFsxLustreRequest          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxLustreRequest"}
+	iUpdateLocationFsxLustreResponse         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxLustreResponse"}
+	iUpdateLocationFsxOntapRequest           = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOntapRequest"}
+	iUpdateLocationFsxOntapResponse          = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOntapResponse"}
+	iUpdateLocationFsxOpenZfsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOpenZfsRequest"}
+	iUpdateLocationFsxOpenZfsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxOpenZfsResponse"}
+	iUpdateLocationFsxWindowsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxWindowsRequest"}
+	iUpdateLocationFsxWindowsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationFsxWindowsResponse"}
+	iUpdateLocationHdfsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationHdfsRequest"}
+	iUpdateLocationHdfsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationHdfsResponse"}
+	iUpdateLocationNfsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationNfsRequest"}
+	iUpdateLocationNfsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationNfsResponse"}
+	iUpdateLocationObjectStorageRequest      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationObjectStorageRequest"}
+	iUpdateLocationObjectStorageResponse     = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationObjectStorageResponse"}
+	iUpdateLocationS3Request                 = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationS3Request"}
+	iUpdateLocationS3Response                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationS3Response"}
+	iUpdateLocationSmbRequest                = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationSmbRequest"}
+	iUpdateLocationSmbResponse               = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateLocationSmbResponse"}
+	iUpdateTaskExecutionRequest              = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTaskExecutionRequest"}
+	iUpdateTaskExecutionResponse             = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTaskExecutionResponse"}
+	iUpdateTaskRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTaskRequest"}
+	iUpdateTaskResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.datasync", Name: "UpdateTaskResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t3 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var m_AgentArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AgentArnList_member}}
+var m_AgentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AgentList_member}}
+var mAgentListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentListEntry_AgentArn, &sAgentListEntry_Name, &sAgentListEntry_Status, &sAgentListEntry_Platform}}
+var mAgentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentStatus_ONLINE, &sAgentStatus_OFFLINE}}
+var mAtime = smithy.SchemaMembers{List: []*smithy.Schema{&sAtime_NONE, &sAtime_BEST_EFFORT}}
+var mAzureAccessTier = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureAccessTier_HOT, &sAzureAccessTier_COOL, &sAzureAccessTier_ARCHIVE}}
+var mAzureBlobAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureBlobAuthenticationType_SAS, &sAzureBlobAuthenticationType_NONE, &sAzureBlobAuthenticationType_OIDC}}
+var mAzureBlobSasConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureBlobSasConfiguration_Token}}
+var mAzureBlobType = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureBlobType_BLOCK}}
+var mAzureFederatedIdentityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureFederatedIdentityConfig_AwsIamRole, &sAzureFederatedIdentityConfig_AzureOidc}}
+var mAzureOidcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAzureOidcConfig_TenantId, &sAzureOidcConfig_ClientId}}
+var mCmkSecretConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCmkSecretConfig_SecretArn, &sCmkSecretConfig_KmsKeyArn}}
+var mCustomSecretConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomSecretConfig_SecretArn, &sCustomSecretConfig_SecretAccessRoleArn}}
+var m_DestinationNetworkInterfaceArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationNetworkInterfaceArns_member}}
+var m_DnsIpList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsIpList_member}}
+var mEc2Config = smithy.SchemaMembers{List: []*smithy.Schema{&sEc2Config_SubnetArn, &sEc2Config_SecurityGroupArns}}
+var m_Ec2SecurityGroupArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ec2SecurityGroupArnList_member}}
+var mEfsInTransitEncryption = smithy.SchemaMembers{List: []*smithy.Schema{&sEfsInTransitEncryption_NONE, &sEfsInTransitEncryption_TLS1_2}}
+var mEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointType_PUBLIC, &sEndpointType_PRIVATE_LINK, &sEndpointType_FIPS, &sEndpointType_FIPS_PRIVATE_LINK}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFilterRule = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterRule_FilterType, &sFilterRule_Value}}
+var mFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterType_SIMPLE_PATTERN}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mFsxProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sFsxProtocol_NFS, &sFsxProtocol_SMB}}
+var mFsxProtocolNfs = smithy.SchemaMembers{List: []*smithy.Schema{&sFsxProtocolNfs_MountOptions}}
+var mFsxProtocolSmb = smithy.SchemaMembers{List: []*smithy.Schema{&sFsxProtocolSmb_Domain, &sFsxProtocolSmb_MountOptions, &sFsxProtocolSmb_Password, &sFsxProtocolSmb_User, &sFsxProtocolSmb_ManagedSecretConfig, &sFsxProtocolSmb_CmkSecretConfig, &sFsxProtocolSmb_CustomSecretConfig}}
+var mFsxUpdateProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sFsxUpdateProtocol_NFS, &sFsxUpdateProtocol_SMB}}
+var mFsxUpdateProtocolSmb = smithy.SchemaMembers{List: []*smithy.Schema{&sFsxUpdateProtocolSmb_Domain, &sFsxUpdateProtocolSmb_MountOptions, &sFsxUpdateProtocolSmb_Password, &sFsxUpdateProtocolSmb_User, &sFsxUpdateProtocolSmb_CmkSecretConfig, &sFsxUpdateProtocolSmb_CustomSecretConfig}}
+var mGid = smithy.SchemaMembers{List: []*smithy.Schema{&sGid_NONE, &sGid_INT_VALUE, &sGid_NAME, &sGid_BOTH}}
+var mGoogleOidcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGoogleOidcConfig_ProjectName, &sGoogleOidcConfig_ProjectNumber, &sGoogleOidcConfig_IdentityPoolName, &sGoogleOidcConfig_IdentityProviderName}}
+var mHdfsAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sHdfsAuthenticationType_SIMPLE, &sHdfsAuthenticationType_KERBEROS}}
+var mHdfsDataTransferProtection = smithy.SchemaMembers{List: []*smithy.Schema{&sHdfsDataTransferProtection_DISABLED, &sHdfsDataTransferProtection_AUTHENTICATION, &sHdfsDataTransferProtection_INTEGRITY, &sHdfsDataTransferProtection_PRIVACY}}
+var mHdfsNameNode = smithy.SchemaMembers{List: []*smithy.Schema{&sHdfsNameNode_Hostname, &sHdfsNameNode_Port}}
+var m_HdfsNameNodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HdfsNameNodeList_member}}
+var mHdfsRpcProtection = smithy.SchemaMembers{List: []*smithy.Schema{&sHdfsRpcProtection_DISABLED, &sHdfsRpcProtection_AUTHENTICATION, &sHdfsRpcProtection_INTEGRITY, &sHdfsRpcProtection_PRIVACY}}
+var m_InputTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InputTagList_member}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_message, &sInternalException_errorCode}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message, &sInvalidRequestException_errorCode, &sInvalidRequestException_datasyncErrorCode}}
+var mLocationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sLocationFilter_Name, &sLocationFilter_Values, &sLocationFilter_Operator}}
+var mLocationFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sLocationFilterName_LocationUri, &sLocationFilterName_LocationType, &sLocationFilterName_CreationTime}}
+var m_LocationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_LocationFilters_member}}
+var m_LocationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LocationList_member}}
+var mLocationListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sLocationListEntry_LocationArn, &sLocationListEntry_LocationUri}}
+var mLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sLogLevel_OFF, &sLogLevel_BASIC, &sLogLevel_TRANSFER}}
+var mManagedSecretConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedSecretConfig_SecretArn}}
+var mManifestAction = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestAction_TRANSFER}}
+var mManifestConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestConfig_Action, &sManifestConfig_Format, &sManifestConfig_Source}}
+var mManifestFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sManifestFormat_CSV}}
+var mMtime = smithy.SchemaMembers{List: []*smithy.Schema{&sMtime_NONE, &sMtime_PRESERVE}}
+var mNfsMountOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sNfsMountOptions_Version}}
+var mNfsVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sNfsVersion_AUTOMATIC, &sNfsVersion_NFS3, &sNfsVersion_NFS4_0, &sNfsVersion_NFS4_1, &sNfsVersion_NFS4_2}}
+var mObjectMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectMetadata_PRESERVE, &sObjectMetadata_NONE}}
+var mObjectStorageExternalIdentityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectStorageExternalIdentityConfig_GoogleOidc}}
+var mObjectStorageFederatedIdentityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectStorageFederatedIdentityConfig_AwsIamRole, &sObjectStorageFederatedIdentityConfig_ExternalIdentity}}
+var mObjectStorageServerProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectStorageServerProtocol_HTTPS, &sObjectStorageServerProtocol_HTTP}}
+var mObjectTags = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectTags_PRESERVE, &sObjectTags_NONE}}
+var mObjectVersionIds = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectVersionIds_INCLUDE, &sObjectVersionIds_NONE}}
+var mOnPremConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOnPremConfig_AgentArns}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_EQ, &sOperator_NE, &sOperator_IN, &sOperator_LE, &sOperator_LT, &sOperator_GE, &sOperator_GT, &sOperator_CONTAINS, &sOperator_NOT_CONTAINS, &sOperator_BEGINS_WITH}, Hash: &hOperator}
+var mOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sOptions_VerifyMode, &sOptions_OverwriteMode, &sOptions_Atime, &sOptions_Mtime, &sOptions_Uid, &sOptions_Gid, &sOptions_PreserveDeletedFiles, &sOptions_PreserveDevices, &sOptions_PosixPermissions, &sOptions_BytesPerSecond, &sOptions_TaskQueueing, &sOptions_LogLevel, &sOptions_TransferMode, &sOptions_SecurityDescriptorCopyFlags, &sOptions_ObjectTags, &sOptions_ObjectMetadata}, Hash: &hOptions}
+var m_OutputTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutputTagList_member}}
+var mOverwriteMode = smithy.SchemaMembers{List: []*smithy.Schema{&sOverwriteMode_ALWAYS, &sOverwriteMode_NEVER}}
+var mPhaseStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPhaseStatus_PENDING, &sPhaseStatus_SUCCESS, &sPhaseStatus_ERROR}}
+var mPlatform = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatform_Version}}
+var m_PLSecurityGroupArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PLSecurityGroupArnList_member}}
+var m_PLSubnetArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PLSubnetArnList_member}}
+var mPosixPermissions = smithy.SchemaMembers{List: []*smithy.Schema{&sPosixPermissions_NONE, &sPosixPermissions_PRESERVE}}
+var mPreserveDeletedFiles = smithy.SchemaMembers{List: []*smithy.Schema{&sPreserveDeletedFiles_PRESERVE, &sPreserveDeletedFiles_REMOVE}}
+var mPreserveDevices = smithy.SchemaMembers{List: []*smithy.Schema{&sPreserveDevices_NONE, &sPreserveDevices_PRESERVE}}
+var mPrivateLinkConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateLinkConfig_VpcEndpointId, &sPrivateLinkConfig_PrivateLinkEndpoint, &sPrivateLinkConfig_SubnetArns, &sPrivateLinkConfig_SecurityGroupArns}}
+var mQopConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sQopConfiguration_RpcProtection, &sQopConfiguration_DataTransferProtection}}
+var mReportDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sReportDestination_S3}}
+var mReportDestinationS3 = smithy.SchemaMembers{List: []*smithy.Schema{&sReportDestinationS3_Subdirectory, &sReportDestinationS3_S3BucketArn, &sReportDestinationS3_BucketAccessRoleArn}}
+var mReportLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sReportLevel_ERRORS_ONLY, &sReportLevel_SUCCESSES_AND_ERRORS}}
+var mReportOutputType = smithy.SchemaMembers{List: []*smithy.Schema{&sReportOutputType_SUMMARY_ONLY, &sReportOutputType_STANDARD}}
+var mReportOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sReportOverride_ReportLevel}}
+var mReportOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sReportOverrides_Transferred, &sReportOverrides_Verified, &sReportOverrides_Deleted, &sReportOverrides_Skipped}}
+var mReportResult = smithy.SchemaMembers{List: []*smithy.Schema{&sReportResult_Status, &sReportResult_ErrorCode, &sReportResult_ErrorDetail}}
+var mS3Config = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Config_BucketAccessRoleArn}}
+var mS3ManifestConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ManifestConfig_ManifestObjectPath, &sS3ManifestConfig_BucketAccessRoleArn, &sS3ManifestConfig_S3BucketArn, &sS3ManifestConfig_ManifestObjectVersionId}}
+var mS3StorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sS3StorageClass_STANDARD, &sS3StorageClass_STANDARD_IA, &sS3StorageClass_ONEZONE_IA, &sS3StorageClass_INTELLIGENT_TIERING, &sS3StorageClass_GLACIER, &sS3StorageClass_DEEP_ARCHIVE, &sS3StorageClass_OUTPOSTS, &sS3StorageClass_GLACIER_INSTANT_RETRIEVAL}}
+var mScheduleDisabledBy = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleDisabledBy_USER, &sScheduleDisabledBy_SERVICE}}
+var mScheduleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleStatus_ENABLED, &sScheduleStatus_DISABLED}}
+var mSmbAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sSmbAuthenticationType_NTLM, &sSmbAuthenticationType_KERBEROS}}
+var mSmbMountOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSmbMountOptions_Version}}
+var mSmbSecurityDescriptorCopyFlags = smithy.SchemaMembers{List: []*smithy.Schema{&sSmbSecurityDescriptorCopyFlags_NONE, &sSmbSecurityDescriptorCopyFlags_OWNER_DACL, &sSmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL}}
+var mSmbVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sSmbVersion_AUTOMATIC, &sSmbVersion_SMB2, &sSmbVersion_SMB3, &sSmbVersion_SMB1, &sSmbVersion_SMB2_0}}
+var mSourceManifestConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceManifestConfig_S3}}
+var m_SourceNetworkInterfaceArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceNetworkInterfaceArns_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sTagListEntry_Key, &sTagListEntry_Value}}
+var mTaskExecutionFilesFailedDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionFilesFailedDetail_Prepare, &sTaskExecutionFilesFailedDetail_Transfer, &sTaskExecutionFilesFailedDetail_Verify, &sTaskExecutionFilesFailedDetail_Delete}}
+var mTaskExecutionFilesListedDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionFilesListedDetail_AtSource, &sTaskExecutionFilesListedDetail_AtDestinationForDelete}}
+var mTaskExecutionFoldersFailedDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionFoldersFailedDetail_List, &sTaskExecutionFoldersFailedDetail_Prepare, &sTaskExecutionFoldersFailedDetail_Transfer, &sTaskExecutionFoldersFailedDetail_Verify, &sTaskExecutionFoldersFailedDetail_Delete}}
+var mTaskExecutionFoldersListedDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionFoldersListedDetail_AtSource, &sTaskExecutionFoldersListedDetail_AtDestinationForDelete}}
+var m_TaskExecutionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskExecutionList_member}}
+var mTaskExecutionListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionListEntry_TaskExecutionArn, &sTaskExecutionListEntry_Status, &sTaskExecutionListEntry_TaskMode}}
+var mTaskExecutionResultDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionResultDetail_PrepareDuration, &sTaskExecutionResultDetail_PrepareStatus, &sTaskExecutionResultDetail_TotalDuration, &sTaskExecutionResultDetail_TransferDuration, &sTaskExecutionResultDetail_TransferStatus, &sTaskExecutionResultDetail_VerifyDuration, &sTaskExecutionResultDetail_VerifyStatus, &sTaskExecutionResultDetail_ErrorCode, &sTaskExecutionResultDetail_ErrorDetail}, Hash: &hTaskExecutionResultDetail}
+var mTaskExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskExecutionStatus_QUEUED, &sTaskExecutionStatus_CANCELLING, &sTaskExecutionStatus_LAUNCHING, &sTaskExecutionStatus_PREPARING, &sTaskExecutionStatus_TRANSFERRING, &sTaskExecutionStatus_VERIFYING, &sTaskExecutionStatus_SUCCESS, &sTaskExecutionStatus_ERROR}}
+var mTaskFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskFilter_Name, &sTaskFilter_Values, &sTaskFilter_Operator}}
+var mTaskFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskFilterName_LocationId, &sTaskFilterName_CreationTime}}
+var m_TaskFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskFilters_member}}
+var m_TaskList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskList_member}}
+var mTaskListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskListEntry_TaskArn, &sTaskListEntry_Status, &sTaskListEntry_Name, &sTaskListEntry_TaskMode}}
+var mTaskMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskMode_BASIC, &sTaskMode_ENHANCED}}
+var mTaskQueueing = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskQueueing_ENABLED, &sTaskQueueing_DISABLED}}
+var mTaskReportConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskReportConfig_Destination, &sTaskReportConfig_OutputType, &sTaskReportConfig_ReportLevel, &sTaskReportConfig_ObjectVersionIds, &sTaskReportConfig_Overrides}}
+var mTaskSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskSchedule_ScheduleExpression, &sTaskSchedule_Status}}
+var mTaskScheduleDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskScheduleDetails_StatusUpdateTime, &sTaskScheduleDetails_DisabledReason, &sTaskScheduleDetails_DisabledBy}}
+var mTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskStatus_AVAILABLE, &sTaskStatus_CREATING, &sTaskStatus_QUEUED, &sTaskStatus_RUNNING, &sTaskStatus_UNAVAILABLE}}
+var mTransferMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTransferMode_CHANGED, &sTransferMode_ALL}}
+var mUid = smithy.SchemaMembers{List: []*smithy.Schema{&sUid_NONE, &sUid_INT_VALUE, &sUid_NAME, &sUid_BOTH}}
+var mVerifyMode = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyMode_POINT_IN_TIME_CONSISTENT, &sVerifyMode_ONLY_FILES_TRANSFERRED, &sVerifyMode_NONE}}
+var mCancelTaskExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTaskExecutionRequest_TaskExecutionArn}}
+var mCreateAgentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAgentRequest_ActivationKey, &sCreateAgentRequest_AgentName, &sCreateAgentRequest_Tags, &sCreateAgentRequest_VpcEndpointId, &sCreateAgentRequest_SubnetArns, &sCreateAgentRequest_SecurityGroupArns}}
+var mCreateAgentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAgentResponse_AgentArn}}
+var mCreateLocationAzureBlobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationAzureBlobRequest_ContainerUrl, &sCreateLocationAzureBlobRequest_AuthenticationType, &sCreateLocationAzureBlobRequest_SasConfiguration, &sCreateLocationAzureBlobRequest_FederatedIdentity, &sCreateLocationAzureBlobRequest_BlobType, &sCreateLocationAzureBlobRequest_AccessTier, &sCreateLocationAzureBlobRequest_Subdirectory, &sCreateLocationAzureBlobRequest_AgentArns, &sCreateLocationAzureBlobRequest_Tags, &sCreateLocationAzureBlobRequest_CmkSecretConfig, &sCreateLocationAzureBlobRequest_CustomSecretConfig}, Hash: &hCreateLocationAzureBlobRequest}
+var mCreateLocationAzureBlobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationAzureBlobResponse_LocationArn}}
+var mCreateLocationEfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationEfsRequest_Subdirectory, &sCreateLocationEfsRequest_EfsFilesystemArn, &sCreateLocationEfsRequest_Ec2Config, &sCreateLocationEfsRequest_Tags, &sCreateLocationEfsRequest_AccessPointArn, &sCreateLocationEfsRequest_FileSystemAccessRoleArn, &sCreateLocationEfsRequest_InTransitEncryption}}
+var mCreateLocationEfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationEfsResponse_LocationArn}}
+var mCreateLocationFsxLustreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxLustreRequest_FsxFilesystemArn, &sCreateLocationFsxLustreRequest_SecurityGroupArns, &sCreateLocationFsxLustreRequest_Subdirectory, &sCreateLocationFsxLustreRequest_Tags}}
+var mCreateLocationFsxLustreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxLustreResponse_LocationArn}}
+var mCreateLocationFsxOntapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxOntapRequest_Protocol, &sCreateLocationFsxOntapRequest_SecurityGroupArns, &sCreateLocationFsxOntapRequest_StorageVirtualMachineArn, &sCreateLocationFsxOntapRequest_Subdirectory, &sCreateLocationFsxOntapRequest_Tags}}
+var mCreateLocationFsxOntapResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxOntapResponse_LocationArn}}
+var mCreateLocationFsxOpenZfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxOpenZfsRequest_FsxFilesystemArn, &sCreateLocationFsxOpenZfsRequest_Protocol, &sCreateLocationFsxOpenZfsRequest_SecurityGroupArns, &sCreateLocationFsxOpenZfsRequest_Subdirectory, &sCreateLocationFsxOpenZfsRequest_Tags}}
+var mCreateLocationFsxOpenZfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxOpenZfsResponse_LocationArn}}
+var mCreateLocationFsxWindowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxWindowsRequest_Subdirectory, &sCreateLocationFsxWindowsRequest_FsxFilesystemArn, &sCreateLocationFsxWindowsRequest_SecurityGroupArns, &sCreateLocationFsxWindowsRequest_Tags, &sCreateLocationFsxWindowsRequest_User, &sCreateLocationFsxWindowsRequest_Domain, &sCreateLocationFsxWindowsRequest_Password, &sCreateLocationFsxWindowsRequest_CmkSecretConfig, &sCreateLocationFsxWindowsRequest_CustomSecretConfig}, Hash: &hCreateLocationFsxWindowsRequest}
+var mCreateLocationFsxWindowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationFsxWindowsResponse_LocationArn}}
+var mCreateLocationHdfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationHdfsRequest_Subdirectory, &sCreateLocationHdfsRequest_NameNodes, &sCreateLocationHdfsRequest_BlockSize, &sCreateLocationHdfsRequest_ReplicationFactor, &sCreateLocationHdfsRequest_KmsKeyProviderUri, &sCreateLocationHdfsRequest_QopConfiguration, &sCreateLocationHdfsRequest_AuthenticationType, &sCreateLocationHdfsRequest_SimpleUser, &sCreateLocationHdfsRequest_KerberosPrincipal, &sCreateLocationHdfsRequest_KerberosKeytab, &sCreateLocationHdfsRequest_KerberosKrb5Conf, &sCreateLocationHdfsRequest_AgentArns, &sCreateLocationHdfsRequest_Tags, &sCreateLocationHdfsRequest_CmkSecretConfig, &sCreateLocationHdfsRequest_CustomSecretConfig}, Hash: &hCreateLocationHdfsRequest}
+var mCreateLocationHdfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationHdfsResponse_LocationArn}}
+var mCreateLocationNfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationNfsRequest_Subdirectory, &sCreateLocationNfsRequest_ServerHostname, &sCreateLocationNfsRequest_OnPremConfig, &sCreateLocationNfsRequest_MountOptions, &sCreateLocationNfsRequest_Tags}}
+var mCreateLocationNfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationNfsResponse_LocationArn}}
+var mCreateLocationObjectStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationObjectStorageRequest_ServerHostname, &sCreateLocationObjectStorageRequest_ServerPort, &sCreateLocationObjectStorageRequest_ServerProtocol, &sCreateLocationObjectStorageRequest_Subdirectory, &sCreateLocationObjectStorageRequest_BucketName, &sCreateLocationObjectStorageRequest_AccessKey, &sCreateLocationObjectStorageRequest_SecretKey, &sCreateLocationObjectStorageRequest_FederatedIdentity, &sCreateLocationObjectStorageRequest_AgentArns, &sCreateLocationObjectStorageRequest_Tags, &sCreateLocationObjectStorageRequest_ServerCertificate, &sCreateLocationObjectStorageRequest_CmkSecretConfig, &sCreateLocationObjectStorageRequest_CustomSecretConfig}, Hash: &hCreateLocationObjectStorageRequest}
+var mCreateLocationObjectStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationObjectStorageResponse_LocationArn}}
+var mCreateLocationS3Request = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationS3Request_Subdirectory, &sCreateLocationS3Request_S3BucketArn, &sCreateLocationS3Request_S3StorageClass, &sCreateLocationS3Request_S3Config, &sCreateLocationS3Request_AgentArns, &sCreateLocationS3Request_Tags}}
+var mCreateLocationS3Response = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationS3Response_LocationArn}}
+var mCreateLocationSmbRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationSmbRequest_Subdirectory, &sCreateLocationSmbRequest_ServerHostname, &sCreateLocationSmbRequest_User, &sCreateLocationSmbRequest_Domain, &sCreateLocationSmbRequest_Password, &sCreateLocationSmbRequest_CmkSecretConfig, &sCreateLocationSmbRequest_CustomSecretConfig, &sCreateLocationSmbRequest_AgentArns, &sCreateLocationSmbRequest_MountOptions, &sCreateLocationSmbRequest_Tags, &sCreateLocationSmbRequest_AuthenticationType, &sCreateLocationSmbRequest_DnsIpAddresses, &sCreateLocationSmbRequest_KerberosPrincipal, &sCreateLocationSmbRequest_KerberosKeytab, &sCreateLocationSmbRequest_KerberosKrb5Conf}, Hash: &hCreateLocationSmbRequest}
+var mCreateLocationSmbResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLocationSmbResponse_LocationArn}}
+var mCreateTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTaskRequest_SourceLocationArn, &sCreateTaskRequest_DestinationLocationArn, &sCreateTaskRequest_CloudWatchLogGroupArn, &sCreateTaskRequest_Name, &sCreateTaskRequest_Options, &sCreateTaskRequest_Excludes, &sCreateTaskRequest_Schedule, &sCreateTaskRequest_Tags, &sCreateTaskRequest_Includes, &sCreateTaskRequest_ManifestConfig, &sCreateTaskRequest_TaskReportConfig, &sCreateTaskRequest_TaskMode}, Hash: &hCreateTaskRequest}
+var mCreateTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTaskResponse_TaskArn}}
+var mDeleteAgentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAgentRequest_AgentArn}}
+var mDeleteLocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLocationRequest_LocationArn}}
+var mDeleteTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTaskRequest_TaskArn}}
+var mDescribeAgentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAgentRequest_AgentArn}}
+var mDescribeAgentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAgentResponse_AgentArn, &sDescribeAgentResponse_Name, &sDescribeAgentResponse_Status, &sDescribeAgentResponse_LastConnectionTime, &sDescribeAgentResponse_CreationTime, &sDescribeAgentResponse_EndpointType, &sDescribeAgentResponse_PrivateLinkConfig, &sDescribeAgentResponse_Platform}}
+var mDescribeLocationAzureBlobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationAzureBlobRequest_LocationArn}}
+var mDescribeLocationAzureBlobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationAzureBlobResponse_LocationArn, &sDescribeLocationAzureBlobResponse_LocationUri, &sDescribeLocationAzureBlobResponse_AuthenticationType, &sDescribeLocationAzureBlobResponse_FederatedIdentity, &sDescribeLocationAzureBlobResponse_BlobType, &sDescribeLocationAzureBlobResponse_AccessTier, &sDescribeLocationAzureBlobResponse_AgentArns, &sDescribeLocationAzureBlobResponse_CreationTime, &sDescribeLocationAzureBlobResponse_ManagedSecretConfig, &sDescribeLocationAzureBlobResponse_CmkSecretConfig, &sDescribeLocationAzureBlobResponse_CustomSecretConfig}, Hash: &hDescribeLocationAzureBlobResponse}
+var mDescribeLocationEfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationEfsRequest_LocationArn}}
+var mDescribeLocationEfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationEfsResponse_LocationArn, &sDescribeLocationEfsResponse_LocationUri, &sDescribeLocationEfsResponse_Ec2Config, &sDescribeLocationEfsResponse_CreationTime, &sDescribeLocationEfsResponse_AccessPointArn, &sDescribeLocationEfsResponse_FileSystemAccessRoleArn, &sDescribeLocationEfsResponse_InTransitEncryption}}
+var mDescribeLocationFsxLustreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxLustreRequest_LocationArn}}
+var mDescribeLocationFsxLustreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxLustreResponse_LocationArn, &sDescribeLocationFsxLustreResponse_LocationUri, &sDescribeLocationFsxLustreResponse_SecurityGroupArns, &sDescribeLocationFsxLustreResponse_CreationTime}}
+var mDescribeLocationFsxOntapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxOntapRequest_LocationArn}}
+var mDescribeLocationFsxOntapResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxOntapResponse_CreationTime, &sDescribeLocationFsxOntapResponse_LocationArn, &sDescribeLocationFsxOntapResponse_LocationUri, &sDescribeLocationFsxOntapResponse_Protocol, &sDescribeLocationFsxOntapResponse_SecurityGroupArns, &sDescribeLocationFsxOntapResponse_StorageVirtualMachineArn, &sDescribeLocationFsxOntapResponse_FsxFilesystemArn}}
+var mDescribeLocationFsxOpenZfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxOpenZfsRequest_LocationArn}}
+var mDescribeLocationFsxOpenZfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxOpenZfsResponse_LocationArn, &sDescribeLocationFsxOpenZfsResponse_LocationUri, &sDescribeLocationFsxOpenZfsResponse_SecurityGroupArns, &sDescribeLocationFsxOpenZfsResponse_Protocol, &sDescribeLocationFsxOpenZfsResponse_CreationTime}}
+var mDescribeLocationFsxWindowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxWindowsRequest_LocationArn}}
+var mDescribeLocationFsxWindowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationFsxWindowsResponse_LocationArn, &sDescribeLocationFsxWindowsResponse_LocationUri, &sDescribeLocationFsxWindowsResponse_SecurityGroupArns, &sDescribeLocationFsxWindowsResponse_CreationTime, &sDescribeLocationFsxWindowsResponse_User, &sDescribeLocationFsxWindowsResponse_Domain, &sDescribeLocationFsxWindowsResponse_ManagedSecretConfig, &sDescribeLocationFsxWindowsResponse_CmkSecretConfig, &sDescribeLocationFsxWindowsResponse_CustomSecretConfig}, Hash: &hDescribeLocationFsxWindowsResponse}
+var mDescribeLocationHdfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationHdfsRequest_LocationArn}}
+var mDescribeLocationHdfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationHdfsResponse_LocationArn, &sDescribeLocationHdfsResponse_LocationUri, &sDescribeLocationHdfsResponse_NameNodes, &sDescribeLocationHdfsResponse_BlockSize, &sDescribeLocationHdfsResponse_ReplicationFactor, &sDescribeLocationHdfsResponse_KmsKeyProviderUri, &sDescribeLocationHdfsResponse_QopConfiguration, &sDescribeLocationHdfsResponse_AuthenticationType, &sDescribeLocationHdfsResponse_SimpleUser, &sDescribeLocationHdfsResponse_KerberosPrincipal, &sDescribeLocationHdfsResponse_AgentArns, &sDescribeLocationHdfsResponse_CreationTime, &sDescribeLocationHdfsResponse_ManagedSecretConfig, &sDescribeLocationHdfsResponse_CmkSecretConfig, &sDescribeLocationHdfsResponse_CustomSecretConfig}, Hash: &hDescribeLocationHdfsResponse}
+var mDescribeLocationNfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationNfsRequest_LocationArn}}
+var mDescribeLocationNfsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationNfsResponse_LocationArn, &sDescribeLocationNfsResponse_LocationUri, &sDescribeLocationNfsResponse_OnPremConfig, &sDescribeLocationNfsResponse_MountOptions, &sDescribeLocationNfsResponse_CreationTime}}
+var mDescribeLocationObjectStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationObjectStorageRequest_LocationArn}}
+var mDescribeLocationObjectStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationObjectStorageResponse_LocationArn, &sDescribeLocationObjectStorageResponse_LocationUri, &sDescribeLocationObjectStorageResponse_AccessKey, &sDescribeLocationObjectStorageResponse_FederatedIdentity, &sDescribeLocationObjectStorageResponse_ServerPort, &sDescribeLocationObjectStorageResponse_ServerProtocol, &sDescribeLocationObjectStorageResponse_AgentArns, &sDescribeLocationObjectStorageResponse_CreationTime, &sDescribeLocationObjectStorageResponse_ServerCertificate, &sDescribeLocationObjectStorageResponse_ManagedSecretConfig, &sDescribeLocationObjectStorageResponse_CmkSecretConfig, &sDescribeLocationObjectStorageResponse_CustomSecretConfig}, Hash: &hDescribeLocationObjectStorageResponse}
+var mDescribeLocationS3Request = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationS3Request_LocationArn}}
+var mDescribeLocationS3Response = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationS3Response_LocationArn, &sDescribeLocationS3Response_LocationUri, &sDescribeLocationS3Response_S3StorageClass, &sDescribeLocationS3Response_S3Config, &sDescribeLocationS3Response_AgentArns, &sDescribeLocationS3Response_CreationTime}}
+var mDescribeLocationSmbRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationSmbRequest_LocationArn}}
+var mDescribeLocationSmbResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLocationSmbResponse_LocationArn, &sDescribeLocationSmbResponse_LocationUri, &sDescribeLocationSmbResponse_AgentArns, &sDescribeLocationSmbResponse_User, &sDescribeLocationSmbResponse_Domain, &sDescribeLocationSmbResponse_MountOptions, &sDescribeLocationSmbResponse_CreationTime, &sDescribeLocationSmbResponse_DnsIpAddresses, &sDescribeLocationSmbResponse_KerberosPrincipal, &sDescribeLocationSmbResponse_AuthenticationType, &sDescribeLocationSmbResponse_ManagedSecretConfig, &sDescribeLocationSmbResponse_CmkSecretConfig, &sDescribeLocationSmbResponse_CustomSecretConfig}, Hash: &hDescribeLocationSmbResponse}
+var mDescribeTaskExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskExecutionRequest_TaskExecutionArn}}
+var mDescribeTaskExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskExecutionResponse_TaskExecutionArn, &sDescribeTaskExecutionResponse_Status, &sDescribeTaskExecutionResponse_Options, &sDescribeTaskExecutionResponse_Excludes, &sDescribeTaskExecutionResponse_Includes, &sDescribeTaskExecutionResponse_ManifestConfig, &sDescribeTaskExecutionResponse_StartTime, &sDescribeTaskExecutionResponse_EstimatedFilesToTransfer, &sDescribeTaskExecutionResponse_EstimatedBytesToTransfer, &sDescribeTaskExecutionResponse_FilesTransferred, &sDescribeTaskExecutionResponse_BytesWritten, &sDescribeTaskExecutionResponse_BytesTransferred, &sDescribeTaskExecutionResponse_BytesCompressed, &sDescribeTaskExecutionResponse_Result, &sDescribeTaskExecutionResponse_TaskReportConfig, &sDescribeTaskExecutionResponse_FilesDeleted, &sDescribeTaskExecutionResponse_FilesSkipped, &sDescribeTaskExecutionResponse_FilesVerified, &sDescribeTaskExecutionResponse_ReportResult, &sDescribeTaskExecutionResponse_EstimatedFilesToDelete, &sDescribeTaskExecutionResponse_TaskMode, &sDescribeTaskExecutionResponse_FilesPrepared, &sDescribeTaskExecutionResponse_FilesListed, &sDescribeTaskExecutionResponse_FilesFailed, &sDescribeTaskExecutionResponse_EstimatedFoldersToDelete, &sDescribeTaskExecutionResponse_EstimatedFoldersToTransfer, &sDescribeTaskExecutionResponse_FoldersSkipped, &sDescribeTaskExecutionResponse_FoldersPrepared, &sDescribeTaskExecutionResponse_FoldersTransferred, &sDescribeTaskExecutionResponse_FoldersVerified, &sDescribeTaskExecutionResponse_FoldersDeleted, &sDescribeTaskExecutionResponse_FoldersListed, &sDescribeTaskExecutionResponse_FoldersFailed, &sDescribeTaskExecutionResponse_LaunchTime, &sDescribeTaskExecutionResponse_EndTime}, Hash: &hDescribeTaskExecutionResponse}
+var mDescribeTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskRequest_TaskArn}}
+var mDescribeTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskResponse_TaskArn, &sDescribeTaskResponse_Status, &sDescribeTaskResponse_Name, &sDescribeTaskResponse_CurrentTaskExecutionArn, &sDescribeTaskResponse_SourceLocationArn, &sDescribeTaskResponse_DestinationLocationArn, &sDescribeTaskResponse_CloudWatchLogGroupArn, &sDescribeTaskResponse_SourceNetworkInterfaceArns, &sDescribeTaskResponse_DestinationNetworkInterfaceArns, &sDescribeTaskResponse_Options, &sDescribeTaskResponse_Excludes, &sDescribeTaskResponse_Schedule, &sDescribeTaskResponse_ErrorCode, &sDescribeTaskResponse_ErrorDetail, &sDescribeTaskResponse_CreationTime, &sDescribeTaskResponse_Includes, &sDescribeTaskResponse_ManifestConfig, &sDescribeTaskResponse_TaskReportConfig, &sDescribeTaskResponse_ScheduleDetails, &sDescribeTaskResponse_TaskMode}, Hash: &hDescribeTaskResponse}
+var mListAgentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAgentsRequest_MaxResults, &sListAgentsRequest_NextToken}}
+var mListAgentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAgentsResponse_Agents, &sListAgentsResponse_NextToken}}
+var mListLocationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLocationsRequest_MaxResults, &sListLocationsRequest_NextToken, &sListLocationsRequest_Filters}}
+var mListLocationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLocationsResponse_Locations, &sListLocationsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn, &sListTagsForResourceRequest_MaxResults, &sListTagsForResourceRequest_NextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags, &sListTagsForResourceResponse_NextToken}}
+var mListTaskExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaskExecutionsRequest_TaskArn, &sListTaskExecutionsRequest_MaxResults, &sListTaskExecutionsRequest_NextToken}}
+var mListTaskExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaskExecutionsResponse_TaskExecutions, &sListTaskExecutionsResponse_NextToken}}
+var mListTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksRequest_MaxResults, &sListTasksRequest_NextToken, &sListTasksRequest_Filters}}
+var mListTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksResponse_Tasks, &sListTasksResponse_NextToken}}
+var mStartTaskExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTaskExecutionRequest_TaskArn, &sStartTaskExecutionRequest_OverrideOptions, &sStartTaskExecutionRequest_Includes, &sStartTaskExecutionRequest_Excludes, &sStartTaskExecutionRequest_ManifestConfig, &sStartTaskExecutionRequest_TaskReportConfig, &sStartTaskExecutionRequest_Tags}}
+var mStartTaskExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTaskExecutionResponse_TaskExecutionArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_Keys}}
+var mUpdateAgentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAgentRequest_AgentArn, &sUpdateAgentRequest_Name}}
+var mUpdateLocationAzureBlobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationAzureBlobRequest_LocationArn, &sUpdateLocationAzureBlobRequest_Subdirectory, &sUpdateLocationAzureBlobRequest_AuthenticationType, &sUpdateLocationAzureBlobRequest_SasConfiguration, &sUpdateLocationAzureBlobRequest_FederatedIdentity, &sUpdateLocationAzureBlobRequest_BlobType, &sUpdateLocationAzureBlobRequest_AccessTier, &sUpdateLocationAzureBlobRequest_AgentArns, &sUpdateLocationAzureBlobRequest_CmkSecretConfig, &sUpdateLocationAzureBlobRequest_CustomSecretConfig}, Hash: &hUpdateLocationAzureBlobRequest}
+var mUpdateLocationEfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationEfsRequest_LocationArn, &sUpdateLocationEfsRequest_Subdirectory, &sUpdateLocationEfsRequest_AccessPointArn, &sUpdateLocationEfsRequest_FileSystemAccessRoleArn, &sUpdateLocationEfsRequest_InTransitEncryption}}
+var mUpdateLocationFsxLustreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationFsxLustreRequest_LocationArn, &sUpdateLocationFsxLustreRequest_Subdirectory}}
+var mUpdateLocationFsxOntapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationFsxOntapRequest_LocationArn, &sUpdateLocationFsxOntapRequest_Protocol, &sUpdateLocationFsxOntapRequest_Subdirectory}}
+var mUpdateLocationFsxOpenZfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationFsxOpenZfsRequest_LocationArn, &sUpdateLocationFsxOpenZfsRequest_Protocol, &sUpdateLocationFsxOpenZfsRequest_Subdirectory}}
+var mUpdateLocationFsxWindowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationFsxWindowsRequest_LocationArn, &sUpdateLocationFsxWindowsRequest_Subdirectory, &sUpdateLocationFsxWindowsRequest_Domain, &sUpdateLocationFsxWindowsRequest_User, &sUpdateLocationFsxWindowsRequest_Password, &sUpdateLocationFsxWindowsRequest_CmkSecretConfig, &sUpdateLocationFsxWindowsRequest_CustomSecretConfig}}
+var mUpdateLocationHdfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationHdfsRequest_LocationArn, &sUpdateLocationHdfsRequest_Subdirectory, &sUpdateLocationHdfsRequest_NameNodes, &sUpdateLocationHdfsRequest_BlockSize, &sUpdateLocationHdfsRequest_ReplicationFactor, &sUpdateLocationHdfsRequest_KmsKeyProviderUri, &sUpdateLocationHdfsRequest_QopConfiguration, &sUpdateLocationHdfsRequest_AuthenticationType, &sUpdateLocationHdfsRequest_SimpleUser, &sUpdateLocationHdfsRequest_KerberosPrincipal, &sUpdateLocationHdfsRequest_KerberosKeytab, &sUpdateLocationHdfsRequest_KerberosKrb5Conf, &sUpdateLocationHdfsRequest_AgentArns, &sUpdateLocationHdfsRequest_CmkSecretConfig, &sUpdateLocationHdfsRequest_CustomSecretConfig}, Hash: &hUpdateLocationHdfsRequest}
+var mUpdateLocationNfsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationNfsRequest_LocationArn, &sUpdateLocationNfsRequest_Subdirectory, &sUpdateLocationNfsRequest_ServerHostname, &sUpdateLocationNfsRequest_OnPremConfig, &sUpdateLocationNfsRequest_MountOptions}}
+var mUpdateLocationObjectStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationObjectStorageRequest_LocationArn, &sUpdateLocationObjectStorageRequest_ServerPort, &sUpdateLocationObjectStorageRequest_ServerProtocol, &sUpdateLocationObjectStorageRequest_Subdirectory, &sUpdateLocationObjectStorageRequest_ServerHostname, &sUpdateLocationObjectStorageRequest_AccessKey, &sUpdateLocationObjectStorageRequest_SecretKey, &sUpdateLocationObjectStorageRequest_FederatedIdentity, &sUpdateLocationObjectStorageRequest_AgentArns, &sUpdateLocationObjectStorageRequest_ServerCertificate, &sUpdateLocationObjectStorageRequest_CmkSecretConfig, &sUpdateLocationObjectStorageRequest_CustomSecretConfig}, Hash: &hUpdateLocationObjectStorageRequest}
+var mUpdateLocationS3Request = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationS3Request_LocationArn, &sUpdateLocationS3Request_Subdirectory, &sUpdateLocationS3Request_S3StorageClass, &sUpdateLocationS3Request_S3Config}}
+var mUpdateLocationSmbRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLocationSmbRequest_LocationArn, &sUpdateLocationSmbRequest_Subdirectory, &sUpdateLocationSmbRequest_ServerHostname, &sUpdateLocationSmbRequest_User, &sUpdateLocationSmbRequest_Domain, &sUpdateLocationSmbRequest_Password, &sUpdateLocationSmbRequest_CmkSecretConfig, &sUpdateLocationSmbRequest_CustomSecretConfig, &sUpdateLocationSmbRequest_AgentArns, &sUpdateLocationSmbRequest_MountOptions, &sUpdateLocationSmbRequest_AuthenticationType, &sUpdateLocationSmbRequest_DnsIpAddresses, &sUpdateLocationSmbRequest_KerberosPrincipal, &sUpdateLocationSmbRequest_KerberosKeytab, &sUpdateLocationSmbRequest_KerberosKrb5Conf}, Hash: &hUpdateLocationSmbRequest}
+var mUpdateTaskExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTaskExecutionRequest_TaskExecutionArn, &sUpdateTaskExecutionRequest_Options}}
+var mUpdateTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTaskRequest_TaskArn, &sUpdateTaskRequest_Options, &sUpdateTaskRequest_Excludes, &sUpdateTaskRequest_Schedule, &sUpdateTaskRequest_Name, &sUpdateTaskRequest_CloudWatchLogGroupArn, &sUpdateTaskRequest_Includes, &sUpdateTaskRequest_ManifestConfig, &sUpdateTaskRequest_TaskReportConfig}, Hash: &hUpdateTaskRequest}
+
+var hOperator = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 9, 0, 0, 0, 0, 0, 0, 0,
+	10, 0, 5, 6, 7, 8, 0, 0,
+}}
+var hOptions = smithy.MemberHash{Seed: 39, Slots: []uint16{
+	0, 7, 0, 15, 5, 0, 9, 0, 16, 8, 3, 0, 0, 2, 11, 0, 0, 4, 0, 0, 12, 14, 0, 6,
+	0, 10, 1, 0, 0, 0, 13, 0,
+}}
+var hTaskExecutionResultDetail = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 9, 0, 4, 0, 0, 0, 0, 3, 8, 7, 0, 0,
+	2, 0, 0, 1, 0, 0, 0, 0,
+}}
+var hCreateLocationAzureBlobRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 9, 8, 6, 10, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 7, 0, 0, 5,
+	2, 0, 0, 4, 11, 0, 0, 0,
+}}
+var hCreateLocationFsxWindowsRequest = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 3, 9, 0, 0, 5, 0, 6, 0, 0, 0, 0, 2, 0, 7, 4, 0, 0, 0, 8, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 0,
+}}
+var hCreateLocationHdfsRequest = smithy.MemberHash{Seed: 59, Slots: []uint16{
+	0, 3, 5, 0, 0, 9, 13, 0, 14, 0, 0, 0, 0, 0, 0, 2, 1, 6, 4, 12, 0, 10, 0, 0,
+	7, 15, 0, 0, 8, 0, 0, 11,
+}}
+var hCreateLocationObjectStorageRequest = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	13, 7, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 2, 0, 1, 10, 0, 0, 0, 0, 0, 8, 9, 12,
+	6, 3, 0, 11, 0, 0, 0, 0,
+}}
+var hCreateLocationSmbRequest = smithy.MemberHash{Seed: 177, Slots: []uint16{
+	0, 0, 10, 0, 8, 11, 0, 0, 0, 0, 0, 6, 14, 9, 0, 3, 0, 0, 0, 2, 13, 5, 0, 7,
+	15, 0, 4, 0, 0, 0, 12, 1,
+}}
+var hCreateTaskRequest = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 3, 8, 0, 0, 2, 4, 12, 0, 11, 10, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+	0, 1, 0, 0, 0, 5, 0, 7,
+}}
+var hDescribeLocationAzureBlobResponse = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 11, 0, 0, 1, 3, 0, 0, 4, 0, 0, 0, 0, 9, 0, 8, 0, 0, 0, 0, 5, 0, 0,
+	7, 2, 6, 0, 0, 0, 10, 0,
+}}
+var hDescribeLocationFsxWindowsResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	4, 6, 0, 2, 0, 9, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 8, 0, 0, 0, 5, 0,
+	0, 0, 0, 0, 0, 0, 7, 0,
+}}
+var hDescribeLocationHdfsResponse = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 5, 0, 0, 14, 0, 0, 0, 12, 4, 3, 11, 0, 9, 0, 0, 0, 0, 7, 0, 10, 0, 2, 0,
+	8, 13, 0, 1, 6, 0, 15, 0,
+}}
+var hDescribeLocationObjectStorageResponse = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 9, 7, 0, 4, 0, 11, 1, 3, 8, 5, 12, 0, 0, 0, 6, 0, 0, 0,
+	2, 10, 0, 0, 0, 0, 0, 0,
+}}
+var hDescribeLocationSmbResponse = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	2, 0, 7, 0, 10, 8, 5, 13, 0, 6, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0,
+	12, 0, 0, 9, 0, 1, 0, 0,
+}}
+var hDescribeTaskExecutionResponse = smithy.MemberHash{Seed: 33, Slots: []uint16{
+	0, 2, 8, 0, 0, 11, 0, 0, 0, 0, 26, 0, 18, 19, 0, 24, 0, 0, 5, 16, 0, 0, 0, 27,
+	23, 0, 0, 0, 0, 0, 31, 0, 22, 0, 0, 6, 0, 0, 29, 0, 3, 0, 0, 0, 0, 0, 17, 0,
+	0, 0, 0, 34, 10, 21, 1, 0, 0, 0, 0, 33, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 20, 0, 0, 25, 13, 0, 0, 0, 0, 14, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0,
+	15, 0, 0, 0, 0, 0, 0, 9, 0, 4, 0, 35, 12, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 7,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hDescribeTaskResponse = smithy.MemberHash{Seed: 50, Slots: []uint16{
+	0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 5,
+	0, 0, 14, 0, 0, 0, 13, 0, 0, 0, 19, 0, 0, 0, 0, 0, 3, 0, 0, 0, 18, 1, 6, 17,
+	16, 0, 0, 2, 0, 20, 11, 8, 0, 0, 9, 12, 10, 0, 0, 0,
+}}
+var hUpdateLocationAzureBlobRequest = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 3, 9, 0, 1, 7, 0, 2, 0, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 5, 0, 0, 8,
+	0, 0, 0, 0, 0, 0, 4, 0,
+}}
+var hUpdateLocationHdfsRequest = smithy.MemberHash{Seed: 59, Slots: []uint16{
+	0, 4, 6, 0, 0, 10, 0, 0, 14, 0, 0, 0, 0, 0, 0, 3, 2, 7, 5, 13, 0, 11, 0, 0,
+	8, 15, 1, 0, 9, 0, 0, 12,
+}}
+var hUpdateLocationObjectStorageRequest = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 1, 0, 5, 12, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 9, 0, 2, 0, 0, 0, 6, 11,
+	0, 0, 10, 0, 7, 0, 0, 3,
+}}
+var hUpdateLocationSmbRequest = smithy.MemberHash{Seed: 112, Slots: []uint16{
+	0, 0, 7, 0, 5, 11, 8, 0, 0, 0, 14, 6, 0, 10, 2, 0, 15, 0, 4, 3, 0, 0, 0, 0,
+	0, 1, 12, 0, 0, 9, 13, 0,
+}}
+var hUpdateTaskRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 1, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 7, 0, 0, 0, 0, 0, 3, 0, 4, 0, 0,
+	0, 8, 9, 0, 2, 0, 0, 0,
+}}
+
+var sCancelTaskExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTaskExecution, Type: smithy.ShapeTypeOperation, Ext: &eCancelTaskExecution})
+var sCreateAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgent, Type: smithy.ShapeTypeOperation, Ext: &eCreateAgent})
+var sCreateLocationAzureBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationAzureBlob, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationAzureBlob})
+var sCreateLocationEfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationEfs, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationEfs})
+var sCreateLocationFsxLustre = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxLustre, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationFsxLustre})
+var sCreateLocationFsxOntap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOntap, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationFsxOntap})
+var sCreateLocationFsxOpenZfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOpenZfs, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationFsxOpenZfs})
+var sCreateLocationFsxWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxWindows, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationFsxWindows})
+var sCreateLocationHdfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationHdfs, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationHdfs})
+var sCreateLocationNfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationNfs, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationNfs})
+var sCreateLocationObjectStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationObjectStorage, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationObjectStorage})
+var sCreateLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationS3, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationS3})
+var sCreateLocationSmb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationSmb, Type: smithy.ShapeTypeOperation, Ext: &eCreateLocationSmb})
+var sCreateTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTask, Type: smithy.ShapeTypeOperation, Ext: &eCreateTask})
+var sDeleteAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAgent, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAgent})
+var sDeleteLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLocation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLocation})
+var sDeleteTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTask, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTask})
+var sDescribeAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgent, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAgent})
+var sDescribeLocationAzureBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationAzureBlob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationAzureBlob})
+var sDescribeLocationEfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationEfs, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationEfs})
+var sDescribeLocationFsxLustre = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxLustre, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationFsxLustre})
+var sDescribeLocationFsxOntap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOntap, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationFsxOntap})
+var sDescribeLocationFsxOpenZfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOpenZfs, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationFsxOpenZfs})
+var sDescribeLocationFsxWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxWindows, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationFsxWindows})
+var sDescribeLocationHdfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationHdfs, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationHdfs})
+var sDescribeLocationNfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationNfs, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationNfs})
+var sDescribeLocationObjectStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationObjectStorage, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationObjectStorage})
+var sDescribeLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationS3, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationS3})
+var sDescribeLocationSmb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationSmb, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLocationSmb})
+var sDescribeTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTask, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTask})
+var sDescribeTaskExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskExecution, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTaskExecution})
+var sListAgents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgents, Type: smithy.ShapeTypeOperation, Ext: &eListAgents})
+var sListLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocations, Type: smithy.ShapeTypeOperation, Ext: &eListLocations})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTaskExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaskExecutions, Type: smithy.ShapeTypeOperation, Ext: &eListTaskExecutions})
+var sListTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasks, Type: smithy.ShapeTypeOperation, Ext: &eListTasks})
+var sStartTaskExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTaskExecution, Type: smithy.ShapeTypeOperation, Ext: &eStartTaskExecution})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgent, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAgent})
+var sUpdateLocationAzureBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationAzureBlob, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationAzureBlob})
+var sUpdateLocationEfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationEfs, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationEfs})
+var sUpdateLocationFsxLustre = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxLustre, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationFsxLustre})
+var sUpdateLocationFsxOntap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOntap, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationFsxOntap})
+var sUpdateLocationFsxOpenZfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOpenZfs, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationFsxOpenZfs})
+var sUpdateLocationFsxWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxWindows, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationFsxWindows})
+var sUpdateLocationHdfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationHdfs, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationHdfs})
+var sUpdateLocationNfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationNfs, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationNfs})
+var sUpdateLocationObjectStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationObjectStorage, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationObjectStorage})
+var sUpdateLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationS3, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationS3})
+var sUpdateLocationSmb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationSmb, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLocationSmb})
+var sUpdateTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTask, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTask})
+var sUpdateTaskExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTaskExecution, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTaskExecution})
+var s_FmrsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FmrsService, Type: smithy.ShapeTypeService, Ext: &e_FmrsService})
+var s_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationKey, Type: smithy.ShapeTypeString, Ext: &e_ActivationKey})
+var s_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &e_AgentArn})
+var s_AgentArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &e_AgentArnList})
+var s_AgentArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &e_AgentArnList_member})
+var s_AgentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentList, Members: &m_AgentList, Type: smithy.ShapeTypeList, Ext: &e_AgentList})
+var s_AgentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAgentListEntry, Members: &mAgentListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_AgentList_member})
+var sAgentListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentListEntry, Members: &mAgentListEntry, Type: smithy.ShapeTypeStructure, Ext: &eAgentListEntry})
+var sAgentListEntry_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eAgentListEntry_AgentArn})
+var sAgentListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eAgentListEntry_Name})
+var sAgentListEntry_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAgentListEntry_Status})
+var sAgentListEntry_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeStructure, Ext: &eAgentListEntry_Platform})
+var sAgentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAgentStatus})
+var sAgentStatus_ONLINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_ONLINE})
+var sAgentStatus_OFFLINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFLINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_OFFLINE})
+var s_AgentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentVersion, Type: smithy.ShapeTypeString, Ext: &e_AgentVersion})
+var sAtime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAtime, Members: &mAtime, Type: smithy.ShapeTypeEnum, Ext: &eAtime})
+var sAtime_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAtime_NONE})
+var sAtime_BEST_EFFORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_EFFORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAtime_BEST_EFFORT})
+var sAzureAccessTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureAccessTier, Members: &mAzureAccessTier, Type: smithy.ShapeTypeEnum, Ext: &eAzureAccessTier})
+var sAzureAccessTier_HOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureAccessTier_HOT})
+var sAzureAccessTier_COOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureAccessTier_COOL})
+var sAzureAccessTier_ARCHIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureAccessTier_ARCHIVE})
+var sAzureBlobAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureBlobAuthenticationType, Members: &mAzureBlobAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eAzureBlobAuthenticationType})
+var sAzureBlobAuthenticationType_SAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureBlobAuthenticationType_SAS})
+var sAzureBlobAuthenticationType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureBlobAuthenticationType_NONE})
+var sAzureBlobAuthenticationType_OIDC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OIDC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureBlobAuthenticationType_OIDC})
+var s_AzureBlobContainerUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureBlobContainerUrl, Type: smithy.ShapeTypeString, Ext: &e_AzureBlobContainerUrl})
+var sAzureBlobSasConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureBlobSasConfiguration, Members: &mAzureBlobSasConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAzureBlobSasConfiguration})
+var sAzureBlobSasConfiguration_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_AzureBlobSasToken, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eAzureBlobSasConfiguration_Token})
+var s_AzureBlobSasToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureBlobSasToken, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_AzureBlobSasToken})
+var s_AzureBlobSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureBlobSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_AzureBlobSubdirectory})
+var sAzureBlobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureBlobType, Members: &mAzureBlobType, Type: smithy.ShapeTypeEnum, Ext: &eAzureBlobType})
+var sAzureBlobType_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAzureBlobType_BLOCK})
+var sAzureFederatedIdentityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureFederatedIdentityConfig, Members: &mAzureFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eAzureFederatedIdentityConfig})
+var sAzureFederatedIdentityConfig_AwsIamRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsIamRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eAzureFederatedIdentityConfig_AwsIamRole})
+var sAzureFederatedIdentityConfig_AzureOidc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AzureOidc", ID: &iAzureOidcConfig, Members: &mAzureOidcConfig, Type: smithy.ShapeTypeStructure, Ext: &eAzureFederatedIdentityConfig_AzureOidc})
+var s_AzureGuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureGuidString, Type: smithy.ShapeTypeString, Ext: &e_AzureGuidString})
+var sAzureOidcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzureOidcConfig, Members: &mAzureOidcConfig, Type: smithy.ShapeTypeStructure, Ext: &eAzureOidcConfig})
+var sAzureOidcConfig_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenantId", ID: &i_AzureGuidString, Type: smithy.ShapeTypeString, Ext: &eAzureOidcConfig_TenantId})
+var sAzureOidcConfig_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientId", ID: &i_AzureGuidString, Type: smithy.ShapeTypeString, Ext: &eAzureOidcConfig_ClientId})
+var s_BytesPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BytesPerSecond, Type: smithy.ShapeTypeLong, Ext: &e_BytesPerSecond})
+var sCmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCmkSecretConfig})
+var sCmkSecretConfig_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eCmkSecretConfig_SecretArn})
+var sCmkSecretConfig_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCmkSecretConfig_KmsKeyArn})
+var sCustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCustomSecretConfig})
+var sCustomSecretConfig_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eCustomSecretConfig_SecretArn})
+var sCustomSecretConfig_SecretAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretAccessRoleArn", ID: &i_IamRoleArnOrEmptyString, Type: smithy.ShapeTypeString, Ext: &eCustomSecretConfig_SecretAccessRoleArn})
+var s_DestinationNetworkInterfaceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationNetworkInterfaceArns, Members: &m_DestinationNetworkInterfaceArns, Type: smithy.ShapeTypeList, Ext: &e_DestinationNetworkInterfaceArns})
+var s_DestinationNetworkInterfaceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkInterfaceArn, Type: smithy.ShapeTypeString, Ext: &e_DestinationNetworkInterfaceArns_member})
+var s_DnsIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsIpList, Members: &m_DnsIpList, Type: smithy.ShapeTypeList, Ext: &e_DnsIpList})
+var s_DnsIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServerIpAddress, Type: smithy.ShapeTypeString, Ext: &e_DnsIpList_member})
+var s_Duration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Duration, Type: smithy.ShapeTypeLong, Ext: &e_Duration})
+var sEc2Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEc2Config, Members: &mEc2Config, Type: smithy.ShapeTypeStructure, Ext: &eEc2Config})
+var sEc2Config_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArn", ID: &i_Ec2SubnetArn, Type: smithy.ShapeTypeString, Ext: &eEc2Config_SubnetArn})
+var sEc2Config_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eEc2Config_SecurityGroupArns})
+var s_Ec2SecurityGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2SecurityGroupArn, Type: smithy.ShapeTypeString, Ext: &e_Ec2SecurityGroupArn})
+var s_Ec2SecurityGroupArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &e_Ec2SecurityGroupArnList})
+var s_Ec2SecurityGroupArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ec2SecurityGroupArn, Type: smithy.ShapeTypeString, Ext: &e_Ec2SecurityGroupArnList_member})
+var s_Ec2SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2SubnetArn, Type: smithy.ShapeTypeString, Ext: &e_Ec2SubnetArn})
+var s_EfsAccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EfsAccessPointArn, Type: smithy.ShapeTypeString, Ext: &e_EfsAccessPointArn})
+var s_EfsFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EfsFilesystemArn, Type: smithy.ShapeTypeString, Ext: &e_EfsFilesystemArn})
+var sEfsInTransitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEfsInTransitEncryption, Members: &mEfsInTransitEncryption, Type: smithy.ShapeTypeEnum, Ext: &eEfsInTransitEncryption})
+var sEfsInTransitEncryption_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEfsInTransitEncryption_NONE})
+var sEfsInTransitEncryption_TLS1_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS1_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEfsInTransitEncryption_TLS1_2})
+var s_EfsSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_EfsSubdirectory})
+var s_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &e_Endpoint})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointType})
+var sEndpointType_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_PUBLIC})
+var sEndpointType_PRIVATE_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_PRIVATE_LINK})
+var sEndpointType_FIPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_FIPS})
+var sEndpointType_FIPS_PRIVATE_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIPS_PRIVATE_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_FIPS_PRIVATE_LINK})
+var s_FilterAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_FilterAttributeValue})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterRule, Members: &mFilterRule, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var sFilterRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterRule, Members: &mFilterRule, Type: smithy.ShapeTypeStructure, Ext: &eFilterRule})
+var sFilterRule_FilterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterType", ID: &iFilterType, Members: &mFilterType, Type: smithy.ShapeTypeEnum, Ext: &eFilterRule_FilterType})
+var sFilterRule_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &eFilterRule_Value})
+var sFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterType, Members: &mFilterType, Type: smithy.ShapeTypeEnum, Ext: &eFilterType})
+var sFilterType_SIMPLE_PATTERN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLE_PATTERN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterType_SIMPLE_PATTERN})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValues_member})
+var s_FsxFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FsxFilesystemArn, Type: smithy.ShapeTypeString, Ext: &e_FsxFilesystemArn})
+var s_FsxLustreSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FsxLustreSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_FsxLustreSubdirectory})
+var s_FsxOntapSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FsxOntapSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_FsxOntapSubdirectory})
+var s_FsxOpenZfsSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FsxOpenZfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_FsxOpenZfsSubdirectory})
+var sFsxProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocol})
+var sFsxProtocol_NFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS", ID: &iFsxProtocolNfs, Members: &mFsxProtocolNfs, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocol_NFS})
+var sFsxProtocol_SMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB", ID: &iFsxProtocolSmb, Members: &mFsxProtocolSmb, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocol_SMB})
+var sFsxProtocolNfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFsxProtocolNfs, Members: &mFsxProtocolNfs, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolNfs})
+var sFsxProtocolNfs_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iNfsMountOptions, Members: &mNfsMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolNfs_MountOptions})
+var sFsxProtocolSmb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFsxProtocolSmb, Members: &mFsxProtocolSmb, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolSmb})
+var sFsxProtocolSmb_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eFsxProtocolSmb_Domain})
+var sFsxProtocolSmb_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolSmb_MountOptions})
+var sFsxProtocolSmb_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eFsxProtocolSmb_Password})
+var sFsxProtocolSmb_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eFsxProtocolSmb_User})
+var sFsxProtocolSmb_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolSmb_ManagedSecretConfig})
+var sFsxProtocolSmb_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolSmb_CmkSecretConfig})
+var sFsxProtocolSmb_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eFsxProtocolSmb_CustomSecretConfig})
+var sFsxUpdateProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFsxUpdateProtocol, Members: &mFsxUpdateProtocol, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocol})
+var sFsxUpdateProtocol_NFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS", ID: &iFsxProtocolNfs, Members: &mFsxProtocolNfs, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocol_NFS})
+var sFsxUpdateProtocol_SMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB", ID: &iFsxUpdateProtocolSmb, Members: &mFsxUpdateProtocolSmb, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocol_SMB})
+var sFsxUpdateProtocolSmb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFsxUpdateProtocolSmb, Members: &mFsxUpdateProtocolSmb, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocolSmb})
+var sFsxUpdateProtocolSmb_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_UpdateSmbDomain, Type: smithy.ShapeTypeString, Ext: &eFsxUpdateProtocolSmb_Domain})
+var sFsxUpdateProtocolSmb_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocolSmb_MountOptions})
+var sFsxUpdateProtocolSmb_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eFsxUpdateProtocolSmb_Password})
+var sFsxUpdateProtocolSmb_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eFsxUpdateProtocolSmb_User})
+var sFsxUpdateProtocolSmb_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocolSmb_CmkSecretConfig})
+var sFsxUpdateProtocolSmb_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eFsxUpdateProtocolSmb_CustomSecretConfig})
+var s_FsxWindowsSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FsxWindowsSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_FsxWindowsSubdirectory})
+var sGid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGid, Members: &mGid, Type: smithy.ShapeTypeEnum, Ext: &eGid})
+var sGid_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGid_NONE})
+var sGid_INT_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGid_INT_VALUE})
+var sGid_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGid_NAME})
+var sGid_BOTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGid_BOTH})
+var s_GoogleIdentityFederationResourceString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GoogleIdentityFederationResourceString, Type: smithy.ShapeTypeString, Ext: &e_GoogleIdentityFederationResourceString})
+var sGoogleOidcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleOidcConfig, Members: &mGoogleOidcConfig, Type: smithy.ShapeTypeStructure, Ext: &eGoogleOidcConfig})
+var sGoogleOidcConfig_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectNameString, Type: smithy.ShapeTypeString, Ext: &eGoogleOidcConfig_ProjectName})
+var sGoogleOidcConfig_ProjectNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectNumber", ID: &i_ProjectNumberString, Type: smithy.ShapeTypeString, Ext: &eGoogleOidcConfig_ProjectNumber})
+var sGoogleOidcConfig_IdentityPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolName", ID: &i_GoogleIdentityFederationResourceString, Type: smithy.ShapeTypeString, Ext: &eGoogleOidcConfig_IdentityPoolName})
+var sGoogleOidcConfig_IdentityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderName", ID: &i_GoogleIdentityFederationResourceString, Type: smithy.ShapeTypeString, Ext: &eGoogleOidcConfig_IdentityProviderName})
+var sHdfsAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHdfsAuthenticationType, Members: &mHdfsAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eHdfsAuthenticationType})
+var sHdfsAuthenticationType_SIMPLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsAuthenticationType_SIMPLE})
+var sHdfsAuthenticationType_KERBEROS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KERBEROS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsAuthenticationType_KERBEROS})
+var s_HdfsBlockSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsBlockSize, Type: smithy.ShapeTypeInteger, Ext: &e_HdfsBlockSize})
+var sHdfsDataTransferProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHdfsDataTransferProtection, Members: &mHdfsDataTransferProtection, Type: smithy.ShapeTypeEnum, Ext: &eHdfsDataTransferProtection})
+var sHdfsDataTransferProtection_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsDataTransferProtection_DISABLED})
+var sHdfsDataTransferProtection_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsDataTransferProtection_AUTHENTICATION})
+var sHdfsDataTransferProtection_INTEGRITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTEGRITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsDataTransferProtection_INTEGRITY})
+var sHdfsDataTransferProtection_PRIVACY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVACY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsDataTransferProtection_PRIVACY})
+var sHdfsNameNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHdfsNameNode, Members: &mHdfsNameNode, Type: smithy.ShapeTypeStructure, Ext: &eHdfsNameNode})
+var sHdfsNameNode_Hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hostname", ID: &i_HdfsServerHostname, Type: smithy.ShapeTypeString, Ext: &eHdfsNameNode_Hostname})
+var sHdfsNameNode_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_HdfsServerPort, Type: smithy.ShapeTypeInteger, Ext: &eHdfsNameNode_Port})
+var s_HdfsNameNodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsNameNodeList, Members: &m_HdfsNameNodeList, Type: smithy.ShapeTypeList, Ext: &e_HdfsNameNodeList})
+var s_HdfsNameNodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHdfsNameNode, Members: &mHdfsNameNode, Type: smithy.ShapeTypeStructure, Ext: &e_HdfsNameNodeList_member})
+var s_HdfsReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsReplicationFactor, Type: smithy.ShapeTypeInteger, Ext: &e_HdfsReplicationFactor})
+var sHdfsRpcProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHdfsRpcProtection, Members: &mHdfsRpcProtection, Type: smithy.ShapeTypeEnum, Ext: &eHdfsRpcProtection})
+var sHdfsRpcProtection_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsRpcProtection_DISABLED})
+var sHdfsRpcProtection_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsRpcProtection_AUTHENTICATION})
+var sHdfsRpcProtection_INTEGRITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTEGRITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsRpcProtection_INTEGRITY})
+var sHdfsRpcProtection_PRIVACY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVACY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHdfsRpcProtection_PRIVACY})
+var s_HdfsServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsServerHostname, Type: smithy.ShapeTypeString, Ext: &e_HdfsServerHostname})
+var s_HdfsServerPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsServerPort, Type: smithy.ShapeTypeInteger, Ext: &e_HdfsServerPort})
+var s_HdfsSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_HdfsSubdirectory})
+var s_HdfsUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HdfsUser, Type: smithy.ShapeTypeString, Ext: &e_HdfsUser})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var s_IamRoleArnOrEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArnOrEmptyString, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArnOrEmptyString})
+var s_InputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &e_InputTagList})
+var s_InputTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagListEntry, Members: &mTagListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_InputTagList_member})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalException})
+var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalException_message})
+var sInternalException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInternalException_errorCode})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sInvalidRequestException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_errorCode})
+var sInvalidRequestException_datasyncErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasyncErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_datasyncErrorCode})
+var s_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &e_ItemCount})
+var s_KerberosKeytabFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KerberosKeytabFile, Type: smithy.ShapeTypeBlob, Ext: &e_KerberosKeytabFile})
+var s_KerberosKrb5ConfFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KerberosKrb5ConfFile, Type: smithy.ShapeTypeBlob, Ext: &e_KerberosKrb5ConfFile})
+var s_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &e_KerberosPrincipal})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_KmsKeyProviderUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyProviderUri, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyProviderUri})
+var s_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &e_LocationArn})
+var sLocationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationFilter, Members: &mLocationFilter, Type: smithy.ShapeTypeStructure, Ext: &eLocationFilter})
+var sLocationFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iLocationFilterName, Members: &mLocationFilterName, Type: smithy.ShapeTypeEnum, Ext: &eLocationFilter_Name})
+var sLocationFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eLocationFilter_Values})
+var sLocationFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eLocationFilter_Operator})
+var sLocationFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationFilterName, Members: &mLocationFilterName, Type: smithy.ShapeTypeEnum, Ext: &eLocationFilterName})
+var sLocationFilterName_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationFilterName_LocationUri})
+var sLocationFilterName_LocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationType", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationFilterName_LocationType})
+var sLocationFilterName_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationFilterName_CreationTime})
+var s_LocationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationFilters, Members: &m_LocationFilters, Type: smithy.ShapeTypeList, Ext: &e_LocationFilters})
+var s_LocationFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationFilter, Members: &mLocationFilter, Type: smithy.ShapeTypeStructure, Ext: &e_LocationFilters_member})
+var s_LocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &e_LocationList})
+var s_LocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationListEntry, Members: &mLocationListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_LocationList_member})
+var sLocationListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationListEntry, Members: &mLocationListEntry, Type: smithy.ShapeTypeStructure, Ext: &eLocationListEntry})
+var sLocationListEntry_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eLocationListEntry_LocationArn})
+var sLocationListEntry_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eLocationListEntry_LocationUri})
+var s_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &e_LocationUri})
+var s_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &e_LogGroupArn})
+var sLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogLevel, Members: &mLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eLogLevel})
+var sLogLevel_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogLevel_OFF})
+var sLogLevel_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogLevel_BASIC})
+var sLogLevel_TRANSFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogLevel_TRANSFER})
+var s_long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &e_long})
+var sManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eManagedSecretConfig})
+var sManagedSecretConfig_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eManagedSecretConfig_SecretArn})
+var sManifestAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestAction, Members: &mManifestAction, Type: smithy.ShapeTypeEnum, Ext: &eManifestAction})
+var sManifestAction_TRANSFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestAction_TRANSFER})
+var sManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eManifestConfig})
+var sManifestConfig_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iManifestAction, Members: &mManifestAction, Type: smithy.ShapeTypeEnum, Ext: &eManifestConfig_Action})
+var sManifestConfig_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iManifestFormat, Members: &mManifestFormat, Type: smithy.ShapeTypeEnum, Ext: &eManifestConfig_Format})
+var sManifestConfig_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iSourceManifestConfig, Members: &mSourceManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eManifestConfig_Source})
+var sManifestFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestFormat, Members: &mManifestFormat, Type: smithy.ShapeTypeEnum, Ext: &eManifestFormat})
+var sManifestFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestFormat_CSV})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMtime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMtime, Members: &mMtime, Type: smithy.ShapeTypeEnum, Ext: &eMtime})
+var sMtime_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMtime_NONE})
+var sMtime_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMtime_PRESERVE})
+var s_NetworkInterfaceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceArn, Type: smithy.ShapeTypeString, Ext: &e_NetworkInterfaceArn})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNfsMountOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNfsMountOptions, Members: &mNfsMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eNfsMountOptions})
+var sNfsMountOptions_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &iNfsVersion, Members: &mNfsVersion, Type: smithy.ShapeTypeEnum, Ext: &eNfsMountOptions_Version})
+var s_NfsSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_NfsSubdirectory})
+var sNfsVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNfsVersion, Members: &mNfsVersion, Type: smithy.ShapeTypeEnum, Ext: &eNfsVersion})
+var sNfsVersion_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNfsVersion_AUTOMATIC})
+var sNfsVersion_NFS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNfsVersion_NFS3})
+var sNfsVersion_NFS4_0 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS4_0", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNfsVersion_NFS4_0})
+var sNfsVersion_NFS4_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS4_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNfsVersion_NFS4_1})
+var sNfsVersion_NFS4_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS4_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNfsVersion_NFS4_2})
+var sObjectMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectMetadata, Members: &mObjectMetadata, Type: smithy.ShapeTypeEnum, Ext: &eObjectMetadata})
+var sObjectMetadata_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectMetadata_PRESERVE})
+var sObjectMetadata_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectMetadata_NONE})
+var s_ObjectStorageAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectStorageAccessKey, Type: smithy.ShapeTypeString, Ext: &e_ObjectStorageAccessKey})
+var s_ObjectStorageBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectStorageBucketName, Type: smithy.ShapeTypeString, Ext: &e_ObjectStorageBucketName})
+var s_ObjectStorageCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectStorageCertificate, Type: smithy.ShapeTypeBlob, Ext: &e_ObjectStorageCertificate})
+var sObjectStorageExternalIdentityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectStorageExternalIdentityConfig, Members: &mObjectStorageExternalIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageExternalIdentityConfig})
+var sObjectStorageExternalIdentityConfig_GoogleOidc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleOidc", ID: &iGoogleOidcConfig, Members: &mGoogleOidcConfig, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageExternalIdentityConfig_GoogleOidc})
+var sObjectStorageFederatedIdentityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectStorageFederatedIdentityConfig, Members: &mObjectStorageFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageFederatedIdentityConfig})
+var sObjectStorageFederatedIdentityConfig_AwsIamRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsIamRole", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eObjectStorageFederatedIdentityConfig_AwsIamRole})
+var sObjectStorageFederatedIdentityConfig_ExternalIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalIdentity", ID: &iObjectStorageExternalIdentityConfig, Members: &mObjectStorageExternalIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageFederatedIdentityConfig_ExternalIdentity})
+var s_ObjectStorageSecretKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectStorageSecretKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ObjectStorageSecretKey})
+var s_ObjectStorageServerPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectStorageServerPort, Type: smithy.ShapeTypeInteger, Ext: &e_ObjectStorageServerPort})
+var sObjectStorageServerProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectStorageServerProtocol, Members: &mObjectStorageServerProtocol, Type: smithy.ShapeTypeEnum, Ext: &eObjectStorageServerProtocol})
+var sObjectStorageServerProtocol_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageServerProtocol_HTTPS})
+var sObjectStorageServerProtocol_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectStorageServerProtocol_HTTP})
+var sObjectTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTags, Members: &mObjectTags, Type: smithy.ShapeTypeEnum, Ext: &eObjectTags})
+var sObjectTags_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTags_PRESERVE})
+var sObjectTags_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTags_NONE})
+var sObjectVersionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectVersionIds, Members: &mObjectVersionIds, Type: smithy.ShapeTypeEnum, Ext: &eObjectVersionIds})
+var sObjectVersionIds_INCLUDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCLUDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectVersionIds_INCLUDE})
+var sObjectVersionIds_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectVersionIds_NONE})
+var sOnPremConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnPremConfig, Members: &mOnPremConfig, Type: smithy.ShapeTypeStructure, Ext: &eOnPremConfig})
+var sOnPremConfig_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eOnPremConfig_AgentArns})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eOperator})
+var sOperator_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_EQ})
+var sOperator_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_NE})
+var sOperator_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_IN})
+var sOperator_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_LE})
+var sOperator_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_LT})
+var sOperator_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_GE})
+var sOperator_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_GT})
+var sOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_CONTAINS})
+var sOperator_NOT_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_NOT_CONTAINS})
+var sOperator_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_BEGINS_WITH})
+var sOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eOptions})
+var sOptions_VerifyMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyMode", ID: &iVerifyMode, Members: &mVerifyMode, Type: smithy.ShapeTypeEnum, Ext: &eOptions_VerifyMode})
+var sOptions_OverwriteMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverwriteMode", ID: &iOverwriteMode, Members: &mOverwriteMode, Type: smithy.ShapeTypeEnum, Ext: &eOptions_OverwriteMode})
+var sOptions_Atime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Atime", ID: &iAtime, Members: &mAtime, Type: smithy.ShapeTypeEnum, Ext: &eOptions_Atime})
+var sOptions_Mtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mtime", ID: &iMtime, Members: &mMtime, Type: smithy.ShapeTypeEnum, Ext: &eOptions_Mtime})
+var sOptions_Uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uid", ID: &iUid, Members: &mUid, Type: smithy.ShapeTypeEnum, Ext: &eOptions_Uid})
+var sOptions_Gid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gid", ID: &iGid, Members: &mGid, Type: smithy.ShapeTypeEnum, Ext: &eOptions_Gid})
+var sOptions_PreserveDeletedFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveDeletedFiles", ID: &iPreserveDeletedFiles, Members: &mPreserveDeletedFiles, Type: smithy.ShapeTypeEnum, Ext: &eOptions_PreserveDeletedFiles})
+var sOptions_PreserveDevices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveDevices", ID: &iPreserveDevices, Members: &mPreserveDevices, Type: smithy.ShapeTypeEnum, Ext: &eOptions_PreserveDevices})
+var sOptions_PosixPermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixPermissions", ID: &iPosixPermissions, Members: &mPosixPermissions, Type: smithy.ShapeTypeEnum, Ext: &eOptions_PosixPermissions})
+var sOptions_BytesPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesPerSecond", ID: &i_BytesPerSecond, Type: smithy.ShapeTypeLong, Ext: &eOptions_BytesPerSecond})
+var sOptions_TaskQueueing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskQueueing", ID: &iTaskQueueing, Members: &mTaskQueueing, Type: smithy.ShapeTypeEnum, Ext: &eOptions_TaskQueueing})
+var sOptions_LogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogLevel", ID: &iLogLevel, Members: &mLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eOptions_LogLevel})
+var sOptions_TransferMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferMode", ID: &iTransferMode, Members: &mTransferMode, Type: smithy.ShapeTypeEnum, Ext: &eOptions_TransferMode})
+var sOptions_SecurityDescriptorCopyFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityDescriptorCopyFlags", ID: &iSmbSecurityDescriptorCopyFlags, Members: &mSmbSecurityDescriptorCopyFlags, Type: smithy.ShapeTypeEnum, Ext: &eOptions_SecurityDescriptorCopyFlags})
+var sOptions_ObjectTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectTags", ID: &iObjectTags, Members: &mObjectTags, Type: smithy.ShapeTypeEnum, Ext: &eOptions_ObjectTags})
+var sOptions_ObjectMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectMetadata", ID: &iObjectMetadata, Members: &mObjectMetadata, Type: smithy.ShapeTypeEnum, Ext: &eOptions_ObjectMetadata})
+var s_OutputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputTagList, Members: &m_OutputTagList, Type: smithy.ShapeTypeList, Ext: &e_OutputTagList})
+var s_OutputTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagListEntry, Members: &mTagListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_OutputTagList_member})
+var sOverwriteMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverwriteMode, Members: &mOverwriteMode, Type: smithy.ShapeTypeEnum, Ext: &eOverwriteMode})
+var sOverwriteMode_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverwriteMode_ALWAYS})
+var sOverwriteMode_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverwriteMode_NEVER})
+var sPhaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhaseStatus, Members: &mPhaseStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhaseStatus})
+var sPhaseStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhaseStatus_PENDING})
+var sPhaseStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhaseStatus_SUCCESS})
+var sPhaseStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhaseStatus_ERROR})
+var sPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeStructure, Ext: &ePlatform})
+var sPlatform_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_AgentVersion, Type: smithy.ShapeTypeString, Ext: &ePlatform_Version})
+var s_PLSecurityGroupArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PLSecurityGroupArnList, Members: &m_PLSecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &e_PLSecurityGroupArnList})
+var s_PLSecurityGroupArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ec2SecurityGroupArn, Type: smithy.ShapeTypeString, Ext: &e_PLSecurityGroupArnList_member})
+var s_PLSubnetArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PLSubnetArnList, Members: &m_PLSubnetArnList, Type: smithy.ShapeTypeList, Ext: &e_PLSubnetArnList})
+var s_PLSubnetArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ec2SubnetArn, Type: smithy.ShapeTypeString, Ext: &e_PLSubnetArnList_member})
+var sPosixPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPosixPermissions, Members: &mPosixPermissions, Type: smithy.ShapeTypeEnum, Ext: &ePosixPermissions})
+var sPosixPermissions_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePosixPermissions_NONE})
+var sPosixPermissions_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePosixPermissions_PRESERVE})
+var sPreserveDeletedFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreserveDeletedFiles, Members: &mPreserveDeletedFiles, Type: smithy.ShapeTypeEnum, Ext: &ePreserveDeletedFiles})
+var sPreserveDeletedFiles_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreserveDeletedFiles_PRESERVE})
+var sPreserveDeletedFiles_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreserveDeletedFiles_REMOVE})
+var sPreserveDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreserveDevices, Members: &mPreserveDevices, Type: smithy.ShapeTypeEnum, Ext: &ePreserveDevices})
+var sPreserveDevices_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreserveDevices_NONE})
+var sPreserveDevices_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePreserveDevices_PRESERVE})
+var sPrivateLinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateLinkConfig, Members: &mPrivateLinkConfig, Type: smithy.ShapeTypeStructure, Ext: &ePrivateLinkConfig})
+var sPrivateLinkConfig_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ePrivateLinkConfig_VpcEndpointId})
+var sPrivateLinkConfig_PrivateLinkEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateLinkEndpoint", ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &ePrivateLinkConfig_PrivateLinkEndpoint})
+var sPrivateLinkConfig_SubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArns", ID: &i_PLSubnetArnList, Members: &m_PLSubnetArnList, Type: smithy.ShapeTypeList, Ext: &ePrivateLinkConfig_SubnetArns})
+var sPrivateLinkConfig_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_PLSecurityGroupArnList, Members: &m_PLSecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &ePrivateLinkConfig_SecurityGroupArns})
+var s_ProjectNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectNameString, Type: smithy.ShapeTypeString, Ext: &e_ProjectNameString})
+var s_ProjectNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectNumberString, Type: smithy.ShapeTypeString, Ext: &e_ProjectNumberString})
+var sQopConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQopConfiguration, Members: &mQopConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eQopConfiguration})
+var sQopConfiguration_RpcProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RpcProtection", ID: &iHdfsRpcProtection, Members: &mHdfsRpcProtection, Type: smithy.ShapeTypeEnum, Ext: &eQopConfiguration_RpcProtection})
+var sQopConfiguration_DataTransferProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataTransferProtection", ID: &iHdfsDataTransferProtection, Members: &mHdfsDataTransferProtection, Type: smithy.ShapeTypeEnum, Ext: &eQopConfiguration_DataTransferProtection})
+var sReportDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportDestination, Members: &mReportDestination, Type: smithy.ShapeTypeStructure, Ext: &eReportDestination})
+var sReportDestination_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iReportDestinationS3, Members: &mReportDestinationS3, Type: smithy.ShapeTypeStructure, Ext: &eReportDestination_S3})
+var sReportDestinationS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportDestinationS3, Members: &mReportDestinationS3, Type: smithy.ShapeTypeStructure, Ext: &eReportDestinationS3})
+var sReportDestinationS3_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eReportDestinationS3_Subdirectory})
+var sReportDestinationS3_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eReportDestinationS3_S3BucketArn})
+var sReportDestinationS3_BucketAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eReportDestinationS3_BucketAccessRoleArn})
+var sReportLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportLevel, Members: &mReportLevel, Type: smithy.ShapeTypeEnum, Ext: &eReportLevel})
+var sReportLevel_ERRORS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERRORS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportLevel_ERRORS_ONLY})
+var sReportLevel_SUCCESSES_AND_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSES_AND_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportLevel_SUCCESSES_AND_ERRORS})
+var sReportOutputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportOutputType, Members: &mReportOutputType, Type: smithy.ShapeTypeEnum, Ext: &eReportOutputType})
+var sReportOutputType_SUMMARY_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUMMARY_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportOutputType_SUMMARY_ONLY})
+var sReportOutputType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportOutputType_STANDARD})
+var sReportOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportOverride, Members: &mReportOverride, Type: smithy.ShapeTypeStructure, Ext: &eReportOverride})
+var sReportOverride_ReportLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportLevel", ID: &iReportLevel, Members: &mReportLevel, Type: smithy.ShapeTypeEnum, Ext: &eReportOverride_ReportLevel})
+var sReportOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportOverrides, Members: &mReportOverrides, Type: smithy.ShapeTypeStructure, Ext: &eReportOverrides})
+var sReportOverrides_Transferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transferred", ID: &iReportOverride, Members: &mReportOverride, Type: smithy.ShapeTypeStructure, Ext: &eReportOverrides_Transferred})
+var sReportOverrides_Verified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verified", ID: &iReportOverride, Members: &mReportOverride, Type: smithy.ShapeTypeStructure, Ext: &eReportOverrides_Verified})
+var sReportOverrides_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &iReportOverride, Members: &mReportOverride, Type: smithy.ShapeTypeStructure, Ext: &eReportOverrides_Deleted})
+var sReportOverrides_Skipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Skipped", ID: &iReportOverride, Members: &mReportOverride, Type: smithy.ShapeTypeStructure, Ext: &eReportOverrides_Skipped})
+var sReportResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportResult, Members: &mReportResult, Type: smithy.ShapeTypeStructure, Ext: &eReportResult})
+var sReportResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhaseStatus, Members: &mPhaseStatus, Type: smithy.ShapeTypeEnum, Ext: &eReportResult_Status})
+var sReportResult_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eReportResult_ErrorCode})
+var sReportResult_ErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetail", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eReportResult_ErrorDetail})
+var s_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &e_S3BucketArn})
+var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eS3Config})
+var sS3Config_BucketAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eS3Config_BucketAccessRoleArn})
+var sS3ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ManifestConfig, Members: &mS3ManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eS3ManifestConfig})
+var sS3ManifestConfig_ManifestObjectPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestObjectPath", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eS3ManifestConfig_ManifestObjectPath})
+var sS3ManifestConfig_BucketAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eS3ManifestConfig_BucketAccessRoleArn})
+var sS3ManifestConfig_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eS3ManifestConfig_S3BucketArn})
+var sS3ManifestConfig_ManifestObjectVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestObjectVersionId", ID: &i_S3ObjectVersionId, Type: smithy.ShapeTypeString, Ext: &eS3ManifestConfig_ManifestObjectVersionId})
+var s_S3ObjectVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectVersionId, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectVersionId})
+var sS3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum, Ext: &eS3StorageClass})
+var sS3StorageClass_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_STANDARD})
+var sS3StorageClass_STANDARD_IA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD_IA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_STANDARD_IA})
+var sS3StorageClass_ONEZONE_IA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONEZONE_IA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_ONEZONE_IA})
+var sS3StorageClass_INTELLIGENT_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTELLIGENT_TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_INTELLIGENT_TIERING})
+var sS3StorageClass_GLACIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLACIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_GLACIER})
+var sS3StorageClass_DEEP_ARCHIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEEP_ARCHIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_DEEP_ARCHIVE})
+var sS3StorageClass_OUTPOSTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPOSTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_OUTPOSTS})
+var sS3StorageClass_GLACIER_INSTANT_RETRIEVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLACIER_INSTANT_RETRIEVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_GLACIER_INSTANT_RETRIEVAL})
+var s_S3Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &e_S3Subdirectory})
+var sScheduleDisabledBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleDisabledBy, Members: &mScheduleDisabledBy, Type: smithy.ShapeTypeEnum, Ext: &eScheduleDisabledBy})
+var sScheduleDisabledBy_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleDisabledBy_USER})
+var sScheduleDisabledBy_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleDisabledBy_SERVICE})
+var s_ScheduleDisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleDisabledReason, Type: smithy.ShapeTypeString, Ext: &e_ScheduleDisabledReason})
+var s_ScheduleExpressionCron = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpressionCron, Type: smithy.ShapeTypeString, Ext: &e_ScheduleExpressionCron})
+var sScheduleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleStatus, Members: &mScheduleStatus, Type: smithy.ShapeTypeEnum, Ext: &eScheduleStatus})
+var sScheduleStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleStatus_ENABLED})
+var sScheduleStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduleStatus_DISABLED})
+var s_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &e_SecretArn})
+var s_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &e_ServerHostname})
+var s_ServerIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerIpAddress, Type: smithy.ShapeTypeString, Ext: &e_ServerIpAddress})
+var sSmbAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSmbAuthenticationType, Members: &mSmbAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eSmbAuthenticationType})
+var sSmbAuthenticationType_NTLM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NTLM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbAuthenticationType_NTLM})
+var sSmbAuthenticationType_KERBEROS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KERBEROS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbAuthenticationType_KERBEROS})
+var s_SmbDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &e_SmbDomain})
+var sSmbMountOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eSmbMountOptions})
+var sSmbMountOptions_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &iSmbVersion, Members: &mSmbVersion, Type: smithy.ShapeTypeEnum, Ext: &eSmbMountOptions_Version})
+var s_SmbPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmbPassword, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SmbPassword})
+var sSmbSecurityDescriptorCopyFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSmbSecurityDescriptorCopyFlags, Members: &mSmbSecurityDescriptorCopyFlags, Type: smithy.ShapeTypeEnum, Ext: &eSmbSecurityDescriptorCopyFlags})
+var sSmbSecurityDescriptorCopyFlags_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbSecurityDescriptorCopyFlags_NONE})
+var sSmbSecurityDescriptorCopyFlags_OWNER_DACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OWNER_DACL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbSecurityDescriptorCopyFlags_OWNER_DACL})
+var sSmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OWNER_DACL_SACL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL})
+var s_SmbSubdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmbSubdirectory, Type: smithy.ShapeTypeString, Ext: &e_SmbSubdirectory})
+var s_SmbUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &e_SmbUser})
+var sSmbVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSmbVersion, Members: &mSmbVersion, Type: smithy.ShapeTypeEnum, Ext: &eSmbVersion})
+var sSmbVersion_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbVersion_AUTOMATIC})
+var sSmbVersion_SMB2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbVersion_SMB2})
+var sSmbVersion_SMB3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbVersion_SMB3})
+var sSmbVersion_SMB1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbVersion_SMB1})
+var sSmbVersion_SMB2_0 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB2_0", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSmbVersion_SMB2_0})
+var sSourceManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceManifestConfig, Members: &mSourceManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eSourceManifestConfig})
+var sSourceManifestConfig_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3ManifestConfig, Members: &mS3ManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eSourceManifestConfig_S3})
+var s_SourceNetworkInterfaceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceNetworkInterfaceArns, Members: &m_SourceNetworkInterfaceArns, Type: smithy.ShapeTypeList, Ext: &e_SourceNetworkInterfaceArns})
+var s_SourceNetworkInterfaceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkInterfaceArn, Type: smithy.ShapeTypeString, Ext: &e_SourceNetworkInterfaceArns_member})
+var s_StorageVirtualMachineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineArn, Type: smithy.ShapeTypeString, Ext: &e_StorageVirtualMachineArn})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &e_TaggableResourceArn})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var sTagListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagListEntry, Members: &mTagListEntry, Type: smithy.ShapeTypeStructure, Ext: &eTagListEntry})
+var sTagListEntry_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagListEntry_Key})
+var sTagListEntry_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTagListEntry_Value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &e_TaskArn})
+var s_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &e_TaskExecutionArn})
+var sTaskExecutionFilesFailedDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionFilesFailedDetail, Members: &mTaskExecutionFilesFailedDetail, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionFilesFailedDetail})
+var sTaskExecutionFilesFailedDetail_Prepare = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prepare", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesFailedDetail_Prepare})
+var sTaskExecutionFilesFailedDetail_Transfer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transfer", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesFailedDetail_Transfer})
+var sTaskExecutionFilesFailedDetail_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesFailedDetail_Verify})
+var sTaskExecutionFilesFailedDetail_Delete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delete", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesFailedDetail_Delete})
+var sTaskExecutionFilesListedDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionFilesListedDetail, Members: &mTaskExecutionFilesListedDetail, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionFilesListedDetail})
+var sTaskExecutionFilesListedDetail_AtSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AtSource", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesListedDetail_AtSource})
+var sTaskExecutionFilesListedDetail_AtDestinationForDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AtDestinationForDelete", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFilesListedDetail_AtDestinationForDelete})
+var sTaskExecutionFoldersFailedDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionFoldersFailedDetail, Members: &mTaskExecutionFoldersFailedDetail, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionFoldersFailedDetail})
+var sTaskExecutionFoldersFailedDetail_List = smithy.NewStaticSchema(smithy.StaticSchema{Member: "List", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersFailedDetail_List})
+var sTaskExecutionFoldersFailedDetail_Prepare = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prepare", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersFailedDetail_Prepare})
+var sTaskExecutionFoldersFailedDetail_Transfer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transfer", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersFailedDetail_Transfer})
+var sTaskExecutionFoldersFailedDetail_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersFailedDetail_Verify})
+var sTaskExecutionFoldersFailedDetail_Delete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delete", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersFailedDetail_Delete})
+var sTaskExecutionFoldersListedDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionFoldersListedDetail, Members: &mTaskExecutionFoldersListedDetail, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionFoldersListedDetail})
+var sTaskExecutionFoldersListedDetail_AtSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AtSource", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersListedDetail_AtSource})
+var sTaskExecutionFoldersListedDetail_AtDestinationForDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AtDestinationForDelete", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionFoldersListedDetail_AtDestinationForDelete})
+var s_TaskExecutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskExecutionList, Members: &m_TaskExecutionList, Type: smithy.ShapeTypeList, Ext: &e_TaskExecutionList})
+var s_TaskExecutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskExecutionListEntry, Members: &mTaskExecutionListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_TaskExecutionList_member})
+var sTaskExecutionListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionListEntry, Members: &mTaskExecutionListEntry, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionListEntry})
+var sTaskExecutionListEntry_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eTaskExecutionListEntry_TaskExecutionArn})
+var sTaskExecutionListEntry_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTaskExecutionStatus, Members: &mTaskExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionListEntry_Status})
+var sTaskExecutionListEntry_TaskMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskMode", ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionListEntry_TaskMode})
+var sTaskExecutionResultDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionResultDetail, Members: &mTaskExecutionResultDetail, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionResultDetail})
+var sTaskExecutionResultDetail_PrepareDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrepareDuration", ID: &i_Duration, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionResultDetail_PrepareDuration})
+var sTaskExecutionResultDetail_PrepareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrepareStatus", ID: &iPhaseStatus, Members: &mPhaseStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionResultDetail_PrepareStatus})
+var sTaskExecutionResultDetail_TotalDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalDuration", ID: &i_Duration, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionResultDetail_TotalDuration})
+var sTaskExecutionResultDetail_TransferDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferDuration", ID: &i_Duration, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionResultDetail_TransferDuration})
+var sTaskExecutionResultDetail_TransferStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferStatus", ID: &iPhaseStatus, Members: &mPhaseStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionResultDetail_TransferStatus})
+var sTaskExecutionResultDetail_VerifyDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyDuration", ID: &i_Duration, Type: smithy.ShapeTypeLong, Ext: &eTaskExecutionResultDetail_VerifyDuration})
+var sTaskExecutionResultDetail_VerifyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyStatus", ID: &iPhaseStatus, Members: &mPhaseStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionResultDetail_VerifyStatus})
+var sTaskExecutionResultDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eTaskExecutionResultDetail_ErrorCode})
+var sTaskExecutionResultDetail_ErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetail", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eTaskExecutionResultDetail_ErrorDetail})
+var sTaskExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskExecutionStatus, Members: &mTaskExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskExecutionStatus})
+var sTaskExecutionStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_QUEUED})
+var sTaskExecutionStatus_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_CANCELLING})
+var sTaskExecutionStatus_LAUNCHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAUNCHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_LAUNCHING})
+var sTaskExecutionStatus_PREPARING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPARING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_PREPARING})
+var sTaskExecutionStatus_TRANSFERRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFERRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_TRANSFERRING})
+var sTaskExecutionStatus_VERIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_VERIFYING})
+var sTaskExecutionStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_SUCCESS})
+var sTaskExecutionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskExecutionStatus_ERROR})
+var sTaskFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskFilter, Members: &mTaskFilter, Type: smithy.ShapeTypeStructure, Ext: &eTaskFilter})
+var sTaskFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iTaskFilterName, Members: &mTaskFilterName, Type: smithy.ShapeTypeEnum, Ext: &eTaskFilter_Name})
+var sTaskFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eTaskFilter_Values})
+var sTaskFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eTaskFilter_Operator})
+var sTaskFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskFilterName, Members: &mTaskFilterName, Type: smithy.ShapeTypeEnum, Ext: &eTaskFilterName})
+var sTaskFilterName_LocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskFilterName_LocationId})
+var sTaskFilterName_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskFilterName_CreationTime})
+var s_TaskFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskFilters, Members: &m_TaskFilters, Type: smithy.ShapeTypeList, Ext: &e_TaskFilters})
+var s_TaskFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskFilter, Members: &mTaskFilter, Type: smithy.ShapeTypeStructure, Ext: &e_TaskFilters_member})
+var s_TaskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskList, Members: &m_TaskList, Type: smithy.ShapeTypeList, Ext: &e_TaskList})
+var s_TaskList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskListEntry, Members: &mTaskListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_TaskList_member})
+var sTaskListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskListEntry, Members: &mTaskListEntry, Type: smithy.ShapeTypeStructure, Ext: &eTaskListEntry})
+var sTaskListEntry_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eTaskListEntry_TaskArn})
+var sTaskListEntry_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskListEntry_Status})
+var sTaskListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTaskListEntry_Name})
+var sTaskListEntry_TaskMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskMode", ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eTaskListEntry_TaskMode})
+var sTaskMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eTaskMode})
+var sTaskMode_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskMode_BASIC})
+var sTaskMode_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskMode_ENHANCED})
+var sTaskQueueing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskQueueing, Members: &mTaskQueueing, Type: smithy.ShapeTypeEnum, Ext: &eTaskQueueing})
+var sTaskQueueing_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskQueueing_ENABLED})
+var sTaskQueueing_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskQueueing_DISABLED})
+var sTaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eTaskReportConfig})
+var sTaskReportConfig_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iReportDestination, Members: &mReportDestination, Type: smithy.ShapeTypeStructure, Ext: &eTaskReportConfig_Destination})
+var sTaskReportConfig_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputType", ID: &iReportOutputType, Members: &mReportOutputType, Type: smithy.ShapeTypeEnum, Ext: &eTaskReportConfig_OutputType})
+var sTaskReportConfig_ReportLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportLevel", ID: &iReportLevel, Members: &mReportLevel, Type: smithy.ShapeTypeEnum, Ext: &eTaskReportConfig_ReportLevel})
+var sTaskReportConfig_ObjectVersionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectVersionIds", ID: &iObjectVersionIds, Members: &mObjectVersionIds, Type: smithy.ShapeTypeEnum, Ext: &eTaskReportConfig_ObjectVersionIds})
+var sTaskReportConfig_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &iReportOverrides, Members: &mReportOverrides, Type: smithy.ShapeTypeStructure, Ext: &eTaskReportConfig_Overrides})
+var sTaskSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskSchedule, Members: &mTaskSchedule, Type: smithy.ShapeTypeStructure, Ext: &eTaskSchedule})
+var sTaskSchedule_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpressionCron, Type: smithy.ShapeTypeString, Ext: &eTaskSchedule_ScheduleExpression})
+var sTaskSchedule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iScheduleStatus, Members: &mScheduleStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskSchedule_Status})
+var sTaskScheduleDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskScheduleDetails, Members: &mTaskScheduleDetails, Type: smithy.ShapeTypeStructure, Ext: &eTaskScheduleDetails})
+var sTaskScheduleDetails_StatusUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusUpdateTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eTaskScheduleDetails_StatusUpdateTime})
+var sTaskScheduleDetails_DisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledReason", ID: &i_ScheduleDisabledReason, Type: smithy.ShapeTypeString, Ext: &eTaskScheduleDetails_DisabledReason})
+var sTaskScheduleDetails_DisabledBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledBy", ID: &iScheduleDisabledBy, Members: &mScheduleDisabledBy, Type: smithy.ShapeTypeEnum, Ext: &eTaskScheduleDetails_DisabledBy})
+var sTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaskStatus})
+var sTaskStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_AVAILABLE})
+var sTaskStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_CREATING})
+var sTaskStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_QUEUED})
+var sTaskStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_RUNNING})
+var sTaskStatus_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaskStatus_UNAVAILABLE})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &e_Time})
+var sTransferMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferMode, Members: &mTransferMode, Type: smithy.ShapeTypeEnum, Ext: &eTransferMode})
+var sTransferMode_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferMode_CHANGED})
+var sTransferMode_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferMode_ALL})
+var sUid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUid, Members: &mUid, Type: smithy.ShapeTypeEnum, Ext: &eUid})
+var sUid_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUid_NONE})
+var sUid_INT_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUid_INT_VALUE})
+var sUid_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUid_NAME})
+var sUid_BOTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUid_BOTH})
+var s_UpdatedEfsAccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatedEfsAccessPointArn, Type: smithy.ShapeTypeString, Ext: &e_UpdatedEfsAccessPointArn})
+var s_UpdatedEfsIamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatedEfsIamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_UpdatedEfsIamRoleArn})
+var s_UpdateSmbDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateSmbDomain, Type: smithy.ShapeTypeString, Ext: &e_UpdateSmbDomain})
+var sVerifyMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMode, Members: &mVerifyMode, Type: smithy.ShapeTypeEnum, Ext: &eVerifyMode})
+var sVerifyMode_POINT_IN_TIME_CONSISTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_IN_TIME_CONSISTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVerifyMode_POINT_IN_TIME_CONSISTENT})
+var sVerifyMode_ONLY_FILES_TRANSFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_FILES_TRANSFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVerifyMode_ONLY_FILES_TRANSFERRED})
+var sVerifyMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVerifyMode_NONE})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var sCancelTaskExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTaskExecutionRequest, Members: &mCancelTaskExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelTaskExecutionRequest})
+var sCancelTaskExecutionRequest_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eCancelTaskExecutionRequest_TaskExecutionArn})
+var sCancelTaskExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTaskExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelTaskExecutionResponse})
+var sCreateAgentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgentRequest, Members: &mCreateAgentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAgentRequest})
+var sCreateAgentRequest_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKey", ID: &i_ActivationKey, Type: smithy.ShapeTypeString, Ext: &eCreateAgentRequest_ActivationKey})
+var sCreateAgentRequest_AgentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentName", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eCreateAgentRequest_AgentName})
+var sCreateAgentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateAgentRequest_Tags})
+var sCreateAgentRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eCreateAgentRequest_VpcEndpointId})
+var sCreateAgentRequest_SubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArns", ID: &i_PLSubnetArnList, Members: &m_PLSubnetArnList, Type: smithy.ShapeTypeList, Ext: &eCreateAgentRequest_SubnetArns})
+var sCreateAgentRequest_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_PLSecurityGroupArnList, Members: &m_PLSecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eCreateAgentRequest_SecurityGroupArns})
+var sCreateAgentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgentResponse, Members: &mCreateAgentResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAgentResponse})
+var sCreateAgentResponse_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eCreateAgentResponse_AgentArn})
+var sCreateLocationAzureBlobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationAzureBlobRequest, Members: &mCreateLocationAzureBlobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobRequest})
+var sCreateLocationAzureBlobRequest_ContainerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerUrl", ID: &i_AzureBlobContainerUrl, Type: smithy.ShapeTypeString, Ext: &eCreateLocationAzureBlobRequest_ContainerUrl})
+var sCreateLocationAzureBlobRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAzureBlobAuthenticationType, Members: &mAzureBlobAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationAzureBlobRequest_AuthenticationType})
+var sCreateLocationAzureBlobRequest_SasConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SasConfiguration", ID: &iAzureBlobSasConfiguration, Members: &mAzureBlobSasConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobRequest_SasConfiguration})
+var sCreateLocationAzureBlobRequest_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iAzureFederatedIdentityConfig, Members: &mAzureFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobRequest_FederatedIdentity})
+var sCreateLocationAzureBlobRequest_BlobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlobType", ID: &iAzureBlobType, Members: &mAzureBlobType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationAzureBlobRequest_BlobType})
+var sCreateLocationAzureBlobRequest_AccessTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessTier", ID: &iAzureAccessTier, Members: &mAzureAccessTier, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationAzureBlobRequest_AccessTier})
+var sCreateLocationAzureBlobRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_AzureBlobSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationAzureBlobRequest_Subdirectory})
+var sCreateLocationAzureBlobRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationAzureBlobRequest_AgentArns})
+var sCreateLocationAzureBlobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationAzureBlobRequest_Tags})
+var sCreateLocationAzureBlobRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobRequest_CmkSecretConfig})
+var sCreateLocationAzureBlobRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobRequest_CustomSecretConfig})
+var sCreateLocationAzureBlobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationAzureBlobResponse, Members: &mCreateLocationAzureBlobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationAzureBlobResponse})
+var sCreateLocationAzureBlobResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationAzureBlobResponse_LocationArn})
+var sCreateLocationEfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationEfsRequest, Members: &mCreateLocationEfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationEfsRequest})
+var sCreateLocationEfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_EfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationEfsRequest_Subdirectory})
+var sCreateLocationEfsRequest_EfsFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EfsFilesystemArn", ID: &i_EfsFilesystemArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationEfsRequest_EfsFilesystemArn})
+var sCreateLocationEfsRequest_Ec2Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2Config", ID: &iEc2Config, Members: &mEc2Config, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationEfsRequest_Ec2Config})
+var sCreateLocationEfsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationEfsRequest_Tags})
+var sCreateLocationEfsRequest_AccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPointArn", ID: &i_EfsAccessPointArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationEfsRequest_AccessPointArn})
+var sCreateLocationEfsRequest_FileSystemAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationEfsRequest_FileSystemAccessRoleArn})
+var sCreateLocationEfsRequest_InTransitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InTransitEncryption", ID: &iEfsInTransitEncryption, Members: &mEfsInTransitEncryption, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationEfsRequest_InTransitEncryption})
+var sCreateLocationEfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationEfsResponse, Members: &mCreateLocationEfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationEfsResponse})
+var sCreateLocationEfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationEfsResponse_LocationArn})
+var sCreateLocationFsxLustreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxLustreRequest, Members: &mCreateLocationFsxLustreRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxLustreRequest})
+var sCreateLocationFsxLustreRequest_FsxFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxFilesystemArn", ID: &i_FsxFilesystemArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxLustreRequest_FsxFilesystemArn})
+var sCreateLocationFsxLustreRequest_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxLustreRequest_SecurityGroupArns})
+var sCreateLocationFsxLustreRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxLustreSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxLustreRequest_Subdirectory})
+var sCreateLocationFsxLustreRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxLustreRequest_Tags})
+var sCreateLocationFsxLustreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxLustreResponse, Members: &mCreateLocationFsxLustreResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxLustreResponse})
+var sCreateLocationFsxLustreResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxLustreResponse_LocationArn})
+var sCreateLocationFsxOntapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOntapRequest, Members: &mCreateLocationFsxOntapRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOntapRequest})
+var sCreateLocationFsxOntapRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOntapRequest_Protocol})
+var sCreateLocationFsxOntapRequest_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxOntapRequest_SecurityGroupArns})
+var sCreateLocationFsxOntapRequest_StorageVirtualMachineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineArn", ID: &i_StorageVirtualMachineArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOntapRequest_StorageVirtualMachineArn})
+var sCreateLocationFsxOntapRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxOntapSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOntapRequest_Subdirectory})
+var sCreateLocationFsxOntapRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxOntapRequest_Tags})
+var sCreateLocationFsxOntapResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOntapResponse, Members: &mCreateLocationFsxOntapResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOntapResponse})
+var sCreateLocationFsxOntapResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOntapResponse_LocationArn})
+var sCreateLocationFsxOpenZfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOpenZfsRequest, Members: &mCreateLocationFsxOpenZfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOpenZfsRequest})
+var sCreateLocationFsxOpenZfsRequest_FsxFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxFilesystemArn", ID: &i_FsxFilesystemArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOpenZfsRequest_FsxFilesystemArn})
+var sCreateLocationFsxOpenZfsRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOpenZfsRequest_Protocol})
+var sCreateLocationFsxOpenZfsRequest_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxOpenZfsRequest_SecurityGroupArns})
+var sCreateLocationFsxOpenZfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxOpenZfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOpenZfsRequest_Subdirectory})
+var sCreateLocationFsxOpenZfsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxOpenZfsRequest_Tags})
+var sCreateLocationFsxOpenZfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxOpenZfsResponse, Members: &mCreateLocationFsxOpenZfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxOpenZfsResponse})
+var sCreateLocationFsxOpenZfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxOpenZfsResponse_LocationArn})
+var sCreateLocationFsxWindowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxWindowsRequest, Members: &mCreateLocationFsxWindowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxWindowsRequest})
+var sCreateLocationFsxWindowsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxWindowsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsRequest_Subdirectory})
+var sCreateLocationFsxWindowsRequest_FsxFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxFilesystemArn", ID: &i_FsxFilesystemArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsRequest_FsxFilesystemArn})
+var sCreateLocationFsxWindowsRequest_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxWindowsRequest_SecurityGroupArns})
+var sCreateLocationFsxWindowsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationFsxWindowsRequest_Tags})
+var sCreateLocationFsxWindowsRequest_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsRequest_User})
+var sCreateLocationFsxWindowsRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsRequest_Domain})
+var sCreateLocationFsxWindowsRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsRequest_Password})
+var sCreateLocationFsxWindowsRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxWindowsRequest_CmkSecretConfig})
+var sCreateLocationFsxWindowsRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxWindowsRequest_CustomSecretConfig})
+var sCreateLocationFsxWindowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationFsxWindowsResponse, Members: &mCreateLocationFsxWindowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationFsxWindowsResponse})
+var sCreateLocationFsxWindowsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationFsxWindowsResponse_LocationArn})
+var sCreateLocationHdfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationHdfsRequest, Members: &mCreateLocationHdfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationHdfsRequest})
+var sCreateLocationHdfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_HdfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationHdfsRequest_Subdirectory})
+var sCreateLocationHdfsRequest_NameNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NameNodes", ID: &i_HdfsNameNodeList, Members: &m_HdfsNameNodeList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationHdfsRequest_NameNodes})
+var sCreateLocationHdfsRequest_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_HdfsBlockSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateLocationHdfsRequest_BlockSize})
+var sCreateLocationHdfsRequest_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i_HdfsReplicationFactor, Type: smithy.ShapeTypeInteger, Ext: &eCreateLocationHdfsRequest_ReplicationFactor})
+var sCreateLocationHdfsRequest_KmsKeyProviderUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyProviderUri", ID: &i_KmsKeyProviderUri, Type: smithy.ShapeTypeString, Ext: &eCreateLocationHdfsRequest_KmsKeyProviderUri})
+var sCreateLocationHdfsRequest_QopConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QopConfiguration", ID: &iQopConfiguration, Members: &mQopConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationHdfsRequest_QopConfiguration})
+var sCreateLocationHdfsRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iHdfsAuthenticationType, Members: &mHdfsAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationHdfsRequest_AuthenticationType})
+var sCreateLocationHdfsRequest_SimpleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SimpleUser", ID: &i_HdfsUser, Type: smithy.ShapeTypeString, Ext: &eCreateLocationHdfsRequest_SimpleUser})
+var sCreateLocationHdfsRequest_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eCreateLocationHdfsRequest_KerberosPrincipal})
+var sCreateLocationHdfsRequest_KerberosKeytab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKeytab", ID: &i_KerberosKeytabFile, Type: smithy.ShapeTypeBlob, Ext: &eCreateLocationHdfsRequest_KerberosKeytab})
+var sCreateLocationHdfsRequest_KerberosKrb5Conf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKrb5Conf", ID: &i_KerberosKrb5ConfFile, Type: smithy.ShapeTypeBlob, Ext: &eCreateLocationHdfsRequest_KerberosKrb5Conf})
+var sCreateLocationHdfsRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationHdfsRequest_AgentArns})
+var sCreateLocationHdfsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationHdfsRequest_Tags})
+var sCreateLocationHdfsRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationHdfsRequest_CmkSecretConfig})
+var sCreateLocationHdfsRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationHdfsRequest_CustomSecretConfig})
+var sCreateLocationHdfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationHdfsResponse, Members: &mCreateLocationHdfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationHdfsResponse})
+var sCreateLocationHdfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationHdfsResponse_LocationArn})
+var sCreateLocationNfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationNfsRequest, Members: &mCreateLocationNfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationNfsRequest})
+var sCreateLocationNfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_NfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationNfsRequest_Subdirectory})
+var sCreateLocationNfsRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eCreateLocationNfsRequest_ServerHostname})
+var sCreateLocationNfsRequest_OnPremConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPremConfig", ID: &iOnPremConfig, Members: &mOnPremConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationNfsRequest_OnPremConfig})
+var sCreateLocationNfsRequest_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iNfsMountOptions, Members: &mNfsMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationNfsRequest_MountOptions})
+var sCreateLocationNfsRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationNfsRequest_Tags})
+var sCreateLocationNfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationNfsResponse, Members: &mCreateLocationNfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationNfsResponse})
+var sCreateLocationNfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationNfsResponse_LocationArn})
+var sCreateLocationObjectStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationObjectStorageRequest, Members: &mCreateLocationObjectStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationObjectStorageRequest})
+var sCreateLocationObjectStorageRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageRequest_ServerHostname})
+var sCreateLocationObjectStorageRequest_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_ObjectStorageServerPort, Type: smithy.ShapeTypeInteger, Ext: &eCreateLocationObjectStorageRequest_ServerPort})
+var sCreateLocationObjectStorageRequest_ServerProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProtocol", ID: &iObjectStorageServerProtocol, Members: &mObjectStorageServerProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationObjectStorageRequest_ServerProtocol})
+var sCreateLocationObjectStorageRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageRequest_Subdirectory})
+var sCreateLocationObjectStorageRequest_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_ObjectStorageBucketName, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageRequest_BucketName})
+var sCreateLocationObjectStorageRequest_AccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKey", ID: &i_ObjectStorageAccessKey, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageRequest_AccessKey})
+var sCreateLocationObjectStorageRequest_SecretKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretKey", ID: &i_ObjectStorageSecretKey, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageRequest_SecretKey})
+var sCreateLocationObjectStorageRequest_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iObjectStorageFederatedIdentityConfig, Members: &mObjectStorageFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationObjectStorageRequest_FederatedIdentity})
+var sCreateLocationObjectStorageRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationObjectStorageRequest_AgentArns})
+var sCreateLocationObjectStorageRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationObjectStorageRequest_Tags})
+var sCreateLocationObjectStorageRequest_ServerCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificate", ID: &i_ObjectStorageCertificate, Type: smithy.ShapeTypeBlob, Ext: &eCreateLocationObjectStorageRequest_ServerCertificate})
+var sCreateLocationObjectStorageRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationObjectStorageRequest_CmkSecretConfig})
+var sCreateLocationObjectStorageRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationObjectStorageRequest_CustomSecretConfig})
+var sCreateLocationObjectStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationObjectStorageResponse, Members: &mCreateLocationObjectStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationObjectStorageResponse})
+var sCreateLocationObjectStorageResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationObjectStorageResponse_LocationArn})
+var sCreateLocationS3Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationS3Request, Members: &mCreateLocationS3Request, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationS3Request})
+var sCreateLocationS3Request_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationS3Request_Subdirectory})
+var sCreateLocationS3Request_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationS3Request_S3BucketArn})
+var sCreateLocationS3Request_S3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageClass", ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationS3Request_S3StorageClass})
+var sCreateLocationS3Request_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationS3Request_S3Config})
+var sCreateLocationS3Request_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationS3Request_AgentArns})
+var sCreateLocationS3Request_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationS3Request_Tags})
+var sCreateLocationS3Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationS3Response, Members: &mCreateLocationS3Response, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationS3Response})
+var sCreateLocationS3Response_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationS3Response_LocationArn})
+var sCreateLocationSmbRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationSmbRequest, Members: &mCreateLocationSmbRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationSmbRequest})
+var sCreateLocationSmbRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_SmbSubdirectory, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_Subdirectory})
+var sCreateLocationSmbRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_ServerHostname})
+var sCreateLocationSmbRequest_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_User})
+var sCreateLocationSmbRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_Domain})
+var sCreateLocationSmbRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_Password})
+var sCreateLocationSmbRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationSmbRequest_CmkSecretConfig})
+var sCreateLocationSmbRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationSmbRequest_CustomSecretConfig})
+var sCreateLocationSmbRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationSmbRequest_AgentArns})
+var sCreateLocationSmbRequest_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationSmbRequest_MountOptions})
+var sCreateLocationSmbRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationSmbRequest_Tags})
+var sCreateLocationSmbRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iSmbAuthenticationType, Members: &mSmbAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLocationSmbRequest_AuthenticationType})
+var sCreateLocationSmbRequest_DnsIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddresses", ID: &i_DnsIpList, Members: &m_DnsIpList, Type: smithy.ShapeTypeList, Ext: &eCreateLocationSmbRequest_DnsIpAddresses})
+var sCreateLocationSmbRequest_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbRequest_KerberosPrincipal})
+var sCreateLocationSmbRequest_KerberosKeytab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKeytab", ID: &i_KerberosKeytabFile, Type: smithy.ShapeTypeBlob, Ext: &eCreateLocationSmbRequest_KerberosKeytab})
+var sCreateLocationSmbRequest_KerberosKrb5Conf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKrb5Conf", ID: &i_KerberosKrb5ConfFile, Type: smithy.ShapeTypeBlob, Ext: &eCreateLocationSmbRequest_KerberosKrb5Conf})
+var sCreateLocationSmbResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLocationSmbResponse, Members: &mCreateLocationSmbResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLocationSmbResponse})
+var sCreateLocationSmbResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLocationSmbResponse_LocationArn})
+var sCreateTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTaskRequest, Members: &mCreateTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskRequest})
+var sCreateTaskRequest_SourceLocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateTaskRequest_SourceLocationArn})
+var sCreateTaskRequest_DestinationLocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationLocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eCreateTaskRequest_DestinationLocationArn})
+var sCreateTaskRequest_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eCreateTaskRequest_CloudWatchLogGroupArn})
+var sCreateTaskRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eCreateTaskRequest_Name})
+var sCreateTaskRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskRequest_Options})
+var sCreateTaskRequest_Excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excludes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eCreateTaskRequest_Excludes})
+var sCreateTaskRequest_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iTaskSchedule, Members: &mTaskSchedule, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskRequest_Schedule})
+var sCreateTaskRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eCreateTaskRequest_Tags})
+var sCreateTaskRequest_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eCreateTaskRequest_Includes})
+var sCreateTaskRequest_ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestConfig", ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskRequest_ManifestConfig})
+var sCreateTaskRequest_TaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskReportConfig", ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskRequest_TaskReportConfig})
+var sCreateTaskRequest_TaskMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskMode", ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateTaskRequest_TaskMode})
+var sCreateTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTaskResponse, Members: &mCreateTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskResponse})
+var sCreateTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eCreateTaskResponse_TaskArn})
+var sDeleteAgentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAgentRequest, Members: &mDeleteAgentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAgentRequest})
+var sDeleteAgentRequest_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAgentRequest_AgentArn})
+var sDeleteAgentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAgentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAgentResponse})
+var sDeleteLocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLocationRequest, Members: &mDeleteLocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLocationRequest})
+var sDeleteLocationRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDeleteLocationRequest_LocationArn})
+var sDeleteLocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLocationResponse})
+var sDeleteTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTaskRequest, Members: &mDeleteTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTaskRequest})
+var sDeleteTaskRequest_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eDeleteTaskRequest_TaskArn})
+var sDeleteTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTaskResponse})
+var sDescribeAgentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgentRequest, Members: &mDescribeAgentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAgentRequest})
+var sDescribeAgentRequest_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAgentRequest_AgentArn})
+var sDescribeAgentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgentResponse, Members: &mDescribeAgentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAgentResponse})
+var sDescribeAgentResponse_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAgentResponse_AgentArn})
+var sDescribeAgentResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eDescribeAgentResponse_Name})
+var sDescribeAgentResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAgentResponse_Status})
+var sDescribeAgentResponse_LastConnectionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastConnectionTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAgentResponse_LastConnectionTime})
+var sDescribeAgentResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAgentResponse_CreationTime})
+var sDescribeAgentResponse_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAgentResponse_EndpointType})
+var sDescribeAgentResponse_PrivateLinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateLinkConfig", ID: &iPrivateLinkConfig, Members: &mPrivateLinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAgentResponse_PrivateLinkConfig})
+var sDescribeAgentResponse_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAgentResponse_Platform})
+var sDescribeLocationAzureBlobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationAzureBlobRequest, Members: &mDescribeLocationAzureBlobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobRequest})
+var sDescribeLocationAzureBlobRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationAzureBlobRequest_LocationArn})
+var sDescribeLocationAzureBlobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationAzureBlobResponse, Members: &mDescribeLocationAzureBlobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobResponse})
+var sDescribeLocationAzureBlobResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationAzureBlobResponse_LocationArn})
+var sDescribeLocationAzureBlobResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationAzureBlobResponse_LocationUri})
+var sDescribeLocationAzureBlobResponse_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAzureBlobAuthenticationType, Members: &mAzureBlobAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationAzureBlobResponse_AuthenticationType})
+var sDescribeLocationAzureBlobResponse_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iAzureFederatedIdentityConfig, Members: &mAzureFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobResponse_FederatedIdentity})
+var sDescribeLocationAzureBlobResponse_BlobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlobType", ID: &iAzureBlobType, Members: &mAzureBlobType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationAzureBlobResponse_BlobType})
+var sDescribeLocationAzureBlobResponse_AccessTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessTier", ID: &iAzureAccessTier, Members: &mAzureAccessTier, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationAzureBlobResponse_AccessTier})
+var sDescribeLocationAzureBlobResponse_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationAzureBlobResponse_AgentArns})
+var sDescribeLocationAzureBlobResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationAzureBlobResponse_CreationTime})
+var sDescribeLocationAzureBlobResponse_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobResponse_ManagedSecretConfig})
+var sDescribeLocationAzureBlobResponse_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobResponse_CmkSecretConfig})
+var sDescribeLocationAzureBlobResponse_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationAzureBlobResponse_CustomSecretConfig})
+var sDescribeLocationEfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationEfsRequest, Members: &mDescribeLocationEfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationEfsRequest})
+var sDescribeLocationEfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationEfsRequest_LocationArn})
+var sDescribeLocationEfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationEfsResponse, Members: &mDescribeLocationEfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationEfsResponse})
+var sDescribeLocationEfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationEfsResponse_LocationArn})
+var sDescribeLocationEfsResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationEfsResponse_LocationUri})
+var sDescribeLocationEfsResponse_Ec2Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2Config", ID: &iEc2Config, Members: &mEc2Config, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationEfsResponse_Ec2Config})
+var sDescribeLocationEfsResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationEfsResponse_CreationTime})
+var sDescribeLocationEfsResponse_AccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPointArn", ID: &i_EfsAccessPointArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationEfsResponse_AccessPointArn})
+var sDescribeLocationEfsResponse_FileSystemAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationEfsResponse_FileSystemAccessRoleArn})
+var sDescribeLocationEfsResponse_InTransitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InTransitEncryption", ID: &iEfsInTransitEncryption, Members: &mEfsInTransitEncryption, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationEfsResponse_InTransitEncryption})
+var sDescribeLocationFsxLustreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxLustreRequest, Members: &mDescribeLocationFsxLustreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxLustreRequest})
+var sDescribeLocationFsxLustreRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxLustreRequest_LocationArn})
+var sDescribeLocationFsxLustreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxLustreResponse, Members: &mDescribeLocationFsxLustreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxLustreResponse})
+var sDescribeLocationFsxLustreResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxLustreResponse_LocationArn})
+var sDescribeLocationFsxLustreResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxLustreResponse_LocationUri})
+var sDescribeLocationFsxLustreResponse_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationFsxLustreResponse_SecurityGroupArns})
+var sDescribeLocationFsxLustreResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationFsxLustreResponse_CreationTime})
+var sDescribeLocationFsxOntapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOntapRequest, Members: &mDescribeLocationFsxOntapRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOntapRequest})
+var sDescribeLocationFsxOntapRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOntapRequest_LocationArn})
+var sDescribeLocationFsxOntapResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOntapResponse, Members: &mDescribeLocationFsxOntapResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOntapResponse})
+var sDescribeLocationFsxOntapResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationFsxOntapResponse_CreationTime})
+var sDescribeLocationFsxOntapResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOntapResponse_LocationArn})
+var sDescribeLocationFsxOntapResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOntapResponse_LocationUri})
+var sDescribeLocationFsxOntapResponse_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOntapResponse_Protocol})
+var sDescribeLocationFsxOntapResponse_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationFsxOntapResponse_SecurityGroupArns})
+var sDescribeLocationFsxOntapResponse_StorageVirtualMachineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineArn", ID: &i_StorageVirtualMachineArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOntapResponse_StorageVirtualMachineArn})
+var sDescribeLocationFsxOntapResponse_FsxFilesystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxFilesystemArn", ID: &i_FsxFilesystemArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOntapResponse_FsxFilesystemArn})
+var sDescribeLocationFsxOpenZfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOpenZfsRequest, Members: &mDescribeLocationFsxOpenZfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOpenZfsRequest})
+var sDescribeLocationFsxOpenZfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOpenZfsRequest_LocationArn})
+var sDescribeLocationFsxOpenZfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxOpenZfsResponse, Members: &mDescribeLocationFsxOpenZfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOpenZfsResponse})
+var sDescribeLocationFsxOpenZfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOpenZfsResponse_LocationArn})
+var sDescribeLocationFsxOpenZfsResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxOpenZfsResponse_LocationUri})
+var sDescribeLocationFsxOpenZfsResponse_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationFsxOpenZfsResponse_SecurityGroupArns})
+var sDescribeLocationFsxOpenZfsResponse_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxOpenZfsResponse_Protocol})
+var sDescribeLocationFsxOpenZfsResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationFsxOpenZfsResponse_CreationTime})
+var sDescribeLocationFsxWindowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxWindowsRequest, Members: &mDescribeLocationFsxWindowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxWindowsRequest})
+var sDescribeLocationFsxWindowsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxWindowsRequest_LocationArn})
+var sDescribeLocationFsxWindowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationFsxWindowsResponse, Members: &mDescribeLocationFsxWindowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxWindowsResponse})
+var sDescribeLocationFsxWindowsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxWindowsResponse_LocationArn})
+var sDescribeLocationFsxWindowsResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxWindowsResponse_LocationUri})
+var sDescribeLocationFsxWindowsResponse_SecurityGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupArns", ID: &i_Ec2SecurityGroupArnList, Members: &m_Ec2SecurityGroupArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationFsxWindowsResponse_SecurityGroupArns})
+var sDescribeLocationFsxWindowsResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationFsxWindowsResponse_CreationTime})
+var sDescribeLocationFsxWindowsResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxWindowsResponse_User})
+var sDescribeLocationFsxWindowsResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationFsxWindowsResponse_Domain})
+var sDescribeLocationFsxWindowsResponse_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxWindowsResponse_ManagedSecretConfig})
+var sDescribeLocationFsxWindowsResponse_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxWindowsResponse_CmkSecretConfig})
+var sDescribeLocationFsxWindowsResponse_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationFsxWindowsResponse_CustomSecretConfig})
+var sDescribeLocationHdfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationHdfsRequest, Members: &mDescribeLocationHdfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsRequest})
+var sDescribeLocationHdfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsRequest_LocationArn})
+var sDescribeLocationHdfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationHdfsResponse, Members: &mDescribeLocationHdfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsResponse})
+var sDescribeLocationHdfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsResponse_LocationArn})
+var sDescribeLocationHdfsResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsResponse_LocationUri})
+var sDescribeLocationHdfsResponse_NameNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NameNodes", ID: &i_HdfsNameNodeList, Members: &m_HdfsNameNodeList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationHdfsResponse_NameNodes})
+var sDescribeLocationHdfsResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_HdfsBlockSize, Type: smithy.ShapeTypeInteger, Ext: &eDescribeLocationHdfsResponse_BlockSize})
+var sDescribeLocationHdfsResponse_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i_HdfsReplicationFactor, Type: smithy.ShapeTypeInteger, Ext: &eDescribeLocationHdfsResponse_ReplicationFactor})
+var sDescribeLocationHdfsResponse_KmsKeyProviderUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyProviderUri", ID: &i_KmsKeyProviderUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsResponse_KmsKeyProviderUri})
+var sDescribeLocationHdfsResponse_QopConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QopConfiguration", ID: &iQopConfiguration, Members: &mQopConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsResponse_QopConfiguration})
+var sDescribeLocationHdfsResponse_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iHdfsAuthenticationType, Members: &mHdfsAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationHdfsResponse_AuthenticationType})
+var sDescribeLocationHdfsResponse_SimpleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SimpleUser", ID: &i_HdfsUser, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsResponse_SimpleUser})
+var sDescribeLocationHdfsResponse_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationHdfsResponse_KerberosPrincipal})
+var sDescribeLocationHdfsResponse_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationHdfsResponse_AgentArns})
+var sDescribeLocationHdfsResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationHdfsResponse_CreationTime})
+var sDescribeLocationHdfsResponse_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsResponse_ManagedSecretConfig})
+var sDescribeLocationHdfsResponse_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsResponse_CmkSecretConfig})
+var sDescribeLocationHdfsResponse_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationHdfsResponse_CustomSecretConfig})
+var sDescribeLocationNfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationNfsRequest, Members: &mDescribeLocationNfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationNfsRequest})
+var sDescribeLocationNfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationNfsRequest_LocationArn})
+var sDescribeLocationNfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationNfsResponse, Members: &mDescribeLocationNfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationNfsResponse})
+var sDescribeLocationNfsResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationNfsResponse_LocationArn})
+var sDescribeLocationNfsResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationNfsResponse_LocationUri})
+var sDescribeLocationNfsResponse_OnPremConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPremConfig", ID: &iOnPremConfig, Members: &mOnPremConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationNfsResponse_OnPremConfig})
+var sDescribeLocationNfsResponse_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iNfsMountOptions, Members: &mNfsMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationNfsResponse_MountOptions})
+var sDescribeLocationNfsResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationNfsResponse_CreationTime})
+var sDescribeLocationObjectStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationObjectStorageRequest, Members: &mDescribeLocationObjectStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageRequest})
+var sDescribeLocationObjectStorageRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationObjectStorageRequest_LocationArn})
+var sDescribeLocationObjectStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationObjectStorageResponse, Members: &mDescribeLocationObjectStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageResponse})
+var sDescribeLocationObjectStorageResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationObjectStorageResponse_LocationArn})
+var sDescribeLocationObjectStorageResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationObjectStorageResponse_LocationUri})
+var sDescribeLocationObjectStorageResponse_AccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKey", ID: &i_ObjectStorageAccessKey, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationObjectStorageResponse_AccessKey})
+var sDescribeLocationObjectStorageResponse_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iObjectStorageFederatedIdentityConfig, Members: &mObjectStorageFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageResponse_FederatedIdentity})
+var sDescribeLocationObjectStorageResponse_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_ObjectStorageServerPort, Type: smithy.ShapeTypeInteger, Ext: &eDescribeLocationObjectStorageResponse_ServerPort})
+var sDescribeLocationObjectStorageResponse_ServerProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProtocol", ID: &iObjectStorageServerProtocol, Members: &mObjectStorageServerProtocol, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationObjectStorageResponse_ServerProtocol})
+var sDescribeLocationObjectStorageResponse_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationObjectStorageResponse_AgentArns})
+var sDescribeLocationObjectStorageResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationObjectStorageResponse_CreationTime})
+var sDescribeLocationObjectStorageResponse_ServerCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificate", ID: &i_ObjectStorageCertificate, Type: smithy.ShapeTypeBlob, Ext: &eDescribeLocationObjectStorageResponse_ServerCertificate})
+var sDescribeLocationObjectStorageResponse_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageResponse_ManagedSecretConfig})
+var sDescribeLocationObjectStorageResponse_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageResponse_CmkSecretConfig})
+var sDescribeLocationObjectStorageResponse_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationObjectStorageResponse_CustomSecretConfig})
+var sDescribeLocationS3Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationS3Request, Members: &mDescribeLocationS3Request, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationS3Request})
+var sDescribeLocationS3Request_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationS3Request_LocationArn})
+var sDescribeLocationS3Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationS3Response, Members: &mDescribeLocationS3Response, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationS3Response})
+var sDescribeLocationS3Response_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationS3Response_LocationArn})
+var sDescribeLocationS3Response_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationS3Response_LocationUri})
+var sDescribeLocationS3Response_S3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageClass", ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationS3Response_S3StorageClass})
+var sDescribeLocationS3Response_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationS3Response_S3Config})
+var sDescribeLocationS3Response_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationS3Response_AgentArns})
+var sDescribeLocationS3Response_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationS3Response_CreationTime})
+var sDescribeLocationSmbRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationSmbRequest, Members: &mDescribeLocationSmbRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbRequest})
+var sDescribeLocationSmbRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbRequest_LocationArn})
+var sDescribeLocationSmbResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocationSmbResponse, Members: &mDescribeLocationSmbResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbResponse})
+var sDescribeLocationSmbResponse_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbResponse_LocationArn})
+var sDescribeLocationSmbResponse_LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationUri", ID: &i_LocationUri, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbResponse_LocationUri})
+var sDescribeLocationSmbResponse_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationSmbResponse_AgentArns})
+var sDescribeLocationSmbResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbResponse_User})
+var sDescribeLocationSmbResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbResponse_Domain})
+var sDescribeLocationSmbResponse_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbResponse_MountOptions})
+var sDescribeLocationSmbResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeLocationSmbResponse_CreationTime})
+var sDescribeLocationSmbResponse_DnsIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddresses", ID: &i_DnsIpList, Members: &m_DnsIpList, Type: smithy.ShapeTypeList, Ext: &eDescribeLocationSmbResponse_DnsIpAddresses})
+var sDescribeLocationSmbResponse_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eDescribeLocationSmbResponse_KerberosPrincipal})
+var sDescribeLocationSmbResponse_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iSmbAuthenticationType, Members: &mSmbAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeLocationSmbResponse_AuthenticationType})
+var sDescribeLocationSmbResponse_ManagedSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedSecretConfig", ID: &iManagedSecretConfig, Members: &mManagedSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbResponse_ManagedSecretConfig})
+var sDescribeLocationSmbResponse_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbResponse_CmkSecretConfig})
+var sDescribeLocationSmbResponse_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLocationSmbResponse_CustomSecretConfig})
+var sDescribeTaskExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskExecutionRequest, Members: &mDescribeTaskExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionRequest})
+var sDescribeTaskExecutionRequest_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskExecutionRequest_TaskExecutionArn})
+var sDescribeTaskExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskExecutionResponse, Members: &mDescribeTaskExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse})
+var sDescribeTaskExecutionResponse_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskExecutionResponse_TaskExecutionArn})
+var sDescribeTaskExecutionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTaskExecutionStatus, Members: &mTaskExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTaskExecutionResponse_Status})
+var sDescribeTaskExecutionResponse_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_Options})
+var sDescribeTaskExecutionResponse_Excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excludes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskExecutionResponse_Excludes})
+var sDescribeTaskExecutionResponse_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskExecutionResponse_Includes})
+var sDescribeTaskExecutionResponse_ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestConfig", ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_ManifestConfig})
+var sDescribeTaskExecutionResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskExecutionResponse_StartTime})
+var sDescribeTaskExecutionResponse_EstimatedFilesToTransfer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedFilesToTransfer", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_EstimatedFilesToTransfer})
+var sDescribeTaskExecutionResponse_EstimatedBytesToTransfer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedBytesToTransfer", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_EstimatedBytesToTransfer})
+var sDescribeTaskExecutionResponse_FilesTransferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesTransferred", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FilesTransferred})
+var sDescribeTaskExecutionResponse_BytesWritten = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesWritten", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_BytesWritten})
+var sDescribeTaskExecutionResponse_BytesTransferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesTransferred", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_BytesTransferred})
+var sDescribeTaskExecutionResponse_BytesCompressed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesCompressed", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_BytesCompressed})
+var sDescribeTaskExecutionResponse_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &iTaskExecutionResultDetail, Members: &mTaskExecutionResultDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_Result})
+var sDescribeTaskExecutionResponse_TaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskReportConfig", ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_TaskReportConfig})
+var sDescribeTaskExecutionResponse_FilesDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesDeleted", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FilesDeleted})
+var sDescribeTaskExecutionResponse_FilesSkipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesSkipped", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FilesSkipped})
+var sDescribeTaskExecutionResponse_FilesVerified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesVerified", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FilesVerified})
+var sDescribeTaskExecutionResponse_ReportResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportResult", ID: &iReportResult, Members: &mReportResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_ReportResult})
+var sDescribeTaskExecutionResponse_EstimatedFilesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedFilesToDelete", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_EstimatedFilesToDelete})
+var sDescribeTaskExecutionResponse_TaskMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskMode", ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTaskExecutionResponse_TaskMode})
+var sDescribeTaskExecutionResponse_FilesPrepared = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesPrepared", ID: &i_long, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FilesPrepared})
+var sDescribeTaskExecutionResponse_FilesListed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesListed", ID: &iTaskExecutionFilesListedDetail, Members: &mTaskExecutionFilesListedDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_FilesListed})
+var sDescribeTaskExecutionResponse_FilesFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesFailed", ID: &iTaskExecutionFilesFailedDetail, Members: &mTaskExecutionFilesFailedDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_FilesFailed})
+var sDescribeTaskExecutionResponse_EstimatedFoldersToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedFoldersToDelete", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_EstimatedFoldersToDelete})
+var sDescribeTaskExecutionResponse_EstimatedFoldersToTransfer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedFoldersToTransfer", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_EstimatedFoldersToTransfer})
+var sDescribeTaskExecutionResponse_FoldersSkipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersSkipped", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FoldersSkipped})
+var sDescribeTaskExecutionResponse_FoldersPrepared = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersPrepared", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FoldersPrepared})
+var sDescribeTaskExecutionResponse_FoldersTransferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersTransferred", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FoldersTransferred})
+var sDescribeTaskExecutionResponse_FoldersVerified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersVerified", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FoldersVerified})
+var sDescribeTaskExecutionResponse_FoldersDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersDeleted", ID: &i_ItemCount, Type: smithy.ShapeTypeLong, Ext: &eDescribeTaskExecutionResponse_FoldersDeleted})
+var sDescribeTaskExecutionResponse_FoldersListed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersListed", ID: &iTaskExecutionFoldersListedDetail, Members: &mTaskExecutionFoldersListedDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_FoldersListed})
+var sDescribeTaskExecutionResponse_FoldersFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoldersFailed", ID: &iTaskExecutionFoldersFailedDetail, Members: &mTaskExecutionFoldersFailedDetail, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskExecutionResponse_FoldersFailed})
+var sDescribeTaskExecutionResponse_LaunchTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskExecutionResponse_LaunchTime})
+var sDescribeTaskExecutionResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskExecutionResponse_EndTime})
+var sDescribeTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskRequest, Members: &mDescribeTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskRequest})
+var sDescribeTaskRequest_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskRequest_TaskArn})
+var sDescribeTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskResponse, Members: &mDescribeTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse})
+var sDescribeTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_TaskArn})
+var sDescribeTaskResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTaskResponse_Status})
+var sDescribeTaskResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_Name})
+var sDescribeTaskResponse_CurrentTaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentTaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_CurrentTaskExecutionArn})
+var sDescribeTaskResponse_SourceLocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_SourceLocationArn})
+var sDescribeTaskResponse_DestinationLocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationLocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_DestinationLocationArn})
+var sDescribeTaskResponse_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_CloudWatchLogGroupArn})
+var sDescribeTaskResponse_SourceNetworkInterfaceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceNetworkInterfaceArns", ID: &i_SourceNetworkInterfaceArns, Members: &m_SourceNetworkInterfaceArns, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskResponse_SourceNetworkInterfaceArns})
+var sDescribeTaskResponse_DestinationNetworkInterfaceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationNetworkInterfaceArns", ID: &i_DestinationNetworkInterfaceArns, Members: &m_DestinationNetworkInterfaceArns, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskResponse_DestinationNetworkInterfaceArns})
+var sDescribeTaskResponse_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse_Options})
+var sDescribeTaskResponse_Excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excludes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskResponse_Excludes})
+var sDescribeTaskResponse_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iTaskSchedule, Members: &mTaskSchedule, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse_Schedule})
+var sDescribeTaskResponse_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_ErrorCode})
+var sDescribeTaskResponse_ErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetail", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskResponse_ErrorDetail})
+var sDescribeTaskResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskResponse_CreationTime})
+var sDescribeTaskResponse_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskResponse_Includes})
+var sDescribeTaskResponse_ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestConfig", ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse_ManifestConfig})
+var sDescribeTaskResponse_TaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskReportConfig", ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse_TaskReportConfig})
+var sDescribeTaskResponse_ScheduleDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleDetails", ID: &iTaskScheduleDetails, Members: &mTaskScheduleDetails, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskResponse_ScheduleDetails})
+var sDescribeTaskResponse_TaskMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskMode", ID: &iTaskMode, Members: &mTaskMode, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTaskResponse_TaskMode})
+var sListAgentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgentsRequest, Members: &mListAgentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAgentsRequest})
+var sListAgentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAgentsRequest_MaxResults})
+var sListAgentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAgentsRequest_NextToken})
+var sListAgentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgentsResponse, Members: &mListAgentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAgentsResponse})
+var sListAgentsResponse_Agents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Agents", ID: &i_AgentList, Members: &m_AgentList, Type: smithy.ShapeTypeList, Ext: &eListAgentsResponse_Agents})
+var sListAgentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAgentsResponse_NextToken})
+var sListLocationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocationsRequest, Members: &mListLocationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLocationsRequest})
+var sListLocationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListLocationsRequest_MaxResults})
+var sListLocationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLocationsRequest_NextToken})
+var sListLocationsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_LocationFilters, Members: &m_LocationFilters, Type: smithy.ShapeTypeList, Ext: &eListLocationsRequest_Filters})
+var sListLocationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocationsResponse, Members: &mListLocationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLocationsResponse})
+var sListLocationsResponse_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &eListLocationsResponse_Locations})
+var sListLocationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLocationsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_MaxResults})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_NextToken})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTagList, Members: &m_OutputTagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_NextToken})
+var sListTaskExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaskExecutionsRequest, Members: &mListTaskExecutionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTaskExecutionsRequest})
+var sListTaskExecutionsRequest_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eListTaskExecutionsRequest_TaskArn})
+var sListTaskExecutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTaskExecutionsRequest_MaxResults})
+var sListTaskExecutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTaskExecutionsRequest_NextToken})
+var sListTaskExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaskExecutionsResponse, Members: &mListTaskExecutionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTaskExecutionsResponse})
+var sListTaskExecutionsResponse_TaskExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutions", ID: &i_TaskExecutionList, Members: &m_TaskExecutionList, Type: smithy.ShapeTypeList, Ext: &eListTaskExecutionsResponse_TaskExecutions})
+var sListTaskExecutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTaskExecutionsResponse_NextToken})
+var sListTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksRequest, Members: &mListTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTasksRequest})
+var sListTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTasksRequest_MaxResults})
+var sListTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTasksRequest_NextToken})
+var sListTasksRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_TaskFilters, Members: &m_TaskFilters, Type: smithy.ShapeTypeList, Ext: &eListTasksRequest_Filters})
+var sListTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksResponse, Members: &mListTasksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTasksResponse})
+var sListTasksResponse_Tasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tasks", ID: &i_TaskList, Members: &m_TaskList, Type: smithy.ShapeTypeList, Ext: &eListTasksResponse_Tasks})
+var sListTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTasksResponse_NextToken})
+var sStartTaskExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTaskExecutionRequest, Members: &mStartTaskExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartTaskExecutionRequest})
+var sStartTaskExecutionRequest_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eStartTaskExecutionRequest_TaskArn})
+var sStartTaskExecutionRequest_OverrideOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverrideOptions", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eStartTaskExecutionRequest_OverrideOptions})
+var sStartTaskExecutionRequest_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eStartTaskExecutionRequest_Includes})
+var sStartTaskExecutionRequest_Excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excludes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eStartTaskExecutionRequest_Excludes})
+var sStartTaskExecutionRequest_ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestConfig", ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartTaskExecutionRequest_ManifestConfig})
+var sStartTaskExecutionRequest_TaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskReportConfig", ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartTaskExecutionRequest_TaskReportConfig})
+var sStartTaskExecutionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eStartTaskExecutionRequest_Tags})
+var sStartTaskExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTaskExecutionResponse, Members: &mStartTaskExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartTaskExecutionResponse})
+var sStartTaskExecutionResponse_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eStartTaskExecutionResponse_TaskExecutionArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTagList, Members: &m_InputTagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_Keys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAgentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgentRequest, Members: &mUpdateAgentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAgentRequest})
+var sUpdateAgentRequest_AgentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArn", ID: &i_AgentArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAgentRequest_AgentArn})
+var sUpdateAgentRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eUpdateAgentRequest_Name})
+var sUpdateAgentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgentResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAgentResponse})
+var sUpdateLocationAzureBlobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationAzureBlobRequest, Members: &mUpdateLocationAzureBlobRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobRequest})
+var sUpdateLocationAzureBlobRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationAzureBlobRequest_LocationArn})
+var sUpdateLocationAzureBlobRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_AzureBlobSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationAzureBlobRequest_Subdirectory})
+var sUpdateLocationAzureBlobRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAzureBlobAuthenticationType, Members: &mAzureBlobAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationAzureBlobRequest_AuthenticationType})
+var sUpdateLocationAzureBlobRequest_SasConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SasConfiguration", ID: &iAzureBlobSasConfiguration, Members: &mAzureBlobSasConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobRequest_SasConfiguration})
+var sUpdateLocationAzureBlobRequest_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iAzureFederatedIdentityConfig, Members: &mAzureFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobRequest_FederatedIdentity})
+var sUpdateLocationAzureBlobRequest_BlobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlobType", ID: &iAzureBlobType, Members: &mAzureBlobType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationAzureBlobRequest_BlobType})
+var sUpdateLocationAzureBlobRequest_AccessTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessTier", ID: &iAzureAccessTier, Members: &mAzureAccessTier, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationAzureBlobRequest_AccessTier})
+var sUpdateLocationAzureBlobRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationAzureBlobRequest_AgentArns})
+var sUpdateLocationAzureBlobRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobRequest_CmkSecretConfig})
+var sUpdateLocationAzureBlobRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobRequest_CustomSecretConfig})
+var sUpdateLocationAzureBlobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationAzureBlobResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationAzureBlobResponse})
+var sUpdateLocationEfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationEfsRequest, Members: &mUpdateLocationEfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationEfsRequest})
+var sUpdateLocationEfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationEfsRequest_LocationArn})
+var sUpdateLocationEfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_EfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationEfsRequest_Subdirectory})
+var sUpdateLocationEfsRequest_AccessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPointArn", ID: &i_UpdatedEfsAccessPointArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationEfsRequest_AccessPointArn})
+var sUpdateLocationEfsRequest_FileSystemAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAccessRoleArn", ID: &i_UpdatedEfsIamRoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationEfsRequest_FileSystemAccessRoleArn})
+var sUpdateLocationEfsRequest_InTransitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InTransitEncryption", ID: &iEfsInTransitEncryption, Members: &mEfsInTransitEncryption, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationEfsRequest_InTransitEncryption})
+var sUpdateLocationEfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationEfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationEfsResponse})
+var sUpdateLocationFsxLustreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxLustreRequest, Members: &mUpdateLocationFsxLustreRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxLustreRequest})
+var sUpdateLocationFsxLustreRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxLustreRequest_LocationArn})
+var sUpdateLocationFsxLustreRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_SmbSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxLustreRequest_Subdirectory})
+var sUpdateLocationFsxLustreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxLustreResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxLustreResponse})
+var sUpdateLocationFsxOntapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOntapRequest, Members: &mUpdateLocationFsxOntapRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOntapRequest})
+var sUpdateLocationFsxOntapRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxOntapRequest_LocationArn})
+var sUpdateLocationFsxOntapRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxUpdateProtocol, Members: &mFsxUpdateProtocol, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOntapRequest_Protocol})
+var sUpdateLocationFsxOntapRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxOntapSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxOntapRequest_Subdirectory})
+var sUpdateLocationFsxOntapResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOntapResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOntapResponse})
+var sUpdateLocationFsxOpenZfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOpenZfsRequest, Members: &mUpdateLocationFsxOpenZfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOpenZfsRequest})
+var sUpdateLocationFsxOpenZfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxOpenZfsRequest_LocationArn})
+var sUpdateLocationFsxOpenZfsRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iFsxProtocol, Members: &mFsxProtocol, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOpenZfsRequest_Protocol})
+var sUpdateLocationFsxOpenZfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_SmbSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxOpenZfsRequest_Subdirectory})
+var sUpdateLocationFsxOpenZfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxOpenZfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxOpenZfsResponse})
+var sUpdateLocationFsxWindowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxWindowsRequest, Members: &mUpdateLocationFsxWindowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxWindowsRequest})
+var sUpdateLocationFsxWindowsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxWindowsRequest_LocationArn})
+var sUpdateLocationFsxWindowsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_FsxWindowsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxWindowsRequest_Subdirectory})
+var sUpdateLocationFsxWindowsRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_UpdateSmbDomain, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxWindowsRequest_Domain})
+var sUpdateLocationFsxWindowsRequest_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxWindowsRequest_User})
+var sUpdateLocationFsxWindowsRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationFsxWindowsRequest_Password})
+var sUpdateLocationFsxWindowsRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxWindowsRequest_CmkSecretConfig})
+var sUpdateLocationFsxWindowsRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxWindowsRequest_CustomSecretConfig})
+var sUpdateLocationFsxWindowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationFsxWindowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationFsxWindowsResponse})
+var sUpdateLocationHdfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationHdfsRequest, Members: &mUpdateLocationHdfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationHdfsRequest})
+var sUpdateLocationHdfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationHdfsRequest_LocationArn})
+var sUpdateLocationHdfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_HdfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationHdfsRequest_Subdirectory})
+var sUpdateLocationHdfsRequest_NameNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NameNodes", ID: &i_HdfsNameNodeList, Members: &m_HdfsNameNodeList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationHdfsRequest_NameNodes})
+var sUpdateLocationHdfsRequest_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_HdfsBlockSize, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLocationHdfsRequest_BlockSize})
+var sUpdateLocationHdfsRequest_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i_HdfsReplicationFactor, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLocationHdfsRequest_ReplicationFactor})
+var sUpdateLocationHdfsRequest_KmsKeyProviderUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyProviderUri", ID: &i_KmsKeyProviderUri, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationHdfsRequest_KmsKeyProviderUri})
+var sUpdateLocationHdfsRequest_QopConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QopConfiguration", ID: &iQopConfiguration, Members: &mQopConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationHdfsRequest_QopConfiguration})
+var sUpdateLocationHdfsRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iHdfsAuthenticationType, Members: &mHdfsAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationHdfsRequest_AuthenticationType})
+var sUpdateLocationHdfsRequest_SimpleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SimpleUser", ID: &i_HdfsUser, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationHdfsRequest_SimpleUser})
+var sUpdateLocationHdfsRequest_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationHdfsRequest_KerberosPrincipal})
+var sUpdateLocationHdfsRequest_KerberosKeytab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKeytab", ID: &i_KerberosKeytabFile, Type: smithy.ShapeTypeBlob, Ext: &eUpdateLocationHdfsRequest_KerberosKeytab})
+var sUpdateLocationHdfsRequest_KerberosKrb5Conf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKrb5Conf", ID: &i_KerberosKrb5ConfFile, Type: smithy.ShapeTypeBlob, Ext: &eUpdateLocationHdfsRequest_KerberosKrb5Conf})
+var sUpdateLocationHdfsRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationHdfsRequest_AgentArns})
+var sUpdateLocationHdfsRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationHdfsRequest_CmkSecretConfig})
+var sUpdateLocationHdfsRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationHdfsRequest_CustomSecretConfig})
+var sUpdateLocationHdfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationHdfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationHdfsResponse})
+var sUpdateLocationNfsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationNfsRequest, Members: &mUpdateLocationNfsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationNfsRequest})
+var sUpdateLocationNfsRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationNfsRequest_LocationArn})
+var sUpdateLocationNfsRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_NfsSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationNfsRequest_Subdirectory})
+var sUpdateLocationNfsRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationNfsRequest_ServerHostname})
+var sUpdateLocationNfsRequest_OnPremConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPremConfig", ID: &iOnPremConfig, Members: &mOnPremConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationNfsRequest_OnPremConfig})
+var sUpdateLocationNfsRequest_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iNfsMountOptions, Members: &mNfsMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationNfsRequest_MountOptions})
+var sUpdateLocationNfsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationNfsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationNfsResponse})
+var sUpdateLocationObjectStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationObjectStorageRequest, Members: &mUpdateLocationObjectStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationObjectStorageRequest})
+var sUpdateLocationObjectStorageRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationObjectStorageRequest_LocationArn})
+var sUpdateLocationObjectStorageRequest_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_ObjectStorageServerPort, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLocationObjectStorageRequest_ServerPort})
+var sUpdateLocationObjectStorageRequest_ServerProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProtocol", ID: &iObjectStorageServerProtocol, Members: &mObjectStorageServerProtocol, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationObjectStorageRequest_ServerProtocol})
+var sUpdateLocationObjectStorageRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationObjectStorageRequest_Subdirectory})
+var sUpdateLocationObjectStorageRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationObjectStorageRequest_ServerHostname})
+var sUpdateLocationObjectStorageRequest_AccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKey", ID: &i_ObjectStorageAccessKey, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationObjectStorageRequest_AccessKey})
+var sUpdateLocationObjectStorageRequest_SecretKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretKey", ID: &i_ObjectStorageSecretKey, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationObjectStorageRequest_SecretKey})
+var sUpdateLocationObjectStorageRequest_FederatedIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederatedIdentity", ID: &iObjectStorageFederatedIdentityConfig, Members: &mObjectStorageFederatedIdentityConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationObjectStorageRequest_FederatedIdentity})
+var sUpdateLocationObjectStorageRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationObjectStorageRequest_AgentArns})
+var sUpdateLocationObjectStorageRequest_ServerCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificate", ID: &i_ObjectStorageCertificate, Type: smithy.ShapeTypeBlob, Ext: &eUpdateLocationObjectStorageRequest_ServerCertificate})
+var sUpdateLocationObjectStorageRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationObjectStorageRequest_CmkSecretConfig})
+var sUpdateLocationObjectStorageRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationObjectStorageRequest_CustomSecretConfig})
+var sUpdateLocationObjectStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationObjectStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationObjectStorageResponse})
+var sUpdateLocationS3Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationS3Request, Members: &mUpdateLocationS3Request, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationS3Request})
+var sUpdateLocationS3Request_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationS3Request_LocationArn})
+var sUpdateLocationS3Request_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_S3Subdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationS3Request_Subdirectory})
+var sUpdateLocationS3Request_S3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageClass", ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationS3Request_S3StorageClass})
+var sUpdateLocationS3Request_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationS3Request_S3Config})
+var sUpdateLocationS3Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationS3Response, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationS3Response})
+var sUpdateLocationSmbRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationSmbRequest, Members: &mUpdateLocationSmbRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationSmbRequest})
+var sUpdateLocationSmbRequest_LocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationArn", ID: &i_LocationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_LocationArn})
+var sUpdateLocationSmbRequest_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdirectory", ID: &i_SmbSubdirectory, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_Subdirectory})
+var sUpdateLocationSmbRequest_ServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerHostname", ID: &i_ServerHostname, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_ServerHostname})
+var sUpdateLocationSmbRequest_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SmbUser, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_User})
+var sUpdateLocationSmbRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_SmbDomain, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_Domain})
+var sUpdateLocationSmbRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SmbPassword, Traits: &t0, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_Password})
+var sUpdateLocationSmbRequest_CmkSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkSecretConfig", ID: &iCmkSecretConfig, Members: &mCmkSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationSmbRequest_CmkSecretConfig})
+var sUpdateLocationSmbRequest_CustomSecretConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomSecretConfig", ID: &iCustomSecretConfig, Members: &mCustomSecretConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationSmbRequest_CustomSecretConfig})
+var sUpdateLocationSmbRequest_AgentArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgentArns", ID: &i_AgentArnList, Members: &m_AgentArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationSmbRequest_AgentArns})
+var sUpdateLocationSmbRequest_MountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountOptions", ID: &iSmbMountOptions, Members: &mSmbMountOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationSmbRequest_MountOptions})
+var sUpdateLocationSmbRequest_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iSmbAuthenticationType, Members: &mSmbAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLocationSmbRequest_AuthenticationType})
+var sUpdateLocationSmbRequest_DnsIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddresses", ID: &i_DnsIpList, Members: &m_DnsIpList, Type: smithy.ShapeTypeList, Ext: &eUpdateLocationSmbRequest_DnsIpAddresses})
+var sUpdateLocationSmbRequest_KerberosPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosPrincipal", ID: &i_KerberosPrincipal, Type: smithy.ShapeTypeString, Ext: &eUpdateLocationSmbRequest_KerberosPrincipal})
+var sUpdateLocationSmbRequest_KerberosKeytab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKeytab", ID: &i_KerberosKeytabFile, Type: smithy.ShapeTypeBlob, Ext: &eUpdateLocationSmbRequest_KerberosKeytab})
+var sUpdateLocationSmbRequest_KerberosKrb5Conf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KerberosKrb5Conf", ID: &i_KerberosKrb5ConfFile, Type: smithy.ShapeTypeBlob, Ext: &eUpdateLocationSmbRequest_KerberosKrb5Conf})
+var sUpdateLocationSmbResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLocationSmbResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLocationSmbResponse})
+var sUpdateTaskExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTaskExecutionRequest, Members: &mUpdateTaskExecutionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskExecutionRequest})
+var sUpdateTaskExecutionRequest_TaskExecutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskExecutionArn", ID: &i_TaskExecutionArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTaskExecutionRequest_TaskExecutionArn})
+var sUpdateTaskExecutionRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskExecutionRequest_Options})
+var sUpdateTaskExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTaskExecutionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskExecutionResponse})
+var sUpdateTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTaskRequest, Members: &mUpdateTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskRequest})
+var sUpdateTaskRequest_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTaskRequest_TaskArn})
+var sUpdateTaskRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iOptions, Members: &mOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskRequest_Options})
+var sUpdateTaskRequest_Excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excludes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eUpdateTaskRequest_Excludes})
+var sUpdateTaskRequest_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iTaskSchedule, Members: &mTaskSchedule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskRequest_Schedule})
+var sUpdateTaskRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eUpdateTaskRequest_Name})
+var sUpdateTaskRequest_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTaskRequest_CloudWatchLogGroupArn})
+var sUpdateTaskRequest_Includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Includes", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eUpdateTaskRequest_Includes})
+var sUpdateTaskRequest_ManifestConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestConfig", ID: &iManifestConfig, Members: &mManifestConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskRequest_ManifestConfig})
+var sUpdateTaskRequest_TaskReportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskReportConfig", ID: &iTaskReportConfig, Members: &mTaskReportConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskRequest_TaskReportConfig})
+var sUpdateTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTaskResponse})
+
+var CancelTaskExecution = &sCancelTaskExecution
+
+var CreateAgent = &sCreateAgent
+
+var CreateLocationAzureBlob = &sCreateLocationAzureBlob
+
+var CreateLocationEfs = &sCreateLocationEfs
+
+var CreateLocationFsxLustre = &sCreateLocationFsxLustre
+
+var CreateLocationFsxOntap = &sCreateLocationFsxOntap
+
+var CreateLocationFsxOpenZfs = &sCreateLocationFsxOpenZfs
+
+var CreateLocationFsxWindows = &sCreateLocationFsxWindows
+
+var CreateLocationHdfs = &sCreateLocationHdfs
+
+var CreateLocationNfs = &sCreateLocationNfs
+
+var CreateLocationObjectStorage = &sCreateLocationObjectStorage
+
+var CreateLocationS3 = &sCreateLocationS3
+
+var CreateLocationSmb = &sCreateLocationSmb
+
+var CreateTask = &sCreateTask
+
+var DeleteAgent = &sDeleteAgent
+
+var DeleteLocation = &sDeleteLocation
+
+var DeleteTask = &sDeleteTask
+
+var DescribeAgent = &sDescribeAgent
+
+var DescribeLocationAzureBlob = &sDescribeLocationAzureBlob
+
+var DescribeLocationEfs = &sDescribeLocationEfs
+
+var DescribeLocationFsxLustre = &sDescribeLocationFsxLustre
+
+var DescribeLocationFsxOntap = &sDescribeLocationFsxOntap
+
+var DescribeLocationFsxOpenZfs = &sDescribeLocationFsxOpenZfs
+
+var DescribeLocationFsxWindows = &sDescribeLocationFsxWindows
+
+var DescribeLocationHdfs = &sDescribeLocationHdfs
+
+var DescribeLocationNfs = &sDescribeLocationNfs
+
+var DescribeLocationObjectStorage = &sDescribeLocationObjectStorage
+
+var DescribeLocationS3 = &sDescribeLocationS3
+
+var DescribeLocationSmb = &sDescribeLocationSmb
+
+var DescribeTask = &sDescribeTask
+
+var DescribeTaskExecution = &sDescribeTaskExecution
+
+var ListAgents = &sListAgents
+
+var ListLocations = &sListLocations
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTaskExecutions = &sListTaskExecutions
+
+var ListTasks = &sListTasks
+
+var StartTaskExecution = &sStartTaskExecution
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAgent = &sUpdateAgent
+
+var UpdateLocationAzureBlob = &sUpdateLocationAzureBlob
+
+var UpdateLocationEfs = &sUpdateLocationEfs
+
+var UpdateLocationFsxLustre = &sUpdateLocationFsxLustre
+
+var UpdateLocationFsxOntap = &sUpdateLocationFsxOntap
+
+var UpdateLocationFsxOpenZfs = &sUpdateLocationFsxOpenZfs
+
+var UpdateLocationFsxWindows = &sUpdateLocationFsxWindows
+
+var UpdateLocationHdfs = &sUpdateLocationHdfs
+
+var UpdateLocationNfs = &sUpdateLocationNfs
+
+var UpdateLocationObjectStorage = &sUpdateLocationObjectStorage
+
+var UpdateLocationS3 = &sUpdateLocationS3
+
+var UpdateLocationSmb = &sUpdateLocationSmb
+
+var UpdateTask = &sUpdateTask
+
+var UpdateTaskExecution = &sUpdateTaskExecution
+
+var _FmrsService = &s_FmrsService
+
+var _ActivationKey = &s_ActivationKey
+
+var _AgentArn = &s_AgentArn
+
+var _AgentArnList = &s_AgentArnList
+var _AgentArnList_member = &s_AgentArnList_member
+
+var _AgentList = &s_AgentList
+var _AgentList_member = &s_AgentList_member
+
+var AgentListEntry = &sAgentListEntry
+var AgentListEntry_AgentArn = &sAgentListEntry_AgentArn
+var AgentListEntry_Name = &sAgentListEntry_Name
+var AgentListEntry_Status = &sAgentListEntry_Status
+var AgentListEntry_Platform = &sAgentListEntry_Platform
+
+var AgentStatus = &sAgentStatus
+var AgentStatus_ONLINE = &sAgentStatus_ONLINE
+var AgentStatus_OFFLINE = &sAgentStatus_OFFLINE
+
+var _AgentVersion = &s_AgentVersion
+
+var Atime = &sAtime
+var Atime_NONE = &sAtime_NONE
+var Atime_BEST_EFFORT = &sAtime_BEST_EFFORT
+
+var AzureAccessTier = &sAzureAccessTier
+var AzureAccessTier_HOT = &sAzureAccessTier_HOT
+var AzureAccessTier_COOL = &sAzureAccessTier_COOL
+var AzureAccessTier_ARCHIVE = &sAzureAccessTier_ARCHIVE
+
+var AzureBlobAuthenticationType = &sAzureBlobAuthenticationType
+var AzureBlobAuthenticationType_SAS = &sAzureBlobAuthenticationType_SAS
+var AzureBlobAuthenticationType_NONE = &sAzureBlobAuthenticationType_NONE
+var AzureBlobAuthenticationType_OIDC = &sAzureBlobAuthenticationType_OIDC
+
+var _AzureBlobContainerUrl = &s_AzureBlobContainerUrl
+
+var AzureBlobSasConfiguration = &sAzureBlobSasConfiguration
+var AzureBlobSasConfiguration_Token = &sAzureBlobSasConfiguration_Token
+
+var _AzureBlobSasToken = &s_AzureBlobSasToken
+
+var _AzureBlobSubdirectory = &s_AzureBlobSubdirectory
+
+var AzureBlobType = &sAzureBlobType
+var AzureBlobType_BLOCK = &sAzureBlobType_BLOCK
+
+var AzureFederatedIdentityConfig = &sAzureFederatedIdentityConfig
+var AzureFederatedIdentityConfig_AwsIamRole = &sAzureFederatedIdentityConfig_AwsIamRole
+var AzureFederatedIdentityConfig_AzureOidc = &sAzureFederatedIdentityConfig_AzureOidc
+
+var _AzureGuidString = &s_AzureGuidString
+
+var AzureOidcConfig = &sAzureOidcConfig
+var AzureOidcConfig_TenantId = &sAzureOidcConfig_TenantId
+var AzureOidcConfig_ClientId = &sAzureOidcConfig_ClientId
+
+var _BytesPerSecond = &s_BytesPerSecond
+
+var CmkSecretConfig = &sCmkSecretConfig
+var CmkSecretConfig_SecretArn = &sCmkSecretConfig_SecretArn
+var CmkSecretConfig_KmsKeyArn = &sCmkSecretConfig_KmsKeyArn
+
+var CustomSecretConfig = &sCustomSecretConfig
+var CustomSecretConfig_SecretArn = &sCustomSecretConfig_SecretArn
+var CustomSecretConfig_SecretAccessRoleArn = &sCustomSecretConfig_SecretAccessRoleArn
+
+var _DestinationNetworkInterfaceArns = &s_DestinationNetworkInterfaceArns
+var _DestinationNetworkInterfaceArns_member = &s_DestinationNetworkInterfaceArns_member
+
+var _DnsIpList = &s_DnsIpList
+var _DnsIpList_member = &s_DnsIpList_member
+
+var _Duration = &s_Duration
+
+var Ec2Config = &sEc2Config
+var Ec2Config_SubnetArn = &sEc2Config_SubnetArn
+var Ec2Config_SecurityGroupArns = &sEc2Config_SecurityGroupArns
+
+var _Ec2SecurityGroupArn = &s_Ec2SecurityGroupArn
+
+var _Ec2SecurityGroupArnList = &s_Ec2SecurityGroupArnList
+var _Ec2SecurityGroupArnList_member = &s_Ec2SecurityGroupArnList_member
+
+var _Ec2SubnetArn = &s_Ec2SubnetArn
+
+var _EfsAccessPointArn = &s_EfsAccessPointArn
+
+var _EfsFilesystemArn = &s_EfsFilesystemArn
+
+var EfsInTransitEncryption = &sEfsInTransitEncryption
+var EfsInTransitEncryption_NONE = &sEfsInTransitEncryption_NONE
+var EfsInTransitEncryption_TLS1_2 = &sEfsInTransitEncryption_TLS1_2
+
+var _EfsSubdirectory = &s_EfsSubdirectory
+
+var _Endpoint = &s_Endpoint
+
+var EndpointType = &sEndpointType
+var EndpointType_PUBLIC = &sEndpointType_PUBLIC
+var EndpointType_PRIVATE_LINK = &sEndpointType_PRIVATE_LINK
+var EndpointType_FIPS = &sEndpointType_FIPS
+var EndpointType_FIPS_PRIVATE_LINK = &sEndpointType_FIPS_PRIVATE_LINK
+
+var _FilterAttributeValue = &s_FilterAttributeValue
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var FilterRule = &sFilterRule
+var FilterRule_FilterType = &sFilterRule_FilterType
+var FilterRule_Value = &sFilterRule_Value
+
+var FilterType = &sFilterType
+var FilterType_SIMPLE_PATTERN = &sFilterType_SIMPLE_PATTERN
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var _FsxFilesystemArn = &s_FsxFilesystemArn
+
+var _FsxLustreSubdirectory = &s_FsxLustreSubdirectory
+
+var _FsxOntapSubdirectory = &s_FsxOntapSubdirectory
+
+var _FsxOpenZfsSubdirectory = &s_FsxOpenZfsSubdirectory
+
+var FsxProtocol = &sFsxProtocol
+var FsxProtocol_NFS = &sFsxProtocol_NFS
+var FsxProtocol_SMB = &sFsxProtocol_SMB
+
+var FsxProtocolNfs = &sFsxProtocolNfs
+var FsxProtocolNfs_MountOptions = &sFsxProtocolNfs_MountOptions
+
+var FsxProtocolSmb = &sFsxProtocolSmb
+var FsxProtocolSmb_Domain = &sFsxProtocolSmb_Domain
+var FsxProtocolSmb_MountOptions = &sFsxProtocolSmb_MountOptions
+var FsxProtocolSmb_Password = &sFsxProtocolSmb_Password
+var FsxProtocolSmb_User = &sFsxProtocolSmb_User
+var FsxProtocolSmb_ManagedSecretConfig = &sFsxProtocolSmb_ManagedSecretConfig
+var FsxProtocolSmb_CmkSecretConfig = &sFsxProtocolSmb_CmkSecretConfig
+var FsxProtocolSmb_CustomSecretConfig = &sFsxProtocolSmb_CustomSecretConfig
+
+var FsxUpdateProtocol = &sFsxUpdateProtocol
+var FsxUpdateProtocol_NFS = &sFsxUpdateProtocol_NFS
+var FsxUpdateProtocol_SMB = &sFsxUpdateProtocol_SMB
+
+var FsxUpdateProtocolSmb = &sFsxUpdateProtocolSmb
+var FsxUpdateProtocolSmb_Domain = &sFsxUpdateProtocolSmb_Domain
+var FsxUpdateProtocolSmb_MountOptions = &sFsxUpdateProtocolSmb_MountOptions
+var FsxUpdateProtocolSmb_Password = &sFsxUpdateProtocolSmb_Password
+var FsxUpdateProtocolSmb_User = &sFsxUpdateProtocolSmb_User
+var FsxUpdateProtocolSmb_CmkSecretConfig = &sFsxUpdateProtocolSmb_CmkSecretConfig
+var FsxUpdateProtocolSmb_CustomSecretConfig = &sFsxUpdateProtocolSmb_CustomSecretConfig
+
+var _FsxWindowsSubdirectory = &s_FsxWindowsSubdirectory
+
+var Gid = &sGid
+var Gid_NONE = &sGid_NONE
+var Gid_INT_VALUE = &sGid_INT_VALUE
+var Gid_NAME = &sGid_NAME
+var Gid_BOTH = &sGid_BOTH
+
+var _GoogleIdentityFederationResourceString = &s_GoogleIdentityFederationResourceString
+
+var GoogleOidcConfig = &sGoogleOidcConfig
+var GoogleOidcConfig_ProjectName = &sGoogleOidcConfig_ProjectName
+var GoogleOidcConfig_ProjectNumber = &sGoogleOidcConfig_ProjectNumber
+var GoogleOidcConfig_IdentityPoolName = &sGoogleOidcConfig_IdentityPoolName
+var GoogleOidcConfig_IdentityProviderName = &sGoogleOidcConfig_IdentityProviderName
+
+var HdfsAuthenticationType = &sHdfsAuthenticationType
+var HdfsAuthenticationType_SIMPLE = &sHdfsAuthenticationType_SIMPLE
+var HdfsAuthenticationType_KERBEROS = &sHdfsAuthenticationType_KERBEROS
+
+var _HdfsBlockSize = &s_HdfsBlockSize
+
+var HdfsDataTransferProtection = &sHdfsDataTransferProtection
+var HdfsDataTransferProtection_DISABLED = &sHdfsDataTransferProtection_DISABLED
+var HdfsDataTransferProtection_AUTHENTICATION = &sHdfsDataTransferProtection_AUTHENTICATION
+var HdfsDataTransferProtection_INTEGRITY = &sHdfsDataTransferProtection_INTEGRITY
+var HdfsDataTransferProtection_PRIVACY = &sHdfsDataTransferProtection_PRIVACY
+
+var HdfsNameNode = &sHdfsNameNode
+var HdfsNameNode_Hostname = &sHdfsNameNode_Hostname
+var HdfsNameNode_Port = &sHdfsNameNode_Port
+
+var _HdfsNameNodeList = &s_HdfsNameNodeList
+var _HdfsNameNodeList_member = &s_HdfsNameNodeList_member
+
+var _HdfsReplicationFactor = &s_HdfsReplicationFactor
+
+var HdfsRpcProtection = &sHdfsRpcProtection
+var HdfsRpcProtection_DISABLED = &sHdfsRpcProtection_DISABLED
+var HdfsRpcProtection_AUTHENTICATION = &sHdfsRpcProtection_AUTHENTICATION
+var HdfsRpcProtection_INTEGRITY = &sHdfsRpcProtection_INTEGRITY
+var HdfsRpcProtection_PRIVACY = &sHdfsRpcProtection_PRIVACY
+
+var _HdfsServerHostname = &s_HdfsServerHostname
+
+var _HdfsServerPort = &s_HdfsServerPort
+
+var _HdfsSubdirectory = &s_HdfsSubdirectory
+
+var _HdfsUser = &s_HdfsUser
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _IamRoleArnOrEmptyString = &s_IamRoleArnOrEmptyString
+
+var _InputTagList = &s_InputTagList
+var _InputTagList_member = &s_InputTagList_member
+
+var InternalException = &sInternalException
+var InternalException_message = &sInternalException_message
+var InternalException_errorCode = &sInternalException_errorCode
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+var InvalidRequestException_errorCode = &sInvalidRequestException_errorCode
+var InvalidRequestException_datasyncErrorCode = &sInvalidRequestException_datasyncErrorCode
+
+var _ItemCount = &s_ItemCount
+
+var _KerberosKeytabFile = &s_KerberosKeytabFile
+
+var _KerberosKrb5ConfFile = &s_KerberosKrb5ConfFile
+
+var _KerberosPrincipal = &s_KerberosPrincipal
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _KmsKeyProviderUri = &s_KmsKeyProviderUri
+
+var _LocationArn = &s_LocationArn
+
+var LocationFilter = &sLocationFilter
+var LocationFilter_Name = &sLocationFilter_Name
+var LocationFilter_Values = &sLocationFilter_Values
+var LocationFilter_Operator = &sLocationFilter_Operator
+
+var LocationFilterName = &sLocationFilterName
+var LocationFilterName_LocationUri = &sLocationFilterName_LocationUri
+var LocationFilterName_LocationType = &sLocationFilterName_LocationType
+var LocationFilterName_CreationTime = &sLocationFilterName_CreationTime
+
+var _LocationFilters = &s_LocationFilters
+var _LocationFilters_member = &s_LocationFilters_member
+
+var _LocationList = &s_LocationList
+var _LocationList_member = &s_LocationList_member
+
+var LocationListEntry = &sLocationListEntry
+var LocationListEntry_LocationArn = &sLocationListEntry_LocationArn
+var LocationListEntry_LocationUri = &sLocationListEntry_LocationUri
+
+var _LocationUri = &s_LocationUri
+
+var _LogGroupArn = &s_LogGroupArn
+
+var LogLevel = &sLogLevel
+var LogLevel_OFF = &sLogLevel_OFF
+var LogLevel_BASIC = &sLogLevel_BASIC
+var LogLevel_TRANSFER = &sLogLevel_TRANSFER
+
+var _long = &s_long
+
+var ManagedSecretConfig = &sManagedSecretConfig
+var ManagedSecretConfig_SecretArn = &sManagedSecretConfig_SecretArn
+
+var ManifestAction = &sManifestAction
+var ManifestAction_TRANSFER = &sManifestAction_TRANSFER
+
+var ManifestConfig = &sManifestConfig
+var ManifestConfig_Action = &sManifestConfig_Action
+var ManifestConfig_Format = &sManifestConfig_Format
+var ManifestConfig_Source = &sManifestConfig_Source
+
+var ManifestFormat = &sManifestFormat
+var ManifestFormat_CSV = &sManifestFormat_CSV
+
+var _MaxResults = &s_MaxResults
+
+var Mtime = &sMtime
+var Mtime_NONE = &sMtime_NONE
+var Mtime_PRESERVE = &sMtime_PRESERVE
+
+var _NetworkInterfaceArn = &s_NetworkInterfaceArn
+
+var _NextToken = &s_NextToken
+
+var NfsMountOptions = &sNfsMountOptions
+var NfsMountOptions_Version = &sNfsMountOptions_Version
+
+var _NfsSubdirectory = &s_NfsSubdirectory
+
+var NfsVersion = &sNfsVersion
+var NfsVersion_AUTOMATIC = &sNfsVersion_AUTOMATIC
+var NfsVersion_NFS3 = &sNfsVersion_NFS3
+var NfsVersion_NFS4_0 = &sNfsVersion_NFS4_0
+var NfsVersion_NFS4_1 = &sNfsVersion_NFS4_1
+var NfsVersion_NFS4_2 = &sNfsVersion_NFS4_2
+
+var ObjectMetadata = &sObjectMetadata
+var ObjectMetadata_PRESERVE = &sObjectMetadata_PRESERVE
+var ObjectMetadata_NONE = &sObjectMetadata_NONE
+
+var _ObjectStorageAccessKey = &s_ObjectStorageAccessKey
+
+var _ObjectStorageBucketName = &s_ObjectStorageBucketName
+
+var _ObjectStorageCertificate = &s_ObjectStorageCertificate
+
+var ObjectStorageExternalIdentityConfig = &sObjectStorageExternalIdentityConfig
+var ObjectStorageExternalIdentityConfig_GoogleOidc = &sObjectStorageExternalIdentityConfig_GoogleOidc
+
+var ObjectStorageFederatedIdentityConfig = &sObjectStorageFederatedIdentityConfig
+var ObjectStorageFederatedIdentityConfig_AwsIamRole = &sObjectStorageFederatedIdentityConfig_AwsIamRole
+var ObjectStorageFederatedIdentityConfig_ExternalIdentity = &sObjectStorageFederatedIdentityConfig_ExternalIdentity
+
+var _ObjectStorageSecretKey = &s_ObjectStorageSecretKey
+
+var _ObjectStorageServerPort = &s_ObjectStorageServerPort
+
+var ObjectStorageServerProtocol = &sObjectStorageServerProtocol
+var ObjectStorageServerProtocol_HTTPS = &sObjectStorageServerProtocol_HTTPS
+var ObjectStorageServerProtocol_HTTP = &sObjectStorageServerProtocol_HTTP
+
+var ObjectTags = &sObjectTags
+var ObjectTags_PRESERVE = &sObjectTags_PRESERVE
+var ObjectTags_NONE = &sObjectTags_NONE
+
+var ObjectVersionIds = &sObjectVersionIds
+var ObjectVersionIds_INCLUDE = &sObjectVersionIds_INCLUDE
+var ObjectVersionIds_NONE = &sObjectVersionIds_NONE
+
+var OnPremConfig = &sOnPremConfig
+var OnPremConfig_AgentArns = &sOnPremConfig_AgentArns
+
+var Operator = &sOperator
+var Operator_EQ = &sOperator_EQ
+var Operator_NE = &sOperator_NE
+var Operator_IN = &sOperator_IN
+var Operator_LE = &sOperator_LE
+var Operator_LT = &sOperator_LT
+var Operator_GE = &sOperator_GE
+var Operator_GT = &sOperator_GT
+var Operator_CONTAINS = &sOperator_CONTAINS
+var Operator_NOT_CONTAINS = &sOperator_NOT_CONTAINS
+var Operator_BEGINS_WITH = &sOperator_BEGINS_WITH
+
+var Options = &sOptions
+var Options_VerifyMode = &sOptions_VerifyMode
+var Options_OverwriteMode = &sOptions_OverwriteMode
+var Options_Atime = &sOptions_Atime
+var Options_Mtime = &sOptions_Mtime
+var Options_Uid = &sOptions_Uid
+var Options_Gid = &sOptions_Gid
+var Options_PreserveDeletedFiles = &sOptions_PreserveDeletedFiles
+var Options_PreserveDevices = &sOptions_PreserveDevices
+var Options_PosixPermissions = &sOptions_PosixPermissions
+var Options_BytesPerSecond = &sOptions_BytesPerSecond
+var Options_TaskQueueing = &sOptions_TaskQueueing
+var Options_LogLevel = &sOptions_LogLevel
+var Options_TransferMode = &sOptions_TransferMode
+var Options_SecurityDescriptorCopyFlags = &sOptions_SecurityDescriptorCopyFlags
+var Options_ObjectTags = &sOptions_ObjectTags
+var Options_ObjectMetadata = &sOptions_ObjectMetadata
+
+var _OutputTagList = &s_OutputTagList
+var _OutputTagList_member = &s_OutputTagList_member
+
+var OverwriteMode = &sOverwriteMode
+var OverwriteMode_ALWAYS = &sOverwriteMode_ALWAYS
+var OverwriteMode_NEVER = &sOverwriteMode_NEVER
+
+var PhaseStatus = &sPhaseStatus
+var PhaseStatus_PENDING = &sPhaseStatus_PENDING
+var PhaseStatus_SUCCESS = &sPhaseStatus_SUCCESS
+var PhaseStatus_ERROR = &sPhaseStatus_ERROR
+
+var Platform = &sPlatform
+var Platform_Version = &sPlatform_Version
+
+var _PLSecurityGroupArnList = &s_PLSecurityGroupArnList
+var _PLSecurityGroupArnList_member = &s_PLSecurityGroupArnList_member
+
+var _PLSubnetArnList = &s_PLSubnetArnList
+var _PLSubnetArnList_member = &s_PLSubnetArnList_member
+
+var PosixPermissions = &sPosixPermissions
+var PosixPermissions_NONE = &sPosixPermissions_NONE
+var PosixPermissions_PRESERVE = &sPosixPermissions_PRESERVE
+
+var PreserveDeletedFiles = &sPreserveDeletedFiles
+var PreserveDeletedFiles_PRESERVE = &sPreserveDeletedFiles_PRESERVE
+var PreserveDeletedFiles_REMOVE = &sPreserveDeletedFiles_REMOVE
+
+var PreserveDevices = &sPreserveDevices
+var PreserveDevices_NONE = &sPreserveDevices_NONE
+var PreserveDevices_PRESERVE = &sPreserveDevices_PRESERVE
+
+var PrivateLinkConfig = &sPrivateLinkConfig
+var PrivateLinkConfig_VpcEndpointId = &sPrivateLinkConfig_VpcEndpointId
+var PrivateLinkConfig_PrivateLinkEndpoint = &sPrivateLinkConfig_PrivateLinkEndpoint
+var PrivateLinkConfig_SubnetArns = &sPrivateLinkConfig_SubnetArns
+var PrivateLinkConfig_SecurityGroupArns = &sPrivateLinkConfig_SecurityGroupArns
+
+var _ProjectNameString = &s_ProjectNameString
+
+var _ProjectNumberString = &s_ProjectNumberString
+
+var QopConfiguration = &sQopConfiguration
+var QopConfiguration_RpcProtection = &sQopConfiguration_RpcProtection
+var QopConfiguration_DataTransferProtection = &sQopConfiguration_DataTransferProtection
+
+var ReportDestination = &sReportDestination
+var ReportDestination_S3 = &sReportDestination_S3
+
+var ReportDestinationS3 = &sReportDestinationS3
+var ReportDestinationS3_Subdirectory = &sReportDestinationS3_Subdirectory
+var ReportDestinationS3_S3BucketArn = &sReportDestinationS3_S3BucketArn
+var ReportDestinationS3_BucketAccessRoleArn = &sReportDestinationS3_BucketAccessRoleArn
+
+var ReportLevel = &sReportLevel
+var ReportLevel_ERRORS_ONLY = &sReportLevel_ERRORS_ONLY
+var ReportLevel_SUCCESSES_AND_ERRORS = &sReportLevel_SUCCESSES_AND_ERRORS
+
+var ReportOutputType = &sReportOutputType
+var ReportOutputType_SUMMARY_ONLY = &sReportOutputType_SUMMARY_ONLY
+var ReportOutputType_STANDARD = &sReportOutputType_STANDARD
+
+var ReportOverride = &sReportOverride
+var ReportOverride_ReportLevel = &sReportOverride_ReportLevel
+
+var ReportOverrides = &sReportOverrides
+var ReportOverrides_Transferred = &sReportOverrides_Transferred
+var ReportOverrides_Verified = &sReportOverrides_Verified
+var ReportOverrides_Deleted = &sReportOverrides_Deleted
+var ReportOverrides_Skipped = &sReportOverrides_Skipped
+
+var ReportResult = &sReportResult
+var ReportResult_Status = &sReportResult_Status
+var ReportResult_ErrorCode = &sReportResult_ErrorCode
+var ReportResult_ErrorDetail = &sReportResult_ErrorDetail
+
+var _S3BucketArn = &s_S3BucketArn
+
+var S3Config = &sS3Config
+var S3Config_BucketAccessRoleArn = &sS3Config_BucketAccessRoleArn
+
+var S3ManifestConfig = &sS3ManifestConfig
+var S3ManifestConfig_ManifestObjectPath = &sS3ManifestConfig_ManifestObjectPath
+var S3ManifestConfig_BucketAccessRoleArn = &sS3ManifestConfig_BucketAccessRoleArn
+var S3ManifestConfig_S3BucketArn = &sS3ManifestConfig_S3BucketArn
+var S3ManifestConfig_ManifestObjectVersionId = &sS3ManifestConfig_ManifestObjectVersionId
+
+var _S3ObjectVersionId = &s_S3ObjectVersionId
+
+var S3StorageClass = &sS3StorageClass
+var S3StorageClass_STANDARD = &sS3StorageClass_STANDARD
+var S3StorageClass_STANDARD_IA = &sS3StorageClass_STANDARD_IA
+var S3StorageClass_ONEZONE_IA = &sS3StorageClass_ONEZONE_IA
+var S3StorageClass_INTELLIGENT_TIERING = &sS3StorageClass_INTELLIGENT_TIERING
+var S3StorageClass_GLACIER = &sS3StorageClass_GLACIER
+var S3StorageClass_DEEP_ARCHIVE = &sS3StorageClass_DEEP_ARCHIVE
+var S3StorageClass_OUTPOSTS = &sS3StorageClass_OUTPOSTS
+var S3StorageClass_GLACIER_INSTANT_RETRIEVAL = &sS3StorageClass_GLACIER_INSTANT_RETRIEVAL
+
+var _S3Subdirectory = &s_S3Subdirectory
+
+var ScheduleDisabledBy = &sScheduleDisabledBy
+var ScheduleDisabledBy_USER = &sScheduleDisabledBy_USER
+var ScheduleDisabledBy_SERVICE = &sScheduleDisabledBy_SERVICE
+
+var _ScheduleDisabledReason = &s_ScheduleDisabledReason
+
+var _ScheduleExpressionCron = &s_ScheduleExpressionCron
+
+var ScheduleStatus = &sScheduleStatus
+var ScheduleStatus_ENABLED = &sScheduleStatus_ENABLED
+var ScheduleStatus_DISABLED = &sScheduleStatus_DISABLED
+
+var _SecretArn = &s_SecretArn
+
+var _ServerHostname = &s_ServerHostname
+
+var _ServerIpAddress = &s_ServerIpAddress
+
+var SmbAuthenticationType = &sSmbAuthenticationType
+var SmbAuthenticationType_NTLM = &sSmbAuthenticationType_NTLM
+var SmbAuthenticationType_KERBEROS = &sSmbAuthenticationType_KERBEROS
+
+var _SmbDomain = &s_SmbDomain
+
+var SmbMountOptions = &sSmbMountOptions
+var SmbMountOptions_Version = &sSmbMountOptions_Version
+
+var _SmbPassword = &s_SmbPassword
+
+var SmbSecurityDescriptorCopyFlags = &sSmbSecurityDescriptorCopyFlags
+var SmbSecurityDescriptorCopyFlags_NONE = &sSmbSecurityDescriptorCopyFlags_NONE
+var SmbSecurityDescriptorCopyFlags_OWNER_DACL = &sSmbSecurityDescriptorCopyFlags_OWNER_DACL
+var SmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL = &sSmbSecurityDescriptorCopyFlags_OWNER_DACL_SACL
+
+var _SmbSubdirectory = &s_SmbSubdirectory
+
+var _SmbUser = &s_SmbUser
+
+var SmbVersion = &sSmbVersion
+var SmbVersion_AUTOMATIC = &sSmbVersion_AUTOMATIC
+var SmbVersion_SMB2 = &sSmbVersion_SMB2
+var SmbVersion_SMB3 = &sSmbVersion_SMB3
+var SmbVersion_SMB1 = &sSmbVersion_SMB1
+var SmbVersion_SMB2_0 = &sSmbVersion_SMB2_0
+
+var SourceManifestConfig = &sSourceManifestConfig
+var SourceManifestConfig_S3 = &sSourceManifestConfig_S3
+
+var _SourceNetworkInterfaceArns = &s_SourceNetworkInterfaceArns
+var _SourceNetworkInterfaceArns_member = &s_SourceNetworkInterfaceArns_member
+
+var _StorageVirtualMachineArn = &s_StorageVirtualMachineArn
+
+var _string = &s_string
+
+var _TaggableResourceArn = &s_TaggableResourceArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagListEntry = &sTagListEntry
+var TagListEntry_Key = &sTagListEntry_Key
+var TagListEntry_Value = &sTagListEntry_Value
+
+var _TagValue = &s_TagValue
+
+var _TaskArn = &s_TaskArn
+
+var _TaskExecutionArn = &s_TaskExecutionArn
+
+var TaskExecutionFilesFailedDetail = &sTaskExecutionFilesFailedDetail
+var TaskExecutionFilesFailedDetail_Prepare = &sTaskExecutionFilesFailedDetail_Prepare
+var TaskExecutionFilesFailedDetail_Transfer = &sTaskExecutionFilesFailedDetail_Transfer
+var TaskExecutionFilesFailedDetail_Verify = &sTaskExecutionFilesFailedDetail_Verify
+var TaskExecutionFilesFailedDetail_Delete = &sTaskExecutionFilesFailedDetail_Delete
+
+var TaskExecutionFilesListedDetail = &sTaskExecutionFilesListedDetail
+var TaskExecutionFilesListedDetail_AtSource = &sTaskExecutionFilesListedDetail_AtSource
+var TaskExecutionFilesListedDetail_AtDestinationForDelete = &sTaskExecutionFilesListedDetail_AtDestinationForDelete
+
+var TaskExecutionFoldersFailedDetail = &sTaskExecutionFoldersFailedDetail
+var TaskExecutionFoldersFailedDetail_List = &sTaskExecutionFoldersFailedDetail_List
+var TaskExecutionFoldersFailedDetail_Prepare = &sTaskExecutionFoldersFailedDetail_Prepare
+var TaskExecutionFoldersFailedDetail_Transfer = &sTaskExecutionFoldersFailedDetail_Transfer
+var TaskExecutionFoldersFailedDetail_Verify = &sTaskExecutionFoldersFailedDetail_Verify
+var TaskExecutionFoldersFailedDetail_Delete = &sTaskExecutionFoldersFailedDetail_Delete
+
+var TaskExecutionFoldersListedDetail = &sTaskExecutionFoldersListedDetail
+var TaskExecutionFoldersListedDetail_AtSource = &sTaskExecutionFoldersListedDetail_AtSource
+var TaskExecutionFoldersListedDetail_AtDestinationForDelete = &sTaskExecutionFoldersListedDetail_AtDestinationForDelete
+
+var _TaskExecutionList = &s_TaskExecutionList
+var _TaskExecutionList_member = &s_TaskExecutionList_member
+
+var TaskExecutionListEntry = &sTaskExecutionListEntry
+var TaskExecutionListEntry_TaskExecutionArn = &sTaskExecutionListEntry_TaskExecutionArn
+var TaskExecutionListEntry_Status = &sTaskExecutionListEntry_Status
+var TaskExecutionListEntry_TaskMode = &sTaskExecutionListEntry_TaskMode
+
+var TaskExecutionResultDetail = &sTaskExecutionResultDetail
+var TaskExecutionResultDetail_PrepareDuration = &sTaskExecutionResultDetail_PrepareDuration
+var TaskExecutionResultDetail_PrepareStatus = &sTaskExecutionResultDetail_PrepareStatus
+var TaskExecutionResultDetail_TotalDuration = &sTaskExecutionResultDetail_TotalDuration
+var TaskExecutionResultDetail_TransferDuration = &sTaskExecutionResultDetail_TransferDuration
+var TaskExecutionResultDetail_TransferStatus = &sTaskExecutionResultDetail_TransferStatus
+var TaskExecutionResultDetail_VerifyDuration = &sTaskExecutionResultDetail_VerifyDuration
+var TaskExecutionResultDetail_VerifyStatus = &sTaskExecutionResultDetail_VerifyStatus
+var TaskExecutionResultDetail_ErrorCode = &sTaskExecutionResultDetail_ErrorCode
+var TaskExecutionResultDetail_ErrorDetail = &sTaskExecutionResultDetail_ErrorDetail
+
+var TaskExecutionStatus = &sTaskExecutionStatus
+var TaskExecutionStatus_QUEUED = &sTaskExecutionStatus_QUEUED
+var TaskExecutionStatus_CANCELLING = &sTaskExecutionStatus_CANCELLING
+var TaskExecutionStatus_LAUNCHING = &sTaskExecutionStatus_LAUNCHING
+var TaskExecutionStatus_PREPARING = &sTaskExecutionStatus_PREPARING
+var TaskExecutionStatus_TRANSFERRING = &sTaskExecutionStatus_TRANSFERRING
+var TaskExecutionStatus_VERIFYING = &sTaskExecutionStatus_VERIFYING
+var TaskExecutionStatus_SUCCESS = &sTaskExecutionStatus_SUCCESS
+var TaskExecutionStatus_ERROR = &sTaskExecutionStatus_ERROR
+
+var TaskFilter = &sTaskFilter
+var TaskFilter_Name = &sTaskFilter_Name
+var TaskFilter_Values = &sTaskFilter_Values
+var TaskFilter_Operator = &sTaskFilter_Operator
+
+var TaskFilterName = &sTaskFilterName
+var TaskFilterName_LocationId = &sTaskFilterName_LocationId
+var TaskFilterName_CreationTime = &sTaskFilterName_CreationTime
+
+var _TaskFilters = &s_TaskFilters
+var _TaskFilters_member = &s_TaskFilters_member
+
+var _TaskList = &s_TaskList
+var _TaskList_member = &s_TaskList_member
+
+var TaskListEntry = &sTaskListEntry
+var TaskListEntry_TaskArn = &sTaskListEntry_TaskArn
+var TaskListEntry_Status = &sTaskListEntry_Status
+var TaskListEntry_Name = &sTaskListEntry_Name
+var TaskListEntry_TaskMode = &sTaskListEntry_TaskMode
+
+var TaskMode = &sTaskMode
+var TaskMode_BASIC = &sTaskMode_BASIC
+var TaskMode_ENHANCED = &sTaskMode_ENHANCED
+
+var TaskQueueing = &sTaskQueueing
+var TaskQueueing_ENABLED = &sTaskQueueing_ENABLED
+var TaskQueueing_DISABLED = &sTaskQueueing_DISABLED
+
+var TaskReportConfig = &sTaskReportConfig
+var TaskReportConfig_Destination = &sTaskReportConfig_Destination
+var TaskReportConfig_OutputType = &sTaskReportConfig_OutputType
+var TaskReportConfig_ReportLevel = &sTaskReportConfig_ReportLevel
+var TaskReportConfig_ObjectVersionIds = &sTaskReportConfig_ObjectVersionIds
+var TaskReportConfig_Overrides = &sTaskReportConfig_Overrides
+
+var TaskSchedule = &sTaskSchedule
+var TaskSchedule_ScheduleExpression = &sTaskSchedule_ScheduleExpression
+var TaskSchedule_Status = &sTaskSchedule_Status
+
+var TaskScheduleDetails = &sTaskScheduleDetails
+var TaskScheduleDetails_StatusUpdateTime = &sTaskScheduleDetails_StatusUpdateTime
+var TaskScheduleDetails_DisabledReason = &sTaskScheduleDetails_DisabledReason
+var TaskScheduleDetails_DisabledBy = &sTaskScheduleDetails_DisabledBy
+
+var TaskStatus = &sTaskStatus
+var TaskStatus_AVAILABLE = &sTaskStatus_AVAILABLE
+var TaskStatus_CREATING = &sTaskStatus_CREATING
+var TaskStatus_QUEUED = &sTaskStatus_QUEUED
+var TaskStatus_RUNNING = &sTaskStatus_RUNNING
+var TaskStatus_UNAVAILABLE = &sTaskStatus_UNAVAILABLE
+
+var _Time = &s_Time
+
+var TransferMode = &sTransferMode
+var TransferMode_CHANGED = &sTransferMode_CHANGED
+var TransferMode_ALL = &sTransferMode_ALL
+
+var Uid = &sUid
+var Uid_NONE = &sUid_NONE
+var Uid_INT_VALUE = &sUid_INT_VALUE
+var Uid_NAME = &sUid_NAME
+var Uid_BOTH = &sUid_BOTH
+
+var _UpdatedEfsAccessPointArn = &s_UpdatedEfsAccessPointArn
+
+var _UpdatedEfsIamRoleArn = &s_UpdatedEfsIamRoleArn
+
+var _UpdateSmbDomain = &s_UpdateSmbDomain
+
+var VerifyMode = &sVerifyMode
+var VerifyMode_POINT_IN_TIME_CONSISTENT = &sVerifyMode_POINT_IN_TIME_CONSISTENT
+var VerifyMode_ONLY_FILES_TRANSFERRED = &sVerifyMode_ONLY_FILES_TRANSFERRED
+var VerifyMode_NONE = &sVerifyMode_NONE
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var CancelTaskExecutionRequest = &sCancelTaskExecutionRequest
+var CancelTaskExecutionRequest_TaskExecutionArn = &sCancelTaskExecutionRequest_TaskExecutionArn
+
+var CancelTaskExecutionResponse = &sCancelTaskExecutionResponse
+
+var CreateAgentRequest = &sCreateAgentRequest
+var CreateAgentRequest_ActivationKey = &sCreateAgentRequest_ActivationKey
+var CreateAgentRequest_AgentName = &sCreateAgentRequest_AgentName
+var CreateAgentRequest_Tags = &sCreateAgentRequest_Tags
+var CreateAgentRequest_VpcEndpointId = &sCreateAgentRequest_VpcEndpointId
+var CreateAgentRequest_SubnetArns = &sCreateAgentRequest_SubnetArns
+var CreateAgentRequest_SecurityGroupArns = &sCreateAgentRequest_SecurityGroupArns
+
+var CreateAgentResponse = &sCreateAgentResponse
+var CreateAgentResponse_AgentArn = &sCreateAgentResponse_AgentArn
+
+var CreateLocationAzureBlobRequest = &sCreateLocationAzureBlobRequest
+var CreateLocationAzureBlobRequest_ContainerUrl = &sCreateLocationAzureBlobRequest_ContainerUrl
+var CreateLocationAzureBlobRequest_AuthenticationType = &sCreateLocationAzureBlobRequest_AuthenticationType
+var CreateLocationAzureBlobRequest_SasConfiguration = &sCreateLocationAzureBlobRequest_SasConfiguration
+var CreateLocationAzureBlobRequest_FederatedIdentity = &sCreateLocationAzureBlobRequest_FederatedIdentity
+var CreateLocationAzureBlobRequest_BlobType = &sCreateLocationAzureBlobRequest_BlobType
+var CreateLocationAzureBlobRequest_AccessTier = &sCreateLocationAzureBlobRequest_AccessTier
+var CreateLocationAzureBlobRequest_Subdirectory = &sCreateLocationAzureBlobRequest_Subdirectory
+var CreateLocationAzureBlobRequest_AgentArns = &sCreateLocationAzureBlobRequest_AgentArns
+var CreateLocationAzureBlobRequest_Tags = &sCreateLocationAzureBlobRequest_Tags
+var CreateLocationAzureBlobRequest_CmkSecretConfig = &sCreateLocationAzureBlobRequest_CmkSecretConfig
+var CreateLocationAzureBlobRequest_CustomSecretConfig = &sCreateLocationAzureBlobRequest_CustomSecretConfig
+
+var CreateLocationAzureBlobResponse = &sCreateLocationAzureBlobResponse
+var CreateLocationAzureBlobResponse_LocationArn = &sCreateLocationAzureBlobResponse_LocationArn
+
+var CreateLocationEfsRequest = &sCreateLocationEfsRequest
+var CreateLocationEfsRequest_Subdirectory = &sCreateLocationEfsRequest_Subdirectory
+var CreateLocationEfsRequest_EfsFilesystemArn = &sCreateLocationEfsRequest_EfsFilesystemArn
+var CreateLocationEfsRequest_Ec2Config = &sCreateLocationEfsRequest_Ec2Config
+var CreateLocationEfsRequest_Tags = &sCreateLocationEfsRequest_Tags
+var CreateLocationEfsRequest_AccessPointArn = &sCreateLocationEfsRequest_AccessPointArn
+var CreateLocationEfsRequest_FileSystemAccessRoleArn = &sCreateLocationEfsRequest_FileSystemAccessRoleArn
+var CreateLocationEfsRequest_InTransitEncryption = &sCreateLocationEfsRequest_InTransitEncryption
+
+var CreateLocationEfsResponse = &sCreateLocationEfsResponse
+var CreateLocationEfsResponse_LocationArn = &sCreateLocationEfsResponse_LocationArn
+
+var CreateLocationFsxLustreRequest = &sCreateLocationFsxLustreRequest
+var CreateLocationFsxLustreRequest_FsxFilesystemArn = &sCreateLocationFsxLustreRequest_FsxFilesystemArn
+var CreateLocationFsxLustreRequest_SecurityGroupArns = &sCreateLocationFsxLustreRequest_SecurityGroupArns
+var CreateLocationFsxLustreRequest_Subdirectory = &sCreateLocationFsxLustreRequest_Subdirectory
+var CreateLocationFsxLustreRequest_Tags = &sCreateLocationFsxLustreRequest_Tags
+
+var CreateLocationFsxLustreResponse = &sCreateLocationFsxLustreResponse
+var CreateLocationFsxLustreResponse_LocationArn = &sCreateLocationFsxLustreResponse_LocationArn
+
+var CreateLocationFsxOntapRequest = &sCreateLocationFsxOntapRequest
+var CreateLocationFsxOntapRequest_Protocol = &sCreateLocationFsxOntapRequest_Protocol
+var CreateLocationFsxOntapRequest_SecurityGroupArns = &sCreateLocationFsxOntapRequest_SecurityGroupArns
+var CreateLocationFsxOntapRequest_StorageVirtualMachineArn = &sCreateLocationFsxOntapRequest_StorageVirtualMachineArn
+var CreateLocationFsxOntapRequest_Subdirectory = &sCreateLocationFsxOntapRequest_Subdirectory
+var CreateLocationFsxOntapRequest_Tags = &sCreateLocationFsxOntapRequest_Tags
+
+var CreateLocationFsxOntapResponse = &sCreateLocationFsxOntapResponse
+var CreateLocationFsxOntapResponse_LocationArn = &sCreateLocationFsxOntapResponse_LocationArn
+
+var CreateLocationFsxOpenZfsRequest = &sCreateLocationFsxOpenZfsRequest
+var CreateLocationFsxOpenZfsRequest_FsxFilesystemArn = &sCreateLocationFsxOpenZfsRequest_FsxFilesystemArn
+var CreateLocationFsxOpenZfsRequest_Protocol = &sCreateLocationFsxOpenZfsRequest_Protocol
+var CreateLocationFsxOpenZfsRequest_SecurityGroupArns = &sCreateLocationFsxOpenZfsRequest_SecurityGroupArns
+var CreateLocationFsxOpenZfsRequest_Subdirectory = &sCreateLocationFsxOpenZfsRequest_Subdirectory
+var CreateLocationFsxOpenZfsRequest_Tags = &sCreateLocationFsxOpenZfsRequest_Tags
+
+var CreateLocationFsxOpenZfsResponse = &sCreateLocationFsxOpenZfsResponse
+var CreateLocationFsxOpenZfsResponse_LocationArn = &sCreateLocationFsxOpenZfsResponse_LocationArn
+
+var CreateLocationFsxWindowsRequest = &sCreateLocationFsxWindowsRequest
+var CreateLocationFsxWindowsRequest_Subdirectory = &sCreateLocationFsxWindowsRequest_Subdirectory
+var CreateLocationFsxWindowsRequest_FsxFilesystemArn = &sCreateLocationFsxWindowsRequest_FsxFilesystemArn
+var CreateLocationFsxWindowsRequest_SecurityGroupArns = &sCreateLocationFsxWindowsRequest_SecurityGroupArns
+var CreateLocationFsxWindowsRequest_Tags = &sCreateLocationFsxWindowsRequest_Tags
+var CreateLocationFsxWindowsRequest_User = &sCreateLocationFsxWindowsRequest_User
+var CreateLocationFsxWindowsRequest_Domain = &sCreateLocationFsxWindowsRequest_Domain
+var CreateLocationFsxWindowsRequest_Password = &sCreateLocationFsxWindowsRequest_Password
+var CreateLocationFsxWindowsRequest_CmkSecretConfig = &sCreateLocationFsxWindowsRequest_CmkSecretConfig
+var CreateLocationFsxWindowsRequest_CustomSecretConfig = &sCreateLocationFsxWindowsRequest_CustomSecretConfig
+
+var CreateLocationFsxWindowsResponse = &sCreateLocationFsxWindowsResponse
+var CreateLocationFsxWindowsResponse_LocationArn = &sCreateLocationFsxWindowsResponse_LocationArn
+
+var CreateLocationHdfsRequest = &sCreateLocationHdfsRequest
+var CreateLocationHdfsRequest_Subdirectory = &sCreateLocationHdfsRequest_Subdirectory
+var CreateLocationHdfsRequest_NameNodes = &sCreateLocationHdfsRequest_NameNodes
+var CreateLocationHdfsRequest_BlockSize = &sCreateLocationHdfsRequest_BlockSize
+var CreateLocationHdfsRequest_ReplicationFactor = &sCreateLocationHdfsRequest_ReplicationFactor
+var CreateLocationHdfsRequest_KmsKeyProviderUri = &sCreateLocationHdfsRequest_KmsKeyProviderUri
+var CreateLocationHdfsRequest_QopConfiguration = &sCreateLocationHdfsRequest_QopConfiguration
+var CreateLocationHdfsRequest_AuthenticationType = &sCreateLocationHdfsRequest_AuthenticationType
+var CreateLocationHdfsRequest_SimpleUser = &sCreateLocationHdfsRequest_SimpleUser
+var CreateLocationHdfsRequest_KerberosPrincipal = &sCreateLocationHdfsRequest_KerberosPrincipal
+var CreateLocationHdfsRequest_KerberosKeytab = &sCreateLocationHdfsRequest_KerberosKeytab
+var CreateLocationHdfsRequest_KerberosKrb5Conf = &sCreateLocationHdfsRequest_KerberosKrb5Conf
+var CreateLocationHdfsRequest_AgentArns = &sCreateLocationHdfsRequest_AgentArns
+var CreateLocationHdfsRequest_Tags = &sCreateLocationHdfsRequest_Tags
+var CreateLocationHdfsRequest_CmkSecretConfig = &sCreateLocationHdfsRequest_CmkSecretConfig
+var CreateLocationHdfsRequest_CustomSecretConfig = &sCreateLocationHdfsRequest_CustomSecretConfig
+
+var CreateLocationHdfsResponse = &sCreateLocationHdfsResponse
+var CreateLocationHdfsResponse_LocationArn = &sCreateLocationHdfsResponse_LocationArn
+
+var CreateLocationNfsRequest = &sCreateLocationNfsRequest
+var CreateLocationNfsRequest_Subdirectory = &sCreateLocationNfsRequest_Subdirectory
+var CreateLocationNfsRequest_ServerHostname = &sCreateLocationNfsRequest_ServerHostname
+var CreateLocationNfsRequest_OnPremConfig = &sCreateLocationNfsRequest_OnPremConfig
+var CreateLocationNfsRequest_MountOptions = &sCreateLocationNfsRequest_MountOptions
+var CreateLocationNfsRequest_Tags = &sCreateLocationNfsRequest_Tags
+
+var CreateLocationNfsResponse = &sCreateLocationNfsResponse
+var CreateLocationNfsResponse_LocationArn = &sCreateLocationNfsResponse_LocationArn
+
+var CreateLocationObjectStorageRequest = &sCreateLocationObjectStorageRequest
+var CreateLocationObjectStorageRequest_ServerHostname = &sCreateLocationObjectStorageRequest_ServerHostname
+var CreateLocationObjectStorageRequest_ServerPort = &sCreateLocationObjectStorageRequest_ServerPort
+var CreateLocationObjectStorageRequest_ServerProtocol = &sCreateLocationObjectStorageRequest_ServerProtocol
+var CreateLocationObjectStorageRequest_Subdirectory = &sCreateLocationObjectStorageRequest_Subdirectory
+var CreateLocationObjectStorageRequest_BucketName = &sCreateLocationObjectStorageRequest_BucketName
+var CreateLocationObjectStorageRequest_AccessKey = &sCreateLocationObjectStorageRequest_AccessKey
+var CreateLocationObjectStorageRequest_SecretKey = &sCreateLocationObjectStorageRequest_SecretKey
+var CreateLocationObjectStorageRequest_FederatedIdentity = &sCreateLocationObjectStorageRequest_FederatedIdentity
+var CreateLocationObjectStorageRequest_AgentArns = &sCreateLocationObjectStorageRequest_AgentArns
+var CreateLocationObjectStorageRequest_Tags = &sCreateLocationObjectStorageRequest_Tags
+var CreateLocationObjectStorageRequest_ServerCertificate = &sCreateLocationObjectStorageRequest_ServerCertificate
+var CreateLocationObjectStorageRequest_CmkSecretConfig = &sCreateLocationObjectStorageRequest_CmkSecretConfig
+var CreateLocationObjectStorageRequest_CustomSecretConfig = &sCreateLocationObjectStorageRequest_CustomSecretConfig
+
+var CreateLocationObjectStorageResponse = &sCreateLocationObjectStorageResponse
+var CreateLocationObjectStorageResponse_LocationArn = &sCreateLocationObjectStorageResponse_LocationArn
+
+var CreateLocationS3Request = &sCreateLocationS3Request
+var CreateLocationS3Request_Subdirectory = &sCreateLocationS3Request_Subdirectory
+var CreateLocationS3Request_S3BucketArn = &sCreateLocationS3Request_S3BucketArn
+var CreateLocationS3Request_S3StorageClass = &sCreateLocationS3Request_S3StorageClass
+var CreateLocationS3Request_S3Config = &sCreateLocationS3Request_S3Config
+var CreateLocationS3Request_AgentArns = &sCreateLocationS3Request_AgentArns
+var CreateLocationS3Request_Tags = &sCreateLocationS3Request_Tags
+
+var CreateLocationS3Response = &sCreateLocationS3Response
+var CreateLocationS3Response_LocationArn = &sCreateLocationS3Response_LocationArn
+
+var CreateLocationSmbRequest = &sCreateLocationSmbRequest
+var CreateLocationSmbRequest_Subdirectory = &sCreateLocationSmbRequest_Subdirectory
+var CreateLocationSmbRequest_ServerHostname = &sCreateLocationSmbRequest_ServerHostname
+var CreateLocationSmbRequest_User = &sCreateLocationSmbRequest_User
+var CreateLocationSmbRequest_Domain = &sCreateLocationSmbRequest_Domain
+var CreateLocationSmbRequest_Password = &sCreateLocationSmbRequest_Password
+var CreateLocationSmbRequest_CmkSecretConfig = &sCreateLocationSmbRequest_CmkSecretConfig
+var CreateLocationSmbRequest_CustomSecretConfig = &sCreateLocationSmbRequest_CustomSecretConfig
+var CreateLocationSmbRequest_AgentArns = &sCreateLocationSmbRequest_AgentArns
+var CreateLocationSmbRequest_MountOptions = &sCreateLocationSmbRequest_MountOptions
+var CreateLocationSmbRequest_Tags = &sCreateLocationSmbRequest_Tags
+var CreateLocationSmbRequest_AuthenticationType = &sCreateLocationSmbRequest_AuthenticationType
+var CreateLocationSmbRequest_DnsIpAddresses = &sCreateLocationSmbRequest_DnsIpAddresses
+var CreateLocationSmbRequest_KerberosPrincipal = &sCreateLocationSmbRequest_KerberosPrincipal
+var CreateLocationSmbRequest_KerberosKeytab = &sCreateLocationSmbRequest_KerberosKeytab
+var CreateLocationSmbRequest_KerberosKrb5Conf = &sCreateLocationSmbRequest_KerberosKrb5Conf
+
+var CreateLocationSmbResponse = &sCreateLocationSmbResponse
+var CreateLocationSmbResponse_LocationArn = &sCreateLocationSmbResponse_LocationArn
+
+var CreateTaskRequest = &sCreateTaskRequest
+var CreateTaskRequest_SourceLocationArn = &sCreateTaskRequest_SourceLocationArn
+var CreateTaskRequest_DestinationLocationArn = &sCreateTaskRequest_DestinationLocationArn
+var CreateTaskRequest_CloudWatchLogGroupArn = &sCreateTaskRequest_CloudWatchLogGroupArn
+var CreateTaskRequest_Name = &sCreateTaskRequest_Name
+var CreateTaskRequest_Options = &sCreateTaskRequest_Options
+var CreateTaskRequest_Excludes = &sCreateTaskRequest_Excludes
+var CreateTaskRequest_Schedule = &sCreateTaskRequest_Schedule
+var CreateTaskRequest_Tags = &sCreateTaskRequest_Tags
+var CreateTaskRequest_Includes = &sCreateTaskRequest_Includes
+var CreateTaskRequest_ManifestConfig = &sCreateTaskRequest_ManifestConfig
+var CreateTaskRequest_TaskReportConfig = &sCreateTaskRequest_TaskReportConfig
+var CreateTaskRequest_TaskMode = &sCreateTaskRequest_TaskMode
+
+var CreateTaskResponse = &sCreateTaskResponse
+var CreateTaskResponse_TaskArn = &sCreateTaskResponse_TaskArn
+
+var DeleteAgentRequest = &sDeleteAgentRequest
+var DeleteAgentRequest_AgentArn = &sDeleteAgentRequest_AgentArn
+
+var DeleteAgentResponse = &sDeleteAgentResponse
+
+var DeleteLocationRequest = &sDeleteLocationRequest
+var DeleteLocationRequest_LocationArn = &sDeleteLocationRequest_LocationArn
+
+var DeleteLocationResponse = &sDeleteLocationResponse
+
+var DeleteTaskRequest = &sDeleteTaskRequest
+var DeleteTaskRequest_TaskArn = &sDeleteTaskRequest_TaskArn
+
+var DeleteTaskResponse = &sDeleteTaskResponse
+
+var DescribeAgentRequest = &sDescribeAgentRequest
+var DescribeAgentRequest_AgentArn = &sDescribeAgentRequest_AgentArn
+
+var DescribeAgentResponse = &sDescribeAgentResponse
+var DescribeAgentResponse_AgentArn = &sDescribeAgentResponse_AgentArn
+var DescribeAgentResponse_Name = &sDescribeAgentResponse_Name
+var DescribeAgentResponse_Status = &sDescribeAgentResponse_Status
+var DescribeAgentResponse_LastConnectionTime = &sDescribeAgentResponse_LastConnectionTime
+var DescribeAgentResponse_CreationTime = &sDescribeAgentResponse_CreationTime
+var DescribeAgentResponse_EndpointType = &sDescribeAgentResponse_EndpointType
+var DescribeAgentResponse_PrivateLinkConfig = &sDescribeAgentResponse_PrivateLinkConfig
+var DescribeAgentResponse_Platform = &sDescribeAgentResponse_Platform
+
+var DescribeLocationAzureBlobRequest = &sDescribeLocationAzureBlobRequest
+var DescribeLocationAzureBlobRequest_LocationArn = &sDescribeLocationAzureBlobRequest_LocationArn
+
+var DescribeLocationAzureBlobResponse = &sDescribeLocationAzureBlobResponse
+var DescribeLocationAzureBlobResponse_LocationArn = &sDescribeLocationAzureBlobResponse_LocationArn
+var DescribeLocationAzureBlobResponse_LocationUri = &sDescribeLocationAzureBlobResponse_LocationUri
+var DescribeLocationAzureBlobResponse_AuthenticationType = &sDescribeLocationAzureBlobResponse_AuthenticationType
+var DescribeLocationAzureBlobResponse_FederatedIdentity = &sDescribeLocationAzureBlobResponse_FederatedIdentity
+var DescribeLocationAzureBlobResponse_BlobType = &sDescribeLocationAzureBlobResponse_BlobType
+var DescribeLocationAzureBlobResponse_AccessTier = &sDescribeLocationAzureBlobResponse_AccessTier
+var DescribeLocationAzureBlobResponse_AgentArns = &sDescribeLocationAzureBlobResponse_AgentArns
+var DescribeLocationAzureBlobResponse_CreationTime = &sDescribeLocationAzureBlobResponse_CreationTime
+var DescribeLocationAzureBlobResponse_ManagedSecretConfig = &sDescribeLocationAzureBlobResponse_ManagedSecretConfig
+var DescribeLocationAzureBlobResponse_CmkSecretConfig = &sDescribeLocationAzureBlobResponse_CmkSecretConfig
+var DescribeLocationAzureBlobResponse_CustomSecretConfig = &sDescribeLocationAzureBlobResponse_CustomSecretConfig
+
+var DescribeLocationEfsRequest = &sDescribeLocationEfsRequest
+var DescribeLocationEfsRequest_LocationArn = &sDescribeLocationEfsRequest_LocationArn
+
+var DescribeLocationEfsResponse = &sDescribeLocationEfsResponse
+var DescribeLocationEfsResponse_LocationArn = &sDescribeLocationEfsResponse_LocationArn
+var DescribeLocationEfsResponse_LocationUri = &sDescribeLocationEfsResponse_LocationUri
+var DescribeLocationEfsResponse_Ec2Config = &sDescribeLocationEfsResponse_Ec2Config
+var DescribeLocationEfsResponse_CreationTime = &sDescribeLocationEfsResponse_CreationTime
+var DescribeLocationEfsResponse_AccessPointArn = &sDescribeLocationEfsResponse_AccessPointArn
+var DescribeLocationEfsResponse_FileSystemAccessRoleArn = &sDescribeLocationEfsResponse_FileSystemAccessRoleArn
+var DescribeLocationEfsResponse_InTransitEncryption = &sDescribeLocationEfsResponse_InTransitEncryption
+
+var DescribeLocationFsxLustreRequest = &sDescribeLocationFsxLustreRequest
+var DescribeLocationFsxLustreRequest_LocationArn = &sDescribeLocationFsxLustreRequest_LocationArn
+
+var DescribeLocationFsxLustreResponse = &sDescribeLocationFsxLustreResponse
+var DescribeLocationFsxLustreResponse_LocationArn = &sDescribeLocationFsxLustreResponse_LocationArn
+var DescribeLocationFsxLustreResponse_LocationUri = &sDescribeLocationFsxLustreResponse_LocationUri
+var DescribeLocationFsxLustreResponse_SecurityGroupArns = &sDescribeLocationFsxLustreResponse_SecurityGroupArns
+var DescribeLocationFsxLustreResponse_CreationTime = &sDescribeLocationFsxLustreResponse_CreationTime
+
+var DescribeLocationFsxOntapRequest = &sDescribeLocationFsxOntapRequest
+var DescribeLocationFsxOntapRequest_LocationArn = &sDescribeLocationFsxOntapRequest_LocationArn
+
+var DescribeLocationFsxOntapResponse = &sDescribeLocationFsxOntapResponse
+var DescribeLocationFsxOntapResponse_CreationTime = &sDescribeLocationFsxOntapResponse_CreationTime
+var DescribeLocationFsxOntapResponse_LocationArn = &sDescribeLocationFsxOntapResponse_LocationArn
+var DescribeLocationFsxOntapResponse_LocationUri = &sDescribeLocationFsxOntapResponse_LocationUri
+var DescribeLocationFsxOntapResponse_Protocol = &sDescribeLocationFsxOntapResponse_Protocol
+var DescribeLocationFsxOntapResponse_SecurityGroupArns = &sDescribeLocationFsxOntapResponse_SecurityGroupArns
+var DescribeLocationFsxOntapResponse_StorageVirtualMachineArn = &sDescribeLocationFsxOntapResponse_StorageVirtualMachineArn
+var DescribeLocationFsxOntapResponse_FsxFilesystemArn = &sDescribeLocationFsxOntapResponse_FsxFilesystemArn
+
+var DescribeLocationFsxOpenZfsRequest = &sDescribeLocationFsxOpenZfsRequest
+var DescribeLocationFsxOpenZfsRequest_LocationArn = &sDescribeLocationFsxOpenZfsRequest_LocationArn
+
+var DescribeLocationFsxOpenZfsResponse = &sDescribeLocationFsxOpenZfsResponse
+var DescribeLocationFsxOpenZfsResponse_LocationArn = &sDescribeLocationFsxOpenZfsResponse_LocationArn
+var DescribeLocationFsxOpenZfsResponse_LocationUri = &sDescribeLocationFsxOpenZfsResponse_LocationUri
+var DescribeLocationFsxOpenZfsResponse_SecurityGroupArns = &sDescribeLocationFsxOpenZfsResponse_SecurityGroupArns
+var DescribeLocationFsxOpenZfsResponse_Protocol = &sDescribeLocationFsxOpenZfsResponse_Protocol
+var DescribeLocationFsxOpenZfsResponse_CreationTime = &sDescribeLocationFsxOpenZfsResponse_CreationTime
+
+var DescribeLocationFsxWindowsRequest = &sDescribeLocationFsxWindowsRequest
+var DescribeLocationFsxWindowsRequest_LocationArn = &sDescribeLocationFsxWindowsRequest_LocationArn
+
+var DescribeLocationFsxWindowsResponse = &sDescribeLocationFsxWindowsResponse
+var DescribeLocationFsxWindowsResponse_LocationArn = &sDescribeLocationFsxWindowsResponse_LocationArn
+var DescribeLocationFsxWindowsResponse_LocationUri = &sDescribeLocationFsxWindowsResponse_LocationUri
+var DescribeLocationFsxWindowsResponse_SecurityGroupArns = &sDescribeLocationFsxWindowsResponse_SecurityGroupArns
+var DescribeLocationFsxWindowsResponse_CreationTime = &sDescribeLocationFsxWindowsResponse_CreationTime
+var DescribeLocationFsxWindowsResponse_User = &sDescribeLocationFsxWindowsResponse_User
+var DescribeLocationFsxWindowsResponse_Domain = &sDescribeLocationFsxWindowsResponse_Domain
+var DescribeLocationFsxWindowsResponse_ManagedSecretConfig = &sDescribeLocationFsxWindowsResponse_ManagedSecretConfig
+var DescribeLocationFsxWindowsResponse_CmkSecretConfig = &sDescribeLocationFsxWindowsResponse_CmkSecretConfig
+var DescribeLocationFsxWindowsResponse_CustomSecretConfig = &sDescribeLocationFsxWindowsResponse_CustomSecretConfig
+
+var DescribeLocationHdfsRequest = &sDescribeLocationHdfsRequest
+var DescribeLocationHdfsRequest_LocationArn = &sDescribeLocationHdfsRequest_LocationArn
+
+var DescribeLocationHdfsResponse = &sDescribeLocationHdfsResponse
+var DescribeLocationHdfsResponse_LocationArn = &sDescribeLocationHdfsResponse_LocationArn
+var DescribeLocationHdfsResponse_LocationUri = &sDescribeLocationHdfsResponse_LocationUri
+var DescribeLocationHdfsResponse_NameNodes = &sDescribeLocationHdfsResponse_NameNodes
+var DescribeLocationHdfsResponse_BlockSize = &sDescribeLocationHdfsResponse_BlockSize
+var DescribeLocationHdfsResponse_ReplicationFactor = &sDescribeLocationHdfsResponse_ReplicationFactor
+var DescribeLocationHdfsResponse_KmsKeyProviderUri = &sDescribeLocationHdfsResponse_KmsKeyProviderUri
+var DescribeLocationHdfsResponse_QopConfiguration = &sDescribeLocationHdfsResponse_QopConfiguration
+var DescribeLocationHdfsResponse_AuthenticationType = &sDescribeLocationHdfsResponse_AuthenticationType
+var DescribeLocationHdfsResponse_SimpleUser = &sDescribeLocationHdfsResponse_SimpleUser
+var DescribeLocationHdfsResponse_KerberosPrincipal = &sDescribeLocationHdfsResponse_KerberosPrincipal
+var DescribeLocationHdfsResponse_AgentArns = &sDescribeLocationHdfsResponse_AgentArns
+var DescribeLocationHdfsResponse_CreationTime = &sDescribeLocationHdfsResponse_CreationTime
+var DescribeLocationHdfsResponse_ManagedSecretConfig = &sDescribeLocationHdfsResponse_ManagedSecretConfig
+var DescribeLocationHdfsResponse_CmkSecretConfig = &sDescribeLocationHdfsResponse_CmkSecretConfig
+var DescribeLocationHdfsResponse_CustomSecretConfig = &sDescribeLocationHdfsResponse_CustomSecretConfig
+
+var DescribeLocationNfsRequest = &sDescribeLocationNfsRequest
+var DescribeLocationNfsRequest_LocationArn = &sDescribeLocationNfsRequest_LocationArn
+
+var DescribeLocationNfsResponse = &sDescribeLocationNfsResponse
+var DescribeLocationNfsResponse_LocationArn = &sDescribeLocationNfsResponse_LocationArn
+var DescribeLocationNfsResponse_LocationUri = &sDescribeLocationNfsResponse_LocationUri
+var DescribeLocationNfsResponse_OnPremConfig = &sDescribeLocationNfsResponse_OnPremConfig
+var DescribeLocationNfsResponse_MountOptions = &sDescribeLocationNfsResponse_MountOptions
+var DescribeLocationNfsResponse_CreationTime = &sDescribeLocationNfsResponse_CreationTime
+
+var DescribeLocationObjectStorageRequest = &sDescribeLocationObjectStorageRequest
+var DescribeLocationObjectStorageRequest_LocationArn = &sDescribeLocationObjectStorageRequest_LocationArn
+
+var DescribeLocationObjectStorageResponse = &sDescribeLocationObjectStorageResponse
+var DescribeLocationObjectStorageResponse_LocationArn = &sDescribeLocationObjectStorageResponse_LocationArn
+var DescribeLocationObjectStorageResponse_LocationUri = &sDescribeLocationObjectStorageResponse_LocationUri
+var DescribeLocationObjectStorageResponse_AccessKey = &sDescribeLocationObjectStorageResponse_AccessKey
+var DescribeLocationObjectStorageResponse_FederatedIdentity = &sDescribeLocationObjectStorageResponse_FederatedIdentity
+var DescribeLocationObjectStorageResponse_ServerPort = &sDescribeLocationObjectStorageResponse_ServerPort
+var DescribeLocationObjectStorageResponse_ServerProtocol = &sDescribeLocationObjectStorageResponse_ServerProtocol
+var DescribeLocationObjectStorageResponse_AgentArns = &sDescribeLocationObjectStorageResponse_AgentArns
+var DescribeLocationObjectStorageResponse_CreationTime = &sDescribeLocationObjectStorageResponse_CreationTime
+var DescribeLocationObjectStorageResponse_ServerCertificate = &sDescribeLocationObjectStorageResponse_ServerCertificate
+var DescribeLocationObjectStorageResponse_ManagedSecretConfig = &sDescribeLocationObjectStorageResponse_ManagedSecretConfig
+var DescribeLocationObjectStorageResponse_CmkSecretConfig = &sDescribeLocationObjectStorageResponse_CmkSecretConfig
+var DescribeLocationObjectStorageResponse_CustomSecretConfig = &sDescribeLocationObjectStorageResponse_CustomSecretConfig
+
+var DescribeLocationS3Request = &sDescribeLocationS3Request
+var DescribeLocationS3Request_LocationArn = &sDescribeLocationS3Request_LocationArn
+
+var DescribeLocationS3Response = &sDescribeLocationS3Response
+var DescribeLocationS3Response_LocationArn = &sDescribeLocationS3Response_LocationArn
+var DescribeLocationS3Response_LocationUri = &sDescribeLocationS3Response_LocationUri
+var DescribeLocationS3Response_S3StorageClass = &sDescribeLocationS3Response_S3StorageClass
+var DescribeLocationS3Response_S3Config = &sDescribeLocationS3Response_S3Config
+var DescribeLocationS3Response_AgentArns = &sDescribeLocationS3Response_AgentArns
+var DescribeLocationS3Response_CreationTime = &sDescribeLocationS3Response_CreationTime
+
+var DescribeLocationSmbRequest = &sDescribeLocationSmbRequest
+var DescribeLocationSmbRequest_LocationArn = &sDescribeLocationSmbRequest_LocationArn
+
+var DescribeLocationSmbResponse = &sDescribeLocationSmbResponse
+var DescribeLocationSmbResponse_LocationArn = &sDescribeLocationSmbResponse_LocationArn
+var DescribeLocationSmbResponse_LocationUri = &sDescribeLocationSmbResponse_LocationUri
+var DescribeLocationSmbResponse_AgentArns = &sDescribeLocationSmbResponse_AgentArns
+var DescribeLocationSmbResponse_User = &sDescribeLocationSmbResponse_User
+var DescribeLocationSmbResponse_Domain = &sDescribeLocationSmbResponse_Domain
+var DescribeLocationSmbResponse_MountOptions = &sDescribeLocationSmbResponse_MountOptions
+var DescribeLocationSmbResponse_CreationTime = &sDescribeLocationSmbResponse_CreationTime
+var DescribeLocationSmbResponse_DnsIpAddresses = &sDescribeLocationSmbResponse_DnsIpAddresses
+var DescribeLocationSmbResponse_KerberosPrincipal = &sDescribeLocationSmbResponse_KerberosPrincipal
+var DescribeLocationSmbResponse_AuthenticationType = &sDescribeLocationSmbResponse_AuthenticationType
+var DescribeLocationSmbResponse_ManagedSecretConfig = &sDescribeLocationSmbResponse_ManagedSecretConfig
+var DescribeLocationSmbResponse_CmkSecretConfig = &sDescribeLocationSmbResponse_CmkSecretConfig
+var DescribeLocationSmbResponse_CustomSecretConfig = &sDescribeLocationSmbResponse_CustomSecretConfig
+
+var DescribeTaskExecutionRequest = &sDescribeTaskExecutionRequest
+var DescribeTaskExecutionRequest_TaskExecutionArn = &sDescribeTaskExecutionRequest_TaskExecutionArn
+
+var DescribeTaskExecutionResponse = &sDescribeTaskExecutionResponse
+var DescribeTaskExecutionResponse_TaskExecutionArn = &sDescribeTaskExecutionResponse_TaskExecutionArn
+var DescribeTaskExecutionResponse_Status = &sDescribeTaskExecutionResponse_Status
+var DescribeTaskExecutionResponse_Options = &sDescribeTaskExecutionResponse_Options
+var DescribeTaskExecutionResponse_Excludes = &sDescribeTaskExecutionResponse_Excludes
+var DescribeTaskExecutionResponse_Includes = &sDescribeTaskExecutionResponse_Includes
+var DescribeTaskExecutionResponse_ManifestConfig = &sDescribeTaskExecutionResponse_ManifestConfig
+var DescribeTaskExecutionResponse_StartTime = &sDescribeTaskExecutionResponse_StartTime
+var DescribeTaskExecutionResponse_EstimatedFilesToTransfer = &sDescribeTaskExecutionResponse_EstimatedFilesToTransfer
+var DescribeTaskExecutionResponse_EstimatedBytesToTransfer = &sDescribeTaskExecutionResponse_EstimatedBytesToTransfer
+var DescribeTaskExecutionResponse_FilesTransferred = &sDescribeTaskExecutionResponse_FilesTransferred
+var DescribeTaskExecutionResponse_BytesWritten = &sDescribeTaskExecutionResponse_BytesWritten
+var DescribeTaskExecutionResponse_BytesTransferred = &sDescribeTaskExecutionResponse_BytesTransferred
+var DescribeTaskExecutionResponse_BytesCompressed = &sDescribeTaskExecutionResponse_BytesCompressed
+var DescribeTaskExecutionResponse_Result = &sDescribeTaskExecutionResponse_Result
+var DescribeTaskExecutionResponse_TaskReportConfig = &sDescribeTaskExecutionResponse_TaskReportConfig
+var DescribeTaskExecutionResponse_FilesDeleted = &sDescribeTaskExecutionResponse_FilesDeleted
+var DescribeTaskExecutionResponse_FilesSkipped = &sDescribeTaskExecutionResponse_FilesSkipped
+var DescribeTaskExecutionResponse_FilesVerified = &sDescribeTaskExecutionResponse_FilesVerified
+var DescribeTaskExecutionResponse_ReportResult = &sDescribeTaskExecutionResponse_ReportResult
+var DescribeTaskExecutionResponse_EstimatedFilesToDelete = &sDescribeTaskExecutionResponse_EstimatedFilesToDelete
+var DescribeTaskExecutionResponse_TaskMode = &sDescribeTaskExecutionResponse_TaskMode
+var DescribeTaskExecutionResponse_FilesPrepared = &sDescribeTaskExecutionResponse_FilesPrepared
+var DescribeTaskExecutionResponse_FilesListed = &sDescribeTaskExecutionResponse_FilesListed
+var DescribeTaskExecutionResponse_FilesFailed = &sDescribeTaskExecutionResponse_FilesFailed
+var DescribeTaskExecutionResponse_EstimatedFoldersToDelete = &sDescribeTaskExecutionResponse_EstimatedFoldersToDelete
+var DescribeTaskExecutionResponse_EstimatedFoldersToTransfer = &sDescribeTaskExecutionResponse_EstimatedFoldersToTransfer
+var DescribeTaskExecutionResponse_FoldersSkipped = &sDescribeTaskExecutionResponse_FoldersSkipped
+var DescribeTaskExecutionResponse_FoldersPrepared = &sDescribeTaskExecutionResponse_FoldersPrepared
+var DescribeTaskExecutionResponse_FoldersTransferred = &sDescribeTaskExecutionResponse_FoldersTransferred
+var DescribeTaskExecutionResponse_FoldersVerified = &sDescribeTaskExecutionResponse_FoldersVerified
+var DescribeTaskExecutionResponse_FoldersDeleted = &sDescribeTaskExecutionResponse_FoldersDeleted
+var DescribeTaskExecutionResponse_FoldersListed = &sDescribeTaskExecutionResponse_FoldersListed
+var DescribeTaskExecutionResponse_FoldersFailed = &sDescribeTaskExecutionResponse_FoldersFailed
+var DescribeTaskExecutionResponse_LaunchTime = &sDescribeTaskExecutionResponse_LaunchTime
+var DescribeTaskExecutionResponse_EndTime = &sDescribeTaskExecutionResponse_EndTime
+
+var DescribeTaskRequest = &sDescribeTaskRequest
+var DescribeTaskRequest_TaskArn = &sDescribeTaskRequest_TaskArn
+
+var DescribeTaskResponse = &sDescribeTaskResponse
+var DescribeTaskResponse_TaskArn = &sDescribeTaskResponse_TaskArn
+var DescribeTaskResponse_Status = &sDescribeTaskResponse_Status
+var DescribeTaskResponse_Name = &sDescribeTaskResponse_Name
+var DescribeTaskResponse_CurrentTaskExecutionArn = &sDescribeTaskResponse_CurrentTaskExecutionArn
+var DescribeTaskResponse_SourceLocationArn = &sDescribeTaskResponse_SourceLocationArn
+var DescribeTaskResponse_DestinationLocationArn = &sDescribeTaskResponse_DestinationLocationArn
+var DescribeTaskResponse_CloudWatchLogGroupArn = &sDescribeTaskResponse_CloudWatchLogGroupArn
+var DescribeTaskResponse_SourceNetworkInterfaceArns = &sDescribeTaskResponse_SourceNetworkInterfaceArns
+var DescribeTaskResponse_DestinationNetworkInterfaceArns = &sDescribeTaskResponse_DestinationNetworkInterfaceArns
+var DescribeTaskResponse_Options = &sDescribeTaskResponse_Options
+var DescribeTaskResponse_Excludes = &sDescribeTaskResponse_Excludes
+var DescribeTaskResponse_Schedule = &sDescribeTaskResponse_Schedule
+var DescribeTaskResponse_ErrorCode = &sDescribeTaskResponse_ErrorCode
+var DescribeTaskResponse_ErrorDetail = &sDescribeTaskResponse_ErrorDetail
+var DescribeTaskResponse_CreationTime = &sDescribeTaskResponse_CreationTime
+var DescribeTaskResponse_Includes = &sDescribeTaskResponse_Includes
+var DescribeTaskResponse_ManifestConfig = &sDescribeTaskResponse_ManifestConfig
+var DescribeTaskResponse_TaskReportConfig = &sDescribeTaskResponse_TaskReportConfig
+var DescribeTaskResponse_ScheduleDetails = &sDescribeTaskResponse_ScheduleDetails
+var DescribeTaskResponse_TaskMode = &sDescribeTaskResponse_TaskMode
+
+var ListAgentsRequest = &sListAgentsRequest
+var ListAgentsRequest_MaxResults = &sListAgentsRequest_MaxResults
+var ListAgentsRequest_NextToken = &sListAgentsRequest_NextToken
+
+var ListAgentsResponse = &sListAgentsResponse
+var ListAgentsResponse_Agents = &sListAgentsResponse_Agents
+var ListAgentsResponse_NextToken = &sListAgentsResponse_NextToken
+
+var ListLocationsRequest = &sListLocationsRequest
+var ListLocationsRequest_MaxResults = &sListLocationsRequest_MaxResults
+var ListLocationsRequest_NextToken = &sListLocationsRequest_NextToken
+var ListLocationsRequest_Filters = &sListLocationsRequest_Filters
+
+var ListLocationsResponse = &sListLocationsResponse
+var ListLocationsResponse_Locations = &sListLocationsResponse_Locations
+var ListLocationsResponse_NextToken = &sListLocationsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+var ListTagsForResourceRequest_MaxResults = &sListTagsForResourceRequest_MaxResults
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+var ListTagsForResourceResponse_NextToken = &sListTagsForResourceResponse_NextToken
+
+var ListTaskExecutionsRequest = &sListTaskExecutionsRequest
+var ListTaskExecutionsRequest_TaskArn = &sListTaskExecutionsRequest_TaskArn
+var ListTaskExecutionsRequest_MaxResults = &sListTaskExecutionsRequest_MaxResults
+var ListTaskExecutionsRequest_NextToken = &sListTaskExecutionsRequest_NextToken
+
+var ListTaskExecutionsResponse = &sListTaskExecutionsResponse
+var ListTaskExecutionsResponse_TaskExecutions = &sListTaskExecutionsResponse_TaskExecutions
+var ListTaskExecutionsResponse_NextToken = &sListTaskExecutionsResponse_NextToken
+
+var ListTasksRequest = &sListTasksRequest
+var ListTasksRequest_MaxResults = &sListTasksRequest_MaxResults
+var ListTasksRequest_NextToken = &sListTasksRequest_NextToken
+var ListTasksRequest_Filters = &sListTasksRequest_Filters
+
+var ListTasksResponse = &sListTasksResponse
+var ListTasksResponse_Tasks = &sListTasksResponse_Tasks
+var ListTasksResponse_NextToken = &sListTasksResponse_NextToken
+
+var StartTaskExecutionRequest = &sStartTaskExecutionRequest
+var StartTaskExecutionRequest_TaskArn = &sStartTaskExecutionRequest_TaskArn
+var StartTaskExecutionRequest_OverrideOptions = &sStartTaskExecutionRequest_OverrideOptions
+var StartTaskExecutionRequest_Includes = &sStartTaskExecutionRequest_Includes
+var StartTaskExecutionRequest_Excludes = &sStartTaskExecutionRequest_Excludes
+var StartTaskExecutionRequest_ManifestConfig = &sStartTaskExecutionRequest_ManifestConfig
+var StartTaskExecutionRequest_TaskReportConfig = &sStartTaskExecutionRequest_TaskReportConfig
+var StartTaskExecutionRequest_Tags = &sStartTaskExecutionRequest_Tags
+
+var StartTaskExecutionResponse = &sStartTaskExecutionResponse
+var StartTaskExecutionResponse_TaskExecutionArn = &sStartTaskExecutionResponse_TaskExecutionArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_Keys = &sUntagResourceRequest_Keys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAgentRequest = &sUpdateAgentRequest
+var UpdateAgentRequest_AgentArn = &sUpdateAgentRequest_AgentArn
+var UpdateAgentRequest_Name = &sUpdateAgentRequest_Name
+
+var UpdateAgentResponse = &sUpdateAgentResponse
+
+var UpdateLocationAzureBlobRequest = &sUpdateLocationAzureBlobRequest
+var UpdateLocationAzureBlobRequest_LocationArn = &sUpdateLocationAzureBlobRequest_LocationArn
+var UpdateLocationAzureBlobRequest_Subdirectory = &sUpdateLocationAzureBlobRequest_Subdirectory
+var UpdateLocationAzureBlobRequest_AuthenticationType = &sUpdateLocationAzureBlobRequest_AuthenticationType
+var UpdateLocationAzureBlobRequest_SasConfiguration = &sUpdateLocationAzureBlobRequest_SasConfiguration
+var UpdateLocationAzureBlobRequest_FederatedIdentity = &sUpdateLocationAzureBlobRequest_FederatedIdentity
+var UpdateLocationAzureBlobRequest_BlobType = &sUpdateLocationAzureBlobRequest_BlobType
+var UpdateLocationAzureBlobRequest_AccessTier = &sUpdateLocationAzureBlobRequest_AccessTier
+var UpdateLocationAzureBlobRequest_AgentArns = &sUpdateLocationAzureBlobRequest_AgentArns
+var UpdateLocationAzureBlobRequest_CmkSecretConfig = &sUpdateLocationAzureBlobRequest_CmkSecretConfig
+var UpdateLocationAzureBlobRequest_CustomSecretConfig = &sUpdateLocationAzureBlobRequest_CustomSecretConfig
+
+var UpdateLocationAzureBlobResponse = &sUpdateLocationAzureBlobResponse
+
+var UpdateLocationEfsRequest = &sUpdateLocationEfsRequest
+var UpdateLocationEfsRequest_LocationArn = &sUpdateLocationEfsRequest_LocationArn
+var UpdateLocationEfsRequest_Subdirectory = &sUpdateLocationEfsRequest_Subdirectory
+var UpdateLocationEfsRequest_AccessPointArn = &sUpdateLocationEfsRequest_AccessPointArn
+var UpdateLocationEfsRequest_FileSystemAccessRoleArn = &sUpdateLocationEfsRequest_FileSystemAccessRoleArn
+var UpdateLocationEfsRequest_InTransitEncryption = &sUpdateLocationEfsRequest_InTransitEncryption
+
+var UpdateLocationEfsResponse = &sUpdateLocationEfsResponse
+
+var UpdateLocationFsxLustreRequest = &sUpdateLocationFsxLustreRequest
+var UpdateLocationFsxLustreRequest_LocationArn = &sUpdateLocationFsxLustreRequest_LocationArn
+var UpdateLocationFsxLustreRequest_Subdirectory = &sUpdateLocationFsxLustreRequest_Subdirectory
+
+var UpdateLocationFsxLustreResponse = &sUpdateLocationFsxLustreResponse
+
+var UpdateLocationFsxOntapRequest = &sUpdateLocationFsxOntapRequest
+var UpdateLocationFsxOntapRequest_LocationArn = &sUpdateLocationFsxOntapRequest_LocationArn
+var UpdateLocationFsxOntapRequest_Protocol = &sUpdateLocationFsxOntapRequest_Protocol
+var UpdateLocationFsxOntapRequest_Subdirectory = &sUpdateLocationFsxOntapRequest_Subdirectory
+
+var UpdateLocationFsxOntapResponse = &sUpdateLocationFsxOntapResponse
+
+var UpdateLocationFsxOpenZfsRequest = &sUpdateLocationFsxOpenZfsRequest
+var UpdateLocationFsxOpenZfsRequest_LocationArn = &sUpdateLocationFsxOpenZfsRequest_LocationArn
+var UpdateLocationFsxOpenZfsRequest_Protocol = &sUpdateLocationFsxOpenZfsRequest_Protocol
+var UpdateLocationFsxOpenZfsRequest_Subdirectory = &sUpdateLocationFsxOpenZfsRequest_Subdirectory
+
+var UpdateLocationFsxOpenZfsResponse = &sUpdateLocationFsxOpenZfsResponse
+
+var UpdateLocationFsxWindowsRequest = &sUpdateLocationFsxWindowsRequest
+var UpdateLocationFsxWindowsRequest_LocationArn = &sUpdateLocationFsxWindowsRequest_LocationArn
+var UpdateLocationFsxWindowsRequest_Subdirectory = &sUpdateLocationFsxWindowsRequest_Subdirectory
+var UpdateLocationFsxWindowsRequest_Domain = &sUpdateLocationFsxWindowsRequest_Domain
+var UpdateLocationFsxWindowsRequest_User = &sUpdateLocationFsxWindowsRequest_User
+var UpdateLocationFsxWindowsRequest_Password = &sUpdateLocationFsxWindowsRequest_Password
+var UpdateLocationFsxWindowsRequest_CmkSecretConfig = &sUpdateLocationFsxWindowsRequest_CmkSecretConfig
+var UpdateLocationFsxWindowsRequest_CustomSecretConfig = &sUpdateLocationFsxWindowsRequest_CustomSecretConfig
+
+var UpdateLocationFsxWindowsResponse = &sUpdateLocationFsxWindowsResponse
+
+var UpdateLocationHdfsRequest = &sUpdateLocationHdfsRequest
+var UpdateLocationHdfsRequest_LocationArn = &sUpdateLocationHdfsRequest_LocationArn
+var UpdateLocationHdfsRequest_Subdirectory = &sUpdateLocationHdfsRequest_Subdirectory
+var UpdateLocationHdfsRequest_NameNodes = &sUpdateLocationHdfsRequest_NameNodes
+var UpdateLocationHdfsRequest_BlockSize = &sUpdateLocationHdfsRequest_BlockSize
+var UpdateLocationHdfsRequest_ReplicationFactor = &sUpdateLocationHdfsRequest_ReplicationFactor
+var UpdateLocationHdfsRequest_KmsKeyProviderUri = &sUpdateLocationHdfsRequest_KmsKeyProviderUri
+var UpdateLocationHdfsRequest_QopConfiguration = &sUpdateLocationHdfsRequest_QopConfiguration
+var UpdateLocationHdfsRequest_AuthenticationType = &sUpdateLocationHdfsRequest_AuthenticationType
+var UpdateLocationHdfsRequest_SimpleUser = &sUpdateLocationHdfsRequest_SimpleUser
+var UpdateLocationHdfsRequest_KerberosPrincipal = &sUpdateLocationHdfsRequest_KerberosPrincipal
+var UpdateLocationHdfsRequest_KerberosKeytab = &sUpdateLocationHdfsRequest_KerberosKeytab
+var UpdateLocationHdfsRequest_KerberosKrb5Conf = &sUpdateLocationHdfsRequest_KerberosKrb5Conf
+var UpdateLocationHdfsRequest_AgentArns = &sUpdateLocationHdfsRequest_AgentArns
+var UpdateLocationHdfsRequest_CmkSecretConfig = &sUpdateLocationHdfsRequest_CmkSecretConfig
+var UpdateLocationHdfsRequest_CustomSecretConfig = &sUpdateLocationHdfsRequest_CustomSecretConfig
+
+var UpdateLocationHdfsResponse = &sUpdateLocationHdfsResponse
+
+var UpdateLocationNfsRequest = &sUpdateLocationNfsRequest
+var UpdateLocationNfsRequest_LocationArn = &sUpdateLocationNfsRequest_LocationArn
+var UpdateLocationNfsRequest_Subdirectory = &sUpdateLocationNfsRequest_Subdirectory
+var UpdateLocationNfsRequest_ServerHostname = &sUpdateLocationNfsRequest_ServerHostname
+var UpdateLocationNfsRequest_OnPremConfig = &sUpdateLocationNfsRequest_OnPremConfig
+var UpdateLocationNfsRequest_MountOptions = &sUpdateLocationNfsRequest_MountOptions
+
+var UpdateLocationNfsResponse = &sUpdateLocationNfsResponse
+
+var UpdateLocationObjectStorageRequest = &sUpdateLocationObjectStorageRequest
+var UpdateLocationObjectStorageRequest_LocationArn = &sUpdateLocationObjectStorageRequest_LocationArn
+var UpdateLocationObjectStorageRequest_ServerPort = &sUpdateLocationObjectStorageRequest_ServerPort
+var UpdateLocationObjectStorageRequest_ServerProtocol = &sUpdateLocationObjectStorageRequest_ServerProtocol
+var UpdateLocationObjectStorageRequest_Subdirectory = &sUpdateLocationObjectStorageRequest_Subdirectory
+var UpdateLocationObjectStorageRequest_ServerHostname = &sUpdateLocationObjectStorageRequest_ServerHostname
+var UpdateLocationObjectStorageRequest_AccessKey = &sUpdateLocationObjectStorageRequest_AccessKey
+var UpdateLocationObjectStorageRequest_SecretKey = &sUpdateLocationObjectStorageRequest_SecretKey
+var UpdateLocationObjectStorageRequest_FederatedIdentity = &sUpdateLocationObjectStorageRequest_FederatedIdentity
+var UpdateLocationObjectStorageRequest_AgentArns = &sUpdateLocationObjectStorageRequest_AgentArns
+var UpdateLocationObjectStorageRequest_ServerCertificate = &sUpdateLocationObjectStorageRequest_ServerCertificate
+var UpdateLocationObjectStorageRequest_CmkSecretConfig = &sUpdateLocationObjectStorageRequest_CmkSecretConfig
+var UpdateLocationObjectStorageRequest_CustomSecretConfig = &sUpdateLocationObjectStorageRequest_CustomSecretConfig
+
+var UpdateLocationObjectStorageResponse = &sUpdateLocationObjectStorageResponse
+
+var UpdateLocationS3Request = &sUpdateLocationS3Request
+var UpdateLocationS3Request_LocationArn = &sUpdateLocationS3Request_LocationArn
+var UpdateLocationS3Request_Subdirectory = &sUpdateLocationS3Request_Subdirectory
+var UpdateLocationS3Request_S3StorageClass = &sUpdateLocationS3Request_S3StorageClass
+var UpdateLocationS3Request_S3Config = &sUpdateLocationS3Request_S3Config
+
+var UpdateLocationS3Response = &sUpdateLocationS3Response
+
+var UpdateLocationSmbRequest = &sUpdateLocationSmbRequest
+var UpdateLocationSmbRequest_LocationArn = &sUpdateLocationSmbRequest_LocationArn
+var UpdateLocationSmbRequest_Subdirectory = &sUpdateLocationSmbRequest_Subdirectory
+var UpdateLocationSmbRequest_ServerHostname = &sUpdateLocationSmbRequest_ServerHostname
+var UpdateLocationSmbRequest_User = &sUpdateLocationSmbRequest_User
+var UpdateLocationSmbRequest_Domain = &sUpdateLocationSmbRequest_Domain
+var UpdateLocationSmbRequest_Password = &sUpdateLocationSmbRequest_Password
+var UpdateLocationSmbRequest_CmkSecretConfig = &sUpdateLocationSmbRequest_CmkSecretConfig
+var UpdateLocationSmbRequest_CustomSecretConfig = &sUpdateLocationSmbRequest_CustomSecretConfig
+var UpdateLocationSmbRequest_AgentArns = &sUpdateLocationSmbRequest_AgentArns
+var UpdateLocationSmbRequest_MountOptions = &sUpdateLocationSmbRequest_MountOptions
+var UpdateLocationSmbRequest_AuthenticationType = &sUpdateLocationSmbRequest_AuthenticationType
+var UpdateLocationSmbRequest_DnsIpAddresses = &sUpdateLocationSmbRequest_DnsIpAddresses
+var UpdateLocationSmbRequest_KerberosPrincipal = &sUpdateLocationSmbRequest_KerberosPrincipal
+var UpdateLocationSmbRequest_KerberosKeytab = &sUpdateLocationSmbRequest_KerberosKeytab
+var UpdateLocationSmbRequest_KerberosKrb5Conf = &sUpdateLocationSmbRequest_KerberosKrb5Conf
+
+var UpdateLocationSmbResponse = &sUpdateLocationSmbResponse
+
+var UpdateTaskExecutionRequest = &sUpdateTaskExecutionRequest
+var UpdateTaskExecutionRequest_TaskExecutionArn = &sUpdateTaskExecutionRequest_TaskExecutionArn
+var UpdateTaskExecutionRequest_Options = &sUpdateTaskExecutionRequest_Options
+
+var UpdateTaskExecutionResponse = &sUpdateTaskExecutionResponse
+
+var UpdateTaskRequest = &sUpdateTaskRequest
+var UpdateTaskRequest_TaskArn = &sUpdateTaskRequest_TaskArn
+var UpdateTaskRequest_Options = &sUpdateTaskRequest_Options
+var UpdateTaskRequest_Excludes = &sUpdateTaskRequest_Excludes
+var UpdateTaskRequest_Schedule = &sUpdateTaskRequest_Schedule
+var UpdateTaskRequest_Name = &sUpdateTaskRequest_Name
+var UpdateTaskRequest_CloudWatchLogGroupArn = &sUpdateTaskRequest_CloudWatchLogGroupArn
+var UpdateTaskRequest_Includes = &sUpdateTaskRequest_Includes
+var UpdateTaskRequest_ManifestConfig = &sUpdateTaskRequest_ManifestConfig
+var UpdateTaskRequest_TaskReportConfig = &sUpdateTaskRequest_TaskReportConfig
+
+var UpdateTaskResponse = &sUpdateTaskResponse
+
+var FmrsService = &smithy.ServiceSchema{Schema: &s_FmrsService, Version: "2018-11-09"}

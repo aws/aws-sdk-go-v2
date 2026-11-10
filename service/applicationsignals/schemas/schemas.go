@@ -4,3991 +4,3839 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDeleteInstrumentationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteInstrumentationConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchDeleteInstrumentationConfigurations                                  smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReport                                 smithy.SchemaExtensions
+	eBatchUpdateExclusionWindows                                               smithy.SchemaExtensions
+	eCreateInstrumentationConfiguration                                        smithy.SchemaExtensions
+	eCreateServiceLevelObjective                                               smithy.SchemaExtensions
+	eDeleteGroupingConfiguration                                               smithy.SchemaExtensions
+	eDeleteInstrumentationConfiguration                                        smithy.SchemaExtensions
+	eDeleteServiceLevelObjective                                               smithy.SchemaExtensions
+	eGetInstrumentationConfiguration                                           smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatus                                     smithy.SchemaExtensions
+	eGetService                                                                smithy.SchemaExtensions
+	eGetServiceLevelObjective                                                  smithy.SchemaExtensions
+	eListAuditFindings                                                         smithy.SchemaExtensions
+	eListEntityEvents                                                          smithy.SchemaExtensions
+	eListGroupingAttributeDefinitions                                          smithy.SchemaExtensions
+	eListInstrumentationConfigurations                                         smithy.SchemaExtensions
+	eListServiceDependencies                                                   smithy.SchemaExtensions
+	eListServiceDependents                                                     smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindows                                 smithy.SchemaExtensions
+	eListServiceLevelObjectives                                                smithy.SchemaExtensions
+	eListServiceOperations                                                     smithy.SchemaExtensions
+	eListServices                                                              smithy.SchemaExtensions
+	eListServiceStates                                                         smithy.SchemaExtensions
+	eListTagsForResource                                                       smithy.SchemaExtensions
+	ePutGroupingConfiguration                                                  smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatus                                  smithy.SchemaExtensions
+	eStartDiscovery                                                            smithy.SchemaExtensions
+	eTagResource                                                               smithy.SchemaExtensions
+	eUntagResource                                                             smithy.SchemaExtensions
+	eUpdateServiceLevelObjective                                               smithy.SchemaExtensions
+	e_ApplicationSignals                                                       smithy.SchemaExtensions
+	eAccessDeniedException                                                     smithy.SchemaExtensions
+	eAccessDeniedException_Message                                             smithy.SchemaExtensions
+	e_AccountId                                                                smithy.SchemaExtensions
+	e_AmazonResourceName                                                       smithy.SchemaExtensions
+	e_Attainment                                                               smithy.SchemaExtensions
+	e_AttainmentGoal                                                           smithy.SchemaExtensions
+	eAttributeFilter                                                           smithy.SchemaExtensions
+	eAttributeFilter_AttributeFilterName                                       smithy.SchemaExtensions
+	eAttributeFilter_AttributeFilterValues                                     smithy.SchemaExtensions
+	e_AttributeFilterName                                                      smithy.SchemaExtensions
+	e_AttributeFilters                                                         smithy.SchemaExtensions
+	e_AttributeFilters_member                                                  smithy.SchemaExtensions
+	e_AttributeFilterValue                                                     smithy.SchemaExtensions
+	e_AttributeFilterValues                                                    smithy.SchemaExtensions
+	e_AttributeFilterValues_member                                             smithy.SchemaExtensions
+	e_AttributeMap                                                             smithy.SchemaExtensions
+	e_AttributeMap_key                                                         smithy.SchemaExtensions
+	e_AttributeMap_value                                                       smithy.SchemaExtensions
+	e_AttributeMaps                                                            smithy.SchemaExtensions
+	e_AttributeMaps_member                                                     smithy.SchemaExtensions
+	e_Attributes                                                               smithy.SchemaExtensions
+	e_Attributes_key                                                           smithy.SchemaExtensions
+	e_Attributes_value                                                         smithy.SchemaExtensions
+	eAuditFinding                                                              smithy.SchemaExtensions
+	eAuditFinding_KeyAttributes                                                smithy.SchemaExtensions
+	eAuditFinding_AuditorResults                                               smithy.SchemaExtensions
+	eAuditFinding_Operation                                                    smithy.SchemaExtensions
+	eAuditFinding_MetricGraph                                                  smithy.SchemaExtensions
+	eAuditFinding_DependencyGraph                                              smithy.SchemaExtensions
+	eAuditFinding_Type                                                         smithy.SchemaExtensions
+	e_AuditFindings                                                            smithy.SchemaExtensions
+	e_AuditFindings_member                                                     smithy.SchemaExtensions
+	eAuditorResult                                                             smithy.SchemaExtensions
+	eAuditorResult_Auditor                                                     smithy.SchemaExtensions
+	eAuditorResult_Description                                                 smithy.SchemaExtensions
+	eAuditorResult_Data                                                        smithy.SchemaExtensions
+	eAuditorResult_Severity                                                    smithy.SchemaExtensions
+	e_AuditorResults                                                           smithy.SchemaExtensions
+	e_AuditorResults_member                                                    smithy.SchemaExtensions
+	e_Auditors                                                                 smithy.SchemaExtensions
+	e_Auditors_member                                                          smithy.SchemaExtensions
+	eAuditTarget                                                               smithy.SchemaExtensions
+	eAuditTarget_Type                                                          smithy.SchemaExtensions
+	eAuditTarget_Data                                                          smithy.SchemaExtensions
+	eAuditTargetEntity                                                         smithy.SchemaExtensions
+	eAuditTargetEntity_Service                                                 smithy.SchemaExtensions
+	eAuditTargetEntity_Slo                                                     smithy.SchemaExtensions
+	eAuditTargetEntity_ServiceOperation                                        smithy.SchemaExtensions
+	eAuditTargetEntity_Canary                                                  smithy.SchemaExtensions
+	e_AuditTargets                                                             smithy.SchemaExtensions
+	e_AuditTargets_member                                                      smithy.SchemaExtensions
+	e_AwsAccountId                                                             smithy.SchemaExtensions
+	eBatchDeleteByResourceArns                                                 smithy.SchemaExtensions
+	eBatchDeleteByResourceArns_ResourceArns                                    smithy.SchemaExtensions
+	eBatchDeleteByResourceArns_InstrumentationType                             smithy.SchemaExtensions
+	eBatchDeleteDeletionTarget                                                 smithy.SchemaExtensions
+	eBatchDeleteDeletionTarget_Scope                                           smithy.SchemaExtensions
+	eBatchDeleteDeletionTarget_ResourceArns                                    smithy.SchemaExtensions
+	eBatchDeleteError                                                          smithy.SchemaExtensions
+	eBatchDeleteError_ResourceArn                                              smithy.SchemaExtensions
+	eBatchDeleteError_Code                                                     smithy.SchemaExtensions
+	eBatchDeleteError_Message                                                  smithy.SchemaExtensions
+	eBatchDeleteErrorCode                                                      smithy.SchemaExtensions
+	eBatchDeleteErrorCode_RESOURCE_NOT_FOUND                                   smithy.SchemaExtensions
+	eBatchDeleteErrorCode_ACCESS_DENIED                                        smithy.SchemaExtensions
+	eBatchDeleteErrorCode_INTERNAL_SERVICE_ERROR                               smithy.SchemaExtensions
+	e_BatchDeleteErrorList                                                     smithy.SchemaExtensions
+	e_BatchDeleteErrorList_member                                              smithy.SchemaExtensions
+	e_BatchDeleteResourceArnList                                               smithy.SchemaExtensions
+	e_BatchDeleteResourceArnList_member                                        smithy.SchemaExtensions
+	eBatchDeleteScope                                                          smithy.SchemaExtensions
+	eBatchDeleteScope_Service                                                  smithy.SchemaExtensions
+	eBatchDeleteScope_Environment                                              smithy.SchemaExtensions
+	eBatchDeleteScope_InstrumentationType                                      smithy.SchemaExtensions
+	eBatchDeleteSuccessfulDeletion                                             smithy.SchemaExtensions
+	eBatchDeleteSuccessfulDeletion_ResourceArn                                 smithy.SchemaExtensions
+	eBatchDeleteSuccessfulDeletion_SignalType                                  smithy.SchemaExtensions
+	eBatchDeleteSuccessfulDeletion_LocationHash                                smithy.SchemaExtensions
+	e_BatchDeleteSuccessfulDeletionList                                        smithy.SchemaExtensions
+	e_BatchDeleteSuccessfulDeletionList_member                                 smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsError                                          smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsError_SloId                                    smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsError_ErrorCode                                smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsError_ErrorMessage                             smithy.SchemaExtensions
+	e_BatchUpdateExclusionWindowsErrors                                        smithy.SchemaExtensions
+	e_BatchUpdateExclusionWindowsErrors_member                                 smithy.SchemaExtensions
+	e_BudgetRequestsRemaining                                                  smithy.SchemaExtensions
+	e_BudgetSecondsRemaining                                                   smithy.SchemaExtensions
+	eBurnRateConfiguration                                                     smithy.SchemaExtensions
+	eBurnRateConfiguration_LookBackWindowMinutes                               smithy.SchemaExtensions
+	e_BurnRateConfigurations                                                   smithy.SchemaExtensions
+	e_BurnRateConfigurations_member                                            smithy.SchemaExtensions
+	e_BurnRateLookBackWindowMinutes                                            smithy.SchemaExtensions
+	eCalendarInterval                                                          smithy.SchemaExtensions
+	eCalendarInterval_StartTime                                                smithy.SchemaExtensions
+	eCalendarInterval_DurationUnit                                             smithy.SchemaExtensions
+	eCalendarInterval_Duration                                                 smithy.SchemaExtensions
+	e_CalendarIntervalDuration                                                 smithy.SchemaExtensions
+	eCanaryEntity                                                              smithy.SchemaExtensions
+	eCanaryEntity_CanaryName                                                   smithy.SchemaExtensions
+	eCaptureConfiguration                                                      smithy.SchemaExtensions
+	eCaptureConfiguration_CodeCapture                                          smithy.SchemaExtensions
+	eCaptureLimitsConfig                                                       smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxHits                                               smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxStringLength                                       smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxCollectionWidth                                    smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxCollectionDepth                                    smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxStackFrames                                        smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxStackTraceSize                                     smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxObjectDepth                                        smithy.SchemaExtensions
+	eCaptureLimitsConfig_MaxFieldsPerObject                                    smithy.SchemaExtensions
+	eChangeEvent                                                               smithy.SchemaExtensions
+	eChangeEvent_Timestamp                                                     smithy.SchemaExtensions
+	eChangeEvent_AccountId                                                     smithy.SchemaExtensions
+	eChangeEvent_Region                                                        smithy.SchemaExtensions
+	eChangeEvent_Entity                                                        smithy.SchemaExtensions
+	eChangeEvent_ChangeEventType                                               smithy.SchemaExtensions
+	eChangeEvent_EventId                                                       smithy.SchemaExtensions
+	eChangeEvent_UserName                                                      smithy.SchemaExtensions
+	eChangeEvent_EventName                                                     smithy.SchemaExtensions
+	e_ChangeEvents                                                             smithy.SchemaExtensions
+	e_ChangeEvents_member                                                      smithy.SchemaExtensions
+	eChangeEventType                                                           smithy.SchemaExtensions
+	eChangeEventType_DEPLOYMENT                                                smithy.SchemaExtensions
+	eChangeEventType_CONFIGURATION                                             smithy.SchemaExtensions
+	eCodeCaptureConfiguration                                                  smithy.SchemaExtensions
+	eCodeCaptureConfiguration_CaptureArguments                                 smithy.SchemaExtensions
+	eCodeCaptureConfiguration_CaptureReturn                                    smithy.SchemaExtensions
+	eCodeCaptureConfiguration_CaptureStackTrace                                smithy.SchemaExtensions
+	eCodeCaptureConfiguration_CaptureLocals                                    smithy.SchemaExtensions
+	eCodeCaptureConfiguration_CaptureLimits                                    smithy.SchemaExtensions
+	eCodeLocation                                                              smithy.SchemaExtensions
+	eCodeLocation_Language                                                     smithy.SchemaExtensions
+	eCodeLocation_CodeUnit                                                     smithy.SchemaExtensions
+	eCodeLocation_ClassName                                                    smithy.SchemaExtensions
+	eCodeLocation_MethodName                                                   smithy.SchemaExtensions
+	eCodeLocation_FilePath                                                     smithy.SchemaExtensions
+	eCodeLocation_LineNumber                                                   smithy.SchemaExtensions
+	eCompositeSliComponent                                                     smithy.SchemaExtensions
+	eCompositeSliComponent_OperationName                                       smithy.SchemaExtensions
+	e_CompositeSliComponents                                                   smithy.SchemaExtensions
+	e_CompositeSliComponents_member                                            smithy.SchemaExtensions
+	eCompositeSliConfig                                                        smithy.SchemaExtensions
+	eCompositeSliConfig_SelectionConfig                                        smithy.SchemaExtensions
+	eCompositeSliConfig_Components                                             smithy.SchemaExtensions
+	eConflictException                                                         smithy.SchemaExtensions
+	eConflictException_Message                                                 smithy.SchemaExtensions
+	eConnectionType                                                            smithy.SchemaExtensions
+	eConnectionType_INDIRECT                                                   smithy.SchemaExtensions
+	eConnectionType_DIRECT                                                     smithy.SchemaExtensions
+	e_DataMap                                                                  smithy.SchemaExtensions
+	e_DataMap_key                                                              smithy.SchemaExtensions
+	e_DataMap_value                                                            smithy.SchemaExtensions
+	eDependencyConfig                                                          smithy.SchemaExtensions
+	eDependencyConfig_DependencyKeyAttributes                                  smithy.SchemaExtensions
+	eDependencyConfig_DependencyOperationName                                  smithy.SchemaExtensions
+	eDependencyGraph                                                           smithy.SchemaExtensions
+	eDependencyGraph_Nodes                                                     smithy.SchemaExtensions
+	eDependencyGraph_Edges                                                     smithy.SchemaExtensions
+	eDetailLevel                                                               smithy.SchemaExtensions
+	eDetailLevel_BRIEF                                                         smithy.SchemaExtensions
+	eDetailLevel_DETAILED                                                      smithy.SchemaExtensions
+	eDimension                                                                 smithy.SchemaExtensions
+	eDimension_Name                                                            smithy.SchemaExtensions
+	eDimension_Value                                                           smithy.SchemaExtensions
+	e_DimensionName                                                            smithy.SchemaExtensions
+	e_Dimensions                                                               smithy.SchemaExtensions
+	e_Dimensions_member                                                        smithy.SchemaExtensions
+	e_DimensionValue                                                           smithy.SchemaExtensions
+	eDurationUnit                                                              smithy.SchemaExtensions
+	eDurationUnit_MINUTE                                                       smithy.SchemaExtensions
+	eDurationUnit_HOUR                                                         smithy.SchemaExtensions
+	eDurationUnit_DAY                                                          smithy.SchemaExtensions
+	eDurationUnit_MONTH                                                        smithy.SchemaExtensions
+	e_DynamicInstrumentationAttributeFilterGroup                               smithy.SchemaExtensions
+	e_DynamicInstrumentationAttributeFilterGroup_key                           smithy.SchemaExtensions
+	e_DynamicInstrumentationAttributeFilterGroup_value                         smithy.SchemaExtensions
+	e_DynamicInstrumentationAttributeFilters                                   smithy.SchemaExtensions
+	e_DynamicInstrumentationAttributeFilters_member                            smithy.SchemaExtensions
+	eDynamicInstrumentationDeletionStatus                                      smithy.SchemaExtensions
+	eDynamicInstrumentationDeletionStatus_DELETED                              smithy.SchemaExtensions
+	eDynamicInstrumentationSignalType                                          smithy.SchemaExtensions
+	eDynamicInstrumentationSignalType_SNAPSHOT                                 smithy.SchemaExtensions
+	eEdge                                                                      smithy.SchemaExtensions
+	eEdge_SourceNodeId                                                         smithy.SchemaExtensions
+	eEdge_DestinationNodeId                                                    smithy.SchemaExtensions
+	eEdge_Duration                                                             smithy.SchemaExtensions
+	eEdge_ConnectionType                                                       smithy.SchemaExtensions
+	e_Edges                                                                    smithy.SchemaExtensions
+	e_Edges_member                                                             smithy.SchemaExtensions
+	eEvaluationType                                                            smithy.SchemaExtensions
+	eEvaluationType_PERIOD_BASED                                               smithy.SchemaExtensions
+	eEvaluationType_REQUEST_BASED                                              smithy.SchemaExtensions
+	e_ExclusionDuration                                                        smithy.SchemaExtensions
+	e_ExclusionReason                                                          smithy.SchemaExtensions
+	eExclusionWindow                                                           smithy.SchemaExtensions
+	eExclusionWindow_Window                                                    smithy.SchemaExtensions
+	eExclusionWindow_StartTime                                                 smithy.SchemaExtensions
+	eExclusionWindow_RecurrenceRule                                            smithy.SchemaExtensions
+	eExclusionWindow_Reason                                                    smithy.SchemaExtensions
+	e_ExclusionWindowErrorCode                                                 smithy.SchemaExtensions
+	e_ExclusionWindowErrorMessage                                              smithy.SchemaExtensions
+	e_ExclusionWindows                                                         smithy.SchemaExtensions
+	e_ExclusionWindows_member                                                  smithy.SchemaExtensions
+	e_Expression                                                               smithy.SchemaExtensions
+	e_FaultDescription                                                         smithy.SchemaExtensions
+	eGoal                                                                      smithy.SchemaExtensions
+	eGoal_Interval                                                             smithy.SchemaExtensions
+	eGoal_AttainmentGoal                                                       smithy.SchemaExtensions
+	eGoal_WarningThreshold                                                     smithy.SchemaExtensions
+	e_GroupIdentifier                                                          smithy.SchemaExtensions
+	eGroupingAttributeDefinition                                               smithy.SchemaExtensions
+	eGroupingAttributeDefinition_GroupingName                                  smithy.SchemaExtensions
+	eGroupingAttributeDefinition_GroupingSourceKeys                            smithy.SchemaExtensions
+	eGroupingAttributeDefinition_DefaultGroupingValue                          smithy.SchemaExtensions
+	e_GroupingAttributeDefinitions                                             smithy.SchemaExtensions
+	e_GroupingAttributeDefinitions_member                                      smithy.SchemaExtensions
+	eGroupingConfiguration                                                     smithy.SchemaExtensions
+	eGroupingConfiguration_GroupingAttributeDefinitions                        smithy.SchemaExtensions
+	eGroupingConfiguration_UpdatedAt                                           smithy.SchemaExtensions
+	e_GroupingSourceKeyStringList                                              smithy.SchemaExtensions
+	e_GroupingSourceKeyStringList_member                                       smithy.SchemaExtensions
+	e_GroupingString                                                           smithy.SchemaExtensions
+	e_GroupName                                                                smithy.SchemaExtensions
+	e_GroupSource                                                              smithy.SchemaExtensions
+	e_GroupValue                                                               smithy.SchemaExtensions
+	eInstrumentationConfiguration                                              smithy.SchemaExtensions
+	eInstrumentationConfiguration_InstrumentationType                          smithy.SchemaExtensions
+	eInstrumentationConfiguration_Service                                      smithy.SchemaExtensions
+	eInstrumentationConfiguration_Environment                                  smithy.SchemaExtensions
+	eInstrumentationConfiguration_SignalType                                   smithy.SchemaExtensions
+	eInstrumentationConfiguration_Location                                     smithy.SchemaExtensions
+	eInstrumentationConfiguration_LocationHash                                 smithy.SchemaExtensions
+	eInstrumentationConfiguration_Description                                  smithy.SchemaExtensions
+	eInstrumentationConfiguration_ExpiresAt                                    smithy.SchemaExtensions
+	eInstrumentationConfiguration_AttributeFilters                             smithy.SchemaExtensions
+	eInstrumentationConfiguration_CaptureConfiguration                         smithy.SchemaExtensions
+	eInstrumentationConfiguration_CreatedAt                                    smithy.SchemaExtensions
+	eInstrumentationConfiguration_ARN                                          smithy.SchemaExtensions
+	e_InstrumentationConfigurationArn                                          smithy.SchemaExtensions
+	eInstrumentationConfigurationStatus                                        smithy.SchemaExtensions
+	eInstrumentationConfigurationStatus_READY                                  smithy.SchemaExtensions
+	eInstrumentationConfigurationStatus_ERROR                                  smithy.SchemaExtensions
+	eInstrumentationConfigurationStatus_ACTIVE                                 smithy.SchemaExtensions
+	eInstrumentationConfigurationStatus_DISABLED                               smithy.SchemaExtensions
+	e_InstrumentationConfigurationStatusList                                   smithy.SchemaExtensions
+	e_InstrumentationConfigurationStatusList_member                            smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport                                  smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_InstrumentationType              smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_SignalType                       smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_LocationHash                     smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_Status                           smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_Time                             smithy.SchemaExtensions
+	eInstrumentationConfigurationStatusReport_ErrorCause                       smithy.SchemaExtensions
+	e_InstrumentationConfigurationsWithoutServiceEnv                           smithy.SchemaExtensions
+	e_InstrumentationConfigurationsWithoutServiceEnv_member                    smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv                             smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_InstrumentationType         smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_SignalType                  smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_Location                    smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_LocationHash                smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_Description                 smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_ExpiresAt                   smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_AttributeFilters            smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration        smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_CreatedAt                   smithy.SchemaExtensions
+	eInstrumentationConfigurationWithoutServiceEnv_ARN                         smithy.SchemaExtensions
+	eInstrumentationErrorCause                                                 smithy.SchemaExtensions
+	eInstrumentationErrorCause_FILE_NOT_FOUND                                  smithy.SchemaExtensions
+	eInstrumentationErrorCause_METHOD_NOT_FOUND                                smithy.SchemaExtensions
+	eInstrumentationErrorCause_LINE_NOT_EXECUTABLE                             smithy.SchemaExtensions
+	eInstrumentationErrorCause_OVERLOADED_METHODS                              smithy.SchemaExtensions
+	eInstrumentationErrorCause_LANGUAGE_MISMATCH                               smithy.SchemaExtensions
+	eInstrumentationErrorCause_RUNTIME_ERROR                                   smithy.SchemaExtensions
+	eInstrumentationStatusEvent                                                smithy.SchemaExtensions
+	eInstrumentationStatusEvent_Time                                           smithy.SchemaExtensions
+	eInstrumentationStatusEvent_ErrorCause                                     smithy.SchemaExtensions
+	e_InstrumentationStatusEventList                                           smithy.SchemaExtensions
+	e_InstrumentationStatusEventList_member                                    smithy.SchemaExtensions
+	eInstrumentationType                                                       smithy.SchemaExtensions
+	eInstrumentationType_BREAKPOINT                                            smithy.SchemaExtensions
+	eInstrumentationType_PROBE                                                 smithy.SchemaExtensions
+	eInterval                                                                  smithy.SchemaExtensions
+	eInterval_RollingInterval                                                  smithy.SchemaExtensions
+	eInterval_CalendarInterval                                                 smithy.SchemaExtensions
+	e_KeyAttributeName                                                         smithy.SchemaExtensions
+	e_KeyAttributeValue                                                        smithy.SchemaExtensions
+	e_LatestChangeEvents                                                       smithy.SchemaExtensions
+	e_LatestChangeEvents_member                                                smithy.SchemaExtensions
+	e_ListAuditFindingMaxResults                                               smithy.SchemaExtensions
+	e_ListEntityEventsMaxResults                                               smithy.SchemaExtensions
+	e_ListServiceDependenciesMaxResults                                        smithy.SchemaExtensions
+	e_ListServiceDependentsMaxResults                                          smithy.SchemaExtensions
+	e_ListServiceLevelObjectiveExclusionWindowsMaxResults                      smithy.SchemaExtensions
+	e_ListServiceLevelObjectivesMaxResults                                     smithy.SchemaExtensions
+	e_ListServiceOperationMaxResults                                           smithy.SchemaExtensions
+	e_ListServicesMaxResults                                                   smithy.SchemaExtensions
+	e_ListServiceStatesMaxResults                                              smithy.SchemaExtensions
+	eLocation                                                                  smithy.SchemaExtensions
+	eLocation_CodeLocation                                                     smithy.SchemaExtensions
+	eLocationIdentifier                                                        smithy.SchemaExtensions
+	eLocationIdentifier_CodeLocation                                           smithy.SchemaExtensions
+	eLocationIdentifier_LocationHash                                           smithy.SchemaExtensions
+	e_LogGroupReferences                                                       smithy.SchemaExtensions
+	e_LogGroupReferences_member                                                smithy.SchemaExtensions
+	eMetric                                                                    smithy.SchemaExtensions
+	eMetric_Namespace                                                          smithy.SchemaExtensions
+	eMetric_MetricName                                                         smithy.SchemaExtensions
+	eMetric_Dimensions                                                         smithy.SchemaExtensions
+	e_MetricDataQueries                                                        smithy.SchemaExtensions
+	e_MetricDataQueries_member                                                 smithy.SchemaExtensions
+	eMetricDataQuery                                                           smithy.SchemaExtensions
+	eMetricDataQuery_Id                                                        smithy.SchemaExtensions
+	eMetricDataQuery_MetricStat                                                smithy.SchemaExtensions
+	eMetricDataQuery_Expression                                                smithy.SchemaExtensions
+	eMetricDataQuery_Label                                                     smithy.SchemaExtensions
+	eMetricDataQuery_ReturnData                                                smithy.SchemaExtensions
+	eMetricDataQuery_Period                                                    smithy.SchemaExtensions
+	eMetricDataQuery_AccountId                                                 smithy.SchemaExtensions
+	e_MetricExpression                                                         smithy.SchemaExtensions
+	eMetricGraph                                                               smithy.SchemaExtensions
+	eMetricGraph_MetricDataQueries                                             smithy.SchemaExtensions
+	eMetricGraph_StartTime                                                     smithy.SchemaExtensions
+	eMetricGraph_EndTime                                                       smithy.SchemaExtensions
+	e_MetricId                                                                 smithy.SchemaExtensions
+	e_MetricLabel                                                              smithy.SchemaExtensions
+	e_MetricName                                                               smithy.SchemaExtensions
+	eMetricReference                                                           smithy.SchemaExtensions
+	eMetricReference_Namespace                                                 smithy.SchemaExtensions
+	eMetricReference_MetricType                                                smithy.SchemaExtensions
+	eMetricReference_Dimensions                                                smithy.SchemaExtensions
+	eMetricReference_MetricName                                                smithy.SchemaExtensions
+	eMetricReference_AccountId                                                 smithy.SchemaExtensions
+	e_MetricReferences                                                         smithy.SchemaExtensions
+	e_MetricReferences_member                                                  smithy.SchemaExtensions
+	eMetricSource                                                              smithy.SchemaExtensions
+	eMetricSource_MetricSourceKeyAttributes                                    smithy.SchemaExtensions
+	eMetricSource_MetricSourceAttributes                                       smithy.SchemaExtensions
+	eMetricSourceType                                                          smithy.SchemaExtensions
+	eMetricSourceType_SERVICE_OPERATION                                        smithy.SchemaExtensions
+	eMetricSourceType_CLOUDWATCH_METRIC                                        smithy.SchemaExtensions
+	eMetricSourceType_SERVICE_DEPENDENCY                                       smithy.SchemaExtensions
+	eMetricSourceType_APPMONITOR                                               smithy.SchemaExtensions
+	eMetricSourceType_CANARY                                                   smithy.SchemaExtensions
+	eMetricSourceType_SERVICE                                                  smithy.SchemaExtensions
+	e_MetricSourceTypes                                                        smithy.SchemaExtensions
+	e_MetricSourceTypes_member                                                 smithy.SchemaExtensions
+	eMetricStat                                                                smithy.SchemaExtensions
+	eMetricStat_Metric                                                         smithy.SchemaExtensions
+	eMetricStat_Period                                                         smithy.SchemaExtensions
+	eMetricStat_Stat                                                           smithy.SchemaExtensions
+	eMetricStat_Unit                                                           smithy.SchemaExtensions
+	e_MetricType                                                               smithy.SchemaExtensions
+	eMonitoredRequestCountMetricDataQueries                                    smithy.SchemaExtensions
+	eMonitoredRequestCountMetricDataQueries_GoodCountMetric                    smithy.SchemaExtensions
+	eMonitoredRequestCountMetricDataQueries_BadCountMetric                     smithy.SchemaExtensions
+	e_Namespace                                                                smithy.SchemaExtensions
+	e_NextToken                                                                smithy.SchemaExtensions
+	eNode                                                                      smithy.SchemaExtensions
+	eNode_KeyAttributes                                                        smithy.SchemaExtensions
+	eNode_Name                                                                 smithy.SchemaExtensions
+	eNode_NodeId                                                               smithy.SchemaExtensions
+	eNode_Operation                                                            smithy.SchemaExtensions
+	eNode_Type                                                                 smithy.SchemaExtensions
+	eNode_Duration                                                             smithy.SchemaExtensions
+	eNode_Status                                                               smithy.SchemaExtensions
+	e_Nodes                                                                    smithy.SchemaExtensions
+	e_Nodes_member                                                             smithy.SchemaExtensions
+	e_OperationName                                                            smithy.SchemaExtensions
+	e_Period                                                                   smithy.SchemaExtensions
+	eProgrammingLanguage                                                       smithy.SchemaExtensions
+	eProgrammingLanguage_JAVA                                                  smithy.SchemaExtensions
+	eProgrammingLanguage_PYTHON                                                smithy.SchemaExtensions
+	eProgrammingLanguage_JAVASCRIPT                                            smithy.SchemaExtensions
+	eRecurrenceRule                                                            smithy.SchemaExtensions
+	eRecurrenceRule_Expression                                                 smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicator                                         smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicator_RequestBasedSliMetric                   smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicator_MetricThreshold                         smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicator_ComparisonOperator                      smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorConfig                                   smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig       smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorConfig_MetricThreshold                   smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorConfig_ComparisonOperator                smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric                                   smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_KeyAttributes                     smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_OperationName                     smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_MetricType                        smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric           smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric       smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_DependencyConfig                  smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_MetricSource                      smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetric_CompositeSliConfig                smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig                             smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes               smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_OperationName               smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_MetricType                  smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric     smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig            smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_MetricSource                smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_MetricName                  smithy.SchemaExtensions
+	eRequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig          smithy.SchemaExtensions
+	e_ResourceId                                                               smithy.SchemaExtensions
+	eResourceNotFoundException                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                                    smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                                      smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                         smithy.SchemaExtensions
+	e_ResourceType                                                             smithy.SchemaExtensions
+	e_ReturnData                                                               smithy.SchemaExtensions
+	eRollingInterval                                                           smithy.SchemaExtensions
+	eRollingInterval_DurationUnit                                              smithy.SchemaExtensions
+	eRollingInterval_Duration                                                  smithy.SchemaExtensions
+	e_RollingIntervalDuration                                                  smithy.SchemaExtensions
+	eSelectionConfig                                                           smithy.SchemaExtensions
+	eSelectionConfig_Type                                                      smithy.SchemaExtensions
+	eSelectionConfig_Pattern                                                   smithy.SchemaExtensions
+	e_SelectionPattern                                                         smithy.SchemaExtensions
+	eSelectionType                                                             smithy.SchemaExtensions
+	eSelectionType_EXPLICIT                                                    smithy.SchemaExtensions
+	eSelectionType_PREFIX                                                      smithy.SchemaExtensions
+	eSelectionType_REGEX                                                       smithy.SchemaExtensions
+	eService                                                                   smithy.SchemaExtensions
+	eService_KeyAttributes                                                     smithy.SchemaExtensions
+	eService_AttributeMaps                                                     smithy.SchemaExtensions
+	eService_ServiceGroups                                                     smithy.SchemaExtensions
+	eService_MetricReferences                                                  smithy.SchemaExtensions
+	eService_LogGroupReferences                                                smithy.SchemaExtensions
+	e_ServiceDependencies                                                      smithy.SchemaExtensions
+	e_ServiceDependencies_member                                               smithy.SchemaExtensions
+	eServiceDependency                                                         smithy.SchemaExtensions
+	eServiceDependency_OperationName                                           smithy.SchemaExtensions
+	eServiceDependency_DependencyKeyAttributes                                 smithy.SchemaExtensions
+	eServiceDependency_DependencyOperationName                                 smithy.SchemaExtensions
+	eServiceDependency_MetricReferences                                        smithy.SchemaExtensions
+	eServiceDependent                                                          smithy.SchemaExtensions
+	eServiceDependent_OperationName                                            smithy.SchemaExtensions
+	eServiceDependent_DependentKeyAttributes                                   smithy.SchemaExtensions
+	eServiceDependent_DependentOperationName                                   smithy.SchemaExtensions
+	eServiceDependent_MetricReferences                                         smithy.SchemaExtensions
+	e_ServiceDependents                                                        smithy.SchemaExtensions
+	e_ServiceDependents_member                                                 smithy.SchemaExtensions
+	eServiceEntity                                                             smithy.SchemaExtensions
+	eServiceEntity_Type                                                        smithy.SchemaExtensions
+	eServiceEntity_Name                                                        smithy.SchemaExtensions
+	eServiceEntity_Environment                                                 smithy.SchemaExtensions
+	eServiceEntity_AwsAccountId                                                smithy.SchemaExtensions
+	e_ServiceErrorMessage                                                      smithy.SchemaExtensions
+	eServiceGroup                                                              smithy.SchemaExtensions
+	eServiceGroup_GroupName                                                    smithy.SchemaExtensions
+	eServiceGroup_GroupValue                                                   smithy.SchemaExtensions
+	eServiceGroup_GroupSource                                                  smithy.SchemaExtensions
+	eServiceGroup_GroupIdentifier                                              smithy.SchemaExtensions
+	e_ServiceGroups                                                            smithy.SchemaExtensions
+	e_ServiceGroups_member                                                     smithy.SchemaExtensions
+	eServiceLevelIndicator                                                     smithy.SchemaExtensions
+	eServiceLevelIndicator_SliMetric                                           smithy.SchemaExtensions
+	eServiceLevelIndicator_MetricThreshold                                     smithy.SchemaExtensions
+	eServiceLevelIndicator_ComparisonOperator                                  smithy.SchemaExtensions
+	eServiceLevelIndicatorComparisonOperator                                   smithy.SchemaExtensions
+	eServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO          smithy.SchemaExtensions
+	eServiceLevelIndicatorComparisonOperator_GREATER_THAN                      smithy.SchemaExtensions
+	eServiceLevelIndicatorComparisonOperator_LESS_THAN                         smithy.SchemaExtensions
+	eServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO             smithy.SchemaExtensions
+	eServiceLevelIndicatorConfig                                               smithy.SchemaExtensions
+	eServiceLevelIndicatorConfig_SliMetricConfig                               smithy.SchemaExtensions
+	eServiceLevelIndicatorConfig_MetricThreshold                               smithy.SchemaExtensions
+	eServiceLevelIndicatorConfig_ComparisonOperator                            smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric                                               smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_KeyAttributes                                 smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_OperationName                                 smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_MetricType                                    smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_MetricDataQueries                             smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_DependencyConfig                              smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_MetricSource                                  smithy.SchemaExtensions
+	eServiceLevelIndicatorMetric_CompositeSliConfig                            smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig                                         smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_KeyAttributes                           smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_OperationName                           smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_MetricType                              smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_MetricName                              smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_Statistic                               smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_PeriodSeconds                           smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_MetricSource                            smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_MetricDataQueries                       smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_DependencyConfig                        smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricConfig_CompositeSliConfig                      smithy.SchemaExtensions
+	e_ServiceLevelIndicatorMetricThreshold                                     smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricType                                           smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricType_LATENCY                                   smithy.SchemaExtensions
+	eServiceLevelIndicatorMetricType_AVAILABILITY                              smithy.SchemaExtensions
+	e_ServiceLevelIndicatorStatistic                                           smithy.SchemaExtensions
+	eServiceLevelObjective                                                     smithy.SchemaExtensions
+	eServiceLevelObjective_Arn                                                 smithy.SchemaExtensions
+	eServiceLevelObjective_Name                                                smithy.SchemaExtensions
+	eServiceLevelObjective_Description                                         smithy.SchemaExtensions
+	eServiceLevelObjective_CreatedTime                                         smithy.SchemaExtensions
+	eServiceLevelObjective_LastUpdatedTime                                     smithy.SchemaExtensions
+	eServiceLevelObjective_Sli                                                 smithy.SchemaExtensions
+	eServiceLevelObjective_RequestBasedSli                                     smithy.SchemaExtensions
+	eServiceLevelObjective_EvaluationType                                      smithy.SchemaExtensions
+	eServiceLevelObjective_Goal                                                smithy.SchemaExtensions
+	eServiceLevelObjective_BurnRateConfigurations                              smithy.SchemaExtensions
+	eServiceLevelObjective_MetricSourceType                                    smithy.SchemaExtensions
+	eServiceLevelObjective_AutoInvestigationEnabled                            smithy.SchemaExtensions
+	e_ServiceLevelObjectiveArn                                                 smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport                                         smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_Arn                                     smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_Name                                    smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_EvaluationType                          smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_BudgetStatus                            smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_Attainment                              smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_TotalBudgetSeconds                      smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining                  smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_TotalBudgetRequests                     smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining                 smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_Sli                                     smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_RequestBasedSli                         smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReport_Goal                                    smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReportError                                    smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReportError_Name                               smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReportError_Arn                                smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReportError_ErrorCode                          smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetReportError_ErrorMessage                       smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReportErrorCode                               smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReportErrorMessage                            smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReportErrors                                  smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReportErrors_member                           smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReports                                       smithy.SchemaExtensions
+	e_ServiceLevelObjectiveBudgetReports_member                                smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetStatus                                         smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetStatus_OK                                      smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetStatus_WARNING                                 smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetStatus_BREACHED                                smithy.SchemaExtensions
+	eServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA                       smithy.SchemaExtensions
+	e_ServiceLevelObjectiveDescription                                         smithy.SchemaExtensions
+	eServiceLevelObjectiveEntity                                               smithy.SchemaExtensions
+	eServiceLevelObjectiveEntity_SloName                                       smithy.SchemaExtensions
+	eServiceLevelObjectiveEntity_SloArn                                        smithy.SchemaExtensions
+	e_ServiceLevelObjectiveId                                                  smithy.SchemaExtensions
+	e_ServiceLevelObjectiveIds                                                 smithy.SchemaExtensions
+	e_ServiceLevelObjectiveIds_member                                          smithy.SchemaExtensions
+	e_ServiceLevelObjectiveName                                                smithy.SchemaExtensions
+	e_ServiceLevelObjectiveSummaries                                           smithy.SchemaExtensions
+	e_ServiceLevelObjectiveSummaries_member                                    smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary                                              smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_Arn                                          smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_Name                                         smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_KeyAttributes                                smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_OperationName                                smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_DependencyConfig                             smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_CreatedTime                                  smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_EvaluationType                               smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_MetricSourceType                             smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_MetricSource                                 smithy.SchemaExtensions
+	eServiceLevelObjectiveSummary_CompositeSliConfig                           smithy.SchemaExtensions
+	eServiceOperation                                                          smithy.SchemaExtensions
+	eServiceOperation_Name                                                     smithy.SchemaExtensions
+	eServiceOperation_MetricReferences                                         smithy.SchemaExtensions
+	eServiceOperationEntity                                                    smithy.SchemaExtensions
+	eServiceOperationEntity_Service                                            smithy.SchemaExtensions
+	eServiceOperationEntity_Operation                                          smithy.SchemaExtensions
+	eServiceOperationEntity_MetricType                                         smithy.SchemaExtensions
+	e_ServiceOperations                                                        smithy.SchemaExtensions
+	e_ServiceOperations_member                                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException                                             smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                     smithy.SchemaExtensions
+	eServiceState                                                              smithy.SchemaExtensions
+	eServiceState_AttributeFilters                                             smithy.SchemaExtensions
+	eServiceState_Service                                                      smithy.SchemaExtensions
+	eServiceState_LatestChangeEvents                                           smithy.SchemaExtensions
+	e_ServiceStates                                                            smithy.SchemaExtensions
+	e_ServiceStates_member                                                     smithy.SchemaExtensions
+	e_ServiceSummaries                                                         smithy.SchemaExtensions
+	e_ServiceSummaries_member                                                  smithy.SchemaExtensions
+	eServiceSummary                                                            smithy.SchemaExtensions
+	eServiceSummary_KeyAttributes                                              smithy.SchemaExtensions
+	eServiceSummary_AttributeMaps                                              smithy.SchemaExtensions
+	eServiceSummary_MetricReferences                                           smithy.SchemaExtensions
+	eServiceSummary_ServiceGroups                                              smithy.SchemaExtensions
+	eSeverity                                                                  smithy.SchemaExtensions
+	eSeverity_CRITICAL                                                         smithy.SchemaExtensions
+	eSeverity_HIGH                                                             smithy.SchemaExtensions
+	eSeverity_MEDIUM                                                           smithy.SchemaExtensions
+	eSeverity_LOW                                                              smithy.SchemaExtensions
+	eSeverity_NONE                                                             smithy.SchemaExtensions
+	e_SLIPeriodSeconds                                                         smithy.SchemaExtensions
+	eStandardUnit                                                              smithy.SchemaExtensions
+	eStandardUnit_MICROSECONDS                                                 smithy.SchemaExtensions
+	eStandardUnit_MILLISECONDS                                                 smithy.SchemaExtensions
+	eStandardUnit_SECONDS                                                      smithy.SchemaExtensions
+	eStandardUnit_BYTES                                                        smithy.SchemaExtensions
+	eStandardUnit_KILOBYTES                                                    smithy.SchemaExtensions
+	eStandardUnit_MEGABYTES                                                    smithy.SchemaExtensions
+	eStandardUnit_GIGABYTES                                                    smithy.SchemaExtensions
+	eStandardUnit_TERABYTES                                                    smithy.SchemaExtensions
+	eStandardUnit_BITS                                                         smithy.SchemaExtensions
+	eStandardUnit_KILOBITS                                                     smithy.SchemaExtensions
+	eStandardUnit_MEGABITS                                                     smithy.SchemaExtensions
+	eStandardUnit_GIGABITS                                                     smithy.SchemaExtensions
+	eStandardUnit_TERABITS                                                     smithy.SchemaExtensions
+	eStandardUnit_PERCENT                                                      smithy.SchemaExtensions
+	eStandardUnit_COUNT                                                        smithy.SchemaExtensions
+	eStandardUnit_BYTES_SECOND                                                 smithy.SchemaExtensions
+	eStandardUnit_KILOBYTES_SECOND                                             smithy.SchemaExtensions
+	eStandardUnit_MEGABYTES_SECOND                                             smithy.SchemaExtensions
+	eStandardUnit_GIGABYTES_SECOND                                             smithy.SchemaExtensions
+	eStandardUnit_TERABYTES_SECOND                                             smithy.SchemaExtensions
+	eStandardUnit_BITS_SECOND                                                  smithy.SchemaExtensions
+	eStandardUnit_KILOBITS_SECOND                                              smithy.SchemaExtensions
+	eStandardUnit_MEGABITS_SECOND                                              smithy.SchemaExtensions
+	eStandardUnit_GIGABITS_SECOND                                              smithy.SchemaExtensions
+	eStandardUnit_TERABITS_SECOND                                              smithy.SchemaExtensions
+	eStandardUnit_COUNT_SECOND                                                 smithy.SchemaExtensions
+	eStandardUnit_NONE                                                         smithy.SchemaExtensions
+	e_Stat                                                                     smithy.SchemaExtensions
+	e_StringList                                                               smithy.SchemaExtensions
+	e_StringList_member                                                        smithy.SchemaExtensions
+	eTag                                                                       smithy.SchemaExtensions
+	eTag_Key                                                                   smithy.SchemaExtensions
+	eTag_Value                                                                 smithy.SchemaExtensions
+	e_TagKey                                                                   smithy.SchemaExtensions
+	e_TagKeyList                                                               smithy.SchemaExtensions
+	e_TagKeyList_member                                                        smithy.SchemaExtensions
+	e_TagList                                                                  smithy.SchemaExtensions
+	e_TagList_member                                                           smithy.SchemaExtensions
+	e_TagValue                                                                 smithy.SchemaExtensions
+	eThrottlingException                                                       smithy.SchemaExtensions
+	eThrottlingException_Message                                               smithy.SchemaExtensions
+	e_TotalBudgetRequests                                                      smithy.SchemaExtensions
+	e_TotalBudgetSeconds                                                       smithy.SchemaExtensions
+	eUnprocessedStatusEvent                                                    smithy.SchemaExtensions
+	eUnprocessedStatusEvent_InstrumentationType                                smithy.SchemaExtensions
+	eUnprocessedStatusEvent_SignalType                                         smithy.SchemaExtensions
+	eUnprocessedStatusEvent_LocationHash                                       smithy.SchemaExtensions
+	eUnprocessedStatusEvent_Status                                             smithy.SchemaExtensions
+	eUnprocessedStatusEvent_Time                                               smithy.SchemaExtensions
+	eUnprocessedStatusEvent_FailedReason                                       smithy.SchemaExtensions
+	eUnprocessedStatusEventFailureReason                                       smithy.SchemaExtensions
+	eUnprocessedStatusEventFailureReason_THROTTLED                             smithy.SchemaExtensions
+	eUnprocessedStatusEventFailureReason_INTERNAL_ERROR                        smithy.SchemaExtensions
+	eUnprocessedStatusEventFailureReason_VALIDATION_ERROR                      smithy.SchemaExtensions
+	e_UnprocessedStatusEventList                                               smithy.SchemaExtensions
+	e_UnprocessedStatusEventList_member                                        smithy.SchemaExtensions
+	eValidationException                                                       smithy.SchemaExtensions
+	eValidationException_message                                               smithy.SchemaExtensions
+	e_ValidationExceptionMessage                                               smithy.SchemaExtensions
+	e_WarningThreshold                                                         smithy.SchemaExtensions
+	eWindow                                                                    smithy.SchemaExtensions
+	eWindow_DurationUnit                                                       smithy.SchemaExtensions
+	eWindow_Duration                                                           smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsRequest                           smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsRequest_DeletionTarget            smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsResponse                          smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsResponse_DeletedCount             smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions      smithy.SchemaExtensions
+	eBatchDeleteInstrumentationConfigurationsResponse_Errors                   smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportInput                            smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportInput_Timestamp                  smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportInput_SloIds                     smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportOutput                           smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp                 smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportOutput_Reports                   smithy.SchemaExtensions
+	eBatchGetServiceLevelObjectiveBudgetReportOutput_Errors                    smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsInput                                          smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsInput_SloIds                                   smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsInput_AddExclusionWindows                      smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsInput_RemoveExclusionWindows                   smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsOutput                                         smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsOutput_SloIds                                  smithy.SchemaExtensions
+	eBatchUpdateExclusionWindowsOutput_Errors                                  smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest                                 smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_InstrumentationType             smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_Service                         smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_Environment                     smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_SignalType                      smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_Location                        smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_Description                     smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_ExpiresAt                       smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_AttributeFilters                smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_CaptureConfiguration            smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationRequest_Tags                            smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse                                smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_InstrumentationType            smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_Service                        smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_Environment                    smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_SignalType                     smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_Location                       smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_LocationHash                   smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_Description                    smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_ExpiresAt                      smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_AttributeFilters               smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_CaptureConfiguration           smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_CreatedAt                      smithy.SchemaExtensions
+	eCreateInstrumentationConfigurationResponse_ARN                            smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput                                          smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_Name                                     smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_Description                              smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_SliConfig                                smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_RequestBasedSliConfig                    smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_Goal                                     smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_Tags                                     smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_BurnRateConfigurations                   smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_CreateRecommendedSlo                     smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveInput_AutoInvestigationEnabled                 smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveOutput                                         smithy.SchemaExtensions
+	eCreateServiceLevelObjectiveOutput_Slo                                     smithy.SchemaExtensions
+	eDeleteGroupingConfigurationOutput                                         smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest                                 smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest_InstrumentationType             smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest_Service                         smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest_Environment                     smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest_SignalType                      smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationRequest_LocationIdentifier              smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationResponse                                smithy.SchemaExtensions
+	eDeleteInstrumentationConfigurationResponse_DeletionStatus                 smithy.SchemaExtensions
+	eDeleteServiceLevelObjectiveInput                                          smithy.SchemaExtensions
+	eDeleteServiceLevelObjectiveInput_Id                                       smithy.SchemaExtensions
+	eDeleteServiceLevelObjectiveOutput                                         smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest                                    smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest_InstrumentationType                smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest_Service                            smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest_Environment                        smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest_SignalType                         smithy.SchemaExtensions
+	eGetInstrumentationConfigurationRequest_LocationIdentifier                 smithy.SchemaExtensions
+	eGetInstrumentationConfigurationResponse                                   smithy.SchemaExtensions
+	eGetInstrumentationConfigurationResponse_Configuration                     smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest                              smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_InstrumentationType          smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_Service                      smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_Environment                  smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_SignalType                   smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_LocationIdentifier           smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_Status                       smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_StartTime                    smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_EndTime                      smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_MaxResults                   smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusRequest_NextToken                    smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse                             smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_Service                     smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_Environment                 smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_SignalType                  smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_Location                    smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_Status                      smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_Events                      smithy.SchemaExtensions
+	eGetInstrumentationConfigurationStatusResponse_NextToken                   smithy.SchemaExtensions
+	eGetServiceInput                                                           smithy.SchemaExtensions
+	eGetServiceInput_StartTime                                                 smithy.SchemaExtensions
+	eGetServiceInput_EndTime                                                   smithy.SchemaExtensions
+	eGetServiceInput_KeyAttributes                                             smithy.SchemaExtensions
+	eGetServiceLevelObjectiveInput                                             smithy.SchemaExtensions
+	eGetServiceLevelObjectiveInput_Id                                          smithy.SchemaExtensions
+	eGetServiceLevelObjectiveOutput                                            smithy.SchemaExtensions
+	eGetServiceLevelObjectiveOutput_Slo                                        smithy.SchemaExtensions
+	eGetServiceOutput                                                          smithy.SchemaExtensions
+	eGetServiceOutput_Service                                                  smithy.SchemaExtensions
+	eGetServiceOutput_StartTime                                                smithy.SchemaExtensions
+	eGetServiceOutput_EndTime                                                  smithy.SchemaExtensions
+	eGetServiceOutput_LogGroupReferences                                       smithy.SchemaExtensions
+	eListAuditFindingsInput                                                    smithy.SchemaExtensions
+	eListAuditFindingsInput_StartTime                                          smithy.SchemaExtensions
+	eListAuditFindingsInput_EndTime                                            smithy.SchemaExtensions
+	eListAuditFindingsInput_Auditors                                           smithy.SchemaExtensions
+	eListAuditFindingsInput_AuditTargets                                       smithy.SchemaExtensions
+	eListAuditFindingsInput_DetailLevel                                        smithy.SchemaExtensions
+	eListAuditFindingsInput_NextToken                                          smithy.SchemaExtensions
+	eListAuditFindingsInput_MaxResults                                         smithy.SchemaExtensions
+	eListAuditFindingsOutput                                                   smithy.SchemaExtensions
+	eListAuditFindingsOutput_StartTime                                         smithy.SchemaExtensions
+	eListAuditFindingsOutput_EndTime                                           smithy.SchemaExtensions
+	eListAuditFindingsOutput_AuditFindings                                     smithy.SchemaExtensions
+	eListAuditFindingsOutput_NextToken                                         smithy.SchemaExtensions
+	eListEntityEventsInput                                                     smithy.SchemaExtensions
+	eListEntityEventsInput_Entity                                              smithy.SchemaExtensions
+	eListEntityEventsInput_StartTime                                           smithy.SchemaExtensions
+	eListEntityEventsInput_EndTime                                             smithy.SchemaExtensions
+	eListEntityEventsInput_MaxResults                                          smithy.SchemaExtensions
+	eListEntityEventsInput_NextToken                                           smithy.SchemaExtensions
+	eListEntityEventsOutput                                                    smithy.SchemaExtensions
+	eListEntityEventsOutput_StartTime                                          smithy.SchemaExtensions
+	eListEntityEventsOutput_EndTime                                            smithy.SchemaExtensions
+	eListEntityEventsOutput_ChangeEvents                                       smithy.SchemaExtensions
+	eListEntityEventsOutput_NextToken                                          smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsInput                                     smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsInput_NextToken                           smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsInput_AwsAccountId                        smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts               smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsOutput                                    smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions       smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsOutput_UpdatedAt                          smithy.SchemaExtensions
+	eListGroupingAttributeDefinitionsOutput_NextToken                          smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest                                  smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_Service                          smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_Environment                      smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_InstrumentationType              smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_SyncedAt                         smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_MaxResults                       smithy.SchemaExtensions
+	eListInstrumentationConfigurationsRequest_NextToken                        smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage                                         smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_Service                                 smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_Environment                             smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_Changed                                 smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_LatestConfigurations                    smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_SyncedAt                                smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_SyncInterval                            smithy.SchemaExtensions
+	eInstrumentationConfigurationsPage_NextToken                               smithy.SchemaExtensions
+	eListServiceDependenciesInput                                              smithy.SchemaExtensions
+	eListServiceDependenciesInput_StartTime                                    smithy.SchemaExtensions
+	eListServiceDependenciesInput_EndTime                                      smithy.SchemaExtensions
+	eListServiceDependenciesInput_KeyAttributes                                smithy.SchemaExtensions
+	eListServiceDependenciesInput_MaxResults                                   smithy.SchemaExtensions
+	eListServiceDependenciesInput_NextToken                                    smithy.SchemaExtensions
+	eListServiceDependenciesOutput                                             smithy.SchemaExtensions
+	eListServiceDependenciesOutput_StartTime                                   smithy.SchemaExtensions
+	eListServiceDependenciesOutput_EndTime                                     smithy.SchemaExtensions
+	eListServiceDependenciesOutput_ServiceDependencies                         smithy.SchemaExtensions
+	eListServiceDependenciesOutput_NextToken                                   smithy.SchemaExtensions
+	eListServiceDependentsInput                                                smithy.SchemaExtensions
+	eListServiceDependentsInput_StartTime                                      smithy.SchemaExtensions
+	eListServiceDependentsInput_EndTime                                        smithy.SchemaExtensions
+	eListServiceDependentsInput_KeyAttributes                                  smithy.SchemaExtensions
+	eListServiceDependentsInput_MaxResults                                     smithy.SchemaExtensions
+	eListServiceDependentsInput_NextToken                                      smithy.SchemaExtensions
+	eListServiceDependentsOutput                                               smithy.SchemaExtensions
+	eListServiceDependentsOutput_StartTime                                     smithy.SchemaExtensions
+	eListServiceDependentsOutput_EndTime                                       smithy.SchemaExtensions
+	eListServiceDependentsOutput_ServiceDependents                             smithy.SchemaExtensions
+	eListServiceDependentsOutput_NextToken                                     smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsInput                            smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsInput_Id                         smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsInput_MaxResults                 smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsInput_NextToken                  smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsOutput                           smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows          smithy.SchemaExtensions
+	eListServiceLevelObjectiveExclusionWindowsOutput_NextToken                 smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput                                           smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_KeyAttributes                             smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_OperationName                             smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_DependencyConfig                          smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_MaxResults                                smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_NextToken                                 smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_MetricSourceTypes                         smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_IncludeLinkedAccounts                     smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_SloOwnerAwsAccountId                      smithy.SchemaExtensions
+	eListServiceLevelObjectivesInput_MetricSource                              smithy.SchemaExtensions
+	eListServiceLevelObjectivesOutput                                          smithy.SchemaExtensions
+	eListServiceLevelObjectivesOutput_SloSummaries                             smithy.SchemaExtensions
+	eListServiceLevelObjectivesOutput_NextToken                                smithy.SchemaExtensions
+	eListServiceOperationsInput                                                smithy.SchemaExtensions
+	eListServiceOperationsInput_StartTime                                      smithy.SchemaExtensions
+	eListServiceOperationsInput_EndTime                                        smithy.SchemaExtensions
+	eListServiceOperationsInput_KeyAttributes                                  smithy.SchemaExtensions
+	eListServiceOperationsInput_MaxResults                                     smithy.SchemaExtensions
+	eListServiceOperationsInput_NextToken                                      smithy.SchemaExtensions
+	eListServiceOperationsOutput                                               smithy.SchemaExtensions
+	eListServiceOperationsOutput_StartTime                                     smithy.SchemaExtensions
+	eListServiceOperationsOutput_EndTime                                       smithy.SchemaExtensions
+	eListServiceOperationsOutput_ServiceOperations                             smithy.SchemaExtensions
+	eListServiceOperationsOutput_NextToken                                     smithy.SchemaExtensions
+	eListServicesInput                                                         smithy.SchemaExtensions
+	eListServicesInput_StartTime                                               smithy.SchemaExtensions
+	eListServicesInput_EndTime                                                 smithy.SchemaExtensions
+	eListServicesInput_MaxResults                                              smithy.SchemaExtensions
+	eListServicesInput_NextToken                                               smithy.SchemaExtensions
+	eListServicesInput_IncludeLinkedAccounts                                   smithy.SchemaExtensions
+	eListServicesInput_AwsAccountId                                            smithy.SchemaExtensions
+	eListServicesOutput                                                        smithy.SchemaExtensions
+	eListServicesOutput_StartTime                                              smithy.SchemaExtensions
+	eListServicesOutput_EndTime                                                smithy.SchemaExtensions
+	eListServicesOutput_ServiceSummaries                                       smithy.SchemaExtensions
+	eListServicesOutput_NextToken                                              smithy.SchemaExtensions
+	eListServiceStatesInput                                                    smithy.SchemaExtensions
+	eListServiceStatesInput_StartTime                                          smithy.SchemaExtensions
+	eListServiceStatesInput_EndTime                                            smithy.SchemaExtensions
+	eListServiceStatesInput_MaxResults                                         smithy.SchemaExtensions
+	eListServiceStatesInput_NextToken                                          smithy.SchemaExtensions
+	eListServiceStatesInput_IncludeLinkedAccounts                              smithy.SchemaExtensions
+	eListServiceStatesInput_AwsAccountId                                       smithy.SchemaExtensions
+	eListServiceStatesInput_AttributeFilters                                   smithy.SchemaExtensions
+	eListServiceStatesOutput                                                   smithy.SchemaExtensions
+	eListServiceStatesOutput_StartTime                                         smithy.SchemaExtensions
+	eListServiceStatesOutput_EndTime                                           smithy.SchemaExtensions
+	eListServiceStatesOutput_ServiceStates                                     smithy.SchemaExtensions
+	eListServiceStatesOutput_NextToken                                         smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse                                               smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                          smithy.SchemaExtensions
+	ePutGroupingConfigurationInput                                             smithy.SchemaExtensions
+	ePutGroupingConfigurationInput_GroupingAttributeDefinitions                smithy.SchemaExtensions
+	ePutGroupingConfigurationOutput                                            smithy.SchemaExtensions
+	ePutGroupingConfigurationOutput_GroupingConfiguration                      smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusRequest                           smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusRequest_Service                   smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusRequest_Environment               smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusRequest_Configurations            smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusResponse                          smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusResponse_Service                  smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusResponse_Environment              smithy.SchemaExtensions
+	eReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents  smithy.SchemaExtensions
+	eStartDiscoveryInput                                                       smithy.SchemaExtensions
+	eStartDiscoveryOutput                                                      smithy.SchemaExtensions
+	eTagResourceRequest                                                        smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                            smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                   smithy.SchemaExtensions
+	eTagResourceResponse                                                       smithy.SchemaExtensions
+	eUntagResourceRequest                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                          smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                              smithy.SchemaExtensions
+	eUntagResourceResponse                                                     smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput                                          smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_Id                                       smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_Description                              smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_SliConfig                                smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_RequestBasedSliConfig                    smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_Goal                                     smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_BurnRateConfigurations                   smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveInput_AutoInvestigationEnabled                 smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveOutput                                         smithy.SchemaExtensions
+	eUpdateServiceLevelObjectiveOutput_Slo                                     smithy.SchemaExtensions
+)
+
+var (
+	iBatchDeleteInstrumentationConfigurations             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteInstrumentationConfigurations"}
+	iBatchGetServiceLevelObjectiveBudgetReport            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchGetServiceLevelObjectiveBudgetReport"}
+	iBatchUpdateExclusionWindows                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchUpdateExclusionWindows"}
+	iCreateInstrumentationConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateInstrumentationConfiguration"}
+	iCreateServiceLevelObjective                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateServiceLevelObjective"}
+	iDeleteGroupingConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteGroupingConfiguration"}
+	iDeleteInstrumentationConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteInstrumentationConfiguration"}
+	iDeleteServiceLevelObjective                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteServiceLevelObjective"}
+	iGetInstrumentationConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfiguration"}
+	iGetInstrumentationConfigurationStatus                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfigurationStatus"}
+	iGetService                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetService"}
+	iGetServiceLevelObjective                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetServiceLevelObjective"}
+	iListAuditFindings                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListAuditFindings"}
+	iListEntityEvents                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListEntityEvents"}
+	iListGroupingAttributeDefinitions                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListGroupingAttributeDefinitions"}
+	iListInstrumentationConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListInstrumentationConfigurations"}
+	iListServiceDependencies                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependencies"}
+	iListServiceDependents                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependents"}
+	iListServiceLevelObjectiveExclusionWindows            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectiveExclusionWindows"}
+	iListServiceLevelObjectives                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectives"}
+	iListServiceOperations                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceOperations"}
+	iListServices                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServices"}
+	iListServiceStates                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceStates"}
+	iListTagsForResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListTagsForResource"}
+	iPutGroupingConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "PutGroupingConfiguration"}
+	iReportInstrumentationConfigurationStatus             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ReportInstrumentationConfigurationStatus"}
+	iStartDiscovery                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "StartDiscovery"}
+	iTagResource                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagResource"}
+	iUntagResource                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UntagResource"}
+	iUpdateServiceLevelObjective                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UpdateServiceLevelObjective"}
+	i_ApplicationSignals                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ApplicationSignals"}
+	iAccessDeniedException                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AccessDeniedException"}
+	i_AccountId                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AccountId"}
+	i_AmazonResourceName                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AmazonResourceName"}
+	i_Attainment                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Attainment"}
+	i_AttainmentGoal                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttainmentGoal"}
+	iAttributeFilter                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeFilter"}
+	i_AttributeFilterName                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeFilterName"}
+	i_AttributeFilters                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeFilters"}
+	i_AttributeFilterValue                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeFilterValue"}
+	i_AttributeFilterValues                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeFilterValues"}
+	i_AttributeMap                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeMap"}
+	i_AttributeMaps                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AttributeMaps"}
+	i_Attributes                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Attributes"}
+	iAuditFinding                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditFinding"}
+	i_AuditFindings                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditFindings"}
+	iAuditorResult                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditorResult"}
+	i_AuditorResults                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditorResults"}
+	i_Auditors                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Auditors"}
+	iAuditTarget                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditTarget"}
+	iAuditTargetEntity                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditTargetEntity"}
+	i_AuditTargets                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AuditTargets"}
+	i_AwsAccountId                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "AwsAccountId"}
+	iBatchDeleteByResourceArns                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteByResourceArns"}
+	iBatchDeleteDeletionTarget                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteDeletionTarget"}
+	iBatchDeleteError                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteError"}
+	iBatchDeleteErrorCode                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteErrorCode"}
+	i_BatchDeleteErrorList                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteErrorList"}
+	i_BatchDeleteResourceArnList                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteResourceArnList"}
+	iBatchDeleteScope                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteScope"}
+	iBatchDeleteSuccessfulDeletion                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteSuccessfulDeletion"}
+	i_BatchDeleteSuccessfulDeletionList                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteSuccessfulDeletionList"}
+	iBatchUpdateExclusionWindowsError                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchUpdateExclusionWindowsError"}
+	i_BatchUpdateExclusionWindowsErrors                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchUpdateExclusionWindowsErrors"}
+	i_BudgetRequestsRemaining                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BudgetRequestsRemaining"}
+	i_BudgetSecondsRemaining                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BudgetSecondsRemaining"}
+	iBurnRateConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BurnRateConfiguration"}
+	i_BurnRateConfigurations                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BurnRateConfigurations"}
+	i_BurnRateLookBackWindowMinutes                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BurnRateLookBackWindowMinutes"}
+	iCalendarInterval                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CalendarInterval"}
+	i_CalendarIntervalDuration                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CalendarIntervalDuration"}
+	iCanaryEntity                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CanaryEntity"}
+	iCaptureConfiguration                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CaptureConfiguration"}
+	iCaptureLimitsConfig                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CaptureLimitsConfig"}
+	iChangeEvent                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ChangeEvent"}
+	i_ChangeEvents                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ChangeEvents"}
+	iChangeEventType                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ChangeEventType"}
+	iCodeCaptureConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CodeCaptureConfiguration"}
+	iCodeLocation                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CodeLocation"}
+	iCompositeSliComponent                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CompositeSliComponent"}
+	i_CompositeSliComponents                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CompositeSliComponents"}
+	iCompositeSliConfig                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CompositeSliConfig"}
+	iConflictException                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ConflictException"}
+	iConnectionType                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ConnectionType"}
+	i_DataMap                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DataMap"}
+	iDependencyConfig                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DependencyConfig"}
+	iDependencyGraph                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DependencyGraph"}
+	iDetailLevel                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DetailLevel"}
+	iDimension                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Dimension"}
+	i_DimensionName                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DimensionName"}
+	i_Dimensions                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Dimensions"}
+	i_DimensionValue                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DimensionValue"}
+	iDurationUnit                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DurationUnit"}
+	i_DynamicInstrumentationAttributeFilterGroup          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DynamicInstrumentationAttributeFilterGroup"}
+	i_DynamicInstrumentationAttributeFilters              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DynamicInstrumentationAttributeFilters"}
+	iDynamicInstrumentationDeletionStatus                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DynamicInstrumentationDeletionStatus"}
+	iDynamicInstrumentationSignalType                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DynamicInstrumentationSignalType"}
+	iEdge                                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Edge"}
+	i_Edges                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Edges"}
+	iEvaluationType                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "EvaluationType"}
+	i_ExclusionDuration                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionDuration"}
+	i_ExclusionReason                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionReason"}
+	iExclusionWindow                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionWindow"}
+	i_ExclusionWindowErrorCode                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionWindowErrorCode"}
+	i_ExclusionWindowErrorMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionWindowErrorMessage"}
+	i_ExclusionWindows                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ExclusionWindows"}
+	i_Expression                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Expression"}
+	i_FaultDescription                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "FaultDescription"}
+	iGoal                                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Goal"}
+	i_GroupIdentifier                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupIdentifier"}
+	iGroupingAttributeDefinition                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupingAttributeDefinition"}
+	i_GroupingAttributeDefinitions                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupingAttributeDefinitions"}
+	iGroupingConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupingConfiguration"}
+	i_GroupingSourceKeyStringList                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupingSourceKeyStringList"}
+	i_GroupingString                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupingString"}
+	i_GroupName                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupName"}
+	i_GroupSource                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupSource"}
+	i_GroupValue                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GroupValue"}
+	iInstrumentationConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfiguration"}
+	i_InstrumentationConfigurationArn                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationArn"}
+	iInstrumentationConfigurationStatus                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationStatus"}
+	i_InstrumentationConfigurationStatusList              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationStatusList"}
+	iInstrumentationConfigurationStatusReport             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationStatusReport"}
+	i_InstrumentationConfigurationsWithoutServiceEnv      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationsWithoutServiceEnv"}
+	iInstrumentationConfigurationWithoutServiceEnv        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationWithoutServiceEnv"}
+	iInstrumentationErrorCause                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationErrorCause"}
+	iInstrumentationStatusEvent                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationStatusEvent"}
+	i_InstrumentationStatusEventList                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationStatusEventList"}
+	iInstrumentationType                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationType"}
+	iInterval                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Interval"}
+	i_KeyAttributeName                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "KeyAttributeName"}
+	i_KeyAttributeValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "KeyAttributeValue"}
+	i_LatestChangeEvents                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "LatestChangeEvents"}
+	i_ListAuditFindingMaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListAuditFindingMaxResults"}
+	i_ListEntityEventsMaxResults                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListEntityEventsMaxResults"}
+	i_ListServiceDependenciesMaxResults                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependenciesMaxResults"}
+	i_ListServiceDependentsMaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependentsMaxResults"}
+	i_ListServiceLevelObjectiveExclusionWindowsMaxResults = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectiveExclusionWindowsMaxResults"}
+	i_ListServiceLevelObjectivesMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectivesMaxResults"}
+	i_ListServiceOperationMaxResults                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceOperationMaxResults"}
+	i_ListServicesMaxResults                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServicesMaxResults"}
+	i_ListServiceStatesMaxResults                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceStatesMaxResults"}
+	iLocation                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Location"}
+	iLocationIdentifier                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "LocationIdentifier"}
+	i_LogGroupReferences                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "LogGroupReferences"}
+	iMetric                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Metric"}
+	i_MetricDataQueries                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricDataQueries"}
+	iMetricDataQuery                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricDataQuery"}
+	i_MetricExpression                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricExpression"}
+	iMetricGraph                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricGraph"}
+	i_MetricId                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricId"}
+	i_MetricLabel                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricLabel"}
+	i_MetricName                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricName"}
+	iMetricReference                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricReference"}
+	i_MetricReferences                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricReferences"}
+	iMetricSource                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricSource"}
+	iMetricSourceType                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricSourceType"}
+	i_MetricSourceTypes                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricSourceTypes"}
+	iMetricStat                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricStat"}
+	i_MetricType                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MetricType"}
+	iMonitoredRequestCountMetricDataQueries               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "MonitoredRequestCountMetricDataQueries"}
+	i_Namespace                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Namespace"}
+	i_NextToken                                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "NextToken"}
+	iNode                                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Node"}
+	i_Nodes                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Nodes"}
+	i_OperationName                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "OperationName"}
+	i_Period                                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Period"}
+	iProgrammingLanguage                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ProgrammingLanguage"}
+	iRecurrenceRule                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RecurrenceRule"}
+	iRequestBasedServiceLevelIndicator                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RequestBasedServiceLevelIndicator"}
+	iRequestBasedServiceLevelIndicatorConfig              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RequestBasedServiceLevelIndicatorConfig"}
+	iRequestBasedServiceLevelIndicatorMetric              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RequestBasedServiceLevelIndicatorMetric"}
+	iRequestBasedServiceLevelIndicatorMetricConfig        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RequestBasedServiceLevelIndicatorMetricConfig"}
+	i_ResourceId                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ResourceId"}
+	iResourceNotFoundException                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ResourceNotFoundException"}
+	i_ResourceType                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ResourceType"}
+	i_ReturnData                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ReturnData"}
+	iRollingInterval                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RollingInterval"}
+	i_RollingIntervalDuration                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "RollingIntervalDuration"}
+	iSelectionConfig                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "SelectionConfig"}
+	i_SelectionPattern                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "SelectionPattern"}
+	iSelectionType                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "SelectionType"}
+	iService                                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Service"}
+	i_ServiceDependencies                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceDependencies"}
+	iServiceDependency                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceDependency"}
+	iServiceDependent                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceDependent"}
+	i_ServiceDependents                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceDependents"}
+	iServiceEntity                                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceEntity"}
+	i_ServiceErrorMessage                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceErrorMessage"}
+	iServiceGroup                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceGroup"}
+	i_ServiceGroups                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceGroups"}
+	iServiceLevelIndicator                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicator"}
+	iServiceLevelIndicatorComparisonOperator              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorComparisonOperator"}
+	iServiceLevelIndicatorConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorConfig"}
+	iServiceLevelIndicatorMetric                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorMetric"}
+	iServiceLevelIndicatorMetricConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorMetricConfig"}
+	i_ServiceLevelIndicatorMetricThreshold                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorMetricThreshold"}
+	iServiceLevelIndicatorMetricType                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorMetricType"}
+	i_ServiceLevelIndicatorStatistic                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelIndicatorStatistic"}
+	iServiceLevelObjective                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjective"}
+	i_ServiceLevelObjectiveArn                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveArn"}
+	iServiceLevelObjectiveBudgetReport                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReport"}
+	iServiceLevelObjectiveBudgetReportError               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReportError"}
+	i_ServiceLevelObjectiveBudgetReportErrorCode          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReportErrorCode"}
+	i_ServiceLevelObjectiveBudgetReportErrorMessage       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReportErrorMessage"}
+	i_ServiceLevelObjectiveBudgetReportErrors             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReportErrors"}
+	i_ServiceLevelObjectiveBudgetReports                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetReports"}
+	iServiceLevelObjectiveBudgetStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveBudgetStatus"}
+	i_ServiceLevelObjectiveDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveDescription"}
+	iServiceLevelObjectiveEntity                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveEntity"}
+	i_ServiceLevelObjectiveId                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveId"}
+	i_ServiceLevelObjectiveIds                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveIds"}
+	i_ServiceLevelObjectiveName                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveName"}
+	i_ServiceLevelObjectiveSummaries                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveSummaries"}
+	iServiceLevelObjectiveSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceLevelObjectiveSummary"}
+	iServiceOperation                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceOperation"}
+	iServiceOperationEntity                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceOperationEntity"}
+	i_ServiceOperations                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceOperations"}
+	iServiceQuotaExceededException                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceQuotaExceededException"}
+	iServiceState                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceState"}
+	i_ServiceStates                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceStates"}
+	i_ServiceSummaries                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceSummaries"}
+	iServiceSummary                                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ServiceSummary"}
+	iSeverity                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Severity"}
+	i_SLIPeriodSeconds                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "SLIPeriodSeconds"}
+	iStandardUnit                                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "StandardUnit"}
+	i_Stat                                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Stat"}
+	i_StringList                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "StringList"}
+	iTag                                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Tag"}
+	i_TagKey                                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagKey"}
+	i_TagKeyList                                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagKeyList"}
+	i_TagList                                             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagList"}
+	i_TagValue                                            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagValue"}
+	iThrottlingException                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ThrottlingException"}
+	i_TotalBudgetRequests                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TotalBudgetRequests"}
+	i_TotalBudgetSeconds                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TotalBudgetSeconds"}
+	iUnprocessedStatusEvent                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UnprocessedStatusEvent"}
+	iUnprocessedStatusEventFailureReason                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UnprocessedStatusEventFailureReason"}
+	i_UnprocessedStatusEventList                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UnprocessedStatusEventList"}
+	iValidationException                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ValidationException"}
+	i_ValidationExceptionMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ValidationExceptionMessage"}
+	i_WarningThreshold                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "WarningThreshold"}
+	iWindow                                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "Window"}
+	iBatchDeleteInstrumentationConfigurationsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteInstrumentationConfigurationsRequest"}
+	iBatchDeleteInstrumentationConfigurationsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchDeleteInstrumentationConfigurationsResponse"}
+	iBatchGetServiceLevelObjectiveBudgetReportInput       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchGetServiceLevelObjectiveBudgetReportInput"}
+	iBatchGetServiceLevelObjectiveBudgetReportOutput      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchGetServiceLevelObjectiveBudgetReportOutput"}
+	iBatchUpdateExclusionWindowsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchUpdateExclusionWindowsInput"}
+	iBatchUpdateExclusionWindowsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "BatchUpdateExclusionWindowsOutput"}
+	iCreateInstrumentationConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateInstrumentationConfigurationRequest"}
+	iCreateInstrumentationConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateInstrumentationConfigurationResponse"}
+	iCreateServiceLevelObjectiveInput                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateServiceLevelObjectiveInput"}
+	iCreateServiceLevelObjectiveOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "CreateServiceLevelObjectiveOutput"}
+	iDeleteGroupingConfigurationOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteGroupingConfigurationOutput"}
+	iDeleteInstrumentationConfigurationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteInstrumentationConfigurationRequest"}
+	iDeleteInstrumentationConfigurationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteInstrumentationConfigurationResponse"}
+	iDeleteServiceLevelObjectiveInput                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteServiceLevelObjectiveInput"}
+	iDeleteServiceLevelObjectiveOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "DeleteServiceLevelObjectiveOutput"}
+	iGetInstrumentationConfigurationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfigurationRequest"}
+	iGetInstrumentationConfigurationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfigurationResponse"}
+	iGetInstrumentationConfigurationStatusRequest         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfigurationStatusRequest"}
+	iGetInstrumentationConfigurationStatusResponse        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetInstrumentationConfigurationStatusResponse"}
+	iGetServiceInput                                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetServiceInput"}
+	iGetServiceLevelObjectiveInput                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetServiceLevelObjectiveInput"}
+	iGetServiceLevelObjectiveOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetServiceLevelObjectiveOutput"}
+	iGetServiceOutput                                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "GetServiceOutput"}
+	iListAuditFindingsInput                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListAuditFindingsInput"}
+	iListAuditFindingsOutput                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListAuditFindingsOutput"}
+	iListEntityEventsInput                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListEntityEventsInput"}
+	iListEntityEventsOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListEntityEventsOutput"}
+	iListGroupingAttributeDefinitionsInput                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListGroupingAttributeDefinitionsInput"}
+	iListGroupingAttributeDefinitionsOutput               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListGroupingAttributeDefinitionsOutput"}
+	iListInstrumentationConfigurationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListInstrumentationConfigurationsRequest"}
+	iInstrumentationConfigurationsPage                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "InstrumentationConfigurationsPage"}
+	iListServiceDependenciesInput                         = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependenciesInput"}
+	iListServiceDependenciesOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependenciesOutput"}
+	iListServiceDependentsInput                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependentsInput"}
+	iListServiceDependentsOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceDependentsOutput"}
+	iListServiceLevelObjectiveExclusionWindowsInput       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectiveExclusionWindowsInput"}
+	iListServiceLevelObjectiveExclusionWindowsOutput      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectiveExclusionWindowsOutput"}
+	iListServiceLevelObjectivesInput                      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectivesInput"}
+	iListServiceLevelObjectivesOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceLevelObjectivesOutput"}
+	iListServiceOperationsInput                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceOperationsInput"}
+	iListServiceOperationsOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceOperationsOutput"}
+	iListServicesInput                                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServicesInput"}
+	iListServicesOutput                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServicesOutput"}
+	iListServiceStatesInput                               = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceStatesInput"}
+	iListServiceStatesOutput                              = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListServiceStatesOutput"}
+	iListTagsForResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ListTagsForResourceResponse"}
+	iPutGroupingConfigurationInput                        = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "PutGroupingConfigurationInput"}
+	iPutGroupingConfigurationOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "PutGroupingConfigurationOutput"}
+	iReportInstrumentationConfigurationStatusRequest      = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ReportInstrumentationConfigurationStatusRequest"}
+	iReportInstrumentationConfigurationStatusResponse     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "ReportInstrumentationConfigurationStatusResponse"}
+	iStartDiscoveryInput                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "StartDiscoveryInput"}
+	iStartDiscoveryOutput                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "StartDiscoveryOutput"}
+	iTagResourceRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagResourceRequest"}
+	iTagResourceResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UntagResourceResponse"}
+	iUpdateServiceLevelObjectiveInput                     = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UpdateServiceLevelObjectiveInput"}
+	iUpdateServiceLevelObjectiveOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.applicationsignals", Name: "UpdateServiceLevelObjectiveOutput"}
+	pString                                               = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pDouble                                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/batch-delete-instrumentation-configurations",
-	Code: 200})
-
-var BatchGetServiceLevelObjectiveBudgetReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchGetServiceLevelObjectiveBudgetReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/budget-report",
-	Code: 200})
-
-var BatchUpdateExclusionWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchUpdateExclusionWindows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/exclusion-windows",
-	Code: 200})
-
-var CreateInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateInstrumentationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-instrumentation-configuration",
-	Code: 200})
-
-var CreateServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateServiceLevelObjective",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/slo",
-	Code: 200})
-
-var DeleteGroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteGroupingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/grouping-configuration",
-	Code: 200})
-
-var DeleteInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteInstrumentationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-instrumentation-configuration",
-	Code: 200})
-
-var DeleteServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteServiceLevelObjective",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/slo/{Id}",
-	Code: 200})
-
-var GetInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-instrumentation-configuration",
-	Code: 200})
-
-var GetInstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfigurationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-instrumentation-configuration-status",
-	Code: 200})
-
-var GetService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetService",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/service",
-	Code: 200})
-
-var GetServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetServiceLevelObjective",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/slo/{Id}",
-	Code: 200})
-
-var ListAuditFindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListAuditFindings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/auditFindings",
-	Code: 200})
-
-var ListEntityEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListEntityEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/events",
-	Code: 200})
-
-var ListGroupingAttributeDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListGroupingAttributeDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/grouping-attribute-definitions",
-	Code: 200})
-
-var ListInstrumentationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListInstrumentationConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-instrumentation-configurations",
-	Code: 200})
-
-var ListServiceDependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependencies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/service-dependencies",
-	Code: 200})
-
-var ListServiceDependents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/service-dependents",
-	Code: 200})
-
-var ListServiceLevelObjectiveExclusionWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectiveExclusionWindows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/slo/{Id}/exclusion-windows",
-	Code: 200})
-
-var ListServiceLevelObjectives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectives",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/slos",
-	Code: 200})
-
-var ListServiceOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/service-operations",
-	Code: 200})
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/services",
-	Code: 200})
-
-var ListServiceStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceStates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/service/states",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags",
-	Code: 200})
-
-var PutGroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "PutGroupingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/grouping-configuration",
-	Code: 200})
-
-var ReportInstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ReportInstrumentationConfigurationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/report-instrumentation-configuration-status",
-	Code: 200})
-
-var StartDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "StartDiscovery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-discovery",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tag-resource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/untag-resource",
-	Code: 200})
-
-var UpdateServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UpdateServiceLevelObjective",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/slo/{Id}",
-	Code: 200})
-
-var _ApplicationSignals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ApplicationSignals",
-}, smithy.ShapeTypeService, 0)
-
-var ApplicationSignals = smithy.NewServiceSchema(_ApplicationSignals, "2024-04-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _Attainment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Attainment",
-}, smithy.ShapeTypeDouble, 0)
-
-var _AttainmentGoal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttainmentGoal",
-}, smithy.ShapeTypeDouble, 0)
-
-var AttributeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeFilter_AttributeFilterName *smithy.Schema
-
-var AttributeFilter_AttributeFilterValues *smithy.Schema
-
-var _AttributeFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeFilters",
-}, smithy.ShapeTypeList, 1)
-var _AttributeFilters_member *smithy.Schema
-
-var _AttributeFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _AttributeFilterValues_member *smithy.Schema
-
-var _AttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _AttributeMap_key *smithy.Schema
-
-var _AttributeMap_value *smithy.Schema
-
-var _AttributeMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AttributeMaps",
-}, smithy.ShapeTypeList, 1)
-var _AttributeMaps_member *smithy.Schema
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Attributes",
-}, smithy.ShapeTypeMap, 2)
-var _Attributes_key *smithy.Schema
-
-var _Attributes_value *smithy.Schema
-
-var AuditFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditFinding",
-}, smithy.ShapeTypeStructure, 6)
-var AuditFinding_KeyAttributes *smithy.Schema
-
-var AuditFinding_AuditorResults *smithy.Schema
-
-var AuditFinding_Operation *smithy.Schema
-
-var AuditFinding_MetricGraph *smithy.Schema
-
-var AuditFinding_DependencyGraph *smithy.Schema
-
-var AuditFinding_Type *smithy.Schema
-
-var _AuditFindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditFindings",
-}, smithy.ShapeTypeList, 1)
-var _AuditFindings_member *smithy.Schema
-
-var AuditorResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditorResult",
-}, smithy.ShapeTypeStructure, 4)
-var AuditorResult_Auditor *smithy.Schema
-
-var AuditorResult_Description *smithy.Schema
-
-var AuditorResult_Data *smithy.Schema
-
-var AuditorResult_Severity *smithy.Schema
-
-var _AuditorResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditorResults",
-}, smithy.ShapeTypeList, 1)
-var _AuditorResults_member *smithy.Schema
-
-var _Auditors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Auditors",
-}, smithy.ShapeTypeList, 1)
-var _Auditors_member *smithy.Schema
-
-var AuditTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditTarget",
-}, smithy.ShapeTypeStructure, 2)
-var AuditTarget_Type *smithy.Schema
-
-var AuditTarget_Data *smithy.Schema
-
-var AuditTargetEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditTargetEntity",
-}, smithy.ShapeTypeUnion, 4)
-var AuditTargetEntity_Service *smithy.Schema
-
-var AuditTargetEntity_Slo *smithy.Schema
-
-var AuditTargetEntity_ServiceOperation *smithy.Schema
-
-var AuditTargetEntity_Canary *smithy.Schema
-
-var _AuditTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AuditTargets",
-}, smithy.ShapeTypeList, 1)
-var _AuditTargets_member *smithy.Schema
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var BatchDeleteByResourceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteByResourceArns",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteByResourceArns_ResourceArns *smithy.Schema
-
-var BatchDeleteByResourceArns_InstrumentationType *smithy.Schema
-
-var BatchDeleteDeletionTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteDeletionTarget",
-}, smithy.ShapeTypeUnion, 2)
-var BatchDeleteDeletionTarget_Scope *smithy.Schema
-
-var BatchDeleteDeletionTarget_ResourceArns *smithy.Schema
-
-var BatchDeleteError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteError_ResourceArn *smithy.Schema
-
-var BatchDeleteError_Code *smithy.Schema
-
-var BatchDeleteError_Message *smithy.Schema
-
-var BatchDeleteErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteErrorCode",
-}, smithy.ShapeTypeEnum, 3)
-var BatchDeleteErrorCode_RESOURCE_NOT_FOUND *smithy.Schema
-
-var BatchDeleteErrorCode_ACCESS_DENIED *smithy.Schema
-
-var BatchDeleteErrorCode_INTERNAL_SERVICE_ERROR *smithy.Schema
-
-var _BatchDeleteErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteErrorList_member *smithy.Schema
-
-var _BatchDeleteResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteResourceArnList_member *smithy.Schema
-
-var BatchDeleteScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteScope",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteScope_Service *smithy.Schema
-
-var BatchDeleteScope_Environment *smithy.Schema
-
-var BatchDeleteScope_InstrumentationType *smithy.Schema
-
-var BatchDeleteSuccessfulDeletion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteSuccessfulDeletion",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteSuccessfulDeletion_ResourceArn *smithy.Schema
-
-var BatchDeleteSuccessfulDeletion_SignalType *smithy.Schema
-
-var BatchDeleteSuccessfulDeletion_LocationHash *smithy.Schema
-
-var _BatchDeleteSuccessfulDeletionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteSuccessfulDeletionList",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteSuccessfulDeletionList_member *smithy.Schema
-
-var BatchUpdateExclusionWindowsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchUpdateExclusionWindowsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchUpdateExclusionWindowsError_SloId *smithy.Schema
-
-var BatchUpdateExclusionWindowsError_ErrorCode *smithy.Schema
-
-var BatchUpdateExclusionWindowsError_ErrorMessage *smithy.Schema
-
-var _BatchUpdateExclusionWindowsErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchUpdateExclusionWindowsErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchUpdateExclusionWindowsErrors_member *smithy.Schema
-
-var _BudgetRequestsRemaining = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BudgetRequestsRemaining",
-}, smithy.ShapeTypeInteger, 0)
-
-var _BudgetSecondsRemaining = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BudgetSecondsRemaining",
-}, smithy.ShapeTypeInteger, 0)
-
-var BurnRateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BurnRateConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var BurnRateConfiguration_LookBackWindowMinutes *smithy.Schema
-
-var _BurnRateConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BurnRateConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _BurnRateConfigurations_member *smithy.Schema
-
-var _BurnRateLookBackWindowMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BurnRateLookBackWindowMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var CalendarInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CalendarInterval",
-}, smithy.ShapeTypeStructure, 3)
-var CalendarInterval_StartTime *smithy.Schema
-
-var CalendarInterval_DurationUnit *smithy.Schema
-
-var CalendarInterval_Duration *smithy.Schema
-
-var _CalendarIntervalDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CalendarIntervalDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var CanaryEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CanaryEntity",
-}, smithy.ShapeTypeStructure, 1)
-var CanaryEntity_CanaryName *smithy.Schema
-
-var CaptureConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CaptureConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var CaptureConfiguration_CodeCapture *smithy.Schema
-
-var CaptureLimitsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CaptureLimitsConfig",
-}, smithy.ShapeTypeStructure, 8)
-var CaptureLimitsConfig_MaxHits *smithy.Schema
-
-var CaptureLimitsConfig_MaxStringLength *smithy.Schema
-
-var CaptureLimitsConfig_MaxCollectionWidth *smithy.Schema
-
-var CaptureLimitsConfig_MaxCollectionDepth *smithy.Schema
-
-var CaptureLimitsConfig_MaxStackFrames *smithy.Schema
-
-var CaptureLimitsConfig_MaxStackTraceSize *smithy.Schema
-
-var CaptureLimitsConfig_MaxObjectDepth *smithy.Schema
-
-var CaptureLimitsConfig_MaxFieldsPerObject *smithy.Schema
-
-var ChangeEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ChangeEvent",
-}, smithy.ShapeTypeStructure, 8)
-var ChangeEvent_Timestamp *smithy.Schema
-
-var ChangeEvent_AccountId *smithy.Schema
-
-var ChangeEvent_Region *smithy.Schema
-
-var ChangeEvent_Entity *smithy.Schema
-
-var ChangeEvent_ChangeEventType *smithy.Schema
-
-var ChangeEvent_EventId *smithy.Schema
-
-var ChangeEvent_UserName *smithy.Schema
-
-var ChangeEvent_EventName *smithy.Schema
-
-var _ChangeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ChangeEvents",
-}, smithy.ShapeTypeList, 1)
-var _ChangeEvents_member *smithy.Schema
-
-var ChangeEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ChangeEventType",
-}, smithy.ShapeTypeEnum, 2)
-var ChangeEventType_DEPLOYMENT *smithy.Schema
-
-var ChangeEventType_CONFIGURATION *smithy.Schema
-
-var CodeCaptureConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CodeCaptureConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var CodeCaptureConfiguration_CaptureArguments *smithy.Schema
-
-var CodeCaptureConfiguration_CaptureReturn *smithy.Schema
-
-var CodeCaptureConfiguration_CaptureStackTrace *smithy.Schema
-
-var CodeCaptureConfiguration_CaptureLocals *smithy.Schema
-
-var CodeCaptureConfiguration_CaptureLimits *smithy.Schema
-
-var CodeLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CodeLocation",
-}, smithy.ShapeTypeStructure, 6)
-var CodeLocation_Language *smithy.Schema
-
-var CodeLocation_CodeUnit *smithy.Schema
-
-var CodeLocation_ClassName *smithy.Schema
-
-var CodeLocation_MethodName *smithy.Schema
-
-var CodeLocation_FilePath *smithy.Schema
-
-var CodeLocation_LineNumber *smithy.Schema
-
-var CompositeSliComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CompositeSliComponent",
-}, smithy.ShapeTypeUnion, 1)
-var CompositeSliComponent_OperationName *smithy.Schema
-
-var _CompositeSliComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CompositeSliComponents",
-}, smithy.ShapeTypeList, 1)
-var _CompositeSliComponents_member *smithy.Schema
-
-var CompositeSliConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CompositeSliConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CompositeSliConfig_SelectionConfig *smithy.Schema
-
-var CompositeSliConfig_Components *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConnectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionType_INDIRECT *smithy.Schema
-
-var ConnectionType_DIRECT *smithy.Schema
-
-var _DataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DataMap",
-}, smithy.ShapeTypeMap, 2)
-var _DataMap_key *smithy.Schema
-
-var _DataMap_value *smithy.Schema
-
-var DependencyConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DependencyConfig",
-}, smithy.ShapeTypeStructure, 2)
-var DependencyConfig_DependencyKeyAttributes *smithy.Schema
-
-var DependencyConfig_DependencyOperationName *smithy.Schema
-
-var DependencyGraph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DependencyGraph",
-}, smithy.ShapeTypeStructure, 2)
-var DependencyGraph_Nodes *smithy.Schema
-
-var DependencyGraph_Edges *smithy.Schema
-
-var DetailLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DetailLevel",
-}, smithy.ShapeTypeEnum, 2)
-var DetailLevel_BRIEF *smithy.Schema
-
-var DetailLevel_DETAILED *smithy.Schema
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 2)
-var Dimension_Name *smithy.Schema
-
-var Dimension_Value *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var DurationUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DurationUnit",
-}, smithy.ShapeTypeEnum, 4)
-var DurationUnit_MINUTE *smithy.Schema
-
-var DurationUnit_HOUR *smithy.Schema
-
-var DurationUnit_DAY *smithy.Schema
-
-var DurationUnit_MONTH *smithy.Schema
-
-var _DynamicInstrumentationAttributeFilterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DynamicInstrumentationAttributeFilterGroup",
-}, smithy.ShapeTypeMap, 2)
-var _DynamicInstrumentationAttributeFilterGroup_key *smithy.Schema
-
-var _DynamicInstrumentationAttributeFilterGroup_value *smithy.Schema
-
-var _DynamicInstrumentationAttributeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DynamicInstrumentationAttributeFilters",
-}, smithy.ShapeTypeList, 1)
-var _DynamicInstrumentationAttributeFilters_member *smithy.Schema
-
-var DynamicInstrumentationDeletionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DynamicInstrumentationDeletionStatus",
-}, smithy.ShapeTypeEnum, 1)
-var DynamicInstrumentationDeletionStatus_DELETED *smithy.Schema
-
-var DynamicInstrumentationSignalType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DynamicInstrumentationSignalType",
-}, smithy.ShapeTypeEnum, 1)
-var DynamicInstrumentationSignalType_SNAPSHOT *smithy.Schema
-
-var Edge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Edge",
-}, smithy.ShapeTypeStructure, 4)
-var Edge_SourceNodeId *smithy.Schema
-
-var Edge_DestinationNodeId *smithy.Schema
-
-var Edge_Duration *smithy.Schema
-
-var Edge_ConnectionType *smithy.Schema
-
-var _Edges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Edges",
-}, smithy.ShapeTypeList, 1)
-var _Edges_member *smithy.Schema
-
-var EvaluationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "EvaluationType",
-}, smithy.ShapeTypeEnum, 2)
-var EvaluationType_PERIOD_BASED *smithy.Schema
-
-var EvaluationType_REQUEST_BASED *smithy.Schema
-
-var _ExclusionDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ExclusionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionReason",
-}, smithy.ShapeTypeString, 0)
-
-var ExclusionWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionWindow",
-}, smithy.ShapeTypeStructure, 4)
-var ExclusionWindow_Window *smithy.Schema
-
-var ExclusionWindow_StartTime *smithy.Schema
-
-var ExclusionWindow_RecurrenceRule *smithy.Schema
-
-var ExclusionWindow_Reason *smithy.Schema
-
-var _ExclusionWindowErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionWindowErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ExclusionWindowErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionWindowErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExclusionWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ExclusionWindows",
-}, smithy.ShapeTypeList, 1)
-var _ExclusionWindows_member *smithy.Schema
-
-var _Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Expression",
-}, smithy.ShapeTypeString, 0)
-
-var _FaultDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "FaultDescription",
-}, smithy.ShapeTypeString, 0)
-
-var Goal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Goal",
-}, smithy.ShapeTypeStructure, 3)
-var Goal_Interval *smithy.Schema
-
-var Goal_AttainmentGoal *smithy.Schema
-
-var Goal_WarningThreshold *smithy.Schema
-
-var _GroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var GroupingAttributeDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupingAttributeDefinition",
-}, smithy.ShapeTypeStructure, 3)
-var GroupingAttributeDefinition_GroupingName *smithy.Schema
-
-var GroupingAttributeDefinition_GroupingSourceKeys *smithy.Schema
-
-var GroupingAttributeDefinition_DefaultGroupingValue *smithy.Schema
-
-var _GroupingAttributeDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupingAttributeDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _GroupingAttributeDefinitions_member *smithy.Schema
-
-var GroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var GroupingConfiguration_GroupingAttributeDefinitions *smithy.Schema
-
-var GroupingConfiguration_UpdatedAt *smithy.Schema
-
-var _GroupingSourceKeyStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupingSourceKeyStringList",
-}, smithy.ShapeTypeList, 1)
-var _GroupingSourceKeyStringList_member *smithy.Schema
-
-var _GroupingString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupingString",
-}, smithy.ShapeTypeString, 0)
-
-var _GroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _GroupSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupSource",
-}, smithy.ShapeTypeString, 0)
-
-var _GroupValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GroupValue",
-}, smithy.ShapeTypeString, 0)
-
-var InstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfiguration",
-}, smithy.ShapeTypeStructure, 12)
-var InstrumentationConfiguration_InstrumentationType *smithy.Schema
-
-var InstrumentationConfiguration_Service *smithy.Schema
-
-var InstrumentationConfiguration_Environment *smithy.Schema
-
-var InstrumentationConfiguration_SignalType *smithy.Schema
-
-var InstrumentationConfiguration_Location *smithy.Schema
-
-var InstrumentationConfiguration_LocationHash *smithy.Schema
-
-var InstrumentationConfiguration_Description *smithy.Schema
-
-var InstrumentationConfiguration_ExpiresAt *smithy.Schema
-
-var InstrumentationConfiguration_AttributeFilters *smithy.Schema
-
-var InstrumentationConfiguration_CaptureConfiguration *smithy.Schema
-
-var InstrumentationConfiguration_CreatedAt *smithy.Schema
-
-var InstrumentationConfiguration_ARN *smithy.Schema
-
-var _InstrumentationConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var InstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var InstrumentationConfigurationStatus_READY *smithy.Schema
-
-var InstrumentationConfigurationStatus_ERROR *smithy.Schema
-
-var InstrumentationConfigurationStatus_ACTIVE *smithy.Schema
-
-var InstrumentationConfigurationStatus_DISABLED *smithy.Schema
-
-var _InstrumentationConfigurationStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationStatusList",
-}, smithy.ShapeTypeList, 1)
-var _InstrumentationConfigurationStatusList_member *smithy.Schema
-
-var InstrumentationConfigurationStatusReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationStatusReport",
-}, smithy.ShapeTypeStructure, 6)
-var InstrumentationConfigurationStatusReport_InstrumentationType *smithy.Schema
-
-var InstrumentationConfigurationStatusReport_SignalType *smithy.Schema
-
-var InstrumentationConfigurationStatusReport_LocationHash *smithy.Schema
-
-var InstrumentationConfigurationStatusReport_Status *smithy.Schema
-
-var InstrumentationConfigurationStatusReport_Time *smithy.Schema
-
-var InstrumentationConfigurationStatusReport_ErrorCause *smithy.Schema
-
-var _InstrumentationConfigurationsWithoutServiceEnv = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationsWithoutServiceEnv",
-}, smithy.ShapeTypeList, 1)
-var _InstrumentationConfigurationsWithoutServiceEnv_member *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationWithoutServiceEnv",
-}, smithy.ShapeTypeStructure, 10)
-var InstrumentationConfigurationWithoutServiceEnv_InstrumentationType *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_SignalType *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_Location *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_LocationHash *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_Description *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_ExpiresAt *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_AttributeFilters *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_CreatedAt *smithy.Schema
-
-var InstrumentationConfigurationWithoutServiceEnv_ARN *smithy.Schema
-
-var InstrumentationErrorCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationErrorCause",
-}, smithy.ShapeTypeEnum, 6)
-var InstrumentationErrorCause_FILE_NOT_FOUND *smithy.Schema
-
-var InstrumentationErrorCause_METHOD_NOT_FOUND *smithy.Schema
-
-var InstrumentationErrorCause_LINE_NOT_EXECUTABLE *smithy.Schema
-
-var InstrumentationErrorCause_OVERLOADED_METHODS *smithy.Schema
-
-var InstrumentationErrorCause_LANGUAGE_MISMATCH *smithy.Schema
-
-var InstrumentationErrorCause_RUNTIME_ERROR *smithy.Schema
-
-var InstrumentationStatusEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationStatusEvent",
-}, smithy.ShapeTypeStructure, 2)
-var InstrumentationStatusEvent_Time *smithy.Schema
-
-var InstrumentationStatusEvent_ErrorCause *smithy.Schema
-
-var _InstrumentationStatusEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationStatusEventList",
-}, smithy.ShapeTypeList, 1)
-var _InstrumentationStatusEventList_member *smithy.Schema
-
-var InstrumentationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationType",
-}, smithy.ShapeTypeEnum, 2)
-var InstrumentationType_BREAKPOINT *smithy.Schema
-
-var InstrumentationType_PROBE *smithy.Schema
-
-var Interval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Interval",
-}, smithy.ShapeTypeUnion, 2)
-var Interval_RollingInterval *smithy.Schema
-
-var Interval_CalendarInterval *smithy.Schema
-
-var _KeyAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "KeyAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "KeyAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _LatestChangeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "LatestChangeEvents",
-}, smithy.ShapeTypeList, 1)
-var _LatestChangeEvents_member *smithy.Schema
-
-var _ListAuditFindingMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListAuditFindingMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEntityEventsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListEntityEventsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceDependenciesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependenciesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceDependentsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependentsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceLevelObjectiveExclusionWindowsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectiveExclusionWindowsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceLevelObjectivesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectivesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceOperationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceOperationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServicesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServicesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListServiceStatesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceStatesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Location",
-}, smithy.ShapeTypeUnion, 1)
-var Location_CodeLocation *smithy.Schema
-
-var LocationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "LocationIdentifier",
-}, smithy.ShapeTypeUnion, 2)
-var LocationIdentifier_CodeLocation *smithy.Schema
-
-var LocationIdentifier_LocationHash *smithy.Schema
-
-var _LogGroupReferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "LogGroupReferences",
-}, smithy.ShapeTypeList, 1)
-var _LogGroupReferences_member *smithy.Schema
-
-var Metric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Metric",
-}, smithy.ShapeTypeStructure, 3)
-var Metric_Namespace *smithy.Schema
-
-var Metric_MetricName *smithy.Schema
-
-var Metric_Dimensions *smithy.Schema
-
-var _MetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricDataQueries",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataQueries_member *smithy.Schema
-
-var MetricDataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricDataQuery",
-}, smithy.ShapeTypeStructure, 7)
-var MetricDataQuery_Id *smithy.Schema
-
-var MetricDataQuery_MetricStat *smithy.Schema
-
-var MetricDataQuery_Expression *smithy.Schema
-
-var MetricDataQuery_Label *smithy.Schema
-
-var MetricDataQuery_ReturnData *smithy.Schema
-
-var MetricDataQuery_Period *smithy.Schema
-
-var MetricDataQuery_AccountId *smithy.Schema
-
-var _MetricExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricExpression",
-}, smithy.ShapeTypeString, 0)
-
-var MetricGraph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricGraph",
-}, smithy.ShapeTypeStructure, 3)
-var MetricGraph_MetricDataQueries *smithy.Schema
-
-var MetricGraph_StartTime *smithy.Schema
-
-var MetricGraph_EndTime *smithy.Schema
-
-var _MetricId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var MetricReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricReference",
-}, smithy.ShapeTypeStructure, 5)
-var MetricReference_Namespace *smithy.Schema
-
-var MetricReference_MetricType *smithy.Schema
-
-var MetricReference_Dimensions *smithy.Schema
-
-var MetricReference_MetricName *smithy.Schema
-
-var MetricReference_AccountId *smithy.Schema
-
-var _MetricReferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricReferences",
-}, smithy.ShapeTypeList, 1)
-var _MetricReferences_member *smithy.Schema
-
-var MetricSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricSource",
-}, smithy.ShapeTypeStructure, 2)
-var MetricSource_MetricSourceKeyAttributes *smithy.Schema
-
-var MetricSource_MetricSourceAttributes *smithy.Schema
-
-var MetricSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricSourceType",
-}, smithy.ShapeTypeEnum, 6)
-var MetricSourceType_SERVICE_OPERATION *smithy.Schema
-
-var MetricSourceType_CLOUDWATCH_METRIC *smithy.Schema
-
-var MetricSourceType_SERVICE_DEPENDENCY *smithy.Schema
-
-var MetricSourceType_APPMONITOR *smithy.Schema
-
-var MetricSourceType_CANARY *smithy.Schema
-
-var MetricSourceType_SERVICE *smithy.Schema
-
-var _MetricSourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricSourceTypes",
-}, smithy.ShapeTypeList, 1)
-var _MetricSourceTypes_member *smithy.Schema
-
-var MetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricStat",
-}, smithy.ShapeTypeStructure, 4)
-var MetricStat_Metric *smithy.Schema
-
-var MetricStat_Period *smithy.Schema
-
-var MetricStat_Stat *smithy.Schema
-
-var MetricStat_Unit *smithy.Schema
-
-var _MetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MetricType",
-}, smithy.ShapeTypeString, 0)
-
-var MonitoredRequestCountMetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "MonitoredRequestCountMetricDataQueries",
-}, smithy.ShapeTypeUnion, 2)
-var MonitoredRequestCountMetricDataQueries_GoodCountMetric *smithy.Schema
-
-var MonitoredRequestCountMetricDataQueries_BadCountMetric *smithy.Schema
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Node = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Node",
-}, smithy.ShapeTypeStructure, 7)
-var Node_KeyAttributes *smithy.Schema
-
-var Node_Name *smithy.Schema
-
-var Node_NodeId *smithy.Schema
-
-var Node_Operation *smithy.Schema
-
-var Node_Type *smithy.Schema
-
-var Node_Duration *smithy.Schema
-
-var Node_Status *smithy.Schema
-
-var _Nodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Nodes",
-}, smithy.ShapeTypeList, 1)
-var _Nodes_member *smithy.Schema
-
-var _OperationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "OperationName",
-}, smithy.ShapeTypeString, 0)
-
-var _Period = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Period",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProgrammingLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ProgrammingLanguage",
-}, smithy.ShapeTypeEnum, 3)
-var ProgrammingLanguage_JAVA *smithy.Schema
-
-var ProgrammingLanguage_PYTHON *smithy.Schema
-
-var ProgrammingLanguage_JAVASCRIPT *smithy.Schema
-
-var RecurrenceRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RecurrenceRule",
-}, smithy.ShapeTypeStructure, 1)
-var RecurrenceRule_Expression *smithy.Schema
-
-var RequestBasedServiceLevelIndicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RequestBasedServiceLevelIndicator",
-}, smithy.ShapeTypeStructure, 3)
-var RequestBasedServiceLevelIndicator_RequestBasedSliMetric *smithy.Schema
-
-var RequestBasedServiceLevelIndicator_MetricThreshold *smithy.Schema
-
-var RequestBasedServiceLevelIndicator_ComparisonOperator *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RequestBasedServiceLevelIndicatorConfig",
-}, smithy.ShapeTypeStructure, 3)
-var RequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorConfig_MetricThreshold *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorConfig_ComparisonOperator *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RequestBasedServiceLevelIndicatorMetric",
-}, smithy.ShapeTypeStructure, 8)
-var RequestBasedServiceLevelIndicatorMetric_KeyAttributes *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_OperationName *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_MetricType *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_DependencyConfig *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_MetricSource *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetric_CompositeSliConfig *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RequestBasedServiceLevelIndicatorMetricConfig",
-}, smithy.ShapeTypeStructure, 9)
-var RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_OperationName *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_MetricType *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_MetricSource *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_MetricName *smithy.Schema
-
-var RequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ReturnData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ReturnData",
-}, smithy.ShapeTypeBoolean, 0)
-
-var RollingInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RollingInterval",
-}, smithy.ShapeTypeStructure, 2)
-var RollingInterval_DurationUnit *smithy.Schema
-
-var RollingInterval_Duration *smithy.Schema
-
-var _RollingIntervalDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "RollingIntervalDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var SelectionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "SelectionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var SelectionConfig_Type *smithy.Schema
-
-var SelectionConfig_Pattern *smithy.Schema
-
-var _SelectionPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "SelectionPattern",
-}, smithy.ShapeTypeString, 0)
-
-var SelectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "SelectionType",
-}, smithy.ShapeTypeEnum, 3)
-var SelectionType_EXPLICIT *smithy.Schema
-
-var SelectionType_PREFIX *smithy.Schema
-
-var SelectionType_REGEX *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Service",
-}, smithy.ShapeTypeStructure, 5)
-var Service_KeyAttributes *smithy.Schema
-
-var Service_AttributeMaps *smithy.Schema
-
-var Service_ServiceGroups *smithy.Schema
-
-var Service_MetricReferences *smithy.Schema
-
-var Service_LogGroupReferences *smithy.Schema
-
-var _ServiceDependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceDependencies",
-}, smithy.ShapeTypeList, 1)
-var _ServiceDependencies_member *smithy.Schema
-
-var ServiceDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceDependency",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceDependency_OperationName *smithy.Schema
-
-var ServiceDependency_DependencyKeyAttributes *smithy.Schema
-
-var ServiceDependency_DependencyOperationName *smithy.Schema
-
-var ServiceDependency_MetricReferences *smithy.Schema
-
-var ServiceDependent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceDependent",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceDependent_OperationName *smithy.Schema
-
-var ServiceDependent_DependentKeyAttributes *smithy.Schema
-
-var ServiceDependent_DependentOperationName *smithy.Schema
-
-var ServiceDependent_MetricReferences *smithy.Schema
-
-var _ServiceDependents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceDependents",
-}, smithy.ShapeTypeList, 1)
-var _ServiceDependents_member *smithy.Schema
-
-var ServiceEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceEntity",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceEntity_Type *smithy.Schema
-
-var ServiceEntity_Name *smithy.Schema
-
-var ServiceEntity_Environment *smithy.Schema
-
-var ServiceEntity_AwsAccountId *smithy.Schema
-
-var _ServiceErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceGroup",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceGroup_GroupName *smithy.Schema
-
-var ServiceGroup_GroupValue *smithy.Schema
-
-var ServiceGroup_GroupSource *smithy.Schema
-
-var ServiceGroup_GroupIdentifier *smithy.Schema
-
-var _ServiceGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceGroups",
-}, smithy.ShapeTypeList, 1)
-var _ServiceGroups_member *smithy.Schema
-
-var ServiceLevelIndicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicator",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceLevelIndicator_SliMetric *smithy.Schema
-
-var ServiceLevelIndicator_MetricThreshold *smithy.Schema
-
-var ServiceLevelIndicator_ComparisonOperator *smithy.Schema
-
-var ServiceLevelIndicatorComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorComparisonOperator",
-}, smithy.ShapeTypeEnum, 4)
-var ServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var ServiceLevelIndicatorComparisonOperator_GREATER_THAN *smithy.Schema
-
-var ServiceLevelIndicatorComparisonOperator_LESS_THAN *smithy.Schema
-
-var ServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var ServiceLevelIndicatorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorConfig",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceLevelIndicatorConfig_SliMetricConfig *smithy.Schema
-
-var ServiceLevelIndicatorConfig_MetricThreshold *smithy.Schema
-
-var ServiceLevelIndicatorConfig_ComparisonOperator *smithy.Schema
-
-var ServiceLevelIndicatorMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorMetric",
-}, smithy.ShapeTypeStructure, 7)
-var ServiceLevelIndicatorMetric_KeyAttributes *smithy.Schema
-
-var ServiceLevelIndicatorMetric_OperationName *smithy.Schema
-
-var ServiceLevelIndicatorMetric_MetricType *smithy.Schema
-
-var ServiceLevelIndicatorMetric_MetricDataQueries *smithy.Schema
-
-var ServiceLevelIndicatorMetric_DependencyConfig *smithy.Schema
-
-var ServiceLevelIndicatorMetric_MetricSource *smithy.Schema
-
-var ServiceLevelIndicatorMetric_CompositeSliConfig *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorMetricConfig",
-}, smithy.ShapeTypeStructure, 10)
-var ServiceLevelIndicatorMetricConfig_KeyAttributes *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_OperationName *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_MetricType *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_MetricName *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_Statistic *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_PeriodSeconds *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_MetricSource *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_MetricDataQueries *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_DependencyConfig *smithy.Schema
-
-var ServiceLevelIndicatorMetricConfig_CompositeSliConfig *smithy.Schema
-
-var _ServiceLevelIndicatorMetricThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorMetricThreshold",
-}, smithy.ShapeTypeDouble, 0)
-
-var ServiceLevelIndicatorMetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorMetricType",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceLevelIndicatorMetricType_LATENCY *smithy.Schema
-
-var ServiceLevelIndicatorMetricType_AVAILABILITY *smithy.Schema
-
-var _ServiceLevelIndicatorStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelIndicatorStatistic",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjective",
-}, smithy.ShapeTypeStructure, 12)
-var ServiceLevelObjective_Arn *smithy.Schema
-
-var ServiceLevelObjective_Name *smithy.Schema
-
-var ServiceLevelObjective_Description *smithy.Schema
-
-var ServiceLevelObjective_CreatedTime *smithy.Schema
-
-var ServiceLevelObjective_LastUpdatedTime *smithy.Schema
-
-var ServiceLevelObjective_Sli *smithy.Schema
-
-var ServiceLevelObjective_RequestBasedSli *smithy.Schema
-
-var ServiceLevelObjective_EvaluationType *smithy.Schema
-
-var ServiceLevelObjective_Goal *smithy.Schema
-
-var ServiceLevelObjective_BurnRateConfigurations *smithy.Schema
-
-var ServiceLevelObjective_MetricSourceType *smithy.Schema
-
-var ServiceLevelObjective_AutoInvestigationEnabled *smithy.Schema
-
-var _ServiceLevelObjectiveArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceLevelObjectiveBudgetReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReport",
-}, smithy.ShapeTypeStructure, 12)
-var ServiceLevelObjectiveBudgetReport_Arn *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_Name *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_EvaluationType *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_BudgetStatus *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_Attainment *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_TotalBudgetRequests *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_Sli *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_RequestBasedSli *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReport_Goal *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReportError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReportError",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceLevelObjectiveBudgetReportError_Name *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReportError_Arn *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReportError_ErrorCode *smithy.Schema
-
-var ServiceLevelObjectiveBudgetReportError_ErrorMessage *smithy.Schema
-
-var _ServiceLevelObjectiveBudgetReportErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReportErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceLevelObjectiveBudgetReportErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReportErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceLevelObjectiveBudgetReportErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReportErrors",
-}, smithy.ShapeTypeList, 1)
-var _ServiceLevelObjectiveBudgetReportErrors_member *smithy.Schema
-
-var _ServiceLevelObjectiveBudgetReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetReports",
-}, smithy.ShapeTypeList, 1)
-var _ServiceLevelObjectiveBudgetReports_member *smithy.Schema
-
-var ServiceLevelObjectiveBudgetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveBudgetStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ServiceLevelObjectiveBudgetStatus_OK *smithy.Schema
-
-var ServiceLevelObjectiveBudgetStatus_WARNING *smithy.Schema
-
-var ServiceLevelObjectiveBudgetStatus_BREACHED *smithy.Schema
-
-var ServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA *smithy.Schema
-
-var _ServiceLevelObjectiveDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceLevelObjectiveEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveEntity",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceLevelObjectiveEntity_SloName *smithy.Schema
-
-var ServiceLevelObjectiveEntity_SloArn *smithy.Schema
-
-var _ServiceLevelObjectiveId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveId",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceLevelObjectiveIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveIds",
-}, smithy.ShapeTypeList, 1)
-var _ServiceLevelObjectiveIds_member *smithy.Schema
-
-var _ServiceLevelObjectiveName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveName",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceLevelObjectiveSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ServiceLevelObjectiveSummaries_member *smithy.Schema
-
-var ServiceLevelObjectiveSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceLevelObjectiveSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ServiceLevelObjectiveSummary_Arn *smithy.Schema
-
-var ServiceLevelObjectiveSummary_Name *smithy.Schema
-
-var ServiceLevelObjectiveSummary_KeyAttributes *smithy.Schema
-
-var ServiceLevelObjectiveSummary_OperationName *smithy.Schema
-
-var ServiceLevelObjectiveSummary_DependencyConfig *smithy.Schema
-
-var ServiceLevelObjectiveSummary_CreatedTime *smithy.Schema
-
-var ServiceLevelObjectiveSummary_EvaluationType *smithy.Schema
-
-var ServiceLevelObjectiveSummary_MetricSourceType *smithy.Schema
-
-var ServiceLevelObjectiveSummary_MetricSource *smithy.Schema
-
-var ServiceLevelObjectiveSummary_CompositeSliConfig *smithy.Schema
-
-var ServiceOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceOperation",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceOperation_Name *smithy.Schema
-
-var ServiceOperation_MetricReferences *smithy.Schema
-
-var ServiceOperationEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceOperationEntity",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceOperationEntity_Service *smithy.Schema
-
-var ServiceOperationEntity_Operation *smithy.Schema
-
-var ServiceOperationEntity_MetricType *smithy.Schema
-
-var _ServiceOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceOperations",
-}, smithy.ShapeTypeList, 1)
-var _ServiceOperations_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceState",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceState_AttributeFilters *smithy.Schema
-
-var ServiceState_Service *smithy.Schema
-
-var ServiceState_LatestChangeEvents *smithy.Schema
-
-var _ServiceStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceStates",
-}, smithy.ShapeTypeList, 1)
-var _ServiceStates_member *smithy.Schema
-
-var _ServiceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ServiceSummaries_member *smithy.Schema
-
-var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceSummary_KeyAttributes *smithy.Schema
-
-var ServiceSummary_AttributeMaps *smithy.Schema
-
-var ServiceSummary_MetricReferences *smithy.Schema
-
-var ServiceSummary_ServiceGroups *smithy.Schema
-
-var Severity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Severity",
-}, smithy.ShapeTypeEnum, 5)
-var Severity_CRITICAL *smithy.Schema
-
-var Severity_HIGH *smithy.Schema
-
-var Severity_MEDIUM *smithy.Schema
-
-var Severity_LOW *smithy.Schema
-
-var Severity_NONE *smithy.Schema
-
-var _SLIPeriodSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "SLIPeriodSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var StandardUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "StandardUnit",
-}, smithy.ShapeTypeEnum, 27)
-var StandardUnit_MICROSECONDS *smithy.Schema
-
-var StandardUnit_MILLISECONDS *smithy.Schema
-
-var StandardUnit_SECONDS *smithy.Schema
-
-var StandardUnit_BYTES *smithy.Schema
-
-var StandardUnit_KILOBYTES *smithy.Schema
-
-var StandardUnit_MEGABYTES *smithy.Schema
-
-var StandardUnit_GIGABYTES *smithy.Schema
-
-var StandardUnit_TERABYTES *smithy.Schema
-
-var StandardUnit_BITS *smithy.Schema
-
-var StandardUnit_KILOBITS *smithy.Schema
-
-var StandardUnit_MEGABITS *smithy.Schema
-
-var StandardUnit_GIGABITS *smithy.Schema
-
-var StandardUnit_TERABITS *smithy.Schema
-
-var StandardUnit_PERCENT *smithy.Schema
-
-var StandardUnit_COUNT *smithy.Schema
-
-var StandardUnit_BYTES_SECOND *smithy.Schema
-
-var StandardUnit_KILOBYTES_SECOND *smithy.Schema
-
-var StandardUnit_MEGABYTES_SECOND *smithy.Schema
-
-var StandardUnit_GIGABYTES_SECOND *smithy.Schema
-
-var StandardUnit_TERABYTES_SECOND *smithy.Schema
-
-var StandardUnit_BITS_SECOND *smithy.Schema
-
-var StandardUnit_KILOBITS_SECOND *smithy.Schema
-
-var StandardUnit_MEGABITS_SECOND *smithy.Schema
-
-var StandardUnit_GIGABITS_SECOND *smithy.Schema
-
-var StandardUnit_TERABITS_SECOND *smithy.Schema
-
-var StandardUnit_COUNT_SECOND *smithy.Schema
-
-var StandardUnit_NONE *smithy.Schema
-
-var _Stat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Stat",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _TotalBudgetRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TotalBudgetRequests",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TotalBudgetSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TotalBudgetSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var UnprocessedStatusEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UnprocessedStatusEvent",
-}, smithy.ShapeTypeStructure, 6)
-var UnprocessedStatusEvent_InstrumentationType *smithy.Schema
-
-var UnprocessedStatusEvent_SignalType *smithy.Schema
-
-var UnprocessedStatusEvent_LocationHash *smithy.Schema
-
-var UnprocessedStatusEvent_Status *smithy.Schema
-
-var UnprocessedStatusEvent_Time *smithy.Schema
-
-var UnprocessedStatusEvent_FailedReason *smithy.Schema
-
-var UnprocessedStatusEventFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UnprocessedStatusEventFailureReason",
-}, smithy.ShapeTypeEnum, 3)
-var UnprocessedStatusEventFailureReason_THROTTLED *smithy.Schema
-
-var UnprocessedStatusEventFailureReason_INTERNAL_ERROR *smithy.Schema
-
-var UnprocessedStatusEventFailureReason_VALIDATION_ERROR *smithy.Schema
-
-var _UnprocessedStatusEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UnprocessedStatusEventList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedStatusEventList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValidationExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ValidationExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _WarningThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "WarningThreshold",
-}, smithy.ShapeTypeDouble, 0)
-
-var Window = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "Window",
-}, smithy.ShapeTypeStructure, 2)
-var Window_DurationUnit *smithy.Schema
-
-var Window_Duration *smithy.Schema
-
-var BatchDeleteInstrumentationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteInstrumentationConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget *smithy.Schema
-
-var BatchDeleteInstrumentationConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchDeleteInstrumentationConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteInstrumentationConfigurationsResponse_DeletedCount *smithy.Schema
-
-var BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions *smithy.Schema
-
-var BatchDeleteInstrumentationConfigurationsResponse_Errors *smithy.Schema
-
-var BatchGetServiceLevelObjectiveBudgetReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchGetServiceLevelObjectiveBudgetReportInput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp *smithy.Schema
-
-var BatchGetServiceLevelObjectiveBudgetReportInput_SloIds *smithy.Schema
-
-var BatchGetServiceLevelObjectiveBudgetReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchGetServiceLevelObjectiveBudgetReportOutput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp *smithy.Schema
-
-var BatchGetServiceLevelObjectiveBudgetReportOutput_Reports *smithy.Schema
-
-var BatchGetServiceLevelObjectiveBudgetReportOutput_Errors *smithy.Schema
-
-var BatchUpdateExclusionWindowsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchUpdateExclusionWindowsInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchUpdateExclusionWindowsInput_SloIds *smithy.Schema
-
-var BatchUpdateExclusionWindowsInput_AddExclusionWindows *smithy.Schema
-
-var BatchUpdateExclusionWindowsInput_RemoveExclusionWindows *smithy.Schema
-
-var BatchUpdateExclusionWindowsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "BatchUpdateExclusionWindowsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateExclusionWindowsOutput_SloIds *smithy.Schema
-
-var BatchUpdateExclusionWindowsOutput_Errors *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateInstrumentationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_Service *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_Environment *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_SignalType *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_Location *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_Description *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_ExpiresAt *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_AttributeFilters *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_CaptureConfiguration *smithy.Schema
-
-var CreateInstrumentationConfigurationRequest_Tags *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateInstrumentationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 12)
-var CreateInstrumentationConfigurationResponse_InstrumentationType *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_Service *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_Environment *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_SignalType *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_Location *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_LocationHash *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_Description *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_ExpiresAt *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_AttributeFilters *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_CaptureConfiguration *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_CreatedAt *smithy.Schema
-
-var CreateInstrumentationConfigurationResponse_ARN *smithy.Schema
-
-var CreateServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateServiceLevelObjectiveInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateServiceLevelObjectiveInput_Name *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_Description *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_SliConfig *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_RequestBasedSliConfig *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_Goal *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_Tags *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_BurnRateConfigurations *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_CreateRecommendedSlo *smithy.Schema
-
-var CreateServiceLevelObjectiveInput_AutoInvestigationEnabled *smithy.Schema
-
-var CreateServiceLevelObjectiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "CreateServiceLevelObjectiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceLevelObjectiveOutput_Slo *smithy.Schema
-
-var DeleteGroupingConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteGroupingConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteInstrumentationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
-
-var DeleteInstrumentationConfigurationRequest_Service *smithy.Schema
-
-var DeleteInstrumentationConfigurationRequest_Environment *smithy.Schema
-
-var DeleteInstrumentationConfigurationRequest_SignalType *smithy.Schema
-
-var DeleteInstrumentationConfigurationRequest_LocationIdentifier *smithy.Schema
-
-var DeleteInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteInstrumentationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInstrumentationConfigurationResponse_DeletionStatus *smithy.Schema
-
-var DeleteServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteServiceLevelObjectiveInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceLevelObjectiveInput_Id *smithy.Schema
-
-var DeleteServiceLevelObjectiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "DeleteServiceLevelObjectiveOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
-
-var GetInstrumentationConfigurationRequest_Service *smithy.Schema
-
-var GetInstrumentationConfigurationRequest_Environment *smithy.Schema
-
-var GetInstrumentationConfigurationRequest_SignalType *smithy.Schema
-
-var GetInstrumentationConfigurationRequest_LocationIdentifier *smithy.Schema
-
-var GetInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetInstrumentationConfigurationResponse_Configuration *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfigurationStatusRequest",
-}, smithy.ShapeTypeStructure, 10)
-var GetInstrumentationConfigurationStatusRequest_InstrumentationType *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_Service *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_Environment *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_SignalType *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_LocationIdentifier *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_Status *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_StartTime *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_EndTime *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_MaxResults *smithy.Schema
-
-var GetInstrumentationConfigurationStatusRequest_NextToken *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetInstrumentationConfigurationStatusResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetInstrumentationConfigurationStatusResponse_Service *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_Environment *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_SignalType *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_Location *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_Status *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_Events *smithy.Schema
-
-var GetInstrumentationConfigurationStatusResponse_NextToken *smithy.Schema
-
-var GetServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetServiceInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetServiceInput_StartTime *smithy.Schema
-
-var GetServiceInput_EndTime *smithy.Schema
-
-var GetServiceInput_KeyAttributes *smithy.Schema
-
-var GetServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetServiceLevelObjectiveInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceLevelObjectiveInput_Id *smithy.Schema
-
-var GetServiceLevelObjectiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetServiceLevelObjectiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceLevelObjectiveOutput_Slo *smithy.Schema
-
-var GetServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "GetServiceOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetServiceOutput_Service *smithy.Schema
-
-var GetServiceOutput_StartTime *smithy.Schema
-
-var GetServiceOutput_EndTime *smithy.Schema
-
-var GetServiceOutput_LogGroupReferences *smithy.Schema
-
-var ListAuditFindingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListAuditFindingsInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListAuditFindingsInput_StartTime *smithy.Schema
-
-var ListAuditFindingsInput_EndTime *smithy.Schema
-
-var ListAuditFindingsInput_Auditors *smithy.Schema
-
-var ListAuditFindingsInput_AuditTargets *smithy.Schema
-
-var ListAuditFindingsInput_DetailLevel *smithy.Schema
-
-var ListAuditFindingsInput_NextToken *smithy.Schema
-
-var ListAuditFindingsInput_MaxResults *smithy.Schema
-
-var ListAuditFindingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListAuditFindingsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListAuditFindingsOutput_StartTime *smithy.Schema
-
-var ListAuditFindingsOutput_EndTime *smithy.Schema
-
-var ListAuditFindingsOutput_AuditFindings *smithy.Schema
-
-var ListAuditFindingsOutput_NextToken *smithy.Schema
-
-var ListEntityEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListEntityEventsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListEntityEventsInput_Entity *smithy.Schema
-
-var ListEntityEventsInput_StartTime *smithy.Schema
-
-var ListEntityEventsInput_EndTime *smithy.Schema
-
-var ListEntityEventsInput_MaxResults *smithy.Schema
-
-var ListEntityEventsInput_NextToken *smithy.Schema
-
-var ListEntityEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListEntityEventsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListEntityEventsOutput_StartTime *smithy.Schema
-
-var ListEntityEventsOutput_EndTime *smithy.Schema
-
-var ListEntityEventsOutput_ChangeEvents *smithy.Schema
-
-var ListEntityEventsOutput_NextToken *smithy.Schema
-
-var ListGroupingAttributeDefinitionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListGroupingAttributeDefinitionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListGroupingAttributeDefinitionsInput_NextToken *smithy.Schema
-
-var ListGroupingAttributeDefinitionsInput_AwsAccountId *smithy.Schema
-
-var ListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListGroupingAttributeDefinitionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListGroupingAttributeDefinitionsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions *smithy.Schema
-
-var ListGroupingAttributeDefinitionsOutput_UpdatedAt *smithy.Schema
-
-var ListGroupingAttributeDefinitionsOutput_NextToken *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListInstrumentationConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListInstrumentationConfigurationsRequest_Service *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest_Environment *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest_InstrumentationType *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest_SyncedAt *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListInstrumentationConfigurationsRequest_NextToken *smithy.Schema
-
-var InstrumentationConfigurationsPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "InstrumentationConfigurationsPage",
-}, smithy.ShapeTypeStructure, 7)
-var InstrumentationConfigurationsPage_Service *smithy.Schema
-
-var InstrumentationConfigurationsPage_Environment *smithy.Schema
-
-var InstrumentationConfigurationsPage_Changed *smithy.Schema
-
-var InstrumentationConfigurationsPage_LatestConfigurations *smithy.Schema
-
-var InstrumentationConfigurationsPage_SyncedAt *smithy.Schema
-
-var InstrumentationConfigurationsPage_SyncInterval *smithy.Schema
-
-var InstrumentationConfigurationsPage_NextToken *smithy.Schema
-
-var ListServiceDependenciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependenciesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListServiceDependenciesInput_StartTime *smithy.Schema
-
-var ListServiceDependenciesInput_EndTime *smithy.Schema
-
-var ListServiceDependenciesInput_KeyAttributes *smithy.Schema
-
-var ListServiceDependenciesInput_MaxResults *smithy.Schema
-
-var ListServiceDependenciesInput_NextToken *smithy.Schema
-
-var ListServiceDependenciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependenciesOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceDependenciesOutput_StartTime *smithy.Schema
-
-var ListServiceDependenciesOutput_EndTime *smithy.Schema
-
-var ListServiceDependenciesOutput_ServiceDependencies *smithy.Schema
-
-var ListServiceDependenciesOutput_NextToken *smithy.Schema
-
-var ListServiceDependentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependentsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListServiceDependentsInput_StartTime *smithy.Schema
-
-var ListServiceDependentsInput_EndTime *smithy.Schema
-
-var ListServiceDependentsInput_KeyAttributes *smithy.Schema
-
-var ListServiceDependentsInput_MaxResults *smithy.Schema
-
-var ListServiceDependentsInput_NextToken *smithy.Schema
-
-var ListServiceDependentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceDependentsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceDependentsOutput_StartTime *smithy.Schema
-
-var ListServiceDependentsOutput_EndTime *smithy.Schema
-
-var ListServiceDependentsOutput_ServiceDependents *smithy.Schema
-
-var ListServiceDependentsOutput_NextToken *smithy.Schema
-
-var ListServiceLevelObjectiveExclusionWindowsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectiveExclusionWindowsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListServiceLevelObjectiveExclusionWindowsInput_Id *smithy.Schema
-
-var ListServiceLevelObjectiveExclusionWindowsInput_MaxResults *smithy.Schema
-
-var ListServiceLevelObjectiveExclusionWindowsInput_NextToken *smithy.Schema
-
-var ListServiceLevelObjectiveExclusionWindowsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectiveExclusionWindowsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows *smithy.Schema
-
-var ListServiceLevelObjectiveExclusionWindowsOutput_NextToken *smithy.Schema
-
-var ListServiceLevelObjectivesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectivesInput",
-}, smithy.ShapeTypeStructure, 9)
-var ListServiceLevelObjectivesInput_KeyAttributes *smithy.Schema
-
-var ListServiceLevelObjectivesInput_OperationName *smithy.Schema
-
-var ListServiceLevelObjectivesInput_DependencyConfig *smithy.Schema
-
-var ListServiceLevelObjectivesInput_MaxResults *smithy.Schema
-
-var ListServiceLevelObjectivesInput_NextToken *smithy.Schema
-
-var ListServiceLevelObjectivesInput_MetricSourceTypes *smithy.Schema
-
-var ListServiceLevelObjectivesInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListServiceLevelObjectivesInput_SloOwnerAwsAccountId *smithy.Schema
-
-var ListServiceLevelObjectivesInput_MetricSource *smithy.Schema
-
-var ListServiceLevelObjectivesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceLevelObjectivesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceLevelObjectivesOutput_SloSummaries *smithy.Schema
-
-var ListServiceLevelObjectivesOutput_NextToken *smithy.Schema
-
-var ListServiceOperationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceOperationsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListServiceOperationsInput_StartTime *smithy.Schema
-
-var ListServiceOperationsInput_EndTime *smithy.Schema
-
-var ListServiceOperationsInput_KeyAttributes *smithy.Schema
-
-var ListServiceOperationsInput_MaxResults *smithy.Schema
-
-var ListServiceOperationsInput_NextToken *smithy.Schema
-
-var ListServiceOperationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceOperationsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceOperationsOutput_StartTime *smithy.Schema
-
-var ListServiceOperationsOutput_EndTime *smithy.Schema
-
-var ListServiceOperationsOutput_ServiceOperations *smithy.Schema
-
-var ListServiceOperationsOutput_NextToken *smithy.Schema
-
-var ListServicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServicesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListServicesInput_StartTime *smithy.Schema
-
-var ListServicesInput_EndTime *smithy.Schema
-
-var ListServicesInput_MaxResults *smithy.Schema
-
-var ListServicesInput_NextToken *smithy.Schema
-
-var ListServicesInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListServicesInput_AwsAccountId *smithy.Schema
-
-var ListServicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServicesOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServicesOutput_StartTime *smithy.Schema
-
-var ListServicesOutput_EndTime *smithy.Schema
-
-var ListServicesOutput_ServiceSummaries *smithy.Schema
-
-var ListServicesOutput_NextToken *smithy.Schema
-
-var ListServiceStatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceStatesInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListServiceStatesInput_StartTime *smithy.Schema
-
-var ListServiceStatesInput_EndTime *smithy.Schema
-
-var ListServiceStatesInput_MaxResults *smithy.Schema
-
-var ListServiceStatesInput_NextToken *smithy.Schema
-
-var ListServiceStatesInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListServiceStatesInput_AwsAccountId *smithy.Schema
-
-var ListServiceStatesInput_AttributeFilters *smithy.Schema
-
-var ListServiceStatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListServiceStatesOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceStatesOutput_StartTime *smithy.Schema
-
-var ListServiceStatesOutput_EndTime *smithy.Schema
-
-var ListServiceStatesOutput_ServiceStates *smithy.Schema
-
-var ListServiceStatesOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutGroupingConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "PutGroupingConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var PutGroupingConfigurationInput_GroupingAttributeDefinitions *smithy.Schema
-
-var PutGroupingConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "PutGroupingConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutGroupingConfigurationOutput_GroupingConfiguration *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ReportInstrumentationConfigurationStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ReportInstrumentationConfigurationStatusRequest_Service *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusRequest_Environment *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusRequest_Configurations *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "ReportInstrumentationConfigurationStatusResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ReportInstrumentationConfigurationStatusResponse_Service *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusResponse_Environment *smithy.Schema
-
-var ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents *smithy.Schema
-
-var StartDiscoveryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "StartDiscoveryInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartDiscoveryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "StartDiscoveryOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UpdateServiceLevelObjectiveInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateServiceLevelObjectiveInput_Id *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_Description *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_SliConfig *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_RequestBasedSliConfig *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_Goal *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_BurnRateConfigurations *smithy.Schema
-
-var UpdateServiceLevelObjectiveInput_AutoInvestigationEnabled *smithy.Schema
-
-var UpdateServiceLevelObjectiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationsignals",
-	Name:      "UpdateServiceLevelObjectiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceLevelObjectiveOutput_Slo *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ServiceErrorMessage)
-
-	_AttributeFilterValues_member = _AttributeFilterValues.AddMember("member", _AttributeFilterValue)
-
-	AttributeFilter_AttributeFilterName = AttributeFilter.AddMember("AttributeFilterName", _AttributeFilterName)
-
-	AttributeFilter_AttributeFilterValues = AttributeFilter.AddMember("AttributeFilterValues", _AttributeFilterValues)
-
-	_AttributeFilters_member = _AttributeFilters.AddMember("member", AttributeFilter)
-
-	_AttributeMap_key = _AttributeMap.AddMember("key", smithyprelude.String)
-
-	_AttributeMap_value = _AttributeMap.AddMember("value", smithyprelude.String)
-
-	_AttributeMaps_member = _AttributeMaps.AddMember("member", _AttributeMap)
-
-	_Attributes_key = _Attributes.AddMember("key", _KeyAttributeName)
-
-	_Attributes_value = _Attributes.AddMember("value", _KeyAttributeValue)
-
-	_DataMap_key = _DataMap.AddMember("key", smithyprelude.String)
-
-	_DataMap_value = _DataMap.AddMember("value", smithyprelude.String)
-
-	Severity_CRITICAL = Severity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	Severity_HIGH = Severity.AddMember("HIGH", smithyprelude.Unit)
-
-	Severity_MEDIUM = Severity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	Severity_LOW = Severity.AddMember("LOW", smithyprelude.Unit)
-
-	Severity_NONE = Severity.AddMember("NONE", smithyprelude.Unit)
-
-	AuditorResult_Auditor = AuditorResult.AddMember("Auditor", smithyprelude.String)
-
-	AuditorResult_Description = AuditorResult.AddMember("Description", smithyprelude.String)
-
-	AuditorResult_Data = AuditorResult.AddMember("Data", _DataMap)
-
-	AuditorResult_Severity = AuditorResult.AddMember("Severity", Severity)
-
-	_AuditorResults_member = _AuditorResults.AddMember("member", AuditorResult)
-
-	Dimension_Name = Dimension.AddMember("Name", _DimensionName)
-
-	Dimension_Value = Dimension.AddMember("Value", _DimensionValue)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	Metric_Namespace = Metric.AddMember("Namespace", _Namespace)
-
-	Metric_MetricName = Metric.AddMember("MetricName", _MetricName)
-
-	Metric_Dimensions = Metric.AddMember("Dimensions", _Dimensions)
-
-	StandardUnit_MICROSECONDS = StandardUnit.AddMember("MICROSECONDS", smithyprelude.Unit)
-
-	StandardUnit_MILLISECONDS = StandardUnit.AddMember("MILLISECONDS", smithyprelude.Unit)
-
-	StandardUnit_SECONDS = StandardUnit.AddMember("SECONDS", smithyprelude.Unit)
-
-	StandardUnit_BYTES = StandardUnit.AddMember("BYTES", smithyprelude.Unit)
-
-	StandardUnit_KILOBYTES = StandardUnit.AddMember("KILOBYTES", smithyprelude.Unit)
-
-	StandardUnit_MEGABYTES = StandardUnit.AddMember("MEGABYTES", smithyprelude.Unit)
-
-	StandardUnit_GIGABYTES = StandardUnit.AddMember("GIGABYTES", smithyprelude.Unit)
-
-	StandardUnit_TERABYTES = StandardUnit.AddMember("TERABYTES", smithyprelude.Unit)
-
-	StandardUnit_BITS = StandardUnit.AddMember("BITS", smithyprelude.Unit)
-
-	StandardUnit_KILOBITS = StandardUnit.AddMember("KILOBITS", smithyprelude.Unit)
-
-	StandardUnit_MEGABITS = StandardUnit.AddMember("MEGABITS", smithyprelude.Unit)
-
-	StandardUnit_GIGABITS = StandardUnit.AddMember("GIGABITS", smithyprelude.Unit)
-
-	StandardUnit_TERABITS = StandardUnit.AddMember("TERABITS", smithyprelude.Unit)
-
-	StandardUnit_PERCENT = StandardUnit.AddMember("PERCENT", smithyprelude.Unit)
-
-	StandardUnit_COUNT = StandardUnit.AddMember("COUNT", smithyprelude.Unit)
-
-	StandardUnit_BYTES_SECOND = StandardUnit.AddMember("BYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_KILOBYTES_SECOND = StandardUnit.AddMember("KILOBYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_MEGABYTES_SECOND = StandardUnit.AddMember("MEGABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_GIGABYTES_SECOND = StandardUnit.AddMember("GIGABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_TERABYTES_SECOND = StandardUnit.AddMember("TERABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_BITS_SECOND = StandardUnit.AddMember("BITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_KILOBITS_SECOND = StandardUnit.AddMember("KILOBITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_MEGABITS_SECOND = StandardUnit.AddMember("MEGABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_GIGABITS_SECOND = StandardUnit.AddMember("GIGABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_TERABITS_SECOND = StandardUnit.AddMember("TERABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_COUNT_SECOND = StandardUnit.AddMember("COUNT_SECOND", smithyprelude.Unit)
-
-	StandardUnit_NONE = StandardUnit.AddMember("NONE", smithyprelude.Unit)
-
-	MetricStat_Metric = MetricStat.AddMember("Metric", Metric)
-
-	MetricStat_Period = MetricStat.AddMember("Period", _Period)
-
-	MetricStat_Stat = MetricStat.AddMember("Stat", _Stat)
-
-	MetricStat_Unit = MetricStat.AddMember("Unit", StandardUnit)
-
-	MetricDataQuery_Id = MetricDataQuery.AddMember("Id", _MetricId)
-
-	MetricDataQuery_MetricStat = MetricDataQuery.AddMember("MetricStat", MetricStat)
-
-	MetricDataQuery_Expression = MetricDataQuery.AddMember("Expression", _MetricExpression)
-
-	MetricDataQuery_Label = MetricDataQuery.AddMember("Label", _MetricLabel)
-
-	MetricDataQuery_ReturnData = MetricDataQuery.AddMember("ReturnData", _ReturnData)
-
-	MetricDataQuery_Period = MetricDataQuery.AddMember("Period", _Period)
-
-	MetricDataQuery_AccountId = MetricDataQuery.AddMember("AccountId", _AccountId)
-
-	_MetricDataQueries_member = _MetricDataQueries.AddMember("member", MetricDataQuery)
-
-	MetricGraph_MetricDataQueries = MetricGraph.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	MetricGraph_StartTime = MetricGraph.AddMember("StartTime", smithyprelude.Timestamp)
-
-	MetricGraph_EndTime = MetricGraph.AddMember("EndTime", smithyprelude.Timestamp)
-
-	Node_KeyAttributes = Node.AddMember("KeyAttributes", _Attributes)
-
-	Node_Name = Node.AddMember("Name", smithyprelude.String)
-
-	Node_NodeId = Node.AddMember("NodeId", smithyprelude.String)
-
-	Node_Operation = Node.AddMember("Operation", smithyprelude.String)
-
-	Node_Type = Node.AddMember("Type", smithyprelude.String)
-
-	Node_Duration = Node.AddMember("Duration", smithyprelude.Double)
-
-	Node_Status = Node.AddMember("Status", smithyprelude.String)
-
-	_Nodes_member = _Nodes.AddMember("member", Node)
-
-	ConnectionType_INDIRECT = ConnectionType.AddMember("INDIRECT", smithyprelude.Unit)
-
-	ConnectionType_DIRECT = ConnectionType.AddMember("DIRECT", smithyprelude.Unit)
-
-	Edge_SourceNodeId = Edge.AddMember("SourceNodeId", smithyprelude.String)
-
-	Edge_DestinationNodeId = Edge.AddMember("DestinationNodeId", smithyprelude.String)
-
-	Edge_Duration = Edge.AddMember("Duration", smithyprelude.Double)
-
-	Edge_ConnectionType = Edge.AddMember("ConnectionType", ConnectionType)
-
-	_Edges_member = _Edges.AddMember("member", Edge)
-
-	DependencyGraph_Nodes = DependencyGraph.AddMember("Nodes", _Nodes)
-
-	DependencyGraph_Edges = DependencyGraph.AddMember("Edges", _Edges)
-
-	AuditFinding_KeyAttributes = AuditFinding.AddMember("KeyAttributes", _Attributes)
-
-	AuditFinding_AuditorResults = AuditFinding.AddMember("AuditorResults", _AuditorResults)
-
-	AuditFinding_Operation = AuditFinding.AddMember("Operation", smithyprelude.String)
-
-	AuditFinding_MetricGraph = AuditFinding.AddMember("MetricGraph", MetricGraph)
-
-	AuditFinding_DependencyGraph = AuditFinding.AddMember("DependencyGraph", DependencyGraph)
-
-	AuditFinding_Type = AuditFinding.AddMember("Type", smithyprelude.String)
-
-	_AuditFindings_member = _AuditFindings.AddMember("member", AuditFinding)
-
-	_Auditors_member = _Auditors.AddMember("member", smithyprelude.String)
-
-	ServiceEntity_Type = ServiceEntity.AddMember("Type", smithyprelude.String)
-
-	ServiceEntity_Name = ServiceEntity.AddMember("Name", smithyprelude.String)
-
-	ServiceEntity_Environment = ServiceEntity.AddMember("Environment", smithyprelude.String)
-
-	ServiceEntity_AwsAccountId = ServiceEntity.AddMember("AwsAccountId", smithyprelude.String)
-
-	ServiceLevelObjectiveEntity_SloName = ServiceLevelObjectiveEntity.AddMember("SloName", smithyprelude.String)
-
-	ServiceLevelObjectiveEntity_SloArn = ServiceLevelObjectiveEntity.AddMember("SloArn", smithyprelude.String)
-
-	ServiceOperationEntity_Service = ServiceOperationEntity.AddMember("Service", ServiceEntity)
-
-	ServiceOperationEntity_Operation = ServiceOperationEntity.AddMember("Operation", smithyprelude.String)
-
-	ServiceOperationEntity_MetricType = ServiceOperationEntity.AddMember("MetricType", smithyprelude.String)
-
-	CanaryEntity_CanaryName = CanaryEntity.AddMember("CanaryName", smithyprelude.String)
-
-	AuditTargetEntity_Service = AuditTargetEntity.AddMember("Service", ServiceEntity)
-
-	AuditTargetEntity_Slo = AuditTargetEntity.AddMember("Slo", ServiceLevelObjectiveEntity)
-
-	AuditTargetEntity_ServiceOperation = AuditTargetEntity.AddMember("ServiceOperation", ServiceOperationEntity)
-
-	AuditTargetEntity_Canary = AuditTargetEntity.AddMember("Canary", CanaryEntity)
-
-	AuditTarget_Type = AuditTarget.AddMember("Type", smithyprelude.String)
-
-	AuditTarget_Data = AuditTarget.AddMember("Data", AuditTargetEntity)
-
-	_AuditTargets_member = _AuditTargets.AddMember("member", AuditTarget)
-
-	_BatchDeleteResourceArnList_member = _BatchDeleteResourceArnList.AddMember("member", smithyprelude.String)
-
-	InstrumentationType_BREAKPOINT = InstrumentationType.AddMember("BREAKPOINT", smithyprelude.Unit)
-
-	InstrumentationType_PROBE = InstrumentationType.AddMember("PROBE", smithyprelude.Unit)
-
-	BatchDeleteByResourceArns_ResourceArns = BatchDeleteByResourceArns.AddMember("ResourceArns", _BatchDeleteResourceArnList)
-
-	BatchDeleteByResourceArns_InstrumentationType = BatchDeleteByResourceArns.AddMember("InstrumentationType", InstrumentationType)
-
-	BatchDeleteScope_Service = BatchDeleteScope.AddMember("Service", smithyprelude.String)
-
-	BatchDeleteScope_Environment = BatchDeleteScope.AddMember("Environment", smithyprelude.String)
-
-	BatchDeleteScope_InstrumentationType = BatchDeleteScope.AddMember("InstrumentationType", InstrumentationType)
-
-	BatchDeleteDeletionTarget_Scope = BatchDeleteDeletionTarget.AddMember("Scope", BatchDeleteScope)
-
-	BatchDeleteDeletionTarget_ResourceArns = BatchDeleteDeletionTarget.AddMember("ResourceArns", BatchDeleteByResourceArns)
-
-	BatchDeleteErrorCode_RESOURCE_NOT_FOUND = BatchDeleteErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	BatchDeleteErrorCode_ACCESS_DENIED = BatchDeleteErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	BatchDeleteErrorCode_INTERNAL_SERVICE_ERROR = BatchDeleteErrorCode.AddMember("INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
-
-	BatchDeleteError_ResourceArn = BatchDeleteError.AddMember("ResourceArn", smithyprelude.String)
-
-	BatchDeleteError_Code = BatchDeleteError.AddMember("Code", BatchDeleteErrorCode)
-
-	BatchDeleteError_Message = BatchDeleteError.AddMember("Message", smithyprelude.String)
-
-	_BatchDeleteErrorList_member = _BatchDeleteErrorList.AddMember("member", BatchDeleteError)
-
-	BatchDeleteSuccessfulDeletion_ResourceArn = BatchDeleteSuccessfulDeletion.AddMember("ResourceArn", smithyprelude.String)
-
-	BatchDeleteSuccessfulDeletion_SignalType = BatchDeleteSuccessfulDeletion.AddMember("SignalType", smithyprelude.String)
-
-	BatchDeleteSuccessfulDeletion_LocationHash = BatchDeleteSuccessfulDeletion.AddMember("LocationHash", smithyprelude.String)
-
-	_BatchDeleteSuccessfulDeletionList_member = _BatchDeleteSuccessfulDeletionList.AddMember("member", BatchDeleteSuccessfulDeletion)
-
-	BatchUpdateExclusionWindowsError_SloId = BatchUpdateExclusionWindowsError.AddMember("SloId", _ServiceLevelObjectiveId)
-
-	BatchUpdateExclusionWindowsError_ErrorCode = BatchUpdateExclusionWindowsError.AddMember("ErrorCode", _ExclusionWindowErrorCode)
-
-	BatchUpdateExclusionWindowsError_ErrorMessage = BatchUpdateExclusionWindowsError.AddMember("ErrorMessage", _ExclusionWindowErrorMessage)
-
-	_BatchUpdateExclusionWindowsErrors_member = _BatchUpdateExclusionWindowsErrors.AddMember("member", BatchUpdateExclusionWindowsError)
-
-	BurnRateConfiguration_LookBackWindowMinutes = BurnRateConfiguration.AddMember("LookBackWindowMinutes", _BurnRateLookBackWindowMinutes)
-
-	_BurnRateConfigurations_member = _BurnRateConfigurations.AddMember("member", BurnRateConfiguration)
-
-	DurationUnit_MINUTE = DurationUnit.AddMember("MINUTE", smithyprelude.Unit)
-
-	DurationUnit_HOUR = DurationUnit.AddMember("HOUR", smithyprelude.Unit)
-
-	DurationUnit_DAY = DurationUnit.AddMember("DAY", smithyprelude.Unit)
-
-	DurationUnit_MONTH = DurationUnit.AddMember("MONTH", smithyprelude.Unit)
-
-	CalendarInterval_StartTime = CalendarInterval.AddMember("StartTime", smithyprelude.Timestamp)
-
-	CalendarInterval_DurationUnit = CalendarInterval.AddMember("DurationUnit", DurationUnit)
-
-	CalendarInterval_Duration = CalendarInterval.AddMember("Duration", _CalendarIntervalDuration)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	CaptureLimitsConfig_MaxHits = CaptureLimitsConfig.AddMember("MaxHits", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxStringLength = CaptureLimitsConfig.AddMember("MaxStringLength", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxCollectionWidth = CaptureLimitsConfig.AddMember("MaxCollectionWidth", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxCollectionDepth = CaptureLimitsConfig.AddMember("MaxCollectionDepth", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxStackFrames = CaptureLimitsConfig.AddMember("MaxStackFrames", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxStackTraceSize = CaptureLimitsConfig.AddMember("MaxStackTraceSize", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxObjectDepth = CaptureLimitsConfig.AddMember("MaxObjectDepth", smithyprelude.Integer)
-
-	CaptureLimitsConfig_MaxFieldsPerObject = CaptureLimitsConfig.AddMember("MaxFieldsPerObject", smithyprelude.Integer)
-
-	CodeCaptureConfiguration_CaptureArguments = CodeCaptureConfiguration.AddMember("CaptureArguments", _StringList)
-
-	CodeCaptureConfiguration_CaptureReturn = CodeCaptureConfiguration.AddMember("CaptureReturn", smithyprelude.Boolean)
-
-	CodeCaptureConfiguration_CaptureStackTrace = CodeCaptureConfiguration.AddMember("CaptureStackTrace", smithyprelude.Boolean)
-
-	CodeCaptureConfiguration_CaptureLocals = CodeCaptureConfiguration.AddMember("CaptureLocals", _StringList)
-
-	CodeCaptureConfiguration_CaptureLimits = CodeCaptureConfiguration.AddMember("CaptureLimits", CaptureLimitsConfig)
-
-	CaptureConfiguration_CodeCapture = CaptureConfiguration.AddMember("CodeCapture", CodeCaptureConfiguration)
-
-	ChangeEventType_DEPLOYMENT = ChangeEventType.AddMember("DEPLOYMENT", smithyprelude.Unit)
-
-	ChangeEventType_CONFIGURATION = ChangeEventType.AddMember("CONFIGURATION", smithyprelude.Unit)
-
-	ChangeEvent_Timestamp = ChangeEvent.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	ChangeEvent_AccountId = ChangeEvent.AddMember("AccountId", _AwsAccountId)
-
-	ChangeEvent_Region = ChangeEvent.AddMember("Region", smithyprelude.String)
-
-	ChangeEvent_Entity = ChangeEvent.AddMember("Entity", _Attributes)
-
-	ChangeEvent_ChangeEventType = ChangeEvent.AddMember("ChangeEventType", ChangeEventType)
-
-	ChangeEvent_EventId = ChangeEvent.AddMember("EventId", smithyprelude.String)
-
-	ChangeEvent_UserName = ChangeEvent.AddMember("UserName", smithyprelude.String)
-
-	ChangeEvent_EventName = ChangeEvent.AddMember("EventName", smithyprelude.String)
-
-	_ChangeEvents_member = _ChangeEvents.AddMember("member", ChangeEvent)
-
-	ProgrammingLanguage_JAVA = ProgrammingLanguage.AddMember("JAVA", smithyprelude.Unit)
-
-	ProgrammingLanguage_PYTHON = ProgrammingLanguage.AddMember("PYTHON", smithyprelude.Unit)
-
-	ProgrammingLanguage_JAVASCRIPT = ProgrammingLanguage.AddMember("JAVASCRIPT", smithyprelude.Unit)
-
-	CodeLocation_Language = CodeLocation.AddMember("Language", ProgrammingLanguage)
-
-	CodeLocation_CodeUnit = CodeLocation.AddMember("CodeUnit", smithyprelude.String)
-
-	CodeLocation_ClassName = CodeLocation.AddMember("ClassName", smithyprelude.String)
-
-	CodeLocation_MethodName = CodeLocation.AddMember("MethodName", smithyprelude.String)
-
-	CodeLocation_FilePath = CodeLocation.AddMember("FilePath", smithyprelude.String)
-
-	CodeLocation_LineNumber = CodeLocation.AddMember("LineNumber", smithyprelude.Integer)
-
-	CompositeSliComponent_OperationName = CompositeSliComponent.AddMember("OperationName", _OperationName)
-
-	_CompositeSliComponents_member = _CompositeSliComponents.AddMember("member", CompositeSliComponent)
-
-	SelectionType_EXPLICIT = SelectionType.AddMember("EXPLICIT", smithyprelude.Unit)
-
-	SelectionType_PREFIX = SelectionType.AddMember("PREFIX", smithyprelude.Unit)
-
-	SelectionType_REGEX = SelectionType.AddMember("REGEX", smithyprelude.Unit)
-
-	SelectionConfig_Type = SelectionConfig.AddMember("Type", SelectionType)
-
-	SelectionConfig_Pattern = SelectionConfig.AddMember("Pattern", _SelectionPattern)
-
-	CompositeSliConfig_SelectionConfig = CompositeSliConfig.AddMember("SelectionConfig", SelectionConfig)
-
-	CompositeSliConfig_Components = CompositeSliConfig.AddMember("Components", _CompositeSliComponents)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	DependencyConfig_DependencyKeyAttributes = DependencyConfig.AddMember("DependencyKeyAttributes", _Attributes)
-
-	DependencyConfig_DependencyOperationName = DependencyConfig.AddMember("DependencyOperationName", _OperationName)
-
-	DetailLevel_BRIEF = DetailLevel.AddMember("BRIEF", smithyprelude.Unit)
-
-	DetailLevel_DETAILED = DetailLevel.AddMember("DETAILED", smithyprelude.Unit)
-
-	_DynamicInstrumentationAttributeFilterGroup_key = _DynamicInstrumentationAttributeFilterGroup.AddMember("key", smithyprelude.String)
-
-	_DynamicInstrumentationAttributeFilterGroup_value = _DynamicInstrumentationAttributeFilterGroup.AddMember("value", smithyprelude.String)
-
-	_DynamicInstrumentationAttributeFilters_member = _DynamicInstrumentationAttributeFilters.AddMember("member", _DynamicInstrumentationAttributeFilterGroup)
-
-	DynamicInstrumentationDeletionStatus_DELETED = DynamicInstrumentationDeletionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DynamicInstrumentationSignalType_SNAPSHOT = DynamicInstrumentationSignalType.AddMember("SNAPSHOT", smithyprelude.Unit)
-
-	EvaluationType_PERIOD_BASED = EvaluationType.AddMember("PERIOD_BASED", smithyprelude.Unit)
-
-	EvaluationType_REQUEST_BASED = EvaluationType.AddMember("REQUEST_BASED", smithyprelude.Unit)
-
-	Window_DurationUnit = Window.AddMember("DurationUnit", DurationUnit)
-
-	Window_Duration = Window.AddMember("Duration", _ExclusionDuration)
-
-	RecurrenceRule_Expression = RecurrenceRule.AddMember("Expression", _Expression)
-
-	ExclusionWindow_Window = ExclusionWindow.AddMember("Window", Window)
-
-	ExclusionWindow_StartTime = ExclusionWindow.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ExclusionWindow_RecurrenceRule = ExclusionWindow.AddMember("RecurrenceRule", RecurrenceRule)
-
-	ExclusionWindow_Reason = ExclusionWindow.AddMember("Reason", _ExclusionReason)
-
-	_ExclusionWindows_member = _ExclusionWindows.AddMember("member", ExclusionWindow)
-
-	RollingInterval_DurationUnit = RollingInterval.AddMember("DurationUnit", DurationUnit)
-
-	RollingInterval_Duration = RollingInterval.AddMember("Duration", _RollingIntervalDuration)
-
-	Interval_RollingInterval = Interval.AddMember("RollingInterval", RollingInterval)
-
-	Interval_CalendarInterval = Interval.AddMember("CalendarInterval", CalendarInterval)
-
-	Goal_Interval = Goal.AddMember("Interval", Interval)
-
-	Goal_AttainmentGoal = Goal.AddMember("AttainmentGoal", _AttainmentGoal)
-
-	Goal_WarningThreshold = Goal.AddMember("WarningThreshold", _WarningThreshold)
-
-	_GroupingSourceKeyStringList_member = _GroupingSourceKeyStringList.AddMember("member", _GroupingString)
-
-	GroupingAttributeDefinition_GroupingName = GroupingAttributeDefinition.AddMember("GroupingName", _GroupingString)
-
-	GroupingAttributeDefinition_GroupingSourceKeys = GroupingAttributeDefinition.AddMember("GroupingSourceKeys", _GroupingSourceKeyStringList)
-
-	GroupingAttributeDefinition_DefaultGroupingValue = GroupingAttributeDefinition.AddMember("DefaultGroupingValue", _GroupingString)
-
-	_GroupingAttributeDefinitions_member = _GroupingAttributeDefinitions.AddMember("member", GroupingAttributeDefinition)
-
-	GroupingConfiguration_GroupingAttributeDefinitions = GroupingConfiguration.AddMember("GroupingAttributeDefinitions", _GroupingAttributeDefinitions)
-
-	GroupingConfiguration_UpdatedAt = GroupingConfiguration.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	Location_CodeLocation = Location.AddMember("CodeLocation", CodeLocation)
-
-	InstrumentationConfiguration_InstrumentationType = InstrumentationConfiguration.AddMember("InstrumentationType", InstrumentationType)
-
-	InstrumentationConfiguration_Service = InstrumentationConfiguration.AddMember("Service", smithyprelude.String)
-
-	InstrumentationConfiguration_Environment = InstrumentationConfiguration.AddMember("Environment", smithyprelude.String)
-
-	InstrumentationConfiguration_SignalType = InstrumentationConfiguration.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	InstrumentationConfiguration_Location = InstrumentationConfiguration.AddMember("Location", Location)
-
-	InstrumentationConfiguration_LocationHash = InstrumentationConfiguration.AddMember("LocationHash", smithyprelude.String)
-
-	InstrumentationConfiguration_Description = InstrumentationConfiguration.AddMember("Description", smithyprelude.String)
-
-	InstrumentationConfiguration_ExpiresAt = InstrumentationConfiguration.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	InstrumentationConfiguration_AttributeFilters = InstrumentationConfiguration.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
-
-	InstrumentationConfiguration_CaptureConfiguration = InstrumentationConfiguration.AddMember("CaptureConfiguration", CaptureConfiguration)
-
-	InstrumentationConfiguration_CreatedAt = InstrumentationConfiguration.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	InstrumentationConfiguration_ARN = InstrumentationConfiguration.AddMember("ARN", _InstrumentationConfigurationArn)
-
-	InstrumentationConfigurationStatus_READY = InstrumentationConfigurationStatus.AddMember("READY", smithyprelude.Unit)
-
-	InstrumentationConfigurationStatus_ERROR = InstrumentationConfigurationStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	InstrumentationConfigurationStatus_ACTIVE = InstrumentationConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	InstrumentationConfigurationStatus_DISABLED = InstrumentationConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	InstrumentationErrorCause_FILE_NOT_FOUND = InstrumentationErrorCause.AddMember("FILE_NOT_FOUND", smithyprelude.Unit)
-
-	InstrumentationErrorCause_METHOD_NOT_FOUND = InstrumentationErrorCause.AddMember("METHOD_NOT_FOUND", smithyprelude.Unit)
-
-	InstrumentationErrorCause_LINE_NOT_EXECUTABLE = InstrumentationErrorCause.AddMember("LINE_NOT_EXECUTABLE", smithyprelude.Unit)
-
-	InstrumentationErrorCause_OVERLOADED_METHODS = InstrumentationErrorCause.AddMember("OVERLOADED_METHODS", smithyprelude.Unit)
-
-	InstrumentationErrorCause_LANGUAGE_MISMATCH = InstrumentationErrorCause.AddMember("LANGUAGE_MISMATCH", smithyprelude.Unit)
-
-	InstrumentationErrorCause_RUNTIME_ERROR = InstrumentationErrorCause.AddMember("RUNTIME_ERROR", smithyprelude.Unit)
-
-	InstrumentationConfigurationStatusReport_InstrumentationType = InstrumentationConfigurationStatusReport.AddMember("InstrumentationType", InstrumentationType)
-
-	InstrumentationConfigurationStatusReport_SignalType = InstrumentationConfigurationStatusReport.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	InstrumentationConfigurationStatusReport_LocationHash = InstrumentationConfigurationStatusReport.AddMember("LocationHash", smithyprelude.String)
-
-	InstrumentationConfigurationStatusReport_Status = InstrumentationConfigurationStatusReport.AddMember("Status", InstrumentationConfigurationStatus)
-
-	InstrumentationConfigurationStatusReport_Time = InstrumentationConfigurationStatusReport.AddMember("Time", smithyprelude.Timestamp)
-
-	InstrumentationConfigurationStatusReport_ErrorCause = InstrumentationConfigurationStatusReport.AddMember("ErrorCause", InstrumentationErrorCause)
-
-	_InstrumentationConfigurationStatusList_member = _InstrumentationConfigurationStatusList.AddMember("member", InstrumentationConfigurationStatusReport)
-
-	InstrumentationConfigurationWithoutServiceEnv_InstrumentationType = InstrumentationConfigurationWithoutServiceEnv.AddMember("InstrumentationType", InstrumentationType)
-
-	InstrumentationConfigurationWithoutServiceEnv_SignalType = InstrumentationConfigurationWithoutServiceEnv.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	InstrumentationConfigurationWithoutServiceEnv_Location = InstrumentationConfigurationWithoutServiceEnv.AddMember("Location", Location)
-
-	InstrumentationConfigurationWithoutServiceEnv_LocationHash = InstrumentationConfigurationWithoutServiceEnv.AddMember("LocationHash", smithyprelude.String)
-
-	InstrumentationConfigurationWithoutServiceEnv_Description = InstrumentationConfigurationWithoutServiceEnv.AddMember("Description", smithyprelude.String)
-
-	InstrumentationConfigurationWithoutServiceEnv_ExpiresAt = InstrumentationConfigurationWithoutServiceEnv.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	InstrumentationConfigurationWithoutServiceEnv_AttributeFilters = InstrumentationConfigurationWithoutServiceEnv.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
-
-	InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration = InstrumentationConfigurationWithoutServiceEnv.AddMember("CaptureConfiguration", CaptureConfiguration)
-
-	InstrumentationConfigurationWithoutServiceEnv_CreatedAt = InstrumentationConfigurationWithoutServiceEnv.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	InstrumentationConfigurationWithoutServiceEnv_ARN = InstrumentationConfigurationWithoutServiceEnv.AddMember("ARN", _InstrumentationConfigurationArn)
-
-	_InstrumentationConfigurationsWithoutServiceEnv_member = _InstrumentationConfigurationsWithoutServiceEnv.AddMember("member", InstrumentationConfigurationWithoutServiceEnv)
-
-	InstrumentationStatusEvent_Time = InstrumentationStatusEvent.AddMember("Time", smithyprelude.Timestamp)
-
-	InstrumentationStatusEvent_ErrorCause = InstrumentationStatusEvent.AddMember("ErrorCause", InstrumentationErrorCause)
-
-	_InstrumentationStatusEventList_member = _InstrumentationStatusEventList.AddMember("member", InstrumentationStatusEvent)
-
-	_LatestChangeEvents_member = _LatestChangeEvents.AddMember("member", ChangeEvent)
-
-	LocationIdentifier_CodeLocation = LocationIdentifier.AddMember("CodeLocation", CodeLocation)
-
-	LocationIdentifier_LocationHash = LocationIdentifier.AddMember("LocationHash", smithyprelude.String)
-
-	_LogGroupReferences_member = _LogGroupReferences.AddMember("member", _Attributes)
-
-	MetricReference_Namespace = MetricReference.AddMember("Namespace", _Namespace)
-
-	MetricReference_MetricType = MetricReference.AddMember("MetricType", _MetricType)
-
-	MetricReference_Dimensions = MetricReference.AddMember("Dimensions", _Dimensions)
-
-	MetricReference_MetricName = MetricReference.AddMember("MetricName", _MetricName)
-
-	MetricReference_AccountId = MetricReference.AddMember("AccountId", _AwsAccountId)
-
-	_MetricReferences_member = _MetricReferences.AddMember("member", MetricReference)
-
-	MetricSource_MetricSourceKeyAttributes = MetricSource.AddMember("MetricSourceKeyAttributes", _Attributes)
-
-	MetricSource_MetricSourceAttributes = MetricSource.AddMember("MetricSourceAttributes", _Attributes)
-
-	MetricSourceType_SERVICE_OPERATION = MetricSourceType.AddMember("SERVICE_OPERATION", smithyprelude.Unit)
-
-	MetricSourceType_CLOUDWATCH_METRIC = MetricSourceType.AddMember("CLOUDWATCH_METRIC", smithyprelude.Unit)
-
-	MetricSourceType_SERVICE_DEPENDENCY = MetricSourceType.AddMember("SERVICE_DEPENDENCY", smithyprelude.Unit)
-
-	MetricSourceType_APPMONITOR = MetricSourceType.AddMember("APPMONITOR", smithyprelude.Unit)
-
-	MetricSourceType_CANARY = MetricSourceType.AddMember("CANARY", smithyprelude.Unit)
-
-	MetricSourceType_SERVICE = MetricSourceType.AddMember("SERVICE", smithyprelude.Unit)
-
-	_MetricSourceTypes_member = _MetricSourceTypes.AddMember("member", MetricSourceType)
-
-	MonitoredRequestCountMetricDataQueries_GoodCountMetric = MonitoredRequestCountMetricDataQueries.AddMember("GoodCountMetric", _MetricDataQueries)
-
-	MonitoredRequestCountMetricDataQueries_BadCountMetric = MonitoredRequestCountMetricDataQueries.AddMember("BadCountMetric", _MetricDataQueries)
-
-	ServiceLevelIndicatorMetricType_LATENCY = ServiceLevelIndicatorMetricType.AddMember("LATENCY", smithyprelude.Unit)
-
-	ServiceLevelIndicatorMetricType_AVAILABILITY = ServiceLevelIndicatorMetricType.AddMember("AVAILABILITY", smithyprelude.Unit)
-
-	RequestBasedServiceLevelIndicatorMetric_KeyAttributes = RequestBasedServiceLevelIndicatorMetric.AddMember("KeyAttributes", _Attributes)
-
-	RequestBasedServiceLevelIndicatorMetric_OperationName = RequestBasedServiceLevelIndicatorMetric.AddMember("OperationName", _OperationName)
-
-	RequestBasedServiceLevelIndicatorMetric_MetricType = RequestBasedServiceLevelIndicatorMetric.AddMember("MetricType", ServiceLevelIndicatorMetricType)
-
-	RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric = RequestBasedServiceLevelIndicatorMetric.AddMember("TotalRequestCountMetric", _MetricDataQueries)
-
-	RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric = RequestBasedServiceLevelIndicatorMetric.AddMember("MonitoredRequestCountMetric", MonitoredRequestCountMetricDataQueries)
-
-	RequestBasedServiceLevelIndicatorMetric_DependencyConfig = RequestBasedServiceLevelIndicatorMetric.AddMember("DependencyConfig", DependencyConfig)
-
-	RequestBasedServiceLevelIndicatorMetric_MetricSource = RequestBasedServiceLevelIndicatorMetric.AddMember("MetricSource", MetricSource)
-
-	RequestBasedServiceLevelIndicatorMetric_CompositeSliConfig = RequestBasedServiceLevelIndicatorMetric.AddMember("CompositeSliConfig", CompositeSliConfig)
-
-	ServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO = ServiceLevelIndicatorComparisonOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	ServiceLevelIndicatorComparisonOperator_GREATER_THAN = ServiceLevelIndicatorComparisonOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ServiceLevelIndicatorComparisonOperator_LESS_THAN = ServiceLevelIndicatorComparisonOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	ServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO = ServiceLevelIndicatorComparisonOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	RequestBasedServiceLevelIndicator_RequestBasedSliMetric = RequestBasedServiceLevelIndicator.AddMember("RequestBasedSliMetric", RequestBasedServiceLevelIndicatorMetric)
-
-	RequestBasedServiceLevelIndicator_MetricThreshold = RequestBasedServiceLevelIndicator.AddMember("MetricThreshold", _ServiceLevelIndicatorMetricThreshold)
-
-	RequestBasedServiceLevelIndicator_ComparisonOperator = RequestBasedServiceLevelIndicator.AddMember("ComparisonOperator", ServiceLevelIndicatorComparisonOperator)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("KeyAttributes", _Attributes)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_OperationName = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("OperationName", _OperationName)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_MetricType = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("MetricType", ServiceLevelIndicatorMetricType)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("TotalRequestCountMetric", _MetricDataQueries)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("MonitoredRequestCountMetric", MonitoredRequestCountMetricDataQueries)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("DependencyConfig", DependencyConfig)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_MetricSource = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("MetricSource", MetricSource)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_MetricName = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("MetricName", _MetricName)
-
-	RequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig = RequestBasedServiceLevelIndicatorMetricConfig.AddMember("CompositeSliConfig", CompositeSliConfig)
-
-	RequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig = RequestBasedServiceLevelIndicatorConfig.AddMember("RequestBasedSliMetricConfig", RequestBasedServiceLevelIndicatorMetricConfig)
-
-	RequestBasedServiceLevelIndicatorConfig_MetricThreshold = RequestBasedServiceLevelIndicatorConfig.AddMember("MetricThreshold", _ServiceLevelIndicatorMetricThreshold)
-
-	RequestBasedServiceLevelIndicatorConfig_ComparisonOperator = RequestBasedServiceLevelIndicatorConfig.AddMember("ComparisonOperator", ServiceLevelIndicatorComparisonOperator)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ResourceType)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _ResourceId)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _FaultDescription)
-
-	ServiceGroup_GroupName = ServiceGroup.AddMember("GroupName", _GroupName)
-
-	ServiceGroup_GroupValue = ServiceGroup.AddMember("GroupValue", _GroupValue)
-
-	ServiceGroup_GroupSource = ServiceGroup.AddMember("GroupSource", _GroupSource)
-
-	ServiceGroup_GroupIdentifier = ServiceGroup.AddMember("GroupIdentifier", _GroupIdentifier)
-
-	_ServiceGroups_member = _ServiceGroups.AddMember("member", ServiceGroup)
-
-	Service_KeyAttributes = Service.AddMember("KeyAttributes", _Attributes)
-
-	Service_AttributeMaps = Service.AddMember("AttributeMaps", _AttributeMaps)
-
-	Service_ServiceGroups = Service.AddMember("ServiceGroups", _ServiceGroups)
-
-	Service_MetricReferences = Service.AddMember("MetricReferences", _MetricReferences)
-
-	Service_LogGroupReferences = Service.AddMember("LogGroupReferences", _LogGroupReferences)
-
-	ServiceDependency_OperationName = ServiceDependency.AddMember("OperationName", _OperationName)
-
-	ServiceDependency_DependencyKeyAttributes = ServiceDependency.AddMember("DependencyKeyAttributes", _Attributes)
-
-	ServiceDependency_DependencyOperationName = ServiceDependency.AddMember("DependencyOperationName", _OperationName)
-
-	ServiceDependency_MetricReferences = ServiceDependency.AddMember("MetricReferences", _MetricReferences)
-
-	_ServiceDependencies_member = _ServiceDependencies.AddMember("member", ServiceDependency)
-
-	ServiceDependent_OperationName = ServiceDependent.AddMember("OperationName", _OperationName)
-
-	ServiceDependent_DependentKeyAttributes = ServiceDependent.AddMember("DependentKeyAttributes", _Attributes)
-
-	ServiceDependent_DependentOperationName = ServiceDependent.AddMember("DependentOperationName", _OperationName)
-
-	ServiceDependent_MetricReferences = ServiceDependent.AddMember("MetricReferences", _MetricReferences)
-
-	_ServiceDependents_member = _ServiceDependents.AddMember("member", ServiceDependent)
-
-	ServiceLevelIndicatorMetric_KeyAttributes = ServiceLevelIndicatorMetric.AddMember("KeyAttributes", _Attributes)
-
-	ServiceLevelIndicatorMetric_OperationName = ServiceLevelIndicatorMetric.AddMember("OperationName", _OperationName)
-
-	ServiceLevelIndicatorMetric_MetricType = ServiceLevelIndicatorMetric.AddMember("MetricType", ServiceLevelIndicatorMetricType)
-
-	ServiceLevelIndicatorMetric_MetricDataQueries = ServiceLevelIndicatorMetric.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	ServiceLevelIndicatorMetric_DependencyConfig = ServiceLevelIndicatorMetric.AddMember("DependencyConfig", DependencyConfig)
-
-	ServiceLevelIndicatorMetric_MetricSource = ServiceLevelIndicatorMetric.AddMember("MetricSource", MetricSource)
-
-	ServiceLevelIndicatorMetric_CompositeSliConfig = ServiceLevelIndicatorMetric.AddMember("CompositeSliConfig", CompositeSliConfig)
-
-	ServiceLevelIndicator_SliMetric = ServiceLevelIndicator.AddMember("SliMetric", ServiceLevelIndicatorMetric)
-
-	ServiceLevelIndicator_MetricThreshold = ServiceLevelIndicator.AddMember("MetricThreshold", _ServiceLevelIndicatorMetricThreshold)
-
-	ServiceLevelIndicator_ComparisonOperator = ServiceLevelIndicator.AddMember("ComparisonOperator", ServiceLevelIndicatorComparisonOperator)
-
-	ServiceLevelIndicatorMetricConfig_KeyAttributes = ServiceLevelIndicatorMetricConfig.AddMember("KeyAttributes", _Attributes)
-
-	ServiceLevelIndicatorMetricConfig_OperationName = ServiceLevelIndicatorMetricConfig.AddMember("OperationName", _OperationName)
-
-	ServiceLevelIndicatorMetricConfig_MetricType = ServiceLevelIndicatorMetricConfig.AddMember("MetricType", ServiceLevelIndicatorMetricType)
-
-	ServiceLevelIndicatorMetricConfig_MetricName = ServiceLevelIndicatorMetricConfig.AddMember("MetricName", _MetricName)
-
-	ServiceLevelIndicatorMetricConfig_Statistic = ServiceLevelIndicatorMetricConfig.AddMember("Statistic", _ServiceLevelIndicatorStatistic)
-
-	ServiceLevelIndicatorMetricConfig_PeriodSeconds = ServiceLevelIndicatorMetricConfig.AddMember("PeriodSeconds", _SLIPeriodSeconds)
-
-	ServiceLevelIndicatorMetricConfig_MetricSource = ServiceLevelIndicatorMetricConfig.AddMember("MetricSource", MetricSource)
-
-	ServiceLevelIndicatorMetricConfig_MetricDataQueries = ServiceLevelIndicatorMetricConfig.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	ServiceLevelIndicatorMetricConfig_DependencyConfig = ServiceLevelIndicatorMetricConfig.AddMember("DependencyConfig", DependencyConfig)
-
-	ServiceLevelIndicatorMetricConfig_CompositeSliConfig = ServiceLevelIndicatorMetricConfig.AddMember("CompositeSliConfig", CompositeSliConfig)
-
-	ServiceLevelIndicatorConfig_SliMetricConfig = ServiceLevelIndicatorConfig.AddMember("SliMetricConfig", ServiceLevelIndicatorMetricConfig)
-
-	ServiceLevelIndicatorConfig_MetricThreshold = ServiceLevelIndicatorConfig.AddMember("MetricThreshold", _ServiceLevelIndicatorMetricThreshold)
-
-	ServiceLevelIndicatorConfig_ComparisonOperator = ServiceLevelIndicatorConfig.AddMember("ComparisonOperator", ServiceLevelIndicatorComparisonOperator)
-
-	ServiceLevelObjective_Arn = ServiceLevelObjective.AddMember("Arn", _ServiceLevelObjectiveArn)
-
-	ServiceLevelObjective_Name = ServiceLevelObjective.AddMember("Name", _ServiceLevelObjectiveName)
-
-	ServiceLevelObjective_Description = ServiceLevelObjective.AddMember("Description", _ServiceLevelObjectiveDescription)
-
-	ServiceLevelObjective_CreatedTime = ServiceLevelObjective.AddMember("CreatedTime", smithyprelude.Timestamp)
-
-	ServiceLevelObjective_LastUpdatedTime = ServiceLevelObjective.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
-
-	ServiceLevelObjective_Sli = ServiceLevelObjective.AddMember("Sli", ServiceLevelIndicator)
-
-	ServiceLevelObjective_RequestBasedSli = ServiceLevelObjective.AddMember("RequestBasedSli", RequestBasedServiceLevelIndicator)
-
-	ServiceLevelObjective_EvaluationType = ServiceLevelObjective.AddMember("EvaluationType", EvaluationType)
-
-	ServiceLevelObjective_Goal = ServiceLevelObjective.AddMember("Goal", Goal)
-
-	ServiceLevelObjective_BurnRateConfigurations = ServiceLevelObjective.AddMember("BurnRateConfigurations", _BurnRateConfigurations)
-
-	ServiceLevelObjective_MetricSourceType = ServiceLevelObjective.AddMember("MetricSourceType", MetricSourceType)
-
-	ServiceLevelObjective_AutoInvestigationEnabled = ServiceLevelObjective.AddMember("AutoInvestigationEnabled", smithyprelude.Boolean)
-
-	ServiceLevelObjectiveBudgetStatus_OK = ServiceLevelObjectiveBudgetStatus.AddMember("OK", smithyprelude.Unit)
-
-	ServiceLevelObjectiveBudgetStatus_WARNING = ServiceLevelObjectiveBudgetStatus.AddMember("WARNING", smithyprelude.Unit)
-
-	ServiceLevelObjectiveBudgetStatus_BREACHED = ServiceLevelObjectiveBudgetStatus.AddMember("BREACHED", smithyprelude.Unit)
-
-	ServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA = ServiceLevelObjectiveBudgetStatus.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
-
-	ServiceLevelObjectiveBudgetReport_Arn = ServiceLevelObjectiveBudgetReport.AddMember("Arn", _ServiceLevelObjectiveArn)
-
-	ServiceLevelObjectiveBudgetReport_Name = ServiceLevelObjectiveBudgetReport.AddMember("Name", _ServiceLevelObjectiveName)
-
-	ServiceLevelObjectiveBudgetReport_EvaluationType = ServiceLevelObjectiveBudgetReport.AddMember("EvaluationType", EvaluationType)
-
-	ServiceLevelObjectiveBudgetReport_BudgetStatus = ServiceLevelObjectiveBudgetReport.AddMember("BudgetStatus", ServiceLevelObjectiveBudgetStatus)
-
-	ServiceLevelObjectiveBudgetReport_Attainment = ServiceLevelObjectiveBudgetReport.AddMember("Attainment", _Attainment)
-
-	ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds = ServiceLevelObjectiveBudgetReport.AddMember("TotalBudgetSeconds", _TotalBudgetSeconds)
-
-	ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining = ServiceLevelObjectiveBudgetReport.AddMember("BudgetSecondsRemaining", _BudgetSecondsRemaining)
-
-	ServiceLevelObjectiveBudgetReport_TotalBudgetRequests = ServiceLevelObjectiveBudgetReport.AddMember("TotalBudgetRequests", _TotalBudgetRequests)
-
-	ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining = ServiceLevelObjectiveBudgetReport.AddMember("BudgetRequestsRemaining", _BudgetRequestsRemaining)
-
-	ServiceLevelObjectiveBudgetReport_Sli = ServiceLevelObjectiveBudgetReport.AddMember("Sli", ServiceLevelIndicator)
-
-	ServiceLevelObjectiveBudgetReport_RequestBasedSli = ServiceLevelObjectiveBudgetReport.AddMember("RequestBasedSli", RequestBasedServiceLevelIndicator)
-
-	ServiceLevelObjectiveBudgetReport_Goal = ServiceLevelObjectiveBudgetReport.AddMember("Goal", Goal)
-
-	ServiceLevelObjectiveBudgetReportError_Name = ServiceLevelObjectiveBudgetReportError.AddMember("Name", _ServiceLevelObjectiveName)
-
-	ServiceLevelObjectiveBudgetReportError_Arn = ServiceLevelObjectiveBudgetReportError.AddMember("Arn", _ServiceLevelObjectiveArn)
-
-	ServiceLevelObjectiveBudgetReportError_ErrorCode = ServiceLevelObjectiveBudgetReportError.AddMember("ErrorCode", _ServiceLevelObjectiveBudgetReportErrorCode)
-
-	ServiceLevelObjectiveBudgetReportError_ErrorMessage = ServiceLevelObjectiveBudgetReportError.AddMember("ErrorMessage", _ServiceLevelObjectiveBudgetReportErrorMessage)
-
-	_ServiceLevelObjectiveBudgetReportErrors_member = _ServiceLevelObjectiveBudgetReportErrors.AddMember("member", ServiceLevelObjectiveBudgetReportError)
-
-	_ServiceLevelObjectiveBudgetReports_member = _ServiceLevelObjectiveBudgetReports.AddMember("member", ServiceLevelObjectiveBudgetReport)
-
-	_ServiceLevelObjectiveIds_member = _ServiceLevelObjectiveIds.AddMember("member", smithyprelude.String)
-
-	ServiceLevelObjectiveSummary_Arn = ServiceLevelObjectiveSummary.AddMember("Arn", _ServiceLevelObjectiveArn)
-
-	ServiceLevelObjectiveSummary_Name = ServiceLevelObjectiveSummary.AddMember("Name", _ServiceLevelObjectiveName)
-
-	ServiceLevelObjectiveSummary_KeyAttributes = ServiceLevelObjectiveSummary.AddMember("KeyAttributes", _Attributes)
-
-	ServiceLevelObjectiveSummary_OperationName = ServiceLevelObjectiveSummary.AddMember("OperationName", _OperationName)
-
-	ServiceLevelObjectiveSummary_DependencyConfig = ServiceLevelObjectiveSummary.AddMember("DependencyConfig", DependencyConfig)
-
-	ServiceLevelObjectiveSummary_CreatedTime = ServiceLevelObjectiveSummary.AddMember("CreatedTime", smithyprelude.Timestamp)
-
-	ServiceLevelObjectiveSummary_EvaluationType = ServiceLevelObjectiveSummary.AddMember("EvaluationType", EvaluationType)
-
-	ServiceLevelObjectiveSummary_MetricSourceType = ServiceLevelObjectiveSummary.AddMember("MetricSourceType", MetricSourceType)
-
-	ServiceLevelObjectiveSummary_MetricSource = ServiceLevelObjectiveSummary.AddMember("MetricSource", MetricSource)
-
-	ServiceLevelObjectiveSummary_CompositeSliConfig = ServiceLevelObjectiveSummary.AddMember("CompositeSliConfig", CompositeSliConfig)
-
-	_ServiceLevelObjectiveSummaries_member = _ServiceLevelObjectiveSummaries.AddMember("member", ServiceLevelObjectiveSummary)
-
-	ServiceOperation_Name = ServiceOperation.AddMember("Name", _OperationName)
-
-	ServiceOperation_MetricReferences = ServiceOperation.AddMember("MetricReferences", _MetricReferences)
-
-	_ServiceOperations_member = _ServiceOperations.AddMember("member", ServiceOperation)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceState_AttributeFilters = ServiceState.AddMember("AttributeFilters", _AttributeFilters)
-
-	ServiceState_Service = ServiceState.AddMember("Service", _Attributes)
-
-	ServiceState_LatestChangeEvents = ServiceState.AddMember("LatestChangeEvents", _LatestChangeEvents)
-
-	_ServiceStates_member = _ServiceStates.AddMember("member", ServiceState)
-
-	ServiceSummary_KeyAttributes = ServiceSummary.AddMember("KeyAttributes", _Attributes)
-
-	ServiceSummary_AttributeMaps = ServiceSummary.AddMember("AttributeMaps", _AttributeMaps)
-
-	ServiceSummary_MetricReferences = ServiceSummary.AddMember("MetricReferences", _MetricReferences)
-
-	ServiceSummary_ServiceGroups = ServiceSummary.AddMember("ServiceGroups", _ServiceGroups)
-
-	_ServiceSummaries_member = _ServiceSummaries.AddMember("member", ServiceSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	UnprocessedStatusEventFailureReason_THROTTLED = UnprocessedStatusEventFailureReason.AddMember("THROTTLED", smithyprelude.Unit)
-
-	UnprocessedStatusEventFailureReason_INTERNAL_ERROR = UnprocessedStatusEventFailureReason.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	UnprocessedStatusEventFailureReason_VALIDATION_ERROR = UnprocessedStatusEventFailureReason.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
-
-	UnprocessedStatusEvent_InstrumentationType = UnprocessedStatusEvent.AddMember("InstrumentationType", InstrumentationType)
-
-	UnprocessedStatusEvent_SignalType = UnprocessedStatusEvent.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	UnprocessedStatusEvent_LocationHash = UnprocessedStatusEvent.AddMember("LocationHash", smithyprelude.String)
-
-	UnprocessedStatusEvent_Status = UnprocessedStatusEvent.AddMember("Status", InstrumentationConfigurationStatus)
-
-	UnprocessedStatusEvent_Time = UnprocessedStatusEvent.AddMember("Time", smithyprelude.Timestamp)
-
-	UnprocessedStatusEvent_FailedReason = UnprocessedStatusEvent.AddMember("FailedReason", UnprocessedStatusEventFailureReason)
-
-	_UnprocessedStatusEventList_member = _UnprocessedStatusEventList.AddMember("member", UnprocessedStatusEvent)
-
-	ValidationException_message = ValidationException.AddMember("message", _ValidationExceptionMessage)
-
-	BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget = BatchDeleteInstrumentationConfigurationsRequest.AddMember("DeletionTarget", BatchDeleteDeletionTarget)
-
-	BatchDeleteInstrumentationConfigurationsResponse_DeletedCount = BatchDeleteInstrumentationConfigurationsResponse.AddMember("DeletedCount", smithyprelude.Integer)
-
-	BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions = BatchDeleteInstrumentationConfigurationsResponse.AddMember("SuccessfulDeletions", _BatchDeleteSuccessfulDeletionList)
-
-	BatchDeleteInstrumentationConfigurationsResponse_Errors = BatchDeleteInstrumentationConfigurationsResponse.AddMember("Errors", _BatchDeleteErrorList)
-
-	BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp = BatchGetServiceLevelObjectiveBudgetReportInput.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	BatchGetServiceLevelObjectiveBudgetReportInput_SloIds = BatchGetServiceLevelObjectiveBudgetReportInput.AddMember("SloIds", _ServiceLevelObjectiveIds)
-
-	BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp = BatchGetServiceLevelObjectiveBudgetReportOutput.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	BatchGetServiceLevelObjectiveBudgetReportOutput_Reports = BatchGetServiceLevelObjectiveBudgetReportOutput.AddMember("Reports", _ServiceLevelObjectiveBudgetReports)
-
-	BatchGetServiceLevelObjectiveBudgetReportOutput_Errors = BatchGetServiceLevelObjectiveBudgetReportOutput.AddMember("Errors", _ServiceLevelObjectiveBudgetReportErrors)
-
-	BatchUpdateExclusionWindowsInput_SloIds = BatchUpdateExclusionWindowsInput.AddMember("SloIds", _ServiceLevelObjectiveIds)
-
-	BatchUpdateExclusionWindowsInput_AddExclusionWindows = BatchUpdateExclusionWindowsInput.AddMember("AddExclusionWindows", _ExclusionWindows)
-
-	BatchUpdateExclusionWindowsInput_RemoveExclusionWindows = BatchUpdateExclusionWindowsInput.AddMember("RemoveExclusionWindows", _ExclusionWindows)
-
-	BatchUpdateExclusionWindowsOutput_SloIds = BatchUpdateExclusionWindowsOutput.AddMember("SloIds", _ServiceLevelObjectiveIds)
-
-	BatchUpdateExclusionWindowsOutput_Errors = BatchUpdateExclusionWindowsOutput.AddMember("Errors", _BatchUpdateExclusionWindowsErrors)
-
-	CreateInstrumentationConfigurationRequest_InstrumentationType = CreateInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
-
-	CreateInstrumentationConfigurationRequest_Service = CreateInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
-
-	CreateInstrumentationConfigurationRequest_Environment = CreateInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
-
-	CreateInstrumentationConfigurationRequest_SignalType = CreateInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	CreateInstrumentationConfigurationRequest_Location = CreateInstrumentationConfigurationRequest.AddMember("Location", Location)
-
-	CreateInstrumentationConfigurationRequest_Description = CreateInstrumentationConfigurationRequest.AddMember("Description", smithyprelude.String)
-
-	CreateInstrumentationConfigurationRequest_ExpiresAt = CreateInstrumentationConfigurationRequest.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	CreateInstrumentationConfigurationRequest_AttributeFilters = CreateInstrumentationConfigurationRequest.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
-
-	CreateInstrumentationConfigurationRequest_CaptureConfiguration = CreateInstrumentationConfigurationRequest.AddMember("CaptureConfiguration", CaptureConfiguration)
-
-	CreateInstrumentationConfigurationRequest_Tags = CreateInstrumentationConfigurationRequest.AddMember("Tags", _TagList)
-
-	CreateInstrumentationConfigurationResponse_InstrumentationType = CreateInstrumentationConfigurationResponse.AddMember("InstrumentationType", InstrumentationType)
-
-	CreateInstrumentationConfigurationResponse_Service = CreateInstrumentationConfigurationResponse.AddMember("Service", smithyprelude.String)
-
-	CreateInstrumentationConfigurationResponse_Environment = CreateInstrumentationConfigurationResponse.AddMember("Environment", smithyprelude.String)
-
-	CreateInstrumentationConfigurationResponse_SignalType = CreateInstrumentationConfigurationResponse.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	CreateInstrumentationConfigurationResponse_Location = CreateInstrumentationConfigurationResponse.AddMember("Location", Location)
-
-	CreateInstrumentationConfigurationResponse_LocationHash = CreateInstrumentationConfigurationResponse.AddMember("LocationHash", smithyprelude.String)
-
-	CreateInstrumentationConfigurationResponse_Description = CreateInstrumentationConfigurationResponse.AddMember("Description", smithyprelude.String)
-
-	CreateInstrumentationConfigurationResponse_ExpiresAt = CreateInstrumentationConfigurationResponse.AddMember("ExpiresAt", smithyprelude.Timestamp)
-
-	CreateInstrumentationConfigurationResponse_AttributeFilters = CreateInstrumentationConfigurationResponse.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
-
-	CreateInstrumentationConfigurationResponse_CaptureConfiguration = CreateInstrumentationConfigurationResponse.AddMember("CaptureConfiguration", CaptureConfiguration)
-
-	CreateInstrumentationConfigurationResponse_CreatedAt = CreateInstrumentationConfigurationResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateInstrumentationConfigurationResponse_ARN = CreateInstrumentationConfigurationResponse.AddMember("ARN", _InstrumentationConfigurationArn)
-
-	CreateServiceLevelObjectiveInput_Name = CreateServiceLevelObjectiveInput.AddMember("Name", _ServiceLevelObjectiveName)
-
-	CreateServiceLevelObjectiveInput_Description = CreateServiceLevelObjectiveInput.AddMember("Description", _ServiceLevelObjectiveDescription)
-
-	CreateServiceLevelObjectiveInput_SliConfig = CreateServiceLevelObjectiveInput.AddMember("SliConfig", ServiceLevelIndicatorConfig)
-
-	CreateServiceLevelObjectiveInput_RequestBasedSliConfig = CreateServiceLevelObjectiveInput.AddMember("RequestBasedSliConfig", RequestBasedServiceLevelIndicatorConfig)
-
-	CreateServiceLevelObjectiveInput_Goal = CreateServiceLevelObjectiveInput.AddMember("Goal", Goal)
-
-	CreateServiceLevelObjectiveInput_Tags = CreateServiceLevelObjectiveInput.AddMember("Tags", _TagList)
-
-	CreateServiceLevelObjectiveInput_BurnRateConfigurations = CreateServiceLevelObjectiveInput.AddMember("BurnRateConfigurations", _BurnRateConfigurations)
-
-	CreateServiceLevelObjectiveInput_CreateRecommendedSlo = CreateServiceLevelObjectiveInput.AddMember("CreateRecommendedSlo", smithyprelude.Boolean)
-
-	CreateServiceLevelObjectiveInput_AutoInvestigationEnabled = CreateServiceLevelObjectiveInput.AddMember("AutoInvestigationEnabled", smithyprelude.Boolean)
-
-	CreateServiceLevelObjectiveOutput_Slo = CreateServiceLevelObjectiveOutput.AddMember("Slo", ServiceLevelObjective)
-
-	DeleteInstrumentationConfigurationRequest_InstrumentationType = DeleteInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
-
-	DeleteInstrumentationConfigurationRequest_Service = DeleteInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
-
-	DeleteInstrumentationConfigurationRequest_Environment = DeleteInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
-
-	DeleteInstrumentationConfigurationRequest_SignalType = DeleteInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	DeleteInstrumentationConfigurationRequest_LocationIdentifier = DeleteInstrumentationConfigurationRequest.AddMember("LocationIdentifier", LocationIdentifier)
-
-	DeleteInstrumentationConfigurationResponse_DeletionStatus = DeleteInstrumentationConfigurationResponse.AddMember("DeletionStatus", DynamicInstrumentationDeletionStatus)
-
-	DeleteServiceLevelObjectiveInput_Id = DeleteServiceLevelObjectiveInput.AddMember("Id", _ServiceLevelObjectiveId, &smithytraits.HTTPLabel{})
-
-	GetInstrumentationConfigurationRequest_InstrumentationType = GetInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
-
-	GetInstrumentationConfigurationRequest_Service = GetInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
-
-	GetInstrumentationConfigurationRequest_Environment = GetInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
-
-	GetInstrumentationConfigurationRequest_SignalType = GetInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	GetInstrumentationConfigurationRequest_LocationIdentifier = GetInstrumentationConfigurationRequest.AddMember("LocationIdentifier", LocationIdentifier)
-
-	GetInstrumentationConfigurationResponse_Configuration = GetInstrumentationConfigurationResponse.AddMember("Configuration", InstrumentationConfiguration)
-
-	GetInstrumentationConfigurationStatusRequest_InstrumentationType = GetInstrumentationConfigurationStatusRequest.AddMember("InstrumentationType", InstrumentationType)
-
-	GetInstrumentationConfigurationStatusRequest_Service = GetInstrumentationConfigurationStatusRequest.AddMember("Service", smithyprelude.String)
-
-	GetInstrumentationConfigurationStatusRequest_Environment = GetInstrumentationConfigurationStatusRequest.AddMember("Environment", smithyprelude.String)
-
-	GetInstrumentationConfigurationStatusRequest_SignalType = GetInstrumentationConfigurationStatusRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	GetInstrumentationConfigurationStatusRequest_LocationIdentifier = GetInstrumentationConfigurationStatusRequest.AddMember("LocationIdentifier", LocationIdentifier)
-
-	GetInstrumentationConfigurationStatusRequest_Status = GetInstrumentationConfigurationStatusRequest.AddMember("Status", InstrumentationConfigurationStatus)
-
-	GetInstrumentationConfigurationStatusRequest_StartTime = GetInstrumentationConfigurationStatusRequest.AddMember("StartTime", smithyprelude.Timestamp)
-
-	GetInstrumentationConfigurationStatusRequest_EndTime = GetInstrumentationConfigurationStatusRequest.AddMember("EndTime", smithyprelude.Timestamp)
-
-	GetInstrumentationConfigurationStatusRequest_MaxResults = GetInstrumentationConfigurationStatusRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	GetInstrumentationConfigurationStatusRequest_NextToken = GetInstrumentationConfigurationStatusRequest.AddMember("NextToken", _NextToken)
-
-	GetInstrumentationConfigurationStatusResponse_Service = GetInstrumentationConfigurationStatusResponse.AddMember("Service", smithyprelude.String)
-
-	GetInstrumentationConfigurationStatusResponse_Environment = GetInstrumentationConfigurationStatusResponse.AddMember("Environment", smithyprelude.String)
-
-	GetInstrumentationConfigurationStatusResponse_SignalType = GetInstrumentationConfigurationStatusResponse.AddMember("SignalType", DynamicInstrumentationSignalType)
-
-	GetInstrumentationConfigurationStatusResponse_Location = GetInstrumentationConfigurationStatusResponse.AddMember("Location", Location)
-
-	GetInstrumentationConfigurationStatusResponse_Status = GetInstrumentationConfigurationStatusResponse.AddMember("Status", InstrumentationConfigurationStatus)
-
-	GetInstrumentationConfigurationStatusResponse_Events = GetInstrumentationConfigurationStatusResponse.AddMember("Events", _InstrumentationStatusEventList)
-
-	GetInstrumentationConfigurationStatusResponse_NextToken = GetInstrumentationConfigurationStatusResponse.AddMember("NextToken", _NextToken)
-
-	GetServiceInput_StartTime = GetServiceInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	GetServiceInput_EndTime = GetServiceInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	GetServiceInput_KeyAttributes = GetServiceInput.AddMember("KeyAttributes", _Attributes)
-
-	GetServiceLevelObjectiveInput_Id = GetServiceLevelObjectiveInput.AddMember("Id", _ServiceLevelObjectiveId, &smithytraits.HTTPLabel{})
-
-	GetServiceLevelObjectiveOutput_Slo = GetServiceLevelObjectiveOutput.AddMember("Slo", ServiceLevelObjective)
-
-	GetServiceOutput_Service = GetServiceOutput.AddMember("Service", Service)
-
-	GetServiceOutput_StartTime = GetServiceOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	GetServiceOutput_EndTime = GetServiceOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	GetServiceOutput_LogGroupReferences = GetServiceOutput.AddMember("LogGroupReferences", _LogGroupReferences)
-
-	ListAuditFindingsInput_StartTime = ListAuditFindingsInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListAuditFindingsInput_EndTime = ListAuditFindingsInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListAuditFindingsInput_Auditors = ListAuditFindingsInput.AddMember("Auditors", _Auditors)
-
-	ListAuditFindingsInput_AuditTargets = ListAuditFindingsInput.AddMember("AuditTargets", _AuditTargets)
-
-	ListAuditFindingsInput_DetailLevel = ListAuditFindingsInput.AddMember("DetailLevel", DetailLevel)
-
-	ListAuditFindingsInput_NextToken = ListAuditFindingsInput.AddMember("NextToken", _NextToken)
-
-	ListAuditFindingsInput_MaxResults = ListAuditFindingsInput.AddMember("MaxResults", _ListAuditFindingMaxResults)
-
-	ListAuditFindingsOutput_StartTime = ListAuditFindingsOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListAuditFindingsOutput_EndTime = ListAuditFindingsOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListAuditFindingsOutput_AuditFindings = ListAuditFindingsOutput.AddMember("AuditFindings", _AuditFindings)
-
-	ListAuditFindingsOutput_NextToken = ListAuditFindingsOutput.AddMember("NextToken", _NextToken)
-
-	ListEntityEventsInput_Entity = ListEntityEventsInput.AddMember("Entity", _Attributes)
-
-	ListEntityEventsInput_StartTime = ListEntityEventsInput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListEntityEventsInput_EndTime = ListEntityEventsInput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListEntityEventsInput_MaxResults = ListEntityEventsInput.AddMember("MaxResults", _ListEntityEventsMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListEntityEventsInput_NextToken = ListEntityEventsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListEntityEventsOutput_StartTime = ListEntityEventsOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListEntityEventsOutput_EndTime = ListEntityEventsOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListEntityEventsOutput_ChangeEvents = ListEntityEventsOutput.AddMember("ChangeEvents", _ChangeEvents)
-
-	ListEntityEventsOutput_NextToken = ListEntityEventsOutput.AddMember("NextToken", _NextToken)
-
-	ListGroupingAttributeDefinitionsInput_NextToken = ListGroupingAttributeDefinitionsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListGroupingAttributeDefinitionsInput_AwsAccountId = ListGroupingAttributeDefinitionsInput.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPQuery{Name: "AwsAccountId"})
-
-	ListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts = ListGroupingAttributeDefinitionsInput.AddMember("IncludeLinkedAccounts", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"})
-
-	ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions = ListGroupingAttributeDefinitionsOutput.AddMember("GroupingAttributeDefinitions", _GroupingAttributeDefinitions)
-
-	ListGroupingAttributeDefinitionsOutput_UpdatedAt = ListGroupingAttributeDefinitionsOutput.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	ListGroupingAttributeDefinitionsOutput_NextToken = ListGroupingAttributeDefinitionsOutput.AddMember("NextToken", _NextToken)
-
-	ListInstrumentationConfigurationsRequest_Service = ListInstrumentationConfigurationsRequest.AddMember("Service", smithyprelude.String)
-
-	ListInstrumentationConfigurationsRequest_Environment = ListInstrumentationConfigurationsRequest.AddMember("Environment", smithyprelude.String)
-
-	ListInstrumentationConfigurationsRequest_InstrumentationType = ListInstrumentationConfigurationsRequest.AddMember("InstrumentationType", InstrumentationType)
-
-	ListInstrumentationConfigurationsRequest_SyncedAt = ListInstrumentationConfigurationsRequest.AddMember("SyncedAt", smithyprelude.Timestamp)
-
-	ListInstrumentationConfigurationsRequest_MaxResults = ListInstrumentationConfigurationsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListInstrumentationConfigurationsRequest_NextToken = ListInstrumentationConfigurationsRequest.AddMember("NextToken", _NextToken)
-
-	InstrumentationConfigurationsPage_Service = InstrumentationConfigurationsPage.AddMember("Service", smithyprelude.String)
-
-	InstrumentationConfigurationsPage_Environment = InstrumentationConfigurationsPage.AddMember("Environment", smithyprelude.String)
-
-	InstrumentationConfigurationsPage_Changed = InstrumentationConfigurationsPage.AddMember("Changed", smithyprelude.Boolean)
-
-	InstrumentationConfigurationsPage_LatestConfigurations = InstrumentationConfigurationsPage.AddMember("LatestConfigurations", _InstrumentationConfigurationsWithoutServiceEnv)
-
-	InstrumentationConfigurationsPage_SyncedAt = InstrumentationConfigurationsPage.AddMember("SyncedAt", smithyprelude.Timestamp)
-
-	InstrumentationConfigurationsPage_SyncInterval = InstrumentationConfigurationsPage.AddMember("SyncInterval", smithyprelude.Integer)
-
-	InstrumentationConfigurationsPage_NextToken = InstrumentationConfigurationsPage.AddMember("NextToken", _NextToken)
-
-	ListServiceDependenciesInput_StartTime = ListServiceDependenciesInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListServiceDependenciesInput_EndTime = ListServiceDependenciesInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListServiceDependenciesInput_KeyAttributes = ListServiceDependenciesInput.AddMember("KeyAttributes", _Attributes)
-
-	ListServiceDependenciesInput_MaxResults = ListServiceDependenciesInput.AddMember("MaxResults", _ListServiceDependenciesMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServiceDependenciesInput_NextToken = ListServiceDependenciesInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServiceDependenciesOutput_StartTime = ListServiceDependenciesOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServiceDependenciesOutput_EndTime = ListServiceDependenciesOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServiceDependenciesOutput_ServiceDependencies = ListServiceDependenciesOutput.AddMember("ServiceDependencies", _ServiceDependencies)
-
-	ListServiceDependenciesOutput_NextToken = ListServiceDependenciesOutput.AddMember("NextToken", _NextToken)
-
-	ListServiceDependentsInput_StartTime = ListServiceDependentsInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListServiceDependentsInput_EndTime = ListServiceDependentsInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListServiceDependentsInput_KeyAttributes = ListServiceDependentsInput.AddMember("KeyAttributes", _Attributes)
-
-	ListServiceDependentsInput_MaxResults = ListServiceDependentsInput.AddMember("MaxResults", _ListServiceDependentsMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServiceDependentsInput_NextToken = ListServiceDependentsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServiceDependentsOutput_StartTime = ListServiceDependentsOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServiceDependentsOutput_EndTime = ListServiceDependentsOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServiceDependentsOutput_ServiceDependents = ListServiceDependentsOutput.AddMember("ServiceDependents", _ServiceDependents)
-
-	ListServiceDependentsOutput_NextToken = ListServiceDependentsOutput.AddMember("NextToken", _NextToken)
-
-	ListServiceLevelObjectiveExclusionWindowsInput_Id = ListServiceLevelObjectiveExclusionWindowsInput.AddMember("Id", _ServiceLevelObjectiveId, &smithytraits.HTTPLabel{})
-
-	ListServiceLevelObjectiveExclusionWindowsInput_MaxResults = ListServiceLevelObjectiveExclusionWindowsInput.AddMember("MaxResults", _ListServiceLevelObjectiveExclusionWindowsMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServiceLevelObjectiveExclusionWindowsInput_NextToken = ListServiceLevelObjectiveExclusionWindowsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows = ListServiceLevelObjectiveExclusionWindowsOutput.AddMember("ExclusionWindows", _ExclusionWindows)
-
-	ListServiceLevelObjectiveExclusionWindowsOutput_NextToken = ListServiceLevelObjectiveExclusionWindowsOutput.AddMember("NextToken", _NextToken)
-
-	ListServiceLevelObjectivesInput_KeyAttributes = ListServiceLevelObjectivesInput.AddMember("KeyAttributes", _Attributes)
-
-	ListServiceLevelObjectivesInput_OperationName = ListServiceLevelObjectivesInput.AddMember("OperationName", _OperationName, &smithytraits.HTTPQuery{Name: "OperationName"})
-
-	ListServiceLevelObjectivesInput_DependencyConfig = ListServiceLevelObjectivesInput.AddMember("DependencyConfig", DependencyConfig)
-
-	ListServiceLevelObjectivesInput_MaxResults = ListServiceLevelObjectivesInput.AddMember("MaxResults", _ListServiceLevelObjectivesMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServiceLevelObjectivesInput_NextToken = ListServiceLevelObjectivesInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServiceLevelObjectivesInput_MetricSourceTypes = ListServiceLevelObjectivesInput.AddMember("MetricSourceTypes", _MetricSourceTypes)
-
-	ListServiceLevelObjectivesInput_IncludeLinkedAccounts = ListServiceLevelObjectivesInput.AddMember("IncludeLinkedAccounts", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"})
-
-	ListServiceLevelObjectivesInput_SloOwnerAwsAccountId = ListServiceLevelObjectivesInput.AddMember("SloOwnerAwsAccountId", _AwsAccountId, &smithytraits.HTTPQuery{Name: "SloOwnerAwsAccountId"})
-
-	ListServiceLevelObjectivesInput_MetricSource = ListServiceLevelObjectivesInput.AddMember("MetricSource", MetricSource)
-
-	ListServiceLevelObjectivesOutput_SloSummaries = ListServiceLevelObjectivesOutput.AddMember("SloSummaries", _ServiceLevelObjectiveSummaries)
-
-	ListServiceLevelObjectivesOutput_NextToken = ListServiceLevelObjectivesOutput.AddMember("NextToken", _NextToken)
-
-	ListServiceOperationsInput_StartTime = ListServiceOperationsInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListServiceOperationsInput_EndTime = ListServiceOperationsInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListServiceOperationsInput_KeyAttributes = ListServiceOperationsInput.AddMember("KeyAttributes", _Attributes)
-
-	ListServiceOperationsInput_MaxResults = ListServiceOperationsInput.AddMember("MaxResults", _ListServiceOperationMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServiceOperationsInput_NextToken = ListServiceOperationsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServiceOperationsOutput_StartTime = ListServiceOperationsOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServiceOperationsOutput_EndTime = ListServiceOperationsOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServiceOperationsOutput_ServiceOperations = ListServiceOperationsOutput.AddMember("ServiceOperations", _ServiceOperations)
-
-	ListServiceOperationsOutput_NextToken = ListServiceOperationsOutput.AddMember("NextToken", _NextToken)
-
-	ListServicesInput_StartTime = ListServicesInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListServicesInput_EndTime = ListServicesInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListServicesInput_MaxResults = ListServicesInput.AddMember("MaxResults", _ListServicesMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServicesInput_NextToken = ListServicesInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServicesInput_IncludeLinkedAccounts = ListServicesInput.AddMember("IncludeLinkedAccounts", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"})
-
-	ListServicesInput_AwsAccountId = ListServicesInput.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPQuery{Name: "AwsAccountId"})
-
-	ListServicesOutput_StartTime = ListServicesOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServicesOutput_EndTime = ListServicesOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServicesOutput_ServiceSummaries = ListServicesOutput.AddMember("ServiceSummaries", _ServiceSummaries)
-
-	ListServicesOutput_NextToken = ListServicesOutput.AddMember("NextToken", _NextToken)
-
-	ListServiceStatesInput_StartTime = ListServiceStatesInput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServiceStatesInput_EndTime = ListServiceStatesInput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServiceStatesInput_MaxResults = ListServiceStatesInput.AddMember("MaxResults", _ListServiceStatesMaxResults)
-
-	ListServiceStatesInput_NextToken = ListServiceStatesInput.AddMember("NextToken", _NextToken)
-
-	ListServiceStatesInput_IncludeLinkedAccounts = ListServiceStatesInput.AddMember("IncludeLinkedAccounts", smithyprelude.Boolean)
-
-	ListServiceStatesInput_AwsAccountId = ListServiceStatesInput.AddMember("AwsAccountId", _AwsAccountId)
-
-	ListServiceStatesInput_AttributeFilters = ListServiceStatesInput.AddMember("AttributeFilters", _AttributeFilters)
-
-	ListServiceStatesOutput_StartTime = ListServiceStatesOutput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	ListServiceStatesOutput_EndTime = ListServiceStatesOutput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ListServiceStatesOutput_ServiceStates = ListServiceStatesOutput.AddMember("ServiceStates", _ServiceStates)
-
-	ListServiceStatesOutput_NextToken = ListServiceStatesOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "ResourceArn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutGroupingConfigurationInput_GroupingAttributeDefinitions = PutGroupingConfigurationInput.AddMember("GroupingAttributeDefinitions", _GroupingAttributeDefinitions)
-
-	PutGroupingConfigurationOutput_GroupingConfiguration = PutGroupingConfigurationOutput.AddMember("GroupingConfiguration", GroupingConfiguration)
-
-	ReportInstrumentationConfigurationStatusRequest_Service = ReportInstrumentationConfigurationStatusRequest.AddMember("Service", smithyprelude.String)
-
-	ReportInstrumentationConfigurationStatusRequest_Environment = ReportInstrumentationConfigurationStatusRequest.AddMember("Environment", smithyprelude.String)
-
-	ReportInstrumentationConfigurationStatusRequest_Configurations = ReportInstrumentationConfigurationStatusRequest.AddMember("Configurations", _InstrumentationConfigurationStatusList)
-
-	ReportInstrumentationConfigurationStatusResponse_Service = ReportInstrumentationConfigurationStatusResponse.AddMember("Service", smithyprelude.String)
-
-	ReportInstrumentationConfigurationStatusResponse_Environment = ReportInstrumentationConfigurationStatusResponse.AddMember("Environment", smithyprelude.String)
-
-	ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents = ReportInstrumentationConfigurationStatusResponse.AddMember("UnprocessedStatusEvents", _UnprocessedStatusEventList)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateServiceLevelObjectiveInput_Id = UpdateServiceLevelObjectiveInput.AddMember("Id", _ServiceLevelObjectiveId, &smithytraits.HTTPLabel{})
-
-	UpdateServiceLevelObjectiveInput_Description = UpdateServiceLevelObjectiveInput.AddMember("Description", _ServiceLevelObjectiveDescription)
-
-	UpdateServiceLevelObjectiveInput_SliConfig = UpdateServiceLevelObjectiveInput.AddMember("SliConfig", ServiceLevelIndicatorConfig)
-
-	UpdateServiceLevelObjectiveInput_RequestBasedSliConfig = UpdateServiceLevelObjectiveInput.AddMember("RequestBasedSliConfig", RequestBasedServiceLevelIndicatorConfig)
-
-	UpdateServiceLevelObjectiveInput_Goal = UpdateServiceLevelObjectiveInput.AddMember("Goal", Goal)
-
-	UpdateServiceLevelObjectiveInput_BurnRateConfigurations = UpdateServiceLevelObjectiveInput.AddMember("BurnRateConfigurations", _BurnRateConfigurations)
-
-	UpdateServiceLevelObjectiveInput_AutoInvestigationEnabled = UpdateServiceLevelObjectiveInput.AddMember("AutoInvestigationEnabled", smithyprelude.Boolean)
-
-	UpdateServiceLevelObjectiveOutput_Slo = UpdateServiceLevelObjectiveOutput.AddMember("Slo", ServiceLevelObjective)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "StartTime"}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "EndTime"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "AwsAccountId"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "OperationName"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "SloOwnerAwsAccountId"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ResourceArn"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAttributeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeFilter_AttributeFilterName, &sAttributeFilter_AttributeFilterValues}}
+var m_AttributeFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeFilters_member}}
+var m_AttributeFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeFilterValues_member}}
+var m_AttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeMap_key, &s_AttributeMap_value}}
+var m_AttributeMaps = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeMaps_member}}
+var m_Attributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Attributes_key, &s_Attributes_value}}
+var mAuditFinding = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditFinding_KeyAttributes, &sAuditFinding_AuditorResults, &sAuditFinding_Operation, &sAuditFinding_MetricGraph, &sAuditFinding_DependencyGraph, &sAuditFinding_Type}}
+var m_AuditFindings = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditFindings_member}}
+var mAuditorResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditorResult_Auditor, &sAuditorResult_Description, &sAuditorResult_Data, &sAuditorResult_Severity}}
+var m_AuditorResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditorResults_member}}
+var m_Auditors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Auditors_member}}
+var mAuditTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditTarget_Type, &sAuditTarget_Data}}
+var mAuditTargetEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditTargetEntity_Service, &sAuditTargetEntity_Slo, &sAuditTargetEntity_ServiceOperation, &sAuditTargetEntity_Canary}}
+var m_AuditTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditTargets_member}}
+var mBatchDeleteByResourceArns = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteByResourceArns_ResourceArns, &sBatchDeleteByResourceArns_InstrumentationType}}
+var mBatchDeleteDeletionTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteDeletionTarget_Scope, &sBatchDeleteDeletionTarget_ResourceArns}}
+var mBatchDeleteError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteError_ResourceArn, &sBatchDeleteError_Code, &sBatchDeleteError_Message}}
+var mBatchDeleteErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteErrorCode_RESOURCE_NOT_FOUND, &sBatchDeleteErrorCode_ACCESS_DENIED, &sBatchDeleteErrorCode_INTERNAL_SERVICE_ERROR}}
+var m_BatchDeleteErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteErrorList_member}}
+var m_BatchDeleteResourceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteResourceArnList_member}}
+var mBatchDeleteScope = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteScope_Service, &sBatchDeleteScope_Environment, &sBatchDeleteScope_InstrumentationType}}
+var mBatchDeleteSuccessfulDeletion = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteSuccessfulDeletion_ResourceArn, &sBatchDeleteSuccessfulDeletion_SignalType, &sBatchDeleteSuccessfulDeletion_LocationHash}}
+var m_BatchDeleteSuccessfulDeletionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteSuccessfulDeletionList_member}}
+var mBatchUpdateExclusionWindowsError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateExclusionWindowsError_SloId, &sBatchUpdateExclusionWindowsError_ErrorCode, &sBatchUpdateExclusionWindowsError_ErrorMessage}}
+var m_BatchUpdateExclusionWindowsErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUpdateExclusionWindowsErrors_member}}
+var mBurnRateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sBurnRateConfiguration_LookBackWindowMinutes}}
+var m_BurnRateConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_BurnRateConfigurations_member}}
+var mCalendarInterval = smithy.SchemaMembers{List: []*smithy.Schema{&sCalendarInterval_StartTime, &sCalendarInterval_DurationUnit, &sCalendarInterval_Duration}}
+var mCanaryEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryEntity_CanaryName}}
+var mCaptureConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCaptureConfiguration_CodeCapture}}
+var mCaptureLimitsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCaptureLimitsConfig_MaxHits, &sCaptureLimitsConfig_MaxStringLength, &sCaptureLimitsConfig_MaxCollectionWidth, &sCaptureLimitsConfig_MaxCollectionDepth, &sCaptureLimitsConfig_MaxStackFrames, &sCaptureLimitsConfig_MaxStackTraceSize, &sCaptureLimitsConfig_MaxObjectDepth, &sCaptureLimitsConfig_MaxFieldsPerObject}}
+var mChangeEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeEvent_Timestamp, &sChangeEvent_AccountId, &sChangeEvent_Region, &sChangeEvent_Entity, &sChangeEvent_ChangeEventType, &sChangeEvent_EventId, &sChangeEvent_UserName, &sChangeEvent_EventName}}
+var m_ChangeEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChangeEvents_member}}
+var mChangeEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeEventType_DEPLOYMENT, &sChangeEventType_CONFIGURATION}}
+var mCodeCaptureConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeCaptureConfiguration_CaptureArguments, &sCodeCaptureConfiguration_CaptureReturn, &sCodeCaptureConfiguration_CaptureStackTrace, &sCodeCaptureConfiguration_CaptureLocals, &sCodeCaptureConfiguration_CaptureLimits}}
+var mCodeLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeLocation_Language, &sCodeLocation_CodeUnit, &sCodeLocation_ClassName, &sCodeLocation_MethodName, &sCodeLocation_FilePath, &sCodeLocation_LineNumber}}
+var mCompositeSliComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeSliComponent_OperationName}}
+var m_CompositeSliComponents = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeSliComponents_member}}
+var mCompositeSliConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeSliConfig_SelectionConfig, &sCompositeSliConfig_Components}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mConnectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionType_INDIRECT, &sConnectionType_DIRECT}}
+var m_DataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataMap_key, &s_DataMap_value}}
+var mDependencyConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyConfig_DependencyKeyAttributes, &sDependencyConfig_DependencyOperationName}}
+var mDependencyGraph = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyGraph_Nodes, &sDependencyGraph_Edges}}
+var mDetailLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sDetailLevel_BRIEF, &sDetailLevel_DETAILED}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_Name, &sDimension_Value}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var mDurationUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sDurationUnit_MINUTE, &sDurationUnit_HOUR, &sDurationUnit_DAY, &sDurationUnit_MONTH}}
+var m_DynamicInstrumentationAttributeFilterGroup = smithy.SchemaMembers{List: []*smithy.Schema{&s_DynamicInstrumentationAttributeFilterGroup_key, &s_DynamicInstrumentationAttributeFilterGroup_value}}
+var m_DynamicInstrumentationAttributeFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_DynamicInstrumentationAttributeFilters_member}}
+var mDynamicInstrumentationDeletionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamicInstrumentationDeletionStatus_DELETED}}
+var mDynamicInstrumentationSignalType = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamicInstrumentationSignalType_SNAPSHOT}}
+var mEdge = smithy.SchemaMembers{List: []*smithy.Schema{&sEdge_SourceNodeId, &sEdge_DestinationNodeId, &sEdge_Duration, &sEdge_ConnectionType}}
+var m_Edges = smithy.SchemaMembers{List: []*smithy.Schema{&s_Edges_member}}
+var mEvaluationType = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationType_PERIOD_BASED, &sEvaluationType_REQUEST_BASED}}
+var mExclusionWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sExclusionWindow_Window, &sExclusionWindow_StartTime, &sExclusionWindow_RecurrenceRule, &sExclusionWindow_Reason}}
+var m_ExclusionWindows = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExclusionWindows_member}}
+var mGoal = smithy.SchemaMembers{List: []*smithy.Schema{&sGoal_Interval, &sGoal_AttainmentGoal, &sGoal_WarningThreshold}}
+var mGroupingAttributeDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupingAttributeDefinition_GroupingName, &sGroupingAttributeDefinition_GroupingSourceKeys, &sGroupingAttributeDefinition_DefaultGroupingValue}}
+var m_GroupingAttributeDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupingAttributeDefinitions_member}}
+var mGroupingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupingConfiguration_GroupingAttributeDefinitions, &sGroupingConfiguration_UpdatedAt}}
+var m_GroupingSourceKeyStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupingSourceKeyStringList_member}}
+var mInstrumentationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationConfiguration_InstrumentationType, &sInstrumentationConfiguration_Service, &sInstrumentationConfiguration_Environment, &sInstrumentationConfiguration_SignalType, &sInstrumentationConfiguration_Location, &sInstrumentationConfiguration_LocationHash, &sInstrumentationConfiguration_Description, &sInstrumentationConfiguration_ExpiresAt, &sInstrumentationConfiguration_AttributeFilters, &sInstrumentationConfiguration_CaptureConfiguration, &sInstrumentationConfiguration_CreatedAt, &sInstrumentationConfiguration_ARN}, Hash: &hInstrumentationConfiguration}
+var mInstrumentationConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationConfigurationStatus_READY, &sInstrumentationConfigurationStatus_ERROR, &sInstrumentationConfigurationStatus_ACTIVE, &sInstrumentationConfigurationStatus_DISABLED}}
+var m_InstrumentationConfigurationStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstrumentationConfigurationStatusList_member}}
+var mInstrumentationConfigurationStatusReport = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationConfigurationStatusReport_InstrumentationType, &sInstrumentationConfigurationStatusReport_SignalType, &sInstrumentationConfigurationStatusReport_LocationHash, &sInstrumentationConfigurationStatusReport_Status, &sInstrumentationConfigurationStatusReport_Time, &sInstrumentationConfigurationStatusReport_ErrorCause}}
+var m_InstrumentationConfigurationsWithoutServiceEnv = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstrumentationConfigurationsWithoutServiceEnv_member}}
+var mInstrumentationConfigurationWithoutServiceEnv = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationConfigurationWithoutServiceEnv_InstrumentationType, &sInstrumentationConfigurationWithoutServiceEnv_SignalType, &sInstrumentationConfigurationWithoutServiceEnv_Location, &sInstrumentationConfigurationWithoutServiceEnv_LocationHash, &sInstrumentationConfigurationWithoutServiceEnv_Description, &sInstrumentationConfigurationWithoutServiceEnv_ExpiresAt, &sInstrumentationConfigurationWithoutServiceEnv_AttributeFilters, &sInstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, &sInstrumentationConfigurationWithoutServiceEnv_CreatedAt, &sInstrumentationConfigurationWithoutServiceEnv_ARN}, Hash: &hInstrumentationConfigurationWithoutServiceEnv}
+var mInstrumentationErrorCause = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationErrorCause_FILE_NOT_FOUND, &sInstrumentationErrorCause_METHOD_NOT_FOUND, &sInstrumentationErrorCause_LINE_NOT_EXECUTABLE, &sInstrumentationErrorCause_OVERLOADED_METHODS, &sInstrumentationErrorCause_LANGUAGE_MISMATCH, &sInstrumentationErrorCause_RUNTIME_ERROR}}
+var mInstrumentationStatusEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationStatusEvent_Time, &sInstrumentationStatusEvent_ErrorCause}}
+var m_InstrumentationStatusEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstrumentationStatusEventList_member}}
+var mInstrumentationType = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationType_BREAKPOINT, &sInstrumentationType_PROBE}}
+var mInterval = smithy.SchemaMembers{List: []*smithy.Schema{&sInterval_RollingInterval, &sInterval_CalendarInterval}}
+var m_LatestChangeEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_LatestChangeEvents_member}}
+var mLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sLocation_CodeLocation}}
+var mLocationIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sLocationIdentifier_CodeLocation, &sLocationIdentifier_LocationHash}}
+var m_LogGroupReferences = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogGroupReferences_member}}
+var mMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sMetric_Namespace, &sMetric_MetricName, &sMetric_Dimensions}}
+var m_MetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataQueries_member}}
+var mMetricDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataQuery_Id, &sMetricDataQuery_MetricStat, &sMetricDataQuery_Expression, &sMetricDataQuery_Label, &sMetricDataQuery_ReturnData, &sMetricDataQuery_Period, &sMetricDataQuery_AccountId}}
+var mMetricGraph = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricGraph_MetricDataQueries, &sMetricGraph_StartTime, &sMetricGraph_EndTime}}
+var mMetricReference = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricReference_Namespace, &sMetricReference_MetricType, &sMetricReference_Dimensions, &sMetricReference_MetricName, &sMetricReference_AccountId}}
+var m_MetricReferences = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricReferences_member}}
+var mMetricSource = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricSource_MetricSourceKeyAttributes, &sMetricSource_MetricSourceAttributes}}
+var mMetricSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricSourceType_SERVICE_OPERATION, &sMetricSourceType_CLOUDWATCH_METRIC, &sMetricSourceType_SERVICE_DEPENDENCY, &sMetricSourceType_APPMONITOR, &sMetricSourceType_CANARY, &sMetricSourceType_SERVICE}}
+var m_MetricSourceTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricSourceTypes_member}}
+var mMetricStat = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStat_Metric, &sMetricStat_Period, &sMetricStat_Stat, &sMetricStat_Unit}}
+var mMonitoredRequestCountMetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitoredRequestCountMetricDataQueries_GoodCountMetric, &sMonitoredRequestCountMetricDataQueries_BadCountMetric}}
+var mNode = smithy.SchemaMembers{List: []*smithy.Schema{&sNode_KeyAttributes, &sNode_Name, &sNode_NodeId, &sNode_Operation, &sNode_Type, &sNode_Duration, &sNode_Status}}
+var m_Nodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Nodes_member}}
+var mProgrammingLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sProgrammingLanguage_JAVA, &sProgrammingLanguage_PYTHON, &sProgrammingLanguage_JAVASCRIPT}}
+var mRecurrenceRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurrenceRule_Expression}}
+var mRequestBasedServiceLevelIndicator = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestBasedServiceLevelIndicator_RequestBasedSliMetric, &sRequestBasedServiceLevelIndicator_MetricThreshold, &sRequestBasedServiceLevelIndicator_ComparisonOperator}}
+var mRequestBasedServiceLevelIndicatorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig, &sRequestBasedServiceLevelIndicatorConfig_MetricThreshold, &sRequestBasedServiceLevelIndicatorConfig_ComparisonOperator}}
+var mRequestBasedServiceLevelIndicatorMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestBasedServiceLevelIndicatorMetric_KeyAttributes, &sRequestBasedServiceLevelIndicatorMetric_OperationName, &sRequestBasedServiceLevelIndicatorMetric_MetricType, &sRequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric, &sRequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric, &sRequestBasedServiceLevelIndicatorMetric_DependencyConfig, &sRequestBasedServiceLevelIndicatorMetric_MetricSource, &sRequestBasedServiceLevelIndicatorMetric_CompositeSliConfig}}
+var mRequestBasedServiceLevelIndicatorMetricConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes, &sRequestBasedServiceLevelIndicatorMetricConfig_OperationName, &sRequestBasedServiceLevelIndicatorMetricConfig_MetricType, &sRequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric, &sRequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric, &sRequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig, &sRequestBasedServiceLevelIndicatorMetricConfig_MetricSource, &sRequestBasedServiceLevelIndicatorMetricConfig_MetricName, &sRequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig}, Hash: &hRequestBasedServiceLevelIndicatorMetricConfig}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_ResourceType, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_Message}}
+var mRollingInterval = smithy.SchemaMembers{List: []*smithy.Schema{&sRollingInterval_DurationUnit, &sRollingInterval_Duration}}
+var mSelectionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectionConfig_Type, &sSelectionConfig_Pattern}}
+var mSelectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectionType_EXPLICIT, &sSelectionType_PREFIX, &sSelectionType_REGEX}}
+var mService = smithy.SchemaMembers{List: []*smithy.Schema{&sService_KeyAttributes, &sService_AttributeMaps, &sService_ServiceGroups, &sService_MetricReferences, &sService_LogGroupReferences}}
+var m_ServiceDependencies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceDependencies_member}}
+var mServiceDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceDependency_OperationName, &sServiceDependency_DependencyKeyAttributes, &sServiceDependency_DependencyOperationName, &sServiceDependency_MetricReferences}}
+var mServiceDependent = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceDependent_OperationName, &sServiceDependent_DependentKeyAttributes, &sServiceDependent_DependentOperationName, &sServiceDependent_MetricReferences}}
+var m_ServiceDependents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceDependents_member}}
+var mServiceEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEntity_Type, &sServiceEntity_Name, &sServiceEntity_Environment, &sServiceEntity_AwsAccountId}}
+var mServiceGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceGroup_GroupName, &sServiceGroup_GroupValue, &sServiceGroup_GroupSource, &sServiceGroup_GroupIdentifier}}
+var m_ServiceGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceGroups_member}}
+var mServiceLevelIndicator = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicator_SliMetric, &sServiceLevelIndicator_MetricThreshold, &sServiceLevelIndicator_ComparisonOperator}}
+var mServiceLevelIndicatorComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO, &sServiceLevelIndicatorComparisonOperator_GREATER_THAN, &sServiceLevelIndicatorComparisonOperator_LESS_THAN, &sServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO}}
+var mServiceLevelIndicatorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicatorConfig_SliMetricConfig, &sServiceLevelIndicatorConfig_MetricThreshold, &sServiceLevelIndicatorConfig_ComparisonOperator}}
+var mServiceLevelIndicatorMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicatorMetric_KeyAttributes, &sServiceLevelIndicatorMetric_OperationName, &sServiceLevelIndicatorMetric_MetricType, &sServiceLevelIndicatorMetric_MetricDataQueries, &sServiceLevelIndicatorMetric_DependencyConfig, &sServiceLevelIndicatorMetric_MetricSource, &sServiceLevelIndicatorMetric_CompositeSliConfig}}
+var mServiceLevelIndicatorMetricConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicatorMetricConfig_KeyAttributes, &sServiceLevelIndicatorMetricConfig_OperationName, &sServiceLevelIndicatorMetricConfig_MetricType, &sServiceLevelIndicatorMetricConfig_MetricName, &sServiceLevelIndicatorMetricConfig_Statistic, &sServiceLevelIndicatorMetricConfig_PeriodSeconds, &sServiceLevelIndicatorMetricConfig_MetricSource, &sServiceLevelIndicatorMetricConfig_MetricDataQueries, &sServiceLevelIndicatorMetricConfig_DependencyConfig, &sServiceLevelIndicatorMetricConfig_CompositeSliConfig}, Hash: &hServiceLevelIndicatorMetricConfig}
+var mServiceLevelIndicatorMetricType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelIndicatorMetricType_LATENCY, &sServiceLevelIndicatorMetricType_AVAILABILITY}}
+var mServiceLevelObjective = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjective_Arn, &sServiceLevelObjective_Name, &sServiceLevelObjective_Description, &sServiceLevelObjective_CreatedTime, &sServiceLevelObjective_LastUpdatedTime, &sServiceLevelObjective_Sli, &sServiceLevelObjective_RequestBasedSli, &sServiceLevelObjective_EvaluationType, &sServiceLevelObjective_Goal, &sServiceLevelObjective_BurnRateConfigurations, &sServiceLevelObjective_MetricSourceType, &sServiceLevelObjective_AutoInvestigationEnabled}, Hash: &hServiceLevelObjective}
+var mServiceLevelObjectiveBudgetReport = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjectiveBudgetReport_Arn, &sServiceLevelObjectiveBudgetReport_Name, &sServiceLevelObjectiveBudgetReport_EvaluationType, &sServiceLevelObjectiveBudgetReport_BudgetStatus, &sServiceLevelObjectiveBudgetReport_Attainment, &sServiceLevelObjectiveBudgetReport_TotalBudgetSeconds, &sServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining, &sServiceLevelObjectiveBudgetReport_TotalBudgetRequests, &sServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining, &sServiceLevelObjectiveBudgetReport_Sli, &sServiceLevelObjectiveBudgetReport_RequestBasedSli, &sServiceLevelObjectiveBudgetReport_Goal}, Hash: &hServiceLevelObjectiveBudgetReport}
+var mServiceLevelObjectiveBudgetReportError = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjectiveBudgetReportError_Name, &sServiceLevelObjectiveBudgetReportError_Arn, &sServiceLevelObjectiveBudgetReportError_ErrorCode, &sServiceLevelObjectiveBudgetReportError_ErrorMessage}}
+var m_ServiceLevelObjectiveBudgetReportErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceLevelObjectiveBudgetReportErrors_member}}
+var m_ServiceLevelObjectiveBudgetReports = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceLevelObjectiveBudgetReports_member}}
+var mServiceLevelObjectiveBudgetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjectiveBudgetStatus_OK, &sServiceLevelObjectiveBudgetStatus_WARNING, &sServiceLevelObjectiveBudgetStatus_BREACHED, &sServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA}}
+var mServiceLevelObjectiveEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjectiveEntity_SloName, &sServiceLevelObjectiveEntity_SloArn}}
+var m_ServiceLevelObjectiveIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceLevelObjectiveIds_member}}
+var m_ServiceLevelObjectiveSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceLevelObjectiveSummaries_member}}
+var mServiceLevelObjectiveSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLevelObjectiveSummary_Arn, &sServiceLevelObjectiveSummary_Name, &sServiceLevelObjectiveSummary_KeyAttributes, &sServiceLevelObjectiveSummary_OperationName, &sServiceLevelObjectiveSummary_DependencyConfig, &sServiceLevelObjectiveSummary_CreatedTime, &sServiceLevelObjectiveSummary_EvaluationType, &sServiceLevelObjectiveSummary_MetricSourceType, &sServiceLevelObjectiveSummary_MetricSource, &sServiceLevelObjectiveSummary_CompositeSliConfig}, Hash: &hServiceLevelObjectiveSummary}
+var mServiceOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceOperation_Name, &sServiceOperation_MetricReferences}}
+var mServiceOperationEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceOperationEntity_Service, &sServiceOperationEntity_Operation, &sServiceOperationEntity_MetricType}}
+var m_ServiceOperations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceOperations_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mServiceState = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceState_AttributeFilters, &sServiceState_Service, &sServiceState_LatestChangeEvents}}
+var m_ServiceStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceStates_member}}
+var m_ServiceSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceSummaries_member}}
+var mServiceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSummary_KeyAttributes, &sServiceSummary_AttributeMaps, &sServiceSummary_MetricReferences, &sServiceSummary_ServiceGroups}}
+var mSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sSeverity_CRITICAL, &sSeverity_HIGH, &sSeverity_MEDIUM, &sSeverity_LOW, &sSeverity_NONE}}
+var mStandardUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStandardUnit_MICROSECONDS, &sStandardUnit_MILLISECONDS, &sStandardUnit_SECONDS, &sStandardUnit_BYTES, &sStandardUnit_KILOBYTES, &sStandardUnit_MEGABYTES, &sStandardUnit_GIGABYTES, &sStandardUnit_TERABYTES, &sStandardUnit_BITS, &sStandardUnit_KILOBITS, &sStandardUnit_MEGABITS, &sStandardUnit_GIGABITS, &sStandardUnit_TERABITS, &sStandardUnit_PERCENT, &sStandardUnit_COUNT, &sStandardUnit_BYTES_SECOND, &sStandardUnit_KILOBYTES_SECOND, &sStandardUnit_MEGABYTES_SECOND, &sStandardUnit_GIGABYTES_SECOND, &sStandardUnit_TERABYTES_SECOND, &sStandardUnit_BITS_SECOND, &sStandardUnit_KILOBITS_SECOND, &sStandardUnit_MEGABITS_SECOND, &sStandardUnit_GIGABITS_SECOND, &sStandardUnit_TERABITS_SECOND, &sStandardUnit_COUNT_SECOND, &sStandardUnit_NONE}, Hash: &hStandardUnit}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mUnprocessedStatusEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedStatusEvent_InstrumentationType, &sUnprocessedStatusEvent_SignalType, &sUnprocessedStatusEvent_LocationHash, &sUnprocessedStatusEvent_Status, &sUnprocessedStatusEvent_Time, &sUnprocessedStatusEvent_FailedReason}}
+var mUnprocessedStatusEventFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedStatusEventFailureReason_THROTTLED, &sUnprocessedStatusEventFailureReason_INTERNAL_ERROR, &sUnprocessedStatusEventFailureReason_VALIDATION_ERROR}}
+var m_UnprocessedStatusEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedStatusEventList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sWindow_DurationUnit, &sWindow_Duration}}
+var mBatchDeleteInstrumentationConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteInstrumentationConfigurationsRequest_DeletionTarget}}
+var mBatchDeleteInstrumentationConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteInstrumentationConfigurationsResponse_DeletedCount, &sBatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions, &sBatchDeleteInstrumentationConfigurationsResponse_Errors}}
+var mBatchGetServiceLevelObjectiveBudgetReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetServiceLevelObjectiveBudgetReportInput_Timestamp, &sBatchGetServiceLevelObjectiveBudgetReportInput_SloIds}}
+var mBatchGetServiceLevelObjectiveBudgetReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, &sBatchGetServiceLevelObjectiveBudgetReportOutput_Reports, &sBatchGetServiceLevelObjectiveBudgetReportOutput_Errors}}
+var mBatchUpdateExclusionWindowsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateExclusionWindowsInput_SloIds, &sBatchUpdateExclusionWindowsInput_AddExclusionWindows, &sBatchUpdateExclusionWindowsInput_RemoveExclusionWindows}}
+var mBatchUpdateExclusionWindowsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateExclusionWindowsOutput_SloIds, &sBatchUpdateExclusionWindowsOutput_Errors}}
+var mCreateInstrumentationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInstrumentationConfigurationRequest_InstrumentationType, &sCreateInstrumentationConfigurationRequest_Service, &sCreateInstrumentationConfigurationRequest_Environment, &sCreateInstrumentationConfigurationRequest_SignalType, &sCreateInstrumentationConfigurationRequest_Location, &sCreateInstrumentationConfigurationRequest_Description, &sCreateInstrumentationConfigurationRequest_ExpiresAt, &sCreateInstrumentationConfigurationRequest_AttributeFilters, &sCreateInstrumentationConfigurationRequest_CaptureConfiguration, &sCreateInstrumentationConfigurationRequest_Tags}, Hash: &hCreateInstrumentationConfigurationRequest}
+var mCreateInstrumentationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInstrumentationConfigurationResponse_InstrumentationType, &sCreateInstrumentationConfigurationResponse_Service, &sCreateInstrumentationConfigurationResponse_Environment, &sCreateInstrumentationConfigurationResponse_SignalType, &sCreateInstrumentationConfigurationResponse_Location, &sCreateInstrumentationConfigurationResponse_LocationHash, &sCreateInstrumentationConfigurationResponse_Description, &sCreateInstrumentationConfigurationResponse_ExpiresAt, &sCreateInstrumentationConfigurationResponse_AttributeFilters, &sCreateInstrumentationConfigurationResponse_CaptureConfiguration, &sCreateInstrumentationConfigurationResponse_CreatedAt, &sCreateInstrumentationConfigurationResponse_ARN}, Hash: &hCreateInstrumentationConfigurationResponse}
+var mCreateServiceLevelObjectiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceLevelObjectiveInput_Name, &sCreateServiceLevelObjectiveInput_Description, &sCreateServiceLevelObjectiveInput_SliConfig, &sCreateServiceLevelObjectiveInput_RequestBasedSliConfig, &sCreateServiceLevelObjectiveInput_Goal, &sCreateServiceLevelObjectiveInput_Tags, &sCreateServiceLevelObjectiveInput_BurnRateConfigurations, &sCreateServiceLevelObjectiveInput_CreateRecommendedSlo, &sCreateServiceLevelObjectiveInput_AutoInvestigationEnabled}, Hash: &hCreateServiceLevelObjectiveInput}
+var mCreateServiceLevelObjectiveOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceLevelObjectiveOutput_Slo}}
+var mDeleteInstrumentationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInstrumentationConfigurationRequest_InstrumentationType, &sDeleteInstrumentationConfigurationRequest_Service, &sDeleteInstrumentationConfigurationRequest_Environment, &sDeleteInstrumentationConfigurationRequest_SignalType, &sDeleteInstrumentationConfigurationRequest_LocationIdentifier}}
+var mDeleteInstrumentationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInstrumentationConfigurationResponse_DeletionStatus}}
+var mDeleteServiceLevelObjectiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceLevelObjectiveInput_Id}}
+var mGetInstrumentationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstrumentationConfigurationRequest_InstrumentationType, &sGetInstrumentationConfigurationRequest_Service, &sGetInstrumentationConfigurationRequest_Environment, &sGetInstrumentationConfigurationRequest_SignalType, &sGetInstrumentationConfigurationRequest_LocationIdentifier}}
+var mGetInstrumentationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstrumentationConfigurationResponse_Configuration}}
+var mGetInstrumentationConfigurationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstrumentationConfigurationStatusRequest_InstrumentationType, &sGetInstrumentationConfigurationStatusRequest_Service, &sGetInstrumentationConfigurationStatusRequest_Environment, &sGetInstrumentationConfigurationStatusRequest_SignalType, &sGetInstrumentationConfigurationStatusRequest_LocationIdentifier, &sGetInstrumentationConfigurationStatusRequest_Status, &sGetInstrumentationConfigurationStatusRequest_StartTime, &sGetInstrumentationConfigurationStatusRequest_EndTime, &sGetInstrumentationConfigurationStatusRequest_MaxResults, &sGetInstrumentationConfigurationStatusRequest_NextToken}, Hash: &hGetInstrumentationConfigurationStatusRequest}
+var mGetInstrumentationConfigurationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInstrumentationConfigurationStatusResponse_Service, &sGetInstrumentationConfigurationStatusResponse_Environment, &sGetInstrumentationConfigurationStatusResponse_SignalType, &sGetInstrumentationConfigurationStatusResponse_Location, &sGetInstrumentationConfigurationStatusResponse_Status, &sGetInstrumentationConfigurationStatusResponse_Events, &sGetInstrumentationConfigurationStatusResponse_NextToken}}
+var mGetServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInput_StartTime, &sGetServiceInput_EndTime, &sGetServiceInput_KeyAttributes}}
+var mGetServiceLevelObjectiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceLevelObjectiveInput_Id}}
+var mGetServiceLevelObjectiveOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceLevelObjectiveOutput_Slo}}
+var mGetServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceOutput_Service, &sGetServiceOutput_StartTime, &sGetServiceOutput_EndTime, &sGetServiceOutput_LogGroupReferences}}
+var mListAuditFindingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAuditFindingsInput_StartTime, &sListAuditFindingsInput_EndTime, &sListAuditFindingsInput_Auditors, &sListAuditFindingsInput_AuditTargets, &sListAuditFindingsInput_DetailLevel, &sListAuditFindingsInput_NextToken, &sListAuditFindingsInput_MaxResults}}
+var mListAuditFindingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAuditFindingsOutput_StartTime, &sListAuditFindingsOutput_EndTime, &sListAuditFindingsOutput_AuditFindings, &sListAuditFindingsOutput_NextToken}}
+var mListEntityEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntityEventsInput_Entity, &sListEntityEventsInput_StartTime, &sListEntityEventsInput_EndTime, &sListEntityEventsInput_MaxResults, &sListEntityEventsInput_NextToken}}
+var mListEntityEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntityEventsOutput_StartTime, &sListEntityEventsOutput_EndTime, &sListEntityEventsOutput_ChangeEvents, &sListEntityEventsOutput_NextToken}}
+var mListGroupingAttributeDefinitionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupingAttributeDefinitionsInput_NextToken, &sListGroupingAttributeDefinitionsInput_AwsAccountId, &sListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts}}
+var mListGroupingAttributeDefinitionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions, &sListGroupingAttributeDefinitionsOutput_UpdatedAt, &sListGroupingAttributeDefinitionsOutput_NextToken}}
+var mListInstrumentationConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInstrumentationConfigurationsRequest_Service, &sListInstrumentationConfigurationsRequest_Environment, &sListInstrumentationConfigurationsRequest_InstrumentationType, &sListInstrumentationConfigurationsRequest_SyncedAt, &sListInstrumentationConfigurationsRequest_MaxResults, &sListInstrumentationConfigurationsRequest_NextToken}}
+var mInstrumentationConfigurationsPage = smithy.SchemaMembers{List: []*smithy.Schema{&sInstrumentationConfigurationsPage_Service, &sInstrumentationConfigurationsPage_Environment, &sInstrumentationConfigurationsPage_Changed, &sInstrumentationConfigurationsPage_LatestConfigurations, &sInstrumentationConfigurationsPage_SyncedAt, &sInstrumentationConfigurationsPage_SyncInterval, &sInstrumentationConfigurationsPage_NextToken}}
+var mListServiceDependenciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceDependenciesInput_StartTime, &sListServiceDependenciesInput_EndTime, &sListServiceDependenciesInput_KeyAttributes, &sListServiceDependenciesInput_MaxResults, &sListServiceDependenciesInput_NextToken}}
+var mListServiceDependenciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceDependenciesOutput_StartTime, &sListServiceDependenciesOutput_EndTime, &sListServiceDependenciesOutput_ServiceDependencies, &sListServiceDependenciesOutput_NextToken}}
+var mListServiceDependentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceDependentsInput_StartTime, &sListServiceDependentsInput_EndTime, &sListServiceDependentsInput_KeyAttributes, &sListServiceDependentsInput_MaxResults, &sListServiceDependentsInput_NextToken}}
+var mListServiceDependentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceDependentsOutput_StartTime, &sListServiceDependentsOutput_EndTime, &sListServiceDependentsOutput_ServiceDependents, &sListServiceDependentsOutput_NextToken}}
+var mListServiceLevelObjectiveExclusionWindowsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceLevelObjectiveExclusionWindowsInput_Id, &sListServiceLevelObjectiveExclusionWindowsInput_MaxResults, &sListServiceLevelObjectiveExclusionWindowsInput_NextToken}}
+var mListServiceLevelObjectiveExclusionWindowsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows, &sListServiceLevelObjectiveExclusionWindowsOutput_NextToken}}
+var mListServiceLevelObjectivesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceLevelObjectivesInput_KeyAttributes, &sListServiceLevelObjectivesInput_OperationName, &sListServiceLevelObjectivesInput_DependencyConfig, &sListServiceLevelObjectivesInput_MaxResults, &sListServiceLevelObjectivesInput_NextToken, &sListServiceLevelObjectivesInput_MetricSourceTypes, &sListServiceLevelObjectivesInput_IncludeLinkedAccounts, &sListServiceLevelObjectivesInput_SloOwnerAwsAccountId, &sListServiceLevelObjectivesInput_MetricSource}, Hash: &hListServiceLevelObjectivesInput}
+var mListServiceLevelObjectivesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceLevelObjectivesOutput_SloSummaries, &sListServiceLevelObjectivesOutput_NextToken}}
+var mListServiceOperationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceOperationsInput_StartTime, &sListServiceOperationsInput_EndTime, &sListServiceOperationsInput_KeyAttributes, &sListServiceOperationsInput_MaxResults, &sListServiceOperationsInput_NextToken}}
+var mListServiceOperationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceOperationsOutput_StartTime, &sListServiceOperationsOutput_EndTime, &sListServiceOperationsOutput_ServiceOperations, &sListServiceOperationsOutput_NextToken}}
+var mListServicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesInput_StartTime, &sListServicesInput_EndTime, &sListServicesInput_MaxResults, &sListServicesInput_NextToken, &sListServicesInput_IncludeLinkedAccounts, &sListServicesInput_AwsAccountId}}
+var mListServicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesOutput_StartTime, &sListServicesOutput_EndTime, &sListServicesOutput_ServiceSummaries, &sListServicesOutput_NextToken}}
+var mListServiceStatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceStatesInput_StartTime, &sListServiceStatesInput_EndTime, &sListServiceStatesInput_MaxResults, &sListServiceStatesInput_NextToken, &sListServiceStatesInput_IncludeLinkedAccounts, &sListServiceStatesInput_AwsAccountId, &sListServiceStatesInput_AttributeFilters}}
+var mListServiceStatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceStatesOutput_StartTime, &sListServiceStatesOutput_EndTime, &sListServiceStatesOutput_ServiceStates, &sListServiceStatesOutput_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutGroupingConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutGroupingConfigurationInput_GroupingAttributeDefinitions}}
+var mPutGroupingConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutGroupingConfigurationOutput_GroupingConfiguration}}
+var mReportInstrumentationConfigurationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReportInstrumentationConfigurationStatusRequest_Service, &sReportInstrumentationConfigurationStatusRequest_Environment, &sReportInstrumentationConfigurationStatusRequest_Configurations}}
+var mReportInstrumentationConfigurationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReportInstrumentationConfigurationStatusResponse_Service, &sReportInstrumentationConfigurationStatusResponse_Environment, &sReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateServiceLevelObjectiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceLevelObjectiveInput_Id, &sUpdateServiceLevelObjectiveInput_Description, &sUpdateServiceLevelObjectiveInput_SliConfig, &sUpdateServiceLevelObjectiveInput_RequestBasedSliConfig, &sUpdateServiceLevelObjectiveInput_Goal, &sUpdateServiceLevelObjectiveInput_BurnRateConfigurations, &sUpdateServiceLevelObjectiveInput_AutoInvestigationEnabled}}
+var mUpdateServiceLevelObjectiveOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceLevelObjectiveOutput_Slo}}
+
+var hInstrumentationConfiguration = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 2, 6, 12, 0, 7, 0, 4, 0, 0, 8, 3, 0, 0, 0, 0, 0, 0, 10, 1, 0,
+	0, 11, 5, 0, 0, 9, 0, 0,
+}}
+var hInstrumentationConfigurationWithoutServiceEnv = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 4, 10, 0, 5, 0, 2, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 8, 1, 0,
+	0, 9, 3, 0, 0, 7, 0, 0,
+}}
+var hRequestBasedServiceLevelIndicatorMetricConfig = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 4, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 6, 2, 0,
+	0, 0, 0, 0, 0, 5, 8, 7,
+}}
+var hServiceLevelIndicatorMetricConfig = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 1, 6, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 9, 2, 0,
+	0, 0, 0, 0, 0, 8, 4, 7,
+}}
+var hServiceLevelObjective = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	5, 11, 0, 2, 0, 6, 0, 7, 3, 0, 4, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 9, 0, 1,
+	0, 12, 0, 0, 0, 8, 0, 0,
+}}
+var hServiceLevelObjectiveBudgetReport = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 2, 3, 0, 0, 8, 0, 0, 0, 9, 0, 0, 5, 4, 0, 0, 1, 0, 6, 12, 0, 0, 10, 0,
+	7, 0, 0, 11, 0, 0, 0, 0,
+}}
+var hServiceLevelObjectiveSummary = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 10, 0, 5, 3, 0, 0, 0, 2, 6, 0, 0, 0, 8, 0, 0, 1, 9,
+	4, 0, 0, 0, 0, 0, 7, 0,
+}}
+var hStandardUnit = smithy.MemberHash{Seed: 282, Slots: []uint16{
+	16, 7, 25, 18, 19, 0, 23, 11, 0, 5, 21, 12, 1, 6, 0, 0, 0, 0, 0, 27, 4, 10, 0, 0,
+	22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 15, 0, 17, 9, 0, 3, 2, 0, 13, 0, 0, 26, 0, 0, 24,
+}}
+var hCreateInstrumentationConfigurationRequest = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 0, 7, 4, 6, 0, 0, 0, 0, 0, 5, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	9, 0, 3, 8, 0, 10, 0, 0,
+}}
+var hCreateInstrumentationConfigurationResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 2, 6, 12, 0, 7, 0, 4, 0, 0, 8, 3, 0, 0, 0, 0, 0, 0, 10, 1, 0,
+	0, 11, 5, 0, 0, 9, 0, 0,
+}}
+var hCreateServiceLevelObjectiveInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 6, 9, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 2, 5, 0, 0,
+	0, 0, 0, 0, 0, 3, 0, 4,
+}}
+var hGetInstrumentationConfigurationStatusRequest = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7, 3, 0, 0, 9, 0, 0, 0, 2, 0, 1,
+	0, 0, 0, 0, 10, 5, 0, 8,
+}}
+var hListServiceLevelObjectivesInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 3, 2, 0,
+	0, 0, 0, 8, 0, 4, 6, 9,
+}}
+
+var sBatchDeleteInstrumentationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteInstrumentationConfigurations, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchDeleteInstrumentationConfigurations})
+var sBatchGetServiceLevelObjectiveBudgetReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetServiceLevelObjectiveBudgetReport, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetServiceLevelObjectiveBudgetReport})
+var sBatchUpdateExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateExclusionWindows, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchUpdateExclusionWindows})
+var sCreateInstrumentationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInstrumentationConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateInstrumentationConfiguration})
+var sCreateServiceLevelObjective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceLevelObjective, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateServiceLevelObjective})
+var sDeleteGroupingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupingConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGroupingConfiguration})
+var sDeleteInstrumentationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstrumentationConfiguration, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInstrumentationConfiguration})
+var sDeleteServiceLevelObjective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceLevelObjective, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteServiceLevelObjective})
+var sGetInstrumentationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfiguration, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetInstrumentationConfiguration})
+var sGetInstrumentationConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfigurationStatus, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetInstrumentationConfigurationStatus})
+var sGetService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetService, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetService})
+var sGetServiceLevelObjective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceLevelObjective, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetServiceLevelObjective})
+var sListAuditFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAuditFindings, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListAuditFindings})
+var sListEntityEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntityEvents, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListEntityEvents})
+var sListGroupingAttributeDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupingAttributeDefinitions, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListGroupingAttributeDefinitions})
+var sListInstrumentationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstrumentationConfigurations, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListInstrumentationConfigurations})
+var sListServiceDependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependencies, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListServiceDependencies})
+var sListServiceDependents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependents, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListServiceDependents})
+var sListServiceLevelObjectiveExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectiveExclusionWindows, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListServiceLevelObjectiveExclusionWindows})
+var sListServiceLevelObjectives = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectives, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListServiceLevelObjectives})
+var sListServiceOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceOperations, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListServiceOperations})
+var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListServices})
+var sListServiceStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceStates, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListServiceStates})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutGroupingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGroupingConfiguration, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ePutGroupingConfiguration})
+var sReportInstrumentationConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportInstrumentationConfigurationStatus, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eReportInstrumentationConfigurationStatus})
+var sStartDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscovery, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eStartDiscovery})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateServiceLevelObjective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceLevelObjective, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateServiceLevelObjective})
+var s_ApplicationSignals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSignals, Type: smithy.ShapeTypeService, Ext: &e_ApplicationSignals})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_Attainment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attainment, Type: smithy.ShapeTypeDouble, Ext: &e_Attainment})
+var s_AttainmentGoal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttainmentGoal, Type: smithy.ShapeTypeDouble, Ext: &e_AttainmentGoal})
+var sAttributeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeFilter, Members: &mAttributeFilter, Type: smithy.ShapeTypeStructure, Ext: &eAttributeFilter})
+var sAttributeFilter_AttributeFilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilterName", ID: &i_AttributeFilterName, Type: smithy.ShapeTypeString, Ext: &eAttributeFilter_AttributeFilterName})
+var sAttributeFilter_AttributeFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilterValues", ID: &i_AttributeFilterValues, Members: &m_AttributeFilterValues, Type: smithy.ShapeTypeList, Ext: &eAttributeFilter_AttributeFilterValues})
+var s_AttributeFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeFilterName, Type: smithy.ShapeTypeString, Ext: &e_AttributeFilterName})
+var s_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeFilters, Members: &m_AttributeFilters, Type: smithy.ShapeTypeList, Ext: &e_AttributeFilters})
+var s_AttributeFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeFilter, Members: &mAttributeFilter, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeFilters_member})
+var s_AttributeFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeFilterValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeFilterValue})
+var s_AttributeFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeFilterValues, Members: &m_AttributeFilterValues, Type: smithy.ShapeTypeList, Ext: &e_AttributeFilterValues})
+var s_AttributeFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeFilterValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeFilterValues_member})
+var s_AttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_AttributeMap})
+var s_AttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AttributeMap_key})
+var s_AttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AttributeMap_value})
+var s_AttributeMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMaps, Members: &m_AttributeMaps, Type: smithy.ShapeTypeList, Ext: &e_AttributeMaps})
+var s_AttributeMaps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_AttributeMaps_member})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &e_Attributes})
+var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KeyAttributeName, Type: smithy.ShapeTypeString, Ext: &e_Attributes_key})
+var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_KeyAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_Attributes_value})
+var sAuditFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditFinding, Members: &mAuditFinding, Type: smithy.ShapeTypeStructure, Ext: &eAuditFinding})
+var sAuditFinding_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eAuditFinding_KeyAttributes})
+var sAuditFinding_AuditorResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditorResults", ID: &i_AuditorResults, Members: &m_AuditorResults, Type: smithy.ShapeTypeList, Ext: &eAuditFinding_AuditorResults})
+var sAuditFinding_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAuditFinding_Operation})
+var sAuditFinding_MetricGraph = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricGraph", ID: &iMetricGraph, Members: &mMetricGraph, Type: smithy.ShapeTypeStructure, Ext: &eAuditFinding_MetricGraph})
+var sAuditFinding_DependencyGraph = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyGraph", ID: &iDependencyGraph, Members: &mDependencyGraph, Type: smithy.ShapeTypeStructure, Ext: &eAuditFinding_DependencyGraph})
+var sAuditFinding_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAuditFinding_Type})
+var s_AuditFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditFindings, Members: &m_AuditFindings, Type: smithy.ShapeTypeList, Ext: &e_AuditFindings})
+var s_AuditFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditFinding, Members: &mAuditFinding, Type: smithy.ShapeTypeStructure, Ext: &e_AuditFindings_member})
+var sAuditorResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditorResult, Members: &mAuditorResult, Type: smithy.ShapeTypeStructure, Ext: &eAuditorResult})
+var sAuditorResult_Auditor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Auditor", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAuditorResult_Auditor})
+var sAuditorResult_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAuditorResult_Description})
+var sAuditorResult_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_DataMap, Members: &m_DataMap, Type: smithy.ShapeTypeMap, Ext: &eAuditorResult_Data})
+var sAuditorResult_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eAuditorResult_Severity})
+var s_AuditorResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditorResults, Members: &m_AuditorResults, Type: smithy.ShapeTypeList, Ext: &e_AuditorResults})
+var s_AuditorResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditorResult, Members: &mAuditorResult, Type: smithy.ShapeTypeStructure, Ext: &e_AuditorResults_member})
+var s_Auditors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Auditors, Members: &m_Auditors, Type: smithy.ShapeTypeList, Ext: &e_Auditors})
+var s_Auditors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Auditors_member})
+var sAuditTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditTarget, Members: &mAuditTarget, Type: smithy.ShapeTypeStructure, Ext: &eAuditTarget})
+var sAuditTarget_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAuditTarget_Type})
+var sAuditTarget_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &iAuditTargetEntity, Members: &mAuditTargetEntity, Type: smithy.ShapeTypeUnion, Ext: &eAuditTarget_Data})
+var sAuditTargetEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditTargetEntity, Members: &mAuditTargetEntity, Type: smithy.ShapeTypeUnion, Ext: &eAuditTargetEntity})
+var sAuditTargetEntity_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iServiceEntity, Members: &mServiceEntity, Type: smithy.ShapeTypeStructure, Ext: &eAuditTargetEntity_Service})
+var sAuditTargetEntity_Slo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slo", ID: &iServiceLevelObjectiveEntity, Members: &mServiceLevelObjectiveEntity, Type: smithy.ShapeTypeStructure, Ext: &eAuditTargetEntity_Slo})
+var sAuditTargetEntity_ServiceOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceOperation", ID: &iServiceOperationEntity, Members: &mServiceOperationEntity, Type: smithy.ShapeTypeStructure, Ext: &eAuditTargetEntity_ServiceOperation})
+var sAuditTargetEntity_Canary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Canary", ID: &iCanaryEntity, Members: &mCanaryEntity, Type: smithy.ShapeTypeStructure, Ext: &eAuditTargetEntity_Canary})
+var s_AuditTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditTargets, Members: &m_AuditTargets, Type: smithy.ShapeTypeList, Ext: &e_AuditTargets})
+var s_AuditTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditTarget, Members: &mAuditTarget, Type: smithy.ShapeTypeStructure, Ext: &e_AuditTargets_member})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var sBatchDeleteByResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteByResourceArns, Members: &mBatchDeleteByResourceArns, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteByResourceArns})
+var sBatchDeleteByResourceArns_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_BatchDeleteResourceArnList, Members: &m_BatchDeleteResourceArnList, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteByResourceArns_ResourceArns})
+var sBatchDeleteByResourceArns_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eBatchDeleteByResourceArns_InstrumentationType})
+var sBatchDeleteDeletionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteDeletionTarget, Members: &mBatchDeleteDeletionTarget, Type: smithy.ShapeTypeUnion, Ext: &eBatchDeleteDeletionTarget})
+var sBatchDeleteDeletionTarget_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iBatchDeleteScope, Members: &mBatchDeleteScope, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteDeletionTarget_Scope})
+var sBatchDeleteDeletionTarget_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &iBatchDeleteByResourceArns, Members: &mBatchDeleteByResourceArns, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteDeletionTarget_ResourceArns})
+var sBatchDeleteError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteError, Members: &mBatchDeleteError, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteError})
+var sBatchDeleteError_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteError_ResourceArn})
+var sBatchDeleteError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iBatchDeleteErrorCode, Members: &mBatchDeleteErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchDeleteError_Code})
+var sBatchDeleteError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteError_Message})
+var sBatchDeleteErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteErrorCode, Members: &mBatchDeleteErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchDeleteErrorCode})
+var sBatchDeleteErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteErrorCode_RESOURCE_NOT_FOUND})
+var sBatchDeleteErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteErrorCode_ACCESS_DENIED})
+var sBatchDeleteErrorCode_INTERNAL_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteErrorCode_INTERNAL_SERVICE_ERROR})
+var s_BatchDeleteErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteErrorList, Members: &m_BatchDeleteErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteErrorList})
+var s_BatchDeleteErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteError, Members: &mBatchDeleteError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteErrorList_member})
+var s_BatchDeleteResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteResourceArnList, Members: &m_BatchDeleteResourceArnList, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteResourceArnList})
+var s_BatchDeleteResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_BatchDeleteResourceArnList_member})
+var sBatchDeleteScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteScope, Members: &mBatchDeleteScope, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteScope})
+var sBatchDeleteScope_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteScope_Service})
+var sBatchDeleteScope_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteScope_Environment})
+var sBatchDeleteScope_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eBatchDeleteScope_InstrumentationType})
+var sBatchDeleteSuccessfulDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteSuccessfulDeletion, Members: &mBatchDeleteSuccessfulDeletion, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteSuccessfulDeletion})
+var sBatchDeleteSuccessfulDeletion_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteSuccessfulDeletion_ResourceArn})
+var sBatchDeleteSuccessfulDeletion_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteSuccessfulDeletion_SignalType})
+var sBatchDeleteSuccessfulDeletion_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteSuccessfulDeletion_LocationHash})
+var s_BatchDeleteSuccessfulDeletionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteSuccessfulDeletionList, Members: &m_BatchDeleteSuccessfulDeletionList, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteSuccessfulDeletionList})
+var s_BatchDeleteSuccessfulDeletionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteSuccessfulDeletion, Members: &mBatchDeleteSuccessfulDeletion, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteSuccessfulDeletionList_member})
+var sBatchUpdateExclusionWindowsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateExclusionWindowsError, Members: &mBatchUpdateExclusionWindowsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateExclusionWindowsError})
+var sBatchUpdateExclusionWindowsError_SloId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloId", ID: &i_ServiceLevelObjectiveId, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateExclusionWindowsError_SloId})
+var sBatchUpdateExclusionWindowsError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ExclusionWindowErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateExclusionWindowsError_ErrorCode})
+var sBatchUpdateExclusionWindowsError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ExclusionWindowErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateExclusionWindowsError_ErrorMessage})
+var s_BatchUpdateExclusionWindowsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUpdateExclusionWindowsErrors, Members: &m_BatchUpdateExclusionWindowsErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchUpdateExclusionWindowsErrors})
+var s_BatchUpdateExclusionWindowsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUpdateExclusionWindowsError, Members: &mBatchUpdateExclusionWindowsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchUpdateExclusionWindowsErrors_member})
+var s_BudgetRequestsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetRequestsRemaining, Type: smithy.ShapeTypeInteger, Ext: &e_BudgetRequestsRemaining})
+var s_BudgetSecondsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetSecondsRemaining, Type: smithy.ShapeTypeInteger, Ext: &e_BudgetSecondsRemaining})
+var sBurnRateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBurnRateConfiguration, Members: &mBurnRateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eBurnRateConfiguration})
+var sBurnRateConfiguration_LookBackWindowMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookBackWindowMinutes", ID: &i_BurnRateLookBackWindowMinutes, Type: smithy.ShapeTypeInteger, Ext: &eBurnRateConfiguration_LookBackWindowMinutes})
+var s_BurnRateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BurnRateConfigurations, Members: &m_BurnRateConfigurations, Type: smithy.ShapeTypeList, Ext: &e_BurnRateConfigurations})
+var s_BurnRateConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBurnRateConfiguration, Members: &mBurnRateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_BurnRateConfigurations_member})
+var s_BurnRateLookBackWindowMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BurnRateLookBackWindowMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_BurnRateLookBackWindowMinutes})
+var sCalendarInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalendarInterval, Members: &mCalendarInterval, Type: smithy.ShapeTypeStructure, Ext: &eCalendarInterval})
+var sCalendarInterval_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCalendarInterval_StartTime})
+var sCalendarInterval_DurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationUnit", ID: &iDurationUnit, Members: &mDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eCalendarInterval_DurationUnit})
+var sCalendarInterval_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_CalendarIntervalDuration, Type: smithy.ShapeTypeInteger, Ext: &eCalendarInterval_Duration})
+var s_CalendarIntervalDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CalendarIntervalDuration, Type: smithy.ShapeTypeInteger, Ext: &e_CalendarIntervalDuration})
+var sCanaryEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryEntity, Members: &mCanaryEntity, Type: smithy.ShapeTypeStructure, Ext: &eCanaryEntity})
+var sCanaryEntity_CanaryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanaryName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCanaryEntity_CanaryName})
+var sCaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaptureConfiguration, Members: &mCaptureConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCaptureConfiguration})
+var sCaptureConfiguration_CodeCapture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeCapture", ID: &iCodeCaptureConfiguration, Members: &mCodeCaptureConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCaptureConfiguration_CodeCapture})
+var sCaptureLimitsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaptureLimitsConfig, Members: &mCaptureLimitsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCaptureLimitsConfig})
+var sCaptureLimitsConfig_MaxHits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxHits", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxHits})
+var sCaptureLimitsConfig_MaxStringLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxStringLength", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxStringLength})
+var sCaptureLimitsConfig_MaxCollectionWidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCollectionWidth", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxCollectionWidth})
+var sCaptureLimitsConfig_MaxCollectionDepth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCollectionDepth", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxCollectionDepth})
+var sCaptureLimitsConfig_MaxStackFrames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxStackFrames", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxStackFrames})
+var sCaptureLimitsConfig_MaxStackTraceSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxStackTraceSize", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxStackTraceSize})
+var sCaptureLimitsConfig_MaxObjectDepth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxObjectDepth", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxObjectDepth})
+var sCaptureLimitsConfig_MaxFieldsPerObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxFieldsPerObject", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCaptureLimitsConfig_MaxFieldsPerObject})
+var sChangeEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeEvent, Members: &mChangeEvent, Type: smithy.ShapeTypeStructure, Ext: &eChangeEvent})
+var sChangeEvent_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeEvent_Timestamp})
+var sChangeEvent_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eChangeEvent_AccountId})
+var sChangeEvent_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eChangeEvent_Region})
+var sChangeEvent_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eChangeEvent_Entity})
+var sChangeEvent_ChangeEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeEventType", ID: &iChangeEventType, Members: &mChangeEventType, Type: smithy.ShapeTypeEnum, Ext: &eChangeEvent_ChangeEventType})
+var sChangeEvent_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eChangeEvent_EventId})
+var sChangeEvent_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eChangeEvent_UserName})
+var sChangeEvent_EventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eChangeEvent_EventName})
+var s_ChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeEvents, Members: &m_ChangeEvents, Type: smithy.ShapeTypeList, Ext: &e_ChangeEvents})
+var s_ChangeEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeEvent, Members: &mChangeEvent, Type: smithy.ShapeTypeStructure, Ext: &e_ChangeEvents_member})
+var sChangeEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeEventType, Members: &mChangeEventType, Type: smithy.ShapeTypeEnum, Ext: &eChangeEventType})
+var sChangeEventType_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeEventType_DEPLOYMENT})
+var sChangeEventType_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeEventType_CONFIGURATION})
+var sCodeCaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeCaptureConfiguration, Members: &mCodeCaptureConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCodeCaptureConfiguration})
+var sCodeCaptureConfiguration_CaptureArguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureArguments", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCodeCaptureConfiguration_CaptureArguments})
+var sCodeCaptureConfiguration_CaptureReturn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureReturn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodeCaptureConfiguration_CaptureReturn})
+var sCodeCaptureConfiguration_CaptureStackTrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureStackTrace", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodeCaptureConfiguration_CaptureStackTrace})
+var sCodeCaptureConfiguration_CaptureLocals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureLocals", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCodeCaptureConfiguration_CaptureLocals})
+var sCodeCaptureConfiguration_CaptureLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureLimits", ID: &iCaptureLimitsConfig, Members: &mCaptureLimitsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCodeCaptureConfiguration_CaptureLimits})
+var sCodeLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeLocation, Members: &mCodeLocation, Type: smithy.ShapeTypeStructure, Ext: &eCodeLocation})
+var sCodeLocation_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &iProgrammingLanguage, Members: &mProgrammingLanguage, Type: smithy.ShapeTypeEnum, Ext: &eCodeLocation_Language})
+var sCodeLocation_CodeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeUnit", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeLocation_CodeUnit})
+var sCodeLocation_ClassName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClassName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeLocation_ClassName})
+var sCodeLocation_MethodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MethodName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeLocation_MethodName})
+var sCodeLocation_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeLocation_FilePath})
+var sCodeLocation_LineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCodeLocation_LineNumber})
+var sCompositeSliComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeSliComponent, Members: &mCompositeSliComponent, Type: smithy.ShapeTypeUnion, Ext: &eCompositeSliComponent})
+var sCompositeSliComponent_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eCompositeSliComponent_OperationName})
+var s_CompositeSliComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeSliComponents, Members: &m_CompositeSliComponents, Type: smithy.ShapeTypeList, Ext: &e_CompositeSliComponents})
+var s_CompositeSliComponents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompositeSliComponent, Members: &mCompositeSliComponent, Type: smithy.ShapeTypeUnion, Ext: &e_CompositeSliComponents_member})
+var sCompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eCompositeSliConfig})
+var sCompositeSliConfig_SelectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectionConfig", ID: &iSelectionConfig, Members: &mSelectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eCompositeSliConfig_SelectionConfig})
+var sCompositeSliConfig_Components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Components", ID: &i_CompositeSliComponents, Members: &m_CompositeSliComponents, Type: smithy.ShapeTypeList, Ext: &eCompositeSliConfig_Components})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum, Ext: &eConnectionType})
+var sConnectionType_INDIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionType_INDIRECT})
+var sConnectionType_DIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionType_DIRECT})
+var s_DataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataMap, Members: &m_DataMap, Type: smithy.ShapeTypeMap, Ext: &e_DataMap})
+var s_DataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DataMap_key})
+var s_DataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DataMap_value})
+var sDependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eDependencyConfig})
+var sDependencyConfig_DependencyKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyKeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eDependencyConfig_DependencyKeyAttributes})
+var sDependencyConfig_DependencyOperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyOperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eDependencyConfig_DependencyOperationName})
+var sDependencyGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyGraph, Members: &mDependencyGraph, Type: smithy.ShapeTypeStructure, Ext: &eDependencyGraph})
+var sDependencyGraph_Nodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nodes", ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &eDependencyGraph_Nodes})
+var sDependencyGraph_Edges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edges", ID: &i_Edges, Members: &m_Edges, Type: smithy.ShapeTypeList, Ext: &eDependencyGraph_Edges})
+var sDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetailLevel, Members: &mDetailLevel, Type: smithy.ShapeTypeEnum, Ext: &eDetailLevel})
+var sDetailLevel_BRIEF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRIEF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetailLevel_BRIEF})
+var sDetailLevel_DETAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetailLevel_DETAILED})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var sDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &eDimension_Name})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &eDimension_Value})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &e_DimensionName})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValue})
+var sDurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDurationUnit, Members: &mDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eDurationUnit})
+var sDurationUnit_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDurationUnit_MINUTE})
+var sDurationUnit_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDurationUnit_HOUR})
+var sDurationUnit_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDurationUnit_DAY})
+var sDurationUnit_MONTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDurationUnit_MONTH})
+var s_DynamicInstrumentationAttributeFilterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicInstrumentationAttributeFilterGroup, Members: &m_DynamicInstrumentationAttributeFilterGroup, Type: smithy.ShapeTypeMap, Ext: &e_DynamicInstrumentationAttributeFilterGroup})
+var s_DynamicInstrumentationAttributeFilterGroup_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DynamicInstrumentationAttributeFilterGroup_key})
+var s_DynamicInstrumentationAttributeFilterGroup_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DynamicInstrumentationAttributeFilterGroup_value})
+var s_DynamicInstrumentationAttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamicInstrumentationAttributeFilters, Members: &m_DynamicInstrumentationAttributeFilters, Type: smithy.ShapeTypeList, Ext: &e_DynamicInstrumentationAttributeFilters})
+var s_DynamicInstrumentationAttributeFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DynamicInstrumentationAttributeFilterGroup, Members: &m_DynamicInstrumentationAttributeFilterGroup, Type: smithy.ShapeTypeMap, Ext: &e_DynamicInstrumentationAttributeFilters_member})
+var sDynamicInstrumentationDeletionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicInstrumentationDeletionStatus, Members: &mDynamicInstrumentationDeletionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDynamicInstrumentationDeletionStatus})
+var sDynamicInstrumentationDeletionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDynamicInstrumentationDeletionStatus_DELETED})
+var sDynamicInstrumentationSignalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eDynamicInstrumentationSignalType})
+var sDynamicInstrumentationSignalType_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDynamicInstrumentationSignalType_SNAPSHOT})
+var sEdge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdge, Members: &mEdge, Type: smithy.ShapeTypeStructure, Ext: &eEdge})
+var sEdge_SourceNodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceNodeId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEdge_SourceNodeId})
+var sEdge_DestinationNodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationNodeId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEdge_DestinationNodeId})
+var sEdge_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eEdge_Duration})
+var sEdge_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum, Ext: &eEdge_ConnectionType})
+var s_Edges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Edges, Members: &m_Edges, Type: smithy.ShapeTypeList, Ext: &e_Edges})
+var s_Edges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEdge, Members: &mEdge, Type: smithy.ShapeTypeStructure, Ext: &e_Edges_member})
+var sEvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eEvaluationType})
+var sEvaluationType_PERIOD_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERIOD_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationType_PERIOD_BASED})
+var sEvaluationType_REQUEST_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationType_REQUEST_BASED})
+var s_ExclusionDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionDuration, Type: smithy.ShapeTypeInteger, Ext: &e_ExclusionDuration})
+var s_ExclusionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionReason, Type: smithy.ShapeTypeString, Ext: &e_ExclusionReason})
+var sExclusionWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExclusionWindow, Members: &mExclusionWindow, Type: smithy.ShapeTypeStructure, Ext: &eExclusionWindow})
+var sExclusionWindow_Window = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Window", ID: &iWindow, Members: &mWindow, Type: smithy.ShapeTypeStructure, Ext: &eExclusionWindow_Window})
+var sExclusionWindow_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExclusionWindow_StartTime})
+var sExclusionWindow_RecurrenceRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurrenceRule", ID: &iRecurrenceRule, Members: &mRecurrenceRule, Type: smithy.ShapeTypeStructure, Ext: &eExclusionWindow_RecurrenceRule})
+var sExclusionWindow_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_ExclusionReason, Type: smithy.ShapeTypeString, Ext: &eExclusionWindow_Reason})
+var s_ExclusionWindowErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionWindowErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ExclusionWindowErrorCode})
+var s_ExclusionWindowErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionWindowErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ExclusionWindowErrorMessage})
+var s_ExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionWindows, Members: &m_ExclusionWindows, Type: smithy.ShapeTypeList, Ext: &e_ExclusionWindows})
+var s_ExclusionWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExclusionWindow, Members: &mExclusionWindow, Type: smithy.ShapeTypeStructure, Ext: &e_ExclusionWindows_member})
+var s_Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expression, Type: smithy.ShapeTypeString, Ext: &e_Expression})
+var s_FaultDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &e_FaultDescription})
+var sGoal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoal, Members: &mGoal, Type: smithy.ShapeTypeStructure, Ext: &eGoal})
+var sGoal_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &iInterval, Members: &mInterval, Type: smithy.ShapeTypeUnion, Ext: &eGoal_Interval})
+var sGoal_AttainmentGoal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttainmentGoal", ID: &i_AttainmentGoal, Type: smithy.ShapeTypeDouble, Ext: &eGoal_AttainmentGoal})
+var sGoal_WarningThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarningThreshold", ID: &i_WarningThreshold, Type: smithy.ShapeTypeDouble, Ext: &eGoal_WarningThreshold})
+var s_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupIdentifier, Type: smithy.ShapeTypeString, Ext: &e_GroupIdentifier})
+var sGroupingAttributeDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupingAttributeDefinition, Members: &mGroupingAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &eGroupingAttributeDefinition})
+var sGroupingAttributeDefinition_GroupingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingName", ID: &i_GroupingString, Type: smithy.ShapeTypeString, Ext: &eGroupingAttributeDefinition_GroupingName})
+var sGroupingAttributeDefinition_GroupingSourceKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingSourceKeys", ID: &i_GroupingSourceKeyStringList, Members: &m_GroupingSourceKeyStringList, Type: smithy.ShapeTypeList, Ext: &eGroupingAttributeDefinition_GroupingSourceKeys})
+var sGroupingAttributeDefinition_DefaultGroupingValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultGroupingValue", ID: &i_GroupingString, Type: smithy.ShapeTypeString, Ext: &eGroupingAttributeDefinition_DefaultGroupingValue})
+var s_GroupingAttributeDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupingAttributeDefinitions, Members: &m_GroupingAttributeDefinitions, Type: smithy.ShapeTypeList, Ext: &e_GroupingAttributeDefinitions})
+var s_GroupingAttributeDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupingAttributeDefinition, Members: &mGroupingAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_GroupingAttributeDefinitions_member})
+var sGroupingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupingConfiguration, Members: &mGroupingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGroupingConfiguration})
+var sGroupingConfiguration_GroupingAttributeDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingAttributeDefinitions", ID: &i_GroupingAttributeDefinitions, Members: &m_GroupingAttributeDefinitions, Type: smithy.ShapeTypeList, Ext: &eGroupingConfiguration_GroupingAttributeDefinitions})
+var sGroupingConfiguration_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGroupingConfiguration_UpdatedAt})
+var s_GroupingSourceKeyStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupingSourceKeyStringList, Members: &m_GroupingSourceKeyStringList, Type: smithy.ShapeTypeList, Ext: &e_GroupingSourceKeyStringList})
+var s_GroupingSourceKeyStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GroupingString, Type: smithy.ShapeTypeString, Ext: &e_GroupingSourceKeyStringList_member})
+var s_GroupingString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupingString, Type: smithy.ShapeTypeString, Ext: &e_GroupingString})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &e_GroupName})
+var s_GroupSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupSource, Type: smithy.ShapeTypeString, Ext: &e_GroupSource})
+var s_GroupValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupValue, Type: smithy.ShapeTypeString, Ext: &e_GroupValue})
+var sInstrumentationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationConfiguration, Members: &mInstrumentationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfiguration})
+var sInstrumentationConfiguration_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfiguration_InstrumentationType})
+var sInstrumentationConfiguration_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfiguration_Service})
+var sInstrumentationConfiguration_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfiguration_Environment})
+var sInstrumentationConfiguration_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfiguration_SignalType})
+var sInstrumentationConfiguration_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eInstrumentationConfiguration_Location})
+var sInstrumentationConfiguration_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfiguration_LocationHash})
+var sInstrumentationConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfiguration_Description})
+var sInstrumentationConfiguration_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfiguration_ExpiresAt})
+var sInstrumentationConfiguration_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_DynamicInstrumentationAttributeFilters, Members: &m_DynamicInstrumentationAttributeFilters, Type: smithy.ShapeTypeList, Ext: &eInstrumentationConfiguration_AttributeFilters})
+var sInstrumentationConfiguration_CaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureConfiguration", ID: &iCaptureConfiguration, Members: &mCaptureConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eInstrumentationConfiguration_CaptureConfiguration})
+var sInstrumentationConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfiguration_CreatedAt})
+var sInstrumentationConfiguration_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_InstrumentationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfiguration_ARN})
+var s_InstrumentationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstrumentationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_InstrumentationConfigurationArn})
+var sInstrumentationConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationConfigurationStatus, Members: &mInstrumentationConfigurationStatus, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationStatus})
+var sInstrumentationConfigurationStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationStatus_READY})
+var sInstrumentationConfigurationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationStatus_ERROR})
+var sInstrumentationConfigurationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationStatus_ACTIVE})
+var sInstrumentationConfigurationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationStatus_DISABLED})
+var s_InstrumentationConfigurationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstrumentationConfigurationStatusList, Members: &m_InstrumentationConfigurationStatusList, Type: smithy.ShapeTypeList, Ext: &e_InstrumentationConfigurationStatusList})
+var s_InstrumentationConfigurationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstrumentationConfigurationStatusReport, Members: &mInstrumentationConfigurationStatusReport, Type: smithy.ShapeTypeStructure, Ext: &e_InstrumentationConfigurationStatusList_member})
+var sInstrumentationConfigurationStatusReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationConfigurationStatusReport, Members: &mInstrumentationConfigurationStatusReport, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationStatusReport})
+var sInstrumentationConfigurationStatusReport_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationStatusReport_InstrumentationType})
+var sInstrumentationConfigurationStatusReport_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationStatusReport_SignalType})
+var sInstrumentationConfigurationStatusReport_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationStatusReport_LocationHash})
+var sInstrumentationConfigurationStatusReport_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInstrumentationConfigurationStatus, Members: &mInstrumentationConfigurationStatus, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationStatusReport_Status})
+var sInstrumentationConfigurationStatusReport_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfigurationStatusReport_Time})
+var sInstrumentationConfigurationStatusReport_ErrorCause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCause", ID: &iInstrumentationErrorCause, Members: &mInstrumentationErrorCause, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationStatusReport_ErrorCause})
+var s_InstrumentationConfigurationsWithoutServiceEnv = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstrumentationConfigurationsWithoutServiceEnv, Members: &m_InstrumentationConfigurationsWithoutServiceEnv, Type: smithy.ShapeTypeList, Ext: &e_InstrumentationConfigurationsWithoutServiceEnv})
+var s_InstrumentationConfigurationsWithoutServiceEnv_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstrumentationConfigurationWithoutServiceEnv, Members: &mInstrumentationConfigurationWithoutServiceEnv, Type: smithy.ShapeTypeStructure, Ext: &e_InstrumentationConfigurationsWithoutServiceEnv_member})
+var sInstrumentationConfigurationWithoutServiceEnv = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationConfigurationWithoutServiceEnv, Members: &mInstrumentationConfigurationWithoutServiceEnv, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationWithoutServiceEnv})
+var sInstrumentationConfigurationWithoutServiceEnv_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationWithoutServiceEnv_InstrumentationType})
+var sInstrumentationConfigurationWithoutServiceEnv_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationConfigurationWithoutServiceEnv_SignalType})
+var sInstrumentationConfigurationWithoutServiceEnv_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eInstrumentationConfigurationWithoutServiceEnv_Location})
+var sInstrumentationConfigurationWithoutServiceEnv_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationWithoutServiceEnv_LocationHash})
+var sInstrumentationConfigurationWithoutServiceEnv_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationWithoutServiceEnv_Description})
+var sInstrumentationConfigurationWithoutServiceEnv_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfigurationWithoutServiceEnv_ExpiresAt})
+var sInstrumentationConfigurationWithoutServiceEnv_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_DynamicInstrumentationAttributeFilters, Members: &m_DynamicInstrumentationAttributeFilters, Type: smithy.ShapeTypeList, Ext: &eInstrumentationConfigurationWithoutServiceEnv_AttributeFilters})
+var sInstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureConfiguration", ID: &iCaptureConfiguration, Members: &mCaptureConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eInstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration})
+var sInstrumentationConfigurationWithoutServiceEnv_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfigurationWithoutServiceEnv_CreatedAt})
+var sInstrumentationConfigurationWithoutServiceEnv_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_InstrumentationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationWithoutServiceEnv_ARN})
+var sInstrumentationErrorCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationErrorCause, Members: &mInstrumentationErrorCause, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationErrorCause})
+var sInstrumentationErrorCause_FILE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_FILE_NOT_FOUND})
+var sInstrumentationErrorCause_METHOD_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METHOD_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_METHOD_NOT_FOUND})
+var sInstrumentationErrorCause_LINE_NOT_EXECUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_NOT_EXECUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_LINE_NOT_EXECUTABLE})
+var sInstrumentationErrorCause_OVERLOADED_METHODS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERLOADED_METHODS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_OVERLOADED_METHODS})
+var sInstrumentationErrorCause_LANGUAGE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LANGUAGE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_LANGUAGE_MISMATCH})
+var sInstrumentationErrorCause_RUNTIME_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNTIME_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationErrorCause_RUNTIME_ERROR})
+var sInstrumentationStatusEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationStatusEvent, Members: &mInstrumentationStatusEvent, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationStatusEvent})
+var sInstrumentationStatusEvent_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationStatusEvent_Time})
+var sInstrumentationStatusEvent_ErrorCause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCause", ID: &iInstrumentationErrorCause, Members: &mInstrumentationErrorCause, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationStatusEvent_ErrorCause})
+var s_InstrumentationStatusEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstrumentationStatusEventList, Members: &m_InstrumentationStatusEventList, Type: smithy.ShapeTypeList, Ext: &e_InstrumentationStatusEventList})
+var s_InstrumentationStatusEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstrumentationStatusEvent, Members: &mInstrumentationStatusEvent, Type: smithy.ShapeTypeStructure, Ext: &e_InstrumentationStatusEventList_member})
+var sInstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eInstrumentationType})
+var sInstrumentationType_BREAKPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BREAKPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationType_BREAKPOINT})
+var sInstrumentationType_PROBE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROBE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationType_PROBE})
+var sInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterval, Members: &mInterval, Type: smithy.ShapeTypeUnion, Ext: &eInterval})
+var sInterval_RollingInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RollingInterval", ID: &iRollingInterval, Members: &mRollingInterval, Type: smithy.ShapeTypeStructure, Ext: &eInterval_RollingInterval})
+var sInterval_CalendarInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalendarInterval", ID: &iCalendarInterval, Members: &mCalendarInterval, Type: smithy.ShapeTypeStructure, Ext: &eInterval_CalendarInterval})
+var s_KeyAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAttributeName, Type: smithy.ShapeTypeString, Ext: &e_KeyAttributeName})
+var s_KeyAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_KeyAttributeValue})
+var s_LatestChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LatestChangeEvents, Members: &m_LatestChangeEvents, Type: smithy.ShapeTypeList, Ext: &e_LatestChangeEvents})
+var s_LatestChangeEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeEvent, Members: &mChangeEvent, Type: smithy.ShapeTypeStructure, Ext: &e_LatestChangeEvents_member})
+var s_ListAuditFindingMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAuditFindingMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListAuditFindingMaxResults})
+var s_ListEntityEventsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEntityEventsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListEntityEventsMaxResults})
+var s_ListServiceDependenciesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceDependenciesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceDependenciesMaxResults})
+var s_ListServiceDependentsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceDependentsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceDependentsMaxResults})
+var s_ListServiceLevelObjectiveExclusionWindowsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceLevelObjectiveExclusionWindowsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceLevelObjectiveExclusionWindowsMaxResults})
+var s_ListServiceLevelObjectivesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceLevelObjectivesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceLevelObjectivesMaxResults})
+var s_ListServiceOperationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceOperationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceOperationMaxResults})
+var s_ListServicesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServicesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServicesMaxResults})
+var s_ListServiceStatesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceStatesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListServiceStatesMaxResults})
+var sLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eLocation})
+var sLocation_CodeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeLocation", ID: &iCodeLocation, Members: &mCodeLocation, Type: smithy.ShapeTypeStructure, Ext: &eLocation_CodeLocation})
+var sLocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationIdentifier, Members: &mLocationIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eLocationIdentifier})
+var sLocationIdentifier_CodeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeLocation", ID: &iCodeLocation, Members: &mCodeLocation, Type: smithy.ShapeTypeStructure, Ext: &eLocationIdentifier_CodeLocation})
+var sLocationIdentifier_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLocationIdentifier_LocationHash})
+var s_LogGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupReferences, Members: &m_LogGroupReferences, Type: smithy.ShapeTypeList, Ext: &e_LogGroupReferences})
+var s_LogGroupReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &e_LogGroupReferences_member})
+var sMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetric})
+var sMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetric_Namespace})
+var sMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetric_MetricName})
+var sMetric_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetric_Dimensions})
+var s_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &e_MetricDataQueries})
+var s_MetricDataQueries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataQueries_member})
+var sMetricDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery})
+var sMetricDataQuery_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Id})
+var sMetricDataQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery_MetricStat})
+var sMetricDataQuery_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_MetricExpression, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Expression})
+var sMetricDataQuery_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Label})
+var sMetricDataQuery_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnData", ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean, Ext: &eMetricDataQuery_ReturnData})
+var sMetricDataQuery_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eMetricDataQuery_Period})
+var sMetricDataQuery_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_AccountId})
+var s_MetricExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricExpression, Type: smithy.ShapeTypeString, Ext: &e_MetricExpression})
+var sMetricGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricGraph, Members: &mMetricGraph, Type: smithy.ShapeTypeStructure, Ext: &eMetricGraph})
+var sMetricGraph_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eMetricGraph_MetricDataQueries})
+var sMetricGraph_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricGraph_StartTime})
+var sMetricGraph_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricGraph_EndTime})
+var s_MetricId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &e_MetricId})
+var s_MetricLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &e_MetricLabel})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var sMetricReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricReference, Members: &mMetricReference, Type: smithy.ShapeTypeStructure, Ext: &eMetricReference})
+var sMetricReference_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetricReference_Namespace})
+var sMetricReference_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &i_MetricType, Type: smithy.ShapeTypeString, Ext: &eMetricReference_MetricType})
+var sMetricReference_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetricReference_Dimensions})
+var sMetricReference_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricReference_MetricName})
+var sMetricReference_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eMetricReference_AccountId})
+var s_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &e_MetricReferences})
+var s_MetricReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricReference, Members: &mMetricReference, Type: smithy.ShapeTypeStructure, Ext: &e_MetricReferences_member})
+var sMetricSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eMetricSource})
+var sMetricSource_MetricSourceKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSourceKeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eMetricSource_MetricSourceKeyAttributes})
+var sMetricSource_MetricSourceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSourceAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eMetricSource_MetricSourceAttributes})
+var sMetricSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricSourceType, Members: &mMetricSourceType, Type: smithy.ShapeTypeEnum, Ext: &eMetricSourceType})
+var sMetricSourceType_SERVICE_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_SERVICE_OPERATION})
+var sMetricSourceType_CLOUDWATCH_METRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_METRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_CLOUDWATCH_METRIC})
+var sMetricSourceType_SERVICE_DEPENDENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_DEPENDENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_SERVICE_DEPENDENCY})
+var sMetricSourceType_APPMONITOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPMONITOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_APPMONITOR})
+var sMetricSourceType_CANARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_CANARY})
+var sMetricSourceType_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricSourceType_SERVICE})
+var s_MetricSourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricSourceTypes, Members: &m_MetricSourceTypes, Type: smithy.ShapeTypeList, Ext: &e_MetricSourceTypes})
+var s_MetricSourceTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricSourceType, Members: &mMetricSourceType, Type: smithy.ShapeTypeEnum, Ext: &e_MetricSourceTypes_member})
+var sMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat})
+var sMetricStat_Metric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metric", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat_Metric})
+var sMetricStat_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eMetricStat_Period})
+var sMetricStat_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_Stat, Type: smithy.ShapeTypeString, Ext: &eMetricStat_Stat})
+var sMetricStat_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricStat_Unit})
+var s_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricType, Type: smithy.ShapeTypeString, Ext: &e_MetricType})
+var sMonitoredRequestCountMetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitoredRequestCountMetricDataQueries, Members: &mMonitoredRequestCountMetricDataQueries, Type: smithy.ShapeTypeUnion, Ext: &eMonitoredRequestCountMetricDataQueries})
+var sMonitoredRequestCountMetricDataQueries_GoodCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoodCountMetric", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eMonitoredRequestCountMetricDataQueries_GoodCountMetric})
+var sMonitoredRequestCountMetricDataQueries_BadCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadCountMetric", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eMonitoredRequestCountMetricDataQueries_BadCountMetric})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &e_Namespace})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeStructure, Ext: &eNode})
+var sNode_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eNode_KeyAttributes})
+var sNode_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNode_Name})
+var sNode_NodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNode_NodeId})
+var sNode_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNode_Operation})
+var sNode_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNode_Type})
+var sNode_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eNode_Duration})
+var sNode_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNode_Status})
+var s_Nodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Nodes, Members: &m_Nodes, Type: smithy.ShapeTypeList, Ext: &e_Nodes})
+var s_Nodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNode, Members: &mNode, Type: smithy.ShapeTypeStructure, Ext: &e_Nodes_member})
+var s_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &e_OperationName})
+var s_Period = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &e_Period})
+var sProgrammingLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgrammingLanguage, Members: &mProgrammingLanguage, Type: smithy.ShapeTypeEnum, Ext: &eProgrammingLanguage})
+var sProgrammingLanguage_JAVA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAVA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgrammingLanguage_JAVA})
+var sProgrammingLanguage_PYTHON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYTHON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgrammingLanguage_PYTHON})
+var sProgrammingLanguage_JAVASCRIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAVASCRIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgrammingLanguage_JAVASCRIPT})
+var sRecurrenceRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurrenceRule, Members: &mRecurrenceRule, Type: smithy.ShapeTypeStructure, Ext: &eRecurrenceRule})
+var sRecurrenceRule_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_Expression, Type: smithy.ShapeTypeString, Ext: &eRecurrenceRule_Expression})
+var sRequestBasedServiceLevelIndicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestBasedServiceLevelIndicator, Members: &mRequestBasedServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicator})
+var sRequestBasedServiceLevelIndicator_RequestBasedSliMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSliMetric", ID: &iRequestBasedServiceLevelIndicatorMetric, Members: &mRequestBasedServiceLevelIndicatorMetric, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicator_RequestBasedSliMetric})
+var sRequestBasedServiceLevelIndicator_MetricThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricThreshold", ID: &i_ServiceLevelIndicatorMetricThreshold, Type: smithy.ShapeTypeDouble, Ext: &eRequestBasedServiceLevelIndicator_MetricThreshold})
+var sRequestBasedServiceLevelIndicator_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iServiceLevelIndicatorComparisonOperator, Members: &mServiceLevelIndicatorComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eRequestBasedServiceLevelIndicator_ComparisonOperator})
+var sRequestBasedServiceLevelIndicatorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestBasedServiceLevelIndicatorConfig, Members: &mRequestBasedServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorConfig})
+var sRequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSliMetricConfig", ID: &iRequestBasedServiceLevelIndicatorMetricConfig, Members: &mRequestBasedServiceLevelIndicatorMetricConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig})
+var sRequestBasedServiceLevelIndicatorConfig_MetricThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricThreshold", ID: &i_ServiceLevelIndicatorMetricThreshold, Type: smithy.ShapeTypeDouble, Ext: &eRequestBasedServiceLevelIndicatorConfig_MetricThreshold})
+var sRequestBasedServiceLevelIndicatorConfig_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iServiceLevelIndicatorComparisonOperator, Members: &mServiceLevelIndicatorComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eRequestBasedServiceLevelIndicatorConfig_ComparisonOperator})
+var sRequestBasedServiceLevelIndicatorMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestBasedServiceLevelIndicatorMetric, Members: &mRequestBasedServiceLevelIndicatorMetric, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetric})
+var sRequestBasedServiceLevelIndicatorMetric_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eRequestBasedServiceLevelIndicatorMetric_KeyAttributes})
+var sRequestBasedServiceLevelIndicatorMetric_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eRequestBasedServiceLevelIndicatorMetric_OperationName})
+var sRequestBasedServiceLevelIndicatorMetric_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &iServiceLevelIndicatorMetricType, Members: &mServiceLevelIndicatorMetricType, Type: smithy.ShapeTypeEnum, Ext: &eRequestBasedServiceLevelIndicatorMetric_MetricType})
+var sRequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRequestCountMetric", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eRequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric})
+var sRequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoredRequestCountMetric", ID: &iMonitoredRequestCountMetricDataQueries, Members: &mMonitoredRequestCountMetricDataQueries, Type: smithy.ShapeTypeUnion, Ext: &eRequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric})
+var sRequestBasedServiceLevelIndicatorMetric_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetric_DependencyConfig})
+var sRequestBasedServiceLevelIndicatorMetric_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetric_MetricSource})
+var sRequestBasedServiceLevelIndicatorMetric_CompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeSliConfig", ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetric_CompositeSliConfig})
+var sRequestBasedServiceLevelIndicatorMetricConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestBasedServiceLevelIndicatorMetricConfig, Members: &mRequestBasedServiceLevelIndicatorMetricConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig})
+var sRequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes})
+var sRequestBasedServiceLevelIndicatorMetricConfig_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_OperationName})
+var sRequestBasedServiceLevelIndicatorMetricConfig_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &iServiceLevelIndicatorMetricType, Members: &mServiceLevelIndicatorMetricType, Type: smithy.ShapeTypeEnum, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_MetricType})
+var sRequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRequestCountMetric", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric})
+var sRequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoredRequestCountMetric", ID: &iMonitoredRequestCountMetricDataQueries, Members: &mMonitoredRequestCountMetricDataQueries, Type: smithy.ShapeTypeUnion, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric})
+var sRequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig})
+var sRequestBasedServiceLevelIndicatorMetricConfig_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_MetricSource})
+var sRequestBasedServiceLevelIndicatorMetricConfig_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_MetricName})
+var sRequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeSliConfig", ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eRequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean, Ext: &e_ReturnData})
+var sRollingInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollingInterval, Members: &mRollingInterval, Type: smithy.ShapeTypeStructure, Ext: &eRollingInterval})
+var sRollingInterval_DurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationUnit", ID: &iDurationUnit, Members: &mDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eRollingInterval_DurationUnit})
+var sRollingInterval_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_RollingIntervalDuration, Type: smithy.ShapeTypeInteger, Ext: &eRollingInterval_Duration})
+var s_RollingIntervalDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RollingIntervalDuration, Type: smithy.ShapeTypeInteger, Ext: &e_RollingIntervalDuration})
+var sSelectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectionConfig, Members: &mSelectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eSelectionConfig})
+var sSelectionConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSelectionType, Members: &mSelectionType, Type: smithy.ShapeTypeEnum, Ext: &eSelectionConfig_Type})
+var sSelectionConfig_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_SelectionPattern, Type: smithy.ShapeTypeString, Ext: &eSelectionConfig_Pattern})
+var s_SelectionPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectionPattern, Type: smithy.ShapeTypeString, Ext: &e_SelectionPattern})
+var sSelectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectionType, Members: &mSelectionType, Type: smithy.ShapeTypeEnum, Ext: &eSelectionType})
+var sSelectionType_EXPLICIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPLICIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSelectionType_EXPLICIT})
+var sSelectionType_PREFIX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREFIX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSelectionType_PREFIX})
+var sSelectionType_REGEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGEX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSelectionType_REGEX})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eService})
+var sService_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eService_KeyAttributes})
+var sService_AttributeMaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeMaps", ID: &i_AttributeMaps, Members: &m_AttributeMaps, Type: smithy.ShapeTypeList, Ext: &eService_AttributeMaps})
+var sService_ServiceGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceGroups", ID: &i_ServiceGroups, Members: &m_ServiceGroups, Type: smithy.ShapeTypeList, Ext: &eService_ServiceGroups})
+var sService_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricReferences", ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &eService_MetricReferences})
+var sService_LogGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupReferences", ID: &i_LogGroupReferences, Members: &m_LogGroupReferences, Type: smithy.ShapeTypeList, Ext: &eService_LogGroupReferences})
+var s_ServiceDependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceDependencies, Members: &m_ServiceDependencies, Type: smithy.ShapeTypeList, Ext: &e_ServiceDependencies})
+var s_ServiceDependencies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceDependency, Members: &mServiceDependency, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceDependencies_member})
+var sServiceDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceDependency, Members: &mServiceDependency, Type: smithy.ShapeTypeStructure, Ext: &eServiceDependency})
+var sServiceDependency_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceDependency_OperationName})
+var sServiceDependency_DependencyKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyKeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceDependency_DependencyKeyAttributes})
+var sServiceDependency_DependencyOperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyOperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceDependency_DependencyOperationName})
+var sServiceDependency_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricReferences", ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &eServiceDependency_MetricReferences})
+var sServiceDependent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceDependent, Members: &mServiceDependent, Type: smithy.ShapeTypeStructure, Ext: &eServiceDependent})
+var sServiceDependent_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceDependent_OperationName})
+var sServiceDependent_DependentKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentKeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceDependent_DependentKeyAttributes})
+var sServiceDependent_DependentOperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentOperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceDependent_DependentOperationName})
+var sServiceDependent_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricReferences", ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &eServiceDependent_MetricReferences})
+var s_ServiceDependents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceDependents, Members: &m_ServiceDependents, Type: smithy.ShapeTypeList, Ext: &e_ServiceDependents})
+var s_ServiceDependents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceDependent, Members: &mServiceDependent, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceDependents_member})
+var sServiceEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEntity, Members: &mServiceEntity, Type: smithy.ShapeTypeStructure, Ext: &eServiceEntity})
+var sServiceEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceEntity_Type})
+var sServiceEntity_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceEntity_Name})
+var sServiceEntity_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceEntity_Environment})
+var sServiceEntity_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceEntity_AwsAccountId})
+var s_ServiceErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ServiceErrorMessage})
+var sServiceGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceGroup, Members: &mServiceGroup, Type: smithy.ShapeTypeStructure, Ext: &eServiceGroup})
+var sServiceGroup_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eServiceGroup_GroupName})
+var sServiceGroup_GroupValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupValue", ID: &i_GroupValue, Type: smithy.ShapeTypeString, Ext: &eServiceGroup_GroupValue})
+var sServiceGroup_GroupSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSource", ID: &i_GroupSource, Type: smithy.ShapeTypeString, Ext: &eServiceGroup_GroupSource})
+var sServiceGroup_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Type: smithy.ShapeTypeString, Ext: &eServiceGroup_GroupIdentifier})
+var s_ServiceGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceGroups, Members: &m_ServiceGroups, Type: smithy.ShapeTypeList, Ext: &e_ServiceGroups})
+var s_ServiceGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceGroup, Members: &mServiceGroup, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceGroups_member})
+var sServiceLevelIndicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicator, Members: &mServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicator})
+var sServiceLevelIndicator_SliMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SliMetric", ID: &iServiceLevelIndicatorMetric, Members: &mServiceLevelIndicatorMetric, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicator_SliMetric})
+var sServiceLevelIndicator_MetricThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricThreshold", ID: &i_ServiceLevelIndicatorMetricThreshold, Type: smithy.ShapeTypeDouble, Ext: &eServiceLevelIndicator_MetricThreshold})
+var sServiceLevelIndicator_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iServiceLevelIndicatorComparisonOperator, Members: &mServiceLevelIndicatorComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicator_ComparisonOperator})
+var sServiceLevelIndicatorComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicatorComparisonOperator, Members: &mServiceLevelIndicatorComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicatorComparisonOperator})
+var sServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO})
+var sServiceLevelIndicatorComparisonOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorComparisonOperator_GREATER_THAN})
+var sServiceLevelIndicatorComparisonOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorComparisonOperator_LESS_THAN})
+var sServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO})
+var sServiceLevelIndicatorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicatorConfig, Members: &mServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorConfig})
+var sServiceLevelIndicatorConfig_SliMetricConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SliMetricConfig", ID: &iServiceLevelIndicatorMetricConfig, Members: &mServiceLevelIndicatorMetricConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorConfig_SliMetricConfig})
+var sServiceLevelIndicatorConfig_MetricThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricThreshold", ID: &i_ServiceLevelIndicatorMetricThreshold, Type: smithy.ShapeTypeDouble, Ext: &eServiceLevelIndicatorConfig_MetricThreshold})
+var sServiceLevelIndicatorConfig_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iServiceLevelIndicatorComparisonOperator, Members: &mServiceLevelIndicatorComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicatorConfig_ComparisonOperator})
+var sServiceLevelIndicatorMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicatorMetric, Members: &mServiceLevelIndicatorMetric, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetric})
+var sServiceLevelIndicatorMetric_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceLevelIndicatorMetric_KeyAttributes})
+var sServiceLevelIndicatorMetric_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelIndicatorMetric_OperationName})
+var sServiceLevelIndicatorMetric_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &iServiceLevelIndicatorMetricType, Members: &mServiceLevelIndicatorMetricType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicatorMetric_MetricType})
+var sServiceLevelIndicatorMetric_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eServiceLevelIndicatorMetric_MetricDataQueries})
+var sServiceLevelIndicatorMetric_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetric_DependencyConfig})
+var sServiceLevelIndicatorMetric_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetric_MetricSource})
+var sServiceLevelIndicatorMetric_CompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeSliConfig", ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetric_CompositeSliConfig})
+var sServiceLevelIndicatorMetricConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicatorMetricConfig, Members: &mServiceLevelIndicatorMetricConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricConfig})
+var sServiceLevelIndicatorMetricConfig_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceLevelIndicatorMetricConfig_KeyAttributes})
+var sServiceLevelIndicatorMetricConfig_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelIndicatorMetricConfig_OperationName})
+var sServiceLevelIndicatorMetricConfig_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &iServiceLevelIndicatorMetricType, Members: &mServiceLevelIndicatorMetricType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicatorMetricConfig_MetricType})
+var sServiceLevelIndicatorMetricConfig_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelIndicatorMetricConfig_MetricName})
+var sServiceLevelIndicatorMetricConfig_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &i_ServiceLevelIndicatorStatistic, Type: smithy.ShapeTypeString, Ext: &eServiceLevelIndicatorMetricConfig_Statistic})
+var sServiceLevelIndicatorMetricConfig_PeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodSeconds", ID: &i_SLIPeriodSeconds, Type: smithy.ShapeTypeInteger, Ext: &eServiceLevelIndicatorMetricConfig_PeriodSeconds})
+var sServiceLevelIndicatorMetricConfig_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricConfig_MetricSource})
+var sServiceLevelIndicatorMetricConfig_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eServiceLevelIndicatorMetricConfig_MetricDataQueries})
+var sServiceLevelIndicatorMetricConfig_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricConfig_DependencyConfig})
+var sServiceLevelIndicatorMetricConfig_CompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeSliConfig", ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricConfig_CompositeSliConfig})
+var s_ServiceLevelIndicatorMetricThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelIndicatorMetricThreshold, Type: smithy.ShapeTypeDouble, Ext: &e_ServiceLevelIndicatorMetricThreshold})
+var sServiceLevelIndicatorMetricType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelIndicatorMetricType, Members: &mServiceLevelIndicatorMetricType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelIndicatorMetricType})
+var sServiceLevelIndicatorMetricType_LATENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricType_LATENCY})
+var sServiceLevelIndicatorMetricType_AVAILABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelIndicatorMetricType_AVAILABILITY})
+var s_ServiceLevelIndicatorStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelIndicatorStatistic, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelIndicatorStatistic})
+var sServiceLevelObjective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjective, Members: &mServiceLevelObjective, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjective})
+var sServiceLevelObjective_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ServiceLevelObjectiveArn, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjective_Arn})
+var sServiceLevelObjective_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjective_Name})
+var sServiceLevelObjective_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ServiceLevelObjectiveDescription, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjective_Description})
+var sServiceLevelObjective_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eServiceLevelObjective_CreatedTime})
+var sServiceLevelObjective_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eServiceLevelObjective_LastUpdatedTime})
+var sServiceLevelObjective_Sli = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sli", ID: &iServiceLevelIndicator, Members: &mServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjective_Sli})
+var sServiceLevelObjective_RequestBasedSli = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSli", ID: &iRequestBasedServiceLevelIndicator, Members: &mRequestBasedServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjective_RequestBasedSli})
+var sServiceLevelObjective_EvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationType", ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjective_EvaluationType})
+var sServiceLevelObjective_Goal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Goal", ID: &iGoal, Members: &mGoal, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjective_Goal})
+var sServiceLevelObjective_BurnRateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BurnRateConfigurations", ID: &i_BurnRateConfigurations, Members: &m_BurnRateConfigurations, Type: smithy.ShapeTypeList, Ext: &eServiceLevelObjective_BurnRateConfigurations})
+var sServiceLevelObjective_MetricSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSourceType", ID: &iMetricSourceType, Members: &mMetricSourceType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjective_MetricSourceType})
+var sServiceLevelObjective_AutoInvestigationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoInvestigationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eServiceLevelObjective_AutoInvestigationEnabled})
+var s_ServiceLevelObjectiveArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveArn, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveArn})
+var sServiceLevelObjectiveBudgetReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjectiveBudgetReport, Members: &mServiceLevelObjectiveBudgetReport, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetReport})
+var sServiceLevelObjectiveBudgetReport_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ServiceLevelObjectiveArn, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReport_Arn})
+var sServiceLevelObjectiveBudgetReport_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReport_Name})
+var sServiceLevelObjectiveBudgetReport_EvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationType", ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjectiveBudgetReport_EvaluationType})
+var sServiceLevelObjectiveBudgetReport_BudgetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetStatus", ID: &iServiceLevelObjectiveBudgetStatus, Members: &mServiceLevelObjectiveBudgetStatus, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjectiveBudgetReport_BudgetStatus})
+var sServiceLevelObjectiveBudgetReport_Attainment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attainment", ID: &i_Attainment, Type: smithy.ShapeTypeDouble, Ext: &eServiceLevelObjectiveBudgetReport_Attainment})
+var sServiceLevelObjectiveBudgetReport_TotalBudgetSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalBudgetSeconds", ID: &i_TotalBudgetSeconds, Type: smithy.ShapeTypeInteger, Ext: &eServiceLevelObjectiveBudgetReport_TotalBudgetSeconds})
+var sServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetSecondsRemaining", ID: &i_BudgetSecondsRemaining, Type: smithy.ShapeTypeInteger, Ext: &eServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining})
+var sServiceLevelObjectiveBudgetReport_TotalBudgetRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalBudgetRequests", ID: &i_TotalBudgetRequests, Type: smithy.ShapeTypeInteger, Ext: &eServiceLevelObjectiveBudgetReport_TotalBudgetRequests})
+var sServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetRequestsRemaining", ID: &i_BudgetRequestsRemaining, Type: smithy.ShapeTypeInteger, Ext: &eServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining})
+var sServiceLevelObjectiveBudgetReport_Sli = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sli", ID: &iServiceLevelIndicator, Members: &mServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetReport_Sli})
+var sServiceLevelObjectiveBudgetReport_RequestBasedSli = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSli", ID: &iRequestBasedServiceLevelIndicator, Members: &mRequestBasedServiceLevelIndicator, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetReport_RequestBasedSli})
+var sServiceLevelObjectiveBudgetReport_Goal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Goal", ID: &iGoal, Members: &mGoal, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetReport_Goal})
+var sServiceLevelObjectiveBudgetReportError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjectiveBudgetReportError, Members: &mServiceLevelObjectiveBudgetReportError, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetReportError})
+var sServiceLevelObjectiveBudgetReportError_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReportError_Name})
+var sServiceLevelObjectiveBudgetReportError_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ServiceLevelObjectiveArn, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReportError_Arn})
+var sServiceLevelObjectiveBudgetReportError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ServiceLevelObjectiveBudgetReportErrorCode, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReportError_ErrorCode})
+var sServiceLevelObjectiveBudgetReportError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ServiceLevelObjectiveBudgetReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveBudgetReportError_ErrorMessage})
+var s_ServiceLevelObjectiveBudgetReportErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveBudgetReportErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveBudgetReportErrorCode})
+var s_ServiceLevelObjectiveBudgetReportErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveBudgetReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveBudgetReportErrorMessage})
+var s_ServiceLevelObjectiveBudgetReportErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveBudgetReportErrors, Members: &m_ServiceLevelObjectiveBudgetReportErrors, Type: smithy.ShapeTypeList, Ext: &e_ServiceLevelObjectiveBudgetReportErrors})
+var s_ServiceLevelObjectiveBudgetReportErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLevelObjectiveBudgetReportError, Members: &mServiceLevelObjectiveBudgetReportError, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceLevelObjectiveBudgetReportErrors_member})
+var s_ServiceLevelObjectiveBudgetReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveBudgetReports, Members: &m_ServiceLevelObjectiveBudgetReports, Type: smithy.ShapeTypeList, Ext: &e_ServiceLevelObjectiveBudgetReports})
+var s_ServiceLevelObjectiveBudgetReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLevelObjectiveBudgetReport, Members: &mServiceLevelObjectiveBudgetReport, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceLevelObjectiveBudgetReports_member})
+var sServiceLevelObjectiveBudgetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjectiveBudgetStatus, Members: &mServiceLevelObjectiveBudgetStatus, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjectiveBudgetStatus})
+var sServiceLevelObjectiveBudgetStatus_OK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetStatus_OK})
+var sServiceLevelObjectiveBudgetStatus_WARNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetStatus_WARNING})
+var sServiceLevelObjectiveBudgetStatus_BREACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BREACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetStatus_BREACHED})
+var sServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA})
+var s_ServiceLevelObjectiveDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveDescription, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveDescription})
+var sServiceLevelObjectiveEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjectiveEntity, Members: &mServiceLevelObjectiveEntity, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveEntity})
+var sServiceLevelObjectiveEntity_SloName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveEntity_SloName})
+var sServiceLevelObjectiveEntity_SloArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveEntity_SloArn})
+var s_ServiceLevelObjectiveId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveId, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveId})
+var s_ServiceLevelObjectiveIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveIds, Members: &m_ServiceLevelObjectiveIds, Type: smithy.ShapeTypeList, Ext: &e_ServiceLevelObjectiveIds})
+var s_ServiceLevelObjectiveIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveIds_member})
+var s_ServiceLevelObjectiveName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &e_ServiceLevelObjectiveName})
+var s_ServiceLevelObjectiveSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLevelObjectiveSummaries, Members: &m_ServiceLevelObjectiveSummaries, Type: smithy.ShapeTypeList, Ext: &e_ServiceLevelObjectiveSummaries})
+var s_ServiceLevelObjectiveSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLevelObjectiveSummary, Members: &mServiceLevelObjectiveSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceLevelObjectiveSummaries_member})
+var sServiceLevelObjectiveSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLevelObjectiveSummary, Members: &mServiceLevelObjectiveSummary, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveSummary})
+var sServiceLevelObjectiveSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ServiceLevelObjectiveArn, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveSummary_Arn})
+var sServiceLevelObjectiveSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveSummary_Name})
+var sServiceLevelObjectiveSummary_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceLevelObjectiveSummary_KeyAttributes})
+var sServiceLevelObjectiveSummary_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceLevelObjectiveSummary_OperationName})
+var sServiceLevelObjectiveSummary_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveSummary_DependencyConfig})
+var sServiceLevelObjectiveSummary_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eServiceLevelObjectiveSummary_CreatedTime})
+var sServiceLevelObjectiveSummary_EvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationType", ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjectiveSummary_EvaluationType})
+var sServiceLevelObjectiveSummary_MetricSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSourceType", ID: &iMetricSourceType, Members: &mMetricSourceType, Type: smithy.ShapeTypeEnum, Ext: &eServiceLevelObjectiveSummary_MetricSourceType})
+var sServiceLevelObjectiveSummary_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveSummary_MetricSource})
+var sServiceLevelObjectiveSummary_CompositeSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeSliConfig", ID: &iCompositeSliConfig, Members: &mCompositeSliConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceLevelObjectiveSummary_CompositeSliConfig})
+var sServiceOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceOperation, Members: &mServiceOperation, Type: smithy.ShapeTypeStructure, Ext: &eServiceOperation})
+var sServiceOperation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_OperationName, Type: smithy.ShapeTypeString, Ext: &eServiceOperation_Name})
+var sServiceOperation_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricReferences", ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &eServiceOperation_MetricReferences})
+var sServiceOperationEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceOperationEntity, Members: &mServiceOperationEntity, Type: smithy.ShapeTypeStructure, Ext: &eServiceOperationEntity})
+var sServiceOperationEntity_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iServiceEntity, Members: &mServiceEntity, Type: smithy.ShapeTypeStructure, Ext: &eServiceOperationEntity_Service})
+var sServiceOperationEntity_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceOperationEntity_Operation})
+var sServiceOperationEntity_MetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceOperationEntity_MetricType})
+var s_ServiceOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceOperations, Members: &m_ServiceOperations, Type: smithy.ShapeTypeList, Ext: &e_ServiceOperations})
+var s_ServiceOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceOperation, Members: &mServiceOperation, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceOperations_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceState, Members: &mServiceState, Type: smithy.ShapeTypeStructure, Ext: &eServiceState})
+var sServiceState_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_AttributeFilters, Members: &m_AttributeFilters, Type: smithy.ShapeTypeList, Ext: &eServiceState_AttributeFilters})
+var sServiceState_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceState_Service})
+var sServiceState_LatestChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestChangeEvents", ID: &i_LatestChangeEvents, Members: &m_LatestChangeEvents, Type: smithy.ShapeTypeList, Ext: &eServiceState_LatestChangeEvents})
+var s_ServiceStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceStates, Members: &m_ServiceStates, Type: smithy.ShapeTypeList, Ext: &e_ServiceStates})
+var s_ServiceStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceState, Members: &mServiceState, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceStates_member})
+var s_ServiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceSummaries, Members: &m_ServiceSummaries, Type: smithy.ShapeTypeList, Ext: &e_ServiceSummaries})
+var s_ServiceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceSummaries_member})
+var sServiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure, Ext: &eServiceSummary})
+var sServiceSummary_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eServiceSummary_KeyAttributes})
+var sServiceSummary_AttributeMaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeMaps", ID: &i_AttributeMaps, Members: &m_AttributeMaps, Type: smithy.ShapeTypeList, Ext: &eServiceSummary_AttributeMaps})
+var sServiceSummary_MetricReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricReferences", ID: &i_MetricReferences, Members: &m_MetricReferences, Type: smithy.ShapeTypeList, Ext: &eServiceSummary_MetricReferences})
+var sServiceSummary_ServiceGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceGroups", ID: &i_ServiceGroups, Members: &m_ServiceGroups, Type: smithy.ShapeTypeList, Ext: &eServiceSummary_ServiceGroups})
+var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eSeverity})
+var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_CRITICAL})
+var sSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_HIGH})
+var sSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_MEDIUM})
+var sSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_LOW})
+var sSeverity_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_NONE})
+var s_SLIPeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SLIPeriodSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SLIPeriodSeconds})
+var sStandardUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eStandardUnit})
+var sStandardUnit_MICROSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MICROSECONDS})
+var sStandardUnit_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MILLISECONDS})
+var sStandardUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_SECONDS})
+var sStandardUnit_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BYTES})
+var sStandardUnit_KILOBYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBYTES})
+var sStandardUnit_MEGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABYTES})
+var sStandardUnit_GIGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABYTES})
+var sStandardUnit_TERABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABYTES})
+var sStandardUnit_BITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BITS})
+var sStandardUnit_KILOBITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBITS})
+var sStandardUnit_MEGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABITS})
+var sStandardUnit_GIGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABITS})
+var sStandardUnit_TERABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABITS})
+var sStandardUnit_PERCENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_PERCENT})
+var sStandardUnit_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_COUNT})
+var sStandardUnit_BYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BYTES_SECOND})
+var sStandardUnit_KILOBYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBYTES_SECOND})
+var sStandardUnit_MEGABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABYTES_SECOND})
+var sStandardUnit_GIGABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABYTES_SECOND})
+var sStandardUnit_TERABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABYTES_SECOND})
+var sStandardUnit_BITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BITS_SECOND})
+var sStandardUnit_KILOBITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBITS_SECOND})
+var sStandardUnit_MEGABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABITS_SECOND})
+var sStandardUnit_GIGABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABITS_SECOND})
+var sStandardUnit_TERABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABITS_SECOND})
+var sStandardUnit_COUNT_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_COUNT_SECOND})
+var sStandardUnit_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_NONE})
+var s_Stat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stat, Type: smithy.ShapeTypeString, Ext: &e_Stat})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var s_TotalBudgetRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalBudgetRequests, Type: smithy.ShapeTypeInteger, Ext: &e_TotalBudgetRequests})
+var s_TotalBudgetSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalBudgetSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_TotalBudgetSeconds})
+var sUnprocessedStatusEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedStatusEvent, Members: &mUnprocessedStatusEvent, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessedStatusEvent})
+var sUnprocessedStatusEvent_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessedStatusEvent_InstrumentationType})
+var sUnprocessedStatusEvent_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessedStatusEvent_SignalType})
+var sUnprocessedStatusEvent_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnprocessedStatusEvent_LocationHash})
+var sUnprocessedStatusEvent_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInstrumentationConfigurationStatus, Members: &mInstrumentationConfigurationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessedStatusEvent_Status})
+var sUnprocessedStatusEvent_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUnprocessedStatusEvent_Time})
+var sUnprocessedStatusEvent_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &iUnprocessedStatusEventFailureReason, Members: &mUnprocessedStatusEventFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessedStatusEvent_FailedReason})
+var sUnprocessedStatusEventFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedStatusEventFailureReason, Members: &mUnprocessedStatusEventFailureReason, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessedStatusEventFailureReason})
+var sUnprocessedStatusEventFailureReason_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessedStatusEventFailureReason_THROTTLED})
+var sUnprocessedStatusEventFailureReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessedStatusEventFailureReason_INTERNAL_ERROR})
+var sUnprocessedStatusEventFailureReason_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessedStatusEventFailureReason_VALIDATION_ERROR})
+var s_UnprocessedStatusEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedStatusEventList, Members: &m_UnprocessedStatusEventList, Type: smithy.ShapeTypeList, Ext: &e_UnprocessedStatusEventList})
+var s_UnprocessedStatusEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedStatusEvent, Members: &mUnprocessedStatusEvent, Type: smithy.ShapeTypeStructure, Ext: &e_UnprocessedStatusEventList_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_ValidationExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionMessage})
+var s_WarningThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarningThreshold, Type: smithy.ShapeTypeDouble, Ext: &e_WarningThreshold})
+var sWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindow, Members: &mWindow, Type: smithy.ShapeTypeStructure, Ext: &eWindow})
+var sWindow_DurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationUnit", ID: &iDurationUnit, Members: &mDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eWindow_DurationUnit})
+var sWindow_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_ExclusionDuration, Type: smithy.ShapeTypeInteger, Ext: &eWindow_Duration})
+var sBatchDeleteInstrumentationConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteInstrumentationConfigurationsRequest, Members: &mBatchDeleteInstrumentationConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteInstrumentationConfigurationsRequest})
+var sBatchDeleteInstrumentationConfigurationsRequest_DeletionTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionTarget", ID: &iBatchDeleteDeletionTarget, Members: &mBatchDeleteDeletionTarget, Type: smithy.ShapeTypeUnion, Ext: &eBatchDeleteInstrumentationConfigurationsRequest_DeletionTarget})
+var sBatchDeleteInstrumentationConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteInstrumentationConfigurationsResponse, Members: &mBatchDeleteInstrumentationConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteInstrumentationConfigurationsResponse})
+var sBatchDeleteInstrumentationConfigurationsResponse_DeletedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eBatchDeleteInstrumentationConfigurationsResponse_DeletedCount})
+var sBatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfulDeletions", ID: &i_BatchDeleteSuccessfulDeletionList, Members: &m_BatchDeleteSuccessfulDeletionList, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions})
+var sBatchDeleteInstrumentationConfigurationsResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchDeleteErrorList, Members: &m_BatchDeleteErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteInstrumentationConfigurationsResponse_Errors})
+var sBatchGetServiceLevelObjectiveBudgetReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetServiceLevelObjectiveBudgetReportInput, Members: &mBatchGetServiceLevelObjectiveBudgetReportInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetServiceLevelObjectiveBudgetReportInput})
+var sBatchGetServiceLevelObjectiveBudgetReportInput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchGetServiceLevelObjectiveBudgetReportInput_Timestamp})
+var sBatchGetServiceLevelObjectiveBudgetReportInput_SloIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloIds", ID: &i_ServiceLevelObjectiveIds, Members: &m_ServiceLevelObjectiveIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetServiceLevelObjectiveBudgetReportInput_SloIds})
+var sBatchGetServiceLevelObjectiveBudgetReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetServiceLevelObjectiveBudgetReportOutput, Members: &mBatchGetServiceLevelObjectiveBudgetReportOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetServiceLevelObjectiveBudgetReportOutput})
+var sBatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp})
+var sBatchGetServiceLevelObjectiveBudgetReportOutput_Reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reports", ID: &i_ServiceLevelObjectiveBudgetReports, Members: &m_ServiceLevelObjectiveBudgetReports, Type: smithy.ShapeTypeList, Ext: &eBatchGetServiceLevelObjectiveBudgetReportOutput_Reports})
+var sBatchGetServiceLevelObjectiveBudgetReportOutput_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ServiceLevelObjectiveBudgetReportErrors, Members: &m_ServiceLevelObjectiveBudgetReportErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetServiceLevelObjectiveBudgetReportOutput_Errors})
+var sBatchUpdateExclusionWindowsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateExclusionWindowsInput, Members: &mBatchUpdateExclusionWindowsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateExclusionWindowsInput})
+var sBatchUpdateExclusionWindowsInput_SloIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloIds", ID: &i_ServiceLevelObjectiveIds, Members: &m_ServiceLevelObjectiveIds, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateExclusionWindowsInput_SloIds})
+var sBatchUpdateExclusionWindowsInput_AddExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddExclusionWindows", ID: &i_ExclusionWindows, Members: &m_ExclusionWindows, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateExclusionWindowsInput_AddExclusionWindows})
+var sBatchUpdateExclusionWindowsInput_RemoveExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveExclusionWindows", ID: &i_ExclusionWindows, Members: &m_ExclusionWindows, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateExclusionWindowsInput_RemoveExclusionWindows})
+var sBatchUpdateExclusionWindowsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateExclusionWindowsOutput, Members: &mBatchUpdateExclusionWindowsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateExclusionWindowsOutput})
+var sBatchUpdateExclusionWindowsOutput_SloIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloIds", ID: &i_ServiceLevelObjectiveIds, Members: &m_ServiceLevelObjectiveIds, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateExclusionWindowsOutput_SloIds})
+var sBatchUpdateExclusionWindowsOutput_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchUpdateExclusionWindowsErrors, Members: &m_BatchUpdateExclusionWindowsErrors, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateExclusionWindowsOutput_Errors})
+var sCreateInstrumentationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInstrumentationConfigurationRequest, Members: &mCreateInstrumentationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateInstrumentationConfigurationRequest})
+var sCreateInstrumentationConfigurationRequest_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateInstrumentationConfigurationRequest_InstrumentationType})
+var sCreateInstrumentationConfigurationRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationRequest_Service})
+var sCreateInstrumentationConfigurationRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationRequest_Environment})
+var sCreateInstrumentationConfigurationRequest_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eCreateInstrumentationConfigurationRequest_SignalType})
+var sCreateInstrumentationConfigurationRequest_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eCreateInstrumentationConfigurationRequest_Location})
+var sCreateInstrumentationConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationRequest_Description})
+var sCreateInstrumentationConfigurationRequest_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateInstrumentationConfigurationRequest_ExpiresAt})
+var sCreateInstrumentationConfigurationRequest_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_DynamicInstrumentationAttributeFilters, Members: &m_DynamicInstrumentationAttributeFilters, Type: smithy.ShapeTypeList, Ext: &eCreateInstrumentationConfigurationRequest_AttributeFilters})
+var sCreateInstrumentationConfigurationRequest_CaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureConfiguration", ID: &iCaptureConfiguration, Members: &mCaptureConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateInstrumentationConfigurationRequest_CaptureConfiguration})
+var sCreateInstrumentationConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateInstrumentationConfigurationRequest_Tags})
+var sCreateInstrumentationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInstrumentationConfigurationResponse, Members: &mCreateInstrumentationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateInstrumentationConfigurationResponse})
+var sCreateInstrumentationConfigurationResponse_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateInstrumentationConfigurationResponse_InstrumentationType})
+var sCreateInstrumentationConfigurationResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationResponse_Service})
+var sCreateInstrumentationConfigurationResponse_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationResponse_Environment})
+var sCreateInstrumentationConfigurationResponse_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eCreateInstrumentationConfigurationResponse_SignalType})
+var sCreateInstrumentationConfigurationResponse_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eCreateInstrumentationConfigurationResponse_Location})
+var sCreateInstrumentationConfigurationResponse_LocationHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationHash", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationResponse_LocationHash})
+var sCreateInstrumentationConfigurationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationResponse_Description})
+var sCreateInstrumentationConfigurationResponse_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateInstrumentationConfigurationResponse_ExpiresAt})
+var sCreateInstrumentationConfigurationResponse_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_DynamicInstrumentationAttributeFilters, Members: &m_DynamicInstrumentationAttributeFilters, Type: smithy.ShapeTypeList, Ext: &eCreateInstrumentationConfigurationResponse_AttributeFilters})
+var sCreateInstrumentationConfigurationResponse_CaptureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaptureConfiguration", ID: &iCaptureConfiguration, Members: &mCaptureConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateInstrumentationConfigurationResponse_CaptureConfiguration})
+var sCreateInstrumentationConfigurationResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateInstrumentationConfigurationResponse_CreatedAt})
+var sCreateInstrumentationConfigurationResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_InstrumentationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateInstrumentationConfigurationResponse_ARN})
+var sCreateServiceLevelObjectiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceLevelObjectiveInput, Members: &mCreateServiceLevelObjectiveInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveInput})
+var sCreateServiceLevelObjectiveInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServiceLevelObjectiveName, Type: smithy.ShapeTypeString, Ext: &eCreateServiceLevelObjectiveInput_Name})
+var sCreateServiceLevelObjectiveInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ServiceLevelObjectiveDescription, Type: smithy.ShapeTypeString, Ext: &eCreateServiceLevelObjectiveInput_Description})
+var sCreateServiceLevelObjectiveInput_SliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SliConfig", ID: &iServiceLevelIndicatorConfig, Members: &mServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveInput_SliConfig})
+var sCreateServiceLevelObjectiveInput_RequestBasedSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSliConfig", ID: &iRequestBasedServiceLevelIndicatorConfig, Members: &mRequestBasedServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveInput_RequestBasedSliConfig})
+var sCreateServiceLevelObjectiveInput_Goal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Goal", ID: &iGoal, Members: &mGoal, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveInput_Goal})
+var sCreateServiceLevelObjectiveInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateServiceLevelObjectiveInput_Tags})
+var sCreateServiceLevelObjectiveInput_BurnRateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BurnRateConfigurations", ID: &i_BurnRateConfigurations, Members: &m_BurnRateConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateServiceLevelObjectiveInput_BurnRateConfigurations})
+var sCreateServiceLevelObjectiveInput_CreateRecommendedSlo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateRecommendedSlo", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateServiceLevelObjectiveInput_CreateRecommendedSlo})
+var sCreateServiceLevelObjectiveInput_AutoInvestigationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoInvestigationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateServiceLevelObjectiveInput_AutoInvestigationEnabled})
+var sCreateServiceLevelObjectiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceLevelObjectiveOutput, Members: &mCreateServiceLevelObjectiveOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveOutput})
+var sCreateServiceLevelObjectiveOutput_Slo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slo", ID: &iServiceLevelObjective, Members: &mServiceLevelObjective, Type: smithy.ShapeTypeStructure, Ext: &eCreateServiceLevelObjectiveOutput_Slo})
+var sDeleteGroupingConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupingConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupingConfigurationOutput})
+var sDeleteInstrumentationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstrumentationConfigurationRequest, Members: &mDeleteInstrumentationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInstrumentationConfigurationRequest})
+var sDeleteInstrumentationConfigurationRequest_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteInstrumentationConfigurationRequest_InstrumentationType})
+var sDeleteInstrumentationConfigurationRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteInstrumentationConfigurationRequest_Service})
+var sDeleteInstrumentationConfigurationRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteInstrumentationConfigurationRequest_Environment})
+var sDeleteInstrumentationConfigurationRequest_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteInstrumentationConfigurationRequest_SignalType})
+var sDeleteInstrumentationConfigurationRequest_LocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationIdentifier", ID: &iLocationIdentifier, Members: &mLocationIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eDeleteInstrumentationConfigurationRequest_LocationIdentifier})
+var sDeleteInstrumentationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstrumentationConfigurationResponse, Members: &mDeleteInstrumentationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInstrumentationConfigurationResponse})
+var sDeleteInstrumentationConfigurationResponse_DeletionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionStatus", ID: &iDynamicInstrumentationDeletionStatus, Members: &mDynamicInstrumentationDeletionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteInstrumentationConfigurationResponse_DeletionStatus})
+var sDeleteServiceLevelObjectiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceLevelObjectiveInput, Members: &mDeleteServiceLevelObjectiveInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceLevelObjectiveInput})
+var sDeleteServiceLevelObjectiveInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ServiceLevelObjectiveId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceLevelObjectiveInput_Id})
+var sDeleteServiceLevelObjectiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceLevelObjectiveOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceLevelObjectiveOutput})
+var sGetInstrumentationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfigurationRequest, Members: &mGetInstrumentationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInstrumentationConfigurationRequest})
+var sGetInstrumentationConfigurationRequest_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationRequest_InstrumentationType})
+var sGetInstrumentationConfigurationRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationRequest_Service})
+var sGetInstrumentationConfigurationRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationRequest_Environment})
+var sGetInstrumentationConfigurationRequest_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationRequest_SignalType})
+var sGetInstrumentationConfigurationRequest_LocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationIdentifier", ID: &iLocationIdentifier, Members: &mLocationIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eGetInstrumentationConfigurationRequest_LocationIdentifier})
+var sGetInstrumentationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfigurationResponse, Members: &mGetInstrumentationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInstrumentationConfigurationResponse})
+var sGetInstrumentationConfigurationResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iInstrumentationConfiguration, Members: &mInstrumentationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetInstrumentationConfigurationResponse_Configuration})
+var sGetInstrumentationConfigurationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfigurationStatusRequest, Members: &mGetInstrumentationConfigurationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInstrumentationConfigurationStatusRequest})
+var sGetInstrumentationConfigurationStatusRequest_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationStatusRequest_InstrumentationType})
+var sGetInstrumentationConfigurationStatusRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusRequest_Service})
+var sGetInstrumentationConfigurationStatusRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusRequest_Environment})
+var sGetInstrumentationConfigurationStatusRequest_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationStatusRequest_SignalType})
+var sGetInstrumentationConfigurationStatusRequest_LocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationIdentifier", ID: &iLocationIdentifier, Members: &mLocationIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eGetInstrumentationConfigurationStatusRequest_LocationIdentifier})
+var sGetInstrumentationConfigurationStatusRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInstrumentationConfigurationStatus, Members: &mInstrumentationConfigurationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationStatusRequest_Status})
+var sGetInstrumentationConfigurationStatusRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInstrumentationConfigurationStatusRequest_StartTime})
+var sGetInstrumentationConfigurationStatusRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInstrumentationConfigurationStatusRequest_EndTime})
+var sGetInstrumentationConfigurationStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetInstrumentationConfigurationStatusRequest_MaxResults})
+var sGetInstrumentationConfigurationStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusRequest_NextToken})
+var sGetInstrumentationConfigurationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstrumentationConfigurationStatusResponse, Members: &mGetInstrumentationConfigurationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInstrumentationConfigurationStatusResponse})
+var sGetInstrumentationConfigurationStatusResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusResponse_Service})
+var sGetInstrumentationConfigurationStatusResponse_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusResponse_Environment})
+var sGetInstrumentationConfigurationStatusResponse_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iDynamicInstrumentationSignalType, Members: &mDynamicInstrumentationSignalType, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationStatusResponse_SignalType})
+var sGetInstrumentationConfigurationStatusResponse_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeUnion, Ext: &eGetInstrumentationConfigurationStatusResponse_Location})
+var sGetInstrumentationConfigurationStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInstrumentationConfigurationStatus, Members: &mInstrumentationConfigurationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetInstrumentationConfigurationStatusResponse_Status})
+var sGetInstrumentationConfigurationStatusResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_InstrumentationStatusEventList, Members: &m_InstrumentationStatusEventList, Type: smithy.ShapeTypeList, Ext: &eGetInstrumentationConfigurationStatusResponse_Events})
+var sGetInstrumentationConfigurationStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetInstrumentationConfigurationStatusResponse_NextToken})
+var sGetServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInput, Members: &mGetServiceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceInput})
+var sGetServiceInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eGetServiceInput_StartTime})
+var sGetServiceInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eGetServiceInput_EndTime})
+var sGetServiceInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eGetServiceInput_KeyAttributes})
+var sGetServiceLevelObjectiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceLevelObjectiveInput, Members: &mGetServiceLevelObjectiveInput, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceLevelObjectiveInput})
+var sGetServiceLevelObjectiveInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ServiceLevelObjectiveId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetServiceLevelObjectiveInput_Id})
+var sGetServiceLevelObjectiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceLevelObjectiveOutput, Members: &mGetServiceLevelObjectiveOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceLevelObjectiveOutput})
+var sGetServiceLevelObjectiveOutput_Slo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slo", ID: &iServiceLevelObjective, Members: &mServiceLevelObjective, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceLevelObjectiveOutput_Slo})
+var sGetServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceOutput, Members: &mGetServiceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceOutput})
+var sGetServiceOutput_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceOutput_Service})
+var sGetServiceOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetServiceOutput_StartTime})
+var sGetServiceOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetServiceOutput_EndTime})
+var sGetServiceOutput_LogGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupReferences", ID: &i_LogGroupReferences, Members: &m_LogGroupReferences, Type: smithy.ShapeTypeList, Ext: &eGetServiceOutput_LogGroupReferences})
+var sListAuditFindingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAuditFindingsInput, Members: &mListAuditFindingsInput, Type: smithy.ShapeTypeStructure, Ext: &eListAuditFindingsInput})
+var sListAuditFindingsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eListAuditFindingsInput_StartTime})
+var sListAuditFindingsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eListAuditFindingsInput_EndTime})
+var sListAuditFindingsInput_Auditors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Auditors", ID: &i_Auditors, Members: &m_Auditors, Type: smithy.ShapeTypeList, Ext: &eListAuditFindingsInput_Auditors})
+var sListAuditFindingsInput_AuditTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditTargets", ID: &i_AuditTargets, Members: &m_AuditTargets, Type: smithy.ShapeTypeList, Ext: &eListAuditFindingsInput_AuditTargets})
+var sListAuditFindingsInput_DetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailLevel", ID: &iDetailLevel, Members: &mDetailLevel, Type: smithy.ShapeTypeEnum, Ext: &eListAuditFindingsInput_DetailLevel})
+var sListAuditFindingsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAuditFindingsInput_NextToken})
+var sListAuditFindingsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListAuditFindingMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAuditFindingsInput_MaxResults})
+var sListAuditFindingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAuditFindingsOutput, Members: &mListAuditFindingsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAuditFindingsOutput})
+var sListAuditFindingsOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListAuditFindingsOutput_StartTime})
+var sListAuditFindingsOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListAuditFindingsOutput_EndTime})
+var sListAuditFindingsOutput_AuditFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditFindings", ID: &i_AuditFindings, Members: &m_AuditFindings, Type: smithy.ShapeTypeList, Ext: &eListAuditFindingsOutput_AuditFindings})
+var sListAuditFindingsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAuditFindingsOutput_NextToken})
+var sListEntityEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntityEventsInput, Members: &mListEntityEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListEntityEventsInput})
+var sListEntityEventsInput_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eListEntityEventsInput_Entity})
+var sListEntityEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEntityEventsInput_StartTime})
+var sListEntityEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEntityEventsInput_EndTime})
+var sListEntityEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListEntityEventsMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListEntityEventsInput_MaxResults})
+var sListEntityEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListEntityEventsInput_NextToken})
+var sListEntityEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntityEventsOutput, Members: &mListEntityEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListEntityEventsOutput})
+var sListEntityEventsOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEntityEventsOutput_StartTime})
+var sListEntityEventsOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEntityEventsOutput_EndTime})
+var sListEntityEventsOutput_ChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeEvents", ID: &i_ChangeEvents, Members: &m_ChangeEvents, Type: smithy.ShapeTypeList, Ext: &eListEntityEventsOutput_ChangeEvents})
+var sListEntityEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEntityEventsOutput_NextToken})
+var sListGroupingAttributeDefinitionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupingAttributeDefinitionsInput, Members: &mListGroupingAttributeDefinitionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListGroupingAttributeDefinitionsInput})
+var sListGroupingAttributeDefinitionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListGroupingAttributeDefinitionsInput_NextToken})
+var sListGroupingAttributeDefinitionsInput_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AwsAccountId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListGroupingAttributeDefinitionsInput_AwsAccountId})
+var sListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t42, Type: smithy.ShapeTypeBoolean, Ext: &eListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts})
+var sListGroupingAttributeDefinitionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupingAttributeDefinitionsOutput, Members: &mListGroupingAttributeDefinitionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListGroupingAttributeDefinitionsOutput})
+var sListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingAttributeDefinitions", ID: &i_GroupingAttributeDefinitions, Members: &m_GroupingAttributeDefinitions, Type: smithy.ShapeTypeList, Ext: &eListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions})
+var sListGroupingAttributeDefinitionsOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListGroupingAttributeDefinitionsOutput_UpdatedAt})
+var sListGroupingAttributeDefinitionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupingAttributeDefinitionsOutput_NextToken})
+var sListInstrumentationConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstrumentationConfigurationsRequest, Members: &mListInstrumentationConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListInstrumentationConfigurationsRequest})
+var sListInstrumentationConfigurationsRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListInstrumentationConfigurationsRequest_Service})
+var sListInstrumentationConfigurationsRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListInstrumentationConfigurationsRequest_Environment})
+var sListInstrumentationConfigurationsRequest_InstrumentationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstrumentationType", ID: &iInstrumentationType, Members: &mInstrumentationType, Type: smithy.ShapeTypeEnum, Ext: &eListInstrumentationConfigurationsRequest_InstrumentationType})
+var sListInstrumentationConfigurationsRequest_SyncedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListInstrumentationConfigurationsRequest_SyncedAt})
+var sListInstrumentationConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListInstrumentationConfigurationsRequest_MaxResults})
+var sListInstrumentationConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListInstrumentationConfigurationsRequest_NextToken})
+var sInstrumentationConfigurationsPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstrumentationConfigurationsPage, Members: &mInstrumentationConfigurationsPage, Type: smithy.ShapeTypeStructure, Ext: &eInstrumentationConfigurationsPage})
+var sInstrumentationConfigurationsPage_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationsPage_Service})
+var sInstrumentationConfigurationsPage_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationsPage_Environment})
+var sInstrumentationConfigurationsPage_Changed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Changed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eInstrumentationConfigurationsPage_Changed})
+var sInstrumentationConfigurationsPage_LatestConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestConfigurations", ID: &i_InstrumentationConfigurationsWithoutServiceEnv, Members: &m_InstrumentationConfigurationsWithoutServiceEnv, Type: smithy.ShapeTypeList, Ext: &eInstrumentationConfigurationsPage_LatestConfigurations})
+var sInstrumentationConfigurationsPage_SyncedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstrumentationConfigurationsPage_SyncedAt})
+var sInstrumentationConfigurationsPage_SyncInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncInterval", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstrumentationConfigurationsPage_SyncInterval})
+var sInstrumentationConfigurationsPage_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eInstrumentationConfigurationsPage_NextToken})
+var sListServiceDependenciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependenciesInput, Members: &mListServiceDependenciesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceDependenciesInput})
+var sListServiceDependenciesInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependenciesInput_StartTime})
+var sListServiceDependenciesInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependenciesInput_EndTime})
+var sListServiceDependenciesInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eListServiceDependenciesInput_KeyAttributes})
+var sListServiceDependenciesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceDependenciesMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServiceDependenciesInput_MaxResults})
+var sListServiceDependenciesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServiceDependenciesInput_NextToken})
+var sListServiceDependenciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependenciesOutput, Members: &mListServiceDependenciesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceDependenciesOutput})
+var sListServiceDependenciesOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependenciesOutput_StartTime})
+var sListServiceDependenciesOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependenciesOutput_EndTime})
+var sListServiceDependenciesOutput_ServiceDependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceDependencies", ID: &i_ServiceDependencies, Members: &m_ServiceDependencies, Type: smithy.ShapeTypeList, Ext: &eListServiceDependenciesOutput_ServiceDependencies})
+var sListServiceDependenciesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceDependenciesOutput_NextToken})
+var sListServiceDependentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependentsInput, Members: &mListServiceDependentsInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceDependentsInput})
+var sListServiceDependentsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependentsInput_StartTime})
+var sListServiceDependentsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependentsInput_EndTime})
+var sListServiceDependentsInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eListServiceDependentsInput_KeyAttributes})
+var sListServiceDependentsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceDependentsMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServiceDependentsInput_MaxResults})
+var sListServiceDependentsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServiceDependentsInput_NextToken})
+var sListServiceDependentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceDependentsOutput, Members: &mListServiceDependentsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceDependentsOutput})
+var sListServiceDependentsOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependentsOutput_StartTime})
+var sListServiceDependentsOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceDependentsOutput_EndTime})
+var sListServiceDependentsOutput_ServiceDependents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceDependents", ID: &i_ServiceDependents, Members: &m_ServiceDependents, Type: smithy.ShapeTypeList, Ext: &eListServiceDependentsOutput_ServiceDependents})
+var sListServiceDependentsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceDependentsOutput_NextToken})
+var sListServiceLevelObjectiveExclusionWindowsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectiveExclusionWindowsInput, Members: &mListServiceLevelObjectiveExclusionWindowsInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectiveExclusionWindowsInput})
+var sListServiceLevelObjectiveExclusionWindowsInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ServiceLevelObjectiveId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectiveExclusionWindowsInput_Id})
+var sListServiceLevelObjectiveExclusionWindowsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceLevelObjectiveExclusionWindowsMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServiceLevelObjectiveExclusionWindowsInput_MaxResults})
+var sListServiceLevelObjectiveExclusionWindowsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectiveExclusionWindowsInput_NextToken})
+var sListServiceLevelObjectiveExclusionWindowsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectiveExclusionWindowsOutput, Members: &mListServiceLevelObjectiveExclusionWindowsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectiveExclusionWindowsOutput})
+var sListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionWindows", ID: &i_ExclusionWindows, Members: &m_ExclusionWindows, Type: smithy.ShapeTypeList, Ext: &eListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows})
+var sListServiceLevelObjectiveExclusionWindowsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectiveExclusionWindowsOutput_NextToken})
+var sListServiceLevelObjectivesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectivesInput, Members: &mListServiceLevelObjectivesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectivesInput})
+var sListServiceLevelObjectivesInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eListServiceLevelObjectivesInput_KeyAttributes})
+var sListServiceLevelObjectivesInput_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_OperationName, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectivesInput_OperationName})
+var sListServiceLevelObjectivesInput_DependencyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyConfig", ID: &iDependencyConfig, Members: &mDependencyConfig, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectivesInput_DependencyConfig})
+var sListServiceLevelObjectivesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceLevelObjectivesMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServiceLevelObjectivesInput_MaxResults})
+var sListServiceLevelObjectivesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectivesInput_NextToken})
+var sListServiceLevelObjectivesInput_MetricSourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSourceTypes", ID: &i_MetricSourceTypes, Members: &m_MetricSourceTypes, Type: smithy.ShapeTypeList, Ext: &eListServiceLevelObjectivesInput_MetricSourceTypes})
+var sListServiceLevelObjectivesInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t42, Type: smithy.ShapeTypeBoolean, Ext: &eListServiceLevelObjectivesInput_IncludeLinkedAccounts})
+var sListServiceLevelObjectivesInput_SloOwnerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloOwnerAwsAccountId", ID: &i_AwsAccountId, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectivesInput_SloOwnerAwsAccountId})
+var sListServiceLevelObjectivesInput_MetricSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSource", ID: &iMetricSource, Members: &mMetricSource, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectivesInput_MetricSource})
+var sListServiceLevelObjectivesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceLevelObjectivesOutput, Members: &mListServiceLevelObjectivesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceLevelObjectivesOutput})
+var sListServiceLevelObjectivesOutput_SloSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SloSummaries", ID: &i_ServiceLevelObjectiveSummaries, Members: &m_ServiceLevelObjectiveSummaries, Type: smithy.ShapeTypeList, Ext: &eListServiceLevelObjectivesOutput_SloSummaries})
+var sListServiceLevelObjectivesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceLevelObjectivesOutput_NextToken})
+var sListServiceOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceOperationsInput, Members: &mListServiceOperationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceOperationsInput})
+var sListServiceOperationsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceOperationsInput_StartTime})
+var sListServiceOperationsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceOperationsInput_EndTime})
+var sListServiceOperationsInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eListServiceOperationsInput_KeyAttributes})
+var sListServiceOperationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceOperationMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServiceOperationsInput_MaxResults})
+var sListServiceOperationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServiceOperationsInput_NextToken})
+var sListServiceOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceOperationsOutput, Members: &mListServiceOperationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceOperationsOutput})
+var sListServiceOperationsOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceOperationsOutput_StartTime})
+var sListServiceOperationsOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceOperationsOutput_EndTime})
+var sListServiceOperationsOutput_ServiceOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceOperations", ID: &i_ServiceOperations, Members: &m_ServiceOperations, Type: smithy.ShapeTypeList, Ext: &eListServiceOperationsOutput_ServiceOperations})
+var sListServiceOperationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceOperationsOutput_NextToken})
+var sListServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesInput, Members: &mListServicesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesInput})
+var sListServicesInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp, Ext: &eListServicesInput_StartTime})
+var sListServicesInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp, Ext: &eListServicesInput_EndTime})
+var sListServicesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServicesMaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListServicesInput_MaxResults})
+var sListServicesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListServicesInput_NextToken})
+var sListServicesInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t42, Type: smithy.ShapeTypeBoolean, Ext: &eListServicesInput_IncludeLinkedAccounts})
+var sListServicesInput_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AwsAccountId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListServicesInput_AwsAccountId})
+var sListServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesOutput, Members: &mListServicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesOutput})
+var sListServicesOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServicesOutput_StartTime})
+var sListServicesOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServicesOutput_EndTime})
+var sListServicesOutput_ServiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSummaries", ID: &i_ServiceSummaries, Members: &m_ServiceSummaries, Type: smithy.ShapeTypeList, Ext: &eListServicesOutput_ServiceSummaries})
+var sListServicesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesOutput_NextToken})
+var sListServiceStatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceStatesInput, Members: &mListServiceStatesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceStatesInput})
+var sListServiceStatesInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceStatesInput_StartTime})
+var sListServiceStatesInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceStatesInput_EndTime})
+var sListServiceStatesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListServiceStatesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListServiceStatesInput_MaxResults})
+var sListServiceStatesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceStatesInput_NextToken})
+var sListServiceStatesInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListServiceStatesInput_IncludeLinkedAccounts})
+var sListServiceStatesInput_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eListServiceStatesInput_AwsAccountId})
+var sListServiceStatesInput_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_AttributeFilters, Members: &m_AttributeFilters, Type: smithy.ShapeTypeList, Ext: &eListServiceStatesInput_AttributeFilters})
+var sListServiceStatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceStatesOutput, Members: &mListServiceStatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServiceStatesOutput})
+var sListServiceStatesOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceStatesOutput_StartTime})
+var sListServiceStatesOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListServiceStatesOutput_EndTime})
+var sListServiceStatesOutput_ServiceStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceStates", ID: &i_ServiceStates, Members: &m_ServiceStates, Type: smithy.ShapeTypeList, Ext: &eListServiceStatesOutput_ServiceStates})
+var sListServiceStatesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceStatesOutput_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutGroupingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGroupingConfigurationInput, Members: &mPutGroupingConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ePutGroupingConfigurationInput})
+var sPutGroupingConfigurationInput_GroupingAttributeDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingAttributeDefinitions", ID: &i_GroupingAttributeDefinitions, Members: &m_GroupingAttributeDefinitions, Type: smithy.ShapeTypeList, Ext: &ePutGroupingConfigurationInput_GroupingAttributeDefinitions})
+var sPutGroupingConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutGroupingConfigurationOutput, Members: &mPutGroupingConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutGroupingConfigurationOutput})
+var sPutGroupingConfigurationOutput_GroupingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupingConfiguration", ID: &iGroupingConfiguration, Members: &mGroupingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutGroupingConfigurationOutput_GroupingConfiguration})
+var sReportInstrumentationConfigurationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportInstrumentationConfigurationStatusRequest, Members: &mReportInstrumentationConfigurationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eReportInstrumentationConfigurationStatusRequest})
+var sReportInstrumentationConfigurationStatusRequest_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReportInstrumentationConfigurationStatusRequest_Service})
+var sReportInstrumentationConfigurationStatusRequest_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReportInstrumentationConfigurationStatusRequest_Environment})
+var sReportInstrumentationConfigurationStatusRequest_Configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configurations", ID: &i_InstrumentationConfigurationStatusList, Members: &m_InstrumentationConfigurationStatusList, Type: smithy.ShapeTypeList, Ext: &eReportInstrumentationConfigurationStatusRequest_Configurations})
+var sReportInstrumentationConfigurationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportInstrumentationConfigurationStatusResponse, Members: &mReportInstrumentationConfigurationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eReportInstrumentationConfigurationStatusResponse})
+var sReportInstrumentationConfigurationStatusResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReportInstrumentationConfigurationStatusResponse_Service})
+var sReportInstrumentationConfigurationStatusResponse_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReportInstrumentationConfigurationStatusResponse_Environment})
+var sReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedStatusEvents", ID: &i_UnprocessedStatusEventList, Members: &m_UnprocessedStatusEventList, Type: smithy.ShapeTypeList, Ext: &eReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents})
+var sStartDiscoveryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscoveryInput, Type: smithy.ShapeTypeStructure, Ext: &eStartDiscoveryInput})
+var sStartDiscoveryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscoveryOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartDiscoveryOutput})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateServiceLevelObjectiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceLevelObjectiveInput, Members: &mUpdateServiceLevelObjectiveInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveInput})
+var sUpdateServiceLevelObjectiveInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ServiceLevelObjectiveId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceLevelObjectiveInput_Id})
+var sUpdateServiceLevelObjectiveInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ServiceLevelObjectiveDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateServiceLevelObjectiveInput_Description})
+var sUpdateServiceLevelObjectiveInput_SliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SliConfig", ID: &iServiceLevelIndicatorConfig, Members: &mServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveInput_SliConfig})
+var sUpdateServiceLevelObjectiveInput_RequestBasedSliConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestBasedSliConfig", ID: &iRequestBasedServiceLevelIndicatorConfig, Members: &mRequestBasedServiceLevelIndicatorConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveInput_RequestBasedSliConfig})
+var sUpdateServiceLevelObjectiveInput_Goal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Goal", ID: &iGoal, Members: &mGoal, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveInput_Goal})
+var sUpdateServiceLevelObjectiveInput_BurnRateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BurnRateConfigurations", ID: &i_BurnRateConfigurations, Members: &m_BurnRateConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateServiceLevelObjectiveInput_BurnRateConfigurations})
+var sUpdateServiceLevelObjectiveInput_AutoInvestigationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoInvestigationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateServiceLevelObjectiveInput_AutoInvestigationEnabled})
+var sUpdateServiceLevelObjectiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceLevelObjectiveOutput, Members: &mUpdateServiceLevelObjectiveOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveOutput})
+var sUpdateServiceLevelObjectiveOutput_Slo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slo", ID: &iServiceLevelObjective, Members: &mServiceLevelObjective, Type: smithy.ShapeTypeStructure, Ext: &eUpdateServiceLevelObjectiveOutput_Slo})
+
+var BatchDeleteInstrumentationConfigurations = &sBatchDeleteInstrumentationConfigurations
+
+var BatchGetServiceLevelObjectiveBudgetReport = &sBatchGetServiceLevelObjectiveBudgetReport
+
+var BatchUpdateExclusionWindows = &sBatchUpdateExclusionWindows
+
+var CreateInstrumentationConfiguration = &sCreateInstrumentationConfiguration
+
+var CreateServiceLevelObjective = &sCreateServiceLevelObjective
+
+var DeleteGroupingConfiguration = &sDeleteGroupingConfiguration
+
+var DeleteInstrumentationConfiguration = &sDeleteInstrumentationConfiguration
+
+var DeleteServiceLevelObjective = &sDeleteServiceLevelObjective
+
+var GetInstrumentationConfiguration = &sGetInstrumentationConfiguration
+
+var GetInstrumentationConfigurationStatus = &sGetInstrumentationConfigurationStatus
+
+var GetService = &sGetService
+
+var GetServiceLevelObjective = &sGetServiceLevelObjective
+
+var ListAuditFindings = &sListAuditFindings
+
+var ListEntityEvents = &sListEntityEvents
+
+var ListGroupingAttributeDefinitions = &sListGroupingAttributeDefinitions
+
+var ListInstrumentationConfigurations = &sListInstrumentationConfigurations
+
+var ListServiceDependencies = &sListServiceDependencies
+
+var ListServiceDependents = &sListServiceDependents
+
+var ListServiceLevelObjectiveExclusionWindows = &sListServiceLevelObjectiveExclusionWindows
+
+var ListServiceLevelObjectives = &sListServiceLevelObjectives
+
+var ListServiceOperations = &sListServiceOperations
+
+var ListServices = &sListServices
+
+var ListServiceStates = &sListServiceStates
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutGroupingConfiguration = &sPutGroupingConfiguration
+
+var ReportInstrumentationConfigurationStatus = &sReportInstrumentationConfigurationStatus
+
+var StartDiscovery = &sStartDiscovery
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateServiceLevelObjective = &sUpdateServiceLevelObjective
+
+var _ApplicationSignals = &s_ApplicationSignals
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _Attainment = &s_Attainment
+
+var _AttainmentGoal = &s_AttainmentGoal
+
+var AttributeFilter = &sAttributeFilter
+var AttributeFilter_AttributeFilterName = &sAttributeFilter_AttributeFilterName
+var AttributeFilter_AttributeFilterValues = &sAttributeFilter_AttributeFilterValues
+
+var _AttributeFilterName = &s_AttributeFilterName
+
+var _AttributeFilters = &s_AttributeFilters
+var _AttributeFilters_member = &s_AttributeFilters_member
+
+var _AttributeFilterValue = &s_AttributeFilterValue
+
+var _AttributeFilterValues = &s_AttributeFilterValues
+var _AttributeFilterValues_member = &s_AttributeFilterValues_member
+
+var _AttributeMap = &s_AttributeMap
+var _AttributeMap_key = &s_AttributeMap_key
+var _AttributeMap_value = &s_AttributeMap_value
+
+var _AttributeMaps = &s_AttributeMaps
+var _AttributeMaps_member = &s_AttributeMaps_member
+
+var _Attributes = &s_Attributes
+var _Attributes_key = &s_Attributes_key
+var _Attributes_value = &s_Attributes_value
+
+var AuditFinding = &sAuditFinding
+var AuditFinding_KeyAttributes = &sAuditFinding_KeyAttributes
+var AuditFinding_AuditorResults = &sAuditFinding_AuditorResults
+var AuditFinding_Operation = &sAuditFinding_Operation
+var AuditFinding_MetricGraph = &sAuditFinding_MetricGraph
+var AuditFinding_DependencyGraph = &sAuditFinding_DependencyGraph
+var AuditFinding_Type = &sAuditFinding_Type
+
+var _AuditFindings = &s_AuditFindings
+var _AuditFindings_member = &s_AuditFindings_member
+
+var AuditorResult = &sAuditorResult
+var AuditorResult_Auditor = &sAuditorResult_Auditor
+var AuditorResult_Description = &sAuditorResult_Description
+var AuditorResult_Data = &sAuditorResult_Data
+var AuditorResult_Severity = &sAuditorResult_Severity
+
+var _AuditorResults = &s_AuditorResults
+var _AuditorResults_member = &s_AuditorResults_member
+
+var _Auditors = &s_Auditors
+var _Auditors_member = &s_Auditors_member
+
+var AuditTarget = &sAuditTarget
+var AuditTarget_Type = &sAuditTarget_Type
+var AuditTarget_Data = &sAuditTarget_Data
+
+var AuditTargetEntity = &sAuditTargetEntity
+var AuditTargetEntity_Service = &sAuditTargetEntity_Service
+var AuditTargetEntity_Slo = &sAuditTargetEntity_Slo
+var AuditTargetEntity_ServiceOperation = &sAuditTargetEntity_ServiceOperation
+var AuditTargetEntity_Canary = &sAuditTargetEntity_Canary
+
+var _AuditTargets = &s_AuditTargets
+var _AuditTargets_member = &s_AuditTargets_member
+
+var _AwsAccountId = &s_AwsAccountId
+
+var BatchDeleteByResourceArns = &sBatchDeleteByResourceArns
+var BatchDeleteByResourceArns_ResourceArns = &sBatchDeleteByResourceArns_ResourceArns
+var BatchDeleteByResourceArns_InstrumentationType = &sBatchDeleteByResourceArns_InstrumentationType
+
+var BatchDeleteDeletionTarget = &sBatchDeleteDeletionTarget
+var BatchDeleteDeletionTarget_Scope = &sBatchDeleteDeletionTarget_Scope
+var BatchDeleteDeletionTarget_ResourceArns = &sBatchDeleteDeletionTarget_ResourceArns
+
+var BatchDeleteError = &sBatchDeleteError
+var BatchDeleteError_ResourceArn = &sBatchDeleteError_ResourceArn
+var BatchDeleteError_Code = &sBatchDeleteError_Code
+var BatchDeleteError_Message = &sBatchDeleteError_Message
+
+var BatchDeleteErrorCode = &sBatchDeleteErrorCode
+var BatchDeleteErrorCode_RESOURCE_NOT_FOUND = &sBatchDeleteErrorCode_RESOURCE_NOT_FOUND
+var BatchDeleteErrorCode_ACCESS_DENIED = &sBatchDeleteErrorCode_ACCESS_DENIED
+var BatchDeleteErrorCode_INTERNAL_SERVICE_ERROR = &sBatchDeleteErrorCode_INTERNAL_SERVICE_ERROR
+
+var _BatchDeleteErrorList = &s_BatchDeleteErrorList
+var _BatchDeleteErrorList_member = &s_BatchDeleteErrorList_member
+
+var _BatchDeleteResourceArnList = &s_BatchDeleteResourceArnList
+var _BatchDeleteResourceArnList_member = &s_BatchDeleteResourceArnList_member
+
+var BatchDeleteScope = &sBatchDeleteScope
+var BatchDeleteScope_Service = &sBatchDeleteScope_Service
+var BatchDeleteScope_Environment = &sBatchDeleteScope_Environment
+var BatchDeleteScope_InstrumentationType = &sBatchDeleteScope_InstrumentationType
+
+var BatchDeleteSuccessfulDeletion = &sBatchDeleteSuccessfulDeletion
+var BatchDeleteSuccessfulDeletion_ResourceArn = &sBatchDeleteSuccessfulDeletion_ResourceArn
+var BatchDeleteSuccessfulDeletion_SignalType = &sBatchDeleteSuccessfulDeletion_SignalType
+var BatchDeleteSuccessfulDeletion_LocationHash = &sBatchDeleteSuccessfulDeletion_LocationHash
+
+var _BatchDeleteSuccessfulDeletionList = &s_BatchDeleteSuccessfulDeletionList
+var _BatchDeleteSuccessfulDeletionList_member = &s_BatchDeleteSuccessfulDeletionList_member
+
+var BatchUpdateExclusionWindowsError = &sBatchUpdateExclusionWindowsError
+var BatchUpdateExclusionWindowsError_SloId = &sBatchUpdateExclusionWindowsError_SloId
+var BatchUpdateExclusionWindowsError_ErrorCode = &sBatchUpdateExclusionWindowsError_ErrorCode
+var BatchUpdateExclusionWindowsError_ErrorMessage = &sBatchUpdateExclusionWindowsError_ErrorMessage
+
+var _BatchUpdateExclusionWindowsErrors = &s_BatchUpdateExclusionWindowsErrors
+var _BatchUpdateExclusionWindowsErrors_member = &s_BatchUpdateExclusionWindowsErrors_member
+
+var _BudgetRequestsRemaining = &s_BudgetRequestsRemaining
+
+var _BudgetSecondsRemaining = &s_BudgetSecondsRemaining
+
+var BurnRateConfiguration = &sBurnRateConfiguration
+var BurnRateConfiguration_LookBackWindowMinutes = &sBurnRateConfiguration_LookBackWindowMinutes
+
+var _BurnRateConfigurations = &s_BurnRateConfigurations
+var _BurnRateConfigurations_member = &s_BurnRateConfigurations_member
+
+var _BurnRateLookBackWindowMinutes = &s_BurnRateLookBackWindowMinutes
+
+var CalendarInterval = &sCalendarInterval
+var CalendarInterval_StartTime = &sCalendarInterval_StartTime
+var CalendarInterval_DurationUnit = &sCalendarInterval_DurationUnit
+var CalendarInterval_Duration = &sCalendarInterval_Duration
+
+var _CalendarIntervalDuration = &s_CalendarIntervalDuration
+
+var CanaryEntity = &sCanaryEntity
+var CanaryEntity_CanaryName = &sCanaryEntity_CanaryName
+
+var CaptureConfiguration = &sCaptureConfiguration
+var CaptureConfiguration_CodeCapture = &sCaptureConfiguration_CodeCapture
+
+var CaptureLimitsConfig = &sCaptureLimitsConfig
+var CaptureLimitsConfig_MaxHits = &sCaptureLimitsConfig_MaxHits
+var CaptureLimitsConfig_MaxStringLength = &sCaptureLimitsConfig_MaxStringLength
+var CaptureLimitsConfig_MaxCollectionWidth = &sCaptureLimitsConfig_MaxCollectionWidth
+var CaptureLimitsConfig_MaxCollectionDepth = &sCaptureLimitsConfig_MaxCollectionDepth
+var CaptureLimitsConfig_MaxStackFrames = &sCaptureLimitsConfig_MaxStackFrames
+var CaptureLimitsConfig_MaxStackTraceSize = &sCaptureLimitsConfig_MaxStackTraceSize
+var CaptureLimitsConfig_MaxObjectDepth = &sCaptureLimitsConfig_MaxObjectDepth
+var CaptureLimitsConfig_MaxFieldsPerObject = &sCaptureLimitsConfig_MaxFieldsPerObject
+
+var ChangeEvent = &sChangeEvent
+var ChangeEvent_Timestamp = &sChangeEvent_Timestamp
+var ChangeEvent_AccountId = &sChangeEvent_AccountId
+var ChangeEvent_Region = &sChangeEvent_Region
+var ChangeEvent_Entity = &sChangeEvent_Entity
+var ChangeEvent_ChangeEventType = &sChangeEvent_ChangeEventType
+var ChangeEvent_EventId = &sChangeEvent_EventId
+var ChangeEvent_UserName = &sChangeEvent_UserName
+var ChangeEvent_EventName = &sChangeEvent_EventName
+
+var _ChangeEvents = &s_ChangeEvents
+var _ChangeEvents_member = &s_ChangeEvents_member
+
+var ChangeEventType = &sChangeEventType
+var ChangeEventType_DEPLOYMENT = &sChangeEventType_DEPLOYMENT
+var ChangeEventType_CONFIGURATION = &sChangeEventType_CONFIGURATION
+
+var CodeCaptureConfiguration = &sCodeCaptureConfiguration
+var CodeCaptureConfiguration_CaptureArguments = &sCodeCaptureConfiguration_CaptureArguments
+var CodeCaptureConfiguration_CaptureReturn = &sCodeCaptureConfiguration_CaptureReturn
+var CodeCaptureConfiguration_CaptureStackTrace = &sCodeCaptureConfiguration_CaptureStackTrace
+var CodeCaptureConfiguration_CaptureLocals = &sCodeCaptureConfiguration_CaptureLocals
+var CodeCaptureConfiguration_CaptureLimits = &sCodeCaptureConfiguration_CaptureLimits
+
+var CodeLocation = &sCodeLocation
+var CodeLocation_Language = &sCodeLocation_Language
+var CodeLocation_CodeUnit = &sCodeLocation_CodeUnit
+var CodeLocation_ClassName = &sCodeLocation_ClassName
+var CodeLocation_MethodName = &sCodeLocation_MethodName
+var CodeLocation_FilePath = &sCodeLocation_FilePath
+var CodeLocation_LineNumber = &sCodeLocation_LineNumber
+
+var CompositeSliComponent = &sCompositeSliComponent
+var CompositeSliComponent_OperationName = &sCompositeSliComponent_OperationName
+
+var _CompositeSliComponents = &s_CompositeSliComponents
+var _CompositeSliComponents_member = &s_CompositeSliComponents_member
+
+var CompositeSliConfig = &sCompositeSliConfig
+var CompositeSliConfig_SelectionConfig = &sCompositeSliConfig_SelectionConfig
+var CompositeSliConfig_Components = &sCompositeSliConfig_Components
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ConnectionType = &sConnectionType
+var ConnectionType_INDIRECT = &sConnectionType_INDIRECT
+var ConnectionType_DIRECT = &sConnectionType_DIRECT
+
+var _DataMap = &s_DataMap
+var _DataMap_key = &s_DataMap_key
+var _DataMap_value = &s_DataMap_value
+
+var DependencyConfig = &sDependencyConfig
+var DependencyConfig_DependencyKeyAttributes = &sDependencyConfig_DependencyKeyAttributes
+var DependencyConfig_DependencyOperationName = &sDependencyConfig_DependencyOperationName
+
+var DependencyGraph = &sDependencyGraph
+var DependencyGraph_Nodes = &sDependencyGraph_Nodes
+var DependencyGraph_Edges = &sDependencyGraph_Edges
+
+var DetailLevel = &sDetailLevel
+var DetailLevel_BRIEF = &sDetailLevel_BRIEF
+var DetailLevel_DETAILED = &sDetailLevel_DETAILED
+
+var Dimension = &sDimension
+var Dimension_Name = &sDimension_Name
+var Dimension_Value = &sDimension_Value
+
+var _DimensionName = &s_DimensionName
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var _DimensionValue = &s_DimensionValue
+
+var DurationUnit = &sDurationUnit
+var DurationUnit_MINUTE = &sDurationUnit_MINUTE
+var DurationUnit_HOUR = &sDurationUnit_HOUR
+var DurationUnit_DAY = &sDurationUnit_DAY
+var DurationUnit_MONTH = &sDurationUnit_MONTH
+
+var _DynamicInstrumentationAttributeFilterGroup = &s_DynamicInstrumentationAttributeFilterGroup
+var _DynamicInstrumentationAttributeFilterGroup_key = &s_DynamicInstrumentationAttributeFilterGroup_key
+var _DynamicInstrumentationAttributeFilterGroup_value = &s_DynamicInstrumentationAttributeFilterGroup_value
+
+var _DynamicInstrumentationAttributeFilters = &s_DynamicInstrumentationAttributeFilters
+var _DynamicInstrumentationAttributeFilters_member = &s_DynamicInstrumentationAttributeFilters_member
+
+var DynamicInstrumentationDeletionStatus = &sDynamicInstrumentationDeletionStatus
+var DynamicInstrumentationDeletionStatus_DELETED = &sDynamicInstrumentationDeletionStatus_DELETED
+
+var DynamicInstrumentationSignalType = &sDynamicInstrumentationSignalType
+var DynamicInstrumentationSignalType_SNAPSHOT = &sDynamicInstrumentationSignalType_SNAPSHOT
+
+var Edge = &sEdge
+var Edge_SourceNodeId = &sEdge_SourceNodeId
+var Edge_DestinationNodeId = &sEdge_DestinationNodeId
+var Edge_Duration = &sEdge_Duration
+var Edge_ConnectionType = &sEdge_ConnectionType
+
+var _Edges = &s_Edges
+var _Edges_member = &s_Edges_member
+
+var EvaluationType = &sEvaluationType
+var EvaluationType_PERIOD_BASED = &sEvaluationType_PERIOD_BASED
+var EvaluationType_REQUEST_BASED = &sEvaluationType_REQUEST_BASED
+
+var _ExclusionDuration = &s_ExclusionDuration
+
+var _ExclusionReason = &s_ExclusionReason
+
+var ExclusionWindow = &sExclusionWindow
+var ExclusionWindow_Window = &sExclusionWindow_Window
+var ExclusionWindow_StartTime = &sExclusionWindow_StartTime
+var ExclusionWindow_RecurrenceRule = &sExclusionWindow_RecurrenceRule
+var ExclusionWindow_Reason = &sExclusionWindow_Reason
+
+var _ExclusionWindowErrorCode = &s_ExclusionWindowErrorCode
+
+var _ExclusionWindowErrorMessage = &s_ExclusionWindowErrorMessage
+
+var _ExclusionWindows = &s_ExclusionWindows
+var _ExclusionWindows_member = &s_ExclusionWindows_member
+
+var _Expression = &s_Expression
+
+var _FaultDescription = &s_FaultDescription
+
+var Goal = &sGoal
+var Goal_Interval = &sGoal_Interval
+var Goal_AttainmentGoal = &sGoal_AttainmentGoal
+var Goal_WarningThreshold = &sGoal_WarningThreshold
+
+var _GroupIdentifier = &s_GroupIdentifier
+
+var GroupingAttributeDefinition = &sGroupingAttributeDefinition
+var GroupingAttributeDefinition_GroupingName = &sGroupingAttributeDefinition_GroupingName
+var GroupingAttributeDefinition_GroupingSourceKeys = &sGroupingAttributeDefinition_GroupingSourceKeys
+var GroupingAttributeDefinition_DefaultGroupingValue = &sGroupingAttributeDefinition_DefaultGroupingValue
+
+var _GroupingAttributeDefinitions = &s_GroupingAttributeDefinitions
+var _GroupingAttributeDefinitions_member = &s_GroupingAttributeDefinitions_member
+
+var GroupingConfiguration = &sGroupingConfiguration
+var GroupingConfiguration_GroupingAttributeDefinitions = &sGroupingConfiguration_GroupingAttributeDefinitions
+var GroupingConfiguration_UpdatedAt = &sGroupingConfiguration_UpdatedAt
+
+var _GroupingSourceKeyStringList = &s_GroupingSourceKeyStringList
+var _GroupingSourceKeyStringList_member = &s_GroupingSourceKeyStringList_member
+
+var _GroupingString = &s_GroupingString
+
+var _GroupName = &s_GroupName
+
+var _GroupSource = &s_GroupSource
+
+var _GroupValue = &s_GroupValue
+
+var InstrumentationConfiguration = &sInstrumentationConfiguration
+var InstrumentationConfiguration_InstrumentationType = &sInstrumentationConfiguration_InstrumentationType
+var InstrumentationConfiguration_Service = &sInstrumentationConfiguration_Service
+var InstrumentationConfiguration_Environment = &sInstrumentationConfiguration_Environment
+var InstrumentationConfiguration_SignalType = &sInstrumentationConfiguration_SignalType
+var InstrumentationConfiguration_Location = &sInstrumentationConfiguration_Location
+var InstrumentationConfiguration_LocationHash = &sInstrumentationConfiguration_LocationHash
+var InstrumentationConfiguration_Description = &sInstrumentationConfiguration_Description
+var InstrumentationConfiguration_ExpiresAt = &sInstrumentationConfiguration_ExpiresAt
+var InstrumentationConfiguration_AttributeFilters = &sInstrumentationConfiguration_AttributeFilters
+var InstrumentationConfiguration_CaptureConfiguration = &sInstrumentationConfiguration_CaptureConfiguration
+var InstrumentationConfiguration_CreatedAt = &sInstrumentationConfiguration_CreatedAt
+var InstrumentationConfiguration_ARN = &sInstrumentationConfiguration_ARN
+
+var _InstrumentationConfigurationArn = &s_InstrumentationConfigurationArn
+
+var InstrumentationConfigurationStatus = &sInstrumentationConfigurationStatus
+var InstrumentationConfigurationStatus_READY = &sInstrumentationConfigurationStatus_READY
+var InstrumentationConfigurationStatus_ERROR = &sInstrumentationConfigurationStatus_ERROR
+var InstrumentationConfigurationStatus_ACTIVE = &sInstrumentationConfigurationStatus_ACTIVE
+var InstrumentationConfigurationStatus_DISABLED = &sInstrumentationConfigurationStatus_DISABLED
+
+var _InstrumentationConfigurationStatusList = &s_InstrumentationConfigurationStatusList
+var _InstrumentationConfigurationStatusList_member = &s_InstrumentationConfigurationStatusList_member
+
+var InstrumentationConfigurationStatusReport = &sInstrumentationConfigurationStatusReport
+var InstrumentationConfigurationStatusReport_InstrumentationType = &sInstrumentationConfigurationStatusReport_InstrumentationType
+var InstrumentationConfigurationStatusReport_SignalType = &sInstrumentationConfigurationStatusReport_SignalType
+var InstrumentationConfigurationStatusReport_LocationHash = &sInstrumentationConfigurationStatusReport_LocationHash
+var InstrumentationConfigurationStatusReport_Status = &sInstrumentationConfigurationStatusReport_Status
+var InstrumentationConfigurationStatusReport_Time = &sInstrumentationConfigurationStatusReport_Time
+var InstrumentationConfigurationStatusReport_ErrorCause = &sInstrumentationConfigurationStatusReport_ErrorCause
+
+var _InstrumentationConfigurationsWithoutServiceEnv = &s_InstrumentationConfigurationsWithoutServiceEnv
+var _InstrumentationConfigurationsWithoutServiceEnv_member = &s_InstrumentationConfigurationsWithoutServiceEnv_member
+
+var InstrumentationConfigurationWithoutServiceEnv = &sInstrumentationConfigurationWithoutServiceEnv
+var InstrumentationConfigurationWithoutServiceEnv_InstrumentationType = &sInstrumentationConfigurationWithoutServiceEnv_InstrumentationType
+var InstrumentationConfigurationWithoutServiceEnv_SignalType = &sInstrumentationConfigurationWithoutServiceEnv_SignalType
+var InstrumentationConfigurationWithoutServiceEnv_Location = &sInstrumentationConfigurationWithoutServiceEnv_Location
+var InstrumentationConfigurationWithoutServiceEnv_LocationHash = &sInstrumentationConfigurationWithoutServiceEnv_LocationHash
+var InstrumentationConfigurationWithoutServiceEnv_Description = &sInstrumentationConfigurationWithoutServiceEnv_Description
+var InstrumentationConfigurationWithoutServiceEnv_ExpiresAt = &sInstrumentationConfigurationWithoutServiceEnv_ExpiresAt
+var InstrumentationConfigurationWithoutServiceEnv_AttributeFilters = &sInstrumentationConfigurationWithoutServiceEnv_AttributeFilters
+var InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration = &sInstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration
+var InstrumentationConfigurationWithoutServiceEnv_CreatedAt = &sInstrumentationConfigurationWithoutServiceEnv_CreatedAt
+var InstrumentationConfigurationWithoutServiceEnv_ARN = &sInstrumentationConfigurationWithoutServiceEnv_ARN
+
+var InstrumentationErrorCause = &sInstrumentationErrorCause
+var InstrumentationErrorCause_FILE_NOT_FOUND = &sInstrumentationErrorCause_FILE_NOT_FOUND
+var InstrumentationErrorCause_METHOD_NOT_FOUND = &sInstrumentationErrorCause_METHOD_NOT_FOUND
+var InstrumentationErrorCause_LINE_NOT_EXECUTABLE = &sInstrumentationErrorCause_LINE_NOT_EXECUTABLE
+var InstrumentationErrorCause_OVERLOADED_METHODS = &sInstrumentationErrorCause_OVERLOADED_METHODS
+var InstrumentationErrorCause_LANGUAGE_MISMATCH = &sInstrumentationErrorCause_LANGUAGE_MISMATCH
+var InstrumentationErrorCause_RUNTIME_ERROR = &sInstrumentationErrorCause_RUNTIME_ERROR
+
+var InstrumentationStatusEvent = &sInstrumentationStatusEvent
+var InstrumentationStatusEvent_Time = &sInstrumentationStatusEvent_Time
+var InstrumentationStatusEvent_ErrorCause = &sInstrumentationStatusEvent_ErrorCause
+
+var _InstrumentationStatusEventList = &s_InstrumentationStatusEventList
+var _InstrumentationStatusEventList_member = &s_InstrumentationStatusEventList_member
+
+var InstrumentationType = &sInstrumentationType
+var InstrumentationType_BREAKPOINT = &sInstrumentationType_BREAKPOINT
+var InstrumentationType_PROBE = &sInstrumentationType_PROBE
+
+var Interval = &sInterval
+var Interval_RollingInterval = &sInterval_RollingInterval
+var Interval_CalendarInterval = &sInterval_CalendarInterval
+
+var _KeyAttributeName = &s_KeyAttributeName
+
+var _KeyAttributeValue = &s_KeyAttributeValue
+
+var _LatestChangeEvents = &s_LatestChangeEvents
+var _LatestChangeEvents_member = &s_LatestChangeEvents_member
+
+var _ListAuditFindingMaxResults = &s_ListAuditFindingMaxResults
+
+var _ListEntityEventsMaxResults = &s_ListEntityEventsMaxResults
+
+var _ListServiceDependenciesMaxResults = &s_ListServiceDependenciesMaxResults
+
+var _ListServiceDependentsMaxResults = &s_ListServiceDependentsMaxResults
+
+var _ListServiceLevelObjectiveExclusionWindowsMaxResults = &s_ListServiceLevelObjectiveExclusionWindowsMaxResults
+
+var _ListServiceLevelObjectivesMaxResults = &s_ListServiceLevelObjectivesMaxResults
+
+var _ListServiceOperationMaxResults = &s_ListServiceOperationMaxResults
+
+var _ListServicesMaxResults = &s_ListServicesMaxResults
+
+var _ListServiceStatesMaxResults = &s_ListServiceStatesMaxResults
+
+var Location = &sLocation
+var Location_CodeLocation = &sLocation_CodeLocation
+
+var LocationIdentifier = &sLocationIdentifier
+var LocationIdentifier_CodeLocation = &sLocationIdentifier_CodeLocation
+var LocationIdentifier_LocationHash = &sLocationIdentifier_LocationHash
+
+var _LogGroupReferences = &s_LogGroupReferences
+var _LogGroupReferences_member = &s_LogGroupReferences_member
+
+var Metric = &sMetric
+var Metric_Namespace = &sMetric_Namespace
+var Metric_MetricName = &sMetric_MetricName
+var Metric_Dimensions = &sMetric_Dimensions
+
+var _MetricDataQueries = &s_MetricDataQueries
+var _MetricDataQueries_member = &s_MetricDataQueries_member
+
+var MetricDataQuery = &sMetricDataQuery
+var MetricDataQuery_Id = &sMetricDataQuery_Id
+var MetricDataQuery_MetricStat = &sMetricDataQuery_MetricStat
+var MetricDataQuery_Expression = &sMetricDataQuery_Expression
+var MetricDataQuery_Label = &sMetricDataQuery_Label
+var MetricDataQuery_ReturnData = &sMetricDataQuery_ReturnData
+var MetricDataQuery_Period = &sMetricDataQuery_Period
+var MetricDataQuery_AccountId = &sMetricDataQuery_AccountId
+
+var _MetricExpression = &s_MetricExpression
+
+var MetricGraph = &sMetricGraph
+var MetricGraph_MetricDataQueries = &sMetricGraph_MetricDataQueries
+var MetricGraph_StartTime = &sMetricGraph_StartTime
+var MetricGraph_EndTime = &sMetricGraph_EndTime
+
+var _MetricId = &s_MetricId
+
+var _MetricLabel = &s_MetricLabel
+
+var _MetricName = &s_MetricName
+
+var MetricReference = &sMetricReference
+var MetricReference_Namespace = &sMetricReference_Namespace
+var MetricReference_MetricType = &sMetricReference_MetricType
+var MetricReference_Dimensions = &sMetricReference_Dimensions
+var MetricReference_MetricName = &sMetricReference_MetricName
+var MetricReference_AccountId = &sMetricReference_AccountId
+
+var _MetricReferences = &s_MetricReferences
+var _MetricReferences_member = &s_MetricReferences_member
+
+var MetricSource = &sMetricSource
+var MetricSource_MetricSourceKeyAttributes = &sMetricSource_MetricSourceKeyAttributes
+var MetricSource_MetricSourceAttributes = &sMetricSource_MetricSourceAttributes
+
+var MetricSourceType = &sMetricSourceType
+var MetricSourceType_SERVICE_OPERATION = &sMetricSourceType_SERVICE_OPERATION
+var MetricSourceType_CLOUDWATCH_METRIC = &sMetricSourceType_CLOUDWATCH_METRIC
+var MetricSourceType_SERVICE_DEPENDENCY = &sMetricSourceType_SERVICE_DEPENDENCY
+var MetricSourceType_APPMONITOR = &sMetricSourceType_APPMONITOR
+var MetricSourceType_CANARY = &sMetricSourceType_CANARY
+var MetricSourceType_SERVICE = &sMetricSourceType_SERVICE
+
+var _MetricSourceTypes = &s_MetricSourceTypes
+var _MetricSourceTypes_member = &s_MetricSourceTypes_member
+
+var MetricStat = &sMetricStat
+var MetricStat_Metric = &sMetricStat_Metric
+var MetricStat_Period = &sMetricStat_Period
+var MetricStat_Stat = &sMetricStat_Stat
+var MetricStat_Unit = &sMetricStat_Unit
+
+var _MetricType = &s_MetricType
+
+var MonitoredRequestCountMetricDataQueries = &sMonitoredRequestCountMetricDataQueries
+var MonitoredRequestCountMetricDataQueries_GoodCountMetric = &sMonitoredRequestCountMetricDataQueries_GoodCountMetric
+var MonitoredRequestCountMetricDataQueries_BadCountMetric = &sMonitoredRequestCountMetricDataQueries_BadCountMetric
+
+var _Namespace = &s_Namespace
+
+var _NextToken = &s_NextToken
+
+var Node = &sNode
+var Node_KeyAttributes = &sNode_KeyAttributes
+var Node_Name = &sNode_Name
+var Node_NodeId = &sNode_NodeId
+var Node_Operation = &sNode_Operation
+var Node_Type = &sNode_Type
+var Node_Duration = &sNode_Duration
+var Node_Status = &sNode_Status
+
+var _Nodes = &s_Nodes
+var _Nodes_member = &s_Nodes_member
+
+var _OperationName = &s_OperationName
+
+var _Period = &s_Period
+
+var ProgrammingLanguage = &sProgrammingLanguage
+var ProgrammingLanguage_JAVA = &sProgrammingLanguage_JAVA
+var ProgrammingLanguage_PYTHON = &sProgrammingLanguage_PYTHON
+var ProgrammingLanguage_JAVASCRIPT = &sProgrammingLanguage_JAVASCRIPT
+
+var RecurrenceRule = &sRecurrenceRule
+var RecurrenceRule_Expression = &sRecurrenceRule_Expression
+
+var RequestBasedServiceLevelIndicator = &sRequestBasedServiceLevelIndicator
+var RequestBasedServiceLevelIndicator_RequestBasedSliMetric = &sRequestBasedServiceLevelIndicator_RequestBasedSliMetric
+var RequestBasedServiceLevelIndicator_MetricThreshold = &sRequestBasedServiceLevelIndicator_MetricThreshold
+var RequestBasedServiceLevelIndicator_ComparisonOperator = &sRequestBasedServiceLevelIndicator_ComparisonOperator
+
+var RequestBasedServiceLevelIndicatorConfig = &sRequestBasedServiceLevelIndicatorConfig
+var RequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig = &sRequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig
+var RequestBasedServiceLevelIndicatorConfig_MetricThreshold = &sRequestBasedServiceLevelIndicatorConfig_MetricThreshold
+var RequestBasedServiceLevelIndicatorConfig_ComparisonOperator = &sRequestBasedServiceLevelIndicatorConfig_ComparisonOperator
+
+var RequestBasedServiceLevelIndicatorMetric = &sRequestBasedServiceLevelIndicatorMetric
+var RequestBasedServiceLevelIndicatorMetric_KeyAttributes = &sRequestBasedServiceLevelIndicatorMetric_KeyAttributes
+var RequestBasedServiceLevelIndicatorMetric_OperationName = &sRequestBasedServiceLevelIndicatorMetric_OperationName
+var RequestBasedServiceLevelIndicatorMetric_MetricType = &sRequestBasedServiceLevelIndicatorMetric_MetricType
+var RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric = &sRequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric
+var RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric = &sRequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric
+var RequestBasedServiceLevelIndicatorMetric_DependencyConfig = &sRequestBasedServiceLevelIndicatorMetric_DependencyConfig
+var RequestBasedServiceLevelIndicatorMetric_MetricSource = &sRequestBasedServiceLevelIndicatorMetric_MetricSource
+var RequestBasedServiceLevelIndicatorMetric_CompositeSliConfig = &sRequestBasedServiceLevelIndicatorMetric_CompositeSliConfig
+
+var RequestBasedServiceLevelIndicatorMetricConfig = &sRequestBasedServiceLevelIndicatorMetricConfig
+var RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes = &sRequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes
+var RequestBasedServiceLevelIndicatorMetricConfig_OperationName = &sRequestBasedServiceLevelIndicatorMetricConfig_OperationName
+var RequestBasedServiceLevelIndicatorMetricConfig_MetricType = &sRequestBasedServiceLevelIndicatorMetricConfig_MetricType
+var RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric = &sRequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric
+var RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric = &sRequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric
+var RequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig = &sRequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig
+var RequestBasedServiceLevelIndicatorMetricConfig_MetricSource = &sRequestBasedServiceLevelIndicatorMetricConfig_MetricSource
+var RequestBasedServiceLevelIndicatorMetricConfig_MetricName = &sRequestBasedServiceLevelIndicatorMetricConfig_MetricName
+var RequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig = &sRequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceType = &s_ResourceType
+
+var _ReturnData = &s_ReturnData
+
+var RollingInterval = &sRollingInterval
+var RollingInterval_DurationUnit = &sRollingInterval_DurationUnit
+var RollingInterval_Duration = &sRollingInterval_Duration
+
+var _RollingIntervalDuration = &s_RollingIntervalDuration
+
+var SelectionConfig = &sSelectionConfig
+var SelectionConfig_Type = &sSelectionConfig_Type
+var SelectionConfig_Pattern = &sSelectionConfig_Pattern
+
+var _SelectionPattern = &s_SelectionPattern
+
+var SelectionType = &sSelectionType
+var SelectionType_EXPLICIT = &sSelectionType_EXPLICIT
+var SelectionType_PREFIX = &sSelectionType_PREFIX
+var SelectionType_REGEX = &sSelectionType_REGEX
+
+var Service = &sService
+var Service_KeyAttributes = &sService_KeyAttributes
+var Service_AttributeMaps = &sService_AttributeMaps
+var Service_ServiceGroups = &sService_ServiceGroups
+var Service_MetricReferences = &sService_MetricReferences
+var Service_LogGroupReferences = &sService_LogGroupReferences
+
+var _ServiceDependencies = &s_ServiceDependencies
+var _ServiceDependencies_member = &s_ServiceDependencies_member
+
+var ServiceDependency = &sServiceDependency
+var ServiceDependency_OperationName = &sServiceDependency_OperationName
+var ServiceDependency_DependencyKeyAttributes = &sServiceDependency_DependencyKeyAttributes
+var ServiceDependency_DependencyOperationName = &sServiceDependency_DependencyOperationName
+var ServiceDependency_MetricReferences = &sServiceDependency_MetricReferences
+
+var ServiceDependent = &sServiceDependent
+var ServiceDependent_OperationName = &sServiceDependent_OperationName
+var ServiceDependent_DependentKeyAttributes = &sServiceDependent_DependentKeyAttributes
+var ServiceDependent_DependentOperationName = &sServiceDependent_DependentOperationName
+var ServiceDependent_MetricReferences = &sServiceDependent_MetricReferences
+
+var _ServiceDependents = &s_ServiceDependents
+var _ServiceDependents_member = &s_ServiceDependents_member
+
+var ServiceEntity = &sServiceEntity
+var ServiceEntity_Type = &sServiceEntity_Type
+var ServiceEntity_Name = &sServiceEntity_Name
+var ServiceEntity_Environment = &sServiceEntity_Environment
+var ServiceEntity_AwsAccountId = &sServiceEntity_AwsAccountId
+
+var _ServiceErrorMessage = &s_ServiceErrorMessage
+
+var ServiceGroup = &sServiceGroup
+var ServiceGroup_GroupName = &sServiceGroup_GroupName
+var ServiceGroup_GroupValue = &sServiceGroup_GroupValue
+var ServiceGroup_GroupSource = &sServiceGroup_GroupSource
+var ServiceGroup_GroupIdentifier = &sServiceGroup_GroupIdentifier
+
+var _ServiceGroups = &s_ServiceGroups
+var _ServiceGroups_member = &s_ServiceGroups_member
+
+var ServiceLevelIndicator = &sServiceLevelIndicator
+var ServiceLevelIndicator_SliMetric = &sServiceLevelIndicator_SliMetric
+var ServiceLevelIndicator_MetricThreshold = &sServiceLevelIndicator_MetricThreshold
+var ServiceLevelIndicator_ComparisonOperator = &sServiceLevelIndicator_ComparisonOperator
+
+var ServiceLevelIndicatorComparisonOperator = &sServiceLevelIndicatorComparisonOperator
+var ServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO = &sServiceLevelIndicatorComparisonOperator_GREATER_THAN_OR_EQUAL_TO
+var ServiceLevelIndicatorComparisonOperator_GREATER_THAN = &sServiceLevelIndicatorComparisonOperator_GREATER_THAN
+var ServiceLevelIndicatorComparisonOperator_LESS_THAN = &sServiceLevelIndicatorComparisonOperator_LESS_THAN
+var ServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO = &sServiceLevelIndicatorComparisonOperator_LESS_THAN_OR_EQUAL_TO
+
+var ServiceLevelIndicatorConfig = &sServiceLevelIndicatorConfig
+var ServiceLevelIndicatorConfig_SliMetricConfig = &sServiceLevelIndicatorConfig_SliMetricConfig
+var ServiceLevelIndicatorConfig_MetricThreshold = &sServiceLevelIndicatorConfig_MetricThreshold
+var ServiceLevelIndicatorConfig_ComparisonOperator = &sServiceLevelIndicatorConfig_ComparisonOperator
+
+var ServiceLevelIndicatorMetric = &sServiceLevelIndicatorMetric
+var ServiceLevelIndicatorMetric_KeyAttributes = &sServiceLevelIndicatorMetric_KeyAttributes
+var ServiceLevelIndicatorMetric_OperationName = &sServiceLevelIndicatorMetric_OperationName
+var ServiceLevelIndicatorMetric_MetricType = &sServiceLevelIndicatorMetric_MetricType
+var ServiceLevelIndicatorMetric_MetricDataQueries = &sServiceLevelIndicatorMetric_MetricDataQueries
+var ServiceLevelIndicatorMetric_DependencyConfig = &sServiceLevelIndicatorMetric_DependencyConfig
+var ServiceLevelIndicatorMetric_MetricSource = &sServiceLevelIndicatorMetric_MetricSource
+var ServiceLevelIndicatorMetric_CompositeSliConfig = &sServiceLevelIndicatorMetric_CompositeSliConfig
+
+var ServiceLevelIndicatorMetricConfig = &sServiceLevelIndicatorMetricConfig
+var ServiceLevelIndicatorMetricConfig_KeyAttributes = &sServiceLevelIndicatorMetricConfig_KeyAttributes
+var ServiceLevelIndicatorMetricConfig_OperationName = &sServiceLevelIndicatorMetricConfig_OperationName
+var ServiceLevelIndicatorMetricConfig_MetricType = &sServiceLevelIndicatorMetricConfig_MetricType
+var ServiceLevelIndicatorMetricConfig_MetricName = &sServiceLevelIndicatorMetricConfig_MetricName
+var ServiceLevelIndicatorMetricConfig_Statistic = &sServiceLevelIndicatorMetricConfig_Statistic
+var ServiceLevelIndicatorMetricConfig_PeriodSeconds = &sServiceLevelIndicatorMetricConfig_PeriodSeconds
+var ServiceLevelIndicatorMetricConfig_MetricSource = &sServiceLevelIndicatorMetricConfig_MetricSource
+var ServiceLevelIndicatorMetricConfig_MetricDataQueries = &sServiceLevelIndicatorMetricConfig_MetricDataQueries
+var ServiceLevelIndicatorMetricConfig_DependencyConfig = &sServiceLevelIndicatorMetricConfig_DependencyConfig
+var ServiceLevelIndicatorMetricConfig_CompositeSliConfig = &sServiceLevelIndicatorMetricConfig_CompositeSliConfig
+
+var _ServiceLevelIndicatorMetricThreshold = &s_ServiceLevelIndicatorMetricThreshold
+
+var ServiceLevelIndicatorMetricType = &sServiceLevelIndicatorMetricType
+var ServiceLevelIndicatorMetricType_LATENCY = &sServiceLevelIndicatorMetricType_LATENCY
+var ServiceLevelIndicatorMetricType_AVAILABILITY = &sServiceLevelIndicatorMetricType_AVAILABILITY
+
+var _ServiceLevelIndicatorStatistic = &s_ServiceLevelIndicatorStatistic
+
+var ServiceLevelObjective = &sServiceLevelObjective
+var ServiceLevelObjective_Arn = &sServiceLevelObjective_Arn
+var ServiceLevelObjective_Name = &sServiceLevelObjective_Name
+var ServiceLevelObjective_Description = &sServiceLevelObjective_Description
+var ServiceLevelObjective_CreatedTime = &sServiceLevelObjective_CreatedTime
+var ServiceLevelObjective_LastUpdatedTime = &sServiceLevelObjective_LastUpdatedTime
+var ServiceLevelObjective_Sli = &sServiceLevelObjective_Sli
+var ServiceLevelObjective_RequestBasedSli = &sServiceLevelObjective_RequestBasedSli
+var ServiceLevelObjective_EvaluationType = &sServiceLevelObjective_EvaluationType
+var ServiceLevelObjective_Goal = &sServiceLevelObjective_Goal
+var ServiceLevelObjective_BurnRateConfigurations = &sServiceLevelObjective_BurnRateConfigurations
+var ServiceLevelObjective_MetricSourceType = &sServiceLevelObjective_MetricSourceType
+var ServiceLevelObjective_AutoInvestigationEnabled = &sServiceLevelObjective_AutoInvestigationEnabled
+
+var _ServiceLevelObjectiveArn = &s_ServiceLevelObjectiveArn
+
+var ServiceLevelObjectiveBudgetReport = &sServiceLevelObjectiveBudgetReport
+var ServiceLevelObjectiveBudgetReport_Arn = &sServiceLevelObjectiveBudgetReport_Arn
+var ServiceLevelObjectiveBudgetReport_Name = &sServiceLevelObjectiveBudgetReport_Name
+var ServiceLevelObjectiveBudgetReport_EvaluationType = &sServiceLevelObjectiveBudgetReport_EvaluationType
+var ServiceLevelObjectiveBudgetReport_BudgetStatus = &sServiceLevelObjectiveBudgetReport_BudgetStatus
+var ServiceLevelObjectiveBudgetReport_Attainment = &sServiceLevelObjectiveBudgetReport_Attainment
+var ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds = &sServiceLevelObjectiveBudgetReport_TotalBudgetSeconds
+var ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining = &sServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining
+var ServiceLevelObjectiveBudgetReport_TotalBudgetRequests = &sServiceLevelObjectiveBudgetReport_TotalBudgetRequests
+var ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining = &sServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining
+var ServiceLevelObjectiveBudgetReport_Sli = &sServiceLevelObjectiveBudgetReport_Sli
+var ServiceLevelObjectiveBudgetReport_RequestBasedSli = &sServiceLevelObjectiveBudgetReport_RequestBasedSli
+var ServiceLevelObjectiveBudgetReport_Goal = &sServiceLevelObjectiveBudgetReport_Goal
+
+var ServiceLevelObjectiveBudgetReportError = &sServiceLevelObjectiveBudgetReportError
+var ServiceLevelObjectiveBudgetReportError_Name = &sServiceLevelObjectiveBudgetReportError_Name
+var ServiceLevelObjectiveBudgetReportError_Arn = &sServiceLevelObjectiveBudgetReportError_Arn
+var ServiceLevelObjectiveBudgetReportError_ErrorCode = &sServiceLevelObjectiveBudgetReportError_ErrorCode
+var ServiceLevelObjectiveBudgetReportError_ErrorMessage = &sServiceLevelObjectiveBudgetReportError_ErrorMessage
+
+var _ServiceLevelObjectiveBudgetReportErrorCode = &s_ServiceLevelObjectiveBudgetReportErrorCode
+
+var _ServiceLevelObjectiveBudgetReportErrorMessage = &s_ServiceLevelObjectiveBudgetReportErrorMessage
+
+var _ServiceLevelObjectiveBudgetReportErrors = &s_ServiceLevelObjectiveBudgetReportErrors
+var _ServiceLevelObjectiveBudgetReportErrors_member = &s_ServiceLevelObjectiveBudgetReportErrors_member
+
+var _ServiceLevelObjectiveBudgetReports = &s_ServiceLevelObjectiveBudgetReports
+var _ServiceLevelObjectiveBudgetReports_member = &s_ServiceLevelObjectiveBudgetReports_member
+
+var ServiceLevelObjectiveBudgetStatus = &sServiceLevelObjectiveBudgetStatus
+var ServiceLevelObjectiveBudgetStatus_OK = &sServiceLevelObjectiveBudgetStatus_OK
+var ServiceLevelObjectiveBudgetStatus_WARNING = &sServiceLevelObjectiveBudgetStatus_WARNING
+var ServiceLevelObjectiveBudgetStatus_BREACHED = &sServiceLevelObjectiveBudgetStatus_BREACHED
+var ServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA = &sServiceLevelObjectiveBudgetStatus_INSUFFICIENT_DATA
+
+var _ServiceLevelObjectiveDescription = &s_ServiceLevelObjectiveDescription
+
+var ServiceLevelObjectiveEntity = &sServiceLevelObjectiveEntity
+var ServiceLevelObjectiveEntity_SloName = &sServiceLevelObjectiveEntity_SloName
+var ServiceLevelObjectiveEntity_SloArn = &sServiceLevelObjectiveEntity_SloArn
+
+var _ServiceLevelObjectiveId = &s_ServiceLevelObjectiveId
+
+var _ServiceLevelObjectiveIds = &s_ServiceLevelObjectiveIds
+var _ServiceLevelObjectiveIds_member = &s_ServiceLevelObjectiveIds_member
+
+var _ServiceLevelObjectiveName = &s_ServiceLevelObjectiveName
+
+var _ServiceLevelObjectiveSummaries = &s_ServiceLevelObjectiveSummaries
+var _ServiceLevelObjectiveSummaries_member = &s_ServiceLevelObjectiveSummaries_member
+
+var ServiceLevelObjectiveSummary = &sServiceLevelObjectiveSummary
+var ServiceLevelObjectiveSummary_Arn = &sServiceLevelObjectiveSummary_Arn
+var ServiceLevelObjectiveSummary_Name = &sServiceLevelObjectiveSummary_Name
+var ServiceLevelObjectiveSummary_KeyAttributes = &sServiceLevelObjectiveSummary_KeyAttributes
+var ServiceLevelObjectiveSummary_OperationName = &sServiceLevelObjectiveSummary_OperationName
+var ServiceLevelObjectiveSummary_DependencyConfig = &sServiceLevelObjectiveSummary_DependencyConfig
+var ServiceLevelObjectiveSummary_CreatedTime = &sServiceLevelObjectiveSummary_CreatedTime
+var ServiceLevelObjectiveSummary_EvaluationType = &sServiceLevelObjectiveSummary_EvaluationType
+var ServiceLevelObjectiveSummary_MetricSourceType = &sServiceLevelObjectiveSummary_MetricSourceType
+var ServiceLevelObjectiveSummary_MetricSource = &sServiceLevelObjectiveSummary_MetricSource
+var ServiceLevelObjectiveSummary_CompositeSliConfig = &sServiceLevelObjectiveSummary_CompositeSliConfig
+
+var ServiceOperation = &sServiceOperation
+var ServiceOperation_Name = &sServiceOperation_Name
+var ServiceOperation_MetricReferences = &sServiceOperation_MetricReferences
+
+var ServiceOperationEntity = &sServiceOperationEntity
+var ServiceOperationEntity_Service = &sServiceOperationEntity_Service
+var ServiceOperationEntity_Operation = &sServiceOperationEntity_Operation
+var ServiceOperationEntity_MetricType = &sServiceOperationEntity_MetricType
+
+var _ServiceOperations = &s_ServiceOperations
+var _ServiceOperations_member = &s_ServiceOperations_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var ServiceState = &sServiceState
+var ServiceState_AttributeFilters = &sServiceState_AttributeFilters
+var ServiceState_Service = &sServiceState_Service
+var ServiceState_LatestChangeEvents = &sServiceState_LatestChangeEvents
+
+var _ServiceStates = &s_ServiceStates
+var _ServiceStates_member = &s_ServiceStates_member
+
+var _ServiceSummaries = &s_ServiceSummaries
+var _ServiceSummaries_member = &s_ServiceSummaries_member
+
+var ServiceSummary = &sServiceSummary
+var ServiceSummary_KeyAttributes = &sServiceSummary_KeyAttributes
+var ServiceSummary_AttributeMaps = &sServiceSummary_AttributeMaps
+var ServiceSummary_MetricReferences = &sServiceSummary_MetricReferences
+var ServiceSummary_ServiceGroups = &sServiceSummary_ServiceGroups
+
+var Severity = &sSeverity
+var Severity_CRITICAL = &sSeverity_CRITICAL
+var Severity_HIGH = &sSeverity_HIGH
+var Severity_MEDIUM = &sSeverity_MEDIUM
+var Severity_LOW = &sSeverity_LOW
+var Severity_NONE = &sSeverity_NONE
+
+var _SLIPeriodSeconds = &s_SLIPeriodSeconds
+
+var StandardUnit = &sStandardUnit
+var StandardUnit_MICROSECONDS = &sStandardUnit_MICROSECONDS
+var StandardUnit_MILLISECONDS = &sStandardUnit_MILLISECONDS
+var StandardUnit_SECONDS = &sStandardUnit_SECONDS
+var StandardUnit_BYTES = &sStandardUnit_BYTES
+var StandardUnit_KILOBYTES = &sStandardUnit_KILOBYTES
+var StandardUnit_MEGABYTES = &sStandardUnit_MEGABYTES
+var StandardUnit_GIGABYTES = &sStandardUnit_GIGABYTES
+var StandardUnit_TERABYTES = &sStandardUnit_TERABYTES
+var StandardUnit_BITS = &sStandardUnit_BITS
+var StandardUnit_KILOBITS = &sStandardUnit_KILOBITS
+var StandardUnit_MEGABITS = &sStandardUnit_MEGABITS
+var StandardUnit_GIGABITS = &sStandardUnit_GIGABITS
+var StandardUnit_TERABITS = &sStandardUnit_TERABITS
+var StandardUnit_PERCENT = &sStandardUnit_PERCENT
+var StandardUnit_COUNT = &sStandardUnit_COUNT
+var StandardUnit_BYTES_SECOND = &sStandardUnit_BYTES_SECOND
+var StandardUnit_KILOBYTES_SECOND = &sStandardUnit_KILOBYTES_SECOND
+var StandardUnit_MEGABYTES_SECOND = &sStandardUnit_MEGABYTES_SECOND
+var StandardUnit_GIGABYTES_SECOND = &sStandardUnit_GIGABYTES_SECOND
+var StandardUnit_TERABYTES_SECOND = &sStandardUnit_TERABYTES_SECOND
+var StandardUnit_BITS_SECOND = &sStandardUnit_BITS_SECOND
+var StandardUnit_KILOBITS_SECOND = &sStandardUnit_KILOBITS_SECOND
+var StandardUnit_MEGABITS_SECOND = &sStandardUnit_MEGABITS_SECOND
+var StandardUnit_GIGABITS_SECOND = &sStandardUnit_GIGABITS_SECOND
+var StandardUnit_TERABITS_SECOND = &sStandardUnit_TERABITS_SECOND
+var StandardUnit_COUNT_SECOND = &sStandardUnit_COUNT_SECOND
+var StandardUnit_NONE = &sStandardUnit_NONE
+
+var _Stat = &s_Stat
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _TotalBudgetRequests = &s_TotalBudgetRequests
+
+var _TotalBudgetSeconds = &s_TotalBudgetSeconds
+
+var UnprocessedStatusEvent = &sUnprocessedStatusEvent
+var UnprocessedStatusEvent_InstrumentationType = &sUnprocessedStatusEvent_InstrumentationType
+var UnprocessedStatusEvent_SignalType = &sUnprocessedStatusEvent_SignalType
+var UnprocessedStatusEvent_LocationHash = &sUnprocessedStatusEvent_LocationHash
+var UnprocessedStatusEvent_Status = &sUnprocessedStatusEvent_Status
+var UnprocessedStatusEvent_Time = &sUnprocessedStatusEvent_Time
+var UnprocessedStatusEvent_FailedReason = &sUnprocessedStatusEvent_FailedReason
+
+var UnprocessedStatusEventFailureReason = &sUnprocessedStatusEventFailureReason
+var UnprocessedStatusEventFailureReason_THROTTLED = &sUnprocessedStatusEventFailureReason_THROTTLED
+var UnprocessedStatusEventFailureReason_INTERNAL_ERROR = &sUnprocessedStatusEventFailureReason_INTERNAL_ERROR
+var UnprocessedStatusEventFailureReason_VALIDATION_ERROR = &sUnprocessedStatusEventFailureReason_VALIDATION_ERROR
+
+var _UnprocessedStatusEventList = &s_UnprocessedStatusEventList
+var _UnprocessedStatusEventList_member = &s_UnprocessedStatusEventList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValidationExceptionMessage = &s_ValidationExceptionMessage
+
+var _WarningThreshold = &s_WarningThreshold
+
+var Window = &sWindow
+var Window_DurationUnit = &sWindow_DurationUnit
+var Window_Duration = &sWindow_Duration
+
+var BatchDeleteInstrumentationConfigurationsRequest = &sBatchDeleteInstrumentationConfigurationsRequest
+var BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget = &sBatchDeleteInstrumentationConfigurationsRequest_DeletionTarget
+
+var BatchDeleteInstrumentationConfigurationsResponse = &sBatchDeleteInstrumentationConfigurationsResponse
+var BatchDeleteInstrumentationConfigurationsResponse_DeletedCount = &sBatchDeleteInstrumentationConfigurationsResponse_DeletedCount
+var BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions = &sBatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions
+var BatchDeleteInstrumentationConfigurationsResponse_Errors = &sBatchDeleteInstrumentationConfigurationsResponse_Errors
+
+var BatchGetServiceLevelObjectiveBudgetReportInput = &sBatchGetServiceLevelObjectiveBudgetReportInput
+var BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp = &sBatchGetServiceLevelObjectiveBudgetReportInput_Timestamp
+var BatchGetServiceLevelObjectiveBudgetReportInput_SloIds = &sBatchGetServiceLevelObjectiveBudgetReportInput_SloIds
+
+var BatchGetServiceLevelObjectiveBudgetReportOutput = &sBatchGetServiceLevelObjectiveBudgetReportOutput
+var BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp = &sBatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp
+var BatchGetServiceLevelObjectiveBudgetReportOutput_Reports = &sBatchGetServiceLevelObjectiveBudgetReportOutput_Reports
+var BatchGetServiceLevelObjectiveBudgetReportOutput_Errors = &sBatchGetServiceLevelObjectiveBudgetReportOutput_Errors
+
+var BatchUpdateExclusionWindowsInput = &sBatchUpdateExclusionWindowsInput
+var BatchUpdateExclusionWindowsInput_SloIds = &sBatchUpdateExclusionWindowsInput_SloIds
+var BatchUpdateExclusionWindowsInput_AddExclusionWindows = &sBatchUpdateExclusionWindowsInput_AddExclusionWindows
+var BatchUpdateExclusionWindowsInput_RemoveExclusionWindows = &sBatchUpdateExclusionWindowsInput_RemoveExclusionWindows
+
+var BatchUpdateExclusionWindowsOutput = &sBatchUpdateExclusionWindowsOutput
+var BatchUpdateExclusionWindowsOutput_SloIds = &sBatchUpdateExclusionWindowsOutput_SloIds
+var BatchUpdateExclusionWindowsOutput_Errors = &sBatchUpdateExclusionWindowsOutput_Errors
+
+var CreateInstrumentationConfigurationRequest = &sCreateInstrumentationConfigurationRequest
+var CreateInstrumentationConfigurationRequest_InstrumentationType = &sCreateInstrumentationConfigurationRequest_InstrumentationType
+var CreateInstrumentationConfigurationRequest_Service = &sCreateInstrumentationConfigurationRequest_Service
+var CreateInstrumentationConfigurationRequest_Environment = &sCreateInstrumentationConfigurationRequest_Environment
+var CreateInstrumentationConfigurationRequest_SignalType = &sCreateInstrumentationConfigurationRequest_SignalType
+var CreateInstrumentationConfigurationRequest_Location = &sCreateInstrumentationConfigurationRequest_Location
+var CreateInstrumentationConfigurationRequest_Description = &sCreateInstrumentationConfigurationRequest_Description
+var CreateInstrumentationConfigurationRequest_ExpiresAt = &sCreateInstrumentationConfigurationRequest_ExpiresAt
+var CreateInstrumentationConfigurationRequest_AttributeFilters = &sCreateInstrumentationConfigurationRequest_AttributeFilters
+var CreateInstrumentationConfigurationRequest_CaptureConfiguration = &sCreateInstrumentationConfigurationRequest_CaptureConfiguration
+var CreateInstrumentationConfigurationRequest_Tags = &sCreateInstrumentationConfigurationRequest_Tags
+
+var CreateInstrumentationConfigurationResponse = &sCreateInstrumentationConfigurationResponse
+var CreateInstrumentationConfigurationResponse_InstrumentationType = &sCreateInstrumentationConfigurationResponse_InstrumentationType
+var CreateInstrumentationConfigurationResponse_Service = &sCreateInstrumentationConfigurationResponse_Service
+var CreateInstrumentationConfigurationResponse_Environment = &sCreateInstrumentationConfigurationResponse_Environment
+var CreateInstrumentationConfigurationResponse_SignalType = &sCreateInstrumentationConfigurationResponse_SignalType
+var CreateInstrumentationConfigurationResponse_Location = &sCreateInstrumentationConfigurationResponse_Location
+var CreateInstrumentationConfigurationResponse_LocationHash = &sCreateInstrumentationConfigurationResponse_LocationHash
+var CreateInstrumentationConfigurationResponse_Description = &sCreateInstrumentationConfigurationResponse_Description
+var CreateInstrumentationConfigurationResponse_ExpiresAt = &sCreateInstrumentationConfigurationResponse_ExpiresAt
+var CreateInstrumentationConfigurationResponse_AttributeFilters = &sCreateInstrumentationConfigurationResponse_AttributeFilters
+var CreateInstrumentationConfigurationResponse_CaptureConfiguration = &sCreateInstrumentationConfigurationResponse_CaptureConfiguration
+var CreateInstrumentationConfigurationResponse_CreatedAt = &sCreateInstrumentationConfigurationResponse_CreatedAt
+var CreateInstrumentationConfigurationResponse_ARN = &sCreateInstrumentationConfigurationResponse_ARN
+
+var CreateServiceLevelObjectiveInput = &sCreateServiceLevelObjectiveInput
+var CreateServiceLevelObjectiveInput_Name = &sCreateServiceLevelObjectiveInput_Name
+var CreateServiceLevelObjectiveInput_Description = &sCreateServiceLevelObjectiveInput_Description
+var CreateServiceLevelObjectiveInput_SliConfig = &sCreateServiceLevelObjectiveInput_SliConfig
+var CreateServiceLevelObjectiveInput_RequestBasedSliConfig = &sCreateServiceLevelObjectiveInput_RequestBasedSliConfig
+var CreateServiceLevelObjectiveInput_Goal = &sCreateServiceLevelObjectiveInput_Goal
+var CreateServiceLevelObjectiveInput_Tags = &sCreateServiceLevelObjectiveInput_Tags
+var CreateServiceLevelObjectiveInput_BurnRateConfigurations = &sCreateServiceLevelObjectiveInput_BurnRateConfigurations
+var CreateServiceLevelObjectiveInput_CreateRecommendedSlo = &sCreateServiceLevelObjectiveInput_CreateRecommendedSlo
+var CreateServiceLevelObjectiveInput_AutoInvestigationEnabled = &sCreateServiceLevelObjectiveInput_AutoInvestigationEnabled
+
+var CreateServiceLevelObjectiveOutput = &sCreateServiceLevelObjectiveOutput
+var CreateServiceLevelObjectiveOutput_Slo = &sCreateServiceLevelObjectiveOutput_Slo
+
+var DeleteGroupingConfigurationOutput = &sDeleteGroupingConfigurationOutput
+
+var DeleteInstrumentationConfigurationRequest = &sDeleteInstrumentationConfigurationRequest
+var DeleteInstrumentationConfigurationRequest_InstrumentationType = &sDeleteInstrumentationConfigurationRequest_InstrumentationType
+var DeleteInstrumentationConfigurationRequest_Service = &sDeleteInstrumentationConfigurationRequest_Service
+var DeleteInstrumentationConfigurationRequest_Environment = &sDeleteInstrumentationConfigurationRequest_Environment
+var DeleteInstrumentationConfigurationRequest_SignalType = &sDeleteInstrumentationConfigurationRequest_SignalType
+var DeleteInstrumentationConfigurationRequest_LocationIdentifier = &sDeleteInstrumentationConfigurationRequest_LocationIdentifier
+
+var DeleteInstrumentationConfigurationResponse = &sDeleteInstrumentationConfigurationResponse
+var DeleteInstrumentationConfigurationResponse_DeletionStatus = &sDeleteInstrumentationConfigurationResponse_DeletionStatus
+
+var DeleteServiceLevelObjectiveInput = &sDeleteServiceLevelObjectiveInput
+var DeleteServiceLevelObjectiveInput_Id = &sDeleteServiceLevelObjectiveInput_Id
+
+var DeleteServiceLevelObjectiveOutput = &sDeleteServiceLevelObjectiveOutput
+
+var GetInstrumentationConfigurationRequest = &sGetInstrumentationConfigurationRequest
+var GetInstrumentationConfigurationRequest_InstrumentationType = &sGetInstrumentationConfigurationRequest_InstrumentationType
+var GetInstrumentationConfigurationRequest_Service = &sGetInstrumentationConfigurationRequest_Service
+var GetInstrumentationConfigurationRequest_Environment = &sGetInstrumentationConfigurationRequest_Environment
+var GetInstrumentationConfigurationRequest_SignalType = &sGetInstrumentationConfigurationRequest_SignalType
+var GetInstrumentationConfigurationRequest_LocationIdentifier = &sGetInstrumentationConfigurationRequest_LocationIdentifier
+
+var GetInstrumentationConfigurationResponse = &sGetInstrumentationConfigurationResponse
+var GetInstrumentationConfigurationResponse_Configuration = &sGetInstrumentationConfigurationResponse_Configuration
+
+var GetInstrumentationConfigurationStatusRequest = &sGetInstrumentationConfigurationStatusRequest
+var GetInstrumentationConfigurationStatusRequest_InstrumentationType = &sGetInstrumentationConfigurationStatusRequest_InstrumentationType
+var GetInstrumentationConfigurationStatusRequest_Service = &sGetInstrumentationConfigurationStatusRequest_Service
+var GetInstrumentationConfigurationStatusRequest_Environment = &sGetInstrumentationConfigurationStatusRequest_Environment
+var GetInstrumentationConfigurationStatusRequest_SignalType = &sGetInstrumentationConfigurationStatusRequest_SignalType
+var GetInstrumentationConfigurationStatusRequest_LocationIdentifier = &sGetInstrumentationConfigurationStatusRequest_LocationIdentifier
+var GetInstrumentationConfigurationStatusRequest_Status = &sGetInstrumentationConfigurationStatusRequest_Status
+var GetInstrumentationConfigurationStatusRequest_StartTime = &sGetInstrumentationConfigurationStatusRequest_StartTime
+var GetInstrumentationConfigurationStatusRequest_EndTime = &sGetInstrumentationConfigurationStatusRequest_EndTime
+var GetInstrumentationConfigurationStatusRequest_MaxResults = &sGetInstrumentationConfigurationStatusRequest_MaxResults
+var GetInstrumentationConfigurationStatusRequest_NextToken = &sGetInstrumentationConfigurationStatusRequest_NextToken
+
+var GetInstrumentationConfigurationStatusResponse = &sGetInstrumentationConfigurationStatusResponse
+var GetInstrumentationConfigurationStatusResponse_Service = &sGetInstrumentationConfigurationStatusResponse_Service
+var GetInstrumentationConfigurationStatusResponse_Environment = &sGetInstrumentationConfigurationStatusResponse_Environment
+var GetInstrumentationConfigurationStatusResponse_SignalType = &sGetInstrumentationConfigurationStatusResponse_SignalType
+var GetInstrumentationConfigurationStatusResponse_Location = &sGetInstrumentationConfigurationStatusResponse_Location
+var GetInstrumentationConfigurationStatusResponse_Status = &sGetInstrumentationConfigurationStatusResponse_Status
+var GetInstrumentationConfigurationStatusResponse_Events = &sGetInstrumentationConfigurationStatusResponse_Events
+var GetInstrumentationConfigurationStatusResponse_NextToken = &sGetInstrumentationConfigurationStatusResponse_NextToken
+
+var GetServiceInput = &sGetServiceInput
+var GetServiceInput_StartTime = &sGetServiceInput_StartTime
+var GetServiceInput_EndTime = &sGetServiceInput_EndTime
+var GetServiceInput_KeyAttributes = &sGetServiceInput_KeyAttributes
+
+var GetServiceLevelObjectiveInput = &sGetServiceLevelObjectiveInput
+var GetServiceLevelObjectiveInput_Id = &sGetServiceLevelObjectiveInput_Id
+
+var GetServiceLevelObjectiveOutput = &sGetServiceLevelObjectiveOutput
+var GetServiceLevelObjectiveOutput_Slo = &sGetServiceLevelObjectiveOutput_Slo
+
+var GetServiceOutput = &sGetServiceOutput
+var GetServiceOutput_Service = &sGetServiceOutput_Service
+var GetServiceOutput_StartTime = &sGetServiceOutput_StartTime
+var GetServiceOutput_EndTime = &sGetServiceOutput_EndTime
+var GetServiceOutput_LogGroupReferences = &sGetServiceOutput_LogGroupReferences
+
+var ListAuditFindingsInput = &sListAuditFindingsInput
+var ListAuditFindingsInput_StartTime = &sListAuditFindingsInput_StartTime
+var ListAuditFindingsInput_EndTime = &sListAuditFindingsInput_EndTime
+var ListAuditFindingsInput_Auditors = &sListAuditFindingsInput_Auditors
+var ListAuditFindingsInput_AuditTargets = &sListAuditFindingsInput_AuditTargets
+var ListAuditFindingsInput_DetailLevel = &sListAuditFindingsInput_DetailLevel
+var ListAuditFindingsInput_NextToken = &sListAuditFindingsInput_NextToken
+var ListAuditFindingsInput_MaxResults = &sListAuditFindingsInput_MaxResults
+
+var ListAuditFindingsOutput = &sListAuditFindingsOutput
+var ListAuditFindingsOutput_StartTime = &sListAuditFindingsOutput_StartTime
+var ListAuditFindingsOutput_EndTime = &sListAuditFindingsOutput_EndTime
+var ListAuditFindingsOutput_AuditFindings = &sListAuditFindingsOutput_AuditFindings
+var ListAuditFindingsOutput_NextToken = &sListAuditFindingsOutput_NextToken
+
+var ListEntityEventsInput = &sListEntityEventsInput
+var ListEntityEventsInput_Entity = &sListEntityEventsInput_Entity
+var ListEntityEventsInput_StartTime = &sListEntityEventsInput_StartTime
+var ListEntityEventsInput_EndTime = &sListEntityEventsInput_EndTime
+var ListEntityEventsInput_MaxResults = &sListEntityEventsInput_MaxResults
+var ListEntityEventsInput_NextToken = &sListEntityEventsInput_NextToken
+
+var ListEntityEventsOutput = &sListEntityEventsOutput
+var ListEntityEventsOutput_StartTime = &sListEntityEventsOutput_StartTime
+var ListEntityEventsOutput_EndTime = &sListEntityEventsOutput_EndTime
+var ListEntityEventsOutput_ChangeEvents = &sListEntityEventsOutput_ChangeEvents
+var ListEntityEventsOutput_NextToken = &sListEntityEventsOutput_NextToken
+
+var ListGroupingAttributeDefinitionsInput = &sListGroupingAttributeDefinitionsInput
+var ListGroupingAttributeDefinitionsInput_NextToken = &sListGroupingAttributeDefinitionsInput_NextToken
+var ListGroupingAttributeDefinitionsInput_AwsAccountId = &sListGroupingAttributeDefinitionsInput_AwsAccountId
+var ListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts = &sListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts
+
+var ListGroupingAttributeDefinitionsOutput = &sListGroupingAttributeDefinitionsOutput
+var ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions = &sListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions
+var ListGroupingAttributeDefinitionsOutput_UpdatedAt = &sListGroupingAttributeDefinitionsOutput_UpdatedAt
+var ListGroupingAttributeDefinitionsOutput_NextToken = &sListGroupingAttributeDefinitionsOutput_NextToken
+
+var ListInstrumentationConfigurationsRequest = &sListInstrumentationConfigurationsRequest
+var ListInstrumentationConfigurationsRequest_Service = &sListInstrumentationConfigurationsRequest_Service
+var ListInstrumentationConfigurationsRequest_Environment = &sListInstrumentationConfigurationsRequest_Environment
+var ListInstrumentationConfigurationsRequest_InstrumentationType = &sListInstrumentationConfigurationsRequest_InstrumentationType
+var ListInstrumentationConfigurationsRequest_SyncedAt = &sListInstrumentationConfigurationsRequest_SyncedAt
+var ListInstrumentationConfigurationsRequest_MaxResults = &sListInstrumentationConfigurationsRequest_MaxResults
+var ListInstrumentationConfigurationsRequest_NextToken = &sListInstrumentationConfigurationsRequest_NextToken
+
+var InstrumentationConfigurationsPage = &sInstrumentationConfigurationsPage
+var InstrumentationConfigurationsPage_Service = &sInstrumentationConfigurationsPage_Service
+var InstrumentationConfigurationsPage_Environment = &sInstrumentationConfigurationsPage_Environment
+var InstrumentationConfigurationsPage_Changed = &sInstrumentationConfigurationsPage_Changed
+var InstrumentationConfigurationsPage_LatestConfigurations = &sInstrumentationConfigurationsPage_LatestConfigurations
+var InstrumentationConfigurationsPage_SyncedAt = &sInstrumentationConfigurationsPage_SyncedAt
+var InstrumentationConfigurationsPage_SyncInterval = &sInstrumentationConfigurationsPage_SyncInterval
+var InstrumentationConfigurationsPage_NextToken = &sInstrumentationConfigurationsPage_NextToken
+
+var ListServiceDependenciesInput = &sListServiceDependenciesInput
+var ListServiceDependenciesInput_StartTime = &sListServiceDependenciesInput_StartTime
+var ListServiceDependenciesInput_EndTime = &sListServiceDependenciesInput_EndTime
+var ListServiceDependenciesInput_KeyAttributes = &sListServiceDependenciesInput_KeyAttributes
+var ListServiceDependenciesInput_MaxResults = &sListServiceDependenciesInput_MaxResults
+var ListServiceDependenciesInput_NextToken = &sListServiceDependenciesInput_NextToken
+
+var ListServiceDependenciesOutput = &sListServiceDependenciesOutput
+var ListServiceDependenciesOutput_StartTime = &sListServiceDependenciesOutput_StartTime
+var ListServiceDependenciesOutput_EndTime = &sListServiceDependenciesOutput_EndTime
+var ListServiceDependenciesOutput_ServiceDependencies = &sListServiceDependenciesOutput_ServiceDependencies
+var ListServiceDependenciesOutput_NextToken = &sListServiceDependenciesOutput_NextToken
+
+var ListServiceDependentsInput = &sListServiceDependentsInput
+var ListServiceDependentsInput_StartTime = &sListServiceDependentsInput_StartTime
+var ListServiceDependentsInput_EndTime = &sListServiceDependentsInput_EndTime
+var ListServiceDependentsInput_KeyAttributes = &sListServiceDependentsInput_KeyAttributes
+var ListServiceDependentsInput_MaxResults = &sListServiceDependentsInput_MaxResults
+var ListServiceDependentsInput_NextToken = &sListServiceDependentsInput_NextToken
+
+var ListServiceDependentsOutput = &sListServiceDependentsOutput
+var ListServiceDependentsOutput_StartTime = &sListServiceDependentsOutput_StartTime
+var ListServiceDependentsOutput_EndTime = &sListServiceDependentsOutput_EndTime
+var ListServiceDependentsOutput_ServiceDependents = &sListServiceDependentsOutput_ServiceDependents
+var ListServiceDependentsOutput_NextToken = &sListServiceDependentsOutput_NextToken
+
+var ListServiceLevelObjectiveExclusionWindowsInput = &sListServiceLevelObjectiveExclusionWindowsInput
+var ListServiceLevelObjectiveExclusionWindowsInput_Id = &sListServiceLevelObjectiveExclusionWindowsInput_Id
+var ListServiceLevelObjectiveExclusionWindowsInput_MaxResults = &sListServiceLevelObjectiveExclusionWindowsInput_MaxResults
+var ListServiceLevelObjectiveExclusionWindowsInput_NextToken = &sListServiceLevelObjectiveExclusionWindowsInput_NextToken
+
+var ListServiceLevelObjectiveExclusionWindowsOutput = &sListServiceLevelObjectiveExclusionWindowsOutput
+var ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows = &sListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows
+var ListServiceLevelObjectiveExclusionWindowsOutput_NextToken = &sListServiceLevelObjectiveExclusionWindowsOutput_NextToken
+
+var ListServiceLevelObjectivesInput = &sListServiceLevelObjectivesInput
+var ListServiceLevelObjectivesInput_KeyAttributes = &sListServiceLevelObjectivesInput_KeyAttributes
+var ListServiceLevelObjectivesInput_OperationName = &sListServiceLevelObjectivesInput_OperationName
+var ListServiceLevelObjectivesInput_DependencyConfig = &sListServiceLevelObjectivesInput_DependencyConfig
+var ListServiceLevelObjectivesInput_MaxResults = &sListServiceLevelObjectivesInput_MaxResults
+var ListServiceLevelObjectivesInput_NextToken = &sListServiceLevelObjectivesInput_NextToken
+var ListServiceLevelObjectivesInput_MetricSourceTypes = &sListServiceLevelObjectivesInput_MetricSourceTypes
+var ListServiceLevelObjectivesInput_IncludeLinkedAccounts = &sListServiceLevelObjectivesInput_IncludeLinkedAccounts
+var ListServiceLevelObjectivesInput_SloOwnerAwsAccountId = &sListServiceLevelObjectivesInput_SloOwnerAwsAccountId
+var ListServiceLevelObjectivesInput_MetricSource = &sListServiceLevelObjectivesInput_MetricSource
+
+var ListServiceLevelObjectivesOutput = &sListServiceLevelObjectivesOutput
+var ListServiceLevelObjectivesOutput_SloSummaries = &sListServiceLevelObjectivesOutput_SloSummaries
+var ListServiceLevelObjectivesOutput_NextToken = &sListServiceLevelObjectivesOutput_NextToken
+
+var ListServiceOperationsInput = &sListServiceOperationsInput
+var ListServiceOperationsInput_StartTime = &sListServiceOperationsInput_StartTime
+var ListServiceOperationsInput_EndTime = &sListServiceOperationsInput_EndTime
+var ListServiceOperationsInput_KeyAttributes = &sListServiceOperationsInput_KeyAttributes
+var ListServiceOperationsInput_MaxResults = &sListServiceOperationsInput_MaxResults
+var ListServiceOperationsInput_NextToken = &sListServiceOperationsInput_NextToken
+
+var ListServiceOperationsOutput = &sListServiceOperationsOutput
+var ListServiceOperationsOutput_StartTime = &sListServiceOperationsOutput_StartTime
+var ListServiceOperationsOutput_EndTime = &sListServiceOperationsOutput_EndTime
+var ListServiceOperationsOutput_ServiceOperations = &sListServiceOperationsOutput_ServiceOperations
+var ListServiceOperationsOutput_NextToken = &sListServiceOperationsOutput_NextToken
+
+var ListServicesInput = &sListServicesInput
+var ListServicesInput_StartTime = &sListServicesInput_StartTime
+var ListServicesInput_EndTime = &sListServicesInput_EndTime
+var ListServicesInput_MaxResults = &sListServicesInput_MaxResults
+var ListServicesInput_NextToken = &sListServicesInput_NextToken
+var ListServicesInput_IncludeLinkedAccounts = &sListServicesInput_IncludeLinkedAccounts
+var ListServicesInput_AwsAccountId = &sListServicesInput_AwsAccountId
+
+var ListServicesOutput = &sListServicesOutput
+var ListServicesOutput_StartTime = &sListServicesOutput_StartTime
+var ListServicesOutput_EndTime = &sListServicesOutput_EndTime
+var ListServicesOutput_ServiceSummaries = &sListServicesOutput_ServiceSummaries
+var ListServicesOutput_NextToken = &sListServicesOutput_NextToken
+
+var ListServiceStatesInput = &sListServiceStatesInput
+var ListServiceStatesInput_StartTime = &sListServiceStatesInput_StartTime
+var ListServiceStatesInput_EndTime = &sListServiceStatesInput_EndTime
+var ListServiceStatesInput_MaxResults = &sListServiceStatesInput_MaxResults
+var ListServiceStatesInput_NextToken = &sListServiceStatesInput_NextToken
+var ListServiceStatesInput_IncludeLinkedAccounts = &sListServiceStatesInput_IncludeLinkedAccounts
+var ListServiceStatesInput_AwsAccountId = &sListServiceStatesInput_AwsAccountId
+var ListServiceStatesInput_AttributeFilters = &sListServiceStatesInput_AttributeFilters
+
+var ListServiceStatesOutput = &sListServiceStatesOutput
+var ListServiceStatesOutput_StartTime = &sListServiceStatesOutput_StartTime
+var ListServiceStatesOutput_EndTime = &sListServiceStatesOutput_EndTime
+var ListServiceStatesOutput_ServiceStates = &sListServiceStatesOutput_ServiceStates
+var ListServiceStatesOutput_NextToken = &sListServiceStatesOutput_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutGroupingConfigurationInput = &sPutGroupingConfigurationInput
+var PutGroupingConfigurationInput_GroupingAttributeDefinitions = &sPutGroupingConfigurationInput_GroupingAttributeDefinitions
+
+var PutGroupingConfigurationOutput = &sPutGroupingConfigurationOutput
+var PutGroupingConfigurationOutput_GroupingConfiguration = &sPutGroupingConfigurationOutput_GroupingConfiguration
+
+var ReportInstrumentationConfigurationStatusRequest = &sReportInstrumentationConfigurationStatusRequest
+var ReportInstrumentationConfigurationStatusRequest_Service = &sReportInstrumentationConfigurationStatusRequest_Service
+var ReportInstrumentationConfigurationStatusRequest_Environment = &sReportInstrumentationConfigurationStatusRequest_Environment
+var ReportInstrumentationConfigurationStatusRequest_Configurations = &sReportInstrumentationConfigurationStatusRequest_Configurations
+
+var ReportInstrumentationConfigurationStatusResponse = &sReportInstrumentationConfigurationStatusResponse
+var ReportInstrumentationConfigurationStatusResponse_Service = &sReportInstrumentationConfigurationStatusResponse_Service
+var ReportInstrumentationConfigurationStatusResponse_Environment = &sReportInstrumentationConfigurationStatusResponse_Environment
+var ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents = &sReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents
+
+var StartDiscoveryInput = &sStartDiscoveryInput
+
+var StartDiscoveryOutput = &sStartDiscoveryOutput
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateServiceLevelObjectiveInput = &sUpdateServiceLevelObjectiveInput
+var UpdateServiceLevelObjectiveInput_Id = &sUpdateServiceLevelObjectiveInput_Id
+var UpdateServiceLevelObjectiveInput_Description = &sUpdateServiceLevelObjectiveInput_Description
+var UpdateServiceLevelObjectiveInput_SliConfig = &sUpdateServiceLevelObjectiveInput_SliConfig
+var UpdateServiceLevelObjectiveInput_RequestBasedSliConfig = &sUpdateServiceLevelObjectiveInput_RequestBasedSliConfig
+var UpdateServiceLevelObjectiveInput_Goal = &sUpdateServiceLevelObjectiveInput_Goal
+var UpdateServiceLevelObjectiveInput_BurnRateConfigurations = &sUpdateServiceLevelObjectiveInput_BurnRateConfigurations
+var UpdateServiceLevelObjectiveInput_AutoInvestigationEnabled = &sUpdateServiceLevelObjectiveInput_AutoInvestigationEnabled
+
+var UpdateServiceLevelObjectiveOutput = &sUpdateServiceLevelObjectiveOutput
+var UpdateServiceLevelObjectiveOutput_Slo = &sUpdateServiceLevelObjectiveOutput_Slo
+
+var ApplicationSignals = &smithy.ServiceSchema{Schema: &s_ApplicationSignals, Version: "2024-04-15"}

@@ -4,1290 +4,1277 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "CreateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateDeployment                                                  smithy.SchemaExtensions
+	eDeleteDeployment                                                  smithy.SchemaExtensions
+	eGetDeployment                                                     smithy.SchemaExtensions
+	eGetDeploymentPatternVersion                                       smithy.SchemaExtensions
+	eGetWorkload                                                       smithy.SchemaExtensions
+	eGetWorkloadDeploymentPattern                                      smithy.SchemaExtensions
+	eListDeploymentEvents                                              smithy.SchemaExtensions
+	eListDeploymentPatternVersions                                     smithy.SchemaExtensions
+	eListDeployments                                                   smithy.SchemaExtensions
+	eListTagsForResource                                               smithy.SchemaExtensions
+	eListWorkloadDeploymentPatterns                                    smithy.SchemaExtensions
+	eListWorkloads                                                     smithy.SchemaExtensions
+	eTagResource                                                       smithy.SchemaExtensions
+	eUntagResource                                                     smithy.SchemaExtensions
+	eUpdateDeployment                                                  smithy.SchemaExtensions
+	e_LaunchWizard                                                     smithy.SchemaExtensions
+	eAccountConstraint                                                 smithy.SchemaExtensions
+	eAccountConstraint_managementAccount                               smithy.SchemaExtensions
+	eAccountConstraint_delegatedAdmin                                  smithy.SchemaExtensions
+	e_AccountConstraintsList                                           smithy.SchemaExtensions
+	e_AccountConstraintsList_member                                    smithy.SchemaExtensions
+	e_AllowedValues                                                    smithy.SchemaExtensions
+	e_AllowedValues_member                                             smithy.SchemaExtensions
+	eDelegatedAdminConstraint                                          smithy.SchemaExtensions
+	eDelegatedAdminConstraint_servicePrincipal                         smithy.SchemaExtensions
+	eDeploymentConditionalField                                        smithy.SchemaExtensions
+	eDeploymentConditionalField_name                                   smithy.SchemaExtensions
+	eDeploymentConditionalField_value                                  smithy.SchemaExtensions
+	eDeploymentConditionalField_comparator                             smithy.SchemaExtensions
+	eDeploymentData                                                    smithy.SchemaExtensions
+	eDeploymentData_name                                               smithy.SchemaExtensions
+	eDeploymentData_id                                                 smithy.SchemaExtensions
+	eDeploymentData_workloadName                                       smithy.SchemaExtensions
+	eDeploymentData_patternName                                        smithy.SchemaExtensions
+	eDeploymentData_status                                             smithy.SchemaExtensions
+	eDeploymentData_createdAt                                          smithy.SchemaExtensions
+	eDeploymentData_modifiedAt                                         smithy.SchemaExtensions
+	eDeploymentData_specifications                                     smithy.SchemaExtensions
+	eDeploymentData_resourceGroup                                      smithy.SchemaExtensions
+	eDeploymentData_deletedAt                                          smithy.SchemaExtensions
+	eDeploymentData_tags                                               smithy.SchemaExtensions
+	eDeploymentData_deploymentArn                                      smithy.SchemaExtensions
+	eDeploymentDataSummary                                             smithy.SchemaExtensions
+	eDeploymentDataSummary_name                                        smithy.SchemaExtensions
+	eDeploymentDataSummary_id                                          smithy.SchemaExtensions
+	eDeploymentDataSummary_workloadName                                smithy.SchemaExtensions
+	eDeploymentDataSummary_patternName                                 smithy.SchemaExtensions
+	eDeploymentDataSummary_status                                      smithy.SchemaExtensions
+	eDeploymentDataSummary_createdAt                                   smithy.SchemaExtensions
+	eDeploymentDataSummary_modifiedAt                                  smithy.SchemaExtensions
+	e_DeploymentDataSummaryList                                        smithy.SchemaExtensions
+	e_DeploymentDataSummaryList_member                                 smithy.SchemaExtensions
+	eDeploymentEventDataSummary                                        smithy.SchemaExtensions
+	eDeploymentEventDataSummary_name                                   smithy.SchemaExtensions
+	eDeploymentEventDataSummary_description                            smithy.SchemaExtensions
+	eDeploymentEventDataSummary_status                                 smithy.SchemaExtensions
+	eDeploymentEventDataSummary_statusReason                           smithy.SchemaExtensions
+	eDeploymentEventDataSummary_timestamp                              smithy.SchemaExtensions
+	eDeploymentEventDataSummary_metadata                               smithy.SchemaExtensions
+	e_DeploymentEventDataSummaryList                                   smithy.SchemaExtensions
+	e_DeploymentEventDataSummaryList_member                            smithy.SchemaExtensions
+	e_DeploymentEventMetadata                                          smithy.SchemaExtensions
+	e_DeploymentEventMetadata_key                                      smithy.SchemaExtensions
+	e_DeploymentEventMetadata_value                                    smithy.SchemaExtensions
+	e_DeploymentEventMetadataKey                                       smithy.SchemaExtensions
+	e_DeploymentEventMetadataValue                                     smithy.SchemaExtensions
+	eDeploymentFilter                                                  smithy.SchemaExtensions
+	eDeploymentFilter_name                                             smithy.SchemaExtensions
+	eDeploymentFilter_values                                           smithy.SchemaExtensions
+	eDeploymentFilterKey                                               smithy.SchemaExtensions
+	eDeploymentFilterKey_WORKLOAD_NAME                                 smithy.SchemaExtensions
+	eDeploymentFilterKey_DEPLOYMENT_STATUS                             smithy.SchemaExtensions
+	e_DeploymentFilterList                                             smithy.SchemaExtensions
+	e_DeploymentFilterList_member                                      smithy.SchemaExtensions
+	e_DeploymentFilterValue                                            smithy.SchemaExtensions
+	e_DeploymentFilterValues                                           smithy.SchemaExtensions
+	e_DeploymentFilterValues_member                                    smithy.SchemaExtensions
+	e_DeploymentId                                                     smithy.SchemaExtensions
+	e_DeploymentName                                                   smithy.SchemaExtensions
+	e_DeploymentPatternName                                            smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary                               smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary_deploymentPatternVersionName  smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary_description                   smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary_documentationUrl              smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary_workloadName                  smithy.SchemaExtensions
+	eDeploymentPatternVersionDataSummary_deploymentPatternName         smithy.SchemaExtensions
+	e_DeploymentPatternVersionDataSummaryList                          smithy.SchemaExtensions
+	e_DeploymentPatternVersionDataSummaryList_member                   smithy.SchemaExtensions
+	eDeploymentPatternVersionFilter                                    smithy.SchemaExtensions
+	eDeploymentPatternVersionFilter_name                               smithy.SchemaExtensions
+	eDeploymentPatternVersionFilter_values                             smithy.SchemaExtensions
+	eDeploymentPatternVersionFilterKey                                 smithy.SchemaExtensions
+	eDeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME smithy.SchemaExtensions
+	e_DeploymentPatternVersionFilterValue                              smithy.SchemaExtensions
+	e_DeploymentPatternVersionFilterValues                             smithy.SchemaExtensions
+	e_DeploymentPatternVersionFilterValues_member                      smithy.SchemaExtensions
+	e_DeploymentPatternVersionName                                     smithy.SchemaExtensions
+	e_DeploymentSpecifications                                         smithy.SchemaExtensions
+	e_DeploymentSpecifications_key                                     smithy.SchemaExtensions
+	e_DeploymentSpecifications_value                                   smithy.SchemaExtensions
+	e_DeploymentSpecificationsData                                     smithy.SchemaExtensions
+	e_DeploymentSpecificationsData_member                              smithy.SchemaExtensions
+	eDeploymentSpecificationsField                                     smithy.SchemaExtensions
+	eDeploymentSpecificationsField_name                                smithy.SchemaExtensions
+	eDeploymentSpecificationsField_description                         smithy.SchemaExtensions
+	eDeploymentSpecificationsField_allowedValues                       smithy.SchemaExtensions
+	eDeploymentSpecificationsField_required                            smithy.SchemaExtensions
+	eDeploymentSpecificationsField_conditionals                        smithy.SchemaExtensions
+	eDeploymentStatus                                                  smithy.SchemaExtensions
+	eDeploymentStatus_COMPLETED                                        smithy.SchemaExtensions
+	eDeploymentStatus_CREATING                                         smithy.SchemaExtensions
+	eDeploymentStatus_DELETE_IN_PROGRESS                               smithy.SchemaExtensions
+	eDeploymentStatus_DELETE_INITIATING                                smithy.SchemaExtensions
+	eDeploymentStatus_DELETE_FAILED                                    smithy.SchemaExtensions
+	eDeploymentStatus_DELETED                                          smithy.SchemaExtensions
+	eDeploymentStatus_FAILED                                           smithy.SchemaExtensions
+	eDeploymentStatus_IN_PROGRESS                                      smithy.SchemaExtensions
+	eDeploymentStatus_VALIDATING                                       smithy.SchemaExtensions
+	eDeploymentStatus_UPDATE_IN_PROGRESS                               smithy.SchemaExtensions
+	eDeploymentStatus_UPDATE_COMPLETED                                 smithy.SchemaExtensions
+	eDeploymentStatus_UPDATE_FAILED                                    smithy.SchemaExtensions
+	eDeploymentStatus_UPDATE_ROLLBACK_COMPLETED                        smithy.SchemaExtensions
+	eDeploymentStatus_UPDATE_ROLLBACK_FAILED                           smithy.SchemaExtensions
+	eEventStatus                                                       smithy.SchemaExtensions
+	eEventStatus_CANCELED                                              smithy.SchemaExtensions
+	eEventStatus_CANCELING                                             smithy.SchemaExtensions
+	eEventStatus_COMPLETED                                             smithy.SchemaExtensions
+	eEventStatus_CREATED                                               smithy.SchemaExtensions
+	eEventStatus_FAILED                                                smithy.SchemaExtensions
+	eEventStatus_IN_PROGRESS                                           smithy.SchemaExtensions
+	eEventStatus_PENDING                                               smithy.SchemaExtensions
+	eEventStatus_TIMED_OUT                                             smithy.SchemaExtensions
+	e_FilterList                                                       smithy.SchemaExtensions
+	e_FilterList_member                                                smithy.SchemaExtensions
+	eInternalServerException                                           smithy.SchemaExtensions
+	eInternalServerException_message                                   smithy.SchemaExtensions
+	e_KeyString                                                        smithy.SchemaExtensions
+	eManagementAccountConstraint                                       smithy.SchemaExtensions
+	e_MaxDeploymentEventResults                                        smithy.SchemaExtensions
+	e_MaxDeploymentResults                                             smithy.SchemaExtensions
+	e_MaxWorkloadDeploymentPatternResults                              smithy.SchemaExtensions
+	e_MaxWorkloadResults                                               smithy.SchemaExtensions
+	e_NextToken                                                        smithy.SchemaExtensions
+	eResourceLimitException                                            smithy.SchemaExtensions
+	eResourceLimitException_message                                    smithy.SchemaExtensions
+	eResourceNotFoundException                                         smithy.SchemaExtensions
+	eResourceNotFoundException_message                                 smithy.SchemaExtensions
+	e_ServicePrincipalType                                             smithy.SchemaExtensions
+	e_SpecificationsConditionalData                                    smithy.SchemaExtensions
+	e_SpecificationsConditionalData_member                             smithy.SchemaExtensions
+	e_TagKey                                                           smithy.SchemaExtensions
+	e_TagKeyList                                                       smithy.SchemaExtensions
+	e_TagKeyList_member                                                smithy.SchemaExtensions
+	e_Tags                                                             smithy.SchemaExtensions
+	e_Tags_key                                                         smithy.SchemaExtensions
+	e_Tags_value                                                       smithy.SchemaExtensions
+	e_TagValue                                                         smithy.SchemaExtensions
+	eValidationException                                               smithy.SchemaExtensions
+	eValidationException_message                                       smithy.SchemaExtensions
+	e_ValueString                                                      smithy.SchemaExtensions
+	eWorkloadData                                                      smithy.SchemaExtensions
+	eWorkloadData_workloadName                                         smithy.SchemaExtensions
+	eWorkloadData_displayName                                          smithy.SchemaExtensions
+	eWorkloadData_status                                               smithy.SchemaExtensions
+	eWorkloadData_accountConstraints                                   smithy.SchemaExtensions
+	eWorkloadData_description                                          smithy.SchemaExtensions
+	eWorkloadData_documentationUrl                                     smithy.SchemaExtensions
+	eWorkloadData_iconUrl                                              smithy.SchemaExtensions
+	eWorkloadData_statusMessage                                        smithy.SchemaExtensions
+	eWorkloadDataSummary                                               smithy.SchemaExtensions
+	eWorkloadDataSummary_workloadName                                  smithy.SchemaExtensions
+	eWorkloadDataSummary_displayName                                   smithy.SchemaExtensions
+	eWorkloadDataSummary_status                                        smithy.SchemaExtensions
+	eWorkloadDataSummary_accountConstraints                            smithy.SchemaExtensions
+	e_WorkloadDataSummaryList                                          smithy.SchemaExtensions
+	e_WorkloadDataSummaryList_member                                   smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData                                     smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_workloadName                        smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_deploymentPatternName               smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_workloadVersionName                 smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_deploymentPatternVersionName        smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_displayName                         smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_description                         smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_status                              smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_statusMessage                       smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_accountConstraints                  smithy.SchemaExtensions
+	eWorkloadDeploymentPatternData_specifications                      smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary                              smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_workloadName                 smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_deploymentPatternName        smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_workloadVersionName          smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_deploymentPatternVersionName smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_displayName                  smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_description                  smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_status                       smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_statusMessage                smithy.SchemaExtensions
+	eWorkloadDeploymentPatternDataSummary_accountConstraints           smithy.SchemaExtensions
+	e_WorkloadDeploymentPatternDataSummaryList                         smithy.SchemaExtensions
+	e_WorkloadDeploymentPatternDataSummaryList_member                  smithy.SchemaExtensions
+	eWorkloadDeploymentPatternStatus                                   smithy.SchemaExtensions
+	eWorkloadDeploymentPatternStatus_ACTIVE                            smithy.SchemaExtensions
+	eWorkloadDeploymentPatternStatus_INACTIVE                          smithy.SchemaExtensions
+	eWorkloadDeploymentPatternStatus_DISABLED                          smithy.SchemaExtensions
+	eWorkloadDeploymentPatternStatus_DELETED                           smithy.SchemaExtensions
+	e_WorkloadName                                                     smithy.SchemaExtensions
+	eWorkloadStatus                                                    smithy.SchemaExtensions
+	eWorkloadStatus_ACTIVE                                             smithy.SchemaExtensions
+	eWorkloadStatus_INACTIVE                                           smithy.SchemaExtensions
+	eWorkloadStatus_DISABLED                                           smithy.SchemaExtensions
+	eWorkloadStatus_DELETED                                            smithy.SchemaExtensions
+	e_WorkloadVersionName                                              smithy.SchemaExtensions
+	eCreateDeploymentInput                                             smithy.SchemaExtensions
+	eCreateDeploymentInput_workloadName                                smithy.SchemaExtensions
+	eCreateDeploymentInput_deploymentPatternName                       smithy.SchemaExtensions
+	eCreateDeploymentInput_name                                        smithy.SchemaExtensions
+	eCreateDeploymentInput_specifications                              smithy.SchemaExtensions
+	eCreateDeploymentInput_dryRun                                      smithy.SchemaExtensions
+	eCreateDeploymentInput_tags                                        smithy.SchemaExtensions
+	eCreateDeploymentOutput                                            smithy.SchemaExtensions
+	eCreateDeploymentOutput_deploymentId                               smithy.SchemaExtensions
+	eDeleteDeploymentInput                                             smithy.SchemaExtensions
+	eDeleteDeploymentInput_deploymentId                                smithy.SchemaExtensions
+	eDeleteDeploymentOutput                                            smithy.SchemaExtensions
+	eDeleteDeploymentOutput_status                                     smithy.SchemaExtensions
+	eDeleteDeploymentOutput_statusReason                               smithy.SchemaExtensions
+	eGetDeploymentInput                                                smithy.SchemaExtensions
+	eGetDeploymentInput_deploymentId                                   smithy.SchemaExtensions
+	eGetDeploymentOutput                                               smithy.SchemaExtensions
+	eGetDeploymentOutput_deployment                                    smithy.SchemaExtensions
+	eGetDeploymentPatternVersionInput                                  smithy.SchemaExtensions
+	eGetDeploymentPatternVersionInput_workloadName                     smithy.SchemaExtensions
+	eGetDeploymentPatternVersionInput_deploymentPatternName            smithy.SchemaExtensions
+	eGetDeploymentPatternVersionInput_deploymentPatternVersionName     smithy.SchemaExtensions
+	eGetDeploymentPatternVersionOutput                                 smithy.SchemaExtensions
+	eGetDeploymentPatternVersionOutput_deploymentPatternVersion        smithy.SchemaExtensions
+	eGetWorkloadDeploymentPatternInput                                 smithy.SchemaExtensions
+	eGetWorkloadDeploymentPatternInput_workloadName                    smithy.SchemaExtensions
+	eGetWorkloadDeploymentPatternInput_deploymentPatternName           smithy.SchemaExtensions
+	eGetWorkloadDeploymentPatternOutput                                smithy.SchemaExtensions
+	eGetWorkloadDeploymentPatternOutput_workloadDeploymentPattern      smithy.SchemaExtensions
+	eGetWorkloadInput                                                  smithy.SchemaExtensions
+	eGetWorkloadInput_workloadName                                     smithy.SchemaExtensions
+	eGetWorkloadOutput                                                 smithy.SchemaExtensions
+	eGetWorkloadOutput_workload                                        smithy.SchemaExtensions
+	eListDeploymentEventsInput                                         smithy.SchemaExtensions
+	eListDeploymentEventsInput_deploymentId                            smithy.SchemaExtensions
+	eListDeploymentEventsInput_maxResults                              smithy.SchemaExtensions
+	eListDeploymentEventsInput_nextToken                               smithy.SchemaExtensions
+	eListDeploymentEventsOutput                                        smithy.SchemaExtensions
+	eListDeploymentEventsOutput_deploymentEvents                       smithy.SchemaExtensions
+	eListDeploymentEventsOutput_nextToken                              smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput                                smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput_workloadName                   smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput_deploymentPatternName          smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput_maxResults                     smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput_nextToken                      smithy.SchemaExtensions
+	eListDeploymentPatternVersionsInput_filters                        smithy.SchemaExtensions
+	eListDeploymentPatternVersionsOutput                               smithy.SchemaExtensions
+	eListDeploymentPatternVersionsOutput_deploymentPatternVersions     smithy.SchemaExtensions
+	eListDeploymentPatternVersionsOutput_nextToken                     smithy.SchemaExtensions
+	eListDeploymentsInput                                              smithy.SchemaExtensions
+	eListDeploymentsInput_filters                                      smithy.SchemaExtensions
+	eListDeploymentsInput_maxResults                                   smithy.SchemaExtensions
+	eListDeploymentsInput_nextToken                                    smithy.SchemaExtensions
+	eListDeploymentsOutput                                             smithy.SchemaExtensions
+	eListDeploymentsOutput_deployments                                 smithy.SchemaExtensions
+	eListDeploymentsOutput_nextToken                                   smithy.SchemaExtensions
+	eListTagsForResourceInput                                          smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                              smithy.SchemaExtensions
+	eListTagsForResourceOutput                                         smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                    smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsInput                               smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsInput_workloadName                  smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsInput_maxResults                    smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsInput_nextToken                     smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsOutput                              smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns   smithy.SchemaExtensions
+	eListWorkloadDeploymentPatternsOutput_nextToken                    smithy.SchemaExtensions
+	eListWorkloadsInput                                                smithy.SchemaExtensions
+	eListWorkloadsInput_maxResults                                     smithy.SchemaExtensions
+	eListWorkloadsInput_nextToken                                      smithy.SchemaExtensions
+	eListWorkloadsOutput                                               smithy.SchemaExtensions
+	eListWorkloadsOutput_workloads                                     smithy.SchemaExtensions
+	eListWorkloadsOutput_nextToken                                     smithy.SchemaExtensions
+	eTagResourceInput                                                  smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                      smithy.SchemaExtensions
+	eTagResourceInput_tags                                             smithy.SchemaExtensions
+	eTagResourceOutput                                                 smithy.SchemaExtensions
+	eUntagResourceInput                                                smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                    smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                        smithy.SchemaExtensions
+	eUntagResourceOutput                                               smithy.SchemaExtensions
+	eUpdateDeploymentInput                                             smithy.SchemaExtensions
+	eUpdateDeploymentInput_deploymentId                                smithy.SchemaExtensions
+	eUpdateDeploymentInput_specifications                              smithy.SchemaExtensions
+	eUpdateDeploymentInput_workloadVersionName                         smithy.SchemaExtensions
+	eUpdateDeploymentInput_deploymentPatternVersionName                smithy.SchemaExtensions
+	eUpdateDeploymentInput_dryRun                                      smithy.SchemaExtensions
+	eUpdateDeploymentInput_force                                       smithy.SchemaExtensions
+	eUpdateDeploymentOutput                                            smithy.SchemaExtensions
+	eUpdateDeploymentOutput_deployment                                 smithy.SchemaExtensions
+)
+
+var (
+	iCreateDeployment                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "CreateDeployment"}
+	iDeleteDeployment                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeleteDeployment"}
+	iGetDeployment                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeployment"}
+	iGetDeploymentPatternVersion               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeploymentPatternVersion"}
+	iGetWorkload                               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkload"}
+	iGetWorkloadDeploymentPattern              = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkloadDeploymentPattern"}
+	iListDeploymentEvents                      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentEvents"}
+	iListDeploymentPatternVersions             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentPatternVersions"}
+	iListDeployments                           = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeployments"}
+	iListTagsForResource                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListTagsForResource"}
+	iListWorkloadDeploymentPatterns            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloadDeploymentPatterns"}
+	iListWorkloads                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloads"}
+	iTagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UntagResource"}
+	iUpdateDeployment                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UpdateDeployment"}
+	i_LaunchWizard                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "LaunchWizard"}
+	iAccountConstraint                         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "AccountConstraint"}
+	i_AccountConstraintsList                   = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "AccountConstraintsList"}
+	i_AllowedValues                            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "AllowedValues"}
+	iDelegatedAdminConstraint                  = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DelegatedAdminConstraint"}
+	iDeploymentConditionalField                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentConditionalField"}
+	iDeploymentData                            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentData"}
+	iDeploymentDataSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentDataSummary"}
+	i_DeploymentDataSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentDataSummaryList"}
+	iDeploymentEventDataSummary                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentEventDataSummary"}
+	i_DeploymentEventDataSummaryList           = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentEventDataSummaryList"}
+	i_DeploymentEventMetadata                  = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentEventMetadata"}
+	i_DeploymentEventMetadataKey               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentEventMetadataKey"}
+	i_DeploymentEventMetadataValue             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentEventMetadataValue"}
+	iDeploymentFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentFilter"}
+	iDeploymentFilterKey                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentFilterKey"}
+	i_DeploymentFilterList                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentFilterList"}
+	i_DeploymentFilterValue                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentFilterValue"}
+	i_DeploymentFilterValues                   = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentFilterValues"}
+	i_DeploymentId                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentId"}
+	i_DeploymentName                           = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentName"}
+	i_DeploymentPatternName                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternName"}
+	iDeploymentPatternVersionDataSummary       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionDataSummary"}
+	i_DeploymentPatternVersionDataSummaryList  = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionDataSummaryList"}
+	iDeploymentPatternVersionFilter            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionFilter"}
+	iDeploymentPatternVersionFilterKey         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionFilterKey"}
+	i_DeploymentPatternVersionFilterValue      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionFilterValue"}
+	i_DeploymentPatternVersionFilterValues     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionFilterValues"}
+	i_DeploymentPatternVersionName             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentPatternVersionName"}
+	i_DeploymentSpecifications                 = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentSpecifications"}
+	i_DeploymentSpecificationsData             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentSpecificationsData"}
+	iDeploymentSpecificationsField             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentSpecificationsField"}
+	iDeploymentStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeploymentStatus"}
+	iEventStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "EventStatus"}
+	i_FilterList                               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "FilterList"}
+	iInternalServerException                   = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "InternalServerException"}
+	i_KeyString                                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "KeyString"}
+	iManagementAccountConstraint               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ManagementAccountConstraint"}
+	i_MaxDeploymentEventResults                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "MaxDeploymentEventResults"}
+	i_MaxDeploymentResults                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "MaxDeploymentResults"}
+	i_MaxWorkloadDeploymentPatternResults      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "MaxWorkloadDeploymentPatternResults"}
+	i_MaxWorkloadResults                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "MaxWorkloadResults"}
+	i_NextToken                                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "NextToken"}
+	iResourceLimitException                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ResourceLimitException"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ResourceNotFoundException"}
+	i_ServicePrincipalType                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ServicePrincipalType"}
+	i_SpecificationsConditionalData            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "SpecificationsConditionalData"}
+	i_TagKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagKeyList"}
+	i_Tags                                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "Tags"}
+	i_TagValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagValue"}
+	iValidationException                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ValidationException"}
+	i_ValueString                              = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ValueString"}
+	iWorkloadData                              = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadData"}
+	iWorkloadDataSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDataSummary"}
+	i_WorkloadDataSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDataSummaryList"}
+	iWorkloadDeploymentPatternData             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDeploymentPatternData"}
+	iWorkloadDeploymentPatternDataSummary      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDeploymentPatternDataSummary"}
+	i_WorkloadDeploymentPatternDataSummaryList = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDeploymentPatternDataSummaryList"}
+	iWorkloadDeploymentPatternStatus           = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadDeploymentPatternStatus"}
+	i_WorkloadName                             = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadName"}
+	iWorkloadStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadStatus"}
+	i_WorkloadVersionName                      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "WorkloadVersionName"}
+	iCreateDeploymentInput                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "CreateDeploymentInput"}
+	iCreateDeploymentOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "CreateDeploymentOutput"}
+	iDeleteDeploymentInput                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeleteDeploymentInput"}
+	iDeleteDeploymentOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "DeleteDeploymentOutput"}
+	iGetDeploymentInput                        = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeploymentInput"}
+	iGetDeploymentOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeploymentOutput"}
+	iGetDeploymentPatternVersionInput          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeploymentPatternVersionInput"}
+	iGetDeploymentPatternVersionOutput         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetDeploymentPatternVersionOutput"}
+	iGetWorkloadDeploymentPatternInput         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkloadDeploymentPatternInput"}
+	iGetWorkloadDeploymentPatternOutput        = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkloadDeploymentPatternOutput"}
+	iGetWorkloadInput                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkloadInput"}
+	iGetWorkloadOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "GetWorkloadOutput"}
+	iListDeploymentEventsInput                 = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentEventsInput"}
+	iListDeploymentEventsOutput                = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentEventsOutput"}
+	iListDeploymentPatternVersionsInput        = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentPatternVersionsInput"}
+	iListDeploymentPatternVersionsOutput       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentPatternVersionsOutput"}
+	iListDeploymentsInput                      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentsInput"}
+	iListDeploymentsOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListDeploymentsOutput"}
+	iListTagsForResourceInput                  = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListTagsForResourceOutput"}
+	iListWorkloadDeploymentPatternsInput       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloadDeploymentPatternsInput"}
+	iListWorkloadDeploymentPatternsOutput      = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloadDeploymentPatternsOutput"}
+	iListWorkloadsInput                        = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloadsInput"}
+	iListWorkloadsOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "ListWorkloadsOutput"}
+	iTagResourceInput                          = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagResourceInput"}
+	iTagResourceOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "TagResourceOutput"}
+	iUntagResourceInput                        = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UntagResourceInput"}
+	iUntagResourceOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UntagResourceOutput"}
+	iUpdateDeploymentInput                     = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UpdateDeploymentInput"}
+	iUpdateDeploymentOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.launchwizard", Name: "UpdateDeploymentOutput"}
+	pString                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createDeployment",
-	Code: 200})
-
-var DeleteDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeleteDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteDeployment",
-	Code: 200})
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getDeployment",
-	Code: 200})
-
-var GetDeploymentPatternVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeploymentPatternVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getDeploymentPatternVersion",
-	Code: 200})
-
-var GetWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkload",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getWorkload",
-	Code: 200})
-
-var GetWorkloadDeploymentPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkloadDeploymentPattern",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getWorkloadDeploymentPattern",
-	Code: 200})
-
-var ListDeploymentEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listDeploymentEvents",
-	Code: 200})
-
-var ListDeploymentPatternVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentPatternVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listDeploymentPatternVersions",
-	Code: 200})
-
-var ListDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listDeployments",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListWorkloadDeploymentPatterns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloadDeploymentPatterns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listWorkloadDeploymentPatterns",
-	Code: 200})
-
-var ListWorkloads = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloads",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listWorkloads",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UpdateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateDeployment",
-	Code: 200})
-
-var _LaunchWizard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "LaunchWizard",
-}, smithy.ShapeTypeService, 0)
-
-var LaunchWizard = smithy.NewServiceSchema(_LaunchWizard, "2018-05-10")
-
-var AccountConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "AccountConstraint",
-}, smithy.ShapeTypeUnion, 2)
-var AccountConstraint_managementAccount *smithy.Schema
-
-var AccountConstraint_delegatedAdmin *smithy.Schema
-
-var _AccountConstraintsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "AccountConstraintsList",
-}, smithy.ShapeTypeList, 1)
-var _AccountConstraintsList_member *smithy.Schema
-
-var _AllowedValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "AllowedValues",
-}, smithy.ShapeTypeList, 1)
-var _AllowedValues_member *smithy.Schema
-
-var DelegatedAdminConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DelegatedAdminConstraint",
-}, smithy.ShapeTypeStructure, 1)
-var DelegatedAdminConstraint_servicePrincipal *smithy.Schema
-
-var DeploymentConditionalField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentConditionalField",
-}, smithy.ShapeTypeStructure, 3)
-var DeploymentConditionalField_name *smithy.Schema
-
-var DeploymentConditionalField_value *smithy.Schema
-
-var DeploymentConditionalField_comparator *smithy.Schema
-
-var DeploymentData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentData",
-}, smithy.ShapeTypeStructure, 12)
-var DeploymentData_name *smithy.Schema
-
-var DeploymentData_id *smithy.Schema
-
-var DeploymentData_workloadName *smithy.Schema
-
-var DeploymentData_patternName *smithy.Schema
-
-var DeploymentData_status *smithy.Schema
-
-var DeploymentData_createdAt *smithy.Schema
-
-var DeploymentData_modifiedAt *smithy.Schema
-
-var DeploymentData_specifications *smithy.Schema
-
-var DeploymentData_resourceGroup *smithy.Schema
-
-var DeploymentData_deletedAt *smithy.Schema
-
-var DeploymentData_tags *smithy.Schema
-
-var DeploymentData_deploymentArn *smithy.Schema
-
-var DeploymentDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentDataSummary",
-}, smithy.ShapeTypeStructure, 7)
-var DeploymentDataSummary_name *smithy.Schema
-
-var DeploymentDataSummary_id *smithy.Schema
-
-var DeploymentDataSummary_workloadName *smithy.Schema
-
-var DeploymentDataSummary_patternName *smithy.Schema
-
-var DeploymentDataSummary_status *smithy.Schema
-
-var DeploymentDataSummary_createdAt *smithy.Schema
-
-var DeploymentDataSummary_modifiedAt *smithy.Schema
-
-var _DeploymentDataSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentDataSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentDataSummaryList_member *smithy.Schema
-
-var DeploymentEventDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentEventDataSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DeploymentEventDataSummary_name *smithy.Schema
-
-var DeploymentEventDataSummary_description *smithy.Schema
-
-var DeploymentEventDataSummary_status *smithy.Schema
-
-var DeploymentEventDataSummary_statusReason *smithy.Schema
-
-var DeploymentEventDataSummary_timestamp *smithy.Schema
-
-var DeploymentEventDataSummary_metadata *smithy.Schema
-
-var _DeploymentEventDataSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentEventDataSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentEventDataSummaryList_member *smithy.Schema
-
-var _DeploymentEventMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentEventMetadata",
-}, smithy.ShapeTypeMap, 2)
-var _DeploymentEventMetadata_key *smithy.Schema
-
-var _DeploymentEventMetadata_value *smithy.Schema
-
-var _DeploymentEventMetadataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentEventMetadataKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentEventMetadataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentEventMetadataValue",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentFilter_name *smithy.Schema
-
-var DeploymentFilter_values *smithy.Schema
-
-var DeploymentFilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentFilterKey",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentFilterKey_WORKLOAD_NAME *smithy.Schema
-
-var DeploymentFilterKey_DEPLOYMENT_STATUS *smithy.Schema
-
-var _DeploymentFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentFilterList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentFilterList_member *smithy.Schema
-
-var _DeploymentFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentFilterValues_member *smithy.Schema
-
-var _DeploymentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentId",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentPatternName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternName",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentPatternVersionDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionDataSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DeploymentPatternVersionDataSummary_deploymentPatternVersionName *smithy.Schema
-
-var DeploymentPatternVersionDataSummary_description *smithy.Schema
-
-var DeploymentPatternVersionDataSummary_documentationUrl *smithy.Schema
-
-var DeploymentPatternVersionDataSummary_workloadName *smithy.Schema
-
-var DeploymentPatternVersionDataSummary_deploymentPatternName *smithy.Schema
-
-var _DeploymentPatternVersionDataSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionDataSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentPatternVersionDataSummaryList_member *smithy.Schema
-
-var DeploymentPatternVersionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentPatternVersionFilter_name *smithy.Schema
-
-var DeploymentPatternVersionFilter_values *smithy.Schema
-
-var DeploymentPatternVersionFilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionFilterKey",
-}, smithy.ShapeTypeEnum, 1)
-var DeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME *smithy.Schema
-
-var _DeploymentPatternVersionFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentPatternVersionFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentPatternVersionFilterValues_member *smithy.Schema
-
-var _DeploymentPatternVersionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentPatternVersionName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentSpecifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentSpecifications",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _DeploymentSpecifications_key *smithy.Schema
-
-var _DeploymentSpecifications_value *smithy.Schema
-
-var _DeploymentSpecificationsData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentSpecificationsData",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentSpecificationsData_member *smithy.Schema
-
-var DeploymentSpecificationsField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentSpecificationsField",
-}, smithy.ShapeTypeStructure, 5)
-var DeploymentSpecificationsField_name *smithy.Schema
-
-var DeploymentSpecificationsField_description *smithy.Schema
-
-var DeploymentSpecificationsField_allowedValues *smithy.Schema
-
-var DeploymentSpecificationsField_required *smithy.Schema
-
-var DeploymentSpecificationsField_conditionals *smithy.Schema
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 14)
-var DeploymentStatus_COMPLETED *smithy.Schema
-
-var DeploymentStatus_CREATING *smithy.Schema
-
-var DeploymentStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var DeploymentStatus_DELETE_INITIATING *smithy.Schema
-
-var DeploymentStatus_DELETE_FAILED *smithy.Schema
-
-var DeploymentStatus_DELETED *smithy.Schema
-
-var DeploymentStatus_FAILED *smithy.Schema
-
-var DeploymentStatus_IN_PROGRESS *smithy.Schema
-
-var DeploymentStatus_VALIDATING *smithy.Schema
-
-var DeploymentStatus_UPDATE_IN_PROGRESS *smithy.Schema
-
-var DeploymentStatus_UPDATE_COMPLETED *smithy.Schema
-
-var DeploymentStatus_UPDATE_FAILED *smithy.Schema
-
-var DeploymentStatus_UPDATE_ROLLBACK_COMPLETED *smithy.Schema
-
-var DeploymentStatus_UPDATE_ROLLBACK_FAILED *smithy.Schema
-
-var EventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "EventStatus",
-}, smithy.ShapeTypeEnum, 8)
-var EventStatus_CANCELED *smithy.Schema
-
-var EventStatus_CANCELING *smithy.Schema
-
-var EventStatus_COMPLETED *smithy.Schema
-
-var EventStatus_CREATED *smithy.Schema
-
-var EventStatus_FAILED *smithy.Schema
-
-var EventStatus_IN_PROGRESS *smithy.Schema
-
-var EventStatus_PENDING *smithy.Schema
-
-var EventStatus_TIMED_OUT *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _KeyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "KeyString",
-}, smithy.ShapeTypeString, 0)
-
-var ManagementAccountConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ManagementAccountConstraint",
-}, smithy.ShapeTypeStructure, 0)
-
-var _MaxDeploymentEventResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "MaxDeploymentEventResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxDeploymentResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "MaxDeploymentResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxWorkloadDeploymentPatternResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "MaxWorkloadDeploymentPatternResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxWorkloadResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "MaxWorkloadResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceLimitException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ResourceLimitException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ServicePrincipalType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ServicePrincipalType",
-}, smithy.ShapeTypeString, 0)
-
-var _SpecificationsConditionalData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "SpecificationsConditionalData",
-}, smithy.ShapeTypeList, 1)
-var _SpecificationsConditionalData_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ValueString",
-}, smithy.ShapeTypeString, 0)
-
-var WorkloadData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadData",
-}, smithy.ShapeTypeStructure, 8)
-var WorkloadData_workloadName *smithy.Schema
-
-var WorkloadData_displayName *smithy.Schema
-
-var WorkloadData_status *smithy.Schema
-
-var WorkloadData_accountConstraints *smithy.Schema
-
-var WorkloadData_description *smithy.Schema
-
-var WorkloadData_documentationUrl *smithy.Schema
-
-var WorkloadData_iconUrl *smithy.Schema
-
-var WorkloadData_statusMessage *smithy.Schema
-
-var WorkloadDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDataSummary",
-}, smithy.ShapeTypeStructure, 4)
-var WorkloadDataSummary_workloadName *smithy.Schema
-
-var WorkloadDataSummary_displayName *smithy.Schema
-
-var WorkloadDataSummary_status *smithy.Schema
-
-var WorkloadDataSummary_accountConstraints *smithy.Schema
-
-var _WorkloadDataSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDataSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WorkloadDataSummaryList_member *smithy.Schema
-
-var WorkloadDeploymentPatternData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDeploymentPatternData",
-}, smithy.ShapeTypeStructure, 10)
-var WorkloadDeploymentPatternData_workloadName *smithy.Schema
-
-var WorkloadDeploymentPatternData_deploymentPatternName *smithy.Schema
-
-var WorkloadDeploymentPatternData_workloadVersionName *smithy.Schema
-
-var WorkloadDeploymentPatternData_deploymentPatternVersionName *smithy.Schema
-
-var WorkloadDeploymentPatternData_displayName *smithy.Schema
-
-var WorkloadDeploymentPatternData_description *smithy.Schema
-
-var WorkloadDeploymentPatternData_status *smithy.Schema
-
-var WorkloadDeploymentPatternData_statusMessage *smithy.Schema
-
-var WorkloadDeploymentPatternData_accountConstraints *smithy.Schema
-
-var WorkloadDeploymentPatternData_specifications *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDeploymentPatternDataSummary",
-}, smithy.ShapeTypeStructure, 9)
-var WorkloadDeploymentPatternDataSummary_workloadName *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_deploymentPatternName *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_workloadVersionName *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_displayName *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_description *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_status *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_statusMessage *smithy.Schema
-
-var WorkloadDeploymentPatternDataSummary_accountConstraints *smithy.Schema
-
-var _WorkloadDeploymentPatternDataSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDeploymentPatternDataSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WorkloadDeploymentPatternDataSummaryList_member *smithy.Schema
-
-var WorkloadDeploymentPatternStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadDeploymentPatternStatus",
-}, smithy.ShapeTypeEnum, 4)
-var WorkloadDeploymentPatternStatus_ACTIVE *smithy.Schema
-
-var WorkloadDeploymentPatternStatus_INACTIVE *smithy.Schema
-
-var WorkloadDeploymentPatternStatus_DISABLED *smithy.Schema
-
-var WorkloadDeploymentPatternStatus_DELETED *smithy.Schema
-
-var _WorkloadName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadName",
-}, smithy.ShapeTypeString, 0)
-
-var WorkloadStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadStatus",
-}, smithy.ShapeTypeEnum, 4)
-var WorkloadStatus_ACTIVE *smithy.Schema
-
-var WorkloadStatus_INACTIVE *smithy.Schema
-
-var WorkloadStatus_DISABLED *smithy.Schema
-
-var WorkloadStatus_DELETED *smithy.Schema
-
-var _WorkloadVersionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "WorkloadVersionName",
-}, smithy.ShapeTypeString, 0)
-
-var CreateDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "CreateDeploymentInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDeploymentInput_workloadName *smithy.Schema
-
-var CreateDeploymentInput_deploymentPatternName *smithy.Schema
-
-var CreateDeploymentInput_name *smithy.Schema
-
-var CreateDeploymentInput_specifications *smithy.Schema
-
-var CreateDeploymentInput_dryRun *smithy.Schema
-
-var CreateDeploymentInput_tags *smithy.Schema
-
-var CreateDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "CreateDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDeploymentOutput_deploymentId *smithy.Schema
-
-var DeleteDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeleteDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentInput_deploymentId *smithy.Schema
-
-var DeleteDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "DeleteDeploymentOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDeploymentOutput_status *smithy.Schema
-
-var DeleteDeploymentOutput_statusReason *smithy.Schema
-
-var GetDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentInput_deploymentId *smithy.Schema
-
-var GetDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentOutput_deployment *smithy.Schema
-
-var GetDeploymentPatternVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeploymentPatternVersionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDeploymentPatternVersionInput_workloadName *smithy.Schema
-
-var GetDeploymentPatternVersionInput_deploymentPatternName *smithy.Schema
-
-var GetDeploymentPatternVersionInput_deploymentPatternVersionName *smithy.Schema
-
-var GetDeploymentPatternVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetDeploymentPatternVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentPatternVersionOutput_deploymentPatternVersion *smithy.Schema
-
-var GetWorkloadDeploymentPatternInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkloadDeploymentPatternInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWorkloadDeploymentPatternInput_workloadName *smithy.Schema
-
-var GetWorkloadDeploymentPatternInput_deploymentPatternName *smithy.Schema
-
-var GetWorkloadDeploymentPatternOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkloadDeploymentPatternOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkloadDeploymentPatternOutput_workloadDeploymentPattern *smithy.Schema
-
-var GetWorkloadInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkloadInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkloadInput_workloadName *smithy.Schema
-
-var GetWorkloadOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "GetWorkloadOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkloadOutput_workload *smithy.Schema
-
-var ListDeploymentEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentEventsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDeploymentEventsInput_deploymentId *smithy.Schema
-
-var ListDeploymentEventsInput_maxResults *smithy.Schema
-
-var ListDeploymentEventsInput_nextToken *smithy.Schema
-
-var ListDeploymentEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentEventsOutput_deploymentEvents *smithy.Schema
-
-var ListDeploymentEventsOutput_nextToken *smithy.Schema
-
-var ListDeploymentPatternVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentPatternVersionsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListDeploymentPatternVersionsInput_workloadName *smithy.Schema
-
-var ListDeploymentPatternVersionsInput_deploymentPatternName *smithy.Schema
-
-var ListDeploymentPatternVersionsInput_maxResults *smithy.Schema
-
-var ListDeploymentPatternVersionsInput_nextToken *smithy.Schema
-
-var ListDeploymentPatternVersionsInput_filters *smithy.Schema
-
-var ListDeploymentPatternVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentPatternVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentPatternVersionsOutput_deploymentPatternVersions *smithy.Schema
-
-var ListDeploymentPatternVersionsOutput_nextToken *smithy.Schema
-
-var ListDeploymentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDeploymentsInput_filters *smithy.Schema
-
-var ListDeploymentsInput_maxResults *smithy.Schema
-
-var ListDeploymentsInput_nextToken *smithy.Schema
-
-var ListDeploymentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListDeploymentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentsOutput_deployments *smithy.Schema
-
-var ListDeploymentsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListWorkloadDeploymentPatternsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloadDeploymentPatternsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkloadDeploymentPatternsInput_workloadName *smithy.Schema
-
-var ListWorkloadDeploymentPatternsInput_maxResults *smithy.Schema
-
-var ListWorkloadDeploymentPatternsInput_nextToken *smithy.Schema
-
-var ListWorkloadDeploymentPatternsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloadDeploymentPatternsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns *smithy.Schema
-
-var ListWorkloadDeploymentPatternsOutput_nextToken *smithy.Schema
-
-var ListWorkloadsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloadsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkloadsInput_maxResults *smithy.Schema
-
-var ListWorkloadsInput_nextToken *smithy.Schema
-
-var ListWorkloadsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "ListWorkloadsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkloadsOutput_workloads *smithy.Schema
-
-var ListWorkloadsOutput_nextToken *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UpdateDeploymentInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateDeploymentInput_deploymentId *smithy.Schema
-
-var UpdateDeploymentInput_specifications *smithy.Schema
-
-var UpdateDeploymentInput_workloadVersionName *smithy.Schema
-
-var UpdateDeploymentInput_deploymentPatternVersionName *smithy.Schema
-
-var UpdateDeploymentInput_dryRun *smithy.Schema
-
-var UpdateDeploymentInput_force *smithy.Schema
-
-var UpdateDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.launchwizard",
-	Name:      "UpdateDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDeploymentOutput_deployment *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	DelegatedAdminConstraint_servicePrincipal = DelegatedAdminConstraint.AddMember("servicePrincipal", _ServicePrincipalType)
-
-	AccountConstraint_managementAccount = AccountConstraint.AddMember("managementAccount", ManagementAccountConstraint)
-
-	AccountConstraint_delegatedAdmin = AccountConstraint.AddMember("delegatedAdmin", DelegatedAdminConstraint)
-
-	_AccountConstraintsList_member = _AccountConstraintsList.AddMember("member", AccountConstraint)
-
-	_AllowedValues_member = _AllowedValues.AddMember("member", _ValueString)
-
-	DeploymentConditionalField_name = DeploymentConditionalField.AddMember("name", smithyprelude.String)
-
-	DeploymentConditionalField_value = DeploymentConditionalField.AddMember("value", smithyprelude.String)
-
-	DeploymentConditionalField_comparator = DeploymentConditionalField.AddMember("comparator", smithyprelude.String)
-
-	DeploymentStatus_COMPLETED = DeploymentStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_CREATING = DeploymentStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DeploymentStatus_DELETE_IN_PROGRESS = DeploymentStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	DeploymentStatus_DELETE_INITIATING = DeploymentStatus.AddMember("DELETE_INITIATING", smithyprelude.Unit)
-
-	DeploymentStatus_DELETE_FAILED = DeploymentStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_DELETED = DeploymentStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DeploymentStatus_FAILED = DeploymentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_IN_PROGRESS = DeploymentStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	DeploymentStatus_VALIDATING = DeploymentStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	DeploymentStatus_UPDATE_IN_PROGRESS = DeploymentStatus.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
-
-	DeploymentStatus_UPDATE_COMPLETED = DeploymentStatus.AddMember("UPDATE_COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_UPDATE_FAILED = DeploymentStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_UPDATE_ROLLBACK_COMPLETED = DeploymentStatus.AddMember("UPDATE_ROLLBACK_COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_UPDATE_ROLLBACK_FAILED = DeploymentStatus.AddMember("UPDATE_ROLLBACK_FAILED", smithyprelude.Unit)
-
-	_DeploymentSpecifications_key = _DeploymentSpecifications.AddMember("key", _KeyString)
-
-	_DeploymentSpecifications_value = _DeploymentSpecifications.AddMember("value", _ValueString)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	DeploymentData_name = DeploymentData.AddMember("name", smithyprelude.String)
-
-	DeploymentData_id = DeploymentData.AddMember("id", _DeploymentId)
-
-	DeploymentData_workloadName = DeploymentData.AddMember("workloadName", _WorkloadName)
-
-	DeploymentData_patternName = DeploymentData.AddMember("patternName", _DeploymentPatternName)
-
-	DeploymentData_status = DeploymentData.AddMember("status", DeploymentStatus)
-
-	DeploymentData_createdAt = DeploymentData.AddMember("createdAt", smithyprelude.Timestamp)
-
-	DeploymentData_modifiedAt = DeploymentData.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	DeploymentData_specifications = DeploymentData.AddMember("specifications", _DeploymentSpecifications)
-
-	DeploymentData_resourceGroup = DeploymentData.AddMember("resourceGroup", smithyprelude.String)
-
-	DeploymentData_deletedAt = DeploymentData.AddMember("deletedAt", smithyprelude.Timestamp)
-
-	DeploymentData_tags = DeploymentData.AddMember("tags", _Tags)
-
-	DeploymentData_deploymentArn = DeploymentData.AddMember("deploymentArn", smithyprelude.String)
-
-	DeploymentDataSummary_name = DeploymentDataSummary.AddMember("name", smithyprelude.String)
-
-	DeploymentDataSummary_id = DeploymentDataSummary.AddMember("id", _DeploymentId)
-
-	DeploymentDataSummary_workloadName = DeploymentDataSummary.AddMember("workloadName", _WorkloadName)
-
-	DeploymentDataSummary_patternName = DeploymentDataSummary.AddMember("patternName", _DeploymentPatternName)
-
-	DeploymentDataSummary_status = DeploymentDataSummary.AddMember("status", DeploymentStatus)
-
-	DeploymentDataSummary_createdAt = DeploymentDataSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	DeploymentDataSummary_modifiedAt = DeploymentDataSummary.AddMember("modifiedAt", smithyprelude.Timestamp)
-
-	_DeploymentDataSummaryList_member = _DeploymentDataSummaryList.AddMember("member", DeploymentDataSummary)
-
-	EventStatus_CANCELED = EventStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	EventStatus_CANCELING = EventStatus.AddMember("CANCELING", smithyprelude.Unit)
-
-	EventStatus_COMPLETED = EventStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	EventStatus_CREATED = EventStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	EventStatus_FAILED = EventStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EventStatus_IN_PROGRESS = EventStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EventStatus_PENDING = EventStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	EventStatus_TIMED_OUT = EventStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	_DeploymentEventMetadata_key = _DeploymentEventMetadata.AddMember("key", _DeploymentEventMetadataKey)
-
-	_DeploymentEventMetadata_value = _DeploymentEventMetadata.AddMember("value", _DeploymentEventMetadataValue)
-
-	DeploymentEventDataSummary_name = DeploymentEventDataSummary.AddMember("name", smithyprelude.String)
-
-	DeploymentEventDataSummary_description = DeploymentEventDataSummary.AddMember("description", smithyprelude.String)
-
-	DeploymentEventDataSummary_status = DeploymentEventDataSummary.AddMember("status", EventStatus)
-
-	DeploymentEventDataSummary_statusReason = DeploymentEventDataSummary.AddMember("statusReason", smithyprelude.String)
-
-	DeploymentEventDataSummary_timestamp = DeploymentEventDataSummary.AddMember("timestamp", smithyprelude.Timestamp)
-
-	DeploymentEventDataSummary_metadata = DeploymentEventDataSummary.AddMember("metadata", _DeploymentEventMetadata)
-
-	_DeploymentEventDataSummaryList_member = _DeploymentEventDataSummaryList.AddMember("member", DeploymentEventDataSummary)
-
-	DeploymentFilterKey_WORKLOAD_NAME = DeploymentFilterKey.AddMember("WORKLOAD_NAME", smithyprelude.Unit)
-
-	DeploymentFilterKey_DEPLOYMENT_STATUS = DeploymentFilterKey.AddMember("DEPLOYMENT_STATUS", smithyprelude.Unit)
-
-	_DeploymentFilterValues_member = _DeploymentFilterValues.AddMember("member", _DeploymentFilterValue)
-
-	DeploymentFilter_name = DeploymentFilter.AddMember("name", DeploymentFilterKey)
-
-	DeploymentFilter_values = DeploymentFilter.AddMember("values", _DeploymentFilterValues)
-
-	_DeploymentFilterList_member = _DeploymentFilterList.AddMember("member", DeploymentFilter)
-
-	DeploymentPatternVersionDataSummary_deploymentPatternVersionName = DeploymentPatternVersionDataSummary.AddMember("deploymentPatternVersionName", smithyprelude.String)
-
-	DeploymentPatternVersionDataSummary_description = DeploymentPatternVersionDataSummary.AddMember("description", smithyprelude.String)
-
-	DeploymentPatternVersionDataSummary_documentationUrl = DeploymentPatternVersionDataSummary.AddMember("documentationUrl", smithyprelude.String)
-
-	DeploymentPatternVersionDataSummary_workloadName = DeploymentPatternVersionDataSummary.AddMember("workloadName", smithyprelude.String)
-
-	DeploymentPatternVersionDataSummary_deploymentPatternName = DeploymentPatternVersionDataSummary.AddMember("deploymentPatternName", smithyprelude.String)
-
-	_DeploymentPatternVersionDataSummaryList_member = _DeploymentPatternVersionDataSummaryList.AddMember("member", DeploymentPatternVersionDataSummary)
-
-	DeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME = DeploymentPatternVersionFilterKey.AddMember("DEPLOYMENT_PATTERN_VERSION_NAME", smithyprelude.Unit)
-
-	_DeploymentPatternVersionFilterValues_member = _DeploymentPatternVersionFilterValues.AddMember("member", _DeploymentPatternVersionFilterValue)
-
-	DeploymentPatternVersionFilter_name = DeploymentPatternVersionFilter.AddMember("name", DeploymentPatternVersionFilterKey)
-
-	DeploymentPatternVersionFilter_values = DeploymentPatternVersionFilter.AddMember("values", _DeploymentPatternVersionFilterValues)
-
-	_SpecificationsConditionalData_member = _SpecificationsConditionalData.AddMember("member", DeploymentConditionalField)
-
-	DeploymentSpecificationsField_name = DeploymentSpecificationsField.AddMember("name", smithyprelude.String)
-
-	DeploymentSpecificationsField_description = DeploymentSpecificationsField.AddMember("description", smithyprelude.String)
-
-	DeploymentSpecificationsField_allowedValues = DeploymentSpecificationsField.AddMember("allowedValues", _AllowedValues)
-
-	DeploymentSpecificationsField_required = DeploymentSpecificationsField.AddMember("required", smithyprelude.String)
-
-	DeploymentSpecificationsField_conditionals = DeploymentSpecificationsField.AddMember("conditionals", _SpecificationsConditionalData)
-
-	_DeploymentSpecificationsData_member = _DeploymentSpecificationsData.AddMember("member", DeploymentSpecificationsField)
-
-	_FilterList_member = _FilterList.AddMember("member", DeploymentPatternVersionFilter)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ResourceLimitException_message = ResourceLimitException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	WorkloadStatus_ACTIVE = WorkloadStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	WorkloadStatus_INACTIVE = WorkloadStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	WorkloadStatus_DISABLED = WorkloadStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	WorkloadStatus_DELETED = WorkloadStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	WorkloadData_workloadName = WorkloadData.AddMember("workloadName", _WorkloadName)
-
-	WorkloadData_displayName = WorkloadData.AddMember("displayName", smithyprelude.String)
-
-	WorkloadData_status = WorkloadData.AddMember("status", WorkloadStatus)
-
-	WorkloadData_accountConstraints = WorkloadData.AddMember("accountConstraints", _AccountConstraintsList)
-
-	WorkloadData_description = WorkloadData.AddMember("description", smithyprelude.String)
-
-	WorkloadData_documentationUrl = WorkloadData.AddMember("documentationUrl", smithyprelude.String)
-
-	WorkloadData_iconUrl = WorkloadData.AddMember("iconUrl", smithyprelude.String)
-
-	WorkloadData_statusMessage = WorkloadData.AddMember("statusMessage", smithyprelude.String)
-
-	WorkloadDataSummary_workloadName = WorkloadDataSummary.AddMember("workloadName", _WorkloadName)
-
-	WorkloadDataSummary_displayName = WorkloadDataSummary.AddMember("displayName", smithyprelude.String)
-
-	WorkloadDataSummary_status = WorkloadDataSummary.AddMember("status", WorkloadStatus)
-
-	WorkloadDataSummary_accountConstraints = WorkloadDataSummary.AddMember("accountConstraints", _AccountConstraintsList)
-
-	_WorkloadDataSummaryList_member = _WorkloadDataSummaryList.AddMember("member", WorkloadDataSummary)
-
-	WorkloadDeploymentPatternStatus_ACTIVE = WorkloadDeploymentPatternStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	WorkloadDeploymentPatternStatus_INACTIVE = WorkloadDeploymentPatternStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	WorkloadDeploymentPatternStatus_DISABLED = WorkloadDeploymentPatternStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	WorkloadDeploymentPatternStatus_DELETED = WorkloadDeploymentPatternStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	WorkloadDeploymentPatternData_workloadName = WorkloadDeploymentPatternData.AddMember("workloadName", _WorkloadName)
-
-	WorkloadDeploymentPatternData_deploymentPatternName = WorkloadDeploymentPatternData.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	WorkloadDeploymentPatternData_workloadVersionName = WorkloadDeploymentPatternData.AddMember("workloadVersionName", _WorkloadVersionName)
-
-	WorkloadDeploymentPatternData_deploymentPatternVersionName = WorkloadDeploymentPatternData.AddMember("deploymentPatternVersionName", _DeploymentPatternVersionName)
-
-	WorkloadDeploymentPatternData_displayName = WorkloadDeploymentPatternData.AddMember("displayName", smithyprelude.String)
-
-	WorkloadDeploymentPatternData_description = WorkloadDeploymentPatternData.AddMember("description", smithyprelude.String)
-
-	WorkloadDeploymentPatternData_status = WorkloadDeploymentPatternData.AddMember("status", WorkloadDeploymentPatternStatus)
-
-	WorkloadDeploymentPatternData_statusMessage = WorkloadDeploymentPatternData.AddMember("statusMessage", smithyprelude.String)
-
-	WorkloadDeploymentPatternData_accountConstraints = WorkloadDeploymentPatternData.AddMember("accountConstraints", _AccountConstraintsList)
-
-	WorkloadDeploymentPatternData_specifications = WorkloadDeploymentPatternData.AddMember("specifications", _DeploymentSpecificationsData)
-
-	WorkloadDeploymentPatternDataSummary_workloadName = WorkloadDeploymentPatternDataSummary.AddMember("workloadName", _WorkloadName)
-
-	WorkloadDeploymentPatternDataSummary_deploymentPatternName = WorkloadDeploymentPatternDataSummary.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	WorkloadDeploymentPatternDataSummary_workloadVersionName = WorkloadDeploymentPatternDataSummary.AddMember("workloadVersionName", _WorkloadVersionName)
-
-	WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName = WorkloadDeploymentPatternDataSummary.AddMember("deploymentPatternVersionName", _DeploymentPatternVersionName)
-
-	WorkloadDeploymentPatternDataSummary_displayName = WorkloadDeploymentPatternDataSummary.AddMember("displayName", smithyprelude.String)
-
-	WorkloadDeploymentPatternDataSummary_description = WorkloadDeploymentPatternDataSummary.AddMember("description", smithyprelude.String)
-
-	WorkloadDeploymentPatternDataSummary_status = WorkloadDeploymentPatternDataSummary.AddMember("status", WorkloadDeploymentPatternStatus)
-
-	WorkloadDeploymentPatternDataSummary_statusMessage = WorkloadDeploymentPatternDataSummary.AddMember("statusMessage", smithyprelude.String)
-
-	WorkloadDeploymentPatternDataSummary_accountConstraints = WorkloadDeploymentPatternDataSummary.AddMember("accountConstraints", _AccountConstraintsList)
-
-	_WorkloadDeploymentPatternDataSummaryList_member = _WorkloadDeploymentPatternDataSummaryList.AddMember("member", WorkloadDeploymentPatternDataSummary)
-
-	CreateDeploymentInput_workloadName = CreateDeploymentInput.AddMember("workloadName", _WorkloadName)
-
-	CreateDeploymentInput_deploymentPatternName = CreateDeploymentInput.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	CreateDeploymentInput_name = CreateDeploymentInput.AddMember("name", _DeploymentName)
-
-	CreateDeploymentInput_specifications = CreateDeploymentInput.AddMember("specifications", _DeploymentSpecifications)
-
-	CreateDeploymentInput_dryRun = CreateDeploymentInput.AddMember("dryRun", smithyprelude.Boolean)
-
-	CreateDeploymentInput_tags = CreateDeploymentInput.AddMember("tags", _Tags)
-
-	CreateDeploymentOutput_deploymentId = CreateDeploymentOutput.AddMember("deploymentId", _DeploymentId)
-
-	DeleteDeploymentInput_deploymentId = DeleteDeploymentInput.AddMember("deploymentId", _DeploymentId)
-
-	DeleteDeploymentOutput_status = DeleteDeploymentOutput.AddMember("status", DeploymentStatus)
-
-	DeleteDeploymentOutput_statusReason = DeleteDeploymentOutput.AddMember("statusReason", smithyprelude.String)
-
-	GetDeploymentInput_deploymentId = GetDeploymentInput.AddMember("deploymentId", _DeploymentId)
-
-	GetDeploymentOutput_deployment = GetDeploymentOutput.AddMember("deployment", DeploymentData)
-
-	GetDeploymentPatternVersionInput_workloadName = GetDeploymentPatternVersionInput.AddMember("workloadName", _WorkloadName)
-
-	GetDeploymentPatternVersionInput_deploymentPatternName = GetDeploymentPatternVersionInput.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	GetDeploymentPatternVersionInput_deploymentPatternVersionName = GetDeploymentPatternVersionInput.AddMember("deploymentPatternVersionName", _DeploymentPatternVersionName)
-
-	GetDeploymentPatternVersionOutput_deploymentPatternVersion = GetDeploymentPatternVersionOutput.AddMember("deploymentPatternVersion", DeploymentPatternVersionDataSummary)
-
-	GetWorkloadDeploymentPatternInput_workloadName = GetWorkloadDeploymentPatternInput.AddMember("workloadName", _WorkloadName)
-
-	GetWorkloadDeploymentPatternInput_deploymentPatternName = GetWorkloadDeploymentPatternInput.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	GetWorkloadDeploymentPatternOutput_workloadDeploymentPattern = GetWorkloadDeploymentPatternOutput.AddMember("workloadDeploymentPattern", WorkloadDeploymentPatternData)
-
-	GetWorkloadInput_workloadName = GetWorkloadInput.AddMember("workloadName", _WorkloadName)
-
-	GetWorkloadOutput_workload = GetWorkloadOutput.AddMember("workload", WorkloadData)
-
-	ListDeploymentEventsInput_deploymentId = ListDeploymentEventsInput.AddMember("deploymentId", _DeploymentId)
-
-	ListDeploymentEventsInput_maxResults = ListDeploymentEventsInput.AddMember("maxResults", _MaxDeploymentEventResults)
-
-	ListDeploymentEventsInput_nextToken = ListDeploymentEventsInput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentEventsOutput_deploymentEvents = ListDeploymentEventsOutput.AddMember("deploymentEvents", _DeploymentEventDataSummaryList)
-
-	ListDeploymentEventsOutput_nextToken = ListDeploymentEventsOutput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentPatternVersionsInput_workloadName = ListDeploymentPatternVersionsInput.AddMember("workloadName", _WorkloadName)
-
-	ListDeploymentPatternVersionsInput_deploymentPatternName = ListDeploymentPatternVersionsInput.AddMember("deploymentPatternName", _DeploymentPatternName)
-
-	ListDeploymentPatternVersionsInput_maxResults = ListDeploymentPatternVersionsInput.AddMember("maxResults", _MaxWorkloadResults)
-
-	ListDeploymentPatternVersionsInput_nextToken = ListDeploymentPatternVersionsInput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentPatternVersionsInput_filters = ListDeploymentPatternVersionsInput.AddMember("filters", _FilterList)
-
-	ListDeploymentPatternVersionsOutput_deploymentPatternVersions = ListDeploymentPatternVersionsOutput.AddMember("deploymentPatternVersions", _DeploymentPatternVersionDataSummaryList)
-
-	ListDeploymentPatternVersionsOutput_nextToken = ListDeploymentPatternVersionsOutput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentsInput_filters = ListDeploymentsInput.AddMember("filters", _DeploymentFilterList)
-
-	ListDeploymentsInput_maxResults = ListDeploymentsInput.AddMember("maxResults", _MaxDeploymentResults)
-
-	ListDeploymentsInput_nextToken = ListDeploymentsInput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentsOutput_deployments = ListDeploymentsOutput.AddMember("deployments", _DeploymentDataSummaryList)
-
-	ListDeploymentsOutput_nextToken = ListDeploymentsOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _Tags)
-
-	ListWorkloadDeploymentPatternsInput_workloadName = ListWorkloadDeploymentPatternsInput.AddMember("workloadName", _WorkloadName)
-
-	ListWorkloadDeploymentPatternsInput_maxResults = ListWorkloadDeploymentPatternsInput.AddMember("maxResults", _MaxWorkloadDeploymentPatternResults)
-
-	ListWorkloadDeploymentPatternsInput_nextToken = ListWorkloadDeploymentPatternsInput.AddMember("nextToken", _NextToken)
-
-	ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns = ListWorkloadDeploymentPatternsOutput.AddMember("workloadDeploymentPatterns", _WorkloadDeploymentPatternDataSummaryList)
-
-	ListWorkloadDeploymentPatternsOutput_nextToken = ListWorkloadDeploymentPatternsOutput.AddMember("nextToken", _NextToken)
-
-	ListWorkloadsInput_maxResults = ListWorkloadsInput.AddMember("maxResults", _MaxWorkloadResults)
-
-	ListWorkloadsInput_nextToken = ListWorkloadsInput.AddMember("nextToken", _NextToken)
-
-	ListWorkloadsOutput_workloads = ListWorkloadsOutput.AddMember("workloads", _WorkloadDataSummaryList)
-
-	ListWorkloadsOutput_nextToken = ListWorkloadsOutput.AddMember("nextToken", _NextToken)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _Tags)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDeploymentInput_deploymentId = UpdateDeploymentInput.AddMember("deploymentId", _DeploymentId)
-
-	UpdateDeploymentInput_specifications = UpdateDeploymentInput.AddMember("specifications", _DeploymentSpecifications)
-
-	UpdateDeploymentInput_workloadVersionName = UpdateDeploymentInput.AddMember("workloadVersionName", _WorkloadVersionName)
-
-	UpdateDeploymentInput_deploymentPatternVersionName = UpdateDeploymentInput.AddMember("deploymentPatternVersionName", _DeploymentPatternVersionName)
-
-	UpdateDeploymentInput_dryRun = UpdateDeploymentInput.AddMember("dryRun", smithyprelude.Boolean)
-
-	UpdateDeploymentInput_force = UpdateDeploymentInput.AddMember("force", smithyprelude.Boolean)
-
-	UpdateDeploymentOutput_deployment = UpdateDeploymentOutput.AddMember("deployment", DeploymentDataSummary)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccountConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountConstraint_managementAccount, &sAccountConstraint_delegatedAdmin}}
+var m_AccountConstraintsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountConstraintsList_member}}
+var m_AllowedValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_AllowedValues_member}}
+var mDelegatedAdminConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegatedAdminConstraint_servicePrincipal}}
+var mDeploymentConditionalField = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentConditionalField_name, &sDeploymentConditionalField_value, &sDeploymentConditionalField_comparator}}
+var mDeploymentData = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentData_name, &sDeploymentData_id, &sDeploymentData_workloadName, &sDeploymentData_patternName, &sDeploymentData_status, &sDeploymentData_createdAt, &sDeploymentData_modifiedAt, &sDeploymentData_specifications, &sDeploymentData_resourceGroup, &sDeploymentData_deletedAt, &sDeploymentData_tags, &sDeploymentData_deploymentArn}, Hash: &hDeploymentData}
+var mDeploymentDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentDataSummary_name, &sDeploymentDataSummary_id, &sDeploymentDataSummary_workloadName, &sDeploymentDataSummary_patternName, &sDeploymentDataSummary_status, &sDeploymentDataSummary_createdAt, &sDeploymentDataSummary_modifiedAt}}
+var m_DeploymentDataSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentDataSummaryList_member}}
+var mDeploymentEventDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentEventDataSummary_name, &sDeploymentEventDataSummary_description, &sDeploymentEventDataSummary_status, &sDeploymentEventDataSummary_statusReason, &sDeploymentEventDataSummary_timestamp, &sDeploymentEventDataSummary_metadata}}
+var m_DeploymentEventDataSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentEventDataSummaryList_member}}
+var m_DeploymentEventMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentEventMetadata_key, &s_DeploymentEventMetadata_value}}
+var mDeploymentFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentFilter_name, &sDeploymentFilter_values}}
+var mDeploymentFilterKey = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentFilterKey_WORKLOAD_NAME, &sDeploymentFilterKey_DEPLOYMENT_STATUS}}
+var m_DeploymentFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentFilterList_member}}
+var m_DeploymentFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentFilterValues_member}}
+var mDeploymentPatternVersionDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentPatternVersionDataSummary_deploymentPatternVersionName, &sDeploymentPatternVersionDataSummary_description, &sDeploymentPatternVersionDataSummary_documentationUrl, &sDeploymentPatternVersionDataSummary_workloadName, &sDeploymentPatternVersionDataSummary_deploymentPatternName}}
+var m_DeploymentPatternVersionDataSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentPatternVersionDataSummaryList_member}}
+var mDeploymentPatternVersionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentPatternVersionFilter_name, &sDeploymentPatternVersionFilter_values}}
+var mDeploymentPatternVersionFilterKey = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME}}
+var m_DeploymentPatternVersionFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentPatternVersionFilterValues_member}}
+var m_DeploymentSpecifications = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentSpecifications_key, &s_DeploymentSpecifications_value}}
+var m_DeploymentSpecificationsData = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentSpecificationsData_member}}
+var mDeploymentSpecificationsField = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentSpecificationsField_name, &sDeploymentSpecificationsField_description, &sDeploymentSpecificationsField_allowedValues, &sDeploymentSpecificationsField_required, &sDeploymentSpecificationsField_conditionals}}
+var mDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStatus_COMPLETED, &sDeploymentStatus_CREATING, &sDeploymentStatus_DELETE_IN_PROGRESS, &sDeploymentStatus_DELETE_INITIATING, &sDeploymentStatus_DELETE_FAILED, &sDeploymentStatus_DELETED, &sDeploymentStatus_FAILED, &sDeploymentStatus_IN_PROGRESS, &sDeploymentStatus_VALIDATING, &sDeploymentStatus_UPDATE_IN_PROGRESS, &sDeploymentStatus_UPDATE_COMPLETED, &sDeploymentStatus_UPDATE_FAILED, &sDeploymentStatus_UPDATE_ROLLBACK_COMPLETED, &sDeploymentStatus_UPDATE_ROLLBACK_FAILED}, Hash: &hDeploymentStatus}
+var mEventStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEventStatus_CANCELED, &sEventStatus_CANCELING, &sEventStatus_COMPLETED, &sEventStatus_CREATED, &sEventStatus_FAILED, &sEventStatus_IN_PROGRESS, &sEventStatus_PENDING, &sEventStatus_TIMED_OUT}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mResourceLimitException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var m_SpecificationsConditionalData = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpecificationsConditionalData_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWorkloadData = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadData_workloadName, &sWorkloadData_displayName, &sWorkloadData_status, &sWorkloadData_accountConstraints, &sWorkloadData_description, &sWorkloadData_documentationUrl, &sWorkloadData_iconUrl, &sWorkloadData_statusMessage}}
+var mWorkloadDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadDataSummary_workloadName, &sWorkloadDataSummary_displayName, &sWorkloadDataSummary_status, &sWorkloadDataSummary_accountConstraints}}
+var m_WorkloadDataSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkloadDataSummaryList_member}}
+var mWorkloadDeploymentPatternData = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadDeploymentPatternData_workloadName, &sWorkloadDeploymentPatternData_deploymentPatternName, &sWorkloadDeploymentPatternData_workloadVersionName, &sWorkloadDeploymentPatternData_deploymentPatternVersionName, &sWorkloadDeploymentPatternData_displayName, &sWorkloadDeploymentPatternData_description, &sWorkloadDeploymentPatternData_status, &sWorkloadDeploymentPatternData_statusMessage, &sWorkloadDeploymentPatternData_accountConstraints, &sWorkloadDeploymentPatternData_specifications}, Hash: &hWorkloadDeploymentPatternData}
+var mWorkloadDeploymentPatternDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadDeploymentPatternDataSummary_workloadName, &sWorkloadDeploymentPatternDataSummary_deploymentPatternName, &sWorkloadDeploymentPatternDataSummary_workloadVersionName, &sWorkloadDeploymentPatternDataSummary_deploymentPatternVersionName, &sWorkloadDeploymentPatternDataSummary_displayName, &sWorkloadDeploymentPatternDataSummary_description, &sWorkloadDeploymentPatternDataSummary_status, &sWorkloadDeploymentPatternDataSummary_statusMessage, &sWorkloadDeploymentPatternDataSummary_accountConstraints}, Hash: &hWorkloadDeploymentPatternDataSummary}
+var m_WorkloadDeploymentPatternDataSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkloadDeploymentPatternDataSummaryList_member}}
+var mWorkloadDeploymentPatternStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadDeploymentPatternStatus_ACTIVE, &sWorkloadDeploymentPatternStatus_INACTIVE, &sWorkloadDeploymentPatternStatus_DISABLED, &sWorkloadDeploymentPatternStatus_DELETED}}
+var mWorkloadStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkloadStatus_ACTIVE, &sWorkloadStatus_INACTIVE, &sWorkloadStatus_DISABLED, &sWorkloadStatus_DELETED}}
+var mCreateDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentInput_workloadName, &sCreateDeploymentInput_deploymentPatternName, &sCreateDeploymentInput_name, &sCreateDeploymentInput_specifications, &sCreateDeploymentInput_dryRun, &sCreateDeploymentInput_tags}}
+var mCreateDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentOutput_deploymentId}}
+var mDeleteDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentInput_deploymentId}}
+var mDeleteDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentOutput_status, &sDeleteDeploymentOutput_statusReason}}
+var mGetDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentInput_deploymentId}}
+var mGetDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentOutput_deployment}}
+var mGetDeploymentPatternVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentPatternVersionInput_workloadName, &sGetDeploymentPatternVersionInput_deploymentPatternName, &sGetDeploymentPatternVersionInput_deploymentPatternVersionName}}
+var mGetDeploymentPatternVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentPatternVersionOutput_deploymentPatternVersion}}
+var mGetWorkloadDeploymentPatternInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkloadDeploymentPatternInput_workloadName, &sGetWorkloadDeploymentPatternInput_deploymentPatternName}}
+var mGetWorkloadDeploymentPatternOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkloadDeploymentPatternOutput_workloadDeploymentPattern}}
+var mGetWorkloadInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkloadInput_workloadName}}
+var mGetWorkloadOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkloadOutput_workload}}
+var mListDeploymentEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentEventsInput_deploymentId, &sListDeploymentEventsInput_maxResults, &sListDeploymentEventsInput_nextToken}}
+var mListDeploymentEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentEventsOutput_deploymentEvents, &sListDeploymentEventsOutput_nextToken}}
+var mListDeploymentPatternVersionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentPatternVersionsInput_workloadName, &sListDeploymentPatternVersionsInput_deploymentPatternName, &sListDeploymentPatternVersionsInput_maxResults, &sListDeploymentPatternVersionsInput_nextToken, &sListDeploymentPatternVersionsInput_filters}}
+var mListDeploymentPatternVersionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentPatternVersionsOutput_deploymentPatternVersions, &sListDeploymentPatternVersionsOutput_nextToken}}
+var mListDeploymentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsInput_filters, &sListDeploymentsInput_maxResults, &sListDeploymentsInput_nextToken}}
+var mListDeploymentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsOutput_deployments, &sListDeploymentsOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mListWorkloadDeploymentPatternsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadDeploymentPatternsInput_workloadName, &sListWorkloadDeploymentPatternsInput_maxResults, &sListWorkloadDeploymentPatternsInput_nextToken}}
+var mListWorkloadDeploymentPatternsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns, &sListWorkloadDeploymentPatternsOutput_nextToken}}
+var mListWorkloadsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadsInput_maxResults, &sListWorkloadsInput_nextToken}}
+var mListWorkloadsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkloadsOutput_workloads, &sListWorkloadsOutput_nextToken}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeploymentInput_deploymentId, &sUpdateDeploymentInput_specifications, &sUpdateDeploymentInput_workloadVersionName, &sUpdateDeploymentInput_deploymentPatternVersionName, &sUpdateDeploymentInput_dryRun, &sUpdateDeploymentInput_force}}
+var mUpdateDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeploymentOutput_deployment}}
+
+var hDeploymentData = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	11, 7, 1, 3, 0, 0, 0, 5, 0, 0, 8, 6, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0,
+	9, 12, 10, 0, 0, 2, 0, 0,
+}}
+var hDeploymentStatus = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	0, 0, 11, 7, 0, 0, 1, 12, 5, 0, 0, 6, 0, 4, 14, 0, 0, 9, 0, 2, 0, 3, 0, 0,
+	0, 10, 0, 8, 0, 13, 0, 0,
+}}
+var hWorkloadDeploymentPatternData = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 3, 0, 8, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 10, 0, 5, 0, 0, 7, 1,
+	6, 0, 0, 0, 0, 0, 9, 0,
+}}
+var hWorkloadDeploymentPatternDataSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 3, 0, 8, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 7, 1,
+	6, 0, 0, 0, 0, 0, 9, 0,
+}}
+
+var sCreateDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeployment, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateDeployment})
+var sDeleteDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeployment, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDeployment})
+var sGetDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployment, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetDeployment})
+var sGetDeploymentPatternVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentPatternVersion, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetDeploymentPatternVersion})
+var sGetWorkload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkload, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkload})
+var sGetWorkloadDeploymentPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkloadDeploymentPattern, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkloadDeploymentPattern})
+var sListDeploymentEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentEvents, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListDeploymentEvents})
+var sListDeploymentPatternVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentPatternVersions, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListDeploymentPatternVersions})
+var sListDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployments, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListDeployments})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWorkloadDeploymentPatterns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadDeploymentPatterns, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListWorkloadDeploymentPatterns})
+var sListWorkloads = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloads, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListWorkloads})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeployment, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDeployment})
+var s_LaunchWizard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchWizard, Type: smithy.ShapeTypeService, Ext: &e_LaunchWizard})
+var sAccountConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountConstraint, Members: &mAccountConstraint, Type: smithy.ShapeTypeUnion, Ext: &eAccountConstraint})
+var sAccountConstraint_managementAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managementAccount", ID: &iManagementAccountConstraint, Type: smithy.ShapeTypeStructure, Ext: &eAccountConstraint_managementAccount})
+var sAccountConstraint_delegatedAdmin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegatedAdmin", ID: &iDelegatedAdminConstraint, Members: &mDelegatedAdminConstraint, Type: smithy.ShapeTypeStructure, Ext: &eAccountConstraint_delegatedAdmin})
+var s_AccountConstraintsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountConstraintsList, Members: &m_AccountConstraintsList, Type: smithy.ShapeTypeList, Ext: &e_AccountConstraintsList})
+var s_AccountConstraintsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountConstraint, Members: &mAccountConstraint, Type: smithy.ShapeTypeUnion, Ext: &e_AccountConstraintsList_member})
+var s_AllowedValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedValues, Members: &m_AllowedValues, Type: smithy.ShapeTypeList, Ext: &e_AllowedValues})
+var s_AllowedValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueString, Type: smithy.ShapeTypeString, Ext: &e_AllowedValues_member})
+var sDelegatedAdminConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegatedAdminConstraint, Members: &mDelegatedAdminConstraint, Type: smithy.ShapeTypeStructure, Ext: &eDelegatedAdminConstraint})
+var sDelegatedAdminConstraint_servicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eDelegatedAdminConstraint_servicePrincipal})
+var sDeploymentConditionalField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentConditionalField, Members: &mDeploymentConditionalField, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentConditionalField})
+var sDeploymentConditionalField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentConditionalField_name})
+var sDeploymentConditionalField_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentConditionalField_value})
+var sDeploymentConditionalField_comparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparator", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentConditionalField_comparator})
+var sDeploymentData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentData, Members: &mDeploymentData, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentData})
+var sDeploymentData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_name})
+var sDeploymentData_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_id})
+var sDeploymentData_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_workloadName})
+var sDeploymentData_patternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_patternName})
+var sDeploymentData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentData_status})
+var sDeploymentData_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentData_createdAt})
+var sDeploymentData_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentData_modifiedAt})
+var sDeploymentData_specifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifications", ID: &i_DeploymentSpecifications, Members: &m_DeploymentSpecifications, Traits: &t15, Type: smithy.ShapeTypeMap, Ext: &eDeploymentData_specifications})
+var sDeploymentData_resourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceGroup", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_resourceGroup})
+var sDeploymentData_deletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentData_deletedAt})
+var sDeploymentData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eDeploymentData_tags})
+var sDeploymentData_deploymentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentData_deploymentArn})
+var sDeploymentDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentDataSummary, Members: &mDeploymentDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentDataSummary})
+var sDeploymentDataSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentDataSummary_name})
+var sDeploymentDataSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eDeploymentDataSummary_id})
+var sDeploymentDataSummary_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eDeploymentDataSummary_workloadName})
+var sDeploymentDataSummary_patternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eDeploymentDataSummary_patternName})
+var sDeploymentDataSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentDataSummary_status})
+var sDeploymentDataSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentDataSummary_createdAt})
+var sDeploymentDataSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentDataSummary_modifiedAt})
+var s_DeploymentDataSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentDataSummaryList, Members: &m_DeploymentDataSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentDataSummaryList})
+var s_DeploymentDataSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentDataSummary, Members: &mDeploymentDataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentDataSummaryList_member})
+var sDeploymentEventDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentEventDataSummary, Members: &mDeploymentEventDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentEventDataSummary})
+var sDeploymentEventDataSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentEventDataSummary_name})
+var sDeploymentEventDataSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentEventDataSummary_description})
+var sDeploymentEventDataSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentEventDataSummary_status})
+var sDeploymentEventDataSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentEventDataSummary_statusReason})
+var sDeploymentEventDataSummary_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeploymentEventDataSummary_timestamp})
+var sDeploymentEventDataSummary_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_DeploymentEventMetadata, Members: &m_DeploymentEventMetadata, Type: smithy.ShapeTypeMap, Ext: &eDeploymentEventDataSummary_metadata})
+var s_DeploymentEventDataSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentEventDataSummaryList, Members: &m_DeploymentEventDataSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentEventDataSummaryList})
+var s_DeploymentEventDataSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentEventDataSummary, Members: &mDeploymentEventDataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentEventDataSummaryList_member})
+var s_DeploymentEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentEventMetadata, Members: &m_DeploymentEventMetadata, Type: smithy.ShapeTypeMap, Ext: &e_DeploymentEventMetadata})
+var s_DeploymentEventMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DeploymentEventMetadataKey, Type: smithy.ShapeTypeString, Ext: &e_DeploymentEventMetadata_key})
+var s_DeploymentEventMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DeploymentEventMetadataValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentEventMetadata_value})
+var s_DeploymentEventMetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentEventMetadataKey, Type: smithy.ShapeTypeString, Ext: &e_DeploymentEventMetadataKey})
+var s_DeploymentEventMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentEventMetadataValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentEventMetadataValue})
+var sDeploymentFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentFilter, Members: &mDeploymentFilter, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentFilter})
+var sDeploymentFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iDeploymentFilterKey, Members: &mDeploymentFilterKey, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentFilter_name})
+var sDeploymentFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DeploymentFilterValues, Members: &m_DeploymentFilterValues, Type: smithy.ShapeTypeList, Ext: &eDeploymentFilter_values})
+var sDeploymentFilterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentFilterKey, Members: &mDeploymentFilterKey, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentFilterKey})
+var sDeploymentFilterKey_WORKLOAD_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKLOAD_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentFilterKey_WORKLOAD_NAME})
+var sDeploymentFilterKey_DEPLOYMENT_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentFilterKey_DEPLOYMENT_STATUS})
+var s_DeploymentFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentFilterList, Members: &m_DeploymentFilterList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentFilterList})
+var s_DeploymentFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentFilter, Members: &mDeploymentFilter, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentFilterList_member})
+var s_DeploymentFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentFilterValue})
+var s_DeploymentFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentFilterValues, Members: &m_DeploymentFilterValues, Type: smithy.ShapeTypeList, Ext: &e_DeploymentFilterValues})
+var s_DeploymentFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeploymentFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentFilterValues_member})
+var s_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &e_DeploymentId})
+var s_DeploymentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentName, Type: smithy.ShapeTypeString, Ext: &e_DeploymentName})
+var s_DeploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &e_DeploymentPatternName})
+var sDeploymentPatternVersionDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentPatternVersionDataSummary, Members: &mDeploymentPatternVersionDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentPatternVersionDataSummary})
+var sDeploymentPatternVersionDataSummary_deploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentPatternVersionDataSummary_deploymentPatternVersionName})
+var sDeploymentPatternVersionDataSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentPatternVersionDataSummary_description})
+var sDeploymentPatternVersionDataSummary_documentationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentationUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentPatternVersionDataSummary_documentationUrl})
+var sDeploymentPatternVersionDataSummary_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentPatternVersionDataSummary_workloadName})
+var sDeploymentPatternVersionDataSummary_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentPatternVersionDataSummary_deploymentPatternName})
+var s_DeploymentPatternVersionDataSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentPatternVersionDataSummaryList, Members: &m_DeploymentPatternVersionDataSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DeploymentPatternVersionDataSummaryList})
+var s_DeploymentPatternVersionDataSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentPatternVersionDataSummary, Members: &mDeploymentPatternVersionDataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentPatternVersionDataSummaryList_member})
+var sDeploymentPatternVersionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentPatternVersionFilter, Members: &mDeploymentPatternVersionFilter, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentPatternVersionFilter})
+var sDeploymentPatternVersionFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iDeploymentPatternVersionFilterKey, Members: &mDeploymentPatternVersionFilterKey, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentPatternVersionFilter_name})
+var sDeploymentPatternVersionFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DeploymentPatternVersionFilterValues, Members: &m_DeploymentPatternVersionFilterValues, Type: smithy.ShapeTypeList, Ext: &eDeploymentPatternVersionFilter_values})
+var sDeploymentPatternVersionFilterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentPatternVersionFilterKey, Members: &mDeploymentPatternVersionFilterKey, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentPatternVersionFilterKey})
+var sDeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_PATTERN_VERSION_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME})
+var s_DeploymentPatternVersionFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentPatternVersionFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentPatternVersionFilterValue})
+var s_DeploymentPatternVersionFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentPatternVersionFilterValues, Members: &m_DeploymentPatternVersionFilterValues, Type: smithy.ShapeTypeList, Ext: &e_DeploymentPatternVersionFilterValues})
+var s_DeploymentPatternVersionFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeploymentPatternVersionFilterValue, Type: smithy.ShapeTypeString, Ext: &e_DeploymentPatternVersionFilterValues_member})
+var s_DeploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentPatternVersionName, Type: smithy.ShapeTypeString, Ext: &e_DeploymentPatternVersionName})
+var s_DeploymentSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentSpecifications, Members: &m_DeploymentSpecifications, Traits: &t16, Type: smithy.ShapeTypeMap, Ext: &e_DeploymentSpecifications})
+var s_DeploymentSpecifications_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KeyString, Type: smithy.ShapeTypeString, Ext: &e_DeploymentSpecifications_key})
+var s_DeploymentSpecifications_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ValueString, Type: smithy.ShapeTypeString, Ext: &e_DeploymentSpecifications_value})
+var s_DeploymentSpecificationsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentSpecificationsData, Members: &m_DeploymentSpecificationsData, Type: smithy.ShapeTypeList, Ext: &e_DeploymentSpecificationsData})
+var s_DeploymentSpecificationsData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentSpecificationsField, Members: &mDeploymentSpecificationsField, Type: smithy.ShapeTypeStructure, Ext: &e_DeploymentSpecificationsData_member})
+var sDeploymentSpecificationsField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentSpecificationsField, Members: &mDeploymentSpecificationsField, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentSpecificationsField})
+var sDeploymentSpecificationsField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentSpecificationsField_name})
+var sDeploymentSpecificationsField_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentSpecificationsField_description})
+var sDeploymentSpecificationsField_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_AllowedValues, Members: &m_AllowedValues, Type: smithy.ShapeTypeList, Ext: &eDeploymentSpecificationsField_allowedValues})
+var sDeploymentSpecificationsField_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeploymentSpecificationsField_required})
+var sDeploymentSpecificationsField_conditionals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionals", ID: &i_SpecificationsConditionalData, Members: &m_SpecificationsConditionalData, Type: smithy.ShapeTypeList, Ext: &eDeploymentSpecificationsField_conditionals})
+var sDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeploymentStatus})
+var sDeploymentStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_COMPLETED})
+var sDeploymentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_CREATING})
+var sDeploymentStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_DELETE_IN_PROGRESS})
+var sDeploymentStatus_DELETE_INITIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_INITIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_DELETE_INITIATING})
+var sDeploymentStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_DELETE_FAILED})
+var sDeploymentStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_DELETED})
+var sDeploymentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_FAILED})
+var sDeploymentStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_IN_PROGRESS})
+var sDeploymentStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_VALIDATING})
+var sDeploymentStatus_UPDATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_UPDATE_IN_PROGRESS})
+var sDeploymentStatus_UPDATE_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_UPDATE_COMPLETED})
+var sDeploymentStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_UPDATE_FAILED})
+var sDeploymentStatus_UPDATE_ROLLBACK_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ROLLBACK_COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_UPDATE_ROLLBACK_COMPLETED})
+var sDeploymentStatus_UPDATE_ROLLBACK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ROLLBACK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeploymentStatus_UPDATE_ROLLBACK_FAILED})
+var sEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum, Ext: &eEventStatus})
+var sEventStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_CANCELED})
+var sEventStatus_CANCELING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_CANCELING})
+var sEventStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_COMPLETED})
+var sEventStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_CREATED})
+var sEventStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_FAILED})
+var sEventStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_IN_PROGRESS})
+var sEventStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_PENDING})
+var sEventStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventStatus_TIMED_OUT})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentPatternVersionFilter, Members: &mDeploymentPatternVersionFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_KeyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyString, Type: smithy.ShapeTypeString, Ext: &e_KeyString})
+var sManagementAccountConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagementAccountConstraint, Type: smithy.ShapeTypeStructure, Ext: &eManagementAccountConstraint})
+var s_MaxDeploymentEventResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxDeploymentEventResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxDeploymentEventResults})
+var s_MaxDeploymentResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxDeploymentResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxDeploymentResults})
+var s_MaxWorkloadDeploymentPatternResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxWorkloadDeploymentPatternResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxWorkloadDeploymentPatternResults})
+var s_MaxWorkloadResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxWorkloadResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxWorkloadResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sResourceLimitException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitException, Members: &mResourceLimitException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitException})
+var sResourceLimitException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceLimitException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_ServicePrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &e_ServicePrincipalType})
+var s_SpecificationsConditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpecificationsConditionalData, Members: &m_SpecificationsConditionalData, Type: smithy.ShapeTypeList, Ext: &e_SpecificationsConditionalData})
+var s_SpecificationsConditionalData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentConditionalField, Members: &mDeploymentConditionalField, Type: smithy.ShapeTypeStructure, Ext: &e_SpecificationsConditionalData_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_ValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueString, Type: smithy.ShapeTypeString, Ext: &e_ValueString})
+var sWorkloadData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadData, Members: &mWorkloadData, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadData})
+var sWorkloadData_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_workloadName})
+var sWorkloadData_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_displayName})
+var sWorkloadData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkloadStatus, Members: &mWorkloadStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadData_status})
+var sWorkloadData_accountConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountConstraints", ID: &i_AccountConstraintsList, Members: &m_AccountConstraintsList, Type: smithy.ShapeTypeList, Ext: &eWorkloadData_accountConstraints})
+var sWorkloadData_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_description})
+var sWorkloadData_documentationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentationUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_documentationUrl})
+var sWorkloadData_iconUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iconUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_iconUrl})
+var sWorkloadData_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadData_statusMessage})
+var sWorkloadDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadDataSummary, Members: &mWorkloadDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDataSummary})
+var sWorkloadDataSummary_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDataSummary_workloadName})
+var sWorkloadDataSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDataSummary_displayName})
+var sWorkloadDataSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkloadStatus, Members: &mWorkloadStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadDataSummary_status})
+var sWorkloadDataSummary_accountConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountConstraints", ID: &i_AccountConstraintsList, Members: &m_AccountConstraintsList, Type: smithy.ShapeTypeList, Ext: &eWorkloadDataSummary_accountConstraints})
+var s_WorkloadDataSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadDataSummaryList, Members: &m_WorkloadDataSummaryList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadDataSummaryList})
+var s_WorkloadDataSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadDataSummary, Members: &mWorkloadDataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkloadDataSummaryList_member})
+var sWorkloadDeploymentPatternData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadDeploymentPatternData, Members: &mWorkloadDeploymentPatternData, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternData})
+var sWorkloadDeploymentPatternData_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_workloadName})
+var sWorkloadDeploymentPatternData_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_deploymentPatternName})
+var sWorkloadDeploymentPatternData_workloadVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadVersionName", ID: &i_WorkloadVersionName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_workloadVersionName})
+var sWorkloadDeploymentPatternData_deploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersionName", ID: &i_DeploymentPatternVersionName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_deploymentPatternVersionName})
+var sWorkloadDeploymentPatternData_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_displayName})
+var sWorkloadDeploymentPatternData_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_description})
+var sWorkloadDeploymentPatternData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkloadDeploymentPatternStatus, Members: &mWorkloadDeploymentPatternStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadDeploymentPatternData_status})
+var sWorkloadDeploymentPatternData_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternData_statusMessage})
+var sWorkloadDeploymentPatternData_accountConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountConstraints", ID: &i_AccountConstraintsList, Members: &m_AccountConstraintsList, Type: smithy.ShapeTypeList, Ext: &eWorkloadDeploymentPatternData_accountConstraints})
+var sWorkloadDeploymentPatternData_specifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifications", ID: &i_DeploymentSpecificationsData, Members: &m_DeploymentSpecificationsData, Type: smithy.ShapeTypeList, Ext: &eWorkloadDeploymentPatternData_specifications})
+var sWorkloadDeploymentPatternDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadDeploymentPatternDataSummary, Members: &mWorkloadDeploymentPatternDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternDataSummary})
+var sWorkloadDeploymentPatternDataSummary_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_workloadName})
+var sWorkloadDeploymentPatternDataSummary_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_deploymentPatternName})
+var sWorkloadDeploymentPatternDataSummary_workloadVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadVersionName", ID: &i_WorkloadVersionName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_workloadVersionName})
+var sWorkloadDeploymentPatternDataSummary_deploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersionName", ID: &i_DeploymentPatternVersionName, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_deploymentPatternVersionName})
+var sWorkloadDeploymentPatternDataSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_displayName})
+var sWorkloadDeploymentPatternDataSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_description})
+var sWorkloadDeploymentPatternDataSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkloadDeploymentPatternStatus, Members: &mWorkloadDeploymentPatternStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadDeploymentPatternDataSummary_status})
+var sWorkloadDeploymentPatternDataSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadDeploymentPatternDataSummary_statusMessage})
+var sWorkloadDeploymentPatternDataSummary_accountConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountConstraints", ID: &i_AccountConstraintsList, Members: &m_AccountConstraintsList, Type: smithy.ShapeTypeList, Ext: &eWorkloadDeploymentPatternDataSummary_accountConstraints})
+var s_WorkloadDeploymentPatternDataSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadDeploymentPatternDataSummaryList, Members: &m_WorkloadDeploymentPatternDataSummaryList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadDeploymentPatternDataSummaryList})
+var s_WorkloadDeploymentPatternDataSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadDeploymentPatternDataSummary, Members: &mWorkloadDeploymentPatternDataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkloadDeploymentPatternDataSummaryList_member})
+var sWorkloadDeploymentPatternStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadDeploymentPatternStatus, Members: &mWorkloadDeploymentPatternStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadDeploymentPatternStatus})
+var sWorkloadDeploymentPatternStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternStatus_ACTIVE})
+var sWorkloadDeploymentPatternStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternStatus_INACTIVE})
+var sWorkloadDeploymentPatternStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternStatus_DISABLED})
+var sWorkloadDeploymentPatternStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadDeploymentPatternStatus_DELETED})
+var s_WorkloadName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &e_WorkloadName})
+var sWorkloadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadStatus, Members: &mWorkloadStatus, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadStatus})
+var sWorkloadStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadStatus_ACTIVE})
+var sWorkloadStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadStatus_INACTIVE})
+var sWorkloadStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadStatus_DISABLED})
+var sWorkloadStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadStatus_DELETED})
+var s_WorkloadVersionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadVersionName, Type: smithy.ShapeTypeString, Ext: &e_WorkloadVersionName})
+var sCreateDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentInput, Members: &mCreateDeploymentInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeploymentInput})
+var sCreateDeploymentInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentInput_workloadName})
+var sCreateDeploymentInput_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentInput_deploymentPatternName})
+var sCreateDeploymentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DeploymentName, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentInput_name})
+var sCreateDeploymentInput_specifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifications", ID: &i_DeploymentSpecifications, Members: &m_DeploymentSpecifications, Traits: &t15, Type: smithy.ShapeTypeMap, Ext: &eCreateDeploymentInput_specifications})
+var sCreateDeploymentInput_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDeploymentInput_dryRun})
+var sCreateDeploymentInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateDeploymentInput_tags})
+var sCreateDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentOutput, Members: &mCreateDeploymentOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeploymentOutput})
+var sCreateDeploymentOutput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eCreateDeploymentOutput_deploymentId})
+var sDeleteDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentInput, Members: &mDeleteDeploymentInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeploymentInput})
+var sDeleteDeploymentInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eDeleteDeploymentInput_deploymentId})
+var sDeleteDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentOutput, Members: &mDeleteDeploymentOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeploymentOutput})
+var sDeleteDeploymentOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteDeploymentOutput_status})
+var sDeleteDeploymentOutput_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteDeploymentOutput_statusReason})
+var sGetDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentInput, Members: &mGetDeploymentInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentInput})
+var sGetDeploymentInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentInput_deploymentId})
+var sGetDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentOutput, Members: &mGetDeploymentOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentOutput})
+var sGetDeploymentOutput_deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployment", ID: &iDeploymentData, Members: &mDeploymentData, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentOutput_deployment})
+var sGetDeploymentPatternVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentPatternVersionInput, Members: &mGetDeploymentPatternVersionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentPatternVersionInput})
+var sGetDeploymentPatternVersionInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentPatternVersionInput_workloadName})
+var sGetDeploymentPatternVersionInput_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentPatternVersionInput_deploymentPatternName})
+var sGetDeploymentPatternVersionInput_deploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersionName", ID: &i_DeploymentPatternVersionName, Type: smithy.ShapeTypeString, Ext: &eGetDeploymentPatternVersionInput_deploymentPatternVersionName})
+var sGetDeploymentPatternVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentPatternVersionOutput, Members: &mGetDeploymentPatternVersionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentPatternVersionOutput})
+var sGetDeploymentPatternVersionOutput_deploymentPatternVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersion", ID: &iDeploymentPatternVersionDataSummary, Members: &mDeploymentPatternVersionDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eGetDeploymentPatternVersionOutput_deploymentPatternVersion})
+var sGetWorkloadDeploymentPatternInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkloadDeploymentPatternInput, Members: &mGetWorkloadDeploymentPatternInput, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadDeploymentPatternInput})
+var sGetWorkloadDeploymentPatternInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eGetWorkloadDeploymentPatternInput_workloadName})
+var sGetWorkloadDeploymentPatternInput_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eGetWorkloadDeploymentPatternInput_deploymentPatternName})
+var sGetWorkloadDeploymentPatternOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkloadDeploymentPatternOutput, Members: &mGetWorkloadDeploymentPatternOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadDeploymentPatternOutput})
+var sGetWorkloadDeploymentPatternOutput_workloadDeploymentPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadDeploymentPattern", ID: &iWorkloadDeploymentPatternData, Members: &mWorkloadDeploymentPatternData, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadDeploymentPatternOutput_workloadDeploymentPattern})
+var sGetWorkloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkloadInput, Members: &mGetWorkloadInput, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadInput})
+var sGetWorkloadInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eGetWorkloadInput_workloadName})
+var sGetWorkloadOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkloadOutput, Members: &mGetWorkloadOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadOutput})
+var sGetWorkloadOutput_workload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workload", ID: &iWorkloadData, Members: &mWorkloadData, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkloadOutput_workload})
+var sListDeploymentEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentEventsInput, Members: &mListDeploymentEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentEventsInput})
+var sListDeploymentEventsInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eListDeploymentEventsInput_deploymentId})
+var sListDeploymentEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxDeploymentEventResults, Type: smithy.ShapeTypeInteger, Ext: &eListDeploymentEventsInput_maxResults})
+var sListDeploymentEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentEventsInput_nextToken})
+var sListDeploymentEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentEventsOutput, Members: &mListDeploymentEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentEventsOutput})
+var sListDeploymentEventsOutput_deploymentEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentEvents", ID: &i_DeploymentEventDataSummaryList, Members: &m_DeploymentEventDataSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDeploymentEventsOutput_deploymentEvents})
+var sListDeploymentEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentEventsOutput_nextToken})
+var sListDeploymentPatternVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentPatternVersionsInput, Members: &mListDeploymentPatternVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentPatternVersionsInput})
+var sListDeploymentPatternVersionsInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eListDeploymentPatternVersionsInput_workloadName})
+var sListDeploymentPatternVersionsInput_deploymentPatternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternName", ID: &i_DeploymentPatternName, Type: smithy.ShapeTypeString, Ext: &eListDeploymentPatternVersionsInput_deploymentPatternName})
+var sListDeploymentPatternVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxWorkloadResults, Type: smithy.ShapeTypeInteger, Ext: &eListDeploymentPatternVersionsInput_maxResults})
+var sListDeploymentPatternVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentPatternVersionsInput_nextToken})
+var sListDeploymentPatternVersionsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListDeploymentPatternVersionsInput_filters})
+var sListDeploymentPatternVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentPatternVersionsOutput, Members: &mListDeploymentPatternVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentPatternVersionsOutput})
+var sListDeploymentPatternVersionsOutput_deploymentPatternVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersions", ID: &i_DeploymentPatternVersionDataSummaryList, Members: &m_DeploymentPatternVersionDataSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDeploymentPatternVersionsOutput_deploymentPatternVersions})
+var sListDeploymentPatternVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentPatternVersionsOutput_nextToken})
+var sListDeploymentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsInput, Members: &mListDeploymentsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentsInput})
+var sListDeploymentsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_DeploymentFilterList, Members: &m_DeploymentFilterList, Type: smithy.ShapeTypeList, Ext: &eListDeploymentsInput_filters})
+var sListDeploymentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxDeploymentResults, Type: smithy.ShapeTypeInteger, Ext: &eListDeploymentsInput_maxResults})
+var sListDeploymentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentsInput_nextToken})
+var sListDeploymentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsOutput, Members: &mListDeploymentsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeploymentsOutput})
+var sListDeploymentsOutput_deployments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployments", ID: &i_DeploymentDataSummaryList, Members: &m_DeploymentDataSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDeploymentsOutput_deployments})
+var sListDeploymentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeploymentsOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sListWorkloadDeploymentPatternsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadDeploymentPatternsInput, Members: &mListWorkloadDeploymentPatternsInput, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadDeploymentPatternsInput})
+var sListWorkloadDeploymentPatternsInput_workloadName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadName", ID: &i_WorkloadName, Type: smithy.ShapeTypeString, Ext: &eListWorkloadDeploymentPatternsInput_workloadName})
+var sListWorkloadDeploymentPatternsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxWorkloadDeploymentPatternResults, Type: smithy.ShapeTypeInteger, Ext: &eListWorkloadDeploymentPatternsInput_maxResults})
+var sListWorkloadDeploymentPatternsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadDeploymentPatternsInput_nextToken})
+var sListWorkloadDeploymentPatternsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadDeploymentPatternsOutput, Members: &mListWorkloadDeploymentPatternsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadDeploymentPatternsOutput})
+var sListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadDeploymentPatterns", ID: &i_WorkloadDeploymentPatternDataSummaryList, Members: &m_WorkloadDeploymentPatternDataSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns})
+var sListWorkloadDeploymentPatternsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadDeploymentPatternsOutput_nextToken})
+var sListWorkloadsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadsInput, Members: &mListWorkloadsInput, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadsInput})
+var sListWorkloadsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxWorkloadResults, Type: smithy.ShapeTypeInteger, Ext: &eListWorkloadsInput_maxResults})
+var sListWorkloadsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsInput_nextToken})
+var sListWorkloadsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkloadsOutput, Members: &mListWorkloadsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListWorkloadsOutput})
+var sListWorkloadsOutput_workloads = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloads", ID: &i_WorkloadDataSummaryList, Members: &m_WorkloadDataSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWorkloadsOutput_workloads})
+var sListWorkloadsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkloadsOutput_nextToken})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t21, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentInput, Members: &mUpdateDeploymentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeploymentInput})
+var sUpdateDeploymentInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString, Ext: &eUpdateDeploymentInput_deploymentId})
+var sUpdateDeploymentInput_specifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specifications", ID: &i_DeploymentSpecifications, Members: &m_DeploymentSpecifications, Traits: &t15, Type: smithy.ShapeTypeMap, Ext: &eUpdateDeploymentInput_specifications})
+var sUpdateDeploymentInput_workloadVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workloadVersionName", ID: &i_WorkloadVersionName, Type: smithy.ShapeTypeString, Ext: &eUpdateDeploymentInput_workloadVersionName})
+var sUpdateDeploymentInput_deploymentPatternVersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPatternVersionName", ID: &i_DeploymentPatternVersionName, Type: smithy.ShapeTypeString, Ext: &eUpdateDeploymentInput_deploymentPatternVersionName})
+var sUpdateDeploymentInput_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDeploymentInput_dryRun})
+var sUpdateDeploymentInput_force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "force", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDeploymentInput_force})
+var sUpdateDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentOutput, Members: &mUpdateDeploymentOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeploymentOutput})
+var sUpdateDeploymentOutput_deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployment", ID: &iDeploymentDataSummary, Members: &mDeploymentDataSummary, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDeploymentOutput_deployment})
+
+var CreateDeployment = &sCreateDeployment
+
+var DeleteDeployment = &sDeleteDeployment
+
+var GetDeployment = &sGetDeployment
+
+var GetDeploymentPatternVersion = &sGetDeploymentPatternVersion
+
+var GetWorkload = &sGetWorkload
+
+var GetWorkloadDeploymentPattern = &sGetWorkloadDeploymentPattern
+
+var ListDeploymentEvents = &sListDeploymentEvents
+
+var ListDeploymentPatternVersions = &sListDeploymentPatternVersions
+
+var ListDeployments = &sListDeployments
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkloadDeploymentPatterns = &sListWorkloadDeploymentPatterns
+
+var ListWorkloads = &sListWorkloads
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDeployment = &sUpdateDeployment
+
+var _LaunchWizard = &s_LaunchWizard
+
+var AccountConstraint = &sAccountConstraint
+var AccountConstraint_managementAccount = &sAccountConstraint_managementAccount
+var AccountConstraint_delegatedAdmin = &sAccountConstraint_delegatedAdmin
+
+var _AccountConstraintsList = &s_AccountConstraintsList
+var _AccountConstraintsList_member = &s_AccountConstraintsList_member
+
+var _AllowedValues = &s_AllowedValues
+var _AllowedValues_member = &s_AllowedValues_member
+
+var DelegatedAdminConstraint = &sDelegatedAdminConstraint
+var DelegatedAdminConstraint_servicePrincipal = &sDelegatedAdminConstraint_servicePrincipal
+
+var DeploymentConditionalField = &sDeploymentConditionalField
+var DeploymentConditionalField_name = &sDeploymentConditionalField_name
+var DeploymentConditionalField_value = &sDeploymentConditionalField_value
+var DeploymentConditionalField_comparator = &sDeploymentConditionalField_comparator
+
+var DeploymentData = &sDeploymentData
+var DeploymentData_name = &sDeploymentData_name
+var DeploymentData_id = &sDeploymentData_id
+var DeploymentData_workloadName = &sDeploymentData_workloadName
+var DeploymentData_patternName = &sDeploymentData_patternName
+var DeploymentData_status = &sDeploymentData_status
+var DeploymentData_createdAt = &sDeploymentData_createdAt
+var DeploymentData_modifiedAt = &sDeploymentData_modifiedAt
+var DeploymentData_specifications = &sDeploymentData_specifications
+var DeploymentData_resourceGroup = &sDeploymentData_resourceGroup
+var DeploymentData_deletedAt = &sDeploymentData_deletedAt
+var DeploymentData_tags = &sDeploymentData_tags
+var DeploymentData_deploymentArn = &sDeploymentData_deploymentArn
+
+var DeploymentDataSummary = &sDeploymentDataSummary
+var DeploymentDataSummary_name = &sDeploymentDataSummary_name
+var DeploymentDataSummary_id = &sDeploymentDataSummary_id
+var DeploymentDataSummary_workloadName = &sDeploymentDataSummary_workloadName
+var DeploymentDataSummary_patternName = &sDeploymentDataSummary_patternName
+var DeploymentDataSummary_status = &sDeploymentDataSummary_status
+var DeploymentDataSummary_createdAt = &sDeploymentDataSummary_createdAt
+var DeploymentDataSummary_modifiedAt = &sDeploymentDataSummary_modifiedAt
+
+var _DeploymentDataSummaryList = &s_DeploymentDataSummaryList
+var _DeploymentDataSummaryList_member = &s_DeploymentDataSummaryList_member
+
+var DeploymentEventDataSummary = &sDeploymentEventDataSummary
+var DeploymentEventDataSummary_name = &sDeploymentEventDataSummary_name
+var DeploymentEventDataSummary_description = &sDeploymentEventDataSummary_description
+var DeploymentEventDataSummary_status = &sDeploymentEventDataSummary_status
+var DeploymentEventDataSummary_statusReason = &sDeploymentEventDataSummary_statusReason
+var DeploymentEventDataSummary_timestamp = &sDeploymentEventDataSummary_timestamp
+var DeploymentEventDataSummary_metadata = &sDeploymentEventDataSummary_metadata
+
+var _DeploymentEventDataSummaryList = &s_DeploymentEventDataSummaryList
+var _DeploymentEventDataSummaryList_member = &s_DeploymentEventDataSummaryList_member
+
+var _DeploymentEventMetadata = &s_DeploymentEventMetadata
+var _DeploymentEventMetadata_key = &s_DeploymentEventMetadata_key
+var _DeploymentEventMetadata_value = &s_DeploymentEventMetadata_value
+
+var _DeploymentEventMetadataKey = &s_DeploymentEventMetadataKey
+
+var _DeploymentEventMetadataValue = &s_DeploymentEventMetadataValue
+
+var DeploymentFilter = &sDeploymentFilter
+var DeploymentFilter_name = &sDeploymentFilter_name
+var DeploymentFilter_values = &sDeploymentFilter_values
+
+var DeploymentFilterKey = &sDeploymentFilterKey
+var DeploymentFilterKey_WORKLOAD_NAME = &sDeploymentFilterKey_WORKLOAD_NAME
+var DeploymentFilterKey_DEPLOYMENT_STATUS = &sDeploymentFilterKey_DEPLOYMENT_STATUS
+
+var _DeploymentFilterList = &s_DeploymentFilterList
+var _DeploymentFilterList_member = &s_DeploymentFilterList_member
+
+var _DeploymentFilterValue = &s_DeploymentFilterValue
+
+var _DeploymentFilterValues = &s_DeploymentFilterValues
+var _DeploymentFilterValues_member = &s_DeploymentFilterValues_member
+
+var _DeploymentId = &s_DeploymentId
+
+var _DeploymentName = &s_DeploymentName
+
+var _DeploymentPatternName = &s_DeploymentPatternName
+
+var DeploymentPatternVersionDataSummary = &sDeploymentPatternVersionDataSummary
+var DeploymentPatternVersionDataSummary_deploymentPatternVersionName = &sDeploymentPatternVersionDataSummary_deploymentPatternVersionName
+var DeploymentPatternVersionDataSummary_description = &sDeploymentPatternVersionDataSummary_description
+var DeploymentPatternVersionDataSummary_documentationUrl = &sDeploymentPatternVersionDataSummary_documentationUrl
+var DeploymentPatternVersionDataSummary_workloadName = &sDeploymentPatternVersionDataSummary_workloadName
+var DeploymentPatternVersionDataSummary_deploymentPatternName = &sDeploymentPatternVersionDataSummary_deploymentPatternName
+
+var _DeploymentPatternVersionDataSummaryList = &s_DeploymentPatternVersionDataSummaryList
+var _DeploymentPatternVersionDataSummaryList_member = &s_DeploymentPatternVersionDataSummaryList_member
+
+var DeploymentPatternVersionFilter = &sDeploymentPatternVersionFilter
+var DeploymentPatternVersionFilter_name = &sDeploymentPatternVersionFilter_name
+var DeploymentPatternVersionFilter_values = &sDeploymentPatternVersionFilter_values
+
+var DeploymentPatternVersionFilterKey = &sDeploymentPatternVersionFilterKey
+var DeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME = &sDeploymentPatternVersionFilterKey_DEPLOYMENT_PATTERN_VERSION_NAME
+
+var _DeploymentPatternVersionFilterValue = &s_DeploymentPatternVersionFilterValue
+
+var _DeploymentPatternVersionFilterValues = &s_DeploymentPatternVersionFilterValues
+var _DeploymentPatternVersionFilterValues_member = &s_DeploymentPatternVersionFilterValues_member
+
+var _DeploymentPatternVersionName = &s_DeploymentPatternVersionName
+
+var _DeploymentSpecifications = &s_DeploymentSpecifications
+var _DeploymentSpecifications_key = &s_DeploymentSpecifications_key
+var _DeploymentSpecifications_value = &s_DeploymentSpecifications_value
+
+var _DeploymentSpecificationsData = &s_DeploymentSpecificationsData
+var _DeploymentSpecificationsData_member = &s_DeploymentSpecificationsData_member
+
+var DeploymentSpecificationsField = &sDeploymentSpecificationsField
+var DeploymentSpecificationsField_name = &sDeploymentSpecificationsField_name
+var DeploymentSpecificationsField_description = &sDeploymentSpecificationsField_description
+var DeploymentSpecificationsField_allowedValues = &sDeploymentSpecificationsField_allowedValues
+var DeploymentSpecificationsField_required = &sDeploymentSpecificationsField_required
+var DeploymentSpecificationsField_conditionals = &sDeploymentSpecificationsField_conditionals
+
+var DeploymentStatus = &sDeploymentStatus
+var DeploymentStatus_COMPLETED = &sDeploymentStatus_COMPLETED
+var DeploymentStatus_CREATING = &sDeploymentStatus_CREATING
+var DeploymentStatus_DELETE_IN_PROGRESS = &sDeploymentStatus_DELETE_IN_PROGRESS
+var DeploymentStatus_DELETE_INITIATING = &sDeploymentStatus_DELETE_INITIATING
+var DeploymentStatus_DELETE_FAILED = &sDeploymentStatus_DELETE_FAILED
+var DeploymentStatus_DELETED = &sDeploymentStatus_DELETED
+var DeploymentStatus_FAILED = &sDeploymentStatus_FAILED
+var DeploymentStatus_IN_PROGRESS = &sDeploymentStatus_IN_PROGRESS
+var DeploymentStatus_VALIDATING = &sDeploymentStatus_VALIDATING
+var DeploymentStatus_UPDATE_IN_PROGRESS = &sDeploymentStatus_UPDATE_IN_PROGRESS
+var DeploymentStatus_UPDATE_COMPLETED = &sDeploymentStatus_UPDATE_COMPLETED
+var DeploymentStatus_UPDATE_FAILED = &sDeploymentStatus_UPDATE_FAILED
+var DeploymentStatus_UPDATE_ROLLBACK_COMPLETED = &sDeploymentStatus_UPDATE_ROLLBACK_COMPLETED
+var DeploymentStatus_UPDATE_ROLLBACK_FAILED = &sDeploymentStatus_UPDATE_ROLLBACK_FAILED
+
+var EventStatus = &sEventStatus
+var EventStatus_CANCELED = &sEventStatus_CANCELED
+var EventStatus_CANCELING = &sEventStatus_CANCELING
+var EventStatus_COMPLETED = &sEventStatus_COMPLETED
+var EventStatus_CREATED = &sEventStatus_CREATED
+var EventStatus_FAILED = &sEventStatus_FAILED
+var EventStatus_IN_PROGRESS = &sEventStatus_IN_PROGRESS
+var EventStatus_PENDING = &sEventStatus_PENDING
+var EventStatus_TIMED_OUT = &sEventStatus_TIMED_OUT
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _KeyString = &s_KeyString
+
+var ManagementAccountConstraint = &sManagementAccountConstraint
+
+var _MaxDeploymentEventResults = &s_MaxDeploymentEventResults
+
+var _MaxDeploymentResults = &s_MaxDeploymentResults
+
+var _MaxWorkloadDeploymentPatternResults = &s_MaxWorkloadDeploymentPatternResults
+
+var _MaxWorkloadResults = &s_MaxWorkloadResults
+
+var _NextToken = &s_NextToken
+
+var ResourceLimitException = &sResourceLimitException
+var ResourceLimitException_message = &sResourceLimitException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ServicePrincipalType = &s_ServicePrincipalType
+
+var _SpecificationsConditionalData = &s_SpecificationsConditionalData
+var _SpecificationsConditionalData_member = &s_SpecificationsConditionalData_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValueString = &s_ValueString
+
+var WorkloadData = &sWorkloadData
+var WorkloadData_workloadName = &sWorkloadData_workloadName
+var WorkloadData_displayName = &sWorkloadData_displayName
+var WorkloadData_status = &sWorkloadData_status
+var WorkloadData_accountConstraints = &sWorkloadData_accountConstraints
+var WorkloadData_description = &sWorkloadData_description
+var WorkloadData_documentationUrl = &sWorkloadData_documentationUrl
+var WorkloadData_iconUrl = &sWorkloadData_iconUrl
+var WorkloadData_statusMessage = &sWorkloadData_statusMessage
+
+var WorkloadDataSummary = &sWorkloadDataSummary
+var WorkloadDataSummary_workloadName = &sWorkloadDataSummary_workloadName
+var WorkloadDataSummary_displayName = &sWorkloadDataSummary_displayName
+var WorkloadDataSummary_status = &sWorkloadDataSummary_status
+var WorkloadDataSummary_accountConstraints = &sWorkloadDataSummary_accountConstraints
+
+var _WorkloadDataSummaryList = &s_WorkloadDataSummaryList
+var _WorkloadDataSummaryList_member = &s_WorkloadDataSummaryList_member
+
+var WorkloadDeploymentPatternData = &sWorkloadDeploymentPatternData
+var WorkloadDeploymentPatternData_workloadName = &sWorkloadDeploymentPatternData_workloadName
+var WorkloadDeploymentPatternData_deploymentPatternName = &sWorkloadDeploymentPatternData_deploymentPatternName
+var WorkloadDeploymentPatternData_workloadVersionName = &sWorkloadDeploymentPatternData_workloadVersionName
+var WorkloadDeploymentPatternData_deploymentPatternVersionName = &sWorkloadDeploymentPatternData_deploymentPatternVersionName
+var WorkloadDeploymentPatternData_displayName = &sWorkloadDeploymentPatternData_displayName
+var WorkloadDeploymentPatternData_description = &sWorkloadDeploymentPatternData_description
+var WorkloadDeploymentPatternData_status = &sWorkloadDeploymentPatternData_status
+var WorkloadDeploymentPatternData_statusMessage = &sWorkloadDeploymentPatternData_statusMessage
+var WorkloadDeploymentPatternData_accountConstraints = &sWorkloadDeploymentPatternData_accountConstraints
+var WorkloadDeploymentPatternData_specifications = &sWorkloadDeploymentPatternData_specifications
+
+var WorkloadDeploymentPatternDataSummary = &sWorkloadDeploymentPatternDataSummary
+var WorkloadDeploymentPatternDataSummary_workloadName = &sWorkloadDeploymentPatternDataSummary_workloadName
+var WorkloadDeploymentPatternDataSummary_deploymentPatternName = &sWorkloadDeploymentPatternDataSummary_deploymentPatternName
+var WorkloadDeploymentPatternDataSummary_workloadVersionName = &sWorkloadDeploymentPatternDataSummary_workloadVersionName
+var WorkloadDeploymentPatternDataSummary_deploymentPatternVersionName = &sWorkloadDeploymentPatternDataSummary_deploymentPatternVersionName
+var WorkloadDeploymentPatternDataSummary_displayName = &sWorkloadDeploymentPatternDataSummary_displayName
+var WorkloadDeploymentPatternDataSummary_description = &sWorkloadDeploymentPatternDataSummary_description
+var WorkloadDeploymentPatternDataSummary_status = &sWorkloadDeploymentPatternDataSummary_status
+var WorkloadDeploymentPatternDataSummary_statusMessage = &sWorkloadDeploymentPatternDataSummary_statusMessage
+var WorkloadDeploymentPatternDataSummary_accountConstraints = &sWorkloadDeploymentPatternDataSummary_accountConstraints
+
+var _WorkloadDeploymentPatternDataSummaryList = &s_WorkloadDeploymentPatternDataSummaryList
+var _WorkloadDeploymentPatternDataSummaryList_member = &s_WorkloadDeploymentPatternDataSummaryList_member
+
+var WorkloadDeploymentPatternStatus = &sWorkloadDeploymentPatternStatus
+var WorkloadDeploymentPatternStatus_ACTIVE = &sWorkloadDeploymentPatternStatus_ACTIVE
+var WorkloadDeploymentPatternStatus_INACTIVE = &sWorkloadDeploymentPatternStatus_INACTIVE
+var WorkloadDeploymentPatternStatus_DISABLED = &sWorkloadDeploymentPatternStatus_DISABLED
+var WorkloadDeploymentPatternStatus_DELETED = &sWorkloadDeploymentPatternStatus_DELETED
+
+var _WorkloadName = &s_WorkloadName
+
+var WorkloadStatus = &sWorkloadStatus
+var WorkloadStatus_ACTIVE = &sWorkloadStatus_ACTIVE
+var WorkloadStatus_INACTIVE = &sWorkloadStatus_INACTIVE
+var WorkloadStatus_DISABLED = &sWorkloadStatus_DISABLED
+var WorkloadStatus_DELETED = &sWorkloadStatus_DELETED
+
+var _WorkloadVersionName = &s_WorkloadVersionName
+
+var CreateDeploymentInput = &sCreateDeploymentInput
+var CreateDeploymentInput_workloadName = &sCreateDeploymentInput_workloadName
+var CreateDeploymentInput_deploymentPatternName = &sCreateDeploymentInput_deploymentPatternName
+var CreateDeploymentInput_name = &sCreateDeploymentInput_name
+var CreateDeploymentInput_specifications = &sCreateDeploymentInput_specifications
+var CreateDeploymentInput_dryRun = &sCreateDeploymentInput_dryRun
+var CreateDeploymentInput_tags = &sCreateDeploymentInput_tags
+
+var CreateDeploymentOutput = &sCreateDeploymentOutput
+var CreateDeploymentOutput_deploymentId = &sCreateDeploymentOutput_deploymentId
+
+var DeleteDeploymentInput = &sDeleteDeploymentInput
+var DeleteDeploymentInput_deploymentId = &sDeleteDeploymentInput_deploymentId
+
+var DeleteDeploymentOutput = &sDeleteDeploymentOutput
+var DeleteDeploymentOutput_status = &sDeleteDeploymentOutput_status
+var DeleteDeploymentOutput_statusReason = &sDeleteDeploymentOutput_statusReason
+
+var GetDeploymentInput = &sGetDeploymentInput
+var GetDeploymentInput_deploymentId = &sGetDeploymentInput_deploymentId
+
+var GetDeploymentOutput = &sGetDeploymentOutput
+var GetDeploymentOutput_deployment = &sGetDeploymentOutput_deployment
+
+var GetDeploymentPatternVersionInput = &sGetDeploymentPatternVersionInput
+var GetDeploymentPatternVersionInput_workloadName = &sGetDeploymentPatternVersionInput_workloadName
+var GetDeploymentPatternVersionInput_deploymentPatternName = &sGetDeploymentPatternVersionInput_deploymentPatternName
+var GetDeploymentPatternVersionInput_deploymentPatternVersionName = &sGetDeploymentPatternVersionInput_deploymentPatternVersionName
+
+var GetDeploymentPatternVersionOutput = &sGetDeploymentPatternVersionOutput
+var GetDeploymentPatternVersionOutput_deploymentPatternVersion = &sGetDeploymentPatternVersionOutput_deploymentPatternVersion
+
+var GetWorkloadDeploymentPatternInput = &sGetWorkloadDeploymentPatternInput
+var GetWorkloadDeploymentPatternInput_workloadName = &sGetWorkloadDeploymentPatternInput_workloadName
+var GetWorkloadDeploymentPatternInput_deploymentPatternName = &sGetWorkloadDeploymentPatternInput_deploymentPatternName
+
+var GetWorkloadDeploymentPatternOutput = &sGetWorkloadDeploymentPatternOutput
+var GetWorkloadDeploymentPatternOutput_workloadDeploymentPattern = &sGetWorkloadDeploymentPatternOutput_workloadDeploymentPattern
+
+var GetWorkloadInput = &sGetWorkloadInput
+var GetWorkloadInput_workloadName = &sGetWorkloadInput_workloadName
+
+var GetWorkloadOutput = &sGetWorkloadOutput
+var GetWorkloadOutput_workload = &sGetWorkloadOutput_workload
+
+var ListDeploymentEventsInput = &sListDeploymentEventsInput
+var ListDeploymentEventsInput_deploymentId = &sListDeploymentEventsInput_deploymentId
+var ListDeploymentEventsInput_maxResults = &sListDeploymentEventsInput_maxResults
+var ListDeploymentEventsInput_nextToken = &sListDeploymentEventsInput_nextToken
+
+var ListDeploymentEventsOutput = &sListDeploymentEventsOutput
+var ListDeploymentEventsOutput_deploymentEvents = &sListDeploymentEventsOutput_deploymentEvents
+var ListDeploymentEventsOutput_nextToken = &sListDeploymentEventsOutput_nextToken
+
+var ListDeploymentPatternVersionsInput = &sListDeploymentPatternVersionsInput
+var ListDeploymentPatternVersionsInput_workloadName = &sListDeploymentPatternVersionsInput_workloadName
+var ListDeploymentPatternVersionsInput_deploymentPatternName = &sListDeploymentPatternVersionsInput_deploymentPatternName
+var ListDeploymentPatternVersionsInput_maxResults = &sListDeploymentPatternVersionsInput_maxResults
+var ListDeploymentPatternVersionsInput_nextToken = &sListDeploymentPatternVersionsInput_nextToken
+var ListDeploymentPatternVersionsInput_filters = &sListDeploymentPatternVersionsInput_filters
+
+var ListDeploymentPatternVersionsOutput = &sListDeploymentPatternVersionsOutput
+var ListDeploymentPatternVersionsOutput_deploymentPatternVersions = &sListDeploymentPatternVersionsOutput_deploymentPatternVersions
+var ListDeploymentPatternVersionsOutput_nextToken = &sListDeploymentPatternVersionsOutput_nextToken
+
+var ListDeploymentsInput = &sListDeploymentsInput
+var ListDeploymentsInput_filters = &sListDeploymentsInput_filters
+var ListDeploymentsInput_maxResults = &sListDeploymentsInput_maxResults
+var ListDeploymentsInput_nextToken = &sListDeploymentsInput_nextToken
+
+var ListDeploymentsOutput = &sListDeploymentsOutput
+var ListDeploymentsOutput_deployments = &sListDeploymentsOutput_deployments
+var ListDeploymentsOutput_nextToken = &sListDeploymentsOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var ListWorkloadDeploymentPatternsInput = &sListWorkloadDeploymentPatternsInput
+var ListWorkloadDeploymentPatternsInput_workloadName = &sListWorkloadDeploymentPatternsInput_workloadName
+var ListWorkloadDeploymentPatternsInput_maxResults = &sListWorkloadDeploymentPatternsInput_maxResults
+var ListWorkloadDeploymentPatternsInput_nextToken = &sListWorkloadDeploymentPatternsInput_nextToken
+
+var ListWorkloadDeploymentPatternsOutput = &sListWorkloadDeploymentPatternsOutput
+var ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns = &sListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns
+var ListWorkloadDeploymentPatternsOutput_nextToken = &sListWorkloadDeploymentPatternsOutput_nextToken
+
+var ListWorkloadsInput = &sListWorkloadsInput
+var ListWorkloadsInput_maxResults = &sListWorkloadsInput_maxResults
+var ListWorkloadsInput_nextToken = &sListWorkloadsInput_nextToken
+
+var ListWorkloadsOutput = &sListWorkloadsOutput
+var ListWorkloadsOutput_workloads = &sListWorkloadsOutput_workloads
+var ListWorkloadsOutput_nextToken = &sListWorkloadsOutput_nextToken
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateDeploymentInput = &sUpdateDeploymentInput
+var UpdateDeploymentInput_deploymentId = &sUpdateDeploymentInput_deploymentId
+var UpdateDeploymentInput_specifications = &sUpdateDeploymentInput_specifications
+var UpdateDeploymentInput_workloadVersionName = &sUpdateDeploymentInput_workloadVersionName
+var UpdateDeploymentInput_deploymentPatternVersionName = &sUpdateDeploymentInput_deploymentPatternVersionName
+var UpdateDeploymentInput_dryRun = &sUpdateDeploymentInput_dryRun
+var UpdateDeploymentInput_force = &sUpdateDeploymentInput_force
+
+var UpdateDeploymentOutput = &sUpdateDeploymentOutput
+var UpdateDeploymentOutput_deployment = &sUpdateDeploymentOutput_deployment
+
+var LaunchWizard = &smithy.ServiceSchema{Schema: &s_LaunchWizard, Version: "2018-05-10"}

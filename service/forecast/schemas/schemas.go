@@ -4,4469 +4,4300 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAutoPredictor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateAutoPredictor",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDatasetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDatasetImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateExplainability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainability",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateExplainabilityExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainabilityExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateForecastExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecastExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateMonitor",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePredictor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictor",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePredictorBacktestExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictorBacktestExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWhatIfAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWhatIfForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWhatIfForecastExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecastExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDatasetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDatasetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDatasetImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDatasetImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExplainability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteExplainability",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExplainabilityExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteExplainabilityExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteForecastExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteForecastExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteMonitor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePredictor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeletePredictor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePredictorBacktestExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeletePredictorBacktestExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourceTree = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteResourceTree",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWhatIfAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWhatIfForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWhatIfForecastExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfForecastExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAutoPredictor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeAutoPredictor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDatasetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDatasetImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeExplainability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainability",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeExplainabilityExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainabilityExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeForecastExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecastExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeMonitor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePredictor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePredictorBacktestExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictorBacktestExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWhatIfAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWhatIfForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWhatIfForecastExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecastExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccuracyMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "GetAccuracyMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatasetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatasetImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetImportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExplainabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilities",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExplainabilityExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilityExports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListForecastExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecastExportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListForecasts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecasts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMonitorEvaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitorEvaluations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMonitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPredictorBacktestExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictorBacktestExportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPredictors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWhatIfAnalyses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfAnalyses",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWhatIfForecastExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecastExports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWhatIfForecasts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecasts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResumeResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ResumeResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "StopResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDatasetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UpdateDatasetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AmazonForecast",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonForecast = smithy.NewServiceSchema(_AmazonForecast, "2018-06-26")
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Action",
-}, smithy.ShapeTypeStructure, 3)
-var Action_AttributeName *smithy.Schema
-
-var Action_Operation *smithy.Schema
-
-var Action_Value *smithy.Schema
-
-var AdditionalDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AdditionalDataset",
-}, smithy.ShapeTypeStructure, 2)
-var AdditionalDataset_Name *smithy.Schema
-
-var AdditionalDataset_Configuration *smithy.Schema
-
-var _AdditionalDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AdditionalDatasets",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalDatasets_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _ArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ArnList",
-}, smithy.ShapeTypeList, 1)
-var _ArnList_member *smithy.Schema
-
-var AttributeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AttributeConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeConfig_AttributeName *smithy.Schema
-
-var AttributeConfig_Transformations *smithy.Schema
-
-var _AttributeConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AttributeConfigs",
-}, smithy.ShapeTypeList, 1)
-var _AttributeConfigs_member *smithy.Schema
-
-var AttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AttributeType",
-}, smithy.ShapeTypeEnum, 5)
-var AttributeType_STRING *smithy.Schema
-
-var AttributeType_INTEGER *smithy.Schema
-
-var AttributeType_FLOAT *smithy.Schema
-
-var AttributeType_TIMESTAMP *smithy.Schema
-
-var AttributeType_GEOLOCATION *smithy.Schema
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var AutoMLOverrideStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "AutoMLOverrideStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var AutoMLOverrideStrategy_LatencyOptimized *smithy.Schema
-
-var AutoMLOverrideStrategy_AccuracyOptimized *smithy.Schema
-
-var Baseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Baseline",
-}, smithy.ShapeTypeStructure, 1)
-var Baseline_PredictorBaseline *smithy.Schema
-
-var BaselineMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "BaselineMetric",
-}, smithy.ShapeTypeStructure, 2)
-var BaselineMetric_Name *smithy.Schema
-
-var BaselineMetric_Value *smithy.Schema
-
-var _BaselineMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "BaselineMetrics",
-}, smithy.ShapeTypeList, 1)
-var _BaselineMetrics_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CategoricalParameterRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CategoricalParameterRange",
-}, smithy.ShapeTypeStructure, 2)
-var CategoricalParameterRange_Name *smithy.Schema
-
-var CategoricalParameterRange_Values *smithy.Schema
-
-var _CategoricalParameterRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CategoricalParameterRanges",
-}, smithy.ShapeTypeList, 1)
-var _CategoricalParameterRanges_member *smithy.Schema
-
-var Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Condition",
-}, smithy.ShapeTypeEnum, 4)
-var Condition_EQUALS *smithy.Schema
-
-var Condition_NOT_EQUALS *smithy.Schema
-
-var Condition_LESS_THAN *smithy.Schema
-
-var Condition_GREATER_THAN *smithy.Schema
-
-var _Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Configuration",
-}, smithy.ShapeTypeMap, 2)
-var _Configuration_key *smithy.Schema
-
-var _Configuration_value *smithy.Schema
-
-var ContinuousParameterRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ContinuousParameterRange",
-}, smithy.ShapeTypeStructure, 4)
-var ContinuousParameterRange_Name *smithy.Schema
-
-var ContinuousParameterRange_MaxValue *smithy.Schema
-
-var ContinuousParameterRange_MinValue *smithy.Schema
-
-var ContinuousParameterRange_ScalingType *smithy.Schema
-
-var _ContinuousParameterRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ContinuousParameterRanges",
-}, smithy.ShapeTypeList, 1)
-var _ContinuousParameterRanges_member *smithy.Schema
-
-var DataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DataConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DataConfig_DatasetGroupArn *smithy.Schema
-
-var DataConfig_AttributeConfigs *smithy.Schema
-
-var DataConfig_AdditionalDatasets *smithy.Schema
-
-var DataDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DataDestination",
-}, smithy.ShapeTypeStructure, 1)
-var DataDestination_S3Config *smithy.Schema
-
-var _DatasetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetGroups",
-}, smithy.ShapeTypeList, 1)
-var _DatasetGroups_member *smithy.Schema
-
-var DatasetGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetGroupSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DatasetGroupSummary_DatasetGroupArn *smithy.Schema
-
-var DatasetGroupSummary_DatasetGroupName *smithy.Schema
-
-var DatasetGroupSummary_CreationTime *smithy.Schema
-
-var DatasetGroupSummary_LastModificationTime *smithy.Schema
-
-var _DatasetImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetImportJobs",
-}, smithy.ShapeTypeList, 1)
-var _DatasetImportJobs_member *smithy.Schema
-
-var DatasetImportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetImportJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var DatasetImportJobSummary_DatasetImportJobArn *smithy.Schema
-
-var DatasetImportJobSummary_DatasetImportJobName *smithy.Schema
-
-var DatasetImportJobSummary_DataSource *smithy.Schema
-
-var DatasetImportJobSummary_Status *smithy.Schema
-
-var DatasetImportJobSummary_Message *smithy.Schema
-
-var DatasetImportJobSummary_CreationTime *smithy.Schema
-
-var DatasetImportJobSummary_LastModificationTime *smithy.Schema
-
-var DatasetImportJobSummary_ImportMode *smithy.Schema
-
-var _Datasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Datasets",
-}, smithy.ShapeTypeList, 1)
-var _Datasets_member *smithy.Schema
-
-var DatasetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DatasetSummary_DatasetArn *smithy.Schema
-
-var DatasetSummary_DatasetName *smithy.Schema
-
-var DatasetSummary_DatasetType *smithy.Schema
-
-var DatasetSummary_Domain *smithy.Schema
-
-var DatasetSummary_CreationTime *smithy.Schema
-
-var DatasetSummary_LastModificationTime *smithy.Schema
-
-var DatasetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DatasetType",
-}, smithy.ShapeTypeEnum, 3)
-var DatasetType_TARGET_TIME_SERIES *smithy.Schema
-
-var DatasetType_RELATED_TIME_SERIES *smithy.Schema
-
-var DatasetType_ITEM_METADATA *smithy.Schema
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 1)
-var DataSource_S3Config *smithy.Schema
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeEnum, 7)
-var DayOfWeek_MONDAY *smithy.Schema
-
-var DayOfWeek_TUESDAY *smithy.Schema
-
-var DayOfWeek_WEDNESDAY *smithy.Schema
-
-var DayOfWeek_THURSDAY *smithy.Schema
-
-var DayOfWeek_FRIDAY *smithy.Schema
-
-var DayOfWeek_SATURDAY *smithy.Schema
-
-var DayOfWeek_SUNDAY *smithy.Schema
-
-var _Detail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Detail",
-}, smithy.ShapeTypeString, 0)
-
-var Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Domain",
-}, smithy.ShapeTypeEnum, 7)
-var Domain_RETAIL *smithy.Schema
-
-var Domain_CUSTOM *smithy.Schema
-
-var Domain_INVENTORY_PLANNING *smithy.Schema
-
-var Domain_EC2_CAPACITY *smithy.Schema
-
-var Domain_WORK_FORCE *smithy.Schema
-
-var Domain_WEB_TRAFFIC *smithy.Schema
-
-var Domain_METRICS *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var EncryptionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "EncryptionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfig_RoleArn *smithy.Schema
-
-var EncryptionConfig_KMSKeyArn *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ErrorMetric",
-}, smithy.ShapeTypeStructure, 5)
-var ErrorMetric_ForecastType *smithy.Schema
-
-var ErrorMetric_WAPE *smithy.Schema
-
-var ErrorMetric_RMSE *smithy.Schema
-
-var ErrorMetric_MASE *smithy.Schema
-
-var ErrorMetric_MAPE *smithy.Schema
-
-var _ErrorMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ErrorMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ErrorMetrics_member *smithy.Schema
-
-var EvaluationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "EvaluationParameters",
-}, smithy.ShapeTypeStructure, 2)
-var EvaluationParameters_NumberOfBacktestWindows *smithy.Schema
-
-var EvaluationParameters_BackTestWindowOffset *smithy.Schema
-
-var EvaluationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "EvaluationResult",
-}, smithy.ShapeTypeStructure, 2)
-var EvaluationResult_AlgorithmArn *smithy.Schema
-
-var EvaluationResult_TestWindows *smithy.Schema
-
-var _EvaluationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "EvaluationState",
-}, smithy.ShapeTypeString, 0)
-
-var EvaluationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "EvaluationType",
-}, smithy.ShapeTypeEnum, 2)
-var EvaluationType_SUMMARY *smithy.Schema
-
-var EvaluationType_COMPUTED *smithy.Schema
-
-var _Explainabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Explainabilities",
-}, smithy.ShapeTypeList, 1)
-var _Explainabilities_member *smithy.Schema
-
-var ExplainabilityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ExplainabilityConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ExplainabilityConfig_TimeSeriesGranularity *smithy.Schema
-
-var ExplainabilityConfig_TimePointGranularity *smithy.Schema
-
-var _ExplainabilityExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ExplainabilityExports",
-}, smithy.ShapeTypeList, 1)
-var _ExplainabilityExports_member *smithy.Schema
-
-var ExplainabilityExportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ExplainabilityExportSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ExplainabilityExportSummary_ExplainabilityExportArn *smithy.Schema
-
-var ExplainabilityExportSummary_ExplainabilityExportName *smithy.Schema
-
-var ExplainabilityExportSummary_Destination *smithy.Schema
-
-var ExplainabilityExportSummary_Status *smithy.Schema
-
-var ExplainabilityExportSummary_Message *smithy.Schema
-
-var ExplainabilityExportSummary_CreationTime *smithy.Schema
-
-var ExplainabilityExportSummary_LastModificationTime *smithy.Schema
-
-var ExplainabilityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ExplainabilityInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ExplainabilityInfo_ExplainabilityArn *smithy.Schema
-
-var ExplainabilityInfo_Status *smithy.Schema
-
-var ExplainabilitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ExplainabilitySummary",
-}, smithy.ShapeTypeStructure, 8)
-var ExplainabilitySummary_ExplainabilityArn *smithy.Schema
-
-var ExplainabilitySummary_ExplainabilityName *smithy.Schema
-
-var ExplainabilitySummary_ResourceArn *smithy.Schema
-
-var ExplainabilitySummary_ExplainabilityConfig *smithy.Schema
-
-var ExplainabilitySummary_Status *smithy.Schema
-
-var ExplainabilitySummary_Message *smithy.Schema
-
-var ExplainabilitySummary_CreationTime *smithy.Schema
-
-var ExplainabilitySummary_LastModificationTime *smithy.Schema
-
-var Featurization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Featurization",
-}, smithy.ShapeTypeStructure, 2)
-var Featurization_AttributeName *smithy.Schema
-
-var Featurization_FeaturizationPipeline *smithy.Schema
-
-var FeaturizationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FeaturizationConfig",
-}, smithy.ShapeTypeStructure, 3)
-var FeaturizationConfig_ForecastFrequency *smithy.Schema
-
-var FeaturizationConfig_ForecastDimensions *smithy.Schema
-
-var FeaturizationConfig_Featurizations *smithy.Schema
-
-var FeaturizationMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FeaturizationMethod",
-}, smithy.ShapeTypeStructure, 2)
-var FeaturizationMethod_FeaturizationMethodName *smithy.Schema
-
-var FeaturizationMethod_FeaturizationMethodParameters *smithy.Schema
-
-var FeaturizationMethodName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FeaturizationMethodName",
-}, smithy.ShapeTypeEnum, 1)
-var FeaturizationMethodName_filling *smithy.Schema
-
-var _FeaturizationMethodParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FeaturizationMethodParameters",
-}, smithy.ShapeTypeMap, 2)
-var _FeaturizationMethodParameters_key *smithy.Schema
-
-var _FeaturizationMethodParameters_value *smithy.Schema
-
-var _FeaturizationPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FeaturizationPipeline",
-}, smithy.ShapeTypeList, 1)
-var _FeaturizationPipeline_member *smithy.Schema
-
-var _Featurizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Featurizations",
-}, smithy.ShapeTypeList, 1)
-var _Featurizations_member *smithy.Schema
-
-var _FieldStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FieldStatistics",
-}, smithy.ShapeTypeMap, 2)
-var _FieldStatistics_key *smithy.Schema
-
-var _FieldStatistics_value *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_Key *smithy.Schema
-
-var Filter_Value *smithy.Schema
-
-var Filter_Condition *smithy.Schema
-
-var FilterConditionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "FilterConditionString",
-}, smithy.ShapeTypeEnum, 2)
-var FilterConditionString_IS *smithy.Schema
-
-var FilterConditionString_IS_NOT *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var _ForecastDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastDimensions",
-}, smithy.ShapeTypeList, 1)
-var _ForecastDimensions_member *smithy.Schema
-
-var _ForecastExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastExportJobs",
-}, smithy.ShapeTypeList, 1)
-var _ForecastExportJobs_member *smithy.Schema
-
-var ForecastExportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastExportJobSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ForecastExportJobSummary_ForecastExportJobArn *smithy.Schema
-
-var ForecastExportJobSummary_ForecastExportJobName *smithy.Schema
-
-var ForecastExportJobSummary_Destination *smithy.Schema
-
-var ForecastExportJobSummary_Status *smithy.Schema
-
-var ForecastExportJobSummary_Message *smithy.Schema
-
-var ForecastExportJobSummary_CreationTime *smithy.Schema
-
-var ForecastExportJobSummary_LastModificationTime *smithy.Schema
-
-var _Forecasts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Forecasts",
-}, smithy.ShapeTypeList, 1)
-var _Forecasts_member *smithy.Schema
-
-var ForecastSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ForecastSummary_ForecastArn *smithy.Schema
-
-var ForecastSummary_ForecastName *smithy.Schema
-
-var ForecastSummary_PredictorArn *smithy.Schema
-
-var ForecastSummary_CreatedUsingAutoPredictor *smithy.Schema
-
-var ForecastSummary_DatasetGroupArn *smithy.Schema
-
-var ForecastSummary_Status *smithy.Schema
-
-var ForecastSummary_Message *smithy.Schema
-
-var ForecastSummary_CreationTime *smithy.Schema
-
-var ForecastSummary_LastModificationTime *smithy.Schema
-
-var _ForecastType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastType",
-}, smithy.ShapeTypeString, 0)
-
-var _ForecastTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ForecastTypes",
-}, smithy.ShapeTypeList, 1)
-var _ForecastTypes_member *smithy.Schema
-
-var _Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Format",
-}, smithy.ShapeTypeString, 0)
-
-var _Frequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Frequency",
-}, smithy.ShapeTypeString, 0)
-
-var _GeolocationFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "GeolocationFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _Hour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Hour",
-}, smithy.ShapeTypeInteger, 0)
-
-var HyperParameterTuningJobConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "HyperParameterTuningJobConfig",
-}, smithy.ShapeTypeStructure, 1)
-var HyperParameterTuningJobConfig_ParameterRanges *smithy.Schema
-
-var ImportMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ImportMode",
-}, smithy.ShapeTypeEnum, 2)
-var ImportMode_FULL *smithy.Schema
-
-var ImportMode_INCREMENTAL *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_DatasetGroupArn *smithy.Schema
-
-var InputDataConfig_SupplementaryFeatures *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var IntegerParameterRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "IntegerParameterRange",
-}, smithy.ShapeTypeStructure, 4)
-var IntegerParameterRange_Name *smithy.Schema
-
-var IntegerParameterRange_MaxValue *smithy.Schema
-
-var IntegerParameterRange_MinValue *smithy.Schema
-
-var IntegerParameterRange_ScalingType *smithy.Schema
-
-var _IntegerParameterRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "IntegerParameterRanges",
-}, smithy.ShapeTypeList, 1)
-var _IntegerParameterRanges_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var _KMSKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "KMSKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var LimitExceededException_Message *smithy.Schema
-
-var _LocalDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "LocalDateTime",
-}, smithy.ShapeTypeString, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _LongArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "LongArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LongArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "LongArnList",
-}, smithy.ShapeTypeList, 1)
-var _LongArnList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var MetricResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MetricResult",
-}, smithy.ShapeTypeStructure, 2)
-var MetricResult_MetricName *smithy.Schema
-
-var MetricResult_MetricValue *smithy.Schema
-
-var _MetricResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MetricResults",
-}, smithy.ShapeTypeList, 1)
-var _MetricResults_member *smithy.Schema
-
-var Metrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Metrics",
-}, smithy.ShapeTypeStructure, 4)
-var Metrics_RMSE *smithy.Schema
-
-var Metrics_WeightedQuantileLosses *smithy.Schema
-
-var Metrics_ErrorMetrics *smithy.Schema
-
-var Metrics_AverageWeightedQuantileLoss *smithy.Schema
-
-var MonitorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MonitorConfig",
-}, smithy.ShapeTypeStructure, 1)
-var MonitorConfig_MonitorName *smithy.Schema
-
-var MonitorDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MonitorDataSource",
-}, smithy.ShapeTypeStructure, 3)
-var MonitorDataSource_DatasetImportJobArn *smithy.Schema
-
-var MonitorDataSource_ForecastArn *smithy.Schema
-
-var MonitorDataSource_PredictorArn *smithy.Schema
-
-var MonitorInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MonitorInfo",
-}, smithy.ShapeTypeStructure, 2)
-var MonitorInfo_MonitorArn *smithy.Schema
-
-var MonitorInfo_Status *smithy.Schema
-
-var _Monitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Monitors",
-}, smithy.ShapeTypeList, 1)
-var _Monitors_member *smithy.Schema
-
-var MonitorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "MonitorSummary",
-}, smithy.ShapeTypeStructure, 6)
-var MonitorSummary_MonitorArn *smithy.Schema
-
-var MonitorSummary_MonitorName *smithy.Schema
-
-var MonitorSummary_ResourceArn *smithy.Schema
-
-var MonitorSummary_Status *smithy.Schema
-
-var MonitorSummary_CreationTime *smithy.Schema
-
-var MonitorSummary_LastModificationTime *smithy.Schema
-
-var Month = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Month",
-}, smithy.ShapeTypeEnum, 12)
-var Month_JANUARY *smithy.Schema
-
-var Month_FEBRUARY *smithy.Schema
-
-var Month_MARCH *smithy.Schema
-
-var Month_APRIL *smithy.Schema
-
-var Month_MAY *smithy.Schema
-
-var Month_JUNE *smithy.Schema
-
-var Month_JULY *smithy.Schema
-
-var Month_AUGUST *smithy.Schema
-
-var Month_SEPTEMBER *smithy.Schema
-
-var Month_OCTOBER *smithy.Schema
-
-var Month_NOVEMBER *smithy.Schema
-
-var Month_DECEMBER *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Operation",
-}, smithy.ShapeTypeEnum, 4)
-var Operation_ADD *smithy.Schema
-
-var Operation_SUBTRACT *smithy.Schema
-
-var Operation_MULTIPLY *smithy.Schema
-
-var Operation_DIVIDE *smithy.Schema
-
-var OptimizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "OptimizationMetric",
-}, smithy.ShapeTypeEnum, 5)
-var OptimizationMetric_WAPE *smithy.Schema
-
-var OptimizationMetric_RMSE *smithy.Schema
-
-var OptimizationMetric_AverageWeightedQuantileLoss *smithy.Schema
-
-var OptimizationMetric_MASE *smithy.Schema
-
-var OptimizationMetric_MAPE *smithy.Schema
-
-var _ParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var ParameterRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ParameterRanges",
-}, smithy.ShapeTypeStructure, 3)
-var ParameterRanges_CategoricalParameterRanges *smithy.Schema
-
-var ParameterRanges_ContinuousParameterRanges *smithy.Schema
-
-var ParameterRanges_IntegerParameterRanges *smithy.Schema
-
-var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _PredictorBacktestExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorBacktestExportJobs",
-}, smithy.ShapeTypeList, 1)
-var _PredictorBacktestExportJobs_member *smithy.Schema
-
-var PredictorBacktestExportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorBacktestExportJobSummary",
-}, smithy.ShapeTypeStructure, 7)
-var PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn *smithy.Schema
-
-var PredictorBacktestExportJobSummary_PredictorBacktestExportJobName *smithy.Schema
-
-var PredictorBacktestExportJobSummary_Destination *smithy.Schema
-
-var PredictorBacktestExportJobSummary_Status *smithy.Schema
-
-var PredictorBacktestExportJobSummary_Message *smithy.Schema
-
-var PredictorBacktestExportJobSummary_CreationTime *smithy.Schema
-
-var PredictorBacktestExportJobSummary_LastModificationTime *smithy.Schema
-
-var PredictorBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorBaseline",
-}, smithy.ShapeTypeStructure, 1)
-var PredictorBaseline_BaselineMetrics *smithy.Schema
-
-var _PredictorEvaluationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorEvaluationResults",
-}, smithy.ShapeTypeList, 1)
-var _PredictorEvaluationResults_member *smithy.Schema
-
-var PredictorEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorEvent",
-}, smithy.ShapeTypeStructure, 2)
-var PredictorEvent_Detail *smithy.Schema
-
-var PredictorEvent_Datetime *smithy.Schema
-
-var PredictorExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorExecution",
-}, smithy.ShapeTypeStructure, 2)
-var PredictorExecution_AlgorithmArn *smithy.Schema
-
-var PredictorExecution_TestWindows *smithy.Schema
-
-var PredictorExecutionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorExecutionDetails",
-}, smithy.ShapeTypeStructure, 1)
-var PredictorExecutionDetails_PredictorExecutions *smithy.Schema
-
-var _PredictorExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorExecutions",
-}, smithy.ShapeTypeList, 1)
-var _PredictorExecutions_member *smithy.Schema
-
-var PredictorMonitorEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorMonitorEvaluation",
-}, smithy.ShapeTypeStructure, 11)
-var PredictorMonitorEvaluation_ResourceArn *smithy.Schema
-
-var PredictorMonitorEvaluation_MonitorArn *smithy.Schema
-
-var PredictorMonitorEvaluation_EvaluationTime *smithy.Schema
-
-var PredictorMonitorEvaluation_EvaluationState *smithy.Schema
-
-var PredictorMonitorEvaluation_WindowStartDatetime *smithy.Schema
-
-var PredictorMonitorEvaluation_WindowEndDatetime *smithy.Schema
-
-var PredictorMonitorEvaluation_PredictorEvent *smithy.Schema
-
-var PredictorMonitorEvaluation_MonitorDataSource *smithy.Schema
-
-var PredictorMonitorEvaluation_MetricResults *smithy.Schema
-
-var PredictorMonitorEvaluation_NumItemsEvaluated *smithy.Schema
-
-var PredictorMonitorEvaluation_Message *smithy.Schema
-
-var _PredictorMonitorEvaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorMonitorEvaluations",
-}, smithy.ShapeTypeList, 1)
-var _PredictorMonitorEvaluations_member *smithy.Schema
-
-var _Predictors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Predictors",
-}, smithy.ShapeTypeList, 1)
-var _Predictors_member *smithy.Schema
-
-var PredictorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "PredictorSummary",
-}, smithy.ShapeTypeStructure, 9)
-var PredictorSummary_PredictorArn *smithy.Schema
-
-var PredictorSummary_PredictorName *smithy.Schema
-
-var PredictorSummary_DatasetGroupArn *smithy.Schema
-
-var PredictorSummary_IsAutoPredictor *smithy.Schema
-
-var PredictorSummary_ReferencePredictorSummary *smithy.Schema
-
-var PredictorSummary_Status *smithy.Schema
-
-var PredictorSummary_Message *smithy.Schema
-
-var PredictorSummary_CreationTime *smithy.Schema
-
-var PredictorSummary_LastModificationTime *smithy.Schema
-
-var ReferencePredictorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ReferencePredictorSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ReferencePredictorSummary_Arn *smithy.Schema
-
-var ReferencePredictorSummary_State *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var S3Config = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "S3Config",
-}, smithy.ShapeTypeStructure, 3)
-var S3Config_Path *smithy.Schema
-
-var S3Config_RoleArn *smithy.Schema
-
-var S3Config_KMSKeyArn *smithy.Schema
-
-var _S3Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "S3Path",
-}, smithy.ShapeTypeString, 0)
-
-var ScalingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ScalingType",
-}, smithy.ShapeTypeEnum, 4)
-var ScalingType_Auto *smithy.Schema
-
-var ScalingType_Linear *smithy.Schema
-
-var ScalingType_Logarithmic *smithy.Schema
-
-var ScalingType_ReverseLogarithmic *smithy.Schema
-
-var Schema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Schema",
-}, smithy.ShapeTypeStructure, 1)
-var Schema_Attributes *smithy.Schema
-
-var SchemaAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "SchemaAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var SchemaAttribute_AttributeName *smithy.Schema
-
-var SchemaAttribute_AttributeType *smithy.Schema
-
-var _SchemaAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "SchemaAttributes",
-}, smithy.ShapeTypeList, 1)
-var _SchemaAttributes_member *smithy.Schema
-
-var State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "State",
-}, smithy.ShapeTypeEnum, 2)
-var State_Active *smithy.Schema
-
-var State_Deleted *smithy.Schema
-
-var Statistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Statistics",
-}, smithy.ShapeTypeStructure, 12)
-var Statistics_Count *smithy.Schema
-
-var Statistics_CountDistinct *smithy.Schema
-
-var Statistics_CountNull *smithy.Schema
-
-var Statistics_CountNan *smithy.Schema
-
-var Statistics_Min *smithy.Schema
-
-var Statistics_Max *smithy.Schema
-
-var Statistics_Avg *smithy.Schema
-
-var Statistics_Stddev *smithy.Schema
-
-var Statistics_CountLong *smithy.Schema
-
-var Statistics_CountDistinctLong *smithy.Schema
-
-var Statistics_CountNullLong *smithy.Schema
-
-var Statistics_CountNanLong *smithy.Schema
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SupplementaryFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "SupplementaryFeature",
-}, smithy.ShapeTypeStructure, 2)
-var SupplementaryFeature_Name *smithy.Schema
-
-var SupplementaryFeature_Value *smithy.Schema
-
-var _SupplementaryFeatures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "SupplementaryFeatures",
-}, smithy.ShapeTypeList, 1)
-var _SupplementaryFeatures_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TestWindowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TestWindowDetails",
-}, smithy.ShapeTypeList, 1)
-var _TestWindowDetails_member *smithy.Schema
-
-var _TestWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TestWindows",
-}, smithy.ShapeTypeList, 1)
-var _TestWindows_member *smithy.Schema
-
-var TestWindowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TestWindowSummary",
-}, smithy.ShapeTypeStructure, 4)
-var TestWindowSummary_TestWindowStart *smithy.Schema
-
-var TestWindowSummary_TestWindowEnd *smithy.Schema
-
-var TestWindowSummary_Status *smithy.Schema
-
-var TestWindowSummary_Message *smithy.Schema
-
-var TimeAlignmentBoundary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeAlignmentBoundary",
-}, smithy.ShapeTypeStructure, 4)
-var TimeAlignmentBoundary_Month *smithy.Schema
-
-var TimeAlignmentBoundary_DayOfMonth *smithy.Schema
-
-var TimeAlignmentBoundary_DayOfWeek *smithy.Schema
-
-var TimeAlignmentBoundary_Hour *smithy.Schema
-
-var TimePointGranularity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimePointGranularity",
-}, smithy.ShapeTypeEnum, 2)
-var TimePointGranularity_ALL *smithy.Schema
-
-var TimePointGranularity_SPECIFIC *smithy.Schema
-
-var TimeSeriesCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesCondition",
-}, smithy.ShapeTypeStructure, 3)
-var TimeSeriesCondition_AttributeName *smithy.Schema
-
-var TimeSeriesCondition_AttributeValue *smithy.Schema
-
-var TimeSeriesCondition_Condition *smithy.Schema
-
-var _TimeSeriesConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesConditions",
-}, smithy.ShapeTypeList, 1)
-var _TimeSeriesConditions_member *smithy.Schema
-
-var TimeSeriesGranularity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesGranularity",
-}, smithy.ShapeTypeEnum, 2)
-var TimeSeriesGranularity_ALL *smithy.Schema
-
-var TimeSeriesGranularity_SPECIFIC *smithy.Schema
-
-var TimeSeriesIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesIdentifiers",
-}, smithy.ShapeTypeStructure, 3)
-var TimeSeriesIdentifiers_DataSource *smithy.Schema
-
-var TimeSeriesIdentifiers_Schema *smithy.Schema
-
-var TimeSeriesIdentifiers_Format *smithy.Schema
-
-var TimeSeriesReplacementsDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesReplacementsDataSource",
-}, smithy.ShapeTypeStructure, 4)
-var TimeSeriesReplacementsDataSource_S3Config *smithy.Schema
-
-var TimeSeriesReplacementsDataSource_Schema *smithy.Schema
-
-var TimeSeriesReplacementsDataSource_Format *smithy.Schema
-
-var TimeSeriesReplacementsDataSource_TimestampFormat *smithy.Schema
-
-var TimeSeriesSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesSelector",
-}, smithy.ShapeTypeStructure, 1)
-var TimeSeriesSelector_TimeSeriesIdentifiers *smithy.Schema
-
-var TimeSeriesTransformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesTransformation",
-}, smithy.ShapeTypeStructure, 2)
-var TimeSeriesTransformation_Action *smithy.Schema
-
-var TimeSeriesTransformation_TimeSeriesConditions *smithy.Schema
-
-var _TimeSeriesTransformations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeSeriesTransformations",
-}, smithy.ShapeTypeList, 1)
-var _TimeSeriesTransformations_member *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimestampFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimestampFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _TimeZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TimeZone",
-}, smithy.ShapeTypeString, 0)
-
-var _TrainingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TrainingParameters",
-}, smithy.ShapeTypeMap, 2)
-var _TrainingParameters_key *smithy.Schema
-
-var _TrainingParameters_value *smithy.Schema
-
-var _Transformations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Transformations",
-}, smithy.ShapeTypeMap, 2)
-var _Transformations_key *smithy.Schema
-
-var _Transformations_value *smithy.Schema
-
-var _UseGeolocationForTimeZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UseGeolocationForTimeZone",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var WeightedQuantileLoss = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WeightedQuantileLoss",
-}, smithy.ShapeTypeStructure, 2)
-var WeightedQuantileLoss_Quantile *smithy.Schema
-
-var WeightedQuantileLoss_LossValue *smithy.Schema
-
-var _WeightedQuantileLosses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WeightedQuantileLosses",
-}, smithy.ShapeTypeList, 1)
-var _WeightedQuantileLosses_member *smithy.Schema
-
-var _WhatIfAnalyses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfAnalyses",
-}, smithy.ShapeTypeList, 1)
-var _WhatIfAnalyses_member *smithy.Schema
-
-var WhatIfAnalysisSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfAnalysisSummary",
-}, smithy.ShapeTypeStructure, 7)
-var WhatIfAnalysisSummary_WhatIfAnalysisArn *smithy.Schema
-
-var WhatIfAnalysisSummary_WhatIfAnalysisName *smithy.Schema
-
-var WhatIfAnalysisSummary_ForecastArn *smithy.Schema
-
-var WhatIfAnalysisSummary_Status *smithy.Schema
-
-var WhatIfAnalysisSummary_Message *smithy.Schema
-
-var WhatIfAnalysisSummary_CreationTime *smithy.Schema
-
-var WhatIfAnalysisSummary_LastModificationTime *smithy.Schema
-
-var _WhatIfForecastArnListForExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfForecastArnListForExport",
-}, smithy.ShapeTypeList, 1)
-var _WhatIfForecastArnListForExport_member *smithy.Schema
-
-var _WhatIfForecastExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfForecastExports",
-}, smithy.ShapeTypeList, 1)
-var _WhatIfForecastExports_member *smithy.Schema
-
-var WhatIfForecastExportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfForecastExportSummary",
-}, smithy.ShapeTypeStructure, 8)
-var WhatIfForecastExportSummary_WhatIfForecastExportArn *smithy.Schema
-
-var WhatIfForecastExportSummary_WhatIfForecastArns *smithy.Schema
-
-var WhatIfForecastExportSummary_WhatIfForecastExportName *smithy.Schema
-
-var WhatIfForecastExportSummary_Destination *smithy.Schema
-
-var WhatIfForecastExportSummary_Status *smithy.Schema
-
-var WhatIfForecastExportSummary_Message *smithy.Schema
-
-var WhatIfForecastExportSummary_CreationTime *smithy.Schema
-
-var WhatIfForecastExportSummary_LastModificationTime *smithy.Schema
-
-var _WhatIfForecasts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfForecasts",
-}, smithy.ShapeTypeList, 1)
-var _WhatIfForecasts_member *smithy.Schema
-
-var WhatIfForecastSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WhatIfForecastSummary",
-}, smithy.ShapeTypeStructure, 7)
-var WhatIfForecastSummary_WhatIfForecastArn *smithy.Schema
-
-var WhatIfForecastSummary_WhatIfForecastName *smithy.Schema
-
-var WhatIfForecastSummary_WhatIfAnalysisArn *smithy.Schema
-
-var WhatIfForecastSummary_Status *smithy.Schema
-
-var WhatIfForecastSummary_Message *smithy.Schema
-
-var WhatIfForecastSummary_CreationTime *smithy.Schema
-
-var WhatIfForecastSummary_LastModificationTime *smithy.Schema
-
-var WindowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "WindowSummary",
-}, smithy.ShapeTypeStructure, 5)
-var WindowSummary_TestWindowStart *smithy.Schema
-
-var WindowSummary_TestWindowEnd *smithy.Schema
-
-var WindowSummary_ItemCount *smithy.Schema
-
-var WindowSummary_EvaluationType *smithy.Schema
-
-var WindowSummary_Metrics *smithy.Schema
-
-var CreateAutoPredictorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateAutoPredictorRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateAutoPredictorRequest_PredictorName *smithy.Schema
-
-var CreateAutoPredictorRequest_ForecastHorizon *smithy.Schema
-
-var CreateAutoPredictorRequest_ForecastTypes *smithy.Schema
-
-var CreateAutoPredictorRequest_ForecastDimensions *smithy.Schema
-
-var CreateAutoPredictorRequest_ForecastFrequency *smithy.Schema
-
-var CreateAutoPredictorRequest_DataConfig *smithy.Schema
-
-var CreateAutoPredictorRequest_EncryptionConfig *smithy.Schema
-
-var CreateAutoPredictorRequest_ReferencePredictorArn *smithy.Schema
-
-var CreateAutoPredictorRequest_OptimizationMetric *smithy.Schema
-
-var CreateAutoPredictorRequest_ExplainPredictor *smithy.Schema
-
-var CreateAutoPredictorRequest_Tags *smithy.Schema
-
-var CreateAutoPredictorRequest_MonitorConfig *smithy.Schema
-
-var CreateAutoPredictorRequest_TimeAlignmentBoundary *smithy.Schema
-
-var CreateAutoPredictorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateAutoPredictorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAutoPredictorResponse_PredictorArn *smithy.Schema
-
-var CreateDatasetGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDatasetGroupRequest_DatasetGroupName *smithy.Schema
-
-var CreateDatasetGroupRequest_Domain *smithy.Schema
-
-var CreateDatasetGroupRequest_DatasetArns *smithy.Schema
-
-var CreateDatasetGroupRequest_Tags *smithy.Schema
-
-var CreateDatasetGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDatasetGroupResponse_DatasetGroupArn *smithy.Schema
-
-var CreateDatasetImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetImportJobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateDatasetImportJobRequest_DatasetImportJobName *smithy.Schema
-
-var CreateDatasetImportJobRequest_DatasetArn *smithy.Schema
-
-var CreateDatasetImportJobRequest_DataSource *smithy.Schema
-
-var CreateDatasetImportJobRequest_TimestampFormat *smithy.Schema
-
-var CreateDatasetImportJobRequest_TimeZone *smithy.Schema
-
-var CreateDatasetImportJobRequest_UseGeolocationForTimeZone *smithy.Schema
-
-var CreateDatasetImportJobRequest_GeolocationFormat *smithy.Schema
-
-var CreateDatasetImportJobRequest_Tags *smithy.Schema
-
-var CreateDatasetImportJobRequest_Format *smithy.Schema
-
-var CreateDatasetImportJobRequest_ImportMode *smithy.Schema
-
-var CreateDatasetImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetImportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDatasetImportJobResponse_DatasetImportJobArn *smithy.Schema
-
-var CreateDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDatasetRequest_DatasetName *smithy.Schema
-
-var CreateDatasetRequest_Domain *smithy.Schema
-
-var CreateDatasetRequest_DatasetType *smithy.Schema
-
-var CreateDatasetRequest_DataFrequency *smithy.Schema
-
-var CreateDatasetRequest_Schema *smithy.Schema
-
-var CreateDatasetRequest_EncryptionConfig *smithy.Schema
-
-var CreateDatasetRequest_Tags *smithy.Schema
-
-var CreateDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDatasetResponse_DatasetArn *smithy.Schema
-
-var CreateExplainabilityExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainabilityExportRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateExplainabilityExportRequest_ExplainabilityExportName *smithy.Schema
-
-var CreateExplainabilityExportRequest_ExplainabilityArn *smithy.Schema
-
-var CreateExplainabilityExportRequest_Destination *smithy.Schema
-
-var CreateExplainabilityExportRequest_Tags *smithy.Schema
-
-var CreateExplainabilityExportRequest_Format *smithy.Schema
-
-var CreateExplainabilityExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainabilityExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateExplainabilityExportResponse_ExplainabilityExportArn *smithy.Schema
-
-var CreateExplainabilityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainabilityRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateExplainabilityRequest_ExplainabilityName *smithy.Schema
-
-var CreateExplainabilityRequest_ResourceArn *smithy.Schema
-
-var CreateExplainabilityRequest_ExplainabilityConfig *smithy.Schema
-
-var CreateExplainabilityRequest_DataSource *smithy.Schema
-
-var CreateExplainabilityRequest_Schema *smithy.Schema
-
-var CreateExplainabilityRequest_EnableVisualization *smithy.Schema
-
-var CreateExplainabilityRequest_StartDateTime *smithy.Schema
-
-var CreateExplainabilityRequest_EndDateTime *smithy.Schema
-
-var CreateExplainabilityRequest_Tags *smithy.Schema
-
-var CreateExplainabilityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateExplainabilityResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateExplainabilityResponse_ExplainabilityArn *smithy.Schema
-
-var CreateForecastExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecastExportJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateForecastExportJobRequest_ForecastExportJobName *smithy.Schema
-
-var CreateForecastExportJobRequest_ForecastArn *smithy.Schema
-
-var CreateForecastExportJobRequest_Destination *smithy.Schema
-
-var CreateForecastExportJobRequest_Tags *smithy.Schema
-
-var CreateForecastExportJobRequest_Format *smithy.Schema
-
-var CreateForecastExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecastExportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateForecastExportJobResponse_ForecastExportJobArn *smithy.Schema
-
-var CreateForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecastRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateForecastRequest_ForecastName *smithy.Schema
-
-var CreateForecastRequest_PredictorArn *smithy.Schema
-
-var CreateForecastRequest_ForecastTypes *smithy.Schema
-
-var CreateForecastRequest_Tags *smithy.Schema
-
-var CreateForecastRequest_TimeSeriesSelector *smithy.Schema
-
-var CreateForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateForecastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateForecastResponse_ForecastArn *smithy.Schema
-
-var CreateMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateMonitorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateMonitorRequest_MonitorName *smithy.Schema
-
-var CreateMonitorRequest_ResourceArn *smithy.Schema
-
-var CreateMonitorRequest_Tags *smithy.Schema
-
-var CreateMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateMonitorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMonitorResponse_MonitorArn *smithy.Schema
-
-var CreatePredictorBacktestExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictorBacktestExportJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName *smithy.Schema
-
-var CreatePredictorBacktestExportJobRequest_PredictorArn *smithy.Schema
-
-var CreatePredictorBacktestExportJobRequest_Destination *smithy.Schema
-
-var CreatePredictorBacktestExportJobRequest_Tags *smithy.Schema
-
-var CreatePredictorBacktestExportJobRequest_Format *smithy.Schema
-
-var CreatePredictorBacktestExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictorBacktestExportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn *smithy.Schema
-
-var CreatePredictorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictorRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreatePredictorRequest_PredictorName *smithy.Schema
-
-var CreatePredictorRequest_AlgorithmArn *smithy.Schema
-
-var CreatePredictorRequest_ForecastHorizon *smithy.Schema
-
-var CreatePredictorRequest_ForecastTypes *smithy.Schema
-
-var CreatePredictorRequest_PerformAutoML *smithy.Schema
-
-var CreatePredictorRequest_AutoMLOverrideStrategy *smithy.Schema
-
-var CreatePredictorRequest_PerformHPO *smithy.Schema
-
-var CreatePredictorRequest_TrainingParameters *smithy.Schema
-
-var CreatePredictorRequest_EvaluationParameters *smithy.Schema
-
-var CreatePredictorRequest_HPOConfig *smithy.Schema
-
-var CreatePredictorRequest_InputDataConfig *smithy.Schema
-
-var CreatePredictorRequest_FeaturizationConfig *smithy.Schema
-
-var CreatePredictorRequest_EncryptionConfig *smithy.Schema
-
-var CreatePredictorRequest_Tags *smithy.Schema
-
-var CreatePredictorRequest_OptimizationMetric *smithy.Schema
-
-var CreatePredictorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreatePredictorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePredictorResponse_PredictorArn *smithy.Schema
-
-var CreateWhatIfAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfAnalysisRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWhatIfAnalysisRequest_WhatIfAnalysisName *smithy.Schema
-
-var CreateWhatIfAnalysisRequest_ForecastArn *smithy.Schema
-
-var CreateWhatIfAnalysisRequest_TimeSeriesSelector *smithy.Schema
-
-var CreateWhatIfAnalysisRequest_Tags *smithy.Schema
-
-var CreateWhatIfAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatIfAnalysisResponse_WhatIfAnalysisArn *smithy.Schema
-
-var CreateWhatIfForecastExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecastExportRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWhatIfForecastExportRequest_WhatIfForecastExportName *smithy.Schema
-
-var CreateWhatIfForecastExportRequest_WhatIfForecastArns *smithy.Schema
-
-var CreateWhatIfForecastExportRequest_Destination *smithy.Schema
-
-var CreateWhatIfForecastExportRequest_Tags *smithy.Schema
-
-var CreateWhatIfForecastExportRequest_Format *smithy.Schema
-
-var CreateWhatIfForecastExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecastExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatIfForecastExportResponse_WhatIfForecastExportArn *smithy.Schema
-
-var CreateWhatIfForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecastRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWhatIfForecastRequest_WhatIfForecastName *smithy.Schema
-
-var CreateWhatIfForecastRequest_WhatIfAnalysisArn *smithy.Schema
-
-var CreateWhatIfForecastRequest_TimeSeriesTransformations *smithy.Schema
-
-var CreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource *smithy.Schema
-
-var CreateWhatIfForecastRequest_Tags *smithy.Schema
-
-var CreateWhatIfForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "CreateWhatIfForecastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatIfForecastResponse_WhatIfForecastArn *smithy.Schema
-
-var DeleteDatasetGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDatasetGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetGroupRequest_DatasetGroupArn *smithy.Schema
-
-var DeleteDatasetImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDatasetImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetImportJobRequest_DatasetImportJobArn *smithy.Schema
-
-var DeleteDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetRequest_DatasetArn *smithy.Schema
-
-var DeleteExplainabilityExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteExplainabilityExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExplainabilityExportRequest_ExplainabilityExportArn *smithy.Schema
-
-var DeleteExplainabilityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteExplainabilityRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExplainabilityRequest_ExplainabilityArn *smithy.Schema
-
-var DeleteForecastExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteForecastExportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteForecastExportJobRequest_ForecastExportJobArn *smithy.Schema
-
-var DeleteForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteForecastRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteForecastRequest_ForecastArn *smithy.Schema
-
-var DeleteMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMonitorRequest_MonitorArn *smithy.Schema
-
-var DeletePredictorBacktestExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeletePredictorBacktestExportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn *smithy.Schema
-
-var DeletePredictorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeletePredictorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePredictorRequest_PredictorArn *smithy.Schema
-
-var DeleteResourceTreeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteResourceTreeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceTreeRequest_ResourceArn *smithy.Schema
-
-var DeleteWhatIfAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfAnalysisRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWhatIfAnalysisRequest_WhatIfAnalysisArn *smithy.Schema
-
-var DeleteWhatIfForecastExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfForecastExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWhatIfForecastExportRequest_WhatIfForecastExportArn *smithy.Schema
-
-var DeleteWhatIfForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DeleteWhatIfForecastRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWhatIfForecastRequest_WhatIfForecastArn *smithy.Schema
-
-var DescribeAutoPredictorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeAutoPredictorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAutoPredictorRequest_PredictorArn *smithy.Schema
-
-var DescribeAutoPredictorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeAutoPredictorResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeAutoPredictorResponse_PredictorArn *smithy.Schema
-
-var DescribeAutoPredictorResponse_PredictorName *smithy.Schema
-
-var DescribeAutoPredictorResponse_ForecastHorizon *smithy.Schema
-
-var DescribeAutoPredictorResponse_ForecastTypes *smithy.Schema
-
-var DescribeAutoPredictorResponse_ForecastFrequency *smithy.Schema
-
-var DescribeAutoPredictorResponse_ForecastDimensions *smithy.Schema
-
-var DescribeAutoPredictorResponse_DatasetImportJobArns *smithy.Schema
-
-var DescribeAutoPredictorResponse_DataConfig *smithy.Schema
-
-var DescribeAutoPredictorResponse_EncryptionConfig *smithy.Schema
-
-var DescribeAutoPredictorResponse_ReferencePredictorSummary *smithy.Schema
-
-var DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeAutoPredictorResponse_Status *smithy.Schema
-
-var DescribeAutoPredictorResponse_Message *smithy.Schema
-
-var DescribeAutoPredictorResponse_CreationTime *smithy.Schema
-
-var DescribeAutoPredictorResponse_LastModificationTime *smithy.Schema
-
-var DescribeAutoPredictorResponse_OptimizationMetric *smithy.Schema
-
-var DescribeAutoPredictorResponse_ExplainabilityInfo *smithy.Schema
-
-var DescribeAutoPredictorResponse_MonitorInfo *smithy.Schema
-
-var DescribeAutoPredictorResponse_TimeAlignmentBoundary *smithy.Schema
-
-var DescribeDatasetGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetGroupRequest_DatasetGroupArn *smithy.Schema
-
-var DescribeDatasetGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetGroupResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeDatasetGroupResponse_DatasetGroupName *smithy.Schema
-
-var DescribeDatasetGroupResponse_DatasetGroupArn *smithy.Schema
-
-var DescribeDatasetGroupResponse_DatasetArns *smithy.Schema
-
-var DescribeDatasetGroupResponse_Domain *smithy.Schema
-
-var DescribeDatasetGroupResponse_Status *smithy.Schema
-
-var DescribeDatasetGroupResponse_CreationTime *smithy.Schema
-
-var DescribeDatasetGroupResponse_LastModificationTime *smithy.Schema
-
-var DescribeDatasetImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetImportJobRequest_DatasetImportJobArn *smithy.Schema
-
-var DescribeDatasetImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetImportJobResponse",
-}, smithy.ShapeTypeStructure, 17)
-var DescribeDatasetImportJobResponse_DatasetImportJobName *smithy.Schema
-
-var DescribeDatasetImportJobResponse_DatasetImportJobArn *smithy.Schema
-
-var DescribeDatasetImportJobResponse_DatasetArn *smithy.Schema
-
-var DescribeDatasetImportJobResponse_TimestampFormat *smithy.Schema
-
-var DescribeDatasetImportJobResponse_TimeZone *smithy.Schema
-
-var DescribeDatasetImportJobResponse_UseGeolocationForTimeZone *smithy.Schema
-
-var DescribeDatasetImportJobResponse_GeolocationFormat *smithy.Schema
-
-var DescribeDatasetImportJobResponse_DataSource *smithy.Schema
-
-var DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeDatasetImportJobResponse_FieldStatistics *smithy.Schema
-
-var DescribeDatasetImportJobResponse_DataSize *smithy.Schema
-
-var DescribeDatasetImportJobResponse_Status *smithy.Schema
-
-var DescribeDatasetImportJobResponse_Message *smithy.Schema
-
-var DescribeDatasetImportJobResponse_CreationTime *smithy.Schema
-
-var DescribeDatasetImportJobResponse_LastModificationTime *smithy.Schema
-
-var DescribeDatasetImportJobResponse_Format *smithy.Schema
-
-var DescribeDatasetImportJobResponse_ImportMode *smithy.Schema
-
-var DescribeDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetRequest_DatasetArn *smithy.Schema
-
-var DescribeDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeDatasetResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeDatasetResponse_DatasetArn *smithy.Schema
-
-var DescribeDatasetResponse_DatasetName *smithy.Schema
-
-var DescribeDatasetResponse_Domain *smithy.Schema
-
-var DescribeDatasetResponse_DatasetType *smithy.Schema
-
-var DescribeDatasetResponse_DataFrequency *smithy.Schema
-
-var DescribeDatasetResponse_Schema *smithy.Schema
-
-var DescribeDatasetResponse_EncryptionConfig *smithy.Schema
-
-var DescribeDatasetResponse_Status *smithy.Schema
-
-var DescribeDatasetResponse_CreationTime *smithy.Schema
-
-var DescribeDatasetResponse_LastModificationTime *smithy.Schema
-
-var DescribeExplainabilityExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainabilityExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeExplainabilityExportRequest_ExplainabilityExportArn *smithy.Schema
-
-var DescribeExplainabilityExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainabilityExportResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeExplainabilityExportResponse_ExplainabilityExportArn *smithy.Schema
-
-var DescribeExplainabilityExportResponse_ExplainabilityExportName *smithy.Schema
-
-var DescribeExplainabilityExportResponse_ExplainabilityArn *smithy.Schema
-
-var DescribeExplainabilityExportResponse_Destination *smithy.Schema
-
-var DescribeExplainabilityExportResponse_Message *smithy.Schema
-
-var DescribeExplainabilityExportResponse_Status *smithy.Schema
-
-var DescribeExplainabilityExportResponse_CreationTime *smithy.Schema
-
-var DescribeExplainabilityExportResponse_LastModificationTime *smithy.Schema
-
-var DescribeExplainabilityExportResponse_Format *smithy.Schema
-
-var DescribeExplainabilityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainabilityRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeExplainabilityRequest_ExplainabilityArn *smithy.Schema
-
-var DescribeExplainabilityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeExplainabilityResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeExplainabilityResponse_ExplainabilityArn *smithy.Schema
-
-var DescribeExplainabilityResponse_ExplainabilityName *smithy.Schema
-
-var DescribeExplainabilityResponse_ResourceArn *smithy.Schema
-
-var DescribeExplainabilityResponse_ExplainabilityConfig *smithy.Schema
-
-var DescribeExplainabilityResponse_EnableVisualization *smithy.Schema
-
-var DescribeExplainabilityResponse_DataSource *smithy.Schema
-
-var DescribeExplainabilityResponse_Schema *smithy.Schema
-
-var DescribeExplainabilityResponse_StartDateTime *smithy.Schema
-
-var DescribeExplainabilityResponse_EndDateTime *smithy.Schema
-
-var DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeExplainabilityResponse_Message *smithy.Schema
-
-var DescribeExplainabilityResponse_Status *smithy.Schema
-
-var DescribeExplainabilityResponse_CreationTime *smithy.Schema
-
-var DescribeExplainabilityResponse_LastModificationTime *smithy.Schema
-
-var DescribeForecastExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecastExportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeForecastExportJobRequest_ForecastExportJobArn *smithy.Schema
-
-var DescribeForecastExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecastExportJobResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeForecastExportJobResponse_ForecastExportJobArn *smithy.Schema
-
-var DescribeForecastExportJobResponse_ForecastExportJobName *smithy.Schema
-
-var DescribeForecastExportJobResponse_ForecastArn *smithy.Schema
-
-var DescribeForecastExportJobResponse_Destination *smithy.Schema
-
-var DescribeForecastExportJobResponse_Message *smithy.Schema
-
-var DescribeForecastExportJobResponse_Status *smithy.Schema
-
-var DescribeForecastExportJobResponse_CreationTime *smithy.Schema
-
-var DescribeForecastExportJobResponse_LastModificationTime *smithy.Schema
-
-var DescribeForecastExportJobResponse_Format *smithy.Schema
-
-var DescribeForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecastRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeForecastRequest_ForecastArn *smithy.Schema
-
-var DescribeForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeForecastResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeForecastResponse_ForecastArn *smithy.Schema
-
-var DescribeForecastResponse_ForecastName *smithy.Schema
-
-var DescribeForecastResponse_ForecastTypes *smithy.Schema
-
-var DescribeForecastResponse_PredictorArn *smithy.Schema
-
-var DescribeForecastResponse_DatasetGroupArn *smithy.Schema
-
-var DescribeForecastResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeForecastResponse_Status *smithy.Schema
-
-var DescribeForecastResponse_Message *smithy.Schema
-
-var DescribeForecastResponse_CreationTime *smithy.Schema
-
-var DescribeForecastResponse_LastModificationTime *smithy.Schema
-
-var DescribeForecastResponse_TimeSeriesSelector *smithy.Schema
-
-var DescribeMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMonitorRequest_MonitorArn *smithy.Schema
-
-var DescribeMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeMonitorResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeMonitorResponse_MonitorName *smithy.Schema
-
-var DescribeMonitorResponse_MonitorArn *smithy.Schema
-
-var DescribeMonitorResponse_ResourceArn *smithy.Schema
-
-var DescribeMonitorResponse_Status *smithy.Schema
-
-var DescribeMonitorResponse_LastEvaluationTime *smithy.Schema
-
-var DescribeMonitorResponse_LastEvaluationState *smithy.Schema
-
-var DescribeMonitorResponse_Baseline *smithy.Schema
-
-var DescribeMonitorResponse_Message *smithy.Schema
-
-var DescribeMonitorResponse_CreationTime *smithy.Schema
-
-var DescribeMonitorResponse_LastModificationTime *smithy.Schema
-
-var DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes *smithy.Schema
-
-var DescribePredictorBacktestExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictorBacktestExportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictorBacktestExportJobResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_PredictorArn *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_Destination *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_Message *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_Status *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_CreationTime *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_LastModificationTime *smithy.Schema
-
-var DescribePredictorBacktestExportJobResponse_Format *smithy.Schema
-
-var DescribePredictorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePredictorRequest_PredictorArn *smithy.Schema
-
-var DescribePredictorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribePredictorResponse",
-}, smithy.ShapeTypeStructure, 24)
-var DescribePredictorResponse_PredictorArn *smithy.Schema
-
-var DescribePredictorResponse_PredictorName *smithy.Schema
-
-var DescribePredictorResponse_AlgorithmArn *smithy.Schema
-
-var DescribePredictorResponse_AutoMLAlgorithmArns *smithy.Schema
-
-var DescribePredictorResponse_ForecastHorizon *smithy.Schema
-
-var DescribePredictorResponse_ForecastTypes *smithy.Schema
-
-var DescribePredictorResponse_PerformAutoML *smithy.Schema
-
-var DescribePredictorResponse_AutoMLOverrideStrategy *smithy.Schema
-
-var DescribePredictorResponse_PerformHPO *smithy.Schema
-
-var DescribePredictorResponse_TrainingParameters *smithy.Schema
-
-var DescribePredictorResponse_EvaluationParameters *smithy.Schema
-
-var DescribePredictorResponse_HPOConfig *smithy.Schema
-
-var DescribePredictorResponse_InputDataConfig *smithy.Schema
-
-var DescribePredictorResponse_FeaturizationConfig *smithy.Schema
-
-var DescribePredictorResponse_EncryptionConfig *smithy.Schema
-
-var DescribePredictorResponse_PredictorExecutionDetails *smithy.Schema
-
-var DescribePredictorResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribePredictorResponse_IsAutoPredictor *smithy.Schema
-
-var DescribePredictorResponse_DatasetImportJobArns *smithy.Schema
-
-var DescribePredictorResponse_Status *smithy.Schema
-
-var DescribePredictorResponse_Message *smithy.Schema
-
-var DescribePredictorResponse_CreationTime *smithy.Schema
-
-var DescribePredictorResponse_LastModificationTime *smithy.Schema
-
-var DescribePredictorResponse_OptimizationMetric *smithy.Schema
-
-var DescribeWhatIfAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfAnalysisRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWhatIfAnalysisRequest_WhatIfAnalysisArn *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfAnalysisResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeWhatIfAnalysisResponse_WhatIfAnalysisName *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_ForecastArn *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_Status *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_Message *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_CreationTime *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_LastModificationTime *smithy.Schema
-
-var DescribeWhatIfAnalysisResponse_TimeSeriesSelector *smithy.Schema
-
-var DescribeWhatIfForecastExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecastExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWhatIfForecastExportRequest_WhatIfForecastExportArn *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecastExportResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_WhatIfForecastExportName *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_WhatIfForecastArns *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_Destination *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_Message *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_Status *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_CreationTime *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_LastModificationTime *smithy.Schema
-
-var DescribeWhatIfForecastExportResponse_Format *smithy.Schema
-
-var DescribeWhatIfForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecastRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWhatIfForecastRequest_WhatIfForecastArn *smithy.Schema
-
-var DescribeWhatIfForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "DescribeWhatIfForecastResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeWhatIfForecastResponse_WhatIfForecastName *smithy.Schema
-
-var DescribeWhatIfForecastResponse_WhatIfForecastArn *smithy.Schema
-
-var DescribeWhatIfForecastResponse_WhatIfAnalysisArn *smithy.Schema
-
-var DescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes *smithy.Schema
-
-var DescribeWhatIfForecastResponse_Status *smithy.Schema
-
-var DescribeWhatIfForecastResponse_Message *smithy.Schema
-
-var DescribeWhatIfForecastResponse_CreationTime *smithy.Schema
-
-var DescribeWhatIfForecastResponse_LastModificationTime *smithy.Schema
-
-var DescribeWhatIfForecastResponse_TimeSeriesTransformations *smithy.Schema
-
-var DescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource *smithy.Schema
-
-var DescribeWhatIfForecastResponse_ForecastTypes *smithy.Schema
-
-var GetAccuracyMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "GetAccuracyMetricsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccuracyMetricsRequest_PredictorArn *smithy.Schema
-
-var GetAccuracyMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "GetAccuracyMetricsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetAccuracyMetricsResponse_PredictorEvaluationResults *smithy.Schema
-
-var GetAccuracyMetricsResponse_IsAutoPredictor *smithy.Schema
-
-var GetAccuracyMetricsResponse_AutoMLOverrideStrategy *smithy.Schema
-
-var GetAccuracyMetricsResponse_OptimizationMetric *smithy.Schema
-
-var ListDatasetGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetGroupsRequest_NextToken *smithy.Schema
-
-var ListDatasetGroupsRequest_MaxResults *smithy.Schema
-
-var ListDatasetGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetGroupsResponse_DatasetGroups *smithy.Schema
-
-var ListDatasetGroupsResponse_NextToken *smithy.Schema
-
-var ListDatasetImportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetImportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDatasetImportJobsRequest_NextToken *smithy.Schema
-
-var ListDatasetImportJobsRequest_MaxResults *smithy.Schema
-
-var ListDatasetImportJobsRequest_Filters *smithy.Schema
-
-var ListDatasetImportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetImportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetImportJobsResponse_DatasetImportJobs *smithy.Schema
-
-var ListDatasetImportJobsResponse_NextToken *smithy.Schema
-
-var ListDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetsRequest_NextToken *smithy.Schema
-
-var ListDatasetsRequest_MaxResults *smithy.Schema
-
-var ListDatasetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListDatasetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetsResponse_Datasets *smithy.Schema
-
-var ListDatasetsResponse_NextToken *smithy.Schema
-
-var ListExplainabilitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilitiesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExplainabilitiesRequest_NextToken *smithy.Schema
-
-var ListExplainabilitiesRequest_MaxResults *smithy.Schema
-
-var ListExplainabilitiesRequest_Filters *smithy.Schema
-
-var ListExplainabilitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExplainabilitiesResponse_Explainabilities *smithy.Schema
-
-var ListExplainabilitiesResponse_NextToken *smithy.Schema
-
-var ListExplainabilityExportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilityExportsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExplainabilityExportsRequest_NextToken *smithy.Schema
-
-var ListExplainabilityExportsRequest_MaxResults *smithy.Schema
-
-var ListExplainabilityExportsRequest_Filters *smithy.Schema
-
-var ListExplainabilityExportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListExplainabilityExportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExplainabilityExportsResponse_ExplainabilityExports *smithy.Schema
-
-var ListExplainabilityExportsResponse_NextToken *smithy.Schema
-
-var ListForecastExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecastExportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListForecastExportJobsRequest_NextToken *smithy.Schema
-
-var ListForecastExportJobsRequest_MaxResults *smithy.Schema
-
-var ListForecastExportJobsRequest_Filters *smithy.Schema
-
-var ListForecastExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecastExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListForecastExportJobsResponse_ForecastExportJobs *smithy.Schema
-
-var ListForecastExportJobsResponse_NextToken *smithy.Schema
-
-var ListForecastsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecastsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListForecastsRequest_NextToken *smithy.Schema
-
-var ListForecastsRequest_MaxResults *smithy.Schema
-
-var ListForecastsRequest_Filters *smithy.Schema
-
-var ListForecastsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListForecastsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListForecastsResponse_Forecasts *smithy.Schema
-
-var ListForecastsResponse_NextToken *smithy.Schema
-
-var ListMonitorEvaluationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitorEvaluationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMonitorEvaluationsRequest_NextToken *smithy.Schema
-
-var ListMonitorEvaluationsRequest_MaxResults *smithy.Schema
-
-var ListMonitorEvaluationsRequest_MonitorArn *smithy.Schema
-
-var ListMonitorEvaluationsRequest_Filters *smithy.Schema
-
-var ListMonitorEvaluationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitorEvaluationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMonitorEvaluationsResponse_NextToken *smithy.Schema
-
-var ListMonitorEvaluationsResponse_PredictorMonitorEvaluations *smithy.Schema
-
-var ListMonitorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMonitorsRequest_NextToken *smithy.Schema
-
-var ListMonitorsRequest_MaxResults *smithy.Schema
-
-var ListMonitorsRequest_Filters *smithy.Schema
-
-var ListMonitorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListMonitorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMonitorsResponse_Monitors *smithy.Schema
-
-var ListMonitorsResponse_NextToken *smithy.Schema
-
-var ListPredictorBacktestExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictorBacktestExportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPredictorBacktestExportJobsRequest_NextToken *smithy.Schema
-
-var ListPredictorBacktestExportJobsRequest_MaxResults *smithy.Schema
-
-var ListPredictorBacktestExportJobsRequest_Filters *smithy.Schema
-
-var ListPredictorBacktestExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictorBacktestExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs *smithy.Schema
-
-var ListPredictorBacktestExportJobsResponse_NextToken *smithy.Schema
-
-var ListPredictorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPredictorsRequest_NextToken *smithy.Schema
-
-var ListPredictorsRequest_MaxResults *smithy.Schema
-
-var ListPredictorsRequest_Filters *smithy.Schema
-
-var ListPredictorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListPredictorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPredictorsResponse_Predictors *smithy.Schema
-
-var ListPredictorsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListWhatIfAnalysesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfAnalysesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatIfAnalysesRequest_NextToken *smithy.Schema
-
-var ListWhatIfAnalysesRequest_MaxResults *smithy.Schema
-
-var ListWhatIfAnalysesRequest_Filters *smithy.Schema
-
-var ListWhatIfAnalysesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfAnalysesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatIfAnalysesResponse_WhatIfAnalyses *smithy.Schema
-
-var ListWhatIfAnalysesResponse_NextToken *smithy.Schema
-
-var ListWhatIfForecastExportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecastExportsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatIfForecastExportsRequest_NextToken *smithy.Schema
-
-var ListWhatIfForecastExportsRequest_MaxResults *smithy.Schema
-
-var ListWhatIfForecastExportsRequest_Filters *smithy.Schema
-
-var ListWhatIfForecastExportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecastExportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatIfForecastExportsResponse_WhatIfForecastExports *smithy.Schema
-
-var ListWhatIfForecastExportsResponse_NextToken *smithy.Schema
-
-var ListWhatIfForecastsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecastsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatIfForecastsRequest_NextToken *smithy.Schema
-
-var ListWhatIfForecastsRequest_MaxResults *smithy.Schema
-
-var ListWhatIfForecastsRequest_Filters *smithy.Schema
-
-var ListWhatIfForecastsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ListWhatIfForecastsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatIfForecastsResponse_WhatIfForecasts *smithy.Schema
-
-var ListWhatIfForecastsResponse_NextToken *smithy.Schema
-
-var ResumeResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "ResumeResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeResourceRequest_ResourceArn *smithy.Schema
-
-var StopResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "StopResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDatasetGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UpdateDatasetGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDatasetGroupRequest_DatasetGroupArn *smithy.Schema
-
-var UpdateDatasetGroupRequest_DatasetArns *smithy.Schema
-
-var UpdateDatasetGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecast",
-	Name:      "UpdateDatasetGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Operation_ADD = Operation.AddMember("ADD", smithyprelude.Unit)
-
-	Operation_SUBTRACT = Operation.AddMember("SUBTRACT", smithyprelude.Unit)
-
-	Operation_MULTIPLY = Operation.AddMember("MULTIPLY", smithyprelude.Unit)
-
-	Operation_DIVIDE = Operation.AddMember("DIVIDE", smithyprelude.Unit)
-
-	Action_AttributeName = Action.AddMember("AttributeName", _Name)
-
-	Action_Operation = Action.AddMember("Operation", Operation)
-
-	Action_Value = Action.AddMember("Value", _Double)
-
-	_Values_member = _Values.AddMember("member", _Value)
-
-	_Configuration_key = _Configuration.AddMember("key", _Name)
-
-	_Configuration_value = _Configuration.AddMember("value", _Values)
-
-	AdditionalDataset_Name = AdditionalDataset.AddMember("Name", _Name)
-
-	AdditionalDataset_Configuration = AdditionalDataset.AddMember("Configuration", _Configuration)
-
-	_AdditionalDatasets_member = _AdditionalDatasets.AddMember("member", AdditionalDataset)
-
-	_ArnList_member = _ArnList.AddMember("member", _Arn)
-
-	_Transformations_key = _Transformations.AddMember("key", _Name)
-
-	_Transformations_value = _Transformations.AddMember("value", _Value)
-
-	AttributeConfig_AttributeName = AttributeConfig.AddMember("AttributeName", _Name)
-
-	AttributeConfig_Transformations = AttributeConfig.AddMember("Transformations", _Transformations)
-
-	_AttributeConfigs_member = _AttributeConfigs.AddMember("member", AttributeConfig)
-
-	AttributeType_STRING = AttributeType.AddMember("STRING", smithyprelude.Unit)
-
-	AttributeType_INTEGER = AttributeType.AddMember("INTEGER", smithyprelude.Unit)
-
-	AttributeType_FLOAT = AttributeType.AddMember("FLOAT", smithyprelude.Unit)
-
-	AttributeType_TIMESTAMP = AttributeType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	AttributeType_GEOLOCATION = AttributeType.AddMember("GEOLOCATION", smithyprelude.Unit)
-
-	AutoMLOverrideStrategy_LatencyOptimized = AutoMLOverrideStrategy.AddMember("LatencyOptimized", smithyprelude.Unit)
-
-	AutoMLOverrideStrategy_AccuracyOptimized = AutoMLOverrideStrategy.AddMember("AccuracyOptimized", smithyprelude.Unit)
-
-	BaselineMetric_Name = BaselineMetric.AddMember("Name", _Name)
-
-	BaselineMetric_Value = BaselineMetric.AddMember("Value", _Double)
-
-	_BaselineMetrics_member = _BaselineMetrics.AddMember("member", BaselineMetric)
-
-	PredictorBaseline_BaselineMetrics = PredictorBaseline.AddMember("BaselineMetrics", _BaselineMetrics)
-
-	Baseline_PredictorBaseline = Baseline.AddMember("PredictorBaseline", PredictorBaseline)
-
-	CategoricalParameterRange_Name = CategoricalParameterRange.AddMember("Name", _Name)
-
-	CategoricalParameterRange_Values = CategoricalParameterRange.AddMember("Values", _Values)
-
-	_CategoricalParameterRanges_member = _CategoricalParameterRanges.AddMember("member", CategoricalParameterRange)
-
-	Condition_EQUALS = Condition.AddMember("EQUALS", smithyprelude.Unit)
-
-	Condition_NOT_EQUALS = Condition.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	Condition_LESS_THAN = Condition.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	Condition_GREATER_THAN = Condition.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ScalingType_Auto = ScalingType.AddMember("Auto", smithyprelude.Unit)
-
-	ScalingType_Linear = ScalingType.AddMember("Linear", smithyprelude.Unit)
-
-	ScalingType_Logarithmic = ScalingType.AddMember("Logarithmic", smithyprelude.Unit)
-
-	ScalingType_ReverseLogarithmic = ScalingType.AddMember("ReverseLogarithmic", smithyprelude.Unit)
-
-	ContinuousParameterRange_Name = ContinuousParameterRange.AddMember("Name", _Name)
-
-	ContinuousParameterRange_MaxValue = ContinuousParameterRange.AddMember("MaxValue", _Double)
-
-	ContinuousParameterRange_MinValue = ContinuousParameterRange.AddMember("MinValue", _Double)
-
-	ContinuousParameterRange_ScalingType = ContinuousParameterRange.AddMember("ScalingType", ScalingType)
-
-	_ContinuousParameterRanges_member = _ContinuousParameterRanges.AddMember("member", ContinuousParameterRange)
-
-	DataConfig_DatasetGroupArn = DataConfig.AddMember("DatasetGroupArn", _Arn)
-
-	DataConfig_AttributeConfigs = DataConfig.AddMember("AttributeConfigs", _AttributeConfigs)
-
-	DataConfig_AdditionalDatasets = DataConfig.AddMember("AdditionalDatasets", _AdditionalDatasets)
-
-	S3Config_Path = S3Config.AddMember("Path", _S3Path)
-
-	S3Config_RoleArn = S3Config.AddMember("RoleArn", _Arn)
-
-	S3Config_KMSKeyArn = S3Config.AddMember("KMSKeyArn", _KMSKeyArn)
-
-	DataDestination_S3Config = DataDestination.AddMember("S3Config", S3Config)
-
-	DatasetGroupSummary_DatasetGroupArn = DatasetGroupSummary.AddMember("DatasetGroupArn", _Arn)
-
-	DatasetGroupSummary_DatasetGroupName = DatasetGroupSummary.AddMember("DatasetGroupName", _Name)
-
-	DatasetGroupSummary_CreationTime = DatasetGroupSummary.AddMember("CreationTime", _Timestamp)
-
-	DatasetGroupSummary_LastModificationTime = DatasetGroupSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_DatasetGroups_member = _DatasetGroups.AddMember("member", DatasetGroupSummary)
-
-	DataSource_S3Config = DataSource.AddMember("S3Config", S3Config)
-
-	ImportMode_FULL = ImportMode.AddMember("FULL", smithyprelude.Unit)
-
-	ImportMode_INCREMENTAL = ImportMode.AddMember("INCREMENTAL", smithyprelude.Unit)
-
-	DatasetImportJobSummary_DatasetImportJobArn = DatasetImportJobSummary.AddMember("DatasetImportJobArn", _Arn)
-
-	DatasetImportJobSummary_DatasetImportJobName = DatasetImportJobSummary.AddMember("DatasetImportJobName", _Name)
-
-	DatasetImportJobSummary_DataSource = DatasetImportJobSummary.AddMember("DataSource", DataSource)
-
-	DatasetImportJobSummary_Status = DatasetImportJobSummary.AddMember("Status", _Status)
-
-	DatasetImportJobSummary_Message = DatasetImportJobSummary.AddMember("Message", _ErrorMessage)
-
-	DatasetImportJobSummary_CreationTime = DatasetImportJobSummary.AddMember("CreationTime", _Timestamp)
-
-	DatasetImportJobSummary_LastModificationTime = DatasetImportJobSummary.AddMember("LastModificationTime", _Timestamp)
-
-	DatasetImportJobSummary_ImportMode = DatasetImportJobSummary.AddMember("ImportMode", ImportMode)
-
-	_DatasetImportJobs_member = _DatasetImportJobs.AddMember("member", DatasetImportJobSummary)
-
-	DatasetType_TARGET_TIME_SERIES = DatasetType.AddMember("TARGET_TIME_SERIES", smithyprelude.Unit)
-
-	DatasetType_RELATED_TIME_SERIES = DatasetType.AddMember("RELATED_TIME_SERIES", smithyprelude.Unit)
-
-	DatasetType_ITEM_METADATA = DatasetType.AddMember("ITEM_METADATA", smithyprelude.Unit)
-
-	Domain_RETAIL = Domain.AddMember("RETAIL", smithyprelude.Unit)
-
-	Domain_CUSTOM = Domain.AddMember("CUSTOM", smithyprelude.Unit)
-
-	Domain_INVENTORY_PLANNING = Domain.AddMember("INVENTORY_PLANNING", smithyprelude.Unit)
-
-	Domain_EC2_CAPACITY = Domain.AddMember("EC2_CAPACITY", smithyprelude.Unit)
-
-	Domain_WORK_FORCE = Domain.AddMember("WORK_FORCE", smithyprelude.Unit)
-
-	Domain_WEB_TRAFFIC = Domain.AddMember("WEB_TRAFFIC", smithyprelude.Unit)
-
-	Domain_METRICS = Domain.AddMember("METRICS", smithyprelude.Unit)
-
-	DatasetSummary_DatasetArn = DatasetSummary.AddMember("DatasetArn", _Arn)
-
-	DatasetSummary_DatasetName = DatasetSummary.AddMember("DatasetName", _Name)
-
-	DatasetSummary_DatasetType = DatasetSummary.AddMember("DatasetType", DatasetType)
-
-	DatasetSummary_Domain = DatasetSummary.AddMember("Domain", Domain)
-
-	DatasetSummary_CreationTime = DatasetSummary.AddMember("CreationTime", _Timestamp)
-
-	DatasetSummary_LastModificationTime = DatasetSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_Datasets_member = _Datasets.AddMember("member", DatasetSummary)
-
-	DayOfWeek_MONDAY = DayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
-
-	DayOfWeek_TUESDAY = DayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
-
-	DayOfWeek_WEDNESDAY = DayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	DayOfWeek_THURSDAY = DayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
-
-	DayOfWeek_FRIDAY = DayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
-
-	DayOfWeek_SATURDAY = DayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
-
-	DayOfWeek_SUNDAY = DayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
-
-	EncryptionConfig_RoleArn = EncryptionConfig.AddMember("RoleArn", _Arn)
-
-	EncryptionConfig_KMSKeyArn = EncryptionConfig.AddMember("KMSKeyArn", _KMSKeyArn)
-
-	ErrorMetric_ForecastType = ErrorMetric.AddMember("ForecastType", _ForecastType)
-
-	ErrorMetric_WAPE = ErrorMetric.AddMember("WAPE", _Double)
-
-	ErrorMetric_RMSE = ErrorMetric.AddMember("RMSE", _Double)
-
-	ErrorMetric_MASE = ErrorMetric.AddMember("MASE", _Double)
-
-	ErrorMetric_MAPE = ErrorMetric.AddMember("MAPE", _Double)
-
-	_ErrorMetrics_member = _ErrorMetrics.AddMember("member", ErrorMetric)
-
-	EvaluationParameters_NumberOfBacktestWindows = EvaluationParameters.AddMember("NumberOfBacktestWindows", _Integer)
-
-	EvaluationParameters_BackTestWindowOffset = EvaluationParameters.AddMember("BackTestWindowOffset", _Integer)
-
-	EvaluationType_SUMMARY = EvaluationType.AddMember("SUMMARY", smithyprelude.Unit)
-
-	EvaluationType_COMPUTED = EvaluationType.AddMember("COMPUTED", smithyprelude.Unit)
-
-	WeightedQuantileLoss_Quantile = WeightedQuantileLoss.AddMember("Quantile", _Double)
-
-	WeightedQuantileLoss_LossValue = WeightedQuantileLoss.AddMember("LossValue", _Double)
-
-	_WeightedQuantileLosses_member = _WeightedQuantileLosses.AddMember("member", WeightedQuantileLoss)
-
-	Metrics_RMSE = Metrics.AddMember("RMSE", _Double)
-
-	Metrics_WeightedQuantileLosses = Metrics.AddMember("WeightedQuantileLosses", _WeightedQuantileLosses)
-
-	Metrics_ErrorMetrics = Metrics.AddMember("ErrorMetrics", _ErrorMetrics)
-
-	Metrics_AverageWeightedQuantileLoss = Metrics.AddMember("AverageWeightedQuantileLoss", _Double)
-
-	WindowSummary_TestWindowStart = WindowSummary.AddMember("TestWindowStart", _Timestamp)
-
-	WindowSummary_TestWindowEnd = WindowSummary.AddMember("TestWindowEnd", _Timestamp)
-
-	WindowSummary_ItemCount = WindowSummary.AddMember("ItemCount", _Integer)
-
-	WindowSummary_EvaluationType = WindowSummary.AddMember("EvaluationType", EvaluationType)
-
-	WindowSummary_Metrics = WindowSummary.AddMember("Metrics", Metrics)
-
-	_TestWindows_member = _TestWindows.AddMember("member", WindowSummary)
-
-	EvaluationResult_AlgorithmArn = EvaluationResult.AddMember("AlgorithmArn", _Arn)
-
-	EvaluationResult_TestWindows = EvaluationResult.AddMember("TestWindows", _TestWindows)
-
-	TimeSeriesGranularity_ALL = TimeSeriesGranularity.AddMember("ALL", smithyprelude.Unit)
-
-	TimeSeriesGranularity_SPECIFIC = TimeSeriesGranularity.AddMember("SPECIFIC", smithyprelude.Unit)
-
-	TimePointGranularity_ALL = TimePointGranularity.AddMember("ALL", smithyprelude.Unit)
-
-	TimePointGranularity_SPECIFIC = TimePointGranularity.AddMember("SPECIFIC", smithyprelude.Unit)
-
-	ExplainabilityConfig_TimeSeriesGranularity = ExplainabilityConfig.AddMember("TimeSeriesGranularity", TimeSeriesGranularity)
-
-	ExplainabilityConfig_TimePointGranularity = ExplainabilityConfig.AddMember("TimePointGranularity", TimePointGranularity)
-
-	ExplainabilitySummary_ExplainabilityArn = ExplainabilitySummary.AddMember("ExplainabilityArn", _Arn)
-
-	ExplainabilitySummary_ExplainabilityName = ExplainabilitySummary.AddMember("ExplainabilityName", _Name)
-
-	ExplainabilitySummary_ResourceArn = ExplainabilitySummary.AddMember("ResourceArn", _Arn)
-
-	ExplainabilitySummary_ExplainabilityConfig = ExplainabilitySummary.AddMember("ExplainabilityConfig", ExplainabilityConfig)
-
-	ExplainabilitySummary_Status = ExplainabilitySummary.AddMember("Status", _Status)
-
-	ExplainabilitySummary_Message = ExplainabilitySummary.AddMember("Message", _Message)
-
-	ExplainabilitySummary_CreationTime = ExplainabilitySummary.AddMember("CreationTime", _Timestamp)
-
-	ExplainabilitySummary_LastModificationTime = ExplainabilitySummary.AddMember("LastModificationTime", _Timestamp)
-
-	_Explainabilities_member = _Explainabilities.AddMember("member", ExplainabilitySummary)
-
-	ExplainabilityExportSummary_ExplainabilityExportArn = ExplainabilityExportSummary.AddMember("ExplainabilityExportArn", _Arn)
-
-	ExplainabilityExportSummary_ExplainabilityExportName = ExplainabilityExportSummary.AddMember("ExplainabilityExportName", _Name)
-
-	ExplainabilityExportSummary_Destination = ExplainabilityExportSummary.AddMember("Destination", DataDestination)
-
-	ExplainabilityExportSummary_Status = ExplainabilityExportSummary.AddMember("Status", _Status)
-
-	ExplainabilityExportSummary_Message = ExplainabilityExportSummary.AddMember("Message", _ErrorMessage)
-
-	ExplainabilityExportSummary_CreationTime = ExplainabilityExportSummary.AddMember("CreationTime", _Timestamp)
-
-	ExplainabilityExportSummary_LastModificationTime = ExplainabilityExportSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_ExplainabilityExports_member = _ExplainabilityExports.AddMember("member", ExplainabilityExportSummary)
-
-	ExplainabilityInfo_ExplainabilityArn = ExplainabilityInfo.AddMember("ExplainabilityArn", _Arn)
-
-	ExplainabilityInfo_Status = ExplainabilityInfo.AddMember("Status", _Status)
-
-	FeaturizationMethodName_filling = FeaturizationMethodName.AddMember("filling", smithyprelude.Unit)
-
-	_FeaturizationMethodParameters_key = _FeaturizationMethodParameters.AddMember("key", _ParameterKey)
-
-	_FeaturizationMethodParameters_value = _FeaturizationMethodParameters.AddMember("value", _ParameterValue)
-
-	FeaturizationMethod_FeaturizationMethodName = FeaturizationMethod.AddMember("FeaturizationMethodName", FeaturizationMethodName)
-
-	FeaturizationMethod_FeaturizationMethodParameters = FeaturizationMethod.AddMember("FeaturizationMethodParameters", _FeaturizationMethodParameters)
-
-	_FeaturizationPipeline_member = _FeaturizationPipeline.AddMember("member", FeaturizationMethod)
-
-	Featurization_AttributeName = Featurization.AddMember("AttributeName", _Name)
-
-	Featurization_FeaturizationPipeline = Featurization.AddMember("FeaturizationPipeline", _FeaturizationPipeline)
-
-	_ForecastDimensions_member = _ForecastDimensions.AddMember("member", _Name)
-
-	_Featurizations_member = _Featurizations.AddMember("member", Featurization)
-
-	FeaturizationConfig_ForecastFrequency = FeaturizationConfig.AddMember("ForecastFrequency", _Frequency)
-
-	FeaturizationConfig_ForecastDimensions = FeaturizationConfig.AddMember("ForecastDimensions", _ForecastDimensions)
-
-	FeaturizationConfig_Featurizations = FeaturizationConfig.AddMember("Featurizations", _Featurizations)
-
-	Statistics_Count = Statistics.AddMember("Count", _Integer)
-
-	Statistics_CountDistinct = Statistics.AddMember("CountDistinct", _Integer)
-
-	Statistics_CountNull = Statistics.AddMember("CountNull", _Integer)
-
-	Statistics_CountNan = Statistics.AddMember("CountNan", _Integer)
-
-	Statistics_Min = Statistics.AddMember("Min", _String)
-
-	Statistics_Max = Statistics.AddMember("Max", _String)
-
-	Statistics_Avg = Statistics.AddMember("Avg", _Double)
-
-	Statistics_Stddev = Statistics.AddMember("Stddev", _Double)
-
-	Statistics_CountLong = Statistics.AddMember("CountLong", _Long)
-
-	Statistics_CountDistinctLong = Statistics.AddMember("CountDistinctLong", _Long)
-
-	Statistics_CountNullLong = Statistics.AddMember("CountNullLong", _Long)
-
-	Statistics_CountNanLong = Statistics.AddMember("CountNanLong", _Long)
-
-	_FieldStatistics_key = _FieldStatistics.AddMember("key", _String)
-
-	_FieldStatistics_value = _FieldStatistics.AddMember("value", Statistics)
-
-	FilterConditionString_IS = FilterConditionString.AddMember("IS", smithyprelude.Unit)
-
-	FilterConditionString_IS_NOT = FilterConditionString.AddMember("IS_NOT", smithyprelude.Unit)
-
-	Filter_Key = Filter.AddMember("Key", _String)
-
-	Filter_Value = Filter.AddMember("Value", _Arn)
-
-	Filter_Condition = Filter.AddMember("Condition", FilterConditionString)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	ForecastExportJobSummary_ForecastExportJobArn = ForecastExportJobSummary.AddMember("ForecastExportJobArn", _Arn)
-
-	ForecastExportJobSummary_ForecastExportJobName = ForecastExportJobSummary.AddMember("ForecastExportJobName", _Name)
-
-	ForecastExportJobSummary_Destination = ForecastExportJobSummary.AddMember("Destination", DataDestination)
-
-	ForecastExportJobSummary_Status = ForecastExportJobSummary.AddMember("Status", _Status)
-
-	ForecastExportJobSummary_Message = ForecastExportJobSummary.AddMember("Message", _ErrorMessage)
-
-	ForecastExportJobSummary_CreationTime = ForecastExportJobSummary.AddMember("CreationTime", _Timestamp)
-
-	ForecastExportJobSummary_LastModificationTime = ForecastExportJobSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_ForecastExportJobs_member = _ForecastExportJobs.AddMember("member", ForecastExportJobSummary)
-
-	ForecastSummary_ForecastArn = ForecastSummary.AddMember("ForecastArn", _Arn)
-
-	ForecastSummary_ForecastName = ForecastSummary.AddMember("ForecastName", _Name)
-
-	ForecastSummary_PredictorArn = ForecastSummary.AddMember("PredictorArn", _String)
-
-	ForecastSummary_CreatedUsingAutoPredictor = ForecastSummary.AddMember("CreatedUsingAutoPredictor", _Boolean)
-
-	ForecastSummary_DatasetGroupArn = ForecastSummary.AddMember("DatasetGroupArn", _String)
-
-	ForecastSummary_Status = ForecastSummary.AddMember("Status", _Status)
-
-	ForecastSummary_Message = ForecastSummary.AddMember("Message", _ErrorMessage)
-
-	ForecastSummary_CreationTime = ForecastSummary.AddMember("CreationTime", _Timestamp)
-
-	ForecastSummary_LastModificationTime = ForecastSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_Forecasts_member = _Forecasts.AddMember("member", ForecastSummary)
-
-	_ForecastTypes_member = _ForecastTypes.AddMember("member", _ForecastType)
-
-	IntegerParameterRange_Name = IntegerParameterRange.AddMember("Name", _Name)
-
-	IntegerParameterRange_MaxValue = IntegerParameterRange.AddMember("MaxValue", _Integer)
-
-	IntegerParameterRange_MinValue = IntegerParameterRange.AddMember("MinValue", _Integer)
-
-	IntegerParameterRange_ScalingType = IntegerParameterRange.AddMember("ScalingType", ScalingType)
-
-	_IntegerParameterRanges_member = _IntegerParameterRanges.AddMember("member", IntegerParameterRange)
-
-	ParameterRanges_CategoricalParameterRanges = ParameterRanges.AddMember("CategoricalParameterRanges", _CategoricalParameterRanges)
-
-	ParameterRanges_ContinuousParameterRanges = ParameterRanges.AddMember("ContinuousParameterRanges", _ContinuousParameterRanges)
-
-	ParameterRanges_IntegerParameterRanges = ParameterRanges.AddMember("IntegerParameterRanges", _IntegerParameterRanges)
-
-	HyperParameterTuningJobConfig_ParameterRanges = HyperParameterTuningJobConfig.AddMember("ParameterRanges", ParameterRanges)
-
-	SupplementaryFeature_Name = SupplementaryFeature.AddMember("Name", _Name)
-
-	SupplementaryFeature_Value = SupplementaryFeature.AddMember("Value", _Value)
-
-	_SupplementaryFeatures_member = _SupplementaryFeatures.AddMember("member", SupplementaryFeature)
-
-	InputDataConfig_DatasetGroupArn = InputDataConfig.AddMember("DatasetGroupArn", _Arn)
-
-	InputDataConfig_SupplementaryFeatures = InputDataConfig.AddMember("SupplementaryFeatures", _SupplementaryFeatures)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	_LongArnList_member = _LongArnList.AddMember("member", _LongArn)
-
-	MetricResult_MetricName = MetricResult.AddMember("MetricName", _MetricName)
-
-	MetricResult_MetricValue = MetricResult.AddMember("MetricValue", _Double)
-
-	_MetricResults_member = _MetricResults.AddMember("member", MetricResult)
-
-	MonitorConfig_MonitorName = MonitorConfig.AddMember("MonitorName", _Name)
-
-	MonitorDataSource_DatasetImportJobArn = MonitorDataSource.AddMember("DatasetImportJobArn", _Arn)
-
-	MonitorDataSource_ForecastArn = MonitorDataSource.AddMember("ForecastArn", _Arn)
-
-	MonitorDataSource_PredictorArn = MonitorDataSource.AddMember("PredictorArn", _Arn)
-
-	MonitorInfo_MonitorArn = MonitorInfo.AddMember("MonitorArn", _Arn)
-
-	MonitorInfo_Status = MonitorInfo.AddMember("Status", _Status)
-
-	MonitorSummary_MonitorArn = MonitorSummary.AddMember("MonitorArn", _Arn)
-
-	MonitorSummary_MonitorName = MonitorSummary.AddMember("MonitorName", _Name)
-
-	MonitorSummary_ResourceArn = MonitorSummary.AddMember("ResourceArn", _Arn)
-
-	MonitorSummary_Status = MonitorSummary.AddMember("Status", _Status)
-
-	MonitorSummary_CreationTime = MonitorSummary.AddMember("CreationTime", _Timestamp)
-
-	MonitorSummary_LastModificationTime = MonitorSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_Monitors_member = _Monitors.AddMember("member", MonitorSummary)
-
-	Month_JANUARY = Month.AddMember("JANUARY", smithyprelude.Unit)
-
-	Month_FEBRUARY = Month.AddMember("FEBRUARY", smithyprelude.Unit)
-
-	Month_MARCH = Month.AddMember("MARCH", smithyprelude.Unit)
-
-	Month_APRIL = Month.AddMember("APRIL", smithyprelude.Unit)
-
-	Month_MAY = Month.AddMember("MAY", smithyprelude.Unit)
-
-	Month_JUNE = Month.AddMember("JUNE", smithyprelude.Unit)
-
-	Month_JULY = Month.AddMember("JULY", smithyprelude.Unit)
-
-	Month_AUGUST = Month.AddMember("AUGUST", smithyprelude.Unit)
-
-	Month_SEPTEMBER = Month.AddMember("SEPTEMBER", smithyprelude.Unit)
-
-	Month_OCTOBER = Month.AddMember("OCTOBER", smithyprelude.Unit)
-
-	Month_NOVEMBER = Month.AddMember("NOVEMBER", smithyprelude.Unit)
-
-	Month_DECEMBER = Month.AddMember("DECEMBER", smithyprelude.Unit)
-
-	OptimizationMetric_WAPE = OptimizationMetric.AddMember("WAPE", smithyprelude.Unit)
-
-	OptimizationMetric_RMSE = OptimizationMetric.AddMember("RMSE", smithyprelude.Unit)
-
-	OptimizationMetric_AverageWeightedQuantileLoss = OptimizationMetric.AddMember("AverageWeightedQuantileLoss", smithyprelude.Unit)
-
-	OptimizationMetric_MASE = OptimizationMetric.AddMember("MASE", smithyprelude.Unit)
-
-	OptimizationMetric_MAPE = OptimizationMetric.AddMember("MAPE", smithyprelude.Unit)
-
-	PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn = PredictorBacktestExportJobSummary.AddMember("PredictorBacktestExportJobArn", _Arn)
-
-	PredictorBacktestExportJobSummary_PredictorBacktestExportJobName = PredictorBacktestExportJobSummary.AddMember("PredictorBacktestExportJobName", _Name)
-
-	PredictorBacktestExportJobSummary_Destination = PredictorBacktestExportJobSummary.AddMember("Destination", DataDestination)
-
-	PredictorBacktestExportJobSummary_Status = PredictorBacktestExportJobSummary.AddMember("Status", _Status)
-
-	PredictorBacktestExportJobSummary_Message = PredictorBacktestExportJobSummary.AddMember("Message", _ErrorMessage)
-
-	PredictorBacktestExportJobSummary_CreationTime = PredictorBacktestExportJobSummary.AddMember("CreationTime", _Timestamp)
-
-	PredictorBacktestExportJobSummary_LastModificationTime = PredictorBacktestExportJobSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_PredictorBacktestExportJobs_member = _PredictorBacktestExportJobs.AddMember("member", PredictorBacktestExportJobSummary)
-
-	_PredictorEvaluationResults_member = _PredictorEvaluationResults.AddMember("member", EvaluationResult)
-
-	PredictorEvent_Detail = PredictorEvent.AddMember("Detail", _Detail)
-
-	PredictorEvent_Datetime = PredictorEvent.AddMember("Datetime", _Timestamp)
-
-	TestWindowSummary_TestWindowStart = TestWindowSummary.AddMember("TestWindowStart", _Timestamp)
-
-	TestWindowSummary_TestWindowEnd = TestWindowSummary.AddMember("TestWindowEnd", _Timestamp)
-
-	TestWindowSummary_Status = TestWindowSummary.AddMember("Status", _Status)
-
-	TestWindowSummary_Message = TestWindowSummary.AddMember("Message", _ErrorMessage)
-
-	_TestWindowDetails_member = _TestWindowDetails.AddMember("member", TestWindowSummary)
-
-	PredictorExecution_AlgorithmArn = PredictorExecution.AddMember("AlgorithmArn", _Arn)
-
-	PredictorExecution_TestWindows = PredictorExecution.AddMember("TestWindows", _TestWindowDetails)
-
-	_PredictorExecutions_member = _PredictorExecutions.AddMember("member", PredictorExecution)
-
-	PredictorExecutionDetails_PredictorExecutions = PredictorExecutionDetails.AddMember("PredictorExecutions", _PredictorExecutions)
-
-	PredictorMonitorEvaluation_ResourceArn = PredictorMonitorEvaluation.AddMember("ResourceArn", _Arn)
-
-	PredictorMonitorEvaluation_MonitorArn = PredictorMonitorEvaluation.AddMember("MonitorArn", _Arn)
-
-	PredictorMonitorEvaluation_EvaluationTime = PredictorMonitorEvaluation.AddMember("EvaluationTime", _Timestamp)
-
-	PredictorMonitorEvaluation_EvaluationState = PredictorMonitorEvaluation.AddMember("EvaluationState", _EvaluationState)
-
-	PredictorMonitorEvaluation_WindowStartDatetime = PredictorMonitorEvaluation.AddMember("WindowStartDatetime", _Timestamp)
-
-	PredictorMonitorEvaluation_WindowEndDatetime = PredictorMonitorEvaluation.AddMember("WindowEndDatetime", _Timestamp)
-
-	PredictorMonitorEvaluation_PredictorEvent = PredictorMonitorEvaluation.AddMember("PredictorEvent", PredictorEvent)
-
-	PredictorMonitorEvaluation_MonitorDataSource = PredictorMonitorEvaluation.AddMember("MonitorDataSource", MonitorDataSource)
-
-	PredictorMonitorEvaluation_MetricResults = PredictorMonitorEvaluation.AddMember("MetricResults", _MetricResults)
-
-	PredictorMonitorEvaluation_NumItemsEvaluated = PredictorMonitorEvaluation.AddMember("NumItemsEvaluated", _Long)
-
-	PredictorMonitorEvaluation_Message = PredictorMonitorEvaluation.AddMember("Message", _Message)
-
-	_PredictorMonitorEvaluations_member = _PredictorMonitorEvaluations.AddMember("member", PredictorMonitorEvaluation)
-
-	State_Active = State.AddMember("Active", smithyprelude.Unit)
-
-	State_Deleted = State.AddMember("Deleted", smithyprelude.Unit)
-
-	ReferencePredictorSummary_Arn = ReferencePredictorSummary.AddMember("Arn", _Arn)
-
-	ReferencePredictorSummary_State = ReferencePredictorSummary.AddMember("State", State)
-
-	PredictorSummary_PredictorArn = PredictorSummary.AddMember("PredictorArn", _Arn)
-
-	PredictorSummary_PredictorName = PredictorSummary.AddMember("PredictorName", _Name)
-
-	PredictorSummary_DatasetGroupArn = PredictorSummary.AddMember("DatasetGroupArn", _Arn)
-
-	PredictorSummary_IsAutoPredictor = PredictorSummary.AddMember("IsAutoPredictor", _Boolean)
-
-	PredictorSummary_ReferencePredictorSummary = PredictorSummary.AddMember("ReferencePredictorSummary", ReferencePredictorSummary)
-
-	PredictorSummary_Status = PredictorSummary.AddMember("Status", _Status)
-
-	PredictorSummary_Message = PredictorSummary.AddMember("Message", _ErrorMessage)
-
-	PredictorSummary_CreationTime = PredictorSummary.AddMember("CreationTime", _Timestamp)
-
-	PredictorSummary_LastModificationTime = PredictorSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_Predictors_member = _Predictors.AddMember("member", PredictorSummary)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	SchemaAttribute_AttributeName = SchemaAttribute.AddMember("AttributeName", _Name)
-
-	SchemaAttribute_AttributeType = SchemaAttribute.AddMember("AttributeType", AttributeType)
-
-	_SchemaAttributes_member = _SchemaAttributes.AddMember("member", SchemaAttribute)
-
-	Schema_Attributes = Schema.AddMember("Attributes", _SchemaAttributes)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	TimeAlignmentBoundary_Month = TimeAlignmentBoundary.AddMember("Month", Month)
-
-	TimeAlignmentBoundary_DayOfMonth = TimeAlignmentBoundary.AddMember("DayOfMonth", _DayOfMonth)
-
-	TimeAlignmentBoundary_DayOfWeek = TimeAlignmentBoundary.AddMember("DayOfWeek", DayOfWeek)
-
-	TimeAlignmentBoundary_Hour = TimeAlignmentBoundary.AddMember("Hour", _Hour)
-
-	TimeSeriesCondition_AttributeName = TimeSeriesCondition.AddMember("AttributeName", _Name)
-
-	TimeSeriesCondition_AttributeValue = TimeSeriesCondition.AddMember("AttributeValue", _AttributeValue)
-
-	TimeSeriesCondition_Condition = TimeSeriesCondition.AddMember("Condition", Condition)
-
-	_TimeSeriesConditions_member = _TimeSeriesConditions.AddMember("member", TimeSeriesCondition)
-
-	TimeSeriesIdentifiers_DataSource = TimeSeriesIdentifiers.AddMember("DataSource", DataSource)
-
-	TimeSeriesIdentifiers_Schema = TimeSeriesIdentifiers.AddMember("Schema", Schema)
-
-	TimeSeriesIdentifiers_Format = TimeSeriesIdentifiers.AddMember("Format", _Format)
-
-	TimeSeriesReplacementsDataSource_S3Config = TimeSeriesReplacementsDataSource.AddMember("S3Config", S3Config)
-
-	TimeSeriesReplacementsDataSource_Schema = TimeSeriesReplacementsDataSource.AddMember("Schema", Schema)
-
-	TimeSeriesReplacementsDataSource_Format = TimeSeriesReplacementsDataSource.AddMember("Format", _Format)
-
-	TimeSeriesReplacementsDataSource_TimestampFormat = TimeSeriesReplacementsDataSource.AddMember("TimestampFormat", _TimestampFormat)
-
-	TimeSeriesSelector_TimeSeriesIdentifiers = TimeSeriesSelector.AddMember("TimeSeriesIdentifiers", TimeSeriesIdentifiers)
-
-	TimeSeriesTransformation_Action = TimeSeriesTransformation.AddMember("Action", Action)
-
-	TimeSeriesTransformation_TimeSeriesConditions = TimeSeriesTransformation.AddMember("TimeSeriesConditions", _TimeSeriesConditions)
-
-	_TimeSeriesTransformations_member = _TimeSeriesTransformations.AddMember("member", TimeSeriesTransformation)
-
-	_TrainingParameters_key = _TrainingParameters.AddMember("key", _ParameterKey)
-
-	_TrainingParameters_value = _TrainingParameters.AddMember("value", _ParameterValue)
-
-	WhatIfAnalysisSummary_WhatIfAnalysisArn = WhatIfAnalysisSummary.AddMember("WhatIfAnalysisArn", _Arn)
-
-	WhatIfAnalysisSummary_WhatIfAnalysisName = WhatIfAnalysisSummary.AddMember("WhatIfAnalysisName", _Name)
-
-	WhatIfAnalysisSummary_ForecastArn = WhatIfAnalysisSummary.AddMember("ForecastArn", _Arn)
-
-	WhatIfAnalysisSummary_Status = WhatIfAnalysisSummary.AddMember("Status", _Status)
-
-	WhatIfAnalysisSummary_Message = WhatIfAnalysisSummary.AddMember("Message", _ErrorMessage)
-
-	WhatIfAnalysisSummary_CreationTime = WhatIfAnalysisSummary.AddMember("CreationTime", _Timestamp)
-
-	WhatIfAnalysisSummary_LastModificationTime = WhatIfAnalysisSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_WhatIfAnalyses_member = _WhatIfAnalyses.AddMember("member", WhatIfAnalysisSummary)
-
-	_WhatIfForecastArnListForExport_member = _WhatIfForecastArnListForExport.AddMember("member", _LongArn)
-
-	WhatIfForecastExportSummary_WhatIfForecastExportArn = WhatIfForecastExportSummary.AddMember("WhatIfForecastExportArn", _LongArn)
-
-	WhatIfForecastExportSummary_WhatIfForecastArns = WhatIfForecastExportSummary.AddMember("WhatIfForecastArns", _WhatIfForecastArnListForExport)
-
-	WhatIfForecastExportSummary_WhatIfForecastExportName = WhatIfForecastExportSummary.AddMember("WhatIfForecastExportName", _Name)
-
-	WhatIfForecastExportSummary_Destination = WhatIfForecastExportSummary.AddMember("Destination", DataDestination)
-
-	WhatIfForecastExportSummary_Status = WhatIfForecastExportSummary.AddMember("Status", _Status)
-
-	WhatIfForecastExportSummary_Message = WhatIfForecastExportSummary.AddMember("Message", _ErrorMessage)
-
-	WhatIfForecastExportSummary_CreationTime = WhatIfForecastExportSummary.AddMember("CreationTime", _Timestamp)
-
-	WhatIfForecastExportSummary_LastModificationTime = WhatIfForecastExportSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_WhatIfForecastExports_member = _WhatIfForecastExports.AddMember("member", WhatIfForecastExportSummary)
-
-	WhatIfForecastSummary_WhatIfForecastArn = WhatIfForecastSummary.AddMember("WhatIfForecastArn", _LongArn)
-
-	WhatIfForecastSummary_WhatIfForecastName = WhatIfForecastSummary.AddMember("WhatIfForecastName", _Name)
-
-	WhatIfForecastSummary_WhatIfAnalysisArn = WhatIfForecastSummary.AddMember("WhatIfAnalysisArn", _Arn)
-
-	WhatIfForecastSummary_Status = WhatIfForecastSummary.AddMember("Status", _Status)
-
-	WhatIfForecastSummary_Message = WhatIfForecastSummary.AddMember("Message", _ErrorMessage)
-
-	WhatIfForecastSummary_CreationTime = WhatIfForecastSummary.AddMember("CreationTime", _Timestamp)
-
-	WhatIfForecastSummary_LastModificationTime = WhatIfForecastSummary.AddMember("LastModificationTime", _Timestamp)
-
-	_WhatIfForecasts_member = _WhatIfForecasts.AddMember("member", WhatIfForecastSummary)
-
-	CreateAutoPredictorRequest_PredictorName = CreateAutoPredictorRequest.AddMember("PredictorName", _Name)
-
-	CreateAutoPredictorRequest_ForecastHorizon = CreateAutoPredictorRequest.AddMember("ForecastHorizon", _Integer)
-
-	CreateAutoPredictorRequest_ForecastTypes = CreateAutoPredictorRequest.AddMember("ForecastTypes", _ForecastTypes)
-
-	CreateAutoPredictorRequest_ForecastDimensions = CreateAutoPredictorRequest.AddMember("ForecastDimensions", _ForecastDimensions)
-
-	CreateAutoPredictorRequest_ForecastFrequency = CreateAutoPredictorRequest.AddMember("ForecastFrequency", _Frequency)
-
-	CreateAutoPredictorRequest_DataConfig = CreateAutoPredictorRequest.AddMember("DataConfig", DataConfig)
-
-	CreateAutoPredictorRequest_EncryptionConfig = CreateAutoPredictorRequest.AddMember("EncryptionConfig", EncryptionConfig)
-
-	CreateAutoPredictorRequest_ReferencePredictorArn = CreateAutoPredictorRequest.AddMember("ReferencePredictorArn", _Arn)
-
-	CreateAutoPredictorRequest_OptimizationMetric = CreateAutoPredictorRequest.AddMember("OptimizationMetric", OptimizationMetric)
-
-	CreateAutoPredictorRequest_ExplainPredictor = CreateAutoPredictorRequest.AddMember("ExplainPredictor", _Boolean)
-
-	CreateAutoPredictorRequest_Tags = CreateAutoPredictorRequest.AddMember("Tags", _Tags)
-
-	CreateAutoPredictorRequest_MonitorConfig = CreateAutoPredictorRequest.AddMember("MonitorConfig", MonitorConfig)
-
-	CreateAutoPredictorRequest_TimeAlignmentBoundary = CreateAutoPredictorRequest.AddMember("TimeAlignmentBoundary", TimeAlignmentBoundary)
-
-	CreateAutoPredictorResponse_PredictorArn = CreateAutoPredictorResponse.AddMember("PredictorArn", _Arn)
-
-	CreateDatasetGroupRequest_DatasetGroupName = CreateDatasetGroupRequest.AddMember("DatasetGroupName", _Name)
-
-	CreateDatasetGroupRequest_Domain = CreateDatasetGroupRequest.AddMember("Domain", Domain)
-
-	CreateDatasetGroupRequest_DatasetArns = CreateDatasetGroupRequest.AddMember("DatasetArns", _ArnList)
-
-	CreateDatasetGroupRequest_Tags = CreateDatasetGroupRequest.AddMember("Tags", _Tags)
-
-	CreateDatasetGroupResponse_DatasetGroupArn = CreateDatasetGroupResponse.AddMember("DatasetGroupArn", _Arn)
-
-	CreateDatasetImportJobRequest_DatasetImportJobName = CreateDatasetImportJobRequest.AddMember("DatasetImportJobName", _Name)
-
-	CreateDatasetImportJobRequest_DatasetArn = CreateDatasetImportJobRequest.AddMember("DatasetArn", _Arn)
-
-	CreateDatasetImportJobRequest_DataSource = CreateDatasetImportJobRequest.AddMember("DataSource", DataSource)
-
-	CreateDatasetImportJobRequest_TimestampFormat = CreateDatasetImportJobRequest.AddMember("TimestampFormat", _TimestampFormat)
-
-	CreateDatasetImportJobRequest_TimeZone = CreateDatasetImportJobRequest.AddMember("TimeZone", _TimeZone)
-
-	CreateDatasetImportJobRequest_UseGeolocationForTimeZone = CreateDatasetImportJobRequest.AddMember("UseGeolocationForTimeZone", _UseGeolocationForTimeZone)
-
-	CreateDatasetImportJobRequest_GeolocationFormat = CreateDatasetImportJobRequest.AddMember("GeolocationFormat", _GeolocationFormat)
-
-	CreateDatasetImportJobRequest_Tags = CreateDatasetImportJobRequest.AddMember("Tags", _Tags)
-
-	CreateDatasetImportJobRequest_Format = CreateDatasetImportJobRequest.AddMember("Format", _Format)
-
-	CreateDatasetImportJobRequest_ImportMode = CreateDatasetImportJobRequest.AddMember("ImportMode", ImportMode)
-
-	CreateDatasetImportJobResponse_DatasetImportJobArn = CreateDatasetImportJobResponse.AddMember("DatasetImportJobArn", _Arn)
-
-	CreateDatasetRequest_DatasetName = CreateDatasetRequest.AddMember("DatasetName", _Name)
-
-	CreateDatasetRequest_Domain = CreateDatasetRequest.AddMember("Domain", Domain)
-
-	CreateDatasetRequest_DatasetType = CreateDatasetRequest.AddMember("DatasetType", DatasetType)
-
-	CreateDatasetRequest_DataFrequency = CreateDatasetRequest.AddMember("DataFrequency", _Frequency)
-
-	CreateDatasetRequest_Schema = CreateDatasetRequest.AddMember("Schema", Schema)
-
-	CreateDatasetRequest_EncryptionConfig = CreateDatasetRequest.AddMember("EncryptionConfig", EncryptionConfig)
-
-	CreateDatasetRequest_Tags = CreateDatasetRequest.AddMember("Tags", _Tags)
-
-	CreateDatasetResponse_DatasetArn = CreateDatasetResponse.AddMember("DatasetArn", _Arn)
-
-	CreateExplainabilityExportRequest_ExplainabilityExportName = CreateExplainabilityExportRequest.AddMember("ExplainabilityExportName", _Name)
-
-	CreateExplainabilityExportRequest_ExplainabilityArn = CreateExplainabilityExportRequest.AddMember("ExplainabilityArn", _Arn)
-
-	CreateExplainabilityExportRequest_Destination = CreateExplainabilityExportRequest.AddMember("Destination", DataDestination)
-
-	CreateExplainabilityExportRequest_Tags = CreateExplainabilityExportRequest.AddMember("Tags", _Tags)
-
-	CreateExplainabilityExportRequest_Format = CreateExplainabilityExportRequest.AddMember("Format", _Format)
-
-	CreateExplainabilityExportResponse_ExplainabilityExportArn = CreateExplainabilityExportResponse.AddMember("ExplainabilityExportArn", _Arn)
-
-	CreateExplainabilityRequest_ExplainabilityName = CreateExplainabilityRequest.AddMember("ExplainabilityName", _Name)
-
-	CreateExplainabilityRequest_ResourceArn = CreateExplainabilityRequest.AddMember("ResourceArn", _Arn)
-
-	CreateExplainabilityRequest_ExplainabilityConfig = CreateExplainabilityRequest.AddMember("ExplainabilityConfig", ExplainabilityConfig)
-
-	CreateExplainabilityRequest_DataSource = CreateExplainabilityRequest.AddMember("DataSource", DataSource)
-
-	CreateExplainabilityRequest_Schema = CreateExplainabilityRequest.AddMember("Schema", Schema)
-
-	CreateExplainabilityRequest_EnableVisualization = CreateExplainabilityRequest.AddMember("EnableVisualization", _Boolean)
-
-	CreateExplainabilityRequest_StartDateTime = CreateExplainabilityRequest.AddMember("StartDateTime", _LocalDateTime)
-
-	CreateExplainabilityRequest_EndDateTime = CreateExplainabilityRequest.AddMember("EndDateTime", _LocalDateTime)
-
-	CreateExplainabilityRequest_Tags = CreateExplainabilityRequest.AddMember("Tags", _Tags)
-
-	CreateExplainabilityResponse_ExplainabilityArn = CreateExplainabilityResponse.AddMember("ExplainabilityArn", _Arn)
-
-	CreateForecastExportJobRequest_ForecastExportJobName = CreateForecastExportJobRequest.AddMember("ForecastExportJobName", _Name)
-
-	CreateForecastExportJobRequest_ForecastArn = CreateForecastExportJobRequest.AddMember("ForecastArn", _Arn)
-
-	CreateForecastExportJobRequest_Destination = CreateForecastExportJobRequest.AddMember("Destination", DataDestination)
-
-	CreateForecastExportJobRequest_Tags = CreateForecastExportJobRequest.AddMember("Tags", _Tags)
-
-	CreateForecastExportJobRequest_Format = CreateForecastExportJobRequest.AddMember("Format", _Format)
-
-	CreateForecastExportJobResponse_ForecastExportJobArn = CreateForecastExportJobResponse.AddMember("ForecastExportJobArn", _Arn)
-
-	CreateForecastRequest_ForecastName = CreateForecastRequest.AddMember("ForecastName", _Name)
-
-	CreateForecastRequest_PredictorArn = CreateForecastRequest.AddMember("PredictorArn", _Arn)
-
-	CreateForecastRequest_ForecastTypes = CreateForecastRequest.AddMember("ForecastTypes", _ForecastTypes)
-
-	CreateForecastRequest_Tags = CreateForecastRequest.AddMember("Tags", _Tags)
-
-	CreateForecastRequest_TimeSeriesSelector = CreateForecastRequest.AddMember("TimeSeriesSelector", TimeSeriesSelector)
-
-	CreateForecastResponse_ForecastArn = CreateForecastResponse.AddMember("ForecastArn", _Arn)
-
-	CreateMonitorRequest_MonitorName = CreateMonitorRequest.AddMember("MonitorName", _Name)
-
-	CreateMonitorRequest_ResourceArn = CreateMonitorRequest.AddMember("ResourceArn", _Arn)
-
-	CreateMonitorRequest_Tags = CreateMonitorRequest.AddMember("Tags", _Tags)
-
-	CreateMonitorResponse_MonitorArn = CreateMonitorResponse.AddMember("MonitorArn", _Arn)
-
-	CreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName = CreatePredictorBacktestExportJobRequest.AddMember("PredictorBacktestExportJobName", _Name)
-
-	CreatePredictorBacktestExportJobRequest_PredictorArn = CreatePredictorBacktestExportJobRequest.AddMember("PredictorArn", _Arn)
-
-	CreatePredictorBacktestExportJobRequest_Destination = CreatePredictorBacktestExportJobRequest.AddMember("Destination", DataDestination)
-
-	CreatePredictorBacktestExportJobRequest_Tags = CreatePredictorBacktestExportJobRequest.AddMember("Tags", _Tags)
-
-	CreatePredictorBacktestExportJobRequest_Format = CreatePredictorBacktestExportJobRequest.AddMember("Format", _Format)
-
-	CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = CreatePredictorBacktestExportJobResponse.AddMember("PredictorBacktestExportJobArn", _Arn)
-
-	CreatePredictorRequest_PredictorName = CreatePredictorRequest.AddMember("PredictorName", _Name)
-
-	CreatePredictorRequest_AlgorithmArn = CreatePredictorRequest.AddMember("AlgorithmArn", _Arn)
-
-	CreatePredictorRequest_ForecastHorizon = CreatePredictorRequest.AddMember("ForecastHorizon", _Integer)
-
-	CreatePredictorRequest_ForecastTypes = CreatePredictorRequest.AddMember("ForecastTypes", _ForecastTypes)
-
-	CreatePredictorRequest_PerformAutoML = CreatePredictorRequest.AddMember("PerformAutoML", _Boolean)
-
-	CreatePredictorRequest_AutoMLOverrideStrategy = CreatePredictorRequest.AddMember("AutoMLOverrideStrategy", AutoMLOverrideStrategy)
-
-	CreatePredictorRequest_PerformHPO = CreatePredictorRequest.AddMember("PerformHPO", _Boolean)
-
-	CreatePredictorRequest_TrainingParameters = CreatePredictorRequest.AddMember("TrainingParameters", _TrainingParameters)
-
-	CreatePredictorRequest_EvaluationParameters = CreatePredictorRequest.AddMember("EvaluationParameters", EvaluationParameters)
-
-	CreatePredictorRequest_HPOConfig = CreatePredictorRequest.AddMember("HPOConfig", HyperParameterTuningJobConfig)
-
-	CreatePredictorRequest_InputDataConfig = CreatePredictorRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	CreatePredictorRequest_FeaturizationConfig = CreatePredictorRequest.AddMember("FeaturizationConfig", FeaturizationConfig)
-
-	CreatePredictorRequest_EncryptionConfig = CreatePredictorRequest.AddMember("EncryptionConfig", EncryptionConfig)
-
-	CreatePredictorRequest_Tags = CreatePredictorRequest.AddMember("Tags", _Tags)
-
-	CreatePredictorRequest_OptimizationMetric = CreatePredictorRequest.AddMember("OptimizationMetric", OptimizationMetric)
-
-	CreatePredictorResponse_PredictorArn = CreatePredictorResponse.AddMember("PredictorArn", _Arn)
-
-	CreateWhatIfAnalysisRequest_WhatIfAnalysisName = CreateWhatIfAnalysisRequest.AddMember("WhatIfAnalysisName", _Name)
-
-	CreateWhatIfAnalysisRequest_ForecastArn = CreateWhatIfAnalysisRequest.AddMember("ForecastArn", _Arn)
-
-	CreateWhatIfAnalysisRequest_TimeSeriesSelector = CreateWhatIfAnalysisRequest.AddMember("TimeSeriesSelector", TimeSeriesSelector)
-
-	CreateWhatIfAnalysisRequest_Tags = CreateWhatIfAnalysisRequest.AddMember("Tags", _Tags)
-
-	CreateWhatIfAnalysisResponse_WhatIfAnalysisArn = CreateWhatIfAnalysisResponse.AddMember("WhatIfAnalysisArn", _Arn)
-
-	CreateWhatIfForecastExportRequest_WhatIfForecastExportName = CreateWhatIfForecastExportRequest.AddMember("WhatIfForecastExportName", _Name)
-
-	CreateWhatIfForecastExportRequest_WhatIfForecastArns = CreateWhatIfForecastExportRequest.AddMember("WhatIfForecastArns", _WhatIfForecastArnListForExport)
-
-	CreateWhatIfForecastExportRequest_Destination = CreateWhatIfForecastExportRequest.AddMember("Destination", DataDestination)
-
-	CreateWhatIfForecastExportRequest_Tags = CreateWhatIfForecastExportRequest.AddMember("Tags", _Tags)
-
-	CreateWhatIfForecastExportRequest_Format = CreateWhatIfForecastExportRequest.AddMember("Format", _Format)
-
-	CreateWhatIfForecastExportResponse_WhatIfForecastExportArn = CreateWhatIfForecastExportResponse.AddMember("WhatIfForecastExportArn", _LongArn)
-
-	CreateWhatIfForecastRequest_WhatIfForecastName = CreateWhatIfForecastRequest.AddMember("WhatIfForecastName", _Name)
-
-	CreateWhatIfForecastRequest_WhatIfAnalysisArn = CreateWhatIfForecastRequest.AddMember("WhatIfAnalysisArn", _Arn)
-
-	CreateWhatIfForecastRequest_TimeSeriesTransformations = CreateWhatIfForecastRequest.AddMember("TimeSeriesTransformations", _TimeSeriesTransformations)
-
-	CreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource = CreateWhatIfForecastRequest.AddMember("TimeSeriesReplacementsDataSource", TimeSeriesReplacementsDataSource)
-
-	CreateWhatIfForecastRequest_Tags = CreateWhatIfForecastRequest.AddMember("Tags", _Tags)
-
-	CreateWhatIfForecastResponse_WhatIfForecastArn = CreateWhatIfForecastResponse.AddMember("WhatIfForecastArn", _LongArn)
-
-	DeleteDatasetGroupRequest_DatasetGroupArn = DeleteDatasetGroupRequest.AddMember("DatasetGroupArn", _Arn)
-
-	DeleteDatasetImportJobRequest_DatasetImportJobArn = DeleteDatasetImportJobRequest.AddMember("DatasetImportJobArn", _Arn)
-
-	DeleteDatasetRequest_DatasetArn = DeleteDatasetRequest.AddMember("DatasetArn", _Arn)
-
-	DeleteExplainabilityExportRequest_ExplainabilityExportArn = DeleteExplainabilityExportRequest.AddMember("ExplainabilityExportArn", _Arn)
-
-	DeleteExplainabilityRequest_ExplainabilityArn = DeleteExplainabilityRequest.AddMember("ExplainabilityArn", _Arn)
-
-	DeleteForecastExportJobRequest_ForecastExportJobArn = DeleteForecastExportJobRequest.AddMember("ForecastExportJobArn", _Arn)
-
-	DeleteForecastRequest_ForecastArn = DeleteForecastRequest.AddMember("ForecastArn", _Arn)
-
-	DeleteMonitorRequest_MonitorArn = DeleteMonitorRequest.AddMember("MonitorArn", _Arn)
-
-	DeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = DeletePredictorBacktestExportJobRequest.AddMember("PredictorBacktestExportJobArn", _Arn)
-
-	DeletePredictorRequest_PredictorArn = DeletePredictorRequest.AddMember("PredictorArn", _Arn)
-
-	DeleteResourceTreeRequest_ResourceArn = DeleteResourceTreeRequest.AddMember("ResourceArn", _Arn)
-
-	DeleteWhatIfAnalysisRequest_WhatIfAnalysisArn = DeleteWhatIfAnalysisRequest.AddMember("WhatIfAnalysisArn", _Arn)
-
-	DeleteWhatIfForecastExportRequest_WhatIfForecastExportArn = DeleteWhatIfForecastExportRequest.AddMember("WhatIfForecastExportArn", _LongArn)
-
-	DeleteWhatIfForecastRequest_WhatIfForecastArn = DeleteWhatIfForecastRequest.AddMember("WhatIfForecastArn", _LongArn)
-
-	DescribeAutoPredictorRequest_PredictorArn = DescribeAutoPredictorRequest.AddMember("PredictorArn", _Arn)
-
-	DescribeAutoPredictorResponse_PredictorArn = DescribeAutoPredictorResponse.AddMember("PredictorArn", _Arn)
-
-	DescribeAutoPredictorResponse_PredictorName = DescribeAutoPredictorResponse.AddMember("PredictorName", _Name)
-
-	DescribeAutoPredictorResponse_ForecastHorizon = DescribeAutoPredictorResponse.AddMember("ForecastHorizon", _Integer)
-
-	DescribeAutoPredictorResponse_ForecastTypes = DescribeAutoPredictorResponse.AddMember("ForecastTypes", _ForecastTypes)
-
-	DescribeAutoPredictorResponse_ForecastFrequency = DescribeAutoPredictorResponse.AddMember("ForecastFrequency", _Frequency)
-
-	DescribeAutoPredictorResponse_ForecastDimensions = DescribeAutoPredictorResponse.AddMember("ForecastDimensions", _ForecastDimensions)
-
-	DescribeAutoPredictorResponse_DatasetImportJobArns = DescribeAutoPredictorResponse.AddMember("DatasetImportJobArns", _ArnList)
-
-	DescribeAutoPredictorResponse_DataConfig = DescribeAutoPredictorResponse.AddMember("DataConfig", DataConfig)
-
-	DescribeAutoPredictorResponse_EncryptionConfig = DescribeAutoPredictorResponse.AddMember("EncryptionConfig", EncryptionConfig)
-
-	DescribeAutoPredictorResponse_ReferencePredictorSummary = DescribeAutoPredictorResponse.AddMember("ReferencePredictorSummary", ReferencePredictorSummary)
-
-	DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes = DescribeAutoPredictorResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeAutoPredictorResponse_Status = DescribeAutoPredictorResponse.AddMember("Status", _Status)
-
-	DescribeAutoPredictorResponse_Message = DescribeAutoPredictorResponse.AddMember("Message", _Message)
-
-	DescribeAutoPredictorResponse_CreationTime = DescribeAutoPredictorResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeAutoPredictorResponse_LastModificationTime = DescribeAutoPredictorResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeAutoPredictorResponse_OptimizationMetric = DescribeAutoPredictorResponse.AddMember("OptimizationMetric", OptimizationMetric)
-
-	DescribeAutoPredictorResponse_ExplainabilityInfo = DescribeAutoPredictorResponse.AddMember("ExplainabilityInfo", ExplainabilityInfo)
-
-	DescribeAutoPredictorResponse_MonitorInfo = DescribeAutoPredictorResponse.AddMember("MonitorInfo", MonitorInfo)
-
-	DescribeAutoPredictorResponse_TimeAlignmentBoundary = DescribeAutoPredictorResponse.AddMember("TimeAlignmentBoundary", TimeAlignmentBoundary)
-
-	DescribeDatasetGroupRequest_DatasetGroupArn = DescribeDatasetGroupRequest.AddMember("DatasetGroupArn", _Arn)
-
-	DescribeDatasetGroupResponse_DatasetGroupName = DescribeDatasetGroupResponse.AddMember("DatasetGroupName", _Name)
-
-	DescribeDatasetGroupResponse_DatasetGroupArn = DescribeDatasetGroupResponse.AddMember("DatasetGroupArn", _Arn)
-
-	DescribeDatasetGroupResponse_DatasetArns = DescribeDatasetGroupResponse.AddMember("DatasetArns", _ArnList)
-
-	DescribeDatasetGroupResponse_Domain = DescribeDatasetGroupResponse.AddMember("Domain", Domain)
-
-	DescribeDatasetGroupResponse_Status = DescribeDatasetGroupResponse.AddMember("Status", _Status)
-
-	DescribeDatasetGroupResponse_CreationTime = DescribeDatasetGroupResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeDatasetGroupResponse_LastModificationTime = DescribeDatasetGroupResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeDatasetImportJobRequest_DatasetImportJobArn = DescribeDatasetImportJobRequest.AddMember("DatasetImportJobArn", _Arn)
-
-	DescribeDatasetImportJobResponse_DatasetImportJobName = DescribeDatasetImportJobResponse.AddMember("DatasetImportJobName", _Name)
-
-	DescribeDatasetImportJobResponse_DatasetImportJobArn = DescribeDatasetImportJobResponse.AddMember("DatasetImportJobArn", _Arn)
-
-	DescribeDatasetImportJobResponse_DatasetArn = DescribeDatasetImportJobResponse.AddMember("DatasetArn", _Arn)
-
-	DescribeDatasetImportJobResponse_TimestampFormat = DescribeDatasetImportJobResponse.AddMember("TimestampFormat", _TimestampFormat)
-
-	DescribeDatasetImportJobResponse_TimeZone = DescribeDatasetImportJobResponse.AddMember("TimeZone", _TimeZone)
-
-	DescribeDatasetImportJobResponse_UseGeolocationForTimeZone = DescribeDatasetImportJobResponse.AddMember("UseGeolocationForTimeZone", _UseGeolocationForTimeZone)
-
-	DescribeDatasetImportJobResponse_GeolocationFormat = DescribeDatasetImportJobResponse.AddMember("GeolocationFormat", _GeolocationFormat)
-
-	DescribeDatasetImportJobResponse_DataSource = DescribeDatasetImportJobResponse.AddMember("DataSource", DataSource)
-
-	DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes = DescribeDatasetImportJobResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeDatasetImportJobResponse_FieldStatistics = DescribeDatasetImportJobResponse.AddMember("FieldStatistics", _FieldStatistics)
-
-	DescribeDatasetImportJobResponse_DataSize = DescribeDatasetImportJobResponse.AddMember("DataSize", _Double)
-
-	DescribeDatasetImportJobResponse_Status = DescribeDatasetImportJobResponse.AddMember("Status", _Status)
-
-	DescribeDatasetImportJobResponse_Message = DescribeDatasetImportJobResponse.AddMember("Message", _Message)
-
-	DescribeDatasetImportJobResponse_CreationTime = DescribeDatasetImportJobResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeDatasetImportJobResponse_LastModificationTime = DescribeDatasetImportJobResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeDatasetImportJobResponse_Format = DescribeDatasetImportJobResponse.AddMember("Format", _Format)
-
-	DescribeDatasetImportJobResponse_ImportMode = DescribeDatasetImportJobResponse.AddMember("ImportMode", ImportMode)
-
-	DescribeDatasetRequest_DatasetArn = DescribeDatasetRequest.AddMember("DatasetArn", _Arn)
-
-	DescribeDatasetResponse_DatasetArn = DescribeDatasetResponse.AddMember("DatasetArn", _Arn)
-
-	DescribeDatasetResponse_DatasetName = DescribeDatasetResponse.AddMember("DatasetName", _Name)
-
-	DescribeDatasetResponse_Domain = DescribeDatasetResponse.AddMember("Domain", Domain)
-
-	DescribeDatasetResponse_DatasetType = DescribeDatasetResponse.AddMember("DatasetType", DatasetType)
-
-	DescribeDatasetResponse_DataFrequency = DescribeDatasetResponse.AddMember("DataFrequency", _Frequency)
-
-	DescribeDatasetResponse_Schema = DescribeDatasetResponse.AddMember("Schema", Schema)
-
-	DescribeDatasetResponse_EncryptionConfig = DescribeDatasetResponse.AddMember("EncryptionConfig", EncryptionConfig)
-
-	DescribeDatasetResponse_Status = DescribeDatasetResponse.AddMember("Status", _Status)
-
-	DescribeDatasetResponse_CreationTime = DescribeDatasetResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeDatasetResponse_LastModificationTime = DescribeDatasetResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeExplainabilityExportRequest_ExplainabilityExportArn = DescribeExplainabilityExportRequest.AddMember("ExplainabilityExportArn", _Arn)
-
-	DescribeExplainabilityExportResponse_ExplainabilityExportArn = DescribeExplainabilityExportResponse.AddMember("ExplainabilityExportArn", _Arn)
-
-	DescribeExplainabilityExportResponse_ExplainabilityExportName = DescribeExplainabilityExportResponse.AddMember("ExplainabilityExportName", _Name)
-
-	DescribeExplainabilityExportResponse_ExplainabilityArn = DescribeExplainabilityExportResponse.AddMember("ExplainabilityArn", _Arn)
-
-	DescribeExplainabilityExportResponse_Destination = DescribeExplainabilityExportResponse.AddMember("Destination", DataDestination)
-
-	DescribeExplainabilityExportResponse_Message = DescribeExplainabilityExportResponse.AddMember("Message", _Message)
-
-	DescribeExplainabilityExportResponse_Status = DescribeExplainabilityExportResponse.AddMember("Status", _Status)
-
-	DescribeExplainabilityExportResponse_CreationTime = DescribeExplainabilityExportResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeExplainabilityExportResponse_LastModificationTime = DescribeExplainabilityExportResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeExplainabilityExportResponse_Format = DescribeExplainabilityExportResponse.AddMember("Format", _Format)
-
-	DescribeExplainabilityRequest_ExplainabilityArn = DescribeExplainabilityRequest.AddMember("ExplainabilityArn", _Arn)
-
-	DescribeExplainabilityResponse_ExplainabilityArn = DescribeExplainabilityResponse.AddMember("ExplainabilityArn", _Arn)
-
-	DescribeExplainabilityResponse_ExplainabilityName = DescribeExplainabilityResponse.AddMember("ExplainabilityName", _Name)
-
-	DescribeExplainabilityResponse_ResourceArn = DescribeExplainabilityResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeExplainabilityResponse_ExplainabilityConfig = DescribeExplainabilityResponse.AddMember("ExplainabilityConfig", ExplainabilityConfig)
-
-	DescribeExplainabilityResponse_EnableVisualization = DescribeExplainabilityResponse.AddMember("EnableVisualization", _Boolean)
-
-	DescribeExplainabilityResponse_DataSource = DescribeExplainabilityResponse.AddMember("DataSource", DataSource)
-
-	DescribeExplainabilityResponse_Schema = DescribeExplainabilityResponse.AddMember("Schema", Schema)
-
-	DescribeExplainabilityResponse_StartDateTime = DescribeExplainabilityResponse.AddMember("StartDateTime", _LocalDateTime)
-
-	DescribeExplainabilityResponse_EndDateTime = DescribeExplainabilityResponse.AddMember("EndDateTime", _LocalDateTime)
-
-	DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes = DescribeExplainabilityResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeExplainabilityResponse_Message = DescribeExplainabilityResponse.AddMember("Message", _Message)
-
-	DescribeExplainabilityResponse_Status = DescribeExplainabilityResponse.AddMember("Status", _Status)
-
-	DescribeExplainabilityResponse_CreationTime = DescribeExplainabilityResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeExplainabilityResponse_LastModificationTime = DescribeExplainabilityResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeForecastExportJobRequest_ForecastExportJobArn = DescribeForecastExportJobRequest.AddMember("ForecastExportJobArn", _Arn)
-
-	DescribeForecastExportJobResponse_ForecastExportJobArn = DescribeForecastExportJobResponse.AddMember("ForecastExportJobArn", _Arn)
-
-	DescribeForecastExportJobResponse_ForecastExportJobName = DescribeForecastExportJobResponse.AddMember("ForecastExportJobName", _Name)
-
-	DescribeForecastExportJobResponse_ForecastArn = DescribeForecastExportJobResponse.AddMember("ForecastArn", _Arn)
-
-	DescribeForecastExportJobResponse_Destination = DescribeForecastExportJobResponse.AddMember("Destination", DataDestination)
-
-	DescribeForecastExportJobResponse_Message = DescribeForecastExportJobResponse.AddMember("Message", _Message)
-
-	DescribeForecastExportJobResponse_Status = DescribeForecastExportJobResponse.AddMember("Status", _Status)
-
-	DescribeForecastExportJobResponse_CreationTime = DescribeForecastExportJobResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeForecastExportJobResponse_LastModificationTime = DescribeForecastExportJobResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeForecastExportJobResponse_Format = DescribeForecastExportJobResponse.AddMember("Format", _Format)
-
-	DescribeForecastRequest_ForecastArn = DescribeForecastRequest.AddMember("ForecastArn", _Arn)
-
-	DescribeForecastResponse_ForecastArn = DescribeForecastResponse.AddMember("ForecastArn", _Arn)
-
-	DescribeForecastResponse_ForecastName = DescribeForecastResponse.AddMember("ForecastName", _Name)
-
-	DescribeForecastResponse_ForecastTypes = DescribeForecastResponse.AddMember("ForecastTypes", _ForecastTypes)
-
-	DescribeForecastResponse_PredictorArn = DescribeForecastResponse.AddMember("PredictorArn", _Arn)
-
-	DescribeForecastResponse_DatasetGroupArn = DescribeForecastResponse.AddMember("DatasetGroupArn", _Arn)
-
-	DescribeForecastResponse_EstimatedTimeRemainingInMinutes = DescribeForecastResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeForecastResponse_Status = DescribeForecastResponse.AddMember("Status", _String)
-
-	DescribeForecastResponse_Message = DescribeForecastResponse.AddMember("Message", _ErrorMessage)
-
-	DescribeForecastResponse_CreationTime = DescribeForecastResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeForecastResponse_LastModificationTime = DescribeForecastResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeForecastResponse_TimeSeriesSelector = DescribeForecastResponse.AddMember("TimeSeriesSelector", TimeSeriesSelector)
-
-	DescribeMonitorRequest_MonitorArn = DescribeMonitorRequest.AddMember("MonitorArn", _Arn)
-
-	DescribeMonitorResponse_MonitorName = DescribeMonitorResponse.AddMember("MonitorName", _Name)
-
-	DescribeMonitorResponse_MonitorArn = DescribeMonitorResponse.AddMember("MonitorArn", _Arn)
-
-	DescribeMonitorResponse_ResourceArn = DescribeMonitorResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeMonitorResponse_Status = DescribeMonitorResponse.AddMember("Status", _Status)
-
-	DescribeMonitorResponse_LastEvaluationTime = DescribeMonitorResponse.AddMember("LastEvaluationTime", _Timestamp)
-
-	DescribeMonitorResponse_LastEvaluationState = DescribeMonitorResponse.AddMember("LastEvaluationState", _EvaluationState)
-
-	DescribeMonitorResponse_Baseline = DescribeMonitorResponse.AddMember("Baseline", Baseline)
-
-	DescribeMonitorResponse_Message = DescribeMonitorResponse.AddMember("Message", _Message)
-
-	DescribeMonitorResponse_CreationTime = DescribeMonitorResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeMonitorResponse_LastModificationTime = DescribeMonitorResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes = DescribeMonitorResponse.AddMember("EstimatedEvaluationTimeRemainingInMinutes", _Long)
-
-	DescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = DescribePredictorBacktestExportJobRequest.AddMember("PredictorBacktestExportJobArn", _Arn)
-
-	DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = DescribePredictorBacktestExportJobResponse.AddMember("PredictorBacktestExportJobArn", _Arn)
-
-	DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName = DescribePredictorBacktestExportJobResponse.AddMember("PredictorBacktestExportJobName", _Name)
-
-	DescribePredictorBacktestExportJobResponse_PredictorArn = DescribePredictorBacktestExportJobResponse.AddMember("PredictorArn", _Arn)
-
-	DescribePredictorBacktestExportJobResponse_Destination = DescribePredictorBacktestExportJobResponse.AddMember("Destination", DataDestination)
-
-	DescribePredictorBacktestExportJobResponse_Message = DescribePredictorBacktestExportJobResponse.AddMember("Message", _Message)
-
-	DescribePredictorBacktestExportJobResponse_Status = DescribePredictorBacktestExportJobResponse.AddMember("Status", _Status)
-
-	DescribePredictorBacktestExportJobResponse_CreationTime = DescribePredictorBacktestExportJobResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribePredictorBacktestExportJobResponse_LastModificationTime = DescribePredictorBacktestExportJobResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribePredictorBacktestExportJobResponse_Format = DescribePredictorBacktestExportJobResponse.AddMember("Format", _Format)
-
-	DescribePredictorRequest_PredictorArn = DescribePredictorRequest.AddMember("PredictorArn", _Arn)
-
-	DescribePredictorResponse_PredictorArn = DescribePredictorResponse.AddMember("PredictorArn", _Name)
-
-	DescribePredictorResponse_PredictorName = DescribePredictorResponse.AddMember("PredictorName", _Name)
-
-	DescribePredictorResponse_AlgorithmArn = DescribePredictorResponse.AddMember("AlgorithmArn", _Arn)
-
-	DescribePredictorResponse_AutoMLAlgorithmArns = DescribePredictorResponse.AddMember("AutoMLAlgorithmArns", _ArnList)
-
-	DescribePredictorResponse_ForecastHorizon = DescribePredictorResponse.AddMember("ForecastHorizon", _Integer)
-
-	DescribePredictorResponse_ForecastTypes = DescribePredictorResponse.AddMember("ForecastTypes", _ForecastTypes)
-
-	DescribePredictorResponse_PerformAutoML = DescribePredictorResponse.AddMember("PerformAutoML", _Boolean)
-
-	DescribePredictorResponse_AutoMLOverrideStrategy = DescribePredictorResponse.AddMember("AutoMLOverrideStrategy", AutoMLOverrideStrategy)
-
-	DescribePredictorResponse_PerformHPO = DescribePredictorResponse.AddMember("PerformHPO", _Boolean)
-
-	DescribePredictorResponse_TrainingParameters = DescribePredictorResponse.AddMember("TrainingParameters", _TrainingParameters)
-
-	DescribePredictorResponse_EvaluationParameters = DescribePredictorResponse.AddMember("EvaluationParameters", EvaluationParameters)
-
-	DescribePredictorResponse_HPOConfig = DescribePredictorResponse.AddMember("HPOConfig", HyperParameterTuningJobConfig)
-
-	DescribePredictorResponse_InputDataConfig = DescribePredictorResponse.AddMember("InputDataConfig", InputDataConfig)
-
-	DescribePredictorResponse_FeaturizationConfig = DescribePredictorResponse.AddMember("FeaturizationConfig", FeaturizationConfig)
-
-	DescribePredictorResponse_EncryptionConfig = DescribePredictorResponse.AddMember("EncryptionConfig", EncryptionConfig)
-
-	DescribePredictorResponse_PredictorExecutionDetails = DescribePredictorResponse.AddMember("PredictorExecutionDetails", PredictorExecutionDetails)
-
-	DescribePredictorResponse_EstimatedTimeRemainingInMinutes = DescribePredictorResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribePredictorResponse_IsAutoPredictor = DescribePredictorResponse.AddMember("IsAutoPredictor", _Boolean)
-
-	DescribePredictorResponse_DatasetImportJobArns = DescribePredictorResponse.AddMember("DatasetImportJobArns", _ArnList)
-
-	DescribePredictorResponse_Status = DescribePredictorResponse.AddMember("Status", _Status)
-
-	DescribePredictorResponse_Message = DescribePredictorResponse.AddMember("Message", _Message)
-
-	DescribePredictorResponse_CreationTime = DescribePredictorResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribePredictorResponse_LastModificationTime = DescribePredictorResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribePredictorResponse_OptimizationMetric = DescribePredictorResponse.AddMember("OptimizationMetric", OptimizationMetric)
-
-	DescribeWhatIfAnalysisRequest_WhatIfAnalysisArn = DescribeWhatIfAnalysisRequest.AddMember("WhatIfAnalysisArn", _Arn)
-
-	DescribeWhatIfAnalysisResponse_WhatIfAnalysisName = DescribeWhatIfAnalysisResponse.AddMember("WhatIfAnalysisName", _Name)
-
-	DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn = DescribeWhatIfAnalysisResponse.AddMember("WhatIfAnalysisArn", _Arn)
-
-	DescribeWhatIfAnalysisResponse_ForecastArn = DescribeWhatIfAnalysisResponse.AddMember("ForecastArn", _Arn)
-
-	DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes = DescribeWhatIfAnalysisResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeWhatIfAnalysisResponse_Status = DescribeWhatIfAnalysisResponse.AddMember("Status", _String)
-
-	DescribeWhatIfAnalysisResponse_Message = DescribeWhatIfAnalysisResponse.AddMember("Message", _ErrorMessage)
-
-	DescribeWhatIfAnalysisResponse_CreationTime = DescribeWhatIfAnalysisResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeWhatIfAnalysisResponse_LastModificationTime = DescribeWhatIfAnalysisResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeWhatIfAnalysisResponse_TimeSeriesSelector = DescribeWhatIfAnalysisResponse.AddMember("TimeSeriesSelector", TimeSeriesSelector)
-
-	DescribeWhatIfForecastExportRequest_WhatIfForecastExportArn = DescribeWhatIfForecastExportRequest.AddMember("WhatIfForecastExportArn", _LongArn)
-
-	DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn = DescribeWhatIfForecastExportResponse.AddMember("WhatIfForecastExportArn", _LongArn)
-
-	DescribeWhatIfForecastExportResponse_WhatIfForecastExportName = DescribeWhatIfForecastExportResponse.AddMember("WhatIfForecastExportName", _Name)
-
-	DescribeWhatIfForecastExportResponse_WhatIfForecastArns = DescribeWhatIfForecastExportResponse.AddMember("WhatIfForecastArns", _LongArnList)
-
-	DescribeWhatIfForecastExportResponse_Destination = DescribeWhatIfForecastExportResponse.AddMember("Destination", DataDestination)
-
-	DescribeWhatIfForecastExportResponse_Message = DescribeWhatIfForecastExportResponse.AddMember("Message", _Message)
-
-	DescribeWhatIfForecastExportResponse_Status = DescribeWhatIfForecastExportResponse.AddMember("Status", _Status)
-
-	DescribeWhatIfForecastExportResponse_CreationTime = DescribeWhatIfForecastExportResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes = DescribeWhatIfForecastExportResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeWhatIfForecastExportResponse_LastModificationTime = DescribeWhatIfForecastExportResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeWhatIfForecastExportResponse_Format = DescribeWhatIfForecastExportResponse.AddMember("Format", _Format)
-
-	DescribeWhatIfForecastRequest_WhatIfForecastArn = DescribeWhatIfForecastRequest.AddMember("WhatIfForecastArn", _LongArn)
-
-	DescribeWhatIfForecastResponse_WhatIfForecastName = DescribeWhatIfForecastResponse.AddMember("WhatIfForecastName", _Name)
-
-	DescribeWhatIfForecastResponse_WhatIfForecastArn = DescribeWhatIfForecastResponse.AddMember("WhatIfForecastArn", _LongArn)
-
-	DescribeWhatIfForecastResponse_WhatIfAnalysisArn = DescribeWhatIfForecastResponse.AddMember("WhatIfAnalysisArn", _Arn)
-
-	DescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes = DescribeWhatIfForecastResponse.AddMember("EstimatedTimeRemainingInMinutes", _Long)
-
-	DescribeWhatIfForecastResponse_Status = DescribeWhatIfForecastResponse.AddMember("Status", _String)
-
-	DescribeWhatIfForecastResponse_Message = DescribeWhatIfForecastResponse.AddMember("Message", _ErrorMessage)
-
-	DescribeWhatIfForecastResponse_CreationTime = DescribeWhatIfForecastResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeWhatIfForecastResponse_LastModificationTime = DescribeWhatIfForecastResponse.AddMember("LastModificationTime", _Timestamp)
-
-	DescribeWhatIfForecastResponse_TimeSeriesTransformations = DescribeWhatIfForecastResponse.AddMember("TimeSeriesTransformations", _TimeSeriesTransformations)
-
-	DescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource = DescribeWhatIfForecastResponse.AddMember("TimeSeriesReplacementsDataSource", TimeSeriesReplacementsDataSource)
-
-	DescribeWhatIfForecastResponse_ForecastTypes = DescribeWhatIfForecastResponse.AddMember("ForecastTypes", _ForecastTypes)
-
-	GetAccuracyMetricsRequest_PredictorArn = GetAccuracyMetricsRequest.AddMember("PredictorArn", _Arn)
-
-	GetAccuracyMetricsResponse_PredictorEvaluationResults = GetAccuracyMetricsResponse.AddMember("PredictorEvaluationResults", _PredictorEvaluationResults)
-
-	GetAccuracyMetricsResponse_IsAutoPredictor = GetAccuracyMetricsResponse.AddMember("IsAutoPredictor", _Boolean)
-
-	GetAccuracyMetricsResponse_AutoMLOverrideStrategy = GetAccuracyMetricsResponse.AddMember("AutoMLOverrideStrategy", AutoMLOverrideStrategy)
-
-	GetAccuracyMetricsResponse_OptimizationMetric = GetAccuracyMetricsResponse.AddMember("OptimizationMetric", OptimizationMetric)
-
-	ListDatasetGroupsRequest_NextToken = ListDatasetGroupsRequest.AddMember("NextToken", _NextToken)
-
-	ListDatasetGroupsRequest_MaxResults = ListDatasetGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListDatasetGroupsResponse_DatasetGroups = ListDatasetGroupsResponse.AddMember("DatasetGroups", _DatasetGroups)
-
-	ListDatasetGroupsResponse_NextToken = ListDatasetGroupsResponse.AddMember("NextToken", _NextToken)
-
-	ListDatasetImportJobsRequest_NextToken = ListDatasetImportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListDatasetImportJobsRequest_MaxResults = ListDatasetImportJobsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListDatasetImportJobsRequest_Filters = ListDatasetImportJobsRequest.AddMember("Filters", _Filters)
-
-	ListDatasetImportJobsResponse_DatasetImportJobs = ListDatasetImportJobsResponse.AddMember("DatasetImportJobs", _DatasetImportJobs)
-
-	ListDatasetImportJobsResponse_NextToken = ListDatasetImportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListDatasetsRequest_NextToken = ListDatasetsRequest.AddMember("NextToken", _NextToken)
-
-	ListDatasetsRequest_MaxResults = ListDatasetsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListDatasetsResponse_Datasets = ListDatasetsResponse.AddMember("Datasets", _Datasets)
-
-	ListDatasetsResponse_NextToken = ListDatasetsResponse.AddMember("NextToken", _NextToken)
-
-	ListExplainabilitiesRequest_NextToken = ListExplainabilitiesRequest.AddMember("NextToken", _NextToken)
-
-	ListExplainabilitiesRequest_MaxResults = ListExplainabilitiesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExplainabilitiesRequest_Filters = ListExplainabilitiesRequest.AddMember("Filters", _Filters)
-
-	ListExplainabilitiesResponse_Explainabilities = ListExplainabilitiesResponse.AddMember("Explainabilities", _Explainabilities)
-
-	ListExplainabilitiesResponse_NextToken = ListExplainabilitiesResponse.AddMember("NextToken", _NextToken)
-
-	ListExplainabilityExportsRequest_NextToken = ListExplainabilityExportsRequest.AddMember("NextToken", _NextToken)
-
-	ListExplainabilityExportsRequest_MaxResults = ListExplainabilityExportsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExplainabilityExportsRequest_Filters = ListExplainabilityExportsRequest.AddMember("Filters", _Filters)
-
-	ListExplainabilityExportsResponse_ExplainabilityExports = ListExplainabilityExportsResponse.AddMember("ExplainabilityExports", _ExplainabilityExports)
-
-	ListExplainabilityExportsResponse_NextToken = ListExplainabilityExportsResponse.AddMember("NextToken", _NextToken)
-
-	ListForecastExportJobsRequest_NextToken = ListForecastExportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListForecastExportJobsRequest_MaxResults = ListForecastExportJobsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListForecastExportJobsRequest_Filters = ListForecastExportJobsRequest.AddMember("Filters", _Filters)
-
-	ListForecastExportJobsResponse_ForecastExportJobs = ListForecastExportJobsResponse.AddMember("ForecastExportJobs", _ForecastExportJobs)
-
-	ListForecastExportJobsResponse_NextToken = ListForecastExportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListForecastsRequest_NextToken = ListForecastsRequest.AddMember("NextToken", _NextToken)
-
-	ListForecastsRequest_MaxResults = ListForecastsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListForecastsRequest_Filters = ListForecastsRequest.AddMember("Filters", _Filters)
-
-	ListForecastsResponse_Forecasts = ListForecastsResponse.AddMember("Forecasts", _Forecasts)
-
-	ListForecastsResponse_NextToken = ListForecastsResponse.AddMember("NextToken", _NextToken)
-
-	ListMonitorEvaluationsRequest_NextToken = ListMonitorEvaluationsRequest.AddMember("NextToken", _NextToken)
-
-	ListMonitorEvaluationsRequest_MaxResults = ListMonitorEvaluationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMonitorEvaluationsRequest_MonitorArn = ListMonitorEvaluationsRequest.AddMember("MonitorArn", _Arn)
-
-	ListMonitorEvaluationsRequest_Filters = ListMonitorEvaluationsRequest.AddMember("Filters", _Filters)
-
-	ListMonitorEvaluationsResponse_NextToken = ListMonitorEvaluationsResponse.AddMember("NextToken", _NextToken)
-
-	ListMonitorEvaluationsResponse_PredictorMonitorEvaluations = ListMonitorEvaluationsResponse.AddMember("PredictorMonitorEvaluations", _PredictorMonitorEvaluations)
-
-	ListMonitorsRequest_NextToken = ListMonitorsRequest.AddMember("NextToken", _NextToken)
-
-	ListMonitorsRequest_MaxResults = ListMonitorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMonitorsRequest_Filters = ListMonitorsRequest.AddMember("Filters", _Filters)
-
-	ListMonitorsResponse_Monitors = ListMonitorsResponse.AddMember("Monitors", _Monitors)
-
-	ListMonitorsResponse_NextToken = ListMonitorsResponse.AddMember("NextToken", _NextToken)
-
-	ListPredictorBacktestExportJobsRequest_NextToken = ListPredictorBacktestExportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListPredictorBacktestExportJobsRequest_MaxResults = ListPredictorBacktestExportJobsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPredictorBacktestExportJobsRequest_Filters = ListPredictorBacktestExportJobsRequest.AddMember("Filters", _Filters)
-
-	ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs = ListPredictorBacktestExportJobsResponse.AddMember("PredictorBacktestExportJobs", _PredictorBacktestExportJobs)
-
-	ListPredictorBacktestExportJobsResponse_NextToken = ListPredictorBacktestExportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListPredictorsRequest_NextToken = ListPredictorsRequest.AddMember("NextToken", _NextToken)
-
-	ListPredictorsRequest_MaxResults = ListPredictorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPredictorsRequest_Filters = ListPredictorsRequest.AddMember("Filters", _Filters)
-
-	ListPredictorsResponse_Predictors = ListPredictorsResponse.AddMember("Predictors", _Predictors)
-
-	ListPredictorsResponse_NextToken = ListPredictorsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ListWhatIfAnalysesRequest_NextToken = ListWhatIfAnalysesRequest.AddMember("NextToken", _NextToken)
-
-	ListWhatIfAnalysesRequest_MaxResults = ListWhatIfAnalysesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListWhatIfAnalysesRequest_Filters = ListWhatIfAnalysesRequest.AddMember("Filters", _Filters)
-
-	ListWhatIfAnalysesResponse_WhatIfAnalyses = ListWhatIfAnalysesResponse.AddMember("WhatIfAnalyses", _WhatIfAnalyses)
-
-	ListWhatIfAnalysesResponse_NextToken = ListWhatIfAnalysesResponse.AddMember("NextToken", _NextToken)
-
-	ListWhatIfForecastExportsRequest_NextToken = ListWhatIfForecastExportsRequest.AddMember("NextToken", _NextToken)
-
-	ListWhatIfForecastExportsRequest_MaxResults = ListWhatIfForecastExportsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListWhatIfForecastExportsRequest_Filters = ListWhatIfForecastExportsRequest.AddMember("Filters", _Filters)
-
-	ListWhatIfForecastExportsResponse_WhatIfForecastExports = ListWhatIfForecastExportsResponse.AddMember("WhatIfForecastExports", _WhatIfForecastExports)
-
-	ListWhatIfForecastExportsResponse_NextToken = ListWhatIfForecastExportsResponse.AddMember("NextToken", _NextToken)
-
-	ListWhatIfForecastsRequest_NextToken = ListWhatIfForecastsRequest.AddMember("NextToken", _NextToken)
-
-	ListWhatIfForecastsRequest_MaxResults = ListWhatIfForecastsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListWhatIfForecastsRequest_Filters = ListWhatIfForecastsRequest.AddMember("Filters", _Filters)
-
-	ListWhatIfForecastsResponse_WhatIfForecasts = ListWhatIfForecastsResponse.AddMember("WhatIfForecasts", _WhatIfForecasts)
-
-	ListWhatIfForecastsResponse_NextToken = ListWhatIfForecastsResponse.AddMember("NextToken", _NextToken)
-
-	ResumeResourceRequest_ResourceArn = ResumeResourceRequest.AddMember("ResourceArn", _Arn)
-
-	StopResourceRequest_ResourceArn = StopResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys)
-
-	UpdateDatasetGroupRequest_DatasetGroupArn = UpdateDatasetGroupRequest.AddMember("DatasetGroupArn", _Arn)
-
-	UpdateDatasetGroupRequest_DatasetArns = UpdateDatasetGroupRequest.AddMember("DatasetArns", _ArnList)
-
-}
+var (
+	eCreateAutoPredictor                                                       smithy.SchemaExtensions
+	eCreateDataset                                                             smithy.SchemaExtensions
+	eCreateDatasetGroup                                                        smithy.SchemaExtensions
+	eCreateDatasetImportJob                                                    smithy.SchemaExtensions
+	eCreateExplainability                                                      smithy.SchemaExtensions
+	eCreateExplainabilityExport                                                smithy.SchemaExtensions
+	eCreateForecast                                                            smithy.SchemaExtensions
+	eCreateForecastExportJob                                                   smithy.SchemaExtensions
+	eCreateMonitor                                                             smithy.SchemaExtensions
+	eCreatePredictor                                                           smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJob                                          smithy.SchemaExtensions
+	eCreateWhatIfAnalysis                                                      smithy.SchemaExtensions
+	eCreateWhatIfForecast                                                      smithy.SchemaExtensions
+	eCreateWhatIfForecastExport                                                smithy.SchemaExtensions
+	eDeleteDataset                                                             smithy.SchemaExtensions
+	eDeleteDatasetGroup                                                        smithy.SchemaExtensions
+	eDeleteDatasetImportJob                                                    smithy.SchemaExtensions
+	eDeleteExplainability                                                      smithy.SchemaExtensions
+	eDeleteExplainabilityExport                                                smithy.SchemaExtensions
+	eDeleteForecast                                                            smithy.SchemaExtensions
+	eDeleteForecastExportJob                                                   smithy.SchemaExtensions
+	eDeleteMonitor                                                             smithy.SchemaExtensions
+	eDeletePredictor                                                           smithy.SchemaExtensions
+	eDeletePredictorBacktestExportJob                                          smithy.SchemaExtensions
+	eDeleteResourceTree                                                        smithy.SchemaExtensions
+	eDeleteWhatIfAnalysis                                                      smithy.SchemaExtensions
+	eDeleteWhatIfForecast                                                      smithy.SchemaExtensions
+	eDeleteWhatIfForecastExport                                                smithy.SchemaExtensions
+	eDescribeAutoPredictor                                                     smithy.SchemaExtensions
+	eDescribeDataset                                                           smithy.SchemaExtensions
+	eDescribeDatasetGroup                                                      smithy.SchemaExtensions
+	eDescribeDatasetImportJob                                                  smithy.SchemaExtensions
+	eDescribeExplainability                                                    smithy.SchemaExtensions
+	eDescribeExplainabilityExport                                              smithy.SchemaExtensions
+	eDescribeForecast                                                          smithy.SchemaExtensions
+	eDescribeForecastExportJob                                                 smithy.SchemaExtensions
+	eDescribeMonitor                                                           smithy.SchemaExtensions
+	eDescribePredictor                                                         smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJob                                        smithy.SchemaExtensions
+	eDescribeWhatIfAnalysis                                                    smithy.SchemaExtensions
+	eDescribeWhatIfForecast                                                    smithy.SchemaExtensions
+	eDescribeWhatIfForecastExport                                              smithy.SchemaExtensions
+	eGetAccuracyMetrics                                                        smithy.SchemaExtensions
+	eListDatasetGroups                                                         smithy.SchemaExtensions
+	eListDatasetImportJobs                                                     smithy.SchemaExtensions
+	eListDatasets                                                              smithy.SchemaExtensions
+	eListExplainabilities                                                      smithy.SchemaExtensions
+	eListExplainabilityExports                                                 smithy.SchemaExtensions
+	eListForecastExportJobs                                                    smithy.SchemaExtensions
+	eListForecasts                                                             smithy.SchemaExtensions
+	eListMonitorEvaluations                                                    smithy.SchemaExtensions
+	eListMonitors                                                              smithy.SchemaExtensions
+	eListPredictorBacktestExportJobs                                           smithy.SchemaExtensions
+	eListPredictors                                                            smithy.SchemaExtensions
+	eListTagsForResource                                                       smithy.SchemaExtensions
+	eListWhatIfAnalyses                                                        smithy.SchemaExtensions
+	eListWhatIfForecastExports                                                 smithy.SchemaExtensions
+	eListWhatIfForecasts                                                       smithy.SchemaExtensions
+	eResumeResource                                                            smithy.SchemaExtensions
+	eStopResource                                                              smithy.SchemaExtensions
+	eTagResource                                                               smithy.SchemaExtensions
+	eUntagResource                                                             smithy.SchemaExtensions
+	eUpdateDatasetGroup                                                        smithy.SchemaExtensions
+	e_AmazonForecast                                                           smithy.SchemaExtensions
+	eAction                                                                    smithy.SchemaExtensions
+	eAction_AttributeName                                                      smithy.SchemaExtensions
+	eAction_Operation                                                          smithy.SchemaExtensions
+	eAction_Value                                                              smithy.SchemaExtensions
+	eAdditionalDataset                                                         smithy.SchemaExtensions
+	eAdditionalDataset_Name                                                    smithy.SchemaExtensions
+	eAdditionalDataset_Configuration                                           smithy.SchemaExtensions
+	e_AdditionalDatasets                                                       smithy.SchemaExtensions
+	e_AdditionalDatasets_member                                                smithy.SchemaExtensions
+	e_Arn                                                                      smithy.SchemaExtensions
+	e_ArnList                                                                  smithy.SchemaExtensions
+	e_ArnList_member                                                           smithy.SchemaExtensions
+	eAttributeConfig                                                           smithy.SchemaExtensions
+	eAttributeConfig_AttributeName                                             smithy.SchemaExtensions
+	eAttributeConfig_Transformations                                           smithy.SchemaExtensions
+	e_AttributeConfigs                                                         smithy.SchemaExtensions
+	e_AttributeConfigs_member                                                  smithy.SchemaExtensions
+	eAttributeType                                                             smithy.SchemaExtensions
+	eAttributeType_STRING                                                      smithy.SchemaExtensions
+	eAttributeType_INTEGER                                                     smithy.SchemaExtensions
+	eAttributeType_FLOAT                                                       smithy.SchemaExtensions
+	eAttributeType_TIMESTAMP                                                   smithy.SchemaExtensions
+	eAttributeType_GEOLOCATION                                                 smithy.SchemaExtensions
+	e_AttributeValue                                                           smithy.SchemaExtensions
+	eAutoMLOverrideStrategy                                                    smithy.SchemaExtensions
+	eAutoMLOverrideStrategy_LatencyOptimized                                   smithy.SchemaExtensions
+	eAutoMLOverrideStrategy_AccuracyOptimized                                  smithy.SchemaExtensions
+	eBaseline                                                                  smithy.SchemaExtensions
+	eBaseline_PredictorBaseline                                                smithy.SchemaExtensions
+	eBaselineMetric                                                            smithy.SchemaExtensions
+	eBaselineMetric_Name                                                       smithy.SchemaExtensions
+	eBaselineMetric_Value                                                      smithy.SchemaExtensions
+	e_BaselineMetrics                                                          smithy.SchemaExtensions
+	e_BaselineMetrics_member                                                   smithy.SchemaExtensions
+	e_Boolean                                                                  smithy.SchemaExtensions
+	eCategoricalParameterRange                                                 smithy.SchemaExtensions
+	eCategoricalParameterRange_Name                                            smithy.SchemaExtensions
+	eCategoricalParameterRange_Values                                          smithy.SchemaExtensions
+	e_CategoricalParameterRanges                                               smithy.SchemaExtensions
+	e_CategoricalParameterRanges_member                                        smithy.SchemaExtensions
+	eCondition                                                                 smithy.SchemaExtensions
+	eCondition_EQUALS                                                          smithy.SchemaExtensions
+	eCondition_NOT_EQUALS                                                      smithy.SchemaExtensions
+	eCondition_LESS_THAN                                                       smithy.SchemaExtensions
+	eCondition_GREATER_THAN                                                    smithy.SchemaExtensions
+	e_Configuration                                                            smithy.SchemaExtensions
+	e_Configuration_key                                                        smithy.SchemaExtensions
+	e_Configuration_value                                                      smithy.SchemaExtensions
+	eContinuousParameterRange                                                  smithy.SchemaExtensions
+	eContinuousParameterRange_Name                                             smithy.SchemaExtensions
+	eContinuousParameterRange_MaxValue                                         smithy.SchemaExtensions
+	eContinuousParameterRange_MinValue                                         smithy.SchemaExtensions
+	eContinuousParameterRange_ScalingType                                      smithy.SchemaExtensions
+	e_ContinuousParameterRanges                                                smithy.SchemaExtensions
+	e_ContinuousParameterRanges_member                                         smithy.SchemaExtensions
+	eDataConfig                                                                smithy.SchemaExtensions
+	eDataConfig_DatasetGroupArn                                                smithy.SchemaExtensions
+	eDataConfig_AttributeConfigs                                               smithy.SchemaExtensions
+	eDataConfig_AdditionalDatasets                                             smithy.SchemaExtensions
+	eDataDestination                                                           smithy.SchemaExtensions
+	eDataDestination_S3Config                                                  smithy.SchemaExtensions
+	e_DatasetGroups                                                            smithy.SchemaExtensions
+	e_DatasetGroups_member                                                     smithy.SchemaExtensions
+	eDatasetGroupSummary                                                       smithy.SchemaExtensions
+	eDatasetGroupSummary_DatasetGroupArn                                       smithy.SchemaExtensions
+	eDatasetGroupSummary_DatasetGroupName                                      smithy.SchemaExtensions
+	eDatasetGroupSummary_CreationTime                                          smithy.SchemaExtensions
+	eDatasetGroupSummary_LastModificationTime                                  smithy.SchemaExtensions
+	e_DatasetImportJobs                                                        smithy.SchemaExtensions
+	e_DatasetImportJobs_member                                                 smithy.SchemaExtensions
+	eDatasetImportJobSummary                                                   smithy.SchemaExtensions
+	eDatasetImportJobSummary_DatasetImportJobArn                               smithy.SchemaExtensions
+	eDatasetImportJobSummary_DatasetImportJobName                              smithy.SchemaExtensions
+	eDatasetImportJobSummary_DataSource                                        smithy.SchemaExtensions
+	eDatasetImportJobSummary_Status                                            smithy.SchemaExtensions
+	eDatasetImportJobSummary_Message                                           smithy.SchemaExtensions
+	eDatasetImportJobSummary_CreationTime                                      smithy.SchemaExtensions
+	eDatasetImportJobSummary_LastModificationTime                              smithy.SchemaExtensions
+	eDatasetImportJobSummary_ImportMode                                        smithy.SchemaExtensions
+	e_Datasets                                                                 smithy.SchemaExtensions
+	e_Datasets_member                                                          smithy.SchemaExtensions
+	eDatasetSummary                                                            smithy.SchemaExtensions
+	eDatasetSummary_DatasetArn                                                 smithy.SchemaExtensions
+	eDatasetSummary_DatasetName                                                smithy.SchemaExtensions
+	eDatasetSummary_DatasetType                                                smithy.SchemaExtensions
+	eDatasetSummary_Domain                                                     smithy.SchemaExtensions
+	eDatasetSummary_CreationTime                                               smithy.SchemaExtensions
+	eDatasetSummary_LastModificationTime                                       smithy.SchemaExtensions
+	eDatasetType                                                               smithy.SchemaExtensions
+	eDatasetType_TARGET_TIME_SERIES                                            smithy.SchemaExtensions
+	eDatasetType_RELATED_TIME_SERIES                                           smithy.SchemaExtensions
+	eDatasetType_ITEM_METADATA                                                 smithy.SchemaExtensions
+	eDataSource                                                                smithy.SchemaExtensions
+	eDataSource_S3Config                                                       smithy.SchemaExtensions
+	e_DayOfMonth                                                               smithy.SchemaExtensions
+	eDayOfWeek                                                                 smithy.SchemaExtensions
+	eDayOfWeek_MONDAY                                                          smithy.SchemaExtensions
+	eDayOfWeek_TUESDAY                                                         smithy.SchemaExtensions
+	eDayOfWeek_WEDNESDAY                                                       smithy.SchemaExtensions
+	eDayOfWeek_THURSDAY                                                        smithy.SchemaExtensions
+	eDayOfWeek_FRIDAY                                                          smithy.SchemaExtensions
+	eDayOfWeek_SATURDAY                                                        smithy.SchemaExtensions
+	eDayOfWeek_SUNDAY                                                          smithy.SchemaExtensions
+	e_Detail                                                                   smithy.SchemaExtensions
+	eDomain                                                                    smithy.SchemaExtensions
+	eDomain_RETAIL                                                             smithy.SchemaExtensions
+	eDomain_CUSTOM                                                             smithy.SchemaExtensions
+	eDomain_INVENTORY_PLANNING                                                 smithy.SchemaExtensions
+	eDomain_EC2_CAPACITY                                                       smithy.SchemaExtensions
+	eDomain_WORK_FORCE                                                         smithy.SchemaExtensions
+	eDomain_WEB_TRAFFIC                                                        smithy.SchemaExtensions
+	eDomain_METRICS                                                            smithy.SchemaExtensions
+	e_Double                                                                   smithy.SchemaExtensions
+	eEncryptionConfig                                                          smithy.SchemaExtensions
+	eEncryptionConfig_RoleArn                                                  smithy.SchemaExtensions
+	eEncryptionConfig_KMSKeyArn                                                smithy.SchemaExtensions
+	e_ErrorMessage                                                             smithy.SchemaExtensions
+	eErrorMetric                                                               smithy.SchemaExtensions
+	eErrorMetric_ForecastType                                                  smithy.SchemaExtensions
+	eErrorMetric_WAPE                                                          smithy.SchemaExtensions
+	eErrorMetric_RMSE                                                          smithy.SchemaExtensions
+	eErrorMetric_MASE                                                          smithy.SchemaExtensions
+	eErrorMetric_MAPE                                                          smithy.SchemaExtensions
+	e_ErrorMetrics                                                             smithy.SchemaExtensions
+	e_ErrorMetrics_member                                                      smithy.SchemaExtensions
+	eEvaluationParameters                                                      smithy.SchemaExtensions
+	eEvaluationParameters_NumberOfBacktestWindows                              smithy.SchemaExtensions
+	eEvaluationParameters_BackTestWindowOffset                                 smithy.SchemaExtensions
+	eEvaluationResult                                                          smithy.SchemaExtensions
+	eEvaluationResult_AlgorithmArn                                             smithy.SchemaExtensions
+	eEvaluationResult_TestWindows                                              smithy.SchemaExtensions
+	e_EvaluationState                                                          smithy.SchemaExtensions
+	eEvaluationType                                                            smithy.SchemaExtensions
+	eEvaluationType_SUMMARY                                                    smithy.SchemaExtensions
+	eEvaluationType_COMPUTED                                                   smithy.SchemaExtensions
+	e_Explainabilities                                                         smithy.SchemaExtensions
+	e_Explainabilities_member                                                  smithy.SchemaExtensions
+	eExplainabilityConfig                                                      smithy.SchemaExtensions
+	eExplainabilityConfig_TimeSeriesGranularity                                smithy.SchemaExtensions
+	eExplainabilityConfig_TimePointGranularity                                 smithy.SchemaExtensions
+	e_ExplainabilityExports                                                    smithy.SchemaExtensions
+	e_ExplainabilityExports_member                                             smithy.SchemaExtensions
+	eExplainabilityExportSummary                                               smithy.SchemaExtensions
+	eExplainabilityExportSummary_ExplainabilityExportArn                       smithy.SchemaExtensions
+	eExplainabilityExportSummary_ExplainabilityExportName                      smithy.SchemaExtensions
+	eExplainabilityExportSummary_Destination                                   smithy.SchemaExtensions
+	eExplainabilityExportSummary_Status                                        smithy.SchemaExtensions
+	eExplainabilityExportSummary_Message                                       smithy.SchemaExtensions
+	eExplainabilityExportSummary_CreationTime                                  smithy.SchemaExtensions
+	eExplainabilityExportSummary_LastModificationTime                          smithy.SchemaExtensions
+	eExplainabilityInfo                                                        smithy.SchemaExtensions
+	eExplainabilityInfo_ExplainabilityArn                                      smithy.SchemaExtensions
+	eExplainabilityInfo_Status                                                 smithy.SchemaExtensions
+	eExplainabilitySummary                                                     smithy.SchemaExtensions
+	eExplainabilitySummary_ExplainabilityArn                                   smithy.SchemaExtensions
+	eExplainabilitySummary_ExplainabilityName                                  smithy.SchemaExtensions
+	eExplainabilitySummary_ResourceArn                                         smithy.SchemaExtensions
+	eExplainabilitySummary_ExplainabilityConfig                                smithy.SchemaExtensions
+	eExplainabilitySummary_Status                                              smithy.SchemaExtensions
+	eExplainabilitySummary_Message                                             smithy.SchemaExtensions
+	eExplainabilitySummary_CreationTime                                        smithy.SchemaExtensions
+	eExplainabilitySummary_LastModificationTime                                smithy.SchemaExtensions
+	eFeaturization                                                             smithy.SchemaExtensions
+	eFeaturization_AttributeName                                               smithy.SchemaExtensions
+	eFeaturization_FeaturizationPipeline                                       smithy.SchemaExtensions
+	eFeaturizationConfig                                                       smithy.SchemaExtensions
+	eFeaturizationConfig_ForecastFrequency                                     smithy.SchemaExtensions
+	eFeaturizationConfig_ForecastDimensions                                    smithy.SchemaExtensions
+	eFeaturizationConfig_Featurizations                                        smithy.SchemaExtensions
+	eFeaturizationMethod                                                       smithy.SchemaExtensions
+	eFeaturizationMethod_FeaturizationMethodName                               smithy.SchemaExtensions
+	eFeaturizationMethod_FeaturizationMethodParameters                         smithy.SchemaExtensions
+	eFeaturizationMethodName                                                   smithy.SchemaExtensions
+	eFeaturizationMethodName_filling                                           smithy.SchemaExtensions
+	e_FeaturizationMethodParameters                                            smithy.SchemaExtensions
+	e_FeaturizationMethodParameters_key                                        smithy.SchemaExtensions
+	e_FeaturizationMethodParameters_value                                      smithy.SchemaExtensions
+	e_FeaturizationPipeline                                                    smithy.SchemaExtensions
+	e_FeaturizationPipeline_member                                             smithy.SchemaExtensions
+	e_Featurizations                                                           smithy.SchemaExtensions
+	e_Featurizations_member                                                    smithy.SchemaExtensions
+	e_FieldStatistics                                                          smithy.SchemaExtensions
+	e_FieldStatistics_key                                                      smithy.SchemaExtensions
+	e_FieldStatistics_value                                                    smithy.SchemaExtensions
+	eFilter                                                                    smithy.SchemaExtensions
+	eFilter_Key                                                                smithy.SchemaExtensions
+	eFilter_Value                                                              smithy.SchemaExtensions
+	eFilter_Condition                                                          smithy.SchemaExtensions
+	eFilterConditionString                                                     smithy.SchemaExtensions
+	eFilterConditionString_IS                                                  smithy.SchemaExtensions
+	eFilterConditionString_IS_NOT                                              smithy.SchemaExtensions
+	e_Filters                                                                  smithy.SchemaExtensions
+	e_Filters_member                                                           smithy.SchemaExtensions
+	e_ForecastDimensions                                                       smithy.SchemaExtensions
+	e_ForecastDimensions_member                                                smithy.SchemaExtensions
+	e_ForecastExportJobs                                                       smithy.SchemaExtensions
+	e_ForecastExportJobs_member                                                smithy.SchemaExtensions
+	eForecastExportJobSummary                                                  smithy.SchemaExtensions
+	eForecastExportJobSummary_ForecastExportJobArn                             smithy.SchemaExtensions
+	eForecastExportJobSummary_ForecastExportJobName                            smithy.SchemaExtensions
+	eForecastExportJobSummary_Destination                                      smithy.SchemaExtensions
+	eForecastExportJobSummary_Status                                           smithy.SchemaExtensions
+	eForecastExportJobSummary_Message                                          smithy.SchemaExtensions
+	eForecastExportJobSummary_CreationTime                                     smithy.SchemaExtensions
+	eForecastExportJobSummary_LastModificationTime                             smithy.SchemaExtensions
+	e_Forecasts                                                                smithy.SchemaExtensions
+	e_Forecasts_member                                                         smithy.SchemaExtensions
+	eForecastSummary                                                           smithy.SchemaExtensions
+	eForecastSummary_ForecastArn                                               smithy.SchemaExtensions
+	eForecastSummary_ForecastName                                              smithy.SchemaExtensions
+	eForecastSummary_PredictorArn                                              smithy.SchemaExtensions
+	eForecastSummary_CreatedUsingAutoPredictor                                 smithy.SchemaExtensions
+	eForecastSummary_DatasetGroupArn                                           smithy.SchemaExtensions
+	eForecastSummary_Status                                                    smithy.SchemaExtensions
+	eForecastSummary_Message                                                   smithy.SchemaExtensions
+	eForecastSummary_CreationTime                                              smithy.SchemaExtensions
+	eForecastSummary_LastModificationTime                                      smithy.SchemaExtensions
+	e_ForecastType                                                             smithy.SchemaExtensions
+	e_ForecastTypes                                                            smithy.SchemaExtensions
+	e_ForecastTypes_member                                                     smithy.SchemaExtensions
+	e_Format                                                                   smithy.SchemaExtensions
+	e_Frequency                                                                smithy.SchemaExtensions
+	e_GeolocationFormat                                                        smithy.SchemaExtensions
+	e_Hour                                                                     smithy.SchemaExtensions
+	eHyperParameterTuningJobConfig                                             smithy.SchemaExtensions
+	eHyperParameterTuningJobConfig_ParameterRanges                             smithy.SchemaExtensions
+	eImportMode                                                                smithy.SchemaExtensions
+	eImportMode_FULL                                                           smithy.SchemaExtensions
+	eImportMode_INCREMENTAL                                                    smithy.SchemaExtensions
+	eInputDataConfig                                                           smithy.SchemaExtensions
+	eInputDataConfig_DatasetGroupArn                                           smithy.SchemaExtensions
+	eInputDataConfig_SupplementaryFeatures                                     smithy.SchemaExtensions
+	e_Integer                                                                  smithy.SchemaExtensions
+	eIntegerParameterRange                                                     smithy.SchemaExtensions
+	eIntegerParameterRange_Name                                                smithy.SchemaExtensions
+	eIntegerParameterRange_MaxValue                                            smithy.SchemaExtensions
+	eIntegerParameterRange_MinValue                                            smithy.SchemaExtensions
+	eIntegerParameterRange_ScalingType                                         smithy.SchemaExtensions
+	e_IntegerParameterRanges                                                   smithy.SchemaExtensions
+	e_IntegerParameterRanges_member                                            smithy.SchemaExtensions
+	eInvalidInputException                                                     smithy.SchemaExtensions
+	eInvalidInputException_Message                                             smithy.SchemaExtensions
+	eInvalidNextTokenException                                                 smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                                         smithy.SchemaExtensions
+	e_KMSKeyArn                                                                smithy.SchemaExtensions
+	eLimitExceededException                                                    smithy.SchemaExtensions
+	eLimitExceededException_Message                                            smithy.SchemaExtensions
+	e_LocalDateTime                                                            smithy.SchemaExtensions
+	e_Long                                                                     smithy.SchemaExtensions
+	e_LongArn                                                                  smithy.SchemaExtensions
+	e_LongArnList                                                              smithy.SchemaExtensions
+	e_LongArnList_member                                                       smithy.SchemaExtensions
+	e_MaxResults                                                               smithy.SchemaExtensions
+	e_Message                                                                  smithy.SchemaExtensions
+	e_MetricName                                                               smithy.SchemaExtensions
+	eMetricResult                                                              smithy.SchemaExtensions
+	eMetricResult_MetricName                                                   smithy.SchemaExtensions
+	eMetricResult_MetricValue                                                  smithy.SchemaExtensions
+	e_MetricResults                                                            smithy.SchemaExtensions
+	e_MetricResults_member                                                     smithy.SchemaExtensions
+	eMetrics                                                                   smithy.SchemaExtensions
+	eMetrics_RMSE                                                              smithy.SchemaExtensions
+	eMetrics_WeightedQuantileLosses                                            smithy.SchemaExtensions
+	eMetrics_ErrorMetrics                                                      smithy.SchemaExtensions
+	eMetrics_AverageWeightedQuantileLoss                                       smithy.SchemaExtensions
+	eMonitorConfig                                                             smithy.SchemaExtensions
+	eMonitorConfig_MonitorName                                                 smithy.SchemaExtensions
+	eMonitorDataSource                                                         smithy.SchemaExtensions
+	eMonitorDataSource_DatasetImportJobArn                                     smithy.SchemaExtensions
+	eMonitorDataSource_ForecastArn                                             smithy.SchemaExtensions
+	eMonitorDataSource_PredictorArn                                            smithy.SchemaExtensions
+	eMonitorInfo                                                               smithy.SchemaExtensions
+	eMonitorInfo_MonitorArn                                                    smithy.SchemaExtensions
+	eMonitorInfo_Status                                                        smithy.SchemaExtensions
+	e_Monitors                                                                 smithy.SchemaExtensions
+	e_Monitors_member                                                          smithy.SchemaExtensions
+	eMonitorSummary                                                            smithy.SchemaExtensions
+	eMonitorSummary_MonitorArn                                                 smithy.SchemaExtensions
+	eMonitorSummary_MonitorName                                                smithy.SchemaExtensions
+	eMonitorSummary_ResourceArn                                                smithy.SchemaExtensions
+	eMonitorSummary_Status                                                     smithy.SchemaExtensions
+	eMonitorSummary_CreationTime                                               smithy.SchemaExtensions
+	eMonitorSummary_LastModificationTime                                       smithy.SchemaExtensions
+	eMonth                                                                     smithy.SchemaExtensions
+	eMonth_JANUARY                                                             smithy.SchemaExtensions
+	eMonth_FEBRUARY                                                            smithy.SchemaExtensions
+	eMonth_MARCH                                                               smithy.SchemaExtensions
+	eMonth_APRIL                                                               smithy.SchemaExtensions
+	eMonth_MAY                                                                 smithy.SchemaExtensions
+	eMonth_JUNE                                                                smithy.SchemaExtensions
+	eMonth_JULY                                                                smithy.SchemaExtensions
+	eMonth_AUGUST                                                              smithy.SchemaExtensions
+	eMonth_SEPTEMBER                                                           smithy.SchemaExtensions
+	eMonth_OCTOBER                                                             smithy.SchemaExtensions
+	eMonth_NOVEMBER                                                            smithy.SchemaExtensions
+	eMonth_DECEMBER                                                            smithy.SchemaExtensions
+	e_Name                                                                     smithy.SchemaExtensions
+	e_NextToken                                                                smithy.SchemaExtensions
+	eOperation                                                                 smithy.SchemaExtensions
+	eOperation_ADD                                                             smithy.SchemaExtensions
+	eOperation_SUBTRACT                                                        smithy.SchemaExtensions
+	eOperation_MULTIPLY                                                        smithy.SchemaExtensions
+	eOperation_DIVIDE                                                          smithy.SchemaExtensions
+	eOptimizationMetric                                                        smithy.SchemaExtensions
+	eOptimizationMetric_WAPE                                                   smithy.SchemaExtensions
+	eOptimizationMetric_RMSE                                                   smithy.SchemaExtensions
+	eOptimizationMetric_AverageWeightedQuantileLoss                            smithy.SchemaExtensions
+	eOptimizationMetric_MASE                                                   smithy.SchemaExtensions
+	eOptimizationMetric_MAPE                                                   smithy.SchemaExtensions
+	e_ParameterKey                                                             smithy.SchemaExtensions
+	eParameterRanges                                                           smithy.SchemaExtensions
+	eParameterRanges_CategoricalParameterRanges                                smithy.SchemaExtensions
+	eParameterRanges_ContinuousParameterRanges                                 smithy.SchemaExtensions
+	eParameterRanges_IntegerParameterRanges                                    smithy.SchemaExtensions
+	e_ParameterValue                                                           smithy.SchemaExtensions
+	e_PredictorBacktestExportJobs                                              smithy.SchemaExtensions
+	e_PredictorBacktestExportJobs_member                                       smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary                                         smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_PredictorBacktestExportJobArn           smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_PredictorBacktestExportJobName          smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_Destination                             smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_Status                                  smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_Message                                 smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_CreationTime                            smithy.SchemaExtensions
+	ePredictorBacktestExportJobSummary_LastModificationTime                    smithy.SchemaExtensions
+	ePredictorBaseline                                                         smithy.SchemaExtensions
+	ePredictorBaseline_BaselineMetrics                                         smithy.SchemaExtensions
+	e_PredictorEvaluationResults                                               smithy.SchemaExtensions
+	e_PredictorEvaluationResults_member                                        smithy.SchemaExtensions
+	ePredictorEvent                                                            smithy.SchemaExtensions
+	ePredictorEvent_Detail                                                     smithy.SchemaExtensions
+	ePredictorEvent_Datetime                                                   smithy.SchemaExtensions
+	ePredictorExecution                                                        smithy.SchemaExtensions
+	ePredictorExecution_AlgorithmArn                                           smithy.SchemaExtensions
+	ePredictorExecution_TestWindows                                            smithy.SchemaExtensions
+	ePredictorExecutionDetails                                                 smithy.SchemaExtensions
+	ePredictorExecutionDetails_PredictorExecutions                             smithy.SchemaExtensions
+	e_PredictorExecutions                                                      smithy.SchemaExtensions
+	e_PredictorExecutions_member                                               smithy.SchemaExtensions
+	ePredictorMonitorEvaluation                                                smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_ResourceArn                                    smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_MonitorArn                                     smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_EvaluationTime                                 smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_EvaluationState                                smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_WindowStartDatetime                            smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_WindowEndDatetime                              smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_PredictorEvent                                 smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_MonitorDataSource                              smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_MetricResults                                  smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_NumItemsEvaluated                              smithy.SchemaExtensions
+	ePredictorMonitorEvaluation_Message                                        smithy.SchemaExtensions
+	e_PredictorMonitorEvaluations                                              smithy.SchemaExtensions
+	e_PredictorMonitorEvaluations_member                                       smithy.SchemaExtensions
+	e_Predictors                                                               smithy.SchemaExtensions
+	e_Predictors_member                                                        smithy.SchemaExtensions
+	ePredictorSummary                                                          smithy.SchemaExtensions
+	ePredictorSummary_PredictorArn                                             smithy.SchemaExtensions
+	ePredictorSummary_PredictorName                                            smithy.SchemaExtensions
+	ePredictorSummary_DatasetGroupArn                                          smithy.SchemaExtensions
+	ePredictorSummary_IsAutoPredictor                                          smithy.SchemaExtensions
+	ePredictorSummary_ReferencePredictorSummary                                smithy.SchemaExtensions
+	ePredictorSummary_Status                                                   smithy.SchemaExtensions
+	ePredictorSummary_Message                                                  smithy.SchemaExtensions
+	ePredictorSummary_CreationTime                                             smithy.SchemaExtensions
+	ePredictorSummary_LastModificationTime                                     smithy.SchemaExtensions
+	eReferencePredictorSummary                                                 smithy.SchemaExtensions
+	eReferencePredictorSummary_Arn                                             smithy.SchemaExtensions
+	eReferencePredictorSummary_State                                           smithy.SchemaExtensions
+	eResourceAlreadyExistsException                                            smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message                                    smithy.SchemaExtensions
+	eResourceInUseException                                                    smithy.SchemaExtensions
+	eResourceInUseException_Message                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                         smithy.SchemaExtensions
+	eS3Config                                                                  smithy.SchemaExtensions
+	eS3Config_Path                                                             smithy.SchemaExtensions
+	eS3Config_RoleArn                                                          smithy.SchemaExtensions
+	eS3Config_KMSKeyArn                                                        smithy.SchemaExtensions
+	e_S3Path                                                                   smithy.SchemaExtensions
+	eScalingType                                                               smithy.SchemaExtensions
+	eScalingType_Auto                                                          smithy.SchemaExtensions
+	eScalingType_Linear                                                        smithy.SchemaExtensions
+	eScalingType_Logarithmic                                                   smithy.SchemaExtensions
+	eScalingType_ReverseLogarithmic                                            smithy.SchemaExtensions
+	eSchema                                                                    smithy.SchemaExtensions
+	eSchema_Attributes                                                         smithy.SchemaExtensions
+	eSchemaAttribute                                                           smithy.SchemaExtensions
+	eSchemaAttribute_AttributeName                                             smithy.SchemaExtensions
+	eSchemaAttribute_AttributeType                                             smithy.SchemaExtensions
+	e_SchemaAttributes                                                         smithy.SchemaExtensions
+	e_SchemaAttributes_member                                                  smithy.SchemaExtensions
+	eState                                                                     smithy.SchemaExtensions
+	eState_Active                                                              smithy.SchemaExtensions
+	eState_Deleted                                                             smithy.SchemaExtensions
+	eStatistics                                                                smithy.SchemaExtensions
+	eStatistics_Count                                                          smithy.SchemaExtensions
+	eStatistics_CountDistinct                                                  smithy.SchemaExtensions
+	eStatistics_CountNull                                                      smithy.SchemaExtensions
+	eStatistics_CountNan                                                       smithy.SchemaExtensions
+	eStatistics_Min                                                            smithy.SchemaExtensions
+	eStatistics_Max                                                            smithy.SchemaExtensions
+	eStatistics_Avg                                                            smithy.SchemaExtensions
+	eStatistics_Stddev                                                         smithy.SchemaExtensions
+	eStatistics_CountLong                                                      smithy.SchemaExtensions
+	eStatistics_CountDistinctLong                                              smithy.SchemaExtensions
+	eStatistics_CountNullLong                                                  smithy.SchemaExtensions
+	eStatistics_CountNanLong                                                   smithy.SchemaExtensions
+	e_Status                                                                   smithy.SchemaExtensions
+	e_String                                                                   smithy.SchemaExtensions
+	eSupplementaryFeature                                                      smithy.SchemaExtensions
+	eSupplementaryFeature_Name                                                 smithy.SchemaExtensions
+	eSupplementaryFeature_Value                                                smithy.SchemaExtensions
+	e_SupplementaryFeatures                                                    smithy.SchemaExtensions
+	e_SupplementaryFeatures_member                                             smithy.SchemaExtensions
+	eTag                                                                       smithy.SchemaExtensions
+	eTag_Key                                                                   smithy.SchemaExtensions
+	eTag_Value                                                                 smithy.SchemaExtensions
+	e_TagKey                                                                   smithy.SchemaExtensions
+	e_TagKeys                                                                  smithy.SchemaExtensions
+	e_TagKeys_member                                                           smithy.SchemaExtensions
+	e_Tags                                                                     smithy.SchemaExtensions
+	e_Tags_member                                                              smithy.SchemaExtensions
+	e_TagValue                                                                 smithy.SchemaExtensions
+	e_TestWindowDetails                                                        smithy.SchemaExtensions
+	e_TestWindowDetails_member                                                 smithy.SchemaExtensions
+	e_TestWindows                                                              smithy.SchemaExtensions
+	e_TestWindows_member                                                       smithy.SchemaExtensions
+	eTestWindowSummary                                                         smithy.SchemaExtensions
+	eTestWindowSummary_TestWindowStart                                         smithy.SchemaExtensions
+	eTestWindowSummary_TestWindowEnd                                           smithy.SchemaExtensions
+	eTestWindowSummary_Status                                                  smithy.SchemaExtensions
+	eTestWindowSummary_Message                                                 smithy.SchemaExtensions
+	eTimeAlignmentBoundary                                                     smithy.SchemaExtensions
+	eTimeAlignmentBoundary_Month                                               smithy.SchemaExtensions
+	eTimeAlignmentBoundary_DayOfMonth                                          smithy.SchemaExtensions
+	eTimeAlignmentBoundary_DayOfWeek                                           smithy.SchemaExtensions
+	eTimeAlignmentBoundary_Hour                                                smithy.SchemaExtensions
+	eTimePointGranularity                                                      smithy.SchemaExtensions
+	eTimePointGranularity_ALL                                                  smithy.SchemaExtensions
+	eTimePointGranularity_SPECIFIC                                             smithy.SchemaExtensions
+	eTimeSeriesCondition                                                       smithy.SchemaExtensions
+	eTimeSeriesCondition_AttributeName                                         smithy.SchemaExtensions
+	eTimeSeriesCondition_AttributeValue                                        smithy.SchemaExtensions
+	eTimeSeriesCondition_Condition                                             smithy.SchemaExtensions
+	e_TimeSeriesConditions                                                     smithy.SchemaExtensions
+	e_TimeSeriesConditions_member                                              smithy.SchemaExtensions
+	eTimeSeriesGranularity                                                     smithy.SchemaExtensions
+	eTimeSeriesGranularity_ALL                                                 smithy.SchemaExtensions
+	eTimeSeriesGranularity_SPECIFIC                                            smithy.SchemaExtensions
+	eTimeSeriesIdentifiers                                                     smithy.SchemaExtensions
+	eTimeSeriesIdentifiers_DataSource                                          smithy.SchemaExtensions
+	eTimeSeriesIdentifiers_Schema                                              smithy.SchemaExtensions
+	eTimeSeriesIdentifiers_Format                                              smithy.SchemaExtensions
+	eTimeSeriesReplacementsDataSource                                          smithy.SchemaExtensions
+	eTimeSeriesReplacementsDataSource_S3Config                                 smithy.SchemaExtensions
+	eTimeSeriesReplacementsDataSource_Schema                                   smithy.SchemaExtensions
+	eTimeSeriesReplacementsDataSource_Format                                   smithy.SchemaExtensions
+	eTimeSeriesReplacementsDataSource_TimestampFormat                          smithy.SchemaExtensions
+	eTimeSeriesSelector                                                        smithy.SchemaExtensions
+	eTimeSeriesSelector_TimeSeriesIdentifiers                                  smithy.SchemaExtensions
+	eTimeSeriesTransformation                                                  smithy.SchemaExtensions
+	eTimeSeriesTransformation_Action                                           smithy.SchemaExtensions
+	eTimeSeriesTransformation_TimeSeriesConditions                             smithy.SchemaExtensions
+	e_TimeSeriesTransformations                                                smithy.SchemaExtensions
+	e_TimeSeriesTransformations_member                                         smithy.SchemaExtensions
+	e_Timestamp                                                                smithy.SchemaExtensions
+	e_TimestampFormat                                                          smithy.SchemaExtensions
+	e_TimeZone                                                                 smithy.SchemaExtensions
+	e_TrainingParameters                                                       smithy.SchemaExtensions
+	e_TrainingParameters_key                                                   smithy.SchemaExtensions
+	e_TrainingParameters_value                                                 smithy.SchemaExtensions
+	e_Transformations                                                          smithy.SchemaExtensions
+	e_Transformations_key                                                      smithy.SchemaExtensions
+	e_Transformations_value                                                    smithy.SchemaExtensions
+	e_UseGeolocationForTimeZone                                                smithy.SchemaExtensions
+	e_Value                                                                    smithy.SchemaExtensions
+	e_Values                                                                   smithy.SchemaExtensions
+	e_Values_member                                                            smithy.SchemaExtensions
+	eWeightedQuantileLoss                                                      smithy.SchemaExtensions
+	eWeightedQuantileLoss_Quantile                                             smithy.SchemaExtensions
+	eWeightedQuantileLoss_LossValue                                            smithy.SchemaExtensions
+	e_WeightedQuantileLosses                                                   smithy.SchemaExtensions
+	e_WeightedQuantileLosses_member                                            smithy.SchemaExtensions
+	e_WhatIfAnalyses                                                           smithy.SchemaExtensions
+	e_WhatIfAnalyses_member                                                    smithy.SchemaExtensions
+	eWhatIfAnalysisSummary                                                     smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_WhatIfAnalysisArn                                   smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_WhatIfAnalysisName                                  smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_ForecastArn                                         smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_Status                                              smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_Message                                             smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_CreationTime                                        smithy.SchemaExtensions
+	eWhatIfAnalysisSummary_LastModificationTime                                smithy.SchemaExtensions
+	e_WhatIfForecastArnListForExport                                           smithy.SchemaExtensions
+	e_WhatIfForecastArnListForExport_member                                    smithy.SchemaExtensions
+	e_WhatIfForecastExports                                                    smithy.SchemaExtensions
+	e_WhatIfForecastExports_member                                             smithy.SchemaExtensions
+	eWhatIfForecastExportSummary                                               smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_WhatIfForecastExportArn                       smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_WhatIfForecastArns                            smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_WhatIfForecastExportName                      smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_Destination                                   smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_Status                                        smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_Message                                       smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_CreationTime                                  smithy.SchemaExtensions
+	eWhatIfForecastExportSummary_LastModificationTime                          smithy.SchemaExtensions
+	e_WhatIfForecasts                                                          smithy.SchemaExtensions
+	e_WhatIfForecasts_member                                                   smithy.SchemaExtensions
+	eWhatIfForecastSummary                                                     smithy.SchemaExtensions
+	eWhatIfForecastSummary_WhatIfForecastArn                                   smithy.SchemaExtensions
+	eWhatIfForecastSummary_WhatIfForecastName                                  smithy.SchemaExtensions
+	eWhatIfForecastSummary_WhatIfAnalysisArn                                   smithy.SchemaExtensions
+	eWhatIfForecastSummary_Status                                              smithy.SchemaExtensions
+	eWhatIfForecastSummary_Message                                             smithy.SchemaExtensions
+	eWhatIfForecastSummary_CreationTime                                        smithy.SchemaExtensions
+	eWhatIfForecastSummary_LastModificationTime                                smithy.SchemaExtensions
+	eWindowSummary                                                             smithy.SchemaExtensions
+	eWindowSummary_TestWindowStart                                             smithy.SchemaExtensions
+	eWindowSummary_TestWindowEnd                                               smithy.SchemaExtensions
+	eWindowSummary_ItemCount                                                   smithy.SchemaExtensions
+	eWindowSummary_EvaluationType                                              smithy.SchemaExtensions
+	eWindowSummary_Metrics                                                     smithy.SchemaExtensions
+	eCreateAutoPredictorRequest                                                smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_PredictorName                                  smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ForecastHorizon                                smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ForecastTypes                                  smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ForecastDimensions                             smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ForecastFrequency                              smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_DataConfig                                     smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_EncryptionConfig                               smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ReferencePredictorArn                          smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_OptimizationMetric                             smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_ExplainPredictor                               smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_Tags                                           smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_MonitorConfig                                  smithy.SchemaExtensions
+	eCreateAutoPredictorRequest_TimeAlignmentBoundary                          smithy.SchemaExtensions
+	eCreateAutoPredictorResponse                                               smithy.SchemaExtensions
+	eCreateAutoPredictorResponse_PredictorArn                                  smithy.SchemaExtensions
+	eCreateDatasetGroupRequest                                                 smithy.SchemaExtensions
+	eCreateDatasetGroupRequest_DatasetGroupName                                smithy.SchemaExtensions
+	eCreateDatasetGroupRequest_Domain                                          smithy.SchemaExtensions
+	eCreateDatasetGroupRequest_DatasetArns                                     smithy.SchemaExtensions
+	eCreateDatasetGroupRequest_Tags                                            smithy.SchemaExtensions
+	eCreateDatasetGroupResponse                                                smithy.SchemaExtensions
+	eCreateDatasetGroupResponse_DatasetGroupArn                                smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest                                             smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_DatasetImportJobName                        smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_DatasetArn                                  smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_DataSource                                  smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_TimestampFormat                             smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_TimeZone                                    smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_UseGeolocationForTimeZone                   smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_GeolocationFormat                           smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_Tags                                        smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_Format                                      smithy.SchemaExtensions
+	eCreateDatasetImportJobRequest_ImportMode                                  smithy.SchemaExtensions
+	eCreateDatasetImportJobResponse                                            smithy.SchemaExtensions
+	eCreateDatasetImportJobResponse_DatasetImportJobArn                        smithy.SchemaExtensions
+	eCreateDatasetRequest                                                      smithy.SchemaExtensions
+	eCreateDatasetRequest_DatasetName                                          smithy.SchemaExtensions
+	eCreateDatasetRequest_Domain                                               smithy.SchemaExtensions
+	eCreateDatasetRequest_DatasetType                                          smithy.SchemaExtensions
+	eCreateDatasetRequest_DataFrequency                                        smithy.SchemaExtensions
+	eCreateDatasetRequest_Schema                                               smithy.SchemaExtensions
+	eCreateDatasetRequest_EncryptionConfig                                     smithy.SchemaExtensions
+	eCreateDatasetRequest_Tags                                                 smithy.SchemaExtensions
+	eCreateDatasetResponse                                                     smithy.SchemaExtensions
+	eCreateDatasetResponse_DatasetArn                                          smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest                                         smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest_ExplainabilityExportName                smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest_ExplainabilityArn                       smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest_Destination                             smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest_Tags                                    smithy.SchemaExtensions
+	eCreateExplainabilityExportRequest_Format                                  smithy.SchemaExtensions
+	eCreateExplainabilityExportResponse                                        smithy.SchemaExtensions
+	eCreateExplainabilityExportResponse_ExplainabilityExportArn                smithy.SchemaExtensions
+	eCreateExplainabilityRequest                                               smithy.SchemaExtensions
+	eCreateExplainabilityRequest_ExplainabilityName                            smithy.SchemaExtensions
+	eCreateExplainabilityRequest_ResourceArn                                   smithy.SchemaExtensions
+	eCreateExplainabilityRequest_ExplainabilityConfig                          smithy.SchemaExtensions
+	eCreateExplainabilityRequest_DataSource                                    smithy.SchemaExtensions
+	eCreateExplainabilityRequest_Schema                                        smithy.SchemaExtensions
+	eCreateExplainabilityRequest_EnableVisualization                           smithy.SchemaExtensions
+	eCreateExplainabilityRequest_StartDateTime                                 smithy.SchemaExtensions
+	eCreateExplainabilityRequest_EndDateTime                                   smithy.SchemaExtensions
+	eCreateExplainabilityRequest_Tags                                          smithy.SchemaExtensions
+	eCreateExplainabilityResponse                                              smithy.SchemaExtensions
+	eCreateExplainabilityResponse_ExplainabilityArn                            smithy.SchemaExtensions
+	eCreateForecastExportJobRequest                                            smithy.SchemaExtensions
+	eCreateForecastExportJobRequest_ForecastExportJobName                      smithy.SchemaExtensions
+	eCreateForecastExportJobRequest_ForecastArn                                smithy.SchemaExtensions
+	eCreateForecastExportJobRequest_Destination                                smithy.SchemaExtensions
+	eCreateForecastExportJobRequest_Tags                                       smithy.SchemaExtensions
+	eCreateForecastExportJobRequest_Format                                     smithy.SchemaExtensions
+	eCreateForecastExportJobResponse                                           smithy.SchemaExtensions
+	eCreateForecastExportJobResponse_ForecastExportJobArn                      smithy.SchemaExtensions
+	eCreateForecastRequest                                                     smithy.SchemaExtensions
+	eCreateForecastRequest_ForecastName                                        smithy.SchemaExtensions
+	eCreateForecastRequest_PredictorArn                                        smithy.SchemaExtensions
+	eCreateForecastRequest_ForecastTypes                                       smithy.SchemaExtensions
+	eCreateForecastRequest_Tags                                                smithy.SchemaExtensions
+	eCreateForecastRequest_TimeSeriesSelector                                  smithy.SchemaExtensions
+	eCreateForecastResponse                                                    smithy.SchemaExtensions
+	eCreateForecastResponse_ForecastArn                                        smithy.SchemaExtensions
+	eCreateMonitorRequest                                                      smithy.SchemaExtensions
+	eCreateMonitorRequest_MonitorName                                          smithy.SchemaExtensions
+	eCreateMonitorRequest_ResourceArn                                          smithy.SchemaExtensions
+	eCreateMonitorRequest_Tags                                                 smithy.SchemaExtensions
+	eCreateMonitorResponse                                                     smithy.SchemaExtensions
+	eCreateMonitorResponse_MonitorArn                                          smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest                                   smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName    smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest_PredictorArn                      smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest_Destination                       smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest_Tags                              smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobRequest_Format                            smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobResponse                                  smithy.SchemaExtensions
+	eCreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn    smithy.SchemaExtensions
+	eCreatePredictorRequest                                                    smithy.SchemaExtensions
+	eCreatePredictorRequest_PredictorName                                      smithy.SchemaExtensions
+	eCreatePredictorRequest_AlgorithmArn                                       smithy.SchemaExtensions
+	eCreatePredictorRequest_ForecastHorizon                                    smithy.SchemaExtensions
+	eCreatePredictorRequest_ForecastTypes                                      smithy.SchemaExtensions
+	eCreatePredictorRequest_PerformAutoML                                      smithy.SchemaExtensions
+	eCreatePredictorRequest_AutoMLOverrideStrategy                             smithy.SchemaExtensions
+	eCreatePredictorRequest_PerformHPO                                         smithy.SchemaExtensions
+	eCreatePredictorRequest_TrainingParameters                                 smithy.SchemaExtensions
+	eCreatePredictorRequest_EvaluationParameters                               smithy.SchemaExtensions
+	eCreatePredictorRequest_HPOConfig                                          smithy.SchemaExtensions
+	eCreatePredictorRequest_InputDataConfig                                    smithy.SchemaExtensions
+	eCreatePredictorRequest_FeaturizationConfig                                smithy.SchemaExtensions
+	eCreatePredictorRequest_EncryptionConfig                                   smithy.SchemaExtensions
+	eCreatePredictorRequest_Tags                                               smithy.SchemaExtensions
+	eCreatePredictorRequest_OptimizationMetric                                 smithy.SchemaExtensions
+	eCreatePredictorResponse                                                   smithy.SchemaExtensions
+	eCreatePredictorResponse_PredictorArn                                      smithy.SchemaExtensions
+	eCreateWhatIfAnalysisRequest                                               smithy.SchemaExtensions
+	eCreateWhatIfAnalysisRequest_WhatIfAnalysisName                            smithy.SchemaExtensions
+	eCreateWhatIfAnalysisRequest_ForecastArn                                   smithy.SchemaExtensions
+	eCreateWhatIfAnalysisRequest_TimeSeriesSelector                            smithy.SchemaExtensions
+	eCreateWhatIfAnalysisRequest_Tags                                          smithy.SchemaExtensions
+	eCreateWhatIfAnalysisResponse                                              smithy.SchemaExtensions
+	eCreateWhatIfAnalysisResponse_WhatIfAnalysisArn                            smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest                                         smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest_WhatIfForecastExportName                smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest_WhatIfForecastArns                      smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest_Destination                             smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest_Tags                                    smithy.SchemaExtensions
+	eCreateWhatIfForecastExportRequest_Format                                  smithy.SchemaExtensions
+	eCreateWhatIfForecastExportResponse                                        smithy.SchemaExtensions
+	eCreateWhatIfForecastExportResponse_WhatIfForecastExportArn                smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest                                               smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest_WhatIfForecastName                            smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest_WhatIfAnalysisArn                             smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest_TimeSeriesTransformations                     smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource              smithy.SchemaExtensions
+	eCreateWhatIfForecastRequest_Tags                                          smithy.SchemaExtensions
+	eCreateWhatIfForecastResponse                                              smithy.SchemaExtensions
+	eCreateWhatIfForecastResponse_WhatIfForecastArn                            smithy.SchemaExtensions
+	eDeleteDatasetGroupRequest                                                 smithy.SchemaExtensions
+	eDeleteDatasetGroupRequest_DatasetGroupArn                                 smithy.SchemaExtensions
+	eDeleteDatasetImportJobRequest                                             smithy.SchemaExtensions
+	eDeleteDatasetImportJobRequest_DatasetImportJobArn                         smithy.SchemaExtensions
+	eDeleteDatasetRequest                                                      smithy.SchemaExtensions
+	eDeleteDatasetRequest_DatasetArn                                           smithy.SchemaExtensions
+	eDeleteExplainabilityExportRequest                                         smithy.SchemaExtensions
+	eDeleteExplainabilityExportRequest_ExplainabilityExportArn                 smithy.SchemaExtensions
+	eDeleteExplainabilityRequest                                               smithy.SchemaExtensions
+	eDeleteExplainabilityRequest_ExplainabilityArn                             smithy.SchemaExtensions
+	eDeleteForecastExportJobRequest                                            smithy.SchemaExtensions
+	eDeleteForecastExportJobRequest_ForecastExportJobArn                       smithy.SchemaExtensions
+	eDeleteForecastRequest                                                     smithy.SchemaExtensions
+	eDeleteForecastRequest_ForecastArn                                         smithy.SchemaExtensions
+	eDeleteMonitorRequest                                                      smithy.SchemaExtensions
+	eDeleteMonitorRequest_MonitorArn                                           smithy.SchemaExtensions
+	eDeletePredictorBacktestExportJobRequest                                   smithy.SchemaExtensions
+	eDeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn     smithy.SchemaExtensions
+	eDeletePredictorRequest                                                    smithy.SchemaExtensions
+	eDeletePredictorRequest_PredictorArn                                       smithy.SchemaExtensions
+	eDeleteResourceTreeRequest                                                 smithy.SchemaExtensions
+	eDeleteResourceTreeRequest_ResourceArn                                     smithy.SchemaExtensions
+	eDeleteWhatIfAnalysisRequest                                               smithy.SchemaExtensions
+	eDeleteWhatIfAnalysisRequest_WhatIfAnalysisArn                             smithy.SchemaExtensions
+	eDeleteWhatIfForecastExportRequest                                         smithy.SchemaExtensions
+	eDeleteWhatIfForecastExportRequest_WhatIfForecastExportArn                 smithy.SchemaExtensions
+	eDeleteWhatIfForecastRequest                                               smithy.SchemaExtensions
+	eDeleteWhatIfForecastRequest_WhatIfForecastArn                             smithy.SchemaExtensions
+	eDescribeAutoPredictorRequest                                              smithy.SchemaExtensions
+	eDescribeAutoPredictorRequest_PredictorArn                                 smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse                                             smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_PredictorArn                                smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_PredictorName                               smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ForecastHorizon                             smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ForecastTypes                               smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ForecastFrequency                           smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ForecastDimensions                          smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_DatasetImportJobArns                        smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_DataConfig                                  smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_EncryptionConfig                            smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ReferencePredictorSummary                   smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes             smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_Status                                      smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_Message                                     smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_CreationTime                                smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_LastModificationTime                        smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_OptimizationMetric                          smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_ExplainabilityInfo                          smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_MonitorInfo                                 smithy.SchemaExtensions
+	eDescribeAutoPredictorResponse_TimeAlignmentBoundary                       smithy.SchemaExtensions
+	eDescribeDatasetGroupRequest                                               smithy.SchemaExtensions
+	eDescribeDatasetGroupRequest_DatasetGroupArn                               smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse                                              smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_DatasetGroupName                             smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_DatasetGroupArn                              smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_DatasetArns                                  smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_Domain                                       smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_Status                                       smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_CreationTime                                 smithy.SchemaExtensions
+	eDescribeDatasetGroupResponse_LastModificationTime                         smithy.SchemaExtensions
+	eDescribeDatasetImportJobRequest                                           smithy.SchemaExtensions
+	eDescribeDatasetImportJobRequest_DatasetImportJobArn                       smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse                                          smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_DatasetImportJobName                     smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_DatasetImportJobArn                      smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_DatasetArn                               smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_TimestampFormat                          smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_TimeZone                                 smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_UseGeolocationForTimeZone                smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_GeolocationFormat                        smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_DataSource                               smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes          smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_FieldStatistics                          smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_DataSize                                 smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_Status                                   smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_Message                                  smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_CreationTime                             smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_LastModificationTime                     smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_Format                                   smithy.SchemaExtensions
+	eDescribeDatasetImportJobResponse_ImportMode                               smithy.SchemaExtensions
+	eDescribeDatasetRequest                                                    smithy.SchemaExtensions
+	eDescribeDatasetRequest_DatasetArn                                         smithy.SchemaExtensions
+	eDescribeDatasetResponse                                                   smithy.SchemaExtensions
+	eDescribeDatasetResponse_DatasetArn                                        smithy.SchemaExtensions
+	eDescribeDatasetResponse_DatasetName                                       smithy.SchemaExtensions
+	eDescribeDatasetResponse_Domain                                            smithy.SchemaExtensions
+	eDescribeDatasetResponse_DatasetType                                       smithy.SchemaExtensions
+	eDescribeDatasetResponse_DataFrequency                                     smithy.SchemaExtensions
+	eDescribeDatasetResponse_Schema                                            smithy.SchemaExtensions
+	eDescribeDatasetResponse_EncryptionConfig                                  smithy.SchemaExtensions
+	eDescribeDatasetResponse_Status                                            smithy.SchemaExtensions
+	eDescribeDatasetResponse_CreationTime                                      smithy.SchemaExtensions
+	eDescribeDatasetResponse_LastModificationTime                              smithy.SchemaExtensions
+	eDescribeExplainabilityExportRequest                                       smithy.SchemaExtensions
+	eDescribeExplainabilityExportRequest_ExplainabilityExportArn               smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse                                      smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_ExplainabilityExportArn              smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_ExplainabilityExportName             smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_ExplainabilityArn                    smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_Destination                          smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_Message                              smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_Status                               smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_CreationTime                         smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_LastModificationTime                 smithy.SchemaExtensions
+	eDescribeExplainabilityExportResponse_Format                               smithy.SchemaExtensions
+	eDescribeExplainabilityRequest                                             smithy.SchemaExtensions
+	eDescribeExplainabilityRequest_ExplainabilityArn                           smithy.SchemaExtensions
+	eDescribeExplainabilityResponse                                            smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_ExplainabilityArn                          smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_ExplainabilityName                         smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_ResourceArn                                smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_ExplainabilityConfig                       smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_EnableVisualization                        smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_DataSource                                 smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_Schema                                     smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_StartDateTime                              smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_EndDateTime                                smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes            smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_Message                                    smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_Status                                     smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_CreationTime                               smithy.SchemaExtensions
+	eDescribeExplainabilityResponse_LastModificationTime                       smithy.SchemaExtensions
+	eDescribeForecastExportJobRequest                                          smithy.SchemaExtensions
+	eDescribeForecastExportJobRequest_ForecastExportJobArn                     smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse                                         smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_ForecastExportJobArn                    smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_ForecastExportJobName                   smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_ForecastArn                             smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_Destination                             smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_Message                                 smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_Status                                  smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_CreationTime                            smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_LastModificationTime                    smithy.SchemaExtensions
+	eDescribeForecastExportJobResponse_Format                                  smithy.SchemaExtensions
+	eDescribeForecastRequest                                                   smithy.SchemaExtensions
+	eDescribeForecastRequest_ForecastArn                                       smithy.SchemaExtensions
+	eDescribeForecastResponse                                                  smithy.SchemaExtensions
+	eDescribeForecastResponse_ForecastArn                                      smithy.SchemaExtensions
+	eDescribeForecastResponse_ForecastName                                     smithy.SchemaExtensions
+	eDescribeForecastResponse_ForecastTypes                                    smithy.SchemaExtensions
+	eDescribeForecastResponse_PredictorArn                                     smithy.SchemaExtensions
+	eDescribeForecastResponse_DatasetGroupArn                                  smithy.SchemaExtensions
+	eDescribeForecastResponse_EstimatedTimeRemainingInMinutes                  smithy.SchemaExtensions
+	eDescribeForecastResponse_Status                                           smithy.SchemaExtensions
+	eDescribeForecastResponse_Message                                          smithy.SchemaExtensions
+	eDescribeForecastResponse_CreationTime                                     smithy.SchemaExtensions
+	eDescribeForecastResponse_LastModificationTime                             smithy.SchemaExtensions
+	eDescribeForecastResponse_TimeSeriesSelector                               smithy.SchemaExtensions
+	eDescribeMonitorRequest                                                    smithy.SchemaExtensions
+	eDescribeMonitorRequest_MonitorArn                                         smithy.SchemaExtensions
+	eDescribeMonitorResponse                                                   smithy.SchemaExtensions
+	eDescribeMonitorResponse_MonitorName                                       smithy.SchemaExtensions
+	eDescribeMonitorResponse_MonitorArn                                        smithy.SchemaExtensions
+	eDescribeMonitorResponse_ResourceArn                                       smithy.SchemaExtensions
+	eDescribeMonitorResponse_Status                                            smithy.SchemaExtensions
+	eDescribeMonitorResponse_LastEvaluationTime                                smithy.SchemaExtensions
+	eDescribeMonitorResponse_LastEvaluationState                               smithy.SchemaExtensions
+	eDescribeMonitorResponse_Baseline                                          smithy.SchemaExtensions
+	eDescribeMonitorResponse_Message                                           smithy.SchemaExtensions
+	eDescribeMonitorResponse_CreationTime                                      smithy.SchemaExtensions
+	eDescribeMonitorResponse_LastModificationTime                              smithy.SchemaExtensions
+	eDescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes         smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobRequest                                 smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn   smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse                                smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn  smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_PredictorArn                   smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_Destination                    smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_Message                        smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_Status                         smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_CreationTime                   smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_LastModificationTime           smithy.SchemaExtensions
+	eDescribePredictorBacktestExportJobResponse_Format                         smithy.SchemaExtensions
+	eDescribePredictorRequest                                                  smithy.SchemaExtensions
+	eDescribePredictorRequest_PredictorArn                                     smithy.SchemaExtensions
+	eDescribePredictorResponse                                                 smithy.SchemaExtensions
+	eDescribePredictorResponse_PredictorArn                                    smithy.SchemaExtensions
+	eDescribePredictorResponse_PredictorName                                   smithy.SchemaExtensions
+	eDescribePredictorResponse_AlgorithmArn                                    smithy.SchemaExtensions
+	eDescribePredictorResponse_AutoMLAlgorithmArns                             smithy.SchemaExtensions
+	eDescribePredictorResponse_ForecastHorizon                                 smithy.SchemaExtensions
+	eDescribePredictorResponse_ForecastTypes                                   smithy.SchemaExtensions
+	eDescribePredictorResponse_PerformAutoML                                   smithy.SchemaExtensions
+	eDescribePredictorResponse_AutoMLOverrideStrategy                          smithy.SchemaExtensions
+	eDescribePredictorResponse_PerformHPO                                      smithy.SchemaExtensions
+	eDescribePredictorResponse_TrainingParameters                              smithy.SchemaExtensions
+	eDescribePredictorResponse_EvaluationParameters                            smithy.SchemaExtensions
+	eDescribePredictorResponse_HPOConfig                                       smithy.SchemaExtensions
+	eDescribePredictorResponse_InputDataConfig                                 smithy.SchemaExtensions
+	eDescribePredictorResponse_FeaturizationConfig                             smithy.SchemaExtensions
+	eDescribePredictorResponse_EncryptionConfig                                smithy.SchemaExtensions
+	eDescribePredictorResponse_PredictorExecutionDetails                       smithy.SchemaExtensions
+	eDescribePredictorResponse_EstimatedTimeRemainingInMinutes                 smithy.SchemaExtensions
+	eDescribePredictorResponse_IsAutoPredictor                                 smithy.SchemaExtensions
+	eDescribePredictorResponse_DatasetImportJobArns                            smithy.SchemaExtensions
+	eDescribePredictorResponse_Status                                          smithy.SchemaExtensions
+	eDescribePredictorResponse_Message                                         smithy.SchemaExtensions
+	eDescribePredictorResponse_CreationTime                                    smithy.SchemaExtensions
+	eDescribePredictorResponse_LastModificationTime                            smithy.SchemaExtensions
+	eDescribePredictorResponse_OptimizationMetric                              smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisRequest                                             smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisRequest_WhatIfAnalysisArn                           smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse                                            smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_WhatIfAnalysisName                         smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_WhatIfAnalysisArn                          smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_ForecastArn                                smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes            smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_Status                                     smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_Message                                    smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_CreationTime                               smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_LastModificationTime                       smithy.SchemaExtensions
+	eDescribeWhatIfAnalysisResponse_TimeSeriesSelector                         smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportRequest                                       smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportRequest_WhatIfForecastExportArn               smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse                                      smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_WhatIfForecastExportArn              smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_WhatIfForecastExportName             smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_WhatIfForecastArns                   smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_Destination                          smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_Message                              smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_Status                               smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_CreationTime                         smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes      smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_LastModificationTime                 smithy.SchemaExtensions
+	eDescribeWhatIfForecastExportResponse_Format                               smithy.SchemaExtensions
+	eDescribeWhatIfForecastRequest                                             smithy.SchemaExtensions
+	eDescribeWhatIfForecastRequest_WhatIfForecastArn                           smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse                                            smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_WhatIfForecastName                         smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_WhatIfForecastArn                          smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_WhatIfAnalysisArn                          smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes            smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_Status                                     smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_Message                                    smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_CreationTime                               smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_LastModificationTime                       smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_TimeSeriesTransformations                  smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource           smithy.SchemaExtensions
+	eDescribeWhatIfForecastResponse_ForecastTypes                              smithy.SchemaExtensions
+	eGetAccuracyMetricsRequest                                                 smithy.SchemaExtensions
+	eGetAccuracyMetricsRequest_PredictorArn                                    smithy.SchemaExtensions
+	eGetAccuracyMetricsResponse                                                smithy.SchemaExtensions
+	eGetAccuracyMetricsResponse_PredictorEvaluationResults                     smithy.SchemaExtensions
+	eGetAccuracyMetricsResponse_IsAutoPredictor                                smithy.SchemaExtensions
+	eGetAccuracyMetricsResponse_AutoMLOverrideStrategy                         smithy.SchemaExtensions
+	eGetAccuracyMetricsResponse_OptimizationMetric                             smithy.SchemaExtensions
+	eListDatasetGroupsRequest                                                  smithy.SchemaExtensions
+	eListDatasetGroupsRequest_NextToken                                        smithy.SchemaExtensions
+	eListDatasetGroupsRequest_MaxResults                                       smithy.SchemaExtensions
+	eListDatasetGroupsResponse                                                 smithy.SchemaExtensions
+	eListDatasetGroupsResponse_DatasetGroups                                   smithy.SchemaExtensions
+	eListDatasetGroupsResponse_NextToken                                       smithy.SchemaExtensions
+	eListDatasetImportJobsRequest                                              smithy.SchemaExtensions
+	eListDatasetImportJobsRequest_NextToken                                    smithy.SchemaExtensions
+	eListDatasetImportJobsRequest_MaxResults                                   smithy.SchemaExtensions
+	eListDatasetImportJobsRequest_Filters                                      smithy.SchemaExtensions
+	eListDatasetImportJobsResponse                                             smithy.SchemaExtensions
+	eListDatasetImportJobsResponse_DatasetImportJobs                           smithy.SchemaExtensions
+	eListDatasetImportJobsResponse_NextToken                                   smithy.SchemaExtensions
+	eListDatasetsRequest                                                       smithy.SchemaExtensions
+	eListDatasetsRequest_NextToken                                             smithy.SchemaExtensions
+	eListDatasetsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListDatasetsResponse                                                      smithy.SchemaExtensions
+	eListDatasetsResponse_Datasets                                             smithy.SchemaExtensions
+	eListDatasetsResponse_NextToken                                            smithy.SchemaExtensions
+	eListExplainabilitiesRequest                                               smithy.SchemaExtensions
+	eListExplainabilitiesRequest_NextToken                                     smithy.SchemaExtensions
+	eListExplainabilitiesRequest_MaxResults                                    smithy.SchemaExtensions
+	eListExplainabilitiesRequest_Filters                                       smithy.SchemaExtensions
+	eListExplainabilitiesResponse                                              smithy.SchemaExtensions
+	eListExplainabilitiesResponse_Explainabilities                             smithy.SchemaExtensions
+	eListExplainabilitiesResponse_NextToken                                    smithy.SchemaExtensions
+	eListExplainabilityExportsRequest                                          smithy.SchemaExtensions
+	eListExplainabilityExportsRequest_NextToken                                smithy.SchemaExtensions
+	eListExplainabilityExportsRequest_MaxResults                               smithy.SchemaExtensions
+	eListExplainabilityExportsRequest_Filters                                  smithy.SchemaExtensions
+	eListExplainabilityExportsResponse                                         smithy.SchemaExtensions
+	eListExplainabilityExportsResponse_ExplainabilityExports                   smithy.SchemaExtensions
+	eListExplainabilityExportsResponse_NextToken                               smithy.SchemaExtensions
+	eListForecastExportJobsRequest                                             smithy.SchemaExtensions
+	eListForecastExportJobsRequest_NextToken                                   smithy.SchemaExtensions
+	eListForecastExportJobsRequest_MaxResults                                  smithy.SchemaExtensions
+	eListForecastExportJobsRequest_Filters                                     smithy.SchemaExtensions
+	eListForecastExportJobsResponse                                            smithy.SchemaExtensions
+	eListForecastExportJobsResponse_ForecastExportJobs                         smithy.SchemaExtensions
+	eListForecastExportJobsResponse_NextToken                                  smithy.SchemaExtensions
+	eListForecastsRequest                                                      smithy.SchemaExtensions
+	eListForecastsRequest_NextToken                                            smithy.SchemaExtensions
+	eListForecastsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListForecastsRequest_Filters                                              smithy.SchemaExtensions
+	eListForecastsResponse                                                     smithy.SchemaExtensions
+	eListForecastsResponse_Forecasts                                           smithy.SchemaExtensions
+	eListForecastsResponse_NextToken                                           smithy.SchemaExtensions
+	eListMonitorEvaluationsRequest                                             smithy.SchemaExtensions
+	eListMonitorEvaluationsRequest_NextToken                                   smithy.SchemaExtensions
+	eListMonitorEvaluationsRequest_MaxResults                                  smithy.SchemaExtensions
+	eListMonitorEvaluationsRequest_MonitorArn                                  smithy.SchemaExtensions
+	eListMonitorEvaluationsRequest_Filters                                     smithy.SchemaExtensions
+	eListMonitorEvaluationsResponse                                            smithy.SchemaExtensions
+	eListMonitorEvaluationsResponse_NextToken                                  smithy.SchemaExtensions
+	eListMonitorEvaluationsResponse_PredictorMonitorEvaluations                smithy.SchemaExtensions
+	eListMonitorsRequest                                                       smithy.SchemaExtensions
+	eListMonitorsRequest_NextToken                                             smithy.SchemaExtensions
+	eListMonitorsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListMonitorsRequest_Filters                                               smithy.SchemaExtensions
+	eListMonitorsResponse                                                      smithy.SchemaExtensions
+	eListMonitorsResponse_Monitors                                             smithy.SchemaExtensions
+	eListMonitorsResponse_NextToken                                            smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsRequest                                    smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsRequest_NextToken                          smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsRequest_MaxResults                         smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsRequest_Filters                            smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsResponse                                   smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs       smithy.SchemaExtensions
+	eListPredictorBacktestExportJobsResponse_NextToken                         smithy.SchemaExtensions
+	eListPredictorsRequest                                                     smithy.SchemaExtensions
+	eListPredictorsRequest_NextToken                                           smithy.SchemaExtensions
+	eListPredictorsRequest_MaxResults                                          smithy.SchemaExtensions
+	eListPredictorsRequest_Filters                                             smithy.SchemaExtensions
+	eListPredictorsResponse                                                    smithy.SchemaExtensions
+	eListPredictorsResponse_Predictors                                         smithy.SchemaExtensions
+	eListPredictorsResponse_NextToken                                          smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse                                               smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                          smithy.SchemaExtensions
+	eListWhatIfAnalysesRequest                                                 smithy.SchemaExtensions
+	eListWhatIfAnalysesRequest_NextToken                                       smithy.SchemaExtensions
+	eListWhatIfAnalysesRequest_MaxResults                                      smithy.SchemaExtensions
+	eListWhatIfAnalysesRequest_Filters                                         smithy.SchemaExtensions
+	eListWhatIfAnalysesResponse                                                smithy.SchemaExtensions
+	eListWhatIfAnalysesResponse_WhatIfAnalyses                                 smithy.SchemaExtensions
+	eListWhatIfAnalysesResponse_NextToken                                      smithy.SchemaExtensions
+	eListWhatIfForecastExportsRequest                                          smithy.SchemaExtensions
+	eListWhatIfForecastExportsRequest_NextToken                                smithy.SchemaExtensions
+	eListWhatIfForecastExportsRequest_MaxResults                               smithy.SchemaExtensions
+	eListWhatIfForecastExportsRequest_Filters                                  smithy.SchemaExtensions
+	eListWhatIfForecastExportsResponse                                         smithy.SchemaExtensions
+	eListWhatIfForecastExportsResponse_WhatIfForecastExports                   smithy.SchemaExtensions
+	eListWhatIfForecastExportsResponse_NextToken                               smithy.SchemaExtensions
+	eListWhatIfForecastsRequest                                                smithy.SchemaExtensions
+	eListWhatIfForecastsRequest_NextToken                                      smithy.SchemaExtensions
+	eListWhatIfForecastsRequest_MaxResults                                     smithy.SchemaExtensions
+	eListWhatIfForecastsRequest_Filters                                        smithy.SchemaExtensions
+	eListWhatIfForecastsResponse                                               smithy.SchemaExtensions
+	eListWhatIfForecastsResponse_WhatIfForecasts                               smithy.SchemaExtensions
+	eListWhatIfForecastsResponse_NextToken                                     smithy.SchemaExtensions
+	eResumeResourceRequest                                                     smithy.SchemaExtensions
+	eResumeResourceRequest_ResourceArn                                         smithy.SchemaExtensions
+	eStopResourceRequest                                                       smithy.SchemaExtensions
+	eStopResourceRequest_ResourceArn                                           smithy.SchemaExtensions
+	eTagResourceRequest                                                        smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                            smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                   smithy.SchemaExtensions
+	eTagResourceResponse                                                       smithy.SchemaExtensions
+	eUntagResourceRequest                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                          smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                              smithy.SchemaExtensions
+	eUntagResourceResponse                                                     smithy.SchemaExtensions
+	eUpdateDatasetGroupRequest                                                 smithy.SchemaExtensions
+	eUpdateDatasetGroupRequest_DatasetGroupArn                                 smithy.SchemaExtensions
+	eUpdateDatasetGroupRequest_DatasetArns                                     smithy.SchemaExtensions
+	eUpdateDatasetGroupResponse                                                smithy.SchemaExtensions
+)
+
+var (
+	iCreateAutoPredictor                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateAutoPredictor"}
+	iCreateDataset                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDataset"}
+	iCreateDatasetGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetGroup"}
+	iCreateDatasetImportJob                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetImportJob"}
+	iCreateExplainability                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainability"}
+	iCreateExplainabilityExport                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainabilityExport"}
+	iCreateForecast                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecast"}
+	iCreateForecastExportJob                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecastExportJob"}
+	iCreateMonitor                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateMonitor"}
+	iCreatePredictor                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictor"}
+	iCreatePredictorBacktestExportJob           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictorBacktestExportJob"}
+	iCreateWhatIfAnalysis                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfAnalysis"}
+	iCreateWhatIfForecast                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecast"}
+	iCreateWhatIfForecastExport                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecastExport"}
+	iDeleteDataset                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDataset"}
+	iDeleteDatasetGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDatasetGroup"}
+	iDeleteDatasetImportJob                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDatasetImportJob"}
+	iDeleteExplainability                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteExplainability"}
+	iDeleteExplainabilityExport                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteExplainabilityExport"}
+	iDeleteForecast                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteForecast"}
+	iDeleteForecastExportJob                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteForecastExportJob"}
+	iDeleteMonitor                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteMonitor"}
+	iDeletePredictor                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeletePredictor"}
+	iDeletePredictorBacktestExportJob           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeletePredictorBacktestExportJob"}
+	iDeleteResourceTree                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteResourceTree"}
+	iDeleteWhatIfAnalysis                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfAnalysis"}
+	iDeleteWhatIfForecast                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfForecast"}
+	iDeleteWhatIfForecastExport                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfForecastExport"}
+	iDescribeAutoPredictor                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeAutoPredictor"}
+	iDescribeDataset                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDataset"}
+	iDescribeDatasetGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetGroup"}
+	iDescribeDatasetImportJob                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetImportJob"}
+	iDescribeExplainability                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainability"}
+	iDescribeExplainabilityExport               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainabilityExport"}
+	iDescribeForecast                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecast"}
+	iDescribeForecastExportJob                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecastExportJob"}
+	iDescribeMonitor                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeMonitor"}
+	iDescribePredictor                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictor"}
+	iDescribePredictorBacktestExportJob         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictorBacktestExportJob"}
+	iDescribeWhatIfAnalysis                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfAnalysis"}
+	iDescribeWhatIfForecast                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecast"}
+	iDescribeWhatIfForecastExport               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecastExport"}
+	iGetAccuracyMetrics                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "GetAccuracyMetrics"}
+	iListDatasetGroups                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetGroups"}
+	iListDatasetImportJobs                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetImportJobs"}
+	iListDatasets                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasets"}
+	iListExplainabilities                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilities"}
+	iListExplainabilityExports                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilityExports"}
+	iListForecastExportJobs                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecastExportJobs"}
+	iListForecasts                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecasts"}
+	iListMonitorEvaluations                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitorEvaluations"}
+	iListMonitors                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitors"}
+	iListPredictorBacktestExportJobs            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictorBacktestExportJobs"}
+	iListPredictors                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictors"}
+	iListTagsForResource                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListTagsForResource"}
+	iListWhatIfAnalyses                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfAnalyses"}
+	iListWhatIfForecastExports                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecastExports"}
+	iListWhatIfForecasts                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecasts"}
+	iResumeResource                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ResumeResource"}
+	iStopResource                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "StopResource"}
+	iTagResource                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagResource"}
+	iUntagResource                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UntagResource"}
+	iUpdateDatasetGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UpdateDatasetGroup"}
+	i_AmazonForecast                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AmazonForecast"}
+	iAction                                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Action"}
+	iAdditionalDataset                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AdditionalDataset"}
+	i_AdditionalDatasets                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AdditionalDatasets"}
+	i_Arn                                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Arn"}
+	i_ArnList                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ArnList"}
+	iAttributeConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AttributeConfig"}
+	i_AttributeConfigs                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AttributeConfigs"}
+	iAttributeType                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AttributeType"}
+	i_AttributeValue                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AttributeValue"}
+	iAutoMLOverrideStrategy                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "AutoMLOverrideStrategy"}
+	iBaseline                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Baseline"}
+	iBaselineMetric                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "BaselineMetric"}
+	i_BaselineMetrics                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "BaselineMetrics"}
+	i_Boolean                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Boolean"}
+	iCategoricalParameterRange                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CategoricalParameterRange"}
+	i_CategoricalParameterRanges                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CategoricalParameterRanges"}
+	iCondition                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Condition"}
+	i_Configuration                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Configuration"}
+	iContinuousParameterRange                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ContinuousParameterRange"}
+	i_ContinuousParameterRanges                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ContinuousParameterRanges"}
+	iDataConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DataConfig"}
+	iDataDestination                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DataDestination"}
+	i_DatasetGroups                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetGroups"}
+	iDatasetGroupSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetGroupSummary"}
+	i_DatasetImportJobs                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetImportJobs"}
+	iDatasetImportJobSummary                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetImportJobSummary"}
+	i_Datasets                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Datasets"}
+	iDatasetSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetSummary"}
+	iDatasetType                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DatasetType"}
+	iDataSource                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DataSource"}
+	i_DayOfMonth                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DayOfMonth"}
+	iDayOfWeek                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DayOfWeek"}
+	i_Detail                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Detail"}
+	iDomain                                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Domain"}
+	i_Double                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Double"}
+	iEncryptionConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "EncryptionConfig"}
+	i_ErrorMessage                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ErrorMessage"}
+	iErrorMetric                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ErrorMetric"}
+	i_ErrorMetrics                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ErrorMetrics"}
+	iEvaluationParameters                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "EvaluationParameters"}
+	iEvaluationResult                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "EvaluationResult"}
+	i_EvaluationState                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "EvaluationState"}
+	iEvaluationType                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "EvaluationType"}
+	i_Explainabilities                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Explainabilities"}
+	iExplainabilityConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ExplainabilityConfig"}
+	i_ExplainabilityExports                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ExplainabilityExports"}
+	iExplainabilityExportSummary                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ExplainabilityExportSummary"}
+	iExplainabilityInfo                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ExplainabilityInfo"}
+	iExplainabilitySummary                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ExplainabilitySummary"}
+	iFeaturization                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Featurization"}
+	iFeaturizationConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FeaturizationConfig"}
+	iFeaturizationMethod                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FeaturizationMethod"}
+	iFeaturizationMethodName                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FeaturizationMethodName"}
+	i_FeaturizationMethodParameters             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FeaturizationMethodParameters"}
+	i_FeaturizationPipeline                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FeaturizationPipeline"}
+	i_Featurizations                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Featurizations"}
+	i_FieldStatistics                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FieldStatistics"}
+	iFilter                                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Filter"}
+	iFilterConditionString                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "FilterConditionString"}
+	i_Filters                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Filters"}
+	i_ForecastDimensions                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastDimensions"}
+	i_ForecastExportJobs                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastExportJobs"}
+	iForecastExportJobSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastExportJobSummary"}
+	i_Forecasts                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Forecasts"}
+	iForecastSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastSummary"}
+	i_ForecastType                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastType"}
+	i_ForecastTypes                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ForecastTypes"}
+	i_Format                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Format"}
+	i_Frequency                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Frequency"}
+	i_GeolocationFormat                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "GeolocationFormat"}
+	i_Hour                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Hour"}
+	iHyperParameterTuningJobConfig              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "HyperParameterTuningJobConfig"}
+	iImportMode                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ImportMode"}
+	iInputDataConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "InputDataConfig"}
+	i_Integer                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Integer"}
+	iIntegerParameterRange                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "IntegerParameterRange"}
+	i_IntegerParameterRanges                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "IntegerParameterRanges"}
+	iInvalidInputException                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "InvalidInputException"}
+	iInvalidNextTokenException                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "InvalidNextTokenException"}
+	i_KMSKeyArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "KMSKeyArn"}
+	iLimitExceededException                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "LimitExceededException"}
+	i_LocalDateTime                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "LocalDateTime"}
+	i_Long                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Long"}
+	i_LongArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "LongArn"}
+	i_LongArnList                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "LongArnList"}
+	i_MaxResults                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MaxResults"}
+	i_Message                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Message"}
+	i_MetricName                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MetricName"}
+	iMetricResult                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MetricResult"}
+	i_MetricResults                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MetricResults"}
+	iMetrics                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Metrics"}
+	iMonitorConfig                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MonitorConfig"}
+	iMonitorDataSource                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MonitorDataSource"}
+	iMonitorInfo                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MonitorInfo"}
+	i_Monitors                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Monitors"}
+	iMonitorSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "MonitorSummary"}
+	iMonth                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Month"}
+	i_Name                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Name"}
+	i_NextToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "NextToken"}
+	iOperation                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Operation"}
+	iOptimizationMetric                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "OptimizationMetric"}
+	i_ParameterKey                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ParameterKey"}
+	iParameterRanges                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ParameterRanges"}
+	i_ParameterValue                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ParameterValue"}
+	i_PredictorBacktestExportJobs               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorBacktestExportJobs"}
+	iPredictorBacktestExportJobSummary          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorBacktestExportJobSummary"}
+	iPredictorBaseline                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorBaseline"}
+	i_PredictorEvaluationResults                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorEvaluationResults"}
+	iPredictorEvent                             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorEvent"}
+	iPredictorExecution                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorExecution"}
+	iPredictorExecutionDetails                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorExecutionDetails"}
+	i_PredictorExecutions                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorExecutions"}
+	iPredictorMonitorEvaluation                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorMonitorEvaluation"}
+	i_PredictorMonitorEvaluations               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorMonitorEvaluations"}
+	i_Predictors                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Predictors"}
+	iPredictorSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "PredictorSummary"}
+	iReferencePredictorSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ReferencePredictorSummary"}
+	iResourceAlreadyExistsException             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ResourceAlreadyExistsException"}
+	iResourceInUseException                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ResourceInUseException"}
+	iResourceNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ResourceNotFoundException"}
+	iS3Config                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "S3Config"}
+	i_S3Path                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "S3Path"}
+	iScalingType                                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ScalingType"}
+	iSchema                                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Schema"}
+	iSchemaAttribute                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "SchemaAttribute"}
+	i_SchemaAttributes                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "SchemaAttributes"}
+	iState                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "State"}
+	iStatistics                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Statistics"}
+	i_Status                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Status"}
+	i_String                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "String"}
+	iSupplementaryFeature                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "SupplementaryFeature"}
+	i_SupplementaryFeatures                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "SupplementaryFeatures"}
+	iTag                                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Tag"}
+	i_TagKey                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagKey"}
+	i_TagKeys                                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagKeys"}
+	i_Tags                                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Tags"}
+	i_TagValue                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagValue"}
+	i_TestWindowDetails                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TestWindowDetails"}
+	i_TestWindows                               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TestWindows"}
+	iTestWindowSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TestWindowSummary"}
+	iTimeAlignmentBoundary                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeAlignmentBoundary"}
+	iTimePointGranularity                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimePointGranularity"}
+	iTimeSeriesCondition                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesCondition"}
+	i_TimeSeriesConditions                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesConditions"}
+	iTimeSeriesGranularity                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesGranularity"}
+	iTimeSeriesIdentifiers                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesIdentifiers"}
+	iTimeSeriesReplacementsDataSource           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesReplacementsDataSource"}
+	iTimeSeriesSelector                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesSelector"}
+	iTimeSeriesTransformation                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesTransformation"}
+	i_TimeSeriesTransformations                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeSeriesTransformations"}
+	i_Timestamp                                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Timestamp"}
+	i_TimestampFormat                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimestampFormat"}
+	i_TimeZone                                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TimeZone"}
+	i_TrainingParameters                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TrainingParameters"}
+	i_Transformations                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Transformations"}
+	i_UseGeolocationForTimeZone                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UseGeolocationForTimeZone"}
+	i_Value                                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Value"}
+	i_Values                                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "Values"}
+	iWeightedQuantileLoss                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WeightedQuantileLoss"}
+	i_WeightedQuantileLosses                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WeightedQuantileLosses"}
+	i_WhatIfAnalyses                            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfAnalyses"}
+	iWhatIfAnalysisSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfAnalysisSummary"}
+	i_WhatIfForecastArnListForExport            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfForecastArnListForExport"}
+	i_WhatIfForecastExports                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfForecastExports"}
+	iWhatIfForecastExportSummary                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfForecastExportSummary"}
+	i_WhatIfForecasts                           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfForecasts"}
+	iWhatIfForecastSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WhatIfForecastSummary"}
+	iWindowSummary                              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "WindowSummary"}
+	iCreateAutoPredictorRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateAutoPredictorRequest"}
+	iCreateAutoPredictorResponse                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateAutoPredictorResponse"}
+	iCreateDatasetGroupRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetGroupRequest"}
+	iCreateDatasetGroupResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetGroupResponse"}
+	iCreateDatasetImportJobRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetImportJobRequest"}
+	iCreateDatasetImportJobResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetImportJobResponse"}
+	iCreateDatasetRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetRequest"}
+	iCreateDatasetResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateDatasetResponse"}
+	iCreateExplainabilityExportRequest          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainabilityExportRequest"}
+	iCreateExplainabilityExportResponse         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainabilityExportResponse"}
+	iCreateExplainabilityRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainabilityRequest"}
+	iCreateExplainabilityResponse               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateExplainabilityResponse"}
+	iCreateForecastExportJobRequest             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecastExportJobRequest"}
+	iCreateForecastExportJobResponse            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecastExportJobResponse"}
+	iCreateForecastRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecastRequest"}
+	iCreateForecastResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateForecastResponse"}
+	iCreateMonitorRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateMonitorRequest"}
+	iCreateMonitorResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateMonitorResponse"}
+	iCreatePredictorBacktestExportJobRequest    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictorBacktestExportJobRequest"}
+	iCreatePredictorBacktestExportJobResponse   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictorBacktestExportJobResponse"}
+	iCreatePredictorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictorRequest"}
+	iCreatePredictorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreatePredictorResponse"}
+	iCreateWhatIfAnalysisRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfAnalysisRequest"}
+	iCreateWhatIfAnalysisResponse               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfAnalysisResponse"}
+	iCreateWhatIfForecastExportRequest          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecastExportRequest"}
+	iCreateWhatIfForecastExportResponse         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecastExportResponse"}
+	iCreateWhatIfForecastRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecastRequest"}
+	iCreateWhatIfForecastResponse               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "CreateWhatIfForecastResponse"}
+	iDeleteDatasetGroupRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDatasetGroupRequest"}
+	iDeleteDatasetImportJobRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDatasetImportJobRequest"}
+	iDeleteDatasetRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteDatasetRequest"}
+	iDeleteExplainabilityExportRequest          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteExplainabilityExportRequest"}
+	iDeleteExplainabilityRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteExplainabilityRequest"}
+	iDeleteForecastExportJobRequest             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteForecastExportJobRequest"}
+	iDeleteForecastRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteForecastRequest"}
+	iDeleteMonitorRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteMonitorRequest"}
+	iDeletePredictorBacktestExportJobRequest    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeletePredictorBacktestExportJobRequest"}
+	iDeletePredictorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeletePredictorRequest"}
+	iDeleteResourceTreeRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteResourceTreeRequest"}
+	iDeleteWhatIfAnalysisRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfAnalysisRequest"}
+	iDeleteWhatIfForecastExportRequest          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfForecastExportRequest"}
+	iDeleteWhatIfForecastRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DeleteWhatIfForecastRequest"}
+	iDescribeAutoPredictorRequest               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeAutoPredictorRequest"}
+	iDescribeAutoPredictorResponse              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeAutoPredictorResponse"}
+	iDescribeDatasetGroupRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetGroupRequest"}
+	iDescribeDatasetGroupResponse               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetGroupResponse"}
+	iDescribeDatasetImportJobRequest            = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetImportJobRequest"}
+	iDescribeDatasetImportJobResponse           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetImportJobResponse"}
+	iDescribeDatasetRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetRequest"}
+	iDescribeDatasetResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeDatasetResponse"}
+	iDescribeExplainabilityExportRequest        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainabilityExportRequest"}
+	iDescribeExplainabilityExportResponse       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainabilityExportResponse"}
+	iDescribeExplainabilityRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainabilityRequest"}
+	iDescribeExplainabilityResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeExplainabilityResponse"}
+	iDescribeForecastExportJobRequest           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecastExportJobRequest"}
+	iDescribeForecastExportJobResponse          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecastExportJobResponse"}
+	iDescribeForecastRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecastRequest"}
+	iDescribeForecastResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeForecastResponse"}
+	iDescribeMonitorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeMonitorRequest"}
+	iDescribeMonitorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeMonitorResponse"}
+	iDescribePredictorBacktestExportJobRequest  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictorBacktestExportJobRequest"}
+	iDescribePredictorBacktestExportJobResponse = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictorBacktestExportJobResponse"}
+	iDescribePredictorRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictorRequest"}
+	iDescribePredictorResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribePredictorResponse"}
+	iDescribeWhatIfAnalysisRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfAnalysisRequest"}
+	iDescribeWhatIfAnalysisResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfAnalysisResponse"}
+	iDescribeWhatIfForecastExportRequest        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecastExportRequest"}
+	iDescribeWhatIfForecastExportResponse       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecastExportResponse"}
+	iDescribeWhatIfForecastRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecastRequest"}
+	iDescribeWhatIfForecastResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "DescribeWhatIfForecastResponse"}
+	iGetAccuracyMetricsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "GetAccuracyMetricsRequest"}
+	iGetAccuracyMetricsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "GetAccuracyMetricsResponse"}
+	iListDatasetGroupsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetGroupsRequest"}
+	iListDatasetGroupsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetGroupsResponse"}
+	iListDatasetImportJobsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetImportJobsRequest"}
+	iListDatasetImportJobsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetImportJobsResponse"}
+	iListDatasetsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetsRequest"}
+	iListDatasetsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListDatasetsResponse"}
+	iListExplainabilitiesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilitiesRequest"}
+	iListExplainabilitiesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilitiesResponse"}
+	iListExplainabilityExportsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilityExportsRequest"}
+	iListExplainabilityExportsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListExplainabilityExportsResponse"}
+	iListForecastExportJobsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecastExportJobsRequest"}
+	iListForecastExportJobsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecastExportJobsResponse"}
+	iListForecastsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecastsRequest"}
+	iListForecastsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListForecastsResponse"}
+	iListMonitorEvaluationsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitorEvaluationsRequest"}
+	iListMonitorEvaluationsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitorEvaluationsResponse"}
+	iListMonitorsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitorsRequest"}
+	iListMonitorsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListMonitorsResponse"}
+	iListPredictorBacktestExportJobsRequest     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictorBacktestExportJobsRequest"}
+	iListPredictorBacktestExportJobsResponse    = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictorBacktestExportJobsResponse"}
+	iListPredictorsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictorsRequest"}
+	iListPredictorsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListPredictorsResponse"}
+	iListTagsForResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListTagsForResourceResponse"}
+	iListWhatIfAnalysesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfAnalysesRequest"}
+	iListWhatIfAnalysesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfAnalysesResponse"}
+	iListWhatIfForecastExportsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecastExportsRequest"}
+	iListWhatIfForecastExportsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecastExportsResponse"}
+	iListWhatIfForecastsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecastsRequest"}
+	iListWhatIfForecastsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ListWhatIfForecastsResponse"}
+	iResumeResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "ResumeResourceRequest"}
+	iStopResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "StopResourceRequest"}
+	iTagResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagResourceRequest"}
+	iTagResourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "TagResourceResponse"}
+	iUntagResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UntagResourceResponse"}
+	iUpdateDatasetGroupRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UpdateDatasetGroupRequest"}
+	iUpdateDatasetGroupResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.forecast", Name: "UpdateDatasetGroupResponse"}
+	pUnit                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_AttributeName, &sAction_Operation, &sAction_Value}}
+var mAdditionalDataset = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalDataset_Name, &sAdditionalDataset_Configuration}}
+var m_AdditionalDatasets = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalDatasets_member}}
+var m_ArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArnList_member}}
+var mAttributeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeConfig_AttributeName, &sAttributeConfig_Transformations}}
+var m_AttributeConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeConfigs_member}}
+var mAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeType_STRING, &sAttributeType_INTEGER, &sAttributeType_FLOAT, &sAttributeType_TIMESTAMP, &sAttributeType_GEOLOCATION}}
+var mAutoMLOverrideStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoMLOverrideStrategy_LatencyOptimized, &sAutoMLOverrideStrategy_AccuracyOptimized}}
+var mBaseline = smithy.SchemaMembers{List: []*smithy.Schema{&sBaseline_PredictorBaseline}}
+var mBaselineMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sBaselineMetric_Name, &sBaselineMetric_Value}}
+var m_BaselineMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_BaselineMetrics_member}}
+var mCategoricalParameterRange = smithy.SchemaMembers{List: []*smithy.Schema{&sCategoricalParameterRange_Name, &sCategoricalParameterRange_Values}}
+var m_CategoricalParameterRanges = smithy.SchemaMembers{List: []*smithy.Schema{&s_CategoricalParameterRanges_member}}
+var mCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sCondition_EQUALS, &sCondition_NOT_EQUALS, &sCondition_LESS_THAN, &sCondition_GREATER_THAN}}
+var m_Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&s_Configuration_key, &s_Configuration_value}}
+var mContinuousParameterRange = smithy.SchemaMembers{List: []*smithy.Schema{&sContinuousParameterRange_Name, &sContinuousParameterRange_MaxValue, &sContinuousParameterRange_MinValue, &sContinuousParameterRange_ScalingType}}
+var m_ContinuousParameterRanges = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContinuousParameterRanges_member}}
+var mDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDataConfig_DatasetGroupArn, &sDataConfig_AttributeConfigs, &sDataConfig_AdditionalDatasets}}
+var mDataDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDataDestination_S3Config}}
+var m_DatasetGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetGroups_member}}
+var mDatasetGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetGroupSummary_DatasetGroupArn, &sDatasetGroupSummary_DatasetGroupName, &sDatasetGroupSummary_CreationTime, &sDatasetGroupSummary_LastModificationTime}}
+var m_DatasetImportJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetImportJobs_member}}
+var mDatasetImportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetImportJobSummary_DatasetImportJobArn, &sDatasetImportJobSummary_DatasetImportJobName, &sDatasetImportJobSummary_DataSource, &sDatasetImportJobSummary_Status, &sDatasetImportJobSummary_Message, &sDatasetImportJobSummary_CreationTime, &sDatasetImportJobSummary_LastModificationTime, &sDatasetImportJobSummary_ImportMode}}
+var m_Datasets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Datasets_member}}
+var mDatasetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetSummary_DatasetArn, &sDatasetSummary_DatasetName, &sDatasetSummary_DatasetType, &sDatasetSummary_Domain, &sDatasetSummary_CreationTime, &sDatasetSummary_LastModificationTime}}
+var mDatasetType = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetType_TARGET_TIME_SERIES, &sDatasetType_RELATED_TIME_SERIES, &sDatasetType_ITEM_METADATA}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_S3Config}}
+var mDayOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&sDayOfWeek_MONDAY, &sDayOfWeek_TUESDAY, &sDayOfWeek_WEDNESDAY, &sDayOfWeek_THURSDAY, &sDayOfWeek_FRIDAY, &sDayOfWeek_SATURDAY, &sDayOfWeek_SUNDAY}}
+var mDomain = smithy.SchemaMembers{List: []*smithy.Schema{&sDomain_RETAIL, &sDomain_CUSTOM, &sDomain_INVENTORY_PLANNING, &sDomain_EC2_CAPACITY, &sDomain_WORK_FORCE, &sDomain_WEB_TRAFFIC, &sDomain_METRICS}}
+var mEncryptionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfig_RoleArn, &sEncryptionConfig_KMSKeyArn}}
+var mErrorMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorMetric_ForecastType, &sErrorMetric_WAPE, &sErrorMetric_RMSE, &sErrorMetric_MASE, &sErrorMetric_MAPE}}
+var m_ErrorMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorMetrics_member}}
+var mEvaluationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationParameters_NumberOfBacktestWindows, &sEvaluationParameters_BackTestWindowOffset}}
+var mEvaluationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationResult_AlgorithmArn, &sEvaluationResult_TestWindows}}
+var mEvaluationType = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationType_SUMMARY, &sEvaluationType_COMPUTED}}
+var m_Explainabilities = smithy.SchemaMembers{List: []*smithy.Schema{&s_Explainabilities_member}}
+var mExplainabilityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sExplainabilityConfig_TimeSeriesGranularity, &sExplainabilityConfig_TimePointGranularity}}
+var m_ExplainabilityExports = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExplainabilityExports_member}}
+var mExplainabilityExportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExplainabilityExportSummary_ExplainabilityExportArn, &sExplainabilityExportSummary_ExplainabilityExportName, &sExplainabilityExportSummary_Destination, &sExplainabilityExportSummary_Status, &sExplainabilityExportSummary_Message, &sExplainabilityExportSummary_CreationTime, &sExplainabilityExportSummary_LastModificationTime}}
+var mExplainabilityInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sExplainabilityInfo_ExplainabilityArn, &sExplainabilityInfo_Status}}
+var mExplainabilitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExplainabilitySummary_ExplainabilityArn, &sExplainabilitySummary_ExplainabilityName, &sExplainabilitySummary_ResourceArn, &sExplainabilitySummary_ExplainabilityConfig, &sExplainabilitySummary_Status, &sExplainabilitySummary_Message, &sExplainabilitySummary_CreationTime, &sExplainabilitySummary_LastModificationTime}}
+var mFeaturization = smithy.SchemaMembers{List: []*smithy.Schema{&sFeaturization_AttributeName, &sFeaturization_FeaturizationPipeline}}
+var mFeaturizationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFeaturizationConfig_ForecastFrequency, &sFeaturizationConfig_ForecastDimensions, &sFeaturizationConfig_Featurizations}}
+var mFeaturizationMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sFeaturizationMethod_FeaturizationMethodName, &sFeaturizationMethod_FeaturizationMethodParameters}}
+var mFeaturizationMethodName = smithy.SchemaMembers{List: []*smithy.Schema{&sFeaturizationMethodName_filling}}
+var m_FeaturizationMethodParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_FeaturizationMethodParameters_key, &s_FeaturizationMethodParameters_value}}
+var m_FeaturizationPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&s_FeaturizationPipeline_member}}
+var m_Featurizations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Featurizations_member}}
+var m_FieldStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldStatistics_key, &s_FieldStatistics_value}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Key, &sFilter_Value, &sFilter_Condition}}
+var mFilterConditionString = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterConditionString_IS, &sFilterConditionString_IS_NOT}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var m_ForecastDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ForecastDimensions_member}}
+var m_ForecastExportJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ForecastExportJobs_member}}
+var mForecastExportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sForecastExportJobSummary_ForecastExportJobArn, &sForecastExportJobSummary_ForecastExportJobName, &sForecastExportJobSummary_Destination, &sForecastExportJobSummary_Status, &sForecastExportJobSummary_Message, &sForecastExportJobSummary_CreationTime, &sForecastExportJobSummary_LastModificationTime}}
+var m_Forecasts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Forecasts_member}}
+var mForecastSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sForecastSummary_ForecastArn, &sForecastSummary_ForecastName, &sForecastSummary_PredictorArn, &sForecastSummary_CreatedUsingAutoPredictor, &sForecastSummary_DatasetGroupArn, &sForecastSummary_Status, &sForecastSummary_Message, &sForecastSummary_CreationTime, &sForecastSummary_LastModificationTime}, Hash: &hForecastSummary}
+var m_ForecastTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ForecastTypes_member}}
+var mHyperParameterTuningJobConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHyperParameterTuningJobConfig_ParameterRanges}}
+var mImportMode = smithy.SchemaMembers{List: []*smithy.Schema{&sImportMode_FULL, &sImportMode_INCREMENTAL}}
+var mInputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInputDataConfig_DatasetGroupArn, &sInputDataConfig_SupplementaryFeatures}}
+var mIntegerParameterRange = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegerParameterRange_Name, &sIntegerParameterRange_MaxValue, &sIntegerParameterRange_MinValue, &sIntegerParameterRange_ScalingType}}
+var m_IntegerParameterRanges = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegerParameterRanges_member}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var m_LongArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongArnList_member}}
+var mMetricResult = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricResult_MetricName, &sMetricResult_MetricValue}}
+var m_MetricResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricResults_member}}
+var mMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sMetrics_RMSE, &sMetrics_WeightedQuantileLosses, &sMetrics_ErrorMetrics, &sMetrics_AverageWeightedQuantileLoss}}
+var mMonitorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorConfig_MonitorName}}
+var mMonitorDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorDataSource_DatasetImportJobArn, &sMonitorDataSource_ForecastArn, &sMonitorDataSource_PredictorArn}}
+var mMonitorInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorInfo_MonitorArn, &sMonitorInfo_Status}}
+var m_Monitors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Monitors_member}}
+var mMonitorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorSummary_MonitorArn, &sMonitorSummary_MonitorName, &sMonitorSummary_ResourceArn, &sMonitorSummary_Status, &sMonitorSummary_CreationTime, &sMonitorSummary_LastModificationTime}}
+var mMonth = smithy.SchemaMembers{List: []*smithy.Schema{&sMonth_JANUARY, &sMonth_FEBRUARY, &sMonth_MARCH, &sMonth_APRIL, &sMonth_MAY, &sMonth_JUNE, &sMonth_JULY, &sMonth_AUGUST, &sMonth_SEPTEMBER, &sMonth_OCTOBER, &sMonth_NOVEMBER, &sMonth_DECEMBER}, Hash: &hMonth}
+var mOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sOperation_ADD, &sOperation_SUBTRACT, &sOperation_MULTIPLY, &sOperation_DIVIDE}}
+var mOptimizationMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sOptimizationMetric_WAPE, &sOptimizationMetric_RMSE, &sOptimizationMetric_AverageWeightedQuantileLoss, &sOptimizationMetric_MASE, &sOptimizationMetric_MAPE}}
+var mParameterRanges = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterRanges_CategoricalParameterRanges, &sParameterRanges_ContinuousParameterRanges, &sParameterRanges_IntegerParameterRanges}}
+var m_PredictorBacktestExportJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictorBacktestExportJobs_member}}
+var mPredictorBacktestExportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorBacktestExportJobSummary_PredictorBacktestExportJobArn, &sPredictorBacktestExportJobSummary_PredictorBacktestExportJobName, &sPredictorBacktestExportJobSummary_Destination, &sPredictorBacktestExportJobSummary_Status, &sPredictorBacktestExportJobSummary_Message, &sPredictorBacktestExportJobSummary_CreationTime, &sPredictorBacktestExportJobSummary_LastModificationTime}}
+var mPredictorBaseline = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorBaseline_BaselineMetrics}}
+var m_PredictorEvaluationResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictorEvaluationResults_member}}
+var mPredictorEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorEvent_Detail, &sPredictorEvent_Datetime}}
+var mPredictorExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorExecution_AlgorithmArn, &sPredictorExecution_TestWindows}}
+var mPredictorExecutionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorExecutionDetails_PredictorExecutions}}
+var m_PredictorExecutions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictorExecutions_member}}
+var mPredictorMonitorEvaluation = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorMonitorEvaluation_ResourceArn, &sPredictorMonitorEvaluation_MonitorArn, &sPredictorMonitorEvaluation_EvaluationTime, &sPredictorMonitorEvaluation_EvaluationState, &sPredictorMonitorEvaluation_WindowStartDatetime, &sPredictorMonitorEvaluation_WindowEndDatetime, &sPredictorMonitorEvaluation_PredictorEvent, &sPredictorMonitorEvaluation_MonitorDataSource, &sPredictorMonitorEvaluation_MetricResults, &sPredictorMonitorEvaluation_NumItemsEvaluated, &sPredictorMonitorEvaluation_Message}, Hash: &hPredictorMonitorEvaluation}
+var m_PredictorMonitorEvaluations = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictorMonitorEvaluations_member}}
+var m_Predictors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Predictors_member}}
+var mPredictorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorSummary_PredictorArn, &sPredictorSummary_PredictorName, &sPredictorSummary_DatasetGroupArn, &sPredictorSummary_IsAutoPredictor, &sPredictorSummary_ReferencePredictorSummary, &sPredictorSummary_Status, &sPredictorSummary_Message, &sPredictorSummary_CreationTime, &sPredictorSummary_LastModificationTime}, Hash: &hPredictorSummary}
+var mReferencePredictorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReferencePredictorSummary_Arn, &sReferencePredictorSummary_State}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mS3Config = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Config_Path, &sS3Config_RoleArn, &sS3Config_KMSKeyArn}}
+var mScalingType = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingType_Auto, &sScalingType_Linear, &sScalingType_Logarithmic, &sScalingType_ReverseLogarithmic}}
+var mSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sSchema_Attributes}}
+var mSchemaAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaAttribute_AttributeName, &sSchemaAttribute_AttributeType}}
+var m_SchemaAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaAttributes_member}}
+var mState = smithy.SchemaMembers{List: []*smithy.Schema{&sState_Active, &sState_Deleted}}
+var mStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sStatistics_Count, &sStatistics_CountDistinct, &sStatistics_CountNull, &sStatistics_CountNan, &sStatistics_Min, &sStatistics_Max, &sStatistics_Avg, &sStatistics_Stddev, &sStatistics_CountLong, &sStatistics_CountDistinctLong, &sStatistics_CountNullLong, &sStatistics_CountNanLong}, Hash: &hStatistics}
+var mSupplementaryFeature = smithy.SchemaMembers{List: []*smithy.Schema{&sSupplementaryFeature_Name, &sSupplementaryFeature_Value}}
+var m_SupplementaryFeatures = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupplementaryFeatures_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var m_TestWindowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_TestWindowDetails_member}}
+var m_TestWindows = smithy.SchemaMembers{List: []*smithy.Schema{&s_TestWindows_member}}
+var mTestWindowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTestWindowSummary_TestWindowStart, &sTestWindowSummary_TestWindowEnd, &sTestWindowSummary_Status, &sTestWindowSummary_Message}}
+var mTimeAlignmentBoundary = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeAlignmentBoundary_Month, &sTimeAlignmentBoundary_DayOfMonth, &sTimeAlignmentBoundary_DayOfWeek, &sTimeAlignmentBoundary_Hour}}
+var mTimePointGranularity = smithy.SchemaMembers{List: []*smithy.Schema{&sTimePointGranularity_ALL, &sTimePointGranularity_SPECIFIC}}
+var mTimeSeriesCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesCondition_AttributeName, &sTimeSeriesCondition_AttributeValue, &sTimeSeriesCondition_Condition}}
+var m_TimeSeriesConditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TimeSeriesConditions_member}}
+var mTimeSeriesGranularity = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesGranularity_ALL, &sTimeSeriesGranularity_SPECIFIC}}
+var mTimeSeriesIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesIdentifiers_DataSource, &sTimeSeriesIdentifiers_Schema, &sTimeSeriesIdentifiers_Format}}
+var mTimeSeriesReplacementsDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesReplacementsDataSource_S3Config, &sTimeSeriesReplacementsDataSource_Schema, &sTimeSeriesReplacementsDataSource_Format, &sTimeSeriesReplacementsDataSource_TimestampFormat}}
+var mTimeSeriesSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesSelector_TimeSeriesIdentifiers}}
+var mTimeSeriesTransformation = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeSeriesTransformation_Action, &sTimeSeriesTransformation_TimeSeriesConditions}}
+var m_TimeSeriesTransformations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TimeSeriesTransformations_member}}
+var m_TrainingParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainingParameters_key, &s_TrainingParameters_value}}
+var m_Transformations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Transformations_key, &s_Transformations_value}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var mWeightedQuantileLoss = smithy.SchemaMembers{List: []*smithy.Schema{&sWeightedQuantileLoss_Quantile, &sWeightedQuantileLoss_LossValue}}
+var m_WeightedQuantileLosses = smithy.SchemaMembers{List: []*smithy.Schema{&s_WeightedQuantileLosses_member}}
+var m_WhatIfAnalyses = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatIfAnalyses_member}}
+var mWhatIfAnalysisSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatIfAnalysisSummary_WhatIfAnalysisArn, &sWhatIfAnalysisSummary_WhatIfAnalysisName, &sWhatIfAnalysisSummary_ForecastArn, &sWhatIfAnalysisSummary_Status, &sWhatIfAnalysisSummary_Message, &sWhatIfAnalysisSummary_CreationTime, &sWhatIfAnalysisSummary_LastModificationTime}}
+var m_WhatIfForecastArnListForExport = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatIfForecastArnListForExport_member}}
+var m_WhatIfForecastExports = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatIfForecastExports_member}}
+var mWhatIfForecastExportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatIfForecastExportSummary_WhatIfForecastExportArn, &sWhatIfForecastExportSummary_WhatIfForecastArns, &sWhatIfForecastExportSummary_WhatIfForecastExportName, &sWhatIfForecastExportSummary_Destination, &sWhatIfForecastExportSummary_Status, &sWhatIfForecastExportSummary_Message, &sWhatIfForecastExportSummary_CreationTime, &sWhatIfForecastExportSummary_LastModificationTime}}
+var m_WhatIfForecasts = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatIfForecasts_member}}
+var mWhatIfForecastSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatIfForecastSummary_WhatIfForecastArn, &sWhatIfForecastSummary_WhatIfForecastName, &sWhatIfForecastSummary_WhatIfAnalysisArn, &sWhatIfForecastSummary_Status, &sWhatIfForecastSummary_Message, &sWhatIfForecastSummary_CreationTime, &sWhatIfForecastSummary_LastModificationTime}}
+var mWindowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowSummary_TestWindowStart, &sWindowSummary_TestWindowEnd, &sWindowSummary_ItemCount, &sWindowSummary_EvaluationType, &sWindowSummary_Metrics}}
+var mCreateAutoPredictorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutoPredictorRequest_PredictorName, &sCreateAutoPredictorRequest_ForecastHorizon, &sCreateAutoPredictorRequest_ForecastTypes, &sCreateAutoPredictorRequest_ForecastDimensions, &sCreateAutoPredictorRequest_ForecastFrequency, &sCreateAutoPredictorRequest_DataConfig, &sCreateAutoPredictorRequest_EncryptionConfig, &sCreateAutoPredictorRequest_ReferencePredictorArn, &sCreateAutoPredictorRequest_OptimizationMetric, &sCreateAutoPredictorRequest_ExplainPredictor, &sCreateAutoPredictorRequest_Tags, &sCreateAutoPredictorRequest_MonitorConfig, &sCreateAutoPredictorRequest_TimeAlignmentBoundary}, Hash: &hCreateAutoPredictorRequest}
+var mCreateAutoPredictorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutoPredictorResponse_PredictorArn}}
+var mCreateDatasetGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetGroupRequest_DatasetGroupName, &sCreateDatasetGroupRequest_Domain, &sCreateDatasetGroupRequest_DatasetArns, &sCreateDatasetGroupRequest_Tags}}
+var mCreateDatasetGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetGroupResponse_DatasetGroupArn}}
+var mCreateDatasetImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetImportJobRequest_DatasetImportJobName, &sCreateDatasetImportJobRequest_DatasetArn, &sCreateDatasetImportJobRequest_DataSource, &sCreateDatasetImportJobRequest_TimestampFormat, &sCreateDatasetImportJobRequest_TimeZone, &sCreateDatasetImportJobRequest_UseGeolocationForTimeZone, &sCreateDatasetImportJobRequest_GeolocationFormat, &sCreateDatasetImportJobRequest_Tags, &sCreateDatasetImportJobRequest_Format, &sCreateDatasetImportJobRequest_ImportMode}, Hash: &hCreateDatasetImportJobRequest}
+var mCreateDatasetImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetImportJobResponse_DatasetImportJobArn}}
+var mCreateDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetRequest_DatasetName, &sCreateDatasetRequest_Domain, &sCreateDatasetRequest_DatasetType, &sCreateDatasetRequest_DataFrequency, &sCreateDatasetRequest_Schema, &sCreateDatasetRequest_EncryptionConfig, &sCreateDatasetRequest_Tags}}
+var mCreateDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetResponse_DatasetArn}}
+var mCreateExplainabilityExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExplainabilityExportRequest_ExplainabilityExportName, &sCreateExplainabilityExportRequest_ExplainabilityArn, &sCreateExplainabilityExportRequest_Destination, &sCreateExplainabilityExportRequest_Tags, &sCreateExplainabilityExportRequest_Format}}
+var mCreateExplainabilityExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExplainabilityExportResponse_ExplainabilityExportArn}}
+var mCreateExplainabilityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExplainabilityRequest_ExplainabilityName, &sCreateExplainabilityRequest_ResourceArn, &sCreateExplainabilityRequest_ExplainabilityConfig, &sCreateExplainabilityRequest_DataSource, &sCreateExplainabilityRequest_Schema, &sCreateExplainabilityRequest_EnableVisualization, &sCreateExplainabilityRequest_StartDateTime, &sCreateExplainabilityRequest_EndDateTime, &sCreateExplainabilityRequest_Tags}, Hash: &hCreateExplainabilityRequest}
+var mCreateExplainabilityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateExplainabilityResponse_ExplainabilityArn}}
+var mCreateForecastExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateForecastExportJobRequest_ForecastExportJobName, &sCreateForecastExportJobRequest_ForecastArn, &sCreateForecastExportJobRequest_Destination, &sCreateForecastExportJobRequest_Tags, &sCreateForecastExportJobRequest_Format}}
+var mCreateForecastExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateForecastExportJobResponse_ForecastExportJobArn}}
+var mCreateForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateForecastRequest_ForecastName, &sCreateForecastRequest_PredictorArn, &sCreateForecastRequest_ForecastTypes, &sCreateForecastRequest_Tags, &sCreateForecastRequest_TimeSeriesSelector}}
+var mCreateForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateForecastResponse_ForecastArn}}
+var mCreateMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorRequest_MonitorName, &sCreateMonitorRequest_ResourceArn, &sCreateMonitorRequest_Tags}}
+var mCreateMonitorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorResponse_MonitorArn}}
+var mCreatePredictorBacktestExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName, &sCreatePredictorBacktestExportJobRequest_PredictorArn, &sCreatePredictorBacktestExportJobRequest_Destination, &sCreatePredictorBacktestExportJobRequest_Tags, &sCreatePredictorBacktestExportJobRequest_Format}}
+var mCreatePredictorBacktestExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn}}
+var mCreatePredictorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePredictorRequest_PredictorName, &sCreatePredictorRequest_AlgorithmArn, &sCreatePredictorRequest_ForecastHorizon, &sCreatePredictorRequest_ForecastTypes, &sCreatePredictorRequest_PerformAutoML, &sCreatePredictorRequest_AutoMLOverrideStrategy, &sCreatePredictorRequest_PerformHPO, &sCreatePredictorRequest_TrainingParameters, &sCreatePredictorRequest_EvaluationParameters, &sCreatePredictorRequest_HPOConfig, &sCreatePredictorRequest_InputDataConfig, &sCreatePredictorRequest_FeaturizationConfig, &sCreatePredictorRequest_EncryptionConfig, &sCreatePredictorRequest_Tags, &sCreatePredictorRequest_OptimizationMetric}, Hash: &hCreatePredictorRequest}
+var mCreatePredictorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePredictorResponse_PredictorArn}}
+var mCreateWhatIfAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfAnalysisRequest_WhatIfAnalysisName, &sCreateWhatIfAnalysisRequest_ForecastArn, &sCreateWhatIfAnalysisRequest_TimeSeriesSelector, &sCreateWhatIfAnalysisRequest_Tags}}
+var mCreateWhatIfAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfAnalysisResponse_WhatIfAnalysisArn}}
+var mCreateWhatIfForecastExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfForecastExportRequest_WhatIfForecastExportName, &sCreateWhatIfForecastExportRequest_WhatIfForecastArns, &sCreateWhatIfForecastExportRequest_Destination, &sCreateWhatIfForecastExportRequest_Tags, &sCreateWhatIfForecastExportRequest_Format}}
+var mCreateWhatIfForecastExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfForecastExportResponse_WhatIfForecastExportArn}}
+var mCreateWhatIfForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfForecastRequest_WhatIfForecastName, &sCreateWhatIfForecastRequest_WhatIfAnalysisArn, &sCreateWhatIfForecastRequest_TimeSeriesTransformations, &sCreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource, &sCreateWhatIfForecastRequest_Tags}}
+var mCreateWhatIfForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatIfForecastResponse_WhatIfForecastArn}}
+var mDeleteDatasetGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetGroupRequest_DatasetGroupArn}}
+var mDeleteDatasetImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetImportJobRequest_DatasetImportJobArn}}
+var mDeleteDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetRequest_DatasetArn}}
+var mDeleteExplainabilityExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExplainabilityExportRequest_ExplainabilityExportArn}}
+var mDeleteExplainabilityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteExplainabilityRequest_ExplainabilityArn}}
+var mDeleteForecastExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteForecastExportJobRequest_ForecastExportJobArn}}
+var mDeleteForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteForecastRequest_ForecastArn}}
+var mDeleteMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMonitorRequest_MonitorArn}}
+var mDeletePredictorBacktestExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn}}
+var mDeletePredictorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePredictorRequest_PredictorArn}}
+var mDeleteResourceTreeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceTreeRequest_ResourceArn}}
+var mDeleteWhatIfAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatIfAnalysisRequest_WhatIfAnalysisArn}}
+var mDeleteWhatIfForecastExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatIfForecastExportRequest_WhatIfForecastExportArn}}
+var mDeleteWhatIfForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatIfForecastRequest_WhatIfForecastArn}}
+var mDescribeAutoPredictorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAutoPredictorRequest_PredictorArn}}
+var mDescribeAutoPredictorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAutoPredictorResponse_PredictorArn, &sDescribeAutoPredictorResponse_PredictorName, &sDescribeAutoPredictorResponse_ForecastHorizon, &sDescribeAutoPredictorResponse_ForecastTypes, &sDescribeAutoPredictorResponse_ForecastFrequency, &sDescribeAutoPredictorResponse_ForecastDimensions, &sDescribeAutoPredictorResponse_DatasetImportJobArns, &sDescribeAutoPredictorResponse_DataConfig, &sDescribeAutoPredictorResponse_EncryptionConfig, &sDescribeAutoPredictorResponse_ReferencePredictorSummary, &sDescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes, &sDescribeAutoPredictorResponse_Status, &sDescribeAutoPredictorResponse_Message, &sDescribeAutoPredictorResponse_CreationTime, &sDescribeAutoPredictorResponse_LastModificationTime, &sDescribeAutoPredictorResponse_OptimizationMetric, &sDescribeAutoPredictorResponse_ExplainabilityInfo, &sDescribeAutoPredictorResponse_MonitorInfo, &sDescribeAutoPredictorResponse_TimeAlignmentBoundary}, Hash: &hDescribeAutoPredictorResponse}
+var mDescribeDatasetGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetGroupRequest_DatasetGroupArn}}
+var mDescribeDatasetGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetGroupResponse_DatasetGroupName, &sDescribeDatasetGroupResponse_DatasetGroupArn, &sDescribeDatasetGroupResponse_DatasetArns, &sDescribeDatasetGroupResponse_Domain, &sDescribeDatasetGroupResponse_Status, &sDescribeDatasetGroupResponse_CreationTime, &sDescribeDatasetGroupResponse_LastModificationTime}}
+var mDescribeDatasetImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetImportJobRequest_DatasetImportJobArn}}
+var mDescribeDatasetImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetImportJobResponse_DatasetImportJobName, &sDescribeDatasetImportJobResponse_DatasetImportJobArn, &sDescribeDatasetImportJobResponse_DatasetArn, &sDescribeDatasetImportJobResponse_TimestampFormat, &sDescribeDatasetImportJobResponse_TimeZone, &sDescribeDatasetImportJobResponse_UseGeolocationForTimeZone, &sDescribeDatasetImportJobResponse_GeolocationFormat, &sDescribeDatasetImportJobResponse_DataSource, &sDescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes, &sDescribeDatasetImportJobResponse_FieldStatistics, &sDescribeDatasetImportJobResponse_DataSize, &sDescribeDatasetImportJobResponse_Status, &sDescribeDatasetImportJobResponse_Message, &sDescribeDatasetImportJobResponse_CreationTime, &sDescribeDatasetImportJobResponse_LastModificationTime, &sDescribeDatasetImportJobResponse_Format, &sDescribeDatasetImportJobResponse_ImportMode}, Hash: &hDescribeDatasetImportJobResponse}
+var mDescribeDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetRequest_DatasetArn}}
+var mDescribeDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetResponse_DatasetArn, &sDescribeDatasetResponse_DatasetName, &sDescribeDatasetResponse_Domain, &sDescribeDatasetResponse_DatasetType, &sDescribeDatasetResponse_DataFrequency, &sDescribeDatasetResponse_Schema, &sDescribeDatasetResponse_EncryptionConfig, &sDescribeDatasetResponse_Status, &sDescribeDatasetResponse_CreationTime, &sDescribeDatasetResponse_LastModificationTime}, Hash: &hDescribeDatasetResponse}
+var mDescribeExplainabilityExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExplainabilityExportRequest_ExplainabilityExportArn}}
+var mDescribeExplainabilityExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExplainabilityExportResponse_ExplainabilityExportArn, &sDescribeExplainabilityExportResponse_ExplainabilityExportName, &sDescribeExplainabilityExportResponse_ExplainabilityArn, &sDescribeExplainabilityExportResponse_Destination, &sDescribeExplainabilityExportResponse_Message, &sDescribeExplainabilityExportResponse_Status, &sDescribeExplainabilityExportResponse_CreationTime, &sDescribeExplainabilityExportResponse_LastModificationTime, &sDescribeExplainabilityExportResponse_Format}, Hash: &hDescribeExplainabilityExportResponse}
+var mDescribeExplainabilityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExplainabilityRequest_ExplainabilityArn}}
+var mDescribeExplainabilityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExplainabilityResponse_ExplainabilityArn, &sDescribeExplainabilityResponse_ExplainabilityName, &sDescribeExplainabilityResponse_ResourceArn, &sDescribeExplainabilityResponse_ExplainabilityConfig, &sDescribeExplainabilityResponse_EnableVisualization, &sDescribeExplainabilityResponse_DataSource, &sDescribeExplainabilityResponse_Schema, &sDescribeExplainabilityResponse_StartDateTime, &sDescribeExplainabilityResponse_EndDateTime, &sDescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes, &sDescribeExplainabilityResponse_Message, &sDescribeExplainabilityResponse_Status, &sDescribeExplainabilityResponse_CreationTime, &sDescribeExplainabilityResponse_LastModificationTime}, Hash: &hDescribeExplainabilityResponse}
+var mDescribeForecastExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeForecastExportJobRequest_ForecastExportJobArn}}
+var mDescribeForecastExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeForecastExportJobResponse_ForecastExportJobArn, &sDescribeForecastExportJobResponse_ForecastExportJobName, &sDescribeForecastExportJobResponse_ForecastArn, &sDescribeForecastExportJobResponse_Destination, &sDescribeForecastExportJobResponse_Message, &sDescribeForecastExportJobResponse_Status, &sDescribeForecastExportJobResponse_CreationTime, &sDescribeForecastExportJobResponse_LastModificationTime, &sDescribeForecastExportJobResponse_Format}, Hash: &hDescribeForecastExportJobResponse}
+var mDescribeForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeForecastRequest_ForecastArn}}
+var mDescribeForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeForecastResponse_ForecastArn, &sDescribeForecastResponse_ForecastName, &sDescribeForecastResponse_ForecastTypes, &sDescribeForecastResponse_PredictorArn, &sDescribeForecastResponse_DatasetGroupArn, &sDescribeForecastResponse_EstimatedTimeRemainingInMinutes, &sDescribeForecastResponse_Status, &sDescribeForecastResponse_Message, &sDescribeForecastResponse_CreationTime, &sDescribeForecastResponse_LastModificationTime, &sDescribeForecastResponse_TimeSeriesSelector}, Hash: &hDescribeForecastResponse}
+var mDescribeMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMonitorRequest_MonitorArn}}
+var mDescribeMonitorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMonitorResponse_MonitorName, &sDescribeMonitorResponse_MonitorArn, &sDescribeMonitorResponse_ResourceArn, &sDescribeMonitorResponse_Status, &sDescribeMonitorResponse_LastEvaluationTime, &sDescribeMonitorResponse_LastEvaluationState, &sDescribeMonitorResponse_Baseline, &sDescribeMonitorResponse_Message, &sDescribeMonitorResponse_CreationTime, &sDescribeMonitorResponse_LastModificationTime, &sDescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes}, Hash: &hDescribeMonitorResponse}
+var mDescribePredictorBacktestExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn}}
+var mDescribePredictorBacktestExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn, &sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName, &sDescribePredictorBacktestExportJobResponse_PredictorArn, &sDescribePredictorBacktestExportJobResponse_Destination, &sDescribePredictorBacktestExportJobResponse_Message, &sDescribePredictorBacktestExportJobResponse_Status, &sDescribePredictorBacktestExportJobResponse_CreationTime, &sDescribePredictorBacktestExportJobResponse_LastModificationTime, &sDescribePredictorBacktestExportJobResponse_Format}, Hash: &hDescribePredictorBacktestExportJobResponse}
+var mDescribePredictorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePredictorRequest_PredictorArn}}
+var mDescribePredictorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePredictorResponse_PredictorArn, &sDescribePredictorResponse_PredictorName, &sDescribePredictorResponse_AlgorithmArn, &sDescribePredictorResponse_AutoMLAlgorithmArns, &sDescribePredictorResponse_ForecastHorizon, &sDescribePredictorResponse_ForecastTypes, &sDescribePredictorResponse_PerformAutoML, &sDescribePredictorResponse_AutoMLOverrideStrategy, &sDescribePredictorResponse_PerformHPO, &sDescribePredictorResponse_TrainingParameters, &sDescribePredictorResponse_EvaluationParameters, &sDescribePredictorResponse_HPOConfig, &sDescribePredictorResponse_InputDataConfig, &sDescribePredictorResponse_FeaturizationConfig, &sDescribePredictorResponse_EncryptionConfig, &sDescribePredictorResponse_PredictorExecutionDetails, &sDescribePredictorResponse_EstimatedTimeRemainingInMinutes, &sDescribePredictorResponse_IsAutoPredictor, &sDescribePredictorResponse_DatasetImportJobArns, &sDescribePredictorResponse_Status, &sDescribePredictorResponse_Message, &sDescribePredictorResponse_CreationTime, &sDescribePredictorResponse_LastModificationTime, &sDescribePredictorResponse_OptimizationMetric}, Hash: &hDescribePredictorResponse}
+var mDescribeWhatIfAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfAnalysisRequest_WhatIfAnalysisArn}}
+var mDescribeWhatIfAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfAnalysisResponse_WhatIfAnalysisName, &sDescribeWhatIfAnalysisResponse_WhatIfAnalysisArn, &sDescribeWhatIfAnalysisResponse_ForecastArn, &sDescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes, &sDescribeWhatIfAnalysisResponse_Status, &sDescribeWhatIfAnalysisResponse_Message, &sDescribeWhatIfAnalysisResponse_CreationTime, &sDescribeWhatIfAnalysisResponse_LastModificationTime, &sDescribeWhatIfAnalysisResponse_TimeSeriesSelector}, Hash: &hDescribeWhatIfAnalysisResponse}
+var mDescribeWhatIfForecastExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfForecastExportRequest_WhatIfForecastExportArn}}
+var mDescribeWhatIfForecastExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfForecastExportResponse_WhatIfForecastExportArn, &sDescribeWhatIfForecastExportResponse_WhatIfForecastExportName, &sDescribeWhatIfForecastExportResponse_WhatIfForecastArns, &sDescribeWhatIfForecastExportResponse_Destination, &sDescribeWhatIfForecastExportResponse_Message, &sDescribeWhatIfForecastExportResponse_Status, &sDescribeWhatIfForecastExportResponse_CreationTime, &sDescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes, &sDescribeWhatIfForecastExportResponse_LastModificationTime, &sDescribeWhatIfForecastExportResponse_Format}, Hash: &hDescribeWhatIfForecastExportResponse}
+var mDescribeWhatIfForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfForecastRequest_WhatIfForecastArn}}
+var mDescribeWhatIfForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWhatIfForecastResponse_WhatIfForecastName, &sDescribeWhatIfForecastResponse_WhatIfForecastArn, &sDescribeWhatIfForecastResponse_WhatIfAnalysisArn, &sDescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes, &sDescribeWhatIfForecastResponse_Status, &sDescribeWhatIfForecastResponse_Message, &sDescribeWhatIfForecastResponse_CreationTime, &sDescribeWhatIfForecastResponse_LastModificationTime, &sDescribeWhatIfForecastResponse_TimeSeriesTransformations, &sDescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource, &sDescribeWhatIfForecastResponse_ForecastTypes}, Hash: &hDescribeWhatIfForecastResponse}
+var mGetAccuracyMetricsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccuracyMetricsRequest_PredictorArn}}
+var mGetAccuracyMetricsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccuracyMetricsResponse_PredictorEvaluationResults, &sGetAccuracyMetricsResponse_IsAutoPredictor, &sGetAccuracyMetricsResponse_AutoMLOverrideStrategy, &sGetAccuracyMetricsResponse_OptimizationMetric}}
+var mListDatasetGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetGroupsRequest_NextToken, &sListDatasetGroupsRequest_MaxResults}}
+var mListDatasetGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetGroupsResponse_DatasetGroups, &sListDatasetGroupsResponse_NextToken}}
+var mListDatasetImportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetImportJobsRequest_NextToken, &sListDatasetImportJobsRequest_MaxResults, &sListDatasetImportJobsRequest_Filters}}
+var mListDatasetImportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetImportJobsResponse_DatasetImportJobs, &sListDatasetImportJobsResponse_NextToken}}
+var mListDatasetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsRequest_NextToken, &sListDatasetsRequest_MaxResults}}
+var mListDatasetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsResponse_Datasets, &sListDatasetsResponse_NextToken}}
+var mListExplainabilitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExplainabilitiesRequest_NextToken, &sListExplainabilitiesRequest_MaxResults, &sListExplainabilitiesRequest_Filters}}
+var mListExplainabilitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExplainabilitiesResponse_Explainabilities, &sListExplainabilitiesResponse_NextToken}}
+var mListExplainabilityExportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExplainabilityExportsRequest_NextToken, &sListExplainabilityExportsRequest_MaxResults, &sListExplainabilityExportsRequest_Filters}}
+var mListExplainabilityExportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExplainabilityExportsResponse_ExplainabilityExports, &sListExplainabilityExportsResponse_NextToken}}
+var mListForecastExportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListForecastExportJobsRequest_NextToken, &sListForecastExportJobsRequest_MaxResults, &sListForecastExportJobsRequest_Filters}}
+var mListForecastExportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListForecastExportJobsResponse_ForecastExportJobs, &sListForecastExportJobsResponse_NextToken}}
+var mListForecastsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListForecastsRequest_NextToken, &sListForecastsRequest_MaxResults, &sListForecastsRequest_Filters}}
+var mListForecastsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListForecastsResponse_Forecasts, &sListForecastsResponse_NextToken}}
+var mListMonitorEvaluationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorEvaluationsRequest_NextToken, &sListMonitorEvaluationsRequest_MaxResults, &sListMonitorEvaluationsRequest_MonitorArn, &sListMonitorEvaluationsRequest_Filters}}
+var mListMonitorEvaluationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorEvaluationsResponse_NextToken, &sListMonitorEvaluationsResponse_PredictorMonitorEvaluations}}
+var mListMonitorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsRequest_NextToken, &sListMonitorsRequest_MaxResults, &sListMonitorsRequest_Filters}}
+var mListMonitorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsResponse_Monitors, &sListMonitorsResponse_NextToken}}
+var mListPredictorBacktestExportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPredictorBacktestExportJobsRequest_NextToken, &sListPredictorBacktestExportJobsRequest_MaxResults, &sListPredictorBacktestExportJobsRequest_Filters}}
+var mListPredictorBacktestExportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, &sListPredictorBacktestExportJobsResponse_NextToken}}
+var mListPredictorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPredictorsRequest_NextToken, &sListPredictorsRequest_MaxResults, &sListPredictorsRequest_Filters}}
+var mListPredictorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPredictorsResponse_Predictors, &sListPredictorsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListWhatIfAnalysesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfAnalysesRequest_NextToken, &sListWhatIfAnalysesRequest_MaxResults, &sListWhatIfAnalysesRequest_Filters}}
+var mListWhatIfAnalysesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfAnalysesResponse_WhatIfAnalyses, &sListWhatIfAnalysesResponse_NextToken}}
+var mListWhatIfForecastExportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfForecastExportsRequest_NextToken, &sListWhatIfForecastExportsRequest_MaxResults, &sListWhatIfForecastExportsRequest_Filters}}
+var mListWhatIfForecastExportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfForecastExportsResponse_WhatIfForecastExports, &sListWhatIfForecastExportsResponse_NextToken}}
+var mListWhatIfForecastsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfForecastsRequest_NextToken, &sListWhatIfForecastsRequest_MaxResults, &sListWhatIfForecastsRequest_Filters}}
+var mListWhatIfForecastsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatIfForecastsResponse_WhatIfForecasts, &sListWhatIfForecastsResponse_NextToken}}
+var mResumeResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeResourceRequest_ResourceArn}}
+var mStopResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopResourceRequest_ResourceArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateDatasetGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasetGroupRequest_DatasetGroupArn, &sUpdateDatasetGroupRequest_DatasetArns}}
+
+var hForecastSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 0, 5, 9, 0, 0, 2, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 0, 7,
+	0, 0, 0, 0, 0, 6, 0, 3,
+}}
+var hMonth = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 5, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 12, 1, 0, 0, 0, 10, 6, 0, 0,
+	7, 9, 0, 0, 11, 0, 2, 0,
+}}
+var hPredictorMonitorEvaluation = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 10, 0, 0, 1, 0, 0, 0, 0, 7, 0, 4, 9, 0, 8, 0, 0, 5, 0, 0, 0, 0, 2, 0,
+	0, 0, 0, 6, 3, 0, 0, 11,
+}}
+var hPredictorSummary = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 9, 0, 0, 5, 0, 0, 7, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 8, 0, 0, 0, 4, 6,
+}}
+var hStatistics = smithy.MemberHash{Seed: 34, Slots: []uint16{
+	0, 1, 0, 0, 0, 0, 0, 5, 0, 2, 0, 0, 6, 0, 0, 0, 12, 0, 8, 0, 0, 10, 3, 9,
+	0, 11, 7, 4, 0, 0, 0, 0,
+}}
+var hCreateAutoPredictorRequest = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	3, 0, 0, 11, 0, 8, 4, 0, 0, 0, 7, 1, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 13, 5,
+	0, 2, 6, 0, 0, 0, 10, 9,
+}}
+var hCreateDatasetImportJobRequest = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	10, 0, 0, 7, 0, 2, 1, 9, 0, 0, 6, 0, 0, 5, 0, 0, 0, 3, 4, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 8, 0, 0,
+}}
+var hCreateExplainabilityRequest = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 0, 0, 7, 2, 8, 4, 0, 0, 0, 3, 0, 0, 5, 0, 0, 0, 0, 1,
+	0, 0, 0, 0, 6, 0, 0, 0,
+}}
+var hCreatePredictorRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 3, 0, 7, 0, 0, 0, 0, 9, 0, 1, 0, 14, 6, 0, 10, 13, 12, 0, 0, 5, 2, 0,
+	15, 0, 0, 4, 0, 8, 11, 0,
+}}
+var hDescribeAutoPredictorResponse = smithy.MemberHash{Seed: 30, Slots: []uint16{
+	17, 0, 19, 2, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 11,
+	0, 0, 0, 0, 0, 0, 1, 12, 0, 15, 0, 3, 0, 5, 0, 0, 4, 0, 0, 0, 0, 16, 6, 10,
+	7, 0, 0, 0, 0, 0, 0, 9, 0, 8, 0, 13, 0, 0, 0, 0,
+}}
+var hDescribeDatasetImportJobResponse = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 8, 7, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 15, 17, 14, 0, 0, 0, 0, 0,
+	0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	0, 13, 0, 0, 0, 1, 10, 0, 9, 0, 16, 0, 5, 0, 6, 3,
+}}
+var hDescribeDatasetResponse = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 8, 3, 0, 0, 0, 0, 0, 4, 10, 0, 0, 0, 0, 2, 9, 0, 6,
+	0, 0, 0, 0, 5, 0, 0, 7,
+}}
+var hDescribeExplainabilityExportResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 8, 9, 0, 0, 0, 0, 1, 0, 0, 0, 5, 4, 0, 0, 0, 0,
+	6, 0, 2, 7, 3, 0, 0, 0,
+}}
+var hDescribeExplainabilityResponse = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	11, 0, 0, 0, 6, 5, 0, 1, 4, 0, 0, 0, 12, 0, 8, 7, 0, 0, 9, 14, 0, 13, 0, 0,
+	0, 2, 0, 0, 0, 10, 0, 3,
+}}
+var hDescribeForecastExportJobResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 2, 0, 8, 0, 0, 0, 1, 0, 7, 4, 0, 0, 0, 0, 3, 0, 0, 5,
+	0, 0, 0, 0, 0, 6, 0, 0,
+}}
+var hDescribeForecastResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 3, 0, 0, 0, 6, 0, 5, 10, 0, 0, 2, 0, 0, 9, 0, 0, 0, 0, 0, 1, 0, 0, 8,
+	0, 0, 0, 0, 11, 7, 0, 4,
+}}
+var hDescribeMonitorResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 5, 0, 11, 0, 10, 1, 0, 0, 0, 0, 9, 0, 2, 0, 0, 3, 0, 0, 0, 8,
+	0, 7, 0, 0, 6, 4, 0, 0,
+}}
+var hDescribePredictorBacktestExportJobResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 0, 0, 8, 1, 0, 0, 0, 0, 7, 4, 0, 0, 0, 0, 0, 0, 0, 5,
+	0, 0, 0, 0, 2, 6, 0, 3,
+}}
+var hDescribePredictorResponse = smithy.MemberHash{Seed: 457, Slots: []uint16{
+	16, 0, 3, 0, 5, 0, 24, 0, 0, 19, 0, 0, 0, 2, 23, 0, 13, 10, 1, 21, 0, 0, 22, 18,
+	0, 0, 0, 0, 17, 7, 0, 0, 0, 20, 0, 14, 0, 0, 0, 15, 0, 6, 0, 0, 12, 8, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 4, 9, 11, 0, 0, 0, 0, 0,
+}}
+var hDescribeWhatIfAnalysisResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 2, 0, 0, 1, 0, 0, 8, 0, 0, 0, 0, 3, 0, 0, 0, 0, 6, 4, 0, 0, 9, 0,
+	5, 0, 0, 7, 0, 0, 0, 0,
+}}
+var hDescribeWhatIfForecastExportResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 0, 10, 0, 8, 0, 0, 9, 0, 0, 0, 0, 0, 7, 4, 0, 3, 0, 2, 0, 0, 0, 5,
+	0, 0, 0, 0, 0, 6, 0, 0,
+}}
+var hDescribeWhatIfForecastResponse = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	3, 0, 10, 0, 0, 0, 11, 0, 0, 6, 0, 0, 4, 9, 0, 0, 2, 1, 8, 0, 0, 5, 0, 0,
+	0, 0, 0, 7, 0, 0, 0, 0,
+}}
+
+var sCreateAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoPredictor, Type: smithy.ShapeTypeOperation, Ext: &eCreateAutoPredictor})
+var sCreateDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataset, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataset})
+var sCreateDatasetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateDatasetGroup})
+var sCreateDatasetImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetImportJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateDatasetImportJob})
+var sCreateExplainability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainability, Type: smithy.ShapeTypeOperation, Ext: &eCreateExplainability})
+var sCreateExplainabilityExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainabilityExport, Type: smithy.ShapeTypeOperation, Ext: &eCreateExplainabilityExport})
+var sCreateForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecast, Type: smithy.ShapeTypeOperation, Ext: &eCreateForecast})
+var sCreateForecastExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecastExportJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateForecastExportJob})
+var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Type: smithy.ShapeTypeOperation, Ext: &eCreateMonitor})
+var sCreatePredictor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictor, Type: smithy.ShapeTypeOperation, Ext: &eCreatePredictor})
+var sCreatePredictorBacktestExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictorBacktestExportJob, Type: smithy.ShapeTypeOperation, Ext: &eCreatePredictorBacktestExportJob})
+var sCreateWhatIfAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfAnalysis, Type: smithy.ShapeTypeOperation, Ext: &eCreateWhatIfAnalysis})
+var sCreateWhatIfForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecast, Type: smithy.ShapeTypeOperation, Ext: &eCreateWhatIfForecast})
+var sCreateWhatIfForecastExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecastExport, Type: smithy.ShapeTypeOperation, Ext: &eCreateWhatIfForecastExport})
+var sDeleteDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataset, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataset})
+var sDeleteDatasetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDatasetGroup})
+var sDeleteDatasetImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetImportJob, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDatasetImportJob})
+var sDeleteExplainability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExplainability, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExplainability})
+var sDeleteExplainabilityExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExplainabilityExport, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExplainabilityExport})
+var sDeleteForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteForecast, Type: smithy.ShapeTypeOperation, Ext: &eDeleteForecast})
+var sDeleteForecastExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteForecastExportJob, Type: smithy.ShapeTypeOperation, Ext: &eDeleteForecastExportJob})
+var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMonitor})
+var sDeletePredictor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePredictor, Type: smithy.ShapeTypeOperation, Ext: &eDeletePredictor})
+var sDeletePredictorBacktestExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePredictorBacktestExportJob, Type: smithy.ShapeTypeOperation, Ext: &eDeletePredictorBacktestExportJob})
+var sDeleteResourceTree = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceTree, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourceTree})
+var sDeleteWhatIfAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfAnalysis, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWhatIfAnalysis})
+var sDeleteWhatIfForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfForecast, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWhatIfForecast})
+var sDeleteWhatIfForecastExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfForecastExport, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWhatIfForecastExport})
+var sDescribeAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoPredictor, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAutoPredictor})
+var sDescribeDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataset, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDataset})
+var sDescribeDatasetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetGroup, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDatasetGroup})
+var sDescribeDatasetImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetImportJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDatasetImportJob})
+var sDescribeExplainability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainability, Type: smithy.ShapeTypeOperation, Ext: &eDescribeExplainability})
+var sDescribeExplainabilityExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainabilityExport, Type: smithy.ShapeTypeOperation, Ext: &eDescribeExplainabilityExport})
+var sDescribeForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecast, Type: smithy.ShapeTypeOperation, Ext: &eDescribeForecast})
+var sDescribeForecastExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecastExportJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeForecastExportJob})
+var sDescribeMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMonitor, Type: smithy.ShapeTypeOperation, Ext: &eDescribeMonitor})
+var sDescribePredictor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictor, Type: smithy.ShapeTypeOperation, Ext: &eDescribePredictor})
+var sDescribePredictorBacktestExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictorBacktestExportJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribePredictorBacktestExportJob})
+var sDescribeWhatIfAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfAnalysis, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWhatIfAnalysis})
+var sDescribeWhatIfForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecast, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWhatIfForecast})
+var sDescribeWhatIfForecastExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecastExport, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWhatIfForecastExport})
+var sGetAccuracyMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccuracyMetrics, Type: smithy.ShapeTypeOperation, Ext: &eGetAccuracyMetrics})
+var sListDatasetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetGroups, Type: smithy.ShapeTypeOperation, Ext: &eListDatasetGroups})
+var sListDatasetImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetImportJobs, Type: smithy.ShapeTypeOperation, Ext: &eListDatasetImportJobs})
+var sListDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasets, Type: smithy.ShapeTypeOperation, Ext: &eListDatasets})
+var sListExplainabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilities, Type: smithy.ShapeTypeOperation, Ext: &eListExplainabilities})
+var sListExplainabilityExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilityExports, Type: smithy.ShapeTypeOperation, Ext: &eListExplainabilityExports})
+var sListForecastExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecastExportJobs, Type: smithy.ShapeTypeOperation, Ext: &eListForecastExportJobs})
+var sListForecasts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecasts, Type: smithy.ShapeTypeOperation, Ext: &eListForecasts})
+var sListMonitorEvaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorEvaluations, Type: smithy.ShapeTypeOperation, Ext: &eListMonitorEvaluations})
+var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Type: smithy.ShapeTypeOperation, Ext: &eListMonitors})
+var sListPredictorBacktestExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictorBacktestExportJobs, Type: smithy.ShapeTypeOperation, Ext: &eListPredictorBacktestExportJobs})
+var sListPredictors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictors, Type: smithy.ShapeTypeOperation, Ext: &eListPredictors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWhatIfAnalyses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfAnalyses, Type: smithy.ShapeTypeOperation, Ext: &eListWhatIfAnalyses})
+var sListWhatIfForecastExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecastExports, Type: smithy.ShapeTypeOperation, Ext: &eListWhatIfForecastExports})
+var sListWhatIfForecasts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecasts, Type: smithy.ShapeTypeOperation, Ext: &eListWhatIfForecasts})
+var sResumeResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeResource, Type: smithy.ShapeTypeOperation, Ext: &eResumeResource})
+var sStopResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopResource, Type: smithy.ShapeTypeOperation, Ext: &eStopResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDatasetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDatasetGroup})
+var s_AmazonForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonForecast, Type: smithy.ShapeTypeService, Ext: &e_AmazonForecast})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var sAction_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAction_AttributeName})
+var sAction_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &eAction_Operation})
+var sAction_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eAction_Value})
+var sAdditionalDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalDataset, Members: &mAdditionalDataset, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalDataset})
+var sAdditionalDataset_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAdditionalDataset_Name})
+var sAdditionalDataset_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &i_Configuration, Members: &m_Configuration, Type: smithy.ShapeTypeMap, Ext: &eAdditionalDataset_Configuration})
+var s_AdditionalDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalDatasets, Members: &m_AdditionalDatasets, Type: smithy.ShapeTypeList, Ext: &e_AdditionalDatasets})
+var s_AdditionalDatasets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalDataset, Members: &mAdditionalDataset, Type: smithy.ShapeTypeStructure, Ext: &e_AdditionalDatasets_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_ArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &e_ArnList})
+var s_ArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_ArnList_member})
+var sAttributeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeConfig, Members: &mAttributeConfig, Type: smithy.ShapeTypeStructure, Ext: &eAttributeConfig})
+var sAttributeConfig_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eAttributeConfig_AttributeName})
+var sAttributeConfig_Transformations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transformations", ID: &i_Transformations, Members: &m_Transformations, Type: smithy.ShapeTypeMap, Ext: &eAttributeConfig_Transformations})
+var s_AttributeConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeConfigs, Members: &m_AttributeConfigs, Type: smithy.ShapeTypeList, Ext: &e_AttributeConfigs})
+var s_AttributeConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeConfig, Members: &mAttributeConfig, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeConfigs_member})
+var sAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeType, Members: &mAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eAttributeType})
+var sAttributeType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributeType_STRING})
+var sAttributeType_INTEGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTEGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributeType_INTEGER})
+var sAttributeType_FLOAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributeType_FLOAT})
+var sAttributeType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributeType_TIMESTAMP})
+var sAttributeType_GEOLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEOLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributeType_GEOLOCATION})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var sAutoMLOverrideStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoMLOverrideStrategy, Members: &mAutoMLOverrideStrategy, Type: smithy.ShapeTypeEnum, Ext: &eAutoMLOverrideStrategy})
+var sAutoMLOverrideStrategy_LatencyOptimized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatencyOptimized", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoMLOverrideStrategy_LatencyOptimized})
+var sAutoMLOverrideStrategy_AccuracyOptimized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccuracyOptimized", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoMLOverrideStrategy_AccuracyOptimized})
+var sBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaseline, Members: &mBaseline, Type: smithy.ShapeTypeStructure, Ext: &eBaseline})
+var sBaseline_PredictorBaseline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBaseline", ID: &iPredictorBaseline, Members: &mPredictorBaseline, Type: smithy.ShapeTypeStructure, Ext: &eBaseline_PredictorBaseline})
+var sBaselineMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineMetric, Members: &mBaselineMetric, Type: smithy.ShapeTypeStructure, Ext: &eBaselineMetric})
+var sBaselineMetric_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eBaselineMetric_Name})
+var sBaselineMetric_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eBaselineMetric_Value})
+var s_BaselineMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineMetrics, Members: &m_BaselineMetrics, Type: smithy.ShapeTypeList, Ext: &e_BaselineMetrics})
+var s_BaselineMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBaselineMetric, Members: &mBaselineMetric, Type: smithy.ShapeTypeStructure, Ext: &e_BaselineMetrics_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sCategoricalParameterRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoricalParameterRange, Members: &mCategoricalParameterRange, Type: smithy.ShapeTypeStructure, Ext: &eCategoricalParameterRange})
+var sCategoricalParameterRange_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCategoricalParameterRange_Name})
+var sCategoricalParameterRange_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eCategoricalParameterRange_Values})
+var s_CategoricalParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoricalParameterRanges, Members: &m_CategoricalParameterRanges, Type: smithy.ShapeTypeList, Ext: &e_CategoricalParameterRanges})
+var s_CategoricalParameterRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategoricalParameterRange, Members: &mCategoricalParameterRange, Type: smithy.ShapeTypeStructure, Ext: &e_CategoricalParameterRanges_member})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeEnum, Ext: &eCondition})
+var sCondition_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCondition_EQUALS})
+var sCondition_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCondition_NOT_EQUALS})
+var sCondition_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCondition_LESS_THAN})
+var sCondition_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCondition_GREATER_THAN})
+var s_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Configuration, Members: &m_Configuration, Type: smithy.ShapeTypeMap, Ext: &e_Configuration})
+var s_Configuration_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Configuration_key})
+var s_Configuration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Configuration_value})
+var sContinuousParameterRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContinuousParameterRange, Members: &mContinuousParameterRange, Type: smithy.ShapeTypeStructure, Ext: &eContinuousParameterRange})
+var sContinuousParameterRange_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eContinuousParameterRange_Name})
+var sContinuousParameterRange_MaxValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eContinuousParameterRange_MaxValue})
+var sContinuousParameterRange_MinValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eContinuousParameterRange_MinValue})
+var sContinuousParameterRange_ScalingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingType", ID: &iScalingType, Members: &mScalingType, Type: smithy.ShapeTypeEnum, Ext: &eContinuousParameterRange_ScalingType})
+var s_ContinuousParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuousParameterRanges, Members: &m_ContinuousParameterRanges, Type: smithy.ShapeTypeList, Ext: &e_ContinuousParameterRanges})
+var s_ContinuousParameterRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContinuousParameterRange, Members: &mContinuousParameterRange, Type: smithy.ShapeTypeStructure, Ext: &e_ContinuousParameterRanges_member})
+var sDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataConfig, Members: &mDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataConfig})
+var sDataConfig_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDataConfig_DatasetGroupArn})
+var sDataConfig_AttributeConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeConfigs", ID: &i_AttributeConfigs, Members: &m_AttributeConfigs, Type: smithy.ShapeTypeList, Ext: &eDataConfig_AttributeConfigs})
+var sDataConfig_AdditionalDatasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalDatasets", ID: &i_AdditionalDatasets, Members: &m_AdditionalDatasets, Type: smithy.ShapeTypeList, Ext: &eDataConfig_AdditionalDatasets})
+var sDataDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eDataDestination})
+var sDataDestination_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eDataDestination_S3Config})
+var s_DatasetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetGroups, Members: &m_DatasetGroups, Type: smithy.ShapeTypeList, Ext: &e_DatasetGroups})
+var s_DatasetGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasetGroupSummary, Members: &mDatasetGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DatasetGroups_member})
+var sDatasetGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetGroupSummary, Members: &mDatasetGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eDatasetGroupSummary})
+var sDatasetGroupSummary_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDatasetGroupSummary_DatasetGroupArn})
+var sDatasetGroupSummary_DatasetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDatasetGroupSummary_DatasetGroupName})
+var sDatasetGroupSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetGroupSummary_CreationTime})
+var sDatasetGroupSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetGroupSummary_LastModificationTime})
+var s_DatasetImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetImportJobs, Members: &m_DatasetImportJobs, Type: smithy.ShapeTypeList, Ext: &e_DatasetImportJobs})
+var s_DatasetImportJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasetImportJobSummary, Members: &mDatasetImportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DatasetImportJobs_member})
+var sDatasetImportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetImportJobSummary, Members: &mDatasetImportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eDatasetImportJobSummary})
+var sDatasetImportJobSummary_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDatasetImportJobSummary_DatasetImportJobArn})
+var sDatasetImportJobSummary_DatasetImportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDatasetImportJobSummary_DatasetImportJobName})
+var sDatasetImportJobSummary_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDatasetImportJobSummary_DataSource})
+var sDatasetImportJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDatasetImportJobSummary_Status})
+var sDatasetImportJobSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDatasetImportJobSummary_Message})
+var sDatasetImportJobSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetImportJobSummary_CreationTime})
+var sDatasetImportJobSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetImportJobSummary_LastModificationTime})
+var sDatasetImportJobSummary_ImportMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportMode", ID: &iImportMode, Members: &mImportMode, Type: smithy.ShapeTypeEnum, Ext: &eDatasetImportJobSummary_ImportMode})
+var s_Datasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Datasets, Members: &m_Datasets, Type: smithy.ShapeTypeList, Ext: &e_Datasets})
+var s_Datasets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasetSummary, Members: &mDatasetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_Datasets_member})
+var sDatasetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetSummary, Members: &mDatasetSummary, Type: smithy.ShapeTypeStructure, Ext: &eDatasetSummary})
+var sDatasetSummary_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDatasetSummary_DatasetArn})
+var sDatasetSummary_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDatasetSummary_DatasetName})
+var sDatasetSummary_DatasetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetType", ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum, Ext: &eDatasetSummary_DatasetType})
+var sDatasetSummary_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eDatasetSummary_Domain})
+var sDatasetSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetSummary_CreationTime})
+var sDatasetSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatasetSummary_LastModificationTime})
+var sDatasetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum, Ext: &eDatasetType})
+var sDatasetType_TARGET_TIME_SERIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_TIME_SERIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatasetType_TARGET_TIME_SERIES})
+var sDatasetType_RELATED_TIME_SERIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELATED_TIME_SERIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatasetType_RELATED_TIME_SERIES})
+var sDatasetType_ITEM_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEM_METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatasetType_ITEM_METADATA})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDataSource})
+var sDataSource_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eDataSource_S3Config})
+var s_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &e_DayOfMonth})
+var sDayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &eDayOfWeek})
+var sDayOfWeek_MONDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_MONDAY})
+var sDayOfWeek_TUESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TUESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_TUESDAY})
+var sDayOfWeek_WEDNESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEDNESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_WEDNESDAY})
+var sDayOfWeek_THURSDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THURSDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_THURSDAY})
+var sDayOfWeek_FRIDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRIDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_FRIDAY})
+var sDayOfWeek_SATURDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATURDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SATURDAY})
+var sDayOfWeek_SUNDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUNDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDayOfWeek_SUNDAY})
+var s_Detail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Detail, Type: smithy.ShapeTypeString, Ext: &e_Detail})
+var sDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eDomain})
+var sDomain_RETAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_RETAIL})
+var sDomain_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_CUSTOM})
+var sDomain_INVENTORY_PLANNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVENTORY_PLANNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_INVENTORY_PLANNING})
+var sDomain_EC2_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_EC2_CAPACITY})
+var sDomain_WORK_FORCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORK_FORCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_WORK_FORCE})
+var sDomain_WEB_TRAFFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEB_TRAFFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_WEB_TRAFFIC})
+var sDomain_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomain_METRICS})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfig})
+var sEncryptionConfig_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfig_RoleArn})
+var sEncryptionConfig_KMSKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyArn", ID: &i_KMSKeyArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfig_KMSKeyArn})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sErrorMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorMetric, Members: &mErrorMetric, Type: smithy.ShapeTypeStructure, Ext: &eErrorMetric})
+var sErrorMetric_ForecastType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastType", ID: &i_ForecastType, Type: smithy.ShapeTypeString, Ext: &eErrorMetric_ForecastType})
+var sErrorMetric_WAPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAPE", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eErrorMetric_WAPE})
+var sErrorMetric_RMSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RMSE", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eErrorMetric_RMSE})
+var sErrorMetric_MASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASE", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eErrorMetric_MASE})
+var sErrorMetric_MAPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAPE", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eErrorMetric_MAPE})
+var s_ErrorMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMetrics, Members: &m_ErrorMetrics, Type: smithy.ShapeTypeList, Ext: &e_ErrorMetrics})
+var s_ErrorMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorMetric, Members: &mErrorMetric, Type: smithy.ShapeTypeStructure, Ext: &e_ErrorMetrics_member})
+var sEvaluationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationParameters, Members: &mEvaluationParameters, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationParameters})
+var sEvaluationParameters_NumberOfBacktestWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBacktestWindows", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eEvaluationParameters_NumberOfBacktestWindows})
+var sEvaluationParameters_BackTestWindowOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackTestWindowOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eEvaluationParameters_BackTestWindowOffset})
+var sEvaluationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationResult, Members: &mEvaluationResult, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationResult})
+var sEvaluationResult_AlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEvaluationResult_AlgorithmArn})
+var sEvaluationResult_TestWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindows", ID: &i_TestWindows, Members: &m_TestWindows, Type: smithy.ShapeTypeList, Ext: &eEvaluationResult_TestWindows})
+var s_EvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationState, Type: smithy.ShapeTypeString, Ext: &e_EvaluationState})
+var sEvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eEvaluationType})
+var sEvaluationType_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationType_SUMMARY})
+var sEvaluationType_COMPUTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationType_COMPUTED})
+var s_Explainabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Explainabilities, Members: &m_Explainabilities, Type: smithy.ShapeTypeList, Ext: &e_Explainabilities})
+var s_Explainabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExplainabilitySummary, Members: &mExplainabilitySummary, Type: smithy.ShapeTypeStructure, Ext: &e_Explainabilities_member})
+var sExplainabilityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExplainabilityConfig, Members: &mExplainabilityConfig, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilityConfig})
+var sExplainabilityConfig_TimeSeriesGranularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesGranularity", ID: &iTimeSeriesGranularity, Members: &mTimeSeriesGranularity, Type: smithy.ShapeTypeEnum, Ext: &eExplainabilityConfig_TimeSeriesGranularity})
+var sExplainabilityConfig_TimePointGranularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePointGranularity", ID: &iTimePointGranularity, Members: &mTimePointGranularity, Type: smithy.ShapeTypeEnum, Ext: &eExplainabilityConfig_TimePointGranularity})
+var s_ExplainabilityExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExplainabilityExports, Members: &m_ExplainabilityExports, Type: smithy.ShapeTypeList, Ext: &e_ExplainabilityExports})
+var s_ExplainabilityExports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExplainabilityExportSummary, Members: &mExplainabilityExportSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExplainabilityExports_member})
+var sExplainabilityExportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExplainabilityExportSummary, Members: &mExplainabilityExportSummary, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilityExportSummary})
+var sExplainabilityExportSummary_ExplainabilityExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExplainabilityExportSummary_ExplainabilityExportArn})
+var sExplainabilityExportSummary_ExplainabilityExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExplainabilityExportSummary_ExplainabilityExportName})
+var sExplainabilityExportSummary_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilityExportSummary_Destination})
+var sExplainabilityExportSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eExplainabilityExportSummary_Status})
+var sExplainabilityExportSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eExplainabilityExportSummary_Message})
+var sExplainabilityExportSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExplainabilityExportSummary_CreationTime})
+var sExplainabilityExportSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExplainabilityExportSummary_LastModificationTime})
+var sExplainabilityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExplainabilityInfo, Members: &mExplainabilityInfo, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilityInfo})
+var sExplainabilityInfo_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExplainabilityInfo_ExplainabilityArn})
+var sExplainabilityInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eExplainabilityInfo_Status})
+var sExplainabilitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExplainabilitySummary, Members: &mExplainabilitySummary, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilitySummary})
+var sExplainabilitySummary_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExplainabilitySummary_ExplainabilityArn})
+var sExplainabilitySummary_ExplainabilityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eExplainabilitySummary_ExplainabilityName})
+var sExplainabilitySummary_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eExplainabilitySummary_ResourceArn})
+var sExplainabilitySummary_ExplainabilityConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityConfig", ID: &iExplainabilityConfig, Members: &mExplainabilityConfig, Type: smithy.ShapeTypeStructure, Ext: &eExplainabilitySummary_ExplainabilityConfig})
+var sExplainabilitySummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eExplainabilitySummary_Status})
+var sExplainabilitySummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eExplainabilitySummary_Message})
+var sExplainabilitySummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExplainabilitySummary_CreationTime})
+var sExplainabilitySummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExplainabilitySummary_LastModificationTime})
+var sFeaturization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeaturization, Members: &mFeaturization, Type: smithy.ShapeTypeStructure, Ext: &eFeaturization})
+var sFeaturization_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eFeaturization_AttributeName})
+var sFeaturization_FeaturizationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeaturizationPipeline", ID: &i_FeaturizationPipeline, Members: &m_FeaturizationPipeline, Type: smithy.ShapeTypeList, Ext: &eFeaturization_FeaturizationPipeline})
+var sFeaturizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeaturizationConfig, Members: &mFeaturizationConfig, Type: smithy.ShapeTypeStructure, Ext: &eFeaturizationConfig})
+var sFeaturizationConfig_ForecastFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastFrequency", ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &eFeaturizationConfig_ForecastFrequency})
+var sFeaturizationConfig_ForecastDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastDimensions", ID: &i_ForecastDimensions, Members: &m_ForecastDimensions, Type: smithy.ShapeTypeList, Ext: &eFeaturizationConfig_ForecastDimensions})
+var sFeaturizationConfig_Featurizations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Featurizations", ID: &i_Featurizations, Members: &m_Featurizations, Type: smithy.ShapeTypeList, Ext: &eFeaturizationConfig_Featurizations})
+var sFeaturizationMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeaturizationMethod, Members: &mFeaturizationMethod, Type: smithy.ShapeTypeStructure, Ext: &eFeaturizationMethod})
+var sFeaturizationMethod_FeaturizationMethodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeaturizationMethodName", ID: &iFeaturizationMethodName, Members: &mFeaturizationMethodName, Type: smithy.ShapeTypeEnum, Ext: &eFeaturizationMethod_FeaturizationMethodName})
+var sFeaturizationMethod_FeaturizationMethodParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeaturizationMethodParameters", ID: &i_FeaturizationMethodParameters, Members: &m_FeaturizationMethodParameters, Type: smithy.ShapeTypeMap, Ext: &eFeaturizationMethod_FeaturizationMethodParameters})
+var sFeaturizationMethodName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeaturizationMethodName, Members: &mFeaturizationMethodName, Type: smithy.ShapeTypeEnum, Ext: &eFeaturizationMethodName})
+var sFeaturizationMethodName_filling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filling", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeaturizationMethodName_filling})
+var s_FeaturizationMethodParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeaturizationMethodParameters, Members: &m_FeaturizationMethodParameters, Type: smithy.ShapeTypeMap, Ext: &e_FeaturizationMethodParameters})
+var s_FeaturizationMethodParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterKey, Type: smithy.ShapeTypeString, Ext: &e_FeaturizationMethodParameters_key})
+var s_FeaturizationMethodParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ParameterValue, Type: smithy.ShapeTypeString, Ext: &e_FeaturizationMethodParameters_value})
+var s_FeaturizationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeaturizationPipeline, Members: &m_FeaturizationPipeline, Type: smithy.ShapeTypeList, Ext: &e_FeaturizationPipeline})
+var s_FeaturizationPipeline_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeaturizationMethod, Members: &mFeaturizationMethod, Type: smithy.ShapeTypeStructure, Ext: &e_FeaturizationPipeline_member})
+var s_Featurizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Featurizations, Members: &m_Featurizations, Type: smithy.ShapeTypeList, Ext: &e_Featurizations})
+var s_Featurizations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeaturization, Members: &mFeaturization, Type: smithy.ShapeTypeStructure, Ext: &e_Featurizations_member})
+var s_FieldStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldStatistics, Members: &m_FieldStatistics, Type: smithy.ShapeTypeMap, Ext: &e_FieldStatistics})
+var s_FieldStatistics_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_FieldStatistics_key})
+var s_FieldStatistics_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iStatistics, Members: &mStatistics, Type: smithy.ShapeTypeStructure, Ext: &e_FieldStatistics_value})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFilter_Key})
+var sFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eFilter_Value})
+var sFilter_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iFilterConditionString, Members: &mFilterConditionString, Type: smithy.ShapeTypeEnum, Ext: &eFilter_Condition})
+var sFilterConditionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterConditionString, Members: &mFilterConditionString, Type: smithy.ShapeTypeEnum, Ext: &eFilterConditionString})
+var sFilterConditionString_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterConditionString_IS})
+var sFilterConditionString_IS_NOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_NOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterConditionString_IS_NOT})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &e_Filters})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_Filters_member})
+var s_ForecastDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForecastDimensions, Members: &m_ForecastDimensions, Type: smithy.ShapeTypeList, Ext: &e_ForecastDimensions})
+var s_ForecastDimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_ForecastDimensions_member})
+var s_ForecastExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForecastExportJobs, Members: &m_ForecastExportJobs, Type: smithy.ShapeTypeList, Ext: &e_ForecastExportJobs})
+var s_ForecastExportJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iForecastExportJobSummary, Members: &mForecastExportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ForecastExportJobs_member})
+var sForecastExportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForecastExportJobSummary, Members: &mForecastExportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eForecastExportJobSummary})
+var sForecastExportJobSummary_ForecastExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eForecastExportJobSummary_ForecastExportJobArn})
+var sForecastExportJobSummary_ForecastExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eForecastExportJobSummary_ForecastExportJobName})
+var sForecastExportJobSummary_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eForecastExportJobSummary_Destination})
+var sForecastExportJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eForecastExportJobSummary_Status})
+var sForecastExportJobSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eForecastExportJobSummary_Message})
+var sForecastExportJobSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eForecastExportJobSummary_CreationTime})
+var sForecastExportJobSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eForecastExportJobSummary_LastModificationTime})
+var s_Forecasts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Forecasts, Members: &m_Forecasts, Type: smithy.ShapeTypeList, Ext: &e_Forecasts})
+var s_Forecasts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iForecastSummary, Members: &mForecastSummary, Type: smithy.ShapeTypeStructure, Ext: &e_Forecasts_member})
+var sForecastSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForecastSummary, Members: &mForecastSummary, Type: smithy.ShapeTypeStructure, Ext: &eForecastSummary})
+var sForecastSummary_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_ForecastArn})
+var sForecastSummary_ForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_ForecastName})
+var sForecastSummary_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_PredictorArn})
+var sForecastSummary_CreatedUsingAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedUsingAutoPredictor", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eForecastSummary_CreatedUsingAutoPredictor})
+var sForecastSummary_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_DatasetGroupArn})
+var sForecastSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_Status})
+var sForecastSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eForecastSummary_Message})
+var sForecastSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eForecastSummary_CreationTime})
+var sForecastSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eForecastSummary_LastModificationTime})
+var s_ForecastType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForecastType, Type: smithy.ShapeTypeString, Ext: &e_ForecastType})
+var s_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &e_ForecastTypes})
+var s_ForecastTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ForecastType, Type: smithy.ShapeTypeString, Ext: &e_ForecastTypes_member})
+var s_Format = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &e_Format})
+var s_Frequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &e_Frequency})
+var s_GeolocationFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeolocationFormat, Type: smithy.ShapeTypeString, Ext: &e_GeolocationFormat})
+var s_Hour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hour, Type: smithy.ShapeTypeInteger, Ext: &e_Hour})
+var sHyperParameterTuningJobConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHyperParameterTuningJobConfig, Members: &mHyperParameterTuningJobConfig, Type: smithy.ShapeTypeStructure, Ext: &eHyperParameterTuningJobConfig})
+var sHyperParameterTuningJobConfig_ParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterRanges", ID: &iParameterRanges, Members: &mParameterRanges, Type: smithy.ShapeTypeStructure, Ext: &eHyperParameterTuningJobConfig_ParameterRanges})
+var sImportMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportMode, Members: &mImportMode, Type: smithy.ShapeTypeEnum, Ext: &eImportMode})
+var sImportMode_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportMode_FULL})
+var sImportMode_INCREMENTAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCREMENTAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportMode_INCREMENTAL})
+var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eInputDataConfig})
+var sInputDataConfig_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eInputDataConfig_DatasetGroupArn})
+var sInputDataConfig_SupplementaryFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplementaryFeatures", ID: &i_SupplementaryFeatures, Members: &m_SupplementaryFeatures, Type: smithy.ShapeTypeList, Ext: &eInputDataConfig_SupplementaryFeatures})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sIntegerParameterRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegerParameterRange, Members: &mIntegerParameterRange, Type: smithy.ShapeTypeStructure, Ext: &eIntegerParameterRange})
+var sIntegerParameterRange_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eIntegerParameterRange_Name})
+var sIntegerParameterRange_MaxValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eIntegerParameterRange_MaxValue})
+var sIntegerParameterRange_MinValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eIntegerParameterRange_MinValue})
+var sIntegerParameterRange_ScalingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingType", ID: &iScalingType, Members: &mScalingType, Type: smithy.ShapeTypeEnum, Ext: &eIntegerParameterRange_ScalingType})
+var s_IntegerParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerParameterRanges, Members: &m_IntegerParameterRanges, Type: smithy.ShapeTypeList, Ext: &e_IntegerParameterRanges})
+var s_IntegerParameterRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegerParameterRange, Members: &mIntegerParameterRange, Type: smithy.ShapeTypeStructure, Ext: &e_IntegerParameterRanges_member})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInputException})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidInputException_Message})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var s_KMSKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KMSKeyArn})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var s_LocalDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalDateTime, Type: smithy.ShapeTypeString, Ext: &e_LocalDateTime})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_LongArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &e_LongArn})
+var s_LongArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongArnList, Members: &m_LongArnList, Type: smithy.ShapeTypeList, Ext: &e_LongArnList})
+var s_LongArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &e_LongArnList_member})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var sMetricResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricResult, Members: &mMetricResult, Type: smithy.ShapeTypeStructure, Ext: &eMetricResult})
+var sMetricResult_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricResult_MetricName})
+var sMetricResult_MetricValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eMetricResult_MetricValue})
+var s_MetricResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricResults, Members: &m_MetricResults, Type: smithy.ShapeTypeList, Ext: &e_MetricResults})
+var s_MetricResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricResult, Members: &mMetricResult, Type: smithy.ShapeTypeStructure, Ext: &e_MetricResults_member})
+var sMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetrics, Members: &mMetrics, Type: smithy.ShapeTypeStructure, Ext: &eMetrics})
+var sMetrics_RMSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RMSE", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eMetrics_RMSE})
+var sMetrics_WeightedQuantileLosses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeightedQuantileLosses", ID: &i_WeightedQuantileLosses, Members: &m_WeightedQuantileLosses, Type: smithy.ShapeTypeList, Ext: &eMetrics_WeightedQuantileLosses})
+var sMetrics_ErrorMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMetrics", ID: &i_ErrorMetrics, Members: &m_ErrorMetrics, Type: smithy.ShapeTypeList, Ext: &eMetrics_ErrorMetrics})
+var sMetrics_AverageWeightedQuantileLoss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageWeightedQuantileLoss", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eMetrics_AverageWeightedQuantileLoss})
+var sMonitorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorConfig, Members: &mMonitorConfig, Type: smithy.ShapeTypeStructure, Ext: &eMonitorConfig})
+var sMonitorConfig_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMonitorConfig_MonitorName})
+var sMonitorDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorDataSource, Members: &mMonitorDataSource, Type: smithy.ShapeTypeStructure, Ext: &eMonitorDataSource})
+var sMonitorDataSource_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorDataSource_DatasetImportJobArn})
+var sMonitorDataSource_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorDataSource_ForecastArn})
+var sMonitorDataSource_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorDataSource_PredictorArn})
+var sMonitorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorInfo, Members: &mMonitorInfo, Type: smithy.ShapeTypeStructure, Ext: &eMonitorInfo})
+var sMonitorInfo_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorInfo_MonitorArn})
+var sMonitorInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eMonitorInfo_Status})
+var s_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Monitors, Members: &m_Monitors, Type: smithy.ShapeTypeList, Ext: &e_Monitors})
+var s_Monitors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_Monitors_member})
+var sMonitorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &eMonitorSummary})
+var sMonitorSummary_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_MonitorArn})
+var sMonitorSummary_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_MonitorName})
+var sMonitorSummary_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_ResourceArn})
+var sMonitorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_Status})
+var sMonitorSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMonitorSummary_CreationTime})
+var sMonitorSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMonitorSummary_LastModificationTime})
+var sMonth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonth, Members: &mMonth, Type: smithy.ShapeTypeEnum, Ext: &eMonth})
+var sMonth_JANUARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JANUARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_JANUARY})
+var sMonth_FEBRUARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEBRUARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_FEBRUARY})
+var sMonth_MARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_MARCH})
+var sMonth_APRIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APRIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_APRIL})
+var sMonth_MAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_MAY})
+var sMonth_JUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_JUNE})
+var sMonth_JULY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JULY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_JULY})
+var sMonth_AUGUST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUGUST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_AUGUST})
+var sMonth_SEPTEMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEPTEMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_SEPTEMBER})
+var sMonth_OCTOBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCTOBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_OCTOBER})
+var sMonth_NOVEMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOVEMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_NOVEMBER})
+var sMonth_DECEMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECEMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonth_DECEMBER})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &eOperation})
+var sOperation_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_ADD})
+var sOperation_SUBTRACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_SUBTRACT})
+var sOperation_MULTIPLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_MULTIPLY})
+var sOperation_DIVIDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVIDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_DIVIDE})
+var sOptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eOptimizationMetric})
+var sOptimizationMetric_WAPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptimizationMetric_WAPE})
+var sOptimizationMetric_RMSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RMSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptimizationMetric_RMSE})
+var sOptimizationMetric_AverageWeightedQuantileLoss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageWeightedQuantileLoss", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptimizationMetric_AverageWeightedQuantileLoss})
+var sOptimizationMetric_MASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptimizationMetric_MASE})
+var sOptimizationMetric_MAPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptimizationMetric_MAPE})
+var s_ParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterKey, Type: smithy.ShapeTypeString, Ext: &e_ParameterKey})
+var sParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterRanges, Members: &mParameterRanges, Type: smithy.ShapeTypeStructure, Ext: &eParameterRanges})
+var sParameterRanges_CategoricalParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CategoricalParameterRanges", ID: &i_CategoricalParameterRanges, Members: &m_CategoricalParameterRanges, Type: smithy.ShapeTypeList, Ext: &eParameterRanges_CategoricalParameterRanges})
+var sParameterRanges_ContinuousParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinuousParameterRanges", ID: &i_ContinuousParameterRanges, Members: &m_ContinuousParameterRanges, Type: smithy.ShapeTypeList, Ext: &eParameterRanges_ContinuousParameterRanges})
+var sParameterRanges_IntegerParameterRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerParameterRanges", ID: &i_IntegerParameterRanges, Members: &m_IntegerParameterRanges, Type: smithy.ShapeTypeList, Ext: &eParameterRanges_IntegerParameterRanges})
+var s_ParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ParameterValue})
+var s_PredictorBacktestExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictorBacktestExportJobs, Members: &m_PredictorBacktestExportJobs, Type: smithy.ShapeTypeList, Ext: &e_PredictorBacktestExportJobs})
+var s_PredictorBacktestExportJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictorBacktestExportJobSummary, Members: &mPredictorBacktestExportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PredictorBacktestExportJobs_member})
+var sPredictorBacktestExportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorBacktestExportJobSummary, Members: &mPredictorBacktestExportJobSummary, Type: smithy.ShapeTypeStructure, Ext: &ePredictorBacktestExportJobSummary})
+var sPredictorBacktestExportJobSummary_PredictorBacktestExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorBacktestExportJobSummary_PredictorBacktestExportJobArn})
+var sPredictorBacktestExportJobSummary_PredictorBacktestExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ePredictorBacktestExportJobSummary_PredictorBacktestExportJobName})
+var sPredictorBacktestExportJobSummary_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &ePredictorBacktestExportJobSummary_Destination})
+var sPredictorBacktestExportJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ePredictorBacktestExportJobSummary_Status})
+var sPredictorBacktestExportJobSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePredictorBacktestExportJobSummary_Message})
+var sPredictorBacktestExportJobSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorBacktestExportJobSummary_CreationTime})
+var sPredictorBacktestExportJobSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorBacktestExportJobSummary_LastModificationTime})
+var sPredictorBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorBaseline, Members: &mPredictorBaseline, Type: smithy.ShapeTypeStructure, Ext: &ePredictorBaseline})
+var sPredictorBaseline_BaselineMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaselineMetrics", ID: &i_BaselineMetrics, Members: &m_BaselineMetrics, Type: smithy.ShapeTypeList, Ext: &ePredictorBaseline_BaselineMetrics})
+var s_PredictorEvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictorEvaluationResults, Members: &m_PredictorEvaluationResults, Type: smithy.ShapeTypeList, Ext: &e_PredictorEvaluationResults})
+var s_PredictorEvaluationResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluationResult, Members: &mEvaluationResult, Type: smithy.ShapeTypeStructure, Ext: &e_PredictorEvaluationResults_member})
+var sPredictorEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorEvent, Members: &mPredictorEvent, Type: smithy.ShapeTypeStructure, Ext: &ePredictorEvent})
+var sPredictorEvent_Detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Detail", ID: &i_Detail, Type: smithy.ShapeTypeString, Ext: &ePredictorEvent_Detail})
+var sPredictorEvent_Datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datetime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorEvent_Datetime})
+var sPredictorExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorExecution, Members: &mPredictorExecution, Type: smithy.ShapeTypeStructure, Ext: &ePredictorExecution})
+var sPredictorExecution_AlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorExecution_AlgorithmArn})
+var sPredictorExecution_TestWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindows", ID: &i_TestWindowDetails, Members: &m_TestWindowDetails, Type: smithy.ShapeTypeList, Ext: &ePredictorExecution_TestWindows})
+var sPredictorExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorExecutionDetails, Members: &mPredictorExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ePredictorExecutionDetails})
+var sPredictorExecutionDetails_PredictorExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorExecutions", ID: &i_PredictorExecutions, Members: &m_PredictorExecutions, Type: smithy.ShapeTypeList, Ext: &ePredictorExecutionDetails_PredictorExecutions})
+var s_PredictorExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictorExecutions, Members: &m_PredictorExecutions, Type: smithy.ShapeTypeList, Ext: &e_PredictorExecutions})
+var s_PredictorExecutions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictorExecution, Members: &mPredictorExecution, Type: smithy.ShapeTypeStructure, Ext: &e_PredictorExecutions_member})
+var sPredictorMonitorEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorMonitorEvaluation, Members: &mPredictorMonitorEvaluation, Type: smithy.ShapeTypeStructure, Ext: &ePredictorMonitorEvaluation})
+var sPredictorMonitorEvaluation_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorMonitorEvaluation_ResourceArn})
+var sPredictorMonitorEvaluation_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorMonitorEvaluation_MonitorArn})
+var sPredictorMonitorEvaluation_EvaluationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorMonitorEvaluation_EvaluationTime})
+var sPredictorMonitorEvaluation_EvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationState", ID: &i_EvaluationState, Type: smithy.ShapeTypeString, Ext: &ePredictorMonitorEvaluation_EvaluationState})
+var sPredictorMonitorEvaluation_WindowStartDatetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowStartDatetime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorMonitorEvaluation_WindowStartDatetime})
+var sPredictorMonitorEvaluation_WindowEndDatetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowEndDatetime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorMonitorEvaluation_WindowEndDatetime})
+var sPredictorMonitorEvaluation_PredictorEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorEvent", ID: &iPredictorEvent, Members: &mPredictorEvent, Type: smithy.ShapeTypeStructure, Ext: &ePredictorMonitorEvaluation_PredictorEvent})
+var sPredictorMonitorEvaluation_MonitorDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorDataSource", ID: &iMonitorDataSource, Members: &mMonitorDataSource, Type: smithy.ShapeTypeStructure, Ext: &ePredictorMonitorEvaluation_MonitorDataSource})
+var sPredictorMonitorEvaluation_MetricResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricResults", ID: &i_MetricResults, Members: &m_MetricResults, Type: smithy.ShapeTypeList, Ext: &ePredictorMonitorEvaluation_MetricResults})
+var sPredictorMonitorEvaluation_NumItemsEvaluated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumItemsEvaluated", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ePredictorMonitorEvaluation_NumItemsEvaluated})
+var sPredictorMonitorEvaluation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePredictorMonitorEvaluation_Message})
+var s_PredictorMonitorEvaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictorMonitorEvaluations, Members: &m_PredictorMonitorEvaluations, Type: smithy.ShapeTypeList, Ext: &e_PredictorMonitorEvaluations})
+var s_PredictorMonitorEvaluations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictorMonitorEvaluation, Members: &mPredictorMonitorEvaluation, Type: smithy.ShapeTypeStructure, Ext: &e_PredictorMonitorEvaluations_member})
+var s_Predictors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Predictors, Members: &m_Predictors, Type: smithy.ShapeTypeList, Ext: &e_Predictors})
+var s_Predictors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictorSummary, Members: &mPredictorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_Predictors_member})
+var sPredictorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorSummary, Members: &mPredictorSummary, Type: smithy.ShapeTypeStructure, Ext: &ePredictorSummary})
+var sPredictorSummary_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorSummary_PredictorArn})
+var sPredictorSummary_PredictorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ePredictorSummary_PredictorName})
+var sPredictorSummary_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePredictorSummary_DatasetGroupArn})
+var sPredictorSummary_IsAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsAutoPredictor", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePredictorSummary_IsAutoPredictor})
+var sPredictorSummary_ReferencePredictorSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferencePredictorSummary", ID: &iReferencePredictorSummary, Members: &mReferencePredictorSummary, Type: smithy.ShapeTypeStructure, Ext: &ePredictorSummary_ReferencePredictorSummary})
+var sPredictorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ePredictorSummary_Status})
+var sPredictorSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePredictorSummary_Message})
+var sPredictorSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorSummary_CreationTime})
+var sPredictorSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePredictorSummary_LastModificationTime})
+var sReferencePredictorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferencePredictorSummary, Members: &mReferencePredictorSummary, Type: smithy.ShapeTypeStructure, Ext: &eReferencePredictorSummary})
+var sReferencePredictorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eReferencePredictorSummary_Arn})
+var sReferencePredictorSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum, Ext: &eReferencePredictorSummary_State})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eS3Config})
+var sS3Config_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &eS3Config_Path})
+var sS3Config_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eS3Config_RoleArn})
+var sS3Config_KMSKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyArn", ID: &i_KMSKeyArn, Type: smithy.ShapeTypeString, Ext: &eS3Config_KMSKeyArn})
+var s_S3Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Path, Type: smithy.ShapeTypeString, Ext: &e_S3Path})
+var sScalingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingType, Members: &mScalingType, Type: smithy.ShapeTypeEnum, Ext: &eScalingType})
+var sScalingType_Auto = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Auto", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalingType_Auto})
+var sScalingType_Linear = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Linear", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalingType_Linear})
+var sScalingType_Logarithmic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Logarithmic", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalingType_Logarithmic})
+var sScalingType_ReverseLogarithmic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReverseLogarithmic", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScalingType_ReverseLogarithmic})
+var sSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eSchema})
+var sSchema_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_SchemaAttributes, Members: &m_SchemaAttributes, Type: smithy.ShapeTypeList, Ext: &eSchema_Attributes})
+var sSchemaAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaAttribute, Members: &mSchemaAttribute, Type: smithy.ShapeTypeStructure, Ext: &eSchemaAttribute})
+var sSchemaAttribute_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eSchemaAttribute_AttributeName})
+var sSchemaAttribute_AttributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeType", ID: &iAttributeType, Members: &mAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eSchemaAttribute_AttributeType})
+var s_SchemaAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaAttributes, Members: &m_SchemaAttributes, Type: smithy.ShapeTypeList, Ext: &e_SchemaAttributes})
+var s_SchemaAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaAttribute, Members: &mSchemaAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_SchemaAttributes_member})
+var sState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum, Ext: &eState})
+var sState_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eState_Active})
+var sState_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eState_Deleted})
+var sStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatistics, Members: &mStatistics, Type: smithy.ShapeTypeStructure, Ext: &eStatistics})
+var sStatistics_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eStatistics_Count})
+var sStatistics_CountDistinct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountDistinct", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eStatistics_CountDistinct})
+var sStatistics_CountNull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountNull", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eStatistics_CountNull})
+var sStatistics_CountNan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountNan", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eStatistics_CountNan})
+var sStatistics_Min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Min", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStatistics_Min})
+var sStatistics_Max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStatistics_Max})
+var sStatistics_Avg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Avg", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eStatistics_Avg})
+var sStatistics_Stddev = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stddev", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eStatistics_Stddev})
+var sStatistics_CountLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountLong", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eStatistics_CountLong})
+var sStatistics_CountDistinctLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountDistinctLong", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eStatistics_CountDistinctLong})
+var sStatistics_CountNullLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountNullLong", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eStatistics_CountNullLong})
+var sStatistics_CountNanLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountNanLong", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eStatistics_CountNanLong})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &e_Status})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sSupplementaryFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementaryFeature, Members: &mSupplementaryFeature, Type: smithy.ShapeTypeStructure, Ext: &eSupplementaryFeature})
+var sSupplementaryFeature_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eSupplementaryFeature_Name})
+var sSupplementaryFeature_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &eSupplementaryFeature_Value})
+var s_SupplementaryFeatures = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplementaryFeatures, Members: &m_SupplementaryFeatures, Type: smithy.ShapeTypeList, Ext: &e_SupplementaryFeatures})
+var s_SupplementaryFeatures_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupplementaryFeature, Members: &mSupplementaryFeature, Type: smithy.ShapeTypeStructure, Ext: &e_SupplementaryFeatures_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_Tags_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TestWindowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestWindowDetails, Members: &m_TestWindowDetails, Type: smithy.ShapeTypeList, Ext: &e_TestWindowDetails})
+var s_TestWindowDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTestWindowSummary, Members: &mTestWindowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TestWindowDetails_member})
+var s_TestWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestWindows, Members: &m_TestWindows, Type: smithy.ShapeTypeList, Ext: &e_TestWindows})
+var s_TestWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWindowSummary, Members: &mWindowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TestWindows_member})
+var sTestWindowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestWindowSummary, Members: &mTestWindowSummary, Type: smithy.ShapeTypeStructure, Ext: &eTestWindowSummary})
+var sTestWindowSummary_TestWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindowStart", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTestWindowSummary_TestWindowStart})
+var sTestWindowSummary_TestWindowEnd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindowEnd", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTestWindowSummary_TestWindowEnd})
+var sTestWindowSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eTestWindowSummary_Status})
+var sTestWindowSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTestWindowSummary_Message})
+var sTimeAlignmentBoundary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeAlignmentBoundary, Members: &mTimeAlignmentBoundary, Type: smithy.ShapeTypeStructure, Ext: &eTimeAlignmentBoundary})
+var sTimeAlignmentBoundary_Month = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Month", ID: &iMonth, Members: &mMonth, Type: smithy.ShapeTypeEnum, Ext: &eTimeAlignmentBoundary_Month})
+var sTimeAlignmentBoundary_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger, Ext: &eTimeAlignmentBoundary_DayOfMonth})
+var sTimeAlignmentBoundary_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &iDayOfWeek, Members: &mDayOfWeek, Type: smithy.ShapeTypeEnum, Ext: &eTimeAlignmentBoundary_DayOfWeek})
+var sTimeAlignmentBoundary_Hour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hour", ID: &i_Hour, Type: smithy.ShapeTypeInteger, Ext: &eTimeAlignmentBoundary_Hour})
+var sTimePointGranularity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePointGranularity, Members: &mTimePointGranularity, Type: smithy.ShapeTypeEnum, Ext: &eTimePointGranularity})
+var sTimePointGranularity_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimePointGranularity_ALL})
+var sTimePointGranularity_SPECIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPECIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimePointGranularity_SPECIFIC})
+var sTimeSeriesCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesCondition, Members: &mTimeSeriesCondition, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesCondition})
+var sTimeSeriesCondition_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eTimeSeriesCondition_AttributeName})
+var sTimeSeriesCondition_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &eTimeSeriesCondition_AttributeValue})
+var sTimeSeriesCondition_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeEnum, Ext: &eTimeSeriesCondition_Condition})
+var s_TimeSeriesConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeSeriesConditions, Members: &m_TimeSeriesConditions, Type: smithy.ShapeTypeList, Ext: &e_TimeSeriesConditions})
+var s_TimeSeriesConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTimeSeriesCondition, Members: &mTimeSeriesCondition, Type: smithy.ShapeTypeStructure, Ext: &e_TimeSeriesConditions_member})
+var sTimeSeriesGranularity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesGranularity, Members: &mTimeSeriesGranularity, Type: smithy.ShapeTypeEnum, Ext: &eTimeSeriesGranularity})
+var sTimeSeriesGranularity_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesGranularity_ALL})
+var sTimeSeriesGranularity_SPECIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPECIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesGranularity_SPECIFIC})
+var sTimeSeriesIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesIdentifiers, Members: &mTimeSeriesIdentifiers, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesIdentifiers})
+var sTimeSeriesIdentifiers_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesIdentifiers_DataSource})
+var sTimeSeriesIdentifiers_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesIdentifiers_Schema})
+var sTimeSeriesIdentifiers_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eTimeSeriesIdentifiers_Format})
+var sTimeSeriesReplacementsDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesReplacementsDataSource, Members: &mTimeSeriesReplacementsDataSource, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesReplacementsDataSource})
+var sTimeSeriesReplacementsDataSource_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesReplacementsDataSource_S3Config})
+var sTimeSeriesReplacementsDataSource_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesReplacementsDataSource_Schema})
+var sTimeSeriesReplacementsDataSource_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eTimeSeriesReplacementsDataSource_Format})
+var sTimeSeriesReplacementsDataSource_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormat", ID: &i_TimestampFormat, Type: smithy.ShapeTypeString, Ext: &eTimeSeriesReplacementsDataSource_TimestampFormat})
+var sTimeSeriesSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesSelector, Members: &mTimeSeriesSelector, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesSelector})
+var sTimeSeriesSelector_TimeSeriesIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesIdentifiers", ID: &iTimeSeriesIdentifiers, Members: &mTimeSeriesIdentifiers, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesSelector_TimeSeriesIdentifiers})
+var sTimeSeriesTransformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeSeriesTransformation, Members: &mTimeSeriesTransformation, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesTransformation})
+var sTimeSeriesTransformation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eTimeSeriesTransformation_Action})
+var sTimeSeriesTransformation_TimeSeriesConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesConditions", ID: &i_TimeSeriesConditions, Members: &m_TimeSeriesConditions, Type: smithy.ShapeTypeList, Ext: &eTimeSeriesTransformation_TimeSeriesConditions})
+var s_TimeSeriesTransformations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeSeriesTransformations, Members: &m_TimeSeriesTransformations, Type: smithy.ShapeTypeList, Ext: &e_TimeSeriesTransformations})
+var s_TimeSeriesTransformations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTimeSeriesTransformation, Members: &mTimeSeriesTransformation, Type: smithy.ShapeTypeStructure, Ext: &e_TimeSeriesTransformations_member})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampFormat, Type: smithy.ShapeTypeString, Ext: &e_TimestampFormat})
+var s_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeZone, Type: smithy.ShapeTypeString, Ext: &e_TimeZone})
+var s_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap, Ext: &e_TrainingParameters})
+var s_TrainingParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterKey, Type: smithy.ShapeTypeString, Ext: &e_TrainingParameters_key})
+var s_TrainingParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ParameterValue, Type: smithy.ShapeTypeString, Ext: &e_TrainingParameters_value})
+var s_Transformations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Transformations, Members: &m_Transformations, Type: smithy.ShapeTypeMap, Ext: &e_Transformations})
+var s_Transformations_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Transformations_key})
+var s_Transformations_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Transformations_value})
+var s_UseGeolocationForTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UseGeolocationForTimeZone, Type: smithy.ShapeTypeBoolean, Ext: &e_UseGeolocationForTimeZone})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Values_member})
+var sWeightedQuantileLoss = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWeightedQuantileLoss, Members: &mWeightedQuantileLoss, Type: smithy.ShapeTypeStructure, Ext: &eWeightedQuantileLoss})
+var sWeightedQuantileLoss_Quantile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quantile", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eWeightedQuantileLoss_Quantile})
+var sWeightedQuantileLoss_LossValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LossValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eWeightedQuantileLoss_LossValue})
+var s_WeightedQuantileLosses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WeightedQuantileLosses, Members: &m_WeightedQuantileLosses, Type: smithy.ShapeTypeList, Ext: &e_WeightedQuantileLosses})
+var s_WeightedQuantileLosses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWeightedQuantileLoss, Members: &mWeightedQuantileLoss, Type: smithy.ShapeTypeStructure, Ext: &e_WeightedQuantileLosses_member})
+var s_WhatIfAnalyses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatIfAnalyses, Members: &m_WhatIfAnalyses, Type: smithy.ShapeTypeList, Ext: &e_WhatIfAnalyses})
+var s_WhatIfAnalyses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatIfAnalysisSummary, Members: &mWhatIfAnalysisSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WhatIfAnalyses_member})
+var sWhatIfAnalysisSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatIfAnalysisSummary, Members: &mWhatIfAnalysisSummary, Type: smithy.ShapeTypeStructure, Ext: &eWhatIfAnalysisSummary})
+var sWhatIfAnalysisSummary_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eWhatIfAnalysisSummary_WhatIfAnalysisArn})
+var sWhatIfAnalysisSummary_WhatIfAnalysisName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eWhatIfAnalysisSummary_WhatIfAnalysisName})
+var sWhatIfAnalysisSummary_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eWhatIfAnalysisSummary_ForecastArn})
+var sWhatIfAnalysisSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eWhatIfAnalysisSummary_Status})
+var sWhatIfAnalysisSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eWhatIfAnalysisSummary_Message})
+var sWhatIfAnalysisSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfAnalysisSummary_CreationTime})
+var sWhatIfAnalysisSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfAnalysisSummary_LastModificationTime})
+var s_WhatIfForecastArnListForExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatIfForecastArnListForExport, Members: &m_WhatIfForecastArnListForExport, Type: smithy.ShapeTypeList, Ext: &e_WhatIfForecastArnListForExport})
+var s_WhatIfForecastArnListForExport_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &e_WhatIfForecastArnListForExport_member})
+var s_WhatIfForecastExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatIfForecastExports, Members: &m_WhatIfForecastExports, Type: smithy.ShapeTypeList, Ext: &e_WhatIfForecastExports})
+var s_WhatIfForecastExports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatIfForecastExportSummary, Members: &mWhatIfForecastExportSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WhatIfForecastExports_member})
+var sWhatIfForecastExportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatIfForecastExportSummary, Members: &mWhatIfForecastExportSummary, Type: smithy.ShapeTypeStructure, Ext: &eWhatIfForecastExportSummary})
+var sWhatIfForecastExportSummary_WhatIfForecastExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastExportSummary_WhatIfForecastExportArn})
+var sWhatIfForecastExportSummary_WhatIfForecastArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArns", ID: &i_WhatIfForecastArnListForExport, Members: &m_WhatIfForecastArnListForExport, Type: smithy.ShapeTypeList, Ext: &eWhatIfForecastExportSummary_WhatIfForecastArns})
+var sWhatIfForecastExportSummary_WhatIfForecastExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastExportSummary_WhatIfForecastExportName})
+var sWhatIfForecastExportSummary_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eWhatIfForecastExportSummary_Destination})
+var sWhatIfForecastExportSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastExportSummary_Status})
+var sWhatIfForecastExportSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastExportSummary_Message})
+var sWhatIfForecastExportSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfForecastExportSummary_CreationTime})
+var sWhatIfForecastExportSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfForecastExportSummary_LastModificationTime})
+var s_WhatIfForecasts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatIfForecasts, Members: &m_WhatIfForecasts, Type: smithy.ShapeTypeList, Ext: &e_WhatIfForecasts})
+var s_WhatIfForecasts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatIfForecastSummary, Members: &mWhatIfForecastSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WhatIfForecasts_member})
+var sWhatIfForecastSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatIfForecastSummary, Members: &mWhatIfForecastSummary, Type: smithy.ShapeTypeStructure, Ext: &eWhatIfForecastSummary})
+var sWhatIfForecastSummary_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastSummary_WhatIfForecastArn})
+var sWhatIfForecastSummary_WhatIfForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastSummary_WhatIfForecastName})
+var sWhatIfForecastSummary_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastSummary_WhatIfAnalysisArn})
+var sWhatIfForecastSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastSummary_Status})
+var sWhatIfForecastSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eWhatIfForecastSummary_Message})
+var sWhatIfForecastSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfForecastSummary_CreationTime})
+var sWhatIfForecastSummary_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWhatIfForecastSummary_LastModificationTime})
+var sWindowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowSummary, Members: &mWindowSummary, Type: smithy.ShapeTypeStructure, Ext: &eWindowSummary})
+var sWindowSummary_TestWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindowStart", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWindowSummary_TestWindowStart})
+var sWindowSummary_TestWindowEnd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestWindowEnd", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWindowSummary_TestWindowEnd})
+var sWindowSummary_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eWindowSummary_ItemCount})
+var sWindowSummary_EvaluationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationType", ID: &iEvaluationType, Members: &mEvaluationType, Type: smithy.ShapeTypeEnum, Ext: &eWindowSummary_EvaluationType})
+var sWindowSummary_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &iMetrics, Members: &mMetrics, Type: smithy.ShapeTypeStructure, Ext: &eWindowSummary_Metrics})
+var sCreateAutoPredictorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoPredictorRequest, Members: &mCreateAutoPredictorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorRequest})
+var sCreateAutoPredictorRequest_PredictorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateAutoPredictorRequest_PredictorName})
+var sCreateAutoPredictorRequest_ForecastHorizon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastHorizon", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateAutoPredictorRequest_ForecastHorizon})
+var sCreateAutoPredictorRequest_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eCreateAutoPredictorRequest_ForecastTypes})
+var sCreateAutoPredictorRequest_ForecastDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastDimensions", ID: &i_ForecastDimensions, Members: &m_ForecastDimensions, Type: smithy.ShapeTypeList, Ext: &eCreateAutoPredictorRequest_ForecastDimensions})
+var sCreateAutoPredictorRequest_ForecastFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastFrequency", ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &eCreateAutoPredictorRequest_ForecastFrequency})
+var sCreateAutoPredictorRequest_DataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataConfig", ID: &iDataConfig, Members: &mDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorRequest_DataConfig})
+var sCreateAutoPredictorRequest_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorRequest_EncryptionConfig})
+var sCreateAutoPredictorRequest_ReferencePredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferencePredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateAutoPredictorRequest_ReferencePredictorArn})
+var sCreateAutoPredictorRequest_OptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizationMetric", ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eCreateAutoPredictorRequest_OptimizationMetric})
+var sCreateAutoPredictorRequest_ExplainPredictor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainPredictor", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateAutoPredictorRequest_ExplainPredictor})
+var sCreateAutoPredictorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateAutoPredictorRequest_Tags})
+var sCreateAutoPredictorRequest_MonitorConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorConfig", ID: &iMonitorConfig, Members: &mMonitorConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorRequest_MonitorConfig})
+var sCreateAutoPredictorRequest_TimeAlignmentBoundary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeAlignmentBoundary", ID: &iTimeAlignmentBoundary, Members: &mTimeAlignmentBoundary, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorRequest_TimeAlignmentBoundary})
+var sCreateAutoPredictorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoPredictorResponse, Members: &mCreateAutoPredictorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAutoPredictorResponse})
+var sCreateAutoPredictorResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateAutoPredictorResponse_PredictorArn})
+var sCreateDatasetGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetGroupRequest, Members: &mCreateDatasetGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetGroupRequest})
+var sCreateDatasetGroupRequest_DatasetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetGroupRequest_DatasetGroupName})
+var sCreateDatasetGroupRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatasetGroupRequest_Domain})
+var sCreateDatasetGroupRequest_DatasetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eCreateDatasetGroupRequest_DatasetArns})
+var sCreateDatasetGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateDatasetGroupRequest_Tags})
+var sCreateDatasetGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetGroupResponse, Members: &mCreateDatasetGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetGroupResponse})
+var sCreateDatasetGroupResponse_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetGroupResponse_DatasetGroupArn})
+var sCreateDatasetImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetImportJobRequest, Members: &mCreateDatasetImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetImportJobRequest})
+var sCreateDatasetImportJobRequest_DatasetImportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_DatasetImportJobName})
+var sCreateDatasetImportJobRequest_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_DatasetArn})
+var sCreateDatasetImportJobRequest_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetImportJobRequest_DataSource})
+var sCreateDatasetImportJobRequest_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormat", ID: &i_TimestampFormat, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_TimestampFormat})
+var sCreateDatasetImportJobRequest_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &i_TimeZone, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_TimeZone})
+var sCreateDatasetImportJobRequest_UseGeolocationForTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseGeolocationForTimeZone", ID: &i_UseGeolocationForTimeZone, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDatasetImportJobRequest_UseGeolocationForTimeZone})
+var sCreateDatasetImportJobRequest_GeolocationFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeolocationFormat", ID: &i_GeolocationFormat, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_GeolocationFormat})
+var sCreateDatasetImportJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateDatasetImportJobRequest_Tags})
+var sCreateDatasetImportJobRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobRequest_Format})
+var sCreateDatasetImportJobRequest_ImportMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportMode", ID: &iImportMode, Members: &mImportMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatasetImportJobRequest_ImportMode})
+var sCreateDatasetImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetImportJobResponse, Members: &mCreateDatasetImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetImportJobResponse})
+var sCreateDatasetImportJobResponse_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetImportJobResponse_DatasetImportJobArn})
+var sCreateDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetRequest, Members: &mCreateDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetRequest})
+var sCreateDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetRequest_DatasetName})
+var sCreateDatasetRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatasetRequest_Domain})
+var sCreateDatasetRequest_DatasetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetType", ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDatasetRequest_DatasetType})
+var sCreateDatasetRequest_DataFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFrequency", ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetRequest_DataFrequency})
+var sCreateDatasetRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetRequest_Schema})
+var sCreateDatasetRequest_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetRequest_EncryptionConfig})
+var sCreateDatasetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateDatasetRequest_Tags})
+var sCreateDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetResponse, Members: &mCreateDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDatasetResponse})
+var sCreateDatasetResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateDatasetResponse_DatasetArn})
+var sCreateExplainabilityExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainabilityExportRequest, Members: &mCreateExplainabilityExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityExportRequest})
+var sCreateExplainabilityExportRequest_ExplainabilityExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityExportRequest_ExplainabilityExportName})
+var sCreateExplainabilityExportRequest_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityExportRequest_ExplainabilityArn})
+var sCreateExplainabilityExportRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityExportRequest_Destination})
+var sCreateExplainabilityExportRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateExplainabilityExportRequest_Tags})
+var sCreateExplainabilityExportRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityExportRequest_Format})
+var sCreateExplainabilityExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainabilityExportResponse, Members: &mCreateExplainabilityExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityExportResponse})
+var sCreateExplainabilityExportResponse_ExplainabilityExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityExportResponse_ExplainabilityExportArn})
+var sCreateExplainabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainabilityRequest, Members: &mCreateExplainabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityRequest})
+var sCreateExplainabilityRequest_ExplainabilityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityRequest_ExplainabilityName})
+var sCreateExplainabilityRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityRequest_ResourceArn})
+var sCreateExplainabilityRequest_ExplainabilityConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityConfig", ID: &iExplainabilityConfig, Members: &mExplainabilityConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityRequest_ExplainabilityConfig})
+var sCreateExplainabilityRequest_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityRequest_DataSource})
+var sCreateExplainabilityRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityRequest_Schema})
+var sCreateExplainabilityRequest_EnableVisualization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableVisualization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateExplainabilityRequest_EnableVisualization})
+var sCreateExplainabilityRequest_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDateTime", ID: &i_LocalDateTime, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityRequest_StartDateTime})
+var sCreateExplainabilityRequest_EndDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDateTime", ID: &i_LocalDateTime, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityRequest_EndDateTime})
+var sCreateExplainabilityRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateExplainabilityRequest_Tags})
+var sCreateExplainabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExplainabilityResponse, Members: &mCreateExplainabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateExplainabilityResponse})
+var sCreateExplainabilityResponse_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateExplainabilityResponse_ExplainabilityArn})
+var sCreateForecastExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecastExportJobRequest, Members: &mCreateForecastExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastExportJobRequest})
+var sCreateForecastExportJobRequest_ForecastExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateForecastExportJobRequest_ForecastExportJobName})
+var sCreateForecastExportJobRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateForecastExportJobRequest_ForecastArn})
+var sCreateForecastExportJobRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastExportJobRequest_Destination})
+var sCreateForecastExportJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateForecastExportJobRequest_Tags})
+var sCreateForecastExportJobRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eCreateForecastExportJobRequest_Format})
+var sCreateForecastExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecastExportJobResponse, Members: &mCreateForecastExportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastExportJobResponse})
+var sCreateForecastExportJobResponse_ForecastExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateForecastExportJobResponse_ForecastExportJobArn})
+var sCreateForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecastRequest, Members: &mCreateForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastRequest})
+var sCreateForecastRequest_ForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateForecastRequest_ForecastName})
+var sCreateForecastRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateForecastRequest_PredictorArn})
+var sCreateForecastRequest_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eCreateForecastRequest_ForecastTypes})
+var sCreateForecastRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateForecastRequest_Tags})
+var sCreateForecastRequest_TimeSeriesSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesSelector", ID: &iTimeSeriesSelector, Members: &mTimeSeriesSelector, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastRequest_TimeSeriesSelector})
+var sCreateForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForecastResponse, Members: &mCreateForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateForecastResponse})
+var sCreateForecastResponse_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateForecastResponse_ForecastArn})
+var sCreateMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorRequest, Members: &mCreateMonitorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorRequest})
+var sCreateMonitorRequest_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorRequest_MonitorName})
+var sCreateMonitorRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorRequest_ResourceArn})
+var sCreateMonitorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorRequest_Tags})
+var sCreateMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorResponse, Members: &mCreateMonitorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorResponse})
+var sCreateMonitorResponse_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorResponse_MonitorArn})
+var sCreatePredictorBacktestExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictorBacktestExportJobRequest, Members: &mCreatePredictorBacktestExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorBacktestExportJobRequest})
+var sCreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName})
+var sCreatePredictorBacktestExportJobRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorBacktestExportJobRequest_PredictorArn})
+var sCreatePredictorBacktestExportJobRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorBacktestExportJobRequest_Destination})
+var sCreatePredictorBacktestExportJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreatePredictorBacktestExportJobRequest_Tags})
+var sCreatePredictorBacktestExportJobRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorBacktestExportJobRequest_Format})
+var sCreatePredictorBacktestExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictorBacktestExportJobResponse, Members: &mCreatePredictorBacktestExportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorBacktestExportJobResponse})
+var sCreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn})
+var sCreatePredictorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictorRequest, Members: &mCreatePredictorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest})
+var sCreatePredictorRequest_PredictorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorRequest_PredictorName})
+var sCreatePredictorRequest_AlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorRequest_AlgorithmArn})
+var sCreatePredictorRequest_ForecastHorizon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastHorizon", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreatePredictorRequest_ForecastHorizon})
+var sCreatePredictorRequest_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eCreatePredictorRequest_ForecastTypes})
+var sCreatePredictorRequest_PerformAutoML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformAutoML", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreatePredictorRequest_PerformAutoML})
+var sCreatePredictorRequest_AutoMLOverrideStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMLOverrideStrategy", ID: &iAutoMLOverrideStrategy, Members: &mAutoMLOverrideStrategy, Type: smithy.ShapeTypeEnum, Ext: &eCreatePredictorRequest_AutoMLOverrideStrategy})
+var sCreatePredictorRequest_PerformHPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformHPO", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreatePredictorRequest_PerformHPO})
+var sCreatePredictorRequest_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingParameters", ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap, Ext: &eCreatePredictorRequest_TrainingParameters})
+var sCreatePredictorRequest_EvaluationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationParameters", ID: &iEvaluationParameters, Members: &mEvaluationParameters, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest_EvaluationParameters})
+var sCreatePredictorRequest_HPOConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HPOConfig", ID: &iHyperParameterTuningJobConfig, Members: &mHyperParameterTuningJobConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest_HPOConfig})
+var sCreatePredictorRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest_InputDataConfig})
+var sCreatePredictorRequest_FeaturizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeaturizationConfig", ID: &iFeaturizationConfig, Members: &mFeaturizationConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest_FeaturizationConfig})
+var sCreatePredictorRequest_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorRequest_EncryptionConfig})
+var sCreatePredictorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreatePredictorRequest_Tags})
+var sCreatePredictorRequest_OptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizationMetric", ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eCreatePredictorRequest_OptimizationMetric})
+var sCreatePredictorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePredictorResponse, Members: &mCreatePredictorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePredictorResponse})
+var sCreatePredictorResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreatePredictorResponse_PredictorArn})
+var sCreateWhatIfAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfAnalysisRequest, Members: &mCreateWhatIfAnalysisRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfAnalysisRequest})
+var sCreateWhatIfAnalysisRequest_WhatIfAnalysisName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfAnalysisRequest_WhatIfAnalysisName})
+var sCreateWhatIfAnalysisRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfAnalysisRequest_ForecastArn})
+var sCreateWhatIfAnalysisRequest_TimeSeriesSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesSelector", ID: &iTimeSeriesSelector, Members: &mTimeSeriesSelector, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfAnalysisRequest_TimeSeriesSelector})
+var sCreateWhatIfAnalysisRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateWhatIfAnalysisRequest_Tags})
+var sCreateWhatIfAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfAnalysisResponse, Members: &mCreateWhatIfAnalysisResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfAnalysisResponse})
+var sCreateWhatIfAnalysisResponse_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfAnalysisResponse_WhatIfAnalysisArn})
+var sCreateWhatIfForecastExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecastExportRequest, Members: &mCreateWhatIfForecastExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastExportRequest})
+var sCreateWhatIfForecastExportRequest_WhatIfForecastExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastExportRequest_WhatIfForecastExportName})
+var sCreateWhatIfForecastExportRequest_WhatIfForecastArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArns", ID: &i_WhatIfForecastArnListForExport, Members: &m_WhatIfForecastArnListForExport, Type: smithy.ShapeTypeList, Ext: &eCreateWhatIfForecastExportRequest_WhatIfForecastArns})
+var sCreateWhatIfForecastExportRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastExportRequest_Destination})
+var sCreateWhatIfForecastExportRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateWhatIfForecastExportRequest_Tags})
+var sCreateWhatIfForecastExportRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastExportRequest_Format})
+var sCreateWhatIfForecastExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecastExportResponse, Members: &mCreateWhatIfForecastExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastExportResponse})
+var sCreateWhatIfForecastExportResponse_WhatIfForecastExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastExportResponse_WhatIfForecastExportArn})
+var sCreateWhatIfForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecastRequest, Members: &mCreateWhatIfForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastRequest})
+var sCreateWhatIfForecastRequest_WhatIfForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastRequest_WhatIfForecastName})
+var sCreateWhatIfForecastRequest_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastRequest_WhatIfAnalysisArn})
+var sCreateWhatIfForecastRequest_TimeSeriesTransformations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesTransformations", ID: &i_TimeSeriesTransformations, Members: &m_TimeSeriesTransformations, Type: smithy.ShapeTypeList, Ext: &eCreateWhatIfForecastRequest_TimeSeriesTransformations})
+var sCreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesReplacementsDataSource", ID: &iTimeSeriesReplacementsDataSource, Members: &mTimeSeriesReplacementsDataSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource})
+var sCreateWhatIfForecastRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateWhatIfForecastRequest_Tags})
+var sCreateWhatIfForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatIfForecastResponse, Members: &mCreateWhatIfForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWhatIfForecastResponse})
+var sCreateWhatIfForecastResponse_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eCreateWhatIfForecastResponse_WhatIfForecastArn})
+var sDeleteDatasetGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetGroupRequest, Members: &mDeleteDatasetGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetGroupRequest})
+var sDeleteDatasetGroupRequest_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetGroupRequest_DatasetGroupArn})
+var sDeleteDatasetImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetImportJobRequest, Members: &mDeleteDatasetImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetImportJobRequest})
+var sDeleteDatasetImportJobRequest_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetImportJobRequest_DatasetImportJobArn})
+var sDeleteDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetRequest, Members: &mDeleteDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetRequest})
+var sDeleteDatasetRequest_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetRequest_DatasetArn})
+var sDeleteExplainabilityExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExplainabilityExportRequest, Members: &mDeleteExplainabilityExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExplainabilityExportRequest})
+var sDeleteExplainabilityExportRequest_ExplainabilityExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteExplainabilityExportRequest_ExplainabilityExportArn})
+var sDeleteExplainabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExplainabilityRequest, Members: &mDeleteExplainabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExplainabilityRequest})
+var sDeleteExplainabilityRequest_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteExplainabilityRequest_ExplainabilityArn})
+var sDeleteForecastExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteForecastExportJobRequest, Members: &mDeleteForecastExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteForecastExportJobRequest})
+var sDeleteForecastExportJobRequest_ForecastExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteForecastExportJobRequest_ForecastExportJobArn})
+var sDeleteForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteForecastRequest, Members: &mDeleteForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteForecastRequest})
+var sDeleteForecastRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteForecastRequest_ForecastArn})
+var sDeleteMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorRequest, Members: &mDeleteMonitorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorRequest})
+var sDeleteMonitorRequest_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteMonitorRequest_MonitorArn})
+var sDeletePredictorBacktestExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePredictorBacktestExportJobRequest, Members: &mDeletePredictorBacktestExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePredictorBacktestExportJobRequest})
+var sDeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn})
+var sDeletePredictorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePredictorRequest, Members: &mDeletePredictorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePredictorRequest})
+var sDeletePredictorRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeletePredictorRequest_PredictorArn})
+var sDeleteResourceTreeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceTreeRequest, Members: &mDeleteResourceTreeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceTreeRequest})
+var sDeleteResourceTreeRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceTreeRequest_ResourceArn})
+var sDeleteWhatIfAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfAnalysisRequest, Members: &mDeleteWhatIfAnalysisRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWhatIfAnalysisRequest})
+var sDeleteWhatIfAnalysisRequest_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteWhatIfAnalysisRequest_WhatIfAnalysisArn})
+var sDeleteWhatIfForecastExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfForecastExportRequest, Members: &mDeleteWhatIfForecastExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWhatIfForecastExportRequest})
+var sDeleteWhatIfForecastExportRequest_WhatIfForecastExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDeleteWhatIfForecastExportRequest_WhatIfForecastExportArn})
+var sDeleteWhatIfForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatIfForecastRequest, Members: &mDeleteWhatIfForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWhatIfForecastRequest})
+var sDeleteWhatIfForecastRequest_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDeleteWhatIfForecastRequest_WhatIfForecastArn})
+var sDescribeAutoPredictorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoPredictorRequest, Members: &mDescribeAutoPredictorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorRequest})
+var sDescribeAutoPredictorRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorRequest_PredictorArn})
+var sDescribeAutoPredictorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoPredictorResponse, Members: &mDescribeAutoPredictorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse})
+var sDescribeAutoPredictorResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorResponse_PredictorArn})
+var sDescribeAutoPredictorResponse_PredictorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorResponse_PredictorName})
+var sDescribeAutoPredictorResponse_ForecastHorizon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastHorizon", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAutoPredictorResponse_ForecastHorizon})
+var sDescribeAutoPredictorResponse_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeAutoPredictorResponse_ForecastTypes})
+var sDescribeAutoPredictorResponse_ForecastFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastFrequency", ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorResponse_ForecastFrequency})
+var sDescribeAutoPredictorResponse_ForecastDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastDimensions", ID: &i_ForecastDimensions, Members: &m_ForecastDimensions, Type: smithy.ShapeTypeList, Ext: &eDescribeAutoPredictorResponse_ForecastDimensions})
+var sDescribeAutoPredictorResponse_DatasetImportJobArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeAutoPredictorResponse_DatasetImportJobArns})
+var sDescribeAutoPredictorResponse_DataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataConfig", ID: &iDataConfig, Members: &mDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_DataConfig})
+var sDescribeAutoPredictorResponse_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_EncryptionConfig})
+var sDescribeAutoPredictorResponse_ReferencePredictorSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferencePredictorSummary", ID: &iReferencePredictorSummary, Members: &mReferencePredictorSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_ReferencePredictorSummary})
+var sDescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeAutoPredictorResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorResponse_Status})
+var sDescribeAutoPredictorResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeAutoPredictorResponse_Message})
+var sDescribeAutoPredictorResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAutoPredictorResponse_CreationTime})
+var sDescribeAutoPredictorResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAutoPredictorResponse_LastModificationTime})
+var sDescribeAutoPredictorResponse_OptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizationMetric", ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAutoPredictorResponse_OptimizationMetric})
+var sDescribeAutoPredictorResponse_ExplainabilityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityInfo", ID: &iExplainabilityInfo, Members: &mExplainabilityInfo, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_ExplainabilityInfo})
+var sDescribeAutoPredictorResponse_MonitorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorInfo", ID: &iMonitorInfo, Members: &mMonitorInfo, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_MonitorInfo})
+var sDescribeAutoPredictorResponse_TimeAlignmentBoundary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeAlignmentBoundary", ID: &iTimeAlignmentBoundary, Members: &mTimeAlignmentBoundary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAutoPredictorResponse_TimeAlignmentBoundary})
+var sDescribeDatasetGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetGroupRequest, Members: &mDescribeDatasetGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetGroupRequest})
+var sDescribeDatasetGroupRequest_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetGroupRequest_DatasetGroupArn})
+var sDescribeDatasetGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetGroupResponse, Members: &mDescribeDatasetGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetGroupResponse})
+var sDescribeDatasetGroupResponse_DatasetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetGroupResponse_DatasetGroupName})
+var sDescribeDatasetGroupResponse_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetGroupResponse_DatasetGroupArn})
+var sDescribeDatasetGroupResponse_DatasetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeDatasetGroupResponse_DatasetArns})
+var sDescribeDatasetGroupResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eDescribeDatasetGroupResponse_Domain})
+var sDescribeDatasetGroupResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetGroupResponse_Status})
+var sDescribeDatasetGroupResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetGroupResponse_CreationTime})
+var sDescribeDatasetGroupResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetGroupResponse_LastModificationTime})
+var sDescribeDatasetImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetImportJobRequest, Members: &mDescribeDatasetImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetImportJobRequest})
+var sDescribeDatasetImportJobRequest_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobRequest_DatasetImportJobArn})
+var sDescribeDatasetImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetImportJobResponse, Members: &mDescribeDatasetImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetImportJobResponse})
+var sDescribeDatasetImportJobResponse_DatasetImportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_DatasetImportJobName})
+var sDescribeDatasetImportJobResponse_DatasetImportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_DatasetImportJobArn})
+var sDescribeDatasetImportJobResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_DatasetArn})
+var sDescribeDatasetImportJobResponse_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormat", ID: &i_TimestampFormat, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_TimestampFormat})
+var sDescribeDatasetImportJobResponse_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &i_TimeZone, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_TimeZone})
+var sDescribeDatasetImportJobResponse_UseGeolocationForTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseGeolocationForTimeZone", ID: &i_UseGeolocationForTimeZone, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDatasetImportJobResponse_UseGeolocationForTimeZone})
+var sDescribeDatasetImportJobResponse_GeolocationFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeolocationFormat", ID: &i_GeolocationFormat, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_GeolocationFormat})
+var sDescribeDatasetImportJobResponse_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetImportJobResponse_DataSource})
+var sDescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeDatasetImportJobResponse_FieldStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldStatistics", ID: &i_FieldStatistics, Members: &m_FieldStatistics, Type: smithy.ShapeTypeMap, Ext: &eDescribeDatasetImportJobResponse_FieldStatistics})
+var sDescribeDatasetImportJobResponse_DataSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSize", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDescribeDatasetImportJobResponse_DataSize})
+var sDescribeDatasetImportJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_Status})
+var sDescribeDatasetImportJobResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_Message})
+var sDescribeDatasetImportJobResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetImportJobResponse_CreationTime})
+var sDescribeDatasetImportJobResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetImportJobResponse_LastModificationTime})
+var sDescribeDatasetImportJobResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetImportJobResponse_Format})
+var sDescribeDatasetImportJobResponse_ImportMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportMode", ID: &iImportMode, Members: &mImportMode, Type: smithy.ShapeTypeEnum, Ext: &eDescribeDatasetImportJobResponse_ImportMode})
+var sDescribeDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetRequest, Members: &mDescribeDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetRequest})
+var sDescribeDatasetRequest_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetRequest_DatasetArn})
+var sDescribeDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetResponse, Members: &mDescribeDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetResponse})
+var sDescribeDatasetResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetResponse_DatasetArn})
+var sDescribeDatasetResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetResponse_DatasetName})
+var sDescribeDatasetResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum, Ext: &eDescribeDatasetResponse_Domain})
+var sDescribeDatasetResponse_DatasetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetType", ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeDatasetResponse_DatasetType})
+var sDescribeDatasetResponse_DataFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFrequency", ID: &i_Frequency, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetResponse_DataFrequency})
+var sDescribeDatasetResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetResponse_Schema})
+var sDescribeDatasetResponse_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetResponse_EncryptionConfig})
+var sDescribeDatasetResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetResponse_Status})
+var sDescribeDatasetResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetResponse_CreationTime})
+var sDescribeDatasetResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDatasetResponse_LastModificationTime})
+var sDescribeExplainabilityExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainabilityExportRequest, Members: &mDescribeExplainabilityExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityExportRequest})
+var sDescribeExplainabilityExportRequest_ExplainabilityExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportRequest_ExplainabilityExportArn})
+var sDescribeExplainabilityExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainabilityExportResponse, Members: &mDescribeExplainabilityExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityExportResponse})
+var sDescribeExplainabilityExportResponse_ExplainabilityExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_ExplainabilityExportArn})
+var sDescribeExplainabilityExportResponse_ExplainabilityExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_ExplainabilityExportName})
+var sDescribeExplainabilityExportResponse_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_ExplainabilityArn})
+var sDescribeExplainabilityExportResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityExportResponse_Destination})
+var sDescribeExplainabilityExportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_Message})
+var sDescribeExplainabilityExportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_Status})
+var sDescribeExplainabilityExportResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExplainabilityExportResponse_CreationTime})
+var sDescribeExplainabilityExportResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExplainabilityExportResponse_LastModificationTime})
+var sDescribeExplainabilityExportResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityExportResponse_Format})
+var sDescribeExplainabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainabilityRequest, Members: &mDescribeExplainabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityRequest})
+var sDescribeExplainabilityRequest_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityRequest_ExplainabilityArn})
+var sDescribeExplainabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExplainabilityResponse, Members: &mDescribeExplainabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityResponse})
+var sDescribeExplainabilityResponse_ExplainabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_ExplainabilityArn})
+var sDescribeExplainabilityResponse_ExplainabilityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_ExplainabilityName})
+var sDescribeExplainabilityResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_ResourceArn})
+var sDescribeExplainabilityResponse_ExplainabilityConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityConfig", ID: &iExplainabilityConfig, Members: &mExplainabilityConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityResponse_ExplainabilityConfig})
+var sDescribeExplainabilityResponse_EnableVisualization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableVisualization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeExplainabilityResponse_EnableVisualization})
+var sDescribeExplainabilityResponse_DataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityResponse_DataSource})
+var sDescribeExplainabilityResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExplainabilityResponse_Schema})
+var sDescribeExplainabilityResponse_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDateTime", ID: &i_LocalDateTime, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_StartDateTime})
+var sDescribeExplainabilityResponse_EndDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDateTime", ID: &i_LocalDateTime, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_EndDateTime})
+var sDescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeExplainabilityResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_Message})
+var sDescribeExplainabilityResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeExplainabilityResponse_Status})
+var sDescribeExplainabilityResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExplainabilityResponse_CreationTime})
+var sDescribeExplainabilityResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExplainabilityResponse_LastModificationTime})
+var sDescribeForecastExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecastExportJobRequest, Members: &mDescribeForecastExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastExportJobRequest})
+var sDescribeForecastExportJobRequest_ForecastExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobRequest_ForecastExportJobArn})
+var sDescribeForecastExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecastExportJobResponse, Members: &mDescribeForecastExportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastExportJobResponse})
+var sDescribeForecastExportJobResponse_ForecastExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_ForecastExportJobArn})
+var sDescribeForecastExportJobResponse_ForecastExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_ForecastExportJobName})
+var sDescribeForecastExportJobResponse_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_ForecastArn})
+var sDescribeForecastExportJobResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastExportJobResponse_Destination})
+var sDescribeForecastExportJobResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_Message})
+var sDescribeForecastExportJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_Status})
+var sDescribeForecastExportJobResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeForecastExportJobResponse_CreationTime})
+var sDescribeForecastExportJobResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeForecastExportJobResponse_LastModificationTime})
+var sDescribeForecastExportJobResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastExportJobResponse_Format})
+var sDescribeForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecastRequest, Members: &mDescribeForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastRequest})
+var sDescribeForecastRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastRequest_ForecastArn})
+var sDescribeForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeForecastResponse, Members: &mDescribeForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastResponse})
+var sDescribeForecastResponse_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_ForecastArn})
+var sDescribeForecastResponse_ForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_ForecastName})
+var sDescribeForecastResponse_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeForecastResponse_ForecastTypes})
+var sDescribeForecastResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_PredictorArn})
+var sDescribeForecastResponse_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_DatasetGroupArn})
+var sDescribeForecastResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeForecastResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeForecastResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_Status})
+var sDescribeForecastResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeForecastResponse_Message})
+var sDescribeForecastResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeForecastResponse_CreationTime})
+var sDescribeForecastResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeForecastResponse_LastModificationTime})
+var sDescribeForecastResponse_TimeSeriesSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesSelector", ID: &iTimeSeriesSelector, Members: &mTimeSeriesSelector, Type: smithy.ShapeTypeStructure, Ext: &eDescribeForecastResponse_TimeSeriesSelector})
+var sDescribeMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMonitorRequest, Members: &mDescribeMonitorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMonitorRequest})
+var sDescribeMonitorRequest_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorRequest_MonitorArn})
+var sDescribeMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMonitorResponse, Members: &mDescribeMonitorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMonitorResponse})
+var sDescribeMonitorResponse_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_MonitorName})
+var sDescribeMonitorResponse_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_MonitorArn})
+var sDescribeMonitorResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_ResourceArn})
+var sDescribeMonitorResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_Status})
+var sDescribeMonitorResponse_LastEvaluationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeMonitorResponse_LastEvaluationTime})
+var sDescribeMonitorResponse_LastEvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluationState", ID: &i_EvaluationState, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_LastEvaluationState})
+var sDescribeMonitorResponse_Baseline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Baseline", ID: &iBaseline, Members: &mBaseline, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMonitorResponse_Baseline})
+var sDescribeMonitorResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeMonitorResponse_Message})
+var sDescribeMonitorResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeMonitorResponse_CreationTime})
+var sDescribeMonitorResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeMonitorResponse_LastModificationTime})
+var sDescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedEvaluationTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes})
+var sDescribePredictorBacktestExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictorBacktestExportJobRequest, Members: &mDescribePredictorBacktestExportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorBacktestExportJobRequest})
+var sDescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn})
+var sDescribePredictorBacktestExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictorBacktestExportJobResponse, Members: &mDescribePredictorBacktestExportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorBacktestExportJobResponse})
+var sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn})
+var sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName})
+var sDescribePredictorBacktestExportJobResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_PredictorArn})
+var sDescribePredictorBacktestExportJobResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorBacktestExportJobResponse_Destination})
+var sDescribePredictorBacktestExportJobResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_Message})
+var sDescribePredictorBacktestExportJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_Status})
+var sDescribePredictorBacktestExportJobResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePredictorBacktestExportJobResponse_CreationTime})
+var sDescribePredictorBacktestExportJobResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePredictorBacktestExportJobResponse_LastModificationTime})
+var sDescribePredictorBacktestExportJobResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorBacktestExportJobResponse_Format})
+var sDescribePredictorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictorRequest, Members: &mDescribePredictorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorRequest})
+var sDescribePredictorRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorRequest_PredictorArn})
+var sDescribePredictorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePredictorResponse, Members: &mDescribePredictorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse})
+var sDescribePredictorResponse_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorResponse_PredictorArn})
+var sDescribePredictorResponse_PredictorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorResponse_PredictorName})
+var sDescribePredictorResponse_AlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorResponse_AlgorithmArn})
+var sDescribePredictorResponse_AutoMLAlgorithmArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMLAlgorithmArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribePredictorResponse_AutoMLAlgorithmArns})
+var sDescribePredictorResponse_ForecastHorizon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastHorizon", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDescribePredictorResponse_ForecastHorizon})
+var sDescribePredictorResponse_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eDescribePredictorResponse_ForecastTypes})
+var sDescribePredictorResponse_PerformAutoML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformAutoML", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribePredictorResponse_PerformAutoML})
+var sDescribePredictorResponse_AutoMLOverrideStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMLOverrideStrategy", ID: &iAutoMLOverrideStrategy, Members: &mAutoMLOverrideStrategy, Type: smithy.ShapeTypeEnum, Ext: &eDescribePredictorResponse_AutoMLOverrideStrategy})
+var sDescribePredictorResponse_PerformHPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformHPO", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribePredictorResponse_PerformHPO})
+var sDescribePredictorResponse_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingParameters", ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap, Ext: &eDescribePredictorResponse_TrainingParameters})
+var sDescribePredictorResponse_EvaluationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationParameters", ID: &iEvaluationParameters, Members: &mEvaluationParameters, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_EvaluationParameters})
+var sDescribePredictorResponse_HPOConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HPOConfig", ID: &iHyperParameterTuningJobConfig, Members: &mHyperParameterTuningJobConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_HPOConfig})
+var sDescribePredictorResponse_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_InputDataConfig})
+var sDescribePredictorResponse_FeaturizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeaturizationConfig", ID: &iFeaturizationConfig, Members: &mFeaturizationConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_FeaturizationConfig})
+var sDescribePredictorResponse_EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_EncryptionConfig})
+var sDescribePredictorResponse_PredictorExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorExecutionDetails", ID: &iPredictorExecutionDetails, Members: &mPredictorExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &eDescribePredictorResponse_PredictorExecutionDetails})
+var sDescribePredictorResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribePredictorResponse_EstimatedTimeRemainingInMinutes})
+var sDescribePredictorResponse_IsAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsAutoPredictor", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribePredictorResponse_IsAutoPredictor})
+var sDescribePredictorResponse_DatasetImportJobArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDescribePredictorResponse_DatasetImportJobArns})
+var sDescribePredictorResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorResponse_Status})
+var sDescribePredictorResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribePredictorResponse_Message})
+var sDescribePredictorResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePredictorResponse_CreationTime})
+var sDescribePredictorResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribePredictorResponse_LastModificationTime})
+var sDescribePredictorResponse_OptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizationMetric", ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eDescribePredictorResponse_OptimizationMetric})
+var sDescribeWhatIfAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfAnalysisRequest, Members: &mDescribeWhatIfAnalysisRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfAnalysisRequest})
+var sDescribeWhatIfAnalysisRequest_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisRequest_WhatIfAnalysisArn})
+var sDescribeWhatIfAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfAnalysisResponse, Members: &mDescribeWhatIfAnalysisResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfAnalysisResponse})
+var sDescribeWhatIfAnalysisResponse_WhatIfAnalysisName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisResponse_WhatIfAnalysisName})
+var sDescribeWhatIfAnalysisResponse_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisResponse_WhatIfAnalysisArn})
+var sDescribeWhatIfAnalysisResponse_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisResponse_ForecastArn})
+var sDescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeWhatIfAnalysisResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisResponse_Status})
+var sDescribeWhatIfAnalysisResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfAnalysisResponse_Message})
+var sDescribeWhatIfAnalysisResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfAnalysisResponse_CreationTime})
+var sDescribeWhatIfAnalysisResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfAnalysisResponse_LastModificationTime})
+var sDescribeWhatIfAnalysisResponse_TimeSeriesSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesSelector", ID: &iTimeSeriesSelector, Members: &mTimeSeriesSelector, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfAnalysisResponse_TimeSeriesSelector})
+var sDescribeWhatIfForecastExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecastExportRequest, Members: &mDescribeWhatIfForecastExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastExportRequest})
+var sDescribeWhatIfForecastExportRequest_WhatIfForecastExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportRequest_WhatIfForecastExportArn})
+var sDescribeWhatIfForecastExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecastExportResponse, Members: &mDescribeWhatIfForecastExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastExportResponse})
+var sDescribeWhatIfForecastExportResponse_WhatIfForecastExportArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportResponse_WhatIfForecastExportArn})
+var sDescribeWhatIfForecastExportResponse_WhatIfForecastExportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExportName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportResponse_WhatIfForecastExportName})
+var sDescribeWhatIfForecastExportResponse_WhatIfForecastArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArns", ID: &i_LongArnList, Members: &m_LongArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeWhatIfForecastExportResponse_WhatIfForecastArns})
+var sDescribeWhatIfForecastExportResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDataDestination, Members: &mDataDestination, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastExportResponse_Destination})
+var sDescribeWhatIfForecastExportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportResponse_Message})
+var sDescribeWhatIfForecastExportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportResponse_Status})
+var sDescribeWhatIfForecastExportResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfForecastExportResponse_CreationTime})
+var sDescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeWhatIfForecastExportResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfForecastExportResponse_LastModificationTime})
+var sDescribeWhatIfForecastExportResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_Format, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastExportResponse_Format})
+var sDescribeWhatIfForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecastRequest, Members: &mDescribeWhatIfForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastRequest})
+var sDescribeWhatIfForecastRequest_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastRequest_WhatIfForecastArn})
+var sDescribeWhatIfForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWhatIfForecastResponse, Members: &mDescribeWhatIfForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastResponse})
+var sDescribeWhatIfForecastResponse_WhatIfForecastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastResponse_WhatIfForecastName})
+var sDescribeWhatIfForecastResponse_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastResponse_WhatIfForecastArn})
+var sDescribeWhatIfForecastResponse_WhatIfAnalysisArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalysisArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastResponse_WhatIfAnalysisArn})
+var sDescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedTimeRemainingInMinutes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes})
+var sDescribeWhatIfForecastResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastResponse_Status})
+var sDescribeWhatIfForecastResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeWhatIfForecastResponse_Message})
+var sDescribeWhatIfForecastResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfForecastResponse_CreationTime})
+var sDescribeWhatIfForecastResponse_LastModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeWhatIfForecastResponse_LastModificationTime})
+var sDescribeWhatIfForecastResponse_TimeSeriesTransformations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesTransformations", ID: &i_TimeSeriesTransformations, Members: &m_TimeSeriesTransformations, Type: smithy.ShapeTypeList, Ext: &eDescribeWhatIfForecastResponse_TimeSeriesTransformations})
+var sDescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeSeriesReplacementsDataSource", ID: &iTimeSeriesReplacementsDataSource, Members: &mTimeSeriesReplacementsDataSource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource})
+var sDescribeWhatIfForecastResponse_ForecastTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastTypes", ID: &i_ForecastTypes, Members: &m_ForecastTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeWhatIfForecastResponse_ForecastTypes})
+var sGetAccuracyMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccuracyMetricsRequest, Members: &mGetAccuracyMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccuracyMetricsRequest})
+var sGetAccuracyMetricsRequest_PredictorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetAccuracyMetricsRequest_PredictorArn})
+var sGetAccuracyMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccuracyMetricsResponse, Members: &mGetAccuracyMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccuracyMetricsResponse})
+var sGetAccuracyMetricsResponse_PredictorEvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorEvaluationResults", ID: &i_PredictorEvaluationResults, Members: &m_PredictorEvaluationResults, Type: smithy.ShapeTypeList, Ext: &eGetAccuracyMetricsResponse_PredictorEvaluationResults})
+var sGetAccuracyMetricsResponse_IsAutoPredictor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsAutoPredictor", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetAccuracyMetricsResponse_IsAutoPredictor})
+var sGetAccuracyMetricsResponse_AutoMLOverrideStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMLOverrideStrategy", ID: &iAutoMLOverrideStrategy, Members: &mAutoMLOverrideStrategy, Type: smithy.ShapeTypeEnum, Ext: &eGetAccuracyMetricsResponse_AutoMLOverrideStrategy})
+var sGetAccuracyMetricsResponse_OptimizationMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizationMetric", ID: &iOptimizationMetric, Members: &mOptimizationMetric, Type: smithy.ShapeTypeEnum, Ext: &eGetAccuracyMetricsResponse_OptimizationMetric})
+var sListDatasetGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetGroupsRequest, Members: &mListDatasetGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetGroupsRequest})
+var sListDatasetGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetGroupsRequest_NextToken})
+var sListDatasetGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListDatasetGroupsRequest_MaxResults})
+var sListDatasetGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetGroupsResponse, Members: &mListDatasetGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetGroupsResponse})
+var sListDatasetGroupsResponse_DatasetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroups", ID: &i_DatasetGroups, Members: &m_DatasetGroups, Type: smithy.ShapeTypeList, Ext: &eListDatasetGroupsResponse_DatasetGroups})
+var sListDatasetGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetGroupsResponse_NextToken})
+var sListDatasetImportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetImportJobsRequest, Members: &mListDatasetImportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetImportJobsRequest})
+var sListDatasetImportJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetImportJobsRequest_NextToken})
+var sListDatasetImportJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListDatasetImportJobsRequest_MaxResults})
+var sListDatasetImportJobsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListDatasetImportJobsRequest_Filters})
+var sListDatasetImportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetImportJobsResponse, Members: &mListDatasetImportJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetImportJobsResponse})
+var sListDatasetImportJobsResponse_DatasetImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetImportJobs", ID: &i_DatasetImportJobs, Members: &m_DatasetImportJobs, Type: smithy.ShapeTypeList, Ext: &eListDatasetImportJobsResponse_DatasetImportJobs})
+var sListDatasetImportJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetImportJobsResponse_NextToken})
+var sListDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsRequest, Members: &mListDatasetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetsRequest})
+var sListDatasetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetsRequest_NextToken})
+var sListDatasetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListDatasetsRequest_MaxResults})
+var sListDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsResponse, Members: &mListDatasetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetsResponse})
+var sListDatasetsResponse_Datasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datasets", ID: &i_Datasets, Members: &m_Datasets, Type: smithy.ShapeTypeList, Ext: &eListDatasetsResponse_Datasets})
+var sListDatasetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDatasetsResponse_NextToken})
+var sListExplainabilitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilitiesRequest, Members: &mListExplainabilitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExplainabilitiesRequest})
+var sListExplainabilitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExplainabilitiesRequest_NextToken})
+var sListExplainabilitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListExplainabilitiesRequest_MaxResults})
+var sListExplainabilitiesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListExplainabilitiesRequest_Filters})
+var sListExplainabilitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilitiesResponse, Members: &mListExplainabilitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExplainabilitiesResponse})
+var sListExplainabilitiesResponse_Explainabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Explainabilities", ID: &i_Explainabilities, Members: &m_Explainabilities, Type: smithy.ShapeTypeList, Ext: &eListExplainabilitiesResponse_Explainabilities})
+var sListExplainabilitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExplainabilitiesResponse_NextToken})
+var sListExplainabilityExportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilityExportsRequest, Members: &mListExplainabilityExportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExplainabilityExportsRequest})
+var sListExplainabilityExportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExplainabilityExportsRequest_NextToken})
+var sListExplainabilityExportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListExplainabilityExportsRequest_MaxResults})
+var sListExplainabilityExportsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListExplainabilityExportsRequest_Filters})
+var sListExplainabilityExportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExplainabilityExportsResponse, Members: &mListExplainabilityExportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExplainabilityExportsResponse})
+var sListExplainabilityExportsResponse_ExplainabilityExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplainabilityExports", ID: &i_ExplainabilityExports, Members: &m_ExplainabilityExports, Type: smithy.ShapeTypeList, Ext: &eListExplainabilityExportsResponse_ExplainabilityExports})
+var sListExplainabilityExportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExplainabilityExportsResponse_NextToken})
+var sListForecastExportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecastExportJobsRequest, Members: &mListForecastExportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListForecastExportJobsRequest})
+var sListForecastExportJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListForecastExportJobsRequest_NextToken})
+var sListForecastExportJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListForecastExportJobsRequest_MaxResults})
+var sListForecastExportJobsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListForecastExportJobsRequest_Filters})
+var sListForecastExportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecastExportJobsResponse, Members: &mListForecastExportJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListForecastExportJobsResponse})
+var sListForecastExportJobsResponse_ForecastExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastExportJobs", ID: &i_ForecastExportJobs, Members: &m_ForecastExportJobs, Type: smithy.ShapeTypeList, Ext: &eListForecastExportJobsResponse_ForecastExportJobs})
+var sListForecastExportJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListForecastExportJobsResponse_NextToken})
+var sListForecastsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecastsRequest, Members: &mListForecastsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListForecastsRequest})
+var sListForecastsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListForecastsRequest_NextToken})
+var sListForecastsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListForecastsRequest_MaxResults})
+var sListForecastsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListForecastsRequest_Filters})
+var sListForecastsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForecastsResponse, Members: &mListForecastsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListForecastsResponse})
+var sListForecastsResponse_Forecasts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forecasts", ID: &i_Forecasts, Members: &m_Forecasts, Type: smithy.ShapeTypeList, Ext: &eListForecastsResponse_Forecasts})
+var sListForecastsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListForecastsResponse_NextToken})
+var sListMonitorEvaluationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorEvaluationsRequest, Members: &mListMonitorEvaluationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorEvaluationsRequest})
+var sListMonitorEvaluationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMonitorEvaluationsRequest_NextToken})
+var sListMonitorEvaluationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorEvaluationsRequest_MaxResults})
+var sListMonitorEvaluationsRequest_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListMonitorEvaluationsRequest_MonitorArn})
+var sListMonitorEvaluationsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListMonitorEvaluationsRequest_Filters})
+var sListMonitorEvaluationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorEvaluationsResponse, Members: &mListMonitorEvaluationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorEvaluationsResponse})
+var sListMonitorEvaluationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMonitorEvaluationsResponse_NextToken})
+var sListMonitorEvaluationsResponse_PredictorMonitorEvaluations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorMonitorEvaluations", ID: &i_PredictorMonitorEvaluations, Members: &m_PredictorMonitorEvaluations, Type: smithy.ShapeTypeList, Ext: &eListMonitorEvaluationsResponse_PredictorMonitorEvaluations})
+var sListMonitorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsRequest, Members: &mListMonitorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsRequest})
+var sListMonitorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMonitorsRequest_NextToken})
+var sListMonitorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorsRequest_MaxResults})
+var sListMonitorsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListMonitorsRequest_Filters})
+var sListMonitorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsResponse, Members: &mListMonitorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsResponse})
+var sListMonitorsResponse_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_Monitors, Members: &m_Monitors, Type: smithy.ShapeTypeList, Ext: &eListMonitorsResponse_Monitors})
+var sListMonitorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMonitorsResponse_NextToken})
+var sListPredictorBacktestExportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictorBacktestExportJobsRequest, Members: &mListPredictorBacktestExportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPredictorBacktestExportJobsRequest})
+var sListPredictorBacktestExportJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPredictorBacktestExportJobsRequest_NextToken})
+var sListPredictorBacktestExportJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPredictorBacktestExportJobsRequest_MaxResults})
+var sListPredictorBacktestExportJobsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListPredictorBacktestExportJobsRequest_Filters})
+var sListPredictorBacktestExportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictorBacktestExportJobsResponse, Members: &mListPredictorBacktestExportJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPredictorBacktestExportJobsResponse})
+var sListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictorBacktestExportJobs", ID: &i_PredictorBacktestExportJobs, Members: &m_PredictorBacktestExportJobs, Type: smithy.ShapeTypeList, Ext: &eListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs})
+var sListPredictorBacktestExportJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPredictorBacktestExportJobsResponse_NextToken})
+var sListPredictorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictorsRequest, Members: &mListPredictorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPredictorsRequest})
+var sListPredictorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPredictorsRequest_NextToken})
+var sListPredictorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPredictorsRequest_MaxResults})
+var sListPredictorsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListPredictorsRequest_Filters})
+var sListPredictorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPredictorsResponse, Members: &mListPredictorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPredictorsResponse})
+var sListPredictorsResponse_Predictors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predictors", ID: &i_Predictors, Members: &m_Predictors, Type: smithy.ShapeTypeList, Ext: &eListPredictorsResponse_Predictors})
+var sListPredictorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPredictorsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListWhatIfAnalysesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfAnalysesRequest, Members: &mListWhatIfAnalysesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfAnalysesRequest})
+var sListWhatIfAnalysesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfAnalysesRequest_NextToken})
+var sListWhatIfAnalysesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWhatIfAnalysesRequest_MaxResults})
+var sListWhatIfAnalysesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListWhatIfAnalysesRequest_Filters})
+var sListWhatIfAnalysesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfAnalysesResponse, Members: &mListWhatIfAnalysesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfAnalysesResponse})
+var sListWhatIfAnalysesResponse_WhatIfAnalyses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfAnalyses", ID: &i_WhatIfAnalyses, Members: &m_WhatIfAnalyses, Type: smithy.ShapeTypeList, Ext: &eListWhatIfAnalysesResponse_WhatIfAnalyses})
+var sListWhatIfAnalysesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfAnalysesResponse_NextToken})
+var sListWhatIfForecastExportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecastExportsRequest, Members: &mListWhatIfForecastExportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfForecastExportsRequest})
+var sListWhatIfForecastExportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfForecastExportsRequest_NextToken})
+var sListWhatIfForecastExportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWhatIfForecastExportsRequest_MaxResults})
+var sListWhatIfForecastExportsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListWhatIfForecastExportsRequest_Filters})
+var sListWhatIfForecastExportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecastExportsResponse, Members: &mListWhatIfForecastExportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfForecastExportsResponse})
+var sListWhatIfForecastExportsResponse_WhatIfForecastExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastExports", ID: &i_WhatIfForecastExports, Members: &m_WhatIfForecastExports, Type: smithy.ShapeTypeList, Ext: &eListWhatIfForecastExportsResponse_WhatIfForecastExports})
+var sListWhatIfForecastExportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfForecastExportsResponse_NextToken})
+var sListWhatIfForecastsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecastsRequest, Members: &mListWhatIfForecastsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfForecastsRequest})
+var sListWhatIfForecastsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfForecastsRequest_NextToken})
+var sListWhatIfForecastsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWhatIfForecastsRequest_MaxResults})
+var sListWhatIfForecastsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListWhatIfForecastsRequest_Filters})
+var sListWhatIfForecastsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatIfForecastsResponse, Members: &mListWhatIfForecastsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWhatIfForecastsResponse})
+var sListWhatIfForecastsResponse_WhatIfForecasts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecasts", ID: &i_WhatIfForecasts, Members: &m_WhatIfForecasts, Type: smithy.ShapeTypeList, Ext: &eListWhatIfForecastsResponse_WhatIfForecasts})
+var sListWhatIfForecastsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWhatIfForecastsResponse_NextToken})
+var sResumeResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeResourceRequest, Members: &mResumeResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eResumeResourceRequest})
+var sResumeResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResumeResourceRequest_ResourceArn})
+var sStopResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopResourceRequest, Members: &mStopResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopResourceRequest})
+var sStopResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStopResourceRequest_ResourceArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateDatasetGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetGroupRequest, Members: &mUpdateDatasetGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDatasetGroupRequest})
+var sUpdateDatasetGroupRequest_DatasetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateDatasetGroupRequest_DatasetGroupArn})
+var sUpdateDatasetGroupRequest_DatasetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateDatasetGroupRequest_DatasetArns})
+var sUpdateDatasetGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDatasetGroupResponse})
+
+var CreateAutoPredictor = &sCreateAutoPredictor
+
+var CreateDataset = &sCreateDataset
+
+var CreateDatasetGroup = &sCreateDatasetGroup
+
+var CreateDatasetImportJob = &sCreateDatasetImportJob
+
+var CreateExplainability = &sCreateExplainability
+
+var CreateExplainabilityExport = &sCreateExplainabilityExport
+
+var CreateForecast = &sCreateForecast
+
+var CreateForecastExportJob = &sCreateForecastExportJob
+
+var CreateMonitor = &sCreateMonitor
+
+var CreatePredictor = &sCreatePredictor
+
+var CreatePredictorBacktestExportJob = &sCreatePredictorBacktestExportJob
+
+var CreateWhatIfAnalysis = &sCreateWhatIfAnalysis
+
+var CreateWhatIfForecast = &sCreateWhatIfForecast
+
+var CreateWhatIfForecastExport = &sCreateWhatIfForecastExport
+
+var DeleteDataset = &sDeleteDataset
+
+var DeleteDatasetGroup = &sDeleteDatasetGroup
+
+var DeleteDatasetImportJob = &sDeleteDatasetImportJob
+
+var DeleteExplainability = &sDeleteExplainability
+
+var DeleteExplainabilityExport = &sDeleteExplainabilityExport
+
+var DeleteForecast = &sDeleteForecast
+
+var DeleteForecastExportJob = &sDeleteForecastExportJob
+
+var DeleteMonitor = &sDeleteMonitor
+
+var DeletePredictor = &sDeletePredictor
+
+var DeletePredictorBacktestExportJob = &sDeletePredictorBacktestExportJob
+
+var DeleteResourceTree = &sDeleteResourceTree
+
+var DeleteWhatIfAnalysis = &sDeleteWhatIfAnalysis
+
+var DeleteWhatIfForecast = &sDeleteWhatIfForecast
+
+var DeleteWhatIfForecastExport = &sDeleteWhatIfForecastExport
+
+var DescribeAutoPredictor = &sDescribeAutoPredictor
+
+var DescribeDataset = &sDescribeDataset
+
+var DescribeDatasetGroup = &sDescribeDatasetGroup
+
+var DescribeDatasetImportJob = &sDescribeDatasetImportJob
+
+var DescribeExplainability = &sDescribeExplainability
+
+var DescribeExplainabilityExport = &sDescribeExplainabilityExport
+
+var DescribeForecast = &sDescribeForecast
+
+var DescribeForecastExportJob = &sDescribeForecastExportJob
+
+var DescribeMonitor = &sDescribeMonitor
+
+var DescribePredictor = &sDescribePredictor
+
+var DescribePredictorBacktestExportJob = &sDescribePredictorBacktestExportJob
+
+var DescribeWhatIfAnalysis = &sDescribeWhatIfAnalysis
+
+var DescribeWhatIfForecast = &sDescribeWhatIfForecast
+
+var DescribeWhatIfForecastExport = &sDescribeWhatIfForecastExport
+
+var GetAccuracyMetrics = &sGetAccuracyMetrics
+
+var ListDatasetGroups = &sListDatasetGroups
+
+var ListDatasetImportJobs = &sListDatasetImportJobs
+
+var ListDatasets = &sListDatasets
+
+var ListExplainabilities = &sListExplainabilities
+
+var ListExplainabilityExports = &sListExplainabilityExports
+
+var ListForecastExportJobs = &sListForecastExportJobs
+
+var ListForecasts = &sListForecasts
+
+var ListMonitorEvaluations = &sListMonitorEvaluations
+
+var ListMonitors = &sListMonitors
+
+var ListPredictorBacktestExportJobs = &sListPredictorBacktestExportJobs
+
+var ListPredictors = &sListPredictors
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWhatIfAnalyses = &sListWhatIfAnalyses
+
+var ListWhatIfForecastExports = &sListWhatIfForecastExports
+
+var ListWhatIfForecasts = &sListWhatIfForecasts
+
+var ResumeResource = &sResumeResource
+
+var StopResource = &sStopResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDatasetGroup = &sUpdateDatasetGroup
+
+var _AmazonForecast = &s_AmazonForecast
+
+var Action = &sAction
+var Action_AttributeName = &sAction_AttributeName
+var Action_Operation = &sAction_Operation
+var Action_Value = &sAction_Value
+
+var AdditionalDataset = &sAdditionalDataset
+var AdditionalDataset_Name = &sAdditionalDataset_Name
+var AdditionalDataset_Configuration = &sAdditionalDataset_Configuration
+
+var _AdditionalDatasets = &s_AdditionalDatasets
+var _AdditionalDatasets_member = &s_AdditionalDatasets_member
+
+var _Arn = &s_Arn
+
+var _ArnList = &s_ArnList
+var _ArnList_member = &s_ArnList_member
+
+var AttributeConfig = &sAttributeConfig
+var AttributeConfig_AttributeName = &sAttributeConfig_AttributeName
+var AttributeConfig_Transformations = &sAttributeConfig_Transformations
+
+var _AttributeConfigs = &s_AttributeConfigs
+var _AttributeConfigs_member = &s_AttributeConfigs_member
+
+var AttributeType = &sAttributeType
+var AttributeType_STRING = &sAttributeType_STRING
+var AttributeType_INTEGER = &sAttributeType_INTEGER
+var AttributeType_FLOAT = &sAttributeType_FLOAT
+var AttributeType_TIMESTAMP = &sAttributeType_TIMESTAMP
+var AttributeType_GEOLOCATION = &sAttributeType_GEOLOCATION
+
+var _AttributeValue = &s_AttributeValue
+
+var AutoMLOverrideStrategy = &sAutoMLOverrideStrategy
+var AutoMLOverrideStrategy_LatencyOptimized = &sAutoMLOverrideStrategy_LatencyOptimized
+var AutoMLOverrideStrategy_AccuracyOptimized = &sAutoMLOverrideStrategy_AccuracyOptimized
+
+var Baseline = &sBaseline
+var Baseline_PredictorBaseline = &sBaseline_PredictorBaseline
+
+var BaselineMetric = &sBaselineMetric
+var BaselineMetric_Name = &sBaselineMetric_Name
+var BaselineMetric_Value = &sBaselineMetric_Value
+
+var _BaselineMetrics = &s_BaselineMetrics
+var _BaselineMetrics_member = &s_BaselineMetrics_member
+
+var _Boolean = &s_Boolean
+
+var CategoricalParameterRange = &sCategoricalParameterRange
+var CategoricalParameterRange_Name = &sCategoricalParameterRange_Name
+var CategoricalParameterRange_Values = &sCategoricalParameterRange_Values
+
+var _CategoricalParameterRanges = &s_CategoricalParameterRanges
+var _CategoricalParameterRanges_member = &s_CategoricalParameterRanges_member
+
+var Condition = &sCondition
+var Condition_EQUALS = &sCondition_EQUALS
+var Condition_NOT_EQUALS = &sCondition_NOT_EQUALS
+var Condition_LESS_THAN = &sCondition_LESS_THAN
+var Condition_GREATER_THAN = &sCondition_GREATER_THAN
+
+var _Configuration = &s_Configuration
+var _Configuration_key = &s_Configuration_key
+var _Configuration_value = &s_Configuration_value
+
+var ContinuousParameterRange = &sContinuousParameterRange
+var ContinuousParameterRange_Name = &sContinuousParameterRange_Name
+var ContinuousParameterRange_MaxValue = &sContinuousParameterRange_MaxValue
+var ContinuousParameterRange_MinValue = &sContinuousParameterRange_MinValue
+var ContinuousParameterRange_ScalingType = &sContinuousParameterRange_ScalingType
+
+var _ContinuousParameterRanges = &s_ContinuousParameterRanges
+var _ContinuousParameterRanges_member = &s_ContinuousParameterRanges_member
+
+var DataConfig = &sDataConfig
+var DataConfig_DatasetGroupArn = &sDataConfig_DatasetGroupArn
+var DataConfig_AttributeConfigs = &sDataConfig_AttributeConfigs
+var DataConfig_AdditionalDatasets = &sDataConfig_AdditionalDatasets
+
+var DataDestination = &sDataDestination
+var DataDestination_S3Config = &sDataDestination_S3Config
+
+var _DatasetGroups = &s_DatasetGroups
+var _DatasetGroups_member = &s_DatasetGroups_member
+
+var DatasetGroupSummary = &sDatasetGroupSummary
+var DatasetGroupSummary_DatasetGroupArn = &sDatasetGroupSummary_DatasetGroupArn
+var DatasetGroupSummary_DatasetGroupName = &sDatasetGroupSummary_DatasetGroupName
+var DatasetGroupSummary_CreationTime = &sDatasetGroupSummary_CreationTime
+var DatasetGroupSummary_LastModificationTime = &sDatasetGroupSummary_LastModificationTime
+
+var _DatasetImportJobs = &s_DatasetImportJobs
+var _DatasetImportJobs_member = &s_DatasetImportJobs_member
+
+var DatasetImportJobSummary = &sDatasetImportJobSummary
+var DatasetImportJobSummary_DatasetImportJobArn = &sDatasetImportJobSummary_DatasetImportJobArn
+var DatasetImportJobSummary_DatasetImportJobName = &sDatasetImportJobSummary_DatasetImportJobName
+var DatasetImportJobSummary_DataSource = &sDatasetImportJobSummary_DataSource
+var DatasetImportJobSummary_Status = &sDatasetImportJobSummary_Status
+var DatasetImportJobSummary_Message = &sDatasetImportJobSummary_Message
+var DatasetImportJobSummary_CreationTime = &sDatasetImportJobSummary_CreationTime
+var DatasetImportJobSummary_LastModificationTime = &sDatasetImportJobSummary_LastModificationTime
+var DatasetImportJobSummary_ImportMode = &sDatasetImportJobSummary_ImportMode
+
+var _Datasets = &s_Datasets
+var _Datasets_member = &s_Datasets_member
+
+var DatasetSummary = &sDatasetSummary
+var DatasetSummary_DatasetArn = &sDatasetSummary_DatasetArn
+var DatasetSummary_DatasetName = &sDatasetSummary_DatasetName
+var DatasetSummary_DatasetType = &sDatasetSummary_DatasetType
+var DatasetSummary_Domain = &sDatasetSummary_Domain
+var DatasetSummary_CreationTime = &sDatasetSummary_CreationTime
+var DatasetSummary_LastModificationTime = &sDatasetSummary_LastModificationTime
+
+var DatasetType = &sDatasetType
+var DatasetType_TARGET_TIME_SERIES = &sDatasetType_TARGET_TIME_SERIES
+var DatasetType_RELATED_TIME_SERIES = &sDatasetType_RELATED_TIME_SERIES
+var DatasetType_ITEM_METADATA = &sDatasetType_ITEM_METADATA
+
+var DataSource = &sDataSource
+var DataSource_S3Config = &sDataSource_S3Config
+
+var _DayOfMonth = &s_DayOfMonth
+
+var DayOfWeek = &sDayOfWeek
+var DayOfWeek_MONDAY = &sDayOfWeek_MONDAY
+var DayOfWeek_TUESDAY = &sDayOfWeek_TUESDAY
+var DayOfWeek_WEDNESDAY = &sDayOfWeek_WEDNESDAY
+var DayOfWeek_THURSDAY = &sDayOfWeek_THURSDAY
+var DayOfWeek_FRIDAY = &sDayOfWeek_FRIDAY
+var DayOfWeek_SATURDAY = &sDayOfWeek_SATURDAY
+var DayOfWeek_SUNDAY = &sDayOfWeek_SUNDAY
+
+var _Detail = &s_Detail
+
+var Domain = &sDomain
+var Domain_RETAIL = &sDomain_RETAIL
+var Domain_CUSTOM = &sDomain_CUSTOM
+var Domain_INVENTORY_PLANNING = &sDomain_INVENTORY_PLANNING
+var Domain_EC2_CAPACITY = &sDomain_EC2_CAPACITY
+var Domain_WORK_FORCE = &sDomain_WORK_FORCE
+var Domain_WEB_TRAFFIC = &sDomain_WEB_TRAFFIC
+var Domain_METRICS = &sDomain_METRICS
+
+var _Double = &s_Double
+
+var EncryptionConfig = &sEncryptionConfig
+var EncryptionConfig_RoleArn = &sEncryptionConfig_RoleArn
+var EncryptionConfig_KMSKeyArn = &sEncryptionConfig_KMSKeyArn
+
+var _ErrorMessage = &s_ErrorMessage
+
+var ErrorMetric = &sErrorMetric
+var ErrorMetric_ForecastType = &sErrorMetric_ForecastType
+var ErrorMetric_WAPE = &sErrorMetric_WAPE
+var ErrorMetric_RMSE = &sErrorMetric_RMSE
+var ErrorMetric_MASE = &sErrorMetric_MASE
+var ErrorMetric_MAPE = &sErrorMetric_MAPE
+
+var _ErrorMetrics = &s_ErrorMetrics
+var _ErrorMetrics_member = &s_ErrorMetrics_member
+
+var EvaluationParameters = &sEvaluationParameters
+var EvaluationParameters_NumberOfBacktestWindows = &sEvaluationParameters_NumberOfBacktestWindows
+var EvaluationParameters_BackTestWindowOffset = &sEvaluationParameters_BackTestWindowOffset
+
+var EvaluationResult = &sEvaluationResult
+var EvaluationResult_AlgorithmArn = &sEvaluationResult_AlgorithmArn
+var EvaluationResult_TestWindows = &sEvaluationResult_TestWindows
+
+var _EvaluationState = &s_EvaluationState
+
+var EvaluationType = &sEvaluationType
+var EvaluationType_SUMMARY = &sEvaluationType_SUMMARY
+var EvaluationType_COMPUTED = &sEvaluationType_COMPUTED
+
+var _Explainabilities = &s_Explainabilities
+var _Explainabilities_member = &s_Explainabilities_member
+
+var ExplainabilityConfig = &sExplainabilityConfig
+var ExplainabilityConfig_TimeSeriesGranularity = &sExplainabilityConfig_TimeSeriesGranularity
+var ExplainabilityConfig_TimePointGranularity = &sExplainabilityConfig_TimePointGranularity
+
+var _ExplainabilityExports = &s_ExplainabilityExports
+var _ExplainabilityExports_member = &s_ExplainabilityExports_member
+
+var ExplainabilityExportSummary = &sExplainabilityExportSummary
+var ExplainabilityExportSummary_ExplainabilityExportArn = &sExplainabilityExportSummary_ExplainabilityExportArn
+var ExplainabilityExportSummary_ExplainabilityExportName = &sExplainabilityExportSummary_ExplainabilityExportName
+var ExplainabilityExportSummary_Destination = &sExplainabilityExportSummary_Destination
+var ExplainabilityExportSummary_Status = &sExplainabilityExportSummary_Status
+var ExplainabilityExportSummary_Message = &sExplainabilityExportSummary_Message
+var ExplainabilityExportSummary_CreationTime = &sExplainabilityExportSummary_CreationTime
+var ExplainabilityExportSummary_LastModificationTime = &sExplainabilityExportSummary_LastModificationTime
+
+var ExplainabilityInfo = &sExplainabilityInfo
+var ExplainabilityInfo_ExplainabilityArn = &sExplainabilityInfo_ExplainabilityArn
+var ExplainabilityInfo_Status = &sExplainabilityInfo_Status
+
+var ExplainabilitySummary = &sExplainabilitySummary
+var ExplainabilitySummary_ExplainabilityArn = &sExplainabilitySummary_ExplainabilityArn
+var ExplainabilitySummary_ExplainabilityName = &sExplainabilitySummary_ExplainabilityName
+var ExplainabilitySummary_ResourceArn = &sExplainabilitySummary_ResourceArn
+var ExplainabilitySummary_ExplainabilityConfig = &sExplainabilitySummary_ExplainabilityConfig
+var ExplainabilitySummary_Status = &sExplainabilitySummary_Status
+var ExplainabilitySummary_Message = &sExplainabilitySummary_Message
+var ExplainabilitySummary_CreationTime = &sExplainabilitySummary_CreationTime
+var ExplainabilitySummary_LastModificationTime = &sExplainabilitySummary_LastModificationTime
+
+var Featurization = &sFeaturization
+var Featurization_AttributeName = &sFeaturization_AttributeName
+var Featurization_FeaturizationPipeline = &sFeaturization_FeaturizationPipeline
+
+var FeaturizationConfig = &sFeaturizationConfig
+var FeaturizationConfig_ForecastFrequency = &sFeaturizationConfig_ForecastFrequency
+var FeaturizationConfig_ForecastDimensions = &sFeaturizationConfig_ForecastDimensions
+var FeaturizationConfig_Featurizations = &sFeaturizationConfig_Featurizations
+
+var FeaturizationMethod = &sFeaturizationMethod
+var FeaturizationMethod_FeaturizationMethodName = &sFeaturizationMethod_FeaturizationMethodName
+var FeaturizationMethod_FeaturizationMethodParameters = &sFeaturizationMethod_FeaturizationMethodParameters
+
+var FeaturizationMethodName = &sFeaturizationMethodName
+var FeaturizationMethodName_filling = &sFeaturizationMethodName_filling
+
+var _FeaturizationMethodParameters = &s_FeaturizationMethodParameters
+var _FeaturizationMethodParameters_key = &s_FeaturizationMethodParameters_key
+var _FeaturizationMethodParameters_value = &s_FeaturizationMethodParameters_value
+
+var _FeaturizationPipeline = &s_FeaturizationPipeline
+var _FeaturizationPipeline_member = &s_FeaturizationPipeline_member
+
+var _Featurizations = &s_Featurizations
+var _Featurizations_member = &s_Featurizations_member
+
+var _FieldStatistics = &s_FieldStatistics
+var _FieldStatistics_key = &s_FieldStatistics_key
+var _FieldStatistics_value = &s_FieldStatistics_value
+
+var Filter = &sFilter
+var Filter_Key = &sFilter_Key
+var Filter_Value = &sFilter_Value
+var Filter_Condition = &sFilter_Condition
+
+var FilterConditionString = &sFilterConditionString
+var FilterConditionString_IS = &sFilterConditionString_IS
+var FilterConditionString_IS_NOT = &sFilterConditionString_IS_NOT
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var _ForecastDimensions = &s_ForecastDimensions
+var _ForecastDimensions_member = &s_ForecastDimensions_member
+
+var _ForecastExportJobs = &s_ForecastExportJobs
+var _ForecastExportJobs_member = &s_ForecastExportJobs_member
+
+var ForecastExportJobSummary = &sForecastExportJobSummary
+var ForecastExportJobSummary_ForecastExportJobArn = &sForecastExportJobSummary_ForecastExportJobArn
+var ForecastExportJobSummary_ForecastExportJobName = &sForecastExportJobSummary_ForecastExportJobName
+var ForecastExportJobSummary_Destination = &sForecastExportJobSummary_Destination
+var ForecastExportJobSummary_Status = &sForecastExportJobSummary_Status
+var ForecastExportJobSummary_Message = &sForecastExportJobSummary_Message
+var ForecastExportJobSummary_CreationTime = &sForecastExportJobSummary_CreationTime
+var ForecastExportJobSummary_LastModificationTime = &sForecastExportJobSummary_LastModificationTime
+
+var _Forecasts = &s_Forecasts
+var _Forecasts_member = &s_Forecasts_member
+
+var ForecastSummary = &sForecastSummary
+var ForecastSummary_ForecastArn = &sForecastSummary_ForecastArn
+var ForecastSummary_ForecastName = &sForecastSummary_ForecastName
+var ForecastSummary_PredictorArn = &sForecastSummary_PredictorArn
+var ForecastSummary_CreatedUsingAutoPredictor = &sForecastSummary_CreatedUsingAutoPredictor
+var ForecastSummary_DatasetGroupArn = &sForecastSummary_DatasetGroupArn
+var ForecastSummary_Status = &sForecastSummary_Status
+var ForecastSummary_Message = &sForecastSummary_Message
+var ForecastSummary_CreationTime = &sForecastSummary_CreationTime
+var ForecastSummary_LastModificationTime = &sForecastSummary_LastModificationTime
+
+var _ForecastType = &s_ForecastType
+
+var _ForecastTypes = &s_ForecastTypes
+var _ForecastTypes_member = &s_ForecastTypes_member
+
+var _Format = &s_Format
+
+var _Frequency = &s_Frequency
+
+var _GeolocationFormat = &s_GeolocationFormat
+
+var _Hour = &s_Hour
+
+var HyperParameterTuningJobConfig = &sHyperParameterTuningJobConfig
+var HyperParameterTuningJobConfig_ParameterRanges = &sHyperParameterTuningJobConfig_ParameterRanges
+
+var ImportMode = &sImportMode
+var ImportMode_FULL = &sImportMode_FULL
+var ImportMode_INCREMENTAL = &sImportMode_INCREMENTAL
+
+var InputDataConfig = &sInputDataConfig
+var InputDataConfig_DatasetGroupArn = &sInputDataConfig_DatasetGroupArn
+var InputDataConfig_SupplementaryFeatures = &sInputDataConfig_SupplementaryFeatures
+
+var _Integer = &s_Integer
+
+var IntegerParameterRange = &sIntegerParameterRange
+var IntegerParameterRange_Name = &sIntegerParameterRange_Name
+var IntegerParameterRange_MaxValue = &sIntegerParameterRange_MaxValue
+var IntegerParameterRange_MinValue = &sIntegerParameterRange_MinValue
+var IntegerParameterRange_ScalingType = &sIntegerParameterRange_ScalingType
+
+var _IntegerParameterRanges = &s_IntegerParameterRanges
+var _IntegerParameterRanges_member = &s_IntegerParameterRanges_member
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_Message = &sInvalidInputException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var _KMSKeyArn = &s_KMSKeyArn
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var _LocalDateTime = &s_LocalDateTime
+
+var _Long = &s_Long
+
+var _LongArn = &s_LongArn
+
+var _LongArnList = &s_LongArnList
+var _LongArnList_member = &s_LongArnList_member
+
+var _MaxResults = &s_MaxResults
+
+var _Message = &s_Message
+
+var _MetricName = &s_MetricName
+
+var MetricResult = &sMetricResult
+var MetricResult_MetricName = &sMetricResult_MetricName
+var MetricResult_MetricValue = &sMetricResult_MetricValue
+
+var _MetricResults = &s_MetricResults
+var _MetricResults_member = &s_MetricResults_member
+
+var Metrics = &sMetrics
+var Metrics_RMSE = &sMetrics_RMSE
+var Metrics_WeightedQuantileLosses = &sMetrics_WeightedQuantileLosses
+var Metrics_ErrorMetrics = &sMetrics_ErrorMetrics
+var Metrics_AverageWeightedQuantileLoss = &sMetrics_AverageWeightedQuantileLoss
+
+var MonitorConfig = &sMonitorConfig
+var MonitorConfig_MonitorName = &sMonitorConfig_MonitorName
+
+var MonitorDataSource = &sMonitorDataSource
+var MonitorDataSource_DatasetImportJobArn = &sMonitorDataSource_DatasetImportJobArn
+var MonitorDataSource_ForecastArn = &sMonitorDataSource_ForecastArn
+var MonitorDataSource_PredictorArn = &sMonitorDataSource_PredictorArn
+
+var MonitorInfo = &sMonitorInfo
+var MonitorInfo_MonitorArn = &sMonitorInfo_MonitorArn
+var MonitorInfo_Status = &sMonitorInfo_Status
+
+var _Monitors = &s_Monitors
+var _Monitors_member = &s_Monitors_member
+
+var MonitorSummary = &sMonitorSummary
+var MonitorSummary_MonitorArn = &sMonitorSummary_MonitorArn
+var MonitorSummary_MonitorName = &sMonitorSummary_MonitorName
+var MonitorSummary_ResourceArn = &sMonitorSummary_ResourceArn
+var MonitorSummary_Status = &sMonitorSummary_Status
+var MonitorSummary_CreationTime = &sMonitorSummary_CreationTime
+var MonitorSummary_LastModificationTime = &sMonitorSummary_LastModificationTime
+
+var Month = &sMonth
+var Month_JANUARY = &sMonth_JANUARY
+var Month_FEBRUARY = &sMonth_FEBRUARY
+var Month_MARCH = &sMonth_MARCH
+var Month_APRIL = &sMonth_APRIL
+var Month_MAY = &sMonth_MAY
+var Month_JUNE = &sMonth_JUNE
+var Month_JULY = &sMonth_JULY
+var Month_AUGUST = &sMonth_AUGUST
+var Month_SEPTEMBER = &sMonth_SEPTEMBER
+var Month_OCTOBER = &sMonth_OCTOBER
+var Month_NOVEMBER = &sMonth_NOVEMBER
+var Month_DECEMBER = &sMonth_DECEMBER
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var Operation = &sOperation
+var Operation_ADD = &sOperation_ADD
+var Operation_SUBTRACT = &sOperation_SUBTRACT
+var Operation_MULTIPLY = &sOperation_MULTIPLY
+var Operation_DIVIDE = &sOperation_DIVIDE
+
+var OptimizationMetric = &sOptimizationMetric
+var OptimizationMetric_WAPE = &sOptimizationMetric_WAPE
+var OptimizationMetric_RMSE = &sOptimizationMetric_RMSE
+var OptimizationMetric_AverageWeightedQuantileLoss = &sOptimizationMetric_AverageWeightedQuantileLoss
+var OptimizationMetric_MASE = &sOptimizationMetric_MASE
+var OptimizationMetric_MAPE = &sOptimizationMetric_MAPE
+
+var _ParameterKey = &s_ParameterKey
+
+var ParameterRanges = &sParameterRanges
+var ParameterRanges_CategoricalParameterRanges = &sParameterRanges_CategoricalParameterRanges
+var ParameterRanges_ContinuousParameterRanges = &sParameterRanges_ContinuousParameterRanges
+var ParameterRanges_IntegerParameterRanges = &sParameterRanges_IntegerParameterRanges
+
+var _ParameterValue = &s_ParameterValue
+
+var _PredictorBacktestExportJobs = &s_PredictorBacktestExportJobs
+var _PredictorBacktestExportJobs_member = &s_PredictorBacktestExportJobs_member
+
+var PredictorBacktestExportJobSummary = &sPredictorBacktestExportJobSummary
+var PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn = &sPredictorBacktestExportJobSummary_PredictorBacktestExportJobArn
+var PredictorBacktestExportJobSummary_PredictorBacktestExportJobName = &sPredictorBacktestExportJobSummary_PredictorBacktestExportJobName
+var PredictorBacktestExportJobSummary_Destination = &sPredictorBacktestExportJobSummary_Destination
+var PredictorBacktestExportJobSummary_Status = &sPredictorBacktestExportJobSummary_Status
+var PredictorBacktestExportJobSummary_Message = &sPredictorBacktestExportJobSummary_Message
+var PredictorBacktestExportJobSummary_CreationTime = &sPredictorBacktestExportJobSummary_CreationTime
+var PredictorBacktestExportJobSummary_LastModificationTime = &sPredictorBacktestExportJobSummary_LastModificationTime
+
+var PredictorBaseline = &sPredictorBaseline
+var PredictorBaseline_BaselineMetrics = &sPredictorBaseline_BaselineMetrics
+
+var _PredictorEvaluationResults = &s_PredictorEvaluationResults
+var _PredictorEvaluationResults_member = &s_PredictorEvaluationResults_member
+
+var PredictorEvent = &sPredictorEvent
+var PredictorEvent_Detail = &sPredictorEvent_Detail
+var PredictorEvent_Datetime = &sPredictorEvent_Datetime
+
+var PredictorExecution = &sPredictorExecution
+var PredictorExecution_AlgorithmArn = &sPredictorExecution_AlgorithmArn
+var PredictorExecution_TestWindows = &sPredictorExecution_TestWindows
+
+var PredictorExecutionDetails = &sPredictorExecutionDetails
+var PredictorExecutionDetails_PredictorExecutions = &sPredictorExecutionDetails_PredictorExecutions
+
+var _PredictorExecutions = &s_PredictorExecutions
+var _PredictorExecutions_member = &s_PredictorExecutions_member
+
+var PredictorMonitorEvaluation = &sPredictorMonitorEvaluation
+var PredictorMonitorEvaluation_ResourceArn = &sPredictorMonitorEvaluation_ResourceArn
+var PredictorMonitorEvaluation_MonitorArn = &sPredictorMonitorEvaluation_MonitorArn
+var PredictorMonitorEvaluation_EvaluationTime = &sPredictorMonitorEvaluation_EvaluationTime
+var PredictorMonitorEvaluation_EvaluationState = &sPredictorMonitorEvaluation_EvaluationState
+var PredictorMonitorEvaluation_WindowStartDatetime = &sPredictorMonitorEvaluation_WindowStartDatetime
+var PredictorMonitorEvaluation_WindowEndDatetime = &sPredictorMonitorEvaluation_WindowEndDatetime
+var PredictorMonitorEvaluation_PredictorEvent = &sPredictorMonitorEvaluation_PredictorEvent
+var PredictorMonitorEvaluation_MonitorDataSource = &sPredictorMonitorEvaluation_MonitorDataSource
+var PredictorMonitorEvaluation_MetricResults = &sPredictorMonitorEvaluation_MetricResults
+var PredictorMonitorEvaluation_NumItemsEvaluated = &sPredictorMonitorEvaluation_NumItemsEvaluated
+var PredictorMonitorEvaluation_Message = &sPredictorMonitorEvaluation_Message
+
+var _PredictorMonitorEvaluations = &s_PredictorMonitorEvaluations
+var _PredictorMonitorEvaluations_member = &s_PredictorMonitorEvaluations_member
+
+var _Predictors = &s_Predictors
+var _Predictors_member = &s_Predictors_member
+
+var PredictorSummary = &sPredictorSummary
+var PredictorSummary_PredictorArn = &sPredictorSummary_PredictorArn
+var PredictorSummary_PredictorName = &sPredictorSummary_PredictorName
+var PredictorSummary_DatasetGroupArn = &sPredictorSummary_DatasetGroupArn
+var PredictorSummary_IsAutoPredictor = &sPredictorSummary_IsAutoPredictor
+var PredictorSummary_ReferencePredictorSummary = &sPredictorSummary_ReferencePredictorSummary
+var PredictorSummary_Status = &sPredictorSummary_Status
+var PredictorSummary_Message = &sPredictorSummary_Message
+var PredictorSummary_CreationTime = &sPredictorSummary_CreationTime
+var PredictorSummary_LastModificationTime = &sPredictorSummary_LastModificationTime
+
+var ReferencePredictorSummary = &sReferencePredictorSummary
+var ReferencePredictorSummary_Arn = &sReferencePredictorSummary_Arn
+var ReferencePredictorSummary_State = &sReferencePredictorSummary_State
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var S3Config = &sS3Config
+var S3Config_Path = &sS3Config_Path
+var S3Config_RoleArn = &sS3Config_RoleArn
+var S3Config_KMSKeyArn = &sS3Config_KMSKeyArn
+
+var _S3Path = &s_S3Path
+
+var ScalingType = &sScalingType
+var ScalingType_Auto = &sScalingType_Auto
+var ScalingType_Linear = &sScalingType_Linear
+var ScalingType_Logarithmic = &sScalingType_Logarithmic
+var ScalingType_ReverseLogarithmic = &sScalingType_ReverseLogarithmic
+
+var Schema = &sSchema
+var Schema_Attributes = &sSchema_Attributes
+
+var SchemaAttribute = &sSchemaAttribute
+var SchemaAttribute_AttributeName = &sSchemaAttribute_AttributeName
+var SchemaAttribute_AttributeType = &sSchemaAttribute_AttributeType
+
+var _SchemaAttributes = &s_SchemaAttributes
+var _SchemaAttributes_member = &s_SchemaAttributes_member
+
+var State = &sState
+var State_Active = &sState_Active
+var State_Deleted = &sState_Deleted
+
+var Statistics = &sStatistics
+var Statistics_Count = &sStatistics_Count
+var Statistics_CountDistinct = &sStatistics_CountDistinct
+var Statistics_CountNull = &sStatistics_CountNull
+var Statistics_CountNan = &sStatistics_CountNan
+var Statistics_Min = &sStatistics_Min
+var Statistics_Max = &sStatistics_Max
+var Statistics_Avg = &sStatistics_Avg
+var Statistics_Stddev = &sStatistics_Stddev
+var Statistics_CountLong = &sStatistics_CountLong
+var Statistics_CountDistinctLong = &sStatistics_CountDistinctLong
+var Statistics_CountNullLong = &sStatistics_CountNullLong
+var Statistics_CountNanLong = &sStatistics_CountNanLong
+
+var _Status = &s_Status
+
+var _String = &s_String
+
+var SupplementaryFeature = &sSupplementaryFeature
+var SupplementaryFeature_Name = &sSupplementaryFeature_Name
+var SupplementaryFeature_Value = &sSupplementaryFeature_Value
+
+var _SupplementaryFeatures = &s_SupplementaryFeatures
+var _SupplementaryFeatures_member = &s_SupplementaryFeatures_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TestWindowDetails = &s_TestWindowDetails
+var _TestWindowDetails_member = &s_TestWindowDetails_member
+
+var _TestWindows = &s_TestWindows
+var _TestWindows_member = &s_TestWindows_member
+
+var TestWindowSummary = &sTestWindowSummary
+var TestWindowSummary_TestWindowStart = &sTestWindowSummary_TestWindowStart
+var TestWindowSummary_TestWindowEnd = &sTestWindowSummary_TestWindowEnd
+var TestWindowSummary_Status = &sTestWindowSummary_Status
+var TestWindowSummary_Message = &sTestWindowSummary_Message
+
+var TimeAlignmentBoundary = &sTimeAlignmentBoundary
+var TimeAlignmentBoundary_Month = &sTimeAlignmentBoundary_Month
+var TimeAlignmentBoundary_DayOfMonth = &sTimeAlignmentBoundary_DayOfMonth
+var TimeAlignmentBoundary_DayOfWeek = &sTimeAlignmentBoundary_DayOfWeek
+var TimeAlignmentBoundary_Hour = &sTimeAlignmentBoundary_Hour
+
+var TimePointGranularity = &sTimePointGranularity
+var TimePointGranularity_ALL = &sTimePointGranularity_ALL
+var TimePointGranularity_SPECIFIC = &sTimePointGranularity_SPECIFIC
+
+var TimeSeriesCondition = &sTimeSeriesCondition
+var TimeSeriesCondition_AttributeName = &sTimeSeriesCondition_AttributeName
+var TimeSeriesCondition_AttributeValue = &sTimeSeriesCondition_AttributeValue
+var TimeSeriesCondition_Condition = &sTimeSeriesCondition_Condition
+
+var _TimeSeriesConditions = &s_TimeSeriesConditions
+var _TimeSeriesConditions_member = &s_TimeSeriesConditions_member
+
+var TimeSeriesGranularity = &sTimeSeriesGranularity
+var TimeSeriesGranularity_ALL = &sTimeSeriesGranularity_ALL
+var TimeSeriesGranularity_SPECIFIC = &sTimeSeriesGranularity_SPECIFIC
+
+var TimeSeriesIdentifiers = &sTimeSeriesIdentifiers
+var TimeSeriesIdentifiers_DataSource = &sTimeSeriesIdentifiers_DataSource
+var TimeSeriesIdentifiers_Schema = &sTimeSeriesIdentifiers_Schema
+var TimeSeriesIdentifiers_Format = &sTimeSeriesIdentifiers_Format
+
+var TimeSeriesReplacementsDataSource = &sTimeSeriesReplacementsDataSource
+var TimeSeriesReplacementsDataSource_S3Config = &sTimeSeriesReplacementsDataSource_S3Config
+var TimeSeriesReplacementsDataSource_Schema = &sTimeSeriesReplacementsDataSource_Schema
+var TimeSeriesReplacementsDataSource_Format = &sTimeSeriesReplacementsDataSource_Format
+var TimeSeriesReplacementsDataSource_TimestampFormat = &sTimeSeriesReplacementsDataSource_TimestampFormat
+
+var TimeSeriesSelector = &sTimeSeriesSelector
+var TimeSeriesSelector_TimeSeriesIdentifiers = &sTimeSeriesSelector_TimeSeriesIdentifiers
+
+var TimeSeriesTransformation = &sTimeSeriesTransformation
+var TimeSeriesTransformation_Action = &sTimeSeriesTransformation_Action
+var TimeSeriesTransformation_TimeSeriesConditions = &sTimeSeriesTransformation_TimeSeriesConditions
+
+var _TimeSeriesTransformations = &s_TimeSeriesTransformations
+var _TimeSeriesTransformations_member = &s_TimeSeriesTransformations_member
+
+var _Timestamp = &s_Timestamp
+
+var _TimestampFormat = &s_TimestampFormat
+
+var _TimeZone = &s_TimeZone
+
+var _TrainingParameters = &s_TrainingParameters
+var _TrainingParameters_key = &s_TrainingParameters_key
+var _TrainingParameters_value = &s_TrainingParameters_value
+
+var _Transformations = &s_Transformations
+var _Transformations_key = &s_Transformations_key
+var _Transformations_value = &s_Transformations_value
+
+var _UseGeolocationForTimeZone = &s_UseGeolocationForTimeZone
+
+var _Value = &s_Value
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var WeightedQuantileLoss = &sWeightedQuantileLoss
+var WeightedQuantileLoss_Quantile = &sWeightedQuantileLoss_Quantile
+var WeightedQuantileLoss_LossValue = &sWeightedQuantileLoss_LossValue
+
+var _WeightedQuantileLosses = &s_WeightedQuantileLosses
+var _WeightedQuantileLosses_member = &s_WeightedQuantileLosses_member
+
+var _WhatIfAnalyses = &s_WhatIfAnalyses
+var _WhatIfAnalyses_member = &s_WhatIfAnalyses_member
+
+var WhatIfAnalysisSummary = &sWhatIfAnalysisSummary
+var WhatIfAnalysisSummary_WhatIfAnalysisArn = &sWhatIfAnalysisSummary_WhatIfAnalysisArn
+var WhatIfAnalysisSummary_WhatIfAnalysisName = &sWhatIfAnalysisSummary_WhatIfAnalysisName
+var WhatIfAnalysisSummary_ForecastArn = &sWhatIfAnalysisSummary_ForecastArn
+var WhatIfAnalysisSummary_Status = &sWhatIfAnalysisSummary_Status
+var WhatIfAnalysisSummary_Message = &sWhatIfAnalysisSummary_Message
+var WhatIfAnalysisSummary_CreationTime = &sWhatIfAnalysisSummary_CreationTime
+var WhatIfAnalysisSummary_LastModificationTime = &sWhatIfAnalysisSummary_LastModificationTime
+
+var _WhatIfForecastArnListForExport = &s_WhatIfForecastArnListForExport
+var _WhatIfForecastArnListForExport_member = &s_WhatIfForecastArnListForExport_member
+
+var _WhatIfForecastExports = &s_WhatIfForecastExports
+var _WhatIfForecastExports_member = &s_WhatIfForecastExports_member
+
+var WhatIfForecastExportSummary = &sWhatIfForecastExportSummary
+var WhatIfForecastExportSummary_WhatIfForecastExportArn = &sWhatIfForecastExportSummary_WhatIfForecastExportArn
+var WhatIfForecastExportSummary_WhatIfForecastArns = &sWhatIfForecastExportSummary_WhatIfForecastArns
+var WhatIfForecastExportSummary_WhatIfForecastExportName = &sWhatIfForecastExportSummary_WhatIfForecastExportName
+var WhatIfForecastExportSummary_Destination = &sWhatIfForecastExportSummary_Destination
+var WhatIfForecastExportSummary_Status = &sWhatIfForecastExportSummary_Status
+var WhatIfForecastExportSummary_Message = &sWhatIfForecastExportSummary_Message
+var WhatIfForecastExportSummary_CreationTime = &sWhatIfForecastExportSummary_CreationTime
+var WhatIfForecastExportSummary_LastModificationTime = &sWhatIfForecastExportSummary_LastModificationTime
+
+var _WhatIfForecasts = &s_WhatIfForecasts
+var _WhatIfForecasts_member = &s_WhatIfForecasts_member
+
+var WhatIfForecastSummary = &sWhatIfForecastSummary
+var WhatIfForecastSummary_WhatIfForecastArn = &sWhatIfForecastSummary_WhatIfForecastArn
+var WhatIfForecastSummary_WhatIfForecastName = &sWhatIfForecastSummary_WhatIfForecastName
+var WhatIfForecastSummary_WhatIfAnalysisArn = &sWhatIfForecastSummary_WhatIfAnalysisArn
+var WhatIfForecastSummary_Status = &sWhatIfForecastSummary_Status
+var WhatIfForecastSummary_Message = &sWhatIfForecastSummary_Message
+var WhatIfForecastSummary_CreationTime = &sWhatIfForecastSummary_CreationTime
+var WhatIfForecastSummary_LastModificationTime = &sWhatIfForecastSummary_LastModificationTime
+
+var WindowSummary = &sWindowSummary
+var WindowSummary_TestWindowStart = &sWindowSummary_TestWindowStart
+var WindowSummary_TestWindowEnd = &sWindowSummary_TestWindowEnd
+var WindowSummary_ItemCount = &sWindowSummary_ItemCount
+var WindowSummary_EvaluationType = &sWindowSummary_EvaluationType
+var WindowSummary_Metrics = &sWindowSummary_Metrics
+
+var CreateAutoPredictorRequest = &sCreateAutoPredictorRequest
+var CreateAutoPredictorRequest_PredictorName = &sCreateAutoPredictorRequest_PredictorName
+var CreateAutoPredictorRequest_ForecastHorizon = &sCreateAutoPredictorRequest_ForecastHorizon
+var CreateAutoPredictorRequest_ForecastTypes = &sCreateAutoPredictorRequest_ForecastTypes
+var CreateAutoPredictorRequest_ForecastDimensions = &sCreateAutoPredictorRequest_ForecastDimensions
+var CreateAutoPredictorRequest_ForecastFrequency = &sCreateAutoPredictorRequest_ForecastFrequency
+var CreateAutoPredictorRequest_DataConfig = &sCreateAutoPredictorRequest_DataConfig
+var CreateAutoPredictorRequest_EncryptionConfig = &sCreateAutoPredictorRequest_EncryptionConfig
+var CreateAutoPredictorRequest_ReferencePredictorArn = &sCreateAutoPredictorRequest_ReferencePredictorArn
+var CreateAutoPredictorRequest_OptimizationMetric = &sCreateAutoPredictorRequest_OptimizationMetric
+var CreateAutoPredictorRequest_ExplainPredictor = &sCreateAutoPredictorRequest_ExplainPredictor
+var CreateAutoPredictorRequest_Tags = &sCreateAutoPredictorRequest_Tags
+var CreateAutoPredictorRequest_MonitorConfig = &sCreateAutoPredictorRequest_MonitorConfig
+var CreateAutoPredictorRequest_TimeAlignmentBoundary = &sCreateAutoPredictorRequest_TimeAlignmentBoundary
+
+var CreateAutoPredictorResponse = &sCreateAutoPredictorResponse
+var CreateAutoPredictorResponse_PredictorArn = &sCreateAutoPredictorResponse_PredictorArn
+
+var CreateDatasetGroupRequest = &sCreateDatasetGroupRequest
+var CreateDatasetGroupRequest_DatasetGroupName = &sCreateDatasetGroupRequest_DatasetGroupName
+var CreateDatasetGroupRequest_Domain = &sCreateDatasetGroupRequest_Domain
+var CreateDatasetGroupRequest_DatasetArns = &sCreateDatasetGroupRequest_DatasetArns
+var CreateDatasetGroupRequest_Tags = &sCreateDatasetGroupRequest_Tags
+
+var CreateDatasetGroupResponse = &sCreateDatasetGroupResponse
+var CreateDatasetGroupResponse_DatasetGroupArn = &sCreateDatasetGroupResponse_DatasetGroupArn
+
+var CreateDatasetImportJobRequest = &sCreateDatasetImportJobRequest
+var CreateDatasetImportJobRequest_DatasetImportJobName = &sCreateDatasetImportJobRequest_DatasetImportJobName
+var CreateDatasetImportJobRequest_DatasetArn = &sCreateDatasetImportJobRequest_DatasetArn
+var CreateDatasetImportJobRequest_DataSource = &sCreateDatasetImportJobRequest_DataSource
+var CreateDatasetImportJobRequest_TimestampFormat = &sCreateDatasetImportJobRequest_TimestampFormat
+var CreateDatasetImportJobRequest_TimeZone = &sCreateDatasetImportJobRequest_TimeZone
+var CreateDatasetImportJobRequest_UseGeolocationForTimeZone = &sCreateDatasetImportJobRequest_UseGeolocationForTimeZone
+var CreateDatasetImportJobRequest_GeolocationFormat = &sCreateDatasetImportJobRequest_GeolocationFormat
+var CreateDatasetImportJobRequest_Tags = &sCreateDatasetImportJobRequest_Tags
+var CreateDatasetImportJobRequest_Format = &sCreateDatasetImportJobRequest_Format
+var CreateDatasetImportJobRequest_ImportMode = &sCreateDatasetImportJobRequest_ImportMode
+
+var CreateDatasetImportJobResponse = &sCreateDatasetImportJobResponse
+var CreateDatasetImportJobResponse_DatasetImportJobArn = &sCreateDatasetImportJobResponse_DatasetImportJobArn
+
+var CreateDatasetRequest = &sCreateDatasetRequest
+var CreateDatasetRequest_DatasetName = &sCreateDatasetRequest_DatasetName
+var CreateDatasetRequest_Domain = &sCreateDatasetRequest_Domain
+var CreateDatasetRequest_DatasetType = &sCreateDatasetRequest_DatasetType
+var CreateDatasetRequest_DataFrequency = &sCreateDatasetRequest_DataFrequency
+var CreateDatasetRequest_Schema = &sCreateDatasetRequest_Schema
+var CreateDatasetRequest_EncryptionConfig = &sCreateDatasetRequest_EncryptionConfig
+var CreateDatasetRequest_Tags = &sCreateDatasetRequest_Tags
+
+var CreateDatasetResponse = &sCreateDatasetResponse
+var CreateDatasetResponse_DatasetArn = &sCreateDatasetResponse_DatasetArn
+
+var CreateExplainabilityExportRequest = &sCreateExplainabilityExportRequest
+var CreateExplainabilityExportRequest_ExplainabilityExportName = &sCreateExplainabilityExportRequest_ExplainabilityExportName
+var CreateExplainabilityExportRequest_ExplainabilityArn = &sCreateExplainabilityExportRequest_ExplainabilityArn
+var CreateExplainabilityExportRequest_Destination = &sCreateExplainabilityExportRequest_Destination
+var CreateExplainabilityExportRequest_Tags = &sCreateExplainabilityExportRequest_Tags
+var CreateExplainabilityExportRequest_Format = &sCreateExplainabilityExportRequest_Format
+
+var CreateExplainabilityExportResponse = &sCreateExplainabilityExportResponse
+var CreateExplainabilityExportResponse_ExplainabilityExportArn = &sCreateExplainabilityExportResponse_ExplainabilityExportArn
+
+var CreateExplainabilityRequest = &sCreateExplainabilityRequest
+var CreateExplainabilityRequest_ExplainabilityName = &sCreateExplainabilityRequest_ExplainabilityName
+var CreateExplainabilityRequest_ResourceArn = &sCreateExplainabilityRequest_ResourceArn
+var CreateExplainabilityRequest_ExplainabilityConfig = &sCreateExplainabilityRequest_ExplainabilityConfig
+var CreateExplainabilityRequest_DataSource = &sCreateExplainabilityRequest_DataSource
+var CreateExplainabilityRequest_Schema = &sCreateExplainabilityRequest_Schema
+var CreateExplainabilityRequest_EnableVisualization = &sCreateExplainabilityRequest_EnableVisualization
+var CreateExplainabilityRequest_StartDateTime = &sCreateExplainabilityRequest_StartDateTime
+var CreateExplainabilityRequest_EndDateTime = &sCreateExplainabilityRequest_EndDateTime
+var CreateExplainabilityRequest_Tags = &sCreateExplainabilityRequest_Tags
+
+var CreateExplainabilityResponse = &sCreateExplainabilityResponse
+var CreateExplainabilityResponse_ExplainabilityArn = &sCreateExplainabilityResponse_ExplainabilityArn
+
+var CreateForecastExportJobRequest = &sCreateForecastExportJobRequest
+var CreateForecastExportJobRequest_ForecastExportJobName = &sCreateForecastExportJobRequest_ForecastExportJobName
+var CreateForecastExportJobRequest_ForecastArn = &sCreateForecastExportJobRequest_ForecastArn
+var CreateForecastExportJobRequest_Destination = &sCreateForecastExportJobRequest_Destination
+var CreateForecastExportJobRequest_Tags = &sCreateForecastExportJobRequest_Tags
+var CreateForecastExportJobRequest_Format = &sCreateForecastExportJobRequest_Format
+
+var CreateForecastExportJobResponse = &sCreateForecastExportJobResponse
+var CreateForecastExportJobResponse_ForecastExportJobArn = &sCreateForecastExportJobResponse_ForecastExportJobArn
+
+var CreateForecastRequest = &sCreateForecastRequest
+var CreateForecastRequest_ForecastName = &sCreateForecastRequest_ForecastName
+var CreateForecastRequest_PredictorArn = &sCreateForecastRequest_PredictorArn
+var CreateForecastRequest_ForecastTypes = &sCreateForecastRequest_ForecastTypes
+var CreateForecastRequest_Tags = &sCreateForecastRequest_Tags
+var CreateForecastRequest_TimeSeriesSelector = &sCreateForecastRequest_TimeSeriesSelector
+
+var CreateForecastResponse = &sCreateForecastResponse
+var CreateForecastResponse_ForecastArn = &sCreateForecastResponse_ForecastArn
+
+var CreateMonitorRequest = &sCreateMonitorRequest
+var CreateMonitorRequest_MonitorName = &sCreateMonitorRequest_MonitorName
+var CreateMonitorRequest_ResourceArn = &sCreateMonitorRequest_ResourceArn
+var CreateMonitorRequest_Tags = &sCreateMonitorRequest_Tags
+
+var CreateMonitorResponse = &sCreateMonitorResponse
+var CreateMonitorResponse_MonitorArn = &sCreateMonitorResponse_MonitorArn
+
+var CreatePredictorBacktestExportJobRequest = &sCreatePredictorBacktestExportJobRequest
+var CreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName = &sCreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName
+var CreatePredictorBacktestExportJobRequest_PredictorArn = &sCreatePredictorBacktestExportJobRequest_PredictorArn
+var CreatePredictorBacktestExportJobRequest_Destination = &sCreatePredictorBacktestExportJobRequest_Destination
+var CreatePredictorBacktestExportJobRequest_Tags = &sCreatePredictorBacktestExportJobRequest_Tags
+var CreatePredictorBacktestExportJobRequest_Format = &sCreatePredictorBacktestExportJobRequest_Format
+
+var CreatePredictorBacktestExportJobResponse = &sCreatePredictorBacktestExportJobResponse
+var CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = &sCreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn
+
+var CreatePredictorRequest = &sCreatePredictorRequest
+var CreatePredictorRequest_PredictorName = &sCreatePredictorRequest_PredictorName
+var CreatePredictorRequest_AlgorithmArn = &sCreatePredictorRequest_AlgorithmArn
+var CreatePredictorRequest_ForecastHorizon = &sCreatePredictorRequest_ForecastHorizon
+var CreatePredictorRequest_ForecastTypes = &sCreatePredictorRequest_ForecastTypes
+var CreatePredictorRequest_PerformAutoML = &sCreatePredictorRequest_PerformAutoML
+var CreatePredictorRequest_AutoMLOverrideStrategy = &sCreatePredictorRequest_AutoMLOverrideStrategy
+var CreatePredictorRequest_PerformHPO = &sCreatePredictorRequest_PerformHPO
+var CreatePredictorRequest_TrainingParameters = &sCreatePredictorRequest_TrainingParameters
+var CreatePredictorRequest_EvaluationParameters = &sCreatePredictorRequest_EvaluationParameters
+var CreatePredictorRequest_HPOConfig = &sCreatePredictorRequest_HPOConfig
+var CreatePredictorRequest_InputDataConfig = &sCreatePredictorRequest_InputDataConfig
+var CreatePredictorRequest_FeaturizationConfig = &sCreatePredictorRequest_FeaturizationConfig
+var CreatePredictorRequest_EncryptionConfig = &sCreatePredictorRequest_EncryptionConfig
+var CreatePredictorRequest_Tags = &sCreatePredictorRequest_Tags
+var CreatePredictorRequest_OptimizationMetric = &sCreatePredictorRequest_OptimizationMetric
+
+var CreatePredictorResponse = &sCreatePredictorResponse
+var CreatePredictorResponse_PredictorArn = &sCreatePredictorResponse_PredictorArn
+
+var CreateWhatIfAnalysisRequest = &sCreateWhatIfAnalysisRequest
+var CreateWhatIfAnalysisRequest_WhatIfAnalysisName = &sCreateWhatIfAnalysisRequest_WhatIfAnalysisName
+var CreateWhatIfAnalysisRequest_ForecastArn = &sCreateWhatIfAnalysisRequest_ForecastArn
+var CreateWhatIfAnalysisRequest_TimeSeriesSelector = &sCreateWhatIfAnalysisRequest_TimeSeriesSelector
+var CreateWhatIfAnalysisRequest_Tags = &sCreateWhatIfAnalysisRequest_Tags
+
+var CreateWhatIfAnalysisResponse = &sCreateWhatIfAnalysisResponse
+var CreateWhatIfAnalysisResponse_WhatIfAnalysisArn = &sCreateWhatIfAnalysisResponse_WhatIfAnalysisArn
+
+var CreateWhatIfForecastExportRequest = &sCreateWhatIfForecastExportRequest
+var CreateWhatIfForecastExportRequest_WhatIfForecastExportName = &sCreateWhatIfForecastExportRequest_WhatIfForecastExportName
+var CreateWhatIfForecastExportRequest_WhatIfForecastArns = &sCreateWhatIfForecastExportRequest_WhatIfForecastArns
+var CreateWhatIfForecastExportRequest_Destination = &sCreateWhatIfForecastExportRequest_Destination
+var CreateWhatIfForecastExportRequest_Tags = &sCreateWhatIfForecastExportRequest_Tags
+var CreateWhatIfForecastExportRequest_Format = &sCreateWhatIfForecastExportRequest_Format
+
+var CreateWhatIfForecastExportResponse = &sCreateWhatIfForecastExportResponse
+var CreateWhatIfForecastExportResponse_WhatIfForecastExportArn = &sCreateWhatIfForecastExportResponse_WhatIfForecastExportArn
+
+var CreateWhatIfForecastRequest = &sCreateWhatIfForecastRequest
+var CreateWhatIfForecastRequest_WhatIfForecastName = &sCreateWhatIfForecastRequest_WhatIfForecastName
+var CreateWhatIfForecastRequest_WhatIfAnalysisArn = &sCreateWhatIfForecastRequest_WhatIfAnalysisArn
+var CreateWhatIfForecastRequest_TimeSeriesTransformations = &sCreateWhatIfForecastRequest_TimeSeriesTransformations
+var CreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource = &sCreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource
+var CreateWhatIfForecastRequest_Tags = &sCreateWhatIfForecastRequest_Tags
+
+var CreateWhatIfForecastResponse = &sCreateWhatIfForecastResponse
+var CreateWhatIfForecastResponse_WhatIfForecastArn = &sCreateWhatIfForecastResponse_WhatIfForecastArn
+
+var DeleteDatasetGroupRequest = &sDeleteDatasetGroupRequest
+var DeleteDatasetGroupRequest_DatasetGroupArn = &sDeleteDatasetGroupRequest_DatasetGroupArn
+
+var DeleteDatasetImportJobRequest = &sDeleteDatasetImportJobRequest
+var DeleteDatasetImportJobRequest_DatasetImportJobArn = &sDeleteDatasetImportJobRequest_DatasetImportJobArn
+
+var DeleteDatasetRequest = &sDeleteDatasetRequest
+var DeleteDatasetRequest_DatasetArn = &sDeleteDatasetRequest_DatasetArn
+
+var DeleteExplainabilityExportRequest = &sDeleteExplainabilityExportRequest
+var DeleteExplainabilityExportRequest_ExplainabilityExportArn = &sDeleteExplainabilityExportRequest_ExplainabilityExportArn
+
+var DeleteExplainabilityRequest = &sDeleteExplainabilityRequest
+var DeleteExplainabilityRequest_ExplainabilityArn = &sDeleteExplainabilityRequest_ExplainabilityArn
+
+var DeleteForecastExportJobRequest = &sDeleteForecastExportJobRequest
+var DeleteForecastExportJobRequest_ForecastExportJobArn = &sDeleteForecastExportJobRequest_ForecastExportJobArn
+
+var DeleteForecastRequest = &sDeleteForecastRequest
+var DeleteForecastRequest_ForecastArn = &sDeleteForecastRequest_ForecastArn
+
+var DeleteMonitorRequest = &sDeleteMonitorRequest
+var DeleteMonitorRequest_MonitorArn = &sDeleteMonitorRequest_MonitorArn
+
+var DeletePredictorBacktestExportJobRequest = &sDeletePredictorBacktestExportJobRequest
+var DeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = &sDeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn
+
+var DeletePredictorRequest = &sDeletePredictorRequest
+var DeletePredictorRequest_PredictorArn = &sDeletePredictorRequest_PredictorArn
+
+var DeleteResourceTreeRequest = &sDeleteResourceTreeRequest
+var DeleteResourceTreeRequest_ResourceArn = &sDeleteResourceTreeRequest_ResourceArn
+
+var DeleteWhatIfAnalysisRequest = &sDeleteWhatIfAnalysisRequest
+var DeleteWhatIfAnalysisRequest_WhatIfAnalysisArn = &sDeleteWhatIfAnalysisRequest_WhatIfAnalysisArn
+
+var DeleteWhatIfForecastExportRequest = &sDeleteWhatIfForecastExportRequest
+var DeleteWhatIfForecastExportRequest_WhatIfForecastExportArn = &sDeleteWhatIfForecastExportRequest_WhatIfForecastExportArn
+
+var DeleteWhatIfForecastRequest = &sDeleteWhatIfForecastRequest
+var DeleteWhatIfForecastRequest_WhatIfForecastArn = &sDeleteWhatIfForecastRequest_WhatIfForecastArn
+
+var DescribeAutoPredictorRequest = &sDescribeAutoPredictorRequest
+var DescribeAutoPredictorRequest_PredictorArn = &sDescribeAutoPredictorRequest_PredictorArn
+
+var DescribeAutoPredictorResponse = &sDescribeAutoPredictorResponse
+var DescribeAutoPredictorResponse_PredictorArn = &sDescribeAutoPredictorResponse_PredictorArn
+var DescribeAutoPredictorResponse_PredictorName = &sDescribeAutoPredictorResponse_PredictorName
+var DescribeAutoPredictorResponse_ForecastHorizon = &sDescribeAutoPredictorResponse_ForecastHorizon
+var DescribeAutoPredictorResponse_ForecastTypes = &sDescribeAutoPredictorResponse_ForecastTypes
+var DescribeAutoPredictorResponse_ForecastFrequency = &sDescribeAutoPredictorResponse_ForecastFrequency
+var DescribeAutoPredictorResponse_ForecastDimensions = &sDescribeAutoPredictorResponse_ForecastDimensions
+var DescribeAutoPredictorResponse_DatasetImportJobArns = &sDescribeAutoPredictorResponse_DatasetImportJobArns
+var DescribeAutoPredictorResponse_DataConfig = &sDescribeAutoPredictorResponse_DataConfig
+var DescribeAutoPredictorResponse_EncryptionConfig = &sDescribeAutoPredictorResponse_EncryptionConfig
+var DescribeAutoPredictorResponse_ReferencePredictorSummary = &sDescribeAutoPredictorResponse_ReferencePredictorSummary
+var DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes = &sDescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes
+var DescribeAutoPredictorResponse_Status = &sDescribeAutoPredictorResponse_Status
+var DescribeAutoPredictorResponse_Message = &sDescribeAutoPredictorResponse_Message
+var DescribeAutoPredictorResponse_CreationTime = &sDescribeAutoPredictorResponse_CreationTime
+var DescribeAutoPredictorResponse_LastModificationTime = &sDescribeAutoPredictorResponse_LastModificationTime
+var DescribeAutoPredictorResponse_OptimizationMetric = &sDescribeAutoPredictorResponse_OptimizationMetric
+var DescribeAutoPredictorResponse_ExplainabilityInfo = &sDescribeAutoPredictorResponse_ExplainabilityInfo
+var DescribeAutoPredictorResponse_MonitorInfo = &sDescribeAutoPredictorResponse_MonitorInfo
+var DescribeAutoPredictorResponse_TimeAlignmentBoundary = &sDescribeAutoPredictorResponse_TimeAlignmentBoundary
+
+var DescribeDatasetGroupRequest = &sDescribeDatasetGroupRequest
+var DescribeDatasetGroupRequest_DatasetGroupArn = &sDescribeDatasetGroupRequest_DatasetGroupArn
+
+var DescribeDatasetGroupResponse = &sDescribeDatasetGroupResponse
+var DescribeDatasetGroupResponse_DatasetGroupName = &sDescribeDatasetGroupResponse_DatasetGroupName
+var DescribeDatasetGroupResponse_DatasetGroupArn = &sDescribeDatasetGroupResponse_DatasetGroupArn
+var DescribeDatasetGroupResponse_DatasetArns = &sDescribeDatasetGroupResponse_DatasetArns
+var DescribeDatasetGroupResponse_Domain = &sDescribeDatasetGroupResponse_Domain
+var DescribeDatasetGroupResponse_Status = &sDescribeDatasetGroupResponse_Status
+var DescribeDatasetGroupResponse_CreationTime = &sDescribeDatasetGroupResponse_CreationTime
+var DescribeDatasetGroupResponse_LastModificationTime = &sDescribeDatasetGroupResponse_LastModificationTime
+
+var DescribeDatasetImportJobRequest = &sDescribeDatasetImportJobRequest
+var DescribeDatasetImportJobRequest_DatasetImportJobArn = &sDescribeDatasetImportJobRequest_DatasetImportJobArn
+
+var DescribeDatasetImportJobResponse = &sDescribeDatasetImportJobResponse
+var DescribeDatasetImportJobResponse_DatasetImportJobName = &sDescribeDatasetImportJobResponse_DatasetImportJobName
+var DescribeDatasetImportJobResponse_DatasetImportJobArn = &sDescribeDatasetImportJobResponse_DatasetImportJobArn
+var DescribeDatasetImportJobResponse_DatasetArn = &sDescribeDatasetImportJobResponse_DatasetArn
+var DescribeDatasetImportJobResponse_TimestampFormat = &sDescribeDatasetImportJobResponse_TimestampFormat
+var DescribeDatasetImportJobResponse_TimeZone = &sDescribeDatasetImportJobResponse_TimeZone
+var DescribeDatasetImportJobResponse_UseGeolocationForTimeZone = &sDescribeDatasetImportJobResponse_UseGeolocationForTimeZone
+var DescribeDatasetImportJobResponse_GeolocationFormat = &sDescribeDatasetImportJobResponse_GeolocationFormat
+var DescribeDatasetImportJobResponse_DataSource = &sDescribeDatasetImportJobResponse_DataSource
+var DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes = &sDescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes
+var DescribeDatasetImportJobResponse_FieldStatistics = &sDescribeDatasetImportJobResponse_FieldStatistics
+var DescribeDatasetImportJobResponse_DataSize = &sDescribeDatasetImportJobResponse_DataSize
+var DescribeDatasetImportJobResponse_Status = &sDescribeDatasetImportJobResponse_Status
+var DescribeDatasetImportJobResponse_Message = &sDescribeDatasetImportJobResponse_Message
+var DescribeDatasetImportJobResponse_CreationTime = &sDescribeDatasetImportJobResponse_CreationTime
+var DescribeDatasetImportJobResponse_LastModificationTime = &sDescribeDatasetImportJobResponse_LastModificationTime
+var DescribeDatasetImportJobResponse_Format = &sDescribeDatasetImportJobResponse_Format
+var DescribeDatasetImportJobResponse_ImportMode = &sDescribeDatasetImportJobResponse_ImportMode
+
+var DescribeDatasetRequest = &sDescribeDatasetRequest
+var DescribeDatasetRequest_DatasetArn = &sDescribeDatasetRequest_DatasetArn
+
+var DescribeDatasetResponse = &sDescribeDatasetResponse
+var DescribeDatasetResponse_DatasetArn = &sDescribeDatasetResponse_DatasetArn
+var DescribeDatasetResponse_DatasetName = &sDescribeDatasetResponse_DatasetName
+var DescribeDatasetResponse_Domain = &sDescribeDatasetResponse_Domain
+var DescribeDatasetResponse_DatasetType = &sDescribeDatasetResponse_DatasetType
+var DescribeDatasetResponse_DataFrequency = &sDescribeDatasetResponse_DataFrequency
+var DescribeDatasetResponse_Schema = &sDescribeDatasetResponse_Schema
+var DescribeDatasetResponse_EncryptionConfig = &sDescribeDatasetResponse_EncryptionConfig
+var DescribeDatasetResponse_Status = &sDescribeDatasetResponse_Status
+var DescribeDatasetResponse_CreationTime = &sDescribeDatasetResponse_CreationTime
+var DescribeDatasetResponse_LastModificationTime = &sDescribeDatasetResponse_LastModificationTime
+
+var DescribeExplainabilityExportRequest = &sDescribeExplainabilityExportRequest
+var DescribeExplainabilityExportRequest_ExplainabilityExportArn = &sDescribeExplainabilityExportRequest_ExplainabilityExportArn
+
+var DescribeExplainabilityExportResponse = &sDescribeExplainabilityExportResponse
+var DescribeExplainabilityExportResponse_ExplainabilityExportArn = &sDescribeExplainabilityExportResponse_ExplainabilityExportArn
+var DescribeExplainabilityExportResponse_ExplainabilityExportName = &sDescribeExplainabilityExportResponse_ExplainabilityExportName
+var DescribeExplainabilityExportResponse_ExplainabilityArn = &sDescribeExplainabilityExportResponse_ExplainabilityArn
+var DescribeExplainabilityExportResponse_Destination = &sDescribeExplainabilityExportResponse_Destination
+var DescribeExplainabilityExportResponse_Message = &sDescribeExplainabilityExportResponse_Message
+var DescribeExplainabilityExportResponse_Status = &sDescribeExplainabilityExportResponse_Status
+var DescribeExplainabilityExportResponse_CreationTime = &sDescribeExplainabilityExportResponse_CreationTime
+var DescribeExplainabilityExportResponse_LastModificationTime = &sDescribeExplainabilityExportResponse_LastModificationTime
+var DescribeExplainabilityExportResponse_Format = &sDescribeExplainabilityExportResponse_Format
+
+var DescribeExplainabilityRequest = &sDescribeExplainabilityRequest
+var DescribeExplainabilityRequest_ExplainabilityArn = &sDescribeExplainabilityRequest_ExplainabilityArn
+
+var DescribeExplainabilityResponse = &sDescribeExplainabilityResponse
+var DescribeExplainabilityResponse_ExplainabilityArn = &sDescribeExplainabilityResponse_ExplainabilityArn
+var DescribeExplainabilityResponse_ExplainabilityName = &sDescribeExplainabilityResponse_ExplainabilityName
+var DescribeExplainabilityResponse_ResourceArn = &sDescribeExplainabilityResponse_ResourceArn
+var DescribeExplainabilityResponse_ExplainabilityConfig = &sDescribeExplainabilityResponse_ExplainabilityConfig
+var DescribeExplainabilityResponse_EnableVisualization = &sDescribeExplainabilityResponse_EnableVisualization
+var DescribeExplainabilityResponse_DataSource = &sDescribeExplainabilityResponse_DataSource
+var DescribeExplainabilityResponse_Schema = &sDescribeExplainabilityResponse_Schema
+var DescribeExplainabilityResponse_StartDateTime = &sDescribeExplainabilityResponse_StartDateTime
+var DescribeExplainabilityResponse_EndDateTime = &sDescribeExplainabilityResponse_EndDateTime
+var DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes = &sDescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes
+var DescribeExplainabilityResponse_Message = &sDescribeExplainabilityResponse_Message
+var DescribeExplainabilityResponse_Status = &sDescribeExplainabilityResponse_Status
+var DescribeExplainabilityResponse_CreationTime = &sDescribeExplainabilityResponse_CreationTime
+var DescribeExplainabilityResponse_LastModificationTime = &sDescribeExplainabilityResponse_LastModificationTime
+
+var DescribeForecastExportJobRequest = &sDescribeForecastExportJobRequest
+var DescribeForecastExportJobRequest_ForecastExportJobArn = &sDescribeForecastExportJobRequest_ForecastExportJobArn
+
+var DescribeForecastExportJobResponse = &sDescribeForecastExportJobResponse
+var DescribeForecastExportJobResponse_ForecastExportJobArn = &sDescribeForecastExportJobResponse_ForecastExportJobArn
+var DescribeForecastExportJobResponse_ForecastExportJobName = &sDescribeForecastExportJobResponse_ForecastExportJobName
+var DescribeForecastExportJobResponse_ForecastArn = &sDescribeForecastExportJobResponse_ForecastArn
+var DescribeForecastExportJobResponse_Destination = &sDescribeForecastExportJobResponse_Destination
+var DescribeForecastExportJobResponse_Message = &sDescribeForecastExportJobResponse_Message
+var DescribeForecastExportJobResponse_Status = &sDescribeForecastExportJobResponse_Status
+var DescribeForecastExportJobResponse_CreationTime = &sDescribeForecastExportJobResponse_CreationTime
+var DescribeForecastExportJobResponse_LastModificationTime = &sDescribeForecastExportJobResponse_LastModificationTime
+var DescribeForecastExportJobResponse_Format = &sDescribeForecastExportJobResponse_Format
+
+var DescribeForecastRequest = &sDescribeForecastRequest
+var DescribeForecastRequest_ForecastArn = &sDescribeForecastRequest_ForecastArn
+
+var DescribeForecastResponse = &sDescribeForecastResponse
+var DescribeForecastResponse_ForecastArn = &sDescribeForecastResponse_ForecastArn
+var DescribeForecastResponse_ForecastName = &sDescribeForecastResponse_ForecastName
+var DescribeForecastResponse_ForecastTypes = &sDescribeForecastResponse_ForecastTypes
+var DescribeForecastResponse_PredictorArn = &sDescribeForecastResponse_PredictorArn
+var DescribeForecastResponse_DatasetGroupArn = &sDescribeForecastResponse_DatasetGroupArn
+var DescribeForecastResponse_EstimatedTimeRemainingInMinutes = &sDescribeForecastResponse_EstimatedTimeRemainingInMinutes
+var DescribeForecastResponse_Status = &sDescribeForecastResponse_Status
+var DescribeForecastResponse_Message = &sDescribeForecastResponse_Message
+var DescribeForecastResponse_CreationTime = &sDescribeForecastResponse_CreationTime
+var DescribeForecastResponse_LastModificationTime = &sDescribeForecastResponse_LastModificationTime
+var DescribeForecastResponse_TimeSeriesSelector = &sDescribeForecastResponse_TimeSeriesSelector
+
+var DescribeMonitorRequest = &sDescribeMonitorRequest
+var DescribeMonitorRequest_MonitorArn = &sDescribeMonitorRequest_MonitorArn
+
+var DescribeMonitorResponse = &sDescribeMonitorResponse
+var DescribeMonitorResponse_MonitorName = &sDescribeMonitorResponse_MonitorName
+var DescribeMonitorResponse_MonitorArn = &sDescribeMonitorResponse_MonitorArn
+var DescribeMonitorResponse_ResourceArn = &sDescribeMonitorResponse_ResourceArn
+var DescribeMonitorResponse_Status = &sDescribeMonitorResponse_Status
+var DescribeMonitorResponse_LastEvaluationTime = &sDescribeMonitorResponse_LastEvaluationTime
+var DescribeMonitorResponse_LastEvaluationState = &sDescribeMonitorResponse_LastEvaluationState
+var DescribeMonitorResponse_Baseline = &sDescribeMonitorResponse_Baseline
+var DescribeMonitorResponse_Message = &sDescribeMonitorResponse_Message
+var DescribeMonitorResponse_CreationTime = &sDescribeMonitorResponse_CreationTime
+var DescribeMonitorResponse_LastModificationTime = &sDescribeMonitorResponse_LastModificationTime
+var DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes = &sDescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes
+
+var DescribePredictorBacktestExportJobRequest = &sDescribePredictorBacktestExportJobRequest
+var DescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn = &sDescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn
+
+var DescribePredictorBacktestExportJobResponse = &sDescribePredictorBacktestExportJobResponse
+var DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn = &sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn
+var DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName = &sDescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName
+var DescribePredictorBacktestExportJobResponse_PredictorArn = &sDescribePredictorBacktestExportJobResponse_PredictorArn
+var DescribePredictorBacktestExportJobResponse_Destination = &sDescribePredictorBacktestExportJobResponse_Destination
+var DescribePredictorBacktestExportJobResponse_Message = &sDescribePredictorBacktestExportJobResponse_Message
+var DescribePredictorBacktestExportJobResponse_Status = &sDescribePredictorBacktestExportJobResponse_Status
+var DescribePredictorBacktestExportJobResponse_CreationTime = &sDescribePredictorBacktestExportJobResponse_CreationTime
+var DescribePredictorBacktestExportJobResponse_LastModificationTime = &sDescribePredictorBacktestExportJobResponse_LastModificationTime
+var DescribePredictorBacktestExportJobResponse_Format = &sDescribePredictorBacktestExportJobResponse_Format
+
+var DescribePredictorRequest = &sDescribePredictorRequest
+var DescribePredictorRequest_PredictorArn = &sDescribePredictorRequest_PredictorArn
+
+var DescribePredictorResponse = &sDescribePredictorResponse
+var DescribePredictorResponse_PredictorArn = &sDescribePredictorResponse_PredictorArn
+var DescribePredictorResponse_PredictorName = &sDescribePredictorResponse_PredictorName
+var DescribePredictorResponse_AlgorithmArn = &sDescribePredictorResponse_AlgorithmArn
+var DescribePredictorResponse_AutoMLAlgorithmArns = &sDescribePredictorResponse_AutoMLAlgorithmArns
+var DescribePredictorResponse_ForecastHorizon = &sDescribePredictorResponse_ForecastHorizon
+var DescribePredictorResponse_ForecastTypes = &sDescribePredictorResponse_ForecastTypes
+var DescribePredictorResponse_PerformAutoML = &sDescribePredictorResponse_PerformAutoML
+var DescribePredictorResponse_AutoMLOverrideStrategy = &sDescribePredictorResponse_AutoMLOverrideStrategy
+var DescribePredictorResponse_PerformHPO = &sDescribePredictorResponse_PerformHPO
+var DescribePredictorResponse_TrainingParameters = &sDescribePredictorResponse_TrainingParameters
+var DescribePredictorResponse_EvaluationParameters = &sDescribePredictorResponse_EvaluationParameters
+var DescribePredictorResponse_HPOConfig = &sDescribePredictorResponse_HPOConfig
+var DescribePredictorResponse_InputDataConfig = &sDescribePredictorResponse_InputDataConfig
+var DescribePredictorResponse_FeaturizationConfig = &sDescribePredictorResponse_FeaturizationConfig
+var DescribePredictorResponse_EncryptionConfig = &sDescribePredictorResponse_EncryptionConfig
+var DescribePredictorResponse_PredictorExecutionDetails = &sDescribePredictorResponse_PredictorExecutionDetails
+var DescribePredictorResponse_EstimatedTimeRemainingInMinutes = &sDescribePredictorResponse_EstimatedTimeRemainingInMinutes
+var DescribePredictorResponse_IsAutoPredictor = &sDescribePredictorResponse_IsAutoPredictor
+var DescribePredictorResponse_DatasetImportJobArns = &sDescribePredictorResponse_DatasetImportJobArns
+var DescribePredictorResponse_Status = &sDescribePredictorResponse_Status
+var DescribePredictorResponse_Message = &sDescribePredictorResponse_Message
+var DescribePredictorResponse_CreationTime = &sDescribePredictorResponse_CreationTime
+var DescribePredictorResponse_LastModificationTime = &sDescribePredictorResponse_LastModificationTime
+var DescribePredictorResponse_OptimizationMetric = &sDescribePredictorResponse_OptimizationMetric
+
+var DescribeWhatIfAnalysisRequest = &sDescribeWhatIfAnalysisRequest
+var DescribeWhatIfAnalysisRequest_WhatIfAnalysisArn = &sDescribeWhatIfAnalysisRequest_WhatIfAnalysisArn
+
+var DescribeWhatIfAnalysisResponse = &sDescribeWhatIfAnalysisResponse
+var DescribeWhatIfAnalysisResponse_WhatIfAnalysisName = &sDescribeWhatIfAnalysisResponse_WhatIfAnalysisName
+var DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn = &sDescribeWhatIfAnalysisResponse_WhatIfAnalysisArn
+var DescribeWhatIfAnalysisResponse_ForecastArn = &sDescribeWhatIfAnalysisResponse_ForecastArn
+var DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes = &sDescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes
+var DescribeWhatIfAnalysisResponse_Status = &sDescribeWhatIfAnalysisResponse_Status
+var DescribeWhatIfAnalysisResponse_Message = &sDescribeWhatIfAnalysisResponse_Message
+var DescribeWhatIfAnalysisResponse_CreationTime = &sDescribeWhatIfAnalysisResponse_CreationTime
+var DescribeWhatIfAnalysisResponse_LastModificationTime = &sDescribeWhatIfAnalysisResponse_LastModificationTime
+var DescribeWhatIfAnalysisResponse_TimeSeriesSelector = &sDescribeWhatIfAnalysisResponse_TimeSeriesSelector
+
+var DescribeWhatIfForecastExportRequest = &sDescribeWhatIfForecastExportRequest
+var DescribeWhatIfForecastExportRequest_WhatIfForecastExportArn = &sDescribeWhatIfForecastExportRequest_WhatIfForecastExportArn
+
+var DescribeWhatIfForecastExportResponse = &sDescribeWhatIfForecastExportResponse
+var DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn = &sDescribeWhatIfForecastExportResponse_WhatIfForecastExportArn
+var DescribeWhatIfForecastExportResponse_WhatIfForecastExportName = &sDescribeWhatIfForecastExportResponse_WhatIfForecastExportName
+var DescribeWhatIfForecastExportResponse_WhatIfForecastArns = &sDescribeWhatIfForecastExportResponse_WhatIfForecastArns
+var DescribeWhatIfForecastExportResponse_Destination = &sDescribeWhatIfForecastExportResponse_Destination
+var DescribeWhatIfForecastExportResponse_Message = &sDescribeWhatIfForecastExportResponse_Message
+var DescribeWhatIfForecastExportResponse_Status = &sDescribeWhatIfForecastExportResponse_Status
+var DescribeWhatIfForecastExportResponse_CreationTime = &sDescribeWhatIfForecastExportResponse_CreationTime
+var DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes = &sDescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes
+var DescribeWhatIfForecastExportResponse_LastModificationTime = &sDescribeWhatIfForecastExportResponse_LastModificationTime
+var DescribeWhatIfForecastExportResponse_Format = &sDescribeWhatIfForecastExportResponse_Format
+
+var DescribeWhatIfForecastRequest = &sDescribeWhatIfForecastRequest
+var DescribeWhatIfForecastRequest_WhatIfForecastArn = &sDescribeWhatIfForecastRequest_WhatIfForecastArn
+
+var DescribeWhatIfForecastResponse = &sDescribeWhatIfForecastResponse
+var DescribeWhatIfForecastResponse_WhatIfForecastName = &sDescribeWhatIfForecastResponse_WhatIfForecastName
+var DescribeWhatIfForecastResponse_WhatIfForecastArn = &sDescribeWhatIfForecastResponse_WhatIfForecastArn
+var DescribeWhatIfForecastResponse_WhatIfAnalysisArn = &sDescribeWhatIfForecastResponse_WhatIfAnalysisArn
+var DescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes = &sDescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes
+var DescribeWhatIfForecastResponse_Status = &sDescribeWhatIfForecastResponse_Status
+var DescribeWhatIfForecastResponse_Message = &sDescribeWhatIfForecastResponse_Message
+var DescribeWhatIfForecastResponse_CreationTime = &sDescribeWhatIfForecastResponse_CreationTime
+var DescribeWhatIfForecastResponse_LastModificationTime = &sDescribeWhatIfForecastResponse_LastModificationTime
+var DescribeWhatIfForecastResponse_TimeSeriesTransformations = &sDescribeWhatIfForecastResponse_TimeSeriesTransformations
+var DescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource = &sDescribeWhatIfForecastResponse_TimeSeriesReplacementsDataSource
+var DescribeWhatIfForecastResponse_ForecastTypes = &sDescribeWhatIfForecastResponse_ForecastTypes
+
+var GetAccuracyMetricsRequest = &sGetAccuracyMetricsRequest
+var GetAccuracyMetricsRequest_PredictorArn = &sGetAccuracyMetricsRequest_PredictorArn
+
+var GetAccuracyMetricsResponse = &sGetAccuracyMetricsResponse
+var GetAccuracyMetricsResponse_PredictorEvaluationResults = &sGetAccuracyMetricsResponse_PredictorEvaluationResults
+var GetAccuracyMetricsResponse_IsAutoPredictor = &sGetAccuracyMetricsResponse_IsAutoPredictor
+var GetAccuracyMetricsResponse_AutoMLOverrideStrategy = &sGetAccuracyMetricsResponse_AutoMLOverrideStrategy
+var GetAccuracyMetricsResponse_OptimizationMetric = &sGetAccuracyMetricsResponse_OptimizationMetric
+
+var ListDatasetGroupsRequest = &sListDatasetGroupsRequest
+var ListDatasetGroupsRequest_NextToken = &sListDatasetGroupsRequest_NextToken
+var ListDatasetGroupsRequest_MaxResults = &sListDatasetGroupsRequest_MaxResults
+
+var ListDatasetGroupsResponse = &sListDatasetGroupsResponse
+var ListDatasetGroupsResponse_DatasetGroups = &sListDatasetGroupsResponse_DatasetGroups
+var ListDatasetGroupsResponse_NextToken = &sListDatasetGroupsResponse_NextToken
+
+var ListDatasetImportJobsRequest = &sListDatasetImportJobsRequest
+var ListDatasetImportJobsRequest_NextToken = &sListDatasetImportJobsRequest_NextToken
+var ListDatasetImportJobsRequest_MaxResults = &sListDatasetImportJobsRequest_MaxResults
+var ListDatasetImportJobsRequest_Filters = &sListDatasetImportJobsRequest_Filters
+
+var ListDatasetImportJobsResponse = &sListDatasetImportJobsResponse
+var ListDatasetImportJobsResponse_DatasetImportJobs = &sListDatasetImportJobsResponse_DatasetImportJobs
+var ListDatasetImportJobsResponse_NextToken = &sListDatasetImportJobsResponse_NextToken
+
+var ListDatasetsRequest = &sListDatasetsRequest
+var ListDatasetsRequest_NextToken = &sListDatasetsRequest_NextToken
+var ListDatasetsRequest_MaxResults = &sListDatasetsRequest_MaxResults
+
+var ListDatasetsResponse = &sListDatasetsResponse
+var ListDatasetsResponse_Datasets = &sListDatasetsResponse_Datasets
+var ListDatasetsResponse_NextToken = &sListDatasetsResponse_NextToken
+
+var ListExplainabilitiesRequest = &sListExplainabilitiesRequest
+var ListExplainabilitiesRequest_NextToken = &sListExplainabilitiesRequest_NextToken
+var ListExplainabilitiesRequest_MaxResults = &sListExplainabilitiesRequest_MaxResults
+var ListExplainabilitiesRequest_Filters = &sListExplainabilitiesRequest_Filters
+
+var ListExplainabilitiesResponse = &sListExplainabilitiesResponse
+var ListExplainabilitiesResponse_Explainabilities = &sListExplainabilitiesResponse_Explainabilities
+var ListExplainabilitiesResponse_NextToken = &sListExplainabilitiesResponse_NextToken
+
+var ListExplainabilityExportsRequest = &sListExplainabilityExportsRequest
+var ListExplainabilityExportsRequest_NextToken = &sListExplainabilityExportsRequest_NextToken
+var ListExplainabilityExportsRequest_MaxResults = &sListExplainabilityExportsRequest_MaxResults
+var ListExplainabilityExportsRequest_Filters = &sListExplainabilityExportsRequest_Filters
+
+var ListExplainabilityExportsResponse = &sListExplainabilityExportsResponse
+var ListExplainabilityExportsResponse_ExplainabilityExports = &sListExplainabilityExportsResponse_ExplainabilityExports
+var ListExplainabilityExportsResponse_NextToken = &sListExplainabilityExportsResponse_NextToken
+
+var ListForecastExportJobsRequest = &sListForecastExportJobsRequest
+var ListForecastExportJobsRequest_NextToken = &sListForecastExportJobsRequest_NextToken
+var ListForecastExportJobsRequest_MaxResults = &sListForecastExportJobsRequest_MaxResults
+var ListForecastExportJobsRequest_Filters = &sListForecastExportJobsRequest_Filters
+
+var ListForecastExportJobsResponse = &sListForecastExportJobsResponse
+var ListForecastExportJobsResponse_ForecastExportJobs = &sListForecastExportJobsResponse_ForecastExportJobs
+var ListForecastExportJobsResponse_NextToken = &sListForecastExportJobsResponse_NextToken
+
+var ListForecastsRequest = &sListForecastsRequest
+var ListForecastsRequest_NextToken = &sListForecastsRequest_NextToken
+var ListForecastsRequest_MaxResults = &sListForecastsRequest_MaxResults
+var ListForecastsRequest_Filters = &sListForecastsRequest_Filters
+
+var ListForecastsResponse = &sListForecastsResponse
+var ListForecastsResponse_Forecasts = &sListForecastsResponse_Forecasts
+var ListForecastsResponse_NextToken = &sListForecastsResponse_NextToken
+
+var ListMonitorEvaluationsRequest = &sListMonitorEvaluationsRequest
+var ListMonitorEvaluationsRequest_NextToken = &sListMonitorEvaluationsRequest_NextToken
+var ListMonitorEvaluationsRequest_MaxResults = &sListMonitorEvaluationsRequest_MaxResults
+var ListMonitorEvaluationsRequest_MonitorArn = &sListMonitorEvaluationsRequest_MonitorArn
+var ListMonitorEvaluationsRequest_Filters = &sListMonitorEvaluationsRequest_Filters
+
+var ListMonitorEvaluationsResponse = &sListMonitorEvaluationsResponse
+var ListMonitorEvaluationsResponse_NextToken = &sListMonitorEvaluationsResponse_NextToken
+var ListMonitorEvaluationsResponse_PredictorMonitorEvaluations = &sListMonitorEvaluationsResponse_PredictorMonitorEvaluations
+
+var ListMonitorsRequest = &sListMonitorsRequest
+var ListMonitorsRequest_NextToken = &sListMonitorsRequest_NextToken
+var ListMonitorsRequest_MaxResults = &sListMonitorsRequest_MaxResults
+var ListMonitorsRequest_Filters = &sListMonitorsRequest_Filters
+
+var ListMonitorsResponse = &sListMonitorsResponse
+var ListMonitorsResponse_Monitors = &sListMonitorsResponse_Monitors
+var ListMonitorsResponse_NextToken = &sListMonitorsResponse_NextToken
+
+var ListPredictorBacktestExportJobsRequest = &sListPredictorBacktestExportJobsRequest
+var ListPredictorBacktestExportJobsRequest_NextToken = &sListPredictorBacktestExportJobsRequest_NextToken
+var ListPredictorBacktestExportJobsRequest_MaxResults = &sListPredictorBacktestExportJobsRequest_MaxResults
+var ListPredictorBacktestExportJobsRequest_Filters = &sListPredictorBacktestExportJobsRequest_Filters
+
+var ListPredictorBacktestExportJobsResponse = &sListPredictorBacktestExportJobsResponse
+var ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs = &sListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs
+var ListPredictorBacktestExportJobsResponse_NextToken = &sListPredictorBacktestExportJobsResponse_NextToken
+
+var ListPredictorsRequest = &sListPredictorsRequest
+var ListPredictorsRequest_NextToken = &sListPredictorsRequest_NextToken
+var ListPredictorsRequest_MaxResults = &sListPredictorsRequest_MaxResults
+var ListPredictorsRequest_Filters = &sListPredictorsRequest_Filters
+
+var ListPredictorsResponse = &sListPredictorsResponse
+var ListPredictorsResponse_Predictors = &sListPredictorsResponse_Predictors
+var ListPredictorsResponse_NextToken = &sListPredictorsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListWhatIfAnalysesRequest = &sListWhatIfAnalysesRequest
+var ListWhatIfAnalysesRequest_NextToken = &sListWhatIfAnalysesRequest_NextToken
+var ListWhatIfAnalysesRequest_MaxResults = &sListWhatIfAnalysesRequest_MaxResults
+var ListWhatIfAnalysesRequest_Filters = &sListWhatIfAnalysesRequest_Filters
+
+var ListWhatIfAnalysesResponse = &sListWhatIfAnalysesResponse
+var ListWhatIfAnalysesResponse_WhatIfAnalyses = &sListWhatIfAnalysesResponse_WhatIfAnalyses
+var ListWhatIfAnalysesResponse_NextToken = &sListWhatIfAnalysesResponse_NextToken
+
+var ListWhatIfForecastExportsRequest = &sListWhatIfForecastExportsRequest
+var ListWhatIfForecastExportsRequest_NextToken = &sListWhatIfForecastExportsRequest_NextToken
+var ListWhatIfForecastExportsRequest_MaxResults = &sListWhatIfForecastExportsRequest_MaxResults
+var ListWhatIfForecastExportsRequest_Filters = &sListWhatIfForecastExportsRequest_Filters
+
+var ListWhatIfForecastExportsResponse = &sListWhatIfForecastExportsResponse
+var ListWhatIfForecastExportsResponse_WhatIfForecastExports = &sListWhatIfForecastExportsResponse_WhatIfForecastExports
+var ListWhatIfForecastExportsResponse_NextToken = &sListWhatIfForecastExportsResponse_NextToken
+
+var ListWhatIfForecastsRequest = &sListWhatIfForecastsRequest
+var ListWhatIfForecastsRequest_NextToken = &sListWhatIfForecastsRequest_NextToken
+var ListWhatIfForecastsRequest_MaxResults = &sListWhatIfForecastsRequest_MaxResults
+var ListWhatIfForecastsRequest_Filters = &sListWhatIfForecastsRequest_Filters
+
+var ListWhatIfForecastsResponse = &sListWhatIfForecastsResponse
+var ListWhatIfForecastsResponse_WhatIfForecasts = &sListWhatIfForecastsResponse_WhatIfForecasts
+var ListWhatIfForecastsResponse_NextToken = &sListWhatIfForecastsResponse_NextToken
+
+var ResumeResourceRequest = &sResumeResourceRequest
+var ResumeResourceRequest_ResourceArn = &sResumeResourceRequest_ResourceArn
+
+var StopResourceRequest = &sStopResourceRequest
+var StopResourceRequest_ResourceArn = &sStopResourceRequest_ResourceArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDatasetGroupRequest = &sUpdateDatasetGroupRequest
+var UpdateDatasetGroupRequest_DatasetGroupArn = &sUpdateDatasetGroupRequest_DatasetGroupArn
+var UpdateDatasetGroupRequest_DatasetArns = &sUpdateDatasetGroupRequest_DatasetArns
+
+var UpdateDatasetGroupResponse = &sUpdateDatasetGroupResponse
+
+var AmazonForecast = &smithy.ServiceSchema{Schema: &s_AmazonForecast, Version: "2018-06-26"}

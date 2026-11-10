@@ -4,4669 +4,4565 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateAssessmentReportEvidenceFolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssociateAssessmentReportEvidenceFolder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eAssociateAssessmentReportEvidenceFolder                                          smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidence                                           smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessment                                                smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessment                                                smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidence                                        smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControl                                           smithy.SchemaExtensions
+	eCreateAssessment                                                                 smithy.SchemaExtensions
+	eCreateAssessmentFramework                                                        smithy.SchemaExtensions
+	eCreateAssessmentReport                                                           smithy.SchemaExtensions
+	eCreateControl                                                                    smithy.SchemaExtensions
+	eDeleteAssessment                                                                 smithy.SchemaExtensions
+	eDeleteAssessmentFramework                                                        smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkShare                                                   smithy.SchemaExtensions
+	eDeleteAssessmentReport                                                           smithy.SchemaExtensions
+	eDeleteControl                                                                    smithy.SchemaExtensions
+	eDeregisterAccount                                                                smithy.SchemaExtensions
+	eDeregisterOrganizationAdminAccount                                               smithy.SchemaExtensions
+	eDisassociateAssessmentReportEvidenceFolder                                       smithy.SchemaExtensions
+	eGetAccountStatus                                                                 smithy.SchemaExtensions
+	eGetAssessment                                                                    smithy.SchemaExtensions
+	eGetAssessmentFramework                                                           smithy.SchemaExtensions
+	eGetAssessmentReportUrl                                                           smithy.SchemaExtensions
+	eGetChangeLogs                                                                    smithy.SchemaExtensions
+	eGetControl                                                                       smithy.SchemaExtensions
+	eGetDelegations                                                                   smithy.SchemaExtensions
+	eGetEvidence                                                                      smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolder                                                      smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrl                                                         smithy.SchemaExtensions
+	eGetEvidenceFolder                                                                smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessment                                                   smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControl                                            smithy.SchemaExtensions
+	eGetInsights                                                                      smithy.SchemaExtensions
+	eGetInsightsByAssessment                                                          smithy.SchemaExtensions
+	eGetOrganizationAdminAccount                                                      smithy.SchemaExtensions
+	eGetServicesInScope                                                               smithy.SchemaExtensions
+	eGetSettings                                                                      smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomain                                     smithy.SchemaExtensions
+	eListAssessmentFrameworks                                                         smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequests                                             smithy.SchemaExtensions
+	eListAssessmentReports                                                            smithy.SchemaExtensions
+	eListAssessments                                                                  smithy.SchemaExtensions
+	eListControlDomainInsights                                                        smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessment                                            smithy.SchemaExtensions
+	eListControlInsightsByControlDomain                                               smithy.SchemaExtensions
+	eListControls                                                                     smithy.SchemaExtensions
+	eListKeywordsForDataSource                                                        smithy.SchemaExtensions
+	eListNotifications                                                                smithy.SchemaExtensions
+	eListTagsForResource                                                              smithy.SchemaExtensions
+	eRegisterAccount                                                                  smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccount                                                 smithy.SchemaExtensions
+	eStartAssessmentFrameworkShare                                                    smithy.SchemaExtensions
+	eTagResource                                                                      smithy.SchemaExtensions
+	eUntagResource                                                                    smithy.SchemaExtensions
+	eUpdateAssessment                                                                 smithy.SchemaExtensions
+	eUpdateAssessmentControl                                                          smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatus                                                 smithy.SchemaExtensions
+	eUpdateAssessmentFramework                                                        smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShare                                                   smithy.SchemaExtensions
+	eUpdateAssessmentStatus                                                           smithy.SchemaExtensions
+	eUpdateControl                                                                    smithy.SchemaExtensions
+	eUpdateSettings                                                                   smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrity                                                smithy.SchemaExtensions
+	e_BedrockAssessmentManagerLambda                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                                            smithy.SchemaExtensions
+	eAccessDeniedException_message                                                    smithy.SchemaExtensions
+	e_AccountId                                                                       smithy.SchemaExtensions
+	e_AccountName                                                                     smithy.SchemaExtensions
+	eAccountStatus                                                                    smithy.SchemaExtensions
+	eAccountStatus_ACTIVE                                                             smithy.SchemaExtensions
+	eAccountStatus_INACTIVE                                                           smithy.SchemaExtensions
+	eAccountStatus_PENDING_ACTIVATION                                                 smithy.SchemaExtensions
+	eActionEnum                                                                       smithy.SchemaExtensions
+	eActionEnum_CREATE                                                                smithy.SchemaExtensions
+	eActionEnum_UPDATE_METADATA                                                       smithy.SchemaExtensions
+	eActionEnum_ACTIVE                                                                smithy.SchemaExtensions
+	eActionEnum_INACTIVE                                                              smithy.SchemaExtensions
+	eActionEnum_DELETE                                                                smithy.SchemaExtensions
+	eActionEnum_UNDER_REVIEW                                                          smithy.SchemaExtensions
+	eActionEnum_REVIEWED                                                              smithy.SchemaExtensions
+	eActionEnum_IMPORT_EVIDENCE                                                       smithy.SchemaExtensions
+	e_ActionPlanInstructions                                                          smithy.SchemaExtensions
+	e_ActionPlanTitle                                                                 smithy.SchemaExtensions
+	eAssessment                                                                       smithy.SchemaExtensions
+	eAssessment_arn                                                                   smithy.SchemaExtensions
+	eAssessment_awsAccount                                                            smithy.SchemaExtensions
+	eAssessment_metadata                                                              smithy.SchemaExtensions
+	eAssessment_framework                                                             smithy.SchemaExtensions
+	eAssessment_tags                                                                  smithy.SchemaExtensions
+	eAssessmentControl                                                                smithy.SchemaExtensions
+	eAssessmentControl_id                                                             smithy.SchemaExtensions
+	eAssessmentControl_name                                                           smithy.SchemaExtensions
+	eAssessmentControl_description                                                    smithy.SchemaExtensions
+	eAssessmentControl_status                                                         smithy.SchemaExtensions
+	eAssessmentControl_response                                                       smithy.SchemaExtensions
+	eAssessmentControl_comments                                                       smithy.SchemaExtensions
+	eAssessmentControl_evidenceSources                                                smithy.SchemaExtensions
+	eAssessmentControl_evidenceCount                                                  smithy.SchemaExtensions
+	eAssessmentControl_assessmentReportEvidenceCount                                  smithy.SchemaExtensions
+	e_AssessmentControls                                                              smithy.SchemaExtensions
+	e_AssessmentControls_member                                                       smithy.SchemaExtensions
+	eAssessmentControlSet                                                             smithy.SchemaExtensions
+	eAssessmentControlSet_id                                                          smithy.SchemaExtensions
+	eAssessmentControlSet_description                                                 smithy.SchemaExtensions
+	eAssessmentControlSet_status                                                      smithy.SchemaExtensions
+	eAssessmentControlSet_roles                                                       smithy.SchemaExtensions
+	eAssessmentControlSet_controls                                                    smithy.SchemaExtensions
+	eAssessmentControlSet_delegations                                                 smithy.SchemaExtensions
+	eAssessmentControlSet_systemEvidenceCount                                         smithy.SchemaExtensions
+	eAssessmentControlSet_manualEvidenceCount                                         smithy.SchemaExtensions
+	e_AssessmentControlSets                                                           smithy.SchemaExtensions
+	e_AssessmentControlSets_member                                                    smithy.SchemaExtensions
+	e_AssessmentDescription                                                           smithy.SchemaExtensions
+	eAssessmentEvidenceFolder                                                         smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_name                                                    smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_date                                                    smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_assessmentId                                            smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_controlSetId                                            smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_controlId                                               smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_id                                                      smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_dataSource                                              smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_author                                                  smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_totalEvidence                                           smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_assessmentReportSelectionCount                          smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_controlName                                             smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceResourcesIncludedCount                          smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount                    smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceByTypeManualCount                               smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount                      smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount                smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceByTypeUserActivityCount                         smithy.SchemaExtensions
+	eAssessmentEvidenceFolder_evidenceAwsServiceSourceCount                           smithy.SchemaExtensions
+	e_AssessmentEvidenceFolderName                                                    smithy.SchemaExtensions
+	e_AssessmentEvidenceFolders                                                       smithy.SchemaExtensions
+	e_AssessmentEvidenceFolders_member                                                smithy.SchemaExtensions
+	eAssessmentFramework                                                              smithy.SchemaExtensions
+	eAssessmentFramework_id                                                           smithy.SchemaExtensions
+	eAssessmentFramework_arn                                                          smithy.SchemaExtensions
+	eAssessmentFramework_metadata                                                     smithy.SchemaExtensions
+	eAssessmentFramework_controlSets                                                  smithy.SchemaExtensions
+	e_AssessmentFrameworkDescription                                                  smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata                                                      smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_arn                                                  smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_id                                                   smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_type                                                 smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_name                                                 smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_description                                          smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_logo                                                 smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_complianceType                                       smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_controlsCount                                        smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_controlSetsCount                                     smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_createdAt                                            smithy.SchemaExtensions
+	eAssessmentFrameworkMetadata_lastUpdatedAt                                        smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest                                                  smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_id                                               smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_frameworkId                                      smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_frameworkName                                    smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_frameworkDescription                             smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_status                                           smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_sourceAccount                                    smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_destinationAccount                               smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_destinationRegion                                smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_expirationTime                                   smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_creationTime                                     smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_lastUpdated                                      smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_comment                                          smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_standardControlsCount                            smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_customControlsCount                              smithy.SchemaExtensions
+	eAssessmentFrameworkShareRequest_complianceType                                   smithy.SchemaExtensions
+	e_AssessmentFrameworkShareRequestList                                             smithy.SchemaExtensions
+	e_AssessmentFrameworkShareRequestList_member                                      smithy.SchemaExtensions
+	eAssessmentMetadata                                                               smithy.SchemaExtensions
+	eAssessmentMetadata_name                                                          smithy.SchemaExtensions
+	eAssessmentMetadata_id                                                            smithy.SchemaExtensions
+	eAssessmentMetadata_description                                                   smithy.SchemaExtensions
+	eAssessmentMetadata_complianceType                                                smithy.SchemaExtensions
+	eAssessmentMetadata_status                                                        smithy.SchemaExtensions
+	eAssessmentMetadata_assessmentReportsDestination                                  smithy.SchemaExtensions
+	eAssessmentMetadata_scope                                                         smithy.SchemaExtensions
+	eAssessmentMetadata_roles                                                         smithy.SchemaExtensions
+	eAssessmentMetadata_delegations                                                   smithy.SchemaExtensions
+	eAssessmentMetadata_creationTime                                                  smithy.SchemaExtensions
+	eAssessmentMetadata_lastUpdated                                                   smithy.SchemaExtensions
+	eAssessmentMetadataItem                                                           smithy.SchemaExtensions
+	eAssessmentMetadataItem_name                                                      smithy.SchemaExtensions
+	eAssessmentMetadataItem_id                                                        smithy.SchemaExtensions
+	eAssessmentMetadataItem_complianceType                                            smithy.SchemaExtensions
+	eAssessmentMetadataItem_status                                                    smithy.SchemaExtensions
+	eAssessmentMetadataItem_roles                                                     smithy.SchemaExtensions
+	eAssessmentMetadataItem_delegations                                               smithy.SchemaExtensions
+	eAssessmentMetadataItem_creationTime                                              smithy.SchemaExtensions
+	eAssessmentMetadataItem_lastUpdated                                               smithy.SchemaExtensions
+	e_AssessmentName                                                                  smithy.SchemaExtensions
+	eAssessmentReport                                                                 smithy.SchemaExtensions
+	eAssessmentReport_id                                                              smithy.SchemaExtensions
+	eAssessmentReport_name                                                            smithy.SchemaExtensions
+	eAssessmentReport_description                                                     smithy.SchemaExtensions
+	eAssessmentReport_awsAccountId                                                    smithy.SchemaExtensions
+	eAssessmentReport_assessmentId                                                    smithy.SchemaExtensions
+	eAssessmentReport_assessmentName                                                  smithy.SchemaExtensions
+	eAssessmentReport_author                                                          smithy.SchemaExtensions
+	eAssessmentReport_status                                                          smithy.SchemaExtensions
+	eAssessmentReport_creationTime                                                    smithy.SchemaExtensions
+	e_AssessmentReportDescription                                                     smithy.SchemaExtensions
+	eAssessmentReportDestinationType                                                  smithy.SchemaExtensions
+	eAssessmentReportDestinationType_S3                                               smithy.SchemaExtensions
+	eAssessmentReportEvidenceError                                                    smithy.SchemaExtensions
+	eAssessmentReportEvidenceError_evidenceId                                         smithy.SchemaExtensions
+	eAssessmentReportEvidenceError_errorCode                                          smithy.SchemaExtensions
+	eAssessmentReportEvidenceError_errorMessage                                       smithy.SchemaExtensions
+	e_AssessmentReportEvidenceErrors                                                  smithy.SchemaExtensions
+	e_AssessmentReportEvidenceErrors_member                                           smithy.SchemaExtensions
+	eAssessmentReportMetadata                                                         smithy.SchemaExtensions
+	eAssessmentReportMetadata_id                                                      smithy.SchemaExtensions
+	eAssessmentReportMetadata_name                                                    smithy.SchemaExtensions
+	eAssessmentReportMetadata_description                                             smithy.SchemaExtensions
+	eAssessmentReportMetadata_assessmentId                                            smithy.SchemaExtensions
+	eAssessmentReportMetadata_assessmentName                                          smithy.SchemaExtensions
+	eAssessmentReportMetadata_author                                                  smithy.SchemaExtensions
+	eAssessmentReportMetadata_status                                                  smithy.SchemaExtensions
+	eAssessmentReportMetadata_creationTime                                            smithy.SchemaExtensions
+	e_AssessmentReportName                                                            smithy.SchemaExtensions
+	eAssessmentReportsDestination                                                     smithy.SchemaExtensions
+	eAssessmentReportsDestination_destinationType                                     smithy.SchemaExtensions
+	eAssessmentReportsDestination_destination                                         smithy.SchemaExtensions
+	e_AssessmentReportsMetadata                                                       smithy.SchemaExtensions
+	e_AssessmentReportsMetadata_member                                                smithy.SchemaExtensions
+	eAssessmentReportStatus                                                           smithy.SchemaExtensions
+	eAssessmentReportStatus_COMPLETE                                                  smithy.SchemaExtensions
+	eAssessmentReportStatus_IN_PROGRESS                                               smithy.SchemaExtensions
+	eAssessmentReportStatus_FAILED                                                    smithy.SchemaExtensions
+	eAssessmentStatus                                                                 smithy.SchemaExtensions
+	eAssessmentStatus_ACTIVE                                                          smithy.SchemaExtensions
+	eAssessmentStatus_INACTIVE                                                        smithy.SchemaExtensions
+	e_AuditManagerArn                                                                 smithy.SchemaExtensions
+	eAWSAccount                                                                       smithy.SchemaExtensions
+	eAWSAccount_id                                                                    smithy.SchemaExtensions
+	eAWSAccount_emailAddress                                                          smithy.SchemaExtensions
+	eAWSAccount_name                                                                  smithy.SchemaExtensions
+	e_AWSAccounts                                                                     smithy.SchemaExtensions
+	e_AWSAccounts_member                                                              smithy.SchemaExtensions
+	eAWSService                                                                       smithy.SchemaExtensions
+	eAWSService_serviceName                                                           smithy.SchemaExtensions
+	e_AWSServiceName                                                                  smithy.SchemaExtensions
+	e_AWSServices                                                                     smithy.SchemaExtensions
+	e_AWSServices_member                                                              smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentError                                           smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentError_createDelegationRequest                   smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentError_errorCode                                 smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentError_errorMessage                              smithy.SchemaExtensions
+	e_BatchCreateDelegationByAssessmentErrors                                         smithy.SchemaExtensions
+	e_BatchCreateDelegationByAssessmentErrors_member                                  smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentError                                           smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentError_delegationId                              smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentError_errorCode                                 smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentError_errorMessage                              smithy.SchemaExtensions
+	e_BatchDeleteDelegationByAssessmentErrors                                         smithy.SchemaExtensions
+	e_BatchDeleteDelegationByAssessmentErrors_member                                  smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlError                                      smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlError_manualEvidence                       smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlError_errorCode                            smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlError_errorMessage                         smithy.SchemaExtensions
+	e_BatchImportEvidenceToAssessmentControlErrors                                    smithy.SchemaExtensions
+	e_BatchImportEvidenceToAssessmentControlErrors_member                             smithy.SchemaExtensions
+	e_Boolean                                                                         smithy.SchemaExtensions
+	eChangeLog                                                                        smithy.SchemaExtensions
+	eChangeLog_objectType                                                             smithy.SchemaExtensions
+	eChangeLog_objectName                                                             smithy.SchemaExtensions
+	eChangeLog_action                                                                 smithy.SchemaExtensions
+	eChangeLog_createdAt                                                              smithy.SchemaExtensions
+	eChangeLog_createdBy                                                              smithy.SchemaExtensions
+	e_ChangeLogs                                                                      smithy.SchemaExtensions
+	e_ChangeLogs_member                                                               smithy.SchemaExtensions
+	e_CloudTrailArn                                                                   smithy.SchemaExtensions
+	e_ComplianceType                                                                  smithy.SchemaExtensions
+	eControl                                                                          smithy.SchemaExtensions
+	eControl_arn                                                                      smithy.SchemaExtensions
+	eControl_id                                                                       smithy.SchemaExtensions
+	eControl_type                                                                     smithy.SchemaExtensions
+	eControl_name                                                                     smithy.SchemaExtensions
+	eControl_description                                                              smithy.SchemaExtensions
+	eControl_testingInformation                                                       smithy.SchemaExtensions
+	eControl_actionPlanTitle                                                          smithy.SchemaExtensions
+	eControl_actionPlanInstructions                                                   smithy.SchemaExtensions
+	eControl_controlSources                                                           smithy.SchemaExtensions
+	eControl_controlMappingSources                                                    smithy.SchemaExtensions
+	eControl_createdAt                                                                smithy.SchemaExtensions
+	eControl_lastUpdatedAt                                                            smithy.SchemaExtensions
+	eControl_createdBy                                                                smithy.SchemaExtensions
+	eControl_lastUpdatedBy                                                            smithy.SchemaExtensions
+	eControl_tags                                                                     smithy.SchemaExtensions
+	eControl_state                                                                    smithy.SchemaExtensions
+	e_ControlCatalogId                                                                smithy.SchemaExtensions
+	eControlComment                                                                   smithy.SchemaExtensions
+	eControlComment_authorName                                                        smithy.SchemaExtensions
+	eControlComment_commentBody                                                       smithy.SchemaExtensions
+	eControlComment_postedDate                                                        smithy.SchemaExtensions
+	e_ControlCommentBody                                                              smithy.SchemaExtensions
+	e_ControlComments                                                                 smithy.SchemaExtensions
+	e_ControlComments_member                                                          smithy.SchemaExtensions
+	e_ControlDescription                                                              smithy.SchemaExtensions
+	e_ControlDomainId                                                                 smithy.SchemaExtensions
+	eControlDomainInsights                                                            smithy.SchemaExtensions
+	eControlDomainInsights_name                                                       smithy.SchemaExtensions
+	eControlDomainInsights_id                                                         smithy.SchemaExtensions
+	eControlDomainInsights_controlsCountByNoncompliantEvidence                        smithy.SchemaExtensions
+	eControlDomainInsights_totalControlsCount                                         smithy.SchemaExtensions
+	eControlDomainInsights_evidenceInsights                                           smithy.SchemaExtensions
+	eControlDomainInsights_lastUpdated                                                smithy.SchemaExtensions
+	e_ControlDomainInsightsList                                                       smithy.SchemaExtensions
+	e_ControlDomainInsightsList_member                                                smithy.SchemaExtensions
+	e_ControlInsightsMetadata                                                         smithy.SchemaExtensions
+	e_ControlInsightsMetadata_member                                                  smithy.SchemaExtensions
+	e_ControlInsightsMetadataByAssessment                                             smithy.SchemaExtensions
+	e_ControlInsightsMetadataByAssessment_member                                      smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem                                          smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem_name                                     smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem_id                                       smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem_evidenceInsights                         smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem_controlSetName                           smithy.SchemaExtensions
+	eControlInsightsMetadataByAssessmentItem_lastUpdated                              smithy.SchemaExtensions
+	eControlInsightsMetadataItem                                                      smithy.SchemaExtensions
+	eControlInsightsMetadataItem_name                                                 smithy.SchemaExtensions
+	eControlInsightsMetadataItem_id                                                   smithy.SchemaExtensions
+	eControlInsightsMetadataItem_evidenceInsights                                     smithy.SchemaExtensions
+	eControlInsightsMetadataItem_lastUpdated                                          smithy.SchemaExtensions
+	eControlMappingSource                                                             smithy.SchemaExtensions
+	eControlMappingSource_sourceId                                                    smithy.SchemaExtensions
+	eControlMappingSource_sourceName                                                  smithy.SchemaExtensions
+	eControlMappingSource_sourceDescription                                           smithy.SchemaExtensions
+	eControlMappingSource_sourceSetUpOption                                           smithy.SchemaExtensions
+	eControlMappingSource_sourceType                                                  smithy.SchemaExtensions
+	eControlMappingSource_sourceKeyword                                               smithy.SchemaExtensions
+	eControlMappingSource_sourceFrequency                                             smithy.SchemaExtensions
+	eControlMappingSource_troubleshootingText                                         smithy.SchemaExtensions
+	e_ControlMappingSources                                                           smithy.SchemaExtensions
+	e_ControlMappingSources_member                                                    smithy.SchemaExtensions
+	eControlMetadata                                                                  smithy.SchemaExtensions
+	eControlMetadata_arn                                                              smithy.SchemaExtensions
+	eControlMetadata_id                                                               smithy.SchemaExtensions
+	eControlMetadata_name                                                             smithy.SchemaExtensions
+	eControlMetadata_controlSources                                                   smithy.SchemaExtensions
+	eControlMetadata_createdAt                                                        smithy.SchemaExtensions
+	eControlMetadata_lastUpdatedAt                                                    smithy.SchemaExtensions
+	e_ControlMetadataList                                                             smithy.SchemaExtensions
+	e_ControlMetadataList_member                                                      smithy.SchemaExtensions
+	e_ControlName                                                                     smithy.SchemaExtensions
+	eControlResponse                                                                  smithy.SchemaExtensions
+	eControlResponse_MANUAL                                                           smithy.SchemaExtensions
+	eControlResponse_AUTOMATE                                                         smithy.SchemaExtensions
+	eControlResponse_DEFER                                                            smithy.SchemaExtensions
+	eControlResponse_IGNORE                                                           smithy.SchemaExtensions
+	e_Controls                                                                        smithy.SchemaExtensions
+	e_Controls_member                                                                 smithy.SchemaExtensions
+	e_ControlsCount                                                                   smithy.SchemaExtensions
+	eControlSet                                                                       smithy.SchemaExtensions
+	eControlSet_id                                                                    smithy.SchemaExtensions
+	eControlSet_name                                                                  smithy.SchemaExtensions
+	eControlSet_controls                                                              smithy.SchemaExtensions
+	e_ControlSetId                                                                    smithy.SchemaExtensions
+	e_ControlSetName                                                                  smithy.SchemaExtensions
+	e_ControlSets                                                                     smithy.SchemaExtensions
+	e_ControlSets_member                                                              smithy.SchemaExtensions
+	e_ControlSetsCount                                                                smithy.SchemaExtensions
+	eControlSetStatus                                                                 smithy.SchemaExtensions
+	eControlSetStatus_ACTIVE                                                          smithy.SchemaExtensions
+	eControlSetStatus_UNDER_REVIEW                                                    smithy.SchemaExtensions
+	eControlSetStatus_REVIEWED                                                        smithy.SchemaExtensions
+	e_ControlSources                                                                  smithy.SchemaExtensions
+	eControlState                                                                     smithy.SchemaExtensions
+	eControlState_ACTIVE                                                              smithy.SchemaExtensions
+	eControlState_END_OF_SUPPORT                                                      smithy.SchemaExtensions
+	eControlStatus                                                                    smithy.SchemaExtensions
+	eControlStatus_UNDER_REVIEW                                                       smithy.SchemaExtensions
+	eControlStatus_REVIEWED                                                           smithy.SchemaExtensions
+	eControlStatus_INACTIVE                                                           smithy.SchemaExtensions
+	eControlType                                                                      smithy.SchemaExtensions
+	eControlType_STANDARD                                                             smithy.SchemaExtensions
+	eControlType_CUSTOM                                                               smithy.SchemaExtensions
+	eControlType_CORE                                                                 smithy.SchemaExtensions
+	eCreateAssessmentFrameworkControl                                                 smithy.SchemaExtensions
+	eCreateAssessmentFrameworkControl_id                                              smithy.SchemaExtensions
+	e_CreateAssessmentFrameworkControls                                               smithy.SchemaExtensions
+	e_CreateAssessmentFrameworkControls_member                                        smithy.SchemaExtensions
+	eCreateAssessmentFrameworkControlSet                                              smithy.SchemaExtensions
+	eCreateAssessmentFrameworkControlSet_name                                         smithy.SchemaExtensions
+	eCreateAssessmentFrameworkControlSet_controls                                     smithy.SchemaExtensions
+	e_CreateAssessmentFrameworkControlSets                                            smithy.SchemaExtensions
+	e_CreateAssessmentFrameworkControlSets_member                                     smithy.SchemaExtensions
+	eCreateControlMappingSource                                                       smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceName                                            smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceDescription                                     smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceSetUpOption                                     smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceType                                            smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceKeyword                                         smithy.SchemaExtensions
+	eCreateControlMappingSource_sourceFrequency                                       smithy.SchemaExtensions
+	eCreateControlMappingSource_troubleshootingText                                   smithy.SchemaExtensions
+	e_CreateControlMappingSources                                                     smithy.SchemaExtensions
+	e_CreateControlMappingSources_member                                              smithy.SchemaExtensions
+	e_CreatedBy                                                                       smithy.SchemaExtensions
+	eCreateDelegationRequest                                                          smithy.SchemaExtensions
+	eCreateDelegationRequest_comment                                                  smithy.SchemaExtensions
+	eCreateDelegationRequest_controlSetId                                             smithy.SchemaExtensions
+	eCreateDelegationRequest_roleArn                                                  smithy.SchemaExtensions
+	eCreateDelegationRequest_roleType                                                 smithy.SchemaExtensions
+	e_CreateDelegationRequests                                                        smithy.SchemaExtensions
+	e_CreateDelegationRequests_member                                                 smithy.SchemaExtensions
+	eDataSourceType                                                                   smithy.SchemaExtensions
+	eDataSourceType_AWS_CLOUDTRAIL                                                    smithy.SchemaExtensions
+	eDataSourceType_AWS_CONFIG                                                        smithy.SchemaExtensions
+	eDataSourceType_AWS_SECURITY_HUB                                                  smithy.SchemaExtensions
+	eDataSourceType_AWS_API_CALL                                                      smithy.SchemaExtensions
+	eDataSourceType_MANUAL                                                            smithy.SchemaExtensions
+	eDefaultExportDestination                                                         smithy.SchemaExtensions
+	eDefaultExportDestination_destinationType                                         smithy.SchemaExtensions
+	eDefaultExportDestination_destination                                             smithy.SchemaExtensions
+	eDelegation                                                                       smithy.SchemaExtensions
+	eDelegation_id                                                                    smithy.SchemaExtensions
+	eDelegation_assessmentName                                                        smithy.SchemaExtensions
+	eDelegation_assessmentId                                                          smithy.SchemaExtensions
+	eDelegation_status                                                                smithy.SchemaExtensions
+	eDelegation_roleArn                                                               smithy.SchemaExtensions
+	eDelegation_roleType                                                              smithy.SchemaExtensions
+	eDelegation_creationTime                                                          smithy.SchemaExtensions
+	eDelegation_lastUpdated                                                           smithy.SchemaExtensions
+	eDelegation_controlSetId                                                          smithy.SchemaExtensions
+	eDelegation_comment                                                               smithy.SchemaExtensions
+	eDelegation_createdBy                                                             smithy.SchemaExtensions
+	e_DelegationComment                                                               smithy.SchemaExtensions
+	e_DelegationIds                                                                   smithy.SchemaExtensions
+	e_DelegationIds_member                                                            smithy.SchemaExtensions
+	eDelegationMetadata                                                               smithy.SchemaExtensions
+	eDelegationMetadata_id                                                            smithy.SchemaExtensions
+	eDelegationMetadata_assessmentName                                                smithy.SchemaExtensions
+	eDelegationMetadata_assessmentId                                                  smithy.SchemaExtensions
+	eDelegationMetadata_status                                                        smithy.SchemaExtensions
+	eDelegationMetadata_roleArn                                                       smithy.SchemaExtensions
+	eDelegationMetadata_creationTime                                                  smithy.SchemaExtensions
+	eDelegationMetadata_controlSetName                                                smithy.SchemaExtensions
+	e_DelegationMetadataList                                                          smithy.SchemaExtensions
+	e_DelegationMetadataList_member                                                   smithy.SchemaExtensions
+	e_Delegations                                                                     smithy.SchemaExtensions
+	e_Delegations_member                                                              smithy.SchemaExtensions
+	eDelegationStatus                                                                 smithy.SchemaExtensions
+	eDelegationStatus_IN_PROGRESS                                                     smithy.SchemaExtensions
+	eDelegationStatus_UNDER_REVIEW                                                    smithy.SchemaExtensions
+	eDelegationStatus_COMPLETE                                                        smithy.SchemaExtensions
+	eDeleteResources                                                                  smithy.SchemaExtensions
+	eDeleteResources_ALL                                                              smithy.SchemaExtensions
+	eDeleteResources_DEFAULT                                                          smithy.SchemaExtensions
+	eDeregistrationPolicy                                                             smithy.SchemaExtensions
+	eDeregistrationPolicy_deleteResources                                             smithy.SchemaExtensions
+	e_EmailAddress                                                                    smithy.SchemaExtensions
+	e_ErrorCode                                                                       smithy.SchemaExtensions
+	e_ErrorMessage                                                                    smithy.SchemaExtensions
+	e_EventName                                                                       smithy.SchemaExtensions
+	eEvidence                                                                         smithy.SchemaExtensions
+	eEvidence_dataSource                                                              smithy.SchemaExtensions
+	eEvidence_evidenceAwsAccountId                                                    smithy.SchemaExtensions
+	eEvidence_time                                                                    smithy.SchemaExtensions
+	eEvidence_eventSource                                                             smithy.SchemaExtensions
+	eEvidence_eventName                                                               smithy.SchemaExtensions
+	eEvidence_evidenceByType                                                          smithy.SchemaExtensions
+	eEvidence_resourcesIncluded                                                       smithy.SchemaExtensions
+	eEvidence_attributes                                                              smithy.SchemaExtensions
+	eEvidence_iamId                                                                   smithy.SchemaExtensions
+	eEvidence_complianceCheck                                                         smithy.SchemaExtensions
+	eEvidence_awsOrganization                                                         smithy.SchemaExtensions
+	eEvidence_awsAccountId                                                            smithy.SchemaExtensions
+	eEvidence_evidenceFolderId                                                        smithy.SchemaExtensions
+	eEvidence_id                                                                      smithy.SchemaExtensions
+	eEvidence_assessmentReportSelection                                               smithy.SchemaExtensions
+	e_EvidenceAttributeKey                                                            smithy.SchemaExtensions
+	e_EvidenceAttributes                                                              smithy.SchemaExtensions
+	e_EvidenceAttributes_key                                                          smithy.SchemaExtensions
+	e_EvidenceAttributes_value                                                        smithy.SchemaExtensions
+	e_EvidenceAttributeValue                                                          smithy.SchemaExtensions
+	eEvidenceFinderBackfillStatus                                                     smithy.SchemaExtensions
+	eEvidenceFinderBackfillStatus_NOT_STARTED                                         smithy.SchemaExtensions
+	eEvidenceFinderBackfillStatus_IN_PROGRESS                                         smithy.SchemaExtensions
+	eEvidenceFinderBackfillStatus_COMPLETED                                           smithy.SchemaExtensions
+	eEvidenceFinderEnablement                                                         smithy.SchemaExtensions
+	eEvidenceFinderEnablement_eventDataStoreArn                                       smithy.SchemaExtensions
+	eEvidenceFinderEnablement_enablementStatus                                        smithy.SchemaExtensions
+	eEvidenceFinderEnablement_backfillStatus                                          smithy.SchemaExtensions
+	eEvidenceFinderEnablement_error                                                   smithy.SchemaExtensions
+	eEvidenceFinderEnablementStatus                                                   smithy.SchemaExtensions
+	eEvidenceFinderEnablementStatus_ENABLED                                           smithy.SchemaExtensions
+	eEvidenceFinderEnablementStatus_DISABLED                                          smithy.SchemaExtensions
+	eEvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS                                smithy.SchemaExtensions
+	eEvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS                               smithy.SchemaExtensions
+	e_EvidenceIds                                                                     smithy.SchemaExtensions
+	e_EvidenceIds_member                                                              smithy.SchemaExtensions
+	eEvidenceInsights                                                                 smithy.SchemaExtensions
+	eEvidenceInsights_noncompliantEvidenceCount                                       smithy.SchemaExtensions
+	eEvidenceInsights_compliantEvidenceCount                                          smithy.SchemaExtensions
+	eEvidenceInsights_inconclusiveEvidenceCount                                       smithy.SchemaExtensions
+	e_EvidenceList                                                                    smithy.SchemaExtensions
+	e_EvidenceList_member                                                             smithy.SchemaExtensions
+	e_EvidenceSources                                                                 smithy.SchemaExtensions
+	e_EvidenceSources_member                                                          smithy.SchemaExtensions
+	eExportDestinationType                                                            smithy.SchemaExtensions
+	eExportDestinationType_S3                                                         smithy.SchemaExtensions
+	e_Filename                                                                        smithy.SchemaExtensions
+	eFramework                                                                        smithy.SchemaExtensions
+	eFramework_arn                                                                    smithy.SchemaExtensions
+	eFramework_id                                                                     smithy.SchemaExtensions
+	eFramework_name                                                                   smithy.SchemaExtensions
+	eFramework_type                                                                   smithy.SchemaExtensions
+	eFramework_complianceType                                                         smithy.SchemaExtensions
+	eFramework_description                                                            smithy.SchemaExtensions
+	eFramework_logo                                                                   smithy.SchemaExtensions
+	eFramework_controlSources                                                         smithy.SchemaExtensions
+	eFramework_controlSets                                                            smithy.SchemaExtensions
+	eFramework_createdAt                                                              smithy.SchemaExtensions
+	eFramework_lastUpdatedAt                                                          smithy.SchemaExtensions
+	eFramework_createdBy                                                              smithy.SchemaExtensions
+	eFramework_lastUpdatedBy                                                          smithy.SchemaExtensions
+	eFramework_tags                                                                   smithy.SchemaExtensions
+	e_FrameworkDescription                                                            smithy.SchemaExtensions
+	eFrameworkMetadata                                                                smithy.SchemaExtensions
+	eFrameworkMetadata_name                                                           smithy.SchemaExtensions
+	eFrameworkMetadata_description                                                    smithy.SchemaExtensions
+	eFrameworkMetadata_logo                                                           smithy.SchemaExtensions
+	eFrameworkMetadata_complianceType                                                 smithy.SchemaExtensions
+	e_FrameworkMetadataList                                                           smithy.SchemaExtensions
+	e_FrameworkMetadataList_member                                                    smithy.SchemaExtensions
+	e_FrameworkName                                                                   smithy.SchemaExtensions
+	eFrameworkType                                                                    smithy.SchemaExtensions
+	eFrameworkType_STANDARD                                                           smithy.SchemaExtensions
+	eFrameworkType_CUSTOM                                                             smithy.SchemaExtensions
+	e_GenericArn                                                                      smithy.SchemaExtensions
+	e_HyperlinkName                                                                   smithy.SchemaExtensions
+	e_IamArn                                                                          smithy.SchemaExtensions
+	eInsights                                                                         smithy.SchemaExtensions
+	eInsights_activeAssessmentsCount                                                  smithy.SchemaExtensions
+	eInsights_noncompliantEvidenceCount                                               smithy.SchemaExtensions
+	eInsights_compliantEvidenceCount                                                  smithy.SchemaExtensions
+	eInsights_inconclusiveEvidenceCount                                               smithy.SchemaExtensions
+	eInsights_assessmentControlsCountByNoncompliantEvidence                           smithy.SchemaExtensions
+	eInsights_totalAssessmentControlsCount                                            smithy.SchemaExtensions
+	eInsights_lastUpdated                                                             smithy.SchemaExtensions
+	eInsightsByAssessment                                                             smithy.SchemaExtensions
+	eInsightsByAssessment_noncompliantEvidenceCount                                   smithy.SchemaExtensions
+	eInsightsByAssessment_compliantEvidenceCount                                      smithy.SchemaExtensions
+	eInsightsByAssessment_inconclusiveEvidenceCount                                   smithy.SchemaExtensions
+	eInsightsByAssessment_assessmentControlsCountByNoncompliantEvidence               smithy.SchemaExtensions
+	eInsightsByAssessment_totalAssessmentControlsCount                                smithy.SchemaExtensions
+	eInsightsByAssessment_lastUpdated                                                 smithy.SchemaExtensions
+	e_Integer                                                                         smithy.SchemaExtensions
+	eInternalServerException                                                          smithy.SchemaExtensions
+	eInternalServerException_message                                                  smithy.SchemaExtensions
+	eKeywordInputType                                                                 smithy.SchemaExtensions
+	eKeywordInputType_SELECT_FROM_LIST                                                smithy.SchemaExtensions
+	eKeywordInputType_UPLOAD_FILE                                                     smithy.SchemaExtensions
+	eKeywordInputType_INPUT_TEXT                                                      smithy.SchemaExtensions
+	e_Keywords                                                                        smithy.SchemaExtensions
+	e_Keywords_member                                                                 smithy.SchemaExtensions
+	e_KeywordValue                                                                    smithy.SchemaExtensions
+	e_KmsKey                                                                          smithy.SchemaExtensions
+	e_LastUpdatedBy                                                                   smithy.SchemaExtensions
+	e_ListAssessmentMetadata                                                          smithy.SchemaExtensions
+	e_ListAssessmentMetadata_member                                                   smithy.SchemaExtensions
+	eManualEvidence                                                                   smithy.SchemaExtensions
+	eManualEvidence_s3ResourcePath                                                    smithy.SchemaExtensions
+	eManualEvidence_textResponse                                                      smithy.SchemaExtensions
+	eManualEvidence_evidenceFileName                                                  smithy.SchemaExtensions
+	e_ManualEvidenceList                                                              smithy.SchemaExtensions
+	e_ManualEvidenceList_member                                                       smithy.SchemaExtensions
+	e_ManualEvidenceLocalFileName                                                     smithy.SchemaExtensions
+	e_ManualEvidenceTextResponse                                                      smithy.SchemaExtensions
+	e_MaxResults                                                                      smithy.SchemaExtensions
+	e_NonEmptyString                                                                  smithy.SchemaExtensions
+	eNotification                                                                     smithy.SchemaExtensions
+	eNotification_id                                                                  smithy.SchemaExtensions
+	eNotification_assessmentId                                                        smithy.SchemaExtensions
+	eNotification_assessmentName                                                      smithy.SchemaExtensions
+	eNotification_controlSetId                                                        smithy.SchemaExtensions
+	eNotification_controlSetName                                                      smithy.SchemaExtensions
+	eNotification_description                                                         smithy.SchemaExtensions
+	eNotification_eventTime                                                           smithy.SchemaExtensions
+	eNotification_source                                                              smithy.SchemaExtensions
+	e_Notifications                                                                   smithy.SchemaExtensions
+	e_Notifications_member                                                            smithy.SchemaExtensions
+	e_NullableInteger                                                                 smithy.SchemaExtensions
+	eObjectTypeEnum                                                                   smithy.SchemaExtensions
+	eObjectTypeEnum_ASSESSMENT                                                        smithy.SchemaExtensions
+	eObjectTypeEnum_CONTROL_SET                                                       smithy.SchemaExtensions
+	eObjectTypeEnum_CONTROL                                                           smithy.SchemaExtensions
+	eObjectTypeEnum_DELEGATION                                                        smithy.SchemaExtensions
+	eObjectTypeEnum_ASSESSMENT_REPORT                                                 smithy.SchemaExtensions
+	e_organizationId                                                                  smithy.SchemaExtensions
+	e_QueryStatement                                                                  smithy.SchemaExtensions
+	e_Region                                                                          smithy.SchemaExtensions
+	eResource                                                                         smithy.SchemaExtensions
+	eResource_arn                                                                     smithy.SchemaExtensions
+	eResource_value                                                                   smithy.SchemaExtensions
+	eResource_complianceCheck                                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                                        smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                             smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                                           smithy.SchemaExtensions
+	e_Resources                                                                       smithy.SchemaExtensions
+	e_Resources_member                                                                smithy.SchemaExtensions
+	eRole                                                                             smithy.SchemaExtensions
+	eRole_roleType                                                                    smithy.SchemaExtensions
+	eRole_roleArn                                                                     smithy.SchemaExtensions
+	e_Roles                                                                           smithy.SchemaExtensions
+	e_Roles_member                                                                    smithy.SchemaExtensions
+	eRoleType                                                                         smithy.SchemaExtensions
+	eRoleType_PROCESS_OWNER                                                           smithy.SchemaExtensions
+	eRoleType_RESOURCE_OWNER                                                          smithy.SchemaExtensions
+	e_S3Url                                                                           smithy.SchemaExtensions
+	eScope                                                                            smithy.SchemaExtensions
+	eScope_awsAccounts                                                                smithy.SchemaExtensions
+	eScope_awsServices                                                                smithy.SchemaExtensions
+	eServiceMetadata                                                                  smithy.SchemaExtensions
+	eServiceMetadata_name                                                             smithy.SchemaExtensions
+	eServiceMetadata_displayName                                                      smithy.SchemaExtensions
+	eServiceMetadata_description                                                      smithy.SchemaExtensions
+	eServiceMetadata_category                                                         smithy.SchemaExtensions
+	e_ServiceMetadataList                                                             smithy.SchemaExtensions
+	e_ServiceMetadataList_member                                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                            smithy.SchemaExtensions
+	eSettingAttribute                                                                 smithy.SchemaExtensions
+	eSettingAttribute_ALL                                                             smithy.SchemaExtensions
+	eSettingAttribute_IS_AWS_ORG_ENABLED                                              smithy.SchemaExtensions
+	eSettingAttribute_SNS_TOPIC                                                       smithy.SchemaExtensions
+	eSettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION                          smithy.SchemaExtensions
+	eSettingAttribute_DEFAULT_PROCESS_OWNERS                                          smithy.SchemaExtensions
+	eSettingAttribute_EVIDENCE_FINDER_ENABLEMENT                                      smithy.SchemaExtensions
+	eSettingAttribute_DEREGISTRATION_POLICY                                           smithy.SchemaExtensions
+	eSettingAttribute_DEFAULT_EXPORT_DESTINATION                                      smithy.SchemaExtensions
+	eSettings                                                                         smithy.SchemaExtensions
+	eSettings_isAwsOrgEnabled                                                         smithy.SchemaExtensions
+	eSettings_snsTopic                                                                smithy.SchemaExtensions
+	eSettings_defaultAssessmentReportsDestination                                     smithy.SchemaExtensions
+	eSettings_defaultProcessOwners                                                    smithy.SchemaExtensions
+	eSettings_kmsKey                                                                  smithy.SchemaExtensions
+	eSettings_evidenceFinderEnablement                                                smithy.SchemaExtensions
+	eSettings_deregistrationPolicy                                                    smithy.SchemaExtensions
+	eSettings_defaultExportDestination                                                smithy.SchemaExtensions
+	eShareRequestAction                                                               smithy.SchemaExtensions
+	eShareRequestAction_ACCEPT                                                        smithy.SchemaExtensions
+	eShareRequestAction_DECLINE                                                       smithy.SchemaExtensions
+	eShareRequestAction_REVOKE                                                        smithy.SchemaExtensions
+	e_ShareRequestComment                                                             smithy.SchemaExtensions
+	eShareRequestStatus                                                               smithy.SchemaExtensions
+	eShareRequestStatus_ACTIVE                                                        smithy.SchemaExtensions
+	eShareRequestStatus_REPLICATING                                                   smithy.SchemaExtensions
+	eShareRequestStatus_SHARED                                                        smithy.SchemaExtensions
+	eShareRequestStatus_EXPIRING                                                      smithy.SchemaExtensions
+	eShareRequestStatus_FAILED                                                        smithy.SchemaExtensions
+	eShareRequestStatus_EXPIRED                                                       smithy.SchemaExtensions
+	eShareRequestStatus_DECLINED                                                      smithy.SchemaExtensions
+	eShareRequestStatus_REVOKED                                                       smithy.SchemaExtensions
+	eShareRequestType                                                                 smithy.SchemaExtensions
+	eShareRequestType_SENT                                                            smithy.SchemaExtensions
+	eShareRequestType_RECEIVED                                                        smithy.SchemaExtensions
+	e_SnsArn                                                                          smithy.SchemaExtensions
+	e_SNSTopic                                                                        smithy.SchemaExtensions
+	e_SourceDescription                                                               smithy.SchemaExtensions
+	eSourceFrequency                                                                  smithy.SchemaExtensions
+	eSourceFrequency_DAILY                                                            smithy.SchemaExtensions
+	eSourceFrequency_WEEKLY                                                           smithy.SchemaExtensions
+	eSourceFrequency_MONTHLY                                                          smithy.SchemaExtensions
+	eSourceKeyword                                                                    smithy.SchemaExtensions
+	eSourceKeyword_keywordInputType                                                   smithy.SchemaExtensions
+	eSourceKeyword_keywordValue                                                       smithy.SchemaExtensions
+	e_SourceName                                                                      smithy.SchemaExtensions
+	eSourceSetUpOption                                                                smithy.SchemaExtensions
+	eSourceSetUpOption_SYSTEM_CONTROLS_MAPPING                                        smithy.SchemaExtensions
+	eSourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING                                    smithy.SchemaExtensions
+	eSourceType                                                                       smithy.SchemaExtensions
+	eSourceType_AWS_CLOUDTRAIL                                                        smithy.SchemaExtensions
+	eSourceType_AWS_CONFIG                                                            smithy.SchemaExtensions
+	eSourceType_AWS_SECURITY_HUB                                                      smithy.SchemaExtensions
+	eSourceType_AWS_API_CALL                                                          smithy.SchemaExtensions
+	eSourceType_MANUAL                                                                smithy.SchemaExtensions
+	eSourceType_COMMON_CONTROL                                                        smithy.SchemaExtensions
+	eSourceType_CORE_CONTROL                                                          smithy.SchemaExtensions
+	e_String                                                                          smithy.SchemaExtensions
+	e_TagKey                                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                                               smithy.SchemaExtensions
+	e_TagMap                                                                          smithy.SchemaExtensions
+	e_TagMap_key                                                                      smithy.SchemaExtensions
+	e_TagMap_value                                                                    smithy.SchemaExtensions
+	e_TagValue                                                                        smithy.SchemaExtensions
+	e_TestingInformation                                                              smithy.SchemaExtensions
+	eThrottlingException                                                              smithy.SchemaExtensions
+	eThrottlingException_message                                                      smithy.SchemaExtensions
+	e_Timestamp                                                                       smithy.SchemaExtensions
+	e_TimestampUUID                                                                   smithy.SchemaExtensions
+	e_Token                                                                           smithy.SchemaExtensions
+	e_TroubleshootingText                                                             smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkControlSet                                              smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkControlSet_id                                           smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkControlSet_name                                         smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkControlSet_controls                                     smithy.SchemaExtensions
+	e_UpdateAssessmentFrameworkControlSets                                            smithy.SchemaExtensions
+	e_UpdateAssessmentFrameworkControlSets_member                                     smithy.SchemaExtensions
+	eURL                                                                              smithy.SchemaExtensions
+	eURL_hyperlinkName                                                                smithy.SchemaExtensions
+	eURL_link                                                                         smithy.SchemaExtensions
+	e_UrlLink                                                                         smithy.SchemaExtensions
+	e_Username                                                                        smithy.SchemaExtensions
+	e_UUID                                                                            smithy.SchemaExtensions
+	e_ValidationErrors                                                                smithy.SchemaExtensions
+	e_ValidationErrors_member                                                         smithy.SchemaExtensions
+	eValidationException                                                              smithy.SchemaExtensions
+	eValidationException_message                                                      smithy.SchemaExtensions
+	eValidationException_reason                                                       smithy.SchemaExtensions
+	eValidationException_fields                                                       smithy.SchemaExtensions
+	eValidationExceptionField                                                         smithy.SchemaExtensions
+	eValidationExceptionField_name                                                    smithy.SchemaExtensions
+	eValidationExceptionField_message                                                 smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                             smithy.SchemaExtensions
+	eValidationExceptionReason                                                        smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                                      smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                           smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                                smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                                  smithy.SchemaExtensions
+	eAssociateAssessmentReportEvidenceFolderRequest                                   smithy.SchemaExtensions
+	eAssociateAssessmentReportEvidenceFolderRequest_assessmentId                      smithy.SchemaExtensions
+	eAssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId                  smithy.SchemaExtensions
+	eAssociateAssessmentReportEvidenceFolderResponse                                  smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceRequest                                    smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceRequest_assessmentId                       smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId                   smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceRequest_evidenceIds                        smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceResponse                                   smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceResponse_evidenceIds                       smithy.SchemaExtensions
+	eBatchAssociateAssessmentReportEvidenceResponse_errors                            smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentRequest                                         smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentRequest_createDelegationRequests                smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentRequest_assessmentId                            smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentResponse                                        smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentResponse_delegations                            smithy.SchemaExtensions
+	eBatchCreateDelegationByAssessmentResponse_errors                                 smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentRequest                                         smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentRequest_delegationIds                           smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentRequest_assessmentId                            smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentResponse                                        smithy.SchemaExtensions
+	eBatchDeleteDelegationByAssessmentResponse_errors                                 smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceRequest                                 smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceRequest_assessmentId                    smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId                smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceRequest_evidenceIds                     smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceResponse                                smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceResponse_evidenceIds                    smithy.SchemaExtensions
+	eBatchDisassociateAssessmentReportEvidenceResponse_errors                         smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlRequest                                    smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlRequest_assessmentId                       smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlRequest_controlSetId                       smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlRequest_controlId                          smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlRequest_manualEvidence                     smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlResponse                                   smithy.SchemaExtensions
+	eBatchImportEvidenceToAssessmentControlResponse_errors                            smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest                                                 smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest_name                                            smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest_description                                     smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest_complianceType                                  smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest_controlSets                                     smithy.SchemaExtensions
+	eCreateAssessmentFrameworkRequest_tags                                            smithy.SchemaExtensions
+	eCreateAssessmentFrameworkResponse                                                smithy.SchemaExtensions
+	eCreateAssessmentFrameworkResponse_framework                                      smithy.SchemaExtensions
+	eCreateAssessmentRequest                                                          smithy.SchemaExtensions
+	eCreateAssessmentRequest_name                                                     smithy.SchemaExtensions
+	eCreateAssessmentRequest_description                                              smithy.SchemaExtensions
+	eCreateAssessmentRequest_assessmentReportsDestination                             smithy.SchemaExtensions
+	eCreateAssessmentRequest_scope                                                    smithy.SchemaExtensions
+	eCreateAssessmentRequest_roles                                                    smithy.SchemaExtensions
+	eCreateAssessmentRequest_frameworkId                                              smithy.SchemaExtensions
+	eCreateAssessmentRequest_tags                                                     smithy.SchemaExtensions
+	eCreateAssessmentResponse                                                         smithy.SchemaExtensions
+	eCreateAssessmentResponse_assessment                                              smithy.SchemaExtensions
+	eCreateAssessmentReportRequest                                                    smithy.SchemaExtensions
+	eCreateAssessmentReportRequest_name                                               smithy.SchemaExtensions
+	eCreateAssessmentReportRequest_description                                        smithy.SchemaExtensions
+	eCreateAssessmentReportRequest_assessmentId                                       smithy.SchemaExtensions
+	eCreateAssessmentReportRequest_queryStatement                                     smithy.SchemaExtensions
+	eCreateAssessmentReportResponse                                                   smithy.SchemaExtensions
+	eCreateAssessmentReportResponse_assessmentReport                                  smithy.SchemaExtensions
+	eCreateControlRequest                                                             smithy.SchemaExtensions
+	eCreateControlRequest_name                                                        smithy.SchemaExtensions
+	eCreateControlRequest_description                                                 smithy.SchemaExtensions
+	eCreateControlRequest_testingInformation                                          smithy.SchemaExtensions
+	eCreateControlRequest_actionPlanTitle                                             smithy.SchemaExtensions
+	eCreateControlRequest_actionPlanInstructions                                      smithy.SchemaExtensions
+	eCreateControlRequest_controlMappingSources                                       smithy.SchemaExtensions
+	eCreateControlRequest_tags                                                        smithy.SchemaExtensions
+	eCreateControlResponse                                                            smithy.SchemaExtensions
+	eCreateControlResponse_control                                                    smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkRequest                                                 smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkRequest_frameworkId                                     smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkResponse                                                smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkShareRequest                                            smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkShareRequest_requestId                                  smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkShareRequest_requestType                                smithy.SchemaExtensions
+	eDeleteAssessmentFrameworkShareResponse                                           smithy.SchemaExtensions
+	eDeleteAssessmentRequest                                                          smithy.SchemaExtensions
+	eDeleteAssessmentRequest_assessmentId                                             smithy.SchemaExtensions
+	eDeleteAssessmentResponse                                                         smithy.SchemaExtensions
+	eDeleteAssessmentReportRequest                                                    smithy.SchemaExtensions
+	eDeleteAssessmentReportRequest_assessmentId                                       smithy.SchemaExtensions
+	eDeleteAssessmentReportRequest_assessmentReportId                                 smithy.SchemaExtensions
+	eDeleteAssessmentReportResponse                                                   smithy.SchemaExtensions
+	eDeleteControlRequest                                                             smithy.SchemaExtensions
+	eDeleteControlRequest_controlId                                                   smithy.SchemaExtensions
+	eDeleteControlResponse                                                            smithy.SchemaExtensions
+	eDeregisterAccountRequest                                                         smithy.SchemaExtensions
+	eDeregisterAccountResponse                                                        smithy.SchemaExtensions
+	eDeregisterAccountResponse_status                                                 smithy.SchemaExtensions
+	eDeregisterOrganizationAdminAccountRequest                                        smithy.SchemaExtensions
+	eDeregisterOrganizationAdminAccountRequest_adminAccountId                         smithy.SchemaExtensions
+	eDeregisterOrganizationAdminAccountResponse                                       smithy.SchemaExtensions
+	eDisassociateAssessmentReportEvidenceFolderRequest                                smithy.SchemaExtensions
+	eDisassociateAssessmentReportEvidenceFolderRequest_assessmentId                   smithy.SchemaExtensions
+	eDisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId               smithy.SchemaExtensions
+	eDisassociateAssessmentReportEvidenceFolderResponse                               smithy.SchemaExtensions
+	eGetAccountStatusRequest                                                          smithy.SchemaExtensions
+	eGetAccountStatusResponse                                                         smithy.SchemaExtensions
+	eGetAccountStatusResponse_status                                                  smithy.SchemaExtensions
+	eGetAssessmentFrameworkRequest                                                    smithy.SchemaExtensions
+	eGetAssessmentFrameworkRequest_frameworkId                                        smithy.SchemaExtensions
+	eGetAssessmentFrameworkResponse                                                   smithy.SchemaExtensions
+	eGetAssessmentFrameworkResponse_framework                                         smithy.SchemaExtensions
+	eGetAssessmentRequest                                                             smithy.SchemaExtensions
+	eGetAssessmentRequest_assessmentId                                                smithy.SchemaExtensions
+	eGetAssessmentResponse                                                            smithy.SchemaExtensions
+	eGetAssessmentResponse_assessment                                                 smithy.SchemaExtensions
+	eGetAssessmentResponse_userRole                                                   smithy.SchemaExtensions
+	eGetAssessmentReportUrlRequest                                                    smithy.SchemaExtensions
+	eGetAssessmentReportUrlRequest_assessmentReportId                                 smithy.SchemaExtensions
+	eGetAssessmentReportUrlRequest_assessmentId                                       smithy.SchemaExtensions
+	eGetAssessmentReportUrlResponse                                                   smithy.SchemaExtensions
+	eGetAssessmentReportUrlResponse_preSignedUrl                                      smithy.SchemaExtensions
+	eGetChangeLogsRequest                                                             smithy.SchemaExtensions
+	eGetChangeLogsRequest_assessmentId                                                smithy.SchemaExtensions
+	eGetChangeLogsRequest_controlSetId                                                smithy.SchemaExtensions
+	eGetChangeLogsRequest_controlId                                                   smithy.SchemaExtensions
+	eGetChangeLogsRequest_nextToken                                                   smithy.SchemaExtensions
+	eGetChangeLogsRequest_maxResults                                                  smithy.SchemaExtensions
+	eGetChangeLogsResponse                                                            smithy.SchemaExtensions
+	eGetChangeLogsResponse_changeLogs                                                 smithy.SchemaExtensions
+	eGetChangeLogsResponse_nextToken                                                  smithy.SchemaExtensions
+	eGetControlRequest                                                                smithy.SchemaExtensions
+	eGetControlRequest_controlId                                                      smithy.SchemaExtensions
+	eGetControlResponse                                                               smithy.SchemaExtensions
+	eGetControlResponse_control                                                       smithy.SchemaExtensions
+	eGetDelegationsRequest                                                            smithy.SchemaExtensions
+	eGetDelegationsRequest_nextToken                                                  smithy.SchemaExtensions
+	eGetDelegationsRequest_maxResults                                                 smithy.SchemaExtensions
+	eGetDelegationsResponse                                                           smithy.SchemaExtensions
+	eGetDelegationsResponse_delegations                                               smithy.SchemaExtensions
+	eGetDelegationsResponse_nextToken                                                 smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest                                               smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest_assessmentId                                  smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest_controlSetId                                  smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest_evidenceFolderId                              smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest_nextToken                                     smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderRequest_maxResults                                    smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderResponse                                              smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderResponse_evidence                                     smithy.SchemaExtensions
+	eGetEvidenceByEvidenceFolderResponse_nextToken                                    smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrlRequest                                                  smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrlRequest_fileName                                         smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrlResponse                                                 smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrlResponse_evidenceFileName                                smithy.SchemaExtensions
+	eGetEvidenceFileUploadUrlResponse_uploadUrl                                       smithy.SchemaExtensions
+	eGetEvidenceFolderRequest                                                         smithy.SchemaExtensions
+	eGetEvidenceFolderRequest_assessmentId                                            smithy.SchemaExtensions
+	eGetEvidenceFolderRequest_controlSetId                                            smithy.SchemaExtensions
+	eGetEvidenceFolderRequest_evidenceFolderId                                        smithy.SchemaExtensions
+	eGetEvidenceFolderResponse                                                        smithy.SchemaExtensions
+	eGetEvidenceFolderResponse_evidenceFolder                                         smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest                                     smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest_assessmentId                        smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest_controlSetId                        smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest_controlId                           smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest_nextToken                           smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlRequest_maxResults                          smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlResponse                                    smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlResponse_evidenceFolders                    smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentControlResponse_nextToken                          smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentRequest                                            smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentRequest_assessmentId                               smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentRequest_nextToken                                  smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentRequest_maxResults                                 smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentResponse                                           smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentResponse_evidenceFolders                           smithy.SchemaExtensions
+	eGetEvidenceFoldersByAssessmentResponse_nextToken                                 smithy.SchemaExtensions
+	eGetEvidenceRequest                                                               smithy.SchemaExtensions
+	eGetEvidenceRequest_assessmentId                                                  smithy.SchemaExtensions
+	eGetEvidenceRequest_controlSetId                                                  smithy.SchemaExtensions
+	eGetEvidenceRequest_evidenceFolderId                                              smithy.SchemaExtensions
+	eGetEvidenceRequest_evidenceId                                                    smithy.SchemaExtensions
+	eGetEvidenceResponse                                                              smithy.SchemaExtensions
+	eGetEvidenceResponse_evidence                                                     smithy.SchemaExtensions
+	eGetInsightsByAssessmentRequest                                                   smithy.SchemaExtensions
+	eGetInsightsByAssessmentRequest_assessmentId                                      smithy.SchemaExtensions
+	eGetInsightsByAssessmentResponse                                                  smithy.SchemaExtensions
+	eGetInsightsByAssessmentResponse_insights                                         smithy.SchemaExtensions
+	eGetInsightsRequest                                                               smithy.SchemaExtensions
+	eGetInsightsResponse                                                              smithy.SchemaExtensions
+	eGetInsightsResponse_insights                                                     smithy.SchemaExtensions
+	eGetOrganizationAdminAccountRequest                                               smithy.SchemaExtensions
+	eGetOrganizationAdminAccountResponse                                              smithy.SchemaExtensions
+	eGetOrganizationAdminAccountResponse_adminAccountId                               smithy.SchemaExtensions
+	eGetOrganizationAdminAccountResponse_organizationId                               smithy.SchemaExtensions
+	eGetServicesInScopeRequest                                                        smithy.SchemaExtensions
+	eGetServicesInScopeResponse                                                       smithy.SchemaExtensions
+	eGetServicesInScopeResponse_serviceMetadata                                       smithy.SchemaExtensions
+	eGetSettingsRequest                                                               smithy.SchemaExtensions
+	eGetSettingsRequest_attribute                                                     smithy.SchemaExtensions
+	eGetSettingsResponse                                                              smithy.SchemaExtensions
+	eGetSettingsResponse_settings                                                     smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainRequest                              smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainRequest_controlDomainId              smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainRequest_assessmentId                 smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainRequest_nextToken                    smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainRequest_maxResults                   smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainResponse                             smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment smithy.SchemaExtensions
+	eListAssessmentControlInsightsByControlDomainResponse_nextToken                   smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsRequest                                      smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsRequest_requestType                          smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsRequest_nextToken                            smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsRequest_maxResults                           smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsResponse                                     smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests    smithy.SchemaExtensions
+	eListAssessmentFrameworkShareRequestsResponse_nextToken                           smithy.SchemaExtensions
+	eListAssessmentFrameworksRequest                                                  smithy.SchemaExtensions
+	eListAssessmentFrameworksRequest_frameworkType                                    smithy.SchemaExtensions
+	eListAssessmentFrameworksRequest_nextToken                                        smithy.SchemaExtensions
+	eListAssessmentFrameworksRequest_maxResults                                       smithy.SchemaExtensions
+	eListAssessmentFrameworksResponse                                                 smithy.SchemaExtensions
+	eListAssessmentFrameworksResponse_frameworkMetadataList                           smithy.SchemaExtensions
+	eListAssessmentFrameworksResponse_nextToken                                       smithy.SchemaExtensions
+	eListAssessmentReportsRequest                                                     smithy.SchemaExtensions
+	eListAssessmentReportsRequest_nextToken                                           smithy.SchemaExtensions
+	eListAssessmentReportsRequest_maxResults                                          smithy.SchemaExtensions
+	eListAssessmentReportsResponse                                                    smithy.SchemaExtensions
+	eListAssessmentReportsResponse_assessmentReports                                  smithy.SchemaExtensions
+	eListAssessmentReportsResponse_nextToken                                          smithy.SchemaExtensions
+	eListAssessmentsRequest                                                           smithy.SchemaExtensions
+	eListAssessmentsRequest_status                                                    smithy.SchemaExtensions
+	eListAssessmentsRequest_nextToken                                                 smithy.SchemaExtensions
+	eListAssessmentsRequest_maxResults                                                smithy.SchemaExtensions
+	eListAssessmentsResponse                                                          smithy.SchemaExtensions
+	eListAssessmentsResponse_assessmentMetadata                                       smithy.SchemaExtensions
+	eListAssessmentsResponse_nextToken                                                smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentRequest                                     smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentRequest_assessmentId                        smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentRequest_nextToken                           smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentRequest_maxResults                          smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentResponse                                    smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentResponse_controlDomainInsights              smithy.SchemaExtensions
+	eListControlDomainInsightsByAssessmentResponse_nextToken                          smithy.SchemaExtensions
+	eListControlDomainInsightsRequest                                                 smithy.SchemaExtensions
+	eListControlDomainInsightsRequest_nextToken                                       smithy.SchemaExtensions
+	eListControlDomainInsightsRequest_maxResults                                      smithy.SchemaExtensions
+	eListControlDomainInsightsResponse                                                smithy.SchemaExtensions
+	eListControlDomainInsightsResponse_controlDomainInsights                          smithy.SchemaExtensions
+	eListControlDomainInsightsResponse_nextToken                                      smithy.SchemaExtensions
+	eListControlInsightsByControlDomainRequest                                        smithy.SchemaExtensions
+	eListControlInsightsByControlDomainRequest_controlDomainId                        smithy.SchemaExtensions
+	eListControlInsightsByControlDomainRequest_nextToken                              smithy.SchemaExtensions
+	eListControlInsightsByControlDomainRequest_maxResults                             smithy.SchemaExtensions
+	eListControlInsightsByControlDomainResponse                                       smithy.SchemaExtensions
+	eListControlInsightsByControlDomainResponse_controlInsightsMetadata               smithy.SchemaExtensions
+	eListControlInsightsByControlDomainResponse_nextToken                             smithy.SchemaExtensions
+	eListControlsRequest                                                              smithy.SchemaExtensions
+	eListControlsRequest_controlType                                                  smithy.SchemaExtensions
+	eListControlsRequest_nextToken                                                    smithy.SchemaExtensions
+	eListControlsRequest_maxResults                                                   smithy.SchemaExtensions
+	eListControlsRequest_controlCatalogId                                             smithy.SchemaExtensions
+	eListControlsResponse                                                             smithy.SchemaExtensions
+	eListControlsResponse_controlMetadataList                                         smithy.SchemaExtensions
+	eListControlsResponse_nextToken                                                   smithy.SchemaExtensions
+	eListKeywordsForDataSourceRequest                                                 smithy.SchemaExtensions
+	eListKeywordsForDataSourceRequest_source                                          smithy.SchemaExtensions
+	eListKeywordsForDataSourceRequest_nextToken                                       smithy.SchemaExtensions
+	eListKeywordsForDataSourceRequest_maxResults                                      smithy.SchemaExtensions
+	eListKeywordsForDataSourceResponse                                                smithy.SchemaExtensions
+	eListKeywordsForDataSourceResponse_keywords                                       smithy.SchemaExtensions
+	eListKeywordsForDataSourceResponse_nextToken                                      smithy.SchemaExtensions
+	eListNotificationsRequest                                                         smithy.SchemaExtensions
+	eListNotificationsRequest_nextToken                                               smithy.SchemaExtensions
+	eListNotificationsRequest_maxResults                                              smithy.SchemaExtensions
+	eListNotificationsResponse                                                        smithy.SchemaExtensions
+	eListNotificationsResponse_notifications                                          smithy.SchemaExtensions
+	eListNotificationsResponse_nextToken                                              smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                                 smithy.SchemaExtensions
+	eRegisterAccountRequest                                                           smithy.SchemaExtensions
+	eRegisterAccountRequest_kmsKey                                                    smithy.SchemaExtensions
+	eRegisterAccountRequest_delegatedAdminAccount                                     smithy.SchemaExtensions
+	eRegisterAccountResponse                                                          smithy.SchemaExtensions
+	eRegisterAccountResponse_status                                                   smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccountRequest                                          smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccountRequest_adminAccountId                           smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccountResponse                                         smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccountResponse_adminAccountId                          smithy.SchemaExtensions
+	eRegisterOrganizationAdminAccountResponse_organizationId                          smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareRequest                                             smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareRequest_frameworkId                                 smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareRequest_destinationAccount                          smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareRequest_destinationRegion                           smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareRequest_comment                                     smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareResponse                                            smithy.SchemaExtensions
+	eStartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest            smithy.SchemaExtensions
+	eTagResourceRequest                                                               smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                                   smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                          smithy.SchemaExtensions
+	eTagResourceResponse                                                              smithy.SchemaExtensions
+	eUntagResourceRequest                                                             smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                                 smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                     smithy.SchemaExtensions
+	eUntagResourceResponse                                                            smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest                                                   smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest_assessmentId                                      smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest_controlSetId                                      smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest_controlId                                         smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest_controlStatus                                     smithy.SchemaExtensions
+	eUpdateAssessmentControlRequest_commentBody                                       smithy.SchemaExtensions
+	eUpdateAssessmentControlResponse                                                  smithy.SchemaExtensions
+	eUpdateAssessmentControlResponse_control                                          smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusRequest                                          smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusRequest_assessmentId                             smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusRequest_controlSetId                             smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusRequest_status                                   smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusRequest_comment                                  smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusResponse                                         smithy.SchemaExtensions
+	eUpdateAssessmentControlSetStatusResponse_controlSet                              smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest                                                 smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest_frameworkId                                     smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest_name                                            smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest_description                                     smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest_complianceType                                  smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkRequest_controlSets                                     smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkResponse                                                smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkResponse_framework                                      smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareRequest                                            smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareRequest_requestId                                  smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareRequest_requestType                                smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareRequest_action                                     smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareResponse                                           smithy.SchemaExtensions
+	eUpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest           smithy.SchemaExtensions
+	eUpdateAssessmentRequest                                                          smithy.SchemaExtensions
+	eUpdateAssessmentRequest_assessmentId                                             smithy.SchemaExtensions
+	eUpdateAssessmentRequest_assessmentName                                           smithy.SchemaExtensions
+	eUpdateAssessmentRequest_assessmentDescription                                    smithy.SchemaExtensions
+	eUpdateAssessmentRequest_scope                                                    smithy.SchemaExtensions
+	eUpdateAssessmentRequest_assessmentReportsDestination                             smithy.SchemaExtensions
+	eUpdateAssessmentRequest_roles                                                    smithy.SchemaExtensions
+	eUpdateAssessmentResponse                                                         smithy.SchemaExtensions
+	eUpdateAssessmentResponse_assessment                                              smithy.SchemaExtensions
+	eUpdateAssessmentStatusRequest                                                    smithy.SchemaExtensions
+	eUpdateAssessmentStatusRequest_assessmentId                                       smithy.SchemaExtensions
+	eUpdateAssessmentStatusRequest_status                                             smithy.SchemaExtensions
+	eUpdateAssessmentStatusResponse                                                   smithy.SchemaExtensions
+	eUpdateAssessmentStatusResponse_assessment                                        smithy.SchemaExtensions
+	eUpdateControlRequest                                                             smithy.SchemaExtensions
+	eUpdateControlRequest_controlId                                                   smithy.SchemaExtensions
+	eUpdateControlRequest_name                                                        smithy.SchemaExtensions
+	eUpdateControlRequest_description                                                 smithy.SchemaExtensions
+	eUpdateControlRequest_testingInformation                                          smithy.SchemaExtensions
+	eUpdateControlRequest_actionPlanTitle                                             smithy.SchemaExtensions
+	eUpdateControlRequest_actionPlanInstructions                                      smithy.SchemaExtensions
+	eUpdateControlRequest_controlMappingSources                                       smithy.SchemaExtensions
+	eUpdateControlResponse                                                            smithy.SchemaExtensions
+	eUpdateControlResponse_control                                                    smithy.SchemaExtensions
+	eUpdateSettingsRequest                                                            smithy.SchemaExtensions
+	eUpdateSettingsRequest_snsTopic                                                   smithy.SchemaExtensions
+	eUpdateSettingsRequest_defaultAssessmentReportsDestination                        smithy.SchemaExtensions
+	eUpdateSettingsRequest_defaultProcessOwners                                       smithy.SchemaExtensions
+	eUpdateSettingsRequest_kmsKey                                                     smithy.SchemaExtensions
+	eUpdateSettingsRequest_evidenceFinderEnabled                                      smithy.SchemaExtensions
+	eUpdateSettingsRequest_deregistrationPolicy                                       smithy.SchemaExtensions
+	eUpdateSettingsRequest_defaultExportDestination                                   smithy.SchemaExtensions
+	eUpdateSettingsResponse                                                           smithy.SchemaExtensions
+	eUpdateSettingsResponse_settings                                                  smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityRequest                                         smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityRequest_s3RelativePath                          smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse                                        smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse_signatureValid                         smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse_signatureAlgorithm                     smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse_signatureDateTime                      smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse_signatureKeyId                         smithy.SchemaExtensions
+	eValidateAssessmentReportIntegrityResponse_validationErrors                       smithy.SchemaExtensions
+)
+
+var (
+	iAssociateAssessmentReportEvidenceFolder              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssociateAssessmentReportEvidenceFolder"}
+	iBatchAssociateAssessmentReportEvidence               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchAssociateAssessmentReportEvidence"}
+	iBatchCreateDelegationByAssessment                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchCreateDelegationByAssessment"}
+	iBatchDeleteDelegationByAssessment                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDeleteDelegationByAssessment"}
+	iBatchDisassociateAssessmentReportEvidence            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDisassociateAssessmentReportEvidence"}
+	iBatchImportEvidenceToAssessmentControl               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchImportEvidenceToAssessmentControl"}
+	iCreateAssessment                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessment"}
+	iCreateAssessmentFramework                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFramework"}
+	iCreateAssessmentReport                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentReport"}
+	iCreateControl                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateControl"}
+	iDeleteAssessment                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessment"}
+	iDeleteAssessmentFramework                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFramework"}
+	iDeleteAssessmentFrameworkShare                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFrameworkShare"}
+	iDeleteAssessmentReport                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentReport"}
+	iDeleteControl                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteControl"}
+	iDeregisterAccount                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterAccount"}
+	iDeregisterOrganizationAdminAccount                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterOrganizationAdminAccount"}
+	iDisassociateAssessmentReportEvidenceFolder           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DisassociateAssessmentReportEvidenceFolder"}
+	iGetAccountStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAccountStatus"}
+	iGetAssessment                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessment"}
+	iGetAssessmentFramework                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentFramework"}
+	iGetAssessmentReportUrl                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentReportUrl"}
+	iGetChangeLogs                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetChangeLogs"}
+	iGetControl                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetControl"}
+	iGetDelegations                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetDelegations"}
+	iGetEvidence                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidence"}
+	iGetEvidenceByEvidenceFolder                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceByEvidenceFolder"}
+	iGetEvidenceFileUploadUrl                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFileUploadUrl"}
+	iGetEvidenceFolder                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFolder"}
+	iGetEvidenceFoldersByAssessment                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessment"}
+	iGetEvidenceFoldersByAssessmentControl                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessmentControl"}
+	iGetInsights                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsights"}
+	iGetInsightsByAssessment                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsightsByAssessment"}
+	iGetOrganizationAdminAccount                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetOrganizationAdminAccount"}
+	iGetServicesInScope                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetServicesInScope"}
+	iGetSettings                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetSettings"}
+	iListAssessmentControlInsightsByControlDomain         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentControlInsightsByControlDomain"}
+	iListAssessmentFrameworks                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworks"}
+	iListAssessmentFrameworkShareRequests                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworkShareRequests"}
+	iListAssessmentReports                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentReports"}
+	iListAssessments                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessments"}
+	iListControlDomainInsights                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsights"}
+	iListControlDomainInsightsByAssessment                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsightsByAssessment"}
+	iListControlInsightsByControlDomain                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlInsightsByControlDomain"}
+	iListControls                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControls"}
+	iListKeywordsForDataSource                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListKeywordsForDataSource"}
+	iListNotifications                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListNotifications"}
+	iListTagsForResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListTagsForResource"}
+	iRegisterAccount                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterAccount"}
+	iRegisterOrganizationAdminAccount                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterOrganizationAdminAccount"}
+	iStartAssessmentFrameworkShare                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "StartAssessmentFrameworkShare"}
+	iTagResource                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagResource"}
+	iUntagResource                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UntagResource"}
+	iUpdateAssessment                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessment"}
+	iUpdateAssessmentControl                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControl"}
+	iUpdateAssessmentControlSetStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControlSetStatus"}
+	iUpdateAssessmentFramework                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFramework"}
+	iUpdateAssessmentFrameworkShare                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkShare"}
+	iUpdateAssessmentStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentStatus"}
+	iUpdateControl                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateControl"}
+	iUpdateSettings                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateSettings"}
+	iValidateAssessmentReportIntegrity                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidateAssessmentReportIntegrity"}
+	i_BedrockAssessmentManagerLambda                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BedrockAssessmentManagerLambda"}
+	iAccessDeniedException                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AccessDeniedException"}
+	i_AccountId                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AccountId"}
+	i_AccountName                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AccountName"}
+	iAccountStatus                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AccountStatus"}
+	iActionEnum                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ActionEnum"}
+	i_ActionPlanInstructions                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ActionPlanInstructions"}
+	i_ActionPlanTitle                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ActionPlanTitle"}
+	iAssessment                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Assessment"}
+	iAssessmentControl                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentControl"}
+	i_AssessmentControls                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentControls"}
+	iAssessmentControlSet                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentControlSet"}
+	i_AssessmentControlSets                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentControlSets"}
+	i_AssessmentDescription                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentDescription"}
+	iAssessmentEvidenceFolder                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentEvidenceFolder"}
+	i_AssessmentEvidenceFolderName                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentEvidenceFolderName"}
+	i_AssessmentEvidenceFolders                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentEvidenceFolders"}
+	iAssessmentFramework                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentFramework"}
+	i_AssessmentFrameworkDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentFrameworkDescription"}
+	iAssessmentFrameworkMetadata                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentFrameworkMetadata"}
+	iAssessmentFrameworkShareRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentFrameworkShareRequest"}
+	i_AssessmentFrameworkShareRequestList                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentFrameworkShareRequestList"}
+	iAssessmentMetadata                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentMetadata"}
+	iAssessmentMetadataItem                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentMetadataItem"}
+	i_AssessmentName                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentName"}
+	iAssessmentReport                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReport"}
+	i_AssessmentReportDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportDescription"}
+	iAssessmentReportDestinationType                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportDestinationType"}
+	iAssessmentReportEvidenceError                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportEvidenceError"}
+	i_AssessmentReportEvidenceErrors                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportEvidenceErrors"}
+	iAssessmentReportMetadata                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportMetadata"}
+	i_AssessmentReportName                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportName"}
+	iAssessmentReportsDestination                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportsDestination"}
+	i_AssessmentReportsMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportsMetadata"}
+	iAssessmentReportStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentReportStatus"}
+	iAssessmentStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssessmentStatus"}
+	i_AuditManagerArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AuditManagerArn"}
+	iAWSAccount                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AWSAccount"}
+	i_AWSAccounts                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AWSAccounts"}
+	iAWSService                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AWSService"}
+	i_AWSServiceName                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AWSServiceName"}
+	i_AWSServices                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AWSServices"}
+	iBatchCreateDelegationByAssessmentError               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchCreateDelegationByAssessmentError"}
+	i_BatchCreateDelegationByAssessmentErrors             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchCreateDelegationByAssessmentErrors"}
+	iBatchDeleteDelegationByAssessmentError               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDeleteDelegationByAssessmentError"}
+	i_BatchDeleteDelegationByAssessmentErrors             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDeleteDelegationByAssessmentErrors"}
+	iBatchImportEvidenceToAssessmentControlError          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchImportEvidenceToAssessmentControlError"}
+	i_BatchImportEvidenceToAssessmentControlErrors        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchImportEvidenceToAssessmentControlErrors"}
+	i_Boolean                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Boolean"}
+	iChangeLog                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ChangeLog"}
+	i_ChangeLogs                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ChangeLogs"}
+	i_CloudTrailArn                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CloudTrailArn"}
+	i_ComplianceType                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ComplianceType"}
+	iControl                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Control"}
+	i_ControlCatalogId                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlCatalogId"}
+	iControlComment                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlComment"}
+	i_ControlCommentBody                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlCommentBody"}
+	i_ControlComments                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlComments"}
+	i_ControlDescription                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlDescription"}
+	i_ControlDomainId                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlDomainId"}
+	iControlDomainInsights                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlDomainInsights"}
+	i_ControlDomainInsightsList                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlDomainInsightsList"}
+	i_ControlInsightsMetadata                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlInsightsMetadata"}
+	i_ControlInsightsMetadataByAssessment                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlInsightsMetadataByAssessment"}
+	iControlInsightsMetadataByAssessmentItem              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlInsightsMetadataByAssessmentItem"}
+	iControlInsightsMetadataItem                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlInsightsMetadataItem"}
+	iControlMappingSource                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlMappingSource"}
+	i_ControlMappingSources                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlMappingSources"}
+	iControlMetadata                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlMetadata"}
+	i_ControlMetadataList                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlMetadataList"}
+	i_ControlName                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlName"}
+	iControlResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlResponse"}
+	i_Controls                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Controls"}
+	i_ControlsCount                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlsCount"}
+	iControlSet                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSet"}
+	i_ControlSetId                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSetId"}
+	i_ControlSetName                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSetName"}
+	i_ControlSets                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSets"}
+	i_ControlSetsCount                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSetsCount"}
+	iControlSetStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSetStatus"}
+	i_ControlSources                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlSources"}
+	iControlState                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlState"}
+	iControlStatus                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlStatus"}
+	iControlType                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ControlType"}
+	iCreateAssessmentFrameworkControl                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkControl"}
+	i_CreateAssessmentFrameworkControls                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkControls"}
+	iCreateAssessmentFrameworkControlSet                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkControlSet"}
+	i_CreateAssessmentFrameworkControlSets                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkControlSets"}
+	iCreateControlMappingSource                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateControlMappingSource"}
+	i_CreateControlMappingSources                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateControlMappingSources"}
+	i_CreatedBy                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreatedBy"}
+	iCreateDelegationRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateDelegationRequest"}
+	i_CreateDelegationRequests                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateDelegationRequests"}
+	iDataSourceType                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DataSourceType"}
+	iDefaultExportDestination                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DefaultExportDestination"}
+	iDelegation                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Delegation"}
+	i_DelegationComment                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DelegationComment"}
+	i_DelegationIds                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DelegationIds"}
+	iDelegationMetadata                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DelegationMetadata"}
+	i_DelegationMetadataList                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DelegationMetadataList"}
+	i_Delegations                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Delegations"}
+	iDelegationStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DelegationStatus"}
+	iDeleteResources                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteResources"}
+	iDeregistrationPolicy                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregistrationPolicy"}
+	i_EmailAddress                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EmailAddress"}
+	i_ErrorCode                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ErrorCode"}
+	i_ErrorMessage                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ErrorMessage"}
+	i_EventName                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EventName"}
+	iEvidence                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Evidence"}
+	i_EvidenceAttributeKey                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceAttributeKey"}
+	i_EvidenceAttributes                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceAttributes"}
+	i_EvidenceAttributeValue                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceAttributeValue"}
+	iEvidenceFinderBackfillStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceFinderBackfillStatus"}
+	iEvidenceFinderEnablement                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceFinderEnablement"}
+	iEvidenceFinderEnablementStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceFinderEnablementStatus"}
+	i_EvidenceIds                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceIds"}
+	iEvidenceInsights                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceInsights"}
+	i_EvidenceList                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceList"}
+	i_EvidenceSources                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "EvidenceSources"}
+	iExportDestinationType                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ExportDestinationType"}
+	i_Filename                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Filename"}
+	iFramework                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Framework"}
+	i_FrameworkDescription                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "FrameworkDescription"}
+	iFrameworkMetadata                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "FrameworkMetadata"}
+	i_FrameworkMetadataList                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "FrameworkMetadataList"}
+	i_FrameworkName                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "FrameworkName"}
+	iFrameworkType                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "FrameworkType"}
+	i_GenericArn                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GenericArn"}
+	i_HyperlinkName                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "HyperlinkName"}
+	i_IamArn                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "IamArn"}
+	iInsights                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Insights"}
+	iInsightsByAssessment                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "InsightsByAssessment"}
+	i_Integer                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Integer"}
+	iInternalServerException                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "InternalServerException"}
+	iKeywordInputType                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "KeywordInputType"}
+	i_Keywords                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Keywords"}
+	i_KeywordValue                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "KeywordValue"}
+	i_KmsKey                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "KmsKey"}
+	i_LastUpdatedBy                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "LastUpdatedBy"}
+	i_ListAssessmentMetadata                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentMetadata"}
+	iManualEvidence                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ManualEvidence"}
+	i_ManualEvidenceList                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ManualEvidenceList"}
+	i_ManualEvidenceLocalFileName                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ManualEvidenceLocalFileName"}
+	i_ManualEvidenceTextResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ManualEvidenceTextResponse"}
+	i_MaxResults                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "MaxResults"}
+	i_NonEmptyString                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "NonEmptyString"}
+	iNotification                                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Notification"}
+	i_Notifications                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Notifications"}
+	i_NullableInteger                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "NullableInteger"}
+	iObjectTypeEnum                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ObjectTypeEnum"}
+	i_organizationId                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "organizationId"}
+	i_QueryStatement                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "QueryStatement"}
+	i_Region                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Region"}
+	iResource                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Resource"}
+	iResourceNotFoundException                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ResourceNotFoundException"}
+	i_Resources                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Resources"}
+	iRole                                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Role"}
+	i_Roles                                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Roles"}
+	iRoleType                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RoleType"}
+	i_S3Url                                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "S3Url"}
+	iScope                                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Scope"}
+	iServiceMetadata                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ServiceMetadata"}
+	i_ServiceMetadataList                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ServiceMetadataList"}
+	iServiceQuotaExceededException                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ServiceQuotaExceededException"}
+	iSettingAttribute                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SettingAttribute"}
+	iSettings                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Settings"}
+	iShareRequestAction                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ShareRequestAction"}
+	i_ShareRequestComment                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ShareRequestComment"}
+	iShareRequestStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ShareRequestStatus"}
+	iShareRequestType                                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ShareRequestType"}
+	i_SnsArn                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SnsArn"}
+	i_SNSTopic                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SNSTopic"}
+	i_SourceDescription                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceDescription"}
+	iSourceFrequency                                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceFrequency"}
+	iSourceKeyword                                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceKeyword"}
+	i_SourceName                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceName"}
+	iSourceSetUpOption                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceSetUpOption"}
+	iSourceType                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "SourceType"}
+	i_String                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "String"}
+	i_TagKey                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagKey"}
+	i_TagKeyList                                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagKeyList"}
+	i_TagMap                                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagMap"}
+	i_TagValue                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagValue"}
+	i_TestingInformation                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TestingInformation"}
+	iThrottlingException                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ThrottlingException"}
+	i_Timestamp                                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Timestamp"}
+	i_TimestampUUID                                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TimestampUUID"}
+	i_Token                                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Token"}
+	i_TroubleshootingText                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TroubleshootingText"}
+	iUpdateAssessmentFrameworkControlSet                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkControlSet"}
+	i_UpdateAssessmentFrameworkControlSets                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkControlSets"}
+	iURL                                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "URL"}
+	i_UrlLink                                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UrlLink"}
+	i_Username                                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "Username"}
+	i_UUID                                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UUID"}
+	i_ValidationErrors                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidationErrors"}
+	iValidationException                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidationException"}
+	iValidationExceptionField                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidationExceptionReason"}
+	iAssociateAssessmentReportEvidenceFolderRequest       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssociateAssessmentReportEvidenceFolderRequest"}
+	iAssociateAssessmentReportEvidenceFolderResponse      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "AssociateAssessmentReportEvidenceFolderResponse"}
+	iBatchAssociateAssessmentReportEvidenceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchAssociateAssessmentReportEvidenceRequest"}
+	iBatchAssociateAssessmentReportEvidenceResponse       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchAssociateAssessmentReportEvidenceResponse"}
+	iBatchCreateDelegationByAssessmentRequest             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchCreateDelegationByAssessmentRequest"}
+	iBatchCreateDelegationByAssessmentResponse            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchCreateDelegationByAssessmentResponse"}
+	iBatchDeleteDelegationByAssessmentRequest             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDeleteDelegationByAssessmentRequest"}
+	iBatchDeleteDelegationByAssessmentResponse            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDeleteDelegationByAssessmentResponse"}
+	iBatchDisassociateAssessmentReportEvidenceRequest     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDisassociateAssessmentReportEvidenceRequest"}
+	iBatchDisassociateAssessmentReportEvidenceResponse    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchDisassociateAssessmentReportEvidenceResponse"}
+	iBatchImportEvidenceToAssessmentControlRequest        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchImportEvidenceToAssessmentControlRequest"}
+	iBatchImportEvidenceToAssessmentControlResponse       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "BatchImportEvidenceToAssessmentControlResponse"}
+	iCreateAssessmentFrameworkRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkRequest"}
+	iCreateAssessmentFrameworkResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentFrameworkResponse"}
+	iCreateAssessmentRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentRequest"}
+	iCreateAssessmentResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentResponse"}
+	iCreateAssessmentReportRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentReportRequest"}
+	iCreateAssessmentReportResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateAssessmentReportResponse"}
+	iCreateControlRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateControlRequest"}
+	iCreateControlResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "CreateControlResponse"}
+	iDeleteAssessmentFrameworkRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFrameworkRequest"}
+	iDeleteAssessmentFrameworkResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFrameworkResponse"}
+	iDeleteAssessmentFrameworkShareRequest                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFrameworkShareRequest"}
+	iDeleteAssessmentFrameworkShareResponse               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentFrameworkShareResponse"}
+	iDeleteAssessmentRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentRequest"}
+	iDeleteAssessmentResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentResponse"}
+	iDeleteAssessmentReportRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentReportRequest"}
+	iDeleteAssessmentReportResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteAssessmentReportResponse"}
+	iDeleteControlRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteControlRequest"}
+	iDeleteControlResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeleteControlResponse"}
+	iDeregisterAccountRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterAccountRequest"}
+	iDeregisterAccountResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterAccountResponse"}
+	iDeregisterOrganizationAdminAccountRequest            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterOrganizationAdminAccountRequest"}
+	iDeregisterOrganizationAdminAccountResponse           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DeregisterOrganizationAdminAccountResponse"}
+	iDisassociateAssessmentReportEvidenceFolderRequest    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DisassociateAssessmentReportEvidenceFolderRequest"}
+	iDisassociateAssessmentReportEvidenceFolderResponse   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "DisassociateAssessmentReportEvidenceFolderResponse"}
+	iGetAccountStatusRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAccountStatusRequest"}
+	iGetAccountStatusResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAccountStatusResponse"}
+	iGetAssessmentFrameworkRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentFrameworkRequest"}
+	iGetAssessmentFrameworkResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentFrameworkResponse"}
+	iGetAssessmentRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentRequest"}
+	iGetAssessmentResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentResponse"}
+	iGetAssessmentReportUrlRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentReportUrlRequest"}
+	iGetAssessmentReportUrlResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetAssessmentReportUrlResponse"}
+	iGetChangeLogsRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetChangeLogsRequest"}
+	iGetChangeLogsResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetChangeLogsResponse"}
+	iGetControlRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetControlRequest"}
+	iGetControlResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetControlResponse"}
+	iGetDelegationsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetDelegationsRequest"}
+	iGetDelegationsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetDelegationsResponse"}
+	iGetEvidenceByEvidenceFolderRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceByEvidenceFolderRequest"}
+	iGetEvidenceByEvidenceFolderResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceByEvidenceFolderResponse"}
+	iGetEvidenceFileUploadUrlRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFileUploadUrlRequest"}
+	iGetEvidenceFileUploadUrlResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFileUploadUrlResponse"}
+	iGetEvidenceFolderRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFolderRequest"}
+	iGetEvidenceFolderResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFolderResponse"}
+	iGetEvidenceFoldersByAssessmentControlRequest         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessmentControlRequest"}
+	iGetEvidenceFoldersByAssessmentControlResponse        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessmentControlResponse"}
+	iGetEvidenceFoldersByAssessmentRequest                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessmentRequest"}
+	iGetEvidenceFoldersByAssessmentResponse               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceFoldersByAssessmentResponse"}
+	iGetEvidenceRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceRequest"}
+	iGetEvidenceResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetEvidenceResponse"}
+	iGetInsightsByAssessmentRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsightsByAssessmentRequest"}
+	iGetInsightsByAssessmentResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsightsByAssessmentResponse"}
+	iGetInsightsRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsightsRequest"}
+	iGetInsightsResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetInsightsResponse"}
+	iGetOrganizationAdminAccountRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetOrganizationAdminAccountRequest"}
+	iGetOrganizationAdminAccountResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetOrganizationAdminAccountResponse"}
+	iGetServicesInScopeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetServicesInScopeRequest"}
+	iGetServicesInScopeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetServicesInScopeResponse"}
+	iGetSettingsRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetSettingsRequest"}
+	iGetSettingsResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "GetSettingsResponse"}
+	iListAssessmentControlInsightsByControlDomainRequest  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentControlInsightsByControlDomainRequest"}
+	iListAssessmentControlInsightsByControlDomainResponse = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentControlInsightsByControlDomainResponse"}
+	iListAssessmentFrameworkShareRequestsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworkShareRequestsRequest"}
+	iListAssessmentFrameworkShareRequestsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworkShareRequestsResponse"}
+	iListAssessmentFrameworksRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworksRequest"}
+	iListAssessmentFrameworksResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentFrameworksResponse"}
+	iListAssessmentReportsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentReportsRequest"}
+	iListAssessmentReportsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentReportsResponse"}
+	iListAssessmentsRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentsRequest"}
+	iListAssessmentsResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListAssessmentsResponse"}
+	iListControlDomainInsightsByAssessmentRequest         = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsightsByAssessmentRequest"}
+	iListControlDomainInsightsByAssessmentResponse        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsightsByAssessmentResponse"}
+	iListControlDomainInsightsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsightsRequest"}
+	iListControlDomainInsightsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlDomainInsightsResponse"}
+	iListControlInsightsByControlDomainRequest            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlInsightsByControlDomainRequest"}
+	iListControlInsightsByControlDomainResponse           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlInsightsByControlDomainResponse"}
+	iListControlsRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlsRequest"}
+	iListControlsResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListControlsResponse"}
+	iListKeywordsForDataSourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListKeywordsForDataSourceRequest"}
+	iListKeywordsForDataSourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListKeywordsForDataSourceResponse"}
+	iListNotificationsRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListNotificationsRequest"}
+	iListNotificationsResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListNotificationsResponse"}
+	iListTagsForResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ListTagsForResourceResponse"}
+	iRegisterAccountRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterAccountRequest"}
+	iRegisterAccountResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterAccountResponse"}
+	iRegisterOrganizationAdminAccountRequest              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterOrganizationAdminAccountRequest"}
+	iRegisterOrganizationAdminAccountResponse             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "RegisterOrganizationAdminAccountResponse"}
+	iStartAssessmentFrameworkShareRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "StartAssessmentFrameworkShareRequest"}
+	iStartAssessmentFrameworkShareResponse                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "StartAssessmentFrameworkShareResponse"}
+	iTagResourceRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagResourceRequest"}
+	iTagResourceResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UntagResourceResponse"}
+	iUpdateAssessmentControlRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControlRequest"}
+	iUpdateAssessmentControlResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControlResponse"}
+	iUpdateAssessmentControlSetStatusRequest              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControlSetStatusRequest"}
+	iUpdateAssessmentControlSetStatusResponse             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentControlSetStatusResponse"}
+	iUpdateAssessmentFrameworkRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkRequest"}
+	iUpdateAssessmentFrameworkResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkResponse"}
+	iUpdateAssessmentFrameworkShareRequest                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkShareRequest"}
+	iUpdateAssessmentFrameworkShareResponse               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentFrameworkShareResponse"}
+	iUpdateAssessmentRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentRequest"}
+	iUpdateAssessmentResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentResponse"}
+	iUpdateAssessmentStatusRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentStatusRequest"}
+	iUpdateAssessmentStatusResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateAssessmentStatusResponse"}
+	iUpdateControlRequest                                 = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateControlRequest"}
+	iUpdateControlResponse                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateControlResponse"}
+	iUpdateSettingsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateSettingsRequest"}
+	iUpdateSettingsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "UpdateSettingsResponse"}
+	iValidateAssessmentReportIntegrityRequest             = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidateAssessmentReportIntegrityRequest"}
+	iValidateAssessmentReportIntegrityResponse            = smithy.ShapeName{Namespace: "com.amazonaws.auditmanager", Name: "ValidateAssessmentReportIntegrityResponse"}
+	pUnit                                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/associateToAssessmentReport",
-	Code: 200})
-
-var BatchAssociateAssessmentReportEvidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchAssociateAssessmentReportEvidence",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/batchAssociateToAssessmentReport",
-	Code: 200})
-
-var BatchCreateDelegationByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchCreateDelegationByAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessments/{assessmentId}/delegations",
-	Code: 200})
-
-var BatchDeleteDelegationByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDeleteDelegationByAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/delegations",
-	Code: 200})
-
-var BatchDisassociateAssessmentReportEvidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDisassociateAssessmentReportEvidence",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/batchDisassociateFromAssessmentReport",
-	Code: 200})
-
-var BatchImportEvidenceToAssessmentControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchImportEvidenceToAssessmentControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}/evidence",
-	Code: 200})
-
-var CreateAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessments",
-	Code: 200})
-
-var CreateAssessmentFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFramework",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessmentFrameworks",
-	Code: 200})
-
-var CreateAssessmentReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessments/{assessmentId}/reports",
-	Code: 200})
-
-var CreateControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/controls",
-	Code: 200})
-
-var DeleteAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/assessments/{assessmentId}",
-	Code: 200})
-
-var DeleteAssessmentFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFramework",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/assessmentFrameworks/{frameworkId}",
-	Code: 200})
-
-var DeleteAssessmentFrameworkShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFrameworkShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/assessmentFrameworkShareRequests/{requestId}",
-	Code: 200})
-
-var DeleteAssessmentReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/assessments/{assessmentId}/reports/{assessmentReportId}",
-	Code: 200})
-
-var DeleteControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/controls/{controlId}",
-	Code: 200})
-
-var DeregisterAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/account/deregisterAccount",
-	Code: 200})
-
-var DeregisterOrganizationAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterOrganizationAdminAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/account/deregisterOrganizationAdminAccount",
-	Code: 200})
-
-var DisassociateAssessmentReportEvidenceFolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DisassociateAssessmentReportEvidenceFolder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/disassociateFromAssessmentReport",
-	Code: 200})
-
-var GetAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAccountStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/account/status",
-	Code: 200})
-
-var GetAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}",
-	Code: 200})
-
-var GetAssessmentFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentFramework",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessmentFrameworks/{frameworkId}",
-	Code: 200})
-
-var GetAssessmentReportUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentReportUrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/reports/{assessmentReportId}/url",
-	Code: 200})
-
-var GetChangeLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetChangeLogs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/changelogs",
-	Code: 200})
-
-var GetControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/controls/{controlId}",
-	Code: 200})
-
-var GetDelegations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetDelegations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/delegations",
-	Code: 200})
-
-var GetEvidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidence",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence/{evidenceId}",
-	Code: 200})
-
-var GetEvidenceByEvidenceFolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceByEvidenceFolder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence",
-	Code: 200})
-
-var GetEvidenceFileUploadUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFileUploadUrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/evidenceFileUploadUrl",
-	Code: 200})
-
-var GetEvidenceFolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFolder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}",
-	Code: 200})
-
-var GetEvidenceFoldersByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/evidenceFolders",
-	Code: 200})
-
-var GetEvidenceFoldersByAssessmentControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessmentControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments/{assessmentId}/evidenceFolders-by-assessment-control/{controlSetId}/{controlId}",
-	Code: 200})
-
-var GetInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsights",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights",
-	Code: 200})
-
-var GetInsightsByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsightsByAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights/assessments/{assessmentId}",
-	Code: 200})
-
-var GetOrganizationAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetOrganizationAdminAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/account/organizationAdminAccount",
-	Code: 200})
-
-var GetServicesInScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetServicesInScope",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/services",
-	Code: 200})
-
-var GetSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/settings/{attribute}",
-	Code: 200})
-
-var ListAssessmentControlInsightsByControlDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentControlInsightsByControlDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights/controls-by-assessment",
-	Code: 200})
-
-var ListAssessmentFrameworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessmentFrameworks",
-	Code: 200})
-
-var ListAssessmentFrameworkShareRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworkShareRequests",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessmentFrameworkShareRequests",
-	Code: 200})
-
-var ListAssessmentReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentReports",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessmentReports",
-	Code: 200})
-
-var ListAssessments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/assessments",
-	Code: 200})
-
-var ListControlDomainInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsights",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights/control-domains",
-	Code: 200})
-
-var ListControlDomainInsightsByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsightsByAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights/control-domains-by-assessment",
-	Code: 200})
-
-var ListControlInsightsByControlDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlInsightsByControlDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/insights/controls",
-	Code: 200})
-
-var ListControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControls",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/controls",
-	Code: 200})
-
-var ListKeywordsForDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListKeywordsForDataSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/dataSourceKeywords",
-	Code: 200})
-
-var ListNotifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListNotifications",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notifications",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/account/registerAccount",
-	Code: 200})
-
-var RegisterOrganizationAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterOrganizationAdminAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/account/registerOrganizationAdminAccount",
-	Code: 200})
-
-var StartAssessmentFrameworkShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "StartAssessmentFrameworkShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessmentFrameworks/{frameworkId}/shareRequests",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}",
-	Code: 200})
-
-var UpdateAssessmentControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}",
-	Code: 200})
-
-var UpdateAssessmentControlSetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControlSetStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/controlSets/{controlSetId}/status",
-	Code: 200})
-
-var UpdateAssessmentFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFramework",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessmentFrameworks/{frameworkId}",
-	Code: 200})
-
-var UpdateAssessmentFrameworkShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessmentFrameworkShareRequests/{requestId}",
-	Code: 200})
-
-var UpdateAssessmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/assessments/{assessmentId}/status",
-	Code: 200})
-
-var UpdateControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/controls/{controlId}",
-	Code: 200})
-
-var UpdateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/settings",
-	Code: 200})
-
-var ValidateAssessmentReportIntegrity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidateAssessmentReportIntegrity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/assessmentReports/integrity",
-	Code: 200})
-
-var _BedrockAssessmentManagerLambda = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BedrockAssessmentManagerLambda",
-}, smithy.ShapeTypeService, 0)
-
-var BedrockAssessmentManagerLambda = smithy.NewServiceSchema(_BedrockAssessmentManagerLambda, "2017-07-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0)
-
-var AccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AccountStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AccountStatus_ACTIVE *smithy.Schema
-
-var AccountStatus_INACTIVE *smithy.Schema
-
-var AccountStatus_PENDING_ACTIVATION *smithy.Schema
-
-var ActionEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ActionEnum",
-}, smithy.ShapeTypeEnum, 8)
-var ActionEnum_CREATE *smithy.Schema
-
-var ActionEnum_UPDATE_METADATA *smithy.Schema
-
-var ActionEnum_ACTIVE *smithy.Schema
-
-var ActionEnum_INACTIVE *smithy.Schema
-
-var ActionEnum_DELETE *smithy.Schema
-
-var ActionEnum_UNDER_REVIEW *smithy.Schema
-
-var ActionEnum_REVIEWED *smithy.Schema
-
-var ActionEnum_IMPORT_EVIDENCE *smithy.Schema
-
-var _ActionPlanInstructions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ActionPlanInstructions",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ActionPlanTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ActionPlanTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Assessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Assessment",
-}, smithy.ShapeTypeStructure, 5)
-var Assessment_arn *smithy.Schema
-
-var Assessment_awsAccount *smithy.Schema
-
-var Assessment_metadata *smithy.Schema
-
-var Assessment_framework *smithy.Schema
-
-var Assessment_tags *smithy.Schema
-
-var AssessmentControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentControl",
-}, smithy.ShapeTypeStructure, 9)
-var AssessmentControl_id *smithy.Schema
-
-var AssessmentControl_name *smithy.Schema
-
-var AssessmentControl_description *smithy.Schema
-
-var AssessmentControl_status *smithy.Schema
-
-var AssessmentControl_response *smithy.Schema
-
-var AssessmentControl_comments *smithy.Schema
-
-var AssessmentControl_evidenceSources *smithy.Schema
-
-var AssessmentControl_evidenceCount *smithy.Schema
-
-var AssessmentControl_assessmentReportEvidenceCount *smithy.Schema
-
-var _AssessmentControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentControls",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentControls_member *smithy.Schema
-
-var AssessmentControlSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentControlSet",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentControlSet_id *smithy.Schema
-
-var AssessmentControlSet_description *smithy.Schema
-
-var AssessmentControlSet_status *smithy.Schema
-
-var AssessmentControlSet_roles *smithy.Schema
-
-var AssessmentControlSet_controls *smithy.Schema
-
-var AssessmentControlSet_delegations *smithy.Schema
-
-var AssessmentControlSet_systemEvidenceCount *smithy.Schema
-
-var AssessmentControlSet_manualEvidenceCount *smithy.Schema
-
-var _AssessmentControlSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentControlSets",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentControlSets_member *smithy.Schema
-
-var _AssessmentDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AssessmentEvidenceFolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentEvidenceFolder",
-}, smithy.ShapeTypeStructure, 18)
-var AssessmentEvidenceFolder_name *smithy.Schema
-
-var AssessmentEvidenceFolder_date *smithy.Schema
-
-var AssessmentEvidenceFolder_assessmentId *smithy.Schema
-
-var AssessmentEvidenceFolder_controlSetId *smithy.Schema
-
-var AssessmentEvidenceFolder_controlId *smithy.Schema
-
-var AssessmentEvidenceFolder_id *smithy.Schema
-
-var AssessmentEvidenceFolder_dataSource *smithy.Schema
-
-var AssessmentEvidenceFolder_author *smithy.Schema
-
-var AssessmentEvidenceFolder_totalEvidence *smithy.Schema
-
-var AssessmentEvidenceFolder_assessmentReportSelectionCount *smithy.Schema
-
-var AssessmentEvidenceFolder_controlName *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceResourcesIncludedCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceByTypeManualCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceByTypeUserActivityCount *smithy.Schema
-
-var AssessmentEvidenceFolder_evidenceAwsServiceSourceCount *smithy.Schema
-
-var _AssessmentEvidenceFolderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentEvidenceFolderName",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentEvidenceFolders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentEvidenceFolders",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentEvidenceFolders_member *smithy.Schema
-
-var AssessmentFramework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentFramework",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var AssessmentFramework_id *smithy.Schema
-
-var AssessmentFramework_arn *smithy.Schema
-
-var AssessmentFramework_metadata *smithy.Schema
-
-var AssessmentFramework_controlSets *smithy.Schema
-
-var _AssessmentFrameworkDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentFrameworkDescription",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentFrameworkMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentFrameworkMetadata",
-}, smithy.ShapeTypeStructure, 11)
-var AssessmentFrameworkMetadata_arn *smithy.Schema
-
-var AssessmentFrameworkMetadata_id *smithy.Schema
-
-var AssessmentFrameworkMetadata_type *smithy.Schema
-
-var AssessmentFrameworkMetadata_name *smithy.Schema
-
-var AssessmentFrameworkMetadata_description *smithy.Schema
-
-var AssessmentFrameworkMetadata_logo *smithy.Schema
-
-var AssessmentFrameworkMetadata_complianceType *smithy.Schema
-
-var AssessmentFrameworkMetadata_controlsCount *smithy.Schema
-
-var AssessmentFrameworkMetadata_controlSetsCount *smithy.Schema
-
-var AssessmentFrameworkMetadata_createdAt *smithy.Schema
-
-var AssessmentFrameworkMetadata_lastUpdatedAt *smithy.Schema
-
-var AssessmentFrameworkShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentFrameworkShareRequest",
-}, smithy.ShapeTypeStructure, 15)
-var AssessmentFrameworkShareRequest_id *smithy.Schema
-
-var AssessmentFrameworkShareRequest_frameworkId *smithy.Schema
-
-var AssessmentFrameworkShareRequest_frameworkName *smithy.Schema
-
-var AssessmentFrameworkShareRequest_frameworkDescription *smithy.Schema
-
-var AssessmentFrameworkShareRequest_status *smithy.Schema
-
-var AssessmentFrameworkShareRequest_sourceAccount *smithy.Schema
-
-var AssessmentFrameworkShareRequest_destinationAccount *smithy.Schema
-
-var AssessmentFrameworkShareRequest_destinationRegion *smithy.Schema
-
-var AssessmentFrameworkShareRequest_expirationTime *smithy.Schema
-
-var AssessmentFrameworkShareRequest_creationTime *smithy.Schema
-
-var AssessmentFrameworkShareRequest_lastUpdated *smithy.Schema
-
-var AssessmentFrameworkShareRequest_comment *smithy.Schema
-
-var AssessmentFrameworkShareRequest_standardControlsCount *smithy.Schema
-
-var AssessmentFrameworkShareRequest_customControlsCount *smithy.Schema
-
-var AssessmentFrameworkShareRequest_complianceType *smithy.Schema
-
-var _AssessmentFrameworkShareRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentFrameworkShareRequestList",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentFrameworkShareRequestList_member *smithy.Schema
-
-var AssessmentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentMetadata",
-}, smithy.ShapeTypeStructure, 11)
-var AssessmentMetadata_name *smithy.Schema
-
-var AssessmentMetadata_id *smithy.Schema
-
-var AssessmentMetadata_description *smithy.Schema
-
-var AssessmentMetadata_complianceType *smithy.Schema
-
-var AssessmentMetadata_status *smithy.Schema
-
-var AssessmentMetadata_assessmentReportsDestination *smithy.Schema
-
-var AssessmentMetadata_scope *smithy.Schema
-
-var AssessmentMetadata_roles *smithy.Schema
-
-var AssessmentMetadata_delegations *smithy.Schema
-
-var AssessmentMetadata_creationTime *smithy.Schema
-
-var AssessmentMetadata_lastUpdated *smithy.Schema
-
-var AssessmentMetadataItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentMetadataItem",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentMetadataItem_name *smithy.Schema
-
-var AssessmentMetadataItem_id *smithy.Schema
-
-var AssessmentMetadataItem_complianceType *smithy.Schema
-
-var AssessmentMetadataItem_status *smithy.Schema
-
-var AssessmentMetadataItem_roles *smithy.Schema
-
-var AssessmentMetadataItem_delegations *smithy.Schema
-
-var AssessmentMetadataItem_creationTime *smithy.Schema
-
-var AssessmentMetadataItem_lastUpdated *smithy.Schema
-
-var _AssessmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AssessmentReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReport",
-}, smithy.ShapeTypeStructure, 9)
-var AssessmentReport_id *smithy.Schema
-
-var AssessmentReport_name *smithy.Schema
-
-var AssessmentReport_description *smithy.Schema
-
-var AssessmentReport_awsAccountId *smithy.Schema
-
-var AssessmentReport_assessmentId *smithy.Schema
-
-var AssessmentReport_assessmentName *smithy.Schema
-
-var AssessmentReport_author *smithy.Schema
-
-var AssessmentReport_status *smithy.Schema
-
-var AssessmentReport_creationTime *smithy.Schema
-
-var _AssessmentReportDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AssessmentReportDestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportDestinationType",
-}, smithy.ShapeTypeEnum, 1)
-var AssessmentReportDestinationType_S3 *smithy.Schema
-
-var AssessmentReportEvidenceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportEvidenceError",
-}, smithy.ShapeTypeStructure, 3)
-var AssessmentReportEvidenceError_evidenceId *smithy.Schema
-
-var AssessmentReportEvidenceError_errorCode *smithy.Schema
-
-var AssessmentReportEvidenceError_errorMessage *smithy.Schema
-
-var _AssessmentReportEvidenceErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportEvidenceErrors",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentReportEvidenceErrors_member *smithy.Schema
-
-var AssessmentReportMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportMetadata",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentReportMetadata_id *smithy.Schema
-
-var AssessmentReportMetadata_name *smithy.Schema
-
-var AssessmentReportMetadata_description *smithy.Schema
-
-var AssessmentReportMetadata_assessmentId *smithy.Schema
-
-var AssessmentReportMetadata_assessmentName *smithy.Schema
-
-var AssessmentReportMetadata_author *smithy.Schema
-
-var AssessmentReportMetadata_status *smithy.Schema
-
-var AssessmentReportMetadata_creationTime *smithy.Schema
-
-var _AssessmentReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportName",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentReportsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportsDestination",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var AssessmentReportsDestination_destinationType *smithy.Schema
-
-var AssessmentReportsDestination_destination *smithy.Schema
-
-var _AssessmentReportsMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportsMetadata",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentReportsMetadata_member *smithy.Schema
-
-var AssessmentReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentReportStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AssessmentReportStatus_COMPLETE *smithy.Schema
-
-var AssessmentReportStatus_IN_PROGRESS *smithy.Schema
-
-var AssessmentReportStatus_FAILED *smithy.Schema
-
-var AssessmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssessmentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AssessmentStatus_ACTIVE *smithy.Schema
-
-var AssessmentStatus_INACTIVE *smithy.Schema
-
-var _AuditManagerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AuditManagerArn",
-}, smithy.ShapeTypeString, 0)
-
-var AWSAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AWSAccount",
-}, smithy.ShapeTypeStructure, 3)
-var AWSAccount_id *smithy.Schema
-
-var AWSAccount_emailAddress *smithy.Schema
-
-var AWSAccount_name *smithy.Schema
-
-var _AWSAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AWSAccounts",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _AWSAccounts_member *smithy.Schema
-
-var AWSService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AWSService",
-}, smithy.ShapeTypeStructure, 1)
-var AWSService_serviceName *smithy.Schema
-
-var _AWSServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AWSServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var _AWSServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AWSServices",
-}, smithy.ShapeTypeList, 1)
-var _AWSServices_member *smithy.Schema
-
-var BatchCreateDelegationByAssessmentError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchCreateDelegationByAssessmentError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateDelegationByAssessmentError_createDelegationRequest *smithy.Schema
-
-var BatchCreateDelegationByAssessmentError_errorCode *smithy.Schema
-
-var BatchCreateDelegationByAssessmentError_errorMessage *smithy.Schema
-
-var _BatchCreateDelegationByAssessmentErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchCreateDelegationByAssessmentErrors",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _BatchCreateDelegationByAssessmentErrors_member *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDeleteDelegationByAssessmentError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteDelegationByAssessmentError_delegationId *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentError_errorCode *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentError_errorMessage *smithy.Schema
-
-var _BatchDeleteDelegationByAssessmentErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDeleteDelegationByAssessmentErrors",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _BatchDeleteDelegationByAssessmentErrors_member *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchImportEvidenceToAssessmentControlError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchImportEvidenceToAssessmentControlError_manualEvidence *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlError_errorCode *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlError_errorMessage *smithy.Schema
-
-var _BatchImportEvidenceToAssessmentControlErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchImportEvidenceToAssessmentControlErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchImportEvidenceToAssessmentControlErrors_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ChangeLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ChangeLog",
-}, smithy.ShapeTypeStructure, 5)
-var ChangeLog_objectType *smithy.Schema
-
-var ChangeLog_objectName *smithy.Schema
-
-var ChangeLog_action *smithy.Schema
-
-var ChangeLog_createdAt *smithy.Schema
-
-var ChangeLog_createdBy *smithy.Schema
-
-var _ChangeLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ChangeLogs",
-}, smithy.ShapeTypeList, 1)
-var _ChangeLogs_member *smithy.Schema
-
-var _CloudTrailArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CloudTrailArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ComplianceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ComplianceType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Control = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Control",
-}, smithy.ShapeTypeStructure, 16)
-var Control_arn *smithy.Schema
-
-var Control_id *smithy.Schema
-
-var Control_type *smithy.Schema
-
-var Control_name *smithy.Schema
-
-var Control_description *smithy.Schema
-
-var Control_testingInformation *smithy.Schema
-
-var Control_actionPlanTitle *smithy.Schema
-
-var Control_actionPlanInstructions *smithy.Schema
-
-var Control_controlSources *smithy.Schema
-
-var Control_controlMappingSources *smithy.Schema
-
-var Control_createdAt *smithy.Schema
-
-var Control_lastUpdatedAt *smithy.Schema
-
-var Control_createdBy *smithy.Schema
-
-var Control_lastUpdatedBy *smithy.Schema
-
-var Control_tags *smithy.Schema
-
-var Control_state *smithy.Schema
-
-var _ControlCatalogId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlCatalogId",
-}, smithy.ShapeTypeString, 0)
-
-var ControlComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlComment",
-}, smithy.ShapeTypeStructure, 3)
-var ControlComment_authorName *smithy.Schema
-
-var ControlComment_commentBody *smithy.Schema
-
-var ControlComment_postedDate *smithy.Schema
-
-var _ControlCommentBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlCommentBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ControlComments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlComments",
-}, smithy.ShapeTypeList, 1)
-var _ControlComments_member *smithy.Schema
-
-var _ControlDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ControlDomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlDomainId",
-}, smithy.ShapeTypeString, 0)
-
-var ControlDomainInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlDomainInsights",
-}, smithy.ShapeTypeStructure, 6)
-var ControlDomainInsights_name *smithy.Schema
-
-var ControlDomainInsights_id *smithy.Schema
-
-var ControlDomainInsights_controlsCountByNoncompliantEvidence *smithy.Schema
-
-var ControlDomainInsights_totalControlsCount *smithy.Schema
-
-var ControlDomainInsights_evidenceInsights *smithy.Schema
-
-var ControlDomainInsights_lastUpdated *smithy.Schema
-
-var _ControlDomainInsightsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlDomainInsightsList",
-}, smithy.ShapeTypeList, 1)
-var _ControlDomainInsightsList_member *smithy.Schema
-
-var _ControlInsightsMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlInsightsMetadata",
-}, smithy.ShapeTypeList, 1)
-var _ControlInsightsMetadata_member *smithy.Schema
-
-var _ControlInsightsMetadataByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlInsightsMetadataByAssessment",
-}, smithy.ShapeTypeList, 1)
-var _ControlInsightsMetadataByAssessment_member *smithy.Schema
-
-var ControlInsightsMetadataByAssessmentItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlInsightsMetadataByAssessmentItem",
-}, smithy.ShapeTypeStructure, 5)
-var ControlInsightsMetadataByAssessmentItem_name *smithy.Schema
-
-var ControlInsightsMetadataByAssessmentItem_id *smithy.Schema
-
-var ControlInsightsMetadataByAssessmentItem_evidenceInsights *smithy.Schema
-
-var ControlInsightsMetadataByAssessmentItem_controlSetName *smithy.Schema
-
-var ControlInsightsMetadataByAssessmentItem_lastUpdated *smithy.Schema
-
-var ControlInsightsMetadataItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlInsightsMetadataItem",
-}, smithy.ShapeTypeStructure, 4)
-var ControlInsightsMetadataItem_name *smithy.Schema
-
-var ControlInsightsMetadataItem_id *smithy.Schema
-
-var ControlInsightsMetadataItem_evidenceInsights *smithy.Schema
-
-var ControlInsightsMetadataItem_lastUpdated *smithy.Schema
-
-var ControlMappingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlMappingSource",
-}, smithy.ShapeTypeStructure, 8)
-var ControlMappingSource_sourceId *smithy.Schema
-
-var ControlMappingSource_sourceName *smithy.Schema
-
-var ControlMappingSource_sourceDescription *smithy.Schema
-
-var ControlMappingSource_sourceSetUpOption *smithy.Schema
-
-var ControlMappingSource_sourceType *smithy.Schema
-
-var ControlMappingSource_sourceKeyword *smithy.Schema
-
-var ControlMappingSource_sourceFrequency *smithy.Schema
-
-var ControlMappingSource_troubleshootingText *smithy.Schema
-
-var _ControlMappingSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlMappingSources",
-}, smithy.ShapeTypeList, 1)
-var _ControlMappingSources_member *smithy.Schema
-
-var ControlMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlMetadata",
-}, smithy.ShapeTypeStructure, 6)
-var ControlMetadata_arn *smithy.Schema
-
-var ControlMetadata_id *smithy.Schema
-
-var ControlMetadata_name *smithy.Schema
-
-var ControlMetadata_controlSources *smithy.Schema
-
-var ControlMetadata_createdAt *smithy.Schema
-
-var ControlMetadata_lastUpdatedAt *smithy.Schema
-
-var _ControlMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _ControlMetadataList_member *smithy.Schema
-
-var _ControlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlName",
-}, smithy.ShapeTypeString, 0)
-
-var ControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlResponse",
-}, smithy.ShapeTypeEnum, 4)
-var ControlResponse_MANUAL *smithy.Schema
-
-var ControlResponse_AUTOMATE *smithy.Schema
-
-var ControlResponse_DEFER *smithy.Schema
-
-var ControlResponse_IGNORE *smithy.Schema
-
-var _Controls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Controls",
-}, smithy.ShapeTypeList, 1)
-var _Controls_member *smithy.Schema
-
-var _ControlsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ControlSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSet",
-}, smithy.ShapeTypeStructure, 3)
-var ControlSet_id *smithy.Schema
-
-var ControlSet_name *smithy.Schema
-
-var ControlSet_controls *smithy.Schema
-
-var _ControlSetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSetId",
-}, smithy.ShapeTypeString, 0)
-
-var _ControlSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _ControlSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSets",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _ControlSets_member *smithy.Schema
-
-var _ControlSetsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSetsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ControlSetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSetStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ControlSetStatus_ACTIVE *smithy.Schema
-
-var ControlSetStatus_UNDER_REVIEW *smithy.Schema
-
-var ControlSetStatus_REVIEWED *smithy.Schema
-
-var _ControlSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlSources",
-}, smithy.ShapeTypeString, 0)
-
-var ControlState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlState",
-}, smithy.ShapeTypeEnum, 2)
-var ControlState_ACTIVE *smithy.Schema
-
-var ControlState_END_OF_SUPPORT *smithy.Schema
-
-var ControlStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ControlStatus_UNDER_REVIEW *smithy.Schema
-
-var ControlStatus_REVIEWED *smithy.Schema
-
-var ControlStatus_INACTIVE *smithy.Schema
-
-var ControlType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ControlType",
-}, smithy.ShapeTypeEnum, 3)
-var ControlType_STANDARD *smithy.Schema
-
-var ControlType_CUSTOM *smithy.Schema
-
-var ControlType_CORE *smithy.Schema
-
-var CreateAssessmentFrameworkControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkControl",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAssessmentFrameworkControl_id *smithy.Schema
-
-var _CreateAssessmentFrameworkControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkControls",
-}, smithy.ShapeTypeList, 1)
-var _CreateAssessmentFrameworkControls_member *smithy.Schema
-
-var CreateAssessmentFrameworkControlSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkControlSet",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAssessmentFrameworkControlSet_name *smithy.Schema
-
-var CreateAssessmentFrameworkControlSet_controls *smithy.Schema
-
-var _CreateAssessmentFrameworkControlSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkControlSets",
-}, smithy.ShapeTypeList, 1)
-var _CreateAssessmentFrameworkControlSets_member *smithy.Schema
-
-var CreateControlMappingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateControlMappingSource",
-}, smithy.ShapeTypeStructure, 7)
-var CreateControlMappingSource_sourceName *smithy.Schema
-
-var CreateControlMappingSource_sourceDescription *smithy.Schema
-
-var CreateControlMappingSource_sourceSetUpOption *smithy.Schema
-
-var CreateControlMappingSource_sourceType *smithy.Schema
-
-var CreateControlMappingSource_sourceKeyword *smithy.Schema
-
-var CreateControlMappingSource_sourceFrequency *smithy.Schema
-
-var CreateControlMappingSource_troubleshootingText *smithy.Schema
-
-var _CreateControlMappingSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateControlMappingSources",
-}, smithy.ShapeTypeList, 1)
-var _CreateControlMappingSources_member *smithy.Schema
-
-var _CreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreatedBy",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CreateDelegationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateDelegationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDelegationRequest_comment *smithy.Schema
-
-var CreateDelegationRequest_controlSetId *smithy.Schema
-
-var CreateDelegationRequest_roleArn *smithy.Schema
-
-var CreateDelegationRequest_roleType *smithy.Schema
-
-var _CreateDelegationRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateDelegationRequests",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _CreateDelegationRequests_member *smithy.Schema
-
-var DataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DataSourceType",
-}, smithy.ShapeTypeEnum, 5)
-var DataSourceType_AWS_CLOUDTRAIL *smithy.Schema
-
-var DataSourceType_AWS_CONFIG *smithy.Schema
-
-var DataSourceType_AWS_SECURITY_HUB *smithy.Schema
-
-var DataSourceType_AWS_API_CALL *smithy.Schema
-
-var DataSourceType_MANUAL *smithy.Schema
-
-var DefaultExportDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DefaultExportDestination",
-}, smithy.ShapeTypeStructure, 2)
-var DefaultExportDestination_destinationType *smithy.Schema
-
-var DefaultExportDestination_destination *smithy.Schema
-
-var Delegation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Delegation",
-}, smithy.ShapeTypeStructure, 11, &smithytraits.Sensitive{})
-var Delegation_id *smithy.Schema
-
-var Delegation_assessmentName *smithy.Schema
-
-var Delegation_assessmentId *smithy.Schema
-
-var Delegation_status *smithy.Schema
-
-var Delegation_roleArn *smithy.Schema
-
-var Delegation_roleType *smithy.Schema
-
-var Delegation_creationTime *smithy.Schema
-
-var Delegation_lastUpdated *smithy.Schema
-
-var Delegation_controlSetId *smithy.Schema
-
-var Delegation_comment *smithy.Schema
-
-var Delegation_createdBy *smithy.Schema
-
-var _DelegationComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DelegationComment",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DelegationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DelegationIds",
-}, smithy.ShapeTypeList, 1)
-var _DelegationIds_member *smithy.Schema
-
-var DelegationMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DelegationMetadata",
-}, smithy.ShapeTypeStructure, 7)
-var DelegationMetadata_id *smithy.Schema
-
-var DelegationMetadata_assessmentName *smithy.Schema
-
-var DelegationMetadata_assessmentId *smithy.Schema
-
-var DelegationMetadata_status *smithy.Schema
-
-var DelegationMetadata_roleArn *smithy.Schema
-
-var DelegationMetadata_creationTime *smithy.Schema
-
-var DelegationMetadata_controlSetName *smithy.Schema
-
-var _DelegationMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DelegationMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _DelegationMetadataList_member *smithy.Schema
-
-var _Delegations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Delegations",
-}, smithy.ShapeTypeList, 1)
-var _Delegations_member *smithy.Schema
-
-var DelegationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DelegationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DelegationStatus_IN_PROGRESS *smithy.Schema
-
-var DelegationStatus_UNDER_REVIEW *smithy.Schema
-
-var DelegationStatus_COMPLETE *smithy.Schema
-
-var DeleteResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteResources",
-}, smithy.ShapeTypeEnum, 2)
-var DeleteResources_ALL *smithy.Schema
-
-var DeleteResources_DEFAULT *smithy.Schema
-
-var DeregistrationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregistrationPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var DeregistrationPolicy_deleteResources *smithy.Schema
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EventName",
-}, smithy.ShapeTypeString, 0)
-
-var Evidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Evidence",
-}, smithy.ShapeTypeStructure, 15)
-var Evidence_dataSource *smithy.Schema
-
-var Evidence_evidenceAwsAccountId *smithy.Schema
-
-var Evidence_time *smithy.Schema
-
-var Evidence_eventSource *smithy.Schema
-
-var Evidence_eventName *smithy.Schema
-
-var Evidence_evidenceByType *smithy.Schema
-
-var Evidence_resourcesIncluded *smithy.Schema
-
-var Evidence_attributes *smithy.Schema
-
-var Evidence_iamId *smithy.Schema
-
-var Evidence_complianceCheck *smithy.Schema
-
-var Evidence_awsOrganization *smithy.Schema
-
-var Evidence_awsAccountId *smithy.Schema
-
-var Evidence_evidenceFolderId *smithy.Schema
-
-var Evidence_id *smithy.Schema
-
-var Evidence_assessmentReportSelection *smithy.Schema
-
-var _EvidenceAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceAttributeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EvidenceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceAttributes",
-}, smithy.ShapeTypeMap, 2)
-var _EvidenceAttributes_key *smithy.Schema
-
-var _EvidenceAttributes_value *smithy.Schema
-
-var _EvidenceAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var EvidenceFinderBackfillStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceFinderBackfillStatus",
-}, smithy.ShapeTypeEnum, 3)
-var EvidenceFinderBackfillStatus_NOT_STARTED *smithy.Schema
-
-var EvidenceFinderBackfillStatus_IN_PROGRESS *smithy.Schema
-
-var EvidenceFinderBackfillStatus_COMPLETED *smithy.Schema
-
-var EvidenceFinderEnablement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceFinderEnablement",
-}, smithy.ShapeTypeStructure, 4)
-var EvidenceFinderEnablement_eventDataStoreArn *smithy.Schema
-
-var EvidenceFinderEnablement_enablementStatus *smithy.Schema
-
-var EvidenceFinderEnablement_backfillStatus *smithy.Schema
-
-var EvidenceFinderEnablement_error *smithy.Schema
-
-var EvidenceFinderEnablementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceFinderEnablementStatus",
-}, smithy.ShapeTypeEnum, 4)
-var EvidenceFinderEnablementStatus_ENABLED *smithy.Schema
-
-var EvidenceFinderEnablementStatus_DISABLED *smithy.Schema
-
-var EvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS *smithy.Schema
-
-var EvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS *smithy.Schema
-
-var _EvidenceIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceIds",
-}, smithy.ShapeTypeList, 1)
-var _EvidenceIds_member *smithy.Schema
-
-var EvidenceInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceInsights",
-}, smithy.ShapeTypeStructure, 3)
-var EvidenceInsights_noncompliantEvidenceCount *smithy.Schema
-
-var EvidenceInsights_compliantEvidenceCount *smithy.Schema
-
-var EvidenceInsights_inconclusiveEvidenceCount *smithy.Schema
-
-var _EvidenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceList",
-}, smithy.ShapeTypeList, 1)
-var _EvidenceList_member *smithy.Schema
-
-var _EvidenceSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "EvidenceSources",
-}, smithy.ShapeTypeList, 1)
-var _EvidenceSources_member *smithy.Schema
-
-var ExportDestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ExportDestinationType",
-}, smithy.ShapeTypeEnum, 1)
-var ExportDestinationType_S3 *smithy.Schema
-
-var _Filename = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Filename",
-}, smithy.ShapeTypeString, 0)
-
-var Framework = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Framework",
-}, smithy.ShapeTypeStructure, 14)
-var Framework_arn *smithy.Schema
-
-var Framework_id *smithy.Schema
-
-var Framework_name *smithy.Schema
-
-var Framework_type *smithy.Schema
-
-var Framework_complianceType *smithy.Schema
-
-var Framework_description *smithy.Schema
-
-var Framework_logo *smithy.Schema
-
-var Framework_controlSources *smithy.Schema
-
-var Framework_controlSets *smithy.Schema
-
-var Framework_createdAt *smithy.Schema
-
-var Framework_lastUpdatedAt *smithy.Schema
-
-var Framework_createdBy *smithy.Schema
-
-var Framework_lastUpdatedBy *smithy.Schema
-
-var Framework_tags *smithy.Schema
-
-var _FrameworkDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "FrameworkDescription",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "FrameworkMetadata",
-}, smithy.ShapeTypeStructure, 4)
-var FrameworkMetadata_name *smithy.Schema
-
-var FrameworkMetadata_description *smithy.Schema
-
-var FrameworkMetadata_logo *smithy.Schema
-
-var FrameworkMetadata_complianceType *smithy.Schema
-
-var _FrameworkMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "FrameworkMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _FrameworkMetadataList_member *smithy.Schema
-
-var _FrameworkName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "FrameworkName",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "FrameworkType",
-}, smithy.ShapeTypeEnum, 2)
-var FrameworkType_STANDARD *smithy.Schema
-
-var FrameworkType_CUSTOM *smithy.Schema
-
-var _GenericArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GenericArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HyperlinkName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "HyperlinkName",
-}, smithy.ShapeTypeString, 0)
-
-var _IamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "IamArn",
-}, smithy.ShapeTypeString, 0)
-
-var Insights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Insights",
-}, smithy.ShapeTypeStructure, 7)
-var Insights_activeAssessmentsCount *smithy.Schema
-
-var Insights_noncompliantEvidenceCount *smithy.Schema
-
-var Insights_compliantEvidenceCount *smithy.Schema
-
-var Insights_inconclusiveEvidenceCount *smithy.Schema
-
-var Insights_assessmentControlsCountByNoncompliantEvidence *smithy.Schema
-
-var Insights_totalAssessmentControlsCount *smithy.Schema
-
-var Insights_lastUpdated *smithy.Schema
-
-var InsightsByAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "InsightsByAssessment",
-}, smithy.ShapeTypeStructure, 6)
-var InsightsByAssessment_noncompliantEvidenceCount *smithy.Schema
-
-var InsightsByAssessment_compliantEvidenceCount *smithy.Schema
-
-var InsightsByAssessment_inconclusiveEvidenceCount *smithy.Schema
-
-var InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence *smithy.Schema
-
-var InsightsByAssessment_totalAssessmentControlsCount *smithy.Schema
-
-var InsightsByAssessment_lastUpdated *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var KeywordInputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "KeywordInputType",
-}, smithy.ShapeTypeEnum, 3)
-var KeywordInputType_SELECT_FROM_LIST *smithy.Schema
-
-var KeywordInputType_UPLOAD_FILE *smithy.Schema
-
-var KeywordInputType_INPUT_TEXT *smithy.Schema
-
-var _Keywords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Keywords",
-}, smithy.ShapeTypeList, 1)
-var _Keywords_member *smithy.Schema
-
-var _KeywordValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "KeywordValue",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LastUpdatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "LastUpdatedBy",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ListAssessmentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentMetadata",
-}, smithy.ShapeTypeList, 1)
-var _ListAssessmentMetadata_member *smithy.Schema
-
-var ManualEvidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ManualEvidence",
-}, smithy.ShapeTypeStructure, 3)
-var ManualEvidence_s3ResourcePath *smithy.Schema
-
-var ManualEvidence_textResponse *smithy.Schema
-
-var ManualEvidence_evidenceFileName *smithy.Schema
-
-var _ManualEvidenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ManualEvidenceList",
-}, smithy.ShapeTypeList, 1)
-var _ManualEvidenceList_member *smithy.Schema
-
-var _ManualEvidenceLocalFileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ManualEvidenceLocalFileName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ManualEvidenceTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ManualEvidenceTextResponse",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var Notification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Notification",
-}, smithy.ShapeTypeStructure, 8)
-var Notification_id *smithy.Schema
-
-var Notification_assessmentId *smithy.Schema
-
-var Notification_assessmentName *smithy.Schema
-
-var Notification_controlSetId *smithy.Schema
-
-var Notification_controlSetName *smithy.Schema
-
-var Notification_description *smithy.Schema
-
-var Notification_eventTime *smithy.Schema
-
-var Notification_source *smithy.Schema
-
-var _Notifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Notifications",
-}, smithy.ShapeTypeList, 1)
-var _Notifications_member *smithy.Schema
-
-var _NullableInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "NullableInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObjectTypeEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ObjectTypeEnum",
-}, smithy.ShapeTypeEnum, 5)
-var ObjectTypeEnum_ASSESSMENT *smithy.Schema
-
-var ObjectTypeEnum_CONTROL_SET *smithy.Schema
-
-var ObjectTypeEnum_CONTROL *smithy.Schema
-
-var ObjectTypeEnum_DELEGATION *smithy.Schema
-
-var ObjectTypeEnum_ASSESSMENT_REPORT *smithy.Schema
-
-var _organizationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "organizationId",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "QueryStatement",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 3)
-var Resource_arn *smithy.Schema
-
-var Resource_value *smithy.Schema
-
-var Resource_complianceCheck *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Role",
-}, smithy.ShapeTypeStructure, 2)
-var Role_roleType *smithy.Schema
-
-var Role_roleArn *smithy.Schema
-
-var _Roles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Roles",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _Roles_member *smithy.Schema
-
-var RoleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RoleType",
-}, smithy.ShapeTypeEnum, 2)
-var RoleType_PROCESS_OWNER *smithy.Schema
-
-var RoleType_RESOURCE_OWNER *smithy.Schema
-
-var _S3Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "S3Url",
-}, smithy.ShapeTypeString, 0)
-
-var Scope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Scope",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Scope_awsAccounts *smithy.Schema
-
-var Scope_awsServices *smithy.Schema
-
-var ServiceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ServiceMetadata",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceMetadata_name *smithy.Schema
-
-var ServiceMetadata_displayName *smithy.Schema
-
-var ServiceMetadata_description *smithy.Schema
-
-var ServiceMetadata_category *smithy.Schema
-
-var _ServiceMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ServiceMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceMetadataList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SettingAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SettingAttribute",
-}, smithy.ShapeTypeEnum, 8)
-var SettingAttribute_ALL *smithy.Schema
-
-var SettingAttribute_IS_AWS_ORG_ENABLED *smithy.Schema
-
-var SettingAttribute_SNS_TOPIC *smithy.Schema
-
-var SettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION *smithy.Schema
-
-var SettingAttribute_DEFAULT_PROCESS_OWNERS *smithy.Schema
-
-var SettingAttribute_EVIDENCE_FINDER_ENABLEMENT *smithy.Schema
-
-var SettingAttribute_DEREGISTRATION_POLICY *smithy.Schema
-
-var SettingAttribute_DEFAULT_EXPORT_DESTINATION *smithy.Schema
-
-var Settings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Settings",
-}, smithy.ShapeTypeStructure, 8)
-var Settings_isAwsOrgEnabled *smithy.Schema
-
-var Settings_snsTopic *smithy.Schema
-
-var Settings_defaultAssessmentReportsDestination *smithy.Schema
-
-var Settings_defaultProcessOwners *smithy.Schema
-
-var Settings_kmsKey *smithy.Schema
-
-var Settings_evidenceFinderEnablement *smithy.Schema
-
-var Settings_deregistrationPolicy *smithy.Schema
-
-var Settings_defaultExportDestination *smithy.Schema
-
-var ShareRequestAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ShareRequestAction",
-}, smithy.ShapeTypeEnum, 3)
-var ShareRequestAction_ACCEPT *smithy.Schema
-
-var ShareRequestAction_DECLINE *smithy.Schema
-
-var ShareRequestAction_REVOKE *smithy.Schema
-
-var _ShareRequestComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ShareRequestComment",
-}, smithy.ShapeTypeString, 0)
-
-var ShareRequestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ShareRequestStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ShareRequestStatus_ACTIVE *smithy.Schema
-
-var ShareRequestStatus_REPLICATING *smithy.Schema
-
-var ShareRequestStatus_SHARED *smithy.Schema
-
-var ShareRequestStatus_EXPIRING *smithy.Schema
-
-var ShareRequestStatus_FAILED *smithy.Schema
-
-var ShareRequestStatus_EXPIRED *smithy.Schema
-
-var ShareRequestStatus_DECLINED *smithy.Schema
-
-var ShareRequestStatus_REVOKED *smithy.Schema
-
-var ShareRequestType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ShareRequestType",
-}, smithy.ShapeTypeEnum, 2)
-var ShareRequestType_SENT *smithy.Schema
-
-var ShareRequestType_RECEIVED *smithy.Schema
-
-var _SnsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SnsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SNSTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SNSTopic",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var SourceFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceFrequency",
-}, smithy.ShapeTypeEnum, 3)
-var SourceFrequency_DAILY *smithy.Schema
-
-var SourceFrequency_WEEKLY *smithy.Schema
-
-var SourceFrequency_MONTHLY *smithy.Schema
-
-var SourceKeyword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceKeyword",
-}, smithy.ShapeTypeStructure, 2)
-var SourceKeyword_keywordInputType *smithy.Schema
-
-var SourceKeyword_keywordValue *smithy.Schema
-
-var _SourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceName",
-}, smithy.ShapeTypeString, 0)
-
-var SourceSetUpOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceSetUpOption",
-}, smithy.ShapeTypeEnum, 2)
-var SourceSetUpOption_SYSTEM_CONTROLS_MAPPING *smithy.Schema
-
-var SourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING *smithy.Schema
-
-var SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "SourceType",
-}, smithy.ShapeTypeEnum, 7)
-var SourceType_AWS_CLOUDTRAIL *smithy.Schema
-
-var SourceType_AWS_CONFIG *smithy.Schema
-
-var SourceType_AWS_SECURITY_HUB *smithy.Schema
-
-var SourceType_AWS_API_CALL *smithy.Schema
-
-var SourceType_MANUAL *smithy.Schema
-
-var SourceType_COMMON_CONTROL *smithy.Schema
-
-var SourceType_CORE_CONTROL *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TestingInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TestingInformation",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimestampUUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TimestampUUID",
-}, smithy.ShapeTypeString, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var _TroubleshootingText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TroubleshootingText",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var UpdateAssessmentFrameworkControlSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkControlSet",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAssessmentFrameworkControlSet_id *smithy.Schema
-
-var UpdateAssessmentFrameworkControlSet_name *smithy.Schema
-
-var UpdateAssessmentFrameworkControlSet_controls *smithy.Schema
-
-var _UpdateAssessmentFrameworkControlSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkControlSets",
-}, smithy.ShapeTypeList, 1)
-var _UpdateAssessmentFrameworkControlSets_member *smithy.Schema
-
-var URL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "URL",
-}, smithy.ShapeTypeStructure, 2)
-var URL_hyperlinkName *smithy.Schema
-
-var URL_link *smithy.Schema
-
-var _UrlLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UrlLink",
-}, smithy.ShapeTypeString, 0)
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var _ValidationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidationErrors",
-}, smithy.ShapeTypeList, 1)
-var _ValidationErrors_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var AssociateAssessmentReportEvidenceFolderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssociateAssessmentReportEvidenceFolderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAssessmentReportEvidenceFolderRequest_assessmentId *smithy.Schema
-
-var AssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId *smithy.Schema
-
-var AssociateAssessmentReportEvidenceFolderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "AssociateAssessmentReportEvidenceFolderResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchAssociateAssessmentReportEvidenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchAssociateAssessmentReportEvidenceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchAssociateAssessmentReportEvidenceRequest_assessmentId *smithy.Schema
-
-var BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId *smithy.Schema
-
-var BatchAssociateAssessmentReportEvidenceRequest_evidenceIds *smithy.Schema
-
-var BatchAssociateAssessmentReportEvidenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchAssociateAssessmentReportEvidenceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateAssessmentReportEvidenceResponse_evidenceIds *smithy.Schema
-
-var BatchAssociateAssessmentReportEvidenceResponse_errors *smithy.Schema
-
-var BatchCreateDelegationByAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchCreateDelegationByAssessmentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateDelegationByAssessmentRequest_createDelegationRequests *smithy.Schema
-
-var BatchCreateDelegationByAssessmentRequest_assessmentId *smithy.Schema
-
-var BatchCreateDelegationByAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchCreateDelegationByAssessmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateDelegationByAssessmentResponse_delegations *smithy.Schema
-
-var BatchCreateDelegationByAssessmentResponse_errors *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDeleteDelegationByAssessmentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteDelegationByAssessmentRequest_delegationIds *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentRequest_assessmentId *smithy.Schema
-
-var BatchDeleteDelegationByAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDeleteDelegationByAssessmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteDelegationByAssessmentResponse_errors *smithy.Schema
-
-var BatchDisassociateAssessmentReportEvidenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDisassociateAssessmentReportEvidenceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDisassociateAssessmentReportEvidenceRequest_assessmentId *smithy.Schema
-
-var BatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId *smithy.Schema
-
-var BatchDisassociateAssessmentReportEvidenceRequest_evidenceIds *smithy.Schema
-
-var BatchDisassociateAssessmentReportEvidenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchDisassociateAssessmentReportEvidenceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds *smithy.Schema
-
-var BatchDisassociateAssessmentReportEvidenceResponse_errors *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchImportEvidenceToAssessmentControlRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchImportEvidenceToAssessmentControlRequest_assessmentId *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlRequest_controlSetId *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlRequest_controlId *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlRequest_manualEvidence *smithy.Schema
-
-var BatchImportEvidenceToAssessmentControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "BatchImportEvidenceToAssessmentControlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchImportEvidenceToAssessmentControlResponse_errors *smithy.Schema
-
-var CreateAssessmentFrameworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAssessmentFrameworkRequest_name *smithy.Schema
-
-var CreateAssessmentFrameworkRequest_description *smithy.Schema
-
-var CreateAssessmentFrameworkRequest_complianceType *smithy.Schema
-
-var CreateAssessmentFrameworkRequest_controlSets *smithy.Schema
-
-var CreateAssessmentFrameworkRequest_tags *smithy.Schema
-
-var CreateAssessmentFrameworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentFrameworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAssessmentFrameworkResponse_framework *smithy.Schema
-
-var CreateAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateAssessmentRequest_name *smithy.Schema
-
-var CreateAssessmentRequest_description *smithy.Schema
-
-var CreateAssessmentRequest_assessmentReportsDestination *smithy.Schema
-
-var CreateAssessmentRequest_scope *smithy.Schema
-
-var CreateAssessmentRequest_roles *smithy.Schema
-
-var CreateAssessmentRequest_frameworkId *smithy.Schema
-
-var CreateAssessmentRequest_tags *smithy.Schema
-
-var CreateAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAssessmentResponse_assessment *smithy.Schema
-
-var CreateAssessmentReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentReportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAssessmentReportRequest_name *smithy.Schema
-
-var CreateAssessmentReportRequest_description *smithy.Schema
-
-var CreateAssessmentReportRequest_assessmentId *smithy.Schema
-
-var CreateAssessmentReportRequest_queryStatement *smithy.Schema
-
-var CreateAssessmentReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateAssessmentReportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAssessmentReportResponse_assessmentReport *smithy.Schema
-
-var CreateControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateControlRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateControlRequest_name *smithy.Schema
-
-var CreateControlRequest_description *smithy.Schema
-
-var CreateControlRequest_testingInformation *smithy.Schema
-
-var CreateControlRequest_actionPlanTitle *smithy.Schema
-
-var CreateControlRequest_actionPlanInstructions *smithy.Schema
-
-var CreateControlRequest_controlMappingSources *smithy.Schema
-
-var CreateControlRequest_tags *smithy.Schema
-
-var CreateControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "CreateControlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateControlResponse_control *smithy.Schema
-
-var DeleteAssessmentFrameworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFrameworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAssessmentFrameworkRequest_frameworkId *smithy.Schema
-
-var DeleteAssessmentFrameworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFrameworkResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAssessmentFrameworkShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFrameworkShareRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAssessmentFrameworkShareRequest_requestId *smithy.Schema
-
-var DeleteAssessmentFrameworkShareRequest_requestType *smithy.Schema
-
-var DeleteAssessmentFrameworkShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentFrameworkShareResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAssessmentRequest_assessmentId *smithy.Schema
-
-var DeleteAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAssessmentReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentReportRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAssessmentReportRequest_assessmentId *smithy.Schema
-
-var DeleteAssessmentReportRequest_assessmentReportId *smithy.Schema
-
-var DeleteAssessmentReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteAssessmentReportResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteControlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteControlRequest_controlId *smithy.Schema
-
-var DeleteControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeleteControlResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterAccountResponse_status *smithy.Schema
-
-var DeregisterOrganizationAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterOrganizationAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterOrganizationAdminAccountRequest_adminAccountId *smithy.Schema
-
-var DeregisterOrganizationAdminAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DeregisterOrganizationAdminAccountResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateAssessmentReportEvidenceFolderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DisassociateAssessmentReportEvidenceFolderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAssessmentReportEvidenceFolderRequest_assessmentId *smithy.Schema
-
-var DisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId *smithy.Schema
-
-var DisassociateAssessmentReportEvidenceFolderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "DisassociateAssessmentReportEvidenceFolderResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAccountStatusRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAccountStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountStatusResponse_status *smithy.Schema
-
-var GetAssessmentFrameworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentFrameworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssessmentFrameworkRequest_frameworkId *smithy.Schema
-
-var GetAssessmentFrameworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentFrameworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssessmentFrameworkResponse_framework *smithy.Schema
-
-var GetAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssessmentRequest_assessmentId *smithy.Schema
-
-var GetAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAssessmentResponse_assessment *smithy.Schema
-
-var GetAssessmentResponse_userRole *smithy.Schema
-
-var GetAssessmentReportUrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentReportUrlRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAssessmentReportUrlRequest_assessmentReportId *smithy.Schema
-
-var GetAssessmentReportUrlRequest_assessmentId *smithy.Schema
-
-var GetAssessmentReportUrlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetAssessmentReportUrlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssessmentReportUrlResponse_preSignedUrl *smithy.Schema
-
-var GetChangeLogsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetChangeLogsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetChangeLogsRequest_assessmentId *smithy.Schema
-
-var GetChangeLogsRequest_controlSetId *smithy.Schema
-
-var GetChangeLogsRequest_controlId *smithy.Schema
-
-var GetChangeLogsRequest_nextToken *smithy.Schema
-
-var GetChangeLogsRequest_maxResults *smithy.Schema
-
-var GetChangeLogsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetChangeLogsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetChangeLogsResponse_changeLogs *smithy.Schema
-
-var GetChangeLogsResponse_nextToken *smithy.Schema
-
-var GetControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetControlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetControlRequest_controlId *smithy.Schema
-
-var GetControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetControlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetControlResponse_control *smithy.Schema
-
-var GetDelegationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetDelegationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDelegationsRequest_nextToken *smithy.Schema
-
-var GetDelegationsRequest_maxResults *smithy.Schema
-
-var GetDelegationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetDelegationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDelegationsResponse_delegations *smithy.Schema
-
-var GetDelegationsResponse_nextToken *smithy.Schema
-
-var GetEvidenceByEvidenceFolderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceByEvidenceFolderRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetEvidenceByEvidenceFolderRequest_assessmentId *smithy.Schema
-
-var GetEvidenceByEvidenceFolderRequest_controlSetId *smithy.Schema
-
-var GetEvidenceByEvidenceFolderRequest_evidenceFolderId *smithy.Schema
-
-var GetEvidenceByEvidenceFolderRequest_nextToken *smithy.Schema
-
-var GetEvidenceByEvidenceFolderRequest_maxResults *smithy.Schema
-
-var GetEvidenceByEvidenceFolderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceByEvidenceFolderResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEvidenceByEvidenceFolderResponse_evidence *smithy.Schema
-
-var GetEvidenceByEvidenceFolderResponse_nextToken *smithy.Schema
-
-var GetEvidenceFileUploadUrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFileUploadUrlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEvidenceFileUploadUrlRequest_fileName *smithy.Schema
-
-var GetEvidenceFileUploadUrlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFileUploadUrlResponse",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var GetEvidenceFileUploadUrlResponse_evidenceFileName *smithy.Schema
-
-var GetEvidenceFileUploadUrlResponse_uploadUrl *smithy.Schema
-
-var GetEvidenceFolderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFolderRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetEvidenceFolderRequest_assessmentId *smithy.Schema
-
-var GetEvidenceFolderRequest_controlSetId *smithy.Schema
-
-var GetEvidenceFolderRequest_evidenceFolderId *smithy.Schema
-
-var GetEvidenceFolderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFolderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEvidenceFolderResponse_evidenceFolder *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessmentControlRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetEvidenceFoldersByAssessmentControlRequest_assessmentId *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlRequest_controlSetId *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlRequest_controlId *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlRequest_nextToken *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlRequest_maxResults *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessmentControlResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEvidenceFoldersByAssessmentControlResponse_evidenceFolders *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentControlResponse_nextToken *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetEvidenceFoldersByAssessmentRequest_assessmentId *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentRequest_nextToken *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentRequest_maxResults *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceFoldersByAssessmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEvidenceFoldersByAssessmentResponse_evidenceFolders *smithy.Schema
-
-var GetEvidenceFoldersByAssessmentResponse_nextToken *smithy.Schema
-
-var GetEvidenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetEvidenceRequest_assessmentId *smithy.Schema
-
-var GetEvidenceRequest_controlSetId *smithy.Schema
-
-var GetEvidenceRequest_evidenceFolderId *smithy.Schema
-
-var GetEvidenceRequest_evidenceId *smithy.Schema
-
-var GetEvidenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetEvidenceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEvidenceResponse_evidence *smithy.Schema
-
-var GetInsightsByAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsightsByAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInsightsByAssessmentRequest_assessmentId *smithy.Schema
-
-var GetInsightsByAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsightsByAssessmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetInsightsByAssessmentResponse_insights *smithy.Schema
-
-var GetInsightsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsightsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetInsightsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetInsightsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetInsightsResponse_insights *smithy.Schema
-
-var GetOrganizationAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetOrganizationAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetOrganizationAdminAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetOrganizationAdminAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetOrganizationAdminAccountResponse_adminAccountId *smithy.Schema
-
-var GetOrganizationAdminAccountResponse_organizationId *smithy.Schema
-
-var GetServicesInScopeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetServicesInScopeRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetServicesInScopeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetServicesInScopeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServicesInScopeResponse_serviceMetadata *smithy.Schema
-
-var GetSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSettingsRequest_attribute *smithy.Schema
-
-var GetSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "GetSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSettingsResponse_settings *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentControlInsightsByControlDomainRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAssessmentControlInsightsByControlDomainRequest_controlDomainId *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainRequest_assessmentId *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainRequest_nextToken *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainRequest_maxResults *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentControlInsightsByControlDomainResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment *smithy.Schema
-
-var ListAssessmentControlInsightsByControlDomainResponse_nextToken *smithy.Schema
-
-var ListAssessmentFrameworkShareRequestsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworkShareRequestsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssessmentFrameworkShareRequestsRequest_requestType *smithy.Schema
-
-var ListAssessmentFrameworkShareRequestsRequest_nextToken *smithy.Schema
-
-var ListAssessmentFrameworkShareRequestsRequest_maxResults *smithy.Schema
-
-var ListAssessmentFrameworkShareRequestsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworkShareRequestsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests *smithy.Schema
-
-var ListAssessmentFrameworkShareRequestsResponse_nextToken *smithy.Schema
-
-var ListAssessmentFrameworksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssessmentFrameworksRequest_frameworkType *smithy.Schema
-
-var ListAssessmentFrameworksRequest_nextToken *smithy.Schema
-
-var ListAssessmentFrameworksRequest_maxResults *smithy.Schema
-
-var ListAssessmentFrameworksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentFrameworksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentFrameworksResponse_frameworkMetadataList *smithy.Schema
-
-var ListAssessmentFrameworksResponse_nextToken *smithy.Schema
-
-var ListAssessmentReportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentReportsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentReportsRequest_nextToken *smithy.Schema
-
-var ListAssessmentReportsRequest_maxResults *smithy.Schema
-
-var ListAssessmentReportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentReportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentReportsResponse_assessmentReports *smithy.Schema
-
-var ListAssessmentReportsResponse_nextToken *smithy.Schema
-
-var ListAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssessmentsRequest_status *smithy.Schema
-
-var ListAssessmentsRequest_nextToken *smithy.Schema
-
-var ListAssessmentsRequest_maxResults *smithy.Schema
-
-var ListAssessmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListAssessmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentsResponse_assessmentMetadata *smithy.Schema
-
-var ListAssessmentsResponse_nextToken *smithy.Schema
-
-var ListControlDomainInsightsByAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsightsByAssessmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListControlDomainInsightsByAssessmentRequest_assessmentId *smithy.Schema
-
-var ListControlDomainInsightsByAssessmentRequest_nextToken *smithy.Schema
-
-var ListControlDomainInsightsByAssessmentRequest_maxResults *smithy.Schema
-
-var ListControlDomainInsightsByAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsightsByAssessmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlDomainInsightsByAssessmentResponse_controlDomainInsights *smithy.Schema
-
-var ListControlDomainInsightsByAssessmentResponse_nextToken *smithy.Schema
-
-var ListControlDomainInsightsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsightsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlDomainInsightsRequest_nextToken *smithy.Schema
-
-var ListControlDomainInsightsRequest_maxResults *smithy.Schema
-
-var ListControlDomainInsightsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlDomainInsightsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlDomainInsightsResponse_controlDomainInsights *smithy.Schema
-
-var ListControlDomainInsightsResponse_nextToken *smithy.Schema
-
-var ListControlInsightsByControlDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlInsightsByControlDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListControlInsightsByControlDomainRequest_controlDomainId *smithy.Schema
-
-var ListControlInsightsByControlDomainRequest_nextToken *smithy.Schema
-
-var ListControlInsightsByControlDomainRequest_maxResults *smithy.Schema
-
-var ListControlInsightsByControlDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlInsightsByControlDomainResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlInsightsByControlDomainResponse_controlInsightsMetadata *smithy.Schema
-
-var ListControlInsightsByControlDomainResponse_nextToken *smithy.Schema
-
-var ListControlsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListControlsRequest_controlType *smithy.Schema
-
-var ListControlsRequest_nextToken *smithy.Schema
-
-var ListControlsRequest_maxResults *smithy.Schema
-
-var ListControlsRequest_controlCatalogId *smithy.Schema
-
-var ListControlsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListControlsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlsResponse_controlMetadataList *smithy.Schema
-
-var ListControlsResponse_nextToken *smithy.Schema
-
-var ListKeywordsForDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListKeywordsForDataSourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListKeywordsForDataSourceRequest_source *smithy.Schema
-
-var ListKeywordsForDataSourceRequest_nextToken *smithy.Schema
-
-var ListKeywordsForDataSourceRequest_maxResults *smithy.Schema
-
-var ListKeywordsForDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListKeywordsForDataSourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListKeywordsForDataSourceResponse_keywords *smithy.Schema
-
-var ListKeywordsForDataSourceResponse_nextToken *smithy.Schema
-
-var ListNotificationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListNotificationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationsRequest_nextToken *smithy.Schema
-
-var ListNotificationsRequest_maxResults *smithy.Schema
-
-var ListNotificationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListNotificationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationsResponse_notifications *smithy.Schema
-
-var ListNotificationsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterAccountRequest_kmsKey *smithy.Schema
-
-var RegisterAccountRequest_delegatedAdminAccount *smithy.Schema
-
-var RegisterAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterAccountResponse_status *smithy.Schema
-
-var RegisterOrganizationAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterOrganizationAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterOrganizationAdminAccountRequest_adminAccountId *smithy.Schema
-
-var RegisterOrganizationAdminAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "RegisterOrganizationAdminAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterOrganizationAdminAccountResponse_adminAccountId *smithy.Schema
-
-var RegisterOrganizationAdminAccountResponse_organizationId *smithy.Schema
-
-var StartAssessmentFrameworkShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "StartAssessmentFrameworkShareRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartAssessmentFrameworkShareRequest_frameworkId *smithy.Schema
-
-var StartAssessmentFrameworkShareRequest_destinationAccount *smithy.Schema
-
-var StartAssessmentFrameworkShareRequest_destinationRegion *smithy.Schema
-
-var StartAssessmentFrameworkShareRequest_comment *smithy.Schema
-
-var StartAssessmentFrameworkShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "StartAssessmentFrameworkShareResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAssessmentControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControlRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateAssessmentControlRequest_assessmentId *smithy.Schema
-
-var UpdateAssessmentControlRequest_controlSetId *smithy.Schema
-
-var UpdateAssessmentControlRequest_controlId *smithy.Schema
-
-var UpdateAssessmentControlRequest_controlStatus *smithy.Schema
-
-var UpdateAssessmentControlRequest_commentBody *smithy.Schema
-
-var UpdateAssessmentControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentControlResponse_control *smithy.Schema
-
-var UpdateAssessmentControlSetStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControlSetStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAssessmentControlSetStatusRequest_assessmentId *smithy.Schema
-
-var UpdateAssessmentControlSetStatusRequest_controlSetId *smithy.Schema
-
-var UpdateAssessmentControlSetStatusRequest_status *smithy.Schema
-
-var UpdateAssessmentControlSetStatusRequest_comment *smithy.Schema
-
-var UpdateAssessmentControlSetStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentControlSetStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentControlSetStatusResponse_controlSet *smithy.Schema
-
-var UpdateAssessmentFrameworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateAssessmentFrameworkRequest_frameworkId *smithy.Schema
-
-var UpdateAssessmentFrameworkRequest_name *smithy.Schema
-
-var UpdateAssessmentFrameworkRequest_description *smithy.Schema
-
-var UpdateAssessmentFrameworkRequest_complianceType *smithy.Schema
-
-var UpdateAssessmentFrameworkRequest_controlSets *smithy.Schema
-
-var UpdateAssessmentFrameworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentFrameworkResponse_framework *smithy.Schema
-
-var UpdateAssessmentFrameworkShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkShareRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAssessmentFrameworkShareRequest_requestId *smithy.Schema
-
-var UpdateAssessmentFrameworkShareRequest_requestType *smithy.Schema
-
-var UpdateAssessmentFrameworkShareRequest_action *smithy.Schema
-
-var UpdateAssessmentFrameworkShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentFrameworkShareResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest *smithy.Schema
-
-var UpdateAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateAssessmentRequest_assessmentId *smithy.Schema
-
-var UpdateAssessmentRequest_assessmentName *smithy.Schema
-
-var UpdateAssessmentRequest_assessmentDescription *smithy.Schema
-
-var UpdateAssessmentRequest_scope *smithy.Schema
-
-var UpdateAssessmentRequest_assessmentReportsDestination *smithy.Schema
-
-var UpdateAssessmentRequest_roles *smithy.Schema
-
-var UpdateAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentResponse_assessment *smithy.Schema
-
-var UpdateAssessmentStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentStatusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAssessmentStatusRequest_assessmentId *smithy.Schema
-
-var UpdateAssessmentStatusRequest_status *smithy.Schema
-
-var UpdateAssessmentStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateAssessmentStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAssessmentStatusResponse_assessment *smithy.Schema
-
-var UpdateControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateControlRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateControlRequest_controlId *smithy.Schema
-
-var UpdateControlRequest_name *smithy.Schema
-
-var UpdateControlRequest_description *smithy.Schema
-
-var UpdateControlRequest_testingInformation *smithy.Schema
-
-var UpdateControlRequest_actionPlanTitle *smithy.Schema
-
-var UpdateControlRequest_actionPlanInstructions *smithy.Schema
-
-var UpdateControlRequest_controlMappingSources *smithy.Schema
-
-var UpdateControlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateControlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateControlResponse_control *smithy.Schema
-
-var UpdateSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateSettingsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateSettingsRequest_snsTopic *smithy.Schema
-
-var UpdateSettingsRequest_defaultAssessmentReportsDestination *smithy.Schema
-
-var UpdateSettingsRequest_defaultProcessOwners *smithy.Schema
-
-var UpdateSettingsRequest_kmsKey *smithy.Schema
-
-var UpdateSettingsRequest_evidenceFinderEnabled *smithy.Schema
-
-var UpdateSettingsRequest_deregistrationPolicy *smithy.Schema
-
-var UpdateSettingsRequest_defaultExportDestination *smithy.Schema
-
-var UpdateSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "UpdateSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSettingsResponse_settings *smithy.Schema
-
-var ValidateAssessmentReportIntegrityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidateAssessmentReportIntegrityRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ValidateAssessmentReportIntegrityRequest_s3RelativePath *smithy.Schema
-
-var ValidateAssessmentReportIntegrityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.auditmanager",
-	Name:      "ValidateAssessmentReportIntegrityResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ValidateAssessmentReportIntegrityResponse_signatureValid *smithy.Schema
-
-var ValidateAssessmentReportIntegrityResponse_signatureAlgorithm *smithy.Schema
-
-var ValidateAssessmentReportIntegrityResponse_signatureDateTime *smithy.Schema
-
-var ValidateAssessmentReportIntegrityResponse_signatureKeyId *smithy.Schema
-
-var ValidateAssessmentReportIntegrityResponse_validationErrors *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AccountStatus_ACTIVE = AccountStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AccountStatus_INACTIVE = AccountStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AccountStatus_PENDING_ACTIVATION = AccountStatus.AddMember("PENDING_ACTIVATION", smithyprelude.Unit)
-
-	ActionEnum_CREATE = ActionEnum.AddMember("CREATE", smithyprelude.Unit)
-
-	ActionEnum_UPDATE_METADATA = ActionEnum.AddMember("UPDATE_METADATA", smithyprelude.Unit)
-
-	ActionEnum_ACTIVE = ActionEnum.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ActionEnum_INACTIVE = ActionEnum.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ActionEnum_DELETE = ActionEnum.AddMember("DELETE", smithyprelude.Unit)
-
-	ActionEnum_UNDER_REVIEW = ActionEnum.AddMember("UNDER_REVIEW", smithyprelude.Unit)
-
-	ActionEnum_REVIEWED = ActionEnum.AddMember("REVIEWED", smithyprelude.Unit)
-
-	ActionEnum_IMPORT_EVIDENCE = ActionEnum.AddMember("IMPORT_EVIDENCE", smithyprelude.Unit)
-
-	AWSAccount_id = AWSAccount.AddMember("id", _AccountId)
-
-	AWSAccount_emailAddress = AWSAccount.AddMember("emailAddress", _EmailAddress)
-
-	AWSAccount_name = AWSAccount.AddMember("name", _AccountName)
-
-	AssessmentStatus_ACTIVE = AssessmentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AssessmentStatus_INACTIVE = AssessmentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AssessmentReportDestinationType_S3 = AssessmentReportDestinationType.AddMember("S3", smithyprelude.Unit)
-
-	AssessmentReportsDestination_destinationType = AssessmentReportsDestination.AddMember("destinationType", AssessmentReportDestinationType)
-
-	AssessmentReportsDestination_destination = AssessmentReportsDestination.AddMember("destination", _S3Url)
-
-	_AWSAccounts_member = _AWSAccounts.AddMember("member", AWSAccount)
-
-	AWSService_serviceName = AWSService.AddMember("serviceName", _AWSServiceName)
-
-	_AWSServices_member = _AWSServices.AddMember("member", AWSService)
-
-	Scope_awsAccounts = Scope.AddMember("awsAccounts", _AWSAccounts)
-
-	Scope_awsServices = Scope.AddMember("awsServices", _AWSServices)
-
-	RoleType_PROCESS_OWNER = RoleType.AddMember("PROCESS_OWNER", smithyprelude.Unit)
-
-	RoleType_RESOURCE_OWNER = RoleType.AddMember("RESOURCE_OWNER", smithyprelude.Unit)
-
-	Role_roleType = Role.AddMember("roleType", RoleType)
-
-	Role_roleArn = Role.AddMember("roleArn", _IamArn)
-
-	_Roles_member = _Roles.AddMember("member", Role)
-
-	DelegationStatus_IN_PROGRESS = DelegationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	DelegationStatus_UNDER_REVIEW = DelegationStatus.AddMember("UNDER_REVIEW", smithyprelude.Unit)
-
-	DelegationStatus_COMPLETE = DelegationStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	Delegation_id = Delegation.AddMember("id", _UUID)
-
-	Delegation_assessmentName = Delegation.AddMember("assessmentName", _AssessmentName)
-
-	Delegation_assessmentId = Delegation.AddMember("assessmentId", _UUID)
-
-	Delegation_status = Delegation.AddMember("status", DelegationStatus)
-
-	Delegation_roleArn = Delegation.AddMember("roleArn", _IamArn)
-
-	Delegation_roleType = Delegation.AddMember("roleType", RoleType)
-
-	Delegation_creationTime = Delegation.AddMember("creationTime", _Timestamp)
-
-	Delegation_lastUpdated = Delegation.AddMember("lastUpdated", _Timestamp)
-
-	Delegation_controlSetId = Delegation.AddMember("controlSetId", _ControlSetId)
-
-	Delegation_comment = Delegation.AddMember("comment", _DelegationComment)
-
-	Delegation_createdBy = Delegation.AddMember("createdBy", _CreatedBy)
-
-	_Delegations_member = _Delegations.AddMember("member", Delegation)
-
-	AssessmentMetadata_name = AssessmentMetadata.AddMember("name", _AssessmentName)
-
-	AssessmentMetadata_id = AssessmentMetadata.AddMember("id", _UUID)
-
-	AssessmentMetadata_description = AssessmentMetadata.AddMember("description", _AssessmentDescription)
-
-	AssessmentMetadata_complianceType = AssessmentMetadata.AddMember("complianceType", _ComplianceType)
-
-	AssessmentMetadata_status = AssessmentMetadata.AddMember("status", AssessmentStatus)
-
-	AssessmentMetadata_assessmentReportsDestination = AssessmentMetadata.AddMember("assessmentReportsDestination", AssessmentReportsDestination)
-
-	AssessmentMetadata_scope = AssessmentMetadata.AddMember("scope", Scope)
-
-	AssessmentMetadata_roles = AssessmentMetadata.AddMember("roles", _Roles)
-
-	AssessmentMetadata_delegations = AssessmentMetadata.AddMember("delegations", _Delegations)
-
-	AssessmentMetadata_creationTime = AssessmentMetadata.AddMember("creationTime", _Timestamp)
-
-	AssessmentMetadata_lastUpdated = AssessmentMetadata.AddMember("lastUpdated", _Timestamp)
-
-	FrameworkMetadata_name = FrameworkMetadata.AddMember("name", _AssessmentName)
-
-	FrameworkMetadata_description = FrameworkMetadata.AddMember("description", _AssessmentFrameworkDescription)
-
-	FrameworkMetadata_logo = FrameworkMetadata.AddMember("logo", _Filename)
-
-	FrameworkMetadata_complianceType = FrameworkMetadata.AddMember("complianceType", _ComplianceType)
-
-	ControlSetStatus_ACTIVE = ControlSetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ControlSetStatus_UNDER_REVIEW = ControlSetStatus.AddMember("UNDER_REVIEW", smithyprelude.Unit)
-
-	ControlSetStatus_REVIEWED = ControlSetStatus.AddMember("REVIEWED", smithyprelude.Unit)
-
-	ControlStatus_UNDER_REVIEW = ControlStatus.AddMember("UNDER_REVIEW", smithyprelude.Unit)
-
-	ControlStatus_REVIEWED = ControlStatus.AddMember("REVIEWED", smithyprelude.Unit)
-
-	ControlStatus_INACTIVE = ControlStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ControlResponse_MANUAL = ControlResponse.AddMember("MANUAL", smithyprelude.Unit)
-
-	ControlResponse_AUTOMATE = ControlResponse.AddMember("AUTOMATE", smithyprelude.Unit)
-
-	ControlResponse_DEFER = ControlResponse.AddMember("DEFER", smithyprelude.Unit)
-
-	ControlResponse_IGNORE = ControlResponse.AddMember("IGNORE", smithyprelude.Unit)
-
-	ControlComment_authorName = ControlComment.AddMember("authorName", _Username)
-
-	ControlComment_commentBody = ControlComment.AddMember("commentBody", _ControlCommentBody)
-
-	ControlComment_postedDate = ControlComment.AddMember("postedDate", _Timestamp)
-
-	_ControlComments_member = _ControlComments.AddMember("member", ControlComment)
-
-	_EvidenceSources_member = _EvidenceSources.AddMember("member", _NonEmptyString)
-
-	AssessmentControl_id = AssessmentControl.AddMember("id", _UUID)
-
-	AssessmentControl_name = AssessmentControl.AddMember("name", _ControlName)
-
-	AssessmentControl_description = AssessmentControl.AddMember("description", _ControlDescription)
-
-	AssessmentControl_status = AssessmentControl.AddMember("status", ControlStatus)
-
-	AssessmentControl_response = AssessmentControl.AddMember("response", ControlResponse)
-
-	AssessmentControl_comments = AssessmentControl.AddMember("comments", _ControlComments)
-
-	AssessmentControl_evidenceSources = AssessmentControl.AddMember("evidenceSources", _EvidenceSources)
-
-	AssessmentControl_evidenceCount = AssessmentControl.AddMember("evidenceCount", _Integer)
-
-	AssessmentControl_assessmentReportEvidenceCount = AssessmentControl.AddMember("assessmentReportEvidenceCount", _Integer)
-
-	_AssessmentControls_member = _AssessmentControls.AddMember("member", AssessmentControl)
-
-	AssessmentControlSet_id = AssessmentControlSet.AddMember("id", _ControlSetId)
-
-	AssessmentControlSet_description = AssessmentControlSet.AddMember("description", _NonEmptyString)
-
-	AssessmentControlSet_status = AssessmentControlSet.AddMember("status", ControlSetStatus)
-
-	AssessmentControlSet_roles = AssessmentControlSet.AddMember("roles", _Roles)
-
-	AssessmentControlSet_controls = AssessmentControlSet.AddMember("controls", _AssessmentControls)
-
-	AssessmentControlSet_delegations = AssessmentControlSet.AddMember("delegations", _Delegations)
-
-	AssessmentControlSet_systemEvidenceCount = AssessmentControlSet.AddMember("systemEvidenceCount", _Integer)
-
-	AssessmentControlSet_manualEvidenceCount = AssessmentControlSet.AddMember("manualEvidenceCount", _Integer)
-
-	_AssessmentControlSets_member = _AssessmentControlSets.AddMember("member", AssessmentControlSet)
-
-	AssessmentFramework_id = AssessmentFramework.AddMember("id", _UUID)
-
-	AssessmentFramework_arn = AssessmentFramework.AddMember("arn", _AuditManagerArn)
-
-	AssessmentFramework_metadata = AssessmentFramework.AddMember("metadata", FrameworkMetadata)
-
-	AssessmentFramework_controlSets = AssessmentFramework.AddMember("controlSets", _AssessmentControlSets)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	Assessment_arn = Assessment.AddMember("arn", _AuditManagerArn)
-
-	Assessment_awsAccount = Assessment.AddMember("awsAccount", AWSAccount)
-
-	Assessment_metadata = Assessment.AddMember("metadata", AssessmentMetadata)
-
-	Assessment_framework = Assessment.AddMember("framework", AssessmentFramework)
-
-	Assessment_tags = Assessment.AddMember("tags", _TagMap)
-
-	AssessmentEvidenceFolder_name = AssessmentEvidenceFolder.AddMember("name", _AssessmentEvidenceFolderName)
-
-	AssessmentEvidenceFolder_date = AssessmentEvidenceFolder.AddMember("date", _Timestamp)
-
-	AssessmentEvidenceFolder_assessmentId = AssessmentEvidenceFolder.AddMember("assessmentId", _UUID)
-
-	AssessmentEvidenceFolder_controlSetId = AssessmentEvidenceFolder.AddMember("controlSetId", _ControlSetId)
-
-	AssessmentEvidenceFolder_controlId = AssessmentEvidenceFolder.AddMember("controlId", _UUID)
-
-	AssessmentEvidenceFolder_id = AssessmentEvidenceFolder.AddMember("id", _UUID)
-
-	AssessmentEvidenceFolder_dataSource = AssessmentEvidenceFolder.AddMember("dataSource", _String)
-
-	AssessmentEvidenceFolder_author = AssessmentEvidenceFolder.AddMember("author", _String)
-
-	AssessmentEvidenceFolder_totalEvidence = AssessmentEvidenceFolder.AddMember("totalEvidence", _Integer)
-
-	AssessmentEvidenceFolder_assessmentReportSelectionCount = AssessmentEvidenceFolder.AddMember("assessmentReportSelectionCount", _Integer)
-
-	AssessmentEvidenceFolder_controlName = AssessmentEvidenceFolder.AddMember("controlName", _ControlName)
-
-	AssessmentEvidenceFolder_evidenceResourcesIncludedCount = AssessmentEvidenceFolder.AddMember("evidenceResourcesIncludedCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount = AssessmentEvidenceFolder.AddMember("evidenceByTypeConfigurationDataCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceByTypeManualCount = AssessmentEvidenceFolder.AddMember("evidenceByTypeManualCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount = AssessmentEvidenceFolder.AddMember("evidenceByTypeComplianceCheckCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount = AssessmentEvidenceFolder.AddMember("evidenceByTypeComplianceCheckIssuesCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceByTypeUserActivityCount = AssessmentEvidenceFolder.AddMember("evidenceByTypeUserActivityCount", _Integer)
-
-	AssessmentEvidenceFolder_evidenceAwsServiceSourceCount = AssessmentEvidenceFolder.AddMember("evidenceAwsServiceSourceCount", _Integer)
-
-	_AssessmentEvidenceFolders_member = _AssessmentEvidenceFolders.AddMember("member", AssessmentEvidenceFolder)
-
-	FrameworkType_STANDARD = FrameworkType.AddMember("STANDARD", smithyprelude.Unit)
-
-	FrameworkType_CUSTOM = FrameworkType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	AssessmentFrameworkMetadata_arn = AssessmentFrameworkMetadata.AddMember("arn", _AuditManagerArn)
-
-	AssessmentFrameworkMetadata_id = AssessmentFrameworkMetadata.AddMember("id", _UUID)
-
-	AssessmentFrameworkMetadata_type = AssessmentFrameworkMetadata.AddMember("type", FrameworkType)
-
-	AssessmentFrameworkMetadata_name = AssessmentFrameworkMetadata.AddMember("name", _FrameworkName)
-
-	AssessmentFrameworkMetadata_description = AssessmentFrameworkMetadata.AddMember("description", _FrameworkDescription)
-
-	AssessmentFrameworkMetadata_logo = AssessmentFrameworkMetadata.AddMember("logo", _Filename)
-
-	AssessmentFrameworkMetadata_complianceType = AssessmentFrameworkMetadata.AddMember("complianceType", _ComplianceType)
-
-	AssessmentFrameworkMetadata_controlsCount = AssessmentFrameworkMetadata.AddMember("controlsCount", _ControlsCount)
-
-	AssessmentFrameworkMetadata_controlSetsCount = AssessmentFrameworkMetadata.AddMember("controlSetsCount", _ControlSetsCount)
-
-	AssessmentFrameworkMetadata_createdAt = AssessmentFrameworkMetadata.AddMember("createdAt", _Timestamp)
-
-	AssessmentFrameworkMetadata_lastUpdatedAt = AssessmentFrameworkMetadata.AddMember("lastUpdatedAt", _Timestamp)
-
-	ShareRequestStatus_ACTIVE = ShareRequestStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ShareRequestStatus_REPLICATING = ShareRequestStatus.AddMember("REPLICATING", smithyprelude.Unit)
-
-	ShareRequestStatus_SHARED = ShareRequestStatus.AddMember("SHARED", smithyprelude.Unit)
-
-	ShareRequestStatus_EXPIRING = ShareRequestStatus.AddMember("EXPIRING", smithyprelude.Unit)
-
-	ShareRequestStatus_FAILED = ShareRequestStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ShareRequestStatus_EXPIRED = ShareRequestStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	ShareRequestStatus_DECLINED = ShareRequestStatus.AddMember("DECLINED", smithyprelude.Unit)
-
-	ShareRequestStatus_REVOKED = ShareRequestStatus.AddMember("REVOKED", smithyprelude.Unit)
-
-	AssessmentFrameworkShareRequest_id = AssessmentFrameworkShareRequest.AddMember("id", _UUID)
-
-	AssessmentFrameworkShareRequest_frameworkId = AssessmentFrameworkShareRequest.AddMember("frameworkId", _UUID)
-
-	AssessmentFrameworkShareRequest_frameworkName = AssessmentFrameworkShareRequest.AddMember("frameworkName", _FrameworkName)
-
-	AssessmentFrameworkShareRequest_frameworkDescription = AssessmentFrameworkShareRequest.AddMember("frameworkDescription", _FrameworkDescription)
-
-	AssessmentFrameworkShareRequest_status = AssessmentFrameworkShareRequest.AddMember("status", ShareRequestStatus)
-
-	AssessmentFrameworkShareRequest_sourceAccount = AssessmentFrameworkShareRequest.AddMember("sourceAccount", _AccountId)
-
-	AssessmentFrameworkShareRequest_destinationAccount = AssessmentFrameworkShareRequest.AddMember("destinationAccount", _AccountId)
-
-	AssessmentFrameworkShareRequest_destinationRegion = AssessmentFrameworkShareRequest.AddMember("destinationRegion", _Region)
-
-	AssessmentFrameworkShareRequest_expirationTime = AssessmentFrameworkShareRequest.AddMember("expirationTime", _Timestamp)
-
-	AssessmentFrameworkShareRequest_creationTime = AssessmentFrameworkShareRequest.AddMember("creationTime", _Timestamp)
-
-	AssessmentFrameworkShareRequest_lastUpdated = AssessmentFrameworkShareRequest.AddMember("lastUpdated", _Timestamp)
-
-	AssessmentFrameworkShareRequest_comment = AssessmentFrameworkShareRequest.AddMember("comment", _ShareRequestComment)
-
-	AssessmentFrameworkShareRequest_standardControlsCount = AssessmentFrameworkShareRequest.AddMember("standardControlsCount", _NullableInteger)
-
-	AssessmentFrameworkShareRequest_customControlsCount = AssessmentFrameworkShareRequest.AddMember("customControlsCount", _NullableInteger)
-
-	AssessmentFrameworkShareRequest_complianceType = AssessmentFrameworkShareRequest.AddMember("complianceType", _ComplianceType)
-
-	_AssessmentFrameworkShareRequestList_member = _AssessmentFrameworkShareRequestList.AddMember("member", AssessmentFrameworkShareRequest)
-
-	AssessmentMetadataItem_name = AssessmentMetadataItem.AddMember("name", _AssessmentName)
-
-	AssessmentMetadataItem_id = AssessmentMetadataItem.AddMember("id", _UUID)
-
-	AssessmentMetadataItem_complianceType = AssessmentMetadataItem.AddMember("complianceType", _ComplianceType)
-
-	AssessmentMetadataItem_status = AssessmentMetadataItem.AddMember("status", AssessmentStatus)
-
-	AssessmentMetadataItem_roles = AssessmentMetadataItem.AddMember("roles", _Roles)
-
-	AssessmentMetadataItem_delegations = AssessmentMetadataItem.AddMember("delegations", _Delegations)
-
-	AssessmentMetadataItem_creationTime = AssessmentMetadataItem.AddMember("creationTime", _Timestamp)
-
-	AssessmentMetadataItem_lastUpdated = AssessmentMetadataItem.AddMember("lastUpdated", _Timestamp)
-
-	AssessmentReportStatus_COMPLETE = AssessmentReportStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	AssessmentReportStatus_IN_PROGRESS = AssessmentReportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AssessmentReportStatus_FAILED = AssessmentReportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AssessmentReport_id = AssessmentReport.AddMember("id", _UUID)
-
-	AssessmentReport_name = AssessmentReport.AddMember("name", _AssessmentReportName)
-
-	AssessmentReport_description = AssessmentReport.AddMember("description", _AssessmentReportDescription)
-
-	AssessmentReport_awsAccountId = AssessmentReport.AddMember("awsAccountId", _AccountId)
-
-	AssessmentReport_assessmentId = AssessmentReport.AddMember("assessmentId", _UUID)
-
-	AssessmentReport_assessmentName = AssessmentReport.AddMember("assessmentName", _AssessmentName)
-
-	AssessmentReport_author = AssessmentReport.AddMember("author", _Username)
-
-	AssessmentReport_status = AssessmentReport.AddMember("status", AssessmentReportStatus)
-
-	AssessmentReport_creationTime = AssessmentReport.AddMember("creationTime", _Timestamp)
-
-	AssessmentReportEvidenceError_evidenceId = AssessmentReportEvidenceError.AddMember("evidenceId", _UUID)
-
-	AssessmentReportEvidenceError_errorCode = AssessmentReportEvidenceError.AddMember("errorCode", _ErrorCode)
-
-	AssessmentReportEvidenceError_errorMessage = AssessmentReportEvidenceError.AddMember("errorMessage", _ErrorMessage)
-
-	_AssessmentReportEvidenceErrors_member = _AssessmentReportEvidenceErrors.AddMember("member", AssessmentReportEvidenceError)
-
-	AssessmentReportMetadata_id = AssessmentReportMetadata.AddMember("id", _UUID)
-
-	AssessmentReportMetadata_name = AssessmentReportMetadata.AddMember("name", _AssessmentReportName)
-
-	AssessmentReportMetadata_description = AssessmentReportMetadata.AddMember("description", _AssessmentReportDescription)
-
-	AssessmentReportMetadata_assessmentId = AssessmentReportMetadata.AddMember("assessmentId", _UUID)
-
-	AssessmentReportMetadata_assessmentName = AssessmentReportMetadata.AddMember("assessmentName", _AssessmentName)
-
-	AssessmentReportMetadata_author = AssessmentReportMetadata.AddMember("author", _Username)
-
-	AssessmentReportMetadata_status = AssessmentReportMetadata.AddMember("status", AssessmentReportStatus)
-
-	AssessmentReportMetadata_creationTime = AssessmentReportMetadata.AddMember("creationTime", _Timestamp)
-
-	_AssessmentReportsMetadata_member = _AssessmentReportsMetadata.AddMember("member", AssessmentReportMetadata)
-
-	CreateDelegationRequest_comment = CreateDelegationRequest.AddMember("comment", _DelegationComment)
-
-	CreateDelegationRequest_controlSetId = CreateDelegationRequest.AddMember("controlSetId", _ControlSetId)
-
-	CreateDelegationRequest_roleArn = CreateDelegationRequest.AddMember("roleArn", _IamArn)
-
-	CreateDelegationRequest_roleType = CreateDelegationRequest.AddMember("roleType", RoleType)
-
-	BatchCreateDelegationByAssessmentError_createDelegationRequest = BatchCreateDelegationByAssessmentError.AddMember("createDelegationRequest", CreateDelegationRequest)
-
-	BatchCreateDelegationByAssessmentError_errorCode = BatchCreateDelegationByAssessmentError.AddMember("errorCode", _ErrorCode)
-
-	BatchCreateDelegationByAssessmentError_errorMessage = BatchCreateDelegationByAssessmentError.AddMember("errorMessage", _ErrorMessage)
-
-	_BatchCreateDelegationByAssessmentErrors_member = _BatchCreateDelegationByAssessmentErrors.AddMember("member", BatchCreateDelegationByAssessmentError)
-
-	BatchDeleteDelegationByAssessmentError_delegationId = BatchDeleteDelegationByAssessmentError.AddMember("delegationId", _UUID)
-
-	BatchDeleteDelegationByAssessmentError_errorCode = BatchDeleteDelegationByAssessmentError.AddMember("errorCode", _ErrorCode)
-
-	BatchDeleteDelegationByAssessmentError_errorMessage = BatchDeleteDelegationByAssessmentError.AddMember("errorMessage", _ErrorMessage)
-
-	_BatchDeleteDelegationByAssessmentErrors_member = _BatchDeleteDelegationByAssessmentErrors.AddMember("member", BatchDeleteDelegationByAssessmentError)
-
-	ManualEvidence_s3ResourcePath = ManualEvidence.AddMember("s3ResourcePath", _S3Url)
-
-	ManualEvidence_textResponse = ManualEvidence.AddMember("textResponse", _ManualEvidenceTextResponse)
-
-	ManualEvidence_evidenceFileName = ManualEvidence.AddMember("evidenceFileName", _ManualEvidenceLocalFileName)
-
-	BatchImportEvidenceToAssessmentControlError_manualEvidence = BatchImportEvidenceToAssessmentControlError.AddMember("manualEvidence", ManualEvidence)
-
-	BatchImportEvidenceToAssessmentControlError_errorCode = BatchImportEvidenceToAssessmentControlError.AddMember("errorCode", _ErrorCode)
-
-	BatchImportEvidenceToAssessmentControlError_errorMessage = BatchImportEvidenceToAssessmentControlError.AddMember("errorMessage", _ErrorMessage)
-
-	_BatchImportEvidenceToAssessmentControlErrors_member = _BatchImportEvidenceToAssessmentControlErrors.AddMember("member", BatchImportEvidenceToAssessmentControlError)
-
-	ObjectTypeEnum_ASSESSMENT = ObjectTypeEnum.AddMember("ASSESSMENT", smithyprelude.Unit)
-
-	ObjectTypeEnum_CONTROL_SET = ObjectTypeEnum.AddMember("CONTROL_SET", smithyprelude.Unit)
-
-	ObjectTypeEnum_CONTROL = ObjectTypeEnum.AddMember("CONTROL", smithyprelude.Unit)
-
-	ObjectTypeEnum_DELEGATION = ObjectTypeEnum.AddMember("DELEGATION", smithyprelude.Unit)
-
-	ObjectTypeEnum_ASSESSMENT_REPORT = ObjectTypeEnum.AddMember("ASSESSMENT_REPORT", smithyprelude.Unit)
-
-	ChangeLog_objectType = ChangeLog.AddMember("objectType", ObjectTypeEnum)
-
-	ChangeLog_objectName = ChangeLog.AddMember("objectName", _NonEmptyString)
-
-	ChangeLog_action = ChangeLog.AddMember("action", ActionEnum)
-
-	ChangeLog_createdAt = ChangeLog.AddMember("createdAt", _Timestamp)
-
-	ChangeLog_createdBy = ChangeLog.AddMember("createdBy", _IamArn)
-
-	_ChangeLogs_member = _ChangeLogs.AddMember("member", ChangeLog)
-
-	ControlType_STANDARD = ControlType.AddMember("STANDARD", smithyprelude.Unit)
-
-	ControlType_CUSTOM = ControlType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	ControlType_CORE = ControlType.AddMember("CORE", smithyprelude.Unit)
-
-	SourceSetUpOption_SYSTEM_CONTROLS_MAPPING = SourceSetUpOption.AddMember("SYSTEM_CONTROLS_MAPPING", smithyprelude.Unit)
-
-	SourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING = SourceSetUpOption.AddMember("PROCEDURAL_CONTROLS_MAPPING", smithyprelude.Unit)
-
-	SourceType_AWS_CLOUDTRAIL = SourceType.AddMember("AWS_CLOUDTRAIL", smithyprelude.Unit)
-
-	SourceType_AWS_CONFIG = SourceType.AddMember("AWS_CONFIG", smithyprelude.Unit)
-
-	SourceType_AWS_SECURITY_HUB = SourceType.AddMember("AWS_SECURITY_HUB", smithyprelude.Unit)
-
-	SourceType_AWS_API_CALL = SourceType.AddMember("AWS_API_CALL", smithyprelude.Unit)
-
-	SourceType_MANUAL = SourceType.AddMember("MANUAL", smithyprelude.Unit)
-
-	SourceType_COMMON_CONTROL = SourceType.AddMember("COMMON_CONTROL", smithyprelude.Unit)
-
-	SourceType_CORE_CONTROL = SourceType.AddMember("CORE_CONTROL", smithyprelude.Unit)
-
-	KeywordInputType_SELECT_FROM_LIST = KeywordInputType.AddMember("SELECT_FROM_LIST", smithyprelude.Unit)
-
-	KeywordInputType_UPLOAD_FILE = KeywordInputType.AddMember("UPLOAD_FILE", smithyprelude.Unit)
-
-	KeywordInputType_INPUT_TEXT = KeywordInputType.AddMember("INPUT_TEXT", smithyprelude.Unit)
-
-	SourceKeyword_keywordInputType = SourceKeyword.AddMember("keywordInputType", KeywordInputType)
-
-	SourceKeyword_keywordValue = SourceKeyword.AddMember("keywordValue", _KeywordValue)
-
-	SourceFrequency_DAILY = SourceFrequency.AddMember("DAILY", smithyprelude.Unit)
-
-	SourceFrequency_WEEKLY = SourceFrequency.AddMember("WEEKLY", smithyprelude.Unit)
-
-	SourceFrequency_MONTHLY = SourceFrequency.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ControlMappingSource_sourceId = ControlMappingSource.AddMember("sourceId", _UUID)
-
-	ControlMappingSource_sourceName = ControlMappingSource.AddMember("sourceName", _SourceName)
-
-	ControlMappingSource_sourceDescription = ControlMappingSource.AddMember("sourceDescription", _SourceDescription)
-
-	ControlMappingSource_sourceSetUpOption = ControlMappingSource.AddMember("sourceSetUpOption", SourceSetUpOption)
-
-	ControlMappingSource_sourceType = ControlMappingSource.AddMember("sourceType", SourceType)
-
-	ControlMappingSource_sourceKeyword = ControlMappingSource.AddMember("sourceKeyword", SourceKeyword)
-
-	ControlMappingSource_sourceFrequency = ControlMappingSource.AddMember("sourceFrequency", SourceFrequency)
-
-	ControlMappingSource_troubleshootingText = ControlMappingSource.AddMember("troubleshootingText", _TroubleshootingText)
-
-	_ControlMappingSources_member = _ControlMappingSources.AddMember("member", ControlMappingSource)
-
-	ControlState_ACTIVE = ControlState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ControlState_END_OF_SUPPORT = ControlState.AddMember("END_OF_SUPPORT", smithyprelude.Unit)
-
-	Control_arn = Control.AddMember("arn", _AuditManagerArn)
-
-	Control_id = Control.AddMember("id", _UUID)
-
-	Control_type = Control.AddMember("type", ControlType)
-
-	Control_name = Control.AddMember("name", _ControlName)
-
-	Control_description = Control.AddMember("description", _ControlDescription)
-
-	Control_testingInformation = Control.AddMember("testingInformation", _TestingInformation)
-
-	Control_actionPlanTitle = Control.AddMember("actionPlanTitle", _ActionPlanTitle)
-
-	Control_actionPlanInstructions = Control.AddMember("actionPlanInstructions", _ActionPlanInstructions)
-
-	Control_controlSources = Control.AddMember("controlSources", _ControlSources)
-
-	Control_controlMappingSources = Control.AddMember("controlMappingSources", _ControlMappingSources)
-
-	Control_createdAt = Control.AddMember("createdAt", _Timestamp)
-
-	Control_lastUpdatedAt = Control.AddMember("lastUpdatedAt", _Timestamp)
-
-	Control_createdBy = Control.AddMember("createdBy", _CreatedBy)
-
-	Control_lastUpdatedBy = Control.AddMember("lastUpdatedBy", _LastUpdatedBy)
-
-	Control_tags = Control.AddMember("tags", _TagMap)
-
-	Control_state = Control.AddMember("state", ControlState)
-
-	EvidenceInsights_noncompliantEvidenceCount = EvidenceInsights.AddMember("noncompliantEvidenceCount", _NullableInteger)
-
-	EvidenceInsights_compliantEvidenceCount = EvidenceInsights.AddMember("compliantEvidenceCount", _NullableInteger)
-
-	EvidenceInsights_inconclusiveEvidenceCount = EvidenceInsights.AddMember("inconclusiveEvidenceCount", _NullableInteger)
-
-	ControlDomainInsights_name = ControlDomainInsights.AddMember("name", _String)
-
-	ControlDomainInsights_id = ControlDomainInsights.AddMember("id", _ControlDomainId)
-
-	ControlDomainInsights_controlsCountByNoncompliantEvidence = ControlDomainInsights.AddMember("controlsCountByNoncompliantEvidence", _NullableInteger)
-
-	ControlDomainInsights_totalControlsCount = ControlDomainInsights.AddMember("totalControlsCount", _NullableInteger)
-
-	ControlDomainInsights_evidenceInsights = ControlDomainInsights.AddMember("evidenceInsights", EvidenceInsights)
-
-	ControlDomainInsights_lastUpdated = ControlDomainInsights.AddMember("lastUpdated", _Timestamp)
-
-	_ControlDomainInsightsList_member = _ControlDomainInsightsList.AddMember("member", ControlDomainInsights)
-
-	ControlInsightsMetadataItem_name = ControlInsightsMetadataItem.AddMember("name", _String)
-
-	ControlInsightsMetadataItem_id = ControlInsightsMetadataItem.AddMember("id", _ControlDomainId)
-
-	ControlInsightsMetadataItem_evidenceInsights = ControlInsightsMetadataItem.AddMember("evidenceInsights", EvidenceInsights)
-
-	ControlInsightsMetadataItem_lastUpdated = ControlInsightsMetadataItem.AddMember("lastUpdated", _Timestamp)
-
-	_ControlInsightsMetadata_member = _ControlInsightsMetadata.AddMember("member", ControlInsightsMetadataItem)
-
-	ControlInsightsMetadataByAssessmentItem_name = ControlInsightsMetadataByAssessmentItem.AddMember("name", _String)
-
-	ControlInsightsMetadataByAssessmentItem_id = ControlInsightsMetadataByAssessmentItem.AddMember("id", _ControlDomainId)
-
-	ControlInsightsMetadataByAssessmentItem_evidenceInsights = ControlInsightsMetadataByAssessmentItem.AddMember("evidenceInsights", EvidenceInsights)
-
-	ControlInsightsMetadataByAssessmentItem_controlSetName = ControlInsightsMetadataByAssessmentItem.AddMember("controlSetName", _NonEmptyString)
-
-	ControlInsightsMetadataByAssessmentItem_lastUpdated = ControlInsightsMetadataByAssessmentItem.AddMember("lastUpdated", _Timestamp)
-
-	_ControlInsightsMetadataByAssessment_member = _ControlInsightsMetadataByAssessment.AddMember("member", ControlInsightsMetadataByAssessmentItem)
-
-	ControlMetadata_arn = ControlMetadata.AddMember("arn", _AuditManagerArn)
-
-	ControlMetadata_id = ControlMetadata.AddMember("id", _UUID)
-
-	ControlMetadata_name = ControlMetadata.AddMember("name", _ControlName)
-
-	ControlMetadata_controlSources = ControlMetadata.AddMember("controlSources", _ControlSources)
-
-	ControlMetadata_createdAt = ControlMetadata.AddMember("createdAt", _Timestamp)
-
-	ControlMetadata_lastUpdatedAt = ControlMetadata.AddMember("lastUpdatedAt", _Timestamp)
-
-	_ControlMetadataList_member = _ControlMetadataList.AddMember("member", ControlMetadata)
-
-	_Controls_member = _Controls.AddMember("member", Control)
-
-	ControlSet_id = ControlSet.AddMember("id", _UUID)
-
-	ControlSet_name = ControlSet.AddMember("name", _ControlSetName)
-
-	ControlSet_controls = ControlSet.AddMember("controls", _Controls)
-
-	_ControlSets_member = _ControlSets.AddMember("member", ControlSet)
-
-	CreateAssessmentFrameworkControl_id = CreateAssessmentFrameworkControl.AddMember("id", _UUID)
-
-	_CreateAssessmentFrameworkControls_member = _CreateAssessmentFrameworkControls.AddMember("member", CreateAssessmentFrameworkControl)
-
-	CreateAssessmentFrameworkControlSet_name = CreateAssessmentFrameworkControlSet.AddMember("name", _ControlSetName)
-
-	CreateAssessmentFrameworkControlSet_controls = CreateAssessmentFrameworkControlSet.AddMember("controls", _CreateAssessmentFrameworkControls)
-
-	_CreateAssessmentFrameworkControlSets_member = _CreateAssessmentFrameworkControlSets.AddMember("member", CreateAssessmentFrameworkControlSet)
-
-	CreateControlMappingSource_sourceName = CreateControlMappingSource.AddMember("sourceName", _SourceName)
-
-	CreateControlMappingSource_sourceDescription = CreateControlMappingSource.AddMember("sourceDescription", _SourceDescription)
-
-	CreateControlMappingSource_sourceSetUpOption = CreateControlMappingSource.AddMember("sourceSetUpOption", SourceSetUpOption)
-
-	CreateControlMappingSource_sourceType = CreateControlMappingSource.AddMember("sourceType", SourceType)
-
-	CreateControlMappingSource_sourceKeyword = CreateControlMappingSource.AddMember("sourceKeyword", SourceKeyword)
-
-	CreateControlMappingSource_sourceFrequency = CreateControlMappingSource.AddMember("sourceFrequency", SourceFrequency)
-
-	CreateControlMappingSource_troubleshootingText = CreateControlMappingSource.AddMember("troubleshootingText", _TroubleshootingText)
-
-	_CreateControlMappingSources_member = _CreateControlMappingSources.AddMember("member", CreateControlMappingSource)
-
-	_CreateDelegationRequests_member = _CreateDelegationRequests.AddMember("member", CreateDelegationRequest)
-
-	DataSourceType_AWS_CLOUDTRAIL = DataSourceType.AddMember("AWS_CLOUDTRAIL", smithyprelude.Unit)
-
-	DataSourceType_AWS_CONFIG = DataSourceType.AddMember("AWS_CONFIG", smithyprelude.Unit)
-
-	DataSourceType_AWS_SECURITY_HUB = DataSourceType.AddMember("AWS_SECURITY_HUB", smithyprelude.Unit)
-
-	DataSourceType_AWS_API_CALL = DataSourceType.AddMember("AWS_API_CALL", smithyprelude.Unit)
-
-	DataSourceType_MANUAL = DataSourceType.AddMember("MANUAL", smithyprelude.Unit)
-
-	ExportDestinationType_S3 = ExportDestinationType.AddMember("S3", smithyprelude.Unit)
-
-	DefaultExportDestination_destinationType = DefaultExportDestination.AddMember("destinationType", ExportDestinationType)
-
-	DefaultExportDestination_destination = DefaultExportDestination.AddMember("destination", _S3Url)
-
-	_DelegationIds_member = _DelegationIds.AddMember("member", _UUID)
-
-	DelegationMetadata_id = DelegationMetadata.AddMember("id", _UUID)
-
-	DelegationMetadata_assessmentName = DelegationMetadata.AddMember("assessmentName", _AssessmentName)
-
-	DelegationMetadata_assessmentId = DelegationMetadata.AddMember("assessmentId", _UUID)
-
-	DelegationMetadata_status = DelegationMetadata.AddMember("status", DelegationStatus)
-
-	DelegationMetadata_roleArn = DelegationMetadata.AddMember("roleArn", _IamArn)
-
-	DelegationMetadata_creationTime = DelegationMetadata.AddMember("creationTime", _Timestamp)
-
-	DelegationMetadata_controlSetName = DelegationMetadata.AddMember("controlSetName", _NonEmptyString)
-
-	_DelegationMetadataList_member = _DelegationMetadataList.AddMember("member", DelegationMetadata)
-
-	DeleteResources_ALL = DeleteResources.AddMember("ALL", smithyprelude.Unit)
-
-	DeleteResources_DEFAULT = DeleteResources.AddMember("DEFAULT", smithyprelude.Unit)
-
-	DeregistrationPolicy_deleteResources = DeregistrationPolicy.AddMember("deleteResources", DeleteResources)
-
-	Resource_arn = Resource.AddMember("arn", _GenericArn)
-
-	Resource_value = Resource.AddMember("value", _String)
-
-	Resource_complianceCheck = Resource.AddMember("complianceCheck", _String)
-
-	_Resources_member = _Resources.AddMember("member", Resource)
-
-	_EvidenceAttributes_key = _EvidenceAttributes.AddMember("key", _EvidenceAttributeKey)
-
-	_EvidenceAttributes_value = _EvidenceAttributes.AddMember("value", _EvidenceAttributeValue)
-
-	Evidence_dataSource = Evidence.AddMember("dataSource", _String)
-
-	Evidence_evidenceAwsAccountId = Evidence.AddMember("evidenceAwsAccountId", _AccountId)
-
-	Evidence_time = Evidence.AddMember("time", _Timestamp)
-
-	Evidence_eventSource = Evidence.AddMember("eventSource", _AWSServiceName)
-
-	Evidence_eventName = Evidence.AddMember("eventName", _EventName)
-
-	Evidence_evidenceByType = Evidence.AddMember("evidenceByType", _String)
-
-	Evidence_resourcesIncluded = Evidence.AddMember("resourcesIncluded", _Resources)
-
-	Evidence_attributes = Evidence.AddMember("attributes", _EvidenceAttributes)
-
-	Evidence_iamId = Evidence.AddMember("iamId", _IamArn)
-
-	Evidence_complianceCheck = Evidence.AddMember("complianceCheck", _String)
-
-	Evidence_awsOrganization = Evidence.AddMember("awsOrganization", _String)
-
-	Evidence_awsAccountId = Evidence.AddMember("awsAccountId", _AccountId)
-
-	Evidence_evidenceFolderId = Evidence.AddMember("evidenceFolderId", _UUID)
-
-	Evidence_id = Evidence.AddMember("id", _UUID)
-
-	Evidence_assessmentReportSelection = Evidence.AddMember("assessmentReportSelection", _String)
-
-	EvidenceFinderBackfillStatus_NOT_STARTED = EvidenceFinderBackfillStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	EvidenceFinderBackfillStatus_IN_PROGRESS = EvidenceFinderBackfillStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EvidenceFinderBackfillStatus_COMPLETED = EvidenceFinderBackfillStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	EvidenceFinderEnablementStatus_ENABLED = EvidenceFinderEnablementStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	EvidenceFinderEnablementStatus_DISABLED = EvidenceFinderEnablementStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	EvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS = EvidenceFinderEnablementStatus.AddMember("ENABLE_IN_PROGRESS", smithyprelude.Unit)
-
-	EvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS = EvidenceFinderEnablementStatus.AddMember("DISABLE_IN_PROGRESS", smithyprelude.Unit)
-
-	EvidenceFinderEnablement_eventDataStoreArn = EvidenceFinderEnablement.AddMember("eventDataStoreArn", _CloudTrailArn)
-
-	EvidenceFinderEnablement_enablementStatus = EvidenceFinderEnablement.AddMember("enablementStatus", EvidenceFinderEnablementStatus)
-
-	EvidenceFinderEnablement_backfillStatus = EvidenceFinderEnablement.AddMember("backfillStatus", EvidenceFinderBackfillStatus)
-
-	EvidenceFinderEnablement_error = EvidenceFinderEnablement.AddMember("error", _ErrorMessage)
-
-	_EvidenceIds_member = _EvidenceIds.AddMember("member", _UUID)
-
-	_EvidenceList_member = _EvidenceList.AddMember("member", Evidence)
-
-	Framework_arn = Framework.AddMember("arn", _AuditManagerArn)
-
-	Framework_id = Framework.AddMember("id", _UUID)
-
-	Framework_name = Framework.AddMember("name", _FrameworkName)
-
-	Framework_type = Framework.AddMember("type", FrameworkType)
-
-	Framework_complianceType = Framework.AddMember("complianceType", _ComplianceType)
-
-	Framework_description = Framework.AddMember("description", _FrameworkDescription)
-
-	Framework_logo = Framework.AddMember("logo", _Filename)
-
-	Framework_controlSources = Framework.AddMember("controlSources", _ControlSources)
-
-	Framework_controlSets = Framework.AddMember("controlSets", _ControlSets)
-
-	Framework_createdAt = Framework.AddMember("createdAt", _Timestamp)
-
-	Framework_lastUpdatedAt = Framework.AddMember("lastUpdatedAt", _Timestamp)
-
-	Framework_createdBy = Framework.AddMember("createdBy", _CreatedBy)
-
-	Framework_lastUpdatedBy = Framework.AddMember("lastUpdatedBy", _LastUpdatedBy)
-
-	Framework_tags = Framework.AddMember("tags", _TagMap)
-
-	_FrameworkMetadataList_member = _FrameworkMetadataList.AddMember("member", AssessmentFrameworkMetadata)
-
-	Insights_activeAssessmentsCount = Insights.AddMember("activeAssessmentsCount", _NullableInteger)
-
-	Insights_noncompliantEvidenceCount = Insights.AddMember("noncompliantEvidenceCount", _NullableInteger)
-
-	Insights_compliantEvidenceCount = Insights.AddMember("compliantEvidenceCount", _NullableInteger)
-
-	Insights_inconclusiveEvidenceCount = Insights.AddMember("inconclusiveEvidenceCount", _NullableInteger)
-
-	Insights_assessmentControlsCountByNoncompliantEvidence = Insights.AddMember("assessmentControlsCountByNoncompliantEvidence", _NullableInteger)
-
-	Insights_totalAssessmentControlsCount = Insights.AddMember("totalAssessmentControlsCount", _NullableInteger)
-
-	Insights_lastUpdated = Insights.AddMember("lastUpdated", _Timestamp)
-
-	InsightsByAssessment_noncompliantEvidenceCount = InsightsByAssessment.AddMember("noncompliantEvidenceCount", _NullableInteger)
-
-	InsightsByAssessment_compliantEvidenceCount = InsightsByAssessment.AddMember("compliantEvidenceCount", _NullableInteger)
-
-	InsightsByAssessment_inconclusiveEvidenceCount = InsightsByAssessment.AddMember("inconclusiveEvidenceCount", _NullableInteger)
-
-	InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence = InsightsByAssessment.AddMember("assessmentControlsCountByNoncompliantEvidence", _NullableInteger)
-
-	InsightsByAssessment_totalAssessmentControlsCount = InsightsByAssessment.AddMember("totalAssessmentControlsCount", _NullableInteger)
-
-	InsightsByAssessment_lastUpdated = InsightsByAssessment.AddMember("lastUpdated", _Timestamp)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	_Keywords_member = _Keywords.AddMember("member", _KeywordValue)
-
-	_ListAssessmentMetadata_member = _ListAssessmentMetadata.AddMember("member", AssessmentMetadataItem)
-
-	_ManualEvidenceList_member = _ManualEvidenceList.AddMember("member", ManualEvidence)
-
-	Notification_id = Notification.AddMember("id", _TimestampUUID)
-
-	Notification_assessmentId = Notification.AddMember("assessmentId", _UUID)
-
-	Notification_assessmentName = Notification.AddMember("assessmentName", _AssessmentName)
-
-	Notification_controlSetId = Notification.AddMember("controlSetId", _ControlSetId)
-
-	Notification_controlSetName = Notification.AddMember("controlSetName", _NonEmptyString)
-
-	Notification_description = Notification.AddMember("description", _NonEmptyString)
-
-	Notification_eventTime = Notification.AddMember("eventTime", _Timestamp)
-
-	Notification_source = Notification.AddMember("source", _NonEmptyString)
-
-	_Notifications_member = _Notifications.AddMember("member", Notification)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _String)
-
-	ServiceMetadata_name = ServiceMetadata.AddMember("name", _AWSServiceName)
-
-	ServiceMetadata_displayName = ServiceMetadata.AddMember("displayName", _NonEmptyString)
-
-	ServiceMetadata_description = ServiceMetadata.AddMember("description", _NonEmptyString)
-
-	ServiceMetadata_category = ServiceMetadata.AddMember("category", _NonEmptyString)
-
-	_ServiceMetadataList_member = _ServiceMetadataList.AddMember("member", ServiceMetadata)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	SettingAttribute_ALL = SettingAttribute.AddMember("ALL", smithyprelude.Unit)
-
-	SettingAttribute_IS_AWS_ORG_ENABLED = SettingAttribute.AddMember("IS_AWS_ORG_ENABLED", smithyprelude.Unit)
-
-	SettingAttribute_SNS_TOPIC = SettingAttribute.AddMember("SNS_TOPIC", smithyprelude.Unit)
-
-	SettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION = SettingAttribute.AddMember("DEFAULT_ASSESSMENT_REPORTS_DESTINATION", smithyprelude.Unit)
-
-	SettingAttribute_DEFAULT_PROCESS_OWNERS = SettingAttribute.AddMember("DEFAULT_PROCESS_OWNERS", smithyprelude.Unit)
-
-	SettingAttribute_EVIDENCE_FINDER_ENABLEMENT = SettingAttribute.AddMember("EVIDENCE_FINDER_ENABLEMENT", smithyprelude.Unit)
-
-	SettingAttribute_DEREGISTRATION_POLICY = SettingAttribute.AddMember("DEREGISTRATION_POLICY", smithyprelude.Unit)
-
-	SettingAttribute_DEFAULT_EXPORT_DESTINATION = SettingAttribute.AddMember("DEFAULT_EXPORT_DESTINATION", smithyprelude.Unit)
-
-	Settings_isAwsOrgEnabled = Settings.AddMember("isAwsOrgEnabled", _Boolean)
-
-	Settings_snsTopic = Settings.AddMember("snsTopic", _SNSTopic)
-
-	Settings_defaultAssessmentReportsDestination = Settings.AddMember("defaultAssessmentReportsDestination", AssessmentReportsDestination)
-
-	Settings_defaultProcessOwners = Settings.AddMember("defaultProcessOwners", _Roles)
-
-	Settings_kmsKey = Settings.AddMember("kmsKey", _KmsKey)
-
-	Settings_evidenceFinderEnablement = Settings.AddMember("evidenceFinderEnablement", EvidenceFinderEnablement)
-
-	Settings_deregistrationPolicy = Settings.AddMember("deregistrationPolicy", DeregistrationPolicy)
-
-	Settings_defaultExportDestination = Settings.AddMember("defaultExportDestination", DefaultExportDestination)
-
-	ShareRequestAction_ACCEPT = ShareRequestAction.AddMember("ACCEPT", smithyprelude.Unit)
-
-	ShareRequestAction_DECLINE = ShareRequestAction.AddMember("DECLINE", smithyprelude.Unit)
-
-	ShareRequestAction_REVOKE = ShareRequestAction.AddMember("REVOKE", smithyprelude.Unit)
-
-	ShareRequestType_SENT = ShareRequestType.AddMember("SENT", smithyprelude.Unit)
-
-	ShareRequestType_RECEIVED = ShareRequestType.AddMember("RECEIVED", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	UpdateAssessmentFrameworkControlSet_id = UpdateAssessmentFrameworkControlSet.AddMember("id", _ControlSetName)
-
-	UpdateAssessmentFrameworkControlSet_name = UpdateAssessmentFrameworkControlSet.AddMember("name", _ControlSetName)
-
-	UpdateAssessmentFrameworkControlSet_controls = UpdateAssessmentFrameworkControlSet.AddMember("controls", _CreateAssessmentFrameworkControls)
-
-	_UpdateAssessmentFrameworkControlSets_member = _UpdateAssessmentFrameworkControlSets.AddMember("member", UpdateAssessmentFrameworkControlSet)
-
-	URL_hyperlinkName = URL.AddMember("hyperlinkName", _HyperlinkName)
-
-	URL_link = URL.AddMember("link", _UrlLink)
-
-	_ValidationErrors_member = _ValidationErrors.AddMember("member", _NonEmptyString)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
-
-	AssociateAssessmentReportEvidenceFolderRequest_assessmentId = AssociateAssessmentReportEvidenceFolderRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	AssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = AssociateAssessmentReportEvidenceFolderRequest.AddMember("evidenceFolderId", _UUID)
-
-	BatchAssociateAssessmentReportEvidenceRequest_assessmentId = BatchAssociateAssessmentReportEvidenceRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId = BatchAssociateAssessmentReportEvidenceRequest.AddMember("evidenceFolderId", _UUID)
-
-	BatchAssociateAssessmentReportEvidenceRequest_evidenceIds = BatchAssociateAssessmentReportEvidenceRequest.AddMember("evidenceIds", _EvidenceIds)
-
-	BatchAssociateAssessmentReportEvidenceResponse_evidenceIds = BatchAssociateAssessmentReportEvidenceResponse.AddMember("evidenceIds", _EvidenceIds)
-
-	BatchAssociateAssessmentReportEvidenceResponse_errors = BatchAssociateAssessmentReportEvidenceResponse.AddMember("errors", _AssessmentReportEvidenceErrors)
-
-	BatchCreateDelegationByAssessmentRequest_createDelegationRequests = BatchCreateDelegationByAssessmentRequest.AddMember("createDelegationRequests", _CreateDelegationRequests)
-
-	BatchCreateDelegationByAssessmentRequest_assessmentId = BatchCreateDelegationByAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchCreateDelegationByAssessmentResponse_delegations = BatchCreateDelegationByAssessmentResponse.AddMember("delegations", _Delegations)
-
-	BatchCreateDelegationByAssessmentResponse_errors = BatchCreateDelegationByAssessmentResponse.AddMember("errors", _BatchCreateDelegationByAssessmentErrors)
-
-	BatchDeleteDelegationByAssessmentRequest_delegationIds = BatchDeleteDelegationByAssessmentRequest.AddMember("delegationIds", _DelegationIds)
-
-	BatchDeleteDelegationByAssessmentRequest_assessmentId = BatchDeleteDelegationByAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchDeleteDelegationByAssessmentResponse_errors = BatchDeleteDelegationByAssessmentResponse.AddMember("errors", _BatchDeleteDelegationByAssessmentErrors)
-
-	BatchDisassociateAssessmentReportEvidenceRequest_assessmentId = BatchDisassociateAssessmentReportEvidenceRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId = BatchDisassociateAssessmentReportEvidenceRequest.AddMember("evidenceFolderId", _UUID)
-
-	BatchDisassociateAssessmentReportEvidenceRequest_evidenceIds = BatchDisassociateAssessmentReportEvidenceRequest.AddMember("evidenceIds", _EvidenceIds)
-
-	BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds = BatchDisassociateAssessmentReportEvidenceResponse.AddMember("evidenceIds", _EvidenceIds)
-
-	BatchDisassociateAssessmentReportEvidenceResponse_errors = BatchDisassociateAssessmentReportEvidenceResponse.AddMember("errors", _AssessmentReportEvidenceErrors)
-
-	BatchImportEvidenceToAssessmentControlRequest_assessmentId = BatchImportEvidenceToAssessmentControlRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchImportEvidenceToAssessmentControlRequest_controlSetId = BatchImportEvidenceToAssessmentControlRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	BatchImportEvidenceToAssessmentControlRequest_controlId = BatchImportEvidenceToAssessmentControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	BatchImportEvidenceToAssessmentControlRequest_manualEvidence = BatchImportEvidenceToAssessmentControlRequest.AddMember("manualEvidence", _ManualEvidenceList)
-
-	BatchImportEvidenceToAssessmentControlResponse_errors = BatchImportEvidenceToAssessmentControlResponse.AddMember("errors", _BatchImportEvidenceToAssessmentControlErrors)
-
-	CreateAssessmentFrameworkRequest_name = CreateAssessmentFrameworkRequest.AddMember("name", _FrameworkName)
-
-	CreateAssessmentFrameworkRequest_description = CreateAssessmentFrameworkRequest.AddMember("description", _FrameworkDescription)
-
-	CreateAssessmentFrameworkRequest_complianceType = CreateAssessmentFrameworkRequest.AddMember("complianceType", _ComplianceType)
-
-	CreateAssessmentFrameworkRequest_controlSets = CreateAssessmentFrameworkRequest.AddMember("controlSets", _CreateAssessmentFrameworkControlSets)
-
-	CreateAssessmentFrameworkRequest_tags = CreateAssessmentFrameworkRequest.AddMember("tags", _TagMap)
-
-	CreateAssessmentFrameworkResponse_framework = CreateAssessmentFrameworkResponse.AddMember("framework", Framework)
-
-	CreateAssessmentRequest_name = CreateAssessmentRequest.AddMember("name", _AssessmentName)
-
-	CreateAssessmentRequest_description = CreateAssessmentRequest.AddMember("description", _AssessmentDescription)
-
-	CreateAssessmentRequest_assessmentReportsDestination = CreateAssessmentRequest.AddMember("assessmentReportsDestination", AssessmentReportsDestination)
-
-	CreateAssessmentRequest_scope = CreateAssessmentRequest.AddMember("scope", Scope)
-
-	CreateAssessmentRequest_roles = CreateAssessmentRequest.AddMember("roles", _Roles)
-
-	CreateAssessmentRequest_frameworkId = CreateAssessmentRequest.AddMember("frameworkId", _UUID)
-
-	CreateAssessmentRequest_tags = CreateAssessmentRequest.AddMember("tags", _TagMap)
-
-	CreateAssessmentResponse_assessment = CreateAssessmentResponse.AddMember("assessment", Assessment)
-
-	CreateAssessmentReportRequest_name = CreateAssessmentReportRequest.AddMember("name", _AssessmentReportName)
-
-	CreateAssessmentReportRequest_description = CreateAssessmentReportRequest.AddMember("description", _AssessmentReportDescription)
-
-	CreateAssessmentReportRequest_assessmentId = CreateAssessmentReportRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	CreateAssessmentReportRequest_queryStatement = CreateAssessmentReportRequest.AddMember("queryStatement", _QueryStatement)
-
-	CreateAssessmentReportResponse_assessmentReport = CreateAssessmentReportResponse.AddMember("assessmentReport", AssessmentReport)
-
-	CreateControlRequest_name = CreateControlRequest.AddMember("name", _ControlName)
-
-	CreateControlRequest_description = CreateControlRequest.AddMember("description", _ControlDescription)
-
-	CreateControlRequest_testingInformation = CreateControlRequest.AddMember("testingInformation", _TestingInformation)
-
-	CreateControlRequest_actionPlanTitle = CreateControlRequest.AddMember("actionPlanTitle", _ActionPlanTitle)
-
-	CreateControlRequest_actionPlanInstructions = CreateControlRequest.AddMember("actionPlanInstructions", _ActionPlanInstructions)
-
-	CreateControlRequest_controlMappingSources = CreateControlRequest.AddMember("controlMappingSources", _CreateControlMappingSources)
-
-	CreateControlRequest_tags = CreateControlRequest.AddMember("tags", _TagMap)
-
-	CreateControlResponse_control = CreateControlResponse.AddMember("control", Control)
-
-	DeleteAssessmentFrameworkRequest_frameworkId = DeleteAssessmentFrameworkRequest.AddMember("frameworkId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteAssessmentFrameworkShareRequest_requestId = DeleteAssessmentFrameworkShareRequest.AddMember("requestId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteAssessmentFrameworkShareRequest_requestType = DeleteAssessmentFrameworkShareRequest.AddMember("requestType", ShareRequestType, &smithytraits.HTTPQuery{Name: "requestType"})
-
-	DeleteAssessmentRequest_assessmentId = DeleteAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteAssessmentReportRequest_assessmentId = DeleteAssessmentReportRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteAssessmentReportRequest_assessmentReportId = DeleteAssessmentReportRequest.AddMember("assessmentReportId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteControlRequest_controlId = DeleteControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeregisterAccountResponse_status = DeregisterAccountResponse.AddMember("status", AccountStatus)
-
-	DeregisterOrganizationAdminAccountRequest_adminAccountId = DeregisterOrganizationAdminAccountRequest.AddMember("adminAccountId", _AccountId)
-
-	DisassociateAssessmentReportEvidenceFolderRequest_assessmentId = DisassociateAssessmentReportEvidenceFolderRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	DisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = DisassociateAssessmentReportEvidenceFolderRequest.AddMember("evidenceFolderId", _UUID)
-
-	GetAccountStatusResponse_status = GetAccountStatusResponse.AddMember("status", AccountStatus)
-
-	GetAssessmentFrameworkRequest_frameworkId = GetAssessmentFrameworkRequest.AddMember("frameworkId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetAssessmentFrameworkResponse_framework = GetAssessmentFrameworkResponse.AddMember("framework", Framework)
-
-	GetAssessmentRequest_assessmentId = GetAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetAssessmentResponse_assessment = GetAssessmentResponse.AddMember("assessment", Assessment)
-
-	GetAssessmentResponse_userRole = GetAssessmentResponse.AddMember("userRole", Role)
-
-	GetAssessmentReportUrlRequest_assessmentReportId = GetAssessmentReportUrlRequest.AddMember("assessmentReportId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetAssessmentReportUrlRequest_assessmentId = GetAssessmentReportUrlRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetAssessmentReportUrlResponse_preSignedUrl = GetAssessmentReportUrlResponse.AddMember("preSignedUrl", URL)
-
-	GetChangeLogsRequest_assessmentId = GetChangeLogsRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetChangeLogsRequest_controlSetId = GetChangeLogsRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPQuery{Name: "controlSetId"})
-
-	GetChangeLogsRequest_controlId = GetChangeLogsRequest.AddMember("controlId", _UUID, &smithytraits.HTTPQuery{Name: "controlId"})
-
-	GetChangeLogsRequest_nextToken = GetChangeLogsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetChangeLogsRequest_maxResults = GetChangeLogsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetChangeLogsResponse_changeLogs = GetChangeLogsResponse.AddMember("changeLogs", _ChangeLogs)
-
-	GetChangeLogsResponse_nextToken = GetChangeLogsResponse.AddMember("nextToken", _Token)
-
-	GetControlRequest_controlId = GetControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetControlResponse_control = GetControlResponse.AddMember("control", Control)
-
-	GetDelegationsRequest_nextToken = GetDelegationsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetDelegationsRequest_maxResults = GetDelegationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetDelegationsResponse_delegations = GetDelegationsResponse.AddMember("delegations", _DelegationMetadataList)
-
-	GetDelegationsResponse_nextToken = GetDelegationsResponse.AddMember("nextToken", _Token)
-
-	GetEvidenceByEvidenceFolderRequest_assessmentId = GetEvidenceByEvidenceFolderRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceByEvidenceFolderRequest_controlSetId = GetEvidenceByEvidenceFolderRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	GetEvidenceByEvidenceFolderRequest_evidenceFolderId = GetEvidenceByEvidenceFolderRequest.AddMember("evidenceFolderId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceByEvidenceFolderRequest_nextToken = GetEvidenceByEvidenceFolderRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetEvidenceByEvidenceFolderRequest_maxResults = GetEvidenceByEvidenceFolderRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetEvidenceByEvidenceFolderResponse_evidence = GetEvidenceByEvidenceFolderResponse.AddMember("evidence", _EvidenceList)
-
-	GetEvidenceByEvidenceFolderResponse_nextToken = GetEvidenceByEvidenceFolderResponse.AddMember("nextToken", _Token)
-
-	GetEvidenceFileUploadUrlRequest_fileName = GetEvidenceFileUploadUrlRequest.AddMember("fileName", _ManualEvidenceLocalFileName, &smithytraits.HTTPQuery{Name: "fileName"})
-
-	GetEvidenceFileUploadUrlResponse_evidenceFileName = GetEvidenceFileUploadUrlResponse.AddMember("evidenceFileName", _NonEmptyString)
-
-	GetEvidenceFileUploadUrlResponse_uploadUrl = GetEvidenceFileUploadUrlResponse.AddMember("uploadUrl", _NonEmptyString)
-
-	GetEvidenceFolderRequest_assessmentId = GetEvidenceFolderRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFolderRequest_controlSetId = GetEvidenceFolderRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFolderRequest_evidenceFolderId = GetEvidenceFolderRequest.AddMember("evidenceFolderId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFolderResponse_evidenceFolder = GetEvidenceFolderResponse.AddMember("evidenceFolder", AssessmentEvidenceFolder)
-
-	GetEvidenceFoldersByAssessmentControlRequest_assessmentId = GetEvidenceFoldersByAssessmentControlRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFoldersByAssessmentControlRequest_controlSetId = GetEvidenceFoldersByAssessmentControlRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFoldersByAssessmentControlRequest_controlId = GetEvidenceFoldersByAssessmentControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFoldersByAssessmentControlRequest_nextToken = GetEvidenceFoldersByAssessmentControlRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetEvidenceFoldersByAssessmentControlRequest_maxResults = GetEvidenceFoldersByAssessmentControlRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetEvidenceFoldersByAssessmentControlResponse_evidenceFolders = GetEvidenceFoldersByAssessmentControlResponse.AddMember("evidenceFolders", _AssessmentEvidenceFolders)
-
-	GetEvidenceFoldersByAssessmentControlResponse_nextToken = GetEvidenceFoldersByAssessmentControlResponse.AddMember("nextToken", _Token)
-
-	GetEvidenceFoldersByAssessmentRequest_assessmentId = GetEvidenceFoldersByAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceFoldersByAssessmentRequest_nextToken = GetEvidenceFoldersByAssessmentRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetEvidenceFoldersByAssessmentRequest_maxResults = GetEvidenceFoldersByAssessmentRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetEvidenceFoldersByAssessmentResponse_evidenceFolders = GetEvidenceFoldersByAssessmentResponse.AddMember("evidenceFolders", _AssessmentEvidenceFolders)
-
-	GetEvidenceFoldersByAssessmentResponse_nextToken = GetEvidenceFoldersByAssessmentResponse.AddMember("nextToken", _Token)
-
-	GetEvidenceRequest_assessmentId = GetEvidenceRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceRequest_controlSetId = GetEvidenceRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	GetEvidenceRequest_evidenceFolderId = GetEvidenceRequest.AddMember("evidenceFolderId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceRequest_evidenceId = GetEvidenceRequest.AddMember("evidenceId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetEvidenceResponse_evidence = GetEvidenceResponse.AddMember("evidence", Evidence)
-
-	GetInsightsByAssessmentRequest_assessmentId = GetInsightsByAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetInsightsByAssessmentResponse_insights = GetInsightsByAssessmentResponse.AddMember("insights", InsightsByAssessment)
-
-	GetInsightsResponse_insights = GetInsightsResponse.AddMember("insights", Insights)
-
-	GetOrganizationAdminAccountResponse_adminAccountId = GetOrganizationAdminAccountResponse.AddMember("adminAccountId", _AccountId)
-
-	GetOrganizationAdminAccountResponse_organizationId = GetOrganizationAdminAccountResponse.AddMember("organizationId", _organizationId)
-
-	GetServicesInScopeResponse_serviceMetadata = GetServicesInScopeResponse.AddMember("serviceMetadata", _ServiceMetadataList)
-
-	GetSettingsRequest_attribute = GetSettingsRequest.AddMember("attribute", SettingAttribute, &smithytraits.HTTPLabel{})
-
-	GetSettingsResponse_settings = GetSettingsResponse.AddMember("settings", Settings)
-
-	ListAssessmentControlInsightsByControlDomainRequest_controlDomainId = ListAssessmentControlInsightsByControlDomainRequest.AddMember("controlDomainId", _ControlDomainId, &smithytraits.HTTPQuery{Name: "controlDomainId"})
-
-	ListAssessmentControlInsightsByControlDomainRequest_assessmentId = ListAssessmentControlInsightsByControlDomainRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPQuery{Name: "assessmentId"})
-
-	ListAssessmentControlInsightsByControlDomainRequest_nextToken = ListAssessmentControlInsightsByControlDomainRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssessmentControlInsightsByControlDomainRequest_maxResults = ListAssessmentControlInsightsByControlDomainRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment = ListAssessmentControlInsightsByControlDomainResponse.AddMember("controlInsightsByAssessment", _ControlInsightsMetadataByAssessment)
-
-	ListAssessmentControlInsightsByControlDomainResponse_nextToken = ListAssessmentControlInsightsByControlDomainResponse.AddMember("nextToken", _Token)
-
-	ListAssessmentFrameworkShareRequestsRequest_requestType = ListAssessmentFrameworkShareRequestsRequest.AddMember("requestType", ShareRequestType, &smithytraits.HTTPQuery{Name: "requestType"})
-
-	ListAssessmentFrameworkShareRequestsRequest_nextToken = ListAssessmentFrameworkShareRequestsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssessmentFrameworkShareRequestsRequest_maxResults = ListAssessmentFrameworkShareRequestsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests = ListAssessmentFrameworkShareRequestsResponse.AddMember("assessmentFrameworkShareRequests", _AssessmentFrameworkShareRequestList)
-
-	ListAssessmentFrameworkShareRequestsResponse_nextToken = ListAssessmentFrameworkShareRequestsResponse.AddMember("nextToken", _Token)
-
-	ListAssessmentFrameworksRequest_frameworkType = ListAssessmentFrameworksRequest.AddMember("frameworkType", FrameworkType, &smithytraits.HTTPQuery{Name: "frameworkType"})
-
-	ListAssessmentFrameworksRequest_nextToken = ListAssessmentFrameworksRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssessmentFrameworksRequest_maxResults = ListAssessmentFrameworksRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssessmentFrameworksResponse_frameworkMetadataList = ListAssessmentFrameworksResponse.AddMember("frameworkMetadataList", _FrameworkMetadataList)
-
-	ListAssessmentFrameworksResponse_nextToken = ListAssessmentFrameworksResponse.AddMember("nextToken", _Token)
-
-	ListAssessmentReportsRequest_nextToken = ListAssessmentReportsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssessmentReportsRequest_maxResults = ListAssessmentReportsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssessmentReportsResponse_assessmentReports = ListAssessmentReportsResponse.AddMember("assessmentReports", _AssessmentReportsMetadata)
-
-	ListAssessmentReportsResponse_nextToken = ListAssessmentReportsResponse.AddMember("nextToken", _Token)
-
-	ListAssessmentsRequest_status = ListAssessmentsRequest.AddMember("status", AssessmentStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListAssessmentsRequest_nextToken = ListAssessmentsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssessmentsRequest_maxResults = ListAssessmentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssessmentsResponse_assessmentMetadata = ListAssessmentsResponse.AddMember("assessmentMetadata", _ListAssessmentMetadata)
-
-	ListAssessmentsResponse_nextToken = ListAssessmentsResponse.AddMember("nextToken", _Token)
-
-	ListControlDomainInsightsByAssessmentRequest_assessmentId = ListControlDomainInsightsByAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPQuery{Name: "assessmentId"})
-
-	ListControlDomainInsightsByAssessmentRequest_nextToken = ListControlDomainInsightsByAssessmentRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListControlDomainInsightsByAssessmentRequest_maxResults = ListControlDomainInsightsByAssessmentRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListControlDomainInsightsByAssessmentResponse_controlDomainInsights = ListControlDomainInsightsByAssessmentResponse.AddMember("controlDomainInsights", _ControlDomainInsightsList)
-
-	ListControlDomainInsightsByAssessmentResponse_nextToken = ListControlDomainInsightsByAssessmentResponse.AddMember("nextToken", _Token)
-
-	ListControlDomainInsightsRequest_nextToken = ListControlDomainInsightsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListControlDomainInsightsRequest_maxResults = ListControlDomainInsightsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListControlDomainInsightsResponse_controlDomainInsights = ListControlDomainInsightsResponse.AddMember("controlDomainInsights", _ControlDomainInsightsList)
-
-	ListControlDomainInsightsResponse_nextToken = ListControlDomainInsightsResponse.AddMember("nextToken", _Token)
-
-	ListControlInsightsByControlDomainRequest_controlDomainId = ListControlInsightsByControlDomainRequest.AddMember("controlDomainId", _ControlDomainId, &smithytraits.HTTPQuery{Name: "controlDomainId"})
-
-	ListControlInsightsByControlDomainRequest_nextToken = ListControlInsightsByControlDomainRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListControlInsightsByControlDomainRequest_maxResults = ListControlInsightsByControlDomainRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListControlInsightsByControlDomainResponse_controlInsightsMetadata = ListControlInsightsByControlDomainResponse.AddMember("controlInsightsMetadata", _ControlInsightsMetadata)
-
-	ListControlInsightsByControlDomainResponse_nextToken = ListControlInsightsByControlDomainResponse.AddMember("nextToken", _Token)
-
-	ListControlsRequest_controlType = ListControlsRequest.AddMember("controlType", ControlType, &smithytraits.HTTPQuery{Name: "controlType"})
-
-	ListControlsRequest_nextToken = ListControlsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListControlsRequest_maxResults = ListControlsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListControlsRequest_controlCatalogId = ListControlsRequest.AddMember("controlCatalogId", _ControlCatalogId, &smithytraits.HTTPQuery{Name: "controlCatalogId"})
-
-	ListControlsResponse_controlMetadataList = ListControlsResponse.AddMember("controlMetadataList", _ControlMetadataList)
-
-	ListControlsResponse_nextToken = ListControlsResponse.AddMember("nextToken", _Token)
-
-	ListKeywordsForDataSourceRequest_source = ListKeywordsForDataSourceRequest.AddMember("source", DataSourceType, &smithytraits.HTTPQuery{Name: "source"})
-
-	ListKeywordsForDataSourceRequest_nextToken = ListKeywordsForDataSourceRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListKeywordsForDataSourceRequest_maxResults = ListKeywordsForDataSourceRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListKeywordsForDataSourceResponse_keywords = ListKeywordsForDataSourceResponse.AddMember("keywords", _Keywords)
-
-	ListKeywordsForDataSourceResponse_nextToken = ListKeywordsForDataSourceResponse.AddMember("nextToken", _Token)
-
-	ListNotificationsRequest_nextToken = ListNotificationsRequest.AddMember("nextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNotificationsRequest_maxResults = ListNotificationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNotificationsResponse_notifications = ListNotificationsResponse.AddMember("notifications", _Notifications)
-
-	ListNotificationsResponse_nextToken = ListNotificationsResponse.AddMember("nextToken", _Token)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AuditManagerArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	RegisterAccountRequest_kmsKey = RegisterAccountRequest.AddMember("kmsKey", _KmsKey)
-
-	RegisterAccountRequest_delegatedAdminAccount = RegisterAccountRequest.AddMember("delegatedAdminAccount", _AccountId)
-
-	RegisterAccountResponse_status = RegisterAccountResponse.AddMember("status", AccountStatus)
-
-	RegisterOrganizationAdminAccountRequest_adminAccountId = RegisterOrganizationAdminAccountRequest.AddMember("adminAccountId", _AccountId)
-
-	RegisterOrganizationAdminAccountResponse_adminAccountId = RegisterOrganizationAdminAccountResponse.AddMember("adminAccountId", _AccountId)
-
-	RegisterOrganizationAdminAccountResponse_organizationId = RegisterOrganizationAdminAccountResponse.AddMember("organizationId", _organizationId)
-
-	StartAssessmentFrameworkShareRequest_frameworkId = StartAssessmentFrameworkShareRequest.AddMember("frameworkId", _UUID, &smithytraits.HTTPLabel{})
-
-	StartAssessmentFrameworkShareRequest_destinationAccount = StartAssessmentFrameworkShareRequest.AddMember("destinationAccount", _AccountId)
-
-	StartAssessmentFrameworkShareRequest_destinationRegion = StartAssessmentFrameworkShareRequest.AddMember("destinationRegion", _Region)
-
-	StartAssessmentFrameworkShareRequest_comment = StartAssessmentFrameworkShareRequest.AddMember("comment", _ShareRequestComment)
-
-	StartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = StartAssessmentFrameworkShareResponse.AddMember("assessmentFrameworkShareRequest", AssessmentFrameworkShareRequest)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AuditManagerArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AuditManagerArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAssessmentControlRequest_assessmentId = UpdateAssessmentControlRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentControlRequest_controlSetId = UpdateAssessmentControlRequest.AddMember("controlSetId", _ControlSetId, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentControlRequest_controlId = UpdateAssessmentControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentControlRequest_controlStatus = UpdateAssessmentControlRequest.AddMember("controlStatus", ControlStatus)
-
-	UpdateAssessmentControlRequest_commentBody = UpdateAssessmentControlRequest.AddMember("commentBody", _ControlCommentBody)
-
-	UpdateAssessmentControlResponse_control = UpdateAssessmentControlResponse.AddMember("control", AssessmentControl)
-
-	UpdateAssessmentControlSetStatusRequest_assessmentId = UpdateAssessmentControlSetStatusRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentControlSetStatusRequest_controlSetId = UpdateAssessmentControlSetStatusRequest.AddMember("controlSetId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentControlSetStatusRequest_status = UpdateAssessmentControlSetStatusRequest.AddMember("status", ControlSetStatus)
-
-	UpdateAssessmentControlSetStatusRequest_comment = UpdateAssessmentControlSetStatusRequest.AddMember("comment", _DelegationComment)
-
-	UpdateAssessmentControlSetStatusResponse_controlSet = UpdateAssessmentControlSetStatusResponse.AddMember("controlSet", AssessmentControlSet)
-
-	UpdateAssessmentFrameworkRequest_frameworkId = UpdateAssessmentFrameworkRequest.AddMember("frameworkId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentFrameworkRequest_name = UpdateAssessmentFrameworkRequest.AddMember("name", _FrameworkName)
-
-	UpdateAssessmentFrameworkRequest_description = UpdateAssessmentFrameworkRequest.AddMember("description", _FrameworkDescription)
-
-	UpdateAssessmentFrameworkRequest_complianceType = UpdateAssessmentFrameworkRequest.AddMember("complianceType", _ComplianceType)
-
-	UpdateAssessmentFrameworkRequest_controlSets = UpdateAssessmentFrameworkRequest.AddMember("controlSets", _UpdateAssessmentFrameworkControlSets)
-
-	UpdateAssessmentFrameworkResponse_framework = UpdateAssessmentFrameworkResponse.AddMember("framework", Framework)
-
-	UpdateAssessmentFrameworkShareRequest_requestId = UpdateAssessmentFrameworkShareRequest.AddMember("requestId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentFrameworkShareRequest_requestType = UpdateAssessmentFrameworkShareRequest.AddMember("requestType", ShareRequestType)
-
-	UpdateAssessmentFrameworkShareRequest_action = UpdateAssessmentFrameworkShareRequest.AddMember("action", ShareRequestAction)
-
-	UpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = UpdateAssessmentFrameworkShareResponse.AddMember("assessmentFrameworkShareRequest", AssessmentFrameworkShareRequest)
-
-	UpdateAssessmentRequest_assessmentId = UpdateAssessmentRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentRequest_assessmentName = UpdateAssessmentRequest.AddMember("assessmentName", _AssessmentName)
-
-	UpdateAssessmentRequest_assessmentDescription = UpdateAssessmentRequest.AddMember("assessmentDescription", _AssessmentDescription)
-
-	UpdateAssessmentRequest_scope = UpdateAssessmentRequest.AddMember("scope", Scope)
-
-	UpdateAssessmentRequest_assessmentReportsDestination = UpdateAssessmentRequest.AddMember("assessmentReportsDestination", AssessmentReportsDestination)
-
-	UpdateAssessmentRequest_roles = UpdateAssessmentRequest.AddMember("roles", _Roles)
-
-	UpdateAssessmentResponse_assessment = UpdateAssessmentResponse.AddMember("assessment", Assessment)
-
-	UpdateAssessmentStatusRequest_assessmentId = UpdateAssessmentStatusRequest.AddMember("assessmentId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateAssessmentStatusRequest_status = UpdateAssessmentStatusRequest.AddMember("status", AssessmentStatus)
-
-	UpdateAssessmentStatusResponse_assessment = UpdateAssessmentStatusResponse.AddMember("assessment", Assessment)
-
-	UpdateControlRequest_controlId = UpdateControlRequest.AddMember("controlId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateControlRequest_name = UpdateControlRequest.AddMember("name", _ControlName)
-
-	UpdateControlRequest_description = UpdateControlRequest.AddMember("description", _ControlDescription)
-
-	UpdateControlRequest_testingInformation = UpdateControlRequest.AddMember("testingInformation", _TestingInformation)
-
-	UpdateControlRequest_actionPlanTitle = UpdateControlRequest.AddMember("actionPlanTitle", _ActionPlanTitle)
-
-	UpdateControlRequest_actionPlanInstructions = UpdateControlRequest.AddMember("actionPlanInstructions", _ActionPlanInstructions)
-
-	UpdateControlRequest_controlMappingSources = UpdateControlRequest.AddMember("controlMappingSources", _ControlMappingSources)
-
-	UpdateControlResponse_control = UpdateControlResponse.AddMember("control", Control)
-
-	UpdateSettingsRequest_snsTopic = UpdateSettingsRequest.AddMember("snsTopic", _SnsArn)
-
-	UpdateSettingsRequest_defaultAssessmentReportsDestination = UpdateSettingsRequest.AddMember("defaultAssessmentReportsDestination", AssessmentReportsDestination)
-
-	UpdateSettingsRequest_defaultProcessOwners = UpdateSettingsRequest.AddMember("defaultProcessOwners", _Roles)
-
-	UpdateSettingsRequest_kmsKey = UpdateSettingsRequest.AddMember("kmsKey", _KmsKey)
-
-	UpdateSettingsRequest_evidenceFinderEnabled = UpdateSettingsRequest.AddMember("evidenceFinderEnabled", _Boolean)
-
-	UpdateSettingsRequest_deregistrationPolicy = UpdateSettingsRequest.AddMember("deregistrationPolicy", DeregistrationPolicy)
-
-	UpdateSettingsRequest_defaultExportDestination = UpdateSettingsRequest.AddMember("defaultExportDestination", DefaultExportDestination)
-
-	UpdateSettingsResponse_settings = UpdateSettingsResponse.AddMember("settings", Settings)
-
-	ValidateAssessmentReportIntegrityRequest_s3RelativePath = ValidateAssessmentReportIntegrityRequest.AddMember("s3RelativePath", _S3Url)
-
-	ValidateAssessmentReportIntegrityResponse_signatureValid = ValidateAssessmentReportIntegrityResponse.AddMember("signatureValid", _Boolean)
-
-	ValidateAssessmentReportIntegrityResponse_signatureAlgorithm = ValidateAssessmentReportIntegrityResponse.AddMember("signatureAlgorithm", _String)
-
-	ValidateAssessmentReportIntegrityResponse_signatureDateTime = ValidateAssessmentReportIntegrityResponse.AddMember("signatureDateTime", _String)
-
-	ValidateAssessmentReportIntegrityResponse_signatureKeyId = ValidateAssessmentReportIntegrityResponse.AddMember("signatureKeyId", _String)
-
-	ValidateAssessmentReportIntegrityResponse_validationErrors = ValidateAssessmentReportIntegrityResponse.AddMember("validationErrors", _ValidationErrors)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "requestType"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "controlSetId"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "controlId"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "fileName"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "controlDomainId"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "assessmentId"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "frameworkType"}}, DirectMask: 0x10}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "controlType"}}, DirectMask: 0x10}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "controlCatalogId"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "source"}}, DirectMask: 0x10}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountStatus_ACTIVE, &sAccountStatus_INACTIVE, &sAccountStatus_PENDING_ACTIVATION}}
+var mActionEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sActionEnum_CREATE, &sActionEnum_UPDATE_METADATA, &sActionEnum_ACTIVE, &sActionEnum_INACTIVE, &sActionEnum_DELETE, &sActionEnum_UNDER_REVIEW, &sActionEnum_REVIEWED, &sActionEnum_IMPORT_EVIDENCE}}
+var mAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessment_arn, &sAssessment_awsAccount, &sAssessment_metadata, &sAssessment_framework, &sAssessment_tags}}
+var mAssessmentControl = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentControl_id, &sAssessmentControl_name, &sAssessmentControl_description, &sAssessmentControl_status, &sAssessmentControl_response, &sAssessmentControl_comments, &sAssessmentControl_evidenceSources, &sAssessmentControl_evidenceCount, &sAssessmentControl_assessmentReportEvidenceCount}, Hash: &hAssessmentControl}
+var m_AssessmentControls = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentControls_member}}
+var mAssessmentControlSet = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentControlSet_id, &sAssessmentControlSet_description, &sAssessmentControlSet_status, &sAssessmentControlSet_roles, &sAssessmentControlSet_controls, &sAssessmentControlSet_delegations, &sAssessmentControlSet_systemEvidenceCount, &sAssessmentControlSet_manualEvidenceCount}}
+var m_AssessmentControlSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentControlSets_member}}
+var mAssessmentEvidenceFolder = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentEvidenceFolder_name, &sAssessmentEvidenceFolder_date, &sAssessmentEvidenceFolder_assessmentId, &sAssessmentEvidenceFolder_controlSetId, &sAssessmentEvidenceFolder_controlId, &sAssessmentEvidenceFolder_id, &sAssessmentEvidenceFolder_dataSource, &sAssessmentEvidenceFolder_author, &sAssessmentEvidenceFolder_totalEvidence, &sAssessmentEvidenceFolder_assessmentReportSelectionCount, &sAssessmentEvidenceFolder_controlName, &sAssessmentEvidenceFolder_evidenceResourcesIncludedCount, &sAssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount, &sAssessmentEvidenceFolder_evidenceByTypeManualCount, &sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount, &sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount, &sAssessmentEvidenceFolder_evidenceByTypeUserActivityCount, &sAssessmentEvidenceFolder_evidenceAwsServiceSourceCount}, Hash: &hAssessmentEvidenceFolder}
+var m_AssessmentEvidenceFolders = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentEvidenceFolders_member}}
+var mAssessmentFramework = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentFramework_id, &sAssessmentFramework_arn, &sAssessmentFramework_metadata, &sAssessmentFramework_controlSets}}
+var mAssessmentFrameworkMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentFrameworkMetadata_arn, &sAssessmentFrameworkMetadata_id, &sAssessmentFrameworkMetadata_type, &sAssessmentFrameworkMetadata_name, &sAssessmentFrameworkMetadata_description, &sAssessmentFrameworkMetadata_logo, &sAssessmentFrameworkMetadata_complianceType, &sAssessmentFrameworkMetadata_controlsCount, &sAssessmentFrameworkMetadata_controlSetsCount, &sAssessmentFrameworkMetadata_createdAt, &sAssessmentFrameworkMetadata_lastUpdatedAt}, Hash: &hAssessmentFrameworkMetadata}
+var mAssessmentFrameworkShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentFrameworkShareRequest_id, &sAssessmentFrameworkShareRequest_frameworkId, &sAssessmentFrameworkShareRequest_frameworkName, &sAssessmentFrameworkShareRequest_frameworkDescription, &sAssessmentFrameworkShareRequest_status, &sAssessmentFrameworkShareRequest_sourceAccount, &sAssessmentFrameworkShareRequest_destinationAccount, &sAssessmentFrameworkShareRequest_destinationRegion, &sAssessmentFrameworkShareRequest_expirationTime, &sAssessmentFrameworkShareRequest_creationTime, &sAssessmentFrameworkShareRequest_lastUpdated, &sAssessmentFrameworkShareRequest_comment, &sAssessmentFrameworkShareRequest_standardControlsCount, &sAssessmentFrameworkShareRequest_customControlsCount, &sAssessmentFrameworkShareRequest_complianceType}, Hash: &hAssessmentFrameworkShareRequest}
+var m_AssessmentFrameworkShareRequestList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentFrameworkShareRequestList_member}}
+var mAssessmentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentMetadata_name, &sAssessmentMetadata_id, &sAssessmentMetadata_description, &sAssessmentMetadata_complianceType, &sAssessmentMetadata_status, &sAssessmentMetadata_assessmentReportsDestination, &sAssessmentMetadata_scope, &sAssessmentMetadata_roles, &sAssessmentMetadata_delegations, &sAssessmentMetadata_creationTime, &sAssessmentMetadata_lastUpdated}, Hash: &hAssessmentMetadata}
+var mAssessmentMetadataItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentMetadataItem_name, &sAssessmentMetadataItem_id, &sAssessmentMetadataItem_complianceType, &sAssessmentMetadataItem_status, &sAssessmentMetadataItem_roles, &sAssessmentMetadataItem_delegations, &sAssessmentMetadataItem_creationTime, &sAssessmentMetadataItem_lastUpdated}}
+var mAssessmentReport = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReport_id, &sAssessmentReport_name, &sAssessmentReport_description, &sAssessmentReport_awsAccountId, &sAssessmentReport_assessmentId, &sAssessmentReport_assessmentName, &sAssessmentReport_author, &sAssessmentReport_status, &sAssessmentReport_creationTime}, Hash: &hAssessmentReport}
+var mAssessmentReportDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReportDestinationType_S3}}
+var mAssessmentReportEvidenceError = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReportEvidenceError_evidenceId, &sAssessmentReportEvidenceError_errorCode, &sAssessmentReportEvidenceError_errorMessage}}
+var m_AssessmentReportEvidenceErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentReportEvidenceErrors_member}}
+var mAssessmentReportMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReportMetadata_id, &sAssessmentReportMetadata_name, &sAssessmentReportMetadata_description, &sAssessmentReportMetadata_assessmentId, &sAssessmentReportMetadata_assessmentName, &sAssessmentReportMetadata_author, &sAssessmentReportMetadata_status, &sAssessmentReportMetadata_creationTime}}
+var mAssessmentReportsDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReportsDestination_destinationType, &sAssessmentReportsDestination_destination}}
+var m_AssessmentReportsMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentReportsMetadata_member}}
+var mAssessmentReportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReportStatus_COMPLETE, &sAssessmentReportStatus_IN_PROGRESS, &sAssessmentReportStatus_FAILED}}
+var mAssessmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentStatus_ACTIVE, &sAssessmentStatus_INACTIVE}}
+var mAWSAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAWSAccount_id, &sAWSAccount_emailAddress, &sAWSAccount_name}}
+var m_AWSAccounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_AWSAccounts_member}}
+var mAWSService = smithy.SchemaMembers{List: []*smithy.Schema{&sAWSService_serviceName}}
+var m_AWSServices = smithy.SchemaMembers{List: []*smithy.Schema{&s_AWSServices_member}}
+var mBatchCreateDelegationByAssessmentError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateDelegationByAssessmentError_createDelegationRequest, &sBatchCreateDelegationByAssessmentError_errorCode, &sBatchCreateDelegationByAssessmentError_errorMessage}}
+var m_BatchCreateDelegationByAssessmentErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateDelegationByAssessmentErrors_member}}
+var mBatchDeleteDelegationByAssessmentError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteDelegationByAssessmentError_delegationId, &sBatchDeleteDelegationByAssessmentError_errorCode, &sBatchDeleteDelegationByAssessmentError_errorMessage}}
+var m_BatchDeleteDelegationByAssessmentErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteDelegationByAssessmentErrors_member}}
+var mBatchImportEvidenceToAssessmentControlError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchImportEvidenceToAssessmentControlError_manualEvidence, &sBatchImportEvidenceToAssessmentControlError_errorCode, &sBatchImportEvidenceToAssessmentControlError_errorMessage}}
+var m_BatchImportEvidenceToAssessmentControlErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchImportEvidenceToAssessmentControlErrors_member}}
+var mChangeLog = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeLog_objectType, &sChangeLog_objectName, &sChangeLog_action, &sChangeLog_createdAt, &sChangeLog_createdBy}}
+var m_ChangeLogs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChangeLogs_member}}
+var mControl = smithy.SchemaMembers{List: []*smithy.Schema{&sControl_arn, &sControl_id, &sControl_type, &sControl_name, &sControl_description, &sControl_testingInformation, &sControl_actionPlanTitle, &sControl_actionPlanInstructions, &sControl_controlSources, &sControl_controlMappingSources, &sControl_createdAt, &sControl_lastUpdatedAt, &sControl_createdBy, &sControl_lastUpdatedBy, &sControl_tags, &sControl_state}, Hash: &hControl}
+var mControlComment = smithy.SchemaMembers{List: []*smithy.Schema{&sControlComment_authorName, &sControlComment_commentBody, &sControlComment_postedDate}}
+var m_ControlComments = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlComments_member}}
+var mControlDomainInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sControlDomainInsights_name, &sControlDomainInsights_id, &sControlDomainInsights_controlsCountByNoncompliantEvidence, &sControlDomainInsights_totalControlsCount, &sControlDomainInsights_evidenceInsights, &sControlDomainInsights_lastUpdated}}
+var m_ControlDomainInsightsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlDomainInsightsList_member}}
+var m_ControlInsightsMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlInsightsMetadata_member}}
+var m_ControlInsightsMetadataByAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlInsightsMetadataByAssessment_member}}
+var mControlInsightsMetadataByAssessmentItem = smithy.SchemaMembers{List: []*smithy.Schema{&sControlInsightsMetadataByAssessmentItem_name, &sControlInsightsMetadataByAssessmentItem_id, &sControlInsightsMetadataByAssessmentItem_evidenceInsights, &sControlInsightsMetadataByAssessmentItem_controlSetName, &sControlInsightsMetadataByAssessmentItem_lastUpdated}}
+var mControlInsightsMetadataItem = smithy.SchemaMembers{List: []*smithy.Schema{&sControlInsightsMetadataItem_name, &sControlInsightsMetadataItem_id, &sControlInsightsMetadataItem_evidenceInsights, &sControlInsightsMetadataItem_lastUpdated}}
+var mControlMappingSource = smithy.SchemaMembers{List: []*smithy.Schema{&sControlMappingSource_sourceId, &sControlMappingSource_sourceName, &sControlMappingSource_sourceDescription, &sControlMappingSource_sourceSetUpOption, &sControlMappingSource_sourceType, &sControlMappingSource_sourceKeyword, &sControlMappingSource_sourceFrequency, &sControlMappingSource_troubleshootingText}}
+var m_ControlMappingSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlMappingSources_member}}
+var mControlMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sControlMetadata_arn, &sControlMetadata_id, &sControlMetadata_name, &sControlMetadata_controlSources, &sControlMetadata_createdAt, &sControlMetadata_lastUpdatedAt}}
+var m_ControlMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlMetadataList_member}}
+var mControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sControlResponse_MANUAL, &sControlResponse_AUTOMATE, &sControlResponse_DEFER, &sControlResponse_IGNORE}}
+var m_Controls = smithy.SchemaMembers{List: []*smithy.Schema{&s_Controls_member}}
+var mControlSet = smithy.SchemaMembers{List: []*smithy.Schema{&sControlSet_id, &sControlSet_name, &sControlSet_controls}}
+var m_ControlSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlSets_member}}
+var mControlSetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sControlSetStatus_ACTIVE, &sControlSetStatus_UNDER_REVIEW, &sControlSetStatus_REVIEWED}}
+var mControlState = smithy.SchemaMembers{List: []*smithy.Schema{&sControlState_ACTIVE, &sControlState_END_OF_SUPPORT}}
+var mControlStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sControlStatus_UNDER_REVIEW, &sControlStatus_REVIEWED, &sControlStatus_INACTIVE}}
+var mControlType = smithy.SchemaMembers{List: []*smithy.Schema{&sControlType_STANDARD, &sControlType_CUSTOM, &sControlType_CORE}}
+var mCreateAssessmentFrameworkControl = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentFrameworkControl_id}}
+var m_CreateAssessmentFrameworkControls = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateAssessmentFrameworkControls_member}}
+var mCreateAssessmentFrameworkControlSet = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentFrameworkControlSet_name, &sCreateAssessmentFrameworkControlSet_controls}}
+var m_CreateAssessmentFrameworkControlSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateAssessmentFrameworkControlSets_member}}
+var mCreateControlMappingSource = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateControlMappingSource_sourceName, &sCreateControlMappingSource_sourceDescription, &sCreateControlMappingSource_sourceSetUpOption, &sCreateControlMappingSource_sourceType, &sCreateControlMappingSource_sourceKeyword, &sCreateControlMappingSource_sourceFrequency, &sCreateControlMappingSource_troubleshootingText}}
+var m_CreateControlMappingSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateControlMappingSources_member}}
+var mCreateDelegationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDelegationRequest_comment, &sCreateDelegationRequest_controlSetId, &sCreateDelegationRequest_roleArn, &sCreateDelegationRequest_roleType}}
+var m_CreateDelegationRequests = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateDelegationRequests_member}}
+var mDataSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceType_AWS_CLOUDTRAIL, &sDataSourceType_AWS_CONFIG, &sDataSourceType_AWS_SECURITY_HUB, &sDataSourceType_AWS_API_CALL, &sDataSourceType_MANUAL}}
+var mDefaultExportDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultExportDestination_destinationType, &sDefaultExportDestination_destination}}
+var mDelegation = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegation_id, &sDelegation_assessmentName, &sDelegation_assessmentId, &sDelegation_status, &sDelegation_roleArn, &sDelegation_roleType, &sDelegation_creationTime, &sDelegation_lastUpdated, &sDelegation_controlSetId, &sDelegation_comment, &sDelegation_createdBy}, Hash: &hDelegation}
+var m_DelegationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_DelegationIds_member}}
+var mDelegationMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegationMetadata_id, &sDelegationMetadata_assessmentName, &sDelegationMetadata_assessmentId, &sDelegationMetadata_status, &sDelegationMetadata_roleArn, &sDelegationMetadata_creationTime, &sDelegationMetadata_controlSetName}}
+var m_DelegationMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DelegationMetadataList_member}}
+var m_Delegations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Delegations_member}}
+var mDelegationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegationStatus_IN_PROGRESS, &sDelegationStatus_UNDER_REVIEW, &sDelegationStatus_COMPLETE}}
+var mDeleteResources = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResources_ALL, &sDeleteResources_DEFAULT}}
+var mDeregistrationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregistrationPolicy_deleteResources}}
+var mEvidence = smithy.SchemaMembers{List: []*smithy.Schema{&sEvidence_dataSource, &sEvidence_evidenceAwsAccountId, &sEvidence_time, &sEvidence_eventSource, &sEvidence_eventName, &sEvidence_evidenceByType, &sEvidence_resourcesIncluded, &sEvidence_attributes, &sEvidence_iamId, &sEvidence_complianceCheck, &sEvidence_awsOrganization, &sEvidence_awsAccountId, &sEvidence_evidenceFolderId, &sEvidence_id, &sEvidence_assessmentReportSelection}, Hash: &hEvidence}
+var m_EvidenceAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvidenceAttributes_key, &s_EvidenceAttributes_value}}
+var mEvidenceFinderBackfillStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEvidenceFinderBackfillStatus_NOT_STARTED, &sEvidenceFinderBackfillStatus_IN_PROGRESS, &sEvidenceFinderBackfillStatus_COMPLETED}}
+var mEvidenceFinderEnablement = smithy.SchemaMembers{List: []*smithy.Schema{&sEvidenceFinderEnablement_eventDataStoreArn, &sEvidenceFinderEnablement_enablementStatus, &sEvidenceFinderEnablement_backfillStatus, &sEvidenceFinderEnablement_error}}
+var mEvidenceFinderEnablementStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEvidenceFinderEnablementStatus_ENABLED, &sEvidenceFinderEnablementStatus_DISABLED, &sEvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS, &sEvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS}}
+var m_EvidenceIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvidenceIds_member}}
+var mEvidenceInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sEvidenceInsights_noncompliantEvidenceCount, &sEvidenceInsights_compliantEvidenceCount, &sEvidenceInsights_inconclusiveEvidenceCount}}
+var m_EvidenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvidenceList_member}}
+var m_EvidenceSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvidenceSources_member}}
+var mExportDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sExportDestinationType_S3}}
+var mFramework = smithy.SchemaMembers{List: []*smithy.Schema{&sFramework_arn, &sFramework_id, &sFramework_name, &sFramework_type, &sFramework_complianceType, &sFramework_description, &sFramework_logo, &sFramework_controlSources, &sFramework_controlSets, &sFramework_createdAt, &sFramework_lastUpdatedAt, &sFramework_createdBy, &sFramework_lastUpdatedBy, &sFramework_tags}, Hash: &hFramework}
+var mFrameworkMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sFrameworkMetadata_name, &sFrameworkMetadata_description, &sFrameworkMetadata_logo, &sFrameworkMetadata_complianceType}}
+var m_FrameworkMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FrameworkMetadataList_member}}
+var mFrameworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sFrameworkType_STANDARD, &sFrameworkType_CUSTOM}}
+var mInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sInsights_activeAssessmentsCount, &sInsights_noncompliantEvidenceCount, &sInsights_compliantEvidenceCount, &sInsights_inconclusiveEvidenceCount, &sInsights_assessmentControlsCountByNoncompliantEvidence, &sInsights_totalAssessmentControlsCount, &sInsights_lastUpdated}}
+var mInsightsByAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightsByAssessment_noncompliantEvidenceCount, &sInsightsByAssessment_compliantEvidenceCount, &sInsightsByAssessment_inconclusiveEvidenceCount, &sInsightsByAssessment_assessmentControlsCountByNoncompliantEvidence, &sInsightsByAssessment_totalAssessmentControlsCount, &sInsightsByAssessment_lastUpdated}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mKeywordInputType = smithy.SchemaMembers{List: []*smithy.Schema{&sKeywordInputType_SELECT_FROM_LIST, &sKeywordInputType_UPLOAD_FILE, &sKeywordInputType_INPUT_TEXT}}
+var m_Keywords = smithy.SchemaMembers{List: []*smithy.Schema{&s_Keywords_member}}
+var m_ListAssessmentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAssessmentMetadata_member}}
+var mManualEvidence = smithy.SchemaMembers{List: []*smithy.Schema{&sManualEvidence_s3ResourcePath, &sManualEvidence_textResponse, &sManualEvidence_evidenceFileName}}
+var m_ManualEvidenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManualEvidenceList_member}}
+var mNotification = smithy.SchemaMembers{List: []*smithy.Schema{&sNotification_id, &sNotification_assessmentId, &sNotification_assessmentName, &sNotification_controlSetId, &sNotification_controlSetName, &sNotification_description, &sNotification_eventTime, &sNotification_source}}
+var m_Notifications = smithy.SchemaMembers{List: []*smithy.Schema{&s_Notifications_member}}
+var mObjectTypeEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectTypeEnum_ASSESSMENT, &sObjectTypeEnum_CONTROL_SET, &sObjectTypeEnum_CONTROL, &sObjectTypeEnum_DELEGATION, &sObjectTypeEnum_ASSESSMENT_REPORT}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_arn, &sResource_value, &sResource_complianceCheck}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var m_Resources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resources_member}}
+var mRole = smithy.SchemaMembers{List: []*smithy.Schema{&sRole_roleType, &sRole_roleArn}}
+var m_Roles = smithy.SchemaMembers{List: []*smithy.Schema{&s_Roles_member}}
+var mRoleType = smithy.SchemaMembers{List: []*smithy.Schema{&sRoleType_PROCESS_OWNER, &sRoleType_RESOURCE_OWNER}}
+var mScope = smithy.SchemaMembers{List: []*smithy.Schema{&sScope_awsAccounts, &sScope_awsServices}}
+var mServiceMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceMetadata_name, &sServiceMetadata_displayName, &sServiceMetadata_description, &sServiceMetadata_category}}
+var m_ServiceMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceMetadataList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSettingAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sSettingAttribute_ALL, &sSettingAttribute_IS_AWS_ORG_ENABLED, &sSettingAttribute_SNS_TOPIC, &sSettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION, &sSettingAttribute_DEFAULT_PROCESS_OWNERS, &sSettingAttribute_EVIDENCE_FINDER_ENABLEMENT, &sSettingAttribute_DEREGISTRATION_POLICY, &sSettingAttribute_DEFAULT_EXPORT_DESTINATION}}
+var mSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sSettings_isAwsOrgEnabled, &sSettings_snsTopic, &sSettings_defaultAssessmentReportsDestination, &sSettings_defaultProcessOwners, &sSettings_kmsKey, &sSettings_evidenceFinderEnablement, &sSettings_deregistrationPolicy, &sSettings_defaultExportDestination}}
+var mShareRequestAction = smithy.SchemaMembers{List: []*smithy.Schema{&sShareRequestAction_ACCEPT, &sShareRequestAction_DECLINE, &sShareRequestAction_REVOKE}}
+var mShareRequestStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sShareRequestStatus_ACTIVE, &sShareRequestStatus_REPLICATING, &sShareRequestStatus_SHARED, &sShareRequestStatus_EXPIRING, &sShareRequestStatus_FAILED, &sShareRequestStatus_EXPIRED, &sShareRequestStatus_DECLINED, &sShareRequestStatus_REVOKED}}
+var mShareRequestType = smithy.SchemaMembers{List: []*smithy.Schema{&sShareRequestType_SENT, &sShareRequestType_RECEIVED}}
+var mSourceFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceFrequency_DAILY, &sSourceFrequency_WEEKLY, &sSourceFrequency_MONTHLY}}
+var mSourceKeyword = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceKeyword_keywordInputType, &sSourceKeyword_keywordValue}}
+var mSourceSetUpOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceSetUpOption_SYSTEM_CONTROLS_MAPPING, &sSourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING}}
+var mSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceType_AWS_CLOUDTRAIL, &sSourceType_AWS_CONFIG, &sSourceType_AWS_SECURITY_HUB, &sSourceType_AWS_API_CALL, &sSourceType_MANUAL, &sSourceType_COMMON_CONTROL, &sSourceType_CORE_CONTROL}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUpdateAssessmentFrameworkControlSet = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentFrameworkControlSet_id, &sUpdateAssessmentFrameworkControlSet_name, &sUpdateAssessmentFrameworkControlSet_controls}}
+var m_UpdateAssessmentFrameworkControlSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateAssessmentFrameworkControlSets_member}}
+var mURL = smithy.SchemaMembers{List: []*smithy.Schema{&sURL_hyperlinkName, &sURL_link}}
+var m_ValidationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationErrors_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mAssociateAssessmentReportEvidenceFolderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAssessmentReportEvidenceFolderRequest_assessmentId, &sAssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId}}
+var mBatchAssociateAssessmentReportEvidenceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateAssessmentReportEvidenceRequest_assessmentId, &sBatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId, &sBatchAssociateAssessmentReportEvidenceRequest_evidenceIds}}
+var mBatchAssociateAssessmentReportEvidenceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateAssessmentReportEvidenceResponse_evidenceIds, &sBatchAssociateAssessmentReportEvidenceResponse_errors}}
+var mBatchCreateDelegationByAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateDelegationByAssessmentRequest_createDelegationRequests, &sBatchCreateDelegationByAssessmentRequest_assessmentId}}
+var mBatchCreateDelegationByAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateDelegationByAssessmentResponse_delegations, &sBatchCreateDelegationByAssessmentResponse_errors}}
+var mBatchDeleteDelegationByAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteDelegationByAssessmentRequest_delegationIds, &sBatchDeleteDelegationByAssessmentRequest_assessmentId}}
+var mBatchDeleteDelegationByAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteDelegationByAssessmentResponse_errors}}
+var mBatchDisassociateAssessmentReportEvidenceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateAssessmentReportEvidenceRequest_assessmentId, &sBatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId, &sBatchDisassociateAssessmentReportEvidenceRequest_evidenceIds}}
+var mBatchDisassociateAssessmentReportEvidenceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateAssessmentReportEvidenceResponse_evidenceIds, &sBatchDisassociateAssessmentReportEvidenceResponse_errors}}
+var mBatchImportEvidenceToAssessmentControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchImportEvidenceToAssessmentControlRequest_assessmentId, &sBatchImportEvidenceToAssessmentControlRequest_controlSetId, &sBatchImportEvidenceToAssessmentControlRequest_controlId, &sBatchImportEvidenceToAssessmentControlRequest_manualEvidence}}
+var mBatchImportEvidenceToAssessmentControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchImportEvidenceToAssessmentControlResponse_errors}}
+var mCreateAssessmentFrameworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentFrameworkRequest_name, &sCreateAssessmentFrameworkRequest_description, &sCreateAssessmentFrameworkRequest_complianceType, &sCreateAssessmentFrameworkRequest_controlSets, &sCreateAssessmentFrameworkRequest_tags}}
+var mCreateAssessmentFrameworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentFrameworkResponse_framework}}
+var mCreateAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentRequest_name, &sCreateAssessmentRequest_description, &sCreateAssessmentRequest_assessmentReportsDestination, &sCreateAssessmentRequest_scope, &sCreateAssessmentRequest_roles, &sCreateAssessmentRequest_frameworkId, &sCreateAssessmentRequest_tags}}
+var mCreateAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentResponse_assessment}}
+var mCreateAssessmentReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentReportRequest_name, &sCreateAssessmentReportRequest_description, &sCreateAssessmentReportRequest_assessmentId, &sCreateAssessmentReportRequest_queryStatement}}
+var mCreateAssessmentReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAssessmentReportResponse_assessmentReport}}
+var mCreateControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateControlRequest_name, &sCreateControlRequest_description, &sCreateControlRequest_testingInformation, &sCreateControlRequest_actionPlanTitle, &sCreateControlRequest_actionPlanInstructions, &sCreateControlRequest_controlMappingSources, &sCreateControlRequest_tags}}
+var mCreateControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateControlResponse_control}}
+var mDeleteAssessmentFrameworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAssessmentFrameworkRequest_frameworkId}}
+var mDeleteAssessmentFrameworkShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAssessmentFrameworkShareRequest_requestId, &sDeleteAssessmentFrameworkShareRequest_requestType}}
+var mDeleteAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAssessmentRequest_assessmentId}}
+var mDeleteAssessmentReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAssessmentReportRequest_assessmentId, &sDeleteAssessmentReportRequest_assessmentReportId}}
+var mDeleteControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteControlRequest_controlId}}
+var mDeregisterAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterAccountResponse_status}}
+var mDeregisterOrganizationAdminAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterOrganizationAdminAccountRequest_adminAccountId}}
+var mDisassociateAssessmentReportEvidenceFolderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAssessmentReportEvidenceFolderRequest_assessmentId, &sDisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId}}
+var mGetAccountStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountStatusResponse_status}}
+var mGetAssessmentFrameworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentFrameworkRequest_frameworkId}}
+var mGetAssessmentFrameworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentFrameworkResponse_framework}}
+var mGetAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentRequest_assessmentId}}
+var mGetAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentResponse_assessment, &sGetAssessmentResponse_userRole}}
+var mGetAssessmentReportUrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentReportUrlRequest_assessmentReportId, &sGetAssessmentReportUrlRequest_assessmentId}}
+var mGetAssessmentReportUrlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentReportUrlResponse_preSignedUrl}}
+var mGetChangeLogsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChangeLogsRequest_assessmentId, &sGetChangeLogsRequest_controlSetId, &sGetChangeLogsRequest_controlId, &sGetChangeLogsRequest_nextToken, &sGetChangeLogsRequest_maxResults}}
+var mGetChangeLogsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChangeLogsResponse_changeLogs, &sGetChangeLogsResponse_nextToken}}
+var mGetControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetControlRequest_controlId}}
+var mGetControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetControlResponse_control}}
+var mGetDelegationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDelegationsRequest_nextToken, &sGetDelegationsRequest_maxResults}}
+var mGetDelegationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDelegationsResponse_delegations, &sGetDelegationsResponse_nextToken}}
+var mGetEvidenceByEvidenceFolderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceByEvidenceFolderRequest_assessmentId, &sGetEvidenceByEvidenceFolderRequest_controlSetId, &sGetEvidenceByEvidenceFolderRequest_evidenceFolderId, &sGetEvidenceByEvidenceFolderRequest_nextToken, &sGetEvidenceByEvidenceFolderRequest_maxResults}}
+var mGetEvidenceByEvidenceFolderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceByEvidenceFolderResponse_evidence, &sGetEvidenceByEvidenceFolderResponse_nextToken}}
+var mGetEvidenceFileUploadUrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFileUploadUrlRequest_fileName}}
+var mGetEvidenceFileUploadUrlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFileUploadUrlResponse_evidenceFileName, &sGetEvidenceFileUploadUrlResponse_uploadUrl}}
+var mGetEvidenceFolderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFolderRequest_assessmentId, &sGetEvidenceFolderRequest_controlSetId, &sGetEvidenceFolderRequest_evidenceFolderId}}
+var mGetEvidenceFolderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFolderResponse_evidenceFolder}}
+var mGetEvidenceFoldersByAssessmentControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFoldersByAssessmentControlRequest_assessmentId, &sGetEvidenceFoldersByAssessmentControlRequest_controlSetId, &sGetEvidenceFoldersByAssessmentControlRequest_controlId, &sGetEvidenceFoldersByAssessmentControlRequest_nextToken, &sGetEvidenceFoldersByAssessmentControlRequest_maxResults}}
+var mGetEvidenceFoldersByAssessmentControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFoldersByAssessmentControlResponse_evidenceFolders, &sGetEvidenceFoldersByAssessmentControlResponse_nextToken}}
+var mGetEvidenceFoldersByAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFoldersByAssessmentRequest_assessmentId, &sGetEvidenceFoldersByAssessmentRequest_nextToken, &sGetEvidenceFoldersByAssessmentRequest_maxResults}}
+var mGetEvidenceFoldersByAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceFoldersByAssessmentResponse_evidenceFolders, &sGetEvidenceFoldersByAssessmentResponse_nextToken}}
+var mGetEvidenceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceRequest_assessmentId, &sGetEvidenceRequest_controlSetId, &sGetEvidenceRequest_evidenceFolderId, &sGetEvidenceRequest_evidenceId}}
+var mGetEvidenceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvidenceResponse_evidence}}
+var mGetInsightsByAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightsByAssessmentRequest_assessmentId}}
+var mGetInsightsByAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightsByAssessmentResponse_insights}}
+var mGetInsightsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightsResponse_insights}}
+var mGetOrganizationAdminAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOrganizationAdminAccountResponse_adminAccountId, &sGetOrganizationAdminAccountResponse_organizationId}}
+var mGetServicesInScopeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServicesInScopeResponse_serviceMetadata}}
+var mGetSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSettingsRequest_attribute}}
+var mGetSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSettingsResponse_settings}}
+var mListAssessmentControlInsightsByControlDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentControlInsightsByControlDomainRequest_controlDomainId, &sListAssessmentControlInsightsByControlDomainRequest_assessmentId, &sListAssessmentControlInsightsByControlDomainRequest_nextToken, &sListAssessmentControlInsightsByControlDomainRequest_maxResults}}
+var mListAssessmentControlInsightsByControlDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment, &sListAssessmentControlInsightsByControlDomainResponse_nextToken}}
+var mListAssessmentFrameworkShareRequestsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentFrameworkShareRequestsRequest_requestType, &sListAssessmentFrameworkShareRequestsRequest_nextToken, &sListAssessmentFrameworkShareRequestsRequest_maxResults}}
+var mListAssessmentFrameworkShareRequestsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests, &sListAssessmentFrameworkShareRequestsResponse_nextToken}}
+var mListAssessmentFrameworksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentFrameworksRequest_frameworkType, &sListAssessmentFrameworksRequest_nextToken, &sListAssessmentFrameworksRequest_maxResults}}
+var mListAssessmentFrameworksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentFrameworksResponse_frameworkMetadataList, &sListAssessmentFrameworksResponse_nextToken}}
+var mListAssessmentReportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentReportsRequest_nextToken, &sListAssessmentReportsRequest_maxResults}}
+var mListAssessmentReportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentReportsResponse_assessmentReports, &sListAssessmentReportsResponse_nextToken}}
+var mListAssessmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentsRequest_status, &sListAssessmentsRequest_nextToken, &sListAssessmentsRequest_maxResults}}
+var mListAssessmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentsResponse_assessmentMetadata, &sListAssessmentsResponse_nextToken}}
+var mListControlDomainInsightsByAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlDomainInsightsByAssessmentRequest_assessmentId, &sListControlDomainInsightsByAssessmentRequest_nextToken, &sListControlDomainInsightsByAssessmentRequest_maxResults}}
+var mListControlDomainInsightsByAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlDomainInsightsByAssessmentResponse_controlDomainInsights, &sListControlDomainInsightsByAssessmentResponse_nextToken}}
+var mListControlDomainInsightsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlDomainInsightsRequest_nextToken, &sListControlDomainInsightsRequest_maxResults}}
+var mListControlDomainInsightsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlDomainInsightsResponse_controlDomainInsights, &sListControlDomainInsightsResponse_nextToken}}
+var mListControlInsightsByControlDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlInsightsByControlDomainRequest_controlDomainId, &sListControlInsightsByControlDomainRequest_nextToken, &sListControlInsightsByControlDomainRequest_maxResults}}
+var mListControlInsightsByControlDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlInsightsByControlDomainResponse_controlInsightsMetadata, &sListControlInsightsByControlDomainResponse_nextToken}}
+var mListControlsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlsRequest_controlType, &sListControlsRequest_nextToken, &sListControlsRequest_maxResults, &sListControlsRequest_controlCatalogId}}
+var mListControlsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlsResponse_controlMetadataList, &sListControlsResponse_nextToken}}
+var mListKeywordsForDataSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeywordsForDataSourceRequest_source, &sListKeywordsForDataSourceRequest_nextToken, &sListKeywordsForDataSourceRequest_maxResults}}
+var mListKeywordsForDataSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeywordsForDataSourceResponse_keywords, &sListKeywordsForDataSourceResponse_nextToken}}
+var mListNotificationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationsRequest_nextToken, &sListNotificationsRequest_maxResults}}
+var mListNotificationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationsResponse_notifications, &sListNotificationsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAccountRequest_kmsKey, &sRegisterAccountRequest_delegatedAdminAccount}}
+var mRegisterAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAccountResponse_status}}
+var mRegisterOrganizationAdminAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOrganizationAdminAccountRequest_adminAccountId}}
+var mRegisterOrganizationAdminAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOrganizationAdminAccountResponse_adminAccountId, &sRegisterOrganizationAdminAccountResponse_organizationId}}
+var mStartAssessmentFrameworkShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAssessmentFrameworkShareRequest_frameworkId, &sStartAssessmentFrameworkShareRequest_destinationAccount, &sStartAssessmentFrameworkShareRequest_destinationRegion, &sStartAssessmentFrameworkShareRequest_comment}}
+var mStartAssessmentFrameworkShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateAssessmentControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentControlRequest_assessmentId, &sUpdateAssessmentControlRequest_controlSetId, &sUpdateAssessmentControlRequest_controlId, &sUpdateAssessmentControlRequest_controlStatus, &sUpdateAssessmentControlRequest_commentBody}}
+var mUpdateAssessmentControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentControlResponse_control}}
+var mUpdateAssessmentControlSetStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentControlSetStatusRequest_assessmentId, &sUpdateAssessmentControlSetStatusRequest_controlSetId, &sUpdateAssessmentControlSetStatusRequest_status, &sUpdateAssessmentControlSetStatusRequest_comment}}
+var mUpdateAssessmentControlSetStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentControlSetStatusResponse_controlSet}}
+var mUpdateAssessmentFrameworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentFrameworkRequest_frameworkId, &sUpdateAssessmentFrameworkRequest_name, &sUpdateAssessmentFrameworkRequest_description, &sUpdateAssessmentFrameworkRequest_complianceType, &sUpdateAssessmentFrameworkRequest_controlSets}}
+var mUpdateAssessmentFrameworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentFrameworkResponse_framework}}
+var mUpdateAssessmentFrameworkShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentFrameworkShareRequest_requestId, &sUpdateAssessmentFrameworkShareRequest_requestType, &sUpdateAssessmentFrameworkShareRequest_action}}
+var mUpdateAssessmentFrameworkShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest}}
+var mUpdateAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentRequest_assessmentId, &sUpdateAssessmentRequest_assessmentName, &sUpdateAssessmentRequest_assessmentDescription, &sUpdateAssessmentRequest_scope, &sUpdateAssessmentRequest_assessmentReportsDestination, &sUpdateAssessmentRequest_roles}}
+var mUpdateAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentResponse_assessment}}
+var mUpdateAssessmentStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentStatusRequest_assessmentId, &sUpdateAssessmentStatusRequest_status}}
+var mUpdateAssessmentStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAssessmentStatusResponse_assessment}}
+var mUpdateControlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateControlRequest_controlId, &sUpdateControlRequest_name, &sUpdateControlRequest_description, &sUpdateControlRequest_testingInformation, &sUpdateControlRequest_actionPlanTitle, &sUpdateControlRequest_actionPlanInstructions, &sUpdateControlRequest_controlMappingSources}}
+var mUpdateControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateControlResponse_control}}
+var mUpdateSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSettingsRequest_snsTopic, &sUpdateSettingsRequest_defaultAssessmentReportsDestination, &sUpdateSettingsRequest_defaultProcessOwners, &sUpdateSettingsRequest_kmsKey, &sUpdateSettingsRequest_evidenceFinderEnabled, &sUpdateSettingsRequest_deregistrationPolicy, &sUpdateSettingsRequest_defaultExportDestination}}
+var mUpdateSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSettingsResponse_settings}}
+var mValidateAssessmentReportIntegrityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateAssessmentReportIntegrityRequest_s3RelativePath}}
+var mValidateAssessmentReportIntegrityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateAssessmentReportIntegrityResponse_signatureValid, &sValidateAssessmentReportIntegrityResponse_signatureAlgorithm, &sValidateAssessmentReportIntegrityResponse_signatureDateTime, &sValidateAssessmentReportIntegrityResponse_signatureKeyId, &sValidateAssessmentReportIntegrityResponse_validationErrors}}
+
+var hAssessmentControl = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 7, 6, 5, 0, 0, 0, 0, 4, 0,
+	3, 0, 0, 9, 0, 0, 8, 0,
+}}
+var hAssessmentEvidenceFolder = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 8, 14, 0, 13, 0, 0, 1, 0, 0, 0, 0, 0, 5, 4, 0, 18, 0,
+	0, 0, 12, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 9, 17, 0, 0, 11, 0, 0, 6, 2, 0, 0,
+	0, 0, 16, 15, 0, 0, 0, 0, 0, 0, 7, 10, 0, 0, 0, 0,
+}}
+var hAssessmentFrameworkMetadata = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 2, 0, 10, 0, 9, 4, 7, 0, 0, 11, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0,
+	5, 0, 3, 0, 0, 0, 0, 0,
+}}
+var hAssessmentFrameworkShareRequest = smithy.MemberHash{Seed: 29, Slots: []uint16{
+	7, 0, 14, 0, 9, 0, 0, 15, 4, 0, 12, 0, 0, 8, 0, 0, 13, 0, 6, 0, 0, 5, 10, 11,
+	0, 0, 3, 0, 0, 1, 2, 0,
+}}
+var hAssessmentMetadata = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	4, 0, 3, 8, 7, 11, 0, 0, 0, 0, 5, 0, 10, 0, 0, 0, 2, 0, 0, 0, 0, 0, 9, 0,
+	0, 1, 0, 0, 0, 0, 0, 6,
+}}
+var hAssessmentReport = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 8, 0, 0, 5, 7, 6,
+	0, 9, 0, 0, 0, 0, 0, 0,
+}}
+var hControl = smithy.MemberHash{Seed: 164, Slots: []uint16{
+	0, 0, 13, 1, 0, 4, 0, 6, 16, 14, 0, 10, 2, 0, 0, 0, 11, 15, 0, 3, 8, 0, 0, 7,
+	0, 12, 0, 5, 0, 9, 0, 0,
+}}
+var hDelegation = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 10, 0, 6, 0, 7, 0, 0, 0, 9, 3, 11, 4, 0, 8, 0, 0, 0, 0, 1, 0, 0, 0,
+	2, 0, 0, 0, 0, 0, 5, 0,
+}}
+var hEvidence = smithy.MemberHash{Seed: 78, Slots: []uint16{
+	6, 9, 0, 0, 0, 0, 13, 0, 0, 1, 0, 10, 0, 0, 3, 0, 14, 5, 7, 12, 0, 0, 8, 0,
+	0, 2, 0, 4, 0, 15, 0, 11,
+}}
+var hFramework = smithy.MemberHash{Seed: 41, Slots: []uint16{
+	11, 4, 0, 14, 0, 0, 9, 5, 10, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 1, 0, 8, 0, 3,
+	0, 0, 0, 12, 0, 7, 2, 6,
+}}
+
+var sAssociateAssessmentReportEvidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAssessmentReportEvidenceFolder, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateAssessmentReportEvidenceFolder})
+var sBatchAssociateAssessmentReportEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateAssessmentReportEvidence, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchAssociateAssessmentReportEvidence})
+var sBatchCreateDelegationByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateDelegationByAssessment, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchCreateDelegationByAssessment})
+var sBatchDeleteDelegationByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteDelegationByAssessment, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eBatchDeleteDelegationByAssessment})
+var sBatchDisassociateAssessmentReportEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateAssessmentReportEvidence, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eBatchDisassociateAssessmentReportEvidence})
+var sBatchImportEvidenceToAssessmentControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchImportEvidenceToAssessmentControl, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eBatchImportEvidenceToAssessmentControl})
+var sCreateAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessment, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateAssessment})
+var sCreateAssessmentFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentFramework, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateAssessmentFramework})
+var sCreateAssessmentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentReport, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateAssessmentReport})
+var sCreateControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControl, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateControl})
+var sDeleteAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessment, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAssessment})
+var sDeleteAssessmentFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFramework, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAssessmentFramework})
+var sDeleteAssessmentFrameworkShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFrameworkShare, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAssessmentFrameworkShare})
+var sDeleteAssessmentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentReport, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAssessmentReport})
+var sDeleteControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControl, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteControl})
+var sDeregisterAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterAccount, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterAccount})
+var sDeregisterOrganizationAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationAdminAccount, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterOrganizationAdminAccount})
+var sDisassociateAssessmentReportEvidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAssessmentReportEvidenceFolder, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateAssessmentReportEvidenceFolder})
+var sGetAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountStatus, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountStatus})
+var sGetAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessment, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetAssessment})
+var sGetAssessmentFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentFramework, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetAssessmentFramework})
+var sGetAssessmentReportUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentReportUrl, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetAssessmentReportUrl})
+var sGetChangeLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeLogs, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eGetChangeLogs})
+var sGetControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControl, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eGetControl})
+var sGetDelegations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegations, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eGetDelegations})
+var sGetEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidence, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidence})
+var sGetEvidenceByEvidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceByEvidenceFolder, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidenceByEvidenceFolder})
+var sGetEvidenceFileUploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFileUploadUrl, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidenceFileUploadUrl})
+var sGetEvidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFolder, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidenceFolder})
+var sGetEvidenceFoldersByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessment, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidenceFoldersByAssessment})
+var sGetEvidenceFoldersByAssessmentControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessmentControl, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetEvidenceFoldersByAssessmentControl})
+var sGetInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsights, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetInsights})
+var sGetInsightsByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightsByAssessment, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetInsightsByAssessment})
+var sGetOrganizationAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOrganizationAdminAccount, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eGetOrganizationAdminAccount})
+var sGetServicesInScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicesInScope, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eGetServicesInScope})
+var sGetSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSettings, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eGetSettings})
+var sListAssessmentControlInsightsByControlDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentControlInsightsByControlDomain, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListAssessmentControlInsightsByControlDomain})
+var sListAssessmentFrameworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworks, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListAssessmentFrameworks})
+var sListAssessmentFrameworkShareRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworkShareRequests, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListAssessmentFrameworkShareRequests})
+var sListAssessmentReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentReports, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListAssessmentReports})
+var sListAssessments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessments, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListAssessments})
+var sListControlDomainInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsights, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListControlDomainInsights})
+var sListControlDomainInsightsByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsightsByAssessment, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eListControlDomainInsightsByAssessment})
+var sListControlInsightsByControlDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlInsightsByControlDomain, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eListControlInsightsByControlDomain})
+var sListControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControls, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListControls})
+var sListKeywordsForDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeywordsForDataSource, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eListKeywordsForDataSource})
+var sListNotifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotifications, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eListNotifications})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccount, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eRegisterAccount})
+var sRegisterOrganizationAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationAdminAccount, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eRegisterOrganizationAdminAccount})
+var sStartAssessmentFrameworkShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessmentFrameworkShare, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eStartAssessmentFrameworkShare})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessment, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessment})
+var sUpdateAssessmentControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControl, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessmentControl})
+var sUpdateAssessmentControlSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControlSetStatus, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessmentControlSetStatus})
+var sUpdateAssessmentFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFramework, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessmentFramework})
+var sUpdateAssessmentFrameworkShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkShare, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessmentFrameworkShare})
+var sUpdateAssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentStatus, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAssessmentStatus})
+var sUpdateControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControl, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eUpdateControl})
+var sUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettings, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSettings})
+var sValidateAssessmentReportIntegrity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateAssessmentReportIntegrity, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eValidateAssessmentReportIntegrity})
+var s_BedrockAssessmentManagerLambda = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BedrockAssessmentManagerLambda, Type: smithy.ShapeTypeService, Ext: &e_BedrockAssessmentManagerLambda})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t62, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Type: smithy.ShapeTypeString, Ext: &e_AccountName})
+var sAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccountStatus})
+var sAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountStatus_ACTIVE})
+var sAccountStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountStatus_INACTIVE})
+var sAccountStatus_PENDING_ACTIVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACTIVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountStatus_PENDING_ACTIVATION})
+var sActionEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionEnum, Members: &mActionEnum, Type: smithy.ShapeTypeEnum, Ext: &eActionEnum})
+var sActionEnum_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_CREATE})
+var sActionEnum_UPDATE_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_UPDATE_METADATA})
+var sActionEnum_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_ACTIVE})
+var sActionEnum_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_INACTIVE})
+var sActionEnum_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_DELETE})
+var sActionEnum_UNDER_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_UNDER_REVIEW})
+var sActionEnum_REVIEWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVIEWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_REVIEWED})
+var sActionEnum_IMPORT_EVIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_EVIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionEnum_IMPORT_EVIDENCE})
+var s_ActionPlanInstructions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionPlanInstructions, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ActionPlanInstructions})
+var s_ActionPlanTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionPlanTitle, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ActionPlanTitle})
+var sAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure, Ext: &eAssessment})
+var sAssessment_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eAssessment_arn})
+var sAssessment_awsAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccount", ID: &iAWSAccount, Members: &mAWSAccount, Type: smithy.ShapeTypeStructure, Ext: &eAssessment_awsAccount})
+var sAssessment_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iAssessmentMetadata, Members: &mAssessmentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAssessment_metadata})
+var sAssessment_framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "framework", ID: &iAssessmentFramework, Members: &mAssessmentFramework, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eAssessment_framework})
+var sAssessment_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAssessment_tags})
+var sAssessmentControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentControl, Members: &mAssessmentControl, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentControl})
+var sAssessmentControl_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentControl_id})
+var sAssessmentControl_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eAssessmentControl_name})
+var sAssessmentControl_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ControlDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentControl_description})
+var sAssessmentControl_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlStatus, Members: &mControlStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentControl_status})
+var sAssessmentControl_response = smithy.NewStaticSchema(smithy.StaticSchema{Member: "response", ID: &iControlResponse, Members: &mControlResponse, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentControl_response})
+var sAssessmentControl_comments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comments", ID: &i_ControlComments, Members: &m_ControlComments, Type: smithy.ShapeTypeList, Ext: &eAssessmentControl_comments})
+var sAssessmentControl_evidenceSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceSources", ID: &i_EvidenceSources, Members: &m_EvidenceSources, Type: smithy.ShapeTypeList, Ext: &eAssessmentControl_evidenceSources})
+var sAssessmentControl_evidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentControl_evidenceCount})
+var sAssessmentControl_assessmentReportEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportEvidenceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentControl_assessmentReportEvidenceCount})
+var s_AssessmentControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentControls, Members: &m_AssessmentControls, Type: smithy.ShapeTypeList, Ext: &e_AssessmentControls})
+var s_AssessmentControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentControl, Members: &mAssessmentControl, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentControls_member})
+var sAssessmentControlSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentControlSet, Members: &mAssessmentControlSet, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentControlSet})
+var sAssessmentControlSet_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &eAssessmentControlSet_id})
+var sAssessmentControlSet_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eAssessmentControlSet_description})
+var sAssessmentControlSet_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlSetStatus, Members: &mControlSetStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentControlSet_status})
+var sAssessmentControlSet_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eAssessmentControlSet_roles})
+var sAssessmentControlSet_controls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controls", ID: &i_AssessmentControls, Members: &m_AssessmentControls, Type: smithy.ShapeTypeList, Ext: &eAssessmentControlSet_controls})
+var sAssessmentControlSet_delegations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegations", ID: &i_Delegations, Members: &m_Delegations, Type: smithy.ShapeTypeList, Ext: &eAssessmentControlSet_delegations})
+var sAssessmentControlSet_systemEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemEvidenceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentControlSet_systemEvidenceCount})
+var sAssessmentControlSet_manualEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualEvidenceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentControlSet_manualEvidenceCount})
+var s_AssessmentControlSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentControlSets, Members: &m_AssessmentControlSets, Type: smithy.ShapeTypeList, Ext: &e_AssessmentControlSets})
+var s_AssessmentControlSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentControlSet, Members: &mAssessmentControlSet, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentControlSets_member})
+var s_AssessmentDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentDescription, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_AssessmentDescription})
+var sAssessmentEvidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentEvidenceFolder, Members: &mAssessmentEvidenceFolder, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentEvidenceFolder})
+var sAssessmentEvidenceFolder_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentEvidenceFolderName, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_name})
+var sAssessmentEvidenceFolder_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentEvidenceFolder_date})
+var sAssessmentEvidenceFolder_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_assessmentId})
+var sAssessmentEvidenceFolder_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_controlSetId})
+var sAssessmentEvidenceFolder_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_controlId})
+var sAssessmentEvidenceFolder_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_id})
+var sAssessmentEvidenceFolder_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_dataSource})
+var sAssessmentEvidenceFolder_author = smithy.NewStaticSchema(smithy.StaticSchema{Member: "author", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_author})
+var sAssessmentEvidenceFolder_totalEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalEvidence", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_totalEvidence})
+var sAssessmentEvidenceFolder_assessmentReportSelectionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportSelectionCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_assessmentReportSelectionCount})
+var sAssessmentEvidenceFolder_controlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlName", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eAssessmentEvidenceFolder_controlName})
+var sAssessmentEvidenceFolder_evidenceResourcesIncludedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceResourcesIncludedCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceResourcesIncludedCount})
+var sAssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByTypeConfigurationDataCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount})
+var sAssessmentEvidenceFolder_evidenceByTypeManualCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByTypeManualCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceByTypeManualCount})
+var sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByTypeComplianceCheckCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount})
+var sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByTypeComplianceCheckIssuesCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount})
+var sAssessmentEvidenceFolder_evidenceByTypeUserActivityCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByTypeUserActivityCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceByTypeUserActivityCount})
+var sAssessmentEvidenceFolder_evidenceAwsServiceSourceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceAwsServiceSourceCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentEvidenceFolder_evidenceAwsServiceSourceCount})
+var s_AssessmentEvidenceFolderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentEvidenceFolderName, Type: smithy.ShapeTypeString, Ext: &e_AssessmentEvidenceFolderName})
+var s_AssessmentEvidenceFolders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentEvidenceFolders, Members: &m_AssessmentEvidenceFolders, Type: smithy.ShapeTypeList, Ext: &e_AssessmentEvidenceFolders})
+var s_AssessmentEvidenceFolders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentEvidenceFolder, Members: &mAssessmentEvidenceFolder, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentEvidenceFolders_member})
+var sAssessmentFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentFramework, Members: &mAssessmentFramework, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentFramework})
+var sAssessmentFramework_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentFramework_id})
+var sAssessmentFramework_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eAssessmentFramework_arn})
+var sAssessmentFramework_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iFrameworkMetadata, Members: &mFrameworkMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentFramework_metadata})
+var sAssessmentFramework_controlSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSets", ID: &i_AssessmentControlSets, Members: &m_AssessmentControlSets, Type: smithy.ShapeTypeList, Ext: &eAssessmentFramework_controlSets})
+var s_AssessmentFrameworkDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentFrameworkDescription, Type: smithy.ShapeTypeString, Ext: &e_AssessmentFrameworkDescription})
+var sAssessmentFrameworkMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentFrameworkMetadata, Members: &mAssessmentFrameworkMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentFrameworkMetadata})
+var sAssessmentFrameworkMetadata_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_arn})
+var sAssessmentFrameworkMetadata_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_id})
+var sAssessmentFrameworkMetadata_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFrameworkType, Members: &mFrameworkType, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentFrameworkMetadata_type})
+var sAssessmentFrameworkMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_name})
+var sAssessmentFrameworkMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_description})
+var sAssessmentFrameworkMetadata_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &i_Filename, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_logo})
+var sAssessmentFrameworkMetadata_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkMetadata_complianceType})
+var sAssessmentFrameworkMetadata_controlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlsCount", ID: &i_ControlsCount, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentFrameworkMetadata_controlsCount})
+var sAssessmentFrameworkMetadata_controlSetsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetsCount", ID: &i_ControlSetsCount, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentFrameworkMetadata_controlSetsCount})
+var sAssessmentFrameworkMetadata_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentFrameworkMetadata_createdAt})
+var sAssessmentFrameworkMetadata_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentFrameworkMetadata_lastUpdatedAt})
+var sAssessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentFrameworkShareRequest, Members: &mAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentFrameworkShareRequest})
+var sAssessmentFrameworkShareRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_id})
+var sAssessmentFrameworkShareRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_frameworkId})
+var sAssessmentFrameworkShareRequest_frameworkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkName", ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_frameworkName})
+var sAssessmentFrameworkShareRequest_frameworkDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkDescription", ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_frameworkDescription})
+var sAssessmentFrameworkShareRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iShareRequestStatus, Members: &mShareRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentFrameworkShareRequest_status})
+var sAssessmentFrameworkShareRequest_sourceAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_sourceAccount})
+var sAssessmentFrameworkShareRequest_destinationAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_destinationAccount})
+var sAssessmentFrameworkShareRequest_destinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_destinationRegion})
+var sAssessmentFrameworkShareRequest_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentFrameworkShareRequest_expirationTime})
+var sAssessmentFrameworkShareRequest_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentFrameworkShareRequest_creationTime})
+var sAssessmentFrameworkShareRequest_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentFrameworkShareRequest_lastUpdated})
+var sAssessmentFrameworkShareRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ShareRequestComment, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_comment})
+var sAssessmentFrameworkShareRequest_standardControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standardControlsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentFrameworkShareRequest_standardControlsCount})
+var sAssessmentFrameworkShareRequest_customControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customControlsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eAssessmentFrameworkShareRequest_customControlsCount})
+var sAssessmentFrameworkShareRequest_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentFrameworkShareRequest_complianceType})
+var s_AssessmentFrameworkShareRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentFrameworkShareRequestList, Members: &m_AssessmentFrameworkShareRequestList, Type: smithy.ShapeTypeList, Ext: &e_AssessmentFrameworkShareRequestList})
+var s_AssessmentFrameworkShareRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentFrameworkShareRequest, Members: &mAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentFrameworkShareRequestList_member})
+var sAssessmentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentMetadata, Members: &mAssessmentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentMetadata})
+var sAssessmentMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadata_name})
+var sAssessmentMetadata_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadata_id})
+var sAssessmentMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadata_description})
+var sAssessmentMetadata_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadata_complianceType})
+var sAssessmentMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentStatus, Members: &mAssessmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentMetadata_status})
+var sAssessmentMetadata_assessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportsDestination", ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentMetadata_assessmentReportsDestination})
+var sAssessmentMetadata_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &iScope, Members: &mScope, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentMetadata_scope})
+var sAssessmentMetadata_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eAssessmentMetadata_roles})
+var sAssessmentMetadata_delegations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegations", ID: &i_Delegations, Members: &m_Delegations, Type: smithy.ShapeTypeList, Ext: &eAssessmentMetadata_delegations})
+var sAssessmentMetadata_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentMetadata_creationTime})
+var sAssessmentMetadata_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentMetadata_lastUpdated})
+var sAssessmentMetadataItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentMetadataItem, Members: &mAssessmentMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentMetadataItem})
+var sAssessmentMetadataItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadataItem_name})
+var sAssessmentMetadataItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadataItem_id})
+var sAssessmentMetadataItem_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentMetadataItem_complianceType})
+var sAssessmentMetadataItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentStatus, Members: &mAssessmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentMetadataItem_status})
+var sAssessmentMetadataItem_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eAssessmentMetadataItem_roles})
+var sAssessmentMetadataItem_delegations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegations", ID: &i_Delegations, Members: &m_Delegations, Type: smithy.ShapeTypeList, Ext: &eAssessmentMetadataItem_delegations})
+var sAssessmentMetadataItem_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentMetadataItem_creationTime})
+var sAssessmentMetadataItem_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentMetadataItem_lastUpdated})
+var s_AssessmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentName, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_AssessmentName})
+var sAssessmentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReport, Members: &mAssessmentReport, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReport})
+var sAssessmentReport_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_id})
+var sAssessmentReport_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentReportName, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_name})
+var sAssessmentReport_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentReportDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_description})
+var sAssessmentReport_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_awsAccountId})
+var sAssessmentReport_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_assessmentId})
+var sAssessmentReport_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_assessmentName})
+var sAssessmentReport_author = smithy.NewStaticSchema(smithy.StaticSchema{Member: "author", ID: &i_Username, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReport_author})
+var sAssessmentReport_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentReportStatus, Members: &mAssessmentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentReport_status})
+var sAssessmentReport_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentReport_creationTime})
+var s_AssessmentReportDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReportDescription, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_AssessmentReportDescription})
+var sAssessmentReportDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReportDestinationType, Members: &mAssessmentReportDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentReportDestinationType})
+var sAssessmentReportDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportDestinationType_S3})
+var sAssessmentReportEvidenceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReportEvidenceError, Members: &mAssessmentReportEvidenceError, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportEvidenceError})
+var sAssessmentReportEvidenceError_evidenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportEvidenceError_evidenceId})
+var sAssessmentReportEvidenceError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportEvidenceError_errorCode})
+var sAssessmentReportEvidenceError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportEvidenceError_errorMessage})
+var s_AssessmentReportEvidenceErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReportEvidenceErrors, Members: &m_AssessmentReportEvidenceErrors, Type: smithy.ShapeTypeList, Ext: &e_AssessmentReportEvidenceErrors})
+var s_AssessmentReportEvidenceErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentReportEvidenceError, Members: &mAssessmentReportEvidenceError, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentReportEvidenceErrors_member})
+var sAssessmentReportMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReportMetadata, Members: &mAssessmentReportMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportMetadata})
+var sAssessmentReportMetadata_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_id})
+var sAssessmentReportMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentReportName, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_name})
+var sAssessmentReportMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentReportDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_description})
+var sAssessmentReportMetadata_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_assessmentId})
+var sAssessmentReportMetadata_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_assessmentName})
+var sAssessmentReportMetadata_author = smithy.NewStaticSchema(smithy.StaticSchema{Member: "author", ID: &i_Username, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportMetadata_author})
+var sAssessmentReportMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentReportStatus, Members: &mAssessmentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentReportMetadata_status})
+var sAssessmentReportMetadata_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssessmentReportMetadata_creationTime})
+var s_AssessmentReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReportName, Type: smithy.ShapeTypeString, Ext: &e_AssessmentReportName})
+var sAssessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportsDestination})
+var sAssessmentReportsDestination_destinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationType", ID: &iAssessmentReportDestinationType, Members: &mAssessmentReportDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentReportsDestination_destinationType})
+var sAssessmentReportsDestination_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_S3Url, Type: smithy.ShapeTypeString, Ext: &eAssessmentReportsDestination_destination})
+var s_AssessmentReportsMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReportsMetadata, Members: &m_AssessmentReportsMetadata, Type: smithy.ShapeTypeList, Ext: &e_AssessmentReportsMetadata})
+var s_AssessmentReportsMetadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentReportMetadata, Members: &mAssessmentReportMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_AssessmentReportsMetadata_member})
+var sAssessmentReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReportStatus, Members: &mAssessmentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentReportStatus})
+var sAssessmentReportStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportStatus_COMPLETE})
+var sAssessmentReportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportStatus_IN_PROGRESS})
+var sAssessmentReportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentReportStatus_FAILED})
+var sAssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentStatus, Members: &mAssessmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssessmentStatus})
+var sAssessmentStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentStatus_ACTIVE})
+var sAssessmentStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssessmentStatus_INACTIVE})
+var s_AuditManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &e_AuditManagerArn})
+var sAWSAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSAccount, Members: &mAWSAccount, Type: smithy.ShapeTypeStructure, Ext: &eAWSAccount})
+var sAWSAccount_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAWSAccount_id})
+var sAWSAccount_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_EmailAddress, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eAWSAccount_emailAddress})
+var sAWSAccount_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AccountName, Type: smithy.ShapeTypeString, Ext: &eAWSAccount_name})
+var s_AWSAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccounts, Members: &m_AWSAccounts, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_AWSAccounts})
+var s_AWSAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAWSAccount, Members: &mAWSAccount, Type: smithy.ShapeTypeStructure, Ext: &e_AWSAccounts_member})
+var sAWSService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSService, Members: &mAWSService, Type: smithy.ShapeTypeStructure, Ext: &eAWSService})
+var sAWSService_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_AWSServiceName, Type: smithy.ShapeTypeString, Ext: &eAWSService_serviceName})
+var s_AWSServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSServiceName, Type: smithy.ShapeTypeString, Ext: &e_AWSServiceName})
+var s_AWSServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSServices, Members: &m_AWSServices, Type: smithy.ShapeTypeList, Ext: &e_AWSServices})
+var s_AWSServices_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAWSService, Members: &mAWSService, Type: smithy.ShapeTypeStructure, Ext: &e_AWSServices_member})
+var sBatchCreateDelegationByAssessmentError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateDelegationByAssessmentError, Members: &mBatchCreateDelegationByAssessmentError, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateDelegationByAssessmentError})
+var sBatchCreateDelegationByAssessmentError_createDelegationRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDelegationRequest", ID: &iCreateDelegationRequest, Members: &mCreateDelegationRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateDelegationByAssessmentError_createDelegationRequest})
+var sBatchCreateDelegationByAssessmentError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchCreateDelegationByAssessmentError_errorCode})
+var sBatchCreateDelegationByAssessmentError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchCreateDelegationByAssessmentError_errorMessage})
+var s_BatchCreateDelegationByAssessmentErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateDelegationByAssessmentErrors, Members: &m_BatchCreateDelegationByAssessmentErrors, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateDelegationByAssessmentErrors})
+var s_BatchCreateDelegationByAssessmentErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateDelegationByAssessmentError, Members: &mBatchCreateDelegationByAssessmentError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchCreateDelegationByAssessmentErrors_member})
+var sBatchDeleteDelegationByAssessmentError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteDelegationByAssessmentError, Members: &mBatchDeleteDelegationByAssessmentError, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteDelegationByAssessmentError})
+var sBatchDeleteDelegationByAssessmentError_delegationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegationId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteDelegationByAssessmentError_delegationId})
+var sBatchDeleteDelegationByAssessmentError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteDelegationByAssessmentError_errorCode})
+var sBatchDeleteDelegationByAssessmentError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteDelegationByAssessmentError_errorMessage})
+var s_BatchDeleteDelegationByAssessmentErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteDelegationByAssessmentErrors, Members: &m_BatchDeleteDelegationByAssessmentErrors, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteDelegationByAssessmentErrors})
+var s_BatchDeleteDelegationByAssessmentErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteDelegationByAssessmentError, Members: &mBatchDeleteDelegationByAssessmentError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteDelegationByAssessmentErrors_member})
+var sBatchImportEvidenceToAssessmentControlError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchImportEvidenceToAssessmentControlError, Members: &mBatchImportEvidenceToAssessmentControlError, Type: smithy.ShapeTypeStructure, Ext: &eBatchImportEvidenceToAssessmentControlError})
+var sBatchImportEvidenceToAssessmentControlError_manualEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualEvidence", ID: &iManualEvidence, Members: &mManualEvidence, Type: smithy.ShapeTypeStructure, Ext: &eBatchImportEvidenceToAssessmentControlError_manualEvidence})
+var sBatchImportEvidenceToAssessmentControlError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchImportEvidenceToAssessmentControlError_errorCode})
+var sBatchImportEvidenceToAssessmentControlError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchImportEvidenceToAssessmentControlError_errorMessage})
+var s_BatchImportEvidenceToAssessmentControlErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchImportEvidenceToAssessmentControlErrors, Members: &m_BatchImportEvidenceToAssessmentControlErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchImportEvidenceToAssessmentControlErrors})
+var s_BatchImportEvidenceToAssessmentControlErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchImportEvidenceToAssessmentControlError, Members: &mBatchImportEvidenceToAssessmentControlError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchImportEvidenceToAssessmentControlErrors_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sChangeLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeLog, Members: &mChangeLog, Type: smithy.ShapeTypeStructure, Ext: &eChangeLog})
+var sChangeLog_objectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectType", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eChangeLog_objectType})
+var sChangeLog_objectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eChangeLog_objectName})
+var sChangeLog_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionEnum, Members: &mActionEnum, Type: smithy.ShapeTypeEnum, Ext: &eChangeLog_action})
+var sChangeLog_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeLog_createdAt})
+var sChangeLog_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eChangeLog_createdBy})
+var s_ChangeLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeLogs, Members: &m_ChangeLogs, Type: smithy.ShapeTypeList, Ext: &e_ChangeLogs})
+var s_ChangeLogs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeLog, Members: &mChangeLog, Type: smithy.ShapeTypeStructure, Ext: &e_ChangeLogs_member})
+var s_CloudTrailArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudTrailArn, Type: smithy.ShapeTypeString, Ext: &e_CloudTrailArn})
+var s_ComplianceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComplianceType, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ComplianceType})
+var sControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControl, Members: &mControl, Type: smithy.ShapeTypeStructure, Ext: &eControl})
+var sControl_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eControl_arn})
+var sControl_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eControl_id})
+var sControl_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iControlType, Members: &mControlType, Type: smithy.ShapeTypeEnum, Ext: &eControl_type})
+var sControl_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eControl_name})
+var sControl_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ControlDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_description})
+var sControl_testingInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testingInformation", ID: &i_TestingInformation, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_testingInformation})
+var sControl_actionPlanTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanTitle", ID: &i_ActionPlanTitle, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_actionPlanTitle})
+var sControl_actionPlanInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanInstructions", ID: &i_ActionPlanInstructions, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_actionPlanInstructions})
+var sControl_controlSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSources", ID: &i_ControlSources, Type: smithy.ShapeTypeString, Ext: &eControl_controlSources})
+var sControl_controlMappingSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlMappingSources", ID: &i_ControlMappingSources, Members: &m_ControlMappingSources, Type: smithy.ShapeTypeList, Ext: &eControl_controlMappingSources})
+var sControl_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControl_createdAt})
+var sControl_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControl_lastUpdatedAt})
+var sControl_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_createdBy})
+var sControl_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControl_lastUpdatedBy})
+var sControl_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eControl_tags})
+var sControl_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iControlState, Members: &mControlState, Type: smithy.ShapeTypeEnum, Ext: &eControl_state})
+var s_ControlCatalogId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlCatalogId, Type: smithy.ShapeTypeString, Ext: &e_ControlCatalogId})
+var sControlComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlComment, Members: &mControlComment, Type: smithy.ShapeTypeStructure, Ext: &eControlComment})
+var sControlComment_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Username, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControlComment_authorName})
+var sControlComment_commentBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentBody", ID: &i_ControlCommentBody, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControlComment_commentBody})
+var sControlComment_postedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlComment_postedDate})
+var s_ControlCommentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlCommentBody, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ControlCommentBody})
+var s_ControlComments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlComments, Members: &m_ControlComments, Type: smithy.ShapeTypeList, Ext: &e_ControlComments})
+var s_ControlComments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlComment, Members: &mControlComment, Type: smithy.ShapeTypeStructure, Ext: &e_ControlComments_member})
+var s_ControlDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlDescription, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ControlDescription})
+var s_ControlDomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlDomainId, Type: smithy.ShapeTypeString, Ext: &e_ControlDomainId})
+var sControlDomainInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlDomainInsights, Members: &mControlDomainInsights, Type: smithy.ShapeTypeStructure, Ext: &eControlDomainInsights})
+var sControlDomainInsights_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eControlDomainInsights_name})
+var sControlDomainInsights_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ControlDomainId, Type: smithy.ShapeTypeString, Ext: &eControlDomainInsights_id})
+var sControlDomainInsights_controlsCountByNoncompliantEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlsCountByNoncompliantEvidence", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eControlDomainInsights_controlsCountByNoncompliantEvidence})
+var sControlDomainInsights_totalControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalControlsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eControlDomainInsights_totalControlsCount})
+var sControlDomainInsights_evidenceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceInsights", ID: &iEvidenceInsights, Members: &mEvidenceInsights, Type: smithy.ShapeTypeStructure, Ext: &eControlDomainInsights_evidenceInsights})
+var sControlDomainInsights_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlDomainInsights_lastUpdated})
+var s_ControlDomainInsightsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlDomainInsightsList, Members: &m_ControlDomainInsightsList, Type: smithy.ShapeTypeList, Ext: &e_ControlDomainInsightsList})
+var s_ControlDomainInsightsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlDomainInsights, Members: &mControlDomainInsights, Type: smithy.ShapeTypeStructure, Ext: &e_ControlDomainInsightsList_member})
+var s_ControlInsightsMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlInsightsMetadata, Members: &m_ControlInsightsMetadata, Type: smithy.ShapeTypeList, Ext: &e_ControlInsightsMetadata})
+var s_ControlInsightsMetadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlInsightsMetadataItem, Members: &mControlInsightsMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &e_ControlInsightsMetadata_member})
+var s_ControlInsightsMetadataByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlInsightsMetadataByAssessment, Members: &m_ControlInsightsMetadataByAssessment, Type: smithy.ShapeTypeList, Ext: &e_ControlInsightsMetadataByAssessment})
+var s_ControlInsightsMetadataByAssessment_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlInsightsMetadataByAssessmentItem, Members: &mControlInsightsMetadataByAssessmentItem, Type: smithy.ShapeTypeStructure, Ext: &e_ControlInsightsMetadataByAssessment_member})
+var sControlInsightsMetadataByAssessmentItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlInsightsMetadataByAssessmentItem, Members: &mControlInsightsMetadataByAssessmentItem, Type: smithy.ShapeTypeStructure, Ext: &eControlInsightsMetadataByAssessmentItem})
+var sControlInsightsMetadataByAssessmentItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eControlInsightsMetadataByAssessmentItem_name})
+var sControlInsightsMetadataByAssessmentItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ControlDomainId, Type: smithy.ShapeTypeString, Ext: &eControlInsightsMetadataByAssessmentItem_id})
+var sControlInsightsMetadataByAssessmentItem_evidenceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceInsights", ID: &iEvidenceInsights, Members: &mEvidenceInsights, Type: smithy.ShapeTypeStructure, Ext: &eControlInsightsMetadataByAssessmentItem_evidenceInsights})
+var sControlInsightsMetadataByAssessmentItem_controlSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eControlInsightsMetadataByAssessmentItem_controlSetName})
+var sControlInsightsMetadataByAssessmentItem_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlInsightsMetadataByAssessmentItem_lastUpdated})
+var sControlInsightsMetadataItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlInsightsMetadataItem, Members: &mControlInsightsMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &eControlInsightsMetadataItem})
+var sControlInsightsMetadataItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eControlInsightsMetadataItem_name})
+var sControlInsightsMetadataItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ControlDomainId, Type: smithy.ShapeTypeString, Ext: &eControlInsightsMetadataItem_id})
+var sControlInsightsMetadataItem_evidenceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceInsights", ID: &iEvidenceInsights, Members: &mEvidenceInsights, Type: smithy.ShapeTypeStructure, Ext: &eControlInsightsMetadataItem_evidenceInsights})
+var sControlInsightsMetadataItem_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlInsightsMetadataItem_lastUpdated})
+var sControlMappingSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlMappingSource, Members: &mControlMappingSource, Type: smithy.ShapeTypeStructure, Ext: &eControlMappingSource})
+var sControlMappingSource_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eControlMappingSource_sourceId})
+var sControlMappingSource_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_SourceName, Type: smithy.ShapeTypeString, Ext: &eControlMappingSource_sourceName})
+var sControlMappingSource_sourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceDescription", ID: &i_SourceDescription, Type: smithy.ShapeTypeString, Ext: &eControlMappingSource_sourceDescription})
+var sControlMappingSource_sourceSetUpOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceSetUpOption", ID: &iSourceSetUpOption, Members: &mSourceSetUpOption, Type: smithy.ShapeTypeEnum, Ext: &eControlMappingSource_sourceSetUpOption})
+var sControlMappingSource_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eControlMappingSource_sourceType})
+var sControlMappingSource_sourceKeyword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceKeyword", ID: &iSourceKeyword, Members: &mSourceKeyword, Type: smithy.ShapeTypeStructure, Ext: &eControlMappingSource_sourceKeyword})
+var sControlMappingSource_sourceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFrequency", ID: &iSourceFrequency, Members: &mSourceFrequency, Type: smithy.ShapeTypeEnum, Ext: &eControlMappingSource_sourceFrequency})
+var sControlMappingSource_troubleshootingText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "troubleshootingText", ID: &i_TroubleshootingText, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eControlMappingSource_troubleshootingText})
+var s_ControlMappingSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlMappingSources, Members: &m_ControlMappingSources, Type: smithy.ShapeTypeList, Ext: &e_ControlMappingSources})
+var s_ControlMappingSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlMappingSource, Members: &mControlMappingSource, Type: smithy.ShapeTypeStructure, Ext: &e_ControlMappingSources_member})
+var sControlMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlMetadata, Members: &mControlMetadata, Type: smithy.ShapeTypeStructure, Ext: &eControlMetadata})
+var sControlMetadata_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eControlMetadata_arn})
+var sControlMetadata_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eControlMetadata_id})
+var sControlMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eControlMetadata_name})
+var sControlMetadata_controlSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSources", ID: &i_ControlSources, Type: smithy.ShapeTypeString, Ext: &eControlMetadata_controlSources})
+var sControlMetadata_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlMetadata_createdAt})
+var sControlMetadata_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eControlMetadata_lastUpdatedAt})
+var s_ControlMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlMetadataList, Members: &m_ControlMetadataList, Type: smithy.ShapeTypeList, Ext: &e_ControlMetadataList})
+var s_ControlMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlMetadata, Members: &mControlMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_ControlMetadataList_member})
+var s_ControlName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &e_ControlName})
+var sControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlResponse, Members: &mControlResponse, Type: smithy.ShapeTypeEnum, Ext: &eControlResponse})
+var sControlResponse_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlResponse_MANUAL})
+var sControlResponse_AUTOMATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlResponse_AUTOMATE})
+var sControlResponse_DEFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlResponse_DEFER})
+var sControlResponse_IGNORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlResponse_IGNORE})
+var s_Controls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Controls, Members: &m_Controls, Type: smithy.ShapeTypeList, Ext: &e_Controls})
+var s_Controls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControl, Members: &mControl, Type: smithy.ShapeTypeStructure, Ext: &e_Controls_member})
+var s_ControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlsCount, Type: smithy.ShapeTypeInteger, Ext: &e_ControlsCount})
+var sControlSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlSet, Members: &mControlSet, Type: smithy.ShapeTypeStructure, Ext: &eControlSet})
+var sControlSet_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eControlSet_id})
+var sControlSet_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlSetName, Type: smithy.ShapeTypeString, Ext: &eControlSet_name})
+var sControlSet_controls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controls", ID: &i_Controls, Members: &m_Controls, Type: smithy.ShapeTypeList, Ext: &eControlSet_controls})
+var s_ControlSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &e_ControlSetId})
+var s_ControlSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlSetName, Type: smithy.ShapeTypeString, Ext: &e_ControlSetName})
+var s_ControlSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlSets, Members: &m_ControlSets, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_ControlSets})
+var s_ControlSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlSet, Members: &mControlSet, Type: smithy.ShapeTypeStructure, Ext: &e_ControlSets_member})
+var s_ControlSetsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlSetsCount, Type: smithy.ShapeTypeInteger, Ext: &e_ControlSetsCount})
+var sControlSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlSetStatus, Members: &mControlSetStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlSetStatus})
+var sControlSetStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlSetStatus_ACTIVE})
+var sControlSetStatus_UNDER_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlSetStatus_UNDER_REVIEW})
+var sControlSetStatus_REVIEWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVIEWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlSetStatus_REVIEWED})
+var s_ControlSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlSources, Type: smithy.ShapeTypeString, Ext: &e_ControlSources})
+var sControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlState, Members: &mControlState, Type: smithy.ShapeTypeEnum, Ext: &eControlState})
+var sControlState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlState_ACTIVE})
+var sControlState_END_OF_SUPPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_OF_SUPPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlState_END_OF_SUPPORT})
+var sControlStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlStatus, Members: &mControlStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlStatus})
+var sControlStatus_UNDER_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlStatus_UNDER_REVIEW})
+var sControlStatus_REVIEWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVIEWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlStatus_REVIEWED})
+var sControlStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlStatus_INACTIVE})
+var sControlType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlType, Members: &mControlType, Type: smithy.ShapeTypeEnum, Ext: &eControlType})
+var sControlType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlType_STANDARD})
+var sControlType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlType_CUSTOM})
+var sControlType_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlType_CORE})
+var sCreateAssessmentFrameworkControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentFrameworkControl, Members: &mCreateAssessmentFrameworkControl, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentFrameworkControl})
+var sCreateAssessmentFrameworkControl_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentFrameworkControl_id})
+var s_CreateAssessmentFrameworkControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateAssessmentFrameworkControls, Members: &m_CreateAssessmentFrameworkControls, Type: smithy.ShapeTypeList, Ext: &e_CreateAssessmentFrameworkControls})
+var s_CreateAssessmentFrameworkControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateAssessmentFrameworkControl, Members: &mCreateAssessmentFrameworkControl, Type: smithy.ShapeTypeStructure, Ext: &e_CreateAssessmentFrameworkControls_member})
+var sCreateAssessmentFrameworkControlSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentFrameworkControlSet, Members: &mCreateAssessmentFrameworkControlSet, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentFrameworkControlSet})
+var sCreateAssessmentFrameworkControlSet_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlSetName, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentFrameworkControlSet_name})
+var sCreateAssessmentFrameworkControlSet_controls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controls", ID: &i_CreateAssessmentFrameworkControls, Members: &m_CreateAssessmentFrameworkControls, Type: smithy.ShapeTypeList, Ext: &eCreateAssessmentFrameworkControlSet_controls})
+var s_CreateAssessmentFrameworkControlSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateAssessmentFrameworkControlSets, Members: &m_CreateAssessmentFrameworkControlSets, Type: smithy.ShapeTypeList, Ext: &e_CreateAssessmentFrameworkControlSets})
+var s_CreateAssessmentFrameworkControlSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateAssessmentFrameworkControlSet, Members: &mCreateAssessmentFrameworkControlSet, Type: smithy.ShapeTypeStructure, Ext: &e_CreateAssessmentFrameworkControlSets_member})
+var sCreateControlMappingSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlMappingSource, Members: &mCreateControlMappingSource, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlMappingSource})
+var sCreateControlMappingSource_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_SourceName, Type: smithy.ShapeTypeString, Ext: &eCreateControlMappingSource_sourceName})
+var sCreateControlMappingSource_sourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceDescription", ID: &i_SourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateControlMappingSource_sourceDescription})
+var sCreateControlMappingSource_sourceSetUpOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceSetUpOption", ID: &iSourceSetUpOption, Members: &mSourceSetUpOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateControlMappingSource_sourceSetUpOption})
+var sCreateControlMappingSource_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eCreateControlMappingSource_sourceType})
+var sCreateControlMappingSource_sourceKeyword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceKeyword", ID: &iSourceKeyword, Members: &mSourceKeyword, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlMappingSource_sourceKeyword})
+var sCreateControlMappingSource_sourceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFrequency", ID: &iSourceFrequency, Members: &mSourceFrequency, Type: smithy.ShapeTypeEnum, Ext: &eCreateControlMappingSource_sourceFrequency})
+var sCreateControlMappingSource_troubleshootingText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "troubleshootingText", ID: &i_TroubleshootingText, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateControlMappingSource_troubleshootingText})
+var s_CreateControlMappingSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateControlMappingSources, Members: &m_CreateControlMappingSources, Type: smithy.ShapeTypeList, Ext: &e_CreateControlMappingSources})
+var s_CreateControlMappingSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateControlMappingSource, Members: &mCreateControlMappingSource, Type: smithy.ShapeTypeStructure, Ext: &e_CreateControlMappingSources_member})
+var s_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedBy, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_CreatedBy})
+var sCreateDelegationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDelegationRequest, Members: &mCreateDelegationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDelegationRequest})
+var sCreateDelegationRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_DelegationComment, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateDelegationRequest_comment})
+var sCreateDelegationRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &eCreateDelegationRequest_controlSetId})
+var sCreateDelegationRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eCreateDelegationRequest_roleArn})
+var sCreateDelegationRequest_roleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleType", ID: &iRoleType, Members: &mRoleType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDelegationRequest_roleType})
+var s_CreateDelegationRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateDelegationRequests, Members: &m_CreateDelegationRequests, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_CreateDelegationRequests})
+var s_CreateDelegationRequests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateDelegationRequest, Members: &mCreateDelegationRequest, Type: smithy.ShapeTypeStructure, Ext: &e_CreateDelegationRequests_member})
+var sDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceType, Members: &mDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eDataSourceType})
+var sDataSourceType_AWS_CLOUDTRAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDTRAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AWS_CLOUDTRAIL})
+var sDataSourceType_AWS_CONFIG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CONFIG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AWS_CONFIG})
+var sDataSourceType_AWS_SECURITY_HUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECURITY_HUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AWS_SECURITY_HUB})
+var sDataSourceType_AWS_API_CALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_API_CALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_AWS_API_CALL})
+var sDataSourceType_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataSourceType_MANUAL})
+var sDefaultExportDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultExportDestination, Members: &mDefaultExportDestination, Type: smithy.ShapeTypeStructure, Ext: &eDefaultExportDestination})
+var sDefaultExportDestination_destinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationType", ID: &iExportDestinationType, Members: &mExportDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eDefaultExportDestination_destinationType})
+var sDefaultExportDestination_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_S3Url, Type: smithy.ShapeTypeString, Ext: &eDefaultExportDestination_destination})
+var sDelegation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegation, Members: &mDelegation, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eDelegation})
+var sDelegation_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDelegation_id})
+var sDelegation_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDelegation_assessmentName})
+var sDelegation_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDelegation_assessmentId})
+var sDelegation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDelegationStatus, Members: &mDelegationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDelegation_status})
+var sDelegation_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eDelegation_roleArn})
+var sDelegation_roleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleType", ID: &iRoleType, Members: &mRoleType, Type: smithy.ShapeTypeEnum, Ext: &eDelegation_roleType})
+var sDelegation_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDelegation_creationTime})
+var sDelegation_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDelegation_lastUpdated})
+var sDelegation_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &eDelegation_controlSetId})
+var sDelegation_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_DelegationComment, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDelegation_comment})
+var sDelegation_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDelegation_createdBy})
+var s_DelegationComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DelegationComment, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_DelegationComment})
+var s_DelegationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DelegationIds, Members: &m_DelegationIds, Type: smithy.ShapeTypeList, Ext: &e_DelegationIds})
+var s_DelegationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_DelegationIds_member})
+var sDelegationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegationMetadata, Members: &mDelegationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDelegationMetadata})
+var sDelegationMetadata_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDelegationMetadata_id})
+var sDelegationMetadata_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eDelegationMetadata_assessmentName})
+var sDelegationMetadata_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDelegationMetadata_assessmentId})
+var sDelegationMetadata_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDelegationStatus, Members: &mDelegationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDelegationMetadata_status})
+var sDelegationMetadata_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eDelegationMetadata_roleArn})
+var sDelegationMetadata_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDelegationMetadata_creationTime})
+var sDelegationMetadata_controlSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eDelegationMetadata_controlSetName})
+var s_DelegationMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DelegationMetadataList, Members: &m_DelegationMetadataList, Type: smithy.ShapeTypeList, Ext: &e_DelegationMetadataList})
+var s_DelegationMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDelegationMetadata, Members: &mDelegationMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_DelegationMetadataList_member})
+var s_Delegations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Delegations, Members: &m_Delegations, Type: smithy.ShapeTypeList, Ext: &e_Delegations})
+var s_Delegations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDelegation, Members: &mDelegation, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &e_Delegations_member})
+var sDelegationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegationStatus, Members: &mDelegationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDelegationStatus})
+var sDelegationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDelegationStatus_IN_PROGRESS})
+var sDelegationStatus_UNDER_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDelegationStatus_UNDER_REVIEW})
+var sDelegationStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDelegationStatus_COMPLETE})
+var sDeleteResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResources, Members: &mDeleteResources, Type: smithy.ShapeTypeEnum, Ext: &eDeleteResources})
+var sDeleteResources_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResources_ALL})
+var sDeleteResources_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResources_DEFAULT})
+var sDeregistrationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregistrationPolicy, Members: &mDeregistrationPolicy, Type: smithy.ShapeTypeStructure, Ext: &eDeregistrationPolicy})
+var sDeregistrationPolicy_deleteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteResources", ID: &iDeleteResources, Members: &mDeleteResources, Type: smithy.ShapeTypeEnum, Ext: &eDeregistrationPolicy_deleteResources})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_EmailAddress})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &e_EventName})
+var sEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvidence, Members: &mEvidence, Type: smithy.ShapeTypeStructure, Ext: &eEvidence})
+var sEvidence_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvidence_dataSource})
+var sEvidence_evidenceAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceAwsAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eEvidence_evidenceAwsAccountId})
+var sEvidence_time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "time", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEvidence_time})
+var sEvidence_eventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSource", ID: &i_AWSServiceName, Type: smithy.ShapeTypeString, Ext: &eEvidence_eventSource})
+var sEvidence_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &eEvidence_eventName})
+var sEvidence_evidenceByType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceByType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvidence_evidenceByType})
+var sEvidence_resourcesIncluded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesIncluded", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &eEvidence_resourcesIncluded})
+var sEvidence_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_EvidenceAttributes, Members: &m_EvidenceAttributes, Type: smithy.ShapeTypeMap, Ext: &eEvidence_attributes})
+var sEvidence_iamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamId", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eEvidence_iamId})
+var sEvidence_complianceCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceCheck", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvidence_complianceCheck})
+var sEvidence_awsOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsOrganization", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvidence_awsOrganization})
+var sEvidence_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eEvidence_awsAccountId})
+var sEvidence_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eEvidence_evidenceFolderId})
+var sEvidence_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eEvidence_id})
+var sEvidence_assessmentReportSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportSelection", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvidence_assessmentReportSelection})
+var s_EvidenceAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_EvidenceAttributeKey})
+var s_EvidenceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceAttributes, Members: &m_EvidenceAttributes, Type: smithy.ShapeTypeMap, Ext: &e_EvidenceAttributes})
+var s_EvidenceAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EvidenceAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_EvidenceAttributes_key})
+var s_EvidenceAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EvidenceAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_EvidenceAttributes_value})
+var s_EvidenceAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_EvidenceAttributeValue})
+var sEvidenceFinderBackfillStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvidenceFinderBackfillStatus, Members: &mEvidenceFinderBackfillStatus, Type: smithy.ShapeTypeEnum, Ext: &eEvidenceFinderBackfillStatus})
+var sEvidenceFinderBackfillStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderBackfillStatus_NOT_STARTED})
+var sEvidenceFinderBackfillStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderBackfillStatus_IN_PROGRESS})
+var sEvidenceFinderBackfillStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderBackfillStatus_COMPLETED})
+var sEvidenceFinderEnablement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvidenceFinderEnablement, Members: &mEvidenceFinderEnablement, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderEnablement})
+var sEvidenceFinderEnablement_eventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDataStoreArn", ID: &i_CloudTrailArn, Type: smithy.ShapeTypeString, Ext: &eEvidenceFinderEnablement_eventDataStoreArn})
+var sEvidenceFinderEnablement_enablementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enablementStatus", ID: &iEvidenceFinderEnablementStatus, Members: &mEvidenceFinderEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &eEvidenceFinderEnablement_enablementStatus})
+var sEvidenceFinderEnablement_backfillStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backfillStatus", ID: &iEvidenceFinderBackfillStatus, Members: &mEvidenceFinderBackfillStatus, Type: smithy.ShapeTypeEnum, Ext: &eEvidenceFinderEnablement_backfillStatus})
+var sEvidenceFinderEnablement_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEvidenceFinderEnablement_error})
+var sEvidenceFinderEnablementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvidenceFinderEnablementStatus, Members: &mEvidenceFinderEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &eEvidenceFinderEnablementStatus})
+var sEvidenceFinderEnablementStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderEnablementStatus_ENABLED})
+var sEvidenceFinderEnablementStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderEnablementStatus_DISABLED})
+var sEvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS})
+var sEvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS})
+var s_EvidenceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceIds, Members: &m_EvidenceIds, Type: smithy.ShapeTypeList, Ext: &e_EvidenceIds})
+var s_EvidenceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_EvidenceIds_member})
+var sEvidenceInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvidenceInsights, Members: &mEvidenceInsights, Type: smithy.ShapeTypeStructure, Ext: &eEvidenceInsights})
+var sEvidenceInsights_noncompliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noncompliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eEvidenceInsights_noncompliantEvidenceCount})
+var sEvidenceInsights_compliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eEvidenceInsights_compliantEvidenceCount})
+var sEvidenceInsights_inconclusiveEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inconclusiveEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eEvidenceInsights_inconclusiveEvidenceCount})
+var s_EvidenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceList, Members: &m_EvidenceList, Type: smithy.ShapeTypeList, Ext: &e_EvidenceList})
+var s_EvidenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvidence, Members: &mEvidence, Type: smithy.ShapeTypeStructure, Ext: &e_EvidenceList_member})
+var s_EvidenceSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvidenceSources, Members: &m_EvidenceSources, Type: smithy.ShapeTypeList, Ext: &e_EvidenceSources})
+var s_EvidenceSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_EvidenceSources_member})
+var sExportDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportDestinationType, Members: &mExportDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eExportDestinationType})
+var sExportDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportDestinationType_S3})
+var s_Filename = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filename, Type: smithy.ShapeTypeString, Ext: &e_Filename})
+var sFramework = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeStructure, Ext: &eFramework})
+var sFramework_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AuditManagerArn, Type: smithy.ShapeTypeString, Ext: &eFramework_arn})
+var sFramework_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eFramework_id})
+var sFramework_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &eFramework_name})
+var sFramework_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFrameworkType, Members: &mFrameworkType, Type: smithy.ShapeTypeEnum, Ext: &eFramework_type})
+var sFramework_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eFramework_complianceType})
+var sFramework_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eFramework_description})
+var sFramework_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &i_Filename, Type: smithy.ShapeTypeString, Ext: &eFramework_logo})
+var sFramework_controlSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSources", ID: &i_ControlSources, Type: smithy.ShapeTypeString, Ext: &eFramework_controlSources})
+var sFramework_controlSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSets", ID: &i_ControlSets, Members: &m_ControlSets, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eFramework_controlSets})
+var sFramework_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFramework_createdAt})
+var sFramework_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFramework_lastUpdatedAt})
+var sFramework_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eFramework_createdBy})
+var sFramework_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eFramework_lastUpdatedBy})
+var sFramework_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eFramework_tags})
+var s_FrameworkDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &e_FrameworkDescription})
+var sFrameworkMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrameworkMetadata, Members: &mFrameworkMetadata, Type: smithy.ShapeTypeStructure, Ext: &eFrameworkMetadata})
+var sFrameworkMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eFrameworkMetadata_name})
+var sFrameworkMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentFrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eFrameworkMetadata_description})
+var sFrameworkMetadata_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &i_Filename, Type: smithy.ShapeTypeString, Ext: &eFrameworkMetadata_logo})
+var sFrameworkMetadata_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eFrameworkMetadata_complianceType})
+var s_FrameworkMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrameworkMetadataList, Members: &m_FrameworkMetadataList, Type: smithy.ShapeTypeList, Ext: &e_FrameworkMetadataList})
+var s_FrameworkMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentFrameworkMetadata, Members: &mAssessmentFrameworkMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_FrameworkMetadataList_member})
+var s_FrameworkName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &e_FrameworkName})
+var sFrameworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrameworkType, Members: &mFrameworkType, Type: smithy.ShapeTypeEnum, Ext: &eFrameworkType})
+var sFrameworkType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrameworkType_STANDARD})
+var sFrameworkType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrameworkType_CUSTOM})
+var s_GenericArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericArn, Type: smithy.ShapeTypeString, Ext: &e_GenericArn})
+var s_HyperlinkName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HyperlinkName, Type: smithy.ShapeTypeString, Ext: &e_HyperlinkName})
+var s_IamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &e_IamArn})
+var sInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsights, Members: &mInsights, Type: smithy.ShapeTypeStructure, Ext: &eInsights})
+var sInsights_activeAssessmentsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeAssessmentsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_activeAssessmentsCount})
+var sInsights_noncompliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noncompliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_noncompliantEvidenceCount})
+var sInsights_compliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_compliantEvidenceCount})
+var sInsights_inconclusiveEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inconclusiveEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_inconclusiveEvidenceCount})
+var sInsights_assessmentControlsCountByNoncompliantEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentControlsCountByNoncompliantEvidence", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_assessmentControlsCountByNoncompliantEvidence})
+var sInsights_totalAssessmentControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalAssessmentControlsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsights_totalAssessmentControlsCount})
+var sInsights_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInsights_lastUpdated})
+var sInsightsByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightsByAssessment, Members: &mInsightsByAssessment, Type: smithy.ShapeTypeStructure, Ext: &eInsightsByAssessment})
+var sInsightsByAssessment_noncompliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noncompliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsightsByAssessment_noncompliantEvidenceCount})
+var sInsightsByAssessment_compliantEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compliantEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsightsByAssessment_compliantEvidenceCount})
+var sInsightsByAssessment_inconclusiveEvidenceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inconclusiveEvidenceCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsightsByAssessment_inconclusiveEvidenceCount})
+var sInsightsByAssessment_assessmentControlsCountByNoncompliantEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentControlsCountByNoncompliantEvidence", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsightsByAssessment_assessmentControlsCountByNoncompliantEvidence})
+var sInsightsByAssessment_totalAssessmentControlsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalAssessmentControlsCount", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eInsightsByAssessment_totalAssessmentControlsCount})
+var sInsightsByAssessment_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInsightsByAssessment_lastUpdated})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sKeywordInputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeywordInputType, Members: &mKeywordInputType, Type: smithy.ShapeTypeEnum, Ext: &eKeywordInputType})
+var sKeywordInputType_SELECT_FROM_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELECT_FROM_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeywordInputType_SELECT_FROM_LIST})
+var sKeywordInputType_UPLOAD_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPLOAD_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeywordInputType_UPLOAD_FILE})
+var sKeywordInputType_INPUT_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPUT_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeywordInputType_INPUT_TEXT})
+var s_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Keywords, Members: &m_Keywords, Type: smithy.ShapeTypeList, Ext: &e_Keywords})
+var s_Keywords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_KeywordValue, Type: smithy.ShapeTypeString, Ext: &e_Keywords_member})
+var s_KeywordValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeywordValue, Type: smithy.ShapeTypeString, Ext: &e_KeywordValue})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &e_KmsKey})
+var s_LastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedBy, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_LastUpdatedBy})
+var s_ListAssessmentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAssessmentMetadata, Members: &m_ListAssessmentMetadata, Type: smithy.ShapeTypeList, Ext: &e_ListAssessmentMetadata})
+var s_ListAssessmentMetadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentMetadataItem, Members: &mAssessmentMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &e_ListAssessmentMetadata_member})
+var sManualEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManualEvidence, Members: &mManualEvidence, Type: smithy.ShapeTypeStructure, Ext: &eManualEvidence})
+var sManualEvidence_s3ResourcePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3ResourcePath", ID: &i_S3Url, Type: smithy.ShapeTypeString, Ext: &eManualEvidence_s3ResourcePath})
+var sManualEvidence_textResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textResponse", ID: &i_ManualEvidenceTextResponse, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eManualEvidence_textResponse})
+var sManualEvidence_evidenceFileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFileName", ID: &i_ManualEvidenceLocalFileName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eManualEvidence_evidenceFileName})
+var s_ManualEvidenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManualEvidenceList, Members: &m_ManualEvidenceList, Type: smithy.ShapeTypeList, Ext: &e_ManualEvidenceList})
+var s_ManualEvidenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManualEvidence, Members: &mManualEvidence, Type: smithy.ShapeTypeStructure, Ext: &e_ManualEvidenceList_member})
+var s_ManualEvidenceLocalFileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManualEvidenceLocalFileName, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ManualEvidenceLocalFileName})
+var s_ManualEvidenceTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManualEvidenceTextResponse, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_ManualEvidenceTextResponse})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var sNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eNotification})
+var sNotification_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TimestampUUID, Type: smithy.ShapeTypeString, Ext: &eNotification_id})
+var sNotification_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eNotification_assessmentId})
+var sNotification_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eNotification_assessmentName})
+var sNotification_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Type: smithy.ShapeTypeString, Ext: &eNotification_controlSetId})
+var sNotification_controlSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eNotification_controlSetName})
+var sNotification_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eNotification_description})
+var sNotification_eventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eNotification_eventTime})
+var sNotification_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eNotification_source})
+var s_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &e_Notifications})
+var s_Notifications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &e_Notifications_member})
+var s_NullableInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &e_NullableInteger})
+var sObjectTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eObjectTypeEnum})
+var sObjectTypeEnum_ASSESSMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSESSMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_ASSESSMENT})
+var sObjectTypeEnum_CONTROL_SET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTROL_SET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_CONTROL_SET})
+var sObjectTypeEnum_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_CONTROL})
+var sObjectTypeEnum_DELEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_DELEGATION})
+var sObjectTypeEnum_ASSESSMENT_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSESSMENT_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_ASSESSMENT_REPORT})
+var s_organizationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_organizationId, Type: smithy.ShapeTypeString, Ext: &e_organizationId})
+var s_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatement, Type: smithy.ShapeTypeString, Ext: &e_QueryStatement})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResource_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_GenericArn, Type: smithy.ShapeTypeString, Ext: &eResource_arn})
+var sResource_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_value})
+var sResource_complianceCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceCheck", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResource_complianceCheck})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t66, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &e_Resources})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &e_Resources_member})
+var sRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeStructure, Ext: &eRole})
+var sRole_roleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleType", ID: &iRoleType, Members: &mRoleType, Type: smithy.ShapeTypeEnum, Ext: &eRole_roleType})
+var sRole_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamArn, Type: smithy.ShapeTypeString, Ext: &eRole_roleArn})
+var s_Roles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Roles, Members: &m_Roles, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &e_Roles})
+var s_Roles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeStructure, Ext: &e_Roles_member})
+var sRoleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleType, Members: &mRoleType, Type: smithy.ShapeTypeEnum, Ext: &eRoleType})
+var sRoleType_PROCESS_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESS_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoleType_PROCESS_OWNER})
+var sRoleType_RESOURCE_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoleType_RESOURCE_OWNER})
+var s_S3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Url, Type: smithy.ShapeTypeString, Ext: &e_S3Url})
+var sScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScope, Members: &mScope, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eScope})
+var sScope_awsAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccounts", ID: &i_AWSAccounts, Members: &m_AWSAccounts, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eScope_awsAccounts})
+var sScope_awsServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsServices", ID: &i_AWSServices, Members: &m_AWSServices, Type: smithy.ShapeTypeList, Ext: &eScope_awsServices})
+var sServiceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceMetadata, Members: &mServiceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eServiceMetadata})
+var sServiceMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AWSServiceName, Type: smithy.ShapeTypeString, Ext: &eServiceMetadata_name})
+var sServiceMetadata_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eServiceMetadata_displayName})
+var sServiceMetadata_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eServiceMetadata_description})
+var sServiceMetadata_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eServiceMetadata_category})
+var s_ServiceMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceMetadataList, Members: &m_ServiceMetadataList, Type: smithy.ShapeTypeList, Ext: &e_ServiceMetadataList})
+var s_ServiceMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceMetadata, Members: &mServiceMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceMetadataList_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSettingAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettingAttribute, Members: &mSettingAttribute, Type: smithy.ShapeTypeEnum, Ext: &eSettingAttribute})
+var sSettingAttribute_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_ALL})
+var sSettingAttribute_IS_AWS_ORG_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_AWS_ORG_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_IS_AWS_ORG_ENABLED})
+var sSettingAttribute_SNS_TOPIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS_TOPIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_SNS_TOPIC})
+var sSettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_ASSESSMENT_REPORTS_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION})
+var sSettingAttribute_DEFAULT_PROCESS_OWNERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_PROCESS_OWNERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_DEFAULT_PROCESS_OWNERS})
+var sSettingAttribute_EVIDENCE_FINDER_ENABLEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVIDENCE_FINDER_ENABLEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_EVIDENCE_FINDER_ENABLEMENT})
+var sSettingAttribute_DEREGISTRATION_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTRATION_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_DEREGISTRATION_POLICY})
+var sSettingAttribute_DEFAULT_EXPORT_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_EXPORT_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettingAttribute_DEFAULT_EXPORT_DESTINATION})
+var sSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettings, Members: &mSettings, Type: smithy.ShapeTypeStructure, Ext: &eSettings})
+var sSettings_isAwsOrgEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAwsOrgEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSettings_isAwsOrgEnabled})
+var sSettings_snsTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snsTopic", ID: &i_SNSTopic, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eSettings_snsTopic})
+var sSettings_defaultAssessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultAssessmentReportsDestination", ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eSettings_defaultAssessmentReportsDestination})
+var sSettings_defaultProcessOwners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultProcessOwners", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eSettings_defaultProcessOwners})
+var sSettings_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eSettings_kmsKey})
+var sSettings_evidenceFinderEnablement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFinderEnablement", ID: &iEvidenceFinderEnablement, Members: &mEvidenceFinderEnablement, Type: smithy.ShapeTypeStructure, Ext: &eSettings_evidenceFinderEnablement})
+var sSettings_deregistrationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deregistrationPolicy", ID: &iDeregistrationPolicy, Members: &mDeregistrationPolicy, Type: smithy.ShapeTypeStructure, Ext: &eSettings_deregistrationPolicy})
+var sSettings_defaultExportDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultExportDestination", ID: &iDefaultExportDestination, Members: &mDefaultExportDestination, Type: smithy.ShapeTypeStructure, Ext: &eSettings_defaultExportDestination})
+var sShareRequestAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareRequestAction, Members: &mShareRequestAction, Type: smithy.ShapeTypeEnum, Ext: &eShareRequestAction})
+var sShareRequestAction_ACCEPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestAction_ACCEPT})
+var sShareRequestAction_DECLINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECLINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestAction_DECLINE})
+var sShareRequestAction_REVOKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestAction_REVOKE})
+var s_ShareRequestComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareRequestComment, Type: smithy.ShapeTypeString, Ext: &e_ShareRequestComment})
+var sShareRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareRequestStatus, Members: &mShareRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eShareRequestStatus})
+var sShareRequestStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_ACTIVE})
+var sShareRequestStatus_REPLICATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_REPLICATING})
+var sShareRequestStatus_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_SHARED})
+var sShareRequestStatus_EXPIRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_EXPIRING})
+var sShareRequestStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_FAILED})
+var sShareRequestStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_EXPIRED})
+var sShareRequestStatus_DECLINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECLINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_DECLINED})
+var sShareRequestStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestStatus_REVOKED})
+var sShareRequestType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareRequestType, Members: &mShareRequestType, Type: smithy.ShapeTypeEnum, Ext: &eShareRequestType})
+var sShareRequestType_SENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestType_SENT})
+var sShareRequestType_RECEIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShareRequestType_RECEIVED})
+var s_SnsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsArn, Type: smithy.ShapeTypeString, Ext: &e_SnsArn})
+var s_SNSTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNSTopic, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_SNSTopic})
+var s_SourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceDescription, Type: smithy.ShapeTypeString, Ext: &e_SourceDescription})
+var sSourceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFrequency, Members: &mSourceFrequency, Type: smithy.ShapeTypeEnum, Ext: &eSourceFrequency})
+var sSourceFrequency_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceFrequency_DAILY})
+var sSourceFrequency_WEEKLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceFrequency_WEEKLY})
+var sSourceFrequency_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceFrequency_MONTHLY})
+var sSourceKeyword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceKeyword, Members: &mSourceKeyword, Type: smithy.ShapeTypeStructure, Ext: &eSourceKeyword})
+var sSourceKeyword_keywordInputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keywordInputType", ID: &iKeywordInputType, Members: &mKeywordInputType, Type: smithy.ShapeTypeEnum, Ext: &eSourceKeyword_keywordInputType})
+var sSourceKeyword_keywordValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keywordValue", ID: &i_KeywordValue, Type: smithy.ShapeTypeString, Ext: &eSourceKeyword_keywordValue})
+var s_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceName, Type: smithy.ShapeTypeString, Ext: &e_SourceName})
+var sSourceSetUpOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceSetUpOption, Members: &mSourceSetUpOption, Type: smithy.ShapeTypeEnum, Ext: &eSourceSetUpOption})
+var sSourceSetUpOption_SYSTEM_CONTROLS_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_CONTROLS_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceSetUpOption_SYSTEM_CONTROLS_MAPPING})
+var sSourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCEDURAL_CONTROLS_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING})
+var sSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eSourceType})
+var sSourceType_AWS_CLOUDTRAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDTRAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_AWS_CLOUDTRAIL})
+var sSourceType_AWS_CONFIG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CONFIG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_AWS_CONFIG})
+var sSourceType_AWS_SECURITY_HUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECURITY_HUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_AWS_SECURITY_HUB})
+var sSourceType_AWS_API_CALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_API_CALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_AWS_API_CALL})
+var sSourceType_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_MANUAL})
+var sSourceType_COMMON_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMON_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_COMMON_CONTROL})
+var sSourceType_CORE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_CORE_CONTROL})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TestingInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestingInformation, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_TestingInformation})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TimestampUUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampUUID, Type: smithy.ShapeTypeString, Ext: &e_TimestampUUID})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var s_TroubleshootingText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TroubleshootingText, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_TroubleshootingText})
+var sUpdateAssessmentFrameworkControlSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkControlSet, Members: &mUpdateAssessmentFrameworkControlSet, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkControlSet})
+var sUpdateAssessmentFrameworkControlSet_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ControlSetName, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkControlSet_id})
+var sUpdateAssessmentFrameworkControlSet_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlSetName, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkControlSet_name})
+var sUpdateAssessmentFrameworkControlSet_controls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controls", ID: &i_CreateAssessmentFrameworkControls, Members: &m_CreateAssessmentFrameworkControls, Type: smithy.ShapeTypeList, Ext: &eUpdateAssessmentFrameworkControlSet_controls})
+var s_UpdateAssessmentFrameworkControlSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateAssessmentFrameworkControlSets, Members: &m_UpdateAssessmentFrameworkControlSets, Type: smithy.ShapeTypeList, Ext: &e_UpdateAssessmentFrameworkControlSets})
+var s_UpdateAssessmentFrameworkControlSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateAssessmentFrameworkControlSet, Members: &mUpdateAssessmentFrameworkControlSet, Type: smithy.ShapeTypeStructure, Ext: &e_UpdateAssessmentFrameworkControlSets_member})
+var sURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iURL, Members: &mURL, Type: smithy.ShapeTypeStructure, Ext: &eURL})
+var sURL_hyperlinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hyperlinkName", ID: &i_HyperlinkName, Type: smithy.ShapeTypeString, Ext: &eURL_hyperlinkName})
+var sURL_link = smithy.NewStaticSchema(smithy.StaticSchema{Member: "link", ID: &i_UrlLink, Type: smithy.ShapeTypeString, Ext: &eURL_link})
+var s_UrlLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlLink, Type: smithy.ShapeTypeString, Ext: &e_UrlLink})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &e_Username})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var s_ValidationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList, Ext: &e_ValidationErrors})
+var s_ValidationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ValidationErrors_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fields})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sAssociateAssessmentReportEvidenceFolderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAssessmentReportEvidenceFolderRequest, Members: &mAssociateAssessmentReportEvidenceFolderRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAssessmentReportEvidenceFolderRequest})
+var sAssociateAssessmentReportEvidenceFolderRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eAssociateAssessmentReportEvidenceFolderRequest_assessmentId})
+var sAssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eAssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId})
+var sAssociateAssessmentReportEvidenceFolderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAssessmentReportEvidenceFolderResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAssessmentReportEvidenceFolderResponse})
+var sBatchAssociateAssessmentReportEvidenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateAssessmentReportEvidenceRequest, Members: &mBatchAssociateAssessmentReportEvidenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateAssessmentReportEvidenceRequest})
+var sBatchAssociateAssessmentReportEvidenceRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateAssessmentReportEvidenceRequest_assessmentId})
+var sBatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId})
+var sBatchAssociateAssessmentReportEvidenceRequest_evidenceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceIds", ID: &i_EvidenceIds, Members: &m_EvidenceIds, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateAssessmentReportEvidenceRequest_evidenceIds})
+var sBatchAssociateAssessmentReportEvidenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateAssessmentReportEvidenceResponse, Members: &mBatchAssociateAssessmentReportEvidenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateAssessmentReportEvidenceResponse})
+var sBatchAssociateAssessmentReportEvidenceResponse_evidenceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceIds", ID: &i_EvidenceIds, Members: &m_EvidenceIds, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateAssessmentReportEvidenceResponse_evidenceIds})
+var sBatchAssociateAssessmentReportEvidenceResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_AssessmentReportEvidenceErrors, Members: &m_AssessmentReportEvidenceErrors, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateAssessmentReportEvidenceResponse_errors})
+var sBatchCreateDelegationByAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateDelegationByAssessmentRequest, Members: &mBatchCreateDelegationByAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateDelegationByAssessmentRequest})
+var sBatchCreateDelegationByAssessmentRequest_createDelegationRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDelegationRequests", ID: &i_CreateDelegationRequests, Members: &m_CreateDelegationRequests, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eBatchCreateDelegationByAssessmentRequest_createDelegationRequests})
+var sBatchCreateDelegationByAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchCreateDelegationByAssessmentRequest_assessmentId})
+var sBatchCreateDelegationByAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateDelegationByAssessmentResponse, Members: &mBatchCreateDelegationByAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateDelegationByAssessmentResponse})
+var sBatchCreateDelegationByAssessmentResponse_delegations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegations", ID: &i_Delegations, Members: &m_Delegations, Type: smithy.ShapeTypeList, Ext: &eBatchCreateDelegationByAssessmentResponse_delegations})
+var sBatchCreateDelegationByAssessmentResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchCreateDelegationByAssessmentErrors, Members: &m_BatchCreateDelegationByAssessmentErrors, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eBatchCreateDelegationByAssessmentResponse_errors})
+var sBatchDeleteDelegationByAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteDelegationByAssessmentRequest, Members: &mBatchDeleteDelegationByAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteDelegationByAssessmentRequest})
+var sBatchDeleteDelegationByAssessmentRequest_delegationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegationIds", ID: &i_DelegationIds, Members: &m_DelegationIds, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteDelegationByAssessmentRequest_delegationIds})
+var sBatchDeleteDelegationByAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteDelegationByAssessmentRequest_assessmentId})
+var sBatchDeleteDelegationByAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteDelegationByAssessmentResponse, Members: &mBatchDeleteDelegationByAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteDelegationByAssessmentResponse})
+var sBatchDeleteDelegationByAssessmentResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDeleteDelegationByAssessmentErrors, Members: &m_BatchDeleteDelegationByAssessmentErrors, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteDelegationByAssessmentResponse_errors})
+var sBatchDisassociateAssessmentReportEvidenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateAssessmentReportEvidenceRequest, Members: &mBatchDisassociateAssessmentReportEvidenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateAssessmentReportEvidenceRequest})
+var sBatchDisassociateAssessmentReportEvidenceRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateAssessmentReportEvidenceRequest_assessmentId})
+var sBatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId})
+var sBatchDisassociateAssessmentReportEvidenceRequest_evidenceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceIds", ID: &i_EvidenceIds, Members: &m_EvidenceIds, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateAssessmentReportEvidenceRequest_evidenceIds})
+var sBatchDisassociateAssessmentReportEvidenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateAssessmentReportEvidenceResponse, Members: &mBatchDisassociateAssessmentReportEvidenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateAssessmentReportEvidenceResponse})
+var sBatchDisassociateAssessmentReportEvidenceResponse_evidenceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceIds", ID: &i_EvidenceIds, Members: &m_EvidenceIds, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateAssessmentReportEvidenceResponse_evidenceIds})
+var sBatchDisassociateAssessmentReportEvidenceResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_AssessmentReportEvidenceErrors, Members: &m_AssessmentReportEvidenceErrors, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateAssessmentReportEvidenceResponse_errors})
+var sBatchImportEvidenceToAssessmentControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchImportEvidenceToAssessmentControlRequest, Members: &mBatchImportEvidenceToAssessmentControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchImportEvidenceToAssessmentControlRequest})
+var sBatchImportEvidenceToAssessmentControlRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchImportEvidenceToAssessmentControlRequest_assessmentId})
+var sBatchImportEvidenceToAssessmentControlRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchImportEvidenceToAssessmentControlRequest_controlSetId})
+var sBatchImportEvidenceToAssessmentControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eBatchImportEvidenceToAssessmentControlRequest_controlId})
+var sBatchImportEvidenceToAssessmentControlRequest_manualEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualEvidence", ID: &i_ManualEvidenceList, Members: &m_ManualEvidenceList, Type: smithy.ShapeTypeList, Ext: &eBatchImportEvidenceToAssessmentControlRequest_manualEvidence})
+var sBatchImportEvidenceToAssessmentControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchImportEvidenceToAssessmentControlResponse, Members: &mBatchImportEvidenceToAssessmentControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchImportEvidenceToAssessmentControlResponse})
+var sBatchImportEvidenceToAssessmentControlResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchImportEvidenceToAssessmentControlErrors, Members: &m_BatchImportEvidenceToAssessmentControlErrors, Type: smithy.ShapeTypeList, Ext: &eBatchImportEvidenceToAssessmentControlResponse_errors})
+var sCreateAssessmentFrameworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentFrameworkRequest, Members: &mCreateAssessmentFrameworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentFrameworkRequest})
+var sCreateAssessmentFrameworkRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentFrameworkRequest_name})
+var sCreateAssessmentFrameworkRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentFrameworkRequest_description})
+var sCreateAssessmentFrameworkRequest_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentFrameworkRequest_complianceType})
+var sCreateAssessmentFrameworkRequest_controlSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSets", ID: &i_CreateAssessmentFrameworkControlSets, Members: &m_CreateAssessmentFrameworkControlSets, Type: smithy.ShapeTypeList, Ext: &eCreateAssessmentFrameworkRequest_controlSets})
+var sCreateAssessmentFrameworkRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAssessmentFrameworkRequest_tags})
+var sCreateAssessmentFrameworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentFrameworkResponse, Members: &mCreateAssessmentFrameworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentFrameworkResponse})
+var sCreateAssessmentFrameworkResponse_framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentFrameworkResponse_framework})
+var sCreateAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentRequest, Members: &mCreateAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentRequest})
+var sCreateAssessmentRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentRequest_name})
+var sCreateAssessmentRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentRequest_description})
+var sCreateAssessmentRequest_assessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportsDestination", ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentRequest_assessmentReportsDestination})
+var sCreateAssessmentRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &iScope, Members: &mScope, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentRequest_scope})
+var sCreateAssessmentRequest_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eCreateAssessmentRequest_roles})
+var sCreateAssessmentRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentRequest_frameworkId})
+var sCreateAssessmentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateAssessmentRequest_tags})
+var sCreateAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentResponse, Members: &mCreateAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentResponse})
+var sCreateAssessmentResponse_assessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessment", ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentResponse_assessment})
+var sCreateAssessmentReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentReportRequest, Members: &mCreateAssessmentReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentReportRequest})
+var sCreateAssessmentReportRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssessmentReportName, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentReportRequest_name})
+var sCreateAssessmentReportRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_AssessmentReportDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentReportRequest_description})
+var sCreateAssessmentReportRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentReportRequest_assessmentId})
+var sCreateAssessmentReportRequest_queryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString, Ext: &eCreateAssessmentReportRequest_queryStatement})
+var sCreateAssessmentReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAssessmentReportResponse, Members: &mCreateAssessmentReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentReportResponse})
+var sCreateAssessmentReportResponse_assessmentReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReport", ID: &iAssessmentReport, Members: &mAssessmentReport, Type: smithy.ShapeTypeStructure, Ext: &eCreateAssessmentReportResponse_assessmentReport})
+var sCreateControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlRequest, Members: &mCreateControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlRequest})
+var sCreateControlRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eCreateControlRequest_name})
+var sCreateControlRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ControlDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateControlRequest_description})
+var sCreateControlRequest_testingInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testingInformation", ID: &i_TestingInformation, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateControlRequest_testingInformation})
+var sCreateControlRequest_actionPlanTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanTitle", ID: &i_ActionPlanTitle, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateControlRequest_actionPlanTitle})
+var sCreateControlRequest_actionPlanInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanInstructions", ID: &i_ActionPlanInstructions, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eCreateControlRequest_actionPlanInstructions})
+var sCreateControlRequest_controlMappingSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlMappingSources", ID: &i_CreateControlMappingSources, Members: &m_CreateControlMappingSources, Type: smithy.ShapeTypeList, Ext: &eCreateControlRequest_controlMappingSources})
+var sCreateControlRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateControlRequest_tags})
+var sCreateControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlResponse, Members: &mCreateControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlResponse})
+var sCreateControlResponse_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &iControl, Members: &mControl, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlResponse_control})
+var sDeleteAssessmentFrameworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFrameworkRequest, Members: &mDeleteAssessmentFrameworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentFrameworkRequest})
+var sDeleteAssessmentFrameworkRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteAssessmentFrameworkRequest_frameworkId})
+var sDeleteAssessmentFrameworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFrameworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentFrameworkResponse})
+var sDeleteAssessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFrameworkShareRequest, Members: &mDeleteAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentFrameworkShareRequest})
+var sDeleteAssessmentFrameworkShareRequest_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteAssessmentFrameworkShareRequest_requestId})
+var sDeleteAssessmentFrameworkShareRequest_requestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestType", ID: &iShareRequestType, Members: &mShareRequestType, Traits: &t71, Type: smithy.ShapeTypeEnum, Ext: &eDeleteAssessmentFrameworkShareRequest_requestType})
+var sDeleteAssessmentFrameworkShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentFrameworkShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentFrameworkShareResponse})
+var sDeleteAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentRequest, Members: &mDeleteAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentRequest})
+var sDeleteAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteAssessmentRequest_assessmentId})
+var sDeleteAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentResponse})
+var sDeleteAssessmentReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentReportRequest, Members: &mDeleteAssessmentReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentReportRequest})
+var sDeleteAssessmentReportRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteAssessmentReportRequest_assessmentId})
+var sDeleteAssessmentReportRequest_assessmentReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteAssessmentReportRequest_assessmentReportId})
+var sDeleteAssessmentReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAssessmentReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAssessmentReportResponse})
+var sDeleteControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlRequest, Members: &mDeleteControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteControlRequest})
+var sDeleteControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDeleteControlRequest_controlId})
+var sDeleteControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteControlResponse})
+var sDeregisterAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterAccountRequest})
+var sDeregisterAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterAccountResponse, Members: &mDeregisterAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterAccountResponse})
+var sDeregisterAccountResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeregisterAccountResponse_status})
+var sDeregisterOrganizationAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationAdminAccountRequest, Members: &mDeregisterOrganizationAdminAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterOrganizationAdminAccountRequest})
+var sDeregisterOrganizationAdminAccountRequest_adminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeregisterOrganizationAdminAccountRequest_adminAccountId})
+var sDeregisterOrganizationAdminAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationAdminAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterOrganizationAdminAccountResponse})
+var sDisassociateAssessmentReportEvidenceFolderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAssessmentReportEvidenceFolderRequest, Members: &mDisassociateAssessmentReportEvidenceFolderRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAssessmentReportEvidenceFolderRequest})
+var sDisassociateAssessmentReportEvidenceFolderRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eDisassociateAssessmentReportEvidenceFolderRequest_assessmentId})
+var sDisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId})
+var sDisassociateAssessmentReportEvidenceFolderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAssessmentReportEvidenceFolderResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAssessmentReportEvidenceFolderResponse})
+var sGetAccountStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountStatusRequest})
+var sGetAccountStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountStatusResponse, Members: &mGetAccountStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountStatusResponse})
+var sGetAccountStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountStatusResponse_status})
+var sGetAssessmentFrameworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentFrameworkRequest, Members: &mGetAssessmentFrameworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentFrameworkRequest})
+var sGetAssessmentFrameworkRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetAssessmentFrameworkRequest_frameworkId})
+var sGetAssessmentFrameworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentFrameworkResponse, Members: &mGetAssessmentFrameworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentFrameworkResponse})
+var sGetAssessmentFrameworkResponse_framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentFrameworkResponse_framework})
+var sGetAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentRequest, Members: &mGetAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentRequest})
+var sGetAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetAssessmentRequest_assessmentId})
+var sGetAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentResponse, Members: &mGetAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentResponse})
+var sGetAssessmentResponse_assessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessment", ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentResponse_assessment})
+var sGetAssessmentResponse_userRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userRole", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentResponse_userRole})
+var sGetAssessmentReportUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentReportUrlRequest, Members: &mGetAssessmentReportUrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentReportUrlRequest})
+var sGetAssessmentReportUrlRequest_assessmentReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetAssessmentReportUrlRequest_assessmentReportId})
+var sGetAssessmentReportUrlRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetAssessmentReportUrlRequest_assessmentId})
+var sGetAssessmentReportUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentReportUrlResponse, Members: &mGetAssessmentReportUrlResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentReportUrlResponse})
+var sGetAssessmentReportUrlResponse_preSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preSignedUrl", ID: &iURL, Members: &mURL, Type: smithy.ShapeTypeStructure, Ext: &eGetAssessmentReportUrlResponse_preSignedUrl})
+var sGetChangeLogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeLogsRequest, Members: &mGetChangeLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeLogsRequest})
+var sGetChangeLogsRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetChangeLogsRequest_assessmentId})
+var sGetChangeLogsRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetChangeLogsRequest_controlSetId})
+var sGetChangeLogsRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eGetChangeLogsRequest_controlId})
+var sGetChangeLogsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetChangeLogsRequest_nextToken})
+var sGetChangeLogsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eGetChangeLogsRequest_maxResults})
+var sGetChangeLogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChangeLogsResponse, Members: &mGetChangeLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChangeLogsResponse})
+var sGetChangeLogsResponse_changeLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeLogs", ID: &i_ChangeLogs, Members: &m_ChangeLogs, Type: smithy.ShapeTypeList, Ext: &eGetChangeLogsResponse_changeLogs})
+var sGetChangeLogsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetChangeLogsResponse_nextToken})
+var sGetControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlRequest, Members: &mGetControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetControlRequest})
+var sGetControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetControlRequest_controlId})
+var sGetControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlResponse, Members: &mGetControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetControlResponse})
+var sGetControlResponse_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &iControl, Members: &mControl, Type: smithy.ShapeTypeStructure, Ext: &eGetControlResponse_control})
+var sGetDelegationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegationsRequest, Members: &mGetDelegationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDelegationsRequest})
+var sGetDelegationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetDelegationsRequest_nextToken})
+var sGetDelegationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eGetDelegationsRequest_maxResults})
+var sGetDelegationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDelegationsResponse, Members: &mGetDelegationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDelegationsResponse})
+var sGetDelegationsResponse_delegations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegations", ID: &i_DelegationMetadataList, Members: &m_DelegationMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetDelegationsResponse_delegations})
+var sGetDelegationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetDelegationsResponse_nextToken})
+var sGetEvidenceByEvidenceFolderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceByEvidenceFolderRequest, Members: &mGetEvidenceByEvidenceFolderRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceByEvidenceFolderRequest})
+var sGetEvidenceByEvidenceFolderRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceByEvidenceFolderRequest_assessmentId})
+var sGetEvidenceByEvidenceFolderRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceByEvidenceFolderRequest_controlSetId})
+var sGetEvidenceByEvidenceFolderRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceByEvidenceFolderRequest_evidenceFolderId})
+var sGetEvidenceByEvidenceFolderRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceByEvidenceFolderRequest_nextToken})
+var sGetEvidenceByEvidenceFolderRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eGetEvidenceByEvidenceFolderRequest_maxResults})
+var sGetEvidenceByEvidenceFolderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceByEvidenceFolderResponse, Members: &mGetEvidenceByEvidenceFolderResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceByEvidenceFolderResponse})
+var sGetEvidenceByEvidenceFolderResponse_evidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidence", ID: &i_EvidenceList, Members: &m_EvidenceList, Type: smithy.ShapeTypeList, Ext: &eGetEvidenceByEvidenceFolderResponse_evidence})
+var sGetEvidenceByEvidenceFolderResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceByEvidenceFolderResponse_nextToken})
+var sGetEvidenceFileUploadUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFileUploadUrlRequest, Members: &mGetEvidenceFileUploadUrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFileUploadUrlRequest})
+var sGetEvidenceFileUploadUrlRequest_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_ManualEvidenceLocalFileName, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFileUploadUrlRequest_fileName})
+var sGetEvidenceFileUploadUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFileUploadUrlResponse, Members: &mGetEvidenceFileUploadUrlResponse, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFileUploadUrlResponse})
+var sGetEvidenceFileUploadUrlResponse_evidenceFileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFileName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFileUploadUrlResponse_evidenceFileName})
+var sGetEvidenceFileUploadUrlResponse_uploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadUrl", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFileUploadUrlResponse_uploadUrl})
+var sGetEvidenceFolderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFolderRequest, Members: &mGetEvidenceFolderRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFolderRequest})
+var sGetEvidenceFolderRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFolderRequest_assessmentId})
+var sGetEvidenceFolderRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFolderRequest_controlSetId})
+var sGetEvidenceFolderRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFolderRequest_evidenceFolderId})
+var sGetEvidenceFolderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFolderResponse, Members: &mGetEvidenceFolderResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFolderResponse})
+var sGetEvidenceFolderResponse_evidenceFolder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolder", ID: &iAssessmentEvidenceFolder, Members: &mAssessmentEvidenceFolder, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFolderResponse_evidenceFolder})
+var sGetEvidenceFoldersByAssessmentControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessmentControlRequest, Members: &mGetEvidenceFoldersByAssessmentControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFoldersByAssessmentControlRequest})
+var sGetEvidenceFoldersByAssessmentControlRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentControlRequest_assessmentId})
+var sGetEvidenceFoldersByAssessmentControlRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentControlRequest_controlSetId})
+var sGetEvidenceFoldersByAssessmentControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentControlRequest_controlId})
+var sGetEvidenceFoldersByAssessmentControlRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentControlRequest_nextToken})
+var sGetEvidenceFoldersByAssessmentControlRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eGetEvidenceFoldersByAssessmentControlRequest_maxResults})
+var sGetEvidenceFoldersByAssessmentControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessmentControlResponse, Members: &mGetEvidenceFoldersByAssessmentControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFoldersByAssessmentControlResponse})
+var sGetEvidenceFoldersByAssessmentControlResponse_evidenceFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolders", ID: &i_AssessmentEvidenceFolders, Members: &m_AssessmentEvidenceFolders, Type: smithy.ShapeTypeList, Ext: &eGetEvidenceFoldersByAssessmentControlResponse_evidenceFolders})
+var sGetEvidenceFoldersByAssessmentControlResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentControlResponse_nextToken})
+var sGetEvidenceFoldersByAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessmentRequest, Members: &mGetEvidenceFoldersByAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFoldersByAssessmentRequest})
+var sGetEvidenceFoldersByAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentRequest_assessmentId})
+var sGetEvidenceFoldersByAssessmentRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentRequest_nextToken})
+var sGetEvidenceFoldersByAssessmentRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eGetEvidenceFoldersByAssessmentRequest_maxResults})
+var sGetEvidenceFoldersByAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceFoldersByAssessmentResponse, Members: &mGetEvidenceFoldersByAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceFoldersByAssessmentResponse})
+var sGetEvidenceFoldersByAssessmentResponse_evidenceFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolders", ID: &i_AssessmentEvidenceFolders, Members: &m_AssessmentEvidenceFolders, Type: smithy.ShapeTypeList, Ext: &eGetEvidenceFoldersByAssessmentResponse_evidenceFolders})
+var sGetEvidenceFoldersByAssessmentResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceFoldersByAssessmentResponse_nextToken})
+var sGetEvidenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceRequest, Members: &mGetEvidenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceRequest})
+var sGetEvidenceRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceRequest_assessmentId})
+var sGetEvidenceRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceRequest_controlSetId})
+var sGetEvidenceRequest_evidenceFolderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFolderId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceRequest_evidenceFolderId})
+var sGetEvidenceRequest_evidenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetEvidenceRequest_evidenceId})
+var sGetEvidenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvidenceResponse, Members: &mGetEvidenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceResponse})
+var sGetEvidenceResponse_evidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidence", ID: &iEvidence, Members: &mEvidence, Type: smithy.ShapeTypeStructure, Ext: &eGetEvidenceResponse_evidence})
+var sGetInsightsByAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightsByAssessmentRequest, Members: &mGetInsightsByAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsByAssessmentRequest})
+var sGetInsightsByAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetInsightsByAssessmentRequest_assessmentId})
+var sGetInsightsByAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightsByAssessmentResponse, Members: &mGetInsightsByAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsByAssessmentResponse})
+var sGetInsightsByAssessmentResponse_insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insights", ID: &iInsightsByAssessment, Members: &mInsightsByAssessment, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsByAssessmentResponse_insights})
+var sGetInsightsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsRequest})
+var sGetInsightsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightsResponse, Members: &mGetInsightsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsResponse})
+var sGetInsightsResponse_insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "insights", ID: &iInsights, Members: &mInsights, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightsResponse_insights})
+var sGetOrganizationAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOrganizationAdminAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetOrganizationAdminAccountRequest})
+var sGetOrganizationAdminAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOrganizationAdminAccountResponse, Members: &mGetOrganizationAdminAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetOrganizationAdminAccountResponse})
+var sGetOrganizationAdminAccountResponse_adminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetOrganizationAdminAccountResponse_adminAccountId})
+var sGetOrganizationAdminAccountResponse_organizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationId", ID: &i_organizationId, Type: smithy.ShapeTypeString, Ext: &eGetOrganizationAdminAccountResponse_organizationId})
+var sGetServicesInScopeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicesInScopeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetServicesInScopeRequest})
+var sGetServicesInScopeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicesInScopeResponse, Members: &mGetServicesInScopeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetServicesInScopeResponse})
+var sGetServicesInScopeResponse_serviceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceMetadata", ID: &i_ServiceMetadataList, Members: &m_ServiceMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetServicesInScopeResponse_serviceMetadata})
+var sGetSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSettingsRequest, Members: &mGetSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSettingsRequest})
+var sGetSettingsRequest_attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attribute", ID: &iSettingAttribute, Members: &mSettingAttribute, Traits: &t70, Type: smithy.ShapeTypeEnum, Ext: &eGetSettingsRequest_attribute})
+var sGetSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSettingsResponse, Members: &mGetSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSettingsResponse})
+var sGetSettingsResponse_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iSettings, Members: &mSettings, Type: smithy.ShapeTypeStructure, Ext: &eGetSettingsResponse_settings})
+var sListAssessmentControlInsightsByControlDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentControlInsightsByControlDomainRequest, Members: &mListAssessmentControlInsightsByControlDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentControlInsightsByControlDomainRequest})
+var sListAssessmentControlInsightsByControlDomainRequest_controlDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlDomainId", ID: &i_ControlDomainId, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListAssessmentControlInsightsByControlDomainRequest_controlDomainId})
+var sListAssessmentControlInsightsByControlDomainRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eListAssessmentControlInsightsByControlDomainRequest_assessmentId})
+var sListAssessmentControlInsightsByControlDomainRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListAssessmentControlInsightsByControlDomainRequest_nextToken})
+var sListAssessmentControlInsightsByControlDomainRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListAssessmentControlInsightsByControlDomainRequest_maxResults})
+var sListAssessmentControlInsightsByControlDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentControlInsightsByControlDomainResponse, Members: &mListAssessmentControlInsightsByControlDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentControlInsightsByControlDomainResponse})
+var sListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlInsightsByAssessment", ID: &i_ControlInsightsMetadataByAssessment, Members: &m_ControlInsightsMetadataByAssessment, Type: smithy.ShapeTypeList, Ext: &eListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment})
+var sListAssessmentControlInsightsByControlDomainResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAssessmentControlInsightsByControlDomainResponse_nextToken})
+var sListAssessmentFrameworkShareRequestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworkShareRequestsRequest, Members: &mListAssessmentFrameworkShareRequestsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentFrameworkShareRequestsRequest})
+var sListAssessmentFrameworkShareRequestsRequest_requestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestType", ID: &iShareRequestType, Members: &mShareRequestType, Traits: &t71, Type: smithy.ShapeTypeEnum, Ext: &eListAssessmentFrameworkShareRequestsRequest_requestType})
+var sListAssessmentFrameworkShareRequestsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListAssessmentFrameworkShareRequestsRequest_nextToken})
+var sListAssessmentFrameworkShareRequestsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListAssessmentFrameworkShareRequestsRequest_maxResults})
+var sListAssessmentFrameworkShareRequestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworkShareRequestsResponse, Members: &mListAssessmentFrameworkShareRequestsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentFrameworkShareRequestsResponse})
+var sListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentFrameworkShareRequests", ID: &i_AssessmentFrameworkShareRequestList, Members: &m_AssessmentFrameworkShareRequestList, Type: smithy.ShapeTypeList, Ext: &eListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests})
+var sListAssessmentFrameworkShareRequestsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAssessmentFrameworkShareRequestsResponse_nextToken})
+var sListAssessmentFrameworksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworksRequest, Members: &mListAssessmentFrameworksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentFrameworksRequest})
+var sListAssessmentFrameworksRequest_frameworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkType", ID: &iFrameworkType, Members: &mFrameworkType, Traits: &t79, Type: smithy.ShapeTypeEnum, Ext: &eListAssessmentFrameworksRequest_frameworkType})
+var sListAssessmentFrameworksRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListAssessmentFrameworksRequest_nextToken})
+var sListAssessmentFrameworksRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListAssessmentFrameworksRequest_maxResults})
+var sListAssessmentFrameworksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentFrameworksResponse, Members: &mListAssessmentFrameworksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentFrameworksResponse})
+var sListAssessmentFrameworksResponse_frameworkMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkMetadataList", ID: &i_FrameworkMetadataList, Members: &m_FrameworkMetadataList, Type: smithy.ShapeTypeList, Ext: &eListAssessmentFrameworksResponse_frameworkMetadataList})
+var sListAssessmentFrameworksResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAssessmentFrameworksResponse_nextToken})
+var sListAssessmentReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentReportsRequest, Members: &mListAssessmentReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentReportsRequest})
+var sListAssessmentReportsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListAssessmentReportsRequest_nextToken})
+var sListAssessmentReportsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListAssessmentReportsRequest_maxResults})
+var sListAssessmentReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentReportsResponse, Members: &mListAssessmentReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentReportsResponse})
+var sListAssessmentReportsResponse_assessmentReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReports", ID: &i_AssessmentReportsMetadata, Members: &m_AssessmentReportsMetadata, Type: smithy.ShapeTypeList, Ext: &eListAssessmentReportsResponse_assessmentReports})
+var sListAssessmentReportsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAssessmentReportsResponse_nextToken})
+var sListAssessmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentsRequest, Members: &mListAssessmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentsRequest})
+var sListAssessmentsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentStatus, Members: &mAssessmentStatus, Traits: &t80, Type: smithy.ShapeTypeEnum, Ext: &eListAssessmentsRequest_status})
+var sListAssessmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListAssessmentsRequest_nextToken})
+var sListAssessmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListAssessmentsRequest_maxResults})
+var sListAssessmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentsResponse, Members: &mListAssessmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssessmentsResponse})
+var sListAssessmentsResponse_assessmentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentMetadata", ID: &i_ListAssessmentMetadata, Members: &m_ListAssessmentMetadata, Type: smithy.ShapeTypeList, Ext: &eListAssessmentsResponse_assessmentMetadata})
+var sListAssessmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAssessmentsResponse_nextToken})
+var sListControlDomainInsightsByAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsightsByAssessmentRequest, Members: &mListControlDomainInsightsByAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eListControlDomainInsightsByAssessmentRequest})
+var sListControlDomainInsightsByAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eListControlDomainInsightsByAssessmentRequest_assessmentId})
+var sListControlDomainInsightsByAssessmentRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListControlDomainInsightsByAssessmentRequest_nextToken})
+var sListControlDomainInsightsByAssessmentRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListControlDomainInsightsByAssessmentRequest_maxResults})
+var sListControlDomainInsightsByAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsightsByAssessmentResponse, Members: &mListControlDomainInsightsByAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eListControlDomainInsightsByAssessmentResponse})
+var sListControlDomainInsightsByAssessmentResponse_controlDomainInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlDomainInsights", ID: &i_ControlDomainInsightsList, Members: &m_ControlDomainInsightsList, Type: smithy.ShapeTypeList, Ext: &eListControlDomainInsightsByAssessmentResponse_controlDomainInsights})
+var sListControlDomainInsightsByAssessmentResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListControlDomainInsightsByAssessmentResponse_nextToken})
+var sListControlDomainInsightsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsightsRequest, Members: &mListControlDomainInsightsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListControlDomainInsightsRequest})
+var sListControlDomainInsightsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListControlDomainInsightsRequest_nextToken})
+var sListControlDomainInsightsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListControlDomainInsightsRequest_maxResults})
+var sListControlDomainInsightsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlDomainInsightsResponse, Members: &mListControlDomainInsightsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListControlDomainInsightsResponse})
+var sListControlDomainInsightsResponse_controlDomainInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlDomainInsights", ID: &i_ControlDomainInsightsList, Members: &m_ControlDomainInsightsList, Type: smithy.ShapeTypeList, Ext: &eListControlDomainInsightsResponse_controlDomainInsights})
+var sListControlDomainInsightsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListControlDomainInsightsResponse_nextToken})
+var sListControlInsightsByControlDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlInsightsByControlDomainRequest, Members: &mListControlInsightsByControlDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eListControlInsightsByControlDomainRequest})
+var sListControlInsightsByControlDomainRequest_controlDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlDomainId", ID: &i_ControlDomainId, Traits: &t77, Type: smithy.ShapeTypeString, Ext: &eListControlInsightsByControlDomainRequest_controlDomainId})
+var sListControlInsightsByControlDomainRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListControlInsightsByControlDomainRequest_nextToken})
+var sListControlInsightsByControlDomainRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListControlInsightsByControlDomainRequest_maxResults})
+var sListControlInsightsByControlDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlInsightsByControlDomainResponse, Members: &mListControlInsightsByControlDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eListControlInsightsByControlDomainResponse})
+var sListControlInsightsByControlDomainResponse_controlInsightsMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlInsightsMetadata", ID: &i_ControlInsightsMetadata, Members: &m_ControlInsightsMetadata, Type: smithy.ShapeTypeList, Ext: &eListControlInsightsByControlDomainResponse_controlInsightsMetadata})
+var sListControlInsightsByControlDomainResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListControlInsightsByControlDomainResponse_nextToken})
+var sListControlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlsRequest, Members: &mListControlsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListControlsRequest})
+var sListControlsRequest_controlType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlType", ID: &iControlType, Members: &mControlType, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eListControlsRequest_controlType})
+var sListControlsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListControlsRequest_nextToken})
+var sListControlsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListControlsRequest_maxResults})
+var sListControlsRequest_controlCatalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlCatalogId", ID: &i_ControlCatalogId, Traits: &t82, Type: smithy.ShapeTypeString, Ext: &eListControlsRequest_controlCatalogId})
+var sListControlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlsResponse, Members: &mListControlsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListControlsResponse})
+var sListControlsResponse_controlMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlMetadataList", ID: &i_ControlMetadataList, Members: &m_ControlMetadataList, Type: smithy.ShapeTypeList, Ext: &eListControlsResponse_controlMetadataList})
+var sListControlsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListControlsResponse_nextToken})
+var sListKeywordsForDataSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeywordsForDataSourceRequest, Members: &mListKeywordsForDataSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKeywordsForDataSourceRequest})
+var sListKeywordsForDataSourceRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDataSourceType, Members: &mDataSourceType, Traits: &t83, Type: smithy.ShapeTypeEnum, Ext: &eListKeywordsForDataSourceRequest_source})
+var sListKeywordsForDataSourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListKeywordsForDataSourceRequest_nextToken})
+var sListKeywordsForDataSourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListKeywordsForDataSourceRequest_maxResults})
+var sListKeywordsForDataSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeywordsForDataSourceResponse, Members: &mListKeywordsForDataSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKeywordsForDataSourceResponse})
+var sListKeywordsForDataSourceResponse_keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keywords", ID: &i_Keywords, Members: &m_Keywords, Type: smithy.ShapeTypeList, Ext: &eListKeywordsForDataSourceResponse_keywords})
+var sListKeywordsForDataSourceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListKeywordsForDataSourceResponse_nextToken})
+var sListNotificationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationsRequest, Members: &mListNotificationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationsRequest})
+var sListNotificationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eListNotificationsRequest_nextToken})
+var sListNotificationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t75, Type: smithy.ShapeTypeInteger, Ext: &eListNotificationsRequest_maxResults})
+var sListNotificationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationsResponse, Members: &mListNotificationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationsResponse})
+var sListNotificationsResponse_notifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifications", ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &eListNotificationsResponse_notifications})
+var sListNotificationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListNotificationsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AuditManagerArn, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sRegisterAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccountRequest, Members: &mRegisterAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountRequest})
+var sRegisterAccountRequest_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eRegisterAccountRequest_kmsKey})
+var sRegisterAccountRequest_delegatedAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delegatedAdminAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRegisterAccountRequest_delegatedAdminAccount})
+var sRegisterAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAccountResponse, Members: &mRegisterAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAccountResponse})
+var sRegisterAccountResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegisterAccountResponse_status})
+var sRegisterOrganizationAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationAdminAccountRequest, Members: &mRegisterOrganizationAdminAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterOrganizationAdminAccountRequest})
+var sRegisterOrganizationAdminAccountRequest_adminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRegisterOrganizationAdminAccountRequest_adminAccountId})
+var sRegisterOrganizationAdminAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationAdminAccountResponse, Members: &mRegisterOrganizationAdminAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterOrganizationAdminAccountResponse})
+var sRegisterOrganizationAdminAccountResponse_adminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRegisterOrganizationAdminAccountResponse_adminAccountId})
+var sRegisterOrganizationAdminAccountResponse_organizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationId", ID: &i_organizationId, Type: smithy.ShapeTypeString, Ext: &eRegisterOrganizationAdminAccountResponse_organizationId})
+var sStartAssessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessmentFrameworkShareRequest, Members: &mStartAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAssessmentFrameworkShareRequest})
+var sStartAssessmentFrameworkShareRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eStartAssessmentFrameworkShareRequest_frameworkId})
+var sStartAssessmentFrameworkShareRequest_destinationAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eStartAssessmentFrameworkShareRequest_destinationAccount})
+var sStartAssessmentFrameworkShareRequest_destinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eStartAssessmentFrameworkShareRequest_destinationRegion})
+var sStartAssessmentFrameworkShareRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ShareRequestComment, Type: smithy.ShapeTypeString, Ext: &eStartAssessmentFrameworkShareRequest_comment})
+var sStartAssessmentFrameworkShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessmentFrameworkShareResponse, Members: &mStartAssessmentFrameworkShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartAssessmentFrameworkShareResponse})
+var sStartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentFrameworkShareRequest", ID: &iAssessmentFrameworkShareRequest, Members: &mAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AuditManagerArn, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AuditManagerArn, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAssessmentControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControlRequest, Members: &mUpdateAssessmentControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlRequest})
+var sUpdateAssessmentControlRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlRequest_assessmentId})
+var sUpdateAssessmentControlRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_ControlSetId, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlRequest_controlSetId})
+var sUpdateAssessmentControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlRequest_controlId})
+var sUpdateAssessmentControlRequest_controlStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlStatus", ID: &iControlStatus, Members: &mControlStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAssessmentControlRequest_controlStatus})
+var sUpdateAssessmentControlRequest_commentBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentBody", ID: &i_ControlCommentBody, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlRequest_commentBody})
+var sUpdateAssessmentControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControlResponse, Members: &mUpdateAssessmentControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlResponse})
+var sUpdateAssessmentControlResponse_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &iAssessmentControl, Members: &mAssessmentControl, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlResponse_control})
+var sUpdateAssessmentControlSetStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControlSetStatusRequest, Members: &mUpdateAssessmentControlSetStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlSetStatusRequest})
+var sUpdateAssessmentControlSetStatusRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlSetStatusRequest_assessmentId})
+var sUpdateAssessmentControlSetStatusRequest_controlSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSetId", ID: &i_String, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlSetStatusRequest_controlSetId})
+var sUpdateAssessmentControlSetStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlSetStatus, Members: &mControlSetStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAssessmentControlSetStatusRequest_status})
+var sUpdateAssessmentControlSetStatusRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_DelegationComment, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentControlSetStatusRequest_comment})
+var sUpdateAssessmentControlSetStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentControlSetStatusResponse, Members: &mUpdateAssessmentControlSetStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlSetStatusResponse})
+var sUpdateAssessmentControlSetStatusResponse_controlSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSet", ID: &iAssessmentControlSet, Members: &mAssessmentControlSet, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentControlSetStatusResponse_controlSet})
+var sUpdateAssessmentFrameworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkRequest, Members: &mUpdateAssessmentFrameworkRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkRequest})
+var sUpdateAssessmentFrameworkRequest_frameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frameworkId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkRequest_frameworkId})
+var sUpdateAssessmentFrameworkRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FrameworkName, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkRequest_name})
+var sUpdateAssessmentFrameworkRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FrameworkDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkRequest_description})
+var sUpdateAssessmentFrameworkRequest_complianceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "complianceType", ID: &i_ComplianceType, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkRequest_complianceType})
+var sUpdateAssessmentFrameworkRequest_controlSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlSets", ID: &i_UpdateAssessmentFrameworkControlSets, Members: &m_UpdateAssessmentFrameworkControlSets, Type: smithy.ShapeTypeList, Ext: &eUpdateAssessmentFrameworkRequest_controlSets})
+var sUpdateAssessmentFrameworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkResponse, Members: &mUpdateAssessmentFrameworkResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkResponse})
+var sUpdateAssessmentFrameworkResponse_framework = smithy.NewStaticSchema(smithy.StaticSchema{Member: "framework", ID: &iFramework, Members: &mFramework, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkResponse_framework})
+var sUpdateAssessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkShareRequest, Members: &mUpdateAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkShareRequest})
+var sUpdateAssessmentFrameworkShareRequest_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentFrameworkShareRequest_requestId})
+var sUpdateAssessmentFrameworkShareRequest_requestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestType", ID: &iShareRequestType, Members: &mShareRequestType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAssessmentFrameworkShareRequest_requestType})
+var sUpdateAssessmentFrameworkShareRequest_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iShareRequestAction, Members: &mShareRequestAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAssessmentFrameworkShareRequest_action})
+var sUpdateAssessmentFrameworkShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentFrameworkShareResponse, Members: &mUpdateAssessmentFrameworkShareResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkShareResponse})
+var sUpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentFrameworkShareRequest", ID: &iAssessmentFrameworkShareRequest, Members: &mAssessmentFrameworkShareRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest})
+var sUpdateAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentRequest, Members: &mUpdateAssessmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentRequest})
+var sUpdateAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentRequest_assessmentId})
+var sUpdateAssessmentRequest_assessmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentName", ID: &i_AssessmentName, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentRequest_assessmentName})
+var sUpdateAssessmentRequest_assessmentDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentDescription", ID: &i_AssessmentDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentRequest_assessmentDescription})
+var sUpdateAssessmentRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &iScope, Members: &mScope, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentRequest_scope})
+var sUpdateAssessmentRequest_assessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentReportsDestination", ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentRequest_assessmentReportsDestination})
+var sUpdateAssessmentRequest_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eUpdateAssessmentRequest_roles})
+var sUpdateAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentResponse, Members: &mUpdateAssessmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentResponse})
+var sUpdateAssessmentResponse_assessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessment", ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentResponse_assessment})
+var sUpdateAssessmentStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentStatusRequest, Members: &mUpdateAssessmentStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentStatusRequest})
+var sUpdateAssessmentStatusRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateAssessmentStatusRequest_assessmentId})
+var sUpdateAssessmentStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAssessmentStatus, Members: &mAssessmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAssessmentStatusRequest_status})
+var sUpdateAssessmentStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAssessmentStatusResponse, Members: &mUpdateAssessmentStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentStatusResponse})
+var sUpdateAssessmentStatusResponse_assessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessment", ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAssessmentStatusResponse_assessment})
+var sUpdateControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlRequest, Members: &mUpdateControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlRequest})
+var sUpdateControlRequest_controlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlId", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_controlId})
+var sUpdateControlRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ControlName, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_name})
+var sUpdateControlRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ControlDescription, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_description})
+var sUpdateControlRequest_testingInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testingInformation", ID: &i_TestingInformation, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_testingInformation})
+var sUpdateControlRequest_actionPlanTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanTitle", ID: &i_ActionPlanTitle, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_actionPlanTitle})
+var sUpdateControlRequest_actionPlanInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionPlanInstructions", ID: &i_ActionPlanInstructions, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eUpdateControlRequest_actionPlanInstructions})
+var sUpdateControlRequest_controlMappingSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlMappingSources", ID: &i_ControlMappingSources, Members: &m_ControlMappingSources, Type: smithy.ShapeTypeList, Ext: &eUpdateControlRequest_controlMappingSources})
+var sUpdateControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlResponse, Members: &mUpdateControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlResponse})
+var sUpdateControlResponse_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &iControl, Members: &mControl, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlResponse_control})
+var sUpdateSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettingsRequest, Members: &mUpdateSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsRequest})
+var sUpdateSettingsRequest_snsTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snsTopic", ID: &i_SnsArn, Type: smithy.ShapeTypeString, Ext: &eUpdateSettingsRequest_snsTopic})
+var sUpdateSettingsRequest_defaultAssessmentReportsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultAssessmentReportsDestination", ID: &iAssessmentReportsDestination, Members: &mAssessmentReportsDestination, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsRequest_defaultAssessmentReportsDestination})
+var sUpdateSettingsRequest_defaultProcessOwners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultProcessOwners", ID: &i_Roles, Members: &m_Roles, Traits: &t64, Type: smithy.ShapeTypeList, Ext: &eUpdateSettingsRequest_defaultProcessOwners})
+var sUpdateSettingsRequest_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eUpdateSettingsRequest_kmsKey})
+var sUpdateSettingsRequest_evidenceFinderEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceFinderEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateSettingsRequest_evidenceFinderEnabled})
+var sUpdateSettingsRequest_deregistrationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deregistrationPolicy", ID: &iDeregistrationPolicy, Members: &mDeregistrationPolicy, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsRequest_deregistrationPolicy})
+var sUpdateSettingsRequest_defaultExportDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultExportDestination", ID: &iDefaultExportDestination, Members: &mDefaultExportDestination, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsRequest_defaultExportDestination})
+var sUpdateSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettingsResponse, Members: &mUpdateSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsResponse})
+var sUpdateSettingsResponse_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iSettings, Members: &mSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSettingsResponse_settings})
+var sValidateAssessmentReportIntegrityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateAssessmentReportIntegrityRequest, Members: &mValidateAssessmentReportIntegrityRequest, Type: smithy.ShapeTypeStructure, Ext: &eValidateAssessmentReportIntegrityRequest})
+var sValidateAssessmentReportIntegrityRequest_s3RelativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3RelativePath", ID: &i_S3Url, Type: smithy.ShapeTypeString, Ext: &eValidateAssessmentReportIntegrityRequest_s3RelativePath})
+var sValidateAssessmentReportIntegrityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateAssessmentReportIntegrityResponse, Members: &mValidateAssessmentReportIntegrityResponse, Type: smithy.ShapeTypeStructure, Ext: &eValidateAssessmentReportIntegrityResponse})
+var sValidateAssessmentReportIntegrityResponse_signatureValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureValid", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eValidateAssessmentReportIntegrityResponse_signatureValid})
+var sValidateAssessmentReportIntegrityResponse_signatureAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureAlgorithm", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidateAssessmentReportIntegrityResponse_signatureAlgorithm})
+var sValidateAssessmentReportIntegrityResponse_signatureDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureDateTime", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidateAssessmentReportIntegrityResponse_signatureDateTime})
+var sValidateAssessmentReportIntegrityResponse_signatureKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidateAssessmentReportIntegrityResponse_signatureKeyId})
+var sValidateAssessmentReportIntegrityResponse_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList, Ext: &eValidateAssessmentReportIntegrityResponse_validationErrors})
+
+var AssociateAssessmentReportEvidenceFolder = &sAssociateAssessmentReportEvidenceFolder
+
+var BatchAssociateAssessmentReportEvidence = &sBatchAssociateAssessmentReportEvidence
+
+var BatchCreateDelegationByAssessment = &sBatchCreateDelegationByAssessment
+
+var BatchDeleteDelegationByAssessment = &sBatchDeleteDelegationByAssessment
+
+var BatchDisassociateAssessmentReportEvidence = &sBatchDisassociateAssessmentReportEvidence
+
+var BatchImportEvidenceToAssessmentControl = &sBatchImportEvidenceToAssessmentControl
+
+var CreateAssessment = &sCreateAssessment
+
+var CreateAssessmentFramework = &sCreateAssessmentFramework
+
+var CreateAssessmentReport = &sCreateAssessmentReport
+
+var CreateControl = &sCreateControl
+
+var DeleteAssessment = &sDeleteAssessment
+
+var DeleteAssessmentFramework = &sDeleteAssessmentFramework
+
+var DeleteAssessmentFrameworkShare = &sDeleteAssessmentFrameworkShare
+
+var DeleteAssessmentReport = &sDeleteAssessmentReport
+
+var DeleteControl = &sDeleteControl
+
+var DeregisterAccount = &sDeregisterAccount
+
+var DeregisterOrganizationAdminAccount = &sDeregisterOrganizationAdminAccount
+
+var DisassociateAssessmentReportEvidenceFolder = &sDisassociateAssessmentReportEvidenceFolder
+
+var GetAccountStatus = &sGetAccountStatus
+
+var GetAssessment = &sGetAssessment
+
+var GetAssessmentFramework = &sGetAssessmentFramework
+
+var GetAssessmentReportUrl = &sGetAssessmentReportUrl
+
+var GetChangeLogs = &sGetChangeLogs
+
+var GetControl = &sGetControl
+
+var GetDelegations = &sGetDelegations
+
+var GetEvidence = &sGetEvidence
+
+var GetEvidenceByEvidenceFolder = &sGetEvidenceByEvidenceFolder
+
+var GetEvidenceFileUploadUrl = &sGetEvidenceFileUploadUrl
+
+var GetEvidenceFolder = &sGetEvidenceFolder
+
+var GetEvidenceFoldersByAssessment = &sGetEvidenceFoldersByAssessment
+
+var GetEvidenceFoldersByAssessmentControl = &sGetEvidenceFoldersByAssessmentControl
+
+var GetInsights = &sGetInsights
+
+var GetInsightsByAssessment = &sGetInsightsByAssessment
+
+var GetOrganizationAdminAccount = &sGetOrganizationAdminAccount
+
+var GetServicesInScope = &sGetServicesInScope
+
+var GetSettings = &sGetSettings
+
+var ListAssessmentControlInsightsByControlDomain = &sListAssessmentControlInsightsByControlDomain
+
+var ListAssessmentFrameworks = &sListAssessmentFrameworks
+
+var ListAssessmentFrameworkShareRequests = &sListAssessmentFrameworkShareRequests
+
+var ListAssessmentReports = &sListAssessmentReports
+
+var ListAssessments = &sListAssessments
+
+var ListControlDomainInsights = &sListControlDomainInsights
+
+var ListControlDomainInsightsByAssessment = &sListControlDomainInsightsByAssessment
+
+var ListControlInsightsByControlDomain = &sListControlInsightsByControlDomain
+
+var ListControls = &sListControls
+
+var ListKeywordsForDataSource = &sListKeywordsForDataSource
+
+var ListNotifications = &sListNotifications
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterAccount = &sRegisterAccount
+
+var RegisterOrganizationAdminAccount = &sRegisterOrganizationAdminAccount
+
+var StartAssessmentFrameworkShare = &sStartAssessmentFrameworkShare
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAssessment = &sUpdateAssessment
+
+var UpdateAssessmentControl = &sUpdateAssessmentControl
+
+var UpdateAssessmentControlSetStatus = &sUpdateAssessmentControlSetStatus
+
+var UpdateAssessmentFramework = &sUpdateAssessmentFramework
+
+var UpdateAssessmentFrameworkShare = &sUpdateAssessmentFrameworkShare
+
+var UpdateAssessmentStatus = &sUpdateAssessmentStatus
+
+var UpdateControl = &sUpdateControl
+
+var UpdateSettings = &sUpdateSettings
+
+var ValidateAssessmentReportIntegrity = &sValidateAssessmentReportIntegrity
+
+var _BedrockAssessmentManagerLambda = &s_BedrockAssessmentManagerLambda
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var _AccountName = &s_AccountName
+
+var AccountStatus = &sAccountStatus
+var AccountStatus_ACTIVE = &sAccountStatus_ACTIVE
+var AccountStatus_INACTIVE = &sAccountStatus_INACTIVE
+var AccountStatus_PENDING_ACTIVATION = &sAccountStatus_PENDING_ACTIVATION
+
+var ActionEnum = &sActionEnum
+var ActionEnum_CREATE = &sActionEnum_CREATE
+var ActionEnum_UPDATE_METADATA = &sActionEnum_UPDATE_METADATA
+var ActionEnum_ACTIVE = &sActionEnum_ACTIVE
+var ActionEnum_INACTIVE = &sActionEnum_INACTIVE
+var ActionEnum_DELETE = &sActionEnum_DELETE
+var ActionEnum_UNDER_REVIEW = &sActionEnum_UNDER_REVIEW
+var ActionEnum_REVIEWED = &sActionEnum_REVIEWED
+var ActionEnum_IMPORT_EVIDENCE = &sActionEnum_IMPORT_EVIDENCE
+
+var _ActionPlanInstructions = &s_ActionPlanInstructions
+
+var _ActionPlanTitle = &s_ActionPlanTitle
+
+var Assessment = &sAssessment
+var Assessment_arn = &sAssessment_arn
+var Assessment_awsAccount = &sAssessment_awsAccount
+var Assessment_metadata = &sAssessment_metadata
+var Assessment_framework = &sAssessment_framework
+var Assessment_tags = &sAssessment_tags
+
+var AssessmentControl = &sAssessmentControl
+var AssessmentControl_id = &sAssessmentControl_id
+var AssessmentControl_name = &sAssessmentControl_name
+var AssessmentControl_description = &sAssessmentControl_description
+var AssessmentControl_status = &sAssessmentControl_status
+var AssessmentControl_response = &sAssessmentControl_response
+var AssessmentControl_comments = &sAssessmentControl_comments
+var AssessmentControl_evidenceSources = &sAssessmentControl_evidenceSources
+var AssessmentControl_evidenceCount = &sAssessmentControl_evidenceCount
+var AssessmentControl_assessmentReportEvidenceCount = &sAssessmentControl_assessmentReportEvidenceCount
+
+var _AssessmentControls = &s_AssessmentControls
+var _AssessmentControls_member = &s_AssessmentControls_member
+
+var AssessmentControlSet = &sAssessmentControlSet
+var AssessmentControlSet_id = &sAssessmentControlSet_id
+var AssessmentControlSet_description = &sAssessmentControlSet_description
+var AssessmentControlSet_status = &sAssessmentControlSet_status
+var AssessmentControlSet_roles = &sAssessmentControlSet_roles
+var AssessmentControlSet_controls = &sAssessmentControlSet_controls
+var AssessmentControlSet_delegations = &sAssessmentControlSet_delegations
+var AssessmentControlSet_systemEvidenceCount = &sAssessmentControlSet_systemEvidenceCount
+var AssessmentControlSet_manualEvidenceCount = &sAssessmentControlSet_manualEvidenceCount
+
+var _AssessmentControlSets = &s_AssessmentControlSets
+var _AssessmentControlSets_member = &s_AssessmentControlSets_member
+
+var _AssessmentDescription = &s_AssessmentDescription
+
+var AssessmentEvidenceFolder = &sAssessmentEvidenceFolder
+var AssessmentEvidenceFolder_name = &sAssessmentEvidenceFolder_name
+var AssessmentEvidenceFolder_date = &sAssessmentEvidenceFolder_date
+var AssessmentEvidenceFolder_assessmentId = &sAssessmentEvidenceFolder_assessmentId
+var AssessmentEvidenceFolder_controlSetId = &sAssessmentEvidenceFolder_controlSetId
+var AssessmentEvidenceFolder_controlId = &sAssessmentEvidenceFolder_controlId
+var AssessmentEvidenceFolder_id = &sAssessmentEvidenceFolder_id
+var AssessmentEvidenceFolder_dataSource = &sAssessmentEvidenceFolder_dataSource
+var AssessmentEvidenceFolder_author = &sAssessmentEvidenceFolder_author
+var AssessmentEvidenceFolder_totalEvidence = &sAssessmentEvidenceFolder_totalEvidence
+var AssessmentEvidenceFolder_assessmentReportSelectionCount = &sAssessmentEvidenceFolder_assessmentReportSelectionCount
+var AssessmentEvidenceFolder_controlName = &sAssessmentEvidenceFolder_controlName
+var AssessmentEvidenceFolder_evidenceResourcesIncludedCount = &sAssessmentEvidenceFolder_evidenceResourcesIncludedCount
+var AssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount = &sAssessmentEvidenceFolder_evidenceByTypeConfigurationDataCount
+var AssessmentEvidenceFolder_evidenceByTypeManualCount = &sAssessmentEvidenceFolder_evidenceByTypeManualCount
+var AssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount = &sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckCount
+var AssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount = &sAssessmentEvidenceFolder_evidenceByTypeComplianceCheckIssuesCount
+var AssessmentEvidenceFolder_evidenceByTypeUserActivityCount = &sAssessmentEvidenceFolder_evidenceByTypeUserActivityCount
+var AssessmentEvidenceFolder_evidenceAwsServiceSourceCount = &sAssessmentEvidenceFolder_evidenceAwsServiceSourceCount
+
+var _AssessmentEvidenceFolderName = &s_AssessmentEvidenceFolderName
+
+var _AssessmentEvidenceFolders = &s_AssessmentEvidenceFolders
+var _AssessmentEvidenceFolders_member = &s_AssessmentEvidenceFolders_member
+
+var AssessmentFramework = &sAssessmentFramework
+var AssessmentFramework_id = &sAssessmentFramework_id
+var AssessmentFramework_arn = &sAssessmentFramework_arn
+var AssessmentFramework_metadata = &sAssessmentFramework_metadata
+var AssessmentFramework_controlSets = &sAssessmentFramework_controlSets
+
+var _AssessmentFrameworkDescription = &s_AssessmentFrameworkDescription
+
+var AssessmentFrameworkMetadata = &sAssessmentFrameworkMetadata
+var AssessmentFrameworkMetadata_arn = &sAssessmentFrameworkMetadata_arn
+var AssessmentFrameworkMetadata_id = &sAssessmentFrameworkMetadata_id
+var AssessmentFrameworkMetadata_type = &sAssessmentFrameworkMetadata_type
+var AssessmentFrameworkMetadata_name = &sAssessmentFrameworkMetadata_name
+var AssessmentFrameworkMetadata_description = &sAssessmentFrameworkMetadata_description
+var AssessmentFrameworkMetadata_logo = &sAssessmentFrameworkMetadata_logo
+var AssessmentFrameworkMetadata_complianceType = &sAssessmentFrameworkMetadata_complianceType
+var AssessmentFrameworkMetadata_controlsCount = &sAssessmentFrameworkMetadata_controlsCount
+var AssessmentFrameworkMetadata_controlSetsCount = &sAssessmentFrameworkMetadata_controlSetsCount
+var AssessmentFrameworkMetadata_createdAt = &sAssessmentFrameworkMetadata_createdAt
+var AssessmentFrameworkMetadata_lastUpdatedAt = &sAssessmentFrameworkMetadata_lastUpdatedAt
+
+var AssessmentFrameworkShareRequest = &sAssessmentFrameworkShareRequest
+var AssessmentFrameworkShareRequest_id = &sAssessmentFrameworkShareRequest_id
+var AssessmentFrameworkShareRequest_frameworkId = &sAssessmentFrameworkShareRequest_frameworkId
+var AssessmentFrameworkShareRequest_frameworkName = &sAssessmentFrameworkShareRequest_frameworkName
+var AssessmentFrameworkShareRequest_frameworkDescription = &sAssessmentFrameworkShareRequest_frameworkDescription
+var AssessmentFrameworkShareRequest_status = &sAssessmentFrameworkShareRequest_status
+var AssessmentFrameworkShareRequest_sourceAccount = &sAssessmentFrameworkShareRequest_sourceAccount
+var AssessmentFrameworkShareRequest_destinationAccount = &sAssessmentFrameworkShareRequest_destinationAccount
+var AssessmentFrameworkShareRequest_destinationRegion = &sAssessmentFrameworkShareRequest_destinationRegion
+var AssessmentFrameworkShareRequest_expirationTime = &sAssessmentFrameworkShareRequest_expirationTime
+var AssessmentFrameworkShareRequest_creationTime = &sAssessmentFrameworkShareRequest_creationTime
+var AssessmentFrameworkShareRequest_lastUpdated = &sAssessmentFrameworkShareRequest_lastUpdated
+var AssessmentFrameworkShareRequest_comment = &sAssessmentFrameworkShareRequest_comment
+var AssessmentFrameworkShareRequest_standardControlsCount = &sAssessmentFrameworkShareRequest_standardControlsCount
+var AssessmentFrameworkShareRequest_customControlsCount = &sAssessmentFrameworkShareRequest_customControlsCount
+var AssessmentFrameworkShareRequest_complianceType = &sAssessmentFrameworkShareRequest_complianceType
+
+var _AssessmentFrameworkShareRequestList = &s_AssessmentFrameworkShareRequestList
+var _AssessmentFrameworkShareRequestList_member = &s_AssessmentFrameworkShareRequestList_member
+
+var AssessmentMetadata = &sAssessmentMetadata
+var AssessmentMetadata_name = &sAssessmentMetadata_name
+var AssessmentMetadata_id = &sAssessmentMetadata_id
+var AssessmentMetadata_description = &sAssessmentMetadata_description
+var AssessmentMetadata_complianceType = &sAssessmentMetadata_complianceType
+var AssessmentMetadata_status = &sAssessmentMetadata_status
+var AssessmentMetadata_assessmentReportsDestination = &sAssessmentMetadata_assessmentReportsDestination
+var AssessmentMetadata_scope = &sAssessmentMetadata_scope
+var AssessmentMetadata_roles = &sAssessmentMetadata_roles
+var AssessmentMetadata_delegations = &sAssessmentMetadata_delegations
+var AssessmentMetadata_creationTime = &sAssessmentMetadata_creationTime
+var AssessmentMetadata_lastUpdated = &sAssessmentMetadata_lastUpdated
+
+var AssessmentMetadataItem = &sAssessmentMetadataItem
+var AssessmentMetadataItem_name = &sAssessmentMetadataItem_name
+var AssessmentMetadataItem_id = &sAssessmentMetadataItem_id
+var AssessmentMetadataItem_complianceType = &sAssessmentMetadataItem_complianceType
+var AssessmentMetadataItem_status = &sAssessmentMetadataItem_status
+var AssessmentMetadataItem_roles = &sAssessmentMetadataItem_roles
+var AssessmentMetadataItem_delegations = &sAssessmentMetadataItem_delegations
+var AssessmentMetadataItem_creationTime = &sAssessmentMetadataItem_creationTime
+var AssessmentMetadataItem_lastUpdated = &sAssessmentMetadataItem_lastUpdated
+
+var _AssessmentName = &s_AssessmentName
+
+var AssessmentReport = &sAssessmentReport
+var AssessmentReport_id = &sAssessmentReport_id
+var AssessmentReport_name = &sAssessmentReport_name
+var AssessmentReport_description = &sAssessmentReport_description
+var AssessmentReport_awsAccountId = &sAssessmentReport_awsAccountId
+var AssessmentReport_assessmentId = &sAssessmentReport_assessmentId
+var AssessmentReport_assessmentName = &sAssessmentReport_assessmentName
+var AssessmentReport_author = &sAssessmentReport_author
+var AssessmentReport_status = &sAssessmentReport_status
+var AssessmentReport_creationTime = &sAssessmentReport_creationTime
+
+var _AssessmentReportDescription = &s_AssessmentReportDescription
+
+var AssessmentReportDestinationType = &sAssessmentReportDestinationType
+var AssessmentReportDestinationType_S3 = &sAssessmentReportDestinationType_S3
+
+var AssessmentReportEvidenceError = &sAssessmentReportEvidenceError
+var AssessmentReportEvidenceError_evidenceId = &sAssessmentReportEvidenceError_evidenceId
+var AssessmentReportEvidenceError_errorCode = &sAssessmentReportEvidenceError_errorCode
+var AssessmentReportEvidenceError_errorMessage = &sAssessmentReportEvidenceError_errorMessage
+
+var _AssessmentReportEvidenceErrors = &s_AssessmentReportEvidenceErrors
+var _AssessmentReportEvidenceErrors_member = &s_AssessmentReportEvidenceErrors_member
+
+var AssessmentReportMetadata = &sAssessmentReportMetadata
+var AssessmentReportMetadata_id = &sAssessmentReportMetadata_id
+var AssessmentReportMetadata_name = &sAssessmentReportMetadata_name
+var AssessmentReportMetadata_description = &sAssessmentReportMetadata_description
+var AssessmentReportMetadata_assessmentId = &sAssessmentReportMetadata_assessmentId
+var AssessmentReportMetadata_assessmentName = &sAssessmentReportMetadata_assessmentName
+var AssessmentReportMetadata_author = &sAssessmentReportMetadata_author
+var AssessmentReportMetadata_status = &sAssessmentReportMetadata_status
+var AssessmentReportMetadata_creationTime = &sAssessmentReportMetadata_creationTime
+
+var _AssessmentReportName = &s_AssessmentReportName
+
+var AssessmentReportsDestination = &sAssessmentReportsDestination
+var AssessmentReportsDestination_destinationType = &sAssessmentReportsDestination_destinationType
+var AssessmentReportsDestination_destination = &sAssessmentReportsDestination_destination
+
+var _AssessmentReportsMetadata = &s_AssessmentReportsMetadata
+var _AssessmentReportsMetadata_member = &s_AssessmentReportsMetadata_member
+
+var AssessmentReportStatus = &sAssessmentReportStatus
+var AssessmentReportStatus_COMPLETE = &sAssessmentReportStatus_COMPLETE
+var AssessmentReportStatus_IN_PROGRESS = &sAssessmentReportStatus_IN_PROGRESS
+var AssessmentReportStatus_FAILED = &sAssessmentReportStatus_FAILED
+
+var AssessmentStatus = &sAssessmentStatus
+var AssessmentStatus_ACTIVE = &sAssessmentStatus_ACTIVE
+var AssessmentStatus_INACTIVE = &sAssessmentStatus_INACTIVE
+
+var _AuditManagerArn = &s_AuditManagerArn
+
+var AWSAccount = &sAWSAccount
+var AWSAccount_id = &sAWSAccount_id
+var AWSAccount_emailAddress = &sAWSAccount_emailAddress
+var AWSAccount_name = &sAWSAccount_name
+
+var _AWSAccounts = &s_AWSAccounts
+var _AWSAccounts_member = &s_AWSAccounts_member
+
+var AWSService = &sAWSService
+var AWSService_serviceName = &sAWSService_serviceName
+
+var _AWSServiceName = &s_AWSServiceName
+
+var _AWSServices = &s_AWSServices
+var _AWSServices_member = &s_AWSServices_member
+
+var BatchCreateDelegationByAssessmentError = &sBatchCreateDelegationByAssessmentError
+var BatchCreateDelegationByAssessmentError_createDelegationRequest = &sBatchCreateDelegationByAssessmentError_createDelegationRequest
+var BatchCreateDelegationByAssessmentError_errorCode = &sBatchCreateDelegationByAssessmentError_errorCode
+var BatchCreateDelegationByAssessmentError_errorMessage = &sBatchCreateDelegationByAssessmentError_errorMessage
+
+var _BatchCreateDelegationByAssessmentErrors = &s_BatchCreateDelegationByAssessmentErrors
+var _BatchCreateDelegationByAssessmentErrors_member = &s_BatchCreateDelegationByAssessmentErrors_member
+
+var BatchDeleteDelegationByAssessmentError = &sBatchDeleteDelegationByAssessmentError
+var BatchDeleteDelegationByAssessmentError_delegationId = &sBatchDeleteDelegationByAssessmentError_delegationId
+var BatchDeleteDelegationByAssessmentError_errorCode = &sBatchDeleteDelegationByAssessmentError_errorCode
+var BatchDeleteDelegationByAssessmentError_errorMessage = &sBatchDeleteDelegationByAssessmentError_errorMessage
+
+var _BatchDeleteDelegationByAssessmentErrors = &s_BatchDeleteDelegationByAssessmentErrors
+var _BatchDeleteDelegationByAssessmentErrors_member = &s_BatchDeleteDelegationByAssessmentErrors_member
+
+var BatchImportEvidenceToAssessmentControlError = &sBatchImportEvidenceToAssessmentControlError
+var BatchImportEvidenceToAssessmentControlError_manualEvidence = &sBatchImportEvidenceToAssessmentControlError_manualEvidence
+var BatchImportEvidenceToAssessmentControlError_errorCode = &sBatchImportEvidenceToAssessmentControlError_errorCode
+var BatchImportEvidenceToAssessmentControlError_errorMessage = &sBatchImportEvidenceToAssessmentControlError_errorMessage
+
+var _BatchImportEvidenceToAssessmentControlErrors = &s_BatchImportEvidenceToAssessmentControlErrors
+var _BatchImportEvidenceToAssessmentControlErrors_member = &s_BatchImportEvidenceToAssessmentControlErrors_member
+
+var _Boolean = &s_Boolean
+
+var ChangeLog = &sChangeLog
+var ChangeLog_objectType = &sChangeLog_objectType
+var ChangeLog_objectName = &sChangeLog_objectName
+var ChangeLog_action = &sChangeLog_action
+var ChangeLog_createdAt = &sChangeLog_createdAt
+var ChangeLog_createdBy = &sChangeLog_createdBy
+
+var _ChangeLogs = &s_ChangeLogs
+var _ChangeLogs_member = &s_ChangeLogs_member
+
+var _CloudTrailArn = &s_CloudTrailArn
+
+var _ComplianceType = &s_ComplianceType
+
+var Control = &sControl
+var Control_arn = &sControl_arn
+var Control_id = &sControl_id
+var Control_type = &sControl_type
+var Control_name = &sControl_name
+var Control_description = &sControl_description
+var Control_testingInformation = &sControl_testingInformation
+var Control_actionPlanTitle = &sControl_actionPlanTitle
+var Control_actionPlanInstructions = &sControl_actionPlanInstructions
+var Control_controlSources = &sControl_controlSources
+var Control_controlMappingSources = &sControl_controlMappingSources
+var Control_createdAt = &sControl_createdAt
+var Control_lastUpdatedAt = &sControl_lastUpdatedAt
+var Control_createdBy = &sControl_createdBy
+var Control_lastUpdatedBy = &sControl_lastUpdatedBy
+var Control_tags = &sControl_tags
+var Control_state = &sControl_state
+
+var _ControlCatalogId = &s_ControlCatalogId
+
+var ControlComment = &sControlComment
+var ControlComment_authorName = &sControlComment_authorName
+var ControlComment_commentBody = &sControlComment_commentBody
+var ControlComment_postedDate = &sControlComment_postedDate
+
+var _ControlCommentBody = &s_ControlCommentBody
+
+var _ControlComments = &s_ControlComments
+var _ControlComments_member = &s_ControlComments_member
+
+var _ControlDescription = &s_ControlDescription
+
+var _ControlDomainId = &s_ControlDomainId
+
+var ControlDomainInsights = &sControlDomainInsights
+var ControlDomainInsights_name = &sControlDomainInsights_name
+var ControlDomainInsights_id = &sControlDomainInsights_id
+var ControlDomainInsights_controlsCountByNoncompliantEvidence = &sControlDomainInsights_controlsCountByNoncompliantEvidence
+var ControlDomainInsights_totalControlsCount = &sControlDomainInsights_totalControlsCount
+var ControlDomainInsights_evidenceInsights = &sControlDomainInsights_evidenceInsights
+var ControlDomainInsights_lastUpdated = &sControlDomainInsights_lastUpdated
+
+var _ControlDomainInsightsList = &s_ControlDomainInsightsList
+var _ControlDomainInsightsList_member = &s_ControlDomainInsightsList_member
+
+var _ControlInsightsMetadata = &s_ControlInsightsMetadata
+var _ControlInsightsMetadata_member = &s_ControlInsightsMetadata_member
+
+var _ControlInsightsMetadataByAssessment = &s_ControlInsightsMetadataByAssessment
+var _ControlInsightsMetadataByAssessment_member = &s_ControlInsightsMetadataByAssessment_member
+
+var ControlInsightsMetadataByAssessmentItem = &sControlInsightsMetadataByAssessmentItem
+var ControlInsightsMetadataByAssessmentItem_name = &sControlInsightsMetadataByAssessmentItem_name
+var ControlInsightsMetadataByAssessmentItem_id = &sControlInsightsMetadataByAssessmentItem_id
+var ControlInsightsMetadataByAssessmentItem_evidenceInsights = &sControlInsightsMetadataByAssessmentItem_evidenceInsights
+var ControlInsightsMetadataByAssessmentItem_controlSetName = &sControlInsightsMetadataByAssessmentItem_controlSetName
+var ControlInsightsMetadataByAssessmentItem_lastUpdated = &sControlInsightsMetadataByAssessmentItem_lastUpdated
+
+var ControlInsightsMetadataItem = &sControlInsightsMetadataItem
+var ControlInsightsMetadataItem_name = &sControlInsightsMetadataItem_name
+var ControlInsightsMetadataItem_id = &sControlInsightsMetadataItem_id
+var ControlInsightsMetadataItem_evidenceInsights = &sControlInsightsMetadataItem_evidenceInsights
+var ControlInsightsMetadataItem_lastUpdated = &sControlInsightsMetadataItem_lastUpdated
+
+var ControlMappingSource = &sControlMappingSource
+var ControlMappingSource_sourceId = &sControlMappingSource_sourceId
+var ControlMappingSource_sourceName = &sControlMappingSource_sourceName
+var ControlMappingSource_sourceDescription = &sControlMappingSource_sourceDescription
+var ControlMappingSource_sourceSetUpOption = &sControlMappingSource_sourceSetUpOption
+var ControlMappingSource_sourceType = &sControlMappingSource_sourceType
+var ControlMappingSource_sourceKeyword = &sControlMappingSource_sourceKeyword
+var ControlMappingSource_sourceFrequency = &sControlMappingSource_sourceFrequency
+var ControlMappingSource_troubleshootingText = &sControlMappingSource_troubleshootingText
+
+var _ControlMappingSources = &s_ControlMappingSources
+var _ControlMappingSources_member = &s_ControlMappingSources_member
+
+var ControlMetadata = &sControlMetadata
+var ControlMetadata_arn = &sControlMetadata_arn
+var ControlMetadata_id = &sControlMetadata_id
+var ControlMetadata_name = &sControlMetadata_name
+var ControlMetadata_controlSources = &sControlMetadata_controlSources
+var ControlMetadata_createdAt = &sControlMetadata_createdAt
+var ControlMetadata_lastUpdatedAt = &sControlMetadata_lastUpdatedAt
+
+var _ControlMetadataList = &s_ControlMetadataList
+var _ControlMetadataList_member = &s_ControlMetadataList_member
+
+var _ControlName = &s_ControlName
+
+var ControlResponse = &sControlResponse
+var ControlResponse_MANUAL = &sControlResponse_MANUAL
+var ControlResponse_AUTOMATE = &sControlResponse_AUTOMATE
+var ControlResponse_DEFER = &sControlResponse_DEFER
+var ControlResponse_IGNORE = &sControlResponse_IGNORE
+
+var _Controls = &s_Controls
+var _Controls_member = &s_Controls_member
+
+var _ControlsCount = &s_ControlsCount
+
+var ControlSet = &sControlSet
+var ControlSet_id = &sControlSet_id
+var ControlSet_name = &sControlSet_name
+var ControlSet_controls = &sControlSet_controls
+
+var _ControlSetId = &s_ControlSetId
+
+var _ControlSetName = &s_ControlSetName
+
+var _ControlSets = &s_ControlSets
+var _ControlSets_member = &s_ControlSets_member
+
+var _ControlSetsCount = &s_ControlSetsCount
+
+var ControlSetStatus = &sControlSetStatus
+var ControlSetStatus_ACTIVE = &sControlSetStatus_ACTIVE
+var ControlSetStatus_UNDER_REVIEW = &sControlSetStatus_UNDER_REVIEW
+var ControlSetStatus_REVIEWED = &sControlSetStatus_REVIEWED
+
+var _ControlSources = &s_ControlSources
+
+var ControlState = &sControlState
+var ControlState_ACTIVE = &sControlState_ACTIVE
+var ControlState_END_OF_SUPPORT = &sControlState_END_OF_SUPPORT
+
+var ControlStatus = &sControlStatus
+var ControlStatus_UNDER_REVIEW = &sControlStatus_UNDER_REVIEW
+var ControlStatus_REVIEWED = &sControlStatus_REVIEWED
+var ControlStatus_INACTIVE = &sControlStatus_INACTIVE
+
+var ControlType = &sControlType
+var ControlType_STANDARD = &sControlType_STANDARD
+var ControlType_CUSTOM = &sControlType_CUSTOM
+var ControlType_CORE = &sControlType_CORE
+
+var CreateAssessmentFrameworkControl = &sCreateAssessmentFrameworkControl
+var CreateAssessmentFrameworkControl_id = &sCreateAssessmentFrameworkControl_id
+
+var _CreateAssessmentFrameworkControls = &s_CreateAssessmentFrameworkControls
+var _CreateAssessmentFrameworkControls_member = &s_CreateAssessmentFrameworkControls_member
+
+var CreateAssessmentFrameworkControlSet = &sCreateAssessmentFrameworkControlSet
+var CreateAssessmentFrameworkControlSet_name = &sCreateAssessmentFrameworkControlSet_name
+var CreateAssessmentFrameworkControlSet_controls = &sCreateAssessmentFrameworkControlSet_controls
+
+var _CreateAssessmentFrameworkControlSets = &s_CreateAssessmentFrameworkControlSets
+var _CreateAssessmentFrameworkControlSets_member = &s_CreateAssessmentFrameworkControlSets_member
+
+var CreateControlMappingSource = &sCreateControlMappingSource
+var CreateControlMappingSource_sourceName = &sCreateControlMappingSource_sourceName
+var CreateControlMappingSource_sourceDescription = &sCreateControlMappingSource_sourceDescription
+var CreateControlMappingSource_sourceSetUpOption = &sCreateControlMappingSource_sourceSetUpOption
+var CreateControlMappingSource_sourceType = &sCreateControlMappingSource_sourceType
+var CreateControlMappingSource_sourceKeyword = &sCreateControlMappingSource_sourceKeyword
+var CreateControlMappingSource_sourceFrequency = &sCreateControlMappingSource_sourceFrequency
+var CreateControlMappingSource_troubleshootingText = &sCreateControlMappingSource_troubleshootingText
+
+var _CreateControlMappingSources = &s_CreateControlMappingSources
+var _CreateControlMappingSources_member = &s_CreateControlMappingSources_member
+
+var _CreatedBy = &s_CreatedBy
+
+var CreateDelegationRequest = &sCreateDelegationRequest
+var CreateDelegationRequest_comment = &sCreateDelegationRequest_comment
+var CreateDelegationRequest_controlSetId = &sCreateDelegationRequest_controlSetId
+var CreateDelegationRequest_roleArn = &sCreateDelegationRequest_roleArn
+var CreateDelegationRequest_roleType = &sCreateDelegationRequest_roleType
+
+var _CreateDelegationRequests = &s_CreateDelegationRequests
+var _CreateDelegationRequests_member = &s_CreateDelegationRequests_member
+
+var DataSourceType = &sDataSourceType
+var DataSourceType_AWS_CLOUDTRAIL = &sDataSourceType_AWS_CLOUDTRAIL
+var DataSourceType_AWS_CONFIG = &sDataSourceType_AWS_CONFIG
+var DataSourceType_AWS_SECURITY_HUB = &sDataSourceType_AWS_SECURITY_HUB
+var DataSourceType_AWS_API_CALL = &sDataSourceType_AWS_API_CALL
+var DataSourceType_MANUAL = &sDataSourceType_MANUAL
+
+var DefaultExportDestination = &sDefaultExportDestination
+var DefaultExportDestination_destinationType = &sDefaultExportDestination_destinationType
+var DefaultExportDestination_destination = &sDefaultExportDestination_destination
+
+var Delegation = &sDelegation
+var Delegation_id = &sDelegation_id
+var Delegation_assessmentName = &sDelegation_assessmentName
+var Delegation_assessmentId = &sDelegation_assessmentId
+var Delegation_status = &sDelegation_status
+var Delegation_roleArn = &sDelegation_roleArn
+var Delegation_roleType = &sDelegation_roleType
+var Delegation_creationTime = &sDelegation_creationTime
+var Delegation_lastUpdated = &sDelegation_lastUpdated
+var Delegation_controlSetId = &sDelegation_controlSetId
+var Delegation_comment = &sDelegation_comment
+var Delegation_createdBy = &sDelegation_createdBy
+
+var _DelegationComment = &s_DelegationComment
+
+var _DelegationIds = &s_DelegationIds
+var _DelegationIds_member = &s_DelegationIds_member
+
+var DelegationMetadata = &sDelegationMetadata
+var DelegationMetadata_id = &sDelegationMetadata_id
+var DelegationMetadata_assessmentName = &sDelegationMetadata_assessmentName
+var DelegationMetadata_assessmentId = &sDelegationMetadata_assessmentId
+var DelegationMetadata_status = &sDelegationMetadata_status
+var DelegationMetadata_roleArn = &sDelegationMetadata_roleArn
+var DelegationMetadata_creationTime = &sDelegationMetadata_creationTime
+var DelegationMetadata_controlSetName = &sDelegationMetadata_controlSetName
+
+var _DelegationMetadataList = &s_DelegationMetadataList
+var _DelegationMetadataList_member = &s_DelegationMetadataList_member
+
+var _Delegations = &s_Delegations
+var _Delegations_member = &s_Delegations_member
+
+var DelegationStatus = &sDelegationStatus
+var DelegationStatus_IN_PROGRESS = &sDelegationStatus_IN_PROGRESS
+var DelegationStatus_UNDER_REVIEW = &sDelegationStatus_UNDER_REVIEW
+var DelegationStatus_COMPLETE = &sDelegationStatus_COMPLETE
+
+var DeleteResources = &sDeleteResources
+var DeleteResources_ALL = &sDeleteResources_ALL
+var DeleteResources_DEFAULT = &sDeleteResources_DEFAULT
+
+var DeregistrationPolicy = &sDeregistrationPolicy
+var DeregistrationPolicy_deleteResources = &sDeregistrationPolicy_deleteResources
+
+var _EmailAddress = &s_EmailAddress
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventName = &s_EventName
+
+var Evidence = &sEvidence
+var Evidence_dataSource = &sEvidence_dataSource
+var Evidence_evidenceAwsAccountId = &sEvidence_evidenceAwsAccountId
+var Evidence_time = &sEvidence_time
+var Evidence_eventSource = &sEvidence_eventSource
+var Evidence_eventName = &sEvidence_eventName
+var Evidence_evidenceByType = &sEvidence_evidenceByType
+var Evidence_resourcesIncluded = &sEvidence_resourcesIncluded
+var Evidence_attributes = &sEvidence_attributes
+var Evidence_iamId = &sEvidence_iamId
+var Evidence_complianceCheck = &sEvidence_complianceCheck
+var Evidence_awsOrganization = &sEvidence_awsOrganization
+var Evidence_awsAccountId = &sEvidence_awsAccountId
+var Evidence_evidenceFolderId = &sEvidence_evidenceFolderId
+var Evidence_id = &sEvidence_id
+var Evidence_assessmentReportSelection = &sEvidence_assessmentReportSelection
+
+var _EvidenceAttributeKey = &s_EvidenceAttributeKey
+
+var _EvidenceAttributes = &s_EvidenceAttributes
+var _EvidenceAttributes_key = &s_EvidenceAttributes_key
+var _EvidenceAttributes_value = &s_EvidenceAttributes_value
+
+var _EvidenceAttributeValue = &s_EvidenceAttributeValue
+
+var EvidenceFinderBackfillStatus = &sEvidenceFinderBackfillStatus
+var EvidenceFinderBackfillStatus_NOT_STARTED = &sEvidenceFinderBackfillStatus_NOT_STARTED
+var EvidenceFinderBackfillStatus_IN_PROGRESS = &sEvidenceFinderBackfillStatus_IN_PROGRESS
+var EvidenceFinderBackfillStatus_COMPLETED = &sEvidenceFinderBackfillStatus_COMPLETED
+
+var EvidenceFinderEnablement = &sEvidenceFinderEnablement
+var EvidenceFinderEnablement_eventDataStoreArn = &sEvidenceFinderEnablement_eventDataStoreArn
+var EvidenceFinderEnablement_enablementStatus = &sEvidenceFinderEnablement_enablementStatus
+var EvidenceFinderEnablement_backfillStatus = &sEvidenceFinderEnablement_backfillStatus
+var EvidenceFinderEnablement_error = &sEvidenceFinderEnablement_error
+
+var EvidenceFinderEnablementStatus = &sEvidenceFinderEnablementStatus
+var EvidenceFinderEnablementStatus_ENABLED = &sEvidenceFinderEnablementStatus_ENABLED
+var EvidenceFinderEnablementStatus_DISABLED = &sEvidenceFinderEnablementStatus_DISABLED
+var EvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS = &sEvidenceFinderEnablementStatus_ENABLE_IN_PROGRESS
+var EvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS = &sEvidenceFinderEnablementStatus_DISABLE_IN_PROGRESS
+
+var _EvidenceIds = &s_EvidenceIds
+var _EvidenceIds_member = &s_EvidenceIds_member
+
+var EvidenceInsights = &sEvidenceInsights
+var EvidenceInsights_noncompliantEvidenceCount = &sEvidenceInsights_noncompliantEvidenceCount
+var EvidenceInsights_compliantEvidenceCount = &sEvidenceInsights_compliantEvidenceCount
+var EvidenceInsights_inconclusiveEvidenceCount = &sEvidenceInsights_inconclusiveEvidenceCount
+
+var _EvidenceList = &s_EvidenceList
+var _EvidenceList_member = &s_EvidenceList_member
+
+var _EvidenceSources = &s_EvidenceSources
+var _EvidenceSources_member = &s_EvidenceSources_member
+
+var ExportDestinationType = &sExportDestinationType
+var ExportDestinationType_S3 = &sExportDestinationType_S3
+
+var _Filename = &s_Filename
+
+var Framework = &sFramework
+var Framework_arn = &sFramework_arn
+var Framework_id = &sFramework_id
+var Framework_name = &sFramework_name
+var Framework_type = &sFramework_type
+var Framework_complianceType = &sFramework_complianceType
+var Framework_description = &sFramework_description
+var Framework_logo = &sFramework_logo
+var Framework_controlSources = &sFramework_controlSources
+var Framework_controlSets = &sFramework_controlSets
+var Framework_createdAt = &sFramework_createdAt
+var Framework_lastUpdatedAt = &sFramework_lastUpdatedAt
+var Framework_createdBy = &sFramework_createdBy
+var Framework_lastUpdatedBy = &sFramework_lastUpdatedBy
+var Framework_tags = &sFramework_tags
+
+var _FrameworkDescription = &s_FrameworkDescription
+
+var FrameworkMetadata = &sFrameworkMetadata
+var FrameworkMetadata_name = &sFrameworkMetadata_name
+var FrameworkMetadata_description = &sFrameworkMetadata_description
+var FrameworkMetadata_logo = &sFrameworkMetadata_logo
+var FrameworkMetadata_complianceType = &sFrameworkMetadata_complianceType
+
+var _FrameworkMetadataList = &s_FrameworkMetadataList
+var _FrameworkMetadataList_member = &s_FrameworkMetadataList_member
+
+var _FrameworkName = &s_FrameworkName
+
+var FrameworkType = &sFrameworkType
+var FrameworkType_STANDARD = &sFrameworkType_STANDARD
+var FrameworkType_CUSTOM = &sFrameworkType_CUSTOM
+
+var _GenericArn = &s_GenericArn
+
+var _HyperlinkName = &s_HyperlinkName
+
+var _IamArn = &s_IamArn
+
+var Insights = &sInsights
+var Insights_activeAssessmentsCount = &sInsights_activeAssessmentsCount
+var Insights_noncompliantEvidenceCount = &sInsights_noncompliantEvidenceCount
+var Insights_compliantEvidenceCount = &sInsights_compliantEvidenceCount
+var Insights_inconclusiveEvidenceCount = &sInsights_inconclusiveEvidenceCount
+var Insights_assessmentControlsCountByNoncompliantEvidence = &sInsights_assessmentControlsCountByNoncompliantEvidence
+var Insights_totalAssessmentControlsCount = &sInsights_totalAssessmentControlsCount
+var Insights_lastUpdated = &sInsights_lastUpdated
+
+var InsightsByAssessment = &sInsightsByAssessment
+var InsightsByAssessment_noncompliantEvidenceCount = &sInsightsByAssessment_noncompliantEvidenceCount
+var InsightsByAssessment_compliantEvidenceCount = &sInsightsByAssessment_compliantEvidenceCount
+var InsightsByAssessment_inconclusiveEvidenceCount = &sInsightsByAssessment_inconclusiveEvidenceCount
+var InsightsByAssessment_assessmentControlsCountByNoncompliantEvidence = &sInsightsByAssessment_assessmentControlsCountByNoncompliantEvidence
+var InsightsByAssessment_totalAssessmentControlsCount = &sInsightsByAssessment_totalAssessmentControlsCount
+var InsightsByAssessment_lastUpdated = &sInsightsByAssessment_lastUpdated
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var KeywordInputType = &sKeywordInputType
+var KeywordInputType_SELECT_FROM_LIST = &sKeywordInputType_SELECT_FROM_LIST
+var KeywordInputType_UPLOAD_FILE = &sKeywordInputType_UPLOAD_FILE
+var KeywordInputType_INPUT_TEXT = &sKeywordInputType_INPUT_TEXT
+
+var _Keywords = &s_Keywords
+var _Keywords_member = &s_Keywords_member
+
+var _KeywordValue = &s_KeywordValue
+
+var _KmsKey = &s_KmsKey
+
+var _LastUpdatedBy = &s_LastUpdatedBy
+
+var _ListAssessmentMetadata = &s_ListAssessmentMetadata
+var _ListAssessmentMetadata_member = &s_ListAssessmentMetadata_member
+
+var ManualEvidence = &sManualEvidence
+var ManualEvidence_s3ResourcePath = &sManualEvidence_s3ResourcePath
+var ManualEvidence_textResponse = &sManualEvidence_textResponse
+var ManualEvidence_evidenceFileName = &sManualEvidence_evidenceFileName
+
+var _ManualEvidenceList = &s_ManualEvidenceList
+var _ManualEvidenceList_member = &s_ManualEvidenceList_member
+
+var _ManualEvidenceLocalFileName = &s_ManualEvidenceLocalFileName
+
+var _ManualEvidenceTextResponse = &s_ManualEvidenceTextResponse
+
+var _MaxResults = &s_MaxResults
+
+var _NonEmptyString = &s_NonEmptyString
+
+var Notification = &sNotification
+var Notification_id = &sNotification_id
+var Notification_assessmentId = &sNotification_assessmentId
+var Notification_assessmentName = &sNotification_assessmentName
+var Notification_controlSetId = &sNotification_controlSetId
+var Notification_controlSetName = &sNotification_controlSetName
+var Notification_description = &sNotification_description
+var Notification_eventTime = &sNotification_eventTime
+var Notification_source = &sNotification_source
+
+var _Notifications = &s_Notifications
+var _Notifications_member = &s_Notifications_member
+
+var _NullableInteger = &s_NullableInteger
+
+var ObjectTypeEnum = &sObjectTypeEnum
+var ObjectTypeEnum_ASSESSMENT = &sObjectTypeEnum_ASSESSMENT
+var ObjectTypeEnum_CONTROL_SET = &sObjectTypeEnum_CONTROL_SET
+var ObjectTypeEnum_CONTROL = &sObjectTypeEnum_CONTROL
+var ObjectTypeEnum_DELEGATION = &sObjectTypeEnum_DELEGATION
+var ObjectTypeEnum_ASSESSMENT_REPORT = &sObjectTypeEnum_ASSESSMENT_REPORT
+
+var _organizationId = &s_organizationId
+
+var _QueryStatement = &s_QueryStatement
+
+var _Region = &s_Region
+
+var Resource = &sResource
+var Resource_arn = &sResource_arn
+var Resource_value = &sResource_value
+var Resource_complianceCheck = &sResource_complianceCheck
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _Resources = &s_Resources
+var _Resources_member = &s_Resources_member
+
+var Role = &sRole
+var Role_roleType = &sRole_roleType
+var Role_roleArn = &sRole_roleArn
+
+var _Roles = &s_Roles
+var _Roles_member = &s_Roles_member
+
+var RoleType = &sRoleType
+var RoleType_PROCESS_OWNER = &sRoleType_PROCESS_OWNER
+var RoleType_RESOURCE_OWNER = &sRoleType_RESOURCE_OWNER
+
+var _S3Url = &s_S3Url
+
+var Scope = &sScope
+var Scope_awsAccounts = &sScope_awsAccounts
+var Scope_awsServices = &sScope_awsServices
+
+var ServiceMetadata = &sServiceMetadata
+var ServiceMetadata_name = &sServiceMetadata_name
+var ServiceMetadata_displayName = &sServiceMetadata_displayName
+var ServiceMetadata_description = &sServiceMetadata_description
+var ServiceMetadata_category = &sServiceMetadata_category
+
+var _ServiceMetadataList = &s_ServiceMetadataList
+var _ServiceMetadataList_member = &s_ServiceMetadataList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SettingAttribute = &sSettingAttribute
+var SettingAttribute_ALL = &sSettingAttribute_ALL
+var SettingAttribute_IS_AWS_ORG_ENABLED = &sSettingAttribute_IS_AWS_ORG_ENABLED
+var SettingAttribute_SNS_TOPIC = &sSettingAttribute_SNS_TOPIC
+var SettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION = &sSettingAttribute_DEFAULT_ASSESSMENT_REPORTS_DESTINATION
+var SettingAttribute_DEFAULT_PROCESS_OWNERS = &sSettingAttribute_DEFAULT_PROCESS_OWNERS
+var SettingAttribute_EVIDENCE_FINDER_ENABLEMENT = &sSettingAttribute_EVIDENCE_FINDER_ENABLEMENT
+var SettingAttribute_DEREGISTRATION_POLICY = &sSettingAttribute_DEREGISTRATION_POLICY
+var SettingAttribute_DEFAULT_EXPORT_DESTINATION = &sSettingAttribute_DEFAULT_EXPORT_DESTINATION
+
+var Settings = &sSettings
+var Settings_isAwsOrgEnabled = &sSettings_isAwsOrgEnabled
+var Settings_snsTopic = &sSettings_snsTopic
+var Settings_defaultAssessmentReportsDestination = &sSettings_defaultAssessmentReportsDestination
+var Settings_defaultProcessOwners = &sSettings_defaultProcessOwners
+var Settings_kmsKey = &sSettings_kmsKey
+var Settings_evidenceFinderEnablement = &sSettings_evidenceFinderEnablement
+var Settings_deregistrationPolicy = &sSettings_deregistrationPolicy
+var Settings_defaultExportDestination = &sSettings_defaultExportDestination
+
+var ShareRequestAction = &sShareRequestAction
+var ShareRequestAction_ACCEPT = &sShareRequestAction_ACCEPT
+var ShareRequestAction_DECLINE = &sShareRequestAction_DECLINE
+var ShareRequestAction_REVOKE = &sShareRequestAction_REVOKE
+
+var _ShareRequestComment = &s_ShareRequestComment
+
+var ShareRequestStatus = &sShareRequestStatus
+var ShareRequestStatus_ACTIVE = &sShareRequestStatus_ACTIVE
+var ShareRequestStatus_REPLICATING = &sShareRequestStatus_REPLICATING
+var ShareRequestStatus_SHARED = &sShareRequestStatus_SHARED
+var ShareRequestStatus_EXPIRING = &sShareRequestStatus_EXPIRING
+var ShareRequestStatus_FAILED = &sShareRequestStatus_FAILED
+var ShareRequestStatus_EXPIRED = &sShareRequestStatus_EXPIRED
+var ShareRequestStatus_DECLINED = &sShareRequestStatus_DECLINED
+var ShareRequestStatus_REVOKED = &sShareRequestStatus_REVOKED
+
+var ShareRequestType = &sShareRequestType
+var ShareRequestType_SENT = &sShareRequestType_SENT
+var ShareRequestType_RECEIVED = &sShareRequestType_RECEIVED
+
+var _SnsArn = &s_SnsArn
+
+var _SNSTopic = &s_SNSTopic
+
+var _SourceDescription = &s_SourceDescription
+
+var SourceFrequency = &sSourceFrequency
+var SourceFrequency_DAILY = &sSourceFrequency_DAILY
+var SourceFrequency_WEEKLY = &sSourceFrequency_WEEKLY
+var SourceFrequency_MONTHLY = &sSourceFrequency_MONTHLY
+
+var SourceKeyword = &sSourceKeyword
+var SourceKeyword_keywordInputType = &sSourceKeyword_keywordInputType
+var SourceKeyword_keywordValue = &sSourceKeyword_keywordValue
+
+var _SourceName = &s_SourceName
+
+var SourceSetUpOption = &sSourceSetUpOption
+var SourceSetUpOption_SYSTEM_CONTROLS_MAPPING = &sSourceSetUpOption_SYSTEM_CONTROLS_MAPPING
+var SourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING = &sSourceSetUpOption_PROCEDURAL_CONTROLS_MAPPING
+
+var SourceType = &sSourceType
+var SourceType_AWS_CLOUDTRAIL = &sSourceType_AWS_CLOUDTRAIL
+var SourceType_AWS_CONFIG = &sSourceType_AWS_CONFIG
+var SourceType_AWS_SECURITY_HUB = &sSourceType_AWS_SECURITY_HUB
+var SourceType_AWS_API_CALL = &sSourceType_AWS_API_CALL
+var SourceType_MANUAL = &sSourceType_MANUAL
+var SourceType_COMMON_CONTROL = &sSourceType_COMMON_CONTROL
+var SourceType_CORE_CONTROL = &sSourceType_CORE_CONTROL
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TestingInformation = &s_TestingInformation
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timestamp = &s_Timestamp
+
+var _TimestampUUID = &s_TimestampUUID
+
+var _Token = &s_Token
+
+var _TroubleshootingText = &s_TroubleshootingText
+
+var UpdateAssessmentFrameworkControlSet = &sUpdateAssessmentFrameworkControlSet
+var UpdateAssessmentFrameworkControlSet_id = &sUpdateAssessmentFrameworkControlSet_id
+var UpdateAssessmentFrameworkControlSet_name = &sUpdateAssessmentFrameworkControlSet_name
+var UpdateAssessmentFrameworkControlSet_controls = &sUpdateAssessmentFrameworkControlSet_controls
+
+var _UpdateAssessmentFrameworkControlSets = &s_UpdateAssessmentFrameworkControlSets
+var _UpdateAssessmentFrameworkControlSets_member = &s_UpdateAssessmentFrameworkControlSets_member
+
+var URL = &sURL
+var URL_hyperlinkName = &sURL_hyperlinkName
+var URL_link = &sURL_link
+
+var _UrlLink = &s_UrlLink
+
+var _Username = &s_Username
+
+var _UUID = &s_UUID
+
+var _ValidationErrors = &s_ValidationErrors
+var _ValidationErrors_member = &s_ValidationErrors_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fields = &sValidationException_fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var AssociateAssessmentReportEvidenceFolderRequest = &sAssociateAssessmentReportEvidenceFolderRequest
+var AssociateAssessmentReportEvidenceFolderRequest_assessmentId = &sAssociateAssessmentReportEvidenceFolderRequest_assessmentId
+var AssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = &sAssociateAssessmentReportEvidenceFolderRequest_evidenceFolderId
+
+var AssociateAssessmentReportEvidenceFolderResponse = &sAssociateAssessmentReportEvidenceFolderResponse
+
+var BatchAssociateAssessmentReportEvidenceRequest = &sBatchAssociateAssessmentReportEvidenceRequest
+var BatchAssociateAssessmentReportEvidenceRequest_assessmentId = &sBatchAssociateAssessmentReportEvidenceRequest_assessmentId
+var BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId = &sBatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId
+var BatchAssociateAssessmentReportEvidenceRequest_evidenceIds = &sBatchAssociateAssessmentReportEvidenceRequest_evidenceIds
+
+var BatchAssociateAssessmentReportEvidenceResponse = &sBatchAssociateAssessmentReportEvidenceResponse
+var BatchAssociateAssessmentReportEvidenceResponse_evidenceIds = &sBatchAssociateAssessmentReportEvidenceResponse_evidenceIds
+var BatchAssociateAssessmentReportEvidenceResponse_errors = &sBatchAssociateAssessmentReportEvidenceResponse_errors
+
+var BatchCreateDelegationByAssessmentRequest = &sBatchCreateDelegationByAssessmentRequest
+var BatchCreateDelegationByAssessmentRequest_createDelegationRequests = &sBatchCreateDelegationByAssessmentRequest_createDelegationRequests
+var BatchCreateDelegationByAssessmentRequest_assessmentId = &sBatchCreateDelegationByAssessmentRequest_assessmentId
+
+var BatchCreateDelegationByAssessmentResponse = &sBatchCreateDelegationByAssessmentResponse
+var BatchCreateDelegationByAssessmentResponse_delegations = &sBatchCreateDelegationByAssessmentResponse_delegations
+var BatchCreateDelegationByAssessmentResponse_errors = &sBatchCreateDelegationByAssessmentResponse_errors
+
+var BatchDeleteDelegationByAssessmentRequest = &sBatchDeleteDelegationByAssessmentRequest
+var BatchDeleteDelegationByAssessmentRequest_delegationIds = &sBatchDeleteDelegationByAssessmentRequest_delegationIds
+var BatchDeleteDelegationByAssessmentRequest_assessmentId = &sBatchDeleteDelegationByAssessmentRequest_assessmentId
+
+var BatchDeleteDelegationByAssessmentResponse = &sBatchDeleteDelegationByAssessmentResponse
+var BatchDeleteDelegationByAssessmentResponse_errors = &sBatchDeleteDelegationByAssessmentResponse_errors
+
+var BatchDisassociateAssessmentReportEvidenceRequest = &sBatchDisassociateAssessmentReportEvidenceRequest
+var BatchDisassociateAssessmentReportEvidenceRequest_assessmentId = &sBatchDisassociateAssessmentReportEvidenceRequest_assessmentId
+var BatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId = &sBatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId
+var BatchDisassociateAssessmentReportEvidenceRequest_evidenceIds = &sBatchDisassociateAssessmentReportEvidenceRequest_evidenceIds
+
+var BatchDisassociateAssessmentReportEvidenceResponse = &sBatchDisassociateAssessmentReportEvidenceResponse
+var BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds = &sBatchDisassociateAssessmentReportEvidenceResponse_evidenceIds
+var BatchDisassociateAssessmentReportEvidenceResponse_errors = &sBatchDisassociateAssessmentReportEvidenceResponse_errors
+
+var BatchImportEvidenceToAssessmentControlRequest = &sBatchImportEvidenceToAssessmentControlRequest
+var BatchImportEvidenceToAssessmentControlRequest_assessmentId = &sBatchImportEvidenceToAssessmentControlRequest_assessmentId
+var BatchImportEvidenceToAssessmentControlRequest_controlSetId = &sBatchImportEvidenceToAssessmentControlRequest_controlSetId
+var BatchImportEvidenceToAssessmentControlRequest_controlId = &sBatchImportEvidenceToAssessmentControlRequest_controlId
+var BatchImportEvidenceToAssessmentControlRequest_manualEvidence = &sBatchImportEvidenceToAssessmentControlRequest_manualEvidence
+
+var BatchImportEvidenceToAssessmentControlResponse = &sBatchImportEvidenceToAssessmentControlResponse
+var BatchImportEvidenceToAssessmentControlResponse_errors = &sBatchImportEvidenceToAssessmentControlResponse_errors
+
+var CreateAssessmentFrameworkRequest = &sCreateAssessmentFrameworkRequest
+var CreateAssessmentFrameworkRequest_name = &sCreateAssessmentFrameworkRequest_name
+var CreateAssessmentFrameworkRequest_description = &sCreateAssessmentFrameworkRequest_description
+var CreateAssessmentFrameworkRequest_complianceType = &sCreateAssessmentFrameworkRequest_complianceType
+var CreateAssessmentFrameworkRequest_controlSets = &sCreateAssessmentFrameworkRequest_controlSets
+var CreateAssessmentFrameworkRequest_tags = &sCreateAssessmentFrameworkRequest_tags
+
+var CreateAssessmentFrameworkResponse = &sCreateAssessmentFrameworkResponse
+var CreateAssessmentFrameworkResponse_framework = &sCreateAssessmentFrameworkResponse_framework
+
+var CreateAssessmentRequest = &sCreateAssessmentRequest
+var CreateAssessmentRequest_name = &sCreateAssessmentRequest_name
+var CreateAssessmentRequest_description = &sCreateAssessmentRequest_description
+var CreateAssessmentRequest_assessmentReportsDestination = &sCreateAssessmentRequest_assessmentReportsDestination
+var CreateAssessmentRequest_scope = &sCreateAssessmentRequest_scope
+var CreateAssessmentRequest_roles = &sCreateAssessmentRequest_roles
+var CreateAssessmentRequest_frameworkId = &sCreateAssessmentRequest_frameworkId
+var CreateAssessmentRequest_tags = &sCreateAssessmentRequest_tags
+
+var CreateAssessmentResponse = &sCreateAssessmentResponse
+var CreateAssessmentResponse_assessment = &sCreateAssessmentResponse_assessment
+
+var CreateAssessmentReportRequest = &sCreateAssessmentReportRequest
+var CreateAssessmentReportRequest_name = &sCreateAssessmentReportRequest_name
+var CreateAssessmentReportRequest_description = &sCreateAssessmentReportRequest_description
+var CreateAssessmentReportRequest_assessmentId = &sCreateAssessmentReportRequest_assessmentId
+var CreateAssessmentReportRequest_queryStatement = &sCreateAssessmentReportRequest_queryStatement
+
+var CreateAssessmentReportResponse = &sCreateAssessmentReportResponse
+var CreateAssessmentReportResponse_assessmentReport = &sCreateAssessmentReportResponse_assessmentReport
+
+var CreateControlRequest = &sCreateControlRequest
+var CreateControlRequest_name = &sCreateControlRequest_name
+var CreateControlRequest_description = &sCreateControlRequest_description
+var CreateControlRequest_testingInformation = &sCreateControlRequest_testingInformation
+var CreateControlRequest_actionPlanTitle = &sCreateControlRequest_actionPlanTitle
+var CreateControlRequest_actionPlanInstructions = &sCreateControlRequest_actionPlanInstructions
+var CreateControlRequest_controlMappingSources = &sCreateControlRequest_controlMappingSources
+var CreateControlRequest_tags = &sCreateControlRequest_tags
+
+var CreateControlResponse = &sCreateControlResponse
+var CreateControlResponse_control = &sCreateControlResponse_control
+
+var DeleteAssessmentFrameworkRequest = &sDeleteAssessmentFrameworkRequest
+var DeleteAssessmentFrameworkRequest_frameworkId = &sDeleteAssessmentFrameworkRequest_frameworkId
+
+var DeleteAssessmentFrameworkResponse = &sDeleteAssessmentFrameworkResponse
+
+var DeleteAssessmentFrameworkShareRequest = &sDeleteAssessmentFrameworkShareRequest
+var DeleteAssessmentFrameworkShareRequest_requestId = &sDeleteAssessmentFrameworkShareRequest_requestId
+var DeleteAssessmentFrameworkShareRequest_requestType = &sDeleteAssessmentFrameworkShareRequest_requestType
+
+var DeleteAssessmentFrameworkShareResponse = &sDeleteAssessmentFrameworkShareResponse
+
+var DeleteAssessmentRequest = &sDeleteAssessmentRequest
+var DeleteAssessmentRequest_assessmentId = &sDeleteAssessmentRequest_assessmentId
+
+var DeleteAssessmentResponse = &sDeleteAssessmentResponse
+
+var DeleteAssessmentReportRequest = &sDeleteAssessmentReportRequest
+var DeleteAssessmentReportRequest_assessmentId = &sDeleteAssessmentReportRequest_assessmentId
+var DeleteAssessmentReportRequest_assessmentReportId = &sDeleteAssessmentReportRequest_assessmentReportId
+
+var DeleteAssessmentReportResponse = &sDeleteAssessmentReportResponse
+
+var DeleteControlRequest = &sDeleteControlRequest
+var DeleteControlRequest_controlId = &sDeleteControlRequest_controlId
+
+var DeleteControlResponse = &sDeleteControlResponse
+
+var DeregisterAccountRequest = &sDeregisterAccountRequest
+
+var DeregisterAccountResponse = &sDeregisterAccountResponse
+var DeregisterAccountResponse_status = &sDeregisterAccountResponse_status
+
+var DeregisterOrganizationAdminAccountRequest = &sDeregisterOrganizationAdminAccountRequest
+var DeregisterOrganizationAdminAccountRequest_adminAccountId = &sDeregisterOrganizationAdminAccountRequest_adminAccountId
+
+var DeregisterOrganizationAdminAccountResponse = &sDeregisterOrganizationAdminAccountResponse
+
+var DisassociateAssessmentReportEvidenceFolderRequest = &sDisassociateAssessmentReportEvidenceFolderRequest
+var DisassociateAssessmentReportEvidenceFolderRequest_assessmentId = &sDisassociateAssessmentReportEvidenceFolderRequest_assessmentId
+var DisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId = &sDisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId
+
+var DisassociateAssessmentReportEvidenceFolderResponse = &sDisassociateAssessmentReportEvidenceFolderResponse
+
+var GetAccountStatusRequest = &sGetAccountStatusRequest
+
+var GetAccountStatusResponse = &sGetAccountStatusResponse
+var GetAccountStatusResponse_status = &sGetAccountStatusResponse_status
+
+var GetAssessmentFrameworkRequest = &sGetAssessmentFrameworkRequest
+var GetAssessmentFrameworkRequest_frameworkId = &sGetAssessmentFrameworkRequest_frameworkId
+
+var GetAssessmentFrameworkResponse = &sGetAssessmentFrameworkResponse
+var GetAssessmentFrameworkResponse_framework = &sGetAssessmentFrameworkResponse_framework
+
+var GetAssessmentRequest = &sGetAssessmentRequest
+var GetAssessmentRequest_assessmentId = &sGetAssessmentRequest_assessmentId
+
+var GetAssessmentResponse = &sGetAssessmentResponse
+var GetAssessmentResponse_assessment = &sGetAssessmentResponse_assessment
+var GetAssessmentResponse_userRole = &sGetAssessmentResponse_userRole
+
+var GetAssessmentReportUrlRequest = &sGetAssessmentReportUrlRequest
+var GetAssessmentReportUrlRequest_assessmentReportId = &sGetAssessmentReportUrlRequest_assessmentReportId
+var GetAssessmentReportUrlRequest_assessmentId = &sGetAssessmentReportUrlRequest_assessmentId
+
+var GetAssessmentReportUrlResponse = &sGetAssessmentReportUrlResponse
+var GetAssessmentReportUrlResponse_preSignedUrl = &sGetAssessmentReportUrlResponse_preSignedUrl
+
+var GetChangeLogsRequest = &sGetChangeLogsRequest
+var GetChangeLogsRequest_assessmentId = &sGetChangeLogsRequest_assessmentId
+var GetChangeLogsRequest_controlSetId = &sGetChangeLogsRequest_controlSetId
+var GetChangeLogsRequest_controlId = &sGetChangeLogsRequest_controlId
+var GetChangeLogsRequest_nextToken = &sGetChangeLogsRequest_nextToken
+var GetChangeLogsRequest_maxResults = &sGetChangeLogsRequest_maxResults
+
+var GetChangeLogsResponse = &sGetChangeLogsResponse
+var GetChangeLogsResponse_changeLogs = &sGetChangeLogsResponse_changeLogs
+var GetChangeLogsResponse_nextToken = &sGetChangeLogsResponse_nextToken
+
+var GetControlRequest = &sGetControlRequest
+var GetControlRequest_controlId = &sGetControlRequest_controlId
+
+var GetControlResponse = &sGetControlResponse
+var GetControlResponse_control = &sGetControlResponse_control
+
+var GetDelegationsRequest = &sGetDelegationsRequest
+var GetDelegationsRequest_nextToken = &sGetDelegationsRequest_nextToken
+var GetDelegationsRequest_maxResults = &sGetDelegationsRequest_maxResults
+
+var GetDelegationsResponse = &sGetDelegationsResponse
+var GetDelegationsResponse_delegations = &sGetDelegationsResponse_delegations
+var GetDelegationsResponse_nextToken = &sGetDelegationsResponse_nextToken
+
+var GetEvidenceByEvidenceFolderRequest = &sGetEvidenceByEvidenceFolderRequest
+var GetEvidenceByEvidenceFolderRequest_assessmentId = &sGetEvidenceByEvidenceFolderRequest_assessmentId
+var GetEvidenceByEvidenceFolderRequest_controlSetId = &sGetEvidenceByEvidenceFolderRequest_controlSetId
+var GetEvidenceByEvidenceFolderRequest_evidenceFolderId = &sGetEvidenceByEvidenceFolderRequest_evidenceFolderId
+var GetEvidenceByEvidenceFolderRequest_nextToken = &sGetEvidenceByEvidenceFolderRequest_nextToken
+var GetEvidenceByEvidenceFolderRequest_maxResults = &sGetEvidenceByEvidenceFolderRequest_maxResults
+
+var GetEvidenceByEvidenceFolderResponse = &sGetEvidenceByEvidenceFolderResponse
+var GetEvidenceByEvidenceFolderResponse_evidence = &sGetEvidenceByEvidenceFolderResponse_evidence
+var GetEvidenceByEvidenceFolderResponse_nextToken = &sGetEvidenceByEvidenceFolderResponse_nextToken
+
+var GetEvidenceFileUploadUrlRequest = &sGetEvidenceFileUploadUrlRequest
+var GetEvidenceFileUploadUrlRequest_fileName = &sGetEvidenceFileUploadUrlRequest_fileName
+
+var GetEvidenceFileUploadUrlResponse = &sGetEvidenceFileUploadUrlResponse
+var GetEvidenceFileUploadUrlResponse_evidenceFileName = &sGetEvidenceFileUploadUrlResponse_evidenceFileName
+var GetEvidenceFileUploadUrlResponse_uploadUrl = &sGetEvidenceFileUploadUrlResponse_uploadUrl
+
+var GetEvidenceFolderRequest = &sGetEvidenceFolderRequest
+var GetEvidenceFolderRequest_assessmentId = &sGetEvidenceFolderRequest_assessmentId
+var GetEvidenceFolderRequest_controlSetId = &sGetEvidenceFolderRequest_controlSetId
+var GetEvidenceFolderRequest_evidenceFolderId = &sGetEvidenceFolderRequest_evidenceFolderId
+
+var GetEvidenceFolderResponse = &sGetEvidenceFolderResponse
+var GetEvidenceFolderResponse_evidenceFolder = &sGetEvidenceFolderResponse_evidenceFolder
+
+var GetEvidenceFoldersByAssessmentControlRequest = &sGetEvidenceFoldersByAssessmentControlRequest
+var GetEvidenceFoldersByAssessmentControlRequest_assessmentId = &sGetEvidenceFoldersByAssessmentControlRequest_assessmentId
+var GetEvidenceFoldersByAssessmentControlRequest_controlSetId = &sGetEvidenceFoldersByAssessmentControlRequest_controlSetId
+var GetEvidenceFoldersByAssessmentControlRequest_controlId = &sGetEvidenceFoldersByAssessmentControlRequest_controlId
+var GetEvidenceFoldersByAssessmentControlRequest_nextToken = &sGetEvidenceFoldersByAssessmentControlRequest_nextToken
+var GetEvidenceFoldersByAssessmentControlRequest_maxResults = &sGetEvidenceFoldersByAssessmentControlRequest_maxResults
+
+var GetEvidenceFoldersByAssessmentControlResponse = &sGetEvidenceFoldersByAssessmentControlResponse
+var GetEvidenceFoldersByAssessmentControlResponse_evidenceFolders = &sGetEvidenceFoldersByAssessmentControlResponse_evidenceFolders
+var GetEvidenceFoldersByAssessmentControlResponse_nextToken = &sGetEvidenceFoldersByAssessmentControlResponse_nextToken
+
+var GetEvidenceFoldersByAssessmentRequest = &sGetEvidenceFoldersByAssessmentRequest
+var GetEvidenceFoldersByAssessmentRequest_assessmentId = &sGetEvidenceFoldersByAssessmentRequest_assessmentId
+var GetEvidenceFoldersByAssessmentRequest_nextToken = &sGetEvidenceFoldersByAssessmentRequest_nextToken
+var GetEvidenceFoldersByAssessmentRequest_maxResults = &sGetEvidenceFoldersByAssessmentRequest_maxResults
+
+var GetEvidenceFoldersByAssessmentResponse = &sGetEvidenceFoldersByAssessmentResponse
+var GetEvidenceFoldersByAssessmentResponse_evidenceFolders = &sGetEvidenceFoldersByAssessmentResponse_evidenceFolders
+var GetEvidenceFoldersByAssessmentResponse_nextToken = &sGetEvidenceFoldersByAssessmentResponse_nextToken
+
+var GetEvidenceRequest = &sGetEvidenceRequest
+var GetEvidenceRequest_assessmentId = &sGetEvidenceRequest_assessmentId
+var GetEvidenceRequest_controlSetId = &sGetEvidenceRequest_controlSetId
+var GetEvidenceRequest_evidenceFolderId = &sGetEvidenceRequest_evidenceFolderId
+var GetEvidenceRequest_evidenceId = &sGetEvidenceRequest_evidenceId
+
+var GetEvidenceResponse = &sGetEvidenceResponse
+var GetEvidenceResponse_evidence = &sGetEvidenceResponse_evidence
+
+var GetInsightsByAssessmentRequest = &sGetInsightsByAssessmentRequest
+var GetInsightsByAssessmentRequest_assessmentId = &sGetInsightsByAssessmentRequest_assessmentId
+
+var GetInsightsByAssessmentResponse = &sGetInsightsByAssessmentResponse
+var GetInsightsByAssessmentResponse_insights = &sGetInsightsByAssessmentResponse_insights
+
+var GetInsightsRequest = &sGetInsightsRequest
+
+var GetInsightsResponse = &sGetInsightsResponse
+var GetInsightsResponse_insights = &sGetInsightsResponse_insights
+
+var GetOrganizationAdminAccountRequest = &sGetOrganizationAdminAccountRequest
+
+var GetOrganizationAdminAccountResponse = &sGetOrganizationAdminAccountResponse
+var GetOrganizationAdminAccountResponse_adminAccountId = &sGetOrganizationAdminAccountResponse_adminAccountId
+var GetOrganizationAdminAccountResponse_organizationId = &sGetOrganizationAdminAccountResponse_organizationId
+
+var GetServicesInScopeRequest = &sGetServicesInScopeRequest
+
+var GetServicesInScopeResponse = &sGetServicesInScopeResponse
+var GetServicesInScopeResponse_serviceMetadata = &sGetServicesInScopeResponse_serviceMetadata
+
+var GetSettingsRequest = &sGetSettingsRequest
+var GetSettingsRequest_attribute = &sGetSettingsRequest_attribute
+
+var GetSettingsResponse = &sGetSettingsResponse
+var GetSettingsResponse_settings = &sGetSettingsResponse_settings
+
+var ListAssessmentControlInsightsByControlDomainRequest = &sListAssessmentControlInsightsByControlDomainRequest
+var ListAssessmentControlInsightsByControlDomainRequest_controlDomainId = &sListAssessmentControlInsightsByControlDomainRequest_controlDomainId
+var ListAssessmentControlInsightsByControlDomainRequest_assessmentId = &sListAssessmentControlInsightsByControlDomainRequest_assessmentId
+var ListAssessmentControlInsightsByControlDomainRequest_nextToken = &sListAssessmentControlInsightsByControlDomainRequest_nextToken
+var ListAssessmentControlInsightsByControlDomainRequest_maxResults = &sListAssessmentControlInsightsByControlDomainRequest_maxResults
+
+var ListAssessmentControlInsightsByControlDomainResponse = &sListAssessmentControlInsightsByControlDomainResponse
+var ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment = &sListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment
+var ListAssessmentControlInsightsByControlDomainResponse_nextToken = &sListAssessmentControlInsightsByControlDomainResponse_nextToken
+
+var ListAssessmentFrameworkShareRequestsRequest = &sListAssessmentFrameworkShareRequestsRequest
+var ListAssessmentFrameworkShareRequestsRequest_requestType = &sListAssessmentFrameworkShareRequestsRequest_requestType
+var ListAssessmentFrameworkShareRequestsRequest_nextToken = &sListAssessmentFrameworkShareRequestsRequest_nextToken
+var ListAssessmentFrameworkShareRequestsRequest_maxResults = &sListAssessmentFrameworkShareRequestsRequest_maxResults
+
+var ListAssessmentFrameworkShareRequestsResponse = &sListAssessmentFrameworkShareRequestsResponse
+var ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests = &sListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests
+var ListAssessmentFrameworkShareRequestsResponse_nextToken = &sListAssessmentFrameworkShareRequestsResponse_nextToken
+
+var ListAssessmentFrameworksRequest = &sListAssessmentFrameworksRequest
+var ListAssessmentFrameworksRequest_frameworkType = &sListAssessmentFrameworksRequest_frameworkType
+var ListAssessmentFrameworksRequest_nextToken = &sListAssessmentFrameworksRequest_nextToken
+var ListAssessmentFrameworksRequest_maxResults = &sListAssessmentFrameworksRequest_maxResults
+
+var ListAssessmentFrameworksResponse = &sListAssessmentFrameworksResponse
+var ListAssessmentFrameworksResponse_frameworkMetadataList = &sListAssessmentFrameworksResponse_frameworkMetadataList
+var ListAssessmentFrameworksResponse_nextToken = &sListAssessmentFrameworksResponse_nextToken
+
+var ListAssessmentReportsRequest = &sListAssessmentReportsRequest
+var ListAssessmentReportsRequest_nextToken = &sListAssessmentReportsRequest_nextToken
+var ListAssessmentReportsRequest_maxResults = &sListAssessmentReportsRequest_maxResults
+
+var ListAssessmentReportsResponse = &sListAssessmentReportsResponse
+var ListAssessmentReportsResponse_assessmentReports = &sListAssessmentReportsResponse_assessmentReports
+var ListAssessmentReportsResponse_nextToken = &sListAssessmentReportsResponse_nextToken
+
+var ListAssessmentsRequest = &sListAssessmentsRequest
+var ListAssessmentsRequest_status = &sListAssessmentsRequest_status
+var ListAssessmentsRequest_nextToken = &sListAssessmentsRequest_nextToken
+var ListAssessmentsRequest_maxResults = &sListAssessmentsRequest_maxResults
+
+var ListAssessmentsResponse = &sListAssessmentsResponse
+var ListAssessmentsResponse_assessmentMetadata = &sListAssessmentsResponse_assessmentMetadata
+var ListAssessmentsResponse_nextToken = &sListAssessmentsResponse_nextToken
+
+var ListControlDomainInsightsByAssessmentRequest = &sListControlDomainInsightsByAssessmentRequest
+var ListControlDomainInsightsByAssessmentRequest_assessmentId = &sListControlDomainInsightsByAssessmentRequest_assessmentId
+var ListControlDomainInsightsByAssessmentRequest_nextToken = &sListControlDomainInsightsByAssessmentRequest_nextToken
+var ListControlDomainInsightsByAssessmentRequest_maxResults = &sListControlDomainInsightsByAssessmentRequest_maxResults
+
+var ListControlDomainInsightsByAssessmentResponse = &sListControlDomainInsightsByAssessmentResponse
+var ListControlDomainInsightsByAssessmentResponse_controlDomainInsights = &sListControlDomainInsightsByAssessmentResponse_controlDomainInsights
+var ListControlDomainInsightsByAssessmentResponse_nextToken = &sListControlDomainInsightsByAssessmentResponse_nextToken
+
+var ListControlDomainInsightsRequest = &sListControlDomainInsightsRequest
+var ListControlDomainInsightsRequest_nextToken = &sListControlDomainInsightsRequest_nextToken
+var ListControlDomainInsightsRequest_maxResults = &sListControlDomainInsightsRequest_maxResults
+
+var ListControlDomainInsightsResponse = &sListControlDomainInsightsResponse
+var ListControlDomainInsightsResponse_controlDomainInsights = &sListControlDomainInsightsResponse_controlDomainInsights
+var ListControlDomainInsightsResponse_nextToken = &sListControlDomainInsightsResponse_nextToken
+
+var ListControlInsightsByControlDomainRequest = &sListControlInsightsByControlDomainRequest
+var ListControlInsightsByControlDomainRequest_controlDomainId = &sListControlInsightsByControlDomainRequest_controlDomainId
+var ListControlInsightsByControlDomainRequest_nextToken = &sListControlInsightsByControlDomainRequest_nextToken
+var ListControlInsightsByControlDomainRequest_maxResults = &sListControlInsightsByControlDomainRequest_maxResults
+
+var ListControlInsightsByControlDomainResponse = &sListControlInsightsByControlDomainResponse
+var ListControlInsightsByControlDomainResponse_controlInsightsMetadata = &sListControlInsightsByControlDomainResponse_controlInsightsMetadata
+var ListControlInsightsByControlDomainResponse_nextToken = &sListControlInsightsByControlDomainResponse_nextToken
+
+var ListControlsRequest = &sListControlsRequest
+var ListControlsRequest_controlType = &sListControlsRequest_controlType
+var ListControlsRequest_nextToken = &sListControlsRequest_nextToken
+var ListControlsRequest_maxResults = &sListControlsRequest_maxResults
+var ListControlsRequest_controlCatalogId = &sListControlsRequest_controlCatalogId
+
+var ListControlsResponse = &sListControlsResponse
+var ListControlsResponse_controlMetadataList = &sListControlsResponse_controlMetadataList
+var ListControlsResponse_nextToken = &sListControlsResponse_nextToken
+
+var ListKeywordsForDataSourceRequest = &sListKeywordsForDataSourceRequest
+var ListKeywordsForDataSourceRequest_source = &sListKeywordsForDataSourceRequest_source
+var ListKeywordsForDataSourceRequest_nextToken = &sListKeywordsForDataSourceRequest_nextToken
+var ListKeywordsForDataSourceRequest_maxResults = &sListKeywordsForDataSourceRequest_maxResults
+
+var ListKeywordsForDataSourceResponse = &sListKeywordsForDataSourceResponse
+var ListKeywordsForDataSourceResponse_keywords = &sListKeywordsForDataSourceResponse_keywords
+var ListKeywordsForDataSourceResponse_nextToken = &sListKeywordsForDataSourceResponse_nextToken
+
+var ListNotificationsRequest = &sListNotificationsRequest
+var ListNotificationsRequest_nextToken = &sListNotificationsRequest_nextToken
+var ListNotificationsRequest_maxResults = &sListNotificationsRequest_maxResults
+
+var ListNotificationsResponse = &sListNotificationsResponse
+var ListNotificationsResponse_notifications = &sListNotificationsResponse_notifications
+var ListNotificationsResponse_nextToken = &sListNotificationsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterAccountRequest = &sRegisterAccountRequest
+var RegisterAccountRequest_kmsKey = &sRegisterAccountRequest_kmsKey
+var RegisterAccountRequest_delegatedAdminAccount = &sRegisterAccountRequest_delegatedAdminAccount
+
+var RegisterAccountResponse = &sRegisterAccountResponse
+var RegisterAccountResponse_status = &sRegisterAccountResponse_status
+
+var RegisterOrganizationAdminAccountRequest = &sRegisterOrganizationAdminAccountRequest
+var RegisterOrganizationAdminAccountRequest_adminAccountId = &sRegisterOrganizationAdminAccountRequest_adminAccountId
+
+var RegisterOrganizationAdminAccountResponse = &sRegisterOrganizationAdminAccountResponse
+var RegisterOrganizationAdminAccountResponse_adminAccountId = &sRegisterOrganizationAdminAccountResponse_adminAccountId
+var RegisterOrganizationAdminAccountResponse_organizationId = &sRegisterOrganizationAdminAccountResponse_organizationId
+
+var StartAssessmentFrameworkShareRequest = &sStartAssessmentFrameworkShareRequest
+var StartAssessmentFrameworkShareRequest_frameworkId = &sStartAssessmentFrameworkShareRequest_frameworkId
+var StartAssessmentFrameworkShareRequest_destinationAccount = &sStartAssessmentFrameworkShareRequest_destinationAccount
+var StartAssessmentFrameworkShareRequest_destinationRegion = &sStartAssessmentFrameworkShareRequest_destinationRegion
+var StartAssessmentFrameworkShareRequest_comment = &sStartAssessmentFrameworkShareRequest_comment
+
+var StartAssessmentFrameworkShareResponse = &sStartAssessmentFrameworkShareResponse
+var StartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = &sStartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAssessmentControlRequest = &sUpdateAssessmentControlRequest
+var UpdateAssessmentControlRequest_assessmentId = &sUpdateAssessmentControlRequest_assessmentId
+var UpdateAssessmentControlRequest_controlSetId = &sUpdateAssessmentControlRequest_controlSetId
+var UpdateAssessmentControlRequest_controlId = &sUpdateAssessmentControlRequest_controlId
+var UpdateAssessmentControlRequest_controlStatus = &sUpdateAssessmentControlRequest_controlStatus
+var UpdateAssessmentControlRequest_commentBody = &sUpdateAssessmentControlRequest_commentBody
+
+var UpdateAssessmentControlResponse = &sUpdateAssessmentControlResponse
+var UpdateAssessmentControlResponse_control = &sUpdateAssessmentControlResponse_control
+
+var UpdateAssessmentControlSetStatusRequest = &sUpdateAssessmentControlSetStatusRequest
+var UpdateAssessmentControlSetStatusRequest_assessmentId = &sUpdateAssessmentControlSetStatusRequest_assessmentId
+var UpdateAssessmentControlSetStatusRequest_controlSetId = &sUpdateAssessmentControlSetStatusRequest_controlSetId
+var UpdateAssessmentControlSetStatusRequest_status = &sUpdateAssessmentControlSetStatusRequest_status
+var UpdateAssessmentControlSetStatusRequest_comment = &sUpdateAssessmentControlSetStatusRequest_comment
+
+var UpdateAssessmentControlSetStatusResponse = &sUpdateAssessmentControlSetStatusResponse
+var UpdateAssessmentControlSetStatusResponse_controlSet = &sUpdateAssessmentControlSetStatusResponse_controlSet
+
+var UpdateAssessmentFrameworkRequest = &sUpdateAssessmentFrameworkRequest
+var UpdateAssessmentFrameworkRequest_frameworkId = &sUpdateAssessmentFrameworkRequest_frameworkId
+var UpdateAssessmentFrameworkRequest_name = &sUpdateAssessmentFrameworkRequest_name
+var UpdateAssessmentFrameworkRequest_description = &sUpdateAssessmentFrameworkRequest_description
+var UpdateAssessmentFrameworkRequest_complianceType = &sUpdateAssessmentFrameworkRequest_complianceType
+var UpdateAssessmentFrameworkRequest_controlSets = &sUpdateAssessmentFrameworkRequest_controlSets
+
+var UpdateAssessmentFrameworkResponse = &sUpdateAssessmentFrameworkResponse
+var UpdateAssessmentFrameworkResponse_framework = &sUpdateAssessmentFrameworkResponse_framework
+
+var UpdateAssessmentFrameworkShareRequest = &sUpdateAssessmentFrameworkShareRequest
+var UpdateAssessmentFrameworkShareRequest_requestId = &sUpdateAssessmentFrameworkShareRequest_requestId
+var UpdateAssessmentFrameworkShareRequest_requestType = &sUpdateAssessmentFrameworkShareRequest_requestType
+var UpdateAssessmentFrameworkShareRequest_action = &sUpdateAssessmentFrameworkShareRequest_action
+
+var UpdateAssessmentFrameworkShareResponse = &sUpdateAssessmentFrameworkShareResponse
+var UpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest = &sUpdateAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest
+
+var UpdateAssessmentRequest = &sUpdateAssessmentRequest
+var UpdateAssessmentRequest_assessmentId = &sUpdateAssessmentRequest_assessmentId
+var UpdateAssessmentRequest_assessmentName = &sUpdateAssessmentRequest_assessmentName
+var UpdateAssessmentRequest_assessmentDescription = &sUpdateAssessmentRequest_assessmentDescription
+var UpdateAssessmentRequest_scope = &sUpdateAssessmentRequest_scope
+var UpdateAssessmentRequest_assessmentReportsDestination = &sUpdateAssessmentRequest_assessmentReportsDestination
+var UpdateAssessmentRequest_roles = &sUpdateAssessmentRequest_roles
+
+var UpdateAssessmentResponse = &sUpdateAssessmentResponse
+var UpdateAssessmentResponse_assessment = &sUpdateAssessmentResponse_assessment
+
+var UpdateAssessmentStatusRequest = &sUpdateAssessmentStatusRequest
+var UpdateAssessmentStatusRequest_assessmentId = &sUpdateAssessmentStatusRequest_assessmentId
+var UpdateAssessmentStatusRequest_status = &sUpdateAssessmentStatusRequest_status
+
+var UpdateAssessmentStatusResponse = &sUpdateAssessmentStatusResponse
+var UpdateAssessmentStatusResponse_assessment = &sUpdateAssessmentStatusResponse_assessment
+
+var UpdateControlRequest = &sUpdateControlRequest
+var UpdateControlRequest_controlId = &sUpdateControlRequest_controlId
+var UpdateControlRequest_name = &sUpdateControlRequest_name
+var UpdateControlRequest_description = &sUpdateControlRequest_description
+var UpdateControlRequest_testingInformation = &sUpdateControlRequest_testingInformation
+var UpdateControlRequest_actionPlanTitle = &sUpdateControlRequest_actionPlanTitle
+var UpdateControlRequest_actionPlanInstructions = &sUpdateControlRequest_actionPlanInstructions
+var UpdateControlRequest_controlMappingSources = &sUpdateControlRequest_controlMappingSources
+
+var UpdateControlResponse = &sUpdateControlResponse
+var UpdateControlResponse_control = &sUpdateControlResponse_control
+
+var UpdateSettingsRequest = &sUpdateSettingsRequest
+var UpdateSettingsRequest_snsTopic = &sUpdateSettingsRequest_snsTopic
+var UpdateSettingsRequest_defaultAssessmentReportsDestination = &sUpdateSettingsRequest_defaultAssessmentReportsDestination
+var UpdateSettingsRequest_defaultProcessOwners = &sUpdateSettingsRequest_defaultProcessOwners
+var UpdateSettingsRequest_kmsKey = &sUpdateSettingsRequest_kmsKey
+var UpdateSettingsRequest_evidenceFinderEnabled = &sUpdateSettingsRequest_evidenceFinderEnabled
+var UpdateSettingsRequest_deregistrationPolicy = &sUpdateSettingsRequest_deregistrationPolicy
+var UpdateSettingsRequest_defaultExportDestination = &sUpdateSettingsRequest_defaultExportDestination
+
+var UpdateSettingsResponse = &sUpdateSettingsResponse
+var UpdateSettingsResponse_settings = &sUpdateSettingsResponse_settings
+
+var ValidateAssessmentReportIntegrityRequest = &sValidateAssessmentReportIntegrityRequest
+var ValidateAssessmentReportIntegrityRequest_s3RelativePath = &sValidateAssessmentReportIntegrityRequest_s3RelativePath
+
+var ValidateAssessmentReportIntegrityResponse = &sValidateAssessmentReportIntegrityResponse
+var ValidateAssessmentReportIntegrityResponse_signatureValid = &sValidateAssessmentReportIntegrityResponse_signatureValid
+var ValidateAssessmentReportIntegrityResponse_signatureAlgorithm = &sValidateAssessmentReportIntegrityResponse_signatureAlgorithm
+var ValidateAssessmentReportIntegrityResponse_signatureDateTime = &sValidateAssessmentReportIntegrityResponse_signatureDateTime
+var ValidateAssessmentReportIntegrityResponse_signatureKeyId = &sValidateAssessmentReportIntegrityResponse_signatureKeyId
+var ValidateAssessmentReportIntegrityResponse_validationErrors = &sValidateAssessmentReportIntegrityResponse_validationErrors
+
+var BedrockAssessmentManagerLambda = &smithy.ServiceSchema{Schema: &s_BedrockAssessmentManagerLambda, Version: "2017-07-25"}

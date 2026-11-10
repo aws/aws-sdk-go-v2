@@ -4,1658 +4,1636 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AssociateRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eAssociateRepository                                                smithy.SchemaExtensions
+	eCreateCodeReview                                                   smithy.SchemaExtensions
+	eDescribeCodeReview                                                 smithy.SchemaExtensions
+	eDescribeRecommendationFeedback                                     smithy.SchemaExtensions
+	eDescribeRepositoryAssociation                                      smithy.SchemaExtensions
+	eDisassociateRepository                                             smithy.SchemaExtensions
+	eListCodeReviews                                                    smithy.SchemaExtensions
+	eListRecommendationFeedback                                         smithy.SchemaExtensions
+	eListRecommendations                                                smithy.SchemaExtensions
+	eListRepositoryAssociations                                         smithy.SchemaExtensions
+	eListTagsForResource                                                smithy.SchemaExtensions
+	ePutRecommendationFeedback                                          smithy.SchemaExtensions
+	eTagResource                                                        smithy.SchemaExtensions
+	eUntagResource                                                      smithy.SchemaExtensions
+	e_AWSGuruFrontendService                                            smithy.SchemaExtensions
+	eAccessDeniedException                                              smithy.SchemaExtensions
+	eAccessDeniedException_Message                                      smithy.SchemaExtensions
+	eAnalysisType                                                       smithy.SchemaExtensions
+	eAnalysisType_SECURITY                                              smithy.SchemaExtensions
+	eAnalysisType_CODE_QUALITY                                          smithy.SchemaExtensions
+	e_AnalysisTypes                                                     smithy.SchemaExtensions
+	e_AnalysisTypes_member                                              smithy.SchemaExtensions
+	e_Arn                                                               smithy.SchemaExtensions
+	e_AssociationArn                                                    smithy.SchemaExtensions
+	e_AssociationId                                                     smithy.SchemaExtensions
+	eBranchDiffSourceCodeType                                           smithy.SchemaExtensions
+	eBranchDiffSourceCodeType_SourceBranchName                          smithy.SchemaExtensions
+	eBranchDiffSourceCodeType_DestinationBranchName                     smithy.SchemaExtensions
+	e_BranchName                                                        smithy.SchemaExtensions
+	e_BuildArtifactsObjectKey                                           smithy.SchemaExtensions
+	e_ClientRequestToken                                                smithy.SchemaExtensions
+	eCodeArtifacts                                                      smithy.SchemaExtensions
+	eCodeArtifacts_SourceCodeArtifactsObjectKey                         smithy.SchemaExtensions
+	eCodeArtifacts_BuildArtifactsObjectKey                              smithy.SchemaExtensions
+	eCodeCommitRepository                                               smithy.SchemaExtensions
+	eCodeCommitRepository_Name                                          smithy.SchemaExtensions
+	eCodeReview                                                         smithy.SchemaExtensions
+	eCodeReview_Name                                                    smithy.SchemaExtensions
+	eCodeReview_CodeReviewArn                                           smithy.SchemaExtensions
+	eCodeReview_RepositoryName                                          smithy.SchemaExtensions
+	eCodeReview_Owner                                                   smithy.SchemaExtensions
+	eCodeReview_ProviderType                                            smithy.SchemaExtensions
+	eCodeReview_State                                                   smithy.SchemaExtensions
+	eCodeReview_StateReason                                             smithy.SchemaExtensions
+	eCodeReview_CreatedTimeStamp                                        smithy.SchemaExtensions
+	eCodeReview_LastUpdatedTimeStamp                                    smithy.SchemaExtensions
+	eCodeReview_Type                                                    smithy.SchemaExtensions
+	eCodeReview_PullRequestId                                           smithy.SchemaExtensions
+	eCodeReview_SourceCodeType                                          smithy.SchemaExtensions
+	eCodeReview_AssociationArn                                          smithy.SchemaExtensions
+	eCodeReview_Metrics                                                 smithy.SchemaExtensions
+	eCodeReview_AnalysisTypes                                           smithy.SchemaExtensions
+	eCodeReview_ConfigFileState                                         smithy.SchemaExtensions
+	e_CodeReviewName                                                    smithy.SchemaExtensions
+	e_CodeReviewSummaries                                               smithy.SchemaExtensions
+	e_CodeReviewSummaries_member                                        smithy.SchemaExtensions
+	eCodeReviewSummary                                                  smithy.SchemaExtensions
+	eCodeReviewSummary_Name                                             smithy.SchemaExtensions
+	eCodeReviewSummary_CodeReviewArn                                    smithy.SchemaExtensions
+	eCodeReviewSummary_RepositoryName                                   smithy.SchemaExtensions
+	eCodeReviewSummary_Owner                                            smithy.SchemaExtensions
+	eCodeReviewSummary_ProviderType                                     smithy.SchemaExtensions
+	eCodeReviewSummary_State                                            smithy.SchemaExtensions
+	eCodeReviewSummary_CreatedTimeStamp                                 smithy.SchemaExtensions
+	eCodeReviewSummary_LastUpdatedTimeStamp                             smithy.SchemaExtensions
+	eCodeReviewSummary_Type                                             smithy.SchemaExtensions
+	eCodeReviewSummary_PullRequestId                                    smithy.SchemaExtensions
+	eCodeReviewSummary_MetricsSummary                                   smithy.SchemaExtensions
+	eCodeReviewSummary_SourceCodeType                                   smithy.SchemaExtensions
+	eCodeReviewType                                                     smithy.SchemaExtensions
+	eCodeReviewType_RepositoryAnalysis                                  smithy.SchemaExtensions
+	eCodeReviewType_AnalysisTypes                                       smithy.SchemaExtensions
+	eCommitDiffSourceCodeType                                           smithy.SchemaExtensions
+	eCommitDiffSourceCodeType_SourceCommit                              smithy.SchemaExtensions
+	eCommitDiffSourceCodeType_DestinationCommit                         smithy.SchemaExtensions
+	eCommitDiffSourceCodeType_MergeBaseCommit                           smithy.SchemaExtensions
+	e_CommitId                                                          smithy.SchemaExtensions
+	eConfigFileState                                                    smithy.SchemaExtensions
+	eConfigFileState_PRESENT                                            smithy.SchemaExtensions
+	eConfigFileState_ABSENT                                             smithy.SchemaExtensions
+	eConfigFileState_PRESENT_WITH_ERRORS                                smithy.SchemaExtensions
+	eConflictException                                                  smithy.SchemaExtensions
+	eConflictException_Message                                          smithy.SchemaExtensions
+	e_ConnectionArn                                                     smithy.SchemaExtensions
+	eEncryptionOption                                                   smithy.SchemaExtensions
+	eEncryptionOption_AoCmk                                             smithy.SchemaExtensions
+	eEncryptionOption_CmCmk                                             smithy.SchemaExtensions
+	e_ErrorMessage                                                      smithy.SchemaExtensions
+	eEventInfo                                                          smithy.SchemaExtensions
+	eEventInfo_Name                                                     smithy.SchemaExtensions
+	eEventInfo_State                                                    smithy.SchemaExtensions
+	e_EventName                                                         smithy.SchemaExtensions
+	e_EventState                                                        smithy.SchemaExtensions
+	e_FilePath                                                          smithy.SchemaExtensions
+	e_FindingsCount                                                     smithy.SchemaExtensions
+	eInternalServerException                                            smithy.SchemaExtensions
+	eInternalServerException_Message                                    smithy.SchemaExtensions
+	eJobState                                                           smithy.SchemaExtensions
+	eJobState_COMPLETED                                                 smithy.SchemaExtensions
+	eJobState_PENDING                                                   smithy.SchemaExtensions
+	eJobState_FAILED                                                    smithy.SchemaExtensions
+	eJobState_DELETING                                                  smithy.SchemaExtensions
+	e_JobStates                                                         smithy.SchemaExtensions
+	e_JobStates_member                                                  smithy.SchemaExtensions
+	eKMSKeyDetails                                                      smithy.SchemaExtensions
+	eKMSKeyDetails_KMSKeyId                                             smithy.SchemaExtensions
+	eKMSKeyDetails_EncryptionOption                                     smithy.SchemaExtensions
+	e_KMSKeyId                                                          smithy.SchemaExtensions
+	e_LineNumber                                                        smithy.SchemaExtensions
+	e_LinesOfCodeCount                                                  smithy.SchemaExtensions
+	e_ListCodeReviewsMaxResults                                         smithy.SchemaExtensions
+	e_ListRecommendationsMaxResults                                     smithy.SchemaExtensions
+	e_LongDescription                                                   smithy.SchemaExtensions
+	e_MaxResults                                                        smithy.SchemaExtensions
+	eMetrics                                                            smithy.SchemaExtensions
+	eMetrics_MeteredLinesOfCodeCount                                    smithy.SchemaExtensions
+	eMetrics_SuppressedLinesOfCodeCount                                 smithy.SchemaExtensions
+	eMetrics_FindingsCount                                              smithy.SchemaExtensions
+	eMetricsSummary                                                     smithy.SchemaExtensions
+	eMetricsSummary_MeteredLinesOfCodeCount                             smithy.SchemaExtensions
+	eMetricsSummary_SuppressedLinesOfCodeCount                          smithy.SchemaExtensions
+	eMetricsSummary_FindingsCount                                       smithy.SchemaExtensions
+	e_Name                                                              smithy.SchemaExtensions
+	e_Names                                                             smithy.SchemaExtensions
+	e_Names_member                                                      smithy.SchemaExtensions
+	e_NextToken                                                         smithy.SchemaExtensions
+	eNotFoundException                                                  smithy.SchemaExtensions
+	eNotFoundException_Message                                          smithy.SchemaExtensions
+	e_Owner                                                             smithy.SchemaExtensions
+	e_Owners                                                            smithy.SchemaExtensions
+	e_Owners_member                                                     smithy.SchemaExtensions
+	eProviderType                                                       smithy.SchemaExtensions
+	eProviderType_CODE_COMMIT                                           smithy.SchemaExtensions
+	eProviderType_GIT_HUB                                               smithy.SchemaExtensions
+	eProviderType_BITBUCKET                                             smithy.SchemaExtensions
+	eProviderType_GIT_HUB_ENTERPRISE_SERVER                             smithy.SchemaExtensions
+	eProviderType_S3_BUCKET                                             smithy.SchemaExtensions
+	e_ProviderTypes                                                     smithy.SchemaExtensions
+	e_ProviderTypes_member                                              smithy.SchemaExtensions
+	e_PullRequestId                                                     smithy.SchemaExtensions
+	eReaction                                                           smithy.SchemaExtensions
+	eReaction_THUMBS_UP                                                 smithy.SchemaExtensions
+	eReaction_THUMBS_DOWN                                               smithy.SchemaExtensions
+	e_Reactions                                                         smithy.SchemaExtensions
+	e_Reactions_member                                                  smithy.SchemaExtensions
+	eRecommendationCategory                                             smithy.SchemaExtensions
+	eRecommendationCategory_AWS_BEST_PRACTICES                          smithy.SchemaExtensions
+	eRecommendationCategory_AWS_CLOUDFORMATION_ISSUES                   smithy.SchemaExtensions
+	eRecommendationCategory_DUPLICATE_CODE                              smithy.SchemaExtensions
+	eRecommendationCategory_CODE_MAINTENANCE_ISSUES                     smithy.SchemaExtensions
+	eRecommendationCategory_CONCURRENCY_ISSUES                          smithy.SchemaExtensions
+	eRecommendationCategory_INPUT_VALIDATIONS                           smithy.SchemaExtensions
+	eRecommendationCategory_PYTHON_BEST_PRACTICES                       smithy.SchemaExtensions
+	eRecommendationCategory_JAVA_BEST_PRACTICES                         smithy.SchemaExtensions
+	eRecommendationCategory_RESOURCE_LEAKS                              smithy.SchemaExtensions
+	eRecommendationCategory_SECURITY_ISSUES                             smithy.SchemaExtensions
+	eRecommendationCategory_CODE_INCONSISTENCIES                        smithy.SchemaExtensions
+	eRecommendationFeedback                                             smithy.SchemaExtensions
+	eRecommendationFeedback_CodeReviewArn                               smithy.SchemaExtensions
+	eRecommendationFeedback_RecommendationId                            smithy.SchemaExtensions
+	eRecommendationFeedback_Reactions                                   smithy.SchemaExtensions
+	eRecommendationFeedback_UserId                                      smithy.SchemaExtensions
+	eRecommendationFeedback_CreatedTimeStamp                            smithy.SchemaExtensions
+	eRecommendationFeedback_LastUpdatedTimeStamp                        smithy.SchemaExtensions
+	e_RecommendationFeedbackSummaries                                   smithy.SchemaExtensions
+	e_RecommendationFeedbackSummaries_member                            smithy.SchemaExtensions
+	eRecommendationFeedbackSummary                                      smithy.SchemaExtensions
+	eRecommendationFeedbackSummary_RecommendationId                     smithy.SchemaExtensions
+	eRecommendationFeedbackSummary_Reactions                            smithy.SchemaExtensions
+	eRecommendationFeedbackSummary_UserId                               smithy.SchemaExtensions
+	e_RecommendationId                                                  smithy.SchemaExtensions
+	e_RecommendationIds                                                 smithy.SchemaExtensions
+	e_RecommendationIds_member                                          smithy.SchemaExtensions
+	e_RecommendationSummaries                                           smithy.SchemaExtensions
+	e_RecommendationSummaries_member                                    smithy.SchemaExtensions
+	eRecommendationSummary                                              smithy.SchemaExtensions
+	eRecommendationSummary_FilePath                                     smithy.SchemaExtensions
+	eRecommendationSummary_RecommendationId                             smithy.SchemaExtensions
+	eRecommendationSummary_StartLine                                    smithy.SchemaExtensions
+	eRecommendationSummary_EndLine                                      smithy.SchemaExtensions
+	eRecommendationSummary_Description                                  smithy.SchemaExtensions
+	eRecommendationSummary_RecommendationCategory                       smithy.SchemaExtensions
+	eRecommendationSummary_RuleMetadata                                 smithy.SchemaExtensions
+	eRecommendationSummary_Severity                                     smithy.SchemaExtensions
+	eRepository                                                         smithy.SchemaExtensions
+	eRepository_CodeCommit                                              smithy.SchemaExtensions
+	eRepository_Bitbucket                                               smithy.SchemaExtensions
+	eRepository_GitHubEnterpriseServer                                  smithy.SchemaExtensions
+	eRepository_S3Bucket                                                smithy.SchemaExtensions
+	eRepositoryAnalysis                                                 smithy.SchemaExtensions
+	eRepositoryAnalysis_RepositoryHead                                  smithy.SchemaExtensions
+	eRepositoryAnalysis_SourceCodeType                                  smithy.SchemaExtensions
+	eRepositoryAssociation                                              smithy.SchemaExtensions
+	eRepositoryAssociation_AssociationId                                smithy.SchemaExtensions
+	eRepositoryAssociation_AssociationArn                               smithy.SchemaExtensions
+	eRepositoryAssociation_ConnectionArn                                smithy.SchemaExtensions
+	eRepositoryAssociation_Name                                         smithy.SchemaExtensions
+	eRepositoryAssociation_Owner                                        smithy.SchemaExtensions
+	eRepositoryAssociation_ProviderType                                 smithy.SchemaExtensions
+	eRepositoryAssociation_State                                        smithy.SchemaExtensions
+	eRepositoryAssociation_StateReason                                  smithy.SchemaExtensions
+	eRepositoryAssociation_LastUpdatedTimeStamp                         smithy.SchemaExtensions
+	eRepositoryAssociation_CreatedTimeStamp                             smithy.SchemaExtensions
+	eRepositoryAssociation_KMSKeyDetails                                smithy.SchemaExtensions
+	eRepositoryAssociation_S3RepositoryDetails                          smithy.SchemaExtensions
+	eRepositoryAssociationState                                         smithy.SchemaExtensions
+	eRepositoryAssociationState_ASSOCIATED                              smithy.SchemaExtensions
+	eRepositoryAssociationState_ASSOCIATING                             smithy.SchemaExtensions
+	eRepositoryAssociationState_FAILED                                  smithy.SchemaExtensions
+	eRepositoryAssociationState_DISASSOCIATING                          smithy.SchemaExtensions
+	eRepositoryAssociationState_DISASSOCIATED                           smithy.SchemaExtensions
+	e_RepositoryAssociationStates                                       smithy.SchemaExtensions
+	e_RepositoryAssociationStates_member                                smithy.SchemaExtensions
+	e_RepositoryAssociationSummaries                                    smithy.SchemaExtensions
+	e_RepositoryAssociationSummaries_member                             smithy.SchemaExtensions
+	eRepositoryAssociationSummary                                       smithy.SchemaExtensions
+	eRepositoryAssociationSummary_AssociationArn                        smithy.SchemaExtensions
+	eRepositoryAssociationSummary_ConnectionArn                         smithy.SchemaExtensions
+	eRepositoryAssociationSummary_LastUpdatedTimeStamp                  smithy.SchemaExtensions
+	eRepositoryAssociationSummary_AssociationId                         smithy.SchemaExtensions
+	eRepositoryAssociationSummary_Name                                  smithy.SchemaExtensions
+	eRepositoryAssociationSummary_Owner                                 smithy.SchemaExtensions
+	eRepositoryAssociationSummary_ProviderType                          smithy.SchemaExtensions
+	eRepositoryAssociationSummary_State                                 smithy.SchemaExtensions
+	eRepositoryHeadSourceCodeType                                       smithy.SchemaExtensions
+	eRepositoryHeadSourceCodeType_BranchName                            smithy.SchemaExtensions
+	e_RepositoryNames                                                   smithy.SchemaExtensions
+	e_RepositoryNames_member                                            smithy.SchemaExtensions
+	e_Requester                                                         smithy.SchemaExtensions
+	e_RequestId                                                         smithy.SchemaExtensions
+	eRequestMetadata                                                    smithy.SchemaExtensions
+	eRequestMetadata_RequestId                                          smithy.SchemaExtensions
+	eRequestMetadata_Requester                                          smithy.SchemaExtensions
+	eRequestMetadata_EventInfo                                          smithy.SchemaExtensions
+	eRequestMetadata_VendorName                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                          smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                  smithy.SchemaExtensions
+	e_RuleId                                                            smithy.SchemaExtensions
+	eRuleMetadata                                                       smithy.SchemaExtensions
+	eRuleMetadata_RuleId                                                smithy.SchemaExtensions
+	eRuleMetadata_RuleName                                              smithy.SchemaExtensions
+	eRuleMetadata_ShortDescription                                      smithy.SchemaExtensions
+	eRuleMetadata_LongDescription                                       smithy.SchemaExtensions
+	eRuleMetadata_RuleTags                                              smithy.SchemaExtensions
+	e_RuleName                                                          smithy.SchemaExtensions
+	e_RuleTag                                                           smithy.SchemaExtensions
+	e_RuleTags                                                          smithy.SchemaExtensions
+	e_RuleTags_member                                                   smithy.SchemaExtensions
+	e_S3BucketName                                                      smithy.SchemaExtensions
+	eS3BucketRepository                                                 smithy.SchemaExtensions
+	eS3BucketRepository_Name                                            smithy.SchemaExtensions
+	eS3BucketRepository_Details                                         smithy.SchemaExtensions
+	eS3Repository                                                       smithy.SchemaExtensions
+	eS3Repository_Name                                                  smithy.SchemaExtensions
+	eS3Repository_BucketName                                            smithy.SchemaExtensions
+	eS3RepositoryDetails                                                smithy.SchemaExtensions
+	eS3RepositoryDetails_BucketName                                     smithy.SchemaExtensions
+	eS3RepositoryDetails_CodeArtifacts                                  smithy.SchemaExtensions
+	eSeverity                                                           smithy.SchemaExtensions
+	eSeverity_INFO                                                      smithy.SchemaExtensions
+	eSeverity_LOW                                                       smithy.SchemaExtensions
+	eSeverity_MEDIUM                                                    smithy.SchemaExtensions
+	eSeverity_HIGH                                                      smithy.SchemaExtensions
+	eSeverity_CRITICAL                                                  smithy.SchemaExtensions
+	e_ShortDescription                                                  smithy.SchemaExtensions
+	e_SourceCodeArtifactsObjectKey                                      smithy.SchemaExtensions
+	eSourceCodeType                                                     smithy.SchemaExtensions
+	eSourceCodeType_CommitDiff                                          smithy.SchemaExtensions
+	eSourceCodeType_RepositoryHead                                      smithy.SchemaExtensions
+	eSourceCodeType_BranchDiff                                          smithy.SchemaExtensions
+	eSourceCodeType_S3BucketRepository                                  smithy.SchemaExtensions
+	eSourceCodeType_RequestMetadata                                     smithy.SchemaExtensions
+	e_StateReason                                                       smithy.SchemaExtensions
+	e_TagKey                                                            smithy.SchemaExtensions
+	e_TagKeyList                                                        smithy.SchemaExtensions
+	e_TagKeyList_member                                                 smithy.SchemaExtensions
+	e_TagMap                                                            smithy.SchemaExtensions
+	e_TagMap_key                                                        smithy.SchemaExtensions
+	e_TagMap_value                                                      smithy.SchemaExtensions
+	e_TagValue                                                          smithy.SchemaExtensions
+	e_Text                                                              smithy.SchemaExtensions
+	eThirdPartySourceRepository                                         smithy.SchemaExtensions
+	eThirdPartySourceRepository_Name                                    smithy.SchemaExtensions
+	eThirdPartySourceRepository_ConnectionArn                           smithy.SchemaExtensions
+	eThirdPartySourceRepository_Owner                                   smithy.SchemaExtensions
+	eThrottlingException                                                smithy.SchemaExtensions
+	eThrottlingException_Message                                        smithy.SchemaExtensions
+	e_TimeStamp                                                         smithy.SchemaExtensions
+	eType                                                               smithy.SchemaExtensions
+	eType_PULL_REQUEST                                                  smithy.SchemaExtensions
+	eType_REPOSITORY_ANALYSIS                                           smithy.SchemaExtensions
+	e_UserId                                                            smithy.SchemaExtensions
+	e_UserIds                                                           smithy.SchemaExtensions
+	e_UserIds_member                                                    smithy.SchemaExtensions
+	eValidationException                                                smithy.SchemaExtensions
+	eValidationException_Message                                        smithy.SchemaExtensions
+	eVendorName                                                         smithy.SchemaExtensions
+	eVendorName_GITHUB                                                  smithy.SchemaExtensions
+	eVendorName_GITLAB                                                  smithy.SchemaExtensions
+	eVendorName_NATIVE_S3                                               smithy.SchemaExtensions
+	eAssociateRepositoryRequest                                         smithy.SchemaExtensions
+	eAssociateRepositoryRequest_Repository                              smithy.SchemaExtensions
+	eAssociateRepositoryRequest_ClientRequestToken                      smithy.SchemaExtensions
+	eAssociateRepositoryRequest_Tags                                    smithy.SchemaExtensions
+	eAssociateRepositoryRequest_KMSKeyDetails                           smithy.SchemaExtensions
+	eAssociateRepositoryResponse                                        smithy.SchemaExtensions
+	eAssociateRepositoryResponse_RepositoryAssociation                  smithy.SchemaExtensions
+	eAssociateRepositoryResponse_Tags                                   smithy.SchemaExtensions
+	eCreateCodeReviewRequest                                            smithy.SchemaExtensions
+	eCreateCodeReviewRequest_Name                                       smithy.SchemaExtensions
+	eCreateCodeReviewRequest_RepositoryAssociationArn                   smithy.SchemaExtensions
+	eCreateCodeReviewRequest_Type                                       smithy.SchemaExtensions
+	eCreateCodeReviewRequest_ClientRequestToken                         smithy.SchemaExtensions
+	eCreateCodeReviewResponse                                           smithy.SchemaExtensions
+	eCreateCodeReviewResponse_CodeReview                                smithy.SchemaExtensions
+	eDescribeCodeReviewRequest                                          smithy.SchemaExtensions
+	eDescribeCodeReviewRequest_CodeReviewArn                            smithy.SchemaExtensions
+	eDescribeCodeReviewResponse                                         smithy.SchemaExtensions
+	eDescribeCodeReviewResponse_CodeReview                              smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackRequest                              smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackRequest_CodeReviewArn                smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackRequest_RecommendationId             smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackRequest_UserId                       smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackResponse                             smithy.SchemaExtensions
+	eDescribeRecommendationFeedbackResponse_RecommendationFeedback      smithy.SchemaExtensions
+	eDescribeRepositoryAssociationRequest                               smithy.SchemaExtensions
+	eDescribeRepositoryAssociationRequest_AssociationArn                smithy.SchemaExtensions
+	eDescribeRepositoryAssociationResponse                              smithy.SchemaExtensions
+	eDescribeRepositoryAssociationResponse_RepositoryAssociation        smithy.SchemaExtensions
+	eDescribeRepositoryAssociationResponse_Tags                         smithy.SchemaExtensions
+	eDisassociateRepositoryRequest                                      smithy.SchemaExtensions
+	eDisassociateRepositoryRequest_AssociationArn                       smithy.SchemaExtensions
+	eDisassociateRepositoryResponse                                     smithy.SchemaExtensions
+	eDisassociateRepositoryResponse_RepositoryAssociation               smithy.SchemaExtensions
+	eDisassociateRepositoryResponse_Tags                                smithy.SchemaExtensions
+	eListCodeReviewsRequest                                             smithy.SchemaExtensions
+	eListCodeReviewsRequest_ProviderTypes                               smithy.SchemaExtensions
+	eListCodeReviewsRequest_States                                      smithy.SchemaExtensions
+	eListCodeReviewsRequest_RepositoryNames                             smithy.SchemaExtensions
+	eListCodeReviewsRequest_Type                                        smithy.SchemaExtensions
+	eListCodeReviewsRequest_MaxResults                                  smithy.SchemaExtensions
+	eListCodeReviewsRequest_NextToken                                   smithy.SchemaExtensions
+	eListCodeReviewsResponse                                            smithy.SchemaExtensions
+	eListCodeReviewsResponse_CodeReviewSummaries                        smithy.SchemaExtensions
+	eListCodeReviewsResponse_NextToken                                  smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest                                  smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest_NextToken                        smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest_MaxResults                       smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest_CodeReviewArn                    smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest_UserIds                          smithy.SchemaExtensions
+	eListRecommendationFeedbackRequest_RecommendationIds                smithy.SchemaExtensions
+	eListRecommendationFeedbackResponse                                 smithy.SchemaExtensions
+	eListRecommendationFeedbackResponse_RecommendationFeedbackSummaries smithy.SchemaExtensions
+	eListRecommendationFeedbackResponse_NextToken                       smithy.SchemaExtensions
+	eListRecommendationsRequest                                         smithy.SchemaExtensions
+	eListRecommendationsRequest_NextToken                               smithy.SchemaExtensions
+	eListRecommendationsRequest_MaxResults                              smithy.SchemaExtensions
+	eListRecommendationsRequest_CodeReviewArn                           smithy.SchemaExtensions
+	eListRecommendationsResponse                                        smithy.SchemaExtensions
+	eListRecommendationsResponse_RecommendationSummaries                smithy.SchemaExtensions
+	eListRecommendationsResponse_NextToken                              smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest                                  smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_ProviderTypes                    smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_States                           smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_Names                            smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_Owners                           smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_MaxResults                       smithy.SchemaExtensions
+	eListRepositoryAssociationsRequest_NextToken                        smithy.SchemaExtensions
+	eListRepositoryAssociationsResponse                                 smithy.SchemaExtensions
+	eListRepositoryAssociationsResponse_RepositoryAssociationSummaries  smithy.SchemaExtensions
+	eListRepositoryAssociationsResponse_NextToken                       smithy.SchemaExtensions
+	eListTagsForResourceRequest                                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                             smithy.SchemaExtensions
+	eListTagsForResourceResponse                                        smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                   smithy.SchemaExtensions
+	ePutRecommendationFeedbackRequest                                   smithy.SchemaExtensions
+	ePutRecommendationFeedbackRequest_CodeReviewArn                     smithy.SchemaExtensions
+	ePutRecommendationFeedbackRequest_RecommendationId                  smithy.SchemaExtensions
+	ePutRecommendationFeedbackRequest_Reactions                         smithy.SchemaExtensions
+	ePutRecommendationFeedbackResponse                                  smithy.SchemaExtensions
+	eTagResourceRequest                                                 smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                     smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                            smithy.SchemaExtensions
+	eTagResourceResponse                                                smithy.SchemaExtensions
+	eUntagResourceRequest                                               smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                   smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                       smithy.SchemaExtensions
+	eUntagResourceResponse                                              smithy.SchemaExtensions
+)
+
+var (
+	iAssociateRepository                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AssociateRepository"}
+	iCreateCodeReview                       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CreateCodeReview"}
+	iDescribeCodeReview                     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeCodeReview"}
+	iDescribeRecommendationFeedback         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRecommendationFeedback"}
+	iDescribeRepositoryAssociation          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRepositoryAssociation"}
+	iDisassociateRepository                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DisassociateRepository"}
+	iListCodeReviews                        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListCodeReviews"}
+	iListRecommendationFeedback             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationFeedback"}
+	iListRecommendations                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendations"}
+	iListRepositoryAssociations             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRepositoryAssociations"}
+	iListTagsForResource                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListTagsForResource"}
+	iPutRecommendationFeedback              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "PutRecommendationFeedback"}
+	iTagResource                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagResource"}
+	iUntagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "UntagResource"}
+	i_AWSGuruFrontendService                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AWSGuruFrontendService"}
+	iAccessDeniedException                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AccessDeniedException"}
+	iAnalysisType                           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AnalysisType"}
+	i_AnalysisTypes                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AnalysisTypes"}
+	i_Arn                                   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Arn"}
+	i_AssociationArn                        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AssociationArn"}
+	i_AssociationId                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AssociationId"}
+	iBranchDiffSourceCodeType               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "BranchDiffSourceCodeType"}
+	i_BranchName                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "BranchName"}
+	i_BuildArtifactsObjectKey               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "BuildArtifactsObjectKey"}
+	i_ClientRequestToken                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ClientRequestToken"}
+	iCodeArtifacts                          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeArtifacts"}
+	iCodeCommitRepository                   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeCommitRepository"}
+	iCodeReview                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeReview"}
+	i_CodeReviewName                        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeReviewName"}
+	i_CodeReviewSummaries                   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeReviewSummaries"}
+	iCodeReviewSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeReviewSummary"}
+	iCodeReviewType                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CodeReviewType"}
+	iCommitDiffSourceCodeType               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CommitDiffSourceCodeType"}
+	i_CommitId                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CommitId"}
+	iConfigFileState                        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ConfigFileState"}
+	iConflictException                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ConflictException"}
+	i_ConnectionArn                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ConnectionArn"}
+	iEncryptionOption                       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "EncryptionOption"}
+	i_ErrorMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ErrorMessage"}
+	iEventInfo                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "EventInfo"}
+	i_EventName                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "EventName"}
+	i_EventState                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "EventState"}
+	i_FilePath                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "FilePath"}
+	i_FindingsCount                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "FindingsCount"}
+	iInternalServerException                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "InternalServerException"}
+	iJobState                               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "JobState"}
+	i_JobStates                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "JobStates"}
+	iKMSKeyDetails                          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "KMSKeyDetails"}
+	i_KMSKeyId                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "KMSKeyId"}
+	i_LineNumber                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "LineNumber"}
+	i_LinesOfCodeCount                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "LinesOfCodeCount"}
+	i_ListCodeReviewsMaxResults             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListCodeReviewsMaxResults"}
+	i_ListRecommendationsMaxResults         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationsMaxResults"}
+	i_LongDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "LongDescription"}
+	i_MaxResults                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "MaxResults"}
+	iMetrics                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Metrics"}
+	iMetricsSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "MetricsSummary"}
+	i_Name                                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Name"}
+	i_Names                                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Names"}
+	i_NextToken                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "NextToken"}
+	iNotFoundException                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "NotFoundException"}
+	i_Owner                                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Owner"}
+	i_Owners                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Owners"}
+	iProviderType                           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ProviderType"}
+	i_ProviderTypes                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ProviderTypes"}
+	i_PullRequestId                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "PullRequestId"}
+	iReaction                               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Reaction"}
+	i_Reactions                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Reactions"}
+	iRecommendationCategory                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationCategory"}
+	iRecommendationFeedback                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationFeedback"}
+	i_RecommendationFeedbackSummaries       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationFeedbackSummaries"}
+	iRecommendationFeedbackSummary          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationFeedbackSummary"}
+	i_RecommendationId                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationId"}
+	i_RecommendationIds                     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationIds"}
+	i_RecommendationSummaries               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationSummaries"}
+	iRecommendationSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RecommendationSummary"}
+	iRepository                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Repository"}
+	iRepositoryAnalysis                     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAnalysis"}
+	iRepositoryAssociation                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAssociation"}
+	iRepositoryAssociationState             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAssociationState"}
+	i_RepositoryAssociationStates           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAssociationStates"}
+	i_RepositoryAssociationSummaries        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAssociationSummaries"}
+	iRepositoryAssociationSummary           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryAssociationSummary"}
+	iRepositoryHeadSourceCodeType           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryHeadSourceCodeType"}
+	i_RepositoryNames                       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RepositoryNames"}
+	i_Requester                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Requester"}
+	i_RequestId                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RequestId"}
+	iRequestMetadata                        = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RequestMetadata"}
+	iResourceNotFoundException              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ResourceNotFoundException"}
+	i_RuleId                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RuleId"}
+	iRuleMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RuleMetadata"}
+	i_RuleName                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RuleName"}
+	i_RuleTag                               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RuleTag"}
+	i_RuleTags                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "RuleTags"}
+	i_S3BucketName                          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "S3BucketName"}
+	iS3BucketRepository                     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "S3BucketRepository"}
+	iS3Repository                           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "S3Repository"}
+	iS3RepositoryDetails                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "S3RepositoryDetails"}
+	iSeverity                               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Severity"}
+	i_ShortDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ShortDescription"}
+	i_SourceCodeArtifactsObjectKey          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "SourceCodeArtifactsObjectKey"}
+	iSourceCodeType                         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "SourceCodeType"}
+	i_StateReason                           = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "StateReason"}
+	i_TagKey                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagKey"}
+	i_TagKeyList                            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagKeyList"}
+	i_TagMap                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagMap"}
+	i_TagValue                              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagValue"}
+	i_Text                                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Text"}
+	iThirdPartySourceRepository             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ThirdPartySourceRepository"}
+	iThrottlingException                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ThrottlingException"}
+	i_TimeStamp                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TimeStamp"}
+	iType                                   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "Type"}
+	i_UserId                                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "UserId"}
+	i_UserIds                               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "UserIds"}
+	iValidationException                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ValidationException"}
+	iVendorName                             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "VendorName"}
+	iAssociateRepositoryRequest             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AssociateRepositoryRequest"}
+	iAssociateRepositoryResponse            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "AssociateRepositoryResponse"}
+	iCreateCodeReviewRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CreateCodeReviewRequest"}
+	iCreateCodeReviewResponse               = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "CreateCodeReviewResponse"}
+	iDescribeCodeReviewRequest              = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeCodeReviewRequest"}
+	iDescribeCodeReviewResponse             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeCodeReviewResponse"}
+	iDescribeRecommendationFeedbackRequest  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRecommendationFeedbackRequest"}
+	iDescribeRecommendationFeedbackResponse = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRecommendationFeedbackResponse"}
+	iDescribeRepositoryAssociationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRepositoryAssociationRequest"}
+	iDescribeRepositoryAssociationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DescribeRepositoryAssociationResponse"}
+	iDisassociateRepositoryRequest          = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DisassociateRepositoryRequest"}
+	iDisassociateRepositoryResponse         = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "DisassociateRepositoryResponse"}
+	iListCodeReviewsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListCodeReviewsRequest"}
+	iListCodeReviewsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListCodeReviewsResponse"}
+	iListRecommendationFeedbackRequest      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationFeedbackRequest"}
+	iListRecommendationFeedbackResponse     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationFeedbackResponse"}
+	iListRecommendationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationsRequest"}
+	iListRecommendationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRecommendationsResponse"}
+	iListRepositoryAssociationsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRepositoryAssociationsRequest"}
+	iListRepositoryAssociationsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListRepositoryAssociationsResponse"}
+	iListTagsForResourceRequest             = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse            = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "ListTagsForResourceResponse"}
+	iPutRecommendationFeedbackRequest       = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "PutRecommendationFeedbackRequest"}
+	iPutRecommendationFeedbackResponse      = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "PutRecommendationFeedbackResponse"}
+	iTagResourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagResourceRequest"}
+	iTagResourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "TagResourceResponse"}
+	iUntagResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.codegurureviewer", Name: "UntagResourceResponse"}
+	pUnit                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/associations",
-	Code: 200})
-
-var CreateCodeReview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CreateCodeReview",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/codereviews",
-	Code: 200})
-
-var DescribeCodeReview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeCodeReview",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/codereviews/{CodeReviewArn}",
-	Code: 200})
-
-var DescribeRecommendationFeedback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRecommendationFeedback",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/feedback/{CodeReviewArn}",
-	Code: 200})
-
-var DescribeRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRepositoryAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/associations/{AssociationArn}",
-	Code: 200})
-
-var DisassociateRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DisassociateRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/associations/{AssociationArn}",
-	Code: 200})
-
-var ListCodeReviews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListCodeReviews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/codereviews",
-	Code: 200})
-
-var ListRecommendationFeedback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationFeedback",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/feedback/{CodeReviewArn}/RecommendationFeedback",
-	Code: 200})
-
-var ListRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/codereviews/{CodeReviewArn}/Recommendations",
-	Code: 200})
-
-var ListRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRepositoryAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/associations",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutRecommendationFeedback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "PutRecommendationFeedback",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/feedback",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var _AWSGuruFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AWSGuruFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSGuruFrontendService = smithy.NewServiceSchema(_AWSGuruFrontendService, "2019-09-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AnalysisType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AnalysisType",
-}, smithy.ShapeTypeEnum, 2)
-var AnalysisType_SECURITY *smithy.Schema
-
-var AnalysisType_CODE_QUALITY *smithy.Schema
-
-var _AnalysisTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AnalysisTypes",
-}, smithy.ShapeTypeList, 1)
-var _AnalysisTypes_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AssociationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AssociationId",
-}, smithy.ShapeTypeString, 0)
-
-var BranchDiffSourceCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "BranchDiffSourceCodeType",
-}, smithy.ShapeTypeStructure, 2)
-var BranchDiffSourceCodeType_SourceBranchName *smithy.Schema
-
-var BranchDiffSourceCodeType_DestinationBranchName *smithy.Schema
-
-var _BranchName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "BranchName",
-}, smithy.ShapeTypeString, 0)
-
-var _BuildArtifactsObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "BuildArtifactsObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var CodeArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeArtifacts",
-}, smithy.ShapeTypeStructure, 2)
-var CodeArtifacts_SourceCodeArtifactsObjectKey *smithy.Schema
-
-var CodeArtifacts_BuildArtifactsObjectKey *smithy.Schema
-
-var CodeCommitRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeCommitRepository",
-}, smithy.ShapeTypeStructure, 1)
-var CodeCommitRepository_Name *smithy.Schema
-
-var CodeReview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeReview",
-}, smithy.ShapeTypeStructure, 16)
-var CodeReview_Name *smithy.Schema
-
-var CodeReview_CodeReviewArn *smithy.Schema
-
-var CodeReview_RepositoryName *smithy.Schema
-
-var CodeReview_Owner *smithy.Schema
-
-var CodeReview_ProviderType *smithy.Schema
-
-var CodeReview_State *smithy.Schema
-
-var CodeReview_StateReason *smithy.Schema
-
-var CodeReview_CreatedTimeStamp *smithy.Schema
-
-var CodeReview_LastUpdatedTimeStamp *smithy.Schema
-
-var CodeReview_Type *smithy.Schema
-
-var CodeReview_PullRequestId *smithy.Schema
-
-var CodeReview_SourceCodeType *smithy.Schema
-
-var CodeReview_AssociationArn *smithy.Schema
-
-var CodeReview_Metrics *smithy.Schema
-
-var CodeReview_AnalysisTypes *smithy.Schema
-
-var CodeReview_ConfigFileState *smithy.Schema
-
-var _CodeReviewName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeReviewName",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeReviewSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeReviewSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CodeReviewSummaries_member *smithy.Schema
-
-var CodeReviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeReviewSummary",
-}, smithy.ShapeTypeStructure, 12)
-var CodeReviewSummary_Name *smithy.Schema
-
-var CodeReviewSummary_CodeReviewArn *smithy.Schema
-
-var CodeReviewSummary_RepositoryName *smithy.Schema
-
-var CodeReviewSummary_Owner *smithy.Schema
-
-var CodeReviewSummary_ProviderType *smithy.Schema
-
-var CodeReviewSummary_State *smithy.Schema
-
-var CodeReviewSummary_CreatedTimeStamp *smithy.Schema
-
-var CodeReviewSummary_LastUpdatedTimeStamp *smithy.Schema
-
-var CodeReviewSummary_Type *smithy.Schema
-
-var CodeReviewSummary_PullRequestId *smithy.Schema
-
-var CodeReviewSummary_MetricsSummary *smithy.Schema
-
-var CodeReviewSummary_SourceCodeType *smithy.Schema
-
-var CodeReviewType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CodeReviewType",
-}, smithy.ShapeTypeStructure, 2)
-var CodeReviewType_RepositoryAnalysis *smithy.Schema
-
-var CodeReviewType_AnalysisTypes *smithy.Schema
-
-var CommitDiffSourceCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CommitDiffSourceCodeType",
-}, smithy.ShapeTypeStructure, 3)
-var CommitDiffSourceCodeType_SourceCommit *smithy.Schema
-
-var CommitDiffSourceCodeType_DestinationCommit *smithy.Schema
-
-var CommitDiffSourceCodeType_MergeBaseCommit *smithy.Schema
-
-var _CommitId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CommitId",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigFileState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ConfigFileState",
-}, smithy.ShapeTypeEnum, 3)
-var ConfigFileState_PRESENT *smithy.Schema
-
-var ConfigFileState_ABSENT *smithy.Schema
-
-var ConfigFileState_PRESENT_WITH_ERRORS *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "EncryptionOption",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionOption_AoCmk *smithy.Schema
-
-var EncryptionOption_CmCmk *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EventInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "EventInfo",
-}, smithy.ShapeTypeStructure, 2)
-var EventInfo_Name *smithy.Schema
-
-var EventInfo_State *smithy.Schema
-
-var _EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "EventName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "EventState",
-}, smithy.ShapeTypeString, 0)
-
-var _FilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "FilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "FindingsCount",
-}, smithy.ShapeTypeLong, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var JobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "JobState",
-}, smithy.ShapeTypeEnum, 4)
-var JobState_COMPLETED *smithy.Schema
-
-var JobState_PENDING *smithy.Schema
-
-var JobState_FAILED *smithy.Schema
-
-var JobState_DELETING *smithy.Schema
-
-var _JobStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "JobStates",
-}, smithy.ShapeTypeList, 1)
-var _JobStates_member *smithy.Schema
-
-var KMSKeyDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "KMSKeyDetails",
-}, smithy.ShapeTypeStructure, 2)
-var KMSKeyDetails_KMSKeyId *smithy.Schema
-
-var KMSKeyDetails_EncryptionOption *smithy.Schema
-
-var _KMSKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "KMSKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _LineNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "LineNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LinesOfCodeCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "LinesOfCodeCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _ListCodeReviewsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListCodeReviewsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListRecommendationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LongDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "LongDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Metrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Metrics",
-}, smithy.ShapeTypeStructure, 3)
-var Metrics_MeteredLinesOfCodeCount *smithy.Schema
-
-var Metrics_SuppressedLinesOfCodeCount *smithy.Schema
-
-var Metrics_FindingsCount *smithy.Schema
-
-var MetricsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "MetricsSummary",
-}, smithy.ShapeTypeStructure, 3)
-var MetricsSummary_MeteredLinesOfCodeCount *smithy.Schema
-
-var MetricsSummary_SuppressedLinesOfCodeCount *smithy.Schema
-
-var MetricsSummary_FindingsCount *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _Names = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Names",
-}, smithy.ShapeTypeList, 1)
-var _Names_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var _Owner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Owner",
-}, smithy.ShapeTypeString, 0)
-
-var _Owners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Owners",
-}, smithy.ShapeTypeList, 1)
-var _Owners_member *smithy.Schema
-
-var ProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ProviderType",
-}, smithy.ShapeTypeEnum, 5)
-var ProviderType_CODE_COMMIT *smithy.Schema
-
-var ProviderType_GIT_HUB *smithy.Schema
-
-var ProviderType_BITBUCKET *smithy.Schema
-
-var ProviderType_GIT_HUB_ENTERPRISE_SERVER *smithy.Schema
-
-var ProviderType_S3_BUCKET *smithy.Schema
-
-var _ProviderTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ProviderTypes",
-}, smithy.ShapeTypeList, 1)
-var _ProviderTypes_member *smithy.Schema
-
-var _PullRequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "PullRequestId",
-}, smithy.ShapeTypeString, 0)
-
-var Reaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Reaction",
-}, smithy.ShapeTypeEnum, 2)
-var Reaction_THUMBS_UP *smithy.Schema
-
-var Reaction_THUMBS_DOWN *smithy.Schema
-
-var _Reactions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Reactions",
-}, smithy.ShapeTypeList, 1)
-var _Reactions_member *smithy.Schema
-
-var RecommendationCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationCategory",
-}, smithy.ShapeTypeEnum, 11)
-var RecommendationCategory_AWS_BEST_PRACTICES *smithy.Schema
-
-var RecommendationCategory_AWS_CLOUDFORMATION_ISSUES *smithy.Schema
-
-var RecommendationCategory_DUPLICATE_CODE *smithy.Schema
-
-var RecommendationCategory_CODE_MAINTENANCE_ISSUES *smithy.Schema
-
-var RecommendationCategory_CONCURRENCY_ISSUES *smithy.Schema
-
-var RecommendationCategory_INPUT_VALIDATIONS *smithy.Schema
-
-var RecommendationCategory_PYTHON_BEST_PRACTICES *smithy.Schema
-
-var RecommendationCategory_JAVA_BEST_PRACTICES *smithy.Schema
-
-var RecommendationCategory_RESOURCE_LEAKS *smithy.Schema
-
-var RecommendationCategory_SECURITY_ISSUES *smithy.Schema
-
-var RecommendationCategory_CODE_INCONSISTENCIES *smithy.Schema
-
-var RecommendationFeedback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationFeedback",
-}, smithy.ShapeTypeStructure, 6)
-var RecommendationFeedback_CodeReviewArn *smithy.Schema
-
-var RecommendationFeedback_RecommendationId *smithy.Schema
-
-var RecommendationFeedback_Reactions *smithy.Schema
-
-var RecommendationFeedback_UserId *smithy.Schema
-
-var RecommendationFeedback_CreatedTimeStamp *smithy.Schema
-
-var RecommendationFeedback_LastUpdatedTimeStamp *smithy.Schema
-
-var _RecommendationFeedbackSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationFeedbackSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationFeedbackSummaries_member *smithy.Schema
-
-var RecommendationFeedbackSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationFeedbackSummary",
-}, smithy.ShapeTypeStructure, 3)
-var RecommendationFeedbackSummary_RecommendationId *smithy.Schema
-
-var RecommendationFeedbackSummary_Reactions *smithy.Schema
-
-var RecommendationFeedbackSummary_UserId *smithy.Schema
-
-var _RecommendationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationId",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationIds",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationIds_member *smithy.Schema
-
-var _RecommendationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationSummaries_member *smithy.Schema
-
-var RecommendationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RecommendationSummary",
-}, smithy.ShapeTypeStructure, 8)
-var RecommendationSummary_FilePath *smithy.Schema
-
-var RecommendationSummary_RecommendationId *smithy.Schema
-
-var RecommendationSummary_StartLine *smithy.Schema
-
-var RecommendationSummary_EndLine *smithy.Schema
-
-var RecommendationSummary_Description *smithy.Schema
-
-var RecommendationSummary_RecommendationCategory *smithy.Schema
-
-var RecommendationSummary_RuleMetadata *smithy.Schema
-
-var RecommendationSummary_Severity *smithy.Schema
-
-var Repository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Repository",
-}, smithy.ShapeTypeStructure, 4)
-var Repository_CodeCommit *smithy.Schema
-
-var Repository_Bitbucket *smithy.Schema
-
-var Repository_GitHubEnterpriseServer *smithy.Schema
-
-var Repository_S3Bucket *smithy.Schema
-
-var RepositoryAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAnalysis",
-}, smithy.ShapeTypeStructure, 2)
-var RepositoryAnalysis_RepositoryHead *smithy.Schema
-
-var RepositoryAnalysis_SourceCodeType *smithy.Schema
-
-var RepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAssociation",
-}, smithy.ShapeTypeStructure, 12)
-var RepositoryAssociation_AssociationId *smithy.Schema
-
-var RepositoryAssociation_AssociationArn *smithy.Schema
-
-var RepositoryAssociation_ConnectionArn *smithy.Schema
-
-var RepositoryAssociation_Name *smithy.Schema
-
-var RepositoryAssociation_Owner *smithy.Schema
-
-var RepositoryAssociation_ProviderType *smithy.Schema
-
-var RepositoryAssociation_State *smithy.Schema
-
-var RepositoryAssociation_StateReason *smithy.Schema
-
-var RepositoryAssociation_LastUpdatedTimeStamp *smithy.Schema
-
-var RepositoryAssociation_CreatedTimeStamp *smithy.Schema
-
-var RepositoryAssociation_KMSKeyDetails *smithy.Schema
-
-var RepositoryAssociation_S3RepositoryDetails *smithy.Schema
-
-var RepositoryAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAssociationState",
-}, smithy.ShapeTypeEnum, 5)
-var RepositoryAssociationState_ASSOCIATED *smithy.Schema
-
-var RepositoryAssociationState_ASSOCIATING *smithy.Schema
-
-var RepositoryAssociationState_FAILED *smithy.Schema
-
-var RepositoryAssociationState_DISASSOCIATING *smithy.Schema
-
-var RepositoryAssociationState_DISASSOCIATED *smithy.Schema
-
-var _RepositoryAssociationStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAssociationStates",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryAssociationStates_member *smithy.Schema
-
-var _RepositoryAssociationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAssociationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryAssociationSummaries_member *smithy.Schema
-
-var RepositoryAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryAssociationSummary",
-}, smithy.ShapeTypeStructure, 8)
-var RepositoryAssociationSummary_AssociationArn *smithy.Schema
-
-var RepositoryAssociationSummary_ConnectionArn *smithy.Schema
-
-var RepositoryAssociationSummary_LastUpdatedTimeStamp *smithy.Schema
-
-var RepositoryAssociationSummary_AssociationId *smithy.Schema
-
-var RepositoryAssociationSummary_Name *smithy.Schema
-
-var RepositoryAssociationSummary_Owner *smithy.Schema
-
-var RepositoryAssociationSummary_ProviderType *smithy.Schema
-
-var RepositoryAssociationSummary_State *smithy.Schema
-
-var RepositoryHeadSourceCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryHeadSourceCodeType",
-}, smithy.ShapeTypeStructure, 1)
-var RepositoryHeadSourceCodeType_BranchName *smithy.Schema
-
-var _RepositoryNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RepositoryNames",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryNames_member *smithy.Schema
-
-var _Requester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Requester",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var RequestMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RequestMetadata",
-}, smithy.ShapeTypeStructure, 4)
-var RequestMetadata_RequestId *smithy.Schema
-
-var RequestMetadata_Requester *smithy.Schema
-
-var RequestMetadata_EventInfo *smithy.Schema
-
-var RequestMetadata_VendorName *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _RuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RuleId",
-}, smithy.ShapeTypeString, 0)
-
-var RuleMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RuleMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var RuleMetadata_RuleId *smithy.Schema
-
-var RuleMetadata_RuleName *smithy.Schema
-
-var RuleMetadata_ShortDescription *smithy.Schema
-
-var RuleMetadata_LongDescription *smithy.Schema
-
-var RuleMetadata_RuleTags *smithy.Schema
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RuleTag",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "RuleTags",
-}, smithy.ShapeTypeList, 1)
-var _RuleTags_member *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var S3BucketRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "S3BucketRepository",
-}, smithy.ShapeTypeStructure, 2)
-var S3BucketRepository_Name *smithy.Schema
-
-var S3BucketRepository_Details *smithy.Schema
-
-var S3Repository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "S3Repository",
-}, smithy.ShapeTypeStructure, 2)
-var S3Repository_Name *smithy.Schema
-
-var S3Repository_BucketName *smithy.Schema
-
-var S3RepositoryDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "S3RepositoryDetails",
-}, smithy.ShapeTypeStructure, 2)
-var S3RepositoryDetails_BucketName *smithy.Schema
-
-var S3RepositoryDetails_CodeArtifacts *smithy.Schema
-
-var Severity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Severity",
-}, smithy.ShapeTypeEnum, 5)
-var Severity_INFO *smithy.Schema
-
-var Severity_LOW *smithy.Schema
-
-var Severity_MEDIUM *smithy.Schema
-
-var Severity_HIGH *smithy.Schema
-
-var Severity_CRITICAL *smithy.Schema
-
-var _ShortDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ShortDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceCodeArtifactsObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "SourceCodeArtifactsObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var SourceCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "SourceCodeType",
-}, smithy.ShapeTypeStructure, 5)
-var SourceCodeType_CommitDiff *smithy.Schema
-
-var SourceCodeType_RepositoryHead *smithy.Schema
-
-var SourceCodeType_BranchDiff *smithy.Schema
-
-var SourceCodeType_S3BucketRepository *smithy.Schema
-
-var SourceCodeType_RequestMetadata *smithy.Schema
-
-var _StateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "StateReason",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Text = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Text",
-}, smithy.ShapeTypeString, 0)
-
-var ThirdPartySourceRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ThirdPartySourceRepository",
-}, smithy.ShapeTypeStructure, 3)
-var ThirdPartySourceRepository_Name *smithy.Schema
-
-var ThirdPartySourceRepository_ConnectionArn *smithy.Schema
-
-var ThirdPartySourceRepository_Owner *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "Type",
-}, smithy.ShapeTypeEnum, 2)
-var Type_PULL_REQUEST *smithy.Schema
-
-var Type_REPOSITORY_ANALYSIS *smithy.Schema
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var _UserIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "UserIds",
-}, smithy.ShapeTypeList, 1)
-var _UserIds_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var VendorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "VendorName",
-}, smithy.ShapeTypeEnum, 3)
-var VendorName_GITHUB *smithy.Schema
-
-var VendorName_GITLAB *smithy.Schema
-
-var VendorName_NATIVE_S3 *smithy.Schema
-
-var AssociateRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AssociateRepositoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateRepositoryRequest_Repository *smithy.Schema
-
-var AssociateRepositoryRequest_ClientRequestToken *smithy.Schema
-
-var AssociateRepositoryRequest_Tags *smithy.Schema
-
-var AssociateRepositoryRequest_KMSKeyDetails *smithy.Schema
-
-var AssociateRepositoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "AssociateRepositoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateRepositoryResponse_RepositoryAssociation *smithy.Schema
-
-var AssociateRepositoryResponse_Tags *smithy.Schema
-
-var CreateCodeReviewRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CreateCodeReviewRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCodeReviewRequest_Name *smithy.Schema
-
-var CreateCodeReviewRequest_RepositoryAssociationArn *smithy.Schema
-
-var CreateCodeReviewRequest_Type *smithy.Schema
-
-var CreateCodeReviewRequest_ClientRequestToken *smithy.Schema
-
-var CreateCodeReviewResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "CreateCodeReviewResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCodeReviewResponse_CodeReview *smithy.Schema
-
-var DescribeCodeReviewRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeCodeReviewRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCodeReviewRequest_CodeReviewArn *smithy.Schema
-
-var DescribeCodeReviewResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeCodeReviewResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCodeReviewResponse_CodeReview *smithy.Schema
-
-var DescribeRecommendationFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRecommendationFeedbackRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeRecommendationFeedbackRequest_CodeReviewArn *smithy.Schema
-
-var DescribeRecommendationFeedbackRequest_RecommendationId *smithy.Schema
-
-var DescribeRecommendationFeedbackRequest_UserId *smithy.Schema
-
-var DescribeRecommendationFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRecommendationFeedbackResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRecommendationFeedbackResponse_RecommendationFeedback *smithy.Schema
-
-var DescribeRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRepositoryAssociationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRepositoryAssociationRequest_AssociationArn *smithy.Schema
-
-var DescribeRepositoryAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DescribeRepositoryAssociationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRepositoryAssociationResponse_RepositoryAssociation *smithy.Schema
-
-var DescribeRepositoryAssociationResponse_Tags *smithy.Schema
-
-var DisassociateRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DisassociateRepositoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateRepositoryRequest_AssociationArn *smithy.Schema
-
-var DisassociateRepositoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "DisassociateRepositoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateRepositoryResponse_RepositoryAssociation *smithy.Schema
-
-var DisassociateRepositoryResponse_Tags *smithy.Schema
-
-var ListCodeReviewsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListCodeReviewsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListCodeReviewsRequest_ProviderTypes *smithy.Schema
-
-var ListCodeReviewsRequest_States *smithy.Schema
-
-var ListCodeReviewsRequest_RepositoryNames *smithy.Schema
-
-var ListCodeReviewsRequest_Type *smithy.Schema
-
-var ListCodeReviewsRequest_MaxResults *smithy.Schema
-
-var ListCodeReviewsRequest_NextToken *smithy.Schema
-
-var ListCodeReviewsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListCodeReviewsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodeReviewsResponse_CodeReviewSummaries *smithy.Schema
-
-var ListCodeReviewsResponse_NextToken *smithy.Schema
-
-var ListRecommendationFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationFeedbackRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRecommendationFeedbackRequest_NextToken *smithy.Schema
-
-var ListRecommendationFeedbackRequest_MaxResults *smithy.Schema
-
-var ListRecommendationFeedbackRequest_CodeReviewArn *smithy.Schema
-
-var ListRecommendationFeedbackRequest_UserIds *smithy.Schema
-
-var ListRecommendationFeedbackRequest_RecommendationIds *smithy.Schema
-
-var ListRecommendationFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationFeedbackResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries *smithy.Schema
-
-var ListRecommendationFeedbackResponse_NextToken *smithy.Schema
-
-var ListRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecommendationsRequest_NextToken *smithy.Schema
-
-var ListRecommendationsRequest_MaxResults *smithy.Schema
-
-var ListRecommendationsRequest_CodeReviewArn *smithy.Schema
-
-var ListRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendationsResponse_RecommendationSummaries *smithy.Schema
-
-var ListRecommendationsResponse_NextToken *smithy.Schema
-
-var ListRepositoryAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRepositoryAssociationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListRepositoryAssociationsRequest_ProviderTypes *smithy.Schema
-
-var ListRepositoryAssociationsRequest_States *smithy.Schema
-
-var ListRepositoryAssociationsRequest_Names *smithy.Schema
-
-var ListRepositoryAssociationsRequest_Owners *smithy.Schema
-
-var ListRepositoryAssociationsRequest_MaxResults *smithy.Schema
-
-var ListRepositoryAssociationsRequest_NextToken *smithy.Schema
-
-var ListRepositoryAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListRepositoryAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoryAssociationsResponse_RepositoryAssociationSummaries *smithy.Schema
-
-var ListRepositoryAssociationsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutRecommendationFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "PutRecommendationFeedbackRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutRecommendationFeedbackRequest_CodeReviewArn *smithy.Schema
-
-var PutRecommendationFeedbackRequest_RecommendationId *smithy.Schema
-
-var PutRecommendationFeedbackRequest_Reactions *smithy.Schema
-
-var PutRecommendationFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "PutRecommendationFeedbackResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codegurureviewer",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	AnalysisType_SECURITY = AnalysisType.AddMember("SECURITY", smithyprelude.Unit)
-
-	AnalysisType_CODE_QUALITY = AnalysisType.AddMember("CODE_QUALITY", smithyprelude.Unit)
-
-	_AnalysisTypes_member = _AnalysisTypes.AddMember("member", AnalysisType)
-
-	BranchDiffSourceCodeType_SourceBranchName = BranchDiffSourceCodeType.AddMember("SourceBranchName", _BranchName)
-
-	BranchDiffSourceCodeType_DestinationBranchName = BranchDiffSourceCodeType.AddMember("DestinationBranchName", _BranchName)
-
-	CodeArtifacts_SourceCodeArtifactsObjectKey = CodeArtifacts.AddMember("SourceCodeArtifactsObjectKey", _SourceCodeArtifactsObjectKey)
-
-	CodeArtifacts_BuildArtifactsObjectKey = CodeArtifacts.AddMember("BuildArtifactsObjectKey", _BuildArtifactsObjectKey)
-
-	CodeCommitRepository_Name = CodeCommitRepository.AddMember("Name", _Name)
-
-	ProviderType_CODE_COMMIT = ProviderType.AddMember("CODE_COMMIT", smithyprelude.Unit)
-
-	ProviderType_GIT_HUB = ProviderType.AddMember("GIT_HUB", smithyprelude.Unit)
-
-	ProviderType_BITBUCKET = ProviderType.AddMember("BITBUCKET", smithyprelude.Unit)
-
-	ProviderType_GIT_HUB_ENTERPRISE_SERVER = ProviderType.AddMember("GIT_HUB_ENTERPRISE_SERVER", smithyprelude.Unit)
-
-	ProviderType_S3_BUCKET = ProviderType.AddMember("S3_BUCKET", smithyprelude.Unit)
-
-	JobState_COMPLETED = JobState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobState_PENDING = JobState.AddMember("PENDING", smithyprelude.Unit)
-
-	JobState_FAILED = JobState.AddMember("FAILED", smithyprelude.Unit)
-
-	JobState_DELETING = JobState.AddMember("DELETING", smithyprelude.Unit)
-
-	Type_PULL_REQUEST = Type.AddMember("PULL_REQUEST", smithyprelude.Unit)
-
-	Type_REPOSITORY_ANALYSIS = Type.AddMember("REPOSITORY_ANALYSIS", smithyprelude.Unit)
-
-	CommitDiffSourceCodeType_SourceCommit = CommitDiffSourceCodeType.AddMember("SourceCommit", _CommitId)
-
-	CommitDiffSourceCodeType_DestinationCommit = CommitDiffSourceCodeType.AddMember("DestinationCommit", _CommitId)
-
-	CommitDiffSourceCodeType_MergeBaseCommit = CommitDiffSourceCodeType.AddMember("MergeBaseCommit", _CommitId)
-
-	RepositoryHeadSourceCodeType_BranchName = RepositoryHeadSourceCodeType.AddMember("BranchName", _BranchName)
-
-	S3RepositoryDetails_BucketName = S3RepositoryDetails.AddMember("BucketName", _S3BucketName)
-
-	S3RepositoryDetails_CodeArtifacts = S3RepositoryDetails.AddMember("CodeArtifacts", CodeArtifacts)
-
-	S3BucketRepository_Name = S3BucketRepository.AddMember("Name", _Name)
-
-	S3BucketRepository_Details = S3BucketRepository.AddMember("Details", S3RepositoryDetails)
-
-	EventInfo_Name = EventInfo.AddMember("Name", _EventName)
-
-	EventInfo_State = EventInfo.AddMember("State", _EventState)
-
-	VendorName_GITHUB = VendorName.AddMember("GITHUB", smithyprelude.Unit)
-
-	VendorName_GITLAB = VendorName.AddMember("GITLAB", smithyprelude.Unit)
-
-	VendorName_NATIVE_S3 = VendorName.AddMember("NATIVE_S3", smithyprelude.Unit)
-
-	RequestMetadata_RequestId = RequestMetadata.AddMember("RequestId", _RequestId)
-
-	RequestMetadata_Requester = RequestMetadata.AddMember("Requester", _Requester)
-
-	RequestMetadata_EventInfo = RequestMetadata.AddMember("EventInfo", EventInfo)
-
-	RequestMetadata_VendorName = RequestMetadata.AddMember("VendorName", VendorName)
-
-	SourceCodeType_CommitDiff = SourceCodeType.AddMember("CommitDiff", CommitDiffSourceCodeType)
-
-	SourceCodeType_RepositoryHead = SourceCodeType.AddMember("RepositoryHead", RepositoryHeadSourceCodeType)
-
-	SourceCodeType_BranchDiff = SourceCodeType.AddMember("BranchDiff", BranchDiffSourceCodeType)
-
-	SourceCodeType_S3BucketRepository = SourceCodeType.AddMember("S3BucketRepository", S3BucketRepository)
-
-	SourceCodeType_RequestMetadata = SourceCodeType.AddMember("RequestMetadata", RequestMetadata)
-
-	Metrics_MeteredLinesOfCodeCount = Metrics.AddMember("MeteredLinesOfCodeCount", _LinesOfCodeCount)
-
-	Metrics_SuppressedLinesOfCodeCount = Metrics.AddMember("SuppressedLinesOfCodeCount", _LinesOfCodeCount)
-
-	Metrics_FindingsCount = Metrics.AddMember("FindingsCount", _FindingsCount)
-
-	ConfigFileState_PRESENT = ConfigFileState.AddMember("PRESENT", smithyprelude.Unit)
-
-	ConfigFileState_ABSENT = ConfigFileState.AddMember("ABSENT", smithyprelude.Unit)
-
-	ConfigFileState_PRESENT_WITH_ERRORS = ConfigFileState.AddMember("PRESENT_WITH_ERRORS", smithyprelude.Unit)
-
-	CodeReview_Name = CodeReview.AddMember("Name", _Name)
-
-	CodeReview_CodeReviewArn = CodeReview.AddMember("CodeReviewArn", _Arn)
-
-	CodeReview_RepositoryName = CodeReview.AddMember("RepositoryName", _Name)
-
-	CodeReview_Owner = CodeReview.AddMember("Owner", _Owner)
-
-	CodeReview_ProviderType = CodeReview.AddMember("ProviderType", ProviderType)
-
-	CodeReview_State = CodeReview.AddMember("State", JobState)
-
-	CodeReview_StateReason = CodeReview.AddMember("StateReason", _StateReason)
-
-	CodeReview_CreatedTimeStamp = CodeReview.AddMember("CreatedTimeStamp", _TimeStamp)
-
-	CodeReview_LastUpdatedTimeStamp = CodeReview.AddMember("LastUpdatedTimeStamp", _TimeStamp)
-
-	CodeReview_Type = CodeReview.AddMember("Type", Type)
-
-	CodeReview_PullRequestId = CodeReview.AddMember("PullRequestId", _PullRequestId)
-
-	CodeReview_SourceCodeType = CodeReview.AddMember("SourceCodeType", SourceCodeType)
-
-	CodeReview_AssociationArn = CodeReview.AddMember("AssociationArn", _AssociationArn)
-
-	CodeReview_Metrics = CodeReview.AddMember("Metrics", Metrics)
-
-	CodeReview_AnalysisTypes = CodeReview.AddMember("AnalysisTypes", _AnalysisTypes)
-
-	CodeReview_ConfigFileState = CodeReview.AddMember("ConfigFileState", ConfigFileState)
-
-	MetricsSummary_MeteredLinesOfCodeCount = MetricsSummary.AddMember("MeteredLinesOfCodeCount", _LinesOfCodeCount)
-
-	MetricsSummary_SuppressedLinesOfCodeCount = MetricsSummary.AddMember("SuppressedLinesOfCodeCount", _LinesOfCodeCount)
-
-	MetricsSummary_FindingsCount = MetricsSummary.AddMember("FindingsCount", _FindingsCount)
-
-	CodeReviewSummary_Name = CodeReviewSummary.AddMember("Name", _Name)
-
-	CodeReviewSummary_CodeReviewArn = CodeReviewSummary.AddMember("CodeReviewArn", _Arn)
-
-	CodeReviewSummary_RepositoryName = CodeReviewSummary.AddMember("RepositoryName", _Name)
-
-	CodeReviewSummary_Owner = CodeReviewSummary.AddMember("Owner", _Owner)
-
-	CodeReviewSummary_ProviderType = CodeReviewSummary.AddMember("ProviderType", ProviderType)
-
-	CodeReviewSummary_State = CodeReviewSummary.AddMember("State", JobState)
-
-	CodeReviewSummary_CreatedTimeStamp = CodeReviewSummary.AddMember("CreatedTimeStamp", _TimeStamp)
-
-	CodeReviewSummary_LastUpdatedTimeStamp = CodeReviewSummary.AddMember("LastUpdatedTimeStamp", _TimeStamp)
-
-	CodeReviewSummary_Type = CodeReviewSummary.AddMember("Type", Type)
-
-	CodeReviewSummary_PullRequestId = CodeReviewSummary.AddMember("PullRequestId", _PullRequestId)
-
-	CodeReviewSummary_MetricsSummary = CodeReviewSummary.AddMember("MetricsSummary", MetricsSummary)
-
-	CodeReviewSummary_SourceCodeType = CodeReviewSummary.AddMember("SourceCodeType", SourceCodeType)
-
-	_CodeReviewSummaries_member = _CodeReviewSummaries.AddMember("member", CodeReviewSummary)
-
-	RepositoryAnalysis_RepositoryHead = RepositoryAnalysis.AddMember("RepositoryHead", RepositoryHeadSourceCodeType)
-
-	RepositoryAnalysis_SourceCodeType = RepositoryAnalysis.AddMember("SourceCodeType", SourceCodeType)
-
-	CodeReviewType_RepositoryAnalysis = CodeReviewType.AddMember("RepositoryAnalysis", RepositoryAnalysis)
-
-	CodeReviewType_AnalysisTypes = CodeReviewType.AddMember("AnalysisTypes", _AnalysisTypes)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	EncryptionOption_AoCmk = EncryptionOption.AddMember("AoCmk", smithyprelude.Unit)
-
-	EncryptionOption_CmCmk = EncryptionOption.AddMember("CmCmk", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	_JobStates_member = _JobStates.AddMember("member", JobState)
-
-	KMSKeyDetails_KMSKeyId = KMSKeyDetails.AddMember("KMSKeyId", _KMSKeyId)
-
-	KMSKeyDetails_EncryptionOption = KMSKeyDetails.AddMember("EncryptionOption", EncryptionOption)
-
-	_Names_member = _Names.AddMember("member", _Name)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _ErrorMessage)
-
-	_Owners_member = _Owners.AddMember("member", _Owner)
-
-	_ProviderTypes_member = _ProviderTypes.AddMember("member", ProviderType)
-
-	Reaction_THUMBS_UP = Reaction.AddMember("THUMBS_UP", smithyprelude.Unit)
-
-	Reaction_THUMBS_DOWN = Reaction.AddMember("THUMBS_DOWN", smithyprelude.Unit)
-
-	_Reactions_member = _Reactions.AddMember("member", Reaction)
-
-	RecommendationCategory_AWS_BEST_PRACTICES = RecommendationCategory.AddMember("AWS_BEST_PRACTICES", smithyprelude.Unit)
-
-	RecommendationCategory_AWS_CLOUDFORMATION_ISSUES = RecommendationCategory.AddMember("AWS_CLOUDFORMATION_ISSUES", smithyprelude.Unit)
-
-	RecommendationCategory_DUPLICATE_CODE = RecommendationCategory.AddMember("DUPLICATE_CODE", smithyprelude.Unit)
-
-	RecommendationCategory_CODE_MAINTENANCE_ISSUES = RecommendationCategory.AddMember("CODE_MAINTENANCE_ISSUES", smithyprelude.Unit)
-
-	RecommendationCategory_CONCURRENCY_ISSUES = RecommendationCategory.AddMember("CONCURRENCY_ISSUES", smithyprelude.Unit)
-
-	RecommendationCategory_INPUT_VALIDATIONS = RecommendationCategory.AddMember("INPUT_VALIDATIONS", smithyprelude.Unit)
-
-	RecommendationCategory_PYTHON_BEST_PRACTICES = RecommendationCategory.AddMember("PYTHON_BEST_PRACTICES", smithyprelude.Unit)
-
-	RecommendationCategory_JAVA_BEST_PRACTICES = RecommendationCategory.AddMember("JAVA_BEST_PRACTICES", smithyprelude.Unit)
-
-	RecommendationCategory_RESOURCE_LEAKS = RecommendationCategory.AddMember("RESOURCE_LEAKS", smithyprelude.Unit)
-
-	RecommendationCategory_SECURITY_ISSUES = RecommendationCategory.AddMember("SECURITY_ISSUES", smithyprelude.Unit)
-
-	RecommendationCategory_CODE_INCONSISTENCIES = RecommendationCategory.AddMember("CODE_INCONSISTENCIES", smithyprelude.Unit)
-
-	RecommendationFeedback_CodeReviewArn = RecommendationFeedback.AddMember("CodeReviewArn", _Arn)
-
-	RecommendationFeedback_RecommendationId = RecommendationFeedback.AddMember("RecommendationId", _RecommendationId)
-
-	RecommendationFeedback_Reactions = RecommendationFeedback.AddMember("Reactions", _Reactions)
-
-	RecommendationFeedback_UserId = RecommendationFeedback.AddMember("UserId", _UserId)
-
-	RecommendationFeedback_CreatedTimeStamp = RecommendationFeedback.AddMember("CreatedTimeStamp", _TimeStamp)
-
-	RecommendationFeedback_LastUpdatedTimeStamp = RecommendationFeedback.AddMember("LastUpdatedTimeStamp", _TimeStamp)
-
-	RecommendationFeedbackSummary_RecommendationId = RecommendationFeedbackSummary.AddMember("RecommendationId", _RecommendationId)
-
-	RecommendationFeedbackSummary_Reactions = RecommendationFeedbackSummary.AddMember("Reactions", _Reactions)
-
-	RecommendationFeedbackSummary_UserId = RecommendationFeedbackSummary.AddMember("UserId", _UserId)
-
-	_RecommendationFeedbackSummaries_member = _RecommendationFeedbackSummaries.AddMember("member", RecommendationFeedbackSummary)
-
-	_RecommendationIds_member = _RecommendationIds.AddMember("member", _RecommendationId)
-
-	_RuleTags_member = _RuleTags.AddMember("member", _RuleTag)
-
-	RuleMetadata_RuleId = RuleMetadata.AddMember("RuleId", _RuleId)
-
-	RuleMetadata_RuleName = RuleMetadata.AddMember("RuleName", _RuleName)
-
-	RuleMetadata_ShortDescription = RuleMetadata.AddMember("ShortDescription", _ShortDescription)
-
-	RuleMetadata_LongDescription = RuleMetadata.AddMember("LongDescription", _LongDescription)
-
-	RuleMetadata_RuleTags = RuleMetadata.AddMember("RuleTags", _RuleTags)
-
-	Severity_INFO = Severity.AddMember("INFO", smithyprelude.Unit)
-
-	Severity_LOW = Severity.AddMember("LOW", smithyprelude.Unit)
-
-	Severity_MEDIUM = Severity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	Severity_HIGH = Severity.AddMember("HIGH", smithyprelude.Unit)
-
-	Severity_CRITICAL = Severity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	RecommendationSummary_FilePath = RecommendationSummary.AddMember("FilePath", _FilePath)
-
-	RecommendationSummary_RecommendationId = RecommendationSummary.AddMember("RecommendationId", _RecommendationId)
-
-	RecommendationSummary_StartLine = RecommendationSummary.AddMember("StartLine", _LineNumber)
-
-	RecommendationSummary_EndLine = RecommendationSummary.AddMember("EndLine", _LineNumber)
-
-	RecommendationSummary_Description = RecommendationSummary.AddMember("Description", _Text)
-
-	RecommendationSummary_RecommendationCategory = RecommendationSummary.AddMember("RecommendationCategory", RecommendationCategory)
-
-	RecommendationSummary_RuleMetadata = RecommendationSummary.AddMember("RuleMetadata", RuleMetadata)
-
-	RecommendationSummary_Severity = RecommendationSummary.AddMember("Severity", Severity)
-
-	_RecommendationSummaries_member = _RecommendationSummaries.AddMember("member", RecommendationSummary)
-
-	ThirdPartySourceRepository_Name = ThirdPartySourceRepository.AddMember("Name", _Name)
-
-	ThirdPartySourceRepository_ConnectionArn = ThirdPartySourceRepository.AddMember("ConnectionArn", _ConnectionArn)
-
-	ThirdPartySourceRepository_Owner = ThirdPartySourceRepository.AddMember("Owner", _Owner)
-
-	S3Repository_Name = S3Repository.AddMember("Name", _Name)
-
-	S3Repository_BucketName = S3Repository.AddMember("BucketName", _S3BucketName)
-
-	Repository_CodeCommit = Repository.AddMember("CodeCommit", CodeCommitRepository)
-
-	Repository_Bitbucket = Repository.AddMember("Bitbucket", ThirdPartySourceRepository)
-
-	Repository_GitHubEnterpriseServer = Repository.AddMember("GitHubEnterpriseServer", ThirdPartySourceRepository)
-
-	Repository_S3Bucket = Repository.AddMember("S3Bucket", S3Repository)
-
-	RepositoryAssociationState_ASSOCIATED = RepositoryAssociationState.AddMember("ASSOCIATED", smithyprelude.Unit)
-
-	RepositoryAssociationState_ASSOCIATING = RepositoryAssociationState.AddMember("ASSOCIATING", smithyprelude.Unit)
-
-	RepositoryAssociationState_FAILED = RepositoryAssociationState.AddMember("FAILED", smithyprelude.Unit)
-
-	RepositoryAssociationState_DISASSOCIATING = RepositoryAssociationState.AddMember("DISASSOCIATING", smithyprelude.Unit)
-
-	RepositoryAssociationState_DISASSOCIATED = RepositoryAssociationState.AddMember("DISASSOCIATED", smithyprelude.Unit)
-
-	RepositoryAssociation_AssociationId = RepositoryAssociation.AddMember("AssociationId", _AssociationId)
-
-	RepositoryAssociation_AssociationArn = RepositoryAssociation.AddMember("AssociationArn", _Arn)
-
-	RepositoryAssociation_ConnectionArn = RepositoryAssociation.AddMember("ConnectionArn", _ConnectionArn)
-
-	RepositoryAssociation_Name = RepositoryAssociation.AddMember("Name", _Name)
-
-	RepositoryAssociation_Owner = RepositoryAssociation.AddMember("Owner", _Owner)
-
-	RepositoryAssociation_ProviderType = RepositoryAssociation.AddMember("ProviderType", ProviderType)
-
-	RepositoryAssociation_State = RepositoryAssociation.AddMember("State", RepositoryAssociationState)
-
-	RepositoryAssociation_StateReason = RepositoryAssociation.AddMember("StateReason", _StateReason)
-
-	RepositoryAssociation_LastUpdatedTimeStamp = RepositoryAssociation.AddMember("LastUpdatedTimeStamp", _TimeStamp)
-
-	RepositoryAssociation_CreatedTimeStamp = RepositoryAssociation.AddMember("CreatedTimeStamp", _TimeStamp)
-
-	RepositoryAssociation_KMSKeyDetails = RepositoryAssociation.AddMember("KMSKeyDetails", KMSKeyDetails)
-
-	RepositoryAssociation_S3RepositoryDetails = RepositoryAssociation.AddMember("S3RepositoryDetails", S3RepositoryDetails)
-
-	_RepositoryAssociationStates_member = _RepositoryAssociationStates.AddMember("member", RepositoryAssociationState)
-
-	RepositoryAssociationSummary_AssociationArn = RepositoryAssociationSummary.AddMember("AssociationArn", _Arn)
-
-	RepositoryAssociationSummary_ConnectionArn = RepositoryAssociationSummary.AddMember("ConnectionArn", _ConnectionArn)
-
-	RepositoryAssociationSummary_LastUpdatedTimeStamp = RepositoryAssociationSummary.AddMember("LastUpdatedTimeStamp", _TimeStamp)
-
-	RepositoryAssociationSummary_AssociationId = RepositoryAssociationSummary.AddMember("AssociationId", _AssociationId)
-
-	RepositoryAssociationSummary_Name = RepositoryAssociationSummary.AddMember("Name", _Name)
-
-	RepositoryAssociationSummary_Owner = RepositoryAssociationSummary.AddMember("Owner", _Owner)
-
-	RepositoryAssociationSummary_ProviderType = RepositoryAssociationSummary.AddMember("ProviderType", ProviderType)
-
-	RepositoryAssociationSummary_State = RepositoryAssociationSummary.AddMember("State", RepositoryAssociationState)
-
-	_RepositoryAssociationSummaries_member = _RepositoryAssociationSummaries.AddMember("member", RepositoryAssociationSummary)
-
-	_RepositoryNames_member = _RepositoryNames.AddMember("member", _Name)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	_UserIds_member = _UserIds.AddMember("member", _UserId)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	AssociateRepositoryRequest_Repository = AssociateRepositoryRequest.AddMember("Repository", Repository)
-
-	AssociateRepositoryRequest_ClientRequestToken = AssociateRepositoryRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	AssociateRepositoryRequest_Tags = AssociateRepositoryRequest.AddMember("Tags", _TagMap)
-
-	AssociateRepositoryRequest_KMSKeyDetails = AssociateRepositoryRequest.AddMember("KMSKeyDetails", KMSKeyDetails)
-
-	AssociateRepositoryResponse_RepositoryAssociation = AssociateRepositoryResponse.AddMember("RepositoryAssociation", RepositoryAssociation)
-
-	AssociateRepositoryResponse_Tags = AssociateRepositoryResponse.AddMember("Tags", _TagMap)
-
-	CreateCodeReviewRequest_Name = CreateCodeReviewRequest.AddMember("Name", _CodeReviewName)
-
-	CreateCodeReviewRequest_RepositoryAssociationArn = CreateCodeReviewRequest.AddMember("RepositoryAssociationArn", _AssociationArn)
-
-	CreateCodeReviewRequest_Type = CreateCodeReviewRequest.AddMember("Type", CodeReviewType)
-
-	CreateCodeReviewRequest_ClientRequestToken = CreateCodeReviewRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateCodeReviewResponse_CodeReview = CreateCodeReviewResponse.AddMember("CodeReview", CodeReview)
-
-	DescribeCodeReviewRequest_CodeReviewArn = DescribeCodeReviewRequest.AddMember("CodeReviewArn", _Arn, &smithytraits.HTTPLabel{})
-
-	DescribeCodeReviewResponse_CodeReview = DescribeCodeReviewResponse.AddMember("CodeReview", CodeReview)
-
-	DescribeRecommendationFeedbackRequest_CodeReviewArn = DescribeRecommendationFeedbackRequest.AddMember("CodeReviewArn", _Arn, &smithytraits.HTTPLabel{})
-
-	DescribeRecommendationFeedbackRequest_RecommendationId = DescribeRecommendationFeedbackRequest.AddMember("RecommendationId", _RecommendationId, &smithytraits.HTTPQuery{Name: "RecommendationId"})
-
-	DescribeRecommendationFeedbackRequest_UserId = DescribeRecommendationFeedbackRequest.AddMember("UserId", _UserId, &smithytraits.HTTPQuery{Name: "UserId"})
-
-	DescribeRecommendationFeedbackResponse_RecommendationFeedback = DescribeRecommendationFeedbackResponse.AddMember("RecommendationFeedback", RecommendationFeedback)
-
-	DescribeRepositoryAssociationRequest_AssociationArn = DescribeRepositoryAssociationRequest.AddMember("AssociationArn", _AssociationArn, &smithytraits.HTTPLabel{})
-
-	DescribeRepositoryAssociationResponse_RepositoryAssociation = DescribeRepositoryAssociationResponse.AddMember("RepositoryAssociation", RepositoryAssociation)
-
-	DescribeRepositoryAssociationResponse_Tags = DescribeRepositoryAssociationResponse.AddMember("Tags", _TagMap)
-
-	DisassociateRepositoryRequest_AssociationArn = DisassociateRepositoryRequest.AddMember("AssociationArn", _AssociationArn, &smithytraits.HTTPLabel{})
-
-	DisassociateRepositoryResponse_RepositoryAssociation = DisassociateRepositoryResponse.AddMember("RepositoryAssociation", RepositoryAssociation)
-
-	DisassociateRepositoryResponse_Tags = DisassociateRepositoryResponse.AddMember("Tags", _TagMap)
-
-	ListCodeReviewsRequest_ProviderTypes = ListCodeReviewsRequest.AddMember("ProviderTypes", _ProviderTypes, &smithytraits.HTTPQuery{Name: "ProviderTypes"})
-
-	ListCodeReviewsRequest_States = ListCodeReviewsRequest.AddMember("States", _JobStates, &smithytraits.HTTPQuery{Name: "States"})
-
-	ListCodeReviewsRequest_RepositoryNames = ListCodeReviewsRequest.AddMember("RepositoryNames", _RepositoryNames, &smithytraits.HTTPQuery{Name: "RepositoryNames"})
-
-	ListCodeReviewsRequest_Type = ListCodeReviewsRequest.AddMember("Type", Type, &smithytraits.HTTPQuery{Name: "Type"})
-
-	ListCodeReviewsRequest_MaxResults = ListCodeReviewsRequest.AddMember("MaxResults", _ListCodeReviewsMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListCodeReviewsRequest_NextToken = ListCodeReviewsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListCodeReviewsResponse_CodeReviewSummaries = ListCodeReviewsResponse.AddMember("CodeReviewSummaries", _CodeReviewSummaries)
-
-	ListCodeReviewsResponse_NextToken = ListCodeReviewsResponse.AddMember("NextToken", _NextToken)
-
-	ListRecommendationFeedbackRequest_NextToken = ListRecommendationFeedbackRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListRecommendationFeedbackRequest_MaxResults = ListRecommendationFeedbackRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListRecommendationFeedbackRequest_CodeReviewArn = ListRecommendationFeedbackRequest.AddMember("CodeReviewArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListRecommendationFeedbackRequest_UserIds = ListRecommendationFeedbackRequest.AddMember("UserIds", _UserIds, &smithytraits.HTTPQuery{Name: "UserIds"})
-
-	ListRecommendationFeedbackRequest_RecommendationIds = ListRecommendationFeedbackRequest.AddMember("RecommendationIds", _RecommendationIds, &smithytraits.HTTPQuery{Name: "RecommendationIds"})
-
-	ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries = ListRecommendationFeedbackResponse.AddMember("RecommendationFeedbackSummaries", _RecommendationFeedbackSummaries)
-
-	ListRecommendationFeedbackResponse_NextToken = ListRecommendationFeedbackResponse.AddMember("NextToken", _NextToken)
-
-	ListRecommendationsRequest_NextToken = ListRecommendationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListRecommendationsRequest_MaxResults = ListRecommendationsRequest.AddMember("MaxResults", _ListRecommendationsMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListRecommendationsRequest_CodeReviewArn = ListRecommendationsRequest.AddMember("CodeReviewArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListRecommendationsResponse_RecommendationSummaries = ListRecommendationsResponse.AddMember("RecommendationSummaries", _RecommendationSummaries)
-
-	ListRecommendationsResponse_NextToken = ListRecommendationsResponse.AddMember("NextToken", _NextToken)
-
-	ListRepositoryAssociationsRequest_ProviderTypes = ListRepositoryAssociationsRequest.AddMember("ProviderTypes", _ProviderTypes, &smithytraits.HTTPQuery{Name: "ProviderType"})
-
-	ListRepositoryAssociationsRequest_States = ListRepositoryAssociationsRequest.AddMember("States", _RepositoryAssociationStates, &smithytraits.HTTPQuery{Name: "State"})
-
-	ListRepositoryAssociationsRequest_Names = ListRepositoryAssociationsRequest.AddMember("Names", _Names, &smithytraits.HTTPQuery{Name: "Name"})
-
-	ListRepositoryAssociationsRequest_Owners = ListRepositoryAssociationsRequest.AddMember("Owners", _Owners, &smithytraits.HTTPQuery{Name: "Owner"})
-
-	ListRepositoryAssociationsRequest_MaxResults = ListRepositoryAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListRepositoryAssociationsRequest_NextToken = ListRepositoryAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListRepositoryAssociationsResponse_RepositoryAssociationSummaries = ListRepositoryAssociationsResponse.AddMember("RepositoryAssociationSummaries", _RepositoryAssociationSummaries)
-
-	ListRepositoryAssociationsResponse_NextToken = ListRepositoryAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AssociationArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PutRecommendationFeedbackRequest_CodeReviewArn = PutRecommendationFeedbackRequest.AddMember("CodeReviewArn", _Arn)
-
-	PutRecommendationFeedbackRequest_RecommendationId = PutRecommendationFeedbackRequest.AddMember("RecommendationId", _RecommendationId)
-
-	PutRecommendationFeedbackRequest_Reactions = PutRecommendationFeedbackRequest.AddMember("Reactions", _Reactions)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AssociationArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AssociationArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "RecommendationId"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "UserId"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ProviderTypes"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "States"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "RepositoryNames"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Type"}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "UserIds"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "RecommendationIds"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ProviderType"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "State"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Name"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Owner"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAnalysisType = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisType_SECURITY, &sAnalysisType_CODE_QUALITY}}
+var m_AnalysisTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnalysisTypes_member}}
+var mBranchDiffSourceCodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sBranchDiffSourceCodeType_SourceBranchName, &sBranchDiffSourceCodeType_DestinationBranchName}}
+var mCodeArtifacts = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeArtifacts_SourceCodeArtifactsObjectKey, &sCodeArtifacts_BuildArtifactsObjectKey}}
+var mCodeCommitRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeCommitRepository_Name}}
+var mCodeReview = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeReview_Name, &sCodeReview_CodeReviewArn, &sCodeReview_RepositoryName, &sCodeReview_Owner, &sCodeReview_ProviderType, &sCodeReview_State, &sCodeReview_StateReason, &sCodeReview_CreatedTimeStamp, &sCodeReview_LastUpdatedTimeStamp, &sCodeReview_Type, &sCodeReview_PullRequestId, &sCodeReview_SourceCodeType, &sCodeReview_AssociationArn, &sCodeReview_Metrics, &sCodeReview_AnalysisTypes, &sCodeReview_ConfigFileState}, Hash: &hCodeReview}
+var m_CodeReviewSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeReviewSummaries_member}}
+var mCodeReviewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeReviewSummary_Name, &sCodeReviewSummary_CodeReviewArn, &sCodeReviewSummary_RepositoryName, &sCodeReviewSummary_Owner, &sCodeReviewSummary_ProviderType, &sCodeReviewSummary_State, &sCodeReviewSummary_CreatedTimeStamp, &sCodeReviewSummary_LastUpdatedTimeStamp, &sCodeReviewSummary_Type, &sCodeReviewSummary_PullRequestId, &sCodeReviewSummary_MetricsSummary, &sCodeReviewSummary_SourceCodeType}, Hash: &hCodeReviewSummary}
+var mCodeReviewType = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeReviewType_RepositoryAnalysis, &sCodeReviewType_AnalysisTypes}}
+var mCommitDiffSourceCodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sCommitDiffSourceCodeType_SourceCommit, &sCommitDiffSourceCodeType_DestinationCommit, &sCommitDiffSourceCodeType_MergeBaseCommit}}
+var mConfigFileState = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigFileState_PRESENT, &sConfigFileState_ABSENT, &sConfigFileState_PRESENT_WITH_ERRORS}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mEncryptionOption = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionOption_AoCmk, &sEncryptionOption_CmCmk}}
+var mEventInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sEventInfo_Name, &sEventInfo_State}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mJobState = smithy.SchemaMembers{List: []*smithy.Schema{&sJobState_COMPLETED, &sJobState_PENDING, &sJobState_FAILED, &sJobState_DELETING}}
+var m_JobStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobStates_member}}
+var mKMSKeyDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSKeyDetails_KMSKeyId, &sKMSKeyDetails_EncryptionOption}}
+var mMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sMetrics_MeteredLinesOfCodeCount, &sMetrics_SuppressedLinesOfCodeCount, &sMetrics_FindingsCount}}
+var mMetricsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricsSummary_MeteredLinesOfCodeCount, &sMetricsSummary_SuppressedLinesOfCodeCount, &sMetricsSummary_FindingsCount}}
+var m_Names = smithy.SchemaMembers{List: []*smithy.Schema{&s_Names_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Message}}
+var m_Owners = smithy.SchemaMembers{List: []*smithy.Schema{&s_Owners_member}}
+var mProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderType_CODE_COMMIT, &sProviderType_GIT_HUB, &sProviderType_BITBUCKET, &sProviderType_GIT_HUB_ENTERPRISE_SERVER, &sProviderType_S3_BUCKET}}
+var m_ProviderTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProviderTypes_member}}
+var mReaction = smithy.SchemaMembers{List: []*smithy.Schema{&sReaction_THUMBS_UP, &sReaction_THUMBS_DOWN}}
+var m_Reactions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Reactions_member}}
+var mRecommendationCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationCategory_AWS_BEST_PRACTICES, &sRecommendationCategory_AWS_CLOUDFORMATION_ISSUES, &sRecommendationCategory_DUPLICATE_CODE, &sRecommendationCategory_CODE_MAINTENANCE_ISSUES, &sRecommendationCategory_CONCURRENCY_ISSUES, &sRecommendationCategory_INPUT_VALIDATIONS, &sRecommendationCategory_PYTHON_BEST_PRACTICES, &sRecommendationCategory_JAVA_BEST_PRACTICES, &sRecommendationCategory_RESOURCE_LEAKS, &sRecommendationCategory_SECURITY_ISSUES, &sRecommendationCategory_CODE_INCONSISTENCIES}, Hash: &hRecommendationCategory}
+var mRecommendationFeedback = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationFeedback_CodeReviewArn, &sRecommendationFeedback_RecommendationId, &sRecommendationFeedback_Reactions, &sRecommendationFeedback_UserId, &sRecommendationFeedback_CreatedTimeStamp, &sRecommendationFeedback_LastUpdatedTimeStamp}}
+var m_RecommendationFeedbackSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendationFeedbackSummaries_member}}
+var mRecommendationFeedbackSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationFeedbackSummary_RecommendationId, &sRecommendationFeedbackSummary_Reactions, &sRecommendationFeedbackSummary_UserId}}
+var m_RecommendationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendationIds_member}}
+var m_RecommendationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendationSummaries_member}}
+var mRecommendationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationSummary_FilePath, &sRecommendationSummary_RecommendationId, &sRecommendationSummary_StartLine, &sRecommendationSummary_EndLine, &sRecommendationSummary_Description, &sRecommendationSummary_RecommendationCategory, &sRecommendationSummary_RuleMetadata, &sRecommendationSummary_Severity}}
+var mRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sRepository_CodeCommit, &sRepository_Bitbucket, &sRepository_GitHubEnterpriseServer, &sRepository_S3Bucket}}
+var mRepositoryAnalysis = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryAnalysis_RepositoryHead, &sRepositoryAnalysis_SourceCodeType}}
+var mRepositoryAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryAssociation_AssociationId, &sRepositoryAssociation_AssociationArn, &sRepositoryAssociation_ConnectionArn, &sRepositoryAssociation_Name, &sRepositoryAssociation_Owner, &sRepositoryAssociation_ProviderType, &sRepositoryAssociation_State, &sRepositoryAssociation_StateReason, &sRepositoryAssociation_LastUpdatedTimeStamp, &sRepositoryAssociation_CreatedTimeStamp, &sRepositoryAssociation_KMSKeyDetails, &sRepositoryAssociation_S3RepositoryDetails}, Hash: &hRepositoryAssociation}
+var mRepositoryAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryAssociationState_ASSOCIATED, &sRepositoryAssociationState_ASSOCIATING, &sRepositoryAssociationState_FAILED, &sRepositoryAssociationState_DISASSOCIATING, &sRepositoryAssociationState_DISASSOCIATED}}
+var m_RepositoryAssociationStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryAssociationStates_member}}
+var m_RepositoryAssociationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryAssociationSummaries_member}}
+var mRepositoryAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryAssociationSummary_AssociationArn, &sRepositoryAssociationSummary_ConnectionArn, &sRepositoryAssociationSummary_LastUpdatedTimeStamp, &sRepositoryAssociationSummary_AssociationId, &sRepositoryAssociationSummary_Name, &sRepositoryAssociationSummary_Owner, &sRepositoryAssociationSummary_ProviderType, &sRepositoryAssociationSummary_State}}
+var mRepositoryHeadSourceCodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryHeadSourceCodeType_BranchName}}
+var m_RepositoryNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryNames_member}}
+var mRequestMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestMetadata_RequestId, &sRequestMetadata_Requester, &sRequestMetadata_EventInfo, &sRequestMetadata_VendorName}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRuleMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleMetadata_RuleId, &sRuleMetadata_RuleName, &sRuleMetadata_ShortDescription, &sRuleMetadata_LongDescription, &sRuleMetadata_RuleTags}}
+var m_RuleTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleTags_member}}
+var mS3BucketRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sS3BucketRepository_Name, &sS3BucketRepository_Details}}
+var mS3Repository = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Repository_Name, &sS3Repository_BucketName}}
+var mS3RepositoryDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sS3RepositoryDetails_BucketName, &sS3RepositoryDetails_CodeArtifacts}}
+var mSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sSeverity_INFO, &sSeverity_LOW, &sSeverity_MEDIUM, &sSeverity_HIGH, &sSeverity_CRITICAL}}
+var mSourceCodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCodeType_CommitDiff, &sSourceCodeType_RepositoryHead, &sSourceCodeType_BranchDiff, &sSourceCodeType_S3BucketRepository, &sSourceCodeType_RequestMetadata}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThirdPartySourceRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartySourceRepository_Name, &sThirdPartySourceRepository_ConnectionArn, &sThirdPartySourceRepository_Owner}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mType = smithy.SchemaMembers{List: []*smithy.Schema{&sType_PULL_REQUEST, &sType_REPOSITORY_ANALYSIS}}
+var m_UserIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserIds_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mVendorName = smithy.SchemaMembers{List: []*smithy.Schema{&sVendorName_GITHUB, &sVendorName_GITLAB, &sVendorName_NATIVE_S3}}
+var mAssociateRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateRepositoryRequest_Repository, &sAssociateRepositoryRequest_ClientRequestToken, &sAssociateRepositoryRequest_Tags, &sAssociateRepositoryRequest_KMSKeyDetails}}
+var mAssociateRepositoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateRepositoryResponse_RepositoryAssociation, &sAssociateRepositoryResponse_Tags}}
+var mCreateCodeReviewRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeReviewRequest_Name, &sCreateCodeReviewRequest_RepositoryAssociationArn, &sCreateCodeReviewRequest_Type, &sCreateCodeReviewRequest_ClientRequestToken}}
+var mCreateCodeReviewResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeReviewResponse_CodeReview}}
+var mDescribeCodeReviewRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeReviewRequest_CodeReviewArn}}
+var mDescribeCodeReviewResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeReviewResponse_CodeReview}}
+var mDescribeRecommendationFeedbackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecommendationFeedbackRequest_CodeReviewArn, &sDescribeRecommendationFeedbackRequest_RecommendationId, &sDescribeRecommendationFeedbackRequest_UserId}}
+var mDescribeRecommendationFeedbackResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecommendationFeedbackResponse_RecommendationFeedback}}
+var mDescribeRepositoryAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRepositoryAssociationRequest_AssociationArn}}
+var mDescribeRepositoryAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRepositoryAssociationResponse_RepositoryAssociation, &sDescribeRepositoryAssociationResponse_Tags}}
+var mDisassociateRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateRepositoryRequest_AssociationArn}}
+var mDisassociateRepositoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateRepositoryResponse_RepositoryAssociation, &sDisassociateRepositoryResponse_Tags}}
+var mListCodeReviewsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeReviewsRequest_ProviderTypes, &sListCodeReviewsRequest_States, &sListCodeReviewsRequest_RepositoryNames, &sListCodeReviewsRequest_Type, &sListCodeReviewsRequest_MaxResults, &sListCodeReviewsRequest_NextToken}}
+var mListCodeReviewsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeReviewsResponse_CodeReviewSummaries, &sListCodeReviewsResponse_NextToken}}
+var mListRecommendationFeedbackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendationFeedbackRequest_NextToken, &sListRecommendationFeedbackRequest_MaxResults, &sListRecommendationFeedbackRequest_CodeReviewArn, &sListRecommendationFeedbackRequest_UserIds, &sListRecommendationFeedbackRequest_RecommendationIds}}
+var mListRecommendationFeedbackResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, &sListRecommendationFeedbackResponse_NextToken}}
+var mListRecommendationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendationsRequest_NextToken, &sListRecommendationsRequest_MaxResults, &sListRecommendationsRequest_CodeReviewArn}}
+var mListRecommendationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendationsResponse_RecommendationSummaries, &sListRecommendationsResponse_NextToken}}
+var mListRepositoryAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoryAssociationsRequest_ProviderTypes, &sListRepositoryAssociationsRequest_States, &sListRepositoryAssociationsRequest_Names, &sListRepositoryAssociationsRequest_Owners, &sListRepositoryAssociationsRequest_MaxResults, &sListRepositoryAssociationsRequest_NextToken}}
+var mListRepositoryAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoryAssociationsResponse_RepositoryAssociationSummaries, &sListRepositoryAssociationsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutRecommendationFeedbackRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecommendationFeedbackRequest_CodeReviewArn, &sPutRecommendationFeedbackRequest_RecommendationId, &sPutRecommendationFeedbackRequest_Reactions}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_TagKeys}}
+
+var hCodeReview = smithy.MemberHash{Seed: 37, Slots: []uint16{
+	7, 5, 9, 0, 0, 4, 6, 11, 0, 0, 2, 13, 15, 0, 8, 0, 1, 16, 0, 0, 10, 0, 14, 0,
+	0, 3, 0, 0, 0, 12, 0, 0,
+}}
+var hCodeReviewSummary = smithy.MemberHash{Seed: 15, Slots: []uint16{
+	0, 1, 2, 0, 3, 0, 0, 12, 0, 8, 4, 0, 0, 0, 10, 11, 9, 0, 0, 0, 0, 0, 0, 6,
+	0, 5, 0, 0, 0, 0, 0, 7,
+}}
+var hRecommendationCategory = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 3, 7, 9, 0, 1, 4, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 8, 10, 0,
+	5, 0, 0, 6, 0, 0, 2, 0,
+}}
+var hRepositoryAssociation = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 10, 0, 0, 2, 0, 0, 0, 1, 0, 8, 11, 4, 0, 9, 0, 5, 0, 0, 0, 6, 12,
+	0, 0, 0, 0, 0, 3, 7, 0,
+}}
+
+var sAssociateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateRepository, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateRepository})
+var sCreateCodeReview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeReview, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateCodeReview})
+var sDescribeCodeReview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeReview, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCodeReview})
+var sDescribeRecommendationFeedback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecommendationFeedback, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRecommendationFeedback})
+var sDescribeRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepositoryAssociation, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRepositoryAssociation})
+var sDisassociateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateRepository, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateRepository})
+var sListCodeReviews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeReviews, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListCodeReviews})
+var sListRecommendationFeedback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendationFeedback, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListRecommendationFeedback})
+var sListRecommendations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendations, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListRecommendations})
+var sListRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryAssociations, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListRepositoryAssociations})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutRecommendationFeedback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecommendationFeedback, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ePutRecommendationFeedback})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_AWSGuruFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSGuruFrontendService, Type: smithy.ShapeTypeService, Ext: &e_AWSGuruFrontendService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisType})
+var sAnalysisType_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisType_SECURITY})
+var sAnalysisType_CODE_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisType_CODE_QUALITY})
+var s_AnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisTypes, Members: &m_AnalysisTypes, Type: smithy.ShapeTypeList, Ext: &e_AnalysisTypes})
+var s_AnalysisTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &e_AnalysisTypes_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationArn, Type: smithy.ShapeTypeString, Ext: &e_AssociationArn})
+var s_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationId, Type: smithy.ShapeTypeString, Ext: &e_AssociationId})
+var sBranchDiffSourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchDiffSourceCodeType, Members: &mBranchDiffSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eBranchDiffSourceCodeType})
+var sBranchDiffSourceCodeType_SourceBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eBranchDiffSourceCodeType_SourceBranchName})
+var sBranchDiffSourceCodeType_DestinationBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eBranchDiffSourceCodeType_DestinationBranchName})
+var s_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &e_BranchName})
+var s_BuildArtifactsObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildArtifactsObjectKey, Type: smithy.ShapeTypeString, Ext: &e_BuildArtifactsObjectKey})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var sCodeArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeArtifacts, Members: &mCodeArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eCodeArtifacts})
+var sCodeArtifacts_SourceCodeArtifactsObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCodeArtifactsObjectKey", ID: &i_SourceCodeArtifactsObjectKey, Type: smithy.ShapeTypeString, Ext: &eCodeArtifacts_SourceCodeArtifactsObjectKey})
+var sCodeArtifacts_BuildArtifactsObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuildArtifactsObjectKey", ID: &i_BuildArtifactsObjectKey, Type: smithy.ShapeTypeString, Ext: &eCodeArtifacts_BuildArtifactsObjectKey})
+var sCodeCommitRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeCommitRepository, Members: &mCodeCommitRepository, Type: smithy.ShapeTypeStructure, Ext: &eCodeCommitRepository})
+var sCodeCommitRepository_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCodeCommitRepository_Name})
+var sCodeReview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeReview, Members: &mCodeReview, Type: smithy.ShapeTypeStructure, Ext: &eCodeReview})
+var sCodeReview_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCodeReview_Name})
+var sCodeReview_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCodeReview_CodeReviewArn})
+var sCodeReview_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCodeReview_RepositoryName})
+var sCodeReview_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eCodeReview_Owner})
+var sCodeReview_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &eCodeReview_ProviderType})
+var sCodeReview_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eCodeReview_State})
+var sCodeReview_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eCodeReview_StateReason})
+var sCodeReview_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeReview_CreatedTimeStamp})
+var sCodeReview_LastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeReview_LastUpdatedTimeStamp})
+var sCodeReview_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum, Ext: &eCodeReview_Type})
+var sCodeReview_PullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eCodeReview_PullRequestId})
+var sCodeReview_SourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCodeType", ID: &iSourceCodeType, Members: &mSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eCodeReview_SourceCodeType})
+var sCodeReview_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationArn", ID: &i_AssociationArn, Type: smithy.ShapeTypeString, Ext: &eCodeReview_AssociationArn})
+var sCodeReview_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &iMetrics, Members: &mMetrics, Type: smithy.ShapeTypeStructure, Ext: &eCodeReview_Metrics})
+var sCodeReview_AnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisTypes", ID: &i_AnalysisTypes, Members: &m_AnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eCodeReview_AnalysisTypes})
+var sCodeReview_ConfigFileState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFileState", ID: &iConfigFileState, Members: &mConfigFileState, Type: smithy.ShapeTypeEnum, Ext: &eCodeReview_ConfigFileState})
+var s_CodeReviewName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeReviewName, Type: smithy.ShapeTypeString, Ext: &e_CodeReviewName})
+var s_CodeReviewSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeReviewSummaries, Members: &m_CodeReviewSummaries, Type: smithy.ShapeTypeList, Ext: &e_CodeReviewSummaries})
+var s_CodeReviewSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeReviewSummary, Members: &mCodeReviewSummary, Type: smithy.ShapeTypeStructure, Ext: &e_CodeReviewSummaries_member})
+var sCodeReviewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeReviewSummary, Members: &mCodeReviewSummary, Type: smithy.ShapeTypeStructure, Ext: &eCodeReviewSummary})
+var sCodeReviewSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCodeReviewSummary_Name})
+var sCodeReviewSummary_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCodeReviewSummary_CodeReviewArn})
+var sCodeReviewSummary_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCodeReviewSummary_RepositoryName})
+var sCodeReviewSummary_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eCodeReviewSummary_Owner})
+var sCodeReviewSummary_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &eCodeReviewSummary_ProviderType})
+var sCodeReviewSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eCodeReviewSummary_State})
+var sCodeReviewSummary_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeReviewSummary_CreatedTimeStamp})
+var sCodeReviewSummary_LastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCodeReviewSummary_LastUpdatedTimeStamp})
+var sCodeReviewSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum, Ext: &eCodeReviewSummary_Type})
+var sCodeReviewSummary_PullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eCodeReviewSummary_PullRequestId})
+var sCodeReviewSummary_MetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricsSummary", ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &eCodeReviewSummary_MetricsSummary})
+var sCodeReviewSummary_SourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCodeType", ID: &iSourceCodeType, Members: &mSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eCodeReviewSummary_SourceCodeType})
+var sCodeReviewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeReviewType, Members: &mCodeReviewType, Type: smithy.ShapeTypeStructure, Ext: &eCodeReviewType})
+var sCodeReviewType_RepositoryAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAnalysis", ID: &iRepositoryAnalysis, Members: &mRepositoryAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eCodeReviewType_RepositoryAnalysis})
+var sCodeReviewType_AnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisTypes", ID: &i_AnalysisTypes, Members: &m_AnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eCodeReviewType_AnalysisTypes})
+var sCommitDiffSourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitDiffSourceCodeType, Members: &mCommitDiffSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eCommitDiffSourceCodeType})
+var sCommitDiffSourceCodeType_SourceCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommitDiffSourceCodeType_SourceCommit})
+var sCommitDiffSourceCodeType_DestinationCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommitDiffSourceCodeType_DestinationCommit})
+var sCommitDiffSourceCodeType_MergeBaseCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MergeBaseCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommitDiffSourceCodeType_MergeBaseCommit})
+var s_CommitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &e_CommitId})
+var sConfigFileState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigFileState, Members: &mConfigFileState, Type: smithy.ShapeTypeEnum, Ext: &eConfigFileState})
+var sConfigFileState_PRESENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigFileState_PRESENT})
+var sConfigFileState_ABSENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigFileState_ABSENT})
+var sConfigFileState_PRESENT_WITH_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESENT_WITH_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigFileState_PRESENT_WITH_ERRORS})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString, Ext: &e_ConnectionArn})
+var sEncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionOption, Members: &mEncryptionOption, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionOption})
+var sEncryptionOption_AoCmk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AoCmk", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionOption_AoCmk})
+var sEncryptionOption_CmCmk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmCmk", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionOption_CmCmk})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEventInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventInfo, Members: &mEventInfo, Type: smithy.ShapeTypeStructure, Ext: &eEventInfo})
+var sEventInfo_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &eEventInfo_Name})
+var sEventInfo_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_EventState, Type: smithy.ShapeTypeString, Ext: &eEventInfo_State})
+var s_EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &e_EventName})
+var s_EventState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventState, Type: smithy.ShapeTypeString, Ext: &e_EventState})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePath})
+var s_FindingsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingsCount, Type: smithy.ShapeTypeLong, Ext: &e_FindingsCount})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eJobState})
+var sJobState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_COMPLETED})
+var sJobState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_PENDING})
+var sJobState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_FAILED})
+var sJobState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_DELETING})
+var s_JobStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobStates, Members: &m_JobStates, Type: smithy.ShapeTypeList, Ext: &e_JobStates})
+var s_JobStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &e_JobStates_member})
+var sKMSKeyDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSKeyDetails, Members: &mKMSKeyDetails, Type: smithy.ShapeTypeStructure, Ext: &eKMSKeyDetails})
+var sKMSKeyDetails_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &eKMSKeyDetails_KMSKeyId})
+var sKMSKeyDetails_EncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOption", ID: &iEncryptionOption, Members: &mEncryptionOption, Type: smithy.ShapeTypeEnum, Ext: &eKMSKeyDetails_EncryptionOption})
+var s_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &e_KMSKeyId})
+var s_LineNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &e_LineNumber})
+var s_LinesOfCodeCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinesOfCodeCount, Type: smithy.ShapeTypeLong, Ext: &e_LinesOfCodeCount})
+var s_ListCodeReviewsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListCodeReviewsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListCodeReviewsMaxResults})
+var s_ListRecommendationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRecommendationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListRecommendationsMaxResults})
+var s_LongDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongDescription, Type: smithy.ShapeTypeString, Ext: &e_LongDescription})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetrics, Members: &mMetrics, Type: smithy.ShapeTypeStructure, Ext: &eMetrics})
+var sMetrics_MeteredLinesOfCodeCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeteredLinesOfCodeCount", ID: &i_LinesOfCodeCount, Type: smithy.ShapeTypeLong, Ext: &eMetrics_MeteredLinesOfCodeCount})
+var sMetrics_SuppressedLinesOfCodeCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuppressedLinesOfCodeCount", ID: &i_LinesOfCodeCount, Type: smithy.ShapeTypeLong, Ext: &eMetrics_SuppressedLinesOfCodeCount})
+var sMetrics_FindingsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FindingsCount", ID: &i_FindingsCount, Type: smithy.ShapeTypeLong, Ext: &eMetrics_FindingsCount})
+var sMetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &eMetricsSummary})
+var sMetricsSummary_MeteredLinesOfCodeCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeteredLinesOfCodeCount", ID: &i_LinesOfCodeCount, Type: smithy.ShapeTypeLong, Ext: &eMetricsSummary_MeteredLinesOfCodeCount})
+var sMetricsSummary_SuppressedLinesOfCodeCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuppressedLinesOfCodeCount", ID: &i_LinesOfCodeCount, Type: smithy.ShapeTypeLong, Ext: &eMetricsSummary_SuppressedLinesOfCodeCount})
+var sMetricsSummary_FindingsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FindingsCount", ID: &i_FindingsCount, Type: smithy.ShapeTypeLong, Ext: &eMetricsSummary_FindingsCount})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_Names = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Names, Members: &m_Names, Type: smithy.ShapeTypeList, Ext: &e_Names})
+var s_Names_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Names_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var s_Owner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &e_Owner})
+var s_Owners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owners, Members: &m_Owners, Type: smithy.ShapeTypeList, Ext: &e_Owners})
+var s_Owners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &e_Owners_member})
+var sProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &eProviderType})
+var sProviderType_CODE_COMMIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_COMMIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderType_CODE_COMMIT})
+var sProviderType_GIT_HUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_HUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderType_GIT_HUB})
+var sProviderType_BITBUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderType_BITBUCKET})
+var sProviderType_GIT_HUB_ENTERPRISE_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_HUB_ENTERPRISE_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderType_GIT_HUB_ENTERPRISE_SERVER})
+var sProviderType_S3_BUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_BUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProviderType_S3_BUCKET})
+var s_ProviderTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProviderTypes, Members: &m_ProviderTypes, Type: smithy.ShapeTypeList, Ext: &e_ProviderTypes})
+var s_ProviderTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &e_ProviderTypes_member})
+var s_PullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &e_PullRequestId})
+var sReaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReaction, Members: &mReaction, Type: smithy.ShapeTypeEnum, Ext: &eReaction})
+var sReaction_THUMBS_UP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THUMBS_UP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReaction_THUMBS_UP})
+var sReaction_THUMBS_DOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THUMBS_DOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReaction_THUMBS_DOWN})
+var s_Reactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reactions, Members: &m_Reactions, Type: smithy.ShapeTypeList, Ext: &e_Reactions})
+var s_Reactions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReaction, Members: &mReaction, Type: smithy.ShapeTypeEnum, Ext: &e_Reactions_member})
+var sRecommendationCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationCategory, Members: &mRecommendationCategory, Type: smithy.ShapeTypeEnum, Ext: &eRecommendationCategory})
+var sRecommendationCategory_AWS_BEST_PRACTICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEST_PRACTICES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_AWS_BEST_PRACTICES})
+var sRecommendationCategory_AWS_CLOUDFORMATION_ISSUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDFORMATION_ISSUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_AWS_CLOUDFORMATION_ISSUES})
+var sRecommendationCategory_DUPLICATE_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_DUPLICATE_CODE})
+var sRecommendationCategory_CODE_MAINTENANCE_ISSUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_MAINTENANCE_ISSUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_CODE_MAINTENANCE_ISSUES})
+var sRecommendationCategory_CONCURRENCY_ISSUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENCY_ISSUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_CONCURRENCY_ISSUES})
+var sRecommendationCategory_INPUT_VALIDATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPUT_VALIDATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_INPUT_VALIDATIONS})
+var sRecommendationCategory_PYTHON_BEST_PRACTICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYTHON_BEST_PRACTICES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_PYTHON_BEST_PRACTICES})
+var sRecommendationCategory_JAVA_BEST_PRACTICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAVA_BEST_PRACTICES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_JAVA_BEST_PRACTICES})
+var sRecommendationCategory_RESOURCE_LEAKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_LEAKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_RESOURCE_LEAKS})
+var sRecommendationCategory_SECURITY_ISSUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_ISSUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_SECURITY_ISSUES})
+var sRecommendationCategory_CODE_INCONSISTENCIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_INCONSISTENCIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationCategory_CODE_INCONSISTENCIES})
+var sRecommendationFeedback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationFeedback, Members: &mRecommendationFeedback, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationFeedback})
+var sRecommendationFeedback_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRecommendationFeedback_CodeReviewArn})
+var sRecommendationFeedback_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &eRecommendationFeedback_RecommendationId})
+var sRecommendationFeedback_Reactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reactions", ID: &i_Reactions, Members: &m_Reactions, Type: smithy.ShapeTypeList, Ext: &eRecommendationFeedback_Reactions})
+var sRecommendationFeedback_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eRecommendationFeedback_UserId})
+var sRecommendationFeedback_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRecommendationFeedback_CreatedTimeStamp})
+var sRecommendationFeedback_LastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRecommendationFeedback_LastUpdatedTimeStamp})
+var s_RecommendationFeedbackSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationFeedbackSummaries, Members: &m_RecommendationFeedbackSummaries, Type: smithy.ShapeTypeList, Ext: &e_RecommendationFeedbackSummaries})
+var s_RecommendationFeedbackSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendationFeedbackSummary, Members: &mRecommendationFeedbackSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecommendationFeedbackSummaries_member})
+var sRecommendationFeedbackSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationFeedbackSummary, Members: &mRecommendationFeedbackSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationFeedbackSummary})
+var sRecommendationFeedbackSummary_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &eRecommendationFeedbackSummary_RecommendationId})
+var sRecommendationFeedbackSummary_Reactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reactions", ID: &i_Reactions, Members: &m_Reactions, Type: smithy.ShapeTypeList, Ext: &eRecommendationFeedbackSummary_Reactions})
+var sRecommendationFeedbackSummary_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eRecommendationFeedbackSummary_UserId})
+var s_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &e_RecommendationId})
+var s_RecommendationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationIds, Members: &m_RecommendationIds, Type: smithy.ShapeTypeList, Ext: &e_RecommendationIds})
+var s_RecommendationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &e_RecommendationIds_member})
+var s_RecommendationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationSummaries, Members: &m_RecommendationSummaries, Type: smithy.ShapeTypeList, Ext: &e_RecommendationSummaries})
+var s_RecommendationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendationSummary, Members: &mRecommendationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RecommendationSummaries_member})
+var sRecommendationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationSummary, Members: &mRecommendationSummary, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationSummary})
+var sRecommendationSummary_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilePath", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &eRecommendationSummary_FilePath})
+var sRecommendationSummary_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &eRecommendationSummary_RecommendationId})
+var sRecommendationSummary_StartLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eRecommendationSummary_StartLine})
+var sRecommendationSummary_EndLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eRecommendationSummary_EndLine})
+var sRecommendationSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &eRecommendationSummary_Description})
+var sRecommendationSummary_RecommendationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationCategory", ID: &iRecommendationCategory, Members: &mRecommendationCategory, Type: smithy.ShapeTypeEnum, Ext: &eRecommendationSummary_RecommendationCategory})
+var sRecommendationSummary_RuleMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleMetadata", ID: &iRuleMetadata, Members: &mRuleMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRecommendationSummary_RuleMetadata})
+var sRecommendationSummary_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eRecommendationSummary_Severity})
+var sRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure, Ext: &eRepository})
+var sRepository_CodeCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeCommit", ID: &iCodeCommitRepository, Members: &mCodeCommitRepository, Type: smithy.ShapeTypeStructure, Ext: &eRepository_CodeCommit})
+var sRepository_Bitbucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bitbucket", ID: &iThirdPartySourceRepository, Members: &mThirdPartySourceRepository, Type: smithy.ShapeTypeStructure, Ext: &eRepository_Bitbucket})
+var sRepository_GitHubEnterpriseServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GitHubEnterpriseServer", ID: &iThirdPartySourceRepository, Members: &mThirdPartySourceRepository, Type: smithy.ShapeTypeStructure, Ext: &eRepository_GitHubEnterpriseServer})
+var sRepository_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &iS3Repository, Members: &mS3Repository, Type: smithy.ShapeTypeStructure, Ext: &eRepository_S3Bucket})
+var sRepositoryAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryAnalysis, Members: &mRepositoryAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAnalysis})
+var sRepositoryAnalysis_RepositoryHead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryHead", ID: &iRepositoryHeadSourceCodeType, Members: &mRepositoryHeadSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAnalysis_RepositoryHead})
+var sRepositoryAnalysis_SourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCodeType", ID: &iSourceCodeType, Members: &mSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAnalysis_SourceCodeType})
+var sRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryAssociation, Members: &mRepositoryAssociation, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociation})
+var sRepositoryAssociation_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_AssociationId, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_AssociationId})
+var sRepositoryAssociation_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_AssociationArn})
+var sRepositoryAssociation_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_ConnectionArn})
+var sRepositoryAssociation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_Name})
+var sRepositoryAssociation_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_Owner})
+var sRepositoryAssociation_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryAssociation_ProviderType})
+var sRepositoryAssociation_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRepositoryAssociationState, Members: &mRepositoryAssociationState, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryAssociation_State})
+var sRepositoryAssociation_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociation_StateReason})
+var sRepositoryAssociation_LastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRepositoryAssociation_LastUpdatedTimeStamp})
+var sRepositoryAssociation_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRepositoryAssociation_CreatedTimeStamp})
+var sRepositoryAssociation_KMSKeyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyDetails", ID: &iKMSKeyDetails, Members: &mKMSKeyDetails, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociation_KMSKeyDetails})
+var sRepositoryAssociation_S3RepositoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3RepositoryDetails", ID: &iS3RepositoryDetails, Members: &mS3RepositoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociation_S3RepositoryDetails})
+var sRepositoryAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryAssociationState, Members: &mRepositoryAssociationState, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryAssociationState})
+var sRepositoryAssociationState_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationState_ASSOCIATED})
+var sRepositoryAssociationState_ASSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationState_ASSOCIATING})
+var sRepositoryAssociationState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationState_FAILED})
+var sRepositoryAssociationState_DISASSOCIATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationState_DISASSOCIATING})
+var sRepositoryAssociationState_DISASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationState_DISASSOCIATED})
+var s_RepositoryAssociationStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryAssociationStates, Members: &m_RepositoryAssociationStates, Type: smithy.ShapeTypeList, Ext: &e_RepositoryAssociationStates})
+var s_RepositoryAssociationStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryAssociationState, Members: &mRepositoryAssociationState, Type: smithy.ShapeTypeEnum, Ext: &e_RepositoryAssociationStates_member})
+var s_RepositoryAssociationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryAssociationSummaries, Members: &m_RepositoryAssociationSummaries, Type: smithy.ShapeTypeList, Ext: &e_RepositoryAssociationSummaries})
+var s_RepositoryAssociationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryAssociationSummary, Members: &mRepositoryAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoryAssociationSummaries_member})
+var sRepositoryAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryAssociationSummary, Members: &mRepositoryAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryAssociationSummary})
+var sRepositoryAssociationSummary_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociationSummary_AssociationArn})
+var sRepositoryAssociationSummary_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociationSummary_ConnectionArn})
+var sRepositoryAssociationSummary_LastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimeStamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRepositoryAssociationSummary_LastUpdatedTimeStamp})
+var sRepositoryAssociationSummary_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_AssociationId, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociationSummary_AssociationId})
+var sRepositoryAssociationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociationSummary_Name})
+var sRepositoryAssociationSummary_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eRepositoryAssociationSummary_Owner})
+var sRepositoryAssociationSummary_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryAssociationSummary_ProviderType})
+var sRepositoryAssociationSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRepositoryAssociationState, Members: &mRepositoryAssociationState, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryAssociationSummary_State})
+var sRepositoryHeadSourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryHeadSourceCodeType, Members: &mRepositoryHeadSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryHeadSourceCodeType})
+var sRepositoryHeadSourceCodeType_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eRepositoryHeadSourceCodeType_BranchName})
+var s_RepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNames, Members: &m_RepositoryNames, Type: smithy.ShapeTypeList, Ext: &e_RepositoryNames})
+var s_RepositoryNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_RepositoryNames_member})
+var s_Requester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &e_Requester})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var sRequestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestMetadata, Members: &mRequestMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRequestMetadata})
+var sRequestMetadata_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eRequestMetadata_RequestId})
+var sRequestMetadata_Requester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Requester", ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &eRequestMetadata_Requester})
+var sRequestMetadata_EventInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventInfo", ID: &iEventInfo, Members: &mEventInfo, Type: smithy.ShapeTypeStructure, Ext: &eRequestMetadata_EventInfo})
+var sRequestMetadata_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &iVendorName, Members: &mVendorName, Type: smithy.ShapeTypeEnum, Ext: &eRequestMetadata_VendorName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleId, Type: smithy.ShapeTypeString, Ext: &e_RuleId})
+var sRuleMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleMetadata, Members: &mRuleMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRuleMetadata})
+var sRuleMetadata_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleId", ID: &i_RuleId, Type: smithy.ShapeTypeString, Ext: &eRuleMetadata_RuleId})
+var sRuleMetadata_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &eRuleMetadata_RuleName})
+var sRuleMetadata_ShortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortDescription", ID: &i_ShortDescription, Type: smithy.ShapeTypeString, Ext: &eRuleMetadata_ShortDescription})
+var sRuleMetadata_LongDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongDescription", ID: &i_LongDescription, Type: smithy.ShapeTypeString, Ext: &eRuleMetadata_LongDescription})
+var sRuleMetadata_RuleTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleTags", ID: &i_RuleTags, Members: &m_RuleTags, Type: smithy.ShapeTypeList, Ext: &eRuleMetadata_RuleTags})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &e_RuleName})
+var s_RuleTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTag, Type: smithy.ShapeTypeString, Ext: &e_RuleTag})
+var s_RuleTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTags, Members: &m_RuleTags, Type: smithy.ShapeTypeList, Ext: &e_RuleTags})
+var s_RuleTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RuleTag, Type: smithy.ShapeTypeString, Ext: &e_RuleTags_member})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var sS3BucketRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BucketRepository, Members: &mS3BucketRepository, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRepository})
+var sS3BucketRepository_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eS3BucketRepository_Name})
+var sS3BucketRepository_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &iS3RepositoryDetails, Members: &mS3RepositoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketRepository_Details})
+var sS3Repository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Repository, Members: &mS3Repository, Type: smithy.ShapeTypeStructure, Ext: &eS3Repository})
+var sS3Repository_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eS3Repository_Name})
+var sS3Repository_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eS3Repository_BucketName})
+var sS3RepositoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3RepositoryDetails, Members: &mS3RepositoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eS3RepositoryDetails})
+var sS3RepositoryDetails_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eS3RepositoryDetails_BucketName})
+var sS3RepositoryDetails_CodeArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeArtifacts", ID: &iCodeArtifacts, Members: &mCodeArtifacts, Type: smithy.ShapeTypeStructure, Ext: &eS3RepositoryDetails_CodeArtifacts})
+var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eSeverity})
+var sSeverity_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_INFO})
+var sSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_LOW})
+var sSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_MEDIUM})
+var sSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_HIGH})
+var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_CRITICAL})
+var s_ShortDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShortDescription, Type: smithy.ShapeTypeString, Ext: &e_ShortDescription})
+var s_SourceCodeArtifactsObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceCodeArtifactsObjectKey, Type: smithy.ShapeTypeString, Ext: &e_SourceCodeArtifactsObjectKey})
+var sSourceCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCodeType, Members: &mSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType})
+var sSourceCodeType_CommitDiff = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommitDiff", ID: &iCommitDiffSourceCodeType, Members: &mCommitDiffSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType_CommitDiff})
+var sSourceCodeType_RepositoryHead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryHead", ID: &iRepositoryHeadSourceCodeType, Members: &mRepositoryHeadSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType_RepositoryHead})
+var sSourceCodeType_BranchDiff = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BranchDiff", ID: &iBranchDiffSourceCodeType, Members: &mBranchDiffSourceCodeType, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType_BranchDiff})
+var sSourceCodeType_S3BucketRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketRepository", ID: &iS3BucketRepository, Members: &mS3BucketRepository, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType_S3BucketRepository})
+var sSourceCodeType_RequestMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestMetadata", ID: &iRequestMetadata, Members: &mRequestMetadata, Type: smithy.ShapeTypeStructure, Ext: &eSourceCodeType_RequestMetadata})
+var s_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &e_StateReason})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Text = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Text, Type: smithy.ShapeTypeString, Ext: &e_Text})
+var sThirdPartySourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartySourceRepository, Members: &mThirdPartySourceRepository, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartySourceRepository})
+var sThirdPartySourceRepository_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eThirdPartySourceRepository_Name})
+var sThirdPartySourceRepository_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString, Ext: &eThirdPartySourceRepository_ConnectionArn})
+var sThirdPartySourceRepository_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eThirdPartySourceRepository_Owner})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum, Ext: &eType})
+var sType_PULL_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eType_PULL_REQUEST})
+var sType_REPOSITORY_ANALYSIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_ANALYSIS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eType_REPOSITORY_ANALYSIS})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &e_UserId})
+var s_UserIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserIds, Members: &m_UserIds, Type: smithy.ShapeTypeList, Ext: &e_UserIds})
+var s_UserIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &e_UserIds_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVendorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVendorName, Members: &mVendorName, Type: smithy.ShapeTypeEnum, Ext: &eVendorName})
+var sVendorName_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVendorName_GITHUB})
+var sVendorName_GITLAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVendorName_GITLAB})
+var sVendorName_NATIVE_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NATIVE_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVendorName_NATIVE_S3})
+var sAssociateRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateRepositoryRequest, Members: &mAssociateRepositoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateRepositoryRequest})
+var sAssociateRepositoryRequest_Repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Repository", ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure, Ext: &eAssociateRepositoryRequest_Repository})
+var sAssociateRepositoryRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eAssociateRepositoryRequest_ClientRequestToken})
+var sAssociateRepositoryRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAssociateRepositoryRequest_Tags})
+var sAssociateRepositoryRequest_KMSKeyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyDetails", ID: &iKMSKeyDetails, Members: &mKMSKeyDetails, Type: smithy.ShapeTypeStructure, Ext: &eAssociateRepositoryRequest_KMSKeyDetails})
+var sAssociateRepositoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateRepositoryResponse, Members: &mAssociateRepositoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateRepositoryResponse})
+var sAssociateRepositoryResponse_RepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAssociation", ID: &iRepositoryAssociation, Members: &mRepositoryAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssociateRepositoryResponse_RepositoryAssociation})
+var sAssociateRepositoryResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAssociateRepositoryResponse_Tags})
+var sCreateCodeReviewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeReviewRequest, Members: &mCreateCodeReviewRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCodeReviewRequest})
+var sCreateCodeReviewRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CodeReviewName, Type: smithy.ShapeTypeString, Ext: &eCreateCodeReviewRequest_Name})
+var sCreateCodeReviewRequest_RepositoryAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAssociationArn", ID: &i_AssociationArn, Type: smithy.ShapeTypeString, Ext: &eCreateCodeReviewRequest_RepositoryAssociationArn})
+var sCreateCodeReviewRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCodeReviewType, Members: &mCodeReviewType, Type: smithy.ShapeTypeStructure, Ext: &eCreateCodeReviewRequest_Type})
+var sCreateCodeReviewRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eCreateCodeReviewRequest_ClientRequestToken})
+var sCreateCodeReviewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeReviewResponse, Members: &mCreateCodeReviewResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCodeReviewResponse})
+var sCreateCodeReviewResponse_CodeReview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReview", ID: &iCodeReview, Members: &mCodeReview, Type: smithy.ShapeTypeStructure, Ext: &eCreateCodeReviewResponse_CodeReview})
+var sDescribeCodeReviewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeReviewRequest, Members: &mDescribeCodeReviewRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCodeReviewRequest})
+var sDescribeCodeReviewRequest_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eDescribeCodeReviewRequest_CodeReviewArn})
+var sDescribeCodeReviewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeReviewResponse, Members: &mDescribeCodeReviewResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCodeReviewResponse})
+var sDescribeCodeReviewResponse_CodeReview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReview", ID: &iCodeReview, Members: &mCodeReview, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCodeReviewResponse_CodeReview})
+var sDescribeRecommendationFeedbackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecommendationFeedbackRequest, Members: &mDescribeRecommendationFeedbackRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecommendationFeedbackRequest})
+var sDescribeRecommendationFeedbackRequest_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eDescribeRecommendationFeedbackRequest_CodeReviewArn})
+var sDescribeRecommendationFeedbackRequest_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationId", ID: &i_RecommendationId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDescribeRecommendationFeedbackRequest_RecommendationId})
+var sDescribeRecommendationFeedbackRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDescribeRecommendationFeedbackRequest_UserId})
+var sDescribeRecommendationFeedbackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecommendationFeedbackResponse, Members: &mDescribeRecommendationFeedbackResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecommendationFeedbackResponse})
+var sDescribeRecommendationFeedbackResponse_RecommendationFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationFeedback", ID: &iRecommendationFeedback, Members: &mRecommendationFeedback, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRecommendationFeedbackResponse_RecommendationFeedback})
+var sDescribeRepositoryAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepositoryAssociationRequest, Members: &mDescribeRepositoryAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRepositoryAssociationRequest})
+var sDescribeRepositoryAssociationRequest_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationArn", ID: &i_AssociationArn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eDescribeRepositoryAssociationRequest_AssociationArn})
+var sDescribeRepositoryAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepositoryAssociationResponse, Members: &mDescribeRepositoryAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRepositoryAssociationResponse})
+var sDescribeRepositoryAssociationResponse_RepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAssociation", ID: &iRepositoryAssociation, Members: &mRepositoryAssociation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRepositoryAssociationResponse_RepositoryAssociation})
+var sDescribeRepositoryAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeRepositoryAssociationResponse_Tags})
+var sDisassociateRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateRepositoryRequest, Members: &mDisassociateRepositoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateRepositoryRequest})
+var sDisassociateRepositoryRequest_AssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationArn", ID: &i_AssociationArn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eDisassociateRepositoryRequest_AssociationArn})
+var sDisassociateRepositoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateRepositoryResponse, Members: &mDisassociateRepositoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateRepositoryResponse})
+var sDisassociateRepositoryResponse_RepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAssociation", ID: &iRepositoryAssociation, Members: &mRepositoryAssociation, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateRepositoryResponse_RepositoryAssociation})
+var sDisassociateRepositoryResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDisassociateRepositoryResponse_Tags})
+var sListCodeReviewsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeReviewsRequest, Members: &mListCodeReviewsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCodeReviewsRequest})
+var sListCodeReviewsRequest_ProviderTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderTypes", ID: &i_ProviderTypes, Members: &m_ProviderTypes, Traits: &t23, Type: smithy.ShapeTypeList, Ext: &eListCodeReviewsRequest_ProviderTypes})
+var sListCodeReviewsRequest_States = smithy.NewStaticSchema(smithy.StaticSchema{Member: "States", ID: &i_JobStates, Members: &m_JobStates, Traits: &t24, Type: smithy.ShapeTypeList, Ext: &eListCodeReviewsRequest_States})
+var sListCodeReviewsRequest_RepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryNames", ID: &i_RepositoryNames, Members: &m_RepositoryNames, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &eListCodeReviewsRequest_RepositoryNames})
+var sListCodeReviewsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Traits: &t26, Type: smithy.ShapeTypeEnum, Ext: &eListCodeReviewsRequest_Type})
+var sListCodeReviewsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListCodeReviewsMaxResults, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &eListCodeReviewsRequest_MaxResults})
+var sListCodeReviewsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eListCodeReviewsRequest_NextToken})
+var sListCodeReviewsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeReviewsResponse, Members: &mListCodeReviewsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCodeReviewsResponse})
+var sListCodeReviewsResponse_CodeReviewSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewSummaries", ID: &i_CodeReviewSummaries, Members: &m_CodeReviewSummaries, Type: smithy.ShapeTypeList, Ext: &eListCodeReviewsResponse_CodeReviewSummaries})
+var sListCodeReviewsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCodeReviewsResponse_NextToken})
+var sListRecommendationFeedbackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendationFeedbackRequest, Members: &mListRecommendationFeedbackRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendationFeedbackRequest})
+var sListRecommendationFeedbackRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eListRecommendationFeedbackRequest_NextToken})
+var sListRecommendationFeedbackRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &eListRecommendationFeedbackRequest_MaxResults})
+var sListRecommendationFeedbackRequest_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListRecommendationFeedbackRequest_CodeReviewArn})
+var sListRecommendationFeedbackRequest_UserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIds", ID: &i_UserIds, Members: &m_UserIds, Traits: &t29, Type: smithy.ShapeTypeList, Ext: &eListRecommendationFeedbackRequest_UserIds})
+var sListRecommendationFeedbackRequest_RecommendationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationIds", ID: &i_RecommendationIds, Members: &m_RecommendationIds, Traits: &t30, Type: smithy.ShapeTypeList, Ext: &eListRecommendationFeedbackRequest_RecommendationIds})
+var sListRecommendationFeedbackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendationFeedbackResponse, Members: &mListRecommendationFeedbackResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendationFeedbackResponse})
+var sListRecommendationFeedbackResponse_RecommendationFeedbackSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationFeedbackSummaries", ID: &i_RecommendationFeedbackSummaries, Members: &m_RecommendationFeedbackSummaries, Type: smithy.ShapeTypeList, Ext: &eListRecommendationFeedbackResponse_RecommendationFeedbackSummaries})
+var sListRecommendationFeedbackResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRecommendationFeedbackResponse_NextToken})
+var sListRecommendationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendationsRequest, Members: &mListRecommendationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendationsRequest})
+var sListRecommendationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eListRecommendationsRequest_NextToken})
+var sListRecommendationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListRecommendationsMaxResults, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &eListRecommendationsRequest_MaxResults})
+var sListRecommendationsRequest_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListRecommendationsRequest_CodeReviewArn})
+var sListRecommendationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendationsResponse, Members: &mListRecommendationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendationsResponse})
+var sListRecommendationsResponse_RecommendationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationSummaries", ID: &i_RecommendationSummaries, Members: &m_RecommendationSummaries, Type: smithy.ShapeTypeList, Ext: &eListRecommendationsResponse_RecommendationSummaries})
+var sListRecommendationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRecommendationsResponse_NextToken})
+var sListRepositoryAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryAssociationsRequest, Members: &mListRepositoryAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoryAssociationsRequest})
+var sListRepositoryAssociationsRequest_ProviderTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderTypes", ID: &i_ProviderTypes, Members: &m_ProviderTypes, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &eListRepositoryAssociationsRequest_ProviderTypes})
+var sListRepositoryAssociationsRequest_States = smithy.NewStaticSchema(smithy.StaticSchema{Member: "States", ID: &i_RepositoryAssociationStates, Members: &m_RepositoryAssociationStates, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eListRepositoryAssociationsRequest_States})
+var sListRepositoryAssociationsRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_Names, Members: &m_Names, Traits: &t33, Type: smithy.ShapeTypeList, Ext: &eListRepositoryAssociationsRequest_Names})
+var sListRepositoryAssociationsRequest_Owners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owners", ID: &i_Owners, Members: &m_Owners, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eListRepositoryAssociationsRequest_Owners})
+var sListRepositoryAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &eListRepositoryAssociationsRequest_MaxResults})
+var sListRepositoryAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eListRepositoryAssociationsRequest_NextToken})
+var sListRepositoryAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryAssociationsResponse, Members: &mListRepositoryAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoryAssociationsResponse})
+var sListRepositoryAssociationsResponse_RepositoryAssociationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryAssociationSummaries", ID: &i_RepositoryAssociationSummaries, Members: &m_RepositoryAssociationSummaries, Type: smithy.ShapeTypeList, Ext: &eListRepositoryAssociationsResponse_RepositoryAssociationSummaries})
+var sListRepositoryAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRepositoryAssociationsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AssociationArn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sPutRecommendationFeedbackRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecommendationFeedbackRequest, Members: &mPutRecommendationFeedbackRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutRecommendationFeedbackRequest})
+var sPutRecommendationFeedbackRequest_CodeReviewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeReviewArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutRecommendationFeedbackRequest_CodeReviewArn})
+var sPutRecommendationFeedbackRequest_RecommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecommendationId", ID: &i_RecommendationId, Type: smithy.ShapeTypeString, Ext: &ePutRecommendationFeedbackRequest_RecommendationId})
+var sPutRecommendationFeedbackRequest_Reactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reactions", ID: &i_Reactions, Members: &m_Reactions, Type: smithy.ShapeTypeList, Ext: &ePutRecommendationFeedbackRequest_Reactions})
+var sPutRecommendationFeedbackResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecommendationFeedbackResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutRecommendationFeedbackResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AssociationArn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AssociationArn, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t35, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+
+var AssociateRepository = &sAssociateRepository
+
+var CreateCodeReview = &sCreateCodeReview
+
+var DescribeCodeReview = &sDescribeCodeReview
+
+var DescribeRecommendationFeedback = &sDescribeRecommendationFeedback
+
+var DescribeRepositoryAssociation = &sDescribeRepositoryAssociation
+
+var DisassociateRepository = &sDisassociateRepository
+
+var ListCodeReviews = &sListCodeReviews
+
+var ListRecommendationFeedback = &sListRecommendationFeedback
+
+var ListRecommendations = &sListRecommendations
+
+var ListRepositoryAssociations = &sListRepositoryAssociations
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutRecommendationFeedback = &sPutRecommendationFeedback
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSGuruFrontendService = &s_AWSGuruFrontendService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AnalysisType = &sAnalysisType
+var AnalysisType_SECURITY = &sAnalysisType_SECURITY
+var AnalysisType_CODE_QUALITY = &sAnalysisType_CODE_QUALITY
+
+var _AnalysisTypes = &s_AnalysisTypes
+var _AnalysisTypes_member = &s_AnalysisTypes_member
+
+var _Arn = &s_Arn
+
+var _AssociationArn = &s_AssociationArn
+
+var _AssociationId = &s_AssociationId
+
+var BranchDiffSourceCodeType = &sBranchDiffSourceCodeType
+var BranchDiffSourceCodeType_SourceBranchName = &sBranchDiffSourceCodeType_SourceBranchName
+var BranchDiffSourceCodeType_DestinationBranchName = &sBranchDiffSourceCodeType_DestinationBranchName
+
+var _BranchName = &s_BranchName
+
+var _BuildArtifactsObjectKey = &s_BuildArtifactsObjectKey
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var CodeArtifacts = &sCodeArtifacts
+var CodeArtifacts_SourceCodeArtifactsObjectKey = &sCodeArtifacts_SourceCodeArtifactsObjectKey
+var CodeArtifacts_BuildArtifactsObjectKey = &sCodeArtifacts_BuildArtifactsObjectKey
+
+var CodeCommitRepository = &sCodeCommitRepository
+var CodeCommitRepository_Name = &sCodeCommitRepository_Name
+
+var CodeReview = &sCodeReview
+var CodeReview_Name = &sCodeReview_Name
+var CodeReview_CodeReviewArn = &sCodeReview_CodeReviewArn
+var CodeReview_RepositoryName = &sCodeReview_RepositoryName
+var CodeReview_Owner = &sCodeReview_Owner
+var CodeReview_ProviderType = &sCodeReview_ProviderType
+var CodeReview_State = &sCodeReview_State
+var CodeReview_StateReason = &sCodeReview_StateReason
+var CodeReview_CreatedTimeStamp = &sCodeReview_CreatedTimeStamp
+var CodeReview_LastUpdatedTimeStamp = &sCodeReview_LastUpdatedTimeStamp
+var CodeReview_Type = &sCodeReview_Type
+var CodeReview_PullRequestId = &sCodeReview_PullRequestId
+var CodeReview_SourceCodeType = &sCodeReview_SourceCodeType
+var CodeReview_AssociationArn = &sCodeReview_AssociationArn
+var CodeReview_Metrics = &sCodeReview_Metrics
+var CodeReview_AnalysisTypes = &sCodeReview_AnalysisTypes
+var CodeReview_ConfigFileState = &sCodeReview_ConfigFileState
+
+var _CodeReviewName = &s_CodeReviewName
+
+var _CodeReviewSummaries = &s_CodeReviewSummaries
+var _CodeReviewSummaries_member = &s_CodeReviewSummaries_member
+
+var CodeReviewSummary = &sCodeReviewSummary
+var CodeReviewSummary_Name = &sCodeReviewSummary_Name
+var CodeReviewSummary_CodeReviewArn = &sCodeReviewSummary_CodeReviewArn
+var CodeReviewSummary_RepositoryName = &sCodeReviewSummary_RepositoryName
+var CodeReviewSummary_Owner = &sCodeReviewSummary_Owner
+var CodeReviewSummary_ProviderType = &sCodeReviewSummary_ProviderType
+var CodeReviewSummary_State = &sCodeReviewSummary_State
+var CodeReviewSummary_CreatedTimeStamp = &sCodeReviewSummary_CreatedTimeStamp
+var CodeReviewSummary_LastUpdatedTimeStamp = &sCodeReviewSummary_LastUpdatedTimeStamp
+var CodeReviewSummary_Type = &sCodeReviewSummary_Type
+var CodeReviewSummary_PullRequestId = &sCodeReviewSummary_PullRequestId
+var CodeReviewSummary_MetricsSummary = &sCodeReviewSummary_MetricsSummary
+var CodeReviewSummary_SourceCodeType = &sCodeReviewSummary_SourceCodeType
+
+var CodeReviewType = &sCodeReviewType
+var CodeReviewType_RepositoryAnalysis = &sCodeReviewType_RepositoryAnalysis
+var CodeReviewType_AnalysisTypes = &sCodeReviewType_AnalysisTypes
+
+var CommitDiffSourceCodeType = &sCommitDiffSourceCodeType
+var CommitDiffSourceCodeType_SourceCommit = &sCommitDiffSourceCodeType_SourceCommit
+var CommitDiffSourceCodeType_DestinationCommit = &sCommitDiffSourceCodeType_DestinationCommit
+var CommitDiffSourceCodeType_MergeBaseCommit = &sCommitDiffSourceCodeType_MergeBaseCommit
+
+var _CommitId = &s_CommitId
+
+var ConfigFileState = &sConfigFileState
+var ConfigFileState_PRESENT = &sConfigFileState_PRESENT
+var ConfigFileState_ABSENT = &sConfigFileState_ABSENT
+var ConfigFileState_PRESENT_WITH_ERRORS = &sConfigFileState_PRESENT_WITH_ERRORS
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _ConnectionArn = &s_ConnectionArn
+
+var EncryptionOption = &sEncryptionOption
+var EncryptionOption_AoCmk = &sEncryptionOption_AoCmk
+var EncryptionOption_CmCmk = &sEncryptionOption_CmCmk
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EventInfo = &sEventInfo
+var EventInfo_Name = &sEventInfo_Name
+var EventInfo_State = &sEventInfo_State
+
+var _EventName = &s_EventName
+
+var _EventState = &s_EventState
+
+var _FilePath = &s_FilePath
+
+var _FindingsCount = &s_FindingsCount
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var JobState = &sJobState
+var JobState_COMPLETED = &sJobState_COMPLETED
+var JobState_PENDING = &sJobState_PENDING
+var JobState_FAILED = &sJobState_FAILED
+var JobState_DELETING = &sJobState_DELETING
+
+var _JobStates = &s_JobStates
+var _JobStates_member = &s_JobStates_member
+
+var KMSKeyDetails = &sKMSKeyDetails
+var KMSKeyDetails_KMSKeyId = &sKMSKeyDetails_KMSKeyId
+var KMSKeyDetails_EncryptionOption = &sKMSKeyDetails_EncryptionOption
+
+var _KMSKeyId = &s_KMSKeyId
+
+var _LineNumber = &s_LineNumber
+
+var _LinesOfCodeCount = &s_LinesOfCodeCount
+
+var _ListCodeReviewsMaxResults = &s_ListCodeReviewsMaxResults
+
+var _ListRecommendationsMaxResults = &s_ListRecommendationsMaxResults
+
+var _LongDescription = &s_LongDescription
+
+var _MaxResults = &s_MaxResults
+
+var Metrics = &sMetrics
+var Metrics_MeteredLinesOfCodeCount = &sMetrics_MeteredLinesOfCodeCount
+var Metrics_SuppressedLinesOfCodeCount = &sMetrics_SuppressedLinesOfCodeCount
+var Metrics_FindingsCount = &sMetrics_FindingsCount
+
+var MetricsSummary = &sMetricsSummary
+var MetricsSummary_MeteredLinesOfCodeCount = &sMetricsSummary_MeteredLinesOfCodeCount
+var MetricsSummary_SuppressedLinesOfCodeCount = &sMetricsSummary_SuppressedLinesOfCodeCount
+var MetricsSummary_FindingsCount = &sMetricsSummary_FindingsCount
+
+var _Name = &s_Name
+
+var _Names = &s_Names
+var _Names_member = &s_Names_member
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Message = &sNotFoundException_Message
+
+var _Owner = &s_Owner
+
+var _Owners = &s_Owners
+var _Owners_member = &s_Owners_member
+
+var ProviderType = &sProviderType
+var ProviderType_CODE_COMMIT = &sProviderType_CODE_COMMIT
+var ProviderType_GIT_HUB = &sProviderType_GIT_HUB
+var ProviderType_BITBUCKET = &sProviderType_BITBUCKET
+var ProviderType_GIT_HUB_ENTERPRISE_SERVER = &sProviderType_GIT_HUB_ENTERPRISE_SERVER
+var ProviderType_S3_BUCKET = &sProviderType_S3_BUCKET
+
+var _ProviderTypes = &s_ProviderTypes
+var _ProviderTypes_member = &s_ProviderTypes_member
+
+var _PullRequestId = &s_PullRequestId
+
+var Reaction = &sReaction
+var Reaction_THUMBS_UP = &sReaction_THUMBS_UP
+var Reaction_THUMBS_DOWN = &sReaction_THUMBS_DOWN
+
+var _Reactions = &s_Reactions
+var _Reactions_member = &s_Reactions_member
+
+var RecommendationCategory = &sRecommendationCategory
+var RecommendationCategory_AWS_BEST_PRACTICES = &sRecommendationCategory_AWS_BEST_PRACTICES
+var RecommendationCategory_AWS_CLOUDFORMATION_ISSUES = &sRecommendationCategory_AWS_CLOUDFORMATION_ISSUES
+var RecommendationCategory_DUPLICATE_CODE = &sRecommendationCategory_DUPLICATE_CODE
+var RecommendationCategory_CODE_MAINTENANCE_ISSUES = &sRecommendationCategory_CODE_MAINTENANCE_ISSUES
+var RecommendationCategory_CONCURRENCY_ISSUES = &sRecommendationCategory_CONCURRENCY_ISSUES
+var RecommendationCategory_INPUT_VALIDATIONS = &sRecommendationCategory_INPUT_VALIDATIONS
+var RecommendationCategory_PYTHON_BEST_PRACTICES = &sRecommendationCategory_PYTHON_BEST_PRACTICES
+var RecommendationCategory_JAVA_BEST_PRACTICES = &sRecommendationCategory_JAVA_BEST_PRACTICES
+var RecommendationCategory_RESOURCE_LEAKS = &sRecommendationCategory_RESOURCE_LEAKS
+var RecommendationCategory_SECURITY_ISSUES = &sRecommendationCategory_SECURITY_ISSUES
+var RecommendationCategory_CODE_INCONSISTENCIES = &sRecommendationCategory_CODE_INCONSISTENCIES
+
+var RecommendationFeedback = &sRecommendationFeedback
+var RecommendationFeedback_CodeReviewArn = &sRecommendationFeedback_CodeReviewArn
+var RecommendationFeedback_RecommendationId = &sRecommendationFeedback_RecommendationId
+var RecommendationFeedback_Reactions = &sRecommendationFeedback_Reactions
+var RecommendationFeedback_UserId = &sRecommendationFeedback_UserId
+var RecommendationFeedback_CreatedTimeStamp = &sRecommendationFeedback_CreatedTimeStamp
+var RecommendationFeedback_LastUpdatedTimeStamp = &sRecommendationFeedback_LastUpdatedTimeStamp
+
+var _RecommendationFeedbackSummaries = &s_RecommendationFeedbackSummaries
+var _RecommendationFeedbackSummaries_member = &s_RecommendationFeedbackSummaries_member
+
+var RecommendationFeedbackSummary = &sRecommendationFeedbackSummary
+var RecommendationFeedbackSummary_RecommendationId = &sRecommendationFeedbackSummary_RecommendationId
+var RecommendationFeedbackSummary_Reactions = &sRecommendationFeedbackSummary_Reactions
+var RecommendationFeedbackSummary_UserId = &sRecommendationFeedbackSummary_UserId
+
+var _RecommendationId = &s_RecommendationId
+
+var _RecommendationIds = &s_RecommendationIds
+var _RecommendationIds_member = &s_RecommendationIds_member
+
+var _RecommendationSummaries = &s_RecommendationSummaries
+var _RecommendationSummaries_member = &s_RecommendationSummaries_member
+
+var RecommendationSummary = &sRecommendationSummary
+var RecommendationSummary_FilePath = &sRecommendationSummary_FilePath
+var RecommendationSummary_RecommendationId = &sRecommendationSummary_RecommendationId
+var RecommendationSummary_StartLine = &sRecommendationSummary_StartLine
+var RecommendationSummary_EndLine = &sRecommendationSummary_EndLine
+var RecommendationSummary_Description = &sRecommendationSummary_Description
+var RecommendationSummary_RecommendationCategory = &sRecommendationSummary_RecommendationCategory
+var RecommendationSummary_RuleMetadata = &sRecommendationSummary_RuleMetadata
+var RecommendationSummary_Severity = &sRecommendationSummary_Severity
+
+var Repository = &sRepository
+var Repository_CodeCommit = &sRepository_CodeCommit
+var Repository_Bitbucket = &sRepository_Bitbucket
+var Repository_GitHubEnterpriseServer = &sRepository_GitHubEnterpriseServer
+var Repository_S3Bucket = &sRepository_S3Bucket
+
+var RepositoryAnalysis = &sRepositoryAnalysis
+var RepositoryAnalysis_RepositoryHead = &sRepositoryAnalysis_RepositoryHead
+var RepositoryAnalysis_SourceCodeType = &sRepositoryAnalysis_SourceCodeType
+
+var RepositoryAssociation = &sRepositoryAssociation
+var RepositoryAssociation_AssociationId = &sRepositoryAssociation_AssociationId
+var RepositoryAssociation_AssociationArn = &sRepositoryAssociation_AssociationArn
+var RepositoryAssociation_ConnectionArn = &sRepositoryAssociation_ConnectionArn
+var RepositoryAssociation_Name = &sRepositoryAssociation_Name
+var RepositoryAssociation_Owner = &sRepositoryAssociation_Owner
+var RepositoryAssociation_ProviderType = &sRepositoryAssociation_ProviderType
+var RepositoryAssociation_State = &sRepositoryAssociation_State
+var RepositoryAssociation_StateReason = &sRepositoryAssociation_StateReason
+var RepositoryAssociation_LastUpdatedTimeStamp = &sRepositoryAssociation_LastUpdatedTimeStamp
+var RepositoryAssociation_CreatedTimeStamp = &sRepositoryAssociation_CreatedTimeStamp
+var RepositoryAssociation_KMSKeyDetails = &sRepositoryAssociation_KMSKeyDetails
+var RepositoryAssociation_S3RepositoryDetails = &sRepositoryAssociation_S3RepositoryDetails
+
+var RepositoryAssociationState = &sRepositoryAssociationState
+var RepositoryAssociationState_ASSOCIATED = &sRepositoryAssociationState_ASSOCIATED
+var RepositoryAssociationState_ASSOCIATING = &sRepositoryAssociationState_ASSOCIATING
+var RepositoryAssociationState_FAILED = &sRepositoryAssociationState_FAILED
+var RepositoryAssociationState_DISASSOCIATING = &sRepositoryAssociationState_DISASSOCIATING
+var RepositoryAssociationState_DISASSOCIATED = &sRepositoryAssociationState_DISASSOCIATED
+
+var _RepositoryAssociationStates = &s_RepositoryAssociationStates
+var _RepositoryAssociationStates_member = &s_RepositoryAssociationStates_member
+
+var _RepositoryAssociationSummaries = &s_RepositoryAssociationSummaries
+var _RepositoryAssociationSummaries_member = &s_RepositoryAssociationSummaries_member
+
+var RepositoryAssociationSummary = &sRepositoryAssociationSummary
+var RepositoryAssociationSummary_AssociationArn = &sRepositoryAssociationSummary_AssociationArn
+var RepositoryAssociationSummary_ConnectionArn = &sRepositoryAssociationSummary_ConnectionArn
+var RepositoryAssociationSummary_LastUpdatedTimeStamp = &sRepositoryAssociationSummary_LastUpdatedTimeStamp
+var RepositoryAssociationSummary_AssociationId = &sRepositoryAssociationSummary_AssociationId
+var RepositoryAssociationSummary_Name = &sRepositoryAssociationSummary_Name
+var RepositoryAssociationSummary_Owner = &sRepositoryAssociationSummary_Owner
+var RepositoryAssociationSummary_ProviderType = &sRepositoryAssociationSummary_ProviderType
+var RepositoryAssociationSummary_State = &sRepositoryAssociationSummary_State
+
+var RepositoryHeadSourceCodeType = &sRepositoryHeadSourceCodeType
+var RepositoryHeadSourceCodeType_BranchName = &sRepositoryHeadSourceCodeType_BranchName
+
+var _RepositoryNames = &s_RepositoryNames
+var _RepositoryNames_member = &s_RepositoryNames_member
+
+var _Requester = &s_Requester
+
+var _RequestId = &s_RequestId
+
+var RequestMetadata = &sRequestMetadata
+var RequestMetadata_RequestId = &sRequestMetadata_RequestId
+var RequestMetadata_Requester = &sRequestMetadata_Requester
+var RequestMetadata_EventInfo = &sRequestMetadata_EventInfo
+var RequestMetadata_VendorName = &sRequestMetadata_VendorName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _RuleId = &s_RuleId
+
+var RuleMetadata = &sRuleMetadata
+var RuleMetadata_RuleId = &sRuleMetadata_RuleId
+var RuleMetadata_RuleName = &sRuleMetadata_RuleName
+var RuleMetadata_ShortDescription = &sRuleMetadata_ShortDescription
+var RuleMetadata_LongDescription = &sRuleMetadata_LongDescription
+var RuleMetadata_RuleTags = &sRuleMetadata_RuleTags
+
+var _RuleName = &s_RuleName
+
+var _RuleTag = &s_RuleTag
+
+var _RuleTags = &s_RuleTags
+var _RuleTags_member = &s_RuleTags_member
+
+var _S3BucketName = &s_S3BucketName
+
+var S3BucketRepository = &sS3BucketRepository
+var S3BucketRepository_Name = &sS3BucketRepository_Name
+var S3BucketRepository_Details = &sS3BucketRepository_Details
+
+var S3Repository = &sS3Repository
+var S3Repository_Name = &sS3Repository_Name
+var S3Repository_BucketName = &sS3Repository_BucketName
+
+var S3RepositoryDetails = &sS3RepositoryDetails
+var S3RepositoryDetails_BucketName = &sS3RepositoryDetails_BucketName
+var S3RepositoryDetails_CodeArtifacts = &sS3RepositoryDetails_CodeArtifacts
+
+var Severity = &sSeverity
+var Severity_INFO = &sSeverity_INFO
+var Severity_LOW = &sSeverity_LOW
+var Severity_MEDIUM = &sSeverity_MEDIUM
+var Severity_HIGH = &sSeverity_HIGH
+var Severity_CRITICAL = &sSeverity_CRITICAL
+
+var _ShortDescription = &s_ShortDescription
+
+var _SourceCodeArtifactsObjectKey = &s_SourceCodeArtifactsObjectKey
+
+var SourceCodeType = &sSourceCodeType
+var SourceCodeType_CommitDiff = &sSourceCodeType_CommitDiff
+var SourceCodeType_RepositoryHead = &sSourceCodeType_RepositoryHead
+var SourceCodeType_BranchDiff = &sSourceCodeType_BranchDiff
+var SourceCodeType_S3BucketRepository = &sSourceCodeType_S3BucketRepository
+var SourceCodeType_RequestMetadata = &sSourceCodeType_RequestMetadata
+
+var _StateReason = &s_StateReason
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Text = &s_Text
+
+var ThirdPartySourceRepository = &sThirdPartySourceRepository
+var ThirdPartySourceRepository_Name = &sThirdPartySourceRepository_Name
+var ThirdPartySourceRepository_ConnectionArn = &sThirdPartySourceRepository_ConnectionArn
+var ThirdPartySourceRepository_Owner = &sThirdPartySourceRepository_Owner
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _TimeStamp = &s_TimeStamp
+
+var Type = &sType
+var Type_PULL_REQUEST = &sType_PULL_REQUEST
+var Type_REPOSITORY_ANALYSIS = &sType_REPOSITORY_ANALYSIS
+
+var _UserId = &s_UserId
+
+var _UserIds = &s_UserIds
+var _UserIds_member = &s_UserIds_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var VendorName = &sVendorName
+var VendorName_GITHUB = &sVendorName_GITHUB
+var VendorName_GITLAB = &sVendorName_GITLAB
+var VendorName_NATIVE_S3 = &sVendorName_NATIVE_S3
+
+var AssociateRepositoryRequest = &sAssociateRepositoryRequest
+var AssociateRepositoryRequest_Repository = &sAssociateRepositoryRequest_Repository
+var AssociateRepositoryRequest_ClientRequestToken = &sAssociateRepositoryRequest_ClientRequestToken
+var AssociateRepositoryRequest_Tags = &sAssociateRepositoryRequest_Tags
+var AssociateRepositoryRequest_KMSKeyDetails = &sAssociateRepositoryRequest_KMSKeyDetails
+
+var AssociateRepositoryResponse = &sAssociateRepositoryResponse
+var AssociateRepositoryResponse_RepositoryAssociation = &sAssociateRepositoryResponse_RepositoryAssociation
+var AssociateRepositoryResponse_Tags = &sAssociateRepositoryResponse_Tags
+
+var CreateCodeReviewRequest = &sCreateCodeReviewRequest
+var CreateCodeReviewRequest_Name = &sCreateCodeReviewRequest_Name
+var CreateCodeReviewRequest_RepositoryAssociationArn = &sCreateCodeReviewRequest_RepositoryAssociationArn
+var CreateCodeReviewRequest_Type = &sCreateCodeReviewRequest_Type
+var CreateCodeReviewRequest_ClientRequestToken = &sCreateCodeReviewRequest_ClientRequestToken
+
+var CreateCodeReviewResponse = &sCreateCodeReviewResponse
+var CreateCodeReviewResponse_CodeReview = &sCreateCodeReviewResponse_CodeReview
+
+var DescribeCodeReviewRequest = &sDescribeCodeReviewRequest
+var DescribeCodeReviewRequest_CodeReviewArn = &sDescribeCodeReviewRequest_CodeReviewArn
+
+var DescribeCodeReviewResponse = &sDescribeCodeReviewResponse
+var DescribeCodeReviewResponse_CodeReview = &sDescribeCodeReviewResponse_CodeReview
+
+var DescribeRecommendationFeedbackRequest = &sDescribeRecommendationFeedbackRequest
+var DescribeRecommendationFeedbackRequest_CodeReviewArn = &sDescribeRecommendationFeedbackRequest_CodeReviewArn
+var DescribeRecommendationFeedbackRequest_RecommendationId = &sDescribeRecommendationFeedbackRequest_RecommendationId
+var DescribeRecommendationFeedbackRequest_UserId = &sDescribeRecommendationFeedbackRequest_UserId
+
+var DescribeRecommendationFeedbackResponse = &sDescribeRecommendationFeedbackResponse
+var DescribeRecommendationFeedbackResponse_RecommendationFeedback = &sDescribeRecommendationFeedbackResponse_RecommendationFeedback
+
+var DescribeRepositoryAssociationRequest = &sDescribeRepositoryAssociationRequest
+var DescribeRepositoryAssociationRequest_AssociationArn = &sDescribeRepositoryAssociationRequest_AssociationArn
+
+var DescribeRepositoryAssociationResponse = &sDescribeRepositoryAssociationResponse
+var DescribeRepositoryAssociationResponse_RepositoryAssociation = &sDescribeRepositoryAssociationResponse_RepositoryAssociation
+var DescribeRepositoryAssociationResponse_Tags = &sDescribeRepositoryAssociationResponse_Tags
+
+var DisassociateRepositoryRequest = &sDisassociateRepositoryRequest
+var DisassociateRepositoryRequest_AssociationArn = &sDisassociateRepositoryRequest_AssociationArn
+
+var DisassociateRepositoryResponse = &sDisassociateRepositoryResponse
+var DisassociateRepositoryResponse_RepositoryAssociation = &sDisassociateRepositoryResponse_RepositoryAssociation
+var DisassociateRepositoryResponse_Tags = &sDisassociateRepositoryResponse_Tags
+
+var ListCodeReviewsRequest = &sListCodeReviewsRequest
+var ListCodeReviewsRequest_ProviderTypes = &sListCodeReviewsRequest_ProviderTypes
+var ListCodeReviewsRequest_States = &sListCodeReviewsRequest_States
+var ListCodeReviewsRequest_RepositoryNames = &sListCodeReviewsRequest_RepositoryNames
+var ListCodeReviewsRequest_Type = &sListCodeReviewsRequest_Type
+var ListCodeReviewsRequest_MaxResults = &sListCodeReviewsRequest_MaxResults
+var ListCodeReviewsRequest_NextToken = &sListCodeReviewsRequest_NextToken
+
+var ListCodeReviewsResponse = &sListCodeReviewsResponse
+var ListCodeReviewsResponse_CodeReviewSummaries = &sListCodeReviewsResponse_CodeReviewSummaries
+var ListCodeReviewsResponse_NextToken = &sListCodeReviewsResponse_NextToken
+
+var ListRecommendationFeedbackRequest = &sListRecommendationFeedbackRequest
+var ListRecommendationFeedbackRequest_NextToken = &sListRecommendationFeedbackRequest_NextToken
+var ListRecommendationFeedbackRequest_MaxResults = &sListRecommendationFeedbackRequest_MaxResults
+var ListRecommendationFeedbackRequest_CodeReviewArn = &sListRecommendationFeedbackRequest_CodeReviewArn
+var ListRecommendationFeedbackRequest_UserIds = &sListRecommendationFeedbackRequest_UserIds
+var ListRecommendationFeedbackRequest_RecommendationIds = &sListRecommendationFeedbackRequest_RecommendationIds
+
+var ListRecommendationFeedbackResponse = &sListRecommendationFeedbackResponse
+var ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries = &sListRecommendationFeedbackResponse_RecommendationFeedbackSummaries
+var ListRecommendationFeedbackResponse_NextToken = &sListRecommendationFeedbackResponse_NextToken
+
+var ListRecommendationsRequest = &sListRecommendationsRequest
+var ListRecommendationsRequest_NextToken = &sListRecommendationsRequest_NextToken
+var ListRecommendationsRequest_MaxResults = &sListRecommendationsRequest_MaxResults
+var ListRecommendationsRequest_CodeReviewArn = &sListRecommendationsRequest_CodeReviewArn
+
+var ListRecommendationsResponse = &sListRecommendationsResponse
+var ListRecommendationsResponse_RecommendationSummaries = &sListRecommendationsResponse_RecommendationSummaries
+var ListRecommendationsResponse_NextToken = &sListRecommendationsResponse_NextToken
+
+var ListRepositoryAssociationsRequest = &sListRepositoryAssociationsRequest
+var ListRepositoryAssociationsRequest_ProviderTypes = &sListRepositoryAssociationsRequest_ProviderTypes
+var ListRepositoryAssociationsRequest_States = &sListRepositoryAssociationsRequest_States
+var ListRepositoryAssociationsRequest_Names = &sListRepositoryAssociationsRequest_Names
+var ListRepositoryAssociationsRequest_Owners = &sListRepositoryAssociationsRequest_Owners
+var ListRepositoryAssociationsRequest_MaxResults = &sListRepositoryAssociationsRequest_MaxResults
+var ListRepositoryAssociationsRequest_NextToken = &sListRepositoryAssociationsRequest_NextToken
+
+var ListRepositoryAssociationsResponse = &sListRepositoryAssociationsResponse
+var ListRepositoryAssociationsResponse_RepositoryAssociationSummaries = &sListRepositoryAssociationsResponse_RepositoryAssociationSummaries
+var ListRepositoryAssociationsResponse_NextToken = &sListRepositoryAssociationsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutRecommendationFeedbackRequest = &sPutRecommendationFeedbackRequest
+var PutRecommendationFeedbackRequest_CodeReviewArn = &sPutRecommendationFeedbackRequest_CodeReviewArn
+var PutRecommendationFeedbackRequest_RecommendationId = &sPutRecommendationFeedbackRequest_RecommendationId
+var PutRecommendationFeedbackRequest_Reactions = &sPutRecommendationFeedbackRequest_Reactions
+
+var PutRecommendationFeedbackResponse = &sPutRecommendationFeedbackResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSGuruFrontendService = &smithy.ServiceSchema{Schema: &s_AWSGuruFrontendService, Version: "2019-09-19"}

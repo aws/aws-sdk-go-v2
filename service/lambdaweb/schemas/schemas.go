@@ -4,1824 +4,1754 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateWebFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/2025-03-07/web-functions",
-	Code: 202})
+var (
+	eCreateWebFunction                                    smithy.SchemaExtensions
+	eCreateWebFunctionEndpoint                            smithy.SchemaExtensions
+	eCreateWebFunctionRevision                            smithy.SchemaExtensions
+	eDeleteResourcePolicy                                 smithy.SchemaExtensions
+	eDeleteWebFunction                                    smithy.SchemaExtensions
+	eDeleteWebFunctionEndpoint                            smithy.SchemaExtensions
+	eDeleteWebFunctionRevision                            smithy.SchemaExtensions
+	eGetResourcePolicy                                    smithy.SchemaExtensions
+	eGetWebAccountSettings                                smithy.SchemaExtensions
+	eGetWebFunction                                       smithy.SchemaExtensions
+	eGetWebFunctionEndpoint                               smithy.SchemaExtensions
+	eGetWebFunctionRevision                               smithy.SchemaExtensions
+	eListTags                                             smithy.SchemaExtensions
+	eListWebFunctionEndpoints                             smithy.SchemaExtensions
+	eListWebFunctionRevisions                             smithy.SchemaExtensions
+	eListWebFunctions                                     smithy.SchemaExtensions
+	ePutResourcePolicy                                    smithy.SchemaExtensions
+	eTagResource                                          smithy.SchemaExtensions
+	eUntagResource                                        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpoint                            smithy.SchemaExtensions
+	e_LambdaWeb                                           smithy.SchemaExtensions
+	eAccessDeniedException                                smithy.SchemaExtensions
+	eAccessDeniedException_message                        smithy.SchemaExtensions
+	eAccountQuotas                                        smithy.SchemaExtensions
+	eAccountQuotas_maxTotalArmVCpus                       smithy.SchemaExtensions
+	eAccountQuotas_maxTotalRateLimit                      smithy.SchemaExtensions
+	eAccountQuotas_maxRevisionsPerFunction                smithy.SchemaExtensions
+	eAccountQuotas_maxEndpointsPerFunction                smithy.SchemaExtensions
+	eAccountUsage                                         smithy.SchemaExtensions
+	eAccountUsage_functionCount                           smithy.SchemaExtensions
+	eApplicationLogLevel                                  smithy.SchemaExtensions
+	eApplicationLogLevel_TRACE                            smithy.SchemaExtensions
+	eApplicationLogLevel_DEBUG                            smithy.SchemaExtensions
+	eApplicationLogLevel_INFO                             smithy.SchemaExtensions
+	eApplicationLogLevel_WARN                             smithy.SchemaExtensions
+	eApplicationLogLevel_ERROR                            smithy.SchemaExtensions
+	eApplicationLogLevel_FATAL                            smithy.SchemaExtensions
+	eAuthType                                             smithy.SchemaExtensions
+	eAuthType_APPLICATION_MANAGED                         smithy.SchemaExtensions
+	eAuthType_IAM_AUTH                                    smithy.SchemaExtensions
+	eAutoDeploymentMode                                   smithy.SchemaExtensions
+	eAutoDeploymentMode_LATEST_REVISION                   smithy.SchemaExtensions
+	eAutoDeploymentMode_DISABLED                          smithy.SchemaExtensions
+	eBuildConfig                                          smithy.SchemaExtensions
+	eBuildConfig_codeConfig                               smithy.SchemaExtensions
+	eBuildConfig_runtimeConfig                            smithy.SchemaExtensions
+	eCodeConfig                                           smithy.SchemaExtensions
+	eCodeConfig_s3Object                                  smithy.SchemaExtensions
+	eConflictException                                    smithy.SchemaExtensions
+	eConflictException_message                            smithy.SchemaExtensions
+	eConflictException_resourceId                         smithy.SchemaExtensions
+	eConflictException_resourceType                       smithy.SchemaExtensions
+	e_DateTime                                            smithy.SchemaExtensions
+	e_Description                                         smithy.SchemaExtensions
+	e_DomainName                                          smithy.SchemaExtensions
+	e_EndpointArn                                         smithy.SchemaExtensions
+	eEndpointConfig                                       smithy.SchemaExtensions
+	eEndpointConfig_endpointName                          smithy.SchemaExtensions
+	eEndpointConfig_description                           smithy.SchemaExtensions
+	eEndpointConfig_endpointType                          smithy.SchemaExtensions
+	eEndpointConfig_authType                              smithy.SchemaExtensions
+	eEndpointConfig_autoDeploymentMode                    smithy.SchemaExtensions
+	eEndpointConfig_regions                               smithy.SchemaExtensions
+	eEndpointConfig_scalingConfig                         smithy.SchemaExtensions
+	eEndpointConfig_throttleConfig                        smithy.SchemaExtensions
+	e_EndpointName                                        smithy.SchemaExtensions
+	eEndpointState                                        smithy.SchemaExtensions
+	eEndpointState_PENDING                                smithy.SchemaExtensions
+	eEndpointState_ACTIVE                                 smithy.SchemaExtensions
+	eEndpointState_FAILED                                 smithy.SchemaExtensions
+	eEndpointState_DELETING                               smithy.SchemaExtensions
+	eEndpointType                                         smithy.SchemaExtensions
+	eEndpointType_HOME_REGION                             smithy.SchemaExtensions
+	eEndpointType_MULTI_REGION                            smithy.SchemaExtensions
+	eEndpointType_PER_REGION                              smithy.SchemaExtensions
+	eEndpointUpdateStatus                                 smithy.SchemaExtensions
+	eEndpointUpdateStatus_IN_PROGRESS                     smithy.SchemaExtensions
+	eEndpointUpdateStatus_SUCCESSFUL                      smithy.SchemaExtensions
+	eEndpointUpdateStatus_FAILED                          smithy.SchemaExtensions
+	e_EnvironmentVariables                                smithy.SchemaExtensions
+	e_EnvironmentVariables_key                            smithy.SchemaExtensions
+	e_EnvironmentVariables_value                          smithy.SchemaExtensions
+	eFilter                                               smithy.SchemaExtensions
+	eFilter_name                                          smithy.SchemaExtensions
+	eFilter_values                                        smithy.SchemaExtensions
+	e_FilterList                                          smithy.SchemaExtensions
+	e_FilterList_member                                   smithy.SchemaExtensions
+	e_FilterValueList                                     smithy.SchemaExtensions
+	e_FilterValueList_member                              smithy.SchemaExtensions
+	e_FunctionArn                                         smithy.SchemaExtensions
+	eFunctionEndpointSummary                              smithy.SchemaExtensions
+	eFunctionEndpointSummary_endpointArn                  smithy.SchemaExtensions
+	eFunctionEndpointSummary_endpointName                 smithy.SchemaExtensions
+	eFunctionEndpointSummary_description                  smithy.SchemaExtensions
+	eFunctionEndpointSummary_endpointType                 smithy.SchemaExtensions
+	eFunctionEndpointSummary_domainName                   smithy.SchemaExtensions
+	eFunctionEndpointSummary_authType                     smithy.SchemaExtensions
+	eFunctionEndpointSummary_autoDeploymentMode           smithy.SchemaExtensions
+	eFunctionEndpointSummary_revisionWeights              smithy.SchemaExtensions
+	eFunctionEndpointSummary_regions                      smithy.SchemaExtensions
+	eFunctionEndpointSummary_scalingConfig                smithy.SchemaExtensions
+	eFunctionEndpointSummary_throttleConfig               smithy.SchemaExtensions
+	eFunctionEndpointSummary_state                        smithy.SchemaExtensions
+	eFunctionEndpointSummary_stateReason                  smithy.SchemaExtensions
+	eFunctionEndpointSummary_updateStatus                 smithy.SchemaExtensions
+	eFunctionEndpointSummary_updateStatusReason           smithy.SchemaExtensions
+	eFunctionEndpointSummary_createdAt                    smithy.SchemaExtensions
+	eFunctionEndpointSummary_updatedAt                    smithy.SchemaExtensions
+	e_FunctionEndpointSummaryList                         smithy.SchemaExtensions
+	e_FunctionEndpointSummaryList_member                  smithy.SchemaExtensions
+	e_FunctionName                                        smithy.SchemaExtensions
+	eFunctionRevisionSummary                              smithy.SchemaExtensions
+	eFunctionRevisionSummary_revisionArn                  smithy.SchemaExtensions
+	eFunctionRevisionSummary_revisionId                   smithy.SchemaExtensions
+	eFunctionRevisionSummary_description                  smithy.SchemaExtensions
+	eFunctionRevisionSummary_state                        smithy.SchemaExtensions
+	eFunctionRevisionSummary_stateReason                  smithy.SchemaExtensions
+	eFunctionRevisionSummary_createdAt                    smithy.SchemaExtensions
+	e_FunctionRevisionSummaryList                         smithy.SchemaExtensions
+	e_FunctionRevisionSummaryList_member                  smithy.SchemaExtensions
+	eFunctionState                                        smithy.SchemaExtensions
+	eFunctionState_PENDING                                smithy.SchemaExtensions
+	eFunctionState_ACTIVE                                 smithy.SchemaExtensions
+	eFunctionState_FAILED                                 smithy.SchemaExtensions
+	eFunctionState_DELETING                               smithy.SchemaExtensions
+	eFunctionSummary                                      smithy.SchemaExtensions
+	eFunctionSummary_functionName                         smithy.SchemaExtensions
+	eFunctionSummary_functionArn                          smithy.SchemaExtensions
+	eFunctionSummary_state                                smithy.SchemaExtensions
+	eFunctionSummary_stateReason                          smithy.SchemaExtensions
+	eFunctionSummary_createdAt                            smithy.SchemaExtensions
+	eFunctionSummary_updatedAt                            smithy.SchemaExtensions
+	e_FunctionSummaryList                                 smithy.SchemaExtensions
+	e_FunctionSummaryList_member                          smithy.SchemaExtensions
+	eInternalServerException                              smithy.SchemaExtensions
+	eInternalServerException_message                      smithy.SchemaExtensions
+	e_KmsKeyArn                                           smithy.SchemaExtensions
+	eLoggingConfig                                        smithy.SchemaExtensions
+	eLoggingConfig_logGroup                               smithy.SchemaExtensions
+	eLoggingConfig_applicationLogLevel                    smithy.SchemaExtensions
+	eLoggingConfig_systemLogLevel                         smithy.SchemaExtensions
+	e_MaxResults                                          smithy.SchemaExtensions
+	e_NextToken                                           smithy.SchemaExtensions
+	e_PolicyRevisionId                                    smithy.SchemaExtensions
+	e_Region                                              smithy.SchemaExtensions
+	eRegionalEndpoint                                     smithy.SchemaExtensions
+	eRegionalEndpoint_domainName                          smithy.SchemaExtensions
+	eRegionalEndpoint_authType                            smithy.SchemaExtensions
+	eRegionalEndpoint_revisionWeights                     smithy.SchemaExtensions
+	eRegionalEndpoint_scalingConfig                       smithy.SchemaExtensions
+	eRegionalEndpoint_throttleConfig                      smithy.SchemaExtensions
+	eRegionalEndpoint_state                               smithy.SchemaExtensions
+	eRegionalEndpoint_stateReason                         smithy.SchemaExtensions
+	eRegionalEndpoint_updateStatus                        smithy.SchemaExtensions
+	eRegionalEndpoint_updateStatusReason                  smithy.SchemaExtensions
+	e_RegionalEndpoints                                   smithy.SchemaExtensions
+	e_RegionalEndpoints_key                               smithy.SchemaExtensions
+	e_RegionalEndpoints_value                             smithy.SchemaExtensions
+	e_RegionList                                          smithy.SchemaExtensions
+	e_RegionList_member                                   smithy.SchemaExtensions
+	e_ResourceArn                                         smithy.SchemaExtensions
+	eResourceNotFoundException                            smithy.SchemaExtensions
+	eResourceNotFoundException_message                    smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                 smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType               smithy.SchemaExtensions
+	e_ResourcePolicy                                      smithy.SchemaExtensions
+	e_RevisionArn                                         smithy.SchemaExtensions
+	eRevisionConfig                                       smithy.SchemaExtensions
+	eRevisionConfig_description                           smithy.SchemaExtensions
+	eRevisionConfig_kmsKeyArn                             smithy.SchemaExtensions
+	eRevisionConfig_buildConfig                           smithy.SchemaExtensions
+	eRevisionConfig_serviceConfig                         smithy.SchemaExtensions
+	eRevisionError                                        smithy.SchemaExtensions
+	eRevisionError_attribute                              smithy.SchemaExtensions
+	eRevisionError_errorCode                              smithy.SchemaExtensions
+	eRevisionError_errorMessage                           smithy.SchemaExtensions
+	e_RevisionErrors                                      smithy.SchemaExtensions
+	e_RevisionErrors_member                               smithy.SchemaExtensions
+	e_RevisionId                                          smithy.SchemaExtensions
+	eRevisionState                                        smithy.SchemaExtensions
+	eRevisionState_PENDING                                smithy.SchemaExtensions
+	eRevisionState_ACTIVE                                 smithy.SchemaExtensions
+	eRevisionState_FAILED                                 smithy.SchemaExtensions
+	eRevisionWeight                                       smithy.SchemaExtensions
+	eRevisionWeight_revisionId                            smithy.SchemaExtensions
+	eRevisionWeight_weight                                smithy.SchemaExtensions
+	e_RevisionWeightList                                  smithy.SchemaExtensions
+	e_RevisionWeightList_member                           smithy.SchemaExtensions
+	e_RoleArn                                             smithy.SchemaExtensions
+	eRuntimeConfig                                        smithy.SchemaExtensions
+	eRuntimeConfig_runtime                                smithy.SchemaExtensions
+	eS3Object                                             smithy.SchemaExtensions
+	eS3Object_bucket                                      smithy.SchemaExtensions
+	eS3Object_key                                         smithy.SchemaExtensions
+	eS3Object_versionId                                   smithy.SchemaExtensions
+	eScalingConfig                                        smithy.SchemaExtensions
+	eScalingConfig_maxEnvironments                        smithy.SchemaExtensions
+	eServiceConfig                                        smithy.SchemaExtensions
+	eServiceConfig_executionRoleArn                       smithy.SchemaExtensions
+	eServiceConfig_timeoutSeconds                         smithy.SchemaExtensions
+	eServiceConfig_egressNetworkConnectorArn              smithy.SchemaExtensions
+	eServiceConfig_maxConcurrencyPerEnvironment           smithy.SchemaExtensions
+	eServiceConfig_environmentVariables                   smithy.SchemaExtensions
+	eServiceConfig_telemetryConfig                        smithy.SchemaExtensions
+	eServiceQuotaExceededException                        smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId             smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType           smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode            smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode              smithy.SchemaExtensions
+	eSystemLogLevel                                       smithy.SchemaExtensions
+	eSystemLogLevel_DEBUG                                 smithy.SchemaExtensions
+	eSystemLogLevel_INFO                                  smithy.SchemaExtensions
+	eSystemLogLevel_WARN                                  smithy.SchemaExtensions
+	e_TagKey                                              smithy.SchemaExtensions
+	e_TagKeyList                                          smithy.SchemaExtensions
+	e_TagKeyList_member                                   smithy.SchemaExtensions
+	e_Tags                                                smithy.SchemaExtensions
+	e_Tags_key                                            smithy.SchemaExtensions
+	e_Tags_value                                          smithy.SchemaExtensions
+	eTelemetryConfig                                      smithy.SchemaExtensions
+	eTelemetryConfig_loggingConfig                        smithy.SchemaExtensions
+	eThrottleConfig                                       smithy.SchemaExtensions
+	eThrottleConfig_rateLimit                             smithy.SchemaExtensions
+	eThrottlingException                                  smithy.SchemaExtensions
+	eThrottlingException_message                          smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                smithy.SchemaExtensions
+	eThrottlingException_serviceCode                      smithy.SchemaExtensions
+	eThrottlingException_quotaCode                        smithy.SchemaExtensions
+	eValidationException                                  smithy.SchemaExtensions
+	eValidationException_message                          smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest                     smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_functionName        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_endpointName        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_description         smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_endpointType        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_authType            smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_autoDeploymentMode  smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_revisionWeights     smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_regions             smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_scalingConfig       smithy.SchemaExtensions
+	eCreateWebFunctionEndpointRequest_throttleConfig      smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse                    smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_functionArn        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_endpointArn        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_endpointName       smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_description        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_endpointType       smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_domainName         smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_authType           smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_autoDeploymentMode smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_revisionWeights    smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_regions            smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_scalingConfig      smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_throttleConfig     smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_state              smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_stateReason        smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_updateStatus       smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_updateStatusReason smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_regionalEndpoints  smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_createdAt          smithy.SchemaExtensions
+	eCreateWebFunctionEndpointResponse_updatedAt          smithy.SchemaExtensions
+	eCreateWebFunctionRequest                             smithy.SchemaExtensions
+	eCreateWebFunctionRequest_functionName                smithy.SchemaExtensions
+	eCreateWebFunctionRequest_revisionConfig              smithy.SchemaExtensions
+	eCreateWebFunctionRequest_endpointConfig              smithy.SchemaExtensions
+	eCreateWebFunctionRequest_tags                        smithy.SchemaExtensions
+	eCreateWebFunctionResponse                            smithy.SchemaExtensions
+	eCreateWebFunctionResponse_functionName               smithy.SchemaExtensions
+	eCreateWebFunctionResponse_functionArn                smithy.SchemaExtensions
+	eCreateWebFunctionResponse_state                      smithy.SchemaExtensions
+	eCreateWebFunctionResponse_stateReason                smithy.SchemaExtensions
+	eCreateWebFunctionResponse_createdAt                  smithy.SchemaExtensions
+	eCreateWebFunctionResponse_updatedAt                  smithy.SchemaExtensions
+	eCreateWebFunctionResponse_revision                   smithy.SchemaExtensions
+	eCreateWebFunctionResponse_endpoint                   smithy.SchemaExtensions
+	eCreateWebFunctionResponse_tags                       smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest                     smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest_functionName        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest_description         smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest_kmsKeyArn           smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest_buildConfig         smithy.SchemaExtensions
+	eCreateWebFunctionRevisionRequest_serviceConfig       smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse                    smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_functionArn        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_revisionArn        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_revisionId         smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_description        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_kmsKeyArn          smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_buildConfig        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_serviceConfig      smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_state              smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_stateReason        smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_errors             smithy.SchemaExtensions
+	eCreateWebFunctionRevisionResponse_createdAt          smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest                          smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_resourceArn              smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_revisionId               smithy.SchemaExtensions
+	eDeleteWebFunctionEndpointRequest                     smithy.SchemaExtensions
+	eDeleteWebFunctionEndpointRequest_functionName        smithy.SchemaExtensions
+	eDeleteWebFunctionEndpointRequest_endpointName        smithy.SchemaExtensions
+	eDeleteWebFunctionRequest                             smithy.SchemaExtensions
+	eDeleteWebFunctionRequest_functionName                smithy.SchemaExtensions
+	eDeleteWebFunctionRevisionRequest                     smithy.SchemaExtensions
+	eDeleteWebFunctionRevisionRequest_functionName        smithy.SchemaExtensions
+	eDeleteWebFunctionRevisionRequest_revisionId          smithy.SchemaExtensions
+	eGetResourcePolicyRequest                             smithy.SchemaExtensions
+	eGetResourcePolicyRequest_resourceArn                 smithy.SchemaExtensions
+	eGetResourcePolicyResponse                            smithy.SchemaExtensions
+	eGetResourcePolicyResponse_policy                     smithy.SchemaExtensions
+	eGetResourcePolicyResponse_revisionId                 smithy.SchemaExtensions
+	eGetWebAccountSettingsRequest                         smithy.SchemaExtensions
+	eGetWebAccountSettingsResponse                        smithy.SchemaExtensions
+	eGetWebAccountSettingsResponse_accountQuotas          smithy.SchemaExtensions
+	eGetWebAccountSettingsResponse_accountUsage           smithy.SchemaExtensions
+	eGetWebFunctionEndpointRequest                        smithy.SchemaExtensions
+	eGetWebFunctionEndpointRequest_functionName           smithy.SchemaExtensions
+	eGetWebFunctionEndpointRequest_endpointName           smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse                       smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_functionArn           smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_endpointArn           smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_endpointName          smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_description           smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_endpointType          smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_domainName            smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_authType              smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_autoDeploymentMode    smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_revisionWeights       smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_regions               smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_scalingConfig         smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_throttleConfig        smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_state                 smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_stateReason           smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_updateStatus          smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_updateStatusReason    smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_regionalEndpoints     smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_createdAt             smithy.SchemaExtensions
+	eGetWebFunctionEndpointResponse_updatedAt             smithy.SchemaExtensions
+	eGetWebFunctionRequest                                smithy.SchemaExtensions
+	eGetWebFunctionRequest_functionName                   smithy.SchemaExtensions
+	eGetWebFunctionResponse                               smithy.SchemaExtensions
+	eGetWebFunctionResponse_functionName                  smithy.SchemaExtensions
+	eGetWebFunctionResponse_functionArn                   smithy.SchemaExtensions
+	eGetWebFunctionResponse_state                         smithy.SchemaExtensions
+	eGetWebFunctionResponse_stateReason                   smithy.SchemaExtensions
+	eGetWebFunctionResponse_createdAt                     smithy.SchemaExtensions
+	eGetWebFunctionResponse_updatedAt                     smithy.SchemaExtensions
+	eGetWebFunctionRevisionRequest                        smithy.SchemaExtensions
+	eGetWebFunctionRevisionRequest_functionName           smithy.SchemaExtensions
+	eGetWebFunctionRevisionRequest_revisionId             smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse                       smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_functionArn           smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_revisionArn           smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_revisionId            smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_description           smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_kmsKeyArn             smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_buildConfig           smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_serviceConfig         smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_state                 smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_stateReason           smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_errors                smithy.SchemaExtensions
+	eGetWebFunctionRevisionResponse_createdAt             smithy.SchemaExtensions
+	eListTagsRequest                                      smithy.SchemaExtensions
+	eListTagsRequest_resource                             smithy.SchemaExtensions
+	eListTagsResponse                                     smithy.SchemaExtensions
+	eListTagsResponse_tags                                smithy.SchemaExtensions
+	eListWebFunctionEndpointsRequest                      smithy.SchemaExtensions
+	eListWebFunctionEndpointsRequest_functionName         smithy.SchemaExtensions
+	eListWebFunctionEndpointsRequest_filters              smithy.SchemaExtensions
+	eListWebFunctionEndpointsRequest_maxResults           smithy.SchemaExtensions
+	eListWebFunctionEndpointsRequest_nextToken            smithy.SchemaExtensions
+	eListWebFunctionEndpointsResponse                     smithy.SchemaExtensions
+	eListWebFunctionEndpointsResponse_endpoints           smithy.SchemaExtensions
+	eListWebFunctionEndpointsResponse_nextToken           smithy.SchemaExtensions
+	eListWebFunctionRevisionsRequest                      smithy.SchemaExtensions
+	eListWebFunctionRevisionsRequest_functionName         smithy.SchemaExtensions
+	eListWebFunctionRevisionsRequest_filters              smithy.SchemaExtensions
+	eListWebFunctionRevisionsRequest_maxResults           smithy.SchemaExtensions
+	eListWebFunctionRevisionsRequest_nextToken            smithy.SchemaExtensions
+	eListWebFunctionRevisionsResponse                     smithy.SchemaExtensions
+	eListWebFunctionRevisionsResponse_revisions           smithy.SchemaExtensions
+	eListWebFunctionRevisionsResponse_nextToken           smithy.SchemaExtensions
+	eListWebFunctionsRequest                              smithy.SchemaExtensions
+	eListWebFunctionsRequest_filters                      smithy.SchemaExtensions
+	eListWebFunctionsRequest_maxResults                   smithy.SchemaExtensions
+	eListWebFunctionsRequest_nextToken                    smithy.SchemaExtensions
+	eListWebFunctionsResponse                             smithy.SchemaExtensions
+	eListWebFunctionsResponse_functions                   smithy.SchemaExtensions
+	eListWebFunctionsResponse_nextToken                   smithy.SchemaExtensions
+	ePutResourcePolicyRequest                             smithy.SchemaExtensions
+	ePutResourcePolicyRequest_resourceArn                 smithy.SchemaExtensions
+	ePutResourcePolicyRequest_policy                      smithy.SchemaExtensions
+	ePutResourcePolicyRequest_revisionId                  smithy.SchemaExtensions
+	ePutResourcePolicyResponse                            smithy.SchemaExtensions
+	ePutResourcePolicyResponse_policy                     smithy.SchemaExtensions
+	ePutResourcePolicyResponse_revisionId                 smithy.SchemaExtensions
+	eTagResourceRequest                                   smithy.SchemaExtensions
+	eTagResourceRequest_resource                          smithy.SchemaExtensions
+	eTagResourceRequest_tags                              smithy.SchemaExtensions
+	eUntagResourceRequest                                 smithy.SchemaExtensions
+	eUntagResourceRequest_resource                        smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                         smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest                     smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_functionName        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_endpointName        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_description         smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_authType            smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_autoDeploymentMode  smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_revisionWeights     smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_scalingConfig       smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointRequest_throttleConfig      smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse                    smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_functionArn        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_endpointArn        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_endpointName       smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_description        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_endpointType       smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_domainName         smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_authType           smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_autoDeploymentMode smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_revisionWeights    smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_regions            smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_scalingConfig      smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_throttleConfig     smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_state              smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_stateReason        smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_updateStatus       smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_updateStatusReason smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_regionalEndpoints  smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_createdAt          smithy.SchemaExtensions
+	eUpdateWebFunctionEndpointResponse_updatedAt          smithy.SchemaExtensions
+)
 
-var CreateWebFunctionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iCreateWebFunction                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunction"}
+	iCreateWebFunctionEndpoint         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionEndpoint"}
+	iCreateWebFunctionRevision         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionRevision"}
+	iDeleteResourcePolicy              = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteResourcePolicy"}
+	iDeleteWebFunction                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunction"}
+	iDeleteWebFunctionEndpoint         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunctionEndpoint"}
+	iDeleteWebFunctionRevision         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunctionRevision"}
+	iGetResourcePolicy                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetResourcePolicy"}
+	iGetWebAccountSettings             = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebAccountSettings"}
+	iGetWebFunction                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunction"}
+	iGetWebFunctionEndpoint            = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionEndpoint"}
+	iGetWebFunctionRevision            = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionRevision"}
+	iListTags                          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListTags"}
+	iListWebFunctionEndpoints          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionEndpoints"}
+	iListWebFunctionRevisions          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionRevisions"}
+	iListWebFunctions                  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctions"}
+	iPutResourcePolicy                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "PutResourcePolicy"}
+	iTagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "TagResource"}
+	iUntagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "UntagResource"}
+	iUpdateWebFunctionEndpoint         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "UpdateWebFunctionEndpoint"}
+	i_LambdaWeb                        = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "LambdaWeb"}
+	iAccessDeniedException             = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "AccessDeniedException"}
+	iAccountQuotas                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "AccountQuotas"}
+	iAccountUsage                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "AccountUsage"}
+	iApplicationLogLevel               = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ApplicationLogLevel"}
+	iAuthType                          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "AuthType"}
+	iAutoDeploymentMode                = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "AutoDeploymentMode"}
+	iBuildConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "BuildConfig"}
+	iCodeConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CodeConfig"}
+	iConflictException                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ConflictException"}
+	i_DateTime                         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DateTime"}
+	i_Description                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "Description"}
+	i_DomainName                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DomainName"}
+	i_EndpointArn                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointArn"}
+	iEndpointConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointConfig"}
+	i_EndpointName                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointName"}
+	iEndpointState                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointState"}
+	iEndpointType                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointType"}
+	iEndpointUpdateStatus              = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EndpointUpdateStatus"}
+	i_EnvironmentVariables             = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "EnvironmentVariables"}
+	iFilter                            = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "Filter"}
+	i_FilterList                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FilterList"}
+	i_FilterValueList                  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FilterValueList"}
+	i_FunctionArn                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionArn"}
+	iFunctionEndpointSummary           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionEndpointSummary"}
+	i_FunctionEndpointSummaryList      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionEndpointSummaryList"}
+	i_FunctionName                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionName"}
+	iFunctionRevisionSummary           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionRevisionSummary"}
+	i_FunctionRevisionSummaryList      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionRevisionSummaryList"}
+	iFunctionState                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionState"}
+	iFunctionSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionSummary"}
+	i_FunctionSummaryList              = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "FunctionSummaryList"}
+	iInternalServerException           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "InternalServerException"}
+	i_KmsKeyArn                        = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "KmsKeyArn"}
+	iLoggingConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "LoggingConfig"}
+	i_MaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "MaxResults"}
+	i_NextToken                        = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "NextToken"}
+	i_PolicyRevisionId                 = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "PolicyRevisionId"}
+	i_Region                           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "Region"}
+	iRegionalEndpoint                  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RegionalEndpoint"}
+	i_RegionalEndpoints                = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RegionalEndpoints"}
+	i_RegionList                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RegionList"}
+	i_ResourceArn                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ResourceArn"}
+	iResourceNotFoundException         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ResourceNotFoundException"}
+	i_ResourcePolicy                   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ResourcePolicy"}
+	i_RevisionArn                      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionArn"}
+	iRevisionConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionConfig"}
+	iRevisionError                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionError"}
+	i_RevisionErrors                   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionErrors"}
+	i_RevisionId                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionId"}
+	iRevisionState                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionState"}
+	iRevisionWeight                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionWeight"}
+	i_RevisionWeightList               = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RevisionWeightList"}
+	i_RoleArn                          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RoleArn"}
+	iRuntimeConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "RuntimeConfig"}
+	iS3Object                          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "S3Object"}
+	iScalingConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ScalingConfig"}
+	iServiceConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ServiceConfig"}
+	iServiceQuotaExceededException     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ServiceQuotaExceededException"}
+	iSystemLogLevel                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "SystemLogLevel"}
+	i_TagKey                           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "TagKey"}
+	i_TagKeyList                       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "TagKeyList"}
+	i_Tags                             = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "Tags"}
+	iTelemetryConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "TelemetryConfig"}
+	iThrottleConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ThrottleConfig"}
+	iThrottlingException               = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ThrottlingException"}
+	iValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ValidationException"}
+	iCreateWebFunctionEndpointRequest  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionEndpointRequest"}
+	iCreateWebFunctionEndpointResponse = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionEndpointResponse"}
+	iCreateWebFunctionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionRequest"}
+	iCreateWebFunctionResponse         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionResponse"}
+	iCreateWebFunctionRevisionRequest  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionRevisionRequest"}
+	iCreateWebFunctionRevisionResponse = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "CreateWebFunctionRevisionResponse"}
+	iDeleteResourcePolicyRequest       = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteResourcePolicyRequest"}
+	iDeleteWebFunctionEndpointRequest  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunctionEndpointRequest"}
+	iDeleteWebFunctionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunctionRequest"}
+	iDeleteWebFunctionRevisionRequest  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "DeleteWebFunctionRevisionRequest"}
+	iGetResourcePolicyRequest          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetResourcePolicyResponse"}
+	iGetWebAccountSettingsRequest      = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebAccountSettingsRequest"}
+	iGetWebAccountSettingsResponse     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebAccountSettingsResponse"}
+	iGetWebFunctionEndpointRequest     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionEndpointRequest"}
+	iGetWebFunctionEndpointResponse    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionEndpointResponse"}
+	iGetWebFunctionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionRequest"}
+	iGetWebFunctionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionResponse"}
+	iGetWebFunctionRevisionRequest     = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionRevisionRequest"}
+	iGetWebFunctionRevisionResponse    = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "GetWebFunctionRevisionResponse"}
+	iListTagsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListTagsRequest"}
+	iListTagsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListTagsResponse"}
+	iListWebFunctionEndpointsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionEndpointsRequest"}
+	iListWebFunctionEndpointsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionEndpointsResponse"}
+	iListWebFunctionRevisionsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionRevisionsRequest"}
+	iListWebFunctionRevisionsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionRevisionsResponse"}
+	iListWebFunctionsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionsRequest"}
+	iListWebFunctionsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "ListWebFunctionsResponse"}
+	iPutResourcePolicyRequest          = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse         = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "PutResourcePolicyResponse"}
+	iTagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "TagResourceRequest"}
+	iUntagResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "UntagResourceRequest"}
+	iUpdateWebFunctionEndpointRequest  = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "UpdateWebFunctionEndpointRequest"}
+	iUpdateWebFunctionEndpointResponse = smithy.ShapeName{Namespace: "com.amazonaws.lambdaweb", Name: "UpdateWebFunctionEndpointResponse"}
+	pString                            = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pUnit                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/2025-03-07/web-functions",
+	Code: 202}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2025-03-07/web-functions/{functionName}/endpoints",
-	Code: 202})
-
-var CreateWebFunctionRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionRevision",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2025-03-07/web-functions/{functionName}/revisions",
-	Code: 202})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2025-03-07/resource-policy/{resourceArn}",
-	Code: 204})
-
-var DeleteWebFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2025-03-07/web-functions/{functionName}",
-	Code: 204})
-
-var DeleteWebFunctionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunctionEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2025-03-07/web-functions/{functionName}/endpoints/{endpointName}",
-	Code: 204})
-
-var DeleteWebFunctionRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunctionRevision",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2025-03-07/web-functions/{functionName}/revisions/{revisionId}",
-	Code: 204})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/resource-policy/{resourceArn}",
-	Code: 200})
-
-var GetWebAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebAccountSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/web-account-settings",
-	Code: 200})
-
-var GetWebFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/web-functions/{functionName}",
-	Code: 200})
-
-var GetWebFunctionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/web-functions/{functionName}/endpoints/{endpointName}",
-	Code: 200})
-
-var GetWebFunctionRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionRevision",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/web-functions/{functionName}/revisions/{revisionId}",
-	Code: 200})
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2025-03-07/tags/{resource}",
-	Code: 200})
-
-var ListWebFunctionEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2025-03-07/web-functions/{functionName}/list-endpoints",
-	Code: 200})
-
-var ListWebFunctionRevisions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionRevisions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2025-03-07/web-functions/{functionName}/list-revisions",
-	Code: 200})
-
-var ListWebFunctions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2025-03-07/web-functions",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2025-03-07/resource-policy/{resourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2025-03-07/tags/{resource}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2025-03-07/tags/{resource}",
-	Code: 204})
-
-var UpdateWebFunctionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "UpdateWebFunctionEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/2025-03-07/web-functions/{functionName}/endpoints/{endpointName}",
-	Code: 202})
-
-var _LambdaWeb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "LambdaWeb",
-}, smithy.ShapeTypeService, 0)
-
-var LambdaWeb = smithy.NewServiceSchema(_LambdaWeb, "2025-03-07")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountQuotas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "AccountQuotas",
-}, smithy.ShapeTypeStructure, 4)
-var AccountQuotas_maxTotalArmVCpus *smithy.Schema
-
-var AccountQuotas_maxTotalRateLimit *smithy.Schema
-
-var AccountQuotas_maxRevisionsPerFunction *smithy.Schema
-
-var AccountQuotas_maxEndpointsPerFunction *smithy.Schema
-
-var AccountUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "AccountUsage",
-}, smithy.ShapeTypeStructure, 1)
-var AccountUsage_functionCount *smithy.Schema
-
-var ApplicationLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ApplicationLogLevel",
-}, smithy.ShapeTypeEnum, 6)
-var ApplicationLogLevel_TRACE *smithy.Schema
-
-var ApplicationLogLevel_DEBUG *smithy.Schema
-
-var ApplicationLogLevel_INFO *smithy.Schema
-
-var ApplicationLogLevel_WARN *smithy.Schema
-
-var ApplicationLogLevel_ERROR *smithy.Schema
-
-var ApplicationLogLevel_FATAL *smithy.Schema
-
-var AuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "AuthType",
-}, smithy.ShapeTypeEnum, 2)
-var AuthType_APPLICATION_MANAGED *smithy.Schema
-
-var AuthType_IAM_AUTH *smithy.Schema
-
-var AutoDeploymentMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "AutoDeploymentMode",
-}, smithy.ShapeTypeEnum, 2)
-var AutoDeploymentMode_LATEST_REVISION *smithy.Schema
-
-var AutoDeploymentMode_DISABLED *smithy.Schema
-
-var BuildConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "BuildConfig",
-}, smithy.ShapeTypeStructure, 2)
-var BuildConfig_codeConfig *smithy.Schema
-
-var BuildConfig_runtimeConfig *smithy.Schema
-
-var CodeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CodeConfig",
-}, smithy.ShapeTypeStructure, 1)
-var CodeConfig_s3Object *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _EndpointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointArn",
-}, smithy.ShapeTypeString, 0)
-
-var EndpointConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointConfig",
-}, smithy.ShapeTypeStructure, 8)
-var EndpointConfig_endpointName *smithy.Schema
-
-var EndpointConfig_description *smithy.Schema
-
-var EndpointConfig_endpointType *smithy.Schema
-
-var EndpointConfig_authType *smithy.Schema
-
-var EndpointConfig_autoDeploymentMode *smithy.Schema
-
-var EndpointConfig_regions *smithy.Schema
-
-var EndpointConfig_scalingConfig *smithy.Schema
-
-var EndpointConfig_throttleConfig *smithy.Schema
-
-var _EndpointName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointName",
-}, smithy.ShapeTypeString, 0)
-
-var EndpointState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointState",
-}, smithy.ShapeTypeEnum, 4)
-var EndpointState_PENDING *smithy.Schema
-
-var EndpointState_ACTIVE *smithy.Schema
-
-var EndpointState_FAILED *smithy.Schema
-
-var EndpointState_DELETING *smithy.Schema
-
-var EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeEnum, 3)
-var EndpointType_HOME_REGION *smithy.Schema
-
-var EndpointType_MULTI_REGION *smithy.Schema
-
-var EndpointType_PER_REGION *smithy.Schema
-
-var EndpointUpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EndpointUpdateStatus",
-}, smithy.ShapeTypeEnum, 3)
-var EndpointUpdateStatus_IN_PROGRESS *smithy.Schema
-
-var EndpointUpdateStatus_SUCCESSFUL *smithy.Schema
-
-var EndpointUpdateStatus_FAILED *smithy.Schema
-
-var _EnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "EnvironmentVariables",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _EnvironmentVariables_key *smithy.Schema
-
-var _EnvironmentVariables_value *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_name *smithy.Schema
-
-var Filter_values *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _FilterValueList_member *smithy.Schema
-
-var _FunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var FunctionEndpointSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionEndpointSummary",
-}, smithy.ShapeTypeStructure, 17)
-var FunctionEndpointSummary_endpointArn *smithy.Schema
-
-var FunctionEndpointSummary_endpointName *smithy.Schema
-
-var FunctionEndpointSummary_description *smithy.Schema
-
-var FunctionEndpointSummary_endpointType *smithy.Schema
-
-var FunctionEndpointSummary_domainName *smithy.Schema
-
-var FunctionEndpointSummary_authType *smithy.Schema
-
-var FunctionEndpointSummary_autoDeploymentMode *smithy.Schema
-
-var FunctionEndpointSummary_revisionWeights *smithy.Schema
-
-var FunctionEndpointSummary_regions *smithy.Schema
-
-var FunctionEndpointSummary_scalingConfig *smithy.Schema
-
-var FunctionEndpointSummary_throttleConfig *smithy.Schema
-
-var FunctionEndpointSummary_state *smithy.Schema
-
-var FunctionEndpointSummary_stateReason *smithy.Schema
-
-var FunctionEndpointSummary_updateStatus *smithy.Schema
-
-var FunctionEndpointSummary_updateStatusReason *smithy.Schema
-
-var FunctionEndpointSummary_createdAt *smithy.Schema
-
-var FunctionEndpointSummary_updatedAt *smithy.Schema
-
-var _FunctionEndpointSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionEndpointSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FunctionEndpointSummaryList_member *smithy.Schema
-
-var _FunctionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionName",
-}, smithy.ShapeTypeString, 0)
-
-var FunctionRevisionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionRevisionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var FunctionRevisionSummary_revisionArn *smithy.Schema
-
-var FunctionRevisionSummary_revisionId *smithy.Schema
-
-var FunctionRevisionSummary_description *smithy.Schema
-
-var FunctionRevisionSummary_state *smithy.Schema
-
-var FunctionRevisionSummary_stateReason *smithy.Schema
-
-var FunctionRevisionSummary_createdAt *smithy.Schema
-
-var _FunctionRevisionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionRevisionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FunctionRevisionSummaryList_member *smithy.Schema
-
-var FunctionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionState",
-}, smithy.ShapeTypeEnum, 4)
-var FunctionState_PENDING *smithy.Schema
-
-var FunctionState_ACTIVE *smithy.Schema
-
-var FunctionState_FAILED *smithy.Schema
-
-var FunctionState_DELETING *smithy.Schema
-
-var FunctionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var FunctionSummary_functionName *smithy.Schema
-
-var FunctionSummary_functionArn *smithy.Schema
-
-var FunctionSummary_state *smithy.Schema
-
-var FunctionSummary_stateReason *smithy.Schema
-
-var FunctionSummary_createdAt *smithy.Schema
-
-var FunctionSummary_updatedAt *smithy.Schema
-
-var _FunctionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "FunctionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FunctionSummaryList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LoggingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "LoggingConfig",
-}, smithy.ShapeTypeStructure, 3)
-var LoggingConfig_logGroup *smithy.Schema
-
-var LoggingConfig_applicationLogLevel *smithy.Schema
-
-var LoggingConfig_systemLogLevel *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "PolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var RegionalEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RegionalEndpoint",
-}, smithy.ShapeTypeStructure, 9)
-var RegionalEndpoint_domainName *smithy.Schema
-
-var RegionalEndpoint_authType *smithy.Schema
-
-var RegionalEndpoint_revisionWeights *smithy.Schema
-
-var RegionalEndpoint_scalingConfig *smithy.Schema
-
-var RegionalEndpoint_throttleConfig *smithy.Schema
-
-var RegionalEndpoint_state *smithy.Schema
-
-var RegionalEndpoint_stateReason *smithy.Schema
-
-var RegionalEndpoint_updateStatus *smithy.Schema
-
-var RegionalEndpoint_updateStatusReason *smithy.Schema
-
-var _RegionalEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RegionalEndpoints",
-}, smithy.ShapeTypeMap, 2)
-var _RegionalEndpoints_key *smithy.Schema
-
-var _RegionalEndpoints_value *smithy.Schema
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _RevisionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionArn",
-}, smithy.ShapeTypeString, 0)
-
-var RevisionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionConfig",
-}, smithy.ShapeTypeStructure, 4)
-var RevisionConfig_description *smithy.Schema
-
-var RevisionConfig_kmsKeyArn *smithy.Schema
-
-var RevisionConfig_buildConfig *smithy.Schema
-
-var RevisionConfig_serviceConfig *smithy.Schema
-
-var RevisionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionError",
-}, smithy.ShapeTypeStructure, 3)
-var RevisionError_attribute *smithy.Schema
-
-var RevisionError_errorCode *smithy.Schema
-
-var RevisionError_errorMessage *smithy.Schema
-
-var _RevisionErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionErrors",
-}, smithy.ShapeTypeList, 1)
-var _RevisionErrors_member *smithy.Schema
-
-var _RevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var RevisionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionState",
-}, smithy.ShapeTypeEnum, 3)
-var RevisionState_PENDING *smithy.Schema
-
-var RevisionState_ACTIVE *smithy.Schema
-
-var RevisionState_FAILED *smithy.Schema
-
-var RevisionWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionWeight",
-}, smithy.ShapeTypeStructure, 2)
-var RevisionWeight_revisionId *smithy.Schema
-
-var RevisionWeight_weight *smithy.Schema
-
-var _RevisionWeightList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RevisionWeightList",
-}, smithy.ShapeTypeList, 1)
-var _RevisionWeightList_member *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var RuntimeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "RuntimeConfig",
-}, smithy.ShapeTypeStructure, 1)
-var RuntimeConfig_runtime *smithy.Schema
-
-var S3Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "S3Object",
-}, smithy.ShapeTypeStructure, 3)
-var S3Object_bucket *smithy.Schema
-
-var S3Object_key *smithy.Schema
-
-var S3Object_versionId *smithy.Schema
-
-var ScalingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ScalingConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ScalingConfig_maxEnvironments *smithy.Schema
-
-var ServiceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ServiceConfig",
-}, smithy.ShapeTypeStructure, 6)
-var ServiceConfig_executionRoleArn *smithy.Schema
-
-var ServiceConfig_timeoutSeconds *smithy.Schema
-
-var ServiceConfig_egressNetworkConnectorArn *smithy.Schema
-
-var ServiceConfig_maxConcurrencyPerEnvironment *smithy.Schema
-
-var ServiceConfig_environmentVariables *smithy.Schema
-
-var ServiceConfig_telemetryConfig *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SystemLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "SystemLogLevel",
-}, smithy.ShapeTypeEnum, 3)
-var SystemLogLevel_DEBUG *smithy.Schema
-
-var SystemLogLevel_INFO *smithy.Schema
-
-var SystemLogLevel_WARN *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var TelemetryConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "TelemetryConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TelemetryConfig_loggingConfig *smithy.Schema
-
-var ThrottleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ThrottleConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ThrottleConfig_rateLimit *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateWebFunctionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionEndpointRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateWebFunctionEndpointRequest_functionName *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_endpointName *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_description *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_endpointType *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_authType *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_autoDeploymentMode *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_revisionWeights *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_regions *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_scalingConfig *smithy.Schema
-
-var CreateWebFunctionEndpointRequest_throttleConfig *smithy.Schema
-
-var CreateWebFunctionEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionEndpointResponse",
-}, smithy.ShapeTypeStructure, 19)
-var CreateWebFunctionEndpointResponse_functionArn *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_endpointArn *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_endpointName *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_description *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_endpointType *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_domainName *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_authType *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_autoDeploymentMode *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_revisionWeights *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_regions *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_scalingConfig *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_throttleConfig *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_state *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_stateReason *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_updateStatus *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_updateStatusReason *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_regionalEndpoints *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_createdAt *smithy.Schema
-
-var CreateWebFunctionEndpointResponse_updatedAt *smithy.Schema
-
-var CreateWebFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWebFunctionRequest_functionName *smithy.Schema
-
-var CreateWebFunctionRequest_revisionConfig *smithy.Schema
-
-var CreateWebFunctionRequest_endpointConfig *smithy.Schema
-
-var CreateWebFunctionRequest_tags *smithy.Schema
-
-var CreateWebFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionResponse",
-}, smithy.ShapeTypeStructure, 9)
-var CreateWebFunctionResponse_functionName *smithy.Schema
-
-var CreateWebFunctionResponse_functionArn *smithy.Schema
-
-var CreateWebFunctionResponse_state *smithy.Schema
-
-var CreateWebFunctionResponse_stateReason *smithy.Schema
-
-var CreateWebFunctionResponse_createdAt *smithy.Schema
-
-var CreateWebFunctionResponse_updatedAt *smithy.Schema
-
-var CreateWebFunctionResponse_revision *smithy.Schema
-
-var CreateWebFunctionResponse_endpoint *smithy.Schema
-
-var CreateWebFunctionResponse_tags *smithy.Schema
-
-var CreateWebFunctionRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionRevisionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWebFunctionRevisionRequest_functionName *smithy.Schema
-
-var CreateWebFunctionRevisionRequest_description *smithy.Schema
-
-var CreateWebFunctionRevisionRequest_kmsKeyArn *smithy.Schema
-
-var CreateWebFunctionRevisionRequest_buildConfig *smithy.Schema
-
-var CreateWebFunctionRevisionRequest_serviceConfig *smithy.Schema
-
-var CreateWebFunctionRevisionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "CreateWebFunctionRevisionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var CreateWebFunctionRevisionResponse_functionArn *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_revisionArn *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_revisionId *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_description *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_kmsKeyArn *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_buildConfig *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_serviceConfig *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_state *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_stateReason *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_errors *smithy.Schema
-
-var CreateWebFunctionRevisionResponse_createdAt *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyRequest_resourceArn *smithy.Schema
-
-var DeleteResourcePolicyRequest_revisionId *smithy.Schema
-
-var DeleteWebFunctionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunctionEndpointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWebFunctionEndpointRequest_functionName *smithy.Schema
-
-var DeleteWebFunctionEndpointRequest_endpointName *smithy.Schema
-
-var DeleteWebFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunctionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWebFunctionRequest_functionName *smithy.Schema
-
-var DeleteWebFunctionRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "DeleteWebFunctionRevisionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWebFunctionRevisionRequest_functionName *smithy.Schema
-
-var DeleteWebFunctionRevisionRequest_revisionId *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_resourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyResponse_policy *smithy.Schema
-
-var GetResourcePolicyResponse_revisionId *smithy.Schema
-
-var GetWebAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetWebAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebAccountSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetWebAccountSettingsResponse_accountQuotas *smithy.Schema
-
-var GetWebAccountSettingsResponse_accountUsage *smithy.Schema
-
-var GetWebFunctionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionEndpointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetWebFunctionEndpointRequest_functionName *smithy.Schema
-
-var GetWebFunctionEndpointRequest_endpointName *smithy.Schema
-
-var GetWebFunctionEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionEndpointResponse",
-}, smithy.ShapeTypeStructure, 19)
-var GetWebFunctionEndpointResponse_functionArn *smithy.Schema
-
-var GetWebFunctionEndpointResponse_endpointArn *smithy.Schema
-
-var GetWebFunctionEndpointResponse_endpointName *smithy.Schema
-
-var GetWebFunctionEndpointResponse_description *smithy.Schema
-
-var GetWebFunctionEndpointResponse_endpointType *smithy.Schema
-
-var GetWebFunctionEndpointResponse_domainName *smithy.Schema
-
-var GetWebFunctionEndpointResponse_authType *smithy.Schema
-
-var GetWebFunctionEndpointResponse_autoDeploymentMode *smithy.Schema
-
-var GetWebFunctionEndpointResponse_revisionWeights *smithy.Schema
-
-var GetWebFunctionEndpointResponse_regions *smithy.Schema
-
-var GetWebFunctionEndpointResponse_scalingConfig *smithy.Schema
-
-var GetWebFunctionEndpointResponse_throttleConfig *smithy.Schema
-
-var GetWebFunctionEndpointResponse_state *smithy.Schema
-
-var GetWebFunctionEndpointResponse_stateReason *smithy.Schema
-
-var GetWebFunctionEndpointResponse_updateStatus *smithy.Schema
-
-var GetWebFunctionEndpointResponse_updateStatusReason *smithy.Schema
-
-var GetWebFunctionEndpointResponse_regionalEndpoints *smithy.Schema
-
-var GetWebFunctionEndpointResponse_createdAt *smithy.Schema
-
-var GetWebFunctionEndpointResponse_updatedAt *smithy.Schema
-
-var GetWebFunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetWebFunctionRequest_functionName *smithy.Schema
-
-var GetWebFunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetWebFunctionResponse_functionName *smithy.Schema
-
-var GetWebFunctionResponse_functionArn *smithy.Schema
-
-var GetWebFunctionResponse_state *smithy.Schema
-
-var GetWebFunctionResponse_stateReason *smithy.Schema
-
-var GetWebFunctionResponse_createdAt *smithy.Schema
-
-var GetWebFunctionResponse_updatedAt *smithy.Schema
-
-var GetWebFunctionRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionRevisionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetWebFunctionRevisionRequest_functionName *smithy.Schema
-
-var GetWebFunctionRevisionRequest_revisionId *smithy.Schema
-
-var GetWebFunctionRevisionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "GetWebFunctionRevisionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetWebFunctionRevisionResponse_functionArn *smithy.Schema
-
-var GetWebFunctionRevisionResponse_revisionArn *smithy.Schema
-
-var GetWebFunctionRevisionResponse_revisionId *smithy.Schema
-
-var GetWebFunctionRevisionResponse_description *smithy.Schema
-
-var GetWebFunctionRevisionResponse_kmsKeyArn *smithy.Schema
-
-var GetWebFunctionRevisionResponse_buildConfig *smithy.Schema
-
-var GetWebFunctionRevisionResponse_serviceConfig *smithy.Schema
-
-var GetWebFunctionRevisionResponse_state *smithy.Schema
-
-var GetWebFunctionRevisionResponse_stateReason *smithy.Schema
-
-var GetWebFunctionRevisionResponse_errors *smithy.Schema
-
-var GetWebFunctionRevisionResponse_createdAt *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsRequest_resource *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsResponse_tags *smithy.Schema
-
-var ListWebFunctionEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionEndpointsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListWebFunctionEndpointsRequest_functionName *smithy.Schema
-
-var ListWebFunctionEndpointsRequest_filters *smithy.Schema
-
-var ListWebFunctionEndpointsRequest_maxResults *smithy.Schema
-
-var ListWebFunctionEndpointsRequest_nextToken *smithy.Schema
-
-var ListWebFunctionEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebFunctionEndpointsResponse_endpoints *smithy.Schema
-
-var ListWebFunctionEndpointsResponse_nextToken *smithy.Schema
-
-var ListWebFunctionRevisionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionRevisionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListWebFunctionRevisionsRequest_functionName *smithy.Schema
-
-var ListWebFunctionRevisionsRequest_filters *smithy.Schema
-
-var ListWebFunctionRevisionsRequest_maxResults *smithy.Schema
-
-var ListWebFunctionRevisionsRequest_nextToken *smithy.Schema
-
-var ListWebFunctionRevisionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionRevisionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebFunctionRevisionsResponse_revisions *smithy.Schema
-
-var ListWebFunctionRevisionsResponse_nextToken *smithy.Schema
-
-var ListWebFunctionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWebFunctionsRequest_filters *smithy.Schema
-
-var ListWebFunctionsRequest_maxResults *smithy.Schema
-
-var ListWebFunctionsRequest_nextToken *smithy.Schema
-
-var ListWebFunctionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "ListWebFunctionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebFunctionsResponse_functions *smithy.Schema
-
-var ListWebFunctionsResponse_nextToken *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyRequest_resourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_policy *smithy.Schema
-
-var PutResourcePolicyRequest_revisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_policy *smithy.Schema
-
-var PutResourcePolicyResponse_revisionId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resource *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resource *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "UpdateWebFunctionEndpointRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateWebFunctionEndpointRequest_functionName *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_endpointName *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_description *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_authType *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_autoDeploymentMode *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_revisionWeights *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_scalingConfig *smithy.Schema
-
-var UpdateWebFunctionEndpointRequest_throttleConfig *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdaweb",
-	Name:      "UpdateWebFunctionEndpointResponse",
-}, smithy.ShapeTypeStructure, 19)
-var UpdateWebFunctionEndpointResponse_functionArn *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_endpointArn *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_endpointName *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_description *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_endpointType *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_domainName *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_authType *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_autoDeploymentMode *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_revisionWeights *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_regions *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_scalingConfig *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_throttleConfig *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_state *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_stateReason *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_updateStatus *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_updateStatusReason *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_regionalEndpoints *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_createdAt *smithy.Schema
-
-var UpdateWebFunctionEndpointResponse_updatedAt *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccountQuotas_maxTotalArmVCpus = AccountQuotas.AddMember("maxTotalArmVCpus", smithyprelude.Integer)
-
-	AccountQuotas_maxTotalRateLimit = AccountQuotas.AddMember("maxTotalRateLimit", smithyprelude.Integer)
-
-	AccountQuotas_maxRevisionsPerFunction = AccountQuotas.AddMember("maxRevisionsPerFunction", smithyprelude.Integer)
-
-	AccountQuotas_maxEndpointsPerFunction = AccountQuotas.AddMember("maxEndpointsPerFunction", smithyprelude.Integer)
-
-	AccountUsage_functionCount = AccountUsage.AddMember("functionCount", smithyprelude.Integer)
-
-	ApplicationLogLevel_TRACE = ApplicationLogLevel.AddMember("TRACE", smithyprelude.Unit)
-
-	ApplicationLogLevel_DEBUG = ApplicationLogLevel.AddMember("DEBUG", smithyprelude.Unit)
-
-	ApplicationLogLevel_INFO = ApplicationLogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	ApplicationLogLevel_WARN = ApplicationLogLevel.AddMember("WARN", smithyprelude.Unit)
-
-	ApplicationLogLevel_ERROR = ApplicationLogLevel.AddMember("ERROR", smithyprelude.Unit)
-
-	ApplicationLogLevel_FATAL = ApplicationLogLevel.AddMember("FATAL", smithyprelude.Unit)
-
-	AuthType_APPLICATION_MANAGED = AuthType.AddMember("APPLICATION_MANAGED", smithyprelude.Unit)
-
-	AuthType_IAM_AUTH = AuthType.AddMember("IAM_AUTH", smithyprelude.Unit)
-
-	AutoDeploymentMode_LATEST_REVISION = AutoDeploymentMode.AddMember("LATEST_REVISION", smithyprelude.Unit)
-
-	AutoDeploymentMode_DISABLED = AutoDeploymentMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	S3Object_bucket = S3Object.AddMember("bucket", smithyprelude.String)
-
-	S3Object_key = S3Object.AddMember("key", smithyprelude.String)
-
-	S3Object_versionId = S3Object.AddMember("versionId", smithyprelude.String)
-
-	CodeConfig_s3Object = CodeConfig.AddMember("s3Object", S3Object)
-
-	RuntimeConfig_runtime = RuntimeConfig.AddMember("runtime", smithyprelude.String)
-
-	BuildConfig_codeConfig = BuildConfig.AddMember("codeConfig", CodeConfig)
-
-	BuildConfig_runtimeConfig = BuildConfig.AddMember("runtimeConfig", RuntimeConfig)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	EndpointType_HOME_REGION = EndpointType.AddMember("HOME_REGION", smithyprelude.Unit)
-
-	EndpointType_MULTI_REGION = EndpointType.AddMember("MULTI_REGION", smithyprelude.Unit)
-
-	EndpointType_PER_REGION = EndpointType.AddMember("PER_REGION", smithyprelude.Unit)
-
-	_RegionList_member = _RegionList.AddMember("member", _Region)
-
-	ScalingConfig_maxEnvironments = ScalingConfig.AddMember("maxEnvironments", smithyprelude.Integer)
-
-	ThrottleConfig_rateLimit = ThrottleConfig.AddMember("rateLimit", smithyprelude.Integer)
-
-	EndpointConfig_endpointName = EndpointConfig.AddMember("endpointName", _EndpointName)
-
-	EndpointConfig_description = EndpointConfig.AddMember("description", _Description)
-
-	EndpointConfig_endpointType = EndpointConfig.AddMember("endpointType", EndpointType)
-
-	EndpointConfig_authType = EndpointConfig.AddMember("authType", AuthType)
-
-	EndpointConfig_autoDeploymentMode = EndpointConfig.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	EndpointConfig_regions = EndpointConfig.AddMember("regions", _RegionList)
-
-	EndpointConfig_scalingConfig = EndpointConfig.AddMember("scalingConfig", ScalingConfig)
-
-	EndpointConfig_throttleConfig = EndpointConfig.AddMember("throttleConfig", ThrottleConfig)
-
-	EndpointState_PENDING = EndpointState.AddMember("PENDING", smithyprelude.Unit)
-
-	EndpointState_ACTIVE = EndpointState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EndpointState_FAILED = EndpointState.AddMember("FAILED", smithyprelude.Unit)
-
-	EndpointState_DELETING = EndpointState.AddMember("DELETING", smithyprelude.Unit)
-
-	EndpointUpdateStatus_IN_PROGRESS = EndpointUpdateStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EndpointUpdateStatus_SUCCESSFUL = EndpointUpdateStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	EndpointUpdateStatus_FAILED = EndpointUpdateStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_EnvironmentVariables_key = _EnvironmentVariables.AddMember("key", smithyprelude.String)
-
-	_EnvironmentVariables_value = _EnvironmentVariables.AddMember("value", smithyprelude.String)
-
-	_FilterValueList_member = _FilterValueList.AddMember("member", smithyprelude.String)
-
-	Filter_name = Filter.AddMember("name", smithyprelude.String)
-
-	Filter_values = Filter.AddMember("values", _FilterValueList)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	RevisionWeight_revisionId = RevisionWeight.AddMember("revisionId", _RevisionId)
-
-	RevisionWeight_weight = RevisionWeight.AddMember("weight", smithyprelude.Integer)
-
-	_RevisionWeightList_member = _RevisionWeightList.AddMember("member", RevisionWeight)
-
-	FunctionEndpointSummary_endpointArn = FunctionEndpointSummary.AddMember("endpointArn", _EndpointArn)
-
-	FunctionEndpointSummary_endpointName = FunctionEndpointSummary.AddMember("endpointName", _EndpointName)
-
-	FunctionEndpointSummary_description = FunctionEndpointSummary.AddMember("description", _Description)
-
-	FunctionEndpointSummary_endpointType = FunctionEndpointSummary.AddMember("endpointType", EndpointType)
-
-	FunctionEndpointSummary_domainName = FunctionEndpointSummary.AddMember("domainName", _DomainName)
-
-	FunctionEndpointSummary_authType = FunctionEndpointSummary.AddMember("authType", AuthType)
-
-	FunctionEndpointSummary_autoDeploymentMode = FunctionEndpointSummary.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	FunctionEndpointSummary_revisionWeights = FunctionEndpointSummary.AddMember("revisionWeights", _RevisionWeightList)
-
-	FunctionEndpointSummary_regions = FunctionEndpointSummary.AddMember("regions", _RegionList)
-
-	FunctionEndpointSummary_scalingConfig = FunctionEndpointSummary.AddMember("scalingConfig", ScalingConfig)
-
-	FunctionEndpointSummary_throttleConfig = FunctionEndpointSummary.AddMember("throttleConfig", ThrottleConfig)
-
-	FunctionEndpointSummary_state = FunctionEndpointSummary.AddMember("state", EndpointState)
-
-	FunctionEndpointSummary_stateReason = FunctionEndpointSummary.AddMember("stateReason", smithyprelude.String)
-
-	FunctionEndpointSummary_updateStatus = FunctionEndpointSummary.AddMember("updateStatus", EndpointUpdateStatus)
-
-	FunctionEndpointSummary_updateStatusReason = FunctionEndpointSummary.AddMember("updateStatusReason", smithyprelude.String)
-
-	FunctionEndpointSummary_createdAt = FunctionEndpointSummary.AddMember("createdAt", _DateTime)
-
-	FunctionEndpointSummary_updatedAt = FunctionEndpointSummary.AddMember("updatedAt", _DateTime)
-
-	_FunctionEndpointSummaryList_member = _FunctionEndpointSummaryList.AddMember("member", FunctionEndpointSummary)
-
-	RevisionState_PENDING = RevisionState.AddMember("PENDING", smithyprelude.Unit)
-
-	RevisionState_ACTIVE = RevisionState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	RevisionState_FAILED = RevisionState.AddMember("FAILED", smithyprelude.Unit)
-
-	FunctionRevisionSummary_revisionArn = FunctionRevisionSummary.AddMember("revisionArn", _RevisionArn)
-
-	FunctionRevisionSummary_revisionId = FunctionRevisionSummary.AddMember("revisionId", _RevisionId)
-
-	FunctionRevisionSummary_description = FunctionRevisionSummary.AddMember("description", _Description)
-
-	FunctionRevisionSummary_state = FunctionRevisionSummary.AddMember("state", RevisionState)
-
-	FunctionRevisionSummary_stateReason = FunctionRevisionSummary.AddMember("stateReason", smithyprelude.String)
-
-	FunctionRevisionSummary_createdAt = FunctionRevisionSummary.AddMember("createdAt", _DateTime)
-
-	_FunctionRevisionSummaryList_member = _FunctionRevisionSummaryList.AddMember("member", FunctionRevisionSummary)
-
-	FunctionState_PENDING = FunctionState.AddMember("PENDING", smithyprelude.Unit)
-
-	FunctionState_ACTIVE = FunctionState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	FunctionState_FAILED = FunctionState.AddMember("FAILED", smithyprelude.Unit)
-
-	FunctionState_DELETING = FunctionState.AddMember("DELETING", smithyprelude.Unit)
-
-	FunctionSummary_functionName = FunctionSummary.AddMember("functionName", _FunctionName)
-
-	FunctionSummary_functionArn = FunctionSummary.AddMember("functionArn", _FunctionArn)
-
-	FunctionSummary_state = FunctionSummary.AddMember("state", FunctionState)
-
-	FunctionSummary_stateReason = FunctionSummary.AddMember("stateReason", smithyprelude.String)
-
-	FunctionSummary_createdAt = FunctionSummary.AddMember("createdAt", _DateTime)
-
-	FunctionSummary_updatedAt = FunctionSummary.AddMember("updatedAt", _DateTime)
-
-	_FunctionSummaryList_member = _FunctionSummaryList.AddMember("member", FunctionSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	SystemLogLevel_DEBUG = SystemLogLevel.AddMember("DEBUG", smithyprelude.Unit)
-
-	SystemLogLevel_INFO = SystemLogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	SystemLogLevel_WARN = SystemLogLevel.AddMember("WARN", smithyprelude.Unit)
-
-	LoggingConfig_logGroup = LoggingConfig.AddMember("logGroup", smithyprelude.String)
-
-	LoggingConfig_applicationLogLevel = LoggingConfig.AddMember("applicationLogLevel", ApplicationLogLevel)
-
-	LoggingConfig_systemLogLevel = LoggingConfig.AddMember("systemLogLevel", SystemLogLevel)
-
-	RegionalEndpoint_domainName = RegionalEndpoint.AddMember("domainName", _DomainName)
-
-	RegionalEndpoint_authType = RegionalEndpoint.AddMember("authType", AuthType)
-
-	RegionalEndpoint_revisionWeights = RegionalEndpoint.AddMember("revisionWeights", _RevisionWeightList)
-
-	RegionalEndpoint_scalingConfig = RegionalEndpoint.AddMember("scalingConfig", ScalingConfig)
-
-	RegionalEndpoint_throttleConfig = RegionalEndpoint.AddMember("throttleConfig", ThrottleConfig)
-
-	RegionalEndpoint_state = RegionalEndpoint.AddMember("state", EndpointState)
-
-	RegionalEndpoint_stateReason = RegionalEndpoint.AddMember("stateReason", smithyprelude.String)
-
-	RegionalEndpoint_updateStatus = RegionalEndpoint.AddMember("updateStatus", EndpointUpdateStatus)
-
-	RegionalEndpoint_updateStatusReason = RegionalEndpoint.AddMember("updateStatusReason", smithyprelude.String)
-
-	_RegionalEndpoints_key = _RegionalEndpoints.AddMember("key", _Region)
-
-	_RegionalEndpoints_value = _RegionalEndpoints.AddMember("value", RegionalEndpoint)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	TelemetryConfig_loggingConfig = TelemetryConfig.AddMember("loggingConfig", LoggingConfig)
-
-	ServiceConfig_executionRoleArn = ServiceConfig.AddMember("executionRoleArn", _RoleArn)
-
-	ServiceConfig_timeoutSeconds = ServiceConfig.AddMember("timeoutSeconds", smithyprelude.Integer)
-
-	ServiceConfig_egressNetworkConnectorArn = ServiceConfig.AddMember("egressNetworkConnectorArn", smithyprelude.String)
-
-	ServiceConfig_maxConcurrencyPerEnvironment = ServiceConfig.AddMember("maxConcurrencyPerEnvironment", smithyprelude.Integer)
-
-	ServiceConfig_environmentVariables = ServiceConfig.AddMember("environmentVariables", _EnvironmentVariables)
-
-	ServiceConfig_telemetryConfig = ServiceConfig.AddMember("telemetryConfig", TelemetryConfig)
-
-	RevisionConfig_description = RevisionConfig.AddMember("description", _Description)
-
-	RevisionConfig_kmsKeyArn = RevisionConfig.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	RevisionConfig_buildConfig = RevisionConfig.AddMember("buildConfig", BuildConfig)
-
-	RevisionConfig_serviceConfig = RevisionConfig.AddMember("serviceConfig", ServiceConfig)
-
-	RevisionError_attribute = RevisionError.AddMember("attribute", smithyprelude.String)
-
-	RevisionError_errorCode = RevisionError.AddMember("errorCode", smithyprelude.String)
-
-	RevisionError_errorMessage = RevisionError.AddMember("errorMessage", smithyprelude.String)
-
-	_RevisionErrors_member = _RevisionErrors.AddMember("member", RevisionError)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateWebFunctionEndpointRequest_functionName = CreateWebFunctionEndpointRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	CreateWebFunctionEndpointRequest_endpointName = CreateWebFunctionEndpointRequest.AddMember("endpointName", _EndpointName)
-
-	CreateWebFunctionEndpointRequest_description = CreateWebFunctionEndpointRequest.AddMember("description", _Description)
-
-	CreateWebFunctionEndpointRequest_endpointType = CreateWebFunctionEndpointRequest.AddMember("endpointType", EndpointType)
-
-	CreateWebFunctionEndpointRequest_authType = CreateWebFunctionEndpointRequest.AddMember("authType", AuthType)
-
-	CreateWebFunctionEndpointRequest_autoDeploymentMode = CreateWebFunctionEndpointRequest.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	CreateWebFunctionEndpointRequest_revisionWeights = CreateWebFunctionEndpointRequest.AddMember("revisionWeights", _RevisionWeightList)
-
-	CreateWebFunctionEndpointRequest_regions = CreateWebFunctionEndpointRequest.AddMember("regions", _RegionList)
-
-	CreateWebFunctionEndpointRequest_scalingConfig = CreateWebFunctionEndpointRequest.AddMember("scalingConfig", ScalingConfig)
-
-	CreateWebFunctionEndpointRequest_throttleConfig = CreateWebFunctionEndpointRequest.AddMember("throttleConfig", ThrottleConfig)
-
-	CreateWebFunctionEndpointResponse_functionArn = CreateWebFunctionEndpointResponse.AddMember("functionArn", _FunctionArn)
-
-	CreateWebFunctionEndpointResponse_endpointArn = CreateWebFunctionEndpointResponse.AddMember("endpointArn", _EndpointArn)
-
-	CreateWebFunctionEndpointResponse_endpointName = CreateWebFunctionEndpointResponse.AddMember("endpointName", _EndpointName)
-
-	CreateWebFunctionEndpointResponse_description = CreateWebFunctionEndpointResponse.AddMember("description", _Description)
-
-	CreateWebFunctionEndpointResponse_endpointType = CreateWebFunctionEndpointResponse.AddMember("endpointType", EndpointType)
-
-	CreateWebFunctionEndpointResponse_domainName = CreateWebFunctionEndpointResponse.AddMember("domainName", _DomainName)
-
-	CreateWebFunctionEndpointResponse_authType = CreateWebFunctionEndpointResponse.AddMember("authType", AuthType)
-
-	CreateWebFunctionEndpointResponse_autoDeploymentMode = CreateWebFunctionEndpointResponse.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	CreateWebFunctionEndpointResponse_revisionWeights = CreateWebFunctionEndpointResponse.AddMember("revisionWeights", _RevisionWeightList)
-
-	CreateWebFunctionEndpointResponse_regions = CreateWebFunctionEndpointResponse.AddMember("regions", _RegionList)
-
-	CreateWebFunctionEndpointResponse_scalingConfig = CreateWebFunctionEndpointResponse.AddMember("scalingConfig", ScalingConfig)
-
-	CreateWebFunctionEndpointResponse_throttleConfig = CreateWebFunctionEndpointResponse.AddMember("throttleConfig", ThrottleConfig)
-
-	CreateWebFunctionEndpointResponse_state = CreateWebFunctionEndpointResponse.AddMember("state", EndpointState)
-
-	CreateWebFunctionEndpointResponse_stateReason = CreateWebFunctionEndpointResponse.AddMember("stateReason", smithyprelude.String)
-
-	CreateWebFunctionEndpointResponse_updateStatus = CreateWebFunctionEndpointResponse.AddMember("updateStatus", EndpointUpdateStatus)
-
-	CreateWebFunctionEndpointResponse_updateStatusReason = CreateWebFunctionEndpointResponse.AddMember("updateStatusReason", smithyprelude.String)
-
-	CreateWebFunctionEndpointResponse_regionalEndpoints = CreateWebFunctionEndpointResponse.AddMember("regionalEndpoints", _RegionalEndpoints)
-
-	CreateWebFunctionEndpointResponse_createdAt = CreateWebFunctionEndpointResponse.AddMember("createdAt", _DateTime)
-
-	CreateWebFunctionEndpointResponse_updatedAt = CreateWebFunctionEndpointResponse.AddMember("updatedAt", _DateTime)
-
-	CreateWebFunctionRequest_functionName = CreateWebFunctionRequest.AddMember("functionName", _FunctionName)
-
-	CreateWebFunctionRequest_revisionConfig = CreateWebFunctionRequest.AddMember("revisionConfig", RevisionConfig)
-
-	CreateWebFunctionRequest_endpointConfig = CreateWebFunctionRequest.AddMember("endpointConfig", EndpointConfig)
-
-	CreateWebFunctionRequest_tags = CreateWebFunctionRequest.AddMember("tags", _Tags)
-
-	CreateWebFunctionResponse_functionName = CreateWebFunctionResponse.AddMember("functionName", _FunctionName)
-
-	CreateWebFunctionResponse_functionArn = CreateWebFunctionResponse.AddMember("functionArn", _FunctionArn)
-
-	CreateWebFunctionResponse_state = CreateWebFunctionResponse.AddMember("state", FunctionState)
-
-	CreateWebFunctionResponse_stateReason = CreateWebFunctionResponse.AddMember("stateReason", smithyprelude.String)
-
-	CreateWebFunctionResponse_createdAt = CreateWebFunctionResponse.AddMember("createdAt", _DateTime)
-
-	CreateWebFunctionResponse_updatedAt = CreateWebFunctionResponse.AddMember("updatedAt", _DateTime)
-
-	CreateWebFunctionResponse_revision = CreateWebFunctionResponse.AddMember("revision", FunctionRevisionSummary)
-
-	CreateWebFunctionResponse_endpoint = CreateWebFunctionResponse.AddMember("endpoint", FunctionEndpointSummary)
-
-	CreateWebFunctionResponse_tags = CreateWebFunctionResponse.AddMember("tags", _Tags)
-
-	CreateWebFunctionRevisionRequest_functionName = CreateWebFunctionRevisionRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	CreateWebFunctionRevisionRequest_description = CreateWebFunctionRevisionRequest.AddMember("description", _Description)
-
-	CreateWebFunctionRevisionRequest_kmsKeyArn = CreateWebFunctionRevisionRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateWebFunctionRevisionRequest_buildConfig = CreateWebFunctionRevisionRequest.AddMember("buildConfig", BuildConfig)
-
-	CreateWebFunctionRevisionRequest_serviceConfig = CreateWebFunctionRevisionRequest.AddMember("serviceConfig", ServiceConfig)
-
-	CreateWebFunctionRevisionResponse_functionArn = CreateWebFunctionRevisionResponse.AddMember("functionArn", _FunctionArn)
-
-	CreateWebFunctionRevisionResponse_revisionArn = CreateWebFunctionRevisionResponse.AddMember("revisionArn", _RevisionArn)
-
-	CreateWebFunctionRevisionResponse_revisionId = CreateWebFunctionRevisionResponse.AddMember("revisionId", _RevisionId)
-
-	CreateWebFunctionRevisionResponse_description = CreateWebFunctionRevisionResponse.AddMember("description", _Description)
-
-	CreateWebFunctionRevisionResponse_kmsKeyArn = CreateWebFunctionRevisionResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateWebFunctionRevisionResponse_buildConfig = CreateWebFunctionRevisionResponse.AddMember("buildConfig", BuildConfig)
-
-	CreateWebFunctionRevisionResponse_serviceConfig = CreateWebFunctionRevisionResponse.AddMember("serviceConfig", ServiceConfig)
-
-	CreateWebFunctionRevisionResponse_state = CreateWebFunctionRevisionResponse.AddMember("state", RevisionState)
-
-	CreateWebFunctionRevisionResponse_stateReason = CreateWebFunctionRevisionResponse.AddMember("stateReason", smithyprelude.String)
-
-	CreateWebFunctionRevisionResponse_errors = CreateWebFunctionRevisionResponse.AddMember("errors", _RevisionErrors)
-
-	CreateWebFunctionRevisionResponse_createdAt = CreateWebFunctionRevisionResponse.AddMember("createdAt", _DateTime)
-
-	DeleteResourcePolicyRequest_resourceArn = DeleteResourcePolicyRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_revisionId = DeleteResourcePolicyRequest.AddMember("revisionId", _PolicyRevisionId, &smithytraits.HTTPQuery{Name: "RevisionId"})
-
-	DeleteWebFunctionEndpointRequest_functionName = DeleteWebFunctionEndpointRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	DeleteWebFunctionEndpointRequest_endpointName = DeleteWebFunctionEndpointRequest.AddMember("endpointName", _EndpointName, &smithytraits.HTTPLabel{})
-
-	DeleteWebFunctionRequest_functionName = DeleteWebFunctionRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	DeleteWebFunctionRevisionRequest_functionName = DeleteWebFunctionRevisionRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	DeleteWebFunctionRevisionRequest_revisionId = DeleteWebFunctionRevisionRequest.AddMember("revisionId", _RevisionId, &smithytraits.HTTPLabel{})
-
-	GetResourcePolicyRequest_resourceArn = GetResourcePolicyRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	GetResourcePolicyResponse_policy = GetResourcePolicyResponse.AddMember("policy", _ResourcePolicy, &smithytraits.JSONName{Name: "Policy"})
-
-	GetResourcePolicyResponse_revisionId = GetResourcePolicyResponse.AddMember("revisionId", _PolicyRevisionId, &smithytraits.JSONName{Name: "RevisionId"})
-
-	GetWebAccountSettingsResponse_accountQuotas = GetWebAccountSettingsResponse.AddMember("accountQuotas", AccountQuotas)
-
-	GetWebAccountSettingsResponse_accountUsage = GetWebAccountSettingsResponse.AddMember("accountUsage", AccountUsage)
-
-	GetWebFunctionEndpointRequest_functionName = GetWebFunctionEndpointRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	GetWebFunctionEndpointRequest_endpointName = GetWebFunctionEndpointRequest.AddMember("endpointName", _EndpointName, &smithytraits.HTTPLabel{})
-
-	GetWebFunctionEndpointResponse_functionArn = GetWebFunctionEndpointResponse.AddMember("functionArn", _FunctionArn)
-
-	GetWebFunctionEndpointResponse_endpointArn = GetWebFunctionEndpointResponse.AddMember("endpointArn", _EndpointArn)
-
-	GetWebFunctionEndpointResponse_endpointName = GetWebFunctionEndpointResponse.AddMember("endpointName", _EndpointName)
-
-	GetWebFunctionEndpointResponse_description = GetWebFunctionEndpointResponse.AddMember("description", _Description)
-
-	GetWebFunctionEndpointResponse_endpointType = GetWebFunctionEndpointResponse.AddMember("endpointType", EndpointType)
-
-	GetWebFunctionEndpointResponse_domainName = GetWebFunctionEndpointResponse.AddMember("domainName", _DomainName)
-
-	GetWebFunctionEndpointResponse_authType = GetWebFunctionEndpointResponse.AddMember("authType", AuthType)
-
-	GetWebFunctionEndpointResponse_autoDeploymentMode = GetWebFunctionEndpointResponse.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	GetWebFunctionEndpointResponse_revisionWeights = GetWebFunctionEndpointResponse.AddMember("revisionWeights", _RevisionWeightList)
-
-	GetWebFunctionEndpointResponse_regions = GetWebFunctionEndpointResponse.AddMember("regions", _RegionList)
-
-	GetWebFunctionEndpointResponse_scalingConfig = GetWebFunctionEndpointResponse.AddMember("scalingConfig", ScalingConfig)
-
-	GetWebFunctionEndpointResponse_throttleConfig = GetWebFunctionEndpointResponse.AddMember("throttleConfig", ThrottleConfig)
-
-	GetWebFunctionEndpointResponse_state = GetWebFunctionEndpointResponse.AddMember("state", EndpointState)
-
-	GetWebFunctionEndpointResponse_stateReason = GetWebFunctionEndpointResponse.AddMember("stateReason", smithyprelude.String)
-
-	GetWebFunctionEndpointResponse_updateStatus = GetWebFunctionEndpointResponse.AddMember("updateStatus", EndpointUpdateStatus)
-
-	GetWebFunctionEndpointResponse_updateStatusReason = GetWebFunctionEndpointResponse.AddMember("updateStatusReason", smithyprelude.String)
-
-	GetWebFunctionEndpointResponse_regionalEndpoints = GetWebFunctionEndpointResponse.AddMember("regionalEndpoints", _RegionalEndpoints)
-
-	GetWebFunctionEndpointResponse_createdAt = GetWebFunctionEndpointResponse.AddMember("createdAt", _DateTime)
-
-	GetWebFunctionEndpointResponse_updatedAt = GetWebFunctionEndpointResponse.AddMember("updatedAt", _DateTime)
-
-	GetWebFunctionRequest_functionName = GetWebFunctionRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	GetWebFunctionResponse_functionName = GetWebFunctionResponse.AddMember("functionName", _FunctionName)
-
-	GetWebFunctionResponse_functionArn = GetWebFunctionResponse.AddMember("functionArn", _FunctionArn)
-
-	GetWebFunctionResponse_state = GetWebFunctionResponse.AddMember("state", FunctionState)
-
-	GetWebFunctionResponse_stateReason = GetWebFunctionResponse.AddMember("stateReason", smithyprelude.String)
-
-	GetWebFunctionResponse_createdAt = GetWebFunctionResponse.AddMember("createdAt", _DateTime)
-
-	GetWebFunctionResponse_updatedAt = GetWebFunctionResponse.AddMember("updatedAt", _DateTime)
-
-	GetWebFunctionRevisionRequest_functionName = GetWebFunctionRevisionRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	GetWebFunctionRevisionRequest_revisionId = GetWebFunctionRevisionRequest.AddMember("revisionId", _RevisionId, &smithytraits.HTTPLabel{})
-
-	GetWebFunctionRevisionResponse_functionArn = GetWebFunctionRevisionResponse.AddMember("functionArn", _FunctionArn)
-
-	GetWebFunctionRevisionResponse_revisionArn = GetWebFunctionRevisionResponse.AddMember("revisionArn", _RevisionArn)
-
-	GetWebFunctionRevisionResponse_revisionId = GetWebFunctionRevisionResponse.AddMember("revisionId", _RevisionId)
-
-	GetWebFunctionRevisionResponse_description = GetWebFunctionRevisionResponse.AddMember("description", _Description)
-
-	GetWebFunctionRevisionResponse_kmsKeyArn = GetWebFunctionRevisionResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetWebFunctionRevisionResponse_buildConfig = GetWebFunctionRevisionResponse.AddMember("buildConfig", BuildConfig)
-
-	GetWebFunctionRevisionResponse_serviceConfig = GetWebFunctionRevisionResponse.AddMember("serviceConfig", ServiceConfig)
-
-	GetWebFunctionRevisionResponse_state = GetWebFunctionRevisionResponse.AddMember("state", RevisionState)
-
-	GetWebFunctionRevisionResponse_stateReason = GetWebFunctionRevisionResponse.AddMember("stateReason", smithyprelude.String)
-
-	GetWebFunctionRevisionResponse_errors = GetWebFunctionRevisionResponse.AddMember("errors", _RevisionErrors)
-
-	GetWebFunctionRevisionResponse_createdAt = GetWebFunctionRevisionResponse.AddMember("createdAt", _DateTime)
-
-	ListTagsRequest_resource = ListTagsRequest.AddMember("resource", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsResponse_tags = ListTagsResponse.AddMember("tags", _Tags, &smithytraits.JSONName{Name: "Tags"})
-
-	ListWebFunctionEndpointsRequest_functionName = ListWebFunctionEndpointsRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	ListWebFunctionEndpointsRequest_filters = ListWebFunctionEndpointsRequest.AddMember("filters", _FilterList)
-
-	ListWebFunctionEndpointsRequest_maxResults = ListWebFunctionEndpointsRequest.AddMember("maxResults", _MaxResults)
-
-	ListWebFunctionEndpointsRequest_nextToken = ListWebFunctionEndpointsRequest.AddMember("nextToken", _NextToken)
-
-	ListWebFunctionEndpointsResponse_endpoints = ListWebFunctionEndpointsResponse.AddMember("endpoints", _FunctionEndpointSummaryList)
-
-	ListWebFunctionEndpointsResponse_nextToken = ListWebFunctionEndpointsResponse.AddMember("nextToken", _NextToken)
-
-	ListWebFunctionRevisionsRequest_functionName = ListWebFunctionRevisionsRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	ListWebFunctionRevisionsRequest_filters = ListWebFunctionRevisionsRequest.AddMember("filters", _FilterList)
-
-	ListWebFunctionRevisionsRequest_maxResults = ListWebFunctionRevisionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListWebFunctionRevisionsRequest_nextToken = ListWebFunctionRevisionsRequest.AddMember("nextToken", _NextToken)
-
-	ListWebFunctionRevisionsResponse_revisions = ListWebFunctionRevisionsResponse.AddMember("revisions", _FunctionRevisionSummaryList)
-
-	ListWebFunctionRevisionsResponse_nextToken = ListWebFunctionRevisionsResponse.AddMember("nextToken", _NextToken)
-
-	ListWebFunctionsRequest_filters = ListWebFunctionsRequest.AddMember("filters", _FilterList)
-
-	ListWebFunctionsRequest_maxResults = ListWebFunctionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListWebFunctionsRequest_nextToken = ListWebFunctionsRequest.AddMember("nextToken", _NextToken)
-
-	ListWebFunctionsResponse_functions = ListWebFunctionsResponse.AddMember("functions", _FunctionSummaryList)
-
-	ListWebFunctionsResponse_nextToken = ListWebFunctionsResponse.AddMember("nextToken", _NextToken)
-
-	PutResourcePolicyRequest_resourceArn = PutResourcePolicyRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	PutResourcePolicyRequest_policy = PutResourcePolicyRequest.AddMember("policy", _ResourcePolicy, &smithytraits.JSONName{Name: "Policy"})
-
-	PutResourcePolicyRequest_revisionId = PutResourcePolicyRequest.AddMember("revisionId", _PolicyRevisionId, &smithytraits.JSONName{Name: "RevisionId"})
-
-	PutResourcePolicyResponse_policy = PutResourcePolicyResponse.AddMember("policy", _ResourcePolicy, &smithytraits.JSONName{Name: "Policy"})
-
-	PutResourcePolicyResponse_revisionId = PutResourcePolicyResponse.AddMember("revisionId", _PolicyRevisionId, &smithytraits.JSONName{Name: "RevisionId"})
-
-	TagResourceRequest_resource = TagResourceRequest.AddMember("resource", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags, &smithytraits.JSONName{Name: "Tags"})
-
-	UntagResourceRequest_resource = UntagResourceRequest.AddMember("resource", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateWebFunctionEndpointRequest_functionName = UpdateWebFunctionEndpointRequest.AddMember("functionName", _FunctionName, &smithytraits.HTTPLabel{})
-
-	UpdateWebFunctionEndpointRequest_endpointName = UpdateWebFunctionEndpointRequest.AddMember("endpointName", _EndpointName, &smithytraits.HTTPLabel{})
-
-	UpdateWebFunctionEndpointRequest_description = UpdateWebFunctionEndpointRequest.AddMember("description", _Description)
-
-	UpdateWebFunctionEndpointRequest_authType = UpdateWebFunctionEndpointRequest.AddMember("authType", AuthType)
-
-	UpdateWebFunctionEndpointRequest_autoDeploymentMode = UpdateWebFunctionEndpointRequest.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	UpdateWebFunctionEndpointRequest_revisionWeights = UpdateWebFunctionEndpointRequest.AddMember("revisionWeights", _RevisionWeightList)
-
-	UpdateWebFunctionEndpointRequest_scalingConfig = UpdateWebFunctionEndpointRequest.AddMember("scalingConfig", ScalingConfig)
-
-	UpdateWebFunctionEndpointRequest_throttleConfig = UpdateWebFunctionEndpointRequest.AddMember("throttleConfig", ThrottleConfig)
-
-	UpdateWebFunctionEndpointResponse_functionArn = UpdateWebFunctionEndpointResponse.AddMember("functionArn", _FunctionArn)
-
-	UpdateWebFunctionEndpointResponse_endpointArn = UpdateWebFunctionEndpointResponse.AddMember("endpointArn", _EndpointArn)
-
-	UpdateWebFunctionEndpointResponse_endpointName = UpdateWebFunctionEndpointResponse.AddMember("endpointName", _EndpointName)
-
-	UpdateWebFunctionEndpointResponse_description = UpdateWebFunctionEndpointResponse.AddMember("description", _Description)
-
-	UpdateWebFunctionEndpointResponse_endpointType = UpdateWebFunctionEndpointResponse.AddMember("endpointType", EndpointType)
-
-	UpdateWebFunctionEndpointResponse_domainName = UpdateWebFunctionEndpointResponse.AddMember("domainName", _DomainName)
-
-	UpdateWebFunctionEndpointResponse_authType = UpdateWebFunctionEndpointResponse.AddMember("authType", AuthType)
-
-	UpdateWebFunctionEndpointResponse_autoDeploymentMode = UpdateWebFunctionEndpointResponse.AddMember("autoDeploymentMode", AutoDeploymentMode)
-
-	UpdateWebFunctionEndpointResponse_revisionWeights = UpdateWebFunctionEndpointResponse.AddMember("revisionWeights", _RevisionWeightList)
-
-	UpdateWebFunctionEndpointResponse_regions = UpdateWebFunctionEndpointResponse.AddMember("regions", _RegionList)
-
-	UpdateWebFunctionEndpointResponse_scalingConfig = UpdateWebFunctionEndpointResponse.AddMember("scalingConfig", ScalingConfig)
-
-	UpdateWebFunctionEndpointResponse_throttleConfig = UpdateWebFunctionEndpointResponse.AddMember("throttleConfig", ThrottleConfig)
-
-	UpdateWebFunctionEndpointResponse_state = UpdateWebFunctionEndpointResponse.AddMember("state", EndpointState)
-
-	UpdateWebFunctionEndpointResponse_stateReason = UpdateWebFunctionEndpointResponse.AddMember("stateReason", smithyprelude.String)
-
-	UpdateWebFunctionEndpointResponse_updateStatus = UpdateWebFunctionEndpointResponse.AddMember("updateStatus", EndpointUpdateStatus)
-
-	UpdateWebFunctionEndpointResponse_updateStatusReason = UpdateWebFunctionEndpointResponse.AddMember("updateStatusReason", smithyprelude.String)
-
-	UpdateWebFunctionEndpointResponse_regionalEndpoints = UpdateWebFunctionEndpointResponse.AddMember("regionalEndpoints", _RegionalEndpoints)
-
-	UpdateWebFunctionEndpointResponse_createdAt = UpdateWebFunctionEndpointResponse.AddMember("createdAt", _DateTime)
-
-	UpdateWebFunctionEndpointResponse_updatedAt = UpdateWebFunctionEndpointResponse.AddMember("updatedAt", _DateTime)
-
-}
+	Code: 202}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "RevisionId"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Policy"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "RevisionId"}}, DirectMask: 0x1}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Tags"}}, DirectMask: 0x1}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccountQuotas = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountQuotas_maxTotalArmVCpus, &sAccountQuotas_maxTotalRateLimit, &sAccountQuotas_maxRevisionsPerFunction, &sAccountQuotas_maxEndpointsPerFunction}}
+var mAccountUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountUsage_functionCount}}
+var mApplicationLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationLogLevel_TRACE, &sApplicationLogLevel_DEBUG, &sApplicationLogLevel_INFO, &sApplicationLogLevel_WARN, &sApplicationLogLevel_ERROR, &sApplicationLogLevel_FATAL}}
+var mAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthType_APPLICATION_MANAGED, &sAuthType_IAM_AUTH}}
+var mAutoDeploymentMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoDeploymentMode_LATEST_REVISION, &sAutoDeploymentMode_DISABLED}}
+var mBuildConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildConfig_codeConfig, &sBuildConfig_runtimeConfig}}
+var mCodeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeConfig_s3Object}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mEndpointConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointConfig_endpointName, &sEndpointConfig_description, &sEndpointConfig_endpointType, &sEndpointConfig_authType, &sEndpointConfig_autoDeploymentMode, &sEndpointConfig_regions, &sEndpointConfig_scalingConfig, &sEndpointConfig_throttleConfig}}
+var mEndpointState = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointState_PENDING, &sEndpointState_ACTIVE, &sEndpointState_FAILED, &sEndpointState_DELETING}}
+var mEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointType_HOME_REGION, &sEndpointType_MULTI_REGION, &sEndpointType_PER_REGION}}
+var mEndpointUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointUpdateStatus_IN_PROGRESS, &sEndpointUpdateStatus_SUCCESSFUL, &sEndpointUpdateStatus_FAILED}}
+var m_EnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentVariables_key, &s_EnvironmentVariables_value}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_name, &sFilter_values}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var m_FilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValueList_member}}
+var mFunctionEndpointSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionEndpointSummary_endpointArn, &sFunctionEndpointSummary_endpointName, &sFunctionEndpointSummary_description, &sFunctionEndpointSummary_endpointType, &sFunctionEndpointSummary_domainName, &sFunctionEndpointSummary_authType, &sFunctionEndpointSummary_autoDeploymentMode, &sFunctionEndpointSummary_revisionWeights, &sFunctionEndpointSummary_regions, &sFunctionEndpointSummary_scalingConfig, &sFunctionEndpointSummary_throttleConfig, &sFunctionEndpointSummary_state, &sFunctionEndpointSummary_stateReason, &sFunctionEndpointSummary_updateStatus, &sFunctionEndpointSummary_updateStatusReason, &sFunctionEndpointSummary_createdAt, &sFunctionEndpointSummary_updatedAt}, Hash: &hFunctionEndpointSummary}
+var m_FunctionEndpointSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionEndpointSummaryList_member}}
+var mFunctionRevisionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionRevisionSummary_revisionArn, &sFunctionRevisionSummary_revisionId, &sFunctionRevisionSummary_description, &sFunctionRevisionSummary_state, &sFunctionRevisionSummary_stateReason, &sFunctionRevisionSummary_createdAt}}
+var m_FunctionRevisionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionRevisionSummaryList_member}}
+var mFunctionState = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionState_PENDING, &sFunctionState_ACTIVE, &sFunctionState_FAILED, &sFunctionState_DELETING}}
+var mFunctionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionSummary_functionName, &sFunctionSummary_functionArn, &sFunctionSummary_state, &sFunctionSummary_stateReason, &sFunctionSummary_createdAt, &sFunctionSummary_updatedAt}}
+var m_FunctionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionSummaryList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLoggingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfig_logGroup, &sLoggingConfig_applicationLogLevel, &sLoggingConfig_systemLogLevel}}
+var mRegionalEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionalEndpoint_domainName, &sRegionalEndpoint_authType, &sRegionalEndpoint_revisionWeights, &sRegionalEndpoint_scalingConfig, &sRegionalEndpoint_throttleConfig, &sRegionalEndpoint_state, &sRegionalEndpoint_stateReason, &sRegionalEndpoint_updateStatus, &sRegionalEndpoint_updateStatusReason}, Hash: &hRegionalEndpoint}
+var m_RegionalEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionalEndpoints_key, &s_RegionalEndpoints_value}}
+var m_RegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mRevisionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRevisionConfig_description, &sRevisionConfig_kmsKeyArn, &sRevisionConfig_buildConfig, &sRevisionConfig_serviceConfig}}
+var mRevisionError = smithy.SchemaMembers{List: []*smithy.Schema{&sRevisionError_attribute, &sRevisionError_errorCode, &sRevisionError_errorMessage}}
+var m_RevisionErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_RevisionErrors_member}}
+var mRevisionState = smithy.SchemaMembers{List: []*smithy.Schema{&sRevisionState_PENDING, &sRevisionState_ACTIVE, &sRevisionState_FAILED}}
+var mRevisionWeight = smithy.SchemaMembers{List: []*smithy.Schema{&sRevisionWeight_revisionId, &sRevisionWeight_weight}}
+var m_RevisionWeightList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RevisionWeightList_member}}
+var mRuntimeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeConfig_runtime}}
+var mS3Object = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Object_bucket, &sS3Object_key, &sS3Object_versionId}}
+var mScalingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingConfig_maxEnvironments}}
+var mServiceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceConfig_executionRoleArn, &sServiceConfig_timeoutSeconds, &sServiceConfig_egressNetworkConnectorArn, &sServiceConfig_maxConcurrencyPerEnvironment, &sServiceConfig_environmentVariables, &sServiceConfig_telemetryConfig}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSystemLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemLogLevel_DEBUG, &sSystemLogLevel_INFO, &sSystemLogLevel_WARN}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTelemetryConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryConfig_loggingConfig}}
+var mThrottleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottleConfig_rateLimit}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_retryAfterSeconds, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateWebFunctionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionEndpointRequest_functionName, &sCreateWebFunctionEndpointRequest_endpointName, &sCreateWebFunctionEndpointRequest_description, &sCreateWebFunctionEndpointRequest_endpointType, &sCreateWebFunctionEndpointRequest_authType, &sCreateWebFunctionEndpointRequest_autoDeploymentMode, &sCreateWebFunctionEndpointRequest_revisionWeights, &sCreateWebFunctionEndpointRequest_regions, &sCreateWebFunctionEndpointRequest_scalingConfig, &sCreateWebFunctionEndpointRequest_throttleConfig}, Hash: &hCreateWebFunctionEndpointRequest}
+var mCreateWebFunctionEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionEndpointResponse_functionArn, &sCreateWebFunctionEndpointResponse_endpointArn, &sCreateWebFunctionEndpointResponse_endpointName, &sCreateWebFunctionEndpointResponse_description, &sCreateWebFunctionEndpointResponse_endpointType, &sCreateWebFunctionEndpointResponse_domainName, &sCreateWebFunctionEndpointResponse_authType, &sCreateWebFunctionEndpointResponse_autoDeploymentMode, &sCreateWebFunctionEndpointResponse_revisionWeights, &sCreateWebFunctionEndpointResponse_regions, &sCreateWebFunctionEndpointResponse_scalingConfig, &sCreateWebFunctionEndpointResponse_throttleConfig, &sCreateWebFunctionEndpointResponse_state, &sCreateWebFunctionEndpointResponse_stateReason, &sCreateWebFunctionEndpointResponse_updateStatus, &sCreateWebFunctionEndpointResponse_updateStatusReason, &sCreateWebFunctionEndpointResponse_regionalEndpoints, &sCreateWebFunctionEndpointResponse_createdAt, &sCreateWebFunctionEndpointResponse_updatedAt}, Hash: &hCreateWebFunctionEndpointResponse}
+var mCreateWebFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionRequest_functionName, &sCreateWebFunctionRequest_revisionConfig, &sCreateWebFunctionRequest_endpointConfig, &sCreateWebFunctionRequest_tags}}
+var mCreateWebFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionResponse_functionName, &sCreateWebFunctionResponse_functionArn, &sCreateWebFunctionResponse_state, &sCreateWebFunctionResponse_stateReason, &sCreateWebFunctionResponse_createdAt, &sCreateWebFunctionResponse_updatedAt, &sCreateWebFunctionResponse_revision, &sCreateWebFunctionResponse_endpoint, &sCreateWebFunctionResponse_tags}, Hash: &hCreateWebFunctionResponse}
+var mCreateWebFunctionRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionRevisionRequest_functionName, &sCreateWebFunctionRevisionRequest_description, &sCreateWebFunctionRevisionRequest_kmsKeyArn, &sCreateWebFunctionRevisionRequest_buildConfig, &sCreateWebFunctionRevisionRequest_serviceConfig}}
+var mCreateWebFunctionRevisionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebFunctionRevisionResponse_functionArn, &sCreateWebFunctionRevisionResponse_revisionArn, &sCreateWebFunctionRevisionResponse_revisionId, &sCreateWebFunctionRevisionResponse_description, &sCreateWebFunctionRevisionResponse_kmsKeyArn, &sCreateWebFunctionRevisionResponse_buildConfig, &sCreateWebFunctionRevisionResponse_serviceConfig, &sCreateWebFunctionRevisionResponse_state, &sCreateWebFunctionRevisionResponse_stateReason, &sCreateWebFunctionRevisionResponse_errors, &sCreateWebFunctionRevisionResponse_createdAt}, Hash: &hCreateWebFunctionRevisionResponse}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_resourceArn, &sDeleteResourcePolicyRequest_revisionId}}
+var mDeleteWebFunctionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebFunctionEndpointRequest_functionName, &sDeleteWebFunctionEndpointRequest_endpointName}}
+var mDeleteWebFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebFunctionRequest_functionName}}
+var mDeleteWebFunctionRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebFunctionRevisionRequest_functionName, &sDeleteWebFunctionRevisionRequest_revisionId}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_resourceArn}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_policy, &sGetResourcePolicyResponse_revisionId}}
+var mGetWebAccountSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebAccountSettingsResponse_accountQuotas, &sGetWebAccountSettingsResponse_accountUsage}}
+var mGetWebFunctionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionEndpointRequest_functionName, &sGetWebFunctionEndpointRequest_endpointName}}
+var mGetWebFunctionEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionEndpointResponse_functionArn, &sGetWebFunctionEndpointResponse_endpointArn, &sGetWebFunctionEndpointResponse_endpointName, &sGetWebFunctionEndpointResponse_description, &sGetWebFunctionEndpointResponse_endpointType, &sGetWebFunctionEndpointResponse_domainName, &sGetWebFunctionEndpointResponse_authType, &sGetWebFunctionEndpointResponse_autoDeploymentMode, &sGetWebFunctionEndpointResponse_revisionWeights, &sGetWebFunctionEndpointResponse_regions, &sGetWebFunctionEndpointResponse_scalingConfig, &sGetWebFunctionEndpointResponse_throttleConfig, &sGetWebFunctionEndpointResponse_state, &sGetWebFunctionEndpointResponse_stateReason, &sGetWebFunctionEndpointResponse_updateStatus, &sGetWebFunctionEndpointResponse_updateStatusReason, &sGetWebFunctionEndpointResponse_regionalEndpoints, &sGetWebFunctionEndpointResponse_createdAt, &sGetWebFunctionEndpointResponse_updatedAt}, Hash: &hGetWebFunctionEndpointResponse}
+var mGetWebFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionRequest_functionName}}
+var mGetWebFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionResponse_functionName, &sGetWebFunctionResponse_functionArn, &sGetWebFunctionResponse_state, &sGetWebFunctionResponse_stateReason, &sGetWebFunctionResponse_createdAt, &sGetWebFunctionResponse_updatedAt}}
+var mGetWebFunctionRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionRevisionRequest_functionName, &sGetWebFunctionRevisionRequest_revisionId}}
+var mGetWebFunctionRevisionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWebFunctionRevisionResponse_functionArn, &sGetWebFunctionRevisionResponse_revisionArn, &sGetWebFunctionRevisionResponse_revisionId, &sGetWebFunctionRevisionResponse_description, &sGetWebFunctionRevisionResponse_kmsKeyArn, &sGetWebFunctionRevisionResponse_buildConfig, &sGetWebFunctionRevisionResponse_serviceConfig, &sGetWebFunctionRevisionResponse_state, &sGetWebFunctionRevisionResponse_stateReason, &sGetWebFunctionRevisionResponse_errors, &sGetWebFunctionRevisionResponse_createdAt}, Hash: &hGetWebFunctionRevisionResponse}
+var mListTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsRequest_resource}}
+var mListTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsResponse_tags}}
+var mListWebFunctionEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionEndpointsRequest_functionName, &sListWebFunctionEndpointsRequest_filters, &sListWebFunctionEndpointsRequest_maxResults, &sListWebFunctionEndpointsRequest_nextToken}}
+var mListWebFunctionEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionEndpointsResponse_endpoints, &sListWebFunctionEndpointsResponse_nextToken}}
+var mListWebFunctionRevisionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionRevisionsRequest_functionName, &sListWebFunctionRevisionsRequest_filters, &sListWebFunctionRevisionsRequest_maxResults, &sListWebFunctionRevisionsRequest_nextToken}}
+var mListWebFunctionRevisionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionRevisionsResponse_revisions, &sListWebFunctionRevisionsResponse_nextToken}}
+var mListWebFunctionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionsRequest_filters, &sListWebFunctionsRequest_maxResults, &sListWebFunctionsRequest_nextToken}}
+var mListWebFunctionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebFunctionsResponse_functions, &sListWebFunctionsResponse_nextToken}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_resourceArn, &sPutResourcePolicyRequest_policy, &sPutResourcePolicyRequest_revisionId}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_policy, &sPutResourcePolicyResponse_revisionId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resource, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resource, &sUntagResourceRequest_tagKeys}}
+var mUpdateWebFunctionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebFunctionEndpointRequest_functionName, &sUpdateWebFunctionEndpointRequest_endpointName, &sUpdateWebFunctionEndpointRequest_description, &sUpdateWebFunctionEndpointRequest_authType, &sUpdateWebFunctionEndpointRequest_autoDeploymentMode, &sUpdateWebFunctionEndpointRequest_revisionWeights, &sUpdateWebFunctionEndpointRequest_scalingConfig, &sUpdateWebFunctionEndpointRequest_throttleConfig}}
+var mUpdateWebFunctionEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebFunctionEndpointResponse_functionArn, &sUpdateWebFunctionEndpointResponse_endpointArn, &sUpdateWebFunctionEndpointResponse_endpointName, &sUpdateWebFunctionEndpointResponse_description, &sUpdateWebFunctionEndpointResponse_endpointType, &sUpdateWebFunctionEndpointResponse_domainName, &sUpdateWebFunctionEndpointResponse_authType, &sUpdateWebFunctionEndpointResponse_autoDeploymentMode, &sUpdateWebFunctionEndpointResponse_revisionWeights, &sUpdateWebFunctionEndpointResponse_regions, &sUpdateWebFunctionEndpointResponse_scalingConfig, &sUpdateWebFunctionEndpointResponse_throttleConfig, &sUpdateWebFunctionEndpointResponse_state, &sUpdateWebFunctionEndpointResponse_stateReason, &sUpdateWebFunctionEndpointResponse_updateStatus, &sUpdateWebFunctionEndpointResponse_updateStatusReason, &sUpdateWebFunctionEndpointResponse_regionalEndpoints, &sUpdateWebFunctionEndpointResponse_createdAt, &sUpdateWebFunctionEndpointResponse_updatedAt}, Hash: &hUpdateWebFunctionEndpointResponse}
+
+var hFunctionEndpointSummary = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 1, 0, 0, 9, 7, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 16, 12, 0, 0, 0, 17, 11, 2, 0, 0, 0, 0, 0, 0, 4, 15, 0, 0, 0, 0, 14, 0,
+	0, 0, 6, 0, 0, 8, 0, 13, 0, 0, 0, 0, 0, 3, 5, 0,
+}}
+var hRegionalEndpoint = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	5, 0, 0, 0, 0, 0, 0, 0, 0, 9, 4, 0, 0, 0, 8, 0, 0, 0, 2, 0, 0, 3, 0, 7,
+	0, 0, 0, 6, 0, 0, 1, 0,
+}}
+var hCreateWebFunctionEndpointRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	10, 2, 0, 0, 0, 8, 6, 0, 4, 1, 9, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 3, 0, 0,
+}}
+var hCreateWebFunctionEndpointResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 2, 0, 0, 10, 8, 0, 0, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 18, 13, 0, 0, 0, 19, 12, 3, 0, 0, 0, 0, 0, 0, 5, 16, 0, 0, 0, 0, 15, 0,
+	0, 0, 7, 0, 0, 9, 0, 14, 0, 0, 0, 0, 0, 4, 6, 1,
+}}
+var hCreateWebFunctionResponse = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	0, 1, 3, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 0, 7, 0, 8, 5, 0, 0, 4, 0, 0, 0,
+	0, 0, 0, 0, 9, 0, 0, 0,
+}}
+var hCreateWebFunctionRevisionResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 7, 0, 0, 0, 9,
+	6, 10, 11, 8, 0, 4, 0, 1,
+}}
+var hGetWebFunctionEndpointResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 2, 0, 0, 10, 8, 0, 0, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 18, 13, 0, 0, 0, 19, 12, 3, 0, 0, 0, 0, 0, 0, 5, 16, 0, 0, 0, 0, 15, 0,
+	0, 0, 7, 0, 0, 9, 0, 14, 0, 0, 0, 0, 0, 4, 6, 1,
+}}
+var hGetWebFunctionRevisionResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 7, 0, 0, 0, 9,
+	6, 10, 11, 8, 0, 4, 0, 1,
+}}
+var hUpdateWebFunctionEndpointResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 2, 0, 0, 10, 8, 0, 0, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 18, 13, 0, 0, 0, 19, 12, 3, 0, 0, 0, 0, 0, 0, 5, 16, 0, 0, 0, 0, 15, 0,
+	0, 0, 7, 0, 0, 9, 0, 14, 0, 0, 0, 0, 0, 4, 6, 1,
+}}
+
+var sCreateWebFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunction, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebFunction})
+var sCreateWebFunctionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionEndpoint, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebFunctionEndpoint})
+var sCreateWebFunctionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionRevision, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateWebFunctionRevision})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteWebFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunction, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebFunction})
+var sDeleteWebFunctionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunctionEndpoint, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebFunctionEndpoint})
+var sDeleteWebFunctionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunctionRevision, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebFunctionRevision})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sGetWebAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebAccountSettings, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetWebAccountSettings})
+var sGetWebFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunction, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetWebFunction})
+var sGetWebFunctionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionEndpoint, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetWebFunctionEndpoint})
+var sGetWebFunctionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionRevision, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetWebFunctionRevision})
+var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListTags})
+var sListWebFunctionEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionEndpoints, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListWebFunctionEndpoints})
+var sListWebFunctionRevisions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionRevisions, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListWebFunctionRevisions})
+var sListWebFunctions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctions, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListWebFunctions})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateWebFunctionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebFunctionEndpoint, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWebFunctionEndpoint})
+var s_LambdaWeb = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaWeb, Type: smithy.ShapeTypeService, Ext: &e_LambdaWeb})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccountQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountQuotas, Members: &mAccountQuotas, Type: smithy.ShapeTypeStructure, Ext: &eAccountQuotas})
+var sAccountQuotas_maxTotalArmVCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTotalArmVCpus", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountQuotas_maxTotalArmVCpus})
+var sAccountQuotas_maxTotalRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTotalRateLimit", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountQuotas_maxTotalRateLimit})
+var sAccountQuotas_maxRevisionsPerFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRevisionsPerFunction", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountQuotas_maxRevisionsPerFunction})
+var sAccountQuotas_maxEndpointsPerFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxEndpointsPerFunction", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountQuotas_maxEndpointsPerFunction})
+var sAccountUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountUsage, Members: &mAccountUsage, Type: smithy.ShapeTypeStructure, Ext: &eAccountUsage})
+var sAccountUsage_functionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountUsage_functionCount})
+var sApplicationLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationLogLevel, Members: &mApplicationLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eApplicationLogLevel})
+var sApplicationLogLevel_TRACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_TRACE})
+var sApplicationLogLevel_DEBUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBUG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_DEBUG})
+var sApplicationLogLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_INFO})
+var sApplicationLogLevel_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_WARN})
+var sApplicationLogLevel_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_ERROR})
+var sApplicationLogLevel_FATAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FATAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationLogLevel_FATAL})
+var sAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eAuthType})
+var sAuthType_APPLICATION_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_APPLICATION_MANAGED})
+var sAuthType_IAM_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_IAM_AUTH})
+var sAutoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eAutoDeploymentMode})
+var sAutoDeploymentMode_LATEST_REVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST_REVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoDeploymentMode_LATEST_REVISION})
+var sAutoDeploymentMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoDeploymentMode_DISABLED})
+var sBuildConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildConfig, Members: &mBuildConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildConfig})
+var sBuildConfig_codeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfig", ID: &iCodeConfig, Members: &mCodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildConfig_codeConfig})
+var sBuildConfig_runtimeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeConfig", ID: &iRuntimeConfig, Members: &mRuntimeConfig, Type: smithy.ShapeTypeStructure, Ext: &eBuildConfig_runtimeConfig})
+var sCodeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeConfig, Members: &mCodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eCodeConfig})
+var sCodeConfig_s3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eCodeConfig_s3Object})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t22, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var s_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &e_EndpointArn})
+var sEndpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointConfig, Members: &mEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eEndpointConfig})
+var sEndpointConfig_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eEndpointConfig_endpointName})
+var sEndpointConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eEndpointConfig_description})
+var sEndpointConfig_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointConfig_endpointType})
+var sEndpointConfig_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointConfig_authType})
+var sEndpointConfig_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eEndpointConfig_autoDeploymentMode})
+var sEndpointConfig_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eEndpointConfig_regions})
+var sEndpointConfig_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eEndpointConfig_scalingConfig})
+var sEndpointConfig_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eEndpointConfig_throttleConfig})
+var s_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &e_EndpointName})
+var sEndpointState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eEndpointState})
+var sEndpointState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointState_PENDING})
+var sEndpointState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointState_ACTIVE})
+var sEndpointState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointState_FAILED})
+var sEndpointState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointState_DELETING})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointType})
+var sEndpointType_HOME_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOME_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_HOME_REGION})
+var sEndpointType_MULTI_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_MULTI_REGION})
+var sEndpointType_PER_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_PER_REGION})
+var sEndpointUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eEndpointUpdateStatus})
+var sEndpointUpdateStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointUpdateStatus_IN_PROGRESS})
+var sEndpointUpdateStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointUpdateStatus_SUCCESSFUL})
+var sEndpointUpdateStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointUpdateStatus_FAILED})
+var s_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Traits: &t23, Type: smithy.ShapeTypeMap, Ext: &e_EnvironmentVariables})
+var s_EnvironmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariables_key})
+var s_EnvironmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariables_value})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_name})
+var sFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &eFilter_values})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var s_FilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &e_FilterValueList})
+var s_FilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FilterValueList_member})
+var s_FunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &e_FunctionArn})
+var sFunctionEndpointSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionEndpointSummary, Members: &mFunctionEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &eFunctionEndpointSummary})
+var sFunctionEndpointSummary_endpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_endpointArn})
+var sFunctionEndpointSummary_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_endpointName})
+var sFunctionEndpointSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_description})
+var sFunctionEndpointSummary_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eFunctionEndpointSummary_endpointType})
+var sFunctionEndpointSummary_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_domainName})
+var sFunctionEndpointSummary_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eFunctionEndpointSummary_authType})
+var sFunctionEndpointSummary_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eFunctionEndpointSummary_autoDeploymentMode})
+var sFunctionEndpointSummary_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eFunctionEndpointSummary_revisionWeights})
+var sFunctionEndpointSummary_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eFunctionEndpointSummary_regions})
+var sFunctionEndpointSummary_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eFunctionEndpointSummary_scalingConfig})
+var sFunctionEndpointSummary_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eFunctionEndpointSummary_throttleConfig})
+var sFunctionEndpointSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eFunctionEndpointSummary_state})
+var sFunctionEndpointSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_stateReason})
+var sFunctionEndpointSummary_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eFunctionEndpointSummary_updateStatus})
+var sFunctionEndpointSummary_updateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFunctionEndpointSummary_updateStatusReason})
+var sFunctionEndpointSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eFunctionEndpointSummary_createdAt})
+var sFunctionEndpointSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eFunctionEndpointSummary_updatedAt})
+var s_FunctionEndpointSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionEndpointSummaryList, Members: &m_FunctionEndpointSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FunctionEndpointSummaryList})
+var s_FunctionEndpointSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunctionEndpointSummary, Members: &mFunctionEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FunctionEndpointSummaryList_member})
+var s_FunctionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionName, Type: smithy.ShapeTypeString, Ext: &e_FunctionName})
+var sFunctionRevisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionRevisionSummary, Members: &mFunctionRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eFunctionRevisionSummary})
+var sFunctionRevisionSummary_revisionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionArn", ID: &i_RevisionArn, Type: smithy.ShapeTypeString, Ext: &eFunctionRevisionSummary_revisionArn})
+var sFunctionRevisionSummary_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eFunctionRevisionSummary_revisionId})
+var sFunctionRevisionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eFunctionRevisionSummary_description})
+var sFunctionRevisionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iRevisionState, Members: &mRevisionState, Type: smithy.ShapeTypeEnum, Ext: &eFunctionRevisionSummary_state})
+var sFunctionRevisionSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFunctionRevisionSummary_stateReason})
+var sFunctionRevisionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eFunctionRevisionSummary_createdAt})
+var s_FunctionRevisionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionRevisionSummaryList, Members: &m_FunctionRevisionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FunctionRevisionSummaryList})
+var s_FunctionRevisionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunctionRevisionSummary, Members: &mFunctionRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FunctionRevisionSummaryList_member})
+var sFunctionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionState, Members: &mFunctionState, Type: smithy.ShapeTypeEnum, Ext: &eFunctionState})
+var sFunctionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionState_PENDING})
+var sFunctionState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionState_ACTIVE})
+var sFunctionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionState_FAILED})
+var sFunctionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFunctionState_DELETING})
+var sFunctionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionSummary, Members: &mFunctionSummary, Type: smithy.ShapeTypeStructure, Ext: &eFunctionSummary})
+var sFunctionSummary_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Type: smithy.ShapeTypeString, Ext: &eFunctionSummary_functionName})
+var sFunctionSummary_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eFunctionSummary_functionArn})
+var sFunctionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iFunctionState, Members: &mFunctionState, Type: smithy.ShapeTypeEnum, Ext: &eFunctionSummary_state})
+var sFunctionSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFunctionSummary_stateReason})
+var sFunctionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eFunctionSummary_createdAt})
+var sFunctionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eFunctionSummary_updatedAt})
+var s_FunctionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionSummaryList, Members: &m_FunctionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FunctionSummaryList})
+var s_FunctionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFunctionSummary, Members: &mFunctionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FunctionSummaryList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sLoggingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfig, Members: &mLoggingConfig, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfig})
+var sLoggingConfig_logGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroup", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLoggingConfig_logGroup})
+var sLoggingConfig_applicationLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationLogLevel", ID: &iApplicationLogLevel, Members: &mApplicationLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eLoggingConfig_applicationLogLevel})
+var sLoggingConfig_systemLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemLogLevel", ID: &iSystemLogLevel, Members: &mSystemLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eLoggingConfig_systemLogLevel})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString, Ext: &e_PolicyRevisionId})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var sRegionalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionalEndpoint, Members: &mRegionalEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eRegionalEndpoint})
+var sRegionalEndpoint_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eRegionalEndpoint_domainName})
+var sRegionalEndpoint_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eRegionalEndpoint_authType})
+var sRegionalEndpoint_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eRegionalEndpoint_revisionWeights})
+var sRegionalEndpoint_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eRegionalEndpoint_scalingConfig})
+var sRegionalEndpoint_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eRegionalEndpoint_throttleConfig})
+var sRegionalEndpoint_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eRegionalEndpoint_state})
+var sRegionalEndpoint_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegionalEndpoint_stateReason})
+var sRegionalEndpoint_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegionalEndpoint_updateStatus})
+var sRegionalEndpoint_updateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegionalEndpoint_updateStatusReason})
+var s_RegionalEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionalEndpoints, Members: &m_RegionalEndpoints, Type: smithy.ShapeTypeMap, Ext: &e_RegionalEndpoints})
+var s_RegionalEndpoints_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_RegionalEndpoints_key})
+var s_RegionalEndpoints_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRegionalEndpoint, Members: &mRegionalEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_RegionalEndpoints_value})
+var s_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &e_RegionList})
+var s_RegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_RegionList_member})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &e_ResourcePolicy})
+var s_RevisionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionArn, Type: smithy.ShapeTypeString, Ext: &e_RevisionArn})
+var sRevisionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionConfig, Members: &mRevisionConfig, Type: smithy.ShapeTypeStructure, Ext: &eRevisionConfig})
+var sRevisionConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eRevisionConfig_description})
+var sRevisionConfig_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eRevisionConfig_kmsKeyArn})
+var sRevisionConfig_buildConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildConfig", ID: &iBuildConfig, Members: &mBuildConfig, Type: smithy.ShapeTypeStructure, Ext: &eRevisionConfig_buildConfig})
+var sRevisionConfig_serviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceConfig", ID: &iServiceConfig, Members: &mServiceConfig, Type: smithy.ShapeTypeStructure, Ext: &eRevisionConfig_serviceConfig})
+var sRevisionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionError, Members: &mRevisionError, Type: smithy.ShapeTypeStructure, Ext: &eRevisionError})
+var sRevisionError_attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attribute", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevisionError_attribute})
+var sRevisionError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevisionError_errorCode})
+var sRevisionError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevisionError_errorMessage})
+var s_RevisionErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionErrors, Members: &m_RevisionErrors, Type: smithy.ShapeTypeList, Ext: &e_RevisionErrors})
+var s_RevisionErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevisionError, Members: &mRevisionError, Type: smithy.ShapeTypeStructure, Ext: &e_RevisionErrors_member})
+var s_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &e_RevisionId})
+var sRevisionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionState, Members: &mRevisionState, Type: smithy.ShapeTypeEnum, Ext: &eRevisionState})
+var sRevisionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevisionState_PENDING})
+var sRevisionState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevisionState_ACTIVE})
+var sRevisionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevisionState_FAILED})
+var sRevisionWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionWeight, Members: &mRevisionWeight, Type: smithy.ShapeTypeStructure, Ext: &eRevisionWeight})
+var sRevisionWeight_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eRevisionWeight_revisionId})
+var sRevisionWeight_weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weight", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRevisionWeight_weight})
+var s_RevisionWeightList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &e_RevisionWeightList})
+var s_RevisionWeightList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevisionWeight, Members: &mRevisionWeight, Type: smithy.ShapeTypeStructure, Ext: &e_RevisionWeightList_member})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sRuntimeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeConfig, Members: &mRuntimeConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeConfig})
+var sRuntimeConfig_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRuntimeConfig_runtime})
+var sS3Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eS3Object})
+var sS3Object_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Object_bucket})
+var sS3Object_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Object_key})
+var sS3Object_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Object_versionId})
+var sScalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eScalingConfig})
+var sScalingConfig_maxEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxEnvironments", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfig_maxEnvironments})
+var sServiceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceConfig, Members: &mServiceConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceConfig})
+var sServiceConfig_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eServiceConfig_executionRoleArn})
+var sServiceConfig_timeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eServiceConfig_timeoutSeconds})
+var sServiceConfig_egressNetworkConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectorArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceConfig_egressNetworkConnectorArn})
+var sServiceConfig_maxConcurrencyPerEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConcurrencyPerEnvironment", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eServiceConfig_maxConcurrencyPerEnvironment})
+var sServiceConfig_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Traits: &t27, Type: smithy.ShapeTypeMap, Ext: &eServiceConfig_environmentVariables})
+var sServiceConfig_telemetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetryConfig", ID: &iTelemetryConfig, Members: &mTelemetryConfig, Type: smithy.ShapeTypeStructure, Ext: &eServiceConfig_telemetryConfig})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSystemLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemLogLevel, Members: &mSystemLogLevel, Type: smithy.ShapeTypeEnum, Ext: &eSystemLogLevel})
+var sSystemLogLevel_DEBUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEBUG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSystemLogLevel_DEBUG})
+var sSystemLogLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSystemLogLevel_INFO})
+var sSystemLogLevel_WARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSystemLogLevel_WARN})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sTelemetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryConfig, Members: &mTelemetryConfig, Type: smithy.ShapeTypeStructure, Ext: &eTelemetryConfig})
+var sTelemetryConfig_loggingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfig", ID: &iLoggingConfig, Members: &mLoggingConfig, Type: smithy.ShapeTypeStructure, Ext: &eTelemetryConfig_loggingConfig})
+var sThrottleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eThrottleConfig})
+var sThrottleConfig_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eThrottleConfig_rateLimit})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateWebFunctionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionEndpointRequest, Members: &mCreateWebFunctionEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointRequest})
+var sCreateWebFunctionEndpointRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointRequest_functionName})
+var sCreateWebFunctionEndpointRequest_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointRequest_endpointName})
+var sCreateWebFunctionEndpointRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointRequest_description})
+var sCreateWebFunctionEndpointRequest_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointRequest_endpointType})
+var sCreateWebFunctionEndpointRequest_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointRequest_authType})
+var sCreateWebFunctionEndpointRequest_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointRequest_autoDeploymentMode})
+var sCreateWebFunctionEndpointRequest_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eCreateWebFunctionEndpointRequest_revisionWeights})
+var sCreateWebFunctionEndpointRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eCreateWebFunctionEndpointRequest_regions})
+var sCreateWebFunctionEndpointRequest_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointRequest_scalingConfig})
+var sCreateWebFunctionEndpointRequest_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointRequest_throttleConfig})
+var sCreateWebFunctionEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionEndpointResponse, Members: &mCreateWebFunctionEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointResponse})
+var sCreateWebFunctionEndpointResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_functionArn})
+var sCreateWebFunctionEndpointResponse_endpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_endpointArn})
+var sCreateWebFunctionEndpointResponse_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_endpointName})
+var sCreateWebFunctionEndpointResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_description})
+var sCreateWebFunctionEndpointResponse_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointResponse_endpointType})
+var sCreateWebFunctionEndpointResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_domainName})
+var sCreateWebFunctionEndpointResponse_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointResponse_authType})
+var sCreateWebFunctionEndpointResponse_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointResponse_autoDeploymentMode})
+var sCreateWebFunctionEndpointResponse_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eCreateWebFunctionEndpointResponse_revisionWeights})
+var sCreateWebFunctionEndpointResponse_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eCreateWebFunctionEndpointResponse_regions})
+var sCreateWebFunctionEndpointResponse_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointResponse_scalingConfig})
+var sCreateWebFunctionEndpointResponse_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionEndpointResponse_throttleConfig})
+var sCreateWebFunctionEndpointResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointResponse_state})
+var sCreateWebFunctionEndpointResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_stateReason})
+var sCreateWebFunctionEndpointResponse_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionEndpointResponse_updateStatus})
+var sCreateWebFunctionEndpointResponse_updateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionEndpointResponse_updateStatusReason})
+var sCreateWebFunctionEndpointResponse_regionalEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionalEndpoints", ID: &i_RegionalEndpoints, Members: &m_RegionalEndpoints, Type: smithy.ShapeTypeMap, Ext: &eCreateWebFunctionEndpointResponse_regionalEndpoints})
+var sCreateWebFunctionEndpointResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWebFunctionEndpointResponse_createdAt})
+var sCreateWebFunctionEndpointResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWebFunctionEndpointResponse_updatedAt})
+var sCreateWebFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionRequest, Members: &mCreateWebFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRequest})
+var sCreateWebFunctionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRequest_functionName})
+var sCreateWebFunctionRequest_revisionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionConfig", ID: &iRevisionConfig, Members: &mRevisionConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRequest_revisionConfig})
+var sCreateWebFunctionRequest_endpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointConfig", ID: &iEndpointConfig, Members: &mEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRequest_endpointConfig})
+var sCreateWebFunctionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateWebFunctionRequest_tags})
+var sCreateWebFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionResponse, Members: &mCreateWebFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionResponse})
+var sCreateWebFunctionResponse_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionResponse_functionName})
+var sCreateWebFunctionResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionResponse_functionArn})
+var sCreateWebFunctionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iFunctionState, Members: &mFunctionState, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionResponse_state})
+var sCreateWebFunctionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionResponse_stateReason})
+var sCreateWebFunctionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWebFunctionResponse_createdAt})
+var sCreateWebFunctionResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWebFunctionResponse_updatedAt})
+var sCreateWebFunctionResponse_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &iFunctionRevisionSummary, Members: &mFunctionRevisionSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionResponse_revision})
+var sCreateWebFunctionResponse_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &iFunctionEndpointSummary, Members: &mFunctionEndpointSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionResponse_endpoint})
+var sCreateWebFunctionResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateWebFunctionResponse_tags})
+var sCreateWebFunctionRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionRevisionRequest, Members: &mCreateWebFunctionRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionRequest})
+var sCreateWebFunctionRevisionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionRequest_functionName})
+var sCreateWebFunctionRevisionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionRequest_description})
+var sCreateWebFunctionRevisionRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionRequest_kmsKeyArn})
+var sCreateWebFunctionRevisionRequest_buildConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildConfig", ID: &iBuildConfig, Members: &mBuildConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionRequest_buildConfig})
+var sCreateWebFunctionRevisionRequest_serviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceConfig", ID: &iServiceConfig, Members: &mServiceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionRequest_serviceConfig})
+var sCreateWebFunctionRevisionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebFunctionRevisionResponse, Members: &mCreateWebFunctionRevisionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionResponse})
+var sCreateWebFunctionRevisionResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_functionArn})
+var sCreateWebFunctionRevisionResponse_revisionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionArn", ID: &i_RevisionArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_revisionArn})
+var sCreateWebFunctionRevisionResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_revisionId})
+var sCreateWebFunctionRevisionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_description})
+var sCreateWebFunctionRevisionResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_kmsKeyArn})
+var sCreateWebFunctionRevisionResponse_buildConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildConfig", ID: &iBuildConfig, Members: &mBuildConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionResponse_buildConfig})
+var sCreateWebFunctionRevisionResponse_serviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceConfig", ID: &iServiceConfig, Members: &mServiceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateWebFunctionRevisionResponse_serviceConfig})
+var sCreateWebFunctionRevisionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iRevisionState, Members: &mRevisionState, Type: smithy.ShapeTypeEnum, Ext: &eCreateWebFunctionRevisionResponse_state})
+var sCreateWebFunctionRevisionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWebFunctionRevisionResponse_stateReason})
+var sCreateWebFunctionRevisionResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_RevisionErrors, Members: &m_RevisionErrors, Type: smithy.ShapeTypeList, Ext: &eCreateWebFunctionRevisionResponse_errors})
+var sCreateWebFunctionRevisionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWebFunctionRevisionResponse_createdAt})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyRequest})
+var sDeleteResourcePolicyRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_resourceArn})
+var sDeleteResourcePolicyRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_PolicyRevisionId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_revisionId})
+var sDeleteWebFunctionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunctionEndpointRequest, Members: &mDeleteWebFunctionEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebFunctionEndpointRequest})
+var sDeleteWebFunctionEndpointRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteWebFunctionEndpointRequest_functionName})
+var sDeleteWebFunctionEndpointRequest_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteWebFunctionEndpointRequest_endpointName})
+var sDeleteWebFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunctionRequest, Members: &mDeleteWebFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebFunctionRequest})
+var sDeleteWebFunctionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteWebFunctionRequest_functionName})
+var sDeleteWebFunctionRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebFunctionRevisionRequest, Members: &mDeleteWebFunctionRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebFunctionRevisionRequest})
+var sDeleteWebFunctionRevisionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteWebFunctionRevisionRequest_functionName})
+var sDeleteWebFunctionRevisionRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eDeleteWebFunctionRevisionRequest_revisionId})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyRequest})
+var sGetResourcePolicyRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyRequest_resourceArn})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyResponse})
+var sGetResourcePolicyResponse_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicy, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_policy})
+var sGetResourcePolicyResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_PolicyRevisionId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_revisionId})
+var sGetWebAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebAccountSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebAccountSettingsRequest})
+var sGetWebAccountSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebAccountSettingsResponse, Members: &mGetWebAccountSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebAccountSettingsResponse})
+var sGetWebAccountSettingsResponse_accountQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountQuotas", ID: &iAccountQuotas, Members: &mAccountQuotas, Type: smithy.ShapeTypeStructure, Ext: &eGetWebAccountSettingsResponse_accountQuotas})
+var sGetWebAccountSettingsResponse_accountUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountUsage", ID: &iAccountUsage, Members: &mAccountUsage, Type: smithy.ShapeTypeStructure, Ext: &eGetWebAccountSettingsResponse_accountUsage})
+var sGetWebFunctionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionEndpointRequest, Members: &mGetWebFunctionEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionEndpointRequest})
+var sGetWebFunctionEndpointRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointRequest_functionName})
+var sGetWebFunctionEndpointRequest_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointRequest_endpointName})
+var sGetWebFunctionEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionEndpointResponse, Members: &mGetWebFunctionEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionEndpointResponse})
+var sGetWebFunctionEndpointResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_functionArn})
+var sGetWebFunctionEndpointResponse_endpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_endpointArn})
+var sGetWebFunctionEndpointResponse_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_endpointName})
+var sGetWebFunctionEndpointResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_description})
+var sGetWebFunctionEndpointResponse_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionEndpointResponse_endpointType})
+var sGetWebFunctionEndpointResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_domainName})
+var sGetWebFunctionEndpointResponse_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionEndpointResponse_authType})
+var sGetWebFunctionEndpointResponse_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionEndpointResponse_autoDeploymentMode})
+var sGetWebFunctionEndpointResponse_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eGetWebFunctionEndpointResponse_revisionWeights})
+var sGetWebFunctionEndpointResponse_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eGetWebFunctionEndpointResponse_regions})
+var sGetWebFunctionEndpointResponse_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionEndpointResponse_scalingConfig})
+var sGetWebFunctionEndpointResponse_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionEndpointResponse_throttleConfig})
+var sGetWebFunctionEndpointResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionEndpointResponse_state})
+var sGetWebFunctionEndpointResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_stateReason})
+var sGetWebFunctionEndpointResponse_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionEndpointResponse_updateStatus})
+var sGetWebFunctionEndpointResponse_updateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionEndpointResponse_updateStatusReason})
+var sGetWebFunctionEndpointResponse_regionalEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionalEndpoints", ID: &i_RegionalEndpoints, Members: &m_RegionalEndpoints, Type: smithy.ShapeTypeMap, Ext: &eGetWebFunctionEndpointResponse_regionalEndpoints})
+var sGetWebFunctionEndpointResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebFunctionEndpointResponse_createdAt})
+var sGetWebFunctionEndpointResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebFunctionEndpointResponse_updatedAt})
+var sGetWebFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionRequest, Members: &mGetWebFunctionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionRequest})
+var sGetWebFunctionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRequest_functionName})
+var sGetWebFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionResponse, Members: &mGetWebFunctionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionResponse})
+var sGetWebFunctionResponse_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionResponse_functionName})
+var sGetWebFunctionResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionResponse_functionArn})
+var sGetWebFunctionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iFunctionState, Members: &mFunctionState, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionResponse_state})
+var sGetWebFunctionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionResponse_stateReason})
+var sGetWebFunctionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebFunctionResponse_createdAt})
+var sGetWebFunctionResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebFunctionResponse_updatedAt})
+var sGetWebFunctionRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionRevisionRequest, Members: &mGetWebFunctionRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionRevisionRequest})
+var sGetWebFunctionRevisionRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionRequest_functionName})
+var sGetWebFunctionRevisionRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionRequest_revisionId})
+var sGetWebFunctionRevisionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWebFunctionRevisionResponse, Members: &mGetWebFunctionRevisionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionRevisionResponse})
+var sGetWebFunctionRevisionResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_functionArn})
+var sGetWebFunctionRevisionResponse_revisionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionArn", ID: &i_RevisionArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_revisionArn})
+var sGetWebFunctionRevisionResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_revisionId})
+var sGetWebFunctionRevisionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_description})
+var sGetWebFunctionRevisionResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_kmsKeyArn})
+var sGetWebFunctionRevisionResponse_buildConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildConfig", ID: &iBuildConfig, Members: &mBuildConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionRevisionResponse_buildConfig})
+var sGetWebFunctionRevisionResponse_serviceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceConfig", ID: &iServiceConfig, Members: &mServiceConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetWebFunctionRevisionResponse_serviceConfig})
+var sGetWebFunctionRevisionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iRevisionState, Members: &mRevisionState, Type: smithy.ShapeTypeEnum, Ext: &eGetWebFunctionRevisionResponse_state})
+var sGetWebFunctionRevisionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWebFunctionRevisionResponse_stateReason})
+var sGetWebFunctionRevisionResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_RevisionErrors, Members: &m_RevisionErrors, Type: smithy.ShapeTypeList, Ext: &eGetWebFunctionRevisionResponse_errors})
+var sGetWebFunctionRevisionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWebFunctionRevisionResponse_createdAt})
+var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsRequest})
+var sListTagsRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListTagsRequest_resource})
+var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsResponse})
+var sListTagsResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t36, Type: smithy.ShapeTypeMap, Ext: &eListTagsResponse_tags})
+var sListWebFunctionEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionEndpointsRequest, Members: &mListWebFunctionEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionEndpointsRequest})
+var sListWebFunctionEndpointsRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionEndpointsRequest_functionName})
+var sListWebFunctionEndpointsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionEndpointsRequest_filters})
+var sListWebFunctionEndpointsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWebFunctionEndpointsRequest_maxResults})
+var sListWebFunctionEndpointsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionEndpointsRequest_nextToken})
+var sListWebFunctionEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionEndpointsResponse, Members: &mListWebFunctionEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionEndpointsResponse})
+var sListWebFunctionEndpointsResponse_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_FunctionEndpointSummaryList, Members: &m_FunctionEndpointSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionEndpointsResponse_endpoints})
+var sListWebFunctionEndpointsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionEndpointsResponse_nextToken})
+var sListWebFunctionRevisionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionRevisionsRequest, Members: &mListWebFunctionRevisionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionRevisionsRequest})
+var sListWebFunctionRevisionsRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionRevisionsRequest_functionName})
+var sListWebFunctionRevisionsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionRevisionsRequest_filters})
+var sListWebFunctionRevisionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWebFunctionRevisionsRequest_maxResults})
+var sListWebFunctionRevisionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionRevisionsRequest_nextToken})
+var sListWebFunctionRevisionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionRevisionsResponse, Members: &mListWebFunctionRevisionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionRevisionsResponse})
+var sListWebFunctionRevisionsResponse_revisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisions", ID: &i_FunctionRevisionSummaryList, Members: &m_FunctionRevisionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionRevisionsResponse_revisions})
+var sListWebFunctionRevisionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionRevisionsResponse_nextToken})
+var sListWebFunctionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionsRequest, Members: &mListWebFunctionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionsRequest})
+var sListWebFunctionsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionsRequest_filters})
+var sListWebFunctionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWebFunctionsRequest_maxResults})
+var sListWebFunctionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionsRequest_nextToken})
+var sListWebFunctionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebFunctionsResponse, Members: &mListWebFunctionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWebFunctionsResponse})
+var sListWebFunctionsResponse_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_FunctionSummaryList, Members: &m_FunctionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWebFunctionsResponse_functions})
+var sListWebFunctionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebFunctionsResponse_nextToken})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyRequest})
+var sPutResourcePolicyRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_resourceArn})
+var sPutResourcePolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicy, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_policy})
+var sPutResourcePolicyRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_PolicyRevisionId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_revisionId})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyResponse})
+var sPutResourcePolicyResponse_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicy, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_policy})
+var sPutResourcePolicyResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_PolicyRevisionId, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_revisionId})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resource})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t36, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resource})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateWebFunctionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebFunctionEndpointRequest, Members: &mUpdateWebFunctionEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointRequest})
+var sUpdateWebFunctionEndpointRequest_functionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionName", ID: &i_FunctionName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointRequest_functionName})
+var sUpdateWebFunctionEndpointRequest_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointRequest_endpointName})
+var sUpdateWebFunctionEndpointRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointRequest_description})
+var sUpdateWebFunctionEndpointRequest_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointRequest_authType})
+var sUpdateWebFunctionEndpointRequest_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointRequest_autoDeploymentMode})
+var sUpdateWebFunctionEndpointRequest_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eUpdateWebFunctionEndpointRequest_revisionWeights})
+var sUpdateWebFunctionEndpointRequest_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointRequest_scalingConfig})
+var sUpdateWebFunctionEndpointRequest_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointRequest_throttleConfig})
+var sUpdateWebFunctionEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebFunctionEndpointResponse, Members: &mUpdateWebFunctionEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointResponse})
+var sUpdateWebFunctionEndpointResponse_functionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functionArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_functionArn})
+var sUpdateWebFunctionEndpointResponse_endpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_endpointArn})
+var sUpdateWebFunctionEndpointResponse_endpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointName", ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_endpointName})
+var sUpdateWebFunctionEndpointResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_description})
+var sUpdateWebFunctionEndpointResponse_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointResponse_endpointType})
+var sUpdateWebFunctionEndpointResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_domainName})
+var sUpdateWebFunctionEndpointResponse_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointResponse_authType})
+var sUpdateWebFunctionEndpointResponse_autoDeploymentMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoDeploymentMode", ID: &iAutoDeploymentMode, Members: &mAutoDeploymentMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointResponse_autoDeploymentMode})
+var sUpdateWebFunctionEndpointResponse_revisionWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionWeights", ID: &i_RevisionWeightList, Members: &m_RevisionWeightList, Type: smithy.ShapeTypeList, Ext: &eUpdateWebFunctionEndpointResponse_revisionWeights})
+var sUpdateWebFunctionEndpointResponse_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eUpdateWebFunctionEndpointResponse_regions})
+var sUpdateWebFunctionEndpointResponse_scalingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfig", ID: &iScalingConfig, Members: &mScalingConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointResponse_scalingConfig})
+var sUpdateWebFunctionEndpointResponse_throttleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttleConfig", ID: &iThrottleConfig, Members: &mThrottleConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWebFunctionEndpointResponse_throttleConfig})
+var sUpdateWebFunctionEndpointResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEndpointState, Members: &mEndpointState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointResponse_state})
+var sUpdateWebFunctionEndpointResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_stateReason})
+var sUpdateWebFunctionEndpointResponse_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iEndpointUpdateStatus, Members: &mEndpointUpdateStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateWebFunctionEndpointResponse_updateStatus})
+var sUpdateWebFunctionEndpointResponse_updateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWebFunctionEndpointResponse_updateStatusReason})
+var sUpdateWebFunctionEndpointResponse_regionalEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionalEndpoints", ID: &i_RegionalEndpoints, Members: &m_RegionalEndpoints, Type: smithy.ShapeTypeMap, Ext: &eUpdateWebFunctionEndpointResponse_regionalEndpoints})
+var sUpdateWebFunctionEndpointResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateWebFunctionEndpointResponse_createdAt})
+var sUpdateWebFunctionEndpointResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateWebFunctionEndpointResponse_updatedAt})
+
+var CreateWebFunction = &sCreateWebFunction
+
+var CreateWebFunctionEndpoint = &sCreateWebFunctionEndpoint
+
+var CreateWebFunctionRevision = &sCreateWebFunctionRevision
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteWebFunction = &sDeleteWebFunction
+
+var DeleteWebFunctionEndpoint = &sDeleteWebFunctionEndpoint
+
+var DeleteWebFunctionRevision = &sDeleteWebFunctionRevision
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetWebAccountSettings = &sGetWebAccountSettings
+
+var GetWebFunction = &sGetWebFunction
+
+var GetWebFunctionEndpoint = &sGetWebFunctionEndpoint
+
+var GetWebFunctionRevision = &sGetWebFunctionRevision
+
+var ListTags = &sListTags
+
+var ListWebFunctionEndpoints = &sListWebFunctionEndpoints
+
+var ListWebFunctionRevisions = &sListWebFunctionRevisions
+
+var ListWebFunctions = &sListWebFunctions
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateWebFunctionEndpoint = &sUpdateWebFunctionEndpoint
+
+var _LambdaWeb = &s_LambdaWeb
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AccountQuotas = &sAccountQuotas
+var AccountQuotas_maxTotalArmVCpus = &sAccountQuotas_maxTotalArmVCpus
+var AccountQuotas_maxTotalRateLimit = &sAccountQuotas_maxTotalRateLimit
+var AccountQuotas_maxRevisionsPerFunction = &sAccountQuotas_maxRevisionsPerFunction
+var AccountQuotas_maxEndpointsPerFunction = &sAccountQuotas_maxEndpointsPerFunction
+
+var AccountUsage = &sAccountUsage
+var AccountUsage_functionCount = &sAccountUsage_functionCount
+
+var ApplicationLogLevel = &sApplicationLogLevel
+var ApplicationLogLevel_TRACE = &sApplicationLogLevel_TRACE
+var ApplicationLogLevel_DEBUG = &sApplicationLogLevel_DEBUG
+var ApplicationLogLevel_INFO = &sApplicationLogLevel_INFO
+var ApplicationLogLevel_WARN = &sApplicationLogLevel_WARN
+var ApplicationLogLevel_ERROR = &sApplicationLogLevel_ERROR
+var ApplicationLogLevel_FATAL = &sApplicationLogLevel_FATAL
+
+var AuthType = &sAuthType
+var AuthType_APPLICATION_MANAGED = &sAuthType_APPLICATION_MANAGED
+var AuthType_IAM_AUTH = &sAuthType_IAM_AUTH
+
+var AutoDeploymentMode = &sAutoDeploymentMode
+var AutoDeploymentMode_LATEST_REVISION = &sAutoDeploymentMode_LATEST_REVISION
+var AutoDeploymentMode_DISABLED = &sAutoDeploymentMode_DISABLED
+
+var BuildConfig = &sBuildConfig
+var BuildConfig_codeConfig = &sBuildConfig_codeConfig
+var BuildConfig_runtimeConfig = &sBuildConfig_runtimeConfig
+
+var CodeConfig = &sCodeConfig
+var CodeConfig_s3Object = &sCodeConfig_s3Object
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _DateTime = &s_DateTime
+
+var _Description = &s_Description
+
+var _DomainName = &s_DomainName
+
+var _EndpointArn = &s_EndpointArn
+
+var EndpointConfig = &sEndpointConfig
+var EndpointConfig_endpointName = &sEndpointConfig_endpointName
+var EndpointConfig_description = &sEndpointConfig_description
+var EndpointConfig_endpointType = &sEndpointConfig_endpointType
+var EndpointConfig_authType = &sEndpointConfig_authType
+var EndpointConfig_autoDeploymentMode = &sEndpointConfig_autoDeploymentMode
+var EndpointConfig_regions = &sEndpointConfig_regions
+var EndpointConfig_scalingConfig = &sEndpointConfig_scalingConfig
+var EndpointConfig_throttleConfig = &sEndpointConfig_throttleConfig
+
+var _EndpointName = &s_EndpointName
+
+var EndpointState = &sEndpointState
+var EndpointState_PENDING = &sEndpointState_PENDING
+var EndpointState_ACTIVE = &sEndpointState_ACTIVE
+var EndpointState_FAILED = &sEndpointState_FAILED
+var EndpointState_DELETING = &sEndpointState_DELETING
+
+var EndpointType = &sEndpointType
+var EndpointType_HOME_REGION = &sEndpointType_HOME_REGION
+var EndpointType_MULTI_REGION = &sEndpointType_MULTI_REGION
+var EndpointType_PER_REGION = &sEndpointType_PER_REGION
+
+var EndpointUpdateStatus = &sEndpointUpdateStatus
+var EndpointUpdateStatus_IN_PROGRESS = &sEndpointUpdateStatus_IN_PROGRESS
+var EndpointUpdateStatus_SUCCESSFUL = &sEndpointUpdateStatus_SUCCESSFUL
+var EndpointUpdateStatus_FAILED = &sEndpointUpdateStatus_FAILED
+
+var _EnvironmentVariables = &s_EnvironmentVariables
+var _EnvironmentVariables_key = &s_EnvironmentVariables_key
+var _EnvironmentVariables_value = &s_EnvironmentVariables_value
+
+var Filter = &sFilter
+var Filter_name = &sFilter_name
+var Filter_values = &sFilter_values
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _FilterValueList = &s_FilterValueList
+var _FilterValueList_member = &s_FilterValueList_member
+
+var _FunctionArn = &s_FunctionArn
+
+var FunctionEndpointSummary = &sFunctionEndpointSummary
+var FunctionEndpointSummary_endpointArn = &sFunctionEndpointSummary_endpointArn
+var FunctionEndpointSummary_endpointName = &sFunctionEndpointSummary_endpointName
+var FunctionEndpointSummary_description = &sFunctionEndpointSummary_description
+var FunctionEndpointSummary_endpointType = &sFunctionEndpointSummary_endpointType
+var FunctionEndpointSummary_domainName = &sFunctionEndpointSummary_domainName
+var FunctionEndpointSummary_authType = &sFunctionEndpointSummary_authType
+var FunctionEndpointSummary_autoDeploymentMode = &sFunctionEndpointSummary_autoDeploymentMode
+var FunctionEndpointSummary_revisionWeights = &sFunctionEndpointSummary_revisionWeights
+var FunctionEndpointSummary_regions = &sFunctionEndpointSummary_regions
+var FunctionEndpointSummary_scalingConfig = &sFunctionEndpointSummary_scalingConfig
+var FunctionEndpointSummary_throttleConfig = &sFunctionEndpointSummary_throttleConfig
+var FunctionEndpointSummary_state = &sFunctionEndpointSummary_state
+var FunctionEndpointSummary_stateReason = &sFunctionEndpointSummary_stateReason
+var FunctionEndpointSummary_updateStatus = &sFunctionEndpointSummary_updateStatus
+var FunctionEndpointSummary_updateStatusReason = &sFunctionEndpointSummary_updateStatusReason
+var FunctionEndpointSummary_createdAt = &sFunctionEndpointSummary_createdAt
+var FunctionEndpointSummary_updatedAt = &sFunctionEndpointSummary_updatedAt
+
+var _FunctionEndpointSummaryList = &s_FunctionEndpointSummaryList
+var _FunctionEndpointSummaryList_member = &s_FunctionEndpointSummaryList_member
+
+var _FunctionName = &s_FunctionName
+
+var FunctionRevisionSummary = &sFunctionRevisionSummary
+var FunctionRevisionSummary_revisionArn = &sFunctionRevisionSummary_revisionArn
+var FunctionRevisionSummary_revisionId = &sFunctionRevisionSummary_revisionId
+var FunctionRevisionSummary_description = &sFunctionRevisionSummary_description
+var FunctionRevisionSummary_state = &sFunctionRevisionSummary_state
+var FunctionRevisionSummary_stateReason = &sFunctionRevisionSummary_stateReason
+var FunctionRevisionSummary_createdAt = &sFunctionRevisionSummary_createdAt
+
+var _FunctionRevisionSummaryList = &s_FunctionRevisionSummaryList
+var _FunctionRevisionSummaryList_member = &s_FunctionRevisionSummaryList_member
+
+var FunctionState = &sFunctionState
+var FunctionState_PENDING = &sFunctionState_PENDING
+var FunctionState_ACTIVE = &sFunctionState_ACTIVE
+var FunctionState_FAILED = &sFunctionState_FAILED
+var FunctionState_DELETING = &sFunctionState_DELETING
+
+var FunctionSummary = &sFunctionSummary
+var FunctionSummary_functionName = &sFunctionSummary_functionName
+var FunctionSummary_functionArn = &sFunctionSummary_functionArn
+var FunctionSummary_state = &sFunctionSummary_state
+var FunctionSummary_stateReason = &sFunctionSummary_stateReason
+var FunctionSummary_createdAt = &sFunctionSummary_createdAt
+var FunctionSummary_updatedAt = &sFunctionSummary_updatedAt
+
+var _FunctionSummaryList = &s_FunctionSummaryList
+var _FunctionSummaryList_member = &s_FunctionSummaryList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var LoggingConfig = &sLoggingConfig
+var LoggingConfig_logGroup = &sLoggingConfig_logGroup
+var LoggingConfig_applicationLogLevel = &sLoggingConfig_applicationLogLevel
+var LoggingConfig_systemLogLevel = &sLoggingConfig_systemLogLevel
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var _PolicyRevisionId = &s_PolicyRevisionId
+
+var _Region = &s_Region
+
+var RegionalEndpoint = &sRegionalEndpoint
+var RegionalEndpoint_domainName = &sRegionalEndpoint_domainName
+var RegionalEndpoint_authType = &sRegionalEndpoint_authType
+var RegionalEndpoint_revisionWeights = &sRegionalEndpoint_revisionWeights
+var RegionalEndpoint_scalingConfig = &sRegionalEndpoint_scalingConfig
+var RegionalEndpoint_throttleConfig = &sRegionalEndpoint_throttleConfig
+var RegionalEndpoint_state = &sRegionalEndpoint_state
+var RegionalEndpoint_stateReason = &sRegionalEndpoint_stateReason
+var RegionalEndpoint_updateStatus = &sRegionalEndpoint_updateStatus
+var RegionalEndpoint_updateStatusReason = &sRegionalEndpoint_updateStatusReason
+
+var _RegionalEndpoints = &s_RegionalEndpoints
+var _RegionalEndpoints_key = &s_RegionalEndpoints_key
+var _RegionalEndpoints_value = &s_RegionalEndpoints_value
+
+var _RegionList = &s_RegionList
+var _RegionList_member = &s_RegionList_member
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _ResourcePolicy = &s_ResourcePolicy
+
+var _RevisionArn = &s_RevisionArn
+
+var RevisionConfig = &sRevisionConfig
+var RevisionConfig_description = &sRevisionConfig_description
+var RevisionConfig_kmsKeyArn = &sRevisionConfig_kmsKeyArn
+var RevisionConfig_buildConfig = &sRevisionConfig_buildConfig
+var RevisionConfig_serviceConfig = &sRevisionConfig_serviceConfig
+
+var RevisionError = &sRevisionError
+var RevisionError_attribute = &sRevisionError_attribute
+var RevisionError_errorCode = &sRevisionError_errorCode
+var RevisionError_errorMessage = &sRevisionError_errorMessage
+
+var _RevisionErrors = &s_RevisionErrors
+var _RevisionErrors_member = &s_RevisionErrors_member
+
+var _RevisionId = &s_RevisionId
+
+var RevisionState = &sRevisionState
+var RevisionState_PENDING = &sRevisionState_PENDING
+var RevisionState_ACTIVE = &sRevisionState_ACTIVE
+var RevisionState_FAILED = &sRevisionState_FAILED
+
+var RevisionWeight = &sRevisionWeight
+var RevisionWeight_revisionId = &sRevisionWeight_revisionId
+var RevisionWeight_weight = &sRevisionWeight_weight
+
+var _RevisionWeightList = &s_RevisionWeightList
+var _RevisionWeightList_member = &s_RevisionWeightList_member
+
+var _RoleArn = &s_RoleArn
+
+var RuntimeConfig = &sRuntimeConfig
+var RuntimeConfig_runtime = &sRuntimeConfig_runtime
+
+var S3Object = &sS3Object
+var S3Object_bucket = &sS3Object_bucket
+var S3Object_key = &sS3Object_key
+var S3Object_versionId = &sS3Object_versionId
+
+var ScalingConfig = &sScalingConfig
+var ScalingConfig_maxEnvironments = &sScalingConfig_maxEnvironments
+
+var ServiceConfig = &sServiceConfig
+var ServiceConfig_executionRoleArn = &sServiceConfig_executionRoleArn
+var ServiceConfig_timeoutSeconds = &sServiceConfig_timeoutSeconds
+var ServiceConfig_egressNetworkConnectorArn = &sServiceConfig_egressNetworkConnectorArn
+var ServiceConfig_maxConcurrencyPerEnvironment = &sServiceConfig_maxConcurrencyPerEnvironment
+var ServiceConfig_environmentVariables = &sServiceConfig_environmentVariables
+var ServiceConfig_telemetryConfig = &sServiceConfig_telemetryConfig
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var SystemLogLevel = &sSystemLogLevel
+var SystemLogLevel_DEBUG = &sSystemLogLevel_DEBUG
+var SystemLogLevel_INFO = &sSystemLogLevel_INFO
+var SystemLogLevel_WARN = &sSystemLogLevel_WARN
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var TelemetryConfig = &sTelemetryConfig
+var TelemetryConfig_loggingConfig = &sTelemetryConfig_loggingConfig
+
+var ThrottleConfig = &sThrottleConfig
+var ThrottleConfig_rateLimit = &sThrottleConfig_rateLimit
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateWebFunctionEndpointRequest = &sCreateWebFunctionEndpointRequest
+var CreateWebFunctionEndpointRequest_functionName = &sCreateWebFunctionEndpointRequest_functionName
+var CreateWebFunctionEndpointRequest_endpointName = &sCreateWebFunctionEndpointRequest_endpointName
+var CreateWebFunctionEndpointRequest_description = &sCreateWebFunctionEndpointRequest_description
+var CreateWebFunctionEndpointRequest_endpointType = &sCreateWebFunctionEndpointRequest_endpointType
+var CreateWebFunctionEndpointRequest_authType = &sCreateWebFunctionEndpointRequest_authType
+var CreateWebFunctionEndpointRequest_autoDeploymentMode = &sCreateWebFunctionEndpointRequest_autoDeploymentMode
+var CreateWebFunctionEndpointRequest_revisionWeights = &sCreateWebFunctionEndpointRequest_revisionWeights
+var CreateWebFunctionEndpointRequest_regions = &sCreateWebFunctionEndpointRequest_regions
+var CreateWebFunctionEndpointRequest_scalingConfig = &sCreateWebFunctionEndpointRequest_scalingConfig
+var CreateWebFunctionEndpointRequest_throttleConfig = &sCreateWebFunctionEndpointRequest_throttleConfig
+
+var CreateWebFunctionEndpointResponse = &sCreateWebFunctionEndpointResponse
+var CreateWebFunctionEndpointResponse_functionArn = &sCreateWebFunctionEndpointResponse_functionArn
+var CreateWebFunctionEndpointResponse_endpointArn = &sCreateWebFunctionEndpointResponse_endpointArn
+var CreateWebFunctionEndpointResponse_endpointName = &sCreateWebFunctionEndpointResponse_endpointName
+var CreateWebFunctionEndpointResponse_description = &sCreateWebFunctionEndpointResponse_description
+var CreateWebFunctionEndpointResponse_endpointType = &sCreateWebFunctionEndpointResponse_endpointType
+var CreateWebFunctionEndpointResponse_domainName = &sCreateWebFunctionEndpointResponse_domainName
+var CreateWebFunctionEndpointResponse_authType = &sCreateWebFunctionEndpointResponse_authType
+var CreateWebFunctionEndpointResponse_autoDeploymentMode = &sCreateWebFunctionEndpointResponse_autoDeploymentMode
+var CreateWebFunctionEndpointResponse_revisionWeights = &sCreateWebFunctionEndpointResponse_revisionWeights
+var CreateWebFunctionEndpointResponse_regions = &sCreateWebFunctionEndpointResponse_regions
+var CreateWebFunctionEndpointResponse_scalingConfig = &sCreateWebFunctionEndpointResponse_scalingConfig
+var CreateWebFunctionEndpointResponse_throttleConfig = &sCreateWebFunctionEndpointResponse_throttleConfig
+var CreateWebFunctionEndpointResponse_state = &sCreateWebFunctionEndpointResponse_state
+var CreateWebFunctionEndpointResponse_stateReason = &sCreateWebFunctionEndpointResponse_stateReason
+var CreateWebFunctionEndpointResponse_updateStatus = &sCreateWebFunctionEndpointResponse_updateStatus
+var CreateWebFunctionEndpointResponse_updateStatusReason = &sCreateWebFunctionEndpointResponse_updateStatusReason
+var CreateWebFunctionEndpointResponse_regionalEndpoints = &sCreateWebFunctionEndpointResponse_regionalEndpoints
+var CreateWebFunctionEndpointResponse_createdAt = &sCreateWebFunctionEndpointResponse_createdAt
+var CreateWebFunctionEndpointResponse_updatedAt = &sCreateWebFunctionEndpointResponse_updatedAt
+
+var CreateWebFunctionRequest = &sCreateWebFunctionRequest
+var CreateWebFunctionRequest_functionName = &sCreateWebFunctionRequest_functionName
+var CreateWebFunctionRequest_revisionConfig = &sCreateWebFunctionRequest_revisionConfig
+var CreateWebFunctionRequest_endpointConfig = &sCreateWebFunctionRequest_endpointConfig
+var CreateWebFunctionRequest_tags = &sCreateWebFunctionRequest_tags
+
+var CreateWebFunctionResponse = &sCreateWebFunctionResponse
+var CreateWebFunctionResponse_functionName = &sCreateWebFunctionResponse_functionName
+var CreateWebFunctionResponse_functionArn = &sCreateWebFunctionResponse_functionArn
+var CreateWebFunctionResponse_state = &sCreateWebFunctionResponse_state
+var CreateWebFunctionResponse_stateReason = &sCreateWebFunctionResponse_stateReason
+var CreateWebFunctionResponse_createdAt = &sCreateWebFunctionResponse_createdAt
+var CreateWebFunctionResponse_updatedAt = &sCreateWebFunctionResponse_updatedAt
+var CreateWebFunctionResponse_revision = &sCreateWebFunctionResponse_revision
+var CreateWebFunctionResponse_endpoint = &sCreateWebFunctionResponse_endpoint
+var CreateWebFunctionResponse_tags = &sCreateWebFunctionResponse_tags
+
+var CreateWebFunctionRevisionRequest = &sCreateWebFunctionRevisionRequest
+var CreateWebFunctionRevisionRequest_functionName = &sCreateWebFunctionRevisionRequest_functionName
+var CreateWebFunctionRevisionRequest_description = &sCreateWebFunctionRevisionRequest_description
+var CreateWebFunctionRevisionRequest_kmsKeyArn = &sCreateWebFunctionRevisionRequest_kmsKeyArn
+var CreateWebFunctionRevisionRequest_buildConfig = &sCreateWebFunctionRevisionRequest_buildConfig
+var CreateWebFunctionRevisionRequest_serviceConfig = &sCreateWebFunctionRevisionRequest_serviceConfig
+
+var CreateWebFunctionRevisionResponse = &sCreateWebFunctionRevisionResponse
+var CreateWebFunctionRevisionResponse_functionArn = &sCreateWebFunctionRevisionResponse_functionArn
+var CreateWebFunctionRevisionResponse_revisionArn = &sCreateWebFunctionRevisionResponse_revisionArn
+var CreateWebFunctionRevisionResponse_revisionId = &sCreateWebFunctionRevisionResponse_revisionId
+var CreateWebFunctionRevisionResponse_description = &sCreateWebFunctionRevisionResponse_description
+var CreateWebFunctionRevisionResponse_kmsKeyArn = &sCreateWebFunctionRevisionResponse_kmsKeyArn
+var CreateWebFunctionRevisionResponse_buildConfig = &sCreateWebFunctionRevisionResponse_buildConfig
+var CreateWebFunctionRevisionResponse_serviceConfig = &sCreateWebFunctionRevisionResponse_serviceConfig
+var CreateWebFunctionRevisionResponse_state = &sCreateWebFunctionRevisionResponse_state
+var CreateWebFunctionRevisionResponse_stateReason = &sCreateWebFunctionRevisionResponse_stateReason
+var CreateWebFunctionRevisionResponse_errors = &sCreateWebFunctionRevisionResponse_errors
+var CreateWebFunctionRevisionResponse_createdAt = &sCreateWebFunctionRevisionResponse_createdAt
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_resourceArn = &sDeleteResourcePolicyRequest_resourceArn
+var DeleteResourcePolicyRequest_revisionId = &sDeleteResourcePolicyRequest_revisionId
+
+var DeleteWebFunctionEndpointRequest = &sDeleteWebFunctionEndpointRequest
+var DeleteWebFunctionEndpointRequest_functionName = &sDeleteWebFunctionEndpointRequest_functionName
+var DeleteWebFunctionEndpointRequest_endpointName = &sDeleteWebFunctionEndpointRequest_endpointName
+
+var DeleteWebFunctionRequest = &sDeleteWebFunctionRequest
+var DeleteWebFunctionRequest_functionName = &sDeleteWebFunctionRequest_functionName
+
+var DeleteWebFunctionRevisionRequest = &sDeleteWebFunctionRevisionRequest
+var DeleteWebFunctionRevisionRequest_functionName = &sDeleteWebFunctionRevisionRequest_functionName
+var DeleteWebFunctionRevisionRequest_revisionId = &sDeleteWebFunctionRevisionRequest_revisionId
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_resourceArn = &sGetResourcePolicyRequest_resourceArn
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_policy = &sGetResourcePolicyResponse_policy
+var GetResourcePolicyResponse_revisionId = &sGetResourcePolicyResponse_revisionId
+
+var GetWebAccountSettingsRequest = &sGetWebAccountSettingsRequest
+
+var GetWebAccountSettingsResponse = &sGetWebAccountSettingsResponse
+var GetWebAccountSettingsResponse_accountQuotas = &sGetWebAccountSettingsResponse_accountQuotas
+var GetWebAccountSettingsResponse_accountUsage = &sGetWebAccountSettingsResponse_accountUsage
+
+var GetWebFunctionEndpointRequest = &sGetWebFunctionEndpointRequest
+var GetWebFunctionEndpointRequest_functionName = &sGetWebFunctionEndpointRequest_functionName
+var GetWebFunctionEndpointRequest_endpointName = &sGetWebFunctionEndpointRequest_endpointName
+
+var GetWebFunctionEndpointResponse = &sGetWebFunctionEndpointResponse
+var GetWebFunctionEndpointResponse_functionArn = &sGetWebFunctionEndpointResponse_functionArn
+var GetWebFunctionEndpointResponse_endpointArn = &sGetWebFunctionEndpointResponse_endpointArn
+var GetWebFunctionEndpointResponse_endpointName = &sGetWebFunctionEndpointResponse_endpointName
+var GetWebFunctionEndpointResponse_description = &sGetWebFunctionEndpointResponse_description
+var GetWebFunctionEndpointResponse_endpointType = &sGetWebFunctionEndpointResponse_endpointType
+var GetWebFunctionEndpointResponse_domainName = &sGetWebFunctionEndpointResponse_domainName
+var GetWebFunctionEndpointResponse_authType = &sGetWebFunctionEndpointResponse_authType
+var GetWebFunctionEndpointResponse_autoDeploymentMode = &sGetWebFunctionEndpointResponse_autoDeploymentMode
+var GetWebFunctionEndpointResponse_revisionWeights = &sGetWebFunctionEndpointResponse_revisionWeights
+var GetWebFunctionEndpointResponse_regions = &sGetWebFunctionEndpointResponse_regions
+var GetWebFunctionEndpointResponse_scalingConfig = &sGetWebFunctionEndpointResponse_scalingConfig
+var GetWebFunctionEndpointResponse_throttleConfig = &sGetWebFunctionEndpointResponse_throttleConfig
+var GetWebFunctionEndpointResponse_state = &sGetWebFunctionEndpointResponse_state
+var GetWebFunctionEndpointResponse_stateReason = &sGetWebFunctionEndpointResponse_stateReason
+var GetWebFunctionEndpointResponse_updateStatus = &sGetWebFunctionEndpointResponse_updateStatus
+var GetWebFunctionEndpointResponse_updateStatusReason = &sGetWebFunctionEndpointResponse_updateStatusReason
+var GetWebFunctionEndpointResponse_regionalEndpoints = &sGetWebFunctionEndpointResponse_regionalEndpoints
+var GetWebFunctionEndpointResponse_createdAt = &sGetWebFunctionEndpointResponse_createdAt
+var GetWebFunctionEndpointResponse_updatedAt = &sGetWebFunctionEndpointResponse_updatedAt
+
+var GetWebFunctionRequest = &sGetWebFunctionRequest
+var GetWebFunctionRequest_functionName = &sGetWebFunctionRequest_functionName
+
+var GetWebFunctionResponse = &sGetWebFunctionResponse
+var GetWebFunctionResponse_functionName = &sGetWebFunctionResponse_functionName
+var GetWebFunctionResponse_functionArn = &sGetWebFunctionResponse_functionArn
+var GetWebFunctionResponse_state = &sGetWebFunctionResponse_state
+var GetWebFunctionResponse_stateReason = &sGetWebFunctionResponse_stateReason
+var GetWebFunctionResponse_createdAt = &sGetWebFunctionResponse_createdAt
+var GetWebFunctionResponse_updatedAt = &sGetWebFunctionResponse_updatedAt
+
+var GetWebFunctionRevisionRequest = &sGetWebFunctionRevisionRequest
+var GetWebFunctionRevisionRequest_functionName = &sGetWebFunctionRevisionRequest_functionName
+var GetWebFunctionRevisionRequest_revisionId = &sGetWebFunctionRevisionRequest_revisionId
+
+var GetWebFunctionRevisionResponse = &sGetWebFunctionRevisionResponse
+var GetWebFunctionRevisionResponse_functionArn = &sGetWebFunctionRevisionResponse_functionArn
+var GetWebFunctionRevisionResponse_revisionArn = &sGetWebFunctionRevisionResponse_revisionArn
+var GetWebFunctionRevisionResponse_revisionId = &sGetWebFunctionRevisionResponse_revisionId
+var GetWebFunctionRevisionResponse_description = &sGetWebFunctionRevisionResponse_description
+var GetWebFunctionRevisionResponse_kmsKeyArn = &sGetWebFunctionRevisionResponse_kmsKeyArn
+var GetWebFunctionRevisionResponse_buildConfig = &sGetWebFunctionRevisionResponse_buildConfig
+var GetWebFunctionRevisionResponse_serviceConfig = &sGetWebFunctionRevisionResponse_serviceConfig
+var GetWebFunctionRevisionResponse_state = &sGetWebFunctionRevisionResponse_state
+var GetWebFunctionRevisionResponse_stateReason = &sGetWebFunctionRevisionResponse_stateReason
+var GetWebFunctionRevisionResponse_errors = &sGetWebFunctionRevisionResponse_errors
+var GetWebFunctionRevisionResponse_createdAt = &sGetWebFunctionRevisionResponse_createdAt
+
+var ListTagsRequest = &sListTagsRequest
+var ListTagsRequest_resource = &sListTagsRequest_resource
+
+var ListTagsResponse = &sListTagsResponse
+var ListTagsResponse_tags = &sListTagsResponse_tags
+
+var ListWebFunctionEndpointsRequest = &sListWebFunctionEndpointsRequest
+var ListWebFunctionEndpointsRequest_functionName = &sListWebFunctionEndpointsRequest_functionName
+var ListWebFunctionEndpointsRequest_filters = &sListWebFunctionEndpointsRequest_filters
+var ListWebFunctionEndpointsRequest_maxResults = &sListWebFunctionEndpointsRequest_maxResults
+var ListWebFunctionEndpointsRequest_nextToken = &sListWebFunctionEndpointsRequest_nextToken
+
+var ListWebFunctionEndpointsResponse = &sListWebFunctionEndpointsResponse
+var ListWebFunctionEndpointsResponse_endpoints = &sListWebFunctionEndpointsResponse_endpoints
+var ListWebFunctionEndpointsResponse_nextToken = &sListWebFunctionEndpointsResponse_nextToken
+
+var ListWebFunctionRevisionsRequest = &sListWebFunctionRevisionsRequest
+var ListWebFunctionRevisionsRequest_functionName = &sListWebFunctionRevisionsRequest_functionName
+var ListWebFunctionRevisionsRequest_filters = &sListWebFunctionRevisionsRequest_filters
+var ListWebFunctionRevisionsRequest_maxResults = &sListWebFunctionRevisionsRequest_maxResults
+var ListWebFunctionRevisionsRequest_nextToken = &sListWebFunctionRevisionsRequest_nextToken
+
+var ListWebFunctionRevisionsResponse = &sListWebFunctionRevisionsResponse
+var ListWebFunctionRevisionsResponse_revisions = &sListWebFunctionRevisionsResponse_revisions
+var ListWebFunctionRevisionsResponse_nextToken = &sListWebFunctionRevisionsResponse_nextToken
+
+var ListWebFunctionsRequest = &sListWebFunctionsRequest
+var ListWebFunctionsRequest_filters = &sListWebFunctionsRequest_filters
+var ListWebFunctionsRequest_maxResults = &sListWebFunctionsRequest_maxResults
+var ListWebFunctionsRequest_nextToken = &sListWebFunctionsRequest_nextToken
+
+var ListWebFunctionsResponse = &sListWebFunctionsResponse
+var ListWebFunctionsResponse_functions = &sListWebFunctionsResponse_functions
+var ListWebFunctionsResponse_nextToken = &sListWebFunctionsResponse_nextToken
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_resourceArn = &sPutResourcePolicyRequest_resourceArn
+var PutResourcePolicyRequest_policy = &sPutResourcePolicyRequest_policy
+var PutResourcePolicyRequest_revisionId = &sPutResourcePolicyRequest_revisionId
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_policy = &sPutResourcePolicyResponse_policy
+var PutResourcePolicyResponse_revisionId = &sPutResourcePolicyResponse_revisionId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resource = &sTagResourceRequest_resource
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resource = &sUntagResourceRequest_resource
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UpdateWebFunctionEndpointRequest = &sUpdateWebFunctionEndpointRequest
+var UpdateWebFunctionEndpointRequest_functionName = &sUpdateWebFunctionEndpointRequest_functionName
+var UpdateWebFunctionEndpointRequest_endpointName = &sUpdateWebFunctionEndpointRequest_endpointName
+var UpdateWebFunctionEndpointRequest_description = &sUpdateWebFunctionEndpointRequest_description
+var UpdateWebFunctionEndpointRequest_authType = &sUpdateWebFunctionEndpointRequest_authType
+var UpdateWebFunctionEndpointRequest_autoDeploymentMode = &sUpdateWebFunctionEndpointRequest_autoDeploymentMode
+var UpdateWebFunctionEndpointRequest_revisionWeights = &sUpdateWebFunctionEndpointRequest_revisionWeights
+var UpdateWebFunctionEndpointRequest_scalingConfig = &sUpdateWebFunctionEndpointRequest_scalingConfig
+var UpdateWebFunctionEndpointRequest_throttleConfig = &sUpdateWebFunctionEndpointRequest_throttleConfig
+
+var UpdateWebFunctionEndpointResponse = &sUpdateWebFunctionEndpointResponse
+var UpdateWebFunctionEndpointResponse_functionArn = &sUpdateWebFunctionEndpointResponse_functionArn
+var UpdateWebFunctionEndpointResponse_endpointArn = &sUpdateWebFunctionEndpointResponse_endpointArn
+var UpdateWebFunctionEndpointResponse_endpointName = &sUpdateWebFunctionEndpointResponse_endpointName
+var UpdateWebFunctionEndpointResponse_description = &sUpdateWebFunctionEndpointResponse_description
+var UpdateWebFunctionEndpointResponse_endpointType = &sUpdateWebFunctionEndpointResponse_endpointType
+var UpdateWebFunctionEndpointResponse_domainName = &sUpdateWebFunctionEndpointResponse_domainName
+var UpdateWebFunctionEndpointResponse_authType = &sUpdateWebFunctionEndpointResponse_authType
+var UpdateWebFunctionEndpointResponse_autoDeploymentMode = &sUpdateWebFunctionEndpointResponse_autoDeploymentMode
+var UpdateWebFunctionEndpointResponse_revisionWeights = &sUpdateWebFunctionEndpointResponse_revisionWeights
+var UpdateWebFunctionEndpointResponse_regions = &sUpdateWebFunctionEndpointResponse_regions
+var UpdateWebFunctionEndpointResponse_scalingConfig = &sUpdateWebFunctionEndpointResponse_scalingConfig
+var UpdateWebFunctionEndpointResponse_throttleConfig = &sUpdateWebFunctionEndpointResponse_throttleConfig
+var UpdateWebFunctionEndpointResponse_state = &sUpdateWebFunctionEndpointResponse_state
+var UpdateWebFunctionEndpointResponse_stateReason = &sUpdateWebFunctionEndpointResponse_stateReason
+var UpdateWebFunctionEndpointResponse_updateStatus = &sUpdateWebFunctionEndpointResponse_updateStatus
+var UpdateWebFunctionEndpointResponse_updateStatusReason = &sUpdateWebFunctionEndpointResponse_updateStatusReason
+var UpdateWebFunctionEndpointResponse_regionalEndpoints = &sUpdateWebFunctionEndpointResponse_regionalEndpoints
+var UpdateWebFunctionEndpointResponse_createdAt = &sUpdateWebFunctionEndpointResponse_createdAt
+var UpdateWebFunctionEndpointResponse_updatedAt = &sUpdateWebFunctionEndpointResponse_updatedAt
+
+var LambdaWeb = &smithy.ServiceSchema{Schema: &s_LambdaWeb, Version: "2025-03-07"}

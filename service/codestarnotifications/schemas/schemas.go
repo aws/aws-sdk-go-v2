@@ -4,919 +4,935 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateNotificationRule                               smithy.SchemaExtensions
+	eDeleteNotificationRule                               smithy.SchemaExtensions
+	eDeleteTarget                                         smithy.SchemaExtensions
+	eDescribeNotificationRule                             smithy.SchemaExtensions
+	eListEventTypes                                       smithy.SchemaExtensions
+	eListNotificationRules                                smithy.SchemaExtensions
+	eListTagsForResource                                  smithy.SchemaExtensions
+	eListTargets                                          smithy.SchemaExtensions
+	eSubscribe                                            smithy.SchemaExtensions
+	eTagResource                                          smithy.SchemaExtensions
+	eUnsubscribe                                          smithy.SchemaExtensions
+	eUntagResource                                        smithy.SchemaExtensions
+	eUpdateNotificationRule                               smithy.SchemaExtensions
+	e_CodeStarNotifications_20191015                      smithy.SchemaExtensions
+	eAccessDeniedException                                smithy.SchemaExtensions
+	eAccessDeniedException_Message                        smithy.SchemaExtensions
+	e_ClientRequestToken                                  smithy.SchemaExtensions
+	eConcurrentModificationException                      smithy.SchemaExtensions
+	eConcurrentModificationException_Message              smithy.SchemaExtensions
+	eConfigurationException                               smithy.SchemaExtensions
+	eConfigurationException_Message                       smithy.SchemaExtensions
+	e_CreatedTimestamp                                    smithy.SchemaExtensions
+	eDetailType                                           smithy.SchemaExtensions
+	eDetailType_BASIC                                     smithy.SchemaExtensions
+	eDetailType_FULL                                      smithy.SchemaExtensions
+	e_EventTypeBatch                                      smithy.SchemaExtensions
+	e_EventTypeBatch_member                               smithy.SchemaExtensions
+	e_EventTypeId                                         smithy.SchemaExtensions
+	e_EventTypeIds                                        smithy.SchemaExtensions
+	e_EventTypeIds_member                                 smithy.SchemaExtensions
+	e_EventTypeName                                       smithy.SchemaExtensions
+	eEventTypeSummary                                     smithy.SchemaExtensions
+	eEventTypeSummary_EventTypeId                         smithy.SchemaExtensions
+	eEventTypeSummary_ServiceName                         smithy.SchemaExtensions
+	eEventTypeSummary_EventTypeName                       smithy.SchemaExtensions
+	eEventTypeSummary_ResourceType                        smithy.SchemaExtensions
+	e_ForceUnsubscribeAll                                 smithy.SchemaExtensions
+	eInvalidNextTokenException                            smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                    smithy.SchemaExtensions
+	e_LastModifiedTimestamp                               smithy.SchemaExtensions
+	eLimitExceededException                               smithy.SchemaExtensions
+	eLimitExceededException_Message                       smithy.SchemaExtensions
+	eListEventTypesFilter                                 smithy.SchemaExtensions
+	eListEventTypesFilter_Name                            smithy.SchemaExtensions
+	eListEventTypesFilter_Value                           smithy.SchemaExtensions
+	eListEventTypesFilterName                             smithy.SchemaExtensions
+	eListEventTypesFilterName_RESOURCE_TYPE               smithy.SchemaExtensions
+	eListEventTypesFilterName_SERVICE_NAME                smithy.SchemaExtensions
+	e_ListEventTypesFilters                               smithy.SchemaExtensions
+	e_ListEventTypesFilters_member                        smithy.SchemaExtensions
+	e_ListEventTypesFilterValue                           smithy.SchemaExtensions
+	eListNotificationRulesFilter                          smithy.SchemaExtensions
+	eListNotificationRulesFilter_Name                     smithy.SchemaExtensions
+	eListNotificationRulesFilter_Value                    smithy.SchemaExtensions
+	eListNotificationRulesFilterName                      smithy.SchemaExtensions
+	eListNotificationRulesFilterName_EVENT_TYPE_ID        smithy.SchemaExtensions
+	eListNotificationRulesFilterName_CREATED_BY           smithy.SchemaExtensions
+	eListNotificationRulesFilterName_RESOURCE             smithy.SchemaExtensions
+	eListNotificationRulesFilterName_TARGET_ADDRESS       smithy.SchemaExtensions
+	e_ListNotificationRulesFilters                        smithy.SchemaExtensions
+	e_ListNotificationRulesFilters_member                 smithy.SchemaExtensions
+	e_ListNotificationRulesFilterValue                    smithy.SchemaExtensions
+	eListTargetsFilter                                    smithy.SchemaExtensions
+	eListTargetsFilter_Name                               smithy.SchemaExtensions
+	eListTargetsFilter_Value                              smithy.SchemaExtensions
+	eListTargetsFilterName                                smithy.SchemaExtensions
+	eListTargetsFilterName_TARGET_TYPE                    smithy.SchemaExtensions
+	eListTargetsFilterName_TARGET_ADDRESS                 smithy.SchemaExtensions
+	eListTargetsFilterName_TARGET_STATUS                  smithy.SchemaExtensions
+	e_ListTargetsFilters                                  smithy.SchemaExtensions
+	e_ListTargetsFilters_member                           smithy.SchemaExtensions
+	e_ListTargetsFilterValue                              smithy.SchemaExtensions
+	e_MaxResults                                          smithy.SchemaExtensions
+	e_Message                                             smithy.SchemaExtensions
+	e_NextToken                                           smithy.SchemaExtensions
+	e_NotificationRuleArn                                 smithy.SchemaExtensions
+	e_NotificationRuleBatch                               smithy.SchemaExtensions
+	e_NotificationRuleBatch_member                        smithy.SchemaExtensions
+	e_NotificationRuleCreatedBy                           smithy.SchemaExtensions
+	e_NotificationRuleId                                  smithy.SchemaExtensions
+	e_NotificationRuleName                                smithy.SchemaExtensions
+	e_NotificationRuleResource                            smithy.SchemaExtensions
+	eNotificationRuleStatus                               smithy.SchemaExtensions
+	eNotificationRuleStatus_ENABLED                       smithy.SchemaExtensions
+	eNotificationRuleStatus_DISABLED                      smithy.SchemaExtensions
+	eNotificationRuleSummary                              smithy.SchemaExtensions
+	eNotificationRuleSummary_Id                           smithy.SchemaExtensions
+	eNotificationRuleSummary_Arn                          smithy.SchemaExtensions
+	eResourceAlreadyExistsException                       smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message               smithy.SchemaExtensions
+	eResourceNotFoundException                            smithy.SchemaExtensions
+	eResourceNotFoundException_Message                    smithy.SchemaExtensions
+	e_ResourceType                                        smithy.SchemaExtensions
+	e_ServiceName                                         smithy.SchemaExtensions
+	e_TagKey                                              smithy.SchemaExtensions
+	e_TagKeys                                             smithy.SchemaExtensions
+	e_TagKeys_member                                      smithy.SchemaExtensions
+	e_Tags                                                smithy.SchemaExtensions
+	e_Tags_key                                            smithy.SchemaExtensions
+	e_Tags_value                                          smithy.SchemaExtensions
+	e_TagValue                                            smithy.SchemaExtensions
+	eTarget                                               smithy.SchemaExtensions
+	eTarget_TargetType                                    smithy.SchemaExtensions
+	eTarget_TargetAddress                                 smithy.SchemaExtensions
+	e_TargetAddress                                       smithy.SchemaExtensions
+	e_Targets                                             smithy.SchemaExtensions
+	e_Targets_member                                      smithy.SchemaExtensions
+	e_TargetsBatch                                        smithy.SchemaExtensions
+	e_TargetsBatch_member                                 smithy.SchemaExtensions
+	eTargetStatus                                         smithy.SchemaExtensions
+	eTargetStatus_PENDING                                 smithy.SchemaExtensions
+	eTargetStatus_ACTIVE                                  smithy.SchemaExtensions
+	eTargetStatus_UNREACHABLE                             smithy.SchemaExtensions
+	eTargetStatus_INACTIVE                                smithy.SchemaExtensions
+	eTargetStatus_DEACTIVATED                             smithy.SchemaExtensions
+	eTargetSummary                                        smithy.SchemaExtensions
+	eTargetSummary_TargetAddress                          smithy.SchemaExtensions
+	eTargetSummary_TargetType                             smithy.SchemaExtensions
+	eTargetSummary_TargetStatus                           smithy.SchemaExtensions
+	e_TargetType                                          smithy.SchemaExtensions
+	eValidationException                                  smithy.SchemaExtensions
+	eValidationException_Message                          smithy.SchemaExtensions
+	eCreateNotificationRuleRequest                        smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_Name                   smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_EventTypeIds           smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_Resource               smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_Targets                smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_DetailType             smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_ClientRequestToken     smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_Tags                   smithy.SchemaExtensions
+	eCreateNotificationRuleRequest_Status                 smithy.SchemaExtensions
+	eCreateNotificationRuleResult                         smithy.SchemaExtensions
+	eCreateNotificationRuleResult_Arn                     smithy.SchemaExtensions
+	eDeleteNotificationRuleRequest                        smithy.SchemaExtensions
+	eDeleteNotificationRuleRequest_Arn                    smithy.SchemaExtensions
+	eDeleteNotificationRuleResult                         smithy.SchemaExtensions
+	eDeleteNotificationRuleResult_Arn                     smithy.SchemaExtensions
+	eDeleteTargetRequest                                  smithy.SchemaExtensions
+	eDeleteTargetRequest_TargetAddress                    smithy.SchemaExtensions
+	eDeleteTargetRequest_ForceUnsubscribeAll              smithy.SchemaExtensions
+	eDeleteTargetResult                                   smithy.SchemaExtensions
+	eDescribeNotificationRuleRequest                      smithy.SchemaExtensions
+	eDescribeNotificationRuleRequest_Arn                  smithy.SchemaExtensions
+	eDescribeNotificationRuleResult                       smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Arn                   smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Name                  smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_EventTypes            smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Resource              smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Targets               smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_DetailType            smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_CreatedBy             smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Status                smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_CreatedTimestamp      smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_LastModifiedTimestamp smithy.SchemaExtensions
+	eDescribeNotificationRuleResult_Tags                  smithy.SchemaExtensions
+	eListEventTypesRequest                                smithy.SchemaExtensions
+	eListEventTypesRequest_Filters                        smithy.SchemaExtensions
+	eListEventTypesRequest_NextToken                      smithy.SchemaExtensions
+	eListEventTypesRequest_MaxResults                     smithy.SchemaExtensions
+	eListEventTypesResult                                 smithy.SchemaExtensions
+	eListEventTypesResult_EventTypes                      smithy.SchemaExtensions
+	eListEventTypesResult_NextToken                       smithy.SchemaExtensions
+	eListNotificationRulesRequest                         smithy.SchemaExtensions
+	eListNotificationRulesRequest_Filters                 smithy.SchemaExtensions
+	eListNotificationRulesRequest_NextToken               smithy.SchemaExtensions
+	eListNotificationRulesRequest_MaxResults              smithy.SchemaExtensions
+	eListNotificationRulesResult                          smithy.SchemaExtensions
+	eListNotificationRulesResult_NextToken                smithy.SchemaExtensions
+	eListNotificationRulesResult_NotificationRules        smithy.SchemaExtensions
+	eListTagsForResourceRequest                           smithy.SchemaExtensions
+	eListTagsForResourceRequest_Arn                       smithy.SchemaExtensions
+	eListTagsForResourceResult                            smithy.SchemaExtensions
+	eListTagsForResourceResult_Tags                       smithy.SchemaExtensions
+	eListTargetsRequest                                   smithy.SchemaExtensions
+	eListTargetsRequest_Filters                           smithy.SchemaExtensions
+	eListTargetsRequest_NextToken                         smithy.SchemaExtensions
+	eListTargetsRequest_MaxResults                        smithy.SchemaExtensions
+	eListTargetsResult                                    smithy.SchemaExtensions
+	eListTargetsResult_Targets                            smithy.SchemaExtensions
+	eListTargetsResult_NextToken                          smithy.SchemaExtensions
+	eSubscribeRequest                                     smithy.SchemaExtensions
+	eSubscribeRequest_Arn                                 smithy.SchemaExtensions
+	eSubscribeRequest_Target                              smithy.SchemaExtensions
+	eSubscribeRequest_ClientRequestToken                  smithy.SchemaExtensions
+	eSubscribeResult                                      smithy.SchemaExtensions
+	eSubscribeResult_Arn                                  smithy.SchemaExtensions
+	eTagResourceRequest                                   smithy.SchemaExtensions
+	eTagResourceRequest_Arn                               smithy.SchemaExtensions
+	eTagResourceRequest_Tags                              smithy.SchemaExtensions
+	eTagResourceResult                                    smithy.SchemaExtensions
+	eTagResourceResult_Tags                               smithy.SchemaExtensions
+	eUnsubscribeRequest                                   smithy.SchemaExtensions
+	eUnsubscribeRequest_Arn                               smithy.SchemaExtensions
+	eUnsubscribeRequest_TargetAddress                     smithy.SchemaExtensions
+	eUnsubscribeResult                                    smithy.SchemaExtensions
+	eUnsubscribeResult_Arn                                smithy.SchemaExtensions
+	eUntagResourceRequest                                 smithy.SchemaExtensions
+	eUntagResourceRequest_Arn                             smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                         smithy.SchemaExtensions
+	eUntagResourceResult                                  smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest                        smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_Arn                    smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_Name                   smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_Status                 smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_EventTypeIds           smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_Targets                smithy.SchemaExtensions
+	eUpdateNotificationRuleRequest_DetailType             smithy.SchemaExtensions
+	eUpdateNotificationRuleResult                         smithy.SchemaExtensions
+)
+
+var (
+	iCreateNotificationRule            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "CreateNotificationRule"}
+	iDeleteNotificationRule            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteNotificationRule"}
+	iDeleteTarget                      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteTarget"}
+	iDescribeNotificationRule          = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DescribeNotificationRule"}
+	iListEventTypes                    = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypes"}
+	iListNotificationRules             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRules"}
+	iListTagsForResource               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTagsForResource"}
+	iListTargets                       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargets"}
+	iSubscribe                         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Subscribe"}
+	iTagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagResource"}
+	iUnsubscribe                       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Unsubscribe"}
+	iUntagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UntagResource"}
+	iUpdateNotificationRule            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UpdateNotificationRule"}
+	i_CodeStarNotifications_20191015   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "CodeStarNotifications_20191015"}
+	iAccessDeniedException             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "AccessDeniedException"}
+	i_ClientRequestToken               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ClientRequestToken"}
+	iConcurrentModificationException   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ConcurrentModificationException"}
+	iConfigurationException            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ConfigurationException"}
+	i_CreatedTimestamp                 = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "CreatedTimestamp"}
+	iDetailType                        = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DetailType"}
+	i_EventTypeBatch                   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "EventTypeBatch"}
+	i_EventTypeId                      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "EventTypeId"}
+	i_EventTypeIds                     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "EventTypeIds"}
+	i_EventTypeName                    = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "EventTypeName"}
+	iEventTypeSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "EventTypeSummary"}
+	i_ForceUnsubscribeAll              = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ForceUnsubscribeAll"}
+	iInvalidNextTokenException         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "InvalidNextTokenException"}
+	i_LastModifiedTimestamp            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "LastModifiedTimestamp"}
+	iLimitExceededException            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "LimitExceededException"}
+	iListEventTypesFilter              = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesFilter"}
+	iListEventTypesFilterName          = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesFilterName"}
+	i_ListEventTypesFilters            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesFilters"}
+	i_ListEventTypesFilterValue        = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesFilterValue"}
+	iListNotificationRulesFilter       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesFilter"}
+	iListNotificationRulesFilterName   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesFilterName"}
+	i_ListNotificationRulesFilters     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesFilters"}
+	i_ListNotificationRulesFilterValue = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesFilterValue"}
+	iListTargetsFilter                 = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsFilter"}
+	iListTargetsFilterName             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsFilterName"}
+	i_ListTargetsFilters               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsFilters"}
+	i_ListTargetsFilterValue           = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsFilterValue"}
+	i_MaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "MaxResults"}
+	i_Message                          = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Message"}
+	i_NextToken                        = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NextToken"}
+	i_NotificationRuleArn              = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleArn"}
+	i_NotificationRuleBatch            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleBatch"}
+	i_NotificationRuleCreatedBy        = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleCreatedBy"}
+	i_NotificationRuleId               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleId"}
+	i_NotificationRuleName             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleName"}
+	i_NotificationRuleResource         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleResource"}
+	iNotificationRuleStatus            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleStatus"}
+	iNotificationRuleSummary           = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "NotificationRuleSummary"}
+	iResourceAlreadyExistsException    = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ResourceAlreadyExistsException"}
+	iResourceNotFoundException         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ResourceNotFoundException"}
+	i_ResourceType                     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ResourceType"}
+	i_ServiceName                      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ServiceName"}
+	i_TagKey                           = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagKey"}
+	i_TagKeys                          = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagKeys"}
+	i_Tags                             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Tags"}
+	i_TagValue                         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagValue"}
+	iTarget                            = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Target"}
+	i_TargetAddress                    = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TargetAddress"}
+	i_Targets                          = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "Targets"}
+	i_TargetsBatch                     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TargetsBatch"}
+	iTargetStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TargetStatus"}
+	iTargetSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TargetSummary"}
+	i_TargetType                       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TargetType"}
+	iValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ValidationException"}
+	iCreateNotificationRuleRequest     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "CreateNotificationRuleRequest"}
+	iCreateNotificationRuleResult      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "CreateNotificationRuleResult"}
+	iDeleteNotificationRuleRequest     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteNotificationRuleRequest"}
+	iDeleteNotificationRuleResult      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteNotificationRuleResult"}
+	iDeleteTargetRequest               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteTargetRequest"}
+	iDeleteTargetResult                = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DeleteTargetResult"}
+	iDescribeNotificationRuleRequest   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DescribeNotificationRuleRequest"}
+	iDescribeNotificationRuleResult    = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "DescribeNotificationRuleResult"}
+	iListEventTypesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesRequest"}
+	iListEventTypesResult              = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListEventTypesResult"}
+	iListNotificationRulesRequest      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesRequest"}
+	iListNotificationRulesResult       = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListNotificationRulesResult"}
+	iListTagsForResourceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResult         = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTagsForResourceResult"}
+	iListTargetsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsRequest"}
+	iListTargetsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "ListTargetsResult"}
+	iSubscribeRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "SubscribeRequest"}
+	iSubscribeResult                   = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "SubscribeResult"}
+	iTagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagResourceRequest"}
+	iTagResourceResult                 = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "TagResourceResult"}
+	iUnsubscribeRequest                = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UnsubscribeRequest"}
+	iUnsubscribeResult                 = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UnsubscribeResult"}
+	iUntagResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UntagResourceRequest"}
+	iUntagResourceResult               = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UntagResourceResult"}
+	iUpdateNotificationRuleRequest     = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UpdateNotificationRuleRequest"}
+	iUpdateNotificationRuleResult      = smithy.ShapeName{Namespace: "com.amazonaws.codestarnotifications", Name: "UpdateNotificationRuleResult"}
+	pUnit                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createNotificationRule",
-	Code: 200})
-
-var DeleteNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteNotificationRule",
-	Code: 200})
-
-var DeleteTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteTarget",
-	Code: 200})
-
-var DescribeNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeNotificationRule",
-	Code: 200})
-
-var ListEventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listEventTypes",
-	Code: 200})
-
-var ListNotificationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listNotificationRules",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listTagsForResource",
-	Code: 200})
-
-var ListTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listTargets",
-	Code: 200})
-
-var Subscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Subscribe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscribe",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tagResource",
-	Code: 200})
-
-var Unsubscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Unsubscribe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/unsubscribe",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/untagResource/{Arn}",
-	Code: 200})
-
-var UpdateNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateNotificationRule",
-	Code: 200})
-
-var _CodeStarNotifications_20191015 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CodeStarNotifications_20191015",
-}, smithy.ShapeTypeService, 0)
-
-var CodeStarNotifications_20191015 = smithy.NewServiceSchema(_CodeStarNotifications_20191015, "2019-10-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConfigurationException_Message *smithy.Schema
-
-var _CreatedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreatedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DetailType",
-}, smithy.ShapeTypeEnum, 2)
-var DetailType_BASIC *smithy.Schema
-
-var DetailType_FULL *smithy.Schema
-
-var _EventTypeBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeBatch",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeBatch_member *smithy.Schema
-
-var _EventTypeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventTypeIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeIds",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeIds_member *smithy.Schema
-
-var _EventTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var EventTypeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeSummary",
-}, smithy.ShapeTypeStructure, 4)
-var EventTypeSummary_EventTypeId *smithy.Schema
-
-var EventTypeSummary_ServiceName *smithy.Schema
-
-var EventTypeSummary_EventTypeName *smithy.Schema
-
-var EventTypeSummary_ResourceType *smithy.Schema
-
-var _ForceUnsubscribeAll = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ForceUnsubscribeAll",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var _LastModifiedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "LastModifiedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var ListEventTypesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventTypesFilter_Name *smithy.Schema
-
-var ListEventTypesFilter_Value *smithy.Schema
-
-var ListEventTypesFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var ListEventTypesFilterName_RESOURCE_TYPE *smithy.Schema
-
-var ListEventTypesFilterName_SERVICE_NAME *smithy.Schema
-
-var _ListEventTypesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListEventTypesFilters_member *smithy.Schema
-
-var _ListEventTypesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var ListNotificationRulesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationRulesFilter_Name *smithy.Schema
-
-var ListNotificationRulesFilter_Value *smithy.Schema
-
-var ListNotificationRulesFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilterName",
-}, smithy.ShapeTypeEnum, 4)
-var ListNotificationRulesFilterName_EVENT_TYPE_ID *smithy.Schema
-
-var ListNotificationRulesFilterName_CREATED_BY *smithy.Schema
-
-var ListNotificationRulesFilterName_RESOURCE *smithy.Schema
-
-var ListNotificationRulesFilterName_TARGET_ADDRESS *smithy.Schema
-
-var _ListNotificationRulesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListNotificationRulesFilters_member *smithy.Schema
-
-var _ListNotificationRulesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var ListTargetsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListTargetsFilter_Name *smithy.Schema
-
-var ListTargetsFilter_Value *smithy.Schema
-
-var ListTargetsFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var ListTargetsFilterName_TARGET_TYPE *smithy.Schema
-
-var ListTargetsFilterName_TARGET_ADDRESS *smithy.Schema
-
-var ListTargetsFilterName_TARGET_STATUS *smithy.Schema
-
-var _ListTargetsFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListTargetsFilters_member *smithy.Schema
-
-var _ListTargetsFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleBatch",
-}, smithy.ShapeTypeList, 1)
-var _NotificationRuleBatch_member *smithy.Schema
-
-var _NotificationRuleCreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleCreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleId",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NotificationRuleResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleResource",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationRuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var NotificationRuleStatus_ENABLED *smithy.Schema
-
-var NotificationRuleStatus_DISABLED *smithy.Schema
-
-var NotificationRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleSummary",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationRuleSummary_Id *smithy.Schema
-
-var NotificationRuleSummary_Arn *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 2)
-var Target_TargetType *smithy.Schema
-
-var Target_TargetAddress *smithy.Schema
-
-var _TargetAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Targets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Targets",
-}, smithy.ShapeTypeList, 1)
-var _Targets_member *smithy.Schema
-
-var _TargetsBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetsBatch",
-}, smithy.ShapeTypeList, 1)
-var _TargetsBatch_member *smithy.Schema
-
-var TargetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetStatus",
-}, smithy.ShapeTypeEnum, 5)
-var TargetStatus_PENDING *smithy.Schema
-
-var TargetStatus_ACTIVE *smithy.Schema
-
-var TargetStatus_UNREACHABLE *smithy.Schema
-
-var TargetStatus_INACTIVE *smithy.Schema
-
-var TargetStatus_DEACTIVATED *smithy.Schema
-
-var TargetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetSummary",
-}, smithy.ShapeTypeStructure, 3)
-var TargetSummary_TargetAddress *smithy.Schema
-
-var TargetSummary_TargetType *smithy.Schema
-
-var TargetSummary_TargetStatus *smithy.Schema
-
-var _TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetType",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateNotificationRuleRequest_Name *smithy.Schema
-
-var CreateNotificationRuleRequest_EventTypeIds *smithy.Schema
-
-var CreateNotificationRuleRequest_Resource *smithy.Schema
-
-var CreateNotificationRuleRequest_Targets *smithy.Schema
-
-var CreateNotificationRuleRequest_DetailType *smithy.Schema
-
-var CreateNotificationRuleRequest_ClientRequestToken *smithy.Schema
-
-var CreateNotificationRuleRequest_Tags *smithy.Schema
-
-var CreateNotificationRuleRequest_Status *smithy.Schema
-
-var CreateNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNotificationRuleResult_Arn *smithy.Schema
-
-var DeleteNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotificationRuleRequest_Arn *smithy.Schema
-
-var DeleteNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotificationRuleResult_Arn *smithy.Schema
-
-var DeleteTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTargetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTargetRequest_TargetAddress *smithy.Schema
-
-var DeleteTargetRequest_ForceUnsubscribeAll *smithy.Schema
-
-var DeleteTargetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTargetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNotificationRuleRequest_Arn *smithy.Schema
-
-var DescribeNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeNotificationRuleResult_Arn *smithy.Schema
-
-var DescribeNotificationRuleResult_Name *smithy.Schema
-
-var DescribeNotificationRuleResult_EventTypes *smithy.Schema
-
-var DescribeNotificationRuleResult_Resource *smithy.Schema
-
-var DescribeNotificationRuleResult_Targets *smithy.Schema
-
-var DescribeNotificationRuleResult_DetailType *smithy.Schema
-
-var DescribeNotificationRuleResult_CreatedBy *smithy.Schema
-
-var DescribeNotificationRuleResult_Status *smithy.Schema
-
-var DescribeNotificationRuleResult_CreatedTimestamp *smithy.Schema
-
-var DescribeNotificationRuleResult_LastModifiedTimestamp *smithy.Schema
-
-var DescribeNotificationRuleResult_Tags *smithy.Schema
-
-var ListEventTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEventTypesRequest_Filters *smithy.Schema
-
-var ListEventTypesRequest_NextToken *smithy.Schema
-
-var ListEventTypesRequest_MaxResults *smithy.Schema
-
-var ListEventTypesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventTypesResult_EventTypes *smithy.Schema
-
-var ListEventTypesResult_NextToken *smithy.Schema
-
-var ListNotificationRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNotificationRulesRequest_Filters *smithy.Schema
-
-var ListNotificationRulesRequest_NextToken *smithy.Schema
-
-var ListNotificationRulesRequest_MaxResults *smithy.Schema
-
-var ListNotificationRulesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationRulesResult_NextToken *smithy.Schema
-
-var ListNotificationRulesResult_NotificationRules *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_Arn *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResult_Tags *smithy.Schema
-
-var ListTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTargetsRequest_Filters *smithy.Schema
-
-var ListTargetsRequest_NextToken *smithy.Schema
-
-var ListTargetsRequest_MaxResults *smithy.Schema
-
-var ListTargetsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListTargetsResult_Targets *smithy.Schema
-
-var ListTargetsResult_NextToken *smithy.Schema
-
-var SubscribeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "SubscribeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SubscribeRequest_Arn *smithy.Schema
-
-var SubscribeRequest_Target *smithy.Schema
-
-var SubscribeRequest_ClientRequestToken *smithy.Schema
-
-var SubscribeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "SubscribeResult",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeResult_Arn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_Arn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceResult_Tags *smithy.Schema
-
-var UnsubscribeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UnsubscribeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UnsubscribeRequest_Arn *smithy.Schema
-
-var UnsubscribeRequest_TargetAddress *smithy.Schema
-
-var UnsubscribeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UnsubscribeResult",
-}, smithy.ShapeTypeStructure, 1)
-var UnsubscribeResult_Arn *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_Arn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateNotificationRuleRequest_Arn *smithy.Schema
-
-var UpdateNotificationRuleRequest_Name *smithy.Schema
-
-var UpdateNotificationRuleRequest_Status *smithy.Schema
-
-var UpdateNotificationRuleRequest_EventTypeIds *smithy.Schema
-
-var UpdateNotificationRuleRequest_Targets *smithy.Schema
-
-var UpdateNotificationRuleRequest_DetailType *smithy.Schema
-
-var UpdateNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _Message)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _Message)
-
-	ConfigurationException_Message = ConfigurationException.AddMember("Message", _Message)
-
-	DetailType_BASIC = DetailType.AddMember("BASIC", smithyprelude.Unit)
-
-	DetailType_FULL = DetailType.AddMember("FULL", smithyprelude.Unit)
-
-	EventTypeSummary_EventTypeId = EventTypeSummary.AddMember("EventTypeId", _EventTypeId)
-
-	EventTypeSummary_ServiceName = EventTypeSummary.AddMember("ServiceName", _ServiceName)
-
-	EventTypeSummary_EventTypeName = EventTypeSummary.AddMember("EventTypeName", _EventTypeName)
-
-	EventTypeSummary_ResourceType = EventTypeSummary.AddMember("ResourceType", _ResourceType)
-
-	_EventTypeBatch_member = _EventTypeBatch.AddMember("member", EventTypeSummary)
-
-	_EventTypeIds_member = _EventTypeIds.AddMember("member", _EventTypeId)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _Message)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _Message)
-
-	ListEventTypesFilterName_RESOURCE_TYPE = ListEventTypesFilterName.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	ListEventTypesFilterName_SERVICE_NAME = ListEventTypesFilterName.AddMember("SERVICE_NAME", smithyprelude.Unit)
-
-	ListEventTypesFilter_Name = ListEventTypesFilter.AddMember("Name", ListEventTypesFilterName)
-
-	ListEventTypesFilter_Value = ListEventTypesFilter.AddMember("Value", _ListEventTypesFilterValue)
-
-	_ListEventTypesFilters_member = _ListEventTypesFilters.AddMember("member", ListEventTypesFilter)
-
-	ListNotificationRulesFilterName_EVENT_TYPE_ID = ListNotificationRulesFilterName.AddMember("EVENT_TYPE_ID", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_CREATED_BY = ListNotificationRulesFilterName.AddMember("CREATED_BY", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_RESOURCE = ListNotificationRulesFilterName.AddMember("RESOURCE", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_TARGET_ADDRESS = ListNotificationRulesFilterName.AddMember("TARGET_ADDRESS", smithyprelude.Unit)
-
-	ListNotificationRulesFilter_Name = ListNotificationRulesFilter.AddMember("Name", ListNotificationRulesFilterName)
-
-	ListNotificationRulesFilter_Value = ListNotificationRulesFilter.AddMember("Value", _ListNotificationRulesFilterValue)
-
-	_ListNotificationRulesFilters_member = _ListNotificationRulesFilters.AddMember("member", ListNotificationRulesFilter)
-
-	ListTargetsFilterName_TARGET_TYPE = ListTargetsFilterName.AddMember("TARGET_TYPE", smithyprelude.Unit)
-
-	ListTargetsFilterName_TARGET_ADDRESS = ListTargetsFilterName.AddMember("TARGET_ADDRESS", smithyprelude.Unit)
-
-	ListTargetsFilterName_TARGET_STATUS = ListTargetsFilterName.AddMember("TARGET_STATUS", smithyprelude.Unit)
-
-	ListTargetsFilter_Name = ListTargetsFilter.AddMember("Name", ListTargetsFilterName)
-
-	ListTargetsFilter_Value = ListTargetsFilter.AddMember("Value", _ListTargetsFilterValue)
-
-	_ListTargetsFilters_member = _ListTargetsFilters.AddMember("member", ListTargetsFilter)
-
-	NotificationRuleSummary_Id = NotificationRuleSummary.AddMember("Id", _NotificationRuleId)
-
-	NotificationRuleSummary_Arn = NotificationRuleSummary.AddMember("Arn", _NotificationRuleArn)
-
-	_NotificationRuleBatch_member = _NotificationRuleBatch.AddMember("member", NotificationRuleSummary)
-
-	NotificationRuleStatus_ENABLED = NotificationRuleStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	NotificationRuleStatus_DISABLED = NotificationRuleStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _Message)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	Target_TargetType = Target.AddMember("TargetType", _TargetType)
-
-	Target_TargetAddress = Target.AddMember("TargetAddress", _TargetAddress)
-
-	_Targets_member = _Targets.AddMember("member", Target)
-
-	TargetStatus_PENDING = TargetStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	TargetStatus_ACTIVE = TargetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TargetStatus_UNREACHABLE = TargetStatus.AddMember("UNREACHABLE", smithyprelude.Unit)
-
-	TargetStatus_INACTIVE = TargetStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	TargetStatus_DEACTIVATED = TargetStatus.AddMember("DEACTIVATED", smithyprelude.Unit)
-
-	TargetSummary_TargetAddress = TargetSummary.AddMember("TargetAddress", _TargetAddress)
-
-	TargetSummary_TargetType = TargetSummary.AddMember("TargetType", _TargetType)
-
-	TargetSummary_TargetStatus = TargetSummary.AddMember("TargetStatus", TargetStatus)
-
-	_TargetsBatch_member = _TargetsBatch.AddMember("member", TargetSummary)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _Message)
-
-	CreateNotificationRuleRequest_Name = CreateNotificationRuleRequest.AddMember("Name", _NotificationRuleName)
-
-	CreateNotificationRuleRequest_EventTypeIds = CreateNotificationRuleRequest.AddMember("EventTypeIds", _EventTypeIds)
-
-	CreateNotificationRuleRequest_Resource = CreateNotificationRuleRequest.AddMember("Resource", _NotificationRuleResource)
-
-	CreateNotificationRuleRequest_Targets = CreateNotificationRuleRequest.AddMember("Targets", _Targets)
-
-	CreateNotificationRuleRequest_DetailType = CreateNotificationRuleRequest.AddMember("DetailType", DetailType)
-
-	CreateNotificationRuleRequest_ClientRequestToken = CreateNotificationRuleRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateNotificationRuleRequest_Tags = CreateNotificationRuleRequest.AddMember("Tags", _Tags)
-
-	CreateNotificationRuleRequest_Status = CreateNotificationRuleRequest.AddMember("Status", NotificationRuleStatus)
-
-	CreateNotificationRuleResult_Arn = CreateNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteNotificationRuleRequest_Arn = DeleteNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteNotificationRuleResult_Arn = DeleteNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteTargetRequest_TargetAddress = DeleteTargetRequest.AddMember("TargetAddress", _TargetAddress)
-
-	DeleteTargetRequest_ForceUnsubscribeAll = DeleteTargetRequest.AddMember("ForceUnsubscribeAll", _ForceUnsubscribeAll)
-
-	DescribeNotificationRuleRequest_Arn = DescribeNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	DescribeNotificationRuleResult_Arn = DescribeNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DescribeNotificationRuleResult_Name = DescribeNotificationRuleResult.AddMember("Name", _NotificationRuleName)
-
-	DescribeNotificationRuleResult_EventTypes = DescribeNotificationRuleResult.AddMember("EventTypes", _EventTypeBatch)
-
-	DescribeNotificationRuleResult_Resource = DescribeNotificationRuleResult.AddMember("Resource", _NotificationRuleResource)
-
-	DescribeNotificationRuleResult_Targets = DescribeNotificationRuleResult.AddMember("Targets", _TargetsBatch)
-
-	DescribeNotificationRuleResult_DetailType = DescribeNotificationRuleResult.AddMember("DetailType", DetailType)
-
-	DescribeNotificationRuleResult_CreatedBy = DescribeNotificationRuleResult.AddMember("CreatedBy", _NotificationRuleCreatedBy)
-
-	DescribeNotificationRuleResult_Status = DescribeNotificationRuleResult.AddMember("Status", NotificationRuleStatus)
-
-	DescribeNotificationRuleResult_CreatedTimestamp = DescribeNotificationRuleResult.AddMember("CreatedTimestamp", _CreatedTimestamp)
-
-	DescribeNotificationRuleResult_LastModifiedTimestamp = DescribeNotificationRuleResult.AddMember("LastModifiedTimestamp", _LastModifiedTimestamp)
-
-	DescribeNotificationRuleResult_Tags = DescribeNotificationRuleResult.AddMember("Tags", _Tags)
-
-	ListEventTypesRequest_Filters = ListEventTypesRequest.AddMember("Filters", _ListEventTypesFilters)
-
-	ListEventTypesRequest_NextToken = ListEventTypesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventTypesRequest_MaxResults = ListEventTypesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEventTypesResult_EventTypes = ListEventTypesResult.AddMember("EventTypes", _EventTypeBatch)
-
-	ListEventTypesResult_NextToken = ListEventTypesResult.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesRequest_Filters = ListNotificationRulesRequest.AddMember("Filters", _ListNotificationRulesFilters)
-
-	ListNotificationRulesRequest_NextToken = ListNotificationRulesRequest.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesRequest_MaxResults = ListNotificationRulesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListNotificationRulesResult_NextToken = ListNotificationRulesResult.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesResult_NotificationRules = ListNotificationRulesResult.AddMember("NotificationRules", _NotificationRuleBatch)
-
-	ListTagsForResourceRequest_Arn = ListTagsForResourceRequest.AddMember("Arn", _NotificationRuleArn)
-
-	ListTagsForResourceResult_Tags = ListTagsForResourceResult.AddMember("Tags", _Tags)
-
-	ListTargetsRequest_Filters = ListTargetsRequest.AddMember("Filters", _ListTargetsFilters)
-
-	ListTargetsRequest_NextToken = ListTargetsRequest.AddMember("NextToken", _NextToken)
-
-	ListTargetsRequest_MaxResults = ListTargetsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTargetsResult_Targets = ListTargetsResult.AddMember("Targets", _TargetsBatch)
-
-	ListTargetsResult_NextToken = ListTargetsResult.AddMember("NextToken", _NextToken)
-
-	SubscribeRequest_Arn = SubscribeRequest.AddMember("Arn", _NotificationRuleArn)
-
-	SubscribeRequest_Target = SubscribeRequest.AddMember("Target", Target)
-
-	SubscribeRequest_ClientRequestToken = SubscribeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	SubscribeResult_Arn = SubscribeResult.AddMember("Arn", _NotificationRuleArn)
-
-	TagResourceRequest_Arn = TagResourceRequest.AddMember("Arn", _NotificationRuleArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	TagResourceResult_Tags = TagResourceResult.AddMember("Tags", _Tags)
-
-	UnsubscribeRequest_Arn = UnsubscribeRequest.AddMember("Arn", _NotificationRuleArn)
-
-	UnsubscribeRequest_TargetAddress = UnsubscribeRequest.AddMember("TargetAddress", _TargetAddress)
-
-	UnsubscribeResult_Arn = UnsubscribeResult.AddMember("Arn", _NotificationRuleArn)
-
-	UntagResourceRequest_Arn = UntagResourceRequest.AddMember("Arn", _NotificationRuleArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateNotificationRuleRequest_Arn = UpdateNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	UpdateNotificationRuleRequest_Name = UpdateNotificationRuleRequest.AddMember("Name", _NotificationRuleName)
-
-	UpdateNotificationRuleRequest_Status = UpdateNotificationRuleRequest.AddMember("Status", NotificationRuleStatus)
-
-	UpdateNotificationRuleRequest_EventTypeIds = UpdateNotificationRuleRequest.AddMember("EventTypeIds", _EventTypeIds)
-
-	UpdateNotificationRuleRequest_Targets = UpdateNotificationRuleRequest.AddMember("Targets", _Targets)
-
-	UpdateNotificationRuleRequest_DetailType = UpdateNotificationRuleRequest.AddMember("DetailType", DetailType)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationException_Message}}
+var mDetailType = smithy.SchemaMembers{List: []*smithy.Schema{&sDetailType_BASIC, &sDetailType_FULL}}
+var m_EventTypeBatch = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeBatch_member}}
+var m_EventTypeIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeIds_member}}
+var mEventTypeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTypeSummary_EventTypeId, &sEventTypeSummary_ServiceName, &sEventTypeSummary_EventTypeName, &sEventTypeSummary_ResourceType}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mListEventTypesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventTypesFilter_Name, &sListEventTypesFilter_Value}}
+var mListEventTypesFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventTypesFilterName_RESOURCE_TYPE, &sListEventTypesFilterName_SERVICE_NAME}}
+var m_ListEventTypesFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEventTypesFilters_member}}
+var mListNotificationRulesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationRulesFilter_Name, &sListNotificationRulesFilter_Value}}
+var mListNotificationRulesFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationRulesFilterName_EVENT_TYPE_ID, &sListNotificationRulesFilterName_CREATED_BY, &sListNotificationRulesFilterName_RESOURCE, &sListNotificationRulesFilterName_TARGET_ADDRESS}}
+var m_ListNotificationRulesFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListNotificationRulesFilters_member}}
+var mListTargetsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsFilter_Name, &sListTargetsFilter_Value}}
+var mListTargetsFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsFilterName_TARGET_TYPE, &sListTargetsFilterName_TARGET_ADDRESS, &sListTargetsFilterName_TARGET_STATUS}}
+var m_ListTargetsFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListTargetsFilters_member}}
+var m_NotificationRuleBatch = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationRuleBatch_member}}
+var mNotificationRuleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationRuleStatus_ENABLED, &sNotificationRuleStatus_DISABLED}}
+var mNotificationRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationRuleSummary_Id, &sNotificationRuleSummary_Arn}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sTarget_TargetType, &sTarget_TargetAddress}}
+var m_Targets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Targets_member}}
+var m_TargetsBatch = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetsBatch_member}}
+var mTargetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetStatus_PENDING, &sTargetStatus_ACTIVE, &sTargetStatus_UNREACHABLE, &sTargetStatus_INACTIVE, &sTargetStatus_DEACTIVATED}}
+var mTargetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetSummary_TargetAddress, &sTargetSummary_TargetType, &sTargetSummary_TargetStatus}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateNotificationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotificationRuleRequest_Name, &sCreateNotificationRuleRequest_EventTypeIds, &sCreateNotificationRuleRequest_Resource, &sCreateNotificationRuleRequest_Targets, &sCreateNotificationRuleRequest_DetailType, &sCreateNotificationRuleRequest_ClientRequestToken, &sCreateNotificationRuleRequest_Tags, &sCreateNotificationRuleRequest_Status}}
+var mCreateNotificationRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotificationRuleResult_Arn}}
+var mDeleteNotificationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNotificationRuleRequest_Arn}}
+var mDeleteNotificationRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNotificationRuleResult_Arn}}
+var mDeleteTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTargetRequest_TargetAddress, &sDeleteTargetRequest_ForceUnsubscribeAll}}
+var mDescribeNotificationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNotificationRuleRequest_Arn}}
+var mDescribeNotificationRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNotificationRuleResult_Arn, &sDescribeNotificationRuleResult_Name, &sDescribeNotificationRuleResult_EventTypes, &sDescribeNotificationRuleResult_Resource, &sDescribeNotificationRuleResult_Targets, &sDescribeNotificationRuleResult_DetailType, &sDescribeNotificationRuleResult_CreatedBy, &sDescribeNotificationRuleResult_Status, &sDescribeNotificationRuleResult_CreatedTimestamp, &sDescribeNotificationRuleResult_LastModifiedTimestamp, &sDescribeNotificationRuleResult_Tags}, Hash: &hDescribeNotificationRuleResult}
+var mListEventTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventTypesRequest_Filters, &sListEventTypesRequest_NextToken, &sListEventTypesRequest_MaxResults}}
+var mListEventTypesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventTypesResult_EventTypes, &sListEventTypesResult_NextToken}}
+var mListNotificationRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationRulesRequest_Filters, &sListNotificationRulesRequest_NextToken, &sListNotificationRulesRequest_MaxResults}}
+var mListNotificationRulesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationRulesResult_NextToken, &sListNotificationRulesResult_NotificationRules}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_Arn}}
+var mListTagsForResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResult_Tags}}
+var mListTargetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsRequest_Filters, &sListTargetsRequest_NextToken, &sListTargetsRequest_MaxResults}}
+var mListTargetsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsResult_Targets, &sListTargetsResult_NextToken}}
+var mSubscribeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeRequest_Arn, &sSubscribeRequest_Target, &sSubscribeRequest_ClientRequestToken}}
+var mSubscribeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeResult_Arn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_Arn, &sTagResourceRequest_Tags}}
+var mTagResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceResult_Tags}}
+var mUnsubscribeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsubscribeRequest_Arn, &sUnsubscribeRequest_TargetAddress}}
+var mUnsubscribeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsubscribeResult_Arn}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_Arn, &sUntagResourceRequest_TagKeys}}
+var mUpdateNotificationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotificationRuleRequest_Arn, &sUpdateNotificationRuleRequest_Name, &sUpdateNotificationRuleRequest_Status, &sUpdateNotificationRuleRequest_EventTypeIds, &sUpdateNotificationRuleRequest_Targets, &sUpdateNotificationRuleRequest_DetailType}}
+
+var hDescribeNotificationRuleResult = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	10, 2, 0, 8, 0, 0, 0, 0, 7, 3, 0, 0, 0, 0, 11, 0, 0, 0, 0, 1, 0, 0, 9, 0,
+	6, 0, 0, 0, 0, 5, 0, 4,
+}}
+
+var sCreateNotificationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationRule, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateNotificationRule})
+var sDeleteNotificationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationRule, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNotificationRule})
+var sDeleteTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTarget, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTarget})
+var sDescribeNotificationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationRule, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDescribeNotificationRule})
+var sListEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventTypes, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListEventTypes})
+var sListNotificationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationRules, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListNotificationRules})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargets, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListTargets})
+var sSubscribe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribe, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eSubscribe})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUnsubscribe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribe, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eUnsubscribe})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateNotificationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationRule, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNotificationRule})
+var s_CodeStarNotifications_20191015 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeStarNotifications_20191015, Type: smithy.ShapeTypeService, Ext: &e_CodeStarNotifications_20191015})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationException, Members: &mConfigurationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationException})
+var sConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConfigurationException_Message})
+var s_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreatedTimestamp})
+var sDetailType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetailType, Members: &mDetailType, Type: smithy.ShapeTypeEnum, Ext: &eDetailType})
+var sDetailType_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetailType_BASIC})
+var sDetailType_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDetailType_FULL})
+var s_EventTypeBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeBatch, Members: &m_EventTypeBatch, Type: smithy.ShapeTypeList, Ext: &e_EventTypeBatch})
+var s_EventTypeBatch_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypeSummary, Members: &mEventTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EventTypeBatch_member})
+var s_EventTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeId, Type: smithy.ShapeTypeString, Ext: &e_EventTypeId})
+var s_EventTypeIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeIds, Members: &m_EventTypeIds, Type: smithy.ShapeTypeList, Ext: &e_EventTypeIds})
+var s_EventTypeIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventTypeId, Type: smithy.ShapeTypeString, Ext: &e_EventTypeIds_member})
+var s_EventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeName, Type: smithy.ShapeTypeString, Ext: &e_EventTypeName})
+var sEventTypeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeSummary, Members: &mEventTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeSummary})
+var sEventTypeSummary_EventTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeId", ID: &i_EventTypeId, Type: smithy.ShapeTypeString, Ext: &eEventTypeSummary_EventTypeId})
+var sEventTypeSummary_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eEventTypeSummary_ServiceName})
+var sEventTypeSummary_EventTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeName", ID: &i_EventTypeName, Type: smithy.ShapeTypeString, Ext: &eEventTypeSummary_EventTypeName})
+var sEventTypeSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eEventTypeSummary_ResourceType})
+var s_ForceUnsubscribeAll = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ForceUnsubscribeAll, Type: smithy.ShapeTypeBoolean, Ext: &e_ForceUnsubscribeAll})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var s_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModifiedTimestamp})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sListEventTypesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventTypesFilter, Members: &mListEventTypesFilter, Type: smithy.ShapeTypeStructure, Ext: &eListEventTypesFilter})
+var sListEventTypesFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListEventTypesFilterName, Members: &mListEventTypesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListEventTypesFilter_Name})
+var sListEventTypesFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ListEventTypesFilterValue, Type: smithy.ShapeTypeString, Ext: &eListEventTypesFilter_Value})
+var sListEventTypesFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventTypesFilterName, Members: &mListEventTypesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListEventTypesFilterName})
+var sListEventTypesFilterName_RESOURCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListEventTypesFilterName_RESOURCE_TYPE})
+var sListEventTypesFilterName_SERVICE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListEventTypesFilterName_SERVICE_NAME})
+var s_ListEventTypesFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEventTypesFilters, Members: &m_ListEventTypesFilters, Type: smithy.ShapeTypeList, Ext: &e_ListEventTypesFilters})
+var s_ListEventTypesFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEventTypesFilter, Members: &mListEventTypesFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ListEventTypesFilters_member})
+var s_ListEventTypesFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEventTypesFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ListEventTypesFilterValue})
+var sListNotificationRulesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationRulesFilter, Members: &mListNotificationRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesFilter})
+var sListNotificationRulesFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListNotificationRulesFilterName, Members: &mListNotificationRulesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListNotificationRulesFilter_Name})
+var sListNotificationRulesFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ListNotificationRulesFilterValue, Type: smithy.ShapeTypeString, Ext: &eListNotificationRulesFilter_Value})
+var sListNotificationRulesFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationRulesFilterName, Members: &mListNotificationRulesFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListNotificationRulesFilterName})
+var sListNotificationRulesFilterName_EVENT_TYPE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_TYPE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesFilterName_EVENT_TYPE_ID})
+var sListNotificationRulesFilterName_CREATED_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_BY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesFilterName_CREATED_BY})
+var sListNotificationRulesFilterName_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesFilterName_RESOURCE})
+var sListNotificationRulesFilterName_TARGET_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesFilterName_TARGET_ADDRESS})
+var s_ListNotificationRulesFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListNotificationRulesFilters, Members: &m_ListNotificationRulesFilters, Type: smithy.ShapeTypeList, Ext: &e_ListNotificationRulesFilters})
+var s_ListNotificationRulesFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListNotificationRulesFilter, Members: &mListNotificationRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ListNotificationRulesFilters_member})
+var s_ListNotificationRulesFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListNotificationRulesFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ListNotificationRulesFilterValue})
+var sListTargetsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsFilter, Members: &mListTargetsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsFilter})
+var sListTargetsFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListTargetsFilterName, Members: &mListTargetsFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListTargetsFilter_Name})
+var sListTargetsFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ListTargetsFilterValue, Type: smithy.ShapeTypeString, Ext: &eListTargetsFilter_Value})
+var sListTargetsFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsFilterName, Members: &mListTargetsFilterName, Type: smithy.ShapeTypeEnum, Ext: &eListTargetsFilterName})
+var sListTargetsFilterName_TARGET_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsFilterName_TARGET_TYPE})
+var sListTargetsFilterName_TARGET_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsFilterName_TARGET_ADDRESS})
+var sListTargetsFilterName_TARGET_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsFilterName_TARGET_STATUS})
+var s_ListTargetsFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetsFilters, Members: &m_ListTargetsFilters, Type: smithy.ShapeTypeList, Ext: &e_ListTargetsFilters})
+var s_ListTargetsFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListTargetsFilter, Members: &mListTargetsFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ListTargetsFilters_member})
+var s_ListTargetsFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetsFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ListTargetsFilterValue})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NotificationRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &e_NotificationRuleArn})
+var s_NotificationRuleBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleBatch, Members: &m_NotificationRuleBatch, Type: smithy.ShapeTypeList, Ext: &e_NotificationRuleBatch})
+var s_NotificationRuleBatch_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationRuleSummary, Members: &mNotificationRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationRuleBatch_member})
+var s_NotificationRuleCreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleCreatedBy, Type: smithy.ShapeTypeString, Ext: &e_NotificationRuleCreatedBy})
+var s_NotificationRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleId, Type: smithy.ShapeTypeString, Ext: &e_NotificationRuleId})
+var s_NotificationRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleName, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &e_NotificationRuleName})
+var s_NotificationRuleResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationRuleResource, Type: smithy.ShapeTypeString, Ext: &e_NotificationRuleResource})
+var sNotificationRuleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationRuleStatus, Members: &mNotificationRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eNotificationRuleStatus})
+var sNotificationRuleStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationRuleStatus_ENABLED})
+var sNotificationRuleStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationRuleStatus_DISABLED})
+var sNotificationRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationRuleSummary, Members: &mNotificationRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationRuleSummary})
+var sNotificationRuleSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NotificationRuleId, Type: smithy.ShapeTypeString, Ext: &eNotificationRuleSummary_Id})
+var sNotificationRuleSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eNotificationRuleSummary_Arn})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &e_ServiceName})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &eTarget})
+var sTarget_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &eTarget_TargetType})
+var sTarget_TargetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAddress", ID: &i_TargetAddress, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eTarget_TargetAddress})
+var s_TargetAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAddress, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &e_TargetAddress})
+var s_Targets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Targets, Members: &m_Targets, Type: smithy.ShapeTypeList, Ext: &e_Targets})
+var s_Targets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &e_Targets_member})
+var s_TargetsBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetsBatch, Members: &m_TargetsBatch, Type: smithy.ShapeTypeList, Ext: &e_TargetsBatch})
+var s_TargetsBatch_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetSummary, Members: &mTargetSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TargetsBatch_member})
+var sTargetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetStatus, Members: &mTargetStatus, Type: smithy.ShapeTypeEnum, Ext: &eTargetStatus})
+var sTargetStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStatus_PENDING})
+var sTargetStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStatus_ACTIVE})
+var sTargetStatus_UNREACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNREACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStatus_UNREACHABLE})
+var sTargetStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStatus_INACTIVE})
+var sTargetStatus_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStatus_DEACTIVATED})
+var sTargetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetSummary, Members: &mTargetSummary, Type: smithy.ShapeTypeStructure, Ext: &eTargetSummary})
+var sTargetSummary_TargetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAddress", ID: &i_TargetAddress, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eTargetSummary_TargetAddress})
+var sTargetSummary_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &eTargetSummary_TargetType})
+var sTargetSummary_TargetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStatus", ID: &iTargetStatus, Members: &mTargetStatus, Type: smithy.ShapeTypeEnum, Ext: &eTargetSummary_TargetStatus})
+var s_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &e_TargetType})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateNotificationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationRuleRequest, Members: &mCreateNotificationRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationRuleRequest})
+var sCreateNotificationRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotificationRuleName, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRuleRequest_Name})
+var sCreateNotificationRuleRequest_EventTypeIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeIds", ID: &i_EventTypeIds, Members: &m_EventTypeIds, Type: smithy.ShapeTypeList, Ext: &eCreateNotificationRuleRequest_EventTypeIds})
+var sCreateNotificationRuleRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_NotificationRuleResource, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRuleRequest_Resource})
+var sCreateNotificationRuleRequest_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_Targets, Members: &m_Targets, Type: smithy.ShapeTypeList, Ext: &eCreateNotificationRuleRequest_Targets})
+var sCreateNotificationRuleRequest_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &iDetailType, Members: &mDetailType, Type: smithy.ShapeTypeEnum, Ext: &eCreateNotificationRuleRequest_DetailType})
+var sCreateNotificationRuleRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRuleRequest_ClientRequestToken})
+var sCreateNotificationRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateNotificationRuleRequest_Tags})
+var sCreateNotificationRuleRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNotificationRuleStatus, Members: &mNotificationRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateNotificationRuleRequest_Status})
+var sCreateNotificationRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationRuleResult, Members: &mCreateNotificationRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationRuleResult})
+var sCreateNotificationRuleResult_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRuleResult_Arn})
+var sDeleteNotificationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationRuleRequest, Members: &mDeleteNotificationRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationRuleRequest})
+var sDeleteNotificationRuleRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eDeleteNotificationRuleRequest_Arn})
+var sDeleteNotificationRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationRuleResult, Members: &mDeleteNotificationRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationRuleResult})
+var sDeleteNotificationRuleResult_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eDeleteNotificationRuleResult_Arn})
+var sDeleteTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetRequest, Members: &mDeleteTargetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetRequest})
+var sDeleteTargetRequest_TargetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAddress", ID: &i_TargetAddress, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eDeleteTargetRequest_TargetAddress})
+var sDeleteTargetRequest_ForceUnsubscribeAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceUnsubscribeAll", ID: &i_ForceUnsubscribeAll, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteTargetRequest_ForceUnsubscribeAll})
+var sDeleteTargetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetResult})
+var sDescribeNotificationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationRuleRequest, Members: &mDescribeNotificationRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeNotificationRuleRequest})
+var sDescribeNotificationRuleRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationRuleRequest_Arn})
+var sDescribeNotificationRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationRuleResult, Members: &mDescribeNotificationRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeNotificationRuleResult})
+var sDescribeNotificationRuleResult_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationRuleResult_Arn})
+var sDescribeNotificationRuleResult_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotificationRuleName, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationRuleResult_Name})
+var sDescribeNotificationRuleResult_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypes", ID: &i_EventTypeBatch, Members: &m_EventTypeBatch, Type: smithy.ShapeTypeList, Ext: &eDescribeNotificationRuleResult_EventTypes})
+var sDescribeNotificationRuleResult_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_NotificationRuleResource, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationRuleResult_Resource})
+var sDescribeNotificationRuleResult_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetsBatch, Members: &m_TargetsBatch, Type: smithy.ShapeTypeList, Ext: &eDescribeNotificationRuleResult_Targets})
+var sDescribeNotificationRuleResult_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &iDetailType, Members: &mDetailType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeNotificationRuleResult_DetailType})
+var sDescribeNotificationRuleResult_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_NotificationRuleCreatedBy, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationRuleResult_CreatedBy})
+var sDescribeNotificationRuleResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNotificationRuleStatus, Members: &mNotificationRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeNotificationRuleResult_Status})
+var sDescribeNotificationRuleResult_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_CreatedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeNotificationRuleResult_CreatedTimestamp})
+var sDescribeNotificationRuleResult_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeNotificationRuleResult_LastModifiedTimestamp})
+var sDescribeNotificationRuleResult_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eDescribeNotificationRuleResult_Tags})
+var sListEventTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventTypesRequest, Members: &mListEventTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEventTypesRequest})
+var sListEventTypesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_ListEventTypesFilters, Members: &m_ListEventTypesFilters, Type: smithy.ShapeTypeList, Ext: &eListEventTypesRequest_Filters})
+var sListEventTypesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEventTypesRequest_NextToken})
+var sListEventTypesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEventTypesRequest_MaxResults})
+var sListEventTypesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventTypesResult, Members: &mListEventTypesResult, Type: smithy.ShapeTypeStructure, Ext: &eListEventTypesResult})
+var sListEventTypesResult_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypes", ID: &i_EventTypeBatch, Members: &m_EventTypeBatch, Type: smithy.ShapeTypeList, Ext: &eListEventTypesResult_EventTypes})
+var sListEventTypesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEventTypesResult_NextToken})
+var sListNotificationRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationRulesRequest, Members: &mListNotificationRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesRequest})
+var sListNotificationRulesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_ListNotificationRulesFilters, Members: &m_ListNotificationRulesFilters, Type: smithy.ShapeTypeList, Ext: &eListNotificationRulesRequest_Filters})
+var sListNotificationRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotificationRulesRequest_NextToken})
+var sListNotificationRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListNotificationRulesRequest_MaxResults})
+var sListNotificationRulesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationRulesResult, Members: &mListNotificationRulesResult, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationRulesResult})
+var sListNotificationRulesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotificationRulesResult_NextToken})
+var sListNotificationRulesResult_NotificationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationRules", ID: &i_NotificationRuleBatch, Members: &m_NotificationRuleBatch, Type: smithy.ShapeTypeList, Ext: &eListNotificationRulesResult_NotificationRules})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_Arn})
+var sListTagsForResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResult, Members: &mListTagsForResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResult})
+var sListTagsForResourceResult_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResult_Tags})
+var sListTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsRequest, Members: &mListTargetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsRequest})
+var sListTargetsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_ListTargetsFilters, Members: &m_ListTargetsFilters, Type: smithy.ShapeTypeList, Ext: &eListTargetsRequest_Filters})
+var sListTargetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTargetsRequest_NextToken})
+var sListTargetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTargetsRequest_MaxResults})
+var sListTargetsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsResult, Members: &mListTargetsResult, Type: smithy.ShapeTypeStructure, Ext: &eListTargetsResult})
+var sListTargetsResult_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetsBatch, Members: &m_TargetsBatch, Type: smithy.ShapeTypeList, Ext: &eListTargetsResult_Targets})
+var sListTargetsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTargetsResult_NextToken})
+var sSubscribeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeRequest, Members: &mSubscribeRequest, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeRequest})
+var sSubscribeRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eSubscribeRequest_Arn})
+var sSubscribeRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeRequest_Target})
+var sSubscribeRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eSubscribeRequest_ClientRequestToken})
+var sSubscribeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeResult, Members: &mSubscribeResult, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeResult})
+var sSubscribeResult_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eSubscribeResult_Arn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_Arn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResult, Members: &mTagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResult})
+var sTagResourceResult_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceResult_Tags})
+var sUnsubscribeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeRequest, Members: &mUnsubscribeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUnsubscribeRequest})
+var sUnsubscribeRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeRequest_Arn})
+var sUnsubscribeRequest_TargetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAddress", ID: &i_TargetAddress, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeRequest_TargetAddress})
+var sUnsubscribeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeResult, Members: &mUnsubscribeResult, Type: smithy.ShapeTypeStructure, Ext: &eUnsubscribeResult})
+var sUnsubscribeResult_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeResult_Arn})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_Arn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t20, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResult, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResult})
+var sUpdateNotificationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationRuleRequest, Members: &mUpdateNotificationRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationRuleRequest})
+var sUpdateNotificationRuleRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NotificationRuleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationRuleRequest_Arn})
+var sUpdateNotificationRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotificationRuleName, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationRuleRequest_Name})
+var sUpdateNotificationRuleRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNotificationRuleStatus, Members: &mNotificationRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateNotificationRuleRequest_Status})
+var sUpdateNotificationRuleRequest_EventTypeIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeIds", ID: &i_EventTypeIds, Members: &m_EventTypeIds, Type: smithy.ShapeTypeList, Ext: &eUpdateNotificationRuleRequest_EventTypeIds})
+var sUpdateNotificationRuleRequest_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_Targets, Members: &m_Targets, Type: smithy.ShapeTypeList, Ext: &eUpdateNotificationRuleRequest_Targets})
+var sUpdateNotificationRuleRequest_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &iDetailType, Members: &mDetailType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateNotificationRuleRequest_DetailType})
+var sUpdateNotificationRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationRuleResult})
+
+var CreateNotificationRule = &sCreateNotificationRule
+
+var DeleteNotificationRule = &sDeleteNotificationRule
+
+var DeleteTarget = &sDeleteTarget
+
+var DescribeNotificationRule = &sDescribeNotificationRule
+
+var ListEventTypes = &sListEventTypes
+
+var ListNotificationRules = &sListNotificationRules
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTargets = &sListTargets
+
+var Subscribe = &sSubscribe
+
+var TagResource = &sTagResource
+
+var Unsubscribe = &sUnsubscribe
+
+var UntagResource = &sUntagResource
+
+var UpdateNotificationRule = &sUpdateNotificationRule
+
+var _CodeStarNotifications_20191015 = &s_CodeStarNotifications_20191015
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConfigurationException = &sConfigurationException
+var ConfigurationException_Message = &sConfigurationException_Message
+
+var _CreatedTimestamp = &s_CreatedTimestamp
+
+var DetailType = &sDetailType
+var DetailType_BASIC = &sDetailType_BASIC
+var DetailType_FULL = &sDetailType_FULL
+
+var _EventTypeBatch = &s_EventTypeBatch
+var _EventTypeBatch_member = &s_EventTypeBatch_member
+
+var _EventTypeId = &s_EventTypeId
+
+var _EventTypeIds = &s_EventTypeIds
+var _EventTypeIds_member = &s_EventTypeIds_member
+
+var _EventTypeName = &s_EventTypeName
+
+var EventTypeSummary = &sEventTypeSummary
+var EventTypeSummary_EventTypeId = &sEventTypeSummary_EventTypeId
+var EventTypeSummary_ServiceName = &sEventTypeSummary_ServiceName
+var EventTypeSummary_EventTypeName = &sEventTypeSummary_EventTypeName
+var EventTypeSummary_ResourceType = &sEventTypeSummary_ResourceType
+
+var _ForceUnsubscribeAll = &s_ForceUnsubscribeAll
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var _LastModifiedTimestamp = &s_LastModifiedTimestamp
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var ListEventTypesFilter = &sListEventTypesFilter
+var ListEventTypesFilter_Name = &sListEventTypesFilter_Name
+var ListEventTypesFilter_Value = &sListEventTypesFilter_Value
+
+var ListEventTypesFilterName = &sListEventTypesFilterName
+var ListEventTypesFilterName_RESOURCE_TYPE = &sListEventTypesFilterName_RESOURCE_TYPE
+var ListEventTypesFilterName_SERVICE_NAME = &sListEventTypesFilterName_SERVICE_NAME
+
+var _ListEventTypesFilters = &s_ListEventTypesFilters
+var _ListEventTypesFilters_member = &s_ListEventTypesFilters_member
+
+var _ListEventTypesFilterValue = &s_ListEventTypesFilterValue
+
+var ListNotificationRulesFilter = &sListNotificationRulesFilter
+var ListNotificationRulesFilter_Name = &sListNotificationRulesFilter_Name
+var ListNotificationRulesFilter_Value = &sListNotificationRulesFilter_Value
+
+var ListNotificationRulesFilterName = &sListNotificationRulesFilterName
+var ListNotificationRulesFilterName_EVENT_TYPE_ID = &sListNotificationRulesFilterName_EVENT_TYPE_ID
+var ListNotificationRulesFilterName_CREATED_BY = &sListNotificationRulesFilterName_CREATED_BY
+var ListNotificationRulesFilterName_RESOURCE = &sListNotificationRulesFilterName_RESOURCE
+var ListNotificationRulesFilterName_TARGET_ADDRESS = &sListNotificationRulesFilterName_TARGET_ADDRESS
+
+var _ListNotificationRulesFilters = &s_ListNotificationRulesFilters
+var _ListNotificationRulesFilters_member = &s_ListNotificationRulesFilters_member
+
+var _ListNotificationRulesFilterValue = &s_ListNotificationRulesFilterValue
+
+var ListTargetsFilter = &sListTargetsFilter
+var ListTargetsFilter_Name = &sListTargetsFilter_Name
+var ListTargetsFilter_Value = &sListTargetsFilter_Value
+
+var ListTargetsFilterName = &sListTargetsFilterName
+var ListTargetsFilterName_TARGET_TYPE = &sListTargetsFilterName_TARGET_TYPE
+var ListTargetsFilterName_TARGET_ADDRESS = &sListTargetsFilterName_TARGET_ADDRESS
+var ListTargetsFilterName_TARGET_STATUS = &sListTargetsFilterName_TARGET_STATUS
+
+var _ListTargetsFilters = &s_ListTargetsFilters
+var _ListTargetsFilters_member = &s_ListTargetsFilters_member
+
+var _ListTargetsFilterValue = &s_ListTargetsFilterValue
+
+var _MaxResults = &s_MaxResults
+
+var _Message = &s_Message
+
+var _NextToken = &s_NextToken
+
+var _NotificationRuleArn = &s_NotificationRuleArn
+
+var _NotificationRuleBatch = &s_NotificationRuleBatch
+var _NotificationRuleBatch_member = &s_NotificationRuleBatch_member
+
+var _NotificationRuleCreatedBy = &s_NotificationRuleCreatedBy
+
+var _NotificationRuleId = &s_NotificationRuleId
+
+var _NotificationRuleName = &s_NotificationRuleName
+
+var _NotificationRuleResource = &s_NotificationRuleResource
+
+var NotificationRuleStatus = &sNotificationRuleStatus
+var NotificationRuleStatus_ENABLED = &sNotificationRuleStatus_ENABLED
+var NotificationRuleStatus_DISABLED = &sNotificationRuleStatus_DISABLED
+
+var NotificationRuleSummary = &sNotificationRuleSummary
+var NotificationRuleSummary_Id = &sNotificationRuleSummary_Id
+var NotificationRuleSummary_Arn = &sNotificationRuleSummary_Arn
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceType = &s_ResourceType
+
+var _ServiceName = &s_ServiceName
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var Target = &sTarget
+var Target_TargetType = &sTarget_TargetType
+var Target_TargetAddress = &sTarget_TargetAddress
+
+var _TargetAddress = &s_TargetAddress
+
+var _Targets = &s_Targets
+var _Targets_member = &s_Targets_member
+
+var _TargetsBatch = &s_TargetsBatch
+var _TargetsBatch_member = &s_TargetsBatch_member
+
+var TargetStatus = &sTargetStatus
+var TargetStatus_PENDING = &sTargetStatus_PENDING
+var TargetStatus_ACTIVE = &sTargetStatus_ACTIVE
+var TargetStatus_UNREACHABLE = &sTargetStatus_UNREACHABLE
+var TargetStatus_INACTIVE = &sTargetStatus_INACTIVE
+var TargetStatus_DEACTIVATED = &sTargetStatus_DEACTIVATED
+
+var TargetSummary = &sTargetSummary
+var TargetSummary_TargetAddress = &sTargetSummary_TargetAddress
+var TargetSummary_TargetType = &sTargetSummary_TargetType
+var TargetSummary_TargetStatus = &sTargetSummary_TargetStatus
+
+var _TargetType = &s_TargetType
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateNotificationRuleRequest = &sCreateNotificationRuleRequest
+var CreateNotificationRuleRequest_Name = &sCreateNotificationRuleRequest_Name
+var CreateNotificationRuleRequest_EventTypeIds = &sCreateNotificationRuleRequest_EventTypeIds
+var CreateNotificationRuleRequest_Resource = &sCreateNotificationRuleRequest_Resource
+var CreateNotificationRuleRequest_Targets = &sCreateNotificationRuleRequest_Targets
+var CreateNotificationRuleRequest_DetailType = &sCreateNotificationRuleRequest_DetailType
+var CreateNotificationRuleRequest_ClientRequestToken = &sCreateNotificationRuleRequest_ClientRequestToken
+var CreateNotificationRuleRequest_Tags = &sCreateNotificationRuleRequest_Tags
+var CreateNotificationRuleRequest_Status = &sCreateNotificationRuleRequest_Status
+
+var CreateNotificationRuleResult = &sCreateNotificationRuleResult
+var CreateNotificationRuleResult_Arn = &sCreateNotificationRuleResult_Arn
+
+var DeleteNotificationRuleRequest = &sDeleteNotificationRuleRequest
+var DeleteNotificationRuleRequest_Arn = &sDeleteNotificationRuleRequest_Arn
+
+var DeleteNotificationRuleResult = &sDeleteNotificationRuleResult
+var DeleteNotificationRuleResult_Arn = &sDeleteNotificationRuleResult_Arn
+
+var DeleteTargetRequest = &sDeleteTargetRequest
+var DeleteTargetRequest_TargetAddress = &sDeleteTargetRequest_TargetAddress
+var DeleteTargetRequest_ForceUnsubscribeAll = &sDeleteTargetRequest_ForceUnsubscribeAll
+
+var DeleteTargetResult = &sDeleteTargetResult
+
+var DescribeNotificationRuleRequest = &sDescribeNotificationRuleRequest
+var DescribeNotificationRuleRequest_Arn = &sDescribeNotificationRuleRequest_Arn
+
+var DescribeNotificationRuleResult = &sDescribeNotificationRuleResult
+var DescribeNotificationRuleResult_Arn = &sDescribeNotificationRuleResult_Arn
+var DescribeNotificationRuleResult_Name = &sDescribeNotificationRuleResult_Name
+var DescribeNotificationRuleResult_EventTypes = &sDescribeNotificationRuleResult_EventTypes
+var DescribeNotificationRuleResult_Resource = &sDescribeNotificationRuleResult_Resource
+var DescribeNotificationRuleResult_Targets = &sDescribeNotificationRuleResult_Targets
+var DescribeNotificationRuleResult_DetailType = &sDescribeNotificationRuleResult_DetailType
+var DescribeNotificationRuleResult_CreatedBy = &sDescribeNotificationRuleResult_CreatedBy
+var DescribeNotificationRuleResult_Status = &sDescribeNotificationRuleResult_Status
+var DescribeNotificationRuleResult_CreatedTimestamp = &sDescribeNotificationRuleResult_CreatedTimestamp
+var DescribeNotificationRuleResult_LastModifiedTimestamp = &sDescribeNotificationRuleResult_LastModifiedTimestamp
+var DescribeNotificationRuleResult_Tags = &sDescribeNotificationRuleResult_Tags
+
+var ListEventTypesRequest = &sListEventTypesRequest
+var ListEventTypesRequest_Filters = &sListEventTypesRequest_Filters
+var ListEventTypesRequest_NextToken = &sListEventTypesRequest_NextToken
+var ListEventTypesRequest_MaxResults = &sListEventTypesRequest_MaxResults
+
+var ListEventTypesResult = &sListEventTypesResult
+var ListEventTypesResult_EventTypes = &sListEventTypesResult_EventTypes
+var ListEventTypesResult_NextToken = &sListEventTypesResult_NextToken
+
+var ListNotificationRulesRequest = &sListNotificationRulesRequest
+var ListNotificationRulesRequest_Filters = &sListNotificationRulesRequest_Filters
+var ListNotificationRulesRequest_NextToken = &sListNotificationRulesRequest_NextToken
+var ListNotificationRulesRequest_MaxResults = &sListNotificationRulesRequest_MaxResults
+
+var ListNotificationRulesResult = &sListNotificationRulesResult
+var ListNotificationRulesResult_NextToken = &sListNotificationRulesResult_NextToken
+var ListNotificationRulesResult_NotificationRules = &sListNotificationRulesResult_NotificationRules
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_Arn = &sListTagsForResourceRequest_Arn
+
+var ListTagsForResourceResult = &sListTagsForResourceResult
+var ListTagsForResourceResult_Tags = &sListTagsForResourceResult_Tags
+
+var ListTargetsRequest = &sListTargetsRequest
+var ListTargetsRequest_Filters = &sListTargetsRequest_Filters
+var ListTargetsRequest_NextToken = &sListTargetsRequest_NextToken
+var ListTargetsRequest_MaxResults = &sListTargetsRequest_MaxResults
+
+var ListTargetsResult = &sListTargetsResult
+var ListTargetsResult_Targets = &sListTargetsResult_Targets
+var ListTargetsResult_NextToken = &sListTargetsResult_NextToken
+
+var SubscribeRequest = &sSubscribeRequest
+var SubscribeRequest_Arn = &sSubscribeRequest_Arn
+var SubscribeRequest_Target = &sSubscribeRequest_Target
+var SubscribeRequest_ClientRequestToken = &sSubscribeRequest_ClientRequestToken
+
+var SubscribeResult = &sSubscribeResult
+var SubscribeResult_Arn = &sSubscribeResult_Arn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_Arn = &sTagResourceRequest_Arn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResult = &sTagResourceResult
+var TagResourceResult_Tags = &sTagResourceResult_Tags
+
+var UnsubscribeRequest = &sUnsubscribeRequest
+var UnsubscribeRequest_Arn = &sUnsubscribeRequest_Arn
+var UnsubscribeRequest_TargetAddress = &sUnsubscribeRequest_TargetAddress
+
+var UnsubscribeResult = &sUnsubscribeResult
+var UnsubscribeResult_Arn = &sUnsubscribeResult_Arn
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_Arn = &sUntagResourceRequest_Arn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResult = &sUntagResourceResult
+
+var UpdateNotificationRuleRequest = &sUpdateNotificationRuleRequest
+var UpdateNotificationRuleRequest_Arn = &sUpdateNotificationRuleRequest_Arn
+var UpdateNotificationRuleRequest_Name = &sUpdateNotificationRuleRequest_Name
+var UpdateNotificationRuleRequest_Status = &sUpdateNotificationRuleRequest_Status
+var UpdateNotificationRuleRequest_EventTypeIds = &sUpdateNotificationRuleRequest_EventTypeIds
+var UpdateNotificationRuleRequest_Targets = &sUpdateNotificationRuleRequest_Targets
+var UpdateNotificationRuleRequest_DetailType = &sUpdateNotificationRuleRequest_DetailType
+
+var UpdateNotificationRuleResult = &sUpdateNotificationRuleResult
+
+var CodeStarNotifications_20191015 = &smithy.ServiceSchema{Schema: &s_CodeStarNotifications_20191015, Version: "2019-10-15"}

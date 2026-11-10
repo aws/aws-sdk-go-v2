@@ -4,959 +4,928 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/monitors",
-	Code: 200})
+var (
+	eCreateMonitor                           smithy.SchemaExtensions
+	eCreateProbe                             smithy.SchemaExtensions
+	eDeleteMonitor                           smithy.SchemaExtensions
+	eDeleteProbe                             smithy.SchemaExtensions
+	eGetMonitor                              smithy.SchemaExtensions
+	eGetProbe                                smithy.SchemaExtensions
+	eListMonitors                            smithy.SchemaExtensions
+	eListTagsForResource                     smithy.SchemaExtensions
+	eTagResource                             smithy.SchemaExtensions
+	eUntagResource                           smithy.SchemaExtensions
+	eUpdateMonitor                           smithy.SchemaExtensions
+	eUpdateProbe                             smithy.SchemaExtensions
+	e_NetworkMonitor                         smithy.SchemaExtensions
+	eAccessDeniedException                   smithy.SchemaExtensions
+	eAccessDeniedException_message           smithy.SchemaExtensions
+	eAddressFamily                           smithy.SchemaExtensions
+	eAddressFamily_IPV4                      smithy.SchemaExtensions
+	eAddressFamily_IPV6                      smithy.SchemaExtensions
+	e_AggregationPeriod                      smithy.SchemaExtensions
+	e_Arn                                    smithy.SchemaExtensions
+	eConflictException                       smithy.SchemaExtensions
+	eConflictException_message               smithy.SchemaExtensions
+	eCreateMonitorProbeInput                 smithy.SchemaExtensions
+	eCreateMonitorProbeInput_sourceArn       smithy.SchemaExtensions
+	eCreateMonitorProbeInput_destination     smithy.SchemaExtensions
+	eCreateMonitorProbeInput_destinationPort smithy.SchemaExtensions
+	eCreateMonitorProbeInput_protocol        smithy.SchemaExtensions
+	eCreateMonitorProbeInput_packetSize      smithy.SchemaExtensions
+	eCreateMonitorProbeInput_probeTags       smithy.SchemaExtensions
+	e_CreateMonitorProbeInputList            smithy.SchemaExtensions
+	e_CreateMonitorProbeInputList_member     smithy.SchemaExtensions
+	e_Destination                            smithy.SchemaExtensions
+	eInternalServerException                 smithy.SchemaExtensions
+	eInternalServerException_message         smithy.SchemaExtensions
+	e_Iso8601Timestamp                       smithy.SchemaExtensions
+	e_MaxResults                             smithy.SchemaExtensions
+	e_MonitorArn                             smithy.SchemaExtensions
+	e_MonitorList                            smithy.SchemaExtensions
+	e_MonitorList_member                     smithy.SchemaExtensions
+	eMonitorState                            smithy.SchemaExtensions
+	eMonitorState_PENDING                    smithy.SchemaExtensions
+	eMonitorState_ACTIVE                     smithy.SchemaExtensions
+	eMonitorState_INACTIVE                   smithy.SchemaExtensions
+	eMonitorState_ERROR                      smithy.SchemaExtensions
+	eMonitorState_DELETING                   smithy.SchemaExtensions
+	eMonitorSummary                          smithy.SchemaExtensions
+	eMonitorSummary_monitorArn               smithy.SchemaExtensions
+	eMonitorSummary_monitorName              smithy.SchemaExtensions
+	eMonitorSummary_state                    smithy.SchemaExtensions
+	eMonitorSummary_aggregationPeriod        smithy.SchemaExtensions
+	eMonitorSummary_tags                     smithy.SchemaExtensions
+	e_PacketSize                             smithy.SchemaExtensions
+	e_PaginationToken                        smithy.SchemaExtensions
+	e_Port                                   smithy.SchemaExtensions
+	eProbe                                   smithy.SchemaExtensions
+	eProbe_probeId                           smithy.SchemaExtensions
+	eProbe_probeArn                          smithy.SchemaExtensions
+	eProbe_sourceArn                         smithy.SchemaExtensions
+	eProbe_destination                       smithy.SchemaExtensions
+	eProbe_destinationPort                   smithy.SchemaExtensions
+	eProbe_protocol                          smithy.SchemaExtensions
+	eProbe_packetSize                        smithy.SchemaExtensions
+	eProbe_addressFamily                     smithy.SchemaExtensions
+	eProbe_vpcId                             smithy.SchemaExtensions
+	eProbe_state                             smithy.SchemaExtensions
+	eProbe_createdAt                         smithy.SchemaExtensions
+	eProbe_modifiedAt                        smithy.SchemaExtensions
+	eProbe_tags                              smithy.SchemaExtensions
+	e_ProbeId                                smithy.SchemaExtensions
+	eProbeInput                              smithy.SchemaExtensions
+	eProbeInput_sourceArn                    smithy.SchemaExtensions
+	eProbeInput_destination                  smithy.SchemaExtensions
+	eProbeInput_destinationPort              smithy.SchemaExtensions
+	eProbeInput_protocol                     smithy.SchemaExtensions
+	eProbeInput_packetSize                   smithy.SchemaExtensions
+	eProbeInput_tags                         smithy.SchemaExtensions
+	e_ProbeList                              smithy.SchemaExtensions
+	e_ProbeList_member                       smithy.SchemaExtensions
+	eProbeState                              smithy.SchemaExtensions
+	eProbeState_PENDING                      smithy.SchemaExtensions
+	eProbeState_ACTIVE                       smithy.SchemaExtensions
+	eProbeState_INACTIVE                     smithy.SchemaExtensions
+	eProbeState_ERROR                        smithy.SchemaExtensions
+	eProbeState_DELETING                     smithy.SchemaExtensions
+	eProbeState_DELETED                      smithy.SchemaExtensions
+	eProtocol                                smithy.SchemaExtensions
+	eProtocol_TCP                            smithy.SchemaExtensions
+	eProtocol_ICMP                           smithy.SchemaExtensions
+	e_ResourceName                           smithy.SchemaExtensions
+	eResourceNotFoundException               smithy.SchemaExtensions
+	eResourceNotFoundException_message       smithy.SchemaExtensions
+	eServiceQuotaExceededException           smithy.SchemaExtensions
+	eServiceQuotaExceededException_message   smithy.SchemaExtensions
+	e_TagKey                                 smithy.SchemaExtensions
+	e_TagKeyList                             smithy.SchemaExtensions
+	e_TagKeyList_member                      smithy.SchemaExtensions
+	e_TagMap                                 smithy.SchemaExtensions
+	e_TagMap_key                             smithy.SchemaExtensions
+	e_TagMap_value                           smithy.SchemaExtensions
+	e_TagValue                               smithy.SchemaExtensions
+	eThrottlingException                     smithy.SchemaExtensions
+	eThrottlingException_message             smithy.SchemaExtensions
+	eValidationException                     smithy.SchemaExtensions
+	eValidationException_message             smithy.SchemaExtensions
+	e_VpcId                                  smithy.SchemaExtensions
+	eCreateMonitorInput                      smithy.SchemaExtensions
+	eCreateMonitorInput_monitorName          smithy.SchemaExtensions
+	eCreateMonitorInput_probes               smithy.SchemaExtensions
+	eCreateMonitorInput_aggregationPeriod    smithy.SchemaExtensions
+	eCreateMonitorInput_clientToken          smithy.SchemaExtensions
+	eCreateMonitorInput_tags                 smithy.SchemaExtensions
+	eCreateMonitorOutput                     smithy.SchemaExtensions
+	eCreateMonitorOutput_monitorArn          smithy.SchemaExtensions
+	eCreateMonitorOutput_monitorName         smithy.SchemaExtensions
+	eCreateMonitorOutput_state               smithy.SchemaExtensions
+	eCreateMonitorOutput_aggregationPeriod   smithy.SchemaExtensions
+	eCreateMonitorOutput_tags                smithy.SchemaExtensions
+	eCreateProbeInput                        smithy.SchemaExtensions
+	eCreateProbeInput_monitorName            smithy.SchemaExtensions
+	eCreateProbeInput_probe                  smithy.SchemaExtensions
+	eCreateProbeInput_clientToken            smithy.SchemaExtensions
+	eCreateProbeInput_tags                   smithy.SchemaExtensions
+	eCreateProbeOutput                       smithy.SchemaExtensions
+	eCreateProbeOutput_probeId               smithy.SchemaExtensions
+	eCreateProbeOutput_probeArn              smithy.SchemaExtensions
+	eCreateProbeOutput_sourceArn             smithy.SchemaExtensions
+	eCreateProbeOutput_destination           smithy.SchemaExtensions
+	eCreateProbeOutput_destinationPort       smithy.SchemaExtensions
+	eCreateProbeOutput_protocol              smithy.SchemaExtensions
+	eCreateProbeOutput_packetSize            smithy.SchemaExtensions
+	eCreateProbeOutput_addressFamily         smithy.SchemaExtensions
+	eCreateProbeOutput_vpcId                 smithy.SchemaExtensions
+	eCreateProbeOutput_state                 smithy.SchemaExtensions
+	eCreateProbeOutput_createdAt             smithy.SchemaExtensions
+	eCreateProbeOutput_modifiedAt            smithy.SchemaExtensions
+	eCreateProbeOutput_tags                  smithy.SchemaExtensions
+	eDeleteMonitorInput                      smithy.SchemaExtensions
+	eDeleteMonitorInput_monitorName          smithy.SchemaExtensions
+	eDeleteMonitorOutput                     smithy.SchemaExtensions
+	eDeleteProbeInput                        smithy.SchemaExtensions
+	eDeleteProbeInput_monitorName            smithy.SchemaExtensions
+	eDeleteProbeInput_probeId                smithy.SchemaExtensions
+	eDeleteProbeOutput                       smithy.SchemaExtensions
+	eGetMonitorInput                         smithy.SchemaExtensions
+	eGetMonitorInput_monitorName             smithy.SchemaExtensions
+	eGetMonitorOutput                        smithy.SchemaExtensions
+	eGetMonitorOutput_monitorArn             smithy.SchemaExtensions
+	eGetMonitorOutput_monitorName            smithy.SchemaExtensions
+	eGetMonitorOutput_state                  smithy.SchemaExtensions
+	eGetMonitorOutput_aggregationPeriod      smithy.SchemaExtensions
+	eGetMonitorOutput_tags                   smithy.SchemaExtensions
+	eGetMonitorOutput_probes                 smithy.SchemaExtensions
+	eGetMonitorOutput_createdAt              smithy.SchemaExtensions
+	eGetMonitorOutput_modifiedAt             smithy.SchemaExtensions
+	eGetProbeInput                           smithy.SchemaExtensions
+	eGetProbeInput_monitorName               smithy.SchemaExtensions
+	eGetProbeInput_probeId                   smithy.SchemaExtensions
+	eGetProbeOutput                          smithy.SchemaExtensions
+	eGetProbeOutput_probeId                  smithy.SchemaExtensions
+	eGetProbeOutput_probeArn                 smithy.SchemaExtensions
+	eGetProbeOutput_sourceArn                smithy.SchemaExtensions
+	eGetProbeOutput_destination              smithy.SchemaExtensions
+	eGetProbeOutput_destinationPort          smithy.SchemaExtensions
+	eGetProbeOutput_protocol                 smithy.SchemaExtensions
+	eGetProbeOutput_packetSize               smithy.SchemaExtensions
+	eGetProbeOutput_addressFamily            smithy.SchemaExtensions
+	eGetProbeOutput_vpcId                    smithy.SchemaExtensions
+	eGetProbeOutput_state                    smithy.SchemaExtensions
+	eGetProbeOutput_createdAt                smithy.SchemaExtensions
+	eGetProbeOutput_modifiedAt               smithy.SchemaExtensions
+	eGetProbeOutput_tags                     smithy.SchemaExtensions
+	eListMonitorsInput                       smithy.SchemaExtensions
+	eListMonitorsInput_nextToken             smithy.SchemaExtensions
+	eListMonitorsInput_maxResults            smithy.SchemaExtensions
+	eListMonitorsInput_state                 smithy.SchemaExtensions
+	eListMonitorsOutput                      smithy.SchemaExtensions
+	eListMonitorsOutput_monitors             smithy.SchemaExtensions
+	eListMonitorsOutput_nextToken            smithy.SchemaExtensions
+	eListTagsForResourceInput                smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn    smithy.SchemaExtensions
+	eListTagsForResourceOutput               smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags          smithy.SchemaExtensions
+	eTagResourceInput                        smithy.SchemaExtensions
+	eTagResourceInput_resourceArn            smithy.SchemaExtensions
+	eTagResourceInput_tags                   smithy.SchemaExtensions
+	eTagResourceOutput                       smithy.SchemaExtensions
+	eUntagResourceInput                      smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn          smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys              smithy.SchemaExtensions
+	eUntagResourceOutput                     smithy.SchemaExtensions
+	eUpdateMonitorInput                      smithy.SchemaExtensions
+	eUpdateMonitorInput_monitorName          smithy.SchemaExtensions
+	eUpdateMonitorInput_aggregationPeriod    smithy.SchemaExtensions
+	eUpdateMonitorOutput                     smithy.SchemaExtensions
+	eUpdateMonitorOutput_monitorArn          smithy.SchemaExtensions
+	eUpdateMonitorOutput_monitorName         smithy.SchemaExtensions
+	eUpdateMonitorOutput_state               smithy.SchemaExtensions
+	eUpdateMonitorOutput_aggregationPeriod   smithy.SchemaExtensions
+	eUpdateMonitorOutput_tags                smithy.SchemaExtensions
+	eUpdateProbeInput                        smithy.SchemaExtensions
+	eUpdateProbeInput_monitorName            smithy.SchemaExtensions
+	eUpdateProbeInput_probeId                smithy.SchemaExtensions
+	eUpdateProbeInput_state                  smithy.SchemaExtensions
+	eUpdateProbeInput_destination            smithy.SchemaExtensions
+	eUpdateProbeInput_destinationPort        smithy.SchemaExtensions
+	eUpdateProbeInput_protocol               smithy.SchemaExtensions
+	eUpdateProbeInput_packetSize             smithy.SchemaExtensions
+	eUpdateProbeOutput                       smithy.SchemaExtensions
+	eUpdateProbeOutput_probeId               smithy.SchemaExtensions
+	eUpdateProbeOutput_probeArn              smithy.SchemaExtensions
+	eUpdateProbeOutput_sourceArn             smithy.SchemaExtensions
+	eUpdateProbeOutput_destination           smithy.SchemaExtensions
+	eUpdateProbeOutput_destinationPort       smithy.SchemaExtensions
+	eUpdateProbeOutput_protocol              smithy.SchemaExtensions
+	eUpdateProbeOutput_packetSize            smithy.SchemaExtensions
+	eUpdateProbeOutput_addressFamily         smithy.SchemaExtensions
+	eUpdateProbeOutput_vpcId                 smithy.SchemaExtensions
+	eUpdateProbeOutput_state                 smithy.SchemaExtensions
+	eUpdateProbeOutput_createdAt             smithy.SchemaExtensions
+	eUpdateProbeOutput_modifiedAt            smithy.SchemaExtensions
+	eUpdateProbeOutput_tags                  smithy.SchemaExtensions
+)
 
-var CreateProbe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateProbe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateMonitor                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateMonitor"}
+	iCreateProbe                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateProbe"}
+	iDeleteMonitor                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteMonitor"}
+	iDeleteProbe                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteProbe"}
+	iGetMonitor                    = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetMonitor"}
+	iGetProbe                      = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetProbe"}
+	iListMonitors                  = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListMonitors"}
+	iListTagsForResource           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListTagsForResource"}
+	iTagResource                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagResource"}
+	iUntagResource                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UntagResource"}
+	iUpdateMonitor                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateMonitor"}
+	iUpdateProbe                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateProbe"}
+	i_NetworkMonitor               = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "NetworkMonitor"}
+	iAccessDeniedException         = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "AccessDeniedException"}
+	iAddressFamily                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "AddressFamily"}
+	i_AggregationPeriod            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "AggregationPeriod"}
+	i_Arn                          = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Arn"}
+	iConflictException             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ConflictException"}
+	iCreateMonitorProbeInput       = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateMonitorProbeInput"}
+	i_CreateMonitorProbeInputList  = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateMonitorProbeInputList"}
+	i_Destination                  = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Destination"}
+	iInternalServerException       = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "InternalServerException"}
+	i_Iso8601Timestamp             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Iso8601Timestamp"}
+	i_MaxResults                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "MaxResults"}
+	i_MonitorArn                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "MonitorArn"}
+	i_MonitorList                  = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "MonitorList"}
+	iMonitorState                  = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "MonitorState"}
+	iMonitorSummary                = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "MonitorSummary"}
+	i_PacketSize                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "PacketSize"}
+	i_PaginationToken              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "PaginationToken"}
+	i_Port                         = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Port"}
+	iProbe                         = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Probe"}
+	i_ProbeId                      = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ProbeId"}
+	iProbeInput                    = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ProbeInput"}
+	i_ProbeList                    = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ProbeList"}
+	iProbeState                    = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ProbeState"}
+	iProtocol                      = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "Protocol"}
+	i_ResourceName                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ResourceName"}
+	iResourceNotFoundException     = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ServiceQuotaExceededException"}
+	i_TagKey                       = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagKey"}
+	i_TagKeyList                   = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagKeyList"}
+	i_TagMap                       = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagMap"}
+	i_TagValue                     = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagValue"}
+	iThrottlingException           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ThrottlingException"}
+	iValidationException           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ValidationException"}
+	i_VpcId                        = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "VpcId"}
+	iCreateMonitorInput            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateMonitorInput"}
+	iCreateMonitorOutput           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateMonitorOutput"}
+	iCreateProbeInput              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateProbeInput"}
+	iCreateProbeOutput             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "CreateProbeOutput"}
+	iDeleteMonitorInput            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteMonitorInput"}
+	iDeleteMonitorOutput           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteMonitorOutput"}
+	iDeleteProbeInput              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteProbeInput"}
+	iDeleteProbeOutput             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "DeleteProbeOutput"}
+	iGetMonitorInput               = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetMonitorInput"}
+	iGetMonitorOutput              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetMonitorOutput"}
+	iGetProbeInput                 = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetProbeInput"}
+	iGetProbeOutput                = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "GetProbeOutput"}
+	iListMonitorsInput             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListMonitorsInput"}
+	iListMonitorsOutput            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListMonitorsOutput"}
+	iListTagsForResourceInput      = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput     = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "ListTagsForResourceOutput"}
+	iTagResourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagResourceInput"}
+	iTagResourceOutput             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "TagResourceOutput"}
+	iUntagResourceInput            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UntagResourceInput"}
+	iUntagResourceOutput           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UntagResourceOutput"}
+	iUpdateMonitorInput            = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateMonitorInput"}
+	iUpdateMonitorOutput           = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateMonitorOutput"}
+	iUpdateProbeInput              = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateProbeInput"}
+	iUpdateProbeOutput             = smithy.ShapeName{Namespace: "com.amazonaws.networkmonitor", Name: "UpdateProbeOutput"}
+	pString                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/monitors",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/monitors/{monitorName}/probes",
-	Code: 200})
-
-var DeleteMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/monitors/{monitorName}",
-	Code: 200})
-
-var DeleteProbe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteProbe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/monitors/{monitorName}/probes/{probeId}",
-	Code: 200})
-
-var GetMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/monitors/{monitorName}",
-	Code: 200})
-
-var GetProbe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetProbe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/monitors/{monitorName}/probes/{probeId}",
-	Code: 200})
-
-var ListMonitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListMonitors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/monitors",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/monitors/{monitorName}",
-	Code: 200})
-
-var UpdateProbe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateProbe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/monitors/{monitorName}/probes/{probeId}",
-	Code: 200})
-
-var _NetworkMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "NetworkMonitor",
-}, smithy.ShapeTypeService, 0)
-
-var NetworkMonitor = smithy.NewServiceSchema(_NetworkMonitor, "2023-08-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AddressFamily = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "AddressFamily",
-}, smithy.ShapeTypeEnum, 2)
-var AddressFamily_IPV4 *smithy.Schema
-
-var AddressFamily_IPV6 *smithy.Schema
-
-var _AggregationPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "AggregationPeriod",
-}, smithy.ShapeTypeLong, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateMonitorProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateMonitorProbeInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateMonitorProbeInput_sourceArn *smithy.Schema
-
-var CreateMonitorProbeInput_destination *smithy.Schema
-
-var CreateMonitorProbeInput_destinationPort *smithy.Schema
-
-var CreateMonitorProbeInput_protocol *smithy.Schema
-
-var CreateMonitorProbeInput_packetSize *smithy.Schema
-
-var CreateMonitorProbeInput_probeTags *smithy.Schema
-
-var _CreateMonitorProbeInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateMonitorProbeInputList",
-}, smithy.ShapeTypeList, 1)
-var _CreateMonitorProbeInputList_member *smithy.Schema
-
-var _Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Destination",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _Iso8601Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Iso8601Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MonitorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "MonitorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MonitorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "MonitorList",
-}, smithy.ShapeTypeList, 1)
-var _MonitorList_member *smithy.Schema
-
-var MonitorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "MonitorState",
-}, smithy.ShapeTypeEnum, 5)
-var MonitorState_PENDING *smithy.Schema
-
-var MonitorState_ACTIVE *smithy.Schema
-
-var MonitorState_INACTIVE *smithy.Schema
-
-var MonitorState_ERROR *smithy.Schema
-
-var MonitorState_DELETING *smithy.Schema
-
-var MonitorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "MonitorSummary",
-}, smithy.ShapeTypeStructure, 5)
-var MonitorSummary_monitorArn *smithy.Schema
-
-var MonitorSummary_monitorName *smithy.Schema
-
-var MonitorSummary_state *smithy.Schema
-
-var MonitorSummary_aggregationPeriod *smithy.Schema
-
-var MonitorSummary_tags *smithy.Schema
-
-var _PacketSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "PacketSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Port = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Port",
-}, smithy.ShapeTypeInteger, 0)
-
-var Probe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Probe",
-}, smithy.ShapeTypeStructure, 13)
-var Probe_probeId *smithy.Schema
-
-var Probe_probeArn *smithy.Schema
-
-var Probe_sourceArn *smithy.Schema
-
-var Probe_destination *smithy.Schema
-
-var Probe_destinationPort *smithy.Schema
-
-var Probe_protocol *smithy.Schema
-
-var Probe_packetSize *smithy.Schema
-
-var Probe_addressFamily *smithy.Schema
-
-var Probe_vpcId *smithy.Schema
-
-var Probe_state *smithy.Schema
-
-var Probe_createdAt *smithy.Schema
-
-var Probe_modifiedAt *smithy.Schema
-
-var Probe_tags *smithy.Schema
-
-var _ProbeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ProbeId",
-}, smithy.ShapeTypeString, 0)
-
-var ProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ProbeInput",
-}, smithy.ShapeTypeStructure, 6)
-var ProbeInput_sourceArn *smithy.Schema
-
-var ProbeInput_destination *smithy.Schema
-
-var ProbeInput_destinationPort *smithy.Schema
-
-var ProbeInput_protocol *smithy.Schema
-
-var ProbeInput_packetSize *smithy.Schema
-
-var ProbeInput_tags *smithy.Schema
-
-var _ProbeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ProbeList",
-}, smithy.ShapeTypeList, 1)
-var _ProbeList_member *smithy.Schema
-
-var ProbeState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ProbeState",
-}, smithy.ShapeTypeEnum, 6)
-var ProbeState_PENDING *smithy.Schema
-
-var ProbeState_ACTIVE *smithy.Schema
-
-var ProbeState_INACTIVE *smithy.Schema
-
-var ProbeState_ERROR *smithy.Schema
-
-var ProbeState_DELETING *smithy.Schema
-
-var ProbeState_DELETED *smithy.Schema
-
-var Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "Protocol",
-}, smithy.ShapeTypeEnum, 2)
-var Protocol_TCP *smithy.Schema
-
-var Protocol_ICMP *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateMonitorInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateMonitorInput_monitorName *smithy.Schema
-
-var CreateMonitorInput_probes *smithy.Schema
-
-var CreateMonitorInput_aggregationPeriod *smithy.Schema
-
-var CreateMonitorInput_clientToken *smithy.Schema
-
-var CreateMonitorInput_tags *smithy.Schema
-
-var CreateMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateMonitorOutput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateMonitorOutput_monitorArn *smithy.Schema
-
-var CreateMonitorOutput_monitorName *smithy.Schema
-
-var CreateMonitorOutput_state *smithy.Schema
-
-var CreateMonitorOutput_aggregationPeriod *smithy.Schema
-
-var CreateMonitorOutput_tags *smithy.Schema
-
-var CreateProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateProbeInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProbeInput_monitorName *smithy.Schema
-
-var CreateProbeInput_probe *smithy.Schema
-
-var CreateProbeInput_clientToken *smithy.Schema
-
-var CreateProbeInput_tags *smithy.Schema
-
-var CreateProbeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "CreateProbeOutput",
-}, smithy.ShapeTypeStructure, 13)
-var CreateProbeOutput_probeId *smithy.Schema
-
-var CreateProbeOutput_probeArn *smithy.Schema
-
-var CreateProbeOutput_sourceArn *smithy.Schema
-
-var CreateProbeOutput_destination *smithy.Schema
-
-var CreateProbeOutput_destinationPort *smithy.Schema
-
-var CreateProbeOutput_protocol *smithy.Schema
-
-var CreateProbeOutput_packetSize *smithy.Schema
-
-var CreateProbeOutput_addressFamily *smithy.Schema
-
-var CreateProbeOutput_vpcId *smithy.Schema
-
-var CreateProbeOutput_state *smithy.Schema
-
-var CreateProbeOutput_createdAt *smithy.Schema
-
-var CreateProbeOutput_modifiedAt *smithy.Schema
-
-var CreateProbeOutput_tags *smithy.Schema
-
-var DeleteMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteMonitorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMonitorInput_monitorName *smithy.Schema
-
-var DeleteMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteMonitorOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteProbeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProbeInput_monitorName *smithy.Schema
-
-var DeleteProbeInput_probeId *smithy.Schema
-
-var DeleteProbeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "DeleteProbeOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetMonitorInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMonitorInput_monitorName *smithy.Schema
-
-var GetMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetMonitorOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetMonitorOutput_monitorArn *smithy.Schema
-
-var GetMonitorOutput_monitorName *smithy.Schema
-
-var GetMonitorOutput_state *smithy.Schema
-
-var GetMonitorOutput_aggregationPeriod *smithy.Schema
-
-var GetMonitorOutput_tags *smithy.Schema
-
-var GetMonitorOutput_probes *smithy.Schema
-
-var GetMonitorOutput_createdAt *smithy.Schema
-
-var GetMonitorOutput_modifiedAt *smithy.Schema
-
-var GetProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetProbeInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetProbeInput_monitorName *smithy.Schema
-
-var GetProbeInput_probeId *smithy.Schema
-
-var GetProbeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "GetProbeOutput",
-}, smithy.ShapeTypeStructure, 13)
-var GetProbeOutput_probeId *smithy.Schema
-
-var GetProbeOutput_probeArn *smithy.Schema
-
-var GetProbeOutput_sourceArn *smithy.Schema
-
-var GetProbeOutput_destination *smithy.Schema
-
-var GetProbeOutput_destinationPort *smithy.Schema
-
-var GetProbeOutput_protocol *smithy.Schema
-
-var GetProbeOutput_packetSize *smithy.Schema
-
-var GetProbeOutput_addressFamily *smithy.Schema
-
-var GetProbeOutput_vpcId *smithy.Schema
-
-var GetProbeOutput_state *smithy.Schema
-
-var GetProbeOutput_createdAt *smithy.Schema
-
-var GetProbeOutput_modifiedAt *smithy.Schema
-
-var GetProbeOutput_tags *smithy.Schema
-
-var ListMonitorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListMonitorsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListMonitorsInput_nextToken *smithy.Schema
-
-var ListMonitorsInput_maxResults *smithy.Schema
-
-var ListMonitorsInput_state *smithy.Schema
-
-var ListMonitorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListMonitorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMonitorsOutput_monitors *smithy.Schema
-
-var ListMonitorsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateMonitorInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMonitorInput_monitorName *smithy.Schema
-
-var UpdateMonitorInput_aggregationPeriod *smithy.Schema
-
-var UpdateMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateMonitorOutput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateMonitorOutput_monitorArn *smithy.Schema
-
-var UpdateMonitorOutput_monitorName *smithy.Schema
-
-var UpdateMonitorOutput_state *smithy.Schema
-
-var UpdateMonitorOutput_aggregationPeriod *smithy.Schema
-
-var UpdateMonitorOutput_tags *smithy.Schema
-
-var UpdateProbeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateProbeInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateProbeInput_monitorName *smithy.Schema
-
-var UpdateProbeInput_probeId *smithy.Schema
-
-var UpdateProbeInput_state *smithy.Schema
-
-var UpdateProbeInput_destination *smithy.Schema
-
-var UpdateProbeInput_destinationPort *smithy.Schema
-
-var UpdateProbeInput_protocol *smithy.Schema
-
-var UpdateProbeInput_packetSize *smithy.Schema
-
-var UpdateProbeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmonitor",
-	Name:      "UpdateProbeOutput",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateProbeOutput_probeId *smithy.Schema
-
-var UpdateProbeOutput_probeArn *smithy.Schema
-
-var UpdateProbeOutput_sourceArn *smithy.Schema
-
-var UpdateProbeOutput_destination *smithy.Schema
-
-var UpdateProbeOutput_destinationPort *smithy.Schema
-
-var UpdateProbeOutput_protocol *smithy.Schema
-
-var UpdateProbeOutput_packetSize *smithy.Schema
-
-var UpdateProbeOutput_addressFamily *smithy.Schema
-
-var UpdateProbeOutput_vpcId *smithy.Schema
-
-var UpdateProbeOutput_state *smithy.Schema
-
-var UpdateProbeOutput_createdAt *smithy.Schema
-
-var UpdateProbeOutput_modifiedAt *smithy.Schema
-
-var UpdateProbeOutput_tags *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AddressFamily_IPV4 = AddressFamily.AddMember("IPV4", smithyprelude.Unit)
-
-	AddressFamily_IPV6 = AddressFamily.AddMember("IPV6", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	Protocol_TCP = Protocol.AddMember("TCP", smithyprelude.Unit)
-
-	Protocol_ICMP = Protocol.AddMember("ICMP", smithyprelude.Unit)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	CreateMonitorProbeInput_sourceArn = CreateMonitorProbeInput.AddMember("sourceArn", _Arn)
-
-	CreateMonitorProbeInput_destination = CreateMonitorProbeInput.AddMember("destination", _Destination)
-
-	CreateMonitorProbeInput_destinationPort = CreateMonitorProbeInput.AddMember("destinationPort", _Port)
-
-	CreateMonitorProbeInput_protocol = CreateMonitorProbeInput.AddMember("protocol", Protocol)
-
-	CreateMonitorProbeInput_packetSize = CreateMonitorProbeInput.AddMember("packetSize", _PacketSize)
-
-	CreateMonitorProbeInput_probeTags = CreateMonitorProbeInput.AddMember("probeTags", _TagMap)
-
-	_CreateMonitorProbeInputList_member = _CreateMonitorProbeInputList.AddMember("member", CreateMonitorProbeInput)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	MonitorState_PENDING = MonitorState.AddMember("PENDING", smithyprelude.Unit)
-
-	MonitorState_ACTIVE = MonitorState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	MonitorState_INACTIVE = MonitorState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	MonitorState_ERROR = MonitorState.AddMember("ERROR", smithyprelude.Unit)
-
-	MonitorState_DELETING = MonitorState.AddMember("DELETING", smithyprelude.Unit)
-
-	MonitorSummary_monitorArn = MonitorSummary.AddMember("monitorArn", _MonitorArn)
-
-	MonitorSummary_monitorName = MonitorSummary.AddMember("monitorName", _ResourceName)
-
-	MonitorSummary_state = MonitorSummary.AddMember("state", MonitorState)
-
-	MonitorSummary_aggregationPeriod = MonitorSummary.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	MonitorSummary_tags = MonitorSummary.AddMember("tags", _TagMap)
-
-	_MonitorList_member = _MonitorList.AddMember("member", MonitorSummary)
-
-	ProbeState_PENDING = ProbeState.AddMember("PENDING", smithyprelude.Unit)
-
-	ProbeState_ACTIVE = ProbeState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ProbeState_INACTIVE = ProbeState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ProbeState_ERROR = ProbeState.AddMember("ERROR", smithyprelude.Unit)
-
-	ProbeState_DELETING = ProbeState.AddMember("DELETING", smithyprelude.Unit)
-
-	ProbeState_DELETED = ProbeState.AddMember("DELETED", smithyprelude.Unit)
-
-	Probe_probeId = Probe.AddMember("probeId", _ProbeId)
-
-	Probe_probeArn = Probe.AddMember("probeArn", _Arn)
-
-	Probe_sourceArn = Probe.AddMember("sourceArn", _Arn)
-
-	Probe_destination = Probe.AddMember("destination", _Destination)
-
-	Probe_destinationPort = Probe.AddMember("destinationPort", _Port)
-
-	Probe_protocol = Probe.AddMember("protocol", Protocol)
-
-	Probe_packetSize = Probe.AddMember("packetSize", _PacketSize)
-
-	Probe_addressFamily = Probe.AddMember("addressFamily", AddressFamily)
-
-	Probe_vpcId = Probe.AddMember("vpcId", _VpcId)
-
-	Probe_state = Probe.AddMember("state", ProbeState)
-
-	Probe_createdAt = Probe.AddMember("createdAt", _Iso8601Timestamp)
-
-	Probe_modifiedAt = Probe.AddMember("modifiedAt", _Iso8601Timestamp)
-
-	Probe_tags = Probe.AddMember("tags", _TagMap)
-
-	ProbeInput_sourceArn = ProbeInput.AddMember("sourceArn", _Arn)
-
-	ProbeInput_destination = ProbeInput.AddMember("destination", _Destination)
-
-	ProbeInput_destinationPort = ProbeInput.AddMember("destinationPort", _Port)
-
-	ProbeInput_protocol = ProbeInput.AddMember("protocol", Protocol)
-
-	ProbeInput_packetSize = ProbeInput.AddMember("packetSize", _PacketSize)
-
-	ProbeInput_tags = ProbeInput.AddMember("tags", _TagMap)
-
-	_ProbeList_member = _ProbeList.AddMember("member", Probe)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateMonitorInput_monitorName = CreateMonitorInput.AddMember("monitorName", _ResourceName)
-
-	CreateMonitorInput_probes = CreateMonitorInput.AddMember("probes", _CreateMonitorProbeInputList)
-
-	CreateMonitorInput_aggregationPeriod = CreateMonitorInput.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	CreateMonitorInput_clientToken = CreateMonitorInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateMonitorInput_tags = CreateMonitorInput.AddMember("tags", _TagMap)
-
-	CreateMonitorOutput_monitorArn = CreateMonitorOutput.AddMember("monitorArn", _MonitorArn)
-
-	CreateMonitorOutput_monitorName = CreateMonitorOutput.AddMember("monitorName", _ResourceName)
-
-	CreateMonitorOutput_state = CreateMonitorOutput.AddMember("state", MonitorState)
-
-	CreateMonitorOutput_aggregationPeriod = CreateMonitorOutput.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	CreateMonitorOutput_tags = CreateMonitorOutput.AddMember("tags", _TagMap)
-
-	CreateProbeInput_monitorName = CreateProbeInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateProbeInput_probe = CreateProbeInput.AddMember("probe", ProbeInput)
-
-	CreateProbeInput_clientToken = CreateProbeInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateProbeInput_tags = CreateProbeInput.AddMember("tags", _TagMap)
-
-	CreateProbeOutput_probeId = CreateProbeOutput.AddMember("probeId", _ProbeId)
-
-	CreateProbeOutput_probeArn = CreateProbeOutput.AddMember("probeArn", _Arn)
-
-	CreateProbeOutput_sourceArn = CreateProbeOutput.AddMember("sourceArn", _Arn)
-
-	CreateProbeOutput_destination = CreateProbeOutput.AddMember("destination", _Destination)
-
-	CreateProbeOutput_destinationPort = CreateProbeOutput.AddMember("destinationPort", _Port)
-
-	CreateProbeOutput_protocol = CreateProbeOutput.AddMember("protocol", Protocol)
-
-	CreateProbeOutput_packetSize = CreateProbeOutput.AddMember("packetSize", _PacketSize)
-
-	CreateProbeOutput_addressFamily = CreateProbeOutput.AddMember("addressFamily", AddressFamily)
-
-	CreateProbeOutput_vpcId = CreateProbeOutput.AddMember("vpcId", _VpcId)
-
-	CreateProbeOutput_state = CreateProbeOutput.AddMember("state", ProbeState)
-
-	CreateProbeOutput_createdAt = CreateProbeOutput.AddMember("createdAt", _Iso8601Timestamp)
-
-	CreateProbeOutput_modifiedAt = CreateProbeOutput.AddMember("modifiedAt", _Iso8601Timestamp)
-
-	CreateProbeOutput_tags = CreateProbeOutput.AddMember("tags", _TagMap)
-
-	DeleteMonitorInput_monitorName = DeleteMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteProbeInput_monitorName = DeleteProbeInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteProbeInput_probeId = DeleteProbeInput.AddMember("probeId", _ProbeId, &smithytraits.HTTPLabel{})
-
-	GetMonitorInput_monitorName = GetMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetMonitorOutput_monitorArn = GetMonitorOutput.AddMember("monitorArn", _MonitorArn)
-
-	GetMonitorOutput_monitorName = GetMonitorOutput.AddMember("monitorName", _ResourceName)
-
-	GetMonitorOutput_state = GetMonitorOutput.AddMember("state", MonitorState)
-
-	GetMonitorOutput_aggregationPeriod = GetMonitorOutput.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	GetMonitorOutput_tags = GetMonitorOutput.AddMember("tags", _TagMap)
-
-	GetMonitorOutput_probes = GetMonitorOutput.AddMember("probes", _ProbeList)
-
-	GetMonitorOutput_createdAt = GetMonitorOutput.AddMember("createdAt", _Iso8601Timestamp)
-
-	GetMonitorOutput_modifiedAt = GetMonitorOutput.AddMember("modifiedAt", _Iso8601Timestamp)
-
-	GetProbeInput_monitorName = GetProbeInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetProbeInput_probeId = GetProbeInput.AddMember("probeId", _ProbeId, &smithytraits.HTTPLabel{})
-
-	GetProbeOutput_probeId = GetProbeOutput.AddMember("probeId", _ProbeId)
-
-	GetProbeOutput_probeArn = GetProbeOutput.AddMember("probeArn", _Arn)
-
-	GetProbeOutput_sourceArn = GetProbeOutput.AddMember("sourceArn", _Arn)
-
-	GetProbeOutput_destination = GetProbeOutput.AddMember("destination", _Destination)
-
-	GetProbeOutput_destinationPort = GetProbeOutput.AddMember("destinationPort", _Port)
-
-	GetProbeOutput_protocol = GetProbeOutput.AddMember("protocol", Protocol)
-
-	GetProbeOutput_packetSize = GetProbeOutput.AddMember("packetSize", _PacketSize)
-
-	GetProbeOutput_addressFamily = GetProbeOutput.AddMember("addressFamily", AddressFamily)
-
-	GetProbeOutput_vpcId = GetProbeOutput.AddMember("vpcId", _VpcId)
-
-	GetProbeOutput_state = GetProbeOutput.AddMember("state", ProbeState)
-
-	GetProbeOutput_createdAt = GetProbeOutput.AddMember("createdAt", _Iso8601Timestamp)
-
-	GetProbeOutput_modifiedAt = GetProbeOutput.AddMember("modifiedAt", _Iso8601Timestamp)
-
-	GetProbeOutput_tags = GetProbeOutput.AddMember("tags", _TagMap)
-
-	ListMonitorsInput_nextToken = ListMonitorsInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMonitorsInput_maxResults = ListMonitorsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMonitorsInput_state = ListMonitorsInput.AddMember("state", smithyprelude.String, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListMonitorsOutput_monitors = ListMonitorsOutput.AddMember("monitors", _MonitorList)
-
-	ListMonitorsOutput_nextToken = ListMonitorsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateMonitorInput_monitorName = UpdateMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateMonitorInput_aggregationPeriod = UpdateMonitorInput.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	UpdateMonitorOutput_monitorArn = UpdateMonitorOutput.AddMember("monitorArn", _MonitorArn)
-
-	UpdateMonitorOutput_monitorName = UpdateMonitorOutput.AddMember("monitorName", _ResourceName)
-
-	UpdateMonitorOutput_state = UpdateMonitorOutput.AddMember("state", MonitorState)
-
-	UpdateMonitorOutput_aggregationPeriod = UpdateMonitorOutput.AddMember("aggregationPeriod", _AggregationPeriod)
-
-	UpdateMonitorOutput_tags = UpdateMonitorOutput.AddMember("tags", _TagMap)
-
-	UpdateProbeInput_monitorName = UpdateProbeInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateProbeInput_probeId = UpdateProbeInput.AddMember("probeId", _ProbeId, &smithytraits.HTTPLabel{})
-
-	UpdateProbeInput_state = UpdateProbeInput.AddMember("state", ProbeState)
-
-	UpdateProbeInput_destination = UpdateProbeInput.AddMember("destination", _Destination)
-
-	UpdateProbeInput_destinationPort = UpdateProbeInput.AddMember("destinationPort", _Port)
-
-	UpdateProbeInput_protocol = UpdateProbeInput.AddMember("protocol", Protocol)
-
-	UpdateProbeInput_packetSize = UpdateProbeInput.AddMember("packetSize", _PacketSize)
-
-	UpdateProbeOutput_probeId = UpdateProbeOutput.AddMember("probeId", _ProbeId)
-
-	UpdateProbeOutput_probeArn = UpdateProbeOutput.AddMember("probeArn", _Arn)
-
-	UpdateProbeOutput_sourceArn = UpdateProbeOutput.AddMember("sourceArn", _Arn)
-
-	UpdateProbeOutput_destination = UpdateProbeOutput.AddMember("destination", _Destination)
-
-	UpdateProbeOutput_destinationPort = UpdateProbeOutput.AddMember("destinationPort", _Port)
-
-	UpdateProbeOutput_protocol = UpdateProbeOutput.AddMember("protocol", Protocol)
-
-	UpdateProbeOutput_packetSize = UpdateProbeOutput.AddMember("packetSize", _PacketSize)
-
-	UpdateProbeOutput_addressFamily = UpdateProbeOutput.AddMember("addressFamily", AddressFamily)
-
-	UpdateProbeOutput_vpcId = UpdateProbeOutput.AddMember("vpcId", _VpcId)
-
-	UpdateProbeOutput_state = UpdateProbeOutput.AddMember("state", ProbeState)
-
-	UpdateProbeOutput_createdAt = UpdateProbeOutput.AddMember("createdAt", _Iso8601Timestamp)
-
-	UpdateProbeOutput_modifiedAt = UpdateProbeOutput.AddMember("modifiedAt", _Iso8601Timestamp)
-
-	UpdateProbeOutput_tags = UpdateProbeOutput.AddMember("tags", _TagMap)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAddressFamily = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressFamily_IPV4, &sAddressFamily_IPV6}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCreateMonitorProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorProbeInput_sourceArn, &sCreateMonitorProbeInput_destination, &sCreateMonitorProbeInput_destinationPort, &sCreateMonitorProbeInput_protocol, &sCreateMonitorProbeInput_packetSize, &sCreateMonitorProbeInput_probeTags}}
+var m_CreateMonitorProbeInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateMonitorProbeInputList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_MonitorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MonitorList_member}}
+var mMonitorState = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorState_PENDING, &sMonitorState_ACTIVE, &sMonitorState_INACTIVE, &sMonitorState_ERROR, &sMonitorState_DELETING}}
+var mMonitorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitorSummary_monitorArn, &sMonitorSummary_monitorName, &sMonitorSummary_state, &sMonitorSummary_aggregationPeriod, &sMonitorSummary_tags}}
+var mProbe = smithy.SchemaMembers{List: []*smithy.Schema{&sProbe_probeId, &sProbe_probeArn, &sProbe_sourceArn, &sProbe_destination, &sProbe_destinationPort, &sProbe_protocol, &sProbe_packetSize, &sProbe_addressFamily, &sProbe_vpcId, &sProbe_state, &sProbe_createdAt, &sProbe_modifiedAt, &sProbe_tags}, Hash: &hProbe}
+var mProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sProbeInput_sourceArn, &sProbeInput_destination, &sProbeInput_destinationPort, &sProbeInput_protocol, &sProbeInput_packetSize, &sProbeInput_tags}}
+var m_ProbeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProbeList_member}}
+var mProbeState = smithy.SchemaMembers{List: []*smithy.Schema{&sProbeState_PENDING, &sProbeState_ACTIVE, &sProbeState_INACTIVE, &sProbeState_ERROR, &sProbeState_DELETING, &sProbeState_DELETED}}
+var mProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocol_TCP, &sProtocol_ICMP}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorInput_monitorName, &sCreateMonitorInput_probes, &sCreateMonitorInput_aggregationPeriod, &sCreateMonitorInput_clientToken, &sCreateMonitorInput_tags}}
+var mCreateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorOutput_monitorArn, &sCreateMonitorOutput_monitorName, &sCreateMonitorOutput_state, &sCreateMonitorOutput_aggregationPeriod, &sCreateMonitorOutput_tags}}
+var mCreateProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProbeInput_monitorName, &sCreateProbeInput_probe, &sCreateProbeInput_clientToken, &sCreateProbeInput_tags}}
+var mCreateProbeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProbeOutput_probeId, &sCreateProbeOutput_probeArn, &sCreateProbeOutput_sourceArn, &sCreateProbeOutput_destination, &sCreateProbeOutput_destinationPort, &sCreateProbeOutput_protocol, &sCreateProbeOutput_packetSize, &sCreateProbeOutput_addressFamily, &sCreateProbeOutput_vpcId, &sCreateProbeOutput_state, &sCreateProbeOutput_createdAt, &sCreateProbeOutput_modifiedAt, &sCreateProbeOutput_tags}, Hash: &hCreateProbeOutput}
+var mDeleteMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMonitorInput_monitorName}}
+var mDeleteProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProbeInput_monitorName, &sDeleteProbeInput_probeId}}
+var mGetMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMonitorInput_monitorName}}
+var mGetMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMonitorOutput_monitorArn, &sGetMonitorOutput_monitorName, &sGetMonitorOutput_state, &sGetMonitorOutput_aggregationPeriod, &sGetMonitorOutput_tags, &sGetMonitorOutput_probes, &sGetMonitorOutput_createdAt, &sGetMonitorOutput_modifiedAt}}
+var mGetProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProbeInput_monitorName, &sGetProbeInput_probeId}}
+var mGetProbeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProbeOutput_probeId, &sGetProbeOutput_probeArn, &sGetProbeOutput_sourceArn, &sGetProbeOutput_destination, &sGetProbeOutput_destinationPort, &sGetProbeOutput_protocol, &sGetProbeOutput_packetSize, &sGetProbeOutput_addressFamily, &sGetProbeOutput_vpcId, &sGetProbeOutput_state, &sGetProbeOutput_createdAt, &sGetProbeOutput_modifiedAt, &sGetProbeOutput_tags}, Hash: &hGetProbeOutput}
+var mListMonitorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsInput_nextToken, &sListMonitorsInput_maxResults, &sListMonitorsInput_state}}
+var mListMonitorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsOutput_monitors, &sListMonitorsOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitorInput_monitorName, &sUpdateMonitorInput_aggregationPeriod}}
+var mUpdateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitorOutput_monitorArn, &sUpdateMonitorOutput_monitorName, &sUpdateMonitorOutput_state, &sUpdateMonitorOutput_aggregationPeriod, &sUpdateMonitorOutput_tags}}
+var mUpdateProbeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProbeInput_monitorName, &sUpdateProbeInput_probeId, &sUpdateProbeInput_state, &sUpdateProbeInput_destination, &sUpdateProbeInput_destinationPort, &sUpdateProbeInput_protocol, &sUpdateProbeInput_packetSize}}
+var mUpdateProbeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProbeOutput_probeId, &sUpdateProbeOutput_probeArn, &sUpdateProbeOutput_sourceArn, &sUpdateProbeOutput_destination, &sUpdateProbeOutput_destinationPort, &sUpdateProbeOutput_protocol, &sUpdateProbeOutput_packetSize, &sUpdateProbeOutput_addressFamily, &sUpdateProbeOutput_vpcId, &sUpdateProbeOutput_state, &sUpdateProbeOutput_createdAt, &sUpdateProbeOutput_modifiedAt, &sUpdateProbeOutput_tags}, Hash: &hUpdateProbeOutput}
+
+var hProbe = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 7, 12, 0, 9, 13, 3, 0, 0, 5, 4, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 8, 0, 1,
+	0, 2, 0, 6, 0, 0, 0, 0,
+}}
+var hCreateProbeOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 7, 12, 0, 9, 13, 3, 0, 0, 5, 4, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 8, 0, 1,
+	0, 2, 0, 6, 0, 0, 0, 0,
+}}
+var hGetProbeOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 7, 12, 0, 9, 13, 3, 0, 0, 5, 4, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 8, 0, 1,
+	0, 2, 0, 6, 0, 0, 0, 0,
+}}
+var hUpdateProbeOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 7, 12, 0, 9, 13, 3, 0, 0, 5, 4, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 8, 0, 1,
+	0, 2, 0, 6, 0, 0, 0, 0,
+}}
+
+var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMonitor})
+var sCreateProbe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProbe, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateProbe})
+var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMonitor})
+var sDeleteProbe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProbe, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProbe})
+var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetMonitor})
+var sGetProbe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProbe, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetProbe})
+var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListMonitors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMonitor})
+var sUpdateProbe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProbe, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProbe})
+var s_NetworkMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkMonitor, Type: smithy.ShapeTypeService, Ext: &e_NetworkMonitor})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAddressFamily = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum, Ext: &eAddressFamily})
+var sAddressFamily_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressFamily_IPV4})
+var sAddressFamily_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressFamily_IPV6})
+var s_AggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &e_AggregationPeriod})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCreateMonitorProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorProbeInput, Members: &mCreateMonitorProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorProbeInput})
+var sCreateMonitorProbeInput_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorProbeInput_sourceArn})
+var sCreateMonitorProbeInput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorProbeInput_destination})
+var sCreateMonitorProbeInput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorProbeInput_destinationPort})
+var sCreateMonitorProbeInput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateMonitorProbeInput_protocol})
+var sCreateMonitorProbeInput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorProbeInput_packetSize})
+var sCreateMonitorProbeInput_probeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorProbeInput_probeTags})
+var s_CreateMonitorProbeInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateMonitorProbeInputList, Members: &m_CreateMonitorProbeInputList, Type: smithy.ShapeTypeList, Ext: &e_CreateMonitorProbeInputList})
+var s_CreateMonitorProbeInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateMonitorProbeInput, Members: &mCreateMonitorProbeInput, Type: smithy.ShapeTypeStructure, Ext: &e_CreateMonitorProbeInputList_member})
+var s_Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &e_Destination})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Iso8601Timestamp})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &e_MonitorArn})
+var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &e_MonitorList})
+var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorList_member})
+var sMonitorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorState, Members: &mMonitorState, Type: smithy.ShapeTypeEnum, Ext: &eMonitorState})
+var sMonitorState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorState_PENDING})
+var sMonitorState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorState_ACTIVE})
+var sMonitorState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorState_INACTIVE})
+var sMonitorState_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorState_ERROR})
+var sMonitorState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorState_DELETING})
+var sMonitorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &eMonitorSummary})
+var sMonitorSummary_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_monitorArn})
+var sMonitorSummary_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_monitorName})
+var sMonitorSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMonitorState, Members: &mMonitorState, Type: smithy.ShapeTypeEnum, Ext: &eMonitorSummary_state})
+var sMonitorSummary_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eMonitorSummary_aggregationPeriod})
+var sMonitorSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eMonitorSummary_tags})
+var s_PacketSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &e_PacketSize})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &e_Port})
+var sProbe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProbe, Members: &mProbe, Type: smithy.ShapeTypeStructure, Ext: &eProbe})
+var sProbe_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Type: smithy.ShapeTypeString, Ext: &eProbe_probeId})
+var sProbe_probeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eProbe_probeArn})
+var sProbe_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eProbe_sourceArn})
+var sProbe_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eProbe_destination})
+var sProbe_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eProbe_destinationPort})
+var sProbe_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eProbe_protocol})
+var sProbe_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eProbe_packetSize})
+var sProbe_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum, Ext: &eProbe_addressFamily})
+var sProbe_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eProbe_vpcId})
+var sProbe_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eProbe_state})
+var sProbe_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProbe_createdAt})
+var sProbe_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProbe_modifiedAt})
+var sProbe_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eProbe_tags})
+var s_ProbeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProbeId, Type: smithy.ShapeTypeString, Ext: &e_ProbeId})
+var sProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProbeInput, Members: &mProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eProbeInput})
+var sProbeInput_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eProbeInput_sourceArn})
+var sProbeInput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eProbeInput_destination})
+var sProbeInput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eProbeInput_destinationPort})
+var sProbeInput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eProbeInput_protocol})
+var sProbeInput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eProbeInput_packetSize})
+var sProbeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eProbeInput_tags})
+var s_ProbeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProbeList, Members: &m_ProbeList, Type: smithy.ShapeTypeList, Ext: &e_ProbeList})
+var s_ProbeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProbe, Members: &mProbe, Type: smithy.ShapeTypeStructure, Ext: &e_ProbeList_member})
+var sProbeState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eProbeState})
+var sProbeState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_PENDING})
+var sProbeState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_ACTIVE})
+var sProbeState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_INACTIVE})
+var sProbeState_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_ERROR})
+var sProbeState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_DELETING})
+var sProbeState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProbeState_DELETED})
+var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eProtocol})
+var sProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocol_TCP})
+var sProtocol_ICMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocol_ICMP})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput})
+var sCreateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_monitorName})
+var sCreateMonitorInput_probes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probes", ID: &i_CreateMonitorProbeInputList, Members: &m_CreateMonitorProbeInputList, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorInput_probes})
+var sCreateMonitorInput_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eCreateMonitorInput_aggregationPeriod})
+var sCreateMonitorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_clientToken})
+var sCreateMonitorInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorInput_tags})
+var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorOutput})
+var sCreateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_monitorArn})
+var sCreateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_monitorName})
+var sCreateMonitorOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMonitorState, Members: &mMonitorState, Type: smithy.ShapeTypeEnum, Ext: &eCreateMonitorOutput_state})
+var sCreateMonitorOutput_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eCreateMonitorOutput_aggregationPeriod})
+var sCreateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorOutput_tags})
+var sCreateProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProbeInput, Members: &mCreateProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProbeInput})
+var sCreateProbeInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateProbeInput_monitorName})
+var sCreateProbeInput_probe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probe", ID: &iProbeInput, Members: &mProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProbeInput_probe})
+var sCreateProbeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateProbeInput_clientToken})
+var sCreateProbeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateProbeInput_tags})
+var sCreateProbeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProbeOutput, Members: &mCreateProbeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProbeOutput})
+var sCreateProbeOutput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Type: smithy.ShapeTypeString, Ext: &eCreateProbeOutput_probeId})
+var sCreateProbeOutput_probeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateProbeOutput_probeArn})
+var sCreateProbeOutput_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateProbeOutput_sourceArn})
+var sCreateProbeOutput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eCreateProbeOutput_destination})
+var sCreateProbeOutput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eCreateProbeOutput_destinationPort})
+var sCreateProbeOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateProbeOutput_protocol})
+var sCreateProbeOutput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateProbeOutput_packetSize})
+var sCreateProbeOutput_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum, Ext: &eCreateProbeOutput_addressFamily})
+var sCreateProbeOutput_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eCreateProbeOutput_vpcId})
+var sCreateProbeOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eCreateProbeOutput_state})
+var sCreateProbeOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateProbeOutput_createdAt})
+var sCreateProbeOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateProbeOutput_modifiedAt})
+var sCreateProbeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateProbeOutput_tags})
+var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorInput})
+var sDeleteMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteMonitorInput_monitorName})
+var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorOutput})
+var sDeleteProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProbeInput, Members: &mDeleteProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProbeInput})
+var sDeleteProbeInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteProbeInput_monitorName})
+var sDeleteProbeInput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteProbeInput_probeId})
+var sDeleteProbeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProbeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProbeOutput})
+var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorInput})
+var sGetMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_monitorName})
+var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput})
+var sGetMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_monitorArn})
+var sGetMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_monitorName})
+var sGetMonitorOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMonitorState, Members: &mMonitorState, Type: smithy.ShapeTypeEnum, Ext: &eGetMonitorOutput_state})
+var sGetMonitorOutput_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eGetMonitorOutput_aggregationPeriod})
+var sGetMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetMonitorOutput_tags})
+var sGetMonitorOutput_probes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probes", ID: &i_ProbeList, Members: &m_ProbeList, Type: smithy.ShapeTypeList, Ext: &eGetMonitorOutput_probes})
+var sGetMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_createdAt})
+var sGetMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_modifiedAt})
+var sGetProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProbeInput, Members: &mGetProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eGetProbeInput})
+var sGetProbeInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetProbeInput_monitorName})
+var sGetProbeInput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetProbeInput_probeId})
+var sGetProbeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProbeOutput, Members: &mGetProbeOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetProbeOutput})
+var sGetProbeOutput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Type: smithy.ShapeTypeString, Ext: &eGetProbeOutput_probeId})
+var sGetProbeOutput_probeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetProbeOutput_probeArn})
+var sGetProbeOutput_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetProbeOutput_sourceArn})
+var sGetProbeOutput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eGetProbeOutput_destination})
+var sGetProbeOutput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eGetProbeOutput_destinationPort})
+var sGetProbeOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eGetProbeOutput_protocol})
+var sGetProbeOutput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eGetProbeOutput_packetSize})
+var sGetProbeOutput_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum, Ext: &eGetProbeOutput_addressFamily})
+var sGetProbeOutput_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eGetProbeOutput_vpcId})
+var sGetProbeOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eGetProbeOutput_state})
+var sGetProbeOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetProbeOutput_createdAt})
+var sGetProbeOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetProbeOutput_modifiedAt})
+var sGetProbeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetProbeOutput_tags})
+var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsInput})
+var sListMonitorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_nextToken})
+var sListMonitorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorsInput_maxResults})
+var sListMonitorsInput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_state})
+var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsOutput})
+var sListMonitorsOutput_monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eListMonitorsOutput_monitors})
+var sListMonitorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMonitorsOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t23, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput})
+var sUpdateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_monitorName})
+var sUpdateMonitorInput_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eUpdateMonitorInput_aggregationPeriod})
+var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorOutput})
+var sUpdateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_monitorArn})
+var sUpdateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_monitorName})
+var sUpdateMonitorOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMonitorState, Members: &mMonitorState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMonitorOutput_state})
+var sUpdateMonitorOutput_aggregationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationPeriod", ID: &i_AggregationPeriod, Type: smithy.ShapeTypeLong, Ext: &eUpdateMonitorOutput_aggregationPeriod})
+var sUpdateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMonitorOutput_tags})
+var sUpdateProbeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProbeInput, Members: &mUpdateProbeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProbeInput})
+var sUpdateProbeInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeInput_monitorName})
+var sUpdateProbeInput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeInput_probeId})
+var sUpdateProbeInput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProbeInput_state})
+var sUpdateProbeInput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeInput_destination})
+var sUpdateProbeInput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProbeInput_destinationPort})
+var sUpdateProbeInput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProbeInput_protocol})
+var sUpdateProbeInput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProbeInput_packetSize})
+var sUpdateProbeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProbeOutput, Members: &mUpdateProbeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProbeOutput})
+var sUpdateProbeOutput_probeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeId", ID: &i_ProbeId, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeOutput_probeId})
+var sUpdateProbeOutput_probeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "probeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeOutput_probeArn})
+var sUpdateProbeOutput_sourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeOutput_sourceArn})
+var sUpdateProbeOutput_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeOutput_destination})
+var sUpdateProbeOutput_destinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPort", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProbeOutput_destinationPort})
+var sUpdateProbeOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProbeOutput_protocol})
+var sUpdateProbeOutput_packetSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetSize", ID: &i_PacketSize, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProbeOutput_packetSize})
+var sUpdateProbeOutput_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProbeOutput_addressFamily})
+var sUpdateProbeOutput_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eUpdateProbeOutput_vpcId})
+var sUpdateProbeOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iProbeState, Members: &mProbeState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProbeOutput_state})
+var sUpdateProbeOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateProbeOutput_createdAt})
+var sUpdateProbeOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateProbeOutput_modifiedAt})
+var sUpdateProbeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateProbeOutput_tags})
+
+var CreateMonitor = &sCreateMonitor
+
+var CreateProbe = &sCreateProbe
+
+var DeleteMonitor = &sDeleteMonitor
+
+var DeleteProbe = &sDeleteProbe
+
+var GetMonitor = &sGetMonitor
+
+var GetProbe = &sGetProbe
+
+var ListMonitors = &sListMonitors
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateMonitor = &sUpdateMonitor
+
+var UpdateProbe = &sUpdateProbe
+
+var _NetworkMonitor = &s_NetworkMonitor
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AddressFamily = &sAddressFamily
+var AddressFamily_IPV4 = &sAddressFamily_IPV4
+var AddressFamily_IPV6 = &sAddressFamily_IPV6
+
+var _AggregationPeriod = &s_AggregationPeriod
+
+var _Arn = &s_Arn
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CreateMonitorProbeInput = &sCreateMonitorProbeInput
+var CreateMonitorProbeInput_sourceArn = &sCreateMonitorProbeInput_sourceArn
+var CreateMonitorProbeInput_destination = &sCreateMonitorProbeInput_destination
+var CreateMonitorProbeInput_destinationPort = &sCreateMonitorProbeInput_destinationPort
+var CreateMonitorProbeInput_protocol = &sCreateMonitorProbeInput_protocol
+var CreateMonitorProbeInput_packetSize = &sCreateMonitorProbeInput_packetSize
+var CreateMonitorProbeInput_probeTags = &sCreateMonitorProbeInput_probeTags
+
+var _CreateMonitorProbeInputList = &s_CreateMonitorProbeInputList
+var _CreateMonitorProbeInputList_member = &s_CreateMonitorProbeInputList_member
+
+var _Destination = &s_Destination
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _Iso8601Timestamp = &s_Iso8601Timestamp
+
+var _MaxResults = &s_MaxResults
+
+var _MonitorArn = &s_MonitorArn
+
+var _MonitorList = &s_MonitorList
+var _MonitorList_member = &s_MonitorList_member
+
+var MonitorState = &sMonitorState
+var MonitorState_PENDING = &sMonitorState_PENDING
+var MonitorState_ACTIVE = &sMonitorState_ACTIVE
+var MonitorState_INACTIVE = &sMonitorState_INACTIVE
+var MonitorState_ERROR = &sMonitorState_ERROR
+var MonitorState_DELETING = &sMonitorState_DELETING
+
+var MonitorSummary = &sMonitorSummary
+var MonitorSummary_monitorArn = &sMonitorSummary_monitorArn
+var MonitorSummary_monitorName = &sMonitorSummary_monitorName
+var MonitorSummary_state = &sMonitorSummary_state
+var MonitorSummary_aggregationPeriod = &sMonitorSummary_aggregationPeriod
+var MonitorSummary_tags = &sMonitorSummary_tags
+
+var _PacketSize = &s_PacketSize
+
+var _PaginationToken = &s_PaginationToken
+
+var _Port = &s_Port
+
+var Probe = &sProbe
+var Probe_probeId = &sProbe_probeId
+var Probe_probeArn = &sProbe_probeArn
+var Probe_sourceArn = &sProbe_sourceArn
+var Probe_destination = &sProbe_destination
+var Probe_destinationPort = &sProbe_destinationPort
+var Probe_protocol = &sProbe_protocol
+var Probe_packetSize = &sProbe_packetSize
+var Probe_addressFamily = &sProbe_addressFamily
+var Probe_vpcId = &sProbe_vpcId
+var Probe_state = &sProbe_state
+var Probe_createdAt = &sProbe_createdAt
+var Probe_modifiedAt = &sProbe_modifiedAt
+var Probe_tags = &sProbe_tags
+
+var _ProbeId = &s_ProbeId
+
+var ProbeInput = &sProbeInput
+var ProbeInput_sourceArn = &sProbeInput_sourceArn
+var ProbeInput_destination = &sProbeInput_destination
+var ProbeInput_destinationPort = &sProbeInput_destinationPort
+var ProbeInput_protocol = &sProbeInput_protocol
+var ProbeInput_packetSize = &sProbeInput_packetSize
+var ProbeInput_tags = &sProbeInput_tags
+
+var _ProbeList = &s_ProbeList
+var _ProbeList_member = &s_ProbeList_member
+
+var ProbeState = &sProbeState
+var ProbeState_PENDING = &sProbeState_PENDING
+var ProbeState_ACTIVE = &sProbeState_ACTIVE
+var ProbeState_INACTIVE = &sProbeState_INACTIVE
+var ProbeState_ERROR = &sProbeState_ERROR
+var ProbeState_DELETING = &sProbeState_DELETING
+var ProbeState_DELETED = &sProbeState_DELETED
+
+var Protocol = &sProtocol
+var Protocol_TCP = &sProtocol_TCP
+var Protocol_ICMP = &sProtocol_ICMP
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _VpcId = &s_VpcId
+
+var CreateMonitorInput = &sCreateMonitorInput
+var CreateMonitorInput_monitorName = &sCreateMonitorInput_monitorName
+var CreateMonitorInput_probes = &sCreateMonitorInput_probes
+var CreateMonitorInput_aggregationPeriod = &sCreateMonitorInput_aggregationPeriod
+var CreateMonitorInput_clientToken = &sCreateMonitorInput_clientToken
+var CreateMonitorInput_tags = &sCreateMonitorInput_tags
+
+var CreateMonitorOutput = &sCreateMonitorOutput
+var CreateMonitorOutput_monitorArn = &sCreateMonitorOutput_monitorArn
+var CreateMonitorOutput_monitorName = &sCreateMonitorOutput_monitorName
+var CreateMonitorOutput_state = &sCreateMonitorOutput_state
+var CreateMonitorOutput_aggregationPeriod = &sCreateMonitorOutput_aggregationPeriod
+var CreateMonitorOutput_tags = &sCreateMonitorOutput_tags
+
+var CreateProbeInput = &sCreateProbeInput
+var CreateProbeInput_monitorName = &sCreateProbeInput_monitorName
+var CreateProbeInput_probe = &sCreateProbeInput_probe
+var CreateProbeInput_clientToken = &sCreateProbeInput_clientToken
+var CreateProbeInput_tags = &sCreateProbeInput_tags
+
+var CreateProbeOutput = &sCreateProbeOutput
+var CreateProbeOutput_probeId = &sCreateProbeOutput_probeId
+var CreateProbeOutput_probeArn = &sCreateProbeOutput_probeArn
+var CreateProbeOutput_sourceArn = &sCreateProbeOutput_sourceArn
+var CreateProbeOutput_destination = &sCreateProbeOutput_destination
+var CreateProbeOutput_destinationPort = &sCreateProbeOutput_destinationPort
+var CreateProbeOutput_protocol = &sCreateProbeOutput_protocol
+var CreateProbeOutput_packetSize = &sCreateProbeOutput_packetSize
+var CreateProbeOutput_addressFamily = &sCreateProbeOutput_addressFamily
+var CreateProbeOutput_vpcId = &sCreateProbeOutput_vpcId
+var CreateProbeOutput_state = &sCreateProbeOutput_state
+var CreateProbeOutput_createdAt = &sCreateProbeOutput_createdAt
+var CreateProbeOutput_modifiedAt = &sCreateProbeOutput_modifiedAt
+var CreateProbeOutput_tags = &sCreateProbeOutput_tags
+
+var DeleteMonitorInput = &sDeleteMonitorInput
+var DeleteMonitorInput_monitorName = &sDeleteMonitorInput_monitorName
+
+var DeleteMonitorOutput = &sDeleteMonitorOutput
+
+var DeleteProbeInput = &sDeleteProbeInput
+var DeleteProbeInput_monitorName = &sDeleteProbeInput_monitorName
+var DeleteProbeInput_probeId = &sDeleteProbeInput_probeId
+
+var DeleteProbeOutput = &sDeleteProbeOutput
+
+var GetMonitorInput = &sGetMonitorInput
+var GetMonitorInput_monitorName = &sGetMonitorInput_monitorName
+
+var GetMonitorOutput = &sGetMonitorOutput
+var GetMonitorOutput_monitorArn = &sGetMonitorOutput_monitorArn
+var GetMonitorOutput_monitorName = &sGetMonitorOutput_monitorName
+var GetMonitorOutput_state = &sGetMonitorOutput_state
+var GetMonitorOutput_aggregationPeriod = &sGetMonitorOutput_aggregationPeriod
+var GetMonitorOutput_tags = &sGetMonitorOutput_tags
+var GetMonitorOutput_probes = &sGetMonitorOutput_probes
+var GetMonitorOutput_createdAt = &sGetMonitorOutput_createdAt
+var GetMonitorOutput_modifiedAt = &sGetMonitorOutput_modifiedAt
+
+var GetProbeInput = &sGetProbeInput
+var GetProbeInput_monitorName = &sGetProbeInput_monitorName
+var GetProbeInput_probeId = &sGetProbeInput_probeId
+
+var GetProbeOutput = &sGetProbeOutput
+var GetProbeOutput_probeId = &sGetProbeOutput_probeId
+var GetProbeOutput_probeArn = &sGetProbeOutput_probeArn
+var GetProbeOutput_sourceArn = &sGetProbeOutput_sourceArn
+var GetProbeOutput_destination = &sGetProbeOutput_destination
+var GetProbeOutput_destinationPort = &sGetProbeOutput_destinationPort
+var GetProbeOutput_protocol = &sGetProbeOutput_protocol
+var GetProbeOutput_packetSize = &sGetProbeOutput_packetSize
+var GetProbeOutput_addressFamily = &sGetProbeOutput_addressFamily
+var GetProbeOutput_vpcId = &sGetProbeOutput_vpcId
+var GetProbeOutput_state = &sGetProbeOutput_state
+var GetProbeOutput_createdAt = &sGetProbeOutput_createdAt
+var GetProbeOutput_modifiedAt = &sGetProbeOutput_modifiedAt
+var GetProbeOutput_tags = &sGetProbeOutput_tags
+
+var ListMonitorsInput = &sListMonitorsInput
+var ListMonitorsInput_nextToken = &sListMonitorsInput_nextToken
+var ListMonitorsInput_maxResults = &sListMonitorsInput_maxResults
+var ListMonitorsInput_state = &sListMonitorsInput_state
+
+var ListMonitorsOutput = &sListMonitorsOutput
+var ListMonitorsOutput_monitors = &sListMonitorsOutput_monitors
+var ListMonitorsOutput_nextToken = &sListMonitorsOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateMonitorInput = &sUpdateMonitorInput
+var UpdateMonitorInput_monitorName = &sUpdateMonitorInput_monitorName
+var UpdateMonitorInput_aggregationPeriod = &sUpdateMonitorInput_aggregationPeriod
+
+var UpdateMonitorOutput = &sUpdateMonitorOutput
+var UpdateMonitorOutput_monitorArn = &sUpdateMonitorOutput_monitorArn
+var UpdateMonitorOutput_monitorName = &sUpdateMonitorOutput_monitorName
+var UpdateMonitorOutput_state = &sUpdateMonitorOutput_state
+var UpdateMonitorOutput_aggregationPeriod = &sUpdateMonitorOutput_aggregationPeriod
+var UpdateMonitorOutput_tags = &sUpdateMonitorOutput_tags
+
+var UpdateProbeInput = &sUpdateProbeInput
+var UpdateProbeInput_monitorName = &sUpdateProbeInput_monitorName
+var UpdateProbeInput_probeId = &sUpdateProbeInput_probeId
+var UpdateProbeInput_state = &sUpdateProbeInput_state
+var UpdateProbeInput_destination = &sUpdateProbeInput_destination
+var UpdateProbeInput_destinationPort = &sUpdateProbeInput_destinationPort
+var UpdateProbeInput_protocol = &sUpdateProbeInput_protocol
+var UpdateProbeInput_packetSize = &sUpdateProbeInput_packetSize
+
+var UpdateProbeOutput = &sUpdateProbeOutput
+var UpdateProbeOutput_probeId = &sUpdateProbeOutput_probeId
+var UpdateProbeOutput_probeArn = &sUpdateProbeOutput_probeArn
+var UpdateProbeOutput_sourceArn = &sUpdateProbeOutput_sourceArn
+var UpdateProbeOutput_destination = &sUpdateProbeOutput_destination
+var UpdateProbeOutput_destinationPort = &sUpdateProbeOutput_destinationPort
+var UpdateProbeOutput_protocol = &sUpdateProbeOutput_protocol
+var UpdateProbeOutput_packetSize = &sUpdateProbeOutput_packetSize
+var UpdateProbeOutput_addressFamily = &sUpdateProbeOutput_addressFamily
+var UpdateProbeOutput_vpcId = &sUpdateProbeOutput_vpcId
+var UpdateProbeOutput_state = &sUpdateProbeOutput_state
+var UpdateProbeOutput_createdAt = &sUpdateProbeOutput_createdAt
+var UpdateProbeOutput_modifiedAt = &sUpdateProbeOutput_modifiedAt
+var UpdateProbeOutput_tags = &sUpdateProbeOutput_tags
+
+var NetworkMonitor = &smithy.ServiceSchema{Schema: &s_NetworkMonitor, Version: "2023-08-01"}

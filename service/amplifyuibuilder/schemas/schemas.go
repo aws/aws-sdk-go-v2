@@ -4,3264 +4,3172 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateComponent                                                 smithy.SchemaExtensions
+	eCreateForm                                                      smithy.SchemaExtensions
+	eCreateTheme                                                     smithy.SchemaExtensions
+	eDeleteComponent                                                 smithy.SchemaExtensions
+	eDeleteForm                                                      smithy.SchemaExtensions
+	eDeleteTheme                                                     smithy.SchemaExtensions
+	eExchangeCodeForToken                                            smithy.SchemaExtensions
+	eExportComponents                                                smithy.SchemaExtensions
+	eExportForms                                                     smithy.SchemaExtensions
+	eExportThemes                                                    smithy.SchemaExtensions
+	eGetCodegenJob                                                   smithy.SchemaExtensions
+	eGetComponent                                                    smithy.SchemaExtensions
+	eGetForm                                                         smithy.SchemaExtensions
+	eGetMetadata                                                     smithy.SchemaExtensions
+	eGetTheme                                                        smithy.SchemaExtensions
+	eListCodegenJobs                                                 smithy.SchemaExtensions
+	eListComponents                                                  smithy.SchemaExtensions
+	eListForms                                                       smithy.SchemaExtensions
+	eListTagsForResource                                             smithy.SchemaExtensions
+	eListThemes                                                      smithy.SchemaExtensions
+	ePutMetadataFlag                                                 smithy.SchemaExtensions
+	eRefreshToken                                                    smithy.SchemaExtensions
+	eStartCodegenJob                                                 smithy.SchemaExtensions
+	eTagResource                                                     smithy.SchemaExtensions
+	eUntagResource                                                   smithy.SchemaExtensions
+	eUpdateComponent                                                 smithy.SchemaExtensions
+	eUpdateForm                                                      smithy.SchemaExtensions
+	eUpdateTheme                                                     smithy.SchemaExtensions
+	e_AmplifyUIBuilder                                               smithy.SchemaExtensions
+	eActionParameters                                                smithy.SchemaExtensions
+	eActionParameters_type                                           smithy.SchemaExtensions
+	eActionParameters_url                                            smithy.SchemaExtensions
+	eActionParameters_anchor                                         smithy.SchemaExtensions
+	eActionParameters_target                                         smithy.SchemaExtensions
+	eActionParameters_global                                         smithy.SchemaExtensions
+	eActionParameters_model                                          smithy.SchemaExtensions
+	eActionParameters_id                                             smithy.SchemaExtensions
+	eActionParameters_fields                                         smithy.SchemaExtensions
+	eActionParameters_state                                          smithy.SchemaExtensions
+	eApiConfiguration                                                smithy.SchemaExtensions
+	eApiConfiguration_graphQLConfig                                  smithy.SchemaExtensions
+	eApiConfiguration_dataStoreConfig                                smithy.SchemaExtensions
+	eApiConfiguration_noApiConfig                                    smithy.SchemaExtensions
+	e_AppId                                                          smithy.SchemaExtensions
+	e_AssociatedFieldsList                                           smithy.SchemaExtensions
+	e_AssociatedFieldsList_member                                    smithy.SchemaExtensions
+	e_CodegenDependencies                                            smithy.SchemaExtensions
+	e_CodegenDependencies_member                                     smithy.SchemaExtensions
+	eCodegenDependency                                               smithy.SchemaExtensions
+	eCodegenDependency_name                                          smithy.SchemaExtensions
+	eCodegenDependency_supportedVersion                              smithy.SchemaExtensions
+	eCodegenDependency_isSemVer                                      smithy.SchemaExtensions
+	eCodegenDependency_reason                                        smithy.SchemaExtensions
+	eCodegenFeatureFlags                                             smithy.SchemaExtensions
+	eCodegenFeatureFlags_isRelationshipSupported                     smithy.SchemaExtensions
+	eCodegenFeatureFlags_isNonModelSupported                         smithy.SchemaExtensions
+	eCodegenGenericDataEnum                                          smithy.SchemaExtensions
+	eCodegenGenericDataEnum_values                                   smithy.SchemaExtensions
+	e_CodegenGenericDataEnums                                        smithy.SchemaExtensions
+	e_CodegenGenericDataEnums_key                                    smithy.SchemaExtensions
+	e_CodegenGenericDataEnums_value                                  smithy.SchemaExtensions
+	e_CodegenGenericDataEnumValuesList                               smithy.SchemaExtensions
+	e_CodegenGenericDataEnumValuesList_member                        smithy.SchemaExtensions
+	eCodegenGenericDataField                                         smithy.SchemaExtensions
+	eCodegenGenericDataField_dataType                                smithy.SchemaExtensions
+	eCodegenGenericDataField_dataTypeValue                           smithy.SchemaExtensions
+	eCodegenGenericDataField_required                                smithy.SchemaExtensions
+	eCodegenGenericDataField_readOnly                                smithy.SchemaExtensions
+	eCodegenGenericDataField_isArray                                 smithy.SchemaExtensions
+	eCodegenGenericDataField_relationship                            smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType                                 smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_ID                              smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_STRING                          smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_INT                             smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_FLOAT                           smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_DATE                        smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_TIME                        smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_DATE_TIME                   smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_TIMESTAMP                   smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_EMAIL                       smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_URL                         smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_IP_ADDRESS                  smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_BOOLEAN                         smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_JSON                        smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_AWS_PHONE                       smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_ENUM                            smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_MODEL                           smithy.SchemaExtensions
+	eCodegenGenericDataFieldDataType_NON_MODEL                       smithy.SchemaExtensions
+	e_CodegenGenericDataFields                                       smithy.SchemaExtensions
+	e_CodegenGenericDataFields_key                                   smithy.SchemaExtensions
+	e_CodegenGenericDataFields_value                                 smithy.SchemaExtensions
+	eCodegenGenericDataModel                                         smithy.SchemaExtensions
+	eCodegenGenericDataModel_fields                                  smithy.SchemaExtensions
+	eCodegenGenericDataModel_isJoinTable                             smithy.SchemaExtensions
+	eCodegenGenericDataModel_primaryKeys                             smithy.SchemaExtensions
+	e_CodegenGenericDataModels                                       smithy.SchemaExtensions
+	e_CodegenGenericDataModels_key                                   smithy.SchemaExtensions
+	e_CodegenGenericDataModels_value                                 smithy.SchemaExtensions
+	eCodegenGenericDataNonModel                                      smithy.SchemaExtensions
+	eCodegenGenericDataNonModel_fields                               smithy.SchemaExtensions
+	e_CodegenGenericDataNonModelFields                               smithy.SchemaExtensions
+	e_CodegenGenericDataNonModelFields_key                           smithy.SchemaExtensions
+	e_CodegenGenericDataNonModelFields_value                         smithy.SchemaExtensions
+	e_CodegenGenericDataNonModels                                    smithy.SchemaExtensions
+	e_CodegenGenericDataNonModels_key                                smithy.SchemaExtensions
+	e_CodegenGenericDataNonModels_value                              smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType                              smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_type                         smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_relatedModelName             smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_relatedModelFields           smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_canUnlinkAssociatedModel     smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_relatedJoinFieldName         smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_relatedJoinTableName         smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_associatedFields             smithy.SchemaExtensions
+	eCodegenGenericDataRelationshipType_isHasManyIndex               smithy.SchemaExtensions
+	eCodegenJob                                                      smithy.SchemaExtensions
+	eCodegenJob_id                                                   smithy.SchemaExtensions
+	eCodegenJob_appId                                                smithy.SchemaExtensions
+	eCodegenJob_environmentName                                      smithy.SchemaExtensions
+	eCodegenJob_renderConfig                                         smithy.SchemaExtensions
+	eCodegenJob_genericDataSchema                                    smithy.SchemaExtensions
+	eCodegenJob_autoGenerateForms                                    smithy.SchemaExtensions
+	eCodegenJob_features                                             smithy.SchemaExtensions
+	eCodegenJob_status                                               smithy.SchemaExtensions
+	eCodegenJob_statusMessage                                        smithy.SchemaExtensions
+	eCodegenJob_asset                                                smithy.SchemaExtensions
+	eCodegenJob_tags                                                 smithy.SchemaExtensions
+	eCodegenJob_createdAt                                            smithy.SchemaExtensions
+	eCodegenJob_modifiedAt                                           smithy.SchemaExtensions
+	eCodegenJob_dependencies                                         smithy.SchemaExtensions
+	eCodegenJobAsset                                                 smithy.SchemaExtensions
+	eCodegenJobAsset_downloadUrl                                     smithy.SchemaExtensions
+	eCodegenJobGenericDataSchema                                     smithy.SchemaExtensions
+	eCodegenJobGenericDataSchema_dataSourceType                      smithy.SchemaExtensions
+	eCodegenJobGenericDataSchema_models                              smithy.SchemaExtensions
+	eCodegenJobGenericDataSchema_enums                               smithy.SchemaExtensions
+	eCodegenJobGenericDataSchema_nonModels                           smithy.SchemaExtensions
+	eCodegenJobGenericDataSourceType                                 smithy.SchemaExtensions
+	eCodegenJobGenericDataSourceType_DATA_STORE                      smithy.SchemaExtensions
+	eCodegenJobRenderConfig                                          smithy.SchemaExtensions
+	eCodegenJobRenderConfig_react                                    smithy.SchemaExtensions
+	eCodegenJobStatus                                                smithy.SchemaExtensions
+	eCodegenJobStatus_IN_PROGRESS                                    smithy.SchemaExtensions
+	eCodegenJobStatus_FAILED                                         smithy.SchemaExtensions
+	eCodegenJobStatus_SUCCEEDED                                      smithy.SchemaExtensions
+	eCodegenJobSummary                                               smithy.SchemaExtensions
+	eCodegenJobSummary_appId                                         smithy.SchemaExtensions
+	eCodegenJobSummary_environmentName                               smithy.SchemaExtensions
+	eCodegenJobSummary_id                                            smithy.SchemaExtensions
+	eCodegenJobSummary_createdAt                                     smithy.SchemaExtensions
+	eCodegenJobSummary_modifiedAt                                    smithy.SchemaExtensions
+	e_CodegenJobSummaryList                                          smithy.SchemaExtensions
+	e_CodegenJobSummaryList_member                                   smithy.SchemaExtensions
+	e_CodegenPrimaryKeysList                                         smithy.SchemaExtensions
+	e_CodegenPrimaryKeysList_member                                  smithy.SchemaExtensions
+	eComponent                                                       smithy.SchemaExtensions
+	eComponent_appId                                                 smithy.SchemaExtensions
+	eComponent_environmentName                                       smithy.SchemaExtensions
+	eComponent_sourceId                                              smithy.SchemaExtensions
+	eComponent_id                                                    smithy.SchemaExtensions
+	eComponent_name                                                  smithy.SchemaExtensions
+	eComponent_componentType                                         smithy.SchemaExtensions
+	eComponent_properties                                            smithy.SchemaExtensions
+	eComponent_children                                              smithy.SchemaExtensions
+	eComponent_variants                                              smithy.SchemaExtensions
+	eComponent_overrides                                             smithy.SchemaExtensions
+	eComponent_bindingProperties                                     smithy.SchemaExtensions
+	eComponent_collectionProperties                                  smithy.SchemaExtensions
+	eComponent_createdAt                                             smithy.SchemaExtensions
+	eComponent_modifiedAt                                            smithy.SchemaExtensions
+	eComponent_tags                                                  smithy.SchemaExtensions
+	eComponent_events                                                smithy.SchemaExtensions
+	eComponent_schemaVersion                                         smithy.SchemaExtensions
+	e_ComponentBindingProperties                                     smithy.SchemaExtensions
+	e_ComponentBindingProperties_key                                 smithy.SchemaExtensions
+	e_ComponentBindingProperties_value                               smithy.SchemaExtensions
+	eComponentBindingPropertiesValue                                 smithy.SchemaExtensions
+	eComponentBindingPropertiesValue_type                            smithy.SchemaExtensions
+	eComponentBindingPropertiesValue_bindingProperties               smithy.SchemaExtensions
+	eComponentBindingPropertiesValue_defaultValue                    smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties                       smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_model                 smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_field                 smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_predicates            smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_userAttribute         smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_bucket                smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_key                   smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_defaultValue          smithy.SchemaExtensions
+	eComponentBindingPropertiesValueProperties_slotName              smithy.SchemaExtensions
+	eComponentChild                                                  smithy.SchemaExtensions
+	eComponentChild_componentType                                    smithy.SchemaExtensions
+	eComponentChild_name                                             smithy.SchemaExtensions
+	eComponentChild_properties                                       smithy.SchemaExtensions
+	eComponentChild_children                                         smithy.SchemaExtensions
+	eComponentChild_events                                           smithy.SchemaExtensions
+	eComponentChild_sourceId                                         smithy.SchemaExtensions
+	e_ComponentChildList                                             smithy.SchemaExtensions
+	e_ComponentChildList_member                                      smithy.SchemaExtensions
+	e_ComponentCollectionProperties                                  smithy.SchemaExtensions
+	e_ComponentCollectionProperties_key                              smithy.SchemaExtensions
+	e_ComponentCollectionProperties_value                            smithy.SchemaExtensions
+	eComponentConditionProperty                                      smithy.SchemaExtensions
+	eComponentConditionProperty_property                             smithy.SchemaExtensions
+	eComponentConditionProperty_field                                smithy.SchemaExtensions
+	eComponentConditionProperty_operator                             smithy.SchemaExtensions
+	eComponentConditionProperty_operand                              smithy.SchemaExtensions
+	eComponentConditionProperty_then                                 smithy.SchemaExtensions
+	eComponentConditionProperty_else                                 smithy.SchemaExtensions
+	eComponentConditionProperty_operandType                          smithy.SchemaExtensions
+	eComponentDataConfiguration                                      smithy.SchemaExtensions
+	eComponentDataConfiguration_model                                smithy.SchemaExtensions
+	eComponentDataConfiguration_sort                                 smithy.SchemaExtensions
+	eComponentDataConfiguration_predicate                            smithy.SchemaExtensions
+	eComponentDataConfiguration_identifiers                          smithy.SchemaExtensions
+	eComponentEvent                                                  smithy.SchemaExtensions
+	eComponentEvent_action                                           smithy.SchemaExtensions
+	eComponentEvent_parameters                                       smithy.SchemaExtensions
+	eComponentEvent_bindingEvent                                     smithy.SchemaExtensions
+	e_ComponentEvents                                                smithy.SchemaExtensions
+	e_ComponentEvents_key                                            smithy.SchemaExtensions
+	e_ComponentEvents_value                                          smithy.SchemaExtensions
+	e_ComponentList                                                  smithy.SchemaExtensions
+	e_ComponentList_member                                           smithy.SchemaExtensions
+	e_ComponentName                                                  smithy.SchemaExtensions
+	e_ComponentOverrides                                             smithy.SchemaExtensions
+	e_ComponentOverrides_key                                         smithy.SchemaExtensions
+	e_ComponentOverrides_value                                       smithy.SchemaExtensions
+	e_ComponentOverridesValue                                        smithy.SchemaExtensions
+	e_ComponentOverridesValue_key                                    smithy.SchemaExtensions
+	e_ComponentOverridesValue_value                                  smithy.SchemaExtensions
+	e_ComponentProperties                                            smithy.SchemaExtensions
+	e_ComponentProperties_key                                        smithy.SchemaExtensions
+	e_ComponentProperties_value                                      smithy.SchemaExtensions
+	eComponentProperty                                               smithy.SchemaExtensions
+	eComponentProperty_value                                         smithy.SchemaExtensions
+	eComponentProperty_bindingProperties                             smithy.SchemaExtensions
+	eComponentProperty_collectionBindingProperties                   smithy.SchemaExtensions
+	eComponentProperty_defaultValue                                  smithy.SchemaExtensions
+	eComponentProperty_model                                         smithy.SchemaExtensions
+	eComponentProperty_bindings                                      smithy.SchemaExtensions
+	eComponentProperty_event                                         smithy.SchemaExtensions
+	eComponentProperty_userAttribute                                 smithy.SchemaExtensions
+	eComponentProperty_concat                                        smithy.SchemaExtensions
+	eComponentProperty_condition                                     smithy.SchemaExtensions
+	eComponentProperty_configured                                    smithy.SchemaExtensions
+	eComponentProperty_type                                          smithy.SchemaExtensions
+	eComponentProperty_importedValue                                 smithy.SchemaExtensions
+	eComponentProperty_componentName                                 smithy.SchemaExtensions
+	eComponentProperty_property                                      smithy.SchemaExtensions
+	eComponentPropertyBindingProperties                              smithy.SchemaExtensions
+	eComponentPropertyBindingProperties_property                     smithy.SchemaExtensions
+	eComponentPropertyBindingProperties_field                        smithy.SchemaExtensions
+	e_ComponentPropertyList                                          smithy.SchemaExtensions
+	e_ComponentPropertyList_member                                   smithy.SchemaExtensions
+	eComponentSummary                                                smithy.SchemaExtensions
+	eComponentSummary_appId                                          smithy.SchemaExtensions
+	eComponentSummary_environmentName                                smithy.SchemaExtensions
+	eComponentSummary_id                                             smithy.SchemaExtensions
+	eComponentSummary_name                                           smithy.SchemaExtensions
+	eComponentSummary_componentType                                  smithy.SchemaExtensions
+	e_ComponentSummaryList                                           smithy.SchemaExtensions
+	e_ComponentSummaryList_member                                    smithy.SchemaExtensions
+	e_ComponentType                                                  smithy.SchemaExtensions
+	eComponentVariant                                                smithy.SchemaExtensions
+	eComponentVariant_variantValues                                  smithy.SchemaExtensions
+	eComponentVariant_overrides                                      smithy.SchemaExtensions
+	e_ComponentVariants                                              smithy.SchemaExtensions
+	e_ComponentVariants_member                                       smithy.SchemaExtensions
+	e_ComponentVariantValues                                         smithy.SchemaExtensions
+	e_ComponentVariantValues_key                                     smithy.SchemaExtensions
+	e_ComponentVariantValues_value                                   smithy.SchemaExtensions
+	eCreateComponentData                                             smithy.SchemaExtensions
+	eCreateComponentData_name                                        smithy.SchemaExtensions
+	eCreateComponentData_sourceId                                    smithy.SchemaExtensions
+	eCreateComponentData_componentType                               smithy.SchemaExtensions
+	eCreateComponentData_properties                                  smithy.SchemaExtensions
+	eCreateComponentData_children                                    smithy.SchemaExtensions
+	eCreateComponentData_variants                                    smithy.SchemaExtensions
+	eCreateComponentData_overrides                                   smithy.SchemaExtensions
+	eCreateComponentData_bindingProperties                           smithy.SchemaExtensions
+	eCreateComponentData_collectionProperties                        smithy.SchemaExtensions
+	eCreateComponentData_tags                                        smithy.SchemaExtensions
+	eCreateComponentData_events                                      smithy.SchemaExtensions
+	eCreateComponentData_schemaVersion                               smithy.SchemaExtensions
+	eCreateFormData                                                  smithy.SchemaExtensions
+	eCreateFormData_name                                             smithy.SchemaExtensions
+	eCreateFormData_dataType                                         smithy.SchemaExtensions
+	eCreateFormData_formActionType                                   smithy.SchemaExtensions
+	eCreateFormData_fields                                           smithy.SchemaExtensions
+	eCreateFormData_style                                            smithy.SchemaExtensions
+	eCreateFormData_sectionalElements                                smithy.SchemaExtensions
+	eCreateFormData_schemaVersion                                    smithy.SchemaExtensions
+	eCreateFormData_cta                                              smithy.SchemaExtensions
+	eCreateFormData_tags                                             smithy.SchemaExtensions
+	eCreateFormData_labelDecorator                                   smithy.SchemaExtensions
+	eCreateThemeData                                                 smithy.SchemaExtensions
+	eCreateThemeData_name                                            smithy.SchemaExtensions
+	eCreateThemeData_values                                          smithy.SchemaExtensions
+	eCreateThemeData_overrides                                       smithy.SchemaExtensions
+	eCreateThemeData_tags                                            smithy.SchemaExtensions
+	eDataStoreRenderConfig                                           smithy.SchemaExtensions
+	eExchangeCodeForTokenRequestBody                                 smithy.SchemaExtensions
+	eExchangeCodeForTokenRequestBody_code                            smithy.SchemaExtensions
+	eExchangeCodeForTokenRequestBody_redirectUri                     smithy.SchemaExtensions
+	eExchangeCodeForTokenRequestBody_clientId                        smithy.SchemaExtensions
+	e_FeaturesMap                                                    smithy.SchemaExtensions
+	e_FeaturesMap_key                                                smithy.SchemaExtensions
+	e_FeaturesMap_value                                              smithy.SchemaExtensions
+	eFieldConfig                                                     smithy.SchemaExtensions
+	eFieldConfig_label                                               smithy.SchemaExtensions
+	eFieldConfig_position                                            smithy.SchemaExtensions
+	eFieldConfig_excluded                                            smithy.SchemaExtensions
+	eFieldConfig_inputType                                           smithy.SchemaExtensions
+	eFieldConfig_validations                                         smithy.SchemaExtensions
+	eFieldInputConfig                                                smithy.SchemaExtensions
+	eFieldInputConfig_type                                           smithy.SchemaExtensions
+	eFieldInputConfig_required                                       smithy.SchemaExtensions
+	eFieldInputConfig_readOnly                                       smithy.SchemaExtensions
+	eFieldInputConfig_placeholder                                    smithy.SchemaExtensions
+	eFieldInputConfig_defaultValue                                   smithy.SchemaExtensions
+	eFieldInputConfig_descriptiveText                                smithy.SchemaExtensions
+	eFieldInputConfig_defaultChecked                                 smithy.SchemaExtensions
+	eFieldInputConfig_defaultCountryCode                             smithy.SchemaExtensions
+	eFieldInputConfig_valueMappings                                  smithy.SchemaExtensions
+	eFieldInputConfig_name                                           smithy.SchemaExtensions
+	eFieldInputConfig_minValue                                       smithy.SchemaExtensions
+	eFieldInputConfig_maxValue                                       smithy.SchemaExtensions
+	eFieldInputConfig_step                                           smithy.SchemaExtensions
+	eFieldInputConfig_value                                          smithy.SchemaExtensions
+	eFieldInputConfig_isArray                                        smithy.SchemaExtensions
+	eFieldInputConfig_fileUploaderConfig                             smithy.SchemaExtensions
+	eFieldPosition                                                   smithy.SchemaExtensions
+	eFieldPosition_fixed                                             smithy.SchemaExtensions
+	eFieldPosition_rightOf                                           smithy.SchemaExtensions
+	eFieldPosition_below                                             smithy.SchemaExtensions
+	e_FieldsMap                                                      smithy.SchemaExtensions
+	e_FieldsMap_key                                                  smithy.SchemaExtensions
+	e_FieldsMap_value                                                smithy.SchemaExtensions
+	eFieldValidationConfiguration                                    smithy.SchemaExtensions
+	eFieldValidationConfiguration_type                               smithy.SchemaExtensions
+	eFieldValidationConfiguration_strValues                          smithy.SchemaExtensions
+	eFieldValidationConfiguration_numValues                          smithy.SchemaExtensions
+	eFieldValidationConfiguration_validationMessage                  smithy.SchemaExtensions
+	eFileUploaderFieldConfig                                         smithy.SchemaExtensions
+	eFileUploaderFieldConfig_accessLevel                             smithy.SchemaExtensions
+	eFileUploaderFieldConfig_acceptedFileTypes                       smithy.SchemaExtensions
+	eFileUploaderFieldConfig_showThumbnails                          smithy.SchemaExtensions
+	eFileUploaderFieldConfig_isResumable                             smithy.SchemaExtensions
+	eFileUploaderFieldConfig_maxFileCount                            smithy.SchemaExtensions
+	eFileUploaderFieldConfig_maxSize                                 smithy.SchemaExtensions
+	eFixedPosition                                                   smithy.SchemaExtensions
+	eFixedPosition_FIRST                                             smithy.SchemaExtensions
+	eForm                                                            smithy.SchemaExtensions
+	eForm_appId                                                      smithy.SchemaExtensions
+	eForm_environmentName                                            smithy.SchemaExtensions
+	eForm_id                                                         smithy.SchemaExtensions
+	eForm_name                                                       smithy.SchemaExtensions
+	eForm_formActionType                                             smithy.SchemaExtensions
+	eForm_style                                                      smithy.SchemaExtensions
+	eForm_dataType                                                   smithy.SchemaExtensions
+	eForm_fields                                                     smithy.SchemaExtensions
+	eForm_sectionalElements                                          smithy.SchemaExtensions
+	eForm_schemaVersion                                              smithy.SchemaExtensions
+	eForm_tags                                                       smithy.SchemaExtensions
+	eForm_cta                                                        smithy.SchemaExtensions
+	eForm_labelDecorator                                             smithy.SchemaExtensions
+	eFormActionType                                                  smithy.SchemaExtensions
+	eFormActionType_CREATE                                           smithy.SchemaExtensions
+	eFormActionType_UPDATE                                           smithy.SchemaExtensions
+	eFormBindingElement                                              smithy.SchemaExtensions
+	eFormBindingElement_element                                      smithy.SchemaExtensions
+	eFormBindingElement_property                                     smithy.SchemaExtensions
+	e_FormBindings                                                   smithy.SchemaExtensions
+	e_FormBindings_key                                               smithy.SchemaExtensions
+	e_FormBindings_value                                             smithy.SchemaExtensions
+	eFormButton                                                      smithy.SchemaExtensions
+	eFormButton_excluded                                             smithy.SchemaExtensions
+	eFormButton_children                                             smithy.SchemaExtensions
+	eFormButton_position                                             smithy.SchemaExtensions
+	eFormButtonsPosition                                             smithy.SchemaExtensions
+	eFormButtonsPosition_TOP                                         smithy.SchemaExtensions
+	eFormButtonsPosition_BOTTOM                                      smithy.SchemaExtensions
+	eFormButtonsPosition_TOP_AND_BOTTOM                              smithy.SchemaExtensions
+	eFormCTA                                                         smithy.SchemaExtensions
+	eFormCTA_position                                                smithy.SchemaExtensions
+	eFormCTA_clear                                                   smithy.SchemaExtensions
+	eFormCTA_cancel                                                  smithy.SchemaExtensions
+	eFormCTA_submit                                                  smithy.SchemaExtensions
+	e_FormDataSourceType                                             smithy.SchemaExtensions
+	eFormDataTypeConfig                                              smithy.SchemaExtensions
+	eFormDataTypeConfig_dataSourceType                               smithy.SchemaExtensions
+	eFormDataTypeConfig_dataTypeName                                 smithy.SchemaExtensions
+	e_FormInputBindingProperties                                     smithy.SchemaExtensions
+	e_FormInputBindingProperties_key                                 smithy.SchemaExtensions
+	e_FormInputBindingProperties_value                               smithy.SchemaExtensions
+	eFormInputBindingPropertiesValue                                 smithy.SchemaExtensions
+	eFormInputBindingPropertiesValue_type                            smithy.SchemaExtensions
+	eFormInputBindingPropertiesValue_bindingProperties               smithy.SchemaExtensions
+	eFormInputBindingPropertiesValueProperties                       smithy.SchemaExtensions
+	eFormInputBindingPropertiesValueProperties_model                 smithy.SchemaExtensions
+	eFormInputValueProperty                                          smithy.SchemaExtensions
+	eFormInputValueProperty_value                                    smithy.SchemaExtensions
+	eFormInputValueProperty_bindingProperties                        smithy.SchemaExtensions
+	eFormInputValueProperty_concat                                   smithy.SchemaExtensions
+	eFormInputValuePropertyBindingProperties                         smithy.SchemaExtensions
+	eFormInputValuePropertyBindingProperties_property                smithy.SchemaExtensions
+	eFormInputValuePropertyBindingProperties_field                   smithy.SchemaExtensions
+	e_FormInputValuePropertyList                                     smithy.SchemaExtensions
+	e_FormInputValuePropertyList_member                              smithy.SchemaExtensions
+	e_FormList                                                       smithy.SchemaExtensions
+	e_FormList_member                                                smithy.SchemaExtensions
+	e_FormName                                                       smithy.SchemaExtensions
+	eFormStyle                                                       smithy.SchemaExtensions
+	eFormStyle_horizontalGap                                         smithy.SchemaExtensions
+	eFormStyle_verticalGap                                           smithy.SchemaExtensions
+	eFormStyle_outerPadding                                          smithy.SchemaExtensions
+	eFormStyleConfig                                                 smithy.SchemaExtensions
+	eFormStyleConfig_tokenReference                                  smithy.SchemaExtensions
+	eFormStyleConfig_value                                           smithy.SchemaExtensions
+	eFormSummary                                                     smithy.SchemaExtensions
+	eFormSummary_appId                                               smithy.SchemaExtensions
+	eFormSummary_dataType                                            smithy.SchemaExtensions
+	eFormSummary_environmentName                                     smithy.SchemaExtensions
+	eFormSummary_formActionType                                      smithy.SchemaExtensions
+	eFormSummary_id                                                  smithy.SchemaExtensions
+	eFormSummary_name                                                smithy.SchemaExtensions
+	e_FormSummaryList                                                smithy.SchemaExtensions
+	e_FormSummaryList_member                                         smithy.SchemaExtensions
+	eGenericDataRelationshipType                                     smithy.SchemaExtensions
+	eGenericDataRelationshipType_HAS_MANY                            smithy.SchemaExtensions
+	eGenericDataRelationshipType_HAS_ONE                             smithy.SchemaExtensions
+	eGenericDataRelationshipType_BELONGS_TO                          smithy.SchemaExtensions
+	eGraphQLRenderConfig                                             smithy.SchemaExtensions
+	eGraphQLRenderConfig_typesFilePath                               smithy.SchemaExtensions
+	eGraphQLRenderConfig_queriesFilePath                             smithy.SchemaExtensions
+	eGraphQLRenderConfig_mutationsFilePath                           smithy.SchemaExtensions
+	eGraphQLRenderConfig_subscriptionsFilePath                       smithy.SchemaExtensions
+	eGraphQLRenderConfig_fragmentsFilePath                           smithy.SchemaExtensions
+	e_IdentifierList                                                 smithy.SchemaExtensions
+	e_IdentifierList_member                                          smithy.SchemaExtensions
+	eInternalServerException                                         smithy.SchemaExtensions
+	eInternalServerException_message                                 smithy.SchemaExtensions
+	eInvalidParameterException                                       smithy.SchemaExtensions
+	eInvalidParameterException_message                               smithy.SchemaExtensions
+	eJSModule                                                        smithy.SchemaExtensions
+	eJSModule_ES2020                                                 smithy.SchemaExtensions
+	eJSModule_ESNEXT                                                 smithy.SchemaExtensions
+	eJSScript                                                        smithy.SchemaExtensions
+	eJSScript_JSX                                                    smithy.SchemaExtensions
+	eJSScript_TSX                                                    smithy.SchemaExtensions
+	eJSScript_JS                                                     smithy.SchemaExtensions
+	eJSTarget                                                        smithy.SchemaExtensions
+	eJSTarget_ES2015                                                 smithy.SchemaExtensions
+	eJSTarget_ES2020                                                 smithy.SchemaExtensions
+	e_LabelDecorator                                                 smithy.SchemaExtensions
+	e_ListCodegenJobsLimit                                           smithy.SchemaExtensions
+	e_ListEntityLimit                                                smithy.SchemaExtensions
+	eMutationActionSetStateParameter                                 smithy.SchemaExtensions
+	eMutationActionSetStateParameter_componentName                   smithy.SchemaExtensions
+	eMutationActionSetStateParameter_property                        smithy.SchemaExtensions
+	eMutationActionSetStateParameter_set                             smithy.SchemaExtensions
+	eNoApiRenderConfig                                               smithy.SchemaExtensions
+	e_NumValues                                                      smithy.SchemaExtensions
+	e_NumValues_member                                               smithy.SchemaExtensions
+	e_OperandType                                                    smithy.SchemaExtensions
+	ePredicate                                                       smithy.SchemaExtensions
+	ePredicate_or                                                    smithy.SchemaExtensions
+	ePredicate_and                                                   smithy.SchemaExtensions
+	ePredicate_field                                                 smithy.SchemaExtensions
+	ePredicate_operator                                              smithy.SchemaExtensions
+	ePredicate_operand                                               smithy.SchemaExtensions
+	ePredicate_operandType                                           smithy.SchemaExtensions
+	e_PredicateList                                                  smithy.SchemaExtensions
+	e_PredicateList_member                                           smithy.SchemaExtensions
+	ePutMetadataFlagBody                                             smithy.SchemaExtensions
+	ePutMetadataFlagBody_newValue                                    smithy.SchemaExtensions
+	e_ReactCodegenDependencies                                       smithy.SchemaExtensions
+	e_ReactCodegenDependencies_key                                   smithy.SchemaExtensions
+	e_ReactCodegenDependencies_value                                 smithy.SchemaExtensions
+	eReactStartCodegenJobData                                        smithy.SchemaExtensions
+	eReactStartCodegenJobData_module                                 smithy.SchemaExtensions
+	eReactStartCodegenJobData_target                                 smithy.SchemaExtensions
+	eReactStartCodegenJobData_script                                 smithy.SchemaExtensions
+	eReactStartCodegenJobData_renderTypeDeclarations                 smithy.SchemaExtensions
+	eReactStartCodegenJobData_inlineSourceMap                        smithy.SchemaExtensions
+	eReactStartCodegenJobData_apiConfiguration                       smithy.SchemaExtensions
+	eReactStartCodegenJobData_dependencies                           smithy.SchemaExtensions
+	eRefreshTokenRequestBody                                         smithy.SchemaExtensions
+	eRefreshTokenRequestBody_token                                   smithy.SchemaExtensions
+	eRefreshTokenRequestBody_clientId                                smithy.SchemaExtensions
+	e_RelatedModelFieldsList                                         smithy.SchemaExtensions
+	e_RelatedModelFieldsList_member                                  smithy.SchemaExtensions
+	eResourceConflictException                                       smithy.SchemaExtensions
+	eResourceConflictException_message                               smithy.SchemaExtensions
+	eResourceNotFoundException                                       smithy.SchemaExtensions
+	eResourceNotFoundException_message                               smithy.SchemaExtensions
+	eSectionalElement                                                smithy.SchemaExtensions
+	eSectionalElement_type                                           smithy.SchemaExtensions
+	eSectionalElement_position                                       smithy.SchemaExtensions
+	eSectionalElement_text                                           smithy.SchemaExtensions
+	eSectionalElement_level                                          smithy.SchemaExtensions
+	eSectionalElement_orientation                                    smithy.SchemaExtensions
+	eSectionalElement_excluded                                       smithy.SchemaExtensions
+	e_SectionalElementMap                                            smithy.SchemaExtensions
+	e_SectionalElementMap_key                                        smithy.SchemaExtensions
+	e_SectionalElementMap_value                                      smithy.SchemaExtensions
+	e_SensitiveString                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                           smithy.SchemaExtensions
+	eSortDirection                                                   smithy.SchemaExtensions
+	eSortDirection_ASC                                               smithy.SchemaExtensions
+	eSortDirection_DESC                                              smithy.SchemaExtensions
+	eSortProperty                                                    smithy.SchemaExtensions
+	eSortProperty_field                                              smithy.SchemaExtensions
+	eSortProperty_direction                                          smithy.SchemaExtensions
+	e_SortPropertyList                                               smithy.SchemaExtensions
+	e_SortPropertyList_member                                        smithy.SchemaExtensions
+	eStartCodegenJobData                                             smithy.SchemaExtensions
+	eStartCodegenJobData_renderConfig                                smithy.SchemaExtensions
+	eStartCodegenJobData_genericDataSchema                           smithy.SchemaExtensions
+	eStartCodegenJobData_autoGenerateForms                           smithy.SchemaExtensions
+	eStartCodegenJobData_features                                    smithy.SchemaExtensions
+	eStartCodegenJobData_tags                                        smithy.SchemaExtensions
+	eStorageAccessLevel                                              smithy.SchemaExtensions
+	eStorageAccessLevel_PUBLIC                                       smithy.SchemaExtensions
+	eStorageAccessLevel_PROTECTED                                    smithy.SchemaExtensions
+	eStorageAccessLevel_PRIVATE                                      smithy.SchemaExtensions
+	e_StrValues                                                      smithy.SchemaExtensions
+	e_StrValues_member                                               smithy.SchemaExtensions
+	e_TagKey                                                         smithy.SchemaExtensions
+	e_TagKeyList                                                     smithy.SchemaExtensions
+	e_TagKeyList_member                                              smithy.SchemaExtensions
+	e_Tags                                                           smithy.SchemaExtensions
+	e_Tags_key                                                       smithy.SchemaExtensions
+	e_Tags_value                                                     smithy.SchemaExtensions
+	e_TagValue                                                       smithy.SchemaExtensions
+	eTheme                                                           smithy.SchemaExtensions
+	eTheme_appId                                                     smithy.SchemaExtensions
+	eTheme_environmentName                                           smithy.SchemaExtensions
+	eTheme_id                                                        smithy.SchemaExtensions
+	eTheme_name                                                      smithy.SchemaExtensions
+	eTheme_createdAt                                                 smithy.SchemaExtensions
+	eTheme_modifiedAt                                                smithy.SchemaExtensions
+	eTheme_values                                                    smithy.SchemaExtensions
+	eTheme_overrides                                                 smithy.SchemaExtensions
+	eTheme_tags                                                      smithy.SchemaExtensions
+	e_ThemeList                                                      smithy.SchemaExtensions
+	e_ThemeList_member                                               smithy.SchemaExtensions
+	e_ThemeName                                                      smithy.SchemaExtensions
+	eThemeSummary                                                    smithy.SchemaExtensions
+	eThemeSummary_appId                                              smithy.SchemaExtensions
+	eThemeSummary_environmentName                                    smithy.SchemaExtensions
+	eThemeSummary_id                                                 smithy.SchemaExtensions
+	eThemeSummary_name                                               smithy.SchemaExtensions
+	e_ThemeSummaryList                                               smithy.SchemaExtensions
+	e_ThemeSummaryList_member                                        smithy.SchemaExtensions
+	eThemeValue                                                      smithy.SchemaExtensions
+	eThemeValue_value                                                smithy.SchemaExtensions
+	eThemeValue_children                                             smithy.SchemaExtensions
+	eThemeValues                                                     smithy.SchemaExtensions
+	eThemeValues_key                                                 smithy.SchemaExtensions
+	eThemeValues_value                                               smithy.SchemaExtensions
+	e_ThemeValuesList                                                smithy.SchemaExtensions
+	e_ThemeValuesList_member                                         smithy.SchemaExtensions
+	eThrottlingException                                             smithy.SchemaExtensions
+	eThrottlingException_message                                     smithy.SchemaExtensions
+	e_TokenProviders                                                 smithy.SchemaExtensions
+	eUnauthorizedException                                           smithy.SchemaExtensions
+	eUnauthorizedException_message                                   smithy.SchemaExtensions
+	eUpdateComponentData                                             smithy.SchemaExtensions
+	eUpdateComponentData_id                                          smithy.SchemaExtensions
+	eUpdateComponentData_name                                        smithy.SchemaExtensions
+	eUpdateComponentData_sourceId                                    smithy.SchemaExtensions
+	eUpdateComponentData_componentType                               smithy.SchemaExtensions
+	eUpdateComponentData_properties                                  smithy.SchemaExtensions
+	eUpdateComponentData_children                                    smithy.SchemaExtensions
+	eUpdateComponentData_variants                                    smithy.SchemaExtensions
+	eUpdateComponentData_overrides                                   smithy.SchemaExtensions
+	eUpdateComponentData_bindingProperties                           smithy.SchemaExtensions
+	eUpdateComponentData_collectionProperties                        smithy.SchemaExtensions
+	eUpdateComponentData_events                                      smithy.SchemaExtensions
+	eUpdateComponentData_schemaVersion                               smithy.SchemaExtensions
+	eUpdateFormData                                                  smithy.SchemaExtensions
+	eUpdateFormData_name                                             smithy.SchemaExtensions
+	eUpdateFormData_dataType                                         smithy.SchemaExtensions
+	eUpdateFormData_formActionType                                   smithy.SchemaExtensions
+	eUpdateFormData_fields                                           smithy.SchemaExtensions
+	eUpdateFormData_style                                            smithy.SchemaExtensions
+	eUpdateFormData_sectionalElements                                smithy.SchemaExtensions
+	eUpdateFormData_schemaVersion                                    smithy.SchemaExtensions
+	eUpdateFormData_cta                                              smithy.SchemaExtensions
+	eUpdateFormData_labelDecorator                                   smithy.SchemaExtensions
+	eUpdateThemeData                                                 smithy.SchemaExtensions
+	eUpdateThemeData_id                                              smithy.SchemaExtensions
+	eUpdateThemeData_name                                            smithy.SchemaExtensions
+	eUpdateThemeData_values                                          smithy.SchemaExtensions
+	eUpdateThemeData_overrides                                       smithy.SchemaExtensions
+	e_Uuid                                                           smithy.SchemaExtensions
+	e_ValidationsList                                                smithy.SchemaExtensions
+	e_ValidationsList_member                                         smithy.SchemaExtensions
+	eValueMapping                                                    smithy.SchemaExtensions
+	eValueMapping_displayValue                                       smithy.SchemaExtensions
+	eValueMapping_value                                              smithy.SchemaExtensions
+	e_ValueMappingList                                               smithy.SchemaExtensions
+	e_ValueMappingList_member                                        smithy.SchemaExtensions
+	eValueMappings                                                   smithy.SchemaExtensions
+	eValueMappings_values                                            smithy.SchemaExtensions
+	eValueMappings_bindingProperties                                 smithy.SchemaExtensions
+	eCreateComponentRequest                                          smithy.SchemaExtensions
+	eCreateComponentRequest_appId                                    smithy.SchemaExtensions
+	eCreateComponentRequest_environmentName                          smithy.SchemaExtensions
+	eCreateComponentRequest_clientToken                              smithy.SchemaExtensions
+	eCreateComponentRequest_componentToCreate                        smithy.SchemaExtensions
+	eCreateComponentResponse                                         smithy.SchemaExtensions
+	eCreateComponentResponse_entity                                  smithy.SchemaExtensions
+	eCreateFormRequest                                               smithy.SchemaExtensions
+	eCreateFormRequest_appId                                         smithy.SchemaExtensions
+	eCreateFormRequest_environmentName                               smithy.SchemaExtensions
+	eCreateFormRequest_clientToken                                   smithy.SchemaExtensions
+	eCreateFormRequest_formToCreate                                  smithy.SchemaExtensions
+	eCreateFormResponse                                              smithy.SchemaExtensions
+	eCreateFormResponse_entity                                       smithy.SchemaExtensions
+	eCreateThemeRequest                                              smithy.SchemaExtensions
+	eCreateThemeRequest_appId                                        smithy.SchemaExtensions
+	eCreateThemeRequest_environmentName                              smithy.SchemaExtensions
+	eCreateThemeRequest_clientToken                                  smithy.SchemaExtensions
+	eCreateThemeRequest_themeToCreate                                smithy.SchemaExtensions
+	eCreateThemeResponse                                             smithy.SchemaExtensions
+	eCreateThemeResponse_entity                                      smithy.SchemaExtensions
+	eDeleteComponentRequest                                          smithy.SchemaExtensions
+	eDeleteComponentRequest_appId                                    smithy.SchemaExtensions
+	eDeleteComponentRequest_environmentName                          smithy.SchemaExtensions
+	eDeleteComponentRequest_id                                       smithy.SchemaExtensions
+	eDeleteFormRequest                                               smithy.SchemaExtensions
+	eDeleteFormRequest_appId                                         smithy.SchemaExtensions
+	eDeleteFormRequest_environmentName                               smithy.SchemaExtensions
+	eDeleteFormRequest_id                                            smithy.SchemaExtensions
+	eDeleteThemeRequest                                              smithy.SchemaExtensions
+	eDeleteThemeRequest_appId                                        smithy.SchemaExtensions
+	eDeleteThemeRequest_environmentName                              smithy.SchemaExtensions
+	eDeleteThemeRequest_id                                           smithy.SchemaExtensions
+	eExchangeCodeForTokenRequest                                     smithy.SchemaExtensions
+	eExchangeCodeForTokenRequest_provider                            smithy.SchemaExtensions
+	eExchangeCodeForTokenRequest_request                             smithy.SchemaExtensions
+	eExchangeCodeForTokenResponse                                    smithy.SchemaExtensions
+	eExchangeCodeForTokenResponse_accessToken                        smithy.SchemaExtensions
+	eExchangeCodeForTokenResponse_expiresIn                          smithy.SchemaExtensions
+	eExchangeCodeForTokenResponse_refreshToken                       smithy.SchemaExtensions
+	eExportComponentsRequest                                         smithy.SchemaExtensions
+	eExportComponentsRequest_appId                                   smithy.SchemaExtensions
+	eExportComponentsRequest_environmentName                         smithy.SchemaExtensions
+	eExportComponentsRequest_nextToken                               smithy.SchemaExtensions
+	eExportComponentsResponse                                        smithy.SchemaExtensions
+	eExportComponentsResponse_entities                               smithy.SchemaExtensions
+	eExportComponentsResponse_nextToken                              smithy.SchemaExtensions
+	eExportFormsRequest                                              smithy.SchemaExtensions
+	eExportFormsRequest_appId                                        smithy.SchemaExtensions
+	eExportFormsRequest_environmentName                              smithy.SchemaExtensions
+	eExportFormsRequest_nextToken                                    smithy.SchemaExtensions
+	eExportFormsResponse                                             smithy.SchemaExtensions
+	eExportFormsResponse_entities                                    smithy.SchemaExtensions
+	eExportFormsResponse_nextToken                                   smithy.SchemaExtensions
+	eExportThemesRequest                                             smithy.SchemaExtensions
+	eExportThemesRequest_appId                                       smithy.SchemaExtensions
+	eExportThemesRequest_environmentName                             smithy.SchemaExtensions
+	eExportThemesRequest_nextToken                                   smithy.SchemaExtensions
+	eExportThemesResponse                                            smithy.SchemaExtensions
+	eExportThemesResponse_entities                                   smithy.SchemaExtensions
+	eExportThemesResponse_nextToken                                  smithy.SchemaExtensions
+	eGetCodegenJobRequest                                            smithy.SchemaExtensions
+	eGetCodegenJobRequest_appId                                      smithy.SchemaExtensions
+	eGetCodegenJobRequest_environmentName                            smithy.SchemaExtensions
+	eGetCodegenJobRequest_id                                         smithy.SchemaExtensions
+	eGetCodegenJobResponse                                           smithy.SchemaExtensions
+	eGetCodegenJobResponse_job                                       smithy.SchemaExtensions
+	eGetComponentRequest                                             smithy.SchemaExtensions
+	eGetComponentRequest_appId                                       smithy.SchemaExtensions
+	eGetComponentRequest_environmentName                             smithy.SchemaExtensions
+	eGetComponentRequest_id                                          smithy.SchemaExtensions
+	eGetComponentResponse                                            smithy.SchemaExtensions
+	eGetComponentResponse_component                                  smithy.SchemaExtensions
+	eGetFormRequest                                                  smithy.SchemaExtensions
+	eGetFormRequest_appId                                            smithy.SchemaExtensions
+	eGetFormRequest_environmentName                                  smithy.SchemaExtensions
+	eGetFormRequest_id                                               smithy.SchemaExtensions
+	eGetFormResponse                                                 smithy.SchemaExtensions
+	eGetFormResponse_form                                            smithy.SchemaExtensions
+	eGetMetadataRequest                                              smithy.SchemaExtensions
+	eGetMetadataRequest_appId                                        smithy.SchemaExtensions
+	eGetMetadataRequest_environmentName                              smithy.SchemaExtensions
+	eGetMetadataResponse                                             smithy.SchemaExtensions
+	eGetMetadataResponse_features                                    smithy.SchemaExtensions
+	eGetThemeRequest                                                 smithy.SchemaExtensions
+	eGetThemeRequest_appId                                           smithy.SchemaExtensions
+	eGetThemeRequest_environmentName                                 smithy.SchemaExtensions
+	eGetThemeRequest_id                                              smithy.SchemaExtensions
+	eGetThemeResponse                                                smithy.SchemaExtensions
+	eGetThemeResponse_theme                                          smithy.SchemaExtensions
+	eListCodegenJobsRequest                                          smithy.SchemaExtensions
+	eListCodegenJobsRequest_appId                                    smithy.SchemaExtensions
+	eListCodegenJobsRequest_environmentName                          smithy.SchemaExtensions
+	eListCodegenJobsRequest_nextToken                                smithy.SchemaExtensions
+	eListCodegenJobsRequest_maxResults                               smithy.SchemaExtensions
+	eListCodegenJobsResponse                                         smithy.SchemaExtensions
+	eListCodegenJobsResponse_entities                                smithy.SchemaExtensions
+	eListCodegenJobsResponse_nextToken                               smithy.SchemaExtensions
+	eListComponentsRequest                                           smithy.SchemaExtensions
+	eListComponentsRequest_appId                                     smithy.SchemaExtensions
+	eListComponentsRequest_environmentName                           smithy.SchemaExtensions
+	eListComponentsRequest_nextToken                                 smithy.SchemaExtensions
+	eListComponentsRequest_maxResults                                smithy.SchemaExtensions
+	eListComponentsResponse                                          smithy.SchemaExtensions
+	eListComponentsResponse_entities                                 smithy.SchemaExtensions
+	eListComponentsResponse_nextToken                                smithy.SchemaExtensions
+	eListFormsRequest                                                smithy.SchemaExtensions
+	eListFormsRequest_appId                                          smithy.SchemaExtensions
+	eListFormsRequest_environmentName                                smithy.SchemaExtensions
+	eListFormsRequest_nextToken                                      smithy.SchemaExtensions
+	eListFormsRequest_maxResults                                     smithy.SchemaExtensions
+	eListFormsResponse                                               smithy.SchemaExtensions
+	eListFormsResponse_entities                                      smithy.SchemaExtensions
+	eListFormsResponse_nextToken                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                          smithy.SchemaExtensions
+	eListTagsForResourceResponse                                     smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                smithy.SchemaExtensions
+	eListThemesRequest                                               smithy.SchemaExtensions
+	eListThemesRequest_appId                                         smithy.SchemaExtensions
+	eListThemesRequest_environmentName                               smithy.SchemaExtensions
+	eListThemesRequest_nextToken                                     smithy.SchemaExtensions
+	eListThemesRequest_maxResults                                    smithy.SchemaExtensions
+	eListThemesResponse                                              smithy.SchemaExtensions
+	eListThemesResponse_entities                                     smithy.SchemaExtensions
+	eListThemesResponse_nextToken                                    smithy.SchemaExtensions
+	ePutMetadataFlagRequest                                          smithy.SchemaExtensions
+	ePutMetadataFlagRequest_appId                                    smithy.SchemaExtensions
+	ePutMetadataFlagRequest_environmentName                          smithy.SchemaExtensions
+	ePutMetadataFlagRequest_featureName                              smithy.SchemaExtensions
+	ePutMetadataFlagRequest_body                                     smithy.SchemaExtensions
+	eRefreshTokenRequest                                             smithy.SchemaExtensions
+	eRefreshTokenRequest_provider                                    smithy.SchemaExtensions
+	eRefreshTokenRequest_refreshTokenBody                            smithy.SchemaExtensions
+	eRefreshTokenResponse                                            smithy.SchemaExtensions
+	eRefreshTokenResponse_accessToken                                smithy.SchemaExtensions
+	eRefreshTokenResponse_expiresIn                                  smithy.SchemaExtensions
+	eStartCodegenJobRequest                                          smithy.SchemaExtensions
+	eStartCodegenJobRequest_appId                                    smithy.SchemaExtensions
+	eStartCodegenJobRequest_environmentName                          smithy.SchemaExtensions
+	eStartCodegenJobRequest_clientToken                              smithy.SchemaExtensions
+	eStartCodegenJobRequest_codegenJobToCreate                       smithy.SchemaExtensions
+	eStartCodegenJobResponse                                         smithy.SchemaExtensions
+	eStartCodegenJobResponse_entity                                  smithy.SchemaExtensions
+	eTagResourceRequest                                              smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                  smithy.SchemaExtensions
+	eTagResourceRequest_tags                                         smithy.SchemaExtensions
+	eTagResourceResponse                                             smithy.SchemaExtensions
+	eUntagResourceRequest                                            smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                    smithy.SchemaExtensions
+	eUntagResourceResponse                                           smithy.SchemaExtensions
+	eUpdateComponentRequest                                          smithy.SchemaExtensions
+	eUpdateComponentRequest_appId                                    smithy.SchemaExtensions
+	eUpdateComponentRequest_environmentName                          smithy.SchemaExtensions
+	eUpdateComponentRequest_id                                       smithy.SchemaExtensions
+	eUpdateComponentRequest_clientToken                              smithy.SchemaExtensions
+	eUpdateComponentRequest_updatedComponent                         smithy.SchemaExtensions
+	eUpdateComponentResponse                                         smithy.SchemaExtensions
+	eUpdateComponentResponse_entity                                  smithy.SchemaExtensions
+	eUpdateFormRequest                                               smithy.SchemaExtensions
+	eUpdateFormRequest_appId                                         smithy.SchemaExtensions
+	eUpdateFormRequest_environmentName                               smithy.SchemaExtensions
+	eUpdateFormRequest_id                                            smithy.SchemaExtensions
+	eUpdateFormRequest_clientToken                                   smithy.SchemaExtensions
+	eUpdateFormRequest_updatedForm                                   smithy.SchemaExtensions
+	eUpdateFormResponse                                              smithy.SchemaExtensions
+	eUpdateFormResponse_entity                                       smithy.SchemaExtensions
+	eUpdateThemeRequest                                              smithy.SchemaExtensions
+	eUpdateThemeRequest_appId                                        smithy.SchemaExtensions
+	eUpdateThemeRequest_environmentName                              smithy.SchemaExtensions
+	eUpdateThemeRequest_id                                           smithy.SchemaExtensions
+	eUpdateThemeRequest_clientToken                                  smithy.SchemaExtensions
+	eUpdateThemeRequest_updatedTheme                                 smithy.SchemaExtensions
+	eUpdateThemeResponse                                             smithy.SchemaExtensions
+	eUpdateThemeResponse_entity                                      smithy.SchemaExtensions
+)
+
+var (
+	iCreateComponent                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateComponent"}
+	iCreateForm                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateForm"}
+	iCreateTheme                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateTheme"}
+	iDeleteComponent                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteComponent"}
+	iDeleteForm                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteForm"}
+	iDeleteTheme                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteTheme"}
+	iExchangeCodeForToken                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExchangeCodeForToken"}
+	iExportComponents                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportComponents"}
+	iExportForms                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportForms"}
+	iExportThemes                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportThemes"}
+	iGetCodegenJob                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetCodegenJob"}
+	iGetComponent                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetComponent"}
+	iGetForm                                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetForm"}
+	iGetMetadata                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetMetadata"}
+	iGetTheme                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetTheme"}
+	iListCodegenJobs                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListCodegenJobs"}
+	iListComponents                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListComponents"}
+	iListForms                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListForms"}
+	iListTagsForResource                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListTagsForResource"}
+	iListThemes                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListThemes"}
+	iPutMetadataFlag                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "PutMetadataFlag"}
+	iRefreshToken                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "RefreshToken"}
+	iStartCodegenJob                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StartCodegenJob"}
+	iTagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UntagResource"}
+	iUpdateComponent                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateComponent"}
+	iUpdateForm                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateForm"}
+	iUpdateTheme                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateTheme"}
+	i_AmplifyUIBuilder                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "AmplifyUIBuilder"}
+	iActionParameters                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ActionParameters"}
+	iApiConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ApiConfiguration"}
+	i_AppId                                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "AppId"}
+	i_AssociatedFieldsList                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "AssociatedFieldsList"}
+	i_CodegenDependencies                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenDependencies"}
+	iCodegenDependency                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenDependency"}
+	iCodegenFeatureFlags                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenFeatureFlags"}
+	iCodegenGenericDataEnum                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataEnum"}
+	i_CodegenGenericDataEnums                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataEnums"}
+	i_CodegenGenericDataEnumValuesList         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataEnumValuesList"}
+	iCodegenGenericDataField                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataField"}
+	iCodegenGenericDataFieldDataType           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataFieldDataType"}
+	i_CodegenGenericDataFields                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataFields"}
+	iCodegenGenericDataModel                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataModel"}
+	i_CodegenGenericDataModels                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataModels"}
+	iCodegenGenericDataNonModel                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataNonModel"}
+	i_CodegenGenericDataNonModelFields         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataNonModelFields"}
+	i_CodegenGenericDataNonModels              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataNonModels"}
+	iCodegenGenericDataRelationshipType        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenGenericDataRelationshipType"}
+	iCodegenJob                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJob"}
+	iCodegenJobAsset                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobAsset"}
+	iCodegenJobGenericDataSchema               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobGenericDataSchema"}
+	iCodegenJobGenericDataSourceType           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobGenericDataSourceType"}
+	iCodegenJobRenderConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobRenderConfig"}
+	iCodegenJobStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobStatus"}
+	iCodegenJobSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobSummary"}
+	i_CodegenJobSummaryList                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenJobSummaryList"}
+	i_CodegenPrimaryKeysList                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CodegenPrimaryKeysList"}
+	iComponent                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Component"}
+	i_ComponentBindingProperties               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentBindingProperties"}
+	iComponentBindingPropertiesValue           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentBindingPropertiesValue"}
+	iComponentBindingPropertiesValueProperties = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentBindingPropertiesValueProperties"}
+	iComponentChild                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentChild"}
+	i_ComponentChildList                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentChildList"}
+	i_ComponentCollectionProperties            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentCollectionProperties"}
+	iComponentConditionProperty                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentConditionProperty"}
+	iComponentDataConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentDataConfiguration"}
+	iComponentEvent                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentEvent"}
+	i_ComponentEvents                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentEvents"}
+	i_ComponentList                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentList"}
+	i_ComponentName                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentName"}
+	i_ComponentOverrides                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentOverrides"}
+	i_ComponentOverridesValue                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentOverridesValue"}
+	i_ComponentProperties                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentProperties"}
+	iComponentProperty                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentProperty"}
+	iComponentPropertyBindingProperties        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentPropertyBindingProperties"}
+	i_ComponentPropertyList                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentPropertyList"}
+	iComponentSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentSummary"}
+	i_ComponentSummaryList                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentSummaryList"}
+	i_ComponentType                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentType"}
+	iComponentVariant                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentVariant"}
+	i_ComponentVariants                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentVariants"}
+	i_ComponentVariantValues                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ComponentVariantValues"}
+	iCreateComponentData                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateComponentData"}
+	iCreateFormData                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateFormData"}
+	iCreateThemeData                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateThemeData"}
+	iDataStoreRenderConfig                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DataStoreRenderConfig"}
+	iExchangeCodeForTokenRequestBody           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExchangeCodeForTokenRequestBody"}
+	i_FeaturesMap                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FeaturesMap"}
+	iFieldConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FieldConfig"}
+	iFieldInputConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FieldInputConfig"}
+	iFieldPosition                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FieldPosition"}
+	i_FieldsMap                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FieldsMap"}
+	iFieldValidationConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FieldValidationConfiguration"}
+	iFileUploaderFieldConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FileUploaderFieldConfig"}
+	iFixedPosition                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FixedPosition"}
+	iForm                                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Form"}
+	iFormActionType                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormActionType"}
+	iFormBindingElement                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormBindingElement"}
+	i_FormBindings                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormBindings"}
+	iFormButton                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormButton"}
+	iFormButtonsPosition                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormButtonsPosition"}
+	iFormCTA                                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormCTA"}
+	i_FormDataSourceType                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormDataSourceType"}
+	iFormDataTypeConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormDataTypeConfig"}
+	i_FormInputBindingProperties               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputBindingProperties"}
+	iFormInputBindingPropertiesValue           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputBindingPropertiesValue"}
+	iFormInputBindingPropertiesValueProperties = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputBindingPropertiesValueProperties"}
+	iFormInputValueProperty                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputValueProperty"}
+	iFormInputValuePropertyBindingProperties   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputValuePropertyBindingProperties"}
+	i_FormInputValuePropertyList               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormInputValuePropertyList"}
+	i_FormList                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormList"}
+	i_FormName                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormName"}
+	iFormStyle                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormStyle"}
+	iFormStyleConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormStyleConfig"}
+	iFormSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormSummary"}
+	i_FormSummaryList                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "FormSummaryList"}
+	iGenericDataRelationshipType               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GenericDataRelationshipType"}
+	iGraphQLRenderConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GraphQLRenderConfig"}
+	i_IdentifierList                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "IdentifierList"}
+	iInternalServerException                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "InternalServerException"}
+	iInvalidParameterException                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "InvalidParameterException"}
+	iJSModule                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "JSModule"}
+	iJSScript                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "JSScript"}
+	iJSTarget                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "JSTarget"}
+	i_LabelDecorator                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "LabelDecorator"}
+	i_ListCodegenJobsLimit                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListCodegenJobsLimit"}
+	i_ListEntityLimit                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListEntityLimit"}
+	iMutationActionSetStateParameter           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "MutationActionSetStateParameter"}
+	iNoApiRenderConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "NoApiRenderConfig"}
+	i_NumValues                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "NumValues"}
+	i_OperandType                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "OperandType"}
+	iPredicate                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Predicate"}
+	i_PredicateList                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "PredicateList"}
+	iPutMetadataFlagBody                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "PutMetadataFlagBody"}
+	i_ReactCodegenDependencies                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ReactCodegenDependencies"}
+	iReactStartCodegenJobData                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ReactStartCodegenJobData"}
+	iRefreshTokenRequestBody                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "RefreshTokenRequestBody"}
+	i_RelatedModelFieldsList                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "RelatedModelFieldsList"}
+	iResourceConflictException                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ResourceConflictException"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ResourceNotFoundException"}
+	iSectionalElement                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SectionalElement"}
+	i_SectionalElementMap                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SectionalElementMap"}
+	i_SensitiveString                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SensitiveString"}
+	iServiceQuotaExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ServiceQuotaExceededException"}
+	iSortDirection                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SortDirection"}
+	iSortProperty                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SortProperty"}
+	i_SortPropertyList                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "SortPropertyList"}
+	iStartCodegenJobData                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StartCodegenJobData"}
+	iStorageAccessLevel                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StorageAccessLevel"}
+	i_StrValues                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StrValues"}
+	i_TagKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagKeyList"}
+	i_Tags                                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Tags"}
+	i_TagValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagValue"}
+	iTheme                                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Theme"}
+	i_ThemeList                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeList"}
+	i_ThemeName                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeName"}
+	iThemeSummary                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeSummary"}
+	i_ThemeSummaryList                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeSummaryList"}
+	iThemeValue                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeValue"}
+	iThemeValues                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeValues"}
+	i_ThemeValuesList                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThemeValuesList"}
+	iThrottlingException                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ThrottlingException"}
+	i_TokenProviders                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TokenProviders"}
+	iUnauthorizedException                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UnauthorizedException"}
+	iUpdateComponentData                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateComponentData"}
+	iUpdateFormData                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateFormData"}
+	iUpdateThemeData                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateThemeData"}
+	i_Uuid                                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "Uuid"}
+	i_ValidationsList                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ValidationsList"}
+	iValueMapping                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ValueMapping"}
+	i_ValueMappingList                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ValueMappingList"}
+	iValueMappings                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ValueMappings"}
+	iCreateComponentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateComponentRequest"}
+	iCreateComponentResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateComponentResponse"}
+	iCreateFormRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateFormRequest"}
+	iCreateFormResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateFormResponse"}
+	iCreateThemeRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateThemeRequest"}
+	iCreateThemeResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "CreateThemeResponse"}
+	iDeleteComponentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteComponentRequest"}
+	iDeleteFormRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteFormRequest"}
+	iDeleteThemeRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "DeleteThemeRequest"}
+	iExchangeCodeForTokenRequest               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExchangeCodeForTokenRequest"}
+	iExchangeCodeForTokenResponse              = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExchangeCodeForTokenResponse"}
+	iExportComponentsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportComponentsRequest"}
+	iExportComponentsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportComponentsResponse"}
+	iExportFormsRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportFormsRequest"}
+	iExportFormsResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportFormsResponse"}
+	iExportThemesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportThemesRequest"}
+	iExportThemesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ExportThemesResponse"}
+	iGetCodegenJobRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetCodegenJobRequest"}
+	iGetCodegenJobResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetCodegenJobResponse"}
+	iGetComponentRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetComponentRequest"}
+	iGetComponentResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetComponentResponse"}
+	iGetFormRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetFormRequest"}
+	iGetFormResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetFormResponse"}
+	iGetMetadataRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetMetadataRequest"}
+	iGetMetadataResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetMetadataResponse"}
+	iGetThemeRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetThemeRequest"}
+	iGetThemeResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "GetThemeResponse"}
+	iListCodegenJobsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListCodegenJobsRequest"}
+	iListCodegenJobsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListCodegenJobsResponse"}
+	iListComponentsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListComponentsRequest"}
+	iListComponentsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListComponentsResponse"}
+	iListFormsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListFormsRequest"}
+	iListFormsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListFormsResponse"}
+	iListTagsForResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListTagsForResourceResponse"}
+	iListThemesRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListThemesRequest"}
+	iListThemesResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "ListThemesResponse"}
+	iPutMetadataFlagRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "PutMetadataFlagRequest"}
+	iRefreshTokenRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "RefreshTokenRequest"}
+	iRefreshTokenResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "RefreshTokenResponse"}
+	iStartCodegenJobRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StartCodegenJobRequest"}
+	iStartCodegenJobResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "StartCodegenJobResponse"}
+	iTagResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagResourceRequest"}
+	iTagResourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "TagResourceResponse"}
+	iUntagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UntagResourceResponse"}
+	iUpdateComponentRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateComponentRequest"}
+	iUpdateComponentResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateComponentResponse"}
+	iUpdateFormRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateFormRequest"}
+	iUpdateFormResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateFormResponse"}
+	iUpdateThemeRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateThemeRequest"}
+	iUpdateThemeResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifyuibuilder", Name: "UpdateThemeResponse"}
+	pString                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pFloat                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Float"}
+	pInteger                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/app/{appId}/environment/{environmentName}/components",
-	Code: 200})
-
-var CreateForm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateForm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/app/{appId}/environment/{environmentName}/forms",
-	Code: 200})
-
-var CreateTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateTheme",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/app/{appId}/environment/{environmentName}/themes",
-	Code: 200})
-
-var DeleteComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/app/{appId}/environment/{environmentName}/components/{id}",
-	Code: 200})
-
-var DeleteForm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteForm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/app/{appId}/environment/{environmentName}/forms/{id}",
-	Code: 200})
-
-var DeleteTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteTheme",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/app/{appId}/environment/{environmentName}/themes/{id}",
-	Code: 200})
-
-var ExchangeCodeForToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExchangeCodeForToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tokens/{provider}",
-	Code: 200})
-
-var ExportComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/export/app/{appId}/environment/{environmentName}/components",
-	Code: 200})
-
-var ExportForms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportForms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/export/app/{appId}/environment/{environmentName}/forms",
-	Code: 200})
-
-var ExportThemes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportThemes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/export/app/{appId}/environment/{environmentName}/themes",
-	Code: 200})
-
-var GetCodegenJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetCodegenJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/codegen-jobs/{id}",
-	Code: 200})
-
-var GetComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/components/{id}",
-	Code: 200})
-
-var GetForm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetForm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/forms/{id}",
-	Code: 200})
-
-var GetMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/metadata",
-	Code: 200})
-
-var GetTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetTheme",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/themes/{id}",
-	Code: 200})
-
-var ListCodegenJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListCodegenJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/codegen-jobs",
-	Code: 200})
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/components",
-	Code: 200})
-
-var ListForms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListForms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/forms",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListThemes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListThemes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/app/{appId}/environment/{environmentName}/themes",
-	Code: 200})
-
-var PutMetadataFlag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "PutMetadataFlag",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/app/{appId}/environment/{environmentName}/metadata/features/{featureName}",
-	Code: 200})
-
-var RefreshToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "RefreshToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tokens/{provider}/refresh",
-	Code: 200})
-
-var StartCodegenJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StartCodegenJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/app/{appId}/environment/{environmentName}/codegen-jobs",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/app/{appId}/environment/{environmentName}/components/{id}",
-	Code: 200})
-
-var UpdateForm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateForm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/app/{appId}/environment/{environmentName}/forms/{id}",
-	Code: 200})
-
-var UpdateTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateTheme",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/app/{appId}/environment/{environmentName}/themes/{id}",
-	Code: 200})
-
-var _AmplifyUIBuilder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "AmplifyUIBuilder",
-}, smithy.ShapeTypeService, 0)
-
-var AmplifyUIBuilder = smithy.NewServiceSchema(_AmplifyUIBuilder, "2021-08-11")
-
-var ActionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ActionParameters",
-}, smithy.ShapeTypeStructure, 9)
-var ActionParameters_type *smithy.Schema
-
-var ActionParameters_url *smithy.Schema
-
-var ActionParameters_anchor *smithy.Schema
-
-var ActionParameters_target *smithy.Schema
-
-var ActionParameters_global *smithy.Schema
-
-var ActionParameters_model *smithy.Schema
-
-var ActionParameters_id *smithy.Schema
-
-var ActionParameters_fields *smithy.Schema
-
-var ActionParameters_state *smithy.Schema
-
-var ApiConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ApiConfiguration",
-}, smithy.ShapeTypeUnion, 3)
-var ApiConfiguration_graphQLConfig *smithy.Schema
-
-var ApiConfiguration_dataStoreConfig *smithy.Schema
-
-var ApiConfiguration_noApiConfig *smithy.Schema
-
-var _AppId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "AppId",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociatedFieldsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "AssociatedFieldsList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedFieldsList_member *smithy.Schema
-
-var _CodegenDependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenDependencies",
-}, smithy.ShapeTypeList, 1)
-var _CodegenDependencies_member *smithy.Schema
-
-var CodegenDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenDependency",
-}, smithy.ShapeTypeStructure, 4)
-var CodegenDependency_name *smithy.Schema
-
-var CodegenDependency_supportedVersion *smithy.Schema
-
-var CodegenDependency_isSemVer *smithy.Schema
-
-var CodegenDependency_reason *smithy.Schema
-
-var CodegenFeatureFlags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenFeatureFlags",
-}, smithy.ShapeTypeStructure, 2)
-var CodegenFeatureFlags_isRelationshipSupported *smithy.Schema
-
-var CodegenFeatureFlags_isNonModelSupported *smithy.Schema
-
-var CodegenGenericDataEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataEnum",
-}, smithy.ShapeTypeStructure, 1)
-var CodegenGenericDataEnum_values *smithy.Schema
-
-var _CodegenGenericDataEnums = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataEnums",
-}, smithy.ShapeTypeMap, 2)
-var _CodegenGenericDataEnums_key *smithy.Schema
-
-var _CodegenGenericDataEnums_value *smithy.Schema
-
-var _CodegenGenericDataEnumValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataEnumValuesList",
-}, smithy.ShapeTypeList, 1)
-var _CodegenGenericDataEnumValuesList_member *smithy.Schema
-
-var CodegenGenericDataField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataField",
-}, smithy.ShapeTypeStructure, 6)
-var CodegenGenericDataField_dataType *smithy.Schema
-
-var CodegenGenericDataField_dataTypeValue *smithy.Schema
-
-var CodegenGenericDataField_required *smithy.Schema
-
-var CodegenGenericDataField_readOnly *smithy.Schema
-
-var CodegenGenericDataField_isArray *smithy.Schema
-
-var CodegenGenericDataField_relationship *smithy.Schema
-
-var CodegenGenericDataFieldDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataFieldDataType",
-}, smithy.ShapeTypeEnum, 17)
-var CodegenGenericDataFieldDataType_ID *smithy.Schema
-
-var CodegenGenericDataFieldDataType_STRING *smithy.Schema
-
-var CodegenGenericDataFieldDataType_INT *smithy.Schema
-
-var CodegenGenericDataFieldDataType_FLOAT *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_DATE *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_TIME *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_DATE_TIME *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_TIMESTAMP *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_EMAIL *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_URL *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_IP_ADDRESS *smithy.Schema
-
-var CodegenGenericDataFieldDataType_BOOLEAN *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_JSON *smithy.Schema
-
-var CodegenGenericDataFieldDataType_AWS_PHONE *smithy.Schema
-
-var CodegenGenericDataFieldDataType_ENUM *smithy.Schema
-
-var CodegenGenericDataFieldDataType_MODEL *smithy.Schema
-
-var CodegenGenericDataFieldDataType_NON_MODEL *smithy.Schema
-
-var _CodegenGenericDataFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataFields",
-}, smithy.ShapeTypeMap, 2)
-var _CodegenGenericDataFields_key *smithy.Schema
-
-var _CodegenGenericDataFields_value *smithy.Schema
-
-var CodegenGenericDataModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataModel",
-}, smithy.ShapeTypeStructure, 3)
-var CodegenGenericDataModel_fields *smithy.Schema
-
-var CodegenGenericDataModel_isJoinTable *smithy.Schema
-
-var CodegenGenericDataModel_primaryKeys *smithy.Schema
-
-var _CodegenGenericDataModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataModels",
-}, smithy.ShapeTypeMap, 2)
-var _CodegenGenericDataModels_key *smithy.Schema
-
-var _CodegenGenericDataModels_value *smithy.Schema
-
-var CodegenGenericDataNonModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataNonModel",
-}, smithy.ShapeTypeStructure, 1)
-var CodegenGenericDataNonModel_fields *smithy.Schema
-
-var _CodegenGenericDataNonModelFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataNonModelFields",
-}, smithy.ShapeTypeMap, 2)
-var _CodegenGenericDataNonModelFields_key *smithy.Schema
-
-var _CodegenGenericDataNonModelFields_value *smithy.Schema
-
-var _CodegenGenericDataNonModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataNonModels",
-}, smithy.ShapeTypeMap, 2)
-var _CodegenGenericDataNonModels_key *smithy.Schema
-
-var _CodegenGenericDataNonModels_value *smithy.Schema
-
-var CodegenGenericDataRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenGenericDataRelationshipType",
-}, smithy.ShapeTypeStructure, 9)
-var CodegenGenericDataRelationshipType_type *smithy.Schema
-
-var CodegenGenericDataRelationshipType_relatedModelName *smithy.Schema
-
-var CodegenGenericDataRelationshipType_relatedModelFields *smithy.Schema
-
-var CodegenGenericDataRelationshipType_canUnlinkAssociatedModel *smithy.Schema
-
-var CodegenGenericDataRelationshipType_relatedJoinFieldName *smithy.Schema
-
-var CodegenGenericDataRelationshipType_relatedJoinTableName *smithy.Schema
-
-var CodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel *smithy.Schema
-
-var CodegenGenericDataRelationshipType_associatedFields *smithy.Schema
-
-var CodegenGenericDataRelationshipType_isHasManyIndex *smithy.Schema
-
-var CodegenJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJob",
-}, smithy.ShapeTypeStructure, 14)
-var CodegenJob_id *smithy.Schema
-
-var CodegenJob_appId *smithy.Schema
-
-var CodegenJob_environmentName *smithy.Schema
-
-var CodegenJob_renderConfig *smithy.Schema
-
-var CodegenJob_genericDataSchema *smithy.Schema
-
-var CodegenJob_autoGenerateForms *smithy.Schema
-
-var CodegenJob_features *smithy.Schema
-
-var CodegenJob_status *smithy.Schema
-
-var CodegenJob_statusMessage *smithy.Schema
-
-var CodegenJob_asset *smithy.Schema
-
-var CodegenJob_tags *smithy.Schema
-
-var CodegenJob_createdAt *smithy.Schema
-
-var CodegenJob_modifiedAt *smithy.Schema
-
-var CodegenJob_dependencies *smithy.Schema
-
-var CodegenJobAsset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobAsset",
-}, smithy.ShapeTypeStructure, 1)
-var CodegenJobAsset_downloadUrl *smithy.Schema
-
-var CodegenJobGenericDataSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobGenericDataSchema",
-}, smithy.ShapeTypeStructure, 4)
-var CodegenJobGenericDataSchema_dataSourceType *smithy.Schema
-
-var CodegenJobGenericDataSchema_models *smithy.Schema
-
-var CodegenJobGenericDataSchema_enums *smithy.Schema
-
-var CodegenJobGenericDataSchema_nonModels *smithy.Schema
-
-var CodegenJobGenericDataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobGenericDataSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var CodegenJobGenericDataSourceType_DATA_STORE *smithy.Schema
-
-var CodegenJobRenderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobRenderConfig",
-}, smithy.ShapeTypeUnion, 1)
-var CodegenJobRenderConfig_react *smithy.Schema
-
-var CodegenJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CodegenJobStatus_IN_PROGRESS *smithy.Schema
-
-var CodegenJobStatus_FAILED *smithy.Schema
-
-var CodegenJobStatus_SUCCEEDED *smithy.Schema
-
-var CodegenJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobSummary",
-}, smithy.ShapeTypeStructure, 5)
-var CodegenJobSummary_appId *smithy.Schema
-
-var CodegenJobSummary_environmentName *smithy.Schema
-
-var CodegenJobSummary_id *smithy.Schema
-
-var CodegenJobSummary_createdAt *smithy.Schema
-
-var CodegenJobSummary_modifiedAt *smithy.Schema
-
-var _CodegenJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CodegenJobSummaryList_member *smithy.Schema
-
-var _CodegenPrimaryKeysList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CodegenPrimaryKeysList",
-}, smithy.ShapeTypeList, 1)
-var _CodegenPrimaryKeysList_member *smithy.Schema
-
-var Component = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Component",
-}, smithy.ShapeTypeStructure, 17)
-var Component_appId *smithy.Schema
-
-var Component_environmentName *smithy.Schema
-
-var Component_sourceId *smithy.Schema
-
-var Component_id *smithy.Schema
-
-var Component_name *smithy.Schema
-
-var Component_componentType *smithy.Schema
-
-var Component_properties *smithy.Schema
-
-var Component_children *smithy.Schema
-
-var Component_variants *smithy.Schema
-
-var Component_overrides *smithy.Schema
-
-var Component_bindingProperties *smithy.Schema
-
-var Component_collectionProperties *smithy.Schema
-
-var Component_createdAt *smithy.Schema
-
-var Component_modifiedAt *smithy.Schema
-
-var Component_tags *smithy.Schema
-
-var Component_events *smithy.Schema
-
-var Component_schemaVersion *smithy.Schema
-
-var _ComponentBindingProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentBindingProperties",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentBindingProperties_key *smithy.Schema
-
-var _ComponentBindingProperties_value *smithy.Schema
-
-var ComponentBindingPropertiesValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentBindingPropertiesValue",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentBindingPropertiesValue_type *smithy.Schema
-
-var ComponentBindingPropertiesValue_bindingProperties *smithy.Schema
-
-var ComponentBindingPropertiesValue_defaultValue *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentBindingPropertiesValueProperties",
-}, smithy.ShapeTypeStructure, 8)
-var ComponentBindingPropertiesValueProperties_model *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_field *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_predicates *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_userAttribute *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_bucket *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_key *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_defaultValue *smithy.Schema
-
-var ComponentBindingPropertiesValueProperties_slotName *smithy.Schema
-
-var ComponentChild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentChild",
-}, smithy.ShapeTypeStructure, 6)
-var ComponentChild_componentType *smithy.Schema
-
-var ComponentChild_name *smithy.Schema
-
-var ComponentChild_properties *smithy.Schema
-
-var ComponentChild_children *smithy.Schema
-
-var ComponentChild_events *smithy.Schema
-
-var ComponentChild_sourceId *smithy.Schema
-
-var _ComponentChildList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentChildList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentChildList_member *smithy.Schema
-
-var _ComponentCollectionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentCollectionProperties",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentCollectionProperties_key *smithy.Schema
-
-var _ComponentCollectionProperties_value *smithy.Schema
-
-var ComponentConditionProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentConditionProperty",
-}, smithy.ShapeTypeStructure, 7)
-var ComponentConditionProperty_property *smithy.Schema
-
-var ComponentConditionProperty_field *smithy.Schema
-
-var ComponentConditionProperty_operator *smithy.Schema
-
-var ComponentConditionProperty_operand *smithy.Schema
-
-var ComponentConditionProperty_then *smithy.Schema
-
-var ComponentConditionProperty_else *smithy.Schema
-
-var ComponentConditionProperty_operandType *smithy.Schema
-
-var ComponentDataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentDataConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ComponentDataConfiguration_model *smithy.Schema
-
-var ComponentDataConfiguration_sort *smithy.Schema
-
-var ComponentDataConfiguration_predicate *smithy.Schema
-
-var ComponentDataConfiguration_identifiers *smithy.Schema
-
-var ComponentEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentEvent",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentEvent_action *smithy.Schema
-
-var ComponentEvent_parameters *smithy.Schema
-
-var ComponentEvent_bindingEvent *smithy.Schema
-
-var _ComponentEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentEvents",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentEvents_key *smithy.Schema
-
-var _ComponentEvents_value *smithy.Schema
-
-var _ComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentList_member *smithy.Schema
-
-var _ComponentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentName",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentOverrides",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentOverrides_key *smithy.Schema
-
-var _ComponentOverrides_value *smithy.Schema
-
-var _ComponentOverridesValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentOverridesValue",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentOverridesValue_key *smithy.Schema
-
-var _ComponentOverridesValue_value *smithy.Schema
-
-var _ComponentProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentProperties",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentProperties_key *smithy.Schema
-
-var _ComponentProperties_value *smithy.Schema
-
-var ComponentProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentProperty",
-}, smithy.ShapeTypeStructure, 15)
-var ComponentProperty_value *smithy.Schema
-
-var ComponentProperty_bindingProperties *smithy.Schema
-
-var ComponentProperty_collectionBindingProperties *smithy.Schema
-
-var ComponentProperty_defaultValue *smithy.Schema
-
-var ComponentProperty_model *smithy.Schema
-
-var ComponentProperty_bindings *smithy.Schema
-
-var ComponentProperty_event *smithy.Schema
-
-var ComponentProperty_userAttribute *smithy.Schema
-
-var ComponentProperty_concat *smithy.Schema
-
-var ComponentProperty_condition *smithy.Schema
-
-var ComponentProperty_configured *smithy.Schema
-
-var ComponentProperty_type *smithy.Schema
-
-var ComponentProperty_importedValue *smithy.Schema
-
-var ComponentProperty_componentName *smithy.Schema
-
-var ComponentProperty_property *smithy.Schema
-
-var ComponentPropertyBindingProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentPropertyBindingProperties",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentPropertyBindingProperties_property *smithy.Schema
-
-var ComponentPropertyBindingProperties_field *smithy.Schema
-
-var _ComponentPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentPropertyList_member *smithy.Schema
-
-var ComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ComponentSummary_appId *smithy.Schema
-
-var ComponentSummary_environmentName *smithy.Schema
-
-var ComponentSummary_id *smithy.Schema
-
-var ComponentSummary_name *smithy.Schema
-
-var ComponentSummary_componentType *smithy.Schema
-
-var _ComponentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentSummaryList_member *smithy.Schema
-
-var _ComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentType",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentVariant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentVariant",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentVariant_variantValues *smithy.Schema
-
-var ComponentVariant_overrides *smithy.Schema
-
-var _ComponentVariants = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentVariants",
-}, smithy.ShapeTypeList, 1)
-var _ComponentVariants_member *smithy.Schema
-
-var _ComponentVariantValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ComponentVariantValues",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentVariantValues_key *smithy.Schema
-
-var _ComponentVariantValues_value *smithy.Schema
-
-var CreateComponentData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateComponentData",
-}, smithy.ShapeTypeStructure, 12)
-var CreateComponentData_name *smithy.Schema
-
-var CreateComponentData_sourceId *smithy.Schema
-
-var CreateComponentData_componentType *smithy.Schema
-
-var CreateComponentData_properties *smithy.Schema
-
-var CreateComponentData_children *smithy.Schema
-
-var CreateComponentData_variants *smithy.Schema
-
-var CreateComponentData_overrides *smithy.Schema
-
-var CreateComponentData_bindingProperties *smithy.Schema
-
-var CreateComponentData_collectionProperties *smithy.Schema
-
-var CreateComponentData_tags *smithy.Schema
-
-var CreateComponentData_events *smithy.Schema
-
-var CreateComponentData_schemaVersion *smithy.Schema
-
-var CreateFormData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateFormData",
-}, smithy.ShapeTypeStructure, 10)
-var CreateFormData_name *smithy.Schema
-
-var CreateFormData_dataType *smithy.Schema
-
-var CreateFormData_formActionType *smithy.Schema
-
-var CreateFormData_fields *smithy.Schema
-
-var CreateFormData_style *smithy.Schema
-
-var CreateFormData_sectionalElements *smithy.Schema
-
-var CreateFormData_schemaVersion *smithy.Schema
-
-var CreateFormData_cta *smithy.Schema
-
-var CreateFormData_tags *smithy.Schema
-
-var CreateFormData_labelDecorator *smithy.Schema
-
-var CreateThemeData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateThemeData",
-}, smithy.ShapeTypeStructure, 4)
-var CreateThemeData_name *smithy.Schema
-
-var CreateThemeData_values *smithy.Schema
-
-var CreateThemeData_overrides *smithy.Schema
-
-var CreateThemeData_tags *smithy.Schema
-
-var DataStoreRenderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DataStoreRenderConfig",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExchangeCodeForTokenRequestBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExchangeCodeForTokenRequestBody",
-}, smithy.ShapeTypeStructure, 3)
-var ExchangeCodeForTokenRequestBody_code *smithy.Schema
-
-var ExchangeCodeForTokenRequestBody_redirectUri *smithy.Schema
-
-var ExchangeCodeForTokenRequestBody_clientId *smithy.Schema
-
-var _FeaturesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FeaturesMap",
-}, smithy.ShapeTypeMap, 2)
-var _FeaturesMap_key *smithy.Schema
-
-var _FeaturesMap_value *smithy.Schema
-
-var FieldConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FieldConfig",
-}, smithy.ShapeTypeStructure, 5)
-var FieldConfig_label *smithy.Schema
-
-var FieldConfig_position *smithy.Schema
-
-var FieldConfig_excluded *smithy.Schema
-
-var FieldConfig_inputType *smithy.Schema
-
-var FieldConfig_validations *smithy.Schema
-
-var FieldInputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FieldInputConfig",
-}, smithy.ShapeTypeStructure, 16)
-var FieldInputConfig_type *smithy.Schema
-
-var FieldInputConfig_required *smithy.Schema
-
-var FieldInputConfig_readOnly *smithy.Schema
-
-var FieldInputConfig_placeholder *smithy.Schema
-
-var FieldInputConfig_defaultValue *smithy.Schema
-
-var FieldInputConfig_descriptiveText *smithy.Schema
-
-var FieldInputConfig_defaultChecked *smithy.Schema
-
-var FieldInputConfig_defaultCountryCode *smithy.Schema
-
-var FieldInputConfig_valueMappings *smithy.Schema
-
-var FieldInputConfig_name *smithy.Schema
-
-var FieldInputConfig_minValue *smithy.Schema
-
-var FieldInputConfig_maxValue *smithy.Schema
-
-var FieldInputConfig_step *smithy.Schema
-
-var FieldInputConfig_value *smithy.Schema
-
-var FieldInputConfig_isArray *smithy.Schema
-
-var FieldInputConfig_fileUploaderConfig *smithy.Schema
-
-var FieldPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FieldPosition",
-}, smithy.ShapeTypeUnion, 3)
-var FieldPosition_fixed *smithy.Schema
-
-var FieldPosition_rightOf *smithy.Schema
-
-var FieldPosition_below *smithy.Schema
-
-var _FieldsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FieldsMap",
-}, smithy.ShapeTypeMap, 2)
-var _FieldsMap_key *smithy.Schema
-
-var _FieldsMap_value *smithy.Schema
-
-var FieldValidationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FieldValidationConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var FieldValidationConfiguration_type *smithy.Schema
-
-var FieldValidationConfiguration_strValues *smithy.Schema
-
-var FieldValidationConfiguration_numValues *smithy.Schema
-
-var FieldValidationConfiguration_validationMessage *smithy.Schema
-
-var FileUploaderFieldConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FileUploaderFieldConfig",
-}, smithy.ShapeTypeStructure, 6)
-var FileUploaderFieldConfig_accessLevel *smithy.Schema
-
-var FileUploaderFieldConfig_acceptedFileTypes *smithy.Schema
-
-var FileUploaderFieldConfig_showThumbnails *smithy.Schema
-
-var FileUploaderFieldConfig_isResumable *smithy.Schema
-
-var FileUploaderFieldConfig_maxFileCount *smithy.Schema
-
-var FileUploaderFieldConfig_maxSize *smithy.Schema
-
-var FixedPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FixedPosition",
-}, smithy.ShapeTypeEnum, 1)
-var FixedPosition_FIRST *smithy.Schema
-
-var Form = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Form",
-}, smithy.ShapeTypeStructure, 13)
-var Form_appId *smithy.Schema
-
-var Form_environmentName *smithy.Schema
-
-var Form_id *smithy.Schema
-
-var Form_name *smithy.Schema
-
-var Form_formActionType *smithy.Schema
-
-var Form_style *smithy.Schema
-
-var Form_dataType *smithy.Schema
-
-var Form_fields *smithy.Schema
-
-var Form_sectionalElements *smithy.Schema
-
-var Form_schemaVersion *smithy.Schema
-
-var Form_tags *smithy.Schema
-
-var Form_cta *smithy.Schema
-
-var Form_labelDecorator *smithy.Schema
-
-var FormActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormActionType",
-}, smithy.ShapeTypeEnum, 2)
-var FormActionType_CREATE *smithy.Schema
-
-var FormActionType_UPDATE *smithy.Schema
-
-var FormBindingElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormBindingElement",
-}, smithy.ShapeTypeStructure, 2)
-var FormBindingElement_element *smithy.Schema
-
-var FormBindingElement_property *smithy.Schema
-
-var _FormBindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormBindings",
-}, smithy.ShapeTypeMap, 2)
-var _FormBindings_key *smithy.Schema
-
-var _FormBindings_value *smithy.Schema
-
-var FormButton = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormButton",
-}, smithy.ShapeTypeStructure, 3)
-var FormButton_excluded *smithy.Schema
-
-var FormButton_children *smithy.Schema
-
-var FormButton_position *smithy.Schema
-
-var FormButtonsPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormButtonsPosition",
-}, smithy.ShapeTypeEnum, 3)
-var FormButtonsPosition_TOP *smithy.Schema
-
-var FormButtonsPosition_BOTTOM *smithy.Schema
-
-var FormButtonsPosition_TOP_AND_BOTTOM *smithy.Schema
-
-var FormCTA = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormCTA",
-}, smithy.ShapeTypeStructure, 4)
-var FormCTA_position *smithy.Schema
-
-var FormCTA_clear *smithy.Schema
-
-var FormCTA_cancel *smithy.Schema
-
-var FormCTA_submit *smithy.Schema
-
-var _FormDataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormDataSourceType",
-}, smithy.ShapeTypeString, 0)
-
-var FormDataTypeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormDataTypeConfig",
-}, smithy.ShapeTypeStructure, 2)
-var FormDataTypeConfig_dataSourceType *smithy.Schema
-
-var FormDataTypeConfig_dataTypeName *smithy.Schema
-
-var _FormInputBindingProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputBindingProperties",
-}, smithy.ShapeTypeMap, 2)
-var _FormInputBindingProperties_key *smithy.Schema
-
-var _FormInputBindingProperties_value *smithy.Schema
-
-var FormInputBindingPropertiesValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputBindingPropertiesValue",
-}, smithy.ShapeTypeStructure, 2)
-var FormInputBindingPropertiesValue_type *smithy.Schema
-
-var FormInputBindingPropertiesValue_bindingProperties *smithy.Schema
-
-var FormInputBindingPropertiesValueProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputBindingPropertiesValueProperties",
-}, smithy.ShapeTypeStructure, 1)
-var FormInputBindingPropertiesValueProperties_model *smithy.Schema
-
-var FormInputValueProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputValueProperty",
-}, smithy.ShapeTypeStructure, 3)
-var FormInputValueProperty_value *smithy.Schema
-
-var FormInputValueProperty_bindingProperties *smithy.Schema
-
-var FormInputValueProperty_concat *smithy.Schema
-
-var FormInputValuePropertyBindingProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputValuePropertyBindingProperties",
-}, smithy.ShapeTypeStructure, 2)
-var FormInputValuePropertyBindingProperties_property *smithy.Schema
-
-var FormInputValuePropertyBindingProperties_field *smithy.Schema
-
-var _FormInputValuePropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormInputValuePropertyList",
-}, smithy.ShapeTypeList, 1)
-var _FormInputValuePropertyList_member *smithy.Schema
-
-var _FormList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormList",
-}, smithy.ShapeTypeList, 1)
-var _FormList_member *smithy.Schema
-
-var _FormName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormName",
-}, smithy.ShapeTypeString, 0)
-
-var FormStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormStyle",
-}, smithy.ShapeTypeStructure, 3)
-var FormStyle_horizontalGap *smithy.Schema
-
-var FormStyle_verticalGap *smithy.Schema
-
-var FormStyle_outerPadding *smithy.Schema
-
-var FormStyleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormStyleConfig",
-}, smithy.ShapeTypeUnion, 2)
-var FormStyleConfig_tokenReference *smithy.Schema
-
-var FormStyleConfig_value *smithy.Schema
-
-var FormSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormSummary",
-}, smithy.ShapeTypeStructure, 6)
-var FormSummary_appId *smithy.Schema
-
-var FormSummary_dataType *smithy.Schema
-
-var FormSummary_environmentName *smithy.Schema
-
-var FormSummary_formActionType *smithy.Schema
-
-var FormSummary_id *smithy.Schema
-
-var FormSummary_name *smithy.Schema
-
-var _FormSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "FormSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FormSummaryList_member *smithy.Schema
-
-var GenericDataRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GenericDataRelationshipType",
-}, smithy.ShapeTypeEnum, 3)
-var GenericDataRelationshipType_HAS_MANY *smithy.Schema
-
-var GenericDataRelationshipType_HAS_ONE *smithy.Schema
-
-var GenericDataRelationshipType_BELONGS_TO *smithy.Schema
-
-var GraphQLRenderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GraphQLRenderConfig",
-}, smithy.ShapeTypeStructure, 5)
-var GraphQLRenderConfig_typesFilePath *smithy.Schema
-
-var GraphQLRenderConfig_queriesFilePath *smithy.Schema
-
-var GraphQLRenderConfig_mutationsFilePath *smithy.Schema
-
-var GraphQLRenderConfig_subscriptionsFilePath *smithy.Schema
-
-var GraphQLRenderConfig_fragmentsFilePath *smithy.Schema
-
-var _IdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "IdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _IdentifierList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var JSModule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "JSModule",
-}, smithy.ShapeTypeEnum, 2)
-var JSModule_ES2020 *smithy.Schema
-
-var JSModule_ESNEXT *smithy.Schema
-
-var JSScript = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "JSScript",
-}, smithy.ShapeTypeEnum, 3)
-var JSScript_JSX *smithy.Schema
-
-var JSScript_TSX *smithy.Schema
-
-var JSScript_JS *smithy.Schema
-
-var JSTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "JSTarget",
-}, smithy.ShapeTypeEnum, 2)
-var JSTarget_ES2015 *smithy.Schema
-
-var JSTarget_ES2020 *smithy.Schema
-
-var _LabelDecorator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "LabelDecorator",
-}, smithy.ShapeTypeString, 0)
-
-var _ListCodegenJobsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListCodegenJobsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEntityLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListEntityLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var MutationActionSetStateParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "MutationActionSetStateParameter",
-}, smithy.ShapeTypeStructure, 3)
-var MutationActionSetStateParameter_componentName *smithy.Schema
-
-var MutationActionSetStateParameter_property *smithy.Schema
-
-var MutationActionSetStateParameter_set *smithy.Schema
-
-var NoApiRenderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "NoApiRenderConfig",
-}, smithy.ShapeTypeStructure, 0)
-
-var _NumValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "NumValues",
-}, smithy.ShapeTypeList, 1)
-var _NumValues_member *smithy.Schema
-
-var _OperandType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "OperandType",
-}, smithy.ShapeTypeString, 0)
-
-var Predicate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Predicate",
-}, smithy.ShapeTypeStructure, 6)
-var Predicate_or *smithy.Schema
-
-var Predicate_and *smithy.Schema
-
-var Predicate_field *smithy.Schema
-
-var Predicate_operator *smithy.Schema
-
-var Predicate_operand *smithy.Schema
-
-var Predicate_operandType *smithy.Schema
-
-var _PredicateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "PredicateList",
-}, smithy.ShapeTypeList, 1)
-var _PredicateList_member *smithy.Schema
-
-var PutMetadataFlagBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "PutMetadataFlagBody",
-}, smithy.ShapeTypeStructure, 1)
-var PutMetadataFlagBody_newValue *smithy.Schema
-
-var _ReactCodegenDependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ReactCodegenDependencies",
-}, smithy.ShapeTypeMap, 2)
-var _ReactCodegenDependencies_key *smithy.Schema
-
-var _ReactCodegenDependencies_value *smithy.Schema
-
-var ReactStartCodegenJobData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ReactStartCodegenJobData",
-}, smithy.ShapeTypeStructure, 7)
-var ReactStartCodegenJobData_module *smithy.Schema
-
-var ReactStartCodegenJobData_target *smithy.Schema
-
-var ReactStartCodegenJobData_script *smithy.Schema
-
-var ReactStartCodegenJobData_renderTypeDeclarations *smithy.Schema
-
-var ReactStartCodegenJobData_inlineSourceMap *smithy.Schema
-
-var ReactStartCodegenJobData_apiConfiguration *smithy.Schema
-
-var ReactStartCodegenJobData_dependencies *smithy.Schema
-
-var RefreshTokenRequestBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "RefreshTokenRequestBody",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshTokenRequestBody_token *smithy.Schema
-
-var RefreshTokenRequestBody_clientId *smithy.Schema
-
-var _RelatedModelFieldsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "RelatedModelFieldsList",
-}, smithy.ShapeTypeList, 1)
-var _RelatedModelFieldsList_member *smithy.Schema
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceConflictException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var SectionalElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SectionalElement",
-}, smithy.ShapeTypeStructure, 6)
-var SectionalElement_type *smithy.Schema
-
-var SectionalElement_position *smithy.Schema
-
-var SectionalElement_text *smithy.Schema
-
-var SectionalElement_level *smithy.Schema
-
-var SectionalElement_orientation *smithy.Schema
-
-var SectionalElement_excluded *smithy.Schema
-
-var _SectionalElementMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SectionalElementMap",
-}, smithy.ShapeTypeMap, 2)
-var _SectionalElementMap_key *smithy.Schema
-
-var _SectionalElementMap_value *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SortDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SortDirection",
-}, smithy.ShapeTypeEnum, 2)
-var SortDirection_ASC *smithy.Schema
-
-var SortDirection_DESC *smithy.Schema
-
-var SortProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SortProperty",
-}, smithy.ShapeTypeStructure, 2)
-var SortProperty_field *smithy.Schema
-
-var SortProperty_direction *smithy.Schema
-
-var _SortPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "SortPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _SortPropertyList_member *smithy.Schema
-
-var StartCodegenJobData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StartCodegenJobData",
-}, smithy.ShapeTypeStructure, 5)
-var StartCodegenJobData_renderConfig *smithy.Schema
-
-var StartCodegenJobData_genericDataSchema *smithy.Schema
-
-var StartCodegenJobData_autoGenerateForms *smithy.Schema
-
-var StartCodegenJobData_features *smithy.Schema
-
-var StartCodegenJobData_tags *smithy.Schema
-
-var StorageAccessLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StorageAccessLevel",
-}, smithy.ShapeTypeEnum, 3)
-var StorageAccessLevel_PUBLIC *smithy.Schema
-
-var StorageAccessLevel_PROTECTED *smithy.Schema
-
-var StorageAccessLevel_PRIVATE *smithy.Schema
-
-var _StrValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StrValues",
-}, smithy.ShapeTypeList, 1)
-var _StrValues_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Theme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Theme",
-}, smithy.ShapeTypeStructure, 9)
-var Theme_appId *smithy.Schema
-
-var Theme_environmentName *smithy.Schema
-
-var Theme_id *smithy.Schema
-
-var Theme_name *smithy.Schema
-
-var Theme_createdAt *smithy.Schema
-
-var Theme_modifiedAt *smithy.Schema
-
-var Theme_values *smithy.Schema
-
-var Theme_overrides *smithy.Schema
-
-var Theme_tags *smithy.Schema
-
-var _ThemeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeList",
-}, smithy.ShapeTypeList, 1)
-var _ThemeList_member *smithy.Schema
-
-var _ThemeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeName",
-}, smithy.ShapeTypeString, 0)
-
-var ThemeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ThemeSummary_appId *smithy.Schema
-
-var ThemeSummary_environmentName *smithy.Schema
-
-var ThemeSummary_id *smithy.Schema
-
-var ThemeSummary_name *smithy.Schema
-
-var _ThemeSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ThemeSummaryList_member *smithy.Schema
-
-var ThemeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeValue",
-}, smithy.ShapeTypeStructure, 2)
-var ThemeValue_value *smithy.Schema
-
-var ThemeValue_children *smithy.Schema
-
-var ThemeValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeValues",
-}, smithy.ShapeTypeStructure, 2)
-var ThemeValues_key *smithy.Schema
-
-var ThemeValues_value *smithy.Schema
-
-var _ThemeValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThemeValuesList",
-}, smithy.ShapeTypeList, 1)
-var _ThemeValuesList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TokenProviders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TokenProviders",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var UpdateComponentData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateComponentData",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateComponentData_id *smithy.Schema
-
-var UpdateComponentData_name *smithy.Schema
-
-var UpdateComponentData_sourceId *smithy.Schema
-
-var UpdateComponentData_componentType *smithy.Schema
-
-var UpdateComponentData_properties *smithy.Schema
-
-var UpdateComponentData_children *smithy.Schema
-
-var UpdateComponentData_variants *smithy.Schema
-
-var UpdateComponentData_overrides *smithy.Schema
-
-var UpdateComponentData_bindingProperties *smithy.Schema
-
-var UpdateComponentData_collectionProperties *smithy.Schema
-
-var UpdateComponentData_events *smithy.Schema
-
-var UpdateComponentData_schemaVersion *smithy.Schema
-
-var UpdateFormData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateFormData",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateFormData_name *smithy.Schema
-
-var UpdateFormData_dataType *smithy.Schema
-
-var UpdateFormData_formActionType *smithy.Schema
-
-var UpdateFormData_fields *smithy.Schema
-
-var UpdateFormData_style *smithy.Schema
-
-var UpdateFormData_sectionalElements *smithy.Schema
-
-var UpdateFormData_schemaVersion *smithy.Schema
-
-var UpdateFormData_cta *smithy.Schema
-
-var UpdateFormData_labelDecorator *smithy.Schema
-
-var UpdateThemeData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateThemeData",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateThemeData_id *smithy.Schema
-
-var UpdateThemeData_name *smithy.Schema
-
-var UpdateThemeData_values *smithy.Schema
-
-var UpdateThemeData_overrides *smithy.Schema
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var _ValidationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ValidationsList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationsList_member *smithy.Schema
-
-var ValueMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ValueMapping",
-}, smithy.ShapeTypeStructure, 2)
-var ValueMapping_displayValue *smithy.Schema
-
-var ValueMapping_value *smithy.Schema
-
-var _ValueMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ValueMappingList",
-}, smithy.ShapeTypeList, 1)
-var _ValueMappingList_member *smithy.Schema
-
-var ValueMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ValueMappings",
-}, smithy.ShapeTypeStructure, 2)
-var ValueMappings_values *smithy.Schema
-
-var ValueMappings_bindingProperties *smithy.Schema
-
-var CreateComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateComponentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateComponentRequest_appId *smithy.Schema
-
-var CreateComponentRequest_environmentName *smithy.Schema
-
-var CreateComponentRequest_clientToken *smithy.Schema
-
-var CreateComponentRequest_componentToCreate *smithy.Schema
-
-var CreateComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateComponentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateComponentResponse_entity *smithy.Schema
-
-var CreateFormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateFormRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateFormRequest_appId *smithy.Schema
-
-var CreateFormRequest_environmentName *smithy.Schema
-
-var CreateFormRequest_clientToken *smithy.Schema
-
-var CreateFormRequest_formToCreate *smithy.Schema
-
-var CreateFormResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateFormResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFormResponse_entity *smithy.Schema
-
-var CreateThemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateThemeRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateThemeRequest_appId *smithy.Schema
-
-var CreateThemeRequest_environmentName *smithy.Schema
-
-var CreateThemeRequest_clientToken *smithy.Schema
-
-var CreateThemeRequest_themeToCreate *smithy.Schema
-
-var CreateThemeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "CreateThemeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateThemeResponse_entity *smithy.Schema
-
-var DeleteComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteComponentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteComponentRequest_appId *smithy.Schema
-
-var DeleteComponentRequest_environmentName *smithy.Schema
-
-var DeleteComponentRequest_id *smithy.Schema
-
-var DeleteFormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteFormRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteFormRequest_appId *smithy.Schema
-
-var DeleteFormRequest_environmentName *smithy.Schema
-
-var DeleteFormRequest_id *smithy.Schema
-
-var DeleteThemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "DeleteThemeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteThemeRequest_appId *smithy.Schema
-
-var DeleteThemeRequest_environmentName *smithy.Schema
-
-var DeleteThemeRequest_id *smithy.Schema
-
-var ExchangeCodeForTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExchangeCodeForTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ExchangeCodeForTokenRequest_provider *smithy.Schema
-
-var ExchangeCodeForTokenRequest_request *smithy.Schema
-
-var ExchangeCodeForTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExchangeCodeForTokenResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ExchangeCodeForTokenResponse_accessToken *smithy.Schema
-
-var ExchangeCodeForTokenResponse_expiresIn *smithy.Schema
-
-var ExchangeCodeForTokenResponse_refreshToken *smithy.Schema
-
-var ExportComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportComponentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ExportComponentsRequest_appId *smithy.Schema
-
-var ExportComponentsRequest_environmentName *smithy.Schema
-
-var ExportComponentsRequest_nextToken *smithy.Schema
-
-var ExportComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportComponentsResponse_entities *smithy.Schema
-
-var ExportComponentsResponse_nextToken *smithy.Schema
-
-var ExportFormsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportFormsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ExportFormsRequest_appId *smithy.Schema
-
-var ExportFormsRequest_environmentName *smithy.Schema
-
-var ExportFormsRequest_nextToken *smithy.Schema
-
-var ExportFormsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportFormsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportFormsResponse_entities *smithy.Schema
-
-var ExportFormsResponse_nextToken *smithy.Schema
-
-var ExportThemesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportThemesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ExportThemesRequest_appId *smithy.Schema
-
-var ExportThemesRequest_environmentName *smithy.Schema
-
-var ExportThemesRequest_nextToken *smithy.Schema
-
-var ExportThemesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ExportThemesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportThemesResponse_entities *smithy.Schema
-
-var ExportThemesResponse_nextToken *smithy.Schema
-
-var GetCodegenJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetCodegenJobRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetCodegenJobRequest_appId *smithy.Schema
-
-var GetCodegenJobRequest_environmentName *smithy.Schema
-
-var GetCodegenJobRequest_id *smithy.Schema
-
-var GetCodegenJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetCodegenJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCodegenJobResponse_job *smithy.Schema
-
-var GetComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetComponentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetComponentRequest_appId *smithy.Schema
-
-var GetComponentRequest_environmentName *smithy.Schema
-
-var GetComponentRequest_id *smithy.Schema
-
-var GetComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetComponentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetComponentResponse_component *smithy.Schema
-
-var GetFormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetFormRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetFormRequest_appId *smithy.Schema
-
-var GetFormRequest_environmentName *smithy.Schema
-
-var GetFormRequest_id *smithy.Schema
-
-var GetFormResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetFormResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetFormResponse_form *smithy.Schema
-
-var GetMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetMetadataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMetadataRequest_appId *smithy.Schema
-
-var GetMetadataRequest_environmentName *smithy.Schema
-
-var GetMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetMetadataResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMetadataResponse_features *smithy.Schema
-
-var GetThemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetThemeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetThemeRequest_appId *smithy.Schema
-
-var GetThemeRequest_environmentName *smithy.Schema
-
-var GetThemeRequest_id *smithy.Schema
-
-var GetThemeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "GetThemeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetThemeResponse_theme *smithy.Schema
-
-var ListCodegenJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListCodegenJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCodegenJobsRequest_appId *smithy.Schema
-
-var ListCodegenJobsRequest_environmentName *smithy.Schema
-
-var ListCodegenJobsRequest_nextToken *smithy.Schema
-
-var ListCodegenJobsRequest_maxResults *smithy.Schema
-
-var ListCodegenJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListCodegenJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodegenJobsResponse_entities *smithy.Schema
-
-var ListCodegenJobsResponse_nextToken *smithy.Schema
-
-var ListComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListComponentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListComponentsRequest_appId *smithy.Schema
-
-var ListComponentsRequest_environmentName *smithy.Schema
-
-var ListComponentsRequest_nextToken *smithy.Schema
-
-var ListComponentsRequest_maxResults *smithy.Schema
-
-var ListComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsResponse_entities *smithy.Schema
-
-var ListComponentsResponse_nextToken *smithy.Schema
-
-var ListFormsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListFormsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListFormsRequest_appId *smithy.Schema
-
-var ListFormsRequest_environmentName *smithy.Schema
-
-var ListFormsRequest_nextToken *smithy.Schema
-
-var ListFormsRequest_maxResults *smithy.Schema
-
-var ListFormsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListFormsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFormsResponse_entities *smithy.Schema
-
-var ListFormsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListThemesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListThemesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListThemesRequest_appId *smithy.Schema
-
-var ListThemesRequest_environmentName *smithy.Schema
-
-var ListThemesRequest_nextToken *smithy.Schema
-
-var ListThemesRequest_maxResults *smithy.Schema
-
-var ListThemesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "ListThemesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListThemesResponse_entities *smithy.Schema
-
-var ListThemesResponse_nextToken *smithy.Schema
-
-var PutMetadataFlagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "PutMetadataFlagRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutMetadataFlagRequest_appId *smithy.Schema
-
-var PutMetadataFlagRequest_environmentName *smithy.Schema
-
-var PutMetadataFlagRequest_featureName *smithy.Schema
-
-var PutMetadataFlagRequest_body *smithy.Schema
-
-var RefreshTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "RefreshTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshTokenRequest_provider *smithy.Schema
-
-var RefreshTokenRequest_refreshTokenBody *smithy.Schema
-
-var RefreshTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "RefreshTokenResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshTokenResponse_accessToken *smithy.Schema
-
-var RefreshTokenResponse_expiresIn *smithy.Schema
-
-var StartCodegenJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StartCodegenJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartCodegenJobRequest_appId *smithy.Schema
-
-var StartCodegenJobRequest_environmentName *smithy.Schema
-
-var StartCodegenJobRequest_clientToken *smithy.Schema
-
-var StartCodegenJobRequest_codegenJobToCreate *smithy.Schema
-
-var StartCodegenJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "StartCodegenJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartCodegenJobResponse_entity *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateComponentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateComponentRequest_appId *smithy.Schema
-
-var UpdateComponentRequest_environmentName *smithy.Schema
-
-var UpdateComponentRequest_id *smithy.Schema
-
-var UpdateComponentRequest_clientToken *smithy.Schema
-
-var UpdateComponentRequest_updatedComponent *smithy.Schema
-
-var UpdateComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateComponentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateComponentResponse_entity *smithy.Schema
-
-var UpdateFormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateFormRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFormRequest_appId *smithy.Schema
-
-var UpdateFormRequest_environmentName *smithy.Schema
-
-var UpdateFormRequest_id *smithy.Schema
-
-var UpdateFormRequest_clientToken *smithy.Schema
-
-var UpdateFormRequest_updatedForm *smithy.Schema
-
-var UpdateFormResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateFormResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFormResponse_entity *smithy.Schema
-
-var UpdateThemeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateThemeRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateThemeRequest_appId *smithy.Schema
-
-var UpdateThemeRequest_environmentName *smithy.Schema
-
-var UpdateThemeRequest_id *smithy.Schema
-
-var UpdateThemeRequest_clientToken *smithy.Schema
-
-var UpdateThemeRequest_updatedTheme *smithy.Schema
-
-var UpdateThemeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifyuibuilder",
-	Name:      "UpdateThemeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateThemeResponse_entity *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientToken"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mActionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sActionParameters_type, &sActionParameters_url, &sActionParameters_anchor, &sActionParameters_target, &sActionParameters_global, &sActionParameters_model, &sActionParameters_id, &sActionParameters_fields, &sActionParameters_state}, Hash: &hActionParameters}
+var mApiConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sApiConfiguration_graphQLConfig, &sApiConfiguration_dataStoreConfig, &sApiConfiguration_noApiConfig}}
+var m_AssociatedFieldsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedFieldsList_member}}
+var m_CodegenDependencies = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenDependencies_member}}
+var mCodegenDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenDependency_name, &sCodegenDependency_supportedVersion, &sCodegenDependency_isSemVer, &sCodegenDependency_reason}}
+var mCodegenFeatureFlags = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenFeatureFlags_isRelationshipSupported, &sCodegenFeatureFlags_isNonModelSupported}}
+var mCodegenGenericDataEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataEnum_values}}
+var m_CodegenGenericDataEnums = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataEnums_key, &s_CodegenGenericDataEnums_value}}
+var m_CodegenGenericDataEnumValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataEnumValuesList_member}}
+var mCodegenGenericDataField = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataField_dataType, &sCodegenGenericDataField_dataTypeValue, &sCodegenGenericDataField_required, &sCodegenGenericDataField_readOnly, &sCodegenGenericDataField_isArray, &sCodegenGenericDataField_relationship}}
+var mCodegenGenericDataFieldDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataFieldDataType_ID, &sCodegenGenericDataFieldDataType_STRING, &sCodegenGenericDataFieldDataType_INT, &sCodegenGenericDataFieldDataType_FLOAT, &sCodegenGenericDataFieldDataType_AWS_DATE, &sCodegenGenericDataFieldDataType_AWS_TIME, &sCodegenGenericDataFieldDataType_AWS_DATE_TIME, &sCodegenGenericDataFieldDataType_AWS_TIMESTAMP, &sCodegenGenericDataFieldDataType_AWS_EMAIL, &sCodegenGenericDataFieldDataType_AWS_URL, &sCodegenGenericDataFieldDataType_AWS_IP_ADDRESS, &sCodegenGenericDataFieldDataType_BOOLEAN, &sCodegenGenericDataFieldDataType_AWS_JSON, &sCodegenGenericDataFieldDataType_AWS_PHONE, &sCodegenGenericDataFieldDataType_ENUM, &sCodegenGenericDataFieldDataType_MODEL, &sCodegenGenericDataFieldDataType_NON_MODEL}, Hash: &hCodegenGenericDataFieldDataType}
+var m_CodegenGenericDataFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataFields_key, &s_CodegenGenericDataFields_value}}
+var mCodegenGenericDataModel = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataModel_fields, &sCodegenGenericDataModel_isJoinTable, &sCodegenGenericDataModel_primaryKeys}}
+var m_CodegenGenericDataModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataModels_key, &s_CodegenGenericDataModels_value}}
+var mCodegenGenericDataNonModel = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataNonModel_fields}}
+var m_CodegenGenericDataNonModelFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataNonModelFields_key, &s_CodegenGenericDataNonModelFields_value}}
+var m_CodegenGenericDataNonModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenGenericDataNonModels_key, &s_CodegenGenericDataNonModels_value}}
+var mCodegenGenericDataRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenGenericDataRelationshipType_type, &sCodegenGenericDataRelationshipType_relatedModelName, &sCodegenGenericDataRelationshipType_relatedModelFields, &sCodegenGenericDataRelationshipType_canUnlinkAssociatedModel, &sCodegenGenericDataRelationshipType_relatedJoinFieldName, &sCodegenGenericDataRelationshipType_relatedJoinTableName, &sCodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel, &sCodegenGenericDataRelationshipType_associatedFields, &sCodegenGenericDataRelationshipType_isHasManyIndex}, Hash: &hCodegenGenericDataRelationshipType}
+var mCodegenJob = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJob_id, &sCodegenJob_appId, &sCodegenJob_environmentName, &sCodegenJob_renderConfig, &sCodegenJob_genericDataSchema, &sCodegenJob_autoGenerateForms, &sCodegenJob_features, &sCodegenJob_status, &sCodegenJob_statusMessage, &sCodegenJob_asset, &sCodegenJob_tags, &sCodegenJob_createdAt, &sCodegenJob_modifiedAt, &sCodegenJob_dependencies}, Hash: &hCodegenJob}
+var mCodegenJobAsset = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobAsset_downloadUrl}}
+var mCodegenJobGenericDataSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobGenericDataSchema_dataSourceType, &sCodegenJobGenericDataSchema_models, &sCodegenJobGenericDataSchema_enums, &sCodegenJobGenericDataSchema_nonModels}}
+var mCodegenJobGenericDataSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobGenericDataSourceType_DATA_STORE}}
+var mCodegenJobRenderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobRenderConfig_react}}
+var mCodegenJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobStatus_IN_PROGRESS, &sCodegenJobStatus_FAILED, &sCodegenJobStatus_SUCCEEDED}}
+var mCodegenJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCodegenJobSummary_appId, &sCodegenJobSummary_environmentName, &sCodegenJobSummary_id, &sCodegenJobSummary_createdAt, &sCodegenJobSummary_modifiedAt}}
+var m_CodegenJobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenJobSummaryList_member}}
+var m_CodegenPrimaryKeysList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodegenPrimaryKeysList_member}}
+var mComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sComponent_appId, &sComponent_environmentName, &sComponent_sourceId, &sComponent_id, &sComponent_name, &sComponent_componentType, &sComponent_properties, &sComponent_children, &sComponent_variants, &sComponent_overrides, &sComponent_bindingProperties, &sComponent_collectionProperties, &sComponent_createdAt, &sComponent_modifiedAt, &sComponent_tags, &sComponent_events, &sComponent_schemaVersion}, Hash: &hComponent}
+var m_ComponentBindingProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentBindingProperties_key, &s_ComponentBindingProperties_value}}
+var mComponentBindingPropertiesValue = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentBindingPropertiesValue_type, &sComponentBindingPropertiesValue_bindingProperties, &sComponentBindingPropertiesValue_defaultValue}}
+var mComponentBindingPropertiesValueProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentBindingPropertiesValueProperties_model, &sComponentBindingPropertiesValueProperties_field, &sComponentBindingPropertiesValueProperties_predicates, &sComponentBindingPropertiesValueProperties_userAttribute, &sComponentBindingPropertiesValueProperties_bucket, &sComponentBindingPropertiesValueProperties_key, &sComponentBindingPropertiesValueProperties_defaultValue, &sComponentBindingPropertiesValueProperties_slotName}}
+var mComponentChild = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentChild_componentType, &sComponentChild_name, &sComponentChild_properties, &sComponentChild_children, &sComponentChild_events, &sComponentChild_sourceId}}
+var m_ComponentChildList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentChildList_member}}
+var m_ComponentCollectionProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentCollectionProperties_key, &s_ComponentCollectionProperties_value}}
+var mComponentConditionProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentConditionProperty_property, &sComponentConditionProperty_field, &sComponentConditionProperty_operator, &sComponentConditionProperty_operand, &sComponentConditionProperty_then, &sComponentConditionProperty_else, &sComponentConditionProperty_operandType}}
+var mComponentDataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentDataConfiguration_model, &sComponentDataConfiguration_sort, &sComponentDataConfiguration_predicate, &sComponentDataConfiguration_identifiers}}
+var mComponentEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentEvent_action, &sComponentEvent_parameters, &sComponentEvent_bindingEvent}}
+var m_ComponentEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentEvents_key, &s_ComponentEvents_value}}
+var m_ComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentList_member}}
+var m_ComponentOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentOverrides_key, &s_ComponentOverrides_value}}
+var m_ComponentOverridesValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentOverridesValue_key, &s_ComponentOverridesValue_value}}
+var m_ComponentProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentProperties_key, &s_ComponentProperties_value}}
+var mComponentProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentProperty_value, &sComponentProperty_bindingProperties, &sComponentProperty_collectionBindingProperties, &sComponentProperty_defaultValue, &sComponentProperty_model, &sComponentProperty_bindings, &sComponentProperty_event, &sComponentProperty_userAttribute, &sComponentProperty_concat, &sComponentProperty_condition, &sComponentProperty_configured, &sComponentProperty_type, &sComponentProperty_importedValue, &sComponentProperty_componentName, &sComponentProperty_property}, Hash: &hComponentProperty}
+var mComponentPropertyBindingProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentPropertyBindingProperties_property, &sComponentPropertyBindingProperties_field}}
+var m_ComponentPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentPropertyList_member}}
+var mComponentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentSummary_appId, &sComponentSummary_environmentName, &sComponentSummary_id, &sComponentSummary_name, &sComponentSummary_componentType}}
+var m_ComponentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentSummaryList_member}}
+var mComponentVariant = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentVariant_variantValues, &sComponentVariant_overrides}}
+var m_ComponentVariants = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentVariants_member}}
+var m_ComponentVariantValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentVariantValues_key, &s_ComponentVariantValues_value}}
+var mCreateComponentData = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentData_name, &sCreateComponentData_sourceId, &sCreateComponentData_componentType, &sCreateComponentData_properties, &sCreateComponentData_children, &sCreateComponentData_variants, &sCreateComponentData_overrides, &sCreateComponentData_bindingProperties, &sCreateComponentData_collectionProperties, &sCreateComponentData_tags, &sCreateComponentData_events, &sCreateComponentData_schemaVersion}, Hash: &hCreateComponentData}
+var mCreateFormData = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFormData_name, &sCreateFormData_dataType, &sCreateFormData_formActionType, &sCreateFormData_fields, &sCreateFormData_style, &sCreateFormData_sectionalElements, &sCreateFormData_schemaVersion, &sCreateFormData_cta, &sCreateFormData_tags, &sCreateFormData_labelDecorator}, Hash: &hCreateFormData}
+var mCreateThemeData = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateThemeData_name, &sCreateThemeData_values, &sCreateThemeData_overrides, &sCreateThemeData_tags}}
+var mExchangeCodeForTokenRequestBody = smithy.SchemaMembers{List: []*smithy.Schema{&sExchangeCodeForTokenRequestBody_code, &sExchangeCodeForTokenRequestBody_redirectUri, &sExchangeCodeForTokenRequestBody_clientId}}
+var m_FeaturesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FeaturesMap_key, &s_FeaturesMap_value}}
+var mFieldConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldConfig_label, &sFieldConfig_position, &sFieldConfig_excluded, &sFieldConfig_inputType, &sFieldConfig_validations}}
+var mFieldInputConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldInputConfig_type, &sFieldInputConfig_required, &sFieldInputConfig_readOnly, &sFieldInputConfig_placeholder, &sFieldInputConfig_defaultValue, &sFieldInputConfig_descriptiveText, &sFieldInputConfig_defaultChecked, &sFieldInputConfig_defaultCountryCode, &sFieldInputConfig_valueMappings, &sFieldInputConfig_name, &sFieldInputConfig_minValue, &sFieldInputConfig_maxValue, &sFieldInputConfig_step, &sFieldInputConfig_value, &sFieldInputConfig_isArray, &sFieldInputConfig_fileUploaderConfig}, Hash: &hFieldInputConfig}
+var mFieldPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldPosition_fixed, &sFieldPosition_rightOf, &sFieldPosition_below}}
+var m_FieldsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldsMap_key, &s_FieldsMap_value}}
+var mFieldValidationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldValidationConfiguration_type, &sFieldValidationConfiguration_strValues, &sFieldValidationConfiguration_numValues, &sFieldValidationConfiguration_validationMessage}}
+var mFileUploaderFieldConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFileUploaderFieldConfig_accessLevel, &sFileUploaderFieldConfig_acceptedFileTypes, &sFileUploaderFieldConfig_showThumbnails, &sFileUploaderFieldConfig_isResumable, &sFileUploaderFieldConfig_maxFileCount, &sFileUploaderFieldConfig_maxSize}}
+var mFixedPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sFixedPosition_FIRST}}
+var mForm = smithy.SchemaMembers{List: []*smithy.Schema{&sForm_appId, &sForm_environmentName, &sForm_id, &sForm_name, &sForm_formActionType, &sForm_style, &sForm_dataType, &sForm_fields, &sForm_sectionalElements, &sForm_schemaVersion, &sForm_tags, &sForm_cta, &sForm_labelDecorator}, Hash: &hForm}
+var mFormActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sFormActionType_CREATE, &sFormActionType_UPDATE}}
+var mFormBindingElement = smithy.SchemaMembers{List: []*smithy.Schema{&sFormBindingElement_element, &sFormBindingElement_property}}
+var m_FormBindings = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormBindings_key, &s_FormBindings_value}}
+var mFormButton = smithy.SchemaMembers{List: []*smithy.Schema{&sFormButton_excluded, &sFormButton_children, &sFormButton_position}}
+var mFormButtonsPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sFormButtonsPosition_TOP, &sFormButtonsPosition_BOTTOM, &sFormButtonsPosition_TOP_AND_BOTTOM}}
+var mFormCTA = smithy.SchemaMembers{List: []*smithy.Schema{&sFormCTA_position, &sFormCTA_clear, &sFormCTA_cancel, &sFormCTA_submit}}
+var mFormDataTypeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFormDataTypeConfig_dataSourceType, &sFormDataTypeConfig_dataTypeName}}
+var m_FormInputBindingProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormInputBindingProperties_key, &s_FormInputBindingProperties_value}}
+var mFormInputBindingPropertiesValue = smithy.SchemaMembers{List: []*smithy.Schema{&sFormInputBindingPropertiesValue_type, &sFormInputBindingPropertiesValue_bindingProperties}}
+var mFormInputBindingPropertiesValueProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sFormInputBindingPropertiesValueProperties_model}}
+var mFormInputValueProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sFormInputValueProperty_value, &sFormInputValueProperty_bindingProperties, &sFormInputValueProperty_concat}}
+var mFormInputValuePropertyBindingProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sFormInputValuePropertyBindingProperties_property, &sFormInputValuePropertyBindingProperties_field}}
+var m_FormInputValuePropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormInputValuePropertyList_member}}
+var m_FormList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormList_member}}
+var mFormStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sFormStyle_horizontalGap, &sFormStyle_verticalGap, &sFormStyle_outerPadding}}
+var mFormStyleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sFormStyleConfig_tokenReference, &sFormStyleConfig_value}}
+var mFormSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFormSummary_appId, &sFormSummary_dataType, &sFormSummary_environmentName, &sFormSummary_formActionType, &sFormSummary_id, &sFormSummary_name}}
+var m_FormSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormSummaryList_member}}
+var mGenericDataRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sGenericDataRelationshipType_HAS_MANY, &sGenericDataRelationshipType_HAS_ONE, &sGenericDataRelationshipType_BELONGS_TO}}
+var mGraphQLRenderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphQLRenderConfig_typesFilePath, &sGraphQLRenderConfig_queriesFilePath, &sGraphQLRenderConfig_mutationsFilePath, &sGraphQLRenderConfig_subscriptionsFilePath, &sGraphQLRenderConfig_fragmentsFilePath}}
+var m_IdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentifierList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message}}
+var mJSModule = smithy.SchemaMembers{List: []*smithy.Schema{&sJSModule_ES2020, &sJSModule_ESNEXT}}
+var mJSScript = smithy.SchemaMembers{List: []*smithy.Schema{&sJSScript_JSX, &sJSScript_TSX, &sJSScript_JS}}
+var mJSTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sJSTarget_ES2015, &sJSTarget_ES2020}}
+var mMutationActionSetStateParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sMutationActionSetStateParameter_componentName, &sMutationActionSetStateParameter_property, &sMutationActionSetStateParameter_set}}
+var m_NumValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_NumValues_member}}
+var mPredicate = smithy.SchemaMembers{List: []*smithy.Schema{&sPredicate_or, &sPredicate_and, &sPredicate_field, &sPredicate_operator, &sPredicate_operand, &sPredicate_operandType}}
+var m_PredicateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredicateList_member}}
+var mPutMetadataFlagBody = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetadataFlagBody_newValue}}
+var m_ReactCodegenDependencies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReactCodegenDependencies_key, &s_ReactCodegenDependencies_value}}
+var mReactStartCodegenJobData = smithy.SchemaMembers{List: []*smithy.Schema{&sReactStartCodegenJobData_module, &sReactStartCodegenJobData_target, &sReactStartCodegenJobData_script, &sReactStartCodegenJobData_renderTypeDeclarations, &sReactStartCodegenJobData_inlineSourceMap, &sReactStartCodegenJobData_apiConfiguration, &sReactStartCodegenJobData_dependencies}}
+var mRefreshTokenRequestBody = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshTokenRequestBody_token, &sRefreshTokenRequestBody_clientId}}
+var m_RelatedModelFieldsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelatedModelFieldsList_member}}
+var mResourceConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConflictException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mSectionalElement = smithy.SchemaMembers{List: []*smithy.Schema{&sSectionalElement_type, &sSectionalElement_position, &sSectionalElement_text, &sSectionalElement_level, &sSectionalElement_orientation, &sSectionalElement_excluded}}
+var m_SectionalElementMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SectionalElementMap_key, &s_SectionalElementMap_value}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSortDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sSortDirection_ASC, &sSortDirection_DESC}}
+var mSortProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sSortProperty_field, &sSortProperty_direction}}
+var m_SortPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SortPropertyList_member}}
+var mStartCodegenJobData = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCodegenJobData_renderConfig, &sStartCodegenJobData_genericDataSchema, &sStartCodegenJobData_autoGenerateForms, &sStartCodegenJobData_features, &sStartCodegenJobData_tags}}
+var mStorageAccessLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageAccessLevel_PUBLIC, &sStorageAccessLevel_PROTECTED, &sStorageAccessLevel_PRIVATE}}
+var m_StrValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_StrValues_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTheme = smithy.SchemaMembers{List: []*smithy.Schema{&sTheme_appId, &sTheme_environmentName, &sTheme_id, &sTheme_name, &sTheme_createdAt, &sTheme_modifiedAt, &sTheme_values, &sTheme_overrides, &sTheme_tags}, Hash: &hTheme}
+var m_ThemeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThemeList_member}}
+var mThemeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeSummary_appId, &sThemeSummary_environmentName, &sThemeSummary_id, &sThemeSummary_name}}
+var m_ThemeSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThemeSummaryList_member}}
+var mThemeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeValue_value, &sThemeValue_children}}
+var mThemeValues = smithy.SchemaMembers{List: []*smithy.Schema{&sThemeValues_key, &sThemeValues_value}}
+var m_ThemeValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThemeValuesList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mUpdateComponentData = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentData_id, &sUpdateComponentData_name, &sUpdateComponentData_sourceId, &sUpdateComponentData_componentType, &sUpdateComponentData_properties, &sUpdateComponentData_children, &sUpdateComponentData_variants, &sUpdateComponentData_overrides, &sUpdateComponentData_bindingProperties, &sUpdateComponentData_collectionProperties, &sUpdateComponentData_events, &sUpdateComponentData_schemaVersion}, Hash: &hUpdateComponentData}
+var mUpdateFormData = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFormData_name, &sUpdateFormData_dataType, &sUpdateFormData_formActionType, &sUpdateFormData_fields, &sUpdateFormData_style, &sUpdateFormData_sectionalElements, &sUpdateFormData_schemaVersion, &sUpdateFormData_cta, &sUpdateFormData_labelDecorator}, Hash: &hUpdateFormData}
+var mUpdateThemeData = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThemeData_id, &sUpdateThemeData_name, &sUpdateThemeData_values, &sUpdateThemeData_overrides}}
+var m_ValidationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationsList_member}}
+var mValueMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sValueMapping_displayValue, &sValueMapping_value}}
+var m_ValueMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValueMappingList_member}}
+var mValueMappings = smithy.SchemaMembers{List: []*smithy.Schema{&sValueMappings_values, &sValueMappings_bindingProperties}}
+var mCreateComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentRequest_appId, &sCreateComponentRequest_environmentName, &sCreateComponentRequest_clientToken, &sCreateComponentRequest_componentToCreate}}
+var mCreateComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentResponse_entity}}
+var mCreateFormRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFormRequest_appId, &sCreateFormRequest_environmentName, &sCreateFormRequest_clientToken, &sCreateFormRequest_formToCreate}}
+var mCreateFormResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFormResponse_entity}}
+var mCreateThemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateThemeRequest_appId, &sCreateThemeRequest_environmentName, &sCreateThemeRequest_clientToken, &sCreateThemeRequest_themeToCreate}}
+var mCreateThemeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateThemeResponse_entity}}
+var mDeleteComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentRequest_appId, &sDeleteComponentRequest_environmentName, &sDeleteComponentRequest_id}}
+var mDeleteFormRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFormRequest_appId, &sDeleteFormRequest_environmentName, &sDeleteFormRequest_id}}
+var mDeleteThemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteThemeRequest_appId, &sDeleteThemeRequest_environmentName, &sDeleteThemeRequest_id}}
+var mExchangeCodeForTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExchangeCodeForTokenRequest_provider, &sExchangeCodeForTokenRequest_request}}
+var mExchangeCodeForTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExchangeCodeForTokenResponse_accessToken, &sExchangeCodeForTokenResponse_expiresIn, &sExchangeCodeForTokenResponse_refreshToken}}
+var mExportComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportComponentsRequest_appId, &sExportComponentsRequest_environmentName, &sExportComponentsRequest_nextToken}}
+var mExportComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportComponentsResponse_entities, &sExportComponentsResponse_nextToken}}
+var mExportFormsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportFormsRequest_appId, &sExportFormsRequest_environmentName, &sExportFormsRequest_nextToken}}
+var mExportFormsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportFormsResponse_entities, &sExportFormsResponse_nextToken}}
+var mExportThemesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportThemesRequest_appId, &sExportThemesRequest_environmentName, &sExportThemesRequest_nextToken}}
+var mExportThemesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportThemesResponse_entities, &sExportThemesResponse_nextToken}}
+var mGetCodegenJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodegenJobRequest_appId, &sGetCodegenJobRequest_environmentName, &sGetCodegenJobRequest_id}}
+var mGetCodegenJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodegenJobResponse_job}}
+var mGetComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentRequest_appId, &sGetComponentRequest_environmentName, &sGetComponentRequest_id}}
+var mGetComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentResponse_component}}
+var mGetFormRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFormRequest_appId, &sGetFormRequest_environmentName, &sGetFormRequest_id}}
+var mGetFormResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFormResponse_form}}
+var mGetMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetadataRequest_appId, &sGetMetadataRequest_environmentName}}
+var mGetMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetadataResponse_features}}
+var mGetThemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThemeRequest_appId, &sGetThemeRequest_environmentName, &sGetThemeRequest_id}}
+var mGetThemeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThemeResponse_theme}}
+var mListCodegenJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodegenJobsRequest_appId, &sListCodegenJobsRequest_environmentName, &sListCodegenJobsRequest_nextToken, &sListCodegenJobsRequest_maxResults}}
+var mListCodegenJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodegenJobsResponse_entities, &sListCodegenJobsResponse_nextToken}}
+var mListComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsRequest_appId, &sListComponentsRequest_environmentName, &sListComponentsRequest_nextToken, &sListComponentsRequest_maxResults}}
+var mListComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsResponse_entities, &sListComponentsResponse_nextToken}}
+var mListFormsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFormsRequest_appId, &sListFormsRequest_environmentName, &sListFormsRequest_nextToken, &sListFormsRequest_maxResults}}
+var mListFormsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFormsResponse_entities, &sListFormsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListThemesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListThemesRequest_appId, &sListThemesRequest_environmentName, &sListThemesRequest_nextToken, &sListThemesRequest_maxResults}}
+var mListThemesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListThemesResponse_entities, &sListThemesResponse_nextToken}}
+var mPutMetadataFlagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetadataFlagRequest_appId, &sPutMetadataFlagRequest_environmentName, &sPutMetadataFlagRequest_featureName, &sPutMetadataFlagRequest_body}}
+var mRefreshTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshTokenRequest_provider, &sRefreshTokenRequest_refreshTokenBody}}
+var mRefreshTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshTokenResponse_accessToken, &sRefreshTokenResponse_expiresIn}}
+var mStartCodegenJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCodegenJobRequest_appId, &sStartCodegenJobRequest_environmentName, &sStartCodegenJobRequest_clientToken, &sStartCodegenJobRequest_codegenJobToCreate}}
+var mStartCodegenJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCodegenJobResponse_entity}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentRequest_appId, &sUpdateComponentRequest_environmentName, &sUpdateComponentRequest_id, &sUpdateComponentRequest_clientToken, &sUpdateComponentRequest_updatedComponent}}
+var mUpdateComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentResponse_entity}}
+var mUpdateFormRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFormRequest_appId, &sUpdateFormRequest_environmentName, &sUpdateFormRequest_id, &sUpdateFormRequest_clientToken, &sUpdateFormRequest_updatedForm}}
+var mUpdateFormResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFormResponse_entity}}
+var mUpdateThemeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThemeRequest_appId, &sUpdateThemeRequest_environmentName, &sUpdateThemeRequest_id, &sUpdateThemeRequest_clientToken, &sUpdateThemeRequest_updatedTheme}}
+var mUpdateThemeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateThemeResponse_entity}}
+
+var hActionParameters = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 5, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 7, 8, 9, 0, 0, 0, 1, 0, 0, 0,
+	0, 0, 4, 0, 3, 0, 0, 0,
+}}
+var hCodegenGenericDataFieldDataType = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 1, 2, 9, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0,
+	0, 0, 12, 0, 10, 5, 0, 13, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 11, 0, 15, 0, 0,
+	0, 0, 14, 3, 0, 0, 0, 0, 4, 16, 0, 0, 0, 0, 8, 0,
+}}
+var hCodegenGenericDataRelationshipType = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 8, 6, 0, 0, 5, 0, 0, 4, 0,
+	0, 3, 1, 0, 0, 2, 0, 0,
+}}
+var hCodegenJob = smithy.MemberHash{Seed: 31, Slots: []uint16{
+	0, 0, 5, 0, 0, 0, 0, 9, 4, 0, 0, 0, 8, 12, 13, 0, 2, 0, 0, 0, 6, 7, 10, 11,
+	1, 0, 14, 0, 0, 0, 0, 3,
+}}
+var hComponent = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 5, 0, 2, 0, 8, 0, 17, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0,
+	7, 0, 0, 10, 0, 0, 11, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 6, 1, 14, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 15, 16, 0, 12, 0, 0, 0, 0, 0, 0,
+}}
+var hComponentProperty = smithy.MemberHash{Seed: 66, Slots: []uint16{
+	0, 0, 0, 7, 0, 5, 0, 0, 8, 3, 0, 0, 1, 0, 0, 11, 13, 0, 14, 0, 10, 4, 0, 0,
+	2, 9, 0, 0, 12, 0, 6, 15,
+}}
+var hCreateComponentData = smithy.MemberHash{Seed: 30, Slots: []uint16{
+	6, 0, 0, 2, 7, 0, 12, 0, 9, 5, 8, 1, 3, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0,
+	0, 0, 0, 10, 0, 0, 4, 0,
+}}
+var hCreateFormData = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	8, 2, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 10, 0, 7, 5, 0, 3, 4, 0,
+	0, 0, 0, 0, 0, 9, 0, 0,
+}}
+var hFieldInputConfig = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	1, 0, 15, 9, 0, 0, 14, 2, 0, 0, 0, 0, 0, 0, 0, 16, 3, 0, 0, 5, 12, 0, 13, 0,
+	10, 6, 8, 4, 7, 0, 11, 0,
+}}
+var hForm = smithy.MemberHash{Seed: 84, Slots: []uint16{
+	0, 0, 0, 0, 0, 10, 3, 1, 12, 0, 0, 13, 0, 0, 0, 11, 5, 0, 0, 4, 0, 6, 0, 8,
+	2, 0, 0, 0, 0, 9, 0, 7,
+}}
+var hTheme = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	9, 6, 4, 0, 0, 0, 1, 0, 0, 0, 2, 5, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 3, 8, 0,
+}}
+var hUpdateComponentData = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 8, 4, 0, 1, 0, 5, 11, 7, 3, 0, 0, 12, 9,
+	0, 0, 0, 2, 0, 0, 0, 0,
+}}
+var hUpdateFormData = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	8, 2, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 9, 0, 7, 5, 0, 3, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+
+var sCreateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponent, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateComponent})
+var sCreateForm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateForm, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateForm})
+var sCreateTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTheme, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateTheme})
+var sDeleteComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponent, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteComponent})
+var sDeleteForm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteForm, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteForm})
+var sDeleteTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTheme, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTheme})
+var sExchangeCodeForToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExchangeCodeForToken, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eExchangeCodeForToken})
+var sExportComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportComponents, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eExportComponents})
+var sExportForms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportForms, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eExportForms})
+var sExportThemes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportThemes, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eExportThemes})
+var sGetCodegenJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodegenJob, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetCodegenJob})
+var sGetComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponent, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetComponent})
+var sGetForm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetForm, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetForm})
+var sGetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadata, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetMetadata})
+var sGetTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTheme, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetTheme})
+var sListCodegenJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodegenJobs, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListCodegenJobs})
+var sListComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponents, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListComponents})
+var sListForms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListForms, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListForms})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListThemes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThemes, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListThemes})
+var sPutMetadataFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetadataFlag, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ePutMetadataFlag})
+var sRefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshToken, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eRefreshToken})
+var sStartCodegenJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCodegenJob, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eStartCodegenJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponent, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateComponent})
+var sUpdateForm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateForm, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUpdateForm})
+var sUpdateTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTheme, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTheme})
+var s_AmplifyUIBuilder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmplifyUIBuilder, Type: smithy.ShapeTypeService, Ext: &e_AmplifyUIBuilder})
+var sActionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionParameters, Members: &mActionParameters, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters})
+var sActionParameters_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_type})
+var sActionParameters_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_url})
+var sActionParameters_anchor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "anchor", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_anchor})
+var sActionParameters_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_target})
+var sActionParameters_global = smithy.NewStaticSchema(smithy.StaticSchema{Member: "global", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_global})
+var sActionParameters_model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "model", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eActionParameters_model})
+var sActionParameters_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_id})
+var sActionParameters_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &eActionParameters_fields})
+var sActionParameters_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMutationActionSetStateParameter, Members: &mMutationActionSetStateParameter, Type: smithy.ShapeTypeStructure, Ext: &eActionParameters_state})
+var sApiConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiConfiguration, Members: &mApiConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eApiConfiguration})
+var sApiConfiguration_graphQLConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graphQLConfig", ID: &iGraphQLRenderConfig, Members: &mGraphQLRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eApiConfiguration_graphQLConfig})
+var sApiConfiguration_dataStoreConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataStoreConfig", ID: &iDataStoreRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eApiConfiguration_dataStoreConfig})
+var sApiConfiguration_noApiConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noApiConfig", ID: &iNoApiRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eApiConfiguration_noApiConfig})
+var s_AppId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppId, Type: smithy.ShapeTypeString, Ext: &e_AppId})
+var s_AssociatedFieldsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedFieldsList, Members: &m_AssociatedFieldsList, Type: smithy.ShapeTypeList, Ext: &e_AssociatedFieldsList})
+var s_AssociatedFieldsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AssociatedFieldsList_member})
+var s_CodegenDependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenDependencies, Members: &m_CodegenDependencies, Type: smithy.ShapeTypeList, Ext: &e_CodegenDependencies})
+var s_CodegenDependencies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodegenDependency, Members: &mCodegenDependency, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenDependencies_member})
+var sCodegenDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenDependency, Members: &mCodegenDependency, Type: smithy.ShapeTypeStructure, Ext: &eCodegenDependency})
+var sCodegenDependency_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenDependency_name})
+var sCodegenDependency_supportedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenDependency_supportedVersion})
+var sCodegenDependency_isSemVer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSemVer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenDependency_isSemVer})
+var sCodegenDependency_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenDependency_reason})
+var sCodegenFeatureFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenFeatureFlags, Members: &mCodegenFeatureFlags, Type: smithy.ShapeTypeStructure, Ext: &eCodegenFeatureFlags})
+var sCodegenFeatureFlags_isRelationshipSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRelationshipSupported", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenFeatureFlags_isRelationshipSupported})
+var sCodegenFeatureFlags_isNonModelSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isNonModelSupported", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenFeatureFlags_isNonModelSupported})
+var sCodegenGenericDataEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataEnum, Members: &mCodegenGenericDataEnum, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataEnum})
+var sCodegenGenericDataEnum_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_CodegenGenericDataEnumValuesList, Members: &m_CodegenGenericDataEnumValuesList, Type: smithy.ShapeTypeList, Ext: &eCodegenGenericDataEnum_values})
+var s_CodegenGenericDataEnums = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataEnums, Members: &m_CodegenGenericDataEnums, Type: smithy.ShapeTypeMap, Ext: &e_CodegenGenericDataEnums})
+var s_CodegenGenericDataEnums_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataEnums_key})
+var s_CodegenGenericDataEnums_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCodegenGenericDataEnum, Members: &mCodegenGenericDataEnum, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenGenericDataEnums_value})
+var s_CodegenGenericDataEnumValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataEnumValuesList, Members: &m_CodegenGenericDataEnumValuesList, Type: smithy.ShapeTypeList, Ext: &e_CodegenGenericDataEnumValuesList})
+var s_CodegenGenericDataEnumValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataEnumValuesList_member})
+var sCodegenGenericDataField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataField, Members: &mCodegenGenericDataField, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataField})
+var sCodegenGenericDataField_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iCodegenGenericDataFieldDataType, Members: &mCodegenGenericDataFieldDataType, Type: smithy.ShapeTypeEnum, Ext: &eCodegenGenericDataField_dataType})
+var sCodegenGenericDataField_dataTypeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTypeValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenGenericDataField_dataTypeValue})
+var sCodegenGenericDataField_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataField_required})
+var sCodegenGenericDataField_readOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnly", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataField_readOnly})
+var sCodegenGenericDataField_isArray = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isArray", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataField_isArray})
+var sCodegenGenericDataField_relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationship", ID: &iCodegenGenericDataRelationshipType, Members: &mCodegenGenericDataRelationshipType, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataField_relationship})
+var sCodegenGenericDataFieldDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataFieldDataType, Members: &mCodegenGenericDataFieldDataType, Type: smithy.ShapeTypeEnum, Ext: &eCodegenGenericDataFieldDataType})
+var sCodegenGenericDataFieldDataType_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_ID})
+var sCodegenGenericDataFieldDataType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_STRING})
+var sCodegenGenericDataFieldDataType_INT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_INT})
+var sCodegenGenericDataFieldDataType_FLOAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_FLOAT})
+var sCodegenGenericDataFieldDataType_AWS_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_DATE})
+var sCodegenGenericDataFieldDataType_AWS_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_TIME})
+var sCodegenGenericDataFieldDataType_AWS_DATE_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_DATE_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_DATE_TIME})
+var sCodegenGenericDataFieldDataType_AWS_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_TIMESTAMP})
+var sCodegenGenericDataFieldDataType_AWS_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_EMAIL})
+var sCodegenGenericDataFieldDataType_AWS_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_URL})
+var sCodegenGenericDataFieldDataType_AWS_IP_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_IP_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_IP_ADDRESS})
+var sCodegenGenericDataFieldDataType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_BOOLEAN})
+var sCodegenGenericDataFieldDataType_AWS_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_JSON})
+var sCodegenGenericDataFieldDataType_AWS_PHONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_PHONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_AWS_PHONE})
+var sCodegenGenericDataFieldDataType_ENUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_ENUM})
+var sCodegenGenericDataFieldDataType_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_MODEL})
+var sCodegenGenericDataFieldDataType_NON_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataFieldDataType_NON_MODEL})
+var s_CodegenGenericDataFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataFields, Members: &m_CodegenGenericDataFields, Type: smithy.ShapeTypeMap, Ext: &e_CodegenGenericDataFields})
+var s_CodegenGenericDataFields_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataFields_key})
+var s_CodegenGenericDataFields_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCodegenGenericDataField, Members: &mCodegenGenericDataField, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenGenericDataFields_value})
+var sCodegenGenericDataModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataModel, Members: &mCodegenGenericDataModel, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataModel})
+var sCodegenGenericDataModel_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_CodegenGenericDataFields, Members: &m_CodegenGenericDataFields, Type: smithy.ShapeTypeMap, Ext: &eCodegenGenericDataModel_fields})
+var sCodegenGenericDataModel_isJoinTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isJoinTable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataModel_isJoinTable})
+var sCodegenGenericDataModel_primaryKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primaryKeys", ID: &i_CodegenPrimaryKeysList, Members: &m_CodegenPrimaryKeysList, Type: smithy.ShapeTypeList, Ext: &eCodegenGenericDataModel_primaryKeys})
+var s_CodegenGenericDataModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataModels, Members: &m_CodegenGenericDataModels, Type: smithy.ShapeTypeMap, Ext: &e_CodegenGenericDataModels})
+var s_CodegenGenericDataModels_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataModels_key})
+var s_CodegenGenericDataModels_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCodegenGenericDataModel, Members: &mCodegenGenericDataModel, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenGenericDataModels_value})
+var sCodegenGenericDataNonModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataNonModel, Members: &mCodegenGenericDataNonModel, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataNonModel})
+var sCodegenGenericDataNonModel_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_CodegenGenericDataNonModelFields, Members: &m_CodegenGenericDataNonModelFields, Type: smithy.ShapeTypeMap, Ext: &eCodegenGenericDataNonModel_fields})
+var s_CodegenGenericDataNonModelFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataNonModelFields, Members: &m_CodegenGenericDataNonModelFields, Type: smithy.ShapeTypeMap, Ext: &e_CodegenGenericDataNonModelFields})
+var s_CodegenGenericDataNonModelFields_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataNonModelFields_key})
+var s_CodegenGenericDataNonModelFields_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCodegenGenericDataField, Members: &mCodegenGenericDataField, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenGenericDataNonModelFields_value})
+var s_CodegenGenericDataNonModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenGenericDataNonModels, Members: &m_CodegenGenericDataNonModels, Type: smithy.ShapeTypeMap, Ext: &e_CodegenGenericDataNonModels})
+var s_CodegenGenericDataNonModels_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenGenericDataNonModels_key})
+var s_CodegenGenericDataNonModels_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCodegenGenericDataNonModel, Members: &mCodegenGenericDataNonModel, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenGenericDataNonModels_value})
+var sCodegenGenericDataRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenGenericDataRelationshipType, Members: &mCodegenGenericDataRelationshipType, Type: smithy.ShapeTypeStructure, Ext: &eCodegenGenericDataRelationshipType})
+var sCodegenGenericDataRelationshipType_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGenericDataRelationshipType, Members: &mGenericDataRelationshipType, Type: smithy.ShapeTypeEnum, Ext: &eCodegenGenericDataRelationshipType_type})
+var sCodegenGenericDataRelationshipType_relatedModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedModelName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenGenericDataRelationshipType_relatedModelName})
+var sCodegenGenericDataRelationshipType_relatedModelFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedModelFields", ID: &i_RelatedModelFieldsList, Members: &m_RelatedModelFieldsList, Type: smithy.ShapeTypeList, Ext: &eCodegenGenericDataRelationshipType_relatedModelFields})
+var sCodegenGenericDataRelationshipType_canUnlinkAssociatedModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canUnlinkAssociatedModel", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataRelationshipType_canUnlinkAssociatedModel})
+var sCodegenGenericDataRelationshipType_relatedJoinFieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedJoinFieldName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenGenericDataRelationshipType_relatedJoinFieldName})
+var sCodegenGenericDataRelationshipType_relatedJoinTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedJoinTableName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenGenericDataRelationshipType_relatedJoinTableName})
+var sCodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "belongsToFieldOnRelatedModel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel})
+var sCodegenGenericDataRelationshipType_associatedFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedFields", ID: &i_AssociatedFieldsList, Members: &m_AssociatedFieldsList, Type: smithy.ShapeTypeList, Ext: &eCodegenGenericDataRelationshipType_associatedFields})
+var sCodegenGenericDataRelationshipType_isHasManyIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isHasManyIndex", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenGenericDataRelationshipType_isHasManyIndex})
+var sCodegenJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJob, Members: &mCodegenJob, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJob})
+var sCodegenJob_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCodegenJob_id})
+var sCodegenJob_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_AppId, Type: smithy.ShapeTypeString, Ext: &eCodegenJob_appId})
+var sCodegenJob_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenJob_environmentName})
+var sCodegenJob_renderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renderConfig", ID: &iCodegenJobRenderConfig, Members: &mCodegenJobRenderConfig, Type: smithy.ShapeTypeUnion, Ext: &eCodegenJob_renderConfig})
+var sCodegenJob_genericDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "genericDataSchema", ID: &iCodegenJobGenericDataSchema, Members: &mCodegenJobGenericDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJob_genericDataSchema})
+var sCodegenJob_autoGenerateForms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoGenerateForms", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCodegenJob_autoGenerateForms})
+var sCodegenJob_features = smithy.NewStaticSchema(smithy.StaticSchema{Member: "features", ID: &iCodegenFeatureFlags, Members: &mCodegenFeatureFlags, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJob_features})
+var sCodegenJob_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCodegenJobStatus, Members: &mCodegenJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eCodegenJob_status})
+var sCodegenJob_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenJob_statusMessage})
+var sCodegenJob_asset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asset", ID: &iCodegenJobAsset, Members: &mCodegenJobAsset, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJob_asset})
+var sCodegenJob_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCodegenJob_tags})
+var sCodegenJob_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eCodegenJob_createdAt})
+var sCodegenJob_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eCodegenJob_modifiedAt})
+var sCodegenJob_dependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependencies", ID: &i_CodegenDependencies, Members: &m_CodegenDependencies, Type: smithy.ShapeTypeList, Ext: &eCodegenJob_dependencies})
+var sCodegenJobAsset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobAsset, Members: &mCodegenJobAsset, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobAsset})
+var sCodegenJobAsset_downloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenJobAsset_downloadUrl})
+var sCodegenJobGenericDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobGenericDataSchema, Members: &mCodegenJobGenericDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobGenericDataSchema})
+var sCodegenJobGenericDataSchema_dataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceType", ID: &iCodegenJobGenericDataSourceType, Members: &mCodegenJobGenericDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eCodegenJobGenericDataSchema_dataSourceType})
+var sCodegenJobGenericDataSchema_models = smithy.NewStaticSchema(smithy.StaticSchema{Member: "models", ID: &i_CodegenGenericDataModels, Members: &m_CodegenGenericDataModels, Type: smithy.ShapeTypeMap, Ext: &eCodegenJobGenericDataSchema_models})
+var sCodegenJobGenericDataSchema_enums = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enums", ID: &i_CodegenGenericDataEnums, Members: &m_CodegenGenericDataEnums, Type: smithy.ShapeTypeMap, Ext: &eCodegenJobGenericDataSchema_enums})
+var sCodegenJobGenericDataSchema_nonModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonModels", ID: &i_CodegenGenericDataNonModels, Members: &m_CodegenGenericDataNonModels, Type: smithy.ShapeTypeMap, Ext: &eCodegenJobGenericDataSchema_nonModels})
+var sCodegenJobGenericDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobGenericDataSourceType, Members: &mCodegenJobGenericDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &eCodegenJobGenericDataSourceType})
+var sCodegenJobGenericDataSourceType_DATA_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobGenericDataSourceType_DATA_STORE})
+var sCodegenJobRenderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobRenderConfig, Members: &mCodegenJobRenderConfig, Type: smithy.ShapeTypeUnion, Ext: &eCodegenJobRenderConfig})
+var sCodegenJobRenderConfig_react = smithy.NewStaticSchema(smithy.StaticSchema{Member: "react", ID: &iReactStartCodegenJobData, Members: &mReactStartCodegenJobData, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobRenderConfig_react})
+var sCodegenJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobStatus, Members: &mCodegenJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eCodegenJobStatus})
+var sCodegenJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobStatus_IN_PROGRESS})
+var sCodegenJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobStatus_FAILED})
+var sCodegenJobStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobStatus_SUCCEEDED})
+var sCodegenJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodegenJobSummary, Members: &mCodegenJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eCodegenJobSummary})
+var sCodegenJobSummary_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_AppId, Type: smithy.ShapeTypeString, Ext: &eCodegenJobSummary_appId})
+var sCodegenJobSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodegenJobSummary_environmentName})
+var sCodegenJobSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCodegenJobSummary_id})
+var sCodegenJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eCodegenJobSummary_createdAt})
+var sCodegenJobSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eCodegenJobSummary_modifiedAt})
+var s_CodegenJobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenJobSummaryList, Members: &m_CodegenJobSummaryList, Type: smithy.ShapeTypeList, Ext: &e_CodegenJobSummaryList})
+var s_CodegenJobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodegenJobSummary, Members: &mCodegenJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_CodegenJobSummaryList_member})
+var s_CodegenPrimaryKeysList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodegenPrimaryKeysList, Members: &m_CodegenPrimaryKeysList, Type: smithy.ShapeTypeList, Ext: &e_CodegenPrimaryKeysList})
+var s_CodegenPrimaryKeysList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CodegenPrimaryKeysList_member})
+var sComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure, Ext: &eComponent})
+var sComponent_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponent_appId})
+var sComponent_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponent_environmentName})
+var sComponent_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponent_sourceId})
+var sComponent_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eComponent_id})
+var sComponent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eComponent_name})
+var sComponent_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &eComponent_componentType})
+var sComponent_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &eComponent_properties})
+var sComponent_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ComponentChildList, Members: &m_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &eComponent_children})
+var sComponent_variants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variants", ID: &i_ComponentVariants, Members: &m_ComponentVariants, Type: smithy.ShapeTypeList, Ext: &eComponent_variants})
+var sComponent_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ComponentOverrides, Members: &m_ComponentOverrides, Type: smithy.ShapeTypeMap, Ext: &eComponent_overrides})
+var sComponent_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &i_ComponentBindingProperties, Members: &m_ComponentBindingProperties, Type: smithy.ShapeTypeMap, Ext: &eComponent_bindingProperties})
+var sComponent_collectionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionProperties", ID: &i_ComponentCollectionProperties, Members: &m_ComponentCollectionProperties, Type: smithy.ShapeTypeMap, Ext: &eComponent_collectionProperties})
+var sComponent_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eComponent_createdAt})
+var sComponent_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eComponent_modifiedAt})
+var sComponent_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eComponent_tags})
+var sComponent_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_ComponentEvents, Members: &m_ComponentEvents, Type: smithy.ShapeTypeMap, Ext: &eComponent_events})
+var sComponent_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponent_schemaVersion})
+var s_ComponentBindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentBindingProperties, Members: &m_ComponentBindingProperties, Type: smithy.ShapeTypeMap, Ext: &e_ComponentBindingProperties})
+var s_ComponentBindingProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentBindingProperties_key})
+var s_ComponentBindingProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentBindingPropertiesValue, Members: &mComponentBindingPropertiesValue, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentBindingProperties_value})
+var sComponentBindingPropertiesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentBindingPropertiesValue, Members: &mComponentBindingPropertiesValue, Type: smithy.ShapeTypeStructure, Ext: &eComponentBindingPropertiesValue})
+var sComponentBindingPropertiesValue_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValue_type})
+var sComponentBindingPropertiesValue_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &iComponentBindingPropertiesValueProperties, Members: &mComponentBindingPropertiesValueProperties, Type: smithy.ShapeTypeStructure, Ext: &eComponentBindingPropertiesValue_bindingProperties})
+var sComponentBindingPropertiesValue_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValue_defaultValue})
+var sComponentBindingPropertiesValueProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentBindingPropertiesValueProperties, Members: &mComponentBindingPropertiesValueProperties, Type: smithy.ShapeTypeStructure, Ext: &eComponentBindingPropertiesValueProperties})
+var sComponentBindingPropertiesValueProperties_model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "model", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_model})
+var sComponentBindingPropertiesValueProperties_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_field})
+var sComponentBindingPropertiesValueProperties_predicates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predicates", ID: &i_PredicateList, Members: &m_PredicateList, Type: smithy.ShapeTypeList, Ext: &eComponentBindingPropertiesValueProperties_predicates})
+var sComponentBindingPropertiesValueProperties_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_userAttribute})
+var sComponentBindingPropertiesValueProperties_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_bucket})
+var sComponentBindingPropertiesValueProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_key})
+var sComponentBindingPropertiesValueProperties_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_defaultValue})
+var sComponentBindingPropertiesValueProperties_slotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentBindingPropertiesValueProperties_slotName})
+var sComponentChild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentChild, Members: &mComponentChild, Type: smithy.ShapeTypeStructure, Ext: &eComponentChild})
+var sComponentChild_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentChild_componentType})
+var sComponentChild_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentChild_name})
+var sComponentChild_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &eComponentChild_properties})
+var sComponentChild_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &eComponentChild_children})
+var sComponentChild_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_ComponentEvents, Members: &m_ComponentEvents, Type: smithy.ShapeTypeMap, Ext: &eComponentChild_events})
+var sComponentChild_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentChild_sourceId})
+var s_ComponentChildList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentChildList, Members: &m_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &e_ComponentChildList})
+var s_ComponentChildList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentChild, Members: &mComponentChild, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentChildList_member})
+var s_ComponentCollectionProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentCollectionProperties, Members: &m_ComponentCollectionProperties, Type: smithy.ShapeTypeMap, Ext: &e_ComponentCollectionProperties})
+var s_ComponentCollectionProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentCollectionProperties_key})
+var s_ComponentCollectionProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentDataConfiguration, Members: &mComponentDataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentCollectionProperties_value})
+var sComponentConditionProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentConditionProperty, Members: &mComponentConditionProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentConditionProperty})
+var sComponentConditionProperty_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentConditionProperty_property})
+var sComponentConditionProperty_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentConditionProperty_field})
+var sComponentConditionProperty_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentConditionProperty_operator})
+var sComponentConditionProperty_operand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operand", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentConditionProperty_operand})
+var sComponentConditionProperty_then = smithy.NewStaticSchema(smithy.StaticSchema{Member: "then", ID: &iComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentConditionProperty_then})
+var sComponentConditionProperty_else = smithy.NewStaticSchema(smithy.StaticSchema{Member: "else", ID: &iComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentConditionProperty_else})
+var sComponentConditionProperty_operandType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operandType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentConditionProperty_operandType})
+var sComponentDataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentDataConfiguration, Members: &mComponentDataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComponentDataConfiguration})
+var sComponentDataConfiguration_model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "model", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentDataConfiguration_model})
+var sComponentDataConfiguration_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &i_SortPropertyList, Members: &m_SortPropertyList, Type: smithy.ShapeTypeList, Ext: &eComponentDataConfiguration_sort})
+var sComponentDataConfiguration_predicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predicate", ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &eComponentDataConfiguration_predicate})
+var sComponentDataConfiguration_identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifiers", ID: &i_IdentifierList, Members: &m_IdentifierList, Type: smithy.ShapeTypeList, Ext: &eComponentDataConfiguration_identifiers})
+var sComponentEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentEvent, Members: &mComponentEvent, Type: smithy.ShapeTypeStructure, Ext: &eComponentEvent})
+var sComponentEvent_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentEvent_action})
+var sComponentEvent_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &iActionParameters, Members: &mActionParameters, Type: smithy.ShapeTypeStructure, Ext: &eComponentEvent_parameters})
+var sComponentEvent_bindingEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingEvent", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentEvent_bindingEvent})
+var s_ComponentEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentEvents, Members: &m_ComponentEvents, Type: smithy.ShapeTypeMap, Ext: &e_ComponentEvents})
+var s_ComponentEvents_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentEvents_key})
+var s_ComponentEvents_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentEvent, Members: &mComponentEvent, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentEvents_value})
+var s_ComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentList, Members: &m_ComponentList, Type: smithy.ShapeTypeList, Ext: &e_ComponentList})
+var s_ComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentList_member})
+var s_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &e_ComponentName})
+var s_ComponentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentOverrides, Members: &m_ComponentOverrides, Type: smithy.ShapeTypeMap, Ext: &e_ComponentOverrides})
+var s_ComponentOverrides_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentOverrides_key})
+var s_ComponentOverrides_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ComponentOverridesValue, Members: &m_ComponentOverridesValue, Type: smithy.ShapeTypeMap, Ext: &e_ComponentOverrides_value})
+var s_ComponentOverridesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentOverridesValue, Members: &m_ComponentOverridesValue, Type: smithy.ShapeTypeMap, Ext: &e_ComponentOverridesValue})
+var s_ComponentOverridesValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentOverridesValue_key})
+var s_ComponentOverridesValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentOverridesValue_value})
+var s_ComponentProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &e_ComponentProperties})
+var s_ComponentProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentProperties_key})
+var s_ComponentProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentProperties_value})
+var sComponentProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentProperty})
+var sComponentProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_value})
+var sComponentProperty_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &iComponentPropertyBindingProperties, Members: &mComponentPropertyBindingProperties, Type: smithy.ShapeTypeStructure, Ext: &eComponentProperty_bindingProperties})
+var sComponentProperty_collectionBindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionBindingProperties", ID: &iComponentPropertyBindingProperties, Members: &mComponentPropertyBindingProperties, Type: smithy.ShapeTypeStructure, Ext: &eComponentProperty_collectionBindingProperties})
+var sComponentProperty_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_defaultValue})
+var sComponentProperty_model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "model", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_model})
+var sComponentProperty_bindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindings", ID: &i_FormBindings, Members: &m_FormBindings, Type: smithy.ShapeTypeMap, Ext: &eComponentProperty_bindings})
+var sComponentProperty_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_event})
+var sComponentProperty_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_userAttribute})
+var sComponentProperty_concat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "concat", ID: &i_ComponentPropertyList, Members: &m_ComponentPropertyList, Type: smithy.ShapeTypeList, Ext: &eComponentProperty_concat})
+var sComponentProperty_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &iComponentConditionProperty, Members: &mComponentConditionProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentProperty_condition})
+var sComponentProperty_configured = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configured", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eComponentProperty_configured})
+var sComponentProperty_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_type})
+var sComponentProperty_importedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importedValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_importedValue})
+var sComponentProperty_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_componentName})
+var sComponentProperty_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentProperty_property})
+var sComponentPropertyBindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentPropertyBindingProperties, Members: &mComponentPropertyBindingProperties, Type: smithy.ShapeTypeStructure, Ext: &eComponentPropertyBindingProperties})
+var sComponentPropertyBindingProperties_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentPropertyBindingProperties_property})
+var sComponentPropertyBindingProperties_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentPropertyBindingProperties_field})
+var s_ComponentPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentPropertyList, Members: &m_ComponentPropertyList, Type: smithy.ShapeTypeList, Ext: &e_ComponentPropertyList})
+var s_ComponentPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentPropertyList_member})
+var sComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure, Ext: &eComponentSummary})
+var sComponentSummary_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentSummary_appId})
+var sComponentSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComponentSummary_environmentName})
+var sComponentSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eComponentSummary_id})
+var sComponentSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eComponentSummary_name})
+var sComponentSummary_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &eComponentSummary_componentType})
+var s_ComponentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentSummaryList, Members: &m_ComponentSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ComponentSummaryList})
+var s_ComponentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentSummaryList_member})
+var s_ComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &e_ComponentType})
+var sComponentVariant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentVariant, Members: &mComponentVariant, Type: smithy.ShapeTypeStructure, Ext: &eComponentVariant})
+var sComponentVariant_variantValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variantValues", ID: &i_ComponentVariantValues, Members: &m_ComponentVariantValues, Type: smithy.ShapeTypeMap, Ext: &eComponentVariant_variantValues})
+var sComponentVariant_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ComponentOverrides, Members: &m_ComponentOverrides, Type: smithy.ShapeTypeMap, Ext: &eComponentVariant_overrides})
+var s_ComponentVariants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVariants, Members: &m_ComponentVariants, Type: smithy.ShapeTypeList, Ext: &e_ComponentVariants})
+var s_ComponentVariants_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentVariant, Members: &mComponentVariant, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentVariants_member})
+var s_ComponentVariantValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVariantValues, Members: &m_ComponentVariantValues, Type: smithy.ShapeTypeMap, Ext: &e_ComponentVariantValues})
+var s_ComponentVariantValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentVariantValues_key})
+var s_ComponentVariantValues_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ComponentVariantValues_value})
+var sCreateComponentData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentData, Members: &mCreateComponentData, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentData})
+var sCreateComponentData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eCreateComponentData_name})
+var sCreateComponentData_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateComponentData_sourceId})
+var sCreateComponentData_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &eCreateComponentData_componentType})
+var sCreateComponentData_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_properties})
+var sCreateComponentData_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ComponentChildList, Members: &m_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &eCreateComponentData_children})
+var sCreateComponentData_variants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variants", ID: &i_ComponentVariants, Members: &m_ComponentVariants, Type: smithy.ShapeTypeList, Ext: &eCreateComponentData_variants})
+var sCreateComponentData_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ComponentOverrides, Members: &m_ComponentOverrides, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_overrides})
+var sCreateComponentData_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &i_ComponentBindingProperties, Members: &m_ComponentBindingProperties, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_bindingProperties})
+var sCreateComponentData_collectionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionProperties", ID: &i_ComponentCollectionProperties, Members: &m_ComponentCollectionProperties, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_collectionProperties})
+var sCreateComponentData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_tags})
+var sCreateComponentData_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_ComponentEvents, Members: &m_ComponentEvents, Type: smithy.ShapeTypeMap, Ext: &eCreateComponentData_events})
+var sCreateComponentData_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateComponentData_schemaVersion})
+var sCreateFormData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFormData, Members: &mCreateFormData, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormData})
+var sCreateFormData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FormName, Type: smithy.ShapeTypeString, Ext: &eCreateFormData_name})
+var sCreateFormData_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iFormDataTypeConfig, Members: &mFormDataTypeConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormData_dataType})
+var sCreateFormData_formActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formActionType", ID: &iFormActionType, Members: &mFormActionType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFormData_formActionType})
+var sCreateFormData_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldsMap, Members: &m_FieldsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateFormData_fields})
+var sCreateFormData_style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "style", ID: &iFormStyle, Members: &mFormStyle, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormData_style})
+var sCreateFormData_sectionalElements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sectionalElements", ID: &i_SectionalElementMap, Members: &m_SectionalElementMap, Type: smithy.ShapeTypeMap, Ext: &eCreateFormData_sectionalElements})
+var sCreateFormData_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateFormData_schemaVersion})
+var sCreateFormData_cta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cta", ID: &iFormCTA, Members: &mFormCTA, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormData_cta})
+var sCreateFormData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateFormData_tags})
+var sCreateFormData_labelDecorator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelDecorator", ID: &i_LabelDecorator, Type: smithy.ShapeTypeString, Ext: &eCreateFormData_labelDecorator})
+var sCreateThemeData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeData, Members: &mCreateThemeData, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeData})
+var sCreateThemeData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ThemeName, Type: smithy.ShapeTypeString, Ext: &eCreateThemeData_name})
+var sCreateThemeData_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eCreateThemeData_values})
+var sCreateThemeData_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eCreateThemeData_overrides})
+var sCreateThemeData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateThemeData_tags})
+var sDataStoreRenderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataStoreRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataStoreRenderConfig})
+var sExchangeCodeForTokenRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExchangeCodeForTokenRequestBody, Members: &mExchangeCodeForTokenRequestBody, Type: smithy.ShapeTypeStructure, Ext: &eExchangeCodeForTokenRequestBody})
+var sExchangeCodeForTokenRequestBody_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenRequestBody_code})
+var sExchangeCodeForTokenRequestBody_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenRequestBody_redirectUri})
+var sExchangeCodeForTokenRequestBody_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenRequestBody_clientId})
+var s_FeaturesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeaturesMap, Members: &m_FeaturesMap, Type: smithy.ShapeTypeMap, Ext: &e_FeaturesMap})
+var s_FeaturesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FeaturesMap_key})
+var s_FeaturesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FeaturesMap_value})
+var sFieldConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldConfig, Members: &mFieldConfig, Type: smithy.ShapeTypeStructure, Ext: &eFieldConfig})
+var sFieldConfig_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldConfig_label})
+var sFieldConfig_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &iFieldPosition, Members: &mFieldPosition, Type: smithy.ShapeTypeUnion, Ext: &eFieldConfig_position})
+var sFieldConfig_excluded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excluded", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFieldConfig_excluded})
+var sFieldConfig_inputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputType", ID: &iFieldInputConfig, Members: &mFieldInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eFieldConfig_inputType})
+var sFieldConfig_validations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validations", ID: &i_ValidationsList, Members: &m_ValidationsList, Type: smithy.ShapeTypeList, Ext: &eFieldConfig_validations})
+var sFieldInputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldInputConfig, Members: &mFieldInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eFieldInputConfig})
+var sFieldInputConfig_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_type})
+var sFieldInputConfig_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFieldInputConfig_required})
+var sFieldInputConfig_readOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnly", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFieldInputConfig_readOnly})
+var sFieldInputConfig_placeholder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "placeholder", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_placeholder})
+var sFieldInputConfig_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_defaultValue})
+var sFieldInputConfig_descriptiveText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptiveText", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_descriptiveText})
+var sFieldInputConfig_defaultChecked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultChecked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFieldInputConfig_defaultChecked})
+var sFieldInputConfig_defaultCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultCountryCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_defaultCountryCode})
+var sFieldInputConfig_valueMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueMappings", ID: &iValueMappings, Members: &mValueMappings, Type: smithy.ShapeTypeStructure, Ext: &eFieldInputConfig_valueMappings})
+var sFieldInputConfig_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_name})
+var sFieldInputConfig_minValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eFieldInputConfig_minValue})
+var sFieldInputConfig_maxValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eFieldInputConfig_maxValue})
+var sFieldInputConfig_step = smithy.NewStaticSchema(smithy.StaticSchema{Member: "step", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eFieldInputConfig_step})
+var sFieldInputConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldInputConfig_value})
+var sFieldInputConfig_isArray = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isArray", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFieldInputConfig_isArray})
+var sFieldInputConfig_fileUploaderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileUploaderConfig", ID: &iFileUploaderFieldConfig, Members: &mFileUploaderFieldConfig, Type: smithy.ShapeTypeStructure, Ext: &eFieldInputConfig_fileUploaderConfig})
+var sFieldPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldPosition, Members: &mFieldPosition, Type: smithy.ShapeTypeUnion, Ext: &eFieldPosition})
+var sFieldPosition_fixed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixed", ID: &iFixedPosition, Members: &mFixedPosition, Type: smithy.ShapeTypeEnum, Ext: &eFieldPosition_fixed})
+var sFieldPosition_rightOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rightOf", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldPosition_rightOf})
+var sFieldPosition_below = smithy.NewStaticSchema(smithy.StaticSchema{Member: "below", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldPosition_below})
+var s_FieldsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldsMap, Members: &m_FieldsMap, Type: smithy.ShapeTypeMap, Ext: &e_FieldsMap})
+var s_FieldsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FieldsMap_key})
+var s_FieldsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFieldConfig, Members: &mFieldConfig, Type: smithy.ShapeTypeStructure, Ext: &e_FieldsMap_value})
+var sFieldValidationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValidationConfiguration, Members: &mFieldValidationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationConfiguration})
+var sFieldValidationConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldValidationConfiguration_type})
+var sFieldValidationConfiguration_strValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strValues", ID: &i_StrValues, Members: &m_StrValues, Type: smithy.ShapeTypeList, Ext: &eFieldValidationConfiguration_strValues})
+var sFieldValidationConfiguration_numValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numValues", ID: &i_NumValues, Members: &m_NumValues, Type: smithy.ShapeTypeList, Ext: &eFieldValidationConfiguration_numValues})
+var sFieldValidationConfiguration_validationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFieldValidationConfiguration_validationMessage})
+var sFileUploaderFieldConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileUploaderFieldConfig, Members: &mFileUploaderFieldConfig, Type: smithy.ShapeTypeStructure, Ext: &eFileUploaderFieldConfig})
+var sFileUploaderFieldConfig_accessLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLevel", ID: &iStorageAccessLevel, Members: &mStorageAccessLevel, Type: smithy.ShapeTypeEnum, Ext: &eFileUploaderFieldConfig_accessLevel})
+var sFileUploaderFieldConfig_acceptedFileTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "acceptedFileTypes", ID: &i_StrValues, Members: &m_StrValues, Type: smithy.ShapeTypeList, Ext: &eFileUploaderFieldConfig_acceptedFileTypes})
+var sFileUploaderFieldConfig_showThumbnails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "showThumbnails", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFileUploaderFieldConfig_showThumbnails})
+var sFileUploaderFieldConfig_isResumable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isResumable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFileUploaderFieldConfig_isResumable})
+var sFileUploaderFieldConfig_maxFileCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxFileCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eFileUploaderFieldConfig_maxFileCount})
+var sFileUploaderFieldConfig_maxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSize", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eFileUploaderFieldConfig_maxSize})
+var sFixedPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFixedPosition, Members: &mFixedPosition, Type: smithy.ShapeTypeEnum, Ext: &eFixedPosition})
+var sFixedPosition_FIRST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFixedPosition_FIRST})
+var sForm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForm, Members: &mForm, Type: smithy.ShapeTypeStructure, Ext: &eForm})
+var sForm_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForm_appId})
+var sForm_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForm_environmentName})
+var sForm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eForm_id})
+var sForm_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FormName, Type: smithy.ShapeTypeString, Ext: &eForm_name})
+var sForm_formActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formActionType", ID: &iFormActionType, Members: &mFormActionType, Type: smithy.ShapeTypeEnum, Ext: &eForm_formActionType})
+var sForm_style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "style", ID: &iFormStyle, Members: &mFormStyle, Type: smithy.ShapeTypeStructure, Ext: &eForm_style})
+var sForm_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iFormDataTypeConfig, Members: &mFormDataTypeConfig, Type: smithy.ShapeTypeStructure, Ext: &eForm_dataType})
+var sForm_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldsMap, Members: &m_FieldsMap, Type: smithy.ShapeTypeMap, Ext: &eForm_fields})
+var sForm_sectionalElements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sectionalElements", ID: &i_SectionalElementMap, Members: &m_SectionalElementMap, Type: smithy.ShapeTypeMap, Ext: &eForm_sectionalElements})
+var sForm_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForm_schemaVersion})
+var sForm_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eForm_tags})
+var sForm_cta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cta", ID: &iFormCTA, Members: &mFormCTA, Type: smithy.ShapeTypeStructure, Ext: &eForm_cta})
+var sForm_labelDecorator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelDecorator", ID: &i_LabelDecorator, Type: smithy.ShapeTypeString, Ext: &eForm_labelDecorator})
+var sFormActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormActionType, Members: &mFormActionType, Type: smithy.ShapeTypeEnum, Ext: &eFormActionType})
+var sFormActionType_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormActionType_CREATE})
+var sFormActionType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormActionType_UPDATE})
+var sFormBindingElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormBindingElement, Members: &mFormBindingElement, Type: smithy.ShapeTypeStructure, Ext: &eFormBindingElement})
+var sFormBindingElement_element = smithy.NewStaticSchema(smithy.StaticSchema{Member: "element", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormBindingElement_element})
+var sFormBindingElement_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormBindingElement_property})
+var s_FormBindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormBindings, Members: &m_FormBindings, Type: smithy.ShapeTypeMap, Ext: &e_FormBindings})
+var s_FormBindings_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FormBindings_key})
+var s_FormBindings_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFormBindingElement, Members: &mFormBindingElement, Type: smithy.ShapeTypeStructure, Ext: &e_FormBindings_value})
+var sFormButton = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormButton, Members: &mFormButton, Type: smithy.ShapeTypeStructure, Ext: &eFormButton})
+var sFormButton_excluded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excluded", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eFormButton_excluded})
+var sFormButton_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormButton_children})
+var sFormButton_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &iFieldPosition, Members: &mFieldPosition, Type: smithy.ShapeTypeUnion, Ext: &eFormButton_position})
+var sFormButtonsPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormButtonsPosition, Members: &mFormButtonsPosition, Type: smithy.ShapeTypeEnum, Ext: &eFormButtonsPosition})
+var sFormButtonsPosition_TOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormButtonsPosition_TOP})
+var sFormButtonsPosition_BOTTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormButtonsPosition_BOTTOM})
+var sFormButtonsPosition_TOP_AND_BOTTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOP_AND_BOTTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormButtonsPosition_TOP_AND_BOTTOM})
+var sFormCTA = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormCTA, Members: &mFormCTA, Type: smithy.ShapeTypeStructure, Ext: &eFormCTA})
+var sFormCTA_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &iFormButtonsPosition, Members: &mFormButtonsPosition, Type: smithy.ShapeTypeEnum, Ext: &eFormCTA_position})
+var sFormCTA_clear = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clear", ID: &iFormButton, Members: &mFormButton, Type: smithy.ShapeTypeStructure, Ext: &eFormCTA_clear})
+var sFormCTA_cancel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancel", ID: &iFormButton, Members: &mFormButton, Type: smithy.ShapeTypeStructure, Ext: &eFormCTA_cancel})
+var sFormCTA_submit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submit", ID: &iFormButton, Members: &mFormButton, Type: smithy.ShapeTypeStructure, Ext: &eFormCTA_submit})
+var s_FormDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormDataSourceType, Type: smithy.ShapeTypeString, Ext: &e_FormDataSourceType})
+var sFormDataTypeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormDataTypeConfig, Members: &mFormDataTypeConfig, Type: smithy.ShapeTypeStructure, Ext: &eFormDataTypeConfig})
+var sFormDataTypeConfig_dataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceType", ID: &i_FormDataSourceType, Type: smithy.ShapeTypeString, Ext: &eFormDataTypeConfig_dataSourceType})
+var sFormDataTypeConfig_dataTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTypeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormDataTypeConfig_dataTypeName})
+var s_FormInputBindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormInputBindingProperties, Members: &m_FormInputBindingProperties, Type: smithy.ShapeTypeMap, Ext: &e_FormInputBindingProperties})
+var s_FormInputBindingProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FormInputBindingProperties_key})
+var s_FormInputBindingProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFormInputBindingPropertiesValue, Members: &mFormInputBindingPropertiesValue, Type: smithy.ShapeTypeStructure, Ext: &e_FormInputBindingProperties_value})
+var sFormInputBindingPropertiesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormInputBindingPropertiesValue, Members: &mFormInputBindingPropertiesValue, Type: smithy.ShapeTypeStructure, Ext: &eFormInputBindingPropertiesValue})
+var sFormInputBindingPropertiesValue_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormInputBindingPropertiesValue_type})
+var sFormInputBindingPropertiesValue_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &iFormInputBindingPropertiesValueProperties, Members: &mFormInputBindingPropertiesValueProperties, Type: smithy.ShapeTypeStructure, Ext: &eFormInputBindingPropertiesValue_bindingProperties})
+var sFormInputBindingPropertiesValueProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormInputBindingPropertiesValueProperties, Members: &mFormInputBindingPropertiesValueProperties, Type: smithy.ShapeTypeStructure, Ext: &eFormInputBindingPropertiesValueProperties})
+var sFormInputBindingPropertiesValueProperties_model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "model", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormInputBindingPropertiesValueProperties_model})
+var sFormInputValueProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormInputValueProperty, Members: &mFormInputValueProperty, Type: smithy.ShapeTypeStructure, Ext: &eFormInputValueProperty})
+var sFormInputValueProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormInputValueProperty_value})
+var sFormInputValueProperty_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &iFormInputValuePropertyBindingProperties, Members: &mFormInputValuePropertyBindingProperties, Type: smithy.ShapeTypeStructure, Ext: &eFormInputValueProperty_bindingProperties})
+var sFormInputValueProperty_concat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "concat", ID: &i_FormInputValuePropertyList, Members: &m_FormInputValuePropertyList, Type: smithy.ShapeTypeList, Ext: &eFormInputValueProperty_concat})
+var sFormInputValuePropertyBindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormInputValuePropertyBindingProperties, Members: &mFormInputValuePropertyBindingProperties, Type: smithy.ShapeTypeStructure, Ext: &eFormInputValuePropertyBindingProperties})
+var sFormInputValuePropertyBindingProperties_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormInputValuePropertyBindingProperties_property})
+var sFormInputValuePropertyBindingProperties_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormInputValuePropertyBindingProperties_field})
+var s_FormInputValuePropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormInputValuePropertyList, Members: &m_FormInputValuePropertyList, Type: smithy.ShapeTypeList, Ext: &e_FormInputValuePropertyList})
+var s_FormInputValuePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFormInputValueProperty, Type: smithy.ShapeTypeStructure, Ext: &e_FormInputValuePropertyList_member})
+var s_FormList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormList, Members: &m_FormList, Type: smithy.ShapeTypeList, Ext: &e_FormList})
+var s_FormList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iForm, Members: &mForm, Type: smithy.ShapeTypeStructure, Ext: &e_FormList_member})
+var s_FormName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormName, Type: smithy.ShapeTypeString, Ext: &e_FormName})
+var sFormStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormStyle, Members: &mFormStyle, Type: smithy.ShapeTypeStructure, Ext: &eFormStyle})
+var sFormStyle_horizontalGap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "horizontalGap", ID: &iFormStyleConfig, Members: &mFormStyleConfig, Type: smithy.ShapeTypeUnion, Ext: &eFormStyle_horizontalGap})
+var sFormStyle_verticalGap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verticalGap", ID: &iFormStyleConfig, Members: &mFormStyleConfig, Type: smithy.ShapeTypeUnion, Ext: &eFormStyle_verticalGap})
+var sFormStyle_outerPadding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outerPadding", ID: &iFormStyleConfig, Members: &mFormStyleConfig, Type: smithy.ShapeTypeUnion, Ext: &eFormStyle_outerPadding})
+var sFormStyleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormStyleConfig, Members: &mFormStyleConfig, Type: smithy.ShapeTypeUnion, Ext: &eFormStyleConfig})
+var sFormStyleConfig_tokenReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenReference", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormStyleConfig_tokenReference})
+var sFormStyleConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormStyleConfig_value})
+var sFormSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormSummary, Members: &mFormSummary, Type: smithy.ShapeTypeStructure, Ext: &eFormSummary})
+var sFormSummary_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormSummary_appId})
+var sFormSummary_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iFormDataTypeConfig, Members: &mFormDataTypeConfig, Type: smithy.ShapeTypeStructure, Ext: &eFormSummary_dataType})
+var sFormSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFormSummary_environmentName})
+var sFormSummary_formActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formActionType", ID: &iFormActionType, Members: &mFormActionType, Type: smithy.ShapeTypeEnum, Ext: &eFormSummary_formActionType})
+var sFormSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eFormSummary_id})
+var sFormSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FormName, Type: smithy.ShapeTypeString, Ext: &eFormSummary_name})
+var s_FormSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormSummaryList, Members: &m_FormSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FormSummaryList})
+var s_FormSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFormSummary, Members: &mFormSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FormSummaryList_member})
+var sGenericDataRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenericDataRelationshipType, Members: &mGenericDataRelationshipType, Type: smithy.ShapeTypeEnum, Ext: &eGenericDataRelationshipType})
+var sGenericDataRelationshipType_HAS_MANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAS_MANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGenericDataRelationshipType_HAS_MANY})
+var sGenericDataRelationshipType_HAS_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAS_ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGenericDataRelationshipType_HAS_ONE})
+var sGenericDataRelationshipType_BELONGS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BELONGS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGenericDataRelationshipType_BELONGS_TO})
+var sGraphQLRenderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphQLRenderConfig, Members: &mGraphQLRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eGraphQLRenderConfig})
+var sGraphQLRenderConfig_typesFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typesFilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGraphQLRenderConfig_typesFilePath})
+var sGraphQLRenderConfig_queriesFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queriesFilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGraphQLRenderConfig_queriesFilePath})
+var sGraphQLRenderConfig_mutationsFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mutationsFilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGraphQLRenderConfig_mutationsFilePath})
+var sGraphQLRenderConfig_subscriptionsFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionsFilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGraphQLRenderConfig_subscriptionsFilePath})
+var sGraphQLRenderConfig_fragmentsFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fragmentsFilePath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGraphQLRenderConfig_fragmentsFilePath})
+var s_IdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentifierList, Members: &m_IdentifierList, Type: smithy.ShapeTypeList, Ext: &e_IdentifierList})
+var s_IdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_IdentifierList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sJSModule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJSModule, Members: &mJSModule, Type: smithy.ShapeTypeEnum, Ext: &eJSModule})
+var sJSModule_ES2020 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES2020", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSModule_ES2020})
+var sJSModule_ESNEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ESNEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSModule_ESNEXT})
+var sJSScript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJSScript, Members: &mJSScript, Type: smithy.ShapeTypeEnum, Ext: &eJSScript})
+var sJSScript_JSX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSScript_JSX})
+var sJSScript_TSX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TSX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSScript_TSX})
+var sJSScript_JS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSScript_JS})
+var sJSTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJSTarget, Members: &mJSTarget, Type: smithy.ShapeTypeEnum, Ext: &eJSTarget})
+var sJSTarget_ES2015 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES2015", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSTarget_ES2015})
+var sJSTarget_ES2020 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES2020", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJSTarget_ES2020})
+var s_LabelDecorator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelDecorator, Type: smithy.ShapeTypeString, Ext: &e_LabelDecorator})
+var s_ListCodegenJobsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListCodegenJobsLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListCodegenJobsLimit})
+var s_ListEntityLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEntityLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListEntityLimit})
+var sMutationActionSetStateParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMutationActionSetStateParameter, Members: &mMutationActionSetStateParameter, Type: smithy.ShapeTypeStructure, Ext: &eMutationActionSetStateParameter})
+var sMutationActionSetStateParameter_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMutationActionSetStateParameter_componentName})
+var sMutationActionSetStateParameter_property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "property", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMutationActionSetStateParameter_property})
+var sMutationActionSetStateParameter_set = smithy.NewStaticSchema(smithy.StaticSchema{Member: "set", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eMutationActionSetStateParameter_set})
+var sNoApiRenderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoApiRenderConfig, Type: smithy.ShapeTypeStructure, Ext: &eNoApiRenderConfig})
+var s_NumValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumValues, Members: &m_NumValues, Type: smithy.ShapeTypeList, Ext: &e_NumValues})
+var s_NumValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_NumValues_member})
+var s_OperandType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperandType, Type: smithy.ShapeTypeString, Ext: &e_OperandType})
+var sPredicate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &ePredicate})
+var sPredicate_or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "or", ID: &i_PredicateList, Type: smithy.ShapeTypeList, Ext: &ePredicate_or})
+var sPredicate_and = smithy.NewStaticSchema(smithy.StaticSchema{Member: "and", ID: &i_PredicateList, Type: smithy.ShapeTypeList, Ext: &ePredicate_and})
+var sPredicate_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePredicate_field})
+var sPredicate_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePredicate_operator})
+var sPredicate_operand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operand", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePredicate_operand})
+var sPredicate_operandType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operandType", ID: &i_OperandType, Type: smithy.ShapeTypeString, Ext: &ePredicate_operandType})
+var s_PredicateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredicateList, Members: &m_PredicateList, Type: smithy.ShapeTypeList, Ext: &e_PredicateList})
+var s_PredicateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredicate, Members: &mPredicate, Type: smithy.ShapeTypeStructure, Ext: &e_PredicateList_member})
+var sPutMetadataFlagBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetadataFlagBody, Members: &mPutMetadataFlagBody, Type: smithy.ShapeTypeStructure, Ext: &ePutMetadataFlagBody})
+var sPutMetadataFlagBody_newValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutMetadataFlagBody_newValue})
+var s_ReactCodegenDependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactCodegenDependencies, Members: &m_ReactCodegenDependencies, Type: smithy.ShapeTypeMap, Ext: &e_ReactCodegenDependencies})
+var s_ReactCodegenDependencies_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ReactCodegenDependencies_key})
+var s_ReactCodegenDependencies_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ReactCodegenDependencies_value})
+var sReactStartCodegenJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactStartCodegenJobData, Members: &mReactStartCodegenJobData, Type: smithy.ShapeTypeStructure, Ext: &eReactStartCodegenJobData})
+var sReactStartCodegenJobData_module = smithy.NewStaticSchema(smithy.StaticSchema{Member: "module", ID: &iJSModule, Members: &mJSModule, Type: smithy.ShapeTypeEnum, Ext: &eReactStartCodegenJobData_module})
+var sReactStartCodegenJobData_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &iJSTarget, Members: &mJSTarget, Type: smithy.ShapeTypeEnum, Ext: &eReactStartCodegenJobData_target})
+var sReactStartCodegenJobData_script = smithy.NewStaticSchema(smithy.StaticSchema{Member: "script", ID: &iJSScript, Members: &mJSScript, Type: smithy.ShapeTypeEnum, Ext: &eReactStartCodegenJobData_script})
+var sReactStartCodegenJobData_renderTypeDeclarations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renderTypeDeclarations", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReactStartCodegenJobData_renderTypeDeclarations})
+var sReactStartCodegenJobData_inlineSourceMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineSourceMap", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eReactStartCodegenJobData_inlineSourceMap})
+var sReactStartCodegenJobData_apiConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiConfiguration", ID: &iApiConfiguration, Members: &mApiConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eReactStartCodegenJobData_apiConfiguration})
+var sReactStartCodegenJobData_dependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependencies", ID: &i_ReactCodegenDependencies, Members: &m_ReactCodegenDependencies, Type: smithy.ShapeTypeMap, Ext: &eReactStartCodegenJobData_dependencies})
+var sRefreshTokenRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTokenRequestBody, Members: &mRefreshTokenRequestBody, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTokenRequestBody})
+var sRefreshTokenRequestBody_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eRefreshTokenRequestBody_token})
+var sRefreshTokenRequestBody_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eRefreshTokenRequestBody_clientId})
+var s_RelatedModelFieldsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedModelFieldsList, Members: &m_RelatedModelFieldsList, Type: smithy.ShapeTypeList, Ext: &e_RelatedModelFieldsList})
+var s_RelatedModelFieldsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_RelatedModelFieldsList_member})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflictException})
+var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceConflictException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sSectionalElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSectionalElement, Members: &mSectionalElement, Type: smithy.ShapeTypeStructure, Ext: &eSectionalElement})
+var sSectionalElement_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSectionalElement_type})
+var sSectionalElement_position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "position", ID: &iFieldPosition, Members: &mFieldPosition, Type: smithy.ShapeTypeUnion, Ext: &eSectionalElement_position})
+var sSectionalElement_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSectionalElement_text})
+var sSectionalElement_level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "level", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSectionalElement_level})
+var sSectionalElement_orientation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orientation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSectionalElement_orientation})
+var sSectionalElement_excluded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excluded", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSectionalElement_excluded})
+var s_SectionalElementMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SectionalElementMap, Members: &m_SectionalElementMap, Type: smithy.ShapeTypeMap, Ext: &e_SectionalElementMap})
+var s_SectionalElementMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SectionalElementMap_key})
+var s_SectionalElementMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSectionalElement, Members: &mSectionalElement, Type: smithy.ShapeTypeStructure, Ext: &e_SectionalElementMap_value})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSortDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortDirection, Members: &mSortDirection, Type: smithy.ShapeTypeEnum, Ext: &eSortDirection})
+var sSortDirection_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortDirection_ASC})
+var sSortDirection_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortDirection_DESC})
+var sSortProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortProperty, Members: &mSortProperty, Type: smithy.ShapeTypeStructure, Ext: &eSortProperty})
+var sSortProperty_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSortProperty_field})
+var sSortProperty_direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "direction", ID: &iSortDirection, Members: &mSortDirection, Type: smithy.ShapeTypeEnum, Ext: &eSortProperty_direction})
+var s_SortPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortPropertyList, Members: &m_SortPropertyList, Type: smithy.ShapeTypeList, Ext: &e_SortPropertyList})
+var s_SortPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSortProperty, Members: &mSortProperty, Type: smithy.ShapeTypeStructure, Ext: &e_SortPropertyList_member})
+var sStartCodegenJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCodegenJobData, Members: &mStartCodegenJobData, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobData})
+var sStartCodegenJobData_renderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renderConfig", ID: &iCodegenJobRenderConfig, Members: &mCodegenJobRenderConfig, Type: smithy.ShapeTypeUnion, Ext: &eStartCodegenJobData_renderConfig})
+var sStartCodegenJobData_genericDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "genericDataSchema", ID: &iCodegenJobGenericDataSchema, Members: &mCodegenJobGenericDataSchema, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobData_genericDataSchema})
+var sStartCodegenJobData_autoGenerateForms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoGenerateForms", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartCodegenJobData_autoGenerateForms})
+var sStartCodegenJobData_features = smithy.NewStaticSchema(smithy.StaticSchema{Member: "features", ID: &iCodegenFeatureFlags, Members: &mCodegenFeatureFlags, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobData_features})
+var sStartCodegenJobData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStartCodegenJobData_tags})
+var sStorageAccessLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageAccessLevel, Members: &mStorageAccessLevel, Type: smithy.ShapeTypeEnum, Ext: &eStorageAccessLevel})
+var sStorageAccessLevel_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageAccessLevel_PUBLIC})
+var sStorageAccessLevel_PROTECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageAccessLevel_PROTECTED})
+var sStorageAccessLevel_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageAccessLevel_PRIVATE})
+var s_StrValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StrValues, Members: &m_StrValues, Type: smithy.ShapeTypeList, Ext: &e_StrValues})
+var s_StrValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StrValues_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &eTheme})
+var sTheme_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTheme_appId})
+var sTheme_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTheme_environmentName})
+var sTheme_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eTheme_id})
+var sTheme_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ThemeName, Type: smithy.ShapeTypeString, Ext: &eTheme_name})
+var sTheme_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eTheme_createdAt})
+var sTheme_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eTheme_modifiedAt})
+var sTheme_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eTheme_values})
+var sTheme_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eTheme_overrides})
+var sTheme_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTheme_tags})
+var s_ThemeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeList, Members: &m_ThemeList, Type: smithy.ShapeTypeList, Ext: &e_ThemeList})
+var s_ThemeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTheme, Members: &mTheme, Type: smithy.ShapeTypeStructure, Ext: &e_ThemeList_member})
+var s_ThemeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeName, Type: smithy.ShapeTypeString, Ext: &e_ThemeName})
+var sThemeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeSummary, Members: &mThemeSummary, Type: smithy.ShapeTypeStructure, Ext: &eThemeSummary})
+var sThemeSummary_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThemeSummary_appId})
+var sThemeSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThemeSummary_environmentName})
+var sThemeSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eThemeSummary_id})
+var sThemeSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ThemeName, Type: smithy.ShapeTypeString, Ext: &eThemeSummary_name})
+var s_ThemeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeSummaryList, Members: &m_ThemeSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ThemeSummaryList})
+var s_ThemeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThemeSummary, Members: &mThemeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ThemeSummaryList_member})
+var sThemeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeValue, Members: &mThemeValue, Type: smithy.ShapeTypeStructure, Ext: &eThemeValue})
+var sThemeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThemeValue_value})
+var sThemeValue_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eThemeValue_children})
+var sThemeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThemeValues, Members: &mThemeValues, Type: smithy.ShapeTypeStructure, Ext: &eThemeValues})
+var sThemeValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThemeValues_key})
+var sThemeValues_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iThemeValue, Members: &mThemeValue, Type: smithy.ShapeTypeStructure, Ext: &eThemeValues_value})
+var s_ThemeValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &e_ThemeValuesList})
+var s_ThemeValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThemeValues, Members: &mThemeValues, Type: smithy.ShapeTypeStructure, Ext: &e_ThemeValuesList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_TokenProviders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenProviders, Type: smithy.ShapeTypeString, Ext: &e_TokenProviders})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sUpdateComponentData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentData, Members: &mUpdateComponentData, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentData})
+var sUpdateComponentData_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentData_id})
+var sUpdateComponentData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComponentName, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentData_name})
+var sUpdateComponentData_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentData_sourceId})
+var sUpdateComponentData_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentData_componentType})
+var sUpdateComponentData_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ComponentProperties, Members: &m_ComponentProperties, Type: smithy.ShapeTypeMap, Ext: &eUpdateComponentData_properties})
+var sUpdateComponentData_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ComponentChildList, Members: &m_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &eUpdateComponentData_children})
+var sUpdateComponentData_variants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variants", ID: &i_ComponentVariants, Members: &m_ComponentVariants, Type: smithy.ShapeTypeList, Ext: &eUpdateComponentData_variants})
+var sUpdateComponentData_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ComponentOverrides, Members: &m_ComponentOverrides, Type: smithy.ShapeTypeMap, Ext: &eUpdateComponentData_overrides})
+var sUpdateComponentData_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &i_ComponentBindingProperties, Members: &m_ComponentBindingProperties, Type: smithy.ShapeTypeMap, Ext: &eUpdateComponentData_bindingProperties})
+var sUpdateComponentData_collectionProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionProperties", ID: &i_ComponentCollectionProperties, Members: &m_ComponentCollectionProperties, Type: smithy.ShapeTypeMap, Ext: &eUpdateComponentData_collectionProperties})
+var sUpdateComponentData_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_ComponentEvents, Members: &m_ComponentEvents, Type: smithy.ShapeTypeMap, Ext: &eUpdateComponentData_events})
+var sUpdateComponentData_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentData_schemaVersion})
+var sUpdateFormData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFormData, Members: &mUpdateFormData, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormData})
+var sUpdateFormData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FormName, Type: smithy.ShapeTypeString, Ext: &eUpdateFormData_name})
+var sUpdateFormData_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iFormDataTypeConfig, Members: &mFormDataTypeConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormData_dataType})
+var sUpdateFormData_formActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formActionType", ID: &iFormActionType, Members: &mFormActionType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFormData_formActionType})
+var sUpdateFormData_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldsMap, Members: &m_FieldsMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateFormData_fields})
+var sUpdateFormData_style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "style", ID: &iFormStyle, Members: &mFormStyle, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormData_style})
+var sUpdateFormData_sectionalElements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sectionalElements", ID: &i_SectionalElementMap, Members: &m_SectionalElementMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateFormData_sectionalElements})
+var sUpdateFormData_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateFormData_schemaVersion})
+var sUpdateFormData_cta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cta", ID: &iFormCTA, Members: &mFormCTA, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormData_cta})
+var sUpdateFormData_labelDecorator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelDecorator", ID: &i_LabelDecorator, Type: smithy.ShapeTypeString, Ext: &eUpdateFormData_labelDecorator})
+var sUpdateThemeData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeData, Members: &mUpdateThemeData, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeData})
+var sUpdateThemeData_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeData_id})
+var sUpdateThemeData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ThemeName, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeData_name})
+var sUpdateThemeData_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eUpdateThemeData_values})
+var sUpdateThemeData_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eUpdateThemeData_overrides})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var s_ValidationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationsList, Members: &m_ValidationsList, Type: smithy.ShapeTypeList, Ext: &e_ValidationsList})
+var s_ValidationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldValidationConfiguration, Members: &mFieldValidationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationsList_member})
+var sValueMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValueMapping, Members: &mValueMapping, Type: smithy.ShapeTypeStructure, Ext: &eValueMapping})
+var sValueMapping_displayValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayValue", ID: &iFormInputValueProperty, Members: &mFormInputValueProperty, Type: smithy.ShapeTypeStructure, Ext: &eValueMapping_displayValue})
+var sValueMapping_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFormInputValueProperty, Members: &mFormInputValueProperty, Type: smithy.ShapeTypeStructure, Ext: &eValueMapping_value})
+var s_ValueMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueMappingList, Members: &m_ValueMappingList, Type: smithy.ShapeTypeList, Ext: &e_ValueMappingList})
+var s_ValueMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValueMapping, Members: &mValueMapping, Type: smithy.ShapeTypeStructure, Ext: &e_ValueMappingList_member})
+var sValueMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValueMappings, Members: &mValueMappings, Type: smithy.ShapeTypeStructure, Ext: &eValueMappings})
+var sValueMappings_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ValueMappingList, Members: &m_ValueMappingList, Type: smithy.ShapeTypeList, Ext: &eValueMappings_values})
+var sValueMappings_bindingProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bindingProperties", ID: &i_FormInputBindingProperties, Members: &m_FormInputBindingProperties, Type: smithy.ShapeTypeMap, Ext: &eValueMappings_bindingProperties})
+var sCreateComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentRequest, Members: &mCreateComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentRequest})
+var sCreateComponentRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateComponentRequest_appId})
+var sCreateComponentRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateComponentRequest_environmentName})
+var sCreateComponentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateComponentRequest_clientToken})
+var sCreateComponentRequest_componentToCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentToCreate", ID: &iCreateComponentData, Members: &mCreateComponentData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentRequest_componentToCreate})
+var sCreateComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentResponse, Members: &mCreateComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentResponse})
+var sCreateComponentResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iComponent, Members: &mComponent, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateComponentResponse_entity})
+var sCreateFormRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFormRequest, Members: &mCreateFormRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormRequest})
+var sCreateFormRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateFormRequest_appId})
+var sCreateFormRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateFormRequest_environmentName})
+var sCreateFormRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateFormRequest_clientToken})
+var sCreateFormRequest_formToCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formToCreate", ID: &iCreateFormData, Members: &mCreateFormData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormRequest_formToCreate})
+var sCreateFormResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFormResponse, Members: &mCreateFormResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormResponse})
+var sCreateFormResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iForm, Members: &mForm, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateFormResponse_entity})
+var sCreateThemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeRequest, Members: &mCreateThemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeRequest})
+var sCreateThemeRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateThemeRequest_appId})
+var sCreateThemeRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateThemeRequest_environmentName})
+var sCreateThemeRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateThemeRequest_clientToken})
+var sCreateThemeRequest_themeToCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "themeToCreate", ID: &iCreateThemeData, Members: &mCreateThemeData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeRequest_themeToCreate})
+var sCreateThemeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateThemeResponse, Members: &mCreateThemeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeResponse})
+var sCreateThemeResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iTheme, Members: &mTheme, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateThemeResponse_entity})
+var sDeleteComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentRequest, Members: &mDeleteComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteComponentRequest})
+var sDeleteComponentRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteComponentRequest_appId})
+var sDeleteComponentRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteComponentRequest_environmentName})
+var sDeleteComponentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteComponentRequest_id})
+var sDeleteFormRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFormRequest, Members: &mDeleteFormRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFormRequest})
+var sDeleteFormRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteFormRequest_appId})
+var sDeleteFormRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteFormRequest_environmentName})
+var sDeleteFormRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteFormRequest_id})
+var sDeleteThemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteThemeRequest, Members: &mDeleteThemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteThemeRequest})
+var sDeleteThemeRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteThemeRequest_appId})
+var sDeleteThemeRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteThemeRequest_environmentName})
+var sDeleteThemeRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteThemeRequest_id})
+var sExchangeCodeForTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExchangeCodeForTokenRequest, Members: &mExchangeCodeForTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eExchangeCodeForTokenRequest})
+var sExchangeCodeForTokenRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_TokenProviders, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenRequest_provider})
+var sExchangeCodeForTokenRequest_request = smithy.NewStaticSchema(smithy.StaticSchema{Member: "request", ID: &iExchangeCodeForTokenRequestBody, Members: &mExchangeCodeForTokenRequestBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eExchangeCodeForTokenRequest_request})
+var sExchangeCodeForTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExchangeCodeForTokenResponse, Members: &mExchangeCodeForTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eExchangeCodeForTokenResponse})
+var sExchangeCodeForTokenResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenResponse_accessToken})
+var sExchangeCodeForTokenResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eExchangeCodeForTokenResponse_expiresIn})
+var sExchangeCodeForTokenResponse_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eExchangeCodeForTokenResponse_refreshToken})
+var sExportComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportComponentsRequest, Members: &mExportComponentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eExportComponentsRequest})
+var sExportComponentsRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportComponentsRequest_appId})
+var sExportComponentsRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportComponentsRequest_environmentName})
+var sExportComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eExportComponentsRequest_nextToken})
+var sExportComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportComponentsResponse, Members: &mExportComponentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eExportComponentsResponse})
+var sExportComponentsResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_ComponentList, Members: &m_ComponentList, Type: smithy.ShapeTypeList, Ext: &eExportComponentsResponse_entities})
+var sExportComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportComponentsResponse_nextToken})
+var sExportFormsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFormsRequest, Members: &mExportFormsRequest, Type: smithy.ShapeTypeStructure, Ext: &eExportFormsRequest})
+var sExportFormsRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportFormsRequest_appId})
+var sExportFormsRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportFormsRequest_environmentName})
+var sExportFormsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eExportFormsRequest_nextToken})
+var sExportFormsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFormsResponse, Members: &mExportFormsResponse, Type: smithy.ShapeTypeStructure, Ext: &eExportFormsResponse})
+var sExportFormsResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_FormList, Members: &m_FormList, Type: smithy.ShapeTypeList, Ext: &eExportFormsResponse_entities})
+var sExportFormsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportFormsResponse_nextToken})
+var sExportThemesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportThemesRequest, Members: &mExportThemesRequest, Type: smithy.ShapeTypeStructure, Ext: &eExportThemesRequest})
+var sExportThemesRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportThemesRequest_appId})
+var sExportThemesRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eExportThemesRequest_environmentName})
+var sExportThemesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eExportThemesRequest_nextToken})
+var sExportThemesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportThemesResponse, Members: &mExportThemesResponse, Type: smithy.ShapeTypeStructure, Ext: &eExportThemesResponse})
+var sExportThemesResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_ThemeList, Members: &m_ThemeList, Type: smithy.ShapeTypeList, Ext: &eExportThemesResponse_entities})
+var sExportThemesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportThemesResponse_nextToken})
+var sGetCodegenJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodegenJobRequest, Members: &mGetCodegenJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCodegenJobRequest})
+var sGetCodegenJobRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_AppId, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetCodegenJobRequest_appId})
+var sGetCodegenJobRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetCodegenJobRequest_environmentName})
+var sGetCodegenJobRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetCodegenJobRequest_id})
+var sGetCodegenJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodegenJobResponse, Members: &mGetCodegenJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCodegenJobResponse})
+var sGetCodegenJobResponse_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &iCodegenJob, Members: &mCodegenJob, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eGetCodegenJobResponse_job})
+var sGetComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentRequest, Members: &mGetComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetComponentRequest})
+var sGetComponentRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetComponentRequest_appId})
+var sGetComponentRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetComponentRequest_environmentName})
+var sGetComponentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetComponentRequest_id})
+var sGetComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentResponse, Members: &mGetComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetComponentResponse})
+var sGetComponentResponse_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eGetComponentResponse_component})
+var sGetFormRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFormRequest, Members: &mGetFormRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFormRequest})
+var sGetFormRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetFormRequest_appId})
+var sGetFormRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetFormRequest_environmentName})
+var sGetFormRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetFormRequest_id})
+var sGetFormResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFormResponse, Members: &mGetFormResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFormResponse})
+var sGetFormResponse_form = smithy.NewStaticSchema(smithy.StaticSchema{Member: "form", ID: &iForm, Members: &mForm, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eGetFormResponse_form})
+var sGetMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadataRequest, Members: &mGetMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMetadataRequest})
+var sGetMetadataRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetMetadataRequest_appId})
+var sGetMetadataRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetMetadataRequest_environmentName})
+var sGetMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadataResponse, Members: &mGetMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMetadataResponse})
+var sGetMetadataResponse_features = smithy.NewStaticSchema(smithy.StaticSchema{Member: "features", ID: &i_FeaturesMap, Members: &m_FeaturesMap, Type: smithy.ShapeTypeMap, Ext: &eGetMetadataResponse_features})
+var sGetThemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThemeRequest, Members: &mGetThemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetThemeRequest})
+var sGetThemeRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetThemeRequest_appId})
+var sGetThemeRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetThemeRequest_environmentName})
+var sGetThemeRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetThemeRequest_id})
+var sGetThemeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThemeResponse, Members: &mGetThemeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetThemeResponse})
+var sGetThemeResponse_theme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "theme", ID: &iTheme, Members: &mTheme, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eGetThemeResponse_theme})
+var sListCodegenJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodegenJobsRequest, Members: &mListCodegenJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCodegenJobsRequest})
+var sListCodegenJobsRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_AppId, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListCodegenJobsRequest_appId})
+var sListCodegenJobsRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListCodegenJobsRequest_environmentName})
+var sListCodegenJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListCodegenJobsRequest_nextToken})
+var sListCodegenJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListCodegenJobsLimit, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eListCodegenJobsRequest_maxResults})
+var sListCodegenJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodegenJobsResponse, Members: &mListCodegenJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCodegenJobsResponse})
+var sListCodegenJobsResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_CodegenJobSummaryList, Members: &m_CodegenJobSummaryList, Type: smithy.ShapeTypeList, Ext: &eListCodegenJobsResponse_entities})
+var sListCodegenJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListCodegenJobsResponse_nextToken})
+var sListComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsRequest, Members: &mListComponentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListComponentsRequest})
+var sListComponentsRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_appId})
+var sListComponentsRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_environmentName})
+var sListComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListComponentsRequest_nextToken})
+var sListComponentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEntityLimit, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eListComponentsRequest_maxResults})
+var sListComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsResponse, Members: &mListComponentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListComponentsResponse})
+var sListComponentsResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_ComponentSummaryList, Members: &m_ComponentSummaryList, Type: smithy.ShapeTypeList, Ext: &eListComponentsResponse_entities})
+var sListComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListComponentsResponse_nextToken})
+var sListFormsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFormsRequest, Members: &mListFormsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFormsRequest})
+var sListFormsRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListFormsRequest_appId})
+var sListFormsRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListFormsRequest_environmentName})
+var sListFormsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListFormsRequest_nextToken})
+var sListFormsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEntityLimit, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eListFormsRequest_maxResults})
+var sListFormsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFormsResponse, Members: &mListFormsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFormsResponse})
+var sListFormsResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_FormSummaryList, Members: &m_FormSummaryList, Type: smithy.ShapeTypeList, Ext: &eListFormsResponse_entities})
+var sListFormsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFormsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListThemesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThemesRequest, Members: &mListThemesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListThemesRequest})
+var sListThemesRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListThemesRequest_appId})
+var sListThemesRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListThemesRequest_environmentName})
+var sListThemesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListThemesRequest_nextToken})
+var sListThemesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEntityLimit, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eListThemesRequest_maxResults})
+var sListThemesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThemesResponse, Members: &mListThemesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListThemesResponse})
+var sListThemesResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_ThemeSummaryList, Members: &m_ThemeSummaryList, Type: smithy.ShapeTypeList, Ext: &eListThemesResponse_entities})
+var sListThemesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListThemesResponse_nextToken})
+var sPutMetadataFlagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetadataFlagRequest, Members: &mPutMetadataFlagRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutMetadataFlagRequest})
+var sPutMetadataFlagRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ePutMetadataFlagRequest_appId})
+var sPutMetadataFlagRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ePutMetadataFlagRequest_environmentName})
+var sPutMetadataFlagRequest_featureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "featureName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ePutMetadataFlagRequest_featureName})
+var sPutMetadataFlagRequest_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &iPutMetadataFlagBody, Members: &mPutMetadataFlagBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &ePutMetadataFlagRequest_body})
+var sRefreshTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTokenRequest, Members: &mRefreshTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTokenRequest})
+var sRefreshTokenRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_TokenProviders, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eRefreshTokenRequest_provider})
+var sRefreshTokenRequest_refreshTokenBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshTokenBody", ID: &iRefreshTokenRequestBody, Members: &mRefreshTokenRequestBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTokenRequest_refreshTokenBody})
+var sRefreshTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTokenResponse, Members: &mRefreshTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTokenResponse})
+var sRefreshTokenResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_SensitiveString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eRefreshTokenResponse_accessToken})
+var sRefreshTokenResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRefreshTokenResponse_expiresIn})
+var sStartCodegenJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCodegenJobRequest, Members: &mStartCodegenJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobRequest})
+var sStartCodegenJobRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_AppId, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStartCodegenJobRequest_appId})
+var sStartCodegenJobRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStartCodegenJobRequest_environmentName})
+var sStartCodegenJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eStartCodegenJobRequest_clientToken})
+var sStartCodegenJobRequest_codegenJobToCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codegenJobToCreate", ID: &iStartCodegenJobData, Members: &mStartCodegenJobData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobRequest_codegenJobToCreate})
+var sStartCodegenJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCodegenJobResponse, Members: &mStartCodegenJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobResponse})
+var sStartCodegenJobResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iCodegenJob, Members: &mCodegenJob, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eStartCodegenJobResponse_entity})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t43, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentRequest, Members: &mUpdateComponentRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentRequest})
+var sUpdateComponentRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_appId})
+var sUpdateComponentRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_environmentName})
+var sUpdateComponentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_id})
+var sUpdateComponentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateComponentRequest_clientToken})
+var sUpdateComponentRequest_updatedComponent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedComponent", ID: &iUpdateComponentData, Members: &mUpdateComponentData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentRequest_updatedComponent})
+var sUpdateComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentResponse, Members: &mUpdateComponentResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentResponse})
+var sUpdateComponentResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iComponent, Members: &mComponent, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComponentResponse_entity})
+var sUpdateFormRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFormRequest, Members: &mUpdateFormRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormRequest})
+var sUpdateFormRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateFormRequest_appId})
+var sUpdateFormRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateFormRequest_environmentName})
+var sUpdateFormRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateFormRequest_id})
+var sUpdateFormRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateFormRequest_clientToken})
+var sUpdateFormRequest_updatedForm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedForm", ID: &iUpdateFormData, Members: &mUpdateFormData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormRequest_updatedForm})
+var sUpdateFormResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFormResponse, Members: &mUpdateFormResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormResponse})
+var sUpdateFormResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iForm, Members: &mForm, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFormResponse_entity})
+var sUpdateThemeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeRequest, Members: &mUpdateThemeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeRequest})
+var sUpdateThemeRequest_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeRequest_appId})
+var sUpdateThemeRequest_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeRequest_environmentName})
+var sUpdateThemeRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeRequest_id})
+var sUpdateThemeRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateThemeRequest_clientToken})
+var sUpdateThemeRequest_updatedTheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedTheme", ID: &iUpdateThemeData, Members: &mUpdateThemeData, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeRequest_updatedTheme})
+var sUpdateThemeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateThemeResponse, Members: &mUpdateThemeResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeResponse})
+var sUpdateThemeResponse_entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entity", ID: &iTheme, Members: &mTheme, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateThemeResponse_entity})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	ComponentPropertyBindingProperties_property = ComponentPropertyBindingProperties.AddMember("property", smithyprelude.String)
-
-	ComponentPropertyBindingProperties_field = ComponentPropertyBindingProperties.AddMember("field", smithyprelude.String)
-
-	FormBindingElement_element = FormBindingElement.AddMember("element", smithyprelude.String)
-
-	FormBindingElement_property = FormBindingElement.AddMember("property", smithyprelude.String)
-
-	_FormBindings_key = _FormBindings.AddMember("key", smithyprelude.String)
-
-	_FormBindings_value = _FormBindings.AddMember("value", FormBindingElement)
-
-	_ComponentPropertyList_member = _ComponentPropertyList.AddMember("member", ComponentProperty)
-
-	ComponentConditionProperty_property = ComponentConditionProperty.AddMember("property", smithyprelude.String)
-
-	ComponentConditionProperty_field = ComponentConditionProperty.AddMember("field", smithyprelude.String)
-
-	ComponentConditionProperty_operator = ComponentConditionProperty.AddMember("operator", smithyprelude.String)
-
-	ComponentConditionProperty_operand = ComponentConditionProperty.AddMember("operand", smithyprelude.String)
-
-	ComponentConditionProperty_then = ComponentConditionProperty.AddMember("then", ComponentProperty)
-
-	ComponentConditionProperty_else = ComponentConditionProperty.AddMember("else", ComponentProperty)
-
-	ComponentConditionProperty_operandType = ComponentConditionProperty.AddMember("operandType", smithyprelude.String)
-
-	ComponentProperty_value = ComponentProperty.AddMember("value", smithyprelude.String)
-
-	ComponentProperty_bindingProperties = ComponentProperty.AddMember("bindingProperties", ComponentPropertyBindingProperties)
-
-	ComponentProperty_collectionBindingProperties = ComponentProperty.AddMember("collectionBindingProperties", ComponentPropertyBindingProperties)
-
-	ComponentProperty_defaultValue = ComponentProperty.AddMember("defaultValue", smithyprelude.String)
-
-	ComponentProperty_model = ComponentProperty.AddMember("model", smithyprelude.String)
-
-	ComponentProperty_bindings = ComponentProperty.AddMember("bindings", _FormBindings)
-
-	ComponentProperty_event = ComponentProperty.AddMember("event", smithyprelude.String)
-
-	ComponentProperty_userAttribute = ComponentProperty.AddMember("userAttribute", smithyprelude.String)
-
-	ComponentProperty_concat = ComponentProperty.AddMember("concat", _ComponentPropertyList)
-
-	ComponentProperty_condition = ComponentProperty.AddMember("condition", ComponentConditionProperty)
-
-	ComponentProperty_configured = ComponentProperty.AddMember("configured", smithyprelude.Boolean)
-
-	ComponentProperty_type = ComponentProperty.AddMember("type", smithyprelude.String)
-
-	ComponentProperty_importedValue = ComponentProperty.AddMember("importedValue", smithyprelude.String)
-
-	ComponentProperty_componentName = ComponentProperty.AddMember("componentName", smithyprelude.String)
-
-	ComponentProperty_property = ComponentProperty.AddMember("property", smithyprelude.String)
-
-	_ComponentProperties_key = _ComponentProperties.AddMember("key", smithyprelude.String)
-
-	_ComponentProperties_value = _ComponentProperties.AddMember("value", ComponentProperty)
-
-	MutationActionSetStateParameter_componentName = MutationActionSetStateParameter.AddMember("componentName", smithyprelude.String)
-
-	MutationActionSetStateParameter_property = MutationActionSetStateParameter.AddMember("property", smithyprelude.String)
-
-	MutationActionSetStateParameter_set = MutationActionSetStateParameter.AddMember("set", ComponentProperty)
-
-	ActionParameters_type = ActionParameters.AddMember("type", ComponentProperty)
-
-	ActionParameters_url = ActionParameters.AddMember("url", ComponentProperty)
-
-	ActionParameters_anchor = ActionParameters.AddMember("anchor", ComponentProperty)
-
-	ActionParameters_target = ActionParameters.AddMember("target", ComponentProperty)
-
-	ActionParameters_global = ActionParameters.AddMember("global", ComponentProperty)
-
-	ActionParameters_model = ActionParameters.AddMember("model", smithyprelude.String)
-
-	ActionParameters_id = ActionParameters.AddMember("id", ComponentProperty)
-
-	ActionParameters_fields = ActionParameters.AddMember("fields", _ComponentProperties)
-
-	ActionParameters_state = ActionParameters.AddMember("state", MutationActionSetStateParameter)
-
-	GraphQLRenderConfig_typesFilePath = GraphQLRenderConfig.AddMember("typesFilePath", smithyprelude.String)
-
-	GraphQLRenderConfig_queriesFilePath = GraphQLRenderConfig.AddMember("queriesFilePath", smithyprelude.String)
-
-	GraphQLRenderConfig_mutationsFilePath = GraphQLRenderConfig.AddMember("mutationsFilePath", smithyprelude.String)
-
-	GraphQLRenderConfig_subscriptionsFilePath = GraphQLRenderConfig.AddMember("subscriptionsFilePath", smithyprelude.String)
-
-	GraphQLRenderConfig_fragmentsFilePath = GraphQLRenderConfig.AddMember("fragmentsFilePath", smithyprelude.String)
-
-	ApiConfiguration_graphQLConfig = ApiConfiguration.AddMember("graphQLConfig", GraphQLRenderConfig)
-
-	ApiConfiguration_dataStoreConfig = ApiConfiguration.AddMember("dataStoreConfig", DataStoreRenderConfig)
-
-	ApiConfiguration_noApiConfig = ApiConfiguration.AddMember("noApiConfig", NoApiRenderConfig)
-
-	_AssociatedFieldsList_member = _AssociatedFieldsList.AddMember("member", smithyprelude.String)
-
-	CodegenDependency_name = CodegenDependency.AddMember("name", smithyprelude.String)
-
-	CodegenDependency_supportedVersion = CodegenDependency.AddMember("supportedVersion", smithyprelude.String)
-
-	CodegenDependency_isSemVer = CodegenDependency.AddMember("isSemVer", smithyprelude.Boolean)
-
-	CodegenDependency_reason = CodegenDependency.AddMember("reason", smithyprelude.String)
-
-	_CodegenDependencies_member = _CodegenDependencies.AddMember("member", CodegenDependency)
-
-	CodegenFeatureFlags_isRelationshipSupported = CodegenFeatureFlags.AddMember("isRelationshipSupported", smithyprelude.Boolean)
-
-	CodegenFeatureFlags_isNonModelSupported = CodegenFeatureFlags.AddMember("isNonModelSupported", smithyprelude.Boolean)
-
-	_CodegenGenericDataEnumValuesList_member = _CodegenGenericDataEnumValuesList.AddMember("member", smithyprelude.String)
-
-	CodegenGenericDataEnum_values = CodegenGenericDataEnum.AddMember("values", _CodegenGenericDataEnumValuesList)
-
-	_CodegenGenericDataEnums_key = _CodegenGenericDataEnums.AddMember("key", smithyprelude.String)
-
-	_CodegenGenericDataEnums_value = _CodegenGenericDataEnums.AddMember("value", CodegenGenericDataEnum)
-
-	CodegenGenericDataFieldDataType_ID = CodegenGenericDataFieldDataType.AddMember("ID", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_STRING = CodegenGenericDataFieldDataType.AddMember("STRING", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_INT = CodegenGenericDataFieldDataType.AddMember("INT", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_FLOAT = CodegenGenericDataFieldDataType.AddMember("FLOAT", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_DATE = CodegenGenericDataFieldDataType.AddMember("AWS_DATE", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_TIME = CodegenGenericDataFieldDataType.AddMember("AWS_TIME", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_DATE_TIME = CodegenGenericDataFieldDataType.AddMember("AWS_DATE_TIME", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_TIMESTAMP = CodegenGenericDataFieldDataType.AddMember("AWS_TIMESTAMP", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_EMAIL = CodegenGenericDataFieldDataType.AddMember("AWS_EMAIL", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_URL = CodegenGenericDataFieldDataType.AddMember("AWS_URL", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_IP_ADDRESS = CodegenGenericDataFieldDataType.AddMember("AWS_IP_ADDRESS", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_BOOLEAN = CodegenGenericDataFieldDataType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_JSON = CodegenGenericDataFieldDataType.AddMember("AWS_JSON", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_AWS_PHONE = CodegenGenericDataFieldDataType.AddMember("AWS_PHONE", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_ENUM = CodegenGenericDataFieldDataType.AddMember("ENUM", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_MODEL = CodegenGenericDataFieldDataType.AddMember("MODEL", smithyprelude.Unit)
-
-	CodegenGenericDataFieldDataType_NON_MODEL = CodegenGenericDataFieldDataType.AddMember("NON_MODEL", smithyprelude.Unit)
-
-	GenericDataRelationshipType_HAS_MANY = GenericDataRelationshipType.AddMember("HAS_MANY", smithyprelude.Unit)
-
-	GenericDataRelationshipType_HAS_ONE = GenericDataRelationshipType.AddMember("HAS_ONE", smithyprelude.Unit)
-
-	GenericDataRelationshipType_BELONGS_TO = GenericDataRelationshipType.AddMember("BELONGS_TO", smithyprelude.Unit)
-
-	_RelatedModelFieldsList_member = _RelatedModelFieldsList.AddMember("member", smithyprelude.String)
-
-	CodegenGenericDataRelationshipType_type = CodegenGenericDataRelationshipType.AddMember("type", GenericDataRelationshipType)
-
-	CodegenGenericDataRelationshipType_relatedModelName = CodegenGenericDataRelationshipType.AddMember("relatedModelName", smithyprelude.String)
-
-	CodegenGenericDataRelationshipType_relatedModelFields = CodegenGenericDataRelationshipType.AddMember("relatedModelFields", _RelatedModelFieldsList)
-
-	CodegenGenericDataRelationshipType_canUnlinkAssociatedModel = CodegenGenericDataRelationshipType.AddMember("canUnlinkAssociatedModel", smithyprelude.Boolean)
-
-	CodegenGenericDataRelationshipType_relatedJoinFieldName = CodegenGenericDataRelationshipType.AddMember("relatedJoinFieldName", smithyprelude.String)
-
-	CodegenGenericDataRelationshipType_relatedJoinTableName = CodegenGenericDataRelationshipType.AddMember("relatedJoinTableName", smithyprelude.String)
-
-	CodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel = CodegenGenericDataRelationshipType.AddMember("belongsToFieldOnRelatedModel", smithyprelude.String)
-
-	CodegenGenericDataRelationshipType_associatedFields = CodegenGenericDataRelationshipType.AddMember("associatedFields", _AssociatedFieldsList)
-
-	CodegenGenericDataRelationshipType_isHasManyIndex = CodegenGenericDataRelationshipType.AddMember("isHasManyIndex", smithyprelude.Boolean)
-
-	CodegenGenericDataField_dataType = CodegenGenericDataField.AddMember("dataType", CodegenGenericDataFieldDataType)
-
-	CodegenGenericDataField_dataTypeValue = CodegenGenericDataField.AddMember("dataTypeValue", smithyprelude.String)
-
-	CodegenGenericDataField_required = CodegenGenericDataField.AddMember("required", smithyprelude.Boolean)
-
-	CodegenGenericDataField_readOnly = CodegenGenericDataField.AddMember("readOnly", smithyprelude.Boolean)
-
-	CodegenGenericDataField_isArray = CodegenGenericDataField.AddMember("isArray", smithyprelude.Boolean)
-
-	CodegenGenericDataField_relationship = CodegenGenericDataField.AddMember("relationship", CodegenGenericDataRelationshipType)
-
-	_CodegenGenericDataFields_key = _CodegenGenericDataFields.AddMember("key", smithyprelude.String)
-
-	_CodegenGenericDataFields_value = _CodegenGenericDataFields.AddMember("value", CodegenGenericDataField)
-
-	_CodegenPrimaryKeysList_member = _CodegenPrimaryKeysList.AddMember("member", smithyprelude.String)
-
-	CodegenGenericDataModel_fields = CodegenGenericDataModel.AddMember("fields", _CodegenGenericDataFields)
-
-	CodegenGenericDataModel_isJoinTable = CodegenGenericDataModel.AddMember("isJoinTable", smithyprelude.Boolean)
-
-	CodegenGenericDataModel_primaryKeys = CodegenGenericDataModel.AddMember("primaryKeys", _CodegenPrimaryKeysList)
-
-	_CodegenGenericDataModels_key = _CodegenGenericDataModels.AddMember("key", smithyprelude.String)
-
-	_CodegenGenericDataModels_value = _CodegenGenericDataModels.AddMember("value", CodegenGenericDataModel)
-
-	_CodegenGenericDataNonModelFields_key = _CodegenGenericDataNonModelFields.AddMember("key", smithyprelude.String)
-
-	_CodegenGenericDataNonModelFields_value = _CodegenGenericDataNonModelFields.AddMember("value", CodegenGenericDataField)
-
-	CodegenGenericDataNonModel_fields = CodegenGenericDataNonModel.AddMember("fields", _CodegenGenericDataNonModelFields)
-
-	_CodegenGenericDataNonModels_key = _CodegenGenericDataNonModels.AddMember("key", smithyprelude.String)
-
-	_CodegenGenericDataNonModels_value = _CodegenGenericDataNonModels.AddMember("value", CodegenGenericDataNonModel)
-
-	JSModule_ES2020 = JSModule.AddMember("ES2020", smithyprelude.Unit)
-
-	JSModule_ESNEXT = JSModule.AddMember("ESNEXT", smithyprelude.Unit)
-
-	JSTarget_ES2015 = JSTarget.AddMember("ES2015", smithyprelude.Unit)
-
-	JSTarget_ES2020 = JSTarget.AddMember("ES2020", smithyprelude.Unit)
-
-	JSScript_JSX = JSScript.AddMember("JSX", smithyprelude.Unit)
-
-	JSScript_TSX = JSScript.AddMember("TSX", smithyprelude.Unit)
-
-	JSScript_JS = JSScript.AddMember("JS", smithyprelude.Unit)
-
-	_ReactCodegenDependencies_key = _ReactCodegenDependencies.AddMember("key", smithyprelude.String)
-
-	_ReactCodegenDependencies_value = _ReactCodegenDependencies.AddMember("value", smithyprelude.String)
-
-	ReactStartCodegenJobData_module = ReactStartCodegenJobData.AddMember("module", JSModule)
-
-	ReactStartCodegenJobData_target = ReactStartCodegenJobData.AddMember("target", JSTarget)
-
-	ReactStartCodegenJobData_script = ReactStartCodegenJobData.AddMember("script", JSScript)
-
-	ReactStartCodegenJobData_renderTypeDeclarations = ReactStartCodegenJobData.AddMember("renderTypeDeclarations", smithyprelude.Boolean)
-
-	ReactStartCodegenJobData_inlineSourceMap = ReactStartCodegenJobData.AddMember("inlineSourceMap", smithyprelude.Boolean)
-
-	ReactStartCodegenJobData_apiConfiguration = ReactStartCodegenJobData.AddMember("apiConfiguration", ApiConfiguration)
-
-	ReactStartCodegenJobData_dependencies = ReactStartCodegenJobData.AddMember("dependencies", _ReactCodegenDependencies)
-
-	CodegenJobRenderConfig_react = CodegenJobRenderConfig.AddMember("react", ReactStartCodegenJobData)
-
-	CodegenJobGenericDataSourceType_DATA_STORE = CodegenJobGenericDataSourceType.AddMember("DATA_STORE", smithyprelude.Unit)
-
-	CodegenJobGenericDataSchema_dataSourceType = CodegenJobGenericDataSchema.AddMember("dataSourceType", CodegenJobGenericDataSourceType)
-
-	CodegenJobGenericDataSchema_models = CodegenJobGenericDataSchema.AddMember("models", _CodegenGenericDataModels)
-
-	CodegenJobGenericDataSchema_enums = CodegenJobGenericDataSchema.AddMember("enums", _CodegenGenericDataEnums)
-
-	CodegenJobGenericDataSchema_nonModels = CodegenJobGenericDataSchema.AddMember("nonModels", _CodegenGenericDataNonModels)
-
-	CodegenJobStatus_IN_PROGRESS = CodegenJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CodegenJobStatus_FAILED = CodegenJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CodegenJobStatus_SUCCEEDED = CodegenJobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	CodegenJobAsset_downloadUrl = CodegenJobAsset.AddMember("downloadUrl", smithyprelude.String)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	CodegenJob_id = CodegenJob.AddMember("id", _Uuid)
-
-	CodegenJob_appId = CodegenJob.AddMember("appId", _AppId)
-
-	CodegenJob_environmentName = CodegenJob.AddMember("environmentName", smithyprelude.String)
-
-	CodegenJob_renderConfig = CodegenJob.AddMember("renderConfig", CodegenJobRenderConfig)
-
-	CodegenJob_genericDataSchema = CodegenJob.AddMember("genericDataSchema", CodegenJobGenericDataSchema)
-
-	CodegenJob_autoGenerateForms = CodegenJob.AddMember("autoGenerateForms", smithyprelude.Boolean)
-
-	CodegenJob_features = CodegenJob.AddMember("features", CodegenFeatureFlags)
-
-	CodegenJob_status = CodegenJob.AddMember("status", CodegenJobStatus)
-
-	CodegenJob_statusMessage = CodegenJob.AddMember("statusMessage", smithyprelude.String)
-
-	CodegenJob_asset = CodegenJob.AddMember("asset", CodegenJobAsset)
-
-	CodegenJob_tags = CodegenJob.AddMember("tags", _Tags)
-
-	CodegenJob_createdAt = CodegenJob.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodegenJob_modifiedAt = CodegenJob.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodegenJob_dependencies = CodegenJob.AddMember("dependencies", _CodegenDependencies)
-
-	CodegenJobSummary_appId = CodegenJobSummary.AddMember("appId", _AppId)
-
-	CodegenJobSummary_environmentName = CodegenJobSummary.AddMember("environmentName", smithyprelude.String)
-
-	CodegenJobSummary_id = CodegenJobSummary.AddMember("id", _Uuid)
-
-	CodegenJobSummary_createdAt = CodegenJobSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodegenJobSummary_modifiedAt = CodegenJobSummary.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_CodegenJobSummaryList_member = _CodegenJobSummaryList.AddMember("member", CodegenJobSummary)
-
-	ComponentEvent_action = ComponentEvent.AddMember("action", smithyprelude.String)
-
-	ComponentEvent_parameters = ComponentEvent.AddMember("parameters", ActionParameters)
-
-	ComponentEvent_bindingEvent = ComponentEvent.AddMember("bindingEvent", smithyprelude.String)
-
-	_ComponentEvents_key = _ComponentEvents.AddMember("key", smithyprelude.String)
-
-	_ComponentEvents_value = _ComponentEvents.AddMember("value", ComponentEvent)
-
-	ComponentChild_componentType = ComponentChild.AddMember("componentType", smithyprelude.String)
-
-	ComponentChild_name = ComponentChild.AddMember("name", smithyprelude.String)
-
-	ComponentChild_properties = ComponentChild.AddMember("properties", _ComponentProperties)
-
-	ComponentChild_children = ComponentChild.AddMember("children", _ComponentChildList)
-
-	ComponentChild_events = ComponentChild.AddMember("events", _ComponentEvents)
-
-	ComponentChild_sourceId = ComponentChild.AddMember("sourceId", smithyprelude.String)
-
-	_ComponentChildList_member = _ComponentChildList.AddMember("member", ComponentChild)
-
-	_ComponentVariantValues_key = _ComponentVariantValues.AddMember("key", smithyprelude.String)
-
-	_ComponentVariantValues_value = _ComponentVariantValues.AddMember("value", smithyprelude.String)
-
-	_ComponentOverridesValue_key = _ComponentOverridesValue.AddMember("key", smithyprelude.String)
-
-	_ComponentOverridesValue_value = _ComponentOverridesValue.AddMember("value", smithyprelude.String)
-
-	_ComponentOverrides_key = _ComponentOverrides.AddMember("key", smithyprelude.String)
-
-	_ComponentOverrides_value = _ComponentOverrides.AddMember("value", _ComponentOverridesValue)
-
-	ComponentVariant_variantValues = ComponentVariant.AddMember("variantValues", _ComponentVariantValues)
-
-	ComponentVariant_overrides = ComponentVariant.AddMember("overrides", _ComponentOverrides)
-
-	_ComponentVariants_member = _ComponentVariants.AddMember("member", ComponentVariant)
-
-	Predicate_or = Predicate.AddMember("or", _PredicateList)
-
-	Predicate_and = Predicate.AddMember("and", _PredicateList)
-
-	Predicate_field = Predicate.AddMember("field", smithyprelude.String)
-
-	Predicate_operator = Predicate.AddMember("operator", smithyprelude.String)
-
-	Predicate_operand = Predicate.AddMember("operand", smithyprelude.String)
-
-	Predicate_operandType = Predicate.AddMember("operandType", _OperandType)
-
-	_PredicateList_member = _PredicateList.AddMember("member", Predicate)
-
-	ComponentBindingPropertiesValueProperties_model = ComponentBindingPropertiesValueProperties.AddMember("model", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_field = ComponentBindingPropertiesValueProperties.AddMember("field", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_predicates = ComponentBindingPropertiesValueProperties.AddMember("predicates", _PredicateList)
-
-	ComponentBindingPropertiesValueProperties_userAttribute = ComponentBindingPropertiesValueProperties.AddMember("userAttribute", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_bucket = ComponentBindingPropertiesValueProperties.AddMember("bucket", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_key = ComponentBindingPropertiesValueProperties.AddMember("key", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_defaultValue = ComponentBindingPropertiesValueProperties.AddMember("defaultValue", smithyprelude.String)
-
-	ComponentBindingPropertiesValueProperties_slotName = ComponentBindingPropertiesValueProperties.AddMember("slotName", smithyprelude.String)
-
-	ComponentBindingPropertiesValue_type = ComponentBindingPropertiesValue.AddMember("type", smithyprelude.String)
-
-	ComponentBindingPropertiesValue_bindingProperties = ComponentBindingPropertiesValue.AddMember("bindingProperties", ComponentBindingPropertiesValueProperties)
-
-	ComponentBindingPropertiesValue_defaultValue = ComponentBindingPropertiesValue.AddMember("defaultValue", smithyprelude.String)
-
-	_ComponentBindingProperties_key = _ComponentBindingProperties.AddMember("key", smithyprelude.String)
-
-	_ComponentBindingProperties_value = _ComponentBindingProperties.AddMember("value", ComponentBindingPropertiesValue)
-
-	SortDirection_ASC = SortDirection.AddMember("ASC", smithyprelude.Unit)
-
-	SortDirection_DESC = SortDirection.AddMember("DESC", smithyprelude.Unit)
-
-	SortProperty_field = SortProperty.AddMember("field", smithyprelude.String)
-
-	SortProperty_direction = SortProperty.AddMember("direction", SortDirection)
-
-	_SortPropertyList_member = _SortPropertyList.AddMember("member", SortProperty)
-
-	_IdentifierList_member = _IdentifierList.AddMember("member", smithyprelude.String)
-
-	ComponentDataConfiguration_model = ComponentDataConfiguration.AddMember("model", smithyprelude.String)
-
-	ComponentDataConfiguration_sort = ComponentDataConfiguration.AddMember("sort", _SortPropertyList)
-
-	ComponentDataConfiguration_predicate = ComponentDataConfiguration.AddMember("predicate", Predicate)
-
-	ComponentDataConfiguration_identifiers = ComponentDataConfiguration.AddMember("identifiers", _IdentifierList)
-
-	_ComponentCollectionProperties_key = _ComponentCollectionProperties.AddMember("key", smithyprelude.String)
-
-	_ComponentCollectionProperties_value = _ComponentCollectionProperties.AddMember("value", ComponentDataConfiguration)
-
-	Component_appId = Component.AddMember("appId", smithyprelude.String)
-
-	Component_environmentName = Component.AddMember("environmentName", smithyprelude.String)
-
-	Component_sourceId = Component.AddMember("sourceId", smithyprelude.String)
-
-	Component_id = Component.AddMember("id", _Uuid)
-
-	Component_name = Component.AddMember("name", _ComponentName)
-
-	Component_componentType = Component.AddMember("componentType", _ComponentType)
-
-	Component_properties = Component.AddMember("properties", _ComponentProperties)
-
-	Component_children = Component.AddMember("children", _ComponentChildList)
-
-	Component_variants = Component.AddMember("variants", _ComponentVariants)
-
-	Component_overrides = Component.AddMember("overrides", _ComponentOverrides)
-
-	Component_bindingProperties = Component.AddMember("bindingProperties", _ComponentBindingProperties)
-
-	Component_collectionProperties = Component.AddMember("collectionProperties", _ComponentCollectionProperties)
-
-	Component_createdAt = Component.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Component_modifiedAt = Component.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Component_tags = Component.AddMember("tags", _Tags)
-
-	Component_events = Component.AddMember("events", _ComponentEvents)
-
-	Component_schemaVersion = Component.AddMember("schemaVersion", smithyprelude.String)
-
-	_ComponentList_member = _ComponentList.AddMember("member", Component)
-
-	ComponentSummary_appId = ComponentSummary.AddMember("appId", smithyprelude.String)
-
-	ComponentSummary_environmentName = ComponentSummary.AddMember("environmentName", smithyprelude.String)
-
-	ComponentSummary_id = ComponentSummary.AddMember("id", _Uuid)
-
-	ComponentSummary_name = ComponentSummary.AddMember("name", _ComponentName)
-
-	ComponentSummary_componentType = ComponentSummary.AddMember("componentType", _ComponentType)
-
-	_ComponentSummaryList_member = _ComponentSummaryList.AddMember("member", ComponentSummary)
-
-	CreateComponentData_name = CreateComponentData.AddMember("name", _ComponentName)
-
-	CreateComponentData_sourceId = CreateComponentData.AddMember("sourceId", smithyprelude.String)
-
-	CreateComponentData_componentType = CreateComponentData.AddMember("componentType", _ComponentType)
-
-	CreateComponentData_properties = CreateComponentData.AddMember("properties", _ComponentProperties)
-
-	CreateComponentData_children = CreateComponentData.AddMember("children", _ComponentChildList)
-
-	CreateComponentData_variants = CreateComponentData.AddMember("variants", _ComponentVariants)
-
-	CreateComponentData_overrides = CreateComponentData.AddMember("overrides", _ComponentOverrides)
-
-	CreateComponentData_bindingProperties = CreateComponentData.AddMember("bindingProperties", _ComponentBindingProperties)
-
-	CreateComponentData_collectionProperties = CreateComponentData.AddMember("collectionProperties", _ComponentCollectionProperties)
-
-	CreateComponentData_tags = CreateComponentData.AddMember("tags", _Tags)
-
-	CreateComponentData_events = CreateComponentData.AddMember("events", _ComponentEvents)
-
-	CreateComponentData_schemaVersion = CreateComponentData.AddMember("schemaVersion", smithyprelude.String)
-
-	FormDataTypeConfig_dataSourceType = FormDataTypeConfig.AddMember("dataSourceType", _FormDataSourceType)
-
-	FormDataTypeConfig_dataTypeName = FormDataTypeConfig.AddMember("dataTypeName", smithyprelude.String)
-
-	FormActionType_CREATE = FormActionType.AddMember("CREATE", smithyprelude.Unit)
-
-	FormActionType_UPDATE = FormActionType.AddMember("UPDATE", smithyprelude.Unit)
-
-	FixedPosition_FIRST = FixedPosition.AddMember("FIRST", smithyprelude.Unit)
-
-	FieldPosition_fixed = FieldPosition.AddMember("fixed", FixedPosition)
-
-	FieldPosition_rightOf = FieldPosition.AddMember("rightOf", smithyprelude.String)
-
-	FieldPosition_below = FieldPosition.AddMember("below", smithyprelude.String)
-
-	FormInputValuePropertyBindingProperties_property = FormInputValuePropertyBindingProperties.AddMember("property", smithyprelude.String)
-
-	FormInputValuePropertyBindingProperties_field = FormInputValuePropertyBindingProperties.AddMember("field", smithyprelude.String)
-
-	_FormInputValuePropertyList_member = _FormInputValuePropertyList.AddMember("member", FormInputValueProperty)
-
-	FormInputValueProperty_value = FormInputValueProperty.AddMember("value", smithyprelude.String)
-
-	FormInputValueProperty_bindingProperties = FormInputValueProperty.AddMember("bindingProperties", FormInputValuePropertyBindingProperties)
-
-	FormInputValueProperty_concat = FormInputValueProperty.AddMember("concat", _FormInputValuePropertyList)
-
-	ValueMapping_displayValue = ValueMapping.AddMember("displayValue", FormInputValueProperty)
-
-	ValueMapping_value = ValueMapping.AddMember("value", FormInputValueProperty)
-
-	_ValueMappingList_member = _ValueMappingList.AddMember("member", ValueMapping)
-
-	FormInputBindingPropertiesValueProperties_model = FormInputBindingPropertiesValueProperties.AddMember("model", smithyprelude.String)
-
-	FormInputBindingPropertiesValue_type = FormInputBindingPropertiesValue.AddMember("type", smithyprelude.String)
-
-	FormInputBindingPropertiesValue_bindingProperties = FormInputBindingPropertiesValue.AddMember("bindingProperties", FormInputBindingPropertiesValueProperties)
-
-	_FormInputBindingProperties_key = _FormInputBindingProperties.AddMember("key", smithyprelude.String)
-
-	_FormInputBindingProperties_value = _FormInputBindingProperties.AddMember("value", FormInputBindingPropertiesValue)
-
-	ValueMappings_values = ValueMappings.AddMember("values", _ValueMappingList)
-
-	ValueMappings_bindingProperties = ValueMappings.AddMember("bindingProperties", _FormInputBindingProperties)
-
-	StorageAccessLevel_PUBLIC = StorageAccessLevel.AddMember("PUBLIC", smithyprelude.Unit)
-
-	StorageAccessLevel_PROTECTED = StorageAccessLevel.AddMember("PROTECTED", smithyprelude.Unit)
-
-	StorageAccessLevel_PRIVATE = StorageAccessLevel.AddMember("PRIVATE", smithyprelude.Unit)
-
-	_StrValues_member = _StrValues.AddMember("member", smithyprelude.String)
-
-	FileUploaderFieldConfig_accessLevel = FileUploaderFieldConfig.AddMember("accessLevel", StorageAccessLevel)
-
-	FileUploaderFieldConfig_acceptedFileTypes = FileUploaderFieldConfig.AddMember("acceptedFileTypes", _StrValues)
-
-	FileUploaderFieldConfig_showThumbnails = FileUploaderFieldConfig.AddMember("showThumbnails", smithyprelude.Boolean)
-
-	FileUploaderFieldConfig_isResumable = FileUploaderFieldConfig.AddMember("isResumable", smithyprelude.Boolean)
-
-	FileUploaderFieldConfig_maxFileCount = FileUploaderFieldConfig.AddMember("maxFileCount", smithyprelude.Integer)
-
-	FileUploaderFieldConfig_maxSize = FileUploaderFieldConfig.AddMember("maxSize", smithyprelude.Integer)
-
-	FieldInputConfig_type = FieldInputConfig.AddMember("type", smithyprelude.String)
-
-	FieldInputConfig_required = FieldInputConfig.AddMember("required", smithyprelude.Boolean)
-
-	FieldInputConfig_readOnly = FieldInputConfig.AddMember("readOnly", smithyprelude.Boolean)
-
-	FieldInputConfig_placeholder = FieldInputConfig.AddMember("placeholder", smithyprelude.String)
-
-	FieldInputConfig_defaultValue = FieldInputConfig.AddMember("defaultValue", smithyprelude.String)
-
-	FieldInputConfig_descriptiveText = FieldInputConfig.AddMember("descriptiveText", smithyprelude.String)
-
-	FieldInputConfig_defaultChecked = FieldInputConfig.AddMember("defaultChecked", smithyprelude.Boolean)
-
-	FieldInputConfig_defaultCountryCode = FieldInputConfig.AddMember("defaultCountryCode", smithyprelude.String)
-
-	FieldInputConfig_valueMappings = FieldInputConfig.AddMember("valueMappings", ValueMappings)
-
-	FieldInputConfig_name = FieldInputConfig.AddMember("name", smithyprelude.String)
-
-	FieldInputConfig_minValue = FieldInputConfig.AddMember("minValue", smithyprelude.Float)
-
-	FieldInputConfig_maxValue = FieldInputConfig.AddMember("maxValue", smithyprelude.Float)
-
-	FieldInputConfig_step = FieldInputConfig.AddMember("step", smithyprelude.Float)
-
-	FieldInputConfig_value = FieldInputConfig.AddMember("value", smithyprelude.String)
-
-	FieldInputConfig_isArray = FieldInputConfig.AddMember("isArray", smithyprelude.Boolean)
-
-	FieldInputConfig_fileUploaderConfig = FieldInputConfig.AddMember("fileUploaderConfig", FileUploaderFieldConfig)
-
-	_NumValues_member = _NumValues.AddMember("member", smithyprelude.Integer)
-
-	FieldValidationConfiguration_type = FieldValidationConfiguration.AddMember("type", smithyprelude.String)
-
-	FieldValidationConfiguration_strValues = FieldValidationConfiguration.AddMember("strValues", _StrValues)
-
-	FieldValidationConfiguration_numValues = FieldValidationConfiguration.AddMember("numValues", _NumValues)
-
-	FieldValidationConfiguration_validationMessage = FieldValidationConfiguration.AddMember("validationMessage", smithyprelude.String)
-
-	_ValidationsList_member = _ValidationsList.AddMember("member", FieldValidationConfiguration)
-
-	FieldConfig_label = FieldConfig.AddMember("label", smithyprelude.String)
-
-	FieldConfig_position = FieldConfig.AddMember("position", FieldPosition)
-
-	FieldConfig_excluded = FieldConfig.AddMember("excluded", smithyprelude.Boolean)
-
-	FieldConfig_inputType = FieldConfig.AddMember("inputType", FieldInputConfig)
-
-	FieldConfig_validations = FieldConfig.AddMember("validations", _ValidationsList)
-
-	_FieldsMap_key = _FieldsMap.AddMember("key", smithyprelude.String)
-
-	_FieldsMap_value = _FieldsMap.AddMember("value", FieldConfig)
-
-	FormStyleConfig_tokenReference = FormStyleConfig.AddMember("tokenReference", smithyprelude.String)
-
-	FormStyleConfig_value = FormStyleConfig.AddMember("value", smithyprelude.String)
-
-	FormStyle_horizontalGap = FormStyle.AddMember("horizontalGap", FormStyleConfig)
-
-	FormStyle_verticalGap = FormStyle.AddMember("verticalGap", FormStyleConfig)
-
-	FormStyle_outerPadding = FormStyle.AddMember("outerPadding", FormStyleConfig)
-
-	SectionalElement_type = SectionalElement.AddMember("type", smithyprelude.String)
-
-	SectionalElement_position = SectionalElement.AddMember("position", FieldPosition)
-
-	SectionalElement_text = SectionalElement.AddMember("text", smithyprelude.String)
-
-	SectionalElement_level = SectionalElement.AddMember("level", smithyprelude.Integer)
-
-	SectionalElement_orientation = SectionalElement.AddMember("orientation", smithyprelude.String)
-
-	SectionalElement_excluded = SectionalElement.AddMember("excluded", smithyprelude.Boolean)
-
-	_SectionalElementMap_key = _SectionalElementMap.AddMember("key", smithyprelude.String)
-
-	_SectionalElementMap_value = _SectionalElementMap.AddMember("value", SectionalElement)
-
-	FormButtonsPosition_TOP = FormButtonsPosition.AddMember("TOP", smithyprelude.Unit)
-
-	FormButtonsPosition_BOTTOM = FormButtonsPosition.AddMember("BOTTOM", smithyprelude.Unit)
-
-	FormButtonsPosition_TOP_AND_BOTTOM = FormButtonsPosition.AddMember("TOP_AND_BOTTOM", smithyprelude.Unit)
-
-	FormButton_excluded = FormButton.AddMember("excluded", smithyprelude.Boolean)
-
-	FormButton_children = FormButton.AddMember("children", smithyprelude.String)
-
-	FormButton_position = FormButton.AddMember("position", FieldPosition)
-
-	FormCTA_position = FormCTA.AddMember("position", FormButtonsPosition)
-
-	FormCTA_clear = FormCTA.AddMember("clear", FormButton)
-
-	FormCTA_cancel = FormCTA.AddMember("cancel", FormButton)
-
-	FormCTA_submit = FormCTA.AddMember("submit", FormButton)
-
-	CreateFormData_name = CreateFormData.AddMember("name", _FormName)
-
-	CreateFormData_dataType = CreateFormData.AddMember("dataType", FormDataTypeConfig)
-
-	CreateFormData_formActionType = CreateFormData.AddMember("formActionType", FormActionType)
-
-	CreateFormData_fields = CreateFormData.AddMember("fields", _FieldsMap)
-
-	CreateFormData_style = CreateFormData.AddMember("style", FormStyle)
-
-	CreateFormData_sectionalElements = CreateFormData.AddMember("sectionalElements", _SectionalElementMap)
-
-	CreateFormData_schemaVersion = CreateFormData.AddMember("schemaVersion", smithyprelude.String)
-
-	CreateFormData_cta = CreateFormData.AddMember("cta", FormCTA)
-
-	CreateFormData_tags = CreateFormData.AddMember("tags", _Tags)
-
-	CreateFormData_labelDecorator = CreateFormData.AddMember("labelDecorator", _LabelDecorator)
-
-	ThemeValue_value = ThemeValue.AddMember("value", smithyprelude.String)
-
-	ThemeValue_children = ThemeValue.AddMember("children", _ThemeValuesList)
-
-	ThemeValues_key = ThemeValues.AddMember("key", smithyprelude.String)
-
-	ThemeValues_value = ThemeValues.AddMember("value", ThemeValue)
-
-	_ThemeValuesList_member = _ThemeValuesList.AddMember("member", ThemeValues)
-
-	CreateThemeData_name = CreateThemeData.AddMember("name", _ThemeName)
-
-	CreateThemeData_values = CreateThemeData.AddMember("values", _ThemeValuesList)
-
-	CreateThemeData_overrides = CreateThemeData.AddMember("overrides", _ThemeValuesList)
-
-	CreateThemeData_tags = CreateThemeData.AddMember("tags", _Tags)
-
-	ExchangeCodeForTokenRequestBody_code = ExchangeCodeForTokenRequestBody.AddMember("code", _SensitiveString)
-
-	ExchangeCodeForTokenRequestBody_redirectUri = ExchangeCodeForTokenRequestBody.AddMember("redirectUri", smithyprelude.String)
-
-	ExchangeCodeForTokenRequestBody_clientId = ExchangeCodeForTokenRequestBody.AddMember("clientId", _SensitiveString)
-
-	_FeaturesMap_key = _FeaturesMap.AddMember("key", smithyprelude.String)
-
-	_FeaturesMap_value = _FeaturesMap.AddMember("value", smithyprelude.String)
-
-	Form_appId = Form.AddMember("appId", smithyprelude.String)
-
-	Form_environmentName = Form.AddMember("environmentName", smithyprelude.String)
-
-	Form_id = Form.AddMember("id", _Uuid)
-
-	Form_name = Form.AddMember("name", _FormName)
-
-	Form_formActionType = Form.AddMember("formActionType", FormActionType)
-
-	Form_style = Form.AddMember("style", FormStyle)
-
-	Form_dataType = Form.AddMember("dataType", FormDataTypeConfig)
-
-	Form_fields = Form.AddMember("fields", _FieldsMap)
-
-	Form_sectionalElements = Form.AddMember("sectionalElements", _SectionalElementMap)
-
-	Form_schemaVersion = Form.AddMember("schemaVersion", smithyprelude.String)
-
-	Form_tags = Form.AddMember("tags", _Tags)
-
-	Form_cta = Form.AddMember("cta", FormCTA)
-
-	Form_labelDecorator = Form.AddMember("labelDecorator", _LabelDecorator)
-
-	_FormList_member = _FormList.AddMember("member", Form)
-
-	FormSummary_appId = FormSummary.AddMember("appId", smithyprelude.String)
-
-	FormSummary_dataType = FormSummary.AddMember("dataType", FormDataTypeConfig)
-
-	FormSummary_environmentName = FormSummary.AddMember("environmentName", smithyprelude.String)
-
-	FormSummary_formActionType = FormSummary.AddMember("formActionType", FormActionType)
-
-	FormSummary_id = FormSummary.AddMember("id", _Uuid)
-
-	FormSummary_name = FormSummary.AddMember("name", _FormName)
-
-	_FormSummaryList_member = _FormSummaryList.AddMember("member", FormSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", smithyprelude.String)
-
-	PutMetadataFlagBody_newValue = PutMetadataFlagBody.AddMember("newValue", smithyprelude.String)
-
-	RefreshTokenRequestBody_token = RefreshTokenRequestBody.AddMember("token", _SensitiveString)
-
-	RefreshTokenRequestBody_clientId = RefreshTokenRequestBody.AddMember("clientId", _SensitiveString)
-
-	ResourceConflictException_message = ResourceConflictException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	StartCodegenJobData_renderConfig = StartCodegenJobData.AddMember("renderConfig", CodegenJobRenderConfig)
-
-	StartCodegenJobData_genericDataSchema = StartCodegenJobData.AddMember("genericDataSchema", CodegenJobGenericDataSchema)
-
-	StartCodegenJobData_autoGenerateForms = StartCodegenJobData.AddMember("autoGenerateForms", smithyprelude.Boolean)
-
-	StartCodegenJobData_features = StartCodegenJobData.AddMember("features", CodegenFeatureFlags)
-
-	StartCodegenJobData_tags = StartCodegenJobData.AddMember("tags", _Tags)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	Theme_appId = Theme.AddMember("appId", smithyprelude.String)
-
-	Theme_environmentName = Theme.AddMember("environmentName", smithyprelude.String)
-
-	Theme_id = Theme.AddMember("id", _Uuid)
-
-	Theme_name = Theme.AddMember("name", _ThemeName)
-
-	Theme_createdAt = Theme.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Theme_modifiedAt = Theme.AddMember("modifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Theme_values = Theme.AddMember("values", _ThemeValuesList)
-
-	Theme_overrides = Theme.AddMember("overrides", _ThemeValuesList)
-
-	Theme_tags = Theme.AddMember("tags", _Tags)
-
-	_ThemeList_member = _ThemeList.AddMember("member", Theme)
-
-	ThemeSummary_appId = ThemeSummary.AddMember("appId", smithyprelude.String)
-
-	ThemeSummary_environmentName = ThemeSummary.AddMember("environmentName", smithyprelude.String)
-
-	ThemeSummary_id = ThemeSummary.AddMember("id", _Uuid)
-
-	ThemeSummary_name = ThemeSummary.AddMember("name", _ThemeName)
-
-	_ThemeSummaryList_member = _ThemeSummaryList.AddMember("member", ThemeSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", smithyprelude.String)
-
-	UpdateComponentData_id = UpdateComponentData.AddMember("id", _Uuid)
-
-	UpdateComponentData_name = UpdateComponentData.AddMember("name", _ComponentName)
-
-	UpdateComponentData_sourceId = UpdateComponentData.AddMember("sourceId", smithyprelude.String)
-
-	UpdateComponentData_componentType = UpdateComponentData.AddMember("componentType", _ComponentType)
-
-	UpdateComponentData_properties = UpdateComponentData.AddMember("properties", _ComponentProperties)
-
-	UpdateComponentData_children = UpdateComponentData.AddMember("children", _ComponentChildList)
-
-	UpdateComponentData_variants = UpdateComponentData.AddMember("variants", _ComponentVariants)
-
-	UpdateComponentData_overrides = UpdateComponentData.AddMember("overrides", _ComponentOverrides)
-
-	UpdateComponentData_bindingProperties = UpdateComponentData.AddMember("bindingProperties", _ComponentBindingProperties)
-
-	UpdateComponentData_collectionProperties = UpdateComponentData.AddMember("collectionProperties", _ComponentCollectionProperties)
-
-	UpdateComponentData_events = UpdateComponentData.AddMember("events", _ComponentEvents)
-
-	UpdateComponentData_schemaVersion = UpdateComponentData.AddMember("schemaVersion", smithyprelude.String)
-
-	UpdateFormData_name = UpdateFormData.AddMember("name", _FormName)
-
-	UpdateFormData_dataType = UpdateFormData.AddMember("dataType", FormDataTypeConfig)
-
-	UpdateFormData_formActionType = UpdateFormData.AddMember("formActionType", FormActionType)
-
-	UpdateFormData_fields = UpdateFormData.AddMember("fields", _FieldsMap)
-
-	UpdateFormData_style = UpdateFormData.AddMember("style", FormStyle)
-
-	UpdateFormData_sectionalElements = UpdateFormData.AddMember("sectionalElements", _SectionalElementMap)
-
-	UpdateFormData_schemaVersion = UpdateFormData.AddMember("schemaVersion", smithyprelude.String)
-
-	UpdateFormData_cta = UpdateFormData.AddMember("cta", FormCTA)
-
-	UpdateFormData_labelDecorator = UpdateFormData.AddMember("labelDecorator", _LabelDecorator)
-
-	UpdateThemeData_id = UpdateThemeData.AddMember("id", _Uuid)
-
-	UpdateThemeData_name = UpdateThemeData.AddMember("name", _ThemeName)
-
-	UpdateThemeData_values = UpdateThemeData.AddMember("values", _ThemeValuesList)
-
-	UpdateThemeData_overrides = UpdateThemeData.AddMember("overrides", _ThemeValuesList)
-
-	CreateComponentRequest_appId = CreateComponentRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateComponentRequest_environmentName = CreateComponentRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateComponentRequest_clientToken = CreateComponentRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	CreateComponentRequest_componentToCreate = CreateComponentRequest.AddMember("componentToCreate", CreateComponentData, &smithytraits.HTTPPayload{})
-
-	CreateComponentResponse_entity = CreateComponentResponse.AddMember("entity", Component, &smithytraits.HTTPPayload{})
-
-	CreateFormRequest_appId = CreateFormRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateFormRequest_environmentName = CreateFormRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateFormRequest_clientToken = CreateFormRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	CreateFormRequest_formToCreate = CreateFormRequest.AddMember("formToCreate", CreateFormData, &smithytraits.HTTPPayload{})
-
-	CreateFormResponse_entity = CreateFormResponse.AddMember("entity", Form, &smithytraits.HTTPPayload{})
-
-	CreateThemeRequest_appId = CreateThemeRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateThemeRequest_environmentName = CreateThemeRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CreateThemeRequest_clientToken = CreateThemeRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	CreateThemeRequest_themeToCreate = CreateThemeRequest.AddMember("themeToCreate", CreateThemeData, &smithytraits.HTTPPayload{})
-
-	CreateThemeResponse_entity = CreateThemeResponse.AddMember("entity", Theme, &smithytraits.HTTPPayload{})
-
-	DeleteComponentRequest_appId = DeleteComponentRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteComponentRequest_environmentName = DeleteComponentRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteComponentRequest_id = DeleteComponentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteFormRequest_appId = DeleteFormRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteFormRequest_environmentName = DeleteFormRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteFormRequest_id = DeleteFormRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteThemeRequest_appId = DeleteThemeRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteThemeRequest_environmentName = DeleteThemeRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteThemeRequest_id = DeleteThemeRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	ExchangeCodeForTokenRequest_provider = ExchangeCodeForTokenRequest.AddMember("provider", _TokenProviders, &smithytraits.HTTPLabel{})
-
-	ExchangeCodeForTokenRequest_request = ExchangeCodeForTokenRequest.AddMember("request", ExchangeCodeForTokenRequestBody, &smithytraits.HTTPPayload{})
-
-	ExchangeCodeForTokenResponse_accessToken = ExchangeCodeForTokenResponse.AddMember("accessToken", _SensitiveString)
-
-	ExchangeCodeForTokenResponse_expiresIn = ExchangeCodeForTokenResponse.AddMember("expiresIn", smithyprelude.Integer)
-
-	ExchangeCodeForTokenResponse_refreshToken = ExchangeCodeForTokenResponse.AddMember("refreshToken", _SensitiveString)
-
-	ExportComponentsRequest_appId = ExportComponentsRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportComponentsRequest_environmentName = ExportComponentsRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportComponentsRequest_nextToken = ExportComponentsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ExportComponentsResponse_entities = ExportComponentsResponse.AddMember("entities", _ComponentList)
-
-	ExportComponentsResponse_nextToken = ExportComponentsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ExportFormsRequest_appId = ExportFormsRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportFormsRequest_environmentName = ExportFormsRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportFormsRequest_nextToken = ExportFormsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ExportFormsResponse_entities = ExportFormsResponse.AddMember("entities", _FormList)
-
-	ExportFormsResponse_nextToken = ExportFormsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ExportThemesRequest_appId = ExportThemesRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportThemesRequest_environmentName = ExportThemesRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ExportThemesRequest_nextToken = ExportThemesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ExportThemesResponse_entities = ExportThemesResponse.AddMember("entities", _ThemeList)
-
-	ExportThemesResponse_nextToken = ExportThemesResponse.AddMember("nextToken", smithyprelude.String)
-
-	GetCodegenJobRequest_appId = GetCodegenJobRequest.AddMember("appId", _AppId, &smithytraits.HTTPLabel{})
-
-	GetCodegenJobRequest_environmentName = GetCodegenJobRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetCodegenJobRequest_id = GetCodegenJobRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetCodegenJobResponse_job = GetCodegenJobResponse.AddMember("job", CodegenJob, &smithytraits.HTTPPayload{})
-
-	GetComponentRequest_appId = GetComponentRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetComponentRequest_environmentName = GetComponentRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetComponentRequest_id = GetComponentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetComponentResponse_component = GetComponentResponse.AddMember("component", Component, &smithytraits.HTTPPayload{})
-
-	GetFormRequest_appId = GetFormRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetFormRequest_environmentName = GetFormRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetFormRequest_id = GetFormRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetFormResponse_form = GetFormResponse.AddMember("form", Form, &smithytraits.HTTPPayload{})
-
-	GetMetadataRequest_appId = GetMetadataRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetMetadataRequest_environmentName = GetMetadataRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetMetadataResponse_features = GetMetadataResponse.AddMember("features", _FeaturesMap)
-
-	GetThemeRequest_appId = GetThemeRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetThemeRequest_environmentName = GetThemeRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetThemeRequest_id = GetThemeRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetThemeResponse_theme = GetThemeResponse.AddMember("theme", Theme, &smithytraits.HTTPPayload{})
-
-	ListCodegenJobsRequest_appId = ListCodegenJobsRequest.AddMember("appId", _AppId, &smithytraits.HTTPLabel{})
-
-	ListCodegenJobsRequest_environmentName = ListCodegenJobsRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListCodegenJobsRequest_nextToken = ListCodegenJobsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCodegenJobsRequest_maxResults = ListCodegenJobsRequest.AddMember("maxResults", _ListCodegenJobsLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCodegenJobsResponse_entities = ListCodegenJobsResponse.AddMember("entities", _CodegenJobSummaryList)
-
-	ListCodegenJobsResponse_nextToken = ListCodegenJobsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListComponentsRequest_appId = ListComponentsRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListComponentsRequest_environmentName = ListComponentsRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListComponentsRequest_nextToken = ListComponentsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListComponentsRequest_maxResults = ListComponentsRequest.AddMember("maxResults", _ListEntityLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListComponentsResponse_entities = ListComponentsResponse.AddMember("entities", _ComponentSummaryList)
-
-	ListComponentsResponse_nextToken = ListComponentsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListFormsRequest_appId = ListFormsRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListFormsRequest_environmentName = ListFormsRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListFormsRequest_nextToken = ListFormsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFormsRequest_maxResults = ListFormsRequest.AddMember("maxResults", _ListEntityLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFormsResponse_entities = ListFormsResponse.AddMember("entities", _FormSummaryList)
-
-	ListFormsResponse_nextToken = ListFormsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	ListThemesRequest_appId = ListThemesRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListThemesRequest_environmentName = ListThemesRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListThemesRequest_nextToken = ListThemesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListThemesRequest_maxResults = ListThemesRequest.AddMember("maxResults", _ListEntityLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListThemesResponse_entities = ListThemesResponse.AddMember("entities", _ThemeSummaryList)
-
-	ListThemesResponse_nextToken = ListThemesResponse.AddMember("nextToken", smithyprelude.String)
-
-	PutMetadataFlagRequest_appId = PutMetadataFlagRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	PutMetadataFlagRequest_environmentName = PutMetadataFlagRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	PutMetadataFlagRequest_featureName = PutMetadataFlagRequest.AddMember("featureName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	PutMetadataFlagRequest_body = PutMetadataFlagRequest.AddMember("body", PutMetadataFlagBody, &smithytraits.HTTPPayload{})
-
-	RefreshTokenRequest_provider = RefreshTokenRequest.AddMember("provider", _TokenProviders, &smithytraits.HTTPLabel{})
-
-	RefreshTokenRequest_refreshTokenBody = RefreshTokenRequest.AddMember("refreshTokenBody", RefreshTokenRequestBody, &smithytraits.HTTPPayload{})
-
-	RefreshTokenResponse_accessToken = RefreshTokenResponse.AddMember("accessToken", _SensitiveString)
-
-	RefreshTokenResponse_expiresIn = RefreshTokenResponse.AddMember("expiresIn", smithyprelude.Integer)
-
-	StartCodegenJobRequest_appId = StartCodegenJobRequest.AddMember("appId", _AppId, &smithytraits.HTTPLabel{})
-
-	StartCodegenJobRequest_environmentName = StartCodegenJobRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	StartCodegenJobRequest_clientToken = StartCodegenJobRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	StartCodegenJobRequest_codegenJobToCreate = StartCodegenJobRequest.AddMember("codegenJobToCreate", StartCodegenJobData, &smithytraits.HTTPPayload{})
-
-	StartCodegenJobResponse_entity = StartCodegenJobResponse.AddMember("entity", CodegenJob, &smithytraits.HTTPPayload{})
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateComponentRequest_appId = UpdateComponentRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateComponentRequest_environmentName = UpdateComponentRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateComponentRequest_id = UpdateComponentRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateComponentRequest_clientToken = UpdateComponentRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	UpdateComponentRequest_updatedComponent = UpdateComponentRequest.AddMember("updatedComponent", UpdateComponentData, &smithytraits.HTTPPayload{})
-
-	UpdateComponentResponse_entity = UpdateComponentResponse.AddMember("entity", Component, &smithytraits.HTTPPayload{})
-
-	UpdateFormRequest_appId = UpdateFormRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateFormRequest_environmentName = UpdateFormRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateFormRequest_id = UpdateFormRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateFormRequest_clientToken = UpdateFormRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	UpdateFormRequest_updatedForm = UpdateFormRequest.AddMember("updatedForm", UpdateFormData, &smithytraits.HTTPPayload{})
-
-	UpdateFormResponse_entity = UpdateFormResponse.AddMember("entity", Form, &smithytraits.HTTPPayload{})
-
-	UpdateThemeRequest_appId = UpdateThemeRequest.AddMember("appId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateThemeRequest_environmentName = UpdateThemeRequest.AddMember("environmentName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateThemeRequest_id = UpdateThemeRequest.AddMember("id", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateThemeRequest_clientToken = UpdateThemeRequest.AddMember("clientToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	UpdateThemeRequest_updatedTheme = UpdateThemeRequest.AddMember("updatedTheme", UpdateThemeData, &smithytraits.HTTPPayload{})
-
-	UpdateThemeResponse_entity = UpdateThemeResponse.AddMember("entity", Theme, &smithytraits.HTTPPayload{})
-
+	sComponentChild_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ComponentChildList, Members: &m_ComponentChildList, Type: smithy.ShapeTypeList, Ext: &eComponentChild_children})
+	sComponentConditionProperty_then = smithy.NewStaticSchema(smithy.StaticSchema{Member: "then", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentConditionProperty_then})
+	sComponentConditionProperty_else = smithy.NewStaticSchema(smithy.StaticSchema{Member: "else", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &eComponentConditionProperty_else})
+	s_ComponentPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentProperty, Members: &mComponentProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentPropertyList_member})
+	s_FormInputValuePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFormInputValueProperty, Members: &mFormInputValueProperty, Type: smithy.ShapeTypeStructure, Ext: &e_FormInputValuePropertyList_member})
+	sPredicate_or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "or", ID: &i_PredicateList, Members: &m_PredicateList, Type: smithy.ShapeTypeList, Ext: &ePredicate_or})
+	sPredicate_and = smithy.NewStaticSchema(smithy.StaticSchema{Member: "and", ID: &i_PredicateList, Members: &m_PredicateList, Type: smithy.ShapeTypeList, Ext: &ePredicate_and})
+	sThemeValue_children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "children", ID: &i_ThemeValuesList, Members: &m_ThemeValuesList, Type: smithy.ShapeTypeList, Ext: &eThemeValue_children})
 }
+
+var CreateComponent = &sCreateComponent
+
+var CreateForm = &sCreateForm
+
+var CreateTheme = &sCreateTheme
+
+var DeleteComponent = &sDeleteComponent
+
+var DeleteForm = &sDeleteForm
+
+var DeleteTheme = &sDeleteTheme
+
+var ExchangeCodeForToken = &sExchangeCodeForToken
+
+var ExportComponents = &sExportComponents
+
+var ExportForms = &sExportForms
+
+var ExportThemes = &sExportThemes
+
+var GetCodegenJob = &sGetCodegenJob
+
+var GetComponent = &sGetComponent
+
+var GetForm = &sGetForm
+
+var GetMetadata = &sGetMetadata
+
+var GetTheme = &sGetTheme
+
+var ListCodegenJobs = &sListCodegenJobs
+
+var ListComponents = &sListComponents
+
+var ListForms = &sListForms
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListThemes = &sListThemes
+
+var PutMetadataFlag = &sPutMetadataFlag
+
+var RefreshToken = &sRefreshToken
+
+var StartCodegenJob = &sStartCodegenJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateComponent = &sUpdateComponent
+
+var UpdateForm = &sUpdateForm
+
+var UpdateTheme = &sUpdateTheme
+
+var _AmplifyUIBuilder = &s_AmplifyUIBuilder
+
+var ActionParameters = &sActionParameters
+var ActionParameters_type = &sActionParameters_type
+var ActionParameters_url = &sActionParameters_url
+var ActionParameters_anchor = &sActionParameters_anchor
+var ActionParameters_target = &sActionParameters_target
+var ActionParameters_global = &sActionParameters_global
+var ActionParameters_model = &sActionParameters_model
+var ActionParameters_id = &sActionParameters_id
+var ActionParameters_fields = &sActionParameters_fields
+var ActionParameters_state = &sActionParameters_state
+
+var ApiConfiguration = &sApiConfiguration
+var ApiConfiguration_graphQLConfig = &sApiConfiguration_graphQLConfig
+var ApiConfiguration_dataStoreConfig = &sApiConfiguration_dataStoreConfig
+var ApiConfiguration_noApiConfig = &sApiConfiguration_noApiConfig
+
+var _AppId = &s_AppId
+
+var _AssociatedFieldsList = &s_AssociatedFieldsList
+var _AssociatedFieldsList_member = &s_AssociatedFieldsList_member
+
+var _CodegenDependencies = &s_CodegenDependencies
+var _CodegenDependencies_member = &s_CodegenDependencies_member
+
+var CodegenDependency = &sCodegenDependency
+var CodegenDependency_name = &sCodegenDependency_name
+var CodegenDependency_supportedVersion = &sCodegenDependency_supportedVersion
+var CodegenDependency_isSemVer = &sCodegenDependency_isSemVer
+var CodegenDependency_reason = &sCodegenDependency_reason
+
+var CodegenFeatureFlags = &sCodegenFeatureFlags
+var CodegenFeatureFlags_isRelationshipSupported = &sCodegenFeatureFlags_isRelationshipSupported
+var CodegenFeatureFlags_isNonModelSupported = &sCodegenFeatureFlags_isNonModelSupported
+
+var CodegenGenericDataEnum = &sCodegenGenericDataEnum
+var CodegenGenericDataEnum_values = &sCodegenGenericDataEnum_values
+
+var _CodegenGenericDataEnums = &s_CodegenGenericDataEnums
+var _CodegenGenericDataEnums_key = &s_CodegenGenericDataEnums_key
+var _CodegenGenericDataEnums_value = &s_CodegenGenericDataEnums_value
+
+var _CodegenGenericDataEnumValuesList = &s_CodegenGenericDataEnumValuesList
+var _CodegenGenericDataEnumValuesList_member = &s_CodegenGenericDataEnumValuesList_member
+
+var CodegenGenericDataField = &sCodegenGenericDataField
+var CodegenGenericDataField_dataType = &sCodegenGenericDataField_dataType
+var CodegenGenericDataField_dataTypeValue = &sCodegenGenericDataField_dataTypeValue
+var CodegenGenericDataField_required = &sCodegenGenericDataField_required
+var CodegenGenericDataField_readOnly = &sCodegenGenericDataField_readOnly
+var CodegenGenericDataField_isArray = &sCodegenGenericDataField_isArray
+var CodegenGenericDataField_relationship = &sCodegenGenericDataField_relationship
+
+var CodegenGenericDataFieldDataType = &sCodegenGenericDataFieldDataType
+var CodegenGenericDataFieldDataType_ID = &sCodegenGenericDataFieldDataType_ID
+var CodegenGenericDataFieldDataType_STRING = &sCodegenGenericDataFieldDataType_STRING
+var CodegenGenericDataFieldDataType_INT = &sCodegenGenericDataFieldDataType_INT
+var CodegenGenericDataFieldDataType_FLOAT = &sCodegenGenericDataFieldDataType_FLOAT
+var CodegenGenericDataFieldDataType_AWS_DATE = &sCodegenGenericDataFieldDataType_AWS_DATE
+var CodegenGenericDataFieldDataType_AWS_TIME = &sCodegenGenericDataFieldDataType_AWS_TIME
+var CodegenGenericDataFieldDataType_AWS_DATE_TIME = &sCodegenGenericDataFieldDataType_AWS_DATE_TIME
+var CodegenGenericDataFieldDataType_AWS_TIMESTAMP = &sCodegenGenericDataFieldDataType_AWS_TIMESTAMP
+var CodegenGenericDataFieldDataType_AWS_EMAIL = &sCodegenGenericDataFieldDataType_AWS_EMAIL
+var CodegenGenericDataFieldDataType_AWS_URL = &sCodegenGenericDataFieldDataType_AWS_URL
+var CodegenGenericDataFieldDataType_AWS_IP_ADDRESS = &sCodegenGenericDataFieldDataType_AWS_IP_ADDRESS
+var CodegenGenericDataFieldDataType_BOOLEAN = &sCodegenGenericDataFieldDataType_BOOLEAN
+var CodegenGenericDataFieldDataType_AWS_JSON = &sCodegenGenericDataFieldDataType_AWS_JSON
+var CodegenGenericDataFieldDataType_AWS_PHONE = &sCodegenGenericDataFieldDataType_AWS_PHONE
+var CodegenGenericDataFieldDataType_ENUM = &sCodegenGenericDataFieldDataType_ENUM
+var CodegenGenericDataFieldDataType_MODEL = &sCodegenGenericDataFieldDataType_MODEL
+var CodegenGenericDataFieldDataType_NON_MODEL = &sCodegenGenericDataFieldDataType_NON_MODEL
+
+var _CodegenGenericDataFields = &s_CodegenGenericDataFields
+var _CodegenGenericDataFields_key = &s_CodegenGenericDataFields_key
+var _CodegenGenericDataFields_value = &s_CodegenGenericDataFields_value
+
+var CodegenGenericDataModel = &sCodegenGenericDataModel
+var CodegenGenericDataModel_fields = &sCodegenGenericDataModel_fields
+var CodegenGenericDataModel_isJoinTable = &sCodegenGenericDataModel_isJoinTable
+var CodegenGenericDataModel_primaryKeys = &sCodegenGenericDataModel_primaryKeys
+
+var _CodegenGenericDataModels = &s_CodegenGenericDataModels
+var _CodegenGenericDataModels_key = &s_CodegenGenericDataModels_key
+var _CodegenGenericDataModels_value = &s_CodegenGenericDataModels_value
+
+var CodegenGenericDataNonModel = &sCodegenGenericDataNonModel
+var CodegenGenericDataNonModel_fields = &sCodegenGenericDataNonModel_fields
+
+var _CodegenGenericDataNonModelFields = &s_CodegenGenericDataNonModelFields
+var _CodegenGenericDataNonModelFields_key = &s_CodegenGenericDataNonModelFields_key
+var _CodegenGenericDataNonModelFields_value = &s_CodegenGenericDataNonModelFields_value
+
+var _CodegenGenericDataNonModels = &s_CodegenGenericDataNonModels
+var _CodegenGenericDataNonModels_key = &s_CodegenGenericDataNonModels_key
+var _CodegenGenericDataNonModels_value = &s_CodegenGenericDataNonModels_value
+
+var CodegenGenericDataRelationshipType = &sCodegenGenericDataRelationshipType
+var CodegenGenericDataRelationshipType_type = &sCodegenGenericDataRelationshipType_type
+var CodegenGenericDataRelationshipType_relatedModelName = &sCodegenGenericDataRelationshipType_relatedModelName
+var CodegenGenericDataRelationshipType_relatedModelFields = &sCodegenGenericDataRelationshipType_relatedModelFields
+var CodegenGenericDataRelationshipType_canUnlinkAssociatedModel = &sCodegenGenericDataRelationshipType_canUnlinkAssociatedModel
+var CodegenGenericDataRelationshipType_relatedJoinFieldName = &sCodegenGenericDataRelationshipType_relatedJoinFieldName
+var CodegenGenericDataRelationshipType_relatedJoinTableName = &sCodegenGenericDataRelationshipType_relatedJoinTableName
+var CodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel = &sCodegenGenericDataRelationshipType_belongsToFieldOnRelatedModel
+var CodegenGenericDataRelationshipType_associatedFields = &sCodegenGenericDataRelationshipType_associatedFields
+var CodegenGenericDataRelationshipType_isHasManyIndex = &sCodegenGenericDataRelationshipType_isHasManyIndex
+
+var CodegenJob = &sCodegenJob
+var CodegenJob_id = &sCodegenJob_id
+var CodegenJob_appId = &sCodegenJob_appId
+var CodegenJob_environmentName = &sCodegenJob_environmentName
+var CodegenJob_renderConfig = &sCodegenJob_renderConfig
+var CodegenJob_genericDataSchema = &sCodegenJob_genericDataSchema
+var CodegenJob_autoGenerateForms = &sCodegenJob_autoGenerateForms
+var CodegenJob_features = &sCodegenJob_features
+var CodegenJob_status = &sCodegenJob_status
+var CodegenJob_statusMessage = &sCodegenJob_statusMessage
+var CodegenJob_asset = &sCodegenJob_asset
+var CodegenJob_tags = &sCodegenJob_tags
+var CodegenJob_createdAt = &sCodegenJob_createdAt
+var CodegenJob_modifiedAt = &sCodegenJob_modifiedAt
+var CodegenJob_dependencies = &sCodegenJob_dependencies
+
+var CodegenJobAsset = &sCodegenJobAsset
+var CodegenJobAsset_downloadUrl = &sCodegenJobAsset_downloadUrl
+
+var CodegenJobGenericDataSchema = &sCodegenJobGenericDataSchema
+var CodegenJobGenericDataSchema_dataSourceType = &sCodegenJobGenericDataSchema_dataSourceType
+var CodegenJobGenericDataSchema_models = &sCodegenJobGenericDataSchema_models
+var CodegenJobGenericDataSchema_enums = &sCodegenJobGenericDataSchema_enums
+var CodegenJobGenericDataSchema_nonModels = &sCodegenJobGenericDataSchema_nonModels
+
+var CodegenJobGenericDataSourceType = &sCodegenJobGenericDataSourceType
+var CodegenJobGenericDataSourceType_DATA_STORE = &sCodegenJobGenericDataSourceType_DATA_STORE
+
+var CodegenJobRenderConfig = &sCodegenJobRenderConfig
+var CodegenJobRenderConfig_react = &sCodegenJobRenderConfig_react
+
+var CodegenJobStatus = &sCodegenJobStatus
+var CodegenJobStatus_IN_PROGRESS = &sCodegenJobStatus_IN_PROGRESS
+var CodegenJobStatus_FAILED = &sCodegenJobStatus_FAILED
+var CodegenJobStatus_SUCCEEDED = &sCodegenJobStatus_SUCCEEDED
+
+var CodegenJobSummary = &sCodegenJobSummary
+var CodegenJobSummary_appId = &sCodegenJobSummary_appId
+var CodegenJobSummary_environmentName = &sCodegenJobSummary_environmentName
+var CodegenJobSummary_id = &sCodegenJobSummary_id
+var CodegenJobSummary_createdAt = &sCodegenJobSummary_createdAt
+var CodegenJobSummary_modifiedAt = &sCodegenJobSummary_modifiedAt
+
+var _CodegenJobSummaryList = &s_CodegenJobSummaryList
+var _CodegenJobSummaryList_member = &s_CodegenJobSummaryList_member
+
+var _CodegenPrimaryKeysList = &s_CodegenPrimaryKeysList
+var _CodegenPrimaryKeysList_member = &s_CodegenPrimaryKeysList_member
+
+var Component = &sComponent
+var Component_appId = &sComponent_appId
+var Component_environmentName = &sComponent_environmentName
+var Component_sourceId = &sComponent_sourceId
+var Component_id = &sComponent_id
+var Component_name = &sComponent_name
+var Component_componentType = &sComponent_componentType
+var Component_properties = &sComponent_properties
+var Component_children = &sComponent_children
+var Component_variants = &sComponent_variants
+var Component_overrides = &sComponent_overrides
+var Component_bindingProperties = &sComponent_bindingProperties
+var Component_collectionProperties = &sComponent_collectionProperties
+var Component_createdAt = &sComponent_createdAt
+var Component_modifiedAt = &sComponent_modifiedAt
+var Component_tags = &sComponent_tags
+var Component_events = &sComponent_events
+var Component_schemaVersion = &sComponent_schemaVersion
+
+var _ComponentBindingProperties = &s_ComponentBindingProperties
+var _ComponentBindingProperties_key = &s_ComponentBindingProperties_key
+var _ComponentBindingProperties_value = &s_ComponentBindingProperties_value
+
+var ComponentBindingPropertiesValue = &sComponentBindingPropertiesValue
+var ComponentBindingPropertiesValue_type = &sComponentBindingPropertiesValue_type
+var ComponentBindingPropertiesValue_bindingProperties = &sComponentBindingPropertiesValue_bindingProperties
+var ComponentBindingPropertiesValue_defaultValue = &sComponentBindingPropertiesValue_defaultValue
+
+var ComponentBindingPropertiesValueProperties = &sComponentBindingPropertiesValueProperties
+var ComponentBindingPropertiesValueProperties_model = &sComponentBindingPropertiesValueProperties_model
+var ComponentBindingPropertiesValueProperties_field = &sComponentBindingPropertiesValueProperties_field
+var ComponentBindingPropertiesValueProperties_predicates = &sComponentBindingPropertiesValueProperties_predicates
+var ComponentBindingPropertiesValueProperties_userAttribute = &sComponentBindingPropertiesValueProperties_userAttribute
+var ComponentBindingPropertiesValueProperties_bucket = &sComponentBindingPropertiesValueProperties_bucket
+var ComponentBindingPropertiesValueProperties_key = &sComponentBindingPropertiesValueProperties_key
+var ComponentBindingPropertiesValueProperties_defaultValue = &sComponentBindingPropertiesValueProperties_defaultValue
+var ComponentBindingPropertiesValueProperties_slotName = &sComponentBindingPropertiesValueProperties_slotName
+
+var ComponentChild = &sComponentChild
+var ComponentChild_componentType = &sComponentChild_componentType
+var ComponentChild_name = &sComponentChild_name
+var ComponentChild_properties = &sComponentChild_properties
+var ComponentChild_children = &sComponentChild_children
+var ComponentChild_events = &sComponentChild_events
+var ComponentChild_sourceId = &sComponentChild_sourceId
+
+var _ComponentChildList = &s_ComponentChildList
+var _ComponentChildList_member = &s_ComponentChildList_member
+
+var _ComponentCollectionProperties = &s_ComponentCollectionProperties
+var _ComponentCollectionProperties_key = &s_ComponentCollectionProperties_key
+var _ComponentCollectionProperties_value = &s_ComponentCollectionProperties_value
+
+var ComponentConditionProperty = &sComponentConditionProperty
+var ComponentConditionProperty_property = &sComponentConditionProperty_property
+var ComponentConditionProperty_field = &sComponentConditionProperty_field
+var ComponentConditionProperty_operator = &sComponentConditionProperty_operator
+var ComponentConditionProperty_operand = &sComponentConditionProperty_operand
+var ComponentConditionProperty_then = &sComponentConditionProperty_then
+var ComponentConditionProperty_else = &sComponentConditionProperty_else
+var ComponentConditionProperty_operandType = &sComponentConditionProperty_operandType
+
+var ComponentDataConfiguration = &sComponentDataConfiguration
+var ComponentDataConfiguration_model = &sComponentDataConfiguration_model
+var ComponentDataConfiguration_sort = &sComponentDataConfiguration_sort
+var ComponentDataConfiguration_predicate = &sComponentDataConfiguration_predicate
+var ComponentDataConfiguration_identifiers = &sComponentDataConfiguration_identifiers
+
+var ComponentEvent = &sComponentEvent
+var ComponentEvent_action = &sComponentEvent_action
+var ComponentEvent_parameters = &sComponentEvent_parameters
+var ComponentEvent_bindingEvent = &sComponentEvent_bindingEvent
+
+var _ComponentEvents = &s_ComponentEvents
+var _ComponentEvents_key = &s_ComponentEvents_key
+var _ComponentEvents_value = &s_ComponentEvents_value
+
+var _ComponentList = &s_ComponentList
+var _ComponentList_member = &s_ComponentList_member
+
+var _ComponentName = &s_ComponentName
+
+var _ComponentOverrides = &s_ComponentOverrides
+var _ComponentOverrides_key = &s_ComponentOverrides_key
+var _ComponentOverrides_value = &s_ComponentOverrides_value
+
+var _ComponentOverridesValue = &s_ComponentOverridesValue
+var _ComponentOverridesValue_key = &s_ComponentOverridesValue_key
+var _ComponentOverridesValue_value = &s_ComponentOverridesValue_value
+
+var _ComponentProperties = &s_ComponentProperties
+var _ComponentProperties_key = &s_ComponentProperties_key
+var _ComponentProperties_value = &s_ComponentProperties_value
+
+var ComponentProperty = &sComponentProperty
+var ComponentProperty_value = &sComponentProperty_value
+var ComponentProperty_bindingProperties = &sComponentProperty_bindingProperties
+var ComponentProperty_collectionBindingProperties = &sComponentProperty_collectionBindingProperties
+var ComponentProperty_defaultValue = &sComponentProperty_defaultValue
+var ComponentProperty_model = &sComponentProperty_model
+var ComponentProperty_bindings = &sComponentProperty_bindings
+var ComponentProperty_event = &sComponentProperty_event
+var ComponentProperty_userAttribute = &sComponentProperty_userAttribute
+var ComponentProperty_concat = &sComponentProperty_concat
+var ComponentProperty_condition = &sComponentProperty_condition
+var ComponentProperty_configured = &sComponentProperty_configured
+var ComponentProperty_type = &sComponentProperty_type
+var ComponentProperty_importedValue = &sComponentProperty_importedValue
+var ComponentProperty_componentName = &sComponentProperty_componentName
+var ComponentProperty_property = &sComponentProperty_property
+
+var ComponentPropertyBindingProperties = &sComponentPropertyBindingProperties
+var ComponentPropertyBindingProperties_property = &sComponentPropertyBindingProperties_property
+var ComponentPropertyBindingProperties_field = &sComponentPropertyBindingProperties_field
+
+var _ComponentPropertyList = &s_ComponentPropertyList
+var _ComponentPropertyList_member = &s_ComponentPropertyList_member
+
+var ComponentSummary = &sComponentSummary
+var ComponentSummary_appId = &sComponentSummary_appId
+var ComponentSummary_environmentName = &sComponentSummary_environmentName
+var ComponentSummary_id = &sComponentSummary_id
+var ComponentSummary_name = &sComponentSummary_name
+var ComponentSummary_componentType = &sComponentSummary_componentType
+
+var _ComponentSummaryList = &s_ComponentSummaryList
+var _ComponentSummaryList_member = &s_ComponentSummaryList_member
+
+var _ComponentType = &s_ComponentType
+
+var ComponentVariant = &sComponentVariant
+var ComponentVariant_variantValues = &sComponentVariant_variantValues
+var ComponentVariant_overrides = &sComponentVariant_overrides
+
+var _ComponentVariants = &s_ComponentVariants
+var _ComponentVariants_member = &s_ComponentVariants_member
+
+var _ComponentVariantValues = &s_ComponentVariantValues
+var _ComponentVariantValues_key = &s_ComponentVariantValues_key
+var _ComponentVariantValues_value = &s_ComponentVariantValues_value
+
+var CreateComponentData = &sCreateComponentData
+var CreateComponentData_name = &sCreateComponentData_name
+var CreateComponentData_sourceId = &sCreateComponentData_sourceId
+var CreateComponentData_componentType = &sCreateComponentData_componentType
+var CreateComponentData_properties = &sCreateComponentData_properties
+var CreateComponentData_children = &sCreateComponentData_children
+var CreateComponentData_variants = &sCreateComponentData_variants
+var CreateComponentData_overrides = &sCreateComponentData_overrides
+var CreateComponentData_bindingProperties = &sCreateComponentData_bindingProperties
+var CreateComponentData_collectionProperties = &sCreateComponentData_collectionProperties
+var CreateComponentData_tags = &sCreateComponentData_tags
+var CreateComponentData_events = &sCreateComponentData_events
+var CreateComponentData_schemaVersion = &sCreateComponentData_schemaVersion
+
+var CreateFormData = &sCreateFormData
+var CreateFormData_name = &sCreateFormData_name
+var CreateFormData_dataType = &sCreateFormData_dataType
+var CreateFormData_formActionType = &sCreateFormData_formActionType
+var CreateFormData_fields = &sCreateFormData_fields
+var CreateFormData_style = &sCreateFormData_style
+var CreateFormData_sectionalElements = &sCreateFormData_sectionalElements
+var CreateFormData_schemaVersion = &sCreateFormData_schemaVersion
+var CreateFormData_cta = &sCreateFormData_cta
+var CreateFormData_tags = &sCreateFormData_tags
+var CreateFormData_labelDecorator = &sCreateFormData_labelDecorator
+
+var CreateThemeData = &sCreateThemeData
+var CreateThemeData_name = &sCreateThemeData_name
+var CreateThemeData_values = &sCreateThemeData_values
+var CreateThemeData_overrides = &sCreateThemeData_overrides
+var CreateThemeData_tags = &sCreateThemeData_tags
+
+var DataStoreRenderConfig = &sDataStoreRenderConfig
+
+var ExchangeCodeForTokenRequestBody = &sExchangeCodeForTokenRequestBody
+var ExchangeCodeForTokenRequestBody_code = &sExchangeCodeForTokenRequestBody_code
+var ExchangeCodeForTokenRequestBody_redirectUri = &sExchangeCodeForTokenRequestBody_redirectUri
+var ExchangeCodeForTokenRequestBody_clientId = &sExchangeCodeForTokenRequestBody_clientId
+
+var _FeaturesMap = &s_FeaturesMap
+var _FeaturesMap_key = &s_FeaturesMap_key
+var _FeaturesMap_value = &s_FeaturesMap_value
+
+var FieldConfig = &sFieldConfig
+var FieldConfig_label = &sFieldConfig_label
+var FieldConfig_position = &sFieldConfig_position
+var FieldConfig_excluded = &sFieldConfig_excluded
+var FieldConfig_inputType = &sFieldConfig_inputType
+var FieldConfig_validations = &sFieldConfig_validations
+
+var FieldInputConfig = &sFieldInputConfig
+var FieldInputConfig_type = &sFieldInputConfig_type
+var FieldInputConfig_required = &sFieldInputConfig_required
+var FieldInputConfig_readOnly = &sFieldInputConfig_readOnly
+var FieldInputConfig_placeholder = &sFieldInputConfig_placeholder
+var FieldInputConfig_defaultValue = &sFieldInputConfig_defaultValue
+var FieldInputConfig_descriptiveText = &sFieldInputConfig_descriptiveText
+var FieldInputConfig_defaultChecked = &sFieldInputConfig_defaultChecked
+var FieldInputConfig_defaultCountryCode = &sFieldInputConfig_defaultCountryCode
+var FieldInputConfig_valueMappings = &sFieldInputConfig_valueMappings
+var FieldInputConfig_name = &sFieldInputConfig_name
+var FieldInputConfig_minValue = &sFieldInputConfig_minValue
+var FieldInputConfig_maxValue = &sFieldInputConfig_maxValue
+var FieldInputConfig_step = &sFieldInputConfig_step
+var FieldInputConfig_value = &sFieldInputConfig_value
+var FieldInputConfig_isArray = &sFieldInputConfig_isArray
+var FieldInputConfig_fileUploaderConfig = &sFieldInputConfig_fileUploaderConfig
+
+var FieldPosition = &sFieldPosition
+var FieldPosition_fixed = &sFieldPosition_fixed
+var FieldPosition_rightOf = &sFieldPosition_rightOf
+var FieldPosition_below = &sFieldPosition_below
+
+var _FieldsMap = &s_FieldsMap
+var _FieldsMap_key = &s_FieldsMap_key
+var _FieldsMap_value = &s_FieldsMap_value
+
+var FieldValidationConfiguration = &sFieldValidationConfiguration
+var FieldValidationConfiguration_type = &sFieldValidationConfiguration_type
+var FieldValidationConfiguration_strValues = &sFieldValidationConfiguration_strValues
+var FieldValidationConfiguration_numValues = &sFieldValidationConfiguration_numValues
+var FieldValidationConfiguration_validationMessage = &sFieldValidationConfiguration_validationMessage
+
+var FileUploaderFieldConfig = &sFileUploaderFieldConfig
+var FileUploaderFieldConfig_accessLevel = &sFileUploaderFieldConfig_accessLevel
+var FileUploaderFieldConfig_acceptedFileTypes = &sFileUploaderFieldConfig_acceptedFileTypes
+var FileUploaderFieldConfig_showThumbnails = &sFileUploaderFieldConfig_showThumbnails
+var FileUploaderFieldConfig_isResumable = &sFileUploaderFieldConfig_isResumable
+var FileUploaderFieldConfig_maxFileCount = &sFileUploaderFieldConfig_maxFileCount
+var FileUploaderFieldConfig_maxSize = &sFileUploaderFieldConfig_maxSize
+
+var FixedPosition = &sFixedPosition
+var FixedPosition_FIRST = &sFixedPosition_FIRST
+
+var Form = &sForm
+var Form_appId = &sForm_appId
+var Form_environmentName = &sForm_environmentName
+var Form_id = &sForm_id
+var Form_name = &sForm_name
+var Form_formActionType = &sForm_formActionType
+var Form_style = &sForm_style
+var Form_dataType = &sForm_dataType
+var Form_fields = &sForm_fields
+var Form_sectionalElements = &sForm_sectionalElements
+var Form_schemaVersion = &sForm_schemaVersion
+var Form_tags = &sForm_tags
+var Form_cta = &sForm_cta
+var Form_labelDecorator = &sForm_labelDecorator
+
+var FormActionType = &sFormActionType
+var FormActionType_CREATE = &sFormActionType_CREATE
+var FormActionType_UPDATE = &sFormActionType_UPDATE
+
+var FormBindingElement = &sFormBindingElement
+var FormBindingElement_element = &sFormBindingElement_element
+var FormBindingElement_property = &sFormBindingElement_property
+
+var _FormBindings = &s_FormBindings
+var _FormBindings_key = &s_FormBindings_key
+var _FormBindings_value = &s_FormBindings_value
+
+var FormButton = &sFormButton
+var FormButton_excluded = &sFormButton_excluded
+var FormButton_children = &sFormButton_children
+var FormButton_position = &sFormButton_position
+
+var FormButtonsPosition = &sFormButtonsPosition
+var FormButtonsPosition_TOP = &sFormButtonsPosition_TOP
+var FormButtonsPosition_BOTTOM = &sFormButtonsPosition_BOTTOM
+var FormButtonsPosition_TOP_AND_BOTTOM = &sFormButtonsPosition_TOP_AND_BOTTOM
+
+var FormCTA = &sFormCTA
+var FormCTA_position = &sFormCTA_position
+var FormCTA_clear = &sFormCTA_clear
+var FormCTA_cancel = &sFormCTA_cancel
+var FormCTA_submit = &sFormCTA_submit
+
+var _FormDataSourceType = &s_FormDataSourceType
+
+var FormDataTypeConfig = &sFormDataTypeConfig
+var FormDataTypeConfig_dataSourceType = &sFormDataTypeConfig_dataSourceType
+var FormDataTypeConfig_dataTypeName = &sFormDataTypeConfig_dataTypeName
+
+var _FormInputBindingProperties = &s_FormInputBindingProperties
+var _FormInputBindingProperties_key = &s_FormInputBindingProperties_key
+var _FormInputBindingProperties_value = &s_FormInputBindingProperties_value
+
+var FormInputBindingPropertiesValue = &sFormInputBindingPropertiesValue
+var FormInputBindingPropertiesValue_type = &sFormInputBindingPropertiesValue_type
+var FormInputBindingPropertiesValue_bindingProperties = &sFormInputBindingPropertiesValue_bindingProperties
+
+var FormInputBindingPropertiesValueProperties = &sFormInputBindingPropertiesValueProperties
+var FormInputBindingPropertiesValueProperties_model = &sFormInputBindingPropertiesValueProperties_model
+
+var FormInputValueProperty = &sFormInputValueProperty
+var FormInputValueProperty_value = &sFormInputValueProperty_value
+var FormInputValueProperty_bindingProperties = &sFormInputValueProperty_bindingProperties
+var FormInputValueProperty_concat = &sFormInputValueProperty_concat
+
+var FormInputValuePropertyBindingProperties = &sFormInputValuePropertyBindingProperties
+var FormInputValuePropertyBindingProperties_property = &sFormInputValuePropertyBindingProperties_property
+var FormInputValuePropertyBindingProperties_field = &sFormInputValuePropertyBindingProperties_field
+
+var _FormInputValuePropertyList = &s_FormInputValuePropertyList
+var _FormInputValuePropertyList_member = &s_FormInputValuePropertyList_member
+
+var _FormList = &s_FormList
+var _FormList_member = &s_FormList_member
+
+var _FormName = &s_FormName
+
+var FormStyle = &sFormStyle
+var FormStyle_horizontalGap = &sFormStyle_horizontalGap
+var FormStyle_verticalGap = &sFormStyle_verticalGap
+var FormStyle_outerPadding = &sFormStyle_outerPadding
+
+var FormStyleConfig = &sFormStyleConfig
+var FormStyleConfig_tokenReference = &sFormStyleConfig_tokenReference
+var FormStyleConfig_value = &sFormStyleConfig_value
+
+var FormSummary = &sFormSummary
+var FormSummary_appId = &sFormSummary_appId
+var FormSummary_dataType = &sFormSummary_dataType
+var FormSummary_environmentName = &sFormSummary_environmentName
+var FormSummary_formActionType = &sFormSummary_formActionType
+var FormSummary_id = &sFormSummary_id
+var FormSummary_name = &sFormSummary_name
+
+var _FormSummaryList = &s_FormSummaryList
+var _FormSummaryList_member = &s_FormSummaryList_member
+
+var GenericDataRelationshipType = &sGenericDataRelationshipType
+var GenericDataRelationshipType_HAS_MANY = &sGenericDataRelationshipType_HAS_MANY
+var GenericDataRelationshipType_HAS_ONE = &sGenericDataRelationshipType_HAS_ONE
+var GenericDataRelationshipType_BELONGS_TO = &sGenericDataRelationshipType_BELONGS_TO
+
+var GraphQLRenderConfig = &sGraphQLRenderConfig
+var GraphQLRenderConfig_typesFilePath = &sGraphQLRenderConfig_typesFilePath
+var GraphQLRenderConfig_queriesFilePath = &sGraphQLRenderConfig_queriesFilePath
+var GraphQLRenderConfig_mutationsFilePath = &sGraphQLRenderConfig_mutationsFilePath
+var GraphQLRenderConfig_subscriptionsFilePath = &sGraphQLRenderConfig_subscriptionsFilePath
+var GraphQLRenderConfig_fragmentsFilePath = &sGraphQLRenderConfig_fragmentsFilePath
+
+var _IdentifierList = &s_IdentifierList
+var _IdentifierList_member = &s_IdentifierList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+
+var JSModule = &sJSModule
+var JSModule_ES2020 = &sJSModule_ES2020
+var JSModule_ESNEXT = &sJSModule_ESNEXT
+
+var JSScript = &sJSScript
+var JSScript_JSX = &sJSScript_JSX
+var JSScript_TSX = &sJSScript_TSX
+var JSScript_JS = &sJSScript_JS
+
+var JSTarget = &sJSTarget
+var JSTarget_ES2015 = &sJSTarget_ES2015
+var JSTarget_ES2020 = &sJSTarget_ES2020
+
+var _LabelDecorator = &s_LabelDecorator
+
+var _ListCodegenJobsLimit = &s_ListCodegenJobsLimit
+
+var _ListEntityLimit = &s_ListEntityLimit
+
+var MutationActionSetStateParameter = &sMutationActionSetStateParameter
+var MutationActionSetStateParameter_componentName = &sMutationActionSetStateParameter_componentName
+var MutationActionSetStateParameter_property = &sMutationActionSetStateParameter_property
+var MutationActionSetStateParameter_set = &sMutationActionSetStateParameter_set
+
+var NoApiRenderConfig = &sNoApiRenderConfig
+
+var _NumValues = &s_NumValues
+var _NumValues_member = &s_NumValues_member
+
+var _OperandType = &s_OperandType
+
+var Predicate = &sPredicate
+var Predicate_or = &sPredicate_or
+var Predicate_and = &sPredicate_and
+var Predicate_field = &sPredicate_field
+var Predicate_operator = &sPredicate_operator
+var Predicate_operand = &sPredicate_operand
+var Predicate_operandType = &sPredicate_operandType
+
+var _PredicateList = &s_PredicateList
+var _PredicateList_member = &s_PredicateList_member
+
+var PutMetadataFlagBody = &sPutMetadataFlagBody
+var PutMetadataFlagBody_newValue = &sPutMetadataFlagBody_newValue
+
+var _ReactCodegenDependencies = &s_ReactCodegenDependencies
+var _ReactCodegenDependencies_key = &s_ReactCodegenDependencies_key
+var _ReactCodegenDependencies_value = &s_ReactCodegenDependencies_value
+
+var ReactStartCodegenJobData = &sReactStartCodegenJobData
+var ReactStartCodegenJobData_module = &sReactStartCodegenJobData_module
+var ReactStartCodegenJobData_target = &sReactStartCodegenJobData_target
+var ReactStartCodegenJobData_script = &sReactStartCodegenJobData_script
+var ReactStartCodegenJobData_renderTypeDeclarations = &sReactStartCodegenJobData_renderTypeDeclarations
+var ReactStartCodegenJobData_inlineSourceMap = &sReactStartCodegenJobData_inlineSourceMap
+var ReactStartCodegenJobData_apiConfiguration = &sReactStartCodegenJobData_apiConfiguration
+var ReactStartCodegenJobData_dependencies = &sReactStartCodegenJobData_dependencies
+
+var RefreshTokenRequestBody = &sRefreshTokenRequestBody
+var RefreshTokenRequestBody_token = &sRefreshTokenRequestBody_token
+var RefreshTokenRequestBody_clientId = &sRefreshTokenRequestBody_clientId
+
+var _RelatedModelFieldsList = &s_RelatedModelFieldsList
+var _RelatedModelFieldsList_member = &s_RelatedModelFieldsList_member
+
+var ResourceConflictException = &sResourceConflictException
+var ResourceConflictException_message = &sResourceConflictException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var SectionalElement = &sSectionalElement
+var SectionalElement_type = &sSectionalElement_type
+var SectionalElement_position = &sSectionalElement_position
+var SectionalElement_text = &sSectionalElement_text
+var SectionalElement_level = &sSectionalElement_level
+var SectionalElement_orientation = &sSectionalElement_orientation
+var SectionalElement_excluded = &sSectionalElement_excluded
+
+var _SectionalElementMap = &s_SectionalElementMap
+var _SectionalElementMap_key = &s_SectionalElementMap_key
+var _SectionalElementMap_value = &s_SectionalElementMap_value
+
+var _SensitiveString = &s_SensitiveString
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SortDirection = &sSortDirection
+var SortDirection_ASC = &sSortDirection_ASC
+var SortDirection_DESC = &sSortDirection_DESC
+
+var SortProperty = &sSortProperty
+var SortProperty_field = &sSortProperty_field
+var SortProperty_direction = &sSortProperty_direction
+
+var _SortPropertyList = &s_SortPropertyList
+var _SortPropertyList_member = &s_SortPropertyList_member
+
+var StartCodegenJobData = &sStartCodegenJobData
+var StartCodegenJobData_renderConfig = &sStartCodegenJobData_renderConfig
+var StartCodegenJobData_genericDataSchema = &sStartCodegenJobData_genericDataSchema
+var StartCodegenJobData_autoGenerateForms = &sStartCodegenJobData_autoGenerateForms
+var StartCodegenJobData_features = &sStartCodegenJobData_features
+var StartCodegenJobData_tags = &sStartCodegenJobData_tags
+
+var StorageAccessLevel = &sStorageAccessLevel
+var StorageAccessLevel_PUBLIC = &sStorageAccessLevel_PUBLIC
+var StorageAccessLevel_PROTECTED = &sStorageAccessLevel_PROTECTED
+var StorageAccessLevel_PRIVATE = &sStorageAccessLevel_PRIVATE
+
+var _StrValues = &s_StrValues
+var _StrValues_member = &s_StrValues_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var Theme = &sTheme
+var Theme_appId = &sTheme_appId
+var Theme_environmentName = &sTheme_environmentName
+var Theme_id = &sTheme_id
+var Theme_name = &sTheme_name
+var Theme_createdAt = &sTheme_createdAt
+var Theme_modifiedAt = &sTheme_modifiedAt
+var Theme_values = &sTheme_values
+var Theme_overrides = &sTheme_overrides
+var Theme_tags = &sTheme_tags
+
+var _ThemeList = &s_ThemeList
+var _ThemeList_member = &s_ThemeList_member
+
+var _ThemeName = &s_ThemeName
+
+var ThemeSummary = &sThemeSummary
+var ThemeSummary_appId = &sThemeSummary_appId
+var ThemeSummary_environmentName = &sThemeSummary_environmentName
+var ThemeSummary_id = &sThemeSummary_id
+var ThemeSummary_name = &sThemeSummary_name
+
+var _ThemeSummaryList = &s_ThemeSummaryList
+var _ThemeSummaryList_member = &s_ThemeSummaryList_member
+
+var ThemeValue = &sThemeValue
+var ThemeValue_value = &sThemeValue_value
+var ThemeValue_children = &sThemeValue_children
+
+var ThemeValues = &sThemeValues
+var ThemeValues_key = &sThemeValues_key
+var ThemeValues_value = &sThemeValues_value
+
+var _ThemeValuesList = &s_ThemeValuesList
+var _ThemeValuesList_member = &s_ThemeValuesList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TokenProviders = &s_TokenProviders
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var UpdateComponentData = &sUpdateComponentData
+var UpdateComponentData_id = &sUpdateComponentData_id
+var UpdateComponentData_name = &sUpdateComponentData_name
+var UpdateComponentData_sourceId = &sUpdateComponentData_sourceId
+var UpdateComponentData_componentType = &sUpdateComponentData_componentType
+var UpdateComponentData_properties = &sUpdateComponentData_properties
+var UpdateComponentData_children = &sUpdateComponentData_children
+var UpdateComponentData_variants = &sUpdateComponentData_variants
+var UpdateComponentData_overrides = &sUpdateComponentData_overrides
+var UpdateComponentData_bindingProperties = &sUpdateComponentData_bindingProperties
+var UpdateComponentData_collectionProperties = &sUpdateComponentData_collectionProperties
+var UpdateComponentData_events = &sUpdateComponentData_events
+var UpdateComponentData_schemaVersion = &sUpdateComponentData_schemaVersion
+
+var UpdateFormData = &sUpdateFormData
+var UpdateFormData_name = &sUpdateFormData_name
+var UpdateFormData_dataType = &sUpdateFormData_dataType
+var UpdateFormData_formActionType = &sUpdateFormData_formActionType
+var UpdateFormData_fields = &sUpdateFormData_fields
+var UpdateFormData_style = &sUpdateFormData_style
+var UpdateFormData_sectionalElements = &sUpdateFormData_sectionalElements
+var UpdateFormData_schemaVersion = &sUpdateFormData_schemaVersion
+var UpdateFormData_cta = &sUpdateFormData_cta
+var UpdateFormData_labelDecorator = &sUpdateFormData_labelDecorator
+
+var UpdateThemeData = &sUpdateThemeData
+var UpdateThemeData_id = &sUpdateThemeData_id
+var UpdateThemeData_name = &sUpdateThemeData_name
+var UpdateThemeData_values = &sUpdateThemeData_values
+var UpdateThemeData_overrides = &sUpdateThemeData_overrides
+
+var _Uuid = &s_Uuid
+
+var _ValidationsList = &s_ValidationsList
+var _ValidationsList_member = &s_ValidationsList_member
+
+var ValueMapping = &sValueMapping
+var ValueMapping_displayValue = &sValueMapping_displayValue
+var ValueMapping_value = &sValueMapping_value
+
+var _ValueMappingList = &s_ValueMappingList
+var _ValueMappingList_member = &s_ValueMappingList_member
+
+var ValueMappings = &sValueMappings
+var ValueMappings_values = &sValueMappings_values
+var ValueMappings_bindingProperties = &sValueMappings_bindingProperties
+
+var CreateComponentRequest = &sCreateComponentRequest
+var CreateComponentRequest_appId = &sCreateComponentRequest_appId
+var CreateComponentRequest_environmentName = &sCreateComponentRequest_environmentName
+var CreateComponentRequest_clientToken = &sCreateComponentRequest_clientToken
+var CreateComponentRequest_componentToCreate = &sCreateComponentRequest_componentToCreate
+
+var CreateComponentResponse = &sCreateComponentResponse
+var CreateComponentResponse_entity = &sCreateComponentResponse_entity
+
+var CreateFormRequest = &sCreateFormRequest
+var CreateFormRequest_appId = &sCreateFormRequest_appId
+var CreateFormRequest_environmentName = &sCreateFormRequest_environmentName
+var CreateFormRequest_clientToken = &sCreateFormRequest_clientToken
+var CreateFormRequest_formToCreate = &sCreateFormRequest_formToCreate
+
+var CreateFormResponse = &sCreateFormResponse
+var CreateFormResponse_entity = &sCreateFormResponse_entity
+
+var CreateThemeRequest = &sCreateThemeRequest
+var CreateThemeRequest_appId = &sCreateThemeRequest_appId
+var CreateThemeRequest_environmentName = &sCreateThemeRequest_environmentName
+var CreateThemeRequest_clientToken = &sCreateThemeRequest_clientToken
+var CreateThemeRequest_themeToCreate = &sCreateThemeRequest_themeToCreate
+
+var CreateThemeResponse = &sCreateThemeResponse
+var CreateThemeResponse_entity = &sCreateThemeResponse_entity
+
+var DeleteComponentRequest = &sDeleteComponentRequest
+var DeleteComponentRequest_appId = &sDeleteComponentRequest_appId
+var DeleteComponentRequest_environmentName = &sDeleteComponentRequest_environmentName
+var DeleteComponentRequest_id = &sDeleteComponentRequest_id
+
+var DeleteFormRequest = &sDeleteFormRequest
+var DeleteFormRequest_appId = &sDeleteFormRequest_appId
+var DeleteFormRequest_environmentName = &sDeleteFormRequest_environmentName
+var DeleteFormRequest_id = &sDeleteFormRequest_id
+
+var DeleteThemeRequest = &sDeleteThemeRequest
+var DeleteThemeRequest_appId = &sDeleteThemeRequest_appId
+var DeleteThemeRequest_environmentName = &sDeleteThemeRequest_environmentName
+var DeleteThemeRequest_id = &sDeleteThemeRequest_id
+
+var ExchangeCodeForTokenRequest = &sExchangeCodeForTokenRequest
+var ExchangeCodeForTokenRequest_provider = &sExchangeCodeForTokenRequest_provider
+var ExchangeCodeForTokenRequest_request = &sExchangeCodeForTokenRequest_request
+
+var ExchangeCodeForTokenResponse = &sExchangeCodeForTokenResponse
+var ExchangeCodeForTokenResponse_accessToken = &sExchangeCodeForTokenResponse_accessToken
+var ExchangeCodeForTokenResponse_expiresIn = &sExchangeCodeForTokenResponse_expiresIn
+var ExchangeCodeForTokenResponse_refreshToken = &sExchangeCodeForTokenResponse_refreshToken
+
+var ExportComponentsRequest = &sExportComponentsRequest
+var ExportComponentsRequest_appId = &sExportComponentsRequest_appId
+var ExportComponentsRequest_environmentName = &sExportComponentsRequest_environmentName
+var ExportComponentsRequest_nextToken = &sExportComponentsRequest_nextToken
+
+var ExportComponentsResponse = &sExportComponentsResponse
+var ExportComponentsResponse_entities = &sExportComponentsResponse_entities
+var ExportComponentsResponse_nextToken = &sExportComponentsResponse_nextToken
+
+var ExportFormsRequest = &sExportFormsRequest
+var ExportFormsRequest_appId = &sExportFormsRequest_appId
+var ExportFormsRequest_environmentName = &sExportFormsRequest_environmentName
+var ExportFormsRequest_nextToken = &sExportFormsRequest_nextToken
+
+var ExportFormsResponse = &sExportFormsResponse
+var ExportFormsResponse_entities = &sExportFormsResponse_entities
+var ExportFormsResponse_nextToken = &sExportFormsResponse_nextToken
+
+var ExportThemesRequest = &sExportThemesRequest
+var ExportThemesRequest_appId = &sExportThemesRequest_appId
+var ExportThemesRequest_environmentName = &sExportThemesRequest_environmentName
+var ExportThemesRequest_nextToken = &sExportThemesRequest_nextToken
+
+var ExportThemesResponse = &sExportThemesResponse
+var ExportThemesResponse_entities = &sExportThemesResponse_entities
+var ExportThemesResponse_nextToken = &sExportThemesResponse_nextToken
+
+var GetCodegenJobRequest = &sGetCodegenJobRequest
+var GetCodegenJobRequest_appId = &sGetCodegenJobRequest_appId
+var GetCodegenJobRequest_environmentName = &sGetCodegenJobRequest_environmentName
+var GetCodegenJobRequest_id = &sGetCodegenJobRequest_id
+
+var GetCodegenJobResponse = &sGetCodegenJobResponse
+var GetCodegenJobResponse_job = &sGetCodegenJobResponse_job
+
+var GetComponentRequest = &sGetComponentRequest
+var GetComponentRequest_appId = &sGetComponentRequest_appId
+var GetComponentRequest_environmentName = &sGetComponentRequest_environmentName
+var GetComponentRequest_id = &sGetComponentRequest_id
+
+var GetComponentResponse = &sGetComponentResponse
+var GetComponentResponse_component = &sGetComponentResponse_component
+
+var GetFormRequest = &sGetFormRequest
+var GetFormRequest_appId = &sGetFormRequest_appId
+var GetFormRequest_environmentName = &sGetFormRequest_environmentName
+var GetFormRequest_id = &sGetFormRequest_id
+
+var GetFormResponse = &sGetFormResponse
+var GetFormResponse_form = &sGetFormResponse_form
+
+var GetMetadataRequest = &sGetMetadataRequest
+var GetMetadataRequest_appId = &sGetMetadataRequest_appId
+var GetMetadataRequest_environmentName = &sGetMetadataRequest_environmentName
+
+var GetMetadataResponse = &sGetMetadataResponse
+var GetMetadataResponse_features = &sGetMetadataResponse_features
+
+var GetThemeRequest = &sGetThemeRequest
+var GetThemeRequest_appId = &sGetThemeRequest_appId
+var GetThemeRequest_environmentName = &sGetThemeRequest_environmentName
+var GetThemeRequest_id = &sGetThemeRequest_id
+
+var GetThemeResponse = &sGetThemeResponse
+var GetThemeResponse_theme = &sGetThemeResponse_theme
+
+var ListCodegenJobsRequest = &sListCodegenJobsRequest
+var ListCodegenJobsRequest_appId = &sListCodegenJobsRequest_appId
+var ListCodegenJobsRequest_environmentName = &sListCodegenJobsRequest_environmentName
+var ListCodegenJobsRequest_nextToken = &sListCodegenJobsRequest_nextToken
+var ListCodegenJobsRequest_maxResults = &sListCodegenJobsRequest_maxResults
+
+var ListCodegenJobsResponse = &sListCodegenJobsResponse
+var ListCodegenJobsResponse_entities = &sListCodegenJobsResponse_entities
+var ListCodegenJobsResponse_nextToken = &sListCodegenJobsResponse_nextToken
+
+var ListComponentsRequest = &sListComponentsRequest
+var ListComponentsRequest_appId = &sListComponentsRequest_appId
+var ListComponentsRequest_environmentName = &sListComponentsRequest_environmentName
+var ListComponentsRequest_nextToken = &sListComponentsRequest_nextToken
+var ListComponentsRequest_maxResults = &sListComponentsRequest_maxResults
+
+var ListComponentsResponse = &sListComponentsResponse
+var ListComponentsResponse_entities = &sListComponentsResponse_entities
+var ListComponentsResponse_nextToken = &sListComponentsResponse_nextToken
+
+var ListFormsRequest = &sListFormsRequest
+var ListFormsRequest_appId = &sListFormsRequest_appId
+var ListFormsRequest_environmentName = &sListFormsRequest_environmentName
+var ListFormsRequest_nextToken = &sListFormsRequest_nextToken
+var ListFormsRequest_maxResults = &sListFormsRequest_maxResults
+
+var ListFormsResponse = &sListFormsResponse
+var ListFormsResponse_entities = &sListFormsResponse_entities
+var ListFormsResponse_nextToken = &sListFormsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListThemesRequest = &sListThemesRequest
+var ListThemesRequest_appId = &sListThemesRequest_appId
+var ListThemesRequest_environmentName = &sListThemesRequest_environmentName
+var ListThemesRequest_nextToken = &sListThemesRequest_nextToken
+var ListThemesRequest_maxResults = &sListThemesRequest_maxResults
+
+var ListThemesResponse = &sListThemesResponse
+var ListThemesResponse_entities = &sListThemesResponse_entities
+var ListThemesResponse_nextToken = &sListThemesResponse_nextToken
+
+var PutMetadataFlagRequest = &sPutMetadataFlagRequest
+var PutMetadataFlagRequest_appId = &sPutMetadataFlagRequest_appId
+var PutMetadataFlagRequest_environmentName = &sPutMetadataFlagRequest_environmentName
+var PutMetadataFlagRequest_featureName = &sPutMetadataFlagRequest_featureName
+var PutMetadataFlagRequest_body = &sPutMetadataFlagRequest_body
+
+var RefreshTokenRequest = &sRefreshTokenRequest
+var RefreshTokenRequest_provider = &sRefreshTokenRequest_provider
+var RefreshTokenRequest_refreshTokenBody = &sRefreshTokenRequest_refreshTokenBody
+
+var RefreshTokenResponse = &sRefreshTokenResponse
+var RefreshTokenResponse_accessToken = &sRefreshTokenResponse_accessToken
+var RefreshTokenResponse_expiresIn = &sRefreshTokenResponse_expiresIn
+
+var StartCodegenJobRequest = &sStartCodegenJobRequest
+var StartCodegenJobRequest_appId = &sStartCodegenJobRequest_appId
+var StartCodegenJobRequest_environmentName = &sStartCodegenJobRequest_environmentName
+var StartCodegenJobRequest_clientToken = &sStartCodegenJobRequest_clientToken
+var StartCodegenJobRequest_codegenJobToCreate = &sStartCodegenJobRequest_codegenJobToCreate
+
+var StartCodegenJobResponse = &sStartCodegenJobResponse
+var StartCodegenJobResponse_entity = &sStartCodegenJobResponse_entity
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateComponentRequest = &sUpdateComponentRequest
+var UpdateComponentRequest_appId = &sUpdateComponentRequest_appId
+var UpdateComponentRequest_environmentName = &sUpdateComponentRequest_environmentName
+var UpdateComponentRequest_id = &sUpdateComponentRequest_id
+var UpdateComponentRequest_clientToken = &sUpdateComponentRequest_clientToken
+var UpdateComponentRequest_updatedComponent = &sUpdateComponentRequest_updatedComponent
+
+var UpdateComponentResponse = &sUpdateComponentResponse
+var UpdateComponentResponse_entity = &sUpdateComponentResponse_entity
+
+var UpdateFormRequest = &sUpdateFormRequest
+var UpdateFormRequest_appId = &sUpdateFormRequest_appId
+var UpdateFormRequest_environmentName = &sUpdateFormRequest_environmentName
+var UpdateFormRequest_id = &sUpdateFormRequest_id
+var UpdateFormRequest_clientToken = &sUpdateFormRequest_clientToken
+var UpdateFormRequest_updatedForm = &sUpdateFormRequest_updatedForm
+
+var UpdateFormResponse = &sUpdateFormResponse
+var UpdateFormResponse_entity = &sUpdateFormResponse_entity
+
+var UpdateThemeRequest = &sUpdateThemeRequest
+var UpdateThemeRequest_appId = &sUpdateThemeRequest_appId
+var UpdateThemeRequest_environmentName = &sUpdateThemeRequest_environmentName
+var UpdateThemeRequest_id = &sUpdateThemeRequest_id
+var UpdateThemeRequest_clientToken = &sUpdateThemeRequest_clientToken
+var UpdateThemeRequest_updatedTheme = &sUpdateThemeRequest_updatedTheme
+
+var UpdateThemeResponse = &sUpdateThemeResponse
+var UpdateThemeResponse_entity = &sUpdateThemeResponse_entity
+
+var AmplifyUIBuilder = &smithy.ServiceSchema{Schema: &s_AmplifyUIBuilder, Version: "2021-08-11"}

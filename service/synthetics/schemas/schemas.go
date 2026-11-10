@@ -4,2203 +4,2174 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AssociateResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+var (
+	eAssociateResource                                     smithy.SchemaExtensions
+	eCreateCanary                                          smithy.SchemaExtensions
+	eCreateGroup                                           smithy.SchemaExtensions
+	eDeleteCanary                                          smithy.SchemaExtensions
+	eDeleteGroup                                           smithy.SchemaExtensions
+	eDescribeCanaries                                      smithy.SchemaExtensions
+	eDescribeCanariesLastRun                               smithy.SchemaExtensions
+	eDescribeRuntimeVersions                               smithy.SchemaExtensions
+	eDisassociateResource                                  smithy.SchemaExtensions
+	eGetCanary                                             smithy.SchemaExtensions
+	eGetCanaryRuns                                         smithy.SchemaExtensions
+	eGetGroup                                              smithy.SchemaExtensions
+	eListAssociatedGroups                                  smithy.SchemaExtensions
+	eListGroupResources                                    smithy.SchemaExtensions
+	eListGroups                                            smithy.SchemaExtensions
+	eListTagsForResource                                   smithy.SchemaExtensions
+	eStartCanary                                           smithy.SchemaExtensions
+	eStartCanaryDryRun                                     smithy.SchemaExtensions
+	eStopCanary                                            smithy.SchemaExtensions
+	eTagResource                                           smithy.SchemaExtensions
+	eUntagResource                                         smithy.SchemaExtensions
+	eUpdateCanary                                          smithy.SchemaExtensions
+	e_Synthetics                                           smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                         smithy.SchemaExtensions
+	eAddReplicaLocationInput                               smithy.SchemaExtensions
+	eAddReplicaLocationInput_Location                      smithy.SchemaExtensions
+	eAddReplicaLocationInput_VpcConfig                     smithy.SchemaExtensions
+	eAddReplicaLocationInput_KmsKeyArn                     smithy.SchemaExtensions
+	e_AddReplicaLocations                                  smithy.SchemaExtensions
+	e_AddReplicaLocations_member                           smithy.SchemaExtensions
+	eArtifactConfigInput                                   smithy.SchemaExtensions
+	eArtifactConfigInput_S3Encryption                      smithy.SchemaExtensions
+	eArtifactConfigOutput                                  smithy.SchemaExtensions
+	eArtifactConfigOutput_S3Encryption                     smithy.SchemaExtensions
+	eBadRequestException                                   smithy.SchemaExtensions
+	eBadRequestException_Message                           smithy.SchemaExtensions
+	eBaseScreenshot                                        smithy.SchemaExtensions
+	eBaseScreenshot_ScreenshotName                         smithy.SchemaExtensions
+	eBaseScreenshot_IgnoreCoordinates                      smithy.SchemaExtensions
+	e_BaseScreenshotConfigIgnoreCoordinate                 smithy.SchemaExtensions
+	e_BaseScreenshotIgnoreCoordinates                      smithy.SchemaExtensions
+	e_BaseScreenshotIgnoreCoordinates_member               smithy.SchemaExtensions
+	e_BaseScreenshots                                      smithy.SchemaExtensions
+	e_BaseScreenshots_member                               smithy.SchemaExtensions
+	e_Blob                                                 smithy.SchemaExtensions
+	e_BlueprintType                                        smithy.SchemaExtensions
+	e_BlueprintTypes                                       smithy.SchemaExtensions
+	e_BlueprintTypes_member                                smithy.SchemaExtensions
+	e_boolean                                              smithy.SchemaExtensions
+	eBrowserConfig                                         smithy.SchemaExtensions
+	eBrowserConfig_BrowserType                             smithy.SchemaExtensions
+	e_BrowserConfigs                                       smithy.SchemaExtensions
+	e_BrowserConfigs_member                                smithy.SchemaExtensions
+	eBrowserType                                           smithy.SchemaExtensions
+	eBrowserType_CHROME                                    smithy.SchemaExtensions
+	eBrowserType_FIREFOX                                   smithy.SchemaExtensions
+	e_Canaries                                             smithy.SchemaExtensions
+	e_Canaries_member                                      smithy.SchemaExtensions
+	e_CanariesLastRun                                      smithy.SchemaExtensions
+	e_CanariesLastRun_member                               smithy.SchemaExtensions
+	eCanary                                                smithy.SchemaExtensions
+	eCanary_Id                                             smithy.SchemaExtensions
+	eCanary_Name                                           smithy.SchemaExtensions
+	eCanary_Code                                           smithy.SchemaExtensions
+	eCanary_ExecutionRoleArn                               smithy.SchemaExtensions
+	eCanary_Schedule                                       smithy.SchemaExtensions
+	eCanary_RunConfig                                      smithy.SchemaExtensions
+	eCanary_SuccessRetentionPeriodInDays                   smithy.SchemaExtensions
+	eCanary_FailureRetentionPeriodInDays                   smithy.SchemaExtensions
+	eCanary_Status                                         smithy.SchemaExtensions
+	eCanary_Timeline                                       smithy.SchemaExtensions
+	eCanary_ArtifactS3Location                             smithy.SchemaExtensions
+	eCanary_EngineArn                                      smithy.SchemaExtensions
+	eCanary_RuntimeVersion                                 smithy.SchemaExtensions
+	eCanary_VpcConfig                                      smithy.SchemaExtensions
+	eCanary_VisualReference                                smithy.SchemaExtensions
+	eCanary_ProvisionedResourceCleanup                     smithy.SchemaExtensions
+	eCanary_BrowserConfigs                                 smithy.SchemaExtensions
+	eCanary_EngineConfigs                                  smithy.SchemaExtensions
+	eCanary_VisualReferences                               smithy.SchemaExtensions
+	eCanary_MultiLocationConfig                            smithy.SchemaExtensions
+	eCanary_Tags                                           smithy.SchemaExtensions
+	eCanary_ArtifactConfig                                 smithy.SchemaExtensions
+	eCanary_KmsKeyArn                                      smithy.SchemaExtensions
+	eCanary_DryRunConfig                                   smithy.SchemaExtensions
+	e_CanaryArn                                            smithy.SchemaExtensions
+	eCanaryCodeInput                                       smithy.SchemaExtensions
+	eCanaryCodeInput_S3Bucket                              smithy.SchemaExtensions
+	eCanaryCodeInput_S3Key                                 smithy.SchemaExtensions
+	eCanaryCodeInput_S3Version                             smithy.SchemaExtensions
+	eCanaryCodeInput_ZipFile                               smithy.SchemaExtensions
+	eCanaryCodeInput_Handler                               smithy.SchemaExtensions
+	eCanaryCodeInput_BlueprintTypes                        smithy.SchemaExtensions
+	eCanaryCodeInput_Dependencies                          smithy.SchemaExtensions
+	eCanaryCodeOutput                                      smithy.SchemaExtensions
+	eCanaryCodeOutput_SourceLocationArn                    smithy.SchemaExtensions
+	eCanaryCodeOutput_Handler                              smithy.SchemaExtensions
+	eCanaryCodeOutput_BlueprintTypes                       smithy.SchemaExtensions
+	eCanaryCodeOutput_Dependencies                         smithy.SchemaExtensions
+	eCanaryDryRunConfigOutput                              smithy.SchemaExtensions
+	eCanaryDryRunConfigOutput_DryRunId                     smithy.SchemaExtensions
+	eCanaryLastRun                                         smithy.SchemaExtensions
+	eCanaryLastRun_CanaryName                              smithy.SchemaExtensions
+	eCanaryLastRun_LastRun                                 smithy.SchemaExtensions
+	e_CanaryName                                           smithy.SchemaExtensions
+	eCanaryRun                                             smithy.SchemaExtensions
+	eCanaryRun_Id                                          smithy.SchemaExtensions
+	eCanaryRun_ScheduledRunId                              smithy.SchemaExtensions
+	eCanaryRun_RetryAttempt                                smithy.SchemaExtensions
+	eCanaryRun_Name                                        smithy.SchemaExtensions
+	eCanaryRun_Status                                      smithy.SchemaExtensions
+	eCanaryRun_Timeline                                    smithy.SchemaExtensions
+	eCanaryRun_ArtifactS3Location                          smithy.SchemaExtensions
+	eCanaryRun_DryRunConfig                                smithy.SchemaExtensions
+	eCanaryRun_BrowserType                                 smithy.SchemaExtensions
+	eCanaryRun_Location                                    smithy.SchemaExtensions
+	eCanaryRunConfigInput                                  smithy.SchemaExtensions
+	eCanaryRunConfigInput_TimeoutInSeconds                 smithy.SchemaExtensions
+	eCanaryRunConfigInput_MemoryInMB                       smithy.SchemaExtensions
+	eCanaryRunConfigInput_ActiveTracing                    smithy.SchemaExtensions
+	eCanaryRunConfigInput_EnvironmentVariables             smithy.SchemaExtensions
+	eCanaryRunConfigInput_EphemeralStorage                 smithy.SchemaExtensions
+	eCanaryRunConfigOutput                                 smithy.SchemaExtensions
+	eCanaryRunConfigOutput_TimeoutInSeconds                smithy.SchemaExtensions
+	eCanaryRunConfigOutput_MemoryInMB                      smithy.SchemaExtensions
+	eCanaryRunConfigOutput_ActiveTracing                   smithy.SchemaExtensions
+	eCanaryRunConfigOutput_EphemeralStorage                smithy.SchemaExtensions
+	e_CanaryRuns                                           smithy.SchemaExtensions
+	e_CanaryRuns_member                                    smithy.SchemaExtensions
+	eCanaryRunState                                        smithy.SchemaExtensions
+	eCanaryRunState_RUNNING                                smithy.SchemaExtensions
+	eCanaryRunState_PASSED                                 smithy.SchemaExtensions
+	eCanaryRunState_FAILED                                 smithy.SchemaExtensions
+	eCanaryRunStateReasonCode                              smithy.SchemaExtensions
+	eCanaryRunStateReasonCode_CANARY_FAILURE               smithy.SchemaExtensions
+	eCanaryRunStateReasonCode_EXECUTION_FAILURE            smithy.SchemaExtensions
+	eCanaryRunStatus                                       smithy.SchemaExtensions
+	eCanaryRunStatus_State                                 smithy.SchemaExtensions
+	eCanaryRunStatus_StateReason                           smithy.SchemaExtensions
+	eCanaryRunStatus_StateReasonCode                       smithy.SchemaExtensions
+	eCanaryRunStatus_TestResult                            smithy.SchemaExtensions
+	eCanaryRunTestResult                                   smithy.SchemaExtensions
+	eCanaryRunTestResult_PASSED                            smithy.SchemaExtensions
+	eCanaryRunTestResult_FAILED                            smithy.SchemaExtensions
+	eCanaryRunTestResult_UNKNOWN                           smithy.SchemaExtensions
+	eCanaryRunTimeline                                     smithy.SchemaExtensions
+	eCanaryRunTimeline_Started                             smithy.SchemaExtensions
+	eCanaryRunTimeline_Completed                           smithy.SchemaExtensions
+	eCanaryRunTimeline_MetricTimestampForRunAndRetries     smithy.SchemaExtensions
+	eCanaryScheduleInput                                   smithy.SchemaExtensions
+	eCanaryScheduleInput_Expression                        smithy.SchemaExtensions
+	eCanaryScheduleInput_DurationInSeconds                 smithy.SchemaExtensions
+	eCanaryScheduleInput_RetryConfig                       smithy.SchemaExtensions
+	eCanaryScheduleOutput                                  smithy.SchemaExtensions
+	eCanaryScheduleOutput_Expression                       smithy.SchemaExtensions
+	eCanaryScheduleOutput_DurationInSeconds                smithy.SchemaExtensions
+	eCanaryScheduleOutput_RetryConfig                      smithy.SchemaExtensions
+	eCanaryState                                           smithy.SchemaExtensions
+	eCanaryState_CREATING                                  smithy.SchemaExtensions
+	eCanaryState_READY                                     smithy.SchemaExtensions
+	eCanaryState_STARTING                                  smithy.SchemaExtensions
+	eCanaryState_RUNNING                                   smithy.SchemaExtensions
+	eCanaryState_UPDATING                                  smithy.SchemaExtensions
+	eCanaryState_STOPPING                                  smithy.SchemaExtensions
+	eCanaryState_STOPPED                                   smithy.SchemaExtensions
+	eCanaryState_ERROR                                     smithy.SchemaExtensions
+	eCanaryState_DELETING                                  smithy.SchemaExtensions
+	eCanaryStateReasonCode                                 smithy.SchemaExtensions
+	eCanaryStateReasonCode_INVALID_PERMISSIONS             smithy.SchemaExtensions
+	eCanaryStateReasonCode_CREATE_PENDING                  smithy.SchemaExtensions
+	eCanaryStateReasonCode_CREATE_IN_PROGRESS              smithy.SchemaExtensions
+	eCanaryStateReasonCode_CREATE_FAILED                   smithy.SchemaExtensions
+	eCanaryStateReasonCode_UPDATE_PENDING                  smithy.SchemaExtensions
+	eCanaryStateReasonCode_UPDATE_IN_PROGRESS              smithy.SchemaExtensions
+	eCanaryStateReasonCode_UPDATE_COMPLETE                 smithy.SchemaExtensions
+	eCanaryStateReasonCode_ROLLBACK_COMPLETE               smithy.SchemaExtensions
+	eCanaryStateReasonCode_ROLLBACK_FAILED                 smithy.SchemaExtensions
+	eCanaryStateReasonCode_DELETE_IN_PROGRESS              smithy.SchemaExtensions
+	eCanaryStateReasonCode_DELETE_FAILED                   smithy.SchemaExtensions
+	eCanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS         smithy.SchemaExtensions
+	eCanaryStatus                                          smithy.SchemaExtensions
+	eCanaryStatus_State                                    smithy.SchemaExtensions
+	eCanaryStatus_StateReason                              smithy.SchemaExtensions
+	eCanaryStatus_StateReasonCode                          smithy.SchemaExtensions
+	eCanaryTimeline                                        smithy.SchemaExtensions
+	eCanaryTimeline_Created                                smithy.SchemaExtensions
+	eCanaryTimeline_LastModified                           smithy.SchemaExtensions
+	eCanaryTimeline_LastStarted                            smithy.SchemaExtensions
+	eCanaryTimeline_LastStopped                            smithy.SchemaExtensions
+	e_CodeHandler                                          smithy.SchemaExtensions
+	eConflictException                                     smithy.SchemaExtensions
+	eConflictException_Message                             smithy.SchemaExtensions
+	e_Dependencies                                         smithy.SchemaExtensions
+	e_Dependencies_member                                  smithy.SchemaExtensions
+	eDependency                                            smithy.SchemaExtensions
+	eDependency_Type                                       smithy.SchemaExtensions
+	eDependency_Reference                                  smithy.SchemaExtensions
+	eDependencyType                                        smithy.SchemaExtensions
+	eDependencyType_LambdaLayer                            smithy.SchemaExtensions
+	e_DescribeCanariesLastRunNameFilter                    smithy.SchemaExtensions
+	e_DescribeCanariesLastRunNameFilter_member             smithy.SchemaExtensions
+	e_DescribeCanariesNameFilter                           smithy.SchemaExtensions
+	e_DescribeCanariesNameFilter_member                    smithy.SchemaExtensions
+	eDryRunConfigOutput                                    smithy.SchemaExtensions
+	eDryRunConfigOutput_DryRunId                           smithy.SchemaExtensions
+	eDryRunConfigOutput_LastDryRunExecutionStatus          smithy.SchemaExtensions
+	eEncryptionMode                                        smithy.SchemaExtensions
+	eEncryptionMode_SSE_S3                                 smithy.SchemaExtensions
+	eEncryptionMode_SSE_KMS                                smithy.SchemaExtensions
+	eEngineConfig                                          smithy.SchemaExtensions
+	eEngineConfig_EngineArn                                smithy.SchemaExtensions
+	eEngineConfig_BrowserType                              smithy.SchemaExtensions
+	e_EngineConfigs                                        smithy.SchemaExtensions
+	e_EngineConfigs_member                                 smithy.SchemaExtensions
+	e_EnvironmentVariableName                              smithy.SchemaExtensions
+	e_EnvironmentVariablesMap                              smithy.SchemaExtensions
+	e_EnvironmentVariablesMap_key                          smithy.SchemaExtensions
+	e_EnvironmentVariablesMap_value                        smithy.SchemaExtensions
+	e_EnvironmentVariableValue                             smithy.SchemaExtensions
+	e_EphemeralStorageSize                                 smithy.SchemaExtensions
+	e_ErrorMessage                                         smithy.SchemaExtensions
+	e_FunctionArn                                          smithy.SchemaExtensions
+	eGroup                                                 smithy.SchemaExtensions
+	eGroup_Id                                              smithy.SchemaExtensions
+	eGroup_Name                                            smithy.SchemaExtensions
+	eGroup_Arn                                             smithy.SchemaExtensions
+	eGroup_Tags                                            smithy.SchemaExtensions
+	eGroup_CreatedTime                                     smithy.SchemaExtensions
+	eGroup_LastModifiedTime                                smithy.SchemaExtensions
+	e_GroupArn                                             smithy.SchemaExtensions
+	e_GroupIdentifier                                      smithy.SchemaExtensions
+	e_GroupName                                            smithy.SchemaExtensions
+	eGroupSummary                                          smithy.SchemaExtensions
+	eGroupSummary_Id                                       smithy.SchemaExtensions
+	eGroupSummary_Name                                     smithy.SchemaExtensions
+	eGroupSummary_Arn                                      smithy.SchemaExtensions
+	e_GroupSummaryList                                     smithy.SchemaExtensions
+	e_GroupSummaryList_member                              smithy.SchemaExtensions
+	eInternalFailureException                              smithy.SchemaExtensions
+	eInternalFailureException_Message                      smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_Message                       smithy.SchemaExtensions
+	e_KmsKeyArn                                            smithy.SchemaExtensions
+	e_Location                                             smithy.SchemaExtensions
+	eLocationType                                          smithy.SchemaExtensions
+	eLocationType_Primary                                  smithy.SchemaExtensions
+	eLocationType_Replica                                  smithy.SchemaExtensions
+	e_MaxCanaryResults                                     smithy.SchemaExtensions
+	e_MaxFifteenMinutesInSeconds                           smithy.SchemaExtensions
+	e_MaxGroupResults                                      smithy.SchemaExtensions
+	e_MaxOneYearInSeconds                                  smithy.SchemaExtensions
+	e_MaxRetries                                           smithy.SchemaExtensions
+	e_MaxSize100                                           smithy.SchemaExtensions
+	e_MaxSize1024                                          smithy.SchemaExtensions
+	e_MaxSize3008                                          smithy.SchemaExtensions
+	eMultiLocationConfig                                   smithy.SchemaExtensions
+	eMultiLocationConfig_LocationType                      smithy.SchemaExtensions
+	eMultiLocationConfig_PrimaryLocation                   smithy.SchemaExtensions
+	eMultiLocationConfig_Replicas                          smithy.SchemaExtensions
+	eMultiLocationConfig_ReplicationState                  smithy.SchemaExtensions
+	eNotFoundException                                     smithy.SchemaExtensions
+	eNotFoundException_Message                             smithy.SchemaExtensions
+	e_NullableBoolean                                      smithy.SchemaExtensions
+	e_PaginationToken                                      smithy.SchemaExtensions
+	eProvisionedResourceCleanupSetting                     smithy.SchemaExtensions
+	eProvisionedResourceCleanupSetting_AUTOMATIC           smithy.SchemaExtensions
+	eProvisionedResourceCleanupSetting_OFF                 smithy.SchemaExtensions
+	e_RemoveReplicaLocations                               smithy.SchemaExtensions
+	e_RemoveReplicaLocations_member                        smithy.SchemaExtensions
+	eReplica                                               smithy.SchemaExtensions
+	eReplica_Location                                      smithy.SchemaExtensions
+	eReplica_ReplicationStatus                             smithy.SchemaExtensions
+	eReplica_CanaryState                                   smithy.SchemaExtensions
+	eReplica_LastModified                                  smithy.SchemaExtensions
+	eReplica_VpcConfig                                     smithy.SchemaExtensions
+	e_Replicas                                             smithy.SchemaExtensions
+	e_Replicas_member                                      smithy.SchemaExtensions
+	eReplicationState                                      smithy.SchemaExtensions
+	eReplicationState_InProgress                           smithy.SchemaExtensions
+	eReplicationState_InSync                               smithy.SchemaExtensions
+	eReplicationState_Inconsistent                         smithy.SchemaExtensions
+	eReplicationStatus                                     smithy.SchemaExtensions
+	eReplicationStatus_State                               smithy.SchemaExtensions
+	eReplicationStatus_StateReason                         smithy.SchemaExtensions
+	eReplicationStatus_StateReasonCode                     smithy.SchemaExtensions
+	eRequestEntityTooLargeException                        smithy.SchemaExtensions
+	eRequestEntityTooLargeException_Message                smithy.SchemaExtensions
+	e_ResourceArn                                          smithy.SchemaExtensions
+	e_ResourceList                                         smithy.SchemaExtensions
+	e_ResourceList_member                                  smithy.SchemaExtensions
+	eResourceNotFoundException                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                     smithy.SchemaExtensions
+	eResourceToTag                                         smithy.SchemaExtensions
+	eResourceToTag_LAMBDA_FUNCTION                         smithy.SchemaExtensions
+	e_RetryAttempt                                         smithy.SchemaExtensions
+	eRetryConfigInput                                      smithy.SchemaExtensions
+	eRetryConfigInput_MaxRetries                           smithy.SchemaExtensions
+	eRetryConfigOutput                                     smithy.SchemaExtensions
+	eRetryConfigOutput_MaxRetries                          smithy.SchemaExtensions
+	e_RoleArn                                              smithy.SchemaExtensions
+	eRuntimeVersion                                        smithy.SchemaExtensions
+	eRuntimeVersion_VersionName                            smithy.SchemaExtensions
+	eRuntimeVersion_Description                            smithy.SchemaExtensions
+	eRuntimeVersion_ReleaseDate                            smithy.SchemaExtensions
+	eRuntimeVersion_DeprecationDate                        smithy.SchemaExtensions
+	e_RuntimeVersionList                                   smithy.SchemaExtensions
+	e_RuntimeVersionList_member                            smithy.SchemaExtensions
+	eRunType                                               smithy.SchemaExtensions
+	eRunType_CANARY_RUN                                    smithy.SchemaExtensions
+	eRunType_DRY_RUN                                       smithy.SchemaExtensions
+	eS3EncryptionConfig                                    smithy.SchemaExtensions
+	eS3EncryptionConfig_EncryptionMode                     smithy.SchemaExtensions
+	eS3EncryptionConfig_KmsKeyArn                          smithy.SchemaExtensions
+	e_SecurityGroupId                                      smithy.SchemaExtensions
+	e_SecurityGroupIds                                     smithy.SchemaExtensions
+	e_SecurityGroupIds_member                              smithy.SchemaExtensions
+	eServiceQuotaExceededException                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                 smithy.SchemaExtensions
+	e_String                                               smithy.SchemaExtensions
+	e_StringList                                           smithy.SchemaExtensions
+	e_StringList_member                                    smithy.SchemaExtensions
+	e_SubnetId                                             smithy.SchemaExtensions
+	e_SubnetIds                                            smithy.SchemaExtensions
+	e_SubnetIds_member                                     smithy.SchemaExtensions
+	e_TagKey                                               smithy.SchemaExtensions
+	e_TagKeyList                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                    smithy.SchemaExtensions
+	e_TagMap                                               smithy.SchemaExtensions
+	e_TagMap_key                                           smithy.SchemaExtensions
+	e_TagMap_value                                         smithy.SchemaExtensions
+	e_TagValue                                             smithy.SchemaExtensions
+	e_Timestamp                                            smithy.SchemaExtensions
+	e_Token                                                smithy.SchemaExtensions
+	eTooManyRequestsException                              smithy.SchemaExtensions
+	eTooManyRequestsException_Message                      smithy.SchemaExtensions
+	e_UUID                                                 smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_Message                           smithy.SchemaExtensions
+	eVisualReferenceInput                                  smithy.SchemaExtensions
+	eVisualReferenceInput_BaseScreenshots                  smithy.SchemaExtensions
+	eVisualReferenceInput_BaseCanaryRunId                  smithy.SchemaExtensions
+	eVisualReferenceInput_BrowserType                      smithy.SchemaExtensions
+	eVisualReferenceOutput                                 smithy.SchemaExtensions
+	eVisualReferenceOutput_BaseScreenshots                 smithy.SchemaExtensions
+	eVisualReferenceOutput_BaseCanaryRunId                 smithy.SchemaExtensions
+	eVisualReferenceOutput_BrowserType                     smithy.SchemaExtensions
+	e_VisualReferences                                     smithy.SchemaExtensions
+	e_VisualReferences_member                              smithy.SchemaExtensions
+	e_VisualReferencesOutput                               smithy.SchemaExtensions
+	e_VisualReferencesOutput_member                        smithy.SchemaExtensions
+	eVpcConfigInput                                        smithy.SchemaExtensions
+	eVpcConfigInput_SubnetIds                              smithy.SchemaExtensions
+	eVpcConfigInput_SecurityGroupIds                       smithy.SchemaExtensions
+	eVpcConfigInput_Ipv6AllowedForDualStack                smithy.SchemaExtensions
+	eVpcConfigOutput                                       smithy.SchemaExtensions
+	eVpcConfigOutput_VpcId                                 smithy.SchemaExtensions
+	eVpcConfigOutput_SubnetIds                             smithy.SchemaExtensions
+	eVpcConfigOutput_SecurityGroupIds                      smithy.SchemaExtensions
+	eVpcConfigOutput_Ipv6AllowedForDualStack               smithy.SchemaExtensions
+	e_VpcId                                                smithy.SchemaExtensions
+	eAssociateResourceRequest                              smithy.SchemaExtensions
+	eAssociateResourceRequest_GroupIdentifier              smithy.SchemaExtensions
+	eAssociateResourceRequest_ResourceArn                  smithy.SchemaExtensions
+	eAssociateResourceResponse                             smithy.SchemaExtensions
+	eCreateCanaryRequest                                   smithy.SchemaExtensions
+	eCreateCanaryRequest_Name                              smithy.SchemaExtensions
+	eCreateCanaryRequest_Code                              smithy.SchemaExtensions
+	eCreateCanaryRequest_ArtifactS3Location                smithy.SchemaExtensions
+	eCreateCanaryRequest_ExecutionRoleArn                  smithy.SchemaExtensions
+	eCreateCanaryRequest_Schedule                          smithy.SchemaExtensions
+	eCreateCanaryRequest_RunConfig                         smithy.SchemaExtensions
+	eCreateCanaryRequest_SuccessRetentionPeriodInDays      smithy.SchemaExtensions
+	eCreateCanaryRequest_FailureRetentionPeriodInDays      smithy.SchemaExtensions
+	eCreateCanaryRequest_RuntimeVersion                    smithy.SchemaExtensions
+	eCreateCanaryRequest_VpcConfig                         smithy.SchemaExtensions
+	eCreateCanaryRequest_ResourcesToReplicateTags          smithy.SchemaExtensions
+	eCreateCanaryRequest_ProvisionedResourceCleanup        smithy.SchemaExtensions
+	eCreateCanaryRequest_BrowserConfigs                    smithy.SchemaExtensions
+	eCreateCanaryRequest_AddReplicaLocations               smithy.SchemaExtensions
+	eCreateCanaryRequest_Tags                              smithy.SchemaExtensions
+	eCreateCanaryRequest_ArtifactConfig                    smithy.SchemaExtensions
+	eCreateCanaryRequest_KmsKeyArn                         smithy.SchemaExtensions
+	eCreateCanaryResponse                                  smithy.SchemaExtensions
+	eCreateCanaryResponse_Canary                           smithy.SchemaExtensions
+	eCreateGroupRequest                                    smithy.SchemaExtensions
+	eCreateGroupRequest_Name                               smithy.SchemaExtensions
+	eCreateGroupRequest_Tags                               smithy.SchemaExtensions
+	eCreateGroupResponse                                   smithy.SchemaExtensions
+	eCreateGroupResponse_Group                             smithy.SchemaExtensions
+	eDeleteCanaryRequest                                   smithy.SchemaExtensions
+	eDeleteCanaryRequest_Name                              smithy.SchemaExtensions
+	eDeleteCanaryRequest_DeleteLambda                      smithy.SchemaExtensions
+	eDeleteCanaryResponse                                  smithy.SchemaExtensions
+	eDeleteGroupRequest                                    smithy.SchemaExtensions
+	eDeleteGroupRequest_GroupIdentifier                    smithy.SchemaExtensions
+	eDeleteGroupResponse                                   smithy.SchemaExtensions
+	eDescribeCanariesRequest                               smithy.SchemaExtensions
+	eDescribeCanariesRequest_NextToken                     smithy.SchemaExtensions
+	eDescribeCanariesRequest_MaxResults                    smithy.SchemaExtensions
+	eDescribeCanariesRequest_Names                         smithy.SchemaExtensions
+	eDescribeCanariesLastRunRequest                        smithy.SchemaExtensions
+	eDescribeCanariesLastRunRequest_NextToken              smithy.SchemaExtensions
+	eDescribeCanariesLastRunRequest_MaxResults             smithy.SchemaExtensions
+	eDescribeCanariesLastRunRequest_Names                  smithy.SchemaExtensions
+	eDescribeCanariesLastRunRequest_BrowserType            smithy.SchemaExtensions
+	eDescribeCanariesLastRunResponse                       smithy.SchemaExtensions
+	eDescribeCanariesLastRunResponse_CanariesLastRun       smithy.SchemaExtensions
+	eDescribeCanariesLastRunResponse_NextToken             smithy.SchemaExtensions
+	eDescribeCanariesResponse                              smithy.SchemaExtensions
+	eDescribeCanariesResponse_Canaries                     smithy.SchemaExtensions
+	eDescribeCanariesResponse_NextToken                    smithy.SchemaExtensions
+	eDescribeRuntimeVersionsRequest                        smithy.SchemaExtensions
+	eDescribeRuntimeVersionsRequest_NextToken              smithy.SchemaExtensions
+	eDescribeRuntimeVersionsRequest_MaxResults             smithy.SchemaExtensions
+	eDescribeRuntimeVersionsResponse                       smithy.SchemaExtensions
+	eDescribeRuntimeVersionsResponse_RuntimeVersions       smithy.SchemaExtensions
+	eDescribeRuntimeVersionsResponse_NextToken             smithy.SchemaExtensions
+	eDisassociateResourceRequest                           smithy.SchemaExtensions
+	eDisassociateResourceRequest_GroupIdentifier           smithy.SchemaExtensions
+	eDisassociateResourceRequest_ResourceArn               smithy.SchemaExtensions
+	eDisassociateResourceResponse                          smithy.SchemaExtensions
+	eGetCanaryRequest                                      smithy.SchemaExtensions
+	eGetCanaryRequest_Name                                 smithy.SchemaExtensions
+	eGetCanaryRequest_DryRunId                             smithy.SchemaExtensions
+	eGetCanaryResponse                                     smithy.SchemaExtensions
+	eGetCanaryResponse_Canary                              smithy.SchemaExtensions
+	eGetCanaryRunsRequest                                  smithy.SchemaExtensions
+	eGetCanaryRunsRequest_Name                             smithy.SchemaExtensions
+	eGetCanaryRunsRequest_NextToken                        smithy.SchemaExtensions
+	eGetCanaryRunsRequest_MaxResults                       smithy.SchemaExtensions
+	eGetCanaryRunsRequest_DryRunId                         smithy.SchemaExtensions
+	eGetCanaryRunsRequest_RunType                          smithy.SchemaExtensions
+	eGetCanaryRunsResponse                                 smithy.SchemaExtensions
+	eGetCanaryRunsResponse_CanaryRuns                      smithy.SchemaExtensions
+	eGetCanaryRunsResponse_NextToken                       smithy.SchemaExtensions
+	eGetGroupRequest                                       smithy.SchemaExtensions
+	eGetGroupRequest_GroupIdentifier                       smithy.SchemaExtensions
+	eGetGroupResponse                                      smithy.SchemaExtensions
+	eGetGroupResponse_Group                                smithy.SchemaExtensions
+	eListAssociatedGroupsRequest                           smithy.SchemaExtensions
+	eListAssociatedGroupsRequest_NextToken                 smithy.SchemaExtensions
+	eListAssociatedGroupsRequest_MaxResults                smithy.SchemaExtensions
+	eListAssociatedGroupsRequest_ResourceArn               smithy.SchemaExtensions
+	eListAssociatedGroupsResponse                          smithy.SchemaExtensions
+	eListAssociatedGroupsResponse_Groups                   smithy.SchemaExtensions
+	eListAssociatedGroupsResponse_NextToken                smithy.SchemaExtensions
+	eListGroupResourcesRequest                             smithy.SchemaExtensions
+	eListGroupResourcesRequest_NextToken                   smithy.SchemaExtensions
+	eListGroupResourcesRequest_MaxResults                  smithy.SchemaExtensions
+	eListGroupResourcesRequest_GroupIdentifier             smithy.SchemaExtensions
+	eListGroupResourcesResponse                            smithy.SchemaExtensions
+	eListGroupResourcesResponse_Resources                  smithy.SchemaExtensions
+	eListGroupResourcesResponse_NextToken                  smithy.SchemaExtensions
+	eListGroupsRequest                                     smithy.SchemaExtensions
+	eListGroupsRequest_NextToken                           smithy.SchemaExtensions
+	eListGroupsRequest_MaxResults                          smithy.SchemaExtensions
+	eListGroupsResponse                                    smithy.SchemaExtensions
+	eListGroupsResponse_Groups                             smithy.SchemaExtensions
+	eListGroupsResponse_NextToken                          smithy.SchemaExtensions
+	eListTagsForResourceRequest                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                smithy.SchemaExtensions
+	eListTagsForResourceResponse                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                      smithy.SchemaExtensions
+	eStartCanaryDryRunRequest                              smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_Name                         smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_Code                         smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_RuntimeVersion               smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_RunConfig                    smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_VpcConfig                    smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_ExecutionRoleArn             smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_SuccessRetentionPeriodInDays smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_FailureRetentionPeriodInDays smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_VisualReference              smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_ArtifactS3Location           smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_ArtifactConfig               smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_ProvisionedResourceCleanup   smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_BrowserConfigs               smithy.SchemaExtensions
+	eStartCanaryDryRunRequest_VisualReferences             smithy.SchemaExtensions
+	eStartCanaryDryRunResponse                             smithy.SchemaExtensions
+	eStartCanaryDryRunResponse_DryRunConfig                smithy.SchemaExtensions
+	eStartCanaryRequest                                    smithy.SchemaExtensions
+	eStartCanaryRequest_Name                               smithy.SchemaExtensions
+	eStartCanaryResponse                                   smithy.SchemaExtensions
+	eStopCanaryRequest                                     smithy.SchemaExtensions
+	eStopCanaryRequest_Name                                smithy.SchemaExtensions
+	eStopCanaryResponse                                    smithy.SchemaExtensions
+	eTagResourceRequest                                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                        smithy.SchemaExtensions
+	eTagResourceRequest_Tags                               smithy.SchemaExtensions
+	eTagResourceResponse                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                      smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                          smithy.SchemaExtensions
+	eUntagResourceResponse                                 smithy.SchemaExtensions
+	eUpdateCanaryRequest                                   smithy.SchemaExtensions
+	eUpdateCanaryRequest_Name                              smithy.SchemaExtensions
+	eUpdateCanaryRequest_Code                              smithy.SchemaExtensions
+	eUpdateCanaryRequest_ExecutionRoleArn                  smithy.SchemaExtensions
+	eUpdateCanaryRequest_RuntimeVersion                    smithy.SchemaExtensions
+	eUpdateCanaryRequest_Schedule                          smithy.SchemaExtensions
+	eUpdateCanaryRequest_RunConfig                         smithy.SchemaExtensions
+	eUpdateCanaryRequest_SuccessRetentionPeriodInDays      smithy.SchemaExtensions
+	eUpdateCanaryRequest_FailureRetentionPeriodInDays      smithy.SchemaExtensions
+	eUpdateCanaryRequest_VpcConfig                         smithy.SchemaExtensions
+	eUpdateCanaryRequest_VisualReference                   smithy.SchemaExtensions
+	eUpdateCanaryRequest_ArtifactS3Location                smithy.SchemaExtensions
+	eUpdateCanaryRequest_ArtifactConfig                    smithy.SchemaExtensions
+	eUpdateCanaryRequest_ProvisionedResourceCleanup        smithy.SchemaExtensions
+	eUpdateCanaryRequest_DryRunId                          smithy.SchemaExtensions
+	eUpdateCanaryRequest_VisualReferences                  smithy.SchemaExtensions
+	eUpdateCanaryRequest_BrowserConfigs                    smithy.SchemaExtensions
+	eUpdateCanaryRequest_AddReplicaLocations               smithy.SchemaExtensions
+	eUpdateCanaryRequest_RemoveReplicaLocations            smithy.SchemaExtensions
+	eUpdateCanaryRequest_KmsKeyArn                         smithy.SchemaExtensions
+	eUpdateCanaryResponse                                  smithy.SchemaExtensions
+)
+
+var (
+	iAssociateResource                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AssociateResource"}
+	iCreateCanary                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateCanary"}
+	iCreateGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateGroup"}
+	iDeleteCanary                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteCanary"}
+	iDeleteGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteGroup"}
+	iDescribeCanaries                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanaries"}
+	iDescribeCanariesLastRun               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesLastRun"}
+	iDescribeRuntimeVersions               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeRuntimeVersions"}
+	iDisassociateResource                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DisassociateResource"}
+	iGetCanary                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanary"}
+	iGetCanaryRuns                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanaryRuns"}
+	iGetGroup                              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetGroup"}
+	iListAssociatedGroups                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListAssociatedGroups"}
+	iListGroupResources                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroupResources"}
+	iListGroups                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroups"}
+	iListTagsForResource                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListTagsForResource"}
+	iStartCanary                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanary"}
+	iStartCanaryDryRun                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanaryDryRun"}
+	iStopCanary                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StopCanary"}
+	iTagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UntagResource"}
+	iUpdateCanary                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UpdateCanary"}
+	i_Synthetics                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Synthetics"}
+	iAccessDeniedException                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AccessDeniedException"}
+	iAddReplicaLocationInput               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AddReplicaLocationInput"}
+	i_AddReplicaLocations                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AddReplicaLocations"}
+	iArtifactConfigInput                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ArtifactConfigInput"}
+	iArtifactConfigOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ArtifactConfigOutput"}
+	iBadRequestException                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BadRequestException"}
+	iBaseScreenshot                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BaseScreenshot"}
+	i_BaseScreenshotConfigIgnoreCoordinate = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BaseScreenshotConfigIgnoreCoordinate"}
+	i_BaseScreenshotIgnoreCoordinates      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BaseScreenshotIgnoreCoordinates"}
+	i_BaseScreenshots                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BaseScreenshots"}
+	i_Blob                                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Blob"}
+	i_BlueprintType                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BlueprintType"}
+	i_BlueprintTypes                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BlueprintTypes"}
+	i_boolean                              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "boolean"}
+	iBrowserConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BrowserConfig"}
+	i_BrowserConfigs                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BrowserConfigs"}
+	iBrowserType                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "BrowserType"}
+	i_Canaries                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Canaries"}
+	i_CanariesLastRun                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanariesLastRun"}
+	iCanary                                = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Canary"}
+	i_CanaryArn                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryArn"}
+	iCanaryCodeInput                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryCodeInput"}
+	iCanaryCodeOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryCodeOutput"}
+	iCanaryDryRunConfigOutput              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryDryRunConfigOutput"}
+	iCanaryLastRun                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryLastRun"}
+	i_CanaryName                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryName"}
+	iCanaryRun                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRun"}
+	iCanaryRunConfigInput                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunConfigInput"}
+	iCanaryRunConfigOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunConfigOutput"}
+	i_CanaryRuns                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRuns"}
+	iCanaryRunState                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunState"}
+	iCanaryRunStateReasonCode              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunStateReasonCode"}
+	iCanaryRunStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunStatus"}
+	iCanaryRunTestResult                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunTestResult"}
+	iCanaryRunTimeline                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryRunTimeline"}
+	iCanaryScheduleInput                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryScheduleInput"}
+	iCanaryScheduleOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryScheduleOutput"}
+	iCanaryState                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryState"}
+	iCanaryStateReasonCode                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryStateReasonCode"}
+	iCanaryStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryStatus"}
+	iCanaryTimeline                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CanaryTimeline"}
+	i_CodeHandler                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CodeHandler"}
+	iConflictException                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ConflictException"}
+	i_Dependencies                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Dependencies"}
+	iDependency                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Dependency"}
+	iDependencyType                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DependencyType"}
+	i_DescribeCanariesLastRunNameFilter    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesLastRunNameFilter"}
+	i_DescribeCanariesNameFilter           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesNameFilter"}
+	iDryRunConfigOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DryRunConfigOutput"}
+	iEncryptionMode                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EncryptionMode"}
+	iEngineConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EngineConfig"}
+	i_EngineConfigs                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EngineConfigs"}
+	i_EnvironmentVariableName              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EnvironmentVariableName"}
+	i_EnvironmentVariablesMap              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EnvironmentVariablesMap"}
+	i_EnvironmentVariableValue             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EnvironmentVariableValue"}
+	i_EphemeralStorageSize                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "EphemeralStorageSize"}
+	i_ErrorMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ErrorMessage"}
+	i_FunctionArn                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "FunctionArn"}
+	iGroup                                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Group"}
+	i_GroupArn                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GroupArn"}
+	i_GroupIdentifier                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GroupIdentifier"}
+	i_GroupName                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GroupName"}
+	iGroupSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GroupSummary"}
+	i_GroupSummaryList                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GroupSummaryList"}
+	iInternalFailureException              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "InternalFailureException"}
+	iInternalServerException               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "InternalServerException"}
+	i_KmsKeyArn                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "KmsKeyArn"}
+	i_Location                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Location"}
+	iLocationType                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "LocationType"}
+	i_MaxCanaryResults                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxCanaryResults"}
+	i_MaxFifteenMinutesInSeconds           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxFifteenMinutesInSeconds"}
+	i_MaxGroupResults                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxGroupResults"}
+	i_MaxOneYearInSeconds                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxOneYearInSeconds"}
+	i_MaxRetries                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxRetries"}
+	i_MaxSize100                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxSize100"}
+	i_MaxSize1024                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxSize1024"}
+	i_MaxSize3008                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MaxSize3008"}
+	iMultiLocationConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "MultiLocationConfig"}
+	iNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "NotFoundException"}
+	i_NullableBoolean                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "NullableBoolean"}
+	i_PaginationToken                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "PaginationToken"}
+	iProvisionedResourceCleanupSetting     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ProvisionedResourceCleanupSetting"}
+	i_RemoveReplicaLocations               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RemoveReplicaLocations"}
+	iReplica                               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Replica"}
+	i_Replicas                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Replicas"}
+	iReplicationState                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ReplicationState"}
+	iReplicationStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ReplicationStatus"}
+	iRequestEntityTooLargeException        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RequestEntityTooLargeException"}
+	i_ResourceArn                          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ResourceArn"}
+	i_ResourceList                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ResourceList"}
+	iResourceNotFoundException             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ResourceNotFoundException"}
+	iResourceToTag                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ResourceToTag"}
+	i_RetryAttempt                         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RetryAttempt"}
+	iRetryConfigInput                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RetryConfigInput"}
+	iRetryConfigOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RetryConfigOutput"}
+	i_RoleArn                              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RoleArn"}
+	iRuntimeVersion                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RuntimeVersion"}
+	i_RuntimeVersionList                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RuntimeVersionList"}
+	iRunType                               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "RunType"}
+	iS3EncryptionConfig                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "S3EncryptionConfig"}
+	i_SecurityGroupId                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "SecurityGroupIds"}
+	iServiceQuotaExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ServiceQuotaExceededException"}
+	i_String                               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "String"}
+	i_StringList                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StringList"}
+	i_SubnetId                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "SubnetId"}
+	i_SubnetIds                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "SubnetIds"}
+	i_TagKey                               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagKey"}
+	i_TagKeyList                           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagKeyList"}
+	i_TagMap                               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagMap"}
+	i_TagValue                             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagValue"}
+	i_Timestamp                            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Timestamp"}
+	i_Token                                = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "Token"}
+	iTooManyRequestsException              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TooManyRequestsException"}
+	i_UUID                                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UUID"}
+	iValidationException                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ValidationException"}
+	iVisualReferenceInput                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VisualReferenceInput"}
+	iVisualReferenceOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VisualReferenceOutput"}
+	i_VisualReferences                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VisualReferences"}
+	i_VisualReferencesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VisualReferencesOutput"}
+	iVpcConfigInput                        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VpcConfigInput"}
+	iVpcConfigOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VpcConfigOutput"}
+	i_VpcId                                = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "VpcId"}
+	iAssociateResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AssociateResourceRequest"}
+	iAssociateResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "AssociateResourceResponse"}
+	iCreateCanaryRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateCanaryRequest"}
+	iCreateCanaryResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateCanaryResponse"}
+	iCreateGroupRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateGroupRequest"}
+	iCreateGroupResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "CreateGroupResponse"}
+	iDeleteCanaryRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteCanaryRequest"}
+	iDeleteCanaryResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteCanaryResponse"}
+	iDeleteGroupRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteGroupRequest"}
+	iDeleteGroupResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DeleteGroupResponse"}
+	iDescribeCanariesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesRequest"}
+	iDescribeCanariesLastRunRequest        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesLastRunRequest"}
+	iDescribeCanariesLastRunResponse       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesLastRunResponse"}
+	iDescribeCanariesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeCanariesResponse"}
+	iDescribeRuntimeVersionsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeRuntimeVersionsRequest"}
+	iDescribeRuntimeVersionsResponse       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DescribeRuntimeVersionsResponse"}
+	iDisassociateResourceRequest           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DisassociateResourceRequest"}
+	iDisassociateResourceResponse          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "DisassociateResourceResponse"}
+	iGetCanaryRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanaryRequest"}
+	iGetCanaryResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanaryResponse"}
+	iGetCanaryRunsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanaryRunsRequest"}
+	iGetCanaryRunsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetCanaryRunsResponse"}
+	iGetGroupRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetGroupRequest"}
+	iGetGroupResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "GetGroupResponse"}
+	iListAssociatedGroupsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListAssociatedGroupsRequest"}
+	iListAssociatedGroupsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListAssociatedGroupsResponse"}
+	iListGroupResourcesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroupResourcesRequest"}
+	iListGroupResourcesResponse            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroupResourcesResponse"}
+	iListGroupsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroupsRequest"}
+	iListGroupsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListGroupsResponse"}
+	iListTagsForResourceRequest            = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse           = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "ListTagsForResourceResponse"}
+	iStartCanaryDryRunRequest              = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanaryDryRunRequest"}
+	iStartCanaryDryRunResponse             = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanaryDryRunResponse"}
+	iStartCanaryRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanaryRequest"}
+	iStartCanaryResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StartCanaryResponse"}
+	iStopCanaryRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StopCanaryRequest"}
+	iStopCanaryResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "StopCanaryResponse"}
+	iTagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagResourceRequest"}
+	iTagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "TagResourceResponse"}
+	iUntagResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UntagResourceResponse"}
+	iUpdateCanaryRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UpdateCanaryRequest"}
+	iUpdateCanaryResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.synthetics", Name: "UpdateCanaryResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/group/{GroupIdentifier}/associate",
-	Code: 200})
-
-var CreateCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canary",
-	Code: 200})
-
-var CreateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/group",
-	Code: 200})
-
-var DeleteCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/canary/{Name}",
-	Code: 200})
-
-var DeleteGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/group/{GroupIdentifier}",
-	Code: 200})
-
-var DescribeCanaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanaries",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canaries",
-	Code: 200})
-
-var DescribeCanariesLastRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesLastRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canaries/last-run",
-	Code: 200})
-
-var DescribeRuntimeVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeRuntimeVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/runtime-versions",
-	Code: 200})
-
-var DisassociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DisassociateResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/group/{GroupIdentifier}/disassociate",
-	Code: 200})
-
-var GetCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/canary/{Name}",
-	Code: 200})
-
-var GetCanaryRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanaryRuns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canary/{Name}/runs",
-	Code: 200})
-
-var GetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/group/{GroupIdentifier}",
-	Code: 200})
-
-var ListAssociatedGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListAssociatedGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resource/{ResourceArn}/groups",
-	Code: 200})
-
-var ListGroupResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroupResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/group/{GroupIdentifier}/resources",
-	Code: 200})
-
-var ListGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/groups",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var StartCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canary/{Name}/start",
-	Code: 200})
-
-var StartCanaryDryRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanaryDryRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canary/{Name}/dry-run/start",
-	Code: 200})
-
-var StopCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StopCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/canary/{Name}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateCanary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UpdateCanary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/canary/{Name}",
-	Code: 200})
-
-var _Synthetics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Synthetics",
-}, smithy.ShapeTypeService, 0)
-
-var Synthetics = smithy.NewServiceSchema(_Synthetics, "2017-10-11")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AddReplicaLocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AddReplicaLocationInput",
-}, smithy.ShapeTypeStructure, 3)
-var AddReplicaLocationInput_Location *smithy.Schema
-
-var AddReplicaLocationInput_VpcConfig *smithy.Schema
-
-var AddReplicaLocationInput_KmsKeyArn *smithy.Schema
-
-var _AddReplicaLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AddReplicaLocations",
-}, smithy.ShapeTypeList, 1)
-var _AddReplicaLocations_member *smithy.Schema
-
-var ArtifactConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ArtifactConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var ArtifactConfigInput_S3Encryption *smithy.Schema
-
-var ArtifactConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ArtifactConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ArtifactConfigOutput_S3Encryption *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var BaseScreenshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BaseScreenshot",
-}, smithy.ShapeTypeStructure, 2)
-var BaseScreenshot_ScreenshotName *smithy.Schema
-
-var BaseScreenshot_IgnoreCoordinates *smithy.Schema
-
-var _BaseScreenshotConfigIgnoreCoordinate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BaseScreenshotConfigIgnoreCoordinate",
-}, smithy.ShapeTypeString, 0)
-
-var _BaseScreenshotIgnoreCoordinates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BaseScreenshotIgnoreCoordinates",
-}, smithy.ShapeTypeList, 1)
-var _BaseScreenshotIgnoreCoordinates_member *smithy.Schema
-
-var _BaseScreenshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BaseScreenshots",
-}, smithy.ShapeTypeList, 1)
-var _BaseScreenshots_member *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _BlueprintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BlueprintType",
-}, smithy.ShapeTypeString, 0)
-
-var _BlueprintTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BlueprintTypes",
-}, smithy.ShapeTypeList, 1)
-var _BlueprintTypes_member *smithy.Schema
-
-var _boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BrowserConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BrowserConfig",
-}, smithy.ShapeTypeStructure, 1)
-var BrowserConfig_BrowserType *smithy.Schema
-
-var _BrowserConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BrowserConfigs",
-}, smithy.ShapeTypeList, 1)
-var _BrowserConfigs_member *smithy.Schema
-
-var BrowserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "BrowserType",
-}, smithy.ShapeTypeEnum, 2)
-var BrowserType_CHROME *smithy.Schema
-
-var BrowserType_FIREFOX *smithy.Schema
-
-var _Canaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Canaries",
-}, smithy.ShapeTypeList, 1)
-var _Canaries_member *smithy.Schema
-
-var _CanariesLastRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanariesLastRun",
-}, smithy.ShapeTypeList, 1)
-var _CanariesLastRun_member *smithy.Schema
-
-var Canary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Canary",
-}, smithy.ShapeTypeStructure, 24)
-var Canary_Id *smithy.Schema
-
-var Canary_Name *smithy.Schema
-
-var Canary_Code *smithy.Schema
-
-var Canary_ExecutionRoleArn *smithy.Schema
-
-var Canary_Schedule *smithy.Schema
-
-var Canary_RunConfig *smithy.Schema
-
-var Canary_SuccessRetentionPeriodInDays *smithy.Schema
-
-var Canary_FailureRetentionPeriodInDays *smithy.Schema
-
-var Canary_Status *smithy.Schema
-
-var Canary_Timeline *smithy.Schema
-
-var Canary_ArtifactS3Location *smithy.Schema
-
-var Canary_EngineArn *smithy.Schema
-
-var Canary_RuntimeVersion *smithy.Schema
-
-var Canary_VpcConfig *smithy.Schema
-
-var Canary_VisualReference *smithy.Schema
-
-var Canary_ProvisionedResourceCleanup *smithy.Schema
-
-var Canary_BrowserConfigs *smithy.Schema
-
-var Canary_EngineConfigs *smithy.Schema
-
-var Canary_VisualReferences *smithy.Schema
-
-var Canary_MultiLocationConfig *smithy.Schema
-
-var Canary_Tags *smithy.Schema
-
-var Canary_ArtifactConfig *smithy.Schema
-
-var Canary_KmsKeyArn *smithy.Schema
-
-var Canary_DryRunConfig *smithy.Schema
-
-var _CanaryArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryArn",
-}, smithy.ShapeTypeString, 0)
-
-var CanaryCodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryCodeInput",
-}, smithy.ShapeTypeStructure, 7)
-var CanaryCodeInput_S3Bucket *smithy.Schema
-
-var CanaryCodeInput_S3Key *smithy.Schema
-
-var CanaryCodeInput_S3Version *smithy.Schema
-
-var CanaryCodeInput_ZipFile *smithy.Schema
-
-var CanaryCodeInput_Handler *smithy.Schema
-
-var CanaryCodeInput_BlueprintTypes *smithy.Schema
-
-var CanaryCodeInput_Dependencies *smithy.Schema
-
-var CanaryCodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryCodeOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CanaryCodeOutput_SourceLocationArn *smithy.Schema
-
-var CanaryCodeOutput_Handler *smithy.Schema
-
-var CanaryCodeOutput_BlueprintTypes *smithy.Schema
-
-var CanaryCodeOutput_Dependencies *smithy.Schema
-
-var CanaryDryRunConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryDryRunConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CanaryDryRunConfigOutput_DryRunId *smithy.Schema
-
-var CanaryLastRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryLastRun",
-}, smithy.ShapeTypeStructure, 2)
-var CanaryLastRun_CanaryName *smithy.Schema
-
-var CanaryLastRun_LastRun *smithy.Schema
-
-var _CanaryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryName",
-}, smithy.ShapeTypeString, 0)
-
-var CanaryRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRun",
-}, smithy.ShapeTypeStructure, 10)
-var CanaryRun_Id *smithy.Schema
-
-var CanaryRun_ScheduledRunId *smithy.Schema
-
-var CanaryRun_RetryAttempt *smithy.Schema
-
-var CanaryRun_Name *smithy.Schema
-
-var CanaryRun_Status *smithy.Schema
-
-var CanaryRun_Timeline *smithy.Schema
-
-var CanaryRun_ArtifactS3Location *smithy.Schema
-
-var CanaryRun_DryRunConfig *smithy.Schema
-
-var CanaryRun_BrowserType *smithy.Schema
-
-var CanaryRun_Location *smithy.Schema
-
-var CanaryRunConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunConfigInput",
-}, smithy.ShapeTypeStructure, 5)
-var CanaryRunConfigInput_TimeoutInSeconds *smithy.Schema
-
-var CanaryRunConfigInput_MemoryInMB *smithy.Schema
-
-var CanaryRunConfigInput_ActiveTracing *smithy.Schema
-
-var CanaryRunConfigInput_EnvironmentVariables *smithy.Schema
-
-var CanaryRunConfigInput_EphemeralStorage *smithy.Schema
-
-var CanaryRunConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunConfigOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CanaryRunConfigOutput_TimeoutInSeconds *smithy.Schema
-
-var CanaryRunConfigOutput_MemoryInMB *smithy.Schema
-
-var CanaryRunConfigOutput_ActiveTracing *smithy.Schema
-
-var CanaryRunConfigOutput_EphemeralStorage *smithy.Schema
-
-var _CanaryRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRuns",
-}, smithy.ShapeTypeList, 1)
-var _CanaryRuns_member *smithy.Schema
-
-var CanaryRunState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunState",
-}, smithy.ShapeTypeEnum, 3)
-var CanaryRunState_RUNNING *smithy.Schema
-
-var CanaryRunState_PASSED *smithy.Schema
-
-var CanaryRunState_FAILED *smithy.Schema
-
-var CanaryRunStateReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunStateReasonCode",
-}, smithy.ShapeTypeEnum, 2)
-var CanaryRunStateReasonCode_CANARY_FAILURE *smithy.Schema
-
-var CanaryRunStateReasonCode_EXECUTION_FAILURE *smithy.Schema
-
-var CanaryRunStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunStatus",
-}, smithy.ShapeTypeStructure, 4)
-var CanaryRunStatus_State *smithy.Schema
-
-var CanaryRunStatus_StateReason *smithy.Schema
-
-var CanaryRunStatus_StateReasonCode *smithy.Schema
-
-var CanaryRunStatus_TestResult *smithy.Schema
-
-var CanaryRunTestResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunTestResult",
-}, smithy.ShapeTypeEnum, 3)
-var CanaryRunTestResult_PASSED *smithy.Schema
-
-var CanaryRunTestResult_FAILED *smithy.Schema
-
-var CanaryRunTestResult_UNKNOWN *smithy.Schema
-
-var CanaryRunTimeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryRunTimeline",
-}, smithy.ShapeTypeStructure, 3)
-var CanaryRunTimeline_Started *smithy.Schema
-
-var CanaryRunTimeline_Completed *smithy.Schema
-
-var CanaryRunTimeline_MetricTimestampForRunAndRetries *smithy.Schema
-
-var CanaryScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryScheduleInput",
-}, smithy.ShapeTypeStructure, 3)
-var CanaryScheduleInput_Expression *smithy.Schema
-
-var CanaryScheduleInput_DurationInSeconds *smithy.Schema
-
-var CanaryScheduleInput_RetryConfig *smithy.Schema
-
-var CanaryScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryScheduleOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CanaryScheduleOutput_Expression *smithy.Schema
-
-var CanaryScheduleOutput_DurationInSeconds *smithy.Schema
-
-var CanaryScheduleOutput_RetryConfig *smithy.Schema
-
-var CanaryState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryState",
-}, smithy.ShapeTypeEnum, 9)
-var CanaryState_CREATING *smithy.Schema
-
-var CanaryState_READY *smithy.Schema
-
-var CanaryState_STARTING *smithy.Schema
-
-var CanaryState_RUNNING *smithy.Schema
-
-var CanaryState_UPDATING *smithy.Schema
-
-var CanaryState_STOPPING *smithy.Schema
-
-var CanaryState_STOPPED *smithy.Schema
-
-var CanaryState_ERROR *smithy.Schema
-
-var CanaryState_DELETING *smithy.Schema
-
-var CanaryStateReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryStateReasonCode",
-}, smithy.ShapeTypeEnum, 12)
-var CanaryStateReasonCode_INVALID_PERMISSIONS *smithy.Schema
-
-var CanaryStateReasonCode_CREATE_PENDING *smithy.Schema
-
-var CanaryStateReasonCode_CREATE_IN_PROGRESS *smithy.Schema
-
-var CanaryStateReasonCode_CREATE_FAILED *smithy.Schema
-
-var CanaryStateReasonCode_UPDATE_PENDING *smithy.Schema
-
-var CanaryStateReasonCode_UPDATE_IN_PROGRESS *smithy.Schema
-
-var CanaryStateReasonCode_UPDATE_COMPLETE *smithy.Schema
-
-var CanaryStateReasonCode_ROLLBACK_COMPLETE *smithy.Schema
-
-var CanaryStateReasonCode_ROLLBACK_FAILED *smithy.Schema
-
-var CanaryStateReasonCode_DELETE_IN_PROGRESS *smithy.Schema
-
-var CanaryStateReasonCode_DELETE_FAILED *smithy.Schema
-
-var CanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS *smithy.Schema
-
-var CanaryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryStatus",
-}, smithy.ShapeTypeStructure, 3)
-var CanaryStatus_State *smithy.Schema
-
-var CanaryStatus_StateReason *smithy.Schema
-
-var CanaryStatus_StateReasonCode *smithy.Schema
-
-var CanaryTimeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CanaryTimeline",
-}, smithy.ShapeTypeStructure, 4)
-var CanaryTimeline_Created *smithy.Schema
-
-var CanaryTimeline_LastModified *smithy.Schema
-
-var CanaryTimeline_LastStarted *smithy.Schema
-
-var CanaryTimeline_LastStopped *smithy.Schema
-
-var _CodeHandler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CodeHandler",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _Dependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Dependencies",
-}, smithy.ShapeTypeList, 1)
-var _Dependencies_member *smithy.Schema
-
-var Dependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Dependency",
-}, smithy.ShapeTypeStructure, 2)
-var Dependency_Type *smithy.Schema
-
-var Dependency_Reference *smithy.Schema
-
-var DependencyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DependencyType",
-}, smithy.ShapeTypeEnum, 1)
-var DependencyType_LambdaLayer *smithy.Schema
-
-var _DescribeCanariesLastRunNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesLastRunNameFilter",
-}, smithy.ShapeTypeList, 1)
-var _DescribeCanariesLastRunNameFilter_member *smithy.Schema
-
-var _DescribeCanariesNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesNameFilter",
-}, smithy.ShapeTypeList, 1)
-var _DescribeCanariesNameFilter_member *smithy.Schema
-
-var DryRunConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DryRunConfigOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DryRunConfigOutput_DryRunId *smithy.Schema
-
-var DryRunConfigOutput_LastDryRunExecutionStatus *smithy.Schema
-
-var EncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EncryptionMode",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionMode_SSE_S3 *smithy.Schema
-
-var EncryptionMode_SSE_KMS *smithy.Schema
-
-var EngineConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EngineConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EngineConfig_EngineArn *smithy.Schema
-
-var EngineConfig_BrowserType *smithy.Schema
-
-var _EngineConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EngineConfigs",
-}, smithy.ShapeTypeList, 1)
-var _EngineConfigs_member *smithy.Schema
-
-var _EnvironmentVariableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EnvironmentVariableName",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentVariablesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EnvironmentVariablesMap",
-}, smithy.ShapeTypeMap, 2)
-var _EnvironmentVariablesMap_key *smithy.Schema
-
-var _EnvironmentVariablesMap_value *smithy.Schema
-
-var _EnvironmentVariableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EnvironmentVariableValue",
-}, smithy.ShapeTypeString, 0)
-
-var _EphemeralStorageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "EphemeralStorageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "FunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Group",
-}, smithy.ShapeTypeStructure, 6)
-var Group_Id *smithy.Schema
-
-var Group_Name *smithy.Schema
-
-var Group_Arn *smithy.Schema
-
-var Group_Tags *smithy.Schema
-
-var Group_CreatedTime *smithy.Schema
-
-var Group_LastModifiedTime *smithy.Schema
-
-var _GroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _GroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GroupIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _GroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GroupName",
-}, smithy.ShapeTypeString, 0)
-
-var GroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GroupSummary",
-}, smithy.ShapeTypeStructure, 3)
-var GroupSummary_Id *smithy.Schema
-
-var GroupSummary_Name *smithy.Schema
-
-var GroupSummary_Arn *smithy.Schema
-
-var _GroupSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GroupSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _GroupSummaryList_member *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_Message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var LocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "LocationType",
-}, smithy.ShapeTypeEnum, 2)
-var LocationType_Primary *smithy.Schema
-
-var LocationType_Replica *smithy.Schema
-
-var _MaxCanaryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxCanaryResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxFifteenMinutesInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxFifteenMinutesInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxGroupResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxGroupResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxOneYearInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxOneYearInSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxRetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxRetries",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSize100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxSize100",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSize1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxSize1024",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSize3008 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MaxSize3008",
-}, smithy.ShapeTypeInteger, 0)
-
-var MultiLocationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "MultiLocationConfig",
-}, smithy.ShapeTypeStructure, 4)
-var MultiLocationConfig_LocationType *smithy.Schema
-
-var MultiLocationConfig_PrimaryLocation *smithy.Schema
-
-var MultiLocationConfig_Replicas *smithy.Schema
-
-var MultiLocationConfig_ReplicationState *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "NullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var ProvisionedResourceCleanupSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ProvisionedResourceCleanupSetting",
-}, smithy.ShapeTypeEnum, 2)
-var ProvisionedResourceCleanupSetting_AUTOMATIC *smithy.Schema
-
-var ProvisionedResourceCleanupSetting_OFF *smithy.Schema
-
-var _RemoveReplicaLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RemoveReplicaLocations",
-}, smithy.ShapeTypeList, 1)
-var _RemoveReplicaLocations_member *smithy.Schema
-
-var Replica = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Replica",
-}, smithy.ShapeTypeStructure, 5)
-var Replica_Location *smithy.Schema
-
-var Replica_ReplicationStatus *smithy.Schema
-
-var Replica_CanaryState *smithy.Schema
-
-var Replica_LastModified *smithy.Schema
-
-var Replica_VpcConfig *smithy.Schema
-
-var _Replicas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Replicas",
-}, smithy.ShapeTypeList, 1)
-var _Replicas_member *smithy.Schema
-
-var ReplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ReplicationState",
-}, smithy.ShapeTypeEnum, 3)
-var ReplicationState_InProgress *smithy.Schema
-
-var ReplicationState_InSync *smithy.Schema
-
-var ReplicationState_Inconsistent *smithy.Schema
-
-var ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ReplicationStatus",
-}, smithy.ShapeTypeStructure, 3)
-var ReplicationStatus_State *smithy.Schema
-
-var ReplicationStatus_StateReason *smithy.Schema
-
-var ReplicationStatus_StateReasonCode *smithy.Schema
-
-var RequestEntityTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RequestEntityTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var RequestEntityTooLargeException_Message *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceToTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ResourceToTag",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceToTag_LAMBDA_FUNCTION *smithy.Schema
-
-var _RetryAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RetryAttempt",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetryConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RetryConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var RetryConfigInput_MaxRetries *smithy.Schema
-
-var RetryConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RetryConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetryConfigOutput_MaxRetries *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var RuntimeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RuntimeVersion",
-}, smithy.ShapeTypeStructure, 4)
-var RuntimeVersion_VersionName *smithy.Schema
-
-var RuntimeVersion_Description *smithy.Schema
-
-var RuntimeVersion_ReleaseDate *smithy.Schema
-
-var RuntimeVersion_DeprecationDate *smithy.Schema
-
-var _RuntimeVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RuntimeVersionList",
-}, smithy.ShapeTypeList, 1)
-var _RuntimeVersionList_member *smithy.Schema
-
-var RunType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "RunType",
-}, smithy.ShapeTypeEnum, 2)
-var RunType_CANARY_RUN *smithy.Schema
-
-var RunType_DRY_RUN *smithy.Schema
-
-var S3EncryptionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "S3EncryptionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var S3EncryptionConfig_EncryptionMode *smithy.Schema
-
-var S3EncryptionConfig_KmsKeyArn *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var VisualReferenceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VisualReferenceInput",
-}, smithy.ShapeTypeStructure, 3)
-var VisualReferenceInput_BaseScreenshots *smithy.Schema
-
-var VisualReferenceInput_BaseCanaryRunId *smithy.Schema
-
-var VisualReferenceInput_BrowserType *smithy.Schema
-
-var VisualReferenceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VisualReferenceOutput",
-}, smithy.ShapeTypeStructure, 3)
-var VisualReferenceOutput_BaseScreenshots *smithy.Schema
-
-var VisualReferenceOutput_BaseCanaryRunId *smithy.Schema
-
-var VisualReferenceOutput_BrowserType *smithy.Schema
-
-var _VisualReferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VisualReferences",
-}, smithy.ShapeTypeList, 1)
-var _VisualReferences_member *smithy.Schema
-
-var _VisualReferencesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VisualReferencesOutput",
-}, smithy.ShapeTypeList, 1)
-var _VisualReferencesOutput_member *smithy.Schema
-
-var VpcConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VpcConfigInput",
-}, smithy.ShapeTypeStructure, 3)
-var VpcConfigInput_SubnetIds *smithy.Schema
-
-var VpcConfigInput_SecurityGroupIds *smithy.Schema
-
-var VpcConfigInput_Ipv6AllowedForDualStack *smithy.Schema
-
-var VpcConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VpcConfigOutput",
-}, smithy.ShapeTypeStructure, 4)
-var VpcConfigOutput_VpcId *smithy.Schema
-
-var VpcConfigOutput_SubnetIds *smithy.Schema
-
-var VpcConfigOutput_SecurityGroupIds *smithy.Schema
-
-var VpcConfigOutput_Ipv6AllowedForDualStack *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AssociateResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateResourceRequest_GroupIdentifier *smithy.Schema
-
-var AssociateResourceRequest_ResourceArn *smithy.Schema
-
-var AssociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "AssociateResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateCanaryRequest",
-}, smithy.ShapeTypeStructure, 17)
-var CreateCanaryRequest_Name *smithy.Schema
-
-var CreateCanaryRequest_Code *smithy.Schema
-
-var CreateCanaryRequest_ArtifactS3Location *smithy.Schema
-
-var CreateCanaryRequest_ExecutionRoleArn *smithy.Schema
-
-var CreateCanaryRequest_Schedule *smithy.Schema
-
-var CreateCanaryRequest_RunConfig *smithy.Schema
-
-var CreateCanaryRequest_SuccessRetentionPeriodInDays *smithy.Schema
-
-var CreateCanaryRequest_FailureRetentionPeriodInDays *smithy.Schema
-
-var CreateCanaryRequest_RuntimeVersion *smithy.Schema
-
-var CreateCanaryRequest_VpcConfig *smithy.Schema
-
-var CreateCanaryRequest_ResourcesToReplicateTags *smithy.Schema
-
-var CreateCanaryRequest_ProvisionedResourceCleanup *smithy.Schema
-
-var CreateCanaryRequest_BrowserConfigs *smithy.Schema
-
-var CreateCanaryRequest_AddReplicaLocations *smithy.Schema
-
-var CreateCanaryRequest_Tags *smithy.Schema
-
-var CreateCanaryRequest_ArtifactConfig *smithy.Schema
-
-var CreateCanaryRequest_KmsKeyArn *smithy.Schema
-
-var CreateCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateCanaryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCanaryResponse_Canary *smithy.Schema
-
-var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateGroupRequest_Name *smithy.Schema
-
-var CreateGroupRequest_Tags *smithy.Schema
-
-var CreateGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "CreateGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGroupResponse_Group *smithy.Schema
-
-var DeleteCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteCanaryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCanaryRequest_Name *smithy.Schema
-
-var DeleteCanaryRequest_DeleteLambda *smithy.Schema
-
-var DeleteCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteCanaryResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGroupRequest_GroupIdentifier *smithy.Schema
-
-var DeleteGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DeleteGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeCanariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeCanariesRequest_NextToken *smithy.Schema
-
-var DescribeCanariesRequest_MaxResults *smithy.Schema
-
-var DescribeCanariesRequest_Names *smithy.Schema
-
-var DescribeCanariesLastRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesLastRunRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeCanariesLastRunRequest_NextToken *smithy.Schema
-
-var DescribeCanariesLastRunRequest_MaxResults *smithy.Schema
-
-var DescribeCanariesLastRunRequest_Names *smithy.Schema
-
-var DescribeCanariesLastRunRequest_BrowserType *smithy.Schema
-
-var DescribeCanariesLastRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesLastRunResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeCanariesLastRunResponse_CanariesLastRun *smithy.Schema
-
-var DescribeCanariesLastRunResponse_NextToken *smithy.Schema
-
-var DescribeCanariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeCanariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeCanariesResponse_Canaries *smithy.Schema
-
-var DescribeCanariesResponse_NextToken *smithy.Schema
-
-var DescribeRuntimeVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeRuntimeVersionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRuntimeVersionsRequest_NextToken *smithy.Schema
-
-var DescribeRuntimeVersionsRequest_MaxResults *smithy.Schema
-
-var DescribeRuntimeVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DescribeRuntimeVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRuntimeVersionsResponse_RuntimeVersions *smithy.Schema
-
-var DescribeRuntimeVersionsResponse_NextToken *smithy.Schema
-
-var DisassociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DisassociateResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateResourceRequest_GroupIdentifier *smithy.Schema
-
-var DisassociateResourceRequest_ResourceArn *smithy.Schema
-
-var DisassociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "DisassociateResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanaryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetCanaryRequest_Name *smithy.Schema
-
-var GetCanaryRequest_DryRunId *smithy.Schema
-
-var GetCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanaryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCanaryResponse_Canary *smithy.Schema
-
-var GetCanaryRunsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanaryRunsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetCanaryRunsRequest_Name *smithy.Schema
-
-var GetCanaryRunsRequest_NextToken *smithy.Schema
-
-var GetCanaryRunsRequest_MaxResults *smithy.Schema
-
-var GetCanaryRunsRequest_DryRunId *smithy.Schema
-
-var GetCanaryRunsRequest_RunType *smithy.Schema
-
-var GetCanaryRunsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetCanaryRunsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCanaryRunsResponse_CanaryRuns *smithy.Schema
-
-var GetCanaryRunsResponse_NextToken *smithy.Schema
-
-var GetGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetGroupRequest_GroupIdentifier *smithy.Schema
-
-var GetGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "GetGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGroupResponse_Group *smithy.Schema
-
-var ListAssociatedGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListAssociatedGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociatedGroupsRequest_NextToken *smithy.Schema
-
-var ListAssociatedGroupsRequest_MaxResults *smithy.Schema
-
-var ListAssociatedGroupsRequest_ResourceArn *smithy.Schema
-
-var ListAssociatedGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListAssociatedGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedGroupsResponse_Groups *smithy.Schema
-
-var ListAssociatedGroupsResponse_NextToken *smithy.Schema
-
-var ListGroupResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroupResourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListGroupResourcesRequest_NextToken *smithy.Schema
-
-var ListGroupResourcesRequest_MaxResults *smithy.Schema
-
-var ListGroupResourcesRequest_GroupIdentifier *smithy.Schema
-
-var ListGroupResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroupResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupResourcesResponse_Resources *smithy.Schema
-
-var ListGroupResourcesResponse_NextToken *smithy.Schema
-
-var ListGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupsRequest_NextToken *smithy.Schema
-
-var ListGroupsRequest_MaxResults *smithy.Schema
-
-var ListGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupsResponse_Groups *smithy.Schema
-
-var ListGroupsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartCanaryDryRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanaryDryRunRequest",
-}, smithy.ShapeTypeStructure, 14)
-var StartCanaryDryRunRequest_Name *smithy.Schema
-
-var StartCanaryDryRunRequest_Code *smithy.Schema
-
-var StartCanaryDryRunRequest_RuntimeVersion *smithy.Schema
-
-var StartCanaryDryRunRequest_RunConfig *smithy.Schema
-
-var StartCanaryDryRunRequest_VpcConfig *smithy.Schema
-
-var StartCanaryDryRunRequest_ExecutionRoleArn *smithy.Schema
-
-var StartCanaryDryRunRequest_SuccessRetentionPeriodInDays *smithy.Schema
-
-var StartCanaryDryRunRequest_FailureRetentionPeriodInDays *smithy.Schema
-
-var StartCanaryDryRunRequest_VisualReference *smithy.Schema
-
-var StartCanaryDryRunRequest_ArtifactS3Location *smithy.Schema
-
-var StartCanaryDryRunRequest_ArtifactConfig *smithy.Schema
-
-var StartCanaryDryRunRequest_ProvisionedResourceCleanup *smithy.Schema
-
-var StartCanaryDryRunRequest_BrowserConfigs *smithy.Schema
-
-var StartCanaryDryRunRequest_VisualReferences *smithy.Schema
-
-var StartCanaryDryRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanaryDryRunResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartCanaryDryRunResponse_DryRunConfig *smithy.Schema
-
-var StartCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanaryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartCanaryRequest_Name *smithy.Schema
-
-var StartCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StartCanaryResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StopCanaryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopCanaryRequest_Name *smithy.Schema
-
-var StopCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "StopCanaryResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCanaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UpdateCanaryRequest",
-}, smithy.ShapeTypeStructure, 19)
-var UpdateCanaryRequest_Name *smithy.Schema
-
-var UpdateCanaryRequest_Code *smithy.Schema
-
-var UpdateCanaryRequest_ExecutionRoleArn *smithy.Schema
-
-var UpdateCanaryRequest_RuntimeVersion *smithy.Schema
-
-var UpdateCanaryRequest_Schedule *smithy.Schema
-
-var UpdateCanaryRequest_RunConfig *smithy.Schema
-
-var UpdateCanaryRequest_SuccessRetentionPeriodInDays *smithy.Schema
-
-var UpdateCanaryRequest_FailureRetentionPeriodInDays *smithy.Schema
-
-var UpdateCanaryRequest_VpcConfig *smithy.Schema
-
-var UpdateCanaryRequest_VisualReference *smithy.Schema
-
-var UpdateCanaryRequest_ArtifactS3Location *smithy.Schema
-
-var UpdateCanaryRequest_ArtifactConfig *smithy.Schema
-
-var UpdateCanaryRequest_ProvisionedResourceCleanup *smithy.Schema
-
-var UpdateCanaryRequest_DryRunId *smithy.Schema
-
-var UpdateCanaryRequest_VisualReferences *smithy.Schema
-
-var UpdateCanaryRequest_BrowserConfigs *smithy.Schema
-
-var UpdateCanaryRequest_AddReplicaLocations *smithy.Schema
-
-var UpdateCanaryRequest_RemoveReplicaLocations *smithy.Schema
-
-var UpdateCanaryRequest_KmsKeyArn *smithy.Schema
-
-var UpdateCanaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.synthetics",
-	Name:      "UpdateCanaryResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	VpcConfigInput_SubnetIds = VpcConfigInput.AddMember("SubnetIds", _SubnetIds)
-
-	VpcConfigInput_SecurityGroupIds = VpcConfigInput.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	VpcConfigInput_Ipv6AllowedForDualStack = VpcConfigInput.AddMember("Ipv6AllowedForDualStack", _NullableBoolean)
-
-	AddReplicaLocationInput_Location = AddReplicaLocationInput.AddMember("Location", _Location)
-
-	AddReplicaLocationInput_VpcConfig = AddReplicaLocationInput.AddMember("VpcConfig", VpcConfigInput)
-
-	AddReplicaLocationInput_KmsKeyArn = AddReplicaLocationInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	_AddReplicaLocations_member = _AddReplicaLocations.AddMember("member", AddReplicaLocationInput)
-
-	EncryptionMode_SSE_S3 = EncryptionMode.AddMember("SSE_S3", smithyprelude.Unit)
-
-	EncryptionMode_SSE_KMS = EncryptionMode.AddMember("SSE_KMS", smithyprelude.Unit)
-
-	S3EncryptionConfig_EncryptionMode = S3EncryptionConfig.AddMember("EncryptionMode", EncryptionMode)
-
-	S3EncryptionConfig_KmsKeyArn = S3EncryptionConfig.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	ArtifactConfigInput_S3Encryption = ArtifactConfigInput.AddMember("S3Encryption", S3EncryptionConfig)
-
-	ArtifactConfigOutput_S3Encryption = ArtifactConfigOutput.AddMember("S3Encryption", S3EncryptionConfig)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _ErrorMessage)
-
-	_BaseScreenshotIgnoreCoordinates_member = _BaseScreenshotIgnoreCoordinates.AddMember("member", _BaseScreenshotConfigIgnoreCoordinate)
-
-	BaseScreenshot_ScreenshotName = BaseScreenshot.AddMember("ScreenshotName", _String)
-
-	BaseScreenshot_IgnoreCoordinates = BaseScreenshot.AddMember("IgnoreCoordinates", _BaseScreenshotIgnoreCoordinates)
-
-	_BaseScreenshots_member = _BaseScreenshots.AddMember("member", BaseScreenshot)
-
-	_BlueprintTypes_member = _BlueprintTypes.AddMember("member", _BlueprintType)
-
-	BrowserType_CHROME = BrowserType.AddMember("CHROME", smithyprelude.Unit)
-
-	BrowserType_FIREFOX = BrowserType.AddMember("FIREFOX", smithyprelude.Unit)
-
-	BrowserConfig_BrowserType = BrowserConfig.AddMember("BrowserType", BrowserType)
-
-	_BrowserConfigs_member = _BrowserConfigs.AddMember("member", BrowserConfig)
-
-	DependencyType_LambdaLayer = DependencyType.AddMember("LambdaLayer", smithyprelude.Unit)
-
-	Dependency_Type = Dependency.AddMember("Type", DependencyType)
-
-	Dependency_Reference = Dependency.AddMember("Reference", _String)
-
-	_Dependencies_member = _Dependencies.AddMember("member", Dependency)
-
-	CanaryCodeOutput_SourceLocationArn = CanaryCodeOutput.AddMember("SourceLocationArn", _String)
-
-	CanaryCodeOutput_Handler = CanaryCodeOutput.AddMember("Handler", _String)
-
-	CanaryCodeOutput_BlueprintTypes = CanaryCodeOutput.AddMember("BlueprintTypes", _BlueprintTypes)
-
-	CanaryCodeOutput_Dependencies = CanaryCodeOutput.AddMember("Dependencies", _Dependencies)
-
-	RetryConfigOutput_MaxRetries = RetryConfigOutput.AddMember("MaxRetries", _MaxRetries)
-
-	CanaryScheduleOutput_Expression = CanaryScheduleOutput.AddMember("Expression", _String)
-
-	CanaryScheduleOutput_DurationInSeconds = CanaryScheduleOutput.AddMember("DurationInSeconds", _MaxOneYearInSeconds)
-
-	CanaryScheduleOutput_RetryConfig = CanaryScheduleOutput.AddMember("RetryConfig", RetryConfigOutput)
-
-	CanaryRunConfigOutput_TimeoutInSeconds = CanaryRunConfigOutput.AddMember("TimeoutInSeconds", _MaxFifteenMinutesInSeconds)
-
-	CanaryRunConfigOutput_MemoryInMB = CanaryRunConfigOutput.AddMember("MemoryInMB", _MaxSize3008)
-
-	CanaryRunConfigOutput_ActiveTracing = CanaryRunConfigOutput.AddMember("ActiveTracing", _NullableBoolean)
-
-	CanaryRunConfigOutput_EphemeralStorage = CanaryRunConfigOutput.AddMember("EphemeralStorage", _EphemeralStorageSize)
-
-	CanaryState_CREATING = CanaryState.AddMember("CREATING", smithyprelude.Unit)
-
-	CanaryState_READY = CanaryState.AddMember("READY", smithyprelude.Unit)
-
-	CanaryState_STARTING = CanaryState.AddMember("STARTING", smithyprelude.Unit)
-
-	CanaryState_RUNNING = CanaryState.AddMember("RUNNING", smithyprelude.Unit)
-
-	CanaryState_UPDATING = CanaryState.AddMember("UPDATING", smithyprelude.Unit)
-
-	CanaryState_STOPPING = CanaryState.AddMember("STOPPING", smithyprelude.Unit)
-
-	CanaryState_STOPPED = CanaryState.AddMember("STOPPED", smithyprelude.Unit)
-
-	CanaryState_ERROR = CanaryState.AddMember("ERROR", smithyprelude.Unit)
-
-	CanaryState_DELETING = CanaryState.AddMember("DELETING", smithyprelude.Unit)
-
-	CanaryStateReasonCode_INVALID_PERMISSIONS = CanaryStateReasonCode.AddMember("INVALID_PERMISSIONS", smithyprelude.Unit)
-
-	CanaryStateReasonCode_CREATE_PENDING = CanaryStateReasonCode.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	CanaryStateReasonCode_CREATE_IN_PROGRESS = CanaryStateReasonCode.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	CanaryStateReasonCode_CREATE_FAILED = CanaryStateReasonCode.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	CanaryStateReasonCode_UPDATE_PENDING = CanaryStateReasonCode.AddMember("UPDATE_PENDING", smithyprelude.Unit)
-
-	CanaryStateReasonCode_UPDATE_IN_PROGRESS = CanaryStateReasonCode.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
-
-	CanaryStateReasonCode_UPDATE_COMPLETE = CanaryStateReasonCode.AddMember("UPDATE_COMPLETE", smithyprelude.Unit)
-
-	CanaryStateReasonCode_ROLLBACK_COMPLETE = CanaryStateReasonCode.AddMember("ROLLBACK_COMPLETE", smithyprelude.Unit)
-
-	CanaryStateReasonCode_ROLLBACK_FAILED = CanaryStateReasonCode.AddMember("ROLLBACK_FAILED", smithyprelude.Unit)
-
-	CanaryStateReasonCode_DELETE_IN_PROGRESS = CanaryStateReasonCode.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	CanaryStateReasonCode_DELETE_FAILED = CanaryStateReasonCode.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	CanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS = CanaryStateReasonCode.AddMember("SYNC_DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	CanaryStatus_State = CanaryStatus.AddMember("State", CanaryState)
-
-	CanaryStatus_StateReason = CanaryStatus.AddMember("StateReason", _String)
-
-	CanaryStatus_StateReasonCode = CanaryStatus.AddMember("StateReasonCode", CanaryStateReasonCode)
-
-	CanaryTimeline_Created = CanaryTimeline.AddMember("Created", _Timestamp)
-
-	CanaryTimeline_LastModified = CanaryTimeline.AddMember("LastModified", _Timestamp)
-
-	CanaryTimeline_LastStarted = CanaryTimeline.AddMember("LastStarted", _Timestamp)
-
-	CanaryTimeline_LastStopped = CanaryTimeline.AddMember("LastStopped", _Timestamp)
-
-	VpcConfigOutput_VpcId = VpcConfigOutput.AddMember("VpcId", _VpcId)
-
-	VpcConfigOutput_SubnetIds = VpcConfigOutput.AddMember("SubnetIds", _SubnetIds)
-
-	VpcConfigOutput_SecurityGroupIds = VpcConfigOutput.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	VpcConfigOutput_Ipv6AllowedForDualStack = VpcConfigOutput.AddMember("Ipv6AllowedForDualStack", _NullableBoolean)
-
-	VisualReferenceOutput_BaseScreenshots = VisualReferenceOutput.AddMember("BaseScreenshots", _BaseScreenshots)
-
-	VisualReferenceOutput_BaseCanaryRunId = VisualReferenceOutput.AddMember("BaseCanaryRunId", _String)
-
-	VisualReferenceOutput_BrowserType = VisualReferenceOutput.AddMember("BrowserType", BrowserType)
-
-	ProvisionedResourceCleanupSetting_AUTOMATIC = ProvisionedResourceCleanupSetting.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	ProvisionedResourceCleanupSetting_OFF = ProvisionedResourceCleanupSetting.AddMember("OFF", smithyprelude.Unit)
-
-	EngineConfig_EngineArn = EngineConfig.AddMember("EngineArn", _FunctionArn)
-
-	EngineConfig_BrowserType = EngineConfig.AddMember("BrowserType", BrowserType)
-
-	_EngineConfigs_member = _EngineConfigs.AddMember("member", EngineConfig)
-
-	_VisualReferencesOutput_member = _VisualReferencesOutput.AddMember("member", VisualReferenceOutput)
-
-	LocationType_Primary = LocationType.AddMember("Primary", smithyprelude.Unit)
-
-	LocationType_Replica = LocationType.AddMember("Replica", smithyprelude.Unit)
-
-	ReplicationState_InProgress = ReplicationState.AddMember("InProgress", smithyprelude.Unit)
-
-	ReplicationState_InSync = ReplicationState.AddMember("InSync", smithyprelude.Unit)
-
-	ReplicationState_Inconsistent = ReplicationState.AddMember("Inconsistent", smithyprelude.Unit)
-
-	ReplicationStatus_State = ReplicationStatus.AddMember("State", ReplicationState)
-
-	ReplicationStatus_StateReason = ReplicationStatus.AddMember("StateReason", _String)
-
-	ReplicationStatus_StateReasonCode = ReplicationStatus.AddMember("StateReasonCode", _String)
-
-	Replica_Location = Replica.AddMember("Location", _Location)
-
-	Replica_ReplicationStatus = Replica.AddMember("ReplicationStatus", ReplicationStatus)
-
-	Replica_CanaryState = Replica.AddMember("CanaryState", CanaryState)
-
-	Replica_LastModified = Replica.AddMember("LastModified", _Timestamp)
-
-	Replica_VpcConfig = Replica.AddMember("VpcConfig", VpcConfigOutput)
-
-	_Replicas_member = _Replicas.AddMember("member", Replica)
-
-	MultiLocationConfig_LocationType = MultiLocationConfig.AddMember("LocationType", LocationType)
-
-	MultiLocationConfig_PrimaryLocation = MultiLocationConfig.AddMember("PrimaryLocation", _Location)
-
-	MultiLocationConfig_Replicas = MultiLocationConfig.AddMember("Replicas", _Replicas)
-
-	MultiLocationConfig_ReplicationState = MultiLocationConfig.AddMember("ReplicationState", ReplicationState)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	DryRunConfigOutput_DryRunId = DryRunConfigOutput.AddMember("DryRunId", _UUID)
-
-	DryRunConfigOutput_LastDryRunExecutionStatus = DryRunConfigOutput.AddMember("LastDryRunExecutionStatus", _String)
-
-	Canary_Id = Canary.AddMember("Id", _UUID)
-
-	Canary_Name = Canary.AddMember("Name", _CanaryName)
-
-	Canary_Code = Canary.AddMember("Code", CanaryCodeOutput)
-
-	Canary_ExecutionRoleArn = Canary.AddMember("ExecutionRoleArn", _RoleArn)
-
-	Canary_Schedule = Canary.AddMember("Schedule", CanaryScheduleOutput)
-
-	Canary_RunConfig = Canary.AddMember("RunConfig", CanaryRunConfigOutput)
-
-	Canary_SuccessRetentionPeriodInDays = Canary.AddMember("SuccessRetentionPeriodInDays", _MaxSize1024)
-
-	Canary_FailureRetentionPeriodInDays = Canary.AddMember("FailureRetentionPeriodInDays", _MaxSize1024)
-
-	Canary_Status = Canary.AddMember("Status", CanaryStatus)
-
-	Canary_Timeline = Canary.AddMember("Timeline", CanaryTimeline)
-
-	Canary_ArtifactS3Location = Canary.AddMember("ArtifactS3Location", _String)
-
-	Canary_EngineArn = Canary.AddMember("EngineArn", _FunctionArn)
-
-	Canary_RuntimeVersion = Canary.AddMember("RuntimeVersion", _String)
-
-	Canary_VpcConfig = Canary.AddMember("VpcConfig", VpcConfigOutput)
-
-	Canary_VisualReference = Canary.AddMember("VisualReference", VisualReferenceOutput)
-
-	Canary_ProvisionedResourceCleanup = Canary.AddMember("ProvisionedResourceCleanup", ProvisionedResourceCleanupSetting)
-
-	Canary_BrowserConfigs = Canary.AddMember("BrowserConfigs", _BrowserConfigs)
-
-	Canary_EngineConfigs = Canary.AddMember("EngineConfigs", _EngineConfigs)
-
-	Canary_VisualReferences = Canary.AddMember("VisualReferences", _VisualReferencesOutput)
-
-	Canary_MultiLocationConfig = Canary.AddMember("MultiLocationConfig", MultiLocationConfig)
-
-	Canary_Tags = Canary.AddMember("Tags", _TagMap)
-
-	Canary_ArtifactConfig = Canary.AddMember("ArtifactConfig", ArtifactConfigOutput)
-
-	Canary_KmsKeyArn = Canary.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	Canary_DryRunConfig = Canary.AddMember("DryRunConfig", DryRunConfigOutput)
-
-	_Canaries_member = _Canaries.AddMember("member", Canary)
-
-	CanaryRunState_RUNNING = CanaryRunState.AddMember("RUNNING", smithyprelude.Unit)
-
-	CanaryRunState_PASSED = CanaryRunState.AddMember("PASSED", smithyprelude.Unit)
-
-	CanaryRunState_FAILED = CanaryRunState.AddMember("FAILED", smithyprelude.Unit)
-
-	CanaryRunStateReasonCode_CANARY_FAILURE = CanaryRunStateReasonCode.AddMember("CANARY_FAILURE", smithyprelude.Unit)
-
-	CanaryRunStateReasonCode_EXECUTION_FAILURE = CanaryRunStateReasonCode.AddMember("EXECUTION_FAILURE", smithyprelude.Unit)
-
-	CanaryRunTestResult_PASSED = CanaryRunTestResult.AddMember("PASSED", smithyprelude.Unit)
-
-	CanaryRunTestResult_FAILED = CanaryRunTestResult.AddMember("FAILED", smithyprelude.Unit)
-
-	CanaryRunTestResult_UNKNOWN = CanaryRunTestResult.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	CanaryRunStatus_State = CanaryRunStatus.AddMember("State", CanaryRunState)
-
-	CanaryRunStatus_StateReason = CanaryRunStatus.AddMember("StateReason", _String)
-
-	CanaryRunStatus_StateReasonCode = CanaryRunStatus.AddMember("StateReasonCode", CanaryRunStateReasonCode)
-
-	CanaryRunStatus_TestResult = CanaryRunStatus.AddMember("TestResult", CanaryRunTestResult)
-
-	CanaryRunTimeline_Started = CanaryRunTimeline.AddMember("Started", _Timestamp)
-
-	CanaryRunTimeline_Completed = CanaryRunTimeline.AddMember("Completed", _Timestamp)
-
-	CanaryRunTimeline_MetricTimestampForRunAndRetries = CanaryRunTimeline.AddMember("MetricTimestampForRunAndRetries", _Timestamp)
-
-	CanaryDryRunConfigOutput_DryRunId = CanaryDryRunConfigOutput.AddMember("DryRunId", _UUID)
-
-	CanaryRun_Id = CanaryRun.AddMember("Id", _UUID)
-
-	CanaryRun_ScheduledRunId = CanaryRun.AddMember("ScheduledRunId", _UUID)
-
-	CanaryRun_RetryAttempt = CanaryRun.AddMember("RetryAttempt", _RetryAttempt)
-
-	CanaryRun_Name = CanaryRun.AddMember("Name", _CanaryName)
-
-	CanaryRun_Status = CanaryRun.AddMember("Status", CanaryRunStatus)
-
-	CanaryRun_Timeline = CanaryRun.AddMember("Timeline", CanaryRunTimeline)
-
-	CanaryRun_ArtifactS3Location = CanaryRun.AddMember("ArtifactS3Location", _String)
-
-	CanaryRun_DryRunConfig = CanaryRun.AddMember("DryRunConfig", CanaryDryRunConfigOutput)
-
-	CanaryRun_BrowserType = CanaryRun.AddMember("BrowserType", BrowserType)
-
-	CanaryRun_Location = CanaryRun.AddMember("Location", _Location)
-
-	CanaryLastRun_CanaryName = CanaryLastRun.AddMember("CanaryName", _CanaryName)
-
-	CanaryLastRun_LastRun = CanaryLastRun.AddMember("LastRun", CanaryRun)
-
-	_CanariesLastRun_member = _CanariesLastRun.AddMember("member", CanaryLastRun)
-
-	CanaryCodeInput_S3Bucket = CanaryCodeInput.AddMember("S3Bucket", _String)
-
-	CanaryCodeInput_S3Key = CanaryCodeInput.AddMember("S3Key", _String)
-
-	CanaryCodeInput_S3Version = CanaryCodeInput.AddMember("S3Version", _String)
-
-	CanaryCodeInput_ZipFile = CanaryCodeInput.AddMember("ZipFile", _Blob)
-
-	CanaryCodeInput_Handler = CanaryCodeInput.AddMember("Handler", _CodeHandler)
-
-	CanaryCodeInput_BlueprintTypes = CanaryCodeInput.AddMember("BlueprintTypes", _BlueprintTypes)
-
-	CanaryCodeInput_Dependencies = CanaryCodeInput.AddMember("Dependencies", _Dependencies)
-
-	_EnvironmentVariablesMap_key = _EnvironmentVariablesMap.AddMember("key", _EnvironmentVariableName)
-
-	_EnvironmentVariablesMap_value = _EnvironmentVariablesMap.AddMember("value", _EnvironmentVariableValue)
-
-	CanaryRunConfigInput_TimeoutInSeconds = CanaryRunConfigInput.AddMember("TimeoutInSeconds", _MaxFifteenMinutesInSeconds)
-
-	CanaryRunConfigInput_MemoryInMB = CanaryRunConfigInput.AddMember("MemoryInMB", _MaxSize3008)
-
-	CanaryRunConfigInput_ActiveTracing = CanaryRunConfigInput.AddMember("ActiveTracing", _NullableBoolean)
-
-	CanaryRunConfigInput_EnvironmentVariables = CanaryRunConfigInput.AddMember("EnvironmentVariables", _EnvironmentVariablesMap)
-
-	CanaryRunConfigInput_EphemeralStorage = CanaryRunConfigInput.AddMember("EphemeralStorage", _EphemeralStorageSize)
-
-	_CanaryRuns_member = _CanaryRuns.AddMember("member", CanaryRun)
-
-	RetryConfigInput_MaxRetries = RetryConfigInput.AddMember("MaxRetries", _MaxRetries)
-
-	CanaryScheduleInput_Expression = CanaryScheduleInput.AddMember("Expression", _String)
-
-	CanaryScheduleInput_DurationInSeconds = CanaryScheduleInput.AddMember("DurationInSeconds", _MaxOneYearInSeconds)
-
-	CanaryScheduleInput_RetryConfig = CanaryScheduleInput.AddMember("RetryConfig", RetryConfigInput)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	_DescribeCanariesLastRunNameFilter_member = _DescribeCanariesLastRunNameFilter.AddMember("member", _CanaryName)
-
-	_DescribeCanariesNameFilter_member = _DescribeCanariesNameFilter.AddMember("member", _CanaryName)
-
-	Group_Id = Group.AddMember("Id", _String)
-
-	Group_Name = Group.AddMember("Name", _GroupName)
-
-	Group_Arn = Group.AddMember("Arn", _GroupArn)
-
-	Group_Tags = Group.AddMember("Tags", _TagMap)
-
-	Group_CreatedTime = Group.AddMember("CreatedTime", _Timestamp)
-
-	Group_LastModifiedTime = Group.AddMember("LastModifiedTime", _Timestamp)
-
-	GroupSummary_Id = GroupSummary.AddMember("Id", _String)
-
-	GroupSummary_Name = GroupSummary.AddMember("Name", _GroupName)
-
-	GroupSummary_Arn = GroupSummary.AddMember("Arn", _GroupArn)
-
-	_GroupSummaryList_member = _GroupSummaryList.AddMember("member", GroupSummary)
-
-	InternalFailureException_Message = InternalFailureException.AddMember("Message", _ErrorMessage)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _ErrorMessage)
-
-	_RemoveReplicaLocations_member = _RemoveReplicaLocations.AddMember("member", _Location)
-
-	RequestEntityTooLargeException_Message = RequestEntityTooLargeException.AddMember("Message", _ErrorMessage)
-
-	ResourceToTag_LAMBDA_FUNCTION = ResourceToTag.AddMember("LAMBDA_FUNCTION", smithyprelude.Unit)
-
-	_ResourceList_member = _ResourceList.AddMember("member", ResourceToTag)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	RuntimeVersion_VersionName = RuntimeVersion.AddMember("VersionName", _String)
-
-	RuntimeVersion_Description = RuntimeVersion.AddMember("Description", _String)
-
-	RuntimeVersion_ReleaseDate = RuntimeVersion.AddMember("ReleaseDate", _Timestamp)
-
-	RuntimeVersion_DeprecationDate = RuntimeVersion.AddMember("DeprecationDate", _Timestamp)
-
-	_RuntimeVersionList_member = _RuntimeVersionList.AddMember("member", RuntimeVersion)
-
-	RunType_CANARY_RUN = RunType.AddMember("CANARY_RUN", smithyprelude.Unit)
-
-	RunType_DRY_RUN = RunType.AddMember("DRY_RUN", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	VisualReferenceInput_BaseScreenshots = VisualReferenceInput.AddMember("BaseScreenshots", _BaseScreenshots)
-
-	VisualReferenceInput_BaseCanaryRunId = VisualReferenceInput.AddMember("BaseCanaryRunId", _String)
-
-	VisualReferenceInput_BrowserType = VisualReferenceInput.AddMember("BrowserType", BrowserType)
-
-	_VisualReferences_member = _VisualReferences.AddMember("member", VisualReferenceInput)
-
-	AssociateResourceRequest_GroupIdentifier = AssociateResourceRequest.AddMember("GroupIdentifier", _GroupIdentifier, &smithytraits.HTTPLabel{})
-
-	AssociateResourceRequest_ResourceArn = AssociateResourceRequest.AddMember("ResourceArn", _CanaryArn)
-
-	CreateCanaryRequest_Name = CreateCanaryRequest.AddMember("Name", _CanaryName)
-
-	CreateCanaryRequest_Code = CreateCanaryRequest.AddMember("Code", CanaryCodeInput)
-
-	CreateCanaryRequest_ArtifactS3Location = CreateCanaryRequest.AddMember("ArtifactS3Location", _String)
-
-	CreateCanaryRequest_ExecutionRoleArn = CreateCanaryRequest.AddMember("ExecutionRoleArn", _RoleArn)
-
-	CreateCanaryRequest_Schedule = CreateCanaryRequest.AddMember("Schedule", CanaryScheduleInput)
-
-	CreateCanaryRequest_RunConfig = CreateCanaryRequest.AddMember("RunConfig", CanaryRunConfigInput)
-
-	CreateCanaryRequest_SuccessRetentionPeriodInDays = CreateCanaryRequest.AddMember("SuccessRetentionPeriodInDays", _MaxSize1024)
-
-	CreateCanaryRequest_FailureRetentionPeriodInDays = CreateCanaryRequest.AddMember("FailureRetentionPeriodInDays", _MaxSize1024)
-
-	CreateCanaryRequest_RuntimeVersion = CreateCanaryRequest.AddMember("RuntimeVersion", _String)
-
-	CreateCanaryRequest_VpcConfig = CreateCanaryRequest.AddMember("VpcConfig", VpcConfigInput)
-
-	CreateCanaryRequest_ResourcesToReplicateTags = CreateCanaryRequest.AddMember("ResourcesToReplicateTags", _ResourceList)
-
-	CreateCanaryRequest_ProvisionedResourceCleanup = CreateCanaryRequest.AddMember("ProvisionedResourceCleanup", ProvisionedResourceCleanupSetting)
-
-	CreateCanaryRequest_BrowserConfigs = CreateCanaryRequest.AddMember("BrowserConfigs", _BrowserConfigs)
-
-	CreateCanaryRequest_AddReplicaLocations = CreateCanaryRequest.AddMember("AddReplicaLocations", _AddReplicaLocations)
-
-	CreateCanaryRequest_Tags = CreateCanaryRequest.AddMember("Tags", _TagMap)
-
-	CreateCanaryRequest_ArtifactConfig = CreateCanaryRequest.AddMember("ArtifactConfig", ArtifactConfigInput)
-
-	CreateCanaryRequest_KmsKeyArn = CreateCanaryRequest.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CreateCanaryResponse_Canary = CreateCanaryResponse.AddMember("Canary", Canary)
-
-	CreateGroupRequest_Name = CreateGroupRequest.AddMember("Name", _GroupName)
-
-	CreateGroupRequest_Tags = CreateGroupRequest.AddMember("Tags", _TagMap)
-
-	CreateGroupResponse_Group = CreateGroupResponse.AddMember("Group", Group)
-
-	DeleteCanaryRequest_Name = DeleteCanaryRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	DeleteCanaryRequest_DeleteLambda = DeleteCanaryRequest.AddMember("DeleteLambda", _boolean, &smithytraits.HTTPQuery{Name: "deleteLambda"})
-
-	DeleteGroupRequest_GroupIdentifier = DeleteGroupRequest.AddMember("GroupIdentifier", _GroupIdentifier, &smithytraits.HTTPLabel{})
-
-	DescribeCanariesRequest_NextToken = DescribeCanariesRequest.AddMember("NextToken", _Token)
-
-	DescribeCanariesRequest_MaxResults = DescribeCanariesRequest.AddMember("MaxResults", _MaxCanaryResults)
-
-	DescribeCanariesRequest_Names = DescribeCanariesRequest.AddMember("Names", _DescribeCanariesNameFilter)
-
-	DescribeCanariesLastRunRequest_NextToken = DescribeCanariesLastRunRequest.AddMember("NextToken", _Token)
-
-	DescribeCanariesLastRunRequest_MaxResults = DescribeCanariesLastRunRequest.AddMember("MaxResults", _MaxSize100)
-
-	DescribeCanariesLastRunRequest_Names = DescribeCanariesLastRunRequest.AddMember("Names", _DescribeCanariesLastRunNameFilter)
-
-	DescribeCanariesLastRunRequest_BrowserType = DescribeCanariesLastRunRequest.AddMember("BrowserType", BrowserType)
-
-	DescribeCanariesLastRunResponse_CanariesLastRun = DescribeCanariesLastRunResponse.AddMember("CanariesLastRun", _CanariesLastRun)
-
-	DescribeCanariesLastRunResponse_NextToken = DescribeCanariesLastRunResponse.AddMember("NextToken", _Token)
-
-	DescribeCanariesResponse_Canaries = DescribeCanariesResponse.AddMember("Canaries", _Canaries)
-
-	DescribeCanariesResponse_NextToken = DescribeCanariesResponse.AddMember("NextToken", _Token)
-
-	DescribeRuntimeVersionsRequest_NextToken = DescribeRuntimeVersionsRequest.AddMember("NextToken", _Token)
-
-	DescribeRuntimeVersionsRequest_MaxResults = DescribeRuntimeVersionsRequest.AddMember("MaxResults", _MaxSize100)
-
-	DescribeRuntimeVersionsResponse_RuntimeVersions = DescribeRuntimeVersionsResponse.AddMember("RuntimeVersions", _RuntimeVersionList)
-
-	DescribeRuntimeVersionsResponse_NextToken = DescribeRuntimeVersionsResponse.AddMember("NextToken", _Token)
-
-	DisassociateResourceRequest_GroupIdentifier = DisassociateResourceRequest.AddMember("GroupIdentifier", _GroupIdentifier, &smithytraits.HTTPLabel{})
-
-	DisassociateResourceRequest_ResourceArn = DisassociateResourceRequest.AddMember("ResourceArn", _CanaryArn)
-
-	GetCanaryRequest_Name = GetCanaryRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	GetCanaryRequest_DryRunId = GetCanaryRequest.AddMember("DryRunId", _UUID, &smithytraits.HTTPQuery{Name: "dryRunId"})
-
-	GetCanaryResponse_Canary = GetCanaryResponse.AddMember("Canary", Canary)
-
-	GetCanaryRunsRequest_Name = GetCanaryRunsRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	GetCanaryRunsRequest_NextToken = GetCanaryRunsRequest.AddMember("NextToken", _Token)
-
-	GetCanaryRunsRequest_MaxResults = GetCanaryRunsRequest.AddMember("MaxResults", _MaxSize100)
-
-	GetCanaryRunsRequest_DryRunId = GetCanaryRunsRequest.AddMember("DryRunId", _UUID)
-
-	GetCanaryRunsRequest_RunType = GetCanaryRunsRequest.AddMember("RunType", RunType)
-
-	GetCanaryRunsResponse_CanaryRuns = GetCanaryRunsResponse.AddMember("CanaryRuns", _CanaryRuns)
-
-	GetCanaryRunsResponse_NextToken = GetCanaryRunsResponse.AddMember("NextToken", _Token)
-
-	GetGroupRequest_GroupIdentifier = GetGroupRequest.AddMember("GroupIdentifier", _GroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetGroupResponse_Group = GetGroupResponse.AddMember("Group", Group)
-
-	ListAssociatedGroupsRequest_NextToken = ListAssociatedGroupsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAssociatedGroupsRequest_MaxResults = ListAssociatedGroupsRequest.AddMember("MaxResults", _MaxGroupResults)
-
-	ListAssociatedGroupsRequest_ResourceArn = ListAssociatedGroupsRequest.AddMember("ResourceArn", _CanaryArn, &smithytraits.HTTPLabel{})
-
-	ListAssociatedGroupsResponse_Groups = ListAssociatedGroupsResponse.AddMember("Groups", _GroupSummaryList)
-
-	ListAssociatedGroupsResponse_NextToken = ListAssociatedGroupsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListGroupResourcesRequest_NextToken = ListGroupResourcesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListGroupResourcesRequest_MaxResults = ListGroupResourcesRequest.AddMember("MaxResults", _MaxGroupResults)
-
-	ListGroupResourcesRequest_GroupIdentifier = ListGroupResourcesRequest.AddMember("GroupIdentifier", _GroupIdentifier, &smithytraits.HTTPLabel{})
-
-	ListGroupResourcesResponse_Resources = ListGroupResourcesResponse.AddMember("Resources", _StringList)
-
-	ListGroupResourcesResponse_NextToken = ListGroupResourcesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListGroupsRequest_NextToken = ListGroupsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListGroupsRequest_MaxResults = ListGroupsRequest.AddMember("MaxResults", _MaxGroupResults)
-
-	ListGroupsResponse_Groups = ListGroupsResponse.AddMember("Groups", _GroupSummaryList)
-
-	ListGroupsResponse_NextToken = ListGroupsResponse.AddMember("NextToken", _Token)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	StartCanaryDryRunRequest_Name = StartCanaryDryRunRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	StartCanaryDryRunRequest_Code = StartCanaryDryRunRequest.AddMember("Code", CanaryCodeInput)
-
-	StartCanaryDryRunRequest_RuntimeVersion = StartCanaryDryRunRequest.AddMember("RuntimeVersion", _String)
-
-	StartCanaryDryRunRequest_RunConfig = StartCanaryDryRunRequest.AddMember("RunConfig", CanaryRunConfigInput)
-
-	StartCanaryDryRunRequest_VpcConfig = StartCanaryDryRunRequest.AddMember("VpcConfig", VpcConfigInput)
-
-	StartCanaryDryRunRequest_ExecutionRoleArn = StartCanaryDryRunRequest.AddMember("ExecutionRoleArn", _RoleArn)
-
-	StartCanaryDryRunRequest_SuccessRetentionPeriodInDays = StartCanaryDryRunRequest.AddMember("SuccessRetentionPeriodInDays", _MaxSize1024)
-
-	StartCanaryDryRunRequest_FailureRetentionPeriodInDays = StartCanaryDryRunRequest.AddMember("FailureRetentionPeriodInDays", _MaxSize1024)
-
-	StartCanaryDryRunRequest_VisualReference = StartCanaryDryRunRequest.AddMember("VisualReference", VisualReferenceInput)
-
-	StartCanaryDryRunRequest_ArtifactS3Location = StartCanaryDryRunRequest.AddMember("ArtifactS3Location", _String)
-
-	StartCanaryDryRunRequest_ArtifactConfig = StartCanaryDryRunRequest.AddMember("ArtifactConfig", ArtifactConfigInput)
-
-	StartCanaryDryRunRequest_ProvisionedResourceCleanup = StartCanaryDryRunRequest.AddMember("ProvisionedResourceCleanup", ProvisionedResourceCleanupSetting)
-
-	StartCanaryDryRunRequest_BrowserConfigs = StartCanaryDryRunRequest.AddMember("BrowserConfigs", _BrowserConfigs)
-
-	StartCanaryDryRunRequest_VisualReferences = StartCanaryDryRunRequest.AddMember("VisualReferences", _VisualReferences)
-
-	StartCanaryDryRunResponse_DryRunConfig = StartCanaryDryRunResponse.AddMember("DryRunConfig", DryRunConfigOutput)
-
-	StartCanaryRequest_Name = StartCanaryRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	StopCanaryRequest_Name = StopCanaryRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCanaryRequest_Name = UpdateCanaryRequest.AddMember("Name", _CanaryName, &smithytraits.HTTPLabel{})
-
-	UpdateCanaryRequest_Code = UpdateCanaryRequest.AddMember("Code", CanaryCodeInput)
-
-	UpdateCanaryRequest_ExecutionRoleArn = UpdateCanaryRequest.AddMember("ExecutionRoleArn", _RoleArn)
-
-	UpdateCanaryRequest_RuntimeVersion = UpdateCanaryRequest.AddMember("RuntimeVersion", _String)
-
-	UpdateCanaryRequest_Schedule = UpdateCanaryRequest.AddMember("Schedule", CanaryScheduleInput)
-
-	UpdateCanaryRequest_RunConfig = UpdateCanaryRequest.AddMember("RunConfig", CanaryRunConfigInput)
-
-	UpdateCanaryRequest_SuccessRetentionPeriodInDays = UpdateCanaryRequest.AddMember("SuccessRetentionPeriodInDays", _MaxSize1024)
-
-	UpdateCanaryRequest_FailureRetentionPeriodInDays = UpdateCanaryRequest.AddMember("FailureRetentionPeriodInDays", _MaxSize1024)
-
-	UpdateCanaryRequest_VpcConfig = UpdateCanaryRequest.AddMember("VpcConfig", VpcConfigInput)
-
-	UpdateCanaryRequest_VisualReference = UpdateCanaryRequest.AddMember("VisualReference", VisualReferenceInput)
-
-	UpdateCanaryRequest_ArtifactS3Location = UpdateCanaryRequest.AddMember("ArtifactS3Location", _String)
-
-	UpdateCanaryRequest_ArtifactConfig = UpdateCanaryRequest.AddMember("ArtifactConfig", ArtifactConfigInput)
-
-	UpdateCanaryRequest_ProvisionedResourceCleanup = UpdateCanaryRequest.AddMember("ProvisionedResourceCleanup", ProvisionedResourceCleanupSetting)
-
-	UpdateCanaryRequest_DryRunId = UpdateCanaryRequest.AddMember("DryRunId", _UUID)
-
-	UpdateCanaryRequest_VisualReferences = UpdateCanaryRequest.AddMember("VisualReferences", _VisualReferences)
-
-	UpdateCanaryRequest_BrowserConfigs = UpdateCanaryRequest.AddMember("BrowserConfigs", _BrowserConfigs)
-
-	UpdateCanaryRequest_AddReplicaLocations = UpdateCanaryRequest.AddMember("AddReplicaLocations", _AddReplicaLocations)
-
-	UpdateCanaryRequest_RemoveReplicaLocations = UpdateCanaryRequest.AddMember("RemoveReplicaLocations", _RemoveReplicaLocations)
-
-	UpdateCanaryRequest_KmsKeyArn = UpdateCanaryRequest.AddMember("KmsKeyArn", _KmsKeyArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "deleteLambda"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "dryRunId"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAddReplicaLocationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddReplicaLocationInput_Location, &sAddReplicaLocationInput_VpcConfig, &sAddReplicaLocationInput_KmsKeyArn}}
+var m_AddReplicaLocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddReplicaLocations_member}}
+var mArtifactConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactConfigInput_S3Encryption}}
+var mArtifactConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactConfigOutput_S3Encryption}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message}}
+var mBaseScreenshot = smithy.SchemaMembers{List: []*smithy.Schema{&sBaseScreenshot_ScreenshotName, &sBaseScreenshot_IgnoreCoordinates}}
+var m_BaseScreenshotIgnoreCoordinates = smithy.SchemaMembers{List: []*smithy.Schema{&s_BaseScreenshotIgnoreCoordinates_member}}
+var m_BaseScreenshots = smithy.SchemaMembers{List: []*smithy.Schema{&s_BaseScreenshots_member}}
+var m_BlueprintTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlueprintTypes_member}}
+var mBrowserConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBrowserConfig_BrowserType}}
+var m_BrowserConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrowserConfigs_member}}
+var mBrowserType = smithy.SchemaMembers{List: []*smithy.Schema{&sBrowserType_CHROME, &sBrowserType_FIREFOX}}
+var m_Canaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_Canaries_member}}
+var m_CanariesLastRun = smithy.SchemaMembers{List: []*smithy.Schema{&s_CanariesLastRun_member}}
+var mCanary = smithy.SchemaMembers{List: []*smithy.Schema{&sCanary_Id, &sCanary_Name, &sCanary_Code, &sCanary_ExecutionRoleArn, &sCanary_Schedule, &sCanary_RunConfig, &sCanary_SuccessRetentionPeriodInDays, &sCanary_FailureRetentionPeriodInDays, &sCanary_Status, &sCanary_Timeline, &sCanary_ArtifactS3Location, &sCanary_EngineArn, &sCanary_RuntimeVersion, &sCanary_VpcConfig, &sCanary_VisualReference, &sCanary_ProvisionedResourceCleanup, &sCanary_BrowserConfigs, &sCanary_EngineConfigs, &sCanary_VisualReferences, &sCanary_MultiLocationConfig, &sCanary_Tags, &sCanary_ArtifactConfig, &sCanary_KmsKeyArn, &sCanary_DryRunConfig}, Hash: &hCanary}
+var mCanaryCodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryCodeInput_S3Bucket, &sCanaryCodeInput_S3Key, &sCanaryCodeInput_S3Version, &sCanaryCodeInput_ZipFile, &sCanaryCodeInput_Handler, &sCanaryCodeInput_BlueprintTypes, &sCanaryCodeInput_Dependencies}}
+var mCanaryCodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryCodeOutput_SourceLocationArn, &sCanaryCodeOutput_Handler, &sCanaryCodeOutput_BlueprintTypes, &sCanaryCodeOutput_Dependencies}}
+var mCanaryDryRunConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryDryRunConfigOutput_DryRunId}}
+var mCanaryLastRun = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryLastRun_CanaryName, &sCanaryLastRun_LastRun}}
+var mCanaryRun = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRun_Id, &sCanaryRun_ScheduledRunId, &sCanaryRun_RetryAttempt, &sCanaryRun_Name, &sCanaryRun_Status, &sCanaryRun_Timeline, &sCanaryRun_ArtifactS3Location, &sCanaryRun_DryRunConfig, &sCanaryRun_BrowserType, &sCanaryRun_Location}, Hash: &hCanaryRun}
+var mCanaryRunConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunConfigInput_TimeoutInSeconds, &sCanaryRunConfigInput_MemoryInMB, &sCanaryRunConfigInput_ActiveTracing, &sCanaryRunConfigInput_EnvironmentVariables, &sCanaryRunConfigInput_EphemeralStorage}}
+var mCanaryRunConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunConfigOutput_TimeoutInSeconds, &sCanaryRunConfigOutput_MemoryInMB, &sCanaryRunConfigOutput_ActiveTracing, &sCanaryRunConfigOutput_EphemeralStorage}}
+var m_CanaryRuns = smithy.SchemaMembers{List: []*smithy.Schema{&s_CanaryRuns_member}}
+var mCanaryRunState = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunState_RUNNING, &sCanaryRunState_PASSED, &sCanaryRunState_FAILED}}
+var mCanaryRunStateReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunStateReasonCode_CANARY_FAILURE, &sCanaryRunStateReasonCode_EXECUTION_FAILURE}}
+var mCanaryRunStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunStatus_State, &sCanaryRunStatus_StateReason, &sCanaryRunStatus_StateReasonCode, &sCanaryRunStatus_TestResult}}
+var mCanaryRunTestResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunTestResult_PASSED, &sCanaryRunTestResult_FAILED, &sCanaryRunTestResult_UNKNOWN}}
+var mCanaryRunTimeline = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryRunTimeline_Started, &sCanaryRunTimeline_Completed, &sCanaryRunTimeline_MetricTimestampForRunAndRetries}}
+var mCanaryScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryScheduleInput_Expression, &sCanaryScheduleInput_DurationInSeconds, &sCanaryScheduleInput_RetryConfig}}
+var mCanaryScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryScheduleOutput_Expression, &sCanaryScheduleOutput_DurationInSeconds, &sCanaryScheduleOutput_RetryConfig}}
+var mCanaryState = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryState_CREATING, &sCanaryState_READY, &sCanaryState_STARTING, &sCanaryState_RUNNING, &sCanaryState_UPDATING, &sCanaryState_STOPPING, &sCanaryState_STOPPED, &sCanaryState_ERROR, &sCanaryState_DELETING}, Hash: &hCanaryState}
+var mCanaryStateReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryStateReasonCode_INVALID_PERMISSIONS, &sCanaryStateReasonCode_CREATE_PENDING, &sCanaryStateReasonCode_CREATE_IN_PROGRESS, &sCanaryStateReasonCode_CREATE_FAILED, &sCanaryStateReasonCode_UPDATE_PENDING, &sCanaryStateReasonCode_UPDATE_IN_PROGRESS, &sCanaryStateReasonCode_UPDATE_COMPLETE, &sCanaryStateReasonCode_ROLLBACK_COMPLETE, &sCanaryStateReasonCode_ROLLBACK_FAILED, &sCanaryStateReasonCode_DELETE_IN_PROGRESS, &sCanaryStateReasonCode_DELETE_FAILED, &sCanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS}, Hash: &hCanaryStateReasonCode}
+var mCanaryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryStatus_State, &sCanaryStatus_StateReason, &sCanaryStatus_StateReasonCode}}
+var mCanaryTimeline = smithy.SchemaMembers{List: []*smithy.Schema{&sCanaryTimeline_Created, &sCanaryTimeline_LastModified, &sCanaryTimeline_LastStarted, &sCanaryTimeline_LastStopped}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var m_Dependencies = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dependencies_member}}
+var mDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sDependency_Type, &sDependency_Reference}}
+var mDependencyType = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyType_LambdaLayer}}
+var m_DescribeCanariesLastRunNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeCanariesLastRunNameFilter_member}}
+var m_DescribeCanariesNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeCanariesNameFilter_member}}
+var mDryRunConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDryRunConfigOutput_DryRunId, &sDryRunConfigOutput_LastDryRunExecutionStatus}}
+var mEncryptionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionMode_SSE_S3, &sEncryptionMode_SSE_KMS}}
+var mEngineConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineConfig_EngineArn, &sEngineConfig_BrowserType}}
+var m_EngineConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngineConfigs_member}}
+var m_EnvironmentVariablesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentVariablesMap_key, &s_EnvironmentVariablesMap_value}}
+var mGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sGroup_Id, &sGroup_Name, &sGroup_Arn, &sGroup_Tags, &sGroup_CreatedTime, &sGroup_LastModifiedTime}}
+var mGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupSummary_Id, &sGroupSummary_Name, &sGroupSummary_Arn}}
+var m_GroupSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupSummaryList_member}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_Message}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mLocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sLocationType_Primary, &sLocationType_Replica}}
+var mMultiLocationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiLocationConfig_LocationType, &sMultiLocationConfig_PrimaryLocation, &sMultiLocationConfig_Replicas, &sMultiLocationConfig_ReplicationState}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Message}}
+var mProvisionedResourceCleanupSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedResourceCleanupSetting_AUTOMATIC, &sProvisionedResourceCleanupSetting_OFF}}
+var m_RemoveReplicaLocations = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemoveReplicaLocations_member}}
+var mReplica = smithy.SchemaMembers{List: []*smithy.Schema{&sReplica_Location, &sReplica_ReplicationStatus, &sReplica_CanaryState, &sReplica_LastModified, &sReplica_VpcConfig}}
+var m_Replicas = smithy.SchemaMembers{List: []*smithy.Schema{&s_Replicas_member}}
+var mReplicationState = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationState_InProgress, &sReplicationState_InSync, &sReplicationState_Inconsistent}}
+var mReplicationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStatus_State, &sReplicationStatus_StateReason, &sReplicationStatus_StateReasonCode}}
+var mRequestEntityTooLargeException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestEntityTooLargeException_Message}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceToTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceToTag_LAMBDA_FUNCTION}}
+var mRetryConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryConfigInput_MaxRetries}}
+var mRetryConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryConfigOutput_MaxRetries}}
+var mRuntimeVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeVersion_VersionName, &sRuntimeVersion_Description, &sRuntimeVersion_ReleaseDate, &sRuntimeVersion_DeprecationDate}}
+var m_RuntimeVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuntimeVersionList_member}}
+var mRunType = smithy.SchemaMembers{List: []*smithy.Schema{&sRunType_CANARY_RUN, &sRunType_DRY_RUN}}
+var mS3EncryptionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3EncryptionConfig_EncryptionMode, &sS3EncryptionConfig_KmsKeyArn}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mVisualReferenceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sVisualReferenceInput_BaseScreenshots, &sVisualReferenceInput_BaseCanaryRunId, &sVisualReferenceInput_BrowserType}}
+var mVisualReferenceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sVisualReferenceOutput_BaseScreenshots, &sVisualReferenceOutput_BaseCanaryRunId, &sVisualReferenceOutput_BrowserType}}
+var m_VisualReferences = smithy.SchemaMembers{List: []*smithy.Schema{&s_VisualReferences_member}}
+var m_VisualReferencesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s_VisualReferencesOutput_member}}
+var mVpcConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfigInput_SubnetIds, &sVpcConfigInput_SecurityGroupIds, &sVpcConfigInput_Ipv6AllowedForDualStack}}
+var mVpcConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfigOutput_VpcId, &sVpcConfigOutput_SubnetIds, &sVpcConfigOutput_SecurityGroupIds, &sVpcConfigOutput_Ipv6AllowedForDualStack}}
+var mAssociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceRequest_GroupIdentifier, &sAssociateResourceRequest_ResourceArn}}
+var mCreateCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCanaryRequest_Name, &sCreateCanaryRequest_Code, &sCreateCanaryRequest_ArtifactS3Location, &sCreateCanaryRequest_ExecutionRoleArn, &sCreateCanaryRequest_Schedule, &sCreateCanaryRequest_RunConfig, &sCreateCanaryRequest_SuccessRetentionPeriodInDays, &sCreateCanaryRequest_FailureRetentionPeriodInDays, &sCreateCanaryRequest_RuntimeVersion, &sCreateCanaryRequest_VpcConfig, &sCreateCanaryRequest_ResourcesToReplicateTags, &sCreateCanaryRequest_ProvisionedResourceCleanup, &sCreateCanaryRequest_BrowserConfigs, &sCreateCanaryRequest_AddReplicaLocations, &sCreateCanaryRequest_Tags, &sCreateCanaryRequest_ArtifactConfig, &sCreateCanaryRequest_KmsKeyArn}, Hash: &hCreateCanaryRequest}
+var mCreateCanaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCanaryResponse_Canary}}
+var mCreateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupRequest_Name, &sCreateGroupRequest_Tags}}
+var mCreateGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupResponse_Group}}
+var mDeleteCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCanaryRequest_Name, &sDeleteCanaryRequest_DeleteLambda}}
+var mDeleteGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGroupRequest_GroupIdentifier}}
+var mDescribeCanariesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCanariesRequest_NextToken, &sDescribeCanariesRequest_MaxResults, &sDescribeCanariesRequest_Names}}
+var mDescribeCanariesLastRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCanariesLastRunRequest_NextToken, &sDescribeCanariesLastRunRequest_MaxResults, &sDescribeCanariesLastRunRequest_Names, &sDescribeCanariesLastRunRequest_BrowserType}}
+var mDescribeCanariesLastRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCanariesLastRunResponse_CanariesLastRun, &sDescribeCanariesLastRunResponse_NextToken}}
+var mDescribeCanariesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCanariesResponse_Canaries, &sDescribeCanariesResponse_NextToken}}
+var mDescribeRuntimeVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuntimeVersionsRequest_NextToken, &sDescribeRuntimeVersionsRequest_MaxResults}}
+var mDescribeRuntimeVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuntimeVersionsResponse_RuntimeVersions, &sDescribeRuntimeVersionsResponse_NextToken}}
+var mDisassociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceRequest_GroupIdentifier, &sDisassociateResourceRequest_ResourceArn}}
+var mGetCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCanaryRequest_Name, &sGetCanaryRequest_DryRunId}}
+var mGetCanaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCanaryResponse_Canary}}
+var mGetCanaryRunsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCanaryRunsRequest_Name, &sGetCanaryRunsRequest_NextToken, &sGetCanaryRunsRequest_MaxResults, &sGetCanaryRunsRequest_DryRunId, &sGetCanaryRunsRequest_RunType}}
+var mGetCanaryRunsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCanaryRunsResponse_CanaryRuns, &sGetCanaryRunsResponse_NextToken}}
+var mGetGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupRequest_GroupIdentifier}}
+var mGetGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupResponse_Group}}
+var mListAssociatedGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedGroupsRequest_NextToken, &sListAssociatedGroupsRequest_MaxResults, &sListAssociatedGroupsRequest_ResourceArn}}
+var mListAssociatedGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedGroupsResponse_Groups, &sListAssociatedGroupsResponse_NextToken}}
+var mListGroupResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupResourcesRequest_NextToken, &sListGroupResourcesRequest_MaxResults, &sListGroupResourcesRequest_GroupIdentifier}}
+var mListGroupResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupResourcesResponse_Resources, &sListGroupResourcesResponse_NextToken}}
+var mListGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsRequest_NextToken, &sListGroupsRequest_MaxResults}}
+var mListGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsResponse_Groups, &sListGroupsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartCanaryDryRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCanaryDryRunRequest_Name, &sStartCanaryDryRunRequest_Code, &sStartCanaryDryRunRequest_RuntimeVersion, &sStartCanaryDryRunRequest_RunConfig, &sStartCanaryDryRunRequest_VpcConfig, &sStartCanaryDryRunRequest_ExecutionRoleArn, &sStartCanaryDryRunRequest_SuccessRetentionPeriodInDays, &sStartCanaryDryRunRequest_FailureRetentionPeriodInDays, &sStartCanaryDryRunRequest_VisualReference, &sStartCanaryDryRunRequest_ArtifactS3Location, &sStartCanaryDryRunRequest_ArtifactConfig, &sStartCanaryDryRunRequest_ProvisionedResourceCleanup, &sStartCanaryDryRunRequest_BrowserConfigs, &sStartCanaryDryRunRequest_VisualReferences}, Hash: &hStartCanaryDryRunRequest}
+var mStartCanaryDryRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCanaryDryRunResponse_DryRunConfig}}
+var mStartCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCanaryRequest_Name}}
+var mStopCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopCanaryRequest_Name}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateCanaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCanaryRequest_Name, &sUpdateCanaryRequest_Code, &sUpdateCanaryRequest_ExecutionRoleArn, &sUpdateCanaryRequest_RuntimeVersion, &sUpdateCanaryRequest_Schedule, &sUpdateCanaryRequest_RunConfig, &sUpdateCanaryRequest_SuccessRetentionPeriodInDays, &sUpdateCanaryRequest_FailureRetentionPeriodInDays, &sUpdateCanaryRequest_VpcConfig, &sUpdateCanaryRequest_VisualReference, &sUpdateCanaryRequest_ArtifactS3Location, &sUpdateCanaryRequest_ArtifactConfig, &sUpdateCanaryRequest_ProvisionedResourceCleanup, &sUpdateCanaryRequest_DryRunId, &sUpdateCanaryRequest_VisualReferences, &sUpdateCanaryRequest_BrowserConfigs, &sUpdateCanaryRequest_AddReplicaLocations, &sUpdateCanaryRequest_RemoveReplicaLocations, &sUpdateCanaryRequest_KmsKeyArn}, Hash: &hUpdateCanaryRequest}
+
+var hCanary = smithy.MemberHash{Seed: 61, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 2, 0, 12, 0, 14, 0, 5, 23, 21, 0, 0, 6, 0, 0, 15, 18, 1,
+	11, 20, 16, 0, 24, 22, 0, 0, 4, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 7, 0, 10, 0, 3,
+	0, 0, 0, 0, 0, 0, 17, 19, 0, 0, 0, 0, 0, 8, 0, 0,
+}}
+var hCanaryRun = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 4, 0, 5, 0, 0, 0, 3, 0, 0, 0, 0, 0, 6, 0, 0, 1, 2, 0, 0, 9, 0, 7, 0,
+	8, 0, 0, 0, 0, 0, 10, 0,
+}}
+var hCanaryState = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 9, 6, 0, 4, 0, 0, 0, 7, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5,
+	0, 8, 0, 1, 0, 0, 2, 0,
+}}
+var hCanaryStateReasonCode = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	0, 0, 0, 0, 8, 5, 0, 0, 0, 4, 7, 0, 0, 12, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0,
+	2, 9, 10, 11, 0, 0, 0, 6,
+}}
+var hCreateCanaryRequest = smithy.MemberHash{Seed: 24, Slots: []uint16{
+	0, 16, 0, 0, 0, 0, 6, 4, 0, 0, 0, 10, 0, 0, 0, 5, 9, 0, 2, 11, 12, 0, 0, 0,
+	0, 7, 0, 0, 17, 0, 0, 3, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0,
+	0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0,
+}}
+var hStartCanaryDryRunRequest = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 0, 0, 0, 3, 10, 2, 12, 0, 4, 8, 0, 11, 0, 0, 7, 5, 6, 13, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 14, 0, 1, 9,
+}}
+var hUpdateCanaryRequest = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	4, 5, 0, 0, 15, 0, 18, 0, 17, 0, 0, 13, 6, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0,
+	11, 0, 3, 0, 0, 0, 16, 0, 0, 0, 8, 12, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0,
+	0, 10, 0, 0, 0, 0, 0, 0, 9, 7, 2, 0, 0, 0, 1, 0,
+}}
+
+var sAssociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResource, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateResource})
+var sCreateCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCanary, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateCanary})
+var sCreateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroup, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateGroup})
+var sDeleteCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCanary, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCanary})
+var sDeleteGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroup, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGroup})
+var sDescribeCanaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanaries, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCanaries})
+var sDescribeCanariesLastRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanariesLastRun, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCanariesLastRun})
+var sDescribeRuntimeVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuntimeVersions, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRuntimeVersions})
+var sDisassociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateResource})
+var sGetCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanary, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetCanary})
+var sGetCanaryRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanaryRuns, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetCanaryRuns})
+var sGetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroup, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetGroup})
+var sListAssociatedGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedGroups, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListAssociatedGroups})
+var sListGroupResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupResources, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListGroupResources})
+var sListGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroups, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListGroups})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanary, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStartCanary})
+var sStartCanaryDryRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanaryDryRun, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eStartCanaryDryRun})
+var sStopCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCanary, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eStopCanary})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCanary, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCanary})
+var s_Synthetics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Synthetics, Type: smithy.ShapeTypeService, Ext: &e_Synthetics})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAddReplicaLocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddReplicaLocationInput, Members: &mAddReplicaLocationInput, Type: smithy.ShapeTypeStructure, Ext: &eAddReplicaLocationInput})
+var sAddReplicaLocationInput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eAddReplicaLocationInput_Location})
+var sAddReplicaLocationInput_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigInput, Members: &mVpcConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eAddReplicaLocationInput_VpcConfig})
+var sAddReplicaLocationInput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eAddReplicaLocationInput_KmsKeyArn})
+var s_AddReplicaLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddReplicaLocations, Members: &m_AddReplicaLocations, Type: smithy.ShapeTypeList, Ext: &e_AddReplicaLocations})
+var s_AddReplicaLocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddReplicaLocationInput, Members: &mAddReplicaLocationInput, Type: smithy.ShapeTypeStructure, Ext: &e_AddReplicaLocations_member})
+var sArtifactConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactConfigInput, Members: &mArtifactConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eArtifactConfigInput})
+var sArtifactConfigInput_S3Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Encryption", ID: &iS3EncryptionConfig, Members: &mS3EncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eArtifactConfigInput_S3Encryption})
+var sArtifactConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactConfigOutput, Members: &mArtifactConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eArtifactConfigOutput})
+var sArtifactConfigOutput_S3Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Encryption", ID: &iS3EncryptionConfig, Members: &mS3EncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eArtifactConfigOutput_S3Encryption})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBaseScreenshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaseScreenshot, Members: &mBaseScreenshot, Type: smithy.ShapeTypeStructure, Ext: &eBaseScreenshot})
+var sBaseScreenshot_ScreenshotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScreenshotName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBaseScreenshot_ScreenshotName})
+var sBaseScreenshot_IgnoreCoordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IgnoreCoordinates", ID: &i_BaseScreenshotIgnoreCoordinates, Members: &m_BaseScreenshotIgnoreCoordinates, Type: smithy.ShapeTypeList, Ext: &eBaseScreenshot_IgnoreCoordinates})
+var s_BaseScreenshotConfigIgnoreCoordinate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaseScreenshotConfigIgnoreCoordinate, Type: smithy.ShapeTypeString, Ext: &e_BaseScreenshotConfigIgnoreCoordinate})
+var s_BaseScreenshotIgnoreCoordinates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaseScreenshotIgnoreCoordinates, Members: &m_BaseScreenshotIgnoreCoordinates, Type: smithy.ShapeTypeList, Ext: &e_BaseScreenshotIgnoreCoordinates})
+var s_BaseScreenshotIgnoreCoordinates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BaseScreenshotConfigIgnoreCoordinate, Type: smithy.ShapeTypeString, Ext: &e_BaseScreenshotIgnoreCoordinates_member})
+var s_BaseScreenshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaseScreenshots, Members: &m_BaseScreenshots, Type: smithy.ShapeTypeList, Ext: &e_BaseScreenshots})
+var s_BaseScreenshots_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBaseScreenshot, Members: &mBaseScreenshot, Type: smithy.ShapeTypeStructure, Ext: &e_BaseScreenshots_member})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &e_Blob})
+var s_BlueprintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintType, Type: smithy.ShapeTypeString, Ext: &e_BlueprintType})
+var s_BlueprintTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintTypes, Members: &m_BlueprintTypes, Type: smithy.ShapeTypeList, Ext: &e_BlueprintTypes})
+var s_BlueprintTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlueprintType, Type: smithy.ShapeTypeString, Ext: &e_BlueprintTypes_member})
+var s_boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_boolean})
+var sBrowserConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrowserConfig, Members: &mBrowserConfig, Type: smithy.ShapeTypeStructure, Ext: &eBrowserConfig})
+var sBrowserConfig_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eBrowserConfig_BrowserType})
+var s_BrowserConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrowserConfigs, Members: &m_BrowserConfigs, Type: smithy.ShapeTypeList, Ext: &e_BrowserConfigs})
+var s_BrowserConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrowserConfig, Members: &mBrowserConfig, Type: smithy.ShapeTypeStructure, Ext: &e_BrowserConfigs_member})
+var sBrowserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eBrowserType})
+var sBrowserType_CHROME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHROME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrowserType_CHROME})
+var sBrowserType_FIREFOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIREFOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrowserType_FIREFOX})
+var s_Canaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Canaries, Members: &m_Canaries, Type: smithy.ShapeTypeList, Ext: &e_Canaries})
+var s_Canaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCanary, Members: &mCanary, Type: smithy.ShapeTypeStructure, Ext: &e_Canaries_member})
+var s_CanariesLastRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanariesLastRun, Members: &m_CanariesLastRun, Type: smithy.ShapeTypeList, Ext: &e_CanariesLastRun})
+var s_CanariesLastRun_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCanaryLastRun, Members: &mCanaryLastRun, Type: smithy.ShapeTypeStructure, Ext: &e_CanariesLastRun_member})
+var sCanary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanary, Members: &mCanary, Type: smithy.ShapeTypeStructure, Ext: &eCanary})
+var sCanary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCanary_Id})
+var sCanary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &eCanary_Name})
+var sCanary_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iCanaryCodeOutput, Members: &mCanaryCodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_Code})
+var sCanary_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCanary_ExecutionRoleArn})
+var sCanary_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iCanaryScheduleOutput, Members: &mCanaryScheduleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_Schedule})
+var sCanary_RunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunConfig", ID: &iCanaryRunConfigOutput, Members: &mCanaryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_RunConfig})
+var sCanary_SuccessRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eCanary_SuccessRetentionPeriodInDays})
+var sCanary_FailureRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eCanary_FailureRetentionPeriodInDays})
+var sCanary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCanaryStatus, Members: &mCanaryStatus, Type: smithy.ShapeTypeStructure, Ext: &eCanary_Status})
+var sCanary_Timeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeline", ID: &iCanaryTimeline, Members: &mCanaryTimeline, Type: smithy.ShapeTypeStructure, Ext: &eCanary_Timeline})
+var sCanary_ArtifactS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactS3Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanary_ArtifactS3Location})
+var sCanary_EngineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eCanary_EngineArn})
+var sCanary_RuntimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanary_RuntimeVersion})
+var sCanary_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigOutput, Members: &mVpcConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_VpcConfig})
+var sCanary_VisualReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReference", ID: &iVisualReferenceOutput, Members: &mVisualReferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_VisualReference})
+var sCanary_ProvisionedResourceCleanup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedResourceCleanup", ID: &iProvisionedResourceCleanupSetting, Members: &mProvisionedResourceCleanupSetting, Type: smithy.ShapeTypeEnum, Ext: &eCanary_ProvisionedResourceCleanup})
+var sCanary_BrowserConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserConfigs", ID: &i_BrowserConfigs, Members: &m_BrowserConfigs, Type: smithy.ShapeTypeList, Ext: &eCanary_BrowserConfigs})
+var sCanary_EngineConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfigs", ID: &i_EngineConfigs, Members: &m_EngineConfigs, Type: smithy.ShapeTypeList, Ext: &eCanary_EngineConfigs})
+var sCanary_VisualReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReferences", ID: &i_VisualReferencesOutput, Members: &m_VisualReferencesOutput, Type: smithy.ShapeTypeList, Ext: &eCanary_VisualReferences})
+var sCanary_MultiLocationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiLocationConfig", ID: &iMultiLocationConfig, Members: &mMultiLocationConfig, Type: smithy.ShapeTypeStructure, Ext: &eCanary_MultiLocationConfig})
+var sCanary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCanary_Tags})
+var sCanary_ArtifactConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactConfig", ID: &iArtifactConfigOutput, Members: &mArtifactConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_ArtifactConfig})
+var sCanary_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCanary_KmsKeyArn})
+var sCanary_DryRunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunConfig", ID: &iDryRunConfigOutput, Members: &mDryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanary_DryRunConfig})
+var s_CanaryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanaryArn, Type: smithy.ShapeTypeString, Ext: &e_CanaryArn})
+var sCanaryCodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryCodeInput, Members: &mCanaryCodeInput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryCodeInput})
+var sCanaryCodeInput_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeInput_S3Bucket})
+var sCanaryCodeInput_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeInput_S3Key})
+var sCanaryCodeInput_S3Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeInput_S3Version})
+var sCanaryCodeInput_ZipFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipFile", ID: &i_Blob, Type: smithy.ShapeTypeBlob, Ext: &eCanaryCodeInput_ZipFile})
+var sCanaryCodeInput_Handler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Handler", ID: &i_CodeHandler, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeInput_Handler})
+var sCanaryCodeInput_BlueprintTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintTypes", ID: &i_BlueprintTypes, Members: &m_BlueprintTypes, Type: smithy.ShapeTypeList, Ext: &eCanaryCodeInput_BlueprintTypes})
+var sCanaryCodeInput_Dependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dependencies", ID: &i_Dependencies, Members: &m_Dependencies, Type: smithy.ShapeTypeList, Ext: &eCanaryCodeInput_Dependencies})
+var sCanaryCodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryCodeOutput, Members: &mCanaryCodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryCodeOutput})
+var sCanaryCodeOutput_SourceLocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLocationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeOutput_SourceLocationArn})
+var sCanaryCodeOutput_Handler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Handler", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryCodeOutput_Handler})
+var sCanaryCodeOutput_BlueprintTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintTypes", ID: &i_BlueprintTypes, Members: &m_BlueprintTypes, Type: smithy.ShapeTypeList, Ext: &eCanaryCodeOutput_BlueprintTypes})
+var sCanaryCodeOutput_Dependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dependencies", ID: &i_Dependencies, Members: &m_Dependencies, Type: smithy.ShapeTypeList, Ext: &eCanaryCodeOutput_Dependencies})
+var sCanaryDryRunConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryDryRunConfigOutput, Members: &mCanaryDryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryDryRunConfigOutput})
+var sCanaryDryRunConfigOutput_DryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCanaryDryRunConfigOutput_DryRunId})
+var sCanaryLastRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryLastRun, Members: &mCanaryLastRun, Type: smithy.ShapeTypeStructure, Ext: &eCanaryLastRun})
+var sCanaryLastRun_CanaryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanaryName", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &eCanaryLastRun_CanaryName})
+var sCanaryLastRun_LastRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRun", ID: &iCanaryRun, Members: &mCanaryRun, Type: smithy.ShapeTypeStructure, Ext: &eCanaryLastRun_LastRun})
+var s_CanaryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &e_CanaryName})
+var sCanaryRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRun, Members: &mCanaryRun, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRun})
+var sCanaryRun_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCanaryRun_Id})
+var sCanaryRun_ScheduledRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledRunId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCanaryRun_ScheduledRunId})
+var sCanaryRun_RetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAttempt", ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRun_RetryAttempt})
+var sCanaryRun_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &eCanaryRun_Name})
+var sCanaryRun_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCanaryRunStatus, Members: &mCanaryRunStatus, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRun_Status})
+var sCanaryRun_Timeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeline", ID: &iCanaryRunTimeline, Members: &mCanaryRunTimeline, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRun_Timeline})
+var sCanaryRun_ArtifactS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactS3Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryRun_ArtifactS3Location})
+var sCanaryRun_DryRunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunConfig", ID: &iCanaryDryRunConfigOutput, Members: &mCanaryDryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRun_DryRunConfig})
+var sCanaryRun_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRun_BrowserType})
+var sCanaryRun_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eCanaryRun_Location})
+var sCanaryRunConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunConfigInput, Members: &mCanaryRunConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunConfigInput})
+var sCanaryRunConfigInput_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInSeconds", ID: &i_MaxFifteenMinutesInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigInput_TimeoutInSeconds})
+var sCanaryRunConfigInput_MemoryInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemoryInMB", ID: &i_MaxSize3008, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigInput_MemoryInMB})
+var sCanaryRunConfigInput_ActiveTracing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveTracing", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCanaryRunConfigInput_ActiveTracing})
+var sCanaryRunConfigInput_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentVariables", ID: &i_EnvironmentVariablesMap, Members: &m_EnvironmentVariablesMap, Type: smithy.ShapeTypeMap, Ext: &eCanaryRunConfigInput_EnvironmentVariables})
+var sCanaryRunConfigInput_EphemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EphemeralStorage", ID: &i_EphemeralStorageSize, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigInput_EphemeralStorage})
+var sCanaryRunConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunConfigOutput, Members: &mCanaryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunConfigOutput})
+var sCanaryRunConfigOutput_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInSeconds", ID: &i_MaxFifteenMinutesInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigOutput_TimeoutInSeconds})
+var sCanaryRunConfigOutput_MemoryInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemoryInMB", ID: &i_MaxSize3008, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigOutput_MemoryInMB})
+var sCanaryRunConfigOutput_ActiveTracing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveTracing", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCanaryRunConfigOutput_ActiveTracing})
+var sCanaryRunConfigOutput_EphemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EphemeralStorage", ID: &i_EphemeralStorageSize, Type: smithy.ShapeTypeInteger, Ext: &eCanaryRunConfigOutput_EphemeralStorage})
+var s_CanaryRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanaryRuns, Members: &m_CanaryRuns, Type: smithy.ShapeTypeList, Ext: &e_CanaryRuns})
+var s_CanaryRuns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCanaryRun, Members: &mCanaryRun, Type: smithy.ShapeTypeStructure, Ext: &e_CanaryRuns_member})
+var sCanaryRunState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunState, Members: &mCanaryRunState, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunState})
+var sCanaryRunState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunState_RUNNING})
+var sCanaryRunState_PASSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunState_PASSED})
+var sCanaryRunState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunState_FAILED})
+var sCanaryRunStateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunStateReasonCode, Members: &mCanaryRunStateReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunStateReasonCode})
+var sCanaryRunStateReasonCode_CANARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunStateReasonCode_CANARY_FAILURE})
+var sCanaryRunStateReasonCode_EXECUTION_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTION_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunStateReasonCode_EXECUTION_FAILURE})
+var sCanaryRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunStatus, Members: &mCanaryRunStatus, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunStatus})
+var sCanaryRunStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCanaryRunState, Members: &mCanaryRunState, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunStatus_State})
+var sCanaryRunStatus_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryRunStatus_StateReason})
+var sCanaryRunStatus_StateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonCode", ID: &iCanaryRunStateReasonCode, Members: &mCanaryRunStateReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunStatus_StateReasonCode})
+var sCanaryRunStatus_TestResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestResult", ID: &iCanaryRunTestResult, Members: &mCanaryRunTestResult, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunStatus_TestResult})
+var sCanaryRunTestResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunTestResult, Members: &mCanaryRunTestResult, Type: smithy.ShapeTypeEnum, Ext: &eCanaryRunTestResult})
+var sCanaryRunTestResult_PASSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunTestResult_PASSED})
+var sCanaryRunTestResult_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunTestResult_FAILED})
+var sCanaryRunTestResult_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunTestResult_UNKNOWN})
+var sCanaryRunTimeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryRunTimeline, Members: &mCanaryRunTimeline, Type: smithy.ShapeTypeStructure, Ext: &eCanaryRunTimeline})
+var sCanaryRunTimeline_Started = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Started", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryRunTimeline_Started})
+var sCanaryRunTimeline_Completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Completed", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryRunTimeline_Completed})
+var sCanaryRunTimeline_MetricTimestampForRunAndRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricTimestampForRunAndRetries", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryRunTimeline_MetricTimestampForRunAndRetries})
+var sCanaryScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryScheduleInput, Members: &mCanaryScheduleInput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryScheduleInput})
+var sCanaryScheduleInput_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryScheduleInput_Expression})
+var sCanaryScheduleInput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_MaxOneYearInSeconds, Type: smithy.ShapeTypeLong, Ext: &eCanaryScheduleInput_DurationInSeconds})
+var sCanaryScheduleInput_RetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryConfig", ID: &iRetryConfigInput, Members: &mRetryConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryScheduleInput_RetryConfig})
+var sCanaryScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryScheduleOutput, Members: &mCanaryScheduleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryScheduleOutput})
+var sCanaryScheduleOutput_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryScheduleOutput_Expression})
+var sCanaryScheduleOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_MaxOneYearInSeconds, Type: smithy.ShapeTypeLong, Ext: &eCanaryScheduleOutput_DurationInSeconds})
+var sCanaryScheduleOutput_RetryConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryConfig", ID: &iRetryConfigOutput, Members: &mRetryConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eCanaryScheduleOutput_RetryConfig})
+var sCanaryState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryState, Members: &mCanaryState, Type: smithy.ShapeTypeEnum, Ext: &eCanaryState})
+var sCanaryState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_CREATING})
+var sCanaryState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_READY})
+var sCanaryState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_STARTING})
+var sCanaryState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_RUNNING})
+var sCanaryState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_UPDATING})
+var sCanaryState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_STOPPING})
+var sCanaryState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_STOPPED})
+var sCanaryState_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_ERROR})
+var sCanaryState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryState_DELETING})
+var sCanaryStateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryStateReasonCode, Members: &mCanaryStateReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eCanaryStateReasonCode})
+var sCanaryStateReasonCode_INVALID_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_INVALID_PERMISSIONS})
+var sCanaryStateReasonCode_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_CREATE_PENDING})
+var sCanaryStateReasonCode_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_CREATE_IN_PROGRESS})
+var sCanaryStateReasonCode_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_CREATE_FAILED})
+var sCanaryStateReasonCode_UPDATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_UPDATE_PENDING})
+var sCanaryStateReasonCode_UPDATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_UPDATE_IN_PROGRESS})
+var sCanaryStateReasonCode_UPDATE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_UPDATE_COMPLETE})
+var sCanaryStateReasonCode_ROLLBACK_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_ROLLBACK_COMPLETE})
+var sCanaryStateReasonCode_ROLLBACK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_ROLLBACK_FAILED})
+var sCanaryStateReasonCode_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_DELETE_IN_PROGRESS})
+var sCanaryStateReasonCode_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_DELETE_FAILED})
+var sCanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS})
+var sCanaryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryStatus, Members: &mCanaryStatus, Type: smithy.ShapeTypeStructure, Ext: &eCanaryStatus})
+var sCanaryStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCanaryState, Members: &mCanaryState, Type: smithy.ShapeTypeEnum, Ext: &eCanaryStatus_State})
+var sCanaryStatus_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCanaryStatus_StateReason})
+var sCanaryStatus_StateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonCode", ID: &iCanaryStateReasonCode, Members: &mCanaryStateReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eCanaryStatus_StateReasonCode})
+var sCanaryTimeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanaryTimeline, Members: &mCanaryTimeline, Type: smithy.ShapeTypeStructure, Ext: &eCanaryTimeline})
+var sCanaryTimeline_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryTimeline_Created})
+var sCanaryTimeline_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryTimeline_LastModified})
+var sCanaryTimeline_LastStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastStarted", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryTimeline_LastStarted})
+var sCanaryTimeline_LastStopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastStopped", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCanaryTimeline_LastStopped})
+var s_CodeHandler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeHandler, Type: smithy.ShapeTypeString, Ext: &e_CodeHandler})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_Dependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dependencies, Members: &m_Dependencies, Type: smithy.ShapeTypeList, Ext: &e_Dependencies})
+var s_Dependencies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDependency, Members: &mDependency, Type: smithy.ShapeTypeStructure, Ext: &e_Dependencies_member})
+var sDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependency, Members: &mDependency, Type: smithy.ShapeTypeStructure, Ext: &eDependency})
+var sDependency_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDependencyType, Members: &mDependencyType, Type: smithy.ShapeTypeEnum, Ext: &eDependency_Type})
+var sDependency_Reference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reference", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDependency_Reference})
+var sDependencyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyType, Members: &mDependencyType, Type: smithy.ShapeTypeEnum, Ext: &eDependencyType})
+var sDependencyType_LambdaLayer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaLayer", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDependencyType_LambdaLayer})
+var s_DescribeCanariesLastRunNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeCanariesLastRunNameFilter, Members: &m_DescribeCanariesLastRunNameFilter, Type: smithy.ShapeTypeList, Ext: &e_DescribeCanariesLastRunNameFilter})
+var s_DescribeCanariesLastRunNameFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &e_DescribeCanariesLastRunNameFilter_member})
+var s_DescribeCanariesNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeCanariesNameFilter, Members: &m_DescribeCanariesNameFilter, Type: smithy.ShapeTypeList, Ext: &e_DescribeCanariesNameFilter})
+var s_DescribeCanariesNameFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &e_DescribeCanariesNameFilter_member})
+var sDryRunConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunConfigOutput, Members: &mDryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eDryRunConfigOutput})
+var sDryRunConfigOutput_DryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eDryRunConfigOutput_DryRunId})
+var sDryRunConfigOutput_LastDryRunExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastDryRunExecutionStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDryRunConfigOutput_LastDryRunExecutionStatus})
+var sEncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionMode})
+var sEncryptionMode_SSE_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionMode_SSE_S3})
+var sEncryptionMode_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionMode_SSE_KMS})
+var sEngineConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineConfig, Members: &mEngineConfig, Type: smithy.ShapeTypeStructure, Ext: &eEngineConfig})
+var sEngineConfig_EngineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineArn", ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &eEngineConfig_EngineArn})
+var sEngineConfig_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eEngineConfig_BrowserType})
+var s_EngineConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngineConfigs, Members: &m_EngineConfigs, Type: smithy.ShapeTypeList, Ext: &e_EngineConfigs})
+var s_EngineConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngineConfig, Members: &mEngineConfig, Type: smithy.ShapeTypeStructure, Ext: &e_EngineConfigs_member})
+var s_EnvironmentVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableName})
+var s_EnvironmentVariablesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariablesMap, Members: &m_EnvironmentVariablesMap, Type: smithy.ShapeTypeMap, Ext: &e_EnvironmentVariablesMap})
+var s_EnvironmentVariablesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariablesMap_key})
+var s_EnvironmentVariablesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariablesMap_value})
+var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableValue})
+var s_EphemeralStorageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemeralStorageSize, Type: smithy.ShapeTypeInteger, Ext: &e_EphemeralStorageSize})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_FunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionArn, Type: smithy.ShapeTypeString, Ext: &e_FunctionArn})
+var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &eGroup})
+var sGroup_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGroup_Id})
+var sGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eGroup_Name})
+var sGroup_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_GroupArn, Type: smithy.ShapeTypeString, Ext: &eGroup_Arn})
+var sGroup_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGroup_Tags})
+var sGroup_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGroup_CreatedTime})
+var sGroup_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGroup_LastModifiedTime})
+var s_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupArn, Type: smithy.ShapeTypeString, Ext: &e_GroupArn})
+var s_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupIdentifier, Type: smithy.ShapeTypeString, Ext: &e_GroupIdentifier})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &e_GroupName})
+var sGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eGroupSummary})
+var sGroupSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGroupSummary_Id})
+var sGroupSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eGroupSummary_Name})
+var sGroupSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_GroupArn, Type: smithy.ShapeTypeString, Ext: &eGroupSummary_Arn})
+var s_GroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &e_GroupSummaryList})
+var s_GroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_GroupSummaryList_member})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailureException})
+var sInternalFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalFailureException_Message})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &e_Location})
+var sLocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationType, Members: &mLocationType, Type: smithy.ShapeTypeEnum, Ext: &eLocationType})
+var sLocationType_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationType_Primary})
+var sLocationType_Replica = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replica", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationType_Replica})
+var s_MaxCanaryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCanaryResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxCanaryResults})
+var s_MaxFifteenMinutesInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxFifteenMinutesInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_MaxFifteenMinutesInSeconds})
+var s_MaxGroupResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxGroupResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxGroupResults})
+var s_MaxOneYearInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxOneYearInSeconds, Type: smithy.ShapeTypeLong, Ext: &e_MaxOneYearInSeconds})
+var s_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRetries})
+var s_MaxSize100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSize100, Type: smithy.ShapeTypeInteger, Ext: &e_MaxSize100})
+var s_MaxSize1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &e_MaxSize1024})
+var s_MaxSize3008 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSize3008, Type: smithy.ShapeTypeInteger, Ext: &e_MaxSize3008})
+var sMultiLocationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiLocationConfig, Members: &mMultiLocationConfig, Type: smithy.ShapeTypeStructure, Ext: &eMultiLocationConfig})
+var sMultiLocationConfig_LocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationType", ID: &iLocationType, Members: &mLocationType, Type: smithy.ShapeTypeEnum, Ext: &eMultiLocationConfig_LocationType})
+var sMultiLocationConfig_PrimaryLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryLocation", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eMultiLocationConfig_PrimaryLocation})
+var sMultiLocationConfig_Replicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replicas", ID: &i_Replicas, Members: &m_Replicas, Type: smithy.ShapeTypeList, Ext: &eMultiLocationConfig_Replicas})
+var sMultiLocationConfig_ReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationState", ID: &iReplicationState, Members: &mReplicationState, Type: smithy.ShapeTypeEnum, Ext: &eMultiLocationConfig_ReplicationState})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBoolean})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sProvisionedResourceCleanupSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedResourceCleanupSetting, Members: &mProvisionedResourceCleanupSetting, Type: smithy.ShapeTypeEnum, Ext: &eProvisionedResourceCleanupSetting})
+var sProvisionedResourceCleanupSetting_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedResourceCleanupSetting_AUTOMATIC})
+var sProvisionedResourceCleanupSetting_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedResourceCleanupSetting_OFF})
+var s_RemoveReplicaLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveReplicaLocations, Members: &m_RemoveReplicaLocations, Type: smithy.ShapeTypeList, Ext: &e_RemoveReplicaLocations})
+var s_RemoveReplicaLocations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &e_RemoveReplicaLocations_member})
+var sReplica = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplica, Members: &mReplica, Type: smithy.ShapeTypeStructure, Ext: &eReplica})
+var sReplica_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eReplica_Location})
+var sReplica_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &eReplica_ReplicationStatus})
+var sReplica_CanaryState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanaryState", ID: &iCanaryState, Members: &mCanaryState, Type: smithy.ShapeTypeEnum, Ext: &eReplica_CanaryState})
+var sReplica_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReplica_LastModified})
+var sReplica_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigOutput, Members: &mVpcConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eReplica_VpcConfig})
+var s_Replicas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Replicas, Members: &m_Replicas, Type: smithy.ShapeTypeList, Ext: &e_Replicas})
+var s_Replicas_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplica, Members: &mReplica, Type: smithy.ShapeTypeStructure, Ext: &e_Replicas_member})
+var sReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationState, Members: &mReplicationState, Type: smithy.ShapeTypeEnum, Ext: &eReplicationState})
+var sReplicationState_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationState_InProgress})
+var sReplicationState_InSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InSync", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationState_InSync})
+var sReplicationState_Inconsistent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inconsistent", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationState_Inconsistent})
+var sReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatus})
+var sReplicationStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplicationState, Members: &mReplicationState, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStatus_State})
+var sReplicationStatus_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplicationStatus_StateReason})
+var sReplicationStatus_StateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplicationStatus_StateReasonCode})
+var sRequestEntityTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestEntityTooLargeException, Members: &mRequestEntityTooLargeException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eRequestEntityTooLargeException})
+var sRequestEntityTooLargeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestEntityTooLargeException_Message})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &e_ResourceList})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceToTag, Members: &mResourceToTag, Type: smithy.ShapeTypeEnum, Ext: &e_ResourceList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceToTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceToTag, Members: &mResourceToTag, Type: smithy.ShapeTypeEnum, Ext: &eResourceToTag})
+var sResourceToTag_LAMBDA_FUNCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_FUNCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceToTag_LAMBDA_FUNCTION})
+var s_RetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAttempt})
+var sRetryConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryConfigInput, Members: &mRetryConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eRetryConfigInput})
+var sRetryConfigInput_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger, Ext: &eRetryConfigInput_MaxRetries})
+var sRetryConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryConfigOutput, Members: &mRetryConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eRetryConfigOutput})
+var sRetryConfigOutput_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger, Ext: &eRetryConfigOutput_MaxRetries})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sRuntimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeVersion, Members: &mRuntimeVersion, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeVersion})
+var sRuntimeVersion_VersionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRuntimeVersion_VersionName})
+var sRuntimeVersion_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRuntimeVersion_Description})
+var sRuntimeVersion_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuntimeVersion_ReleaseDate})
+var sRuntimeVersion_DeprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuntimeVersion_DeprecationDate})
+var s_RuntimeVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeVersionList, Members: &m_RuntimeVersionList, Type: smithy.ShapeTypeList, Ext: &e_RuntimeVersionList})
+var s_RuntimeVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuntimeVersion, Members: &mRuntimeVersion, Type: smithy.ShapeTypeStructure, Ext: &e_RuntimeVersionList_member})
+var sRunType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunType, Members: &mRunType, Type: smithy.ShapeTypeEnum, Ext: &eRunType})
+var sRunType_CANARY_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANARY_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRunType_CANARY_RUN})
+var sRunType_DRY_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRY_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRunType_DRY_RUN})
+var sS3EncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3EncryptionConfig, Members: &mS3EncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eS3EncryptionConfig})
+var sS3EncryptionConfig_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum, Ext: &eS3EncryptionConfig_EncryptionMode})
+var sS3EncryptionConfig_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eS3EncryptionConfig_KmsKeyArn})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIds})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIds_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &e_SubnetIds})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetIds_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVisualReferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisualReferenceInput, Members: &mVisualReferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eVisualReferenceInput})
+var sVisualReferenceInput_BaseScreenshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseScreenshots", ID: &i_BaseScreenshots, Members: &m_BaseScreenshots, Type: smithy.ShapeTypeList, Ext: &eVisualReferenceInput_BaseScreenshots})
+var sVisualReferenceInput_BaseCanaryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseCanaryRunId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVisualReferenceInput_BaseCanaryRunId})
+var sVisualReferenceInput_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eVisualReferenceInput_BrowserType})
+var sVisualReferenceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisualReferenceOutput, Members: &mVisualReferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &eVisualReferenceOutput})
+var sVisualReferenceOutput_BaseScreenshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseScreenshots", ID: &i_BaseScreenshots, Members: &m_BaseScreenshots, Type: smithy.ShapeTypeList, Ext: &eVisualReferenceOutput_BaseScreenshots})
+var sVisualReferenceOutput_BaseCanaryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseCanaryRunId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVisualReferenceOutput_BaseCanaryRunId})
+var sVisualReferenceOutput_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eVisualReferenceOutput_BrowserType})
+var s_VisualReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VisualReferences, Members: &m_VisualReferences, Type: smithy.ShapeTypeList, Ext: &e_VisualReferences})
+var s_VisualReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVisualReferenceInput, Members: &mVisualReferenceInput, Type: smithy.ShapeTypeStructure, Ext: &e_VisualReferences_member})
+var s_VisualReferencesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VisualReferencesOutput, Members: &m_VisualReferencesOutput, Type: smithy.ShapeTypeList, Ext: &e_VisualReferencesOutput})
+var s_VisualReferencesOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVisualReferenceOutput, Members: &mVisualReferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &e_VisualReferencesOutput_member})
+var sVpcConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfigInput, Members: &mVpcConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfigInput})
+var sVpcConfigInput_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfigInput_SubnetIds})
+var sVpcConfigInput_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfigInput_SecurityGroupIds})
+var sVpcConfigInput_Ipv6AllowedForDualStack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6AllowedForDualStack", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eVpcConfigInput_Ipv6AllowedForDualStack})
+var sVpcConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfigOutput, Members: &mVpcConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfigOutput})
+var sVpcConfigOutput_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eVpcConfigOutput_VpcId})
+var sVpcConfigOutput_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfigOutput_SubnetIds})
+var sVpcConfigOutput_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eVpcConfigOutput_SecurityGroupIds})
+var sVpcConfigOutput_Ipv6AllowedForDualStack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6AllowedForDualStack", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eVpcConfigOutput_Ipv6AllowedForDualStack})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sAssociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceRequest, Members: &mAssociateResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceRequest})
+var sAssociateResourceRequest_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceRequest_GroupIdentifier})
+var sAssociateResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_CanaryArn, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceRequest_ResourceArn})
+var sAssociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceResponse})
+var sCreateCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCanaryRequest, Members: &mCreateCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest})
+var sCreateCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Type: smithy.ShapeTypeString, Ext: &eCreateCanaryRequest_Name})
+var sCreateCanaryRequest_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iCanaryCodeInput, Members: &mCanaryCodeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest_Code})
+var sCreateCanaryRequest_ArtifactS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactS3Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateCanaryRequest_ArtifactS3Location})
+var sCreateCanaryRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateCanaryRequest_ExecutionRoleArn})
+var sCreateCanaryRequest_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iCanaryScheduleInput, Members: &mCanaryScheduleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest_Schedule})
+var sCreateCanaryRequest_RunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunConfig", ID: &iCanaryRunConfigInput, Members: &mCanaryRunConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest_RunConfig})
+var sCreateCanaryRequest_SuccessRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eCreateCanaryRequest_SuccessRetentionPeriodInDays})
+var sCreateCanaryRequest_FailureRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eCreateCanaryRequest_FailureRetentionPeriodInDays})
+var sCreateCanaryRequest_RuntimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateCanaryRequest_RuntimeVersion})
+var sCreateCanaryRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigInput, Members: &mVpcConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest_VpcConfig})
+var sCreateCanaryRequest_ResourcesToReplicateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToReplicateTags", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eCreateCanaryRequest_ResourcesToReplicateTags})
+var sCreateCanaryRequest_ProvisionedResourceCleanup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedResourceCleanup", ID: &iProvisionedResourceCleanupSetting, Members: &mProvisionedResourceCleanupSetting, Type: smithy.ShapeTypeEnum, Ext: &eCreateCanaryRequest_ProvisionedResourceCleanup})
+var sCreateCanaryRequest_BrowserConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserConfigs", ID: &i_BrowserConfigs, Members: &m_BrowserConfigs, Type: smithy.ShapeTypeList, Ext: &eCreateCanaryRequest_BrowserConfigs})
+var sCreateCanaryRequest_AddReplicaLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaLocations", ID: &i_AddReplicaLocations, Members: &m_AddReplicaLocations, Type: smithy.ShapeTypeList, Ext: &eCreateCanaryRequest_AddReplicaLocations})
+var sCreateCanaryRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateCanaryRequest_Tags})
+var sCreateCanaryRequest_ArtifactConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactConfig", ID: &iArtifactConfigInput, Members: &mArtifactConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryRequest_ArtifactConfig})
+var sCreateCanaryRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateCanaryRequest_KmsKeyArn})
+var sCreateCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCanaryResponse, Members: &mCreateCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryResponse})
+var sCreateCanaryResponse_Canary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Canary", ID: &iCanary, Members: &mCanary, Type: smithy.ShapeTypeStructure, Ext: &eCreateCanaryResponse_Canary})
+var sCreateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupRequest, Members: &mCreateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupRequest})
+var sCreateGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_Name})
+var sCreateGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateGroupRequest_Tags})
+var sCreateGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupResponse, Members: &mCreateGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupResponse})
+var sCreateGroupResponse_Group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Group", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupResponse_Group})
+var sDeleteCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCanaryRequest, Members: &mDeleteCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCanaryRequest})
+var sDeleteCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteCanaryRequest_Name})
+var sDeleteCanaryRequest_DeleteLambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteLambda", ID: &i_boolean, Traits: &t31, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteCanaryRequest_DeleteLambda})
+var sDeleteCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCanaryResponse})
+var sDeleteGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupRequest, Members: &mDeleteGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupRequest})
+var sDeleteGroupRequest_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_GroupIdentifier})
+var sDeleteGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupResponse})
+var sDescribeCanariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanariesRequest, Members: &mDescribeCanariesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCanariesRequest})
+var sDescribeCanariesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeCanariesRequest_NextToken})
+var sDescribeCanariesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCanaryResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCanariesRequest_MaxResults})
+var sDescribeCanariesRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_DescribeCanariesNameFilter, Members: &m_DescribeCanariesNameFilter, Type: smithy.ShapeTypeList, Ext: &eDescribeCanariesRequest_Names})
+var sDescribeCanariesLastRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanariesLastRunRequest, Members: &mDescribeCanariesLastRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCanariesLastRunRequest})
+var sDescribeCanariesLastRunRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeCanariesLastRunRequest_NextToken})
+var sDescribeCanariesLastRunRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxSize100, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCanariesLastRunRequest_MaxResults})
+var sDescribeCanariesLastRunRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_DescribeCanariesLastRunNameFilter, Members: &m_DescribeCanariesLastRunNameFilter, Type: smithy.ShapeTypeList, Ext: &eDescribeCanariesLastRunRequest_Names})
+var sDescribeCanariesLastRunRequest_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserType", ID: &iBrowserType, Members: &mBrowserType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeCanariesLastRunRequest_BrowserType})
+var sDescribeCanariesLastRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanariesLastRunResponse, Members: &mDescribeCanariesLastRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCanariesLastRunResponse})
+var sDescribeCanariesLastRunResponse_CanariesLastRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanariesLastRun", ID: &i_CanariesLastRun, Members: &m_CanariesLastRun, Type: smithy.ShapeTypeList, Ext: &eDescribeCanariesLastRunResponse_CanariesLastRun})
+var sDescribeCanariesLastRunResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeCanariesLastRunResponse_NextToken})
+var sDescribeCanariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCanariesResponse, Members: &mDescribeCanariesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCanariesResponse})
+var sDescribeCanariesResponse_Canaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Canaries", ID: &i_Canaries, Members: &m_Canaries, Type: smithy.ShapeTypeList, Ext: &eDescribeCanariesResponse_Canaries})
+var sDescribeCanariesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeCanariesResponse_NextToken})
+var sDescribeRuntimeVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuntimeVersionsRequest, Members: &mDescribeRuntimeVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuntimeVersionsRequest})
+var sDescribeRuntimeVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeRuntimeVersionsRequest_NextToken})
+var sDescribeRuntimeVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxSize100, Type: smithy.ShapeTypeInteger, Ext: &eDescribeRuntimeVersionsRequest_MaxResults})
+var sDescribeRuntimeVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuntimeVersionsResponse, Members: &mDescribeRuntimeVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuntimeVersionsResponse})
+var sDescribeRuntimeVersionsResponse_RuntimeVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeVersions", ID: &i_RuntimeVersionList, Members: &m_RuntimeVersionList, Type: smithy.ShapeTypeList, Ext: &eDescribeRuntimeVersionsResponse_RuntimeVersions})
+var sDescribeRuntimeVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eDescribeRuntimeVersionsResponse_NextToken})
+var sDisassociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceRequest, Members: &mDisassociateResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceRequest})
+var sDisassociateResourceRequest_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceRequest_GroupIdentifier})
+var sDisassociateResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_CanaryArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceRequest_ResourceArn})
+var sDisassociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceResponse})
+var sGetCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanaryRequest, Members: &mGetCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCanaryRequest})
+var sGetCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRequest_Name})
+var sGetCanaryRequest_DryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunId", ID: &i_UUID, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRequest_DryRunId})
+var sGetCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanaryResponse, Members: &mGetCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCanaryResponse})
+var sGetCanaryResponse_Canary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Canary", ID: &iCanary, Members: &mCanary, Type: smithy.ShapeTypeStructure, Ext: &eGetCanaryResponse_Canary})
+var sGetCanaryRunsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanaryRunsRequest, Members: &mGetCanaryRunsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCanaryRunsRequest})
+var sGetCanaryRunsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRunsRequest_Name})
+var sGetCanaryRunsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRunsRequest_NextToken})
+var sGetCanaryRunsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxSize100, Type: smithy.ShapeTypeInteger, Ext: &eGetCanaryRunsRequest_MaxResults})
+var sGetCanaryRunsRequest_DryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRunsRequest_DryRunId})
+var sGetCanaryRunsRequest_RunType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunType", ID: &iRunType, Members: &mRunType, Type: smithy.ShapeTypeEnum, Ext: &eGetCanaryRunsRequest_RunType})
+var sGetCanaryRunsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCanaryRunsResponse, Members: &mGetCanaryRunsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCanaryRunsResponse})
+var sGetCanaryRunsResponse_CanaryRuns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanaryRuns", ID: &i_CanaryRuns, Members: &m_CanaryRuns, Type: smithy.ShapeTypeList, Ext: &eGetCanaryRunsResponse_CanaryRuns})
+var sGetCanaryRunsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetCanaryRunsResponse_NextToken})
+var sGetGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupRequest, Members: &mGetGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupRequest})
+var sGetGroupRequest_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetGroupRequest_GroupIdentifier})
+var sGetGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupResponse, Members: &mGetGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupResponse})
+var sGetGroupResponse_Group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Group", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupResponse_Group})
+var sListAssociatedGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedGroupsRequest, Members: &mListAssociatedGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedGroupsRequest})
+var sListAssociatedGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAssociatedGroupsRequest_NextToken})
+var sListAssociatedGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxGroupResults, Type: smithy.ShapeTypeInteger, Ext: &eListAssociatedGroupsRequest_MaxResults})
+var sListAssociatedGroupsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_CanaryArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListAssociatedGroupsRequest_ResourceArn})
+var sListAssociatedGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedGroupsResponse, Members: &mListAssociatedGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedGroupsResponse})
+var sListAssociatedGroupsResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListAssociatedGroupsResponse_Groups})
+var sListAssociatedGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAssociatedGroupsResponse_NextToken})
+var sListGroupResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupResourcesRequest, Members: &mListGroupResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupResourcesRequest})
+var sListGroupResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGroupResourcesRequest_NextToken})
+var sListGroupResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxGroupResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupResourcesRequest_MaxResults})
+var sListGroupResourcesRequest_GroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIdentifier", ID: &i_GroupIdentifier, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListGroupResourcesRequest_GroupIdentifier})
+var sListGroupResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupResourcesResponse, Members: &mListGroupResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroupResourcesResponse})
+var sListGroupResourcesResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eListGroupResourcesResponse_Resources})
+var sListGroupResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGroupResourcesResponse_NextToken})
+var sListGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsRequest, Members: &mListGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsRequest})
+var sListGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_NextToken})
+var sListGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxGroupResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupsRequest_MaxResults})
+var sListGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsResponse, Members: &mListGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsResponse})
+var sListGroupsResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListGroupsResponse_Groups})
+var sListGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListGroupsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sStartCanaryDryRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanaryDryRunRequest, Members: &mStartCanaryDryRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest})
+var sStartCanaryDryRunRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eStartCanaryDryRunRequest_Name})
+var sStartCanaryDryRunRequest_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iCanaryCodeInput, Members: &mCanaryCodeInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest_Code})
+var sStartCanaryDryRunRequest_RuntimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartCanaryDryRunRequest_RuntimeVersion})
+var sStartCanaryDryRunRequest_RunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunConfig", ID: &iCanaryRunConfigInput, Members: &mCanaryRunConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest_RunConfig})
+var sStartCanaryDryRunRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigInput, Members: &mVpcConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest_VpcConfig})
+var sStartCanaryDryRunRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eStartCanaryDryRunRequest_ExecutionRoleArn})
+var sStartCanaryDryRunRequest_SuccessRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eStartCanaryDryRunRequest_SuccessRetentionPeriodInDays})
+var sStartCanaryDryRunRequest_FailureRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eStartCanaryDryRunRequest_FailureRetentionPeriodInDays})
+var sStartCanaryDryRunRequest_VisualReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReference", ID: &iVisualReferenceInput, Members: &mVisualReferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest_VisualReference})
+var sStartCanaryDryRunRequest_ArtifactS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactS3Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartCanaryDryRunRequest_ArtifactS3Location})
+var sStartCanaryDryRunRequest_ArtifactConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactConfig", ID: &iArtifactConfigInput, Members: &mArtifactConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunRequest_ArtifactConfig})
+var sStartCanaryDryRunRequest_ProvisionedResourceCleanup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedResourceCleanup", ID: &iProvisionedResourceCleanupSetting, Members: &mProvisionedResourceCleanupSetting, Type: smithy.ShapeTypeEnum, Ext: &eStartCanaryDryRunRequest_ProvisionedResourceCleanup})
+var sStartCanaryDryRunRequest_BrowserConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserConfigs", ID: &i_BrowserConfigs, Members: &m_BrowserConfigs, Type: smithy.ShapeTypeList, Ext: &eStartCanaryDryRunRequest_BrowserConfigs})
+var sStartCanaryDryRunRequest_VisualReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReferences", ID: &i_VisualReferences, Members: &m_VisualReferences, Type: smithy.ShapeTypeList, Ext: &eStartCanaryDryRunRequest_VisualReferences})
+var sStartCanaryDryRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanaryDryRunResponse, Members: &mStartCanaryDryRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunResponse})
+var sStartCanaryDryRunResponse_DryRunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunConfig", ID: &iDryRunConfigOutput, Members: &mDryRunConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryDryRunResponse_DryRunConfig})
+var sStartCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanaryRequest, Members: &mStartCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryRequest})
+var sStartCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eStartCanaryRequest_Name})
+var sStartCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartCanaryResponse})
+var sStopCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCanaryRequest, Members: &mStopCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopCanaryRequest})
+var sStopCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eStopCanaryRequest_Name})
+var sStopCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopCanaryResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t33, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateCanaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCanaryRequest, Members: &mUpdateCanaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest})
+var sUpdateCanaryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CanaryName, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_Name})
+var sUpdateCanaryRequest_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iCanaryCodeInput, Members: &mCanaryCodeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_Code})
+var sUpdateCanaryRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_ExecutionRoleArn})
+var sUpdateCanaryRequest_RuntimeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_RuntimeVersion})
+var sUpdateCanaryRequest_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iCanaryScheduleInput, Members: &mCanaryScheduleInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_Schedule})
+var sUpdateCanaryRequest_RunConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunConfig", ID: &iCanaryRunConfigInput, Members: &mCanaryRunConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_RunConfig})
+var sUpdateCanaryRequest_SuccessRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eUpdateCanaryRequest_SuccessRetentionPeriodInDays})
+var sUpdateCanaryRequest_FailureRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureRetentionPeriodInDays", ID: &i_MaxSize1024, Type: smithy.ShapeTypeInteger, Ext: &eUpdateCanaryRequest_FailureRetentionPeriodInDays})
+var sUpdateCanaryRequest_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iVpcConfigInput, Members: &mVpcConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_VpcConfig})
+var sUpdateCanaryRequest_VisualReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReference", ID: &iVisualReferenceInput, Members: &mVisualReferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_VisualReference})
+var sUpdateCanaryRequest_ArtifactS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactS3Location", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_ArtifactS3Location})
+var sUpdateCanaryRequest_ArtifactConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactConfig", ID: &iArtifactConfigInput, Members: &mArtifactConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryRequest_ArtifactConfig})
+var sUpdateCanaryRequest_ProvisionedResourceCleanup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedResourceCleanup", ID: &iProvisionedResourceCleanupSetting, Members: &mProvisionedResourceCleanupSetting, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCanaryRequest_ProvisionedResourceCleanup})
+var sUpdateCanaryRequest_DryRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_DryRunId})
+var sUpdateCanaryRequest_VisualReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VisualReferences", ID: &i_VisualReferences, Members: &m_VisualReferences, Type: smithy.ShapeTypeList, Ext: &eUpdateCanaryRequest_VisualReferences})
+var sUpdateCanaryRequest_BrowserConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrowserConfigs", ID: &i_BrowserConfigs, Members: &m_BrowserConfigs, Type: smithy.ShapeTypeList, Ext: &eUpdateCanaryRequest_BrowserConfigs})
+var sUpdateCanaryRequest_AddReplicaLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaLocations", ID: &i_AddReplicaLocations, Members: &m_AddReplicaLocations, Type: smithy.ShapeTypeList, Ext: &eUpdateCanaryRequest_AddReplicaLocations})
+var sUpdateCanaryRequest_RemoveReplicaLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveReplicaLocations", ID: &i_RemoveReplicaLocations, Members: &m_RemoveReplicaLocations, Type: smithy.ShapeTypeList, Ext: &eUpdateCanaryRequest_RemoveReplicaLocations})
+var sUpdateCanaryRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCanaryRequest_KmsKeyArn})
+var sUpdateCanaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCanaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCanaryResponse})
+
+var AssociateResource = &sAssociateResource
+
+var CreateCanary = &sCreateCanary
+
+var CreateGroup = &sCreateGroup
+
+var DeleteCanary = &sDeleteCanary
+
+var DeleteGroup = &sDeleteGroup
+
+var DescribeCanaries = &sDescribeCanaries
+
+var DescribeCanariesLastRun = &sDescribeCanariesLastRun
+
+var DescribeRuntimeVersions = &sDescribeRuntimeVersions
+
+var DisassociateResource = &sDisassociateResource
+
+var GetCanary = &sGetCanary
+
+var GetCanaryRuns = &sGetCanaryRuns
+
+var GetGroup = &sGetGroup
+
+var ListAssociatedGroups = &sListAssociatedGroups
+
+var ListGroupResources = &sListGroupResources
+
+var ListGroups = &sListGroups
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartCanary = &sStartCanary
+
+var StartCanaryDryRun = &sStartCanaryDryRun
+
+var StopCanary = &sStopCanary
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCanary = &sUpdateCanary
+
+var _Synthetics = &s_Synthetics
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AddReplicaLocationInput = &sAddReplicaLocationInput
+var AddReplicaLocationInput_Location = &sAddReplicaLocationInput_Location
+var AddReplicaLocationInput_VpcConfig = &sAddReplicaLocationInput_VpcConfig
+var AddReplicaLocationInput_KmsKeyArn = &sAddReplicaLocationInput_KmsKeyArn
+
+var _AddReplicaLocations = &s_AddReplicaLocations
+var _AddReplicaLocations_member = &s_AddReplicaLocations_member
+
+var ArtifactConfigInput = &sArtifactConfigInput
+var ArtifactConfigInput_S3Encryption = &sArtifactConfigInput_S3Encryption
+
+var ArtifactConfigOutput = &sArtifactConfigOutput
+var ArtifactConfigOutput_S3Encryption = &sArtifactConfigOutput_S3Encryption
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+
+var BaseScreenshot = &sBaseScreenshot
+var BaseScreenshot_ScreenshotName = &sBaseScreenshot_ScreenshotName
+var BaseScreenshot_IgnoreCoordinates = &sBaseScreenshot_IgnoreCoordinates
+
+var _BaseScreenshotConfigIgnoreCoordinate = &s_BaseScreenshotConfigIgnoreCoordinate
+
+var _BaseScreenshotIgnoreCoordinates = &s_BaseScreenshotIgnoreCoordinates
+var _BaseScreenshotIgnoreCoordinates_member = &s_BaseScreenshotIgnoreCoordinates_member
+
+var _BaseScreenshots = &s_BaseScreenshots
+var _BaseScreenshots_member = &s_BaseScreenshots_member
+
+var _Blob = &s_Blob
+
+var _BlueprintType = &s_BlueprintType
+
+var _BlueprintTypes = &s_BlueprintTypes
+var _BlueprintTypes_member = &s_BlueprintTypes_member
+
+var _boolean = &s_boolean
+
+var BrowserConfig = &sBrowserConfig
+var BrowserConfig_BrowserType = &sBrowserConfig_BrowserType
+
+var _BrowserConfigs = &s_BrowserConfigs
+var _BrowserConfigs_member = &s_BrowserConfigs_member
+
+var BrowserType = &sBrowserType
+var BrowserType_CHROME = &sBrowserType_CHROME
+var BrowserType_FIREFOX = &sBrowserType_FIREFOX
+
+var _Canaries = &s_Canaries
+var _Canaries_member = &s_Canaries_member
+
+var _CanariesLastRun = &s_CanariesLastRun
+var _CanariesLastRun_member = &s_CanariesLastRun_member
+
+var Canary = &sCanary
+var Canary_Id = &sCanary_Id
+var Canary_Name = &sCanary_Name
+var Canary_Code = &sCanary_Code
+var Canary_ExecutionRoleArn = &sCanary_ExecutionRoleArn
+var Canary_Schedule = &sCanary_Schedule
+var Canary_RunConfig = &sCanary_RunConfig
+var Canary_SuccessRetentionPeriodInDays = &sCanary_SuccessRetentionPeriodInDays
+var Canary_FailureRetentionPeriodInDays = &sCanary_FailureRetentionPeriodInDays
+var Canary_Status = &sCanary_Status
+var Canary_Timeline = &sCanary_Timeline
+var Canary_ArtifactS3Location = &sCanary_ArtifactS3Location
+var Canary_EngineArn = &sCanary_EngineArn
+var Canary_RuntimeVersion = &sCanary_RuntimeVersion
+var Canary_VpcConfig = &sCanary_VpcConfig
+var Canary_VisualReference = &sCanary_VisualReference
+var Canary_ProvisionedResourceCleanup = &sCanary_ProvisionedResourceCleanup
+var Canary_BrowserConfigs = &sCanary_BrowserConfigs
+var Canary_EngineConfigs = &sCanary_EngineConfigs
+var Canary_VisualReferences = &sCanary_VisualReferences
+var Canary_MultiLocationConfig = &sCanary_MultiLocationConfig
+var Canary_Tags = &sCanary_Tags
+var Canary_ArtifactConfig = &sCanary_ArtifactConfig
+var Canary_KmsKeyArn = &sCanary_KmsKeyArn
+var Canary_DryRunConfig = &sCanary_DryRunConfig
+
+var _CanaryArn = &s_CanaryArn
+
+var CanaryCodeInput = &sCanaryCodeInput
+var CanaryCodeInput_S3Bucket = &sCanaryCodeInput_S3Bucket
+var CanaryCodeInput_S3Key = &sCanaryCodeInput_S3Key
+var CanaryCodeInput_S3Version = &sCanaryCodeInput_S3Version
+var CanaryCodeInput_ZipFile = &sCanaryCodeInput_ZipFile
+var CanaryCodeInput_Handler = &sCanaryCodeInput_Handler
+var CanaryCodeInput_BlueprintTypes = &sCanaryCodeInput_BlueprintTypes
+var CanaryCodeInput_Dependencies = &sCanaryCodeInput_Dependencies
+
+var CanaryCodeOutput = &sCanaryCodeOutput
+var CanaryCodeOutput_SourceLocationArn = &sCanaryCodeOutput_SourceLocationArn
+var CanaryCodeOutput_Handler = &sCanaryCodeOutput_Handler
+var CanaryCodeOutput_BlueprintTypes = &sCanaryCodeOutput_BlueprintTypes
+var CanaryCodeOutput_Dependencies = &sCanaryCodeOutput_Dependencies
+
+var CanaryDryRunConfigOutput = &sCanaryDryRunConfigOutput
+var CanaryDryRunConfigOutput_DryRunId = &sCanaryDryRunConfigOutput_DryRunId
+
+var CanaryLastRun = &sCanaryLastRun
+var CanaryLastRun_CanaryName = &sCanaryLastRun_CanaryName
+var CanaryLastRun_LastRun = &sCanaryLastRun_LastRun
+
+var _CanaryName = &s_CanaryName
+
+var CanaryRun = &sCanaryRun
+var CanaryRun_Id = &sCanaryRun_Id
+var CanaryRun_ScheduledRunId = &sCanaryRun_ScheduledRunId
+var CanaryRun_RetryAttempt = &sCanaryRun_RetryAttempt
+var CanaryRun_Name = &sCanaryRun_Name
+var CanaryRun_Status = &sCanaryRun_Status
+var CanaryRun_Timeline = &sCanaryRun_Timeline
+var CanaryRun_ArtifactS3Location = &sCanaryRun_ArtifactS3Location
+var CanaryRun_DryRunConfig = &sCanaryRun_DryRunConfig
+var CanaryRun_BrowserType = &sCanaryRun_BrowserType
+var CanaryRun_Location = &sCanaryRun_Location
+
+var CanaryRunConfigInput = &sCanaryRunConfigInput
+var CanaryRunConfigInput_TimeoutInSeconds = &sCanaryRunConfigInput_TimeoutInSeconds
+var CanaryRunConfigInput_MemoryInMB = &sCanaryRunConfigInput_MemoryInMB
+var CanaryRunConfigInput_ActiveTracing = &sCanaryRunConfigInput_ActiveTracing
+var CanaryRunConfigInput_EnvironmentVariables = &sCanaryRunConfigInput_EnvironmentVariables
+var CanaryRunConfigInput_EphemeralStorage = &sCanaryRunConfigInput_EphemeralStorage
+
+var CanaryRunConfigOutput = &sCanaryRunConfigOutput
+var CanaryRunConfigOutput_TimeoutInSeconds = &sCanaryRunConfigOutput_TimeoutInSeconds
+var CanaryRunConfigOutput_MemoryInMB = &sCanaryRunConfigOutput_MemoryInMB
+var CanaryRunConfigOutput_ActiveTracing = &sCanaryRunConfigOutput_ActiveTracing
+var CanaryRunConfigOutput_EphemeralStorage = &sCanaryRunConfigOutput_EphemeralStorage
+
+var _CanaryRuns = &s_CanaryRuns
+var _CanaryRuns_member = &s_CanaryRuns_member
+
+var CanaryRunState = &sCanaryRunState
+var CanaryRunState_RUNNING = &sCanaryRunState_RUNNING
+var CanaryRunState_PASSED = &sCanaryRunState_PASSED
+var CanaryRunState_FAILED = &sCanaryRunState_FAILED
+
+var CanaryRunStateReasonCode = &sCanaryRunStateReasonCode
+var CanaryRunStateReasonCode_CANARY_FAILURE = &sCanaryRunStateReasonCode_CANARY_FAILURE
+var CanaryRunStateReasonCode_EXECUTION_FAILURE = &sCanaryRunStateReasonCode_EXECUTION_FAILURE
+
+var CanaryRunStatus = &sCanaryRunStatus
+var CanaryRunStatus_State = &sCanaryRunStatus_State
+var CanaryRunStatus_StateReason = &sCanaryRunStatus_StateReason
+var CanaryRunStatus_StateReasonCode = &sCanaryRunStatus_StateReasonCode
+var CanaryRunStatus_TestResult = &sCanaryRunStatus_TestResult
+
+var CanaryRunTestResult = &sCanaryRunTestResult
+var CanaryRunTestResult_PASSED = &sCanaryRunTestResult_PASSED
+var CanaryRunTestResult_FAILED = &sCanaryRunTestResult_FAILED
+var CanaryRunTestResult_UNKNOWN = &sCanaryRunTestResult_UNKNOWN
+
+var CanaryRunTimeline = &sCanaryRunTimeline
+var CanaryRunTimeline_Started = &sCanaryRunTimeline_Started
+var CanaryRunTimeline_Completed = &sCanaryRunTimeline_Completed
+var CanaryRunTimeline_MetricTimestampForRunAndRetries = &sCanaryRunTimeline_MetricTimestampForRunAndRetries
+
+var CanaryScheduleInput = &sCanaryScheduleInput
+var CanaryScheduleInput_Expression = &sCanaryScheduleInput_Expression
+var CanaryScheduleInput_DurationInSeconds = &sCanaryScheduleInput_DurationInSeconds
+var CanaryScheduleInput_RetryConfig = &sCanaryScheduleInput_RetryConfig
+
+var CanaryScheduleOutput = &sCanaryScheduleOutput
+var CanaryScheduleOutput_Expression = &sCanaryScheduleOutput_Expression
+var CanaryScheduleOutput_DurationInSeconds = &sCanaryScheduleOutput_DurationInSeconds
+var CanaryScheduleOutput_RetryConfig = &sCanaryScheduleOutput_RetryConfig
+
+var CanaryState = &sCanaryState
+var CanaryState_CREATING = &sCanaryState_CREATING
+var CanaryState_READY = &sCanaryState_READY
+var CanaryState_STARTING = &sCanaryState_STARTING
+var CanaryState_RUNNING = &sCanaryState_RUNNING
+var CanaryState_UPDATING = &sCanaryState_UPDATING
+var CanaryState_STOPPING = &sCanaryState_STOPPING
+var CanaryState_STOPPED = &sCanaryState_STOPPED
+var CanaryState_ERROR = &sCanaryState_ERROR
+var CanaryState_DELETING = &sCanaryState_DELETING
+
+var CanaryStateReasonCode = &sCanaryStateReasonCode
+var CanaryStateReasonCode_INVALID_PERMISSIONS = &sCanaryStateReasonCode_INVALID_PERMISSIONS
+var CanaryStateReasonCode_CREATE_PENDING = &sCanaryStateReasonCode_CREATE_PENDING
+var CanaryStateReasonCode_CREATE_IN_PROGRESS = &sCanaryStateReasonCode_CREATE_IN_PROGRESS
+var CanaryStateReasonCode_CREATE_FAILED = &sCanaryStateReasonCode_CREATE_FAILED
+var CanaryStateReasonCode_UPDATE_PENDING = &sCanaryStateReasonCode_UPDATE_PENDING
+var CanaryStateReasonCode_UPDATE_IN_PROGRESS = &sCanaryStateReasonCode_UPDATE_IN_PROGRESS
+var CanaryStateReasonCode_UPDATE_COMPLETE = &sCanaryStateReasonCode_UPDATE_COMPLETE
+var CanaryStateReasonCode_ROLLBACK_COMPLETE = &sCanaryStateReasonCode_ROLLBACK_COMPLETE
+var CanaryStateReasonCode_ROLLBACK_FAILED = &sCanaryStateReasonCode_ROLLBACK_FAILED
+var CanaryStateReasonCode_DELETE_IN_PROGRESS = &sCanaryStateReasonCode_DELETE_IN_PROGRESS
+var CanaryStateReasonCode_DELETE_FAILED = &sCanaryStateReasonCode_DELETE_FAILED
+var CanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS = &sCanaryStateReasonCode_SYNC_DELETE_IN_PROGRESS
+
+var CanaryStatus = &sCanaryStatus
+var CanaryStatus_State = &sCanaryStatus_State
+var CanaryStatus_StateReason = &sCanaryStatus_StateReason
+var CanaryStatus_StateReasonCode = &sCanaryStatus_StateReasonCode
+
+var CanaryTimeline = &sCanaryTimeline
+var CanaryTimeline_Created = &sCanaryTimeline_Created
+var CanaryTimeline_LastModified = &sCanaryTimeline_LastModified
+var CanaryTimeline_LastStarted = &sCanaryTimeline_LastStarted
+var CanaryTimeline_LastStopped = &sCanaryTimeline_LastStopped
+
+var _CodeHandler = &s_CodeHandler
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _Dependencies = &s_Dependencies
+var _Dependencies_member = &s_Dependencies_member
+
+var Dependency = &sDependency
+var Dependency_Type = &sDependency_Type
+var Dependency_Reference = &sDependency_Reference
+
+var DependencyType = &sDependencyType
+var DependencyType_LambdaLayer = &sDependencyType_LambdaLayer
+
+var _DescribeCanariesLastRunNameFilter = &s_DescribeCanariesLastRunNameFilter
+var _DescribeCanariesLastRunNameFilter_member = &s_DescribeCanariesLastRunNameFilter_member
+
+var _DescribeCanariesNameFilter = &s_DescribeCanariesNameFilter
+var _DescribeCanariesNameFilter_member = &s_DescribeCanariesNameFilter_member
+
+var DryRunConfigOutput = &sDryRunConfigOutput
+var DryRunConfigOutput_DryRunId = &sDryRunConfigOutput_DryRunId
+var DryRunConfigOutput_LastDryRunExecutionStatus = &sDryRunConfigOutput_LastDryRunExecutionStatus
+
+var EncryptionMode = &sEncryptionMode
+var EncryptionMode_SSE_S3 = &sEncryptionMode_SSE_S3
+var EncryptionMode_SSE_KMS = &sEncryptionMode_SSE_KMS
+
+var EngineConfig = &sEngineConfig
+var EngineConfig_EngineArn = &sEngineConfig_EngineArn
+var EngineConfig_BrowserType = &sEngineConfig_BrowserType
+
+var _EngineConfigs = &s_EngineConfigs
+var _EngineConfigs_member = &s_EngineConfigs_member
+
+var _EnvironmentVariableName = &s_EnvironmentVariableName
+
+var _EnvironmentVariablesMap = &s_EnvironmentVariablesMap
+var _EnvironmentVariablesMap_key = &s_EnvironmentVariablesMap_key
+var _EnvironmentVariablesMap_value = &s_EnvironmentVariablesMap_value
+
+var _EnvironmentVariableValue = &s_EnvironmentVariableValue
+
+var _EphemeralStorageSize = &s_EphemeralStorageSize
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _FunctionArn = &s_FunctionArn
+
+var Group = &sGroup
+var Group_Id = &sGroup_Id
+var Group_Name = &sGroup_Name
+var Group_Arn = &sGroup_Arn
+var Group_Tags = &sGroup_Tags
+var Group_CreatedTime = &sGroup_CreatedTime
+var Group_LastModifiedTime = &sGroup_LastModifiedTime
+
+var _GroupArn = &s_GroupArn
+
+var _GroupIdentifier = &s_GroupIdentifier
+
+var _GroupName = &s_GroupName
+
+var GroupSummary = &sGroupSummary
+var GroupSummary_Id = &sGroupSummary_Id
+var GroupSummary_Name = &sGroupSummary_Name
+var GroupSummary_Arn = &sGroupSummary_Arn
+
+var _GroupSummaryList = &s_GroupSummaryList
+var _GroupSummaryList_member = &s_GroupSummaryList_member
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_Message = &sInternalFailureException_Message
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _Location = &s_Location
+
+var LocationType = &sLocationType
+var LocationType_Primary = &sLocationType_Primary
+var LocationType_Replica = &sLocationType_Replica
+
+var _MaxCanaryResults = &s_MaxCanaryResults
+
+var _MaxFifteenMinutesInSeconds = &s_MaxFifteenMinutesInSeconds
+
+var _MaxGroupResults = &s_MaxGroupResults
+
+var _MaxOneYearInSeconds = &s_MaxOneYearInSeconds
+
+var _MaxRetries = &s_MaxRetries
+
+var _MaxSize100 = &s_MaxSize100
+
+var _MaxSize1024 = &s_MaxSize1024
+
+var _MaxSize3008 = &s_MaxSize3008
+
+var MultiLocationConfig = &sMultiLocationConfig
+var MultiLocationConfig_LocationType = &sMultiLocationConfig_LocationType
+var MultiLocationConfig_PrimaryLocation = &sMultiLocationConfig_PrimaryLocation
+var MultiLocationConfig_Replicas = &sMultiLocationConfig_Replicas
+var MultiLocationConfig_ReplicationState = &sMultiLocationConfig_ReplicationState
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Message = &sNotFoundException_Message
+
+var _NullableBoolean = &s_NullableBoolean
+
+var _PaginationToken = &s_PaginationToken
+
+var ProvisionedResourceCleanupSetting = &sProvisionedResourceCleanupSetting
+var ProvisionedResourceCleanupSetting_AUTOMATIC = &sProvisionedResourceCleanupSetting_AUTOMATIC
+var ProvisionedResourceCleanupSetting_OFF = &sProvisionedResourceCleanupSetting_OFF
+
+var _RemoveReplicaLocations = &s_RemoveReplicaLocations
+var _RemoveReplicaLocations_member = &s_RemoveReplicaLocations_member
+
+var Replica = &sReplica
+var Replica_Location = &sReplica_Location
+var Replica_ReplicationStatus = &sReplica_ReplicationStatus
+var Replica_CanaryState = &sReplica_CanaryState
+var Replica_LastModified = &sReplica_LastModified
+var Replica_VpcConfig = &sReplica_VpcConfig
+
+var _Replicas = &s_Replicas
+var _Replicas_member = &s_Replicas_member
+
+var ReplicationState = &sReplicationState
+var ReplicationState_InProgress = &sReplicationState_InProgress
+var ReplicationState_InSync = &sReplicationState_InSync
+var ReplicationState_Inconsistent = &sReplicationState_Inconsistent
+
+var ReplicationStatus = &sReplicationStatus
+var ReplicationStatus_State = &sReplicationStatus_State
+var ReplicationStatus_StateReason = &sReplicationStatus_StateReason
+var ReplicationStatus_StateReasonCode = &sReplicationStatus_StateReasonCode
+
+var RequestEntityTooLargeException = &sRequestEntityTooLargeException
+var RequestEntityTooLargeException_Message = &sRequestEntityTooLargeException_Message
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceToTag = &sResourceToTag
+var ResourceToTag_LAMBDA_FUNCTION = &sResourceToTag_LAMBDA_FUNCTION
+
+var _RetryAttempt = &s_RetryAttempt
+
+var RetryConfigInput = &sRetryConfigInput
+var RetryConfigInput_MaxRetries = &sRetryConfigInput_MaxRetries
+
+var RetryConfigOutput = &sRetryConfigOutput
+var RetryConfigOutput_MaxRetries = &sRetryConfigOutput_MaxRetries
+
+var _RoleArn = &s_RoleArn
+
+var RuntimeVersion = &sRuntimeVersion
+var RuntimeVersion_VersionName = &sRuntimeVersion_VersionName
+var RuntimeVersion_Description = &sRuntimeVersion_Description
+var RuntimeVersion_ReleaseDate = &sRuntimeVersion_ReleaseDate
+var RuntimeVersion_DeprecationDate = &sRuntimeVersion_DeprecationDate
+
+var _RuntimeVersionList = &s_RuntimeVersionList
+var _RuntimeVersionList_member = &s_RuntimeVersionList_member
+
+var RunType = &sRunType
+var RunType_CANARY_RUN = &sRunType_CANARY_RUN
+var RunType_DRY_RUN = &sRunType_DRY_RUN
+
+var S3EncryptionConfig = &sS3EncryptionConfig
+var S3EncryptionConfig_EncryptionMode = &sS3EncryptionConfig_EncryptionMode
+var S3EncryptionConfig_KmsKeyArn = &sS3EncryptionConfig_KmsKeyArn
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var _Token = &s_Token
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var _UUID = &s_UUID
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var VisualReferenceInput = &sVisualReferenceInput
+var VisualReferenceInput_BaseScreenshots = &sVisualReferenceInput_BaseScreenshots
+var VisualReferenceInput_BaseCanaryRunId = &sVisualReferenceInput_BaseCanaryRunId
+var VisualReferenceInput_BrowserType = &sVisualReferenceInput_BrowserType
+
+var VisualReferenceOutput = &sVisualReferenceOutput
+var VisualReferenceOutput_BaseScreenshots = &sVisualReferenceOutput_BaseScreenshots
+var VisualReferenceOutput_BaseCanaryRunId = &sVisualReferenceOutput_BaseCanaryRunId
+var VisualReferenceOutput_BrowserType = &sVisualReferenceOutput_BrowserType
+
+var _VisualReferences = &s_VisualReferences
+var _VisualReferences_member = &s_VisualReferences_member
+
+var _VisualReferencesOutput = &s_VisualReferencesOutput
+var _VisualReferencesOutput_member = &s_VisualReferencesOutput_member
+
+var VpcConfigInput = &sVpcConfigInput
+var VpcConfigInput_SubnetIds = &sVpcConfigInput_SubnetIds
+var VpcConfigInput_SecurityGroupIds = &sVpcConfigInput_SecurityGroupIds
+var VpcConfigInput_Ipv6AllowedForDualStack = &sVpcConfigInput_Ipv6AllowedForDualStack
+
+var VpcConfigOutput = &sVpcConfigOutput
+var VpcConfigOutput_VpcId = &sVpcConfigOutput_VpcId
+var VpcConfigOutput_SubnetIds = &sVpcConfigOutput_SubnetIds
+var VpcConfigOutput_SecurityGroupIds = &sVpcConfigOutput_SecurityGroupIds
+var VpcConfigOutput_Ipv6AllowedForDualStack = &sVpcConfigOutput_Ipv6AllowedForDualStack
+
+var _VpcId = &s_VpcId
+
+var AssociateResourceRequest = &sAssociateResourceRequest
+var AssociateResourceRequest_GroupIdentifier = &sAssociateResourceRequest_GroupIdentifier
+var AssociateResourceRequest_ResourceArn = &sAssociateResourceRequest_ResourceArn
+
+var AssociateResourceResponse = &sAssociateResourceResponse
+
+var CreateCanaryRequest = &sCreateCanaryRequest
+var CreateCanaryRequest_Name = &sCreateCanaryRequest_Name
+var CreateCanaryRequest_Code = &sCreateCanaryRequest_Code
+var CreateCanaryRequest_ArtifactS3Location = &sCreateCanaryRequest_ArtifactS3Location
+var CreateCanaryRequest_ExecutionRoleArn = &sCreateCanaryRequest_ExecutionRoleArn
+var CreateCanaryRequest_Schedule = &sCreateCanaryRequest_Schedule
+var CreateCanaryRequest_RunConfig = &sCreateCanaryRequest_RunConfig
+var CreateCanaryRequest_SuccessRetentionPeriodInDays = &sCreateCanaryRequest_SuccessRetentionPeriodInDays
+var CreateCanaryRequest_FailureRetentionPeriodInDays = &sCreateCanaryRequest_FailureRetentionPeriodInDays
+var CreateCanaryRequest_RuntimeVersion = &sCreateCanaryRequest_RuntimeVersion
+var CreateCanaryRequest_VpcConfig = &sCreateCanaryRequest_VpcConfig
+var CreateCanaryRequest_ResourcesToReplicateTags = &sCreateCanaryRequest_ResourcesToReplicateTags
+var CreateCanaryRequest_ProvisionedResourceCleanup = &sCreateCanaryRequest_ProvisionedResourceCleanup
+var CreateCanaryRequest_BrowserConfigs = &sCreateCanaryRequest_BrowserConfigs
+var CreateCanaryRequest_AddReplicaLocations = &sCreateCanaryRequest_AddReplicaLocations
+var CreateCanaryRequest_Tags = &sCreateCanaryRequest_Tags
+var CreateCanaryRequest_ArtifactConfig = &sCreateCanaryRequest_ArtifactConfig
+var CreateCanaryRequest_KmsKeyArn = &sCreateCanaryRequest_KmsKeyArn
+
+var CreateCanaryResponse = &sCreateCanaryResponse
+var CreateCanaryResponse_Canary = &sCreateCanaryResponse_Canary
+
+var CreateGroupRequest = &sCreateGroupRequest
+var CreateGroupRequest_Name = &sCreateGroupRequest_Name
+var CreateGroupRequest_Tags = &sCreateGroupRequest_Tags
+
+var CreateGroupResponse = &sCreateGroupResponse
+var CreateGroupResponse_Group = &sCreateGroupResponse_Group
+
+var DeleteCanaryRequest = &sDeleteCanaryRequest
+var DeleteCanaryRequest_Name = &sDeleteCanaryRequest_Name
+var DeleteCanaryRequest_DeleteLambda = &sDeleteCanaryRequest_DeleteLambda
+
+var DeleteCanaryResponse = &sDeleteCanaryResponse
+
+var DeleteGroupRequest = &sDeleteGroupRequest
+var DeleteGroupRequest_GroupIdentifier = &sDeleteGroupRequest_GroupIdentifier
+
+var DeleteGroupResponse = &sDeleteGroupResponse
+
+var DescribeCanariesRequest = &sDescribeCanariesRequest
+var DescribeCanariesRequest_NextToken = &sDescribeCanariesRequest_NextToken
+var DescribeCanariesRequest_MaxResults = &sDescribeCanariesRequest_MaxResults
+var DescribeCanariesRequest_Names = &sDescribeCanariesRequest_Names
+
+var DescribeCanariesLastRunRequest = &sDescribeCanariesLastRunRequest
+var DescribeCanariesLastRunRequest_NextToken = &sDescribeCanariesLastRunRequest_NextToken
+var DescribeCanariesLastRunRequest_MaxResults = &sDescribeCanariesLastRunRequest_MaxResults
+var DescribeCanariesLastRunRequest_Names = &sDescribeCanariesLastRunRequest_Names
+var DescribeCanariesLastRunRequest_BrowserType = &sDescribeCanariesLastRunRequest_BrowserType
+
+var DescribeCanariesLastRunResponse = &sDescribeCanariesLastRunResponse
+var DescribeCanariesLastRunResponse_CanariesLastRun = &sDescribeCanariesLastRunResponse_CanariesLastRun
+var DescribeCanariesLastRunResponse_NextToken = &sDescribeCanariesLastRunResponse_NextToken
+
+var DescribeCanariesResponse = &sDescribeCanariesResponse
+var DescribeCanariesResponse_Canaries = &sDescribeCanariesResponse_Canaries
+var DescribeCanariesResponse_NextToken = &sDescribeCanariesResponse_NextToken
+
+var DescribeRuntimeVersionsRequest = &sDescribeRuntimeVersionsRequest
+var DescribeRuntimeVersionsRequest_NextToken = &sDescribeRuntimeVersionsRequest_NextToken
+var DescribeRuntimeVersionsRequest_MaxResults = &sDescribeRuntimeVersionsRequest_MaxResults
+
+var DescribeRuntimeVersionsResponse = &sDescribeRuntimeVersionsResponse
+var DescribeRuntimeVersionsResponse_RuntimeVersions = &sDescribeRuntimeVersionsResponse_RuntimeVersions
+var DescribeRuntimeVersionsResponse_NextToken = &sDescribeRuntimeVersionsResponse_NextToken
+
+var DisassociateResourceRequest = &sDisassociateResourceRequest
+var DisassociateResourceRequest_GroupIdentifier = &sDisassociateResourceRequest_GroupIdentifier
+var DisassociateResourceRequest_ResourceArn = &sDisassociateResourceRequest_ResourceArn
+
+var DisassociateResourceResponse = &sDisassociateResourceResponse
+
+var GetCanaryRequest = &sGetCanaryRequest
+var GetCanaryRequest_Name = &sGetCanaryRequest_Name
+var GetCanaryRequest_DryRunId = &sGetCanaryRequest_DryRunId
+
+var GetCanaryResponse = &sGetCanaryResponse
+var GetCanaryResponse_Canary = &sGetCanaryResponse_Canary
+
+var GetCanaryRunsRequest = &sGetCanaryRunsRequest
+var GetCanaryRunsRequest_Name = &sGetCanaryRunsRequest_Name
+var GetCanaryRunsRequest_NextToken = &sGetCanaryRunsRequest_NextToken
+var GetCanaryRunsRequest_MaxResults = &sGetCanaryRunsRequest_MaxResults
+var GetCanaryRunsRequest_DryRunId = &sGetCanaryRunsRequest_DryRunId
+var GetCanaryRunsRequest_RunType = &sGetCanaryRunsRequest_RunType
+
+var GetCanaryRunsResponse = &sGetCanaryRunsResponse
+var GetCanaryRunsResponse_CanaryRuns = &sGetCanaryRunsResponse_CanaryRuns
+var GetCanaryRunsResponse_NextToken = &sGetCanaryRunsResponse_NextToken
+
+var GetGroupRequest = &sGetGroupRequest
+var GetGroupRequest_GroupIdentifier = &sGetGroupRequest_GroupIdentifier
+
+var GetGroupResponse = &sGetGroupResponse
+var GetGroupResponse_Group = &sGetGroupResponse_Group
+
+var ListAssociatedGroupsRequest = &sListAssociatedGroupsRequest
+var ListAssociatedGroupsRequest_NextToken = &sListAssociatedGroupsRequest_NextToken
+var ListAssociatedGroupsRequest_MaxResults = &sListAssociatedGroupsRequest_MaxResults
+var ListAssociatedGroupsRequest_ResourceArn = &sListAssociatedGroupsRequest_ResourceArn
+
+var ListAssociatedGroupsResponse = &sListAssociatedGroupsResponse
+var ListAssociatedGroupsResponse_Groups = &sListAssociatedGroupsResponse_Groups
+var ListAssociatedGroupsResponse_NextToken = &sListAssociatedGroupsResponse_NextToken
+
+var ListGroupResourcesRequest = &sListGroupResourcesRequest
+var ListGroupResourcesRequest_NextToken = &sListGroupResourcesRequest_NextToken
+var ListGroupResourcesRequest_MaxResults = &sListGroupResourcesRequest_MaxResults
+var ListGroupResourcesRequest_GroupIdentifier = &sListGroupResourcesRequest_GroupIdentifier
+
+var ListGroupResourcesResponse = &sListGroupResourcesResponse
+var ListGroupResourcesResponse_Resources = &sListGroupResourcesResponse_Resources
+var ListGroupResourcesResponse_NextToken = &sListGroupResourcesResponse_NextToken
+
+var ListGroupsRequest = &sListGroupsRequest
+var ListGroupsRequest_NextToken = &sListGroupsRequest_NextToken
+var ListGroupsRequest_MaxResults = &sListGroupsRequest_MaxResults
+
+var ListGroupsResponse = &sListGroupsResponse
+var ListGroupsResponse_Groups = &sListGroupsResponse_Groups
+var ListGroupsResponse_NextToken = &sListGroupsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartCanaryDryRunRequest = &sStartCanaryDryRunRequest
+var StartCanaryDryRunRequest_Name = &sStartCanaryDryRunRequest_Name
+var StartCanaryDryRunRequest_Code = &sStartCanaryDryRunRequest_Code
+var StartCanaryDryRunRequest_RuntimeVersion = &sStartCanaryDryRunRequest_RuntimeVersion
+var StartCanaryDryRunRequest_RunConfig = &sStartCanaryDryRunRequest_RunConfig
+var StartCanaryDryRunRequest_VpcConfig = &sStartCanaryDryRunRequest_VpcConfig
+var StartCanaryDryRunRequest_ExecutionRoleArn = &sStartCanaryDryRunRequest_ExecutionRoleArn
+var StartCanaryDryRunRequest_SuccessRetentionPeriodInDays = &sStartCanaryDryRunRequest_SuccessRetentionPeriodInDays
+var StartCanaryDryRunRequest_FailureRetentionPeriodInDays = &sStartCanaryDryRunRequest_FailureRetentionPeriodInDays
+var StartCanaryDryRunRequest_VisualReference = &sStartCanaryDryRunRequest_VisualReference
+var StartCanaryDryRunRequest_ArtifactS3Location = &sStartCanaryDryRunRequest_ArtifactS3Location
+var StartCanaryDryRunRequest_ArtifactConfig = &sStartCanaryDryRunRequest_ArtifactConfig
+var StartCanaryDryRunRequest_ProvisionedResourceCleanup = &sStartCanaryDryRunRequest_ProvisionedResourceCleanup
+var StartCanaryDryRunRequest_BrowserConfigs = &sStartCanaryDryRunRequest_BrowserConfigs
+var StartCanaryDryRunRequest_VisualReferences = &sStartCanaryDryRunRequest_VisualReferences
+
+var StartCanaryDryRunResponse = &sStartCanaryDryRunResponse
+var StartCanaryDryRunResponse_DryRunConfig = &sStartCanaryDryRunResponse_DryRunConfig
+
+var StartCanaryRequest = &sStartCanaryRequest
+var StartCanaryRequest_Name = &sStartCanaryRequest_Name
+
+var StartCanaryResponse = &sStartCanaryResponse
+
+var StopCanaryRequest = &sStopCanaryRequest
+var StopCanaryRequest_Name = &sStopCanaryRequest_Name
+
+var StopCanaryResponse = &sStopCanaryResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateCanaryRequest = &sUpdateCanaryRequest
+var UpdateCanaryRequest_Name = &sUpdateCanaryRequest_Name
+var UpdateCanaryRequest_Code = &sUpdateCanaryRequest_Code
+var UpdateCanaryRequest_ExecutionRoleArn = &sUpdateCanaryRequest_ExecutionRoleArn
+var UpdateCanaryRequest_RuntimeVersion = &sUpdateCanaryRequest_RuntimeVersion
+var UpdateCanaryRequest_Schedule = &sUpdateCanaryRequest_Schedule
+var UpdateCanaryRequest_RunConfig = &sUpdateCanaryRequest_RunConfig
+var UpdateCanaryRequest_SuccessRetentionPeriodInDays = &sUpdateCanaryRequest_SuccessRetentionPeriodInDays
+var UpdateCanaryRequest_FailureRetentionPeriodInDays = &sUpdateCanaryRequest_FailureRetentionPeriodInDays
+var UpdateCanaryRequest_VpcConfig = &sUpdateCanaryRequest_VpcConfig
+var UpdateCanaryRequest_VisualReference = &sUpdateCanaryRequest_VisualReference
+var UpdateCanaryRequest_ArtifactS3Location = &sUpdateCanaryRequest_ArtifactS3Location
+var UpdateCanaryRequest_ArtifactConfig = &sUpdateCanaryRequest_ArtifactConfig
+var UpdateCanaryRequest_ProvisionedResourceCleanup = &sUpdateCanaryRequest_ProvisionedResourceCleanup
+var UpdateCanaryRequest_DryRunId = &sUpdateCanaryRequest_DryRunId
+var UpdateCanaryRequest_VisualReferences = &sUpdateCanaryRequest_VisualReferences
+var UpdateCanaryRequest_BrowserConfigs = &sUpdateCanaryRequest_BrowserConfigs
+var UpdateCanaryRequest_AddReplicaLocations = &sUpdateCanaryRequest_AddReplicaLocations
+var UpdateCanaryRequest_RemoveReplicaLocations = &sUpdateCanaryRequest_RemoveReplicaLocations
+var UpdateCanaryRequest_KmsKeyArn = &sUpdateCanaryRequest_KmsKeyArn
+
+var UpdateCanaryResponse = &sUpdateCanaryResponse
+
+var Synthetics = &smithy.ServiceSchema{Schema: &s_Synthetics, Version: "2017-10-11"}

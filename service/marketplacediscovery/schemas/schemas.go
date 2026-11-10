@@ -4,3291 +4,3140 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetListing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetListing",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eGetListing                                                                smithy.SchemaExtensions
+	eGetOffer                                                                  smithy.SchemaExtensions
+	eGetOfferSet                                                               smithy.SchemaExtensions
+	eGetOfferTerms                                                             smithy.SchemaExtensions
+	eGetProduct                                                                smithy.SchemaExtensions
+	eListFulfillmentOptions                                                    smithy.SchemaExtensions
+	eListPurchaseOptions                                                       smithy.SchemaExtensions
+	eSearchFacets                                                              smithy.SchemaExtensions
+	eSearchListings                                                            smithy.SchemaExtensions
+	e_AWSMarketplaceDiscovery                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                                     smithy.SchemaExtensions
+	eAccessDeniedException_message                                             smithy.SchemaExtensions
+	e_AgreementResourceId                                                      smithy.SchemaExtensions
+	e_AmazonMachineImageCidrIpAddressList                                      smithy.SchemaExtensions
+	e_AmazonMachineImageCidrIpAddressList_member                               smithy.SchemaExtensions
+	eAmazonMachineImageEbsVolume                                               smithy.SchemaExtensions
+	eAmazonMachineImageEbsVolume_volumeTypes                                   smithy.SchemaExtensions
+	eAmazonMachineImageEbsVolume_iops                                          smithy.SchemaExtensions
+	e_AmazonMachineImageEbsVolumeTypeList                                      smithy.SchemaExtensions
+	e_AmazonMachineImageEbsVolumeTypeList_member                               smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption                                       smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_fulfillmentOptionId                   smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_fulfillmentOptionName                 smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_fulfillmentOptionVersion              smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_fulfillmentOptionType                 smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName          smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_operatingSystems                      smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_recommendation                        smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_releaseNotes                          smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_usageInstructions                     smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_availableFromTime                     smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_accessUrlTemplate                     smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_architecture                          smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_amiAlias                              smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_ebsVolume                             smithy.SchemaExtensions
+	eAmazonMachineImageFulfillmentOption_shortDescription                      smithy.SchemaExtensions
+	eAmazonMachineImageOperatingSystem                                         smithy.SchemaExtensions
+	eAmazonMachineImageOperatingSystem_operatingSystemFamilyName               smithy.SchemaExtensions
+	eAmazonMachineImageOperatingSystem_operatingSystemName                     smithy.SchemaExtensions
+	eAmazonMachineImageOperatingSystem_operatingSystemVersion                  smithy.SchemaExtensions
+	e_AmazonMachineImageOperatingSystemList                                    smithy.SchemaExtensions
+	e_AmazonMachineImageOperatingSystemList_member                             smithy.SchemaExtensions
+	eAmazonMachineImageRecommendation                                          smithy.SchemaExtensions
+	eAmazonMachineImageRecommendation_instanceType                             smithy.SchemaExtensions
+	eAmazonMachineImageRecommendation_securityGroups                           smithy.SchemaExtensions
+	eAmazonMachineImageSecurityGroup                                           smithy.SchemaExtensions
+	eAmazonMachineImageSecurityGroup_protocol                                  smithy.SchemaExtensions
+	eAmazonMachineImageSecurityGroup_fromPort                                  smithy.SchemaExtensions
+	eAmazonMachineImageSecurityGroup_toPort                                    smithy.SchemaExtensions
+	eAmazonMachineImageSecurityGroup_cidrIpAddresses                           smithy.SchemaExtensions
+	e_AmazonMachineImageSecurityGroupList                                      smithy.SchemaExtensions
+	e_AmazonMachineImageSecurityGroupList_member                               smithy.SchemaExtensions
+	eApiFulfillmentOption                                                      smithy.SchemaExtensions
+	eApiFulfillmentOption_fulfillmentOptionId                                  smithy.SchemaExtensions
+	eApiFulfillmentOption_fulfillmentOptionType                                smithy.SchemaExtensions
+	eApiFulfillmentOption_fulfillmentOptionDisplayName                         smithy.SchemaExtensions
+	eApiFulfillmentOption_usageInstructions                                    smithy.SchemaExtensions
+	eApiFulfillmentOption_awsSupportedServices                                 smithy.SchemaExtensions
+	eAwsSupportedService                                                       smithy.SchemaExtensions
+	eAwsSupportedService_supportedServiceType                                  smithy.SchemaExtensions
+	eAwsSupportedService_displayName                                           smithy.SchemaExtensions
+	eAwsSupportedService_description                                           smithy.SchemaExtensions
+	e_AwsSupportedServiceList                                                  smithy.SchemaExtensions
+	e_AwsSupportedServiceList_member                                           smithy.SchemaExtensions
+	eBillingPeriodType                                                         smithy.SchemaExtensions
+	eBillingPeriodType_MONTHLY                                                 smithy.SchemaExtensions
+	e_BoundedString                                                            smithy.SchemaExtensions
+	eByolPricingTerm                                                           smithy.SchemaExtensions
+	eByolPricingTerm_id                                                        smithy.SchemaExtensions
+	eByolPricingTerm_type                                                      smithy.SchemaExtensions
+	e_Catalog                                                                  smithy.SchemaExtensions
+	eCategory                                                                  smithy.SchemaExtensions
+	eCategory_categoryId                                                       smithy.SchemaExtensions
+	eCategory_displayName                                                      smithy.SchemaExtensions
+	e_CategoryList                                                             smithy.SchemaExtensions
+	e_CategoryList_member                                                      smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption                                           smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_fulfillmentOptionId                       smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_fulfillmentOptionName                     smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_fulfillmentOptionType                     smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_fulfillmentOptionDisplayName              smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_fulfillmentOptionVersion                  smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_releaseNotes                              smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_usageInstructions                         smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_availableFromTime                         smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_shortDescription                          smithy.SchemaExtensions
+	eCloudFormationFulfillmentOption_longDescription                           smithy.SchemaExtensions
+	eConfigurableUpfrontPricingTerm                                            smithy.SchemaExtensions
+	eConfigurableUpfrontPricingTerm_id                                         smithy.SchemaExtensions
+	eConfigurableUpfrontPricingTerm_type                                       smithy.SchemaExtensions
+	eConfigurableUpfrontPricingTerm_currencyCode                               smithy.SchemaExtensions
+	eConfigurableUpfrontPricingTerm_rateCards                                  smithy.SchemaExtensions
+	eConfigurableUpfrontRateCardItem                                           smithy.SchemaExtensions
+	eConfigurableUpfrontRateCardItem_selector                                  smithy.SchemaExtensions
+	eConfigurableUpfrontRateCardItem_constraints                               smithy.SchemaExtensions
+	eConfigurableUpfrontRateCardItem_rateCard                                  smithy.SchemaExtensions
+	e_ConfigurableUpfrontRateCardList                                          smithy.SchemaExtensions
+	e_ConfigurableUpfrontRateCardList_member                                   smithy.SchemaExtensions
+	eConstraints                                                               smithy.SchemaExtensions
+	eConstraints_multipleDimensionSelection                                    smithy.SchemaExtensions
+	eConstraints_quantityConfiguration                                         smithy.SchemaExtensions
+	eContainerFulfillmentOption                                                smithy.SchemaExtensions
+	eContainerFulfillmentOption_fulfillmentOptionId                            smithy.SchemaExtensions
+	eContainerFulfillmentOption_fulfillmentOptionName                          smithy.SchemaExtensions
+	eContainerFulfillmentOption_fulfillmentOptionType                          smithy.SchemaExtensions
+	eContainerFulfillmentOption_fulfillmentOptionDisplayName                   smithy.SchemaExtensions
+	eContainerFulfillmentOption_fulfillmentOptionVersion                       smithy.SchemaExtensions
+	eContainerFulfillmentOption_operatingSystems                               smithy.SchemaExtensions
+	eContainerFulfillmentOption_awsSupportedServices                           smithy.SchemaExtensions
+	eContainerFulfillmentOption_releaseNotes                                   smithy.SchemaExtensions
+	eContainerFulfillmentOption_usageInstructions                              smithy.SchemaExtensions
+	eContainerOperatingSystem                                                  smithy.SchemaExtensions
+	eContainerOperatingSystem_operatingSystemFamilyName                        smithy.SchemaExtensions
+	eContainerOperatingSystem_operatingSystemName                              smithy.SchemaExtensions
+	e_ContainerOperatingSystemList                                             smithy.SchemaExtensions
+	e_ContainerOperatingSystemList_member                                      smithy.SchemaExtensions
+	e_CurrencyCode                                                             smithy.SchemaExtensions
+	eDataArtifact                                                              smithy.SchemaExtensions
+	eDataArtifact_description                                                  smithy.SchemaExtensions
+	eDataArtifact_resourceArn                                                  smithy.SchemaExtensions
+	eDataArtifact_resourceType                                                 smithy.SchemaExtensions
+	eDataArtifact_dataClassification                                           smithy.SchemaExtensions
+	e_DataArtifactList                                                         smithy.SchemaExtensions
+	e_DataArtifactList_member                                                  smithy.SchemaExtensions
+	eDataExchangeFulfillmentOption                                             smithy.SchemaExtensions
+	eDataExchangeFulfillmentOption_fulfillmentOptionId                         smithy.SchemaExtensions
+	eDataExchangeFulfillmentOption_fulfillmentOptionType                       smithy.SchemaExtensions
+	eDataExchangeFulfillmentOption_fulfillmentOptionDisplayName                smithy.SchemaExtensions
+	eDataExchangeFulfillmentOption_dataArtifacts                               smithy.SchemaExtensions
+	eDeployedOnAwsStatus                                                       smithy.SchemaExtensions
+	eDeployedOnAwsStatus_DEPLOYED                                              smithy.SchemaExtensions
+	eDeployedOnAwsStatus_NOT_DEPLOYED                                          smithy.SchemaExtensions
+	eDeployedOnAwsStatus_NOT_APPLICABLE                                        smithy.SchemaExtensions
+	eDimensionLabel                                                            smithy.SchemaExtensions
+	eDimensionLabel_labelType                                                  smithy.SchemaExtensions
+	eDimensionLabel_labelValue                                                 smithy.SchemaExtensions
+	eDimensionLabel_displayName                                                smithy.SchemaExtensions
+	e_DimensionLabelList                                                       smithy.SchemaExtensions
+	e_DimensionLabelList_member                                                smithy.SchemaExtensions
+	eDimensionLabelType                                                        smithy.SchemaExtensions
+	eDimensionLabelType_REGION                                                 smithy.SchemaExtensions
+	eDimensionLabelType_SAGEMAKER_OPTION                                       smithy.SchemaExtensions
+	eDocumentItem                                                              smithy.SchemaExtensions
+	eDocumentItem_type                                                         smithy.SchemaExtensions
+	eDocumentItem_url                                                          smithy.SchemaExtensions
+	eDocumentItem_version                                                      smithy.SchemaExtensions
+	e_DocumentList                                                             smithy.SchemaExtensions
+	e_DocumentList_member                                                      smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption                                 smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId             smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName           smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType           smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName    smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion        smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_operatingSystems                smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_awsSupportedServices            smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_releaseNotes                    smithy.SchemaExtensions
+	eEc2ImageBuilderComponentFulfillmentOption_usageInstructions               smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption                                                 smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_fulfillmentOptionId                             smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_fulfillmentOptionName                           smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_fulfillmentOptionType                           smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_fulfillmentOptionDisplayName                    smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_fulfillmentOptionVersion                        smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_operatingSystems                                smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_releaseNotes                                    smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_usageInstructions                               smithy.SchemaExtensions
+	eEksAddOnFulfillmentOption_awsSupportedServices                            smithy.SchemaExtensions
+	eEksAddOnOperatingSystem                                                   smithy.SchemaExtensions
+	eEksAddOnOperatingSystem_operatingSystemFamilyName                         smithy.SchemaExtensions
+	eEksAddOnOperatingSystem_operatingSystemName                               smithy.SchemaExtensions
+	e_EksAddOnOperatingSystemList                                              smithy.SchemaExtensions
+	e_EksAddOnOperatingSystemList_member                                       smithy.SchemaExtensions
+	e_ExceptionMessage                                                         smithy.SchemaExtensions
+	e_FacetTypeList                                                            smithy.SchemaExtensions
+	e_FacetTypeList_member                                                     smithy.SchemaExtensions
+	eFixedPercentage                                                           smithy.SchemaExtensions
+	eFixedPercentage_percentageValue                                           smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm                                                   smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_id                                                smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_type                                              smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_currencyCode                                      smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_duration                                          smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_price                                             smithy.SchemaExtensions
+	eFixedUpfrontPricingTerm_grants                                            smithy.SchemaExtensions
+	eFreeTrialPricingTerm                                                      smithy.SchemaExtensions
+	eFreeTrialPricingTerm_id                                                   smithy.SchemaExtensions
+	eFreeTrialPricingTerm_type                                                 smithy.SchemaExtensions
+	eFreeTrialPricingTerm_duration                                             smithy.SchemaExtensions
+	eFreeTrialPricingTerm_grants                                               smithy.SchemaExtensions
+	eFulfillmentOption                                                         smithy.SchemaExtensions
+	eFulfillmentOption_amazonMachineImageFulfillmentOption                     smithy.SchemaExtensions
+	eFulfillmentOption_apiFulfillmentOption                                    smithy.SchemaExtensions
+	eFulfillmentOption_cloudFormationFulfillmentOption                         smithy.SchemaExtensions
+	eFulfillmentOption_containerFulfillmentOption                              smithy.SchemaExtensions
+	eFulfillmentOption_helmFulfillmentOption                                   smithy.SchemaExtensions
+	eFulfillmentOption_eksAddOnFulfillmentOption                               smithy.SchemaExtensions
+	eFulfillmentOption_ec2ImageBuilderComponentFulfillmentOption               smithy.SchemaExtensions
+	eFulfillmentOption_dataExchangeFulfillmentOption                           smithy.SchemaExtensions
+	eFulfillmentOption_professionalServicesFulfillmentOption                   smithy.SchemaExtensions
+	eFulfillmentOption_saasFulfillmentOption                                   smithy.SchemaExtensions
+	eFulfillmentOption_sageMakerAlgorithmFulfillmentOption                     smithy.SchemaExtensions
+	eFulfillmentOption_sageMakerModelFulfillmentOption                         smithy.SchemaExtensions
+	e_FulfillmentOptionsList                                                   smithy.SchemaExtensions
+	e_FulfillmentOptionsList_member                                            smithy.SchemaExtensions
+	eFulfillmentOptionSummary                                                  smithy.SchemaExtensions
+	eFulfillmentOptionSummary_fulfillmentOptionType                            smithy.SchemaExtensions
+	eFulfillmentOptionSummary_displayName                                      smithy.SchemaExtensions
+	e_FulfillmentOptionSummaryList                                             smithy.SchemaExtensions
+	e_FulfillmentOptionSummaryList_member                                      smithy.SchemaExtensions
+	eFulfillmentOptionType                                                     smithy.SchemaExtensions
+	eFulfillmentOptionType_AMAZON_MACHINE_IMAGE                                smithy.SchemaExtensions
+	eFulfillmentOptionType_API                                                 smithy.SchemaExtensions
+	eFulfillmentOptionType_CLOUDFORMATION_TEMPLATE                             smithy.SchemaExtensions
+	eFulfillmentOptionType_CONTAINER                                           smithy.SchemaExtensions
+	eFulfillmentOptionType_HELM                                                smithy.SchemaExtensions
+	eFulfillmentOptionType_EKS_ADD_ON                                          smithy.SchemaExtensions
+	eFulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT                         smithy.SchemaExtensions
+	eFulfillmentOptionType_DATA_EXCHANGE                                       smithy.SchemaExtensions
+	eFulfillmentOptionType_PROFESSIONAL_SERVICES                               smithy.SchemaExtensions
+	eFulfillmentOptionType_SAAS                                                smithy.SchemaExtensions
+	eFulfillmentOptionType_SAGEMAKER_ALGORITHM                                 smithy.SchemaExtensions
+	eFulfillmentOptionType_SAGEMAKER_MODEL                                     smithy.SchemaExtensions
+	eGrantItem                                                                 smithy.SchemaExtensions
+	eGrantItem_dimensionKey                                                    smithy.SchemaExtensions
+	eGrantItem_displayName                                                     smithy.SchemaExtensions
+	eGrantItem_description                                                     smithy.SchemaExtensions
+	eGrantItem_dimensionLabels                                                 smithy.SchemaExtensions
+	eGrantItem_unit                                                            smithy.SchemaExtensions
+	eGrantItem_maxQuantity                                                     smithy.SchemaExtensions
+	e_GrantList                                                                smithy.SchemaExtensions
+	e_GrantList_member                                                         smithy.SchemaExtensions
+	eHelmFulfillmentOption                                                     smithy.SchemaExtensions
+	eHelmFulfillmentOption_fulfillmentOptionId                                 smithy.SchemaExtensions
+	eHelmFulfillmentOption_fulfillmentOptionName                               smithy.SchemaExtensions
+	eHelmFulfillmentOption_fulfillmentOptionType                               smithy.SchemaExtensions
+	eHelmFulfillmentOption_fulfillmentOptionDisplayName                        smithy.SchemaExtensions
+	eHelmFulfillmentOption_fulfillmentOptionVersion                            smithy.SchemaExtensions
+	eHelmFulfillmentOption_operatingSystems                                    smithy.SchemaExtensions
+	eHelmFulfillmentOption_releaseNotes                                        smithy.SchemaExtensions
+	eHelmFulfillmentOption_awsSupportedServices                                smithy.SchemaExtensions
+	eHelmFulfillmentOption_usageInstructions                                   smithy.SchemaExtensions
+	eHelmOperatingSystem                                                       smithy.SchemaExtensions
+	eHelmOperatingSystem_operatingSystemFamilyName                             smithy.SchemaExtensions
+	eHelmOperatingSystem_operatingSystemName                                   smithy.SchemaExtensions
+	e_HelmOperatingSystemList                                                  smithy.SchemaExtensions
+	e_HelmOperatingSystemList_member                                           smithy.SchemaExtensions
+	e_HighlightList                                                            smithy.SchemaExtensions
+	e_HighlightList_member                                                     smithy.SchemaExtensions
+	eInternalServerException                                                   smithy.SchemaExtensions
+	eInternalServerException_message                                           smithy.SchemaExtensions
+	eLegalDocumentType                                                         smithy.SchemaExtensions
+	eLegalDocumentType_CUSTOM_EULA                                             smithy.SchemaExtensions
+	eLegalDocumentType_CUSTOM_DSA                                              smithy.SchemaExtensions
+	eLegalDocumentType_ENTERPRISE_EULA                                         smithy.SchemaExtensions
+	eLegalDocumentType_STANDARD_EULA                                           smithy.SchemaExtensions
+	eLegalDocumentType_STANDARD_DSA                                            smithy.SchemaExtensions
+	eLegalTerm                                                                 smithy.SchemaExtensions
+	eLegalTerm_id                                                              smithy.SchemaExtensions
+	eLegalTerm_type                                                            smithy.SchemaExtensions
+	eLegalTerm_documents                                                       smithy.SchemaExtensions
+	eListingAssociatedEntity                                                   smithy.SchemaExtensions
+	eListingAssociatedEntity_product                                           smithy.SchemaExtensions
+	eListingAssociatedEntity_offer                                             smithy.SchemaExtensions
+	e_ListingAssociatedEntityList                                              smithy.SchemaExtensions
+	e_ListingAssociatedEntityList_member                                       smithy.SchemaExtensions
+	eListingBadge                                                              smithy.SchemaExtensions
+	eListingBadge_displayName                                                  smithy.SchemaExtensions
+	eListingBadge_badgeType                                                    smithy.SchemaExtensions
+	e_ListingBadgeList                                                         smithy.SchemaExtensions
+	e_ListingBadgeList_member                                                  smithy.SchemaExtensions
+	eListingBadgeType                                                          smithy.SchemaExtensions
+	eListingBadgeType_AWS_FREE_TIER                                            smithy.SchemaExtensions
+	eListingBadgeType_FREE_TRIAL                                               smithy.SchemaExtensions
+	eListingBadgeType_DEPLOYED_ON_AWS                                          smithy.SchemaExtensions
+	eListingBadgeType_QUICK_LAUNCH                                             smithy.SchemaExtensions
+	eListingBadgeType_MULTI_PRODUCT                                            smithy.SchemaExtensions
+	eListingFacet                                                              smithy.SchemaExtensions
+	eListingFacet_value                                                        smithy.SchemaExtensions
+	eListingFacet_displayName                                                  smithy.SchemaExtensions
+	eListingFacet_parent                                                       smithy.SchemaExtensions
+	eListingFacet_count                                                        smithy.SchemaExtensions
+	e_ListingFacetList                                                         smithy.SchemaExtensions
+	e_ListingFacetList_member                                                  smithy.SchemaExtensions
+	e_ListingId                                                                smithy.SchemaExtensions
+	eListingSummary                                                            smithy.SchemaExtensions
+	eListingSummary_listingId                                                  smithy.SchemaExtensions
+	eListingSummary_listingName                                                smithy.SchemaExtensions
+	eListingSummary_publisher                                                  smithy.SchemaExtensions
+	eListingSummary_fulfillmentOptionSummaries                                 smithy.SchemaExtensions
+	eListingSummary_catalog                                                    smithy.SchemaExtensions
+	eListingSummary_shortDescription                                           smithy.SchemaExtensions
+	eListingSummary_logoThumbnailUrl                                           smithy.SchemaExtensions
+	eListingSummary_categories                                                 smithy.SchemaExtensions
+	eListingSummary_badges                                                     smithy.SchemaExtensions
+	eListingSummary_reviewSummary                                              smithy.SchemaExtensions
+	eListingSummary_pricingModels                                              smithy.SchemaExtensions
+	eListingSummary_pricingUnits                                               smithy.SchemaExtensions
+	eListingSummary_associatedEntities                                         smithy.SchemaExtensions
+	eListingSummaryAssociatedEntity                                            smithy.SchemaExtensions
+	eListingSummaryAssociatedEntity_product                                    smithy.SchemaExtensions
+	e_ListingSummaryAssociatedEntityList                                       smithy.SchemaExtensions
+	e_ListingSummaryAssociatedEntityList_member                                smithy.SchemaExtensions
+	e_ListingSummaryList                                                       smithy.SchemaExtensions
+	e_ListingSummaryList_member                                                smithy.SchemaExtensions
+	e_Locale                                                                   smithy.SchemaExtensions
+	e_MaxResults                                                               smithy.SchemaExtensions
+	eNetPaymentTerm                                                            smithy.SchemaExtensions
+	eNetPaymentTerm_id                                                         smithy.SchemaExtensions
+	eNetPaymentTerm_type                                                       smithy.SchemaExtensions
+	eNetPaymentTerm_paymentDuePeriod                                           smithy.SchemaExtensions
+	e_NextToken                                                                smithy.SchemaExtensions
+	e_NonEmptyString                                                           smithy.SchemaExtensions
+	e_NonNegativeCount                                                         smithy.SchemaExtensions
+	e_NullableString                                                           smithy.SchemaExtensions
+	eOfferAssociatedEntity                                                     smithy.SchemaExtensions
+	eOfferAssociatedEntity_product                                             smithy.SchemaExtensions
+	eOfferAssociatedEntity_offerSet                                            smithy.SchemaExtensions
+	e_OfferAssociatedEntityList                                                smithy.SchemaExtensions
+	e_OfferAssociatedEntityList_member                                         smithy.SchemaExtensions
+	e_OfferId                                                                  smithy.SchemaExtensions
+	eOfferInformation                                                          smithy.SchemaExtensions
+	eOfferInformation_offerId                                                  smithy.SchemaExtensions
+	eOfferInformation_offerName                                                smithy.SchemaExtensions
+	eOfferInformation_sellerOfRecord                                           smithy.SchemaExtensions
+	eOfferSetAssociatedEntity                                                  smithy.SchemaExtensions
+	eOfferSetAssociatedEntity_product                                          smithy.SchemaExtensions
+	eOfferSetAssociatedEntity_offer                                            smithy.SchemaExtensions
+	e_OfferSetAssociatedEntityList                                             smithy.SchemaExtensions
+	e_OfferSetAssociatedEntityList_member                                      smithy.SchemaExtensions
+	e_OfferSetId                                                               smithy.SchemaExtensions
+	eOfferSetInformation                                                       smithy.SchemaExtensions
+	eOfferSetInformation_offerSetId                                            smithy.SchemaExtensions
+	eOfferSetInformation_sellerOfRecord                                        smithy.SchemaExtensions
+	eOfferTerm                                                                 smithy.SchemaExtensions
+	eOfferTerm_byolPricingTerm                                                 smithy.SchemaExtensions
+	eOfferTerm_configurableUpfrontPricingTerm                                  smithy.SchemaExtensions
+	eOfferTerm_fixedUpfrontPricingTerm                                         smithy.SchemaExtensions
+	eOfferTerm_freeTrialPricingTerm                                            smithy.SchemaExtensions
+	eOfferTerm_legalTerm                                                       smithy.SchemaExtensions
+	eOfferTerm_paymentScheduleTerm                                             smithy.SchemaExtensions
+	eOfferTerm_recurringPaymentTerm                                            smithy.SchemaExtensions
+	eOfferTerm_renewalTerm                                                     smithy.SchemaExtensions
+	eOfferTerm_supportTerm                                                     smithy.SchemaExtensions
+	eOfferTerm_usageBasedPricingTerm                                           smithy.SchemaExtensions
+	eOfferTerm_validityTerm                                                    smithy.SchemaExtensions
+	eOfferTerm_variablePaymentTerm                                             smithy.SchemaExtensions
+	eOfferTerm_netPaymentTerm                                                  smithy.SchemaExtensions
+	e_OfferTermsList                                                           smithy.SchemaExtensions
+	e_OfferTermsList_member                                                    smithy.SchemaExtensions
+	ePaymentScheduleEntry                                                      smithy.SchemaExtensions
+	ePaymentScheduleEntry_chargeDateOffset                                     smithy.SchemaExtensions
+	ePaymentScheduleEntry_chargePercentage                                     smithy.SchemaExtensions
+	ePaymentScheduleEntry_dayOfMonth                                           smithy.SchemaExtensions
+	e_PaymentScheduleEntryList                                                 smithy.SchemaExtensions
+	e_PaymentScheduleEntryList_member                                          smithy.SchemaExtensions
+	ePaymentScheduleTerm                                                       smithy.SchemaExtensions
+	ePaymentScheduleTerm_id                                                    smithy.SchemaExtensions
+	ePaymentScheduleTerm_type                                                  smithy.SchemaExtensions
+	ePaymentScheduleTerm_currencyCode                                          smithy.SchemaExtensions
+	ePaymentScheduleTerm_schedule                                              smithy.SchemaExtensions
+	ePaymentScheduleTermTemplate                                               smithy.SchemaExtensions
+	ePaymentScheduleTermTemplate_schedule                                      smithy.SchemaExtensions
+	ePercentageRange                                                           smithy.SchemaExtensions
+	ePercentageRange_minimumValue                                              smithy.SchemaExtensions
+	ePercentageRange_maximumValue                                              smithy.SchemaExtensions
+	ePercentageRange_defaultValue                                              smithy.SchemaExtensions
+	ePriceIncrease                                                             smithy.SchemaExtensions
+	ePriceIncrease_fixedPercentage                                             smithy.SchemaExtensions
+	ePriceIncrease_percentageRange                                             smithy.SchemaExtensions
+	ePricingModel                                                              smithy.SchemaExtensions
+	ePricingModel_pricingModelType                                             smithy.SchemaExtensions
+	ePricingModel_displayName                                                  smithy.SchemaExtensions
+	e_PricingModelList                                                         smithy.SchemaExtensions
+	e_PricingModelList_member                                                  smithy.SchemaExtensions
+	ePricingModelType                                                          smithy.SchemaExtensions
+	ePricingModelType_USAGE                                                    smithy.SchemaExtensions
+	ePricingModelType_CONTRACT                                                 smithy.SchemaExtensions
+	ePricingModelType_BYOL                                                     smithy.SchemaExtensions
+	ePricingModelType_FREE                                                     smithy.SchemaExtensions
+	ePricingUnit                                                               smithy.SchemaExtensions
+	ePricingUnit_pricingUnitType                                               smithy.SchemaExtensions
+	ePricingUnit_displayName                                                   smithy.SchemaExtensions
+	e_PricingUnitList                                                          smithy.SchemaExtensions
+	e_PricingUnitList_member                                                   smithy.SchemaExtensions
+	ePricingUnitType                                                           smithy.SchemaExtensions
+	ePricingUnitType_USERS                                                     smithy.SchemaExtensions
+	ePricingUnitType_HOSTS                                                     smithy.SchemaExtensions
+	ePricingUnitType_BANDWIDTH                                                 smithy.SchemaExtensions
+	ePricingUnitType_DATA                                                      smithy.SchemaExtensions
+	ePricingUnitType_TIERS                                                     smithy.SchemaExtensions
+	ePricingUnitType_REQUESTS                                                  smithy.SchemaExtensions
+	ePricingUnitType_UNITS                                                     smithy.SchemaExtensions
+	e_ProductId                                                                smithy.SchemaExtensions
+	eProductInformation                                                        smithy.SchemaExtensions
+	eProductInformation_productId                                              smithy.SchemaExtensions
+	eProductInformation_productName                                            smithy.SchemaExtensions
+	eProductInformation_manufacturer                                           smithy.SchemaExtensions
+	eProfessionalServicesFulfillmentOption                                     smithy.SchemaExtensions
+	eProfessionalServicesFulfillmentOption_fulfillmentOptionId                 smithy.SchemaExtensions
+	eProfessionalServicesFulfillmentOption_fulfillmentOptionType               smithy.SchemaExtensions
+	eProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName        smithy.SchemaExtensions
+	ePromotionalEmbeddedImage                                                  smithy.SchemaExtensions
+	ePromotionalEmbeddedImage_title                                            smithy.SchemaExtensions
+	ePromotionalEmbeddedImage_url                                              smithy.SchemaExtensions
+	ePromotionalEmbeddedImage_description                                      smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo                                                  smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo_title                                            smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo_url                                              smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo_preview                                          smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo_thumbnail                                        smithy.SchemaExtensions
+	ePromotionalEmbeddedVideo_description                                      smithy.SchemaExtensions
+	ePromotionalMedia                                                          smithy.SchemaExtensions
+	ePromotionalMedia_embeddedImage                                            smithy.SchemaExtensions
+	ePromotionalMedia_embeddedVideo                                            smithy.SchemaExtensions
+	e_PromotionalMediaList                                                     smithy.SchemaExtensions
+	e_PromotionalMediaList_member                                              smithy.SchemaExtensions
+	ePurchaseOptionAssociatedEntity                                            smithy.SchemaExtensions
+	ePurchaseOptionAssociatedEntity_product                                    smithy.SchemaExtensions
+	ePurchaseOptionAssociatedEntity_offer                                      smithy.SchemaExtensions
+	ePurchaseOptionAssociatedEntity_offerSet                                   smithy.SchemaExtensions
+	e_PurchaseOptionAssociatedEntityList                                       smithy.SchemaExtensions
+	e_PurchaseOptionAssociatedEntityList_member                                smithy.SchemaExtensions
+	ePurchaseOptionBadge                                                       smithy.SchemaExtensions
+	ePurchaseOptionBadge_displayName                                           smithy.SchemaExtensions
+	ePurchaseOptionBadge_badgeType                                             smithy.SchemaExtensions
+	e_PurchaseOptionBadgeList                                                  smithy.SchemaExtensions
+	e_PurchaseOptionBadgeList_member                                           smithy.SchemaExtensions
+	ePurchaseOptionBadgeType                                                   smithy.SchemaExtensions
+	ePurchaseOptionBadgeType_PRIVATE_PRICING                                   smithy.SchemaExtensions
+	ePurchaseOptionBadgeType_FUTURE_DATED                                      smithy.SchemaExtensions
+	ePurchaseOptionBadgeType_REPLACEMENT_OFFER                                 smithy.SchemaExtensions
+	ePurchaseOptionBadgeType_AUTO_RENEW                                        smithy.SchemaExtensions
+	ePurchaseOptionFilter                                                      smithy.SchemaExtensions
+	ePurchaseOptionFilter_filterType                                           smithy.SchemaExtensions
+	ePurchaseOptionFilter_filterValues                                         smithy.SchemaExtensions
+	e_PurchaseOptionFilterList                                                 smithy.SchemaExtensions
+	e_PurchaseOptionFilterList_member                                          smithy.SchemaExtensions
+	ePurchaseOptionFilterType                                                  smithy.SchemaExtensions
+	ePurchaseOptionFilterType_PRODUCT_ID                                       smithy.SchemaExtensions
+	ePurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID                      smithy.SchemaExtensions
+	ePurchaseOptionFilterType_PURCHASE_OPTION_TYPE                             smithy.SchemaExtensions
+	ePurchaseOptionFilterType_VISIBILITY_SCOPE                                 smithy.SchemaExtensions
+	ePurchaseOptionFilterType_AVAILABILITY_STATUS                              smithy.SchemaExtensions
+	e_PurchaseOptionFilterValue                                                smithy.SchemaExtensions
+	e_PurchaseOptionFilterValueList                                            smithy.SchemaExtensions
+	e_PurchaseOptionFilterValueList_member                                     smithy.SchemaExtensions
+	ePurchaseOptionSummary                                                     smithy.SchemaExtensions
+	ePurchaseOptionSummary_purchaseOptionId                                    smithy.SchemaExtensions
+	ePurchaseOptionSummary_catalog                                             smithy.SchemaExtensions
+	ePurchaseOptionSummary_purchaseOptionType                                  smithy.SchemaExtensions
+	ePurchaseOptionSummary_purchaseOptionName                                  smithy.SchemaExtensions
+	ePurchaseOptionSummary_availableFromTime                                   smithy.SchemaExtensions
+	ePurchaseOptionSummary_expirationTime                                      smithy.SchemaExtensions
+	ePurchaseOptionSummary_sellerOfRecord                                      smithy.SchemaExtensions
+	ePurchaseOptionSummary_badges                                              smithy.SchemaExtensions
+	ePurchaseOptionSummary_associatedEntities                                  smithy.SchemaExtensions
+	e_PurchaseOptionSummaryList                                                smithy.SchemaExtensions
+	e_PurchaseOptionSummaryList_member                                         smithy.SchemaExtensions
+	ePurchaseOptionType                                                        smithy.SchemaExtensions
+	ePurchaseOptionType_OFFER                                                  smithy.SchemaExtensions
+	ePurchaseOptionType_OFFERSET                                               smithy.SchemaExtensions
+	eRateCardConstraintType                                                    smithy.SchemaExtensions
+	eRateCardConstraintType_ALLOWED                                            smithy.SchemaExtensions
+	eRateCardConstraintType_DISALLOWED                                         smithy.SchemaExtensions
+	eRateCardItem                                                              smithy.SchemaExtensions
+	eRateCardItem_dimensionKey                                                 smithy.SchemaExtensions
+	eRateCardItem_displayName                                                  smithy.SchemaExtensions
+	eRateCardItem_description                                                  smithy.SchemaExtensions
+	eRateCardItem_dimensionLabels                                              smithy.SchemaExtensions
+	eRateCardItem_unit                                                         smithy.SchemaExtensions
+	eRateCardItem_price                                                        smithy.SchemaExtensions
+	e_RateCardList                                                             smithy.SchemaExtensions
+	e_RateCardList_member                                                      smithy.SchemaExtensions
+	eRecurringPaymentTerm                                                      smithy.SchemaExtensions
+	eRecurringPaymentTerm_id                                                   smithy.SchemaExtensions
+	eRecurringPaymentTerm_type                                                 smithy.SchemaExtensions
+	eRecurringPaymentTerm_currencyCode                                         smithy.SchemaExtensions
+	eRecurringPaymentTerm_billingPeriod                                        smithy.SchemaExtensions
+	eRecurringPaymentTerm_price                                                smithy.SchemaExtensions
+	eRenewalTerm                                                               smithy.SchemaExtensions
+	eRenewalTerm_id                                                            smithy.SchemaExtensions
+	eRenewalTerm_type                                                          smithy.SchemaExtensions
+	eRenewalTerm_maxRenewals                                                   smithy.SchemaExtensions
+	eRenewalTerm_lockoutPeriod                                                 smithy.SchemaExtensions
+	eRenewalTerm_adjustmentDeadline                                            smithy.SchemaExtensions
+	eRenewalTerm_priceIncrease                                                 smithy.SchemaExtensions
+	eRenewalTerm_termTemplates                                                 smithy.SchemaExtensions
+	eResource                                                                  smithy.SchemaExtensions
+	eResource_resourceType                                                     smithy.SchemaExtensions
+	eResource_contentType                                                      smithy.SchemaExtensions
+	eResource_value                                                            smithy.SchemaExtensions
+	eResource_displayName                                                      smithy.SchemaExtensions
+	eResourceContentType                                                       smithy.SchemaExtensions
+	eResourceContentType_EMAIL                                                 smithy.SchemaExtensions
+	eResourceContentType_PHONE_NUMBER                                          smithy.SchemaExtensions
+	eResourceContentType_LINK                                                  smithy.SchemaExtensions
+	eResourceContentType_OTHER                                                 smithy.SchemaExtensions
+	e_ResourceList                                                             smithy.SchemaExtensions
+	e_ResourceList_member                                                      smithy.SchemaExtensions
+	eResourceNotFoundException                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_message                                         smithy.SchemaExtensions
+	eResourceType                                                              smithy.SchemaExtensions
+	eResourceType_MANUFACTURER_SUPPORT                                         smithy.SchemaExtensions
+	eResourceType_MANUFACTURER_INSTRUCTIONS                                    smithy.SchemaExtensions
+	eReviewSourceId                                                            smithy.SchemaExtensions
+	eReviewSourceId_AWS_MARKETPLACE                                            smithy.SchemaExtensions
+	eReviewSourceId_G2                                                         smithy.SchemaExtensions
+	eReviewSourceId_PEERSPOT                                                   smithy.SchemaExtensions
+	eReviewSourceSummary                                                       smithy.SchemaExtensions
+	eReviewSourceSummary_sourceName                                            smithy.SchemaExtensions
+	eReviewSourceSummary_sourceId                                              smithy.SchemaExtensions
+	eReviewSourceSummary_sourceUrl                                             smithy.SchemaExtensions
+	eReviewSourceSummary_averageRating                                         smithy.SchemaExtensions
+	eReviewSourceSummary_totalReviews                                          smithy.SchemaExtensions
+	e_ReviewSourceSummaryList                                                  smithy.SchemaExtensions
+	e_ReviewSourceSummaryList_member                                           smithy.SchemaExtensions
+	eReviewSummary                                                             smithy.SchemaExtensions
+	eReviewSummary_reviewSourceSummaries                                       smithy.SchemaExtensions
+	eSaasFulfillmentOption                                                     smithy.SchemaExtensions
+	eSaasFulfillmentOption_fulfillmentOptionId                                 smithy.SchemaExtensions
+	eSaasFulfillmentOption_fulfillmentOptionType                               smithy.SchemaExtensions
+	eSaasFulfillmentOption_fulfillmentOptionDisplayName                        smithy.SchemaExtensions
+	eSaasFulfillmentOption_fulfillmentUrl                                      smithy.SchemaExtensions
+	eSaasFulfillmentOption_usageInstructions                                   smithy.SchemaExtensions
+	eSaasFulfillmentOption_availableFromTime                                   smithy.SchemaExtensions
+	eSaasFulfillmentOption_launchUrl                                           smithy.SchemaExtensions
+	eSaasFulfillmentOption_quickLaunch                                         smithy.SchemaExtensions
+	eSaasQuickLaunchStatus                                                     smithy.SchemaExtensions
+	eSaasQuickLaunchStatus_ENABLED                                             smithy.SchemaExtensions
+	eSaasQuickLaunchStatus_DISABLED                                            smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption                                       smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionId                   smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionType                 smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName          smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion              smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_releaseNotes                          smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_usageInstructions                     smithy.SchemaExtensions
+	eSageMakerAlgorithmFulfillmentOption_recommendation                        smithy.SchemaExtensions
+	eSageMakerAlgorithmRecommendation                                          smithy.SchemaExtensions
+	eSageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType    smithy.SchemaExtensions
+	eSageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType smithy.SchemaExtensions
+	eSageMakerAlgorithmRecommendation_recommendedTrainingInstanceType          smithy.SchemaExtensions
+	e_SageMakerModelContentTypeList                                            smithy.SchemaExtensions
+	e_SageMakerModelContentTypeList_member                                     smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption                                           smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_fulfillmentOptionId                       smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_fulfillmentOptionType                     smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_fulfillmentOptionDisplayName              smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_fulfillmentOptionVersion                  smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_releaseNotes                              smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_usageInstructions                         smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_recommendation                            smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_supportedContentTypes                     smithy.SchemaExtensions
+	eSageMakerModelFulfillmentOption_supportedResponseMimeTypes                smithy.SchemaExtensions
+	eSageMakerModelRecommendation                                              smithy.SchemaExtensions
+	eSageMakerModelRecommendation_recommendedBatchTransformInstanceType        smithy.SchemaExtensions
+	eSageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType     smithy.SchemaExtensions
+	e_SageMakerModelResponseMimeTypeList                                       smithy.SchemaExtensions
+	e_SageMakerModelResponseMimeTypeList_member                                smithy.SchemaExtensions
+	eScheduleItem                                                              smithy.SchemaExtensions
+	eScheduleItem_chargeDate                                                   smithy.SchemaExtensions
+	eScheduleItem_chargeAmount                                                 smithy.SchemaExtensions
+	e_ScheduleList                                                             smithy.SchemaExtensions
+	e_ScheduleList_member                                                      smithy.SchemaExtensions
+	eSearchFacetType                                                           smithy.SchemaExtensions
+	eSearchFacetType_AVERAGE_CUSTOMER_RATING                                   smithy.SchemaExtensions
+	eSearchFacetType_CATEGORY                                                  smithy.SchemaExtensions
+	eSearchFacetType_PUBLISHER                                                 smithy.SchemaExtensions
+	eSearchFacetType_FULFILLMENT_OPTION_TYPE                                   smithy.SchemaExtensions
+	eSearchFacetType_PRICING_MODEL                                             smithy.SchemaExtensions
+	eSearchFacetType_PRICING_UNIT                                              smithy.SchemaExtensions
+	eSearchFacetType_DEPLOYED_ON_AWS                                           smithy.SchemaExtensions
+	eSearchFacetType_NUMBER_OF_PRODUCTS                                        smithy.SchemaExtensions
+	eSearchFilter                                                              smithy.SchemaExtensions
+	eSearchFilter_filterType                                                   smithy.SchemaExtensions
+	eSearchFilter_filterValues                                                 smithy.SchemaExtensions
+	e_SearchFilterList                                                         smithy.SchemaExtensions
+	e_SearchFilterList_member                                                  smithy.SchemaExtensions
+	eSearchFilterType                                                          smithy.SchemaExtensions
+	eSearchFilterType_MIN_AVERAGE_CUSTOMER_RATING                              smithy.SchemaExtensions
+	eSearchFilterType_MAX_AVERAGE_CUSTOMER_RATING                              smithy.SchemaExtensions
+	eSearchFilterType_CATEGORY                                                 smithy.SchemaExtensions
+	eSearchFilterType_PUBLISHER                                                smithy.SchemaExtensions
+	eSearchFilterType_FULFILLMENT_OPTION_TYPE                                  smithy.SchemaExtensions
+	eSearchFilterType_PRICING_MODEL                                            smithy.SchemaExtensions
+	eSearchFilterType_PRICING_UNIT                                             smithy.SchemaExtensions
+	eSearchFilterType_DEPLOYED_ON_AWS                                          smithy.SchemaExtensions
+	eSearchFilterType_NUMBER_OF_PRODUCTS                                       smithy.SchemaExtensions
+	e_SearchFilterValue                                                        smithy.SchemaExtensions
+	e_SearchFilterValueList                                                    smithy.SchemaExtensions
+	e_SearchFilterValueList_member                                             smithy.SchemaExtensions
+	eSearchListingsSortBy                                                      smithy.SchemaExtensions
+	eSearchListingsSortBy_RELEVANCE                                            smithy.SchemaExtensions
+	eSearchListingsSortBy_AVERAGE_CUSTOMER_RATING                              smithy.SchemaExtensions
+	eSearchListingsSortOrder                                                   smithy.SchemaExtensions
+	eSearchListingsSortOrder_DESCENDING                                        smithy.SchemaExtensions
+	eSearchListingsSortOrder_ASCENDING                                         smithy.SchemaExtensions
+	e_SearchText                                                               smithy.SchemaExtensions
+	eSelector                                                                  smithy.SchemaExtensions
+	eSelector_type                                                             smithy.SchemaExtensions
+	eSelector_value                                                            smithy.SchemaExtensions
+	eSelectorType                                                              smithy.SchemaExtensions
+	eSelectorType_DURATION                                                     smithy.SchemaExtensions
+	eSellerEngagement                                                          smithy.SchemaExtensions
+	eSellerEngagement_engagementType                                           smithy.SchemaExtensions
+	eSellerEngagement_contentType                                              smithy.SchemaExtensions
+	eSellerEngagement_value                                                    smithy.SchemaExtensions
+	eSellerEngagementContentType                                               smithy.SchemaExtensions
+	eSellerEngagementContentType_LINK                                          smithy.SchemaExtensions
+	e_SellerEngagementList                                                     smithy.SchemaExtensions
+	e_SellerEngagementList_member                                              smithy.SchemaExtensions
+	eSellerEngagementType                                                      smithy.SchemaExtensions
+	eSellerEngagementType_REQUEST_FOR_PRIVATE_OFFER                            smithy.SchemaExtensions
+	eSellerEngagementType_REQUEST_FOR_DEMO                                     smithy.SchemaExtensions
+	eSellerInformation                                                         smithy.SchemaExtensions
+	eSellerInformation_sellerProfileId                                         smithy.SchemaExtensions
+	eSellerInformation_displayName                                             smithy.SchemaExtensions
+	e_SellerProfileId                                                          smithy.SchemaExtensions
+	eSupportTerm                                                               smithy.SchemaExtensions
+	eSupportTerm_id                                                            smithy.SchemaExtensions
+	eSupportTerm_type                                                          smithy.SchemaExtensions
+	eSupportTerm_refundPolicy                                                  smithy.SchemaExtensions
+	e_TermId                                                                   smithy.SchemaExtensions
+	eTermTemplate                                                              smithy.SchemaExtensions
+	eTermTemplate_paymentScheduleTermTemplate                                  smithy.SchemaExtensions
+	e_TermTemplateList                                                         smithy.SchemaExtensions
+	e_TermTemplateList_member                                                  smithy.SchemaExtensions
+	eTermType                                                                  smithy.SchemaExtensions
+	eTermType_BYOL_PRICING_TERM                                                smithy.SchemaExtensions
+	eTermType_CONFIGURABLE_UPFRONT_PRICING_TERM                                smithy.SchemaExtensions
+	eTermType_FIXED_UPFRONT_PRICING_TERM                                       smithy.SchemaExtensions
+	eTermType_USAGE_BASED_PRICING_TERM                                         smithy.SchemaExtensions
+	eTermType_FREE_TRIAL_PRICING_TERM                                          smithy.SchemaExtensions
+	eTermType_LEGAL_TERM                                                       smithy.SchemaExtensions
+	eTermType_PAYMENT_SCHEDULE_TERM                                            smithy.SchemaExtensions
+	eTermType_RECURRING_PAYMENT_TERM                                           smithy.SchemaExtensions
+	eTermType_RENEWAL_TERM                                                     smithy.SchemaExtensions
+	eTermType_SUPPORT_TERM                                                     smithy.SchemaExtensions
+	eTermType_VALIDITY_TERM                                                    smithy.SchemaExtensions
+	eTermType_VARIABLE_PAYMENT_TERM                                            smithy.SchemaExtensions
+	eTermType_NET_PAYMENT_TERM                                                 smithy.SchemaExtensions
+	eThrottlingException                                                       smithy.SchemaExtensions
+	eThrottlingException_message                                               smithy.SchemaExtensions
+	e_TypeToFacetMap                                                           smithy.SchemaExtensions
+	e_TypeToFacetMap_key                                                       smithy.SchemaExtensions
+	e_TypeToFacetMap_value                                                     smithy.SchemaExtensions
+	e_URL                                                                      smithy.SchemaExtensions
+	eUsageBasedPricingTerm                                                     smithy.SchemaExtensions
+	eUsageBasedPricingTerm_id                                                  smithy.SchemaExtensions
+	eUsageBasedPricingTerm_type                                                smithy.SchemaExtensions
+	eUsageBasedPricingTerm_currencyCode                                        smithy.SchemaExtensions
+	eUsageBasedPricingTerm_rateCards                                           smithy.SchemaExtensions
+	eUsageBasedRateCardItem                                                    smithy.SchemaExtensions
+	eUsageBasedRateCardItem_rateCard                                           smithy.SchemaExtensions
+	e_UsageBasedRateCardList                                                   smithy.SchemaExtensions
+	e_UsageBasedRateCardList_member                                            smithy.SchemaExtensions
+	eUseCase                                                                   smithy.SchemaExtensions
+	eUseCase_description                                                       smithy.SchemaExtensions
+	eUseCase_displayName                                                       smithy.SchemaExtensions
+	eUseCase_value                                                             smithy.SchemaExtensions
+	eUseCaseEntry                                                              smithy.SchemaExtensions
+	eUseCaseEntry_useCase                                                      smithy.SchemaExtensions
+	e_UseCaseList                                                              smithy.SchemaExtensions
+	e_UseCaseList_member                                                       smithy.SchemaExtensions
+	eValidationException                                                       smithy.SchemaExtensions
+	eValidationException_message                                               smithy.SchemaExtensions
+	eValidationException_reason                                                smithy.SchemaExtensions
+	eValidationExceptionReason                                                 smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PAGINATION_TOKEN                        smithy.SchemaExtensions
+	eValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS                    smithy.SchemaExtensions
+	eValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED                       smithy.SchemaExtensions
+	eValidityTerm                                                              smithy.SchemaExtensions
+	eValidityTerm_id                                                           smithy.SchemaExtensions
+	eValidityTerm_type                                                         smithy.SchemaExtensions
+	eValidityTerm_agreementDuration                                            smithy.SchemaExtensions
+	eValidityTerm_agreementEndDate                                             smithy.SchemaExtensions
+	eValidityTerm_agreementStartDate                                           smithy.SchemaExtensions
+	eVariablePaymentTerm                                                       smithy.SchemaExtensions
+	eVariablePaymentTerm_id                                                    smithy.SchemaExtensions
+	eVariablePaymentTerm_type                                                  smithy.SchemaExtensions
+	eVariablePaymentTerm_currencyCode                                          smithy.SchemaExtensions
+	eVariablePaymentTerm_maxTotalChargeAmount                                  smithy.SchemaExtensions
+	eGetListingInput                                                           smithy.SchemaExtensions
+	eGetListingInput_locale                                                    smithy.SchemaExtensions
+	eGetListingInput_listingId                                                 smithy.SchemaExtensions
+	eGetListingOutput                                                          smithy.SchemaExtensions
+	eGetListingOutput_locale                                                   smithy.SchemaExtensions
+	eGetListingOutput_associatedEntities                                       smithy.SchemaExtensions
+	eGetListingOutput_badges                                                   smithy.SchemaExtensions
+	eGetListingOutput_catalog                                                  smithy.SchemaExtensions
+	eGetListingOutput_categories                                               smithy.SchemaExtensions
+	eGetListingOutput_fulfillmentOptionSummaries                               smithy.SchemaExtensions
+	eGetListingOutput_highlights                                               smithy.SchemaExtensions
+	eGetListingOutput_integrationGuide                                         smithy.SchemaExtensions
+	eGetListingOutput_listingId                                                smithy.SchemaExtensions
+	eGetListingOutput_listingName                                              smithy.SchemaExtensions
+	eGetListingOutput_logoThumbnailUrl                                         smithy.SchemaExtensions
+	eGetListingOutput_longDescription                                          smithy.SchemaExtensions
+	eGetListingOutput_pricingModels                                            smithy.SchemaExtensions
+	eGetListingOutput_pricingUnits                                             smithy.SchemaExtensions
+	eGetListingOutput_promotionalMedia                                         smithy.SchemaExtensions
+	eGetListingOutput_publisher                                                smithy.SchemaExtensions
+	eGetListingOutput_resources                                                smithy.SchemaExtensions
+	eGetListingOutput_reviewSummary                                            smithy.SchemaExtensions
+	eGetListingOutput_sellerEngagements                                        smithy.SchemaExtensions
+	eGetListingOutput_shortDescription                                         smithy.SchemaExtensions
+	eGetListingOutput_useCases                                                 smithy.SchemaExtensions
+	eGetOfferInput                                                             smithy.SchemaExtensions
+	eGetOfferInput_locale                                                      smithy.SchemaExtensions
+	eGetOfferInput_offerId                                                     smithy.SchemaExtensions
+	eGetOfferOutput                                                            smithy.SchemaExtensions
+	eGetOfferOutput_locale                                                     smithy.SchemaExtensions
+	eGetOfferOutput_offerId                                                    smithy.SchemaExtensions
+	eGetOfferOutput_catalog                                                    smithy.SchemaExtensions
+	eGetOfferOutput_offerName                                                  smithy.SchemaExtensions
+	eGetOfferOutput_expirationTime                                             smithy.SchemaExtensions
+	eGetOfferOutput_availableFromTime                                          smithy.SchemaExtensions
+	eGetOfferOutput_sellerOfRecord                                             smithy.SchemaExtensions
+	eGetOfferOutput_associatedEntities                                         smithy.SchemaExtensions
+	eGetOfferOutput_agreementProposalId                                        smithy.SchemaExtensions
+	eGetOfferOutput_replacementAgreementId                                     smithy.SchemaExtensions
+	eGetOfferOutput_pricingModel                                               smithy.SchemaExtensions
+	eGetOfferOutput_badges                                                     smithy.SchemaExtensions
+	eGetOfferSetInput                                                          smithy.SchemaExtensions
+	eGetOfferSetInput_locale                                                   smithy.SchemaExtensions
+	eGetOfferSetInput_offerSetId                                               smithy.SchemaExtensions
+	eGetOfferSetOutput                                                         smithy.SchemaExtensions
+	eGetOfferSetOutput_locale                                                  smithy.SchemaExtensions
+	eGetOfferSetOutput_offerSetId                                              smithy.SchemaExtensions
+	eGetOfferSetOutput_catalog                                                 smithy.SchemaExtensions
+	eGetOfferSetOutput_offerSetName                                            smithy.SchemaExtensions
+	eGetOfferSetOutput_availableFromTime                                       smithy.SchemaExtensions
+	eGetOfferSetOutput_expirationTime                                          smithy.SchemaExtensions
+	eGetOfferSetOutput_buyerNotes                                              smithy.SchemaExtensions
+	eGetOfferSetOutput_sellerOfRecord                                          smithy.SchemaExtensions
+	eGetOfferSetOutput_badges                                                  smithy.SchemaExtensions
+	eGetOfferSetOutput_associatedEntities                                      smithy.SchemaExtensions
+	eGetOfferTermsInput                                                        smithy.SchemaExtensions
+	eGetOfferTermsInput_locale                                                 smithy.SchemaExtensions
+	eGetOfferTermsInput_offerId                                                smithy.SchemaExtensions
+	eGetOfferTermsInput_maxResults                                             smithy.SchemaExtensions
+	eGetOfferTermsInput_nextToken                                              smithy.SchemaExtensions
+	eGetOfferTermsOutput                                                       smithy.SchemaExtensions
+	eGetOfferTermsOutput_locale                                                smithy.SchemaExtensions
+	eGetOfferTermsOutput_offerTerms                                            smithy.SchemaExtensions
+	eGetOfferTermsOutput_nextToken                                             smithy.SchemaExtensions
+	eGetProductInput                                                           smithy.SchemaExtensions
+	eGetProductInput_locale                                                    smithy.SchemaExtensions
+	eGetProductInput_productId                                                 smithy.SchemaExtensions
+	eGetProductOutput                                                          smithy.SchemaExtensions
+	eGetProductOutput_locale                                                   smithy.SchemaExtensions
+	eGetProductOutput_productId                                                smithy.SchemaExtensions
+	eGetProductOutput_catalog                                                  smithy.SchemaExtensions
+	eGetProductOutput_productName                                              smithy.SchemaExtensions
+	eGetProductOutput_manufacturer                                             smithy.SchemaExtensions
+	eGetProductOutput_deployedOnAws                                            smithy.SchemaExtensions
+	eGetProductOutput_shortDescription                                         smithy.SchemaExtensions
+	eGetProductOutput_longDescription                                          smithy.SchemaExtensions
+	eGetProductOutput_logoThumbnailUrl                                         smithy.SchemaExtensions
+	eGetProductOutput_fulfillmentOptionSummaries                               smithy.SchemaExtensions
+	eGetProductOutput_categories                                               smithy.SchemaExtensions
+	eGetProductOutput_highlights                                               smithy.SchemaExtensions
+	eGetProductOutput_promotionalMedia                                         smithy.SchemaExtensions
+	eGetProductOutput_resources                                                smithy.SchemaExtensions
+	eGetProductOutput_sellerEngagements                                        smithy.SchemaExtensions
+	eGetProductOutput_listingId                                                smithy.SchemaExtensions
+	eListFulfillmentOptionsInput                                               smithy.SchemaExtensions
+	eListFulfillmentOptionsInput_locale                                        smithy.SchemaExtensions
+	eListFulfillmentOptionsInput_productId                                     smithy.SchemaExtensions
+	eListFulfillmentOptionsInput_maxResults                                    smithy.SchemaExtensions
+	eListFulfillmentOptionsInput_nextToken                                     smithy.SchemaExtensions
+	eListFulfillmentOptionsOutput                                              smithy.SchemaExtensions
+	eListFulfillmentOptionsOutput_locale                                       smithy.SchemaExtensions
+	eListFulfillmentOptionsOutput_fulfillmentOptions                           smithy.SchemaExtensions
+	eListFulfillmentOptionsOutput_nextToken                                    smithy.SchemaExtensions
+	eListPurchaseOptionsInput                                                  smithy.SchemaExtensions
+	eListPurchaseOptionsInput_locale                                           smithy.SchemaExtensions
+	eListPurchaseOptionsInput_filters                                          smithy.SchemaExtensions
+	eListPurchaseOptionsInput_maxResults                                       smithy.SchemaExtensions
+	eListPurchaseOptionsInput_nextToken                                        smithy.SchemaExtensions
+	eListPurchaseOptionsOutput                                                 smithy.SchemaExtensions
+	eListPurchaseOptionsOutput_purchaseOptions                                 smithy.SchemaExtensions
+	eListPurchaseOptionsOutput_nextToken                                       smithy.SchemaExtensions
+	eSearchFacetsInput                                                         smithy.SchemaExtensions
+	eSearchFacetsInput_locale                                                  smithy.SchemaExtensions
+	eSearchFacetsInput_searchText                                              smithy.SchemaExtensions
+	eSearchFacetsInput_filters                                                 smithy.SchemaExtensions
+	eSearchFacetsInput_facetTypes                                              smithy.SchemaExtensions
+	eSearchFacetsInput_nextToken                                               smithy.SchemaExtensions
+	eSearchFacetsOutput                                                        smithy.SchemaExtensions
+	eSearchFacetsOutput_totalResults                                           smithy.SchemaExtensions
+	eSearchFacetsOutput_listingFacets                                          smithy.SchemaExtensions
+	eSearchFacetsOutput_nextToken                                              smithy.SchemaExtensions
+	eSearchListingsInput                                                       smithy.SchemaExtensions
+	eSearchListingsInput_locale                                                smithy.SchemaExtensions
+	eSearchListingsInput_searchText                                            smithy.SchemaExtensions
+	eSearchListingsInput_filters                                               smithy.SchemaExtensions
+	eSearchListingsInput_maxResults                                            smithy.SchemaExtensions
+	eSearchListingsInput_sortBy                                                smithy.SchemaExtensions
+	eSearchListingsInput_sortOrder                                             smithy.SchemaExtensions
+	eSearchListingsInput_nextToken                                             smithy.SchemaExtensions
+	eSearchListingsOutput                                                      smithy.SchemaExtensions
+	eSearchListingsOutput_totalResults                                         smithy.SchemaExtensions
+	eSearchListingsOutput_listingSummaries                                     smithy.SchemaExtensions
+	eSearchListingsOutput_nextToken                                            smithy.SchemaExtensions
+)
+
+var (
+	iGetListing                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetListing"}
+	iGetOffer                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOffer"}
+	iGetOfferSet                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferSet"}
+	iGetOfferTerms                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferTerms"}
+	iGetProduct                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetProduct"}
+	iListFulfillmentOptions                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListFulfillmentOptions"}
+	iListPurchaseOptions                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListPurchaseOptions"}
+	iSearchFacets                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFacets"}
+	iSearchListings                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchListings"}
+	i_AWSMarketplaceDiscovery                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AWSMarketplaceDiscovery"}
+	iAccessDeniedException                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AccessDeniedException"}
+	i_AgreementResourceId                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AgreementResourceId"}
+	i_AmazonMachineImageCidrIpAddressList      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageCidrIpAddressList"}
+	iAmazonMachineImageEbsVolume               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageEbsVolume"}
+	i_AmazonMachineImageEbsVolumeTypeList      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageEbsVolumeTypeList"}
+	iAmazonMachineImageFulfillmentOption       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageFulfillmentOption"}
+	iAmazonMachineImageOperatingSystem         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageOperatingSystem"}
+	i_AmazonMachineImageOperatingSystemList    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageOperatingSystemList"}
+	iAmazonMachineImageRecommendation          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageRecommendation"}
+	iAmazonMachineImageSecurityGroup           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageSecurityGroup"}
+	i_AmazonMachineImageSecurityGroupList      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AmazonMachineImageSecurityGroupList"}
+	iApiFulfillmentOption                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ApiFulfillmentOption"}
+	iAwsSupportedService                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AwsSupportedService"}
+	i_AwsSupportedServiceList                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "AwsSupportedServiceList"}
+	iBillingPeriodType                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "BillingPeriodType"}
+	i_BoundedString                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "BoundedString"}
+	iByolPricingTerm                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ByolPricingTerm"}
+	i_Catalog                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Catalog"}
+	iCategory                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Category"}
+	i_CategoryList                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "CategoryList"}
+	iCloudFormationFulfillmentOption           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "CloudFormationFulfillmentOption"}
+	iConfigurableUpfrontPricingTerm            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ConfigurableUpfrontPricingTerm"}
+	iConfigurableUpfrontRateCardItem           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ConfigurableUpfrontRateCardItem"}
+	i_ConfigurableUpfrontRateCardList          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ConfigurableUpfrontRateCardList"}
+	iConstraints                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Constraints"}
+	iContainerFulfillmentOption                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ContainerFulfillmentOption"}
+	iContainerOperatingSystem                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ContainerOperatingSystem"}
+	i_ContainerOperatingSystemList             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ContainerOperatingSystemList"}
+	i_CurrencyCode                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "CurrencyCode"}
+	iDataArtifact                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DataArtifact"}
+	i_DataArtifactList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DataArtifactList"}
+	iDataExchangeFulfillmentOption             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DataExchangeFulfillmentOption"}
+	iDeployedOnAwsStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DeployedOnAwsStatus"}
+	iDimensionLabel                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DimensionLabel"}
+	i_DimensionLabelList                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DimensionLabelList"}
+	iDimensionLabelType                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DimensionLabelType"}
+	iDocumentItem                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DocumentItem"}
+	i_DocumentList                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "DocumentList"}
+	iEc2ImageBuilderComponentFulfillmentOption = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Ec2ImageBuilderComponentFulfillmentOption"}
+	iEksAddOnFulfillmentOption                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "EksAddOnFulfillmentOption"}
+	iEksAddOnOperatingSystem                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "EksAddOnOperatingSystem"}
+	i_EksAddOnOperatingSystemList              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "EksAddOnOperatingSystemList"}
+	i_ExceptionMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ExceptionMessage"}
+	i_FacetTypeList                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FacetTypeList"}
+	iFixedPercentage                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FixedPercentage"}
+	iFixedUpfrontPricingTerm                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FixedUpfrontPricingTerm"}
+	iFreeTrialPricingTerm                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FreeTrialPricingTerm"}
+	iFulfillmentOption                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FulfillmentOption"}
+	i_FulfillmentOptionsList                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FulfillmentOptionsList"}
+	iFulfillmentOptionSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FulfillmentOptionSummary"}
+	i_FulfillmentOptionSummaryList             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FulfillmentOptionSummaryList"}
+	iFulfillmentOptionType                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "FulfillmentOptionType"}
+	iGrantItem                                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GrantItem"}
+	i_GrantList                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GrantList"}
+	iHelmFulfillmentOption                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "HelmFulfillmentOption"}
+	iHelmOperatingSystem                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "HelmOperatingSystem"}
+	i_HelmOperatingSystemList                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "HelmOperatingSystemList"}
+	i_HighlightList                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "HighlightList"}
+	iInternalServerException                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "InternalServerException"}
+	iLegalDocumentType                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "LegalDocumentType"}
+	iLegalTerm                                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "LegalTerm"}
+	iListingAssociatedEntity                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingAssociatedEntity"}
+	i_ListingAssociatedEntityList              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingAssociatedEntityList"}
+	iListingBadge                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingBadge"}
+	i_ListingBadgeList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingBadgeList"}
+	iListingBadgeType                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingBadgeType"}
+	iListingFacet                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingFacet"}
+	i_ListingFacetList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingFacetList"}
+	i_ListingId                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingId"}
+	iListingSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingSummary"}
+	iListingSummaryAssociatedEntity            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingSummaryAssociatedEntity"}
+	i_ListingSummaryAssociatedEntityList       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingSummaryAssociatedEntityList"}
+	i_ListingSummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListingSummaryList"}
+	i_Locale                                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Locale"}
+	i_MaxResults                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "MaxResults"}
+	iNetPaymentTerm                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "NetPaymentTerm"}
+	i_NextToken                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "NextToken"}
+	i_NonEmptyString                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "NonEmptyString"}
+	i_NonNegativeCount                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "NonNegativeCount"}
+	i_NullableString                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "NullableString"}
+	iOfferAssociatedEntity                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferAssociatedEntity"}
+	i_OfferAssociatedEntityList                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferAssociatedEntityList"}
+	i_OfferId                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferId"}
+	iOfferInformation                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferInformation"}
+	iOfferSetAssociatedEntity                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferSetAssociatedEntity"}
+	i_OfferSetAssociatedEntityList             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferSetAssociatedEntityList"}
+	i_OfferSetId                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferSetId"}
+	iOfferSetInformation                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferSetInformation"}
+	iOfferTerm                                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferTerm"}
+	i_OfferTermsList                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "OfferTermsList"}
+	iPaymentScheduleEntry                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PaymentScheduleEntry"}
+	i_PaymentScheduleEntryList                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PaymentScheduleEntryList"}
+	iPaymentScheduleTerm                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PaymentScheduleTerm"}
+	iPaymentScheduleTermTemplate               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PaymentScheduleTermTemplate"}
+	iPercentageRange                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PercentageRange"}
+	iPriceIncrease                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PriceIncrease"}
+	iPricingModel                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingModel"}
+	i_PricingModelList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingModelList"}
+	iPricingModelType                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingModelType"}
+	iPricingUnit                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingUnit"}
+	i_PricingUnitList                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingUnitList"}
+	iPricingUnitType                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PricingUnitType"}
+	i_ProductId                                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ProductId"}
+	iProductInformation                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ProductInformation"}
+	iProfessionalServicesFulfillmentOption     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ProfessionalServicesFulfillmentOption"}
+	iPromotionalEmbeddedImage                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PromotionalEmbeddedImage"}
+	iPromotionalEmbeddedVideo                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PromotionalEmbeddedVideo"}
+	iPromotionalMedia                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PromotionalMedia"}
+	i_PromotionalMediaList                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PromotionalMediaList"}
+	iPurchaseOptionAssociatedEntity            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionAssociatedEntity"}
+	i_PurchaseOptionAssociatedEntityList       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionAssociatedEntityList"}
+	iPurchaseOptionBadge                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionBadge"}
+	i_PurchaseOptionBadgeList                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionBadgeList"}
+	iPurchaseOptionBadgeType                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionBadgeType"}
+	iPurchaseOptionFilter                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionFilter"}
+	i_PurchaseOptionFilterList                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionFilterList"}
+	iPurchaseOptionFilterType                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionFilterType"}
+	i_PurchaseOptionFilterValue                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionFilterValue"}
+	i_PurchaseOptionFilterValueList            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionFilterValueList"}
+	iPurchaseOptionSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionSummary"}
+	i_PurchaseOptionSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionSummaryList"}
+	iPurchaseOptionType                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "PurchaseOptionType"}
+	iRateCardConstraintType                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "RateCardConstraintType"}
+	iRateCardItem                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "RateCardItem"}
+	i_RateCardList                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "RateCardList"}
+	iRecurringPaymentTerm                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "RecurringPaymentTerm"}
+	iRenewalTerm                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "RenewalTerm"}
+	iResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Resource"}
+	iResourceContentType                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ResourceContentType"}
+	i_ResourceList                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ResourceList"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ResourceNotFoundException"}
+	iResourceType                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ResourceType"}
+	iReviewSourceId                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ReviewSourceId"}
+	iReviewSourceSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ReviewSourceSummary"}
+	i_ReviewSourceSummaryList                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ReviewSourceSummaryList"}
+	iReviewSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ReviewSummary"}
+	iSaasFulfillmentOption                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SaasFulfillmentOption"}
+	iSaasQuickLaunchStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SaasQuickLaunchStatus"}
+	iSageMakerAlgorithmFulfillmentOption       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerAlgorithmFulfillmentOption"}
+	iSageMakerAlgorithmRecommendation          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerAlgorithmRecommendation"}
+	i_SageMakerModelContentTypeList            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerModelContentTypeList"}
+	iSageMakerModelFulfillmentOption           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerModelFulfillmentOption"}
+	iSageMakerModelRecommendation              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerModelRecommendation"}
+	i_SageMakerModelResponseMimeTypeList       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SageMakerModelResponseMimeTypeList"}
+	iScheduleItem                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ScheduleItem"}
+	i_ScheduleList                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ScheduleList"}
+	iSearchFacetType                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFacetType"}
+	iSearchFilter                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFilter"}
+	i_SearchFilterList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFilterList"}
+	iSearchFilterType                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFilterType"}
+	i_SearchFilterValue                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFilterValue"}
+	i_SearchFilterValueList                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFilterValueList"}
+	iSearchListingsSortBy                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchListingsSortBy"}
+	iSearchListingsSortOrder                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchListingsSortOrder"}
+	i_SearchText                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchText"}
+	iSelector                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "Selector"}
+	iSelectorType                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SelectorType"}
+	iSellerEngagement                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerEngagement"}
+	iSellerEngagementContentType               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerEngagementContentType"}
+	i_SellerEngagementList                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerEngagementList"}
+	iSellerEngagementType                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerEngagementType"}
+	iSellerInformation                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerInformation"}
+	i_SellerProfileId                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SellerProfileId"}
+	iSupportTerm                               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SupportTerm"}
+	i_TermId                                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "TermId"}
+	iTermTemplate                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "TermTemplate"}
+	i_TermTemplateList                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "TermTemplateList"}
+	iTermType                                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "TermType"}
+	iThrottlingException                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ThrottlingException"}
+	i_TypeToFacetMap                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "TypeToFacetMap"}
+	i_URL                                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "URL"}
+	iUsageBasedPricingTerm                     = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UsageBasedPricingTerm"}
+	iUsageBasedRateCardItem                    = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UsageBasedRateCardItem"}
+	i_UsageBasedRateCardList                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UsageBasedRateCardList"}
+	iUseCase                                   = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UseCase"}
+	iUseCaseEntry                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UseCaseEntry"}
+	i_UseCaseList                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "UseCaseList"}
+	iValidationException                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ValidationException"}
+	iValidationExceptionReason                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ValidationExceptionReason"}
+	iValidityTerm                              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ValidityTerm"}
+	iVariablePaymentTerm                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "VariablePaymentTerm"}
+	iGetListingInput                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetListingInput"}
+	iGetListingOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetListingOutput"}
+	iGetOfferInput                             = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferInput"}
+	iGetOfferOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferOutput"}
+	iGetOfferSetInput                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferSetInput"}
+	iGetOfferSetOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferSetOutput"}
+	iGetOfferTermsInput                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferTermsInput"}
+	iGetOfferTermsOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetOfferTermsOutput"}
+	iGetProductInput                           = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetProductInput"}
+	iGetProductOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "GetProductOutput"}
+	iListFulfillmentOptionsInput               = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListFulfillmentOptionsInput"}
+	iListFulfillmentOptionsOutput              = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListFulfillmentOptionsOutput"}
+	iListPurchaseOptionsInput                  = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListPurchaseOptionsInput"}
+	iListPurchaseOptionsOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "ListPurchaseOptionsOutput"}
+	iSearchFacetsInput                         = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFacetsInput"}
+	iSearchFacetsOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchFacetsOutput"}
+	iSearchListingsInput                       = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchListingsInput"}
+	iSearchListingsOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.marketplacediscovery", Name: "SearchListingsOutput"}
+	pString                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/getListing",
-	Code: 200})
-
-var GetOffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOffer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/getOffer",
-	Code: 200})
-
-var GetOfferSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/getOfferSet",
-	Code: 200})
-
-var GetOfferTerms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferTerms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/getOfferTerms",
-	Code: 200})
-
-var GetProduct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetProduct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/getProduct",
-	Code: 200})
-
-var ListFulfillmentOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListFulfillmentOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/listFulfillmentOptions",
-	Code: 200})
-
-var ListPurchaseOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListPurchaseOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/listPurchaseOptions",
-	Code: 200})
-
-var SearchFacets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFacets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/searchFacets",
-	Code: 200})
-
-var SearchListings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchListings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-02-05/searchListings",
-	Code: 200})
-
-var _AWSMarketplaceDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AWSMarketplaceDiscovery",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMarketplaceDiscovery = smithy.NewServiceSchema(_AWSMarketplaceDiscovery, "2026-02-05")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AgreementResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AgreementResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonMachineImageCidrIpAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageCidrIpAddressList",
-}, smithy.ShapeTypeList, 1)
-var _AmazonMachineImageCidrIpAddressList_member *smithy.Schema
-
-var AmazonMachineImageEbsVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageEbsVolume",
-}, smithy.ShapeTypeStructure, 2)
-var AmazonMachineImageEbsVolume_volumeTypes *smithy.Schema
-
-var AmazonMachineImageEbsVolume_iops *smithy.Schema
-
-var _AmazonMachineImageEbsVolumeTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageEbsVolumeTypeList",
-}, smithy.ShapeTypeList, 1)
-var _AmazonMachineImageEbsVolumeTypeList_member *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageFulfillmentOption",
-}, smithy.ShapeTypeStructure, 15)
-var AmazonMachineImageFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_operatingSystems *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_recommendation *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_releaseNotes *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_usageInstructions *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_availableFromTime *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_accessUrlTemplate *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_architecture *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_amiAlias *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_ebsVolume *smithy.Schema
-
-var AmazonMachineImageFulfillmentOption_shortDescription *smithy.Schema
-
-var AmazonMachineImageOperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageOperatingSystem",
-}, smithy.ShapeTypeStructure, 3)
-var AmazonMachineImageOperatingSystem_operatingSystemFamilyName *smithy.Schema
-
-var AmazonMachineImageOperatingSystem_operatingSystemName *smithy.Schema
-
-var AmazonMachineImageOperatingSystem_operatingSystemVersion *smithy.Schema
-
-var _AmazonMachineImageOperatingSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageOperatingSystemList",
-}, smithy.ShapeTypeList, 1)
-var _AmazonMachineImageOperatingSystemList_member *smithy.Schema
-
-var AmazonMachineImageRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageRecommendation",
-}, smithy.ShapeTypeStructure, 2)
-var AmazonMachineImageRecommendation_instanceType *smithy.Schema
-
-var AmazonMachineImageRecommendation_securityGroups *smithy.Schema
-
-var AmazonMachineImageSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageSecurityGroup",
-}, smithy.ShapeTypeStructure, 4)
-var AmazonMachineImageSecurityGroup_protocol *smithy.Schema
-
-var AmazonMachineImageSecurityGroup_fromPort *smithy.Schema
-
-var AmazonMachineImageSecurityGroup_toPort *smithy.Schema
-
-var AmazonMachineImageSecurityGroup_cidrIpAddresses *smithy.Schema
-
-var _AmazonMachineImageSecurityGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AmazonMachineImageSecurityGroupList",
-}, smithy.ShapeTypeList, 1)
-var _AmazonMachineImageSecurityGroupList_member *smithy.Schema
-
-var ApiFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ApiFulfillmentOption",
-}, smithy.ShapeTypeStructure, 5)
-var ApiFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var ApiFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var ApiFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var ApiFulfillmentOption_usageInstructions *smithy.Schema
-
-var ApiFulfillmentOption_awsSupportedServices *smithy.Schema
-
-var AwsSupportedService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AwsSupportedService",
-}, smithy.ShapeTypeStructure, 3)
-var AwsSupportedService_supportedServiceType *smithy.Schema
-
-var AwsSupportedService_displayName *smithy.Schema
-
-var AwsSupportedService_description *smithy.Schema
-
-var _AwsSupportedServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "AwsSupportedServiceList",
-}, smithy.ShapeTypeList, 1)
-var _AwsSupportedServiceList_member *smithy.Schema
-
-var BillingPeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "BillingPeriodType",
-}, smithy.ShapeTypeEnum, 1)
-var BillingPeriodType_MONTHLY *smithy.Schema
-
-var _BoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "BoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var ByolPricingTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ByolPricingTerm",
-}, smithy.ShapeTypeStructure, 2)
-var ByolPricingTerm_id *smithy.Schema
-
-var ByolPricingTerm_type *smithy.Schema
-
-var _Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Catalog",
-}, smithy.ShapeTypeString, 0)
-
-var Category = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Category",
-}, smithy.ShapeTypeStructure, 2)
-var Category_categoryId *smithy.Schema
-
-var Category_displayName *smithy.Schema
-
-var _CategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "CategoryList",
-}, smithy.ShapeTypeList, 1)
-var _CategoryList_member *smithy.Schema
-
-var CloudFormationFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "CloudFormationFulfillmentOption",
-}, smithy.ShapeTypeStructure, 10)
-var CloudFormationFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var CloudFormationFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var CloudFormationFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var CloudFormationFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var CloudFormationFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var CloudFormationFulfillmentOption_releaseNotes *smithy.Schema
-
-var CloudFormationFulfillmentOption_usageInstructions *smithy.Schema
-
-var CloudFormationFulfillmentOption_availableFromTime *smithy.Schema
-
-var CloudFormationFulfillmentOption_shortDescription *smithy.Schema
-
-var CloudFormationFulfillmentOption_longDescription *smithy.Schema
-
-var ConfigurableUpfrontPricingTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ConfigurableUpfrontPricingTerm",
-}, smithy.ShapeTypeStructure, 4)
-var ConfigurableUpfrontPricingTerm_id *smithy.Schema
-
-var ConfigurableUpfrontPricingTerm_type *smithy.Schema
-
-var ConfigurableUpfrontPricingTerm_currencyCode *smithy.Schema
-
-var ConfigurableUpfrontPricingTerm_rateCards *smithy.Schema
-
-var ConfigurableUpfrontRateCardItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ConfigurableUpfrontRateCardItem",
-}, smithy.ShapeTypeStructure, 3)
-var ConfigurableUpfrontRateCardItem_selector *smithy.Schema
-
-var ConfigurableUpfrontRateCardItem_constraints *smithy.Schema
-
-var ConfigurableUpfrontRateCardItem_rateCard *smithy.Schema
-
-var _ConfigurableUpfrontRateCardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ConfigurableUpfrontRateCardList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurableUpfrontRateCardList_member *smithy.Schema
-
-var Constraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Constraints",
-}, smithy.ShapeTypeStructure, 2)
-var Constraints_multipleDimensionSelection *smithy.Schema
-
-var Constraints_quantityConfiguration *smithy.Schema
-
-var ContainerFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ContainerFulfillmentOption",
-}, smithy.ShapeTypeStructure, 9)
-var ContainerFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var ContainerFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var ContainerFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var ContainerFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var ContainerFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var ContainerFulfillmentOption_operatingSystems *smithy.Schema
-
-var ContainerFulfillmentOption_awsSupportedServices *smithy.Schema
-
-var ContainerFulfillmentOption_releaseNotes *smithy.Schema
-
-var ContainerFulfillmentOption_usageInstructions *smithy.Schema
-
-var ContainerOperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ContainerOperatingSystem",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerOperatingSystem_operatingSystemFamilyName *smithy.Schema
-
-var ContainerOperatingSystem_operatingSystemName *smithy.Schema
-
-var _ContainerOperatingSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ContainerOperatingSystemList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerOperatingSystemList_member *smithy.Schema
-
-var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeString, 0)
-
-var DataArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DataArtifact",
-}, smithy.ShapeTypeStructure, 4)
-var DataArtifact_description *smithy.Schema
-
-var DataArtifact_resourceArn *smithy.Schema
-
-var DataArtifact_resourceType *smithy.Schema
-
-var DataArtifact_dataClassification *smithy.Schema
-
-var _DataArtifactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DataArtifactList",
-}, smithy.ShapeTypeList, 1)
-var _DataArtifactList_member *smithy.Schema
-
-var DataExchangeFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DataExchangeFulfillmentOption",
-}, smithy.ShapeTypeStructure, 4)
-var DataExchangeFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var DataExchangeFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var DataExchangeFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var DataExchangeFulfillmentOption_dataArtifacts *smithy.Schema
-
-var DeployedOnAwsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DeployedOnAwsStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DeployedOnAwsStatus_DEPLOYED *smithy.Schema
-
-var DeployedOnAwsStatus_NOT_DEPLOYED *smithy.Schema
-
-var DeployedOnAwsStatus_NOT_APPLICABLE *smithy.Schema
-
-var DimensionLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DimensionLabel",
-}, smithy.ShapeTypeStructure, 3)
-var DimensionLabel_labelType *smithy.Schema
-
-var DimensionLabel_labelValue *smithy.Schema
-
-var DimensionLabel_displayName *smithy.Schema
-
-var _DimensionLabelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DimensionLabelList",
-}, smithy.ShapeTypeList, 1)
-var _DimensionLabelList_member *smithy.Schema
-
-var DimensionLabelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DimensionLabelType",
-}, smithy.ShapeTypeEnum, 2)
-var DimensionLabelType_REGION *smithy.Schema
-
-var DimensionLabelType_SAGEMAKER_OPTION *smithy.Schema
-
-var DocumentItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DocumentItem",
-}, smithy.ShapeTypeStructure, 3)
-var DocumentItem_type *smithy.Schema
-
-var DocumentItem_url *smithy.Schema
-
-var DocumentItem_version *smithy.Schema
-
-var _DocumentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "DocumentList",
-}, smithy.ShapeTypeList, 1)
-var _DocumentList_member *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Ec2ImageBuilderComponentFulfillmentOption",
-}, smithy.ShapeTypeStructure, 9)
-var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_operatingSystems *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_releaseNotes *smithy.Schema
-
-var Ec2ImageBuilderComponentFulfillmentOption_usageInstructions *smithy.Schema
-
-var EksAddOnFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "EksAddOnFulfillmentOption",
-}, smithy.ShapeTypeStructure, 9)
-var EksAddOnFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var EksAddOnFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var EksAddOnFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var EksAddOnFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var EksAddOnFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var EksAddOnFulfillmentOption_operatingSystems *smithy.Schema
-
-var EksAddOnFulfillmentOption_releaseNotes *smithy.Schema
-
-var EksAddOnFulfillmentOption_usageInstructions *smithy.Schema
-
-var EksAddOnFulfillmentOption_awsSupportedServices *smithy.Schema
-
-var EksAddOnOperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "EksAddOnOperatingSystem",
-}, smithy.ShapeTypeStructure, 2)
-var EksAddOnOperatingSystem_operatingSystemFamilyName *smithy.Schema
-
-var EksAddOnOperatingSystem_operatingSystemName *smithy.Schema
-
-var _EksAddOnOperatingSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "EksAddOnOperatingSystemList",
-}, smithy.ShapeTypeList, 1)
-var _EksAddOnOperatingSystemList_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FacetTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FacetTypeList",
-}, smithy.ShapeTypeList, 1)
-var _FacetTypeList_member *smithy.Schema
-
-var FixedPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FixedPercentage",
-}, smithy.ShapeTypeStructure, 1)
-var FixedPercentage_percentageValue *smithy.Schema
-
-var FixedUpfrontPricingTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FixedUpfrontPricingTerm",
-}, smithy.ShapeTypeStructure, 6)
-var FixedUpfrontPricingTerm_id *smithy.Schema
-
-var FixedUpfrontPricingTerm_type *smithy.Schema
-
-var FixedUpfrontPricingTerm_currencyCode *smithy.Schema
-
-var FixedUpfrontPricingTerm_duration *smithy.Schema
-
-var FixedUpfrontPricingTerm_price *smithy.Schema
-
-var FixedUpfrontPricingTerm_grants *smithy.Schema
-
-var FreeTrialPricingTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FreeTrialPricingTerm",
-}, smithy.ShapeTypeStructure, 4)
-var FreeTrialPricingTerm_id *smithy.Schema
-
-var FreeTrialPricingTerm_type *smithy.Schema
-
-var FreeTrialPricingTerm_duration *smithy.Schema
-
-var FreeTrialPricingTerm_grants *smithy.Schema
-
-var FulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FulfillmentOption",
-}, smithy.ShapeTypeUnion, 12)
-var FulfillmentOption_amazonMachineImageFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_apiFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_cloudFormationFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_containerFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_helmFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_eksAddOnFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_ec2ImageBuilderComponentFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_dataExchangeFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_professionalServicesFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_saasFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_sageMakerAlgorithmFulfillmentOption *smithy.Schema
-
-var FulfillmentOption_sageMakerModelFulfillmentOption *smithy.Schema
-
-var _FulfillmentOptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FulfillmentOptionsList",
-}, smithy.ShapeTypeList, 1)
-var _FulfillmentOptionsList_member *smithy.Schema
-
-var FulfillmentOptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FulfillmentOptionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var FulfillmentOptionSummary_fulfillmentOptionType *smithy.Schema
-
-var FulfillmentOptionSummary_displayName *smithy.Schema
-
-var _FulfillmentOptionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FulfillmentOptionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FulfillmentOptionSummaryList_member *smithy.Schema
-
-var FulfillmentOptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "FulfillmentOptionType",
-}, smithy.ShapeTypeEnum, 12)
-var FulfillmentOptionType_AMAZON_MACHINE_IMAGE *smithy.Schema
-
-var FulfillmentOptionType_API *smithy.Schema
-
-var FulfillmentOptionType_CLOUDFORMATION_TEMPLATE *smithy.Schema
-
-var FulfillmentOptionType_CONTAINER *smithy.Schema
-
-var FulfillmentOptionType_HELM *smithy.Schema
-
-var FulfillmentOptionType_EKS_ADD_ON *smithy.Schema
-
-var FulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT *smithy.Schema
-
-var FulfillmentOptionType_DATA_EXCHANGE *smithy.Schema
-
-var FulfillmentOptionType_PROFESSIONAL_SERVICES *smithy.Schema
-
-var FulfillmentOptionType_SAAS *smithy.Schema
-
-var FulfillmentOptionType_SAGEMAKER_ALGORITHM *smithy.Schema
-
-var FulfillmentOptionType_SAGEMAKER_MODEL *smithy.Schema
-
-var GrantItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GrantItem",
-}, smithy.ShapeTypeStructure, 6)
-var GrantItem_dimensionKey *smithy.Schema
-
-var GrantItem_displayName *smithy.Schema
-
-var GrantItem_description *smithy.Schema
-
-var GrantItem_dimensionLabels *smithy.Schema
-
-var GrantItem_unit *smithy.Schema
-
-var GrantItem_maxQuantity *smithy.Schema
-
-var _GrantList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GrantList",
-}, smithy.ShapeTypeList, 1)
-var _GrantList_member *smithy.Schema
-
-var HelmFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "HelmFulfillmentOption",
-}, smithy.ShapeTypeStructure, 9)
-var HelmFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var HelmFulfillmentOption_fulfillmentOptionName *smithy.Schema
-
-var HelmFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var HelmFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var HelmFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var HelmFulfillmentOption_operatingSystems *smithy.Schema
-
-var HelmFulfillmentOption_releaseNotes *smithy.Schema
-
-var HelmFulfillmentOption_awsSupportedServices *smithy.Schema
-
-var HelmFulfillmentOption_usageInstructions *smithy.Schema
-
-var HelmOperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "HelmOperatingSystem",
-}, smithy.ShapeTypeStructure, 2)
-var HelmOperatingSystem_operatingSystemFamilyName *smithy.Schema
-
-var HelmOperatingSystem_operatingSystemName *smithy.Schema
-
-var _HelmOperatingSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "HelmOperatingSystemList",
-}, smithy.ShapeTypeList, 1)
-var _HelmOperatingSystemList_member *smithy.Schema
-
-var _HighlightList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "HighlightList",
-}, smithy.ShapeTypeList, 1)
-var _HighlightList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LegalDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "LegalDocumentType",
-}, smithy.ShapeTypeEnum, 5)
-var LegalDocumentType_CUSTOM_EULA *smithy.Schema
-
-var LegalDocumentType_CUSTOM_DSA *smithy.Schema
-
-var LegalDocumentType_ENTERPRISE_EULA *smithy.Schema
-
-var LegalDocumentType_STANDARD_EULA *smithy.Schema
-
-var LegalDocumentType_STANDARD_DSA *smithy.Schema
-
-var LegalTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "LegalTerm",
-}, smithy.ShapeTypeStructure, 3)
-var LegalTerm_id *smithy.Schema
-
-var LegalTerm_type *smithy.Schema
-
-var LegalTerm_documents *smithy.Schema
-
-var ListingAssociatedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingAssociatedEntity",
-}, smithy.ShapeTypeStructure, 2)
-var ListingAssociatedEntity_product *smithy.Schema
-
-var ListingAssociatedEntity_offer *smithy.Schema
-
-var _ListingAssociatedEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingAssociatedEntityList",
-}, smithy.ShapeTypeList, 1)
-var _ListingAssociatedEntityList_member *smithy.Schema
-
-var ListingBadge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingBadge",
-}, smithy.ShapeTypeStructure, 2)
-var ListingBadge_displayName *smithy.Schema
-
-var ListingBadge_badgeType *smithy.Schema
-
-var _ListingBadgeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingBadgeList",
-}, smithy.ShapeTypeList, 1)
-var _ListingBadgeList_member *smithy.Schema
-
-var ListingBadgeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingBadgeType",
-}, smithy.ShapeTypeEnum, 5)
-var ListingBadgeType_AWS_FREE_TIER *smithy.Schema
-
-var ListingBadgeType_FREE_TRIAL *smithy.Schema
-
-var ListingBadgeType_DEPLOYED_ON_AWS *smithy.Schema
-
-var ListingBadgeType_QUICK_LAUNCH *smithy.Schema
-
-var ListingBadgeType_MULTI_PRODUCT *smithy.Schema
-
-var ListingFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingFacet",
-}, smithy.ShapeTypeStructure, 4)
-var ListingFacet_value *smithy.Schema
-
-var ListingFacet_displayName *smithy.Schema
-
-var ListingFacet_parent *smithy.Schema
-
-var ListingFacet_count *smithy.Schema
-
-var _ListingFacetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingFacetList",
-}, smithy.ShapeTypeList, 1)
-var _ListingFacetList_member *smithy.Schema
-
-var _ListingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingId",
-}, smithy.ShapeTypeString, 0)
-
-var ListingSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingSummary",
-}, smithy.ShapeTypeStructure, 13)
-var ListingSummary_listingId *smithy.Schema
-
-var ListingSummary_listingName *smithy.Schema
-
-var ListingSummary_publisher *smithy.Schema
-
-var ListingSummary_fulfillmentOptionSummaries *smithy.Schema
-
-var ListingSummary_catalog *smithy.Schema
-
-var ListingSummary_shortDescription *smithy.Schema
-
-var ListingSummary_logoThumbnailUrl *smithy.Schema
-
-var ListingSummary_categories *smithy.Schema
-
-var ListingSummary_badges *smithy.Schema
-
-var ListingSummary_reviewSummary *smithy.Schema
-
-var ListingSummary_pricingModels *smithy.Schema
-
-var ListingSummary_pricingUnits *smithy.Schema
-
-var ListingSummary_associatedEntities *smithy.Schema
-
-var ListingSummaryAssociatedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingSummaryAssociatedEntity",
-}, smithy.ShapeTypeStructure, 1)
-var ListingSummaryAssociatedEntity_product *smithy.Schema
-
-var _ListingSummaryAssociatedEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingSummaryAssociatedEntityList",
-}, smithy.ShapeTypeList, 1)
-var _ListingSummaryAssociatedEntityList_member *smithy.Schema
-
-var _ListingSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListingSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ListingSummaryList_member *smithy.Schema
-
-var _Locale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Locale",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetPaymentTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "NetPaymentTerm",
-}, smithy.ShapeTypeStructure, 3)
-var NetPaymentTerm_id *smithy.Schema
-
-var NetPaymentTerm_type *smithy.Schema
-
-var NetPaymentTerm_paymentDuePeriod *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonNegativeCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "NonNegativeCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _NullableString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "NullableString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferAssociatedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferAssociatedEntity",
-}, smithy.ShapeTypeStructure, 2)
-var OfferAssociatedEntity_product *smithy.Schema
-
-var OfferAssociatedEntity_offerSet *smithy.Schema
-
-var _OfferAssociatedEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferAssociatedEntityList",
-}, smithy.ShapeTypeList, 1)
-var _OfferAssociatedEntityList_member *smithy.Schema
-
-var _OfferId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferId",
-}, smithy.ShapeTypeString, 0)
-
-var OfferInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferInformation",
-}, smithy.ShapeTypeStructure, 3)
-var OfferInformation_offerId *smithy.Schema
-
-var OfferInformation_offerName *smithy.Schema
-
-var OfferInformation_sellerOfRecord *smithy.Schema
-
-var OfferSetAssociatedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferSetAssociatedEntity",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetAssociatedEntity_product *smithy.Schema
-
-var OfferSetAssociatedEntity_offer *smithy.Schema
-
-var _OfferSetAssociatedEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferSetAssociatedEntityList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetAssociatedEntityList_member *smithy.Schema
-
-var _OfferSetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferSetId",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferSetInformation",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetInformation_offerSetId *smithy.Schema
-
-var OfferSetInformation_sellerOfRecord *smithy.Schema
-
-var OfferTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferTerm",
-}, smithy.ShapeTypeUnion, 13)
-var OfferTerm_byolPricingTerm *smithy.Schema
-
-var OfferTerm_configurableUpfrontPricingTerm *smithy.Schema
-
-var OfferTerm_fixedUpfrontPricingTerm *smithy.Schema
-
-var OfferTerm_freeTrialPricingTerm *smithy.Schema
-
-var OfferTerm_legalTerm *smithy.Schema
-
-var OfferTerm_paymentScheduleTerm *smithy.Schema
-
-var OfferTerm_recurringPaymentTerm *smithy.Schema
-
-var OfferTerm_renewalTerm *smithy.Schema
-
-var OfferTerm_supportTerm *smithy.Schema
-
-var OfferTerm_usageBasedPricingTerm *smithy.Schema
-
-var OfferTerm_validityTerm *smithy.Schema
-
-var OfferTerm_variablePaymentTerm *smithy.Schema
-
-var OfferTerm_netPaymentTerm *smithy.Schema
-
-var _OfferTermsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "OfferTermsList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTermsList_member *smithy.Schema
-
-var PaymentScheduleEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PaymentScheduleEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PaymentScheduleEntry_chargeDateOffset *smithy.Schema
-
-var PaymentScheduleEntry_chargePercentage *smithy.Schema
-
-var PaymentScheduleEntry_dayOfMonth *smithy.Schema
-
-var _PaymentScheduleEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PaymentScheduleEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PaymentScheduleEntryList_member *smithy.Schema
-
-var PaymentScheduleTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PaymentScheduleTerm",
-}, smithy.ShapeTypeStructure, 4)
-var PaymentScheduleTerm_id *smithy.Schema
-
-var PaymentScheduleTerm_type *smithy.Schema
-
-var PaymentScheduleTerm_currencyCode *smithy.Schema
-
-var PaymentScheduleTerm_schedule *smithy.Schema
-
-var PaymentScheduleTermTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PaymentScheduleTermTemplate",
-}, smithy.ShapeTypeStructure, 1)
-var PaymentScheduleTermTemplate_schedule *smithy.Schema
-
-var PercentageRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PercentageRange",
-}, smithy.ShapeTypeStructure, 3)
-var PercentageRange_minimumValue *smithy.Schema
-
-var PercentageRange_maximumValue *smithy.Schema
-
-var PercentageRange_defaultValue *smithy.Schema
-
-var PriceIncrease = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PriceIncrease",
-}, smithy.ShapeTypeUnion, 2)
-var PriceIncrease_fixedPercentage *smithy.Schema
-
-var PriceIncrease_percentageRange *smithy.Schema
-
-var PricingModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingModel",
-}, smithy.ShapeTypeStructure, 2)
-var PricingModel_pricingModelType *smithy.Schema
-
-var PricingModel_displayName *smithy.Schema
-
-var _PricingModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingModelList",
-}, smithy.ShapeTypeList, 1)
-var _PricingModelList_member *smithy.Schema
-
-var PricingModelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingModelType",
-}, smithy.ShapeTypeEnum, 4)
-var PricingModelType_USAGE *smithy.Schema
-
-var PricingModelType_CONTRACT *smithy.Schema
-
-var PricingModelType_BYOL *smithy.Schema
-
-var PricingModelType_FREE *smithy.Schema
-
-var PricingUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingUnit",
-}, smithy.ShapeTypeStructure, 2)
-var PricingUnit_pricingUnitType *smithy.Schema
-
-var PricingUnit_displayName *smithy.Schema
-
-var _PricingUnitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingUnitList",
-}, smithy.ShapeTypeList, 1)
-var _PricingUnitList_member *smithy.Schema
-
-var PricingUnitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PricingUnitType",
-}, smithy.ShapeTypeEnum, 7)
-var PricingUnitType_USERS *smithy.Schema
-
-var PricingUnitType_HOSTS *smithy.Schema
-
-var PricingUnitType_BANDWIDTH *smithy.Schema
-
-var PricingUnitType_DATA *smithy.Schema
-
-var PricingUnitType_TIERS *smithy.Schema
-
-var PricingUnitType_REQUESTS *smithy.Schema
-
-var PricingUnitType_UNITS *smithy.Schema
-
-var _ProductId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ProductId",
-}, smithy.ShapeTypeString, 0)
-
-var ProductInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ProductInformation",
-}, smithy.ShapeTypeStructure, 3)
-var ProductInformation_productId *smithy.Schema
-
-var ProductInformation_productName *smithy.Schema
-
-var ProductInformation_manufacturer *smithy.Schema
-
-var ProfessionalServicesFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ProfessionalServicesFulfillmentOption",
-}, smithy.ShapeTypeStructure, 3)
-var ProfessionalServicesFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var ProfessionalServicesFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var PromotionalEmbeddedImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PromotionalEmbeddedImage",
-}, smithy.ShapeTypeStructure, 3)
-var PromotionalEmbeddedImage_title *smithy.Schema
-
-var PromotionalEmbeddedImage_url *smithy.Schema
-
-var PromotionalEmbeddedImage_description *smithy.Schema
-
-var PromotionalEmbeddedVideo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PromotionalEmbeddedVideo",
-}, smithy.ShapeTypeStructure, 5)
-var PromotionalEmbeddedVideo_title *smithy.Schema
-
-var PromotionalEmbeddedVideo_url *smithy.Schema
-
-var PromotionalEmbeddedVideo_preview *smithy.Schema
-
-var PromotionalEmbeddedVideo_thumbnail *smithy.Schema
-
-var PromotionalEmbeddedVideo_description *smithy.Schema
-
-var PromotionalMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PromotionalMedia",
-}, smithy.ShapeTypeUnion, 2)
-var PromotionalMedia_embeddedImage *smithy.Schema
-
-var PromotionalMedia_embeddedVideo *smithy.Schema
-
-var _PromotionalMediaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PromotionalMediaList",
-}, smithy.ShapeTypeList, 1)
-var _PromotionalMediaList_member *smithy.Schema
-
-var PurchaseOptionAssociatedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionAssociatedEntity",
-}, smithy.ShapeTypeStructure, 3)
-var PurchaseOptionAssociatedEntity_product *smithy.Schema
-
-var PurchaseOptionAssociatedEntity_offer *smithy.Schema
-
-var PurchaseOptionAssociatedEntity_offerSet *smithy.Schema
-
-var _PurchaseOptionAssociatedEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionAssociatedEntityList",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOptionAssociatedEntityList_member *smithy.Schema
-
-var PurchaseOptionBadge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionBadge",
-}, smithy.ShapeTypeStructure, 2)
-var PurchaseOptionBadge_displayName *smithy.Schema
-
-var PurchaseOptionBadge_badgeType *smithy.Schema
-
-var _PurchaseOptionBadgeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionBadgeList",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOptionBadgeList_member *smithy.Schema
-
-var PurchaseOptionBadgeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionBadgeType",
-}, smithy.ShapeTypeEnum, 4)
-var PurchaseOptionBadgeType_PRIVATE_PRICING *smithy.Schema
-
-var PurchaseOptionBadgeType_FUTURE_DATED *smithy.Schema
-
-var PurchaseOptionBadgeType_REPLACEMENT_OFFER *smithy.Schema
-
-var PurchaseOptionBadgeType_AUTO_RENEW *smithy.Schema
-
-var PurchaseOptionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionFilter",
-}, smithy.ShapeTypeStructure, 2)
-var PurchaseOptionFilter_filterType *smithy.Schema
-
-var PurchaseOptionFilter_filterValues *smithy.Schema
-
-var _PurchaseOptionFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionFilterList",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOptionFilterList_member *smithy.Schema
-
-var PurchaseOptionFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionFilterType",
-}, smithy.ShapeTypeEnum, 5)
-var PurchaseOptionFilterType_PRODUCT_ID *smithy.Schema
-
-var PurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID *smithy.Schema
-
-var PurchaseOptionFilterType_PURCHASE_OPTION_TYPE *smithy.Schema
-
-var PurchaseOptionFilterType_VISIBILITY_SCOPE *smithy.Schema
-
-var PurchaseOptionFilterType_AVAILABILITY_STATUS *smithy.Schema
-
-var _PurchaseOptionFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _PurchaseOptionFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOptionFilterValueList_member *smithy.Schema
-
-var PurchaseOptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionSummary",
-}, smithy.ShapeTypeStructure, 9)
-var PurchaseOptionSummary_purchaseOptionId *smithy.Schema
-
-var PurchaseOptionSummary_catalog *smithy.Schema
-
-var PurchaseOptionSummary_purchaseOptionType *smithy.Schema
-
-var PurchaseOptionSummary_purchaseOptionName *smithy.Schema
-
-var PurchaseOptionSummary_availableFromTime *smithy.Schema
-
-var PurchaseOptionSummary_expirationTime *smithy.Schema
-
-var PurchaseOptionSummary_sellerOfRecord *smithy.Schema
-
-var PurchaseOptionSummary_badges *smithy.Schema
-
-var PurchaseOptionSummary_associatedEntities *smithy.Schema
-
-var _PurchaseOptionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOptionSummaryList_member *smithy.Schema
-
-var PurchaseOptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "PurchaseOptionType",
-}, smithy.ShapeTypeEnum, 2)
-var PurchaseOptionType_OFFER *smithy.Schema
-
-var PurchaseOptionType_OFFERSET *smithy.Schema
-
-var RateCardConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "RateCardConstraintType",
-}, smithy.ShapeTypeEnum, 2)
-var RateCardConstraintType_ALLOWED *smithy.Schema
-
-var RateCardConstraintType_DISALLOWED *smithy.Schema
-
-var RateCardItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "RateCardItem",
-}, smithy.ShapeTypeStructure, 6)
-var RateCardItem_dimensionKey *smithy.Schema
-
-var RateCardItem_displayName *smithy.Schema
-
-var RateCardItem_description *smithy.Schema
-
-var RateCardItem_dimensionLabels *smithy.Schema
-
-var RateCardItem_unit *smithy.Schema
-
-var RateCardItem_price *smithy.Schema
-
-var _RateCardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "RateCardList",
-}, smithy.ShapeTypeList, 1)
-var _RateCardList_member *smithy.Schema
-
-var RecurringPaymentTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "RecurringPaymentTerm",
-}, smithy.ShapeTypeStructure, 5)
-var RecurringPaymentTerm_id *smithy.Schema
-
-var RecurringPaymentTerm_type *smithy.Schema
-
-var RecurringPaymentTerm_currencyCode *smithy.Schema
-
-var RecurringPaymentTerm_billingPeriod *smithy.Schema
-
-var RecurringPaymentTerm_price *smithy.Schema
-
-var RenewalTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "RenewalTerm",
-}, smithy.ShapeTypeStructure, 7)
-var RenewalTerm_id *smithy.Schema
-
-var RenewalTerm_type *smithy.Schema
-
-var RenewalTerm_maxRenewals *smithy.Schema
-
-var RenewalTerm_lockoutPeriod *smithy.Schema
-
-var RenewalTerm_adjustmentDeadline *smithy.Schema
-
-var RenewalTerm_priceIncrease *smithy.Schema
-
-var RenewalTerm_termTemplates *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
-var Resource_resourceType *smithy.Schema
-
-var Resource_contentType *smithy.Schema
-
-var Resource_value *smithy.Schema
-
-var Resource_displayName *smithy.Schema
-
-var ResourceContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ResourceContentType",
-}, smithy.ShapeTypeEnum, 4)
-var ResourceContentType_EMAIL *smithy.Schema
-
-var ResourceContentType_PHONE_NUMBER *smithy.Schema
-
-var ResourceContentType_LINK *smithy.Schema
-
-var ResourceContentType_OTHER *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_MANUFACTURER_SUPPORT *smithy.Schema
-
-var ResourceType_MANUFACTURER_INSTRUCTIONS *smithy.Schema
-
-var ReviewSourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ReviewSourceId",
-}, smithy.ShapeTypeEnum, 3)
-var ReviewSourceId_AWS_MARKETPLACE *smithy.Schema
-
-var ReviewSourceId_G2 *smithy.Schema
-
-var ReviewSourceId_PEERSPOT *smithy.Schema
-
-var ReviewSourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ReviewSourceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ReviewSourceSummary_sourceName *smithy.Schema
-
-var ReviewSourceSummary_sourceId *smithy.Schema
-
-var ReviewSourceSummary_sourceUrl *smithy.Schema
-
-var ReviewSourceSummary_averageRating *smithy.Schema
-
-var ReviewSourceSummary_totalReviews *smithy.Schema
-
-var _ReviewSourceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ReviewSourceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ReviewSourceSummaryList_member *smithy.Schema
-
-var ReviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ReviewSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ReviewSummary_reviewSourceSummaries *smithy.Schema
-
-var SaasFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SaasFulfillmentOption",
-}, smithy.ShapeTypeStructure, 8)
-var SaasFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var SaasFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var SaasFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var SaasFulfillmentOption_fulfillmentUrl *smithy.Schema
-
-var SaasFulfillmentOption_usageInstructions *smithy.Schema
-
-var SaasFulfillmentOption_availableFromTime *smithy.Schema
-
-var SaasFulfillmentOption_launchUrl *smithy.Schema
-
-var SaasFulfillmentOption_quickLaunch *smithy.Schema
-
-var SaasQuickLaunchStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SaasQuickLaunchStatus",
-}, smithy.ShapeTypeEnum, 2)
-var SaasQuickLaunchStatus_ENABLED *smithy.Schema
-
-var SaasQuickLaunchStatus_DISABLED *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerAlgorithmFulfillmentOption",
-}, smithy.ShapeTypeStructure, 7)
-var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_releaseNotes *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_usageInstructions *smithy.Schema
-
-var SageMakerAlgorithmFulfillmentOption_recommendation *smithy.Schema
-
-var SageMakerAlgorithmRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerAlgorithmRecommendation",
-}, smithy.ShapeTypeStructure, 3)
-var SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType *smithy.Schema
-
-var SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType *smithy.Schema
-
-var SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType *smithy.Schema
-
-var _SageMakerModelContentTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerModelContentTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SageMakerModelContentTypeList_member *smithy.Schema
-
-var SageMakerModelFulfillmentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerModelFulfillmentOption",
-}, smithy.ShapeTypeStructure, 9)
-var SageMakerModelFulfillmentOption_fulfillmentOptionId *smithy.Schema
-
-var SageMakerModelFulfillmentOption_fulfillmentOptionType *smithy.Schema
-
-var SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName *smithy.Schema
-
-var SageMakerModelFulfillmentOption_fulfillmentOptionVersion *smithy.Schema
-
-var SageMakerModelFulfillmentOption_releaseNotes *smithy.Schema
-
-var SageMakerModelFulfillmentOption_usageInstructions *smithy.Schema
-
-var SageMakerModelFulfillmentOption_recommendation *smithy.Schema
-
-var SageMakerModelFulfillmentOption_supportedContentTypes *smithy.Schema
-
-var SageMakerModelFulfillmentOption_supportedResponseMimeTypes *smithy.Schema
-
-var SageMakerModelRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerModelRecommendation",
-}, smithy.ShapeTypeStructure, 2)
-var SageMakerModelRecommendation_recommendedBatchTransformInstanceType *smithy.Schema
-
-var SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType *smithy.Schema
-
-var _SageMakerModelResponseMimeTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SageMakerModelResponseMimeTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SageMakerModelResponseMimeTypeList_member *smithy.Schema
-
-var ScheduleItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ScheduleItem",
-}, smithy.ShapeTypeStructure, 2)
-var ScheduleItem_chargeDate *smithy.Schema
-
-var ScheduleItem_chargeAmount *smithy.Schema
-
-var _ScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduleList_member *smithy.Schema
-
-var SearchFacetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFacetType",
-}, smithy.ShapeTypeEnum, 8)
-var SearchFacetType_AVERAGE_CUSTOMER_RATING *smithy.Schema
-
-var SearchFacetType_CATEGORY *smithy.Schema
-
-var SearchFacetType_PUBLISHER *smithy.Schema
-
-var SearchFacetType_FULFILLMENT_OPTION_TYPE *smithy.Schema
-
-var SearchFacetType_PRICING_MODEL *smithy.Schema
-
-var SearchFacetType_PRICING_UNIT *smithy.Schema
-
-var SearchFacetType_DEPLOYED_ON_AWS *smithy.Schema
-
-var SearchFacetType_NUMBER_OF_PRODUCTS *smithy.Schema
-
-var SearchFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SearchFilter_filterType *smithy.Schema
-
-var SearchFilter_filterValues *smithy.Schema
-
-var _SearchFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SearchFilterList_member *smithy.Schema
-
-var SearchFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFilterType",
-}, smithy.ShapeTypeEnum, 9)
-var SearchFilterType_MIN_AVERAGE_CUSTOMER_RATING *smithy.Schema
-
-var SearchFilterType_MAX_AVERAGE_CUSTOMER_RATING *smithy.Schema
-
-var SearchFilterType_CATEGORY *smithy.Schema
-
-var SearchFilterType_PUBLISHER *smithy.Schema
-
-var SearchFilterType_FULFILLMENT_OPTION_TYPE *smithy.Schema
-
-var SearchFilterType_PRICING_MODEL *smithy.Schema
-
-var SearchFilterType_PRICING_UNIT *smithy.Schema
-
-var SearchFilterType_DEPLOYED_ON_AWS *smithy.Schema
-
-var SearchFilterType_NUMBER_OF_PRODUCTS *smithy.Schema
-
-var _SearchFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SearchFilterValueList_member *smithy.Schema
-
-var SearchListingsSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchListingsSortBy",
-}, smithy.ShapeTypeEnum, 2)
-var SearchListingsSortBy_RELEVANCE *smithy.Schema
-
-var SearchListingsSortBy_AVERAGE_CUSTOMER_RATING *smithy.Schema
-
-var SearchListingsSortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchListingsSortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SearchListingsSortOrder_DESCENDING *smithy.Schema
-
-var SearchListingsSortOrder_ASCENDING *smithy.Schema
-
-var _SearchText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchText",
-}, smithy.ShapeTypeString, 0)
-
-var Selector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "Selector",
-}, smithy.ShapeTypeStructure, 2)
-var Selector_type *smithy.Schema
-
-var Selector_value *smithy.Schema
-
-var SelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SelectorType",
-}, smithy.ShapeTypeEnum, 1)
-var SelectorType_DURATION *smithy.Schema
-
-var SellerEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerEngagement",
-}, smithy.ShapeTypeStructure, 3)
-var SellerEngagement_engagementType *smithy.Schema
-
-var SellerEngagement_contentType *smithy.Schema
-
-var SellerEngagement_value *smithy.Schema
-
-var SellerEngagementContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerEngagementContentType",
-}, smithy.ShapeTypeEnum, 1)
-var SellerEngagementContentType_LINK *smithy.Schema
-
-var _SellerEngagementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerEngagementList",
-}, smithy.ShapeTypeList, 1)
-var _SellerEngagementList_member *smithy.Schema
-
-var SellerEngagementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerEngagementType",
-}, smithy.ShapeTypeEnum, 2)
-var SellerEngagementType_REQUEST_FOR_PRIVATE_OFFER *smithy.Schema
-
-var SellerEngagementType_REQUEST_FOR_DEMO *smithy.Schema
-
-var SellerInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerInformation",
-}, smithy.ShapeTypeStructure, 2)
-var SellerInformation_sellerProfileId *smithy.Schema
-
-var SellerInformation_displayName *smithy.Schema
-
-var _SellerProfileId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SellerProfileId",
-}, smithy.ShapeTypeString, 0)
-
-var SupportTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SupportTerm",
-}, smithy.ShapeTypeStructure, 3)
-var SupportTerm_id *smithy.Schema
-
-var SupportTerm_type *smithy.Schema
-
-var SupportTerm_refundPolicy *smithy.Schema
-
-var _TermId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "TermId",
-}, smithy.ShapeTypeString, 0)
-
-var TermTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "TermTemplate",
-}, smithy.ShapeTypeUnion, 1)
-var TermTemplate_paymentScheduleTermTemplate *smithy.Schema
-
-var _TermTemplateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "TermTemplateList",
-}, smithy.ShapeTypeList, 1)
-var _TermTemplateList_member *smithy.Schema
-
-var TermType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "TermType",
-}, smithy.ShapeTypeEnum, 13)
-var TermType_BYOL_PRICING_TERM *smithy.Schema
-
-var TermType_CONFIGURABLE_UPFRONT_PRICING_TERM *smithy.Schema
-
-var TermType_FIXED_UPFRONT_PRICING_TERM *smithy.Schema
-
-var TermType_USAGE_BASED_PRICING_TERM *smithy.Schema
-
-var TermType_FREE_TRIAL_PRICING_TERM *smithy.Schema
-
-var TermType_LEGAL_TERM *smithy.Schema
-
-var TermType_PAYMENT_SCHEDULE_TERM *smithy.Schema
-
-var TermType_RECURRING_PAYMENT_TERM *smithy.Schema
-
-var TermType_RENEWAL_TERM *smithy.Schema
-
-var TermType_SUPPORT_TERM *smithy.Schema
-
-var TermType_VALIDITY_TERM *smithy.Schema
-
-var TermType_VARIABLE_PAYMENT_TERM *smithy.Schema
-
-var TermType_NET_PAYMENT_TERM *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TypeToFacetMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "TypeToFacetMap",
-}, smithy.ShapeTypeMap, 2)
-var _TypeToFacetMap_key *smithy.Schema
-
-var _TypeToFacetMap_value *smithy.Schema
-
-var _URL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "URL",
-}, smithy.ShapeTypeString, 0)
-
-var UsageBasedPricingTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UsageBasedPricingTerm",
-}, smithy.ShapeTypeStructure, 4)
-var UsageBasedPricingTerm_id *smithy.Schema
-
-var UsageBasedPricingTerm_type *smithy.Schema
-
-var UsageBasedPricingTerm_currencyCode *smithy.Schema
-
-var UsageBasedPricingTerm_rateCards *smithy.Schema
-
-var UsageBasedRateCardItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UsageBasedRateCardItem",
-}, smithy.ShapeTypeStructure, 1)
-var UsageBasedRateCardItem_rateCard *smithy.Schema
-
-var _UsageBasedRateCardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UsageBasedRateCardList",
-}, smithy.ShapeTypeList, 1)
-var _UsageBasedRateCardList_member *smithy.Schema
-
-var UseCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UseCase",
-}, smithy.ShapeTypeStructure, 3)
-var UseCase_description *smithy.Schema
-
-var UseCase_displayName *smithy.Schema
-
-var UseCase_value *smithy.Schema
-
-var UseCaseEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UseCaseEntry",
-}, smithy.ShapeTypeStructure, 1)
-var UseCaseEntry_useCase *smithy.Schema
-
-var _UseCaseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "UseCaseList",
-}, smithy.ShapeTypeList, 1)
-var _UseCaseList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 3)
-var ValidationExceptionReason_INVALID_PAGINATION_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS *smithy.Schema
-
-var ValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED *smithy.Schema
-
-var ValidityTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ValidityTerm",
-}, smithy.ShapeTypeStructure, 5)
-var ValidityTerm_id *smithy.Schema
-
-var ValidityTerm_type *smithy.Schema
-
-var ValidityTerm_agreementDuration *smithy.Schema
-
-var ValidityTerm_agreementEndDate *smithy.Schema
-
-var ValidityTerm_agreementStartDate *smithy.Schema
-
-var VariablePaymentTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "VariablePaymentTerm",
-}, smithy.ShapeTypeStructure, 4)
-var VariablePaymentTerm_id *smithy.Schema
-
-var VariablePaymentTerm_type *smithy.Schema
-
-var VariablePaymentTerm_currencyCode *smithy.Schema
-
-var VariablePaymentTerm_maxTotalChargeAmount *smithy.Schema
-
-var GetListingInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetListingInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetListingInput_locale *smithy.Schema
-
-var GetListingInput_listingId *smithy.Schema
-
-var GetListingOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetListingOutput",
-}, smithy.ShapeTypeStructure, 21)
-var GetListingOutput_locale *smithy.Schema
-
-var GetListingOutput_associatedEntities *smithy.Schema
-
-var GetListingOutput_badges *smithy.Schema
-
-var GetListingOutput_catalog *smithy.Schema
-
-var GetListingOutput_categories *smithy.Schema
-
-var GetListingOutput_fulfillmentOptionSummaries *smithy.Schema
-
-var GetListingOutput_highlights *smithy.Schema
-
-var GetListingOutput_integrationGuide *smithy.Schema
-
-var GetListingOutput_listingId *smithy.Schema
-
-var GetListingOutput_listingName *smithy.Schema
-
-var GetListingOutput_logoThumbnailUrl *smithy.Schema
-
-var GetListingOutput_longDescription *smithy.Schema
-
-var GetListingOutput_pricingModels *smithy.Schema
-
-var GetListingOutput_pricingUnits *smithy.Schema
-
-var GetListingOutput_promotionalMedia *smithy.Schema
-
-var GetListingOutput_publisher *smithy.Schema
-
-var GetListingOutput_resources *smithy.Schema
-
-var GetListingOutput_reviewSummary *smithy.Schema
-
-var GetListingOutput_sellerEngagements *smithy.Schema
-
-var GetListingOutput_shortDescription *smithy.Schema
-
-var GetListingOutput_useCases *smithy.Schema
-
-var GetOfferInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetOfferInput_locale *smithy.Schema
-
-var GetOfferInput_offerId *smithy.Schema
-
-var GetOfferOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetOfferOutput_locale *smithy.Schema
-
-var GetOfferOutput_offerId *smithy.Schema
-
-var GetOfferOutput_catalog *smithy.Schema
-
-var GetOfferOutput_offerName *smithy.Schema
-
-var GetOfferOutput_expirationTime *smithy.Schema
-
-var GetOfferOutput_availableFromTime *smithy.Schema
-
-var GetOfferOutput_sellerOfRecord *smithy.Schema
-
-var GetOfferOutput_associatedEntities *smithy.Schema
-
-var GetOfferOutput_agreementProposalId *smithy.Schema
-
-var GetOfferOutput_replacementAgreementId *smithy.Schema
-
-var GetOfferOutput_pricingModel *smithy.Schema
-
-var GetOfferOutput_badges *smithy.Schema
-
-var GetOfferSetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferSetInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetOfferSetInput_locale *smithy.Schema
-
-var GetOfferSetInput_offerSetId *smithy.Schema
-
-var GetOfferSetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferSetOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetOfferSetOutput_locale *smithy.Schema
-
-var GetOfferSetOutput_offerSetId *smithy.Schema
-
-var GetOfferSetOutput_catalog *smithy.Schema
-
-var GetOfferSetOutput_offerSetName *smithy.Schema
-
-var GetOfferSetOutput_availableFromTime *smithy.Schema
-
-var GetOfferSetOutput_expirationTime *smithy.Schema
-
-var GetOfferSetOutput_buyerNotes *smithy.Schema
-
-var GetOfferSetOutput_sellerOfRecord *smithy.Schema
-
-var GetOfferSetOutput_badges *smithy.Schema
-
-var GetOfferSetOutput_associatedEntities *smithy.Schema
-
-var GetOfferTermsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferTermsInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetOfferTermsInput_locale *smithy.Schema
-
-var GetOfferTermsInput_offerId *smithy.Schema
-
-var GetOfferTermsInput_maxResults *smithy.Schema
-
-var GetOfferTermsInput_nextToken *smithy.Schema
-
-var GetOfferTermsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetOfferTermsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetOfferTermsOutput_locale *smithy.Schema
-
-var GetOfferTermsOutput_offerTerms *smithy.Schema
-
-var GetOfferTermsOutput_nextToken *smithy.Schema
-
-var GetProductInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetProductInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetProductInput_locale *smithy.Schema
-
-var GetProductInput_productId *smithy.Schema
-
-var GetProductOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "GetProductOutput",
-}, smithy.ShapeTypeStructure, 16)
-var GetProductOutput_locale *smithy.Schema
-
-var GetProductOutput_productId *smithy.Schema
-
-var GetProductOutput_catalog *smithy.Schema
-
-var GetProductOutput_productName *smithy.Schema
-
-var GetProductOutput_manufacturer *smithy.Schema
-
-var GetProductOutput_deployedOnAws *smithy.Schema
-
-var GetProductOutput_shortDescription *smithy.Schema
-
-var GetProductOutput_longDescription *smithy.Schema
-
-var GetProductOutput_logoThumbnailUrl *smithy.Schema
-
-var GetProductOutput_fulfillmentOptionSummaries *smithy.Schema
-
-var GetProductOutput_categories *smithy.Schema
-
-var GetProductOutput_highlights *smithy.Schema
-
-var GetProductOutput_promotionalMedia *smithy.Schema
-
-var GetProductOutput_resources *smithy.Schema
-
-var GetProductOutput_sellerEngagements *smithy.Schema
-
-var GetProductOutput_listingId *smithy.Schema
-
-var ListFulfillmentOptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListFulfillmentOptionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListFulfillmentOptionsInput_locale *smithy.Schema
-
-var ListFulfillmentOptionsInput_productId *smithy.Schema
-
-var ListFulfillmentOptionsInput_maxResults *smithy.Schema
-
-var ListFulfillmentOptionsInput_nextToken *smithy.Schema
-
-var ListFulfillmentOptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListFulfillmentOptionsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFulfillmentOptionsOutput_locale *smithy.Schema
-
-var ListFulfillmentOptionsOutput_fulfillmentOptions *smithy.Schema
-
-var ListFulfillmentOptionsOutput_nextToken *smithy.Schema
-
-var ListPurchaseOptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListPurchaseOptionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListPurchaseOptionsInput_locale *smithy.Schema
-
-var ListPurchaseOptionsInput_filters *smithy.Schema
-
-var ListPurchaseOptionsInput_maxResults *smithy.Schema
-
-var ListPurchaseOptionsInput_nextToken *smithy.Schema
-
-var ListPurchaseOptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "ListPurchaseOptionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPurchaseOptionsOutput_purchaseOptions *smithy.Schema
-
-var ListPurchaseOptionsOutput_nextToken *smithy.Schema
-
-var SearchFacetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFacetsInput",
-}, smithy.ShapeTypeStructure, 5)
-var SearchFacetsInput_locale *smithy.Schema
-
-var SearchFacetsInput_searchText *smithy.Schema
-
-var SearchFacetsInput_filters *smithy.Schema
-
-var SearchFacetsInput_facetTypes *smithy.Schema
-
-var SearchFacetsInput_nextToken *smithy.Schema
-
-var SearchFacetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchFacetsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SearchFacetsOutput_totalResults *smithy.Schema
-
-var SearchFacetsOutput_listingFacets *smithy.Schema
-
-var SearchFacetsOutput_nextToken *smithy.Schema
-
-var SearchListingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchListingsInput",
-}, smithy.ShapeTypeStructure, 7)
-var SearchListingsInput_locale *smithy.Schema
-
-var SearchListingsInput_searchText *smithy.Schema
-
-var SearchListingsInput_filters *smithy.Schema
-
-var SearchListingsInput_maxResults *smithy.Schema
-
-var SearchListingsInput_sortBy *smithy.Schema
-
-var SearchListingsInput_sortOrder *smithy.Schema
-
-var SearchListingsInput_nextToken *smithy.Schema
-
-var SearchListingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacediscovery",
-	Name:      "SearchListingsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SearchListingsOutput_totalResults *smithy.Schema
-
-var SearchListingsOutput_listingSummaries *smithy.Schema
-
-var SearchListingsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
-
-	_AmazonMachineImageCidrIpAddressList_member = _AmazonMachineImageCidrIpAddressList.AddMember("member", smithyprelude.String)
-
-	_AmazonMachineImageEbsVolumeTypeList_member = _AmazonMachineImageEbsVolumeTypeList.AddMember("member", smithyprelude.String)
-
-	AmazonMachineImageEbsVolume_volumeTypes = AmazonMachineImageEbsVolume.AddMember("volumeTypes", _AmazonMachineImageEbsVolumeTypeList)
-
-	AmazonMachineImageEbsVolume_iops = AmazonMachineImageEbsVolume.AddMember("iops", smithyprelude.Integer)
-
-	FulfillmentOptionType_AMAZON_MACHINE_IMAGE = FulfillmentOptionType.AddMember("AMAZON_MACHINE_IMAGE", smithyprelude.Unit)
-
-	FulfillmentOptionType_API = FulfillmentOptionType.AddMember("API", smithyprelude.Unit)
-
-	FulfillmentOptionType_CLOUDFORMATION_TEMPLATE = FulfillmentOptionType.AddMember("CLOUDFORMATION_TEMPLATE", smithyprelude.Unit)
-
-	FulfillmentOptionType_CONTAINER = FulfillmentOptionType.AddMember("CONTAINER", smithyprelude.Unit)
-
-	FulfillmentOptionType_HELM = FulfillmentOptionType.AddMember("HELM", smithyprelude.Unit)
-
-	FulfillmentOptionType_EKS_ADD_ON = FulfillmentOptionType.AddMember("EKS_ADD_ON", smithyprelude.Unit)
-
-	FulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT = FulfillmentOptionType.AddMember("EC2_IMAGE_BUILDER_COMPONENT", smithyprelude.Unit)
-
-	FulfillmentOptionType_DATA_EXCHANGE = FulfillmentOptionType.AddMember("DATA_EXCHANGE", smithyprelude.Unit)
-
-	FulfillmentOptionType_PROFESSIONAL_SERVICES = FulfillmentOptionType.AddMember("PROFESSIONAL_SERVICES", smithyprelude.Unit)
-
-	FulfillmentOptionType_SAAS = FulfillmentOptionType.AddMember("SAAS", smithyprelude.Unit)
-
-	FulfillmentOptionType_SAGEMAKER_ALGORITHM = FulfillmentOptionType.AddMember("SAGEMAKER_ALGORITHM", smithyprelude.Unit)
-
-	FulfillmentOptionType_SAGEMAKER_MODEL = FulfillmentOptionType.AddMember("SAGEMAKER_MODEL", smithyprelude.Unit)
-
-	AmazonMachineImageOperatingSystem_operatingSystemFamilyName = AmazonMachineImageOperatingSystem.AddMember("operatingSystemFamilyName", smithyprelude.String)
-
-	AmazonMachineImageOperatingSystem_operatingSystemName = AmazonMachineImageOperatingSystem.AddMember("operatingSystemName", smithyprelude.String)
-
-	AmazonMachineImageOperatingSystem_operatingSystemVersion = AmazonMachineImageOperatingSystem.AddMember("operatingSystemVersion", smithyprelude.String)
-
-	_AmazonMachineImageOperatingSystemList_member = _AmazonMachineImageOperatingSystemList.AddMember("member", AmazonMachineImageOperatingSystem)
-
-	AmazonMachineImageSecurityGroup_protocol = AmazonMachineImageSecurityGroup.AddMember("protocol", smithyprelude.String)
-
-	AmazonMachineImageSecurityGroup_fromPort = AmazonMachineImageSecurityGroup.AddMember("fromPort", smithyprelude.Integer)
-
-	AmazonMachineImageSecurityGroup_toPort = AmazonMachineImageSecurityGroup.AddMember("toPort", smithyprelude.Integer)
-
-	AmazonMachineImageSecurityGroup_cidrIpAddresses = AmazonMachineImageSecurityGroup.AddMember("cidrIpAddresses", _AmazonMachineImageCidrIpAddressList)
-
-	_AmazonMachineImageSecurityGroupList_member = _AmazonMachineImageSecurityGroupList.AddMember("member", AmazonMachineImageSecurityGroup)
-
-	AmazonMachineImageRecommendation_instanceType = AmazonMachineImageRecommendation.AddMember("instanceType", smithyprelude.String)
-
-	AmazonMachineImageRecommendation_securityGroups = AmazonMachineImageRecommendation.AddMember("securityGroups", _AmazonMachineImageSecurityGroupList)
-
-	AmazonMachineImageFulfillmentOption_fulfillmentOptionId = AmazonMachineImageFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_fulfillmentOptionName = AmazonMachineImageFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion = AmazonMachineImageFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_fulfillmentOptionType = AmazonMachineImageFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName = AmazonMachineImageFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_operatingSystems = AmazonMachineImageFulfillmentOption.AddMember("operatingSystems", _AmazonMachineImageOperatingSystemList)
-
-	AmazonMachineImageFulfillmentOption_recommendation = AmazonMachineImageFulfillmentOption.AddMember("recommendation", AmazonMachineImageRecommendation)
-
-	AmazonMachineImageFulfillmentOption_releaseNotes = AmazonMachineImageFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_usageInstructions = AmazonMachineImageFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_availableFromTime = AmazonMachineImageFulfillmentOption.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	AmazonMachineImageFulfillmentOption_accessUrlTemplate = AmazonMachineImageFulfillmentOption.AddMember("accessUrlTemplate", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_architecture = AmazonMachineImageFulfillmentOption.AddMember("architecture", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_amiAlias = AmazonMachineImageFulfillmentOption.AddMember("amiAlias", smithyprelude.String)
-
-	AmazonMachineImageFulfillmentOption_ebsVolume = AmazonMachineImageFulfillmentOption.AddMember("ebsVolume", AmazonMachineImageEbsVolume)
-
-	AmazonMachineImageFulfillmentOption_shortDescription = AmazonMachineImageFulfillmentOption.AddMember("shortDescription", smithyprelude.String)
-
-	AwsSupportedService_supportedServiceType = AwsSupportedService.AddMember("supportedServiceType", smithyprelude.String)
-
-	AwsSupportedService_displayName = AwsSupportedService.AddMember("displayName", smithyprelude.String)
-
-	AwsSupportedService_description = AwsSupportedService.AddMember("description", smithyprelude.String)
-
-	_AwsSupportedServiceList_member = _AwsSupportedServiceList.AddMember("member", AwsSupportedService)
-
-	ApiFulfillmentOption_fulfillmentOptionId = ApiFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	ApiFulfillmentOption_fulfillmentOptionType = ApiFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	ApiFulfillmentOption_fulfillmentOptionDisplayName = ApiFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	ApiFulfillmentOption_usageInstructions = ApiFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	ApiFulfillmentOption_awsSupportedServices = ApiFulfillmentOption.AddMember("awsSupportedServices", _AwsSupportedServiceList)
-
-	BillingPeriodType_MONTHLY = BillingPeriodType.AddMember("MONTHLY", smithyprelude.Unit)
-
-	TermType_BYOL_PRICING_TERM = TermType.AddMember("BYOL_PRICING_TERM", smithyprelude.Unit)
-
-	TermType_CONFIGURABLE_UPFRONT_PRICING_TERM = TermType.AddMember("CONFIGURABLE_UPFRONT_PRICING_TERM", smithyprelude.Unit)
-
-	TermType_FIXED_UPFRONT_PRICING_TERM = TermType.AddMember("FIXED_UPFRONT_PRICING_TERM", smithyprelude.Unit)
-
-	TermType_USAGE_BASED_PRICING_TERM = TermType.AddMember("USAGE_BASED_PRICING_TERM", smithyprelude.Unit)
-
-	TermType_FREE_TRIAL_PRICING_TERM = TermType.AddMember("FREE_TRIAL_PRICING_TERM", smithyprelude.Unit)
-
-	TermType_LEGAL_TERM = TermType.AddMember("LEGAL_TERM", smithyprelude.Unit)
-
-	TermType_PAYMENT_SCHEDULE_TERM = TermType.AddMember("PAYMENT_SCHEDULE_TERM", smithyprelude.Unit)
-
-	TermType_RECURRING_PAYMENT_TERM = TermType.AddMember("RECURRING_PAYMENT_TERM", smithyprelude.Unit)
-
-	TermType_RENEWAL_TERM = TermType.AddMember("RENEWAL_TERM", smithyprelude.Unit)
-
-	TermType_SUPPORT_TERM = TermType.AddMember("SUPPORT_TERM", smithyprelude.Unit)
-
-	TermType_VALIDITY_TERM = TermType.AddMember("VALIDITY_TERM", smithyprelude.Unit)
-
-	TermType_VARIABLE_PAYMENT_TERM = TermType.AddMember("VARIABLE_PAYMENT_TERM", smithyprelude.Unit)
-
-	TermType_NET_PAYMENT_TERM = TermType.AddMember("NET_PAYMENT_TERM", smithyprelude.Unit)
-
-	ByolPricingTerm_id = ByolPricingTerm.AddMember("id", _TermId)
-
-	ByolPricingTerm_type = ByolPricingTerm.AddMember("type", TermType)
-
-	Category_categoryId = Category.AddMember("categoryId", _NonEmptyString)
-
-	Category_displayName = Category.AddMember("displayName", _NonEmptyString)
-
-	_CategoryList_member = _CategoryList.AddMember("member", Category)
-
-	CloudFormationFulfillmentOption_fulfillmentOptionId = CloudFormationFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_fulfillmentOptionName = CloudFormationFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_fulfillmentOptionType = CloudFormationFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	CloudFormationFulfillmentOption_fulfillmentOptionDisplayName = CloudFormationFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_fulfillmentOptionVersion = CloudFormationFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_releaseNotes = CloudFormationFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_usageInstructions = CloudFormationFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_availableFromTime = CloudFormationFulfillmentOption.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	CloudFormationFulfillmentOption_shortDescription = CloudFormationFulfillmentOption.AddMember("shortDescription", smithyprelude.String)
-
-	CloudFormationFulfillmentOption_longDescription = CloudFormationFulfillmentOption.AddMember("longDescription", smithyprelude.String)
-
-	SelectorType_DURATION = SelectorType.AddMember("DURATION", smithyprelude.Unit)
-
-	Selector_type = Selector.AddMember("type", SelectorType)
-
-	Selector_value = Selector.AddMember("value", _BoundedString)
-
-	RateCardConstraintType_ALLOWED = RateCardConstraintType.AddMember("ALLOWED", smithyprelude.Unit)
-
-	RateCardConstraintType_DISALLOWED = RateCardConstraintType.AddMember("DISALLOWED", smithyprelude.Unit)
-
-	Constraints_multipleDimensionSelection = Constraints.AddMember("multipleDimensionSelection", RateCardConstraintType)
-
-	Constraints_quantityConfiguration = Constraints.AddMember("quantityConfiguration", RateCardConstraintType)
-
-	DimensionLabelType_REGION = DimensionLabelType.AddMember("REGION", smithyprelude.Unit)
-
-	DimensionLabelType_SAGEMAKER_OPTION = DimensionLabelType.AddMember("SAGEMAKER_OPTION", smithyprelude.Unit)
-
-	DimensionLabel_labelType = DimensionLabel.AddMember("labelType", DimensionLabelType)
-
-	DimensionLabel_labelValue = DimensionLabel.AddMember("labelValue", _BoundedString)
-
-	DimensionLabel_displayName = DimensionLabel.AddMember("displayName", _BoundedString)
-
-	_DimensionLabelList_member = _DimensionLabelList.AddMember("member", DimensionLabel)
-
-	RateCardItem_dimensionKey = RateCardItem.AddMember("dimensionKey", _BoundedString)
-
-	RateCardItem_displayName = RateCardItem.AddMember("displayName", _BoundedString)
-
-	RateCardItem_description = RateCardItem.AddMember("description", _BoundedString)
-
-	RateCardItem_dimensionLabels = RateCardItem.AddMember("dimensionLabels", _DimensionLabelList)
-
-	RateCardItem_unit = RateCardItem.AddMember("unit", _BoundedString)
-
-	RateCardItem_price = RateCardItem.AddMember("price", _BoundedString)
-
-	_RateCardList_member = _RateCardList.AddMember("member", RateCardItem)
-
-	ConfigurableUpfrontRateCardItem_selector = ConfigurableUpfrontRateCardItem.AddMember("selector", Selector)
-
-	ConfigurableUpfrontRateCardItem_constraints = ConfigurableUpfrontRateCardItem.AddMember("constraints", Constraints)
-
-	ConfigurableUpfrontRateCardItem_rateCard = ConfigurableUpfrontRateCardItem.AddMember("rateCard", _RateCardList)
-
-	_ConfigurableUpfrontRateCardList_member = _ConfigurableUpfrontRateCardList.AddMember("member", ConfigurableUpfrontRateCardItem)
-
-	ConfigurableUpfrontPricingTerm_id = ConfigurableUpfrontPricingTerm.AddMember("id", _TermId)
-
-	ConfigurableUpfrontPricingTerm_type = ConfigurableUpfrontPricingTerm.AddMember("type", TermType)
-
-	ConfigurableUpfrontPricingTerm_currencyCode = ConfigurableUpfrontPricingTerm.AddMember("currencyCode", _CurrencyCode)
-
-	ConfigurableUpfrontPricingTerm_rateCards = ConfigurableUpfrontPricingTerm.AddMember("rateCards", _ConfigurableUpfrontRateCardList)
-
-	ContainerOperatingSystem_operatingSystemFamilyName = ContainerOperatingSystem.AddMember("operatingSystemFamilyName", smithyprelude.String)
-
-	ContainerOperatingSystem_operatingSystemName = ContainerOperatingSystem.AddMember("operatingSystemName", smithyprelude.String)
-
-	_ContainerOperatingSystemList_member = _ContainerOperatingSystemList.AddMember("member", ContainerOperatingSystem)
-
-	ContainerFulfillmentOption_fulfillmentOptionId = ContainerFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	ContainerFulfillmentOption_fulfillmentOptionName = ContainerFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	ContainerFulfillmentOption_fulfillmentOptionType = ContainerFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	ContainerFulfillmentOption_fulfillmentOptionDisplayName = ContainerFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	ContainerFulfillmentOption_fulfillmentOptionVersion = ContainerFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	ContainerFulfillmentOption_operatingSystems = ContainerFulfillmentOption.AddMember("operatingSystems", _ContainerOperatingSystemList)
-
-	ContainerFulfillmentOption_awsSupportedServices = ContainerFulfillmentOption.AddMember("awsSupportedServices", _AwsSupportedServiceList)
-
-	ContainerFulfillmentOption_releaseNotes = ContainerFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	ContainerFulfillmentOption_usageInstructions = ContainerFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	DataArtifact_description = DataArtifact.AddMember("description", smithyprelude.String)
-
-	DataArtifact_resourceArn = DataArtifact.AddMember("resourceArn", smithyprelude.String)
-
-	DataArtifact_resourceType = DataArtifact.AddMember("resourceType", smithyprelude.String)
-
-	DataArtifact_dataClassification = DataArtifact.AddMember("dataClassification", smithyprelude.String)
-
-	_DataArtifactList_member = _DataArtifactList.AddMember("member", DataArtifact)
-
-	DataExchangeFulfillmentOption_fulfillmentOptionId = DataExchangeFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	DataExchangeFulfillmentOption_fulfillmentOptionType = DataExchangeFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	DataExchangeFulfillmentOption_fulfillmentOptionDisplayName = DataExchangeFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	DataExchangeFulfillmentOption_dataArtifacts = DataExchangeFulfillmentOption.AddMember("dataArtifacts", _DataArtifactList)
-
-	DeployedOnAwsStatus_DEPLOYED = DeployedOnAwsStatus.AddMember("DEPLOYED", smithyprelude.Unit)
-
-	DeployedOnAwsStatus_NOT_DEPLOYED = DeployedOnAwsStatus.AddMember("NOT_DEPLOYED", smithyprelude.Unit)
-
-	DeployedOnAwsStatus_NOT_APPLICABLE = DeployedOnAwsStatus.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
-
-	LegalDocumentType_CUSTOM_EULA = LegalDocumentType.AddMember("CUSTOM_EULA", smithyprelude.Unit)
-
-	LegalDocumentType_CUSTOM_DSA = LegalDocumentType.AddMember("CUSTOM_DSA", smithyprelude.Unit)
-
-	LegalDocumentType_ENTERPRISE_EULA = LegalDocumentType.AddMember("ENTERPRISE_EULA", smithyprelude.Unit)
-
-	LegalDocumentType_STANDARD_EULA = LegalDocumentType.AddMember("STANDARD_EULA", smithyprelude.Unit)
-
-	LegalDocumentType_STANDARD_DSA = LegalDocumentType.AddMember("STANDARD_DSA", smithyprelude.Unit)
-
-	DocumentItem_type = DocumentItem.AddMember("type", LegalDocumentType)
-
-	DocumentItem_url = DocumentItem.AddMember("url", _URL)
-
-	DocumentItem_version = DocumentItem.AddMember("version", smithyprelude.String)
-
-	_DocumentList_member = _DocumentList.AddMember("member", DocumentItem)
-
-	Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId = Ec2ImageBuilderComponentFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName = Ec2ImageBuilderComponentFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType = Ec2ImageBuilderComponentFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName = Ec2ImageBuilderComponentFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion = Ec2ImageBuilderComponentFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	Ec2ImageBuilderComponentFulfillmentOption_operatingSystems = Ec2ImageBuilderComponentFulfillmentOption.AddMember("operatingSystems", _ContainerOperatingSystemList)
-
-	Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices = Ec2ImageBuilderComponentFulfillmentOption.AddMember("awsSupportedServices", _AwsSupportedServiceList)
-
-	Ec2ImageBuilderComponentFulfillmentOption_releaseNotes = Ec2ImageBuilderComponentFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	Ec2ImageBuilderComponentFulfillmentOption_usageInstructions = Ec2ImageBuilderComponentFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	EksAddOnOperatingSystem_operatingSystemFamilyName = EksAddOnOperatingSystem.AddMember("operatingSystemFamilyName", smithyprelude.String)
-
-	EksAddOnOperatingSystem_operatingSystemName = EksAddOnOperatingSystem.AddMember("operatingSystemName", smithyprelude.String)
-
-	_EksAddOnOperatingSystemList_member = _EksAddOnOperatingSystemList.AddMember("member", EksAddOnOperatingSystem)
-
-	EksAddOnFulfillmentOption_fulfillmentOptionId = EksAddOnFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_fulfillmentOptionName = EksAddOnFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_fulfillmentOptionType = EksAddOnFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	EksAddOnFulfillmentOption_fulfillmentOptionDisplayName = EksAddOnFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_fulfillmentOptionVersion = EksAddOnFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_operatingSystems = EksAddOnFulfillmentOption.AddMember("operatingSystems", _EksAddOnOperatingSystemList)
-
-	EksAddOnFulfillmentOption_releaseNotes = EksAddOnFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_usageInstructions = EksAddOnFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	EksAddOnFulfillmentOption_awsSupportedServices = EksAddOnFulfillmentOption.AddMember("awsSupportedServices", _AwsSupportedServiceList)
-
-	SearchFacetType_AVERAGE_CUSTOMER_RATING = SearchFacetType.AddMember("AVERAGE_CUSTOMER_RATING", smithyprelude.Unit)
-
-	SearchFacetType_CATEGORY = SearchFacetType.AddMember("CATEGORY", smithyprelude.Unit)
-
-	SearchFacetType_PUBLISHER = SearchFacetType.AddMember("PUBLISHER", smithyprelude.Unit)
-
-	SearchFacetType_FULFILLMENT_OPTION_TYPE = SearchFacetType.AddMember("FULFILLMENT_OPTION_TYPE", smithyprelude.Unit)
-
-	SearchFacetType_PRICING_MODEL = SearchFacetType.AddMember("PRICING_MODEL", smithyprelude.Unit)
-
-	SearchFacetType_PRICING_UNIT = SearchFacetType.AddMember("PRICING_UNIT", smithyprelude.Unit)
-
-	SearchFacetType_DEPLOYED_ON_AWS = SearchFacetType.AddMember("DEPLOYED_ON_AWS", smithyprelude.Unit)
-
-	SearchFacetType_NUMBER_OF_PRODUCTS = SearchFacetType.AddMember("NUMBER_OF_PRODUCTS", smithyprelude.Unit)
-
-	_FacetTypeList_member = _FacetTypeList.AddMember("member", SearchFacetType)
-
-	FixedPercentage_percentageValue = FixedPercentage.AddMember("percentageValue", _BoundedString)
-
-	GrantItem_dimensionKey = GrantItem.AddMember("dimensionKey", _BoundedString)
-
-	GrantItem_displayName = GrantItem.AddMember("displayName", _BoundedString)
-
-	GrantItem_description = GrantItem.AddMember("description", _BoundedString)
-
-	GrantItem_dimensionLabels = GrantItem.AddMember("dimensionLabels", _DimensionLabelList)
-
-	GrantItem_unit = GrantItem.AddMember("unit", _BoundedString)
-
-	GrantItem_maxQuantity = GrantItem.AddMember("maxQuantity", smithyprelude.Integer)
-
-	_GrantList_member = _GrantList.AddMember("member", GrantItem)
-
-	FixedUpfrontPricingTerm_id = FixedUpfrontPricingTerm.AddMember("id", _TermId)
-
-	FixedUpfrontPricingTerm_type = FixedUpfrontPricingTerm.AddMember("type", TermType)
-
-	FixedUpfrontPricingTerm_currencyCode = FixedUpfrontPricingTerm.AddMember("currencyCode", _CurrencyCode)
-
-	FixedUpfrontPricingTerm_duration = FixedUpfrontPricingTerm.AddMember("duration", _BoundedString)
-
-	FixedUpfrontPricingTerm_price = FixedUpfrontPricingTerm.AddMember("price", _BoundedString)
-
-	FixedUpfrontPricingTerm_grants = FixedUpfrontPricingTerm.AddMember("grants", _GrantList)
-
-	FreeTrialPricingTerm_id = FreeTrialPricingTerm.AddMember("id", _TermId)
-
-	FreeTrialPricingTerm_type = FreeTrialPricingTerm.AddMember("type", TermType)
-
-	FreeTrialPricingTerm_duration = FreeTrialPricingTerm.AddMember("duration", _BoundedString)
-
-	FreeTrialPricingTerm_grants = FreeTrialPricingTerm.AddMember("grants", _GrantList)
-
-	HelmOperatingSystem_operatingSystemFamilyName = HelmOperatingSystem.AddMember("operatingSystemFamilyName", smithyprelude.String)
-
-	HelmOperatingSystem_operatingSystemName = HelmOperatingSystem.AddMember("operatingSystemName", smithyprelude.String)
-
-	_HelmOperatingSystemList_member = _HelmOperatingSystemList.AddMember("member", HelmOperatingSystem)
-
-	HelmFulfillmentOption_fulfillmentOptionId = HelmFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	HelmFulfillmentOption_fulfillmentOptionName = HelmFulfillmentOption.AddMember("fulfillmentOptionName", smithyprelude.String)
-
-	HelmFulfillmentOption_fulfillmentOptionType = HelmFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	HelmFulfillmentOption_fulfillmentOptionDisplayName = HelmFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	HelmFulfillmentOption_fulfillmentOptionVersion = HelmFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	HelmFulfillmentOption_operatingSystems = HelmFulfillmentOption.AddMember("operatingSystems", _HelmOperatingSystemList)
-
-	HelmFulfillmentOption_releaseNotes = HelmFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	HelmFulfillmentOption_awsSupportedServices = HelmFulfillmentOption.AddMember("awsSupportedServices", _AwsSupportedServiceList)
-
-	HelmFulfillmentOption_usageInstructions = HelmFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	ProfessionalServicesFulfillmentOption_fulfillmentOptionId = ProfessionalServicesFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	ProfessionalServicesFulfillmentOption_fulfillmentOptionType = ProfessionalServicesFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName = ProfessionalServicesFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	SaasQuickLaunchStatus_ENABLED = SaasQuickLaunchStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	SaasQuickLaunchStatus_DISABLED = SaasQuickLaunchStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	SaasFulfillmentOption_fulfillmentOptionId = SaasFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	SaasFulfillmentOption_fulfillmentOptionType = SaasFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	SaasFulfillmentOption_fulfillmentOptionDisplayName = SaasFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	SaasFulfillmentOption_fulfillmentUrl = SaasFulfillmentOption.AddMember("fulfillmentUrl", smithyprelude.String)
-
-	SaasFulfillmentOption_usageInstructions = SaasFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	SaasFulfillmentOption_availableFromTime = SaasFulfillmentOption.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	SaasFulfillmentOption_launchUrl = SaasFulfillmentOption.AddMember("launchUrl", _URL)
-
-	SaasFulfillmentOption_quickLaunch = SaasFulfillmentOption.AddMember("quickLaunch", SaasQuickLaunchStatus)
-
-	SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType = SageMakerAlgorithmRecommendation.AddMember("recommendedBatchTransformInstanceType", smithyprelude.String)
-
-	SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType = SageMakerAlgorithmRecommendation.AddMember("recommendedRealtimeInferenceInstanceType", smithyprelude.String)
-
-	SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType = SageMakerAlgorithmRecommendation.AddMember("recommendedTrainingInstanceType", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId = SageMakerAlgorithmFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType = SageMakerAlgorithmFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName = SageMakerAlgorithmFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion = SageMakerAlgorithmFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_releaseNotes = SageMakerAlgorithmFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_usageInstructions = SageMakerAlgorithmFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	SageMakerAlgorithmFulfillmentOption_recommendation = SageMakerAlgorithmFulfillmentOption.AddMember("recommendation", SageMakerAlgorithmRecommendation)
-
-	SageMakerModelRecommendation_recommendedBatchTransformInstanceType = SageMakerModelRecommendation.AddMember("recommendedBatchTransformInstanceType", smithyprelude.String)
-
-	SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType = SageMakerModelRecommendation.AddMember("recommendedRealtimeInferenceInstanceType", smithyprelude.String)
-
-	_SageMakerModelContentTypeList_member = _SageMakerModelContentTypeList.AddMember("member", smithyprelude.String)
-
-	_SageMakerModelResponseMimeTypeList_member = _SageMakerModelResponseMimeTypeList.AddMember("member", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_fulfillmentOptionId = SageMakerModelFulfillmentOption.AddMember("fulfillmentOptionId", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_fulfillmentOptionType = SageMakerModelFulfillmentOption.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName = SageMakerModelFulfillmentOption.AddMember("fulfillmentOptionDisplayName", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_fulfillmentOptionVersion = SageMakerModelFulfillmentOption.AddMember("fulfillmentOptionVersion", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_releaseNotes = SageMakerModelFulfillmentOption.AddMember("releaseNotes", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_usageInstructions = SageMakerModelFulfillmentOption.AddMember("usageInstructions", smithyprelude.String)
-
-	SageMakerModelFulfillmentOption_recommendation = SageMakerModelFulfillmentOption.AddMember("recommendation", SageMakerModelRecommendation)
-
-	SageMakerModelFulfillmentOption_supportedContentTypes = SageMakerModelFulfillmentOption.AddMember("supportedContentTypes", _SageMakerModelContentTypeList)
-
-	SageMakerModelFulfillmentOption_supportedResponseMimeTypes = SageMakerModelFulfillmentOption.AddMember("supportedResponseMimeTypes", _SageMakerModelResponseMimeTypeList)
-
-	FulfillmentOption_amazonMachineImageFulfillmentOption = FulfillmentOption.AddMember("amazonMachineImageFulfillmentOption", AmazonMachineImageFulfillmentOption)
-
-	FulfillmentOption_apiFulfillmentOption = FulfillmentOption.AddMember("apiFulfillmentOption", ApiFulfillmentOption)
-
-	FulfillmentOption_cloudFormationFulfillmentOption = FulfillmentOption.AddMember("cloudFormationFulfillmentOption", CloudFormationFulfillmentOption)
-
-	FulfillmentOption_containerFulfillmentOption = FulfillmentOption.AddMember("containerFulfillmentOption", ContainerFulfillmentOption)
-
-	FulfillmentOption_helmFulfillmentOption = FulfillmentOption.AddMember("helmFulfillmentOption", HelmFulfillmentOption)
-
-	FulfillmentOption_eksAddOnFulfillmentOption = FulfillmentOption.AddMember("eksAddOnFulfillmentOption", EksAddOnFulfillmentOption)
-
-	FulfillmentOption_ec2ImageBuilderComponentFulfillmentOption = FulfillmentOption.AddMember("ec2ImageBuilderComponentFulfillmentOption", Ec2ImageBuilderComponentFulfillmentOption)
-
-	FulfillmentOption_dataExchangeFulfillmentOption = FulfillmentOption.AddMember("dataExchangeFulfillmentOption", DataExchangeFulfillmentOption)
-
-	FulfillmentOption_professionalServicesFulfillmentOption = FulfillmentOption.AddMember("professionalServicesFulfillmentOption", ProfessionalServicesFulfillmentOption)
-
-	FulfillmentOption_saasFulfillmentOption = FulfillmentOption.AddMember("saasFulfillmentOption", SaasFulfillmentOption)
-
-	FulfillmentOption_sageMakerAlgorithmFulfillmentOption = FulfillmentOption.AddMember("sageMakerAlgorithmFulfillmentOption", SageMakerAlgorithmFulfillmentOption)
-
-	FulfillmentOption_sageMakerModelFulfillmentOption = FulfillmentOption.AddMember("sageMakerModelFulfillmentOption", SageMakerModelFulfillmentOption)
-
-	_FulfillmentOptionsList_member = _FulfillmentOptionsList.AddMember("member", FulfillmentOption)
-
-	FulfillmentOptionSummary_fulfillmentOptionType = FulfillmentOptionSummary.AddMember("fulfillmentOptionType", FulfillmentOptionType)
-
-	FulfillmentOptionSummary_displayName = FulfillmentOptionSummary.AddMember("displayName", _NonEmptyString)
-
-	_FulfillmentOptionSummaryList_member = _FulfillmentOptionSummaryList.AddMember("member", FulfillmentOptionSummary)
-
-	_HighlightList_member = _HighlightList.AddMember("member", _NonEmptyString)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
-
-	LegalTerm_id = LegalTerm.AddMember("id", _TermId)
-
-	LegalTerm_type = LegalTerm.AddMember("type", TermType)
-
-	LegalTerm_documents = LegalTerm.AddMember("documents", _DocumentList)
-
-	SellerInformation_sellerProfileId = SellerInformation.AddMember("sellerProfileId", _SellerProfileId)
-
-	SellerInformation_displayName = SellerInformation.AddMember("displayName", _NonEmptyString)
-
-	ProductInformation_productId = ProductInformation.AddMember("productId", _ProductId)
-
-	ProductInformation_productName = ProductInformation.AddMember("productName", _NonEmptyString)
-
-	ProductInformation_manufacturer = ProductInformation.AddMember("manufacturer", SellerInformation)
-
-	OfferInformation_offerId = OfferInformation.AddMember("offerId", _OfferId)
-
-	OfferInformation_offerName = OfferInformation.AddMember("offerName", _NullableString)
-
-	OfferInformation_sellerOfRecord = OfferInformation.AddMember("sellerOfRecord", SellerInformation)
-
-	ListingAssociatedEntity_product = ListingAssociatedEntity.AddMember("product", ProductInformation)
-
-	ListingAssociatedEntity_offer = ListingAssociatedEntity.AddMember("offer", OfferInformation)
-
-	_ListingAssociatedEntityList_member = _ListingAssociatedEntityList.AddMember("member", ListingAssociatedEntity)
-
-	ListingBadgeType_AWS_FREE_TIER = ListingBadgeType.AddMember("AWS_FREE_TIER", smithyprelude.Unit)
-
-	ListingBadgeType_FREE_TRIAL = ListingBadgeType.AddMember("FREE_TRIAL", smithyprelude.Unit)
-
-	ListingBadgeType_DEPLOYED_ON_AWS = ListingBadgeType.AddMember("DEPLOYED_ON_AWS", smithyprelude.Unit)
-
-	ListingBadgeType_QUICK_LAUNCH = ListingBadgeType.AddMember("QUICK_LAUNCH", smithyprelude.Unit)
-
-	ListingBadgeType_MULTI_PRODUCT = ListingBadgeType.AddMember("MULTI_PRODUCT", smithyprelude.Unit)
-
-	ListingBadge_displayName = ListingBadge.AddMember("displayName", _NonEmptyString)
-
-	ListingBadge_badgeType = ListingBadge.AddMember("badgeType", ListingBadgeType)
-
-	_ListingBadgeList_member = _ListingBadgeList.AddMember("member", ListingBadge)
-
-	ListingFacet_value = ListingFacet.AddMember("value", _NonEmptyString)
-
-	ListingFacet_displayName = ListingFacet.AddMember("displayName", _NonEmptyString)
-
-	ListingFacet_parent = ListingFacet.AddMember("parent", _NullableString)
-
-	ListingFacet_count = ListingFacet.AddMember("count", _NonNegativeCount)
-
-	_ListingFacetList_member = _ListingFacetList.AddMember("member", ListingFacet)
-
-	ReviewSourceId_AWS_MARKETPLACE = ReviewSourceId.AddMember("AWS_MARKETPLACE", smithyprelude.Unit)
-
-	ReviewSourceId_G2 = ReviewSourceId.AddMember("G2", smithyprelude.Unit)
-
-	ReviewSourceId_PEERSPOT = ReviewSourceId.AddMember("PEERSPOT", smithyprelude.Unit)
-
-	ReviewSourceSummary_sourceName = ReviewSourceSummary.AddMember("sourceName", _NonEmptyString)
-
-	ReviewSourceSummary_sourceId = ReviewSourceSummary.AddMember("sourceId", ReviewSourceId)
-
-	ReviewSourceSummary_sourceUrl = ReviewSourceSummary.AddMember("sourceUrl", _URL)
-
-	ReviewSourceSummary_averageRating = ReviewSourceSummary.AddMember("averageRating", _NonEmptyString)
-
-	ReviewSourceSummary_totalReviews = ReviewSourceSummary.AddMember("totalReviews", _NonNegativeCount)
-
-	_ReviewSourceSummaryList_member = _ReviewSourceSummaryList.AddMember("member", ReviewSourceSummary)
-
-	ReviewSummary_reviewSourceSummaries = ReviewSummary.AddMember("reviewSourceSummaries", _ReviewSourceSummaryList)
-
-	PricingModelType_USAGE = PricingModelType.AddMember("USAGE", smithyprelude.Unit)
-
-	PricingModelType_CONTRACT = PricingModelType.AddMember("CONTRACT", smithyprelude.Unit)
-
-	PricingModelType_BYOL = PricingModelType.AddMember("BYOL", smithyprelude.Unit)
-
-	PricingModelType_FREE = PricingModelType.AddMember("FREE", smithyprelude.Unit)
-
-	PricingModel_pricingModelType = PricingModel.AddMember("pricingModelType", PricingModelType)
-
-	PricingModel_displayName = PricingModel.AddMember("displayName", _NonEmptyString)
-
-	_PricingModelList_member = _PricingModelList.AddMember("member", PricingModel)
-
-	PricingUnitType_USERS = PricingUnitType.AddMember("USERS", smithyprelude.Unit)
-
-	PricingUnitType_HOSTS = PricingUnitType.AddMember("HOSTS", smithyprelude.Unit)
-
-	PricingUnitType_BANDWIDTH = PricingUnitType.AddMember("BANDWIDTH", smithyprelude.Unit)
-
-	PricingUnitType_DATA = PricingUnitType.AddMember("DATA", smithyprelude.Unit)
-
-	PricingUnitType_TIERS = PricingUnitType.AddMember("TIERS", smithyprelude.Unit)
-
-	PricingUnitType_REQUESTS = PricingUnitType.AddMember("REQUESTS", smithyprelude.Unit)
-
-	PricingUnitType_UNITS = PricingUnitType.AddMember("UNITS", smithyprelude.Unit)
-
-	PricingUnit_pricingUnitType = PricingUnit.AddMember("pricingUnitType", PricingUnitType)
-
-	PricingUnit_displayName = PricingUnit.AddMember("displayName", _NonEmptyString)
-
-	_PricingUnitList_member = _PricingUnitList.AddMember("member", PricingUnit)
-
-	ListingSummaryAssociatedEntity_product = ListingSummaryAssociatedEntity.AddMember("product", ProductInformation)
-
-	_ListingSummaryAssociatedEntityList_member = _ListingSummaryAssociatedEntityList.AddMember("member", ListingSummaryAssociatedEntity)
-
-	ListingSummary_listingId = ListingSummary.AddMember("listingId", _ListingId)
-
-	ListingSummary_listingName = ListingSummary.AddMember("listingName", _NonEmptyString)
-
-	ListingSummary_publisher = ListingSummary.AddMember("publisher", SellerInformation)
-
-	ListingSummary_fulfillmentOptionSummaries = ListingSummary.AddMember("fulfillmentOptionSummaries", _FulfillmentOptionSummaryList)
-
-	ListingSummary_catalog = ListingSummary.AddMember("catalog", _Catalog)
-
-	ListingSummary_shortDescription = ListingSummary.AddMember("shortDescription", _NonEmptyString)
-
-	ListingSummary_logoThumbnailUrl = ListingSummary.AddMember("logoThumbnailUrl", _URL)
-
-	ListingSummary_categories = ListingSummary.AddMember("categories", _CategoryList)
-
-	ListingSummary_badges = ListingSummary.AddMember("badges", _ListingBadgeList)
-
-	ListingSummary_reviewSummary = ListingSummary.AddMember("reviewSummary", ReviewSummary)
-
-	ListingSummary_pricingModels = ListingSummary.AddMember("pricingModels", _PricingModelList)
-
-	ListingSummary_pricingUnits = ListingSummary.AddMember("pricingUnits", _PricingUnitList)
-
-	ListingSummary_associatedEntities = ListingSummary.AddMember("associatedEntities", _ListingSummaryAssociatedEntityList)
-
-	_ListingSummaryList_member = _ListingSummaryList.AddMember("member", ListingSummary)
-
-	NetPaymentTerm_id = NetPaymentTerm.AddMember("id", _TermId)
-
-	NetPaymentTerm_type = NetPaymentTerm.AddMember("type", TermType)
-
-	NetPaymentTerm_paymentDuePeriod = NetPaymentTerm.AddMember("paymentDuePeriod", _BoundedString)
-
-	OfferSetInformation_offerSetId = OfferSetInformation.AddMember("offerSetId", _OfferSetId)
-
-	OfferSetInformation_sellerOfRecord = OfferSetInformation.AddMember("sellerOfRecord", SellerInformation)
-
-	OfferAssociatedEntity_product = OfferAssociatedEntity.AddMember("product", ProductInformation)
-
-	OfferAssociatedEntity_offerSet = OfferAssociatedEntity.AddMember("offerSet", OfferSetInformation)
-
-	_OfferAssociatedEntityList_member = _OfferAssociatedEntityList.AddMember("member", OfferAssociatedEntity)
-
-	OfferSetAssociatedEntity_product = OfferSetAssociatedEntity.AddMember("product", ProductInformation)
-
-	OfferSetAssociatedEntity_offer = OfferSetAssociatedEntity.AddMember("offer", OfferInformation)
-
-	_OfferSetAssociatedEntityList_member = _OfferSetAssociatedEntityList.AddMember("member", OfferSetAssociatedEntity)
-
-	ScheduleItem_chargeDate = ScheduleItem.AddMember("chargeDate", smithyprelude.Timestamp)
-
-	ScheduleItem_chargeAmount = ScheduleItem.AddMember("chargeAmount", _BoundedString)
-
-	_ScheduleList_member = _ScheduleList.AddMember("member", ScheduleItem)
-
-	PaymentScheduleTerm_id = PaymentScheduleTerm.AddMember("id", _TermId)
-
-	PaymentScheduleTerm_type = PaymentScheduleTerm.AddMember("type", TermType)
-
-	PaymentScheduleTerm_currencyCode = PaymentScheduleTerm.AddMember("currencyCode", _CurrencyCode)
-
-	PaymentScheduleTerm_schedule = PaymentScheduleTerm.AddMember("schedule", _ScheduleList)
-
-	RecurringPaymentTerm_id = RecurringPaymentTerm.AddMember("id", _TermId)
-
-	RecurringPaymentTerm_type = RecurringPaymentTerm.AddMember("type", TermType)
-
-	RecurringPaymentTerm_currencyCode = RecurringPaymentTerm.AddMember("currencyCode", _CurrencyCode)
-
-	RecurringPaymentTerm_billingPeriod = RecurringPaymentTerm.AddMember("billingPeriod", BillingPeriodType)
-
-	RecurringPaymentTerm_price = RecurringPaymentTerm.AddMember("price", _BoundedString)
-
-	PercentageRange_minimumValue = PercentageRange.AddMember("minimumValue", _BoundedString)
-
-	PercentageRange_maximumValue = PercentageRange.AddMember("maximumValue", _BoundedString)
-
-	PercentageRange_defaultValue = PercentageRange.AddMember("defaultValue", _BoundedString)
-
-	PriceIncrease_fixedPercentage = PriceIncrease.AddMember("fixedPercentage", FixedPercentage)
-
-	PriceIncrease_percentageRange = PriceIncrease.AddMember("percentageRange", PercentageRange)
-
-	PaymentScheduleEntry_chargeDateOffset = PaymentScheduleEntry.AddMember("chargeDateOffset", _BoundedString)
-
-	PaymentScheduleEntry_chargePercentage = PaymentScheduleEntry.AddMember("chargePercentage", _BoundedString)
-
-	PaymentScheduleEntry_dayOfMonth = PaymentScheduleEntry.AddMember("dayOfMonth", smithyprelude.Integer)
-
-	_PaymentScheduleEntryList_member = _PaymentScheduleEntryList.AddMember("member", PaymentScheduleEntry)
-
-	PaymentScheduleTermTemplate_schedule = PaymentScheduleTermTemplate.AddMember("schedule", _PaymentScheduleEntryList)
-
-	TermTemplate_paymentScheduleTermTemplate = TermTemplate.AddMember("paymentScheduleTermTemplate", PaymentScheduleTermTemplate)
-
-	_TermTemplateList_member = _TermTemplateList.AddMember("member", TermTemplate)
-
-	RenewalTerm_id = RenewalTerm.AddMember("id", _TermId)
-
-	RenewalTerm_type = RenewalTerm.AddMember("type", TermType)
-
-	RenewalTerm_maxRenewals = RenewalTerm.AddMember("maxRenewals", smithyprelude.Integer)
-
-	RenewalTerm_lockoutPeriod = RenewalTerm.AddMember("lockoutPeriod", _BoundedString)
-
-	RenewalTerm_adjustmentDeadline = RenewalTerm.AddMember("adjustmentDeadline", _BoundedString)
-
-	RenewalTerm_priceIncrease = RenewalTerm.AddMember("priceIncrease", PriceIncrease)
-
-	RenewalTerm_termTemplates = RenewalTerm.AddMember("termTemplates", _TermTemplateList)
-
-	SupportTerm_id = SupportTerm.AddMember("id", _TermId)
-
-	SupportTerm_type = SupportTerm.AddMember("type", TermType)
-
-	SupportTerm_refundPolicy = SupportTerm.AddMember("refundPolicy", _BoundedString)
-
-	UsageBasedRateCardItem_rateCard = UsageBasedRateCardItem.AddMember("rateCard", _RateCardList)
-
-	_UsageBasedRateCardList_member = _UsageBasedRateCardList.AddMember("member", UsageBasedRateCardItem)
-
-	UsageBasedPricingTerm_id = UsageBasedPricingTerm.AddMember("id", _TermId)
-
-	UsageBasedPricingTerm_type = UsageBasedPricingTerm.AddMember("type", TermType)
-
-	UsageBasedPricingTerm_currencyCode = UsageBasedPricingTerm.AddMember("currencyCode", _CurrencyCode)
-
-	UsageBasedPricingTerm_rateCards = UsageBasedPricingTerm.AddMember("rateCards", _UsageBasedRateCardList)
-
-	ValidityTerm_id = ValidityTerm.AddMember("id", _TermId)
-
-	ValidityTerm_type = ValidityTerm.AddMember("type", TermType)
-
-	ValidityTerm_agreementDuration = ValidityTerm.AddMember("agreementDuration", _BoundedString)
-
-	ValidityTerm_agreementEndDate = ValidityTerm.AddMember("agreementEndDate", smithyprelude.Timestamp)
-
-	ValidityTerm_agreementStartDate = ValidityTerm.AddMember("agreementStartDate", smithyprelude.Timestamp)
-
-	VariablePaymentTerm_id = VariablePaymentTerm.AddMember("id", _TermId)
-
-	VariablePaymentTerm_type = VariablePaymentTerm.AddMember("type", TermType)
-
-	VariablePaymentTerm_currencyCode = VariablePaymentTerm.AddMember("currencyCode", _CurrencyCode)
-
-	VariablePaymentTerm_maxTotalChargeAmount = VariablePaymentTerm.AddMember("maxTotalChargeAmount", _BoundedString)
-
-	OfferTerm_byolPricingTerm = OfferTerm.AddMember("byolPricingTerm", ByolPricingTerm)
-
-	OfferTerm_configurableUpfrontPricingTerm = OfferTerm.AddMember("configurableUpfrontPricingTerm", ConfigurableUpfrontPricingTerm)
-
-	OfferTerm_fixedUpfrontPricingTerm = OfferTerm.AddMember("fixedUpfrontPricingTerm", FixedUpfrontPricingTerm)
-
-	OfferTerm_freeTrialPricingTerm = OfferTerm.AddMember("freeTrialPricingTerm", FreeTrialPricingTerm)
-
-	OfferTerm_legalTerm = OfferTerm.AddMember("legalTerm", LegalTerm)
-
-	OfferTerm_paymentScheduleTerm = OfferTerm.AddMember("paymentScheduleTerm", PaymentScheduleTerm)
-
-	OfferTerm_recurringPaymentTerm = OfferTerm.AddMember("recurringPaymentTerm", RecurringPaymentTerm)
-
-	OfferTerm_renewalTerm = OfferTerm.AddMember("renewalTerm", RenewalTerm)
-
-	OfferTerm_supportTerm = OfferTerm.AddMember("supportTerm", SupportTerm)
-
-	OfferTerm_usageBasedPricingTerm = OfferTerm.AddMember("usageBasedPricingTerm", UsageBasedPricingTerm)
-
-	OfferTerm_validityTerm = OfferTerm.AddMember("validityTerm", ValidityTerm)
-
-	OfferTerm_variablePaymentTerm = OfferTerm.AddMember("variablePaymentTerm", VariablePaymentTerm)
-
-	OfferTerm_netPaymentTerm = OfferTerm.AddMember("netPaymentTerm", NetPaymentTerm)
-
-	_OfferTermsList_member = _OfferTermsList.AddMember("member", OfferTerm)
-
-	PromotionalEmbeddedImage_title = PromotionalEmbeddedImage.AddMember("title", _NonEmptyString)
-
-	PromotionalEmbeddedImage_url = PromotionalEmbeddedImage.AddMember("url", _URL)
-
-	PromotionalEmbeddedImage_description = PromotionalEmbeddedImage.AddMember("description", _NullableString)
-
-	PromotionalEmbeddedVideo_title = PromotionalEmbeddedVideo.AddMember("title", _NonEmptyString)
-
-	PromotionalEmbeddedVideo_url = PromotionalEmbeddedVideo.AddMember("url", _URL)
-
-	PromotionalEmbeddedVideo_preview = PromotionalEmbeddedVideo.AddMember("preview", _URL)
-
-	PromotionalEmbeddedVideo_thumbnail = PromotionalEmbeddedVideo.AddMember("thumbnail", _URL)
-
-	PromotionalEmbeddedVideo_description = PromotionalEmbeddedVideo.AddMember("description", _NullableString)
-
-	PromotionalMedia_embeddedImage = PromotionalMedia.AddMember("embeddedImage", PromotionalEmbeddedImage)
-
-	PromotionalMedia_embeddedVideo = PromotionalMedia.AddMember("embeddedVideo", PromotionalEmbeddedVideo)
-
-	_PromotionalMediaList_member = _PromotionalMediaList.AddMember("member", PromotionalMedia)
-
-	PurchaseOptionAssociatedEntity_product = PurchaseOptionAssociatedEntity.AddMember("product", ProductInformation)
-
-	PurchaseOptionAssociatedEntity_offer = PurchaseOptionAssociatedEntity.AddMember("offer", OfferInformation)
-
-	PurchaseOptionAssociatedEntity_offerSet = PurchaseOptionAssociatedEntity.AddMember("offerSet", OfferSetInformation)
-
-	_PurchaseOptionAssociatedEntityList_member = _PurchaseOptionAssociatedEntityList.AddMember("member", PurchaseOptionAssociatedEntity)
-
-	PurchaseOptionBadgeType_PRIVATE_PRICING = PurchaseOptionBadgeType.AddMember("PRIVATE_PRICING", smithyprelude.Unit)
-
-	PurchaseOptionBadgeType_FUTURE_DATED = PurchaseOptionBadgeType.AddMember("FUTURE_DATED", smithyprelude.Unit)
-
-	PurchaseOptionBadgeType_REPLACEMENT_OFFER = PurchaseOptionBadgeType.AddMember("REPLACEMENT_OFFER", smithyprelude.Unit)
-
-	PurchaseOptionBadgeType_AUTO_RENEW = PurchaseOptionBadgeType.AddMember("AUTO_RENEW", smithyprelude.Unit)
-
-	PurchaseOptionBadge_displayName = PurchaseOptionBadge.AddMember("displayName", _NonEmptyString)
-
-	PurchaseOptionBadge_badgeType = PurchaseOptionBadge.AddMember("badgeType", PurchaseOptionBadgeType)
-
-	_PurchaseOptionBadgeList_member = _PurchaseOptionBadgeList.AddMember("member", PurchaseOptionBadge)
-
-	PurchaseOptionFilterType_PRODUCT_ID = PurchaseOptionFilterType.AddMember("PRODUCT_ID", smithyprelude.Unit)
-
-	PurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID = PurchaseOptionFilterType.AddMember("SELLER_OF_RECORD_PROFILE_ID", smithyprelude.Unit)
-
-	PurchaseOptionFilterType_PURCHASE_OPTION_TYPE = PurchaseOptionFilterType.AddMember("PURCHASE_OPTION_TYPE", smithyprelude.Unit)
-
-	PurchaseOptionFilterType_VISIBILITY_SCOPE = PurchaseOptionFilterType.AddMember("VISIBILITY_SCOPE", smithyprelude.Unit)
-
-	PurchaseOptionFilterType_AVAILABILITY_STATUS = PurchaseOptionFilterType.AddMember("AVAILABILITY_STATUS", smithyprelude.Unit)
-
-	_PurchaseOptionFilterValueList_member = _PurchaseOptionFilterValueList.AddMember("member", _PurchaseOptionFilterValue)
-
-	PurchaseOptionFilter_filterType = PurchaseOptionFilter.AddMember("filterType", PurchaseOptionFilterType)
-
-	PurchaseOptionFilter_filterValues = PurchaseOptionFilter.AddMember("filterValues", _PurchaseOptionFilterValueList)
-
-	_PurchaseOptionFilterList_member = _PurchaseOptionFilterList.AddMember("member", PurchaseOptionFilter)
-
-	PurchaseOptionType_OFFER = PurchaseOptionType.AddMember("OFFER", smithyprelude.Unit)
-
-	PurchaseOptionType_OFFERSET = PurchaseOptionType.AddMember("OFFERSET", smithyprelude.Unit)
-
-	PurchaseOptionSummary_purchaseOptionId = PurchaseOptionSummary.AddMember("purchaseOptionId", _NonEmptyString)
-
-	PurchaseOptionSummary_catalog = PurchaseOptionSummary.AddMember("catalog", _Catalog)
-
-	PurchaseOptionSummary_purchaseOptionType = PurchaseOptionSummary.AddMember("purchaseOptionType", PurchaseOptionType)
-
-	PurchaseOptionSummary_purchaseOptionName = PurchaseOptionSummary.AddMember("purchaseOptionName", _NonEmptyString)
-
-	PurchaseOptionSummary_availableFromTime = PurchaseOptionSummary.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	PurchaseOptionSummary_expirationTime = PurchaseOptionSummary.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	PurchaseOptionSummary_sellerOfRecord = PurchaseOptionSummary.AddMember("sellerOfRecord", SellerInformation)
-
-	PurchaseOptionSummary_badges = PurchaseOptionSummary.AddMember("badges", _PurchaseOptionBadgeList)
-
-	PurchaseOptionSummary_associatedEntities = PurchaseOptionSummary.AddMember("associatedEntities", _PurchaseOptionAssociatedEntityList)
-
-	_PurchaseOptionSummaryList_member = _PurchaseOptionSummaryList.AddMember("member", PurchaseOptionSummary)
-
-	ResourceType_MANUFACTURER_SUPPORT = ResourceType.AddMember("MANUFACTURER_SUPPORT", smithyprelude.Unit)
-
-	ResourceType_MANUFACTURER_INSTRUCTIONS = ResourceType.AddMember("MANUFACTURER_INSTRUCTIONS", smithyprelude.Unit)
-
-	ResourceContentType_EMAIL = ResourceContentType.AddMember("EMAIL", smithyprelude.Unit)
-
-	ResourceContentType_PHONE_NUMBER = ResourceContentType.AddMember("PHONE_NUMBER", smithyprelude.Unit)
-
-	ResourceContentType_LINK = ResourceContentType.AddMember("LINK", smithyprelude.Unit)
-
-	ResourceContentType_OTHER = ResourceContentType.AddMember("OTHER", smithyprelude.Unit)
-
-	Resource_resourceType = Resource.AddMember("resourceType", ResourceType)
-
-	Resource_contentType = Resource.AddMember("contentType", ResourceContentType)
-
-	Resource_value = Resource.AddMember("value", _NonEmptyString)
-
-	Resource_displayName = Resource.AddMember("displayName", _NullableString)
-
-	_ResourceList_member = _ResourceList.AddMember("member", Resource)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	SearchFilterType_MIN_AVERAGE_CUSTOMER_RATING = SearchFilterType.AddMember("MIN_AVERAGE_CUSTOMER_RATING", smithyprelude.Unit)
-
-	SearchFilterType_MAX_AVERAGE_CUSTOMER_RATING = SearchFilterType.AddMember("MAX_AVERAGE_CUSTOMER_RATING", smithyprelude.Unit)
-
-	SearchFilterType_CATEGORY = SearchFilterType.AddMember("CATEGORY", smithyprelude.Unit)
-
-	SearchFilterType_PUBLISHER = SearchFilterType.AddMember("PUBLISHER", smithyprelude.Unit)
-
-	SearchFilterType_FULFILLMENT_OPTION_TYPE = SearchFilterType.AddMember("FULFILLMENT_OPTION_TYPE", smithyprelude.Unit)
-
-	SearchFilterType_PRICING_MODEL = SearchFilterType.AddMember("PRICING_MODEL", smithyprelude.Unit)
-
-	SearchFilterType_PRICING_UNIT = SearchFilterType.AddMember("PRICING_UNIT", smithyprelude.Unit)
-
-	SearchFilterType_DEPLOYED_ON_AWS = SearchFilterType.AddMember("DEPLOYED_ON_AWS", smithyprelude.Unit)
-
-	SearchFilterType_NUMBER_OF_PRODUCTS = SearchFilterType.AddMember("NUMBER_OF_PRODUCTS", smithyprelude.Unit)
-
-	_SearchFilterValueList_member = _SearchFilterValueList.AddMember("member", _SearchFilterValue)
-
-	SearchFilter_filterType = SearchFilter.AddMember("filterType", SearchFilterType)
-
-	SearchFilter_filterValues = SearchFilter.AddMember("filterValues", _SearchFilterValueList)
-
-	_SearchFilterList_member = _SearchFilterList.AddMember("member", SearchFilter)
-
-	SearchListingsSortBy_RELEVANCE = SearchListingsSortBy.AddMember("RELEVANCE", smithyprelude.Unit)
-
-	SearchListingsSortBy_AVERAGE_CUSTOMER_RATING = SearchListingsSortBy.AddMember("AVERAGE_CUSTOMER_RATING", smithyprelude.Unit)
-
-	SearchListingsSortOrder_DESCENDING = SearchListingsSortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	SearchListingsSortOrder_ASCENDING = SearchListingsSortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SellerEngagementType_REQUEST_FOR_PRIVATE_OFFER = SellerEngagementType.AddMember("REQUEST_FOR_PRIVATE_OFFER", smithyprelude.Unit)
-
-	SellerEngagementType_REQUEST_FOR_DEMO = SellerEngagementType.AddMember("REQUEST_FOR_DEMO", smithyprelude.Unit)
-
-	SellerEngagementContentType_LINK = SellerEngagementContentType.AddMember("LINK", smithyprelude.Unit)
-
-	SellerEngagement_engagementType = SellerEngagement.AddMember("engagementType", SellerEngagementType)
-
-	SellerEngagement_contentType = SellerEngagement.AddMember("contentType", SellerEngagementContentType)
-
-	SellerEngagement_value = SellerEngagement.AddMember("value", _NonEmptyString)
-
-	_SellerEngagementList_member = _SellerEngagementList.AddMember("member", SellerEngagement)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
-
-	_TypeToFacetMap_key = _TypeToFacetMap.AddMember("key", SearchFacetType)
-
-	_TypeToFacetMap_value = _TypeToFacetMap.AddMember("value", _ListingFacetList)
-
-	UseCase_description = UseCase.AddMember("description", _NonEmptyString)
-
-	UseCase_displayName = UseCase.AddMember("displayName", _NonEmptyString)
-
-	UseCase_value = UseCase.AddMember("value", _NonEmptyString)
-
-	UseCaseEntry_useCase = UseCaseEntry.AddMember("useCase", UseCase)
-
-	_UseCaseList_member = _UseCaseList.AddMember("member", UseCaseEntry)
-
-	ValidationExceptionReason_INVALID_PAGINATION_TOKEN = ValidationExceptionReason.AddMember("INVALID_PAGINATION_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS = ValidationExceptionReason.AddMember("MALFORMED_REQUEST_PARAMETERS", smithyprelude.Unit)
-
-	ValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED = ValidationExceptionReason.AddMember("PAGINATION_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ValidationException_message = ValidationException.AddMember("message", _ExceptionMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	GetListingInput_locale = GetListingInput.AddMember("locale", _Locale)
-
-	GetListingInput_listingId = GetListingInput.AddMember("listingId", _ListingId)
-
-	GetListingOutput_locale = GetListingOutput.AddMember("locale", _Locale)
-
-	GetListingOutput_associatedEntities = GetListingOutput.AddMember("associatedEntities", _ListingAssociatedEntityList)
-
-	GetListingOutput_badges = GetListingOutput.AddMember("badges", _ListingBadgeList)
-
-	GetListingOutput_catalog = GetListingOutput.AddMember("catalog", _Catalog)
-
-	GetListingOutput_categories = GetListingOutput.AddMember("categories", _CategoryList)
-
-	GetListingOutput_fulfillmentOptionSummaries = GetListingOutput.AddMember("fulfillmentOptionSummaries", _FulfillmentOptionSummaryList)
-
-	GetListingOutput_highlights = GetListingOutput.AddMember("highlights", _HighlightList)
-
-	GetListingOutput_integrationGuide = GetListingOutput.AddMember("integrationGuide", _NullableString)
-
-	GetListingOutput_listingId = GetListingOutput.AddMember("listingId", _ListingId)
-
-	GetListingOutput_listingName = GetListingOutput.AddMember("listingName", _NonEmptyString)
-
-	GetListingOutput_logoThumbnailUrl = GetListingOutput.AddMember("logoThumbnailUrl", _URL)
-
-	GetListingOutput_longDescription = GetListingOutput.AddMember("longDescription", _NonEmptyString)
-
-	GetListingOutput_pricingModels = GetListingOutput.AddMember("pricingModels", _PricingModelList)
-
-	GetListingOutput_pricingUnits = GetListingOutput.AddMember("pricingUnits", _PricingUnitList)
-
-	GetListingOutput_promotionalMedia = GetListingOutput.AddMember("promotionalMedia", _PromotionalMediaList)
-
-	GetListingOutput_publisher = GetListingOutput.AddMember("publisher", SellerInformation)
-
-	GetListingOutput_resources = GetListingOutput.AddMember("resources", _ResourceList)
-
-	GetListingOutput_reviewSummary = GetListingOutput.AddMember("reviewSummary", ReviewSummary)
-
-	GetListingOutput_sellerEngagements = GetListingOutput.AddMember("sellerEngagements", _SellerEngagementList)
-
-	GetListingOutput_shortDescription = GetListingOutput.AddMember("shortDescription", _NonEmptyString)
-
-	GetListingOutput_useCases = GetListingOutput.AddMember("useCases", _UseCaseList)
-
-	GetOfferInput_locale = GetOfferInput.AddMember("locale", _Locale)
-
-	GetOfferInput_offerId = GetOfferInput.AddMember("offerId", _OfferId)
-
-	GetOfferOutput_locale = GetOfferOutput.AddMember("locale", _Locale)
-
-	GetOfferOutput_offerId = GetOfferOutput.AddMember("offerId", _OfferId)
-
-	GetOfferOutput_catalog = GetOfferOutput.AddMember("catalog", _Catalog)
-
-	GetOfferOutput_offerName = GetOfferOutput.AddMember("offerName", _NullableString)
-
-	GetOfferOutput_expirationTime = GetOfferOutput.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	GetOfferOutput_availableFromTime = GetOfferOutput.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	GetOfferOutput_sellerOfRecord = GetOfferOutput.AddMember("sellerOfRecord", SellerInformation)
-
-	GetOfferOutput_associatedEntities = GetOfferOutput.AddMember("associatedEntities", _OfferAssociatedEntityList)
-
-	GetOfferOutput_agreementProposalId = GetOfferOutput.AddMember("agreementProposalId", _AgreementResourceId)
-
-	GetOfferOutput_replacementAgreementId = GetOfferOutput.AddMember("replacementAgreementId", _AgreementResourceId)
-
-	GetOfferOutput_pricingModel = GetOfferOutput.AddMember("pricingModel", PricingModel)
-
-	GetOfferOutput_badges = GetOfferOutput.AddMember("badges", _PurchaseOptionBadgeList)
-
-	GetOfferSetInput_locale = GetOfferSetInput.AddMember("locale", _Locale)
-
-	GetOfferSetInput_offerSetId = GetOfferSetInput.AddMember("offerSetId", _OfferSetId)
-
-	GetOfferSetOutput_locale = GetOfferSetOutput.AddMember("locale", _Locale)
-
-	GetOfferSetOutput_offerSetId = GetOfferSetOutput.AddMember("offerSetId", _OfferSetId)
-
-	GetOfferSetOutput_catalog = GetOfferSetOutput.AddMember("catalog", _Catalog)
-
-	GetOfferSetOutput_offerSetName = GetOfferSetOutput.AddMember("offerSetName", _NonEmptyString)
-
-	GetOfferSetOutput_availableFromTime = GetOfferSetOutput.AddMember("availableFromTime", smithyprelude.Timestamp)
-
-	GetOfferSetOutput_expirationTime = GetOfferSetOutput.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	GetOfferSetOutput_buyerNotes = GetOfferSetOutput.AddMember("buyerNotes", _NullableString)
-
-	GetOfferSetOutput_sellerOfRecord = GetOfferSetOutput.AddMember("sellerOfRecord", SellerInformation)
-
-	GetOfferSetOutput_badges = GetOfferSetOutput.AddMember("badges", _PurchaseOptionBadgeList)
-
-	GetOfferSetOutput_associatedEntities = GetOfferSetOutput.AddMember("associatedEntities", _OfferSetAssociatedEntityList)
-
-	GetOfferTermsInput_locale = GetOfferTermsInput.AddMember("locale", _Locale)
-
-	GetOfferTermsInput_offerId = GetOfferTermsInput.AddMember("offerId", _OfferId)
-
-	GetOfferTermsInput_maxResults = GetOfferTermsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	GetOfferTermsInput_nextToken = GetOfferTermsInput.AddMember("nextToken", _NextToken)
-
-	GetOfferTermsOutput_locale = GetOfferTermsOutput.AddMember("locale", _Locale)
-
-	GetOfferTermsOutput_offerTerms = GetOfferTermsOutput.AddMember("offerTerms", _OfferTermsList)
-
-	GetOfferTermsOutput_nextToken = GetOfferTermsOutput.AddMember("nextToken", _NextToken)
-
-	GetProductInput_locale = GetProductInput.AddMember("locale", _Locale)
-
-	GetProductInput_productId = GetProductInput.AddMember("productId", _ProductId)
-
-	GetProductOutput_locale = GetProductOutput.AddMember("locale", _Locale)
-
-	GetProductOutput_productId = GetProductOutput.AddMember("productId", _ProductId)
-
-	GetProductOutput_catalog = GetProductOutput.AddMember("catalog", _Catalog)
-
-	GetProductOutput_productName = GetProductOutput.AddMember("productName", _NonEmptyString)
-
-	GetProductOutput_manufacturer = GetProductOutput.AddMember("manufacturer", SellerInformation)
-
-	GetProductOutput_deployedOnAws = GetProductOutput.AddMember("deployedOnAws", DeployedOnAwsStatus)
-
-	GetProductOutput_shortDescription = GetProductOutput.AddMember("shortDescription", _NonEmptyString)
-
-	GetProductOutput_longDescription = GetProductOutput.AddMember("longDescription", _NonEmptyString)
-
-	GetProductOutput_logoThumbnailUrl = GetProductOutput.AddMember("logoThumbnailUrl", _URL)
-
-	GetProductOutput_fulfillmentOptionSummaries = GetProductOutput.AddMember("fulfillmentOptionSummaries", _FulfillmentOptionSummaryList)
-
-	GetProductOutput_categories = GetProductOutput.AddMember("categories", _CategoryList)
-
-	GetProductOutput_highlights = GetProductOutput.AddMember("highlights", _HighlightList)
-
-	GetProductOutput_promotionalMedia = GetProductOutput.AddMember("promotionalMedia", _PromotionalMediaList)
-
-	GetProductOutput_resources = GetProductOutput.AddMember("resources", _ResourceList)
-
-	GetProductOutput_sellerEngagements = GetProductOutput.AddMember("sellerEngagements", _SellerEngagementList)
-
-	GetProductOutput_listingId = GetProductOutput.AddMember("listingId", _ListingId)
-
-	ListFulfillmentOptionsInput_locale = ListFulfillmentOptionsInput.AddMember("locale", _Locale)
-
-	ListFulfillmentOptionsInput_productId = ListFulfillmentOptionsInput.AddMember("productId", _ProductId)
-
-	ListFulfillmentOptionsInput_maxResults = ListFulfillmentOptionsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListFulfillmentOptionsInput_nextToken = ListFulfillmentOptionsInput.AddMember("nextToken", _NextToken)
-
-	ListFulfillmentOptionsOutput_locale = ListFulfillmentOptionsOutput.AddMember("locale", _Locale)
-
-	ListFulfillmentOptionsOutput_fulfillmentOptions = ListFulfillmentOptionsOutput.AddMember("fulfillmentOptions", _FulfillmentOptionsList)
-
-	ListFulfillmentOptionsOutput_nextToken = ListFulfillmentOptionsOutput.AddMember("nextToken", _NextToken)
-
-	ListPurchaseOptionsInput_locale = ListPurchaseOptionsInput.AddMember("locale", _Locale)
-
-	ListPurchaseOptionsInput_filters = ListPurchaseOptionsInput.AddMember("filters", _PurchaseOptionFilterList)
-
-	ListPurchaseOptionsInput_maxResults = ListPurchaseOptionsInput.AddMember("maxResults", _MaxResults)
-
-	ListPurchaseOptionsInput_nextToken = ListPurchaseOptionsInput.AddMember("nextToken", _NextToken)
-
-	ListPurchaseOptionsOutput_purchaseOptions = ListPurchaseOptionsOutput.AddMember("purchaseOptions", _PurchaseOptionSummaryList)
-
-	ListPurchaseOptionsOutput_nextToken = ListPurchaseOptionsOutput.AddMember("nextToken", _NextToken)
-
-	SearchFacetsInput_locale = SearchFacetsInput.AddMember("locale", _Locale)
-
-	SearchFacetsInput_searchText = SearchFacetsInput.AddMember("searchText", _SearchText)
-
-	SearchFacetsInput_filters = SearchFacetsInput.AddMember("filters", _SearchFilterList)
-
-	SearchFacetsInput_facetTypes = SearchFacetsInput.AddMember("facetTypes", _FacetTypeList)
-
-	SearchFacetsInput_nextToken = SearchFacetsInput.AddMember("nextToken", _NextToken)
-
-	SearchFacetsOutput_totalResults = SearchFacetsOutput.AddMember("totalResults", _NonNegativeCount)
-
-	SearchFacetsOutput_listingFacets = SearchFacetsOutput.AddMember("listingFacets", _TypeToFacetMap)
-
-	SearchFacetsOutput_nextToken = SearchFacetsOutput.AddMember("nextToken", _NextToken)
-
-	SearchListingsInput_locale = SearchListingsInput.AddMember("locale", _Locale)
-
-	SearchListingsInput_searchText = SearchListingsInput.AddMember("searchText", _SearchText)
-
-	SearchListingsInput_filters = SearchListingsInput.AddMember("filters", _SearchFilterList)
-
-	SearchListingsInput_maxResults = SearchListingsInput.AddMember("maxResults", _MaxResults)
-
-	SearchListingsInput_sortBy = SearchListingsInput.AddMember("sortBy", SearchListingsSortBy)
-
-	SearchListingsInput_sortOrder = SearchListingsInput.AddMember("sortOrder", SearchListingsSortOrder)
-
-	SearchListingsInput_nextToken = SearchListingsInput.AddMember("nextToken", _NextToken)
-
-	SearchListingsOutput_totalResults = SearchListingsOutput.AddMember("totalResults", _NonNegativeCount)
-
-	SearchListingsOutput_listingSummaries = SearchListingsOutput.AddMember("listingSummaries", _ListingSummaryList)
-
-	SearchListingsOutput_nextToken = SearchListingsOutput.AddMember("nextToken", _NextToken)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AmazonMachineImageCidrIpAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmazonMachineImageCidrIpAddressList_member}}
+var mAmazonMachineImageEbsVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMachineImageEbsVolume_volumeTypes, &sAmazonMachineImageEbsVolume_iops}}
+var m_AmazonMachineImageEbsVolumeTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmazonMachineImageEbsVolumeTypeList_member}}
+var mAmazonMachineImageFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMachineImageFulfillmentOption_fulfillmentOptionId, &sAmazonMachineImageFulfillmentOption_fulfillmentOptionName, &sAmazonMachineImageFulfillmentOption_fulfillmentOptionVersion, &sAmazonMachineImageFulfillmentOption_fulfillmentOptionType, &sAmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName, &sAmazonMachineImageFulfillmentOption_operatingSystems, &sAmazonMachineImageFulfillmentOption_recommendation, &sAmazonMachineImageFulfillmentOption_releaseNotes, &sAmazonMachineImageFulfillmentOption_usageInstructions, &sAmazonMachineImageFulfillmentOption_availableFromTime, &sAmazonMachineImageFulfillmentOption_accessUrlTemplate, &sAmazonMachineImageFulfillmentOption_architecture, &sAmazonMachineImageFulfillmentOption_amiAlias, &sAmazonMachineImageFulfillmentOption_ebsVolume, &sAmazonMachineImageFulfillmentOption_shortDescription}, Hash: &hAmazonMachineImageFulfillmentOption}
+var mAmazonMachineImageOperatingSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMachineImageOperatingSystem_operatingSystemFamilyName, &sAmazonMachineImageOperatingSystem_operatingSystemName, &sAmazonMachineImageOperatingSystem_operatingSystemVersion}}
+var m_AmazonMachineImageOperatingSystemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmazonMachineImageOperatingSystemList_member}}
+var mAmazonMachineImageRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMachineImageRecommendation_instanceType, &sAmazonMachineImageRecommendation_securityGroups}}
+var mAmazonMachineImageSecurityGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMachineImageSecurityGroup_protocol, &sAmazonMachineImageSecurityGroup_fromPort, &sAmazonMachineImageSecurityGroup_toPort, &sAmazonMachineImageSecurityGroup_cidrIpAddresses}}
+var m_AmazonMachineImageSecurityGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmazonMachineImageSecurityGroupList_member}}
+var mApiFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sApiFulfillmentOption_fulfillmentOptionId, &sApiFulfillmentOption_fulfillmentOptionType, &sApiFulfillmentOption_fulfillmentOptionDisplayName, &sApiFulfillmentOption_usageInstructions, &sApiFulfillmentOption_awsSupportedServices}}
+var mAwsSupportedService = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsSupportedService_supportedServiceType, &sAwsSupportedService_displayName, &sAwsSupportedService_description}}
+var m_AwsSupportedServiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsSupportedServiceList_member}}
+var mBillingPeriodType = smithy.SchemaMembers{List: []*smithy.Schema{&sBillingPeriodType_MONTHLY}}
+var mByolPricingTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sByolPricingTerm_id, &sByolPricingTerm_type}}
+var mCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sCategory_categoryId, &sCategory_displayName}}
+var m_CategoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CategoryList_member}}
+var mCloudFormationFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudFormationFulfillmentOption_fulfillmentOptionId, &sCloudFormationFulfillmentOption_fulfillmentOptionName, &sCloudFormationFulfillmentOption_fulfillmentOptionType, &sCloudFormationFulfillmentOption_fulfillmentOptionDisplayName, &sCloudFormationFulfillmentOption_fulfillmentOptionVersion, &sCloudFormationFulfillmentOption_releaseNotes, &sCloudFormationFulfillmentOption_usageInstructions, &sCloudFormationFulfillmentOption_availableFromTime, &sCloudFormationFulfillmentOption_shortDescription, &sCloudFormationFulfillmentOption_longDescription}, Hash: &hCloudFormationFulfillmentOption}
+var mConfigurableUpfrontPricingTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurableUpfrontPricingTerm_id, &sConfigurableUpfrontPricingTerm_type, &sConfigurableUpfrontPricingTerm_currencyCode, &sConfigurableUpfrontPricingTerm_rateCards}}
+var mConfigurableUpfrontRateCardItem = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurableUpfrontRateCardItem_selector, &sConfigurableUpfrontRateCardItem_constraints, &sConfigurableUpfrontRateCardItem_rateCard}}
+var m_ConfigurableUpfrontRateCardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurableUpfrontRateCardList_member}}
+var mConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&sConstraints_multipleDimensionSelection, &sConstraints_quantityConfiguration}}
+var mContainerFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerFulfillmentOption_fulfillmentOptionId, &sContainerFulfillmentOption_fulfillmentOptionName, &sContainerFulfillmentOption_fulfillmentOptionType, &sContainerFulfillmentOption_fulfillmentOptionDisplayName, &sContainerFulfillmentOption_fulfillmentOptionVersion, &sContainerFulfillmentOption_operatingSystems, &sContainerFulfillmentOption_awsSupportedServices, &sContainerFulfillmentOption_releaseNotes, &sContainerFulfillmentOption_usageInstructions}, Hash: &hContainerFulfillmentOption}
+var mContainerOperatingSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerOperatingSystem_operatingSystemFamilyName, &sContainerOperatingSystem_operatingSystemName}}
+var m_ContainerOperatingSystemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerOperatingSystemList_member}}
+var mDataArtifact = smithy.SchemaMembers{List: []*smithy.Schema{&sDataArtifact_description, &sDataArtifact_resourceArn, &sDataArtifact_resourceType, &sDataArtifact_dataClassification}}
+var m_DataArtifactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataArtifactList_member}}
+var mDataExchangeFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDataExchangeFulfillmentOption_fulfillmentOptionId, &sDataExchangeFulfillmentOption_fulfillmentOptionType, &sDataExchangeFulfillmentOption_fulfillmentOptionDisplayName, &sDataExchangeFulfillmentOption_dataArtifacts}}
+var mDeployedOnAwsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployedOnAwsStatus_DEPLOYED, &sDeployedOnAwsStatus_NOT_DEPLOYED, &sDeployedOnAwsStatus_NOT_APPLICABLE}}
+var mDimensionLabel = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionLabel_labelType, &sDimensionLabel_labelValue, &sDimensionLabel_displayName}}
+var m_DimensionLabelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DimensionLabelList_member}}
+var mDimensionLabelType = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionLabelType_REGION, &sDimensionLabelType_SAGEMAKER_OPTION}}
+var mDocumentItem = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentItem_type, &sDocumentItem_url, &sDocumentItem_version}}
+var m_DocumentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentList_member}}
+var mEc2ImageBuilderComponentFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId, &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName, &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType, &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName, &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion, &sEc2ImageBuilderComponentFulfillmentOption_operatingSystems, &sEc2ImageBuilderComponentFulfillmentOption_awsSupportedServices, &sEc2ImageBuilderComponentFulfillmentOption_releaseNotes, &sEc2ImageBuilderComponentFulfillmentOption_usageInstructions}, Hash: &hEc2ImageBuilderComponentFulfillmentOption}
+var mEksAddOnFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAddOnFulfillmentOption_fulfillmentOptionId, &sEksAddOnFulfillmentOption_fulfillmentOptionName, &sEksAddOnFulfillmentOption_fulfillmentOptionType, &sEksAddOnFulfillmentOption_fulfillmentOptionDisplayName, &sEksAddOnFulfillmentOption_fulfillmentOptionVersion, &sEksAddOnFulfillmentOption_operatingSystems, &sEksAddOnFulfillmentOption_releaseNotes, &sEksAddOnFulfillmentOption_usageInstructions, &sEksAddOnFulfillmentOption_awsSupportedServices}, Hash: &hEksAddOnFulfillmentOption}
+var mEksAddOnOperatingSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAddOnOperatingSystem_operatingSystemFamilyName, &sEksAddOnOperatingSystem_operatingSystemName}}
+var m_EksAddOnOperatingSystemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksAddOnOperatingSystemList_member}}
+var m_FacetTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FacetTypeList_member}}
+var mFixedPercentage = smithy.SchemaMembers{List: []*smithy.Schema{&sFixedPercentage_percentageValue}}
+var mFixedUpfrontPricingTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sFixedUpfrontPricingTerm_id, &sFixedUpfrontPricingTerm_type, &sFixedUpfrontPricingTerm_currencyCode, &sFixedUpfrontPricingTerm_duration, &sFixedUpfrontPricingTerm_price, &sFixedUpfrontPricingTerm_grants}}
+var mFreeTrialPricingTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sFreeTrialPricingTerm_id, &sFreeTrialPricingTerm_type, &sFreeTrialPricingTerm_duration, &sFreeTrialPricingTerm_grants}}
+var mFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentOption_amazonMachineImageFulfillmentOption, &sFulfillmentOption_apiFulfillmentOption, &sFulfillmentOption_cloudFormationFulfillmentOption, &sFulfillmentOption_containerFulfillmentOption, &sFulfillmentOption_helmFulfillmentOption, &sFulfillmentOption_eksAddOnFulfillmentOption, &sFulfillmentOption_ec2ImageBuilderComponentFulfillmentOption, &sFulfillmentOption_dataExchangeFulfillmentOption, &sFulfillmentOption_professionalServicesFulfillmentOption, &sFulfillmentOption_saasFulfillmentOption, &sFulfillmentOption_sageMakerAlgorithmFulfillmentOption, &sFulfillmentOption_sageMakerModelFulfillmentOption}, Hash: &hFulfillmentOption}
+var m_FulfillmentOptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FulfillmentOptionsList_member}}
+var mFulfillmentOptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentOptionSummary_fulfillmentOptionType, &sFulfillmentOptionSummary_displayName}}
+var m_FulfillmentOptionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FulfillmentOptionSummaryList_member}}
+var mFulfillmentOptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentOptionType_AMAZON_MACHINE_IMAGE, &sFulfillmentOptionType_API, &sFulfillmentOptionType_CLOUDFORMATION_TEMPLATE, &sFulfillmentOptionType_CONTAINER, &sFulfillmentOptionType_HELM, &sFulfillmentOptionType_EKS_ADD_ON, &sFulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT, &sFulfillmentOptionType_DATA_EXCHANGE, &sFulfillmentOptionType_PROFESSIONAL_SERVICES, &sFulfillmentOptionType_SAAS, &sFulfillmentOptionType_SAGEMAKER_ALGORITHM, &sFulfillmentOptionType_SAGEMAKER_MODEL}, Hash: &hFulfillmentOptionType}
+var mGrantItem = smithy.SchemaMembers{List: []*smithy.Schema{&sGrantItem_dimensionKey, &sGrantItem_displayName, &sGrantItem_description, &sGrantItem_dimensionLabels, &sGrantItem_unit, &sGrantItem_maxQuantity}}
+var m_GrantList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GrantList_member}}
+var mHelmFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sHelmFulfillmentOption_fulfillmentOptionId, &sHelmFulfillmentOption_fulfillmentOptionName, &sHelmFulfillmentOption_fulfillmentOptionType, &sHelmFulfillmentOption_fulfillmentOptionDisplayName, &sHelmFulfillmentOption_fulfillmentOptionVersion, &sHelmFulfillmentOption_operatingSystems, &sHelmFulfillmentOption_releaseNotes, &sHelmFulfillmentOption_awsSupportedServices, &sHelmFulfillmentOption_usageInstructions}, Hash: &hHelmFulfillmentOption}
+var mHelmOperatingSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sHelmOperatingSystem_operatingSystemFamilyName, &sHelmOperatingSystem_operatingSystemName}}
+var m_HelmOperatingSystemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HelmOperatingSystemList_member}}
+var m_HighlightList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HighlightList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLegalDocumentType = smithy.SchemaMembers{List: []*smithy.Schema{&sLegalDocumentType_CUSTOM_EULA, &sLegalDocumentType_CUSTOM_DSA, &sLegalDocumentType_ENTERPRISE_EULA, &sLegalDocumentType_STANDARD_EULA, &sLegalDocumentType_STANDARD_DSA}}
+var mLegalTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sLegalTerm_id, &sLegalTerm_type, &sLegalTerm_documents}}
+var mListingAssociatedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sListingAssociatedEntity_product, &sListingAssociatedEntity_offer}}
+var m_ListingAssociatedEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListingAssociatedEntityList_member}}
+var mListingBadge = smithy.SchemaMembers{List: []*smithy.Schema{&sListingBadge_displayName, &sListingBadge_badgeType}}
+var m_ListingBadgeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListingBadgeList_member}}
+var mListingBadgeType = smithy.SchemaMembers{List: []*smithy.Schema{&sListingBadgeType_AWS_FREE_TIER, &sListingBadgeType_FREE_TRIAL, &sListingBadgeType_DEPLOYED_ON_AWS, &sListingBadgeType_QUICK_LAUNCH, &sListingBadgeType_MULTI_PRODUCT}}
+var mListingFacet = smithy.SchemaMembers{List: []*smithy.Schema{&sListingFacet_value, &sListingFacet_displayName, &sListingFacet_parent, &sListingFacet_count}}
+var m_ListingFacetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListingFacetList_member}}
+var mListingSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sListingSummary_listingId, &sListingSummary_listingName, &sListingSummary_publisher, &sListingSummary_fulfillmentOptionSummaries, &sListingSummary_catalog, &sListingSummary_shortDescription, &sListingSummary_logoThumbnailUrl, &sListingSummary_categories, &sListingSummary_badges, &sListingSummary_reviewSummary, &sListingSummary_pricingModels, &sListingSummary_pricingUnits, &sListingSummary_associatedEntities}, Hash: &hListingSummary}
+var mListingSummaryAssociatedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sListingSummaryAssociatedEntity_product}}
+var m_ListingSummaryAssociatedEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListingSummaryAssociatedEntityList_member}}
+var m_ListingSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListingSummaryList_member}}
+var mNetPaymentTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sNetPaymentTerm_id, &sNetPaymentTerm_type, &sNetPaymentTerm_paymentDuePeriod}}
+var mOfferAssociatedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferAssociatedEntity_product, &sOfferAssociatedEntity_offerSet}}
+var m_OfferAssociatedEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferAssociatedEntityList_member}}
+var mOfferInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferInformation_offerId, &sOfferInformation_offerName, &sOfferInformation_sellerOfRecord}}
+var mOfferSetAssociatedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetAssociatedEntity_product, &sOfferSetAssociatedEntity_offer}}
+var m_OfferSetAssociatedEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetAssociatedEntityList_member}}
+var mOfferSetInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetInformation_offerSetId, &sOfferSetInformation_sellerOfRecord}}
+var mOfferTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTerm_byolPricingTerm, &sOfferTerm_configurableUpfrontPricingTerm, &sOfferTerm_fixedUpfrontPricingTerm, &sOfferTerm_freeTrialPricingTerm, &sOfferTerm_legalTerm, &sOfferTerm_paymentScheduleTerm, &sOfferTerm_recurringPaymentTerm, &sOfferTerm_renewalTerm, &sOfferTerm_supportTerm, &sOfferTerm_usageBasedPricingTerm, &sOfferTerm_validityTerm, &sOfferTerm_variablePaymentTerm, &sOfferTerm_netPaymentTerm}, Hash: &hOfferTerm}
+var m_OfferTermsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferTermsList_member}}
+var mPaymentScheduleEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPaymentScheduleEntry_chargeDateOffset, &sPaymentScheduleEntry_chargePercentage, &sPaymentScheduleEntry_dayOfMonth}}
+var m_PaymentScheduleEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PaymentScheduleEntryList_member}}
+var mPaymentScheduleTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sPaymentScheduleTerm_id, &sPaymentScheduleTerm_type, &sPaymentScheduleTerm_currencyCode, &sPaymentScheduleTerm_schedule}}
+var mPaymentScheduleTermTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sPaymentScheduleTermTemplate_schedule}}
+var mPercentageRange = smithy.SchemaMembers{List: []*smithy.Schema{&sPercentageRange_minimumValue, &sPercentageRange_maximumValue, &sPercentageRange_defaultValue}}
+var mPriceIncrease = smithy.SchemaMembers{List: []*smithy.Schema{&sPriceIncrease_fixedPercentage, &sPriceIncrease_percentageRange}}
+var mPricingModel = smithy.SchemaMembers{List: []*smithy.Schema{&sPricingModel_pricingModelType, &sPricingModel_displayName}}
+var m_PricingModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PricingModelList_member}}
+var mPricingModelType = smithy.SchemaMembers{List: []*smithy.Schema{&sPricingModelType_USAGE, &sPricingModelType_CONTRACT, &sPricingModelType_BYOL, &sPricingModelType_FREE}}
+var mPricingUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sPricingUnit_pricingUnitType, &sPricingUnit_displayName}}
+var m_PricingUnitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PricingUnitList_member}}
+var mPricingUnitType = smithy.SchemaMembers{List: []*smithy.Schema{&sPricingUnitType_USERS, &sPricingUnitType_HOSTS, &sPricingUnitType_BANDWIDTH, &sPricingUnitType_DATA, &sPricingUnitType_TIERS, &sPricingUnitType_REQUESTS, &sPricingUnitType_UNITS}}
+var mProductInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sProductInformation_productId, &sProductInformation_productName, &sProductInformation_manufacturer}}
+var mProfessionalServicesFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sProfessionalServicesFulfillmentOption_fulfillmentOptionId, &sProfessionalServicesFulfillmentOption_fulfillmentOptionType, &sProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName}}
+var mPromotionalEmbeddedImage = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotionalEmbeddedImage_title, &sPromotionalEmbeddedImage_url, &sPromotionalEmbeddedImage_description}}
+var mPromotionalEmbeddedVideo = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotionalEmbeddedVideo_title, &sPromotionalEmbeddedVideo_url, &sPromotionalEmbeddedVideo_preview, &sPromotionalEmbeddedVideo_thumbnail, &sPromotionalEmbeddedVideo_description}}
+var mPromotionalMedia = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotionalMedia_embeddedImage, &sPromotionalMedia_embeddedVideo}}
+var m_PromotionalMediaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PromotionalMediaList_member}}
+var mPurchaseOptionAssociatedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionAssociatedEntity_product, &sPurchaseOptionAssociatedEntity_offer, &sPurchaseOptionAssociatedEntity_offerSet}}
+var m_PurchaseOptionAssociatedEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PurchaseOptionAssociatedEntityList_member}}
+var mPurchaseOptionBadge = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionBadge_displayName, &sPurchaseOptionBadge_badgeType}}
+var m_PurchaseOptionBadgeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PurchaseOptionBadgeList_member}}
+var mPurchaseOptionBadgeType = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionBadgeType_PRIVATE_PRICING, &sPurchaseOptionBadgeType_FUTURE_DATED, &sPurchaseOptionBadgeType_REPLACEMENT_OFFER, &sPurchaseOptionBadgeType_AUTO_RENEW}}
+var mPurchaseOptionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionFilter_filterType, &sPurchaseOptionFilter_filterValues}}
+var m_PurchaseOptionFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PurchaseOptionFilterList_member}}
+var mPurchaseOptionFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionFilterType_PRODUCT_ID, &sPurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID, &sPurchaseOptionFilterType_PURCHASE_OPTION_TYPE, &sPurchaseOptionFilterType_VISIBILITY_SCOPE, &sPurchaseOptionFilterType_AVAILABILITY_STATUS}}
+var m_PurchaseOptionFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PurchaseOptionFilterValueList_member}}
+var mPurchaseOptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionSummary_purchaseOptionId, &sPurchaseOptionSummary_catalog, &sPurchaseOptionSummary_purchaseOptionType, &sPurchaseOptionSummary_purchaseOptionName, &sPurchaseOptionSummary_availableFromTime, &sPurchaseOptionSummary_expirationTime, &sPurchaseOptionSummary_sellerOfRecord, &sPurchaseOptionSummary_badges, &sPurchaseOptionSummary_associatedEntities}, Hash: &hPurchaseOptionSummary}
+var m_PurchaseOptionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PurchaseOptionSummaryList_member}}
+var mPurchaseOptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sPurchaseOptionType_OFFER, &sPurchaseOptionType_OFFERSET}}
+var mRateCardConstraintType = smithy.SchemaMembers{List: []*smithy.Schema{&sRateCardConstraintType_ALLOWED, &sRateCardConstraintType_DISALLOWED}}
+var mRateCardItem = smithy.SchemaMembers{List: []*smithy.Schema{&sRateCardItem_dimensionKey, &sRateCardItem_displayName, &sRateCardItem_description, &sRateCardItem_dimensionLabels, &sRateCardItem_unit, &sRateCardItem_price}}
+var m_RateCardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RateCardList_member}}
+var mRecurringPaymentTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sRecurringPaymentTerm_id, &sRecurringPaymentTerm_type, &sRecurringPaymentTerm_currencyCode, &sRecurringPaymentTerm_billingPeriod, &sRecurringPaymentTerm_price}}
+var mRenewalTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sRenewalTerm_id, &sRenewalTerm_type, &sRenewalTerm_maxRenewals, &sRenewalTerm_lockoutPeriod, &sRenewalTerm_adjustmentDeadline, &sRenewalTerm_priceIncrease, &sRenewalTerm_termTemplates}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_resourceType, &sResource_contentType, &sResource_value, &sResource_displayName}}
+var mResourceContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceContentType_EMAIL, &sResourceContentType_PHONE_NUMBER, &sResourceContentType_LINK, &sResourceContentType_OTHER}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_MANUFACTURER_SUPPORT, &sResourceType_MANUFACTURER_INSTRUCTIONS}}
+var mReviewSourceId = smithy.SchemaMembers{List: []*smithy.Schema{&sReviewSourceId_AWS_MARKETPLACE, &sReviewSourceId_G2, &sReviewSourceId_PEERSPOT}}
+var mReviewSourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReviewSourceSummary_sourceName, &sReviewSourceSummary_sourceId, &sReviewSourceSummary_sourceUrl, &sReviewSourceSummary_averageRating, &sReviewSourceSummary_totalReviews}}
+var m_ReviewSourceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReviewSourceSummaryList_member}}
+var mReviewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReviewSummary_reviewSourceSummaries}}
+var mSaasFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSaasFulfillmentOption_fulfillmentOptionId, &sSaasFulfillmentOption_fulfillmentOptionType, &sSaasFulfillmentOption_fulfillmentOptionDisplayName, &sSaasFulfillmentOption_fulfillmentUrl, &sSaasFulfillmentOption_usageInstructions, &sSaasFulfillmentOption_availableFromTime, &sSaasFulfillmentOption_launchUrl, &sSaasFulfillmentOption_quickLaunch}}
+var mSaasQuickLaunchStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSaasQuickLaunchStatus_ENABLED, &sSaasQuickLaunchStatus_DISABLED}}
+var mSageMakerAlgorithmFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionId, &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionType, &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName, &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion, &sSageMakerAlgorithmFulfillmentOption_releaseNotes, &sSageMakerAlgorithmFulfillmentOption_usageInstructions, &sSageMakerAlgorithmFulfillmentOption_recommendation}}
+var mSageMakerAlgorithmRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType, &sSageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType, &sSageMakerAlgorithmRecommendation_recommendedTrainingInstanceType}}
+var m_SageMakerModelContentTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SageMakerModelContentTypeList_member}}
+var mSageMakerModelFulfillmentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerModelFulfillmentOption_fulfillmentOptionId, &sSageMakerModelFulfillmentOption_fulfillmentOptionType, &sSageMakerModelFulfillmentOption_fulfillmentOptionDisplayName, &sSageMakerModelFulfillmentOption_fulfillmentOptionVersion, &sSageMakerModelFulfillmentOption_releaseNotes, &sSageMakerModelFulfillmentOption_usageInstructions, &sSageMakerModelFulfillmentOption_recommendation, &sSageMakerModelFulfillmentOption_supportedContentTypes, &sSageMakerModelFulfillmentOption_supportedResponseMimeTypes}, Hash: &hSageMakerModelFulfillmentOption}
+var mSageMakerModelRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerModelRecommendation_recommendedBatchTransformInstanceType, &sSageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType}}
+var m_SageMakerModelResponseMimeTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SageMakerModelResponseMimeTypeList_member}}
+var mScheduleItem = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleItem_chargeDate, &sScheduleItem_chargeAmount}}
+var m_ScheduleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduleList_member}}
+var mSearchFacetType = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFacetType_AVERAGE_CUSTOMER_RATING, &sSearchFacetType_CATEGORY, &sSearchFacetType_PUBLISHER, &sSearchFacetType_FULFILLMENT_OPTION_TYPE, &sSearchFacetType_PRICING_MODEL, &sSearchFacetType_PRICING_UNIT, &sSearchFacetType_DEPLOYED_ON_AWS, &sSearchFacetType_NUMBER_OF_PRODUCTS}}
+var mSearchFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFilter_filterType, &sSearchFilter_filterValues}}
+var m_SearchFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFilterList_member}}
+var mSearchFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFilterType_MIN_AVERAGE_CUSTOMER_RATING, &sSearchFilterType_MAX_AVERAGE_CUSTOMER_RATING, &sSearchFilterType_CATEGORY, &sSearchFilterType_PUBLISHER, &sSearchFilterType_FULFILLMENT_OPTION_TYPE, &sSearchFilterType_PRICING_MODEL, &sSearchFilterType_PRICING_UNIT, &sSearchFilterType_DEPLOYED_ON_AWS, &sSearchFilterType_NUMBER_OF_PRODUCTS}, Hash: &hSearchFilterType}
+var m_SearchFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchFilterValueList_member}}
+var mSearchListingsSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchListingsSortBy_RELEVANCE, &sSearchListingsSortBy_AVERAGE_CUSTOMER_RATING}}
+var mSearchListingsSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchListingsSortOrder_DESCENDING, &sSearchListingsSortOrder_ASCENDING}}
+var mSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sSelector_type, &sSelector_value}}
+var mSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectorType_DURATION}}
+var mSellerEngagement = smithy.SchemaMembers{List: []*smithy.Schema{&sSellerEngagement_engagementType, &sSellerEngagement_contentType, &sSellerEngagement_value}}
+var mSellerEngagementContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sSellerEngagementContentType_LINK}}
+var m_SellerEngagementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SellerEngagementList_member}}
+var mSellerEngagementType = smithy.SchemaMembers{List: []*smithy.Schema{&sSellerEngagementType_REQUEST_FOR_PRIVATE_OFFER, &sSellerEngagementType_REQUEST_FOR_DEMO}}
+var mSellerInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sSellerInformation_sellerProfileId, &sSellerInformation_displayName}}
+var mSupportTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportTerm_id, &sSupportTerm_type, &sSupportTerm_refundPolicy}}
+var mTermTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sTermTemplate_paymentScheduleTermTemplate}}
+var m_TermTemplateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TermTemplateList_member}}
+var mTermType = smithy.SchemaMembers{List: []*smithy.Schema{&sTermType_BYOL_PRICING_TERM, &sTermType_CONFIGURABLE_UPFRONT_PRICING_TERM, &sTermType_FIXED_UPFRONT_PRICING_TERM, &sTermType_USAGE_BASED_PRICING_TERM, &sTermType_FREE_TRIAL_PRICING_TERM, &sTermType_LEGAL_TERM, &sTermType_PAYMENT_SCHEDULE_TERM, &sTermType_RECURRING_PAYMENT_TERM, &sTermType_RENEWAL_TERM, &sTermType_SUPPORT_TERM, &sTermType_VALIDITY_TERM, &sTermType_VARIABLE_PAYMENT_TERM, &sTermType_NET_PAYMENT_TERM}, Hash: &hTermType}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var m_TypeToFacetMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypeToFacetMap_key, &s_TypeToFacetMap_value}}
+var mUsageBasedPricingTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageBasedPricingTerm_id, &sUsageBasedPricingTerm_type, &sUsageBasedPricingTerm_currencyCode, &sUsageBasedPricingTerm_rateCards}}
+var mUsageBasedRateCardItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUsageBasedRateCardItem_rateCard}}
+var m_UsageBasedRateCardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UsageBasedRateCardList_member}}
+var mUseCase = smithy.SchemaMembers{List: []*smithy.Schema{&sUseCase_description, &sUseCase_displayName, &sUseCase_value}}
+var mUseCaseEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sUseCaseEntry_useCase}}
+var m_UseCaseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UseCaseList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_INVALID_PAGINATION_TOKEN, &sValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS, &sValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED}}
+var mValidityTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sValidityTerm_id, &sValidityTerm_type, &sValidityTerm_agreementDuration, &sValidityTerm_agreementEndDate, &sValidityTerm_agreementStartDate}}
+var mVariablePaymentTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sVariablePaymentTerm_id, &sVariablePaymentTerm_type, &sVariablePaymentTerm_currencyCode, &sVariablePaymentTerm_maxTotalChargeAmount}}
+var mGetListingInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListingInput_locale, &sGetListingInput_listingId}}
+var mGetListingOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetListingOutput_locale, &sGetListingOutput_associatedEntities, &sGetListingOutput_badges, &sGetListingOutput_catalog, &sGetListingOutput_categories, &sGetListingOutput_fulfillmentOptionSummaries, &sGetListingOutput_highlights, &sGetListingOutput_integrationGuide, &sGetListingOutput_listingId, &sGetListingOutput_listingName, &sGetListingOutput_logoThumbnailUrl, &sGetListingOutput_longDescription, &sGetListingOutput_pricingModels, &sGetListingOutput_pricingUnits, &sGetListingOutput_promotionalMedia, &sGetListingOutput_publisher, &sGetListingOutput_resources, &sGetListingOutput_reviewSummary, &sGetListingOutput_sellerEngagements, &sGetListingOutput_shortDescription, &sGetListingOutput_useCases}, Hash: &hGetListingOutput}
+var mGetOfferInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferInput_locale, &sGetOfferInput_offerId}}
+var mGetOfferOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferOutput_locale, &sGetOfferOutput_offerId, &sGetOfferOutput_catalog, &sGetOfferOutput_offerName, &sGetOfferOutput_expirationTime, &sGetOfferOutput_availableFromTime, &sGetOfferOutput_sellerOfRecord, &sGetOfferOutput_associatedEntities, &sGetOfferOutput_agreementProposalId, &sGetOfferOutput_replacementAgreementId, &sGetOfferOutput_pricingModel, &sGetOfferOutput_badges}, Hash: &hGetOfferOutput}
+var mGetOfferSetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferSetInput_locale, &sGetOfferSetInput_offerSetId}}
+var mGetOfferSetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferSetOutput_locale, &sGetOfferSetOutput_offerSetId, &sGetOfferSetOutput_catalog, &sGetOfferSetOutput_offerSetName, &sGetOfferSetOutput_availableFromTime, &sGetOfferSetOutput_expirationTime, &sGetOfferSetOutput_buyerNotes, &sGetOfferSetOutput_sellerOfRecord, &sGetOfferSetOutput_badges, &sGetOfferSetOutput_associatedEntities}, Hash: &hGetOfferSetOutput}
+var mGetOfferTermsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferTermsInput_locale, &sGetOfferTermsInput_offerId, &sGetOfferTermsInput_maxResults, &sGetOfferTermsInput_nextToken}}
+var mGetOfferTermsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOfferTermsOutput_locale, &sGetOfferTermsOutput_offerTerms, &sGetOfferTermsOutput_nextToken}}
+var mGetProductInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductInput_locale, &sGetProductInput_productId}}
+var mGetProductOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductOutput_locale, &sGetProductOutput_productId, &sGetProductOutput_catalog, &sGetProductOutput_productName, &sGetProductOutput_manufacturer, &sGetProductOutput_deployedOnAws, &sGetProductOutput_shortDescription, &sGetProductOutput_longDescription, &sGetProductOutput_logoThumbnailUrl, &sGetProductOutput_fulfillmentOptionSummaries, &sGetProductOutput_categories, &sGetProductOutput_highlights, &sGetProductOutput_promotionalMedia, &sGetProductOutput_resources, &sGetProductOutput_sellerEngagements, &sGetProductOutput_listingId}, Hash: &hGetProductOutput}
+var mListFulfillmentOptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFulfillmentOptionsInput_locale, &sListFulfillmentOptionsInput_productId, &sListFulfillmentOptionsInput_maxResults, &sListFulfillmentOptionsInput_nextToken}}
+var mListFulfillmentOptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFulfillmentOptionsOutput_locale, &sListFulfillmentOptionsOutput_fulfillmentOptions, &sListFulfillmentOptionsOutput_nextToken}}
+var mListPurchaseOptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPurchaseOptionsInput_locale, &sListPurchaseOptionsInput_filters, &sListPurchaseOptionsInput_maxResults, &sListPurchaseOptionsInput_nextToken}}
+var mListPurchaseOptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPurchaseOptionsOutput_purchaseOptions, &sListPurchaseOptionsOutput_nextToken}}
+var mSearchFacetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFacetsInput_locale, &sSearchFacetsInput_searchText, &sSearchFacetsInput_filters, &sSearchFacetsInput_facetTypes, &sSearchFacetsInput_nextToken}}
+var mSearchFacetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFacetsOutput_totalResults, &sSearchFacetsOutput_listingFacets, &sSearchFacetsOutput_nextToken}}
+var mSearchListingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchListingsInput_locale, &sSearchListingsInput_searchText, &sSearchListingsInput_filters, &sSearchListingsInput_maxResults, &sSearchListingsInput_sortBy, &sSearchListingsInput_sortOrder, &sSearchListingsInput_nextToken}}
+var mSearchListingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchListingsOutput_totalResults, &sSearchListingsOutput_listingSummaries, &sSearchListingsOutput_nextToken}}
+
+var hAmazonMachineImageFulfillmentOption = smithy.MemberHash{Seed: 48, Slots: []uint16{
+	0, 0, 4, 6, 0, 0, 0, 2, 13, 1, 0, 0, 5, 3, 8, 0, 12, 0, 11, 10, 0, 14, 0, 7,
+	0, 0, 0, 9, 0, 0, 15, 0,
+}}
+var hCloudFormationFulfillmentOption = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	3, 0, 0, 0, 1, 10, 0, 2, 0, 6, 0, 5, 9, 0, 4, 0, 0, 0, 0, 0, 8, 0, 0, 7,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hContainerFulfillmentOption = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 4, 0, 0, 6, 0, 0, 0, 8, 1, 0, 2, 9, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+	0, 0, 0, 3, 7, 0, 0, 0,
+}}
+var hEc2ImageBuilderComponentFulfillmentOption = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 4, 0, 0, 6, 0, 0, 0, 8, 1, 0, 2, 9, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+	0, 0, 0, 3, 7, 0, 0, 0,
+}}
+var hEksAddOnFulfillmentOption = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 4, 0, 0, 6, 0, 0, 0, 7, 1, 0, 2, 8, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+	0, 0, 0, 3, 9, 0, 0, 0,
+}}
+var hFulfillmentOption = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 9, 0, 0, 0, 3, 11, 5, 2, 0, 6, 0, 0, 1, 0, 0, 10, 0, 0, 0, 0, 0, 0,
+	12, 7, 0, 4, 0, 0, 8, 0,
+}}
+var hFulfillmentOptionType = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 7, 0, 0, 0, 0, 1, 0, 5, 0, 12, 0, 9, 6, 0, 0, 2, 0, 0, 4, 3, 0, 11,
+	0, 8, 10, 0, 0, 0, 0, 0,
+}}
+var hHelmFulfillmentOption = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 4, 0, 0, 6, 0, 0, 0, 7, 1, 0, 2, 9, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+	0, 0, 0, 3, 8, 0, 0, 0,
+}}
+var hListingSummary = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 0, 6, 0, 10, 4, 0, 11, 0, 9, 0, 0, 2, 0, 0, 0, 13, 12, 0, 0, 0, 3, 0,
+	0, 0, 0, 0, 8, 1, 5, 7,
+}}
+var hOfferTerm = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 13, 6, 0, 0, 0, 4, 3, 0, 1, 7, 9, 0, 0, 11, 0, 12, 0, 2, 0, 0, 0, 0, 0,
+	0, 0, 5, 8, 0, 10, 0, 0,
+}}
+var hPurchaseOptionSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	9, 0, 0, 3, 0, 0, 0, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
+	0, 4, 0, 0, 5, 7, 0, 6,
+}}
+var hSageMakerModelFulfillmentOption = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	2, 0, 0, 9, 1, 0, 0, 0, 0, 5, 0, 4, 8, 0, 3, 0, 0, 0, 0, 0, 0, 7, 0, 6,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hSearchFilterType = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 7, 4, 9, 3, 0, 0, 0, 0, 0, 8, 0, 0, 6, 0, 5, 0, 0,
+	0, 0, 2, 0, 1, 0, 0, 0,
+}}
+var hTermType = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 3, 6, 0, 1, 0, 0, 4, 0, 0, 10, 0, 0, 0, 0, 13, 11, 0, 0, 0, 0, 5, 7, 0,
+	8, 0, 0, 2, 12, 0, 9, 0,
+}}
+var hGetListingOutput = smithy.MemberHash{Seed: 19, Slots: []uint16{
+	0, 13, 0, 0, 0, 0, 6, 0, 18, 0, 14, 0, 0, 0, 0, 9, 0, 0, 0, 11, 0, 16, 0, 0,
+	0, 0, 0, 0, 19, 7, 10, 0, 0, 12, 20, 5, 0, 0, 0, 0, 15, 0, 0, 1, 0, 0, 0, 17,
+	0, 21, 0, 3, 0, 0, 0, 0, 8, 4, 0, 0, 2, 0, 0, 0,
+}}
+var hGetOfferOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 9, 12, 0, 0, 0, 4, 11, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 3,
+	0, 0, 0, 0, 6, 7, 10, 5,
+}}
+var hGetOfferSetOutput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 10, 0, 0, 0, 7, 1, 0, 6, 5, 0, 0, 0,
+	8, 0, 0, 0, 0, 4, 3, 2,
+}}
+var hGetProductOutput = smithy.MemberHash{Seed: 51, Slots: []uint16{
+	10, 0, 16, 0, 0, 0, 0, 0, 7, 6, 0, 0, 0, 3, 0, 4, 0, 5, 13, 0, 12, 9, 14, 2,
+	0, 8, 11, 15, 0, 0, 0, 1,
+}}
+
+var sGetListing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListing, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetListing})
+var sGetOffer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOffer, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetOffer})
+var sGetOfferSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferSet, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetOfferSet})
+var sGetOfferTerms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferTerms, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetOfferTerms})
+var sGetProduct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProduct, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetProduct})
+var sListFulfillmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFulfillmentOptions, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListFulfillmentOptions})
+var sListPurchaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPurchaseOptions, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListPurchaseOptions})
+var sSearchFacets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFacets, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eSearchFacets})
+var sSearchListings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchListings, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eSearchListings})
+var s_AWSMarketplaceDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMarketplaceDiscovery, Type: smithy.ShapeTypeService, Ext: &e_AWSMarketplaceDiscovery})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AgreementResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgreementResourceId, Type: smithy.ShapeTypeString, Ext: &e_AgreementResourceId})
+var s_AmazonMachineImageCidrIpAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonMachineImageCidrIpAddressList, Members: &m_AmazonMachineImageCidrIpAddressList, Type: smithy.ShapeTypeList, Ext: &e_AmazonMachineImageCidrIpAddressList})
+var s_AmazonMachineImageCidrIpAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AmazonMachineImageCidrIpAddressList_member})
+var sAmazonMachineImageEbsVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMachineImageEbsVolume, Members: &mAmazonMachineImageEbsVolume, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageEbsVolume})
+var sAmazonMachineImageEbsVolume_volumeTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeTypes", ID: &i_AmazonMachineImageEbsVolumeTypeList, Members: &m_AmazonMachineImageEbsVolumeTypeList, Type: smithy.ShapeTypeList, Ext: &eAmazonMachineImageEbsVolume_volumeTypes})
+var sAmazonMachineImageEbsVolume_iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iops", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAmazonMachineImageEbsVolume_iops})
+var s_AmazonMachineImageEbsVolumeTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonMachineImageEbsVolumeTypeList, Members: &m_AmazonMachineImageEbsVolumeTypeList, Type: smithy.ShapeTypeList, Ext: &e_AmazonMachineImageEbsVolumeTypeList})
+var s_AmazonMachineImageEbsVolumeTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AmazonMachineImageEbsVolumeTypeList_member})
+var sAmazonMachineImageFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMachineImageFulfillmentOption, Members: &mAmazonMachineImageFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageFulfillmentOption})
+var sAmazonMachineImageFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_fulfillmentOptionId})
+var sAmazonMachineImageFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_fulfillmentOptionName})
+var sAmazonMachineImageFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_fulfillmentOptionVersion})
+var sAmazonMachineImageFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eAmazonMachineImageFulfillmentOption_fulfillmentOptionType})
+var sAmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName})
+var sAmazonMachineImageFulfillmentOption_operatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystems", ID: &i_AmazonMachineImageOperatingSystemList, Members: &m_AmazonMachineImageOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &eAmazonMachineImageFulfillmentOption_operatingSystems})
+var sAmazonMachineImageFulfillmentOption_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iAmazonMachineImageRecommendation, Members: &mAmazonMachineImageRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageFulfillmentOption_recommendation})
+var sAmazonMachineImageFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_releaseNotes})
+var sAmazonMachineImageFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_usageInstructions})
+var sAmazonMachineImageFulfillmentOption_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAmazonMachineImageFulfillmentOption_availableFromTime})
+var sAmazonMachineImageFulfillmentOption_accessUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessUrlTemplate", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_accessUrlTemplate})
+var sAmazonMachineImageFulfillmentOption_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_architecture})
+var sAmazonMachineImageFulfillmentOption_amiAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiAlias", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_amiAlias})
+var sAmazonMachineImageFulfillmentOption_ebsVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsVolume", ID: &iAmazonMachineImageEbsVolume, Members: &mAmazonMachineImageEbsVolume, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageFulfillmentOption_ebsVolume})
+var sAmazonMachineImageFulfillmentOption_shortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageFulfillmentOption_shortDescription})
+var sAmazonMachineImageOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMachineImageOperatingSystem, Members: &mAmazonMachineImageOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageOperatingSystem})
+var sAmazonMachineImageOperatingSystem_operatingSystemFamilyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemFamilyName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageOperatingSystem_operatingSystemFamilyName})
+var sAmazonMachineImageOperatingSystem_operatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageOperatingSystem_operatingSystemName})
+var sAmazonMachineImageOperatingSystem_operatingSystemVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageOperatingSystem_operatingSystemVersion})
+var s_AmazonMachineImageOperatingSystemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonMachineImageOperatingSystemList, Members: &m_AmazonMachineImageOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &e_AmazonMachineImageOperatingSystemList})
+var s_AmazonMachineImageOperatingSystemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAmazonMachineImageOperatingSystem, Members: &mAmazonMachineImageOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &e_AmazonMachineImageOperatingSystemList_member})
+var sAmazonMachineImageRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMachineImageRecommendation, Members: &mAmazonMachineImageRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageRecommendation})
+var sAmazonMachineImageRecommendation_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageRecommendation_instanceType})
+var sAmazonMachineImageRecommendation_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_AmazonMachineImageSecurityGroupList, Members: &m_AmazonMachineImageSecurityGroupList, Type: smithy.ShapeTypeList, Ext: &eAmazonMachineImageRecommendation_securityGroups})
+var sAmazonMachineImageSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMachineImageSecurityGroup, Members: &mAmazonMachineImageSecurityGroup, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMachineImageSecurityGroup})
+var sAmazonMachineImageSecurityGroup_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmazonMachineImageSecurityGroup_protocol})
+var sAmazonMachineImageSecurityGroup_fromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromPort", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAmazonMachineImageSecurityGroup_fromPort})
+var sAmazonMachineImageSecurityGroup_toPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toPort", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAmazonMachineImageSecurityGroup_toPort})
+var sAmazonMachineImageSecurityGroup_cidrIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidrIpAddresses", ID: &i_AmazonMachineImageCidrIpAddressList, Members: &m_AmazonMachineImageCidrIpAddressList, Type: smithy.ShapeTypeList, Ext: &eAmazonMachineImageSecurityGroup_cidrIpAddresses})
+var s_AmazonMachineImageSecurityGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonMachineImageSecurityGroupList, Members: &m_AmazonMachineImageSecurityGroupList, Type: smithy.ShapeTypeList, Ext: &e_AmazonMachineImageSecurityGroupList})
+var s_AmazonMachineImageSecurityGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAmazonMachineImageSecurityGroup, Members: &mAmazonMachineImageSecurityGroup, Type: smithy.ShapeTypeStructure, Ext: &e_AmazonMachineImageSecurityGroupList_member})
+var sApiFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiFulfillmentOption, Members: &mApiFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eApiFulfillmentOption})
+var sApiFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eApiFulfillmentOption_fulfillmentOptionId})
+var sApiFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eApiFulfillmentOption_fulfillmentOptionType})
+var sApiFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eApiFulfillmentOption_fulfillmentOptionDisplayName})
+var sApiFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eApiFulfillmentOption_usageInstructions})
+var sApiFulfillmentOption_awsSupportedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSupportedServices", ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &eApiFulfillmentOption_awsSupportedServices})
+var sAwsSupportedService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsSupportedService, Members: &mAwsSupportedService, Type: smithy.ShapeTypeStructure, Ext: &eAwsSupportedService})
+var sAwsSupportedService_supportedServiceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedServiceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAwsSupportedService_supportedServiceType})
+var sAwsSupportedService_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAwsSupportedService_displayName})
+var sAwsSupportedService_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAwsSupportedService_description})
+var s_AwsSupportedServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &e_AwsSupportedServiceList})
+var s_AwsSupportedServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsSupportedService, Members: &mAwsSupportedService, Type: smithy.ShapeTypeStructure, Ext: &e_AwsSupportedServiceList_member})
+var sBillingPeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingPeriodType, Members: &mBillingPeriodType, Type: smithy.ShapeTypeEnum, Ext: &eBillingPeriodType})
+var sBillingPeriodType_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingPeriodType_MONTHLY})
+var s_BoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &e_BoundedString})
+var sByolPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByolPricingTerm, Members: &mByolPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eByolPricingTerm})
+var sByolPricingTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eByolPricingTerm_id})
+var sByolPricingTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eByolPricingTerm_type})
+var s_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &e_Catalog})
+var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &eCategory})
+var sCategory_categoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCategory_categoryId})
+var sCategory_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCategory_displayName})
+var s_CategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &e_CategoryList})
+var s_CategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &e_CategoryList_member})
+var sCloudFormationFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudFormationFulfillmentOption, Members: &mCloudFormationFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eCloudFormationFulfillmentOption})
+var sCloudFormationFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_fulfillmentOptionId})
+var sCloudFormationFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_fulfillmentOptionName})
+var sCloudFormationFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eCloudFormationFulfillmentOption_fulfillmentOptionType})
+var sCloudFormationFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_fulfillmentOptionDisplayName})
+var sCloudFormationFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_fulfillmentOptionVersion})
+var sCloudFormationFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_releaseNotes})
+var sCloudFormationFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_usageInstructions})
+var sCloudFormationFulfillmentOption_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCloudFormationFulfillmentOption_availableFromTime})
+var sCloudFormationFulfillmentOption_shortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_shortDescription})
+var sCloudFormationFulfillmentOption_longDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudFormationFulfillmentOption_longDescription})
+var sConfigurableUpfrontPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurableUpfrontPricingTerm, Members: &mConfigurableUpfrontPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eConfigurableUpfrontPricingTerm})
+var sConfigurableUpfrontPricingTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eConfigurableUpfrontPricingTerm_id})
+var sConfigurableUpfrontPricingTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eConfigurableUpfrontPricingTerm_type})
+var sConfigurableUpfrontPricingTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eConfigurableUpfrontPricingTerm_currencyCode})
+var sConfigurableUpfrontPricingTerm_rateCards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateCards", ID: &i_ConfigurableUpfrontRateCardList, Members: &m_ConfigurableUpfrontRateCardList, Type: smithy.ShapeTypeList, Ext: &eConfigurableUpfrontPricingTerm_rateCards})
+var sConfigurableUpfrontRateCardItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurableUpfrontRateCardItem, Members: &mConfigurableUpfrontRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &eConfigurableUpfrontRateCardItem})
+var sConfigurableUpfrontRateCardItem_selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selector", ID: &iSelector, Members: &mSelector, Type: smithy.ShapeTypeStructure, Ext: &eConfigurableUpfrontRateCardItem_selector})
+var sConfigurableUpfrontRateCardItem_constraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "constraints", ID: &iConstraints, Members: &mConstraints, Type: smithy.ShapeTypeStructure, Ext: &eConfigurableUpfrontRateCardItem_constraints})
+var sConfigurableUpfrontRateCardItem_rateCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateCard", ID: &i_RateCardList, Members: &m_RateCardList, Type: smithy.ShapeTypeList, Ext: &eConfigurableUpfrontRateCardItem_rateCard})
+var s_ConfigurableUpfrontRateCardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurableUpfrontRateCardList, Members: &m_ConfigurableUpfrontRateCardList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurableUpfrontRateCardList})
+var s_ConfigurableUpfrontRateCardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurableUpfrontRateCardItem, Members: &mConfigurableUpfrontRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigurableUpfrontRateCardList_member})
+var sConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstraints, Members: &mConstraints, Type: smithy.ShapeTypeStructure, Ext: &eConstraints})
+var sConstraints_multipleDimensionSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "multipleDimensionSelection", ID: &iRateCardConstraintType, Members: &mRateCardConstraintType, Type: smithy.ShapeTypeEnum, Ext: &eConstraints_multipleDimensionSelection})
+var sConstraints_quantityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantityConfiguration", ID: &iRateCardConstraintType, Members: &mRateCardConstraintType, Type: smithy.ShapeTypeEnum, Ext: &eConstraints_quantityConfiguration})
+var sContainerFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerFulfillmentOption, Members: &mContainerFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eContainerFulfillmentOption})
+var sContainerFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_fulfillmentOptionId})
+var sContainerFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_fulfillmentOptionName})
+var sContainerFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eContainerFulfillmentOption_fulfillmentOptionType})
+var sContainerFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_fulfillmentOptionDisplayName})
+var sContainerFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_fulfillmentOptionVersion})
+var sContainerFulfillmentOption_operatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystems", ID: &i_ContainerOperatingSystemList, Members: &m_ContainerOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &eContainerFulfillmentOption_operatingSystems})
+var sContainerFulfillmentOption_awsSupportedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSupportedServices", ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &eContainerFulfillmentOption_awsSupportedServices})
+var sContainerFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_releaseNotes})
+var sContainerFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerFulfillmentOption_usageInstructions})
+var sContainerOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerOperatingSystem, Members: &mContainerOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &eContainerOperatingSystem})
+var sContainerOperatingSystem_operatingSystemFamilyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemFamilyName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerOperatingSystem_operatingSystemFamilyName})
+var sContainerOperatingSystem_operatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContainerOperatingSystem_operatingSystemName})
+var s_ContainerOperatingSystemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerOperatingSystemList, Members: &m_ContainerOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &e_ContainerOperatingSystemList})
+var s_ContainerOperatingSystemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerOperatingSystem, Members: &mContainerOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &e_ContainerOperatingSystemList_member})
+var s_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &e_CurrencyCode})
+var sDataArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataArtifact, Members: &mDataArtifact, Type: smithy.ShapeTypeStructure, Ext: &eDataArtifact})
+var sDataArtifact_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataArtifact_description})
+var sDataArtifact_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataArtifact_resourceArn})
+var sDataArtifact_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataArtifact_resourceType})
+var sDataArtifact_dataClassification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataClassification", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataArtifact_dataClassification})
+var s_DataArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataArtifactList, Members: &m_DataArtifactList, Type: smithy.ShapeTypeList, Ext: &e_DataArtifactList})
+var s_DataArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataArtifact, Members: &mDataArtifact, Type: smithy.ShapeTypeStructure, Ext: &e_DataArtifactList_member})
+var sDataExchangeFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataExchangeFulfillmentOption, Members: &mDataExchangeFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eDataExchangeFulfillmentOption})
+var sDataExchangeFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataExchangeFulfillmentOption_fulfillmentOptionId})
+var sDataExchangeFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eDataExchangeFulfillmentOption_fulfillmentOptionType})
+var sDataExchangeFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataExchangeFulfillmentOption_fulfillmentOptionDisplayName})
+var sDataExchangeFulfillmentOption_dataArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataArtifacts", ID: &i_DataArtifactList, Members: &m_DataArtifactList, Type: smithy.ShapeTypeList, Ext: &eDataExchangeFulfillmentOption_dataArtifacts})
+var sDeployedOnAwsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployedOnAwsStatus, Members: &mDeployedOnAwsStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeployedOnAwsStatus})
+var sDeployedOnAwsStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeployedOnAwsStatus_DEPLOYED})
+var sDeployedOnAwsStatus_NOT_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeployedOnAwsStatus_NOT_DEPLOYED})
+var sDeployedOnAwsStatus_NOT_APPLICABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLICABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeployedOnAwsStatus_NOT_APPLICABLE})
+var sDimensionLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionLabel, Members: &mDimensionLabel, Type: smithy.ShapeTypeStructure, Ext: &eDimensionLabel})
+var sDimensionLabel_labelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelType", ID: &iDimensionLabelType, Members: &mDimensionLabelType, Type: smithy.ShapeTypeEnum, Ext: &eDimensionLabel_labelType})
+var sDimensionLabel_labelValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labelValue", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eDimensionLabel_labelValue})
+var sDimensionLabel_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eDimensionLabel_displayName})
+var s_DimensionLabelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionLabelList, Members: &m_DimensionLabelList, Type: smithy.ShapeTypeList, Ext: &e_DimensionLabelList})
+var s_DimensionLabelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionLabel, Members: &mDimensionLabel, Type: smithy.ShapeTypeStructure, Ext: &e_DimensionLabelList_member})
+var sDimensionLabelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionLabelType, Members: &mDimensionLabelType, Type: smithy.ShapeTypeEnum, Ext: &eDimensionLabelType})
+var sDimensionLabelType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionLabelType_REGION})
+var sDimensionLabelType_SAGEMAKER_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionLabelType_SAGEMAKER_OPTION})
+var sDocumentItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentItem, Members: &mDocumentItem, Type: smithy.ShapeTypeStructure, Ext: &eDocumentItem})
+var sDocumentItem_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iLegalDocumentType, Members: &mLegalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eDocumentItem_type})
+var sDocumentItem_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eDocumentItem_url})
+var sDocumentItem_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentItem_version})
+var s_DocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &e_DocumentList})
+var s_DocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocumentItem, Members: &mDocumentItem, Type: smithy.ShapeTypeStructure, Ext: &e_DocumentList_member})
+var sEc2ImageBuilderComponentFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEc2ImageBuilderComponentFulfillmentOption, Members: &mEc2ImageBuilderComponentFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eEc2ImageBuilderComponentFulfillmentOption})
+var sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId})
+var sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName})
+var sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType})
+var sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName})
+var sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion})
+var sEc2ImageBuilderComponentFulfillmentOption_operatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystems", ID: &i_ContainerOperatingSystemList, Members: &m_ContainerOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &eEc2ImageBuilderComponentFulfillmentOption_operatingSystems})
+var sEc2ImageBuilderComponentFulfillmentOption_awsSupportedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSupportedServices", ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &eEc2ImageBuilderComponentFulfillmentOption_awsSupportedServices})
+var sEc2ImageBuilderComponentFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_releaseNotes})
+var sEc2ImageBuilderComponentFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEc2ImageBuilderComponentFulfillmentOption_usageInstructions})
+var sEksAddOnFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAddOnFulfillmentOption, Members: &mEksAddOnFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eEksAddOnFulfillmentOption})
+var sEksAddOnFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_fulfillmentOptionId})
+var sEksAddOnFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_fulfillmentOptionName})
+var sEksAddOnFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eEksAddOnFulfillmentOption_fulfillmentOptionType})
+var sEksAddOnFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_fulfillmentOptionDisplayName})
+var sEksAddOnFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_fulfillmentOptionVersion})
+var sEksAddOnFulfillmentOption_operatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystems", ID: &i_EksAddOnOperatingSystemList, Members: &m_EksAddOnOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &eEksAddOnFulfillmentOption_operatingSystems})
+var sEksAddOnFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_releaseNotes})
+var sEksAddOnFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnFulfillmentOption_usageInstructions})
+var sEksAddOnFulfillmentOption_awsSupportedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSupportedServices", ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &eEksAddOnFulfillmentOption_awsSupportedServices})
+var sEksAddOnOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAddOnOperatingSystem, Members: &mEksAddOnOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &eEksAddOnOperatingSystem})
+var sEksAddOnOperatingSystem_operatingSystemFamilyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemFamilyName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnOperatingSystem_operatingSystemFamilyName})
+var sEksAddOnOperatingSystem_operatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEksAddOnOperatingSystem_operatingSystemName})
+var s_EksAddOnOperatingSystemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksAddOnOperatingSystemList, Members: &m_EksAddOnOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &e_EksAddOnOperatingSystemList})
+var s_EksAddOnOperatingSystemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksAddOnOperatingSystem, Members: &mEksAddOnOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &e_EksAddOnOperatingSystemList_member})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_FacetTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FacetTypeList, Members: &m_FacetTypeList, Type: smithy.ShapeTypeList, Ext: &e_FacetTypeList})
+var s_FacetTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchFacetType, Members: &mSearchFacetType, Type: smithy.ShapeTypeEnum, Ext: &e_FacetTypeList_member})
+var sFixedPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFixedPercentage, Members: &mFixedPercentage, Type: smithy.ShapeTypeStructure, Ext: &eFixedPercentage})
+var sFixedPercentage_percentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentageValue", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eFixedPercentage_percentageValue})
+var sFixedUpfrontPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFixedUpfrontPricingTerm, Members: &mFixedUpfrontPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eFixedUpfrontPricingTerm})
+var sFixedUpfrontPricingTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eFixedUpfrontPricingTerm_id})
+var sFixedUpfrontPricingTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eFixedUpfrontPricingTerm_type})
+var sFixedUpfrontPricingTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eFixedUpfrontPricingTerm_currencyCode})
+var sFixedUpfrontPricingTerm_duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duration", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eFixedUpfrontPricingTerm_duration})
+var sFixedUpfrontPricingTerm_price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "price", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eFixedUpfrontPricingTerm_price})
+var sFixedUpfrontPricingTerm_grants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grants", ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &eFixedUpfrontPricingTerm_grants})
+var sFreeTrialPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFreeTrialPricingTerm, Members: &mFreeTrialPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eFreeTrialPricingTerm})
+var sFreeTrialPricingTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eFreeTrialPricingTerm_id})
+var sFreeTrialPricingTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eFreeTrialPricingTerm_type})
+var sFreeTrialPricingTerm_duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duration", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eFreeTrialPricingTerm_duration})
+var sFreeTrialPricingTerm_grants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grants", ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &eFreeTrialPricingTerm_grants})
+var sFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentOption, Members: &mFulfillmentOption, Type: smithy.ShapeTypeUnion, Ext: &eFulfillmentOption})
+var sFulfillmentOption_amazonMachineImageFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonMachineImageFulfillmentOption", ID: &iAmazonMachineImageFulfillmentOption, Members: &mAmazonMachineImageFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_amazonMachineImageFulfillmentOption})
+var sFulfillmentOption_apiFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiFulfillmentOption", ID: &iApiFulfillmentOption, Members: &mApiFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_apiFulfillmentOption})
+var sFulfillmentOption_cloudFormationFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudFormationFulfillmentOption", ID: &iCloudFormationFulfillmentOption, Members: &mCloudFormationFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_cloudFormationFulfillmentOption})
+var sFulfillmentOption_containerFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerFulfillmentOption", ID: &iContainerFulfillmentOption, Members: &mContainerFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_containerFulfillmentOption})
+var sFulfillmentOption_helmFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "helmFulfillmentOption", ID: &iHelmFulfillmentOption, Members: &mHelmFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_helmFulfillmentOption})
+var sFulfillmentOption_eksAddOnFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksAddOnFulfillmentOption", ID: &iEksAddOnFulfillmentOption, Members: &mEksAddOnFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_eksAddOnFulfillmentOption})
+var sFulfillmentOption_ec2ImageBuilderComponentFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2ImageBuilderComponentFulfillmentOption", ID: &iEc2ImageBuilderComponentFulfillmentOption, Members: &mEc2ImageBuilderComponentFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_ec2ImageBuilderComponentFulfillmentOption})
+var sFulfillmentOption_dataExchangeFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataExchangeFulfillmentOption", ID: &iDataExchangeFulfillmentOption, Members: &mDataExchangeFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_dataExchangeFulfillmentOption})
+var sFulfillmentOption_professionalServicesFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "professionalServicesFulfillmentOption", ID: &iProfessionalServicesFulfillmentOption, Members: &mProfessionalServicesFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_professionalServicesFulfillmentOption})
+var sFulfillmentOption_saasFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saasFulfillmentOption", ID: &iSaasFulfillmentOption, Members: &mSaasFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_saasFulfillmentOption})
+var sFulfillmentOption_sageMakerAlgorithmFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sageMakerAlgorithmFulfillmentOption", ID: &iSageMakerAlgorithmFulfillmentOption, Members: &mSageMakerAlgorithmFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_sageMakerAlgorithmFulfillmentOption})
+var sFulfillmentOption_sageMakerModelFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sageMakerModelFulfillmentOption", ID: &iSageMakerModelFulfillmentOption, Members: &mSageMakerModelFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOption_sageMakerModelFulfillmentOption})
+var s_FulfillmentOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FulfillmentOptionsList, Members: &m_FulfillmentOptionsList, Type: smithy.ShapeTypeList, Ext: &e_FulfillmentOptionsList})
+var s_FulfillmentOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFulfillmentOption, Members: &mFulfillmentOption, Type: smithy.ShapeTypeUnion, Ext: &e_FulfillmentOptionsList_member})
+var sFulfillmentOptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentOptionSummary, Members: &mFulfillmentOptionSummary, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionSummary})
+var sFulfillmentOptionSummary_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eFulfillmentOptionSummary_fulfillmentOptionType})
+var sFulfillmentOptionSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFulfillmentOptionSummary_displayName})
+var s_FulfillmentOptionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FulfillmentOptionSummaryList, Members: &m_FulfillmentOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_FulfillmentOptionSummaryList})
+var s_FulfillmentOptionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFulfillmentOptionSummary, Members: &mFulfillmentOptionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FulfillmentOptionSummaryList_member})
+var sFulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eFulfillmentOptionType})
+var sFulfillmentOptionType_AMAZON_MACHINE_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_MACHINE_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_AMAZON_MACHINE_IMAGE})
+var sFulfillmentOptionType_API = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_API})
+var sFulfillmentOptionType_CLOUDFORMATION_TEMPLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDFORMATION_TEMPLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_CLOUDFORMATION_TEMPLATE})
+var sFulfillmentOptionType_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_CONTAINER})
+var sFulfillmentOptionType_HELM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HELM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_HELM})
+var sFulfillmentOptionType_EKS_ADD_ON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_ADD_ON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_EKS_ADD_ON})
+var sFulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2_IMAGE_BUILDER_COMPONENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT})
+var sFulfillmentOptionType_DATA_EXCHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_EXCHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_DATA_EXCHANGE})
+var sFulfillmentOptionType_PROFESSIONAL_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSIONAL_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_PROFESSIONAL_SERVICES})
+var sFulfillmentOptionType_SAAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_SAAS})
+var sFulfillmentOptionType_SAGEMAKER_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_SAGEMAKER_ALGORITHM})
+var sFulfillmentOptionType_SAGEMAKER_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentOptionType_SAGEMAKER_MODEL})
+var sGrantItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantItem, Members: &mGrantItem, Type: smithy.ShapeTypeStructure, Ext: &eGrantItem})
+var sGrantItem_dimensionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensionKey", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eGrantItem_dimensionKey})
+var sGrantItem_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eGrantItem_displayName})
+var sGrantItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eGrantItem_description})
+var sGrantItem_dimensionLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensionLabels", ID: &i_DimensionLabelList, Members: &m_DimensionLabelList, Type: smithy.ShapeTypeList, Ext: &eGrantItem_dimensionLabels})
+var sGrantItem_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eGrantItem_unit})
+var sGrantItem_maxQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxQuantity", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGrantItem_maxQuantity})
+var s_GrantList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &e_GrantList})
+var s_GrantList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrantItem, Members: &mGrantItem, Type: smithy.ShapeTypeStructure, Ext: &e_GrantList_member})
+var sHelmFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHelmFulfillmentOption, Members: &mHelmFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eHelmFulfillmentOption})
+var sHelmFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_fulfillmentOptionId})
+var sHelmFulfillmentOption_fulfillmentOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_fulfillmentOptionName})
+var sHelmFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eHelmFulfillmentOption_fulfillmentOptionType})
+var sHelmFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_fulfillmentOptionDisplayName})
+var sHelmFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_fulfillmentOptionVersion})
+var sHelmFulfillmentOption_operatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystems", ID: &i_HelmOperatingSystemList, Members: &m_HelmOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &eHelmFulfillmentOption_operatingSystems})
+var sHelmFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_releaseNotes})
+var sHelmFulfillmentOption_awsSupportedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSupportedServices", ID: &i_AwsSupportedServiceList, Members: &m_AwsSupportedServiceList, Type: smithy.ShapeTypeList, Ext: &eHelmFulfillmentOption_awsSupportedServices})
+var sHelmFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmFulfillmentOption_usageInstructions})
+var sHelmOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHelmOperatingSystem, Members: &mHelmOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &eHelmOperatingSystem})
+var sHelmOperatingSystem_operatingSystemFamilyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemFamilyName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmOperatingSystem_operatingSystemFamilyName})
+var sHelmOperatingSystem_operatingSystemName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHelmOperatingSystem_operatingSystemName})
+var s_HelmOperatingSystemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HelmOperatingSystemList, Members: &m_HelmOperatingSystemList, Type: smithy.ShapeTypeList, Ext: &e_HelmOperatingSystemList})
+var s_HelmOperatingSystemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHelmOperatingSystem, Members: &mHelmOperatingSystem, Type: smithy.ShapeTypeStructure, Ext: &e_HelmOperatingSystemList_member})
+var s_HighlightList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &e_HighlightList})
+var s_HighlightList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_HighlightList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sLegalDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLegalDocumentType, Members: &mLegalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eLegalDocumentType})
+var sLegalDocumentType_CUSTOM_EULA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_EULA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLegalDocumentType_CUSTOM_EULA})
+var sLegalDocumentType_CUSTOM_DSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_DSA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLegalDocumentType_CUSTOM_DSA})
+var sLegalDocumentType_ENTERPRISE_EULA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTERPRISE_EULA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLegalDocumentType_ENTERPRISE_EULA})
+var sLegalDocumentType_STANDARD_EULA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD_EULA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLegalDocumentType_STANDARD_EULA})
+var sLegalDocumentType_STANDARD_DSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD_DSA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLegalDocumentType_STANDARD_DSA})
+var sLegalTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLegalTerm, Members: &mLegalTerm, Type: smithy.ShapeTypeStructure, Ext: &eLegalTerm})
+var sLegalTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eLegalTerm_id})
+var sLegalTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eLegalTerm_type})
+var sLegalTerm_documents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documents", ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &eLegalTerm_documents})
+var sListingAssociatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingAssociatedEntity, Members: &mListingAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &eListingAssociatedEntity})
+var sListingAssociatedEntity_product = smithy.NewStaticSchema(smithy.StaticSchema{Member: "product", ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &eListingAssociatedEntity_product})
+var sListingAssociatedEntity_offer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offer", ID: &iOfferInformation, Members: &mOfferInformation, Type: smithy.ShapeTypeStructure, Ext: &eListingAssociatedEntity_offer})
+var s_ListingAssociatedEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingAssociatedEntityList, Members: &m_ListingAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &e_ListingAssociatedEntityList})
+var s_ListingAssociatedEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListingAssociatedEntity, Members: &mListingAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_ListingAssociatedEntityList_member})
+var sListingBadge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingBadge, Members: &mListingBadge, Type: smithy.ShapeTypeStructure, Ext: &eListingBadge})
+var sListingBadge_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListingBadge_displayName})
+var sListingBadge_badgeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeType", ID: &iListingBadgeType, Members: &mListingBadgeType, Type: smithy.ShapeTypeEnum, Ext: &eListingBadge_badgeType})
+var s_ListingBadgeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingBadgeList, Members: &m_ListingBadgeList, Type: smithy.ShapeTypeList, Ext: &e_ListingBadgeList})
+var s_ListingBadgeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListingBadge, Members: &mListingBadge, Type: smithy.ShapeTypeStructure, Ext: &e_ListingBadgeList_member})
+var sListingBadgeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingBadgeType, Members: &mListingBadgeType, Type: smithy.ShapeTypeEnum, Ext: &eListingBadgeType})
+var sListingBadgeType_AWS_FREE_TIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_FREE_TIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListingBadgeType_AWS_FREE_TIER})
+var sListingBadgeType_FREE_TRIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_TRIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListingBadgeType_FREE_TRIAL})
+var sListingBadgeType_DEPLOYED_ON_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED_ON_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListingBadgeType_DEPLOYED_ON_AWS})
+var sListingBadgeType_QUICK_LAUNCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUICK_LAUNCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListingBadgeType_QUICK_LAUNCH})
+var sListingBadgeType_MULTI_PRODUCT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_PRODUCT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListingBadgeType_MULTI_PRODUCT})
+var sListingFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingFacet, Members: &mListingFacet, Type: smithy.ShapeTypeStructure, Ext: &eListingFacet})
+var sListingFacet_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListingFacet_value})
+var sListingFacet_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListingFacet_displayName})
+var sListingFacet_parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parent", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eListingFacet_parent})
+var sListingFacet_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_NonNegativeCount, Type: smithy.ShapeTypeLong, Ext: &eListingFacet_count})
+var s_ListingFacetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingFacetList, Members: &m_ListingFacetList, Type: smithy.ShapeTypeList, Ext: &e_ListingFacetList})
+var s_ListingFacetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListingFacet, Members: &mListingFacet, Type: smithy.ShapeTypeStructure, Ext: &e_ListingFacetList_member})
+var s_ListingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingId, Type: smithy.ShapeTypeString, Ext: &e_ListingId})
+var sListingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingSummary, Members: &mListingSummary, Type: smithy.ShapeTypeStructure, Ext: &eListingSummary})
+var sListingSummary_listingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingId", ID: &i_ListingId, Type: smithy.ShapeTypeString, Ext: &eListingSummary_listingId})
+var sListingSummary_listingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListingSummary_listingName})
+var sListingSummary_publisher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publisher", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eListingSummary_publisher})
+var sListingSummary_fulfillmentOptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionSummaries", ID: &i_FulfillmentOptionSummaryList, Members: &m_FulfillmentOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_fulfillmentOptionSummaries})
+var sListingSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eListingSummary_catalog})
+var sListingSummary_shortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortDescription", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eListingSummary_shortDescription})
+var sListingSummary_logoThumbnailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logoThumbnailUrl", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eListingSummary_logoThumbnailUrl})
+var sListingSummary_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_categories})
+var sListingSummary_badges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badges", ID: &i_ListingBadgeList, Members: &m_ListingBadgeList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_badges})
+var sListingSummary_reviewSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewSummary", ID: &iReviewSummary, Members: &mReviewSummary, Type: smithy.ShapeTypeStructure, Ext: &eListingSummary_reviewSummary})
+var sListingSummary_pricingModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingModels", ID: &i_PricingModelList, Members: &m_PricingModelList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_pricingModels})
+var sListingSummary_pricingUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingUnits", ID: &i_PricingUnitList, Members: &m_PricingUnitList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_pricingUnits})
+var sListingSummary_associatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntities", ID: &i_ListingSummaryAssociatedEntityList, Members: &m_ListingSummaryAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &eListingSummary_associatedEntities})
+var sListingSummaryAssociatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListingSummaryAssociatedEntity, Members: &mListingSummaryAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &eListingSummaryAssociatedEntity})
+var sListingSummaryAssociatedEntity_product = smithy.NewStaticSchema(smithy.StaticSchema{Member: "product", ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &eListingSummaryAssociatedEntity_product})
+var s_ListingSummaryAssociatedEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingSummaryAssociatedEntityList, Members: &m_ListingSummaryAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &e_ListingSummaryAssociatedEntityList})
+var s_ListingSummaryAssociatedEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListingSummaryAssociatedEntity, Members: &mListingSummaryAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_ListingSummaryAssociatedEntityList_member})
+var s_ListingSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingSummaryList, Members: &m_ListingSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ListingSummaryList})
+var s_ListingSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListingSummary, Members: &mListingSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ListingSummaryList_member})
+var s_Locale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &e_Locale})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sNetPaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetPaymentTerm, Members: &mNetPaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eNetPaymentTerm})
+var sNetPaymentTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eNetPaymentTerm_id})
+var sNetPaymentTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eNetPaymentTerm_type})
+var sNetPaymentTerm_paymentDuePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentDuePeriod", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eNetPaymentTerm_paymentDuePeriod})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonNegativeCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeCount, Type: smithy.ShapeTypeLong, Ext: &e_NonNegativeCount})
+var s_NullableString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &e_NullableString})
+var sOfferAssociatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferAssociatedEntity, Members: &mOfferAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &eOfferAssociatedEntity})
+var sOfferAssociatedEntity_product = smithy.NewStaticSchema(smithy.StaticSchema{Member: "product", ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferAssociatedEntity_product})
+var sOfferAssociatedEntity_offerSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSet", ID: &iOfferSetInformation, Members: &mOfferSetInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferAssociatedEntity_offerSet})
+var s_OfferAssociatedEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferAssociatedEntityList, Members: &m_OfferAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &e_OfferAssociatedEntityList})
+var s_OfferAssociatedEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferAssociatedEntity, Members: &mOfferAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_OfferAssociatedEntityList_member})
+var s_OfferId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferId, Type: smithy.ShapeTypeString, Ext: &e_OfferId})
+var sOfferInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferInformation, Members: &mOfferInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferInformation})
+var sOfferInformation_offerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerId", ID: &i_OfferId, Type: smithy.ShapeTypeString, Ext: &eOfferInformation_offerId})
+var sOfferInformation_offerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerName", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eOfferInformation_offerName})
+var sOfferInformation_sellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerOfRecord", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferInformation_sellerOfRecord})
+var sOfferSetAssociatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetAssociatedEntity, Members: &mOfferSetAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &eOfferSetAssociatedEntity})
+var sOfferSetAssociatedEntity_product = smithy.NewStaticSchema(smithy.StaticSchema{Member: "product", ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferSetAssociatedEntity_product})
+var sOfferSetAssociatedEntity_offer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offer", ID: &iOfferInformation, Members: &mOfferInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferSetAssociatedEntity_offer})
+var s_OfferSetAssociatedEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetAssociatedEntityList, Members: &m_OfferSetAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &e_OfferSetAssociatedEntityList})
+var s_OfferSetAssociatedEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferSetAssociatedEntity, Members: &mOfferSetAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_OfferSetAssociatedEntityList_member})
+var s_OfferSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetId, Type: smithy.ShapeTypeString, Ext: &e_OfferSetId})
+var sOfferSetInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetInformation, Members: &mOfferSetInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferSetInformation})
+var sOfferSetInformation_offerSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSetId", ID: &i_OfferSetId, Type: smithy.ShapeTypeString, Ext: &eOfferSetInformation_offerSetId})
+var sOfferSetInformation_sellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerOfRecord", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eOfferSetInformation_sellerOfRecord})
+var sOfferTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTerm, Members: &mOfferTerm, Type: smithy.ShapeTypeUnion, Ext: &eOfferTerm})
+var sOfferTerm_byolPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byolPricingTerm", ID: &iByolPricingTerm, Members: &mByolPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_byolPricingTerm})
+var sOfferTerm_configurableUpfrontPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurableUpfrontPricingTerm", ID: &iConfigurableUpfrontPricingTerm, Members: &mConfigurableUpfrontPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_configurableUpfrontPricingTerm})
+var sOfferTerm_fixedUpfrontPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixedUpfrontPricingTerm", ID: &iFixedUpfrontPricingTerm, Members: &mFixedUpfrontPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_fixedUpfrontPricingTerm})
+var sOfferTerm_freeTrialPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "freeTrialPricingTerm", ID: &iFreeTrialPricingTerm, Members: &mFreeTrialPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_freeTrialPricingTerm})
+var sOfferTerm_legalTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalTerm", ID: &iLegalTerm, Members: &mLegalTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_legalTerm})
+var sOfferTerm_paymentScheduleTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentScheduleTerm", ID: &iPaymentScheduleTerm, Members: &mPaymentScheduleTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_paymentScheduleTerm})
+var sOfferTerm_recurringPaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recurringPaymentTerm", ID: &iRecurringPaymentTerm, Members: &mRecurringPaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_recurringPaymentTerm})
+var sOfferTerm_renewalTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renewalTerm", ID: &iRenewalTerm, Members: &mRenewalTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_renewalTerm})
+var sOfferTerm_supportTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportTerm", ID: &iSupportTerm, Members: &mSupportTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_supportTerm})
+var sOfferTerm_usageBasedPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageBasedPricingTerm", ID: &iUsageBasedPricingTerm, Members: &mUsageBasedPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_usageBasedPricingTerm})
+var sOfferTerm_validityTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validityTerm", ID: &iValidityTerm, Members: &mValidityTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_validityTerm})
+var sOfferTerm_variablePaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variablePaymentTerm", ID: &iVariablePaymentTerm, Members: &mVariablePaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_variablePaymentTerm})
+var sOfferTerm_netPaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "netPaymentTerm", ID: &iNetPaymentTerm, Members: &mNetPaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eOfferTerm_netPaymentTerm})
+var s_OfferTermsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTermsList, Members: &m_OfferTermsList, Type: smithy.ShapeTypeList, Ext: &e_OfferTermsList})
+var s_OfferTermsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferTerm, Members: &mOfferTerm, Type: smithy.ShapeTypeUnion, Ext: &e_OfferTermsList_member})
+var sPaymentScheduleEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPaymentScheduleEntry, Members: &mPaymentScheduleEntry, Type: smithy.ShapeTypeStructure, Ext: &ePaymentScheduleEntry})
+var sPaymentScheduleEntry_chargeDateOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeDateOffset", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &ePaymentScheduleEntry_chargeDateOffset})
+var sPaymentScheduleEntry_chargePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargePercentage", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &ePaymentScheduleEntry_chargePercentage})
+var sPaymentScheduleEntry_dayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dayOfMonth", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ePaymentScheduleEntry_dayOfMonth})
+var s_PaymentScheduleEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaymentScheduleEntryList, Members: &m_PaymentScheduleEntryList, Type: smithy.ShapeTypeList, Ext: &e_PaymentScheduleEntryList})
+var s_PaymentScheduleEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPaymentScheduleEntry, Members: &mPaymentScheduleEntry, Type: smithy.ShapeTypeStructure, Ext: &e_PaymentScheduleEntryList_member})
+var sPaymentScheduleTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPaymentScheduleTerm, Members: &mPaymentScheduleTerm, Type: smithy.ShapeTypeStructure, Ext: &ePaymentScheduleTerm})
+var sPaymentScheduleTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &ePaymentScheduleTerm_id})
+var sPaymentScheduleTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &ePaymentScheduleTerm_type})
+var sPaymentScheduleTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &ePaymentScheduleTerm_currencyCode})
+var sPaymentScheduleTerm_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &ePaymentScheduleTerm_schedule})
+var sPaymentScheduleTermTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPaymentScheduleTermTemplate, Members: &mPaymentScheduleTermTemplate, Type: smithy.ShapeTypeStructure, Ext: &ePaymentScheduleTermTemplate})
+var sPaymentScheduleTermTemplate_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &i_PaymentScheduleEntryList, Members: &m_PaymentScheduleEntryList, Type: smithy.ShapeTypeList, Ext: &ePaymentScheduleTermTemplate_schedule})
+var sPercentageRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPercentageRange, Members: &mPercentageRange, Type: smithy.ShapeTypeStructure, Ext: &ePercentageRange})
+var sPercentageRange_minimumValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumValue", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &ePercentageRange_minimumValue})
+var sPercentageRange_maximumValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumValue", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &ePercentageRange_maximumValue})
+var sPercentageRange_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &ePercentageRange_defaultValue})
+var sPriceIncrease = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriceIncrease, Members: &mPriceIncrease, Type: smithy.ShapeTypeUnion, Ext: &ePriceIncrease})
+var sPriceIncrease_fixedPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixedPercentage", ID: &iFixedPercentage, Members: &mFixedPercentage, Type: smithy.ShapeTypeStructure, Ext: &ePriceIncrease_fixedPercentage})
+var sPriceIncrease_percentageRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentageRange", ID: &iPercentageRange, Members: &mPercentageRange, Type: smithy.ShapeTypeStructure, Ext: &ePriceIncrease_percentageRange})
+var sPricingModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingModel, Members: &mPricingModel, Type: smithy.ShapeTypeStructure, Ext: &ePricingModel})
+var sPricingModel_pricingModelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingModelType", ID: &iPricingModelType, Members: &mPricingModelType, Type: smithy.ShapeTypeEnum, Ext: &ePricingModel_pricingModelType})
+var sPricingModel_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePricingModel_displayName})
+var s_PricingModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingModelList, Members: &m_PricingModelList, Type: smithy.ShapeTypeList, Ext: &e_PricingModelList})
+var s_PricingModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingModel, Members: &mPricingModel, Type: smithy.ShapeTypeStructure, Ext: &e_PricingModelList_member})
+var sPricingModelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingModelType, Members: &mPricingModelType, Type: smithy.ShapeTypeEnum, Ext: &ePricingModelType})
+var sPricingModelType_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingModelType_USAGE})
+var sPricingModelType_CONTRACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTRACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingModelType_CONTRACT})
+var sPricingModelType_BYOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingModelType_BYOL})
+var sPricingModelType_FREE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingModelType_FREE})
+var sPricingUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingUnit, Members: &mPricingUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnit})
+var sPricingUnit_pricingUnitType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingUnitType", ID: &iPricingUnitType, Members: &mPricingUnitType, Type: smithy.ShapeTypeEnum, Ext: &ePricingUnit_pricingUnitType})
+var sPricingUnit_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePricingUnit_displayName})
+var s_PricingUnitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingUnitList, Members: &m_PricingUnitList, Type: smithy.ShapeTypeList, Ext: &e_PricingUnitList})
+var s_PricingUnitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingUnit, Members: &mPricingUnit, Type: smithy.ShapeTypeStructure, Ext: &e_PricingUnitList_member})
+var sPricingUnitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingUnitType, Members: &mPricingUnitType, Type: smithy.ShapeTypeEnum, Ext: &ePricingUnitType})
+var sPricingUnitType_USERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_USERS})
+var sPricingUnitType_HOSTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOSTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_HOSTS})
+var sPricingUnitType_BANDWIDTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BANDWIDTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_BANDWIDTH})
+var sPricingUnitType_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_DATA})
+var sPricingUnitType_TIERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_TIERS})
+var sPricingUnitType_REQUESTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_REQUESTS})
+var sPricingUnitType_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingUnitType_UNITS})
+var s_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &e_ProductId})
+var sProductInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &eProductInformation})
+var sProductInformation_productId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &eProductInformation_productId})
+var sProductInformation_productName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eProductInformation_productName})
+var sProductInformation_manufacturer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manufacturer", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eProductInformation_manufacturer})
+var sProfessionalServicesFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfessionalServicesFulfillmentOption, Members: &mProfessionalServicesFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eProfessionalServicesFulfillmentOption})
+var sProfessionalServicesFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProfessionalServicesFulfillmentOption_fulfillmentOptionId})
+var sProfessionalServicesFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eProfessionalServicesFulfillmentOption_fulfillmentOptionType})
+var sProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName})
+var sPromotionalEmbeddedImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotionalEmbeddedImage, Members: &mPromotionalEmbeddedImage, Type: smithy.ShapeTypeStructure, Ext: &ePromotionalEmbeddedImage})
+var sPromotionalEmbeddedImage_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedImage_title})
+var sPromotionalEmbeddedImage_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedImage_url})
+var sPromotionalEmbeddedImage_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedImage_description})
+var sPromotionalEmbeddedVideo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotionalEmbeddedVideo, Members: &mPromotionalEmbeddedVideo, Type: smithy.ShapeTypeStructure, Ext: &ePromotionalEmbeddedVideo})
+var sPromotionalEmbeddedVideo_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedVideo_title})
+var sPromotionalEmbeddedVideo_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedVideo_url})
+var sPromotionalEmbeddedVideo_preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preview", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedVideo_preview})
+var sPromotionalEmbeddedVideo_thumbnail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbnail", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedVideo_thumbnail})
+var sPromotionalEmbeddedVideo_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &ePromotionalEmbeddedVideo_description})
+var sPromotionalMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotionalMedia, Members: &mPromotionalMedia, Type: smithy.ShapeTypeUnion, Ext: &ePromotionalMedia})
+var sPromotionalMedia_embeddedImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddedImage", ID: &iPromotionalEmbeddedImage, Members: &mPromotionalEmbeddedImage, Type: smithy.ShapeTypeStructure, Ext: &ePromotionalMedia_embeddedImage})
+var sPromotionalMedia_embeddedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddedVideo", ID: &iPromotionalEmbeddedVideo, Members: &mPromotionalEmbeddedVideo, Type: smithy.ShapeTypeStructure, Ext: &ePromotionalMedia_embeddedVideo})
+var s_PromotionalMediaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PromotionalMediaList, Members: &m_PromotionalMediaList, Type: smithy.ShapeTypeList, Ext: &e_PromotionalMediaList})
+var s_PromotionalMediaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPromotionalMedia, Members: &mPromotionalMedia, Type: smithy.ShapeTypeUnion, Ext: &e_PromotionalMediaList_member})
+var sPurchaseOptionAssociatedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionAssociatedEntity, Members: &mPurchaseOptionAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionAssociatedEntity})
+var sPurchaseOptionAssociatedEntity_product = smithy.NewStaticSchema(smithy.StaticSchema{Member: "product", ID: &iProductInformation, Members: &mProductInformation, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionAssociatedEntity_product})
+var sPurchaseOptionAssociatedEntity_offer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offer", ID: &iOfferInformation, Members: &mOfferInformation, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionAssociatedEntity_offer})
+var sPurchaseOptionAssociatedEntity_offerSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSet", ID: &iOfferSetInformation, Members: &mOfferSetInformation, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionAssociatedEntity_offerSet})
+var s_PurchaseOptionAssociatedEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionAssociatedEntityList, Members: &m_PurchaseOptionAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOptionAssociatedEntityList})
+var s_PurchaseOptionAssociatedEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOptionAssociatedEntity, Members: &mPurchaseOptionAssociatedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_PurchaseOptionAssociatedEntityList_member})
+var sPurchaseOptionBadge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionBadge, Members: &mPurchaseOptionBadge, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionBadge})
+var sPurchaseOptionBadge_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePurchaseOptionBadge_displayName})
+var sPurchaseOptionBadge_badgeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badgeType", ID: &iPurchaseOptionBadgeType, Members: &mPurchaseOptionBadgeType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionBadge_badgeType})
+var s_PurchaseOptionBadgeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionBadgeList, Members: &m_PurchaseOptionBadgeList, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOptionBadgeList})
+var s_PurchaseOptionBadgeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOptionBadge, Members: &mPurchaseOptionBadge, Type: smithy.ShapeTypeStructure, Ext: &e_PurchaseOptionBadgeList_member})
+var sPurchaseOptionBadgeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionBadgeType, Members: &mPurchaseOptionBadgeType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionBadgeType})
+var sPurchaseOptionBadgeType_PRIVATE_PRICING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE_PRICING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionBadgeType_PRIVATE_PRICING})
+var sPurchaseOptionBadgeType_FUTURE_DATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FUTURE_DATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionBadgeType_FUTURE_DATED})
+var sPurchaseOptionBadgeType_REPLACEMENT_OFFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACEMENT_OFFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionBadgeType_REPLACEMENT_OFFER})
+var sPurchaseOptionBadgeType_AUTO_RENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_RENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionBadgeType_AUTO_RENEW})
+var sPurchaseOptionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionFilter, Members: &mPurchaseOptionFilter, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilter})
+var sPurchaseOptionFilter_filterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterType", ID: &iPurchaseOptionFilterType, Members: &mPurchaseOptionFilterType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionFilter_filterType})
+var sPurchaseOptionFilter_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_PurchaseOptionFilterValueList, Members: &m_PurchaseOptionFilterValueList, Type: smithy.ShapeTypeList, Ext: &ePurchaseOptionFilter_filterValues})
+var s_PurchaseOptionFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionFilterList, Members: &m_PurchaseOptionFilterList, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOptionFilterList})
+var s_PurchaseOptionFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOptionFilter, Members: &mPurchaseOptionFilter, Type: smithy.ShapeTypeStructure, Ext: &e_PurchaseOptionFilterList_member})
+var sPurchaseOptionFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionFilterType, Members: &mPurchaseOptionFilterType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionFilterType})
+var sPurchaseOptionFilterType_PRODUCT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilterType_PRODUCT_ID})
+var sPurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELLER_OF_RECORD_PROFILE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID})
+var sPurchaseOptionFilterType_PURCHASE_OPTION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_OPTION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilterType_PURCHASE_OPTION_TYPE})
+var sPurchaseOptionFilterType_VISIBILITY_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VISIBILITY_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilterType_VISIBILITY_SCOPE})
+var sPurchaseOptionFilterType_AVAILABILITY_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABILITY_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionFilterType_AVAILABILITY_STATUS})
+var s_PurchaseOptionFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionFilterValue, Type: smithy.ShapeTypeString, Ext: &e_PurchaseOptionFilterValue})
+var s_PurchaseOptionFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionFilterValueList, Members: &m_PurchaseOptionFilterValueList, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOptionFilterValueList})
+var s_PurchaseOptionFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PurchaseOptionFilterValue, Type: smithy.ShapeTypeString, Ext: &e_PurchaseOptionFilterValueList_member})
+var sPurchaseOptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionSummary, Members: &mPurchaseOptionSummary, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionSummary})
+var sPurchaseOptionSummary_purchaseOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOptionId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePurchaseOptionSummary_purchaseOptionId})
+var sPurchaseOptionSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ePurchaseOptionSummary_catalog})
+var sPurchaseOptionSummary_purchaseOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOptionType", ID: &iPurchaseOptionType, Members: &mPurchaseOptionType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionSummary_purchaseOptionType})
+var sPurchaseOptionSummary_purchaseOptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOptionName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePurchaseOptionSummary_purchaseOptionName})
+var sPurchaseOptionSummary_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePurchaseOptionSummary_availableFromTime})
+var sPurchaseOptionSummary_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePurchaseOptionSummary_expirationTime})
+var sPurchaseOptionSummary_sellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerOfRecord", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionSummary_sellerOfRecord})
+var sPurchaseOptionSummary_badges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badges", ID: &i_PurchaseOptionBadgeList, Members: &m_PurchaseOptionBadgeList, Type: smithy.ShapeTypeList, Ext: &ePurchaseOptionSummary_badges})
+var sPurchaseOptionSummary_associatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntities", ID: &i_PurchaseOptionAssociatedEntityList, Members: &m_PurchaseOptionAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &ePurchaseOptionSummary_associatedEntities})
+var s_PurchaseOptionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOptionSummaryList, Members: &m_PurchaseOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOptionSummaryList})
+var s_PurchaseOptionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOptionSummary, Members: &mPurchaseOptionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PurchaseOptionSummaryList_member})
+var sPurchaseOptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOptionType, Members: &mPurchaseOptionType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOptionType})
+var sPurchaseOptionType_OFFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionType_OFFER})
+var sPurchaseOptionType_OFFERSET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFERSET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOptionType_OFFERSET})
+var sRateCardConstraintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateCardConstraintType, Members: &mRateCardConstraintType, Type: smithy.ShapeTypeEnum, Ext: &eRateCardConstraintType})
+var sRateCardConstraintType_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRateCardConstraintType_ALLOWED})
+var sRateCardConstraintType_DISALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRateCardConstraintType_DISALLOWED})
+var sRateCardItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateCardItem, Members: &mRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &eRateCardItem})
+var sRateCardItem_dimensionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensionKey", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRateCardItem_dimensionKey})
+var sRateCardItem_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRateCardItem_displayName})
+var sRateCardItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRateCardItem_description})
+var sRateCardItem_dimensionLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensionLabels", ID: &i_DimensionLabelList, Members: &m_DimensionLabelList, Type: smithy.ShapeTypeList, Ext: &eRateCardItem_dimensionLabels})
+var sRateCardItem_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRateCardItem_unit})
+var sRateCardItem_price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "price", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRateCardItem_price})
+var s_RateCardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RateCardList, Members: &m_RateCardList, Type: smithy.ShapeTypeList, Ext: &e_RateCardList})
+var s_RateCardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRateCardItem, Members: &mRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &e_RateCardList_member})
+var sRecurringPaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecurringPaymentTerm, Members: &mRecurringPaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eRecurringPaymentTerm})
+var sRecurringPaymentTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eRecurringPaymentTerm_id})
+var sRecurringPaymentTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eRecurringPaymentTerm_type})
+var sRecurringPaymentTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eRecurringPaymentTerm_currencyCode})
+var sRecurringPaymentTerm_billingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingPeriod", ID: &iBillingPeriodType, Members: &mBillingPeriodType, Type: smithy.ShapeTypeEnum, Ext: &eRecurringPaymentTerm_billingPeriod})
+var sRecurringPaymentTerm_price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "price", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRecurringPaymentTerm_price})
+var sRenewalTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewalTerm, Members: &mRenewalTerm, Type: smithy.ShapeTypeStructure, Ext: &eRenewalTerm})
+var sRenewalTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eRenewalTerm_id})
+var sRenewalTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eRenewalTerm_type})
+var sRenewalTerm_maxRenewals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRenewals", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRenewalTerm_maxRenewals})
+var sRenewalTerm_lockoutPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lockoutPeriod", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRenewalTerm_lockoutPeriod})
+var sRenewalTerm_adjustmentDeadline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adjustmentDeadline", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eRenewalTerm_adjustmentDeadline})
+var sRenewalTerm_priceIncrease = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priceIncrease", ID: &iPriceIncrease, Members: &mPriceIncrease, Type: smithy.ShapeTypeUnion, Ext: &eRenewalTerm_priceIncrease})
+var sRenewalTerm_termTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "termTemplates", ID: &i_TermTemplateList, Members: &m_TermTemplateList, Type: smithy.ShapeTypeList, Ext: &eRenewalTerm_termTemplates})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResource_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResource_resourceType})
+var sResource_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iResourceContentType, Members: &mResourceContentType, Type: smithy.ShapeTypeEnum, Ext: &eResource_contentType})
+var sResource_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eResource_value})
+var sResource_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eResource_displayName})
+var sResourceContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceContentType, Members: &mResourceContentType, Type: smithy.ShapeTypeEnum, Ext: &eResourceContentType})
+var sResourceContentType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceContentType_EMAIL})
+var sResourceContentType_PHONE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceContentType_PHONE_NUMBER})
+var sResourceContentType_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceContentType_LINK})
+var sResourceContentType_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceContentType_OTHER})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &e_ResourceList})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_MANUFACTURER_SUPPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUFACTURER_SUPPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_MANUFACTURER_SUPPORT})
+var sResourceType_MANUFACTURER_INSTRUCTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUFACTURER_INSTRUCTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_MANUFACTURER_INSTRUCTIONS})
+var sReviewSourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewSourceId, Members: &mReviewSourceId, Type: smithy.ShapeTypeEnum, Ext: &eReviewSourceId})
+var sReviewSourceId_AWS_MARKETPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewSourceId_AWS_MARKETPLACE})
+var sReviewSourceId_G2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "G2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewSourceId_G2})
+var sReviewSourceId_PEERSPOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEERSPOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewSourceId_PEERSPOT})
+var sReviewSourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewSourceSummary, Members: &mReviewSourceSummary, Type: smithy.ShapeTypeStructure, Ext: &eReviewSourceSummary})
+var sReviewSourceSummary_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReviewSourceSummary_sourceName})
+var sReviewSourceSummary_sourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceId", ID: &iReviewSourceId, Members: &mReviewSourceId, Type: smithy.ShapeTypeEnum, Ext: &eReviewSourceSummary_sourceId})
+var sReviewSourceSummary_sourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceUrl", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eReviewSourceSummary_sourceUrl})
+var sReviewSourceSummary_averageRating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "averageRating", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eReviewSourceSummary_averageRating})
+var sReviewSourceSummary_totalReviews = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalReviews", ID: &i_NonNegativeCount, Type: smithy.ShapeTypeLong, Ext: &eReviewSourceSummary_totalReviews})
+var s_ReviewSourceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewSourceSummaryList, Members: &m_ReviewSourceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ReviewSourceSummaryList})
+var s_ReviewSourceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewSourceSummary, Members: &mReviewSourceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ReviewSourceSummaryList_member})
+var sReviewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewSummary, Members: &mReviewSummary, Type: smithy.ShapeTypeStructure, Ext: &eReviewSummary})
+var sReviewSummary_reviewSourceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewSourceSummaries", ID: &i_ReviewSourceSummaryList, Members: &m_ReviewSourceSummaryList, Type: smithy.ShapeTypeList, Ext: &eReviewSummary_reviewSourceSummaries})
+var sSaasFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaasFulfillmentOption, Members: &mSaasFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eSaasFulfillmentOption})
+var sSaasFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaasFulfillmentOption_fulfillmentOptionId})
+var sSaasFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eSaasFulfillmentOption_fulfillmentOptionType})
+var sSaasFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaasFulfillmentOption_fulfillmentOptionDisplayName})
+var sSaasFulfillmentOption_fulfillmentUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaasFulfillmentOption_fulfillmentUrl})
+var sSaasFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaasFulfillmentOption_usageInstructions})
+var sSaasFulfillmentOption_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSaasFulfillmentOption_availableFromTime})
+var sSaasFulfillmentOption_launchUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchUrl", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eSaasFulfillmentOption_launchUrl})
+var sSaasFulfillmentOption_quickLaunch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quickLaunch", ID: &iSaasQuickLaunchStatus, Members: &mSaasQuickLaunchStatus, Type: smithy.ShapeTypeEnum, Ext: &eSaasFulfillmentOption_quickLaunch})
+var sSaasQuickLaunchStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaasQuickLaunchStatus, Members: &mSaasQuickLaunchStatus, Type: smithy.ShapeTypeEnum, Ext: &eSaasQuickLaunchStatus})
+var sSaasQuickLaunchStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSaasQuickLaunchStatus_ENABLED})
+var sSaasQuickLaunchStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSaasQuickLaunchStatus_DISABLED})
+var sSageMakerAlgorithmFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerAlgorithmFulfillmentOption, Members: &mSageMakerAlgorithmFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerAlgorithmFulfillmentOption})
+var sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionId})
+var sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionType})
+var sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName})
+var sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion})
+var sSageMakerAlgorithmFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmFulfillmentOption_releaseNotes})
+var sSageMakerAlgorithmFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmFulfillmentOption_usageInstructions})
+var sSageMakerAlgorithmFulfillmentOption_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iSageMakerAlgorithmRecommendation, Members: &mSageMakerAlgorithmRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerAlgorithmFulfillmentOption_recommendation})
+var sSageMakerAlgorithmRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerAlgorithmRecommendation, Members: &mSageMakerAlgorithmRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerAlgorithmRecommendation})
+var sSageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedBatchTransformInstanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType})
+var sSageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedRealtimeInferenceInstanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType})
+var sSageMakerAlgorithmRecommendation_recommendedTrainingInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedTrainingInstanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerAlgorithmRecommendation_recommendedTrainingInstanceType})
+var s_SageMakerModelContentTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerModelContentTypeList, Members: &m_SageMakerModelContentTypeList, Type: smithy.ShapeTypeList, Ext: &e_SageMakerModelContentTypeList})
+var s_SageMakerModelContentTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SageMakerModelContentTypeList_member})
+var sSageMakerModelFulfillmentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerModelFulfillmentOption, Members: &mSageMakerModelFulfillmentOption, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerModelFulfillmentOption})
+var sSageMakerModelFulfillmentOption_fulfillmentOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelFulfillmentOption_fulfillmentOptionId})
+var sSageMakerModelFulfillmentOption_fulfillmentOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionType", ID: &iFulfillmentOptionType, Members: &mFulfillmentOptionType, Type: smithy.ShapeTypeEnum, Ext: &eSageMakerModelFulfillmentOption_fulfillmentOptionType})
+var sSageMakerModelFulfillmentOption_fulfillmentOptionDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionDisplayName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelFulfillmentOption_fulfillmentOptionDisplayName})
+var sSageMakerModelFulfillmentOption_fulfillmentOptionVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelFulfillmentOption_fulfillmentOptionVersion})
+var sSageMakerModelFulfillmentOption_releaseNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "releaseNotes", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelFulfillmentOption_releaseNotes})
+var sSageMakerModelFulfillmentOption_usageInstructions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageInstructions", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelFulfillmentOption_usageInstructions})
+var sSageMakerModelFulfillmentOption_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iSageMakerModelRecommendation, Members: &mSageMakerModelRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerModelFulfillmentOption_recommendation})
+var sSageMakerModelFulfillmentOption_supportedContentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedContentTypes", ID: &i_SageMakerModelContentTypeList, Members: &m_SageMakerModelContentTypeList, Type: smithy.ShapeTypeList, Ext: &eSageMakerModelFulfillmentOption_supportedContentTypes})
+var sSageMakerModelFulfillmentOption_supportedResponseMimeTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedResponseMimeTypes", ID: &i_SageMakerModelResponseMimeTypeList, Members: &m_SageMakerModelResponseMimeTypeList, Type: smithy.ShapeTypeList, Ext: &eSageMakerModelFulfillmentOption_supportedResponseMimeTypes})
+var sSageMakerModelRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerModelRecommendation, Members: &mSageMakerModelRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eSageMakerModelRecommendation})
+var sSageMakerModelRecommendation_recommendedBatchTransformInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedBatchTransformInstanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelRecommendation_recommendedBatchTransformInstanceType})
+var sSageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedRealtimeInferenceInstanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType})
+var s_SageMakerModelResponseMimeTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerModelResponseMimeTypeList, Members: &m_SageMakerModelResponseMimeTypeList, Type: smithy.ShapeTypeList, Ext: &e_SageMakerModelResponseMimeTypeList})
+var s_SageMakerModelResponseMimeTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SageMakerModelResponseMimeTypeList_member})
+var sScheduleItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleItem, Members: &mScheduleItem, Type: smithy.ShapeTypeStructure, Ext: &eScheduleItem})
+var sScheduleItem_chargeDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduleItem_chargeDate})
+var sScheduleItem_chargeAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeAmount", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eScheduleItem_chargeAmount})
+var s_ScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &e_ScheduleList})
+var s_ScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleItem, Members: &mScheduleItem, Type: smithy.ShapeTypeStructure, Ext: &e_ScheduleList_member})
+var sSearchFacetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFacetType, Members: &mSearchFacetType, Type: smithy.ShapeTypeEnum, Ext: &eSearchFacetType})
+var sSearchFacetType_AVERAGE_CUSTOMER_RATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVERAGE_CUSTOMER_RATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_AVERAGE_CUSTOMER_RATING})
+var sSearchFacetType_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_CATEGORY})
+var sSearchFacetType_PUBLISHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_PUBLISHER})
+var sSearchFacetType_FULFILLMENT_OPTION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLMENT_OPTION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_FULFILLMENT_OPTION_TYPE})
+var sSearchFacetType_PRICING_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_PRICING_MODEL})
+var sSearchFacetType_PRICING_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_PRICING_UNIT})
+var sSearchFacetType_DEPLOYED_ON_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED_ON_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_DEPLOYED_ON_AWS})
+var sSearchFacetType_NUMBER_OF_PRODUCTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_OF_PRODUCTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetType_NUMBER_OF_PRODUCTS})
+var sSearchFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilter})
+var sSearchFilter_filterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterType", ID: &iSearchFilterType, Members: &mSearchFilterType, Type: smithy.ShapeTypeEnum, Ext: &eSearchFilter_filterType})
+var sSearchFilter_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_SearchFilterValueList, Members: &m_SearchFilterValueList, Type: smithy.ShapeTypeList, Ext: &eSearchFilter_filterValues})
+var s_SearchFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterList, Members: &m_SearchFilterList, Type: smithy.ShapeTypeList, Ext: &e_SearchFilterList})
+var s_SearchFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchFilter, Members: &mSearchFilter, Type: smithy.ShapeTypeStructure, Ext: &e_SearchFilterList_member})
+var sSearchFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFilterType, Members: &mSearchFilterType, Type: smithy.ShapeTypeEnum, Ext: &eSearchFilterType})
+var sSearchFilterType_MIN_AVERAGE_CUSTOMER_RATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIN_AVERAGE_CUSTOMER_RATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_MIN_AVERAGE_CUSTOMER_RATING})
+var sSearchFilterType_MAX_AVERAGE_CUSTOMER_RATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_AVERAGE_CUSTOMER_RATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_MAX_AVERAGE_CUSTOMER_RATING})
+var sSearchFilterType_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_CATEGORY})
+var sSearchFilterType_PUBLISHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_PUBLISHER})
+var sSearchFilterType_FULFILLMENT_OPTION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLMENT_OPTION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_FULFILLMENT_OPTION_TYPE})
+var sSearchFilterType_PRICING_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_PRICING_MODEL})
+var sSearchFilterType_PRICING_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_PRICING_UNIT})
+var sSearchFilterType_DEPLOYED_ON_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED_ON_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_DEPLOYED_ON_AWS})
+var sSearchFilterType_NUMBER_OF_PRODUCTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_OF_PRODUCTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchFilterType_NUMBER_OF_PRODUCTS})
+var s_SearchFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterValue})
+var s_SearchFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchFilterValueList, Members: &m_SearchFilterValueList, Type: smithy.ShapeTypeList, Ext: &e_SearchFilterValueList})
+var s_SearchFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SearchFilterValue, Type: smithy.ShapeTypeString, Ext: &e_SearchFilterValueList_member})
+var sSearchListingsSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchListingsSortBy, Members: &mSearchListingsSortBy, Type: smithy.ShapeTypeEnum, Ext: &eSearchListingsSortBy})
+var sSearchListingsSortBy_RELEVANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEVANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsSortBy_RELEVANCE})
+var sSearchListingsSortBy_AVERAGE_CUSTOMER_RATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVERAGE_CUSTOMER_RATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsSortBy_AVERAGE_CUSTOMER_RATING})
+var sSearchListingsSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchListingsSortOrder, Members: &mSearchListingsSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSearchListingsSortOrder})
+var sSearchListingsSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsSortOrder_DESCENDING})
+var sSearchListingsSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsSortOrder_ASCENDING})
+var s_SearchText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchText, Type: smithy.ShapeTypeString, Ext: &e_SearchText})
+var sSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelector, Members: &mSelector, Type: smithy.ShapeTypeStructure, Ext: &eSelector})
+var sSelector_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSelectorType, Members: &mSelectorType, Type: smithy.ShapeTypeEnum, Ext: &eSelector_type})
+var sSelector_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eSelector_value})
+var sSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectorType, Members: &mSelectorType, Type: smithy.ShapeTypeEnum, Ext: &eSelectorType})
+var sSelectorType_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSelectorType_DURATION})
+var sSellerEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSellerEngagement, Members: &mSellerEngagement, Type: smithy.ShapeTypeStructure, Ext: &eSellerEngagement})
+var sSellerEngagement_engagementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "engagementType", ID: &iSellerEngagementType, Members: &mSellerEngagementType, Type: smithy.ShapeTypeEnum, Ext: &eSellerEngagement_engagementType})
+var sSellerEngagement_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iSellerEngagementContentType, Members: &mSellerEngagementContentType, Type: smithy.ShapeTypeEnum, Ext: &eSellerEngagement_contentType})
+var sSellerEngagement_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSellerEngagement_value})
+var sSellerEngagementContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSellerEngagementContentType, Members: &mSellerEngagementContentType, Type: smithy.ShapeTypeEnum, Ext: &eSellerEngagementContentType})
+var sSellerEngagementContentType_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSellerEngagementContentType_LINK})
+var s_SellerEngagementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SellerEngagementList, Members: &m_SellerEngagementList, Type: smithy.ShapeTypeList, Ext: &e_SellerEngagementList})
+var s_SellerEngagementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSellerEngagement, Members: &mSellerEngagement, Type: smithy.ShapeTypeStructure, Ext: &e_SellerEngagementList_member})
+var sSellerEngagementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSellerEngagementType, Members: &mSellerEngagementType, Type: smithy.ShapeTypeEnum, Ext: &eSellerEngagementType})
+var sSellerEngagementType_REQUEST_FOR_PRIVATE_OFFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_FOR_PRIVATE_OFFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSellerEngagementType_REQUEST_FOR_PRIVATE_OFFER})
+var sSellerEngagementType_REQUEST_FOR_DEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_FOR_DEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSellerEngagementType_REQUEST_FOR_DEMO})
+var sSellerInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eSellerInformation})
+var sSellerInformation_sellerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerProfileId", ID: &i_SellerProfileId, Type: smithy.ShapeTypeString, Ext: &eSellerInformation_sellerProfileId})
+var sSellerInformation_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSellerInformation_displayName})
+var s_SellerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SellerProfileId, Type: smithy.ShapeTypeString, Ext: &e_SellerProfileId})
+var sSupportTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportTerm, Members: &mSupportTerm, Type: smithy.ShapeTypeStructure, Ext: &eSupportTerm})
+var sSupportTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eSupportTerm_id})
+var sSupportTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eSupportTerm_type})
+var sSupportTerm_refundPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refundPolicy", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eSupportTerm_refundPolicy})
+var s_TermId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &e_TermId})
+var sTermTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTermTemplate, Members: &mTermTemplate, Type: smithy.ShapeTypeUnion, Ext: &eTermTemplate})
+var sTermTemplate_paymentScheduleTermTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentScheduleTermTemplate", ID: &iPaymentScheduleTermTemplate, Members: &mPaymentScheduleTermTemplate, Type: smithy.ShapeTypeStructure, Ext: &eTermTemplate_paymentScheduleTermTemplate})
+var s_TermTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TermTemplateList, Members: &m_TermTemplateList, Type: smithy.ShapeTypeList, Ext: &e_TermTemplateList})
+var s_TermTemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTermTemplate, Members: &mTermTemplate, Type: smithy.ShapeTypeUnion, Ext: &e_TermTemplateList_member})
+var sTermType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eTermType})
+var sTermType_BYOL_PRICING_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYOL_PRICING_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_BYOL_PRICING_TERM})
+var sTermType_CONFIGURABLE_UPFRONT_PRICING_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIGURABLE_UPFRONT_PRICING_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_CONFIGURABLE_UPFRONT_PRICING_TERM})
+var sTermType_FIXED_UPFRONT_PRICING_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_UPFRONT_PRICING_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_FIXED_UPFRONT_PRICING_TERM})
+var sTermType_USAGE_BASED_PRICING_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_BASED_PRICING_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_USAGE_BASED_PRICING_TERM})
+var sTermType_FREE_TRIAL_PRICING_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_TRIAL_PRICING_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_FREE_TRIAL_PRICING_TERM})
+var sTermType_LEGAL_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_LEGAL_TERM})
+var sTermType_PAYMENT_SCHEDULE_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_SCHEDULE_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_PAYMENT_SCHEDULE_TERM})
+var sTermType_RECURRING_PAYMENT_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING_PAYMENT_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_RECURRING_PAYMENT_TERM})
+var sTermType_RENEWAL_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENEWAL_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_RENEWAL_TERM})
+var sTermType_SUPPORT_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPORT_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_SUPPORT_TERM})
+var sTermType_VALIDITY_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDITY_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_VALIDITY_TERM})
+var sTermType_VARIABLE_PAYMENT_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARIABLE_PAYMENT_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_VARIABLE_PAYMENT_TERM})
+var sTermType_NET_PAYMENT_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_PAYMENT_TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTermType_NET_PAYMENT_TERM})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var s_TypeToFacetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeToFacetMap, Members: &m_TypeToFacetMap, Type: smithy.ShapeTypeMap, Ext: &e_TypeToFacetMap})
+var s_TypeToFacetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iSearchFacetType, Members: &mSearchFacetType, Type: smithy.ShapeTypeEnum, Ext: &e_TypeToFacetMap_key})
+var s_TypeToFacetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ListingFacetList, Members: &m_ListingFacetList, Type: smithy.ShapeTypeList, Ext: &e_TypeToFacetMap_value})
+var s_URL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &e_URL})
+var sUsageBasedPricingTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageBasedPricingTerm, Members: &mUsageBasedPricingTerm, Type: smithy.ShapeTypeStructure, Ext: &eUsageBasedPricingTerm})
+var sUsageBasedPricingTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eUsageBasedPricingTerm_id})
+var sUsageBasedPricingTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eUsageBasedPricingTerm_type})
+var sUsageBasedPricingTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eUsageBasedPricingTerm_currencyCode})
+var sUsageBasedPricingTerm_rateCards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateCards", ID: &i_UsageBasedRateCardList, Members: &m_UsageBasedRateCardList, Type: smithy.ShapeTypeList, Ext: &eUsageBasedPricingTerm_rateCards})
+var sUsageBasedRateCardItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUsageBasedRateCardItem, Members: &mUsageBasedRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &eUsageBasedRateCardItem})
+var sUsageBasedRateCardItem_rateCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateCard", ID: &i_RateCardList, Members: &m_RateCardList, Type: smithy.ShapeTypeList, Ext: &eUsageBasedRateCardItem_rateCard})
+var s_UsageBasedRateCardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageBasedRateCardList, Members: &m_UsageBasedRateCardList, Type: smithy.ShapeTypeList, Ext: &e_UsageBasedRateCardList})
+var s_UsageBasedRateCardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUsageBasedRateCardItem, Members: &mUsageBasedRateCardItem, Type: smithy.ShapeTypeStructure, Ext: &e_UsageBasedRateCardList_member})
+var sUseCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUseCase, Members: &mUseCase, Type: smithy.ShapeTypeStructure, Ext: &eUseCase})
+var sUseCase_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUseCase_description})
+var sUseCase_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUseCase_displayName})
+var sUseCase_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eUseCase_value})
+var sUseCaseEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUseCaseEntry, Members: &mUseCaseEntry, Type: smithy.ShapeTypeStructure, Ext: &eUseCaseEntry})
+var sUseCaseEntry_useCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useCase", ID: &iUseCase, Members: &mUseCase, Type: smithy.ShapeTypeStructure, Ext: &eUseCaseEntry_useCase})
+var s_UseCaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UseCaseList, Members: &m_UseCaseList, Type: smithy.ShapeTypeList, Ext: &e_UseCaseList})
+var s_UseCaseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUseCaseEntry, Members: &mUseCaseEntry, Type: smithy.ShapeTypeStructure, Ext: &e_UseCaseList_member})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_INVALID_PAGINATION_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGINATION_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PAGINATION_TOKEN})
+var sValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MALFORMED_REQUEST_PARAMETERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS})
+var sValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAGINATION_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED})
+var sValidityTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidityTerm, Members: &mValidityTerm, Type: smithy.ShapeTypeStructure, Ext: &eValidityTerm})
+var sValidityTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eValidityTerm_id})
+var sValidityTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eValidityTerm_type})
+var sValidityTerm_agreementDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementDuration", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eValidityTerm_agreementDuration})
+var sValidityTerm_agreementEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementEndDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eValidityTerm_agreementEndDate})
+var sValidityTerm_agreementStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementStartDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eValidityTerm_agreementStartDate})
+var sVariablePaymentTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariablePaymentTerm, Members: &mVariablePaymentTerm, Type: smithy.ShapeTypeStructure, Ext: &eVariablePaymentTerm})
+var sVariablePaymentTerm_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TermId, Type: smithy.ShapeTypeString, Ext: &eVariablePaymentTerm_id})
+var sVariablePaymentTerm_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iTermType, Members: &mTermType, Type: smithy.ShapeTypeEnum, Ext: &eVariablePaymentTerm_type})
+var sVariablePaymentTerm_currencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eVariablePaymentTerm_currencyCode})
+var sVariablePaymentTerm_maxTotalChargeAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTotalChargeAmount", ID: &i_BoundedString, Type: smithy.ShapeTypeString, Ext: &eVariablePaymentTerm_maxTotalChargeAmount})
+var sGetListingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListingInput, Members: &mGetListingInput, Type: smithy.ShapeTypeStructure, Ext: &eGetListingInput})
+var sGetListingInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetListingInput_locale})
+var sGetListingInput_listingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingId", ID: &i_ListingId, Type: smithy.ShapeTypeString, Ext: &eGetListingInput_listingId})
+var sGetListingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListingOutput, Members: &mGetListingOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetListingOutput})
+var sGetListingOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_locale})
+var sGetListingOutput_associatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntities", ID: &i_ListingAssociatedEntityList, Members: &m_ListingAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_associatedEntities})
+var sGetListingOutput_badges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badges", ID: &i_ListingBadgeList, Members: &m_ListingBadgeList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_badges})
+var sGetListingOutput_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_catalog})
+var sGetListingOutput_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_categories})
+var sGetListingOutput_fulfillmentOptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionSummaries", ID: &i_FulfillmentOptionSummaryList, Members: &m_FulfillmentOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_fulfillmentOptionSummaries})
+var sGetListingOutput_highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "highlights", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_highlights})
+var sGetListingOutput_integrationGuide = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationGuide", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_integrationGuide})
+var sGetListingOutput_listingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingId", ID: &i_ListingId, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_listingId})
+var sGetListingOutput_listingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_listingName})
+var sGetListingOutput_logoThumbnailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logoThumbnailUrl", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_logoThumbnailUrl})
+var sGetListingOutput_longDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longDescription", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_longDescription})
+var sGetListingOutput_pricingModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingModels", ID: &i_PricingModelList, Members: &m_PricingModelList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_pricingModels})
+var sGetListingOutput_pricingUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingUnits", ID: &i_PricingUnitList, Members: &m_PricingUnitList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_pricingUnits})
+var sGetListingOutput_promotionalMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promotionalMedia", ID: &i_PromotionalMediaList, Members: &m_PromotionalMediaList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_promotionalMedia})
+var sGetListingOutput_publisher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publisher", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetListingOutput_publisher})
+var sGetListingOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_resources})
+var sGetListingOutput_reviewSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reviewSummary", ID: &iReviewSummary, Members: &mReviewSummary, Type: smithy.ShapeTypeStructure, Ext: &eGetListingOutput_reviewSummary})
+var sGetListingOutput_sellerEngagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerEngagements", ID: &i_SellerEngagementList, Members: &m_SellerEngagementList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_sellerEngagements})
+var sGetListingOutput_shortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortDescription", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetListingOutput_shortDescription})
+var sGetListingOutput_useCases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useCases", ID: &i_UseCaseList, Members: &m_UseCaseList, Type: smithy.ShapeTypeList, Ext: &eGetListingOutput_useCases})
+var sGetOfferInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferInput, Members: &mGetOfferInput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferInput})
+var sGetOfferInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferInput_locale})
+var sGetOfferInput_offerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerId", ID: &i_OfferId, Type: smithy.ShapeTypeString, Ext: &eGetOfferInput_offerId})
+var sGetOfferOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferOutput, Members: &mGetOfferOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferOutput})
+var sGetOfferOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_locale})
+var sGetOfferOutput_offerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerId", ID: &i_OfferId, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_offerId})
+var sGetOfferOutput_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_catalog})
+var sGetOfferOutput_offerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerName", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_offerName})
+var sGetOfferOutput_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOfferOutput_expirationTime})
+var sGetOfferOutput_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOfferOutput_availableFromTime})
+var sGetOfferOutput_sellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerOfRecord", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferOutput_sellerOfRecord})
+var sGetOfferOutput_associatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntities", ID: &i_OfferAssociatedEntityList, Members: &m_OfferAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &eGetOfferOutput_associatedEntities})
+var sGetOfferOutput_agreementProposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementProposalId", ID: &i_AgreementResourceId, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_agreementProposalId})
+var sGetOfferOutput_replacementAgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replacementAgreementId", ID: &i_AgreementResourceId, Type: smithy.ShapeTypeString, Ext: &eGetOfferOutput_replacementAgreementId})
+var sGetOfferOutput_pricingModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingModel", ID: &iPricingModel, Members: &mPricingModel, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferOutput_pricingModel})
+var sGetOfferOutput_badges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badges", ID: &i_PurchaseOptionBadgeList, Members: &m_PurchaseOptionBadgeList, Type: smithy.ShapeTypeList, Ext: &eGetOfferOutput_badges})
+var sGetOfferSetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferSetInput, Members: &mGetOfferSetInput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferSetInput})
+var sGetOfferSetInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetInput_locale})
+var sGetOfferSetInput_offerSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSetId", ID: &i_OfferSetId, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetInput_offerSetId})
+var sGetOfferSetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferSetOutput, Members: &mGetOfferSetOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferSetOutput})
+var sGetOfferSetOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetOutput_locale})
+var sGetOfferSetOutput_offerSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSetId", ID: &i_OfferSetId, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetOutput_offerSetId})
+var sGetOfferSetOutput_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetOutput_catalog})
+var sGetOfferSetOutput_offerSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerSetName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetOutput_offerSetName})
+var sGetOfferSetOutput_availableFromTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableFromTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOfferSetOutput_availableFromTime})
+var sGetOfferSetOutput_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOfferSetOutput_expirationTime})
+var sGetOfferSetOutput_buyerNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buyerNotes", ID: &i_NullableString, Type: smithy.ShapeTypeString, Ext: &eGetOfferSetOutput_buyerNotes})
+var sGetOfferSetOutput_sellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerOfRecord", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferSetOutput_sellerOfRecord})
+var sGetOfferSetOutput_badges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "badges", ID: &i_PurchaseOptionBadgeList, Members: &m_PurchaseOptionBadgeList, Type: smithy.ShapeTypeList, Ext: &eGetOfferSetOutput_badges})
+var sGetOfferSetOutput_associatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEntities", ID: &i_OfferSetAssociatedEntityList, Members: &m_OfferSetAssociatedEntityList, Type: smithy.ShapeTypeList, Ext: &eGetOfferSetOutput_associatedEntities})
+var sGetOfferTermsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferTermsInput, Members: &mGetOfferTermsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferTermsInput})
+var sGetOfferTermsInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferTermsInput_locale})
+var sGetOfferTermsInput_offerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerId", ID: &i_OfferId, Type: smithy.ShapeTypeString, Ext: &eGetOfferTermsInput_offerId})
+var sGetOfferTermsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetOfferTermsInput_maxResults})
+var sGetOfferTermsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetOfferTermsInput_nextToken})
+var sGetOfferTermsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOfferTermsOutput, Members: &mGetOfferTermsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetOfferTermsOutput})
+var sGetOfferTermsOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetOfferTermsOutput_locale})
+var sGetOfferTermsOutput_offerTerms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offerTerms", ID: &i_OfferTermsList, Members: &m_OfferTermsList, Type: smithy.ShapeTypeList, Ext: &eGetOfferTermsOutput_offerTerms})
+var sGetOfferTermsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetOfferTermsOutput_nextToken})
+var sGetProductInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductInput, Members: &mGetProductInput, Type: smithy.ShapeTypeStructure, Ext: &eGetProductInput})
+var sGetProductInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetProductInput_locale})
+var sGetProductInput_productId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &eGetProductInput_productId})
+var sGetProductOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductOutput, Members: &mGetProductOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetProductOutput})
+var sGetProductOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_locale})
+var sGetProductOutput_productId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_productId})
+var sGetProductOutput_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_catalog})
+var sGetProductOutput_productName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_productName})
+var sGetProductOutput_manufacturer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manufacturer", ID: &iSellerInformation, Members: &mSellerInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetProductOutput_manufacturer})
+var sGetProductOutput_deployedOnAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployedOnAws", ID: &iDeployedOnAwsStatus, Members: &mDeployedOnAwsStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetProductOutput_deployedOnAws})
+var sGetProductOutput_shortDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortDescription", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_shortDescription})
+var sGetProductOutput_longDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longDescription", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_longDescription})
+var sGetProductOutput_logoThumbnailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logoThumbnailUrl", ID: &i_URL, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_logoThumbnailUrl})
+var sGetProductOutput_fulfillmentOptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptionSummaries", ID: &i_FulfillmentOptionSummaryList, Members: &m_FulfillmentOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_fulfillmentOptionSummaries})
+var sGetProductOutput_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_categories})
+var sGetProductOutput_highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "highlights", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_highlights})
+var sGetProductOutput_promotionalMedia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promotionalMedia", ID: &i_PromotionalMediaList, Members: &m_PromotionalMediaList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_promotionalMedia})
+var sGetProductOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_resources})
+var sGetProductOutput_sellerEngagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sellerEngagements", ID: &i_SellerEngagementList, Members: &m_SellerEngagementList, Type: smithy.ShapeTypeList, Ext: &eGetProductOutput_sellerEngagements})
+var sGetProductOutput_listingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingId", ID: &i_ListingId, Type: smithy.ShapeTypeString, Ext: &eGetProductOutput_listingId})
+var sListFulfillmentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFulfillmentOptionsInput, Members: &mListFulfillmentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFulfillmentOptionsInput})
+var sListFulfillmentOptionsInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eListFulfillmentOptionsInput_locale})
+var sListFulfillmentOptionsInput_productId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &eListFulfillmentOptionsInput_productId})
+var sListFulfillmentOptionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListFulfillmentOptionsInput_maxResults})
+var sListFulfillmentOptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFulfillmentOptionsInput_nextToken})
+var sListFulfillmentOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFulfillmentOptionsOutput, Members: &mListFulfillmentOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFulfillmentOptionsOutput})
+var sListFulfillmentOptionsOutput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eListFulfillmentOptionsOutput_locale})
+var sListFulfillmentOptionsOutput_fulfillmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentOptions", ID: &i_FulfillmentOptionsList, Members: &m_FulfillmentOptionsList, Type: smithy.ShapeTypeList, Ext: &eListFulfillmentOptionsOutput_fulfillmentOptions})
+var sListFulfillmentOptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFulfillmentOptionsOutput_nextToken})
+var sListPurchaseOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPurchaseOptionsInput, Members: &mListPurchaseOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListPurchaseOptionsInput})
+var sListPurchaseOptionsInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eListPurchaseOptionsInput_locale})
+var sListPurchaseOptionsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_PurchaseOptionFilterList, Members: &m_PurchaseOptionFilterList, Type: smithy.ShapeTypeList, Ext: &eListPurchaseOptionsInput_filters})
+var sListPurchaseOptionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPurchaseOptionsInput_maxResults})
+var sListPurchaseOptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPurchaseOptionsInput_nextToken})
+var sListPurchaseOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPurchaseOptionsOutput, Members: &mListPurchaseOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPurchaseOptionsOutput})
+var sListPurchaseOptionsOutput_purchaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOptions", ID: &i_PurchaseOptionSummaryList, Members: &m_PurchaseOptionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPurchaseOptionsOutput_purchaseOptions})
+var sListPurchaseOptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPurchaseOptionsOutput_nextToken})
+var sSearchFacetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFacetsInput, Members: &mSearchFacetsInput, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetsInput})
+var sSearchFacetsInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eSearchFacetsInput_locale})
+var sSearchFacetsInput_searchText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchText", ID: &i_SearchText, Type: smithy.ShapeTypeString, Ext: &eSearchFacetsInput_searchText})
+var sSearchFacetsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchFilterList, Members: &m_SearchFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchFacetsInput_filters})
+var sSearchFacetsInput_facetTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "facetTypes", ID: &i_FacetTypeList, Members: &m_FacetTypeList, Type: smithy.ShapeTypeList, Ext: &eSearchFacetsInput_facetTypes})
+var sSearchFacetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchFacetsInput_nextToken})
+var sSearchFacetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFacetsOutput, Members: &mSearchFacetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSearchFacetsOutput})
+var sSearchFacetsOutput_totalResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalResults", ID: &i_NonNegativeCount, Type: smithy.ShapeTypeLong, Ext: &eSearchFacetsOutput_totalResults})
+var sSearchFacetsOutput_listingFacets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingFacets", ID: &i_TypeToFacetMap, Members: &m_TypeToFacetMap, Type: smithy.ShapeTypeMap, Ext: &eSearchFacetsOutput_listingFacets})
+var sSearchFacetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchFacetsOutput_nextToken})
+var sSearchListingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchListingsInput, Members: &mSearchListingsInput, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsInput})
+var sSearchListingsInput_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_Locale, Type: smithy.ShapeTypeString, Ext: &eSearchListingsInput_locale})
+var sSearchListingsInput_searchText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchText", ID: &i_SearchText, Type: smithy.ShapeTypeString, Ext: &eSearchListingsInput_searchText})
+var sSearchListingsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SearchFilterList, Members: &m_SearchFilterList, Type: smithy.ShapeTypeList, Ext: &eSearchListingsInput_filters})
+var sSearchListingsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eSearchListingsInput_maxResults})
+var sSearchListingsInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSearchListingsSortBy, Members: &mSearchListingsSortBy, Type: smithy.ShapeTypeEnum, Ext: &eSearchListingsInput_sortBy})
+var sSearchListingsInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSearchListingsSortOrder, Members: &mSearchListingsSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSearchListingsInput_sortOrder})
+var sSearchListingsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchListingsInput_nextToken})
+var sSearchListingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchListingsOutput, Members: &mSearchListingsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSearchListingsOutput})
+var sSearchListingsOutput_totalResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalResults", ID: &i_NonNegativeCount, Type: smithy.ShapeTypeLong, Ext: &eSearchListingsOutput_totalResults})
+var sSearchListingsOutput_listingSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listingSummaries", ID: &i_ListingSummaryList, Members: &m_ListingSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchListingsOutput_listingSummaries})
+var sSearchListingsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eSearchListingsOutput_nextToken})
+
+var GetListing = &sGetListing
+
+var GetOffer = &sGetOffer
+
+var GetOfferSet = &sGetOfferSet
+
+var GetOfferTerms = &sGetOfferTerms
+
+var GetProduct = &sGetProduct
+
+var ListFulfillmentOptions = &sListFulfillmentOptions
+
+var ListPurchaseOptions = &sListPurchaseOptions
+
+var SearchFacets = &sSearchFacets
+
+var SearchListings = &sSearchListings
+
+var _AWSMarketplaceDiscovery = &s_AWSMarketplaceDiscovery
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AgreementResourceId = &s_AgreementResourceId
+
+var _AmazonMachineImageCidrIpAddressList = &s_AmazonMachineImageCidrIpAddressList
+var _AmazonMachineImageCidrIpAddressList_member = &s_AmazonMachineImageCidrIpAddressList_member
+
+var AmazonMachineImageEbsVolume = &sAmazonMachineImageEbsVolume
+var AmazonMachineImageEbsVolume_volumeTypes = &sAmazonMachineImageEbsVolume_volumeTypes
+var AmazonMachineImageEbsVolume_iops = &sAmazonMachineImageEbsVolume_iops
+
+var _AmazonMachineImageEbsVolumeTypeList = &s_AmazonMachineImageEbsVolumeTypeList
+var _AmazonMachineImageEbsVolumeTypeList_member = &s_AmazonMachineImageEbsVolumeTypeList_member
+
+var AmazonMachineImageFulfillmentOption = &sAmazonMachineImageFulfillmentOption
+var AmazonMachineImageFulfillmentOption_fulfillmentOptionId = &sAmazonMachineImageFulfillmentOption_fulfillmentOptionId
+var AmazonMachineImageFulfillmentOption_fulfillmentOptionName = &sAmazonMachineImageFulfillmentOption_fulfillmentOptionName
+var AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion = &sAmazonMachineImageFulfillmentOption_fulfillmentOptionVersion
+var AmazonMachineImageFulfillmentOption_fulfillmentOptionType = &sAmazonMachineImageFulfillmentOption_fulfillmentOptionType
+var AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName = &sAmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName
+var AmazonMachineImageFulfillmentOption_operatingSystems = &sAmazonMachineImageFulfillmentOption_operatingSystems
+var AmazonMachineImageFulfillmentOption_recommendation = &sAmazonMachineImageFulfillmentOption_recommendation
+var AmazonMachineImageFulfillmentOption_releaseNotes = &sAmazonMachineImageFulfillmentOption_releaseNotes
+var AmazonMachineImageFulfillmentOption_usageInstructions = &sAmazonMachineImageFulfillmentOption_usageInstructions
+var AmazonMachineImageFulfillmentOption_availableFromTime = &sAmazonMachineImageFulfillmentOption_availableFromTime
+var AmazonMachineImageFulfillmentOption_accessUrlTemplate = &sAmazonMachineImageFulfillmentOption_accessUrlTemplate
+var AmazonMachineImageFulfillmentOption_architecture = &sAmazonMachineImageFulfillmentOption_architecture
+var AmazonMachineImageFulfillmentOption_amiAlias = &sAmazonMachineImageFulfillmentOption_amiAlias
+var AmazonMachineImageFulfillmentOption_ebsVolume = &sAmazonMachineImageFulfillmentOption_ebsVolume
+var AmazonMachineImageFulfillmentOption_shortDescription = &sAmazonMachineImageFulfillmentOption_shortDescription
+
+var AmazonMachineImageOperatingSystem = &sAmazonMachineImageOperatingSystem
+var AmazonMachineImageOperatingSystem_operatingSystemFamilyName = &sAmazonMachineImageOperatingSystem_operatingSystemFamilyName
+var AmazonMachineImageOperatingSystem_operatingSystemName = &sAmazonMachineImageOperatingSystem_operatingSystemName
+var AmazonMachineImageOperatingSystem_operatingSystemVersion = &sAmazonMachineImageOperatingSystem_operatingSystemVersion
+
+var _AmazonMachineImageOperatingSystemList = &s_AmazonMachineImageOperatingSystemList
+var _AmazonMachineImageOperatingSystemList_member = &s_AmazonMachineImageOperatingSystemList_member
+
+var AmazonMachineImageRecommendation = &sAmazonMachineImageRecommendation
+var AmazonMachineImageRecommendation_instanceType = &sAmazonMachineImageRecommendation_instanceType
+var AmazonMachineImageRecommendation_securityGroups = &sAmazonMachineImageRecommendation_securityGroups
+
+var AmazonMachineImageSecurityGroup = &sAmazonMachineImageSecurityGroup
+var AmazonMachineImageSecurityGroup_protocol = &sAmazonMachineImageSecurityGroup_protocol
+var AmazonMachineImageSecurityGroup_fromPort = &sAmazonMachineImageSecurityGroup_fromPort
+var AmazonMachineImageSecurityGroup_toPort = &sAmazonMachineImageSecurityGroup_toPort
+var AmazonMachineImageSecurityGroup_cidrIpAddresses = &sAmazonMachineImageSecurityGroup_cidrIpAddresses
+
+var _AmazonMachineImageSecurityGroupList = &s_AmazonMachineImageSecurityGroupList
+var _AmazonMachineImageSecurityGroupList_member = &s_AmazonMachineImageSecurityGroupList_member
+
+var ApiFulfillmentOption = &sApiFulfillmentOption
+var ApiFulfillmentOption_fulfillmentOptionId = &sApiFulfillmentOption_fulfillmentOptionId
+var ApiFulfillmentOption_fulfillmentOptionType = &sApiFulfillmentOption_fulfillmentOptionType
+var ApiFulfillmentOption_fulfillmentOptionDisplayName = &sApiFulfillmentOption_fulfillmentOptionDisplayName
+var ApiFulfillmentOption_usageInstructions = &sApiFulfillmentOption_usageInstructions
+var ApiFulfillmentOption_awsSupportedServices = &sApiFulfillmentOption_awsSupportedServices
+
+var AwsSupportedService = &sAwsSupportedService
+var AwsSupportedService_supportedServiceType = &sAwsSupportedService_supportedServiceType
+var AwsSupportedService_displayName = &sAwsSupportedService_displayName
+var AwsSupportedService_description = &sAwsSupportedService_description
+
+var _AwsSupportedServiceList = &s_AwsSupportedServiceList
+var _AwsSupportedServiceList_member = &s_AwsSupportedServiceList_member
+
+var BillingPeriodType = &sBillingPeriodType
+var BillingPeriodType_MONTHLY = &sBillingPeriodType_MONTHLY
+
+var _BoundedString = &s_BoundedString
+
+var ByolPricingTerm = &sByolPricingTerm
+var ByolPricingTerm_id = &sByolPricingTerm_id
+var ByolPricingTerm_type = &sByolPricingTerm_type
+
+var _Catalog = &s_Catalog
+
+var Category = &sCategory
+var Category_categoryId = &sCategory_categoryId
+var Category_displayName = &sCategory_displayName
+
+var _CategoryList = &s_CategoryList
+var _CategoryList_member = &s_CategoryList_member
+
+var CloudFormationFulfillmentOption = &sCloudFormationFulfillmentOption
+var CloudFormationFulfillmentOption_fulfillmentOptionId = &sCloudFormationFulfillmentOption_fulfillmentOptionId
+var CloudFormationFulfillmentOption_fulfillmentOptionName = &sCloudFormationFulfillmentOption_fulfillmentOptionName
+var CloudFormationFulfillmentOption_fulfillmentOptionType = &sCloudFormationFulfillmentOption_fulfillmentOptionType
+var CloudFormationFulfillmentOption_fulfillmentOptionDisplayName = &sCloudFormationFulfillmentOption_fulfillmentOptionDisplayName
+var CloudFormationFulfillmentOption_fulfillmentOptionVersion = &sCloudFormationFulfillmentOption_fulfillmentOptionVersion
+var CloudFormationFulfillmentOption_releaseNotes = &sCloudFormationFulfillmentOption_releaseNotes
+var CloudFormationFulfillmentOption_usageInstructions = &sCloudFormationFulfillmentOption_usageInstructions
+var CloudFormationFulfillmentOption_availableFromTime = &sCloudFormationFulfillmentOption_availableFromTime
+var CloudFormationFulfillmentOption_shortDescription = &sCloudFormationFulfillmentOption_shortDescription
+var CloudFormationFulfillmentOption_longDescription = &sCloudFormationFulfillmentOption_longDescription
+
+var ConfigurableUpfrontPricingTerm = &sConfigurableUpfrontPricingTerm
+var ConfigurableUpfrontPricingTerm_id = &sConfigurableUpfrontPricingTerm_id
+var ConfigurableUpfrontPricingTerm_type = &sConfigurableUpfrontPricingTerm_type
+var ConfigurableUpfrontPricingTerm_currencyCode = &sConfigurableUpfrontPricingTerm_currencyCode
+var ConfigurableUpfrontPricingTerm_rateCards = &sConfigurableUpfrontPricingTerm_rateCards
+
+var ConfigurableUpfrontRateCardItem = &sConfigurableUpfrontRateCardItem
+var ConfigurableUpfrontRateCardItem_selector = &sConfigurableUpfrontRateCardItem_selector
+var ConfigurableUpfrontRateCardItem_constraints = &sConfigurableUpfrontRateCardItem_constraints
+var ConfigurableUpfrontRateCardItem_rateCard = &sConfigurableUpfrontRateCardItem_rateCard
+
+var _ConfigurableUpfrontRateCardList = &s_ConfigurableUpfrontRateCardList
+var _ConfigurableUpfrontRateCardList_member = &s_ConfigurableUpfrontRateCardList_member
+
+var Constraints = &sConstraints
+var Constraints_multipleDimensionSelection = &sConstraints_multipleDimensionSelection
+var Constraints_quantityConfiguration = &sConstraints_quantityConfiguration
+
+var ContainerFulfillmentOption = &sContainerFulfillmentOption
+var ContainerFulfillmentOption_fulfillmentOptionId = &sContainerFulfillmentOption_fulfillmentOptionId
+var ContainerFulfillmentOption_fulfillmentOptionName = &sContainerFulfillmentOption_fulfillmentOptionName
+var ContainerFulfillmentOption_fulfillmentOptionType = &sContainerFulfillmentOption_fulfillmentOptionType
+var ContainerFulfillmentOption_fulfillmentOptionDisplayName = &sContainerFulfillmentOption_fulfillmentOptionDisplayName
+var ContainerFulfillmentOption_fulfillmentOptionVersion = &sContainerFulfillmentOption_fulfillmentOptionVersion
+var ContainerFulfillmentOption_operatingSystems = &sContainerFulfillmentOption_operatingSystems
+var ContainerFulfillmentOption_awsSupportedServices = &sContainerFulfillmentOption_awsSupportedServices
+var ContainerFulfillmentOption_releaseNotes = &sContainerFulfillmentOption_releaseNotes
+var ContainerFulfillmentOption_usageInstructions = &sContainerFulfillmentOption_usageInstructions
+
+var ContainerOperatingSystem = &sContainerOperatingSystem
+var ContainerOperatingSystem_operatingSystemFamilyName = &sContainerOperatingSystem_operatingSystemFamilyName
+var ContainerOperatingSystem_operatingSystemName = &sContainerOperatingSystem_operatingSystemName
+
+var _ContainerOperatingSystemList = &s_ContainerOperatingSystemList
+var _ContainerOperatingSystemList_member = &s_ContainerOperatingSystemList_member
+
+var _CurrencyCode = &s_CurrencyCode
+
+var DataArtifact = &sDataArtifact
+var DataArtifact_description = &sDataArtifact_description
+var DataArtifact_resourceArn = &sDataArtifact_resourceArn
+var DataArtifact_resourceType = &sDataArtifact_resourceType
+var DataArtifact_dataClassification = &sDataArtifact_dataClassification
+
+var _DataArtifactList = &s_DataArtifactList
+var _DataArtifactList_member = &s_DataArtifactList_member
+
+var DataExchangeFulfillmentOption = &sDataExchangeFulfillmentOption
+var DataExchangeFulfillmentOption_fulfillmentOptionId = &sDataExchangeFulfillmentOption_fulfillmentOptionId
+var DataExchangeFulfillmentOption_fulfillmentOptionType = &sDataExchangeFulfillmentOption_fulfillmentOptionType
+var DataExchangeFulfillmentOption_fulfillmentOptionDisplayName = &sDataExchangeFulfillmentOption_fulfillmentOptionDisplayName
+var DataExchangeFulfillmentOption_dataArtifacts = &sDataExchangeFulfillmentOption_dataArtifacts
+
+var DeployedOnAwsStatus = &sDeployedOnAwsStatus
+var DeployedOnAwsStatus_DEPLOYED = &sDeployedOnAwsStatus_DEPLOYED
+var DeployedOnAwsStatus_NOT_DEPLOYED = &sDeployedOnAwsStatus_NOT_DEPLOYED
+var DeployedOnAwsStatus_NOT_APPLICABLE = &sDeployedOnAwsStatus_NOT_APPLICABLE
+
+var DimensionLabel = &sDimensionLabel
+var DimensionLabel_labelType = &sDimensionLabel_labelType
+var DimensionLabel_labelValue = &sDimensionLabel_labelValue
+var DimensionLabel_displayName = &sDimensionLabel_displayName
+
+var _DimensionLabelList = &s_DimensionLabelList
+var _DimensionLabelList_member = &s_DimensionLabelList_member
+
+var DimensionLabelType = &sDimensionLabelType
+var DimensionLabelType_REGION = &sDimensionLabelType_REGION
+var DimensionLabelType_SAGEMAKER_OPTION = &sDimensionLabelType_SAGEMAKER_OPTION
+
+var DocumentItem = &sDocumentItem
+var DocumentItem_type = &sDocumentItem_type
+var DocumentItem_url = &sDocumentItem_url
+var DocumentItem_version = &sDocumentItem_version
+
+var _DocumentList = &s_DocumentList
+var _DocumentList_member = &s_DocumentList_member
+
+var Ec2ImageBuilderComponentFulfillmentOption = &sEc2ImageBuilderComponentFulfillmentOption
+var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId = &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId
+var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName = &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName
+var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType = &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType
+var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName = &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName
+var Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion = &sEc2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion
+var Ec2ImageBuilderComponentFulfillmentOption_operatingSystems = &sEc2ImageBuilderComponentFulfillmentOption_operatingSystems
+var Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices = &sEc2ImageBuilderComponentFulfillmentOption_awsSupportedServices
+var Ec2ImageBuilderComponentFulfillmentOption_releaseNotes = &sEc2ImageBuilderComponentFulfillmentOption_releaseNotes
+var Ec2ImageBuilderComponentFulfillmentOption_usageInstructions = &sEc2ImageBuilderComponentFulfillmentOption_usageInstructions
+
+var EksAddOnFulfillmentOption = &sEksAddOnFulfillmentOption
+var EksAddOnFulfillmentOption_fulfillmentOptionId = &sEksAddOnFulfillmentOption_fulfillmentOptionId
+var EksAddOnFulfillmentOption_fulfillmentOptionName = &sEksAddOnFulfillmentOption_fulfillmentOptionName
+var EksAddOnFulfillmentOption_fulfillmentOptionType = &sEksAddOnFulfillmentOption_fulfillmentOptionType
+var EksAddOnFulfillmentOption_fulfillmentOptionDisplayName = &sEksAddOnFulfillmentOption_fulfillmentOptionDisplayName
+var EksAddOnFulfillmentOption_fulfillmentOptionVersion = &sEksAddOnFulfillmentOption_fulfillmentOptionVersion
+var EksAddOnFulfillmentOption_operatingSystems = &sEksAddOnFulfillmentOption_operatingSystems
+var EksAddOnFulfillmentOption_releaseNotes = &sEksAddOnFulfillmentOption_releaseNotes
+var EksAddOnFulfillmentOption_usageInstructions = &sEksAddOnFulfillmentOption_usageInstructions
+var EksAddOnFulfillmentOption_awsSupportedServices = &sEksAddOnFulfillmentOption_awsSupportedServices
+
+var EksAddOnOperatingSystem = &sEksAddOnOperatingSystem
+var EksAddOnOperatingSystem_operatingSystemFamilyName = &sEksAddOnOperatingSystem_operatingSystemFamilyName
+var EksAddOnOperatingSystem_operatingSystemName = &sEksAddOnOperatingSystem_operatingSystemName
+
+var _EksAddOnOperatingSystemList = &s_EksAddOnOperatingSystemList
+var _EksAddOnOperatingSystemList_member = &s_EksAddOnOperatingSystemList_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _FacetTypeList = &s_FacetTypeList
+var _FacetTypeList_member = &s_FacetTypeList_member
+
+var FixedPercentage = &sFixedPercentage
+var FixedPercentage_percentageValue = &sFixedPercentage_percentageValue
+
+var FixedUpfrontPricingTerm = &sFixedUpfrontPricingTerm
+var FixedUpfrontPricingTerm_id = &sFixedUpfrontPricingTerm_id
+var FixedUpfrontPricingTerm_type = &sFixedUpfrontPricingTerm_type
+var FixedUpfrontPricingTerm_currencyCode = &sFixedUpfrontPricingTerm_currencyCode
+var FixedUpfrontPricingTerm_duration = &sFixedUpfrontPricingTerm_duration
+var FixedUpfrontPricingTerm_price = &sFixedUpfrontPricingTerm_price
+var FixedUpfrontPricingTerm_grants = &sFixedUpfrontPricingTerm_grants
+
+var FreeTrialPricingTerm = &sFreeTrialPricingTerm
+var FreeTrialPricingTerm_id = &sFreeTrialPricingTerm_id
+var FreeTrialPricingTerm_type = &sFreeTrialPricingTerm_type
+var FreeTrialPricingTerm_duration = &sFreeTrialPricingTerm_duration
+var FreeTrialPricingTerm_grants = &sFreeTrialPricingTerm_grants
+
+var FulfillmentOption = &sFulfillmentOption
+var FulfillmentOption_amazonMachineImageFulfillmentOption = &sFulfillmentOption_amazonMachineImageFulfillmentOption
+var FulfillmentOption_apiFulfillmentOption = &sFulfillmentOption_apiFulfillmentOption
+var FulfillmentOption_cloudFormationFulfillmentOption = &sFulfillmentOption_cloudFormationFulfillmentOption
+var FulfillmentOption_containerFulfillmentOption = &sFulfillmentOption_containerFulfillmentOption
+var FulfillmentOption_helmFulfillmentOption = &sFulfillmentOption_helmFulfillmentOption
+var FulfillmentOption_eksAddOnFulfillmentOption = &sFulfillmentOption_eksAddOnFulfillmentOption
+var FulfillmentOption_ec2ImageBuilderComponentFulfillmentOption = &sFulfillmentOption_ec2ImageBuilderComponentFulfillmentOption
+var FulfillmentOption_dataExchangeFulfillmentOption = &sFulfillmentOption_dataExchangeFulfillmentOption
+var FulfillmentOption_professionalServicesFulfillmentOption = &sFulfillmentOption_professionalServicesFulfillmentOption
+var FulfillmentOption_saasFulfillmentOption = &sFulfillmentOption_saasFulfillmentOption
+var FulfillmentOption_sageMakerAlgorithmFulfillmentOption = &sFulfillmentOption_sageMakerAlgorithmFulfillmentOption
+var FulfillmentOption_sageMakerModelFulfillmentOption = &sFulfillmentOption_sageMakerModelFulfillmentOption
+
+var _FulfillmentOptionsList = &s_FulfillmentOptionsList
+var _FulfillmentOptionsList_member = &s_FulfillmentOptionsList_member
+
+var FulfillmentOptionSummary = &sFulfillmentOptionSummary
+var FulfillmentOptionSummary_fulfillmentOptionType = &sFulfillmentOptionSummary_fulfillmentOptionType
+var FulfillmentOptionSummary_displayName = &sFulfillmentOptionSummary_displayName
+
+var _FulfillmentOptionSummaryList = &s_FulfillmentOptionSummaryList
+var _FulfillmentOptionSummaryList_member = &s_FulfillmentOptionSummaryList_member
+
+var FulfillmentOptionType = &sFulfillmentOptionType
+var FulfillmentOptionType_AMAZON_MACHINE_IMAGE = &sFulfillmentOptionType_AMAZON_MACHINE_IMAGE
+var FulfillmentOptionType_API = &sFulfillmentOptionType_API
+var FulfillmentOptionType_CLOUDFORMATION_TEMPLATE = &sFulfillmentOptionType_CLOUDFORMATION_TEMPLATE
+var FulfillmentOptionType_CONTAINER = &sFulfillmentOptionType_CONTAINER
+var FulfillmentOptionType_HELM = &sFulfillmentOptionType_HELM
+var FulfillmentOptionType_EKS_ADD_ON = &sFulfillmentOptionType_EKS_ADD_ON
+var FulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT = &sFulfillmentOptionType_EC2_IMAGE_BUILDER_COMPONENT
+var FulfillmentOptionType_DATA_EXCHANGE = &sFulfillmentOptionType_DATA_EXCHANGE
+var FulfillmentOptionType_PROFESSIONAL_SERVICES = &sFulfillmentOptionType_PROFESSIONAL_SERVICES
+var FulfillmentOptionType_SAAS = &sFulfillmentOptionType_SAAS
+var FulfillmentOptionType_SAGEMAKER_ALGORITHM = &sFulfillmentOptionType_SAGEMAKER_ALGORITHM
+var FulfillmentOptionType_SAGEMAKER_MODEL = &sFulfillmentOptionType_SAGEMAKER_MODEL
+
+var GrantItem = &sGrantItem
+var GrantItem_dimensionKey = &sGrantItem_dimensionKey
+var GrantItem_displayName = &sGrantItem_displayName
+var GrantItem_description = &sGrantItem_description
+var GrantItem_dimensionLabels = &sGrantItem_dimensionLabels
+var GrantItem_unit = &sGrantItem_unit
+var GrantItem_maxQuantity = &sGrantItem_maxQuantity
+
+var _GrantList = &s_GrantList
+var _GrantList_member = &s_GrantList_member
+
+var HelmFulfillmentOption = &sHelmFulfillmentOption
+var HelmFulfillmentOption_fulfillmentOptionId = &sHelmFulfillmentOption_fulfillmentOptionId
+var HelmFulfillmentOption_fulfillmentOptionName = &sHelmFulfillmentOption_fulfillmentOptionName
+var HelmFulfillmentOption_fulfillmentOptionType = &sHelmFulfillmentOption_fulfillmentOptionType
+var HelmFulfillmentOption_fulfillmentOptionDisplayName = &sHelmFulfillmentOption_fulfillmentOptionDisplayName
+var HelmFulfillmentOption_fulfillmentOptionVersion = &sHelmFulfillmentOption_fulfillmentOptionVersion
+var HelmFulfillmentOption_operatingSystems = &sHelmFulfillmentOption_operatingSystems
+var HelmFulfillmentOption_releaseNotes = &sHelmFulfillmentOption_releaseNotes
+var HelmFulfillmentOption_awsSupportedServices = &sHelmFulfillmentOption_awsSupportedServices
+var HelmFulfillmentOption_usageInstructions = &sHelmFulfillmentOption_usageInstructions
+
+var HelmOperatingSystem = &sHelmOperatingSystem
+var HelmOperatingSystem_operatingSystemFamilyName = &sHelmOperatingSystem_operatingSystemFamilyName
+var HelmOperatingSystem_operatingSystemName = &sHelmOperatingSystem_operatingSystemName
+
+var _HelmOperatingSystemList = &s_HelmOperatingSystemList
+var _HelmOperatingSystemList_member = &s_HelmOperatingSystemList_member
+
+var _HighlightList = &s_HighlightList
+var _HighlightList_member = &s_HighlightList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LegalDocumentType = &sLegalDocumentType
+var LegalDocumentType_CUSTOM_EULA = &sLegalDocumentType_CUSTOM_EULA
+var LegalDocumentType_CUSTOM_DSA = &sLegalDocumentType_CUSTOM_DSA
+var LegalDocumentType_ENTERPRISE_EULA = &sLegalDocumentType_ENTERPRISE_EULA
+var LegalDocumentType_STANDARD_EULA = &sLegalDocumentType_STANDARD_EULA
+var LegalDocumentType_STANDARD_DSA = &sLegalDocumentType_STANDARD_DSA
+
+var LegalTerm = &sLegalTerm
+var LegalTerm_id = &sLegalTerm_id
+var LegalTerm_type = &sLegalTerm_type
+var LegalTerm_documents = &sLegalTerm_documents
+
+var ListingAssociatedEntity = &sListingAssociatedEntity
+var ListingAssociatedEntity_product = &sListingAssociatedEntity_product
+var ListingAssociatedEntity_offer = &sListingAssociatedEntity_offer
+
+var _ListingAssociatedEntityList = &s_ListingAssociatedEntityList
+var _ListingAssociatedEntityList_member = &s_ListingAssociatedEntityList_member
+
+var ListingBadge = &sListingBadge
+var ListingBadge_displayName = &sListingBadge_displayName
+var ListingBadge_badgeType = &sListingBadge_badgeType
+
+var _ListingBadgeList = &s_ListingBadgeList
+var _ListingBadgeList_member = &s_ListingBadgeList_member
+
+var ListingBadgeType = &sListingBadgeType
+var ListingBadgeType_AWS_FREE_TIER = &sListingBadgeType_AWS_FREE_TIER
+var ListingBadgeType_FREE_TRIAL = &sListingBadgeType_FREE_TRIAL
+var ListingBadgeType_DEPLOYED_ON_AWS = &sListingBadgeType_DEPLOYED_ON_AWS
+var ListingBadgeType_QUICK_LAUNCH = &sListingBadgeType_QUICK_LAUNCH
+var ListingBadgeType_MULTI_PRODUCT = &sListingBadgeType_MULTI_PRODUCT
+
+var ListingFacet = &sListingFacet
+var ListingFacet_value = &sListingFacet_value
+var ListingFacet_displayName = &sListingFacet_displayName
+var ListingFacet_parent = &sListingFacet_parent
+var ListingFacet_count = &sListingFacet_count
+
+var _ListingFacetList = &s_ListingFacetList
+var _ListingFacetList_member = &s_ListingFacetList_member
+
+var _ListingId = &s_ListingId
+
+var ListingSummary = &sListingSummary
+var ListingSummary_listingId = &sListingSummary_listingId
+var ListingSummary_listingName = &sListingSummary_listingName
+var ListingSummary_publisher = &sListingSummary_publisher
+var ListingSummary_fulfillmentOptionSummaries = &sListingSummary_fulfillmentOptionSummaries
+var ListingSummary_catalog = &sListingSummary_catalog
+var ListingSummary_shortDescription = &sListingSummary_shortDescription
+var ListingSummary_logoThumbnailUrl = &sListingSummary_logoThumbnailUrl
+var ListingSummary_categories = &sListingSummary_categories
+var ListingSummary_badges = &sListingSummary_badges
+var ListingSummary_reviewSummary = &sListingSummary_reviewSummary
+var ListingSummary_pricingModels = &sListingSummary_pricingModels
+var ListingSummary_pricingUnits = &sListingSummary_pricingUnits
+var ListingSummary_associatedEntities = &sListingSummary_associatedEntities
+
+var ListingSummaryAssociatedEntity = &sListingSummaryAssociatedEntity
+var ListingSummaryAssociatedEntity_product = &sListingSummaryAssociatedEntity_product
+
+var _ListingSummaryAssociatedEntityList = &s_ListingSummaryAssociatedEntityList
+var _ListingSummaryAssociatedEntityList_member = &s_ListingSummaryAssociatedEntityList_member
+
+var _ListingSummaryList = &s_ListingSummaryList
+var _ListingSummaryList_member = &s_ListingSummaryList_member
+
+var _Locale = &s_Locale
+
+var _MaxResults = &s_MaxResults
+
+var NetPaymentTerm = &sNetPaymentTerm
+var NetPaymentTerm_id = &sNetPaymentTerm_id
+var NetPaymentTerm_type = &sNetPaymentTerm_type
+var NetPaymentTerm_paymentDuePeriod = &sNetPaymentTerm_paymentDuePeriod
+
+var _NextToken = &s_NextToken
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NonNegativeCount = &s_NonNegativeCount
+
+var _NullableString = &s_NullableString
+
+var OfferAssociatedEntity = &sOfferAssociatedEntity
+var OfferAssociatedEntity_product = &sOfferAssociatedEntity_product
+var OfferAssociatedEntity_offerSet = &sOfferAssociatedEntity_offerSet
+
+var _OfferAssociatedEntityList = &s_OfferAssociatedEntityList
+var _OfferAssociatedEntityList_member = &s_OfferAssociatedEntityList_member
+
+var _OfferId = &s_OfferId
+
+var OfferInformation = &sOfferInformation
+var OfferInformation_offerId = &sOfferInformation_offerId
+var OfferInformation_offerName = &sOfferInformation_offerName
+var OfferInformation_sellerOfRecord = &sOfferInformation_sellerOfRecord
+
+var OfferSetAssociatedEntity = &sOfferSetAssociatedEntity
+var OfferSetAssociatedEntity_product = &sOfferSetAssociatedEntity_product
+var OfferSetAssociatedEntity_offer = &sOfferSetAssociatedEntity_offer
+
+var _OfferSetAssociatedEntityList = &s_OfferSetAssociatedEntityList
+var _OfferSetAssociatedEntityList_member = &s_OfferSetAssociatedEntityList_member
+
+var _OfferSetId = &s_OfferSetId
+
+var OfferSetInformation = &sOfferSetInformation
+var OfferSetInformation_offerSetId = &sOfferSetInformation_offerSetId
+var OfferSetInformation_sellerOfRecord = &sOfferSetInformation_sellerOfRecord
+
+var OfferTerm = &sOfferTerm
+var OfferTerm_byolPricingTerm = &sOfferTerm_byolPricingTerm
+var OfferTerm_configurableUpfrontPricingTerm = &sOfferTerm_configurableUpfrontPricingTerm
+var OfferTerm_fixedUpfrontPricingTerm = &sOfferTerm_fixedUpfrontPricingTerm
+var OfferTerm_freeTrialPricingTerm = &sOfferTerm_freeTrialPricingTerm
+var OfferTerm_legalTerm = &sOfferTerm_legalTerm
+var OfferTerm_paymentScheduleTerm = &sOfferTerm_paymentScheduleTerm
+var OfferTerm_recurringPaymentTerm = &sOfferTerm_recurringPaymentTerm
+var OfferTerm_renewalTerm = &sOfferTerm_renewalTerm
+var OfferTerm_supportTerm = &sOfferTerm_supportTerm
+var OfferTerm_usageBasedPricingTerm = &sOfferTerm_usageBasedPricingTerm
+var OfferTerm_validityTerm = &sOfferTerm_validityTerm
+var OfferTerm_variablePaymentTerm = &sOfferTerm_variablePaymentTerm
+var OfferTerm_netPaymentTerm = &sOfferTerm_netPaymentTerm
+
+var _OfferTermsList = &s_OfferTermsList
+var _OfferTermsList_member = &s_OfferTermsList_member
+
+var PaymentScheduleEntry = &sPaymentScheduleEntry
+var PaymentScheduleEntry_chargeDateOffset = &sPaymentScheduleEntry_chargeDateOffset
+var PaymentScheduleEntry_chargePercentage = &sPaymentScheduleEntry_chargePercentage
+var PaymentScheduleEntry_dayOfMonth = &sPaymentScheduleEntry_dayOfMonth
+
+var _PaymentScheduleEntryList = &s_PaymentScheduleEntryList
+var _PaymentScheduleEntryList_member = &s_PaymentScheduleEntryList_member
+
+var PaymentScheduleTerm = &sPaymentScheduleTerm
+var PaymentScheduleTerm_id = &sPaymentScheduleTerm_id
+var PaymentScheduleTerm_type = &sPaymentScheduleTerm_type
+var PaymentScheduleTerm_currencyCode = &sPaymentScheduleTerm_currencyCode
+var PaymentScheduleTerm_schedule = &sPaymentScheduleTerm_schedule
+
+var PaymentScheduleTermTemplate = &sPaymentScheduleTermTemplate
+var PaymentScheduleTermTemplate_schedule = &sPaymentScheduleTermTemplate_schedule
+
+var PercentageRange = &sPercentageRange
+var PercentageRange_minimumValue = &sPercentageRange_minimumValue
+var PercentageRange_maximumValue = &sPercentageRange_maximumValue
+var PercentageRange_defaultValue = &sPercentageRange_defaultValue
+
+var PriceIncrease = &sPriceIncrease
+var PriceIncrease_fixedPercentage = &sPriceIncrease_fixedPercentage
+var PriceIncrease_percentageRange = &sPriceIncrease_percentageRange
+
+var PricingModel = &sPricingModel
+var PricingModel_pricingModelType = &sPricingModel_pricingModelType
+var PricingModel_displayName = &sPricingModel_displayName
+
+var _PricingModelList = &s_PricingModelList
+var _PricingModelList_member = &s_PricingModelList_member
+
+var PricingModelType = &sPricingModelType
+var PricingModelType_USAGE = &sPricingModelType_USAGE
+var PricingModelType_CONTRACT = &sPricingModelType_CONTRACT
+var PricingModelType_BYOL = &sPricingModelType_BYOL
+var PricingModelType_FREE = &sPricingModelType_FREE
+
+var PricingUnit = &sPricingUnit
+var PricingUnit_pricingUnitType = &sPricingUnit_pricingUnitType
+var PricingUnit_displayName = &sPricingUnit_displayName
+
+var _PricingUnitList = &s_PricingUnitList
+var _PricingUnitList_member = &s_PricingUnitList_member
+
+var PricingUnitType = &sPricingUnitType
+var PricingUnitType_USERS = &sPricingUnitType_USERS
+var PricingUnitType_HOSTS = &sPricingUnitType_HOSTS
+var PricingUnitType_BANDWIDTH = &sPricingUnitType_BANDWIDTH
+var PricingUnitType_DATA = &sPricingUnitType_DATA
+var PricingUnitType_TIERS = &sPricingUnitType_TIERS
+var PricingUnitType_REQUESTS = &sPricingUnitType_REQUESTS
+var PricingUnitType_UNITS = &sPricingUnitType_UNITS
+
+var _ProductId = &s_ProductId
+
+var ProductInformation = &sProductInformation
+var ProductInformation_productId = &sProductInformation_productId
+var ProductInformation_productName = &sProductInformation_productName
+var ProductInformation_manufacturer = &sProductInformation_manufacturer
+
+var ProfessionalServicesFulfillmentOption = &sProfessionalServicesFulfillmentOption
+var ProfessionalServicesFulfillmentOption_fulfillmentOptionId = &sProfessionalServicesFulfillmentOption_fulfillmentOptionId
+var ProfessionalServicesFulfillmentOption_fulfillmentOptionType = &sProfessionalServicesFulfillmentOption_fulfillmentOptionType
+var ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName = &sProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName
+
+var PromotionalEmbeddedImage = &sPromotionalEmbeddedImage
+var PromotionalEmbeddedImage_title = &sPromotionalEmbeddedImage_title
+var PromotionalEmbeddedImage_url = &sPromotionalEmbeddedImage_url
+var PromotionalEmbeddedImage_description = &sPromotionalEmbeddedImage_description
+
+var PromotionalEmbeddedVideo = &sPromotionalEmbeddedVideo
+var PromotionalEmbeddedVideo_title = &sPromotionalEmbeddedVideo_title
+var PromotionalEmbeddedVideo_url = &sPromotionalEmbeddedVideo_url
+var PromotionalEmbeddedVideo_preview = &sPromotionalEmbeddedVideo_preview
+var PromotionalEmbeddedVideo_thumbnail = &sPromotionalEmbeddedVideo_thumbnail
+var PromotionalEmbeddedVideo_description = &sPromotionalEmbeddedVideo_description
+
+var PromotionalMedia = &sPromotionalMedia
+var PromotionalMedia_embeddedImage = &sPromotionalMedia_embeddedImage
+var PromotionalMedia_embeddedVideo = &sPromotionalMedia_embeddedVideo
+
+var _PromotionalMediaList = &s_PromotionalMediaList
+var _PromotionalMediaList_member = &s_PromotionalMediaList_member
+
+var PurchaseOptionAssociatedEntity = &sPurchaseOptionAssociatedEntity
+var PurchaseOptionAssociatedEntity_product = &sPurchaseOptionAssociatedEntity_product
+var PurchaseOptionAssociatedEntity_offer = &sPurchaseOptionAssociatedEntity_offer
+var PurchaseOptionAssociatedEntity_offerSet = &sPurchaseOptionAssociatedEntity_offerSet
+
+var _PurchaseOptionAssociatedEntityList = &s_PurchaseOptionAssociatedEntityList
+var _PurchaseOptionAssociatedEntityList_member = &s_PurchaseOptionAssociatedEntityList_member
+
+var PurchaseOptionBadge = &sPurchaseOptionBadge
+var PurchaseOptionBadge_displayName = &sPurchaseOptionBadge_displayName
+var PurchaseOptionBadge_badgeType = &sPurchaseOptionBadge_badgeType
+
+var _PurchaseOptionBadgeList = &s_PurchaseOptionBadgeList
+var _PurchaseOptionBadgeList_member = &s_PurchaseOptionBadgeList_member
+
+var PurchaseOptionBadgeType = &sPurchaseOptionBadgeType
+var PurchaseOptionBadgeType_PRIVATE_PRICING = &sPurchaseOptionBadgeType_PRIVATE_PRICING
+var PurchaseOptionBadgeType_FUTURE_DATED = &sPurchaseOptionBadgeType_FUTURE_DATED
+var PurchaseOptionBadgeType_REPLACEMENT_OFFER = &sPurchaseOptionBadgeType_REPLACEMENT_OFFER
+var PurchaseOptionBadgeType_AUTO_RENEW = &sPurchaseOptionBadgeType_AUTO_RENEW
+
+var PurchaseOptionFilter = &sPurchaseOptionFilter
+var PurchaseOptionFilter_filterType = &sPurchaseOptionFilter_filterType
+var PurchaseOptionFilter_filterValues = &sPurchaseOptionFilter_filterValues
+
+var _PurchaseOptionFilterList = &s_PurchaseOptionFilterList
+var _PurchaseOptionFilterList_member = &s_PurchaseOptionFilterList_member
+
+var PurchaseOptionFilterType = &sPurchaseOptionFilterType
+var PurchaseOptionFilterType_PRODUCT_ID = &sPurchaseOptionFilterType_PRODUCT_ID
+var PurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID = &sPurchaseOptionFilterType_SELLER_OF_RECORD_PROFILE_ID
+var PurchaseOptionFilterType_PURCHASE_OPTION_TYPE = &sPurchaseOptionFilterType_PURCHASE_OPTION_TYPE
+var PurchaseOptionFilterType_VISIBILITY_SCOPE = &sPurchaseOptionFilterType_VISIBILITY_SCOPE
+var PurchaseOptionFilterType_AVAILABILITY_STATUS = &sPurchaseOptionFilterType_AVAILABILITY_STATUS
+
+var _PurchaseOptionFilterValue = &s_PurchaseOptionFilterValue
+
+var _PurchaseOptionFilterValueList = &s_PurchaseOptionFilterValueList
+var _PurchaseOptionFilterValueList_member = &s_PurchaseOptionFilterValueList_member
+
+var PurchaseOptionSummary = &sPurchaseOptionSummary
+var PurchaseOptionSummary_purchaseOptionId = &sPurchaseOptionSummary_purchaseOptionId
+var PurchaseOptionSummary_catalog = &sPurchaseOptionSummary_catalog
+var PurchaseOptionSummary_purchaseOptionType = &sPurchaseOptionSummary_purchaseOptionType
+var PurchaseOptionSummary_purchaseOptionName = &sPurchaseOptionSummary_purchaseOptionName
+var PurchaseOptionSummary_availableFromTime = &sPurchaseOptionSummary_availableFromTime
+var PurchaseOptionSummary_expirationTime = &sPurchaseOptionSummary_expirationTime
+var PurchaseOptionSummary_sellerOfRecord = &sPurchaseOptionSummary_sellerOfRecord
+var PurchaseOptionSummary_badges = &sPurchaseOptionSummary_badges
+var PurchaseOptionSummary_associatedEntities = &sPurchaseOptionSummary_associatedEntities
+
+var _PurchaseOptionSummaryList = &s_PurchaseOptionSummaryList
+var _PurchaseOptionSummaryList_member = &s_PurchaseOptionSummaryList_member
+
+var PurchaseOptionType = &sPurchaseOptionType
+var PurchaseOptionType_OFFER = &sPurchaseOptionType_OFFER
+var PurchaseOptionType_OFFERSET = &sPurchaseOptionType_OFFERSET
+
+var RateCardConstraintType = &sRateCardConstraintType
+var RateCardConstraintType_ALLOWED = &sRateCardConstraintType_ALLOWED
+var RateCardConstraintType_DISALLOWED = &sRateCardConstraintType_DISALLOWED
+
+var RateCardItem = &sRateCardItem
+var RateCardItem_dimensionKey = &sRateCardItem_dimensionKey
+var RateCardItem_displayName = &sRateCardItem_displayName
+var RateCardItem_description = &sRateCardItem_description
+var RateCardItem_dimensionLabels = &sRateCardItem_dimensionLabels
+var RateCardItem_unit = &sRateCardItem_unit
+var RateCardItem_price = &sRateCardItem_price
+
+var _RateCardList = &s_RateCardList
+var _RateCardList_member = &s_RateCardList_member
+
+var RecurringPaymentTerm = &sRecurringPaymentTerm
+var RecurringPaymentTerm_id = &sRecurringPaymentTerm_id
+var RecurringPaymentTerm_type = &sRecurringPaymentTerm_type
+var RecurringPaymentTerm_currencyCode = &sRecurringPaymentTerm_currencyCode
+var RecurringPaymentTerm_billingPeriod = &sRecurringPaymentTerm_billingPeriod
+var RecurringPaymentTerm_price = &sRecurringPaymentTerm_price
+
+var RenewalTerm = &sRenewalTerm
+var RenewalTerm_id = &sRenewalTerm_id
+var RenewalTerm_type = &sRenewalTerm_type
+var RenewalTerm_maxRenewals = &sRenewalTerm_maxRenewals
+var RenewalTerm_lockoutPeriod = &sRenewalTerm_lockoutPeriod
+var RenewalTerm_adjustmentDeadline = &sRenewalTerm_adjustmentDeadline
+var RenewalTerm_priceIncrease = &sRenewalTerm_priceIncrease
+var RenewalTerm_termTemplates = &sRenewalTerm_termTemplates
+
+var Resource = &sResource
+var Resource_resourceType = &sResource_resourceType
+var Resource_contentType = &sResource_contentType
+var Resource_value = &sResource_value
+var Resource_displayName = &sResource_displayName
+
+var ResourceContentType = &sResourceContentType
+var ResourceContentType_EMAIL = &sResourceContentType_EMAIL
+var ResourceContentType_PHONE_NUMBER = &sResourceContentType_PHONE_NUMBER
+var ResourceContentType_LINK = &sResourceContentType_LINK
+var ResourceContentType_OTHER = &sResourceContentType_OTHER
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceType = &sResourceType
+var ResourceType_MANUFACTURER_SUPPORT = &sResourceType_MANUFACTURER_SUPPORT
+var ResourceType_MANUFACTURER_INSTRUCTIONS = &sResourceType_MANUFACTURER_INSTRUCTIONS
+
+var ReviewSourceId = &sReviewSourceId
+var ReviewSourceId_AWS_MARKETPLACE = &sReviewSourceId_AWS_MARKETPLACE
+var ReviewSourceId_G2 = &sReviewSourceId_G2
+var ReviewSourceId_PEERSPOT = &sReviewSourceId_PEERSPOT
+
+var ReviewSourceSummary = &sReviewSourceSummary
+var ReviewSourceSummary_sourceName = &sReviewSourceSummary_sourceName
+var ReviewSourceSummary_sourceId = &sReviewSourceSummary_sourceId
+var ReviewSourceSummary_sourceUrl = &sReviewSourceSummary_sourceUrl
+var ReviewSourceSummary_averageRating = &sReviewSourceSummary_averageRating
+var ReviewSourceSummary_totalReviews = &sReviewSourceSummary_totalReviews
+
+var _ReviewSourceSummaryList = &s_ReviewSourceSummaryList
+var _ReviewSourceSummaryList_member = &s_ReviewSourceSummaryList_member
+
+var ReviewSummary = &sReviewSummary
+var ReviewSummary_reviewSourceSummaries = &sReviewSummary_reviewSourceSummaries
+
+var SaasFulfillmentOption = &sSaasFulfillmentOption
+var SaasFulfillmentOption_fulfillmentOptionId = &sSaasFulfillmentOption_fulfillmentOptionId
+var SaasFulfillmentOption_fulfillmentOptionType = &sSaasFulfillmentOption_fulfillmentOptionType
+var SaasFulfillmentOption_fulfillmentOptionDisplayName = &sSaasFulfillmentOption_fulfillmentOptionDisplayName
+var SaasFulfillmentOption_fulfillmentUrl = &sSaasFulfillmentOption_fulfillmentUrl
+var SaasFulfillmentOption_usageInstructions = &sSaasFulfillmentOption_usageInstructions
+var SaasFulfillmentOption_availableFromTime = &sSaasFulfillmentOption_availableFromTime
+var SaasFulfillmentOption_launchUrl = &sSaasFulfillmentOption_launchUrl
+var SaasFulfillmentOption_quickLaunch = &sSaasFulfillmentOption_quickLaunch
+
+var SaasQuickLaunchStatus = &sSaasQuickLaunchStatus
+var SaasQuickLaunchStatus_ENABLED = &sSaasQuickLaunchStatus_ENABLED
+var SaasQuickLaunchStatus_DISABLED = &sSaasQuickLaunchStatus_DISABLED
+
+var SageMakerAlgorithmFulfillmentOption = &sSageMakerAlgorithmFulfillmentOption
+var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId = &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionId
+var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType = &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionType
+var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName = &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName
+var SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion = &sSageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion
+var SageMakerAlgorithmFulfillmentOption_releaseNotes = &sSageMakerAlgorithmFulfillmentOption_releaseNotes
+var SageMakerAlgorithmFulfillmentOption_usageInstructions = &sSageMakerAlgorithmFulfillmentOption_usageInstructions
+var SageMakerAlgorithmFulfillmentOption_recommendation = &sSageMakerAlgorithmFulfillmentOption_recommendation
+
+var SageMakerAlgorithmRecommendation = &sSageMakerAlgorithmRecommendation
+var SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType = &sSageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType
+var SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType = &sSageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType
+var SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType = &sSageMakerAlgorithmRecommendation_recommendedTrainingInstanceType
+
+var _SageMakerModelContentTypeList = &s_SageMakerModelContentTypeList
+var _SageMakerModelContentTypeList_member = &s_SageMakerModelContentTypeList_member
+
+var SageMakerModelFulfillmentOption = &sSageMakerModelFulfillmentOption
+var SageMakerModelFulfillmentOption_fulfillmentOptionId = &sSageMakerModelFulfillmentOption_fulfillmentOptionId
+var SageMakerModelFulfillmentOption_fulfillmentOptionType = &sSageMakerModelFulfillmentOption_fulfillmentOptionType
+var SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName = &sSageMakerModelFulfillmentOption_fulfillmentOptionDisplayName
+var SageMakerModelFulfillmentOption_fulfillmentOptionVersion = &sSageMakerModelFulfillmentOption_fulfillmentOptionVersion
+var SageMakerModelFulfillmentOption_releaseNotes = &sSageMakerModelFulfillmentOption_releaseNotes
+var SageMakerModelFulfillmentOption_usageInstructions = &sSageMakerModelFulfillmentOption_usageInstructions
+var SageMakerModelFulfillmentOption_recommendation = &sSageMakerModelFulfillmentOption_recommendation
+var SageMakerModelFulfillmentOption_supportedContentTypes = &sSageMakerModelFulfillmentOption_supportedContentTypes
+var SageMakerModelFulfillmentOption_supportedResponseMimeTypes = &sSageMakerModelFulfillmentOption_supportedResponseMimeTypes
+
+var SageMakerModelRecommendation = &sSageMakerModelRecommendation
+var SageMakerModelRecommendation_recommendedBatchTransformInstanceType = &sSageMakerModelRecommendation_recommendedBatchTransformInstanceType
+var SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType = &sSageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType
+
+var _SageMakerModelResponseMimeTypeList = &s_SageMakerModelResponseMimeTypeList
+var _SageMakerModelResponseMimeTypeList_member = &s_SageMakerModelResponseMimeTypeList_member
+
+var ScheduleItem = &sScheduleItem
+var ScheduleItem_chargeDate = &sScheduleItem_chargeDate
+var ScheduleItem_chargeAmount = &sScheduleItem_chargeAmount
+
+var _ScheduleList = &s_ScheduleList
+var _ScheduleList_member = &s_ScheduleList_member
+
+var SearchFacetType = &sSearchFacetType
+var SearchFacetType_AVERAGE_CUSTOMER_RATING = &sSearchFacetType_AVERAGE_CUSTOMER_RATING
+var SearchFacetType_CATEGORY = &sSearchFacetType_CATEGORY
+var SearchFacetType_PUBLISHER = &sSearchFacetType_PUBLISHER
+var SearchFacetType_FULFILLMENT_OPTION_TYPE = &sSearchFacetType_FULFILLMENT_OPTION_TYPE
+var SearchFacetType_PRICING_MODEL = &sSearchFacetType_PRICING_MODEL
+var SearchFacetType_PRICING_UNIT = &sSearchFacetType_PRICING_UNIT
+var SearchFacetType_DEPLOYED_ON_AWS = &sSearchFacetType_DEPLOYED_ON_AWS
+var SearchFacetType_NUMBER_OF_PRODUCTS = &sSearchFacetType_NUMBER_OF_PRODUCTS
+
+var SearchFilter = &sSearchFilter
+var SearchFilter_filterType = &sSearchFilter_filterType
+var SearchFilter_filterValues = &sSearchFilter_filterValues
+
+var _SearchFilterList = &s_SearchFilterList
+var _SearchFilterList_member = &s_SearchFilterList_member
+
+var SearchFilterType = &sSearchFilterType
+var SearchFilterType_MIN_AVERAGE_CUSTOMER_RATING = &sSearchFilterType_MIN_AVERAGE_CUSTOMER_RATING
+var SearchFilterType_MAX_AVERAGE_CUSTOMER_RATING = &sSearchFilterType_MAX_AVERAGE_CUSTOMER_RATING
+var SearchFilterType_CATEGORY = &sSearchFilterType_CATEGORY
+var SearchFilterType_PUBLISHER = &sSearchFilterType_PUBLISHER
+var SearchFilterType_FULFILLMENT_OPTION_TYPE = &sSearchFilterType_FULFILLMENT_OPTION_TYPE
+var SearchFilterType_PRICING_MODEL = &sSearchFilterType_PRICING_MODEL
+var SearchFilterType_PRICING_UNIT = &sSearchFilterType_PRICING_UNIT
+var SearchFilterType_DEPLOYED_ON_AWS = &sSearchFilterType_DEPLOYED_ON_AWS
+var SearchFilterType_NUMBER_OF_PRODUCTS = &sSearchFilterType_NUMBER_OF_PRODUCTS
+
+var _SearchFilterValue = &s_SearchFilterValue
+
+var _SearchFilterValueList = &s_SearchFilterValueList
+var _SearchFilterValueList_member = &s_SearchFilterValueList_member
+
+var SearchListingsSortBy = &sSearchListingsSortBy
+var SearchListingsSortBy_RELEVANCE = &sSearchListingsSortBy_RELEVANCE
+var SearchListingsSortBy_AVERAGE_CUSTOMER_RATING = &sSearchListingsSortBy_AVERAGE_CUSTOMER_RATING
+
+var SearchListingsSortOrder = &sSearchListingsSortOrder
+var SearchListingsSortOrder_DESCENDING = &sSearchListingsSortOrder_DESCENDING
+var SearchListingsSortOrder_ASCENDING = &sSearchListingsSortOrder_ASCENDING
+
+var _SearchText = &s_SearchText
+
+var Selector = &sSelector
+var Selector_type = &sSelector_type
+var Selector_value = &sSelector_value
+
+var SelectorType = &sSelectorType
+var SelectorType_DURATION = &sSelectorType_DURATION
+
+var SellerEngagement = &sSellerEngagement
+var SellerEngagement_engagementType = &sSellerEngagement_engagementType
+var SellerEngagement_contentType = &sSellerEngagement_contentType
+var SellerEngagement_value = &sSellerEngagement_value
+
+var SellerEngagementContentType = &sSellerEngagementContentType
+var SellerEngagementContentType_LINK = &sSellerEngagementContentType_LINK
+
+var _SellerEngagementList = &s_SellerEngagementList
+var _SellerEngagementList_member = &s_SellerEngagementList_member
+
+var SellerEngagementType = &sSellerEngagementType
+var SellerEngagementType_REQUEST_FOR_PRIVATE_OFFER = &sSellerEngagementType_REQUEST_FOR_PRIVATE_OFFER
+var SellerEngagementType_REQUEST_FOR_DEMO = &sSellerEngagementType_REQUEST_FOR_DEMO
+
+var SellerInformation = &sSellerInformation
+var SellerInformation_sellerProfileId = &sSellerInformation_sellerProfileId
+var SellerInformation_displayName = &sSellerInformation_displayName
+
+var _SellerProfileId = &s_SellerProfileId
+
+var SupportTerm = &sSupportTerm
+var SupportTerm_id = &sSupportTerm_id
+var SupportTerm_type = &sSupportTerm_type
+var SupportTerm_refundPolicy = &sSupportTerm_refundPolicy
+
+var _TermId = &s_TermId
+
+var TermTemplate = &sTermTemplate
+var TermTemplate_paymentScheduleTermTemplate = &sTermTemplate_paymentScheduleTermTemplate
+
+var _TermTemplateList = &s_TermTemplateList
+var _TermTemplateList_member = &s_TermTemplateList_member
+
+var TermType = &sTermType
+var TermType_BYOL_PRICING_TERM = &sTermType_BYOL_PRICING_TERM
+var TermType_CONFIGURABLE_UPFRONT_PRICING_TERM = &sTermType_CONFIGURABLE_UPFRONT_PRICING_TERM
+var TermType_FIXED_UPFRONT_PRICING_TERM = &sTermType_FIXED_UPFRONT_PRICING_TERM
+var TermType_USAGE_BASED_PRICING_TERM = &sTermType_USAGE_BASED_PRICING_TERM
+var TermType_FREE_TRIAL_PRICING_TERM = &sTermType_FREE_TRIAL_PRICING_TERM
+var TermType_LEGAL_TERM = &sTermType_LEGAL_TERM
+var TermType_PAYMENT_SCHEDULE_TERM = &sTermType_PAYMENT_SCHEDULE_TERM
+var TermType_RECURRING_PAYMENT_TERM = &sTermType_RECURRING_PAYMENT_TERM
+var TermType_RENEWAL_TERM = &sTermType_RENEWAL_TERM
+var TermType_SUPPORT_TERM = &sTermType_SUPPORT_TERM
+var TermType_VALIDITY_TERM = &sTermType_VALIDITY_TERM
+var TermType_VARIABLE_PAYMENT_TERM = &sTermType_VARIABLE_PAYMENT_TERM
+var TermType_NET_PAYMENT_TERM = &sTermType_NET_PAYMENT_TERM
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TypeToFacetMap = &s_TypeToFacetMap
+var _TypeToFacetMap_key = &s_TypeToFacetMap_key
+var _TypeToFacetMap_value = &s_TypeToFacetMap_value
+
+var _URL = &s_URL
+
+var UsageBasedPricingTerm = &sUsageBasedPricingTerm
+var UsageBasedPricingTerm_id = &sUsageBasedPricingTerm_id
+var UsageBasedPricingTerm_type = &sUsageBasedPricingTerm_type
+var UsageBasedPricingTerm_currencyCode = &sUsageBasedPricingTerm_currencyCode
+var UsageBasedPricingTerm_rateCards = &sUsageBasedPricingTerm_rateCards
+
+var UsageBasedRateCardItem = &sUsageBasedRateCardItem
+var UsageBasedRateCardItem_rateCard = &sUsageBasedRateCardItem_rateCard
+
+var _UsageBasedRateCardList = &s_UsageBasedRateCardList
+var _UsageBasedRateCardList_member = &s_UsageBasedRateCardList_member
+
+var UseCase = &sUseCase
+var UseCase_description = &sUseCase_description
+var UseCase_displayName = &sUseCase_displayName
+var UseCase_value = &sUseCase_value
+
+var UseCaseEntry = &sUseCaseEntry
+var UseCaseEntry_useCase = &sUseCaseEntry_useCase
+
+var _UseCaseList = &s_UseCaseList
+var _UseCaseList_member = &s_UseCaseList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_INVALID_PAGINATION_TOKEN = &sValidationExceptionReason_INVALID_PAGINATION_TOKEN
+var ValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS = &sValidationExceptionReason_MALFORMED_REQUEST_PARAMETERS
+var ValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED = &sValidationExceptionReason_PAGINATION_LIMIT_EXCEEDED
+
+var ValidityTerm = &sValidityTerm
+var ValidityTerm_id = &sValidityTerm_id
+var ValidityTerm_type = &sValidityTerm_type
+var ValidityTerm_agreementDuration = &sValidityTerm_agreementDuration
+var ValidityTerm_agreementEndDate = &sValidityTerm_agreementEndDate
+var ValidityTerm_agreementStartDate = &sValidityTerm_agreementStartDate
+
+var VariablePaymentTerm = &sVariablePaymentTerm
+var VariablePaymentTerm_id = &sVariablePaymentTerm_id
+var VariablePaymentTerm_type = &sVariablePaymentTerm_type
+var VariablePaymentTerm_currencyCode = &sVariablePaymentTerm_currencyCode
+var VariablePaymentTerm_maxTotalChargeAmount = &sVariablePaymentTerm_maxTotalChargeAmount
+
+var GetListingInput = &sGetListingInput
+var GetListingInput_locale = &sGetListingInput_locale
+var GetListingInput_listingId = &sGetListingInput_listingId
+
+var GetListingOutput = &sGetListingOutput
+var GetListingOutput_locale = &sGetListingOutput_locale
+var GetListingOutput_associatedEntities = &sGetListingOutput_associatedEntities
+var GetListingOutput_badges = &sGetListingOutput_badges
+var GetListingOutput_catalog = &sGetListingOutput_catalog
+var GetListingOutput_categories = &sGetListingOutput_categories
+var GetListingOutput_fulfillmentOptionSummaries = &sGetListingOutput_fulfillmentOptionSummaries
+var GetListingOutput_highlights = &sGetListingOutput_highlights
+var GetListingOutput_integrationGuide = &sGetListingOutput_integrationGuide
+var GetListingOutput_listingId = &sGetListingOutput_listingId
+var GetListingOutput_listingName = &sGetListingOutput_listingName
+var GetListingOutput_logoThumbnailUrl = &sGetListingOutput_logoThumbnailUrl
+var GetListingOutput_longDescription = &sGetListingOutput_longDescription
+var GetListingOutput_pricingModels = &sGetListingOutput_pricingModels
+var GetListingOutput_pricingUnits = &sGetListingOutput_pricingUnits
+var GetListingOutput_promotionalMedia = &sGetListingOutput_promotionalMedia
+var GetListingOutput_publisher = &sGetListingOutput_publisher
+var GetListingOutput_resources = &sGetListingOutput_resources
+var GetListingOutput_reviewSummary = &sGetListingOutput_reviewSummary
+var GetListingOutput_sellerEngagements = &sGetListingOutput_sellerEngagements
+var GetListingOutput_shortDescription = &sGetListingOutput_shortDescription
+var GetListingOutput_useCases = &sGetListingOutput_useCases
+
+var GetOfferInput = &sGetOfferInput
+var GetOfferInput_locale = &sGetOfferInput_locale
+var GetOfferInput_offerId = &sGetOfferInput_offerId
+
+var GetOfferOutput = &sGetOfferOutput
+var GetOfferOutput_locale = &sGetOfferOutput_locale
+var GetOfferOutput_offerId = &sGetOfferOutput_offerId
+var GetOfferOutput_catalog = &sGetOfferOutput_catalog
+var GetOfferOutput_offerName = &sGetOfferOutput_offerName
+var GetOfferOutput_expirationTime = &sGetOfferOutput_expirationTime
+var GetOfferOutput_availableFromTime = &sGetOfferOutput_availableFromTime
+var GetOfferOutput_sellerOfRecord = &sGetOfferOutput_sellerOfRecord
+var GetOfferOutput_associatedEntities = &sGetOfferOutput_associatedEntities
+var GetOfferOutput_agreementProposalId = &sGetOfferOutput_agreementProposalId
+var GetOfferOutput_replacementAgreementId = &sGetOfferOutput_replacementAgreementId
+var GetOfferOutput_pricingModel = &sGetOfferOutput_pricingModel
+var GetOfferOutput_badges = &sGetOfferOutput_badges
+
+var GetOfferSetInput = &sGetOfferSetInput
+var GetOfferSetInput_locale = &sGetOfferSetInput_locale
+var GetOfferSetInput_offerSetId = &sGetOfferSetInput_offerSetId
+
+var GetOfferSetOutput = &sGetOfferSetOutput
+var GetOfferSetOutput_locale = &sGetOfferSetOutput_locale
+var GetOfferSetOutput_offerSetId = &sGetOfferSetOutput_offerSetId
+var GetOfferSetOutput_catalog = &sGetOfferSetOutput_catalog
+var GetOfferSetOutput_offerSetName = &sGetOfferSetOutput_offerSetName
+var GetOfferSetOutput_availableFromTime = &sGetOfferSetOutput_availableFromTime
+var GetOfferSetOutput_expirationTime = &sGetOfferSetOutput_expirationTime
+var GetOfferSetOutput_buyerNotes = &sGetOfferSetOutput_buyerNotes
+var GetOfferSetOutput_sellerOfRecord = &sGetOfferSetOutput_sellerOfRecord
+var GetOfferSetOutput_badges = &sGetOfferSetOutput_badges
+var GetOfferSetOutput_associatedEntities = &sGetOfferSetOutput_associatedEntities
+
+var GetOfferTermsInput = &sGetOfferTermsInput
+var GetOfferTermsInput_locale = &sGetOfferTermsInput_locale
+var GetOfferTermsInput_offerId = &sGetOfferTermsInput_offerId
+var GetOfferTermsInput_maxResults = &sGetOfferTermsInput_maxResults
+var GetOfferTermsInput_nextToken = &sGetOfferTermsInput_nextToken
+
+var GetOfferTermsOutput = &sGetOfferTermsOutput
+var GetOfferTermsOutput_locale = &sGetOfferTermsOutput_locale
+var GetOfferTermsOutput_offerTerms = &sGetOfferTermsOutput_offerTerms
+var GetOfferTermsOutput_nextToken = &sGetOfferTermsOutput_nextToken
+
+var GetProductInput = &sGetProductInput
+var GetProductInput_locale = &sGetProductInput_locale
+var GetProductInput_productId = &sGetProductInput_productId
+
+var GetProductOutput = &sGetProductOutput
+var GetProductOutput_locale = &sGetProductOutput_locale
+var GetProductOutput_productId = &sGetProductOutput_productId
+var GetProductOutput_catalog = &sGetProductOutput_catalog
+var GetProductOutput_productName = &sGetProductOutput_productName
+var GetProductOutput_manufacturer = &sGetProductOutput_manufacturer
+var GetProductOutput_deployedOnAws = &sGetProductOutput_deployedOnAws
+var GetProductOutput_shortDescription = &sGetProductOutput_shortDescription
+var GetProductOutput_longDescription = &sGetProductOutput_longDescription
+var GetProductOutput_logoThumbnailUrl = &sGetProductOutput_logoThumbnailUrl
+var GetProductOutput_fulfillmentOptionSummaries = &sGetProductOutput_fulfillmentOptionSummaries
+var GetProductOutput_categories = &sGetProductOutput_categories
+var GetProductOutput_highlights = &sGetProductOutput_highlights
+var GetProductOutput_promotionalMedia = &sGetProductOutput_promotionalMedia
+var GetProductOutput_resources = &sGetProductOutput_resources
+var GetProductOutput_sellerEngagements = &sGetProductOutput_sellerEngagements
+var GetProductOutput_listingId = &sGetProductOutput_listingId
+
+var ListFulfillmentOptionsInput = &sListFulfillmentOptionsInput
+var ListFulfillmentOptionsInput_locale = &sListFulfillmentOptionsInput_locale
+var ListFulfillmentOptionsInput_productId = &sListFulfillmentOptionsInput_productId
+var ListFulfillmentOptionsInput_maxResults = &sListFulfillmentOptionsInput_maxResults
+var ListFulfillmentOptionsInput_nextToken = &sListFulfillmentOptionsInput_nextToken
+
+var ListFulfillmentOptionsOutput = &sListFulfillmentOptionsOutput
+var ListFulfillmentOptionsOutput_locale = &sListFulfillmentOptionsOutput_locale
+var ListFulfillmentOptionsOutput_fulfillmentOptions = &sListFulfillmentOptionsOutput_fulfillmentOptions
+var ListFulfillmentOptionsOutput_nextToken = &sListFulfillmentOptionsOutput_nextToken
+
+var ListPurchaseOptionsInput = &sListPurchaseOptionsInput
+var ListPurchaseOptionsInput_locale = &sListPurchaseOptionsInput_locale
+var ListPurchaseOptionsInput_filters = &sListPurchaseOptionsInput_filters
+var ListPurchaseOptionsInput_maxResults = &sListPurchaseOptionsInput_maxResults
+var ListPurchaseOptionsInput_nextToken = &sListPurchaseOptionsInput_nextToken
+
+var ListPurchaseOptionsOutput = &sListPurchaseOptionsOutput
+var ListPurchaseOptionsOutput_purchaseOptions = &sListPurchaseOptionsOutput_purchaseOptions
+var ListPurchaseOptionsOutput_nextToken = &sListPurchaseOptionsOutput_nextToken
+
+var SearchFacetsInput = &sSearchFacetsInput
+var SearchFacetsInput_locale = &sSearchFacetsInput_locale
+var SearchFacetsInput_searchText = &sSearchFacetsInput_searchText
+var SearchFacetsInput_filters = &sSearchFacetsInput_filters
+var SearchFacetsInput_facetTypes = &sSearchFacetsInput_facetTypes
+var SearchFacetsInput_nextToken = &sSearchFacetsInput_nextToken
+
+var SearchFacetsOutput = &sSearchFacetsOutput
+var SearchFacetsOutput_totalResults = &sSearchFacetsOutput_totalResults
+var SearchFacetsOutput_listingFacets = &sSearchFacetsOutput_listingFacets
+var SearchFacetsOutput_nextToken = &sSearchFacetsOutput_nextToken
+
+var SearchListingsInput = &sSearchListingsInput
+var SearchListingsInput_locale = &sSearchListingsInput_locale
+var SearchListingsInput_searchText = &sSearchListingsInput_searchText
+var SearchListingsInput_filters = &sSearchListingsInput_filters
+var SearchListingsInput_maxResults = &sSearchListingsInput_maxResults
+var SearchListingsInput_sortBy = &sSearchListingsInput_sortBy
+var SearchListingsInput_sortOrder = &sSearchListingsInput_sortOrder
+var SearchListingsInput_nextToken = &sSearchListingsInput_nextToken
+
+var SearchListingsOutput = &sSearchListingsOutput
+var SearchListingsOutput_totalResults = &sSearchListingsOutput_totalResults
+var SearchListingsOutput_listingSummaries = &sSearchListingsOutput_listingSummaries
+var SearchListingsOutput_nextToken = &sSearchListingsOutput_nextToken
+
+var AWSMarketplaceDiscovery = &smithy.ServiceSchema{Schema: &s_AWSMarketplaceDiscovery, Version: "2026-02-05"}

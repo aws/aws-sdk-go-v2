@@ -4,824 +4,843 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeReportCreation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "DescribeReportCreation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eDescribeReportCreation                        smithy.SchemaExtensions
+	eGetComplianceSummary                          smithy.SchemaExtensions
+	eGetResources                                  smithy.SchemaExtensions
+	eGetTagKeys                                    smithy.SchemaExtensions
+	eGetTagValues                                  smithy.SchemaExtensions
+	eListRequiredTags                              smithy.SchemaExtensions
+	eStartReportCreation                           smithy.SchemaExtensions
+	eTagResources                                  smithy.SchemaExtensions
+	eUntagResources                                smithy.SchemaExtensions
+	e_ResourceGroupsTaggingAPI_20170126            smithy.SchemaExtensions
+	e_AmazonResourceType                           smithy.SchemaExtensions
+	e_CloudFormationResourceType                   smithy.SchemaExtensions
+	e_CloudFormationResourceTypes                  smithy.SchemaExtensions
+	e_CloudFormationResourceTypes_member           smithy.SchemaExtensions
+	eComplianceDetails                             smithy.SchemaExtensions
+	eComplianceDetails_NoncompliantKeys            smithy.SchemaExtensions
+	eComplianceDetails_KeysWithNoncompliantValues  smithy.SchemaExtensions
+	eComplianceDetails_MissingTagKeys              smithy.SchemaExtensions
+	eComplianceDetails_ComplianceStatus            smithy.SchemaExtensions
+	e_ComplianceStatus                             smithy.SchemaExtensions
+	eConcurrentModificationException               smithy.SchemaExtensions
+	eConcurrentModificationException_Message       smithy.SchemaExtensions
+	eConstraintViolationException                  smithy.SchemaExtensions
+	eConstraintViolationException_Message          smithy.SchemaExtensions
+	eErrorCode                                     smithy.SchemaExtensions
+	eErrorCode_INTERNAL_SERVICE_EXCEPTION          smithy.SchemaExtensions
+	eErrorCode_INVALID_PARAMETER_EXCEPTION         smithy.SchemaExtensions
+	e_ErrorMessage                                 smithy.SchemaExtensions
+	e_ExceptionMessage                             smithy.SchemaExtensions
+	e_ExcludeCompliantResources                    smithy.SchemaExtensions
+	e_FailedResourcesMap                           smithy.SchemaExtensions
+	e_FailedResourcesMap_key                       smithy.SchemaExtensions
+	e_FailedResourcesMap_value                     smithy.SchemaExtensions
+	eFailureInfo                                   smithy.SchemaExtensions
+	eFailureInfo_StatusCode                        smithy.SchemaExtensions
+	eFailureInfo_ErrorCode                         smithy.SchemaExtensions
+	eFailureInfo_ErrorMessage                      smithy.SchemaExtensions
+	e_GroupBy                                      smithy.SchemaExtensions
+	e_GroupBy_member                               smithy.SchemaExtensions
+	eGroupByAttribute                              smithy.SchemaExtensions
+	eGroupByAttribute_TARGET_ID                    smithy.SchemaExtensions
+	eGroupByAttribute_REGION                       smithy.SchemaExtensions
+	eGroupByAttribute_RESOURCE_TYPE                smithy.SchemaExtensions
+	e_IncludeComplianceDetails                     smithy.SchemaExtensions
+	eInternalServiceException                      smithy.SchemaExtensions
+	eInternalServiceException_Message              smithy.SchemaExtensions
+	eInvalidParameterException                     smithy.SchemaExtensions
+	eInvalidParameterException_Message             smithy.SchemaExtensions
+	e_LastUpdated                                  smithy.SchemaExtensions
+	e_MaxResultsForListRequiredTags                smithy.SchemaExtensions
+	e_MaxResultsGetComplianceSummary               smithy.SchemaExtensions
+	e_NonCompliantResources                        smithy.SchemaExtensions
+	e_PaginationToken                              smithy.SchemaExtensions
+	ePaginationTokenExpiredException               smithy.SchemaExtensions
+	ePaginationTokenExpiredException_Message       smithy.SchemaExtensions
+	e_Region                                       smithy.SchemaExtensions
+	e_RegionFilterList                             smithy.SchemaExtensions
+	e_RegionFilterList_member                      smithy.SchemaExtensions
+	e_ReportingTagKeys                             smithy.SchemaExtensions
+	e_ReportingTagKeys_member                      smithy.SchemaExtensions
+	eRequiredTag                                   smithy.SchemaExtensions
+	eRequiredTag_ResourceType                      smithy.SchemaExtensions
+	eRequiredTag_CloudFormationResourceTypes       smithy.SchemaExtensions
+	eRequiredTag_ReportingTagKeys                  smithy.SchemaExtensions
+	e_RequiredTagsForListRequiredTags              smithy.SchemaExtensions
+	e_RequiredTagsForListRequiredTags_member       smithy.SchemaExtensions
+	e_ResourceARN                                  smithy.SchemaExtensions
+	e_ResourceARNListForGet                        smithy.SchemaExtensions
+	e_ResourceARNListForGet_member                 smithy.SchemaExtensions
+	e_ResourceARNListForTagUntag                   smithy.SchemaExtensions
+	e_ResourceARNListForTagUntag_member            smithy.SchemaExtensions
+	e_ResourcesPerPage                             smithy.SchemaExtensions
+	eResourceTagMapping                            smithy.SchemaExtensions
+	eResourceTagMapping_ResourceARN                smithy.SchemaExtensions
+	eResourceTagMapping_Tags                       smithy.SchemaExtensions
+	eResourceTagMapping_ComplianceDetails          smithy.SchemaExtensions
+	e_ResourceTagMappingList                       smithy.SchemaExtensions
+	e_ResourceTagMappingList_member                smithy.SchemaExtensions
+	e_ResourceType                                 smithy.SchemaExtensions
+	e_ResourceTypeFilterList                       smithy.SchemaExtensions
+	e_ResourceTypeFilterList_member                smithy.SchemaExtensions
+	e_S3Bucket                                     smithy.SchemaExtensions
+	e_S3Location                                   smithy.SchemaExtensions
+	e_StartDate                                    smithy.SchemaExtensions
+	e_Status                                       smithy.SchemaExtensions
+	e_StatusCode                                   smithy.SchemaExtensions
+	eSummary                                       smithy.SchemaExtensions
+	eSummary_LastUpdated                           smithy.SchemaExtensions
+	eSummary_TargetId                              smithy.SchemaExtensions
+	eSummary_TargetIdType                          smithy.SchemaExtensions
+	eSummary_Region                                smithy.SchemaExtensions
+	eSummary_ResourceType                          smithy.SchemaExtensions
+	eSummary_NonCompliantResources                 smithy.SchemaExtensions
+	e_SummaryList                                  smithy.SchemaExtensions
+	e_SummaryList_member                           smithy.SchemaExtensions
+	eTag                                           smithy.SchemaExtensions
+	eTag_Key                                       smithy.SchemaExtensions
+	eTag_Value                                     smithy.SchemaExtensions
+	eTagFilter                                     smithy.SchemaExtensions
+	eTagFilter_Key                                 smithy.SchemaExtensions
+	eTagFilter_Values                              smithy.SchemaExtensions
+	e_TagFilterList                                smithy.SchemaExtensions
+	e_TagFilterList_member                         smithy.SchemaExtensions
+	e_TagKey                                       smithy.SchemaExtensions
+	e_TagKeyFilterList                             smithy.SchemaExtensions
+	e_TagKeyFilterList_member                      smithy.SchemaExtensions
+	e_TagKeyList                                   smithy.SchemaExtensions
+	e_TagKeyList_member                            smithy.SchemaExtensions
+	e_TagKeyListForUntag                           smithy.SchemaExtensions
+	e_TagKeyListForUntag_member                    smithy.SchemaExtensions
+	e_TagList                                      smithy.SchemaExtensions
+	e_TagList_member                               smithy.SchemaExtensions
+	e_TagMap                                       smithy.SchemaExtensions
+	e_TagMap_key                                   smithy.SchemaExtensions
+	e_TagMap_value                                 smithy.SchemaExtensions
+	e_TagsPerPage                                  smithy.SchemaExtensions
+	e_TagValue                                     smithy.SchemaExtensions
+	e_TagValueList                                 smithy.SchemaExtensions
+	e_TagValueList_member                          smithy.SchemaExtensions
+	e_TagValuesOutputList                          smithy.SchemaExtensions
+	e_TagValuesOutputList_member                   smithy.SchemaExtensions
+	e_TargetId                                     smithy.SchemaExtensions
+	e_TargetIdFilterList                           smithy.SchemaExtensions
+	e_TargetIdFilterList_member                    smithy.SchemaExtensions
+	eTargetIdType                                  smithy.SchemaExtensions
+	eTargetIdType_ACCOUNT                          smithy.SchemaExtensions
+	eTargetIdType_OU                               smithy.SchemaExtensions
+	eTargetIdType_ROOT                             smithy.SchemaExtensions
+	eThrottledException                            smithy.SchemaExtensions
+	eThrottledException_Message                    smithy.SchemaExtensions
+	eDescribeReportCreationInput                   smithy.SchemaExtensions
+	eDescribeReportCreationOutput                  smithy.SchemaExtensions
+	eDescribeReportCreationOutput_Status           smithy.SchemaExtensions
+	eDescribeReportCreationOutput_S3Location       smithy.SchemaExtensions
+	eDescribeReportCreationOutput_StartDate        smithy.SchemaExtensions
+	eDescribeReportCreationOutput_ErrorMessage     smithy.SchemaExtensions
+	eGetComplianceSummaryInput                     smithy.SchemaExtensions
+	eGetComplianceSummaryInput_TargetIdFilters     smithy.SchemaExtensions
+	eGetComplianceSummaryInput_RegionFilters       smithy.SchemaExtensions
+	eGetComplianceSummaryInput_ResourceTypeFilters smithy.SchemaExtensions
+	eGetComplianceSummaryInput_TagKeyFilters       smithy.SchemaExtensions
+	eGetComplianceSummaryInput_GroupBy             smithy.SchemaExtensions
+	eGetComplianceSummaryInput_MaxResults          smithy.SchemaExtensions
+	eGetComplianceSummaryInput_PaginationToken     smithy.SchemaExtensions
+	eGetComplianceSummaryOutput                    smithy.SchemaExtensions
+	eGetComplianceSummaryOutput_SummaryList        smithy.SchemaExtensions
+	eGetComplianceSummaryOutput_PaginationToken    smithy.SchemaExtensions
+	eGetResourcesInput                             smithy.SchemaExtensions
+	eGetResourcesInput_PaginationToken             smithy.SchemaExtensions
+	eGetResourcesInput_TagFilters                  smithy.SchemaExtensions
+	eGetResourcesInput_ResourcesPerPage            smithy.SchemaExtensions
+	eGetResourcesInput_TagsPerPage                 smithy.SchemaExtensions
+	eGetResourcesInput_ResourceTypeFilters         smithy.SchemaExtensions
+	eGetResourcesInput_IncludeComplianceDetails    smithy.SchemaExtensions
+	eGetResourcesInput_ExcludeCompliantResources   smithy.SchemaExtensions
+	eGetResourcesInput_ResourceARNList             smithy.SchemaExtensions
+	eGetResourcesOutput                            smithy.SchemaExtensions
+	eGetResourcesOutput_PaginationToken            smithy.SchemaExtensions
+	eGetResourcesOutput_ResourceTagMappingList     smithy.SchemaExtensions
+	eGetTagKeysInput                               smithy.SchemaExtensions
+	eGetTagKeysInput_PaginationToken               smithy.SchemaExtensions
+	eGetTagKeysOutput                              smithy.SchemaExtensions
+	eGetTagKeysOutput_PaginationToken              smithy.SchemaExtensions
+	eGetTagKeysOutput_TagKeys                      smithy.SchemaExtensions
+	eGetTagValuesInput                             smithy.SchemaExtensions
+	eGetTagValuesInput_PaginationToken             smithy.SchemaExtensions
+	eGetTagValuesInput_Key                         smithy.SchemaExtensions
+	eGetTagValuesOutput                            smithy.SchemaExtensions
+	eGetTagValuesOutput_PaginationToken            smithy.SchemaExtensions
+	eGetTagValuesOutput_TagValues                  smithy.SchemaExtensions
+	eListRequiredTagsInput                         smithy.SchemaExtensions
+	eListRequiredTagsInput_NextToken               smithy.SchemaExtensions
+	eListRequiredTagsInput_MaxResults              smithy.SchemaExtensions
+	eListRequiredTagsOutput                        smithy.SchemaExtensions
+	eListRequiredTagsOutput_RequiredTags           smithy.SchemaExtensions
+	eListRequiredTagsOutput_NextToken              smithy.SchemaExtensions
+	eStartReportCreationInput                      smithy.SchemaExtensions
+	eStartReportCreationInput_S3Bucket             smithy.SchemaExtensions
+	eStartReportCreationOutput                     smithy.SchemaExtensions
+	eTagResourcesInput                             smithy.SchemaExtensions
+	eTagResourcesInput_ResourceARNList             smithy.SchemaExtensions
+	eTagResourcesInput_Tags                        smithy.SchemaExtensions
+	eTagResourcesOutput                            smithy.SchemaExtensions
+	eTagResourcesOutput_FailedResourcesMap         smithy.SchemaExtensions
+	eUntagResourcesInput                           smithy.SchemaExtensions
+	eUntagResourcesInput_ResourceARNList           smithy.SchemaExtensions
+	eUntagResourcesInput_TagKeys                   smithy.SchemaExtensions
+	eUntagResourcesOutput                          smithy.SchemaExtensions
+	eUntagResourcesOutput_FailedResourcesMap       smithy.SchemaExtensions
+)
+
+var (
+	iDescribeReportCreation             = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "DescribeReportCreation"}
+	iGetComplianceSummary               = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetComplianceSummary"}
+	iGetResources                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetResources"}
+	iGetTagKeys                         = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagKeys"}
+	iGetTagValues                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagValues"}
+	iListRequiredTags                   = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ListRequiredTags"}
+	iStartReportCreation                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "StartReportCreation"}
+	iTagResources                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagResources"}
+	iUntagResources                     = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "UntagResources"}
+	i_ResourceGroupsTaggingAPI_20170126 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceGroupsTaggingAPI_20170126"}
+	i_AmazonResourceType                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "AmazonResourceType"}
+	i_CloudFormationResourceType        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "CloudFormationResourceType"}
+	i_CloudFormationResourceTypes       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "CloudFormationResourceTypes"}
+	iComplianceDetails                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ComplianceDetails"}
+	i_ComplianceStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ComplianceStatus"}
+	iConcurrentModificationException    = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ConcurrentModificationException"}
+	iConstraintViolationException       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ConstraintViolationException"}
+	iErrorCode                          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ErrorCode"}
+	i_ErrorMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ErrorMessage"}
+	i_ExceptionMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ExceptionMessage"}
+	i_ExcludeCompliantResources         = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ExcludeCompliantResources"}
+	i_FailedResourcesMap                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "FailedResourcesMap"}
+	iFailureInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "FailureInfo"}
+	i_GroupBy                           = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GroupBy"}
+	iGroupByAttribute                   = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GroupByAttribute"}
+	i_IncludeComplianceDetails          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "IncludeComplianceDetails"}
+	iInternalServiceException           = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "InternalServiceException"}
+	iInvalidParameterException          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "InvalidParameterException"}
+	i_LastUpdated                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "LastUpdated"}
+	i_MaxResultsForListRequiredTags     = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "MaxResultsForListRequiredTags"}
+	i_MaxResultsGetComplianceSummary    = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "MaxResultsGetComplianceSummary"}
+	i_NonCompliantResources             = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "NonCompliantResources"}
+	i_PaginationToken                   = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "PaginationToken"}
+	iPaginationTokenExpiredException    = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "PaginationTokenExpiredException"}
+	i_Region                            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "Region"}
+	i_RegionFilterList                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "RegionFilterList"}
+	i_ReportingTagKeys                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ReportingTagKeys"}
+	iRequiredTag                        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "RequiredTag"}
+	i_RequiredTagsForListRequiredTags   = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "RequiredTagsForListRequiredTags"}
+	i_ResourceARN                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceARN"}
+	i_ResourceARNListForGet             = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceARNListForGet"}
+	i_ResourceARNListForTagUntag        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceARNListForTagUntag"}
+	i_ResourcesPerPage                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourcesPerPage"}
+	iResourceTagMapping                 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceTagMapping"}
+	i_ResourceTagMappingList            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceTagMappingList"}
+	i_ResourceType                      = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceType"}
+	i_ResourceTypeFilterList            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ResourceTypeFilterList"}
+	i_S3Bucket                          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "S3Bucket"}
+	i_S3Location                        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "S3Location"}
+	i_StartDate                         = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "StartDate"}
+	i_Status                            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "Status"}
+	i_StatusCode                        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "StatusCode"}
+	iSummary                            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "Summary"}
+	i_SummaryList                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "SummaryList"}
+	iTag                                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "Tag"}
+	iTagFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagFilter"}
+	i_TagFilterList                     = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagFilterList"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagKey"}
+	i_TagKeyFilterList                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagKeyFilterList"}
+	i_TagKeyList                        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagKeyList"}
+	i_TagKeyListForUntag                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagKeyListForUntag"}
+	i_TagList                           = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagList"}
+	i_TagMap                            = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagMap"}
+	i_TagsPerPage                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagsPerPage"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagValue"}
+	i_TagValueList                      = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagValueList"}
+	i_TagValuesOutputList               = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagValuesOutputList"}
+	i_TargetId                          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TargetId"}
+	i_TargetIdFilterList                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TargetIdFilterList"}
+	iTargetIdType                       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TargetIdType"}
+	iThrottledException                 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ThrottledException"}
+	iDescribeReportCreationInput        = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "DescribeReportCreationInput"}
+	iDescribeReportCreationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "DescribeReportCreationOutput"}
+	iGetComplianceSummaryInput          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetComplianceSummaryInput"}
+	iGetComplianceSummaryOutput         = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetComplianceSummaryOutput"}
+	iGetResourcesInput                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetResourcesInput"}
+	iGetResourcesOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetResourcesOutput"}
+	iGetTagKeysInput                    = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagKeysInput"}
+	iGetTagKeysOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagKeysOutput"}
+	iGetTagValuesInput                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagValuesInput"}
+	iGetTagValuesOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "GetTagValuesOutput"}
+	iListRequiredTagsInput              = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ListRequiredTagsInput"}
+	iListRequiredTagsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "ListRequiredTagsOutput"}
+	iStartReportCreationInput           = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "StartReportCreationInput"}
+	iStartReportCreationOutput          = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "StartReportCreationOutput"}
+	iTagResourcesInput                  = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagResourcesInput"}
+	iTagResourcesOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "TagResourcesOutput"}
+	iUntagResourcesInput                = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "UntagResourcesInput"}
+	iUntagResourcesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.resourcegroupstaggingapi", Name: "UntagResourcesOutput"}
+	pUnit                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeReportCreation",
-	Code: 200})
-
-var GetComplianceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetComplianceSummary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetComplianceSummary",
-	Code: 200})
-
-var GetResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetResources",
-	Code: 200})
-
-var GetTagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagKeys",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTagKeys",
-	Code: 200})
-
-var GetTagValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagValues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTagValues",
-	Code: 200})
-
-var ListRequiredTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ListRequiredTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListRequiredTags",
-	Code: 200})
-
-var StartReportCreation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "StartReportCreation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartReportCreation",
-	Code: 200})
-
-var TagResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResources",
-	Code: 200})
-
-var UntagResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "UntagResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResources",
-	Code: 200})
-
-var _ResourceGroupsTaggingAPI_20170126 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceGroupsTaggingAPI_20170126",
-}, smithy.ShapeTypeService, 0)
-
-var ResourceGroupsTaggingAPI_20170126 = smithy.NewServiceSchema(_ResourceGroupsTaggingAPI_20170126, "2017-01-26")
-
-var _AmazonResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "AmazonResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudFormationResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "CloudFormationResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudFormationResourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "CloudFormationResourceTypes",
-}, smithy.ShapeTypeList, 1)
-var _CloudFormationResourceTypes_member *smithy.Schema
-
-var ComplianceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ComplianceDetails",
-}, smithy.ShapeTypeStructure, 4)
-var ComplianceDetails_NoncompliantKeys *smithy.Schema
-
-var ComplianceDetails_KeysWithNoncompliantValues *smithy.Schema
-
-var ComplianceDetails_MissingTagKeys *smithy.Schema
-
-var ComplianceDetails_ComplianceStatus *smithy.Schema
-
-var _ComplianceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ComplianceStatus",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConstraintViolationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ConstraintViolationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ConstraintViolationException_Message *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 2)
-var ErrorCode_INTERNAL_SERVICE_EXCEPTION *smithy.Schema
-
-var ErrorCode_INVALID_PARAMETER_EXCEPTION *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExcludeCompliantResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ExcludeCompliantResources",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _FailedResourcesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "FailedResourcesMap",
-}, smithy.ShapeTypeMap, 2)
-var _FailedResourcesMap_key *smithy.Schema
-
-var _FailedResourcesMap_value *smithy.Schema
-
-var FailureInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "FailureInfo",
-}, smithy.ShapeTypeStructure, 3)
-var FailureInfo_StatusCode *smithy.Schema
-
-var FailureInfo_ErrorCode *smithy.Schema
-
-var FailureInfo_ErrorMessage *smithy.Schema
-
-var _GroupBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GroupBy",
-}, smithy.ShapeTypeList, 1)
-var _GroupBy_member *smithy.Schema
-
-var GroupByAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GroupByAttribute",
-}, smithy.ShapeTypeEnum, 3)
-var GroupByAttribute_TARGET_ID *smithy.Schema
-
-var GroupByAttribute_REGION *smithy.Schema
-
-var GroupByAttribute_RESOURCE_TYPE *smithy.Schema
-
-var _IncludeComplianceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "IncludeComplianceDetails",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServiceException_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_Message *smithy.Schema
-
-var _LastUpdated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "LastUpdated",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResultsForListRequiredTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "MaxResultsForListRequiredTags",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsGetComplianceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "MaxResultsGetComplianceSummary",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NonCompliantResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "NonCompliantResources",
-}, smithy.ShapeTypeLong, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PaginationTokenExpiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "PaginationTokenExpiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PaginationTokenExpiredException_Message *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "RegionFilterList",
-}, smithy.ShapeTypeList, 1)
-var _RegionFilterList_member *smithy.Schema
-
-var _ReportingTagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ReportingTagKeys",
-}, smithy.ShapeTypeList, 1)
-var _ReportingTagKeys_member *smithy.Schema
-
-var RequiredTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "RequiredTag",
-}, smithy.ShapeTypeStructure, 3)
-var RequiredTag_ResourceType *smithy.Schema
-
-var RequiredTag_CloudFormationResourceTypes *smithy.Schema
-
-var RequiredTag_ReportingTagKeys *smithy.Schema
-
-var _RequiredTagsForListRequiredTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "RequiredTagsForListRequiredTags",
-}, smithy.ShapeTypeList, 1)
-var _RequiredTagsForListRequiredTags_member *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceARNListForGet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceARNListForGet",
-}, smithy.ShapeTypeList, 1)
-var _ResourceARNListForGet_member *smithy.Schema
-
-var _ResourceARNListForTagUntag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceARNListForTagUntag",
-}, smithy.ShapeTypeList, 1)
-var _ResourceARNListForTagUntag_member *smithy.Schema
-
-var _ResourcesPerPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourcesPerPage",
-}, smithy.ShapeTypeInteger, 0)
-
-var ResourceTagMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceTagMapping",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceTagMapping_ResourceARN *smithy.Schema
-
-var ResourceTagMapping_Tags *smithy.Schema
-
-var ResourceTagMapping_ComplianceDetails *smithy.Schema
-
-var _ResourceTagMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceTagMappingList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagMappingList_member *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTypeFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ResourceTypeFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypeFilterList_member *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "S3Location",
-}, smithy.ShapeTypeString, 0)
-
-var _StartDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "StartDate",
-}, smithy.ShapeTypeString, 0)
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var Summary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "Summary",
-}, smithy.ShapeTypeStructure, 6)
-var Summary_LastUpdated *smithy.Schema
-
-var Summary_TargetId *smithy.Schema
-
-var Summary_TargetIdType *smithy.Schema
-
-var Summary_Region *smithy.Schema
-
-var Summary_ResourceType *smithy.Schema
-
-var Summary_NonCompliantResources *smithy.Schema
-
-var _SummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "SummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SummaryList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var TagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TagFilter_Key *smithy.Schema
-
-var TagFilter_Values *smithy.Schema
-
-var _TagFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagFilterList",
-}, smithy.ShapeTypeList, 1)
-var _TagFilterList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagKeyFilterList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyFilterList_member *smithy.Schema
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagKeyListForUntag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagKeyListForUntag",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyListForUntag_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagsPerPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagsPerPage",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TagValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagValueList",
-}, smithy.ShapeTypeList, 1)
-var _TagValueList_member *smithy.Schema
-
-var _TagValuesOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagValuesOutputList",
-}, smithy.ShapeTypeList, 1)
-var _TagValuesOutputList_member *smithy.Schema
-
-var _TargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TargetId",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetIdFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TargetIdFilterList",
-}, smithy.ShapeTypeList, 1)
-var _TargetIdFilterList_member *smithy.Schema
-
-var TargetIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TargetIdType",
-}, smithy.ShapeTypeEnum, 3)
-var TargetIdType_ACCOUNT *smithy.Schema
-
-var TargetIdType_OU *smithy.Schema
-
-var TargetIdType_ROOT *smithy.Schema
-
-var ThrottledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ThrottledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ThrottledException_Message *smithy.Schema
-
-var DescribeReportCreationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "DescribeReportCreationInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeReportCreationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "DescribeReportCreationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeReportCreationOutput_Status *smithy.Schema
-
-var DescribeReportCreationOutput_S3Location *smithy.Schema
-
-var DescribeReportCreationOutput_StartDate *smithy.Schema
-
-var DescribeReportCreationOutput_ErrorMessage *smithy.Schema
-
-var GetComplianceSummaryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetComplianceSummaryInput",
-}, smithy.ShapeTypeStructure, 7)
-var GetComplianceSummaryInput_TargetIdFilters *smithy.Schema
-
-var GetComplianceSummaryInput_RegionFilters *smithy.Schema
-
-var GetComplianceSummaryInput_ResourceTypeFilters *smithy.Schema
-
-var GetComplianceSummaryInput_TagKeyFilters *smithy.Schema
-
-var GetComplianceSummaryInput_GroupBy *smithy.Schema
-
-var GetComplianceSummaryInput_MaxResults *smithy.Schema
-
-var GetComplianceSummaryInput_PaginationToken *smithy.Schema
-
-var GetComplianceSummaryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetComplianceSummaryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetComplianceSummaryOutput_SummaryList *smithy.Schema
-
-var GetComplianceSummaryOutput_PaginationToken *smithy.Schema
-
-var GetResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetResourcesInput",
-}, smithy.ShapeTypeStructure, 8)
-var GetResourcesInput_PaginationToken *smithy.Schema
-
-var GetResourcesInput_TagFilters *smithy.Schema
-
-var GetResourcesInput_ResourcesPerPage *smithy.Schema
-
-var GetResourcesInput_TagsPerPage *smithy.Schema
-
-var GetResourcesInput_ResourceTypeFilters *smithy.Schema
-
-var GetResourcesInput_IncludeComplianceDetails *smithy.Schema
-
-var GetResourcesInput_ExcludeCompliantResources *smithy.Schema
-
-var GetResourcesInput_ResourceARNList *smithy.Schema
-
-var GetResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcesOutput_PaginationToken *smithy.Schema
-
-var GetResourcesOutput_ResourceTagMappingList *smithy.Schema
-
-var GetTagKeysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagKeysInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTagKeysInput_PaginationToken *smithy.Schema
-
-var GetTagKeysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagKeysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTagKeysOutput_PaginationToken *smithy.Schema
-
-var GetTagKeysOutput_TagKeys *smithy.Schema
-
-var GetTagValuesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagValuesInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTagValuesInput_PaginationToken *smithy.Schema
-
-var GetTagValuesInput_Key *smithy.Schema
-
-var GetTagValuesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "GetTagValuesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTagValuesOutput_PaginationToken *smithy.Schema
-
-var GetTagValuesOutput_TagValues *smithy.Schema
-
-var ListRequiredTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ListRequiredTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRequiredTagsInput_NextToken *smithy.Schema
-
-var ListRequiredTagsInput_MaxResults *smithy.Schema
-
-var ListRequiredTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "ListRequiredTagsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRequiredTagsOutput_RequiredTags *smithy.Schema
-
-var ListRequiredTagsOutput_NextToken *smithy.Schema
-
-var StartReportCreationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "StartReportCreationInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartReportCreationInput_S3Bucket *smithy.Schema
-
-var StartReportCreationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "StartReportCreationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourcesInput_ResourceARNList *smithy.Schema
-
-var TagResourcesInput_Tags *smithy.Schema
-
-var TagResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "TagResourcesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourcesOutput_FailedResourcesMap *smithy.Schema
-
-var UntagResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "UntagResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourcesInput_ResourceARNList *smithy.Schema
-
-var UntagResourcesInput_TagKeys *smithy.Schema
-
-var UntagResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourcegroupstaggingapi",
-	Name:      "UntagResourcesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UntagResourcesOutput_FailedResourcesMap *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_CloudFormationResourceTypes_member = _CloudFormationResourceTypes.AddMember("member", _CloudFormationResourceType)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ComplianceDetails_NoncompliantKeys = ComplianceDetails.AddMember("NoncompliantKeys", _TagKeyList)
-
-	ComplianceDetails_KeysWithNoncompliantValues = ComplianceDetails.AddMember("KeysWithNoncompliantValues", _TagKeyList)
-
-	ComplianceDetails_MissingTagKeys = ComplianceDetails.AddMember("MissingTagKeys", _TagKeyList)
-
-	ComplianceDetails_ComplianceStatus = ComplianceDetails.AddMember("ComplianceStatus", _ComplianceStatus)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ExceptionMessage)
-
-	ConstraintViolationException_Message = ConstraintViolationException.AddMember("Message", _ExceptionMessage)
-
-	ErrorCode_INTERNAL_SERVICE_EXCEPTION = ErrorCode.AddMember("INTERNAL_SERVICE_EXCEPTION", smithyprelude.Unit)
-
-	ErrorCode_INVALID_PARAMETER_EXCEPTION = ErrorCode.AddMember("INVALID_PARAMETER_EXCEPTION", smithyprelude.Unit)
-
-	FailureInfo_StatusCode = FailureInfo.AddMember("StatusCode", _StatusCode)
-
-	FailureInfo_ErrorCode = FailureInfo.AddMember("ErrorCode", ErrorCode)
-
-	FailureInfo_ErrorMessage = FailureInfo.AddMember("ErrorMessage", _ErrorMessage)
-
-	_FailedResourcesMap_key = _FailedResourcesMap.AddMember("key", _ResourceARN)
-
-	_FailedResourcesMap_value = _FailedResourcesMap.AddMember("value", FailureInfo)
-
-	GroupByAttribute_TARGET_ID = GroupByAttribute.AddMember("TARGET_ID", smithyprelude.Unit)
-
-	GroupByAttribute_REGION = GroupByAttribute.AddMember("REGION", smithyprelude.Unit)
-
-	GroupByAttribute_RESOURCE_TYPE = GroupByAttribute.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	_GroupBy_member = _GroupBy.AddMember("member", GroupByAttribute)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ExceptionMessage)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _ExceptionMessage)
-
-	PaginationTokenExpiredException_Message = PaginationTokenExpiredException.AddMember("Message", _ExceptionMessage)
-
-	_RegionFilterList_member = _RegionFilterList.AddMember("member", _Region)
-
-	_ReportingTagKeys_member = _ReportingTagKeys.AddMember("member", _TagKey)
-
-	RequiredTag_ResourceType = RequiredTag.AddMember("ResourceType", _ResourceType)
-
-	RequiredTag_CloudFormationResourceTypes = RequiredTag.AddMember("CloudFormationResourceTypes", _CloudFormationResourceTypes)
-
-	RequiredTag_ReportingTagKeys = RequiredTag.AddMember("ReportingTagKeys", _ReportingTagKeys)
-
-	_RequiredTagsForListRequiredTags_member = _RequiredTagsForListRequiredTags.AddMember("member", RequiredTag)
-
-	_ResourceARNListForGet_member = _ResourceARNListForGet.AddMember("member", _ResourceARN)
-
-	_ResourceARNListForTagUntag_member = _ResourceARNListForTagUntag.AddMember("member", _ResourceARN)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ResourceTagMapping_ResourceARN = ResourceTagMapping.AddMember("ResourceARN", _ResourceARN)
-
-	ResourceTagMapping_Tags = ResourceTagMapping.AddMember("Tags", _TagList)
-
-	ResourceTagMapping_ComplianceDetails = ResourceTagMapping.AddMember("ComplianceDetails", ComplianceDetails)
-
-	_ResourceTagMappingList_member = _ResourceTagMappingList.AddMember("member", ResourceTagMapping)
-
-	_ResourceTypeFilterList_member = _ResourceTypeFilterList.AddMember("member", _AmazonResourceType)
-
-	TargetIdType_ACCOUNT = TargetIdType.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	TargetIdType_OU = TargetIdType.AddMember("OU", smithyprelude.Unit)
-
-	TargetIdType_ROOT = TargetIdType.AddMember("ROOT", smithyprelude.Unit)
-
-	Summary_LastUpdated = Summary.AddMember("LastUpdated", _LastUpdated)
-
-	Summary_TargetId = Summary.AddMember("TargetId", _TargetId)
-
-	Summary_TargetIdType = Summary.AddMember("TargetIdType", TargetIdType)
-
-	Summary_Region = Summary.AddMember("Region", _Region)
-
-	Summary_ResourceType = Summary.AddMember("ResourceType", _AmazonResourceType)
-
-	Summary_NonCompliantResources = Summary.AddMember("NonCompliantResources", _NonCompliantResources)
-
-	_SummaryList_member = _SummaryList.AddMember("member", Summary)
-
-	_TagValueList_member = _TagValueList.AddMember("member", _TagValue)
-
-	TagFilter_Key = TagFilter.AddMember("Key", _TagKey)
-
-	TagFilter_Values = TagFilter.AddMember("Values", _TagValueList)
-
-	_TagFilterList_member = _TagFilterList.AddMember("member", TagFilter)
-
-	_TagKeyFilterList_member = _TagKeyFilterList.AddMember("member", _TagKey)
-
-	_TagKeyListForUntag_member = _TagKeyListForUntag.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	_TagValuesOutputList_member = _TagValuesOutputList.AddMember("member", _TagValue)
-
-	_TargetIdFilterList_member = _TargetIdFilterList.AddMember("member", _TargetId)
-
-	ThrottledException_Message = ThrottledException.AddMember("Message", _ExceptionMessage)
-
-	DescribeReportCreationOutput_Status = DescribeReportCreationOutput.AddMember("Status", _Status)
-
-	DescribeReportCreationOutput_S3Location = DescribeReportCreationOutput.AddMember("S3Location", _S3Location)
-
-	DescribeReportCreationOutput_StartDate = DescribeReportCreationOutput.AddMember("StartDate", _StartDate)
-
-	DescribeReportCreationOutput_ErrorMessage = DescribeReportCreationOutput.AddMember("ErrorMessage", _ErrorMessage)
-
-	GetComplianceSummaryInput_TargetIdFilters = GetComplianceSummaryInput.AddMember("TargetIdFilters", _TargetIdFilterList)
-
-	GetComplianceSummaryInput_RegionFilters = GetComplianceSummaryInput.AddMember("RegionFilters", _RegionFilterList)
-
-	GetComplianceSummaryInput_ResourceTypeFilters = GetComplianceSummaryInput.AddMember("ResourceTypeFilters", _ResourceTypeFilterList)
-
-	GetComplianceSummaryInput_TagKeyFilters = GetComplianceSummaryInput.AddMember("TagKeyFilters", _TagKeyFilterList)
-
-	GetComplianceSummaryInput_GroupBy = GetComplianceSummaryInput.AddMember("GroupBy", _GroupBy)
-
-	GetComplianceSummaryInput_MaxResults = GetComplianceSummaryInput.AddMember("MaxResults", _MaxResultsGetComplianceSummary)
-
-	GetComplianceSummaryInput_PaginationToken = GetComplianceSummaryInput.AddMember("PaginationToken", _PaginationToken)
-
-	GetComplianceSummaryOutput_SummaryList = GetComplianceSummaryOutput.AddMember("SummaryList", _SummaryList)
-
-	GetComplianceSummaryOutput_PaginationToken = GetComplianceSummaryOutput.AddMember("PaginationToken", _PaginationToken)
-
-	GetResourcesInput_PaginationToken = GetResourcesInput.AddMember("PaginationToken", _PaginationToken)
-
-	GetResourcesInput_TagFilters = GetResourcesInput.AddMember("TagFilters", _TagFilterList)
-
-	GetResourcesInput_ResourcesPerPage = GetResourcesInput.AddMember("ResourcesPerPage", _ResourcesPerPage)
-
-	GetResourcesInput_TagsPerPage = GetResourcesInput.AddMember("TagsPerPage", _TagsPerPage)
-
-	GetResourcesInput_ResourceTypeFilters = GetResourcesInput.AddMember("ResourceTypeFilters", _ResourceTypeFilterList)
-
-	GetResourcesInput_IncludeComplianceDetails = GetResourcesInput.AddMember("IncludeComplianceDetails", _IncludeComplianceDetails)
-
-	GetResourcesInput_ExcludeCompliantResources = GetResourcesInput.AddMember("ExcludeCompliantResources", _ExcludeCompliantResources)
-
-	GetResourcesInput_ResourceARNList = GetResourcesInput.AddMember("ResourceARNList", _ResourceARNListForGet)
-
-	GetResourcesOutput_PaginationToken = GetResourcesOutput.AddMember("PaginationToken", _PaginationToken)
-
-	GetResourcesOutput_ResourceTagMappingList = GetResourcesOutput.AddMember("ResourceTagMappingList", _ResourceTagMappingList)
-
-	GetTagKeysInput_PaginationToken = GetTagKeysInput.AddMember("PaginationToken", _PaginationToken)
-
-	GetTagKeysOutput_PaginationToken = GetTagKeysOutput.AddMember("PaginationToken", _PaginationToken)
-
-	GetTagKeysOutput_TagKeys = GetTagKeysOutput.AddMember("TagKeys", _TagKeyList)
-
-	GetTagValuesInput_PaginationToken = GetTagValuesInput.AddMember("PaginationToken", _PaginationToken)
-
-	GetTagValuesInput_Key = GetTagValuesInput.AddMember("Key", _TagKey)
-
-	GetTagValuesOutput_PaginationToken = GetTagValuesOutput.AddMember("PaginationToken", _PaginationToken)
-
-	GetTagValuesOutput_TagValues = GetTagValuesOutput.AddMember("TagValues", _TagValuesOutputList)
-
-	ListRequiredTagsInput_NextToken = ListRequiredTagsInput.AddMember("NextToken", _PaginationToken)
-
-	ListRequiredTagsInput_MaxResults = ListRequiredTagsInput.AddMember("MaxResults", _MaxResultsForListRequiredTags)
-
-	ListRequiredTagsOutput_RequiredTags = ListRequiredTagsOutput.AddMember("RequiredTags", _RequiredTagsForListRequiredTags)
-
-	ListRequiredTagsOutput_NextToken = ListRequiredTagsOutput.AddMember("NextToken", _PaginationToken)
-
-	StartReportCreationInput_S3Bucket = StartReportCreationInput.AddMember("S3Bucket", _S3Bucket)
-
-	TagResourcesInput_ResourceARNList = TagResourcesInput.AddMember("ResourceARNList", _ResourceARNListForTagUntag)
-
-	TagResourcesInput_Tags = TagResourcesInput.AddMember("Tags", _TagMap)
-
-	TagResourcesOutput_FailedResourcesMap = TagResourcesOutput.AddMember("FailedResourcesMap", _FailedResourcesMap)
-
-	UntagResourcesInput_ResourceARNList = UntagResourcesInput.AddMember("ResourceARNList", _ResourceARNListForTagUntag)
-
-	UntagResourcesInput_TagKeys = UntagResourcesInput.AddMember("TagKeys", _TagKeyListForUntag)
-
-	UntagResourcesOutput_FailedResourcesMap = UntagResourcesOutput.AddMember("FailedResourcesMap", _FailedResourcesMap)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t10 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var m_CloudFormationResourceTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_CloudFormationResourceTypes_member}}
+var mComplianceDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sComplianceDetails_NoncompliantKeys, &sComplianceDetails_KeysWithNoncompliantValues, &sComplianceDetails_MissingTagKeys, &sComplianceDetails_ComplianceStatus}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConstraintViolationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConstraintViolationException_Message}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_INTERNAL_SERVICE_EXCEPTION, &sErrorCode_INVALID_PARAMETER_EXCEPTION}}
+var m_FailedResourcesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FailedResourcesMap_key, &s_FailedResourcesMap_value}}
+var mFailureInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureInfo_StatusCode, &sFailureInfo_ErrorCode, &sFailureInfo_ErrorMessage}}
+var m_GroupBy = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupBy_member}}
+var mGroupByAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupByAttribute_TARGET_ID, &sGroupByAttribute_REGION, &sGroupByAttribute_RESOURCE_TYPE}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_Message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message}}
+var mPaginationTokenExpiredException = smithy.SchemaMembers{List: []*smithy.Schema{&sPaginationTokenExpiredException_Message}}
+var m_RegionFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionFilterList_member}}
+var m_ReportingTagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportingTagKeys_member}}
+var mRequiredTag = smithy.SchemaMembers{List: []*smithy.Schema{&sRequiredTag_ResourceType, &sRequiredTag_CloudFormationResourceTypes, &sRequiredTag_ReportingTagKeys}}
+var m_RequiredTagsForListRequiredTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequiredTagsForListRequiredTags_member}}
+var m_ResourceARNListForGet = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceARNListForGet_member}}
+var m_ResourceARNListForTagUntag = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceARNListForTagUntag_member}}
+var mResourceTagMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTagMapping_ResourceARN, &sResourceTagMapping_Tags, &sResourceTagMapping_ComplianceDetails}}
+var m_ResourceTagMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagMappingList_member}}
+var m_ResourceTypeFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypeFilterList_member}}
+var mSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSummary_LastUpdated, &sSummary_TargetId, &sSummary_TargetIdType, &sSummary_Region, &sSummary_ResourceType, &sSummary_NonCompliantResources}}
+var m_SummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SummaryList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTagFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTagFilter_Key, &sTagFilter_Values}}
+var m_TagFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagFilterList_member}}
+var m_TagKeyFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyFilterList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagKeyListForUntag = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyListForUntag_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_TagValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagValueList_member}}
+var m_TagValuesOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagValuesOutputList_member}}
+var m_TargetIdFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetIdFilterList_member}}
+var mTargetIdType = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetIdType_ACCOUNT, &sTargetIdType_OU, &sTargetIdType_ROOT}}
+var mThrottledException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledException_Message}}
+var mDescribeReportCreationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReportCreationOutput_Status, &sDescribeReportCreationOutput_S3Location, &sDescribeReportCreationOutput_StartDate, &sDescribeReportCreationOutput_ErrorMessage}}
+var mGetComplianceSummaryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComplianceSummaryInput_TargetIdFilters, &sGetComplianceSummaryInput_RegionFilters, &sGetComplianceSummaryInput_ResourceTypeFilters, &sGetComplianceSummaryInput_TagKeyFilters, &sGetComplianceSummaryInput_GroupBy, &sGetComplianceSummaryInput_MaxResults, &sGetComplianceSummaryInput_PaginationToken}}
+var mGetComplianceSummaryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComplianceSummaryOutput_SummaryList, &sGetComplianceSummaryOutput_PaginationToken}}
+var mGetResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcesInput_PaginationToken, &sGetResourcesInput_TagFilters, &sGetResourcesInput_ResourcesPerPage, &sGetResourcesInput_TagsPerPage, &sGetResourcesInput_ResourceTypeFilters, &sGetResourcesInput_IncludeComplianceDetails, &sGetResourcesInput_ExcludeCompliantResources, &sGetResourcesInput_ResourceARNList}}
+var mGetResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcesOutput_PaginationToken, &sGetResourcesOutput_ResourceTagMappingList}}
+var mGetTagKeysInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagKeysInput_PaginationToken}}
+var mGetTagKeysOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagKeysOutput_PaginationToken, &sGetTagKeysOutput_TagKeys}}
+var mGetTagValuesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagValuesInput_PaginationToken, &sGetTagValuesInput_Key}}
+var mGetTagValuesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagValuesOutput_PaginationToken, &sGetTagValuesOutput_TagValues}}
+var mListRequiredTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRequiredTagsInput_NextToken, &sListRequiredTagsInput_MaxResults}}
+var mListRequiredTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRequiredTagsOutput_RequiredTags, &sListRequiredTagsOutput_NextToken}}
+var mStartReportCreationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartReportCreationInput_S3Bucket}}
+var mTagResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourcesInput_ResourceARNList, &sTagResourcesInput_Tags}}
+var mTagResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourcesOutput_FailedResourcesMap}}
+var mUntagResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourcesInput_ResourceARNList, &sUntagResourcesInput_TagKeys}}
+var mUntagResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourcesOutput_FailedResourcesMap}}
+
+var sDescribeReportCreation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportCreation, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReportCreation})
+var sGetComplianceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceSummary, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetComplianceSummary})
+var sGetResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResources, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetResources})
+var sGetTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagKeys, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetTagKeys})
+var sGetTagValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagValues, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetTagValues})
+var sListRequiredTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequiredTags, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListRequiredTags})
+var sStartReportCreation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReportCreation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eStartReportCreation})
+var sTagResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResources, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eTagResources})
+var sUntagResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResources, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eUntagResources})
+var s_ResourceGroupsTaggingAPI_20170126 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceGroupsTaggingAPI_20170126, Type: smithy.ShapeTypeService, Ext: &e_ResourceGroupsTaggingAPI_20170126})
+var s_AmazonResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceType, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceType})
+var s_CloudFormationResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudFormationResourceType, Type: smithy.ShapeTypeString, Ext: &e_CloudFormationResourceType})
+var s_CloudFormationResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudFormationResourceTypes, Members: &m_CloudFormationResourceTypes, Type: smithy.ShapeTypeList, Ext: &e_CloudFormationResourceTypes})
+var s_CloudFormationResourceTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CloudFormationResourceType, Type: smithy.ShapeTypeString, Ext: &e_CloudFormationResourceTypes_member})
+var sComplianceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplianceDetails, Members: &mComplianceDetails, Type: smithy.ShapeTypeStructure, Ext: &eComplianceDetails})
+var sComplianceDetails_NoncompliantKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoncompliantKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eComplianceDetails_NoncompliantKeys})
+var sComplianceDetails_KeysWithNoncompliantValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeysWithNoncompliantValues", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eComplianceDetails_KeysWithNoncompliantValues})
+var sComplianceDetails_MissingTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingTagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eComplianceDetails_MissingTagKeys})
+var sComplianceDetails_ComplianceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComplianceStatus", ID: &i_ComplianceStatus, Type: smithy.ShapeTypeBoolean, Ext: &eComplianceDetails_ComplianceStatus})
+var s_ComplianceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComplianceStatus, Type: smithy.ShapeTypeBoolean, Ext: &e_ComplianceStatus})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sConstraintViolationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstraintViolationException, Members: &mConstraintViolationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eConstraintViolationException})
+var sConstraintViolationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConstraintViolationException_Message})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorCode})
+var sErrorCode_INTERNAL_SERVICE_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVICE_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_INTERNAL_SERVICE_EXCEPTION})
+var sErrorCode_INVALID_PARAMETER_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PARAMETER_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_INVALID_PARAMETER_EXCEPTION})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_ExcludeCompliantResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeCompliantResources, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeCompliantResources})
+var s_FailedResourcesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedResourcesMap, Members: &m_FailedResourcesMap, Type: smithy.ShapeTypeMap, Ext: &e_FailedResourcesMap})
+var s_FailedResourcesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_FailedResourcesMap_key})
+var s_FailedResourcesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFailureInfo, Members: &mFailureInfo, Type: smithy.ShapeTypeStructure, Ext: &e_FailedResourcesMap_value})
+var sFailureInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureInfo, Members: &mFailureInfo, Type: smithy.ShapeTypeStructure, Ext: &eFailureInfo})
+var sFailureInfo_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &eFailureInfo_StatusCode})
+var sFailureInfo_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eFailureInfo_ErrorCode})
+var sFailureInfo_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eFailureInfo_ErrorMessage})
+var s_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupBy, Members: &m_GroupBy, Type: smithy.ShapeTypeList, Ext: &e_GroupBy})
+var s_GroupBy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupByAttribute, Members: &mGroupByAttribute, Type: smithy.ShapeTypeEnum, Ext: &e_GroupBy_member})
+var sGroupByAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupByAttribute, Members: &mGroupByAttribute, Type: smithy.ShapeTypeEnum, Ext: &eGroupByAttribute})
+var sGroupByAttribute_TARGET_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupByAttribute_TARGET_ID})
+var sGroupByAttribute_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupByAttribute_REGION})
+var sGroupByAttribute_RESOURCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupByAttribute_RESOURCE_TYPE})
+var s_IncludeComplianceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeComplianceDetails, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeComplianceDetails})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceException})
+var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceException_Message})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_Message})
+var s_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdated, Type: smithy.ShapeTypeString, Ext: &e_LastUpdated})
+var s_MaxResultsForListRequiredTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsForListRequiredTags, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsForListRequiredTags})
+var s_MaxResultsGetComplianceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsGetComplianceSummary, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsGetComplianceSummary})
+var s_NonCompliantResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonCompliantResources, Type: smithy.ShapeTypeLong, Ext: &e_NonCompliantResources})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPaginationTokenExpiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPaginationTokenExpiredException, Members: &mPaginationTokenExpiredException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ePaginationTokenExpiredException})
+var sPaginationTokenExpiredException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ePaginationTokenExpiredException_Message})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_RegionFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionFilterList, Members: &m_RegionFilterList, Type: smithy.ShapeTypeList, Ext: &e_RegionFilterList})
+var s_RegionFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_RegionFilterList_member})
+var s_ReportingTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportingTagKeys, Members: &m_ReportingTagKeys, Type: smithy.ShapeTypeList, Ext: &e_ReportingTagKeys})
+var s_ReportingTagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_ReportingTagKeys_member})
+var sRequiredTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequiredTag, Members: &mRequiredTag, Type: smithy.ShapeTypeStructure, Ext: &eRequiredTag})
+var sRequiredTag_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eRequiredTag_ResourceType})
+var sRequiredTag_CloudFormationResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudFormationResourceTypes", ID: &i_CloudFormationResourceTypes, Members: &m_CloudFormationResourceTypes, Type: smithy.ShapeTypeList, Ext: &eRequiredTag_CloudFormationResourceTypes})
+var sRequiredTag_ReportingTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportingTagKeys", ID: &i_ReportingTagKeys, Members: &m_ReportingTagKeys, Type: smithy.ShapeTypeList, Ext: &eRequiredTag_ReportingTagKeys})
+var s_RequiredTagsForListRequiredTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequiredTagsForListRequiredTags, Members: &m_RequiredTagsForListRequiredTags, Type: smithy.ShapeTypeList, Ext: &e_RequiredTagsForListRequiredTags})
+var s_RequiredTagsForListRequiredTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequiredTag, Members: &mRequiredTag, Type: smithy.ShapeTypeStructure, Ext: &e_RequiredTagsForListRequiredTags_member})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var s_ResourceARNListForGet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARNListForGet, Members: &m_ResourceARNListForGet, Type: smithy.ShapeTypeList, Ext: &e_ResourceARNListForGet})
+var s_ResourceARNListForGet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARNListForGet_member})
+var s_ResourceARNListForTagUntag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARNListForTagUntag, Members: &m_ResourceARNListForTagUntag, Type: smithy.ShapeTypeList, Ext: &e_ResourceARNListForTagUntag})
+var s_ResourceARNListForTagUntag_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARNListForTagUntag_member})
+var s_ResourcesPerPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcesPerPage, Type: smithy.ShapeTypeInteger, Ext: &e_ResourcesPerPage})
+var sResourceTagMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTagMapping, Members: &mResourceTagMapping, Type: smithy.ShapeTypeStructure, Ext: &eResourceTagMapping})
+var sResourceTagMapping_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eResourceTagMapping_ResourceARN})
+var sResourceTagMapping_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eResourceTagMapping_Tags})
+var sResourceTagMapping_ComplianceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComplianceDetails", ID: &iComplianceDetails, Members: &mComplianceDetails, Type: smithy.ShapeTypeStructure, Ext: &eResourceTagMapping_ComplianceDetails})
+var s_ResourceTagMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagMappingList, Members: &m_ResourceTagMappingList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagMappingList})
+var s_ResourceTagMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTagMapping, Members: &mResourceTagMapping, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceTagMappingList_member})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ResourceTypeFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeFilterList, Members: &m_ResourceTypeFilterList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTypeFilterList})
+var s_ResourceTypeFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AmazonResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceTypeFilterList_member})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Location, Type: smithy.ShapeTypeString, Ext: &e_S3Location})
+var s_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartDate, Type: smithy.ShapeTypeString, Ext: &e_StartDate})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &e_Status})
+var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &e_StatusCode})
+var sSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &eSummary})
+var sSummary_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_LastUpdated, Type: smithy.ShapeTypeString, Ext: &eSummary_LastUpdated})
+var sSummary_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eSummary_TargetId})
+var sSummary_TargetIdType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdType", ID: &iTargetIdType, Members: &mTargetIdType, Type: smithy.ShapeTypeEnum, Ext: &eSummary_TargetIdType})
+var sSummary_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eSummary_Region})
+var sSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_AmazonResourceType, Type: smithy.ShapeTypeString, Ext: &eSummary_ResourceType})
+var sSummary_NonCompliantResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NonCompliantResources", ID: &i_NonCompliantResources, Type: smithy.ShapeTypeLong, Ext: &eSummary_NonCompliantResources})
+var s_SummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummaryList, Members: &m_SummaryList, Type: smithy.ShapeTypeList, Ext: &e_SummaryList})
+var s_SummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SummaryList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var sTagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure, Ext: &eTagFilter})
+var sTagFilter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagFilter_Key})
+var sTagFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_TagValueList, Members: &m_TagValueList, Type: smithy.ShapeTypeList, Ext: &eTagFilter_Values})
+var s_TagFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagFilterList, Members: &m_TagFilterList, Type: smithy.ShapeTypeList, Ext: &e_TagFilterList})
+var s_TagFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure, Ext: &e_TagFilterList_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyFilterList, Members: &m_TagKeyFilterList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyFilterList})
+var s_TagKeyFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyFilterList_member})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagKeyListForUntag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyListForUntag, Members: &m_TagKeyListForUntag, Type: smithy.ShapeTypeList, Ext: &e_TagKeyListForUntag})
+var s_TagKeyListForUntag_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyListForUntag_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagsPerPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsPerPage, Type: smithy.ShapeTypeInteger, Ext: &e_TagsPerPage})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TagValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueList, Members: &m_TagValueList, Type: smithy.ShapeTypeList, Ext: &e_TagValueList})
+var s_TagValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValueList_member})
+var s_TagValuesOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValuesOutputList, Members: &m_TagValuesOutputList, Type: smithy.ShapeTypeList, Ext: &e_TagValuesOutputList})
+var s_TagValuesOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValuesOutputList_member})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetId})
+var s_TargetIdFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdFilterList, Members: &m_TargetIdFilterList, Type: smithy.ShapeTypeList, Ext: &e_TargetIdFilterList})
+var s_TargetIdFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetIdFilterList_member})
+var sTargetIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetIdType, Members: &mTargetIdType, Type: smithy.ShapeTypeEnum, Ext: &eTargetIdType})
+var sTargetIdType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetIdType_ACCOUNT})
+var sTargetIdType_OU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetIdType_OU})
+var sTargetIdType_ROOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetIdType_ROOT})
+var sThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledException, Members: &mThrottledException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eThrottledException})
+var sThrottledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottledException_Message})
+var sDescribeReportCreationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportCreationInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReportCreationInput})
+var sDescribeReportCreationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportCreationOutput, Members: &mDescribeReportCreationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReportCreationOutput})
+var sDescribeReportCreationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eDescribeReportCreationOutput_Status})
+var sDescribeReportCreationOutput_S3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Location", ID: &i_S3Location, Type: smithy.ShapeTypeString, Ext: &eDescribeReportCreationOutput_S3Location})
+var sDescribeReportCreationOutput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_StartDate, Type: smithy.ShapeTypeString, Ext: &eDescribeReportCreationOutput_StartDate})
+var sDescribeReportCreationOutput_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeReportCreationOutput_ErrorMessage})
+var sGetComplianceSummaryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceSummaryInput, Members: &mGetComplianceSummaryInput, Type: smithy.ShapeTypeStructure, Ext: &eGetComplianceSummaryInput})
+var sGetComplianceSummaryInput_TargetIdFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdFilters", ID: &i_TargetIdFilterList, Members: &m_TargetIdFilterList, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryInput_TargetIdFilters})
+var sGetComplianceSummaryInput_RegionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionFilters", ID: &i_RegionFilterList, Members: &m_RegionFilterList, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryInput_RegionFilters})
+var sGetComplianceSummaryInput_ResourceTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypeFilters", ID: &i_ResourceTypeFilterList, Members: &m_ResourceTypeFilterList, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryInput_ResourceTypeFilters})
+var sGetComplianceSummaryInput_TagKeyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyFilters", ID: &i_TagKeyFilterList, Members: &m_TagKeyFilterList, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryInput_TagKeyFilters})
+var sGetComplianceSummaryInput_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_GroupBy, Members: &m_GroupBy, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryInput_GroupBy})
+var sGetComplianceSummaryInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsGetComplianceSummary, Type: smithy.ShapeTypeInteger, Ext: &eGetComplianceSummaryInput_MaxResults})
+var sGetComplianceSummaryInput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetComplianceSummaryInput_PaginationToken})
+var sGetComplianceSummaryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceSummaryOutput, Members: &mGetComplianceSummaryOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetComplianceSummaryOutput})
+var sGetComplianceSummaryOutput_SummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryList", ID: &i_SummaryList, Members: &m_SummaryList, Type: smithy.ShapeTypeList, Ext: &eGetComplianceSummaryOutput_SummaryList})
+var sGetComplianceSummaryOutput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetComplianceSummaryOutput_PaginationToken})
+var sGetResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcesInput, Members: &mGetResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcesInput})
+var sGetResourcesInput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetResourcesInput_PaginationToken})
+var sGetResourcesInput_TagFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagFilters", ID: &i_TagFilterList, Members: &m_TagFilterList, Type: smithy.ShapeTypeList, Ext: &eGetResourcesInput_TagFilters})
+var sGetResourcesInput_ResourcesPerPage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesPerPage", ID: &i_ResourcesPerPage, Type: smithy.ShapeTypeInteger, Ext: &eGetResourcesInput_ResourcesPerPage})
+var sGetResourcesInput_TagsPerPage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsPerPage", ID: &i_TagsPerPage, Type: smithy.ShapeTypeInteger, Ext: &eGetResourcesInput_TagsPerPage})
+var sGetResourcesInput_ResourceTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypeFilters", ID: &i_ResourceTypeFilterList, Members: &m_ResourceTypeFilterList, Type: smithy.ShapeTypeList, Ext: &eGetResourcesInput_ResourceTypeFilters})
+var sGetResourcesInput_IncludeComplianceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeComplianceDetails", ID: &i_IncludeComplianceDetails, Type: smithy.ShapeTypeBoolean, Ext: &eGetResourcesInput_IncludeComplianceDetails})
+var sGetResourcesInput_ExcludeCompliantResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCompliantResources", ID: &i_ExcludeCompliantResources, Type: smithy.ShapeTypeBoolean, Ext: &eGetResourcesInput_ExcludeCompliantResources})
+var sGetResourcesInput_ResourceARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARNList", ID: &i_ResourceARNListForGet, Members: &m_ResourceARNListForGet, Type: smithy.ShapeTypeList, Ext: &eGetResourcesInput_ResourceARNList})
+var sGetResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcesOutput, Members: &mGetResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcesOutput})
+var sGetResourcesOutput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetResourcesOutput_PaginationToken})
+var sGetResourcesOutput_ResourceTagMappingList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagMappingList", ID: &i_ResourceTagMappingList, Members: &m_ResourceTagMappingList, Type: smithy.ShapeTypeList, Ext: &eGetResourcesOutput_ResourceTagMappingList})
+var sGetTagKeysInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagKeysInput, Members: &mGetTagKeysInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTagKeysInput})
+var sGetTagKeysInput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetTagKeysInput_PaginationToken})
+var sGetTagKeysOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagKeysOutput, Members: &mGetTagKeysOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTagKeysOutput})
+var sGetTagKeysOutput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetTagKeysOutput_PaginationToken})
+var sGetTagKeysOutput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eGetTagKeysOutput_TagKeys})
+var sGetTagValuesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagValuesInput, Members: &mGetTagValuesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTagValuesInput})
+var sGetTagValuesInput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetTagValuesInput_PaginationToken})
+var sGetTagValuesInput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eGetTagValuesInput_Key})
+var sGetTagValuesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagValuesOutput, Members: &mGetTagValuesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTagValuesOutput})
+var sGetTagValuesOutput_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eGetTagValuesOutput_PaginationToken})
+var sGetTagValuesOutput_TagValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagValues", ID: &i_TagValuesOutputList, Members: &m_TagValuesOutputList, Type: smithy.ShapeTypeList, Ext: &eGetTagValuesOutput_TagValues})
+var sListRequiredTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequiredTagsInput, Members: &mListRequiredTagsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRequiredTagsInput})
+var sListRequiredTagsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRequiredTagsInput_NextToken})
+var sListRequiredTagsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForListRequiredTags, Type: smithy.ShapeTypeInteger, Ext: &eListRequiredTagsInput_MaxResults})
+var sListRequiredTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequiredTagsOutput, Members: &mListRequiredTagsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRequiredTagsOutput})
+var sListRequiredTagsOutput_RequiredTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredTags", ID: &i_RequiredTagsForListRequiredTags, Members: &m_RequiredTagsForListRequiredTags, Type: smithy.ShapeTypeList, Ext: &eListRequiredTagsOutput_RequiredTags})
+var sListRequiredTagsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRequiredTagsOutput_NextToken})
+var sStartReportCreationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReportCreationInput, Members: &mStartReportCreationInput, Type: smithy.ShapeTypeStructure, Ext: &eStartReportCreationInput})
+var sStartReportCreationInput_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eStartReportCreationInput_S3Bucket})
+var sStartReportCreationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReportCreationOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartReportCreationOutput})
+var sTagResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourcesInput, Members: &mTagResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourcesInput})
+var sTagResourcesInput_ResourceARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARNList", ID: &i_ResourceARNListForTagUntag, Members: &m_ResourceARNListForTagUntag, Type: smithy.ShapeTypeList, Ext: &eTagResourcesInput_ResourceARNList})
+var sTagResourcesInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourcesInput_Tags})
+var sTagResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourcesOutput, Members: &mTagResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourcesOutput})
+var sTagResourcesOutput_FailedResourcesMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedResourcesMap", ID: &i_FailedResourcesMap, Members: &m_FailedResourcesMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourcesOutput_FailedResourcesMap})
+var sUntagResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourcesInput, Members: &mUntagResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourcesInput})
+var sUntagResourcesInput_ResourceARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARNList", ID: &i_ResourceARNListForTagUntag, Members: &m_ResourceARNListForTagUntag, Type: smithy.ShapeTypeList, Ext: &eUntagResourcesInput_ResourceARNList})
+var sUntagResourcesInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyListForUntag, Members: &m_TagKeyListForUntag, Type: smithy.ShapeTypeList, Ext: &eUntagResourcesInput_TagKeys})
+var sUntagResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourcesOutput, Members: &mUntagResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourcesOutput})
+var sUntagResourcesOutput_FailedResourcesMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedResourcesMap", ID: &i_FailedResourcesMap, Members: &m_FailedResourcesMap, Type: smithy.ShapeTypeMap, Ext: &eUntagResourcesOutput_FailedResourcesMap})
+
+var DescribeReportCreation = &sDescribeReportCreation
+
+var GetComplianceSummary = &sGetComplianceSummary
+
+var GetResources = &sGetResources
+
+var GetTagKeys = &sGetTagKeys
+
+var GetTagValues = &sGetTagValues
+
+var ListRequiredTags = &sListRequiredTags
+
+var StartReportCreation = &sStartReportCreation
+
+var TagResources = &sTagResources
+
+var UntagResources = &sUntagResources
+
+var _ResourceGroupsTaggingAPI_20170126 = &s_ResourceGroupsTaggingAPI_20170126
+
+var _AmazonResourceType = &s_AmazonResourceType
+
+var _CloudFormationResourceType = &s_CloudFormationResourceType
+
+var _CloudFormationResourceTypes = &s_CloudFormationResourceTypes
+var _CloudFormationResourceTypes_member = &s_CloudFormationResourceTypes_member
+
+var ComplianceDetails = &sComplianceDetails
+var ComplianceDetails_NoncompliantKeys = &sComplianceDetails_NoncompliantKeys
+var ComplianceDetails_KeysWithNoncompliantValues = &sComplianceDetails_KeysWithNoncompliantValues
+var ComplianceDetails_MissingTagKeys = &sComplianceDetails_MissingTagKeys
+var ComplianceDetails_ComplianceStatus = &sComplianceDetails_ComplianceStatus
+
+var _ComplianceStatus = &s_ComplianceStatus
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConstraintViolationException = &sConstraintViolationException
+var ConstraintViolationException_Message = &sConstraintViolationException_Message
+
+var ErrorCode = &sErrorCode
+var ErrorCode_INTERNAL_SERVICE_EXCEPTION = &sErrorCode_INTERNAL_SERVICE_EXCEPTION
+var ErrorCode_INVALID_PARAMETER_EXCEPTION = &sErrorCode_INVALID_PARAMETER_EXCEPTION
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _ExcludeCompliantResources = &s_ExcludeCompliantResources
+
+var _FailedResourcesMap = &s_FailedResourcesMap
+var _FailedResourcesMap_key = &s_FailedResourcesMap_key
+var _FailedResourcesMap_value = &s_FailedResourcesMap_value
+
+var FailureInfo = &sFailureInfo
+var FailureInfo_StatusCode = &sFailureInfo_StatusCode
+var FailureInfo_ErrorCode = &sFailureInfo_ErrorCode
+var FailureInfo_ErrorMessage = &sFailureInfo_ErrorMessage
+
+var _GroupBy = &s_GroupBy
+var _GroupBy_member = &s_GroupBy_member
+
+var GroupByAttribute = &sGroupByAttribute
+var GroupByAttribute_TARGET_ID = &sGroupByAttribute_TARGET_ID
+var GroupByAttribute_REGION = &sGroupByAttribute_REGION
+var GroupByAttribute_RESOURCE_TYPE = &sGroupByAttribute_RESOURCE_TYPE
+
+var _IncludeComplianceDetails = &s_IncludeComplianceDetails
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_Message = &sInternalServiceException_Message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+
+var _LastUpdated = &s_LastUpdated
+
+var _MaxResultsForListRequiredTags = &s_MaxResultsForListRequiredTags
+
+var _MaxResultsGetComplianceSummary = &s_MaxResultsGetComplianceSummary
+
+var _NonCompliantResources = &s_NonCompliantResources
+
+var _PaginationToken = &s_PaginationToken
+
+var PaginationTokenExpiredException = &sPaginationTokenExpiredException
+var PaginationTokenExpiredException_Message = &sPaginationTokenExpiredException_Message
+
+var _Region = &s_Region
+
+var _RegionFilterList = &s_RegionFilterList
+var _RegionFilterList_member = &s_RegionFilterList_member
+
+var _ReportingTagKeys = &s_ReportingTagKeys
+var _ReportingTagKeys_member = &s_ReportingTagKeys_member
+
+var RequiredTag = &sRequiredTag
+var RequiredTag_ResourceType = &sRequiredTag_ResourceType
+var RequiredTag_CloudFormationResourceTypes = &sRequiredTag_CloudFormationResourceTypes
+var RequiredTag_ReportingTagKeys = &sRequiredTag_ReportingTagKeys
+
+var _RequiredTagsForListRequiredTags = &s_RequiredTagsForListRequiredTags
+var _RequiredTagsForListRequiredTags_member = &s_RequiredTagsForListRequiredTags_member
+
+var _ResourceARN = &s_ResourceARN
+
+var _ResourceARNListForGet = &s_ResourceARNListForGet
+var _ResourceARNListForGet_member = &s_ResourceARNListForGet_member
+
+var _ResourceARNListForTagUntag = &s_ResourceARNListForTagUntag
+var _ResourceARNListForTagUntag_member = &s_ResourceARNListForTagUntag_member
+
+var _ResourcesPerPage = &s_ResourcesPerPage
+
+var ResourceTagMapping = &sResourceTagMapping
+var ResourceTagMapping_ResourceARN = &sResourceTagMapping_ResourceARN
+var ResourceTagMapping_Tags = &sResourceTagMapping_Tags
+var ResourceTagMapping_ComplianceDetails = &sResourceTagMapping_ComplianceDetails
+
+var _ResourceTagMappingList = &s_ResourceTagMappingList
+var _ResourceTagMappingList_member = &s_ResourceTagMappingList_member
+
+var _ResourceType = &s_ResourceType
+
+var _ResourceTypeFilterList = &s_ResourceTypeFilterList
+var _ResourceTypeFilterList_member = &s_ResourceTypeFilterList_member
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Location = &s_S3Location
+
+var _StartDate = &s_StartDate
+
+var _Status = &s_Status
+
+var _StatusCode = &s_StatusCode
+
+var Summary = &sSummary
+var Summary_LastUpdated = &sSummary_LastUpdated
+var Summary_TargetId = &sSummary_TargetId
+var Summary_TargetIdType = &sSummary_TargetIdType
+var Summary_Region = &sSummary_Region
+var Summary_ResourceType = &sSummary_ResourceType
+var Summary_NonCompliantResources = &sSummary_NonCompliantResources
+
+var _SummaryList = &s_SummaryList
+var _SummaryList_member = &s_SummaryList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var TagFilter = &sTagFilter
+var TagFilter_Key = &sTagFilter_Key
+var TagFilter_Values = &sTagFilter_Values
+
+var _TagFilterList = &s_TagFilterList
+var _TagFilterList_member = &s_TagFilterList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyFilterList = &s_TagKeyFilterList
+var _TagKeyFilterList_member = &s_TagKeyFilterList_member
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagKeyListForUntag = &s_TagKeyListForUntag
+var _TagKeyListForUntag_member = &s_TagKeyListForUntag_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagsPerPage = &s_TagsPerPage
+
+var _TagValue = &s_TagValue
+
+var _TagValueList = &s_TagValueList
+var _TagValueList_member = &s_TagValueList_member
+
+var _TagValuesOutputList = &s_TagValuesOutputList
+var _TagValuesOutputList_member = &s_TagValuesOutputList_member
+
+var _TargetId = &s_TargetId
+
+var _TargetIdFilterList = &s_TargetIdFilterList
+var _TargetIdFilterList_member = &s_TargetIdFilterList_member
+
+var TargetIdType = &sTargetIdType
+var TargetIdType_ACCOUNT = &sTargetIdType_ACCOUNT
+var TargetIdType_OU = &sTargetIdType_OU
+var TargetIdType_ROOT = &sTargetIdType_ROOT
+
+var ThrottledException = &sThrottledException
+var ThrottledException_Message = &sThrottledException_Message
+
+var DescribeReportCreationInput = &sDescribeReportCreationInput
+
+var DescribeReportCreationOutput = &sDescribeReportCreationOutput
+var DescribeReportCreationOutput_Status = &sDescribeReportCreationOutput_Status
+var DescribeReportCreationOutput_S3Location = &sDescribeReportCreationOutput_S3Location
+var DescribeReportCreationOutput_StartDate = &sDescribeReportCreationOutput_StartDate
+var DescribeReportCreationOutput_ErrorMessage = &sDescribeReportCreationOutput_ErrorMessage
+
+var GetComplianceSummaryInput = &sGetComplianceSummaryInput
+var GetComplianceSummaryInput_TargetIdFilters = &sGetComplianceSummaryInput_TargetIdFilters
+var GetComplianceSummaryInput_RegionFilters = &sGetComplianceSummaryInput_RegionFilters
+var GetComplianceSummaryInput_ResourceTypeFilters = &sGetComplianceSummaryInput_ResourceTypeFilters
+var GetComplianceSummaryInput_TagKeyFilters = &sGetComplianceSummaryInput_TagKeyFilters
+var GetComplianceSummaryInput_GroupBy = &sGetComplianceSummaryInput_GroupBy
+var GetComplianceSummaryInput_MaxResults = &sGetComplianceSummaryInput_MaxResults
+var GetComplianceSummaryInput_PaginationToken = &sGetComplianceSummaryInput_PaginationToken
+
+var GetComplianceSummaryOutput = &sGetComplianceSummaryOutput
+var GetComplianceSummaryOutput_SummaryList = &sGetComplianceSummaryOutput_SummaryList
+var GetComplianceSummaryOutput_PaginationToken = &sGetComplianceSummaryOutput_PaginationToken
+
+var GetResourcesInput = &sGetResourcesInput
+var GetResourcesInput_PaginationToken = &sGetResourcesInput_PaginationToken
+var GetResourcesInput_TagFilters = &sGetResourcesInput_TagFilters
+var GetResourcesInput_ResourcesPerPage = &sGetResourcesInput_ResourcesPerPage
+var GetResourcesInput_TagsPerPage = &sGetResourcesInput_TagsPerPage
+var GetResourcesInput_ResourceTypeFilters = &sGetResourcesInput_ResourceTypeFilters
+var GetResourcesInput_IncludeComplianceDetails = &sGetResourcesInput_IncludeComplianceDetails
+var GetResourcesInput_ExcludeCompliantResources = &sGetResourcesInput_ExcludeCompliantResources
+var GetResourcesInput_ResourceARNList = &sGetResourcesInput_ResourceARNList
+
+var GetResourcesOutput = &sGetResourcesOutput
+var GetResourcesOutput_PaginationToken = &sGetResourcesOutput_PaginationToken
+var GetResourcesOutput_ResourceTagMappingList = &sGetResourcesOutput_ResourceTagMappingList
+
+var GetTagKeysInput = &sGetTagKeysInput
+var GetTagKeysInput_PaginationToken = &sGetTagKeysInput_PaginationToken
+
+var GetTagKeysOutput = &sGetTagKeysOutput
+var GetTagKeysOutput_PaginationToken = &sGetTagKeysOutput_PaginationToken
+var GetTagKeysOutput_TagKeys = &sGetTagKeysOutput_TagKeys
+
+var GetTagValuesInput = &sGetTagValuesInput
+var GetTagValuesInput_PaginationToken = &sGetTagValuesInput_PaginationToken
+var GetTagValuesInput_Key = &sGetTagValuesInput_Key
+
+var GetTagValuesOutput = &sGetTagValuesOutput
+var GetTagValuesOutput_PaginationToken = &sGetTagValuesOutput_PaginationToken
+var GetTagValuesOutput_TagValues = &sGetTagValuesOutput_TagValues
+
+var ListRequiredTagsInput = &sListRequiredTagsInput
+var ListRequiredTagsInput_NextToken = &sListRequiredTagsInput_NextToken
+var ListRequiredTagsInput_MaxResults = &sListRequiredTagsInput_MaxResults
+
+var ListRequiredTagsOutput = &sListRequiredTagsOutput
+var ListRequiredTagsOutput_RequiredTags = &sListRequiredTagsOutput_RequiredTags
+var ListRequiredTagsOutput_NextToken = &sListRequiredTagsOutput_NextToken
+
+var StartReportCreationInput = &sStartReportCreationInput
+var StartReportCreationInput_S3Bucket = &sStartReportCreationInput_S3Bucket
+
+var StartReportCreationOutput = &sStartReportCreationOutput
+
+var TagResourcesInput = &sTagResourcesInput
+var TagResourcesInput_ResourceARNList = &sTagResourcesInput_ResourceARNList
+var TagResourcesInput_Tags = &sTagResourcesInput_Tags
+
+var TagResourcesOutput = &sTagResourcesOutput
+var TagResourcesOutput_FailedResourcesMap = &sTagResourcesOutput_FailedResourcesMap
+
+var UntagResourcesInput = &sUntagResourcesInput
+var UntagResourcesInput_ResourceARNList = &sUntagResourcesInput_ResourceARNList
+var UntagResourcesInput_TagKeys = &sUntagResourcesInput_TagKeys
+
+var UntagResourcesOutput = &sUntagResourcesOutput
+var UntagResourcesOutput_FailedResourcesMap = &sUntagResourcesOutput_FailedResourcesMap
+
+var ResourceGroupsTaggingAPI_20170126 = &smithy.ServiceSchema{Schema: &s_ResourceGroupsTaggingAPI_20170126, Version: "2017-01-26"}

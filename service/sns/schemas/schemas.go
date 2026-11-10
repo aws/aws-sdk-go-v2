@@ -4,1994 +4,2014 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "AddPermission",
-}, smithy.ShapeTypeOperation, 0)
-
-var CheckIfPhoneNumberIsOptedOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CheckIfPhoneNumberIsOptedOut",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ConfirmSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePlatformApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreatePlatformApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePlatformEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreatePlatformEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSMSSandboxPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateSMSSandboxPhoneNumber",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateTopic",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePlatformApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeletePlatformApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSMSSandboxPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteSMSSandboxPhoneNumber",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteTopic",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDataProtectionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetDataProtectionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEndpointAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetEndpointAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPlatformApplicationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetPlatformApplicationAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSMSAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSMSSandboxAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSSandboxAccountStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSubscriptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSubscriptionAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTopicAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetTopicAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEndpointsByPlatformApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListEndpointsByPlatformApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOriginationNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListOriginationNumbers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPhoneNumbersOptedOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPhoneNumbersOptedOut",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPlatformApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPlatformApplications",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSMSSandboxPhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSMSSandboxPhoneNumbers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSubscriptionsByTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptionsByTopic",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTopics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTopics",
-}, smithy.ShapeTypeOperation, 0)
-
-var OptInPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "OptInPhoneNumber",
-}, smithy.ShapeTypeOperation, 0)
-
-var Publish = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Publish",
-}, smithy.ShapeTypeOperation, 0)
-
-var PublishBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatch",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutDataProtectionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PutDataProtectionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemovePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "RemovePermission",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetEndpointAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetEndpointAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetPlatformApplicationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetPlatformApplicationAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSMSAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetSMSAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSubscriptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetSubscriptionAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetTopicAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetTopicAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var Subscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Subscribe",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var Unsubscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Unsubscribe",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var VerifySMSSandboxPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "VerifySMSSandboxPhoneNumber",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonSimpleNotificationService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "AmazonSimpleNotificationService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://sns.amazonaws.com/doc/2010-03-31/"})
-
-var AmazonSimpleNotificationService = smithy.NewServiceSchema(_AmazonSimpleNotificationService, "2010-03-31")
-
-var _account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "account",
-}, smithy.ShapeTypeString, 0)
-
-var _action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "action",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ActionsList",
-}, smithy.ShapeTypeList, 1)
-var _ActionsList_member *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "attributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _attributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "attributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _authenticateOnUnsubscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "authenticateOnUnsubscribe",
-}, smithy.ShapeTypeString, 0)
-
-var AuthorizationErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "AuthorizationErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AuthorizationError",
-		StatusCode: 403})
-var AuthorizationErrorException_message *smithy.Schema
-
-var BatchEntryIdsNotDistinctException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "BatchEntryIdsNotDistinctException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "BatchEntryIdsNotDistinct",
-		StatusCode: 400})
-var BatchEntryIdsNotDistinctException_message *smithy.Schema
-
-var BatchRequestTooLongException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "BatchRequestTooLongException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "BatchRequestTooLong",
-		StatusCode: 400})
-var BatchRequestTooLongException_message *smithy.Schema
-
-var BatchResultErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "BatchResultErrorEntry",
-}, smithy.ShapeTypeStructure, 4)
-var BatchResultErrorEntry_Id *smithy.Schema
-
-var BatchResultErrorEntry_Code *smithy.Schema
-
-var BatchResultErrorEntry_Message *smithy.Schema
-
-var BatchResultErrorEntry_SenderFault *smithy.Schema
-
-var _BatchResultErrorEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "BatchResultErrorEntryList",
-}, smithy.ShapeTypeList, 1)
-var _BatchResultErrorEntryList_member *smithy.Schema
-
-var _Binary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Binary",
-}, smithy.ShapeTypeBlob, 0)
-
-var _boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConcurrentAccessException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ConcurrentAccessException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentAccess",
-		StatusCode: 400})
-var ConcurrentAccessException_message *smithy.Schema
-
-var _delegate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "delegate",
-}, smithy.ShapeTypeString, 0)
-
-var _DelegatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DelegatesList",
-}, smithy.ShapeTypeList, 1)
-var _DelegatesList_member *smithy.Schema
-
-var EmptyBatchRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "EmptyBatchRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EmptyBatchRequest",
-		StatusCode: 400})
-var EmptyBatchRequestException_message *smithy.Schema
-
-var Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeStructure, 2)
-var Endpoint_EndpointArn *smithy.Schema
-
-var Endpoint_Attributes *smithy.Schema
-
-var _Endpoint2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Endpoint2",
-}, smithy.ShapeTypeString, 0)
-
-var EndpointDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "EndpointDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EndpointDisabled",
-		StatusCode: 400})
-var EndpointDisabledException_message *smithy.Schema
-
-var FilterPolicyLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "FilterPolicyLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "FilterPolicyLimitExceeded",
-		StatusCode: 403})
-var FilterPolicyLimitExceededException_message *smithy.Schema
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
-		StatusCode: 500})
-var InternalErrorException_message *smithy.Schema
-
-var InvalidBatchEntryIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InvalidBatchEntryIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidBatchEntryId",
-		StatusCode: 400})
-var InvalidBatchEntryIdException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
-		StatusCode: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ParameterValueInvalid",
-		StatusCode: 400})
-var InvalidParameterValueException_message *smithy.Schema
-
-var InvalidSecurityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InvalidSecurityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSecurity",
-		StatusCode: 403})
-var InvalidSecurityException_message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidState",
-		StatusCode: 400})
-var InvalidStateException_message *smithy.Schema
-
-var _Iso2CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Iso2CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var KMSAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSAccessDenied",
-		StatusCode: 400})
-var KMSAccessDeniedException_message *smithy.Schema
-
-var KMSDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSDisabled",
-		StatusCode: 400})
-var KMSDisabledException_message *smithy.Schema
-
-var KMSInvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSInvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSInvalidState",
-		StatusCode: 400})
-var KMSInvalidStateException_message *smithy.Schema
-
-var KMSNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSNotFound",
-		StatusCode: 400})
-var KMSNotFoundException_message *smithy.Schema
-
-var KMSOptInRequired = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSOptInRequired",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSOptInRequired",
-		StatusCode: 403})
-var KMSOptInRequired_message *smithy.Schema
-
-var KMSThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "KMSThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSThrottling",
-		StatusCode: 400})
-var KMSThrottlingException_message *smithy.Schema
-
-var _label = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "label",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "LanguageCodeString",
-}, smithy.ShapeTypeEnum, 13)
-var LanguageCodeString_en_US *smithy.Schema
-
-var LanguageCodeString_en_GB *smithy.Schema
-
-var LanguageCodeString_es_419 *smithy.Schema
-
-var LanguageCodeString_es_ES *smithy.Schema
-
-var LanguageCodeString_de_DE *smithy.Schema
-
-var LanguageCodeString_fr_CA *smithy.Schema
-
-var LanguageCodeString_fr_FR *smithy.Schema
-
-var LanguageCodeString_it_IT *smithy.Schema
-
-var LanguageCodeString_jp_JP *smithy.Schema
-
-var LanguageCodeString_pt_BR *smithy.Schema
-
-var LanguageCodeString_kr_KR *smithy.Schema
-
-var LanguageCodeString_zh_CN *smithy.Schema
-
-var LanguageCodeString_zh_TW *smithy.Schema
-
-var _ListOfEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListOfEndpoints",
-}, smithy.ShapeTypeList, 1)
-var _ListOfEndpoints_member *smithy.Schema
-
-var _ListOfPlatformApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListOfPlatformApplications",
-}, smithy.ShapeTypeList, 1)
-var _ListOfPlatformApplications_member *smithy.Schema
-
-var _ListString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListString",
-}, smithy.ShapeTypeList, 1)
-var _ListString_member *smithy.Schema
-
-var _MapStringToString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "MapStringToString",
-}, smithy.ShapeTypeMap, 2)
-var _MapStringToString_key *smithy.Schema
-
-var _MapStringToString_value *smithy.Schema
-
-var _MaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "MaxItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxItemsListOriginationNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "MaxItemsListOriginationNumbers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "message",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "MessageAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _MessageAttributeMap_key *smithy.Schema
-
-var _MessageAttributeMap_value *smithy.Schema
-
-var MessageAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "MessageAttributeValue",
-}, smithy.ShapeTypeStructure, 3)
-var MessageAttributeValue_DataType *smithy.Schema
-
-var MessageAttributeValue_StringValue *smithy.Schema
-
-var MessageAttributeValue_BinaryValue *smithy.Schema
-
-var _messageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "messageId",
-}, smithy.ShapeTypeString, 0)
-
-var _messageStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "messageStructure",
-}, smithy.ShapeTypeString, 0)
-
-var _nextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "nextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "NotFound",
-		StatusCode: 404})
-var NotFoundException_message *smithy.Schema
-
-var NumberCapability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "NumberCapability",
-}, smithy.ShapeTypeEnum, 3)
-var NumberCapability_SMS *smithy.Schema
-
-var NumberCapability_MMS *smithy.Schema
-
-var NumberCapability_VOICE *smithy.Schema
-
-var _NumberCapabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "NumberCapabilityList",
-}, smithy.ShapeTypeList, 1)
-var _NumberCapabilityList_member *smithy.Schema
-
-var OptedOutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "OptedOutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OptedOut",
-		StatusCode: 400})
-var OptedOutException_message *smithy.Schema
-
-var _OTPCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "OTPCode",
-}, smithy.ShapeTypeString, 0)
-
-var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PhoneNumberInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PhoneNumberInformation",
-}, smithy.ShapeTypeStructure, 6)
-var PhoneNumberInformation_CreatedAt *smithy.Schema
-
-var PhoneNumberInformation_PhoneNumber *smithy.Schema
-
-var PhoneNumberInformation_Status *smithy.Schema
-
-var PhoneNumberInformation_Iso2CountryCode *smithy.Schema
-
-var PhoneNumberInformation_RouteType *smithy.Schema
-
-var PhoneNumberInformation_NumberCapabilities *smithy.Schema
-
-var _PhoneNumberInformationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PhoneNumberInformationList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberInformationList_member *smithy.Schema
-
-var _PhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberList_member *smithy.Schema
-
-var _PhoneNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PhoneNumberString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PlatformApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PlatformApplication",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformApplication_PlatformApplicationArn *smithy.Schema
-
-var PlatformApplication_Attributes *smithy.Schema
-
-var PlatformApplicationDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PlatformApplicationDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PlatformApplicationDisabled",
-		StatusCode: 400})
-var PlatformApplicationDisabledException_message *smithy.Schema
-
-var _protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "protocol",
-}, smithy.ShapeTypeString, 0)
-
-var PublishBatchRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchRequestEntry",
-}, smithy.ShapeTypeStructure, 7)
-var PublishBatchRequestEntry_Id *smithy.Schema
-
-var PublishBatchRequestEntry_Message *smithy.Schema
-
-var PublishBatchRequestEntry_Subject *smithy.Schema
-
-var PublishBatchRequestEntry_MessageStructure *smithy.Schema
-
-var PublishBatchRequestEntry_MessageAttributes *smithy.Schema
-
-var PublishBatchRequestEntry_MessageDeduplicationId *smithy.Schema
-
-var PublishBatchRequestEntry_MessageGroupId *smithy.Schema
-
-var _PublishBatchRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PublishBatchRequestEntryList_member *smithy.Schema
-
-var PublishBatchResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchResultEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PublishBatchResultEntry_Id *smithy.Schema
-
-var PublishBatchResultEntry_MessageId *smithy.Schema
-
-var PublishBatchResultEntry_SequenceNumber *smithy.Schema
-
-var _PublishBatchResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PublishBatchResultEntryList_member *smithy.Schema
-
-var ReplayLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ReplayLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "ReplayLimitExceeded",
-		StatusCode: 403})
-var ReplayLimitExceededException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RouteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "RouteType",
-}, smithy.ShapeTypeEnum, 3)
-var RouteType_Transactional *smithy.Schema
-
-var RouteType_Promotional *smithy.Schema
-
-var RouteType_Premium *smithy.Schema
-
-var SMSSandboxPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SMSSandboxPhoneNumber",
-}, smithy.ShapeTypeStructure, 2)
-var SMSSandboxPhoneNumber_PhoneNumber *smithy.Schema
-
-var SMSSandboxPhoneNumber_Status *smithy.Schema
-
-var _SMSSandboxPhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SMSSandboxPhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _SMSSandboxPhoneNumberList_member *smithy.Schema
-
-var SMSSandboxPhoneNumberVerificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SMSSandboxPhoneNumberVerificationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var SMSSandboxPhoneNumberVerificationStatus_Pending *smithy.Schema
-
-var SMSSandboxPhoneNumberVerificationStatus_Verified *smithy.Schema
-
-var StaleTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "StaleTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "StaleTag",
-		StatusCode: 400})
-var StaleTagException_message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _subject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "subject",
-}, smithy.ShapeTypeString, 0)
-
-var Subscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Subscription",
-}, smithy.ShapeTypeStructure, 5)
-var Subscription_SubscriptionArn *smithy.Schema
-
-var Subscription_Owner *smithy.Schema
-
-var Subscription_Protocol *smithy.Schema
-
-var Subscription_Endpoint *smithy.Schema
-
-var Subscription_TopicArn *smithy.Schema
-
-var _subscriptionARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "subscriptionARN",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriptionAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SubscriptionAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _SubscriptionAttributesMap_key *smithy.Schema
-
-var _SubscriptionAttributesMap_value *smithy.Schema
-
-var SubscriptionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SubscriptionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "SubscriptionLimitExceeded",
-		StatusCode: 403})
-var SubscriptionLimitExceededException_message *smithy.Schema
-
-var _SubscriptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SubscriptionsList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionsList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TagLimitExceeded",
-		StatusCode: 400})
-var TagLimitExceededException_message *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TagPolicy",
-		StatusCode: 400})
-var TagPolicyException_message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ThrottledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "Throttled",
-		StatusCode: 429})
-var ThrottledException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "token",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyEntriesInBatchRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TooManyEntriesInBatchRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyEntriesInBatchRequest",
-		StatusCode: 400})
-var TooManyEntriesInBatchRequestException_message *smithy.Schema
-
-var Topic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "Topic",
-}, smithy.ShapeTypeStructure, 1)
-var Topic_TopicArn *smithy.Schema
-
-var _topicARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "topicARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TopicAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _TopicAttributesMap_key *smithy.Schema
-
-var _TopicAttributesMap_value *smithy.Schema
-
-var TopicLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TopicLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "TopicLimitExceeded",
-		StatusCode: 403})
-var TopicLimitExceededException_message *smithy.Schema
-
-var _topicName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "topicName",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TopicsList",
-}, smithy.ShapeTypeList, 1)
-var _TopicsList_member *smithy.Schema
-
-var UserErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "UserErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "UserError",
-		StatusCode: 400})
-var UserErrorException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_Message *smithy.Schema
-
-var VerificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "VerificationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var VerificationException_Message *smithy.Schema
-
-var VerificationException_Status *smithy.Schema
-
-var AddPermissionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "AddPermissionInput",
-}, smithy.ShapeTypeStructure, 4)
-var AddPermissionInput_TopicArn *smithy.Schema
-
-var AddPermissionInput_Label *smithy.Schema
-
-var AddPermissionInput_AWSAccountId *smithy.Schema
-
-var AddPermissionInput_ActionName *smithy.Schema
-
-var CheckIfPhoneNumberIsOptedOutInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CheckIfPhoneNumberIsOptedOutInput",
-}, smithy.ShapeTypeStructure, 1)
-var CheckIfPhoneNumberIsOptedOutInput_phoneNumber *smithy.Schema
-
-var CheckIfPhoneNumberIsOptedOutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CheckIfPhoneNumberIsOptedOutResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CheckIfPhoneNumberIsOptedOutResponse_isOptedOut *smithy.Schema
-
-var ConfirmSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ConfirmSubscriptionInput",
-}, smithy.ShapeTypeStructure, 3)
-var ConfirmSubscriptionInput_TopicArn *smithy.Schema
-
-var ConfirmSubscriptionInput_Token *smithy.Schema
-
-var ConfirmSubscriptionInput_AuthenticateOnUnsubscribe *smithy.Schema
-
-var ConfirmSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ConfirmSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmSubscriptionResponse_SubscriptionArn *smithy.Schema
-
-var CreatePlatformApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreatePlatformApplicationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreatePlatformApplicationInput_Name *smithy.Schema
-
-var CreatePlatformApplicationInput_Platform *smithy.Schema
-
-var CreatePlatformApplicationInput_Attributes *smithy.Schema
-
-var CreatePlatformApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreatePlatformApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePlatformApplicationResponse_PlatformApplicationArn *smithy.Schema
-
-var CreatePlatformEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreatePlatformEndpointInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePlatformEndpointInput_PlatformApplicationArn *smithy.Schema
-
-var CreatePlatformEndpointInput_Token *smithy.Schema
-
-var CreatePlatformEndpointInput_CustomUserData *smithy.Schema
-
-var CreatePlatformEndpointInput_Attributes *smithy.Schema
-
-var CreateEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEndpointResponse_EndpointArn *smithy.Schema
-
-var CreateSMSSandboxPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateSMSSandboxPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSMSSandboxPhoneNumberInput_PhoneNumber *smithy.Schema
-
-var CreateSMSSandboxPhoneNumberInput_LanguageCode *smithy.Schema
-
-var CreateSMSSandboxPhoneNumberResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateSMSSandboxPhoneNumberResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateTopicInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateTopicInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateTopicInput_Name *smithy.Schema
-
-var CreateTopicInput_Attributes *smithy.Schema
-
-var CreateTopicInput_Tags *smithy.Schema
-
-var CreateTopicInput_DataProtectionPolicy *smithy.Schema
-
-var CreateTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "CreateTopicResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTopicResponse_TopicArn *smithy.Schema
-
-var DeleteEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteEndpointInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEndpointInput_EndpointArn *smithy.Schema
-
-var DeletePlatformApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeletePlatformApplicationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePlatformApplicationInput_PlatformApplicationArn *smithy.Schema
-
-var DeleteSMSSandboxPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteSMSSandboxPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSMSSandboxPhoneNumberInput_PhoneNumber *smithy.Schema
-
-var DeleteSMSSandboxPhoneNumberResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteSMSSandboxPhoneNumberResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTopicInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "DeleteTopicInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTopicInput_TopicArn *smithy.Schema
-
-var GetDataProtectionPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetDataProtectionPolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataProtectionPolicyInput_ResourceArn *smithy.Schema
-
-var GetDataProtectionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetDataProtectionPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataProtectionPolicyResponse_DataProtectionPolicy *smithy.Schema
-
-var GetEndpointAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetEndpointAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEndpointAttributesInput_EndpointArn *smithy.Schema
-
-var GetEndpointAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetEndpointAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEndpointAttributesResponse_Attributes *smithy.Schema
-
-var GetPlatformApplicationAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetPlatformApplicationAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlatformApplicationAttributesInput_PlatformApplicationArn *smithy.Schema
-
-var GetPlatformApplicationAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetPlatformApplicationAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPlatformApplicationAttributesResponse_Attributes *smithy.Schema
-
-var GetSMSAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSMSAttributesInput_attributes *smithy.Schema
-
-var GetSMSAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSMSAttributesResponse_attributes *smithy.Schema
-
-var GetSMSSandboxAccountStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSSandboxAccountStatusInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetSMSSandboxAccountStatusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSMSSandboxAccountStatusResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetSMSSandboxAccountStatusResult_IsInSandbox *smithy.Schema
-
-var GetSubscriptionAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSubscriptionAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionAttributesInput_SubscriptionArn *smithy.Schema
-
-var GetSubscriptionAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetSubscriptionAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionAttributesResponse_Attributes *smithy.Schema
-
-var GetTopicAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetTopicAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTopicAttributesInput_TopicArn *smithy.Schema
-
-var GetTopicAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "GetTopicAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTopicAttributesResponse_Attributes *smithy.Schema
-
-var ListEndpointsByPlatformApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListEndpointsByPlatformApplicationInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEndpointsByPlatformApplicationInput_PlatformApplicationArn *smithy.Schema
-
-var ListEndpointsByPlatformApplicationInput_NextToken *smithy.Schema
-
-var ListEndpointsByPlatformApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListEndpointsByPlatformApplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEndpointsByPlatformApplicationResponse_Endpoints *smithy.Schema
-
-var ListEndpointsByPlatformApplicationResponse_NextToken *smithy.Schema
-
-var ListOriginationNumbersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListOriginationNumbersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListOriginationNumbersRequest_NextToken *smithy.Schema
-
-var ListOriginationNumbersRequest_MaxResults *smithy.Schema
-
-var ListOriginationNumbersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListOriginationNumbersResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListOriginationNumbersResult_NextToken *smithy.Schema
-
-var ListOriginationNumbersResult_PhoneNumbers *smithy.Schema
-
-var ListPhoneNumbersOptedOutInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPhoneNumbersOptedOutInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListPhoneNumbersOptedOutInput_nextToken *smithy.Schema
-
-var ListPhoneNumbersOptedOutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPhoneNumbersOptedOutResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumbersOptedOutResponse_phoneNumbers *smithy.Schema
-
-var ListPhoneNumbersOptedOutResponse_nextToken *smithy.Schema
-
-var ListPlatformApplicationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPlatformApplicationsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListPlatformApplicationsInput_NextToken *smithy.Schema
-
-var ListPlatformApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListPlatformApplicationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPlatformApplicationsResponse_PlatformApplications *smithy.Schema
-
-var ListPlatformApplicationsResponse_NextToken *smithy.Schema
-
-var ListSMSSandboxPhoneNumbersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSMSSandboxPhoneNumbersInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSMSSandboxPhoneNumbersInput_NextToken *smithy.Schema
-
-var ListSMSSandboxPhoneNumbersInput_MaxResults *smithy.Schema
-
-var ListSMSSandboxPhoneNumbersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSMSSandboxPhoneNumbersResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSMSSandboxPhoneNumbersResult_PhoneNumbers *smithy.Schema
-
-var ListSMSSandboxPhoneNumbersResult_NextToken *smithy.Schema
-
-var ListSubscriptionsByTopicInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptionsByTopicInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsByTopicInput_TopicArn *smithy.Schema
-
-var ListSubscriptionsByTopicInput_NextToken *smithy.Schema
-
-var ListSubscriptionsByTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptionsByTopicResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsByTopicResponse_Subscriptions *smithy.Schema
-
-var ListSubscriptionsByTopicResponse_NextToken *smithy.Schema
-
-var ListSubscriptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListSubscriptionsInput_NextToken *smithy.Schema
-
-var ListSubscriptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListSubscriptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsResponse_Subscriptions *smithy.Schema
-
-var ListSubscriptionsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTopicsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTopicsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTopicsInput_NextToken *smithy.Schema
-
-var ListTopicsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "ListTopicsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTopicsResponse_Topics *smithy.Schema
-
-var ListTopicsResponse_NextToken *smithy.Schema
-
-var OptInPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "OptInPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 1)
-var OptInPhoneNumberInput_phoneNumber *smithy.Schema
-
-var OptInPhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "OptInPhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PublishBatchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchInput",
-}, smithy.ShapeTypeStructure, 2)
-var PublishBatchInput_TopicArn *smithy.Schema
-
-var PublishBatchInput_PublishBatchRequestEntries *smithy.Schema
-
-var PublishBatchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishBatchResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PublishBatchResponse_Successful *smithy.Schema
-
-var PublishBatchResponse_Failed *smithy.Schema
-
-var PublishInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishInput",
-}, smithy.ShapeTypeStructure, 9)
-var PublishInput_TopicArn *smithy.Schema
-
-var PublishInput_TargetArn *smithy.Schema
-
-var PublishInput_PhoneNumber *smithy.Schema
-
-var PublishInput_Message *smithy.Schema
-
-var PublishInput_Subject *smithy.Schema
-
-var PublishInput_MessageStructure *smithy.Schema
-
-var PublishInput_MessageAttributes *smithy.Schema
-
-var PublishInput_MessageDeduplicationId *smithy.Schema
-
-var PublishInput_MessageGroupId *smithy.Schema
-
-var PublishResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PublishResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PublishResponse_MessageId *smithy.Schema
-
-var PublishResponse_SequenceNumber *smithy.Schema
-
-var PutDataProtectionPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "PutDataProtectionPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutDataProtectionPolicyInput_ResourceArn *smithy.Schema
-
-var PutDataProtectionPolicyInput_DataProtectionPolicy *smithy.Schema
-
-var RemovePermissionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "RemovePermissionInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemovePermissionInput_TopicArn *smithy.Schema
-
-var RemovePermissionInput_Label *smithy.Schema
-
-var SetEndpointAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetEndpointAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetEndpointAttributesInput_EndpointArn *smithy.Schema
-
-var SetEndpointAttributesInput_Attributes *smithy.Schema
-
-var SetPlatformApplicationAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetPlatformApplicationAttributesInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetPlatformApplicationAttributesInput_PlatformApplicationArn *smithy.Schema
-
-var SetPlatformApplicationAttributesInput_Attributes *smithy.Schema
-
-var SetSMSAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetSMSAttributesInput",
-}, smithy.ShapeTypeStructure, 1)
-var SetSMSAttributesInput_attributes *smithy.Schema
-
-var SetSMSAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetSMSAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var SetSubscriptionAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetSubscriptionAttributesInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetSubscriptionAttributesInput_SubscriptionArn *smithy.Schema
-
-var SetSubscriptionAttributesInput_AttributeName *smithy.Schema
-
-var SetSubscriptionAttributesInput_AttributeValue *smithy.Schema
-
-var SetTopicAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SetTopicAttributesInput",
-}, smithy.ShapeTypeStructure, 3)
-var SetTopicAttributesInput_TopicArn *smithy.Schema
-
-var SetTopicAttributesInput_AttributeName *smithy.Schema
-
-var SetTopicAttributesInput_AttributeValue *smithy.Schema
-
-var SubscribeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SubscribeInput",
-}, smithy.ShapeTypeStructure, 5)
-var SubscribeInput_TopicArn *smithy.Schema
-
-var SubscribeInput_Protocol *smithy.Schema
-
-var SubscribeInput_Endpoint *smithy.Schema
-
-var SubscribeInput_Attributes *smithy.Schema
-
-var SubscribeInput_ReturnSubscriptionArn *smithy.Schema
-
-var SubscribeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "SubscribeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeResponse_SubscriptionArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UnsubscribeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "UnsubscribeInput",
-}, smithy.ShapeTypeStructure, 1)
-var UnsubscribeInput_SubscriptionArn *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var VerifySMSSandboxPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "VerifySMSSandboxPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 2)
-var VerifySMSSandboxPhoneNumberInput_PhoneNumber *smithy.Schema
-
-var VerifySMSSandboxPhoneNumberInput_OneTimePassword *smithy.Schema
-
-var VerifySMSSandboxPhoneNumberResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sns",
-	Name:      "VerifySMSSandboxPhoneNumberResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_ActionsList_member = _ActionsList.AddMember("member", _action)
-
-	AuthorizationErrorException_message = AuthorizationErrorException.AddMember("message", _String)
-
-	BatchEntryIdsNotDistinctException_message = BatchEntryIdsNotDistinctException.AddMember("message", _String)
-
-	BatchRequestTooLongException_message = BatchRequestTooLongException.AddMember("message", _String)
-
-	BatchResultErrorEntry_Id = BatchResultErrorEntry.AddMember("Id", _String)
-
-	BatchResultErrorEntry_Code = BatchResultErrorEntry.AddMember("Code", _String)
-
-	BatchResultErrorEntry_Message = BatchResultErrorEntry.AddMember("Message", _String)
-
-	BatchResultErrorEntry_SenderFault = BatchResultErrorEntry.AddMember("SenderFault", _boolean)
-
-	_BatchResultErrorEntryList_member = _BatchResultErrorEntryList.AddMember("member", BatchResultErrorEntry)
-
-	ConcurrentAccessException_message = ConcurrentAccessException.AddMember("message", _String)
-
-	_DelegatesList_member = _DelegatesList.AddMember("member", _delegate)
-
-	EmptyBatchRequestException_message = EmptyBatchRequestException.AddMember("message", _String)
-
-	_MapStringToString_key = _MapStringToString.AddMember("key", _String)
-
-	_MapStringToString_value = _MapStringToString.AddMember("value", _String)
-
-	Endpoint_EndpointArn = Endpoint.AddMember("EndpointArn", _String)
-
-	Endpoint_Attributes = Endpoint.AddMember("Attributes", _MapStringToString)
-
-	EndpointDisabledException_message = EndpointDisabledException.AddMember("message", _String)
-
-	FilterPolicyLimitExceededException_message = FilterPolicyLimitExceededException.AddMember("message", _String)
-
-	InternalErrorException_message = InternalErrorException.AddMember("message", _String)
-
-	InvalidBatchEntryIdException_message = InvalidBatchEntryIdException.AddMember("message", _String)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _String)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _String)
-
-	InvalidSecurityException_message = InvalidSecurityException.AddMember("message", _String)
-
-	InvalidStateException_message = InvalidStateException.AddMember("message", _String)
-
-	KMSAccessDeniedException_message = KMSAccessDeniedException.AddMember("message", _String)
-
-	KMSDisabledException_message = KMSDisabledException.AddMember("message", _String)
-
-	KMSInvalidStateException_message = KMSInvalidStateException.AddMember("message", _String)
-
-	KMSNotFoundException_message = KMSNotFoundException.AddMember("message", _String)
-
-	KMSOptInRequired_message = KMSOptInRequired.AddMember("message", _String)
-
-	KMSThrottlingException_message = KMSThrottlingException.AddMember("message", _String)
-
-	LanguageCodeString_en_US = LanguageCodeString.AddMember("en_US", smithyprelude.Unit)
-
-	LanguageCodeString_en_GB = LanguageCodeString.AddMember("en_GB", smithyprelude.Unit)
-
-	LanguageCodeString_es_419 = LanguageCodeString.AddMember("es_419", smithyprelude.Unit)
-
-	LanguageCodeString_es_ES = LanguageCodeString.AddMember("es_ES", smithyprelude.Unit)
-
-	LanguageCodeString_de_DE = LanguageCodeString.AddMember("de_DE", smithyprelude.Unit)
-
-	LanguageCodeString_fr_CA = LanguageCodeString.AddMember("fr_CA", smithyprelude.Unit)
-
-	LanguageCodeString_fr_FR = LanguageCodeString.AddMember("fr_FR", smithyprelude.Unit)
-
-	LanguageCodeString_it_IT = LanguageCodeString.AddMember("it_IT", smithyprelude.Unit)
-
-	LanguageCodeString_jp_JP = LanguageCodeString.AddMember("jp_JP", smithyprelude.Unit)
-
-	LanguageCodeString_pt_BR = LanguageCodeString.AddMember("pt_BR", smithyprelude.Unit)
-
-	LanguageCodeString_kr_KR = LanguageCodeString.AddMember("kr_KR", smithyprelude.Unit)
-
-	LanguageCodeString_zh_CN = LanguageCodeString.AddMember("zh_CN", smithyprelude.Unit)
-
-	LanguageCodeString_zh_TW = LanguageCodeString.AddMember("zh_TW", smithyprelude.Unit)
-
-	_ListOfEndpoints_member = _ListOfEndpoints.AddMember("member", Endpoint)
-
-	PlatformApplication_PlatformApplicationArn = PlatformApplication.AddMember("PlatformApplicationArn", _String)
-
-	PlatformApplication_Attributes = PlatformApplication.AddMember("Attributes", _MapStringToString)
-
-	_ListOfPlatformApplications_member = _ListOfPlatformApplications.AddMember("member", PlatformApplication)
-
-	_ListString_member = _ListString.AddMember("member", _String)
-
-	MessageAttributeValue_DataType = MessageAttributeValue.AddMember("DataType", _String)
-
-	MessageAttributeValue_StringValue = MessageAttributeValue.AddMember("StringValue", _String)
-
-	MessageAttributeValue_BinaryValue = MessageAttributeValue.AddMember("BinaryValue", _Binary)
-
-	_MessageAttributeMap_key = _MessageAttributeMap.AddMember("key", _String, &smithytraits.XMLName{Name: "Name"})
-
-	_MessageAttributeMap_value = _MessageAttributeMap.AddMember("value", MessageAttributeValue, &smithytraits.XMLName{Name: "Value"})
-
-	NotFoundException_message = NotFoundException.AddMember("message", _String)
-
-	NumberCapability_SMS = NumberCapability.AddMember("SMS", smithyprelude.Unit)
-
-	NumberCapability_MMS = NumberCapability.AddMember("MMS", smithyprelude.Unit)
-
-	NumberCapability_VOICE = NumberCapability.AddMember("VOICE", smithyprelude.Unit)
-
-	_NumberCapabilityList_member = _NumberCapabilityList.AddMember("member", NumberCapability)
-
-	OptedOutException_message = OptedOutException.AddMember("message", _String)
-
-	RouteType_Transactional = RouteType.AddMember("Transactional", smithyprelude.Unit)
-
-	RouteType_Promotional = RouteType.AddMember("Promotional", smithyprelude.Unit)
-
-	RouteType_Premium = RouteType.AddMember("Premium", smithyprelude.Unit)
-
-	PhoneNumberInformation_CreatedAt = PhoneNumberInformation.AddMember("CreatedAt", _Timestamp)
-
-	PhoneNumberInformation_PhoneNumber = PhoneNumberInformation.AddMember("PhoneNumber", _PhoneNumber)
-
-	PhoneNumberInformation_Status = PhoneNumberInformation.AddMember("Status", _String)
-
-	PhoneNumberInformation_Iso2CountryCode = PhoneNumberInformation.AddMember("Iso2CountryCode", _Iso2CountryCode)
-
-	PhoneNumberInformation_RouteType = PhoneNumberInformation.AddMember("RouteType", RouteType)
-
-	PhoneNumberInformation_NumberCapabilities = PhoneNumberInformation.AddMember("NumberCapabilities", _NumberCapabilityList)
-
-	_PhoneNumberInformationList_member = _PhoneNumberInformationList.AddMember("member", PhoneNumberInformation)
-
-	_PhoneNumberList_member = _PhoneNumberList.AddMember("member", _PhoneNumber)
-
-	PlatformApplicationDisabledException_message = PlatformApplicationDisabledException.AddMember("message", _String)
-
-	PublishBatchRequestEntry_Id = PublishBatchRequestEntry.AddMember("Id", _String)
-
-	PublishBatchRequestEntry_Message = PublishBatchRequestEntry.AddMember("Message", _message)
-
-	PublishBatchRequestEntry_Subject = PublishBatchRequestEntry.AddMember("Subject", _subject)
-
-	PublishBatchRequestEntry_MessageStructure = PublishBatchRequestEntry.AddMember("MessageStructure", _messageStructure)
-
-	PublishBatchRequestEntry_MessageAttributes = PublishBatchRequestEntry.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	PublishBatchRequestEntry_MessageDeduplicationId = PublishBatchRequestEntry.AddMember("MessageDeduplicationId", _String)
-
-	PublishBatchRequestEntry_MessageGroupId = PublishBatchRequestEntry.AddMember("MessageGroupId", _String)
-
-	_PublishBatchRequestEntryList_member = _PublishBatchRequestEntryList.AddMember("member", PublishBatchRequestEntry)
-
-	PublishBatchResultEntry_Id = PublishBatchResultEntry.AddMember("Id", _String)
-
-	PublishBatchResultEntry_MessageId = PublishBatchResultEntry.AddMember("MessageId", _messageId)
-
-	PublishBatchResultEntry_SequenceNumber = PublishBatchResultEntry.AddMember("SequenceNumber", _String)
-
-	_PublishBatchResultEntryList_member = _PublishBatchResultEntryList.AddMember("member", PublishBatchResultEntry)
-
-	ReplayLimitExceededException_message = ReplayLimitExceededException.AddMember("message", _String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	SMSSandboxPhoneNumberVerificationStatus_Pending = SMSSandboxPhoneNumberVerificationStatus.AddMember("Pending", smithyprelude.Unit)
-
-	SMSSandboxPhoneNumberVerificationStatus_Verified = SMSSandboxPhoneNumberVerificationStatus.AddMember("Verified", smithyprelude.Unit)
-
-	SMSSandboxPhoneNumber_PhoneNumber = SMSSandboxPhoneNumber.AddMember("PhoneNumber", _PhoneNumberString)
-
-	SMSSandboxPhoneNumber_Status = SMSSandboxPhoneNumber.AddMember("Status", SMSSandboxPhoneNumberVerificationStatus)
-
-	_SMSSandboxPhoneNumberList_member = _SMSSandboxPhoneNumberList.AddMember("member", SMSSandboxPhoneNumber)
-
-	StaleTagException_message = StaleTagException.AddMember("message", _String)
-
-	Subscription_SubscriptionArn = Subscription.AddMember("SubscriptionArn", _subscriptionARN)
-
-	Subscription_Owner = Subscription.AddMember("Owner", _account)
-
-	Subscription_Protocol = Subscription.AddMember("Protocol", _protocol)
-
-	Subscription_Endpoint = Subscription.AddMember("Endpoint", _Endpoint2)
-
-	Subscription_TopicArn = Subscription.AddMember("TopicArn", _topicARN)
-
-	_SubscriptionAttributesMap_key = _SubscriptionAttributesMap.AddMember("key", _attributeName)
-
-	_SubscriptionAttributesMap_value = _SubscriptionAttributesMap.AddMember("value", _attributeValue)
-
-	SubscriptionLimitExceededException_message = SubscriptionLimitExceededException.AddMember("message", _String)
-
-	_SubscriptionsList_member = _SubscriptionsList.AddMember("member", Subscription)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagLimitExceededException_message = TagLimitExceededException.AddMember("message", _String)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TagPolicyException_message = TagPolicyException.AddMember("message", _String)
-
-	ThrottledException_message = ThrottledException.AddMember("message", _String)
-
-	TooManyEntriesInBatchRequestException_message = TooManyEntriesInBatchRequestException.AddMember("message", _String)
-
-	Topic_TopicArn = Topic.AddMember("TopicArn", _topicARN)
-
-	_TopicAttributesMap_key = _TopicAttributesMap.AddMember("key", _attributeName)
-
-	_TopicAttributesMap_value = _TopicAttributesMap.AddMember("value", _attributeValue)
-
-	TopicLimitExceededException_message = TopicLimitExceededException.AddMember("message", _String)
-
-	_TopicsList_member = _TopicsList.AddMember("member", Topic)
-
-	UserErrorException_message = UserErrorException.AddMember("message", _String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	VerificationException_Message = VerificationException.AddMember("Message", _String)
-
-	VerificationException_Status = VerificationException.AddMember("Status", _String)
-
-	AddPermissionInput_TopicArn = AddPermissionInput.AddMember("TopicArn", _topicARN)
-
-	AddPermissionInput_Label = AddPermissionInput.AddMember("Label", _label)
-
-	AddPermissionInput_AWSAccountId = AddPermissionInput.AddMember("AWSAccountId", _DelegatesList)
-
-	AddPermissionInput_ActionName = AddPermissionInput.AddMember("ActionName", _ActionsList)
-
-	CheckIfPhoneNumberIsOptedOutInput_phoneNumber = CheckIfPhoneNumberIsOptedOutInput.AddMember("phoneNumber", _PhoneNumber)
-
-	CheckIfPhoneNumberIsOptedOutResponse_isOptedOut = CheckIfPhoneNumberIsOptedOutResponse.AddMember("isOptedOut", _boolean)
-
-	ConfirmSubscriptionInput_TopicArn = ConfirmSubscriptionInput.AddMember("TopicArn", _topicARN)
-
-	ConfirmSubscriptionInput_Token = ConfirmSubscriptionInput.AddMember("Token", _token)
-
-	ConfirmSubscriptionInput_AuthenticateOnUnsubscribe = ConfirmSubscriptionInput.AddMember("AuthenticateOnUnsubscribe", _authenticateOnUnsubscribe)
-
-	ConfirmSubscriptionResponse_SubscriptionArn = ConfirmSubscriptionResponse.AddMember("SubscriptionArn", _subscriptionARN)
-
-	CreatePlatformApplicationInput_Name = CreatePlatformApplicationInput.AddMember("Name", _String)
-
-	CreatePlatformApplicationInput_Platform = CreatePlatformApplicationInput.AddMember("Platform", _String)
-
-	CreatePlatformApplicationInput_Attributes = CreatePlatformApplicationInput.AddMember("Attributes", _MapStringToString)
-
-	CreatePlatformApplicationResponse_PlatformApplicationArn = CreatePlatformApplicationResponse.AddMember("PlatformApplicationArn", _String)
-
-	CreatePlatformEndpointInput_PlatformApplicationArn = CreatePlatformEndpointInput.AddMember("PlatformApplicationArn", _String)
-
-	CreatePlatformEndpointInput_Token = CreatePlatformEndpointInput.AddMember("Token", _String)
-
-	CreatePlatformEndpointInput_CustomUserData = CreatePlatformEndpointInput.AddMember("CustomUserData", _String)
-
-	CreatePlatformEndpointInput_Attributes = CreatePlatformEndpointInput.AddMember("Attributes", _MapStringToString)
-
-	CreateEndpointResponse_EndpointArn = CreateEndpointResponse.AddMember("EndpointArn", _String)
-
-	CreateSMSSandboxPhoneNumberInput_PhoneNumber = CreateSMSSandboxPhoneNumberInput.AddMember("PhoneNumber", _PhoneNumberString)
-
-	CreateSMSSandboxPhoneNumberInput_LanguageCode = CreateSMSSandboxPhoneNumberInput.AddMember("LanguageCode", LanguageCodeString)
-
-	CreateTopicInput_Name = CreateTopicInput.AddMember("Name", _topicName)
-
-	CreateTopicInput_Attributes = CreateTopicInput.AddMember("Attributes", _TopicAttributesMap)
-
-	CreateTopicInput_Tags = CreateTopicInput.AddMember("Tags", _TagList)
-
-	CreateTopicInput_DataProtectionPolicy = CreateTopicInput.AddMember("DataProtectionPolicy", _attributeValue)
-
-	CreateTopicResponse_TopicArn = CreateTopicResponse.AddMember("TopicArn", _topicARN)
-
-	DeleteEndpointInput_EndpointArn = DeleteEndpointInput.AddMember("EndpointArn", _String)
-
-	DeletePlatformApplicationInput_PlatformApplicationArn = DeletePlatformApplicationInput.AddMember("PlatformApplicationArn", _String)
-
-	DeleteSMSSandboxPhoneNumberInput_PhoneNumber = DeleteSMSSandboxPhoneNumberInput.AddMember("PhoneNumber", _PhoneNumberString)
-
-	DeleteTopicInput_TopicArn = DeleteTopicInput.AddMember("TopicArn", _topicARN)
-
-	GetDataProtectionPolicyInput_ResourceArn = GetDataProtectionPolicyInput.AddMember("ResourceArn", _topicARN)
-
-	GetDataProtectionPolicyResponse_DataProtectionPolicy = GetDataProtectionPolicyResponse.AddMember("DataProtectionPolicy", _attributeValue)
-
-	GetEndpointAttributesInput_EndpointArn = GetEndpointAttributesInput.AddMember("EndpointArn", _String)
-
-	GetEndpointAttributesResponse_Attributes = GetEndpointAttributesResponse.AddMember("Attributes", _MapStringToString)
-
-	GetPlatformApplicationAttributesInput_PlatformApplicationArn = GetPlatformApplicationAttributesInput.AddMember("PlatformApplicationArn", _String)
-
-	GetPlatformApplicationAttributesResponse_Attributes = GetPlatformApplicationAttributesResponse.AddMember("Attributes", _MapStringToString)
-
-	GetSMSAttributesInput_attributes = GetSMSAttributesInput.AddMember("attributes", _ListString)
-
-	GetSMSAttributesResponse_attributes = GetSMSAttributesResponse.AddMember("attributes", _MapStringToString)
-
-	GetSMSSandboxAccountStatusResult_IsInSandbox = GetSMSSandboxAccountStatusResult.AddMember("IsInSandbox", _boolean)
-
-	GetSubscriptionAttributesInput_SubscriptionArn = GetSubscriptionAttributesInput.AddMember("SubscriptionArn", _subscriptionARN)
-
-	GetSubscriptionAttributesResponse_Attributes = GetSubscriptionAttributesResponse.AddMember("Attributes", _SubscriptionAttributesMap)
-
-	GetTopicAttributesInput_TopicArn = GetTopicAttributesInput.AddMember("TopicArn", _topicARN)
-
-	GetTopicAttributesResponse_Attributes = GetTopicAttributesResponse.AddMember("Attributes", _TopicAttributesMap)
-
-	ListEndpointsByPlatformApplicationInput_PlatformApplicationArn = ListEndpointsByPlatformApplicationInput.AddMember("PlatformApplicationArn", _String)
-
-	ListEndpointsByPlatformApplicationInput_NextToken = ListEndpointsByPlatformApplicationInput.AddMember("NextToken", _String)
-
-	ListEndpointsByPlatformApplicationResponse_Endpoints = ListEndpointsByPlatformApplicationResponse.AddMember("Endpoints", _ListOfEndpoints)
-
-	ListEndpointsByPlatformApplicationResponse_NextToken = ListEndpointsByPlatformApplicationResponse.AddMember("NextToken", _String)
-
-	ListOriginationNumbersRequest_NextToken = ListOriginationNumbersRequest.AddMember("NextToken", _nextToken)
-
-	ListOriginationNumbersRequest_MaxResults = ListOriginationNumbersRequest.AddMember("MaxResults", _MaxItemsListOriginationNumbers)
-
-	ListOriginationNumbersResult_NextToken = ListOriginationNumbersResult.AddMember("NextToken", _nextToken)
-
-	ListOriginationNumbersResult_PhoneNumbers = ListOriginationNumbersResult.AddMember("PhoneNumbers", _PhoneNumberInformationList)
-
-	ListPhoneNumbersOptedOutInput_nextToken = ListPhoneNumbersOptedOutInput.AddMember("nextToken", _String)
-
-	ListPhoneNumbersOptedOutResponse_phoneNumbers = ListPhoneNumbersOptedOutResponse.AddMember("phoneNumbers", _PhoneNumberList)
-
-	ListPhoneNumbersOptedOutResponse_nextToken = ListPhoneNumbersOptedOutResponse.AddMember("nextToken", _String)
-
-	ListPlatformApplicationsInput_NextToken = ListPlatformApplicationsInput.AddMember("NextToken", _String)
-
-	ListPlatformApplicationsResponse_PlatformApplications = ListPlatformApplicationsResponse.AddMember("PlatformApplications", _ListOfPlatformApplications)
-
-	ListPlatformApplicationsResponse_NextToken = ListPlatformApplicationsResponse.AddMember("NextToken", _String)
-
-	ListSMSSandboxPhoneNumbersInput_NextToken = ListSMSSandboxPhoneNumbersInput.AddMember("NextToken", _nextToken)
-
-	ListSMSSandboxPhoneNumbersInput_MaxResults = ListSMSSandboxPhoneNumbersInput.AddMember("MaxResults", _MaxItems)
-
-	ListSMSSandboxPhoneNumbersResult_PhoneNumbers = ListSMSSandboxPhoneNumbersResult.AddMember("PhoneNumbers", _SMSSandboxPhoneNumberList)
-
-	ListSMSSandboxPhoneNumbersResult_NextToken = ListSMSSandboxPhoneNumbersResult.AddMember("NextToken", _String)
-
-	ListSubscriptionsByTopicInput_TopicArn = ListSubscriptionsByTopicInput.AddMember("TopicArn", _topicARN)
-
-	ListSubscriptionsByTopicInput_NextToken = ListSubscriptionsByTopicInput.AddMember("NextToken", _nextToken)
-
-	ListSubscriptionsByTopicResponse_Subscriptions = ListSubscriptionsByTopicResponse.AddMember("Subscriptions", _SubscriptionsList)
-
-	ListSubscriptionsByTopicResponse_NextToken = ListSubscriptionsByTopicResponse.AddMember("NextToken", _nextToken)
-
-	ListSubscriptionsInput_NextToken = ListSubscriptionsInput.AddMember("NextToken", _nextToken)
-
-	ListSubscriptionsResponse_Subscriptions = ListSubscriptionsResponse.AddMember("Subscriptions", _SubscriptionsList)
-
-	ListSubscriptionsResponse_NextToken = ListSubscriptionsResponse.AddMember("NextToken", _nextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTopicsInput_NextToken = ListTopicsInput.AddMember("NextToken", _nextToken)
-
-	ListTopicsResponse_Topics = ListTopicsResponse.AddMember("Topics", _TopicsList)
-
-	ListTopicsResponse_NextToken = ListTopicsResponse.AddMember("NextToken", _nextToken)
-
-	OptInPhoneNumberInput_phoneNumber = OptInPhoneNumberInput.AddMember("phoneNumber", _PhoneNumber)
-
-	PublishBatchInput_TopicArn = PublishBatchInput.AddMember("TopicArn", _topicARN)
-
-	PublishBatchInput_PublishBatchRequestEntries = PublishBatchInput.AddMember("PublishBatchRequestEntries", _PublishBatchRequestEntryList)
-
-	PublishBatchResponse_Successful = PublishBatchResponse.AddMember("Successful", _PublishBatchResultEntryList)
-
-	PublishBatchResponse_Failed = PublishBatchResponse.AddMember("Failed", _BatchResultErrorEntryList)
-
-	PublishInput_TopicArn = PublishInput.AddMember("TopicArn", _topicARN)
-
-	PublishInput_TargetArn = PublishInput.AddMember("TargetArn", _String)
-
-	PublishInput_PhoneNumber = PublishInput.AddMember("PhoneNumber", _PhoneNumber)
-
-	PublishInput_Message = PublishInput.AddMember("Message", _message)
-
-	PublishInput_Subject = PublishInput.AddMember("Subject", _subject)
-
-	PublishInput_MessageStructure = PublishInput.AddMember("MessageStructure", _messageStructure)
-
-	PublishInput_MessageAttributes = PublishInput.AddMember("MessageAttributes", _MessageAttributeMap)
-
-	PublishInput_MessageDeduplicationId = PublishInput.AddMember("MessageDeduplicationId", _String)
-
-	PublishInput_MessageGroupId = PublishInput.AddMember("MessageGroupId", _String)
-
-	PublishResponse_MessageId = PublishResponse.AddMember("MessageId", _messageId)
-
-	PublishResponse_SequenceNumber = PublishResponse.AddMember("SequenceNumber", _String)
-
-	PutDataProtectionPolicyInput_ResourceArn = PutDataProtectionPolicyInput.AddMember("ResourceArn", _topicARN)
-
-	PutDataProtectionPolicyInput_DataProtectionPolicy = PutDataProtectionPolicyInput.AddMember("DataProtectionPolicy", _attributeValue)
-
-	RemovePermissionInput_TopicArn = RemovePermissionInput.AddMember("TopicArn", _topicARN)
-
-	RemovePermissionInput_Label = RemovePermissionInput.AddMember("Label", _label)
-
-	SetEndpointAttributesInput_EndpointArn = SetEndpointAttributesInput.AddMember("EndpointArn", _String)
-
-	SetEndpointAttributesInput_Attributes = SetEndpointAttributesInput.AddMember("Attributes", _MapStringToString)
-
-	SetPlatformApplicationAttributesInput_PlatformApplicationArn = SetPlatformApplicationAttributesInput.AddMember("PlatformApplicationArn", _String)
-
-	SetPlatformApplicationAttributesInput_Attributes = SetPlatformApplicationAttributesInput.AddMember("Attributes", _MapStringToString)
-
-	SetSMSAttributesInput_attributes = SetSMSAttributesInput.AddMember("attributes", _MapStringToString)
-
-	SetSubscriptionAttributesInput_SubscriptionArn = SetSubscriptionAttributesInput.AddMember("SubscriptionArn", _subscriptionARN)
-
-	SetSubscriptionAttributesInput_AttributeName = SetSubscriptionAttributesInput.AddMember("AttributeName", _attributeName)
-
-	SetSubscriptionAttributesInput_AttributeValue = SetSubscriptionAttributesInput.AddMember("AttributeValue", _attributeValue)
-
-	SetTopicAttributesInput_TopicArn = SetTopicAttributesInput.AddMember("TopicArn", _topicARN)
-
-	SetTopicAttributesInput_AttributeName = SetTopicAttributesInput.AddMember("AttributeName", _attributeName)
-
-	SetTopicAttributesInput_AttributeValue = SetTopicAttributesInput.AddMember("AttributeValue", _attributeValue)
-
-	SubscribeInput_TopicArn = SubscribeInput.AddMember("TopicArn", _topicARN)
-
-	SubscribeInput_Protocol = SubscribeInput.AddMember("Protocol", _protocol)
-
-	SubscribeInput_Endpoint = SubscribeInput.AddMember("Endpoint", _Endpoint2)
-
-	SubscribeInput_Attributes = SubscribeInput.AddMember("Attributes", _SubscriptionAttributesMap)
-
-	SubscribeInput_ReturnSubscriptionArn = SubscribeInput.AddMember("ReturnSubscriptionArn", _boolean)
-
-	SubscribeResponse_SubscriptionArn = SubscribeResponse.AddMember("SubscriptionArn", _subscriptionARN)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UnsubscribeInput_SubscriptionArn = UnsubscribeInput.AddMember("SubscriptionArn", _subscriptionARN)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	VerifySMSSandboxPhoneNumberInput_PhoneNumber = VerifySMSSandboxPhoneNumberInput.AddMember("PhoneNumber", _PhoneNumberString)
-
-	VerifySMSSandboxPhoneNumberInput_OneTimePassword = VerifySMSSandboxPhoneNumberInput.AddMember("OneTimePassword", _OTPCode)
-
-}
+var (
+	eAddPermission                                                  smithy.SchemaExtensions
+	eCheckIfPhoneNumberIsOptedOut                                   smithy.SchemaExtensions
+	eConfirmSubscription                                            smithy.SchemaExtensions
+	eCreatePlatformApplication                                      smithy.SchemaExtensions
+	eCreatePlatformEndpoint                                         smithy.SchemaExtensions
+	eCreateSMSSandboxPhoneNumber                                    smithy.SchemaExtensions
+	eCreateTopic                                                    smithy.SchemaExtensions
+	eDeleteEndpoint                                                 smithy.SchemaExtensions
+	eDeletePlatformApplication                                      smithy.SchemaExtensions
+	eDeleteSMSSandboxPhoneNumber                                    smithy.SchemaExtensions
+	eDeleteTopic                                                    smithy.SchemaExtensions
+	eGetDataProtectionPolicy                                        smithy.SchemaExtensions
+	eGetEndpointAttributes                                          smithy.SchemaExtensions
+	eGetPlatformApplicationAttributes                               smithy.SchemaExtensions
+	eGetSMSAttributes                                               smithy.SchemaExtensions
+	eGetSMSSandboxAccountStatus                                     smithy.SchemaExtensions
+	eGetSubscriptionAttributes                                      smithy.SchemaExtensions
+	eGetTopicAttributes                                             smithy.SchemaExtensions
+	eListEndpointsByPlatformApplication                             smithy.SchemaExtensions
+	eListOriginationNumbers                                         smithy.SchemaExtensions
+	eListPhoneNumbersOptedOut                                       smithy.SchemaExtensions
+	eListPlatformApplications                                       smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbers                                     smithy.SchemaExtensions
+	eListSubscriptions                                              smithy.SchemaExtensions
+	eListSubscriptionsByTopic                                       smithy.SchemaExtensions
+	eListTagsForResource                                            smithy.SchemaExtensions
+	eListTopics                                                     smithy.SchemaExtensions
+	eOptInPhoneNumber                                               smithy.SchemaExtensions
+	ePublish                                                        smithy.SchemaExtensions
+	ePublishBatch                                                   smithy.SchemaExtensions
+	ePutDataProtectionPolicy                                        smithy.SchemaExtensions
+	eRemovePermission                                               smithy.SchemaExtensions
+	eSetEndpointAttributes                                          smithy.SchemaExtensions
+	eSetPlatformApplicationAttributes                               smithy.SchemaExtensions
+	eSetSMSAttributes                                               smithy.SchemaExtensions
+	eSetSubscriptionAttributes                                      smithy.SchemaExtensions
+	eSetTopicAttributes                                             smithy.SchemaExtensions
+	eSubscribe                                                      smithy.SchemaExtensions
+	eTagResource                                                    smithy.SchemaExtensions
+	eUnsubscribe                                                    smithy.SchemaExtensions
+	eUntagResource                                                  smithy.SchemaExtensions
+	eVerifySMSSandboxPhoneNumber                                    smithy.SchemaExtensions
+	e_AmazonSimpleNotificationService                               smithy.SchemaExtensions
+	e_account                                                       smithy.SchemaExtensions
+	e_action                                                        smithy.SchemaExtensions
+	e_ActionsList                                                   smithy.SchemaExtensions
+	e_ActionsList_member                                            smithy.SchemaExtensions
+	e_AmazonResourceName                                            smithy.SchemaExtensions
+	e_attributeName                                                 smithy.SchemaExtensions
+	e_attributeValue                                                smithy.SchemaExtensions
+	e_authenticateOnUnsubscribe                                     smithy.SchemaExtensions
+	eAuthorizationErrorException                                    smithy.SchemaExtensions
+	eAuthorizationErrorException_message                            smithy.SchemaExtensions
+	eBatchEntryIdsNotDistinctException                              smithy.SchemaExtensions
+	eBatchEntryIdsNotDistinctException_message                      smithy.SchemaExtensions
+	eBatchRequestTooLongException                                   smithy.SchemaExtensions
+	eBatchRequestTooLongException_message                           smithy.SchemaExtensions
+	eBatchResultErrorEntry                                          smithy.SchemaExtensions
+	eBatchResultErrorEntry_Id                                       smithy.SchemaExtensions
+	eBatchResultErrorEntry_Code                                     smithy.SchemaExtensions
+	eBatchResultErrorEntry_Message                                  smithy.SchemaExtensions
+	eBatchResultErrorEntry_SenderFault                              smithy.SchemaExtensions
+	e_BatchResultErrorEntryList                                     smithy.SchemaExtensions
+	e_BatchResultErrorEntryList_member                              smithy.SchemaExtensions
+	e_Binary                                                        smithy.SchemaExtensions
+	e_boolean                                                       smithy.SchemaExtensions
+	eConcurrentAccessException                                      smithy.SchemaExtensions
+	eConcurrentAccessException_message                              smithy.SchemaExtensions
+	e_delegate                                                      smithy.SchemaExtensions
+	e_DelegatesList                                                 smithy.SchemaExtensions
+	e_DelegatesList_member                                          smithy.SchemaExtensions
+	eEmptyBatchRequestException                                     smithy.SchemaExtensions
+	eEmptyBatchRequestException_message                             smithy.SchemaExtensions
+	eEndpoint                                                       smithy.SchemaExtensions
+	eEndpoint_EndpointArn                                           smithy.SchemaExtensions
+	eEndpoint_Attributes                                            smithy.SchemaExtensions
+	e_Endpoint2                                                     smithy.SchemaExtensions
+	eEndpointDisabledException                                      smithy.SchemaExtensions
+	eEndpointDisabledException_message                              smithy.SchemaExtensions
+	eFilterPolicyLimitExceededException                             smithy.SchemaExtensions
+	eFilterPolicyLimitExceededException_message                     smithy.SchemaExtensions
+	eInternalErrorException                                         smithy.SchemaExtensions
+	eInternalErrorException_message                                 smithy.SchemaExtensions
+	eInvalidBatchEntryIdException                                   smithy.SchemaExtensions
+	eInvalidBatchEntryIdException_message                           smithy.SchemaExtensions
+	eInvalidParameterException                                      smithy.SchemaExtensions
+	eInvalidParameterException_message                              smithy.SchemaExtensions
+	eInvalidParameterValueException                                 smithy.SchemaExtensions
+	eInvalidParameterValueException_message                         smithy.SchemaExtensions
+	eInvalidSecurityException                                       smithy.SchemaExtensions
+	eInvalidSecurityException_message                               smithy.SchemaExtensions
+	eInvalidStateException                                          smithy.SchemaExtensions
+	eInvalidStateException_message                                  smithy.SchemaExtensions
+	e_Iso2CountryCode                                               smithy.SchemaExtensions
+	eKMSAccessDeniedException                                       smithy.SchemaExtensions
+	eKMSAccessDeniedException_message                               smithy.SchemaExtensions
+	eKMSDisabledException                                           smithy.SchemaExtensions
+	eKMSDisabledException_message                                   smithy.SchemaExtensions
+	eKMSInvalidStateException                                       smithy.SchemaExtensions
+	eKMSInvalidStateException_message                               smithy.SchemaExtensions
+	eKMSNotFoundException                                           smithy.SchemaExtensions
+	eKMSNotFoundException_message                                   smithy.SchemaExtensions
+	eKMSOptInRequired                                               smithy.SchemaExtensions
+	eKMSOptInRequired_message                                       smithy.SchemaExtensions
+	eKMSThrottlingException                                         smithy.SchemaExtensions
+	eKMSThrottlingException_message                                 smithy.SchemaExtensions
+	e_label                                                         smithy.SchemaExtensions
+	eLanguageCodeString                                             smithy.SchemaExtensions
+	eLanguageCodeString_en_US                                       smithy.SchemaExtensions
+	eLanguageCodeString_en_GB                                       smithy.SchemaExtensions
+	eLanguageCodeString_es_419                                      smithy.SchemaExtensions
+	eLanguageCodeString_es_ES                                       smithy.SchemaExtensions
+	eLanguageCodeString_de_DE                                       smithy.SchemaExtensions
+	eLanguageCodeString_fr_CA                                       smithy.SchemaExtensions
+	eLanguageCodeString_fr_FR                                       smithy.SchemaExtensions
+	eLanguageCodeString_it_IT                                       smithy.SchemaExtensions
+	eLanguageCodeString_jp_JP                                       smithy.SchemaExtensions
+	eLanguageCodeString_pt_BR                                       smithy.SchemaExtensions
+	eLanguageCodeString_kr_KR                                       smithy.SchemaExtensions
+	eLanguageCodeString_zh_CN                                       smithy.SchemaExtensions
+	eLanguageCodeString_zh_TW                                       smithy.SchemaExtensions
+	e_ListOfEndpoints                                               smithy.SchemaExtensions
+	e_ListOfEndpoints_member                                        smithy.SchemaExtensions
+	e_ListOfPlatformApplications                                    smithy.SchemaExtensions
+	e_ListOfPlatformApplications_member                             smithy.SchemaExtensions
+	e_ListString                                                    smithy.SchemaExtensions
+	e_ListString_member                                             smithy.SchemaExtensions
+	e_MapStringToString                                             smithy.SchemaExtensions
+	e_MapStringToString_key                                         smithy.SchemaExtensions
+	e_MapStringToString_value                                       smithy.SchemaExtensions
+	e_MaxItems                                                      smithy.SchemaExtensions
+	e_MaxItemsListOriginationNumbers                                smithy.SchemaExtensions
+	e_message                                                       smithy.SchemaExtensions
+	e_MessageAttributeMap                                           smithy.SchemaExtensions
+	e_MessageAttributeMap_key                                       smithy.SchemaExtensions
+	e_MessageAttributeMap_value                                     smithy.SchemaExtensions
+	eMessageAttributeValue                                          smithy.SchemaExtensions
+	eMessageAttributeValue_DataType                                 smithy.SchemaExtensions
+	eMessageAttributeValue_StringValue                              smithy.SchemaExtensions
+	eMessageAttributeValue_BinaryValue                              smithy.SchemaExtensions
+	e_messageId                                                     smithy.SchemaExtensions
+	e_messageStructure                                              smithy.SchemaExtensions
+	e_nextToken                                                     smithy.SchemaExtensions
+	eNotFoundException                                              smithy.SchemaExtensions
+	eNotFoundException_message                                      smithy.SchemaExtensions
+	eNumberCapability                                               smithy.SchemaExtensions
+	eNumberCapability_SMS                                           smithy.SchemaExtensions
+	eNumberCapability_MMS                                           smithy.SchemaExtensions
+	eNumberCapability_VOICE                                         smithy.SchemaExtensions
+	e_NumberCapabilityList                                          smithy.SchemaExtensions
+	e_NumberCapabilityList_member                                   smithy.SchemaExtensions
+	eOptedOutException                                              smithy.SchemaExtensions
+	eOptedOutException_message                                      smithy.SchemaExtensions
+	e_OTPCode                                                       smithy.SchemaExtensions
+	e_PhoneNumber                                                   smithy.SchemaExtensions
+	ePhoneNumberInformation                                         smithy.SchemaExtensions
+	ePhoneNumberInformation_CreatedAt                               smithy.SchemaExtensions
+	ePhoneNumberInformation_PhoneNumber                             smithy.SchemaExtensions
+	ePhoneNumberInformation_Status                                  smithy.SchemaExtensions
+	ePhoneNumberInformation_Iso2CountryCode                         smithy.SchemaExtensions
+	ePhoneNumberInformation_RouteType                               smithy.SchemaExtensions
+	ePhoneNumberInformation_NumberCapabilities                      smithy.SchemaExtensions
+	e_PhoneNumberInformationList                                    smithy.SchemaExtensions
+	e_PhoneNumberInformationList_member                             smithy.SchemaExtensions
+	e_PhoneNumberList                                               smithy.SchemaExtensions
+	e_PhoneNumberList_member                                        smithy.SchemaExtensions
+	e_PhoneNumberString                                             smithy.SchemaExtensions
+	ePlatformApplication                                            smithy.SchemaExtensions
+	ePlatformApplication_PlatformApplicationArn                     smithy.SchemaExtensions
+	ePlatformApplication_Attributes                                 smithy.SchemaExtensions
+	ePlatformApplicationDisabledException                           smithy.SchemaExtensions
+	ePlatformApplicationDisabledException_message                   smithy.SchemaExtensions
+	e_protocol                                                      smithy.SchemaExtensions
+	ePublishBatchRequestEntry                                       smithy.SchemaExtensions
+	ePublishBatchRequestEntry_Id                                    smithy.SchemaExtensions
+	ePublishBatchRequestEntry_Message                               smithy.SchemaExtensions
+	ePublishBatchRequestEntry_Subject                               smithy.SchemaExtensions
+	ePublishBatchRequestEntry_MessageStructure                      smithy.SchemaExtensions
+	ePublishBatchRequestEntry_MessageAttributes                     smithy.SchemaExtensions
+	ePublishBatchRequestEntry_MessageDeduplicationId                smithy.SchemaExtensions
+	ePublishBatchRequestEntry_MessageGroupId                        smithy.SchemaExtensions
+	e_PublishBatchRequestEntryList                                  smithy.SchemaExtensions
+	e_PublishBatchRequestEntryList_member                           smithy.SchemaExtensions
+	ePublishBatchResultEntry                                        smithy.SchemaExtensions
+	ePublishBatchResultEntry_Id                                     smithy.SchemaExtensions
+	ePublishBatchResultEntry_MessageId                              smithy.SchemaExtensions
+	ePublishBatchResultEntry_SequenceNumber                         smithy.SchemaExtensions
+	e_PublishBatchResultEntryList                                   smithy.SchemaExtensions
+	e_PublishBatchResultEntryList_member                            smithy.SchemaExtensions
+	eReplayLimitExceededException                                   smithy.SchemaExtensions
+	eReplayLimitExceededException_message                           smithy.SchemaExtensions
+	eResourceNotFoundException                                      smithy.SchemaExtensions
+	eResourceNotFoundException_message                              smithy.SchemaExtensions
+	eRouteType                                                      smithy.SchemaExtensions
+	eRouteType_Transactional                                        smithy.SchemaExtensions
+	eRouteType_Promotional                                          smithy.SchemaExtensions
+	eRouteType_Premium                                              smithy.SchemaExtensions
+	eSMSSandboxPhoneNumber                                          smithy.SchemaExtensions
+	eSMSSandboxPhoneNumber_PhoneNumber                              smithy.SchemaExtensions
+	eSMSSandboxPhoneNumber_Status                                   smithy.SchemaExtensions
+	e_SMSSandboxPhoneNumberList                                     smithy.SchemaExtensions
+	e_SMSSandboxPhoneNumberList_member                              smithy.SchemaExtensions
+	eSMSSandboxPhoneNumberVerificationStatus                        smithy.SchemaExtensions
+	eSMSSandboxPhoneNumberVerificationStatus_Pending                smithy.SchemaExtensions
+	eSMSSandboxPhoneNumberVerificationStatus_Verified               smithy.SchemaExtensions
+	eStaleTagException                                              smithy.SchemaExtensions
+	eStaleTagException_message                                      smithy.SchemaExtensions
+	e_String                                                        smithy.SchemaExtensions
+	e_subject                                                       smithy.SchemaExtensions
+	eSubscription                                                   smithy.SchemaExtensions
+	eSubscription_SubscriptionArn                                   smithy.SchemaExtensions
+	eSubscription_Owner                                             smithy.SchemaExtensions
+	eSubscription_Protocol                                          smithy.SchemaExtensions
+	eSubscription_Endpoint                                          smithy.SchemaExtensions
+	eSubscription_TopicArn                                          smithy.SchemaExtensions
+	e_subscriptionARN                                               smithy.SchemaExtensions
+	e_SubscriptionAttributesMap                                     smithy.SchemaExtensions
+	e_SubscriptionAttributesMap_key                                 smithy.SchemaExtensions
+	e_SubscriptionAttributesMap_value                               smithy.SchemaExtensions
+	eSubscriptionLimitExceededException                             smithy.SchemaExtensions
+	eSubscriptionLimitExceededException_message                     smithy.SchemaExtensions
+	e_SubscriptionsList                                             smithy.SchemaExtensions
+	e_SubscriptionsList_member                                      smithy.SchemaExtensions
+	eTag                                                            smithy.SchemaExtensions
+	eTag_Key                                                        smithy.SchemaExtensions
+	eTag_Value                                                      smithy.SchemaExtensions
+	e_TagKey                                                        smithy.SchemaExtensions
+	e_TagKeyList                                                    smithy.SchemaExtensions
+	e_TagKeyList_member                                             smithy.SchemaExtensions
+	eTagLimitExceededException                                      smithy.SchemaExtensions
+	eTagLimitExceededException_message                              smithy.SchemaExtensions
+	e_TagList                                                       smithy.SchemaExtensions
+	e_TagList_member                                                smithy.SchemaExtensions
+	eTagPolicyException                                             smithy.SchemaExtensions
+	eTagPolicyException_message                                     smithy.SchemaExtensions
+	e_TagValue                                                      smithy.SchemaExtensions
+	eThrottledException                                             smithy.SchemaExtensions
+	eThrottledException_message                                     smithy.SchemaExtensions
+	e_Timestamp                                                     smithy.SchemaExtensions
+	e_token                                                         smithy.SchemaExtensions
+	eTooManyEntriesInBatchRequestException                          smithy.SchemaExtensions
+	eTooManyEntriesInBatchRequestException_message                  smithy.SchemaExtensions
+	eTopic                                                          smithy.SchemaExtensions
+	eTopic_TopicArn                                                 smithy.SchemaExtensions
+	e_topicARN                                                      smithy.SchemaExtensions
+	e_TopicAttributesMap                                            smithy.SchemaExtensions
+	e_TopicAttributesMap_key                                        smithy.SchemaExtensions
+	e_TopicAttributesMap_value                                      smithy.SchemaExtensions
+	eTopicLimitExceededException                                    smithy.SchemaExtensions
+	eTopicLimitExceededException_message                            smithy.SchemaExtensions
+	e_topicName                                                     smithy.SchemaExtensions
+	e_TopicsList                                                    smithy.SchemaExtensions
+	e_TopicsList_member                                             smithy.SchemaExtensions
+	eUserErrorException                                             smithy.SchemaExtensions
+	eUserErrorException_message                                     smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_Message                                    smithy.SchemaExtensions
+	eVerificationException                                          smithy.SchemaExtensions
+	eVerificationException_Message                                  smithy.SchemaExtensions
+	eVerificationException_Status                                   smithy.SchemaExtensions
+	eAddPermissionInput                                             smithy.SchemaExtensions
+	eAddPermissionInput_TopicArn                                    smithy.SchemaExtensions
+	eAddPermissionInput_Label                                       smithy.SchemaExtensions
+	eAddPermissionInput_AWSAccountId                                smithy.SchemaExtensions
+	eAddPermissionInput_ActionName                                  smithy.SchemaExtensions
+	eCheckIfPhoneNumberIsOptedOutInput                              smithy.SchemaExtensions
+	eCheckIfPhoneNumberIsOptedOutInput_phoneNumber                  smithy.SchemaExtensions
+	eCheckIfPhoneNumberIsOptedOutResponse                           smithy.SchemaExtensions
+	eCheckIfPhoneNumberIsOptedOutResponse_isOptedOut                smithy.SchemaExtensions
+	eConfirmSubscriptionInput                                       smithy.SchemaExtensions
+	eConfirmSubscriptionInput_TopicArn                              smithy.SchemaExtensions
+	eConfirmSubscriptionInput_Token                                 smithy.SchemaExtensions
+	eConfirmSubscriptionInput_AuthenticateOnUnsubscribe             smithy.SchemaExtensions
+	eConfirmSubscriptionResponse                                    smithy.SchemaExtensions
+	eConfirmSubscriptionResponse_SubscriptionArn                    smithy.SchemaExtensions
+	eCreatePlatformApplicationInput                                 smithy.SchemaExtensions
+	eCreatePlatformApplicationInput_Name                            smithy.SchemaExtensions
+	eCreatePlatformApplicationInput_Platform                        smithy.SchemaExtensions
+	eCreatePlatformApplicationInput_Attributes                      smithy.SchemaExtensions
+	eCreatePlatformApplicationResponse                              smithy.SchemaExtensions
+	eCreatePlatformApplicationResponse_PlatformApplicationArn       smithy.SchemaExtensions
+	eCreatePlatformEndpointInput                                    smithy.SchemaExtensions
+	eCreatePlatformEndpointInput_PlatformApplicationArn             smithy.SchemaExtensions
+	eCreatePlatformEndpointInput_Token                              smithy.SchemaExtensions
+	eCreatePlatformEndpointInput_CustomUserData                     smithy.SchemaExtensions
+	eCreatePlatformEndpointInput_Attributes                         smithy.SchemaExtensions
+	eCreateEndpointResponse                                         smithy.SchemaExtensions
+	eCreateEndpointResponse_EndpointArn                             smithy.SchemaExtensions
+	eCreateSMSSandboxPhoneNumberInput                               smithy.SchemaExtensions
+	eCreateSMSSandboxPhoneNumberInput_PhoneNumber                   smithy.SchemaExtensions
+	eCreateSMSSandboxPhoneNumberInput_LanguageCode                  smithy.SchemaExtensions
+	eCreateSMSSandboxPhoneNumberResult                              smithy.SchemaExtensions
+	eCreateTopicInput                                               smithy.SchemaExtensions
+	eCreateTopicInput_Name                                          smithy.SchemaExtensions
+	eCreateTopicInput_Attributes                                    smithy.SchemaExtensions
+	eCreateTopicInput_Tags                                          smithy.SchemaExtensions
+	eCreateTopicInput_DataProtectionPolicy                          smithy.SchemaExtensions
+	eCreateTopicResponse                                            smithy.SchemaExtensions
+	eCreateTopicResponse_TopicArn                                   smithy.SchemaExtensions
+	eDeleteEndpointInput                                            smithy.SchemaExtensions
+	eDeleteEndpointInput_EndpointArn                                smithy.SchemaExtensions
+	eDeletePlatformApplicationInput                                 smithy.SchemaExtensions
+	eDeletePlatformApplicationInput_PlatformApplicationArn          smithy.SchemaExtensions
+	eDeleteSMSSandboxPhoneNumberInput                               smithy.SchemaExtensions
+	eDeleteSMSSandboxPhoneNumberInput_PhoneNumber                   smithy.SchemaExtensions
+	eDeleteSMSSandboxPhoneNumberResult                              smithy.SchemaExtensions
+	eDeleteTopicInput                                               smithy.SchemaExtensions
+	eDeleteTopicInput_TopicArn                                      smithy.SchemaExtensions
+	eGetDataProtectionPolicyInput                                   smithy.SchemaExtensions
+	eGetDataProtectionPolicyInput_ResourceArn                       smithy.SchemaExtensions
+	eGetDataProtectionPolicyResponse                                smithy.SchemaExtensions
+	eGetDataProtectionPolicyResponse_DataProtectionPolicy           smithy.SchemaExtensions
+	eGetEndpointAttributesInput                                     smithy.SchemaExtensions
+	eGetEndpointAttributesInput_EndpointArn                         smithy.SchemaExtensions
+	eGetEndpointAttributesResponse                                  smithy.SchemaExtensions
+	eGetEndpointAttributesResponse_Attributes                       smithy.SchemaExtensions
+	eGetPlatformApplicationAttributesInput                          smithy.SchemaExtensions
+	eGetPlatformApplicationAttributesInput_PlatformApplicationArn   smithy.SchemaExtensions
+	eGetPlatformApplicationAttributesResponse                       smithy.SchemaExtensions
+	eGetPlatformApplicationAttributesResponse_Attributes            smithy.SchemaExtensions
+	eGetSMSAttributesInput                                          smithy.SchemaExtensions
+	eGetSMSAttributesInput_attributes                               smithy.SchemaExtensions
+	eGetSMSAttributesResponse                                       smithy.SchemaExtensions
+	eGetSMSAttributesResponse_attributes                            smithy.SchemaExtensions
+	eGetSMSSandboxAccountStatusInput                                smithy.SchemaExtensions
+	eGetSMSSandboxAccountStatusResult                               smithy.SchemaExtensions
+	eGetSMSSandboxAccountStatusResult_IsInSandbox                   smithy.SchemaExtensions
+	eGetSubscriptionAttributesInput                                 smithy.SchemaExtensions
+	eGetSubscriptionAttributesInput_SubscriptionArn                 smithy.SchemaExtensions
+	eGetSubscriptionAttributesResponse                              smithy.SchemaExtensions
+	eGetSubscriptionAttributesResponse_Attributes                   smithy.SchemaExtensions
+	eGetTopicAttributesInput                                        smithy.SchemaExtensions
+	eGetTopicAttributesInput_TopicArn                               smithy.SchemaExtensions
+	eGetTopicAttributesResponse                                     smithy.SchemaExtensions
+	eGetTopicAttributesResponse_Attributes                          smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationInput                        smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationInput_PlatformApplicationArn smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationInput_NextToken              smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationResponse                     smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationResponse_Endpoints           smithy.SchemaExtensions
+	eListEndpointsByPlatformApplicationResponse_NextToken           smithy.SchemaExtensions
+	eListOriginationNumbersRequest                                  smithy.SchemaExtensions
+	eListOriginationNumbersRequest_NextToken                        smithy.SchemaExtensions
+	eListOriginationNumbersRequest_MaxResults                       smithy.SchemaExtensions
+	eListOriginationNumbersResult                                   smithy.SchemaExtensions
+	eListOriginationNumbersResult_NextToken                         smithy.SchemaExtensions
+	eListOriginationNumbersResult_PhoneNumbers                      smithy.SchemaExtensions
+	eListPhoneNumbersOptedOutInput                                  smithy.SchemaExtensions
+	eListPhoneNumbersOptedOutInput_nextToken                        smithy.SchemaExtensions
+	eListPhoneNumbersOptedOutResponse                               smithy.SchemaExtensions
+	eListPhoneNumbersOptedOutResponse_phoneNumbers                  smithy.SchemaExtensions
+	eListPhoneNumbersOptedOutResponse_nextToken                     smithy.SchemaExtensions
+	eListPlatformApplicationsInput                                  smithy.SchemaExtensions
+	eListPlatformApplicationsInput_NextToken                        smithy.SchemaExtensions
+	eListPlatformApplicationsResponse                               smithy.SchemaExtensions
+	eListPlatformApplicationsResponse_PlatformApplications          smithy.SchemaExtensions
+	eListPlatformApplicationsResponse_NextToken                     smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersInput                                smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersInput_NextToken                      smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersInput_MaxResults                     smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersResult                               smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersResult_PhoneNumbers                  smithy.SchemaExtensions
+	eListSMSSandboxPhoneNumbersResult_NextToken                     smithy.SchemaExtensions
+	eListSubscriptionsByTopicInput                                  smithy.SchemaExtensions
+	eListSubscriptionsByTopicInput_TopicArn                         smithy.SchemaExtensions
+	eListSubscriptionsByTopicInput_NextToken                        smithy.SchemaExtensions
+	eListSubscriptionsByTopicResponse                               smithy.SchemaExtensions
+	eListSubscriptionsByTopicResponse_Subscriptions                 smithy.SchemaExtensions
+	eListSubscriptionsByTopicResponse_NextToken                     smithy.SchemaExtensions
+	eListSubscriptionsInput                                         smithy.SchemaExtensions
+	eListSubscriptionsInput_NextToken                               smithy.SchemaExtensions
+	eListSubscriptionsResponse                                      smithy.SchemaExtensions
+	eListSubscriptionsResponse_Subscriptions                        smithy.SchemaExtensions
+	eListSubscriptionsResponse_NextToken                            smithy.SchemaExtensions
+	eListTagsForResourceRequest                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                         smithy.SchemaExtensions
+	eListTagsForResourceResponse                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                               smithy.SchemaExtensions
+	eListTopicsInput                                                smithy.SchemaExtensions
+	eListTopicsInput_NextToken                                      smithy.SchemaExtensions
+	eListTopicsResponse                                             smithy.SchemaExtensions
+	eListTopicsResponse_Topics                                      smithy.SchemaExtensions
+	eListTopicsResponse_NextToken                                   smithy.SchemaExtensions
+	eOptInPhoneNumberInput                                          smithy.SchemaExtensions
+	eOptInPhoneNumberInput_phoneNumber                              smithy.SchemaExtensions
+	eOptInPhoneNumberResponse                                       smithy.SchemaExtensions
+	ePublishBatchInput                                              smithy.SchemaExtensions
+	ePublishBatchInput_TopicArn                                     smithy.SchemaExtensions
+	ePublishBatchInput_PublishBatchRequestEntries                   smithy.SchemaExtensions
+	ePublishBatchResponse                                           smithy.SchemaExtensions
+	ePublishBatchResponse_Successful                                smithy.SchemaExtensions
+	ePublishBatchResponse_Failed                                    smithy.SchemaExtensions
+	ePublishInput                                                   smithy.SchemaExtensions
+	ePublishInput_TopicArn                                          smithy.SchemaExtensions
+	ePublishInput_TargetArn                                         smithy.SchemaExtensions
+	ePublishInput_PhoneNumber                                       smithy.SchemaExtensions
+	ePublishInput_Message                                           smithy.SchemaExtensions
+	ePublishInput_Subject                                           smithy.SchemaExtensions
+	ePublishInput_MessageStructure                                  smithy.SchemaExtensions
+	ePublishInput_MessageAttributes                                 smithy.SchemaExtensions
+	ePublishInput_MessageDeduplicationId                            smithy.SchemaExtensions
+	ePublishInput_MessageGroupId                                    smithy.SchemaExtensions
+	ePublishResponse                                                smithy.SchemaExtensions
+	ePublishResponse_MessageId                                      smithy.SchemaExtensions
+	ePublishResponse_SequenceNumber                                 smithy.SchemaExtensions
+	ePutDataProtectionPolicyInput                                   smithy.SchemaExtensions
+	ePutDataProtectionPolicyInput_ResourceArn                       smithy.SchemaExtensions
+	ePutDataProtectionPolicyInput_DataProtectionPolicy              smithy.SchemaExtensions
+	eRemovePermissionInput                                          smithy.SchemaExtensions
+	eRemovePermissionInput_TopicArn                                 smithy.SchemaExtensions
+	eRemovePermissionInput_Label                                    smithy.SchemaExtensions
+	eSetEndpointAttributesInput                                     smithy.SchemaExtensions
+	eSetEndpointAttributesInput_EndpointArn                         smithy.SchemaExtensions
+	eSetEndpointAttributesInput_Attributes                          smithy.SchemaExtensions
+	eSetPlatformApplicationAttributesInput                          smithy.SchemaExtensions
+	eSetPlatformApplicationAttributesInput_PlatformApplicationArn   smithy.SchemaExtensions
+	eSetPlatformApplicationAttributesInput_Attributes               smithy.SchemaExtensions
+	eSetSMSAttributesInput                                          smithy.SchemaExtensions
+	eSetSMSAttributesInput_attributes                               smithy.SchemaExtensions
+	eSetSMSAttributesResponse                                       smithy.SchemaExtensions
+	eSetSubscriptionAttributesInput                                 smithy.SchemaExtensions
+	eSetSubscriptionAttributesInput_SubscriptionArn                 smithy.SchemaExtensions
+	eSetSubscriptionAttributesInput_AttributeName                   smithy.SchemaExtensions
+	eSetSubscriptionAttributesInput_AttributeValue                  smithy.SchemaExtensions
+	eSetTopicAttributesInput                                        smithy.SchemaExtensions
+	eSetTopicAttributesInput_TopicArn                               smithy.SchemaExtensions
+	eSetTopicAttributesInput_AttributeName                          smithy.SchemaExtensions
+	eSetTopicAttributesInput_AttributeValue                         smithy.SchemaExtensions
+	eSubscribeInput                                                 smithy.SchemaExtensions
+	eSubscribeInput_TopicArn                                        smithy.SchemaExtensions
+	eSubscribeInput_Protocol                                        smithy.SchemaExtensions
+	eSubscribeInput_Endpoint                                        smithy.SchemaExtensions
+	eSubscribeInput_Attributes                                      smithy.SchemaExtensions
+	eSubscribeInput_ReturnSubscriptionArn                           smithy.SchemaExtensions
+	eSubscribeResponse                                              smithy.SchemaExtensions
+	eSubscribeResponse_SubscriptionArn                              smithy.SchemaExtensions
+	eTagResourceRequest                                             smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                 smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                        smithy.SchemaExtensions
+	eTagResourceResponse                                            smithy.SchemaExtensions
+	eUnsubscribeInput                                               smithy.SchemaExtensions
+	eUnsubscribeInput_SubscriptionArn                               smithy.SchemaExtensions
+	eUntagResourceRequest                                           smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                               smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                   smithy.SchemaExtensions
+	eUntagResourceResponse                                          smithy.SchemaExtensions
+	eVerifySMSSandboxPhoneNumberInput                               smithy.SchemaExtensions
+	eVerifySMSSandboxPhoneNumberInput_PhoneNumber                   smithy.SchemaExtensions
+	eVerifySMSSandboxPhoneNumberInput_OneTimePassword               smithy.SchemaExtensions
+	eVerifySMSSandboxPhoneNumberResult                              smithy.SchemaExtensions
+)
+
+var (
+	iAddPermission                              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "AddPermission"}
+	iCheckIfPhoneNumberIsOptedOut               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CheckIfPhoneNumberIsOptedOut"}
+	iConfirmSubscription                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ConfirmSubscription"}
+	iCreatePlatformApplication                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreatePlatformApplication"}
+	iCreatePlatformEndpoint                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreatePlatformEndpoint"}
+	iCreateSMSSandboxPhoneNumber                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateSMSSandboxPhoneNumber"}
+	iCreateTopic                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateTopic"}
+	iDeleteEndpoint                             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteEndpoint"}
+	iDeletePlatformApplication                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeletePlatformApplication"}
+	iDeleteSMSSandboxPhoneNumber                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteSMSSandboxPhoneNumber"}
+	iDeleteTopic                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteTopic"}
+	iGetDataProtectionPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetDataProtectionPolicy"}
+	iGetEndpointAttributes                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetEndpointAttributes"}
+	iGetPlatformApplicationAttributes           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetPlatformApplicationAttributes"}
+	iGetSMSAttributes                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSAttributes"}
+	iGetSMSSandboxAccountStatus                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSSandboxAccountStatus"}
+	iGetSubscriptionAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSubscriptionAttributes"}
+	iGetTopicAttributes                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetTopicAttributes"}
+	iListEndpointsByPlatformApplication         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListEndpointsByPlatformApplication"}
+	iListOriginationNumbers                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListOriginationNumbers"}
+	iListPhoneNumbersOptedOut                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPhoneNumbersOptedOut"}
+	iListPlatformApplications                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPlatformApplications"}
+	iListSMSSandboxPhoneNumbers                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSMSSandboxPhoneNumbers"}
+	iListSubscriptions                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptions"}
+	iListSubscriptionsByTopic                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptionsByTopic"}
+	iListTagsForResource                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTagsForResource"}
+	iListTopics                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTopics"}
+	iOptInPhoneNumber                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "OptInPhoneNumber"}
+	iPublish                                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Publish"}
+	iPublishBatch                               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatch"}
+	iPutDataProtectionPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PutDataProtectionPolicy"}
+	iRemovePermission                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "RemovePermission"}
+	iSetEndpointAttributes                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetEndpointAttributes"}
+	iSetPlatformApplicationAttributes           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetPlatformApplicationAttributes"}
+	iSetSMSAttributes                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetSMSAttributes"}
+	iSetSubscriptionAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetSubscriptionAttributes"}
+	iSetTopicAttributes                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetTopicAttributes"}
+	iSubscribe                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Subscribe"}
+	iTagResource                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagResource"}
+	iUnsubscribe                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Unsubscribe"}
+	iUntagResource                              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "UntagResource"}
+	iVerifySMSSandboxPhoneNumber                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "VerifySMSSandboxPhoneNumber"}
+	i_AmazonSimpleNotificationService           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "AmazonSimpleNotificationService"}
+	i_account                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "account"}
+	i_action                                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "action"}
+	i_ActionsList                               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ActionsList"}
+	i_AmazonResourceName                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "AmazonResourceName"}
+	i_attributeName                             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "attributeName"}
+	i_attributeValue                            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "attributeValue"}
+	i_authenticateOnUnsubscribe                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "authenticateOnUnsubscribe"}
+	iAuthorizationErrorException                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "AuthorizationErrorException"}
+	iBatchEntryIdsNotDistinctException          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "BatchEntryIdsNotDistinctException"}
+	iBatchRequestTooLongException               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "BatchRequestTooLongException"}
+	iBatchResultErrorEntry                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "BatchResultErrorEntry"}
+	i_BatchResultErrorEntryList                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "BatchResultErrorEntryList"}
+	i_Binary                                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Binary"}
+	i_boolean                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "boolean"}
+	iConcurrentAccessException                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ConcurrentAccessException"}
+	i_delegate                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "delegate"}
+	i_DelegatesList                             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DelegatesList"}
+	iEmptyBatchRequestException                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "EmptyBatchRequestException"}
+	iEndpoint                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Endpoint"}
+	i_Endpoint2                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Endpoint2"}
+	iEndpointDisabledException                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "EndpointDisabledException"}
+	iFilterPolicyLimitExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "FilterPolicyLimitExceededException"}
+	iInternalErrorException                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InternalErrorException"}
+	iInvalidBatchEntryIdException               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InvalidBatchEntryIdException"}
+	iInvalidParameterException                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InvalidParameterException"}
+	iInvalidParameterValueException             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InvalidParameterValueException"}
+	iInvalidSecurityException                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InvalidSecurityException"}
+	iInvalidStateException                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "InvalidStateException"}
+	i_Iso2CountryCode                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Iso2CountryCode"}
+	iKMSAccessDeniedException                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSAccessDeniedException"}
+	iKMSDisabledException                       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSDisabledException"}
+	iKMSInvalidStateException                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSInvalidStateException"}
+	iKMSNotFoundException                       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSNotFoundException"}
+	iKMSOptInRequired                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSOptInRequired"}
+	iKMSThrottlingException                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "KMSThrottlingException"}
+	i_label                                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "label"}
+	iLanguageCodeString                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "LanguageCodeString"}
+	i_ListOfEndpoints                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListOfEndpoints"}
+	i_ListOfPlatformApplications                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListOfPlatformApplications"}
+	i_ListString                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListString"}
+	i_MapStringToString                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "MapStringToString"}
+	i_MaxItems                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "MaxItems"}
+	i_MaxItemsListOriginationNumbers            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "MaxItemsListOriginationNumbers"}
+	i_message                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "message"}
+	i_MessageAttributeMap                       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "MessageAttributeMap"}
+	iMessageAttributeValue                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "MessageAttributeValue"}
+	i_messageId                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "messageId"}
+	i_messageStructure                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "messageStructure"}
+	i_nextToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "nextToken"}
+	iNotFoundException                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "NotFoundException"}
+	iNumberCapability                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "NumberCapability"}
+	i_NumberCapabilityList                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "NumberCapabilityList"}
+	iOptedOutException                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "OptedOutException"}
+	i_OTPCode                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "OTPCode"}
+	i_PhoneNumber                               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PhoneNumber"}
+	iPhoneNumberInformation                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PhoneNumberInformation"}
+	i_PhoneNumberInformationList                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PhoneNumberInformationList"}
+	i_PhoneNumberList                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PhoneNumberList"}
+	i_PhoneNumberString                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PhoneNumberString"}
+	iPlatformApplication                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PlatformApplication"}
+	iPlatformApplicationDisabledException       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PlatformApplicationDisabledException"}
+	i_protocol                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "protocol"}
+	iPublishBatchRequestEntry                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchRequestEntry"}
+	i_PublishBatchRequestEntryList              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchRequestEntryList"}
+	iPublishBatchResultEntry                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchResultEntry"}
+	i_PublishBatchResultEntryList               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchResultEntryList"}
+	iReplayLimitExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ReplayLimitExceededException"}
+	iResourceNotFoundException                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ResourceNotFoundException"}
+	iRouteType                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "RouteType"}
+	iSMSSandboxPhoneNumber                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SMSSandboxPhoneNumber"}
+	i_SMSSandboxPhoneNumberList                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SMSSandboxPhoneNumberList"}
+	iSMSSandboxPhoneNumberVerificationStatus    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SMSSandboxPhoneNumberVerificationStatus"}
+	iStaleTagException                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "StaleTagException"}
+	i_String                                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "String"}
+	i_subject                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "subject"}
+	iSubscription                               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Subscription"}
+	i_subscriptionARN                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "subscriptionARN"}
+	i_SubscriptionAttributesMap                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SubscriptionAttributesMap"}
+	iSubscriptionLimitExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SubscriptionLimitExceededException"}
+	i_SubscriptionsList                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SubscriptionsList"}
+	iTag                                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Tag"}
+	i_TagKey                                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagKey"}
+	i_TagKeyList                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagKeyList"}
+	iTagLimitExceededException                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagLimitExceededException"}
+	i_TagList                                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagList"}
+	iTagPolicyException                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagPolicyException"}
+	i_TagValue                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagValue"}
+	iThrottledException                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ThrottledException"}
+	i_Timestamp                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Timestamp"}
+	i_token                                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "token"}
+	iTooManyEntriesInBatchRequestException      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TooManyEntriesInBatchRequestException"}
+	iTopic                                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "Topic"}
+	i_topicARN                                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "topicARN"}
+	i_TopicAttributesMap                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TopicAttributesMap"}
+	iTopicLimitExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TopicLimitExceededException"}
+	i_topicName                                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "topicName"}
+	i_TopicsList                                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TopicsList"}
+	iUserErrorException                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "UserErrorException"}
+	iValidationException                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ValidationException"}
+	iVerificationException                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "VerificationException"}
+	iAddPermissionInput                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "AddPermissionInput"}
+	iCheckIfPhoneNumberIsOptedOutInput          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CheckIfPhoneNumberIsOptedOutInput"}
+	iCheckIfPhoneNumberIsOptedOutResponse       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CheckIfPhoneNumberIsOptedOutResponse"}
+	iConfirmSubscriptionInput                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ConfirmSubscriptionInput"}
+	iConfirmSubscriptionResponse                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ConfirmSubscriptionResponse"}
+	iCreatePlatformApplicationInput             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreatePlatformApplicationInput"}
+	iCreatePlatformApplicationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreatePlatformApplicationResponse"}
+	iCreatePlatformEndpointInput                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreatePlatformEndpointInput"}
+	iCreateEndpointResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateEndpointResponse"}
+	iCreateSMSSandboxPhoneNumberInput           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateSMSSandboxPhoneNumberInput"}
+	iCreateSMSSandboxPhoneNumberResult          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateSMSSandboxPhoneNumberResult"}
+	iCreateTopicInput                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateTopicInput"}
+	iCreateTopicResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "CreateTopicResponse"}
+	iDeleteEndpointInput                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteEndpointInput"}
+	iDeletePlatformApplicationInput             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeletePlatformApplicationInput"}
+	iDeleteSMSSandboxPhoneNumberInput           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteSMSSandboxPhoneNumberInput"}
+	iDeleteSMSSandboxPhoneNumberResult          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteSMSSandboxPhoneNumberResult"}
+	iDeleteTopicInput                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "DeleteTopicInput"}
+	iGetDataProtectionPolicyInput               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetDataProtectionPolicyInput"}
+	iGetDataProtectionPolicyResponse            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetDataProtectionPolicyResponse"}
+	iGetEndpointAttributesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetEndpointAttributesInput"}
+	iGetEndpointAttributesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetEndpointAttributesResponse"}
+	iGetPlatformApplicationAttributesInput      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetPlatformApplicationAttributesInput"}
+	iGetPlatformApplicationAttributesResponse   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetPlatformApplicationAttributesResponse"}
+	iGetSMSAttributesInput                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSAttributesInput"}
+	iGetSMSAttributesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSAttributesResponse"}
+	iGetSMSSandboxAccountStatusInput            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSSandboxAccountStatusInput"}
+	iGetSMSSandboxAccountStatusResult           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSMSSandboxAccountStatusResult"}
+	iGetSubscriptionAttributesInput             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSubscriptionAttributesInput"}
+	iGetSubscriptionAttributesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetSubscriptionAttributesResponse"}
+	iGetTopicAttributesInput                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetTopicAttributesInput"}
+	iGetTopicAttributesResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "GetTopicAttributesResponse"}
+	iListEndpointsByPlatformApplicationInput    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListEndpointsByPlatformApplicationInput"}
+	iListEndpointsByPlatformApplicationResponse = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListEndpointsByPlatformApplicationResponse"}
+	iListOriginationNumbersRequest              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListOriginationNumbersRequest"}
+	iListOriginationNumbersResult               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListOriginationNumbersResult"}
+	iListPhoneNumbersOptedOutInput              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPhoneNumbersOptedOutInput"}
+	iListPhoneNumbersOptedOutResponse           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPhoneNumbersOptedOutResponse"}
+	iListPlatformApplicationsInput              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPlatformApplicationsInput"}
+	iListPlatformApplicationsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListPlatformApplicationsResponse"}
+	iListSMSSandboxPhoneNumbersInput            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSMSSandboxPhoneNumbersInput"}
+	iListSMSSandboxPhoneNumbersResult           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSMSSandboxPhoneNumbersResult"}
+	iListSubscriptionsByTopicInput              = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptionsByTopicInput"}
+	iListSubscriptionsByTopicResponse           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptionsByTopicResponse"}
+	iListSubscriptionsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptionsInput"}
+	iListSubscriptionsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListSubscriptionsResponse"}
+	iListTagsForResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTagsForResourceResponse"}
+	iListTopicsInput                            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTopicsInput"}
+	iListTopicsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "ListTopicsResponse"}
+	iOptInPhoneNumberInput                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "OptInPhoneNumberInput"}
+	iOptInPhoneNumberResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "OptInPhoneNumberResponse"}
+	iPublishBatchInput                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchInput"}
+	iPublishBatchResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishBatchResponse"}
+	iPublishInput                               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishInput"}
+	iPublishResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PublishResponse"}
+	iPutDataProtectionPolicyInput               = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "PutDataProtectionPolicyInput"}
+	iRemovePermissionInput                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "RemovePermissionInput"}
+	iSetEndpointAttributesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetEndpointAttributesInput"}
+	iSetPlatformApplicationAttributesInput      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetPlatformApplicationAttributesInput"}
+	iSetSMSAttributesInput                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetSMSAttributesInput"}
+	iSetSMSAttributesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetSMSAttributesResponse"}
+	iSetSubscriptionAttributesInput             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetSubscriptionAttributesInput"}
+	iSetTopicAttributesInput                    = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SetTopicAttributesInput"}
+	iSubscribeInput                             = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SubscribeInput"}
+	iSubscribeResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "SubscribeResponse"}
+	iTagResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagResourceRequest"}
+	iTagResourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "TagResourceResponse"}
+	iUnsubscribeInput                           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "UnsubscribeInput"}
+	iUntagResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "UntagResourceResponse"}
+	iVerifySMSSandboxPhoneNumberInput           = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "VerifySMSSandboxPhoneNumberInput"}
+	iVerifySMSSandboxPhoneNumberResult          = smithy.ShapeName{Namespace: "com.amazonaws.sns", Name: "VerifySMSSandboxPhoneNumberResult"}
+	pUnit                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://sns.amazonaws.com/doc/2010-03-31/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AuthorizationError",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BatchEntryIdsNotDistinct",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BatchRequestTooLong",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentAccess",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EmptyBatchRequest",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EndpointDisabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "FilterPolicyLimitExceeded",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalError",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidBatchEntryId",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ParameterValueInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSecurity",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSAccessDenied",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSDisabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSInvalidState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSOptInRequired",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSThrottling",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Name"}}, DirectMask: 0x8}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Value"}}, DirectMask: 0x8}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OptedOut",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PlatformApplicationDisabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ReplayLimitExceeded",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "StaleTag",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubscriptionLimitExceeded",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TagLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TagPolicy",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Throttled",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyEntriesInBatchRequest",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TopicLimitExceeded",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UserError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t38 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var m_ActionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionsList_member}}
+var mAuthorizationErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationErrorException_message}}
+var mBatchEntryIdsNotDistinctException = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchEntryIdsNotDistinctException_message}}
+var mBatchRequestTooLongException = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRequestTooLongException_message}}
+var mBatchResultErrorEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchResultErrorEntry_Id, &sBatchResultErrorEntry_Code, &sBatchResultErrorEntry_Message, &sBatchResultErrorEntry_SenderFault}}
+var m_BatchResultErrorEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchResultErrorEntryList_member}}
+var mConcurrentAccessException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentAccessException_message}}
+var m_DelegatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DelegatesList_member}}
+var mEmptyBatchRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sEmptyBatchRequestException_message}}
+var mEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpoint_EndpointArn, &sEndpoint_Attributes}}
+var mEndpointDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDisabledException_message}}
+var mFilterPolicyLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterPolicyLimitExceededException_message}}
+var mInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalErrorException_message}}
+var mInvalidBatchEntryIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidBatchEntryIdException_message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message}}
+var mInvalidParameterValueException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterValueException_message}}
+var mInvalidSecurityException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSecurityException_message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_message}}
+var mKMSAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSAccessDeniedException_message}}
+var mKMSDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSDisabledException_message}}
+var mKMSInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSInvalidStateException_message}}
+var mKMSNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSNotFoundException_message}}
+var mKMSOptInRequired = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSOptInRequired_message}}
+var mKMSThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSThrottlingException_message}}
+var mLanguageCodeString = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageCodeString_en_US, &sLanguageCodeString_en_GB, &sLanguageCodeString_es_419, &sLanguageCodeString_es_ES, &sLanguageCodeString_de_DE, &sLanguageCodeString_fr_CA, &sLanguageCodeString_fr_FR, &sLanguageCodeString_it_IT, &sLanguageCodeString_jp_JP, &sLanguageCodeString_pt_BR, &sLanguageCodeString_kr_KR, &sLanguageCodeString_zh_CN, &sLanguageCodeString_zh_TW}, Hash: &hLanguageCodeString}
+var m_ListOfEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfEndpoints_member}}
+var m_ListOfPlatformApplications = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfPlatformApplications_member}}
+var m_ListString = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListString_member}}
+var m_MapStringToString = smithy.SchemaMembers{List: []*smithy.Schema{&s_MapStringToString_key, &s_MapStringToString_value}}
+var m_MessageAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_MessageAttributeMap_key, &s_MessageAttributeMap_value}}
+var mMessageAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageAttributeValue_DataType, &sMessageAttributeValue_StringValue, &sMessageAttributeValue_BinaryValue}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mNumberCapability = smithy.SchemaMembers{List: []*smithy.Schema{&sNumberCapability_SMS, &sNumberCapability_MMS, &sNumberCapability_VOICE}}
+var m_NumberCapabilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NumberCapabilityList_member}}
+var mOptedOutException = smithy.SchemaMembers{List: []*smithy.Schema{&sOptedOutException_message}}
+var mPhoneNumberInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberInformation_CreatedAt, &sPhoneNumberInformation_PhoneNumber, &sPhoneNumberInformation_Status, &sPhoneNumberInformation_Iso2CountryCode, &sPhoneNumberInformation_RouteType, &sPhoneNumberInformation_NumberCapabilities}}
+var m_PhoneNumberInformationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberInformationList_member}}
+var m_PhoneNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberList_member}}
+var mPlatformApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformApplication_PlatformApplicationArn, &sPlatformApplication_Attributes}}
+var mPlatformApplicationDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformApplicationDisabledException_message}}
+var mPublishBatchRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishBatchRequestEntry_Id, &sPublishBatchRequestEntry_Message, &sPublishBatchRequestEntry_Subject, &sPublishBatchRequestEntry_MessageStructure, &sPublishBatchRequestEntry_MessageAttributes, &sPublishBatchRequestEntry_MessageDeduplicationId, &sPublishBatchRequestEntry_MessageGroupId}}
+var m_PublishBatchRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PublishBatchRequestEntryList_member}}
+var mPublishBatchResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishBatchResultEntry_Id, &sPublishBatchResultEntry_MessageId, &sPublishBatchResultEntry_SequenceNumber}}
+var m_PublishBatchResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PublishBatchResultEntryList_member}}
+var mReplayLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sReplayLimitExceededException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRouteType = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteType_Transactional, &sRouteType_Promotional, &sRouteType_Premium}}
+var mSMSSandboxPhoneNumber = smithy.SchemaMembers{List: []*smithy.Schema{&sSMSSandboxPhoneNumber_PhoneNumber, &sSMSSandboxPhoneNumber_Status}}
+var m_SMSSandboxPhoneNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SMSSandboxPhoneNumberList_member}}
+var mSMSSandboxPhoneNumberVerificationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSMSSandboxPhoneNumberVerificationStatus_Pending, &sSMSSandboxPhoneNumberVerificationStatus_Verified}}
+var mStaleTagException = smithy.SchemaMembers{List: []*smithy.Schema{&sStaleTagException_message}}
+var mSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscription_SubscriptionArn, &sSubscription_Owner, &sSubscription_Protocol, &sSubscription_Endpoint, &sSubscription_TopicArn}}
+var m_SubscriptionAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionAttributesMap_key, &s_SubscriptionAttributesMap_value}}
+var mSubscriptionLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionLimitExceededException_message}}
+var m_SubscriptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionsList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagLimitExceededException_message}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTagPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPolicyException_message}}
+var mThrottledException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledException_message}}
+var mTooManyEntriesInBatchRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyEntriesInBatchRequestException_message}}
+var mTopic = smithy.SchemaMembers{List: []*smithy.Schema{&sTopic_TopicArn}}
+var m_TopicAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TopicAttributesMap_key, &s_TopicAttributesMap_value}}
+var mTopicLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicLimitExceededException_message}}
+var m_TopicsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TopicsList_member}}
+var mUserErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sUserErrorException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mVerificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sVerificationException_Message, &sVerificationException_Status}}
+var mAddPermissionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddPermissionInput_TopicArn, &sAddPermissionInput_Label, &sAddPermissionInput_AWSAccountId, &sAddPermissionInput_ActionName}}
+var mCheckIfPhoneNumberIsOptedOutInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCheckIfPhoneNumberIsOptedOutInput_phoneNumber}}
+var mCheckIfPhoneNumberIsOptedOutResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCheckIfPhoneNumberIsOptedOutResponse_isOptedOut}}
+var mConfirmSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmSubscriptionInput_TopicArn, &sConfirmSubscriptionInput_Token, &sConfirmSubscriptionInput_AuthenticateOnUnsubscribe}}
+var mConfirmSubscriptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmSubscriptionResponse_SubscriptionArn}}
+var mCreatePlatformApplicationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlatformApplicationInput_Name, &sCreatePlatformApplicationInput_Platform, &sCreatePlatformApplicationInput_Attributes}}
+var mCreatePlatformApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlatformApplicationResponse_PlatformApplicationArn}}
+var mCreatePlatformEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePlatformEndpointInput_PlatformApplicationArn, &sCreatePlatformEndpointInput_Token, &sCreatePlatformEndpointInput_CustomUserData, &sCreatePlatformEndpointInput_Attributes}}
+var mCreateEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEndpointResponse_EndpointArn}}
+var mCreateSMSSandboxPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSMSSandboxPhoneNumberInput_PhoneNumber, &sCreateSMSSandboxPhoneNumberInput_LanguageCode}}
+var mCreateTopicInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTopicInput_Name, &sCreateTopicInput_Attributes, &sCreateTopicInput_Tags, &sCreateTopicInput_DataProtectionPolicy}}
+var mCreateTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTopicResponse_TopicArn}}
+var mDeleteEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEndpointInput_EndpointArn}}
+var mDeletePlatformApplicationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePlatformApplicationInput_PlatformApplicationArn}}
+var mDeleteSMSSandboxPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSMSSandboxPhoneNumberInput_PhoneNumber}}
+var mDeleteTopicInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTopicInput_TopicArn}}
+var mGetDataProtectionPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataProtectionPolicyInput_ResourceArn}}
+var mGetDataProtectionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataProtectionPolicyResponse_DataProtectionPolicy}}
+var mGetEndpointAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEndpointAttributesInput_EndpointArn}}
+var mGetEndpointAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEndpointAttributesResponse_Attributes}}
+var mGetPlatformApplicationAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlatformApplicationAttributesInput_PlatformApplicationArn}}
+var mGetPlatformApplicationAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPlatformApplicationAttributesResponse_Attributes}}
+var mGetSMSAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSMSAttributesInput_attributes}}
+var mGetSMSAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSMSAttributesResponse_attributes}}
+var mGetSMSSandboxAccountStatusResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSMSSandboxAccountStatusResult_IsInSandbox}}
+var mGetSubscriptionAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionAttributesInput_SubscriptionArn}}
+var mGetSubscriptionAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionAttributesResponse_Attributes}}
+var mGetTopicAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTopicAttributesInput_TopicArn}}
+var mGetTopicAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTopicAttributesResponse_Attributes}}
+var mListEndpointsByPlatformApplicationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEndpointsByPlatformApplicationInput_PlatformApplicationArn, &sListEndpointsByPlatformApplicationInput_NextToken}}
+var mListEndpointsByPlatformApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEndpointsByPlatformApplicationResponse_Endpoints, &sListEndpointsByPlatformApplicationResponse_NextToken}}
+var mListOriginationNumbersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOriginationNumbersRequest_NextToken, &sListOriginationNumbersRequest_MaxResults}}
+var mListOriginationNumbersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListOriginationNumbersResult_NextToken, &sListOriginationNumbersResult_PhoneNumbers}}
+var mListPhoneNumbersOptedOutInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumbersOptedOutInput_nextToken}}
+var mListPhoneNumbersOptedOutResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumbersOptedOutResponse_phoneNumbers, &sListPhoneNumbersOptedOutResponse_nextToken}}
+var mListPlatformApplicationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformApplicationsInput_NextToken}}
+var mListPlatformApplicationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPlatformApplicationsResponse_PlatformApplications, &sListPlatformApplicationsResponse_NextToken}}
+var mListSMSSandboxPhoneNumbersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSMSSandboxPhoneNumbersInput_NextToken, &sListSMSSandboxPhoneNumbersInput_MaxResults}}
+var mListSMSSandboxPhoneNumbersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListSMSSandboxPhoneNumbersResult_PhoneNumbers, &sListSMSSandboxPhoneNumbersResult_NextToken}}
+var mListSubscriptionsByTopicInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsByTopicInput_TopicArn, &sListSubscriptionsByTopicInput_NextToken}}
+var mListSubscriptionsByTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsByTopicResponse_Subscriptions, &sListSubscriptionsByTopicResponse_NextToken}}
+var mListSubscriptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsInput_NextToken}}
+var mListSubscriptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsResponse_Subscriptions, &sListSubscriptionsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTopicsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTopicsInput_NextToken}}
+var mListTopicsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTopicsResponse_Topics, &sListTopicsResponse_NextToken}}
+var mOptInPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sOptInPhoneNumberInput_phoneNumber}}
+var mPublishBatchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishBatchInput_TopicArn, &sPublishBatchInput_PublishBatchRequestEntries}}
+var mPublishBatchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishBatchResponse_Successful, &sPublishBatchResponse_Failed}}
+var mPublishInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishInput_TopicArn, &sPublishInput_TargetArn, &sPublishInput_PhoneNumber, &sPublishInput_Message, &sPublishInput_Subject, &sPublishInput_MessageStructure, &sPublishInput_MessageAttributes, &sPublishInput_MessageDeduplicationId, &sPublishInput_MessageGroupId}, Hash: &hPublishInput}
+var mPublishResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishResponse_MessageId, &sPublishResponse_SequenceNumber}}
+var mPutDataProtectionPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDataProtectionPolicyInput_ResourceArn, &sPutDataProtectionPolicyInput_DataProtectionPolicy}}
+var mRemovePermissionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemovePermissionInput_TopicArn, &sRemovePermissionInput_Label}}
+var mSetEndpointAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetEndpointAttributesInput_EndpointArn, &sSetEndpointAttributesInput_Attributes}}
+var mSetPlatformApplicationAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetPlatformApplicationAttributesInput_PlatformApplicationArn, &sSetPlatformApplicationAttributesInput_Attributes}}
+var mSetSMSAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSMSAttributesInput_attributes}}
+var mSetSubscriptionAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSubscriptionAttributesInput_SubscriptionArn, &sSetSubscriptionAttributesInput_AttributeName, &sSetSubscriptionAttributesInput_AttributeValue}}
+var mSetTopicAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetTopicAttributesInput_TopicArn, &sSetTopicAttributesInput_AttributeName, &sSetTopicAttributesInput_AttributeValue}}
+var mSubscribeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeInput_TopicArn, &sSubscribeInput_Protocol, &sSubscribeInput_Endpoint, &sSubscribeInput_Attributes, &sSubscribeInput_ReturnSubscriptionArn}}
+var mSubscribeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeResponse_SubscriptionArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUnsubscribeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsubscribeInput_SubscriptionArn}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mVerifySMSSandboxPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifySMSSandboxPhoneNumberInput_PhoneNumber, &sVerifySMSSandboxPhoneNumberInput_OneTimePassword}}
+
+var hLanguageCodeString = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	9, 0, 0, 8, 0, 0, 5, 0, 0, 0, 11, 0, 0, 0, 0, 1, 0, 0, 6, 4, 0, 12, 0, 0,
+	13, 0, 3, 0, 0, 2, 10, 7,
+}}
+var hPublishInput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 2, 7, 0, 0, 0, 0, 0, 8, 6, 0, 9, 0, 0, 0, 4, 0, 0, 0, 0, 3,
+	0, 0, 1, 0, 0, 5, 0, 0,
+}}
+
+var sAddPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddPermission, Type: smithy.ShapeTypeOperation, Ext: &eAddPermission})
+var sCheckIfPhoneNumberIsOptedOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckIfPhoneNumberIsOptedOut, Type: smithy.ShapeTypeOperation, Ext: &eCheckIfPhoneNumberIsOptedOut})
+var sConfirmSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmSubscription, Type: smithy.ShapeTypeOperation, Ext: &eConfirmSubscription})
+var sCreatePlatformApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformApplication, Type: smithy.ShapeTypeOperation, Ext: &eCreatePlatformApplication})
+var sCreatePlatformEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eCreatePlatformEndpoint})
+var sCreateSMSSandboxPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMSSandboxPhoneNumber, Type: smithy.ShapeTypeOperation, Ext: &eCreateSMSSandboxPhoneNumber})
+var sCreateTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopic, Type: smithy.ShapeTypeOperation, Ext: &eCreateTopic})
+var sDeleteEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEndpoint})
+var sDeletePlatformApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlatformApplication, Type: smithy.ShapeTypeOperation, Ext: &eDeletePlatformApplication})
+var sDeleteSMSSandboxPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSMSSandboxPhoneNumber, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSMSSandboxPhoneNumber})
+var sDeleteTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTopic, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTopic})
+var sGetDataProtectionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetDataProtectionPolicy})
+var sGetEndpointAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEndpointAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetEndpointAttributes})
+var sGetPlatformApplicationAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlatformApplicationAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetPlatformApplicationAttributes})
+var sGetSMSAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetSMSAttributes})
+var sGetSMSSandboxAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSSandboxAccountStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetSMSSandboxAccountStatus})
+var sGetSubscriptionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetSubscriptionAttributes})
+var sGetTopicAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTopicAttributes, Type: smithy.ShapeTypeOperation, Ext: &eGetTopicAttributes})
+var sListEndpointsByPlatformApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsByPlatformApplication, Type: smithy.ShapeTypeOperation, Ext: &eListEndpointsByPlatformApplication})
+var sListOriginationNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginationNumbers, Type: smithy.ShapeTypeOperation, Ext: &eListOriginationNumbers})
+var sListPhoneNumbersOptedOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersOptedOut, Type: smithy.ShapeTypeOperation, Ext: &eListPhoneNumbersOptedOut})
+var sListPlatformApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformApplications, Type: smithy.ShapeTypeOperation, Ext: &eListPlatformApplications})
+var sListSMSSandboxPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSMSSandboxPhoneNumbers, Type: smithy.ShapeTypeOperation, Ext: &eListSMSSandboxPhoneNumbers})
+var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Type: smithy.ShapeTypeOperation, Ext: &eListSubscriptions})
+var sListSubscriptionsByTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsByTopic, Type: smithy.ShapeTypeOperation, Ext: &eListSubscriptionsByTopic})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTopics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopics, Type: smithy.ShapeTypeOperation, Ext: &eListTopics})
+var sOptInPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInPhoneNumber, Type: smithy.ShapeTypeOperation, Ext: &eOptInPhoneNumber})
+var sPublish = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublish, Type: smithy.ShapeTypeOperation, Ext: &ePublish})
+var sPublishBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishBatch, Type: smithy.ShapeTypeOperation, Ext: &ePublishBatch})
+var sPutDataProtectionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDataProtectionPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutDataProtectionPolicy})
+var sRemovePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemovePermission, Type: smithy.ShapeTypeOperation, Ext: &eRemovePermission})
+var sSetEndpointAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetEndpointAttributes, Type: smithy.ShapeTypeOperation, Ext: &eSetEndpointAttributes})
+var sSetPlatformApplicationAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetPlatformApplicationAttributes, Type: smithy.ShapeTypeOperation, Ext: &eSetPlatformApplicationAttributes})
+var sSetSMSAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMSAttributes, Type: smithy.ShapeTypeOperation, Ext: &eSetSMSAttributes})
+var sSetSubscriptionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSubscriptionAttributes, Type: smithy.ShapeTypeOperation, Ext: &eSetSubscriptionAttributes})
+var sSetTopicAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetTopicAttributes, Type: smithy.ShapeTypeOperation, Ext: &eSetTopicAttributes})
+var sSubscribe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribe, Type: smithy.ShapeTypeOperation, Ext: &eSubscribe})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUnsubscribe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribe, Type: smithy.ShapeTypeOperation, Ext: &eUnsubscribe})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sVerifySMSSandboxPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifySMSSandboxPhoneNumber, Type: smithy.ShapeTypeOperation, Ext: &eVerifySMSSandboxPhoneNumber})
+var s_AmazonSimpleNotificationService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSimpleNotificationService, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AmazonSimpleNotificationService})
+var s_account = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_account, Type: smithy.ShapeTypeString, Ext: &e_account})
+var s_action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_action, Type: smithy.ShapeTypeString, Ext: &e_action})
+var s_ActionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &e_ActionsList})
+var s_ActionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_action, Type: smithy.ShapeTypeString, Ext: &e_ActionsList_member})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_attributeName})
+var s_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_attributeValue})
+var s_authenticateOnUnsubscribe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_authenticateOnUnsubscribe, Type: smithy.ShapeTypeString, Ext: &e_authenticateOnUnsubscribe})
+var sAuthorizationErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationErrorException, Members: &mAuthorizationErrorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationErrorException})
+var sAuthorizationErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAuthorizationErrorException_message})
+var sBatchEntryIdsNotDistinctException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchEntryIdsNotDistinctException, Members: &mBatchEntryIdsNotDistinctException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eBatchEntryIdsNotDistinctException})
+var sBatchEntryIdsNotDistinctException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchEntryIdsNotDistinctException_message})
+var sBatchRequestTooLongException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRequestTooLongException, Members: &mBatchRequestTooLongException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eBatchRequestTooLongException})
+var sBatchRequestTooLongException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchRequestTooLongException_message})
+var sBatchResultErrorEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchResultErrorEntry, Members: &mBatchResultErrorEntry, Type: smithy.ShapeTypeStructure, Ext: &eBatchResultErrorEntry})
+var sBatchResultErrorEntry_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchResultErrorEntry_Id})
+var sBatchResultErrorEntry_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchResultErrorEntry_Code})
+var sBatchResultErrorEntry_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBatchResultErrorEntry_Message})
+var sBatchResultErrorEntry_SenderFault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderFault", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eBatchResultErrorEntry_SenderFault})
+var s_BatchResultErrorEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchResultErrorEntryList, Members: &m_BatchResultErrorEntryList, Type: smithy.ShapeTypeList, Ext: &e_BatchResultErrorEntryList})
+var s_BatchResultErrorEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchResultErrorEntry, Members: &mBatchResultErrorEntry, Type: smithy.ShapeTypeStructure, Ext: &e_BatchResultErrorEntryList_member})
+var s_Binary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Binary, Type: smithy.ShapeTypeBlob, Ext: &e_Binary})
+var s_boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_boolean})
+var sConcurrentAccessException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentAccessException, Members: &mConcurrentAccessException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentAccessException})
+var sConcurrentAccessException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConcurrentAccessException_message})
+var s_delegate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_delegate, Type: smithy.ShapeTypeString, Ext: &e_delegate})
+var s_DelegatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DelegatesList, Members: &m_DelegatesList, Type: smithy.ShapeTypeList, Ext: &e_DelegatesList})
+var s_DelegatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_delegate, Type: smithy.ShapeTypeString, Ext: &e_DelegatesList_member})
+var sEmptyBatchRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyBatchRequestException, Members: &mEmptyBatchRequestException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eEmptyBatchRequestException})
+var sEmptyBatchRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEmptyBatchRequestException_message})
+var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint})
+var sEndpoint_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpoint_EndpointArn})
+var sEndpoint_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eEndpoint_Attributes})
+var s_Endpoint2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoint2, Type: smithy.ShapeTypeString, Ext: &e_Endpoint2})
+var sEndpointDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDisabledException, Members: &mEndpointDisabledException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDisabledException})
+var sEndpointDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpointDisabledException_message})
+var sFilterPolicyLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterPolicyLimitExceededException, Members: &mFilterPolicyLimitExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eFilterPolicyLimitExceededException})
+var sFilterPolicyLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFilterPolicyLimitExceededException_message})
+var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInternalErrorException})
+var sInternalErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalErrorException_message})
+var sInvalidBatchEntryIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBatchEntryIdException, Members: &mInvalidBatchEntryIdException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInvalidBatchEntryIdException})
+var sInvalidBatchEntryIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidBatchEntryIdException_message})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterValueException})
+var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterValueException_message})
+var sInvalidSecurityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSecurityException, Members: &mInvalidSecurityException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSecurityException})
+var sInvalidSecurityException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidSecurityException_message})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateException})
+var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidStateException_message})
+var s_Iso2CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso2CountryCode, Type: smithy.ShapeTypeString, Ext: &e_Iso2CountryCode})
+var sKMSAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSAccessDeniedException, Members: &mKMSAccessDeniedException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eKMSAccessDeniedException})
+var sKMSAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSAccessDeniedException_message})
+var sKMSDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSDisabledException, Members: &mKMSDisabledException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eKMSDisabledException})
+var sKMSDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSDisabledException_message})
+var sKMSInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidStateException, Members: &mKMSInvalidStateException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eKMSInvalidStateException})
+var sKMSInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSInvalidStateException_message})
+var sKMSNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSNotFoundException, Members: &mKMSNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eKMSNotFoundException})
+var sKMSNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSNotFoundException_message})
+var sKMSOptInRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSOptInRequired, Members: &mKMSOptInRequired, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eKMSOptInRequired})
+var sKMSOptInRequired_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSOptInRequired_message})
+var sKMSThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSThrottlingException, Members: &mKMSThrottlingException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eKMSThrottlingException})
+var sKMSThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSThrottlingException_message})
+var s_label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_label, Type: smithy.ShapeTypeString, Ext: &e_label})
+var sLanguageCodeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCodeString, Members: &mLanguageCodeString, Type: smithy.ShapeTypeEnum, Ext: &eLanguageCodeString})
+var sLanguageCodeString_en_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_en_US})
+var sLanguageCodeString_en_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "en_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_en_GB})
+var sLanguageCodeString_es_419 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es_419", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_es_419})
+var sLanguageCodeString_es_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "es_ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_es_ES})
+var sLanguageCodeString_de_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "de_DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_de_DE})
+var sLanguageCodeString_fr_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr_CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_fr_CA})
+var sLanguageCodeString_fr_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fr_FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_fr_FR})
+var sLanguageCodeString_it_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "it_IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_it_IT})
+var sLanguageCodeString_jp_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jp_JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_jp_JP})
+var sLanguageCodeString_pt_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pt_BR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_pt_BR})
+var sLanguageCodeString_kr_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kr_KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_kr_KR})
+var sLanguageCodeString_zh_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zh_CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_zh_CN})
+var sLanguageCodeString_zh_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zh_TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCodeString_zh_TW})
+var s_ListOfEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfEndpoints, Members: &m_ListOfEndpoints, Type: smithy.ShapeTypeList, Ext: &e_ListOfEndpoints})
+var s_ListOfEndpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfEndpoints_member})
+var s_ListOfPlatformApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfPlatformApplications, Members: &m_ListOfPlatformApplications, Type: smithy.ShapeTypeList, Ext: &e_ListOfPlatformApplications})
+var s_ListOfPlatformApplications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformApplication, Members: &mPlatformApplication, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfPlatformApplications_member})
+var s_ListString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListString, Members: &m_ListString, Type: smithy.ShapeTypeList, Ext: &e_ListString})
+var s_ListString_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ListString_member})
+var s_MapStringToString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &e_MapStringToString})
+var s_MapStringToString_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_MapStringToString_key})
+var s_MapStringToString_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_MapStringToString_value})
+var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_MaxItems})
+var s_MaxItemsListOriginationNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItemsListOriginationNumbers, Type: smithy.ShapeTypeInteger, Ext: &e_MaxItemsListOriginationNumbers})
+var s_message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_message, Type: smithy.ShapeTypeString, Ext: &e_message})
+var s_MessageAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_MessageAttributeMap})
+var s_MessageAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_MessageAttributeMap_key})
+var s_MessageAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iMessageAttributeValue, Members: &mMessageAttributeValue, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &e_MessageAttributeMap_value})
+var sMessageAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageAttributeValue, Members: &mMessageAttributeValue, Type: smithy.ShapeTypeStructure, Ext: &eMessageAttributeValue})
+var sMessageAttributeValue_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMessageAttributeValue_DataType})
+var sMessageAttributeValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eMessageAttributeValue_StringValue})
+var sMessageAttributeValue_BinaryValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryValue", ID: &i_Binary, Type: smithy.ShapeTypeBlob, Ext: &eMessageAttributeValue_BinaryValue})
+var s_messageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_messageId, Type: smithy.ShapeTypeString, Ext: &e_messageId})
+var s_messageStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_messageStructure, Type: smithy.ShapeTypeString, Ext: &e_messageStructure})
+var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &e_nextToken})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sNumberCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberCapability, Members: &mNumberCapability, Type: smithy.ShapeTypeEnum, Ext: &eNumberCapability})
+var sNumberCapability_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNumberCapability_SMS})
+var sNumberCapability_MMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNumberCapability_MMS})
+var sNumberCapability_VOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNumberCapability_VOICE})
+var s_NumberCapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberCapabilityList, Members: &m_NumberCapabilityList, Type: smithy.ShapeTypeList, Ext: &e_NumberCapabilityList})
+var s_NumberCapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNumberCapability, Members: &mNumberCapability, Type: smithy.ShapeTypeEnum, Ext: &e_NumberCapabilityList_member})
+var sOptedOutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptedOutException, Members: &mOptedOutException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eOptedOutException})
+var sOptedOutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOptedOutException_message})
+var s_OTPCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OTPCode, Type: smithy.ShapeTypeString, Ext: &e_OTPCode})
+var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumber})
+var sPhoneNumberInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberInformation, Members: &mPhoneNumberInformation, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberInformation})
+var sPhoneNumberInformation_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumberInformation_CreatedAt})
+var sPhoneNumberInformation_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberInformation_PhoneNumber})
+var sPhoneNumberInformation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberInformation_Status})
+var sPhoneNumberInformation_Iso2CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iso2CountryCode", ID: &i_Iso2CountryCode, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberInformation_Iso2CountryCode})
+var sPhoneNumberInformation_RouteType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteType", ID: &iRouteType, Members: &mRouteType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberInformation_RouteType})
+var sPhoneNumberInformation_NumberCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberCapabilities", ID: &i_NumberCapabilityList, Members: &m_NumberCapabilityList, Type: smithy.ShapeTypeList, Ext: &ePhoneNumberInformation_NumberCapabilities})
+var s_PhoneNumberInformationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberInformationList, Members: &m_PhoneNumberInformationList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberInformationList})
+var s_PhoneNumberInformationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberInformation, Members: &mPhoneNumberInformation, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberInformationList_member})
+var s_PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberList})
+var s_PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PhoneNumber, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumberList_member})
+var s_PhoneNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumberString})
+var sPlatformApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformApplication, Members: &mPlatformApplication, Type: smithy.ShapeTypeStructure, Ext: &ePlatformApplication})
+var sPlatformApplication_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformApplication_PlatformApplicationArn})
+var sPlatformApplication_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &ePlatformApplication_Attributes})
+var sPlatformApplicationDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformApplicationDisabledException, Members: &mPlatformApplicationDisabledException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ePlatformApplicationDisabledException})
+var sPlatformApplicationDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePlatformApplicationDisabledException_message})
+var s_protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_protocol, Type: smithy.ShapeTypeString, Ext: &e_protocol})
+var sPublishBatchRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishBatchRequestEntry, Members: &mPublishBatchRequestEntry, Type: smithy.ShapeTypeStructure, Ext: &ePublishBatchRequestEntry})
+var sPublishBatchRequestEntry_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_Id})
+var sPublishBatchRequestEntry_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_Message})
+var sPublishBatchRequestEntry_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_subject, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_Subject})
+var sPublishBatchRequestEntry_MessageStructure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageStructure", ID: &i_messageStructure, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_MessageStructure})
+var sPublishBatchRequestEntry_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &ePublishBatchRequestEntry_MessageAttributes})
+var sPublishBatchRequestEntry_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDeduplicationId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_MessageDeduplicationId})
+var sPublishBatchRequestEntry_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishBatchRequestEntry_MessageGroupId})
+var s_PublishBatchRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublishBatchRequestEntryList, Members: &m_PublishBatchRequestEntryList, Type: smithy.ShapeTypeList, Ext: &e_PublishBatchRequestEntryList})
+var s_PublishBatchRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPublishBatchRequestEntry, Members: &mPublishBatchRequestEntry, Type: smithy.ShapeTypeStructure, Ext: &e_PublishBatchRequestEntryList_member})
+var sPublishBatchResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishBatchResultEntry, Members: &mPublishBatchResultEntry, Type: smithy.ShapeTypeStructure, Ext: &ePublishBatchResultEntry})
+var sPublishBatchResultEntry_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishBatchResultEntry_Id})
+var sPublishBatchResultEntry_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_messageId, Type: smithy.ShapeTypeString, Ext: &ePublishBatchResultEntry_MessageId})
+var sPublishBatchResultEntry_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishBatchResultEntry_SequenceNumber})
+var s_PublishBatchResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublishBatchResultEntryList, Members: &m_PublishBatchResultEntryList, Type: smithy.ShapeTypeList, Ext: &e_PublishBatchResultEntryList})
+var s_PublishBatchResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPublishBatchResultEntry, Members: &mPublishBatchResultEntry, Type: smithy.ShapeTypeStructure, Ext: &e_PublishBatchResultEntryList_member})
+var sReplayLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplayLimitExceededException, Members: &mReplayLimitExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eReplayLimitExceededException})
+var sReplayLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReplayLimitExceededException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRouteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteType, Members: &mRouteType, Type: smithy.ShapeTypeEnum, Ext: &eRouteType})
+var sRouteType_Transactional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transactional", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRouteType_Transactional})
+var sRouteType_Promotional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Promotional", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRouteType_Promotional})
+var sRouteType_Premium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Premium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRouteType_Premium})
+var sSMSSandboxPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSMSSandboxPhoneNumber, Members: &mSMSSandboxPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &eSMSSandboxPhoneNumber})
+var sSMSSandboxPhoneNumber_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumberString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eSMSSandboxPhoneNumber_PhoneNumber})
+var sSMSSandboxPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSMSSandboxPhoneNumberVerificationStatus, Members: &mSMSSandboxPhoneNumberVerificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eSMSSandboxPhoneNumber_Status})
+var s_SMSSandboxPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMSSandboxPhoneNumberList, Members: &m_SMSSandboxPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_SMSSandboxPhoneNumberList})
+var s_SMSSandboxPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSMSSandboxPhoneNumber, Members: &mSMSSandboxPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &e_SMSSandboxPhoneNumberList_member})
+var sSMSSandboxPhoneNumberVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSMSSandboxPhoneNumberVerificationStatus, Members: &mSMSSandboxPhoneNumberVerificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eSMSSandboxPhoneNumberVerificationStatus})
+var sSMSSandboxPhoneNumberVerificationStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSMSSandboxPhoneNumberVerificationStatus_Pending})
+var sSMSSandboxPhoneNumberVerificationStatus_Verified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verified", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSMSSandboxPhoneNumberVerificationStatus_Verified})
+var sStaleTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaleTagException, Members: &mStaleTagException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eStaleTagException})
+var sStaleTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStaleTagException_message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_subject, Type: smithy.ShapeTypeString, Ext: &e_subject})
+var sSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure, Ext: &eSubscription})
+var sSubscription_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eSubscription_SubscriptionArn})
+var sSubscription_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_account, Type: smithy.ShapeTypeString, Ext: &eSubscription_Owner})
+var sSubscription_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_protocol, Type: smithy.ShapeTypeString, Ext: &eSubscription_Protocol})
+var sSubscription_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_Endpoint2, Type: smithy.ShapeTypeString, Ext: &eSubscription_Endpoint})
+var sSubscription_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eSubscription_TopicArn})
+var s_subscriptionARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &e_subscriptionARN})
+var s_SubscriptionAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionAttributesMap, Members: &m_SubscriptionAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_SubscriptionAttributesMap})
+var s_SubscriptionAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionAttributesMap_key})
+var s_SubscriptionAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionAttributesMap_value})
+var sSubscriptionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionLimitExceededException, Members: &mSubscriptionLimitExceededException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionLimitExceededException})
+var sSubscriptionLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSubscriptionLimitExceededException_message})
+var s_SubscriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionsList, Members: &m_SubscriptionsList, Type: smithy.ShapeTypeList, Ext: &e_SubscriptionsList})
+var s_SubscriptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure, Ext: &e_SubscriptionsList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var sTagLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagLimitExceededException, Members: &mTagLimitExceededException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eTagLimitExceededException})
+var sTagLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagLimitExceededException_message})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTagPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyException, Members: &mTagPolicyException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eTagPolicyException})
+var sTagPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTagPolicyException_message})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledException, Members: &mThrottledException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eThrottledException})
+var sThrottledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottledException_message})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_token, Type: smithy.ShapeTypeString, Ext: &e_token})
+var sTooManyEntriesInBatchRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyEntriesInBatchRequestException, Members: &mTooManyEntriesInBatchRequestException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eTooManyEntriesInBatchRequestException})
+var sTooManyEntriesInBatchRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTooManyEntriesInBatchRequestException_message})
+var sTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopic, Members: &mTopic, Type: smithy.ShapeTypeStructure, Ext: &eTopic})
+var sTopic_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eTopic_TopicArn})
+var s_topicARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &e_topicARN})
+var s_TopicAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicAttributesMap, Members: &m_TopicAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_TopicAttributesMap})
+var s_TopicAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &e_TopicAttributesMap_key})
+var s_TopicAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &e_TopicAttributesMap_value})
+var sTopicLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicLimitExceededException, Members: &mTopicLimitExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eTopicLimitExceededException})
+var sTopicLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTopicLimitExceededException_message})
+var s_topicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_topicName, Type: smithy.ShapeTypeString, Ext: &e_topicName})
+var s_TopicsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicsList, Members: &m_TopicsList, Type: smithy.ShapeTypeList, Ext: &e_TopicsList})
+var s_TopicsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTopic, Members: &mTopic, Type: smithy.ShapeTypeStructure, Ext: &e_TopicsList_member})
+var sUserErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserErrorException, Members: &mUserErrorException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eUserErrorException})
+var sUserErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUserErrorException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVerificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerificationException, Members: &mVerificationException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eVerificationException})
+var sVerificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVerificationException_Message})
+var sVerificationException_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVerificationException_Status})
+var sAddPermissionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddPermissionInput, Members: &mAddPermissionInput, Type: smithy.ShapeTypeStructure, Ext: &eAddPermissionInput})
+var sAddPermissionInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eAddPermissionInput_TopicArn})
+var sAddPermissionInput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_label, Type: smithy.ShapeTypeString, Ext: &eAddPermissionInput_Label})
+var sAddPermissionInput_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSAccountId", ID: &i_DelegatesList, Members: &m_DelegatesList, Type: smithy.ShapeTypeList, Ext: &eAddPermissionInput_AWSAccountId})
+var sAddPermissionInput_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList, Ext: &eAddPermissionInput_ActionName})
+var sCheckIfPhoneNumberIsOptedOutInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckIfPhoneNumberIsOptedOutInput, Members: &mCheckIfPhoneNumberIsOptedOutInput, Type: smithy.ShapeTypeStructure, Ext: &eCheckIfPhoneNumberIsOptedOutInput})
+var sCheckIfPhoneNumberIsOptedOutInput_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eCheckIfPhoneNumberIsOptedOutInput_phoneNumber})
+var sCheckIfPhoneNumberIsOptedOutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckIfPhoneNumberIsOptedOutResponse, Members: &mCheckIfPhoneNumberIsOptedOutResponse, Type: smithy.ShapeTypeStructure, Ext: &eCheckIfPhoneNumberIsOptedOutResponse})
+var sCheckIfPhoneNumberIsOptedOutResponse_isOptedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isOptedOut", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCheckIfPhoneNumberIsOptedOutResponse_isOptedOut})
+var sConfirmSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmSubscriptionInput, Members: &mConfirmSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eConfirmSubscriptionInput})
+var sConfirmSubscriptionInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eConfirmSubscriptionInput_TopicArn})
+var sConfirmSubscriptionInput_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_token, Type: smithy.ShapeTypeString, Ext: &eConfirmSubscriptionInput_Token})
+var sConfirmSubscriptionInput_AuthenticateOnUnsubscribe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticateOnUnsubscribe", ID: &i_authenticateOnUnsubscribe, Type: smithy.ShapeTypeString, Ext: &eConfirmSubscriptionInput_AuthenticateOnUnsubscribe})
+var sConfirmSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmSubscriptionResponse, Members: &mConfirmSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eConfirmSubscriptionResponse})
+var sConfirmSubscriptionResponse_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eConfirmSubscriptionResponse_SubscriptionArn})
+var sCreatePlatformApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformApplicationInput, Members: &mCreatePlatformApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformApplicationInput})
+var sCreatePlatformApplicationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformApplicationInput_Name})
+var sCreatePlatformApplicationInput_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformApplicationInput_Platform})
+var sCreatePlatformApplicationInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eCreatePlatformApplicationInput_Attributes})
+var sCreatePlatformApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformApplicationResponse, Members: &mCreatePlatformApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformApplicationResponse})
+var sCreatePlatformApplicationResponse_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformApplicationResponse_PlatformApplicationArn})
+var sCreatePlatformEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePlatformEndpointInput, Members: &mCreatePlatformEndpointInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePlatformEndpointInput})
+var sCreatePlatformEndpointInput_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformEndpointInput_PlatformApplicationArn})
+var sCreatePlatformEndpointInput_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformEndpointInput_Token})
+var sCreatePlatformEndpointInput_CustomUserData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomUserData", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePlatformEndpointInput_CustomUserData})
+var sCreatePlatformEndpointInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eCreatePlatformEndpointInput_Attributes})
+var sCreateEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointResponse, Members: &mCreateEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateEndpointResponse})
+var sCreateEndpointResponse_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointResponse_EndpointArn})
+var sCreateSMSSandboxPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMSSandboxPhoneNumberInput, Members: &mCreateSMSSandboxPhoneNumberInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSMSSandboxPhoneNumberInput})
+var sCreateSMSSandboxPhoneNumberInput_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumberString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eCreateSMSSandboxPhoneNumberInput_PhoneNumber})
+var sCreateSMSSandboxPhoneNumberInput_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCodeString, Members: &mLanguageCodeString, Type: smithy.ShapeTypeEnum, Ext: &eCreateSMSSandboxPhoneNumberInput_LanguageCode})
+var sCreateSMSSandboxPhoneNumberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMSSandboxPhoneNumberResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateSMSSandboxPhoneNumberResult})
+var sCreateTopicInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopicInput, Members: &mCreateTopicInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTopicInput})
+var sCreateTopicInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_topicName, Type: smithy.ShapeTypeString, Ext: &eCreateTopicInput_Name})
+var sCreateTopicInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TopicAttributesMap, Members: &m_TopicAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eCreateTopicInput_Attributes})
+var sCreateTopicInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTopicInput_Tags})
+var sCreateTopicInput_DataProtectionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProtectionPolicy", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &eCreateTopicInput_DataProtectionPolicy})
+var sCreateTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopicResponse, Members: &mCreateTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTopicResponse})
+var sCreateTopicResponse_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eCreateTopicResponse_TopicArn})
+var sDeleteEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpointInput, Members: &mDeleteEndpointInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEndpointInput})
+var sDeleteEndpointInput_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteEndpointInput_EndpointArn})
+var sDeletePlatformApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePlatformApplicationInput, Members: &mDeletePlatformApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePlatformApplicationInput})
+var sDeletePlatformApplicationInput_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeletePlatformApplicationInput_PlatformApplicationArn})
+var sDeleteSMSSandboxPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSMSSandboxPhoneNumberInput, Members: &mDeleteSMSSandboxPhoneNumberInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSMSSandboxPhoneNumberInput})
+var sDeleteSMSSandboxPhoneNumberInput_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumberString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eDeleteSMSSandboxPhoneNumberInput_PhoneNumber})
+var sDeleteSMSSandboxPhoneNumberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSMSSandboxPhoneNumberResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSMSSandboxPhoneNumberResult})
+var sDeleteTopicInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTopicInput, Members: &mDeleteTopicInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTopicInput})
+var sDeleteTopicInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eDeleteTopicInput_TopicArn})
+var sGetDataProtectionPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionPolicyInput, Members: &mGetDataProtectionPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDataProtectionPolicyInput})
+var sGetDataProtectionPolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eGetDataProtectionPolicyInput_ResourceArn})
+var sGetDataProtectionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionPolicyResponse, Members: &mGetDataProtectionPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataProtectionPolicyResponse})
+var sGetDataProtectionPolicyResponse_DataProtectionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProtectionPolicy", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &eGetDataProtectionPolicyResponse_DataProtectionPolicy})
+var sGetEndpointAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEndpointAttributesInput, Members: &mGetEndpointAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetEndpointAttributesInput})
+var sGetEndpointAttributesInput_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetEndpointAttributesInput_EndpointArn})
+var sGetEndpointAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEndpointAttributesResponse, Members: &mGetEndpointAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEndpointAttributesResponse})
+var sGetEndpointAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eGetEndpointAttributesResponse_Attributes})
+var sGetPlatformApplicationAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlatformApplicationAttributesInput, Members: &mGetPlatformApplicationAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPlatformApplicationAttributesInput})
+var sGetPlatformApplicationAttributesInput_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetPlatformApplicationAttributesInput_PlatformApplicationArn})
+var sGetPlatformApplicationAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlatformApplicationAttributesResponse, Members: &mGetPlatformApplicationAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPlatformApplicationAttributesResponse})
+var sGetPlatformApplicationAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eGetPlatformApplicationAttributesResponse_Attributes})
+var sGetSMSAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSAttributesInput, Members: &mGetSMSAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSMSAttributesInput})
+var sGetSMSAttributesInput_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ListString, Members: &m_ListString, Type: smithy.ShapeTypeList, Ext: &eGetSMSAttributesInput_attributes})
+var sGetSMSAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSAttributesResponse, Members: &mGetSMSAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSMSAttributesResponse})
+var sGetSMSAttributesResponse_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eGetSMSAttributesResponse_attributes})
+var sGetSMSSandboxAccountStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSSandboxAccountStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSMSSandboxAccountStatusInput})
+var sGetSMSSandboxAccountStatusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSMSSandboxAccountStatusResult, Members: &mGetSMSSandboxAccountStatusResult, Type: smithy.ShapeTypeStructure, Ext: &eGetSMSSandboxAccountStatusResult})
+var sGetSMSSandboxAccountStatusResult_IsInSandbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsInSandbox", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetSMSSandboxAccountStatusResult_IsInSandbox})
+var sGetSubscriptionAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionAttributesInput, Members: &mGetSubscriptionAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionAttributesInput})
+var sGetSubscriptionAttributesInput_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionAttributesInput_SubscriptionArn})
+var sGetSubscriptionAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionAttributesResponse, Members: &mGetSubscriptionAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionAttributesResponse})
+var sGetSubscriptionAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_SubscriptionAttributesMap, Members: &m_SubscriptionAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eGetSubscriptionAttributesResponse_Attributes})
+var sGetTopicAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTopicAttributesInput, Members: &mGetTopicAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTopicAttributesInput})
+var sGetTopicAttributesInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eGetTopicAttributesInput_TopicArn})
+var sGetTopicAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTopicAttributesResponse, Members: &mGetTopicAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTopicAttributesResponse})
+var sGetTopicAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TopicAttributesMap, Members: &m_TopicAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eGetTopicAttributesResponse_Attributes})
+var sListEndpointsByPlatformApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsByPlatformApplicationInput, Members: &mListEndpointsByPlatformApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eListEndpointsByPlatformApplicationInput})
+var sListEndpointsByPlatformApplicationInput_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListEndpointsByPlatformApplicationInput_PlatformApplicationArn})
+var sListEndpointsByPlatformApplicationInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListEndpointsByPlatformApplicationInput_NextToken})
+var sListEndpointsByPlatformApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsByPlatformApplicationResponse, Members: &mListEndpointsByPlatformApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEndpointsByPlatformApplicationResponse})
+var sListEndpointsByPlatformApplicationResponse_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_ListOfEndpoints, Members: &m_ListOfEndpoints, Type: smithy.ShapeTypeList, Ext: &eListEndpointsByPlatformApplicationResponse_Endpoints})
+var sListEndpointsByPlatformApplicationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListEndpointsByPlatformApplicationResponse_NextToken})
+var sListOriginationNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginationNumbersRequest, Members: &mListOriginationNumbersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOriginationNumbersRequest})
+var sListOriginationNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListOriginationNumbersRequest_NextToken})
+var sListOriginationNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxItemsListOriginationNumbers, Type: smithy.ShapeTypeInteger, Ext: &eListOriginationNumbersRequest_MaxResults})
+var sListOriginationNumbersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginationNumbersResult, Members: &mListOriginationNumbersResult, Type: smithy.ShapeTypeStructure, Ext: &eListOriginationNumbersResult})
+var sListOriginationNumbersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListOriginationNumbersResult_NextToken})
+var sListOriginationNumbersResult_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumberInformationList, Members: &m_PhoneNumberInformationList, Type: smithy.ShapeTypeList, Ext: &eListOriginationNumbersResult_PhoneNumbers})
+var sListPhoneNumbersOptedOutInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersOptedOutInput, Members: &mListPhoneNumbersOptedOutInput, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumbersOptedOutInput})
+var sListPhoneNumbersOptedOutInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersOptedOutInput_nextToken})
+var sListPhoneNumbersOptedOutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersOptedOutResponse, Members: &mListPhoneNumbersOptedOutResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumbersOptedOutResponse})
+var sListPhoneNumbersOptedOutResponse_phoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumbers", ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eListPhoneNumbersOptedOutResponse_phoneNumbers})
+var sListPhoneNumbersOptedOutResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersOptedOutResponse_nextToken})
+var sListPlatformApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformApplicationsInput, Members: &mListPlatformApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformApplicationsInput})
+var sListPlatformApplicationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPlatformApplicationsInput_NextToken})
+var sListPlatformApplicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlatformApplicationsResponse, Members: &mListPlatformApplicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPlatformApplicationsResponse})
+var sListPlatformApplicationsResponse_PlatformApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplications", ID: &i_ListOfPlatformApplications, Members: &m_ListOfPlatformApplications, Type: smithy.ShapeTypeList, Ext: &eListPlatformApplicationsResponse_PlatformApplications})
+var sListPlatformApplicationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPlatformApplicationsResponse_NextToken})
+var sListSMSSandboxPhoneNumbersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSMSSandboxPhoneNumbersInput, Members: &mListSMSSandboxPhoneNumbersInput, Type: smithy.ShapeTypeStructure, Ext: &eListSMSSandboxPhoneNumbersInput})
+var sListSMSSandboxPhoneNumbersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSMSSandboxPhoneNumbersInput_NextToken})
+var sListSMSSandboxPhoneNumbersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListSMSSandboxPhoneNumbersInput_MaxResults})
+var sListSMSSandboxPhoneNumbersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSMSSandboxPhoneNumbersResult, Members: &mListSMSSandboxPhoneNumbersResult, Type: smithy.ShapeTypeStructure, Ext: &eListSMSSandboxPhoneNumbersResult})
+var sListSMSSandboxPhoneNumbersResult_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_SMSSandboxPhoneNumberList, Members: &m_SMSSandboxPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eListSMSSandboxPhoneNumbersResult_PhoneNumbers})
+var sListSMSSandboxPhoneNumbersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSMSSandboxPhoneNumbersResult_NextToken})
+var sListSubscriptionsByTopicInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsByTopicInput, Members: &mListSubscriptionsByTopicInput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsByTopicInput})
+var sListSubscriptionsByTopicInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsByTopicInput_TopicArn})
+var sListSubscriptionsByTopicInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsByTopicInput_NextToken})
+var sListSubscriptionsByTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsByTopicResponse, Members: &mListSubscriptionsByTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsByTopicResponse})
+var sListSubscriptionsByTopicResponse_Subscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriptions", ID: &i_SubscriptionsList, Members: &m_SubscriptionsList, Type: smithy.ShapeTypeList, Ext: &eListSubscriptionsByTopicResponse_Subscriptions})
+var sListSubscriptionsByTopicResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsByTopicResponse_NextToken})
+var sListSubscriptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsInput, Members: &mListSubscriptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsInput})
+var sListSubscriptionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsInput_NextToken})
+var sListSubscriptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsResponse, Members: &mListSubscriptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsResponse})
+var sListSubscriptionsResponse_Subscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriptions", ID: &i_SubscriptionsList, Members: &m_SubscriptionsList, Type: smithy.ShapeTypeList, Ext: &eListSubscriptionsResponse_Subscriptions})
+var sListSubscriptionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTopicsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopicsInput, Members: &mListTopicsInput, Type: smithy.ShapeTypeStructure, Ext: &eListTopicsInput})
+var sListTopicsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListTopicsInput_NextToken})
+var sListTopicsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopicsResponse, Members: &mListTopicsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTopicsResponse})
+var sListTopicsResponse_Topics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Topics", ID: &i_TopicsList, Members: &m_TopicsList, Type: smithy.ShapeTypeList, Ext: &eListTopicsResponse_Topics})
+var sListTopicsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eListTopicsResponse_NextToken})
+var sOptInPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInPhoneNumberInput, Members: &mOptInPhoneNumberInput, Type: smithy.ShapeTypeStructure, Ext: &eOptInPhoneNumberInput})
+var sOptInPhoneNumberInput_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eOptInPhoneNumberInput_phoneNumber})
+var sOptInPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInPhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eOptInPhoneNumberResponse})
+var sPublishBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishBatchInput, Members: &mPublishBatchInput, Type: smithy.ShapeTypeStructure, Ext: &ePublishBatchInput})
+var sPublishBatchInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &ePublishBatchInput_TopicArn})
+var sPublishBatchInput_PublishBatchRequestEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishBatchRequestEntries", ID: &i_PublishBatchRequestEntryList, Members: &m_PublishBatchRequestEntryList, Type: smithy.ShapeTypeList, Ext: &ePublishBatchInput_PublishBatchRequestEntries})
+var sPublishBatchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishBatchResponse, Members: &mPublishBatchResponse, Type: smithy.ShapeTypeStructure, Ext: &ePublishBatchResponse})
+var sPublishBatchResponse_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &i_PublishBatchResultEntryList, Members: &m_PublishBatchResultEntryList, Type: smithy.ShapeTypeList, Ext: &ePublishBatchResponse_Successful})
+var sPublishBatchResponse_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &i_BatchResultErrorEntryList, Members: &m_BatchResultErrorEntryList, Type: smithy.ShapeTypeList, Ext: &ePublishBatchResponse_Failed})
+var sPublishInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishInput, Members: &mPublishInput, Type: smithy.ShapeTypeStructure, Ext: &ePublishInput})
+var sPublishInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &ePublishInput_TopicArn})
+var sPublishInput_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishInput_TargetArn})
+var sPublishInput_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ePublishInput_PhoneNumber})
+var sPublishInput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_message, Type: smithy.ShapeTypeString, Ext: &ePublishInput_Message})
+var sPublishInput_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_subject, Type: smithy.ShapeTypeString, Ext: &ePublishInput_Subject})
+var sPublishInput_MessageStructure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageStructure", ID: &i_messageStructure, Type: smithy.ShapeTypeString, Ext: &ePublishInput_MessageStructure})
+var sPublishInput_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_MessageAttributeMap, Members: &m_MessageAttributeMap, Type: smithy.ShapeTypeMap, Ext: &ePublishInput_MessageAttributes})
+var sPublishInput_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDeduplicationId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishInput_MessageDeduplicationId})
+var sPublishInput_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishInput_MessageGroupId})
+var sPublishResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishResponse, Members: &mPublishResponse, Type: smithy.ShapeTypeStructure, Ext: &ePublishResponse})
+var sPublishResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_messageId, Type: smithy.ShapeTypeString, Ext: &ePublishResponse_MessageId})
+var sPublishResponse_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePublishResponse_SequenceNumber})
+var sPutDataProtectionPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDataProtectionPolicyInput, Members: &mPutDataProtectionPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutDataProtectionPolicyInput})
+var sPutDataProtectionPolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &ePutDataProtectionPolicyInput_ResourceArn})
+var sPutDataProtectionPolicyInput_DataProtectionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProtectionPolicy", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &ePutDataProtectionPolicyInput_DataProtectionPolicy})
+var sRemovePermissionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemovePermissionInput, Members: &mRemovePermissionInput, Type: smithy.ShapeTypeStructure, Ext: &eRemovePermissionInput})
+var sRemovePermissionInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eRemovePermissionInput_TopicArn})
+var sRemovePermissionInput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_label, Type: smithy.ShapeTypeString, Ext: &eRemovePermissionInput_Label})
+var sSetEndpointAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetEndpointAttributesInput, Members: &mSetEndpointAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetEndpointAttributesInput})
+var sSetEndpointAttributesInput_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSetEndpointAttributesInput_EndpointArn})
+var sSetEndpointAttributesInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eSetEndpointAttributesInput_Attributes})
+var sSetPlatformApplicationAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetPlatformApplicationAttributesInput, Members: &mSetPlatformApplicationAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetPlatformApplicationAttributesInput})
+var sSetPlatformApplicationAttributesInput_PlatformApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformApplicationArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSetPlatformApplicationAttributesInput_PlatformApplicationArn})
+var sSetPlatformApplicationAttributesInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eSetPlatformApplicationAttributesInput_Attributes})
+var sSetSMSAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMSAttributesInput, Members: &mSetSMSAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetSMSAttributesInput})
+var sSetSMSAttributesInput_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_MapStringToString, Members: &m_MapStringToString, Type: smithy.ShapeTypeMap, Ext: &eSetSMSAttributesInput_attributes})
+var sSetSMSAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMSAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eSetSMSAttributesResponse})
+var sSetSubscriptionAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSubscriptionAttributesInput, Members: &mSetSubscriptionAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetSubscriptionAttributesInput})
+var sSetSubscriptionAttributesInput_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eSetSubscriptionAttributesInput_SubscriptionArn})
+var sSetSubscriptionAttributesInput_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &eSetSubscriptionAttributesInput_AttributeName})
+var sSetSubscriptionAttributesInput_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &eSetSubscriptionAttributesInput_AttributeValue})
+var sSetTopicAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetTopicAttributesInput, Members: &mSetTopicAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eSetTopicAttributesInput})
+var sSetTopicAttributesInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eSetTopicAttributesInput_TopicArn})
+var sSetTopicAttributesInput_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_attributeName, Type: smithy.ShapeTypeString, Ext: &eSetTopicAttributesInput_AttributeName})
+var sSetTopicAttributesInput_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_attributeValue, Type: smithy.ShapeTypeString, Ext: &eSetTopicAttributesInput_AttributeValue})
+var sSubscribeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeInput, Members: &mSubscribeInput, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeInput})
+var sSubscribeInput_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_topicARN, Type: smithy.ShapeTypeString, Ext: &eSubscribeInput_TopicArn})
+var sSubscribeInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_protocol, Type: smithy.ShapeTypeString, Ext: &eSubscribeInput_Protocol})
+var sSubscribeInput_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_Endpoint2, Type: smithy.ShapeTypeString, Ext: &eSubscribeInput_Endpoint})
+var sSubscribeInput_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_SubscriptionAttributesMap, Members: &m_SubscriptionAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eSubscribeInput_Attributes})
+var sSubscribeInput_ReturnSubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnSubscriptionArn", ID: &i_boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSubscribeInput_ReturnSubscriptionArn})
+var sSubscribeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeResponse, Members: &mSubscribeResponse, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeResponse})
+var sSubscribeResponse_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eSubscribeResponse_SubscriptionArn})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUnsubscribeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeInput, Members: &mUnsubscribeInput, Type: smithy.ShapeTypeStructure, Ext: &eUnsubscribeInput})
+var sUnsubscribeInput_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionArn", ID: &i_subscriptionARN, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeInput_SubscriptionArn})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sVerifySMSSandboxPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifySMSSandboxPhoneNumberInput, Members: &mVerifySMSSandboxPhoneNumberInput, Type: smithy.ShapeTypeStructure, Ext: &eVerifySMSSandboxPhoneNumberInput})
+var sVerifySMSSandboxPhoneNumberInput_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumberString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eVerifySMSSandboxPhoneNumberInput_PhoneNumber})
+var sVerifySMSSandboxPhoneNumberInput_OneTimePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneTimePassword", ID: &i_OTPCode, Type: smithy.ShapeTypeString, Ext: &eVerifySMSSandboxPhoneNumberInput_OneTimePassword})
+var sVerifySMSSandboxPhoneNumberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifySMSSandboxPhoneNumberResult, Type: smithy.ShapeTypeStructure, Ext: &eVerifySMSSandboxPhoneNumberResult})
+
+var AddPermission = &sAddPermission
+
+var CheckIfPhoneNumberIsOptedOut = &sCheckIfPhoneNumberIsOptedOut
+
+var ConfirmSubscription = &sConfirmSubscription
+
+var CreatePlatformApplication = &sCreatePlatformApplication
+
+var CreatePlatformEndpoint = &sCreatePlatformEndpoint
+
+var CreateSMSSandboxPhoneNumber = &sCreateSMSSandboxPhoneNumber
+
+var CreateTopic = &sCreateTopic
+
+var DeleteEndpoint = &sDeleteEndpoint
+
+var DeletePlatformApplication = &sDeletePlatformApplication
+
+var DeleteSMSSandboxPhoneNumber = &sDeleteSMSSandboxPhoneNumber
+
+var DeleteTopic = &sDeleteTopic
+
+var GetDataProtectionPolicy = &sGetDataProtectionPolicy
+
+var GetEndpointAttributes = &sGetEndpointAttributes
+
+var GetPlatformApplicationAttributes = &sGetPlatformApplicationAttributes
+
+var GetSMSAttributes = &sGetSMSAttributes
+
+var GetSMSSandboxAccountStatus = &sGetSMSSandboxAccountStatus
+
+var GetSubscriptionAttributes = &sGetSubscriptionAttributes
+
+var GetTopicAttributes = &sGetTopicAttributes
+
+var ListEndpointsByPlatformApplication = &sListEndpointsByPlatformApplication
+
+var ListOriginationNumbers = &sListOriginationNumbers
+
+var ListPhoneNumbersOptedOut = &sListPhoneNumbersOptedOut
+
+var ListPlatformApplications = &sListPlatformApplications
+
+var ListSMSSandboxPhoneNumbers = &sListSMSSandboxPhoneNumbers
+
+var ListSubscriptions = &sListSubscriptions
+
+var ListSubscriptionsByTopic = &sListSubscriptionsByTopic
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTopics = &sListTopics
+
+var OptInPhoneNumber = &sOptInPhoneNumber
+
+var Publish = &sPublish
+
+var PublishBatch = &sPublishBatch
+
+var PutDataProtectionPolicy = &sPutDataProtectionPolicy
+
+var RemovePermission = &sRemovePermission
+
+var SetEndpointAttributes = &sSetEndpointAttributes
+
+var SetPlatformApplicationAttributes = &sSetPlatformApplicationAttributes
+
+var SetSMSAttributes = &sSetSMSAttributes
+
+var SetSubscriptionAttributes = &sSetSubscriptionAttributes
+
+var SetTopicAttributes = &sSetTopicAttributes
+
+var Subscribe = &sSubscribe
+
+var TagResource = &sTagResource
+
+var Unsubscribe = &sUnsubscribe
+
+var UntagResource = &sUntagResource
+
+var VerifySMSSandboxPhoneNumber = &sVerifySMSSandboxPhoneNumber
+
+var _AmazonSimpleNotificationService = &s_AmazonSimpleNotificationService
+
+var _account = &s_account
+
+var _action = &s_action
+
+var _ActionsList = &s_ActionsList
+var _ActionsList_member = &s_ActionsList_member
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _attributeName = &s_attributeName
+
+var _attributeValue = &s_attributeValue
+
+var _authenticateOnUnsubscribe = &s_authenticateOnUnsubscribe
+
+var AuthorizationErrorException = &sAuthorizationErrorException
+var AuthorizationErrorException_message = &sAuthorizationErrorException_message
+
+var BatchEntryIdsNotDistinctException = &sBatchEntryIdsNotDistinctException
+var BatchEntryIdsNotDistinctException_message = &sBatchEntryIdsNotDistinctException_message
+
+var BatchRequestTooLongException = &sBatchRequestTooLongException
+var BatchRequestTooLongException_message = &sBatchRequestTooLongException_message
+
+var BatchResultErrorEntry = &sBatchResultErrorEntry
+var BatchResultErrorEntry_Id = &sBatchResultErrorEntry_Id
+var BatchResultErrorEntry_Code = &sBatchResultErrorEntry_Code
+var BatchResultErrorEntry_Message = &sBatchResultErrorEntry_Message
+var BatchResultErrorEntry_SenderFault = &sBatchResultErrorEntry_SenderFault
+
+var _BatchResultErrorEntryList = &s_BatchResultErrorEntryList
+var _BatchResultErrorEntryList_member = &s_BatchResultErrorEntryList_member
+
+var _Binary = &s_Binary
+
+var _boolean = &s_boolean
+
+var ConcurrentAccessException = &sConcurrentAccessException
+var ConcurrentAccessException_message = &sConcurrentAccessException_message
+
+var _delegate = &s_delegate
+
+var _DelegatesList = &s_DelegatesList
+var _DelegatesList_member = &s_DelegatesList_member
+
+var EmptyBatchRequestException = &sEmptyBatchRequestException
+var EmptyBatchRequestException_message = &sEmptyBatchRequestException_message
+
+var Endpoint = &sEndpoint
+var Endpoint_EndpointArn = &sEndpoint_EndpointArn
+var Endpoint_Attributes = &sEndpoint_Attributes
+
+var _Endpoint2 = &s_Endpoint2
+
+var EndpointDisabledException = &sEndpointDisabledException
+var EndpointDisabledException_message = &sEndpointDisabledException_message
+
+var FilterPolicyLimitExceededException = &sFilterPolicyLimitExceededException
+var FilterPolicyLimitExceededException_message = &sFilterPolicyLimitExceededException_message
+
+var InternalErrorException = &sInternalErrorException
+var InternalErrorException_message = &sInternalErrorException_message
+
+var InvalidBatchEntryIdException = &sInvalidBatchEntryIdException
+var InvalidBatchEntryIdException_message = &sInvalidBatchEntryIdException_message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+
+var InvalidParameterValueException = &sInvalidParameterValueException
+var InvalidParameterValueException_message = &sInvalidParameterValueException_message
+
+var InvalidSecurityException = &sInvalidSecurityException
+var InvalidSecurityException_message = &sInvalidSecurityException_message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_message = &sInvalidStateException_message
+
+var _Iso2CountryCode = &s_Iso2CountryCode
+
+var KMSAccessDeniedException = &sKMSAccessDeniedException
+var KMSAccessDeniedException_message = &sKMSAccessDeniedException_message
+
+var KMSDisabledException = &sKMSDisabledException
+var KMSDisabledException_message = &sKMSDisabledException_message
+
+var KMSInvalidStateException = &sKMSInvalidStateException
+var KMSInvalidStateException_message = &sKMSInvalidStateException_message
+
+var KMSNotFoundException = &sKMSNotFoundException
+var KMSNotFoundException_message = &sKMSNotFoundException_message
+
+var KMSOptInRequired = &sKMSOptInRequired
+var KMSOptInRequired_message = &sKMSOptInRequired_message
+
+var KMSThrottlingException = &sKMSThrottlingException
+var KMSThrottlingException_message = &sKMSThrottlingException_message
+
+var _label = &s_label
+
+var LanguageCodeString = &sLanguageCodeString
+var LanguageCodeString_en_US = &sLanguageCodeString_en_US
+var LanguageCodeString_en_GB = &sLanguageCodeString_en_GB
+var LanguageCodeString_es_419 = &sLanguageCodeString_es_419
+var LanguageCodeString_es_ES = &sLanguageCodeString_es_ES
+var LanguageCodeString_de_DE = &sLanguageCodeString_de_DE
+var LanguageCodeString_fr_CA = &sLanguageCodeString_fr_CA
+var LanguageCodeString_fr_FR = &sLanguageCodeString_fr_FR
+var LanguageCodeString_it_IT = &sLanguageCodeString_it_IT
+var LanguageCodeString_jp_JP = &sLanguageCodeString_jp_JP
+var LanguageCodeString_pt_BR = &sLanguageCodeString_pt_BR
+var LanguageCodeString_kr_KR = &sLanguageCodeString_kr_KR
+var LanguageCodeString_zh_CN = &sLanguageCodeString_zh_CN
+var LanguageCodeString_zh_TW = &sLanguageCodeString_zh_TW
+
+var _ListOfEndpoints = &s_ListOfEndpoints
+var _ListOfEndpoints_member = &s_ListOfEndpoints_member
+
+var _ListOfPlatformApplications = &s_ListOfPlatformApplications
+var _ListOfPlatformApplications_member = &s_ListOfPlatformApplications_member
+
+var _ListString = &s_ListString
+var _ListString_member = &s_ListString_member
+
+var _MapStringToString = &s_MapStringToString
+var _MapStringToString_key = &s_MapStringToString_key
+var _MapStringToString_value = &s_MapStringToString_value
+
+var _MaxItems = &s_MaxItems
+
+var _MaxItemsListOriginationNumbers = &s_MaxItemsListOriginationNumbers
+
+var _message = &s_message
+
+var _MessageAttributeMap = &s_MessageAttributeMap
+var _MessageAttributeMap_key = &s_MessageAttributeMap_key
+var _MessageAttributeMap_value = &s_MessageAttributeMap_value
+
+var MessageAttributeValue = &sMessageAttributeValue
+var MessageAttributeValue_DataType = &sMessageAttributeValue_DataType
+var MessageAttributeValue_StringValue = &sMessageAttributeValue_StringValue
+var MessageAttributeValue_BinaryValue = &sMessageAttributeValue_BinaryValue
+
+var _messageId = &s_messageId
+
+var _messageStructure = &s_messageStructure
+
+var _nextToken = &s_nextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var NumberCapability = &sNumberCapability
+var NumberCapability_SMS = &sNumberCapability_SMS
+var NumberCapability_MMS = &sNumberCapability_MMS
+var NumberCapability_VOICE = &sNumberCapability_VOICE
+
+var _NumberCapabilityList = &s_NumberCapabilityList
+var _NumberCapabilityList_member = &s_NumberCapabilityList_member
+
+var OptedOutException = &sOptedOutException
+var OptedOutException_message = &sOptedOutException_message
+
+var _OTPCode = &s_OTPCode
+
+var _PhoneNumber = &s_PhoneNumber
+
+var PhoneNumberInformation = &sPhoneNumberInformation
+var PhoneNumberInformation_CreatedAt = &sPhoneNumberInformation_CreatedAt
+var PhoneNumberInformation_PhoneNumber = &sPhoneNumberInformation_PhoneNumber
+var PhoneNumberInformation_Status = &sPhoneNumberInformation_Status
+var PhoneNumberInformation_Iso2CountryCode = &sPhoneNumberInformation_Iso2CountryCode
+var PhoneNumberInformation_RouteType = &sPhoneNumberInformation_RouteType
+var PhoneNumberInformation_NumberCapabilities = &sPhoneNumberInformation_NumberCapabilities
+
+var _PhoneNumberInformationList = &s_PhoneNumberInformationList
+var _PhoneNumberInformationList_member = &s_PhoneNumberInformationList_member
+
+var _PhoneNumberList = &s_PhoneNumberList
+var _PhoneNumberList_member = &s_PhoneNumberList_member
+
+var _PhoneNumberString = &s_PhoneNumberString
+
+var PlatformApplication = &sPlatformApplication
+var PlatformApplication_PlatformApplicationArn = &sPlatformApplication_PlatformApplicationArn
+var PlatformApplication_Attributes = &sPlatformApplication_Attributes
+
+var PlatformApplicationDisabledException = &sPlatformApplicationDisabledException
+var PlatformApplicationDisabledException_message = &sPlatformApplicationDisabledException_message
+
+var _protocol = &s_protocol
+
+var PublishBatchRequestEntry = &sPublishBatchRequestEntry
+var PublishBatchRequestEntry_Id = &sPublishBatchRequestEntry_Id
+var PublishBatchRequestEntry_Message = &sPublishBatchRequestEntry_Message
+var PublishBatchRequestEntry_Subject = &sPublishBatchRequestEntry_Subject
+var PublishBatchRequestEntry_MessageStructure = &sPublishBatchRequestEntry_MessageStructure
+var PublishBatchRequestEntry_MessageAttributes = &sPublishBatchRequestEntry_MessageAttributes
+var PublishBatchRequestEntry_MessageDeduplicationId = &sPublishBatchRequestEntry_MessageDeduplicationId
+var PublishBatchRequestEntry_MessageGroupId = &sPublishBatchRequestEntry_MessageGroupId
+
+var _PublishBatchRequestEntryList = &s_PublishBatchRequestEntryList
+var _PublishBatchRequestEntryList_member = &s_PublishBatchRequestEntryList_member
+
+var PublishBatchResultEntry = &sPublishBatchResultEntry
+var PublishBatchResultEntry_Id = &sPublishBatchResultEntry_Id
+var PublishBatchResultEntry_MessageId = &sPublishBatchResultEntry_MessageId
+var PublishBatchResultEntry_SequenceNumber = &sPublishBatchResultEntry_SequenceNumber
+
+var _PublishBatchResultEntryList = &s_PublishBatchResultEntryList
+var _PublishBatchResultEntryList_member = &s_PublishBatchResultEntryList_member
+
+var ReplayLimitExceededException = &sReplayLimitExceededException
+var ReplayLimitExceededException_message = &sReplayLimitExceededException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RouteType = &sRouteType
+var RouteType_Transactional = &sRouteType_Transactional
+var RouteType_Promotional = &sRouteType_Promotional
+var RouteType_Premium = &sRouteType_Premium
+
+var SMSSandboxPhoneNumber = &sSMSSandboxPhoneNumber
+var SMSSandboxPhoneNumber_PhoneNumber = &sSMSSandboxPhoneNumber_PhoneNumber
+var SMSSandboxPhoneNumber_Status = &sSMSSandboxPhoneNumber_Status
+
+var _SMSSandboxPhoneNumberList = &s_SMSSandboxPhoneNumberList
+var _SMSSandboxPhoneNumberList_member = &s_SMSSandboxPhoneNumberList_member
+
+var SMSSandboxPhoneNumberVerificationStatus = &sSMSSandboxPhoneNumberVerificationStatus
+var SMSSandboxPhoneNumberVerificationStatus_Pending = &sSMSSandboxPhoneNumberVerificationStatus_Pending
+var SMSSandboxPhoneNumberVerificationStatus_Verified = &sSMSSandboxPhoneNumberVerificationStatus_Verified
+
+var StaleTagException = &sStaleTagException
+var StaleTagException_message = &sStaleTagException_message
+
+var _String = &s_String
+
+var _subject = &s_subject
+
+var Subscription = &sSubscription
+var Subscription_SubscriptionArn = &sSubscription_SubscriptionArn
+var Subscription_Owner = &sSubscription_Owner
+var Subscription_Protocol = &sSubscription_Protocol
+var Subscription_Endpoint = &sSubscription_Endpoint
+var Subscription_TopicArn = &sSubscription_TopicArn
+
+var _subscriptionARN = &s_subscriptionARN
+
+var _SubscriptionAttributesMap = &s_SubscriptionAttributesMap
+var _SubscriptionAttributesMap_key = &s_SubscriptionAttributesMap_key
+var _SubscriptionAttributesMap_value = &s_SubscriptionAttributesMap_value
+
+var SubscriptionLimitExceededException = &sSubscriptionLimitExceededException
+var SubscriptionLimitExceededException_message = &sSubscriptionLimitExceededException_message
+
+var _SubscriptionsList = &s_SubscriptionsList
+var _SubscriptionsList_member = &s_SubscriptionsList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagLimitExceededException = &sTagLimitExceededException
+var TagLimitExceededException_message = &sTagLimitExceededException_message
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TagPolicyException = &sTagPolicyException
+var TagPolicyException_message = &sTagPolicyException_message
+
+var _TagValue = &s_TagValue
+
+var ThrottledException = &sThrottledException
+var ThrottledException_message = &sThrottledException_message
+
+var _Timestamp = &s_Timestamp
+
+var _token = &s_token
+
+var TooManyEntriesInBatchRequestException = &sTooManyEntriesInBatchRequestException
+var TooManyEntriesInBatchRequestException_message = &sTooManyEntriesInBatchRequestException_message
+
+var Topic = &sTopic
+var Topic_TopicArn = &sTopic_TopicArn
+
+var _topicARN = &s_topicARN
+
+var _TopicAttributesMap = &s_TopicAttributesMap
+var _TopicAttributesMap_key = &s_TopicAttributesMap_key
+var _TopicAttributesMap_value = &s_TopicAttributesMap_value
+
+var TopicLimitExceededException = &sTopicLimitExceededException
+var TopicLimitExceededException_message = &sTopicLimitExceededException_message
+
+var _topicName = &s_topicName
+
+var _TopicsList = &s_TopicsList
+var _TopicsList_member = &s_TopicsList_member
+
+var UserErrorException = &sUserErrorException
+var UserErrorException_message = &sUserErrorException_message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var VerificationException = &sVerificationException
+var VerificationException_Message = &sVerificationException_Message
+var VerificationException_Status = &sVerificationException_Status
+
+var AddPermissionInput = &sAddPermissionInput
+var AddPermissionInput_TopicArn = &sAddPermissionInput_TopicArn
+var AddPermissionInput_Label = &sAddPermissionInput_Label
+var AddPermissionInput_AWSAccountId = &sAddPermissionInput_AWSAccountId
+var AddPermissionInput_ActionName = &sAddPermissionInput_ActionName
+
+var CheckIfPhoneNumberIsOptedOutInput = &sCheckIfPhoneNumberIsOptedOutInput
+var CheckIfPhoneNumberIsOptedOutInput_phoneNumber = &sCheckIfPhoneNumberIsOptedOutInput_phoneNumber
+
+var CheckIfPhoneNumberIsOptedOutResponse = &sCheckIfPhoneNumberIsOptedOutResponse
+var CheckIfPhoneNumberIsOptedOutResponse_isOptedOut = &sCheckIfPhoneNumberIsOptedOutResponse_isOptedOut
+
+var ConfirmSubscriptionInput = &sConfirmSubscriptionInput
+var ConfirmSubscriptionInput_TopicArn = &sConfirmSubscriptionInput_TopicArn
+var ConfirmSubscriptionInput_Token = &sConfirmSubscriptionInput_Token
+var ConfirmSubscriptionInput_AuthenticateOnUnsubscribe = &sConfirmSubscriptionInput_AuthenticateOnUnsubscribe
+
+var ConfirmSubscriptionResponse = &sConfirmSubscriptionResponse
+var ConfirmSubscriptionResponse_SubscriptionArn = &sConfirmSubscriptionResponse_SubscriptionArn
+
+var CreatePlatformApplicationInput = &sCreatePlatformApplicationInput
+var CreatePlatformApplicationInput_Name = &sCreatePlatformApplicationInput_Name
+var CreatePlatformApplicationInput_Platform = &sCreatePlatformApplicationInput_Platform
+var CreatePlatformApplicationInput_Attributes = &sCreatePlatformApplicationInput_Attributes
+
+var CreatePlatformApplicationResponse = &sCreatePlatformApplicationResponse
+var CreatePlatformApplicationResponse_PlatformApplicationArn = &sCreatePlatformApplicationResponse_PlatformApplicationArn
+
+var CreatePlatformEndpointInput = &sCreatePlatformEndpointInput
+var CreatePlatformEndpointInput_PlatformApplicationArn = &sCreatePlatformEndpointInput_PlatformApplicationArn
+var CreatePlatformEndpointInput_Token = &sCreatePlatformEndpointInput_Token
+var CreatePlatformEndpointInput_CustomUserData = &sCreatePlatformEndpointInput_CustomUserData
+var CreatePlatformEndpointInput_Attributes = &sCreatePlatformEndpointInput_Attributes
+
+var CreateEndpointResponse = &sCreateEndpointResponse
+var CreateEndpointResponse_EndpointArn = &sCreateEndpointResponse_EndpointArn
+
+var CreateSMSSandboxPhoneNumberInput = &sCreateSMSSandboxPhoneNumberInput
+var CreateSMSSandboxPhoneNumberInput_PhoneNumber = &sCreateSMSSandboxPhoneNumberInput_PhoneNumber
+var CreateSMSSandboxPhoneNumberInput_LanguageCode = &sCreateSMSSandboxPhoneNumberInput_LanguageCode
+
+var CreateSMSSandboxPhoneNumberResult = &sCreateSMSSandboxPhoneNumberResult
+
+var CreateTopicInput = &sCreateTopicInput
+var CreateTopicInput_Name = &sCreateTopicInput_Name
+var CreateTopicInput_Attributes = &sCreateTopicInput_Attributes
+var CreateTopicInput_Tags = &sCreateTopicInput_Tags
+var CreateTopicInput_DataProtectionPolicy = &sCreateTopicInput_DataProtectionPolicy
+
+var CreateTopicResponse = &sCreateTopicResponse
+var CreateTopicResponse_TopicArn = &sCreateTopicResponse_TopicArn
+
+var DeleteEndpointInput = &sDeleteEndpointInput
+var DeleteEndpointInput_EndpointArn = &sDeleteEndpointInput_EndpointArn
+
+var DeletePlatformApplicationInput = &sDeletePlatformApplicationInput
+var DeletePlatformApplicationInput_PlatformApplicationArn = &sDeletePlatformApplicationInput_PlatformApplicationArn
+
+var DeleteSMSSandboxPhoneNumberInput = &sDeleteSMSSandboxPhoneNumberInput
+var DeleteSMSSandboxPhoneNumberInput_PhoneNumber = &sDeleteSMSSandboxPhoneNumberInput_PhoneNumber
+
+var DeleteSMSSandboxPhoneNumberResult = &sDeleteSMSSandboxPhoneNumberResult
+
+var DeleteTopicInput = &sDeleteTopicInput
+var DeleteTopicInput_TopicArn = &sDeleteTopicInput_TopicArn
+
+var GetDataProtectionPolicyInput = &sGetDataProtectionPolicyInput
+var GetDataProtectionPolicyInput_ResourceArn = &sGetDataProtectionPolicyInput_ResourceArn
+
+var GetDataProtectionPolicyResponse = &sGetDataProtectionPolicyResponse
+var GetDataProtectionPolicyResponse_DataProtectionPolicy = &sGetDataProtectionPolicyResponse_DataProtectionPolicy
+
+var GetEndpointAttributesInput = &sGetEndpointAttributesInput
+var GetEndpointAttributesInput_EndpointArn = &sGetEndpointAttributesInput_EndpointArn
+
+var GetEndpointAttributesResponse = &sGetEndpointAttributesResponse
+var GetEndpointAttributesResponse_Attributes = &sGetEndpointAttributesResponse_Attributes
+
+var GetPlatformApplicationAttributesInput = &sGetPlatformApplicationAttributesInput
+var GetPlatformApplicationAttributesInput_PlatformApplicationArn = &sGetPlatformApplicationAttributesInput_PlatformApplicationArn
+
+var GetPlatformApplicationAttributesResponse = &sGetPlatformApplicationAttributesResponse
+var GetPlatformApplicationAttributesResponse_Attributes = &sGetPlatformApplicationAttributesResponse_Attributes
+
+var GetSMSAttributesInput = &sGetSMSAttributesInput
+var GetSMSAttributesInput_attributes = &sGetSMSAttributesInput_attributes
+
+var GetSMSAttributesResponse = &sGetSMSAttributesResponse
+var GetSMSAttributesResponse_attributes = &sGetSMSAttributesResponse_attributes
+
+var GetSMSSandboxAccountStatusInput = &sGetSMSSandboxAccountStatusInput
+
+var GetSMSSandboxAccountStatusResult = &sGetSMSSandboxAccountStatusResult
+var GetSMSSandboxAccountStatusResult_IsInSandbox = &sGetSMSSandboxAccountStatusResult_IsInSandbox
+
+var GetSubscriptionAttributesInput = &sGetSubscriptionAttributesInput
+var GetSubscriptionAttributesInput_SubscriptionArn = &sGetSubscriptionAttributesInput_SubscriptionArn
+
+var GetSubscriptionAttributesResponse = &sGetSubscriptionAttributesResponse
+var GetSubscriptionAttributesResponse_Attributes = &sGetSubscriptionAttributesResponse_Attributes
+
+var GetTopicAttributesInput = &sGetTopicAttributesInput
+var GetTopicAttributesInput_TopicArn = &sGetTopicAttributesInput_TopicArn
+
+var GetTopicAttributesResponse = &sGetTopicAttributesResponse
+var GetTopicAttributesResponse_Attributes = &sGetTopicAttributesResponse_Attributes
+
+var ListEndpointsByPlatformApplicationInput = &sListEndpointsByPlatformApplicationInput
+var ListEndpointsByPlatformApplicationInput_PlatformApplicationArn = &sListEndpointsByPlatformApplicationInput_PlatformApplicationArn
+var ListEndpointsByPlatformApplicationInput_NextToken = &sListEndpointsByPlatformApplicationInput_NextToken
+
+var ListEndpointsByPlatformApplicationResponse = &sListEndpointsByPlatformApplicationResponse
+var ListEndpointsByPlatformApplicationResponse_Endpoints = &sListEndpointsByPlatformApplicationResponse_Endpoints
+var ListEndpointsByPlatformApplicationResponse_NextToken = &sListEndpointsByPlatformApplicationResponse_NextToken
+
+var ListOriginationNumbersRequest = &sListOriginationNumbersRequest
+var ListOriginationNumbersRequest_NextToken = &sListOriginationNumbersRequest_NextToken
+var ListOriginationNumbersRequest_MaxResults = &sListOriginationNumbersRequest_MaxResults
+
+var ListOriginationNumbersResult = &sListOriginationNumbersResult
+var ListOriginationNumbersResult_NextToken = &sListOriginationNumbersResult_NextToken
+var ListOriginationNumbersResult_PhoneNumbers = &sListOriginationNumbersResult_PhoneNumbers
+
+var ListPhoneNumbersOptedOutInput = &sListPhoneNumbersOptedOutInput
+var ListPhoneNumbersOptedOutInput_nextToken = &sListPhoneNumbersOptedOutInput_nextToken
+
+var ListPhoneNumbersOptedOutResponse = &sListPhoneNumbersOptedOutResponse
+var ListPhoneNumbersOptedOutResponse_phoneNumbers = &sListPhoneNumbersOptedOutResponse_phoneNumbers
+var ListPhoneNumbersOptedOutResponse_nextToken = &sListPhoneNumbersOptedOutResponse_nextToken
+
+var ListPlatformApplicationsInput = &sListPlatformApplicationsInput
+var ListPlatformApplicationsInput_NextToken = &sListPlatformApplicationsInput_NextToken
+
+var ListPlatformApplicationsResponse = &sListPlatformApplicationsResponse
+var ListPlatformApplicationsResponse_PlatformApplications = &sListPlatformApplicationsResponse_PlatformApplications
+var ListPlatformApplicationsResponse_NextToken = &sListPlatformApplicationsResponse_NextToken
+
+var ListSMSSandboxPhoneNumbersInput = &sListSMSSandboxPhoneNumbersInput
+var ListSMSSandboxPhoneNumbersInput_NextToken = &sListSMSSandboxPhoneNumbersInput_NextToken
+var ListSMSSandboxPhoneNumbersInput_MaxResults = &sListSMSSandboxPhoneNumbersInput_MaxResults
+
+var ListSMSSandboxPhoneNumbersResult = &sListSMSSandboxPhoneNumbersResult
+var ListSMSSandboxPhoneNumbersResult_PhoneNumbers = &sListSMSSandboxPhoneNumbersResult_PhoneNumbers
+var ListSMSSandboxPhoneNumbersResult_NextToken = &sListSMSSandboxPhoneNumbersResult_NextToken
+
+var ListSubscriptionsByTopicInput = &sListSubscriptionsByTopicInput
+var ListSubscriptionsByTopicInput_TopicArn = &sListSubscriptionsByTopicInput_TopicArn
+var ListSubscriptionsByTopicInput_NextToken = &sListSubscriptionsByTopicInput_NextToken
+
+var ListSubscriptionsByTopicResponse = &sListSubscriptionsByTopicResponse
+var ListSubscriptionsByTopicResponse_Subscriptions = &sListSubscriptionsByTopicResponse_Subscriptions
+var ListSubscriptionsByTopicResponse_NextToken = &sListSubscriptionsByTopicResponse_NextToken
+
+var ListSubscriptionsInput = &sListSubscriptionsInput
+var ListSubscriptionsInput_NextToken = &sListSubscriptionsInput_NextToken
+
+var ListSubscriptionsResponse = &sListSubscriptionsResponse
+var ListSubscriptionsResponse_Subscriptions = &sListSubscriptionsResponse_Subscriptions
+var ListSubscriptionsResponse_NextToken = &sListSubscriptionsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTopicsInput = &sListTopicsInput
+var ListTopicsInput_NextToken = &sListTopicsInput_NextToken
+
+var ListTopicsResponse = &sListTopicsResponse
+var ListTopicsResponse_Topics = &sListTopicsResponse_Topics
+var ListTopicsResponse_NextToken = &sListTopicsResponse_NextToken
+
+var OptInPhoneNumberInput = &sOptInPhoneNumberInput
+var OptInPhoneNumberInput_phoneNumber = &sOptInPhoneNumberInput_phoneNumber
+
+var OptInPhoneNumberResponse = &sOptInPhoneNumberResponse
+
+var PublishBatchInput = &sPublishBatchInput
+var PublishBatchInput_TopicArn = &sPublishBatchInput_TopicArn
+var PublishBatchInput_PublishBatchRequestEntries = &sPublishBatchInput_PublishBatchRequestEntries
+
+var PublishBatchResponse = &sPublishBatchResponse
+var PublishBatchResponse_Successful = &sPublishBatchResponse_Successful
+var PublishBatchResponse_Failed = &sPublishBatchResponse_Failed
+
+var PublishInput = &sPublishInput
+var PublishInput_TopicArn = &sPublishInput_TopicArn
+var PublishInput_TargetArn = &sPublishInput_TargetArn
+var PublishInput_PhoneNumber = &sPublishInput_PhoneNumber
+var PublishInput_Message = &sPublishInput_Message
+var PublishInput_Subject = &sPublishInput_Subject
+var PublishInput_MessageStructure = &sPublishInput_MessageStructure
+var PublishInput_MessageAttributes = &sPublishInput_MessageAttributes
+var PublishInput_MessageDeduplicationId = &sPublishInput_MessageDeduplicationId
+var PublishInput_MessageGroupId = &sPublishInput_MessageGroupId
+
+var PublishResponse = &sPublishResponse
+var PublishResponse_MessageId = &sPublishResponse_MessageId
+var PublishResponse_SequenceNumber = &sPublishResponse_SequenceNumber
+
+var PutDataProtectionPolicyInput = &sPutDataProtectionPolicyInput
+var PutDataProtectionPolicyInput_ResourceArn = &sPutDataProtectionPolicyInput_ResourceArn
+var PutDataProtectionPolicyInput_DataProtectionPolicy = &sPutDataProtectionPolicyInput_DataProtectionPolicy
+
+var RemovePermissionInput = &sRemovePermissionInput
+var RemovePermissionInput_TopicArn = &sRemovePermissionInput_TopicArn
+var RemovePermissionInput_Label = &sRemovePermissionInput_Label
+
+var SetEndpointAttributesInput = &sSetEndpointAttributesInput
+var SetEndpointAttributesInput_EndpointArn = &sSetEndpointAttributesInput_EndpointArn
+var SetEndpointAttributesInput_Attributes = &sSetEndpointAttributesInput_Attributes
+
+var SetPlatformApplicationAttributesInput = &sSetPlatformApplicationAttributesInput
+var SetPlatformApplicationAttributesInput_PlatformApplicationArn = &sSetPlatformApplicationAttributesInput_PlatformApplicationArn
+var SetPlatformApplicationAttributesInput_Attributes = &sSetPlatformApplicationAttributesInput_Attributes
+
+var SetSMSAttributesInput = &sSetSMSAttributesInput
+var SetSMSAttributesInput_attributes = &sSetSMSAttributesInput_attributes
+
+var SetSMSAttributesResponse = &sSetSMSAttributesResponse
+
+var SetSubscriptionAttributesInput = &sSetSubscriptionAttributesInput
+var SetSubscriptionAttributesInput_SubscriptionArn = &sSetSubscriptionAttributesInput_SubscriptionArn
+var SetSubscriptionAttributesInput_AttributeName = &sSetSubscriptionAttributesInput_AttributeName
+var SetSubscriptionAttributesInput_AttributeValue = &sSetSubscriptionAttributesInput_AttributeValue
+
+var SetTopicAttributesInput = &sSetTopicAttributesInput
+var SetTopicAttributesInput_TopicArn = &sSetTopicAttributesInput_TopicArn
+var SetTopicAttributesInput_AttributeName = &sSetTopicAttributesInput_AttributeName
+var SetTopicAttributesInput_AttributeValue = &sSetTopicAttributesInput_AttributeValue
+
+var SubscribeInput = &sSubscribeInput
+var SubscribeInput_TopicArn = &sSubscribeInput_TopicArn
+var SubscribeInput_Protocol = &sSubscribeInput_Protocol
+var SubscribeInput_Endpoint = &sSubscribeInput_Endpoint
+var SubscribeInput_Attributes = &sSubscribeInput_Attributes
+var SubscribeInput_ReturnSubscriptionArn = &sSubscribeInput_ReturnSubscriptionArn
+
+var SubscribeResponse = &sSubscribeResponse
+var SubscribeResponse_SubscriptionArn = &sSubscribeResponse_SubscriptionArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UnsubscribeInput = &sUnsubscribeInput
+var UnsubscribeInput_SubscriptionArn = &sUnsubscribeInput_SubscriptionArn
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var VerifySMSSandboxPhoneNumberInput = &sVerifySMSSandboxPhoneNumberInput
+var VerifySMSSandboxPhoneNumberInput_PhoneNumber = &sVerifySMSSandboxPhoneNumberInput_PhoneNumber
+var VerifySMSSandboxPhoneNumberInput_OneTimePassword = &sVerifySMSSandboxPhoneNumberInput_OneTimePassword
+
+var VerifySMSSandboxPhoneNumberResult = &sVerifySMSSandboxPhoneNumberResult
+
+var AmazonSimpleNotificationService = &smithy.ServiceSchema{Schema: &s_AmazonSimpleNotificationService, Version: "2010-03-31"}

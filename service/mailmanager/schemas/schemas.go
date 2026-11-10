@@ -4,4774 +4,4634 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAddonInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAddonSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAddressListImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressListImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIngressPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateIngressPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRelay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRelay",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRuleSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRuleSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTrafficPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateTrafficPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAddonInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAddonSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIngressPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteIngressPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRelay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRelay",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRuleSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRuleSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTrafficPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteTrafficPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterMemberFromAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeregisterMemberFromAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAddonInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAddonSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAddressListImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressListImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchiveExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchiveMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessage",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchiveMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessageContent",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchiveSearch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearch",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetArchiveSearchResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearchResults",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIngressPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetIngressPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMemberOfAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetMemberOfAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRelay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRelay",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRuleSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRuleSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTrafficPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetTrafficPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAddonInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonInstances",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAddonSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonSubscriptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAddressListImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressListImportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAddressLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListArchiveExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveExports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchives",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListArchiveSearches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveSearches",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIngressPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListIngressPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMembersOfAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListMembersOfAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRelays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRelays",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRuleSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRuleSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTrafficPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTrafficPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterMemberToAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RegisterMemberToAddressList",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAddressListImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartAddressListImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartArchiveExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartArchiveSearch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveSearch",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopAddressListImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopAddressListImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopArchiveExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopArchiveSearch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveSearch",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateIngressPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateIngressPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRelay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRelay",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRuleSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRuleSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTrafficPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateTrafficPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var _MailManagerSvc = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "MailManagerSvc",
-}, smithy.ShapeTypeService, 0)
-
-var MailManagerSvc = smithy.NewServiceSchema(_MailManagerSvc, "2023-10-17")
-
-var AcceptAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AcceptAction",
-}, smithy.ShapeTypeEnum, 2)
-var AcceptAction_ALLOW *smithy.Schema
-
-var AcceptAction_DENY *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var ActionFailurePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ActionFailurePolicy",
-}, smithy.ShapeTypeEnum, 2)
-var ActionFailurePolicy_CONTINUE *smithy.Schema
-
-var ActionFailurePolicy_DROP *smithy.Schema
-
-var AddHeaderAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddHeaderAction",
-}, smithy.ShapeTypeStructure, 2)
-var AddHeaderAction_HeaderName *smithy.Schema
-
-var AddHeaderAction_HeaderValue *smithy.Schema
-
-var AddonInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonInstance",
-}, smithy.ShapeTypeStructure, 5)
-var AddonInstance_AddonInstanceId *smithy.Schema
-
-var AddonInstance_AddonSubscriptionId *smithy.Schema
-
-var AddonInstance_AddonName *smithy.Schema
-
-var AddonInstance_AddonInstanceArn *smithy.Schema
-
-var AddonInstance_CreatedTimestamp *smithy.Schema
-
-var _AddonInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AddonInstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonInstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _AddonInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonInstances",
-}, smithy.ShapeTypeList, 1)
-var _AddonInstances_member *smithy.Schema
-
-var _AddonName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonName",
-}, smithy.ShapeTypeString, 0)
-
-var AddonSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonSubscription",
-}, smithy.ShapeTypeStructure, 4)
-var AddonSubscription_AddonSubscriptionId *smithy.Schema
-
-var AddonSubscription_AddonName *smithy.Schema
-
-var AddonSubscription_AddonSubscriptionArn *smithy.Schema
-
-var AddonSubscription_CreatedTimestamp *smithy.Schema
-
-var _AddonSubscriptionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonSubscriptionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AddonSubscriptionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonSubscriptionId",
-}, smithy.ShapeTypeString, 0)
-
-var _AddonSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddonSubscriptions",
-}, smithy.ShapeTypeList, 1)
-var _AddonSubscriptions_member *smithy.Schema
-
-var _Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Address",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AddressFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AddressFilter_AddressPrefix *smithy.Schema
-
-var AddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressList",
-}, smithy.ShapeTypeStructure, 5)
-var AddressList_AddressListId *smithy.Schema
-
-var AddressList_AddressListArn *smithy.Schema
-
-var AddressList_AddressListName *smithy.Schema
-
-var AddressList_CreatedTimestamp *smithy.Schema
-
-var AddressList_LastUpdatedTimestamp *smithy.Schema
-
-var _AddressListArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressListArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressListId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressListId",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressListName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressListName",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressLists",
-}, smithy.ShapeTypeList, 1)
-var _AddressLists_member *smithy.Schema
-
-var _AddressPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AddressPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AddressPrefix",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Analysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Analysis",
-}, smithy.ShapeTypeStructure, 2)
-var Analysis_Analyzer *smithy.Schema
-
-var Analysis_ResultField *smithy.Schema
-
-var _AnalyzerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "AnalyzerArn",
-}, smithy.ShapeTypeString, 0)
-
-var Archive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Archive",
-}, smithy.ShapeTypeStructure, 4)
-var Archive_ArchiveId *smithy.Schema
-
-var Archive_ArchiveName *smithy.Schema
-
-var Archive_ArchiveState *smithy.Schema
-
-var Archive_LastUpdatedTimestamp *smithy.Schema
-
-var ArchiveAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveAction",
-}, smithy.ShapeTypeStructure, 2)
-var ArchiveAction_ActionFailurePolicy *smithy.Schema
-
-var ArchiveAction_TargetArchive *smithy.Schema
-
-var _ArchiveArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveArn",
-}, smithy.ShapeTypeString, 0)
-
-var ArchiveBooleanEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveBooleanEmailAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var ArchiveBooleanEmailAttribute_HAS_ATTACHMENTS *smithy.Schema
-
-var ArchiveBooleanExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveBooleanExpression",
-}, smithy.ShapeTypeStructure, 2)
-var ArchiveBooleanExpression_Evaluate *smithy.Schema
-
-var ArchiveBooleanExpression_Operator *smithy.Schema
-
-var ArchiveBooleanOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveBooleanOperator",
-}, smithy.ShapeTypeEnum, 2)
-var ArchiveBooleanOperator_IS_TRUE *smithy.Schema
-
-var ArchiveBooleanOperator_IS_FALSE *smithy.Schema
-
-var ArchiveBooleanToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveBooleanToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var ArchiveBooleanToEvaluate_Attribute *smithy.Schema
-
-var _ArchivedMessageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchivedMessageId",
-}, smithy.ShapeTypeString, 0)
-
-var ArchiveFilterCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveFilterCondition",
-}, smithy.ShapeTypeUnion, 2)
-var ArchiveFilterCondition_StringExpression *smithy.Schema
-
-var ArchiveFilterCondition_BooleanExpression *smithy.Schema
-
-var _ArchiveFilterConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveFilterConditions",
-}, smithy.ShapeTypeList, 1)
-var _ArchiveFilterConditions_member *smithy.Schema
-
-var ArchiveFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveFilters",
-}, smithy.ShapeTypeStructure, 2)
-var ArchiveFilters_Include *smithy.Schema
-
-var ArchiveFilters_Unless *smithy.Schema
-
-var _ArchiveId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveId",
-}, smithy.ShapeTypeString, 0)
-
-var _ArchiveIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _ArchiveNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ArchiveRetention = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveRetention",
-}, smithy.ShapeTypeUnion, 1)
-var ArchiveRetention_RetentionPeriod *smithy.Schema
-
-var _ArchivesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchivesList",
-}, smithy.ShapeTypeList, 1)
-var _ArchivesList_member *smithy.Schema
-
-var ArchiveState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveState",
-}, smithy.ShapeTypeEnum, 2)
-var ArchiveState_ACTIVE *smithy.Schema
-
-var ArchiveState_PENDING_DELETION *smithy.Schema
-
-var ArchiveStringEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveStringEmailAttribute",
-}, smithy.ShapeTypeEnum, 6)
-var ArchiveStringEmailAttribute_TO *smithy.Schema
-
-var ArchiveStringEmailAttribute_FROM *smithy.Schema
-
-var ArchiveStringEmailAttribute_CC *smithy.Schema
-
-var ArchiveStringEmailAttribute_SUBJECT *smithy.Schema
-
-var ArchiveStringEmailAttribute_ENVELOPE_TO *smithy.Schema
-
-var ArchiveStringEmailAttribute_ENVELOPE_FROM *smithy.Schema
-
-var ArchiveStringExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveStringExpression",
-}, smithy.ShapeTypeStructure, 3)
-var ArchiveStringExpression_Evaluate *smithy.Schema
-
-var ArchiveStringExpression_Operator *smithy.Schema
-
-var ArchiveStringExpression_Values *smithy.Schema
-
-var ArchiveStringOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveStringOperator",
-}, smithy.ShapeTypeEnum, 1)
-var ArchiveStringOperator_CONTAINS *smithy.Schema
-
-var ArchiveStringToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ArchiveStringToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var ArchiveStringToEvaluate_Attribute *smithy.Schema
-
-var BounceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "BounceAction",
-}, smithy.ShapeTypeStructure, 7)
-var BounceAction_ActionFailurePolicy *smithy.Schema
-
-var BounceAction_RoleArn *smithy.Schema
-
-var BounceAction_Sender *smithy.Schema
-
-var BounceAction_StatusCode *smithy.Schema
-
-var BounceAction_SmtpReplyCode *smithy.Schema
-
-var BounceAction_DiagnosticMessage *smithy.Schema
-
-var BounceAction_Message *smithy.Schema
-
-var _BounceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "BounceMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CAContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CAContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _CrlContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CrlContent",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DeliverToMailboxAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeliverToMailboxAction",
-}, smithy.ShapeTypeStructure, 3)
-var DeliverToMailboxAction_ActionFailurePolicy *smithy.Schema
-
-var DeliverToMailboxAction_MailboxArn *smithy.Schema
-
-var DeliverToMailboxAction_RoleArn *smithy.Schema
-
-var DeliverToQBusinessAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeliverToQBusinessAction",
-}, smithy.ShapeTypeStructure, 4)
-var DeliverToQBusinessAction_ActionFailurePolicy *smithy.Schema
-
-var DeliverToQBusinessAction_ApplicationId *smithy.Schema
-
-var DeliverToQBusinessAction_IndexId *smithy.Schema
-
-var DeliverToQBusinessAction_RoleArn *smithy.Schema
-
-var _DiagnosticMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DiagnosticMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DropAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DropAction",
-}, smithy.ShapeTypeStructure, 0)
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EmailReceivedHeadersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "EmailReceivedHeadersList",
-}, smithy.ShapeTypeList, 1)
-var _EmailReceivedHeadersList_member *smithy.Schema
-
-var Envelope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Envelope",
-}, smithy.ShapeTypeStructure, 3)
-var Envelope_Helo *smithy.Schema
-
-var Envelope_From *smithy.Schema
-
-var Envelope_To *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExportDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportDestinationConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var ExportDestinationConfiguration_S3 *smithy.Schema
-
-var _ExportId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportId",
-}, smithy.ShapeTypeString, 0)
-
-var _ExportMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ExportState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportState",
-}, smithy.ShapeTypeEnum, 6)
-var ExportState_QUEUED *smithy.Schema
-
-var ExportState_PREPROCESSING *smithy.Schema
-
-var ExportState_PROCESSING *smithy.Schema
-
-var ExportState_COMPLETED *smithy.Schema
-
-var ExportState_FAILED *smithy.Schema
-
-var ExportState_CANCELLED *smithy.Schema
-
-var ExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportStatus",
-}, smithy.ShapeTypeStructure, 4)
-var ExportStatus_SubmissionTimestamp *smithy.Schema
-
-var ExportStatus_CompletionTimestamp *smithy.Schema
-
-var ExportStatus_State *smithy.Schema
-
-var ExportStatus_ErrorMessage *smithy.Schema
-
-var ExportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ExportSummary_ExportId *smithy.Schema
-
-var ExportSummary_Status *smithy.Schema
-
-var _ExportSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ExportSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ExportSummaryList_member *smithy.Schema
-
-var _HeaderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "HeaderName",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "HeaderValue",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var ImportDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ImportDataFormat",
-}, smithy.ShapeTypeStructure, 1)
-var ImportDataFormat_ImportDataType *smithy.Schema
-
-var ImportDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ImportDataType",
-}, smithy.ShapeTypeEnum, 2)
-var ImportDataType_CSV *smithy.Schema
-
-var ImportDataType_JSON *smithy.Schema
-
-var ImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ImportJob",
-}, smithy.ShapeTypeStructure, 12)
-var ImportJob_JobId *smithy.Schema
-
-var ImportJob_Name *smithy.Schema
-
-var ImportJob_Status *smithy.Schema
-
-var ImportJob_PreSignedUrl *smithy.Schema
-
-var ImportJob_ImportedItemsCount *smithy.Schema
-
-var ImportJob_FailedItemsCount *smithy.Schema
-
-var ImportJob_ImportDataFormat *smithy.Schema
-
-var ImportJob_AddressListId *smithy.Schema
-
-var ImportJob_CreatedTimestamp *smithy.Schema
-
-var ImportJob_StartTimestamp *smithy.Schema
-
-var ImportJob_CompletedTimestamp *smithy.Schema
-
-var ImportJob_Error *smithy.Schema
-
-var _ImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ImportJobs",
-}, smithy.ShapeTypeList, 1)
-var _ImportJobs_member *smithy.Schema
-
-var ImportJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ImportJobStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ImportJobStatus_CREATED *smithy.Schema
-
-var ImportJobStatus_PROCESSING *smithy.Schema
-
-var ImportJobStatus_COMPLETED *smithy.Schema
-
-var ImportJobStatus_FAILED *smithy.Schema
-
-var ImportJobStatus_STOPPED *smithy.Schema
-
-var _IngressAddressListArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressAddressListArnList",
-}, smithy.ShapeTypeList, 1)
-var _IngressAddressListArnList_member *smithy.Schema
-
-var IngressAddressListEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressAddressListEmailAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var IngressAddressListEmailAttribute_RECIPIENT *smithy.Schema
-
-var IngressAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressAnalysis",
-}, smithy.ShapeTypeStructure, 2)
-var IngressAnalysis_Analyzer *smithy.Schema
-
-var IngressAnalysis_ResultField *smithy.Schema
-
-var IngressBooleanExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressBooleanExpression",
-}, smithy.ShapeTypeStructure, 2)
-var IngressBooleanExpression_Evaluate *smithy.Schema
-
-var IngressBooleanExpression_Operator *smithy.Schema
-
-var IngressBooleanOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressBooleanOperator",
-}, smithy.ShapeTypeEnum, 2)
-var IngressBooleanOperator_IS_TRUE *smithy.Schema
-
-var IngressBooleanOperator_IS_FALSE *smithy.Schema
-
-var IngressBooleanToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressBooleanToEvaluate",
-}, smithy.ShapeTypeUnion, 2)
-var IngressBooleanToEvaluate_Analysis *smithy.Schema
-
-var IngressBooleanToEvaluate_IsInAddressList *smithy.Schema
-
-var IngressIpOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpOperator",
-}, smithy.ShapeTypeEnum, 2)
-var IngressIpOperator_CIDR_MATCHES *smithy.Schema
-
-var IngressIpOperator_NOT_CIDR_MATCHES *smithy.Schema
-
-var IngressIpToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var IngressIpToEvaluate_Attribute *smithy.Schema
-
-var IngressIpv4Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpv4Attribute",
-}, smithy.ShapeTypeEnum, 1)
-var IngressIpv4Attribute_SENDER_IP *smithy.Schema
-
-var IngressIpv4Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpv4Expression",
-}, smithy.ShapeTypeStructure, 3)
-var IngressIpv4Expression_Evaluate *smithy.Schema
-
-var IngressIpv4Expression_Operator *smithy.Schema
-
-var IngressIpv4Expression_Values *smithy.Schema
-
-var IngressIpv6Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpv6Attribute",
-}, smithy.ShapeTypeEnum, 1)
-var IngressIpv6Attribute_SENDER_IPV6 *smithy.Schema
-
-var IngressIpv6Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpv6Expression",
-}, smithy.ShapeTypeStructure, 3)
-var IngressIpv6Expression_Evaluate *smithy.Schema
-
-var IngressIpv6Expression_Operator *smithy.Schema
-
-var IngressIpv6Expression_Values *smithy.Schema
-
-var IngressIpv6ToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIpv6ToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var IngressIpv6ToEvaluate_Attribute *smithy.Schema
-
-var IngressIsInAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressIsInAddressList",
-}, smithy.ShapeTypeStructure, 2)
-var IngressIsInAddressList_Attribute *smithy.Schema
-
-var IngressIsInAddressList_AddressLists *smithy.Schema
-
-var IngressPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPoint",
-}, smithy.ShapeTypeStructure, 5)
-var IngressPoint_IngressPointName *smithy.Schema
-
-var IngressPoint_IngressPointId *smithy.Schema
-
-var IngressPoint_Status *smithy.Schema
-
-var IngressPoint_Type *smithy.Schema
-
-var IngressPoint_ARecord *smithy.Schema
-
-var _IngressPointARecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointARecord",
-}, smithy.ShapeTypeString, 0)
-
-var _IngressPointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointArn",
-}, smithy.ShapeTypeString, 0)
-
-var IngressPointAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointAuthConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var IngressPointAuthConfiguration_IngressPointPasswordConfiguration *smithy.Schema
-
-var IngressPointAuthConfiguration_SecretArn *smithy.Schema
-
-var IngressPointAuthConfiguration_TlsAuthConfiguration *smithy.Schema
-
-var IngressPointConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointConfiguration",
-}, smithy.ShapeTypeUnion, 3)
-var IngressPointConfiguration_SmtpPassword *smithy.Schema
-
-var IngressPointConfiguration_SecretArn *smithy.Schema
-
-var IngressPointConfiguration_TlsAuthConfiguration *smithy.Schema
-
-var _IngressPointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointId",
-}, smithy.ShapeTypeString, 0)
-
-var _IngressPointName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointName",
-}, smithy.ShapeTypeString, 0)
-
-var IngressPointPasswordConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointPasswordConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var IngressPointPasswordConfiguration_SmtpPasswordVersion *smithy.Schema
-
-var IngressPointPasswordConfiguration_PreviousSmtpPasswordVersion *smithy.Schema
-
-var IngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp *smithy.Schema
-
-var _IngressPointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointsList",
-}, smithy.ShapeTypeList, 1)
-var _IngressPointsList_member *smithy.Schema
-
-var IngressPointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointStatus",
-}, smithy.ShapeTypeEnum, 7)
-var IngressPointStatus_PROVISIONING *smithy.Schema
-
-var IngressPointStatus_DEPROVISIONING *smithy.Schema
-
-var IngressPointStatus_UPDATING *smithy.Schema
-
-var IngressPointStatus_ACTIVE *smithy.Schema
-
-var IngressPointStatus_CLOSED *smithy.Schema
-
-var IngressPointStatus_FAILED *smithy.Schema
-
-var IngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST *smithy.Schema
-
-var IngressPointStatusToUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointStatusToUpdate",
-}, smithy.ShapeTypeEnum, 2)
-var IngressPointStatusToUpdate_ACTIVE *smithy.Schema
-
-var IngressPointStatusToUpdate_CLOSED *smithy.Schema
-
-var IngressPointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressPointType",
-}, smithy.ShapeTypeEnum, 3)
-var IngressPointType_OPEN *smithy.Schema
-
-var IngressPointType_AUTH *smithy.Schema
-
-var IngressPointType_MTLS *smithy.Schema
-
-var IngressStringEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressStringEmailAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var IngressStringEmailAttribute_RECIPIENT *smithy.Schema
-
-var IngressStringExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressStringExpression",
-}, smithy.ShapeTypeStructure, 3)
-var IngressStringExpression_Evaluate *smithy.Schema
-
-var IngressStringExpression_Operator *smithy.Schema
-
-var IngressStringExpression_Values *smithy.Schema
-
-var IngressStringOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressStringOperator",
-}, smithy.ShapeTypeEnum, 5)
-var IngressStringOperator_EQUALS *smithy.Schema
-
-var IngressStringOperator_NOT_EQUALS *smithy.Schema
-
-var IngressStringOperator_STARTS_WITH *smithy.Schema
-
-var IngressStringOperator_ENDS_WITH *smithy.Schema
-
-var IngressStringOperator_CONTAINS *smithy.Schema
-
-var IngressStringToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressStringToEvaluate",
-}, smithy.ShapeTypeUnion, 2)
-var IngressStringToEvaluate_Attribute *smithy.Schema
-
-var IngressStringToEvaluate_Analysis *smithy.Schema
-
-var IngressTlsAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressTlsAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var IngressTlsAttribute_TLS_PROTOCOL *smithy.Schema
-
-var IngressTlsProtocolAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressTlsProtocolAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var IngressTlsProtocolAttribute_TLS1_2 *smithy.Schema
-
-var IngressTlsProtocolAttribute_TLS1_3 *smithy.Schema
-
-var IngressTlsProtocolExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressTlsProtocolExpression",
-}, smithy.ShapeTypeStructure, 3)
-var IngressTlsProtocolExpression_Evaluate *smithy.Schema
-
-var IngressTlsProtocolExpression_Operator *smithy.Schema
-
-var IngressTlsProtocolExpression_Value *smithy.Schema
-
-var IngressTlsProtocolOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressTlsProtocolOperator",
-}, smithy.ShapeTypeEnum, 2)
-var IngressTlsProtocolOperator_MINIMUM_TLS_VERSION *smithy.Schema
-
-var IngressTlsProtocolOperator_IS *smithy.Schema
-
-var IngressTlsProtocolToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IngressTlsProtocolToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var IngressTlsProtocolToEvaluate_Attribute *smithy.Schema
-
-var InvokeLambdaAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "InvokeLambdaAction",
-}, smithy.ShapeTypeStructure, 5)
-var InvokeLambdaAction_ActionFailurePolicy *smithy.Schema
-
-var InvokeLambdaAction_FunctionArn *smithy.Schema
-
-var InvokeLambdaAction_InvocationType *smithy.Schema
-
-var InvokeLambdaAction_RoleArn *smithy.Schema
-
-var InvokeLambdaAction_RetryTimeMinutes *smithy.Schema
-
-var IpType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "IpType",
-}, smithy.ShapeTypeEnum, 2)
-var IpType_IPV4 *smithy.Schema
-
-var IpType_DUAL_STACK *smithy.Schema
-
-var _Ipv4Cidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Ipv4Cidr",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv4Cidrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Ipv4Cidrs",
-}, smithy.ShapeTypeList, 1)
-var _Ipv4Cidrs_member *smithy.Schema
-
-var _Ipv6Cidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Ipv6Cidr",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv6Cidrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Ipv6Cidrs",
-}, smithy.ShapeTypeList, 1)
-var _Ipv6Cidrs_member *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobItemsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "JobItemsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaFunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "LambdaFunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaInvocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "LambdaInvocationType",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaInvocationType_EVENT *smithy.Schema
-
-var LambdaInvocationType_REQUEST_RESPONSE *smithy.Schema
-
-var _LambdaRetryTimeMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "LambdaRetryTimeMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var MailFrom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "MailFrom",
-}, smithy.ShapeTypeEnum, 2)
-var MailFrom_REPLACE *smithy.Schema
-
-var MailFrom_PRESERVE *smithy.Schema
-
-var _MaxMessageSizeBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "MaxMessageSizeBytes",
-}, smithy.ShapeTypeInteger, 0)
-
-var MessageBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "MessageBody",
-}, smithy.ShapeTypeStructure, 3)
-var MessageBody_Text *smithy.Schema
-
-var MessageBody_Html *smithy.Schema
-
-var MessageBody_MessageMalformed *smithy.Schema
-
-var Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Metadata",
-}, smithy.ShapeTypeStructure, 13)
-var Metadata_Timestamp *smithy.Schema
-
-var Metadata_IngressPointId *smithy.Schema
-
-var Metadata_TrafficPolicyId *smithy.Schema
-
-var Metadata_RuleSetId *smithy.Schema
-
-var Metadata_SenderHostname *smithy.Schema
-
-var Metadata_SenderIpAddress *smithy.Schema
-
-var Metadata_TlsCipherSuite *smithy.Schema
-
-var Metadata_TlsProtocol *smithy.Schema
-
-var Metadata_SendingMethod *smithy.Schema
-
-var Metadata_SourceIdentity *smithy.Schema
-
-var Metadata_SendingPool *smithy.Schema
-
-var Metadata_ConfigurationSet *smithy.Schema
-
-var Metadata_SourceArn *smithy.Schema
-
-var _MimeHeaderAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "MimeHeaderAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _NameOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "NameOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var NetworkConfiguration_PublicNetworkConfiguration *smithy.Schema
-
-var NetworkConfiguration_PrivateNetworkConfiguration *smithy.Schema
-
-var NoAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "NoAuthentication",
-}, smithy.ShapeTypeStructure, 0)
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PolicyCondition",
-}, smithy.ShapeTypeUnion, 5)
-var PolicyCondition_StringExpression *smithy.Schema
-
-var PolicyCondition_IpExpression *smithy.Schema
-
-var PolicyCondition_Ipv6Expression *smithy.Schema
-
-var PolicyCondition_TlsExpression *smithy.Schema
-
-var PolicyCondition_BooleanExpression *smithy.Schema
-
-var _PolicyConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PolicyConditions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyConditions_member *smithy.Schema
-
-var PolicyStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PolicyStatement",
-}, smithy.ShapeTypeStructure, 2)
-var PolicyStatement_Conditions *smithy.Schema
-
-var PolicyStatement_Action *smithy.Schema
-
-var _PolicyStatementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PolicyStatementList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyStatementList_member *smithy.Schema
-
-var _PreSignedUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PreSignedUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PrivateNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PrivateNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PrivateNetworkConfiguration_VpcEndpointId *smithy.Schema
-
-var PublicNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "PublicNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PublicNetworkConfiguration_IpType *smithy.Schema
-
-var _QBusinessApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "QBusinessApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _QBusinessIndexId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "QBusinessIndexId",
-}, smithy.ShapeTypeString, 0)
-
-var _Recipients = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Recipients",
-}, smithy.ShapeTypeList, 1)
-var _Recipients_member *smithy.Schema
-
-var Relay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Relay",
-}, smithy.ShapeTypeStructure, 3)
-var Relay_RelayId *smithy.Schema
-
-var Relay_RelayName *smithy.Schema
-
-var Relay_LastModifiedTimestamp *smithy.Schema
-
-var RelayAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayAction",
-}, smithy.ShapeTypeStructure, 3)
-var RelayAction_ActionFailurePolicy *smithy.Schema
-
-var RelayAction_Relay *smithy.Schema
-
-var RelayAction_MailFrom *smithy.Schema
-
-var _RelayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayArn",
-}, smithy.ShapeTypeString, 0)
-
-var RelayAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayAuthentication",
-}, smithy.ShapeTypeUnion, 2)
-var RelayAuthentication_SecretArn *smithy.Schema
-
-var RelayAuthentication_NoAuthentication *smithy.Schema
-
-var _RelayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayId",
-}, smithy.ShapeTypeString, 0)
-
-var _RelayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayName",
-}, smithy.ShapeTypeString, 0)
-
-var _Relays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Relays",
-}, smithy.ShapeTypeList, 1)
-var _Relays_member *smithy.Schema
-
-var _RelayServerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayServerName",
-}, smithy.ShapeTypeString, 0)
-
-var _RelayServerPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RelayServerPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var ReplaceRecipientAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ReplaceRecipientAction",
-}, smithy.ShapeTypeStructure, 1)
-var ReplaceRecipientAction_ReplaceWith *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResultField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ResultField",
-}, smithy.ShapeTypeString, 0)
-
-var RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RetentionPeriod",
-}, smithy.ShapeTypeEnum, 16)
-var RetentionPeriod_THREE_MONTHS *smithy.Schema
-
-var RetentionPeriod_SIX_MONTHS *smithy.Schema
-
-var RetentionPeriod_NINE_MONTHS *smithy.Schema
-
-var RetentionPeriod_ONE_YEAR *smithy.Schema
-
-var RetentionPeriod_EIGHTEEN_MONTHS *smithy.Schema
-
-var RetentionPeriod_TWO_YEARS *smithy.Schema
-
-var RetentionPeriod_THIRTY_MONTHS *smithy.Schema
-
-var RetentionPeriod_THREE_YEARS *smithy.Schema
-
-var RetentionPeriod_FOUR_YEARS *smithy.Schema
-
-var RetentionPeriod_FIVE_YEARS *smithy.Schema
-
-var RetentionPeriod_SIX_YEARS *smithy.Schema
-
-var RetentionPeriod_SEVEN_YEARS *smithy.Schema
-
-var RetentionPeriod_EIGHT_YEARS *smithy.Schema
-
-var RetentionPeriod_NINE_YEARS *smithy.Schema
-
-var RetentionPeriod_TEN_YEARS *smithy.Schema
-
-var RetentionPeriod_PERMANENT *smithy.Schema
-
-var Row = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Row",
-}, smithy.ShapeTypeStructure, 19)
-var Row_ArchivedMessageId *smithy.Schema
-
-var Row_ReceivedTimestamp *smithy.Schema
-
-var Row_Date *smithy.Schema
-
-var Row_To *smithy.Schema
-
-var Row_From *smithy.Schema
-
-var Row_Cc *smithy.Schema
-
-var Row_Subject *smithy.Schema
-
-var Row_MessageId *smithy.Schema
-
-var Row_HasAttachments *smithy.Schema
-
-var Row_ReceivedHeaders *smithy.Schema
-
-var Row_InReplyTo *smithy.Schema
-
-var Row_XMailer *smithy.Schema
-
-var Row_XOriginalMailer *smithy.Schema
-
-var Row_XPriority *smithy.Schema
-
-var Row_IngressPointId *smithy.Schema
-
-var Row_SenderHostname *smithy.Schema
-
-var Row_SenderIpAddress *smithy.Schema
-
-var Row_Envelope *smithy.Schema
-
-var Row_SourceArn *smithy.Schema
-
-var _RowsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RowsList",
-}, smithy.ShapeTypeList, 1)
-var _RowsList_member *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 4)
-var Rule_Name *smithy.Schema
-
-var Rule_Conditions *smithy.Schema
-
-var Rule_Unless *smithy.Schema
-
-var Rule_Actions *smithy.Schema
-
-var RuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleAction",
-}, smithy.ShapeTypeUnion, 12)
-var RuleAction_Drop *smithy.Schema
-
-var RuleAction_Relay *smithy.Schema
-
-var RuleAction_Archive *smithy.Schema
-
-var RuleAction_WriteToS3 *smithy.Schema
-
-var RuleAction_Send *smithy.Schema
-
-var RuleAction_AddHeader *smithy.Schema
-
-var RuleAction_ReplaceRecipient *smithy.Schema
-
-var RuleAction_DeliverToMailbox *smithy.Schema
-
-var RuleAction_DeliverToQBusiness *smithy.Schema
-
-var RuleAction_PublishToSns *smithy.Schema
-
-var RuleAction_Bounce *smithy.Schema
-
-var RuleAction_InvokeLambda *smithy.Schema
-
-var _RuleActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleActions",
-}, smithy.ShapeTypeList, 1)
-var _RuleActions_member *smithy.Schema
-
-var _RuleAddressListArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleAddressListArnList",
-}, smithy.ShapeTypeList, 1)
-var _RuleAddressListArnList_member *smithy.Schema
-
-var RuleAddressListEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleAddressListEmailAttribute",
-}, smithy.ShapeTypeEnum, 6)
-var RuleAddressListEmailAttribute_RECIPIENT *smithy.Schema
-
-var RuleAddressListEmailAttribute_MAIL_FROM *smithy.Schema
-
-var RuleAddressListEmailAttribute_SENDER *smithy.Schema
-
-var RuleAddressListEmailAttribute_FROM *smithy.Schema
-
-var RuleAddressListEmailAttribute_TO *smithy.Schema
-
-var RuleAddressListEmailAttribute_CC *smithy.Schema
-
-var RuleBooleanEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleBooleanEmailAttribute",
-}, smithy.ShapeTypeEnum, 3)
-var RuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED *smithy.Schema
-
-var RuleBooleanEmailAttribute_TLS *smithy.Schema
-
-var RuleBooleanEmailAttribute_TLS_WRAPPED *smithy.Schema
-
-var RuleBooleanExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleBooleanExpression",
-}, smithy.ShapeTypeStructure, 2)
-var RuleBooleanExpression_Evaluate *smithy.Schema
-
-var RuleBooleanExpression_Operator *smithy.Schema
-
-var RuleBooleanOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleBooleanOperator",
-}, smithy.ShapeTypeEnum, 2)
-var RuleBooleanOperator_IS_TRUE *smithy.Schema
-
-var RuleBooleanOperator_IS_FALSE *smithy.Schema
-
-var RuleBooleanToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleBooleanToEvaluate",
-}, smithy.ShapeTypeUnion, 3)
-var RuleBooleanToEvaluate_Attribute *smithy.Schema
-
-var RuleBooleanToEvaluate_Analysis *smithy.Schema
-
-var RuleBooleanToEvaluate_IsInAddressList *smithy.Schema
-
-var RuleClientCertificateAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleClientCertificateAttribute",
-}, smithy.ShapeTypeEnum, 8)
-var RuleClientCertificateAttribute_CN *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_RFC822_NAME *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_DNS_NAME *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_DIRECTORY_NAME *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_IP_ADDRESS *smithy.Schema
-
-var RuleClientCertificateAttribute_SAN_REGISTERED_ID *smithy.Schema
-
-var RuleClientCertificateAttribute_SERIAL_NUMBER *smithy.Schema
-
-var RuleCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleCondition",
-}, smithy.ShapeTypeUnion, 6)
-var RuleCondition_BooleanExpression *smithy.Schema
-
-var RuleCondition_StringExpression *smithy.Schema
-
-var RuleCondition_NumberExpression *smithy.Schema
-
-var RuleCondition_IpExpression *smithy.Schema
-
-var RuleCondition_VerdictExpression *smithy.Schema
-
-var RuleCondition_DmarcExpression *smithy.Schema
-
-var _RuleConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleConditions",
-}, smithy.ShapeTypeList, 1)
-var _RuleConditions_member *smithy.Schema
-
-var RuleDmarcExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleDmarcExpression",
-}, smithy.ShapeTypeStructure, 2)
-var RuleDmarcExpression_Operator *smithy.Schema
-
-var RuleDmarcExpression_Values *smithy.Schema
-
-var RuleDmarcOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleDmarcOperator",
-}, smithy.ShapeTypeEnum, 2)
-var RuleDmarcOperator_EQUALS *smithy.Schema
-
-var RuleDmarcOperator_NOT_EQUALS *smithy.Schema
-
-var RuleDmarcPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleDmarcPolicy",
-}, smithy.ShapeTypeEnum, 3)
-var RuleDmarcPolicy_NONE *smithy.Schema
-
-var RuleDmarcPolicy_QUARANTINE *smithy.Schema
-
-var RuleDmarcPolicy_REJECT *smithy.Schema
-
-var _RuleDmarcValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleDmarcValueList",
-}, smithy.ShapeTypeList, 1)
-var _RuleDmarcValueList_member *smithy.Schema
-
-var RuleIpEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpEmailAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var RuleIpEmailAttribute_SOURCE_IP *smithy.Schema
-
-var RuleIpExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpExpression",
-}, smithy.ShapeTypeStructure, 3)
-var RuleIpExpression_Evaluate *smithy.Schema
-
-var RuleIpExpression_Operator *smithy.Schema
-
-var RuleIpExpression_Values *smithy.Schema
-
-var RuleIpOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpOperator",
-}, smithy.ShapeTypeEnum, 2)
-var RuleIpOperator_CIDR_MATCHES *smithy.Schema
-
-var RuleIpOperator_NOT_CIDR_MATCHES *smithy.Schema
-
-var _RuleIpStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpStringValue",
-}, smithy.ShapeTypeString, 0)
-
-var RuleIpToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var RuleIpToEvaluate_Attribute *smithy.Schema
-
-var _RuleIpValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIpValueList",
-}, smithy.ShapeTypeList, 1)
-var _RuleIpValueList_member *smithy.Schema
-
-var RuleIsInAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleIsInAddressList",
-}, smithy.ShapeTypeStructure, 2)
-var RuleIsInAddressList_Attribute *smithy.Schema
-
-var RuleIsInAddressList_AddressLists *smithy.Schema
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var RuleNumberEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleNumberEmailAttribute",
-}, smithy.ShapeTypeEnum, 1)
-var RuleNumberEmailAttribute_MESSAGE_SIZE *smithy.Schema
-
-var RuleNumberExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleNumberExpression",
-}, smithy.ShapeTypeStructure, 3)
-var RuleNumberExpression_Evaluate *smithy.Schema
-
-var RuleNumberExpression_Operator *smithy.Schema
-
-var RuleNumberExpression_Value *smithy.Schema
-
-var RuleNumberOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleNumberOperator",
-}, smithy.ShapeTypeEnum, 6)
-var RuleNumberOperator_EQUALS *smithy.Schema
-
-var RuleNumberOperator_NOT_EQUALS *smithy.Schema
-
-var RuleNumberOperator_LESS_THAN *smithy.Schema
-
-var RuleNumberOperator_GREATER_THAN *smithy.Schema
-
-var RuleNumberOperator_LESS_THAN_OR_EQUAL *smithy.Schema
-
-var RuleNumberOperator_GREATER_THAN_OR_EQUAL *smithy.Schema
-
-var RuleNumberToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleNumberToEvaluate",
-}, smithy.ShapeTypeUnion, 1)
-var RuleNumberToEvaluate_Attribute *smithy.Schema
-
-var _Rules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Rules",
-}, smithy.ShapeTypeList, 1)
-var _Rules_member *smithy.Schema
-
-var RuleSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleSet",
-}, smithy.ShapeTypeStructure, 3)
-var RuleSet_RuleSetId *smithy.Schema
-
-var RuleSet_RuleSetName *smithy.Schema
-
-var RuleSet_LastModificationDate *smithy.Schema
-
-var _RuleSetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleSetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleSetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleSetId",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleSets",
-}, smithy.ShapeTypeList, 1)
-var _RuleSets_member *smithy.Schema
-
-var RuleStringEmailAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringEmailAttribute",
-}, smithy.ShapeTypeEnum, 8)
-var RuleStringEmailAttribute_MAIL_FROM *smithy.Schema
-
-var RuleStringEmailAttribute_HELO *smithy.Schema
-
-var RuleStringEmailAttribute_RECIPIENT *smithy.Schema
-
-var RuleStringEmailAttribute_SENDER *smithy.Schema
-
-var RuleStringEmailAttribute_FROM *smithy.Schema
-
-var RuleStringEmailAttribute_SUBJECT *smithy.Schema
-
-var RuleStringEmailAttribute_TO *smithy.Schema
-
-var RuleStringEmailAttribute_CC *smithy.Schema
-
-var RuleStringExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringExpression",
-}, smithy.ShapeTypeStructure, 3)
-var RuleStringExpression_Evaluate *smithy.Schema
-
-var RuleStringExpression_Operator *smithy.Schema
-
-var RuleStringExpression_Values *smithy.Schema
-
-var _RuleStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringList",
-}, smithy.ShapeTypeList, 1)
-var _RuleStringList_member *smithy.Schema
-
-var RuleStringOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringOperator",
-}, smithy.ShapeTypeEnum, 5)
-var RuleStringOperator_EQUALS *smithy.Schema
-
-var RuleStringOperator_NOT_EQUALS *smithy.Schema
-
-var RuleStringOperator_STARTS_WITH *smithy.Schema
-
-var RuleStringOperator_ENDS_WITH *smithy.Schema
-
-var RuleStringOperator_CONTAINS *smithy.Schema
-
-var RuleStringToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringToEvaluate",
-}, smithy.ShapeTypeUnion, 4)
-var RuleStringToEvaluate_Attribute *smithy.Schema
-
-var RuleStringToEvaluate_MimeHeaderAttribute *smithy.Schema
-
-var RuleStringToEvaluate_Analysis *smithy.Schema
-
-var RuleStringToEvaluate_ClientCertificateAttribute *smithy.Schema
-
-var _RuleStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleStringValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var RuleVerdict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdict",
-}, smithy.ShapeTypeEnum, 4)
-var RuleVerdict_PASS *smithy.Schema
-
-var RuleVerdict_FAIL *smithy.Schema
-
-var RuleVerdict_GRAY *smithy.Schema
-
-var RuleVerdict_PROCESSING_FAILED *smithy.Schema
-
-var RuleVerdictAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdictAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var RuleVerdictAttribute_SPF *smithy.Schema
-
-var RuleVerdictAttribute_DKIM *smithy.Schema
-
-var RuleVerdictExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdictExpression",
-}, smithy.ShapeTypeStructure, 3)
-var RuleVerdictExpression_Evaluate *smithy.Schema
-
-var RuleVerdictExpression_Operator *smithy.Schema
-
-var RuleVerdictExpression_Values *smithy.Schema
-
-var RuleVerdictOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdictOperator",
-}, smithy.ShapeTypeEnum, 2)
-var RuleVerdictOperator_EQUALS *smithy.Schema
-
-var RuleVerdictOperator_NOT_EQUALS *smithy.Schema
-
-var RuleVerdictToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdictToEvaluate",
-}, smithy.ShapeTypeUnion, 2)
-var RuleVerdictToEvaluate_Attribute *smithy.Schema
-
-var RuleVerdictToEvaluate_Analysis *smithy.Schema
-
-var _RuleVerdictValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RuleVerdictValueList",
-}, smithy.ShapeTypeList, 1)
-var _RuleVerdictValueList_member *smithy.Schema
-
-var S3Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3Action",
-}, smithy.ShapeTypeStructure, 5)
-var S3Action_ActionFailurePolicy *smithy.Schema
-
-var S3Action_RoleArn *smithy.Schema
-
-var S3Action_S3Bucket *smithy.Schema
-
-var S3Action_S3Prefix *smithy.Schema
-
-var S3Action_S3SseKmsKeyId *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var S3ExportDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3ExportDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3ExportDestinationConfiguration_S3Location *smithy.Schema
-
-var _S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3Location",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _S3PresignedURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "S3PresignedURL",
-}, smithy.ShapeTypeString, 0)
-
-var SavedAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SavedAddress",
-}, smithy.ShapeTypeStructure, 2)
-var SavedAddress_Address *smithy.Schema
-
-var SavedAddress_CreatedTimestamp *smithy.Schema
-
-var _SavedAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SavedAddresses",
-}, smithy.ShapeTypeList, 1)
-var _SavedAddresses_member *smithy.Schema
-
-var _SearchId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchId",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var SearchState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchState",
-}, smithy.ShapeTypeEnum, 5)
-var SearchState_QUEUED *smithy.Schema
-
-var SearchState_RUNNING *smithy.Schema
-
-var SearchState_COMPLETED *smithy.Schema
-
-var SearchState_FAILED *smithy.Schema
-
-var SearchState_CANCELLED *smithy.Schema
-
-var SearchStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchStatus",
-}, smithy.ShapeTypeStructure, 4)
-var SearchStatus_SubmissionTimestamp *smithy.Schema
-
-var SearchStatus_CompletionTimestamp *smithy.Schema
-
-var SearchStatus_State *smithy.Schema
-
-var SearchStatus_ErrorMessage *smithy.Schema
-
-var SearchSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SearchSummary_SearchId *smithy.Schema
-
-var SearchSummary_Status *smithy.Schema
-
-var _SearchSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SearchSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SearchSummaryList_member *smithy.Schema
-
-var _SecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var SendAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SendAction",
-}, smithy.ShapeTypeStructure, 2)
-var SendAction_ActionFailurePolicy *smithy.Schema
-
-var SendAction_RoleArn *smithy.Schema
-
-var _SenderIpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SenderIpAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _SmtpPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SmtpPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SmtpReplyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SmtpReplyCode",
-}, smithy.ShapeTypeString, 0)
-
-var SnsAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SnsAction",
-}, smithy.ShapeTypeStructure, 5)
-var SnsAction_ActionFailurePolicy *smithy.Schema
-
-var SnsAction_TopicArn *smithy.Schema
-
-var SnsAction_RoleArn *smithy.Schema
-
-var SnsAction_Encoding *smithy.Schema
-
-var SnsAction_PayloadType *smithy.Schema
-
-var SnsNotificationEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SnsNotificationEncoding",
-}, smithy.ShapeTypeEnum, 2)
-var SnsNotificationEncoding_UTF_8 *smithy.Schema
-
-var SnsNotificationEncoding_BASE64 *smithy.Schema
-
-var SnsNotificationPayloadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SnsNotificationPayloadType",
-}, smithy.ShapeTypeEnum, 2)
-var SnsNotificationPayloadType_HEADERS *smithy.Schema
-
-var SnsNotificationPayloadType_CONTENT *smithy.Schema
-
-var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "SnsTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StringValueList",
-}, smithy.ShapeTypeList, 1)
-var _StringValueList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TlsAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TlsAuthConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TlsAuthConfiguration_TrustStore *smithy.Schema
-
-var TlsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TlsPolicy",
-}, smithy.ShapeTypeEnum, 3)
-var TlsPolicy_REQUIRED *smithy.Schema
-
-var TlsPolicy_OPTIONAL *smithy.Schema
-
-var TlsPolicy_FIPS *smithy.Schema
-
-var TrafficPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrafficPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var TrafficPolicy_TrafficPolicyName *smithy.Schema
-
-var TrafficPolicy_TrafficPolicyId *smithy.Schema
-
-var TrafficPolicy_DefaultAction *smithy.Schema
-
-var _TrafficPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrafficPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TrafficPolicyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrafficPolicyId",
-}, smithy.ShapeTypeString, 0)
-
-var _TrafficPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrafficPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _TrafficPolicyList_member *smithy.Schema
-
-var _TrafficPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrafficPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var TrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrustStore",
-}, smithy.ShapeTypeStructure, 3)
-var TrustStore_CAContent *smithy.Schema
-
-var TrustStore_CrlContent *smithy.Schema
-
-var TrustStore_KmsKeyArn *smithy.Schema
-
-var TrustStoreResponseOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TrustStoreResponseOption",
-}, smithy.ShapeTypeEnum, 2)
-var TrustStoreResponseOption_EXCLUDE *smithy.Schema
-
-var TrustStoreResponseOption_INCLUDE *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateAddonInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonInstanceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAddonInstanceRequest_ClientToken *smithy.Schema
-
-var CreateAddonInstanceRequest_AddonSubscriptionId *smithy.Schema
-
-var CreateAddonInstanceRequest_Tags *smithy.Schema
-
-var CreateAddonInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonInstanceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAddonInstanceResponse_AddonInstanceId *smithy.Schema
-
-var CreateAddonSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAddonSubscriptionRequest_ClientToken *smithy.Schema
-
-var CreateAddonSubscriptionRequest_AddonName *smithy.Schema
-
-var CreateAddonSubscriptionRequest_Tags *smithy.Schema
-
-var CreateAddonSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddonSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAddonSubscriptionResponse_AddonSubscriptionId *smithy.Schema
-
-var CreateAddressListImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressListImportJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAddressListImportJobRequest_ClientToken *smithy.Schema
-
-var CreateAddressListImportJobRequest_AddressListId *smithy.Schema
-
-var CreateAddressListImportJobRequest_Name *smithy.Schema
-
-var CreateAddressListImportJobRequest_ImportDataFormat *smithy.Schema
-
-var CreateAddressListImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressListImportJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAddressListImportJobResponse_JobId *smithy.Schema
-
-var CreateAddressListImportJobResponse_PreSignedUrl *smithy.Schema
-
-var CreateAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressListRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAddressListRequest_ClientToken *smithy.Schema
-
-var CreateAddressListRequest_AddressListName *smithy.Schema
-
-var CreateAddressListRequest_Tags *smithy.Schema
-
-var CreateAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateAddressListResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAddressListResponse_AddressListId *smithy.Schema
-
-var CreateArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateArchiveRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateArchiveRequest_ClientToken *smithy.Schema
-
-var CreateArchiveRequest_ArchiveName *smithy.Schema
-
-var CreateArchiveRequest_Retention *smithy.Schema
-
-var CreateArchiveRequest_KmsKeyArn *smithy.Schema
-
-var CreateArchiveRequest_Tags *smithy.Schema
-
-var CreateArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateArchiveResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateArchiveResponse_ArchiveId *smithy.Schema
-
-var CreateIngressPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateIngressPointRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateIngressPointRequest_ClientToken *smithy.Schema
-
-var CreateIngressPointRequest_IngressPointName *smithy.Schema
-
-var CreateIngressPointRequest_Type *smithy.Schema
-
-var CreateIngressPointRequest_RuleSetId *smithy.Schema
-
-var CreateIngressPointRequest_TrafficPolicyId *smithy.Schema
-
-var CreateIngressPointRequest_IngressPointConfiguration *smithy.Schema
-
-var CreateIngressPointRequest_NetworkConfiguration *smithy.Schema
-
-var CreateIngressPointRequest_TlsPolicy *smithy.Schema
-
-var CreateIngressPointRequest_Tags *smithy.Schema
-
-var CreateIngressPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateIngressPointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIngressPointResponse_IngressPointId *smithy.Schema
-
-var CreateRelayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRelayRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRelayRequest_ClientToken *smithy.Schema
-
-var CreateRelayRequest_RelayName *smithy.Schema
-
-var CreateRelayRequest_ServerName *smithy.Schema
-
-var CreateRelayRequest_ServerPort *smithy.Schema
-
-var CreateRelayRequest_Authentication *smithy.Schema
-
-var CreateRelayRequest_Tags *smithy.Schema
-
-var CreateRelayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRelayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRelayResponse_RelayId *smithy.Schema
-
-var CreateRuleSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRuleSetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRuleSetRequest_ClientToken *smithy.Schema
-
-var CreateRuleSetRequest_RuleSetName *smithy.Schema
-
-var CreateRuleSetRequest_Rules *smithy.Schema
-
-var CreateRuleSetRequest_Tags *smithy.Schema
-
-var CreateRuleSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateRuleSetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRuleSetResponse_RuleSetId *smithy.Schema
-
-var CreateTrafficPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateTrafficPolicyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateTrafficPolicyRequest_ClientToken *smithy.Schema
-
-var CreateTrafficPolicyRequest_TrafficPolicyName *smithy.Schema
-
-var CreateTrafficPolicyRequest_PolicyStatements *smithy.Schema
-
-var CreateTrafficPolicyRequest_DefaultAction *smithy.Schema
-
-var CreateTrafficPolicyRequest_MaxMessageSizeBytes *smithy.Schema
-
-var CreateTrafficPolicyRequest_Tags *smithy.Schema
-
-var CreateTrafficPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "CreateTrafficPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTrafficPolicyResponse_TrafficPolicyId *smithy.Schema
-
-var DeleteAddonInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAddonInstanceRequest_AddonInstanceId *smithy.Schema
-
-var DeleteAddonInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonInstanceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAddonSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAddonSubscriptionRequest_AddonSubscriptionId *smithy.Schema
-
-var DeleteAddonSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddonSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddressListRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAddressListRequest_AddressListId *smithy.Schema
-
-var DeleteAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteAddressListResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteArchiveRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteArchiveRequest_ArchiveId *smithy.Schema
-
-var DeleteArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteArchiveResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIngressPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteIngressPointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIngressPointRequest_IngressPointId *smithy.Schema
-
-var DeleteIngressPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteIngressPointResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRelayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRelayRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRelayRequest_RelayId *smithy.Schema
-
-var DeleteRelayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRelayResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRuleSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRuleSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleSetRequest_RuleSetId *smithy.Schema
-
-var DeleteRuleSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteRuleSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTrafficPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteTrafficPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrafficPolicyRequest_TrafficPolicyId *smithy.Schema
-
-var DeleteTrafficPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeleteTrafficPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterMemberFromAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeregisterMemberFromAddressListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterMemberFromAddressListRequest_AddressListId *smithy.Schema
-
-var DeregisterMemberFromAddressListRequest_Address *smithy.Schema
-
-var DeregisterMemberFromAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "DeregisterMemberFromAddressListResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAddonInstanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAddonInstanceRequest_AddonInstanceId *smithy.Schema
-
-var GetAddonInstanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonInstanceResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetAddonInstanceResponse_AddonSubscriptionId *smithy.Schema
-
-var GetAddonInstanceResponse_AddonName *smithy.Schema
-
-var GetAddonInstanceResponse_AddonInstanceArn *smithy.Schema
-
-var GetAddonInstanceResponse_CreatedTimestamp *smithy.Schema
-
-var GetAddonSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAddonSubscriptionRequest_AddonSubscriptionId *smithy.Schema
-
-var GetAddonSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddonSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetAddonSubscriptionResponse_AddonName *smithy.Schema
-
-var GetAddonSubscriptionResponse_AddonSubscriptionArn *smithy.Schema
-
-var GetAddonSubscriptionResponse_CreatedTimestamp *smithy.Schema
-
-var GetAddressListImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressListImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAddressListImportJobRequest_JobId *smithy.Schema
-
-var GetAddressListImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressListImportJobResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetAddressListImportJobResponse_JobId *smithy.Schema
-
-var GetAddressListImportJobResponse_Name *smithy.Schema
-
-var GetAddressListImportJobResponse_Status *smithy.Schema
-
-var GetAddressListImportJobResponse_PreSignedUrl *smithy.Schema
-
-var GetAddressListImportJobResponse_ImportedItemsCount *smithy.Schema
-
-var GetAddressListImportJobResponse_FailedItemsCount *smithy.Schema
-
-var GetAddressListImportJobResponse_ImportDataFormat *smithy.Schema
-
-var GetAddressListImportJobResponse_AddressListId *smithy.Schema
-
-var GetAddressListImportJobResponse_CreatedTimestamp *smithy.Schema
-
-var GetAddressListImportJobResponse_StartTimestamp *smithy.Schema
-
-var GetAddressListImportJobResponse_CompletedTimestamp *smithy.Schema
-
-var GetAddressListImportJobResponse_Error *smithy.Schema
-
-var GetAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressListRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAddressListRequest_AddressListId *smithy.Schema
-
-var GetAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetAddressListResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetAddressListResponse_AddressListId *smithy.Schema
-
-var GetAddressListResponse_AddressListArn *smithy.Schema
-
-var GetAddressListResponse_AddressListName *smithy.Schema
-
-var GetAddressListResponse_CreatedTimestamp *smithy.Schema
-
-var GetAddressListResponse_LastUpdatedTimestamp *smithy.Schema
-
-var GetArchiveExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveExportRequest_ExportId *smithy.Schema
-
-var GetArchiveExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveExportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetArchiveExportResponse_ArchiveId *smithy.Schema
-
-var GetArchiveExportResponse_Filters *smithy.Schema
-
-var GetArchiveExportResponse_FromTimestamp *smithy.Schema
-
-var GetArchiveExportResponse_ToTimestamp *smithy.Schema
-
-var GetArchiveExportResponse_MaxResults *smithy.Schema
-
-var GetArchiveExportResponse_ExportDestinationConfiguration *smithy.Schema
-
-var GetArchiveExportResponse_Status *smithy.Schema
-
-var GetArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveRequest_ArchiveId *smithy.Schema
-
-var GetArchiveMessageContentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessageContentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveMessageContentRequest_ArchivedMessageId *smithy.Schema
-
-var GetArchiveMessageContentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessageContentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveMessageContentResponse_Body *smithy.Schema
-
-var GetArchiveMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveMessageRequest_ArchivedMessageId *smithy.Schema
-
-var GetArchiveMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveMessageResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetArchiveMessageResponse_MessageDownloadLink *smithy.Schema
-
-var GetArchiveMessageResponse_Metadata *smithy.Schema
-
-var GetArchiveMessageResponse_Envelope *smithy.Schema
-
-var GetArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetArchiveResponse_ArchiveId *smithy.Schema
-
-var GetArchiveResponse_ArchiveName *smithy.Schema
-
-var GetArchiveResponse_ArchiveArn *smithy.Schema
-
-var GetArchiveResponse_ArchiveState *smithy.Schema
-
-var GetArchiveResponse_Retention *smithy.Schema
-
-var GetArchiveResponse_CreatedTimestamp *smithy.Schema
-
-var GetArchiveResponse_LastUpdatedTimestamp *smithy.Schema
-
-var GetArchiveResponse_KmsKeyArn *smithy.Schema
-
-var GetArchiveSearchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearchRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveSearchRequest_SearchId *smithy.Schema
-
-var GetArchiveSearchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearchResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetArchiveSearchResponse_ArchiveId *smithy.Schema
-
-var GetArchiveSearchResponse_Filters *smithy.Schema
-
-var GetArchiveSearchResponse_FromTimestamp *smithy.Schema
-
-var GetArchiveSearchResponse_ToTimestamp *smithy.Schema
-
-var GetArchiveSearchResponse_MaxResults *smithy.Schema
-
-var GetArchiveSearchResponse_Status *smithy.Schema
-
-var GetArchiveSearchResultsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearchResultsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveSearchResultsRequest_SearchId *smithy.Schema
-
-var GetArchiveSearchResultsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetArchiveSearchResultsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetArchiveSearchResultsResponse_Rows *smithy.Schema
-
-var GetIngressPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetIngressPointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIngressPointRequest_IngressPointId *smithy.Schema
-
-var GetIngressPointRequest_IncludeTrustStoreContents *smithy.Schema
-
-var GetIngressPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetIngressPointResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetIngressPointResponse_IngressPointId *smithy.Schema
-
-var GetIngressPointResponse_IngressPointName *smithy.Schema
-
-var GetIngressPointResponse_IngressPointArn *smithy.Schema
-
-var GetIngressPointResponse_Status *smithy.Schema
-
-var GetIngressPointResponse_Type *smithy.Schema
-
-var GetIngressPointResponse_ARecord *smithy.Schema
-
-var GetIngressPointResponse_RuleSetId *smithy.Schema
-
-var GetIngressPointResponse_TrafficPolicyId *smithy.Schema
-
-var GetIngressPointResponse_IngressPointAuthConfiguration *smithy.Schema
-
-var GetIngressPointResponse_NetworkConfiguration *smithy.Schema
-
-var GetIngressPointResponse_TlsPolicy *smithy.Schema
-
-var GetIngressPointResponse_CreatedTimestamp *smithy.Schema
-
-var GetIngressPointResponse_LastUpdatedTimestamp *smithy.Schema
-
-var GetMemberOfAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetMemberOfAddressListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMemberOfAddressListRequest_AddressListId *smithy.Schema
-
-var GetMemberOfAddressListRequest_Address *smithy.Schema
-
-var GetMemberOfAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetMemberOfAddressListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMemberOfAddressListResponse_Address *smithy.Schema
-
-var GetMemberOfAddressListResponse_CreatedTimestamp *smithy.Schema
-
-var GetRelayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRelayRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRelayRequest_RelayId *smithy.Schema
-
-var GetRelayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRelayResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetRelayResponse_RelayId *smithy.Schema
-
-var GetRelayResponse_RelayArn *smithy.Schema
-
-var GetRelayResponse_RelayName *smithy.Schema
-
-var GetRelayResponse_ServerName *smithy.Schema
-
-var GetRelayResponse_ServerPort *smithy.Schema
-
-var GetRelayResponse_Authentication *smithy.Schema
-
-var GetRelayResponse_CreatedTimestamp *smithy.Schema
-
-var GetRelayResponse_LastModifiedTimestamp *smithy.Schema
-
-var GetRuleSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRuleSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleSetRequest_RuleSetId *smithy.Schema
-
-var GetRuleSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetRuleSetResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetRuleSetResponse_RuleSetId *smithy.Schema
-
-var GetRuleSetResponse_RuleSetArn *smithy.Schema
-
-var GetRuleSetResponse_RuleSetName *smithy.Schema
-
-var GetRuleSetResponse_CreatedDate *smithy.Schema
-
-var GetRuleSetResponse_LastModificationDate *smithy.Schema
-
-var GetRuleSetResponse_Rules *smithy.Schema
-
-var GetTrafficPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetTrafficPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrafficPolicyRequest_TrafficPolicyId *smithy.Schema
-
-var GetTrafficPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "GetTrafficPolicyResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetTrafficPolicyResponse_TrafficPolicyName *smithy.Schema
-
-var GetTrafficPolicyResponse_TrafficPolicyId *smithy.Schema
-
-var GetTrafficPolicyResponse_TrafficPolicyArn *smithy.Schema
-
-var GetTrafficPolicyResponse_PolicyStatements *smithy.Schema
-
-var GetTrafficPolicyResponse_MaxMessageSizeBytes *smithy.Schema
-
-var GetTrafficPolicyResponse_DefaultAction *smithy.Schema
-
-var GetTrafficPolicyResponse_CreatedTimestamp *smithy.Schema
-
-var GetTrafficPolicyResponse_LastUpdatedTimestamp *smithy.Schema
-
-var ListAddonInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonInstancesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddonInstancesRequest_NextToken *smithy.Schema
-
-var ListAddonInstancesRequest_PageSize *smithy.Schema
-
-var ListAddonInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonInstancesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddonInstancesResponse_AddonInstances *smithy.Schema
-
-var ListAddonInstancesResponse_NextToken *smithy.Schema
-
-var ListAddonSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddonSubscriptionsRequest_NextToken *smithy.Schema
-
-var ListAddonSubscriptionsRequest_PageSize *smithy.Schema
-
-var ListAddonSubscriptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddonSubscriptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddonSubscriptionsResponse_AddonSubscriptions *smithy.Schema
-
-var ListAddonSubscriptionsResponse_NextToken *smithy.Schema
-
-var ListAddressListImportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressListImportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAddressListImportJobsRequest_AddressListId *smithy.Schema
-
-var ListAddressListImportJobsRequest_NextToken *smithy.Schema
-
-var ListAddressListImportJobsRequest_PageSize *smithy.Schema
-
-var ListAddressListImportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressListImportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddressListImportJobsResponse_ImportJobs *smithy.Schema
-
-var ListAddressListImportJobsResponse_NextToken *smithy.Schema
-
-var ListAddressListsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressListsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddressListsRequest_NextToken *smithy.Schema
-
-var ListAddressListsRequest_PageSize *smithy.Schema
-
-var ListAddressListsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListAddressListsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAddressListsResponse_AddressLists *smithy.Schema
-
-var ListAddressListsResponse_NextToken *smithy.Schema
-
-var ListArchiveExportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveExportsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListArchiveExportsRequest_ArchiveId *smithy.Schema
-
-var ListArchiveExportsRequest_NextToken *smithy.Schema
-
-var ListArchiveExportsRequest_PageSize *smithy.Schema
-
-var ListArchiveExportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveExportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListArchiveExportsResponse_Exports *smithy.Schema
-
-var ListArchiveExportsResponse_NextToken *smithy.Schema
-
-var ListArchiveSearchesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveSearchesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListArchiveSearchesRequest_ArchiveId *smithy.Schema
-
-var ListArchiveSearchesRequest_NextToken *smithy.Schema
-
-var ListArchiveSearchesRequest_PageSize *smithy.Schema
-
-var ListArchiveSearchesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchiveSearchesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListArchiveSearchesResponse_Searches *smithy.Schema
-
-var ListArchiveSearchesResponse_NextToken *smithy.Schema
-
-var ListArchivesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchivesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListArchivesRequest_NextToken *smithy.Schema
-
-var ListArchivesRequest_PageSize *smithy.Schema
-
-var ListArchivesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListArchivesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListArchivesResponse_Archives *smithy.Schema
-
-var ListArchivesResponse_NextToken *smithy.Schema
-
-var ListIngressPointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListIngressPointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngressPointsRequest_PageSize *smithy.Schema
-
-var ListIngressPointsRequest_NextToken *smithy.Schema
-
-var ListIngressPointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListIngressPointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngressPointsResponse_IngressPoints *smithy.Schema
-
-var ListIngressPointsResponse_NextToken *smithy.Schema
-
-var ListMembersOfAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListMembersOfAddressListRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMembersOfAddressListRequest_AddressListId *smithy.Schema
-
-var ListMembersOfAddressListRequest_Filter *smithy.Schema
-
-var ListMembersOfAddressListRequest_NextToken *smithy.Schema
-
-var ListMembersOfAddressListRequest_PageSize *smithy.Schema
-
-var ListMembersOfAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListMembersOfAddressListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMembersOfAddressListResponse_Addresses *smithy.Schema
-
-var ListMembersOfAddressListResponse_NextToken *smithy.Schema
-
-var ListRelaysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRelaysRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRelaysRequest_PageSize *smithy.Schema
-
-var ListRelaysRequest_NextToken *smithy.Schema
-
-var ListRelaysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRelaysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRelaysResponse_Relays *smithy.Schema
-
-var ListRelaysResponse_NextToken *smithy.Schema
-
-var ListRuleSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRuleSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleSetsRequest_NextToken *smithy.Schema
-
-var ListRuleSetsRequest_PageSize *smithy.Schema
-
-var ListRuleSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListRuleSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleSetsResponse_RuleSets *smithy.Schema
-
-var ListRuleSetsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTrafficPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTrafficPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrafficPoliciesRequest_PageSize *smithy.Schema
-
-var ListTrafficPoliciesRequest_NextToken *smithy.Schema
-
-var ListTrafficPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "ListTrafficPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrafficPoliciesResponse_TrafficPolicies *smithy.Schema
-
-var ListTrafficPoliciesResponse_NextToken *smithy.Schema
-
-var RegisterMemberToAddressListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RegisterMemberToAddressListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterMemberToAddressListRequest_AddressListId *smithy.Schema
-
-var RegisterMemberToAddressListRequest_Address *smithy.Schema
-
-var RegisterMemberToAddressListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "RegisterMemberToAddressListResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartAddressListImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartAddressListImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartAddressListImportJobRequest_JobId *smithy.Schema
-
-var StartAddressListImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartAddressListImportJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartArchiveExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveExportRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartArchiveExportRequest_ArchiveId *smithy.Schema
-
-var StartArchiveExportRequest_Filters *smithy.Schema
-
-var StartArchiveExportRequest_FromTimestamp *smithy.Schema
-
-var StartArchiveExportRequest_ToTimestamp *smithy.Schema
-
-var StartArchiveExportRequest_MaxResults *smithy.Schema
-
-var StartArchiveExportRequest_ExportDestinationConfiguration *smithy.Schema
-
-var StartArchiveExportRequest_IncludeMetadata *smithy.Schema
-
-var StartArchiveExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveExportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartArchiveExportResponse_ExportId *smithy.Schema
-
-var StartArchiveSearchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveSearchRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartArchiveSearchRequest_ArchiveId *smithy.Schema
-
-var StartArchiveSearchRequest_Filters *smithy.Schema
-
-var StartArchiveSearchRequest_FromTimestamp *smithy.Schema
-
-var StartArchiveSearchRequest_ToTimestamp *smithy.Schema
-
-var StartArchiveSearchRequest_MaxResults *smithy.Schema
-
-var StartArchiveSearchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StartArchiveSearchResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartArchiveSearchResponse_SearchId *smithy.Schema
-
-var StopAddressListImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopAddressListImportJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopAddressListImportJobRequest_JobId *smithy.Schema
-
-var StopAddressListImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopAddressListImportJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopArchiveExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopArchiveExportRequest_ExportId *smithy.Schema
-
-var StopArchiveExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveExportResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopArchiveSearchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveSearchRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopArchiveSearchRequest_SearchId *smithy.Schema
-
-var StopArchiveSearchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "StopArchiveSearchResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateArchiveRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateArchiveRequest_ArchiveId *smithy.Schema
-
-var UpdateArchiveRequest_ArchiveName *smithy.Schema
-
-var UpdateArchiveRequest_Retention *smithy.Schema
-
-var UpdateArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateArchiveResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateIngressPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateIngressPointRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateIngressPointRequest_IngressPointId *smithy.Schema
-
-var UpdateIngressPointRequest_IngressPointName *smithy.Schema
-
-var UpdateIngressPointRequest_StatusToUpdate *smithy.Schema
-
-var UpdateIngressPointRequest_RuleSetId *smithy.Schema
-
-var UpdateIngressPointRequest_TrafficPolicyId *smithy.Schema
-
-var UpdateIngressPointRequest_IngressPointConfiguration *smithy.Schema
-
-var UpdateIngressPointRequest_TlsPolicy *smithy.Schema
-
-var UpdateIngressPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateIngressPointResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRelayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRelayRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRelayRequest_RelayId *smithy.Schema
-
-var UpdateRelayRequest_RelayName *smithy.Schema
-
-var UpdateRelayRequest_ServerName *smithy.Schema
-
-var UpdateRelayRequest_ServerPort *smithy.Schema
-
-var UpdateRelayRequest_Authentication *smithy.Schema
-
-var UpdateRelayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRelayResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRuleSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRuleSetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRuleSetRequest_RuleSetId *smithy.Schema
-
-var UpdateRuleSetRequest_RuleSetName *smithy.Schema
-
-var UpdateRuleSetRequest_Rules *smithy.Schema
-
-var UpdateRuleSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateRuleSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTrafficPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateTrafficPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateTrafficPolicyRequest_TrafficPolicyId *smithy.Schema
-
-var UpdateTrafficPolicyRequest_TrafficPolicyName *smithy.Schema
-
-var UpdateTrafficPolicyRequest_PolicyStatements *smithy.Schema
-
-var UpdateTrafficPolicyRequest_DefaultAction *smithy.Schema
-
-var UpdateTrafficPolicyRequest_MaxMessageSizeBytes *smithy.Schema
-
-var UpdateTrafficPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mailmanager",
-	Name:      "UpdateTrafficPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AcceptAction_ALLOW = AcceptAction.AddMember("ALLOW", smithyprelude.Unit)
-
-	AcceptAction_DENY = AcceptAction.AddMember("DENY", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	ActionFailurePolicy_CONTINUE = ActionFailurePolicy.AddMember("CONTINUE", smithyprelude.Unit)
-
-	ActionFailurePolicy_DROP = ActionFailurePolicy.AddMember("DROP", smithyprelude.Unit)
-
-	AddHeaderAction_HeaderName = AddHeaderAction.AddMember("HeaderName", _HeaderName)
-
-	AddHeaderAction_HeaderValue = AddHeaderAction.AddMember("HeaderValue", _HeaderValue)
-
-	AddonInstance_AddonInstanceId = AddonInstance.AddMember("AddonInstanceId", _AddonInstanceId)
-
-	AddonInstance_AddonSubscriptionId = AddonInstance.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	AddonInstance_AddonName = AddonInstance.AddMember("AddonName", _AddonName)
-
-	AddonInstance_AddonInstanceArn = AddonInstance.AddMember("AddonInstanceArn", _AddonInstanceArn)
-
-	AddonInstance_CreatedTimestamp = AddonInstance.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	_AddonInstances_member = _AddonInstances.AddMember("member", AddonInstance)
-
-	AddonSubscription_AddonSubscriptionId = AddonSubscription.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	AddonSubscription_AddonName = AddonSubscription.AddMember("AddonName", _AddonName)
-
-	AddonSubscription_AddonSubscriptionArn = AddonSubscription.AddMember("AddonSubscriptionArn", _AddonSubscriptionArn)
-
-	AddonSubscription_CreatedTimestamp = AddonSubscription.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	_AddonSubscriptions_member = _AddonSubscriptions.AddMember("member", AddonSubscription)
-
-	AddressFilter_AddressPrefix = AddressFilter.AddMember("AddressPrefix", _AddressPrefix)
-
-	AddressList_AddressListId = AddressList.AddMember("AddressListId", _AddressListId)
-
-	AddressList_AddressListArn = AddressList.AddMember("AddressListArn", _AddressListArn)
-
-	AddressList_AddressListName = AddressList.AddMember("AddressListName", _AddressListName)
-
-	AddressList_CreatedTimestamp = AddressList.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	AddressList_LastUpdatedTimestamp = AddressList.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	_AddressLists_member = _AddressLists.AddMember("member", AddressList)
-
-	Analysis_Analyzer = Analysis.AddMember("Analyzer", _AnalyzerArn)
-
-	Analysis_ResultField = Analysis.AddMember("ResultField", _ResultField)
-
-	ArchiveState_ACTIVE = ArchiveState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ArchiveState_PENDING_DELETION = ArchiveState.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	Archive_ArchiveId = Archive.AddMember("ArchiveId", _ArchiveIdString)
-
-	Archive_ArchiveName = Archive.AddMember("ArchiveName", _ArchiveNameString)
-
-	Archive_ArchiveState = Archive.AddMember("ArchiveState", ArchiveState)
-
-	Archive_LastUpdatedTimestamp = Archive.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	ArchiveAction_ActionFailurePolicy = ArchiveAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	ArchiveAction_TargetArchive = ArchiveAction.AddMember("TargetArchive", _NameOrArn)
-
-	ArchiveBooleanEmailAttribute_HAS_ATTACHMENTS = ArchiveBooleanEmailAttribute.AddMember("HAS_ATTACHMENTS", smithyprelude.Unit)
-
-	ArchiveBooleanToEvaluate_Attribute = ArchiveBooleanToEvaluate.AddMember("Attribute", ArchiveBooleanEmailAttribute)
-
-	ArchiveBooleanOperator_IS_TRUE = ArchiveBooleanOperator.AddMember("IS_TRUE", smithyprelude.Unit)
-
-	ArchiveBooleanOperator_IS_FALSE = ArchiveBooleanOperator.AddMember("IS_FALSE", smithyprelude.Unit)
-
-	ArchiveBooleanExpression_Evaluate = ArchiveBooleanExpression.AddMember("Evaluate", ArchiveBooleanToEvaluate)
-
-	ArchiveBooleanExpression_Operator = ArchiveBooleanExpression.AddMember("Operator", ArchiveBooleanOperator)
-
-	ArchiveStringEmailAttribute_TO = ArchiveStringEmailAttribute.AddMember("TO", smithyprelude.Unit)
-
-	ArchiveStringEmailAttribute_FROM = ArchiveStringEmailAttribute.AddMember("FROM", smithyprelude.Unit)
-
-	ArchiveStringEmailAttribute_CC = ArchiveStringEmailAttribute.AddMember("CC", smithyprelude.Unit)
-
-	ArchiveStringEmailAttribute_SUBJECT = ArchiveStringEmailAttribute.AddMember("SUBJECT", smithyprelude.Unit)
-
-	ArchiveStringEmailAttribute_ENVELOPE_TO = ArchiveStringEmailAttribute.AddMember("ENVELOPE_TO", smithyprelude.Unit)
-
-	ArchiveStringEmailAttribute_ENVELOPE_FROM = ArchiveStringEmailAttribute.AddMember("ENVELOPE_FROM", smithyprelude.Unit)
-
-	ArchiveStringToEvaluate_Attribute = ArchiveStringToEvaluate.AddMember("Attribute", ArchiveStringEmailAttribute)
-
-	ArchiveStringOperator_CONTAINS = ArchiveStringOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	_StringValueList_member = _StringValueList.AddMember("member", _StringValue)
-
-	ArchiveStringExpression_Evaluate = ArchiveStringExpression.AddMember("Evaluate", ArchiveStringToEvaluate)
-
-	ArchiveStringExpression_Operator = ArchiveStringExpression.AddMember("Operator", ArchiveStringOperator)
-
-	ArchiveStringExpression_Values = ArchiveStringExpression.AddMember("Values", _StringValueList)
-
-	ArchiveFilterCondition_StringExpression = ArchiveFilterCondition.AddMember("StringExpression", ArchiveStringExpression)
-
-	ArchiveFilterCondition_BooleanExpression = ArchiveFilterCondition.AddMember("BooleanExpression", ArchiveBooleanExpression)
-
-	_ArchiveFilterConditions_member = _ArchiveFilterConditions.AddMember("member", ArchiveFilterCondition)
-
-	ArchiveFilters_Include = ArchiveFilters.AddMember("Include", _ArchiveFilterConditions)
-
-	ArchiveFilters_Unless = ArchiveFilters.AddMember("Unless", _ArchiveFilterConditions)
-
-	RetentionPeriod_THREE_MONTHS = RetentionPeriod.AddMember("THREE_MONTHS", smithyprelude.Unit)
-
-	RetentionPeriod_SIX_MONTHS = RetentionPeriod.AddMember("SIX_MONTHS", smithyprelude.Unit)
-
-	RetentionPeriod_NINE_MONTHS = RetentionPeriod.AddMember("NINE_MONTHS", smithyprelude.Unit)
-
-	RetentionPeriod_ONE_YEAR = RetentionPeriod.AddMember("ONE_YEAR", smithyprelude.Unit)
-
-	RetentionPeriod_EIGHTEEN_MONTHS = RetentionPeriod.AddMember("EIGHTEEN_MONTHS", smithyprelude.Unit)
-
-	RetentionPeriod_TWO_YEARS = RetentionPeriod.AddMember("TWO_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_THIRTY_MONTHS = RetentionPeriod.AddMember("THIRTY_MONTHS", smithyprelude.Unit)
-
-	RetentionPeriod_THREE_YEARS = RetentionPeriod.AddMember("THREE_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_FOUR_YEARS = RetentionPeriod.AddMember("FOUR_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_FIVE_YEARS = RetentionPeriod.AddMember("FIVE_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_SIX_YEARS = RetentionPeriod.AddMember("SIX_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_SEVEN_YEARS = RetentionPeriod.AddMember("SEVEN_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_EIGHT_YEARS = RetentionPeriod.AddMember("EIGHT_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_NINE_YEARS = RetentionPeriod.AddMember("NINE_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_TEN_YEARS = RetentionPeriod.AddMember("TEN_YEARS", smithyprelude.Unit)
-
-	RetentionPeriod_PERMANENT = RetentionPeriod.AddMember("PERMANENT", smithyprelude.Unit)
-
-	ArchiveRetention_RetentionPeriod = ArchiveRetention.AddMember("RetentionPeriod", RetentionPeriod)
-
-	_ArchivesList_member = _ArchivesList.AddMember("member", Archive)
-
-	BounceAction_ActionFailurePolicy = BounceAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	BounceAction_RoleArn = BounceAction.AddMember("RoleArn", _IamRoleArn)
-
-	BounceAction_Sender = BounceAction.AddMember("Sender", _EmailAddress)
-
-	BounceAction_StatusCode = BounceAction.AddMember("StatusCode", _StatusCode)
-
-	BounceAction_SmtpReplyCode = BounceAction.AddMember("SmtpReplyCode", _SmtpReplyCode)
-
-	BounceAction_DiagnosticMessage = BounceAction.AddMember("DiagnosticMessage", _DiagnosticMessage)
-
-	BounceAction_Message = BounceAction.AddMember("Message", _BounceMessage)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	DeliverToMailboxAction_ActionFailurePolicy = DeliverToMailboxAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	DeliverToMailboxAction_MailboxArn = DeliverToMailboxAction.AddMember("MailboxArn", _NameOrArn)
-
-	DeliverToMailboxAction_RoleArn = DeliverToMailboxAction.AddMember("RoleArn", _IamRoleArn)
-
-	DeliverToQBusinessAction_ActionFailurePolicy = DeliverToQBusinessAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	DeliverToQBusinessAction_ApplicationId = DeliverToQBusinessAction.AddMember("ApplicationId", _QBusinessApplicationId)
-
-	DeliverToQBusinessAction_IndexId = DeliverToQBusinessAction.AddMember("IndexId", _QBusinessIndexId)
-
-	DeliverToQBusinessAction_RoleArn = DeliverToQBusinessAction.AddMember("RoleArn", _IamRoleArn)
-
-	_EmailReceivedHeadersList_member = _EmailReceivedHeadersList.AddMember("member", smithyprelude.String)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Envelope_Helo = Envelope.AddMember("Helo", smithyprelude.String)
-
-	Envelope_From = Envelope.AddMember("From", smithyprelude.String)
-
-	Envelope_To = Envelope.AddMember("To", _StringList)
-
-	S3ExportDestinationConfiguration_S3Location = S3ExportDestinationConfiguration.AddMember("S3Location", _S3Location)
-
-	ExportDestinationConfiguration_S3 = ExportDestinationConfiguration.AddMember("S3", S3ExportDestinationConfiguration)
-
-	ExportState_QUEUED = ExportState.AddMember("QUEUED", smithyprelude.Unit)
-
-	ExportState_PREPROCESSING = ExportState.AddMember("PREPROCESSING", smithyprelude.Unit)
-
-	ExportState_PROCESSING = ExportState.AddMember("PROCESSING", smithyprelude.Unit)
-
-	ExportState_COMPLETED = ExportState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ExportState_FAILED = ExportState.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportState_CANCELLED = ExportState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ExportStatus_SubmissionTimestamp = ExportStatus.AddMember("SubmissionTimestamp", smithyprelude.Timestamp)
-
-	ExportStatus_CompletionTimestamp = ExportStatus.AddMember("CompletionTimestamp", smithyprelude.Timestamp)
-
-	ExportStatus_State = ExportStatus.AddMember("State", ExportState)
-
-	ExportStatus_ErrorMessage = ExportStatus.AddMember("ErrorMessage", _ErrorMessage)
-
-	ExportSummary_ExportId = ExportSummary.AddMember("ExportId", _ExportId)
-
-	ExportSummary_Status = ExportSummary.AddMember("Status", ExportStatus)
-
-	_ExportSummaryList_member = _ExportSummaryList.AddMember("member", ExportSummary)
-
-	ImportDataType_CSV = ImportDataType.AddMember("CSV", smithyprelude.Unit)
-
-	ImportDataType_JSON = ImportDataType.AddMember("JSON", smithyprelude.Unit)
-
-	ImportDataFormat_ImportDataType = ImportDataFormat.AddMember("ImportDataType", ImportDataType)
-
-	ImportJobStatus_CREATED = ImportJobStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ImportJobStatus_PROCESSING = ImportJobStatus.AddMember("PROCESSING", smithyprelude.Unit)
-
-	ImportJobStatus_COMPLETED = ImportJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ImportJobStatus_FAILED = ImportJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ImportJobStatus_STOPPED = ImportJobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ImportJob_JobId = ImportJob.AddMember("JobId", _JobId)
-
-	ImportJob_Name = ImportJob.AddMember("Name", _JobName)
-
-	ImportJob_Status = ImportJob.AddMember("Status", ImportJobStatus)
-
-	ImportJob_PreSignedUrl = ImportJob.AddMember("PreSignedUrl", _PreSignedUrl)
-
-	ImportJob_ImportedItemsCount = ImportJob.AddMember("ImportedItemsCount", _JobItemsCount)
-
-	ImportJob_FailedItemsCount = ImportJob.AddMember("FailedItemsCount", _JobItemsCount)
-
-	ImportJob_ImportDataFormat = ImportJob.AddMember("ImportDataFormat", ImportDataFormat)
-
-	ImportJob_AddressListId = ImportJob.AddMember("AddressListId", _AddressListId)
-
-	ImportJob_CreatedTimestamp = ImportJob.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	ImportJob_StartTimestamp = ImportJob.AddMember("StartTimestamp", smithyprelude.Timestamp)
-
-	ImportJob_CompletedTimestamp = ImportJob.AddMember("CompletedTimestamp", smithyprelude.Timestamp)
-
-	ImportJob_Error = ImportJob.AddMember("Error", _ErrorMessage)
-
-	_ImportJobs_member = _ImportJobs.AddMember("member", ImportJob)
-
-	_IngressAddressListArnList_member = _IngressAddressListArnList.AddMember("member", _AddressListArn)
-
-	IngressAddressListEmailAttribute_RECIPIENT = IngressAddressListEmailAttribute.AddMember("RECIPIENT", smithyprelude.Unit)
-
-	IngressAnalysis_Analyzer = IngressAnalysis.AddMember("Analyzer", _AnalyzerArn)
-
-	IngressAnalysis_ResultField = IngressAnalysis.AddMember("ResultField", _ResultField)
-
-	IngressIsInAddressList_Attribute = IngressIsInAddressList.AddMember("Attribute", IngressAddressListEmailAttribute)
-
-	IngressIsInAddressList_AddressLists = IngressIsInAddressList.AddMember("AddressLists", _IngressAddressListArnList)
-
-	IngressBooleanToEvaluate_Analysis = IngressBooleanToEvaluate.AddMember("Analysis", IngressAnalysis)
-
-	IngressBooleanToEvaluate_IsInAddressList = IngressBooleanToEvaluate.AddMember("IsInAddressList", IngressIsInAddressList)
-
-	IngressBooleanOperator_IS_TRUE = IngressBooleanOperator.AddMember("IS_TRUE", smithyprelude.Unit)
-
-	IngressBooleanOperator_IS_FALSE = IngressBooleanOperator.AddMember("IS_FALSE", smithyprelude.Unit)
-
-	IngressBooleanExpression_Evaluate = IngressBooleanExpression.AddMember("Evaluate", IngressBooleanToEvaluate)
-
-	IngressBooleanExpression_Operator = IngressBooleanExpression.AddMember("Operator", IngressBooleanOperator)
-
-	IngressIpOperator_CIDR_MATCHES = IngressIpOperator.AddMember("CIDR_MATCHES", smithyprelude.Unit)
-
-	IngressIpOperator_NOT_CIDR_MATCHES = IngressIpOperator.AddMember("NOT_CIDR_MATCHES", smithyprelude.Unit)
-
-	IngressIpv4Attribute_SENDER_IP = IngressIpv4Attribute.AddMember("SENDER_IP", smithyprelude.Unit)
-
-	IngressIpToEvaluate_Attribute = IngressIpToEvaluate.AddMember("Attribute", IngressIpv4Attribute)
-
-	_Ipv4Cidrs_member = _Ipv4Cidrs.AddMember("member", _Ipv4Cidr)
-
-	IngressIpv4Expression_Evaluate = IngressIpv4Expression.AddMember("Evaluate", IngressIpToEvaluate)
-
-	IngressIpv4Expression_Operator = IngressIpv4Expression.AddMember("Operator", IngressIpOperator)
-
-	IngressIpv4Expression_Values = IngressIpv4Expression.AddMember("Values", _Ipv4Cidrs)
-
-	IngressIpv6Attribute_SENDER_IPV6 = IngressIpv6Attribute.AddMember("SENDER_IPV6", smithyprelude.Unit)
-
-	IngressIpv6ToEvaluate_Attribute = IngressIpv6ToEvaluate.AddMember("Attribute", IngressIpv6Attribute)
-
-	_Ipv6Cidrs_member = _Ipv6Cidrs.AddMember("member", _Ipv6Cidr)
-
-	IngressIpv6Expression_Evaluate = IngressIpv6Expression.AddMember("Evaluate", IngressIpv6ToEvaluate)
-
-	IngressIpv6Expression_Operator = IngressIpv6Expression.AddMember("Operator", IngressIpOperator)
-
-	IngressIpv6Expression_Values = IngressIpv6Expression.AddMember("Values", _Ipv6Cidrs)
-
-	IngressPointStatus_PROVISIONING = IngressPointStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	IngressPointStatus_DEPROVISIONING = IngressPointStatus.AddMember("DEPROVISIONING", smithyprelude.Unit)
-
-	IngressPointStatus_UPDATING = IngressPointStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	IngressPointStatus_ACTIVE = IngressPointStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	IngressPointStatus_CLOSED = IngressPointStatus.AddMember("CLOSED", smithyprelude.Unit)
-
-	IngressPointStatus_FAILED = IngressPointStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST = IngressPointStatus.AddMember("ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST", smithyprelude.Unit)
-
-	IngressPointType_OPEN = IngressPointType.AddMember("OPEN", smithyprelude.Unit)
-
-	IngressPointType_AUTH = IngressPointType.AddMember("AUTH", smithyprelude.Unit)
-
-	IngressPointType_MTLS = IngressPointType.AddMember("MTLS", smithyprelude.Unit)
-
-	IngressPoint_IngressPointName = IngressPoint.AddMember("IngressPointName", _IngressPointName)
-
-	IngressPoint_IngressPointId = IngressPoint.AddMember("IngressPointId", _IngressPointId)
-
-	IngressPoint_Status = IngressPoint.AddMember("Status", IngressPointStatus)
-
-	IngressPoint_Type = IngressPoint.AddMember("Type", IngressPointType)
-
-	IngressPoint_ARecord = IngressPoint.AddMember("ARecord", _IngressPointARecord)
-
-	IngressPointPasswordConfiguration_SmtpPasswordVersion = IngressPointPasswordConfiguration.AddMember("SmtpPasswordVersion", smithyprelude.String)
-
-	IngressPointPasswordConfiguration_PreviousSmtpPasswordVersion = IngressPointPasswordConfiguration.AddMember("PreviousSmtpPasswordVersion", smithyprelude.String)
-
-	IngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp = IngressPointPasswordConfiguration.AddMember("PreviousSmtpPasswordExpiryTimestamp", smithyprelude.Timestamp)
-
-	TrustStore_CAContent = TrustStore.AddMember("CAContent", _CAContent)
-
-	TrustStore_CrlContent = TrustStore.AddMember("CrlContent", _CrlContent)
-
-	TrustStore_KmsKeyArn = TrustStore.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	TlsAuthConfiguration_TrustStore = TlsAuthConfiguration.AddMember("TrustStore", TrustStore)
-
-	IngressPointAuthConfiguration_IngressPointPasswordConfiguration = IngressPointAuthConfiguration.AddMember("IngressPointPasswordConfiguration", IngressPointPasswordConfiguration)
-
-	IngressPointAuthConfiguration_SecretArn = IngressPointAuthConfiguration.AddMember("SecretArn", _SecretArn)
-
-	IngressPointAuthConfiguration_TlsAuthConfiguration = IngressPointAuthConfiguration.AddMember("TlsAuthConfiguration", TlsAuthConfiguration)
-
-	IngressPointConfiguration_SmtpPassword = IngressPointConfiguration.AddMember("SmtpPassword", _SmtpPassword)
-
-	IngressPointConfiguration_SecretArn = IngressPointConfiguration.AddMember("SecretArn", _SecretArn)
-
-	IngressPointConfiguration_TlsAuthConfiguration = IngressPointConfiguration.AddMember("TlsAuthConfiguration", TlsAuthConfiguration)
-
-	_IngressPointsList_member = _IngressPointsList.AddMember("member", IngressPoint)
-
-	IngressPointStatusToUpdate_ACTIVE = IngressPointStatusToUpdate.AddMember("ACTIVE", smithyprelude.Unit)
-
-	IngressPointStatusToUpdate_CLOSED = IngressPointStatusToUpdate.AddMember("CLOSED", smithyprelude.Unit)
-
-	IngressStringEmailAttribute_RECIPIENT = IngressStringEmailAttribute.AddMember("RECIPIENT", smithyprelude.Unit)
-
-	IngressStringToEvaluate_Attribute = IngressStringToEvaluate.AddMember("Attribute", IngressStringEmailAttribute)
-
-	IngressStringToEvaluate_Analysis = IngressStringToEvaluate.AddMember("Analysis", IngressAnalysis)
-
-	IngressStringOperator_EQUALS = IngressStringOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	IngressStringOperator_NOT_EQUALS = IngressStringOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	IngressStringOperator_STARTS_WITH = IngressStringOperator.AddMember("STARTS_WITH", smithyprelude.Unit)
-
-	IngressStringOperator_ENDS_WITH = IngressStringOperator.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	IngressStringOperator_CONTAINS = IngressStringOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	IngressStringExpression_Evaluate = IngressStringExpression.AddMember("Evaluate", IngressStringToEvaluate)
-
-	IngressStringExpression_Operator = IngressStringExpression.AddMember("Operator", IngressStringOperator)
-
-	IngressStringExpression_Values = IngressStringExpression.AddMember("Values", _StringList)
-
-	IngressTlsAttribute_TLS_PROTOCOL = IngressTlsAttribute.AddMember("TLS_PROTOCOL", smithyprelude.Unit)
-
-	IngressTlsProtocolAttribute_TLS1_2 = IngressTlsProtocolAttribute.AddMember("TLS1_2", smithyprelude.Unit)
-
-	IngressTlsProtocolAttribute_TLS1_3 = IngressTlsProtocolAttribute.AddMember("TLS1_3", smithyprelude.Unit)
-
-	IngressTlsProtocolToEvaluate_Attribute = IngressTlsProtocolToEvaluate.AddMember("Attribute", IngressTlsAttribute)
-
-	IngressTlsProtocolOperator_MINIMUM_TLS_VERSION = IngressTlsProtocolOperator.AddMember("MINIMUM_TLS_VERSION", smithyprelude.Unit)
-
-	IngressTlsProtocolOperator_IS = IngressTlsProtocolOperator.AddMember("IS", smithyprelude.Unit)
-
-	IngressTlsProtocolExpression_Evaluate = IngressTlsProtocolExpression.AddMember("Evaluate", IngressTlsProtocolToEvaluate)
-
-	IngressTlsProtocolExpression_Operator = IngressTlsProtocolExpression.AddMember("Operator", IngressTlsProtocolOperator)
-
-	IngressTlsProtocolExpression_Value = IngressTlsProtocolExpression.AddMember("Value", IngressTlsProtocolAttribute)
-
-	LambdaInvocationType_EVENT = LambdaInvocationType.AddMember("EVENT", smithyprelude.Unit)
-
-	LambdaInvocationType_REQUEST_RESPONSE = LambdaInvocationType.AddMember("REQUEST_RESPONSE", smithyprelude.Unit)
-
-	InvokeLambdaAction_ActionFailurePolicy = InvokeLambdaAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	InvokeLambdaAction_FunctionArn = InvokeLambdaAction.AddMember("FunctionArn", _LambdaFunctionArn)
-
-	InvokeLambdaAction_InvocationType = InvokeLambdaAction.AddMember("InvocationType", LambdaInvocationType)
-
-	InvokeLambdaAction_RoleArn = InvokeLambdaAction.AddMember("RoleArn", _IamRoleArn)
-
-	InvokeLambdaAction_RetryTimeMinutes = InvokeLambdaAction.AddMember("RetryTimeMinutes", _LambdaRetryTimeMinutes)
-
-	IpType_IPV4 = IpType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpType_DUAL_STACK = IpType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	MailFrom_REPLACE = MailFrom.AddMember("REPLACE", smithyprelude.Unit)
-
-	MailFrom_PRESERVE = MailFrom.AddMember("PRESERVE", smithyprelude.Unit)
-
-	MessageBody_Text = MessageBody.AddMember("Text", smithyprelude.String)
-
-	MessageBody_Html = MessageBody.AddMember("Html", smithyprelude.String)
-
-	MessageBody_MessageMalformed = MessageBody.AddMember("MessageMalformed", smithyprelude.Boolean)
-
-	Metadata_Timestamp = Metadata.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	Metadata_IngressPointId = Metadata.AddMember("IngressPointId", _IngressPointId)
-
-	Metadata_TrafficPolicyId = Metadata.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	Metadata_RuleSetId = Metadata.AddMember("RuleSetId", _RuleSetId)
-
-	Metadata_SenderHostname = Metadata.AddMember("SenderHostname", smithyprelude.String)
-
-	Metadata_SenderIpAddress = Metadata.AddMember("SenderIpAddress", _SenderIpAddress)
-
-	Metadata_TlsCipherSuite = Metadata.AddMember("TlsCipherSuite", smithyprelude.String)
-
-	Metadata_TlsProtocol = Metadata.AddMember("TlsProtocol", smithyprelude.String)
-
-	Metadata_SendingMethod = Metadata.AddMember("SendingMethod", smithyprelude.String)
-
-	Metadata_SourceIdentity = Metadata.AddMember("SourceIdentity", smithyprelude.String)
-
-	Metadata_SendingPool = Metadata.AddMember("SendingPool", smithyprelude.String)
-
-	Metadata_ConfigurationSet = Metadata.AddMember("ConfigurationSet", smithyprelude.String)
-
-	Metadata_SourceArn = Metadata.AddMember("SourceArn", smithyprelude.String)
-
-	PublicNetworkConfiguration_IpType = PublicNetworkConfiguration.AddMember("IpType", IpType)
-
-	PrivateNetworkConfiguration_VpcEndpointId = PrivateNetworkConfiguration.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	NetworkConfiguration_PublicNetworkConfiguration = NetworkConfiguration.AddMember("PublicNetworkConfiguration", PublicNetworkConfiguration)
-
-	NetworkConfiguration_PrivateNetworkConfiguration = NetworkConfiguration.AddMember("PrivateNetworkConfiguration", PrivateNetworkConfiguration)
-
-	PolicyCondition_StringExpression = PolicyCondition.AddMember("StringExpression", IngressStringExpression)
-
-	PolicyCondition_IpExpression = PolicyCondition.AddMember("IpExpression", IngressIpv4Expression)
-
-	PolicyCondition_Ipv6Expression = PolicyCondition.AddMember("Ipv6Expression", IngressIpv6Expression)
-
-	PolicyCondition_TlsExpression = PolicyCondition.AddMember("TlsExpression", IngressTlsProtocolExpression)
-
-	PolicyCondition_BooleanExpression = PolicyCondition.AddMember("BooleanExpression", IngressBooleanExpression)
-
-	_PolicyConditions_member = _PolicyConditions.AddMember("member", PolicyCondition)
-
-	PolicyStatement_Conditions = PolicyStatement.AddMember("Conditions", _PolicyConditions)
-
-	PolicyStatement_Action = PolicyStatement.AddMember("Action", AcceptAction)
-
-	_PolicyStatementList_member = _PolicyStatementList.AddMember("member", PolicyStatement)
-
-	_Recipients_member = _Recipients.AddMember("member", _EmailAddress)
-
-	Relay_RelayId = Relay.AddMember("RelayId", _RelayId)
-
-	Relay_RelayName = Relay.AddMember("RelayName", _RelayName)
-
-	Relay_LastModifiedTimestamp = Relay.AddMember("LastModifiedTimestamp", smithyprelude.Timestamp)
-
-	RelayAction_ActionFailurePolicy = RelayAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	RelayAction_Relay = RelayAction.AddMember("Relay", _IdOrArn)
-
-	RelayAction_MailFrom = RelayAction.AddMember("MailFrom", MailFrom)
-
-	RelayAuthentication_SecretArn = RelayAuthentication.AddMember("SecretArn", _SecretArn)
-
-	RelayAuthentication_NoAuthentication = RelayAuthentication.AddMember("NoAuthentication", NoAuthentication)
-
-	_Relays_member = _Relays.AddMember("member", Relay)
-
-	ReplaceRecipientAction_ReplaceWith = ReplaceRecipientAction.AddMember("ReplaceWith", _Recipients)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	Row_ArchivedMessageId = Row.AddMember("ArchivedMessageId", _ArchivedMessageId)
-
-	Row_ReceivedTimestamp = Row.AddMember("ReceivedTimestamp", smithyprelude.Timestamp)
-
-	Row_Date = Row.AddMember("Date", smithyprelude.String)
-
-	Row_To = Row.AddMember("To", smithyprelude.String)
-
-	Row_From = Row.AddMember("From", smithyprelude.String)
-
-	Row_Cc = Row.AddMember("Cc", smithyprelude.String)
-
-	Row_Subject = Row.AddMember("Subject", smithyprelude.String)
-
-	Row_MessageId = Row.AddMember("MessageId", smithyprelude.String)
-
-	Row_HasAttachments = Row.AddMember("HasAttachments", smithyprelude.Boolean)
-
-	Row_ReceivedHeaders = Row.AddMember("ReceivedHeaders", _EmailReceivedHeadersList)
-
-	Row_InReplyTo = Row.AddMember("InReplyTo", smithyprelude.String)
-
-	Row_XMailer = Row.AddMember("XMailer", smithyprelude.String)
-
-	Row_XOriginalMailer = Row.AddMember("XOriginalMailer", smithyprelude.String)
-
-	Row_XPriority = Row.AddMember("XPriority", smithyprelude.String)
-
-	Row_IngressPointId = Row.AddMember("IngressPointId", _IngressPointId)
-
-	Row_SenderHostname = Row.AddMember("SenderHostname", smithyprelude.String)
-
-	Row_SenderIpAddress = Row.AddMember("SenderIpAddress", _SenderIpAddress)
-
-	Row_Envelope = Row.AddMember("Envelope", Envelope)
-
-	Row_SourceArn = Row.AddMember("SourceArn", smithyprelude.String)
-
-	_RowsList_member = _RowsList.AddMember("member", Row)
-
-	RuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED = RuleBooleanEmailAttribute.AddMember("READ_RECEIPT_REQUESTED", smithyprelude.Unit)
-
-	RuleBooleanEmailAttribute_TLS = RuleBooleanEmailAttribute.AddMember("TLS", smithyprelude.Unit)
-
-	RuleBooleanEmailAttribute_TLS_WRAPPED = RuleBooleanEmailAttribute.AddMember("TLS_WRAPPED", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_RECIPIENT = RuleAddressListEmailAttribute.AddMember("RECIPIENT", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_MAIL_FROM = RuleAddressListEmailAttribute.AddMember("MAIL_FROM", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_SENDER = RuleAddressListEmailAttribute.AddMember("SENDER", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_FROM = RuleAddressListEmailAttribute.AddMember("FROM", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_TO = RuleAddressListEmailAttribute.AddMember("TO", smithyprelude.Unit)
-
-	RuleAddressListEmailAttribute_CC = RuleAddressListEmailAttribute.AddMember("CC", smithyprelude.Unit)
-
-	_RuleAddressListArnList_member = _RuleAddressListArnList.AddMember("member", _AddressListArn)
-
-	RuleIsInAddressList_Attribute = RuleIsInAddressList.AddMember("Attribute", RuleAddressListEmailAttribute)
-
-	RuleIsInAddressList_AddressLists = RuleIsInAddressList.AddMember("AddressLists", _RuleAddressListArnList)
-
-	RuleBooleanToEvaluate_Attribute = RuleBooleanToEvaluate.AddMember("Attribute", RuleBooleanEmailAttribute)
-
-	RuleBooleanToEvaluate_Analysis = RuleBooleanToEvaluate.AddMember("Analysis", Analysis)
-
-	RuleBooleanToEvaluate_IsInAddressList = RuleBooleanToEvaluate.AddMember("IsInAddressList", RuleIsInAddressList)
-
-	RuleBooleanOperator_IS_TRUE = RuleBooleanOperator.AddMember("IS_TRUE", smithyprelude.Unit)
-
-	RuleBooleanOperator_IS_FALSE = RuleBooleanOperator.AddMember("IS_FALSE", smithyprelude.Unit)
-
-	RuleBooleanExpression_Evaluate = RuleBooleanExpression.AddMember("Evaluate", RuleBooleanToEvaluate)
-
-	RuleBooleanExpression_Operator = RuleBooleanExpression.AddMember("Operator", RuleBooleanOperator)
-
-	RuleStringEmailAttribute_MAIL_FROM = RuleStringEmailAttribute.AddMember("MAIL_FROM", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_HELO = RuleStringEmailAttribute.AddMember("HELO", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_RECIPIENT = RuleStringEmailAttribute.AddMember("RECIPIENT", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_SENDER = RuleStringEmailAttribute.AddMember("SENDER", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_FROM = RuleStringEmailAttribute.AddMember("FROM", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_SUBJECT = RuleStringEmailAttribute.AddMember("SUBJECT", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_TO = RuleStringEmailAttribute.AddMember("TO", smithyprelude.Unit)
-
-	RuleStringEmailAttribute_CC = RuleStringEmailAttribute.AddMember("CC", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_CN = RuleClientCertificateAttribute.AddMember("CN", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_RFC822_NAME = RuleClientCertificateAttribute.AddMember("SAN_RFC822_NAME", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_DNS_NAME = RuleClientCertificateAttribute.AddMember("SAN_DNS_NAME", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_DIRECTORY_NAME = RuleClientCertificateAttribute.AddMember("SAN_DIRECTORY_NAME", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER = RuleClientCertificateAttribute.AddMember("SAN_UNIFORM_RESOURCE_IDENTIFIER", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_IP_ADDRESS = RuleClientCertificateAttribute.AddMember("SAN_IP_ADDRESS", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SAN_REGISTERED_ID = RuleClientCertificateAttribute.AddMember("SAN_REGISTERED_ID", smithyprelude.Unit)
-
-	RuleClientCertificateAttribute_SERIAL_NUMBER = RuleClientCertificateAttribute.AddMember("SERIAL_NUMBER", smithyprelude.Unit)
-
-	RuleStringToEvaluate_Attribute = RuleStringToEvaluate.AddMember("Attribute", RuleStringEmailAttribute)
-
-	RuleStringToEvaluate_MimeHeaderAttribute = RuleStringToEvaluate.AddMember("MimeHeaderAttribute", _MimeHeaderAttribute)
-
-	RuleStringToEvaluate_Analysis = RuleStringToEvaluate.AddMember("Analysis", Analysis)
-
-	RuleStringToEvaluate_ClientCertificateAttribute = RuleStringToEvaluate.AddMember("ClientCertificateAttribute", RuleClientCertificateAttribute)
-
-	RuleStringOperator_EQUALS = RuleStringOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	RuleStringOperator_NOT_EQUALS = RuleStringOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	RuleStringOperator_STARTS_WITH = RuleStringOperator.AddMember("STARTS_WITH", smithyprelude.Unit)
-
-	RuleStringOperator_ENDS_WITH = RuleStringOperator.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	RuleStringOperator_CONTAINS = RuleStringOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	_RuleStringList_member = _RuleStringList.AddMember("member", _RuleStringValue)
-
-	RuleStringExpression_Evaluate = RuleStringExpression.AddMember("Evaluate", RuleStringToEvaluate)
-
-	RuleStringExpression_Operator = RuleStringExpression.AddMember("Operator", RuleStringOperator)
-
-	RuleStringExpression_Values = RuleStringExpression.AddMember("Values", _RuleStringList)
-
-	RuleNumberEmailAttribute_MESSAGE_SIZE = RuleNumberEmailAttribute.AddMember("MESSAGE_SIZE", smithyprelude.Unit)
-
-	RuleNumberToEvaluate_Attribute = RuleNumberToEvaluate.AddMember("Attribute", RuleNumberEmailAttribute)
-
-	RuleNumberOperator_EQUALS = RuleNumberOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	RuleNumberOperator_NOT_EQUALS = RuleNumberOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	RuleNumberOperator_LESS_THAN = RuleNumberOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	RuleNumberOperator_GREATER_THAN = RuleNumberOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	RuleNumberOperator_LESS_THAN_OR_EQUAL = RuleNumberOperator.AddMember("LESS_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	RuleNumberOperator_GREATER_THAN_OR_EQUAL = RuleNumberOperator.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	RuleNumberExpression_Evaluate = RuleNumberExpression.AddMember("Evaluate", RuleNumberToEvaluate)
-
-	RuleNumberExpression_Operator = RuleNumberExpression.AddMember("Operator", RuleNumberOperator)
-
-	RuleNumberExpression_Value = RuleNumberExpression.AddMember("Value", smithyprelude.Double)
-
-	RuleIpEmailAttribute_SOURCE_IP = RuleIpEmailAttribute.AddMember("SOURCE_IP", smithyprelude.Unit)
-
-	RuleIpToEvaluate_Attribute = RuleIpToEvaluate.AddMember("Attribute", RuleIpEmailAttribute)
-
-	RuleIpOperator_CIDR_MATCHES = RuleIpOperator.AddMember("CIDR_MATCHES", smithyprelude.Unit)
-
-	RuleIpOperator_NOT_CIDR_MATCHES = RuleIpOperator.AddMember("NOT_CIDR_MATCHES", smithyprelude.Unit)
-
-	_RuleIpValueList_member = _RuleIpValueList.AddMember("member", _RuleIpStringValue)
-
-	RuleIpExpression_Evaluate = RuleIpExpression.AddMember("Evaluate", RuleIpToEvaluate)
-
-	RuleIpExpression_Operator = RuleIpExpression.AddMember("Operator", RuleIpOperator)
-
-	RuleIpExpression_Values = RuleIpExpression.AddMember("Values", _RuleIpValueList)
-
-	RuleVerdictAttribute_SPF = RuleVerdictAttribute.AddMember("SPF", smithyprelude.Unit)
-
-	RuleVerdictAttribute_DKIM = RuleVerdictAttribute.AddMember("DKIM", smithyprelude.Unit)
-
-	RuleVerdictToEvaluate_Attribute = RuleVerdictToEvaluate.AddMember("Attribute", RuleVerdictAttribute)
-
-	RuleVerdictToEvaluate_Analysis = RuleVerdictToEvaluate.AddMember("Analysis", Analysis)
-
-	RuleVerdictOperator_EQUALS = RuleVerdictOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	RuleVerdictOperator_NOT_EQUALS = RuleVerdictOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	RuleVerdict_PASS = RuleVerdict.AddMember("PASS", smithyprelude.Unit)
-
-	RuleVerdict_FAIL = RuleVerdict.AddMember("FAIL", smithyprelude.Unit)
-
-	RuleVerdict_GRAY = RuleVerdict.AddMember("GRAY", smithyprelude.Unit)
-
-	RuleVerdict_PROCESSING_FAILED = RuleVerdict.AddMember("PROCESSING_FAILED", smithyprelude.Unit)
-
-	_RuleVerdictValueList_member = _RuleVerdictValueList.AddMember("member", RuleVerdict)
-
-	RuleVerdictExpression_Evaluate = RuleVerdictExpression.AddMember("Evaluate", RuleVerdictToEvaluate)
-
-	RuleVerdictExpression_Operator = RuleVerdictExpression.AddMember("Operator", RuleVerdictOperator)
-
-	RuleVerdictExpression_Values = RuleVerdictExpression.AddMember("Values", _RuleVerdictValueList)
-
-	RuleDmarcOperator_EQUALS = RuleDmarcOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	RuleDmarcOperator_NOT_EQUALS = RuleDmarcOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	RuleDmarcPolicy_NONE = RuleDmarcPolicy.AddMember("NONE", smithyprelude.Unit)
-
-	RuleDmarcPolicy_QUARANTINE = RuleDmarcPolicy.AddMember("QUARANTINE", smithyprelude.Unit)
-
-	RuleDmarcPolicy_REJECT = RuleDmarcPolicy.AddMember("REJECT", smithyprelude.Unit)
-
-	_RuleDmarcValueList_member = _RuleDmarcValueList.AddMember("member", RuleDmarcPolicy)
-
-	RuleDmarcExpression_Operator = RuleDmarcExpression.AddMember("Operator", RuleDmarcOperator)
-
-	RuleDmarcExpression_Values = RuleDmarcExpression.AddMember("Values", _RuleDmarcValueList)
-
-	RuleCondition_BooleanExpression = RuleCondition.AddMember("BooleanExpression", RuleBooleanExpression)
-
-	RuleCondition_StringExpression = RuleCondition.AddMember("StringExpression", RuleStringExpression)
-
-	RuleCondition_NumberExpression = RuleCondition.AddMember("NumberExpression", RuleNumberExpression)
-
-	RuleCondition_IpExpression = RuleCondition.AddMember("IpExpression", RuleIpExpression)
-
-	RuleCondition_VerdictExpression = RuleCondition.AddMember("VerdictExpression", RuleVerdictExpression)
-
-	RuleCondition_DmarcExpression = RuleCondition.AddMember("DmarcExpression", RuleDmarcExpression)
-
-	_RuleConditions_member = _RuleConditions.AddMember("member", RuleCondition)
-
-	S3Action_ActionFailurePolicy = S3Action.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	S3Action_RoleArn = S3Action.AddMember("RoleArn", _IamRoleArn)
-
-	S3Action_S3Bucket = S3Action.AddMember("S3Bucket", _S3Bucket)
-
-	S3Action_S3Prefix = S3Action.AddMember("S3Prefix", _S3Prefix)
-
-	S3Action_S3SseKmsKeyId = S3Action.AddMember("S3SseKmsKeyId", _KmsKeyId)
-
-	SendAction_ActionFailurePolicy = SendAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	SendAction_RoleArn = SendAction.AddMember("RoleArn", _IamRoleArn)
-
-	SnsNotificationEncoding_UTF_8 = SnsNotificationEncoding.AddMember("UTF_8", smithyprelude.Unit)
-
-	SnsNotificationEncoding_BASE64 = SnsNotificationEncoding.AddMember("BASE64", smithyprelude.Unit)
-
-	SnsNotificationPayloadType_HEADERS = SnsNotificationPayloadType.AddMember("HEADERS", smithyprelude.Unit)
-
-	SnsNotificationPayloadType_CONTENT = SnsNotificationPayloadType.AddMember("CONTENT", smithyprelude.Unit)
-
-	SnsAction_ActionFailurePolicy = SnsAction.AddMember("ActionFailurePolicy", ActionFailurePolicy)
-
-	SnsAction_TopicArn = SnsAction.AddMember("TopicArn", _SnsTopicArn)
-
-	SnsAction_RoleArn = SnsAction.AddMember("RoleArn", _IamRoleArn)
-
-	SnsAction_Encoding = SnsAction.AddMember("Encoding", SnsNotificationEncoding)
-
-	SnsAction_PayloadType = SnsAction.AddMember("PayloadType", SnsNotificationPayloadType)
-
-	RuleAction_Drop = RuleAction.AddMember("Drop", DropAction)
-
-	RuleAction_Relay = RuleAction.AddMember("Relay", RelayAction)
-
-	RuleAction_Archive = RuleAction.AddMember("Archive", ArchiveAction)
-
-	RuleAction_WriteToS3 = RuleAction.AddMember("WriteToS3", S3Action)
-
-	RuleAction_Send = RuleAction.AddMember("Send", SendAction)
-
-	RuleAction_AddHeader = RuleAction.AddMember("AddHeader", AddHeaderAction)
-
-	RuleAction_ReplaceRecipient = RuleAction.AddMember("ReplaceRecipient", ReplaceRecipientAction)
-
-	RuleAction_DeliverToMailbox = RuleAction.AddMember("DeliverToMailbox", DeliverToMailboxAction)
-
-	RuleAction_DeliverToQBusiness = RuleAction.AddMember("DeliverToQBusiness", DeliverToQBusinessAction)
-
-	RuleAction_PublishToSns = RuleAction.AddMember("PublishToSns", SnsAction)
-
-	RuleAction_Bounce = RuleAction.AddMember("Bounce", BounceAction)
-
-	RuleAction_InvokeLambda = RuleAction.AddMember("InvokeLambda", InvokeLambdaAction)
-
-	_RuleActions_member = _RuleActions.AddMember("member", RuleAction)
-
-	Rule_Name = Rule.AddMember("Name", _RuleName)
-
-	Rule_Conditions = Rule.AddMember("Conditions", _RuleConditions)
-
-	Rule_Unless = Rule.AddMember("Unless", _RuleConditions)
-
-	Rule_Actions = Rule.AddMember("Actions", _RuleActions)
-
-	_Rules_member = _Rules.AddMember("member", Rule)
-
-	RuleSet_RuleSetId = RuleSet.AddMember("RuleSetId", _RuleSetId)
-
-	RuleSet_RuleSetName = RuleSet.AddMember("RuleSetName", _RuleSetName)
-
-	RuleSet_LastModificationDate = RuleSet.AddMember("LastModificationDate", smithyprelude.Timestamp)
-
-	_RuleSets_member = _RuleSets.AddMember("member", RuleSet)
-
-	SavedAddress_Address = SavedAddress.AddMember("Address", _Address)
-
-	SavedAddress_CreatedTimestamp = SavedAddress.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	_SavedAddresses_member = _SavedAddresses.AddMember("member", SavedAddress)
-
-	SearchState_QUEUED = SearchState.AddMember("QUEUED", smithyprelude.Unit)
-
-	SearchState_RUNNING = SearchState.AddMember("RUNNING", smithyprelude.Unit)
-
-	SearchState_COMPLETED = SearchState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	SearchState_FAILED = SearchState.AddMember("FAILED", smithyprelude.Unit)
-
-	SearchState_CANCELLED = SearchState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	SearchStatus_SubmissionTimestamp = SearchStatus.AddMember("SubmissionTimestamp", smithyprelude.Timestamp)
-
-	SearchStatus_CompletionTimestamp = SearchStatus.AddMember("CompletionTimestamp", smithyprelude.Timestamp)
-
-	SearchStatus_State = SearchStatus.AddMember("State", SearchState)
-
-	SearchStatus_ErrorMessage = SearchStatus.AddMember("ErrorMessage", _ErrorMessage)
-
-	SearchSummary_SearchId = SearchSummary.AddMember("SearchId", _SearchId)
-
-	SearchSummary_Status = SearchSummary.AddMember("Status", SearchStatus)
-
-	_SearchSummaryList_member = _SearchSummaryList.AddMember("member", SearchSummary)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	TlsPolicy_REQUIRED = TlsPolicy.AddMember("REQUIRED", smithyprelude.Unit)
-
-	TlsPolicy_OPTIONAL = TlsPolicy.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	TlsPolicy_FIPS = TlsPolicy.AddMember("FIPS", smithyprelude.Unit)
-
-	TrafficPolicy_TrafficPolicyName = TrafficPolicy.AddMember("TrafficPolicyName", _TrafficPolicyName)
-
-	TrafficPolicy_TrafficPolicyId = TrafficPolicy.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	TrafficPolicy_DefaultAction = TrafficPolicy.AddMember("DefaultAction", AcceptAction)
-
-	_TrafficPolicyList_member = _TrafficPolicyList.AddMember("member", TrafficPolicy)
-
-	TrustStoreResponseOption_EXCLUDE = TrustStoreResponseOption.AddMember("EXCLUDE", smithyprelude.Unit)
-
-	TrustStoreResponseOption_INCLUDE = TrustStoreResponseOption.AddMember("INCLUDE", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	CreateAddonInstanceRequest_ClientToken = CreateAddonInstanceRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateAddonInstanceRequest_AddonSubscriptionId = CreateAddonInstanceRequest.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	CreateAddonInstanceRequest_Tags = CreateAddonInstanceRequest.AddMember("Tags", _TagList)
-
-	CreateAddonInstanceResponse_AddonInstanceId = CreateAddonInstanceResponse.AddMember("AddonInstanceId", _AddonInstanceId)
-
-	CreateAddonSubscriptionRequest_ClientToken = CreateAddonSubscriptionRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateAddonSubscriptionRequest_AddonName = CreateAddonSubscriptionRequest.AddMember("AddonName", _AddonName)
-
-	CreateAddonSubscriptionRequest_Tags = CreateAddonSubscriptionRequest.AddMember("Tags", _TagList)
-
-	CreateAddonSubscriptionResponse_AddonSubscriptionId = CreateAddonSubscriptionResponse.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	CreateAddressListImportJobRequest_ClientToken = CreateAddressListImportJobRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateAddressListImportJobRequest_AddressListId = CreateAddressListImportJobRequest.AddMember("AddressListId", _AddressListId)
-
-	CreateAddressListImportJobRequest_Name = CreateAddressListImportJobRequest.AddMember("Name", _JobName)
-
-	CreateAddressListImportJobRequest_ImportDataFormat = CreateAddressListImportJobRequest.AddMember("ImportDataFormat", ImportDataFormat)
-
-	CreateAddressListImportJobResponse_JobId = CreateAddressListImportJobResponse.AddMember("JobId", _JobId)
-
-	CreateAddressListImportJobResponse_PreSignedUrl = CreateAddressListImportJobResponse.AddMember("PreSignedUrl", _PreSignedUrl)
-
-	CreateAddressListRequest_ClientToken = CreateAddressListRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateAddressListRequest_AddressListName = CreateAddressListRequest.AddMember("AddressListName", _AddressListName)
-
-	CreateAddressListRequest_Tags = CreateAddressListRequest.AddMember("Tags", _TagList)
-
-	CreateAddressListResponse_AddressListId = CreateAddressListResponse.AddMember("AddressListId", _AddressListId)
-
-	CreateArchiveRequest_ClientToken = CreateArchiveRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateArchiveRequest_ArchiveName = CreateArchiveRequest.AddMember("ArchiveName", _ArchiveNameString)
-
-	CreateArchiveRequest_Retention = CreateArchiveRequest.AddMember("Retention", ArchiveRetention)
-
-	CreateArchiveRequest_KmsKeyArn = CreateArchiveRequest.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CreateArchiveRequest_Tags = CreateArchiveRequest.AddMember("Tags", _TagList)
-
-	CreateArchiveResponse_ArchiveId = CreateArchiveResponse.AddMember("ArchiveId", _ArchiveIdString)
-
-	CreateIngressPointRequest_ClientToken = CreateIngressPointRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateIngressPointRequest_IngressPointName = CreateIngressPointRequest.AddMember("IngressPointName", _IngressPointName)
-
-	CreateIngressPointRequest_Type = CreateIngressPointRequest.AddMember("Type", IngressPointType)
-
-	CreateIngressPointRequest_RuleSetId = CreateIngressPointRequest.AddMember("RuleSetId", _RuleSetId)
-
-	CreateIngressPointRequest_TrafficPolicyId = CreateIngressPointRequest.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	CreateIngressPointRequest_IngressPointConfiguration = CreateIngressPointRequest.AddMember("IngressPointConfiguration", IngressPointConfiguration)
-
-	CreateIngressPointRequest_NetworkConfiguration = CreateIngressPointRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	CreateIngressPointRequest_TlsPolicy = CreateIngressPointRequest.AddMember("TlsPolicy", TlsPolicy)
-
-	CreateIngressPointRequest_Tags = CreateIngressPointRequest.AddMember("Tags", _TagList)
-
-	CreateIngressPointResponse_IngressPointId = CreateIngressPointResponse.AddMember("IngressPointId", _IngressPointId)
-
-	CreateRelayRequest_ClientToken = CreateRelayRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateRelayRequest_RelayName = CreateRelayRequest.AddMember("RelayName", _RelayName)
-
-	CreateRelayRequest_ServerName = CreateRelayRequest.AddMember("ServerName", _RelayServerName)
-
-	CreateRelayRequest_ServerPort = CreateRelayRequest.AddMember("ServerPort", _RelayServerPort)
-
-	CreateRelayRequest_Authentication = CreateRelayRequest.AddMember("Authentication", RelayAuthentication)
-
-	CreateRelayRequest_Tags = CreateRelayRequest.AddMember("Tags", _TagList)
-
-	CreateRelayResponse_RelayId = CreateRelayResponse.AddMember("RelayId", _RelayId)
-
-	CreateRuleSetRequest_ClientToken = CreateRuleSetRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateRuleSetRequest_RuleSetName = CreateRuleSetRequest.AddMember("RuleSetName", _RuleSetName)
-
-	CreateRuleSetRequest_Rules = CreateRuleSetRequest.AddMember("Rules", _Rules)
-
-	CreateRuleSetRequest_Tags = CreateRuleSetRequest.AddMember("Tags", _TagList)
-
-	CreateRuleSetResponse_RuleSetId = CreateRuleSetResponse.AddMember("RuleSetId", _RuleSetId)
-
-	CreateTrafficPolicyRequest_ClientToken = CreateTrafficPolicyRequest.AddMember("ClientToken", _IdempotencyToken)
-
-	CreateTrafficPolicyRequest_TrafficPolicyName = CreateTrafficPolicyRequest.AddMember("TrafficPolicyName", _TrafficPolicyName)
-
-	CreateTrafficPolicyRequest_PolicyStatements = CreateTrafficPolicyRequest.AddMember("PolicyStatements", _PolicyStatementList)
-
-	CreateTrafficPolicyRequest_DefaultAction = CreateTrafficPolicyRequest.AddMember("DefaultAction", AcceptAction)
-
-	CreateTrafficPolicyRequest_MaxMessageSizeBytes = CreateTrafficPolicyRequest.AddMember("MaxMessageSizeBytes", _MaxMessageSizeBytes)
-
-	CreateTrafficPolicyRequest_Tags = CreateTrafficPolicyRequest.AddMember("Tags", _TagList)
-
-	CreateTrafficPolicyResponse_TrafficPolicyId = CreateTrafficPolicyResponse.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	DeleteAddonInstanceRequest_AddonInstanceId = DeleteAddonInstanceRequest.AddMember("AddonInstanceId", _AddonInstanceId)
-
-	DeleteAddonSubscriptionRequest_AddonSubscriptionId = DeleteAddonSubscriptionRequest.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	DeleteAddressListRequest_AddressListId = DeleteAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	DeleteArchiveRequest_ArchiveId = DeleteArchiveRequest.AddMember("ArchiveId", _ArchiveIdString)
-
-	DeleteIngressPointRequest_IngressPointId = DeleteIngressPointRequest.AddMember("IngressPointId", _IngressPointId)
-
-	DeleteRelayRequest_RelayId = DeleteRelayRequest.AddMember("RelayId", _RelayId)
-
-	DeleteRuleSetRequest_RuleSetId = DeleteRuleSetRequest.AddMember("RuleSetId", _RuleSetId)
-
-	DeleteTrafficPolicyRequest_TrafficPolicyId = DeleteTrafficPolicyRequest.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	DeregisterMemberFromAddressListRequest_AddressListId = DeregisterMemberFromAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	DeregisterMemberFromAddressListRequest_Address = DeregisterMemberFromAddressListRequest.AddMember("Address", _Address)
-
-	GetAddonInstanceRequest_AddonInstanceId = GetAddonInstanceRequest.AddMember("AddonInstanceId", _AddonInstanceId)
-
-	GetAddonInstanceResponse_AddonSubscriptionId = GetAddonInstanceResponse.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	GetAddonInstanceResponse_AddonName = GetAddonInstanceResponse.AddMember("AddonName", _AddonName)
-
-	GetAddonInstanceResponse_AddonInstanceArn = GetAddonInstanceResponse.AddMember("AddonInstanceArn", _AddonInstanceArn)
-
-	GetAddonInstanceResponse_CreatedTimestamp = GetAddonInstanceResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetAddonSubscriptionRequest_AddonSubscriptionId = GetAddonSubscriptionRequest.AddMember("AddonSubscriptionId", _AddonSubscriptionId)
-
-	GetAddonSubscriptionResponse_AddonName = GetAddonSubscriptionResponse.AddMember("AddonName", _AddonName)
-
-	GetAddonSubscriptionResponse_AddonSubscriptionArn = GetAddonSubscriptionResponse.AddMember("AddonSubscriptionArn", _AddonSubscriptionArn)
-
-	GetAddonSubscriptionResponse_CreatedTimestamp = GetAddonSubscriptionResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetAddressListImportJobRequest_JobId = GetAddressListImportJobRequest.AddMember("JobId", _JobId)
-
-	GetAddressListImportJobResponse_JobId = GetAddressListImportJobResponse.AddMember("JobId", _JobId)
-
-	GetAddressListImportJobResponse_Name = GetAddressListImportJobResponse.AddMember("Name", _JobName)
-
-	GetAddressListImportJobResponse_Status = GetAddressListImportJobResponse.AddMember("Status", ImportJobStatus)
-
-	GetAddressListImportJobResponse_PreSignedUrl = GetAddressListImportJobResponse.AddMember("PreSignedUrl", _PreSignedUrl)
-
-	GetAddressListImportJobResponse_ImportedItemsCount = GetAddressListImportJobResponse.AddMember("ImportedItemsCount", _JobItemsCount)
-
-	GetAddressListImportJobResponse_FailedItemsCount = GetAddressListImportJobResponse.AddMember("FailedItemsCount", _JobItemsCount)
-
-	GetAddressListImportJobResponse_ImportDataFormat = GetAddressListImportJobResponse.AddMember("ImportDataFormat", ImportDataFormat)
-
-	GetAddressListImportJobResponse_AddressListId = GetAddressListImportJobResponse.AddMember("AddressListId", _AddressListId)
-
-	GetAddressListImportJobResponse_CreatedTimestamp = GetAddressListImportJobResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetAddressListImportJobResponse_StartTimestamp = GetAddressListImportJobResponse.AddMember("StartTimestamp", smithyprelude.Timestamp)
-
-	GetAddressListImportJobResponse_CompletedTimestamp = GetAddressListImportJobResponse.AddMember("CompletedTimestamp", smithyprelude.Timestamp)
-
-	GetAddressListImportJobResponse_Error = GetAddressListImportJobResponse.AddMember("Error", _ErrorMessage)
-
-	GetAddressListRequest_AddressListId = GetAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	GetAddressListResponse_AddressListId = GetAddressListResponse.AddMember("AddressListId", _AddressListId)
-
-	GetAddressListResponse_AddressListArn = GetAddressListResponse.AddMember("AddressListArn", _AddressListArn)
-
-	GetAddressListResponse_AddressListName = GetAddressListResponse.AddMember("AddressListName", _AddressListName)
-
-	GetAddressListResponse_CreatedTimestamp = GetAddressListResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetAddressListResponse_LastUpdatedTimestamp = GetAddressListResponse.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveExportRequest_ExportId = GetArchiveExportRequest.AddMember("ExportId", _ExportId)
-
-	GetArchiveExportResponse_ArchiveId = GetArchiveExportResponse.AddMember("ArchiveId", _ArchiveId)
-
-	GetArchiveExportResponse_Filters = GetArchiveExportResponse.AddMember("Filters", ArchiveFilters)
-
-	GetArchiveExportResponse_FromTimestamp = GetArchiveExportResponse.AddMember("FromTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveExportResponse_ToTimestamp = GetArchiveExportResponse.AddMember("ToTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveExportResponse_MaxResults = GetArchiveExportResponse.AddMember("MaxResults", _ExportMaxResults)
-
-	GetArchiveExportResponse_ExportDestinationConfiguration = GetArchiveExportResponse.AddMember("ExportDestinationConfiguration", ExportDestinationConfiguration)
-
-	GetArchiveExportResponse_Status = GetArchiveExportResponse.AddMember("Status", ExportStatus)
-
-	GetArchiveRequest_ArchiveId = GetArchiveRequest.AddMember("ArchiveId", _ArchiveIdString)
-
-	GetArchiveMessageContentRequest_ArchivedMessageId = GetArchiveMessageContentRequest.AddMember("ArchivedMessageId", _ArchivedMessageId)
-
-	GetArchiveMessageContentResponse_Body = GetArchiveMessageContentResponse.AddMember("Body", MessageBody)
-
-	GetArchiveMessageRequest_ArchivedMessageId = GetArchiveMessageRequest.AddMember("ArchivedMessageId", _ArchivedMessageId)
-
-	GetArchiveMessageResponse_MessageDownloadLink = GetArchiveMessageResponse.AddMember("MessageDownloadLink", _S3PresignedURL)
-
-	GetArchiveMessageResponse_Metadata = GetArchiveMessageResponse.AddMember("Metadata", Metadata)
-
-	GetArchiveMessageResponse_Envelope = GetArchiveMessageResponse.AddMember("Envelope", Envelope)
-
-	GetArchiveResponse_ArchiveId = GetArchiveResponse.AddMember("ArchiveId", _ArchiveIdString)
-
-	GetArchiveResponse_ArchiveName = GetArchiveResponse.AddMember("ArchiveName", _ArchiveNameString)
-
-	GetArchiveResponse_ArchiveArn = GetArchiveResponse.AddMember("ArchiveArn", _ArchiveArn)
-
-	GetArchiveResponse_ArchiveState = GetArchiveResponse.AddMember("ArchiveState", ArchiveState)
-
-	GetArchiveResponse_Retention = GetArchiveResponse.AddMember("Retention", ArchiveRetention)
-
-	GetArchiveResponse_CreatedTimestamp = GetArchiveResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveResponse_LastUpdatedTimestamp = GetArchiveResponse.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveResponse_KmsKeyArn = GetArchiveResponse.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	GetArchiveSearchRequest_SearchId = GetArchiveSearchRequest.AddMember("SearchId", _SearchId)
-
-	GetArchiveSearchResponse_ArchiveId = GetArchiveSearchResponse.AddMember("ArchiveId", _ArchiveId)
-
-	GetArchiveSearchResponse_Filters = GetArchiveSearchResponse.AddMember("Filters", ArchiveFilters)
-
-	GetArchiveSearchResponse_FromTimestamp = GetArchiveSearchResponse.AddMember("FromTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveSearchResponse_ToTimestamp = GetArchiveSearchResponse.AddMember("ToTimestamp", smithyprelude.Timestamp)
-
-	GetArchiveSearchResponse_MaxResults = GetArchiveSearchResponse.AddMember("MaxResults", _SearchMaxResults)
-
-	GetArchiveSearchResponse_Status = GetArchiveSearchResponse.AddMember("Status", SearchStatus)
-
-	GetArchiveSearchResultsRequest_SearchId = GetArchiveSearchResultsRequest.AddMember("SearchId", _SearchId)
-
-	GetArchiveSearchResultsResponse_Rows = GetArchiveSearchResultsResponse.AddMember("Rows", _RowsList)
-
-	GetIngressPointRequest_IngressPointId = GetIngressPointRequest.AddMember("IngressPointId", _IngressPointId)
-
-	GetIngressPointRequest_IncludeTrustStoreContents = GetIngressPointRequest.AddMember("IncludeTrustStoreContents", TrustStoreResponseOption)
-
-	GetIngressPointResponse_IngressPointId = GetIngressPointResponse.AddMember("IngressPointId", _IngressPointId)
-
-	GetIngressPointResponse_IngressPointName = GetIngressPointResponse.AddMember("IngressPointName", _IngressPointName)
-
-	GetIngressPointResponse_IngressPointArn = GetIngressPointResponse.AddMember("IngressPointArn", _IngressPointArn)
-
-	GetIngressPointResponse_Status = GetIngressPointResponse.AddMember("Status", IngressPointStatus)
-
-	GetIngressPointResponse_Type = GetIngressPointResponse.AddMember("Type", IngressPointType)
-
-	GetIngressPointResponse_ARecord = GetIngressPointResponse.AddMember("ARecord", _IngressPointARecord)
-
-	GetIngressPointResponse_RuleSetId = GetIngressPointResponse.AddMember("RuleSetId", _RuleSetId)
-
-	GetIngressPointResponse_TrafficPolicyId = GetIngressPointResponse.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	GetIngressPointResponse_IngressPointAuthConfiguration = GetIngressPointResponse.AddMember("IngressPointAuthConfiguration", IngressPointAuthConfiguration)
-
-	GetIngressPointResponse_NetworkConfiguration = GetIngressPointResponse.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	GetIngressPointResponse_TlsPolicy = GetIngressPointResponse.AddMember("TlsPolicy", TlsPolicy)
-
-	GetIngressPointResponse_CreatedTimestamp = GetIngressPointResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetIngressPointResponse_LastUpdatedTimestamp = GetIngressPointResponse.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	GetMemberOfAddressListRequest_AddressListId = GetMemberOfAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	GetMemberOfAddressListRequest_Address = GetMemberOfAddressListRequest.AddMember("Address", _Address)
-
-	GetMemberOfAddressListResponse_Address = GetMemberOfAddressListResponse.AddMember("Address", _Address)
-
-	GetMemberOfAddressListResponse_CreatedTimestamp = GetMemberOfAddressListResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetRelayRequest_RelayId = GetRelayRequest.AddMember("RelayId", _RelayId)
-
-	GetRelayResponse_RelayId = GetRelayResponse.AddMember("RelayId", _RelayId)
-
-	GetRelayResponse_RelayArn = GetRelayResponse.AddMember("RelayArn", _RelayArn)
-
-	GetRelayResponse_RelayName = GetRelayResponse.AddMember("RelayName", _RelayName)
-
-	GetRelayResponse_ServerName = GetRelayResponse.AddMember("ServerName", _RelayServerName)
-
-	GetRelayResponse_ServerPort = GetRelayResponse.AddMember("ServerPort", _RelayServerPort)
-
-	GetRelayResponse_Authentication = GetRelayResponse.AddMember("Authentication", RelayAuthentication)
-
-	GetRelayResponse_CreatedTimestamp = GetRelayResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetRelayResponse_LastModifiedTimestamp = GetRelayResponse.AddMember("LastModifiedTimestamp", smithyprelude.Timestamp)
-
-	GetRuleSetRequest_RuleSetId = GetRuleSetRequest.AddMember("RuleSetId", _RuleSetId)
-
-	GetRuleSetResponse_RuleSetId = GetRuleSetResponse.AddMember("RuleSetId", _RuleSetId)
-
-	GetRuleSetResponse_RuleSetArn = GetRuleSetResponse.AddMember("RuleSetArn", _RuleSetArn)
-
-	GetRuleSetResponse_RuleSetName = GetRuleSetResponse.AddMember("RuleSetName", _RuleSetName)
-
-	GetRuleSetResponse_CreatedDate = GetRuleSetResponse.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	GetRuleSetResponse_LastModificationDate = GetRuleSetResponse.AddMember("LastModificationDate", smithyprelude.Timestamp)
-
-	GetRuleSetResponse_Rules = GetRuleSetResponse.AddMember("Rules", _Rules)
-
-	GetTrafficPolicyRequest_TrafficPolicyId = GetTrafficPolicyRequest.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	GetTrafficPolicyResponse_TrafficPolicyName = GetTrafficPolicyResponse.AddMember("TrafficPolicyName", _TrafficPolicyName)
-
-	GetTrafficPolicyResponse_TrafficPolicyId = GetTrafficPolicyResponse.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	GetTrafficPolicyResponse_TrafficPolicyArn = GetTrafficPolicyResponse.AddMember("TrafficPolicyArn", _TrafficPolicyArn)
-
-	GetTrafficPolicyResponse_PolicyStatements = GetTrafficPolicyResponse.AddMember("PolicyStatements", _PolicyStatementList)
-
-	GetTrafficPolicyResponse_MaxMessageSizeBytes = GetTrafficPolicyResponse.AddMember("MaxMessageSizeBytes", _MaxMessageSizeBytes)
-
-	GetTrafficPolicyResponse_DefaultAction = GetTrafficPolicyResponse.AddMember("DefaultAction", AcceptAction)
-
-	GetTrafficPolicyResponse_CreatedTimestamp = GetTrafficPolicyResponse.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
-
-	GetTrafficPolicyResponse_LastUpdatedTimestamp = GetTrafficPolicyResponse.AddMember("LastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	ListAddonInstancesRequest_NextToken = ListAddonInstancesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAddonInstancesRequest_PageSize = ListAddonInstancesRequest.AddMember("PageSize", _PageSize)
-
-	ListAddonInstancesResponse_AddonInstances = ListAddonInstancesResponse.AddMember("AddonInstances", _AddonInstances)
-
-	ListAddonInstancesResponse_NextToken = ListAddonInstancesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAddonSubscriptionsRequest_NextToken = ListAddonSubscriptionsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAddonSubscriptionsRequest_PageSize = ListAddonSubscriptionsRequest.AddMember("PageSize", _PageSize)
-
-	ListAddonSubscriptionsResponse_AddonSubscriptions = ListAddonSubscriptionsResponse.AddMember("AddonSubscriptions", _AddonSubscriptions)
-
-	ListAddonSubscriptionsResponse_NextToken = ListAddonSubscriptionsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAddressListImportJobsRequest_AddressListId = ListAddressListImportJobsRequest.AddMember("AddressListId", _AddressListId)
-
-	ListAddressListImportJobsRequest_NextToken = ListAddressListImportJobsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAddressListImportJobsRequest_PageSize = ListAddressListImportJobsRequest.AddMember("PageSize", _PageSize)
-
-	ListAddressListImportJobsResponse_ImportJobs = ListAddressListImportJobsResponse.AddMember("ImportJobs", _ImportJobs)
-
-	ListAddressListImportJobsResponse_NextToken = ListAddressListImportJobsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAddressListsRequest_NextToken = ListAddressListsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAddressListsRequest_PageSize = ListAddressListsRequest.AddMember("PageSize", _PageSize)
-
-	ListAddressListsResponse_AddressLists = ListAddressListsResponse.AddMember("AddressLists", _AddressLists)
-
-	ListAddressListsResponse_NextToken = ListAddressListsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListArchiveExportsRequest_ArchiveId = ListArchiveExportsRequest.AddMember("ArchiveId", _ArchiveId)
-
-	ListArchiveExportsRequest_NextToken = ListArchiveExportsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListArchiveExportsRequest_PageSize = ListArchiveExportsRequest.AddMember("PageSize", _PageSize)
-
-	ListArchiveExportsResponse_Exports = ListArchiveExportsResponse.AddMember("Exports", _ExportSummaryList)
-
-	ListArchiveExportsResponse_NextToken = ListArchiveExportsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListArchiveSearchesRequest_ArchiveId = ListArchiveSearchesRequest.AddMember("ArchiveId", _ArchiveId)
-
-	ListArchiveSearchesRequest_NextToken = ListArchiveSearchesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListArchiveSearchesRequest_PageSize = ListArchiveSearchesRequest.AddMember("PageSize", _PageSize)
-
-	ListArchiveSearchesResponse_Searches = ListArchiveSearchesResponse.AddMember("Searches", _SearchSummaryList)
-
-	ListArchiveSearchesResponse_NextToken = ListArchiveSearchesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListArchivesRequest_NextToken = ListArchivesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListArchivesRequest_PageSize = ListArchivesRequest.AddMember("PageSize", _PageSize)
-
-	ListArchivesResponse_Archives = ListArchivesResponse.AddMember("Archives", _ArchivesList)
-
-	ListArchivesResponse_NextToken = ListArchivesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListIngressPointsRequest_PageSize = ListIngressPointsRequest.AddMember("PageSize", _PageSize)
-
-	ListIngressPointsRequest_NextToken = ListIngressPointsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListIngressPointsResponse_IngressPoints = ListIngressPointsResponse.AddMember("IngressPoints", _IngressPointsList)
-
-	ListIngressPointsResponse_NextToken = ListIngressPointsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListMembersOfAddressListRequest_AddressListId = ListMembersOfAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	ListMembersOfAddressListRequest_Filter = ListMembersOfAddressListRequest.AddMember("Filter", AddressFilter)
-
-	ListMembersOfAddressListRequest_NextToken = ListMembersOfAddressListRequest.AddMember("NextToken", _PaginationToken)
-
-	ListMembersOfAddressListRequest_PageSize = ListMembersOfAddressListRequest.AddMember("PageSize", _AddressPageSize)
-
-	ListMembersOfAddressListResponse_Addresses = ListMembersOfAddressListResponse.AddMember("Addresses", _SavedAddresses)
-
-	ListMembersOfAddressListResponse_NextToken = ListMembersOfAddressListResponse.AddMember("NextToken", _PaginationToken)
-
-	ListRelaysRequest_PageSize = ListRelaysRequest.AddMember("PageSize", smithyprelude.Integer)
-
-	ListRelaysRequest_NextToken = ListRelaysRequest.AddMember("NextToken", _PaginationToken)
-
-	ListRelaysResponse_Relays = ListRelaysResponse.AddMember("Relays", _Relays)
-
-	ListRelaysResponse_NextToken = ListRelaysResponse.AddMember("NextToken", _PaginationToken)
-
-	ListRuleSetsRequest_NextToken = ListRuleSetsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListRuleSetsRequest_PageSize = ListRuleSetsRequest.AddMember("PageSize", _PageSize)
-
-	ListRuleSetsResponse_RuleSets = ListRuleSetsResponse.AddMember("RuleSets", _RuleSets)
-
-	ListRuleSetsResponse_NextToken = ListRuleSetsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTrafficPoliciesRequest_PageSize = ListTrafficPoliciesRequest.AddMember("PageSize", _PageSize)
-
-	ListTrafficPoliciesRequest_NextToken = ListTrafficPoliciesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListTrafficPoliciesResponse_TrafficPolicies = ListTrafficPoliciesResponse.AddMember("TrafficPolicies", _TrafficPolicyList)
-
-	ListTrafficPoliciesResponse_NextToken = ListTrafficPoliciesResponse.AddMember("NextToken", _PaginationToken)
-
-	RegisterMemberToAddressListRequest_AddressListId = RegisterMemberToAddressListRequest.AddMember("AddressListId", _AddressListId)
-
-	RegisterMemberToAddressListRequest_Address = RegisterMemberToAddressListRequest.AddMember("Address", _Address)
-
-	StartAddressListImportJobRequest_JobId = StartAddressListImportJobRequest.AddMember("JobId", _JobId)
-
-	StartArchiveExportRequest_ArchiveId = StartArchiveExportRequest.AddMember("ArchiveId", _ArchiveId)
-
-	StartArchiveExportRequest_Filters = StartArchiveExportRequest.AddMember("Filters", ArchiveFilters)
-
-	StartArchiveExportRequest_FromTimestamp = StartArchiveExportRequest.AddMember("FromTimestamp", smithyprelude.Timestamp)
-
-	StartArchiveExportRequest_ToTimestamp = StartArchiveExportRequest.AddMember("ToTimestamp", smithyprelude.Timestamp)
-
-	StartArchiveExportRequest_MaxResults = StartArchiveExportRequest.AddMember("MaxResults", _ExportMaxResults)
-
-	StartArchiveExportRequest_ExportDestinationConfiguration = StartArchiveExportRequest.AddMember("ExportDestinationConfiguration", ExportDestinationConfiguration)
-
-	StartArchiveExportRequest_IncludeMetadata = StartArchiveExportRequest.AddMember("IncludeMetadata", smithyprelude.Boolean)
-
-	StartArchiveExportResponse_ExportId = StartArchiveExportResponse.AddMember("ExportId", _ExportId)
-
-	StartArchiveSearchRequest_ArchiveId = StartArchiveSearchRequest.AddMember("ArchiveId", _ArchiveId)
-
-	StartArchiveSearchRequest_Filters = StartArchiveSearchRequest.AddMember("Filters", ArchiveFilters)
-
-	StartArchiveSearchRequest_FromTimestamp = StartArchiveSearchRequest.AddMember("FromTimestamp", smithyprelude.Timestamp)
-
-	StartArchiveSearchRequest_ToTimestamp = StartArchiveSearchRequest.AddMember("ToTimestamp", smithyprelude.Timestamp)
-
-	StartArchiveSearchRequest_MaxResults = StartArchiveSearchRequest.AddMember("MaxResults", _SearchMaxResults)
-
-	StartArchiveSearchResponse_SearchId = StartArchiveSearchResponse.AddMember("SearchId", _SearchId)
-
-	StopAddressListImportJobRequest_JobId = StopAddressListImportJobRequest.AddMember("JobId", _JobId)
-
-	StopArchiveExportRequest_ExportId = StopArchiveExportRequest.AddMember("ExportId", _ExportId)
-
-	StopArchiveSearchRequest_SearchId = StopArchiveSearchRequest.AddMember("SearchId", _SearchId)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateArchiveRequest_ArchiveId = UpdateArchiveRequest.AddMember("ArchiveId", _ArchiveIdString)
-
-	UpdateArchiveRequest_ArchiveName = UpdateArchiveRequest.AddMember("ArchiveName", _ArchiveNameString)
-
-	UpdateArchiveRequest_Retention = UpdateArchiveRequest.AddMember("Retention", ArchiveRetention)
-
-	UpdateIngressPointRequest_IngressPointId = UpdateIngressPointRequest.AddMember("IngressPointId", _IngressPointId)
-
-	UpdateIngressPointRequest_IngressPointName = UpdateIngressPointRequest.AddMember("IngressPointName", _IngressPointName)
-
-	UpdateIngressPointRequest_StatusToUpdate = UpdateIngressPointRequest.AddMember("StatusToUpdate", IngressPointStatusToUpdate)
-
-	UpdateIngressPointRequest_RuleSetId = UpdateIngressPointRequest.AddMember("RuleSetId", _RuleSetId)
-
-	UpdateIngressPointRequest_TrafficPolicyId = UpdateIngressPointRequest.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	UpdateIngressPointRequest_IngressPointConfiguration = UpdateIngressPointRequest.AddMember("IngressPointConfiguration", IngressPointConfiguration)
-
-	UpdateIngressPointRequest_TlsPolicy = UpdateIngressPointRequest.AddMember("TlsPolicy", TlsPolicy)
-
-	UpdateRelayRequest_RelayId = UpdateRelayRequest.AddMember("RelayId", _RelayId)
-
-	UpdateRelayRequest_RelayName = UpdateRelayRequest.AddMember("RelayName", _RelayName)
-
-	UpdateRelayRequest_ServerName = UpdateRelayRequest.AddMember("ServerName", _RelayServerName)
-
-	UpdateRelayRequest_ServerPort = UpdateRelayRequest.AddMember("ServerPort", _RelayServerPort)
-
-	UpdateRelayRequest_Authentication = UpdateRelayRequest.AddMember("Authentication", RelayAuthentication)
-
-	UpdateRuleSetRequest_RuleSetId = UpdateRuleSetRequest.AddMember("RuleSetId", _RuleSetId)
-
-	UpdateRuleSetRequest_RuleSetName = UpdateRuleSetRequest.AddMember("RuleSetName", _RuleSetName)
-
-	UpdateRuleSetRequest_Rules = UpdateRuleSetRequest.AddMember("Rules", _Rules)
-
-	UpdateTrafficPolicyRequest_TrafficPolicyId = UpdateTrafficPolicyRequest.AddMember("TrafficPolicyId", _TrafficPolicyId)
-
-	UpdateTrafficPolicyRequest_TrafficPolicyName = UpdateTrafficPolicyRequest.AddMember("TrafficPolicyName", _TrafficPolicyName)
-
-	UpdateTrafficPolicyRequest_PolicyStatements = UpdateTrafficPolicyRequest.AddMember("PolicyStatements", _PolicyStatementList)
-
-	UpdateTrafficPolicyRequest_DefaultAction = UpdateTrafficPolicyRequest.AddMember("DefaultAction", AcceptAction)
-
-	UpdateTrafficPolicyRequest_MaxMessageSizeBytes = UpdateTrafficPolicyRequest.AddMember("MaxMessageSizeBytes", _MaxMessageSizeBytes)
-
-}
+var (
+	eCreateAddonInstance                                                   smithy.SchemaExtensions
+	eCreateAddonSubscription                                               smithy.SchemaExtensions
+	eCreateAddressList                                                     smithy.SchemaExtensions
+	eCreateAddressListImportJob                                            smithy.SchemaExtensions
+	eCreateArchive                                                         smithy.SchemaExtensions
+	eCreateIngressPoint                                                    smithy.SchemaExtensions
+	eCreateRelay                                                           smithy.SchemaExtensions
+	eCreateRuleSet                                                         smithy.SchemaExtensions
+	eCreateTrafficPolicy                                                   smithy.SchemaExtensions
+	eDeleteAddonInstance                                                   smithy.SchemaExtensions
+	eDeleteAddonSubscription                                               smithy.SchemaExtensions
+	eDeleteAddressList                                                     smithy.SchemaExtensions
+	eDeleteArchive                                                         smithy.SchemaExtensions
+	eDeleteIngressPoint                                                    smithy.SchemaExtensions
+	eDeleteRelay                                                           smithy.SchemaExtensions
+	eDeleteRuleSet                                                         smithy.SchemaExtensions
+	eDeleteTrafficPolicy                                                   smithy.SchemaExtensions
+	eDeregisterMemberFromAddressList                                       smithy.SchemaExtensions
+	eGetAddonInstance                                                      smithy.SchemaExtensions
+	eGetAddonSubscription                                                  smithy.SchemaExtensions
+	eGetAddressList                                                        smithy.SchemaExtensions
+	eGetAddressListImportJob                                               smithy.SchemaExtensions
+	eGetArchive                                                            smithy.SchemaExtensions
+	eGetArchiveExport                                                      smithy.SchemaExtensions
+	eGetArchiveMessage                                                     smithy.SchemaExtensions
+	eGetArchiveMessageContent                                              smithy.SchemaExtensions
+	eGetArchiveSearch                                                      smithy.SchemaExtensions
+	eGetArchiveSearchResults                                               smithy.SchemaExtensions
+	eGetIngressPoint                                                       smithy.SchemaExtensions
+	eGetMemberOfAddressList                                                smithy.SchemaExtensions
+	eGetRelay                                                              smithy.SchemaExtensions
+	eGetRuleSet                                                            smithy.SchemaExtensions
+	eGetTrafficPolicy                                                      smithy.SchemaExtensions
+	eListAddonInstances                                                    smithy.SchemaExtensions
+	eListAddonSubscriptions                                                smithy.SchemaExtensions
+	eListAddressListImportJobs                                             smithy.SchemaExtensions
+	eListAddressLists                                                      smithy.SchemaExtensions
+	eListArchiveExports                                                    smithy.SchemaExtensions
+	eListArchives                                                          smithy.SchemaExtensions
+	eListArchiveSearches                                                   smithy.SchemaExtensions
+	eListIngressPoints                                                     smithy.SchemaExtensions
+	eListMembersOfAddressList                                              smithy.SchemaExtensions
+	eListRelays                                                            smithy.SchemaExtensions
+	eListRuleSets                                                          smithy.SchemaExtensions
+	eListTagsForResource                                                   smithy.SchemaExtensions
+	eListTrafficPolicies                                                   smithy.SchemaExtensions
+	eRegisterMemberToAddressList                                           smithy.SchemaExtensions
+	eStartAddressListImportJob                                             smithy.SchemaExtensions
+	eStartArchiveExport                                                    smithy.SchemaExtensions
+	eStartArchiveSearch                                                    smithy.SchemaExtensions
+	eStopAddressListImportJob                                              smithy.SchemaExtensions
+	eStopArchiveExport                                                     smithy.SchemaExtensions
+	eStopArchiveSearch                                                     smithy.SchemaExtensions
+	eTagResource                                                           smithy.SchemaExtensions
+	eUntagResource                                                         smithy.SchemaExtensions
+	eUpdateArchive                                                         smithy.SchemaExtensions
+	eUpdateIngressPoint                                                    smithy.SchemaExtensions
+	eUpdateRelay                                                           smithy.SchemaExtensions
+	eUpdateRuleSet                                                         smithy.SchemaExtensions
+	eUpdateTrafficPolicy                                                   smithy.SchemaExtensions
+	e_MailManagerSvc                                                       smithy.SchemaExtensions
+	eAcceptAction                                                          smithy.SchemaExtensions
+	eAcceptAction_ALLOW                                                    smithy.SchemaExtensions
+	eAcceptAction_DENY                                                     smithy.SchemaExtensions
+	eAccessDeniedException                                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                                         smithy.SchemaExtensions
+	eActionFailurePolicy                                                   smithy.SchemaExtensions
+	eActionFailurePolicy_CONTINUE                                          smithy.SchemaExtensions
+	eActionFailurePolicy_DROP                                              smithy.SchemaExtensions
+	eAddHeaderAction                                                       smithy.SchemaExtensions
+	eAddHeaderAction_HeaderName                                            smithy.SchemaExtensions
+	eAddHeaderAction_HeaderValue                                           smithy.SchemaExtensions
+	eAddonInstance                                                         smithy.SchemaExtensions
+	eAddonInstance_AddonInstanceId                                         smithy.SchemaExtensions
+	eAddonInstance_AddonSubscriptionId                                     smithy.SchemaExtensions
+	eAddonInstance_AddonName                                               smithy.SchemaExtensions
+	eAddonInstance_AddonInstanceArn                                        smithy.SchemaExtensions
+	eAddonInstance_CreatedTimestamp                                        smithy.SchemaExtensions
+	e_AddonInstanceArn                                                     smithy.SchemaExtensions
+	e_AddonInstanceId                                                      smithy.SchemaExtensions
+	e_AddonInstances                                                       smithy.SchemaExtensions
+	e_AddonInstances_member                                                smithy.SchemaExtensions
+	e_AddonName                                                            smithy.SchemaExtensions
+	eAddonSubscription                                                     smithy.SchemaExtensions
+	eAddonSubscription_AddonSubscriptionId                                 smithy.SchemaExtensions
+	eAddonSubscription_AddonName                                           smithy.SchemaExtensions
+	eAddonSubscription_AddonSubscriptionArn                                smithy.SchemaExtensions
+	eAddonSubscription_CreatedTimestamp                                    smithy.SchemaExtensions
+	e_AddonSubscriptionArn                                                 smithy.SchemaExtensions
+	e_AddonSubscriptionId                                                  smithy.SchemaExtensions
+	e_AddonSubscriptions                                                   smithy.SchemaExtensions
+	e_AddonSubscriptions_member                                            smithy.SchemaExtensions
+	e_Address                                                              smithy.SchemaExtensions
+	eAddressFilter                                                         smithy.SchemaExtensions
+	eAddressFilter_AddressPrefix                                           smithy.SchemaExtensions
+	eAddressList                                                           smithy.SchemaExtensions
+	eAddressList_AddressListId                                             smithy.SchemaExtensions
+	eAddressList_AddressListArn                                            smithy.SchemaExtensions
+	eAddressList_AddressListName                                           smithy.SchemaExtensions
+	eAddressList_CreatedTimestamp                                          smithy.SchemaExtensions
+	eAddressList_LastUpdatedTimestamp                                      smithy.SchemaExtensions
+	e_AddressListArn                                                       smithy.SchemaExtensions
+	e_AddressListId                                                        smithy.SchemaExtensions
+	e_AddressListName                                                      smithy.SchemaExtensions
+	e_AddressLists                                                         smithy.SchemaExtensions
+	e_AddressLists_member                                                  smithy.SchemaExtensions
+	e_AddressPageSize                                                      smithy.SchemaExtensions
+	e_AddressPrefix                                                        smithy.SchemaExtensions
+	eAnalysis                                                              smithy.SchemaExtensions
+	eAnalysis_Analyzer                                                     smithy.SchemaExtensions
+	eAnalysis_ResultField                                                  smithy.SchemaExtensions
+	e_AnalyzerArn                                                          smithy.SchemaExtensions
+	eArchive                                                               smithy.SchemaExtensions
+	eArchive_ArchiveId                                                     smithy.SchemaExtensions
+	eArchive_ArchiveName                                                   smithy.SchemaExtensions
+	eArchive_ArchiveState                                                  smithy.SchemaExtensions
+	eArchive_LastUpdatedTimestamp                                          smithy.SchemaExtensions
+	eArchiveAction                                                         smithy.SchemaExtensions
+	eArchiveAction_ActionFailurePolicy                                     smithy.SchemaExtensions
+	eArchiveAction_TargetArchive                                           smithy.SchemaExtensions
+	e_ArchiveArn                                                           smithy.SchemaExtensions
+	eArchiveBooleanEmailAttribute                                          smithy.SchemaExtensions
+	eArchiveBooleanEmailAttribute_HAS_ATTACHMENTS                          smithy.SchemaExtensions
+	eArchiveBooleanExpression                                              smithy.SchemaExtensions
+	eArchiveBooleanExpression_Evaluate                                     smithy.SchemaExtensions
+	eArchiveBooleanExpression_Operator                                     smithy.SchemaExtensions
+	eArchiveBooleanOperator                                                smithy.SchemaExtensions
+	eArchiveBooleanOperator_IS_TRUE                                        smithy.SchemaExtensions
+	eArchiveBooleanOperator_IS_FALSE                                       smithy.SchemaExtensions
+	eArchiveBooleanToEvaluate                                              smithy.SchemaExtensions
+	eArchiveBooleanToEvaluate_Attribute                                    smithy.SchemaExtensions
+	e_ArchivedMessageId                                                    smithy.SchemaExtensions
+	eArchiveFilterCondition                                                smithy.SchemaExtensions
+	eArchiveFilterCondition_StringExpression                               smithy.SchemaExtensions
+	eArchiveFilterCondition_BooleanExpression                              smithy.SchemaExtensions
+	e_ArchiveFilterConditions                                              smithy.SchemaExtensions
+	e_ArchiveFilterConditions_member                                       smithy.SchemaExtensions
+	eArchiveFilters                                                        smithy.SchemaExtensions
+	eArchiveFilters_Include                                                smithy.SchemaExtensions
+	eArchiveFilters_Unless                                                 smithy.SchemaExtensions
+	e_ArchiveId                                                            smithy.SchemaExtensions
+	e_ArchiveIdString                                                      smithy.SchemaExtensions
+	e_ArchiveNameString                                                    smithy.SchemaExtensions
+	eArchiveRetention                                                      smithy.SchemaExtensions
+	eArchiveRetention_RetentionPeriod                                      smithy.SchemaExtensions
+	e_ArchivesList                                                         smithy.SchemaExtensions
+	e_ArchivesList_member                                                  smithy.SchemaExtensions
+	eArchiveState                                                          smithy.SchemaExtensions
+	eArchiveState_ACTIVE                                                   smithy.SchemaExtensions
+	eArchiveState_PENDING_DELETION                                         smithy.SchemaExtensions
+	eArchiveStringEmailAttribute                                           smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_TO                                        smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_FROM                                      smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_CC                                        smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_SUBJECT                                   smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_ENVELOPE_TO                               smithy.SchemaExtensions
+	eArchiveStringEmailAttribute_ENVELOPE_FROM                             smithy.SchemaExtensions
+	eArchiveStringExpression                                               smithy.SchemaExtensions
+	eArchiveStringExpression_Evaluate                                      smithy.SchemaExtensions
+	eArchiveStringExpression_Operator                                      smithy.SchemaExtensions
+	eArchiveStringExpression_Values                                        smithy.SchemaExtensions
+	eArchiveStringOperator                                                 smithy.SchemaExtensions
+	eArchiveStringOperator_CONTAINS                                        smithy.SchemaExtensions
+	eArchiveStringToEvaluate                                               smithy.SchemaExtensions
+	eArchiveStringToEvaluate_Attribute                                     smithy.SchemaExtensions
+	eBounceAction                                                          smithy.SchemaExtensions
+	eBounceAction_ActionFailurePolicy                                      smithy.SchemaExtensions
+	eBounceAction_RoleArn                                                  smithy.SchemaExtensions
+	eBounceAction_Sender                                                   smithy.SchemaExtensions
+	eBounceAction_StatusCode                                               smithy.SchemaExtensions
+	eBounceAction_SmtpReplyCode                                            smithy.SchemaExtensions
+	eBounceAction_DiagnosticMessage                                        smithy.SchemaExtensions
+	eBounceAction_Message                                                  smithy.SchemaExtensions
+	e_BounceMessage                                                        smithy.SchemaExtensions
+	e_CAContent                                                            smithy.SchemaExtensions
+	eConflictException                                                     smithy.SchemaExtensions
+	eConflictException_Message                                             smithy.SchemaExtensions
+	e_CrlContent                                                           smithy.SchemaExtensions
+	eDeliverToMailboxAction                                                smithy.SchemaExtensions
+	eDeliverToMailboxAction_ActionFailurePolicy                            smithy.SchemaExtensions
+	eDeliverToMailboxAction_MailboxArn                                     smithy.SchemaExtensions
+	eDeliverToMailboxAction_RoleArn                                        smithy.SchemaExtensions
+	eDeliverToQBusinessAction                                              smithy.SchemaExtensions
+	eDeliverToQBusinessAction_ActionFailurePolicy                          smithy.SchemaExtensions
+	eDeliverToQBusinessAction_ApplicationId                                smithy.SchemaExtensions
+	eDeliverToQBusinessAction_IndexId                                      smithy.SchemaExtensions
+	eDeliverToQBusinessAction_RoleArn                                      smithy.SchemaExtensions
+	e_DiagnosticMessage                                                    smithy.SchemaExtensions
+	eDropAction                                                            smithy.SchemaExtensions
+	e_EmailAddress                                                         smithy.SchemaExtensions
+	e_EmailReceivedHeadersList                                             smithy.SchemaExtensions
+	e_EmailReceivedHeadersList_member                                      smithy.SchemaExtensions
+	eEnvelope                                                              smithy.SchemaExtensions
+	eEnvelope_Helo                                                         smithy.SchemaExtensions
+	eEnvelope_From                                                         smithy.SchemaExtensions
+	eEnvelope_To                                                           smithy.SchemaExtensions
+	e_ErrorMessage                                                         smithy.SchemaExtensions
+	eExportDestinationConfiguration                                        smithy.SchemaExtensions
+	eExportDestinationConfiguration_S3                                     smithy.SchemaExtensions
+	e_ExportId                                                             smithy.SchemaExtensions
+	e_ExportMaxResults                                                     smithy.SchemaExtensions
+	eExportState                                                           smithy.SchemaExtensions
+	eExportState_QUEUED                                                    smithy.SchemaExtensions
+	eExportState_PREPROCESSING                                             smithy.SchemaExtensions
+	eExportState_PROCESSING                                                smithy.SchemaExtensions
+	eExportState_COMPLETED                                                 smithy.SchemaExtensions
+	eExportState_FAILED                                                    smithy.SchemaExtensions
+	eExportState_CANCELLED                                                 smithy.SchemaExtensions
+	eExportStatus                                                          smithy.SchemaExtensions
+	eExportStatus_SubmissionTimestamp                                      smithy.SchemaExtensions
+	eExportStatus_CompletionTimestamp                                      smithy.SchemaExtensions
+	eExportStatus_State                                                    smithy.SchemaExtensions
+	eExportStatus_ErrorMessage                                             smithy.SchemaExtensions
+	eExportSummary                                                         smithy.SchemaExtensions
+	eExportSummary_ExportId                                                smithy.SchemaExtensions
+	eExportSummary_Status                                                  smithy.SchemaExtensions
+	e_ExportSummaryList                                                    smithy.SchemaExtensions
+	e_ExportSummaryList_member                                             smithy.SchemaExtensions
+	e_HeaderName                                                           smithy.SchemaExtensions
+	e_HeaderValue                                                          smithy.SchemaExtensions
+	e_IamRoleArn                                                           smithy.SchemaExtensions
+	e_IdempotencyToken                                                     smithy.SchemaExtensions
+	e_IdOrArn                                                              smithy.SchemaExtensions
+	eImportDataFormat                                                      smithy.SchemaExtensions
+	eImportDataFormat_ImportDataType                                       smithy.SchemaExtensions
+	eImportDataType                                                        smithy.SchemaExtensions
+	eImportDataType_CSV                                                    smithy.SchemaExtensions
+	eImportDataType_JSON                                                   smithy.SchemaExtensions
+	eImportJob                                                             smithy.SchemaExtensions
+	eImportJob_JobId                                                       smithy.SchemaExtensions
+	eImportJob_Name                                                        smithy.SchemaExtensions
+	eImportJob_Status                                                      smithy.SchemaExtensions
+	eImportJob_PreSignedUrl                                                smithy.SchemaExtensions
+	eImportJob_ImportedItemsCount                                          smithy.SchemaExtensions
+	eImportJob_FailedItemsCount                                            smithy.SchemaExtensions
+	eImportJob_ImportDataFormat                                            smithy.SchemaExtensions
+	eImportJob_AddressListId                                               smithy.SchemaExtensions
+	eImportJob_CreatedTimestamp                                            smithy.SchemaExtensions
+	eImportJob_StartTimestamp                                              smithy.SchemaExtensions
+	eImportJob_CompletedTimestamp                                          smithy.SchemaExtensions
+	eImportJob_Error                                                       smithy.SchemaExtensions
+	e_ImportJobs                                                           smithy.SchemaExtensions
+	e_ImportJobs_member                                                    smithy.SchemaExtensions
+	eImportJobStatus                                                       smithy.SchemaExtensions
+	eImportJobStatus_CREATED                                               smithy.SchemaExtensions
+	eImportJobStatus_PROCESSING                                            smithy.SchemaExtensions
+	eImportJobStatus_COMPLETED                                             smithy.SchemaExtensions
+	eImportJobStatus_FAILED                                                smithy.SchemaExtensions
+	eImportJobStatus_STOPPED                                               smithy.SchemaExtensions
+	e_IngressAddressListArnList                                            smithy.SchemaExtensions
+	e_IngressAddressListArnList_member                                     smithy.SchemaExtensions
+	eIngressAddressListEmailAttribute                                      smithy.SchemaExtensions
+	eIngressAddressListEmailAttribute_RECIPIENT                            smithy.SchemaExtensions
+	eIngressAnalysis                                                       smithy.SchemaExtensions
+	eIngressAnalysis_Analyzer                                              smithy.SchemaExtensions
+	eIngressAnalysis_ResultField                                           smithy.SchemaExtensions
+	eIngressBooleanExpression                                              smithy.SchemaExtensions
+	eIngressBooleanExpression_Evaluate                                     smithy.SchemaExtensions
+	eIngressBooleanExpression_Operator                                     smithy.SchemaExtensions
+	eIngressBooleanOperator                                                smithy.SchemaExtensions
+	eIngressBooleanOperator_IS_TRUE                                        smithy.SchemaExtensions
+	eIngressBooleanOperator_IS_FALSE                                       smithy.SchemaExtensions
+	eIngressBooleanToEvaluate                                              smithy.SchemaExtensions
+	eIngressBooleanToEvaluate_Analysis                                     smithy.SchemaExtensions
+	eIngressBooleanToEvaluate_IsInAddressList                              smithy.SchemaExtensions
+	eIngressIpOperator                                                     smithy.SchemaExtensions
+	eIngressIpOperator_CIDR_MATCHES                                        smithy.SchemaExtensions
+	eIngressIpOperator_NOT_CIDR_MATCHES                                    smithy.SchemaExtensions
+	eIngressIpToEvaluate                                                   smithy.SchemaExtensions
+	eIngressIpToEvaluate_Attribute                                         smithy.SchemaExtensions
+	eIngressIpv4Attribute                                                  smithy.SchemaExtensions
+	eIngressIpv4Attribute_SENDER_IP                                        smithy.SchemaExtensions
+	eIngressIpv4Expression                                                 smithy.SchemaExtensions
+	eIngressIpv4Expression_Evaluate                                        smithy.SchemaExtensions
+	eIngressIpv4Expression_Operator                                        smithy.SchemaExtensions
+	eIngressIpv4Expression_Values                                          smithy.SchemaExtensions
+	eIngressIpv6Attribute                                                  smithy.SchemaExtensions
+	eIngressIpv6Attribute_SENDER_IPV6                                      smithy.SchemaExtensions
+	eIngressIpv6Expression                                                 smithy.SchemaExtensions
+	eIngressIpv6Expression_Evaluate                                        smithy.SchemaExtensions
+	eIngressIpv6Expression_Operator                                        smithy.SchemaExtensions
+	eIngressIpv6Expression_Values                                          smithy.SchemaExtensions
+	eIngressIpv6ToEvaluate                                                 smithy.SchemaExtensions
+	eIngressIpv6ToEvaluate_Attribute                                       smithy.SchemaExtensions
+	eIngressIsInAddressList                                                smithy.SchemaExtensions
+	eIngressIsInAddressList_Attribute                                      smithy.SchemaExtensions
+	eIngressIsInAddressList_AddressLists                                   smithy.SchemaExtensions
+	eIngressPoint                                                          smithy.SchemaExtensions
+	eIngressPoint_IngressPointName                                         smithy.SchemaExtensions
+	eIngressPoint_IngressPointId                                           smithy.SchemaExtensions
+	eIngressPoint_Status                                                   smithy.SchemaExtensions
+	eIngressPoint_Type                                                     smithy.SchemaExtensions
+	eIngressPoint_ARecord                                                  smithy.SchemaExtensions
+	e_IngressPointARecord                                                  smithy.SchemaExtensions
+	e_IngressPointArn                                                      smithy.SchemaExtensions
+	eIngressPointAuthConfiguration                                         smithy.SchemaExtensions
+	eIngressPointAuthConfiguration_IngressPointPasswordConfiguration       smithy.SchemaExtensions
+	eIngressPointAuthConfiguration_SecretArn                               smithy.SchemaExtensions
+	eIngressPointAuthConfiguration_TlsAuthConfiguration                    smithy.SchemaExtensions
+	eIngressPointConfiguration                                             smithy.SchemaExtensions
+	eIngressPointConfiguration_SmtpPassword                                smithy.SchemaExtensions
+	eIngressPointConfiguration_SecretArn                                   smithy.SchemaExtensions
+	eIngressPointConfiguration_TlsAuthConfiguration                        smithy.SchemaExtensions
+	e_IngressPointId                                                       smithy.SchemaExtensions
+	e_IngressPointName                                                     smithy.SchemaExtensions
+	eIngressPointPasswordConfiguration                                     smithy.SchemaExtensions
+	eIngressPointPasswordConfiguration_SmtpPasswordVersion                 smithy.SchemaExtensions
+	eIngressPointPasswordConfiguration_PreviousSmtpPasswordVersion         smithy.SchemaExtensions
+	eIngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp smithy.SchemaExtensions
+	e_IngressPointsList                                                    smithy.SchemaExtensions
+	e_IngressPointsList_member                                             smithy.SchemaExtensions
+	eIngressPointStatus                                                    smithy.SchemaExtensions
+	eIngressPointStatus_PROVISIONING                                       smithy.SchemaExtensions
+	eIngressPointStatus_DEPROVISIONING                                     smithy.SchemaExtensions
+	eIngressPointStatus_UPDATING                                           smithy.SchemaExtensions
+	eIngressPointStatus_ACTIVE                                             smithy.SchemaExtensions
+	eIngressPointStatus_CLOSED                                             smithy.SchemaExtensions
+	eIngressPointStatus_FAILED                                             smithy.SchemaExtensions
+	eIngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST             smithy.SchemaExtensions
+	eIngressPointStatusToUpdate                                            smithy.SchemaExtensions
+	eIngressPointStatusToUpdate_ACTIVE                                     smithy.SchemaExtensions
+	eIngressPointStatusToUpdate_CLOSED                                     smithy.SchemaExtensions
+	eIngressPointType                                                      smithy.SchemaExtensions
+	eIngressPointType_OPEN                                                 smithy.SchemaExtensions
+	eIngressPointType_AUTH                                                 smithy.SchemaExtensions
+	eIngressPointType_MTLS                                                 smithy.SchemaExtensions
+	eIngressStringEmailAttribute                                           smithy.SchemaExtensions
+	eIngressStringEmailAttribute_RECIPIENT                                 smithy.SchemaExtensions
+	eIngressStringExpression                                               smithy.SchemaExtensions
+	eIngressStringExpression_Evaluate                                      smithy.SchemaExtensions
+	eIngressStringExpression_Operator                                      smithy.SchemaExtensions
+	eIngressStringExpression_Values                                        smithy.SchemaExtensions
+	eIngressStringOperator                                                 smithy.SchemaExtensions
+	eIngressStringOperator_EQUALS                                          smithy.SchemaExtensions
+	eIngressStringOperator_NOT_EQUALS                                      smithy.SchemaExtensions
+	eIngressStringOperator_STARTS_WITH                                     smithy.SchemaExtensions
+	eIngressStringOperator_ENDS_WITH                                       smithy.SchemaExtensions
+	eIngressStringOperator_CONTAINS                                        smithy.SchemaExtensions
+	eIngressStringToEvaluate                                               smithy.SchemaExtensions
+	eIngressStringToEvaluate_Attribute                                     smithy.SchemaExtensions
+	eIngressStringToEvaluate_Analysis                                      smithy.SchemaExtensions
+	eIngressTlsAttribute                                                   smithy.SchemaExtensions
+	eIngressTlsAttribute_TLS_PROTOCOL                                      smithy.SchemaExtensions
+	eIngressTlsProtocolAttribute                                           smithy.SchemaExtensions
+	eIngressTlsProtocolAttribute_TLS1_2                                    smithy.SchemaExtensions
+	eIngressTlsProtocolAttribute_TLS1_3                                    smithy.SchemaExtensions
+	eIngressTlsProtocolExpression                                          smithy.SchemaExtensions
+	eIngressTlsProtocolExpression_Evaluate                                 smithy.SchemaExtensions
+	eIngressTlsProtocolExpression_Operator                                 smithy.SchemaExtensions
+	eIngressTlsProtocolExpression_Value                                    smithy.SchemaExtensions
+	eIngressTlsProtocolOperator                                            smithy.SchemaExtensions
+	eIngressTlsProtocolOperator_MINIMUM_TLS_VERSION                        smithy.SchemaExtensions
+	eIngressTlsProtocolOperator_IS                                         smithy.SchemaExtensions
+	eIngressTlsProtocolToEvaluate                                          smithy.SchemaExtensions
+	eIngressTlsProtocolToEvaluate_Attribute                                smithy.SchemaExtensions
+	eInvokeLambdaAction                                                    smithy.SchemaExtensions
+	eInvokeLambdaAction_ActionFailurePolicy                                smithy.SchemaExtensions
+	eInvokeLambdaAction_FunctionArn                                        smithy.SchemaExtensions
+	eInvokeLambdaAction_InvocationType                                     smithy.SchemaExtensions
+	eInvokeLambdaAction_RoleArn                                            smithy.SchemaExtensions
+	eInvokeLambdaAction_RetryTimeMinutes                                   smithy.SchemaExtensions
+	eIpType                                                                smithy.SchemaExtensions
+	eIpType_IPV4                                                           smithy.SchemaExtensions
+	eIpType_DUAL_STACK                                                     smithy.SchemaExtensions
+	e_Ipv4Cidr                                                             smithy.SchemaExtensions
+	e_Ipv4Cidrs                                                            smithy.SchemaExtensions
+	e_Ipv4Cidrs_member                                                     smithy.SchemaExtensions
+	e_Ipv6Cidr                                                             smithy.SchemaExtensions
+	e_Ipv6Cidrs                                                            smithy.SchemaExtensions
+	e_Ipv6Cidrs_member                                                     smithy.SchemaExtensions
+	e_JobId                                                                smithy.SchemaExtensions
+	e_JobItemsCount                                                        smithy.SchemaExtensions
+	e_JobName                                                              smithy.SchemaExtensions
+	e_KmsKeyArn                                                            smithy.SchemaExtensions
+	e_KmsKeyId                                                             smithy.SchemaExtensions
+	e_LambdaFunctionArn                                                    smithy.SchemaExtensions
+	eLambdaInvocationType                                                  smithy.SchemaExtensions
+	eLambdaInvocationType_EVENT                                            smithy.SchemaExtensions
+	eLambdaInvocationType_REQUEST_RESPONSE                                 smithy.SchemaExtensions
+	e_LambdaRetryTimeMinutes                                               smithy.SchemaExtensions
+	eMailFrom                                                              smithy.SchemaExtensions
+	eMailFrom_REPLACE                                                      smithy.SchemaExtensions
+	eMailFrom_PRESERVE                                                     smithy.SchemaExtensions
+	e_MaxMessageSizeBytes                                                  smithy.SchemaExtensions
+	eMessageBody                                                           smithy.SchemaExtensions
+	eMessageBody_Text                                                      smithy.SchemaExtensions
+	eMessageBody_Html                                                      smithy.SchemaExtensions
+	eMessageBody_MessageMalformed                                          smithy.SchemaExtensions
+	eMetadata                                                              smithy.SchemaExtensions
+	eMetadata_Timestamp                                                    smithy.SchemaExtensions
+	eMetadata_IngressPointId                                               smithy.SchemaExtensions
+	eMetadata_TrafficPolicyId                                              smithy.SchemaExtensions
+	eMetadata_RuleSetId                                                    smithy.SchemaExtensions
+	eMetadata_SenderHostname                                               smithy.SchemaExtensions
+	eMetadata_SenderIpAddress                                              smithy.SchemaExtensions
+	eMetadata_TlsCipherSuite                                               smithy.SchemaExtensions
+	eMetadata_TlsProtocol                                                  smithy.SchemaExtensions
+	eMetadata_SendingMethod                                                smithy.SchemaExtensions
+	eMetadata_SourceIdentity                                               smithy.SchemaExtensions
+	eMetadata_SendingPool                                                  smithy.SchemaExtensions
+	eMetadata_ConfigurationSet                                             smithy.SchemaExtensions
+	eMetadata_SourceArn                                                    smithy.SchemaExtensions
+	e_MimeHeaderAttribute                                                  smithy.SchemaExtensions
+	e_NameOrArn                                                            smithy.SchemaExtensions
+	eNetworkConfiguration                                                  smithy.SchemaExtensions
+	eNetworkConfiguration_PublicNetworkConfiguration                       smithy.SchemaExtensions
+	eNetworkConfiguration_PrivateNetworkConfiguration                      smithy.SchemaExtensions
+	eNoAuthentication                                                      smithy.SchemaExtensions
+	e_PageSize                                                             smithy.SchemaExtensions
+	e_PaginationToken                                                      smithy.SchemaExtensions
+	ePolicyCondition                                                       smithy.SchemaExtensions
+	ePolicyCondition_StringExpression                                      smithy.SchemaExtensions
+	ePolicyCondition_IpExpression                                          smithy.SchemaExtensions
+	ePolicyCondition_Ipv6Expression                                        smithy.SchemaExtensions
+	ePolicyCondition_TlsExpression                                         smithy.SchemaExtensions
+	ePolicyCondition_BooleanExpression                                     smithy.SchemaExtensions
+	e_PolicyConditions                                                     smithy.SchemaExtensions
+	e_PolicyConditions_member                                              smithy.SchemaExtensions
+	ePolicyStatement                                                       smithy.SchemaExtensions
+	ePolicyStatement_Conditions                                            smithy.SchemaExtensions
+	ePolicyStatement_Action                                                smithy.SchemaExtensions
+	e_PolicyStatementList                                                  smithy.SchemaExtensions
+	e_PolicyStatementList_member                                           smithy.SchemaExtensions
+	e_PreSignedUrl                                                         smithy.SchemaExtensions
+	ePrivateNetworkConfiguration                                           smithy.SchemaExtensions
+	ePrivateNetworkConfiguration_VpcEndpointId                             smithy.SchemaExtensions
+	ePublicNetworkConfiguration                                            smithy.SchemaExtensions
+	ePublicNetworkConfiguration_IpType                                     smithy.SchemaExtensions
+	e_QBusinessApplicationId                                               smithy.SchemaExtensions
+	e_QBusinessIndexId                                                     smithy.SchemaExtensions
+	e_Recipients                                                           smithy.SchemaExtensions
+	e_Recipients_member                                                    smithy.SchemaExtensions
+	eRelay                                                                 smithy.SchemaExtensions
+	eRelay_RelayId                                                         smithy.SchemaExtensions
+	eRelay_RelayName                                                       smithy.SchemaExtensions
+	eRelay_LastModifiedTimestamp                                           smithy.SchemaExtensions
+	eRelayAction                                                           smithy.SchemaExtensions
+	eRelayAction_ActionFailurePolicy                                       smithy.SchemaExtensions
+	eRelayAction_Relay                                                     smithy.SchemaExtensions
+	eRelayAction_MailFrom                                                  smithy.SchemaExtensions
+	e_RelayArn                                                             smithy.SchemaExtensions
+	eRelayAuthentication                                                   smithy.SchemaExtensions
+	eRelayAuthentication_SecretArn                                         smithy.SchemaExtensions
+	eRelayAuthentication_NoAuthentication                                  smithy.SchemaExtensions
+	e_RelayId                                                              smithy.SchemaExtensions
+	e_RelayName                                                            smithy.SchemaExtensions
+	e_Relays                                                               smithy.SchemaExtensions
+	e_Relays_member                                                        smithy.SchemaExtensions
+	e_RelayServerName                                                      smithy.SchemaExtensions
+	e_RelayServerPort                                                      smithy.SchemaExtensions
+	eReplaceRecipientAction                                                smithy.SchemaExtensions
+	eReplaceRecipientAction_ReplaceWith                                    smithy.SchemaExtensions
+	eResourceNotFoundException                                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                     smithy.SchemaExtensions
+	e_ResultField                                                          smithy.SchemaExtensions
+	eRetentionPeriod                                                       smithy.SchemaExtensions
+	eRetentionPeriod_THREE_MONTHS                                          smithy.SchemaExtensions
+	eRetentionPeriod_SIX_MONTHS                                            smithy.SchemaExtensions
+	eRetentionPeriod_NINE_MONTHS                                           smithy.SchemaExtensions
+	eRetentionPeriod_ONE_YEAR                                              smithy.SchemaExtensions
+	eRetentionPeriod_EIGHTEEN_MONTHS                                       smithy.SchemaExtensions
+	eRetentionPeriod_TWO_YEARS                                             smithy.SchemaExtensions
+	eRetentionPeriod_THIRTY_MONTHS                                         smithy.SchemaExtensions
+	eRetentionPeriod_THREE_YEARS                                           smithy.SchemaExtensions
+	eRetentionPeriod_FOUR_YEARS                                            smithy.SchemaExtensions
+	eRetentionPeriod_FIVE_YEARS                                            smithy.SchemaExtensions
+	eRetentionPeriod_SIX_YEARS                                             smithy.SchemaExtensions
+	eRetentionPeriod_SEVEN_YEARS                                           smithy.SchemaExtensions
+	eRetentionPeriod_EIGHT_YEARS                                           smithy.SchemaExtensions
+	eRetentionPeriod_NINE_YEARS                                            smithy.SchemaExtensions
+	eRetentionPeriod_TEN_YEARS                                             smithy.SchemaExtensions
+	eRetentionPeriod_PERMANENT                                             smithy.SchemaExtensions
+	eRow                                                                   smithy.SchemaExtensions
+	eRow_ArchivedMessageId                                                 smithy.SchemaExtensions
+	eRow_ReceivedTimestamp                                                 smithy.SchemaExtensions
+	eRow_Date                                                              smithy.SchemaExtensions
+	eRow_To                                                                smithy.SchemaExtensions
+	eRow_From                                                              smithy.SchemaExtensions
+	eRow_Cc                                                                smithy.SchemaExtensions
+	eRow_Subject                                                           smithy.SchemaExtensions
+	eRow_MessageId                                                         smithy.SchemaExtensions
+	eRow_HasAttachments                                                    smithy.SchemaExtensions
+	eRow_ReceivedHeaders                                                   smithy.SchemaExtensions
+	eRow_InReplyTo                                                         smithy.SchemaExtensions
+	eRow_XMailer                                                           smithy.SchemaExtensions
+	eRow_XOriginalMailer                                                   smithy.SchemaExtensions
+	eRow_XPriority                                                         smithy.SchemaExtensions
+	eRow_IngressPointId                                                    smithy.SchemaExtensions
+	eRow_SenderHostname                                                    smithy.SchemaExtensions
+	eRow_SenderIpAddress                                                   smithy.SchemaExtensions
+	eRow_Envelope                                                          smithy.SchemaExtensions
+	eRow_SourceArn                                                         smithy.SchemaExtensions
+	e_RowsList                                                             smithy.SchemaExtensions
+	e_RowsList_member                                                      smithy.SchemaExtensions
+	eRule                                                                  smithy.SchemaExtensions
+	eRule_Name                                                             smithy.SchemaExtensions
+	eRule_Conditions                                                       smithy.SchemaExtensions
+	eRule_Unless                                                           smithy.SchemaExtensions
+	eRule_Actions                                                          smithy.SchemaExtensions
+	eRuleAction                                                            smithy.SchemaExtensions
+	eRuleAction_Drop                                                       smithy.SchemaExtensions
+	eRuleAction_Relay                                                      smithy.SchemaExtensions
+	eRuleAction_Archive                                                    smithy.SchemaExtensions
+	eRuleAction_WriteToS3                                                  smithy.SchemaExtensions
+	eRuleAction_Send                                                       smithy.SchemaExtensions
+	eRuleAction_AddHeader                                                  smithy.SchemaExtensions
+	eRuleAction_ReplaceRecipient                                           smithy.SchemaExtensions
+	eRuleAction_DeliverToMailbox                                           smithy.SchemaExtensions
+	eRuleAction_DeliverToQBusiness                                         smithy.SchemaExtensions
+	eRuleAction_PublishToSns                                               smithy.SchemaExtensions
+	eRuleAction_Bounce                                                     smithy.SchemaExtensions
+	eRuleAction_InvokeLambda                                               smithy.SchemaExtensions
+	e_RuleActions                                                          smithy.SchemaExtensions
+	e_RuleActions_member                                                   smithy.SchemaExtensions
+	e_RuleAddressListArnList                                               smithy.SchemaExtensions
+	e_RuleAddressListArnList_member                                        smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute                                         smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_RECIPIENT                               smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_MAIL_FROM                               smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_SENDER                                  smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_FROM                                    smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_TO                                      smithy.SchemaExtensions
+	eRuleAddressListEmailAttribute_CC                                      smithy.SchemaExtensions
+	eRuleBooleanEmailAttribute                                             smithy.SchemaExtensions
+	eRuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED                      smithy.SchemaExtensions
+	eRuleBooleanEmailAttribute_TLS                                         smithy.SchemaExtensions
+	eRuleBooleanEmailAttribute_TLS_WRAPPED                                 smithy.SchemaExtensions
+	eRuleBooleanExpression                                                 smithy.SchemaExtensions
+	eRuleBooleanExpression_Evaluate                                        smithy.SchemaExtensions
+	eRuleBooleanExpression_Operator                                        smithy.SchemaExtensions
+	eRuleBooleanOperator                                                   smithy.SchemaExtensions
+	eRuleBooleanOperator_IS_TRUE                                           smithy.SchemaExtensions
+	eRuleBooleanOperator_IS_FALSE                                          smithy.SchemaExtensions
+	eRuleBooleanToEvaluate                                                 smithy.SchemaExtensions
+	eRuleBooleanToEvaluate_Attribute                                       smithy.SchemaExtensions
+	eRuleBooleanToEvaluate_Analysis                                        smithy.SchemaExtensions
+	eRuleBooleanToEvaluate_IsInAddressList                                 smithy.SchemaExtensions
+	eRuleClientCertificateAttribute                                        smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_CN                                     smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_RFC822_NAME                        smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_DNS_NAME                           smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_DIRECTORY_NAME                     smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER        smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_IP_ADDRESS                         smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SAN_REGISTERED_ID                      smithy.SchemaExtensions
+	eRuleClientCertificateAttribute_SERIAL_NUMBER                          smithy.SchemaExtensions
+	eRuleCondition                                                         smithy.SchemaExtensions
+	eRuleCondition_BooleanExpression                                       smithy.SchemaExtensions
+	eRuleCondition_StringExpression                                        smithy.SchemaExtensions
+	eRuleCondition_NumberExpression                                        smithy.SchemaExtensions
+	eRuleCondition_IpExpression                                            smithy.SchemaExtensions
+	eRuleCondition_VerdictExpression                                       smithy.SchemaExtensions
+	eRuleCondition_DmarcExpression                                         smithy.SchemaExtensions
+	e_RuleConditions                                                       smithy.SchemaExtensions
+	e_RuleConditions_member                                                smithy.SchemaExtensions
+	eRuleDmarcExpression                                                   smithy.SchemaExtensions
+	eRuleDmarcExpression_Operator                                          smithy.SchemaExtensions
+	eRuleDmarcExpression_Values                                            smithy.SchemaExtensions
+	eRuleDmarcOperator                                                     smithy.SchemaExtensions
+	eRuleDmarcOperator_EQUALS                                              smithy.SchemaExtensions
+	eRuleDmarcOperator_NOT_EQUALS                                          smithy.SchemaExtensions
+	eRuleDmarcPolicy                                                       smithy.SchemaExtensions
+	eRuleDmarcPolicy_NONE                                                  smithy.SchemaExtensions
+	eRuleDmarcPolicy_QUARANTINE                                            smithy.SchemaExtensions
+	eRuleDmarcPolicy_REJECT                                                smithy.SchemaExtensions
+	e_RuleDmarcValueList                                                   smithy.SchemaExtensions
+	e_RuleDmarcValueList_member                                            smithy.SchemaExtensions
+	eRuleIpEmailAttribute                                                  smithy.SchemaExtensions
+	eRuleIpEmailAttribute_SOURCE_IP                                        smithy.SchemaExtensions
+	eRuleIpExpression                                                      smithy.SchemaExtensions
+	eRuleIpExpression_Evaluate                                             smithy.SchemaExtensions
+	eRuleIpExpression_Operator                                             smithy.SchemaExtensions
+	eRuleIpExpression_Values                                               smithy.SchemaExtensions
+	eRuleIpOperator                                                        smithy.SchemaExtensions
+	eRuleIpOperator_CIDR_MATCHES                                           smithy.SchemaExtensions
+	eRuleIpOperator_NOT_CIDR_MATCHES                                       smithy.SchemaExtensions
+	e_RuleIpStringValue                                                    smithy.SchemaExtensions
+	eRuleIpToEvaluate                                                      smithy.SchemaExtensions
+	eRuleIpToEvaluate_Attribute                                            smithy.SchemaExtensions
+	e_RuleIpValueList                                                      smithy.SchemaExtensions
+	e_RuleIpValueList_member                                               smithy.SchemaExtensions
+	eRuleIsInAddressList                                                   smithy.SchemaExtensions
+	eRuleIsInAddressList_Attribute                                         smithy.SchemaExtensions
+	eRuleIsInAddressList_AddressLists                                      smithy.SchemaExtensions
+	e_RuleName                                                             smithy.SchemaExtensions
+	eRuleNumberEmailAttribute                                              smithy.SchemaExtensions
+	eRuleNumberEmailAttribute_MESSAGE_SIZE                                 smithy.SchemaExtensions
+	eRuleNumberExpression                                                  smithy.SchemaExtensions
+	eRuleNumberExpression_Evaluate                                         smithy.SchemaExtensions
+	eRuleNumberExpression_Operator                                         smithy.SchemaExtensions
+	eRuleNumberExpression_Value                                            smithy.SchemaExtensions
+	eRuleNumberOperator                                                    smithy.SchemaExtensions
+	eRuleNumberOperator_EQUALS                                             smithy.SchemaExtensions
+	eRuleNumberOperator_NOT_EQUALS                                         smithy.SchemaExtensions
+	eRuleNumberOperator_LESS_THAN                                          smithy.SchemaExtensions
+	eRuleNumberOperator_GREATER_THAN                                       smithy.SchemaExtensions
+	eRuleNumberOperator_LESS_THAN_OR_EQUAL                                 smithy.SchemaExtensions
+	eRuleNumberOperator_GREATER_THAN_OR_EQUAL                              smithy.SchemaExtensions
+	eRuleNumberToEvaluate                                                  smithy.SchemaExtensions
+	eRuleNumberToEvaluate_Attribute                                        smithy.SchemaExtensions
+	e_Rules                                                                smithy.SchemaExtensions
+	e_Rules_member                                                         smithy.SchemaExtensions
+	eRuleSet                                                               smithy.SchemaExtensions
+	eRuleSet_RuleSetId                                                     smithy.SchemaExtensions
+	eRuleSet_RuleSetName                                                   smithy.SchemaExtensions
+	eRuleSet_LastModificationDate                                          smithy.SchemaExtensions
+	e_RuleSetArn                                                           smithy.SchemaExtensions
+	e_RuleSetId                                                            smithy.SchemaExtensions
+	e_RuleSetName                                                          smithy.SchemaExtensions
+	e_RuleSets                                                             smithy.SchemaExtensions
+	e_RuleSets_member                                                      smithy.SchemaExtensions
+	eRuleStringEmailAttribute                                              smithy.SchemaExtensions
+	eRuleStringEmailAttribute_MAIL_FROM                                    smithy.SchemaExtensions
+	eRuleStringEmailAttribute_HELO                                         smithy.SchemaExtensions
+	eRuleStringEmailAttribute_RECIPIENT                                    smithy.SchemaExtensions
+	eRuleStringEmailAttribute_SENDER                                       smithy.SchemaExtensions
+	eRuleStringEmailAttribute_FROM                                         smithy.SchemaExtensions
+	eRuleStringEmailAttribute_SUBJECT                                      smithy.SchemaExtensions
+	eRuleStringEmailAttribute_TO                                           smithy.SchemaExtensions
+	eRuleStringEmailAttribute_CC                                           smithy.SchemaExtensions
+	eRuleStringExpression                                                  smithy.SchemaExtensions
+	eRuleStringExpression_Evaluate                                         smithy.SchemaExtensions
+	eRuleStringExpression_Operator                                         smithy.SchemaExtensions
+	eRuleStringExpression_Values                                           smithy.SchemaExtensions
+	e_RuleStringList                                                       smithy.SchemaExtensions
+	e_RuleStringList_member                                                smithy.SchemaExtensions
+	eRuleStringOperator                                                    smithy.SchemaExtensions
+	eRuleStringOperator_EQUALS                                             smithy.SchemaExtensions
+	eRuleStringOperator_NOT_EQUALS                                         smithy.SchemaExtensions
+	eRuleStringOperator_STARTS_WITH                                        smithy.SchemaExtensions
+	eRuleStringOperator_ENDS_WITH                                          smithy.SchemaExtensions
+	eRuleStringOperator_CONTAINS                                           smithy.SchemaExtensions
+	eRuleStringToEvaluate                                                  smithy.SchemaExtensions
+	eRuleStringToEvaluate_Attribute                                        smithy.SchemaExtensions
+	eRuleStringToEvaluate_MimeHeaderAttribute                              smithy.SchemaExtensions
+	eRuleStringToEvaluate_Analysis                                         smithy.SchemaExtensions
+	eRuleStringToEvaluate_ClientCertificateAttribute                       smithy.SchemaExtensions
+	e_RuleStringValue                                                      smithy.SchemaExtensions
+	eRuleVerdict                                                           smithy.SchemaExtensions
+	eRuleVerdict_PASS                                                      smithy.SchemaExtensions
+	eRuleVerdict_FAIL                                                      smithy.SchemaExtensions
+	eRuleVerdict_GRAY                                                      smithy.SchemaExtensions
+	eRuleVerdict_PROCESSING_FAILED                                         smithy.SchemaExtensions
+	eRuleVerdictAttribute                                                  smithy.SchemaExtensions
+	eRuleVerdictAttribute_SPF                                              smithy.SchemaExtensions
+	eRuleVerdictAttribute_DKIM                                             smithy.SchemaExtensions
+	eRuleVerdictExpression                                                 smithy.SchemaExtensions
+	eRuleVerdictExpression_Evaluate                                        smithy.SchemaExtensions
+	eRuleVerdictExpression_Operator                                        smithy.SchemaExtensions
+	eRuleVerdictExpression_Values                                          smithy.SchemaExtensions
+	eRuleVerdictOperator                                                   smithy.SchemaExtensions
+	eRuleVerdictOperator_EQUALS                                            smithy.SchemaExtensions
+	eRuleVerdictOperator_NOT_EQUALS                                        smithy.SchemaExtensions
+	eRuleVerdictToEvaluate                                                 smithy.SchemaExtensions
+	eRuleVerdictToEvaluate_Attribute                                       smithy.SchemaExtensions
+	eRuleVerdictToEvaluate_Analysis                                        smithy.SchemaExtensions
+	e_RuleVerdictValueList                                                 smithy.SchemaExtensions
+	e_RuleVerdictValueList_member                                          smithy.SchemaExtensions
+	eS3Action                                                              smithy.SchemaExtensions
+	eS3Action_ActionFailurePolicy                                          smithy.SchemaExtensions
+	eS3Action_RoleArn                                                      smithy.SchemaExtensions
+	eS3Action_S3Bucket                                                     smithy.SchemaExtensions
+	eS3Action_S3Prefix                                                     smithy.SchemaExtensions
+	eS3Action_S3SseKmsKeyId                                                smithy.SchemaExtensions
+	e_S3Bucket                                                             smithy.SchemaExtensions
+	eS3ExportDestinationConfiguration                                      smithy.SchemaExtensions
+	eS3ExportDestinationConfiguration_S3Location                           smithy.SchemaExtensions
+	e_S3Location                                                           smithy.SchemaExtensions
+	e_S3Prefix                                                             smithy.SchemaExtensions
+	e_S3PresignedURL                                                       smithy.SchemaExtensions
+	eSavedAddress                                                          smithy.SchemaExtensions
+	eSavedAddress_Address                                                  smithy.SchemaExtensions
+	eSavedAddress_CreatedTimestamp                                         smithy.SchemaExtensions
+	e_SavedAddresses                                                       smithy.SchemaExtensions
+	e_SavedAddresses_member                                                smithy.SchemaExtensions
+	e_SearchId                                                             smithy.SchemaExtensions
+	e_SearchMaxResults                                                     smithy.SchemaExtensions
+	eSearchState                                                           smithy.SchemaExtensions
+	eSearchState_QUEUED                                                    smithy.SchemaExtensions
+	eSearchState_RUNNING                                                   smithy.SchemaExtensions
+	eSearchState_COMPLETED                                                 smithy.SchemaExtensions
+	eSearchState_FAILED                                                    smithy.SchemaExtensions
+	eSearchState_CANCELLED                                                 smithy.SchemaExtensions
+	eSearchStatus                                                          smithy.SchemaExtensions
+	eSearchStatus_SubmissionTimestamp                                      smithy.SchemaExtensions
+	eSearchStatus_CompletionTimestamp                                      smithy.SchemaExtensions
+	eSearchStatus_State                                                    smithy.SchemaExtensions
+	eSearchStatus_ErrorMessage                                             smithy.SchemaExtensions
+	eSearchSummary                                                         smithy.SchemaExtensions
+	eSearchSummary_SearchId                                                smithy.SchemaExtensions
+	eSearchSummary_Status                                                  smithy.SchemaExtensions
+	e_SearchSummaryList                                                    smithy.SchemaExtensions
+	e_SearchSummaryList_member                                             smithy.SchemaExtensions
+	e_SecretArn                                                            smithy.SchemaExtensions
+	eSendAction                                                            smithy.SchemaExtensions
+	eSendAction_ActionFailurePolicy                                        smithy.SchemaExtensions
+	eSendAction_RoleArn                                                    smithy.SchemaExtensions
+	e_SenderIpAddress                                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                 smithy.SchemaExtensions
+	e_SmtpPassword                                                         smithy.SchemaExtensions
+	e_SmtpReplyCode                                                        smithy.SchemaExtensions
+	eSnsAction                                                             smithy.SchemaExtensions
+	eSnsAction_ActionFailurePolicy                                         smithy.SchemaExtensions
+	eSnsAction_TopicArn                                                    smithy.SchemaExtensions
+	eSnsAction_RoleArn                                                     smithy.SchemaExtensions
+	eSnsAction_Encoding                                                    smithy.SchemaExtensions
+	eSnsAction_PayloadType                                                 smithy.SchemaExtensions
+	eSnsNotificationEncoding                                               smithy.SchemaExtensions
+	eSnsNotificationEncoding_UTF_8                                         smithy.SchemaExtensions
+	eSnsNotificationEncoding_BASE64                                        smithy.SchemaExtensions
+	eSnsNotificationPayloadType                                            smithy.SchemaExtensions
+	eSnsNotificationPayloadType_HEADERS                                    smithy.SchemaExtensions
+	eSnsNotificationPayloadType_CONTENT                                    smithy.SchemaExtensions
+	e_SnsTopicArn                                                          smithy.SchemaExtensions
+	e_StatusCode                                                           smithy.SchemaExtensions
+	e_StringList                                                           smithy.SchemaExtensions
+	e_StringList_member                                                    smithy.SchemaExtensions
+	e_StringValue                                                          smithy.SchemaExtensions
+	e_StringValueList                                                      smithy.SchemaExtensions
+	e_StringValueList_member                                               smithy.SchemaExtensions
+	eTag                                                                   smithy.SchemaExtensions
+	eTag_Key                                                               smithy.SchemaExtensions
+	eTag_Value                                                             smithy.SchemaExtensions
+	e_TaggableResourceArn                                                  smithy.SchemaExtensions
+	e_TagKey                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                    smithy.SchemaExtensions
+	e_TagList                                                              smithy.SchemaExtensions
+	e_TagList_member                                                       smithy.SchemaExtensions
+	e_TagValue                                                             smithy.SchemaExtensions
+	eThrottlingException                                                   smithy.SchemaExtensions
+	eThrottlingException_Message                                           smithy.SchemaExtensions
+	eTlsAuthConfiguration                                                  smithy.SchemaExtensions
+	eTlsAuthConfiguration_TrustStore                                       smithy.SchemaExtensions
+	eTlsPolicy                                                             smithy.SchemaExtensions
+	eTlsPolicy_REQUIRED                                                    smithy.SchemaExtensions
+	eTlsPolicy_OPTIONAL                                                    smithy.SchemaExtensions
+	eTlsPolicy_FIPS                                                        smithy.SchemaExtensions
+	eTrafficPolicy                                                         smithy.SchemaExtensions
+	eTrafficPolicy_TrafficPolicyName                                       smithy.SchemaExtensions
+	eTrafficPolicy_TrafficPolicyId                                         smithy.SchemaExtensions
+	eTrafficPolicy_DefaultAction                                           smithy.SchemaExtensions
+	e_TrafficPolicyArn                                                     smithy.SchemaExtensions
+	e_TrafficPolicyId                                                      smithy.SchemaExtensions
+	e_TrafficPolicyList                                                    smithy.SchemaExtensions
+	e_TrafficPolicyList_member                                             smithy.SchemaExtensions
+	e_TrafficPolicyName                                                    smithy.SchemaExtensions
+	eTrustStore                                                            smithy.SchemaExtensions
+	eTrustStore_CAContent                                                  smithy.SchemaExtensions
+	eTrustStore_CrlContent                                                 smithy.SchemaExtensions
+	eTrustStore_KmsKeyArn                                                  smithy.SchemaExtensions
+	eTrustStoreResponseOption                                              smithy.SchemaExtensions
+	eTrustStoreResponseOption_EXCLUDE                                      smithy.SchemaExtensions
+	eTrustStoreResponseOption_INCLUDE                                      smithy.SchemaExtensions
+	eValidationException                                                   smithy.SchemaExtensions
+	eValidationException_Message                                           smithy.SchemaExtensions
+	e_VpcEndpointId                                                        smithy.SchemaExtensions
+	eCreateAddonInstanceRequest                                            smithy.SchemaExtensions
+	eCreateAddonInstanceRequest_ClientToken                                smithy.SchemaExtensions
+	eCreateAddonInstanceRequest_AddonSubscriptionId                        smithy.SchemaExtensions
+	eCreateAddonInstanceRequest_Tags                                       smithy.SchemaExtensions
+	eCreateAddonInstanceResponse                                           smithy.SchemaExtensions
+	eCreateAddonInstanceResponse_AddonInstanceId                           smithy.SchemaExtensions
+	eCreateAddonSubscriptionRequest                                        smithy.SchemaExtensions
+	eCreateAddonSubscriptionRequest_ClientToken                            smithy.SchemaExtensions
+	eCreateAddonSubscriptionRequest_AddonName                              smithy.SchemaExtensions
+	eCreateAddonSubscriptionRequest_Tags                                   smithy.SchemaExtensions
+	eCreateAddonSubscriptionResponse                                       smithy.SchemaExtensions
+	eCreateAddonSubscriptionResponse_AddonSubscriptionId                   smithy.SchemaExtensions
+	eCreateAddressListImportJobRequest                                     smithy.SchemaExtensions
+	eCreateAddressListImportJobRequest_ClientToken                         smithy.SchemaExtensions
+	eCreateAddressListImportJobRequest_AddressListId                       smithy.SchemaExtensions
+	eCreateAddressListImportJobRequest_Name                                smithy.SchemaExtensions
+	eCreateAddressListImportJobRequest_ImportDataFormat                    smithy.SchemaExtensions
+	eCreateAddressListImportJobResponse                                    smithy.SchemaExtensions
+	eCreateAddressListImportJobResponse_JobId                              smithy.SchemaExtensions
+	eCreateAddressListImportJobResponse_PreSignedUrl                       smithy.SchemaExtensions
+	eCreateAddressListRequest                                              smithy.SchemaExtensions
+	eCreateAddressListRequest_ClientToken                                  smithy.SchemaExtensions
+	eCreateAddressListRequest_AddressListName                              smithy.SchemaExtensions
+	eCreateAddressListRequest_Tags                                         smithy.SchemaExtensions
+	eCreateAddressListResponse                                             smithy.SchemaExtensions
+	eCreateAddressListResponse_AddressListId                               smithy.SchemaExtensions
+	eCreateArchiveRequest                                                  smithy.SchemaExtensions
+	eCreateArchiveRequest_ClientToken                                      smithy.SchemaExtensions
+	eCreateArchiveRequest_ArchiveName                                      smithy.SchemaExtensions
+	eCreateArchiveRequest_Retention                                        smithy.SchemaExtensions
+	eCreateArchiveRequest_KmsKeyArn                                        smithy.SchemaExtensions
+	eCreateArchiveRequest_Tags                                             smithy.SchemaExtensions
+	eCreateArchiveResponse                                                 smithy.SchemaExtensions
+	eCreateArchiveResponse_ArchiveId                                       smithy.SchemaExtensions
+	eCreateIngressPointRequest                                             smithy.SchemaExtensions
+	eCreateIngressPointRequest_ClientToken                                 smithy.SchemaExtensions
+	eCreateIngressPointRequest_IngressPointName                            smithy.SchemaExtensions
+	eCreateIngressPointRequest_Type                                        smithy.SchemaExtensions
+	eCreateIngressPointRequest_RuleSetId                                   smithy.SchemaExtensions
+	eCreateIngressPointRequest_TrafficPolicyId                             smithy.SchemaExtensions
+	eCreateIngressPointRequest_IngressPointConfiguration                   smithy.SchemaExtensions
+	eCreateIngressPointRequest_NetworkConfiguration                        smithy.SchemaExtensions
+	eCreateIngressPointRequest_TlsPolicy                                   smithy.SchemaExtensions
+	eCreateIngressPointRequest_Tags                                        smithy.SchemaExtensions
+	eCreateIngressPointResponse                                            smithy.SchemaExtensions
+	eCreateIngressPointResponse_IngressPointId                             smithy.SchemaExtensions
+	eCreateRelayRequest                                                    smithy.SchemaExtensions
+	eCreateRelayRequest_ClientToken                                        smithy.SchemaExtensions
+	eCreateRelayRequest_RelayName                                          smithy.SchemaExtensions
+	eCreateRelayRequest_ServerName                                         smithy.SchemaExtensions
+	eCreateRelayRequest_ServerPort                                         smithy.SchemaExtensions
+	eCreateRelayRequest_Authentication                                     smithy.SchemaExtensions
+	eCreateRelayRequest_Tags                                               smithy.SchemaExtensions
+	eCreateRelayResponse                                                   smithy.SchemaExtensions
+	eCreateRelayResponse_RelayId                                           smithy.SchemaExtensions
+	eCreateRuleSetRequest                                                  smithy.SchemaExtensions
+	eCreateRuleSetRequest_ClientToken                                      smithy.SchemaExtensions
+	eCreateRuleSetRequest_RuleSetName                                      smithy.SchemaExtensions
+	eCreateRuleSetRequest_Rules                                            smithy.SchemaExtensions
+	eCreateRuleSetRequest_Tags                                             smithy.SchemaExtensions
+	eCreateRuleSetResponse                                                 smithy.SchemaExtensions
+	eCreateRuleSetResponse_RuleSetId                                       smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest                                            smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_ClientToken                                smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_TrafficPolicyName                          smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_PolicyStatements                           smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_DefaultAction                              smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_MaxMessageSizeBytes                        smithy.SchemaExtensions
+	eCreateTrafficPolicyRequest_Tags                                       smithy.SchemaExtensions
+	eCreateTrafficPolicyResponse                                           smithy.SchemaExtensions
+	eCreateTrafficPolicyResponse_TrafficPolicyId                           smithy.SchemaExtensions
+	eDeleteAddonInstanceRequest                                            smithy.SchemaExtensions
+	eDeleteAddonInstanceRequest_AddonInstanceId                            smithy.SchemaExtensions
+	eDeleteAddonInstanceResponse                                           smithy.SchemaExtensions
+	eDeleteAddonSubscriptionRequest                                        smithy.SchemaExtensions
+	eDeleteAddonSubscriptionRequest_AddonSubscriptionId                    smithy.SchemaExtensions
+	eDeleteAddonSubscriptionResponse                                       smithy.SchemaExtensions
+	eDeleteAddressListRequest                                              smithy.SchemaExtensions
+	eDeleteAddressListRequest_AddressListId                                smithy.SchemaExtensions
+	eDeleteAddressListResponse                                             smithy.SchemaExtensions
+	eDeleteArchiveRequest                                                  smithy.SchemaExtensions
+	eDeleteArchiveRequest_ArchiveId                                        smithy.SchemaExtensions
+	eDeleteArchiveResponse                                                 smithy.SchemaExtensions
+	eDeleteIngressPointRequest                                             smithy.SchemaExtensions
+	eDeleteIngressPointRequest_IngressPointId                              smithy.SchemaExtensions
+	eDeleteIngressPointResponse                                            smithy.SchemaExtensions
+	eDeleteRelayRequest                                                    smithy.SchemaExtensions
+	eDeleteRelayRequest_RelayId                                            smithy.SchemaExtensions
+	eDeleteRelayResponse                                                   smithy.SchemaExtensions
+	eDeleteRuleSetRequest                                                  smithy.SchemaExtensions
+	eDeleteRuleSetRequest_RuleSetId                                        smithy.SchemaExtensions
+	eDeleteRuleSetResponse                                                 smithy.SchemaExtensions
+	eDeleteTrafficPolicyRequest                                            smithy.SchemaExtensions
+	eDeleteTrafficPolicyRequest_TrafficPolicyId                            smithy.SchemaExtensions
+	eDeleteTrafficPolicyResponse                                           smithy.SchemaExtensions
+	eDeregisterMemberFromAddressListRequest                                smithy.SchemaExtensions
+	eDeregisterMemberFromAddressListRequest_AddressListId                  smithy.SchemaExtensions
+	eDeregisterMemberFromAddressListRequest_Address                        smithy.SchemaExtensions
+	eDeregisterMemberFromAddressListResponse                               smithy.SchemaExtensions
+	eGetAddonInstanceRequest                                               smithy.SchemaExtensions
+	eGetAddonInstanceRequest_AddonInstanceId                               smithy.SchemaExtensions
+	eGetAddonInstanceResponse                                              smithy.SchemaExtensions
+	eGetAddonInstanceResponse_AddonSubscriptionId                          smithy.SchemaExtensions
+	eGetAddonInstanceResponse_AddonName                                    smithy.SchemaExtensions
+	eGetAddonInstanceResponse_AddonInstanceArn                             smithy.SchemaExtensions
+	eGetAddonInstanceResponse_CreatedTimestamp                             smithy.SchemaExtensions
+	eGetAddonSubscriptionRequest                                           smithy.SchemaExtensions
+	eGetAddonSubscriptionRequest_AddonSubscriptionId                       smithy.SchemaExtensions
+	eGetAddonSubscriptionResponse                                          smithy.SchemaExtensions
+	eGetAddonSubscriptionResponse_AddonName                                smithy.SchemaExtensions
+	eGetAddonSubscriptionResponse_AddonSubscriptionArn                     smithy.SchemaExtensions
+	eGetAddonSubscriptionResponse_CreatedTimestamp                         smithy.SchemaExtensions
+	eGetAddressListImportJobRequest                                        smithy.SchemaExtensions
+	eGetAddressListImportJobRequest_JobId                                  smithy.SchemaExtensions
+	eGetAddressListImportJobResponse                                       smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_JobId                                 smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_Name                                  smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_Status                                smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_PreSignedUrl                          smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_ImportedItemsCount                    smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_FailedItemsCount                      smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_ImportDataFormat                      smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_AddressListId                         smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_CreatedTimestamp                      smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_StartTimestamp                        smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_CompletedTimestamp                    smithy.SchemaExtensions
+	eGetAddressListImportJobResponse_Error                                 smithy.SchemaExtensions
+	eGetAddressListRequest                                                 smithy.SchemaExtensions
+	eGetAddressListRequest_AddressListId                                   smithy.SchemaExtensions
+	eGetAddressListResponse                                                smithy.SchemaExtensions
+	eGetAddressListResponse_AddressListId                                  smithy.SchemaExtensions
+	eGetAddressListResponse_AddressListArn                                 smithy.SchemaExtensions
+	eGetAddressListResponse_AddressListName                                smithy.SchemaExtensions
+	eGetAddressListResponse_CreatedTimestamp                               smithy.SchemaExtensions
+	eGetAddressListResponse_LastUpdatedTimestamp                           smithy.SchemaExtensions
+	eGetArchiveExportRequest                                               smithy.SchemaExtensions
+	eGetArchiveExportRequest_ExportId                                      smithy.SchemaExtensions
+	eGetArchiveExportResponse                                              smithy.SchemaExtensions
+	eGetArchiveExportResponse_ArchiveId                                    smithy.SchemaExtensions
+	eGetArchiveExportResponse_Filters                                      smithy.SchemaExtensions
+	eGetArchiveExportResponse_FromTimestamp                                smithy.SchemaExtensions
+	eGetArchiveExportResponse_ToTimestamp                                  smithy.SchemaExtensions
+	eGetArchiveExportResponse_MaxResults                                   smithy.SchemaExtensions
+	eGetArchiveExportResponse_ExportDestinationConfiguration               smithy.SchemaExtensions
+	eGetArchiveExportResponse_Status                                       smithy.SchemaExtensions
+	eGetArchiveRequest                                                     smithy.SchemaExtensions
+	eGetArchiveRequest_ArchiveId                                           smithy.SchemaExtensions
+	eGetArchiveMessageContentRequest                                       smithy.SchemaExtensions
+	eGetArchiveMessageContentRequest_ArchivedMessageId                     smithy.SchemaExtensions
+	eGetArchiveMessageContentResponse                                      smithy.SchemaExtensions
+	eGetArchiveMessageContentResponse_Body                                 smithy.SchemaExtensions
+	eGetArchiveMessageRequest                                              smithy.SchemaExtensions
+	eGetArchiveMessageRequest_ArchivedMessageId                            smithy.SchemaExtensions
+	eGetArchiveMessageResponse                                             smithy.SchemaExtensions
+	eGetArchiveMessageResponse_MessageDownloadLink                         smithy.SchemaExtensions
+	eGetArchiveMessageResponse_Metadata                                    smithy.SchemaExtensions
+	eGetArchiveMessageResponse_Envelope                                    smithy.SchemaExtensions
+	eGetArchiveResponse                                                    smithy.SchemaExtensions
+	eGetArchiveResponse_ArchiveId                                          smithy.SchemaExtensions
+	eGetArchiveResponse_ArchiveName                                        smithy.SchemaExtensions
+	eGetArchiveResponse_ArchiveArn                                         smithy.SchemaExtensions
+	eGetArchiveResponse_ArchiveState                                       smithy.SchemaExtensions
+	eGetArchiveResponse_Retention                                          smithy.SchemaExtensions
+	eGetArchiveResponse_CreatedTimestamp                                   smithy.SchemaExtensions
+	eGetArchiveResponse_LastUpdatedTimestamp                               smithy.SchemaExtensions
+	eGetArchiveResponse_KmsKeyArn                                          smithy.SchemaExtensions
+	eGetArchiveSearchRequest                                               smithy.SchemaExtensions
+	eGetArchiveSearchRequest_SearchId                                      smithy.SchemaExtensions
+	eGetArchiveSearchResponse                                              smithy.SchemaExtensions
+	eGetArchiveSearchResponse_ArchiveId                                    smithy.SchemaExtensions
+	eGetArchiveSearchResponse_Filters                                      smithy.SchemaExtensions
+	eGetArchiveSearchResponse_FromTimestamp                                smithy.SchemaExtensions
+	eGetArchiveSearchResponse_ToTimestamp                                  smithy.SchemaExtensions
+	eGetArchiveSearchResponse_MaxResults                                   smithy.SchemaExtensions
+	eGetArchiveSearchResponse_Status                                       smithy.SchemaExtensions
+	eGetArchiveSearchResultsRequest                                        smithy.SchemaExtensions
+	eGetArchiveSearchResultsRequest_SearchId                               smithy.SchemaExtensions
+	eGetArchiveSearchResultsResponse                                       smithy.SchemaExtensions
+	eGetArchiveSearchResultsResponse_Rows                                  smithy.SchemaExtensions
+	eGetIngressPointRequest                                                smithy.SchemaExtensions
+	eGetIngressPointRequest_IngressPointId                                 smithy.SchemaExtensions
+	eGetIngressPointRequest_IncludeTrustStoreContents                      smithy.SchemaExtensions
+	eGetIngressPointResponse                                               smithy.SchemaExtensions
+	eGetIngressPointResponse_IngressPointId                                smithy.SchemaExtensions
+	eGetIngressPointResponse_IngressPointName                              smithy.SchemaExtensions
+	eGetIngressPointResponse_IngressPointArn                               smithy.SchemaExtensions
+	eGetIngressPointResponse_Status                                        smithy.SchemaExtensions
+	eGetIngressPointResponse_Type                                          smithy.SchemaExtensions
+	eGetIngressPointResponse_ARecord                                       smithy.SchemaExtensions
+	eGetIngressPointResponse_RuleSetId                                     smithy.SchemaExtensions
+	eGetIngressPointResponse_TrafficPolicyId                               smithy.SchemaExtensions
+	eGetIngressPointResponse_IngressPointAuthConfiguration                 smithy.SchemaExtensions
+	eGetIngressPointResponse_NetworkConfiguration                          smithy.SchemaExtensions
+	eGetIngressPointResponse_TlsPolicy                                     smithy.SchemaExtensions
+	eGetIngressPointResponse_CreatedTimestamp                              smithy.SchemaExtensions
+	eGetIngressPointResponse_LastUpdatedTimestamp                          smithy.SchemaExtensions
+	eGetMemberOfAddressListRequest                                         smithy.SchemaExtensions
+	eGetMemberOfAddressListRequest_AddressListId                           smithy.SchemaExtensions
+	eGetMemberOfAddressListRequest_Address                                 smithy.SchemaExtensions
+	eGetMemberOfAddressListResponse                                        smithy.SchemaExtensions
+	eGetMemberOfAddressListResponse_Address                                smithy.SchemaExtensions
+	eGetMemberOfAddressListResponse_CreatedTimestamp                       smithy.SchemaExtensions
+	eGetRelayRequest                                                       smithy.SchemaExtensions
+	eGetRelayRequest_RelayId                                               smithy.SchemaExtensions
+	eGetRelayResponse                                                      smithy.SchemaExtensions
+	eGetRelayResponse_RelayId                                              smithy.SchemaExtensions
+	eGetRelayResponse_RelayArn                                             smithy.SchemaExtensions
+	eGetRelayResponse_RelayName                                            smithy.SchemaExtensions
+	eGetRelayResponse_ServerName                                           smithy.SchemaExtensions
+	eGetRelayResponse_ServerPort                                           smithy.SchemaExtensions
+	eGetRelayResponse_Authentication                                       smithy.SchemaExtensions
+	eGetRelayResponse_CreatedTimestamp                                     smithy.SchemaExtensions
+	eGetRelayResponse_LastModifiedTimestamp                                smithy.SchemaExtensions
+	eGetRuleSetRequest                                                     smithy.SchemaExtensions
+	eGetRuleSetRequest_RuleSetId                                           smithy.SchemaExtensions
+	eGetRuleSetResponse                                                    smithy.SchemaExtensions
+	eGetRuleSetResponse_RuleSetId                                          smithy.SchemaExtensions
+	eGetRuleSetResponse_RuleSetArn                                         smithy.SchemaExtensions
+	eGetRuleSetResponse_RuleSetName                                        smithy.SchemaExtensions
+	eGetRuleSetResponse_CreatedDate                                        smithy.SchemaExtensions
+	eGetRuleSetResponse_LastModificationDate                               smithy.SchemaExtensions
+	eGetRuleSetResponse_Rules                                              smithy.SchemaExtensions
+	eGetTrafficPolicyRequest                                               smithy.SchemaExtensions
+	eGetTrafficPolicyRequest_TrafficPolicyId                               smithy.SchemaExtensions
+	eGetTrafficPolicyResponse                                              smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_TrafficPolicyName                            smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_TrafficPolicyId                              smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_TrafficPolicyArn                             smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_PolicyStatements                             smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_MaxMessageSizeBytes                          smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_DefaultAction                                smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_CreatedTimestamp                             smithy.SchemaExtensions
+	eGetTrafficPolicyResponse_LastUpdatedTimestamp                         smithy.SchemaExtensions
+	eListAddonInstancesRequest                                             smithy.SchemaExtensions
+	eListAddonInstancesRequest_NextToken                                   smithy.SchemaExtensions
+	eListAddonInstancesRequest_PageSize                                    smithy.SchemaExtensions
+	eListAddonInstancesResponse                                            smithy.SchemaExtensions
+	eListAddonInstancesResponse_AddonInstances                             smithy.SchemaExtensions
+	eListAddonInstancesResponse_NextToken                                  smithy.SchemaExtensions
+	eListAddonSubscriptionsRequest                                         smithy.SchemaExtensions
+	eListAddonSubscriptionsRequest_NextToken                               smithy.SchemaExtensions
+	eListAddonSubscriptionsRequest_PageSize                                smithy.SchemaExtensions
+	eListAddonSubscriptionsResponse                                        smithy.SchemaExtensions
+	eListAddonSubscriptionsResponse_AddonSubscriptions                     smithy.SchemaExtensions
+	eListAddonSubscriptionsResponse_NextToken                              smithy.SchemaExtensions
+	eListAddressListImportJobsRequest                                      smithy.SchemaExtensions
+	eListAddressListImportJobsRequest_AddressListId                        smithy.SchemaExtensions
+	eListAddressListImportJobsRequest_NextToken                            smithy.SchemaExtensions
+	eListAddressListImportJobsRequest_PageSize                             smithy.SchemaExtensions
+	eListAddressListImportJobsResponse                                     smithy.SchemaExtensions
+	eListAddressListImportJobsResponse_ImportJobs                          smithy.SchemaExtensions
+	eListAddressListImportJobsResponse_NextToken                           smithy.SchemaExtensions
+	eListAddressListsRequest                                               smithy.SchemaExtensions
+	eListAddressListsRequest_NextToken                                     smithy.SchemaExtensions
+	eListAddressListsRequest_PageSize                                      smithy.SchemaExtensions
+	eListAddressListsResponse                                              smithy.SchemaExtensions
+	eListAddressListsResponse_AddressLists                                 smithy.SchemaExtensions
+	eListAddressListsResponse_NextToken                                    smithy.SchemaExtensions
+	eListArchiveExportsRequest                                             smithy.SchemaExtensions
+	eListArchiveExportsRequest_ArchiveId                                   smithy.SchemaExtensions
+	eListArchiveExportsRequest_NextToken                                   smithy.SchemaExtensions
+	eListArchiveExportsRequest_PageSize                                    smithy.SchemaExtensions
+	eListArchiveExportsResponse                                            smithy.SchemaExtensions
+	eListArchiveExportsResponse_Exports                                    smithy.SchemaExtensions
+	eListArchiveExportsResponse_NextToken                                  smithy.SchemaExtensions
+	eListArchiveSearchesRequest                                            smithy.SchemaExtensions
+	eListArchiveSearchesRequest_ArchiveId                                  smithy.SchemaExtensions
+	eListArchiveSearchesRequest_NextToken                                  smithy.SchemaExtensions
+	eListArchiveSearchesRequest_PageSize                                   smithy.SchemaExtensions
+	eListArchiveSearchesResponse                                           smithy.SchemaExtensions
+	eListArchiveSearchesResponse_Searches                                  smithy.SchemaExtensions
+	eListArchiveSearchesResponse_NextToken                                 smithy.SchemaExtensions
+	eListArchivesRequest                                                   smithy.SchemaExtensions
+	eListArchivesRequest_NextToken                                         smithy.SchemaExtensions
+	eListArchivesRequest_PageSize                                          smithy.SchemaExtensions
+	eListArchivesResponse                                                  smithy.SchemaExtensions
+	eListArchivesResponse_Archives                                         smithy.SchemaExtensions
+	eListArchivesResponse_NextToken                                        smithy.SchemaExtensions
+	eListIngressPointsRequest                                              smithy.SchemaExtensions
+	eListIngressPointsRequest_PageSize                                     smithy.SchemaExtensions
+	eListIngressPointsRequest_NextToken                                    smithy.SchemaExtensions
+	eListIngressPointsResponse                                             smithy.SchemaExtensions
+	eListIngressPointsResponse_IngressPoints                               smithy.SchemaExtensions
+	eListIngressPointsResponse_NextToken                                   smithy.SchemaExtensions
+	eListMembersOfAddressListRequest                                       smithy.SchemaExtensions
+	eListMembersOfAddressListRequest_AddressListId                         smithy.SchemaExtensions
+	eListMembersOfAddressListRequest_Filter                                smithy.SchemaExtensions
+	eListMembersOfAddressListRequest_NextToken                             smithy.SchemaExtensions
+	eListMembersOfAddressListRequest_PageSize                              smithy.SchemaExtensions
+	eListMembersOfAddressListResponse                                      smithy.SchemaExtensions
+	eListMembersOfAddressListResponse_Addresses                            smithy.SchemaExtensions
+	eListMembersOfAddressListResponse_NextToken                            smithy.SchemaExtensions
+	eListRelaysRequest                                                     smithy.SchemaExtensions
+	eListRelaysRequest_PageSize                                            smithy.SchemaExtensions
+	eListRelaysRequest_NextToken                                           smithy.SchemaExtensions
+	eListRelaysResponse                                                    smithy.SchemaExtensions
+	eListRelaysResponse_Relays                                             smithy.SchemaExtensions
+	eListRelaysResponse_NextToken                                          smithy.SchemaExtensions
+	eListRuleSetsRequest                                                   smithy.SchemaExtensions
+	eListRuleSetsRequest_NextToken                                         smithy.SchemaExtensions
+	eListRuleSetsRequest_PageSize                                          smithy.SchemaExtensions
+	eListRuleSetsResponse                                                  smithy.SchemaExtensions
+	eListRuleSetsResponse_RuleSets                                         smithy.SchemaExtensions
+	eListRuleSetsResponse_NextToken                                        smithy.SchemaExtensions
+	eListTagsForResourceRequest                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                smithy.SchemaExtensions
+	eListTagsForResourceResponse                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                      smithy.SchemaExtensions
+	eListTrafficPoliciesRequest                                            smithy.SchemaExtensions
+	eListTrafficPoliciesRequest_PageSize                                   smithy.SchemaExtensions
+	eListTrafficPoliciesRequest_NextToken                                  smithy.SchemaExtensions
+	eListTrafficPoliciesResponse                                           smithy.SchemaExtensions
+	eListTrafficPoliciesResponse_TrafficPolicies                           smithy.SchemaExtensions
+	eListTrafficPoliciesResponse_NextToken                                 smithy.SchemaExtensions
+	eRegisterMemberToAddressListRequest                                    smithy.SchemaExtensions
+	eRegisterMemberToAddressListRequest_AddressListId                      smithy.SchemaExtensions
+	eRegisterMemberToAddressListRequest_Address                            smithy.SchemaExtensions
+	eRegisterMemberToAddressListResponse                                   smithy.SchemaExtensions
+	eStartAddressListImportJobRequest                                      smithy.SchemaExtensions
+	eStartAddressListImportJobRequest_JobId                                smithy.SchemaExtensions
+	eStartAddressListImportJobResponse                                     smithy.SchemaExtensions
+	eStartArchiveExportRequest                                             smithy.SchemaExtensions
+	eStartArchiveExportRequest_ArchiveId                                   smithy.SchemaExtensions
+	eStartArchiveExportRequest_Filters                                     smithy.SchemaExtensions
+	eStartArchiveExportRequest_FromTimestamp                               smithy.SchemaExtensions
+	eStartArchiveExportRequest_ToTimestamp                                 smithy.SchemaExtensions
+	eStartArchiveExportRequest_MaxResults                                  smithy.SchemaExtensions
+	eStartArchiveExportRequest_ExportDestinationConfiguration              smithy.SchemaExtensions
+	eStartArchiveExportRequest_IncludeMetadata                             smithy.SchemaExtensions
+	eStartArchiveExportResponse                                            smithy.SchemaExtensions
+	eStartArchiveExportResponse_ExportId                                   smithy.SchemaExtensions
+	eStartArchiveSearchRequest                                             smithy.SchemaExtensions
+	eStartArchiveSearchRequest_ArchiveId                                   smithy.SchemaExtensions
+	eStartArchiveSearchRequest_Filters                                     smithy.SchemaExtensions
+	eStartArchiveSearchRequest_FromTimestamp                               smithy.SchemaExtensions
+	eStartArchiveSearchRequest_ToTimestamp                                 smithy.SchemaExtensions
+	eStartArchiveSearchRequest_MaxResults                                  smithy.SchemaExtensions
+	eStartArchiveSearchResponse                                            smithy.SchemaExtensions
+	eStartArchiveSearchResponse_SearchId                                   smithy.SchemaExtensions
+	eStopAddressListImportJobRequest                                       smithy.SchemaExtensions
+	eStopAddressListImportJobRequest_JobId                                 smithy.SchemaExtensions
+	eStopAddressListImportJobResponse                                      smithy.SchemaExtensions
+	eStopArchiveExportRequest                                              smithy.SchemaExtensions
+	eStopArchiveExportRequest_ExportId                                     smithy.SchemaExtensions
+	eStopArchiveExportResponse                                             smithy.SchemaExtensions
+	eStopArchiveSearchRequest                                              smithy.SchemaExtensions
+	eStopArchiveSearchRequest_SearchId                                     smithy.SchemaExtensions
+	eStopArchiveSearchResponse                                             smithy.SchemaExtensions
+	eTagResourceRequest                                                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                        smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                               smithy.SchemaExtensions
+	eTagResourceResponse                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                      smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                          smithy.SchemaExtensions
+	eUntagResourceResponse                                                 smithy.SchemaExtensions
+	eUpdateArchiveRequest                                                  smithy.SchemaExtensions
+	eUpdateArchiveRequest_ArchiveId                                        smithy.SchemaExtensions
+	eUpdateArchiveRequest_ArchiveName                                      smithy.SchemaExtensions
+	eUpdateArchiveRequest_Retention                                        smithy.SchemaExtensions
+	eUpdateArchiveResponse                                                 smithy.SchemaExtensions
+	eUpdateIngressPointRequest                                             smithy.SchemaExtensions
+	eUpdateIngressPointRequest_IngressPointId                              smithy.SchemaExtensions
+	eUpdateIngressPointRequest_IngressPointName                            smithy.SchemaExtensions
+	eUpdateIngressPointRequest_StatusToUpdate                              smithy.SchemaExtensions
+	eUpdateIngressPointRequest_RuleSetId                                   smithy.SchemaExtensions
+	eUpdateIngressPointRequest_TrafficPolicyId                             smithy.SchemaExtensions
+	eUpdateIngressPointRequest_IngressPointConfiguration                   smithy.SchemaExtensions
+	eUpdateIngressPointRequest_TlsPolicy                                   smithy.SchemaExtensions
+	eUpdateIngressPointResponse                                            smithy.SchemaExtensions
+	eUpdateRelayRequest                                                    smithy.SchemaExtensions
+	eUpdateRelayRequest_RelayId                                            smithy.SchemaExtensions
+	eUpdateRelayRequest_RelayName                                          smithy.SchemaExtensions
+	eUpdateRelayRequest_ServerName                                         smithy.SchemaExtensions
+	eUpdateRelayRequest_ServerPort                                         smithy.SchemaExtensions
+	eUpdateRelayRequest_Authentication                                     smithy.SchemaExtensions
+	eUpdateRelayResponse                                                   smithy.SchemaExtensions
+	eUpdateRuleSetRequest                                                  smithy.SchemaExtensions
+	eUpdateRuleSetRequest_RuleSetId                                        smithy.SchemaExtensions
+	eUpdateRuleSetRequest_RuleSetName                                      smithy.SchemaExtensions
+	eUpdateRuleSetRequest_Rules                                            smithy.SchemaExtensions
+	eUpdateRuleSetResponse                                                 smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest                                            smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest_TrafficPolicyId                            smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest_TrafficPolicyName                          smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest_PolicyStatements                           smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest_DefaultAction                              smithy.SchemaExtensions
+	eUpdateTrafficPolicyRequest_MaxMessageSizeBytes                        smithy.SchemaExtensions
+	eUpdateTrafficPolicyResponse                                           smithy.SchemaExtensions
+)
+
+var (
+	iCreateAddonInstance                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonInstance"}
+	iCreateAddonSubscription                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonSubscription"}
+	iCreateAddressList                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressList"}
+	iCreateAddressListImportJob              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressListImportJob"}
+	iCreateArchive                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateArchive"}
+	iCreateIngressPoint                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateIngressPoint"}
+	iCreateRelay                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRelay"}
+	iCreateRuleSet                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRuleSet"}
+	iCreateTrafficPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateTrafficPolicy"}
+	iDeleteAddonInstance                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonInstance"}
+	iDeleteAddonSubscription                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonSubscription"}
+	iDeleteAddressList                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddressList"}
+	iDeleteArchive                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteArchive"}
+	iDeleteIngressPoint                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteIngressPoint"}
+	iDeleteRelay                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRelay"}
+	iDeleteRuleSet                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRuleSet"}
+	iDeleteTrafficPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteTrafficPolicy"}
+	iDeregisterMemberFromAddressList         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeregisterMemberFromAddressList"}
+	iGetAddonInstance                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonInstance"}
+	iGetAddonSubscription                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonSubscription"}
+	iGetAddressList                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressList"}
+	iGetAddressListImportJob                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressListImportJob"}
+	iGetArchive                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchive"}
+	iGetArchiveExport                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveExport"}
+	iGetArchiveMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessage"}
+	iGetArchiveMessageContent                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessageContent"}
+	iGetArchiveSearch                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearch"}
+	iGetArchiveSearchResults                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearchResults"}
+	iGetIngressPoint                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetIngressPoint"}
+	iGetMemberOfAddressList                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetMemberOfAddressList"}
+	iGetRelay                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRelay"}
+	iGetRuleSet                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRuleSet"}
+	iGetTrafficPolicy                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetTrafficPolicy"}
+	iListAddonInstances                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonInstances"}
+	iListAddonSubscriptions                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonSubscriptions"}
+	iListAddressListImportJobs               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressListImportJobs"}
+	iListAddressLists                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressLists"}
+	iListArchiveExports                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveExports"}
+	iListArchives                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchives"}
+	iListArchiveSearches                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveSearches"}
+	iListIngressPoints                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListIngressPoints"}
+	iListMembersOfAddressList                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListMembersOfAddressList"}
+	iListRelays                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRelays"}
+	iListRuleSets                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRuleSets"}
+	iListTagsForResource                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTagsForResource"}
+	iListTrafficPolicies                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTrafficPolicies"}
+	iRegisterMemberToAddressList             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RegisterMemberToAddressList"}
+	iStartAddressListImportJob               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartAddressListImportJob"}
+	iStartArchiveExport                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveExport"}
+	iStartArchiveSearch                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveSearch"}
+	iStopAddressListImportJob                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopAddressListImportJob"}
+	iStopArchiveExport                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveExport"}
+	iStopArchiveSearch                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveSearch"}
+	iTagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UntagResource"}
+	iUpdateArchive                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateArchive"}
+	iUpdateIngressPoint                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateIngressPoint"}
+	iUpdateRelay                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRelay"}
+	iUpdateRuleSet                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRuleSet"}
+	iUpdateTrafficPolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateTrafficPolicy"}
+	i_MailManagerSvc                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "MailManagerSvc"}
+	iAcceptAction                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AcceptAction"}
+	iAccessDeniedException                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AccessDeniedException"}
+	iActionFailurePolicy                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ActionFailurePolicy"}
+	iAddHeaderAction                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddHeaderAction"}
+	iAddonInstance                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonInstance"}
+	i_AddonInstanceArn                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonInstanceArn"}
+	i_AddonInstanceId                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonInstanceId"}
+	i_AddonInstances                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonInstances"}
+	i_AddonName                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonName"}
+	iAddonSubscription                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonSubscription"}
+	i_AddonSubscriptionArn                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonSubscriptionArn"}
+	i_AddonSubscriptionId                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonSubscriptionId"}
+	i_AddonSubscriptions                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddonSubscriptions"}
+	i_Address                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Address"}
+	iAddressFilter                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressFilter"}
+	iAddressList                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressList"}
+	i_AddressListArn                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressListArn"}
+	i_AddressListId                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressListId"}
+	i_AddressListName                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressListName"}
+	i_AddressLists                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressLists"}
+	i_AddressPageSize                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressPageSize"}
+	i_AddressPrefix                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AddressPrefix"}
+	iAnalysis                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Analysis"}
+	i_AnalyzerArn                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "AnalyzerArn"}
+	iArchive                                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Archive"}
+	iArchiveAction                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveAction"}
+	i_ArchiveArn                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveArn"}
+	iArchiveBooleanEmailAttribute            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveBooleanEmailAttribute"}
+	iArchiveBooleanExpression                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveBooleanExpression"}
+	iArchiveBooleanOperator                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveBooleanOperator"}
+	iArchiveBooleanToEvaluate                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveBooleanToEvaluate"}
+	i_ArchivedMessageId                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchivedMessageId"}
+	iArchiveFilterCondition                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveFilterCondition"}
+	i_ArchiveFilterConditions                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveFilterConditions"}
+	iArchiveFilters                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveFilters"}
+	i_ArchiveId                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveId"}
+	i_ArchiveIdString                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveIdString"}
+	i_ArchiveNameString                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveNameString"}
+	iArchiveRetention                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveRetention"}
+	i_ArchivesList                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchivesList"}
+	iArchiveState                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveState"}
+	iArchiveStringEmailAttribute             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveStringEmailAttribute"}
+	iArchiveStringExpression                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveStringExpression"}
+	iArchiveStringOperator                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveStringOperator"}
+	iArchiveStringToEvaluate                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ArchiveStringToEvaluate"}
+	iBounceAction                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "BounceAction"}
+	i_BounceMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "BounceMessage"}
+	i_CAContent                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CAContent"}
+	iConflictException                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ConflictException"}
+	i_CrlContent                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CrlContent"}
+	iDeliverToMailboxAction                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeliverToMailboxAction"}
+	iDeliverToQBusinessAction                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeliverToQBusinessAction"}
+	i_DiagnosticMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DiagnosticMessage"}
+	iDropAction                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DropAction"}
+	i_EmailAddress                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "EmailAddress"}
+	i_EmailReceivedHeadersList               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "EmailReceivedHeadersList"}
+	iEnvelope                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Envelope"}
+	i_ErrorMessage                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ErrorMessage"}
+	iExportDestinationConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportDestinationConfiguration"}
+	i_ExportId                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportId"}
+	i_ExportMaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportMaxResults"}
+	iExportState                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportState"}
+	iExportStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportStatus"}
+	iExportSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportSummary"}
+	i_ExportSummaryList                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ExportSummaryList"}
+	i_HeaderName                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "HeaderName"}
+	i_HeaderValue                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "HeaderValue"}
+	i_IamRoleArn                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IamRoleArn"}
+	i_IdempotencyToken                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IdempotencyToken"}
+	i_IdOrArn                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IdOrArn"}
+	iImportDataFormat                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ImportDataFormat"}
+	iImportDataType                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ImportDataType"}
+	iImportJob                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ImportJob"}
+	i_ImportJobs                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ImportJobs"}
+	iImportJobStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ImportJobStatus"}
+	i_IngressAddressListArnList              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressAddressListArnList"}
+	iIngressAddressListEmailAttribute        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressAddressListEmailAttribute"}
+	iIngressAnalysis                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressAnalysis"}
+	iIngressBooleanExpression                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressBooleanExpression"}
+	iIngressBooleanOperator                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressBooleanOperator"}
+	iIngressBooleanToEvaluate                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressBooleanToEvaluate"}
+	iIngressIpOperator                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpOperator"}
+	iIngressIpToEvaluate                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpToEvaluate"}
+	iIngressIpv4Attribute                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpv4Attribute"}
+	iIngressIpv4Expression                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpv4Expression"}
+	iIngressIpv6Attribute                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpv6Attribute"}
+	iIngressIpv6Expression                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpv6Expression"}
+	iIngressIpv6ToEvaluate                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIpv6ToEvaluate"}
+	iIngressIsInAddressList                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressIsInAddressList"}
+	iIngressPoint                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPoint"}
+	i_IngressPointARecord                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointARecord"}
+	i_IngressPointArn                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointArn"}
+	iIngressPointAuthConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointAuthConfiguration"}
+	iIngressPointConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointConfiguration"}
+	i_IngressPointId                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointId"}
+	i_IngressPointName                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointName"}
+	iIngressPointPasswordConfiguration       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointPasswordConfiguration"}
+	i_IngressPointsList                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointsList"}
+	iIngressPointStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointStatus"}
+	iIngressPointStatusToUpdate              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointStatusToUpdate"}
+	iIngressPointType                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressPointType"}
+	iIngressStringEmailAttribute             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressStringEmailAttribute"}
+	iIngressStringExpression                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressStringExpression"}
+	iIngressStringOperator                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressStringOperator"}
+	iIngressStringToEvaluate                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressStringToEvaluate"}
+	iIngressTlsAttribute                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressTlsAttribute"}
+	iIngressTlsProtocolAttribute             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressTlsProtocolAttribute"}
+	iIngressTlsProtocolExpression            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressTlsProtocolExpression"}
+	iIngressTlsProtocolOperator              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressTlsProtocolOperator"}
+	iIngressTlsProtocolToEvaluate            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IngressTlsProtocolToEvaluate"}
+	iInvokeLambdaAction                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "InvokeLambdaAction"}
+	iIpType                                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "IpType"}
+	i_Ipv4Cidr                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Ipv4Cidr"}
+	i_Ipv4Cidrs                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Ipv4Cidrs"}
+	i_Ipv6Cidr                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Ipv6Cidr"}
+	i_Ipv6Cidrs                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Ipv6Cidrs"}
+	i_JobId                                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "JobId"}
+	i_JobItemsCount                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "JobItemsCount"}
+	i_JobName                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "JobName"}
+	i_KmsKeyArn                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "KmsKeyArn"}
+	i_KmsKeyId                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "KmsKeyId"}
+	i_LambdaFunctionArn                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "LambdaFunctionArn"}
+	iLambdaInvocationType                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "LambdaInvocationType"}
+	i_LambdaRetryTimeMinutes                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "LambdaRetryTimeMinutes"}
+	iMailFrom                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "MailFrom"}
+	i_MaxMessageSizeBytes                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "MaxMessageSizeBytes"}
+	iMessageBody                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "MessageBody"}
+	iMetadata                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Metadata"}
+	i_MimeHeaderAttribute                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "MimeHeaderAttribute"}
+	i_NameOrArn                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "NameOrArn"}
+	iNetworkConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "NetworkConfiguration"}
+	iNoAuthentication                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "NoAuthentication"}
+	i_PageSize                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PageSize"}
+	i_PaginationToken                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PaginationToken"}
+	iPolicyCondition                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PolicyCondition"}
+	i_PolicyConditions                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PolicyConditions"}
+	iPolicyStatement                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PolicyStatement"}
+	i_PolicyStatementList                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PolicyStatementList"}
+	i_PreSignedUrl                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PreSignedUrl"}
+	iPrivateNetworkConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PrivateNetworkConfiguration"}
+	iPublicNetworkConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "PublicNetworkConfiguration"}
+	i_QBusinessApplicationId                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "QBusinessApplicationId"}
+	i_QBusinessIndexId                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "QBusinessIndexId"}
+	i_Recipients                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Recipients"}
+	iRelay                                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Relay"}
+	iRelayAction                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayAction"}
+	i_RelayArn                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayArn"}
+	iRelayAuthentication                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayAuthentication"}
+	i_RelayId                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayId"}
+	i_RelayName                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayName"}
+	i_Relays                                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Relays"}
+	i_RelayServerName                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayServerName"}
+	i_RelayServerPort                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RelayServerPort"}
+	iReplaceRecipientAction                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ReplaceRecipientAction"}
+	iResourceNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ResourceNotFoundException"}
+	i_ResultField                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ResultField"}
+	iRetentionPeriod                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RetentionPeriod"}
+	iRow                                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Row"}
+	i_RowsList                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RowsList"}
+	iRule                                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Rule"}
+	iRuleAction                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleAction"}
+	i_RuleActions                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleActions"}
+	i_RuleAddressListArnList                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleAddressListArnList"}
+	iRuleAddressListEmailAttribute           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleAddressListEmailAttribute"}
+	iRuleBooleanEmailAttribute               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleBooleanEmailAttribute"}
+	iRuleBooleanExpression                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleBooleanExpression"}
+	iRuleBooleanOperator                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleBooleanOperator"}
+	iRuleBooleanToEvaluate                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleBooleanToEvaluate"}
+	iRuleClientCertificateAttribute          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleClientCertificateAttribute"}
+	iRuleCondition                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleCondition"}
+	i_RuleConditions                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleConditions"}
+	iRuleDmarcExpression                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleDmarcExpression"}
+	iRuleDmarcOperator                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleDmarcOperator"}
+	iRuleDmarcPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleDmarcPolicy"}
+	i_RuleDmarcValueList                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleDmarcValueList"}
+	iRuleIpEmailAttribute                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpEmailAttribute"}
+	iRuleIpExpression                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpExpression"}
+	iRuleIpOperator                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpOperator"}
+	i_RuleIpStringValue                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpStringValue"}
+	iRuleIpToEvaluate                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpToEvaluate"}
+	i_RuleIpValueList                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIpValueList"}
+	iRuleIsInAddressList                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleIsInAddressList"}
+	i_RuleName                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleName"}
+	iRuleNumberEmailAttribute                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleNumberEmailAttribute"}
+	iRuleNumberExpression                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleNumberExpression"}
+	iRuleNumberOperator                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleNumberOperator"}
+	iRuleNumberToEvaluate                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleNumberToEvaluate"}
+	i_Rules                                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Rules"}
+	iRuleSet                                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleSet"}
+	i_RuleSetArn                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleSetArn"}
+	i_RuleSetId                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleSetId"}
+	i_RuleSetName                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleSetName"}
+	i_RuleSets                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleSets"}
+	iRuleStringEmailAttribute                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringEmailAttribute"}
+	iRuleStringExpression                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringExpression"}
+	i_RuleStringList                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringList"}
+	iRuleStringOperator                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringOperator"}
+	iRuleStringToEvaluate                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringToEvaluate"}
+	i_RuleStringValue                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleStringValue"}
+	iRuleVerdict                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdict"}
+	iRuleVerdictAttribute                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdictAttribute"}
+	iRuleVerdictExpression                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdictExpression"}
+	iRuleVerdictOperator                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdictOperator"}
+	iRuleVerdictToEvaluate                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdictToEvaluate"}
+	i_RuleVerdictValueList                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RuleVerdictValueList"}
+	iS3Action                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3Action"}
+	i_S3Bucket                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3Bucket"}
+	iS3ExportDestinationConfiguration        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3ExportDestinationConfiguration"}
+	i_S3Location                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3Location"}
+	i_S3Prefix                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3Prefix"}
+	i_S3PresignedURL                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "S3PresignedURL"}
+	iSavedAddress                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SavedAddress"}
+	i_SavedAddresses                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SavedAddresses"}
+	i_SearchId                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchId"}
+	i_SearchMaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchMaxResults"}
+	iSearchState                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchState"}
+	iSearchStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchStatus"}
+	iSearchSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchSummary"}
+	i_SearchSummaryList                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SearchSummaryList"}
+	i_SecretArn                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SecretArn"}
+	iSendAction                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SendAction"}
+	i_SenderIpAddress                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SenderIpAddress"}
+	iServiceQuotaExceededException           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ServiceQuotaExceededException"}
+	i_SmtpPassword                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SmtpPassword"}
+	i_SmtpReplyCode                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SmtpReplyCode"}
+	iSnsAction                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SnsAction"}
+	iSnsNotificationEncoding                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SnsNotificationEncoding"}
+	iSnsNotificationPayloadType              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SnsNotificationPayloadType"}
+	i_SnsTopicArn                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "SnsTopicArn"}
+	i_StatusCode                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StatusCode"}
+	i_StringList                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StringList"}
+	i_StringValue                            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StringValue"}
+	i_StringValueList                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StringValueList"}
+	iTag                                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "Tag"}
+	i_TaggableResourceArn                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TaggableResourceArn"}
+	i_TagKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagKeyList"}
+	i_TagList                                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagList"}
+	i_TagValue                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagValue"}
+	iThrottlingException                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ThrottlingException"}
+	iTlsAuthConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TlsAuthConfiguration"}
+	iTlsPolicy                               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TlsPolicy"}
+	iTrafficPolicy                           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrafficPolicy"}
+	i_TrafficPolicyArn                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrafficPolicyArn"}
+	i_TrafficPolicyId                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrafficPolicyId"}
+	i_TrafficPolicyList                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrafficPolicyList"}
+	i_TrafficPolicyName                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrafficPolicyName"}
+	iTrustStore                              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrustStore"}
+	iTrustStoreResponseOption                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TrustStoreResponseOption"}
+	iValidationException                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ValidationException"}
+	i_VpcEndpointId                          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "VpcEndpointId"}
+	iCreateAddonInstanceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonInstanceRequest"}
+	iCreateAddonInstanceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonInstanceResponse"}
+	iCreateAddonSubscriptionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonSubscriptionRequest"}
+	iCreateAddonSubscriptionResponse         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddonSubscriptionResponse"}
+	iCreateAddressListImportJobRequest       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressListImportJobRequest"}
+	iCreateAddressListImportJobResponse      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressListImportJobResponse"}
+	iCreateAddressListRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressListRequest"}
+	iCreateAddressListResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateAddressListResponse"}
+	iCreateArchiveRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateArchiveRequest"}
+	iCreateArchiveResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateArchiveResponse"}
+	iCreateIngressPointRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateIngressPointRequest"}
+	iCreateIngressPointResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateIngressPointResponse"}
+	iCreateRelayRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRelayRequest"}
+	iCreateRelayResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRelayResponse"}
+	iCreateRuleSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRuleSetRequest"}
+	iCreateRuleSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateRuleSetResponse"}
+	iCreateTrafficPolicyRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateTrafficPolicyRequest"}
+	iCreateTrafficPolicyResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "CreateTrafficPolicyResponse"}
+	iDeleteAddonInstanceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonInstanceRequest"}
+	iDeleteAddonInstanceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonInstanceResponse"}
+	iDeleteAddonSubscriptionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonSubscriptionRequest"}
+	iDeleteAddonSubscriptionResponse         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddonSubscriptionResponse"}
+	iDeleteAddressListRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddressListRequest"}
+	iDeleteAddressListResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteAddressListResponse"}
+	iDeleteArchiveRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteArchiveRequest"}
+	iDeleteArchiveResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteArchiveResponse"}
+	iDeleteIngressPointRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteIngressPointRequest"}
+	iDeleteIngressPointResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteIngressPointResponse"}
+	iDeleteRelayRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRelayRequest"}
+	iDeleteRelayResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRelayResponse"}
+	iDeleteRuleSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRuleSetRequest"}
+	iDeleteRuleSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteRuleSetResponse"}
+	iDeleteTrafficPolicyRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteTrafficPolicyRequest"}
+	iDeleteTrafficPolicyResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeleteTrafficPolicyResponse"}
+	iDeregisterMemberFromAddressListRequest  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeregisterMemberFromAddressListRequest"}
+	iDeregisterMemberFromAddressListResponse = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "DeregisterMemberFromAddressListResponse"}
+	iGetAddonInstanceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonInstanceRequest"}
+	iGetAddonInstanceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonInstanceResponse"}
+	iGetAddonSubscriptionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonSubscriptionRequest"}
+	iGetAddonSubscriptionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddonSubscriptionResponse"}
+	iGetAddressListImportJobRequest          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressListImportJobRequest"}
+	iGetAddressListImportJobResponse         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressListImportJobResponse"}
+	iGetAddressListRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressListRequest"}
+	iGetAddressListResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetAddressListResponse"}
+	iGetArchiveExportRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveExportRequest"}
+	iGetArchiveExportResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveExportResponse"}
+	iGetArchiveRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveRequest"}
+	iGetArchiveMessageContentRequest         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessageContentRequest"}
+	iGetArchiveMessageContentResponse        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessageContentResponse"}
+	iGetArchiveMessageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessageRequest"}
+	iGetArchiveMessageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveMessageResponse"}
+	iGetArchiveResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveResponse"}
+	iGetArchiveSearchRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearchRequest"}
+	iGetArchiveSearchResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearchResponse"}
+	iGetArchiveSearchResultsRequest          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearchResultsRequest"}
+	iGetArchiveSearchResultsResponse         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetArchiveSearchResultsResponse"}
+	iGetIngressPointRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetIngressPointRequest"}
+	iGetIngressPointResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetIngressPointResponse"}
+	iGetMemberOfAddressListRequest           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetMemberOfAddressListRequest"}
+	iGetMemberOfAddressListResponse          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetMemberOfAddressListResponse"}
+	iGetRelayRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRelayRequest"}
+	iGetRelayResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRelayResponse"}
+	iGetRuleSetRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRuleSetRequest"}
+	iGetRuleSetResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetRuleSetResponse"}
+	iGetTrafficPolicyRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetTrafficPolicyRequest"}
+	iGetTrafficPolicyResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "GetTrafficPolicyResponse"}
+	iListAddonInstancesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonInstancesRequest"}
+	iListAddonInstancesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonInstancesResponse"}
+	iListAddonSubscriptionsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonSubscriptionsRequest"}
+	iListAddonSubscriptionsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddonSubscriptionsResponse"}
+	iListAddressListImportJobsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressListImportJobsRequest"}
+	iListAddressListImportJobsResponse       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressListImportJobsResponse"}
+	iListAddressListsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressListsRequest"}
+	iListAddressListsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListAddressListsResponse"}
+	iListArchiveExportsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveExportsRequest"}
+	iListArchiveExportsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveExportsResponse"}
+	iListArchiveSearchesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveSearchesRequest"}
+	iListArchiveSearchesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchiveSearchesResponse"}
+	iListArchivesRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchivesRequest"}
+	iListArchivesResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListArchivesResponse"}
+	iListIngressPointsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListIngressPointsRequest"}
+	iListIngressPointsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListIngressPointsResponse"}
+	iListMembersOfAddressListRequest         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListMembersOfAddressListRequest"}
+	iListMembersOfAddressListResponse        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListMembersOfAddressListResponse"}
+	iListRelaysRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRelaysRequest"}
+	iListRelaysResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRelaysResponse"}
+	iListRuleSetsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRuleSetsRequest"}
+	iListRuleSetsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListRuleSetsResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTagsForResourceResponse"}
+	iListTrafficPoliciesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTrafficPoliciesRequest"}
+	iListTrafficPoliciesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "ListTrafficPoliciesResponse"}
+	iRegisterMemberToAddressListRequest      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RegisterMemberToAddressListRequest"}
+	iRegisterMemberToAddressListResponse     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "RegisterMemberToAddressListResponse"}
+	iStartAddressListImportJobRequest        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartAddressListImportJobRequest"}
+	iStartAddressListImportJobResponse       = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartAddressListImportJobResponse"}
+	iStartArchiveExportRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveExportRequest"}
+	iStartArchiveExportResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveExportResponse"}
+	iStartArchiveSearchRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveSearchRequest"}
+	iStartArchiveSearchResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StartArchiveSearchResponse"}
+	iStopAddressListImportJobRequest         = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopAddressListImportJobRequest"}
+	iStopAddressListImportJobResponse        = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopAddressListImportJobResponse"}
+	iStopArchiveExportRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveExportRequest"}
+	iStopArchiveExportResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveExportResponse"}
+	iStopArchiveSearchRequest                = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveSearchRequest"}
+	iStopArchiveSearchResponse               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "StopArchiveSearchResponse"}
+	iTagResourceRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UntagResourceResponse"}
+	iUpdateArchiveRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateArchiveRequest"}
+	iUpdateArchiveResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateArchiveResponse"}
+	iUpdateIngressPointRequest               = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateIngressPointRequest"}
+	iUpdateIngressPointResponse              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateIngressPointResponse"}
+	iUpdateRelayRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRelayRequest"}
+	iUpdateRelayResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRelayResponse"}
+	iUpdateRuleSetRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRuleSetRequest"}
+	iUpdateRuleSetResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateRuleSetResponse"}
+	iUpdateTrafficPolicyRequest              = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateTrafficPolicyRequest"}
+	iUpdateTrafficPolicyResponse             = smithy.ShapeName{Namespace: "com.amazonaws.mailmanager", Name: "UpdateTrafficPolicyResponse"}
+	pUnit                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pString                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pDouble                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+	pInteger                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAcceptAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptAction_ALLOW, &sAcceptAction_DENY}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mActionFailurePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sActionFailurePolicy_CONTINUE, &sActionFailurePolicy_DROP}}
+var mAddHeaderAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAddHeaderAction_HeaderName, &sAddHeaderAction_HeaderValue}}
+var mAddonInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sAddonInstance_AddonInstanceId, &sAddonInstance_AddonSubscriptionId, &sAddonInstance_AddonName, &sAddonInstance_AddonInstanceArn, &sAddonInstance_CreatedTimestamp}}
+var m_AddonInstances = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddonInstances_member}}
+var mAddonSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sAddonSubscription_AddonSubscriptionId, &sAddonSubscription_AddonName, &sAddonSubscription_AddonSubscriptionArn, &sAddonSubscription_CreatedTimestamp}}
+var m_AddonSubscriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddonSubscriptions_member}}
+var mAddressFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressFilter_AddressPrefix}}
+var mAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressList_AddressListId, &sAddressList_AddressListArn, &sAddressList_AddressListName, &sAddressList_CreatedTimestamp, &sAddressList_LastUpdatedTimestamp}}
+var m_AddressLists = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddressLists_member}}
+var mAnalysis = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysis_Analyzer, &sAnalysis_ResultField}}
+var mArchive = smithy.SchemaMembers{List: []*smithy.Schema{&sArchive_ArchiveId, &sArchive_ArchiveName, &sArchive_ArchiveState, &sArchive_LastUpdatedTimestamp}}
+var mArchiveAction = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveAction_ActionFailurePolicy, &sArchiveAction_TargetArchive}}
+var mArchiveBooleanEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveBooleanEmailAttribute_HAS_ATTACHMENTS}}
+var mArchiveBooleanExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveBooleanExpression_Evaluate, &sArchiveBooleanExpression_Operator}}
+var mArchiveBooleanOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveBooleanOperator_IS_TRUE, &sArchiveBooleanOperator_IS_FALSE}}
+var mArchiveBooleanToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveBooleanToEvaluate_Attribute}}
+var mArchiveFilterCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveFilterCondition_StringExpression, &sArchiveFilterCondition_BooleanExpression}}
+var m_ArchiveFilterConditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArchiveFilterConditions_member}}
+var mArchiveFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveFilters_Include, &sArchiveFilters_Unless}}
+var mArchiveRetention = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveRetention_RetentionPeriod}}
+var m_ArchivesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArchivesList_member}}
+var mArchiveState = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveState_ACTIVE, &sArchiveState_PENDING_DELETION}}
+var mArchiveStringEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveStringEmailAttribute_TO, &sArchiveStringEmailAttribute_FROM, &sArchiveStringEmailAttribute_CC, &sArchiveStringEmailAttribute_SUBJECT, &sArchiveStringEmailAttribute_ENVELOPE_TO, &sArchiveStringEmailAttribute_ENVELOPE_FROM}}
+var mArchiveStringExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveStringExpression_Evaluate, &sArchiveStringExpression_Operator, &sArchiveStringExpression_Values}}
+var mArchiveStringOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveStringOperator_CONTAINS}}
+var mArchiveStringToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveStringToEvaluate_Attribute}}
+var mBounceAction = smithy.SchemaMembers{List: []*smithy.Schema{&sBounceAction_ActionFailurePolicy, &sBounceAction_RoleArn, &sBounceAction_Sender, &sBounceAction_StatusCode, &sBounceAction_SmtpReplyCode, &sBounceAction_DiagnosticMessage, &sBounceAction_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDeliverToMailboxAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliverToMailboxAction_ActionFailurePolicy, &sDeliverToMailboxAction_MailboxArn, &sDeliverToMailboxAction_RoleArn}}
+var mDeliverToQBusinessAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliverToQBusinessAction_ActionFailurePolicy, &sDeliverToQBusinessAction_ApplicationId, &sDeliverToQBusinessAction_IndexId, &sDeliverToQBusinessAction_RoleArn}}
+var m_EmailReceivedHeadersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EmailReceivedHeadersList_member}}
+var mEnvelope = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvelope_Helo, &sEnvelope_From, &sEnvelope_To}}
+var mExportDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExportDestinationConfiguration_S3}}
+var mExportState = smithy.SchemaMembers{List: []*smithy.Schema{&sExportState_QUEUED, &sExportState_PREPROCESSING, &sExportState_PROCESSING, &sExportState_COMPLETED, &sExportState_FAILED, &sExportState_CANCELLED}}
+var mExportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExportStatus_SubmissionTimestamp, &sExportStatus_CompletionTimestamp, &sExportStatus_State, &sExportStatus_ErrorMessage}}
+var mExportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSummary_ExportId, &sExportSummary_Status}}
+var m_ExportSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExportSummaryList_member}}
+var mImportDataFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDataFormat_ImportDataType}}
+var mImportDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDataType_CSV, &sImportDataType_JSON}}
+var mImportJob = smithy.SchemaMembers{List: []*smithy.Schema{&sImportJob_JobId, &sImportJob_Name, &sImportJob_Status, &sImportJob_PreSignedUrl, &sImportJob_ImportedItemsCount, &sImportJob_FailedItemsCount, &sImportJob_ImportDataFormat, &sImportJob_AddressListId, &sImportJob_CreatedTimestamp, &sImportJob_StartTimestamp, &sImportJob_CompletedTimestamp, &sImportJob_Error}, Hash: &hImportJob}
+var m_ImportJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImportJobs_member}}
+var mImportJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sImportJobStatus_CREATED, &sImportJobStatus_PROCESSING, &sImportJobStatus_COMPLETED, &sImportJobStatus_FAILED, &sImportJobStatus_STOPPED}}
+var m_IngressAddressListArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngressAddressListArnList_member}}
+var mIngressAddressListEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressAddressListEmailAttribute_RECIPIENT}}
+var mIngressAnalysis = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressAnalysis_Analyzer, &sIngressAnalysis_ResultField}}
+var mIngressBooleanExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressBooleanExpression_Evaluate, &sIngressBooleanExpression_Operator}}
+var mIngressBooleanOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressBooleanOperator_IS_TRUE, &sIngressBooleanOperator_IS_FALSE}}
+var mIngressBooleanToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressBooleanToEvaluate_Analysis, &sIngressBooleanToEvaluate_IsInAddressList}}
+var mIngressIpOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpOperator_CIDR_MATCHES, &sIngressIpOperator_NOT_CIDR_MATCHES}}
+var mIngressIpToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpToEvaluate_Attribute}}
+var mIngressIpv4Attribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpv4Attribute_SENDER_IP}}
+var mIngressIpv4Expression = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpv4Expression_Evaluate, &sIngressIpv4Expression_Operator, &sIngressIpv4Expression_Values}}
+var mIngressIpv6Attribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpv6Attribute_SENDER_IPV6}}
+var mIngressIpv6Expression = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpv6Expression_Evaluate, &sIngressIpv6Expression_Operator, &sIngressIpv6Expression_Values}}
+var mIngressIpv6ToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIpv6ToEvaluate_Attribute}}
+var mIngressIsInAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressIsInAddressList_Attribute, &sIngressIsInAddressList_AddressLists}}
+var mIngressPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPoint_IngressPointName, &sIngressPoint_IngressPointId, &sIngressPoint_Status, &sIngressPoint_Type, &sIngressPoint_ARecord}}
+var mIngressPointAuthConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointAuthConfiguration_IngressPointPasswordConfiguration, &sIngressPointAuthConfiguration_SecretArn, &sIngressPointAuthConfiguration_TlsAuthConfiguration}}
+var mIngressPointConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointConfiguration_SmtpPassword, &sIngressPointConfiguration_SecretArn, &sIngressPointConfiguration_TlsAuthConfiguration}}
+var mIngressPointPasswordConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointPasswordConfiguration_SmtpPasswordVersion, &sIngressPointPasswordConfiguration_PreviousSmtpPasswordVersion, &sIngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp}}
+var m_IngressPointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngressPointsList_member}}
+var mIngressPointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointStatus_PROVISIONING, &sIngressPointStatus_DEPROVISIONING, &sIngressPointStatus_UPDATING, &sIngressPointStatus_ACTIVE, &sIngressPointStatus_CLOSED, &sIngressPointStatus_FAILED, &sIngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST}}
+var mIngressPointStatusToUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointStatusToUpdate_ACTIVE, &sIngressPointStatusToUpdate_CLOSED}}
+var mIngressPointType = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressPointType_OPEN, &sIngressPointType_AUTH, &sIngressPointType_MTLS}}
+var mIngressStringEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressStringEmailAttribute_RECIPIENT}}
+var mIngressStringExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressStringExpression_Evaluate, &sIngressStringExpression_Operator, &sIngressStringExpression_Values}}
+var mIngressStringOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressStringOperator_EQUALS, &sIngressStringOperator_NOT_EQUALS, &sIngressStringOperator_STARTS_WITH, &sIngressStringOperator_ENDS_WITH, &sIngressStringOperator_CONTAINS}}
+var mIngressStringToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressStringToEvaluate_Attribute, &sIngressStringToEvaluate_Analysis}}
+var mIngressTlsAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressTlsAttribute_TLS_PROTOCOL}}
+var mIngressTlsProtocolAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressTlsProtocolAttribute_TLS1_2, &sIngressTlsProtocolAttribute_TLS1_3}}
+var mIngressTlsProtocolExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressTlsProtocolExpression_Evaluate, &sIngressTlsProtocolExpression_Operator, &sIngressTlsProtocolExpression_Value}}
+var mIngressTlsProtocolOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressTlsProtocolOperator_MINIMUM_TLS_VERSION, &sIngressTlsProtocolOperator_IS}}
+var mIngressTlsProtocolToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressTlsProtocolToEvaluate_Attribute}}
+var mInvokeLambdaAction = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeLambdaAction_ActionFailurePolicy, &sInvokeLambdaAction_FunctionArn, &sInvokeLambdaAction_InvocationType, &sInvokeLambdaAction_RoleArn, &sInvokeLambdaAction_RetryTimeMinutes}}
+var mIpType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpType_IPV4, &sIpType_DUAL_STACK}}
+var m_Ipv4Cidrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ipv4Cidrs_member}}
+var m_Ipv6Cidrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ipv6Cidrs_member}}
+var mLambdaInvocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaInvocationType_EVENT, &sLambdaInvocationType_REQUEST_RESPONSE}}
+var mMailFrom = smithy.SchemaMembers{List: []*smithy.Schema{&sMailFrom_REPLACE, &sMailFrom_PRESERVE}}
+var mMessageBody = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageBody_Text, &sMessageBody_Html, &sMessageBody_MessageMalformed}}
+var mMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadata_Timestamp, &sMetadata_IngressPointId, &sMetadata_TrafficPolicyId, &sMetadata_RuleSetId, &sMetadata_SenderHostname, &sMetadata_SenderIpAddress, &sMetadata_TlsCipherSuite, &sMetadata_TlsProtocol, &sMetadata_SendingMethod, &sMetadata_SourceIdentity, &sMetadata_SendingPool, &sMetadata_ConfigurationSet, &sMetadata_SourceArn}, Hash: &hMetadata}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_PublicNetworkConfiguration, &sNetworkConfiguration_PrivateNetworkConfiguration}}
+var mPolicyCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyCondition_StringExpression, &sPolicyCondition_IpExpression, &sPolicyCondition_Ipv6Expression, &sPolicyCondition_TlsExpression, &sPolicyCondition_BooleanExpression}}
+var m_PolicyConditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyConditions_member}}
+var mPolicyStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyStatement_Conditions, &sPolicyStatement_Action}}
+var m_PolicyStatementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyStatementList_member}}
+var mPrivateNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateNetworkConfiguration_VpcEndpointId}}
+var mPublicNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicNetworkConfiguration_IpType}}
+var m_Recipients = smithy.SchemaMembers{List: []*smithy.Schema{&s_Recipients_member}}
+var mRelay = smithy.SchemaMembers{List: []*smithy.Schema{&sRelay_RelayId, &sRelay_RelayName, &sRelay_LastModifiedTimestamp}}
+var mRelayAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRelayAction_ActionFailurePolicy, &sRelayAction_Relay, &sRelayAction_MailFrom}}
+var mRelayAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sRelayAuthentication_SecretArn, &sRelayAuthentication_NoAuthentication}}
+var m_Relays = smithy.SchemaMembers{List: []*smithy.Schema{&s_Relays_member}}
+var mReplaceRecipientAction = smithy.SchemaMembers{List: []*smithy.Schema{&sReplaceRecipientAction_ReplaceWith}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRetentionPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionPeriod_THREE_MONTHS, &sRetentionPeriod_SIX_MONTHS, &sRetentionPeriod_NINE_MONTHS, &sRetentionPeriod_ONE_YEAR, &sRetentionPeriod_EIGHTEEN_MONTHS, &sRetentionPeriod_TWO_YEARS, &sRetentionPeriod_THIRTY_MONTHS, &sRetentionPeriod_THREE_YEARS, &sRetentionPeriod_FOUR_YEARS, &sRetentionPeriod_FIVE_YEARS, &sRetentionPeriod_SIX_YEARS, &sRetentionPeriod_SEVEN_YEARS, &sRetentionPeriod_EIGHT_YEARS, &sRetentionPeriod_NINE_YEARS, &sRetentionPeriod_TEN_YEARS, &sRetentionPeriod_PERMANENT}, Hash: &hRetentionPeriod}
+var mRow = smithy.SchemaMembers{List: []*smithy.Schema{&sRow_ArchivedMessageId, &sRow_ReceivedTimestamp, &sRow_Date, &sRow_To, &sRow_From, &sRow_Cc, &sRow_Subject, &sRow_MessageId, &sRow_HasAttachments, &sRow_ReceivedHeaders, &sRow_InReplyTo, &sRow_XMailer, &sRow_XOriginalMailer, &sRow_XPriority, &sRow_IngressPointId, &sRow_SenderHostname, &sRow_SenderIpAddress, &sRow_Envelope, &sRow_SourceArn}, Hash: &hRow}
+var m_RowsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RowsList_member}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_Name, &sRule_Conditions, &sRule_Unless, &sRule_Actions}}
+var mRuleAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleAction_Drop, &sRuleAction_Relay, &sRuleAction_Archive, &sRuleAction_WriteToS3, &sRuleAction_Send, &sRuleAction_AddHeader, &sRuleAction_ReplaceRecipient, &sRuleAction_DeliverToMailbox, &sRuleAction_DeliverToQBusiness, &sRuleAction_PublishToSns, &sRuleAction_Bounce, &sRuleAction_InvokeLambda}, Hash: &hRuleAction}
+var m_RuleActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleActions_member}}
+var m_RuleAddressListArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleAddressListArnList_member}}
+var mRuleAddressListEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleAddressListEmailAttribute_RECIPIENT, &sRuleAddressListEmailAttribute_MAIL_FROM, &sRuleAddressListEmailAttribute_SENDER, &sRuleAddressListEmailAttribute_FROM, &sRuleAddressListEmailAttribute_TO, &sRuleAddressListEmailAttribute_CC}}
+var mRuleBooleanEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED, &sRuleBooleanEmailAttribute_TLS, &sRuleBooleanEmailAttribute_TLS_WRAPPED}}
+var mRuleBooleanExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleBooleanExpression_Evaluate, &sRuleBooleanExpression_Operator}}
+var mRuleBooleanOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleBooleanOperator_IS_TRUE, &sRuleBooleanOperator_IS_FALSE}}
+var mRuleBooleanToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleBooleanToEvaluate_Attribute, &sRuleBooleanToEvaluate_Analysis, &sRuleBooleanToEvaluate_IsInAddressList}}
+var mRuleClientCertificateAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleClientCertificateAttribute_CN, &sRuleClientCertificateAttribute_SAN_RFC822_NAME, &sRuleClientCertificateAttribute_SAN_DNS_NAME, &sRuleClientCertificateAttribute_SAN_DIRECTORY_NAME, &sRuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER, &sRuleClientCertificateAttribute_SAN_IP_ADDRESS, &sRuleClientCertificateAttribute_SAN_REGISTERED_ID, &sRuleClientCertificateAttribute_SERIAL_NUMBER}}
+var mRuleCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleCondition_BooleanExpression, &sRuleCondition_StringExpression, &sRuleCondition_NumberExpression, &sRuleCondition_IpExpression, &sRuleCondition_VerdictExpression, &sRuleCondition_DmarcExpression}}
+var m_RuleConditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleConditions_member}}
+var mRuleDmarcExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleDmarcExpression_Operator, &sRuleDmarcExpression_Values}}
+var mRuleDmarcOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleDmarcOperator_EQUALS, &sRuleDmarcOperator_NOT_EQUALS}}
+var mRuleDmarcPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleDmarcPolicy_NONE, &sRuleDmarcPolicy_QUARANTINE, &sRuleDmarcPolicy_REJECT}}
+var m_RuleDmarcValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleDmarcValueList_member}}
+var mRuleIpEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleIpEmailAttribute_SOURCE_IP}}
+var mRuleIpExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleIpExpression_Evaluate, &sRuleIpExpression_Operator, &sRuleIpExpression_Values}}
+var mRuleIpOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleIpOperator_CIDR_MATCHES, &sRuleIpOperator_NOT_CIDR_MATCHES}}
+var mRuleIpToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleIpToEvaluate_Attribute}}
+var m_RuleIpValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleIpValueList_member}}
+var mRuleIsInAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleIsInAddressList_Attribute, &sRuleIsInAddressList_AddressLists}}
+var mRuleNumberEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleNumberEmailAttribute_MESSAGE_SIZE}}
+var mRuleNumberExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleNumberExpression_Evaluate, &sRuleNumberExpression_Operator, &sRuleNumberExpression_Value}}
+var mRuleNumberOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleNumberOperator_EQUALS, &sRuleNumberOperator_NOT_EQUALS, &sRuleNumberOperator_LESS_THAN, &sRuleNumberOperator_GREATER_THAN, &sRuleNumberOperator_LESS_THAN_OR_EQUAL, &sRuleNumberOperator_GREATER_THAN_OR_EQUAL}}
+var mRuleNumberToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleNumberToEvaluate_Attribute}}
+var m_Rules = smithy.SchemaMembers{List: []*smithy.Schema{&s_Rules_member}}
+var mRuleSet = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleSet_RuleSetId, &sRuleSet_RuleSetName, &sRuleSet_LastModificationDate}}
+var m_RuleSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleSets_member}}
+var mRuleStringEmailAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStringEmailAttribute_MAIL_FROM, &sRuleStringEmailAttribute_HELO, &sRuleStringEmailAttribute_RECIPIENT, &sRuleStringEmailAttribute_SENDER, &sRuleStringEmailAttribute_FROM, &sRuleStringEmailAttribute_SUBJECT, &sRuleStringEmailAttribute_TO, &sRuleStringEmailAttribute_CC}}
+var mRuleStringExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStringExpression_Evaluate, &sRuleStringExpression_Operator, &sRuleStringExpression_Values}}
+var m_RuleStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleStringList_member}}
+var mRuleStringOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStringOperator_EQUALS, &sRuleStringOperator_NOT_EQUALS, &sRuleStringOperator_STARTS_WITH, &sRuleStringOperator_ENDS_WITH, &sRuleStringOperator_CONTAINS}}
+var mRuleStringToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStringToEvaluate_Attribute, &sRuleStringToEvaluate_MimeHeaderAttribute, &sRuleStringToEvaluate_Analysis, &sRuleStringToEvaluate_ClientCertificateAttribute}}
+var mRuleVerdict = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleVerdict_PASS, &sRuleVerdict_FAIL, &sRuleVerdict_GRAY, &sRuleVerdict_PROCESSING_FAILED}}
+var mRuleVerdictAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleVerdictAttribute_SPF, &sRuleVerdictAttribute_DKIM}}
+var mRuleVerdictExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleVerdictExpression_Evaluate, &sRuleVerdictExpression_Operator, &sRuleVerdictExpression_Values}}
+var mRuleVerdictOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleVerdictOperator_EQUALS, &sRuleVerdictOperator_NOT_EQUALS}}
+var mRuleVerdictToEvaluate = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleVerdictToEvaluate_Attribute, &sRuleVerdictToEvaluate_Analysis}}
+var m_RuleVerdictValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleVerdictValueList_member}}
+var mS3Action = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Action_ActionFailurePolicy, &sS3Action_RoleArn, &sS3Action_S3Bucket, &sS3Action_S3Prefix, &sS3Action_S3SseKmsKeyId}}
+var mS3ExportDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ExportDestinationConfiguration_S3Location}}
+var mSavedAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sSavedAddress_Address, &sSavedAddress_CreatedTimestamp}}
+var m_SavedAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavedAddresses_member}}
+var mSearchState = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchState_QUEUED, &sSearchState_RUNNING, &sSearchState_COMPLETED, &sSearchState_FAILED, &sSearchState_CANCELLED}}
+var mSearchStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchStatus_SubmissionTimestamp, &sSearchStatus_CompletionTimestamp, &sSearchStatus_State, &sSearchStatus_ErrorMessage}}
+var mSearchSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSummary_SearchId, &sSearchSummary_Status}}
+var m_SearchSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchSummaryList_member}}
+var mSendAction = smithy.SchemaMembers{List: []*smithy.Schema{&sSendAction_ActionFailurePolicy, &sSendAction_RoleArn}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSnsAction = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsAction_ActionFailurePolicy, &sSnsAction_TopicArn, &sSnsAction_RoleArn, &sSnsAction_Encoding, &sSnsAction_PayloadType}}
+var mSnsNotificationEncoding = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsNotificationEncoding_UTF_8, &sSnsNotificationEncoding_BASE64}}
+var mSnsNotificationPayloadType = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsNotificationPayloadType_HEADERS, &sSnsNotificationPayloadType_CONTENT}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_StringValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringValueList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTlsAuthConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsAuthConfiguration_TrustStore}}
+var mTlsPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsPolicy_REQUIRED, &sTlsPolicy_OPTIONAL, &sTlsPolicy_FIPS}}
+var mTrafficPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTrafficPolicy_TrafficPolicyName, &sTrafficPolicy_TrafficPolicyId, &sTrafficPolicy_DefaultAction}}
+var m_TrafficPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrafficPolicyList_member}}
+var mTrustStore = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStore_CAContent, &sTrustStore_CrlContent, &sTrustStore_KmsKeyArn}}
+var mTrustStoreResponseOption = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreResponseOption_EXCLUDE, &sTrustStoreResponseOption_INCLUDE}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateAddonInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddonInstanceRequest_ClientToken, &sCreateAddonInstanceRequest_AddonSubscriptionId, &sCreateAddonInstanceRequest_Tags}}
+var mCreateAddonInstanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddonInstanceResponse_AddonInstanceId}}
+var mCreateAddonSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddonSubscriptionRequest_ClientToken, &sCreateAddonSubscriptionRequest_AddonName, &sCreateAddonSubscriptionRequest_Tags}}
+var mCreateAddonSubscriptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddonSubscriptionResponse_AddonSubscriptionId}}
+var mCreateAddressListImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressListImportJobRequest_ClientToken, &sCreateAddressListImportJobRequest_AddressListId, &sCreateAddressListImportJobRequest_Name, &sCreateAddressListImportJobRequest_ImportDataFormat}}
+var mCreateAddressListImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressListImportJobResponse_JobId, &sCreateAddressListImportJobResponse_PreSignedUrl}}
+var mCreateAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressListRequest_ClientToken, &sCreateAddressListRequest_AddressListName, &sCreateAddressListRequest_Tags}}
+var mCreateAddressListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressListResponse_AddressListId}}
+var mCreateArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateArchiveRequest_ClientToken, &sCreateArchiveRequest_ArchiveName, &sCreateArchiveRequest_Retention, &sCreateArchiveRequest_KmsKeyArn, &sCreateArchiveRequest_Tags}}
+var mCreateArchiveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateArchiveResponse_ArchiveId}}
+var mCreateIngressPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngressPointRequest_ClientToken, &sCreateIngressPointRequest_IngressPointName, &sCreateIngressPointRequest_Type, &sCreateIngressPointRequest_RuleSetId, &sCreateIngressPointRequest_TrafficPolicyId, &sCreateIngressPointRequest_IngressPointConfiguration, &sCreateIngressPointRequest_NetworkConfiguration, &sCreateIngressPointRequest_TlsPolicy, &sCreateIngressPointRequest_Tags}, Hash: &hCreateIngressPointRequest}
+var mCreateIngressPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngressPointResponse_IngressPointId}}
+var mCreateRelayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRelayRequest_ClientToken, &sCreateRelayRequest_RelayName, &sCreateRelayRequest_ServerName, &sCreateRelayRequest_ServerPort, &sCreateRelayRequest_Authentication, &sCreateRelayRequest_Tags}}
+var mCreateRelayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRelayResponse_RelayId}}
+var mCreateRuleSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleSetRequest_ClientToken, &sCreateRuleSetRequest_RuleSetName, &sCreateRuleSetRequest_Rules, &sCreateRuleSetRequest_Tags}}
+var mCreateRuleSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleSetResponse_RuleSetId}}
+var mCreateTrafficPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrafficPolicyRequest_ClientToken, &sCreateTrafficPolicyRequest_TrafficPolicyName, &sCreateTrafficPolicyRequest_PolicyStatements, &sCreateTrafficPolicyRequest_DefaultAction, &sCreateTrafficPolicyRequest_MaxMessageSizeBytes, &sCreateTrafficPolicyRequest_Tags}}
+var mCreateTrafficPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrafficPolicyResponse_TrafficPolicyId}}
+var mDeleteAddonInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAddonInstanceRequest_AddonInstanceId}}
+var mDeleteAddonSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAddonSubscriptionRequest_AddonSubscriptionId}}
+var mDeleteAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAddressListRequest_AddressListId}}
+var mDeleteArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteArchiveRequest_ArchiveId}}
+var mDeleteIngressPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIngressPointRequest_IngressPointId}}
+var mDeleteRelayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRelayRequest_RelayId}}
+var mDeleteRuleSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleSetRequest_RuleSetId}}
+var mDeleteTrafficPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrafficPolicyRequest_TrafficPolicyId}}
+var mDeregisterMemberFromAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterMemberFromAddressListRequest_AddressListId, &sDeregisterMemberFromAddressListRequest_Address}}
+var mGetAddonInstanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddonInstanceRequest_AddonInstanceId}}
+var mGetAddonInstanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddonInstanceResponse_AddonSubscriptionId, &sGetAddonInstanceResponse_AddonName, &sGetAddonInstanceResponse_AddonInstanceArn, &sGetAddonInstanceResponse_CreatedTimestamp}}
+var mGetAddonSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddonSubscriptionRequest_AddonSubscriptionId}}
+var mGetAddonSubscriptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddonSubscriptionResponse_AddonName, &sGetAddonSubscriptionResponse_AddonSubscriptionArn, &sGetAddonSubscriptionResponse_CreatedTimestamp}}
+var mGetAddressListImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddressListImportJobRequest_JobId}}
+var mGetAddressListImportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddressListImportJobResponse_JobId, &sGetAddressListImportJobResponse_Name, &sGetAddressListImportJobResponse_Status, &sGetAddressListImportJobResponse_PreSignedUrl, &sGetAddressListImportJobResponse_ImportedItemsCount, &sGetAddressListImportJobResponse_FailedItemsCount, &sGetAddressListImportJobResponse_ImportDataFormat, &sGetAddressListImportJobResponse_AddressListId, &sGetAddressListImportJobResponse_CreatedTimestamp, &sGetAddressListImportJobResponse_StartTimestamp, &sGetAddressListImportJobResponse_CompletedTimestamp, &sGetAddressListImportJobResponse_Error}, Hash: &hGetAddressListImportJobResponse}
+var mGetAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddressListRequest_AddressListId}}
+var mGetAddressListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAddressListResponse_AddressListId, &sGetAddressListResponse_AddressListArn, &sGetAddressListResponse_AddressListName, &sGetAddressListResponse_CreatedTimestamp, &sGetAddressListResponse_LastUpdatedTimestamp}}
+var mGetArchiveExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveExportRequest_ExportId}}
+var mGetArchiveExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveExportResponse_ArchiveId, &sGetArchiveExportResponse_Filters, &sGetArchiveExportResponse_FromTimestamp, &sGetArchiveExportResponse_ToTimestamp, &sGetArchiveExportResponse_MaxResults, &sGetArchiveExportResponse_ExportDestinationConfiguration, &sGetArchiveExportResponse_Status}}
+var mGetArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveRequest_ArchiveId}}
+var mGetArchiveMessageContentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveMessageContentRequest_ArchivedMessageId}}
+var mGetArchiveMessageContentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveMessageContentResponse_Body}}
+var mGetArchiveMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveMessageRequest_ArchivedMessageId}}
+var mGetArchiveMessageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveMessageResponse_MessageDownloadLink, &sGetArchiveMessageResponse_Metadata, &sGetArchiveMessageResponse_Envelope}}
+var mGetArchiveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveResponse_ArchiveId, &sGetArchiveResponse_ArchiveName, &sGetArchiveResponse_ArchiveArn, &sGetArchiveResponse_ArchiveState, &sGetArchiveResponse_Retention, &sGetArchiveResponse_CreatedTimestamp, &sGetArchiveResponse_LastUpdatedTimestamp, &sGetArchiveResponse_KmsKeyArn}}
+var mGetArchiveSearchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveSearchRequest_SearchId}}
+var mGetArchiveSearchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveSearchResponse_ArchiveId, &sGetArchiveSearchResponse_Filters, &sGetArchiveSearchResponse_FromTimestamp, &sGetArchiveSearchResponse_ToTimestamp, &sGetArchiveSearchResponse_MaxResults, &sGetArchiveSearchResponse_Status}}
+var mGetArchiveSearchResultsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveSearchResultsRequest_SearchId}}
+var mGetArchiveSearchResultsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetArchiveSearchResultsResponse_Rows}}
+var mGetIngressPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngressPointRequest_IngressPointId, &sGetIngressPointRequest_IncludeTrustStoreContents}}
+var mGetIngressPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngressPointResponse_IngressPointId, &sGetIngressPointResponse_IngressPointName, &sGetIngressPointResponse_IngressPointArn, &sGetIngressPointResponse_Status, &sGetIngressPointResponse_Type, &sGetIngressPointResponse_ARecord, &sGetIngressPointResponse_RuleSetId, &sGetIngressPointResponse_TrafficPolicyId, &sGetIngressPointResponse_IngressPointAuthConfiguration, &sGetIngressPointResponse_NetworkConfiguration, &sGetIngressPointResponse_TlsPolicy, &sGetIngressPointResponse_CreatedTimestamp, &sGetIngressPointResponse_LastUpdatedTimestamp}, Hash: &hGetIngressPointResponse}
+var mGetMemberOfAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMemberOfAddressListRequest_AddressListId, &sGetMemberOfAddressListRequest_Address}}
+var mGetMemberOfAddressListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMemberOfAddressListResponse_Address, &sGetMemberOfAddressListResponse_CreatedTimestamp}}
+var mGetRelayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRelayRequest_RelayId}}
+var mGetRelayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRelayResponse_RelayId, &sGetRelayResponse_RelayArn, &sGetRelayResponse_RelayName, &sGetRelayResponse_ServerName, &sGetRelayResponse_ServerPort, &sGetRelayResponse_Authentication, &sGetRelayResponse_CreatedTimestamp, &sGetRelayResponse_LastModifiedTimestamp}}
+var mGetRuleSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleSetRequest_RuleSetId}}
+var mGetRuleSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleSetResponse_RuleSetId, &sGetRuleSetResponse_RuleSetArn, &sGetRuleSetResponse_RuleSetName, &sGetRuleSetResponse_CreatedDate, &sGetRuleSetResponse_LastModificationDate, &sGetRuleSetResponse_Rules}}
+var mGetTrafficPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrafficPolicyRequest_TrafficPolicyId}}
+var mGetTrafficPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrafficPolicyResponse_TrafficPolicyName, &sGetTrafficPolicyResponse_TrafficPolicyId, &sGetTrafficPolicyResponse_TrafficPolicyArn, &sGetTrafficPolicyResponse_PolicyStatements, &sGetTrafficPolicyResponse_MaxMessageSizeBytes, &sGetTrafficPolicyResponse_DefaultAction, &sGetTrafficPolicyResponse_CreatedTimestamp, &sGetTrafficPolicyResponse_LastUpdatedTimestamp}}
+var mListAddonInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddonInstancesRequest_NextToken, &sListAddonInstancesRequest_PageSize}}
+var mListAddonInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddonInstancesResponse_AddonInstances, &sListAddonInstancesResponse_NextToken}}
+var mListAddonSubscriptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddonSubscriptionsRequest_NextToken, &sListAddonSubscriptionsRequest_PageSize}}
+var mListAddonSubscriptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddonSubscriptionsResponse_AddonSubscriptions, &sListAddonSubscriptionsResponse_NextToken}}
+var mListAddressListImportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddressListImportJobsRequest_AddressListId, &sListAddressListImportJobsRequest_NextToken, &sListAddressListImportJobsRequest_PageSize}}
+var mListAddressListImportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddressListImportJobsResponse_ImportJobs, &sListAddressListImportJobsResponse_NextToken}}
+var mListAddressListsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddressListsRequest_NextToken, &sListAddressListsRequest_PageSize}}
+var mListAddressListsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAddressListsResponse_AddressLists, &sListAddressListsResponse_NextToken}}
+var mListArchiveExportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchiveExportsRequest_ArchiveId, &sListArchiveExportsRequest_NextToken, &sListArchiveExportsRequest_PageSize}}
+var mListArchiveExportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchiveExportsResponse_Exports, &sListArchiveExportsResponse_NextToken}}
+var mListArchiveSearchesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchiveSearchesRequest_ArchiveId, &sListArchiveSearchesRequest_NextToken, &sListArchiveSearchesRequest_PageSize}}
+var mListArchiveSearchesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchiveSearchesResponse_Searches, &sListArchiveSearchesResponse_NextToken}}
+var mListArchivesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchivesRequest_NextToken, &sListArchivesRequest_PageSize}}
+var mListArchivesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchivesResponse_Archives, &sListArchivesResponse_NextToken}}
+var mListIngressPointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngressPointsRequest_PageSize, &sListIngressPointsRequest_NextToken}}
+var mListIngressPointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngressPointsResponse_IngressPoints, &sListIngressPointsResponse_NextToken}}
+var mListMembersOfAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersOfAddressListRequest_AddressListId, &sListMembersOfAddressListRequest_Filter, &sListMembersOfAddressListRequest_NextToken, &sListMembersOfAddressListRequest_PageSize}}
+var mListMembersOfAddressListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersOfAddressListResponse_Addresses, &sListMembersOfAddressListResponse_NextToken}}
+var mListRelaysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRelaysRequest_PageSize, &sListRelaysRequest_NextToken}}
+var mListRelaysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRelaysResponse_Relays, &sListRelaysResponse_NextToken}}
+var mListRuleSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleSetsRequest_NextToken, &sListRuleSetsRequest_PageSize}}
+var mListRuleSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleSetsResponse_RuleSets, &sListRuleSetsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTrafficPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrafficPoliciesRequest_PageSize, &sListTrafficPoliciesRequest_NextToken}}
+var mListTrafficPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrafficPoliciesResponse_TrafficPolicies, &sListTrafficPoliciesResponse_NextToken}}
+var mRegisterMemberToAddressListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterMemberToAddressListRequest_AddressListId, &sRegisterMemberToAddressListRequest_Address}}
+var mStartAddressListImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAddressListImportJobRequest_JobId}}
+var mStartArchiveExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartArchiveExportRequest_ArchiveId, &sStartArchiveExportRequest_Filters, &sStartArchiveExportRequest_FromTimestamp, &sStartArchiveExportRequest_ToTimestamp, &sStartArchiveExportRequest_MaxResults, &sStartArchiveExportRequest_ExportDestinationConfiguration, &sStartArchiveExportRequest_IncludeMetadata}}
+var mStartArchiveExportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartArchiveExportResponse_ExportId}}
+var mStartArchiveSearchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartArchiveSearchRequest_ArchiveId, &sStartArchiveSearchRequest_Filters, &sStartArchiveSearchRequest_FromTimestamp, &sStartArchiveSearchRequest_ToTimestamp, &sStartArchiveSearchRequest_MaxResults}}
+var mStartArchiveSearchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartArchiveSearchResponse_SearchId}}
+var mStopAddressListImportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopAddressListImportJobRequest_JobId}}
+var mStopArchiveExportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopArchiveExportRequest_ExportId}}
+var mStopArchiveSearchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopArchiveSearchRequest_SearchId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateArchiveRequest_ArchiveId, &sUpdateArchiveRequest_ArchiveName, &sUpdateArchiveRequest_Retention}}
+var mUpdateIngressPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIngressPointRequest_IngressPointId, &sUpdateIngressPointRequest_IngressPointName, &sUpdateIngressPointRequest_StatusToUpdate, &sUpdateIngressPointRequest_RuleSetId, &sUpdateIngressPointRequest_TrafficPolicyId, &sUpdateIngressPointRequest_IngressPointConfiguration, &sUpdateIngressPointRequest_TlsPolicy}}
+var mUpdateRelayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelayRequest_RelayId, &sUpdateRelayRequest_RelayName, &sUpdateRelayRequest_ServerName, &sUpdateRelayRequest_ServerPort, &sUpdateRelayRequest_Authentication}}
+var mUpdateRuleSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleSetRequest_RuleSetId, &sUpdateRuleSetRequest_RuleSetName, &sUpdateRuleSetRequest_Rules}}
+var mUpdateTrafficPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrafficPolicyRequest_TrafficPolicyId, &sUpdateTrafficPolicyRequest_TrafficPolicyName, &sUpdateTrafficPolicyRequest_PolicyStatements, &sUpdateTrafficPolicyRequest_DefaultAction, &sUpdateTrafficPolicyRequest_MaxMessageSizeBytes}}
+
+var hImportJob = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	6, 9, 0, 11, 3, 0, 0, 5, 0, 1, 10, 0, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 12, 0,
+	0, 0, 0, 0, 0, 7, 0, 8,
+}}
+var hMetadata = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 10, 0, 11, 0, 0, 4, 9, 2, 0, 5, 0, 8, 0, 0, 0, 0, 0, 13, 7, 6, 0, 0, 0,
+	0, 12, 1, 3, 0, 0, 0, 0,
+}}
+var hRetentionPeriod = smithy.MemberHash{Seed: 69, Slots: []uint16{
+	0, 0, 10, 0, 5, 0, 2, 13, 0, 0, 11, 6, 0, 4, 0, 0, 0, 3, 0, 0, 0, 9, 16, 0,
+	15, 14, 12, 7, 0, 0, 1, 8,
+}}
+var hRow = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 11, 13, 15, 0, 3, 0, 17, 4, 0, 0, 0, 0, 0,
+	0, 0, 19, 0, 0, 7, 0, 0, 0, 18, 0, 1, 0, 0, 10, 16, 5, 0, 0, 0, 0, 12, 0, 2,
+	0, 9, 0, 0, 0, 0, 0, 0, 0, 14, 6, 0, 0, 0, 0, 0,
+}}
+var hRuleAction = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 10, 0, 12, 0, 0, 6, 11, 1, 0, 0, 0, 3, 0, 5, 0, 0, 0, 0,
+	2, 0, 9, 7, 0, 0, 0, 8,
+}}
+var hCreateIngressPointRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 0, 9, 4, 0, 0, 0, 0, 5, 0, 0, 1, 0,
+	0, 0, 0, 0, 2, 6, 8, 0,
+}}
+var hGetAddressListImportJobResponse = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	6, 9, 0, 11, 3, 0, 0, 5, 0, 1, 10, 0, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 12, 0,
+	0, 0, 0, 0, 0, 7, 0, 8,
+}}
+var hGetIngressPointResponse = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 1, 6, 10, 2, 0, 11, 3, 0, 0, 0, 0, 0, 0, 9, 4, 0, 0, 13,
+	7, 0, 12, 5, 8, 0, 0, 0,
+}}
+
+var sCreateAddonInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonInstance, Type: smithy.ShapeTypeOperation, Ext: &eCreateAddonInstance})
+var sCreateAddonSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonSubscription, Type: smithy.ShapeTypeOperation, Ext: &eCreateAddonSubscription})
+var sCreateAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressList, Type: smithy.ShapeTypeOperation, Ext: &eCreateAddressList})
+var sCreateAddressListImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressListImportJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateAddressListImportJob})
+var sCreateArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchive, Type: smithy.ShapeTypeOperation, Ext: &eCreateArchive})
+var sCreateIngressPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngressPoint, Type: smithy.ShapeTypeOperation, Ext: &eCreateIngressPoint})
+var sCreateRelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelay, Type: smithy.ShapeTypeOperation, Ext: &eCreateRelay})
+var sCreateRuleSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleSet, Type: smithy.ShapeTypeOperation, Ext: &eCreateRuleSet})
+var sCreateTrafficPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrafficPolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreateTrafficPolicy})
+var sDeleteAddonInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonInstance, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAddonInstance})
+var sDeleteAddonSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonSubscription, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAddonSubscription})
+var sDeleteAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddressList, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAddressList})
+var sDeleteArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchive, Type: smithy.ShapeTypeOperation, Ext: &eDeleteArchive})
+var sDeleteIngressPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngressPoint, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIngressPoint})
+var sDeleteRelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelay, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRelay})
+var sDeleteRuleSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleSet, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRuleSet})
+var sDeleteTrafficPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrafficPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTrafficPolicy})
+var sDeregisterMemberFromAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMemberFromAddressList, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterMemberFromAddressList})
+var sGetAddonInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonInstance, Type: smithy.ShapeTypeOperation, Ext: &eGetAddonInstance})
+var sGetAddonSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonSubscription, Type: smithy.ShapeTypeOperation, Ext: &eGetAddonSubscription})
+var sGetAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressList, Type: smithy.ShapeTypeOperation, Ext: &eGetAddressList})
+var sGetAddressListImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressListImportJob, Type: smithy.ShapeTypeOperation, Ext: &eGetAddressListImportJob})
+var sGetArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchive, Type: smithy.ShapeTypeOperation, Ext: &eGetArchive})
+var sGetArchiveExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveExport, Type: smithy.ShapeTypeOperation, Ext: &eGetArchiveExport})
+var sGetArchiveMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessage, Type: smithy.ShapeTypeOperation, Ext: &eGetArchiveMessage})
+var sGetArchiveMessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessageContent, Type: smithy.ShapeTypeOperation, Ext: &eGetArchiveMessageContent})
+var sGetArchiveSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearch, Type: smithy.ShapeTypeOperation, Ext: &eGetArchiveSearch})
+var sGetArchiveSearchResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearchResults, Type: smithy.ShapeTypeOperation, Ext: &eGetArchiveSearchResults})
+var sGetIngressPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngressPoint, Type: smithy.ShapeTypeOperation, Ext: &eGetIngressPoint})
+var sGetMemberOfAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMemberOfAddressList, Type: smithy.ShapeTypeOperation, Ext: &eGetMemberOfAddressList})
+var sGetRelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelay, Type: smithy.ShapeTypeOperation, Ext: &eGetRelay})
+var sGetRuleSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleSet, Type: smithy.ShapeTypeOperation, Ext: &eGetRuleSet})
+var sGetTrafficPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrafficPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetTrafficPolicy})
+var sListAddonInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonInstances, Type: smithy.ShapeTypeOperation, Ext: &eListAddonInstances})
+var sListAddonSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonSubscriptions, Type: smithy.ShapeTypeOperation, Ext: &eListAddonSubscriptions})
+var sListAddressListImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressListImportJobs, Type: smithy.ShapeTypeOperation, Ext: &eListAddressListImportJobs})
+var sListAddressLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressLists, Type: smithy.ShapeTypeOperation, Ext: &eListAddressLists})
+var sListArchiveExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveExports, Type: smithy.ShapeTypeOperation, Ext: &eListArchiveExports})
+var sListArchives = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchives, Type: smithy.ShapeTypeOperation, Ext: &eListArchives})
+var sListArchiveSearches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveSearches, Type: smithy.ShapeTypeOperation, Ext: &eListArchiveSearches})
+var sListIngressPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngressPoints, Type: smithy.ShapeTypeOperation, Ext: &eListIngressPoints})
+var sListMembersOfAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersOfAddressList, Type: smithy.ShapeTypeOperation, Ext: &eListMembersOfAddressList})
+var sListRelays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelays, Type: smithy.ShapeTypeOperation, Ext: &eListRelays})
+var sListRuleSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleSets, Type: smithy.ShapeTypeOperation, Ext: &eListRuleSets})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTrafficPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrafficPolicies, Type: smithy.ShapeTypeOperation, Ext: &eListTrafficPolicies})
+var sRegisterMemberToAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMemberToAddressList, Type: smithy.ShapeTypeOperation, Ext: &eRegisterMemberToAddressList})
+var sStartAddressListImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAddressListImportJob, Type: smithy.ShapeTypeOperation, Ext: &eStartAddressListImportJob})
+var sStartArchiveExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveExport, Type: smithy.ShapeTypeOperation, Ext: &eStartArchiveExport})
+var sStartArchiveSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveSearch, Type: smithy.ShapeTypeOperation, Ext: &eStartArchiveSearch})
+var sStopAddressListImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAddressListImportJob, Type: smithy.ShapeTypeOperation, Ext: &eStopAddressListImportJob})
+var sStopArchiveExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveExport, Type: smithy.ShapeTypeOperation, Ext: &eStopArchiveExport})
+var sStopArchiveSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveSearch, Type: smithy.ShapeTypeOperation, Ext: &eStopArchiveSearch})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchive, Type: smithy.ShapeTypeOperation, Ext: &eUpdateArchive})
+var sUpdateIngressPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngressPoint, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIngressPoint})
+var sUpdateRelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelay, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRelay})
+var sUpdateRuleSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleSet, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRuleSet})
+var sUpdateTrafficPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrafficPolicy, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTrafficPolicy})
+var s_MailManagerSvc = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailManagerSvc, Type: smithy.ShapeTypeService, Ext: &e_MailManagerSvc})
+var sAcceptAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &eAcceptAction})
+var sAcceptAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptAction_ALLOW})
+var sAcceptAction_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAcceptAction_DENY})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eActionFailurePolicy})
+var sActionFailurePolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionFailurePolicy_CONTINUE})
+var sActionFailurePolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionFailurePolicy_DROP})
+var sAddHeaderAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddHeaderAction, Members: &mAddHeaderAction, Type: smithy.ShapeTypeStructure, Ext: &eAddHeaderAction})
+var sAddHeaderAction_HeaderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderName", ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &eAddHeaderAction_HeaderName})
+var sAddHeaderAction_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderValue", ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &eAddHeaderAction_HeaderValue})
+var sAddonInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddonInstance, Members: &mAddonInstance, Type: smithy.ShapeTypeStructure, Ext: &eAddonInstance})
+var sAddonInstance_AddonInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceId", ID: &i_AddonInstanceId, Type: smithy.ShapeTypeString, Ext: &eAddonInstance_AddonInstanceId})
+var sAddonInstance_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eAddonInstance_AddonSubscriptionId})
+var sAddonInstance_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonName", ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &eAddonInstance_AddonName})
+var sAddonInstance_AddonInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceArn", ID: &i_AddonInstanceArn, Type: smithy.ShapeTypeString, Ext: &eAddonInstance_AddonInstanceArn})
+var sAddonInstance_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAddonInstance_CreatedTimestamp})
+var s_AddonInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonInstanceArn, Type: smithy.ShapeTypeString, Ext: &e_AddonInstanceArn})
+var s_AddonInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonInstanceId, Type: smithy.ShapeTypeString, Ext: &e_AddonInstanceId})
+var s_AddonInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonInstances, Members: &m_AddonInstances, Type: smithy.ShapeTypeList, Ext: &e_AddonInstances})
+var s_AddonInstances_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddonInstance, Members: &mAddonInstance, Type: smithy.ShapeTypeStructure, Ext: &e_AddonInstances_member})
+var s_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &e_AddonName})
+var sAddonSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddonSubscription, Members: &mAddonSubscription, Type: smithy.ShapeTypeStructure, Ext: &eAddonSubscription})
+var sAddonSubscription_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eAddonSubscription_AddonSubscriptionId})
+var sAddonSubscription_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonName", ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &eAddonSubscription_AddonName})
+var sAddonSubscription_AddonSubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionArn", ID: &i_AddonSubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eAddonSubscription_AddonSubscriptionArn})
+var sAddonSubscription_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAddonSubscription_CreatedTimestamp})
+var s_AddonSubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonSubscriptionArn, Type: smithy.ShapeTypeString, Ext: &e_AddonSubscriptionArn})
+var s_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &e_AddonSubscriptionId})
+var s_AddonSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddonSubscriptions, Members: &m_AddonSubscriptions, Type: smithy.ShapeTypeList, Ext: &e_AddonSubscriptions})
+var s_AddonSubscriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddonSubscription, Members: &mAddonSubscription, Type: smithy.ShapeTypeStructure, Ext: &e_AddonSubscriptions_member})
+var s_Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Address, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Address})
+var sAddressFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressFilter, Members: &mAddressFilter, Type: smithy.ShapeTypeStructure, Ext: &eAddressFilter})
+var sAddressFilter_AddressPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressPrefix", ID: &i_AddressPrefix, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAddressFilter_AddressPrefix})
+var sAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressList, Members: &mAddressList, Type: smithy.ShapeTypeStructure, Ext: &eAddressList})
+var sAddressList_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eAddressList_AddressListId})
+var sAddressList_AddressListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListArn", ID: &i_AddressListArn, Type: smithy.ShapeTypeString, Ext: &eAddressList_AddressListArn})
+var sAddressList_AddressListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListName", ID: &i_AddressListName, Type: smithy.ShapeTypeString, Ext: &eAddressList_AddressListName})
+var sAddressList_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAddressList_CreatedTimestamp})
+var sAddressList_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAddressList_LastUpdatedTimestamp})
+var s_AddressListArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressListArn, Type: smithy.ShapeTypeString, Ext: &e_AddressListArn})
+var s_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &e_AddressListId})
+var s_AddressListName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressListName, Type: smithy.ShapeTypeString, Ext: &e_AddressListName})
+var s_AddressLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLists, Members: &m_AddressLists, Type: smithy.ShapeTypeList, Ext: &e_AddressLists})
+var s_AddressLists_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddressList, Members: &mAddressList, Type: smithy.ShapeTypeStructure, Ext: &e_AddressLists_member})
+var s_AddressPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressPageSize, Type: smithy.ShapeTypeInteger, Ext: &e_AddressPageSize})
+var s_AddressPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressPrefix, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_AddressPrefix})
+var sAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysis, Members: &mAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eAnalysis})
+var sAnalysis_Analyzer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analyzer", ID: &i_AnalyzerArn, Type: smithy.ShapeTypeString, Ext: &eAnalysis_Analyzer})
+var sAnalysis_ResultField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultField", ID: &i_ResultField, Type: smithy.ShapeTypeString, Ext: &eAnalysis_ResultField})
+var s_AnalyzerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalyzerArn, Type: smithy.ShapeTypeString, Ext: &e_AnalyzerArn})
+var sArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchive, Members: &mArchive, Type: smithy.ShapeTypeStructure, Ext: &eArchive})
+var sArchive_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eArchive_ArchiveId})
+var sArchive_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveNameString, Type: smithy.ShapeTypeString, Ext: &eArchive_ArchiveName})
+var sArchive_ArchiveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveState", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum, Ext: &eArchive_ArchiveState})
+var sArchive_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eArchive_LastUpdatedTimestamp})
+var sArchiveAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveAction, Members: &mArchiveAction, Type: smithy.ShapeTypeStructure, Ext: &eArchiveAction})
+var sArchiveAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eArchiveAction_ActionFailurePolicy})
+var sArchiveAction_TargetArchive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArchive", ID: &i_NameOrArn, Type: smithy.ShapeTypeString, Ext: &eArchiveAction_TargetArchive})
+var s_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveArn, Type: smithy.ShapeTypeString, Ext: &e_ArchiveArn})
+var sArchiveBooleanEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveBooleanEmailAttribute, Members: &mArchiveBooleanEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eArchiveBooleanEmailAttribute})
+var sArchiveBooleanEmailAttribute_HAS_ATTACHMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAS_ATTACHMENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveBooleanEmailAttribute_HAS_ATTACHMENTS})
+var sArchiveBooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveBooleanExpression, Members: &mArchiveBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &eArchiveBooleanExpression})
+var sArchiveBooleanExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iArchiveBooleanToEvaluate, Members: &mArchiveBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eArchiveBooleanExpression_Evaluate})
+var sArchiveBooleanExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iArchiveBooleanOperator, Members: &mArchiveBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eArchiveBooleanExpression_Operator})
+var sArchiveBooleanOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveBooleanOperator, Members: &mArchiveBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eArchiveBooleanOperator})
+var sArchiveBooleanOperator_IS_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveBooleanOperator_IS_TRUE})
+var sArchiveBooleanOperator_IS_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveBooleanOperator_IS_FALSE})
+var sArchiveBooleanToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveBooleanToEvaluate, Members: &mArchiveBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eArchiveBooleanToEvaluate})
+var sArchiveBooleanToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iArchiveBooleanEmailAttribute, Members: &mArchiveBooleanEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eArchiveBooleanToEvaluate_Attribute})
+var s_ArchivedMessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchivedMessageId, Type: smithy.ShapeTypeString, Ext: &e_ArchivedMessageId})
+var sArchiveFilterCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveFilterCondition, Members: &mArchiveFilterCondition, Type: smithy.ShapeTypeUnion, Ext: &eArchiveFilterCondition})
+var sArchiveFilterCondition_StringExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringExpression", ID: &iArchiveStringExpression, Members: &mArchiveStringExpression, Type: smithy.ShapeTypeStructure, Ext: &eArchiveFilterCondition_StringExpression})
+var sArchiveFilterCondition_BooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanExpression", ID: &iArchiveBooleanExpression, Members: &mArchiveBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &eArchiveFilterCondition_BooleanExpression})
+var s_ArchiveFilterConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveFilterConditions, Members: &m_ArchiveFilterConditions, Type: smithy.ShapeTypeList, Ext: &e_ArchiveFilterConditions})
+var s_ArchiveFilterConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArchiveFilterCondition, Members: &mArchiveFilterCondition, Type: smithy.ShapeTypeUnion, Ext: &e_ArchiveFilterConditions_member})
+var sArchiveFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveFilters, Members: &mArchiveFilters, Type: smithy.ShapeTypeStructure, Ext: &eArchiveFilters})
+var sArchiveFilters_Include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Include", ID: &i_ArchiveFilterConditions, Members: &m_ArchiveFilterConditions, Type: smithy.ShapeTypeList, Ext: &eArchiveFilters_Include})
+var sArchiveFilters_Unless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unless", ID: &i_ArchiveFilterConditions, Members: &m_ArchiveFilterConditions, Type: smithy.ShapeTypeList, Ext: &eArchiveFilters_Unless})
+var s_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &e_ArchiveId})
+var s_ArchiveIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &e_ArchiveIdString})
+var s_ArchiveNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveNameString, Type: smithy.ShapeTypeString, Ext: &e_ArchiveNameString})
+var sArchiveRetention = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveRetention, Members: &mArchiveRetention, Type: smithy.ShapeTypeUnion, Ext: &eArchiveRetention})
+var sArchiveRetention_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeEnum, Ext: &eArchiveRetention_RetentionPeriod})
+var s_ArchivesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchivesList, Members: &m_ArchivesList, Type: smithy.ShapeTypeList, Ext: &e_ArchivesList})
+var s_ArchivesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArchive, Members: &mArchive, Type: smithy.ShapeTypeStructure, Ext: &e_ArchivesList_member})
+var sArchiveState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum, Ext: &eArchiveState})
+var sArchiveState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveState_ACTIVE})
+var sArchiveState_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveState_PENDING_DELETION})
+var sArchiveStringEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveStringEmailAttribute, Members: &mArchiveStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eArchiveStringEmailAttribute})
+var sArchiveStringEmailAttribute_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_TO})
+var sArchiveStringEmailAttribute_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_FROM})
+var sArchiveStringEmailAttribute_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_CC})
+var sArchiveStringEmailAttribute_SUBJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_SUBJECT})
+var sArchiveStringEmailAttribute_ENVELOPE_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVELOPE_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_ENVELOPE_TO})
+var sArchiveStringEmailAttribute_ENVELOPE_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVELOPE_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringEmailAttribute_ENVELOPE_FROM})
+var sArchiveStringExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveStringExpression, Members: &mArchiveStringExpression, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringExpression})
+var sArchiveStringExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iArchiveStringToEvaluate, Members: &mArchiveStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eArchiveStringExpression_Evaluate})
+var sArchiveStringExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iArchiveStringOperator, Members: &mArchiveStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eArchiveStringExpression_Operator})
+var sArchiveStringExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringValueList, Members: &m_StringValueList, Type: smithy.ShapeTypeList, Ext: &eArchiveStringExpression_Values})
+var sArchiveStringOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveStringOperator, Members: &mArchiveStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eArchiveStringOperator})
+var sArchiveStringOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchiveStringOperator_CONTAINS})
+var sArchiveStringToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveStringToEvaluate, Members: &mArchiveStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eArchiveStringToEvaluate})
+var sArchiveStringToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iArchiveStringEmailAttribute, Members: &mArchiveStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eArchiveStringToEvaluate_Attribute})
+var sBounceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBounceAction, Members: &mBounceAction, Type: smithy.ShapeTypeStructure, Ext: &eBounceAction})
+var sBounceAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eBounceAction_ActionFailurePolicy})
+var sBounceAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eBounceAction_RoleArn})
+var sBounceAction_Sender = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sender", ID: &i_EmailAddress, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eBounceAction_Sender})
+var sBounceAction_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeString, Ext: &eBounceAction_StatusCode})
+var sBounceAction_SmtpReplyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmtpReplyCode", ID: &i_SmtpReplyCode, Type: smithy.ShapeTypeString, Ext: &eBounceAction_SmtpReplyCode})
+var sBounceAction_DiagnosticMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiagnosticMessage", ID: &i_DiagnosticMessage, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eBounceAction_DiagnosticMessage})
+var sBounceAction_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BounceMessage, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eBounceAction_Message})
+var s_BounceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BounceMessage, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_BounceMessage})
+var s_CAContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CAContent, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_CAContent})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_CrlContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrlContent, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_CrlContent})
+var sDeliverToMailboxAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverToMailboxAction, Members: &mDeliverToMailboxAction, Type: smithy.ShapeTypeStructure, Ext: &eDeliverToMailboxAction})
+var sDeliverToMailboxAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eDeliverToMailboxAction_ActionFailurePolicy})
+var sDeliverToMailboxAction_MailboxArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxArn", ID: &i_NameOrArn, Type: smithy.ShapeTypeString, Ext: &eDeliverToMailboxAction_MailboxArn})
+var sDeliverToMailboxAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eDeliverToMailboxAction_RoleArn})
+var sDeliverToQBusinessAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverToQBusinessAction, Members: &mDeliverToQBusinessAction, Type: smithy.ShapeTypeStructure, Ext: &eDeliverToQBusinessAction})
+var sDeliverToQBusinessAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eDeliverToQBusinessAction_ActionFailurePolicy})
+var sDeliverToQBusinessAction_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_QBusinessApplicationId, Type: smithy.ShapeTypeString, Ext: &eDeliverToQBusinessAction_ApplicationId})
+var sDeliverToQBusinessAction_IndexId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexId", ID: &i_QBusinessIndexId, Type: smithy.ShapeTypeString, Ext: &eDeliverToQBusinessAction_IndexId})
+var sDeliverToQBusinessAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eDeliverToQBusinessAction_RoleArn})
+var s_DiagnosticMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiagnosticMessage, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_DiagnosticMessage})
+var sDropAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDropAction, Type: smithy.ShapeTypeStructure, Ext: &eDropAction})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_EmailAddress})
+var s_EmailReceivedHeadersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailReceivedHeadersList, Members: &m_EmailReceivedHeadersList, Type: smithy.ShapeTypeList, Ext: &e_EmailReceivedHeadersList})
+var s_EmailReceivedHeadersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EmailReceivedHeadersList_member})
+var sEnvelope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvelope, Members: &mEnvelope, Type: smithy.ShapeTypeStructure, Ext: &eEnvelope})
+var sEnvelope_Helo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Helo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnvelope_Helo})
+var sEnvelope_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnvelope_From})
+var sEnvelope_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eEnvelope_To})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sExportDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportDestinationConfiguration, Members: &mExportDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eExportDestinationConfiguration})
+var sExportDestinationConfiguration_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3ExportDestinationConfiguration, Members: &mS3ExportDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExportDestinationConfiguration_S3})
+var s_ExportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportId, Type: smithy.ShapeTypeString, Ext: &e_ExportId})
+var s_ExportMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ExportMaxResults})
+var sExportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportState, Members: &mExportState, Type: smithy.ShapeTypeEnum, Ext: &eExportState})
+var sExportState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_QUEUED})
+var sExportState_PREPROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_PREPROCESSING})
+var sExportState_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_PROCESSING})
+var sExportState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_COMPLETED})
+var sExportState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_FAILED})
+var sExportState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportState_CANCELLED})
+var sExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eExportStatus})
+var sExportStatus_SubmissionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmissionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExportStatus_SubmissionTimestamp})
+var sExportStatus_CompletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eExportStatus_CompletionTimestamp})
+var sExportStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iExportState, Members: &mExportState, Type: smithy.ShapeTypeEnum, Ext: &eExportStatus_State})
+var sExportStatus_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eExportStatus_ErrorMessage})
+var sExportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSummary, Members: &mExportSummary, Type: smithy.ShapeTypeStructure, Ext: &eExportSummary})
+var sExportSummary_ExportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportId", ID: &i_ExportId, Type: smithy.ShapeTypeString, Ext: &eExportSummary_ExportId})
+var sExportSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eExportSummary_Status})
+var s_ExportSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportSummaryList, Members: &m_ExportSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ExportSummaryList})
+var s_ExportSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExportSummary, Members: &mExportSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExportSummaryList_member})
+var s_HeaderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderName, Type: smithy.ShapeTypeString, Ext: &e_HeaderName})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &e_HeaderValue})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var s_IdOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdOrArn, Type: smithy.ShapeTypeString, Ext: &e_IdOrArn})
+var sImportDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDataFormat, Members: &mImportDataFormat, Type: smithy.ShapeTypeStructure, Ext: &eImportDataFormat})
+var sImportDataFormat_ImportDataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportDataType", ID: &iImportDataType, Members: &mImportDataType, Type: smithy.ShapeTypeEnum, Ext: &eImportDataFormat_ImportDataType})
+var sImportDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDataType, Members: &mImportDataType, Type: smithy.ShapeTypeEnum, Ext: &eImportDataType})
+var sImportDataType_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportDataType_CSV})
+var sImportDataType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportDataType_JSON})
+var sImportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportJob, Members: &mImportJob, Type: smithy.ShapeTypeStructure, Ext: &eImportJob})
+var sImportJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eImportJob_JobId})
+var sImportJob_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eImportJob_Name})
+var sImportJob_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iImportJobStatus, Members: &mImportJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eImportJob_Status})
+var sImportJob_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreSignedUrl", ID: &i_PreSignedUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eImportJob_PreSignedUrl})
+var sImportJob_ImportedItemsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedItemsCount", ID: &i_JobItemsCount, Type: smithy.ShapeTypeInteger, Ext: &eImportJob_ImportedItemsCount})
+var sImportJob_FailedItemsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedItemsCount", ID: &i_JobItemsCount, Type: smithy.ShapeTypeInteger, Ext: &eImportJob_FailedItemsCount})
+var sImportJob_ImportDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportDataFormat", ID: &iImportDataFormat, Members: &mImportDataFormat, Type: smithy.ShapeTypeStructure, Ext: &eImportJob_ImportDataFormat})
+var sImportJob_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eImportJob_AddressListId})
+var sImportJob_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImportJob_CreatedTimestamp})
+var sImportJob_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImportJob_StartTimestamp})
+var sImportJob_CompletedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eImportJob_CompletedTimestamp})
+var sImportJob_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eImportJob_Error})
+var s_ImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportJobs, Members: &m_ImportJobs, Type: smithy.ShapeTypeList, Ext: &e_ImportJobs})
+var s_ImportJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImportJob, Members: &mImportJob, Type: smithy.ShapeTypeStructure, Ext: &e_ImportJobs_member})
+var sImportJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportJobStatus, Members: &mImportJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eImportJobStatus})
+var sImportJobStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportJobStatus_CREATED})
+var sImportJobStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportJobStatus_PROCESSING})
+var sImportJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportJobStatus_COMPLETED})
+var sImportJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportJobStatus_FAILED})
+var sImportJobStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportJobStatus_STOPPED})
+var s_IngressAddressListArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressAddressListArnList, Members: &m_IngressAddressListArnList, Type: smithy.ShapeTypeList, Ext: &e_IngressAddressListArnList})
+var s_IngressAddressListArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AddressListArn, Type: smithy.ShapeTypeString, Ext: &e_IngressAddressListArnList_member})
+var sIngressAddressListEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressAddressListEmailAttribute, Members: &mIngressAddressListEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressAddressListEmailAttribute})
+var sIngressAddressListEmailAttribute_RECIPIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECIPIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressAddressListEmailAttribute_RECIPIENT})
+var sIngressAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressAnalysis, Members: &mIngressAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eIngressAnalysis})
+var sIngressAnalysis_Analyzer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analyzer", ID: &i_AnalyzerArn, Type: smithy.ShapeTypeString, Ext: &eIngressAnalysis_Analyzer})
+var sIngressAnalysis_ResultField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultField", ID: &i_ResultField, Type: smithy.ShapeTypeString, Ext: &eIngressAnalysis_ResultField})
+var sIngressBooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressBooleanExpression, Members: &mIngressBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &eIngressBooleanExpression})
+var sIngressBooleanExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iIngressBooleanToEvaluate, Members: &mIngressBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressBooleanExpression_Evaluate})
+var sIngressBooleanExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iIngressBooleanOperator, Members: &mIngressBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressBooleanExpression_Operator})
+var sIngressBooleanOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressBooleanOperator, Members: &mIngressBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressBooleanOperator})
+var sIngressBooleanOperator_IS_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressBooleanOperator_IS_TRUE})
+var sIngressBooleanOperator_IS_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressBooleanOperator_IS_FALSE})
+var sIngressBooleanToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressBooleanToEvaluate, Members: &mIngressBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressBooleanToEvaluate})
+var sIngressBooleanToEvaluate_Analysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analysis", ID: &iIngressAnalysis, Members: &mIngressAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eIngressBooleanToEvaluate_Analysis})
+var sIngressBooleanToEvaluate_IsInAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsInAddressList", ID: &iIngressIsInAddressList, Members: &mIngressIsInAddressList, Type: smithy.ShapeTypeStructure, Ext: &eIngressBooleanToEvaluate_IsInAddressList})
+var sIngressIpOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpOperator, Members: &mIngressIpOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpOperator})
+var sIngressIpOperator_CIDR_MATCHES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CIDR_MATCHES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpOperator_CIDR_MATCHES})
+var sIngressIpOperator_NOT_CIDR_MATCHES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CIDR_MATCHES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpOperator_NOT_CIDR_MATCHES})
+var sIngressIpToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpToEvaluate, Members: &mIngressIpToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressIpToEvaluate})
+var sIngressIpToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iIngressIpv4Attribute, Members: &mIngressIpv4Attribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpToEvaluate_Attribute})
+var sIngressIpv4Attribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpv4Attribute, Members: &mIngressIpv4Attribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpv4Attribute})
+var sIngressIpv4Attribute_SENDER_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER_IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpv4Attribute_SENDER_IP})
+var sIngressIpv4Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpv4Expression, Members: &mIngressIpv4Expression, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpv4Expression})
+var sIngressIpv4Expression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iIngressIpToEvaluate, Members: &mIngressIpToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressIpv4Expression_Evaluate})
+var sIngressIpv4Expression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iIngressIpOperator, Members: &mIngressIpOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpv4Expression_Operator})
+var sIngressIpv4Expression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Ipv4Cidrs, Members: &m_Ipv4Cidrs, Type: smithy.ShapeTypeList, Ext: &eIngressIpv4Expression_Values})
+var sIngressIpv6Attribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpv6Attribute, Members: &mIngressIpv6Attribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpv6Attribute})
+var sIngressIpv6Attribute_SENDER_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER_IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpv6Attribute_SENDER_IPV6})
+var sIngressIpv6Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpv6Expression, Members: &mIngressIpv6Expression, Type: smithy.ShapeTypeStructure, Ext: &eIngressIpv6Expression})
+var sIngressIpv6Expression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iIngressIpv6ToEvaluate, Members: &mIngressIpv6ToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressIpv6Expression_Evaluate})
+var sIngressIpv6Expression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iIngressIpOperator, Members: &mIngressIpOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpv6Expression_Operator})
+var sIngressIpv6Expression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Ipv6Cidrs, Members: &m_Ipv6Cidrs, Type: smithy.ShapeTypeList, Ext: &eIngressIpv6Expression_Values})
+var sIngressIpv6ToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIpv6ToEvaluate, Members: &mIngressIpv6ToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressIpv6ToEvaluate})
+var sIngressIpv6ToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iIngressIpv6Attribute, Members: &mIngressIpv6Attribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressIpv6ToEvaluate_Attribute})
+var sIngressIsInAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressIsInAddressList, Members: &mIngressIsInAddressList, Type: smithy.ShapeTypeStructure, Ext: &eIngressIsInAddressList})
+var sIngressIsInAddressList_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iIngressAddressListEmailAttribute, Members: &mIngressAddressListEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressIsInAddressList_Attribute})
+var sIngressIsInAddressList_AddressLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLists", ID: &i_IngressAddressListArnList, Members: &m_IngressAddressListArnList, Type: smithy.ShapeTypeList, Ext: &eIngressIsInAddressList_AddressLists})
+var sIngressPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPoint, Members: &mIngressPoint, Type: smithy.ShapeTypeStructure, Ext: &eIngressPoint})
+var sIngressPoint_IngressPointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointName", ID: &i_IngressPointName, Type: smithy.ShapeTypeString, Ext: &eIngressPoint_IngressPointName})
+var sIngressPoint_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eIngressPoint_IngressPointId})
+var sIngressPoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngressPointStatus, Members: &mIngressPointStatus, Type: smithy.ShapeTypeEnum, Ext: &eIngressPoint_Status})
+var sIngressPoint_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iIngressPointType, Members: &mIngressPointType, Type: smithy.ShapeTypeEnum, Ext: &eIngressPoint_Type})
+var sIngressPoint_ARecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARecord", ID: &i_IngressPointARecord, Type: smithy.ShapeTypeString, Ext: &eIngressPoint_ARecord})
+var s_IngressPointARecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressPointARecord, Type: smithy.ShapeTypeString, Ext: &e_IngressPointARecord})
+var s_IngressPointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressPointArn, Type: smithy.ShapeTypeString, Ext: &e_IngressPointArn})
+var sIngressPointAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointAuthConfiguration, Members: &mIngressPointAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointAuthConfiguration})
+var sIngressPointAuthConfiguration_IngressPointPasswordConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointPasswordConfiguration", ID: &iIngressPointPasswordConfiguration, Members: &mIngressPointPasswordConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointAuthConfiguration_IngressPointPasswordConfiguration})
+var sIngressPointAuthConfiguration_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eIngressPointAuthConfiguration_SecretArn})
+var sIngressPointAuthConfiguration_TlsAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsAuthConfiguration", ID: &iTlsAuthConfiguration, Members: &mTlsAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointAuthConfiguration_TlsAuthConfiguration})
+var sIngressPointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointConfiguration, Members: &mIngressPointConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eIngressPointConfiguration})
+var sIngressPointConfiguration_SmtpPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmtpPassword", ID: &i_SmtpPassword, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eIngressPointConfiguration_SmtpPassword})
+var sIngressPointConfiguration_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eIngressPointConfiguration_SecretArn})
+var sIngressPointConfiguration_TlsAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsAuthConfiguration", ID: &iTlsAuthConfiguration, Members: &mTlsAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointConfiguration_TlsAuthConfiguration})
+var s_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &e_IngressPointId})
+var s_IngressPointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressPointName, Type: smithy.ShapeTypeString, Ext: &e_IngressPointName})
+var sIngressPointPasswordConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointPasswordConfiguration, Members: &mIngressPointPasswordConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointPasswordConfiguration})
+var sIngressPointPasswordConfiguration_SmtpPasswordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmtpPasswordVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIngressPointPasswordConfiguration_SmtpPasswordVersion})
+var sIngressPointPasswordConfiguration_PreviousSmtpPasswordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousSmtpPasswordVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIngressPointPasswordConfiguration_PreviousSmtpPasswordVersion})
+var sIngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousSmtpPasswordExpiryTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp})
+var s_IngressPointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngressPointsList, Members: &m_IngressPointsList, Type: smithy.ShapeTypeList, Ext: &e_IngressPointsList})
+var s_IngressPointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngressPoint, Members: &mIngressPoint, Type: smithy.ShapeTypeStructure, Ext: &e_IngressPointsList_member})
+var sIngressPointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointStatus, Members: &mIngressPointStatus, Type: smithy.ShapeTypeEnum, Ext: &eIngressPointStatus})
+var sIngressPointStatus_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_PROVISIONING})
+var sIngressPointStatus_DEPROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_DEPROVISIONING})
+var sIngressPointStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_UPDATING})
+var sIngressPointStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_ACTIVE})
+var sIngressPointStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_CLOSED})
+var sIngressPointStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_FAILED})
+var sIngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST})
+var sIngressPointStatusToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointStatusToUpdate, Members: &mIngressPointStatusToUpdate, Type: smithy.ShapeTypeEnum, Ext: &eIngressPointStatusToUpdate})
+var sIngressPointStatusToUpdate_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatusToUpdate_ACTIVE})
+var sIngressPointStatusToUpdate_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointStatusToUpdate_CLOSED})
+var sIngressPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressPointType, Members: &mIngressPointType, Type: smithy.ShapeTypeEnum, Ext: &eIngressPointType})
+var sIngressPointType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointType_OPEN})
+var sIngressPointType_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointType_AUTH})
+var sIngressPointType_MTLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MTLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressPointType_MTLS})
+var sIngressStringEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressStringEmailAttribute, Members: &mIngressStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressStringEmailAttribute})
+var sIngressStringEmailAttribute_RECIPIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECIPIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringEmailAttribute_RECIPIENT})
+var sIngressStringExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressStringExpression, Members: &mIngressStringExpression, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringExpression})
+var sIngressStringExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iIngressStringToEvaluate, Members: &mIngressStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressStringExpression_Evaluate})
+var sIngressStringExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iIngressStringOperator, Members: &mIngressStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressStringExpression_Operator})
+var sIngressStringExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eIngressStringExpression_Values})
+var sIngressStringOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressStringOperator, Members: &mIngressStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressStringOperator})
+var sIngressStringOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringOperator_EQUALS})
+var sIngressStringOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringOperator_NOT_EQUALS})
+var sIngressStringOperator_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringOperator_STARTS_WITH})
+var sIngressStringOperator_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringOperator_ENDS_WITH})
+var sIngressStringOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringOperator_CONTAINS})
+var sIngressStringToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressStringToEvaluate, Members: &mIngressStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressStringToEvaluate})
+var sIngressStringToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iIngressStringEmailAttribute, Members: &mIngressStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressStringToEvaluate_Attribute})
+var sIngressStringToEvaluate_Analysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analysis", ID: &iIngressAnalysis, Members: &mIngressAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eIngressStringToEvaluate_Analysis})
+var sIngressTlsAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressTlsAttribute, Members: &mIngressTlsAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsAttribute})
+var sIngressTlsAttribute_TLS_PROTOCOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_PROTOCOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsAttribute_TLS_PROTOCOL})
+var sIngressTlsProtocolAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressTlsProtocolAttribute, Members: &mIngressTlsProtocolAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsProtocolAttribute})
+var sIngressTlsProtocolAttribute_TLS1_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS1_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsProtocolAttribute_TLS1_2})
+var sIngressTlsProtocolAttribute_TLS1_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS1_3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsProtocolAttribute_TLS1_3})
+var sIngressTlsProtocolExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressTlsProtocolExpression, Members: &mIngressTlsProtocolExpression, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsProtocolExpression})
+var sIngressTlsProtocolExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iIngressTlsProtocolToEvaluate, Members: &mIngressTlsProtocolToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressTlsProtocolExpression_Evaluate})
+var sIngressTlsProtocolExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iIngressTlsProtocolOperator, Members: &mIngressTlsProtocolOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsProtocolExpression_Operator})
+var sIngressTlsProtocolExpression_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iIngressTlsProtocolAttribute, Members: &mIngressTlsProtocolAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsProtocolExpression_Value})
+var sIngressTlsProtocolOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressTlsProtocolOperator, Members: &mIngressTlsProtocolOperator, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsProtocolOperator})
+var sIngressTlsProtocolOperator_MINIMUM_TLS_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINIMUM_TLS_VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsProtocolOperator_MINIMUM_TLS_VERSION})
+var sIngressTlsProtocolOperator_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngressTlsProtocolOperator_IS})
+var sIngressTlsProtocolToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressTlsProtocolToEvaluate, Members: &mIngressTlsProtocolToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eIngressTlsProtocolToEvaluate})
+var sIngressTlsProtocolToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iIngressTlsAttribute, Members: &mIngressTlsAttribute, Type: smithy.ShapeTypeEnum, Ext: &eIngressTlsProtocolToEvaluate_Attribute})
+var sInvokeLambdaAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeLambdaAction, Members: &mInvokeLambdaAction, Type: smithy.ShapeTypeStructure, Ext: &eInvokeLambdaAction})
+var sInvokeLambdaAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eInvokeLambdaAction_ActionFailurePolicy})
+var sInvokeLambdaAction_FunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionArn", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &eInvokeLambdaAction_FunctionArn})
+var sInvokeLambdaAction_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &iLambdaInvocationType, Members: &mLambdaInvocationType, Type: smithy.ShapeTypeEnum, Ext: &eInvokeLambdaAction_InvocationType})
+var sInvokeLambdaAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eInvokeLambdaAction_RoleArn})
+var sInvokeLambdaAction_RetryTimeMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryTimeMinutes", ID: &i_LambdaRetryTimeMinutes, Type: smithy.ShapeTypeInteger, Ext: &eInvokeLambdaAction_RetryTimeMinutes})
+var sIpType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpType, Members: &mIpType, Type: smithy.ShapeTypeEnum, Ext: &eIpType})
+var sIpType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpType_IPV4})
+var sIpType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpType_DUAL_STACK})
+var s_Ipv4Cidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4Cidr, Type: smithy.ShapeTypeString, Ext: &e_Ipv4Cidr})
+var s_Ipv4Cidrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4Cidrs, Members: &m_Ipv4Cidrs, Type: smithy.ShapeTypeList, Ext: &e_Ipv4Cidrs})
+var s_Ipv4Cidrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv4Cidr, Type: smithy.ShapeTypeString, Ext: &e_Ipv4Cidrs_member})
+var s_Ipv6Cidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv6Cidr, Type: smithy.ShapeTypeString, Ext: &e_Ipv6Cidr})
+var s_Ipv6Cidrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv6Cidrs, Members: &m_Ipv6Cidrs, Type: smithy.ShapeTypeList, Ext: &e_Ipv6Cidrs})
+var s_Ipv6Cidrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv6Cidr, Type: smithy.ShapeTypeString, Ext: &e_Ipv6Cidrs_member})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobItemsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobItemsCount, Type: smithy.ShapeTypeInteger, Ext: &e_JobItemsCount})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &e_JobName})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaFunctionArn})
+var sLambdaInvocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaInvocationType, Members: &mLambdaInvocationType, Type: smithy.ShapeTypeEnum, Ext: &eLambdaInvocationType})
+var sLambdaInvocationType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLambdaInvocationType_EVENT})
+var sLambdaInvocationType_REQUEST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLambdaInvocationType_REQUEST_RESPONSE})
+var s_LambdaRetryTimeMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaRetryTimeMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_LambdaRetryTimeMinutes})
+var sMailFrom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFrom, Members: &mMailFrom, Type: smithy.ShapeTypeEnum, Ext: &eMailFrom})
+var sMailFrom_REPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFrom_REPLACE})
+var sMailFrom_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFrom_PRESERVE})
+var s_MaxMessageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxMessageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_MaxMessageSizeBytes})
+var sMessageBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageBody, Members: &mMessageBody, Type: smithy.ShapeTypeStructure, Ext: &eMessageBody})
+var sMessageBody_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageBody_Text})
+var sMessageBody_Html = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Html", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageBody_Html})
+var sMessageBody_MessageMalformed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageMalformed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMessageBody_MessageMalformed})
+var sMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure, Ext: &eMetadata})
+var sMetadata_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetadata_Timestamp})
+var sMetadata_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eMetadata_IngressPointId})
+var sMetadata_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eMetadata_TrafficPolicyId})
+var sMetadata_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eMetadata_RuleSetId})
+var sMetadata_SenderHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderHostname", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_SenderHostname})
+var sMetadata_SenderIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderIpAddress", ID: &i_SenderIpAddress, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eMetadata_SenderIpAddress})
+var sMetadata_TlsCipherSuite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsCipherSuite", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_TlsCipherSuite})
+var sMetadata_TlsProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsProtocol", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_TlsProtocol})
+var sMetadata_SendingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingMethod", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_SendingMethod})
+var sMetadata_SourceIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentity", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_SourceIdentity})
+var sMetadata_SendingPool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPool", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_SendingPool})
+var sMetadata_ConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSet", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_ConfigurationSet})
+var sMetadata_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetadata_SourceArn})
+var s_MimeHeaderAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MimeHeaderAttribute, Type: smithy.ShapeTypeString, Ext: &e_MimeHeaderAttribute})
+var s_NameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameOrArn, Type: smithy.ShapeTypeString, Ext: &e_NameOrArn})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eNetworkConfiguration})
+var sNetworkConfiguration_PublicNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicNetworkConfiguration", ID: &iPublicNetworkConfiguration, Members: &mPublicNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkConfiguration_PublicNetworkConfiguration})
+var sNetworkConfiguration_PrivateNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateNetworkConfiguration", ID: &iPrivateNetworkConfiguration, Members: &mPrivateNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkConfiguration_PrivateNetworkConfiguration})
+var sNoAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eNoAuthentication})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &e_PageSize})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPolicyCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyCondition, Members: &mPolicyCondition, Type: smithy.ShapeTypeUnion, Ext: &ePolicyCondition})
+var sPolicyCondition_StringExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringExpression", ID: &iIngressStringExpression, Members: &mIngressStringExpression, Type: smithy.ShapeTypeStructure, Ext: &ePolicyCondition_StringExpression})
+var sPolicyCondition_IpExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpExpression", ID: &iIngressIpv4Expression, Members: &mIngressIpv4Expression, Type: smithy.ShapeTypeStructure, Ext: &ePolicyCondition_IpExpression})
+var sPolicyCondition_Ipv6Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6Expression", ID: &iIngressIpv6Expression, Members: &mIngressIpv6Expression, Type: smithy.ShapeTypeStructure, Ext: &ePolicyCondition_Ipv6Expression})
+var sPolicyCondition_TlsExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsExpression", ID: &iIngressTlsProtocolExpression, Members: &mIngressTlsProtocolExpression, Type: smithy.ShapeTypeStructure, Ext: &ePolicyCondition_TlsExpression})
+var sPolicyCondition_BooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanExpression", ID: &iIngressBooleanExpression, Members: &mIngressBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &ePolicyCondition_BooleanExpression})
+var s_PolicyConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyConditions, Members: &m_PolicyConditions, Type: smithy.ShapeTypeList, Ext: &e_PolicyConditions})
+var s_PolicyConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyCondition, Members: &mPolicyCondition, Type: smithy.ShapeTypeUnion, Ext: &e_PolicyConditions_member})
+var sPolicyStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &ePolicyStatement})
+var sPolicyStatement_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_PolicyConditions, Members: &m_PolicyConditions, Type: smithy.ShapeTypeList, Ext: &ePolicyStatement_Conditions})
+var sPolicyStatement_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &ePolicyStatement_Action})
+var s_PolicyStatementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatementList, Members: &m_PolicyStatementList, Type: smithy.ShapeTypeList, Ext: &e_PolicyStatementList})
+var s_PolicyStatementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyStatementList_member})
+var s_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreSignedUrl, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PreSignedUrl})
+var sPrivateNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateNetworkConfiguration, Members: &mPrivateNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePrivateNetworkConfiguration})
+var sPrivateNetworkConfiguration_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ePrivateNetworkConfiguration_VpcEndpointId})
+var sPublicNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicNetworkConfiguration, Members: &mPublicNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePublicNetworkConfiguration})
+var sPublicNetworkConfiguration_IpType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpType", ID: &iIpType, Members: &mIpType, Type: smithy.ShapeTypeEnum, Ext: &ePublicNetworkConfiguration_IpType})
+var s_QBusinessApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QBusinessApplicationId, Type: smithy.ShapeTypeString, Ext: &e_QBusinessApplicationId})
+var s_QBusinessIndexId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QBusinessIndexId, Type: smithy.ShapeTypeString, Ext: &e_QBusinessIndexId})
+var s_Recipients = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Recipients, Members: &m_Recipients, Type: smithy.ShapeTypeList, Ext: &e_Recipients})
+var s_Recipients_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Recipients_member})
+var sRelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelay, Members: &mRelay, Type: smithy.ShapeTypeStructure, Ext: &eRelay})
+var sRelay_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eRelay_RelayId})
+var sRelay_RelayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayName", ID: &i_RelayName, Type: smithy.ShapeTypeString, Ext: &eRelay_RelayName})
+var sRelay_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRelay_LastModifiedTimestamp})
+var sRelayAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelayAction, Members: &mRelayAction, Type: smithy.ShapeTypeStructure, Ext: &eRelayAction})
+var sRelayAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eRelayAction_ActionFailurePolicy})
+var sRelayAction_Relay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relay", ID: &i_IdOrArn, Type: smithy.ShapeTypeString, Ext: &eRelayAction_Relay})
+var sRelayAction_MailFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFrom", ID: &iMailFrom, Members: &mMailFrom, Type: smithy.ShapeTypeEnum, Ext: &eRelayAction_MailFrom})
+var s_RelayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelayArn, Type: smithy.ShapeTypeString, Ext: &e_RelayArn})
+var sRelayAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelayAuthentication, Members: &mRelayAuthentication, Type: smithy.ShapeTypeUnion, Ext: &eRelayAuthentication})
+var sRelayAuthentication_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &eRelayAuthentication_SecretArn})
+var sRelayAuthentication_NoAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoAuthentication", ID: &iNoAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eRelayAuthentication_NoAuthentication})
+var s_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &e_RelayId})
+var s_RelayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelayName, Type: smithy.ShapeTypeString, Ext: &e_RelayName})
+var s_Relays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Relays, Members: &m_Relays, Type: smithy.ShapeTypeList, Ext: &e_Relays})
+var s_Relays_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelay, Members: &mRelay, Type: smithy.ShapeTypeStructure, Ext: &e_Relays_member})
+var s_RelayServerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelayServerName, Type: smithy.ShapeTypeString, Ext: &e_RelayServerName})
+var s_RelayServerPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelayServerPort, Type: smithy.ShapeTypeInteger, Ext: &e_RelayServerPort})
+var sReplaceRecipientAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplaceRecipientAction, Members: &mReplaceRecipientAction, Type: smithy.ShapeTypeStructure, Ext: &eReplaceRecipientAction})
+var sReplaceRecipientAction_ReplaceWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplaceWith", ID: &i_Recipients, Members: &m_Recipients, Type: smithy.ShapeTypeList, Ext: &eReplaceRecipientAction_ReplaceWith})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResultField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultField, Type: smithy.ShapeTypeString, Ext: &e_ResultField})
+var sRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeEnum, Ext: &eRetentionPeriod})
+var sRetentionPeriod_THREE_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_THREE_MONTHS})
+var sRetentionPeriod_SIX_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIX_MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_SIX_MONTHS})
+var sRetentionPeriod_NINE_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NINE_MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_NINE_MONTHS})
+var sRetentionPeriod_ONE_YEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_YEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_ONE_YEAR})
+var sRetentionPeriod_EIGHTEEN_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EIGHTEEN_MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_EIGHTEEN_MONTHS})
+var sRetentionPeriod_TWO_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWO_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_TWO_YEARS})
+var sRetentionPeriod_THIRTY_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THIRTY_MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_THIRTY_MONTHS})
+var sRetentionPeriod_THREE_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_THREE_YEARS})
+var sRetentionPeriod_FOUR_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOUR_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_FOUR_YEARS})
+var sRetentionPeriod_FIVE_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_FIVE_YEARS})
+var sRetentionPeriod_SIX_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIX_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_SIX_YEARS})
+var sRetentionPeriod_SEVEN_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEVEN_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_SEVEN_YEARS})
+var sRetentionPeriod_EIGHT_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EIGHT_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_EIGHT_YEARS})
+var sRetentionPeriod_NINE_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NINE_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_NINE_YEARS})
+var sRetentionPeriod_TEN_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEN_YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_TEN_YEARS})
+var sRetentionPeriod_PERMANENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMANENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod_PERMANENT})
+var sRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure, Ext: &eRow})
+var sRow_ArchivedMessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchivedMessageId", ID: &i_ArchivedMessageId, Type: smithy.ShapeTypeString, Ext: &eRow_ArchivedMessageId})
+var sRow_ReceivedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceivedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRow_ReceivedTimestamp})
+var sRow_Date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Date", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_Date})
+var sRow_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_To})
+var sRow_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_From})
+var sRow_Cc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cc", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_Cc})
+var sRow_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_Subject})
+var sRow_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_MessageId})
+var sRow_HasAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasAttachments", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eRow_HasAttachments})
+var sRow_ReceivedHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceivedHeaders", ID: &i_EmailReceivedHeadersList, Members: &m_EmailReceivedHeadersList, Type: smithy.ShapeTypeList, Ext: &eRow_ReceivedHeaders})
+var sRow_InReplyTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InReplyTo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_InReplyTo})
+var sRow_XMailer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XMailer", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_XMailer})
+var sRow_XOriginalMailer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XOriginalMailer", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_XOriginalMailer})
+var sRow_XPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XPriority", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_XPriority})
+var sRow_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eRow_IngressPointId})
+var sRow_SenderHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderHostname", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_SenderHostname})
+var sRow_SenderIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderIpAddress", ID: &i_SenderIpAddress, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eRow_SenderIpAddress})
+var sRow_Envelope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Envelope", ID: &iEnvelope, Members: &mEnvelope, Type: smithy.ShapeTypeStructure, Ext: &eRow_Envelope})
+var sRow_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRow_SourceArn})
+var s_RowsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RowsList, Members: &m_RowsList, Type: smithy.ShapeTypeList, Ext: &e_RowsList})
+var s_RowsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure, Ext: &e_RowsList_member})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &eRule_Name})
+var sRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_RuleConditions, Members: &m_RuleConditions, Type: smithy.ShapeTypeList, Ext: &eRule_Conditions})
+var sRule_Unless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unless", ID: &i_RuleConditions, Members: &m_RuleConditions, Type: smithy.ShapeTypeList, Ext: &eRule_Unless})
+var sRule_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_RuleActions, Members: &m_RuleActions, Type: smithy.ShapeTypeList, Ext: &eRule_Actions})
+var sRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleAction, Members: &mRuleAction, Type: smithy.ShapeTypeUnion, Ext: &eRuleAction})
+var sRuleAction_Drop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Drop", ID: &iDropAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_Drop})
+var sRuleAction_Relay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relay", ID: &iRelayAction, Members: &mRelayAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_Relay})
+var sRuleAction_Archive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Archive", ID: &iArchiveAction, Members: &mArchiveAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_Archive})
+var sRuleAction_WriteToS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WriteToS3", ID: &iS3Action, Members: &mS3Action, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_WriteToS3})
+var sRuleAction_Send = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Send", ID: &iSendAction, Members: &mSendAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_Send})
+var sRuleAction_AddHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddHeader", ID: &iAddHeaderAction, Members: &mAddHeaderAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_AddHeader})
+var sRuleAction_ReplaceRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplaceRecipient", ID: &iReplaceRecipientAction, Members: &mReplaceRecipientAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_ReplaceRecipient})
+var sRuleAction_DeliverToMailbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverToMailbox", ID: &iDeliverToMailboxAction, Members: &mDeliverToMailboxAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_DeliverToMailbox})
+var sRuleAction_DeliverToQBusiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverToQBusiness", ID: &iDeliverToQBusinessAction, Members: &mDeliverToQBusinessAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_DeliverToQBusiness})
+var sRuleAction_PublishToSns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishToSns", ID: &iSnsAction, Members: &mSnsAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_PublishToSns})
+var sRuleAction_Bounce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bounce", ID: &iBounceAction, Members: &mBounceAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_Bounce})
+var sRuleAction_InvokeLambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokeLambda", ID: &iInvokeLambdaAction, Members: &mInvokeLambdaAction, Type: smithy.ShapeTypeStructure, Ext: &eRuleAction_InvokeLambda})
+var s_RuleActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleActions, Members: &m_RuleActions, Type: smithy.ShapeTypeList, Ext: &e_RuleActions})
+var s_RuleActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleAction, Members: &mRuleAction, Type: smithy.ShapeTypeUnion, Ext: &e_RuleActions_member})
+var s_RuleAddressListArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleAddressListArnList, Members: &m_RuleAddressListArnList, Type: smithy.ShapeTypeList, Ext: &e_RuleAddressListArnList})
+var s_RuleAddressListArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AddressListArn, Type: smithy.ShapeTypeString, Ext: &e_RuleAddressListArnList_member})
+var sRuleAddressListEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleAddressListEmailAttribute, Members: &mRuleAddressListEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleAddressListEmailAttribute})
+var sRuleAddressListEmailAttribute_RECIPIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECIPIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_RECIPIENT})
+var sRuleAddressListEmailAttribute_MAIL_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAIL_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_MAIL_FROM})
+var sRuleAddressListEmailAttribute_SENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_SENDER})
+var sRuleAddressListEmailAttribute_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_FROM})
+var sRuleAddressListEmailAttribute_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_TO})
+var sRuleAddressListEmailAttribute_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleAddressListEmailAttribute_CC})
+var sRuleBooleanEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleBooleanEmailAttribute, Members: &mRuleBooleanEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleBooleanEmailAttribute})
+var sRuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_RECEIPT_REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED})
+var sRuleBooleanEmailAttribute_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanEmailAttribute_TLS})
+var sRuleBooleanEmailAttribute_TLS_WRAPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_WRAPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanEmailAttribute_TLS_WRAPPED})
+var sRuleBooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleBooleanExpression, Members: &mRuleBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanExpression})
+var sRuleBooleanExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iRuleBooleanToEvaluate, Members: &mRuleBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleBooleanExpression_Evaluate})
+var sRuleBooleanExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleBooleanOperator, Members: &mRuleBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleBooleanExpression_Operator})
+var sRuleBooleanOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleBooleanOperator, Members: &mRuleBooleanOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleBooleanOperator})
+var sRuleBooleanOperator_IS_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanOperator_IS_TRUE})
+var sRuleBooleanOperator_IS_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS_FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanOperator_IS_FALSE})
+var sRuleBooleanToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleBooleanToEvaluate, Members: &mRuleBooleanToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleBooleanToEvaluate})
+var sRuleBooleanToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleBooleanEmailAttribute, Members: &mRuleBooleanEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleBooleanToEvaluate_Attribute})
+var sRuleBooleanToEvaluate_Analysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analysis", ID: &iAnalysis, Members: &mAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanToEvaluate_Analysis})
+var sRuleBooleanToEvaluate_IsInAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsInAddressList", ID: &iRuleIsInAddressList, Members: &mRuleIsInAddressList, Type: smithy.ShapeTypeStructure, Ext: &eRuleBooleanToEvaluate_IsInAddressList})
+var sRuleClientCertificateAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleClientCertificateAttribute, Members: &mRuleClientCertificateAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleClientCertificateAttribute})
+var sRuleClientCertificateAttribute_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_CN})
+var sRuleClientCertificateAttribute_SAN_RFC822_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_RFC822_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_RFC822_NAME})
+var sRuleClientCertificateAttribute_SAN_DNS_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_DNS_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_DNS_NAME})
+var sRuleClientCertificateAttribute_SAN_DIRECTORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_DIRECTORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_DIRECTORY_NAME})
+var sRuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_UNIFORM_RESOURCE_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER})
+var sRuleClientCertificateAttribute_SAN_IP_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_IP_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_IP_ADDRESS})
+var sRuleClientCertificateAttribute_SAN_REGISTERED_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAN_REGISTERED_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SAN_REGISTERED_ID})
+var sRuleClientCertificateAttribute_SERIAL_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERIAL_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleClientCertificateAttribute_SERIAL_NUMBER})
+var sRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleCondition, Members: &mRuleCondition, Type: smithy.ShapeTypeUnion, Ext: &eRuleCondition})
+var sRuleCondition_BooleanExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanExpression", ID: &iRuleBooleanExpression, Members: &mRuleBooleanExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_BooleanExpression})
+var sRuleCondition_StringExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringExpression", ID: &iRuleStringExpression, Members: &mRuleStringExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_StringExpression})
+var sRuleCondition_NumberExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberExpression", ID: &iRuleNumberExpression, Members: &mRuleNumberExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_NumberExpression})
+var sRuleCondition_IpExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpExpression", ID: &iRuleIpExpression, Members: &mRuleIpExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_IpExpression})
+var sRuleCondition_VerdictExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerdictExpression", ID: &iRuleVerdictExpression, Members: &mRuleVerdictExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_VerdictExpression})
+var sRuleCondition_DmarcExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DmarcExpression", ID: &iRuleDmarcExpression, Members: &mRuleDmarcExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleCondition_DmarcExpression})
+var s_RuleConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConditions, Members: &m_RuleConditions, Type: smithy.ShapeTypeList, Ext: &e_RuleConditions})
+var s_RuleConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleCondition, Members: &mRuleCondition, Type: smithy.ShapeTypeUnion, Ext: &e_RuleConditions_member})
+var sRuleDmarcExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDmarcExpression, Members: &mRuleDmarcExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcExpression})
+var sRuleDmarcExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleDmarcOperator, Members: &mRuleDmarcOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleDmarcExpression_Operator})
+var sRuleDmarcExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_RuleDmarcValueList, Members: &m_RuleDmarcValueList, Type: smithy.ShapeTypeList, Ext: &eRuleDmarcExpression_Values})
+var sRuleDmarcOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDmarcOperator, Members: &mRuleDmarcOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleDmarcOperator})
+var sRuleDmarcOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcOperator_EQUALS})
+var sRuleDmarcOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcOperator_NOT_EQUALS})
+var sRuleDmarcPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDmarcPolicy, Members: &mRuleDmarcPolicy, Type: smithy.ShapeTypeEnum, Ext: &eRuleDmarcPolicy})
+var sRuleDmarcPolicy_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcPolicy_NONE})
+var sRuleDmarcPolicy_QUARANTINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARANTINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcPolicy_QUARANTINE})
+var sRuleDmarcPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleDmarcPolicy_REJECT})
+var s_RuleDmarcValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDmarcValueList, Members: &m_RuleDmarcValueList, Type: smithy.ShapeTypeList, Ext: &e_RuleDmarcValueList})
+var s_RuleDmarcValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleDmarcPolicy, Members: &mRuleDmarcPolicy, Type: smithy.ShapeTypeEnum, Ext: &e_RuleDmarcValueList_member})
+var sRuleIpEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleIpEmailAttribute, Members: &mRuleIpEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleIpEmailAttribute})
+var sRuleIpEmailAttribute_SOURCE_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleIpEmailAttribute_SOURCE_IP})
+var sRuleIpExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleIpExpression, Members: &mRuleIpExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleIpExpression})
+var sRuleIpExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iRuleIpToEvaluate, Members: &mRuleIpToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleIpExpression_Evaluate})
+var sRuleIpExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleIpOperator, Members: &mRuleIpOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleIpExpression_Operator})
+var sRuleIpExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_RuleIpValueList, Members: &m_RuleIpValueList, Type: smithy.ShapeTypeList, Ext: &eRuleIpExpression_Values})
+var sRuleIpOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleIpOperator, Members: &mRuleIpOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleIpOperator})
+var sRuleIpOperator_CIDR_MATCHES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CIDR_MATCHES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleIpOperator_CIDR_MATCHES})
+var sRuleIpOperator_NOT_CIDR_MATCHES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CIDR_MATCHES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleIpOperator_NOT_CIDR_MATCHES})
+var s_RuleIpStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIpStringValue, Type: smithy.ShapeTypeString, Ext: &e_RuleIpStringValue})
+var sRuleIpToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleIpToEvaluate, Members: &mRuleIpToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleIpToEvaluate})
+var sRuleIpToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleIpEmailAttribute, Members: &mRuleIpEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleIpToEvaluate_Attribute})
+var s_RuleIpValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIpValueList, Members: &m_RuleIpValueList, Type: smithy.ShapeTypeList, Ext: &e_RuleIpValueList})
+var s_RuleIpValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RuleIpStringValue, Type: smithy.ShapeTypeString, Ext: &e_RuleIpValueList_member})
+var sRuleIsInAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleIsInAddressList, Members: &mRuleIsInAddressList, Type: smithy.ShapeTypeStructure, Ext: &eRuleIsInAddressList})
+var sRuleIsInAddressList_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleAddressListEmailAttribute, Members: &mRuleAddressListEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleIsInAddressList_Attribute})
+var sRuleIsInAddressList_AddressLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLists", ID: &i_RuleAddressListArnList, Members: &m_RuleAddressListArnList, Type: smithy.ShapeTypeList, Ext: &eRuleIsInAddressList_AddressLists})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &e_RuleName})
+var sRuleNumberEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleNumberEmailAttribute, Members: &mRuleNumberEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleNumberEmailAttribute})
+var sRuleNumberEmailAttribute_MESSAGE_SIZE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_SIZE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberEmailAttribute_MESSAGE_SIZE})
+var sRuleNumberExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleNumberExpression, Members: &mRuleNumberExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberExpression})
+var sRuleNumberExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iRuleNumberToEvaluate, Members: &mRuleNumberToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleNumberExpression_Evaluate})
+var sRuleNumberExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleNumberOperator, Members: &mRuleNumberOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleNumberExpression_Operator})
+var sRuleNumberExpression_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRuleNumberExpression_Value})
+var sRuleNumberOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleNumberOperator, Members: &mRuleNumberOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleNumberOperator})
+var sRuleNumberOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_EQUALS})
+var sRuleNumberOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_NOT_EQUALS})
+var sRuleNumberOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_LESS_THAN})
+var sRuleNumberOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_GREATER_THAN})
+var sRuleNumberOperator_LESS_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_LESS_THAN_OR_EQUAL})
+var sRuleNumberOperator_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleNumberOperator_GREATER_THAN_OR_EQUAL})
+var sRuleNumberToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleNumberToEvaluate, Members: &mRuleNumberToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleNumberToEvaluate})
+var sRuleNumberToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleNumberEmailAttribute, Members: &mRuleNumberEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleNumberToEvaluate_Attribute})
+var s_Rules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &e_Rules})
+var s_Rules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &e_Rules_member})
+var sRuleSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleSet, Members: &mRuleSet, Type: smithy.ShapeTypeStructure, Ext: &eRuleSet})
+var sRuleSet_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eRuleSet_RuleSetId})
+var sRuleSet_RuleSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetName", ID: &i_RuleSetName, Type: smithy.ShapeTypeString, Ext: &eRuleSet_RuleSetName})
+var sRuleSet_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleSet_LastModificationDate})
+var s_RuleSetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSetArn, Type: smithy.ShapeTypeString, Ext: &e_RuleSetArn})
+var s_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &e_RuleSetId})
+var s_RuleSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSetName, Type: smithy.ShapeTypeString, Ext: &e_RuleSetName})
+var s_RuleSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSets, Members: &m_RuleSets, Type: smithy.ShapeTypeList, Ext: &e_RuleSets})
+var s_RuleSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleSet, Members: &mRuleSet, Type: smithy.ShapeTypeStructure, Ext: &e_RuleSets_member})
+var sRuleStringEmailAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStringEmailAttribute, Members: &mRuleStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleStringEmailAttribute})
+var sRuleStringEmailAttribute_MAIL_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAIL_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_MAIL_FROM})
+var sRuleStringEmailAttribute_HELO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HELO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_HELO})
+var sRuleStringEmailAttribute_RECIPIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECIPIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_RECIPIENT})
+var sRuleStringEmailAttribute_SENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_SENDER})
+var sRuleStringEmailAttribute_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_FROM})
+var sRuleStringEmailAttribute_SUBJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_SUBJECT})
+var sRuleStringEmailAttribute_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_TO})
+var sRuleStringEmailAttribute_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringEmailAttribute_CC})
+var sRuleStringExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStringExpression, Members: &mRuleStringExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringExpression})
+var sRuleStringExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iRuleStringToEvaluate, Members: &mRuleStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleStringExpression_Evaluate})
+var sRuleStringExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleStringOperator, Members: &mRuleStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleStringExpression_Operator})
+var sRuleStringExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_RuleStringList, Members: &m_RuleStringList, Type: smithy.ShapeTypeList, Ext: &eRuleStringExpression_Values})
+var s_RuleStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleStringList, Members: &m_RuleStringList, Type: smithy.ShapeTypeList, Ext: &e_RuleStringList})
+var s_RuleStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RuleStringValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_RuleStringList_member})
+var sRuleStringOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStringOperator, Members: &mRuleStringOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleStringOperator})
+var sRuleStringOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringOperator_EQUALS})
+var sRuleStringOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringOperator_NOT_EQUALS})
+var sRuleStringOperator_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringOperator_STARTS_WITH})
+var sRuleStringOperator_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringOperator_ENDS_WITH})
+var sRuleStringOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringOperator_CONTAINS})
+var sRuleStringToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStringToEvaluate, Members: &mRuleStringToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleStringToEvaluate})
+var sRuleStringToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleStringEmailAttribute, Members: &mRuleStringEmailAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleStringToEvaluate_Attribute})
+var sRuleStringToEvaluate_MimeHeaderAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MimeHeaderAttribute", ID: &i_MimeHeaderAttribute, Type: smithy.ShapeTypeString, Ext: &eRuleStringToEvaluate_MimeHeaderAttribute})
+var sRuleStringToEvaluate_Analysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analysis", ID: &iAnalysis, Members: &mAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eRuleStringToEvaluate_Analysis})
+var sRuleStringToEvaluate_ClientCertificateAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateAttribute", ID: &iRuleClientCertificateAttribute, Members: &mRuleClientCertificateAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleStringToEvaluate_ClientCertificateAttribute})
+var s_RuleStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleStringValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_RuleStringValue})
+var sRuleVerdict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVerdict, Members: &mRuleVerdict, Type: smithy.ShapeTypeEnum, Ext: &eRuleVerdict})
+var sRuleVerdict_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdict_PASS})
+var sRuleVerdict_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdict_FAIL})
+var sRuleVerdict_GRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdict_GRAY})
+var sRuleVerdict_PROCESSING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdict_PROCESSING_FAILED})
+var sRuleVerdictAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVerdictAttribute, Members: &mRuleVerdictAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleVerdictAttribute})
+var sRuleVerdictAttribute_SPF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictAttribute_SPF})
+var sRuleVerdictAttribute_DKIM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DKIM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictAttribute_DKIM})
+var sRuleVerdictExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVerdictExpression, Members: &mRuleVerdictExpression, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictExpression})
+var sRuleVerdictExpression_Evaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Evaluate", ID: &iRuleVerdictToEvaluate, Members: &mRuleVerdictToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleVerdictExpression_Evaluate})
+var sRuleVerdictExpression_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iRuleVerdictOperator, Members: &mRuleVerdictOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleVerdictExpression_Operator})
+var sRuleVerdictExpression_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_RuleVerdictValueList, Members: &m_RuleVerdictValueList, Type: smithy.ShapeTypeList, Ext: &eRuleVerdictExpression_Values})
+var sRuleVerdictOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVerdictOperator, Members: &mRuleVerdictOperator, Type: smithy.ShapeTypeEnum, Ext: &eRuleVerdictOperator})
+var sRuleVerdictOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictOperator_EQUALS})
+var sRuleVerdictOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictOperator_NOT_EQUALS})
+var sRuleVerdictToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVerdictToEvaluate, Members: &mRuleVerdictToEvaluate, Type: smithy.ShapeTypeUnion, Ext: &eRuleVerdictToEvaluate})
+var sRuleVerdictToEvaluate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iRuleVerdictAttribute, Members: &mRuleVerdictAttribute, Type: smithy.ShapeTypeEnum, Ext: &eRuleVerdictToEvaluate_Attribute})
+var sRuleVerdictToEvaluate_Analysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analysis", ID: &iAnalysis, Members: &mAnalysis, Type: smithy.ShapeTypeStructure, Ext: &eRuleVerdictToEvaluate_Analysis})
+var s_RuleVerdictValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleVerdictValueList, Members: &m_RuleVerdictValueList, Type: smithy.ShapeTypeList, Ext: &e_RuleVerdictValueList})
+var s_RuleVerdictValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleVerdict, Members: &mRuleVerdict, Type: smithy.ShapeTypeEnum, Ext: &e_RuleVerdictValueList_member})
+var sS3Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Action, Members: &mS3Action, Type: smithy.ShapeTypeStructure, Ext: &eS3Action})
+var sS3Action_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eS3Action_ActionFailurePolicy})
+var sS3Action_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eS3Action_RoleArn})
+var sS3Action_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eS3Action_S3Bucket})
+var sS3Action_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &eS3Action_S3Prefix})
+var sS3Action_S3SseKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3SseKmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eS3Action_S3SseKmsKeyId})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var sS3ExportDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ExportDestinationConfiguration, Members: &mS3ExportDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3ExportDestinationConfiguration})
+var sS3ExportDestinationConfiguration_S3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Location", ID: &i_S3Location, Type: smithy.ShapeTypeString, Ext: &eS3ExportDestinationConfiguration_S3Location})
+var s_S3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Location, Type: smithy.ShapeTypeString, Ext: &e_S3Location})
+var s_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &e_S3Prefix})
+var s_S3PresignedURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3PresignedURL, Type: smithy.ShapeTypeString, Ext: &e_S3PresignedURL})
+var sSavedAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavedAddress, Members: &mSavedAddress, Type: smithy.ShapeTypeStructure, Ext: &eSavedAddress})
+var sSavedAddress_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_Address, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eSavedAddress_Address})
+var sSavedAddress_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSavedAddress_CreatedTimestamp})
+var s_SavedAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavedAddresses, Members: &m_SavedAddresses, Type: smithy.ShapeTypeList, Ext: &e_SavedAddresses})
+var s_SavedAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavedAddress, Members: &mSavedAddress, Type: smithy.ShapeTypeStructure, Ext: &e_SavedAddresses_member})
+var s_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &e_SearchId})
+var s_SearchMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_SearchMaxResults})
+var sSearchState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchState, Members: &mSearchState, Type: smithy.ShapeTypeEnum, Ext: &eSearchState})
+var sSearchState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchState_QUEUED})
+var sSearchState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchState_RUNNING})
+var sSearchState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchState_COMPLETED})
+var sSearchState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchState_FAILED})
+var sSearchState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchState_CANCELLED})
+var sSearchStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchStatus, Members: &mSearchStatus, Type: smithy.ShapeTypeStructure, Ext: &eSearchStatus})
+var sSearchStatus_SubmissionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmissionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSearchStatus_SubmissionTimestamp})
+var sSearchStatus_CompletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSearchStatus_CompletionTimestamp})
+var sSearchStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSearchState, Members: &mSearchState, Type: smithy.ShapeTypeEnum, Ext: &eSearchStatus_State})
+var sSearchStatus_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eSearchStatus_ErrorMessage})
+var sSearchSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSummary, Members: &mSearchSummary, Type: smithy.ShapeTypeStructure, Ext: &eSearchSummary})
+var sSearchSummary_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchId", ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &eSearchSummary_SearchId})
+var sSearchSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSearchStatus, Members: &mSearchStatus, Type: smithy.ShapeTypeStructure, Ext: &eSearchSummary_Status})
+var s_SearchSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSummaryList, Members: &m_SearchSummaryList, Type: smithy.ShapeTypeList, Ext: &e_SearchSummaryList})
+var s_SearchSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchSummary, Members: &mSearchSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SearchSummaryList_member})
+var s_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretArn, Type: smithy.ShapeTypeString, Ext: &e_SecretArn})
+var sSendAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendAction, Members: &mSendAction, Type: smithy.ShapeTypeStructure, Ext: &eSendAction})
+var sSendAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eSendAction_ActionFailurePolicy})
+var sSendAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eSendAction_RoleArn})
+var s_SenderIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SenderIpAddress, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SenderIpAddress})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var s_SmtpPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmtpPassword, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SmtpPassword})
+var s_SmtpReplyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SmtpReplyCode, Type: smithy.ShapeTypeString, Ext: &e_SmtpReplyCode})
+var sSnsAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsAction, Members: &mSnsAction, Type: smithy.ShapeTypeStructure, Ext: &eSnsAction})
+var sSnsAction_ActionFailurePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionFailurePolicy", ID: &iActionFailurePolicy, Members: &mActionFailurePolicy, Type: smithy.ShapeTypeEnum, Ext: &eSnsAction_ActionFailurePolicy})
+var sSnsAction_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &eSnsAction_TopicArn})
+var sSnsAction_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eSnsAction_RoleArn})
+var sSnsAction_Encoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encoding", ID: &iSnsNotificationEncoding, Members: &mSnsNotificationEncoding, Type: smithy.ShapeTypeEnum, Ext: &eSnsAction_Encoding})
+var sSnsAction_PayloadType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadType", ID: &iSnsNotificationPayloadType, Members: &mSnsNotificationPayloadType, Type: smithy.ShapeTypeEnum, Ext: &eSnsAction_PayloadType})
+var sSnsNotificationEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsNotificationEncoding, Members: &mSnsNotificationEncoding, Type: smithy.ShapeTypeEnum, Ext: &eSnsNotificationEncoding})
+var sSnsNotificationEncoding_UTF_8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UTF_8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnsNotificationEncoding_UTF_8})
+var sSnsNotificationEncoding_BASE64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASE64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnsNotificationEncoding_BASE64})
+var sSnsNotificationPayloadType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsNotificationPayloadType, Members: &mSnsNotificationPayloadType, Type: smithy.ShapeTypeEnum, Ext: &eSnsNotificationPayloadType})
+var sSnsNotificationPayloadType_HEADERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEADERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnsNotificationPayloadType_HEADERS})
+var sSnsNotificationPayloadType_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnsNotificationPayloadType_CONTENT})
+var s_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsTopicArn, Type: smithy.ShapeTypeString, Ext: &e_SnsTopicArn})
+var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeString, Ext: &e_StatusCode})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &e_StringValue})
+var s_StringValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValueList, Members: &m_StringValueList, Type: smithy.ShapeTypeList, Ext: &e_StringValueList})
+var s_StringValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &e_StringValueList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &e_TaggableResourceArn})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTlsAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsAuthConfiguration, Members: &mTlsAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTlsAuthConfiguration})
+var sTlsAuthConfiguration_TrustStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStore", ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure, Ext: &eTlsAuthConfiguration_TrustStore})
+var sTlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eTlsPolicy})
+var sTlsPolicy_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsPolicy_REQUIRED})
+var sTlsPolicy_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsPolicy_OPTIONAL})
+var sTlsPolicy_FIPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsPolicy_FIPS})
+var sTrafficPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrafficPolicy, Members: &mTrafficPolicy, Type: smithy.ShapeTypeStructure, Ext: &eTrafficPolicy})
+var sTrafficPolicy_TrafficPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyName", ID: &i_TrafficPolicyName, Type: smithy.ShapeTypeString, Ext: &eTrafficPolicy_TrafficPolicyName})
+var sTrafficPolicy_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eTrafficPolicy_TrafficPolicyId})
+var sTrafficPolicy_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &eTrafficPolicy_DefaultAction})
+var s_TrafficPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPolicyArn, Type: smithy.ShapeTypeString, Ext: &e_TrafficPolicyArn})
+var s_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &e_TrafficPolicyId})
+var s_TrafficPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPolicyList, Members: &m_TrafficPolicyList, Type: smithy.ShapeTypeList, Ext: &e_TrafficPolicyList})
+var s_TrafficPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrafficPolicy, Members: &mTrafficPolicy, Type: smithy.ShapeTypeStructure, Ext: &e_TrafficPolicyList_member})
+var s_TrafficPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPolicyName, Type: smithy.ShapeTypeString, Ext: &e_TrafficPolicyName})
+var sTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure, Ext: &eTrustStore})
+var sTrustStore_CAContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAContent", ID: &i_CAContent, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eTrustStore_CAContent})
+var sTrustStore_CrlContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrlContent", ID: &i_CrlContent, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eTrustStore_CrlContent})
+var sTrustStore_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eTrustStore_KmsKeyArn})
+var sTrustStoreResponseOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreResponseOption, Members: &mTrustStoreResponseOption, Type: smithy.ShapeTypeEnum, Ext: &eTrustStoreResponseOption})
+var sTrustStoreResponseOption_EXCLUDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCLUDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreResponseOption_EXCLUDE})
+var sTrustStoreResponseOption_INCLUDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCLUDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTrustStoreResponseOption_INCLUDE})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var sCreateAddonInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonInstanceRequest, Members: &mCreateAddonInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddonInstanceRequest})
+var sCreateAddonInstanceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAddonInstanceRequest_ClientToken})
+var sCreateAddonInstanceRequest_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eCreateAddonInstanceRequest_AddonSubscriptionId})
+var sCreateAddonInstanceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAddonInstanceRequest_Tags})
+var sCreateAddonInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonInstanceResponse, Members: &mCreateAddonInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddonInstanceResponse})
+var sCreateAddonInstanceResponse_AddonInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceId", ID: &i_AddonInstanceId, Type: smithy.ShapeTypeString, Ext: &eCreateAddonInstanceResponse_AddonInstanceId})
+var sCreateAddonSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonSubscriptionRequest, Members: &mCreateAddonSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddonSubscriptionRequest})
+var sCreateAddonSubscriptionRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAddonSubscriptionRequest_ClientToken})
+var sCreateAddonSubscriptionRequest_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonName", ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &eCreateAddonSubscriptionRequest_AddonName})
+var sCreateAddonSubscriptionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAddonSubscriptionRequest_Tags})
+var sCreateAddonSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddonSubscriptionResponse, Members: &mCreateAddonSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddonSubscriptionResponse})
+var sCreateAddonSubscriptionResponse_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eCreateAddonSubscriptionResponse_AddonSubscriptionId})
+var sCreateAddressListImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressListImportJobRequest, Members: &mCreateAddressListImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressListImportJobRequest})
+var sCreateAddressListImportJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListImportJobRequest_ClientToken})
+var sCreateAddressListImportJobRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListImportJobRequest_AddressListId})
+var sCreateAddressListImportJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListImportJobRequest_Name})
+var sCreateAddressListImportJobRequest_ImportDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportDataFormat", ID: &iImportDataFormat, Members: &mImportDataFormat, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressListImportJobRequest_ImportDataFormat})
+var sCreateAddressListImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressListImportJobResponse, Members: &mCreateAddressListImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressListImportJobResponse})
+var sCreateAddressListImportJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListImportJobResponse_JobId})
+var sCreateAddressListImportJobResponse_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreSignedUrl", ID: &i_PreSignedUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListImportJobResponse_PreSignedUrl})
+var sCreateAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressListRequest, Members: &mCreateAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressListRequest})
+var sCreateAddressListRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListRequest_ClientToken})
+var sCreateAddressListRequest_AddressListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListName", ID: &i_AddressListName, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListRequest_AddressListName})
+var sCreateAddressListRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAddressListRequest_Tags})
+var sCreateAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressListResponse, Members: &mCreateAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressListResponse})
+var sCreateAddressListResponse_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eCreateAddressListResponse_AddressListId})
+var sCreateArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchiveRequest, Members: &mCreateArchiveRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateArchiveRequest})
+var sCreateArchiveRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateArchiveRequest_ClientToken})
+var sCreateArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveNameString, Type: smithy.ShapeTypeString, Ext: &eCreateArchiveRequest_ArchiveName})
+var sCreateArchiveRequest_Retention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retention", ID: &iArchiveRetention, Members: &mArchiveRetention, Type: smithy.ShapeTypeUnion, Ext: &eCreateArchiveRequest_Retention})
+var sCreateArchiveRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateArchiveRequest_KmsKeyArn})
+var sCreateArchiveRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateArchiveRequest_Tags})
+var sCreateArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchiveResponse, Members: &mCreateArchiveResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateArchiveResponse})
+var sCreateArchiveResponse_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eCreateArchiveResponse_ArchiveId})
+var sCreateIngressPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngressPointRequest, Members: &mCreateIngressPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngressPointRequest})
+var sCreateIngressPointRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateIngressPointRequest_ClientToken})
+var sCreateIngressPointRequest_IngressPointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointName", ID: &i_IngressPointName, Type: smithy.ShapeTypeString, Ext: &eCreateIngressPointRequest_IngressPointName})
+var sCreateIngressPointRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iIngressPointType, Members: &mIngressPointType, Type: smithy.ShapeTypeEnum, Ext: &eCreateIngressPointRequest_Type})
+var sCreateIngressPointRequest_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eCreateIngressPointRequest_RuleSetId})
+var sCreateIngressPointRequest_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eCreateIngressPointRequest_TrafficPolicyId})
+var sCreateIngressPointRequest_IngressPointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointConfiguration", ID: &iIngressPointConfiguration, Members: &mIngressPointConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateIngressPointRequest_IngressPointConfiguration})
+var sCreateIngressPointRequest_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateIngressPointRequest_NetworkConfiguration})
+var sCreateIngressPointRequest_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eCreateIngressPointRequest_TlsPolicy})
+var sCreateIngressPointRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateIngressPointRequest_Tags})
+var sCreateIngressPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngressPointResponse, Members: &mCreateIngressPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngressPointResponse})
+var sCreateIngressPointResponse_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eCreateIngressPointResponse_IngressPointId})
+var sCreateRelayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelayRequest, Members: &mCreateRelayRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelayRequest})
+var sCreateRelayRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRelayRequest_ClientToken})
+var sCreateRelayRequest_RelayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayName", ID: &i_RelayName, Type: smithy.ShapeTypeString, Ext: &eCreateRelayRequest_RelayName})
+var sCreateRelayRequest_ServerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerName", ID: &i_RelayServerName, Type: smithy.ShapeTypeString, Ext: &eCreateRelayRequest_ServerName})
+var sCreateRelayRequest_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_RelayServerPort, Type: smithy.ShapeTypeInteger, Ext: &eCreateRelayRequest_ServerPort})
+var sCreateRelayRequest_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &iRelayAuthentication, Members: &mRelayAuthentication, Type: smithy.ShapeTypeUnion, Ext: &eCreateRelayRequest_Authentication})
+var sCreateRelayRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRelayRequest_Tags})
+var sCreateRelayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelayResponse, Members: &mCreateRelayResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelayResponse})
+var sCreateRelayResponse_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eCreateRelayResponse_RelayId})
+var sCreateRuleSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleSetRequest, Members: &mCreateRuleSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleSetRequest})
+var sCreateRuleSetRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleSetRequest_ClientToken})
+var sCreateRuleSetRequest_RuleSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetName", ID: &i_RuleSetName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleSetRequest_RuleSetName})
+var sCreateRuleSetRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eCreateRuleSetRequest_Rules})
+var sCreateRuleSetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleSetRequest_Tags})
+var sCreateRuleSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleSetResponse, Members: &mCreateRuleSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleSetResponse})
+var sCreateRuleSetResponse_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eCreateRuleSetResponse_RuleSetId})
+var sCreateTrafficPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrafficPolicyRequest, Members: &mCreateTrafficPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrafficPolicyRequest})
+var sCreateTrafficPolicyRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateTrafficPolicyRequest_ClientToken})
+var sCreateTrafficPolicyRequest_TrafficPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyName", ID: &i_TrafficPolicyName, Type: smithy.ShapeTypeString, Ext: &eCreateTrafficPolicyRequest_TrafficPolicyName})
+var sCreateTrafficPolicyRequest_PolicyStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyStatements", ID: &i_PolicyStatementList, Members: &m_PolicyStatementList, Type: smithy.ShapeTypeList, Ext: &eCreateTrafficPolicyRequest_PolicyStatements})
+var sCreateTrafficPolicyRequest_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &eCreateTrafficPolicyRequest_DefaultAction})
+var sCreateTrafficPolicyRequest_MaxMessageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxMessageSizeBytes", ID: &i_MaxMessageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eCreateTrafficPolicyRequest_MaxMessageSizeBytes})
+var sCreateTrafficPolicyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTrafficPolicyRequest_Tags})
+var sCreateTrafficPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrafficPolicyResponse, Members: &mCreateTrafficPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTrafficPolicyResponse})
+var sCreateTrafficPolicyResponse_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eCreateTrafficPolicyResponse_TrafficPolicyId})
+var sDeleteAddonInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonInstanceRequest, Members: &mDeleteAddonInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddonInstanceRequest})
+var sDeleteAddonInstanceRequest_AddonInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceId", ID: &i_AddonInstanceId, Type: smithy.ShapeTypeString, Ext: &eDeleteAddonInstanceRequest_AddonInstanceId})
+var sDeleteAddonInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddonInstanceResponse})
+var sDeleteAddonSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonSubscriptionRequest, Members: &mDeleteAddonSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddonSubscriptionRequest})
+var sDeleteAddonSubscriptionRequest_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eDeleteAddonSubscriptionRequest_AddonSubscriptionId})
+var sDeleteAddonSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddonSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddonSubscriptionResponse})
+var sDeleteAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddressListRequest, Members: &mDeleteAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddressListRequest})
+var sDeleteAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eDeleteAddressListRequest_AddressListId})
+var sDeleteAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAddressListResponse})
+var sDeleteArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchiveRequest, Members: &mDeleteArchiveRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteArchiveRequest})
+var sDeleteArchiveRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eDeleteArchiveRequest_ArchiveId})
+var sDeleteArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchiveResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteArchiveResponse})
+var sDeleteIngressPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngressPointRequest, Members: &mDeleteIngressPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngressPointRequest})
+var sDeleteIngressPointRequest_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eDeleteIngressPointRequest_IngressPointId})
+var sDeleteIngressPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngressPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngressPointResponse})
+var sDeleteRelayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelayRequest, Members: &mDeleteRelayRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRelayRequest})
+var sDeleteRelayRequest_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eDeleteRelayRequest_RelayId})
+var sDeleteRelayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelayResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRelayResponse})
+var sDeleteRuleSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleSetRequest, Members: &mDeleteRuleSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleSetRequest})
+var sDeleteRuleSetRequest_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleSetRequest_RuleSetId})
+var sDeleteRuleSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleSetResponse})
+var sDeleteTrafficPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrafficPolicyRequest, Members: &mDeleteTrafficPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTrafficPolicyRequest})
+var sDeleteTrafficPolicyRequest_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eDeleteTrafficPolicyRequest_TrafficPolicyId})
+var sDeleteTrafficPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrafficPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTrafficPolicyResponse})
+var sDeregisterMemberFromAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMemberFromAddressListRequest, Members: &mDeregisterMemberFromAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterMemberFromAddressListRequest})
+var sDeregisterMemberFromAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eDeregisterMemberFromAddressListRequest_AddressListId})
+var sDeregisterMemberFromAddressListRequest_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_Address, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eDeregisterMemberFromAddressListRequest_Address})
+var sDeregisterMemberFromAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMemberFromAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterMemberFromAddressListResponse})
+var sGetAddonInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonInstanceRequest, Members: &mGetAddonInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAddonInstanceRequest})
+var sGetAddonInstanceRequest_AddonInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceId", ID: &i_AddonInstanceId, Type: smithy.ShapeTypeString, Ext: &eGetAddonInstanceRequest_AddonInstanceId})
+var sGetAddonInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonInstanceResponse, Members: &mGetAddonInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAddonInstanceResponse})
+var sGetAddonInstanceResponse_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eGetAddonInstanceResponse_AddonSubscriptionId})
+var sGetAddonInstanceResponse_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonName", ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &eGetAddonInstanceResponse_AddonName})
+var sGetAddonInstanceResponse_AddonInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstanceArn", ID: &i_AddonInstanceArn, Type: smithy.ShapeTypeString, Ext: &eGetAddonInstanceResponse_AddonInstanceArn})
+var sGetAddonInstanceResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddonInstanceResponse_CreatedTimestamp})
+var sGetAddonSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonSubscriptionRequest, Members: &mGetAddonSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAddonSubscriptionRequest})
+var sGetAddonSubscriptionRequest_AddonSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionId", ID: &i_AddonSubscriptionId, Type: smithy.ShapeTypeString, Ext: &eGetAddonSubscriptionRequest_AddonSubscriptionId})
+var sGetAddonSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddonSubscriptionResponse, Members: &mGetAddonSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAddonSubscriptionResponse})
+var sGetAddonSubscriptionResponse_AddonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonName", ID: &i_AddonName, Type: smithy.ShapeTypeString, Ext: &eGetAddonSubscriptionResponse_AddonName})
+var sGetAddonSubscriptionResponse_AddonSubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptionArn", ID: &i_AddonSubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eGetAddonSubscriptionResponse_AddonSubscriptionArn})
+var sGetAddonSubscriptionResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddonSubscriptionResponse_CreatedTimestamp})
+var sGetAddressListImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressListImportJobRequest, Members: &mGetAddressListImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAddressListImportJobRequest})
+var sGetAddressListImportJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobRequest_JobId})
+var sGetAddressListImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressListImportJobResponse, Members: &mGetAddressListImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAddressListImportJobResponse})
+var sGetAddressListImportJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobResponse_JobId})
+var sGetAddressListImportJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobResponse_Name})
+var sGetAddressListImportJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iImportJobStatus, Members: &mImportJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAddressListImportJobResponse_Status})
+var sGetAddressListImportJobResponse_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreSignedUrl", ID: &i_PreSignedUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobResponse_PreSignedUrl})
+var sGetAddressListImportJobResponse_ImportedItemsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedItemsCount", ID: &i_JobItemsCount, Type: smithy.ShapeTypeInteger, Ext: &eGetAddressListImportJobResponse_ImportedItemsCount})
+var sGetAddressListImportJobResponse_FailedItemsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedItemsCount", ID: &i_JobItemsCount, Type: smithy.ShapeTypeInteger, Ext: &eGetAddressListImportJobResponse_FailedItemsCount})
+var sGetAddressListImportJobResponse_ImportDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportDataFormat", ID: &iImportDataFormat, Members: &mImportDataFormat, Type: smithy.ShapeTypeStructure, Ext: &eGetAddressListImportJobResponse_ImportDataFormat})
+var sGetAddressListImportJobResponse_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobResponse_AddressListId})
+var sGetAddressListImportJobResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddressListImportJobResponse_CreatedTimestamp})
+var sGetAddressListImportJobResponse_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddressListImportJobResponse_StartTimestamp})
+var sGetAddressListImportJobResponse_CompletedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddressListImportJobResponse_CompletedTimestamp})
+var sGetAddressListImportJobResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGetAddressListImportJobResponse_Error})
+var sGetAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressListRequest, Members: &mGetAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAddressListRequest})
+var sGetAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eGetAddressListRequest_AddressListId})
+var sGetAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAddressListResponse, Members: &mGetAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAddressListResponse})
+var sGetAddressListResponse_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eGetAddressListResponse_AddressListId})
+var sGetAddressListResponse_AddressListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListArn", ID: &i_AddressListArn, Type: smithy.ShapeTypeString, Ext: &eGetAddressListResponse_AddressListArn})
+var sGetAddressListResponse_AddressListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListName", ID: &i_AddressListName, Type: smithy.ShapeTypeString, Ext: &eGetAddressListResponse_AddressListName})
+var sGetAddressListResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddressListResponse_CreatedTimestamp})
+var sGetAddressListResponse_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAddressListResponse_LastUpdatedTimestamp})
+var sGetArchiveExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveExportRequest, Members: &mGetArchiveExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveExportRequest})
+var sGetArchiveExportRequest_ExportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportId", ID: &i_ExportId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveExportRequest_ExportId})
+var sGetArchiveExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveExportResponse, Members: &mGetArchiveExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveExportResponse})
+var sGetArchiveExportResponse_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveExportResponse_ArchiveId})
+var sGetArchiveExportResponse_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iArchiveFilters, Members: &mArchiveFilters, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveExportResponse_Filters})
+var sGetArchiveExportResponse_FromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveExportResponse_FromTimestamp})
+var sGetArchiveExportResponse_ToTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveExportResponse_ToTimestamp})
+var sGetArchiveExportResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ExportMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetArchiveExportResponse_MaxResults})
+var sGetArchiveExportResponse_ExportDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportDestinationConfiguration", ID: &iExportDestinationConfiguration, Members: &mExportDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eGetArchiveExportResponse_ExportDestinationConfiguration})
+var sGetArchiveExportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportStatus, Members: &mExportStatus, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveExportResponse_Status})
+var sGetArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveRequest, Members: &mGetArchiveRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveRequest})
+var sGetArchiveRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eGetArchiveRequest_ArchiveId})
+var sGetArchiveMessageContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessageContentRequest, Members: &mGetArchiveMessageContentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageContentRequest})
+var sGetArchiveMessageContentRequest_ArchivedMessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchivedMessageId", ID: &i_ArchivedMessageId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveMessageContentRequest_ArchivedMessageId})
+var sGetArchiveMessageContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessageContentResponse, Members: &mGetArchiveMessageContentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageContentResponse})
+var sGetArchiveMessageContentResponse_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iMessageBody, Members: &mMessageBody, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageContentResponse_Body})
+var sGetArchiveMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessageRequest, Members: &mGetArchiveMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageRequest})
+var sGetArchiveMessageRequest_ArchivedMessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchivedMessageId", ID: &i_ArchivedMessageId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveMessageRequest_ArchivedMessageId})
+var sGetArchiveMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveMessageResponse, Members: &mGetArchiveMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageResponse})
+var sGetArchiveMessageResponse_MessageDownloadLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDownloadLink", ID: &i_S3PresignedURL, Type: smithy.ShapeTypeString, Ext: &eGetArchiveMessageResponse_MessageDownloadLink})
+var sGetArchiveMessageResponse_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageResponse_Metadata})
+var sGetArchiveMessageResponse_Envelope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Envelope", ID: &iEnvelope, Members: &mEnvelope, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveMessageResponse_Envelope})
+var sGetArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveResponse, Members: &mGetArchiveResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveResponse})
+var sGetArchiveResponse_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eGetArchiveResponse_ArchiveId})
+var sGetArchiveResponse_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveNameString, Type: smithy.ShapeTypeString, Ext: &eGetArchiveResponse_ArchiveName})
+var sGetArchiveResponse_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveArn", ID: &i_ArchiveArn, Type: smithy.ShapeTypeString, Ext: &eGetArchiveResponse_ArchiveArn})
+var sGetArchiveResponse_ArchiveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveState", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum, Ext: &eGetArchiveResponse_ArchiveState})
+var sGetArchiveResponse_Retention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retention", ID: &iArchiveRetention, Members: &mArchiveRetention, Type: smithy.ShapeTypeUnion, Ext: &eGetArchiveResponse_Retention})
+var sGetArchiveResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveResponse_CreatedTimestamp})
+var sGetArchiveResponse_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveResponse_LastUpdatedTimestamp})
+var sGetArchiveResponse_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eGetArchiveResponse_KmsKeyArn})
+var sGetArchiveSearchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearchRequest, Members: &mGetArchiveSearchRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchRequest})
+var sGetArchiveSearchRequest_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchId", ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveSearchRequest_SearchId})
+var sGetArchiveSearchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearchResponse, Members: &mGetArchiveSearchResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchResponse})
+var sGetArchiveSearchResponse_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveSearchResponse_ArchiveId})
+var sGetArchiveSearchResponse_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iArchiveFilters, Members: &mArchiveFilters, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchResponse_Filters})
+var sGetArchiveSearchResponse_FromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveSearchResponse_FromTimestamp})
+var sGetArchiveSearchResponse_ToTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetArchiveSearchResponse_ToTimestamp})
+var sGetArchiveSearchResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_SearchMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetArchiveSearchResponse_MaxResults})
+var sGetArchiveSearchResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSearchStatus, Members: &mSearchStatus, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchResponse_Status})
+var sGetArchiveSearchResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearchResultsRequest, Members: &mGetArchiveSearchResultsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchResultsRequest})
+var sGetArchiveSearchResultsRequest_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchId", ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &eGetArchiveSearchResultsRequest_SearchId})
+var sGetArchiveSearchResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetArchiveSearchResultsResponse, Members: &mGetArchiveSearchResultsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetArchiveSearchResultsResponse})
+var sGetArchiveSearchResultsResponse_Rows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rows", ID: &i_RowsList, Members: &m_RowsList, Type: smithy.ShapeTypeList, Ext: &eGetArchiveSearchResultsResponse_Rows})
+var sGetIngressPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngressPointRequest, Members: &mGetIngressPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIngressPointRequest})
+var sGetIngressPointRequest_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointRequest_IngressPointId})
+var sGetIngressPointRequest_IncludeTrustStoreContents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTrustStoreContents", ID: &iTrustStoreResponseOption, Members: &mTrustStoreResponseOption, Type: smithy.ShapeTypeEnum, Ext: &eGetIngressPointRequest_IncludeTrustStoreContents})
+var sGetIngressPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngressPointResponse, Members: &mGetIngressPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIngressPointResponse})
+var sGetIngressPointResponse_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_IngressPointId})
+var sGetIngressPointResponse_IngressPointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointName", ID: &i_IngressPointName, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_IngressPointName})
+var sGetIngressPointResponse_IngressPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointArn", ID: &i_IngressPointArn, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_IngressPointArn})
+var sGetIngressPointResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngressPointStatus, Members: &mIngressPointStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetIngressPointResponse_Status})
+var sGetIngressPointResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iIngressPointType, Members: &mIngressPointType, Type: smithy.ShapeTypeEnum, Ext: &eGetIngressPointResponse_Type})
+var sGetIngressPointResponse_ARecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARecord", ID: &i_IngressPointARecord, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_ARecord})
+var sGetIngressPointResponse_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_RuleSetId})
+var sGetIngressPointResponse_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eGetIngressPointResponse_TrafficPolicyId})
+var sGetIngressPointResponse_IngressPointAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointAuthConfiguration", ID: &iIngressPointAuthConfiguration, Members: &mIngressPointAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetIngressPointResponse_IngressPointAuthConfiguration})
+var sGetIngressPointResponse_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eGetIngressPointResponse_NetworkConfiguration})
+var sGetIngressPointResponse_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eGetIngressPointResponse_TlsPolicy})
+var sGetIngressPointResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIngressPointResponse_CreatedTimestamp})
+var sGetIngressPointResponse_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIngressPointResponse_LastUpdatedTimestamp})
+var sGetMemberOfAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMemberOfAddressListRequest, Members: &mGetMemberOfAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMemberOfAddressListRequest})
+var sGetMemberOfAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eGetMemberOfAddressListRequest_AddressListId})
+var sGetMemberOfAddressListRequest_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_Address, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetMemberOfAddressListRequest_Address})
+var sGetMemberOfAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMemberOfAddressListResponse, Members: &mGetMemberOfAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMemberOfAddressListResponse})
+var sGetMemberOfAddressListResponse_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_Address, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetMemberOfAddressListResponse_Address})
+var sGetMemberOfAddressListResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMemberOfAddressListResponse_CreatedTimestamp})
+var sGetRelayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelayRequest, Members: &mGetRelayRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRelayRequest})
+var sGetRelayRequest_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eGetRelayRequest_RelayId})
+var sGetRelayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelayResponse, Members: &mGetRelayResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRelayResponse})
+var sGetRelayResponse_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eGetRelayResponse_RelayId})
+var sGetRelayResponse_RelayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayArn", ID: &i_RelayArn, Type: smithy.ShapeTypeString, Ext: &eGetRelayResponse_RelayArn})
+var sGetRelayResponse_RelayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayName", ID: &i_RelayName, Type: smithy.ShapeTypeString, Ext: &eGetRelayResponse_RelayName})
+var sGetRelayResponse_ServerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerName", ID: &i_RelayServerName, Type: smithy.ShapeTypeString, Ext: &eGetRelayResponse_ServerName})
+var sGetRelayResponse_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_RelayServerPort, Type: smithy.ShapeTypeInteger, Ext: &eGetRelayResponse_ServerPort})
+var sGetRelayResponse_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &iRelayAuthentication, Members: &mRelayAuthentication, Type: smithy.ShapeTypeUnion, Ext: &eGetRelayResponse_Authentication})
+var sGetRelayResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRelayResponse_CreatedTimestamp})
+var sGetRelayResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRelayResponse_LastModifiedTimestamp})
+var sGetRuleSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleSetRequest, Members: &mGetRuleSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleSetRequest})
+var sGetRuleSetRequest_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eGetRuleSetRequest_RuleSetId})
+var sGetRuleSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleSetResponse, Members: &mGetRuleSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleSetResponse})
+var sGetRuleSetResponse_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eGetRuleSetResponse_RuleSetId})
+var sGetRuleSetResponse_RuleSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetArn", ID: &i_RuleSetArn, Type: smithy.ShapeTypeString, Ext: &eGetRuleSetResponse_RuleSetArn})
+var sGetRuleSetResponse_RuleSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetName", ID: &i_RuleSetName, Type: smithy.ShapeTypeString, Ext: &eGetRuleSetResponse_RuleSetName})
+var sGetRuleSetResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRuleSetResponse_CreatedDate})
+var sGetRuleSetResponse_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRuleSetResponse_LastModificationDate})
+var sGetRuleSetResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eGetRuleSetResponse_Rules})
+var sGetTrafficPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrafficPolicyRequest, Members: &mGetTrafficPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTrafficPolicyRequest})
+var sGetTrafficPolicyRequest_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eGetTrafficPolicyRequest_TrafficPolicyId})
+var sGetTrafficPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrafficPolicyResponse, Members: &mGetTrafficPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTrafficPolicyResponse})
+var sGetTrafficPolicyResponse_TrafficPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyName", ID: &i_TrafficPolicyName, Type: smithy.ShapeTypeString, Ext: &eGetTrafficPolicyResponse_TrafficPolicyName})
+var sGetTrafficPolicyResponse_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eGetTrafficPolicyResponse_TrafficPolicyId})
+var sGetTrafficPolicyResponse_TrafficPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyArn", ID: &i_TrafficPolicyArn, Type: smithy.ShapeTypeString, Ext: &eGetTrafficPolicyResponse_TrafficPolicyArn})
+var sGetTrafficPolicyResponse_PolicyStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyStatements", ID: &i_PolicyStatementList, Members: &m_PolicyStatementList, Type: smithy.ShapeTypeList, Ext: &eGetTrafficPolicyResponse_PolicyStatements})
+var sGetTrafficPolicyResponse_MaxMessageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxMessageSizeBytes", ID: &i_MaxMessageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eGetTrafficPolicyResponse_MaxMessageSizeBytes})
+var sGetTrafficPolicyResponse_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &eGetTrafficPolicyResponse_DefaultAction})
+var sGetTrafficPolicyResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTrafficPolicyResponse_CreatedTimestamp})
+var sGetTrafficPolicyResponse_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTrafficPolicyResponse_LastUpdatedTimestamp})
+var sListAddonInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonInstancesRequest, Members: &mListAddonInstancesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAddonInstancesRequest})
+var sListAddonInstancesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddonInstancesRequest_NextToken})
+var sListAddonInstancesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListAddonInstancesRequest_PageSize})
+var sListAddonInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonInstancesResponse, Members: &mListAddonInstancesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAddonInstancesResponse})
+var sListAddonInstancesResponse_AddonInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonInstances", ID: &i_AddonInstances, Members: &m_AddonInstances, Type: smithy.ShapeTypeList, Ext: &eListAddonInstancesResponse_AddonInstances})
+var sListAddonInstancesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddonInstancesResponse_NextToken})
+var sListAddonSubscriptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonSubscriptionsRequest, Members: &mListAddonSubscriptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAddonSubscriptionsRequest})
+var sListAddonSubscriptionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddonSubscriptionsRequest_NextToken})
+var sListAddonSubscriptionsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListAddonSubscriptionsRequest_PageSize})
+var sListAddonSubscriptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddonSubscriptionsResponse, Members: &mListAddonSubscriptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAddonSubscriptionsResponse})
+var sListAddonSubscriptionsResponse_AddonSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddonSubscriptions", ID: &i_AddonSubscriptions, Members: &m_AddonSubscriptions, Type: smithy.ShapeTypeList, Ext: &eListAddonSubscriptionsResponse_AddonSubscriptions})
+var sListAddonSubscriptionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddonSubscriptionsResponse_NextToken})
+var sListAddressListImportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressListImportJobsRequest, Members: &mListAddressListImportJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAddressListImportJobsRequest})
+var sListAddressListImportJobsRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eListAddressListImportJobsRequest_AddressListId})
+var sListAddressListImportJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddressListImportJobsRequest_NextToken})
+var sListAddressListImportJobsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListAddressListImportJobsRequest_PageSize})
+var sListAddressListImportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressListImportJobsResponse, Members: &mListAddressListImportJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAddressListImportJobsResponse})
+var sListAddressListImportJobsResponse_ImportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportJobs", ID: &i_ImportJobs, Members: &m_ImportJobs, Type: smithy.ShapeTypeList, Ext: &eListAddressListImportJobsResponse_ImportJobs})
+var sListAddressListImportJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddressListImportJobsResponse_NextToken})
+var sListAddressListsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressListsRequest, Members: &mListAddressListsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAddressListsRequest})
+var sListAddressListsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddressListsRequest_NextToken})
+var sListAddressListsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListAddressListsRequest_PageSize})
+var sListAddressListsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAddressListsResponse, Members: &mListAddressListsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAddressListsResponse})
+var sListAddressListsResponse_AddressLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLists", ID: &i_AddressLists, Members: &m_AddressLists, Type: smithy.ShapeTypeList, Ext: &eListAddressListsResponse_AddressLists})
+var sListAddressListsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAddressListsResponse_NextToken})
+var sListArchiveExportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveExportsRequest, Members: &mListArchiveExportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListArchiveExportsRequest})
+var sListArchiveExportsRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eListArchiveExportsRequest_ArchiveId})
+var sListArchiveExportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchiveExportsRequest_NextToken})
+var sListArchiveExportsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListArchiveExportsRequest_PageSize})
+var sListArchiveExportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveExportsResponse, Members: &mListArchiveExportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListArchiveExportsResponse})
+var sListArchiveExportsResponse_Exports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exports", ID: &i_ExportSummaryList, Members: &m_ExportSummaryList, Type: smithy.ShapeTypeList, Ext: &eListArchiveExportsResponse_Exports})
+var sListArchiveExportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchiveExportsResponse_NextToken})
+var sListArchiveSearchesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveSearchesRequest, Members: &mListArchiveSearchesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListArchiveSearchesRequest})
+var sListArchiveSearchesRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eListArchiveSearchesRequest_ArchiveId})
+var sListArchiveSearchesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchiveSearchesRequest_NextToken})
+var sListArchiveSearchesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListArchiveSearchesRequest_PageSize})
+var sListArchiveSearchesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchiveSearchesResponse, Members: &mListArchiveSearchesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListArchiveSearchesResponse})
+var sListArchiveSearchesResponse_Searches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Searches", ID: &i_SearchSummaryList, Members: &m_SearchSummaryList, Type: smithy.ShapeTypeList, Ext: &eListArchiveSearchesResponse_Searches})
+var sListArchiveSearchesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchiveSearchesResponse_NextToken})
+var sListArchivesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchivesRequest, Members: &mListArchivesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListArchivesRequest})
+var sListArchivesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchivesRequest_NextToken})
+var sListArchivesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListArchivesRequest_PageSize})
+var sListArchivesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchivesResponse, Members: &mListArchivesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListArchivesResponse})
+var sListArchivesResponse_Archives = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Archives", ID: &i_ArchivesList, Members: &m_ArchivesList, Type: smithy.ShapeTypeList, Ext: &eListArchivesResponse_Archives})
+var sListArchivesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListArchivesResponse_NextToken})
+var sListIngressPointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngressPointsRequest, Members: &mListIngressPointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIngressPointsRequest})
+var sListIngressPointsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListIngressPointsRequest_PageSize})
+var sListIngressPointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListIngressPointsRequest_NextToken})
+var sListIngressPointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngressPointsResponse, Members: &mListIngressPointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIngressPointsResponse})
+var sListIngressPointsResponse_IngressPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPoints", ID: &i_IngressPointsList, Members: &m_IngressPointsList, Type: smithy.ShapeTypeList, Ext: &eListIngressPointsResponse_IngressPoints})
+var sListIngressPointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListIngressPointsResponse_NextToken})
+var sListMembersOfAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersOfAddressListRequest, Members: &mListMembersOfAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMembersOfAddressListRequest})
+var sListMembersOfAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eListMembersOfAddressListRequest_AddressListId})
+var sListMembersOfAddressListRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iAddressFilter, Members: &mAddressFilter, Type: smithy.ShapeTypeStructure, Ext: &eListMembersOfAddressListRequest_Filter})
+var sListMembersOfAddressListRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListMembersOfAddressListRequest_NextToken})
+var sListMembersOfAddressListRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_AddressPageSize, Type: smithy.ShapeTypeInteger, Ext: &eListMembersOfAddressListRequest_PageSize})
+var sListMembersOfAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersOfAddressListResponse, Members: &mListMembersOfAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMembersOfAddressListResponse})
+var sListMembersOfAddressListResponse_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_SavedAddresses, Members: &m_SavedAddresses, Type: smithy.ShapeTypeList, Ext: &eListMembersOfAddressListResponse_Addresses})
+var sListMembersOfAddressListResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListMembersOfAddressListResponse_NextToken})
+var sListRelaysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelaysRequest, Members: &mListRelaysRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRelaysRequest})
+var sListRelaysRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListRelaysRequest_PageSize})
+var sListRelaysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRelaysRequest_NextToken})
+var sListRelaysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelaysResponse, Members: &mListRelaysResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRelaysResponse})
+var sListRelaysResponse_Relays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relays", ID: &i_Relays, Members: &m_Relays, Type: smithy.ShapeTypeList, Ext: &eListRelaysResponse_Relays})
+var sListRelaysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRelaysResponse_NextToken})
+var sListRuleSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleSetsRequest, Members: &mListRuleSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRuleSetsRequest})
+var sListRuleSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRuleSetsRequest_NextToken})
+var sListRuleSetsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListRuleSetsRequest_PageSize})
+var sListRuleSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleSetsResponse, Members: &mListRuleSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRuleSetsResponse})
+var sListRuleSetsResponse_RuleSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSets", ID: &i_RuleSets, Members: &m_RuleSets, Type: smithy.ShapeTypeList, Ext: &eListRuleSetsResponse_RuleSets})
+var sListRuleSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRuleSetsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTrafficPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrafficPoliciesRequest, Members: &mListTrafficPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTrafficPoliciesRequest})
+var sListTrafficPoliciesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger, Ext: &eListTrafficPoliciesRequest_PageSize})
+var sListTrafficPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTrafficPoliciesRequest_NextToken})
+var sListTrafficPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrafficPoliciesResponse, Members: &mListTrafficPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTrafficPoliciesResponse})
+var sListTrafficPoliciesResponse_TrafficPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicies", ID: &i_TrafficPolicyList, Members: &m_TrafficPolicyList, Type: smithy.ShapeTypeList, Ext: &eListTrafficPoliciesResponse_TrafficPolicies})
+var sListTrafficPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTrafficPoliciesResponse_NextToken})
+var sRegisterMemberToAddressListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMemberToAddressListRequest, Members: &mRegisterMemberToAddressListRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterMemberToAddressListRequest})
+var sRegisterMemberToAddressListRequest_AddressListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressListId", ID: &i_AddressListId, Type: smithy.ShapeTypeString, Ext: &eRegisterMemberToAddressListRequest_AddressListId})
+var sRegisterMemberToAddressListRequest_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_Address, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eRegisterMemberToAddressListRequest_Address})
+var sRegisterMemberToAddressListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMemberToAddressListResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterMemberToAddressListResponse})
+var sStartAddressListImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAddressListImportJobRequest, Members: &mStartAddressListImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAddressListImportJobRequest})
+var sStartAddressListImportJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStartAddressListImportJobRequest_JobId})
+var sStartAddressListImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAddressListImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartAddressListImportJobResponse})
+var sStartArchiveExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveExportRequest, Members: &mStartArchiveExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveExportRequest})
+var sStartArchiveExportRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eStartArchiveExportRequest_ArchiveId})
+var sStartArchiveExportRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iArchiveFilters, Members: &mArchiveFilters, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveExportRequest_Filters})
+var sStartArchiveExportRequest_FromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartArchiveExportRequest_FromTimestamp})
+var sStartArchiveExportRequest_ToTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartArchiveExportRequest_ToTimestamp})
+var sStartArchiveExportRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ExportMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eStartArchiveExportRequest_MaxResults})
+var sStartArchiveExportRequest_ExportDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportDestinationConfiguration", ID: &iExportDestinationConfiguration, Members: &mExportDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eStartArchiveExportRequest_ExportDestinationConfiguration})
+var sStartArchiveExportRequest_IncludeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartArchiveExportRequest_IncludeMetadata})
+var sStartArchiveExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveExportResponse, Members: &mStartArchiveExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveExportResponse})
+var sStartArchiveExportResponse_ExportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportId", ID: &i_ExportId, Type: smithy.ShapeTypeString, Ext: &eStartArchiveExportResponse_ExportId})
+var sStartArchiveSearchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveSearchRequest, Members: &mStartArchiveSearchRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveSearchRequest})
+var sStartArchiveSearchRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveId, Type: smithy.ShapeTypeString, Ext: &eStartArchiveSearchRequest_ArchiveId})
+var sStartArchiveSearchRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iArchiveFilters, Members: &mArchiveFilters, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveSearchRequest_Filters})
+var sStartArchiveSearchRequest_FromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartArchiveSearchRequest_FromTimestamp})
+var sStartArchiveSearchRequest_ToTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartArchiveSearchRequest_ToTimestamp})
+var sStartArchiveSearchRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_SearchMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eStartArchiveSearchRequest_MaxResults})
+var sStartArchiveSearchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartArchiveSearchResponse, Members: &mStartArchiveSearchResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartArchiveSearchResponse})
+var sStartArchiveSearchResponse_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchId", ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &eStartArchiveSearchResponse_SearchId})
+var sStopAddressListImportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAddressListImportJobRequest, Members: &mStopAddressListImportJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopAddressListImportJobRequest})
+var sStopAddressListImportJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eStopAddressListImportJobRequest_JobId})
+var sStopAddressListImportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAddressListImportJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopAddressListImportJobResponse})
+var sStopArchiveExportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveExportRequest, Members: &mStopArchiveExportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopArchiveExportRequest})
+var sStopArchiveExportRequest_ExportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportId", ID: &i_ExportId, Type: smithy.ShapeTypeString, Ext: &eStopArchiveExportRequest_ExportId})
+var sStopArchiveExportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveExportResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopArchiveExportResponse})
+var sStopArchiveSearchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveSearchRequest, Members: &mStopArchiveSearchRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopArchiveSearchRequest})
+var sStopArchiveSearchRequest_SearchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchId", ID: &i_SearchId, Type: smithy.ShapeTypeString, Ext: &eStopArchiveSearchRequest_SearchId})
+var sStopArchiveSearchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopArchiveSearchResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopArchiveSearchResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchiveRequest, Members: &mUpdateArchiveRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateArchiveRequest})
+var sUpdateArchiveRequest_ArchiveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveId", ID: &i_ArchiveIdString, Type: smithy.ShapeTypeString, Ext: &eUpdateArchiveRequest_ArchiveId})
+var sUpdateArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveNameString, Type: smithy.ShapeTypeString, Ext: &eUpdateArchiveRequest_ArchiveName})
+var sUpdateArchiveRequest_Retention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retention", ID: &iArchiveRetention, Members: &mArchiveRetention, Type: smithy.ShapeTypeUnion, Ext: &eUpdateArchiveRequest_Retention})
+var sUpdateArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchiveResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateArchiveResponse})
+var sUpdateIngressPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngressPointRequest, Members: &mUpdateIngressPointRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIngressPointRequest})
+var sUpdateIngressPointRequest_IngressPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointId", ID: &i_IngressPointId, Type: smithy.ShapeTypeString, Ext: &eUpdateIngressPointRequest_IngressPointId})
+var sUpdateIngressPointRequest_IngressPointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointName", ID: &i_IngressPointName, Type: smithy.ShapeTypeString, Ext: &eUpdateIngressPointRequest_IngressPointName})
+var sUpdateIngressPointRequest_StatusToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusToUpdate", ID: &iIngressPointStatusToUpdate, Members: &mIngressPointStatusToUpdate, Type: smithy.ShapeTypeEnum, Ext: &eUpdateIngressPointRequest_StatusToUpdate})
+var sUpdateIngressPointRequest_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eUpdateIngressPointRequest_RuleSetId})
+var sUpdateIngressPointRequest_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eUpdateIngressPointRequest_TrafficPolicyId})
+var sUpdateIngressPointRequest_IngressPointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressPointConfiguration", ID: &iIngressPointConfiguration, Members: &mIngressPointConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateIngressPointRequest_IngressPointConfiguration})
+var sUpdateIngressPointRequest_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eUpdateIngressPointRequest_TlsPolicy})
+var sUpdateIngressPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngressPointResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIngressPointResponse})
+var sUpdateRelayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelayRequest, Members: &mUpdateRelayRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelayRequest})
+var sUpdateRelayRequest_RelayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayId", ID: &i_RelayId, Type: smithy.ShapeTypeString, Ext: &eUpdateRelayRequest_RelayId})
+var sUpdateRelayRequest_RelayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelayName", ID: &i_RelayName, Type: smithy.ShapeTypeString, Ext: &eUpdateRelayRequest_RelayName})
+var sUpdateRelayRequest_ServerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerName", ID: &i_RelayServerName, Type: smithy.ShapeTypeString, Ext: &eUpdateRelayRequest_ServerName})
+var sUpdateRelayRequest_ServerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerPort", ID: &i_RelayServerPort, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRelayRequest_ServerPort})
+var sUpdateRelayRequest_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &iRelayAuthentication, Members: &mRelayAuthentication, Type: smithy.ShapeTypeUnion, Ext: &eUpdateRelayRequest_Authentication})
+var sUpdateRelayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelayResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelayResponse})
+var sUpdateRuleSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleSetRequest, Members: &mUpdateRuleSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleSetRequest})
+var sUpdateRuleSetRequest_RuleSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetId", ID: &i_RuleSetId, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleSetRequest_RuleSetId})
+var sUpdateRuleSetRequest_RuleSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSetName", ID: &i_RuleSetName, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleSetRequest_RuleSetName})
+var sUpdateRuleSetRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_Rules, Members: &m_Rules, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleSetRequest_Rules})
+var sUpdateRuleSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleSetResponse})
+var sUpdateTrafficPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrafficPolicyRequest, Members: &mUpdateTrafficPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTrafficPolicyRequest})
+var sUpdateTrafficPolicyRequest_TrafficPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyId", ID: &i_TrafficPolicyId, Type: smithy.ShapeTypeString, Ext: &eUpdateTrafficPolicyRequest_TrafficPolicyId})
+var sUpdateTrafficPolicyRequest_TrafficPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPolicyName", ID: &i_TrafficPolicyName, Type: smithy.ShapeTypeString, Ext: &eUpdateTrafficPolicyRequest_TrafficPolicyName})
+var sUpdateTrafficPolicyRequest_PolicyStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyStatements", ID: &i_PolicyStatementList, Members: &m_PolicyStatementList, Type: smithy.ShapeTypeList, Ext: &eUpdateTrafficPolicyRequest_PolicyStatements})
+var sUpdateTrafficPolicyRequest_DefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAction", ID: &iAcceptAction, Members: &mAcceptAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateTrafficPolicyRequest_DefaultAction})
+var sUpdateTrafficPolicyRequest_MaxMessageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxMessageSizeBytes", ID: &i_MaxMessageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eUpdateTrafficPolicyRequest_MaxMessageSizeBytes})
+var sUpdateTrafficPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrafficPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTrafficPolicyResponse})
+
+var CreateAddonInstance = &sCreateAddonInstance
+
+var CreateAddonSubscription = &sCreateAddonSubscription
+
+var CreateAddressList = &sCreateAddressList
+
+var CreateAddressListImportJob = &sCreateAddressListImportJob
+
+var CreateArchive = &sCreateArchive
+
+var CreateIngressPoint = &sCreateIngressPoint
+
+var CreateRelay = &sCreateRelay
+
+var CreateRuleSet = &sCreateRuleSet
+
+var CreateTrafficPolicy = &sCreateTrafficPolicy
+
+var DeleteAddonInstance = &sDeleteAddonInstance
+
+var DeleteAddonSubscription = &sDeleteAddonSubscription
+
+var DeleteAddressList = &sDeleteAddressList
+
+var DeleteArchive = &sDeleteArchive
+
+var DeleteIngressPoint = &sDeleteIngressPoint
+
+var DeleteRelay = &sDeleteRelay
+
+var DeleteRuleSet = &sDeleteRuleSet
+
+var DeleteTrafficPolicy = &sDeleteTrafficPolicy
+
+var DeregisterMemberFromAddressList = &sDeregisterMemberFromAddressList
+
+var GetAddonInstance = &sGetAddonInstance
+
+var GetAddonSubscription = &sGetAddonSubscription
+
+var GetAddressList = &sGetAddressList
+
+var GetAddressListImportJob = &sGetAddressListImportJob
+
+var GetArchive = &sGetArchive
+
+var GetArchiveExport = &sGetArchiveExport
+
+var GetArchiveMessage = &sGetArchiveMessage
+
+var GetArchiveMessageContent = &sGetArchiveMessageContent
+
+var GetArchiveSearch = &sGetArchiveSearch
+
+var GetArchiveSearchResults = &sGetArchiveSearchResults
+
+var GetIngressPoint = &sGetIngressPoint
+
+var GetMemberOfAddressList = &sGetMemberOfAddressList
+
+var GetRelay = &sGetRelay
+
+var GetRuleSet = &sGetRuleSet
+
+var GetTrafficPolicy = &sGetTrafficPolicy
+
+var ListAddonInstances = &sListAddonInstances
+
+var ListAddonSubscriptions = &sListAddonSubscriptions
+
+var ListAddressListImportJobs = &sListAddressListImportJobs
+
+var ListAddressLists = &sListAddressLists
+
+var ListArchiveExports = &sListArchiveExports
+
+var ListArchives = &sListArchives
+
+var ListArchiveSearches = &sListArchiveSearches
+
+var ListIngressPoints = &sListIngressPoints
+
+var ListMembersOfAddressList = &sListMembersOfAddressList
+
+var ListRelays = &sListRelays
+
+var ListRuleSets = &sListRuleSets
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTrafficPolicies = &sListTrafficPolicies
+
+var RegisterMemberToAddressList = &sRegisterMemberToAddressList
+
+var StartAddressListImportJob = &sStartAddressListImportJob
+
+var StartArchiveExport = &sStartArchiveExport
+
+var StartArchiveSearch = &sStartArchiveSearch
+
+var StopAddressListImportJob = &sStopAddressListImportJob
+
+var StopArchiveExport = &sStopArchiveExport
+
+var StopArchiveSearch = &sStopArchiveSearch
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateArchive = &sUpdateArchive
+
+var UpdateIngressPoint = &sUpdateIngressPoint
+
+var UpdateRelay = &sUpdateRelay
+
+var UpdateRuleSet = &sUpdateRuleSet
+
+var UpdateTrafficPolicy = &sUpdateTrafficPolicy
+
+var _MailManagerSvc = &s_MailManagerSvc
+
+var AcceptAction = &sAcceptAction
+var AcceptAction_ALLOW = &sAcceptAction_ALLOW
+var AcceptAction_DENY = &sAcceptAction_DENY
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var ActionFailurePolicy = &sActionFailurePolicy
+var ActionFailurePolicy_CONTINUE = &sActionFailurePolicy_CONTINUE
+var ActionFailurePolicy_DROP = &sActionFailurePolicy_DROP
+
+var AddHeaderAction = &sAddHeaderAction
+var AddHeaderAction_HeaderName = &sAddHeaderAction_HeaderName
+var AddHeaderAction_HeaderValue = &sAddHeaderAction_HeaderValue
+
+var AddonInstance = &sAddonInstance
+var AddonInstance_AddonInstanceId = &sAddonInstance_AddonInstanceId
+var AddonInstance_AddonSubscriptionId = &sAddonInstance_AddonSubscriptionId
+var AddonInstance_AddonName = &sAddonInstance_AddonName
+var AddonInstance_AddonInstanceArn = &sAddonInstance_AddonInstanceArn
+var AddonInstance_CreatedTimestamp = &sAddonInstance_CreatedTimestamp
+
+var _AddonInstanceArn = &s_AddonInstanceArn
+
+var _AddonInstanceId = &s_AddonInstanceId
+
+var _AddonInstances = &s_AddonInstances
+var _AddonInstances_member = &s_AddonInstances_member
+
+var _AddonName = &s_AddonName
+
+var AddonSubscription = &sAddonSubscription
+var AddonSubscription_AddonSubscriptionId = &sAddonSubscription_AddonSubscriptionId
+var AddonSubscription_AddonName = &sAddonSubscription_AddonName
+var AddonSubscription_AddonSubscriptionArn = &sAddonSubscription_AddonSubscriptionArn
+var AddonSubscription_CreatedTimestamp = &sAddonSubscription_CreatedTimestamp
+
+var _AddonSubscriptionArn = &s_AddonSubscriptionArn
+
+var _AddonSubscriptionId = &s_AddonSubscriptionId
+
+var _AddonSubscriptions = &s_AddonSubscriptions
+var _AddonSubscriptions_member = &s_AddonSubscriptions_member
+
+var _Address = &s_Address
+
+var AddressFilter = &sAddressFilter
+var AddressFilter_AddressPrefix = &sAddressFilter_AddressPrefix
+
+var AddressList = &sAddressList
+var AddressList_AddressListId = &sAddressList_AddressListId
+var AddressList_AddressListArn = &sAddressList_AddressListArn
+var AddressList_AddressListName = &sAddressList_AddressListName
+var AddressList_CreatedTimestamp = &sAddressList_CreatedTimestamp
+var AddressList_LastUpdatedTimestamp = &sAddressList_LastUpdatedTimestamp
+
+var _AddressListArn = &s_AddressListArn
+
+var _AddressListId = &s_AddressListId
+
+var _AddressListName = &s_AddressListName
+
+var _AddressLists = &s_AddressLists
+var _AddressLists_member = &s_AddressLists_member
+
+var _AddressPageSize = &s_AddressPageSize
+
+var _AddressPrefix = &s_AddressPrefix
+
+var Analysis = &sAnalysis
+var Analysis_Analyzer = &sAnalysis_Analyzer
+var Analysis_ResultField = &sAnalysis_ResultField
+
+var _AnalyzerArn = &s_AnalyzerArn
+
+var Archive = &sArchive
+var Archive_ArchiveId = &sArchive_ArchiveId
+var Archive_ArchiveName = &sArchive_ArchiveName
+var Archive_ArchiveState = &sArchive_ArchiveState
+var Archive_LastUpdatedTimestamp = &sArchive_LastUpdatedTimestamp
+
+var ArchiveAction = &sArchiveAction
+var ArchiveAction_ActionFailurePolicy = &sArchiveAction_ActionFailurePolicy
+var ArchiveAction_TargetArchive = &sArchiveAction_TargetArchive
+
+var _ArchiveArn = &s_ArchiveArn
+
+var ArchiveBooleanEmailAttribute = &sArchiveBooleanEmailAttribute
+var ArchiveBooleanEmailAttribute_HAS_ATTACHMENTS = &sArchiveBooleanEmailAttribute_HAS_ATTACHMENTS
+
+var ArchiveBooleanExpression = &sArchiveBooleanExpression
+var ArchiveBooleanExpression_Evaluate = &sArchiveBooleanExpression_Evaluate
+var ArchiveBooleanExpression_Operator = &sArchiveBooleanExpression_Operator
+
+var ArchiveBooleanOperator = &sArchiveBooleanOperator
+var ArchiveBooleanOperator_IS_TRUE = &sArchiveBooleanOperator_IS_TRUE
+var ArchiveBooleanOperator_IS_FALSE = &sArchiveBooleanOperator_IS_FALSE
+
+var ArchiveBooleanToEvaluate = &sArchiveBooleanToEvaluate
+var ArchiveBooleanToEvaluate_Attribute = &sArchiveBooleanToEvaluate_Attribute
+
+var _ArchivedMessageId = &s_ArchivedMessageId
+
+var ArchiveFilterCondition = &sArchiveFilterCondition
+var ArchiveFilterCondition_StringExpression = &sArchiveFilterCondition_StringExpression
+var ArchiveFilterCondition_BooleanExpression = &sArchiveFilterCondition_BooleanExpression
+
+var _ArchiveFilterConditions = &s_ArchiveFilterConditions
+var _ArchiveFilterConditions_member = &s_ArchiveFilterConditions_member
+
+var ArchiveFilters = &sArchiveFilters
+var ArchiveFilters_Include = &sArchiveFilters_Include
+var ArchiveFilters_Unless = &sArchiveFilters_Unless
+
+var _ArchiveId = &s_ArchiveId
+
+var _ArchiveIdString = &s_ArchiveIdString
+
+var _ArchiveNameString = &s_ArchiveNameString
+
+var ArchiveRetention = &sArchiveRetention
+var ArchiveRetention_RetentionPeriod = &sArchiveRetention_RetentionPeriod
+
+var _ArchivesList = &s_ArchivesList
+var _ArchivesList_member = &s_ArchivesList_member
+
+var ArchiveState = &sArchiveState
+var ArchiveState_ACTIVE = &sArchiveState_ACTIVE
+var ArchiveState_PENDING_DELETION = &sArchiveState_PENDING_DELETION
+
+var ArchiveStringEmailAttribute = &sArchiveStringEmailAttribute
+var ArchiveStringEmailAttribute_TO = &sArchiveStringEmailAttribute_TO
+var ArchiveStringEmailAttribute_FROM = &sArchiveStringEmailAttribute_FROM
+var ArchiveStringEmailAttribute_CC = &sArchiveStringEmailAttribute_CC
+var ArchiveStringEmailAttribute_SUBJECT = &sArchiveStringEmailAttribute_SUBJECT
+var ArchiveStringEmailAttribute_ENVELOPE_TO = &sArchiveStringEmailAttribute_ENVELOPE_TO
+var ArchiveStringEmailAttribute_ENVELOPE_FROM = &sArchiveStringEmailAttribute_ENVELOPE_FROM
+
+var ArchiveStringExpression = &sArchiveStringExpression
+var ArchiveStringExpression_Evaluate = &sArchiveStringExpression_Evaluate
+var ArchiveStringExpression_Operator = &sArchiveStringExpression_Operator
+var ArchiveStringExpression_Values = &sArchiveStringExpression_Values
+
+var ArchiveStringOperator = &sArchiveStringOperator
+var ArchiveStringOperator_CONTAINS = &sArchiveStringOperator_CONTAINS
+
+var ArchiveStringToEvaluate = &sArchiveStringToEvaluate
+var ArchiveStringToEvaluate_Attribute = &sArchiveStringToEvaluate_Attribute
+
+var BounceAction = &sBounceAction
+var BounceAction_ActionFailurePolicy = &sBounceAction_ActionFailurePolicy
+var BounceAction_RoleArn = &sBounceAction_RoleArn
+var BounceAction_Sender = &sBounceAction_Sender
+var BounceAction_StatusCode = &sBounceAction_StatusCode
+var BounceAction_SmtpReplyCode = &sBounceAction_SmtpReplyCode
+var BounceAction_DiagnosticMessage = &sBounceAction_DiagnosticMessage
+var BounceAction_Message = &sBounceAction_Message
+
+var _BounceMessage = &s_BounceMessage
+
+var _CAContent = &s_CAContent
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _CrlContent = &s_CrlContent
+
+var DeliverToMailboxAction = &sDeliverToMailboxAction
+var DeliverToMailboxAction_ActionFailurePolicy = &sDeliverToMailboxAction_ActionFailurePolicy
+var DeliverToMailboxAction_MailboxArn = &sDeliverToMailboxAction_MailboxArn
+var DeliverToMailboxAction_RoleArn = &sDeliverToMailboxAction_RoleArn
+
+var DeliverToQBusinessAction = &sDeliverToQBusinessAction
+var DeliverToQBusinessAction_ActionFailurePolicy = &sDeliverToQBusinessAction_ActionFailurePolicy
+var DeliverToQBusinessAction_ApplicationId = &sDeliverToQBusinessAction_ApplicationId
+var DeliverToQBusinessAction_IndexId = &sDeliverToQBusinessAction_IndexId
+var DeliverToQBusinessAction_RoleArn = &sDeliverToQBusinessAction_RoleArn
+
+var _DiagnosticMessage = &s_DiagnosticMessage
+
+var DropAction = &sDropAction
+
+var _EmailAddress = &s_EmailAddress
+
+var _EmailReceivedHeadersList = &s_EmailReceivedHeadersList
+var _EmailReceivedHeadersList_member = &s_EmailReceivedHeadersList_member
+
+var Envelope = &sEnvelope
+var Envelope_Helo = &sEnvelope_Helo
+var Envelope_From = &sEnvelope_From
+var Envelope_To = &sEnvelope_To
+
+var _ErrorMessage = &s_ErrorMessage
+
+var ExportDestinationConfiguration = &sExportDestinationConfiguration
+var ExportDestinationConfiguration_S3 = &sExportDestinationConfiguration_S3
+
+var _ExportId = &s_ExportId
+
+var _ExportMaxResults = &s_ExportMaxResults
+
+var ExportState = &sExportState
+var ExportState_QUEUED = &sExportState_QUEUED
+var ExportState_PREPROCESSING = &sExportState_PREPROCESSING
+var ExportState_PROCESSING = &sExportState_PROCESSING
+var ExportState_COMPLETED = &sExportState_COMPLETED
+var ExportState_FAILED = &sExportState_FAILED
+var ExportState_CANCELLED = &sExportState_CANCELLED
+
+var ExportStatus = &sExportStatus
+var ExportStatus_SubmissionTimestamp = &sExportStatus_SubmissionTimestamp
+var ExportStatus_CompletionTimestamp = &sExportStatus_CompletionTimestamp
+var ExportStatus_State = &sExportStatus_State
+var ExportStatus_ErrorMessage = &sExportStatus_ErrorMessage
+
+var ExportSummary = &sExportSummary
+var ExportSummary_ExportId = &sExportSummary_ExportId
+var ExportSummary_Status = &sExportSummary_Status
+
+var _ExportSummaryList = &s_ExportSummaryList
+var _ExportSummaryList_member = &s_ExportSummaryList_member
+
+var _HeaderName = &s_HeaderName
+
+var _HeaderValue = &s_HeaderValue
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var _IdOrArn = &s_IdOrArn
+
+var ImportDataFormat = &sImportDataFormat
+var ImportDataFormat_ImportDataType = &sImportDataFormat_ImportDataType
+
+var ImportDataType = &sImportDataType
+var ImportDataType_CSV = &sImportDataType_CSV
+var ImportDataType_JSON = &sImportDataType_JSON
+
+var ImportJob = &sImportJob
+var ImportJob_JobId = &sImportJob_JobId
+var ImportJob_Name = &sImportJob_Name
+var ImportJob_Status = &sImportJob_Status
+var ImportJob_PreSignedUrl = &sImportJob_PreSignedUrl
+var ImportJob_ImportedItemsCount = &sImportJob_ImportedItemsCount
+var ImportJob_FailedItemsCount = &sImportJob_FailedItemsCount
+var ImportJob_ImportDataFormat = &sImportJob_ImportDataFormat
+var ImportJob_AddressListId = &sImportJob_AddressListId
+var ImportJob_CreatedTimestamp = &sImportJob_CreatedTimestamp
+var ImportJob_StartTimestamp = &sImportJob_StartTimestamp
+var ImportJob_CompletedTimestamp = &sImportJob_CompletedTimestamp
+var ImportJob_Error = &sImportJob_Error
+
+var _ImportJobs = &s_ImportJobs
+var _ImportJobs_member = &s_ImportJobs_member
+
+var ImportJobStatus = &sImportJobStatus
+var ImportJobStatus_CREATED = &sImportJobStatus_CREATED
+var ImportJobStatus_PROCESSING = &sImportJobStatus_PROCESSING
+var ImportJobStatus_COMPLETED = &sImportJobStatus_COMPLETED
+var ImportJobStatus_FAILED = &sImportJobStatus_FAILED
+var ImportJobStatus_STOPPED = &sImportJobStatus_STOPPED
+
+var _IngressAddressListArnList = &s_IngressAddressListArnList
+var _IngressAddressListArnList_member = &s_IngressAddressListArnList_member
+
+var IngressAddressListEmailAttribute = &sIngressAddressListEmailAttribute
+var IngressAddressListEmailAttribute_RECIPIENT = &sIngressAddressListEmailAttribute_RECIPIENT
+
+var IngressAnalysis = &sIngressAnalysis
+var IngressAnalysis_Analyzer = &sIngressAnalysis_Analyzer
+var IngressAnalysis_ResultField = &sIngressAnalysis_ResultField
+
+var IngressBooleanExpression = &sIngressBooleanExpression
+var IngressBooleanExpression_Evaluate = &sIngressBooleanExpression_Evaluate
+var IngressBooleanExpression_Operator = &sIngressBooleanExpression_Operator
+
+var IngressBooleanOperator = &sIngressBooleanOperator
+var IngressBooleanOperator_IS_TRUE = &sIngressBooleanOperator_IS_TRUE
+var IngressBooleanOperator_IS_FALSE = &sIngressBooleanOperator_IS_FALSE
+
+var IngressBooleanToEvaluate = &sIngressBooleanToEvaluate
+var IngressBooleanToEvaluate_Analysis = &sIngressBooleanToEvaluate_Analysis
+var IngressBooleanToEvaluate_IsInAddressList = &sIngressBooleanToEvaluate_IsInAddressList
+
+var IngressIpOperator = &sIngressIpOperator
+var IngressIpOperator_CIDR_MATCHES = &sIngressIpOperator_CIDR_MATCHES
+var IngressIpOperator_NOT_CIDR_MATCHES = &sIngressIpOperator_NOT_CIDR_MATCHES
+
+var IngressIpToEvaluate = &sIngressIpToEvaluate
+var IngressIpToEvaluate_Attribute = &sIngressIpToEvaluate_Attribute
+
+var IngressIpv4Attribute = &sIngressIpv4Attribute
+var IngressIpv4Attribute_SENDER_IP = &sIngressIpv4Attribute_SENDER_IP
+
+var IngressIpv4Expression = &sIngressIpv4Expression
+var IngressIpv4Expression_Evaluate = &sIngressIpv4Expression_Evaluate
+var IngressIpv4Expression_Operator = &sIngressIpv4Expression_Operator
+var IngressIpv4Expression_Values = &sIngressIpv4Expression_Values
+
+var IngressIpv6Attribute = &sIngressIpv6Attribute
+var IngressIpv6Attribute_SENDER_IPV6 = &sIngressIpv6Attribute_SENDER_IPV6
+
+var IngressIpv6Expression = &sIngressIpv6Expression
+var IngressIpv6Expression_Evaluate = &sIngressIpv6Expression_Evaluate
+var IngressIpv6Expression_Operator = &sIngressIpv6Expression_Operator
+var IngressIpv6Expression_Values = &sIngressIpv6Expression_Values
+
+var IngressIpv6ToEvaluate = &sIngressIpv6ToEvaluate
+var IngressIpv6ToEvaluate_Attribute = &sIngressIpv6ToEvaluate_Attribute
+
+var IngressIsInAddressList = &sIngressIsInAddressList
+var IngressIsInAddressList_Attribute = &sIngressIsInAddressList_Attribute
+var IngressIsInAddressList_AddressLists = &sIngressIsInAddressList_AddressLists
+
+var IngressPoint = &sIngressPoint
+var IngressPoint_IngressPointName = &sIngressPoint_IngressPointName
+var IngressPoint_IngressPointId = &sIngressPoint_IngressPointId
+var IngressPoint_Status = &sIngressPoint_Status
+var IngressPoint_Type = &sIngressPoint_Type
+var IngressPoint_ARecord = &sIngressPoint_ARecord
+
+var _IngressPointARecord = &s_IngressPointARecord
+
+var _IngressPointArn = &s_IngressPointArn
+
+var IngressPointAuthConfiguration = &sIngressPointAuthConfiguration
+var IngressPointAuthConfiguration_IngressPointPasswordConfiguration = &sIngressPointAuthConfiguration_IngressPointPasswordConfiguration
+var IngressPointAuthConfiguration_SecretArn = &sIngressPointAuthConfiguration_SecretArn
+var IngressPointAuthConfiguration_TlsAuthConfiguration = &sIngressPointAuthConfiguration_TlsAuthConfiguration
+
+var IngressPointConfiguration = &sIngressPointConfiguration
+var IngressPointConfiguration_SmtpPassword = &sIngressPointConfiguration_SmtpPassword
+var IngressPointConfiguration_SecretArn = &sIngressPointConfiguration_SecretArn
+var IngressPointConfiguration_TlsAuthConfiguration = &sIngressPointConfiguration_TlsAuthConfiguration
+
+var _IngressPointId = &s_IngressPointId
+
+var _IngressPointName = &s_IngressPointName
+
+var IngressPointPasswordConfiguration = &sIngressPointPasswordConfiguration
+var IngressPointPasswordConfiguration_SmtpPasswordVersion = &sIngressPointPasswordConfiguration_SmtpPasswordVersion
+var IngressPointPasswordConfiguration_PreviousSmtpPasswordVersion = &sIngressPointPasswordConfiguration_PreviousSmtpPasswordVersion
+var IngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp = &sIngressPointPasswordConfiguration_PreviousSmtpPasswordExpiryTimestamp
+
+var _IngressPointsList = &s_IngressPointsList
+var _IngressPointsList_member = &s_IngressPointsList_member
+
+var IngressPointStatus = &sIngressPointStatus
+var IngressPointStatus_PROVISIONING = &sIngressPointStatus_PROVISIONING
+var IngressPointStatus_DEPROVISIONING = &sIngressPointStatus_DEPROVISIONING
+var IngressPointStatus_UPDATING = &sIngressPointStatus_UPDATING
+var IngressPointStatus_ACTIVE = &sIngressPointStatus_ACTIVE
+var IngressPointStatus_CLOSED = &sIngressPointStatus_CLOSED
+var IngressPointStatus_FAILED = &sIngressPointStatus_FAILED
+var IngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST = &sIngressPointStatus_ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST
+
+var IngressPointStatusToUpdate = &sIngressPointStatusToUpdate
+var IngressPointStatusToUpdate_ACTIVE = &sIngressPointStatusToUpdate_ACTIVE
+var IngressPointStatusToUpdate_CLOSED = &sIngressPointStatusToUpdate_CLOSED
+
+var IngressPointType = &sIngressPointType
+var IngressPointType_OPEN = &sIngressPointType_OPEN
+var IngressPointType_AUTH = &sIngressPointType_AUTH
+var IngressPointType_MTLS = &sIngressPointType_MTLS
+
+var IngressStringEmailAttribute = &sIngressStringEmailAttribute
+var IngressStringEmailAttribute_RECIPIENT = &sIngressStringEmailAttribute_RECIPIENT
+
+var IngressStringExpression = &sIngressStringExpression
+var IngressStringExpression_Evaluate = &sIngressStringExpression_Evaluate
+var IngressStringExpression_Operator = &sIngressStringExpression_Operator
+var IngressStringExpression_Values = &sIngressStringExpression_Values
+
+var IngressStringOperator = &sIngressStringOperator
+var IngressStringOperator_EQUALS = &sIngressStringOperator_EQUALS
+var IngressStringOperator_NOT_EQUALS = &sIngressStringOperator_NOT_EQUALS
+var IngressStringOperator_STARTS_WITH = &sIngressStringOperator_STARTS_WITH
+var IngressStringOperator_ENDS_WITH = &sIngressStringOperator_ENDS_WITH
+var IngressStringOperator_CONTAINS = &sIngressStringOperator_CONTAINS
+
+var IngressStringToEvaluate = &sIngressStringToEvaluate
+var IngressStringToEvaluate_Attribute = &sIngressStringToEvaluate_Attribute
+var IngressStringToEvaluate_Analysis = &sIngressStringToEvaluate_Analysis
+
+var IngressTlsAttribute = &sIngressTlsAttribute
+var IngressTlsAttribute_TLS_PROTOCOL = &sIngressTlsAttribute_TLS_PROTOCOL
+
+var IngressTlsProtocolAttribute = &sIngressTlsProtocolAttribute
+var IngressTlsProtocolAttribute_TLS1_2 = &sIngressTlsProtocolAttribute_TLS1_2
+var IngressTlsProtocolAttribute_TLS1_3 = &sIngressTlsProtocolAttribute_TLS1_3
+
+var IngressTlsProtocolExpression = &sIngressTlsProtocolExpression
+var IngressTlsProtocolExpression_Evaluate = &sIngressTlsProtocolExpression_Evaluate
+var IngressTlsProtocolExpression_Operator = &sIngressTlsProtocolExpression_Operator
+var IngressTlsProtocolExpression_Value = &sIngressTlsProtocolExpression_Value
+
+var IngressTlsProtocolOperator = &sIngressTlsProtocolOperator
+var IngressTlsProtocolOperator_MINIMUM_TLS_VERSION = &sIngressTlsProtocolOperator_MINIMUM_TLS_VERSION
+var IngressTlsProtocolOperator_IS = &sIngressTlsProtocolOperator_IS
+
+var IngressTlsProtocolToEvaluate = &sIngressTlsProtocolToEvaluate
+var IngressTlsProtocolToEvaluate_Attribute = &sIngressTlsProtocolToEvaluate_Attribute
+
+var InvokeLambdaAction = &sInvokeLambdaAction
+var InvokeLambdaAction_ActionFailurePolicy = &sInvokeLambdaAction_ActionFailurePolicy
+var InvokeLambdaAction_FunctionArn = &sInvokeLambdaAction_FunctionArn
+var InvokeLambdaAction_InvocationType = &sInvokeLambdaAction_InvocationType
+var InvokeLambdaAction_RoleArn = &sInvokeLambdaAction_RoleArn
+var InvokeLambdaAction_RetryTimeMinutes = &sInvokeLambdaAction_RetryTimeMinutes
+
+var IpType = &sIpType
+var IpType_IPV4 = &sIpType_IPV4
+var IpType_DUAL_STACK = &sIpType_DUAL_STACK
+
+var _Ipv4Cidr = &s_Ipv4Cidr
+
+var _Ipv4Cidrs = &s_Ipv4Cidrs
+var _Ipv4Cidrs_member = &s_Ipv4Cidrs_member
+
+var _Ipv6Cidr = &s_Ipv6Cidr
+
+var _Ipv6Cidrs = &s_Ipv6Cidrs
+var _Ipv6Cidrs_member = &s_Ipv6Cidrs_member
+
+var _JobId = &s_JobId
+
+var _JobItemsCount = &s_JobItemsCount
+
+var _JobName = &s_JobName
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _KmsKeyId = &s_KmsKeyId
+
+var _LambdaFunctionArn = &s_LambdaFunctionArn
+
+var LambdaInvocationType = &sLambdaInvocationType
+var LambdaInvocationType_EVENT = &sLambdaInvocationType_EVENT
+var LambdaInvocationType_REQUEST_RESPONSE = &sLambdaInvocationType_REQUEST_RESPONSE
+
+var _LambdaRetryTimeMinutes = &s_LambdaRetryTimeMinutes
+
+var MailFrom = &sMailFrom
+var MailFrom_REPLACE = &sMailFrom_REPLACE
+var MailFrom_PRESERVE = &sMailFrom_PRESERVE
+
+var _MaxMessageSizeBytes = &s_MaxMessageSizeBytes
+
+var MessageBody = &sMessageBody
+var MessageBody_Text = &sMessageBody_Text
+var MessageBody_Html = &sMessageBody_Html
+var MessageBody_MessageMalformed = &sMessageBody_MessageMalformed
+
+var Metadata = &sMetadata
+var Metadata_Timestamp = &sMetadata_Timestamp
+var Metadata_IngressPointId = &sMetadata_IngressPointId
+var Metadata_TrafficPolicyId = &sMetadata_TrafficPolicyId
+var Metadata_RuleSetId = &sMetadata_RuleSetId
+var Metadata_SenderHostname = &sMetadata_SenderHostname
+var Metadata_SenderIpAddress = &sMetadata_SenderIpAddress
+var Metadata_TlsCipherSuite = &sMetadata_TlsCipherSuite
+var Metadata_TlsProtocol = &sMetadata_TlsProtocol
+var Metadata_SendingMethod = &sMetadata_SendingMethod
+var Metadata_SourceIdentity = &sMetadata_SourceIdentity
+var Metadata_SendingPool = &sMetadata_SendingPool
+var Metadata_ConfigurationSet = &sMetadata_ConfigurationSet
+var Metadata_SourceArn = &sMetadata_SourceArn
+
+var _MimeHeaderAttribute = &s_MimeHeaderAttribute
+
+var _NameOrArn = &s_NameOrArn
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_PublicNetworkConfiguration = &sNetworkConfiguration_PublicNetworkConfiguration
+var NetworkConfiguration_PrivateNetworkConfiguration = &sNetworkConfiguration_PrivateNetworkConfiguration
+
+var NoAuthentication = &sNoAuthentication
+
+var _PageSize = &s_PageSize
+
+var _PaginationToken = &s_PaginationToken
+
+var PolicyCondition = &sPolicyCondition
+var PolicyCondition_StringExpression = &sPolicyCondition_StringExpression
+var PolicyCondition_IpExpression = &sPolicyCondition_IpExpression
+var PolicyCondition_Ipv6Expression = &sPolicyCondition_Ipv6Expression
+var PolicyCondition_TlsExpression = &sPolicyCondition_TlsExpression
+var PolicyCondition_BooleanExpression = &sPolicyCondition_BooleanExpression
+
+var _PolicyConditions = &s_PolicyConditions
+var _PolicyConditions_member = &s_PolicyConditions_member
+
+var PolicyStatement = &sPolicyStatement
+var PolicyStatement_Conditions = &sPolicyStatement_Conditions
+var PolicyStatement_Action = &sPolicyStatement_Action
+
+var _PolicyStatementList = &s_PolicyStatementList
+var _PolicyStatementList_member = &s_PolicyStatementList_member
+
+var _PreSignedUrl = &s_PreSignedUrl
+
+var PrivateNetworkConfiguration = &sPrivateNetworkConfiguration
+var PrivateNetworkConfiguration_VpcEndpointId = &sPrivateNetworkConfiguration_VpcEndpointId
+
+var PublicNetworkConfiguration = &sPublicNetworkConfiguration
+var PublicNetworkConfiguration_IpType = &sPublicNetworkConfiguration_IpType
+
+var _QBusinessApplicationId = &s_QBusinessApplicationId
+
+var _QBusinessIndexId = &s_QBusinessIndexId
+
+var _Recipients = &s_Recipients
+var _Recipients_member = &s_Recipients_member
+
+var Relay = &sRelay
+var Relay_RelayId = &sRelay_RelayId
+var Relay_RelayName = &sRelay_RelayName
+var Relay_LastModifiedTimestamp = &sRelay_LastModifiedTimestamp
+
+var RelayAction = &sRelayAction
+var RelayAction_ActionFailurePolicy = &sRelayAction_ActionFailurePolicy
+var RelayAction_Relay = &sRelayAction_Relay
+var RelayAction_MailFrom = &sRelayAction_MailFrom
+
+var _RelayArn = &s_RelayArn
+
+var RelayAuthentication = &sRelayAuthentication
+var RelayAuthentication_SecretArn = &sRelayAuthentication_SecretArn
+var RelayAuthentication_NoAuthentication = &sRelayAuthentication_NoAuthentication
+
+var _RelayId = &s_RelayId
+
+var _RelayName = &s_RelayName
+
+var _Relays = &s_Relays
+var _Relays_member = &s_Relays_member
+
+var _RelayServerName = &s_RelayServerName
+
+var _RelayServerPort = &s_RelayServerPort
+
+var ReplaceRecipientAction = &sReplaceRecipientAction
+var ReplaceRecipientAction_ReplaceWith = &sReplaceRecipientAction_ReplaceWith
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResultField = &s_ResultField
+
+var RetentionPeriod = &sRetentionPeriod
+var RetentionPeriod_THREE_MONTHS = &sRetentionPeriod_THREE_MONTHS
+var RetentionPeriod_SIX_MONTHS = &sRetentionPeriod_SIX_MONTHS
+var RetentionPeriod_NINE_MONTHS = &sRetentionPeriod_NINE_MONTHS
+var RetentionPeriod_ONE_YEAR = &sRetentionPeriod_ONE_YEAR
+var RetentionPeriod_EIGHTEEN_MONTHS = &sRetentionPeriod_EIGHTEEN_MONTHS
+var RetentionPeriod_TWO_YEARS = &sRetentionPeriod_TWO_YEARS
+var RetentionPeriod_THIRTY_MONTHS = &sRetentionPeriod_THIRTY_MONTHS
+var RetentionPeriod_THREE_YEARS = &sRetentionPeriod_THREE_YEARS
+var RetentionPeriod_FOUR_YEARS = &sRetentionPeriod_FOUR_YEARS
+var RetentionPeriod_FIVE_YEARS = &sRetentionPeriod_FIVE_YEARS
+var RetentionPeriod_SIX_YEARS = &sRetentionPeriod_SIX_YEARS
+var RetentionPeriod_SEVEN_YEARS = &sRetentionPeriod_SEVEN_YEARS
+var RetentionPeriod_EIGHT_YEARS = &sRetentionPeriod_EIGHT_YEARS
+var RetentionPeriod_NINE_YEARS = &sRetentionPeriod_NINE_YEARS
+var RetentionPeriod_TEN_YEARS = &sRetentionPeriod_TEN_YEARS
+var RetentionPeriod_PERMANENT = &sRetentionPeriod_PERMANENT
+
+var Row = &sRow
+var Row_ArchivedMessageId = &sRow_ArchivedMessageId
+var Row_ReceivedTimestamp = &sRow_ReceivedTimestamp
+var Row_Date = &sRow_Date
+var Row_To = &sRow_To
+var Row_From = &sRow_From
+var Row_Cc = &sRow_Cc
+var Row_Subject = &sRow_Subject
+var Row_MessageId = &sRow_MessageId
+var Row_HasAttachments = &sRow_HasAttachments
+var Row_ReceivedHeaders = &sRow_ReceivedHeaders
+var Row_InReplyTo = &sRow_InReplyTo
+var Row_XMailer = &sRow_XMailer
+var Row_XOriginalMailer = &sRow_XOriginalMailer
+var Row_XPriority = &sRow_XPriority
+var Row_IngressPointId = &sRow_IngressPointId
+var Row_SenderHostname = &sRow_SenderHostname
+var Row_SenderIpAddress = &sRow_SenderIpAddress
+var Row_Envelope = &sRow_Envelope
+var Row_SourceArn = &sRow_SourceArn
+
+var _RowsList = &s_RowsList
+var _RowsList_member = &s_RowsList_member
+
+var Rule = &sRule
+var Rule_Name = &sRule_Name
+var Rule_Conditions = &sRule_Conditions
+var Rule_Unless = &sRule_Unless
+var Rule_Actions = &sRule_Actions
+
+var RuleAction = &sRuleAction
+var RuleAction_Drop = &sRuleAction_Drop
+var RuleAction_Relay = &sRuleAction_Relay
+var RuleAction_Archive = &sRuleAction_Archive
+var RuleAction_WriteToS3 = &sRuleAction_WriteToS3
+var RuleAction_Send = &sRuleAction_Send
+var RuleAction_AddHeader = &sRuleAction_AddHeader
+var RuleAction_ReplaceRecipient = &sRuleAction_ReplaceRecipient
+var RuleAction_DeliverToMailbox = &sRuleAction_DeliverToMailbox
+var RuleAction_DeliverToQBusiness = &sRuleAction_DeliverToQBusiness
+var RuleAction_PublishToSns = &sRuleAction_PublishToSns
+var RuleAction_Bounce = &sRuleAction_Bounce
+var RuleAction_InvokeLambda = &sRuleAction_InvokeLambda
+
+var _RuleActions = &s_RuleActions
+var _RuleActions_member = &s_RuleActions_member
+
+var _RuleAddressListArnList = &s_RuleAddressListArnList
+var _RuleAddressListArnList_member = &s_RuleAddressListArnList_member
+
+var RuleAddressListEmailAttribute = &sRuleAddressListEmailAttribute
+var RuleAddressListEmailAttribute_RECIPIENT = &sRuleAddressListEmailAttribute_RECIPIENT
+var RuleAddressListEmailAttribute_MAIL_FROM = &sRuleAddressListEmailAttribute_MAIL_FROM
+var RuleAddressListEmailAttribute_SENDER = &sRuleAddressListEmailAttribute_SENDER
+var RuleAddressListEmailAttribute_FROM = &sRuleAddressListEmailAttribute_FROM
+var RuleAddressListEmailAttribute_TO = &sRuleAddressListEmailAttribute_TO
+var RuleAddressListEmailAttribute_CC = &sRuleAddressListEmailAttribute_CC
+
+var RuleBooleanEmailAttribute = &sRuleBooleanEmailAttribute
+var RuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED = &sRuleBooleanEmailAttribute_READ_RECEIPT_REQUESTED
+var RuleBooleanEmailAttribute_TLS = &sRuleBooleanEmailAttribute_TLS
+var RuleBooleanEmailAttribute_TLS_WRAPPED = &sRuleBooleanEmailAttribute_TLS_WRAPPED
+
+var RuleBooleanExpression = &sRuleBooleanExpression
+var RuleBooleanExpression_Evaluate = &sRuleBooleanExpression_Evaluate
+var RuleBooleanExpression_Operator = &sRuleBooleanExpression_Operator
+
+var RuleBooleanOperator = &sRuleBooleanOperator
+var RuleBooleanOperator_IS_TRUE = &sRuleBooleanOperator_IS_TRUE
+var RuleBooleanOperator_IS_FALSE = &sRuleBooleanOperator_IS_FALSE
+
+var RuleBooleanToEvaluate = &sRuleBooleanToEvaluate
+var RuleBooleanToEvaluate_Attribute = &sRuleBooleanToEvaluate_Attribute
+var RuleBooleanToEvaluate_Analysis = &sRuleBooleanToEvaluate_Analysis
+var RuleBooleanToEvaluate_IsInAddressList = &sRuleBooleanToEvaluate_IsInAddressList
+
+var RuleClientCertificateAttribute = &sRuleClientCertificateAttribute
+var RuleClientCertificateAttribute_CN = &sRuleClientCertificateAttribute_CN
+var RuleClientCertificateAttribute_SAN_RFC822_NAME = &sRuleClientCertificateAttribute_SAN_RFC822_NAME
+var RuleClientCertificateAttribute_SAN_DNS_NAME = &sRuleClientCertificateAttribute_SAN_DNS_NAME
+var RuleClientCertificateAttribute_SAN_DIRECTORY_NAME = &sRuleClientCertificateAttribute_SAN_DIRECTORY_NAME
+var RuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER = &sRuleClientCertificateAttribute_SAN_UNIFORM_RESOURCE_IDENTIFIER
+var RuleClientCertificateAttribute_SAN_IP_ADDRESS = &sRuleClientCertificateAttribute_SAN_IP_ADDRESS
+var RuleClientCertificateAttribute_SAN_REGISTERED_ID = &sRuleClientCertificateAttribute_SAN_REGISTERED_ID
+var RuleClientCertificateAttribute_SERIAL_NUMBER = &sRuleClientCertificateAttribute_SERIAL_NUMBER
+
+var RuleCondition = &sRuleCondition
+var RuleCondition_BooleanExpression = &sRuleCondition_BooleanExpression
+var RuleCondition_StringExpression = &sRuleCondition_StringExpression
+var RuleCondition_NumberExpression = &sRuleCondition_NumberExpression
+var RuleCondition_IpExpression = &sRuleCondition_IpExpression
+var RuleCondition_VerdictExpression = &sRuleCondition_VerdictExpression
+var RuleCondition_DmarcExpression = &sRuleCondition_DmarcExpression
+
+var _RuleConditions = &s_RuleConditions
+var _RuleConditions_member = &s_RuleConditions_member
+
+var RuleDmarcExpression = &sRuleDmarcExpression
+var RuleDmarcExpression_Operator = &sRuleDmarcExpression_Operator
+var RuleDmarcExpression_Values = &sRuleDmarcExpression_Values
+
+var RuleDmarcOperator = &sRuleDmarcOperator
+var RuleDmarcOperator_EQUALS = &sRuleDmarcOperator_EQUALS
+var RuleDmarcOperator_NOT_EQUALS = &sRuleDmarcOperator_NOT_EQUALS
+
+var RuleDmarcPolicy = &sRuleDmarcPolicy
+var RuleDmarcPolicy_NONE = &sRuleDmarcPolicy_NONE
+var RuleDmarcPolicy_QUARANTINE = &sRuleDmarcPolicy_QUARANTINE
+var RuleDmarcPolicy_REJECT = &sRuleDmarcPolicy_REJECT
+
+var _RuleDmarcValueList = &s_RuleDmarcValueList
+var _RuleDmarcValueList_member = &s_RuleDmarcValueList_member
+
+var RuleIpEmailAttribute = &sRuleIpEmailAttribute
+var RuleIpEmailAttribute_SOURCE_IP = &sRuleIpEmailAttribute_SOURCE_IP
+
+var RuleIpExpression = &sRuleIpExpression
+var RuleIpExpression_Evaluate = &sRuleIpExpression_Evaluate
+var RuleIpExpression_Operator = &sRuleIpExpression_Operator
+var RuleIpExpression_Values = &sRuleIpExpression_Values
+
+var RuleIpOperator = &sRuleIpOperator
+var RuleIpOperator_CIDR_MATCHES = &sRuleIpOperator_CIDR_MATCHES
+var RuleIpOperator_NOT_CIDR_MATCHES = &sRuleIpOperator_NOT_CIDR_MATCHES
+
+var _RuleIpStringValue = &s_RuleIpStringValue
+
+var RuleIpToEvaluate = &sRuleIpToEvaluate
+var RuleIpToEvaluate_Attribute = &sRuleIpToEvaluate_Attribute
+
+var _RuleIpValueList = &s_RuleIpValueList
+var _RuleIpValueList_member = &s_RuleIpValueList_member
+
+var RuleIsInAddressList = &sRuleIsInAddressList
+var RuleIsInAddressList_Attribute = &sRuleIsInAddressList_Attribute
+var RuleIsInAddressList_AddressLists = &sRuleIsInAddressList_AddressLists
+
+var _RuleName = &s_RuleName
+
+var RuleNumberEmailAttribute = &sRuleNumberEmailAttribute
+var RuleNumberEmailAttribute_MESSAGE_SIZE = &sRuleNumberEmailAttribute_MESSAGE_SIZE
+
+var RuleNumberExpression = &sRuleNumberExpression
+var RuleNumberExpression_Evaluate = &sRuleNumberExpression_Evaluate
+var RuleNumberExpression_Operator = &sRuleNumberExpression_Operator
+var RuleNumberExpression_Value = &sRuleNumberExpression_Value
+
+var RuleNumberOperator = &sRuleNumberOperator
+var RuleNumberOperator_EQUALS = &sRuleNumberOperator_EQUALS
+var RuleNumberOperator_NOT_EQUALS = &sRuleNumberOperator_NOT_EQUALS
+var RuleNumberOperator_LESS_THAN = &sRuleNumberOperator_LESS_THAN
+var RuleNumberOperator_GREATER_THAN = &sRuleNumberOperator_GREATER_THAN
+var RuleNumberOperator_LESS_THAN_OR_EQUAL = &sRuleNumberOperator_LESS_THAN_OR_EQUAL
+var RuleNumberOperator_GREATER_THAN_OR_EQUAL = &sRuleNumberOperator_GREATER_THAN_OR_EQUAL
+
+var RuleNumberToEvaluate = &sRuleNumberToEvaluate
+var RuleNumberToEvaluate_Attribute = &sRuleNumberToEvaluate_Attribute
+
+var _Rules = &s_Rules
+var _Rules_member = &s_Rules_member
+
+var RuleSet = &sRuleSet
+var RuleSet_RuleSetId = &sRuleSet_RuleSetId
+var RuleSet_RuleSetName = &sRuleSet_RuleSetName
+var RuleSet_LastModificationDate = &sRuleSet_LastModificationDate
+
+var _RuleSetArn = &s_RuleSetArn
+
+var _RuleSetId = &s_RuleSetId
+
+var _RuleSetName = &s_RuleSetName
+
+var _RuleSets = &s_RuleSets
+var _RuleSets_member = &s_RuleSets_member
+
+var RuleStringEmailAttribute = &sRuleStringEmailAttribute
+var RuleStringEmailAttribute_MAIL_FROM = &sRuleStringEmailAttribute_MAIL_FROM
+var RuleStringEmailAttribute_HELO = &sRuleStringEmailAttribute_HELO
+var RuleStringEmailAttribute_RECIPIENT = &sRuleStringEmailAttribute_RECIPIENT
+var RuleStringEmailAttribute_SENDER = &sRuleStringEmailAttribute_SENDER
+var RuleStringEmailAttribute_FROM = &sRuleStringEmailAttribute_FROM
+var RuleStringEmailAttribute_SUBJECT = &sRuleStringEmailAttribute_SUBJECT
+var RuleStringEmailAttribute_TO = &sRuleStringEmailAttribute_TO
+var RuleStringEmailAttribute_CC = &sRuleStringEmailAttribute_CC
+
+var RuleStringExpression = &sRuleStringExpression
+var RuleStringExpression_Evaluate = &sRuleStringExpression_Evaluate
+var RuleStringExpression_Operator = &sRuleStringExpression_Operator
+var RuleStringExpression_Values = &sRuleStringExpression_Values
+
+var _RuleStringList = &s_RuleStringList
+var _RuleStringList_member = &s_RuleStringList_member
+
+var RuleStringOperator = &sRuleStringOperator
+var RuleStringOperator_EQUALS = &sRuleStringOperator_EQUALS
+var RuleStringOperator_NOT_EQUALS = &sRuleStringOperator_NOT_EQUALS
+var RuleStringOperator_STARTS_WITH = &sRuleStringOperator_STARTS_WITH
+var RuleStringOperator_ENDS_WITH = &sRuleStringOperator_ENDS_WITH
+var RuleStringOperator_CONTAINS = &sRuleStringOperator_CONTAINS
+
+var RuleStringToEvaluate = &sRuleStringToEvaluate
+var RuleStringToEvaluate_Attribute = &sRuleStringToEvaluate_Attribute
+var RuleStringToEvaluate_MimeHeaderAttribute = &sRuleStringToEvaluate_MimeHeaderAttribute
+var RuleStringToEvaluate_Analysis = &sRuleStringToEvaluate_Analysis
+var RuleStringToEvaluate_ClientCertificateAttribute = &sRuleStringToEvaluate_ClientCertificateAttribute
+
+var _RuleStringValue = &s_RuleStringValue
+
+var RuleVerdict = &sRuleVerdict
+var RuleVerdict_PASS = &sRuleVerdict_PASS
+var RuleVerdict_FAIL = &sRuleVerdict_FAIL
+var RuleVerdict_GRAY = &sRuleVerdict_GRAY
+var RuleVerdict_PROCESSING_FAILED = &sRuleVerdict_PROCESSING_FAILED
+
+var RuleVerdictAttribute = &sRuleVerdictAttribute
+var RuleVerdictAttribute_SPF = &sRuleVerdictAttribute_SPF
+var RuleVerdictAttribute_DKIM = &sRuleVerdictAttribute_DKIM
+
+var RuleVerdictExpression = &sRuleVerdictExpression
+var RuleVerdictExpression_Evaluate = &sRuleVerdictExpression_Evaluate
+var RuleVerdictExpression_Operator = &sRuleVerdictExpression_Operator
+var RuleVerdictExpression_Values = &sRuleVerdictExpression_Values
+
+var RuleVerdictOperator = &sRuleVerdictOperator
+var RuleVerdictOperator_EQUALS = &sRuleVerdictOperator_EQUALS
+var RuleVerdictOperator_NOT_EQUALS = &sRuleVerdictOperator_NOT_EQUALS
+
+var RuleVerdictToEvaluate = &sRuleVerdictToEvaluate
+var RuleVerdictToEvaluate_Attribute = &sRuleVerdictToEvaluate_Attribute
+var RuleVerdictToEvaluate_Analysis = &sRuleVerdictToEvaluate_Analysis
+
+var _RuleVerdictValueList = &s_RuleVerdictValueList
+var _RuleVerdictValueList_member = &s_RuleVerdictValueList_member
+
+var S3Action = &sS3Action
+var S3Action_ActionFailurePolicy = &sS3Action_ActionFailurePolicy
+var S3Action_RoleArn = &sS3Action_RoleArn
+var S3Action_S3Bucket = &sS3Action_S3Bucket
+var S3Action_S3Prefix = &sS3Action_S3Prefix
+var S3Action_S3SseKmsKeyId = &sS3Action_S3SseKmsKeyId
+
+var _S3Bucket = &s_S3Bucket
+
+var S3ExportDestinationConfiguration = &sS3ExportDestinationConfiguration
+var S3ExportDestinationConfiguration_S3Location = &sS3ExportDestinationConfiguration_S3Location
+
+var _S3Location = &s_S3Location
+
+var _S3Prefix = &s_S3Prefix
+
+var _S3PresignedURL = &s_S3PresignedURL
+
+var SavedAddress = &sSavedAddress
+var SavedAddress_Address = &sSavedAddress_Address
+var SavedAddress_CreatedTimestamp = &sSavedAddress_CreatedTimestamp
+
+var _SavedAddresses = &s_SavedAddresses
+var _SavedAddresses_member = &s_SavedAddresses_member
+
+var _SearchId = &s_SearchId
+
+var _SearchMaxResults = &s_SearchMaxResults
+
+var SearchState = &sSearchState
+var SearchState_QUEUED = &sSearchState_QUEUED
+var SearchState_RUNNING = &sSearchState_RUNNING
+var SearchState_COMPLETED = &sSearchState_COMPLETED
+var SearchState_FAILED = &sSearchState_FAILED
+var SearchState_CANCELLED = &sSearchState_CANCELLED
+
+var SearchStatus = &sSearchStatus
+var SearchStatus_SubmissionTimestamp = &sSearchStatus_SubmissionTimestamp
+var SearchStatus_CompletionTimestamp = &sSearchStatus_CompletionTimestamp
+var SearchStatus_State = &sSearchStatus_State
+var SearchStatus_ErrorMessage = &sSearchStatus_ErrorMessage
+
+var SearchSummary = &sSearchSummary
+var SearchSummary_SearchId = &sSearchSummary_SearchId
+var SearchSummary_Status = &sSearchSummary_Status
+
+var _SearchSummaryList = &s_SearchSummaryList
+var _SearchSummaryList_member = &s_SearchSummaryList_member
+
+var _SecretArn = &s_SecretArn
+
+var SendAction = &sSendAction
+var SendAction_ActionFailurePolicy = &sSendAction_ActionFailurePolicy
+var SendAction_RoleArn = &sSendAction_RoleArn
+
+var _SenderIpAddress = &s_SenderIpAddress
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _SmtpPassword = &s_SmtpPassword
+
+var _SmtpReplyCode = &s_SmtpReplyCode
+
+var SnsAction = &sSnsAction
+var SnsAction_ActionFailurePolicy = &sSnsAction_ActionFailurePolicy
+var SnsAction_TopicArn = &sSnsAction_TopicArn
+var SnsAction_RoleArn = &sSnsAction_RoleArn
+var SnsAction_Encoding = &sSnsAction_Encoding
+var SnsAction_PayloadType = &sSnsAction_PayloadType
+
+var SnsNotificationEncoding = &sSnsNotificationEncoding
+var SnsNotificationEncoding_UTF_8 = &sSnsNotificationEncoding_UTF_8
+var SnsNotificationEncoding_BASE64 = &sSnsNotificationEncoding_BASE64
+
+var SnsNotificationPayloadType = &sSnsNotificationPayloadType
+var SnsNotificationPayloadType_HEADERS = &sSnsNotificationPayloadType_HEADERS
+var SnsNotificationPayloadType_CONTENT = &sSnsNotificationPayloadType_CONTENT
+
+var _SnsTopicArn = &s_SnsTopicArn
+
+var _StatusCode = &s_StatusCode
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _StringValue = &s_StringValue
+
+var _StringValueList = &s_StringValueList
+var _StringValueList_member = &s_StringValueList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TaggableResourceArn = &s_TaggableResourceArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var TlsAuthConfiguration = &sTlsAuthConfiguration
+var TlsAuthConfiguration_TrustStore = &sTlsAuthConfiguration_TrustStore
+
+var TlsPolicy = &sTlsPolicy
+var TlsPolicy_REQUIRED = &sTlsPolicy_REQUIRED
+var TlsPolicy_OPTIONAL = &sTlsPolicy_OPTIONAL
+var TlsPolicy_FIPS = &sTlsPolicy_FIPS
+
+var TrafficPolicy = &sTrafficPolicy
+var TrafficPolicy_TrafficPolicyName = &sTrafficPolicy_TrafficPolicyName
+var TrafficPolicy_TrafficPolicyId = &sTrafficPolicy_TrafficPolicyId
+var TrafficPolicy_DefaultAction = &sTrafficPolicy_DefaultAction
+
+var _TrafficPolicyArn = &s_TrafficPolicyArn
+
+var _TrafficPolicyId = &s_TrafficPolicyId
+
+var _TrafficPolicyList = &s_TrafficPolicyList
+var _TrafficPolicyList_member = &s_TrafficPolicyList_member
+
+var _TrafficPolicyName = &s_TrafficPolicyName
+
+var TrustStore = &sTrustStore
+var TrustStore_CAContent = &sTrustStore_CAContent
+var TrustStore_CrlContent = &sTrustStore_CrlContent
+var TrustStore_KmsKeyArn = &sTrustStore_KmsKeyArn
+
+var TrustStoreResponseOption = &sTrustStoreResponseOption
+var TrustStoreResponseOption_EXCLUDE = &sTrustStoreResponseOption_EXCLUDE
+var TrustStoreResponseOption_INCLUDE = &sTrustStoreResponseOption_INCLUDE
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var CreateAddonInstanceRequest = &sCreateAddonInstanceRequest
+var CreateAddonInstanceRequest_ClientToken = &sCreateAddonInstanceRequest_ClientToken
+var CreateAddonInstanceRequest_AddonSubscriptionId = &sCreateAddonInstanceRequest_AddonSubscriptionId
+var CreateAddonInstanceRequest_Tags = &sCreateAddonInstanceRequest_Tags
+
+var CreateAddonInstanceResponse = &sCreateAddonInstanceResponse
+var CreateAddonInstanceResponse_AddonInstanceId = &sCreateAddonInstanceResponse_AddonInstanceId
+
+var CreateAddonSubscriptionRequest = &sCreateAddonSubscriptionRequest
+var CreateAddonSubscriptionRequest_ClientToken = &sCreateAddonSubscriptionRequest_ClientToken
+var CreateAddonSubscriptionRequest_AddonName = &sCreateAddonSubscriptionRequest_AddonName
+var CreateAddonSubscriptionRequest_Tags = &sCreateAddonSubscriptionRequest_Tags
+
+var CreateAddonSubscriptionResponse = &sCreateAddonSubscriptionResponse
+var CreateAddonSubscriptionResponse_AddonSubscriptionId = &sCreateAddonSubscriptionResponse_AddonSubscriptionId
+
+var CreateAddressListImportJobRequest = &sCreateAddressListImportJobRequest
+var CreateAddressListImportJobRequest_ClientToken = &sCreateAddressListImportJobRequest_ClientToken
+var CreateAddressListImportJobRequest_AddressListId = &sCreateAddressListImportJobRequest_AddressListId
+var CreateAddressListImportJobRequest_Name = &sCreateAddressListImportJobRequest_Name
+var CreateAddressListImportJobRequest_ImportDataFormat = &sCreateAddressListImportJobRequest_ImportDataFormat
+
+var CreateAddressListImportJobResponse = &sCreateAddressListImportJobResponse
+var CreateAddressListImportJobResponse_JobId = &sCreateAddressListImportJobResponse_JobId
+var CreateAddressListImportJobResponse_PreSignedUrl = &sCreateAddressListImportJobResponse_PreSignedUrl
+
+var CreateAddressListRequest = &sCreateAddressListRequest
+var CreateAddressListRequest_ClientToken = &sCreateAddressListRequest_ClientToken
+var CreateAddressListRequest_AddressListName = &sCreateAddressListRequest_AddressListName
+var CreateAddressListRequest_Tags = &sCreateAddressListRequest_Tags
+
+var CreateAddressListResponse = &sCreateAddressListResponse
+var CreateAddressListResponse_AddressListId = &sCreateAddressListResponse_AddressListId
+
+var CreateArchiveRequest = &sCreateArchiveRequest
+var CreateArchiveRequest_ClientToken = &sCreateArchiveRequest_ClientToken
+var CreateArchiveRequest_ArchiveName = &sCreateArchiveRequest_ArchiveName
+var CreateArchiveRequest_Retention = &sCreateArchiveRequest_Retention
+var CreateArchiveRequest_KmsKeyArn = &sCreateArchiveRequest_KmsKeyArn
+var CreateArchiveRequest_Tags = &sCreateArchiveRequest_Tags
+
+var CreateArchiveResponse = &sCreateArchiveResponse
+var CreateArchiveResponse_ArchiveId = &sCreateArchiveResponse_ArchiveId
+
+var CreateIngressPointRequest = &sCreateIngressPointRequest
+var CreateIngressPointRequest_ClientToken = &sCreateIngressPointRequest_ClientToken
+var CreateIngressPointRequest_IngressPointName = &sCreateIngressPointRequest_IngressPointName
+var CreateIngressPointRequest_Type = &sCreateIngressPointRequest_Type
+var CreateIngressPointRequest_RuleSetId = &sCreateIngressPointRequest_RuleSetId
+var CreateIngressPointRequest_TrafficPolicyId = &sCreateIngressPointRequest_TrafficPolicyId
+var CreateIngressPointRequest_IngressPointConfiguration = &sCreateIngressPointRequest_IngressPointConfiguration
+var CreateIngressPointRequest_NetworkConfiguration = &sCreateIngressPointRequest_NetworkConfiguration
+var CreateIngressPointRequest_TlsPolicy = &sCreateIngressPointRequest_TlsPolicy
+var CreateIngressPointRequest_Tags = &sCreateIngressPointRequest_Tags
+
+var CreateIngressPointResponse = &sCreateIngressPointResponse
+var CreateIngressPointResponse_IngressPointId = &sCreateIngressPointResponse_IngressPointId
+
+var CreateRelayRequest = &sCreateRelayRequest
+var CreateRelayRequest_ClientToken = &sCreateRelayRequest_ClientToken
+var CreateRelayRequest_RelayName = &sCreateRelayRequest_RelayName
+var CreateRelayRequest_ServerName = &sCreateRelayRequest_ServerName
+var CreateRelayRequest_ServerPort = &sCreateRelayRequest_ServerPort
+var CreateRelayRequest_Authentication = &sCreateRelayRequest_Authentication
+var CreateRelayRequest_Tags = &sCreateRelayRequest_Tags
+
+var CreateRelayResponse = &sCreateRelayResponse
+var CreateRelayResponse_RelayId = &sCreateRelayResponse_RelayId
+
+var CreateRuleSetRequest = &sCreateRuleSetRequest
+var CreateRuleSetRequest_ClientToken = &sCreateRuleSetRequest_ClientToken
+var CreateRuleSetRequest_RuleSetName = &sCreateRuleSetRequest_RuleSetName
+var CreateRuleSetRequest_Rules = &sCreateRuleSetRequest_Rules
+var CreateRuleSetRequest_Tags = &sCreateRuleSetRequest_Tags
+
+var CreateRuleSetResponse = &sCreateRuleSetResponse
+var CreateRuleSetResponse_RuleSetId = &sCreateRuleSetResponse_RuleSetId
+
+var CreateTrafficPolicyRequest = &sCreateTrafficPolicyRequest
+var CreateTrafficPolicyRequest_ClientToken = &sCreateTrafficPolicyRequest_ClientToken
+var CreateTrafficPolicyRequest_TrafficPolicyName = &sCreateTrafficPolicyRequest_TrafficPolicyName
+var CreateTrafficPolicyRequest_PolicyStatements = &sCreateTrafficPolicyRequest_PolicyStatements
+var CreateTrafficPolicyRequest_DefaultAction = &sCreateTrafficPolicyRequest_DefaultAction
+var CreateTrafficPolicyRequest_MaxMessageSizeBytes = &sCreateTrafficPolicyRequest_MaxMessageSizeBytes
+var CreateTrafficPolicyRequest_Tags = &sCreateTrafficPolicyRequest_Tags
+
+var CreateTrafficPolicyResponse = &sCreateTrafficPolicyResponse
+var CreateTrafficPolicyResponse_TrafficPolicyId = &sCreateTrafficPolicyResponse_TrafficPolicyId
+
+var DeleteAddonInstanceRequest = &sDeleteAddonInstanceRequest
+var DeleteAddonInstanceRequest_AddonInstanceId = &sDeleteAddonInstanceRequest_AddonInstanceId
+
+var DeleteAddonInstanceResponse = &sDeleteAddonInstanceResponse
+
+var DeleteAddonSubscriptionRequest = &sDeleteAddonSubscriptionRequest
+var DeleteAddonSubscriptionRequest_AddonSubscriptionId = &sDeleteAddonSubscriptionRequest_AddonSubscriptionId
+
+var DeleteAddonSubscriptionResponse = &sDeleteAddonSubscriptionResponse
+
+var DeleteAddressListRequest = &sDeleteAddressListRequest
+var DeleteAddressListRequest_AddressListId = &sDeleteAddressListRequest_AddressListId
+
+var DeleteAddressListResponse = &sDeleteAddressListResponse
+
+var DeleteArchiveRequest = &sDeleteArchiveRequest
+var DeleteArchiveRequest_ArchiveId = &sDeleteArchiveRequest_ArchiveId
+
+var DeleteArchiveResponse = &sDeleteArchiveResponse
+
+var DeleteIngressPointRequest = &sDeleteIngressPointRequest
+var DeleteIngressPointRequest_IngressPointId = &sDeleteIngressPointRequest_IngressPointId
+
+var DeleteIngressPointResponse = &sDeleteIngressPointResponse
+
+var DeleteRelayRequest = &sDeleteRelayRequest
+var DeleteRelayRequest_RelayId = &sDeleteRelayRequest_RelayId
+
+var DeleteRelayResponse = &sDeleteRelayResponse
+
+var DeleteRuleSetRequest = &sDeleteRuleSetRequest
+var DeleteRuleSetRequest_RuleSetId = &sDeleteRuleSetRequest_RuleSetId
+
+var DeleteRuleSetResponse = &sDeleteRuleSetResponse
+
+var DeleteTrafficPolicyRequest = &sDeleteTrafficPolicyRequest
+var DeleteTrafficPolicyRequest_TrafficPolicyId = &sDeleteTrafficPolicyRequest_TrafficPolicyId
+
+var DeleteTrafficPolicyResponse = &sDeleteTrafficPolicyResponse
+
+var DeregisterMemberFromAddressListRequest = &sDeregisterMemberFromAddressListRequest
+var DeregisterMemberFromAddressListRequest_AddressListId = &sDeregisterMemberFromAddressListRequest_AddressListId
+var DeregisterMemberFromAddressListRequest_Address = &sDeregisterMemberFromAddressListRequest_Address
+
+var DeregisterMemberFromAddressListResponse = &sDeregisterMemberFromAddressListResponse
+
+var GetAddonInstanceRequest = &sGetAddonInstanceRequest
+var GetAddonInstanceRequest_AddonInstanceId = &sGetAddonInstanceRequest_AddonInstanceId
+
+var GetAddonInstanceResponse = &sGetAddonInstanceResponse
+var GetAddonInstanceResponse_AddonSubscriptionId = &sGetAddonInstanceResponse_AddonSubscriptionId
+var GetAddonInstanceResponse_AddonName = &sGetAddonInstanceResponse_AddonName
+var GetAddonInstanceResponse_AddonInstanceArn = &sGetAddonInstanceResponse_AddonInstanceArn
+var GetAddonInstanceResponse_CreatedTimestamp = &sGetAddonInstanceResponse_CreatedTimestamp
+
+var GetAddonSubscriptionRequest = &sGetAddonSubscriptionRequest
+var GetAddonSubscriptionRequest_AddonSubscriptionId = &sGetAddonSubscriptionRequest_AddonSubscriptionId
+
+var GetAddonSubscriptionResponse = &sGetAddonSubscriptionResponse
+var GetAddonSubscriptionResponse_AddonName = &sGetAddonSubscriptionResponse_AddonName
+var GetAddonSubscriptionResponse_AddonSubscriptionArn = &sGetAddonSubscriptionResponse_AddonSubscriptionArn
+var GetAddonSubscriptionResponse_CreatedTimestamp = &sGetAddonSubscriptionResponse_CreatedTimestamp
+
+var GetAddressListImportJobRequest = &sGetAddressListImportJobRequest
+var GetAddressListImportJobRequest_JobId = &sGetAddressListImportJobRequest_JobId
+
+var GetAddressListImportJobResponse = &sGetAddressListImportJobResponse
+var GetAddressListImportJobResponse_JobId = &sGetAddressListImportJobResponse_JobId
+var GetAddressListImportJobResponse_Name = &sGetAddressListImportJobResponse_Name
+var GetAddressListImportJobResponse_Status = &sGetAddressListImportJobResponse_Status
+var GetAddressListImportJobResponse_PreSignedUrl = &sGetAddressListImportJobResponse_PreSignedUrl
+var GetAddressListImportJobResponse_ImportedItemsCount = &sGetAddressListImportJobResponse_ImportedItemsCount
+var GetAddressListImportJobResponse_FailedItemsCount = &sGetAddressListImportJobResponse_FailedItemsCount
+var GetAddressListImportJobResponse_ImportDataFormat = &sGetAddressListImportJobResponse_ImportDataFormat
+var GetAddressListImportJobResponse_AddressListId = &sGetAddressListImportJobResponse_AddressListId
+var GetAddressListImportJobResponse_CreatedTimestamp = &sGetAddressListImportJobResponse_CreatedTimestamp
+var GetAddressListImportJobResponse_StartTimestamp = &sGetAddressListImportJobResponse_StartTimestamp
+var GetAddressListImportJobResponse_CompletedTimestamp = &sGetAddressListImportJobResponse_CompletedTimestamp
+var GetAddressListImportJobResponse_Error = &sGetAddressListImportJobResponse_Error
+
+var GetAddressListRequest = &sGetAddressListRequest
+var GetAddressListRequest_AddressListId = &sGetAddressListRequest_AddressListId
+
+var GetAddressListResponse = &sGetAddressListResponse
+var GetAddressListResponse_AddressListId = &sGetAddressListResponse_AddressListId
+var GetAddressListResponse_AddressListArn = &sGetAddressListResponse_AddressListArn
+var GetAddressListResponse_AddressListName = &sGetAddressListResponse_AddressListName
+var GetAddressListResponse_CreatedTimestamp = &sGetAddressListResponse_CreatedTimestamp
+var GetAddressListResponse_LastUpdatedTimestamp = &sGetAddressListResponse_LastUpdatedTimestamp
+
+var GetArchiveExportRequest = &sGetArchiveExportRequest
+var GetArchiveExportRequest_ExportId = &sGetArchiveExportRequest_ExportId
+
+var GetArchiveExportResponse = &sGetArchiveExportResponse
+var GetArchiveExportResponse_ArchiveId = &sGetArchiveExportResponse_ArchiveId
+var GetArchiveExportResponse_Filters = &sGetArchiveExportResponse_Filters
+var GetArchiveExportResponse_FromTimestamp = &sGetArchiveExportResponse_FromTimestamp
+var GetArchiveExportResponse_ToTimestamp = &sGetArchiveExportResponse_ToTimestamp
+var GetArchiveExportResponse_MaxResults = &sGetArchiveExportResponse_MaxResults
+var GetArchiveExportResponse_ExportDestinationConfiguration = &sGetArchiveExportResponse_ExportDestinationConfiguration
+var GetArchiveExportResponse_Status = &sGetArchiveExportResponse_Status
+
+var GetArchiveRequest = &sGetArchiveRequest
+var GetArchiveRequest_ArchiveId = &sGetArchiveRequest_ArchiveId
+
+var GetArchiveMessageContentRequest = &sGetArchiveMessageContentRequest
+var GetArchiveMessageContentRequest_ArchivedMessageId = &sGetArchiveMessageContentRequest_ArchivedMessageId
+
+var GetArchiveMessageContentResponse = &sGetArchiveMessageContentResponse
+var GetArchiveMessageContentResponse_Body = &sGetArchiveMessageContentResponse_Body
+
+var GetArchiveMessageRequest = &sGetArchiveMessageRequest
+var GetArchiveMessageRequest_ArchivedMessageId = &sGetArchiveMessageRequest_ArchivedMessageId
+
+var GetArchiveMessageResponse = &sGetArchiveMessageResponse
+var GetArchiveMessageResponse_MessageDownloadLink = &sGetArchiveMessageResponse_MessageDownloadLink
+var GetArchiveMessageResponse_Metadata = &sGetArchiveMessageResponse_Metadata
+var GetArchiveMessageResponse_Envelope = &sGetArchiveMessageResponse_Envelope
+
+var GetArchiveResponse = &sGetArchiveResponse
+var GetArchiveResponse_ArchiveId = &sGetArchiveResponse_ArchiveId
+var GetArchiveResponse_ArchiveName = &sGetArchiveResponse_ArchiveName
+var GetArchiveResponse_ArchiveArn = &sGetArchiveResponse_ArchiveArn
+var GetArchiveResponse_ArchiveState = &sGetArchiveResponse_ArchiveState
+var GetArchiveResponse_Retention = &sGetArchiveResponse_Retention
+var GetArchiveResponse_CreatedTimestamp = &sGetArchiveResponse_CreatedTimestamp
+var GetArchiveResponse_LastUpdatedTimestamp = &sGetArchiveResponse_LastUpdatedTimestamp
+var GetArchiveResponse_KmsKeyArn = &sGetArchiveResponse_KmsKeyArn
+
+var GetArchiveSearchRequest = &sGetArchiveSearchRequest
+var GetArchiveSearchRequest_SearchId = &sGetArchiveSearchRequest_SearchId
+
+var GetArchiveSearchResponse = &sGetArchiveSearchResponse
+var GetArchiveSearchResponse_ArchiveId = &sGetArchiveSearchResponse_ArchiveId
+var GetArchiveSearchResponse_Filters = &sGetArchiveSearchResponse_Filters
+var GetArchiveSearchResponse_FromTimestamp = &sGetArchiveSearchResponse_FromTimestamp
+var GetArchiveSearchResponse_ToTimestamp = &sGetArchiveSearchResponse_ToTimestamp
+var GetArchiveSearchResponse_MaxResults = &sGetArchiveSearchResponse_MaxResults
+var GetArchiveSearchResponse_Status = &sGetArchiveSearchResponse_Status
+
+var GetArchiveSearchResultsRequest = &sGetArchiveSearchResultsRequest
+var GetArchiveSearchResultsRequest_SearchId = &sGetArchiveSearchResultsRequest_SearchId
+
+var GetArchiveSearchResultsResponse = &sGetArchiveSearchResultsResponse
+var GetArchiveSearchResultsResponse_Rows = &sGetArchiveSearchResultsResponse_Rows
+
+var GetIngressPointRequest = &sGetIngressPointRequest
+var GetIngressPointRequest_IngressPointId = &sGetIngressPointRequest_IngressPointId
+var GetIngressPointRequest_IncludeTrustStoreContents = &sGetIngressPointRequest_IncludeTrustStoreContents
+
+var GetIngressPointResponse = &sGetIngressPointResponse
+var GetIngressPointResponse_IngressPointId = &sGetIngressPointResponse_IngressPointId
+var GetIngressPointResponse_IngressPointName = &sGetIngressPointResponse_IngressPointName
+var GetIngressPointResponse_IngressPointArn = &sGetIngressPointResponse_IngressPointArn
+var GetIngressPointResponse_Status = &sGetIngressPointResponse_Status
+var GetIngressPointResponse_Type = &sGetIngressPointResponse_Type
+var GetIngressPointResponse_ARecord = &sGetIngressPointResponse_ARecord
+var GetIngressPointResponse_RuleSetId = &sGetIngressPointResponse_RuleSetId
+var GetIngressPointResponse_TrafficPolicyId = &sGetIngressPointResponse_TrafficPolicyId
+var GetIngressPointResponse_IngressPointAuthConfiguration = &sGetIngressPointResponse_IngressPointAuthConfiguration
+var GetIngressPointResponse_NetworkConfiguration = &sGetIngressPointResponse_NetworkConfiguration
+var GetIngressPointResponse_TlsPolicy = &sGetIngressPointResponse_TlsPolicy
+var GetIngressPointResponse_CreatedTimestamp = &sGetIngressPointResponse_CreatedTimestamp
+var GetIngressPointResponse_LastUpdatedTimestamp = &sGetIngressPointResponse_LastUpdatedTimestamp
+
+var GetMemberOfAddressListRequest = &sGetMemberOfAddressListRequest
+var GetMemberOfAddressListRequest_AddressListId = &sGetMemberOfAddressListRequest_AddressListId
+var GetMemberOfAddressListRequest_Address = &sGetMemberOfAddressListRequest_Address
+
+var GetMemberOfAddressListResponse = &sGetMemberOfAddressListResponse
+var GetMemberOfAddressListResponse_Address = &sGetMemberOfAddressListResponse_Address
+var GetMemberOfAddressListResponse_CreatedTimestamp = &sGetMemberOfAddressListResponse_CreatedTimestamp
+
+var GetRelayRequest = &sGetRelayRequest
+var GetRelayRequest_RelayId = &sGetRelayRequest_RelayId
+
+var GetRelayResponse = &sGetRelayResponse
+var GetRelayResponse_RelayId = &sGetRelayResponse_RelayId
+var GetRelayResponse_RelayArn = &sGetRelayResponse_RelayArn
+var GetRelayResponse_RelayName = &sGetRelayResponse_RelayName
+var GetRelayResponse_ServerName = &sGetRelayResponse_ServerName
+var GetRelayResponse_ServerPort = &sGetRelayResponse_ServerPort
+var GetRelayResponse_Authentication = &sGetRelayResponse_Authentication
+var GetRelayResponse_CreatedTimestamp = &sGetRelayResponse_CreatedTimestamp
+var GetRelayResponse_LastModifiedTimestamp = &sGetRelayResponse_LastModifiedTimestamp
+
+var GetRuleSetRequest = &sGetRuleSetRequest
+var GetRuleSetRequest_RuleSetId = &sGetRuleSetRequest_RuleSetId
+
+var GetRuleSetResponse = &sGetRuleSetResponse
+var GetRuleSetResponse_RuleSetId = &sGetRuleSetResponse_RuleSetId
+var GetRuleSetResponse_RuleSetArn = &sGetRuleSetResponse_RuleSetArn
+var GetRuleSetResponse_RuleSetName = &sGetRuleSetResponse_RuleSetName
+var GetRuleSetResponse_CreatedDate = &sGetRuleSetResponse_CreatedDate
+var GetRuleSetResponse_LastModificationDate = &sGetRuleSetResponse_LastModificationDate
+var GetRuleSetResponse_Rules = &sGetRuleSetResponse_Rules
+
+var GetTrafficPolicyRequest = &sGetTrafficPolicyRequest
+var GetTrafficPolicyRequest_TrafficPolicyId = &sGetTrafficPolicyRequest_TrafficPolicyId
+
+var GetTrafficPolicyResponse = &sGetTrafficPolicyResponse
+var GetTrafficPolicyResponse_TrafficPolicyName = &sGetTrafficPolicyResponse_TrafficPolicyName
+var GetTrafficPolicyResponse_TrafficPolicyId = &sGetTrafficPolicyResponse_TrafficPolicyId
+var GetTrafficPolicyResponse_TrafficPolicyArn = &sGetTrafficPolicyResponse_TrafficPolicyArn
+var GetTrafficPolicyResponse_PolicyStatements = &sGetTrafficPolicyResponse_PolicyStatements
+var GetTrafficPolicyResponse_MaxMessageSizeBytes = &sGetTrafficPolicyResponse_MaxMessageSizeBytes
+var GetTrafficPolicyResponse_DefaultAction = &sGetTrafficPolicyResponse_DefaultAction
+var GetTrafficPolicyResponse_CreatedTimestamp = &sGetTrafficPolicyResponse_CreatedTimestamp
+var GetTrafficPolicyResponse_LastUpdatedTimestamp = &sGetTrafficPolicyResponse_LastUpdatedTimestamp
+
+var ListAddonInstancesRequest = &sListAddonInstancesRequest
+var ListAddonInstancesRequest_NextToken = &sListAddonInstancesRequest_NextToken
+var ListAddonInstancesRequest_PageSize = &sListAddonInstancesRequest_PageSize
+
+var ListAddonInstancesResponse = &sListAddonInstancesResponse
+var ListAddonInstancesResponse_AddonInstances = &sListAddonInstancesResponse_AddonInstances
+var ListAddonInstancesResponse_NextToken = &sListAddonInstancesResponse_NextToken
+
+var ListAddonSubscriptionsRequest = &sListAddonSubscriptionsRequest
+var ListAddonSubscriptionsRequest_NextToken = &sListAddonSubscriptionsRequest_NextToken
+var ListAddonSubscriptionsRequest_PageSize = &sListAddonSubscriptionsRequest_PageSize
+
+var ListAddonSubscriptionsResponse = &sListAddonSubscriptionsResponse
+var ListAddonSubscriptionsResponse_AddonSubscriptions = &sListAddonSubscriptionsResponse_AddonSubscriptions
+var ListAddonSubscriptionsResponse_NextToken = &sListAddonSubscriptionsResponse_NextToken
+
+var ListAddressListImportJobsRequest = &sListAddressListImportJobsRequest
+var ListAddressListImportJobsRequest_AddressListId = &sListAddressListImportJobsRequest_AddressListId
+var ListAddressListImportJobsRequest_NextToken = &sListAddressListImportJobsRequest_NextToken
+var ListAddressListImportJobsRequest_PageSize = &sListAddressListImportJobsRequest_PageSize
+
+var ListAddressListImportJobsResponse = &sListAddressListImportJobsResponse
+var ListAddressListImportJobsResponse_ImportJobs = &sListAddressListImportJobsResponse_ImportJobs
+var ListAddressListImportJobsResponse_NextToken = &sListAddressListImportJobsResponse_NextToken
+
+var ListAddressListsRequest = &sListAddressListsRequest
+var ListAddressListsRequest_NextToken = &sListAddressListsRequest_NextToken
+var ListAddressListsRequest_PageSize = &sListAddressListsRequest_PageSize
+
+var ListAddressListsResponse = &sListAddressListsResponse
+var ListAddressListsResponse_AddressLists = &sListAddressListsResponse_AddressLists
+var ListAddressListsResponse_NextToken = &sListAddressListsResponse_NextToken
+
+var ListArchiveExportsRequest = &sListArchiveExportsRequest
+var ListArchiveExportsRequest_ArchiveId = &sListArchiveExportsRequest_ArchiveId
+var ListArchiveExportsRequest_NextToken = &sListArchiveExportsRequest_NextToken
+var ListArchiveExportsRequest_PageSize = &sListArchiveExportsRequest_PageSize
+
+var ListArchiveExportsResponse = &sListArchiveExportsResponse
+var ListArchiveExportsResponse_Exports = &sListArchiveExportsResponse_Exports
+var ListArchiveExportsResponse_NextToken = &sListArchiveExportsResponse_NextToken
+
+var ListArchiveSearchesRequest = &sListArchiveSearchesRequest
+var ListArchiveSearchesRequest_ArchiveId = &sListArchiveSearchesRequest_ArchiveId
+var ListArchiveSearchesRequest_NextToken = &sListArchiveSearchesRequest_NextToken
+var ListArchiveSearchesRequest_PageSize = &sListArchiveSearchesRequest_PageSize
+
+var ListArchiveSearchesResponse = &sListArchiveSearchesResponse
+var ListArchiveSearchesResponse_Searches = &sListArchiveSearchesResponse_Searches
+var ListArchiveSearchesResponse_NextToken = &sListArchiveSearchesResponse_NextToken
+
+var ListArchivesRequest = &sListArchivesRequest
+var ListArchivesRequest_NextToken = &sListArchivesRequest_NextToken
+var ListArchivesRequest_PageSize = &sListArchivesRequest_PageSize
+
+var ListArchivesResponse = &sListArchivesResponse
+var ListArchivesResponse_Archives = &sListArchivesResponse_Archives
+var ListArchivesResponse_NextToken = &sListArchivesResponse_NextToken
+
+var ListIngressPointsRequest = &sListIngressPointsRequest
+var ListIngressPointsRequest_PageSize = &sListIngressPointsRequest_PageSize
+var ListIngressPointsRequest_NextToken = &sListIngressPointsRequest_NextToken
+
+var ListIngressPointsResponse = &sListIngressPointsResponse
+var ListIngressPointsResponse_IngressPoints = &sListIngressPointsResponse_IngressPoints
+var ListIngressPointsResponse_NextToken = &sListIngressPointsResponse_NextToken
+
+var ListMembersOfAddressListRequest = &sListMembersOfAddressListRequest
+var ListMembersOfAddressListRequest_AddressListId = &sListMembersOfAddressListRequest_AddressListId
+var ListMembersOfAddressListRequest_Filter = &sListMembersOfAddressListRequest_Filter
+var ListMembersOfAddressListRequest_NextToken = &sListMembersOfAddressListRequest_NextToken
+var ListMembersOfAddressListRequest_PageSize = &sListMembersOfAddressListRequest_PageSize
+
+var ListMembersOfAddressListResponse = &sListMembersOfAddressListResponse
+var ListMembersOfAddressListResponse_Addresses = &sListMembersOfAddressListResponse_Addresses
+var ListMembersOfAddressListResponse_NextToken = &sListMembersOfAddressListResponse_NextToken
+
+var ListRelaysRequest = &sListRelaysRequest
+var ListRelaysRequest_PageSize = &sListRelaysRequest_PageSize
+var ListRelaysRequest_NextToken = &sListRelaysRequest_NextToken
+
+var ListRelaysResponse = &sListRelaysResponse
+var ListRelaysResponse_Relays = &sListRelaysResponse_Relays
+var ListRelaysResponse_NextToken = &sListRelaysResponse_NextToken
+
+var ListRuleSetsRequest = &sListRuleSetsRequest
+var ListRuleSetsRequest_NextToken = &sListRuleSetsRequest_NextToken
+var ListRuleSetsRequest_PageSize = &sListRuleSetsRequest_PageSize
+
+var ListRuleSetsResponse = &sListRuleSetsResponse
+var ListRuleSetsResponse_RuleSets = &sListRuleSetsResponse_RuleSets
+var ListRuleSetsResponse_NextToken = &sListRuleSetsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTrafficPoliciesRequest = &sListTrafficPoliciesRequest
+var ListTrafficPoliciesRequest_PageSize = &sListTrafficPoliciesRequest_PageSize
+var ListTrafficPoliciesRequest_NextToken = &sListTrafficPoliciesRequest_NextToken
+
+var ListTrafficPoliciesResponse = &sListTrafficPoliciesResponse
+var ListTrafficPoliciesResponse_TrafficPolicies = &sListTrafficPoliciesResponse_TrafficPolicies
+var ListTrafficPoliciesResponse_NextToken = &sListTrafficPoliciesResponse_NextToken
+
+var RegisterMemberToAddressListRequest = &sRegisterMemberToAddressListRequest
+var RegisterMemberToAddressListRequest_AddressListId = &sRegisterMemberToAddressListRequest_AddressListId
+var RegisterMemberToAddressListRequest_Address = &sRegisterMemberToAddressListRequest_Address
+
+var RegisterMemberToAddressListResponse = &sRegisterMemberToAddressListResponse
+
+var StartAddressListImportJobRequest = &sStartAddressListImportJobRequest
+var StartAddressListImportJobRequest_JobId = &sStartAddressListImportJobRequest_JobId
+
+var StartAddressListImportJobResponse = &sStartAddressListImportJobResponse
+
+var StartArchiveExportRequest = &sStartArchiveExportRequest
+var StartArchiveExportRequest_ArchiveId = &sStartArchiveExportRequest_ArchiveId
+var StartArchiveExportRequest_Filters = &sStartArchiveExportRequest_Filters
+var StartArchiveExportRequest_FromTimestamp = &sStartArchiveExportRequest_FromTimestamp
+var StartArchiveExportRequest_ToTimestamp = &sStartArchiveExportRequest_ToTimestamp
+var StartArchiveExportRequest_MaxResults = &sStartArchiveExportRequest_MaxResults
+var StartArchiveExportRequest_ExportDestinationConfiguration = &sStartArchiveExportRequest_ExportDestinationConfiguration
+var StartArchiveExportRequest_IncludeMetadata = &sStartArchiveExportRequest_IncludeMetadata
+
+var StartArchiveExportResponse = &sStartArchiveExportResponse
+var StartArchiveExportResponse_ExportId = &sStartArchiveExportResponse_ExportId
+
+var StartArchiveSearchRequest = &sStartArchiveSearchRequest
+var StartArchiveSearchRequest_ArchiveId = &sStartArchiveSearchRequest_ArchiveId
+var StartArchiveSearchRequest_Filters = &sStartArchiveSearchRequest_Filters
+var StartArchiveSearchRequest_FromTimestamp = &sStartArchiveSearchRequest_FromTimestamp
+var StartArchiveSearchRequest_ToTimestamp = &sStartArchiveSearchRequest_ToTimestamp
+var StartArchiveSearchRequest_MaxResults = &sStartArchiveSearchRequest_MaxResults
+
+var StartArchiveSearchResponse = &sStartArchiveSearchResponse
+var StartArchiveSearchResponse_SearchId = &sStartArchiveSearchResponse_SearchId
+
+var StopAddressListImportJobRequest = &sStopAddressListImportJobRequest
+var StopAddressListImportJobRequest_JobId = &sStopAddressListImportJobRequest_JobId
+
+var StopAddressListImportJobResponse = &sStopAddressListImportJobResponse
+
+var StopArchiveExportRequest = &sStopArchiveExportRequest
+var StopArchiveExportRequest_ExportId = &sStopArchiveExportRequest_ExportId
+
+var StopArchiveExportResponse = &sStopArchiveExportResponse
+
+var StopArchiveSearchRequest = &sStopArchiveSearchRequest
+var StopArchiveSearchRequest_SearchId = &sStopArchiveSearchRequest_SearchId
+
+var StopArchiveSearchResponse = &sStopArchiveSearchResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateArchiveRequest = &sUpdateArchiveRequest
+var UpdateArchiveRequest_ArchiveId = &sUpdateArchiveRequest_ArchiveId
+var UpdateArchiveRequest_ArchiveName = &sUpdateArchiveRequest_ArchiveName
+var UpdateArchiveRequest_Retention = &sUpdateArchiveRequest_Retention
+
+var UpdateArchiveResponse = &sUpdateArchiveResponse
+
+var UpdateIngressPointRequest = &sUpdateIngressPointRequest
+var UpdateIngressPointRequest_IngressPointId = &sUpdateIngressPointRequest_IngressPointId
+var UpdateIngressPointRequest_IngressPointName = &sUpdateIngressPointRequest_IngressPointName
+var UpdateIngressPointRequest_StatusToUpdate = &sUpdateIngressPointRequest_StatusToUpdate
+var UpdateIngressPointRequest_RuleSetId = &sUpdateIngressPointRequest_RuleSetId
+var UpdateIngressPointRequest_TrafficPolicyId = &sUpdateIngressPointRequest_TrafficPolicyId
+var UpdateIngressPointRequest_IngressPointConfiguration = &sUpdateIngressPointRequest_IngressPointConfiguration
+var UpdateIngressPointRequest_TlsPolicy = &sUpdateIngressPointRequest_TlsPolicy
+
+var UpdateIngressPointResponse = &sUpdateIngressPointResponse
+
+var UpdateRelayRequest = &sUpdateRelayRequest
+var UpdateRelayRequest_RelayId = &sUpdateRelayRequest_RelayId
+var UpdateRelayRequest_RelayName = &sUpdateRelayRequest_RelayName
+var UpdateRelayRequest_ServerName = &sUpdateRelayRequest_ServerName
+var UpdateRelayRequest_ServerPort = &sUpdateRelayRequest_ServerPort
+var UpdateRelayRequest_Authentication = &sUpdateRelayRequest_Authentication
+
+var UpdateRelayResponse = &sUpdateRelayResponse
+
+var UpdateRuleSetRequest = &sUpdateRuleSetRequest
+var UpdateRuleSetRequest_RuleSetId = &sUpdateRuleSetRequest_RuleSetId
+var UpdateRuleSetRequest_RuleSetName = &sUpdateRuleSetRequest_RuleSetName
+var UpdateRuleSetRequest_Rules = &sUpdateRuleSetRequest_Rules
+
+var UpdateRuleSetResponse = &sUpdateRuleSetResponse
+
+var UpdateTrafficPolicyRequest = &sUpdateTrafficPolicyRequest
+var UpdateTrafficPolicyRequest_TrafficPolicyId = &sUpdateTrafficPolicyRequest_TrafficPolicyId
+var UpdateTrafficPolicyRequest_TrafficPolicyName = &sUpdateTrafficPolicyRequest_TrafficPolicyName
+var UpdateTrafficPolicyRequest_PolicyStatements = &sUpdateTrafficPolicyRequest_PolicyStatements
+var UpdateTrafficPolicyRequest_DefaultAction = &sUpdateTrafficPolicyRequest_DefaultAction
+var UpdateTrafficPolicyRequest_MaxMessageSizeBytes = &sUpdateTrafficPolicyRequest_MaxMessageSizeBytes
+
+var UpdateTrafficPolicyResponse = &sUpdateTrafficPolicyResponse
+
+var MailManagerSvc = &smithy.ServiceSchema{Schema: &s_MailManagerSvc, Version: "2023-10-17"}

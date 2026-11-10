@@ -4,2138 +4,2113 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateBrandProfile                                                  smithy.SchemaExtensions
+	eCreateBrandProfileAttributes                                        smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistration                                  smithy.SchemaExtensions
+	eCreateNotifyCodeConfiguration                                       smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfile                                 smithy.SchemaExtensions
+	eDeleteBrandProfile                                                  smithy.SchemaExtensions
+	eDeleteBrandProfileAttribute                                         smithy.SchemaExtensions
+	eDeleteNotifyCodeConfiguration                                       smithy.SchemaExtensions
+	eGetBrandProfile                                                     smithy.SchemaExtensions
+	eGetBrandProfileAttribute                                            smithy.SchemaExtensions
+	eGetJob                                                              smithy.SchemaExtensions
+	eGetNotifyCodeConfiguration                                          smithy.SchemaExtensions
+	eListBrandProfileAttributes                                          smithy.SchemaExtensions
+	eListBrandProfiles                                                   smithy.SchemaExtensions
+	eListJobs                                                            smithy.SchemaExtensions
+	eListNotifyCodeConfigurations                                        smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfile                                   smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	eSendNotifyCodeVerification                                          smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdateBrandProfile                                                  smithy.SchemaExtensions
+	eUpdateBrandProfileAttribute                                         smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistration                                  smithy.SchemaExtensions
+	eUpdateNotifyCodeConfiguration                                       smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfile                                 smithy.SchemaExtensions
+	eValidateNotifyCodeVerification                                      smithy.SchemaExtensions
+	e_EndUserMessaging                                                   smithy.SchemaExtensions
+	eAccessDeniedException                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                       smithy.SchemaExtensions
+	e_AmazonResourceName                                                 smithy.SchemaExtensions
+	e_AttachmentBody                                                     smithy.SchemaExtensions
+	e_BrandProfileAttributeCategory                                      smithy.SchemaExtensions
+	e_BrandProfileAttributeDescription                                   smithy.SchemaExtensions
+	eBrandProfileAttributeInput                                          smithy.SchemaExtensions
+	eBrandProfileAttributeInput_attributeName                            smithy.SchemaExtensions
+	eBrandProfileAttributeInput_attributeType                            smithy.SchemaExtensions
+	eBrandProfileAttributeInput_attributeValue                           smithy.SchemaExtensions
+	eBrandProfileAttributeInput_attachmentBody                           smithy.SchemaExtensions
+	eBrandProfileAttributeInput_description                              smithy.SchemaExtensions
+	eBrandProfileAttributeInput_category                                 smithy.SchemaExtensions
+	e_BrandProfileAttributeInputList                                     smithy.SchemaExtensions
+	e_BrandProfileAttributeInputList_member                              smithy.SchemaExtensions
+	e_BrandProfileAttributeName                                          smithy.SchemaExtensions
+	eBrandProfileAttributeOutput                                         smithy.SchemaExtensions
+	eBrandProfileAttributeOutput_attributeName                           smithy.SchemaExtensions
+	eBrandProfileAttributeOutput_attributeType                           smithy.SchemaExtensions
+	eBrandProfileAttributeOutput_mediaDownloadUrl                        smithy.SchemaExtensions
+	e_BrandProfileAttributeOutputList                                    smithy.SchemaExtensions
+	e_BrandProfileAttributeOutputList_member                             smithy.SchemaExtensions
+	eBrandProfileAttributeSummary                                        smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_attributeName                          smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_attributeType                          smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_description                            smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_category                               smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_createdAt                              smithy.SchemaExtensions
+	eBrandProfileAttributeSummary_updatedAt                              smithy.SchemaExtensions
+	e_BrandProfileAttributeSummaryList                                   smithy.SchemaExtensions
+	e_BrandProfileAttributeSummaryList_member                            smithy.SchemaExtensions
+	eBrandProfileAttributeType                                           smithy.SchemaExtensions
+	eBrandProfileAttributeType_TEXT                                      smithy.SchemaExtensions
+	eBrandProfileAttributeType_IMAGE                                     smithy.SchemaExtensions
+	eBrandProfileAttributeType_DOCUMENT                                  smithy.SchemaExtensions
+	e_BrandProfileAttributeValue                                         smithy.SchemaExtensions
+	e_BrandProfileIdOrArn                                                smithy.SchemaExtensions
+	eBrandProfileInfo                                                    smithy.SchemaExtensions
+	eBrandProfileInfo_brandProfileId                                     smithy.SchemaExtensions
+	eBrandProfileInfo_brandProfileArn                                    smithy.SchemaExtensions
+	eBrandProfileInfo_brandProfileName                                   smithy.SchemaExtensions
+	eBrandProfileInfo_status                                             smithy.SchemaExtensions
+	eBrandProfileInfo_deletionProtectionEnabled                          smithy.SchemaExtensions
+	eBrandProfileInfo_createdAt                                          smithy.SchemaExtensions
+	eBrandProfileInfo_updatedAt                                          smithy.SchemaExtensions
+	e_BrandProfileInfoList                                               smithy.SchemaExtensions
+	e_BrandProfileInfoList_member                                        smithy.SchemaExtensions
+	e_BrandProfileName                                                   smithy.SchemaExtensions
+	eChannelParameters                                                   smithy.SchemaExtensions
+	eChannelParameters_text                                              smithy.SchemaExtensions
+	eChannelParameters_voice                                             smithy.SchemaExtensions
+	eChannelParameters_notify                                            smithy.SchemaExtensions
+	eChannelParameters_whatsApp                                          smithy.SchemaExtensions
+	e_ClientToken                                                        smithy.SchemaExtensions
+	eCodeConfigurationParameters                                         smithy.SchemaExtensions
+	eCodeConfigurationParameters_codeType                                smithy.SchemaExtensions
+	eCodeConfigurationParameters_codeLength                              smithy.SchemaExtensions
+	eCodeConfigurationParameters_validityPeriodMinutes                   smithy.SchemaExtensions
+	eCodeConfigurationParameters_maxAttempts                             smithy.SchemaExtensions
+	e_CodeLength                                                         smithy.SchemaExtensions
+	eCodeType                                                            smithy.SchemaExtensions
+	eCodeType_NUMERIC                                                    smithy.SchemaExtensions
+	eCodeType_ALPHA                                                      smithy.SchemaExtensions
+	eCodeType_ALPHANUMERIC                                               smithy.SchemaExtensions
+	e_ConfigurationSetName                                               smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	eConflictException_resourceId                                        smithy.SchemaExtensions
+	eConflictException_resourceType                                      smithy.SchemaExtensions
+	e_ContextKey                                                         smithy.SchemaExtensions
+	e_ContextMap                                                         smithy.SchemaExtensions
+	e_ContextMap_key                                                     smithy.SchemaExtensions
+	e_ContextMap_value                                                   smithy.SchemaExtensions
+	e_ContextValue                                                       smithy.SchemaExtensions
+	e_DestinationCountryParameterKey                                     smithy.SchemaExtensions
+	e_DestinationCountryParameters                                       smithy.SchemaExtensions
+	e_DestinationCountryParameters_key                                   smithy.SchemaExtensions
+	e_DestinationCountryParameters_value                                 smithy.SchemaExtensions
+	e_DestinationCountryParameterValue                                   smithy.SchemaExtensions
+	e_DestinationIdentity                                                smithy.SchemaExtensions
+	e_InlineTemplateBody                                                 smithy.SchemaExtensions
+	eInternalServerException                                             smithy.SchemaExtensions
+	eInternalServerException_message                                     smithy.SchemaExtensions
+	e_JobErrorCode                                                       smithy.SchemaExtensions
+	e_JobErrorMessage                                                    smithy.SchemaExtensions
+	e_JobId                                                              smithy.SchemaExtensions
+	e_JobOperationType                                                   smithy.SchemaExtensions
+	eJobResource                                                         smithy.SchemaExtensions
+	eJobResource_resourceType                                            smithy.SchemaExtensions
+	eJobResource_resourceId                                              smithy.SchemaExtensions
+	eJobResource_resourceArn                                             smithy.SchemaExtensions
+	e_JobResourceId                                                      smithy.SchemaExtensions
+	e_JobResourceIdentifier                                              smithy.SchemaExtensions
+	e_JobResourceList                                                    smithy.SchemaExtensions
+	e_JobResourceList_member                                             smithy.SchemaExtensions
+	eJobResourceType                                                     smithy.SchemaExtensions
+	eJobResourceType_REGISTRATION                                        smithy.SchemaExtensions
+	eJobResourceType_BRAND_PROFILE                                       smithy.SchemaExtensions
+	eJobResult                                                           smithy.SchemaExtensions
+	eJobResult_jobId                                                     smithy.SchemaExtensions
+	eJobResult_resourceIdentifier                                        smithy.SchemaExtensions
+	e_JobResults                                                         smithy.SchemaExtensions
+	e_JobResults_member                                                  smithy.SchemaExtensions
+	eJobStatus                                                           smithy.SchemaExtensions
+	eJobStatus_SUCCESS                                                   smithy.SchemaExtensions
+	eJobStatus_PROCESSING                                                smithy.SchemaExtensions
+	eJobStatus_FAILED                                                    smithy.SchemaExtensions
+	eJobSummary                                                          smithy.SchemaExtensions
+	eJobSummary_jobId                                                    smithy.SchemaExtensions
+	eJobSummary_status                                                   smithy.SchemaExtensions
+	eJobSummary_operationType                                            smithy.SchemaExtensions
+	eJobSummary_createdAt                                                smithy.SchemaExtensions
+	eJobSummary_updatedAt                                                smithy.SchemaExtensions
+	eJobSummary_brandProfileId                                           smithy.SchemaExtensions
+	eJobSummary_errorCode                                                smithy.SchemaExtensions
+	eJobSummary_errorMessage                                             smithy.SchemaExtensions
+	eJobSummary_resources                                                smithy.SchemaExtensions
+	e_JobSummaryList                                                     smithy.SchemaExtensions
+	e_JobSummaryList_member                                              smithy.SchemaExtensions
+	e_LanguageCode                                                       smithy.SchemaExtensions
+	e_MaxResults                                                         smithy.SchemaExtensions
+	e_MaxVerificationAttempts                                            smithy.SchemaExtensions
+	e_MediaDownloadUrl                                                   smithy.SchemaExtensions
+	e_MessageId                                                          smithy.SchemaExtensions
+	e_NextToken                                                          smithy.SchemaExtensions
+	eNotifyChannel                                                       smithy.SchemaExtensions
+	eNotifyChannel_TEXT                                                  smithy.SchemaExtensions
+	eNotifyChannel_VOICE                                                 smithy.SchemaExtensions
+	eNotifyChannel_WHATSAPP                                              smithy.SchemaExtensions
+	eNotifyCodeConfiguration                                             smithy.SchemaExtensions
+	eNotifyCodeConfiguration_notifyCodeConfigurationId                   smithy.SchemaExtensions
+	eNotifyCodeConfiguration_notifyCodeConfigurationArn                  smithy.SchemaExtensions
+	eNotifyCodeConfiguration_notifyCodeConfigurationName                 smithy.SchemaExtensions
+	eNotifyCodeConfiguration_codeConfigurationParameters                 smithy.SchemaExtensions
+	eNotifyCodeConfiguration_channelParameters                           smithy.SchemaExtensions
+	eNotifyCodeConfiguration_deletionProtectionEnabled                   smithy.SchemaExtensions
+	eNotifyCodeConfiguration_createdAt                                   smithy.SchemaExtensions
+	eNotifyCodeConfiguration_updatedAt                                   smithy.SchemaExtensions
+	e_NotifyCodeConfigurationId                                          smithy.SchemaExtensions
+	e_NotifyCodeConfigurationIdOrArn                                     smithy.SchemaExtensions
+	e_NotifyCodeConfigurationList                                        smithy.SchemaExtensions
+	e_NotifyCodeConfigurationList_member                                 smithy.SchemaExtensions
+	e_NotifyCodeConfigurationName                                        smithy.SchemaExtensions
+	eNotifyParameters                                                    smithy.SchemaExtensions
+	eNotifyParameters_notifyTemplateId                                   smithy.SchemaExtensions
+	eNotifyParameters_voiceId                                            smithy.SchemaExtensions
+	e_NotifyTemplateId                                                   smithy.SchemaExtensions
+	eOnAttributeConflict                                                 smithy.SchemaExtensions
+	eOnAttributeConflict_REPLACE                                         smithy.SchemaExtensions
+	eOnAttributeConflict_PRESERVE                                        smithy.SchemaExtensions
+	e_OriginationIdentity                                                smithy.SchemaExtensions
+	e_ReferenceId                                                        smithy.SchemaExtensions
+	eRegistrationAssociationSummary                                      smithy.SchemaExtensions
+	eRegistrationAssociationSummary_registrationId                       smithy.SchemaExtensions
+	eRegistrationAssociationSummary_registrationType                     smithy.SchemaExtensions
+	eRegistrationAssociationSummary_createdAt                            smithy.SchemaExtensions
+	eRegistrationAssociationSummary_smartMatchUsed                       smithy.SchemaExtensions
+	e_RegistrationAssociationSummaryList                                 smithy.SchemaExtensions
+	e_RegistrationAssociationSummaryList_member                          smithy.SchemaExtensions
+	e_RegistrationId                                                     smithy.SchemaExtensions
+	e_RegistrationIdList                                                 smithy.SchemaExtensions
+	e_RegistrationIdList_member                                          smithy.SchemaExtensions
+	e_RegistrationIdOrArn                                                smithy.SchemaExtensions
+	e_RegistrationType                                                   smithy.SchemaExtensions
+	e_RegistrationTypeList                                               smithy.SchemaExtensions
+	e_RegistrationTypeList_member                                        smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                              smithy.SchemaExtensions
+	eServiceQuotaExceededException                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                               smithy.SchemaExtensions
+	eStatus                                                              smithy.SchemaExtensions
+	eStatus_ACTIVE                                                       smithy.SchemaExtensions
+	eStatus_BLOCKED                                                      smithy.SchemaExtensions
+	eStatus_PAUSED                                                       smithy.SchemaExtensions
+	eStatus_CANCELLED                                                    smithy.SchemaExtensions
+	eStatus_FAILED                                                       smithy.SchemaExtensions
+	eTag                                                                 smithy.SchemaExtensions
+	eTag_key                                                             smithy.SchemaExtensions
+	eTag_value                                                           smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagKeyList                                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                                  smithy.SchemaExtensions
+	e_TagList                                                            smithy.SchemaExtensions
+	e_TagList_member                                                     smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	eTextParameters                                                      smithy.SchemaExtensions
+	eTextParameters_inlineTemplateBody                                   smithy.SchemaExtensions
+	eTextParameters_destinationCountryParameters                         smithy.SchemaExtensions
+	eThrottlingException                                                 smithy.SchemaExtensions
+	eThrottlingException_message                                         smithy.SchemaExtensions
+	eUpdateChannelParameters                                             smithy.SchemaExtensions
+	eUpdateChannelParameters_text                                        smithy.SchemaExtensions
+	eUpdateChannelParameters_voice                                       smithy.SchemaExtensions
+	eUpdateChannelParameters_notify                                      smithy.SchemaExtensions
+	eUpdateChannelParameters_whatsApp                                    smithy.SchemaExtensions
+	eUpdateCodeConfigurationParameters                                   smithy.SchemaExtensions
+	eUpdateCodeConfigurationParameters_codeType                          smithy.SchemaExtensions
+	eUpdateCodeConfigurationParameters_codeLength                        smithy.SchemaExtensions
+	eUpdateCodeConfigurationParameters_validityPeriodMinutes             smithy.SchemaExtensions
+	eUpdateCodeConfigurationParameters_maxAttempts                       smithy.SchemaExtensions
+	e_UpdateDestinationCountryParameters                                 smithy.SchemaExtensions
+	e_UpdateDestinationCountryParameters_key                             smithy.SchemaExtensions
+	e_UpdateDestinationCountryParameters_value                           smithy.SchemaExtensions
+	e_UpdateInlineTemplateBody                                           smithy.SchemaExtensions
+	e_UpdateLanguageCode                                                 smithy.SchemaExtensions
+	eUpdateNotifyParameters                                              smithy.SchemaExtensions
+	eUpdateNotifyParameters_notifyTemplateId                             smithy.SchemaExtensions
+	eUpdateNotifyParameters_voiceId                                      smithy.SchemaExtensions
+	e_UpdateNotifyTemplateId                                             smithy.SchemaExtensions
+	eUpdateTextParameters                                                smithy.SchemaExtensions
+	eUpdateTextParameters_inlineTemplateBody                             smithy.SchemaExtensions
+	eUpdateTextParameters_destinationCountryParameters                   smithy.SchemaExtensions
+	e_UpdateVoiceId                                                      smithy.SchemaExtensions
+	eUpdateVoiceParameters                                               smithy.SchemaExtensions
+	eUpdateVoiceParameters_inlineTemplateBody                            smithy.SchemaExtensions
+	eUpdateVoiceParameters_languageCode                                  smithy.SchemaExtensions
+	eUpdateVoiceParameters_voiceId                                       smithy.SchemaExtensions
+	eUpdateVoiceParameters_voiceMessageBodyTextType                      smithy.SchemaExtensions
+	eUpdateWhatsAppParameters                                            smithy.SchemaExtensions
+	eUpdateWhatsAppParameters_whatsAppTemplateName                       smithy.SchemaExtensions
+	eUpdateWhatsAppParameters_languageCode                               smithy.SchemaExtensions
+	e_UpdateWhatsAppTemplateName                                         smithy.SchemaExtensions
+	eValidationException                                                 smithy.SchemaExtensions
+	eValidationException_message                                         smithy.SchemaExtensions
+	eValidationException_fieldList                                       smithy.SchemaExtensions
+	eValidationExceptionField                                            smithy.SchemaExtensions
+	eValidationExceptionField_path                                       smithy.SchemaExtensions
+	eValidationExceptionField_message                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                smithy.SchemaExtensions
+	e_ValidityPeriodMinutes                                              smithy.SchemaExtensions
+	e_VerificationCode                                                   smithy.SchemaExtensions
+	e_VerificationId                                                     smithy.SchemaExtensions
+	eVerificationStatus                                                  smithy.SchemaExtensions
+	eVerificationStatus_VALID                                            smithy.SchemaExtensions
+	eVerificationStatus_INVALID                                          smithy.SchemaExtensions
+	e_VoiceId                                                            smithy.SchemaExtensions
+	eVoiceMessageBodyTextType                                            smithy.SchemaExtensions
+	eVoiceMessageBodyTextType_TEXT                                       smithy.SchemaExtensions
+	eVoiceMessageBodyTextType_SSML                                       smithy.SchemaExtensions
+	eVoiceParameters                                                     smithy.SchemaExtensions
+	eVoiceParameters_inlineTemplateBody                                  smithy.SchemaExtensions
+	eVoiceParameters_languageCode                                        smithy.SchemaExtensions
+	eVoiceParameters_voiceId                                             smithy.SchemaExtensions
+	eVoiceParameters_voiceMessageBodyTextType                            smithy.SchemaExtensions
+	eWhatsAppParameters                                                  smithy.SchemaExtensions
+	eWhatsAppParameters_whatsAppTemplateName                             smithy.SchemaExtensions
+	eWhatsAppParameters_languageCode                                     smithy.SchemaExtensions
+	e_WhatsAppTemplateName                                               smithy.SchemaExtensions
+	eCreateBrandProfileAttributesInput                                   smithy.SchemaExtensions
+	eCreateBrandProfileAttributesInput_brandProfileId                    smithy.SchemaExtensions
+	eCreateBrandProfileAttributesInput_attributes                        smithy.SchemaExtensions
+	eCreateBrandProfileAttributesInput_clientToken                       smithy.SchemaExtensions
+	eCreateBrandProfileAttributesOutput                                  smithy.SchemaExtensions
+	eCreateBrandProfileAttributesOutput_attributes                       smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput                             smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput_registrationId              smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput_brandProfileName            smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput_smartMatch                  smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput_tags                        smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationInput_clientToken                 smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationOutput                            smithy.SchemaExtensions
+	eCreateBrandProfileFromRegistrationOutput_results                    smithy.SchemaExtensions
+	eCreateBrandProfileInput                                             smithy.SchemaExtensions
+	eCreateBrandProfileInput_brandProfileName                            smithy.SchemaExtensions
+	eCreateBrandProfileInput_clientToken                                 smithy.SchemaExtensions
+	eCreateBrandProfileInput_deletionProtectionEnabled                   smithy.SchemaExtensions
+	eCreateBrandProfileInput_tags                                        smithy.SchemaExtensions
+	eCreateBrandProfileOutput                                            smithy.SchemaExtensions
+	eCreateBrandProfileOutput_brandProfileId                             smithy.SchemaExtensions
+	eCreateBrandProfileOutput_brandProfileArn                            smithy.SchemaExtensions
+	eCreateBrandProfileOutput_brandProfileName                           smithy.SchemaExtensions
+	eCreateBrandProfileOutput_status                                     smithy.SchemaExtensions
+	eCreateBrandProfileOutput_deletionProtectionEnabled                  smithy.SchemaExtensions
+	eCreateBrandProfileOutput_createdAt                                  smithy.SchemaExtensions
+	eCreateBrandProfileOutput_updatedAt                                  smithy.SchemaExtensions
+	eCreateBrandProfileOutput_attributesCreated                          smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput                                  smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_notifyCodeConfigurationName      smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_codeConfigurationParameters      smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_channelParameters                smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_deletionProtectionEnabled        smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_clientToken                      smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationInput_tags                             smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationOutput                                 smithy.SchemaExtensions
+	eCreateNotifyCodeConfigurationOutput_notifyCodeConfiguration         smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileInput                            smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileInput_brandProfileId             smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileInput_registrationTypes          smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileInput_smartMatch                 smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileInput_clientToken                smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileOutput                           smithy.SchemaExtensions
+	eCreateRegistrationsFromBrandProfileOutput_results                   smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeInput                                    smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeInput_brandProfileId                     smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeInput_attributeName                      smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeOutput                                   smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeOutput_brandProfileId                    smithy.SchemaExtensions
+	eDeleteBrandProfileAttributeOutput_attributeName                     smithy.SchemaExtensions
+	eDeleteBrandProfileInput                                             smithy.SchemaExtensions
+	eDeleteBrandProfileInput_brandProfileId                              smithy.SchemaExtensions
+	eDeleteBrandProfileOutput                                            smithy.SchemaExtensions
+	eDeleteBrandProfileOutput_brandProfileId                             smithy.SchemaExtensions
+	eDeleteBrandProfileOutput_brandProfileArn                            smithy.SchemaExtensions
+	eDeleteNotifyCodeConfigurationInput                                  smithy.SchemaExtensions
+	eDeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId        smithy.SchemaExtensions
+	eDeleteNotifyCodeConfigurationOutput                                 smithy.SchemaExtensions
+	eGetBrandProfileAttributeInput                                       smithy.SchemaExtensions
+	eGetBrandProfileAttributeInput_brandProfileId                        smithy.SchemaExtensions
+	eGetBrandProfileAttributeInput_attributeName                         smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput                                      smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_attributeName                        smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_attributeType                        smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_attributeValue                       smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_description                          smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_category                             smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_mediaContentType                     smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_mediaSizeBytes                       smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_mediaDownloadUrl                     smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_createdAt                            smithy.SchemaExtensions
+	eGetBrandProfileAttributeOutput_updatedAt                            smithy.SchemaExtensions
+	eGetBrandProfileInput                                                smithy.SchemaExtensions
+	eGetBrandProfileInput_brandProfileId                                 smithy.SchemaExtensions
+	eGetBrandProfileOutput                                               smithy.SchemaExtensions
+	eGetBrandProfileOutput_brandProfileId                                smithy.SchemaExtensions
+	eGetBrandProfileOutput_brandProfileArn                               smithy.SchemaExtensions
+	eGetBrandProfileOutput_brandProfileName                              smithy.SchemaExtensions
+	eGetBrandProfileOutput_status                                        smithy.SchemaExtensions
+	eGetBrandProfileOutput_deletionProtectionEnabled                     smithy.SchemaExtensions
+	eGetBrandProfileOutput_createdAt                                     smithy.SchemaExtensions
+	eGetBrandProfileOutput_updatedAt                                     smithy.SchemaExtensions
+	eGetJobInput                                                         smithy.SchemaExtensions
+	eGetJobInput_jobId                                                   smithy.SchemaExtensions
+	eJob                                                                 smithy.SchemaExtensions
+	eJob_jobId                                                           smithy.SchemaExtensions
+	eJob_status                                                          smithy.SchemaExtensions
+	eJob_operationType                                                   smithy.SchemaExtensions
+	eJob_createdAt                                                       smithy.SchemaExtensions
+	eJob_updatedAt                                                       smithy.SchemaExtensions
+	eJob_brandProfileId                                                  smithy.SchemaExtensions
+	eJob_errorCode                                                       smithy.SchemaExtensions
+	eJob_errorMessage                                                    smithy.SchemaExtensions
+	eJob_resources                                                       smithy.SchemaExtensions
+	eGetNotifyCodeConfigurationInput                                     smithy.SchemaExtensions
+	eGetNotifyCodeConfigurationInput_notifyCodeConfigurationId           smithy.SchemaExtensions
+	eGetNotifyCodeConfigurationOutput                                    smithy.SchemaExtensions
+	eGetNotifyCodeConfigurationOutput_notifyCodeConfiguration            smithy.SchemaExtensions
+	eListBrandProfileAttributesInput                                     smithy.SchemaExtensions
+	eListBrandProfileAttributesInput_brandProfileId                      smithy.SchemaExtensions
+	eListBrandProfileAttributesInput_nextToken                           smithy.SchemaExtensions
+	eListBrandProfileAttributesInput_maxResults                          smithy.SchemaExtensions
+	eListBrandProfileAttributesOutput                                    smithy.SchemaExtensions
+	eListBrandProfileAttributesOutput_brandProfileAttributes             smithy.SchemaExtensions
+	eListBrandProfileAttributesOutput_nextToken                          smithy.SchemaExtensions
+	eListBrandProfilesInput                                              smithy.SchemaExtensions
+	eListBrandProfilesInput_nextToken                                    smithy.SchemaExtensions
+	eListBrandProfilesInput_maxResults                                   smithy.SchemaExtensions
+	eListBrandProfilesOutput                                             smithy.SchemaExtensions
+	eListBrandProfilesOutput_brandProfiles                               smithy.SchemaExtensions
+	eListBrandProfilesOutput_nextToken                                   smithy.SchemaExtensions
+	eListJobsInput                                                       smithy.SchemaExtensions
+	eListJobsInput_maxResults                                            smithy.SchemaExtensions
+	eListJobsInput_nextToken                                             smithy.SchemaExtensions
+	eListJobsInput_status                                                smithy.SchemaExtensions
+	eListJobsInput_brandProfileId                                        smithy.SchemaExtensions
+	eListJobsInput_operationType                                         smithy.SchemaExtensions
+	eListJobsOutput                                                      smithy.SchemaExtensions
+	eListJobsOutput_jobs                                                 smithy.SchemaExtensions
+	eListJobsOutput_nextToken                                            smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsInput                                   smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsInput_maxResults                        smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsInput_nextToken                         smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsOutput                                  smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsOutput_notifyCodeConfigurations         smithy.SchemaExtensions
+	eListNotifyCodeConfigurationsOutput_nextToken                        smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileInput                              smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileInput_brandProfileId               smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileInput_maxResults                   smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileInput_nextToken                    smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileOutput                             smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileOutput_registrationAssociations    smithy.SchemaExtensions
+	eListRegistrationsFromBrandProfileOutput_nextToken                   smithy.SchemaExtensions
+	eListTagsForResourceInput                                            smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                smithy.SchemaExtensions
+	eListTagsForResourceOutput                                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                      smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput                                     smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_channel                             smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_destinationIdentity                 smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_originationIdentity                 smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_notifyCodeConfiguration             smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_overrideChannelParameters           smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_overrideCodeConfigurationParameters smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_configurationSetName                smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_context                             smithy.SchemaExtensions
+	eSendNotifyCodeVerificationInput_referenceId                         smithy.SchemaExtensions
+	eSendNotifyCodeVerificationOutput                                    smithy.SchemaExtensions
+	eSendNotifyCodeVerificationOutput_verificationId                     smithy.SchemaExtensions
+	eSendNotifyCodeVerificationOutput_messageId                          smithy.SchemaExtensions
+	eTagResourceInput                                                    smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                        smithy.SchemaExtensions
+	eTagResourceInput_tags                                               smithy.SchemaExtensions
+	eTagResourceOutput                                                   smithy.SchemaExtensions
+	eUntagResourceInput                                                  smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                      smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                          smithy.SchemaExtensions
+	eUntagResourceOutput                                                 smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput                                    smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_brandProfileId                     smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_attributeName                      smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_attributeValue                     smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_attachmentBody                     smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_description                        smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeInput_category                           smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput                                   smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_attributeName                     smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_attributeType                     smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_attributeValue                    smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_description                       smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_category                          smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_mediaContentType                  smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_mediaSizeBytes                    smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_createdAt                         smithy.SchemaExtensions
+	eUpdateBrandProfileAttributeOutput_updatedAt                         smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput                             smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput_brandProfileId              smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput_registrationId              smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput_smartMatch                  smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput_onAttributeConflict         smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationInput_clientToken                 smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationOutput                            smithy.SchemaExtensions
+	eUpdateBrandProfileFromRegistrationOutput_results                    smithy.SchemaExtensions
+	eUpdateBrandProfileInput                                             smithy.SchemaExtensions
+	eUpdateBrandProfileInput_brandProfileId                              smithy.SchemaExtensions
+	eUpdateBrandProfileInput_brandProfileName                            smithy.SchemaExtensions
+	eUpdateBrandProfileInput_deletionProtectionEnabled                   smithy.SchemaExtensions
+	eUpdateBrandProfileOutput                                            smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_brandProfileId                             smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_brandProfileArn                            smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_brandProfileName                           smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_status                                     smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_deletionProtectionEnabled                  smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_createdAt                                  smithy.SchemaExtensions
+	eUpdateBrandProfileOutput_updatedAt                                  smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput                                  smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId        smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName      smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput_codeConfigurationParameters      smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput_channelParameters                smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationInput_deletionProtectionEnabled        smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationOutput                                 smithy.SchemaExtensions
+	eUpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration         smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput                            smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput_brandProfileId             smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput_registrationIds            smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput_smartMatch                 smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput_onAttributeConflict        smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileInput_clientToken                smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileOutput                           smithy.SchemaExtensions
+	eUpdateRegistrationsFromBrandProfileOutput_results                   smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationInput                                 smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationInput_destinationIdentity             smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationInput_referenceId                     smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationInput_code                            smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationOutput                                smithy.SchemaExtensions
+	eValidateNotifyCodeVerificationOutput_status                         smithy.SchemaExtensions
+)
+
+var (
+	iCreateBrandProfile                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfile"}
+	iCreateBrandProfileAttributes              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileAttributes"}
+	iCreateBrandProfileFromRegistration        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileFromRegistration"}
+	iCreateNotifyCodeConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateNotifyCodeConfiguration"}
+	iCreateRegistrationsFromBrandProfile       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateRegistrationsFromBrandProfile"}
+	iDeleteBrandProfile                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfile"}
+	iDeleteBrandProfileAttribute               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfileAttribute"}
+	iDeleteNotifyCodeConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteNotifyCodeConfiguration"}
+	iGetBrandProfile                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfile"}
+	iGetBrandProfileAttribute                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfileAttribute"}
+	iGetJob                                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetJob"}
+	iGetNotifyCodeConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetNotifyCodeConfiguration"}
+	iListBrandProfileAttributes                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfileAttributes"}
+	iListBrandProfiles                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfiles"}
+	iListJobs                                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListJobs"}
+	iListNotifyCodeConfigurations              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListNotifyCodeConfigurations"}
+	iListRegistrationsFromBrandProfile         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListRegistrationsFromBrandProfile"}
+	iListTagsForResource                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListTagsForResource"}
+	iSendNotifyCodeVerification                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "SendNotifyCodeVerification"}
+	iTagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UntagResource"}
+	iUpdateBrandProfile                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfile"}
+	iUpdateBrandProfileAttribute               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileAttribute"}
+	iUpdateBrandProfileFromRegistration        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileFromRegistration"}
+	iUpdateNotifyCodeConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateNotifyCodeConfiguration"}
+	iUpdateRegistrationsFromBrandProfile       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateRegistrationsFromBrandProfile"}
+	iValidateNotifyCodeVerification            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidateNotifyCodeVerification"}
+	i_EndUserMessaging                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "EndUserMessaging"}
+	iAccessDeniedException                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "AccessDeniedException"}
+	i_AmazonResourceName                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "AmazonResourceName"}
+	i_AttachmentBody                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "AttachmentBody"}
+	i_BrandProfileAttributeCategory            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeCategory"}
+	i_BrandProfileAttributeDescription         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeDescription"}
+	iBrandProfileAttributeInput                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeInput"}
+	i_BrandProfileAttributeInputList           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeInputList"}
+	i_BrandProfileAttributeName                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeName"}
+	iBrandProfileAttributeOutput               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeOutput"}
+	i_BrandProfileAttributeOutputList          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeOutputList"}
+	iBrandProfileAttributeSummary              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeSummary"}
+	i_BrandProfileAttributeSummaryList         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeSummaryList"}
+	iBrandProfileAttributeType                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeType"}
+	i_BrandProfileAttributeValue               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileAttributeValue"}
+	i_BrandProfileIdOrArn                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileIdOrArn"}
+	iBrandProfileInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileInfo"}
+	i_BrandProfileInfoList                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileInfoList"}
+	i_BrandProfileName                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "BrandProfileName"}
+	iChannelParameters                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ChannelParameters"}
+	i_ClientToken                              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ClientToken"}
+	iCodeConfigurationParameters               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CodeConfigurationParameters"}
+	i_CodeLength                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CodeLength"}
+	iCodeType                                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CodeType"}
+	i_ConfigurationSetName                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ConfigurationSetName"}
+	iConflictException                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ConflictException"}
+	i_ContextKey                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ContextKey"}
+	i_ContextMap                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ContextMap"}
+	i_ContextValue                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ContextValue"}
+	i_DestinationCountryParameterKey           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DestinationCountryParameterKey"}
+	i_DestinationCountryParameters             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DestinationCountryParameters"}
+	i_DestinationCountryParameterValue         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DestinationCountryParameterValue"}
+	i_DestinationIdentity                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DestinationIdentity"}
+	i_InlineTemplateBody                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "InlineTemplateBody"}
+	iInternalServerException                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "InternalServerException"}
+	i_JobErrorCode                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobErrorCode"}
+	i_JobErrorMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobErrorMessage"}
+	i_JobId                                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobId"}
+	i_JobOperationType                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobOperationType"}
+	iJobResource                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResource"}
+	i_JobResourceId                            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResourceId"}
+	i_JobResourceIdentifier                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResourceIdentifier"}
+	i_JobResourceList                          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResourceList"}
+	iJobResourceType                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResourceType"}
+	iJobResult                                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResult"}
+	i_JobResults                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobResults"}
+	iJobStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobStatus"}
+	iJobSummary                                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobSummary"}
+	i_JobSummaryList                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "JobSummaryList"}
+	i_LanguageCode                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "LanguageCode"}
+	i_MaxResults                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "MaxResults"}
+	i_MaxVerificationAttempts                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "MaxVerificationAttempts"}
+	i_MediaDownloadUrl                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "MediaDownloadUrl"}
+	i_MessageId                                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "MessageId"}
+	i_NextToken                                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NextToken"}
+	iNotifyChannel                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyChannel"}
+	iNotifyCodeConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyCodeConfiguration"}
+	i_NotifyCodeConfigurationId                = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyCodeConfigurationId"}
+	i_NotifyCodeConfigurationIdOrArn           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyCodeConfigurationIdOrArn"}
+	i_NotifyCodeConfigurationList              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyCodeConfigurationList"}
+	i_NotifyCodeConfigurationName              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyCodeConfigurationName"}
+	iNotifyParameters                          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyParameters"}
+	i_NotifyTemplateId                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "NotifyTemplateId"}
+	iOnAttributeConflict                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "OnAttributeConflict"}
+	i_OriginationIdentity                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "OriginationIdentity"}
+	i_ReferenceId                              = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ReferenceId"}
+	iRegistrationAssociationSummary            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationAssociationSummary"}
+	i_RegistrationAssociationSummaryList       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationAssociationSummaryList"}
+	i_RegistrationId                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationId"}
+	i_RegistrationIdList                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationIdList"}
+	i_RegistrationIdOrArn                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationIdOrArn"}
+	i_RegistrationType                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationType"}
+	i_RegistrationTypeList                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "RegistrationTypeList"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ServiceQuotaExceededException"}
+	iStatus                                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "Status"}
+	iTag                                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "Tag"}
+	i_TagKey                                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagKeyList"}
+	i_TagList                                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagList"}
+	i_TagValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagValue"}
+	iTextParameters                            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TextParameters"}
+	iThrottlingException                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ThrottlingException"}
+	iUpdateChannelParameters                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateChannelParameters"}
+	iUpdateCodeConfigurationParameters         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateCodeConfigurationParameters"}
+	i_UpdateDestinationCountryParameters       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateDestinationCountryParameters"}
+	i_UpdateInlineTemplateBody                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateInlineTemplateBody"}
+	i_UpdateLanguageCode                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateLanguageCode"}
+	iUpdateNotifyParameters                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateNotifyParameters"}
+	i_UpdateNotifyTemplateId                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateNotifyTemplateId"}
+	iUpdateTextParameters                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateTextParameters"}
+	i_UpdateVoiceId                            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateVoiceId"}
+	iUpdateVoiceParameters                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateVoiceParameters"}
+	iUpdateWhatsAppParameters                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateWhatsAppParameters"}
+	i_UpdateWhatsAppTemplateName               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateWhatsAppTemplateName"}
+	iValidationException                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidationException"}
+	iValidationExceptionField                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidationExceptionFieldList"}
+	i_ValidityPeriodMinutes                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidityPeriodMinutes"}
+	i_VerificationCode                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VerificationCode"}
+	i_VerificationId                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VerificationId"}
+	iVerificationStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VerificationStatus"}
+	i_VoiceId                                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VoiceId"}
+	iVoiceMessageBodyTextType                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VoiceMessageBodyTextType"}
+	iVoiceParameters                           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "VoiceParameters"}
+	iWhatsAppParameters                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "WhatsAppParameters"}
+	i_WhatsAppTemplateName                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "WhatsAppTemplateName"}
+	iCreateBrandProfileAttributesInput         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileAttributesInput"}
+	iCreateBrandProfileAttributesOutput        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileAttributesOutput"}
+	iCreateBrandProfileFromRegistrationInput   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileFromRegistrationInput"}
+	iCreateBrandProfileFromRegistrationOutput  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileFromRegistrationOutput"}
+	iCreateBrandProfileInput                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileInput"}
+	iCreateBrandProfileOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateBrandProfileOutput"}
+	iCreateNotifyCodeConfigurationInput        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateNotifyCodeConfigurationInput"}
+	iCreateNotifyCodeConfigurationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateNotifyCodeConfigurationOutput"}
+	iCreateRegistrationsFromBrandProfileInput  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateRegistrationsFromBrandProfileInput"}
+	iCreateRegistrationsFromBrandProfileOutput = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "CreateRegistrationsFromBrandProfileOutput"}
+	iDeleteBrandProfileAttributeInput          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfileAttributeInput"}
+	iDeleteBrandProfileAttributeOutput         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfileAttributeOutput"}
+	iDeleteBrandProfileInput                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfileInput"}
+	iDeleteBrandProfileOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteBrandProfileOutput"}
+	iDeleteNotifyCodeConfigurationInput        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteNotifyCodeConfigurationInput"}
+	iDeleteNotifyCodeConfigurationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "DeleteNotifyCodeConfigurationOutput"}
+	iGetBrandProfileAttributeInput             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfileAttributeInput"}
+	iGetBrandProfileAttributeOutput            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfileAttributeOutput"}
+	iGetBrandProfileInput                      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfileInput"}
+	iGetBrandProfileOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetBrandProfileOutput"}
+	iGetJobInput                               = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetJobInput"}
+	iJob                                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "Job"}
+	iGetNotifyCodeConfigurationInput           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetNotifyCodeConfigurationInput"}
+	iGetNotifyCodeConfigurationOutput          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "GetNotifyCodeConfigurationOutput"}
+	iListBrandProfileAttributesInput           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfileAttributesInput"}
+	iListBrandProfileAttributesOutput          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfileAttributesOutput"}
+	iListBrandProfilesInput                    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfilesInput"}
+	iListBrandProfilesOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListBrandProfilesOutput"}
+	iListJobsInput                             = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListJobsInput"}
+	iListJobsOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListJobsOutput"}
+	iListNotifyCodeConfigurationsInput         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListNotifyCodeConfigurationsInput"}
+	iListNotifyCodeConfigurationsOutput        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListNotifyCodeConfigurationsOutput"}
+	iListRegistrationsFromBrandProfileInput    = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListRegistrationsFromBrandProfileInput"}
+	iListRegistrationsFromBrandProfileOutput   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListRegistrationsFromBrandProfileOutput"}
+	iListTagsForResourceInput                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ListTagsForResourceOutput"}
+	iSendNotifyCodeVerificationInput           = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "SendNotifyCodeVerificationInput"}
+	iSendNotifyCodeVerificationOutput          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "SendNotifyCodeVerificationOutput"}
+	iTagResourceInput                          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagResourceInput"}
+	iTagResourceOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "TagResourceOutput"}
+	iUntagResourceInput                        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UntagResourceInput"}
+	iUntagResourceOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UntagResourceOutput"}
+	iUpdateBrandProfileAttributeInput          = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileAttributeInput"}
+	iUpdateBrandProfileAttributeOutput         = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileAttributeOutput"}
+	iUpdateBrandProfileFromRegistrationInput   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileFromRegistrationInput"}
+	iUpdateBrandProfileFromRegistrationOutput  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileFromRegistrationOutput"}
+	iUpdateBrandProfileInput                   = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileInput"}
+	iUpdateBrandProfileOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateBrandProfileOutput"}
+	iUpdateNotifyCodeConfigurationInput        = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateNotifyCodeConfigurationInput"}
+	iUpdateNotifyCodeConfigurationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateNotifyCodeConfigurationOutput"}
+	iUpdateRegistrationsFromBrandProfileInput  = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateRegistrationsFromBrandProfileInput"}
+	iUpdateRegistrationsFromBrandProfileOutput = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "UpdateRegistrationsFromBrandProfileOutput"}
+	iValidateNotifyCodeVerificationInput       = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidateNotifyCodeVerificationInput"}
+	iValidateNotifyCodeVerificationOutput      = smithy.ShapeName{Namespace: "com.amazonaws.endusermessaging", Name: "ValidateNotifyCodeVerificationOutput"}
+	pString                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pBlob                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles",
-	Code: 200})
-
-var CreateBrandProfileAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles/{brandProfileId}/attributes",
-	Code: 200})
-
-var CreateBrandProfileFromRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileFromRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles/create-from-registration",
-	Code: 200})
-
-var CreateNotifyCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateNotifyCodeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/notify-code-configurations",
-	Code: 200})
-
-var CreateRegistrationsFromBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateRegistrationsFromBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles/{brandProfileId}/create-registrations",
-	Code: 200})
-
-var DeleteBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/brand-profiles/{brandProfileId+}",
-	Code: 200})
-
-var DeleteBrandProfileAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfileAttribute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/brand-profiles/{brandProfileId}/attributes/{attributeName}",
-	Code: 200})
-
-var DeleteNotifyCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteNotifyCodeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/notify-code-configurations/{notifyCodeConfigurationId+}",
-	Code: 200})
-
-var GetBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brand-profiles/{brandProfileId+}",
-	Code: 200})
-
-var GetBrandProfileAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfileAttribute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brand-profiles/{brandProfileId}/attributes/{attributeName}",
-	Code: 200})
-
-var GetJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/jobs/{jobId}",
-	Code: 200})
-
-var GetNotifyCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetNotifyCodeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/notify-code-configurations/{notifyCodeConfigurationId+}",
-	Code: 200})
-
-var ListBrandProfileAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfileAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brand-profiles/{brandProfileId}/attributes",
-	Code: 200})
-
-var ListBrandProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brand-profiles",
-	Code: 200})
-
-var ListJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/jobs",
-	Code: 200})
-
-var ListNotifyCodeConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListNotifyCodeConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/notify-code-configurations",
-	Code: 200})
-
-var ListRegistrationsFromBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListRegistrationsFromBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/brand-profiles/{brandProfileId}/registrations",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var SendNotifyCodeVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "SendNotifyCodeVerification",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/notify-code-verifications/send",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/brand-profiles/{brandProfileId+}",
-	Code: 200})
-
-var UpdateBrandProfileAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileAttribute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/brand-profiles/{brandProfileId}/attributes/{attributeName}",
-	Code: 200})
-
-var UpdateBrandProfileFromRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileFromRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles/{brandProfileId}/update-from-registration",
-	Code: 200})
-
-var UpdateNotifyCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateNotifyCodeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/notify-code-configurations/{notifyCodeConfigurationId+}",
-	Code: 200})
-
-var UpdateRegistrationsFromBrandProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateRegistrationsFromBrandProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/brand-profiles/{brandProfileId}/update-registrations",
-	Code: 200})
-
-var ValidateNotifyCodeVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidateNotifyCodeVerification",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/notify-code-verifications/validate",
-	Code: 200})
-
-var _EndUserMessaging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "EndUserMessaging",
-}, smithy.ShapeTypeService, 0)
-
-var EndUserMessaging = smithy.NewServiceSchema(_EndUserMessaging, "2026-09-21")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttachmentBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "AttachmentBody",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _BrandProfileAttributeCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _BrandProfileAttributeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BrandProfileAttributeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeInput",
-}, smithy.ShapeTypeStructure, 6)
-var BrandProfileAttributeInput_attributeName *smithy.Schema
-
-var BrandProfileAttributeInput_attributeType *smithy.Schema
-
-var BrandProfileAttributeInput_attributeValue *smithy.Schema
-
-var BrandProfileAttributeInput_attachmentBody *smithy.Schema
-
-var BrandProfileAttributeInput_description *smithy.Schema
-
-var BrandProfileAttributeInput_category *smithy.Schema
-
-var _BrandProfileAttributeInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeInputList",
-}, smithy.ShapeTypeList, 1)
-var _BrandProfileAttributeInputList_member *smithy.Schema
-
-var _BrandProfileAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BrandProfileAttributeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var BrandProfileAttributeOutput_attributeName *smithy.Schema
-
-var BrandProfileAttributeOutput_attributeType *smithy.Schema
-
-var BrandProfileAttributeOutput_mediaDownloadUrl *smithy.Schema
-
-var _BrandProfileAttributeOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BrandProfileAttributeOutputList_member *smithy.Schema
-
-var BrandProfileAttributeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeSummary",
-}, smithy.ShapeTypeStructure, 6)
-var BrandProfileAttributeSummary_attributeName *smithy.Schema
-
-var BrandProfileAttributeSummary_attributeType *smithy.Schema
-
-var BrandProfileAttributeSummary_description *smithy.Schema
-
-var BrandProfileAttributeSummary_category *smithy.Schema
-
-var BrandProfileAttributeSummary_createdAt *smithy.Schema
-
-var BrandProfileAttributeSummary_updatedAt *smithy.Schema
-
-var _BrandProfileAttributeSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _BrandProfileAttributeSummaryList_member *smithy.Schema
-
-var BrandProfileAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeType",
-}, smithy.ShapeTypeEnum, 3)
-var BrandProfileAttributeType_TEXT *smithy.Schema
-
-var BrandProfileAttributeType_IMAGE *smithy.Schema
-
-var BrandProfileAttributeType_DOCUMENT *smithy.Schema
-
-var _BrandProfileAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileAttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _BrandProfileIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var BrandProfileInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileInfo",
-}, smithy.ShapeTypeStructure, 7)
-var BrandProfileInfo_brandProfileId *smithy.Schema
-
-var BrandProfileInfo_brandProfileArn *smithy.Schema
-
-var BrandProfileInfo_brandProfileName *smithy.Schema
-
-var BrandProfileInfo_status *smithy.Schema
-
-var BrandProfileInfo_deletionProtectionEnabled *smithy.Schema
-
-var BrandProfileInfo_createdAt *smithy.Schema
-
-var BrandProfileInfo_updatedAt *smithy.Schema
-
-var _BrandProfileInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileInfoList",
-}, smithy.ShapeTypeList, 1)
-var _BrandProfileInfoList_member *smithy.Schema
-
-var _BrandProfileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "BrandProfileName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ChannelParameters",
-}, smithy.ShapeTypeStructure, 4)
-var ChannelParameters_text *smithy.Schema
-
-var ChannelParameters_voice *smithy.Schema
-
-var ChannelParameters_notify *smithy.Schema
-
-var ChannelParameters_whatsApp *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CodeConfigurationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CodeConfigurationParameters",
-}, smithy.ShapeTypeStructure, 4)
-var CodeConfigurationParameters_codeType *smithy.Schema
-
-var CodeConfigurationParameters_codeLength *smithy.Schema
-
-var CodeConfigurationParameters_validityPeriodMinutes *smithy.Schema
-
-var CodeConfigurationParameters_maxAttempts *smithy.Schema
-
-var _CodeLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CodeLength",
-}, smithy.ShapeTypeInteger, 0)
-
-var CodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CodeType",
-}, smithy.ShapeTypeEnum, 3)
-var CodeType_NUMERIC *smithy.Schema
-
-var CodeType_ALPHA *smithy.Schema
-
-var CodeType_ALPHANUMERIC *smithy.Schema
-
-var _ConfigurationSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ConfigurationSetName",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ContextKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _ContextMap_key *smithy.Schema
-
-var _ContextMap_value *smithy.Schema
-
-var _ContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ContextValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DestinationCountryParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DestinationCountryParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationCountryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DestinationCountryParameters",
-}, smithy.ShapeTypeMap, 2)
-var _DestinationCountryParameters_key *smithy.Schema
-
-var _DestinationCountryParameters_value *smithy.Schema
-
-var _DestinationCountryParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DestinationCountryParameterValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DestinationIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DestinationIdentity",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _InlineTemplateBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "InlineTemplateBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JobErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _JobErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobOperationType",
-}, smithy.ShapeTypeString, 0)
-
-var JobResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResource",
-}, smithy.ShapeTypeStructure, 3)
-var JobResource_resourceType *smithy.Schema
-
-var JobResource_resourceId *smithy.Schema
-
-var JobResource_resourceArn *smithy.Schema
-
-var _JobResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _JobResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResourceList",
-}, smithy.ShapeTypeList, 1)
-var _JobResourceList_member *smithy.Schema
-
-var JobResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var JobResourceType_REGISTRATION *smithy.Schema
-
-var JobResourceType_BRAND_PROFILE *smithy.Schema
-
-var JobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResult",
-}, smithy.ShapeTypeStructure, 2)
-var JobResult_jobId *smithy.Schema
-
-var JobResult_resourceIdentifier *smithy.Schema
-
-var _JobResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobResults",
-}, smithy.ShapeTypeList, 1)
-var _JobResults_member *smithy.Schema
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 3)
-var JobStatus_SUCCESS *smithy.Schema
-
-var JobStatus_PROCESSING *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobSummary",
-}, smithy.ShapeTypeStructure, 9)
-var JobSummary_jobId *smithy.Schema
-
-var JobSummary_status *smithy.Schema
-
-var JobSummary_operationType *smithy.Schema
-
-var JobSummary_createdAt *smithy.Schema
-
-var JobSummary_updatedAt *smithy.Schema
-
-var JobSummary_brandProfileId *smithy.Schema
-
-var JobSummary_errorCode *smithy.Schema
-
-var JobSummary_errorMessage *smithy.Schema
-
-var JobSummary_resources *smithy.Schema
-
-var _JobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "JobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _JobSummaryList_member *smithy.Schema
-
-var _LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxVerificationAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "MaxVerificationAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MediaDownloadUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "MediaDownloadUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MessageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "MessageId",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotifyChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyChannel",
-}, smithy.ShapeTypeEnum, 3)
-var NotifyChannel_TEXT *smithy.Schema
-
-var NotifyChannel_VOICE *smithy.Schema
-
-var NotifyChannel_WHATSAPP *smithy.Schema
-
-var NotifyCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyCodeConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var NotifyCodeConfiguration_notifyCodeConfigurationId *smithy.Schema
-
-var NotifyCodeConfiguration_notifyCodeConfigurationArn *smithy.Schema
-
-var NotifyCodeConfiguration_notifyCodeConfigurationName *smithy.Schema
-
-var NotifyCodeConfiguration_codeConfigurationParameters *smithy.Schema
-
-var NotifyCodeConfiguration_channelParameters *smithy.Schema
-
-var NotifyCodeConfiguration_deletionProtectionEnabled *smithy.Schema
-
-var NotifyCodeConfiguration_createdAt *smithy.Schema
-
-var NotifyCodeConfiguration_updatedAt *smithy.Schema
-
-var _NotifyCodeConfigurationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyCodeConfigurationId",
-}, smithy.ShapeTypeString, 0)
-
-var _NotifyCodeConfigurationIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyCodeConfigurationIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NotifyCodeConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyCodeConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _NotifyCodeConfigurationList_member *smithy.Schema
-
-var _NotifyCodeConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyCodeConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var NotifyParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyParameters",
-}, smithy.ShapeTypeStructure, 2)
-var NotifyParameters_notifyTemplateId *smithy.Schema
-
-var NotifyParameters_voiceId *smithy.Schema
-
-var _NotifyTemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "NotifyTemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var OnAttributeConflict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "OnAttributeConflict",
-}, smithy.ShapeTypeEnum, 2)
-var OnAttributeConflict_REPLACE *smithy.Schema
-
-var OnAttributeConflict_PRESERVE *smithy.Schema
-
-var _OriginationIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "OriginationIdentity",
-}, smithy.ShapeTypeString, 0)
-
-var _ReferenceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ReferenceId",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationAssociationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var RegistrationAssociationSummary_registrationId *smithy.Schema
-
-var RegistrationAssociationSummary_registrationType *smithy.Schema
-
-var RegistrationAssociationSummary_createdAt *smithy.Schema
-
-var RegistrationAssociationSummary_smartMatchUsed *smithy.Schema
-
-var _RegistrationAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationAssociationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RegistrationAssociationSummaryList_member *smithy.Schema
-
-var _RegistrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationId",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistrationIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationIdList",
-}, smithy.ShapeTypeList, 1)
-var _RegistrationIdList_member *smithy.Schema
-
-var _RegistrationIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationType",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistrationTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "RegistrationTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RegistrationTypeList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 5)
-var Status_ACTIVE *smithy.Schema
-
-var Status_BLOCKED *smithy.Schema
-
-var Status_PAUSED *smithy.Schema
-
-var Status_CANCELLED *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TextParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TextParameters",
-}, smithy.ShapeTypeStructure, 2)
-var TextParameters_inlineTemplateBody *smithy.Schema
-
-var TextParameters_destinationCountryParameters *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var UpdateChannelParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateChannelParameters",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelParameters_text *smithy.Schema
-
-var UpdateChannelParameters_voice *smithy.Schema
-
-var UpdateChannelParameters_notify *smithy.Schema
-
-var UpdateChannelParameters_whatsApp *smithy.Schema
-
-var UpdateCodeConfigurationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateCodeConfigurationParameters",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCodeConfigurationParameters_codeType *smithy.Schema
-
-var UpdateCodeConfigurationParameters_codeLength *smithy.Schema
-
-var UpdateCodeConfigurationParameters_validityPeriodMinutes *smithy.Schema
-
-var UpdateCodeConfigurationParameters_maxAttempts *smithy.Schema
-
-var _UpdateDestinationCountryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateDestinationCountryParameters",
-}, smithy.ShapeTypeMap, 2)
-var _UpdateDestinationCountryParameters_key *smithy.Schema
-
-var _UpdateDestinationCountryParameters_value *smithy.Schema
-
-var _UpdateInlineTemplateBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateInlineTemplateBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UpdateLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateLanguageCode",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateNotifyParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateNotifyParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateNotifyParameters_notifyTemplateId *smithy.Schema
-
-var UpdateNotifyParameters_voiceId *smithy.Schema
-
-var _UpdateNotifyTemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateNotifyTemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateTextParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateTextParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTextParameters_inlineTemplateBody *smithy.Schema
-
-var UpdateTextParameters_destinationCountryParameters *smithy.Schema
-
-var _UpdateVoiceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateVoiceId",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateVoiceParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateVoiceParameters",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateVoiceParameters_inlineTemplateBody *smithy.Schema
-
-var UpdateVoiceParameters_languageCode *smithy.Schema
-
-var UpdateVoiceParameters_voiceId *smithy.Schema
-
-var UpdateVoiceParameters_voiceMessageBodyTextType *smithy.Schema
-
-var UpdateWhatsAppParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateWhatsAppParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateWhatsAppParameters_whatsAppTemplateName *smithy.Schema
-
-var UpdateWhatsAppParameters_languageCode *smithy.Schema
-
-var _UpdateWhatsAppTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateWhatsAppTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidityPeriodMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidityPeriodMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VerificationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VerificationCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _VerificationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VerificationId",
-}, smithy.ShapeTypeString, 0)
-
-var VerificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VerificationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var VerificationStatus_VALID *smithy.Schema
-
-var VerificationStatus_INVALID *smithy.Schema
-
-var _VoiceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VoiceId",
-}, smithy.ShapeTypeString, 0)
-
-var VoiceMessageBodyTextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VoiceMessageBodyTextType",
-}, smithy.ShapeTypeEnum, 2)
-var VoiceMessageBodyTextType_TEXT *smithy.Schema
-
-var VoiceMessageBodyTextType_SSML *smithy.Schema
-
-var VoiceParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "VoiceParameters",
-}, smithy.ShapeTypeStructure, 4)
-var VoiceParameters_inlineTemplateBody *smithy.Schema
-
-var VoiceParameters_languageCode *smithy.Schema
-
-var VoiceParameters_voiceId *smithy.Schema
-
-var VoiceParameters_voiceMessageBodyTextType *smithy.Schema
-
-var WhatsAppParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "WhatsAppParameters",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppParameters_whatsAppTemplateName *smithy.Schema
-
-var WhatsAppParameters_languageCode *smithy.Schema
-
-var _WhatsAppTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "WhatsAppTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var CreateBrandProfileAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileAttributesInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBrandProfileAttributesInput_brandProfileId *smithy.Schema
-
-var CreateBrandProfileAttributesInput_attributes *smithy.Schema
-
-var CreateBrandProfileAttributesInput_clientToken *smithy.Schema
-
-var CreateBrandProfileAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileAttributesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBrandProfileAttributesOutput_attributes *smithy.Schema
-
-var CreateBrandProfileFromRegistrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileFromRegistrationInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateBrandProfileFromRegistrationInput_registrationId *smithy.Schema
-
-var CreateBrandProfileFromRegistrationInput_brandProfileName *smithy.Schema
-
-var CreateBrandProfileFromRegistrationInput_smartMatch *smithy.Schema
-
-var CreateBrandProfileFromRegistrationInput_tags *smithy.Schema
-
-var CreateBrandProfileFromRegistrationInput_clientToken *smithy.Schema
-
-var CreateBrandProfileFromRegistrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileFromRegistrationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBrandProfileFromRegistrationOutput_results *smithy.Schema
-
-var CreateBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBrandProfileInput_brandProfileName *smithy.Schema
-
-var CreateBrandProfileInput_clientToken *smithy.Schema
-
-var CreateBrandProfileInput_deletionProtectionEnabled *smithy.Schema
-
-var CreateBrandProfileInput_tags *smithy.Schema
-
-var CreateBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateBrandProfileOutput_brandProfileId *smithy.Schema
-
-var CreateBrandProfileOutput_brandProfileArn *smithy.Schema
-
-var CreateBrandProfileOutput_brandProfileName *smithy.Schema
-
-var CreateBrandProfileOutput_status *smithy.Schema
-
-var CreateBrandProfileOutput_deletionProtectionEnabled *smithy.Schema
-
-var CreateBrandProfileOutput_createdAt *smithy.Schema
-
-var CreateBrandProfileOutput_updatedAt *smithy.Schema
-
-var CreateBrandProfileOutput_attributesCreated *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateNotifyCodeConfigurationInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateNotifyCodeConfigurationInput_notifyCodeConfigurationName *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput_codeConfigurationParameters *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput_channelParameters *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput_deletionProtectionEnabled *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput_clientToken *smithy.Schema
-
-var CreateNotifyCodeConfigurationInput_tags *smithy.Schema
-
-var CreateNotifyCodeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateNotifyCodeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNotifyCodeConfigurationOutput_notifyCodeConfiguration *smithy.Schema
-
-var CreateRegistrationsFromBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateRegistrationsFromBrandProfileInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRegistrationsFromBrandProfileInput_brandProfileId *smithy.Schema
-
-var CreateRegistrationsFromBrandProfileInput_registrationTypes *smithy.Schema
-
-var CreateRegistrationsFromBrandProfileInput_smartMatch *smithy.Schema
-
-var CreateRegistrationsFromBrandProfileInput_clientToken *smithy.Schema
-
-var CreateRegistrationsFromBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "CreateRegistrationsFromBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRegistrationsFromBrandProfileOutput_results *smithy.Schema
-
-var DeleteBrandProfileAttributeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfileAttributeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBrandProfileAttributeInput_brandProfileId *smithy.Schema
-
-var DeleteBrandProfileAttributeInput_attributeName *smithy.Schema
-
-var DeleteBrandProfileAttributeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfileAttributeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBrandProfileAttributeOutput_brandProfileId *smithy.Schema
-
-var DeleteBrandProfileAttributeOutput_attributeName *smithy.Schema
-
-var DeleteBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfileInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBrandProfileInput_brandProfileId *smithy.Schema
-
-var DeleteBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBrandProfileOutput_brandProfileId *smithy.Schema
-
-var DeleteBrandProfileOutput_brandProfileArn *smithy.Schema
-
-var DeleteNotifyCodeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteNotifyCodeConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId *smithy.Schema
-
-var DeleteNotifyCodeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "DeleteNotifyCodeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetBrandProfileAttributeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfileAttributeInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBrandProfileAttributeInput_brandProfileId *smithy.Schema
-
-var GetBrandProfileAttributeInput_attributeName *smithy.Schema
-
-var GetBrandProfileAttributeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfileAttributeOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetBrandProfileAttributeOutput_attributeName *smithy.Schema
-
-var GetBrandProfileAttributeOutput_attributeType *smithy.Schema
-
-var GetBrandProfileAttributeOutput_attributeValue *smithy.Schema
-
-var GetBrandProfileAttributeOutput_description *smithy.Schema
-
-var GetBrandProfileAttributeOutput_category *smithy.Schema
-
-var GetBrandProfileAttributeOutput_mediaContentType *smithy.Schema
-
-var GetBrandProfileAttributeOutput_mediaSizeBytes *smithy.Schema
-
-var GetBrandProfileAttributeOutput_mediaDownloadUrl *smithy.Schema
-
-var GetBrandProfileAttributeOutput_createdAt *smithy.Schema
-
-var GetBrandProfileAttributeOutput_updatedAt *smithy.Schema
-
-var GetBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfileInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBrandProfileInput_brandProfileId *smithy.Schema
-
-var GetBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetBrandProfileOutput_brandProfileId *smithy.Schema
-
-var GetBrandProfileOutput_brandProfileArn *smithy.Schema
-
-var GetBrandProfileOutput_brandProfileName *smithy.Schema
-
-var GetBrandProfileOutput_status *smithy.Schema
-
-var GetBrandProfileOutput_deletionProtectionEnabled *smithy.Schema
-
-var GetBrandProfileOutput_createdAt *smithy.Schema
-
-var GetBrandProfileOutput_updatedAt *smithy.Schema
-
-var GetJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobInput_jobId *smithy.Schema
-
-var Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "Job",
-}, smithy.ShapeTypeStructure, 9)
-var Job_jobId *smithy.Schema
-
-var Job_status *smithy.Schema
-
-var Job_operationType *smithy.Schema
-
-var Job_createdAt *smithy.Schema
-
-var Job_updatedAt *smithy.Schema
-
-var Job_brandProfileId *smithy.Schema
-
-var Job_errorCode *smithy.Schema
-
-var Job_errorMessage *smithy.Schema
-
-var Job_resources *smithy.Schema
-
-var GetNotifyCodeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetNotifyCodeConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotifyCodeConfigurationInput_notifyCodeConfigurationId *smithy.Schema
-
-var GetNotifyCodeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "GetNotifyCodeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotifyCodeConfigurationOutput_notifyCodeConfiguration *smithy.Schema
-
-var ListBrandProfileAttributesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfileAttributesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListBrandProfileAttributesInput_brandProfileId *smithy.Schema
-
-var ListBrandProfileAttributesInput_nextToken *smithy.Schema
-
-var ListBrandProfileAttributesInput_maxResults *smithy.Schema
-
-var ListBrandProfileAttributesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfileAttributesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrandProfileAttributesOutput_brandProfileAttributes *smithy.Schema
-
-var ListBrandProfileAttributesOutput_nextToken *smithy.Schema
-
-var ListBrandProfilesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfilesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrandProfilesInput_nextToken *smithy.Schema
-
-var ListBrandProfilesInput_maxResults *smithy.Schema
-
-var ListBrandProfilesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListBrandProfilesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrandProfilesOutput_brandProfiles *smithy.Schema
-
-var ListBrandProfilesOutput_nextToken *smithy.Schema
-
-var ListJobsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListJobsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListJobsInput_maxResults *smithy.Schema
-
-var ListJobsInput_nextToken *smithy.Schema
-
-var ListJobsInput_status *smithy.Schema
-
-var ListJobsInput_brandProfileId *smithy.Schema
-
-var ListJobsInput_operationType *smithy.Schema
-
-var ListJobsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListJobsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsOutput_jobs *smithy.Schema
-
-var ListJobsOutput_nextToken *smithy.Schema
-
-var ListNotifyCodeConfigurationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListNotifyCodeConfigurationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotifyCodeConfigurationsInput_maxResults *smithy.Schema
-
-var ListNotifyCodeConfigurationsInput_nextToken *smithy.Schema
-
-var ListNotifyCodeConfigurationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListNotifyCodeConfigurationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotifyCodeConfigurationsOutput_notifyCodeConfigurations *smithy.Schema
-
-var ListNotifyCodeConfigurationsOutput_nextToken *smithy.Schema
-
-var ListRegistrationsFromBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListRegistrationsFromBrandProfileInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListRegistrationsFromBrandProfileInput_brandProfileId *smithy.Schema
-
-var ListRegistrationsFromBrandProfileInput_maxResults *smithy.Schema
-
-var ListRegistrationsFromBrandProfileInput_nextToken *smithy.Schema
-
-var ListRegistrationsFromBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListRegistrationsFromBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegistrationsFromBrandProfileOutput_registrationAssociations *smithy.Schema
-
-var ListRegistrationsFromBrandProfileOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var SendNotifyCodeVerificationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "SendNotifyCodeVerificationInput",
-}, smithy.ShapeTypeStructure, 9)
-var SendNotifyCodeVerificationInput_channel *smithy.Schema
-
-var SendNotifyCodeVerificationInput_destinationIdentity *smithy.Schema
-
-var SendNotifyCodeVerificationInput_originationIdentity *smithy.Schema
-
-var SendNotifyCodeVerificationInput_notifyCodeConfiguration *smithy.Schema
-
-var SendNotifyCodeVerificationInput_overrideChannelParameters *smithy.Schema
-
-var SendNotifyCodeVerificationInput_overrideCodeConfigurationParameters *smithy.Schema
-
-var SendNotifyCodeVerificationInput_configurationSetName *smithy.Schema
-
-var SendNotifyCodeVerificationInput_context *smithy.Schema
-
-var SendNotifyCodeVerificationInput_referenceId *smithy.Schema
-
-var SendNotifyCodeVerificationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "SendNotifyCodeVerificationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var SendNotifyCodeVerificationOutput_verificationId *smithy.Schema
-
-var SendNotifyCodeVerificationOutput_messageId *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateBrandProfileAttributeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileAttributeInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateBrandProfileAttributeInput_brandProfileId *smithy.Schema
-
-var UpdateBrandProfileAttributeInput_attributeName *smithy.Schema
-
-var UpdateBrandProfileAttributeInput_attributeValue *smithy.Schema
-
-var UpdateBrandProfileAttributeInput_attachmentBody *smithy.Schema
-
-var UpdateBrandProfileAttributeInput_description *smithy.Schema
-
-var UpdateBrandProfileAttributeInput_category *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileAttributeOutput",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateBrandProfileAttributeOutput_attributeName *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_attributeType *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_attributeValue *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_description *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_category *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_mediaContentType *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_mediaSizeBytes *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_createdAt *smithy.Schema
-
-var UpdateBrandProfileAttributeOutput_updatedAt *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileFromRegistrationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateBrandProfileFromRegistrationInput_brandProfileId *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationInput_registrationId *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationInput_smartMatch *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationInput_onAttributeConflict *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationInput_clientToken *smithy.Schema
-
-var UpdateBrandProfileFromRegistrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileFromRegistrationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBrandProfileFromRegistrationOutput_results *smithy.Schema
-
-var UpdateBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBrandProfileInput_brandProfileId *smithy.Schema
-
-var UpdateBrandProfileInput_brandProfileName *smithy.Schema
-
-var UpdateBrandProfileInput_deletionProtectionEnabled *smithy.Schema
-
-var UpdateBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateBrandProfileOutput_brandProfileId *smithy.Schema
-
-var UpdateBrandProfileOutput_brandProfileArn *smithy.Schema
-
-var UpdateBrandProfileOutput_brandProfileName *smithy.Schema
-
-var UpdateBrandProfileOutput_status *smithy.Schema
-
-var UpdateBrandProfileOutput_deletionProtectionEnabled *smithy.Schema
-
-var UpdateBrandProfileOutput_createdAt *smithy.Schema
-
-var UpdateBrandProfileOutput_updatedAt *smithy.Schema
-
-var UpdateNotifyCodeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateNotifyCodeConfigurationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId *smithy.Schema
-
-var UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName *smithy.Schema
-
-var UpdateNotifyCodeConfigurationInput_codeConfigurationParameters *smithy.Schema
-
-var UpdateNotifyCodeConfigurationInput_channelParameters *smithy.Schema
-
-var UpdateNotifyCodeConfigurationInput_deletionProtectionEnabled *smithy.Schema
-
-var UpdateNotifyCodeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateNotifyCodeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateRegistrationsFromBrandProfileInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRegistrationsFromBrandProfileInput_brandProfileId *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileInput_registrationIds *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileInput_smartMatch *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileInput_onAttributeConflict *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileInput_clientToken *smithy.Schema
-
-var UpdateRegistrationsFromBrandProfileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "UpdateRegistrationsFromBrandProfileOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRegistrationsFromBrandProfileOutput_results *smithy.Schema
-
-var ValidateNotifyCodeVerificationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidateNotifyCodeVerificationInput",
-}, smithy.ShapeTypeStructure, 3)
-var ValidateNotifyCodeVerificationInput_destinationIdentity *smithy.Schema
-
-var ValidateNotifyCodeVerificationInput_referenceId *smithy.Schema
-
-var ValidateNotifyCodeVerificationInput_code *smithy.Schema
-
-var ValidateNotifyCodeVerificationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.endusermessaging",
-	Name:      "ValidateNotifyCodeVerificationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ValidateNotifyCodeVerificationOutput_status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	BrandProfileAttributeType_TEXT = BrandProfileAttributeType.AddMember("TEXT", smithyprelude.Unit)
-
-	BrandProfileAttributeType_IMAGE = BrandProfileAttributeType.AddMember("IMAGE", smithyprelude.Unit)
-
-	BrandProfileAttributeType_DOCUMENT = BrandProfileAttributeType.AddMember("DOCUMENT", smithyprelude.Unit)
-
-	BrandProfileAttributeInput_attributeName = BrandProfileAttributeInput.AddMember("attributeName", _BrandProfileAttributeName)
-
-	BrandProfileAttributeInput_attributeType = BrandProfileAttributeInput.AddMember("attributeType", BrandProfileAttributeType)
-
-	BrandProfileAttributeInput_attributeValue = BrandProfileAttributeInput.AddMember("attributeValue", _BrandProfileAttributeValue)
-
-	BrandProfileAttributeInput_attachmentBody = BrandProfileAttributeInput.AddMember("attachmentBody", _AttachmentBody)
-
-	BrandProfileAttributeInput_description = BrandProfileAttributeInput.AddMember("description", _BrandProfileAttributeDescription)
-
-	BrandProfileAttributeInput_category = BrandProfileAttributeInput.AddMember("category", _BrandProfileAttributeCategory)
-
-	_BrandProfileAttributeInputList_member = _BrandProfileAttributeInputList.AddMember("member", BrandProfileAttributeInput)
-
-	BrandProfileAttributeOutput_attributeName = BrandProfileAttributeOutput.AddMember("attributeName", _BrandProfileAttributeName)
-
-	BrandProfileAttributeOutput_attributeType = BrandProfileAttributeOutput.AddMember("attributeType", BrandProfileAttributeType)
-
-	BrandProfileAttributeOutput_mediaDownloadUrl = BrandProfileAttributeOutput.AddMember("mediaDownloadUrl", _MediaDownloadUrl)
-
-	_BrandProfileAttributeOutputList_member = _BrandProfileAttributeOutputList.AddMember("member", BrandProfileAttributeOutput)
-
-	BrandProfileAttributeSummary_attributeName = BrandProfileAttributeSummary.AddMember("attributeName", _BrandProfileAttributeName)
-
-	BrandProfileAttributeSummary_attributeType = BrandProfileAttributeSummary.AddMember("attributeType", BrandProfileAttributeType)
-
-	BrandProfileAttributeSummary_description = BrandProfileAttributeSummary.AddMember("description", _BrandProfileAttributeDescription)
-
-	BrandProfileAttributeSummary_category = BrandProfileAttributeSummary.AddMember("category", _BrandProfileAttributeCategory)
-
-	BrandProfileAttributeSummary_createdAt = BrandProfileAttributeSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	BrandProfileAttributeSummary_updatedAt = BrandProfileAttributeSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_BrandProfileAttributeSummaryList_member = _BrandProfileAttributeSummaryList.AddMember("member", BrandProfileAttributeSummary)
-
-	Status_ACTIVE = Status.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Status_BLOCKED = Status.AddMember("BLOCKED", smithyprelude.Unit)
-
-	Status_PAUSED = Status.AddMember("PAUSED", smithyprelude.Unit)
-
-	Status_CANCELLED = Status.AddMember("CANCELLED", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	BrandProfileInfo_brandProfileId = BrandProfileInfo.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	BrandProfileInfo_brandProfileArn = BrandProfileInfo.AddMember("brandProfileArn", _AmazonResourceName)
-
-	BrandProfileInfo_brandProfileName = BrandProfileInfo.AddMember("brandProfileName", _BrandProfileName)
-
-	BrandProfileInfo_status = BrandProfileInfo.AddMember("status", Status)
-
-	BrandProfileInfo_deletionProtectionEnabled = BrandProfileInfo.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	BrandProfileInfo_createdAt = BrandProfileInfo.AddMember("createdAt", smithyprelude.Timestamp)
-
-	BrandProfileInfo_updatedAt = BrandProfileInfo.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_BrandProfileInfoList_member = _BrandProfileInfoList.AddMember("member", BrandProfileInfo)
-
-	_DestinationCountryParameters_key = _DestinationCountryParameters.AddMember("key", _DestinationCountryParameterKey)
-
-	_DestinationCountryParameters_value = _DestinationCountryParameters.AddMember("value", _DestinationCountryParameterValue)
-
-	TextParameters_inlineTemplateBody = TextParameters.AddMember("inlineTemplateBody", _InlineTemplateBody)
-
-	TextParameters_destinationCountryParameters = TextParameters.AddMember("destinationCountryParameters", _DestinationCountryParameters)
-
-	VoiceMessageBodyTextType_TEXT = VoiceMessageBodyTextType.AddMember("TEXT", smithyprelude.Unit)
-
-	VoiceMessageBodyTextType_SSML = VoiceMessageBodyTextType.AddMember("SSML", smithyprelude.Unit)
-
-	VoiceParameters_inlineTemplateBody = VoiceParameters.AddMember("inlineTemplateBody", _InlineTemplateBody)
-
-	VoiceParameters_languageCode = VoiceParameters.AddMember("languageCode", _LanguageCode)
-
-	VoiceParameters_voiceId = VoiceParameters.AddMember("voiceId", _VoiceId)
-
-	VoiceParameters_voiceMessageBodyTextType = VoiceParameters.AddMember("voiceMessageBodyTextType", VoiceMessageBodyTextType)
-
-	NotifyParameters_notifyTemplateId = NotifyParameters.AddMember("notifyTemplateId", _NotifyTemplateId)
-
-	NotifyParameters_voiceId = NotifyParameters.AddMember("voiceId", _VoiceId)
-
-	WhatsAppParameters_whatsAppTemplateName = WhatsAppParameters.AddMember("whatsAppTemplateName", _WhatsAppTemplateName)
-
-	WhatsAppParameters_languageCode = WhatsAppParameters.AddMember("languageCode", _LanguageCode)
-
-	ChannelParameters_text = ChannelParameters.AddMember("text", TextParameters)
-
-	ChannelParameters_voice = ChannelParameters.AddMember("voice", VoiceParameters)
-
-	ChannelParameters_notify = ChannelParameters.AddMember("notify", NotifyParameters)
-
-	ChannelParameters_whatsApp = ChannelParameters.AddMember("whatsApp", WhatsAppParameters)
-
-	CodeType_NUMERIC = CodeType.AddMember("NUMERIC", smithyprelude.Unit)
-
-	CodeType_ALPHA = CodeType.AddMember("ALPHA", smithyprelude.Unit)
-
-	CodeType_ALPHANUMERIC = CodeType.AddMember("ALPHANUMERIC", smithyprelude.Unit)
-
-	CodeConfigurationParameters_codeType = CodeConfigurationParameters.AddMember("codeType", CodeType)
-
-	CodeConfigurationParameters_codeLength = CodeConfigurationParameters.AddMember("codeLength", _CodeLength)
-
-	CodeConfigurationParameters_validityPeriodMinutes = CodeConfigurationParameters.AddMember("validityPeriodMinutes", _ValidityPeriodMinutes)
-
-	CodeConfigurationParameters_maxAttempts = CodeConfigurationParameters.AddMember("maxAttempts", _MaxVerificationAttempts)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	_ContextMap_key = _ContextMap.AddMember("key", _ContextKey)
-
-	_ContextMap_value = _ContextMap.AddMember("value", _ContextValue)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	JobResourceType_REGISTRATION = JobResourceType.AddMember("REGISTRATION", smithyprelude.Unit)
-
-	JobResourceType_BRAND_PROFILE = JobResourceType.AddMember("BRAND_PROFILE", smithyprelude.Unit)
-
-	JobResource_resourceType = JobResource.AddMember("resourceType", JobResourceType)
-
-	JobResource_resourceId = JobResource.AddMember("resourceId", _JobResourceId)
-
-	JobResource_resourceArn = JobResource.AddMember("resourceArn", _AmazonResourceName)
-
-	_JobResourceList_member = _JobResourceList.AddMember("member", JobResource)
-
-	JobResult_jobId = JobResult.AddMember("jobId", _JobId)
-
-	JobResult_resourceIdentifier = JobResult.AddMember("resourceIdentifier", _JobResourceIdentifier)
-
-	_JobResults_member = _JobResults.AddMember("member", JobResult)
-
-	JobStatus_SUCCESS = JobStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	JobStatus_PROCESSING = JobStatus.AddMember("PROCESSING", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobSummary_jobId = JobSummary.AddMember("jobId", _JobId)
-
-	JobSummary_status = JobSummary.AddMember("status", JobStatus)
-
-	JobSummary_operationType = JobSummary.AddMember("operationType", _JobOperationType)
-
-	JobSummary_createdAt = JobSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	JobSummary_updatedAt = JobSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	JobSummary_brandProfileId = JobSummary.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	JobSummary_errorCode = JobSummary.AddMember("errorCode", _JobErrorCode)
-
-	JobSummary_errorMessage = JobSummary.AddMember("errorMessage", _JobErrorMessage)
-
-	JobSummary_resources = JobSummary.AddMember("resources", _JobResourceList)
-
-	_JobSummaryList_member = _JobSummaryList.AddMember("member", JobSummary)
-
-	NotifyChannel_TEXT = NotifyChannel.AddMember("TEXT", smithyprelude.Unit)
-
-	NotifyChannel_VOICE = NotifyChannel.AddMember("VOICE", smithyprelude.Unit)
-
-	NotifyChannel_WHATSAPP = NotifyChannel.AddMember("WHATSAPP", smithyprelude.Unit)
-
-	NotifyCodeConfiguration_notifyCodeConfigurationId = NotifyCodeConfiguration.AddMember("notifyCodeConfigurationId", _NotifyCodeConfigurationId)
-
-	NotifyCodeConfiguration_notifyCodeConfigurationArn = NotifyCodeConfiguration.AddMember("notifyCodeConfigurationArn", _AmazonResourceName)
-
-	NotifyCodeConfiguration_notifyCodeConfigurationName = NotifyCodeConfiguration.AddMember("notifyCodeConfigurationName", _NotifyCodeConfigurationName)
-
-	NotifyCodeConfiguration_codeConfigurationParameters = NotifyCodeConfiguration.AddMember("codeConfigurationParameters", CodeConfigurationParameters)
-
-	NotifyCodeConfiguration_channelParameters = NotifyCodeConfiguration.AddMember("channelParameters", ChannelParameters)
-
-	NotifyCodeConfiguration_deletionProtectionEnabled = NotifyCodeConfiguration.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	NotifyCodeConfiguration_createdAt = NotifyCodeConfiguration.AddMember("createdAt", smithyprelude.Timestamp)
-
-	NotifyCodeConfiguration_updatedAt = NotifyCodeConfiguration.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_NotifyCodeConfigurationList_member = _NotifyCodeConfigurationList.AddMember("member", NotifyCodeConfiguration)
-
-	OnAttributeConflict_REPLACE = OnAttributeConflict.AddMember("REPLACE", smithyprelude.Unit)
-
-	OnAttributeConflict_PRESERVE = OnAttributeConflict.AddMember("PRESERVE", smithyprelude.Unit)
-
-	RegistrationAssociationSummary_registrationId = RegistrationAssociationSummary.AddMember("registrationId", _RegistrationId)
-
-	RegistrationAssociationSummary_registrationType = RegistrationAssociationSummary.AddMember("registrationType", _RegistrationType)
-
-	RegistrationAssociationSummary_createdAt = RegistrationAssociationSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	RegistrationAssociationSummary_smartMatchUsed = RegistrationAssociationSummary.AddMember("smartMatchUsed", smithyprelude.Boolean)
-
-	_RegistrationAssociationSummaryList_member = _RegistrationAssociationSummaryList.AddMember("member", RegistrationAssociationSummary)
-
-	_RegistrationIdList_member = _RegistrationIdList.AddMember("member", _RegistrationIdOrArn)
-
-	_RegistrationTypeList_member = _RegistrationTypeList.AddMember("member", _RegistrationType)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	_UpdateDestinationCountryParameters_key = _UpdateDestinationCountryParameters.AddMember("key", _DestinationCountryParameterKey)
-
-	_UpdateDestinationCountryParameters_value = _UpdateDestinationCountryParameters.AddMember("value", _DestinationCountryParameterValue)
-
-	UpdateTextParameters_inlineTemplateBody = UpdateTextParameters.AddMember("inlineTemplateBody", _UpdateInlineTemplateBody)
-
-	UpdateTextParameters_destinationCountryParameters = UpdateTextParameters.AddMember("destinationCountryParameters", _UpdateDestinationCountryParameters)
-
-	UpdateVoiceParameters_inlineTemplateBody = UpdateVoiceParameters.AddMember("inlineTemplateBody", _UpdateInlineTemplateBody)
-
-	UpdateVoiceParameters_languageCode = UpdateVoiceParameters.AddMember("languageCode", _UpdateLanguageCode)
-
-	UpdateVoiceParameters_voiceId = UpdateVoiceParameters.AddMember("voiceId", _UpdateVoiceId)
-
-	UpdateVoiceParameters_voiceMessageBodyTextType = UpdateVoiceParameters.AddMember("voiceMessageBodyTextType", VoiceMessageBodyTextType)
-
-	UpdateNotifyParameters_notifyTemplateId = UpdateNotifyParameters.AddMember("notifyTemplateId", _UpdateNotifyTemplateId)
-
-	UpdateNotifyParameters_voiceId = UpdateNotifyParameters.AddMember("voiceId", _UpdateVoiceId)
-
-	UpdateWhatsAppParameters_whatsAppTemplateName = UpdateWhatsAppParameters.AddMember("whatsAppTemplateName", _UpdateWhatsAppTemplateName)
-
-	UpdateWhatsAppParameters_languageCode = UpdateWhatsAppParameters.AddMember("languageCode", _UpdateLanguageCode)
-
-	UpdateChannelParameters_text = UpdateChannelParameters.AddMember("text", UpdateTextParameters)
-
-	UpdateChannelParameters_voice = UpdateChannelParameters.AddMember("voice", UpdateVoiceParameters)
-
-	UpdateChannelParameters_notify = UpdateChannelParameters.AddMember("notify", UpdateNotifyParameters)
-
-	UpdateChannelParameters_whatsApp = UpdateChannelParameters.AddMember("whatsApp", UpdateWhatsAppParameters)
-
-	UpdateCodeConfigurationParameters_codeType = UpdateCodeConfigurationParameters.AddMember("codeType", CodeType)
-
-	UpdateCodeConfigurationParameters_codeLength = UpdateCodeConfigurationParameters.AddMember("codeLength", _CodeLength)
-
-	UpdateCodeConfigurationParameters_validityPeriodMinutes = UpdateCodeConfigurationParameters.AddMember("validityPeriodMinutes", _ValidityPeriodMinutes)
-
-	UpdateCodeConfigurationParameters_maxAttempts = UpdateCodeConfigurationParameters.AddMember("maxAttempts", _MaxVerificationAttempts)
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	VerificationStatus_VALID = VerificationStatus.AddMember("VALID", smithyprelude.Unit)
-
-	VerificationStatus_INVALID = VerificationStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	CreateBrandProfileAttributesInput_brandProfileId = CreateBrandProfileAttributesInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	CreateBrandProfileAttributesInput_attributes = CreateBrandProfileAttributesInput.AddMember("attributes", _BrandProfileAttributeInputList)
-
-	CreateBrandProfileAttributesInput_clientToken = CreateBrandProfileAttributesInput.AddMember("clientToken", _ClientToken)
-
-	CreateBrandProfileAttributesOutput_attributes = CreateBrandProfileAttributesOutput.AddMember("attributes", _BrandProfileAttributeOutputList)
-
-	CreateBrandProfileFromRegistrationInput_registrationId = CreateBrandProfileFromRegistrationInput.AddMember("registrationId", _RegistrationIdOrArn)
-
-	CreateBrandProfileFromRegistrationInput_brandProfileName = CreateBrandProfileFromRegistrationInput.AddMember("brandProfileName", _BrandProfileName)
-
-	CreateBrandProfileFromRegistrationInput_smartMatch = CreateBrandProfileFromRegistrationInput.AddMember("smartMatch", smithyprelude.Boolean)
-
-	CreateBrandProfileFromRegistrationInput_tags = CreateBrandProfileFromRegistrationInput.AddMember("tags", _TagList)
-
-	CreateBrandProfileFromRegistrationInput_clientToken = CreateBrandProfileFromRegistrationInput.AddMember("clientToken", _ClientToken)
-
-	CreateBrandProfileFromRegistrationOutput_results = CreateBrandProfileFromRegistrationOutput.AddMember("results", _JobResults)
-
-	CreateBrandProfileInput_brandProfileName = CreateBrandProfileInput.AddMember("brandProfileName", _BrandProfileName)
-
-	CreateBrandProfileInput_clientToken = CreateBrandProfileInput.AddMember("clientToken", _ClientToken)
-
-	CreateBrandProfileInput_deletionProtectionEnabled = CreateBrandProfileInput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	CreateBrandProfileInput_tags = CreateBrandProfileInput.AddMember("tags", _TagList)
-
-	CreateBrandProfileOutput_brandProfileId = CreateBrandProfileOutput.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	CreateBrandProfileOutput_brandProfileArn = CreateBrandProfileOutput.AddMember("brandProfileArn", _AmazonResourceName)
-
-	CreateBrandProfileOutput_brandProfileName = CreateBrandProfileOutput.AddMember("brandProfileName", _BrandProfileName)
-
-	CreateBrandProfileOutput_status = CreateBrandProfileOutput.AddMember("status", Status)
-
-	CreateBrandProfileOutput_deletionProtectionEnabled = CreateBrandProfileOutput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	CreateBrandProfileOutput_createdAt = CreateBrandProfileOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateBrandProfileOutput_updatedAt = CreateBrandProfileOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	CreateBrandProfileOutput_attributesCreated = CreateBrandProfileOutput.AddMember("attributesCreated", smithyprelude.Integer)
-
-	CreateNotifyCodeConfigurationInput_notifyCodeConfigurationName = CreateNotifyCodeConfigurationInput.AddMember("notifyCodeConfigurationName", _NotifyCodeConfigurationName)
-
-	CreateNotifyCodeConfigurationInput_codeConfigurationParameters = CreateNotifyCodeConfigurationInput.AddMember("codeConfigurationParameters", CodeConfigurationParameters)
-
-	CreateNotifyCodeConfigurationInput_channelParameters = CreateNotifyCodeConfigurationInput.AddMember("channelParameters", ChannelParameters)
-
-	CreateNotifyCodeConfigurationInput_deletionProtectionEnabled = CreateNotifyCodeConfigurationInput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	CreateNotifyCodeConfigurationInput_clientToken = CreateNotifyCodeConfigurationInput.AddMember("clientToken", _ClientToken)
-
-	CreateNotifyCodeConfigurationInput_tags = CreateNotifyCodeConfigurationInput.AddMember("tags", _TagList)
-
-	CreateNotifyCodeConfigurationOutput_notifyCodeConfiguration = CreateNotifyCodeConfigurationOutput.AddMember("notifyCodeConfiguration", NotifyCodeConfiguration)
-
-	CreateRegistrationsFromBrandProfileInput_brandProfileId = CreateRegistrationsFromBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	CreateRegistrationsFromBrandProfileInput_registrationTypes = CreateRegistrationsFromBrandProfileInput.AddMember("registrationTypes", _RegistrationTypeList)
-
-	CreateRegistrationsFromBrandProfileInput_smartMatch = CreateRegistrationsFromBrandProfileInput.AddMember("smartMatch", smithyprelude.Boolean)
-
-	CreateRegistrationsFromBrandProfileInput_clientToken = CreateRegistrationsFromBrandProfileInput.AddMember("clientToken", _ClientToken)
-
-	CreateRegistrationsFromBrandProfileOutput_results = CreateRegistrationsFromBrandProfileOutput.AddMember("results", _JobResults)
-
-	DeleteBrandProfileAttributeInput_brandProfileId = DeleteBrandProfileAttributeInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	DeleteBrandProfileAttributeInput_attributeName = DeleteBrandProfileAttributeInput.AddMember("attributeName", _BrandProfileAttributeName, &smithytraits.HTTPLabel{})
-
-	DeleteBrandProfileAttributeOutput_brandProfileId = DeleteBrandProfileAttributeOutput.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	DeleteBrandProfileAttributeOutput_attributeName = DeleteBrandProfileAttributeOutput.AddMember("attributeName", _BrandProfileAttributeName)
-
-	DeleteBrandProfileInput_brandProfileId = DeleteBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	DeleteBrandProfileOutput_brandProfileId = DeleteBrandProfileOutput.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	DeleteBrandProfileOutput_brandProfileArn = DeleteBrandProfileOutput.AddMember("brandProfileArn", _AmazonResourceName)
-
-	DeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId = DeleteNotifyCodeConfigurationInput.AddMember("notifyCodeConfigurationId", _NotifyCodeConfigurationIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetBrandProfileAttributeInput_brandProfileId = GetBrandProfileAttributeInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetBrandProfileAttributeInput_attributeName = GetBrandProfileAttributeInput.AddMember("attributeName", _BrandProfileAttributeName, &smithytraits.HTTPLabel{})
-
-	GetBrandProfileAttributeOutput_attributeName = GetBrandProfileAttributeOutput.AddMember("attributeName", _BrandProfileAttributeName)
-
-	GetBrandProfileAttributeOutput_attributeType = GetBrandProfileAttributeOutput.AddMember("attributeType", BrandProfileAttributeType)
-
-	GetBrandProfileAttributeOutput_attributeValue = GetBrandProfileAttributeOutput.AddMember("attributeValue", _BrandProfileAttributeValue)
-
-	GetBrandProfileAttributeOutput_description = GetBrandProfileAttributeOutput.AddMember("description", _BrandProfileAttributeDescription)
-
-	GetBrandProfileAttributeOutput_category = GetBrandProfileAttributeOutput.AddMember("category", _BrandProfileAttributeCategory)
-
-	GetBrandProfileAttributeOutput_mediaContentType = GetBrandProfileAttributeOutput.AddMember("mediaContentType", smithyprelude.String)
-
-	GetBrandProfileAttributeOutput_mediaSizeBytes = GetBrandProfileAttributeOutput.AddMember("mediaSizeBytes", smithyprelude.Long)
-
-	GetBrandProfileAttributeOutput_mediaDownloadUrl = GetBrandProfileAttributeOutput.AddMember("mediaDownloadUrl", _MediaDownloadUrl)
-
-	GetBrandProfileAttributeOutput_createdAt = GetBrandProfileAttributeOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetBrandProfileAttributeOutput_updatedAt = GetBrandProfileAttributeOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	GetBrandProfileInput_brandProfileId = GetBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetBrandProfileOutput_brandProfileId = GetBrandProfileOutput.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	GetBrandProfileOutput_brandProfileArn = GetBrandProfileOutput.AddMember("brandProfileArn", _AmazonResourceName)
-
-	GetBrandProfileOutput_brandProfileName = GetBrandProfileOutput.AddMember("brandProfileName", _BrandProfileName)
-
-	GetBrandProfileOutput_status = GetBrandProfileOutput.AddMember("status", Status)
-
-	GetBrandProfileOutput_deletionProtectionEnabled = GetBrandProfileOutput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	GetBrandProfileOutput_createdAt = GetBrandProfileOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetBrandProfileOutput_updatedAt = GetBrandProfileOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	GetJobInput_jobId = GetJobInput.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	Job_jobId = Job.AddMember("jobId", _JobId)
-
-	Job_status = Job.AddMember("status", JobStatus)
-
-	Job_operationType = Job.AddMember("operationType", _JobOperationType)
-
-	Job_createdAt = Job.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Job_updatedAt = Job.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	Job_brandProfileId = Job.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	Job_errorCode = Job.AddMember("errorCode", _JobErrorCode)
-
-	Job_errorMessage = Job.AddMember("errorMessage", _JobErrorMessage)
-
-	Job_resources = Job.AddMember("resources", _JobResourceList)
-
-	GetNotifyCodeConfigurationInput_notifyCodeConfigurationId = GetNotifyCodeConfigurationInput.AddMember("notifyCodeConfigurationId", _NotifyCodeConfigurationIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetNotifyCodeConfigurationOutput_notifyCodeConfiguration = GetNotifyCodeConfigurationOutput.AddMember("notifyCodeConfiguration", NotifyCodeConfiguration)
-
-	ListBrandProfileAttributesInput_brandProfileId = ListBrandProfileAttributesInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	ListBrandProfileAttributesInput_nextToken = ListBrandProfileAttributesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBrandProfileAttributesInput_maxResults = ListBrandProfileAttributesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBrandProfileAttributesOutput_brandProfileAttributes = ListBrandProfileAttributesOutput.AddMember("brandProfileAttributes", _BrandProfileAttributeSummaryList)
-
-	ListBrandProfileAttributesOutput_nextToken = ListBrandProfileAttributesOutput.AddMember("nextToken", _NextToken)
-
-	ListBrandProfilesInput_nextToken = ListBrandProfilesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBrandProfilesInput_maxResults = ListBrandProfilesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBrandProfilesOutput_brandProfiles = ListBrandProfilesOutput.AddMember("brandProfiles", _BrandProfileInfoList)
-
-	ListBrandProfilesOutput_nextToken = ListBrandProfilesOutput.AddMember("nextToken", _NextToken)
-
-	ListJobsInput_maxResults = ListJobsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListJobsInput_nextToken = ListJobsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListJobsInput_status = ListJobsInput.AddMember("status", JobStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListJobsInput_brandProfileId = ListJobsInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPQuery{Name: "brandProfileId"})
-
-	ListJobsInput_operationType = ListJobsInput.AddMember("operationType", _JobOperationType, &smithytraits.HTTPQuery{Name: "operationType"})
-
-	ListJobsOutput_jobs = ListJobsOutput.AddMember("jobs", _JobSummaryList)
-
-	ListJobsOutput_nextToken = ListJobsOutput.AddMember("nextToken", _NextToken)
-
-	ListNotifyCodeConfigurationsInput_maxResults = ListNotifyCodeConfigurationsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNotifyCodeConfigurationsInput_nextToken = ListNotifyCodeConfigurationsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNotifyCodeConfigurationsOutput_notifyCodeConfigurations = ListNotifyCodeConfigurationsOutput.AddMember("notifyCodeConfigurations", _NotifyCodeConfigurationList)
-
-	ListNotifyCodeConfigurationsOutput_nextToken = ListNotifyCodeConfigurationsOutput.AddMember("nextToken", _NextToken)
-
-	ListRegistrationsFromBrandProfileInput_brandProfileId = ListRegistrationsFromBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	ListRegistrationsFromBrandProfileInput_maxResults = ListRegistrationsFromBrandProfileInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRegistrationsFromBrandProfileInput_nextToken = ListRegistrationsFromBrandProfileInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRegistrationsFromBrandProfileOutput_registrationAssociations = ListRegistrationsFromBrandProfileOutput.AddMember("registrationAssociations", _RegistrationAssociationSummaryList)
-
-	ListRegistrationsFromBrandProfileOutput_nextToken = ListRegistrationsFromBrandProfileOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	SendNotifyCodeVerificationInput_channel = SendNotifyCodeVerificationInput.AddMember("channel", NotifyChannel)
-
-	SendNotifyCodeVerificationInput_destinationIdentity = SendNotifyCodeVerificationInput.AddMember("destinationIdentity", _DestinationIdentity)
-
-	SendNotifyCodeVerificationInput_originationIdentity = SendNotifyCodeVerificationInput.AddMember("originationIdentity", _OriginationIdentity)
-
-	SendNotifyCodeVerificationInput_notifyCodeConfiguration = SendNotifyCodeVerificationInput.AddMember("notifyCodeConfiguration", _NotifyCodeConfigurationIdOrArn)
-
-	SendNotifyCodeVerificationInput_overrideChannelParameters = SendNotifyCodeVerificationInput.AddMember("overrideChannelParameters", ChannelParameters)
-
-	SendNotifyCodeVerificationInput_overrideCodeConfigurationParameters = SendNotifyCodeVerificationInput.AddMember("overrideCodeConfigurationParameters", CodeConfigurationParameters)
-
-	SendNotifyCodeVerificationInput_configurationSetName = SendNotifyCodeVerificationInput.AddMember("configurationSetName", _ConfigurationSetName)
-
-	SendNotifyCodeVerificationInput_context = SendNotifyCodeVerificationInput.AddMember("context", _ContextMap)
-
-	SendNotifyCodeVerificationInput_referenceId = SendNotifyCodeVerificationInput.AddMember("referenceId", _ReferenceId)
-
-	SendNotifyCodeVerificationOutput_verificationId = SendNotifyCodeVerificationOutput.AddMember("verificationId", _VerificationId)
-
-	SendNotifyCodeVerificationOutput_messageId = SendNotifyCodeVerificationOutput.AddMember("messageId", _MessageId)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateBrandProfileAttributeInput_brandProfileId = UpdateBrandProfileAttributeInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateBrandProfileAttributeInput_attributeName = UpdateBrandProfileAttributeInput.AddMember("attributeName", _BrandProfileAttributeName, &smithytraits.HTTPLabel{})
-
-	UpdateBrandProfileAttributeInput_attributeValue = UpdateBrandProfileAttributeInput.AddMember("attributeValue", _BrandProfileAttributeValue)
-
-	UpdateBrandProfileAttributeInput_attachmentBody = UpdateBrandProfileAttributeInput.AddMember("attachmentBody", smithyprelude.Blob)
-
-	UpdateBrandProfileAttributeInput_description = UpdateBrandProfileAttributeInput.AddMember("description", _BrandProfileAttributeDescription)
-
-	UpdateBrandProfileAttributeInput_category = UpdateBrandProfileAttributeInput.AddMember("category", _BrandProfileAttributeCategory)
-
-	UpdateBrandProfileAttributeOutput_attributeName = UpdateBrandProfileAttributeOutput.AddMember("attributeName", _BrandProfileAttributeName)
-
-	UpdateBrandProfileAttributeOutput_attributeType = UpdateBrandProfileAttributeOutput.AddMember("attributeType", BrandProfileAttributeType)
-
-	UpdateBrandProfileAttributeOutput_attributeValue = UpdateBrandProfileAttributeOutput.AddMember("attributeValue", _BrandProfileAttributeValue)
-
-	UpdateBrandProfileAttributeOutput_description = UpdateBrandProfileAttributeOutput.AddMember("description", _BrandProfileAttributeDescription)
-
-	UpdateBrandProfileAttributeOutput_category = UpdateBrandProfileAttributeOutput.AddMember("category", _BrandProfileAttributeCategory)
-
-	UpdateBrandProfileAttributeOutput_mediaContentType = UpdateBrandProfileAttributeOutput.AddMember("mediaContentType", smithyprelude.String)
-
-	UpdateBrandProfileAttributeOutput_mediaSizeBytes = UpdateBrandProfileAttributeOutput.AddMember("mediaSizeBytes", smithyprelude.Long)
-
-	UpdateBrandProfileAttributeOutput_createdAt = UpdateBrandProfileAttributeOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	UpdateBrandProfileAttributeOutput_updatedAt = UpdateBrandProfileAttributeOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	UpdateBrandProfileFromRegistrationInput_brandProfileId = UpdateBrandProfileFromRegistrationInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateBrandProfileFromRegistrationInput_registrationId = UpdateBrandProfileFromRegistrationInput.AddMember("registrationId", _RegistrationIdOrArn)
-
-	UpdateBrandProfileFromRegistrationInput_smartMatch = UpdateBrandProfileFromRegistrationInput.AddMember("smartMatch", smithyprelude.Boolean)
-
-	UpdateBrandProfileFromRegistrationInput_onAttributeConflict = UpdateBrandProfileFromRegistrationInput.AddMember("onAttributeConflict", OnAttributeConflict)
-
-	UpdateBrandProfileFromRegistrationInput_clientToken = UpdateBrandProfileFromRegistrationInput.AddMember("clientToken", _ClientToken)
-
-	UpdateBrandProfileFromRegistrationOutput_results = UpdateBrandProfileFromRegistrationOutput.AddMember("results", _JobResults)
-
-	UpdateBrandProfileInput_brandProfileId = UpdateBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateBrandProfileInput_brandProfileName = UpdateBrandProfileInput.AddMember("brandProfileName", _BrandProfileName)
-
-	UpdateBrandProfileInput_deletionProtectionEnabled = UpdateBrandProfileInput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	UpdateBrandProfileOutput_brandProfileId = UpdateBrandProfileOutput.AddMember("brandProfileId", _BrandProfileIdOrArn)
-
-	UpdateBrandProfileOutput_brandProfileArn = UpdateBrandProfileOutput.AddMember("brandProfileArn", _AmazonResourceName)
-
-	UpdateBrandProfileOutput_brandProfileName = UpdateBrandProfileOutput.AddMember("brandProfileName", _BrandProfileName)
-
-	UpdateBrandProfileOutput_status = UpdateBrandProfileOutput.AddMember("status", Status)
-
-	UpdateBrandProfileOutput_deletionProtectionEnabled = UpdateBrandProfileOutput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	UpdateBrandProfileOutput_createdAt = UpdateBrandProfileOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	UpdateBrandProfileOutput_updatedAt = UpdateBrandProfileOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId = UpdateNotifyCodeConfigurationInput.AddMember("notifyCodeConfigurationId", _NotifyCodeConfigurationIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName = UpdateNotifyCodeConfigurationInput.AddMember("notifyCodeConfigurationName", _NotifyCodeConfigurationName)
-
-	UpdateNotifyCodeConfigurationInput_codeConfigurationParameters = UpdateNotifyCodeConfigurationInput.AddMember("codeConfigurationParameters", UpdateCodeConfigurationParameters)
-
-	UpdateNotifyCodeConfigurationInput_channelParameters = UpdateNotifyCodeConfigurationInput.AddMember("channelParameters", UpdateChannelParameters)
-
-	UpdateNotifyCodeConfigurationInput_deletionProtectionEnabled = UpdateNotifyCodeConfigurationInput.AddMember("deletionProtectionEnabled", smithyprelude.Boolean)
-
-	UpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration = UpdateNotifyCodeConfigurationOutput.AddMember("notifyCodeConfiguration", NotifyCodeConfiguration)
-
-	UpdateRegistrationsFromBrandProfileInput_brandProfileId = UpdateRegistrationsFromBrandProfileInput.AddMember("brandProfileId", _BrandProfileIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateRegistrationsFromBrandProfileInput_registrationIds = UpdateRegistrationsFromBrandProfileInput.AddMember("registrationIds", _RegistrationIdList)
-
-	UpdateRegistrationsFromBrandProfileInput_smartMatch = UpdateRegistrationsFromBrandProfileInput.AddMember("smartMatch", smithyprelude.Boolean)
-
-	UpdateRegistrationsFromBrandProfileInput_onAttributeConflict = UpdateRegistrationsFromBrandProfileInput.AddMember("onAttributeConflict", OnAttributeConflict)
-
-	UpdateRegistrationsFromBrandProfileInput_clientToken = UpdateRegistrationsFromBrandProfileInput.AddMember("clientToken", _ClientToken)
-
-	UpdateRegistrationsFromBrandProfileOutput_results = UpdateRegistrationsFromBrandProfileOutput.AddMember("results", _JobResults)
-
-	ValidateNotifyCodeVerificationInput_destinationIdentity = ValidateNotifyCodeVerificationInput.AddMember("destinationIdentity", _DestinationIdentity)
-
-	ValidateNotifyCodeVerificationInput_referenceId = ValidateNotifyCodeVerificationInput.AddMember("referenceId", _ReferenceId)
-
-	ValidateNotifyCodeVerificationInput_code = ValidateNotifyCodeVerificationInput.AddMember("code", _VerificationCode)
-
-	ValidateNotifyCodeVerificationOutput_status = ValidateNotifyCodeVerificationOutput.AddMember("status", VerificationStatus)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x4}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "brandProfileId"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "operationType"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBrandProfileAttributeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandProfileAttributeInput_attributeName, &sBrandProfileAttributeInput_attributeType, &sBrandProfileAttributeInput_attributeValue, &sBrandProfileAttributeInput_attachmentBody, &sBrandProfileAttributeInput_description, &sBrandProfileAttributeInput_category}}
+var m_BrandProfileAttributeInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrandProfileAttributeInputList_member}}
+var mBrandProfileAttributeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandProfileAttributeOutput_attributeName, &sBrandProfileAttributeOutput_attributeType, &sBrandProfileAttributeOutput_mediaDownloadUrl}}
+var m_BrandProfileAttributeOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrandProfileAttributeOutputList_member}}
+var mBrandProfileAttributeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandProfileAttributeSummary_attributeName, &sBrandProfileAttributeSummary_attributeType, &sBrandProfileAttributeSummary_description, &sBrandProfileAttributeSummary_category, &sBrandProfileAttributeSummary_createdAt, &sBrandProfileAttributeSummary_updatedAt}}
+var m_BrandProfileAttributeSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrandProfileAttributeSummaryList_member}}
+var mBrandProfileAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandProfileAttributeType_TEXT, &sBrandProfileAttributeType_IMAGE, &sBrandProfileAttributeType_DOCUMENT}}
+var mBrandProfileInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandProfileInfo_brandProfileId, &sBrandProfileInfo_brandProfileArn, &sBrandProfileInfo_brandProfileName, &sBrandProfileInfo_status, &sBrandProfileInfo_deletionProtectionEnabled, &sBrandProfileInfo_createdAt, &sBrandProfileInfo_updatedAt}}
+var m_BrandProfileInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrandProfileInfoList_member}}
+var mChannelParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelParameters_text, &sChannelParameters_voice, &sChannelParameters_notify, &sChannelParameters_whatsApp}}
+var mCodeConfigurationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeConfigurationParameters_codeType, &sCodeConfigurationParameters_codeLength, &sCodeConfigurationParameters_validityPeriodMinutes, &sCodeConfigurationParameters_maxAttempts}}
+var mCodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeType_NUMERIC, &sCodeType_ALPHA, &sCodeType_ALPHANUMERIC}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var m_ContextMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContextMap_key, &s_ContextMap_value}}
+var m_DestinationCountryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationCountryParameters_key, &s_DestinationCountryParameters_value}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mJobResource = smithy.SchemaMembers{List: []*smithy.Schema{&sJobResource_resourceType, &sJobResource_resourceId, &sJobResource_resourceArn}}
+var m_JobResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobResourceList_member}}
+var mJobResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sJobResourceType_REGISTRATION, &sJobResourceType_BRAND_PROFILE}}
+var mJobResult = smithy.SchemaMembers{List: []*smithy.Schema{&sJobResult_jobId, &sJobResult_resourceIdentifier}}
+var m_JobResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobResults_member}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUCCESS, &sJobStatus_PROCESSING, &sJobStatus_FAILED}}
+var mJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sJobSummary_jobId, &sJobSummary_status, &sJobSummary_operationType, &sJobSummary_createdAt, &sJobSummary_updatedAt, &sJobSummary_brandProfileId, &sJobSummary_errorCode, &sJobSummary_errorMessage, &sJobSummary_resources}, Hash: &hJobSummary}
+var m_JobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobSummaryList_member}}
+var mNotifyChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyChannel_TEXT, &sNotifyChannel_VOICE, &sNotifyChannel_WHATSAPP}}
+var mNotifyCodeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyCodeConfiguration_notifyCodeConfigurationId, &sNotifyCodeConfiguration_notifyCodeConfigurationArn, &sNotifyCodeConfiguration_notifyCodeConfigurationName, &sNotifyCodeConfiguration_codeConfigurationParameters, &sNotifyCodeConfiguration_channelParameters, &sNotifyCodeConfiguration_deletionProtectionEnabled, &sNotifyCodeConfiguration_createdAt, &sNotifyCodeConfiguration_updatedAt}}
+var m_NotifyCodeConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotifyCodeConfigurationList_member}}
+var mNotifyParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyParameters_notifyTemplateId, &sNotifyParameters_voiceId}}
+var mOnAttributeConflict = smithy.SchemaMembers{List: []*smithy.Schema{&sOnAttributeConflict_REPLACE, &sOnAttributeConflict_PRESERVE}}
+var mRegistrationAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationAssociationSummary_registrationId, &sRegistrationAssociationSummary_registrationType, &sRegistrationAssociationSummary_createdAt, &sRegistrationAssociationSummary_smartMatchUsed}}
+var m_RegistrationAssociationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistrationAssociationSummaryList_member}}
+var m_RegistrationIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistrationIdList_member}}
+var m_RegistrationTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistrationTypeList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_ACTIVE, &sStatus_BLOCKED, &sStatus_PAUSED, &sStatus_CANCELLED, &sStatus_FAILED}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTextParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sTextParameters_inlineTemplateBody, &sTextParameters_destinationCountryParameters}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUpdateChannelParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelParameters_text, &sUpdateChannelParameters_voice, &sUpdateChannelParameters_notify, &sUpdateChannelParameters_whatsApp}}
+var mUpdateCodeConfigurationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCodeConfigurationParameters_codeType, &sUpdateCodeConfigurationParameters_codeLength, &sUpdateCodeConfigurationParameters_validityPeriodMinutes, &sUpdateCodeConfigurationParameters_maxAttempts}}
+var m_UpdateDestinationCountryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateDestinationCountryParameters_key, &s_UpdateDestinationCountryParameters_value}}
+var mUpdateNotifyParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotifyParameters_notifyTemplateId, &sUpdateNotifyParameters_voiceId}}
+var mUpdateTextParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTextParameters_inlineTemplateBody, &sUpdateTextParameters_destinationCountryParameters}}
+var mUpdateVoiceParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVoiceParameters_inlineTemplateBody, &sUpdateVoiceParameters_languageCode, &sUpdateVoiceParameters_voiceId, &sUpdateVoiceParameters_voiceMessageBodyTextType}}
+var mUpdateWhatsAppParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWhatsAppParameters_whatsAppTemplateName, &sUpdateWhatsAppParameters_languageCode}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_path, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mVerificationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVerificationStatus_VALID, &sVerificationStatus_INVALID}}
+var mVoiceMessageBodyTextType = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceMessageBodyTextType_TEXT, &sVoiceMessageBodyTextType_SSML}}
+var mVoiceParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceParameters_inlineTemplateBody, &sVoiceParameters_languageCode, &sVoiceParameters_voiceId, &sVoiceParameters_voiceMessageBodyTextType}}
+var mWhatsAppParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppParameters_whatsAppTemplateName, &sWhatsAppParameters_languageCode}}
+var mCreateBrandProfileAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileAttributesInput_brandProfileId, &sCreateBrandProfileAttributesInput_attributes, &sCreateBrandProfileAttributesInput_clientToken}}
+var mCreateBrandProfileAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileAttributesOutput_attributes}}
+var mCreateBrandProfileFromRegistrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileFromRegistrationInput_registrationId, &sCreateBrandProfileFromRegistrationInput_brandProfileName, &sCreateBrandProfileFromRegistrationInput_smartMatch, &sCreateBrandProfileFromRegistrationInput_tags, &sCreateBrandProfileFromRegistrationInput_clientToken}}
+var mCreateBrandProfileFromRegistrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileFromRegistrationOutput_results}}
+var mCreateBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileInput_brandProfileName, &sCreateBrandProfileInput_clientToken, &sCreateBrandProfileInput_deletionProtectionEnabled, &sCreateBrandProfileInput_tags}}
+var mCreateBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrandProfileOutput_brandProfileId, &sCreateBrandProfileOutput_brandProfileArn, &sCreateBrandProfileOutput_brandProfileName, &sCreateBrandProfileOutput_status, &sCreateBrandProfileOutput_deletionProtectionEnabled, &sCreateBrandProfileOutput_createdAt, &sCreateBrandProfileOutput_updatedAt, &sCreateBrandProfileOutput_attributesCreated}}
+var mCreateNotifyCodeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotifyCodeConfigurationInput_notifyCodeConfigurationName, &sCreateNotifyCodeConfigurationInput_codeConfigurationParameters, &sCreateNotifyCodeConfigurationInput_channelParameters, &sCreateNotifyCodeConfigurationInput_deletionProtectionEnabled, &sCreateNotifyCodeConfigurationInput_clientToken, &sCreateNotifyCodeConfigurationInput_tags}}
+var mCreateNotifyCodeConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotifyCodeConfigurationOutput_notifyCodeConfiguration}}
+var mCreateRegistrationsFromBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegistrationsFromBrandProfileInput_brandProfileId, &sCreateRegistrationsFromBrandProfileInput_registrationTypes, &sCreateRegistrationsFromBrandProfileInput_smartMatch, &sCreateRegistrationsFromBrandProfileInput_clientToken}}
+var mCreateRegistrationsFromBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegistrationsFromBrandProfileOutput_results}}
+var mDeleteBrandProfileAttributeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrandProfileAttributeInput_brandProfileId, &sDeleteBrandProfileAttributeInput_attributeName}}
+var mDeleteBrandProfileAttributeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrandProfileAttributeOutput_brandProfileId, &sDeleteBrandProfileAttributeOutput_attributeName}}
+var mDeleteBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrandProfileInput_brandProfileId}}
+var mDeleteBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrandProfileOutput_brandProfileId, &sDeleteBrandProfileOutput_brandProfileArn}}
+var mDeleteNotifyCodeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId}}
+var mGetBrandProfileAttributeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrandProfileAttributeInput_brandProfileId, &sGetBrandProfileAttributeInput_attributeName}}
+var mGetBrandProfileAttributeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrandProfileAttributeOutput_attributeName, &sGetBrandProfileAttributeOutput_attributeType, &sGetBrandProfileAttributeOutput_attributeValue, &sGetBrandProfileAttributeOutput_description, &sGetBrandProfileAttributeOutput_category, &sGetBrandProfileAttributeOutput_mediaContentType, &sGetBrandProfileAttributeOutput_mediaSizeBytes, &sGetBrandProfileAttributeOutput_mediaDownloadUrl, &sGetBrandProfileAttributeOutput_createdAt, &sGetBrandProfileAttributeOutput_updatedAt}, Hash: &hGetBrandProfileAttributeOutput}
+var mGetBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrandProfileInput_brandProfileId}}
+var mGetBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrandProfileOutput_brandProfileId, &sGetBrandProfileOutput_brandProfileArn, &sGetBrandProfileOutput_brandProfileName, &sGetBrandProfileOutput_status, &sGetBrandProfileOutput_deletionProtectionEnabled, &sGetBrandProfileOutput_createdAt, &sGetBrandProfileOutput_updatedAt}}
+var mGetJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobInput_jobId}}
+var mJob = smithy.SchemaMembers{List: []*smithy.Schema{&sJob_jobId, &sJob_status, &sJob_operationType, &sJob_createdAt, &sJob_updatedAt, &sJob_brandProfileId, &sJob_errorCode, &sJob_errorMessage, &sJob_resources}, Hash: &hJob}
+var mGetNotifyCodeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotifyCodeConfigurationInput_notifyCodeConfigurationId}}
+var mGetNotifyCodeConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotifyCodeConfigurationOutput_notifyCodeConfiguration}}
+var mListBrandProfileAttributesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrandProfileAttributesInput_brandProfileId, &sListBrandProfileAttributesInput_nextToken, &sListBrandProfileAttributesInput_maxResults}}
+var mListBrandProfileAttributesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrandProfileAttributesOutput_brandProfileAttributes, &sListBrandProfileAttributesOutput_nextToken}}
+var mListBrandProfilesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrandProfilesInput_nextToken, &sListBrandProfilesInput_maxResults}}
+var mListBrandProfilesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrandProfilesOutput_brandProfiles, &sListBrandProfilesOutput_nextToken}}
+var mListJobsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsInput_maxResults, &sListJobsInput_nextToken, &sListJobsInput_status, &sListJobsInput_brandProfileId, &sListJobsInput_operationType}}
+var mListJobsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsOutput_jobs, &sListJobsOutput_nextToken}}
+var mListNotifyCodeConfigurationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotifyCodeConfigurationsInput_maxResults, &sListNotifyCodeConfigurationsInput_nextToken}}
+var mListNotifyCodeConfigurationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotifyCodeConfigurationsOutput_notifyCodeConfigurations, &sListNotifyCodeConfigurationsOutput_nextToken}}
+var mListRegistrationsFromBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegistrationsFromBrandProfileInput_brandProfileId, &sListRegistrationsFromBrandProfileInput_maxResults, &sListRegistrationsFromBrandProfileInput_nextToken}}
+var mListRegistrationsFromBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegistrationsFromBrandProfileOutput_registrationAssociations, &sListRegistrationsFromBrandProfileOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mSendNotifyCodeVerificationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendNotifyCodeVerificationInput_channel, &sSendNotifyCodeVerificationInput_destinationIdentity, &sSendNotifyCodeVerificationInput_originationIdentity, &sSendNotifyCodeVerificationInput_notifyCodeConfiguration, &sSendNotifyCodeVerificationInput_overrideChannelParameters, &sSendNotifyCodeVerificationInput_overrideCodeConfigurationParameters, &sSendNotifyCodeVerificationInput_configurationSetName, &sSendNotifyCodeVerificationInput_context, &sSendNotifyCodeVerificationInput_referenceId}, Hash: &hSendNotifyCodeVerificationInput}
+var mSendNotifyCodeVerificationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendNotifyCodeVerificationOutput_verificationId, &sSendNotifyCodeVerificationOutput_messageId}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateBrandProfileAttributeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileAttributeInput_brandProfileId, &sUpdateBrandProfileAttributeInput_attributeName, &sUpdateBrandProfileAttributeInput_attributeValue, &sUpdateBrandProfileAttributeInput_attachmentBody, &sUpdateBrandProfileAttributeInput_description, &sUpdateBrandProfileAttributeInput_category}}
+var mUpdateBrandProfileAttributeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileAttributeOutput_attributeName, &sUpdateBrandProfileAttributeOutput_attributeType, &sUpdateBrandProfileAttributeOutput_attributeValue, &sUpdateBrandProfileAttributeOutput_description, &sUpdateBrandProfileAttributeOutput_category, &sUpdateBrandProfileAttributeOutput_mediaContentType, &sUpdateBrandProfileAttributeOutput_mediaSizeBytes, &sUpdateBrandProfileAttributeOutput_createdAt, &sUpdateBrandProfileAttributeOutput_updatedAt}, Hash: &hUpdateBrandProfileAttributeOutput}
+var mUpdateBrandProfileFromRegistrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileFromRegistrationInput_brandProfileId, &sUpdateBrandProfileFromRegistrationInput_registrationId, &sUpdateBrandProfileFromRegistrationInput_smartMatch, &sUpdateBrandProfileFromRegistrationInput_onAttributeConflict, &sUpdateBrandProfileFromRegistrationInput_clientToken}}
+var mUpdateBrandProfileFromRegistrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileFromRegistrationOutput_results}}
+var mUpdateBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileInput_brandProfileId, &sUpdateBrandProfileInput_brandProfileName, &sUpdateBrandProfileInput_deletionProtectionEnabled}}
+var mUpdateBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrandProfileOutput_brandProfileId, &sUpdateBrandProfileOutput_brandProfileArn, &sUpdateBrandProfileOutput_brandProfileName, &sUpdateBrandProfileOutput_status, &sUpdateBrandProfileOutput_deletionProtectionEnabled, &sUpdateBrandProfileOutput_createdAt, &sUpdateBrandProfileOutput_updatedAt}}
+var mUpdateNotifyCodeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId, &sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName, &sUpdateNotifyCodeConfigurationInput_codeConfigurationParameters, &sUpdateNotifyCodeConfigurationInput_channelParameters, &sUpdateNotifyCodeConfigurationInput_deletionProtectionEnabled}}
+var mUpdateNotifyCodeConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration}}
+var mUpdateRegistrationsFromBrandProfileInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegistrationsFromBrandProfileInput_brandProfileId, &sUpdateRegistrationsFromBrandProfileInput_registrationIds, &sUpdateRegistrationsFromBrandProfileInput_smartMatch, &sUpdateRegistrationsFromBrandProfileInput_onAttributeConflict, &sUpdateRegistrationsFromBrandProfileInput_clientToken}}
+var mUpdateRegistrationsFromBrandProfileOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegistrationsFromBrandProfileOutput_results}}
+var mValidateNotifyCodeVerificationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateNotifyCodeVerificationInput_destinationIdentity, &sValidateNotifyCodeVerificationInput_referenceId, &sValidateNotifyCodeVerificationInput_code}}
+var mValidateNotifyCodeVerificationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateNotifyCodeVerificationOutput_status}}
+
+var hJobSummary = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 8, 0, 4, 0, 0, 0, 0, 0, 5, 0, 6, 0, 1, 9, 0, 0, 0, 0, 0, 0, 0, 2, 7,
+	3, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hGetBrandProfileAttributeOutput = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 2, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0,
+	5, 0, 9, 0, 0, 4, 3, 10,
+}}
+var hJob = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 8, 0, 4, 0, 0, 0, 0, 0, 5, 0, 6, 0, 1, 9, 0, 0, 0, 0, 0, 0, 0, 2, 7,
+	3, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hSendNotifyCodeVerificationInput = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	8, 0, 9, 0, 0, 0, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0,
+	7, 1, 5, 0, 0, 0, 2, 0,
+}}
+var hUpdateBrandProfileAttributeOutput = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 2, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	5, 0, 8, 0, 0, 4, 3, 9,
+}}
+
+var sCreateBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfile, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateBrandProfile})
+var sCreateBrandProfileAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileAttributes, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateBrandProfileAttributes})
+var sCreateBrandProfileFromRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileFromRegistration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateBrandProfileFromRegistration})
+var sCreateNotifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotifyCodeConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateNotifyCodeConfiguration})
+var sCreateRegistrationsFromBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistrationsFromBrandProfile, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateRegistrationsFromBrandProfile})
+var sDeleteBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfile, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBrandProfile})
+var sDeleteBrandProfileAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfileAttribute, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBrandProfileAttribute})
+var sDeleteNotifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotifyCodeConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNotifyCodeConfiguration})
+var sGetBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfile, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetBrandProfile})
+var sGetBrandProfileAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfileAttribute, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetBrandProfileAttribute})
+var sGetJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJob, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetJob})
+var sGetNotifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotifyCodeConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetNotifyCodeConfiguration})
+var sListBrandProfileAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfileAttributes, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListBrandProfileAttributes})
+var sListBrandProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfiles, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListBrandProfiles})
+var sListJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobs, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListJobs})
+var sListNotifyCodeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotifyCodeConfigurations, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListNotifyCodeConfigurations})
+var sListRegistrationsFromBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistrationsFromBrandProfile, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListRegistrationsFromBrandProfile})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sSendNotifyCodeVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendNotifyCodeVerification, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eSendNotifyCodeVerification})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfile, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrandProfile})
+var sUpdateBrandProfileAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileAttribute, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrandProfileAttribute})
+var sUpdateBrandProfileFromRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileFromRegistration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrandProfileFromRegistration})
+var sUpdateNotifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotifyCodeConfiguration, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNotifyCodeConfiguration})
+var sUpdateRegistrationsFromBrandProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistrationsFromBrandProfile, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRegistrationsFromBrandProfile})
+var sValidateNotifyCodeVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateNotifyCodeVerification, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eValidateNotifyCodeVerification})
+var s_EndUserMessaging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndUserMessaging, Type: smithy.ShapeTypeService, Ext: &e_EndUserMessaging})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_AttachmentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentBody, Traits: &t28, Type: smithy.ShapeTypeBlob, Ext: &e_AttachmentBody})
+var s_BrandProfileAttributeCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileAttributeCategory})
+var s_BrandProfileAttributeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeDescription, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileAttributeDescription})
+var sBrandProfileAttributeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandProfileAttributeInput, Members: &mBrandProfileAttributeInput, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeInput})
+var sBrandProfileAttributeInput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeInput_attributeName})
+var sBrandProfileAttributeInput_attributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeType", ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eBrandProfileAttributeInput_attributeType})
+var sBrandProfileAttributeInput_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeValue", ID: &i_BrandProfileAttributeValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeInput_attributeValue})
+var sBrandProfileAttributeInput_attachmentBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentBody", ID: &i_AttachmentBody, Traits: &t29, Type: smithy.ShapeTypeBlob, Ext: &eBrandProfileAttributeInput_attachmentBody})
+var sBrandProfileAttributeInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BrandProfileAttributeDescription, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeInput_description})
+var sBrandProfileAttributeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeInput_category})
+var s_BrandProfileAttributeInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeInputList, Members: &m_BrandProfileAttributeInputList, Type: smithy.ShapeTypeList, Ext: &e_BrandProfileAttributeInputList})
+var s_BrandProfileAttributeInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrandProfileAttributeInput, Members: &mBrandProfileAttributeInput, Type: smithy.ShapeTypeStructure, Ext: &e_BrandProfileAttributeInputList_member})
+var s_BrandProfileAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileAttributeName})
+var sBrandProfileAttributeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandProfileAttributeOutput, Members: &mBrandProfileAttributeOutput, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeOutput})
+var sBrandProfileAttributeOutput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeOutput_attributeName})
+var sBrandProfileAttributeOutput_attributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeType", ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eBrandProfileAttributeOutput_attributeType})
+var sBrandProfileAttributeOutput_mediaDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaDownloadUrl", ID: &i_MediaDownloadUrl, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeOutput_mediaDownloadUrl})
+var s_BrandProfileAttributeOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeOutputList, Members: &m_BrandProfileAttributeOutputList, Type: smithy.ShapeTypeList, Ext: &e_BrandProfileAttributeOutputList})
+var s_BrandProfileAttributeOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrandProfileAttributeOutput, Members: &mBrandProfileAttributeOutput, Type: smithy.ShapeTypeStructure, Ext: &e_BrandProfileAttributeOutputList_member})
+var sBrandProfileAttributeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandProfileAttributeSummary, Members: &mBrandProfileAttributeSummary, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeSummary})
+var sBrandProfileAttributeSummary_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeSummary_attributeName})
+var sBrandProfileAttributeSummary_attributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeType", ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eBrandProfileAttributeSummary_attributeType})
+var sBrandProfileAttributeSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BrandProfileAttributeDescription, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeSummary_description})
+var sBrandProfileAttributeSummary_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &eBrandProfileAttributeSummary_category})
+var sBrandProfileAttributeSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBrandProfileAttributeSummary_createdAt})
+var sBrandProfileAttributeSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBrandProfileAttributeSummary_updatedAt})
+var s_BrandProfileAttributeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeSummaryList, Members: &m_BrandProfileAttributeSummaryList, Type: smithy.ShapeTypeList, Ext: &e_BrandProfileAttributeSummaryList})
+var s_BrandProfileAttributeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrandProfileAttributeSummary, Members: &mBrandProfileAttributeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_BrandProfileAttributeSummaryList_member})
+var sBrandProfileAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eBrandProfileAttributeType})
+var sBrandProfileAttributeType_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeType_TEXT})
+var sBrandProfileAttributeType_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeType_IMAGE})
+var sBrandProfileAttributeType_DOCUMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileAttributeType_DOCUMENT})
+var s_BrandProfileAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileAttributeValue, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileAttributeValue})
+var s_BrandProfileIdOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileIdOrArn})
+var sBrandProfileInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandProfileInfo, Members: &mBrandProfileInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrandProfileInfo})
+var sBrandProfileInfo_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eBrandProfileInfo_brandProfileId})
+var sBrandProfileInfo_brandProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eBrandProfileInfo_brandProfileArn})
+var sBrandProfileInfo_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eBrandProfileInfo_brandProfileName})
+var sBrandProfileInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eBrandProfileInfo_status})
+var sBrandProfileInfo_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eBrandProfileInfo_deletionProtectionEnabled})
+var sBrandProfileInfo_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBrandProfileInfo_createdAt})
+var sBrandProfileInfo_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBrandProfileInfo_updatedAt})
+var s_BrandProfileInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileInfoList, Members: &m_BrandProfileInfoList, Type: smithy.ShapeTypeList, Ext: &e_BrandProfileInfoList})
+var s_BrandProfileInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrandProfileInfo, Members: &mBrandProfileInfo, Type: smithy.ShapeTypeStructure, Ext: &e_BrandProfileInfoList_member})
+var s_BrandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &e_BrandProfileName})
+var sChannelParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelParameters, Members: &mChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eChannelParameters})
+var sChannelParameters_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &iTextParameters, Members: &mTextParameters, Type: smithy.ShapeTypeStructure, Ext: &eChannelParameters_text})
+var sChannelParameters_voice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voice", ID: &iVoiceParameters, Members: &mVoiceParameters, Type: smithy.ShapeTypeStructure, Ext: &eChannelParameters_voice})
+var sChannelParameters_notify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notify", ID: &iNotifyParameters, Members: &mNotifyParameters, Type: smithy.ShapeTypeStructure, Ext: &eChannelParameters_notify})
+var sChannelParameters_whatsApp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "whatsApp", ID: &iWhatsAppParameters, Members: &mWhatsAppParameters, Type: smithy.ShapeTypeStructure, Ext: &eChannelParameters_whatsApp})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sCodeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeConfigurationParameters, Members: &mCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eCodeConfigurationParameters})
+var sCodeConfigurationParameters_codeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeType", ID: &iCodeType, Members: &mCodeType, Type: smithy.ShapeTypeEnum, Ext: &eCodeConfigurationParameters_codeType})
+var sCodeConfigurationParameters_codeLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeLength", ID: &i_CodeLength, Type: smithy.ShapeTypeInteger, Ext: &eCodeConfigurationParameters_codeLength})
+var sCodeConfigurationParameters_validityPeriodMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validityPeriodMinutes", ID: &i_ValidityPeriodMinutes, Type: smithy.ShapeTypeInteger, Ext: &eCodeConfigurationParameters_validityPeriodMinutes})
+var sCodeConfigurationParameters_maxAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAttempts", ID: &i_MaxVerificationAttempts, Type: smithy.ShapeTypeInteger, Ext: &eCodeConfigurationParameters_maxAttempts})
+var s_CodeLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeLength, Type: smithy.ShapeTypeInteger, Ext: &e_CodeLength})
+var sCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeType, Members: &mCodeType, Type: smithy.ShapeTypeEnum, Ext: &eCodeType})
+var sCodeType_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodeType_NUMERIC})
+var sCodeType_ALPHA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALPHA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodeType_ALPHA})
+var sCodeType_ALPHANUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALPHANUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCodeType_ALPHANUMERIC})
+var s_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationSetName})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var s_ContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextKey, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_ContextKey})
+var s_ContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextMap, Members: &m_ContextMap, Type: smithy.ShapeTypeMap, Ext: &e_ContextMap})
+var s_ContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ContextKey, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &e_ContextMap_key})
+var s_ContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ContextValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &e_ContextMap_value})
+var s_ContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextValue, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_ContextValue})
+var s_DestinationCountryParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationCountryParameterKey, Type: smithy.ShapeTypeString, Ext: &e_DestinationCountryParameterKey})
+var s_DestinationCountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationCountryParameters, Members: &m_DestinationCountryParameters, Type: smithy.ShapeTypeMap, Ext: &e_DestinationCountryParameters})
+var s_DestinationCountryParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DestinationCountryParameterKey, Type: smithy.ShapeTypeString, Ext: &e_DestinationCountryParameters_key})
+var s_DestinationCountryParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DestinationCountryParameterValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &e_DestinationCountryParameters_value})
+var s_DestinationCountryParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationCountryParameterValue, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_DestinationCountryParameterValue})
+var s_DestinationIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationIdentity, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_DestinationIdentity})
+var s_InlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InlineTemplateBody, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_InlineTemplateBody})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_JobErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobErrorCode, Type: smithy.ShapeTypeString, Ext: &e_JobErrorCode})
+var s_JobErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_JobErrorMessage})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobOperationType, Type: smithy.ShapeTypeString, Ext: &e_JobOperationType})
+var sJobResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eJobResource})
+var sJobResource_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iJobResourceType, Members: &mJobResourceType, Type: smithy.ShapeTypeEnum, Ext: &eJobResource_resourceType})
+var sJobResource_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_JobResourceId, Type: smithy.ShapeTypeString, Ext: &eJobResource_resourceId})
+var sJobResource_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eJobResource_resourceArn})
+var s_JobResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobResourceId, Type: smithy.ShapeTypeString, Ext: &e_JobResourceId})
+var s_JobResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_JobResourceIdentifier})
+var s_JobResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobResourceList, Members: &m_JobResourceList, Type: smithy.ShapeTypeList, Ext: &e_JobResourceList})
+var s_JobResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &e_JobResourceList_member})
+var sJobResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobResourceType, Members: &mJobResourceType, Type: smithy.ShapeTypeEnum, Ext: &eJobResourceType})
+var sJobResourceType_REGISTRATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobResourceType_REGISTRATION})
+var sJobResourceType_BRAND_PROFILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRAND_PROFILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobResourceType_BRAND_PROFILE})
+var sJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobResult, Members: &mJobResult, Type: smithy.ShapeTypeStructure, Ext: &eJobResult})
+var sJobResult_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJobResult_jobId})
+var sJobResult_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_JobResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eJobResult_resourceIdentifier})
+var s_JobResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobResults, Members: &m_JobResults, Type: smithy.ShapeTypeList, Ext: &e_JobResults})
+var s_JobResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobResult, Members: &mJobResult, Type: smithy.ShapeTypeStructure, Ext: &e_JobResults_member})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var sJobStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_SUCCESS})
+var sJobStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_PROCESSING})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_FAILED})
+var sJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eJobSummary})
+var sJobSummary_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJobSummary_jobId})
+var sJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobSummary_status})
+var sJobSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &i_JobOperationType, Type: smithy.ShapeTypeString, Ext: &eJobSummary_operationType})
+var sJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJobSummary_createdAt})
+var sJobSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJobSummary_updatedAt})
+var sJobSummary_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eJobSummary_brandProfileId})
+var sJobSummary_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_JobErrorCode, Type: smithy.ShapeTypeString, Ext: &eJobSummary_errorCode})
+var sJobSummary_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_JobErrorMessage, Type: smithy.ShapeTypeString, Ext: &eJobSummary_errorMessage})
+var sJobSummary_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_JobResourceList, Members: &m_JobResourceList, Type: smithy.ShapeTypeList, Ext: &eJobSummary_resources})
+var s_JobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList, Ext: &e_JobSummaryList})
+var s_JobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_JobSummaryList_member})
+var s_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageCode, Type: smithy.ShapeTypeString, Ext: &e_LanguageCode})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MaxVerificationAttempts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxVerificationAttempts, Type: smithy.ShapeTypeInteger, Ext: &e_MaxVerificationAttempts})
+var s_MediaDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaDownloadUrl, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_MediaDownloadUrl})
+var s_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &e_MessageId})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotifyChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyChannel, Members: &mNotifyChannel, Type: smithy.ShapeTypeEnum, Ext: &eNotifyChannel})
+var sNotifyChannel_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotifyChannel_TEXT})
+var sNotifyChannel_VOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotifyChannel_VOICE})
+var sNotifyChannel_WHATSAPP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WHATSAPP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotifyChannel_WHATSAPP})
+var sNotifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyCodeConfiguration, Members: &mNotifyCodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNotifyCodeConfiguration})
+var sNotifyCodeConfiguration_notifyCodeConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationId", ID: &i_NotifyCodeConfigurationId, Type: smithy.ShapeTypeString, Ext: &eNotifyCodeConfiguration_notifyCodeConfigurationId})
+var sNotifyCodeConfiguration_notifyCodeConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eNotifyCodeConfiguration_notifyCodeConfigurationArn})
+var sNotifyCodeConfiguration_notifyCodeConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationName", ID: &i_NotifyCodeConfigurationName, Type: smithy.ShapeTypeString, Ext: &eNotifyCodeConfiguration_notifyCodeConfigurationName})
+var sNotifyCodeConfiguration_codeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfigurationParameters", ID: &iCodeConfigurationParameters, Members: &mCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eNotifyCodeConfiguration_codeConfigurationParameters})
+var sNotifyCodeConfiguration_channelParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelParameters", ID: &iChannelParameters, Members: &mChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eNotifyCodeConfiguration_channelParameters})
+var sNotifyCodeConfiguration_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eNotifyCodeConfiguration_deletionProtectionEnabled})
+var sNotifyCodeConfiguration_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eNotifyCodeConfiguration_createdAt})
+var sNotifyCodeConfiguration_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eNotifyCodeConfiguration_updatedAt})
+var s_NotifyCodeConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyCodeConfigurationId, Type: smithy.ShapeTypeString, Ext: &e_NotifyCodeConfigurationId})
+var s_NotifyCodeConfigurationIdOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyCodeConfigurationIdOrArn, Type: smithy.ShapeTypeString, Ext: &e_NotifyCodeConfigurationIdOrArn})
+var s_NotifyCodeConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyCodeConfigurationList, Members: &m_NotifyCodeConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_NotifyCodeConfigurationList})
+var s_NotifyCodeConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotifyCodeConfiguration, Members: &mNotifyCodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_NotifyCodeConfigurationList_member})
+var s_NotifyCodeConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyCodeConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_NotifyCodeConfigurationName})
+var sNotifyParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyParameters, Members: &mNotifyParameters, Type: smithy.ShapeTypeStructure, Ext: &eNotifyParameters})
+var sNotifyParameters_notifyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyTemplateId", ID: &i_NotifyTemplateId, Type: smithy.ShapeTypeString, Ext: &eNotifyParameters_notifyTemplateId})
+var sNotifyParameters_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_VoiceId, Type: smithy.ShapeTypeString, Ext: &eNotifyParameters_voiceId})
+var s_NotifyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyTemplateId, Type: smithy.ShapeTypeString, Ext: &e_NotifyTemplateId})
+var sOnAttributeConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnAttributeConflict, Members: &mOnAttributeConflict, Type: smithy.ShapeTypeEnum, Ext: &eOnAttributeConflict})
+var sOnAttributeConflict_REPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOnAttributeConflict_REPLACE})
+var sOnAttributeConflict_PRESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOnAttributeConflict_PRESERVE})
+var s_OriginationIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationIdentity, Type: smithy.ShapeTypeString, Ext: &e_OriginationIdentity})
+var s_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceId, Type: smithy.ShapeTypeString, Ext: &e_ReferenceId})
+var sRegistrationAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationAssociationSummary, Members: &mRegistrationAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationAssociationSummary})
+var sRegistrationAssociationSummary_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eRegistrationAssociationSummary_registrationId})
+var sRegistrationAssociationSummary_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &i_RegistrationType, Type: smithy.ShapeTypeString, Ext: &eRegistrationAssociationSummary_registrationType})
+var sRegistrationAssociationSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRegistrationAssociationSummary_createdAt})
+var sRegistrationAssociationSummary_smartMatchUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smartMatchUsed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegistrationAssociationSummary_smartMatchUsed})
+var s_RegistrationAssociationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationAssociationSummaryList, Members: &m_RegistrationAssociationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RegistrationAssociationSummaryList})
+var s_RegistrationAssociationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistrationAssociationSummary, Members: &mRegistrationAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RegistrationAssociationSummaryList_member})
+var s_RegistrationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &e_RegistrationId})
+var s_RegistrationIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationIdList, Members: &m_RegistrationIdList, Type: smithy.ShapeTypeList, Ext: &e_RegistrationIdList})
+var s_RegistrationIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegistrationIdOrArn, Type: smithy.ShapeTypeString, Ext: &e_RegistrationIdList_member})
+var s_RegistrationIdOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationIdOrArn, Type: smithy.ShapeTypeString, Ext: &e_RegistrationIdOrArn})
+var s_RegistrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationType, Type: smithy.ShapeTypeString, Ext: &e_RegistrationType})
+var s_RegistrationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationTypeList, Members: &m_RegistrationTypeList, Type: smithy.ShapeTypeList, Ext: &e_RegistrationTypeList})
+var s_RegistrationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegistrationType, Type: smithy.ShapeTypeString, Ext: &e_RegistrationTypeList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_ACTIVE})
+var sStatus_BLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_BLOCKED})
+var sStatus_PAUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PAUSED})
+var sStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_CANCELLED})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_FAILED})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTextParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextParameters, Members: &mTextParameters, Type: smithy.ShapeTypeStructure, Ext: &eTextParameters})
+var sTextParameters_inlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineTemplateBody", ID: &i_InlineTemplateBody, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eTextParameters_inlineTemplateBody})
+var sTextParameters_destinationCountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCountryParameters", ID: &i_DestinationCountryParameters, Members: &m_DestinationCountryParameters, Type: smithy.ShapeTypeMap, Ext: &eTextParameters_destinationCountryParameters})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sUpdateChannelParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelParameters, Members: &mUpdateChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelParameters})
+var sUpdateChannelParameters_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &iUpdateTextParameters, Members: &mUpdateTextParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelParameters_text})
+var sUpdateChannelParameters_voice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voice", ID: &iUpdateVoiceParameters, Members: &mUpdateVoiceParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelParameters_voice})
+var sUpdateChannelParameters_notify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notify", ID: &iUpdateNotifyParameters, Members: &mUpdateNotifyParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelParameters_notify})
+var sUpdateChannelParameters_whatsApp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "whatsApp", ID: &iUpdateWhatsAppParameters, Members: &mUpdateWhatsAppParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelParameters_whatsApp})
+var sUpdateCodeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCodeConfigurationParameters, Members: &mUpdateCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCodeConfigurationParameters})
+var sUpdateCodeConfigurationParameters_codeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeType", ID: &iCodeType, Members: &mCodeType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCodeConfigurationParameters_codeType})
+var sUpdateCodeConfigurationParameters_codeLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeLength", ID: &i_CodeLength, Type: smithy.ShapeTypeInteger, Ext: &eUpdateCodeConfigurationParameters_codeLength})
+var sUpdateCodeConfigurationParameters_validityPeriodMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validityPeriodMinutes", ID: &i_ValidityPeriodMinutes, Type: smithy.ShapeTypeInteger, Ext: &eUpdateCodeConfigurationParameters_validityPeriodMinutes})
+var sUpdateCodeConfigurationParameters_maxAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAttempts", ID: &i_MaxVerificationAttempts, Type: smithy.ShapeTypeInteger, Ext: &eUpdateCodeConfigurationParameters_maxAttempts})
+var s_UpdateDestinationCountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateDestinationCountryParameters, Members: &m_UpdateDestinationCountryParameters, Type: smithy.ShapeTypeMap, Ext: &e_UpdateDestinationCountryParameters})
+var s_UpdateDestinationCountryParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DestinationCountryParameterKey, Type: smithy.ShapeTypeString, Ext: &e_UpdateDestinationCountryParameters_key})
+var s_UpdateDestinationCountryParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DestinationCountryParameterValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &e_UpdateDestinationCountryParameters_value})
+var s_UpdateInlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateInlineTemplateBody, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_UpdateInlineTemplateBody})
+var s_UpdateLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateLanguageCode, Type: smithy.ShapeTypeString, Ext: &e_UpdateLanguageCode})
+var sUpdateNotifyParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotifyParameters, Members: &mUpdateNotifyParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyParameters})
+var sUpdateNotifyParameters_notifyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyTemplateId", ID: &i_UpdateNotifyTemplateId, Type: smithy.ShapeTypeString, Ext: &eUpdateNotifyParameters_notifyTemplateId})
+var sUpdateNotifyParameters_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_UpdateVoiceId, Type: smithy.ShapeTypeString, Ext: &eUpdateNotifyParameters_voiceId})
+var s_UpdateNotifyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateNotifyTemplateId, Type: smithy.ShapeTypeString, Ext: &e_UpdateNotifyTemplateId})
+var sUpdateTextParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTextParameters, Members: &mUpdateTextParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTextParameters})
+var sUpdateTextParameters_inlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineTemplateBody", ID: &i_UpdateInlineTemplateBody, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateTextParameters_inlineTemplateBody})
+var sUpdateTextParameters_destinationCountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCountryParameters", ID: &i_UpdateDestinationCountryParameters, Members: &m_UpdateDestinationCountryParameters, Type: smithy.ShapeTypeMap, Ext: &eUpdateTextParameters_destinationCountryParameters})
+var s_UpdateVoiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateVoiceId, Type: smithy.ShapeTypeString, Ext: &e_UpdateVoiceId})
+var sUpdateVoiceParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceParameters, Members: &mUpdateVoiceParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceParameters})
+var sUpdateVoiceParameters_inlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineTemplateBody", ID: &i_UpdateInlineTemplateBody, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceParameters_inlineTemplateBody})
+var sUpdateVoiceParameters_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &i_UpdateLanguageCode, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceParameters_languageCode})
+var sUpdateVoiceParameters_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_UpdateVoiceId, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceParameters_voiceId})
+var sUpdateVoiceParameters_voiceMessageBodyTextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceMessageBodyTextType", ID: &iVoiceMessageBodyTextType, Members: &mVoiceMessageBodyTextType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateVoiceParameters_voiceMessageBodyTextType})
+var sUpdateWhatsAppParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppParameters, Members: &mUpdateWhatsAppParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWhatsAppParameters})
+var sUpdateWhatsAppParameters_whatsAppTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "whatsAppTemplateName", ID: &i_UpdateWhatsAppTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateWhatsAppParameters_whatsAppTemplateName})
+var sUpdateWhatsAppParameters_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &i_UpdateLanguageCode, Type: smithy.ShapeTypeString, Ext: &eUpdateWhatsAppParameters_languageCode})
+var s_UpdateWhatsAppTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateWhatsAppTemplateName, Type: smithy.ShapeTypeString, Ext: &e_UpdateWhatsAppTemplateName})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_path})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidityPeriodMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidityPeriodMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_ValidityPeriodMinutes})
+var s_VerificationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VerificationCode, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &e_VerificationCode})
+var s_VerificationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VerificationId, Type: smithy.ShapeTypeString, Ext: &e_VerificationId})
+var sVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerificationStatus, Members: &mVerificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eVerificationStatus})
+var sVerificationStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVerificationStatus_VALID})
+var sVerificationStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVerificationStatus_INVALID})
+var s_VoiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceId, Type: smithy.ShapeTypeString, Ext: &e_VoiceId})
+var sVoiceMessageBodyTextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceMessageBodyTextType, Members: &mVoiceMessageBodyTextType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceMessageBodyTextType})
+var sVoiceMessageBodyTextType_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceMessageBodyTextType_TEXT})
+var sVoiceMessageBodyTextType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceMessageBodyTextType_SSML})
+var sVoiceParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceParameters, Members: &mVoiceParameters, Type: smithy.ShapeTypeStructure, Ext: &eVoiceParameters})
+var sVoiceParameters_inlineTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineTemplateBody", ID: &i_InlineTemplateBody, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eVoiceParameters_inlineTemplateBody})
+var sVoiceParameters_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &i_LanguageCode, Type: smithy.ShapeTypeString, Ext: &eVoiceParameters_languageCode})
+var sVoiceParameters_voiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceId", ID: &i_VoiceId, Type: smithy.ShapeTypeString, Ext: &eVoiceParameters_voiceId})
+var sVoiceParameters_voiceMessageBodyTextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "voiceMessageBodyTextType", ID: &iVoiceMessageBodyTextType, Members: &mVoiceMessageBodyTextType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceParameters_voiceMessageBodyTextType})
+var sWhatsAppParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppParameters, Members: &mWhatsAppParameters, Type: smithy.ShapeTypeStructure, Ext: &eWhatsAppParameters})
+var sWhatsAppParameters_whatsAppTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "whatsAppTemplateName", ID: &i_WhatsAppTemplateName, Type: smithy.ShapeTypeString, Ext: &eWhatsAppParameters_whatsAppTemplateName})
+var sWhatsAppParameters_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &i_LanguageCode, Type: smithy.ShapeTypeString, Ext: &eWhatsAppParameters_languageCode})
+var s_WhatsAppTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppTemplateName, Type: smithy.ShapeTypeString, Ext: &e_WhatsAppTemplateName})
+var sCreateBrandProfileAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileAttributesInput, Members: &mCreateBrandProfileAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileAttributesInput})
+var sCreateBrandProfileAttributesInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileAttributesInput_brandProfileId})
+var sCreateBrandProfileAttributesInput_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_BrandProfileAttributeInputList, Members: &m_BrandProfileAttributeInputList, Type: smithy.ShapeTypeList, Ext: &eCreateBrandProfileAttributesInput_attributes})
+var sCreateBrandProfileAttributesInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileAttributesInput_clientToken})
+var sCreateBrandProfileAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileAttributesOutput, Members: &mCreateBrandProfileAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileAttributesOutput})
+var sCreateBrandProfileAttributesOutput_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_BrandProfileAttributeOutputList, Members: &m_BrandProfileAttributeOutputList, Type: smithy.ShapeTypeList, Ext: &eCreateBrandProfileAttributesOutput_attributes})
+var sCreateBrandProfileFromRegistrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileFromRegistrationInput, Members: &mCreateBrandProfileFromRegistrationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileFromRegistrationInput})
+var sCreateBrandProfileFromRegistrationInput_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationIdOrArn, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileFromRegistrationInput_registrationId})
+var sCreateBrandProfileFromRegistrationInput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileFromRegistrationInput_brandProfileName})
+var sCreateBrandProfileFromRegistrationInput_smartMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smartMatch", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBrandProfileFromRegistrationInput_smartMatch})
+var sCreateBrandProfileFromRegistrationInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateBrandProfileFromRegistrationInput_tags})
+var sCreateBrandProfileFromRegistrationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileFromRegistrationInput_clientToken})
+var sCreateBrandProfileFromRegistrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileFromRegistrationOutput, Members: &mCreateBrandProfileFromRegistrationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileFromRegistrationOutput})
+var sCreateBrandProfileFromRegistrationOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_JobResults, Members: &m_JobResults, Type: smithy.ShapeTypeList, Ext: &eCreateBrandProfileFromRegistrationOutput_results})
+var sCreateBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileInput, Members: &mCreateBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileInput})
+var sCreateBrandProfileInput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileInput_brandProfileName})
+var sCreateBrandProfileInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileInput_clientToken})
+var sCreateBrandProfileInput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBrandProfileInput_deletionProtectionEnabled})
+var sCreateBrandProfileInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateBrandProfileInput_tags})
+var sCreateBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrandProfileOutput, Members: &mCreateBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBrandProfileOutput})
+var sCreateBrandProfileOutput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileOutput_brandProfileId})
+var sCreateBrandProfileOutput_brandProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileOutput_brandProfileArn})
+var sCreateBrandProfileOutput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eCreateBrandProfileOutput_brandProfileName})
+var sCreateBrandProfileOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateBrandProfileOutput_status})
+var sCreateBrandProfileOutput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBrandProfileOutput_deletionProtectionEnabled})
+var sCreateBrandProfileOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateBrandProfileOutput_createdAt})
+var sCreateBrandProfileOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateBrandProfileOutput_updatedAt})
+var sCreateBrandProfileOutput_attributesCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributesCreated", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateBrandProfileOutput_attributesCreated})
+var sCreateNotifyCodeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotifyCodeConfigurationInput, Members: &mCreateNotifyCodeConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotifyCodeConfigurationInput})
+var sCreateNotifyCodeConfigurationInput_notifyCodeConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationName", ID: &i_NotifyCodeConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateNotifyCodeConfigurationInput_notifyCodeConfigurationName})
+var sCreateNotifyCodeConfigurationInput_codeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfigurationParameters", ID: &iCodeConfigurationParameters, Members: &mCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotifyCodeConfigurationInput_codeConfigurationParameters})
+var sCreateNotifyCodeConfigurationInput_channelParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelParameters", ID: &iChannelParameters, Members: &mChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotifyCodeConfigurationInput_channelParameters})
+var sCreateNotifyCodeConfigurationInput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateNotifyCodeConfigurationInput_deletionProtectionEnabled})
+var sCreateNotifyCodeConfigurationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateNotifyCodeConfigurationInput_clientToken})
+var sCreateNotifyCodeConfigurationInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateNotifyCodeConfigurationInput_tags})
+var sCreateNotifyCodeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotifyCodeConfigurationOutput, Members: &mCreateNotifyCodeConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotifyCodeConfigurationOutput})
+var sCreateNotifyCodeConfigurationOutput_notifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfiguration", ID: &iNotifyCodeConfiguration, Members: &mNotifyCodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotifyCodeConfigurationOutput_notifyCodeConfiguration})
+var sCreateRegistrationsFromBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistrationsFromBrandProfileInput, Members: &mCreateRegistrationsFromBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegistrationsFromBrandProfileInput})
+var sCreateRegistrationsFromBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateRegistrationsFromBrandProfileInput_brandProfileId})
+var sCreateRegistrationsFromBrandProfileInput_registrationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationTypes", ID: &i_RegistrationTypeList, Members: &m_RegistrationTypeList, Type: smithy.ShapeTypeList, Ext: &eCreateRegistrationsFromBrandProfileInput_registrationTypes})
+var sCreateRegistrationsFromBrandProfileInput_smartMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smartMatch", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateRegistrationsFromBrandProfileInput_smartMatch})
+var sCreateRegistrationsFromBrandProfileInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCreateRegistrationsFromBrandProfileInput_clientToken})
+var sCreateRegistrationsFromBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistrationsFromBrandProfileOutput, Members: &mCreateRegistrationsFromBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRegistrationsFromBrandProfileOutput})
+var sCreateRegistrationsFromBrandProfileOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_JobResults, Members: &m_JobResults, Type: smithy.ShapeTypeList, Ext: &eCreateRegistrationsFromBrandProfileOutput_results})
+var sDeleteBrandProfileAttributeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfileAttributeInput, Members: &mDeleteBrandProfileAttributeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrandProfileAttributeInput})
+var sDeleteBrandProfileAttributeInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileAttributeInput_brandProfileId})
+var sDeleteBrandProfileAttributeInput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileAttributeInput_attributeName})
+var sDeleteBrandProfileAttributeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfileAttributeOutput, Members: &mDeleteBrandProfileAttributeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrandProfileAttributeOutput})
+var sDeleteBrandProfileAttributeOutput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileAttributeOutput_brandProfileId})
+var sDeleteBrandProfileAttributeOutput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileAttributeOutput_attributeName})
+var sDeleteBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfileInput, Members: &mDeleteBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrandProfileInput})
+var sDeleteBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileInput_brandProfileId})
+var sDeleteBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrandProfileOutput, Members: &mDeleteBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBrandProfileOutput})
+var sDeleteBrandProfileOutput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileOutput_brandProfileId})
+var sDeleteBrandProfileOutput_brandProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteBrandProfileOutput_brandProfileArn})
+var sDeleteNotifyCodeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotifyCodeConfigurationInput, Members: &mDeleteNotifyCodeConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotifyCodeConfigurationInput})
+var sDeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationId", ID: &i_NotifyCodeConfigurationIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eDeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId})
+var sDeleteNotifyCodeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotifyCodeConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotifyCodeConfigurationOutput})
+var sGetBrandProfileAttributeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfileAttributeInput, Members: &mGetBrandProfileAttributeInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBrandProfileAttributeInput})
+var sGetBrandProfileAttributeInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeInput_brandProfileId})
+var sGetBrandProfileAttributeInput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeInput_attributeName})
+var sGetBrandProfileAttributeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfileAttributeOutput, Members: &mGetBrandProfileAttributeOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBrandProfileAttributeOutput})
+var sGetBrandProfileAttributeOutput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_attributeName})
+var sGetBrandProfileAttributeOutput_attributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeType", ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eGetBrandProfileAttributeOutput_attributeType})
+var sGetBrandProfileAttributeOutput_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeValue", ID: &i_BrandProfileAttributeValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_attributeValue})
+var sGetBrandProfileAttributeOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BrandProfileAttributeDescription, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_description})
+var sGetBrandProfileAttributeOutput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_category})
+var sGetBrandProfileAttributeOutput_mediaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaContentType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_mediaContentType})
+var sGetBrandProfileAttributeOutput_mediaSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaSizeBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetBrandProfileAttributeOutput_mediaSizeBytes})
+var sGetBrandProfileAttributeOutput_mediaDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaDownloadUrl", ID: &i_MediaDownloadUrl, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileAttributeOutput_mediaDownloadUrl})
+var sGetBrandProfileAttributeOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBrandProfileAttributeOutput_createdAt})
+var sGetBrandProfileAttributeOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBrandProfileAttributeOutput_updatedAt})
+var sGetBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfileInput, Members: &mGetBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBrandProfileInput})
+var sGetBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileInput_brandProfileId})
+var sGetBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrandProfileOutput, Members: &mGetBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBrandProfileOutput})
+var sGetBrandProfileOutput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileOutput_brandProfileId})
+var sGetBrandProfileOutput_brandProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileOutput_brandProfileArn})
+var sGetBrandProfileOutput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eGetBrandProfileOutput_brandProfileName})
+var sGetBrandProfileOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBrandProfileOutput_status})
+var sGetBrandProfileOutput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetBrandProfileOutput_deletionProtectionEnabled})
+var sGetBrandProfileOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBrandProfileOutput_createdAt})
+var sGetBrandProfileOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBrandProfileOutput_updatedAt})
+var sGetJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobInput, Members: &mGetJobInput, Type: smithy.ShapeTypeStructure, Ext: &eGetJobInput})
+var sGetJobInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetJobInput_jobId})
+var sJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eJob})
+var sJob_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJob_jobId})
+var sJob_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJob_status})
+var sJob_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &i_JobOperationType, Type: smithy.ShapeTypeString, Ext: &eJob_operationType})
+var sJob_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJob_createdAt})
+var sJob_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJob_updatedAt})
+var sJob_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eJob_brandProfileId})
+var sJob_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_JobErrorCode, Type: smithy.ShapeTypeString, Ext: &eJob_errorCode})
+var sJob_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_JobErrorMessage, Type: smithy.ShapeTypeString, Ext: &eJob_errorMessage})
+var sJob_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_JobResourceList, Members: &m_JobResourceList, Type: smithy.ShapeTypeList, Ext: &eJob_resources})
+var sGetNotifyCodeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotifyCodeConfigurationInput, Members: &mGetNotifyCodeConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetNotifyCodeConfigurationInput})
+var sGetNotifyCodeConfigurationInput_notifyCodeConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationId", ID: &i_NotifyCodeConfigurationIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetNotifyCodeConfigurationInput_notifyCodeConfigurationId})
+var sGetNotifyCodeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotifyCodeConfigurationOutput, Members: &mGetNotifyCodeConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetNotifyCodeConfigurationOutput})
+var sGetNotifyCodeConfigurationOutput_notifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfiguration", ID: &iNotifyCodeConfiguration, Members: &mNotifyCodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetNotifyCodeConfigurationOutput_notifyCodeConfiguration})
+var sListBrandProfileAttributesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfileAttributesInput, Members: &mListBrandProfileAttributesInput, Type: smithy.ShapeTypeStructure, Ext: &eListBrandProfileAttributesInput})
+var sListBrandProfileAttributesInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListBrandProfileAttributesInput_brandProfileId})
+var sListBrandProfileAttributesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListBrandProfileAttributesInput_nextToken})
+var sListBrandProfileAttributesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListBrandProfileAttributesInput_maxResults})
+var sListBrandProfileAttributesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfileAttributesOutput, Members: &mListBrandProfileAttributesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBrandProfileAttributesOutput})
+var sListBrandProfileAttributesOutput_brandProfileAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileAttributes", ID: &i_BrandProfileAttributeSummaryList, Members: &m_BrandProfileAttributeSummaryList, Type: smithy.ShapeTypeList, Ext: &eListBrandProfileAttributesOutput_brandProfileAttributes})
+var sListBrandProfileAttributesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListBrandProfileAttributesOutput_nextToken})
+var sListBrandProfilesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfilesInput, Members: &mListBrandProfilesInput, Type: smithy.ShapeTypeStructure, Ext: &eListBrandProfilesInput})
+var sListBrandProfilesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListBrandProfilesInput_nextToken})
+var sListBrandProfilesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListBrandProfilesInput_maxResults})
+var sListBrandProfilesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrandProfilesOutput, Members: &mListBrandProfilesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBrandProfilesOutput})
+var sListBrandProfilesOutput_brandProfiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfiles", ID: &i_BrandProfileInfoList, Members: &m_BrandProfileInfoList, Type: smithy.ShapeTypeList, Ext: &eListBrandProfilesOutput_brandProfiles})
+var sListBrandProfilesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListBrandProfilesOutput_nextToken})
+var sListJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsInput, Members: &mListJobsInput, Type: smithy.ShapeTypeStructure, Ext: &eListJobsInput})
+var sListJobsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListJobsInput_maxResults})
+var sListJobsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListJobsInput_nextToken})
+var sListJobsInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Traits: &t40, Type: smithy.ShapeTypeEnum, Ext: &eListJobsInput_status})
+var sListJobsInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListJobsInput_brandProfileId})
+var sListJobsInput_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &i_JobOperationType, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListJobsInput_operationType})
+var sListJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsOutput, Members: &mListJobsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListJobsOutput})
+var sListJobsOutput_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList, Ext: &eListJobsOutput_jobs})
+var sListJobsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListJobsOutput_nextToken})
+var sListNotifyCodeConfigurationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotifyCodeConfigurationsInput, Members: &mListNotifyCodeConfigurationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListNotifyCodeConfigurationsInput})
+var sListNotifyCodeConfigurationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListNotifyCodeConfigurationsInput_maxResults})
+var sListNotifyCodeConfigurationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListNotifyCodeConfigurationsInput_nextToken})
+var sListNotifyCodeConfigurationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotifyCodeConfigurationsOutput, Members: &mListNotifyCodeConfigurationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListNotifyCodeConfigurationsOutput})
+var sListNotifyCodeConfigurationsOutput_notifyCodeConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurations", ID: &i_NotifyCodeConfigurationList, Members: &m_NotifyCodeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListNotifyCodeConfigurationsOutput_notifyCodeConfigurations})
+var sListNotifyCodeConfigurationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotifyCodeConfigurationsOutput_nextToken})
+var sListRegistrationsFromBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistrationsFromBrandProfileInput, Members: &mListRegistrationsFromBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eListRegistrationsFromBrandProfileInput})
+var sListRegistrationsFromBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListRegistrationsFromBrandProfileInput_brandProfileId})
+var sListRegistrationsFromBrandProfileInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListRegistrationsFromBrandProfileInput_maxResults})
+var sListRegistrationsFromBrandProfileInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListRegistrationsFromBrandProfileInput_nextToken})
+var sListRegistrationsFromBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistrationsFromBrandProfileOutput, Members: &mListRegistrationsFromBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRegistrationsFromBrandProfileOutput})
+var sListRegistrationsFromBrandProfileOutput_registrationAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationAssociations", ID: &i_RegistrationAssociationSummaryList, Members: &m_RegistrationAssociationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRegistrationsFromBrandProfileOutput_registrationAssociations})
+var sListRegistrationsFromBrandProfileOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRegistrationsFromBrandProfileOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_tags})
+var sSendNotifyCodeVerificationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendNotifyCodeVerificationInput, Members: &mSendNotifyCodeVerificationInput, Type: smithy.ShapeTypeStructure, Ext: &eSendNotifyCodeVerificationInput})
+var sSendNotifyCodeVerificationInput_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &iNotifyChannel, Members: &mNotifyChannel, Type: smithy.ShapeTypeEnum, Ext: &eSendNotifyCodeVerificationInput_channel})
+var sSendNotifyCodeVerificationInput_destinationIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationIdentity", ID: &i_DestinationIdentity, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationInput_destinationIdentity})
+var sSendNotifyCodeVerificationInput_originationIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationIdentity", ID: &i_OriginationIdentity, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationInput_originationIdentity})
+var sSendNotifyCodeVerificationInput_notifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfiguration", ID: &i_NotifyCodeConfigurationIdOrArn, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationInput_notifyCodeConfiguration})
+var sSendNotifyCodeVerificationInput_overrideChannelParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideChannelParameters", ID: &iChannelParameters, Members: &mChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eSendNotifyCodeVerificationInput_overrideChannelParameters})
+var sSendNotifyCodeVerificationInput_overrideCodeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideCodeConfigurationParameters", ID: &iCodeConfigurationParameters, Members: &mCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eSendNotifyCodeVerificationInput_overrideCodeConfigurationParameters})
+var sSendNotifyCodeVerificationInput_configurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationInput_configurationSetName})
+var sSendNotifyCodeVerificationInput_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_ContextMap, Members: &m_ContextMap, Type: smithy.ShapeTypeMap, Ext: &eSendNotifyCodeVerificationInput_context})
+var sSendNotifyCodeVerificationInput_referenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceId", ID: &i_ReferenceId, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationInput_referenceId})
+var sSendNotifyCodeVerificationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendNotifyCodeVerificationOutput, Members: &mSendNotifyCodeVerificationOutput, Type: smithy.ShapeTypeStructure, Ext: &eSendNotifyCodeVerificationOutput})
+var sSendNotifyCodeVerificationOutput_verificationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verificationId", ID: &i_VerificationId, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationOutput_verificationId})
+var sSendNotifyCodeVerificationOutput_messageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageId", ID: &i_MessageId, Type: smithy.ShapeTypeString, Ext: &eSendNotifyCodeVerificationOutput_messageId})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t43, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateBrandProfileAttributeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileAttributeInput, Members: &mUpdateBrandProfileAttributeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileAttributeInput})
+var sUpdateBrandProfileAttributeInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeInput_brandProfileId})
+var sUpdateBrandProfileAttributeInput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeInput_attributeName})
+var sUpdateBrandProfileAttributeInput_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeValue", ID: &i_BrandProfileAttributeValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeInput_attributeValue})
+var sUpdateBrandProfileAttributeInput_attachmentBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentBody", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eUpdateBrandProfileAttributeInput_attachmentBody})
+var sUpdateBrandProfileAttributeInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BrandProfileAttributeDescription, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeInput_description})
+var sUpdateBrandProfileAttributeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeInput_category})
+var sUpdateBrandProfileAttributeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileAttributeOutput, Members: &mUpdateBrandProfileAttributeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileAttributeOutput})
+var sUpdateBrandProfileAttributeOutput_attributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeName", ID: &i_BrandProfileAttributeName, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeOutput_attributeName})
+var sUpdateBrandProfileAttributeOutput_attributeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeType", ID: &iBrandProfileAttributeType, Members: &mBrandProfileAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrandProfileAttributeOutput_attributeType})
+var sUpdateBrandProfileAttributeOutput_attributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeValue", ID: &i_BrandProfileAttributeValue, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeOutput_attributeValue})
+var sUpdateBrandProfileAttributeOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_BrandProfileAttributeDescription, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeOutput_description})
+var sUpdateBrandProfileAttributeOutput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_BrandProfileAttributeCategory, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeOutput_category})
+var sUpdateBrandProfileAttributeOutput_mediaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaContentType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileAttributeOutput_mediaContentType})
+var sUpdateBrandProfileAttributeOutput_mediaSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaSizeBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eUpdateBrandProfileAttributeOutput_mediaSizeBytes})
+var sUpdateBrandProfileAttributeOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateBrandProfileAttributeOutput_createdAt})
+var sUpdateBrandProfileAttributeOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateBrandProfileAttributeOutput_updatedAt})
+var sUpdateBrandProfileFromRegistrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileFromRegistrationInput, Members: &mUpdateBrandProfileFromRegistrationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileFromRegistrationInput})
+var sUpdateBrandProfileFromRegistrationInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileFromRegistrationInput_brandProfileId})
+var sUpdateBrandProfileFromRegistrationInput_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationIdOrArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileFromRegistrationInput_registrationId})
+var sUpdateBrandProfileFromRegistrationInput_smartMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smartMatch", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBrandProfileFromRegistrationInput_smartMatch})
+var sUpdateBrandProfileFromRegistrationInput_onAttributeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onAttributeConflict", ID: &iOnAttributeConflict, Members: &mOnAttributeConflict, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrandProfileFromRegistrationInput_onAttributeConflict})
+var sUpdateBrandProfileFromRegistrationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileFromRegistrationInput_clientToken})
+var sUpdateBrandProfileFromRegistrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileFromRegistrationOutput, Members: &mUpdateBrandProfileFromRegistrationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileFromRegistrationOutput})
+var sUpdateBrandProfileFromRegistrationOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_JobResults, Members: &m_JobResults, Type: smithy.ShapeTypeList, Ext: &eUpdateBrandProfileFromRegistrationOutput_results})
+var sUpdateBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileInput, Members: &mUpdateBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileInput})
+var sUpdateBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileInput_brandProfileId})
+var sUpdateBrandProfileInput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileInput_brandProfileName})
+var sUpdateBrandProfileInput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBrandProfileInput_deletionProtectionEnabled})
+var sUpdateBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrandProfileOutput, Members: &mUpdateBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrandProfileOutput})
+var sUpdateBrandProfileOutput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileOutput_brandProfileId})
+var sUpdateBrandProfileOutput_brandProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileOutput_brandProfileArn})
+var sUpdateBrandProfileOutput_brandProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileName", ID: &i_BrandProfileName, Type: smithy.ShapeTypeString, Ext: &eUpdateBrandProfileOutput_brandProfileName})
+var sUpdateBrandProfileOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBrandProfileOutput_status})
+var sUpdateBrandProfileOutput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBrandProfileOutput_deletionProtectionEnabled})
+var sUpdateBrandProfileOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateBrandProfileOutput_createdAt})
+var sUpdateBrandProfileOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateBrandProfileOutput_updatedAt})
+var sUpdateNotifyCodeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotifyCodeConfigurationInput, Members: &mUpdateNotifyCodeConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyCodeConfigurationInput})
+var sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationId", ID: &i_NotifyCodeConfigurationIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId})
+var sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfigurationName", ID: &i_NotifyCodeConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName})
+var sUpdateNotifyCodeConfigurationInput_codeConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfigurationParameters", ID: &iUpdateCodeConfigurationParameters, Members: &mUpdateCodeConfigurationParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyCodeConfigurationInput_codeConfigurationParameters})
+var sUpdateNotifyCodeConfigurationInput_channelParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelParameters", ID: &iUpdateChannelParameters, Members: &mUpdateChannelParameters, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyCodeConfigurationInput_channelParameters})
+var sUpdateNotifyCodeConfigurationInput_deletionProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtectionEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateNotifyCodeConfigurationInput_deletionProtectionEnabled})
+var sUpdateNotifyCodeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotifyCodeConfigurationOutput, Members: &mUpdateNotifyCodeConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyCodeConfigurationOutput})
+var sUpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notifyCodeConfiguration", ID: &iNotifyCodeConfiguration, Members: &mNotifyCodeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration})
+var sUpdateRegistrationsFromBrandProfileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistrationsFromBrandProfileInput, Members: &mUpdateRegistrationsFromBrandProfileInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegistrationsFromBrandProfileInput})
+var sUpdateRegistrationsFromBrandProfileInput_brandProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandProfileId", ID: &i_BrandProfileIdOrArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateRegistrationsFromBrandProfileInput_brandProfileId})
+var sUpdateRegistrationsFromBrandProfileInput_registrationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationIds", ID: &i_RegistrationIdList, Members: &m_RegistrationIdList, Type: smithy.ShapeTypeList, Ext: &eUpdateRegistrationsFromBrandProfileInput_registrationIds})
+var sUpdateRegistrationsFromBrandProfileInput_smartMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "smartMatch", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateRegistrationsFromBrandProfileInput_smartMatch})
+var sUpdateRegistrationsFromBrandProfileInput_onAttributeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onAttributeConflict", ID: &iOnAttributeConflict, Members: &mOnAttributeConflict, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRegistrationsFromBrandProfileInput_onAttributeConflict})
+var sUpdateRegistrationsFromBrandProfileInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eUpdateRegistrationsFromBrandProfileInput_clientToken})
+var sUpdateRegistrationsFromBrandProfileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistrationsFromBrandProfileOutput, Members: &mUpdateRegistrationsFromBrandProfileOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRegistrationsFromBrandProfileOutput})
+var sUpdateRegistrationsFromBrandProfileOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_JobResults, Members: &m_JobResults, Type: smithy.ShapeTypeList, Ext: &eUpdateRegistrationsFromBrandProfileOutput_results})
+var sValidateNotifyCodeVerificationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateNotifyCodeVerificationInput, Members: &mValidateNotifyCodeVerificationInput, Type: smithy.ShapeTypeStructure, Ext: &eValidateNotifyCodeVerificationInput})
+var sValidateNotifyCodeVerificationInput_destinationIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationIdentity", ID: &i_DestinationIdentity, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eValidateNotifyCodeVerificationInput_destinationIdentity})
+var sValidateNotifyCodeVerificationInput_referenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceId", ID: &i_ReferenceId, Type: smithy.ShapeTypeString, Ext: &eValidateNotifyCodeVerificationInput_referenceId})
+var sValidateNotifyCodeVerificationInput_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_VerificationCode, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eValidateNotifyCodeVerificationInput_code})
+var sValidateNotifyCodeVerificationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateNotifyCodeVerificationOutput, Members: &mValidateNotifyCodeVerificationOutput, Type: smithy.ShapeTypeStructure, Ext: &eValidateNotifyCodeVerificationOutput})
+var sValidateNotifyCodeVerificationOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVerificationStatus, Members: &mVerificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eValidateNotifyCodeVerificationOutput_status})
+
+var CreateBrandProfile = &sCreateBrandProfile
+
+var CreateBrandProfileAttributes = &sCreateBrandProfileAttributes
+
+var CreateBrandProfileFromRegistration = &sCreateBrandProfileFromRegistration
+
+var CreateNotifyCodeConfiguration = &sCreateNotifyCodeConfiguration
+
+var CreateRegistrationsFromBrandProfile = &sCreateRegistrationsFromBrandProfile
+
+var DeleteBrandProfile = &sDeleteBrandProfile
+
+var DeleteBrandProfileAttribute = &sDeleteBrandProfileAttribute
+
+var DeleteNotifyCodeConfiguration = &sDeleteNotifyCodeConfiguration
+
+var GetBrandProfile = &sGetBrandProfile
+
+var GetBrandProfileAttribute = &sGetBrandProfileAttribute
+
+var GetJob = &sGetJob
+
+var GetNotifyCodeConfiguration = &sGetNotifyCodeConfiguration
+
+var ListBrandProfileAttributes = &sListBrandProfileAttributes
+
+var ListBrandProfiles = &sListBrandProfiles
+
+var ListJobs = &sListJobs
+
+var ListNotifyCodeConfigurations = &sListNotifyCodeConfigurations
+
+var ListRegistrationsFromBrandProfile = &sListRegistrationsFromBrandProfile
+
+var ListTagsForResource = &sListTagsForResource
+
+var SendNotifyCodeVerification = &sSendNotifyCodeVerification
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateBrandProfile = &sUpdateBrandProfile
+
+var UpdateBrandProfileAttribute = &sUpdateBrandProfileAttribute
+
+var UpdateBrandProfileFromRegistration = &sUpdateBrandProfileFromRegistration
+
+var UpdateNotifyCodeConfiguration = &sUpdateNotifyCodeConfiguration
+
+var UpdateRegistrationsFromBrandProfile = &sUpdateRegistrationsFromBrandProfile
+
+var ValidateNotifyCodeVerification = &sValidateNotifyCodeVerification
+
+var _EndUserMessaging = &s_EndUserMessaging
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _AttachmentBody = &s_AttachmentBody
+
+var _BrandProfileAttributeCategory = &s_BrandProfileAttributeCategory
+
+var _BrandProfileAttributeDescription = &s_BrandProfileAttributeDescription
+
+var BrandProfileAttributeInput = &sBrandProfileAttributeInput
+var BrandProfileAttributeInput_attributeName = &sBrandProfileAttributeInput_attributeName
+var BrandProfileAttributeInput_attributeType = &sBrandProfileAttributeInput_attributeType
+var BrandProfileAttributeInput_attributeValue = &sBrandProfileAttributeInput_attributeValue
+var BrandProfileAttributeInput_attachmentBody = &sBrandProfileAttributeInput_attachmentBody
+var BrandProfileAttributeInput_description = &sBrandProfileAttributeInput_description
+var BrandProfileAttributeInput_category = &sBrandProfileAttributeInput_category
+
+var _BrandProfileAttributeInputList = &s_BrandProfileAttributeInputList
+var _BrandProfileAttributeInputList_member = &s_BrandProfileAttributeInputList_member
+
+var _BrandProfileAttributeName = &s_BrandProfileAttributeName
+
+var BrandProfileAttributeOutput = &sBrandProfileAttributeOutput
+var BrandProfileAttributeOutput_attributeName = &sBrandProfileAttributeOutput_attributeName
+var BrandProfileAttributeOutput_attributeType = &sBrandProfileAttributeOutput_attributeType
+var BrandProfileAttributeOutput_mediaDownloadUrl = &sBrandProfileAttributeOutput_mediaDownloadUrl
+
+var _BrandProfileAttributeOutputList = &s_BrandProfileAttributeOutputList
+var _BrandProfileAttributeOutputList_member = &s_BrandProfileAttributeOutputList_member
+
+var BrandProfileAttributeSummary = &sBrandProfileAttributeSummary
+var BrandProfileAttributeSummary_attributeName = &sBrandProfileAttributeSummary_attributeName
+var BrandProfileAttributeSummary_attributeType = &sBrandProfileAttributeSummary_attributeType
+var BrandProfileAttributeSummary_description = &sBrandProfileAttributeSummary_description
+var BrandProfileAttributeSummary_category = &sBrandProfileAttributeSummary_category
+var BrandProfileAttributeSummary_createdAt = &sBrandProfileAttributeSummary_createdAt
+var BrandProfileAttributeSummary_updatedAt = &sBrandProfileAttributeSummary_updatedAt
+
+var _BrandProfileAttributeSummaryList = &s_BrandProfileAttributeSummaryList
+var _BrandProfileAttributeSummaryList_member = &s_BrandProfileAttributeSummaryList_member
+
+var BrandProfileAttributeType = &sBrandProfileAttributeType
+var BrandProfileAttributeType_TEXT = &sBrandProfileAttributeType_TEXT
+var BrandProfileAttributeType_IMAGE = &sBrandProfileAttributeType_IMAGE
+var BrandProfileAttributeType_DOCUMENT = &sBrandProfileAttributeType_DOCUMENT
+
+var _BrandProfileAttributeValue = &s_BrandProfileAttributeValue
+
+var _BrandProfileIdOrArn = &s_BrandProfileIdOrArn
+
+var BrandProfileInfo = &sBrandProfileInfo
+var BrandProfileInfo_brandProfileId = &sBrandProfileInfo_brandProfileId
+var BrandProfileInfo_brandProfileArn = &sBrandProfileInfo_brandProfileArn
+var BrandProfileInfo_brandProfileName = &sBrandProfileInfo_brandProfileName
+var BrandProfileInfo_status = &sBrandProfileInfo_status
+var BrandProfileInfo_deletionProtectionEnabled = &sBrandProfileInfo_deletionProtectionEnabled
+var BrandProfileInfo_createdAt = &sBrandProfileInfo_createdAt
+var BrandProfileInfo_updatedAt = &sBrandProfileInfo_updatedAt
+
+var _BrandProfileInfoList = &s_BrandProfileInfoList
+var _BrandProfileInfoList_member = &s_BrandProfileInfoList_member
+
+var _BrandProfileName = &s_BrandProfileName
+
+var ChannelParameters = &sChannelParameters
+var ChannelParameters_text = &sChannelParameters_text
+var ChannelParameters_voice = &sChannelParameters_voice
+var ChannelParameters_notify = &sChannelParameters_notify
+var ChannelParameters_whatsApp = &sChannelParameters_whatsApp
+
+var _ClientToken = &s_ClientToken
+
+var CodeConfigurationParameters = &sCodeConfigurationParameters
+var CodeConfigurationParameters_codeType = &sCodeConfigurationParameters_codeType
+var CodeConfigurationParameters_codeLength = &sCodeConfigurationParameters_codeLength
+var CodeConfigurationParameters_validityPeriodMinutes = &sCodeConfigurationParameters_validityPeriodMinutes
+var CodeConfigurationParameters_maxAttempts = &sCodeConfigurationParameters_maxAttempts
+
+var _CodeLength = &s_CodeLength
+
+var CodeType = &sCodeType
+var CodeType_NUMERIC = &sCodeType_NUMERIC
+var CodeType_ALPHA = &sCodeType_ALPHA
+var CodeType_ALPHANUMERIC = &sCodeType_ALPHANUMERIC
+
+var _ConfigurationSetName = &s_ConfigurationSetName
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _ContextKey = &s_ContextKey
+
+var _ContextMap = &s_ContextMap
+var _ContextMap_key = &s_ContextMap_key
+var _ContextMap_value = &s_ContextMap_value
+
+var _ContextValue = &s_ContextValue
+
+var _DestinationCountryParameterKey = &s_DestinationCountryParameterKey
+
+var _DestinationCountryParameters = &s_DestinationCountryParameters
+var _DestinationCountryParameters_key = &s_DestinationCountryParameters_key
+var _DestinationCountryParameters_value = &s_DestinationCountryParameters_value
+
+var _DestinationCountryParameterValue = &s_DestinationCountryParameterValue
+
+var _DestinationIdentity = &s_DestinationIdentity
+
+var _InlineTemplateBody = &s_InlineTemplateBody
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JobErrorCode = &s_JobErrorCode
+
+var _JobErrorMessage = &s_JobErrorMessage
+
+var _JobId = &s_JobId
+
+var _JobOperationType = &s_JobOperationType
+
+var JobResource = &sJobResource
+var JobResource_resourceType = &sJobResource_resourceType
+var JobResource_resourceId = &sJobResource_resourceId
+var JobResource_resourceArn = &sJobResource_resourceArn
+
+var _JobResourceId = &s_JobResourceId
+
+var _JobResourceIdentifier = &s_JobResourceIdentifier
+
+var _JobResourceList = &s_JobResourceList
+var _JobResourceList_member = &s_JobResourceList_member
+
+var JobResourceType = &sJobResourceType
+var JobResourceType_REGISTRATION = &sJobResourceType_REGISTRATION
+var JobResourceType_BRAND_PROFILE = &sJobResourceType_BRAND_PROFILE
+
+var JobResult = &sJobResult
+var JobResult_jobId = &sJobResult_jobId
+var JobResult_resourceIdentifier = &sJobResult_resourceIdentifier
+
+var _JobResults = &s_JobResults
+var _JobResults_member = &s_JobResults_member
+
+var JobStatus = &sJobStatus
+var JobStatus_SUCCESS = &sJobStatus_SUCCESS
+var JobStatus_PROCESSING = &sJobStatus_PROCESSING
+var JobStatus_FAILED = &sJobStatus_FAILED
+
+var JobSummary = &sJobSummary
+var JobSummary_jobId = &sJobSummary_jobId
+var JobSummary_status = &sJobSummary_status
+var JobSummary_operationType = &sJobSummary_operationType
+var JobSummary_createdAt = &sJobSummary_createdAt
+var JobSummary_updatedAt = &sJobSummary_updatedAt
+var JobSummary_brandProfileId = &sJobSummary_brandProfileId
+var JobSummary_errorCode = &sJobSummary_errorCode
+var JobSummary_errorMessage = &sJobSummary_errorMessage
+var JobSummary_resources = &sJobSummary_resources
+
+var _JobSummaryList = &s_JobSummaryList
+var _JobSummaryList_member = &s_JobSummaryList_member
+
+var _LanguageCode = &s_LanguageCode
+
+var _MaxResults = &s_MaxResults
+
+var _MaxVerificationAttempts = &s_MaxVerificationAttempts
+
+var _MediaDownloadUrl = &s_MediaDownloadUrl
+
+var _MessageId = &s_MessageId
+
+var _NextToken = &s_NextToken
+
+var NotifyChannel = &sNotifyChannel
+var NotifyChannel_TEXT = &sNotifyChannel_TEXT
+var NotifyChannel_VOICE = &sNotifyChannel_VOICE
+var NotifyChannel_WHATSAPP = &sNotifyChannel_WHATSAPP
+
+var NotifyCodeConfiguration = &sNotifyCodeConfiguration
+var NotifyCodeConfiguration_notifyCodeConfigurationId = &sNotifyCodeConfiguration_notifyCodeConfigurationId
+var NotifyCodeConfiguration_notifyCodeConfigurationArn = &sNotifyCodeConfiguration_notifyCodeConfigurationArn
+var NotifyCodeConfiguration_notifyCodeConfigurationName = &sNotifyCodeConfiguration_notifyCodeConfigurationName
+var NotifyCodeConfiguration_codeConfigurationParameters = &sNotifyCodeConfiguration_codeConfigurationParameters
+var NotifyCodeConfiguration_channelParameters = &sNotifyCodeConfiguration_channelParameters
+var NotifyCodeConfiguration_deletionProtectionEnabled = &sNotifyCodeConfiguration_deletionProtectionEnabled
+var NotifyCodeConfiguration_createdAt = &sNotifyCodeConfiguration_createdAt
+var NotifyCodeConfiguration_updatedAt = &sNotifyCodeConfiguration_updatedAt
+
+var _NotifyCodeConfigurationId = &s_NotifyCodeConfigurationId
+
+var _NotifyCodeConfigurationIdOrArn = &s_NotifyCodeConfigurationIdOrArn
+
+var _NotifyCodeConfigurationList = &s_NotifyCodeConfigurationList
+var _NotifyCodeConfigurationList_member = &s_NotifyCodeConfigurationList_member
+
+var _NotifyCodeConfigurationName = &s_NotifyCodeConfigurationName
+
+var NotifyParameters = &sNotifyParameters
+var NotifyParameters_notifyTemplateId = &sNotifyParameters_notifyTemplateId
+var NotifyParameters_voiceId = &sNotifyParameters_voiceId
+
+var _NotifyTemplateId = &s_NotifyTemplateId
+
+var OnAttributeConflict = &sOnAttributeConflict
+var OnAttributeConflict_REPLACE = &sOnAttributeConflict_REPLACE
+var OnAttributeConflict_PRESERVE = &sOnAttributeConflict_PRESERVE
+
+var _OriginationIdentity = &s_OriginationIdentity
+
+var _ReferenceId = &s_ReferenceId
+
+var RegistrationAssociationSummary = &sRegistrationAssociationSummary
+var RegistrationAssociationSummary_registrationId = &sRegistrationAssociationSummary_registrationId
+var RegistrationAssociationSummary_registrationType = &sRegistrationAssociationSummary_registrationType
+var RegistrationAssociationSummary_createdAt = &sRegistrationAssociationSummary_createdAt
+var RegistrationAssociationSummary_smartMatchUsed = &sRegistrationAssociationSummary_smartMatchUsed
+
+var _RegistrationAssociationSummaryList = &s_RegistrationAssociationSummaryList
+var _RegistrationAssociationSummaryList_member = &s_RegistrationAssociationSummaryList_member
+
+var _RegistrationId = &s_RegistrationId
+
+var _RegistrationIdList = &s_RegistrationIdList
+var _RegistrationIdList_member = &s_RegistrationIdList_member
+
+var _RegistrationIdOrArn = &s_RegistrationIdOrArn
+
+var _RegistrationType = &s_RegistrationType
+
+var _RegistrationTypeList = &s_RegistrationTypeList
+var _RegistrationTypeList_member = &s_RegistrationTypeList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var Status = &sStatus
+var Status_ACTIVE = &sStatus_ACTIVE
+var Status_BLOCKED = &sStatus_BLOCKED
+var Status_PAUSED = &sStatus_PAUSED
+var Status_CANCELLED = &sStatus_CANCELLED
+var Status_FAILED = &sStatus_FAILED
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TextParameters = &sTextParameters
+var TextParameters_inlineTemplateBody = &sTextParameters_inlineTemplateBody
+var TextParameters_destinationCountryParameters = &sTextParameters_destinationCountryParameters
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var UpdateChannelParameters = &sUpdateChannelParameters
+var UpdateChannelParameters_text = &sUpdateChannelParameters_text
+var UpdateChannelParameters_voice = &sUpdateChannelParameters_voice
+var UpdateChannelParameters_notify = &sUpdateChannelParameters_notify
+var UpdateChannelParameters_whatsApp = &sUpdateChannelParameters_whatsApp
+
+var UpdateCodeConfigurationParameters = &sUpdateCodeConfigurationParameters
+var UpdateCodeConfigurationParameters_codeType = &sUpdateCodeConfigurationParameters_codeType
+var UpdateCodeConfigurationParameters_codeLength = &sUpdateCodeConfigurationParameters_codeLength
+var UpdateCodeConfigurationParameters_validityPeriodMinutes = &sUpdateCodeConfigurationParameters_validityPeriodMinutes
+var UpdateCodeConfigurationParameters_maxAttempts = &sUpdateCodeConfigurationParameters_maxAttempts
+
+var _UpdateDestinationCountryParameters = &s_UpdateDestinationCountryParameters
+var _UpdateDestinationCountryParameters_key = &s_UpdateDestinationCountryParameters_key
+var _UpdateDestinationCountryParameters_value = &s_UpdateDestinationCountryParameters_value
+
+var _UpdateInlineTemplateBody = &s_UpdateInlineTemplateBody
+
+var _UpdateLanguageCode = &s_UpdateLanguageCode
+
+var UpdateNotifyParameters = &sUpdateNotifyParameters
+var UpdateNotifyParameters_notifyTemplateId = &sUpdateNotifyParameters_notifyTemplateId
+var UpdateNotifyParameters_voiceId = &sUpdateNotifyParameters_voiceId
+
+var _UpdateNotifyTemplateId = &s_UpdateNotifyTemplateId
+
+var UpdateTextParameters = &sUpdateTextParameters
+var UpdateTextParameters_inlineTemplateBody = &sUpdateTextParameters_inlineTemplateBody
+var UpdateTextParameters_destinationCountryParameters = &sUpdateTextParameters_destinationCountryParameters
+
+var _UpdateVoiceId = &s_UpdateVoiceId
+
+var UpdateVoiceParameters = &sUpdateVoiceParameters
+var UpdateVoiceParameters_inlineTemplateBody = &sUpdateVoiceParameters_inlineTemplateBody
+var UpdateVoiceParameters_languageCode = &sUpdateVoiceParameters_languageCode
+var UpdateVoiceParameters_voiceId = &sUpdateVoiceParameters_voiceId
+var UpdateVoiceParameters_voiceMessageBodyTextType = &sUpdateVoiceParameters_voiceMessageBodyTextType
+
+var UpdateWhatsAppParameters = &sUpdateWhatsAppParameters
+var UpdateWhatsAppParameters_whatsAppTemplateName = &sUpdateWhatsAppParameters_whatsAppTemplateName
+var UpdateWhatsAppParameters_languageCode = &sUpdateWhatsAppParameters_languageCode
+
+var _UpdateWhatsAppTemplateName = &s_UpdateWhatsAppTemplateName
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_path = &sValidationExceptionField_path
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidityPeriodMinutes = &s_ValidityPeriodMinutes
+
+var _VerificationCode = &s_VerificationCode
+
+var _VerificationId = &s_VerificationId
+
+var VerificationStatus = &sVerificationStatus
+var VerificationStatus_VALID = &sVerificationStatus_VALID
+var VerificationStatus_INVALID = &sVerificationStatus_INVALID
+
+var _VoiceId = &s_VoiceId
+
+var VoiceMessageBodyTextType = &sVoiceMessageBodyTextType
+var VoiceMessageBodyTextType_TEXT = &sVoiceMessageBodyTextType_TEXT
+var VoiceMessageBodyTextType_SSML = &sVoiceMessageBodyTextType_SSML
+
+var VoiceParameters = &sVoiceParameters
+var VoiceParameters_inlineTemplateBody = &sVoiceParameters_inlineTemplateBody
+var VoiceParameters_languageCode = &sVoiceParameters_languageCode
+var VoiceParameters_voiceId = &sVoiceParameters_voiceId
+var VoiceParameters_voiceMessageBodyTextType = &sVoiceParameters_voiceMessageBodyTextType
+
+var WhatsAppParameters = &sWhatsAppParameters
+var WhatsAppParameters_whatsAppTemplateName = &sWhatsAppParameters_whatsAppTemplateName
+var WhatsAppParameters_languageCode = &sWhatsAppParameters_languageCode
+
+var _WhatsAppTemplateName = &s_WhatsAppTemplateName
+
+var CreateBrandProfileAttributesInput = &sCreateBrandProfileAttributesInput
+var CreateBrandProfileAttributesInput_brandProfileId = &sCreateBrandProfileAttributesInput_brandProfileId
+var CreateBrandProfileAttributesInput_attributes = &sCreateBrandProfileAttributesInput_attributes
+var CreateBrandProfileAttributesInput_clientToken = &sCreateBrandProfileAttributesInput_clientToken
+
+var CreateBrandProfileAttributesOutput = &sCreateBrandProfileAttributesOutput
+var CreateBrandProfileAttributesOutput_attributes = &sCreateBrandProfileAttributesOutput_attributes
+
+var CreateBrandProfileFromRegistrationInput = &sCreateBrandProfileFromRegistrationInput
+var CreateBrandProfileFromRegistrationInput_registrationId = &sCreateBrandProfileFromRegistrationInput_registrationId
+var CreateBrandProfileFromRegistrationInput_brandProfileName = &sCreateBrandProfileFromRegistrationInput_brandProfileName
+var CreateBrandProfileFromRegistrationInput_smartMatch = &sCreateBrandProfileFromRegistrationInput_smartMatch
+var CreateBrandProfileFromRegistrationInput_tags = &sCreateBrandProfileFromRegistrationInput_tags
+var CreateBrandProfileFromRegistrationInput_clientToken = &sCreateBrandProfileFromRegistrationInput_clientToken
+
+var CreateBrandProfileFromRegistrationOutput = &sCreateBrandProfileFromRegistrationOutput
+var CreateBrandProfileFromRegistrationOutput_results = &sCreateBrandProfileFromRegistrationOutput_results
+
+var CreateBrandProfileInput = &sCreateBrandProfileInput
+var CreateBrandProfileInput_brandProfileName = &sCreateBrandProfileInput_brandProfileName
+var CreateBrandProfileInput_clientToken = &sCreateBrandProfileInput_clientToken
+var CreateBrandProfileInput_deletionProtectionEnabled = &sCreateBrandProfileInput_deletionProtectionEnabled
+var CreateBrandProfileInput_tags = &sCreateBrandProfileInput_tags
+
+var CreateBrandProfileOutput = &sCreateBrandProfileOutput
+var CreateBrandProfileOutput_brandProfileId = &sCreateBrandProfileOutput_brandProfileId
+var CreateBrandProfileOutput_brandProfileArn = &sCreateBrandProfileOutput_brandProfileArn
+var CreateBrandProfileOutput_brandProfileName = &sCreateBrandProfileOutput_brandProfileName
+var CreateBrandProfileOutput_status = &sCreateBrandProfileOutput_status
+var CreateBrandProfileOutput_deletionProtectionEnabled = &sCreateBrandProfileOutput_deletionProtectionEnabled
+var CreateBrandProfileOutput_createdAt = &sCreateBrandProfileOutput_createdAt
+var CreateBrandProfileOutput_updatedAt = &sCreateBrandProfileOutput_updatedAt
+var CreateBrandProfileOutput_attributesCreated = &sCreateBrandProfileOutput_attributesCreated
+
+var CreateNotifyCodeConfigurationInput = &sCreateNotifyCodeConfigurationInput
+var CreateNotifyCodeConfigurationInput_notifyCodeConfigurationName = &sCreateNotifyCodeConfigurationInput_notifyCodeConfigurationName
+var CreateNotifyCodeConfigurationInput_codeConfigurationParameters = &sCreateNotifyCodeConfigurationInput_codeConfigurationParameters
+var CreateNotifyCodeConfigurationInput_channelParameters = &sCreateNotifyCodeConfigurationInput_channelParameters
+var CreateNotifyCodeConfigurationInput_deletionProtectionEnabled = &sCreateNotifyCodeConfigurationInput_deletionProtectionEnabled
+var CreateNotifyCodeConfigurationInput_clientToken = &sCreateNotifyCodeConfigurationInput_clientToken
+var CreateNotifyCodeConfigurationInput_tags = &sCreateNotifyCodeConfigurationInput_tags
+
+var CreateNotifyCodeConfigurationOutput = &sCreateNotifyCodeConfigurationOutput
+var CreateNotifyCodeConfigurationOutput_notifyCodeConfiguration = &sCreateNotifyCodeConfigurationOutput_notifyCodeConfiguration
+
+var CreateRegistrationsFromBrandProfileInput = &sCreateRegistrationsFromBrandProfileInput
+var CreateRegistrationsFromBrandProfileInput_brandProfileId = &sCreateRegistrationsFromBrandProfileInput_brandProfileId
+var CreateRegistrationsFromBrandProfileInput_registrationTypes = &sCreateRegistrationsFromBrandProfileInput_registrationTypes
+var CreateRegistrationsFromBrandProfileInput_smartMatch = &sCreateRegistrationsFromBrandProfileInput_smartMatch
+var CreateRegistrationsFromBrandProfileInput_clientToken = &sCreateRegistrationsFromBrandProfileInput_clientToken
+
+var CreateRegistrationsFromBrandProfileOutput = &sCreateRegistrationsFromBrandProfileOutput
+var CreateRegistrationsFromBrandProfileOutput_results = &sCreateRegistrationsFromBrandProfileOutput_results
+
+var DeleteBrandProfileAttributeInput = &sDeleteBrandProfileAttributeInput
+var DeleteBrandProfileAttributeInput_brandProfileId = &sDeleteBrandProfileAttributeInput_brandProfileId
+var DeleteBrandProfileAttributeInput_attributeName = &sDeleteBrandProfileAttributeInput_attributeName
+
+var DeleteBrandProfileAttributeOutput = &sDeleteBrandProfileAttributeOutput
+var DeleteBrandProfileAttributeOutput_brandProfileId = &sDeleteBrandProfileAttributeOutput_brandProfileId
+var DeleteBrandProfileAttributeOutput_attributeName = &sDeleteBrandProfileAttributeOutput_attributeName
+
+var DeleteBrandProfileInput = &sDeleteBrandProfileInput
+var DeleteBrandProfileInput_brandProfileId = &sDeleteBrandProfileInput_brandProfileId
+
+var DeleteBrandProfileOutput = &sDeleteBrandProfileOutput
+var DeleteBrandProfileOutput_brandProfileId = &sDeleteBrandProfileOutput_brandProfileId
+var DeleteBrandProfileOutput_brandProfileArn = &sDeleteBrandProfileOutput_brandProfileArn
+
+var DeleteNotifyCodeConfigurationInput = &sDeleteNotifyCodeConfigurationInput
+var DeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId = &sDeleteNotifyCodeConfigurationInput_notifyCodeConfigurationId
+
+var DeleteNotifyCodeConfigurationOutput = &sDeleteNotifyCodeConfigurationOutput
+
+var GetBrandProfileAttributeInput = &sGetBrandProfileAttributeInput
+var GetBrandProfileAttributeInput_brandProfileId = &sGetBrandProfileAttributeInput_brandProfileId
+var GetBrandProfileAttributeInput_attributeName = &sGetBrandProfileAttributeInput_attributeName
+
+var GetBrandProfileAttributeOutput = &sGetBrandProfileAttributeOutput
+var GetBrandProfileAttributeOutput_attributeName = &sGetBrandProfileAttributeOutput_attributeName
+var GetBrandProfileAttributeOutput_attributeType = &sGetBrandProfileAttributeOutput_attributeType
+var GetBrandProfileAttributeOutput_attributeValue = &sGetBrandProfileAttributeOutput_attributeValue
+var GetBrandProfileAttributeOutput_description = &sGetBrandProfileAttributeOutput_description
+var GetBrandProfileAttributeOutput_category = &sGetBrandProfileAttributeOutput_category
+var GetBrandProfileAttributeOutput_mediaContentType = &sGetBrandProfileAttributeOutput_mediaContentType
+var GetBrandProfileAttributeOutput_mediaSizeBytes = &sGetBrandProfileAttributeOutput_mediaSizeBytes
+var GetBrandProfileAttributeOutput_mediaDownloadUrl = &sGetBrandProfileAttributeOutput_mediaDownloadUrl
+var GetBrandProfileAttributeOutput_createdAt = &sGetBrandProfileAttributeOutput_createdAt
+var GetBrandProfileAttributeOutput_updatedAt = &sGetBrandProfileAttributeOutput_updatedAt
+
+var GetBrandProfileInput = &sGetBrandProfileInput
+var GetBrandProfileInput_brandProfileId = &sGetBrandProfileInput_brandProfileId
+
+var GetBrandProfileOutput = &sGetBrandProfileOutput
+var GetBrandProfileOutput_brandProfileId = &sGetBrandProfileOutput_brandProfileId
+var GetBrandProfileOutput_brandProfileArn = &sGetBrandProfileOutput_brandProfileArn
+var GetBrandProfileOutput_brandProfileName = &sGetBrandProfileOutput_brandProfileName
+var GetBrandProfileOutput_status = &sGetBrandProfileOutput_status
+var GetBrandProfileOutput_deletionProtectionEnabled = &sGetBrandProfileOutput_deletionProtectionEnabled
+var GetBrandProfileOutput_createdAt = &sGetBrandProfileOutput_createdAt
+var GetBrandProfileOutput_updatedAt = &sGetBrandProfileOutput_updatedAt
+
+var GetJobInput = &sGetJobInput
+var GetJobInput_jobId = &sGetJobInput_jobId
+
+var Job = &sJob
+var Job_jobId = &sJob_jobId
+var Job_status = &sJob_status
+var Job_operationType = &sJob_operationType
+var Job_createdAt = &sJob_createdAt
+var Job_updatedAt = &sJob_updatedAt
+var Job_brandProfileId = &sJob_brandProfileId
+var Job_errorCode = &sJob_errorCode
+var Job_errorMessage = &sJob_errorMessage
+var Job_resources = &sJob_resources
+
+var GetNotifyCodeConfigurationInput = &sGetNotifyCodeConfigurationInput
+var GetNotifyCodeConfigurationInput_notifyCodeConfigurationId = &sGetNotifyCodeConfigurationInput_notifyCodeConfigurationId
+
+var GetNotifyCodeConfigurationOutput = &sGetNotifyCodeConfigurationOutput
+var GetNotifyCodeConfigurationOutput_notifyCodeConfiguration = &sGetNotifyCodeConfigurationOutput_notifyCodeConfiguration
+
+var ListBrandProfileAttributesInput = &sListBrandProfileAttributesInput
+var ListBrandProfileAttributesInput_brandProfileId = &sListBrandProfileAttributesInput_brandProfileId
+var ListBrandProfileAttributesInput_nextToken = &sListBrandProfileAttributesInput_nextToken
+var ListBrandProfileAttributesInput_maxResults = &sListBrandProfileAttributesInput_maxResults
+
+var ListBrandProfileAttributesOutput = &sListBrandProfileAttributesOutput
+var ListBrandProfileAttributesOutput_brandProfileAttributes = &sListBrandProfileAttributesOutput_brandProfileAttributes
+var ListBrandProfileAttributesOutput_nextToken = &sListBrandProfileAttributesOutput_nextToken
+
+var ListBrandProfilesInput = &sListBrandProfilesInput
+var ListBrandProfilesInput_nextToken = &sListBrandProfilesInput_nextToken
+var ListBrandProfilesInput_maxResults = &sListBrandProfilesInput_maxResults
+
+var ListBrandProfilesOutput = &sListBrandProfilesOutput
+var ListBrandProfilesOutput_brandProfiles = &sListBrandProfilesOutput_brandProfiles
+var ListBrandProfilesOutput_nextToken = &sListBrandProfilesOutput_nextToken
+
+var ListJobsInput = &sListJobsInput
+var ListJobsInput_maxResults = &sListJobsInput_maxResults
+var ListJobsInput_nextToken = &sListJobsInput_nextToken
+var ListJobsInput_status = &sListJobsInput_status
+var ListJobsInput_brandProfileId = &sListJobsInput_brandProfileId
+var ListJobsInput_operationType = &sListJobsInput_operationType
+
+var ListJobsOutput = &sListJobsOutput
+var ListJobsOutput_jobs = &sListJobsOutput_jobs
+var ListJobsOutput_nextToken = &sListJobsOutput_nextToken
+
+var ListNotifyCodeConfigurationsInput = &sListNotifyCodeConfigurationsInput
+var ListNotifyCodeConfigurationsInput_maxResults = &sListNotifyCodeConfigurationsInput_maxResults
+var ListNotifyCodeConfigurationsInput_nextToken = &sListNotifyCodeConfigurationsInput_nextToken
+
+var ListNotifyCodeConfigurationsOutput = &sListNotifyCodeConfigurationsOutput
+var ListNotifyCodeConfigurationsOutput_notifyCodeConfigurations = &sListNotifyCodeConfigurationsOutput_notifyCodeConfigurations
+var ListNotifyCodeConfigurationsOutput_nextToken = &sListNotifyCodeConfigurationsOutput_nextToken
+
+var ListRegistrationsFromBrandProfileInput = &sListRegistrationsFromBrandProfileInput
+var ListRegistrationsFromBrandProfileInput_brandProfileId = &sListRegistrationsFromBrandProfileInput_brandProfileId
+var ListRegistrationsFromBrandProfileInput_maxResults = &sListRegistrationsFromBrandProfileInput_maxResults
+var ListRegistrationsFromBrandProfileInput_nextToken = &sListRegistrationsFromBrandProfileInput_nextToken
+
+var ListRegistrationsFromBrandProfileOutput = &sListRegistrationsFromBrandProfileOutput
+var ListRegistrationsFromBrandProfileOutput_registrationAssociations = &sListRegistrationsFromBrandProfileOutput_registrationAssociations
+var ListRegistrationsFromBrandProfileOutput_nextToken = &sListRegistrationsFromBrandProfileOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var SendNotifyCodeVerificationInput = &sSendNotifyCodeVerificationInput
+var SendNotifyCodeVerificationInput_channel = &sSendNotifyCodeVerificationInput_channel
+var SendNotifyCodeVerificationInput_destinationIdentity = &sSendNotifyCodeVerificationInput_destinationIdentity
+var SendNotifyCodeVerificationInput_originationIdentity = &sSendNotifyCodeVerificationInput_originationIdentity
+var SendNotifyCodeVerificationInput_notifyCodeConfiguration = &sSendNotifyCodeVerificationInput_notifyCodeConfiguration
+var SendNotifyCodeVerificationInput_overrideChannelParameters = &sSendNotifyCodeVerificationInput_overrideChannelParameters
+var SendNotifyCodeVerificationInput_overrideCodeConfigurationParameters = &sSendNotifyCodeVerificationInput_overrideCodeConfigurationParameters
+var SendNotifyCodeVerificationInput_configurationSetName = &sSendNotifyCodeVerificationInput_configurationSetName
+var SendNotifyCodeVerificationInput_context = &sSendNotifyCodeVerificationInput_context
+var SendNotifyCodeVerificationInput_referenceId = &sSendNotifyCodeVerificationInput_referenceId
+
+var SendNotifyCodeVerificationOutput = &sSendNotifyCodeVerificationOutput
+var SendNotifyCodeVerificationOutput_verificationId = &sSendNotifyCodeVerificationOutput_verificationId
+var SendNotifyCodeVerificationOutput_messageId = &sSendNotifyCodeVerificationOutput_messageId
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateBrandProfileAttributeInput = &sUpdateBrandProfileAttributeInput
+var UpdateBrandProfileAttributeInput_brandProfileId = &sUpdateBrandProfileAttributeInput_brandProfileId
+var UpdateBrandProfileAttributeInput_attributeName = &sUpdateBrandProfileAttributeInput_attributeName
+var UpdateBrandProfileAttributeInput_attributeValue = &sUpdateBrandProfileAttributeInput_attributeValue
+var UpdateBrandProfileAttributeInput_attachmentBody = &sUpdateBrandProfileAttributeInput_attachmentBody
+var UpdateBrandProfileAttributeInput_description = &sUpdateBrandProfileAttributeInput_description
+var UpdateBrandProfileAttributeInput_category = &sUpdateBrandProfileAttributeInput_category
+
+var UpdateBrandProfileAttributeOutput = &sUpdateBrandProfileAttributeOutput
+var UpdateBrandProfileAttributeOutput_attributeName = &sUpdateBrandProfileAttributeOutput_attributeName
+var UpdateBrandProfileAttributeOutput_attributeType = &sUpdateBrandProfileAttributeOutput_attributeType
+var UpdateBrandProfileAttributeOutput_attributeValue = &sUpdateBrandProfileAttributeOutput_attributeValue
+var UpdateBrandProfileAttributeOutput_description = &sUpdateBrandProfileAttributeOutput_description
+var UpdateBrandProfileAttributeOutput_category = &sUpdateBrandProfileAttributeOutput_category
+var UpdateBrandProfileAttributeOutput_mediaContentType = &sUpdateBrandProfileAttributeOutput_mediaContentType
+var UpdateBrandProfileAttributeOutput_mediaSizeBytes = &sUpdateBrandProfileAttributeOutput_mediaSizeBytes
+var UpdateBrandProfileAttributeOutput_createdAt = &sUpdateBrandProfileAttributeOutput_createdAt
+var UpdateBrandProfileAttributeOutput_updatedAt = &sUpdateBrandProfileAttributeOutput_updatedAt
+
+var UpdateBrandProfileFromRegistrationInput = &sUpdateBrandProfileFromRegistrationInput
+var UpdateBrandProfileFromRegistrationInput_brandProfileId = &sUpdateBrandProfileFromRegistrationInput_brandProfileId
+var UpdateBrandProfileFromRegistrationInput_registrationId = &sUpdateBrandProfileFromRegistrationInput_registrationId
+var UpdateBrandProfileFromRegistrationInput_smartMatch = &sUpdateBrandProfileFromRegistrationInput_smartMatch
+var UpdateBrandProfileFromRegistrationInput_onAttributeConflict = &sUpdateBrandProfileFromRegistrationInput_onAttributeConflict
+var UpdateBrandProfileFromRegistrationInput_clientToken = &sUpdateBrandProfileFromRegistrationInput_clientToken
+
+var UpdateBrandProfileFromRegistrationOutput = &sUpdateBrandProfileFromRegistrationOutput
+var UpdateBrandProfileFromRegistrationOutput_results = &sUpdateBrandProfileFromRegistrationOutput_results
+
+var UpdateBrandProfileInput = &sUpdateBrandProfileInput
+var UpdateBrandProfileInput_brandProfileId = &sUpdateBrandProfileInput_brandProfileId
+var UpdateBrandProfileInput_brandProfileName = &sUpdateBrandProfileInput_brandProfileName
+var UpdateBrandProfileInput_deletionProtectionEnabled = &sUpdateBrandProfileInput_deletionProtectionEnabled
+
+var UpdateBrandProfileOutput = &sUpdateBrandProfileOutput
+var UpdateBrandProfileOutput_brandProfileId = &sUpdateBrandProfileOutput_brandProfileId
+var UpdateBrandProfileOutput_brandProfileArn = &sUpdateBrandProfileOutput_brandProfileArn
+var UpdateBrandProfileOutput_brandProfileName = &sUpdateBrandProfileOutput_brandProfileName
+var UpdateBrandProfileOutput_status = &sUpdateBrandProfileOutput_status
+var UpdateBrandProfileOutput_deletionProtectionEnabled = &sUpdateBrandProfileOutput_deletionProtectionEnabled
+var UpdateBrandProfileOutput_createdAt = &sUpdateBrandProfileOutput_createdAt
+var UpdateBrandProfileOutput_updatedAt = &sUpdateBrandProfileOutput_updatedAt
+
+var UpdateNotifyCodeConfigurationInput = &sUpdateNotifyCodeConfigurationInput
+var UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId = &sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationId
+var UpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName = &sUpdateNotifyCodeConfigurationInput_notifyCodeConfigurationName
+var UpdateNotifyCodeConfigurationInput_codeConfigurationParameters = &sUpdateNotifyCodeConfigurationInput_codeConfigurationParameters
+var UpdateNotifyCodeConfigurationInput_channelParameters = &sUpdateNotifyCodeConfigurationInput_channelParameters
+var UpdateNotifyCodeConfigurationInput_deletionProtectionEnabled = &sUpdateNotifyCodeConfigurationInput_deletionProtectionEnabled
+
+var UpdateNotifyCodeConfigurationOutput = &sUpdateNotifyCodeConfigurationOutput
+var UpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration = &sUpdateNotifyCodeConfigurationOutput_notifyCodeConfiguration
+
+var UpdateRegistrationsFromBrandProfileInput = &sUpdateRegistrationsFromBrandProfileInput
+var UpdateRegistrationsFromBrandProfileInput_brandProfileId = &sUpdateRegistrationsFromBrandProfileInput_brandProfileId
+var UpdateRegistrationsFromBrandProfileInput_registrationIds = &sUpdateRegistrationsFromBrandProfileInput_registrationIds
+var UpdateRegistrationsFromBrandProfileInput_smartMatch = &sUpdateRegistrationsFromBrandProfileInput_smartMatch
+var UpdateRegistrationsFromBrandProfileInput_onAttributeConflict = &sUpdateRegistrationsFromBrandProfileInput_onAttributeConflict
+var UpdateRegistrationsFromBrandProfileInput_clientToken = &sUpdateRegistrationsFromBrandProfileInput_clientToken
+
+var UpdateRegistrationsFromBrandProfileOutput = &sUpdateRegistrationsFromBrandProfileOutput
+var UpdateRegistrationsFromBrandProfileOutput_results = &sUpdateRegistrationsFromBrandProfileOutput_results
+
+var ValidateNotifyCodeVerificationInput = &sValidateNotifyCodeVerificationInput
+var ValidateNotifyCodeVerificationInput_destinationIdentity = &sValidateNotifyCodeVerificationInput_destinationIdentity
+var ValidateNotifyCodeVerificationInput_referenceId = &sValidateNotifyCodeVerificationInput_referenceId
+var ValidateNotifyCodeVerificationInput_code = &sValidateNotifyCodeVerificationInput_code
+
+var ValidateNotifyCodeVerificationOutput = &sValidateNotifyCodeVerificationOutput
+var ValidateNotifyCodeVerificationOutput_status = &sValidateNotifyCodeVerificationOutput_status
+
+var EndUserMessaging = &smithy.ServiceSchema{Schema: &s_EndUserMessaging, Version: "2026-09-21"}

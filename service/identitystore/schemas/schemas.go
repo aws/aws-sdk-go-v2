@@ -4,1949 +4,1843 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroupMembership",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroupMembership",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroupMembership",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeIdentityStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeIdentityStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupId",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetGroupMembershipId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupMembershipId",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetUserId",
-}, smithy.ShapeTypeOperation, 0)
-
-var IsMemberInGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IsMemberInGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroupMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMemberships",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroupMembershipsForMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMembershipsForMember",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIdentityStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListIdentityStores",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateIdentityStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateIdentityStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSIdentityStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AWSIdentityStore",
-}, smithy.ShapeTypeService, 0)
-
-var AWSIdentityStore = smithy.NewServiceSchema(_AWSIdentityStore, "2020-06-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_RequestId *smithy.Schema
-
-var AccessDeniedException_Reason *smithy.Schema
-
-var AccessDeniedExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AccessDeniedExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var AccessDeniedExceptionReason_KMS_ACCESS_DENIED *smithy.Schema
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 8)
-var Address_StreetAddress *smithy.Schema
-
-var Address_Locality *smithy.Schema
-
-var Address_Region *smithy.Schema
-
-var Address_PostalCode *smithy.Schema
-
-var Address_Country *smithy.Schema
-
-var Address_Formatted *smithy.Schema
-
-var Address_Type *smithy.Schema
-
-var Address_Primary *smithy.Schema
-
-var _Addresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Addresses",
-}, smithy.ShapeTypeList, 1)
-var _Addresses_member *smithy.Schema
-
-var AlternateIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AlternateIdentifier",
-}, smithy.ShapeTypeUnion, 2)
-var AlternateIdentifier_ExternalId *smithy.Schema
-
-var AlternateIdentifier_UniqueAttribute *smithy.Schema
-
-var AttributeOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AttributeOperation",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeOperation_AttributePath *smithy.Schema
-
-var AttributeOperation_AttributeValue *smithy.Schema
-
-var _AttributeOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AttributeOperations",
-}, smithy.ShapeTypeList, 1)
-var _AttributeOperations_member *smithy.Schema
-
-var _AttributePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AttributePath",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeDocument, 0)
-
-var _BooleanType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "BooleanType",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_RequestId *smithy.Schema
-
-var ConflictException_Reason *smithy.Schema
-
-var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION *smithy.Schema
-
-var ConflictExceptionReason_CONCURRENT_MODIFICATION *smithy.Schema
-
-var _DateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DateType",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Email = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Email",
-}, smithy.ShapeTypeStructure, 3)
-var Email_Value *smithy.Schema
-
-var Email_Type *smithy.Schema
-
-var Email_Primary *smithy.Schema
-
-var _Emails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Emails",
-}, smithy.ShapeTypeList, 1)
-var _Emails_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExtensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtensionNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExtensionNames",
-}, smithy.ShapeTypeList, 1)
-var _ExtensionNames_member *smithy.Schema
-
-var _Extensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Extensions",
-}, smithy.ShapeTypeMap, 2)
-var _Extensions_key *smithy.Schema
-
-var _Extensions_value *smithy.Schema
-
-var ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalId_Issuer *smithy.Schema
-
-var ExternalId_Id *smithy.Schema
-
-var _ExternalIdIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExternalIdIdentifier",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ExternalIdIssuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExternalIdIssuer",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ExternalIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ExternalIds",
-}, smithy.ShapeTypeList, 1)
-var _ExternalIds_member *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_AttributePath *smithy.Schema
-
-var Filter_AttributeValue *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Group",
-}, smithy.ShapeTypeStructure, 11)
-var Group_IdentityStoreId *smithy.Schema
-
-var Group_GroupId *smithy.Schema
-
-var Group_GroupArn *smithy.Schema
-
-var Group_Revision *smithy.Schema
-
-var Group_DisplayName *smithy.Schema
-
-var Group_ExternalIds *smithy.Schema
-
-var Group_Description *smithy.Schema
-
-var Group_CreatedAt *smithy.Schema
-
-var Group_UpdatedAt *smithy.Schema
-
-var Group_CreatedBy *smithy.Schema
-
-var Group_UpdatedBy *smithy.Schema
-
-var _GroupDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupDisplayName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _GroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupIds",
-}, smithy.ShapeTypeList, 1)
-var _GroupIds_member *smithy.Schema
-
-var GroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupMembership",
-}, smithy.ShapeTypeStructure, 9)
-var GroupMembership_IdentityStoreId *smithy.Schema
-
-var GroupMembership_MembershipId *smithy.Schema
-
-var GroupMembership_MembershipArn *smithy.Schema
-
-var GroupMembership_GroupId *smithy.Schema
-
-var GroupMembership_MemberId *smithy.Schema
-
-var GroupMembership_CreatedAt *smithy.Schema
-
-var GroupMembership_UpdatedAt *smithy.Schema
-
-var GroupMembership_CreatedBy *smithy.Schema
-
-var GroupMembership_UpdatedBy *smithy.Schema
-
-var GroupMembershipExistenceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupMembershipExistenceResult",
-}, smithy.ShapeTypeStructure, 3)
-var GroupMembershipExistenceResult_GroupId *smithy.Schema
-
-var GroupMembershipExistenceResult_MemberId *smithy.Schema
-
-var GroupMembershipExistenceResult_MembershipExists *smithy.Schema
-
-var _GroupMembershipExistenceResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupMembershipExistenceResults",
-}, smithy.ShapeTypeList, 1)
-var _GroupMembershipExistenceResults_member *smithy.Schema
-
-var _GroupMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GroupMemberships",
-}, smithy.ShapeTypeList, 1)
-var _GroupMemberships_member *smithy.Schema
-
-var _Groups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Groups",
-}, smithy.ShapeTypeList, 1)
-var _Groups_member *smithy.Schema
-
-var IdentityStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IdentityStore",
-}, smithy.ShapeTypeStructure, 2)
-var IdentityStore_IdentityStoreId *smithy.Schema
-
-var IdentityStore_IdentityStoreArn *smithy.Schema
-
-var _IdentityStoreArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IdentityStoreArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityStoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IdentityStoreId",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IdentityStores",
-}, smithy.ShapeTypeList, 1)
-var _IdentityStores_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InternalServerException_RequestId *smithy.Schema
-
-var InternalServerException_RetryAfterSeconds *smithy.Schema
-
-var _IpCidrList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IpCidrList",
-}, smithy.ShapeTypeList, 1)
-var _IpCidrList_member *smithy.Schema
-
-var _IpCidrType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IpCidrType",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MemberId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "MemberId",
-}, smithy.ShapeTypeUnion, 1)
-var MemberId_UserId *smithy.Schema
-
-var Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Name",
-}, smithy.ShapeTypeStructure, 6)
-var Name_Formatted *smithy.Schema
-
-var Name_FamilyName *smithy.Schema
-
-var Name_GivenName *smithy.Schema
-
-var Name_MiddleName *smithy.Schema
-
-var Name_HonorificPrefix *smithy.Schema
-
-var Name_HonorificSuffix *smithy.Schema
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkConfiguration_VpceAccessRequired *smithy.Schema
-
-var NetworkConfiguration_ApiRestrictSourceVpcs *smithy.Schema
-
-var NetworkConfiguration_ApiAllowSourceIps *smithy.Schema
-
-var NetworkConfiguration_ScimAllowSourceIps *smithy.Schema
-
-var NetworkConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "NetworkConfigurationDetails",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkConfigurationDetails_VpceAccessRequired *smithy.Schema
-
-var NetworkConfigurationDetails_ApiRestrictSourceVpcs *smithy.Schema
-
-var NetworkConfigurationDetails_ApiAllowSourceIps *smithy.Schema
-
-var NetworkConfigurationDetails_ScimAllowSourceIps *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeStructure, 3)
-var PhoneNumber_Value *smithy.Schema
-
-var PhoneNumber_Type *smithy.Schema
-
-var PhoneNumber_Primary *smithy.Schema
-
-var _PhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "PhoneNumbers",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumbers_member *smithy.Schema
-
-var Photo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Photo",
-}, smithy.ShapeTypeStructure, 4)
-var Photo_Value *smithy.Schema
-
-var Photo_Type *smithy.Schema
-
-var Photo_Display *smithy.Schema
-
-var Photo_Primary *smithy.Schema
-
-var _Photos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Photos",
-}, smithy.ShapeTypeList, 1)
-var _Photos_member *smithy.Schema
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_Reason *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_RequestId *smithy.Schema
-
-var ResourceNotFoundExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceNotFoundExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND *smithy.Schema
-
-var _ResourceRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceRevision",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 5)
-var ResourceType_GROUP *smithy.Schema
-
-var ResourceType_USER *smithy.Schema
-
-var ResourceType_IDENTITY_STORE *smithy.Schema
-
-var ResourceType_GROUP_MEMBERSHIP *smithy.Schema
-
-var ResourceType_RESOURCE_POLICY *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Role",
-}, smithy.ShapeTypeStructure, 3)
-var Role_Value *smithy.Schema
-
-var Role_Type *smithy.Schema
-
-var Role_Primary *smithy.Schema
-
-var _Roles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Roles",
-}, smithy.ShapeTypeList, 1)
-var _Roles_member *smithy.Schema
-
-var _SensitiveStringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "SensitiveStringType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_RequestId *smithy.Schema
-
-var _StringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "StringType",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_RequestId *smithy.Schema
-
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var ThrottlingException_Reason *smithy.Schema
-
-var ThrottlingExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ThrottlingExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ThrottlingExceptionReason_KMS_THROTTLING *smithy.Schema
-
-var UniqueAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UniqueAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var UniqueAttribute_AttributePath *smithy.Schema
-
-var UniqueAttribute_AttributeValue *smithy.Schema
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 28)
-var User_IdentityStoreId *smithy.Schema
-
-var User_UserId *smithy.Schema
-
-var User_UserArn *smithy.Schema
-
-var User_Revision *smithy.Schema
-
-var User_UserName *smithy.Schema
-
-var User_ExternalIds *smithy.Schema
-
-var User_Name *smithy.Schema
-
-var User_DisplayName *smithy.Schema
-
-var User_NickName *smithy.Schema
-
-var User_ProfileUrl *smithy.Schema
-
-var User_Emails *smithy.Schema
-
-var User_Addresses *smithy.Schema
-
-var User_PhoneNumbers *smithy.Schema
-
-var User_UserType *smithy.Schema
-
-var User_Title *smithy.Schema
-
-var User_PreferredLanguage *smithy.Schema
-
-var User_Locale *smithy.Schema
-
-var User_Timezone *smithy.Schema
-
-var User_UserStatus *smithy.Schema
-
-var User_Photos *smithy.Schema
-
-var User_Website *smithy.Schema
-
-var User_Birthdate *smithy.Schema
-
-var User_Roles *smithy.Schema
-
-var User_CreatedAt *smithy.Schema
-
-var User_CreatedBy *smithy.Schema
-
-var User_UpdatedAt *smithy.Schema
-
-var User_UpdatedBy *smithy.Schema
-
-var User_Extensions *smithy.Schema
-
-var _UserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UserName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Users = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "Users",
-}, smithy.ShapeTypeList, 1)
-var _Users_member *smithy.Schema
-
-var UserStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UserStatus",
-}, smithy.ShapeTypeEnum, 2)
-var UserStatus_ENABLED *smithy.Schema
-
-var UserStatus_DISABLED *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_RequestId *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_KMS_INVALID_ARN *smithy.Schema
-
-var ValidationExceptionReason_KMS_INVALID_KEY_USAGE *smithy.Schema
-
-var ValidationExceptionReason_KMS_INVALID_STATE *smithy.Schema
-
-var ValidationExceptionReason_KMS_DISABLED *smithy.Schema
-
-var _VpcIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "VpcIdList",
-}, smithy.ShapeTypeList, 1)
-var _VpcIdList_member *smithy.Schema
-
-var _VpcIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "VpcIdType",
-}, smithy.ShapeTypeString, 0)
-
-var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateGroupRequest_IdentityStoreId *smithy.Schema
-
-var CreateGroupRequest_DisplayName *smithy.Schema
-
-var CreateGroupRequest_Description *smithy.Schema
-
-var CreateGroupMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroupMembershipRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateGroupMembershipRequest_IdentityStoreId *smithy.Schema
-
-var CreateGroupMembershipRequest_GroupId *smithy.Schema
-
-var CreateGroupMembershipRequest_MemberId *smithy.Schema
-
-var CreateGroupMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroupMembershipResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateGroupMembershipResponse_IdentityStoreId *smithy.Schema
-
-var CreateGroupMembershipResponse_MembershipId *smithy.Schema
-
-var CreateGroupMembershipResponse_MembershipArn *smithy.Schema
-
-var CreateGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateGroupResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateGroupResponse_IdentityStoreId *smithy.Schema
-
-var CreateGroupResponse_GroupId *smithy.Schema
-
-var CreateGroupResponse_GroupArn *smithy.Schema
-
-var CreateGroupResponse_Revision *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 19)
-var CreateUserRequest_IdentityStoreId *smithy.Schema
-
-var CreateUserRequest_UserName *smithy.Schema
-
-var CreateUserRequest_Name *smithy.Schema
-
-var CreateUserRequest_DisplayName *smithy.Schema
-
-var CreateUserRequest_NickName *smithy.Schema
-
-var CreateUserRequest_ProfileUrl *smithy.Schema
-
-var CreateUserRequest_Emails *smithy.Schema
-
-var CreateUserRequest_Addresses *smithy.Schema
-
-var CreateUserRequest_PhoneNumbers *smithy.Schema
-
-var CreateUserRequest_UserType *smithy.Schema
-
-var CreateUserRequest_Title *smithy.Schema
-
-var CreateUserRequest_PreferredLanguage *smithy.Schema
-
-var CreateUserRequest_Locale *smithy.Schema
-
-var CreateUserRequest_Timezone *smithy.Schema
-
-var CreateUserRequest_Photos *smithy.Schema
-
-var CreateUserRequest_Website *smithy.Schema
-
-var CreateUserRequest_Birthdate *smithy.Schema
-
-var CreateUserRequest_Roles *smithy.Schema
-
-var CreateUserRequest_Extensions *smithy.Schema
-
-var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateUserResponse_IdentityStoreId *smithy.Schema
-
-var CreateUserResponse_UserId *smithy.Schema
-
-var CreateUserResponse_UserArn *smithy.Schema
-
-var CreateUserResponse_Revision *smithy.Schema
-
-var DeleteGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteGroupRequest_IdentityStoreId *smithy.Schema
-
-var DeleteGroupRequest_GroupId *smithy.Schema
-
-var DeleteGroupRequest_Revision *smithy.Schema
-
-var DeleteGroupMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroupMembershipRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteGroupMembershipRequest_IdentityStoreId *smithy.Schema
-
-var DeleteGroupMembershipRequest_MembershipId *smithy.Schema
-
-var DeleteGroupMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroupMembershipResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteUserRequest_IdentityStoreId *smithy.Schema
-
-var DeleteUserRequest_UserId *smithy.Schema
-
-var DeleteUserRequest_Revision *smithy.Schema
-
-var DeleteUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DeleteUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeGroupRequest_IdentityStoreId *smithy.Schema
-
-var DescribeGroupRequest_GroupId *smithy.Schema
-
-var DescribeGroupMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroupMembershipRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeGroupMembershipRequest_IdentityStoreId *smithy.Schema
-
-var DescribeGroupMembershipRequest_MembershipId *smithy.Schema
-
-var DescribeGroupMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroupMembershipResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeGroupMembershipResponse_IdentityStoreId *smithy.Schema
-
-var DescribeGroupMembershipResponse_MembershipId *smithy.Schema
-
-var DescribeGroupMembershipResponse_MembershipArn *smithy.Schema
-
-var DescribeGroupMembershipResponse_GroupId *smithy.Schema
-
-var DescribeGroupMembershipResponse_MemberId *smithy.Schema
-
-var DescribeGroupMembershipResponse_CreatedAt *smithy.Schema
-
-var DescribeGroupMembershipResponse_UpdatedAt *smithy.Schema
-
-var DescribeGroupMembershipResponse_CreatedBy *smithy.Schema
-
-var DescribeGroupMembershipResponse_UpdatedBy *smithy.Schema
-
-var DescribeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeGroupResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeGroupResponse_IdentityStoreId *smithy.Schema
-
-var DescribeGroupResponse_GroupId *smithy.Schema
-
-var DescribeGroupResponse_GroupArn *smithy.Schema
-
-var DescribeGroupResponse_Revision *smithy.Schema
-
-var DescribeGroupResponse_DisplayName *smithy.Schema
-
-var DescribeGroupResponse_ExternalIds *smithy.Schema
-
-var DescribeGroupResponse_Description *smithy.Schema
-
-var DescribeGroupResponse_CreatedAt *smithy.Schema
-
-var DescribeGroupResponse_UpdatedAt *smithy.Schema
-
-var DescribeGroupResponse_CreatedBy *smithy.Schema
-
-var DescribeGroupResponse_UpdatedBy *smithy.Schema
-
-var DescribeIdentityStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeIdentityStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIdentityStoreRequest_IdentityStoreId *smithy.Schema
-
-var DescribeIdentityStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeIdentityStoreResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeIdentityStoreResponse_IdentityStoreId *smithy.Schema
-
-var DescribeIdentityStoreResponse_IdentityStoreArn *smithy.Schema
-
-var DescribeIdentityStoreResponse_NetworkConfiguration *smithy.Schema
-
-var DescribeUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeUserRequest_IdentityStoreId *smithy.Schema
-
-var DescribeUserRequest_UserId *smithy.Schema
-
-var DescribeUserRequest_Extensions *smithy.Schema
-
-var DescribeUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "DescribeUserResponse",
-}, smithy.ShapeTypeStructure, 28)
-var DescribeUserResponse_IdentityStoreId *smithy.Schema
-
-var DescribeUserResponse_UserId *smithy.Schema
-
-var DescribeUserResponse_UserArn *smithy.Schema
-
-var DescribeUserResponse_Revision *smithy.Schema
-
-var DescribeUserResponse_UserName *smithy.Schema
-
-var DescribeUserResponse_ExternalIds *smithy.Schema
-
-var DescribeUserResponse_Name *smithy.Schema
-
-var DescribeUserResponse_DisplayName *smithy.Schema
-
-var DescribeUserResponse_NickName *smithy.Schema
-
-var DescribeUserResponse_ProfileUrl *smithy.Schema
-
-var DescribeUserResponse_Emails *smithy.Schema
-
-var DescribeUserResponse_Addresses *smithy.Schema
-
-var DescribeUserResponse_PhoneNumbers *smithy.Schema
-
-var DescribeUserResponse_UserType *smithy.Schema
-
-var DescribeUserResponse_Title *smithy.Schema
-
-var DescribeUserResponse_PreferredLanguage *smithy.Schema
-
-var DescribeUserResponse_Locale *smithy.Schema
-
-var DescribeUserResponse_Timezone *smithy.Schema
-
-var DescribeUserResponse_UserStatus *smithy.Schema
-
-var DescribeUserResponse_Photos *smithy.Schema
-
-var DescribeUserResponse_Website *smithy.Schema
-
-var DescribeUserResponse_Birthdate *smithy.Schema
-
-var DescribeUserResponse_Roles *smithy.Schema
-
-var DescribeUserResponse_CreatedAt *smithy.Schema
-
-var DescribeUserResponse_CreatedBy *smithy.Schema
-
-var DescribeUserResponse_UpdatedAt *smithy.Schema
-
-var DescribeUserResponse_UpdatedBy *smithy.Schema
-
-var DescribeUserResponse_Extensions *smithy.Schema
-
-var GetGroupIdRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupIdRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetGroupIdRequest_IdentityStoreId *smithy.Schema
-
-var GetGroupIdRequest_AlternateIdentifier *smithy.Schema
-
-var GetGroupIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupIdResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetGroupIdResponse_IdentityStoreId *smithy.Schema
-
-var GetGroupIdResponse_GroupId *smithy.Schema
-
-var GetGroupIdResponse_GroupArn *smithy.Schema
-
-var GetGroupMembershipIdRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupMembershipIdRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetGroupMembershipIdRequest_IdentityStoreId *smithy.Schema
-
-var GetGroupMembershipIdRequest_GroupId *smithy.Schema
-
-var GetGroupMembershipIdRequest_MemberId *smithy.Schema
-
-var GetGroupMembershipIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetGroupMembershipIdResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetGroupMembershipIdResponse_IdentityStoreId *smithy.Schema
-
-var GetGroupMembershipIdResponse_MembershipId *smithy.Schema
-
-var GetGroupMembershipIdResponse_MembershipArn *smithy.Schema
-
-var GetUserIdRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetUserIdRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetUserIdRequest_IdentityStoreId *smithy.Schema
-
-var GetUserIdRequest_AlternateIdentifier *smithy.Schema
-
-var GetUserIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "GetUserIdResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetUserIdResponse_IdentityStoreId *smithy.Schema
-
-var GetUserIdResponse_UserId *smithy.Schema
-
-var GetUserIdResponse_UserArn *smithy.Schema
-
-var IsMemberInGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IsMemberInGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var IsMemberInGroupsRequest_IdentityStoreId *smithy.Schema
-
-var IsMemberInGroupsRequest_MemberId *smithy.Schema
-
-var IsMemberInGroupsRequest_GroupIds *smithy.Schema
-
-var IsMemberInGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "IsMemberInGroupsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var IsMemberInGroupsResponse_Results *smithy.Schema
-
-var ListGroupMembershipsForMemberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMembershipsForMemberRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGroupMembershipsForMemberRequest_IdentityStoreId *smithy.Schema
-
-var ListGroupMembershipsForMemberRequest_MemberId *smithy.Schema
-
-var ListGroupMembershipsForMemberRequest_MaxResults *smithy.Schema
-
-var ListGroupMembershipsForMemberRequest_NextToken *smithy.Schema
-
-var ListGroupMembershipsForMemberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMembershipsForMemberResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupMembershipsForMemberResponse_GroupMemberships *smithy.Schema
-
-var ListGroupMembershipsForMemberResponse_NextToken *smithy.Schema
-
-var ListGroupMembershipsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMembershipsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGroupMembershipsRequest_IdentityStoreId *smithy.Schema
-
-var ListGroupMembershipsRequest_GroupId *smithy.Schema
-
-var ListGroupMembershipsRequest_MaxResults *smithy.Schema
-
-var ListGroupMembershipsRequest_NextToken *smithy.Schema
-
-var ListGroupMembershipsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupMembershipsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupMembershipsResponse_GroupMemberships *smithy.Schema
-
-var ListGroupMembershipsResponse_NextToken *smithy.Schema
-
-var ListGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGroupsRequest_IdentityStoreId *smithy.Schema
-
-var ListGroupsRequest_MaxResults *smithy.Schema
-
-var ListGroupsRequest_NextToken *smithy.Schema
-
-var ListGroupsRequest_Filters *smithy.Schema
-
-var ListGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupsResponse_Groups *smithy.Schema
-
-var ListGroupsResponse_NextToken *smithy.Schema
-
-var ListIdentityStoresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListIdentityStoresRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentityStoresRequest_MaxResults *smithy.Schema
-
-var ListIdentityStoresRequest_NextToken *smithy.Schema
-
-var ListIdentityStoresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListIdentityStoresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentityStoresResponse_IdentityStores *smithy.Schema
-
-var ListIdentityStoresResponse_NextToken *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListUsersRequest_IdentityStoreId *smithy.Schema
-
-var ListUsersRequest_Extensions *smithy.Schema
-
-var ListUsersRequest_MaxResults *smithy.Schema
-
-var ListUsersRequest_NextToken *smithy.Schema
-
-var ListUsersRequest_Filters *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUsersResponse_Users *smithy.Schema
-
-var ListUsersResponse_NextToken *smithy.Schema
-
-var UpdateGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateGroupRequest_IdentityStoreId *smithy.Schema
-
-var UpdateGroupRequest_GroupId *smithy.Schema
-
-var UpdateGroupRequest_Operations *smithy.Schema
-
-var UpdateGroupRequest_Revision *smithy.Schema
-
-var UpdateGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateGroupResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateGroupResponse_IdentityStoreId *smithy.Schema
-
-var UpdateGroupResponse_GroupId *smithy.Schema
-
-var UpdateGroupResponse_GroupArn *smithy.Schema
-
-var UpdateGroupResponse_Revision *smithy.Schema
-
-var UpdateIdentityStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateIdentityStoreRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateIdentityStoreRequest_IdentityStoreId *smithy.Schema
-
-var UpdateIdentityStoreRequest_NetworkConfiguration *smithy.Schema
-
-var UpdateIdentityStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateIdentityStoreResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateIdentityStoreResponse_IdentityStoreId *smithy.Schema
-
-var UpdateIdentityStoreResponse_IdentityStoreArn *smithy.Schema
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateUserRequest_IdentityStoreId *smithy.Schema
-
-var UpdateUserRequest_UserId *smithy.Schema
-
-var UpdateUserRequest_Operations *smithy.Schema
-
-var UpdateUserRequest_Revision *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateUserResponse_IdentityStoreId *smithy.Schema
-
-var UpdateUserResponse_UserId *smithy.Schema
-
-var UpdateUserResponse_UserArn *smithy.Schema
-
-var UpdateUserResponse_Revision *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedExceptionReason_KMS_ACCESS_DENIED = AccessDeniedExceptionReason.AddMember("KMS_ACCESS_DENIED", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
-
-	AccessDeniedException_RequestId = AccessDeniedException.AddMember("RequestId", _RequestId)
-
-	AccessDeniedException_Reason = AccessDeniedException.AddMember("Reason", AccessDeniedExceptionReason)
-
-	Address_StreetAddress = Address.AddMember("StreetAddress", _SensitiveStringType)
-
-	Address_Locality = Address.AddMember("Locality", _SensitiveStringType)
-
-	Address_Region = Address.AddMember("Region", _SensitiveStringType)
-
-	Address_PostalCode = Address.AddMember("PostalCode", _SensitiveStringType)
-
-	Address_Country = Address.AddMember("Country", _SensitiveStringType)
-
-	Address_Formatted = Address.AddMember("Formatted", _SensitiveStringType)
-
-	Address_Type = Address.AddMember("Type", _SensitiveStringType)
-
-	Address_Primary = Address.AddMember("Primary", _BooleanType)
-
-	_Addresses_member = _Addresses.AddMember("member", Address)
-
-	ExternalId_Issuer = ExternalId.AddMember("Issuer", _ExternalIdIssuer)
-
-	ExternalId_Id = ExternalId.AddMember("Id", _ExternalIdIdentifier)
-
-	UniqueAttribute_AttributePath = UniqueAttribute.AddMember("AttributePath", _AttributePath)
-
-	UniqueAttribute_AttributeValue = UniqueAttribute.AddMember("AttributeValue", _AttributeValue)
-
-	AlternateIdentifier_ExternalId = AlternateIdentifier.AddMember("ExternalId", ExternalId)
-
-	AlternateIdentifier_UniqueAttribute = AlternateIdentifier.AddMember("UniqueAttribute", UniqueAttribute)
-
-	AttributeOperation_AttributePath = AttributeOperation.AddMember("AttributePath", _AttributePath)
-
-	AttributeOperation_AttributeValue = AttributeOperation.AddMember("AttributeValue", _AttributeValue)
-
-	_AttributeOperations_member = _AttributeOperations.AddMember("member", AttributeOperation)
-
-	ConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION = ConflictExceptionReason.AddMember("UNIQUENESS_CONSTRAINT_VIOLATION", smithyprelude.Unit)
-
-	ConflictExceptionReason_CONCURRENT_MODIFICATION = ConflictExceptionReason.AddMember("CONCURRENT_MODIFICATION", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ExceptionMessage)
-
-	ConflictException_RequestId = ConflictException.AddMember("RequestId", _RequestId)
-
-	ConflictException_Reason = ConflictException.AddMember("Reason", ConflictExceptionReason)
-
-	Email_Value = Email.AddMember("Value", _SensitiveStringType)
-
-	Email_Type = Email.AddMember("Type", _SensitiveStringType)
-
-	Email_Primary = Email.AddMember("Primary", _BooleanType)
-
-	_Emails_member = _Emails.AddMember("member", Email)
-
-	_ExtensionNames_member = _ExtensionNames.AddMember("member", _ExtensionName)
-
-	_Extensions_key = _Extensions.AddMember("key", _ExtensionName)
-
-	_Extensions_value = _Extensions.AddMember("value", _AttributeValue)
-
-	_ExternalIds_member = _ExternalIds.AddMember("member", ExternalId)
-
-	Filter_AttributePath = Filter.AddMember("AttributePath", _AttributePath)
-
-	Filter_AttributeValue = Filter.AddMember("AttributeValue", _SensitiveStringType)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	Group_IdentityStoreId = Group.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	Group_GroupId = Group.AddMember("GroupId", _ResourceId)
-
-	Group_GroupArn = Group.AddMember("GroupArn", _ResourceArn)
-
-	Group_Revision = Group.AddMember("Revision", _ResourceRevision)
-
-	Group_DisplayName = Group.AddMember("DisplayName", _GroupDisplayName)
-
-	Group_ExternalIds = Group.AddMember("ExternalIds", _ExternalIds)
-
-	Group_Description = Group.AddMember("Description", _SensitiveStringType)
-
-	Group_CreatedAt = Group.AddMember("CreatedAt", _DateType)
-
-	Group_UpdatedAt = Group.AddMember("UpdatedAt", _DateType)
-
-	Group_CreatedBy = Group.AddMember("CreatedBy", _StringType)
-
-	Group_UpdatedBy = Group.AddMember("UpdatedBy", _StringType)
-
-	_GroupIds_member = _GroupIds.AddMember("member", _ResourceId)
-
-	MemberId_UserId = MemberId.AddMember("UserId", _ResourceId)
-
-	GroupMembership_IdentityStoreId = GroupMembership.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GroupMembership_MembershipId = GroupMembership.AddMember("MembershipId", _ResourceId)
-
-	GroupMembership_MembershipArn = GroupMembership.AddMember("MembershipArn", _ResourceArn)
-
-	GroupMembership_GroupId = GroupMembership.AddMember("GroupId", _ResourceId)
-
-	GroupMembership_MemberId = GroupMembership.AddMember("MemberId", MemberId)
-
-	GroupMembership_CreatedAt = GroupMembership.AddMember("CreatedAt", _DateType)
-
-	GroupMembership_UpdatedAt = GroupMembership.AddMember("UpdatedAt", _DateType)
-
-	GroupMembership_CreatedBy = GroupMembership.AddMember("CreatedBy", _StringType)
-
-	GroupMembership_UpdatedBy = GroupMembership.AddMember("UpdatedBy", _StringType)
-
-	GroupMembershipExistenceResult_GroupId = GroupMembershipExistenceResult.AddMember("GroupId", _ResourceId)
-
-	GroupMembershipExistenceResult_MemberId = GroupMembershipExistenceResult.AddMember("MemberId", MemberId)
-
-	GroupMembershipExistenceResult_MembershipExists = GroupMembershipExistenceResult.AddMember("MembershipExists", _BooleanType)
-
-	_GroupMembershipExistenceResults_member = _GroupMembershipExistenceResults.AddMember("member", GroupMembershipExistenceResult)
-
-	_GroupMemberships_member = _GroupMemberships.AddMember("member", GroupMembership)
-
-	_Groups_member = _Groups.AddMember("member", Group)
-
-	IdentityStore_IdentityStoreId = IdentityStore.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	IdentityStore_IdentityStoreArn = IdentityStore.AddMember("IdentityStoreArn", _IdentityStoreArn)
-
-	_IdentityStores_member = _IdentityStores.AddMember("member", IdentityStore)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ExceptionMessage)
-
-	InternalServerException_RequestId = InternalServerException.AddMember("RequestId", _RequestId)
-
-	InternalServerException_RetryAfterSeconds = InternalServerException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_IpCidrList_member = _IpCidrList.AddMember("member", _IpCidrType)
-
-	Name_Formatted = Name.AddMember("Formatted", _SensitiveStringType)
-
-	Name_FamilyName = Name.AddMember("FamilyName", _SensitiveStringType)
-
-	Name_GivenName = Name.AddMember("GivenName", _SensitiveStringType)
-
-	Name_MiddleName = Name.AddMember("MiddleName", _SensitiveStringType)
-
-	Name_HonorificPrefix = Name.AddMember("HonorificPrefix", _SensitiveStringType)
-
-	Name_HonorificSuffix = Name.AddMember("HonorificSuffix", _SensitiveStringType)
-
-	_VpcIdList_member = _VpcIdList.AddMember("member", _VpcIdType)
-
-	NetworkConfiguration_VpceAccessRequired = NetworkConfiguration.AddMember("VpceAccessRequired", _BooleanType)
-
-	NetworkConfiguration_ApiRestrictSourceVpcs = NetworkConfiguration.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
-
-	NetworkConfiguration_ApiAllowSourceIps = NetworkConfiguration.AddMember("ApiAllowSourceIps", _IpCidrList)
-
-	NetworkConfiguration_ScimAllowSourceIps = NetworkConfiguration.AddMember("ScimAllowSourceIps", _IpCidrList)
-
-	NetworkConfigurationDetails_VpceAccessRequired = NetworkConfigurationDetails.AddMember("VpceAccessRequired", _BooleanType)
-
-	NetworkConfigurationDetails_ApiRestrictSourceVpcs = NetworkConfigurationDetails.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
-
-	NetworkConfigurationDetails_ApiAllowSourceIps = NetworkConfigurationDetails.AddMember("ApiAllowSourceIps", _IpCidrList)
-
-	NetworkConfigurationDetails_ScimAllowSourceIps = NetworkConfigurationDetails.AddMember("ScimAllowSourceIps", _IpCidrList)
-
-	PhoneNumber_Value = PhoneNumber.AddMember("Value", _SensitiveStringType)
-
-	PhoneNumber_Type = PhoneNumber.AddMember("Type", _SensitiveStringType)
-
-	PhoneNumber_Primary = PhoneNumber.AddMember("Primary", _BooleanType)
-
-	_PhoneNumbers_member = _PhoneNumbers.AddMember("member", PhoneNumber)
-
-	Photo_Value = Photo.AddMember("Value", _SensitiveStringType)
-
-	Photo_Type = Photo.AddMember("Type", _SensitiveStringType)
-
-	Photo_Display = Photo.AddMember("Display", _SensitiveStringType)
-
-	Photo_Primary = Photo.AddMember("Primary", _BooleanType)
-
-	_Photos_member = _Photos.AddMember("member", Photo)
-
-	ResourceType_GROUP = ResourceType.AddMember("GROUP", smithyprelude.Unit)
-
-	ResourceType_USER = ResourceType.AddMember("USER", smithyprelude.Unit)
-
-	ResourceType_IDENTITY_STORE = ResourceType.AddMember("IDENTITY_STORE", smithyprelude.Unit)
-
-	ResourceType_GROUP_MEMBERSHIP = ResourceType.AddMember("GROUP_MEMBERSHIP", smithyprelude.Unit)
-
-	ResourceType_RESOURCE_POLICY = ResourceType.AddMember("RESOURCE_POLICY", smithyprelude.Unit)
-
-	ResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("KMS_KEY_NOT_FOUND", smithyprelude.Unit)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", ResourceType)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _ResourceId)
-
-	ResourceNotFoundException_Reason = ResourceNotFoundException.AddMember("Reason", ResourceNotFoundExceptionReason)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ExceptionMessage)
-
-	ResourceNotFoundException_RequestId = ResourceNotFoundException.AddMember("RequestId", _RequestId)
-
-	Role_Value = Role.AddMember("Value", _SensitiveStringType)
-
-	Role_Type = Role.AddMember("Type", _SensitiveStringType)
-
-	Role_Primary = Role.AddMember("Primary", _BooleanType)
-
-	_Roles_member = _Roles.AddMember("member", Role)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ExceptionMessage)
-
-	ServiceQuotaExceededException_RequestId = ServiceQuotaExceededException.AddMember("RequestId", _RequestId)
-
-	ThrottlingExceptionReason_KMS_THROTTLING = ThrottlingExceptionReason.AddMember("KMS_THROTTLING", smithyprelude.Unit)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ExceptionMessage)
-
-	ThrottlingException_RequestId = ThrottlingException.AddMember("RequestId", _RequestId)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ThrottlingException_Reason = ThrottlingException.AddMember("Reason", ThrottlingExceptionReason)
-
-	UserStatus_ENABLED = UserStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	UserStatus_DISABLED = UserStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	User_IdentityStoreId = User.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	User_UserId = User.AddMember("UserId", _ResourceId)
-
-	User_UserArn = User.AddMember("UserArn", _ResourceArn)
-
-	User_Revision = User.AddMember("Revision", _ResourceRevision)
-
-	User_UserName = User.AddMember("UserName", _UserName)
-
-	User_ExternalIds = User.AddMember("ExternalIds", _ExternalIds)
-
-	User_Name = User.AddMember("Name", Name)
-
-	User_DisplayName = User.AddMember("DisplayName", _SensitiveStringType)
-
-	User_NickName = User.AddMember("NickName", _SensitiveStringType)
-
-	User_ProfileUrl = User.AddMember("ProfileUrl", _SensitiveStringType)
-
-	User_Emails = User.AddMember("Emails", _Emails)
-
-	User_Addresses = User.AddMember("Addresses", _Addresses)
-
-	User_PhoneNumbers = User.AddMember("PhoneNumbers", _PhoneNumbers)
-
-	User_UserType = User.AddMember("UserType", _SensitiveStringType)
-
-	User_Title = User.AddMember("Title", _SensitiveStringType)
-
-	User_PreferredLanguage = User.AddMember("PreferredLanguage", _SensitiveStringType)
-
-	User_Locale = User.AddMember("Locale", _SensitiveStringType)
-
-	User_Timezone = User.AddMember("Timezone", _SensitiveStringType)
-
-	User_UserStatus = User.AddMember("UserStatus", UserStatus)
-
-	User_Photos = User.AddMember("Photos", _Photos)
-
-	User_Website = User.AddMember("Website", _SensitiveStringType)
-
-	User_Birthdate = User.AddMember("Birthdate", _SensitiveStringType)
-
-	User_Roles = User.AddMember("Roles", _Roles)
-
-	User_CreatedAt = User.AddMember("CreatedAt", _DateType)
-
-	User_CreatedBy = User.AddMember("CreatedBy", _StringType)
-
-	User_UpdatedAt = User.AddMember("UpdatedAt", _DateType)
-
-	User_UpdatedBy = User.AddMember("UpdatedBy", _StringType)
-
-	User_Extensions = User.AddMember("Extensions", _Extensions)
-
-	_Users_member = _Users.AddMember("member", User)
-
-	ValidationExceptionReason_KMS_INVALID_ARN = ValidationExceptionReason.AddMember("KMS_INVALID_ARN", smithyprelude.Unit)
-
-	ValidationExceptionReason_KMS_INVALID_KEY_USAGE = ValidationExceptionReason.AddMember("KMS_INVALID_KEY_USAGE", smithyprelude.Unit)
-
-	ValidationExceptionReason_KMS_INVALID_STATE = ValidationExceptionReason.AddMember("KMS_INVALID_STATE", smithyprelude.Unit)
-
-	ValidationExceptionReason_KMS_DISABLED = ValidationExceptionReason.AddMember("KMS_DISABLED", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ExceptionMessage)
-
-	ValidationException_RequestId = ValidationException.AddMember("RequestId", _RequestId)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	CreateGroupRequest_IdentityStoreId = CreateGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateGroupRequest_DisplayName = CreateGroupRequest.AddMember("DisplayName", _GroupDisplayName)
-
-	CreateGroupRequest_Description = CreateGroupRequest.AddMember("Description", _SensitiveStringType)
-
-	CreateGroupMembershipRequest_IdentityStoreId = CreateGroupMembershipRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateGroupMembershipRequest_GroupId = CreateGroupMembershipRequest.AddMember("GroupId", _ResourceId)
-
-	CreateGroupMembershipRequest_MemberId = CreateGroupMembershipRequest.AddMember("MemberId", MemberId)
-
-	CreateGroupMembershipResponse_IdentityStoreId = CreateGroupMembershipResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateGroupMembershipResponse_MembershipId = CreateGroupMembershipResponse.AddMember("MembershipId", _ResourceId)
-
-	CreateGroupMembershipResponse_MembershipArn = CreateGroupMembershipResponse.AddMember("MembershipArn", _ResourceArn)
-
-	CreateGroupResponse_IdentityStoreId = CreateGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateGroupResponse_GroupId = CreateGroupResponse.AddMember("GroupId", _ResourceId)
-
-	CreateGroupResponse_GroupArn = CreateGroupResponse.AddMember("GroupArn", _ResourceArn)
-
-	CreateGroupResponse_Revision = CreateGroupResponse.AddMember("Revision", _ResourceRevision)
-
-	CreateUserRequest_IdentityStoreId = CreateUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateUserRequest_UserName = CreateUserRequest.AddMember("UserName", _UserName)
-
-	CreateUserRequest_Name = CreateUserRequest.AddMember("Name", Name)
-
-	CreateUserRequest_DisplayName = CreateUserRequest.AddMember("DisplayName", _SensitiveStringType)
-
-	CreateUserRequest_NickName = CreateUserRequest.AddMember("NickName", _SensitiveStringType)
-
-	CreateUserRequest_ProfileUrl = CreateUserRequest.AddMember("ProfileUrl", _SensitiveStringType)
-
-	CreateUserRequest_Emails = CreateUserRequest.AddMember("Emails", _Emails)
-
-	CreateUserRequest_Addresses = CreateUserRequest.AddMember("Addresses", _Addresses)
-
-	CreateUserRequest_PhoneNumbers = CreateUserRequest.AddMember("PhoneNumbers", _PhoneNumbers)
-
-	CreateUserRequest_UserType = CreateUserRequest.AddMember("UserType", _SensitiveStringType)
-
-	CreateUserRequest_Title = CreateUserRequest.AddMember("Title", _SensitiveStringType)
-
-	CreateUserRequest_PreferredLanguage = CreateUserRequest.AddMember("PreferredLanguage", _SensitiveStringType)
-
-	CreateUserRequest_Locale = CreateUserRequest.AddMember("Locale", _SensitiveStringType)
-
-	CreateUserRequest_Timezone = CreateUserRequest.AddMember("Timezone", _SensitiveStringType)
-
-	CreateUserRequest_Photos = CreateUserRequest.AddMember("Photos", _Photos)
-
-	CreateUserRequest_Website = CreateUserRequest.AddMember("Website", _SensitiveStringType)
-
-	CreateUserRequest_Birthdate = CreateUserRequest.AddMember("Birthdate", _SensitiveStringType)
-
-	CreateUserRequest_Roles = CreateUserRequest.AddMember("Roles", _Roles)
-
-	CreateUserRequest_Extensions = CreateUserRequest.AddMember("Extensions", _Extensions)
-
-	CreateUserResponse_IdentityStoreId = CreateUserResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	CreateUserResponse_UserId = CreateUserResponse.AddMember("UserId", _ResourceId)
-
-	CreateUserResponse_UserArn = CreateUserResponse.AddMember("UserArn", _ResourceArn)
-
-	CreateUserResponse_Revision = CreateUserResponse.AddMember("Revision", _ResourceRevision)
-
-	DeleteGroupRequest_IdentityStoreId = DeleteGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DeleteGroupRequest_GroupId = DeleteGroupRequest.AddMember("GroupId", _ResourceId)
-
-	DeleteGroupRequest_Revision = DeleteGroupRequest.AddMember("Revision", _ResourceRevision)
-
-	DeleteGroupMembershipRequest_IdentityStoreId = DeleteGroupMembershipRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DeleteGroupMembershipRequest_MembershipId = DeleteGroupMembershipRequest.AddMember("MembershipId", _ResourceId)
-
-	DeleteUserRequest_IdentityStoreId = DeleteUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DeleteUserRequest_UserId = DeleteUserRequest.AddMember("UserId", _ResourceId)
-
-	DeleteUserRequest_Revision = DeleteUserRequest.AddMember("Revision", _ResourceRevision)
-
-	DescribeGroupRequest_IdentityStoreId = DescribeGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeGroupRequest_GroupId = DescribeGroupRequest.AddMember("GroupId", _ResourceId)
-
-	DescribeGroupMembershipRequest_IdentityStoreId = DescribeGroupMembershipRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeGroupMembershipRequest_MembershipId = DescribeGroupMembershipRequest.AddMember("MembershipId", _ResourceId)
-
-	DescribeGroupMembershipResponse_IdentityStoreId = DescribeGroupMembershipResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeGroupMembershipResponse_MembershipId = DescribeGroupMembershipResponse.AddMember("MembershipId", _ResourceId)
-
-	DescribeGroupMembershipResponse_MembershipArn = DescribeGroupMembershipResponse.AddMember("MembershipArn", _ResourceArn)
-
-	DescribeGroupMembershipResponse_GroupId = DescribeGroupMembershipResponse.AddMember("GroupId", _ResourceId)
-
-	DescribeGroupMembershipResponse_MemberId = DescribeGroupMembershipResponse.AddMember("MemberId", MemberId)
-
-	DescribeGroupMembershipResponse_CreatedAt = DescribeGroupMembershipResponse.AddMember("CreatedAt", _DateType)
-
-	DescribeGroupMembershipResponse_UpdatedAt = DescribeGroupMembershipResponse.AddMember("UpdatedAt", _DateType)
-
-	DescribeGroupMembershipResponse_CreatedBy = DescribeGroupMembershipResponse.AddMember("CreatedBy", _StringType)
-
-	DescribeGroupMembershipResponse_UpdatedBy = DescribeGroupMembershipResponse.AddMember("UpdatedBy", _StringType)
-
-	DescribeGroupResponse_IdentityStoreId = DescribeGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeGroupResponse_GroupId = DescribeGroupResponse.AddMember("GroupId", _ResourceId)
-
-	DescribeGroupResponse_GroupArn = DescribeGroupResponse.AddMember("GroupArn", _ResourceArn)
-
-	DescribeGroupResponse_Revision = DescribeGroupResponse.AddMember("Revision", _ResourceRevision)
-
-	DescribeGroupResponse_DisplayName = DescribeGroupResponse.AddMember("DisplayName", _GroupDisplayName)
-
-	DescribeGroupResponse_ExternalIds = DescribeGroupResponse.AddMember("ExternalIds", _ExternalIds)
-
-	DescribeGroupResponse_Description = DescribeGroupResponse.AddMember("Description", _SensitiveStringType)
-
-	DescribeGroupResponse_CreatedAt = DescribeGroupResponse.AddMember("CreatedAt", _DateType)
-
-	DescribeGroupResponse_UpdatedAt = DescribeGroupResponse.AddMember("UpdatedAt", _DateType)
-
-	DescribeGroupResponse_CreatedBy = DescribeGroupResponse.AddMember("CreatedBy", _StringType)
-
-	DescribeGroupResponse_UpdatedBy = DescribeGroupResponse.AddMember("UpdatedBy", _StringType)
-
-	DescribeIdentityStoreRequest_IdentityStoreId = DescribeIdentityStoreRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeIdentityStoreResponse_IdentityStoreId = DescribeIdentityStoreResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeIdentityStoreResponse_IdentityStoreArn = DescribeIdentityStoreResponse.AddMember("IdentityStoreArn", _IdentityStoreArn)
-
-	DescribeIdentityStoreResponse_NetworkConfiguration = DescribeIdentityStoreResponse.AddMember("NetworkConfiguration", NetworkConfigurationDetails)
-
-	DescribeUserRequest_IdentityStoreId = DescribeUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeUserRequest_UserId = DescribeUserRequest.AddMember("UserId", _ResourceId)
-
-	DescribeUserRequest_Extensions = DescribeUserRequest.AddMember("Extensions", _ExtensionNames)
-
-	DescribeUserResponse_IdentityStoreId = DescribeUserResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	DescribeUserResponse_UserId = DescribeUserResponse.AddMember("UserId", _ResourceId)
-
-	DescribeUserResponse_UserArn = DescribeUserResponse.AddMember("UserArn", _ResourceArn)
-
-	DescribeUserResponse_Revision = DescribeUserResponse.AddMember("Revision", _ResourceRevision)
-
-	DescribeUserResponse_UserName = DescribeUserResponse.AddMember("UserName", _UserName)
-
-	DescribeUserResponse_ExternalIds = DescribeUserResponse.AddMember("ExternalIds", _ExternalIds)
-
-	DescribeUserResponse_Name = DescribeUserResponse.AddMember("Name", Name)
-
-	DescribeUserResponse_DisplayName = DescribeUserResponse.AddMember("DisplayName", _SensitiveStringType)
-
-	DescribeUserResponse_NickName = DescribeUserResponse.AddMember("NickName", _SensitiveStringType)
-
-	DescribeUserResponse_ProfileUrl = DescribeUserResponse.AddMember("ProfileUrl", _SensitiveStringType)
-
-	DescribeUserResponse_Emails = DescribeUserResponse.AddMember("Emails", _Emails)
-
-	DescribeUserResponse_Addresses = DescribeUserResponse.AddMember("Addresses", _Addresses)
-
-	DescribeUserResponse_PhoneNumbers = DescribeUserResponse.AddMember("PhoneNumbers", _PhoneNumbers)
-
-	DescribeUserResponse_UserType = DescribeUserResponse.AddMember("UserType", _SensitiveStringType)
-
-	DescribeUserResponse_Title = DescribeUserResponse.AddMember("Title", _SensitiveStringType)
-
-	DescribeUserResponse_PreferredLanguage = DescribeUserResponse.AddMember("PreferredLanguage", _SensitiveStringType)
-
-	DescribeUserResponse_Locale = DescribeUserResponse.AddMember("Locale", _SensitiveStringType)
-
-	DescribeUserResponse_Timezone = DescribeUserResponse.AddMember("Timezone", _SensitiveStringType)
-
-	DescribeUserResponse_UserStatus = DescribeUserResponse.AddMember("UserStatus", UserStatus)
-
-	DescribeUserResponse_Photos = DescribeUserResponse.AddMember("Photos", _Photos)
-
-	DescribeUserResponse_Website = DescribeUserResponse.AddMember("Website", _SensitiveStringType)
-
-	DescribeUserResponse_Birthdate = DescribeUserResponse.AddMember("Birthdate", _SensitiveStringType)
-
-	DescribeUserResponse_Roles = DescribeUserResponse.AddMember("Roles", _Roles)
-
-	DescribeUserResponse_CreatedAt = DescribeUserResponse.AddMember("CreatedAt", _DateType)
-
-	DescribeUserResponse_CreatedBy = DescribeUserResponse.AddMember("CreatedBy", _StringType)
-
-	DescribeUserResponse_UpdatedAt = DescribeUserResponse.AddMember("UpdatedAt", _DateType)
-
-	DescribeUserResponse_UpdatedBy = DescribeUserResponse.AddMember("UpdatedBy", _StringType)
-
-	DescribeUserResponse_Extensions = DescribeUserResponse.AddMember("Extensions", _Extensions)
-
-	GetGroupIdRequest_IdentityStoreId = GetGroupIdRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetGroupIdRequest_AlternateIdentifier = GetGroupIdRequest.AddMember("AlternateIdentifier", AlternateIdentifier)
-
-	GetGroupIdResponse_IdentityStoreId = GetGroupIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetGroupIdResponse_GroupId = GetGroupIdResponse.AddMember("GroupId", _ResourceId)
-
-	GetGroupIdResponse_GroupArn = GetGroupIdResponse.AddMember("GroupArn", _ResourceArn)
-
-	GetGroupMembershipIdRequest_IdentityStoreId = GetGroupMembershipIdRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetGroupMembershipIdRequest_GroupId = GetGroupMembershipIdRequest.AddMember("GroupId", _ResourceId)
-
-	GetGroupMembershipIdRequest_MemberId = GetGroupMembershipIdRequest.AddMember("MemberId", MemberId)
-
-	GetGroupMembershipIdResponse_IdentityStoreId = GetGroupMembershipIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetGroupMembershipIdResponse_MembershipId = GetGroupMembershipIdResponse.AddMember("MembershipId", _ResourceId)
-
-	GetGroupMembershipIdResponse_MembershipArn = GetGroupMembershipIdResponse.AddMember("MembershipArn", _ResourceArn)
-
-	GetUserIdRequest_IdentityStoreId = GetUserIdRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetUserIdRequest_AlternateIdentifier = GetUserIdRequest.AddMember("AlternateIdentifier", AlternateIdentifier)
-
-	GetUserIdResponse_IdentityStoreId = GetUserIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	GetUserIdResponse_UserId = GetUserIdResponse.AddMember("UserId", _ResourceId)
-
-	GetUserIdResponse_UserArn = GetUserIdResponse.AddMember("UserArn", _ResourceArn)
-
-	IsMemberInGroupsRequest_IdentityStoreId = IsMemberInGroupsRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	IsMemberInGroupsRequest_MemberId = IsMemberInGroupsRequest.AddMember("MemberId", MemberId)
-
-	IsMemberInGroupsRequest_GroupIds = IsMemberInGroupsRequest.AddMember("GroupIds", _GroupIds)
-
-	IsMemberInGroupsResponse_Results = IsMemberInGroupsResponse.AddMember("Results", _GroupMembershipExistenceResults)
-
-	ListGroupMembershipsForMemberRequest_IdentityStoreId = ListGroupMembershipsForMemberRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	ListGroupMembershipsForMemberRequest_MemberId = ListGroupMembershipsForMemberRequest.AddMember("MemberId", MemberId)
-
-	ListGroupMembershipsForMemberRequest_MaxResults = ListGroupMembershipsForMemberRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupMembershipsForMemberRequest_NextToken = ListGroupMembershipsForMemberRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupMembershipsForMemberResponse_GroupMemberships = ListGroupMembershipsForMemberResponse.AddMember("GroupMemberships", _GroupMemberships)
-
-	ListGroupMembershipsForMemberResponse_NextToken = ListGroupMembershipsForMemberResponse.AddMember("NextToken", _NextToken)
-
-	ListGroupMembershipsRequest_IdentityStoreId = ListGroupMembershipsRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	ListGroupMembershipsRequest_GroupId = ListGroupMembershipsRequest.AddMember("GroupId", _ResourceId)
-
-	ListGroupMembershipsRequest_MaxResults = ListGroupMembershipsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupMembershipsRequest_NextToken = ListGroupMembershipsRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupMembershipsResponse_GroupMemberships = ListGroupMembershipsResponse.AddMember("GroupMemberships", _GroupMemberships)
-
-	ListGroupMembershipsResponse_NextToken = ListGroupMembershipsResponse.AddMember("NextToken", _NextToken)
-
-	ListGroupsRequest_IdentityStoreId = ListGroupsRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	ListGroupsRequest_MaxResults = ListGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupsRequest_NextToken = ListGroupsRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupsRequest_Filters = ListGroupsRequest.AddMember("Filters", _Filters)
-
-	ListGroupsResponse_Groups = ListGroupsResponse.AddMember("Groups", _Groups)
-
-	ListGroupsResponse_NextToken = ListGroupsResponse.AddMember("NextToken", _NextToken)
-
-	ListIdentityStoresRequest_MaxResults = ListIdentityStoresRequest.AddMember("MaxResults", _MaxResults)
-
-	ListIdentityStoresRequest_NextToken = ListIdentityStoresRequest.AddMember("NextToken", _NextToken)
-
-	ListIdentityStoresResponse_IdentityStores = ListIdentityStoresResponse.AddMember("IdentityStores", _IdentityStores)
-
-	ListIdentityStoresResponse_NextToken = ListIdentityStoresResponse.AddMember("NextToken", _NextToken)
-
-	ListUsersRequest_IdentityStoreId = ListUsersRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	ListUsersRequest_Extensions = ListUsersRequest.AddMember("Extensions", _ExtensionNames)
-
-	ListUsersRequest_MaxResults = ListUsersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListUsersRequest_NextToken = ListUsersRequest.AddMember("NextToken", _NextToken)
-
-	ListUsersRequest_Filters = ListUsersRequest.AddMember("Filters", _Filters)
-
-	ListUsersResponse_Users = ListUsersResponse.AddMember("Users", _Users)
-
-	ListUsersResponse_NextToken = ListUsersResponse.AddMember("NextToken", _NextToken)
-
-	UpdateGroupRequest_IdentityStoreId = UpdateGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateGroupRequest_GroupId = UpdateGroupRequest.AddMember("GroupId", _ResourceId)
-
-	UpdateGroupRequest_Operations = UpdateGroupRequest.AddMember("Operations", _AttributeOperations)
-
-	UpdateGroupRequest_Revision = UpdateGroupRequest.AddMember("Revision", _ResourceRevision)
-
-	UpdateGroupResponse_IdentityStoreId = UpdateGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateGroupResponse_GroupId = UpdateGroupResponse.AddMember("GroupId", _ResourceId)
-
-	UpdateGroupResponse_GroupArn = UpdateGroupResponse.AddMember("GroupArn", _ResourceArn)
-
-	UpdateGroupResponse_Revision = UpdateGroupResponse.AddMember("Revision", _ResourceRevision)
-
-	UpdateIdentityStoreRequest_IdentityStoreId = UpdateIdentityStoreRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateIdentityStoreRequest_NetworkConfiguration = UpdateIdentityStoreRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	UpdateIdentityStoreResponse_IdentityStoreId = UpdateIdentityStoreResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateIdentityStoreResponse_IdentityStoreArn = UpdateIdentityStoreResponse.AddMember("IdentityStoreArn", _IdentityStoreArn)
-
-	UpdateUserRequest_IdentityStoreId = UpdateUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateUserRequest_UserId = UpdateUserRequest.AddMember("UserId", _ResourceId)
-
-	UpdateUserRequest_Operations = UpdateUserRequest.AddMember("Operations", _AttributeOperations)
-
-	UpdateUserRequest_Revision = UpdateUserRequest.AddMember("Revision", _ResourceRevision)
-
-	UpdateUserResponse_IdentityStoreId = UpdateUserResponse.AddMember("IdentityStoreId", _IdentityStoreId)
-
-	UpdateUserResponse_UserId = UpdateUserResponse.AddMember("UserId", _ResourceId)
-
-	UpdateUserResponse_UserArn = UpdateUserResponse.AddMember("UserArn", _ResourceArn)
-
-	UpdateUserResponse_Revision = UpdateUserResponse.AddMember("Revision", _ResourceRevision)
-
-}
+var (
+	eCreateGroup                                             smithy.SchemaExtensions
+	eCreateGroupMembership                                   smithy.SchemaExtensions
+	eCreateUser                                              smithy.SchemaExtensions
+	eDeleteGroup                                             smithy.SchemaExtensions
+	eDeleteGroupMembership                                   smithy.SchemaExtensions
+	eDeleteUser                                              smithy.SchemaExtensions
+	eDescribeGroup                                           smithy.SchemaExtensions
+	eDescribeGroupMembership                                 smithy.SchemaExtensions
+	eDescribeIdentityStore                                   smithy.SchemaExtensions
+	eDescribeUser                                            smithy.SchemaExtensions
+	eGetGroupId                                              smithy.SchemaExtensions
+	eGetGroupMembershipId                                    smithy.SchemaExtensions
+	eGetUserId                                               smithy.SchemaExtensions
+	eIsMemberInGroups                                        smithy.SchemaExtensions
+	eListGroupMemberships                                    smithy.SchemaExtensions
+	eListGroupMembershipsForMember                           smithy.SchemaExtensions
+	eListGroups                                              smithy.SchemaExtensions
+	eListIdentityStores                                      smithy.SchemaExtensions
+	eListUsers                                               smithy.SchemaExtensions
+	eUpdateGroup                                             smithy.SchemaExtensions
+	eUpdateIdentityStore                                     smithy.SchemaExtensions
+	eUpdateUser                                              smithy.SchemaExtensions
+	e_AWSIdentityStore                                       smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_Message                           smithy.SchemaExtensions
+	eAccessDeniedException_RequestId                         smithy.SchemaExtensions
+	eAccessDeniedException_Reason                            smithy.SchemaExtensions
+	eAccessDeniedExceptionReason                             smithy.SchemaExtensions
+	eAccessDeniedExceptionReason_KMS_ACCESS_DENIED           smithy.SchemaExtensions
+	eAddress                                                 smithy.SchemaExtensions
+	eAddress_StreetAddress                                   smithy.SchemaExtensions
+	eAddress_Locality                                        smithy.SchemaExtensions
+	eAddress_Region                                          smithy.SchemaExtensions
+	eAddress_PostalCode                                      smithy.SchemaExtensions
+	eAddress_Country                                         smithy.SchemaExtensions
+	eAddress_Formatted                                       smithy.SchemaExtensions
+	eAddress_Type                                            smithy.SchemaExtensions
+	eAddress_Primary                                         smithy.SchemaExtensions
+	e_Addresses                                              smithy.SchemaExtensions
+	e_Addresses_member                                       smithy.SchemaExtensions
+	eAlternateIdentifier                                     smithy.SchemaExtensions
+	eAlternateIdentifier_ExternalId                          smithy.SchemaExtensions
+	eAlternateIdentifier_UniqueAttribute                     smithy.SchemaExtensions
+	eAttributeOperation                                      smithy.SchemaExtensions
+	eAttributeOperation_AttributePath                        smithy.SchemaExtensions
+	eAttributeOperation_AttributeValue                       smithy.SchemaExtensions
+	e_AttributeOperations                                    smithy.SchemaExtensions
+	e_AttributeOperations_member                             smithy.SchemaExtensions
+	e_AttributePath                                          smithy.SchemaExtensions
+	e_AttributeValue                                         smithy.SchemaExtensions
+	e_BooleanType                                            smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_Message                               smithy.SchemaExtensions
+	eConflictException_RequestId                             smithy.SchemaExtensions
+	eConflictException_Reason                                smithy.SchemaExtensions
+	eConflictExceptionReason                                 smithy.SchemaExtensions
+	eConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION smithy.SchemaExtensions
+	eConflictExceptionReason_CONCURRENT_MODIFICATION         smithy.SchemaExtensions
+	e_DateType                                               smithy.SchemaExtensions
+	eEmail                                                   smithy.SchemaExtensions
+	eEmail_Value                                             smithy.SchemaExtensions
+	eEmail_Type                                              smithy.SchemaExtensions
+	eEmail_Primary                                           smithy.SchemaExtensions
+	e_Emails                                                 smithy.SchemaExtensions
+	e_Emails_member                                          smithy.SchemaExtensions
+	e_ExceptionMessage                                       smithy.SchemaExtensions
+	e_ExtensionName                                          smithy.SchemaExtensions
+	e_ExtensionNames                                         smithy.SchemaExtensions
+	e_ExtensionNames_member                                  smithy.SchemaExtensions
+	e_Extensions                                             smithy.SchemaExtensions
+	e_Extensions_key                                         smithy.SchemaExtensions
+	e_Extensions_value                                       smithy.SchemaExtensions
+	eExternalId                                              smithy.SchemaExtensions
+	eExternalId_Issuer                                       smithy.SchemaExtensions
+	eExternalId_Id                                           smithy.SchemaExtensions
+	e_ExternalIdIdentifier                                   smithy.SchemaExtensions
+	e_ExternalIdIssuer                                       smithy.SchemaExtensions
+	e_ExternalIds                                            smithy.SchemaExtensions
+	e_ExternalIds_member                                     smithy.SchemaExtensions
+	eFilter                                                  smithy.SchemaExtensions
+	eFilter_AttributePath                                    smithy.SchemaExtensions
+	eFilter_AttributeValue                                   smithy.SchemaExtensions
+	e_Filters                                                smithy.SchemaExtensions
+	e_Filters_member                                         smithy.SchemaExtensions
+	eGroup                                                   smithy.SchemaExtensions
+	eGroup_IdentityStoreId                                   smithy.SchemaExtensions
+	eGroup_GroupId                                           smithy.SchemaExtensions
+	eGroup_GroupArn                                          smithy.SchemaExtensions
+	eGroup_Revision                                          smithy.SchemaExtensions
+	eGroup_DisplayName                                       smithy.SchemaExtensions
+	eGroup_ExternalIds                                       smithy.SchemaExtensions
+	eGroup_Description                                       smithy.SchemaExtensions
+	eGroup_CreatedAt                                         smithy.SchemaExtensions
+	eGroup_UpdatedAt                                         smithy.SchemaExtensions
+	eGroup_CreatedBy                                         smithy.SchemaExtensions
+	eGroup_UpdatedBy                                         smithy.SchemaExtensions
+	e_GroupDisplayName                                       smithy.SchemaExtensions
+	e_GroupIds                                               smithy.SchemaExtensions
+	e_GroupIds_member                                        smithy.SchemaExtensions
+	eGroupMembership                                         smithy.SchemaExtensions
+	eGroupMembership_IdentityStoreId                         smithy.SchemaExtensions
+	eGroupMembership_MembershipId                            smithy.SchemaExtensions
+	eGroupMembership_MembershipArn                           smithy.SchemaExtensions
+	eGroupMembership_GroupId                                 smithy.SchemaExtensions
+	eGroupMembership_MemberId                                smithy.SchemaExtensions
+	eGroupMembership_CreatedAt                               smithy.SchemaExtensions
+	eGroupMembership_UpdatedAt                               smithy.SchemaExtensions
+	eGroupMembership_CreatedBy                               smithy.SchemaExtensions
+	eGroupMembership_UpdatedBy                               smithy.SchemaExtensions
+	eGroupMembershipExistenceResult                          smithy.SchemaExtensions
+	eGroupMembershipExistenceResult_GroupId                  smithy.SchemaExtensions
+	eGroupMembershipExistenceResult_MemberId                 smithy.SchemaExtensions
+	eGroupMembershipExistenceResult_MembershipExists         smithy.SchemaExtensions
+	e_GroupMembershipExistenceResults                        smithy.SchemaExtensions
+	e_GroupMembershipExistenceResults_member                 smithy.SchemaExtensions
+	e_GroupMemberships                                       smithy.SchemaExtensions
+	e_GroupMemberships_member                                smithy.SchemaExtensions
+	e_Groups                                                 smithy.SchemaExtensions
+	e_Groups_member                                          smithy.SchemaExtensions
+	eIdentityStore                                           smithy.SchemaExtensions
+	eIdentityStore_IdentityStoreId                           smithy.SchemaExtensions
+	eIdentityStore_IdentityStoreArn                          smithy.SchemaExtensions
+	e_IdentityStoreArn                                       smithy.SchemaExtensions
+	e_IdentityStoreId                                        smithy.SchemaExtensions
+	e_IdentityStores                                         smithy.SchemaExtensions
+	e_IdentityStores_member                                  smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_Message                         smithy.SchemaExtensions
+	eInternalServerException_RequestId                       smithy.SchemaExtensions
+	eInternalServerException_RetryAfterSeconds               smithy.SchemaExtensions
+	e_IpCidrList                                             smithy.SchemaExtensions
+	e_IpCidrList_member                                      smithy.SchemaExtensions
+	e_IpCidrType                                             smithy.SchemaExtensions
+	e_MaxResults                                             smithy.SchemaExtensions
+	eMemberId                                                smithy.SchemaExtensions
+	eMemberId_UserId                                         smithy.SchemaExtensions
+	eName                                                    smithy.SchemaExtensions
+	eName_Formatted                                          smithy.SchemaExtensions
+	eName_FamilyName                                         smithy.SchemaExtensions
+	eName_GivenName                                          smithy.SchemaExtensions
+	eName_MiddleName                                         smithy.SchemaExtensions
+	eName_HonorificPrefix                                    smithy.SchemaExtensions
+	eName_HonorificSuffix                                    smithy.SchemaExtensions
+	eNetworkConfiguration                                    smithy.SchemaExtensions
+	eNetworkConfiguration_VpceAccessRequired                 smithy.SchemaExtensions
+	eNetworkConfiguration_ApiRestrictSourceVpcs              smithy.SchemaExtensions
+	eNetworkConfiguration_ApiAllowSourceIps                  smithy.SchemaExtensions
+	eNetworkConfiguration_ScimAllowSourceIps                 smithy.SchemaExtensions
+	eNetworkConfigurationDetails                             smithy.SchemaExtensions
+	eNetworkConfigurationDetails_VpceAccessRequired          smithy.SchemaExtensions
+	eNetworkConfigurationDetails_ApiRestrictSourceVpcs       smithy.SchemaExtensions
+	eNetworkConfigurationDetails_ApiAllowSourceIps           smithy.SchemaExtensions
+	eNetworkConfigurationDetails_ScimAllowSourceIps          smithy.SchemaExtensions
+	e_NextToken                                              smithy.SchemaExtensions
+	ePhoneNumber                                             smithy.SchemaExtensions
+	ePhoneNumber_Value                                       smithy.SchemaExtensions
+	ePhoneNumber_Type                                        smithy.SchemaExtensions
+	ePhoneNumber_Primary                                     smithy.SchemaExtensions
+	e_PhoneNumbers                                           smithy.SchemaExtensions
+	e_PhoneNumbers_member                                    smithy.SchemaExtensions
+	ePhoto                                                   smithy.SchemaExtensions
+	ePhoto_Value                                             smithy.SchemaExtensions
+	ePhoto_Type                                              smithy.SchemaExtensions
+	ePhoto_Display                                           smithy.SchemaExtensions
+	ePhoto_Primary                                           smithy.SchemaExtensions
+	e_Photos                                                 smithy.SchemaExtensions
+	e_Photos_member                                          smithy.SchemaExtensions
+	e_RequestId                                              smithy.SchemaExtensions
+	e_ResourceArn                                            smithy.SchemaExtensions
+	e_ResourceId                                             smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                  smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                    smithy.SchemaExtensions
+	eResourceNotFoundException_Reason                        smithy.SchemaExtensions
+	eResourceNotFoundException_Message                       smithy.SchemaExtensions
+	eResourceNotFoundException_RequestId                     smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason                         smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND       smithy.SchemaExtensions
+	e_ResourceRevision                                       smithy.SchemaExtensions
+	eResourceType                                            smithy.SchemaExtensions
+	eResourceType_GROUP                                      smithy.SchemaExtensions
+	eResourceType_USER                                       smithy.SchemaExtensions
+	eResourceType_IDENTITY_STORE                             smithy.SchemaExtensions
+	eResourceType_GROUP_MEMBERSHIP                           smithy.SchemaExtensions
+	eResourceType_RESOURCE_POLICY                            smithy.SchemaExtensions
+	e_RetryAfterSeconds                                      smithy.SchemaExtensions
+	eRole                                                    smithy.SchemaExtensions
+	eRole_Value                                              smithy.SchemaExtensions
+	eRole_Type                                               smithy.SchemaExtensions
+	eRole_Primary                                            smithy.SchemaExtensions
+	e_Roles                                                  smithy.SchemaExtensions
+	e_Roles_member                                           smithy.SchemaExtensions
+	e_SensitiveStringType                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_RequestId                 smithy.SchemaExtensions
+	e_StringType                                             smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_Message                             smithy.SchemaExtensions
+	eThrottlingException_RequestId                           smithy.SchemaExtensions
+	eThrottlingException_RetryAfterSeconds                   smithy.SchemaExtensions
+	eThrottlingException_Reason                              smithy.SchemaExtensions
+	eThrottlingExceptionReason                               smithy.SchemaExtensions
+	eThrottlingExceptionReason_KMS_THROTTLING                smithy.SchemaExtensions
+	eUniqueAttribute                                         smithy.SchemaExtensions
+	eUniqueAttribute_AttributePath                           smithy.SchemaExtensions
+	eUniqueAttribute_AttributeValue                          smithy.SchemaExtensions
+	eUser                                                    smithy.SchemaExtensions
+	eUser_IdentityStoreId                                    smithy.SchemaExtensions
+	eUser_UserId                                             smithy.SchemaExtensions
+	eUser_UserArn                                            smithy.SchemaExtensions
+	eUser_Revision                                           smithy.SchemaExtensions
+	eUser_UserName                                           smithy.SchemaExtensions
+	eUser_ExternalIds                                        smithy.SchemaExtensions
+	eUser_Name                                               smithy.SchemaExtensions
+	eUser_DisplayName                                        smithy.SchemaExtensions
+	eUser_NickName                                           smithy.SchemaExtensions
+	eUser_ProfileUrl                                         smithy.SchemaExtensions
+	eUser_Emails                                             smithy.SchemaExtensions
+	eUser_Addresses                                          smithy.SchemaExtensions
+	eUser_PhoneNumbers                                       smithy.SchemaExtensions
+	eUser_UserType                                           smithy.SchemaExtensions
+	eUser_Title                                              smithy.SchemaExtensions
+	eUser_PreferredLanguage                                  smithy.SchemaExtensions
+	eUser_Locale                                             smithy.SchemaExtensions
+	eUser_Timezone                                           smithy.SchemaExtensions
+	eUser_UserStatus                                         smithy.SchemaExtensions
+	eUser_Photos                                             smithy.SchemaExtensions
+	eUser_Website                                            smithy.SchemaExtensions
+	eUser_Birthdate                                          smithy.SchemaExtensions
+	eUser_Roles                                              smithy.SchemaExtensions
+	eUser_CreatedAt                                          smithy.SchemaExtensions
+	eUser_CreatedBy                                          smithy.SchemaExtensions
+	eUser_UpdatedAt                                          smithy.SchemaExtensions
+	eUser_UpdatedBy                                          smithy.SchemaExtensions
+	eUser_Extensions                                         smithy.SchemaExtensions
+	e_UserName                                               smithy.SchemaExtensions
+	e_Users                                                  smithy.SchemaExtensions
+	e_Users_member                                           smithy.SchemaExtensions
+	eUserStatus                                              smithy.SchemaExtensions
+	eUserStatus_ENABLED                                      smithy.SchemaExtensions
+	eUserStatus_DISABLED                                     smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_Message                             smithy.SchemaExtensions
+	eValidationException_RequestId                           smithy.SchemaExtensions
+	eValidationException_Reason                              smithy.SchemaExtensions
+	eValidationExceptionReason                               smithy.SchemaExtensions
+	eValidationExceptionReason_KMS_INVALID_ARN               smithy.SchemaExtensions
+	eValidationExceptionReason_KMS_INVALID_KEY_USAGE         smithy.SchemaExtensions
+	eValidationExceptionReason_KMS_INVALID_STATE             smithy.SchemaExtensions
+	eValidationExceptionReason_KMS_DISABLED                  smithy.SchemaExtensions
+	e_VpcIdList                                              smithy.SchemaExtensions
+	e_VpcIdList_member                                       smithy.SchemaExtensions
+	e_VpcIdType                                              smithy.SchemaExtensions
+	eCreateGroupRequest                                      smithy.SchemaExtensions
+	eCreateGroupRequest_IdentityStoreId                      smithy.SchemaExtensions
+	eCreateGroupRequest_DisplayName                          smithy.SchemaExtensions
+	eCreateGroupRequest_Description                          smithy.SchemaExtensions
+	eCreateGroupMembershipRequest                            smithy.SchemaExtensions
+	eCreateGroupMembershipRequest_IdentityStoreId            smithy.SchemaExtensions
+	eCreateGroupMembershipRequest_GroupId                    smithy.SchemaExtensions
+	eCreateGroupMembershipRequest_MemberId                   smithy.SchemaExtensions
+	eCreateGroupMembershipResponse                           smithy.SchemaExtensions
+	eCreateGroupMembershipResponse_IdentityStoreId           smithy.SchemaExtensions
+	eCreateGroupMembershipResponse_MembershipId              smithy.SchemaExtensions
+	eCreateGroupMembershipResponse_MembershipArn             smithy.SchemaExtensions
+	eCreateGroupResponse                                     smithy.SchemaExtensions
+	eCreateGroupResponse_IdentityStoreId                     smithy.SchemaExtensions
+	eCreateGroupResponse_GroupId                             smithy.SchemaExtensions
+	eCreateGroupResponse_GroupArn                            smithy.SchemaExtensions
+	eCreateGroupResponse_Revision                            smithy.SchemaExtensions
+	eCreateUserRequest                                       smithy.SchemaExtensions
+	eCreateUserRequest_IdentityStoreId                       smithy.SchemaExtensions
+	eCreateUserRequest_UserName                              smithy.SchemaExtensions
+	eCreateUserRequest_Name                                  smithy.SchemaExtensions
+	eCreateUserRequest_DisplayName                           smithy.SchemaExtensions
+	eCreateUserRequest_NickName                              smithy.SchemaExtensions
+	eCreateUserRequest_ProfileUrl                            smithy.SchemaExtensions
+	eCreateUserRequest_Emails                                smithy.SchemaExtensions
+	eCreateUserRequest_Addresses                             smithy.SchemaExtensions
+	eCreateUserRequest_PhoneNumbers                          smithy.SchemaExtensions
+	eCreateUserRequest_UserType                              smithy.SchemaExtensions
+	eCreateUserRequest_Title                                 smithy.SchemaExtensions
+	eCreateUserRequest_PreferredLanguage                     smithy.SchemaExtensions
+	eCreateUserRequest_Locale                                smithy.SchemaExtensions
+	eCreateUserRequest_Timezone                              smithy.SchemaExtensions
+	eCreateUserRequest_Photos                                smithy.SchemaExtensions
+	eCreateUserRequest_Website                               smithy.SchemaExtensions
+	eCreateUserRequest_Birthdate                             smithy.SchemaExtensions
+	eCreateUserRequest_Roles                                 smithy.SchemaExtensions
+	eCreateUserRequest_Extensions                            smithy.SchemaExtensions
+	eCreateUserResponse                                      smithy.SchemaExtensions
+	eCreateUserResponse_IdentityStoreId                      smithy.SchemaExtensions
+	eCreateUserResponse_UserId                               smithy.SchemaExtensions
+	eCreateUserResponse_UserArn                              smithy.SchemaExtensions
+	eCreateUserResponse_Revision                             smithy.SchemaExtensions
+	eDeleteGroupRequest                                      smithy.SchemaExtensions
+	eDeleteGroupRequest_IdentityStoreId                      smithy.SchemaExtensions
+	eDeleteGroupRequest_GroupId                              smithy.SchemaExtensions
+	eDeleteGroupRequest_Revision                             smithy.SchemaExtensions
+	eDeleteGroupMembershipRequest                            smithy.SchemaExtensions
+	eDeleteGroupMembershipRequest_IdentityStoreId            smithy.SchemaExtensions
+	eDeleteGroupMembershipRequest_MembershipId               smithy.SchemaExtensions
+	eDeleteGroupMembershipResponse                           smithy.SchemaExtensions
+	eDeleteGroupResponse                                     smithy.SchemaExtensions
+	eDeleteUserRequest                                       smithy.SchemaExtensions
+	eDeleteUserRequest_IdentityStoreId                       smithy.SchemaExtensions
+	eDeleteUserRequest_UserId                                smithy.SchemaExtensions
+	eDeleteUserRequest_Revision                              smithy.SchemaExtensions
+	eDeleteUserResponse                                      smithy.SchemaExtensions
+	eDescribeGroupRequest                                    smithy.SchemaExtensions
+	eDescribeGroupRequest_IdentityStoreId                    smithy.SchemaExtensions
+	eDescribeGroupRequest_GroupId                            smithy.SchemaExtensions
+	eDescribeGroupMembershipRequest                          smithy.SchemaExtensions
+	eDescribeGroupMembershipRequest_IdentityStoreId          smithy.SchemaExtensions
+	eDescribeGroupMembershipRequest_MembershipId             smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse                         smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_IdentityStoreId         smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_MembershipId            smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_MembershipArn           smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_GroupId                 smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_MemberId                smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_CreatedAt               smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_UpdatedAt               smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_CreatedBy               smithy.SchemaExtensions
+	eDescribeGroupMembershipResponse_UpdatedBy               smithy.SchemaExtensions
+	eDescribeGroupResponse                                   smithy.SchemaExtensions
+	eDescribeGroupResponse_IdentityStoreId                   smithy.SchemaExtensions
+	eDescribeGroupResponse_GroupId                           smithy.SchemaExtensions
+	eDescribeGroupResponse_GroupArn                          smithy.SchemaExtensions
+	eDescribeGroupResponse_Revision                          smithy.SchemaExtensions
+	eDescribeGroupResponse_DisplayName                       smithy.SchemaExtensions
+	eDescribeGroupResponse_ExternalIds                       smithy.SchemaExtensions
+	eDescribeGroupResponse_Description                       smithy.SchemaExtensions
+	eDescribeGroupResponse_CreatedAt                         smithy.SchemaExtensions
+	eDescribeGroupResponse_UpdatedAt                         smithy.SchemaExtensions
+	eDescribeGroupResponse_CreatedBy                         smithy.SchemaExtensions
+	eDescribeGroupResponse_UpdatedBy                         smithy.SchemaExtensions
+	eDescribeIdentityStoreRequest                            smithy.SchemaExtensions
+	eDescribeIdentityStoreRequest_IdentityStoreId            smithy.SchemaExtensions
+	eDescribeIdentityStoreResponse                           smithy.SchemaExtensions
+	eDescribeIdentityStoreResponse_IdentityStoreId           smithy.SchemaExtensions
+	eDescribeIdentityStoreResponse_IdentityStoreArn          smithy.SchemaExtensions
+	eDescribeIdentityStoreResponse_NetworkConfiguration      smithy.SchemaExtensions
+	eDescribeUserRequest                                     smithy.SchemaExtensions
+	eDescribeUserRequest_IdentityStoreId                     smithy.SchemaExtensions
+	eDescribeUserRequest_UserId                              smithy.SchemaExtensions
+	eDescribeUserRequest_Extensions                          smithy.SchemaExtensions
+	eDescribeUserResponse                                    smithy.SchemaExtensions
+	eDescribeUserResponse_IdentityStoreId                    smithy.SchemaExtensions
+	eDescribeUserResponse_UserId                             smithy.SchemaExtensions
+	eDescribeUserResponse_UserArn                            smithy.SchemaExtensions
+	eDescribeUserResponse_Revision                           smithy.SchemaExtensions
+	eDescribeUserResponse_UserName                           smithy.SchemaExtensions
+	eDescribeUserResponse_ExternalIds                        smithy.SchemaExtensions
+	eDescribeUserResponse_Name                               smithy.SchemaExtensions
+	eDescribeUserResponse_DisplayName                        smithy.SchemaExtensions
+	eDescribeUserResponse_NickName                           smithy.SchemaExtensions
+	eDescribeUserResponse_ProfileUrl                         smithy.SchemaExtensions
+	eDescribeUserResponse_Emails                             smithy.SchemaExtensions
+	eDescribeUserResponse_Addresses                          smithy.SchemaExtensions
+	eDescribeUserResponse_PhoneNumbers                       smithy.SchemaExtensions
+	eDescribeUserResponse_UserType                           smithy.SchemaExtensions
+	eDescribeUserResponse_Title                              smithy.SchemaExtensions
+	eDescribeUserResponse_PreferredLanguage                  smithy.SchemaExtensions
+	eDescribeUserResponse_Locale                             smithy.SchemaExtensions
+	eDescribeUserResponse_Timezone                           smithy.SchemaExtensions
+	eDescribeUserResponse_UserStatus                         smithy.SchemaExtensions
+	eDescribeUserResponse_Photos                             smithy.SchemaExtensions
+	eDescribeUserResponse_Website                            smithy.SchemaExtensions
+	eDescribeUserResponse_Birthdate                          smithy.SchemaExtensions
+	eDescribeUserResponse_Roles                              smithy.SchemaExtensions
+	eDescribeUserResponse_CreatedAt                          smithy.SchemaExtensions
+	eDescribeUserResponse_CreatedBy                          smithy.SchemaExtensions
+	eDescribeUserResponse_UpdatedAt                          smithy.SchemaExtensions
+	eDescribeUserResponse_UpdatedBy                          smithy.SchemaExtensions
+	eDescribeUserResponse_Extensions                         smithy.SchemaExtensions
+	eGetGroupIdRequest                                       smithy.SchemaExtensions
+	eGetGroupIdRequest_IdentityStoreId                       smithy.SchemaExtensions
+	eGetGroupIdRequest_AlternateIdentifier                   smithy.SchemaExtensions
+	eGetGroupIdResponse                                      smithy.SchemaExtensions
+	eGetGroupIdResponse_IdentityStoreId                      smithy.SchemaExtensions
+	eGetGroupIdResponse_GroupId                              smithy.SchemaExtensions
+	eGetGroupIdResponse_GroupArn                             smithy.SchemaExtensions
+	eGetGroupMembershipIdRequest                             smithy.SchemaExtensions
+	eGetGroupMembershipIdRequest_IdentityStoreId             smithy.SchemaExtensions
+	eGetGroupMembershipIdRequest_GroupId                     smithy.SchemaExtensions
+	eGetGroupMembershipIdRequest_MemberId                    smithy.SchemaExtensions
+	eGetGroupMembershipIdResponse                            smithy.SchemaExtensions
+	eGetGroupMembershipIdResponse_IdentityStoreId            smithy.SchemaExtensions
+	eGetGroupMembershipIdResponse_MembershipId               smithy.SchemaExtensions
+	eGetGroupMembershipIdResponse_MembershipArn              smithy.SchemaExtensions
+	eGetUserIdRequest                                        smithy.SchemaExtensions
+	eGetUserIdRequest_IdentityStoreId                        smithy.SchemaExtensions
+	eGetUserIdRequest_AlternateIdentifier                    smithy.SchemaExtensions
+	eGetUserIdResponse                                       smithy.SchemaExtensions
+	eGetUserIdResponse_IdentityStoreId                       smithy.SchemaExtensions
+	eGetUserIdResponse_UserId                                smithy.SchemaExtensions
+	eGetUserIdResponse_UserArn                               smithy.SchemaExtensions
+	eIsMemberInGroupsRequest                                 smithy.SchemaExtensions
+	eIsMemberInGroupsRequest_IdentityStoreId                 smithy.SchemaExtensions
+	eIsMemberInGroupsRequest_MemberId                        smithy.SchemaExtensions
+	eIsMemberInGroupsRequest_GroupIds                        smithy.SchemaExtensions
+	eIsMemberInGroupsResponse                                smithy.SchemaExtensions
+	eIsMemberInGroupsResponse_Results                        smithy.SchemaExtensions
+	eListGroupMembershipsForMemberRequest                    smithy.SchemaExtensions
+	eListGroupMembershipsForMemberRequest_IdentityStoreId    smithy.SchemaExtensions
+	eListGroupMembershipsForMemberRequest_MemberId           smithy.SchemaExtensions
+	eListGroupMembershipsForMemberRequest_MaxResults         smithy.SchemaExtensions
+	eListGroupMembershipsForMemberRequest_NextToken          smithy.SchemaExtensions
+	eListGroupMembershipsForMemberResponse                   smithy.SchemaExtensions
+	eListGroupMembershipsForMemberResponse_GroupMemberships  smithy.SchemaExtensions
+	eListGroupMembershipsForMemberResponse_NextToken         smithy.SchemaExtensions
+	eListGroupMembershipsRequest                             smithy.SchemaExtensions
+	eListGroupMembershipsRequest_IdentityStoreId             smithy.SchemaExtensions
+	eListGroupMembershipsRequest_GroupId                     smithy.SchemaExtensions
+	eListGroupMembershipsRequest_MaxResults                  smithy.SchemaExtensions
+	eListGroupMembershipsRequest_NextToken                   smithy.SchemaExtensions
+	eListGroupMembershipsResponse                            smithy.SchemaExtensions
+	eListGroupMembershipsResponse_GroupMemberships           smithy.SchemaExtensions
+	eListGroupMembershipsResponse_NextToken                  smithy.SchemaExtensions
+	eListGroupsRequest                                       smithy.SchemaExtensions
+	eListGroupsRequest_IdentityStoreId                       smithy.SchemaExtensions
+	eListGroupsRequest_MaxResults                            smithy.SchemaExtensions
+	eListGroupsRequest_NextToken                             smithy.SchemaExtensions
+	eListGroupsRequest_Filters                               smithy.SchemaExtensions
+	eListGroupsResponse                                      smithy.SchemaExtensions
+	eListGroupsResponse_Groups                               smithy.SchemaExtensions
+	eListGroupsResponse_NextToken                            smithy.SchemaExtensions
+	eListIdentityStoresRequest                               smithy.SchemaExtensions
+	eListIdentityStoresRequest_MaxResults                    smithy.SchemaExtensions
+	eListIdentityStoresRequest_NextToken                     smithy.SchemaExtensions
+	eListIdentityStoresResponse                              smithy.SchemaExtensions
+	eListIdentityStoresResponse_IdentityStores               smithy.SchemaExtensions
+	eListIdentityStoresResponse_NextToken                    smithy.SchemaExtensions
+	eListUsersRequest                                        smithy.SchemaExtensions
+	eListUsersRequest_IdentityStoreId                        smithy.SchemaExtensions
+	eListUsersRequest_Extensions                             smithy.SchemaExtensions
+	eListUsersRequest_MaxResults                             smithy.SchemaExtensions
+	eListUsersRequest_NextToken                              smithy.SchemaExtensions
+	eListUsersRequest_Filters                                smithy.SchemaExtensions
+	eListUsersResponse                                       smithy.SchemaExtensions
+	eListUsersResponse_Users                                 smithy.SchemaExtensions
+	eListUsersResponse_NextToken                             smithy.SchemaExtensions
+	eUpdateGroupRequest                                      smithy.SchemaExtensions
+	eUpdateGroupRequest_IdentityStoreId                      smithy.SchemaExtensions
+	eUpdateGroupRequest_GroupId                              smithy.SchemaExtensions
+	eUpdateGroupRequest_Operations                           smithy.SchemaExtensions
+	eUpdateGroupRequest_Revision                             smithy.SchemaExtensions
+	eUpdateGroupResponse                                     smithy.SchemaExtensions
+	eUpdateGroupResponse_IdentityStoreId                     smithy.SchemaExtensions
+	eUpdateGroupResponse_GroupId                             smithy.SchemaExtensions
+	eUpdateGroupResponse_GroupArn                            smithy.SchemaExtensions
+	eUpdateGroupResponse_Revision                            smithy.SchemaExtensions
+	eUpdateIdentityStoreRequest                              smithy.SchemaExtensions
+	eUpdateIdentityStoreRequest_IdentityStoreId              smithy.SchemaExtensions
+	eUpdateIdentityStoreRequest_NetworkConfiguration         smithy.SchemaExtensions
+	eUpdateIdentityStoreResponse                             smithy.SchemaExtensions
+	eUpdateIdentityStoreResponse_IdentityStoreId             smithy.SchemaExtensions
+	eUpdateIdentityStoreResponse_IdentityStoreArn            smithy.SchemaExtensions
+	eUpdateUserRequest                                       smithy.SchemaExtensions
+	eUpdateUserRequest_IdentityStoreId                       smithy.SchemaExtensions
+	eUpdateUserRequest_UserId                                smithy.SchemaExtensions
+	eUpdateUserRequest_Operations                            smithy.SchemaExtensions
+	eUpdateUserRequest_Revision                              smithy.SchemaExtensions
+	eUpdateUserResponse                                      smithy.SchemaExtensions
+	eUpdateUserResponse_IdentityStoreId                      smithy.SchemaExtensions
+	eUpdateUserResponse_UserId                               smithy.SchemaExtensions
+	eUpdateUserResponse_UserArn                              smithy.SchemaExtensions
+	eUpdateUserResponse_Revision                             smithy.SchemaExtensions
+)
+
+var (
+	iCreateGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroup"}
+	iCreateGroupMembership                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroupMembership"}
+	iCreateUser                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateUser"}
+	iDeleteGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroup"}
+	iDeleteGroupMembership                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroupMembership"}
+	iDeleteUser                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteUser"}
+	iDescribeGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroup"}
+	iDescribeGroupMembership               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroupMembership"}
+	iDescribeIdentityStore                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeIdentityStore"}
+	iDescribeUser                          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeUser"}
+	iGetGroupId                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupId"}
+	iGetGroupMembershipId                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupMembershipId"}
+	iGetUserId                             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetUserId"}
+	iIsMemberInGroups                      = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IsMemberInGroups"}
+	iListGroupMemberships                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMemberships"}
+	iListGroupMembershipsForMember         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMembershipsForMember"}
+	iListGroups                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroups"}
+	iListIdentityStores                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListIdentityStores"}
+	iListUsers                             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListUsers"}
+	iUpdateGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateGroup"}
+	iUpdateIdentityStore                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateIdentityStore"}
+	iUpdateUser                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateUser"}
+	i_AWSIdentityStore                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AWSIdentityStore"}
+	iAccessDeniedException                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AccessDeniedException"}
+	iAccessDeniedExceptionReason           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AccessDeniedExceptionReason"}
+	iAddress                               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Address"}
+	i_Addresses                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Addresses"}
+	iAlternateIdentifier                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AlternateIdentifier"}
+	iAttributeOperation                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AttributeOperation"}
+	i_AttributeOperations                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AttributeOperations"}
+	i_AttributePath                        = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AttributePath"}
+	i_AttributeValue                       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "AttributeValue"}
+	i_BooleanType                          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "BooleanType"}
+	iConflictException                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ConflictException"}
+	iConflictExceptionReason               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ConflictExceptionReason"}
+	i_DateType                             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DateType"}
+	iEmail                                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Email"}
+	i_Emails                               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Emails"}
+	i_ExceptionMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExceptionMessage"}
+	i_ExtensionName                        = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExtensionName"}
+	i_ExtensionNames                       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExtensionNames"}
+	i_Extensions                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Extensions"}
+	iExternalId                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExternalId"}
+	i_ExternalIdIdentifier                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExternalIdIdentifier"}
+	i_ExternalIdIssuer                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExternalIdIssuer"}
+	i_ExternalIds                          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ExternalIds"}
+	iFilter                                = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Filter"}
+	i_Filters                              = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Filters"}
+	iGroup                                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Group"}
+	i_GroupDisplayName                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupDisplayName"}
+	i_GroupIds                             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupIds"}
+	iGroupMembership                       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupMembership"}
+	iGroupMembershipExistenceResult        = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupMembershipExistenceResult"}
+	i_GroupMembershipExistenceResults      = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupMembershipExistenceResults"}
+	i_GroupMemberships                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GroupMemberships"}
+	i_Groups                               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Groups"}
+	iIdentityStore                         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IdentityStore"}
+	i_IdentityStoreArn                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IdentityStoreArn"}
+	i_IdentityStoreId                      = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IdentityStoreId"}
+	i_IdentityStores                       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IdentityStores"}
+	iInternalServerException               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "InternalServerException"}
+	i_IpCidrList                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IpCidrList"}
+	i_IpCidrType                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IpCidrType"}
+	i_MaxResults                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "MaxResults"}
+	iMemberId                              = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "MemberId"}
+	iName                                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Name"}
+	iNetworkConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "NetworkConfiguration"}
+	iNetworkConfigurationDetails           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "NetworkConfigurationDetails"}
+	i_NextToken                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "NextToken"}
+	iPhoneNumber                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "PhoneNumber"}
+	i_PhoneNumbers                         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "PhoneNumbers"}
+	iPhoto                                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Photo"}
+	i_Photos                               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Photos"}
+	i_RequestId                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "RequestId"}
+	i_ResourceArn                          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceArn"}
+	i_ResourceId                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceId"}
+	iResourceNotFoundException             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceNotFoundException"}
+	iResourceNotFoundExceptionReason       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceNotFoundExceptionReason"}
+	i_ResourceRevision                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceRevision"}
+	iResourceType                          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ResourceType"}
+	i_RetryAfterSeconds                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "RetryAfterSeconds"}
+	iRole                                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Role"}
+	i_Roles                                = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Roles"}
+	i_SensitiveStringType                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "SensitiveStringType"}
+	iServiceQuotaExceededException         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ServiceQuotaExceededException"}
+	i_StringType                           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "StringType"}
+	iThrottlingException                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ThrottlingException"}
+	iThrottlingExceptionReason             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ThrottlingExceptionReason"}
+	iUniqueAttribute                       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UniqueAttribute"}
+	iUser                                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "User"}
+	i_UserName                             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UserName"}
+	i_Users                                = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "Users"}
+	iUserStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UserStatus"}
+	iValidationException                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ValidationException"}
+	iValidationExceptionReason             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ValidationExceptionReason"}
+	i_VpcIdList                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "VpcIdList"}
+	i_VpcIdType                            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "VpcIdType"}
+	iCreateGroupRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroupRequest"}
+	iCreateGroupMembershipRequest          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroupMembershipRequest"}
+	iCreateGroupMembershipResponse         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroupMembershipResponse"}
+	iCreateGroupResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateGroupResponse"}
+	iCreateUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateUserRequest"}
+	iCreateUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "CreateUserResponse"}
+	iDeleteGroupRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroupRequest"}
+	iDeleteGroupMembershipRequest          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroupMembershipRequest"}
+	iDeleteGroupMembershipResponse         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroupMembershipResponse"}
+	iDeleteGroupResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteGroupResponse"}
+	iDeleteUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteUserRequest"}
+	iDeleteUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DeleteUserResponse"}
+	iDescribeGroupRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroupRequest"}
+	iDescribeGroupMembershipRequest        = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroupMembershipRequest"}
+	iDescribeGroupMembershipResponse       = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroupMembershipResponse"}
+	iDescribeGroupResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeGroupResponse"}
+	iDescribeIdentityStoreRequest          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeIdentityStoreRequest"}
+	iDescribeIdentityStoreResponse         = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeIdentityStoreResponse"}
+	iDescribeUserRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeUserRequest"}
+	iDescribeUserResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "DescribeUserResponse"}
+	iGetGroupIdRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupIdRequest"}
+	iGetGroupIdResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupIdResponse"}
+	iGetGroupMembershipIdRequest           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupMembershipIdRequest"}
+	iGetGroupMembershipIdResponse          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetGroupMembershipIdResponse"}
+	iGetUserIdRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetUserIdRequest"}
+	iGetUserIdResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "GetUserIdResponse"}
+	iIsMemberInGroupsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IsMemberInGroupsRequest"}
+	iIsMemberInGroupsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "IsMemberInGroupsResponse"}
+	iListGroupMembershipsForMemberRequest  = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMembershipsForMemberRequest"}
+	iListGroupMembershipsForMemberResponse = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMembershipsForMemberResponse"}
+	iListGroupMembershipsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMembershipsRequest"}
+	iListGroupMembershipsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupMembershipsResponse"}
+	iListGroupsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupsRequest"}
+	iListGroupsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListGroupsResponse"}
+	iListIdentityStoresRequest             = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListIdentityStoresRequest"}
+	iListIdentityStoresResponse            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListIdentityStoresResponse"}
+	iListUsersRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListUsersRequest"}
+	iListUsersResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "ListUsersResponse"}
+	iUpdateGroupRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateGroupRequest"}
+	iUpdateGroupResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateGroupResponse"}
+	iUpdateIdentityStoreRequest            = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateIdentityStoreRequest"}
+	iUpdateIdentityStoreResponse           = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateIdentityStoreResponse"}
+	iUpdateUserRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.identitystore", Name: "UpdateUserResponse"}
+	pUnit                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_RequestId, &sAccessDeniedException_Reason}}
+var mAccessDeniedExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedExceptionReason_KMS_ACCESS_DENIED}}
+var mAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sAddress_StreetAddress, &sAddress_Locality, &sAddress_Region, &sAddress_PostalCode, &sAddress_Country, &sAddress_Formatted, &sAddress_Type, &sAddress_Primary}}
+var m_Addresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_Addresses_member}}
+var mAlternateIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sAlternateIdentifier_ExternalId, &sAlternateIdentifier_UniqueAttribute}}
+var mAttributeOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeOperation_AttributePath, &sAttributeOperation_AttributeValue}}
+var m_AttributeOperations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeOperations_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_RequestId, &sConflictException_Reason}}
+var mConflictExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION, &sConflictExceptionReason_CONCURRENT_MODIFICATION}}
+var mEmail = smithy.SchemaMembers{List: []*smithy.Schema{&sEmail_Value, &sEmail_Type, &sEmail_Primary}}
+var m_Emails = smithy.SchemaMembers{List: []*smithy.Schema{&s_Emails_member}}
+var m_ExtensionNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtensionNames_member}}
+var m_Extensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Extensions_key, &s_Extensions_value}}
+var mExternalId = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalId_Issuer, &sExternalId_Id}}
+var m_ExternalIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalIds_member}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_AttributePath, &sFilter_AttributeValue}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var mGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sGroup_IdentityStoreId, &sGroup_GroupId, &sGroup_GroupArn, &sGroup_Revision, &sGroup_DisplayName, &sGroup_ExternalIds, &sGroup_Description, &sGroup_CreatedAt, &sGroup_UpdatedAt, &sGroup_CreatedBy, &sGroup_UpdatedBy}, Hash: &hGroup}
+var m_GroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupIds_member}}
+var mGroupMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupMembership_IdentityStoreId, &sGroupMembership_MembershipId, &sGroupMembership_MembershipArn, &sGroupMembership_GroupId, &sGroupMembership_MemberId, &sGroupMembership_CreatedAt, &sGroupMembership_UpdatedAt, &sGroupMembership_CreatedBy, &sGroupMembership_UpdatedBy}, Hash: &hGroupMembership}
+var mGroupMembershipExistenceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupMembershipExistenceResult_GroupId, &sGroupMembershipExistenceResult_MemberId, &sGroupMembershipExistenceResult_MembershipExists}}
+var m_GroupMembershipExistenceResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupMembershipExistenceResults_member}}
+var m_GroupMemberships = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupMemberships_member}}
+var m_Groups = smithy.SchemaMembers{List: []*smithy.Schema{&s_Groups_member}}
+var mIdentityStore = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityStore_IdentityStoreId, &sIdentityStore_IdentityStoreArn}}
+var m_IdentityStores = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityStores_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message, &sInternalServerException_RequestId, &sInternalServerException_RetryAfterSeconds}}
+var m_IpCidrList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpCidrList_member}}
+var mMemberId = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberId_UserId}}
+var mName = smithy.SchemaMembers{List: []*smithy.Schema{&sName_Formatted, &sName_FamilyName, &sName_GivenName, &sName_MiddleName, &sName_HonorificPrefix, &sName_HonorificSuffix}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_VpceAccessRequired, &sNetworkConfiguration_ApiRestrictSourceVpcs, &sNetworkConfiguration_ApiAllowSourceIps, &sNetworkConfiguration_ScimAllowSourceIps}}
+var mNetworkConfigurationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfigurationDetails_VpceAccessRequired, &sNetworkConfigurationDetails_ApiRestrictSourceVpcs, &sNetworkConfigurationDetails_ApiAllowSourceIps, &sNetworkConfigurationDetails_ScimAllowSourceIps}}
+var mPhoneNumber = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumber_Value, &sPhoneNumber_Type, &sPhoneNumber_Primary}}
+var m_PhoneNumbers = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumbers_member}}
+var mPhoto = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoto_Value, &sPhoto_Type, &sPhoto_Display, &sPhoto_Primary}}
+var m_Photos = smithy.SchemaMembers{List: []*smithy.Schema{&s_Photos_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_ResourceType, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_Reason, &sResourceNotFoundException_Message, &sResourceNotFoundException_RequestId}}
+var mResourceNotFoundExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_GROUP, &sResourceType_USER, &sResourceType_IDENTITY_STORE, &sResourceType_GROUP_MEMBERSHIP, &sResourceType_RESOURCE_POLICY}}
+var mRole = smithy.SchemaMembers{List: []*smithy.Schema{&sRole_Value, &sRole_Type, &sRole_Primary}}
+var m_Roles = smithy.SchemaMembers{List: []*smithy.Schema{&s_Roles_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_RequestId}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_RequestId, &sThrottlingException_RetryAfterSeconds, &sThrottlingException_Reason}}
+var mThrottlingExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingExceptionReason_KMS_THROTTLING}}
+var mUniqueAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sUniqueAttribute_AttributePath, &sUniqueAttribute_AttributeValue}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_IdentityStoreId, &sUser_UserId, &sUser_UserArn, &sUser_Revision, &sUser_UserName, &sUser_ExternalIds, &sUser_Name, &sUser_DisplayName, &sUser_NickName, &sUser_ProfileUrl, &sUser_Emails, &sUser_Addresses, &sUser_PhoneNumbers, &sUser_UserType, &sUser_Title, &sUser_PreferredLanguage, &sUser_Locale, &sUser_Timezone, &sUser_UserStatus, &sUser_Photos, &sUser_Website, &sUser_Birthdate, &sUser_Roles, &sUser_CreatedAt, &sUser_CreatedBy, &sUser_UpdatedAt, &sUser_UpdatedBy, &sUser_Extensions}, Hash: &hUser}
+var m_Users = smithy.SchemaMembers{List: []*smithy.Schema{&s_Users_member}}
+var mUserStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUserStatus_ENABLED, &sUserStatus_DISABLED}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_RequestId, &sValidationException_Reason}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_KMS_INVALID_ARN, &sValidationExceptionReason_KMS_INVALID_KEY_USAGE, &sValidationExceptionReason_KMS_INVALID_STATE, &sValidationExceptionReason_KMS_DISABLED}}
+var m_VpcIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcIdList_member}}
+var mCreateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupRequest_IdentityStoreId, &sCreateGroupRequest_DisplayName, &sCreateGroupRequest_Description}}
+var mCreateGroupMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupMembershipRequest_IdentityStoreId, &sCreateGroupMembershipRequest_GroupId, &sCreateGroupMembershipRequest_MemberId}}
+var mCreateGroupMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupMembershipResponse_IdentityStoreId, &sCreateGroupMembershipResponse_MembershipId, &sCreateGroupMembershipResponse_MembershipArn}}
+var mCreateGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupResponse_IdentityStoreId, &sCreateGroupResponse_GroupId, &sCreateGroupResponse_GroupArn, &sCreateGroupResponse_Revision}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_IdentityStoreId, &sCreateUserRequest_UserName, &sCreateUserRequest_Name, &sCreateUserRequest_DisplayName, &sCreateUserRequest_NickName, &sCreateUserRequest_ProfileUrl, &sCreateUserRequest_Emails, &sCreateUserRequest_Addresses, &sCreateUserRequest_PhoneNumbers, &sCreateUserRequest_UserType, &sCreateUserRequest_Title, &sCreateUserRequest_PreferredLanguage, &sCreateUserRequest_Locale, &sCreateUserRequest_Timezone, &sCreateUserRequest_Photos, &sCreateUserRequest_Website, &sCreateUserRequest_Birthdate, &sCreateUserRequest_Roles, &sCreateUserRequest_Extensions}, Hash: &hCreateUserRequest}
+var mCreateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserResponse_IdentityStoreId, &sCreateUserResponse_UserId, &sCreateUserResponse_UserArn, &sCreateUserResponse_Revision}}
+var mDeleteGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGroupRequest_IdentityStoreId, &sDeleteGroupRequest_GroupId, &sDeleteGroupRequest_Revision}}
+var mDeleteGroupMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGroupMembershipRequest_IdentityStoreId, &sDeleteGroupMembershipRequest_MembershipId}}
+var mDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserRequest_IdentityStoreId, &sDeleteUserRequest_UserId, &sDeleteUserRequest_Revision}}
+var mDescribeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupRequest_IdentityStoreId, &sDescribeGroupRequest_GroupId}}
+var mDescribeGroupMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupMembershipRequest_IdentityStoreId, &sDescribeGroupMembershipRequest_MembershipId}}
+var mDescribeGroupMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupMembershipResponse_IdentityStoreId, &sDescribeGroupMembershipResponse_MembershipId, &sDescribeGroupMembershipResponse_MembershipArn, &sDescribeGroupMembershipResponse_GroupId, &sDescribeGroupMembershipResponse_MemberId, &sDescribeGroupMembershipResponse_CreatedAt, &sDescribeGroupMembershipResponse_UpdatedAt, &sDescribeGroupMembershipResponse_CreatedBy, &sDescribeGroupMembershipResponse_UpdatedBy}, Hash: &hDescribeGroupMembershipResponse}
+var mDescribeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupResponse_IdentityStoreId, &sDescribeGroupResponse_GroupId, &sDescribeGroupResponse_GroupArn, &sDescribeGroupResponse_Revision, &sDescribeGroupResponse_DisplayName, &sDescribeGroupResponse_ExternalIds, &sDescribeGroupResponse_Description, &sDescribeGroupResponse_CreatedAt, &sDescribeGroupResponse_UpdatedAt, &sDescribeGroupResponse_CreatedBy, &sDescribeGroupResponse_UpdatedBy}, Hash: &hDescribeGroupResponse}
+var mDescribeIdentityStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIdentityStoreRequest_IdentityStoreId}}
+var mDescribeIdentityStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIdentityStoreResponse_IdentityStoreId, &sDescribeIdentityStoreResponse_IdentityStoreArn, &sDescribeIdentityStoreResponse_NetworkConfiguration}}
+var mDescribeUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserRequest_IdentityStoreId, &sDescribeUserRequest_UserId, &sDescribeUserRequest_Extensions}}
+var mDescribeUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserResponse_IdentityStoreId, &sDescribeUserResponse_UserId, &sDescribeUserResponse_UserArn, &sDescribeUserResponse_Revision, &sDescribeUserResponse_UserName, &sDescribeUserResponse_ExternalIds, &sDescribeUserResponse_Name, &sDescribeUserResponse_DisplayName, &sDescribeUserResponse_NickName, &sDescribeUserResponse_ProfileUrl, &sDescribeUserResponse_Emails, &sDescribeUserResponse_Addresses, &sDescribeUserResponse_PhoneNumbers, &sDescribeUserResponse_UserType, &sDescribeUserResponse_Title, &sDescribeUserResponse_PreferredLanguage, &sDescribeUserResponse_Locale, &sDescribeUserResponse_Timezone, &sDescribeUserResponse_UserStatus, &sDescribeUserResponse_Photos, &sDescribeUserResponse_Website, &sDescribeUserResponse_Birthdate, &sDescribeUserResponse_Roles, &sDescribeUserResponse_CreatedAt, &sDescribeUserResponse_CreatedBy, &sDescribeUserResponse_UpdatedAt, &sDescribeUserResponse_UpdatedBy, &sDescribeUserResponse_Extensions}, Hash: &hDescribeUserResponse}
+var mGetGroupIdRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupIdRequest_IdentityStoreId, &sGetGroupIdRequest_AlternateIdentifier}}
+var mGetGroupIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupIdResponse_IdentityStoreId, &sGetGroupIdResponse_GroupId, &sGetGroupIdResponse_GroupArn}}
+var mGetGroupMembershipIdRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupMembershipIdRequest_IdentityStoreId, &sGetGroupMembershipIdRequest_GroupId, &sGetGroupMembershipIdRequest_MemberId}}
+var mGetGroupMembershipIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGroupMembershipIdResponse_IdentityStoreId, &sGetGroupMembershipIdResponse_MembershipId, &sGetGroupMembershipIdResponse_MembershipArn}}
+var mGetUserIdRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserIdRequest_IdentityStoreId, &sGetUserIdRequest_AlternateIdentifier}}
+var mGetUserIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserIdResponse_IdentityStoreId, &sGetUserIdResponse_UserId, &sGetUserIdResponse_UserArn}}
+var mIsMemberInGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sIsMemberInGroupsRequest_IdentityStoreId, &sIsMemberInGroupsRequest_MemberId, &sIsMemberInGroupsRequest_GroupIds}}
+var mIsMemberInGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sIsMemberInGroupsResponse_Results}}
+var mListGroupMembershipsForMemberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembershipsForMemberRequest_IdentityStoreId, &sListGroupMembershipsForMemberRequest_MemberId, &sListGroupMembershipsForMemberRequest_MaxResults, &sListGroupMembershipsForMemberRequest_NextToken}}
+var mListGroupMembershipsForMemberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembershipsForMemberResponse_GroupMemberships, &sListGroupMembershipsForMemberResponse_NextToken}}
+var mListGroupMembershipsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembershipsRequest_IdentityStoreId, &sListGroupMembershipsRequest_GroupId, &sListGroupMembershipsRequest_MaxResults, &sListGroupMembershipsRequest_NextToken}}
+var mListGroupMembershipsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembershipsResponse_GroupMemberships, &sListGroupMembershipsResponse_NextToken}}
+var mListGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsRequest_IdentityStoreId, &sListGroupsRequest_MaxResults, &sListGroupsRequest_NextToken, &sListGroupsRequest_Filters}}
+var mListGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsResponse_Groups, &sListGroupsResponse_NextToken}}
+var mListIdentityStoresRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentityStoresRequest_MaxResults, &sListIdentityStoresRequest_NextToken}}
+var mListIdentityStoresResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentityStoresResponse_IdentityStores, &sListIdentityStoresResponse_NextToken}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_IdentityStoreId, &sListUsersRequest_Extensions, &sListUsersRequest_MaxResults, &sListUsersRequest_NextToken, &sListUsersRequest_Filters}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_Users, &sListUsersResponse_NextToken}}
+var mUpdateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGroupRequest_IdentityStoreId, &sUpdateGroupRequest_GroupId, &sUpdateGroupRequest_Operations, &sUpdateGroupRequest_Revision}}
+var mUpdateGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGroupResponse_IdentityStoreId, &sUpdateGroupResponse_GroupId, &sUpdateGroupResponse_GroupArn, &sUpdateGroupResponse_Revision}}
+var mUpdateIdentityStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentityStoreRequest_IdentityStoreId, &sUpdateIdentityStoreRequest_NetworkConfiguration}}
+var mUpdateIdentityStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentityStoreResponse_IdentityStoreId, &sUpdateIdentityStoreResponse_IdentityStoreArn}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_IdentityStoreId, &sUpdateUserRequest_UserId, &sUpdateUserRequest_Operations, &sUpdateUserRequest_Revision}}
+var mUpdateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserResponse_IdentityStoreId, &sUpdateUserResponse_UserId, &sUpdateUserResponse_UserArn, &sUpdateUserResponse_Revision}}
+
+var hGroup = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 5, 0, 9, 0, 2, 0, 0, 0, 0, 0, 8, 11, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 3, 0, 4, 10, 7,
+}}
+var hGroupMembership = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 0, 8, 0, 0, 9, 0, 0, 3, 0, 0, 1, 0, 5, 0, 0, 7, 6, 4,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hUser = smithy.MemberHash{Seed: 2044, Slots: []uint16{
+	0, 0, 0, 22, 0, 0, 2, 0, 8, 23, 1, 0, 24, 0, 0, 12, 0, 0, 0, 0, 20, 16, 0, 0,
+	0, 0, 0, 0, 0, 11, 0, 0, 0, 28, 0, 0, 14, 6, 0, 4, 0, 13, 26, 0, 0, 0, 0, 9,
+	0, 0, 15, 0, 5, 27, 18, 0, 21, 3, 25, 19, 7, 17, 0, 10,
+}}
+var hCreateUserRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 6, 0, 0, 0, 2, 4, 0, 0, 17, 0, 0, 3, 0, 10, 0, 0, 0, 0, 0, 0, 11,
+	0, 0, 0, 0, 7, 19, 0, 16, 0, 0, 12, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0,
+	0, 15, 5, 0, 0, 0, 0, 1, 13, 0, 0, 9, 0, 8, 0, 0,
+}}
+var hDescribeGroupMembershipResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 0, 8, 0, 0, 9, 0, 0, 3, 0, 0, 1, 0, 5, 0, 0, 7, 6, 4,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hDescribeGroupResponse = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 5, 0, 9, 0, 2, 0, 0, 0, 0, 0, 8, 11, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 3, 0, 4, 10, 7,
+}}
+var hDescribeUserResponse = smithy.MemberHash{Seed: 2044, Slots: []uint16{
+	0, 0, 0, 22, 0, 0, 2, 0, 8, 23, 1, 0, 24, 0, 0, 12, 0, 0, 0, 0, 20, 16, 0, 0,
+	0, 0, 0, 0, 0, 11, 0, 0, 0, 28, 0, 0, 14, 6, 0, 4, 0, 13, 26, 0, 0, 0, 0, 9,
+	0, 0, 15, 0, 5, 27, 18, 0, 21, 3, 25, 19, 7, 17, 0, 10,
+}}
+
+var sCreateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateGroup})
+var sCreateGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupMembership, Type: smithy.ShapeTypeOperation, Ext: &eCreateGroupMembership})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Type: smithy.ShapeTypeOperation, Ext: &eCreateUser})
+var sDeleteGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGroup})
+var sDeleteGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupMembership, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGroupMembership})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUser})
+var sDescribeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroup, Type: smithy.ShapeTypeOperation, Ext: &eDescribeGroup})
+var sDescribeGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupMembership, Type: smithy.ShapeTypeOperation, Ext: &eDescribeGroupMembership})
+var sDescribeIdentityStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityStore, Type: smithy.ShapeTypeOperation, Ext: &eDescribeIdentityStore})
+var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUser})
+var sGetGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupId, Type: smithy.ShapeTypeOperation, Ext: &eGetGroupId})
+var sGetGroupMembershipId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupMembershipId, Type: smithy.ShapeTypeOperation, Ext: &eGetGroupMembershipId})
+var sGetUserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserId, Type: smithy.ShapeTypeOperation, Ext: &eGetUserId})
+var sIsMemberInGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsMemberInGroups, Type: smithy.ShapeTypeOperation, Ext: &eIsMemberInGroups})
+var sListGroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMemberships, Type: smithy.ShapeTypeOperation, Ext: &eListGroupMemberships})
+var sListGroupMembershipsForMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembershipsForMember, Type: smithy.ShapeTypeOperation, Ext: &eListGroupMembershipsForMember})
+var sListGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroups, Type: smithy.ShapeTypeOperation, Ext: &eListGroups})
+var sListIdentityStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityStores, Type: smithy.ShapeTypeOperation, Ext: &eListIdentityStores})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Type: smithy.ShapeTypeOperation, Ext: &eListUsers})
+var sUpdateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGroup})
+var sUpdateIdentityStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityStore, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIdentityStore})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Type: smithy.ShapeTypeOperation, Ext: &eUpdateUser})
+var s_AWSIdentityStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSIdentityStore, Type: smithy.ShapeTypeService, Ext: &e_AWSIdentityStore})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessDeniedException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_RequestId})
+var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_Reason})
+var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedExceptionReason})
+var sAccessDeniedExceptionReason_KMS_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedExceptionReason_KMS_ACCESS_DENIED})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var sAddress_StreetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetAddress", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_StreetAddress})
+var sAddress_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_Locality})
+var sAddress_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_Region})
+var sAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_PostalCode})
+var sAddress_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_Country})
+var sAddress_Formatted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Formatted", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_Formatted})
+var sAddress_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAddress_Type})
+var sAddress_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eAddress_Primary})
+var s_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &e_Addresses})
+var s_Addresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &e_Addresses_member})
+var sAlternateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlternateIdentifier, Members: &mAlternateIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eAlternateIdentifier})
+var sAlternateIdentifier_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &iExternalId, Members: &mExternalId, Type: smithy.ShapeTypeStructure, Ext: &eAlternateIdentifier_ExternalId})
+var sAlternateIdentifier_UniqueAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueAttribute", ID: &iUniqueAttribute, Members: &mUniqueAttribute, Type: smithy.ShapeTypeStructure, Ext: &eAlternateIdentifier_UniqueAttribute})
+var sAttributeOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeOperation, Members: &mAttributeOperation, Type: smithy.ShapeTypeStructure, Ext: &eAttributeOperation})
+var sAttributeOperation_AttributePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributePath", ID: &i_AttributePath, Type: smithy.ShapeTypeString, Ext: &eAttributeOperation_AttributePath})
+var sAttributeOperation_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_AttributeValue, Type: smithy.ShapeTypeDocument, Ext: &eAttributeOperation_AttributeValue})
+var s_AttributeOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeOperations, Members: &m_AttributeOperations, Type: smithy.ShapeTypeList, Ext: &e_AttributeOperations})
+var s_AttributeOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeOperation, Members: &mAttributeOperation, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeOperations_member})
+var s_AttributePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributePath, Type: smithy.ShapeTypeString, Ext: &e_AttributePath})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeDocument, Ext: &e_AttributeValue})
+var s_BooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eConflictException_RequestId})
+var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Reason})
+var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictExceptionReason})
+var sConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIQUENESS_CONSTRAINT_VIOLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION})
+var sConflictExceptionReason_CONCURRENT_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_CONCURRENT_MODIFICATION})
+var s_DateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateType})
+var sEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmail, Members: &mEmail, Type: smithy.ShapeTypeStructure, Ext: &eEmail})
+var sEmail_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eEmail_Value})
+var sEmail_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eEmail_Type})
+var sEmail_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eEmail_Primary})
+var s_Emails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Emails, Members: &m_Emails, Type: smithy.ShapeTypeList, Ext: &e_Emails})
+var s_Emails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEmail, Members: &mEmail, Type: smithy.ShapeTypeStructure, Ext: &e_Emails_member})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_ExtensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionName, Type: smithy.ShapeTypeString, Ext: &e_ExtensionName})
+var s_ExtensionNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtensionNames, Members: &m_ExtensionNames, Type: smithy.ShapeTypeList, Ext: &e_ExtensionNames})
+var s_ExtensionNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExtensionName, Type: smithy.ShapeTypeString, Ext: &e_ExtensionNames_member})
+var s_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Extensions, Members: &m_Extensions, Type: smithy.ShapeTypeMap, Ext: &e_Extensions})
+var s_Extensions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExtensionName, Type: smithy.ShapeTypeString, Ext: &e_Extensions_key})
+var s_Extensions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeDocument, Ext: &e_Extensions_value})
+var sExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalId, Members: &mExternalId, Type: smithy.ShapeTypeStructure, Ext: &eExternalId})
+var sExternalId_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_ExternalIdIssuer, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eExternalId_Issuer})
+var sExternalId_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ExternalIdIdentifier, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eExternalId_Id})
+var s_ExternalIdIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalIdIdentifier, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_ExternalIdIdentifier})
+var s_ExternalIdIssuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalIdIssuer, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_ExternalIdIssuer})
+var s_ExternalIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalIds, Members: &m_ExternalIds, Type: smithy.ShapeTypeList, Ext: &e_ExternalIds})
+var s_ExternalIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExternalId, Members: &mExternalId, Type: smithy.ShapeTypeStructure, Ext: &e_ExternalIds_member})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_AttributePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributePath", ID: &i_AttributePath, Type: smithy.ShapeTypeString, Ext: &eFilter_AttributePath})
+var sFilter_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eFilter_AttributeValue})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &e_Filters})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_Filters_member})
+var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &eGroup})
+var sGroup_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGroup_IdentityStoreId})
+var sGroup_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGroup_GroupId})
+var sGroup_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGroup_GroupArn})
+var sGroup_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eGroup_Revision})
+var sGroup_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_GroupDisplayName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eGroup_DisplayName})
+var sGroup_ExternalIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalIds", ID: &i_ExternalIds, Members: &m_ExternalIds, Type: smithy.ShapeTypeList, Ext: &eGroup_ExternalIds})
+var sGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eGroup_Description})
+var sGroup_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGroup_CreatedAt})
+var sGroup_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGroup_UpdatedAt})
+var sGroup_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eGroup_CreatedBy})
+var sGroup_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eGroup_UpdatedBy})
+var s_GroupDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupDisplayName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_GroupDisplayName})
+var s_GroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList, Ext: &e_GroupIds})
+var s_GroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_GroupIds_member})
+var sGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupMembership, Members: &mGroupMembership, Type: smithy.ShapeTypeStructure, Ext: &eGroupMembership})
+var sGroupMembership_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_IdentityStoreId})
+var sGroupMembership_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_MembershipId})
+var sGroupMembership_MembershipArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_MembershipArn})
+var sGroupMembership_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_GroupId})
+var sGroupMembership_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eGroupMembership_MemberId})
+var sGroupMembership_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGroupMembership_CreatedAt})
+var sGroupMembership_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGroupMembership_UpdatedAt})
+var sGroupMembership_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_CreatedBy})
+var sGroupMembership_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eGroupMembership_UpdatedBy})
+var sGroupMembershipExistenceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupMembershipExistenceResult, Members: &mGroupMembershipExistenceResult, Type: smithy.ShapeTypeStructure, Ext: &eGroupMembershipExistenceResult})
+var sGroupMembershipExistenceResult_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGroupMembershipExistenceResult_GroupId})
+var sGroupMembershipExistenceResult_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eGroupMembershipExistenceResult_MemberId})
+var sGroupMembershipExistenceResult_MembershipExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipExists", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGroupMembershipExistenceResult_MembershipExists})
+var s_GroupMembershipExistenceResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupMembershipExistenceResults, Members: &m_GroupMembershipExistenceResults, Type: smithy.ShapeTypeList, Ext: &e_GroupMembershipExistenceResults})
+var s_GroupMembershipExistenceResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupMembershipExistenceResult, Members: &mGroupMembershipExistenceResult, Type: smithy.ShapeTypeStructure, Ext: &e_GroupMembershipExistenceResults_member})
+var s_GroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupMemberships, Members: &m_GroupMemberships, Type: smithy.ShapeTypeList, Ext: &e_GroupMemberships})
+var s_GroupMemberships_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupMembership, Members: &mGroupMembership, Type: smithy.ShapeTypeStructure, Ext: &e_GroupMemberships_member})
+var s_Groups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &e_Groups})
+var s_Groups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &e_Groups_member})
+var sIdentityStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityStore, Members: &mIdentityStore, Type: smithy.ShapeTypeStructure, Ext: &eIdentityStore})
+var sIdentityStore_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eIdentityStore_IdentityStoreId})
+var sIdentityStore_IdentityStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreArn", ID: &i_IdentityStoreArn, Type: smithy.ShapeTypeString, Ext: &eIdentityStore_IdentityStoreArn})
+var s_IdentityStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityStoreArn, Type: smithy.ShapeTypeString, Ext: &e_IdentityStoreArn})
+var s_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &e_IdentityStoreId})
+var s_IdentityStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityStores, Members: &m_IdentityStores, Type: smithy.ShapeTypeList, Ext: &e_IdentityStores})
+var s_IdentityStores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityStore, Members: &mIdentityStore, Type: smithy.ShapeTypeStructure, Ext: &e_IdentityStores_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInternalServerException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_RequestId})
+var sInternalServerException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t5, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_RetryAfterSeconds})
+var s_IpCidrList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpCidrList, Members: &m_IpCidrList, Type: smithy.ShapeTypeList, Ext: &e_IpCidrList})
+var s_IpCidrList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpCidrType, Type: smithy.ShapeTypeString, Ext: &e_IpCidrList_member})
+var s_IpCidrType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpCidrType, Type: smithy.ShapeTypeString, Ext: &e_IpCidrType})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMemberId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eMemberId})
+var sMemberId_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eMemberId_UserId})
+var sName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iName, Members: &mName, Type: smithy.ShapeTypeStructure, Ext: &eName})
+var sName_Formatted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Formatted", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_Formatted})
+var sName_FamilyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FamilyName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_FamilyName})
+var sName_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_GivenName})
+var sName_MiddleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MiddleName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_MiddleName})
+var sName_HonorificPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HonorificPrefix", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_HonorificPrefix})
+var sName_HonorificSuffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HonorificSuffix", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eName_HonorificSuffix})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNetworkConfiguration})
+var sNetworkConfiguration_VpceAccessRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpceAccessRequired", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eNetworkConfiguration_VpceAccessRequired})
+var sNetworkConfiguration_ApiRestrictSourceVpcs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiRestrictSourceVpcs", ID: &i_VpcIdList, Members: &m_VpcIdList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfiguration_ApiRestrictSourceVpcs})
+var sNetworkConfiguration_ApiAllowSourceIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiAllowSourceIps", ID: &i_IpCidrList, Members: &m_IpCidrList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfiguration_ApiAllowSourceIps})
+var sNetworkConfiguration_ScimAllowSourceIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScimAllowSourceIps", ID: &i_IpCidrList, Members: &m_IpCidrList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfiguration_ScimAllowSourceIps})
+var sNetworkConfigurationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfigurationDetails, Members: &mNetworkConfigurationDetails, Type: smithy.ShapeTypeStructure, Ext: &eNetworkConfigurationDetails})
+var sNetworkConfigurationDetails_VpceAccessRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpceAccessRequired", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eNetworkConfigurationDetails_VpceAccessRequired})
+var sNetworkConfigurationDetails_ApiRestrictSourceVpcs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiRestrictSourceVpcs", ID: &i_VpcIdList, Members: &m_VpcIdList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfigurationDetails_ApiRestrictSourceVpcs})
+var sNetworkConfigurationDetails_ApiAllowSourceIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiAllowSourceIps", ID: &i_IpCidrList, Members: &m_IpCidrList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfigurationDetails_ApiAllowSourceIps})
+var sNetworkConfigurationDetails_ScimAllowSourceIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScimAllowSourceIps", ID: &i_IpCidrList, Members: &m_IpCidrList, Type: smithy.ShapeTypeList, Ext: &eNetworkConfigurationDetails_ScimAllowSourceIps})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumber})
+var sPhoneNumber_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_Value})
+var sPhoneNumber_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_Type})
+var sPhoneNumber_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumber_Primary})
+var s_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumbers, Members: &m_PhoneNumbers, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumbers})
+var s_PhoneNumbers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumbers_member})
+var sPhoto = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoto, Members: &mPhoto, Type: smithy.ShapeTypeStructure, Ext: &ePhoto})
+var sPhoto_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ePhoto_Value})
+var sPhoto_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ePhoto_Type})
+var sPhoto_Display = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Display", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ePhoto_Display})
+var sPhoto_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ePhoto_Primary})
+var s_Photos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Photos, Members: &m_Photos, Type: smithy.ShapeTypeList, Ext: &e_Photos})
+var s_Photos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoto, Members: &mPhoto, Type: smithy.ShapeTypeStructure, Ext: &e_Photos_member})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_ResourceType})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_Reason})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_RequestId})
+var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundExceptionReason})
+var sResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_KEY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND})
+var s_ResourceRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &e_ResourceRevision})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_GROUP})
+var sResourceType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_USER})
+var sResourceType_IDENTITY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_IDENTITY_STORE})
+var sResourceType_GROUP_MEMBERSHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP_MEMBERSHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_GROUP_MEMBERSHIP})
+var sResourceType_RESOURCE_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_RESOURCE_POLICY})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAfterSeconds})
+var sRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeStructure, Ext: &eRole})
+var sRole_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eRole_Value})
+var sRole_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eRole_Type})
+var sRole_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eRole_Primary})
+var s_Roles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &e_Roles})
+var s_Roles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeStructure, Ext: &e_Roles_member})
+var s_SensitiveStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_SensitiveStringType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_RequestId})
+var s_StringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &e_StringType})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_RequestId})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t5, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_RetryAfterSeconds})
+var sThrottlingException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iThrottlingExceptionReason, Members: &mThrottlingExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eThrottlingException_Reason})
+var sThrottlingExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingExceptionReason, Members: &mThrottlingExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eThrottlingExceptionReason})
+var sThrottlingExceptionReason_KMS_THROTTLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_THROTTLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingExceptionReason_KMS_THROTTLING})
+var sUniqueAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUniqueAttribute, Members: &mUniqueAttribute, Type: smithy.ShapeTypeStructure, Ext: &eUniqueAttribute})
+var sUniqueAttribute_AttributePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributePath", ID: &i_AttributePath, Type: smithy.ShapeTypeString, Ext: &eUniqueAttribute_AttributePath})
+var sUniqueAttribute_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_AttributeValue, Type: smithy.ShapeTypeDocument, Ext: &eUniqueAttribute_AttributeValue})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &eUser})
+var sUser_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUser_IdentityStoreId})
+var sUser_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUser_UserId})
+var sUser_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUser_UserArn})
+var sUser_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eUser_Revision})
+var sUser_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_UserName})
+var sUser_ExternalIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalIds", ID: &i_ExternalIds, Members: &m_ExternalIds, Type: smithy.ShapeTypeList, Ext: &eUser_ExternalIds})
+var sUser_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iName, Members: &mName, Type: smithy.ShapeTypeStructure, Ext: &eUser_Name})
+var sUser_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_DisplayName})
+var sUser_NickName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NickName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_NickName})
+var sUser_ProfileUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileUrl", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_ProfileUrl})
+var sUser_Emails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emails", ID: &i_Emails, Members: &m_Emails, Type: smithy.ShapeTypeList, Ext: &eUser_Emails})
+var sUser_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eUser_Addresses})
+var sUser_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumbers, Members: &m_PhoneNumbers, Type: smithy.ShapeTypeList, Ext: &eUser_PhoneNumbers})
+var sUser_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_UserType})
+var sUser_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_Title})
+var sUser_PreferredLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredLanguage", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_PreferredLanguage})
+var sUser_Locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locale", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_Locale})
+var sUser_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_Timezone})
+var sUser_UserStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStatus", ID: &iUserStatus, Members: &mUserStatus, Type: smithy.ShapeTypeEnum, Ext: &eUser_UserStatus})
+var sUser_Photos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Photos", ID: &i_Photos, Members: &m_Photos, Type: smithy.ShapeTypeList, Ext: &eUser_Photos})
+var sUser_Website = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Website", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_Website})
+var sUser_Birthdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Birthdate", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUser_Birthdate})
+var sUser_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &eUser_Roles})
+var sUser_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eUser_CreatedAt})
+var sUser_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eUser_CreatedBy})
+var sUser_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eUser_UpdatedAt})
+var sUser_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eUser_UpdatedBy})
+var sUser_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &i_Extensions, Members: &m_Extensions, Type: smithy.ShapeTypeMap, Ext: &eUser_Extensions})
+var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_UserName})
+var s_Users = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &e_Users})
+var s_Users_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &e_Users_member})
+var sUserStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserStatus, Members: &mUserStatus, Type: smithy.ShapeTypeEnum, Ext: &eUserStatus})
+var sUserStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStatus_ENABLED})
+var sUserStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserStatus_DISABLED})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eValidationException_RequestId})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_KMS_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_KMS_INVALID_ARN})
+var sValidationExceptionReason_KMS_INVALID_KEY_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_INVALID_KEY_USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_KMS_INVALID_KEY_USAGE})
+var sValidationExceptionReason_KMS_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_KMS_INVALID_STATE})
+var sValidationExceptionReason_KMS_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_KMS_DISABLED})
+var s_VpcIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIdList, Members: &m_VpcIdList, Type: smithy.ShapeTypeList, Ext: &e_VpcIdList})
+var s_VpcIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VpcIdType, Type: smithy.ShapeTypeString, Ext: &e_VpcIdList_member})
+var s_VpcIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIdType, Type: smithy.ShapeTypeString, Ext: &e_VpcIdType})
+var sCreateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupRequest, Members: &mCreateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupRequest})
+var sCreateGroupRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_IdentityStoreId})
+var sCreateGroupRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_GroupDisplayName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_DisplayName})
+var sCreateGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_Description})
+var sCreateGroupMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupMembershipRequest, Members: &mCreateGroupMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupMembershipRequest})
+var sCreateGroupMembershipRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupMembershipRequest_IdentityStoreId})
+var sCreateGroupMembershipRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupMembershipRequest_GroupId})
+var sCreateGroupMembershipRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eCreateGroupMembershipRequest_MemberId})
+var sCreateGroupMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupMembershipResponse, Members: &mCreateGroupMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupMembershipResponse})
+var sCreateGroupMembershipResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupMembershipResponse_IdentityStoreId})
+var sCreateGroupMembershipResponse_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupMembershipResponse_MembershipId})
+var sCreateGroupMembershipResponse_MembershipArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateGroupMembershipResponse_MembershipArn})
+var sCreateGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupResponse, Members: &mCreateGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupResponse})
+var sCreateGroupResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResponse_IdentityStoreId})
+var sCreateGroupResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResponse_GroupId})
+var sCreateGroupResponse_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResponse_GroupArn})
+var sCreateGroupResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResponse_Revision})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserRequest})
+var sCreateUserRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_IdentityStoreId})
+var sCreateUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_UserName})
+var sCreateUserRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iName, Members: &mName, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserRequest_Name})
+var sCreateUserRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_DisplayName})
+var sCreateUserRequest_NickName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NickName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_NickName})
+var sCreateUserRequest_ProfileUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileUrl", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_ProfileUrl})
+var sCreateUserRequest_Emails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emails", ID: &i_Emails, Members: &m_Emails, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_Emails})
+var sCreateUserRequest_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_Addresses})
+var sCreateUserRequest_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumbers, Members: &m_PhoneNumbers, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_PhoneNumbers})
+var sCreateUserRequest_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_UserType})
+var sCreateUserRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Title})
+var sCreateUserRequest_PreferredLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredLanguage", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_PreferredLanguage})
+var sCreateUserRequest_Locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locale", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Locale})
+var sCreateUserRequest_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Timezone})
+var sCreateUserRequest_Photos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Photos", ID: &i_Photos, Members: &m_Photos, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_Photos})
+var sCreateUserRequest_Website = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Website", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Website})
+var sCreateUserRequest_Birthdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Birthdate", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Birthdate})
+var sCreateUserRequest_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &eCreateUserRequest_Roles})
+var sCreateUserRequest_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &i_Extensions, Members: &m_Extensions, Type: smithy.ShapeTypeMap, Ext: &eCreateUserRequest_Extensions})
+var sCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResponse, Members: &mCreateUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserResponse})
+var sCreateUserResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateUserResponse_IdentityStoreId})
+var sCreateUserResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateUserResponse_UserId})
+var sCreateUserResponse_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateUserResponse_UserArn})
+var sCreateUserResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eCreateUserResponse_Revision})
+var sDeleteGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupRequest, Members: &mDeleteGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupRequest})
+var sDeleteGroupRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_IdentityStoreId})
+var sDeleteGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_GroupId})
+var sDeleteGroupRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_Revision})
+var sDeleteGroupMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupMembershipRequest, Members: &mDeleteGroupMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupMembershipRequest})
+var sDeleteGroupMembershipRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupMembershipRequest_IdentityStoreId})
+var sDeleteGroupMembershipRequest_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupMembershipRequest_MembershipId})
+var sDeleteGroupMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupMembershipResponse})
+var sDeleteGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupResponse})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserRequest})
+var sDeleteUserRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_IdentityStoreId})
+var sDeleteUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_UserId})
+var sDeleteUserRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_Revision})
+var sDeleteUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserResponse})
+var sDescribeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupRequest, Members: &mDescribeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupRequest})
+var sDescribeGroupRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupRequest_IdentityStoreId})
+var sDescribeGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupRequest_GroupId})
+var sDescribeGroupMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupMembershipRequest, Members: &mDescribeGroupMembershipRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupMembershipRequest})
+var sDescribeGroupMembershipRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipRequest_IdentityStoreId})
+var sDescribeGroupMembershipRequest_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipRequest_MembershipId})
+var sDescribeGroupMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupMembershipResponse, Members: &mDescribeGroupMembershipResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupMembershipResponse})
+var sDescribeGroupMembershipResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_IdentityStoreId})
+var sDescribeGroupMembershipResponse_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_MembershipId})
+var sDescribeGroupMembershipResponse_MembershipArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_MembershipArn})
+var sDescribeGroupMembershipResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_GroupId})
+var sDescribeGroupMembershipResponse_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eDescribeGroupMembershipResponse_MemberId})
+var sDescribeGroupMembershipResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeGroupMembershipResponse_CreatedAt})
+var sDescribeGroupMembershipResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeGroupMembershipResponse_UpdatedAt})
+var sDescribeGroupMembershipResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_CreatedBy})
+var sDescribeGroupMembershipResponse_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupMembershipResponse_UpdatedBy})
+var sDescribeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupResponse, Members: &mDescribeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupResponse})
+var sDescribeGroupResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_IdentityStoreId})
+var sDescribeGroupResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_GroupId})
+var sDescribeGroupResponse_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_GroupArn})
+var sDescribeGroupResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_Revision})
+var sDescribeGroupResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_GroupDisplayName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_DisplayName})
+var sDescribeGroupResponse_ExternalIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalIds", ID: &i_ExternalIds, Members: &m_ExternalIds, Type: smithy.ShapeTypeList, Ext: &eDescribeGroupResponse_ExternalIds})
+var sDescribeGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_Description})
+var sDescribeGroupResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeGroupResponse_CreatedAt})
+var sDescribeGroupResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeGroupResponse_UpdatedAt})
+var sDescribeGroupResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_CreatedBy})
+var sDescribeGroupResponse_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResponse_UpdatedBy})
+var sDescribeIdentityStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityStoreRequest, Members: &mDescribeIdentityStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityStoreRequest})
+var sDescribeIdentityStoreRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityStoreRequest_IdentityStoreId})
+var sDescribeIdentityStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityStoreResponse, Members: &mDescribeIdentityStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityStoreResponse})
+var sDescribeIdentityStoreResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityStoreResponse_IdentityStoreId})
+var sDescribeIdentityStoreResponse_IdentityStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreArn", ID: &i_IdentityStoreArn, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityStoreResponse_IdentityStoreArn})
+var sDescribeIdentityStoreResponse_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfigurationDetails, Members: &mNetworkConfigurationDetails, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityStoreResponse_NetworkConfiguration})
+var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserRequest})
+var sDescribeUserRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_IdentityStoreId})
+var sDescribeUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_UserId})
+var sDescribeUserRequest_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &i_ExtensionNames, Members: &m_ExtensionNames, Type: smithy.ShapeTypeList, Ext: &eDescribeUserRequest_Extensions})
+var sDescribeUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResponse, Members: &mDescribeUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserResponse})
+var sDescribeUserResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_IdentityStoreId})
+var sDescribeUserResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_UserId})
+var sDescribeUserResponse_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_UserArn})
+var sDescribeUserResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Revision})
+var sDescribeUserResponse_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_UserName})
+var sDescribeUserResponse_ExternalIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalIds", ID: &i_ExternalIds, Members: &m_ExternalIds, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_ExternalIds})
+var sDescribeUserResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iName, Members: &mName, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserResponse_Name})
+var sDescribeUserResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_DisplayName})
+var sDescribeUserResponse_NickName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NickName", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_NickName})
+var sDescribeUserResponse_ProfileUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileUrl", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_ProfileUrl})
+var sDescribeUserResponse_Emails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emails", ID: &i_Emails, Members: &m_Emails, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_Emails})
+var sDescribeUserResponse_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_Addresses})
+var sDescribeUserResponse_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumbers, Members: &m_PhoneNumbers, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_PhoneNumbers})
+var sDescribeUserResponse_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_UserType})
+var sDescribeUserResponse_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Title})
+var sDescribeUserResponse_PreferredLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredLanguage", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_PreferredLanguage})
+var sDescribeUserResponse_Locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locale", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Locale})
+var sDescribeUserResponse_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Timezone})
+var sDescribeUserResponse_UserStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserStatus", ID: &iUserStatus, Members: &mUserStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeUserResponse_UserStatus})
+var sDescribeUserResponse_Photos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Photos", ID: &i_Photos, Members: &m_Photos, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_Photos})
+var sDescribeUserResponse_Website = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Website", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Website})
+var sDescribeUserResponse_Birthdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Birthdate", ID: &i_SensitiveStringType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_Birthdate})
+var sDescribeUserResponse_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &eDescribeUserResponse_Roles})
+var sDescribeUserResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeUserResponse_CreatedAt})
+var sDescribeUserResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_CreatedBy})
+var sDescribeUserResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeUserResponse_UpdatedAt})
+var sDescribeUserResponse_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedBy", ID: &i_StringType, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResponse_UpdatedBy})
+var sDescribeUserResponse_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &i_Extensions, Members: &m_Extensions, Type: smithy.ShapeTypeMap, Ext: &eDescribeUserResponse_Extensions})
+var sGetGroupIdRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupIdRequest, Members: &mGetGroupIdRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupIdRequest})
+var sGetGroupIdRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetGroupIdRequest_IdentityStoreId})
+var sGetGroupIdRequest_AlternateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateIdentifier", ID: &iAlternateIdentifier, Members: &mAlternateIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eGetGroupIdRequest_AlternateIdentifier})
+var sGetGroupIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupIdResponse, Members: &mGetGroupIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupIdResponse})
+var sGetGroupIdResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetGroupIdResponse_IdentityStoreId})
+var sGetGroupIdResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetGroupIdResponse_GroupId})
+var sGetGroupIdResponse_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetGroupIdResponse_GroupArn})
+var sGetGroupMembershipIdRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupMembershipIdRequest, Members: &mGetGroupMembershipIdRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupMembershipIdRequest})
+var sGetGroupMembershipIdRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetGroupMembershipIdRequest_IdentityStoreId})
+var sGetGroupMembershipIdRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetGroupMembershipIdRequest_GroupId})
+var sGetGroupMembershipIdRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eGetGroupMembershipIdRequest_MemberId})
+var sGetGroupMembershipIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGroupMembershipIdResponse, Members: &mGetGroupMembershipIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGroupMembershipIdResponse})
+var sGetGroupMembershipIdResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetGroupMembershipIdResponse_IdentityStoreId})
+var sGetGroupMembershipIdResponse_MembershipId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetGroupMembershipIdResponse_MembershipId})
+var sGetGroupMembershipIdResponse_MembershipArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetGroupMembershipIdResponse_MembershipArn})
+var sGetUserIdRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserIdRequest, Members: &mGetUserIdRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetUserIdRequest})
+var sGetUserIdRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetUserIdRequest_IdentityStoreId})
+var sGetUserIdRequest_AlternateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateIdentifier", ID: &iAlternateIdentifier, Members: &mAlternateIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eGetUserIdRequest_AlternateIdentifier})
+var sGetUserIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserIdResponse, Members: &mGetUserIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetUserIdResponse})
+var sGetUserIdResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eGetUserIdResponse_IdentityStoreId})
+var sGetUserIdResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetUserIdResponse_UserId})
+var sGetUserIdResponse_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetUserIdResponse_UserArn})
+var sIsMemberInGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsMemberInGroupsRequest, Members: &mIsMemberInGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eIsMemberInGroupsRequest})
+var sIsMemberInGroupsRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eIsMemberInGroupsRequest_IdentityStoreId})
+var sIsMemberInGroupsRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eIsMemberInGroupsRequest_MemberId})
+var sIsMemberInGroupsRequest_GroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupIds", ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList, Ext: &eIsMemberInGroupsRequest_GroupIds})
+var sIsMemberInGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsMemberInGroupsResponse, Members: &mIsMemberInGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eIsMemberInGroupsResponse})
+var sIsMemberInGroupsResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_GroupMembershipExistenceResults, Members: &m_GroupMembershipExistenceResults, Type: smithy.ShapeTypeList, Ext: &eIsMemberInGroupsResponse_Results})
+var sListGroupMembershipsForMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembershipsForMemberRequest, Members: &mListGroupMembershipsForMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembershipsForMemberRequest})
+var sListGroupMembershipsForMemberRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsForMemberRequest_IdentityStoreId})
+var sListGroupMembershipsForMemberRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &iMemberId, Members: &mMemberId, Type: smithy.ShapeTypeUnion, Ext: &eListGroupMembershipsForMemberRequest_MemberId})
+var sListGroupMembershipsForMemberRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupMembershipsForMemberRequest_MaxResults})
+var sListGroupMembershipsForMemberRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsForMemberRequest_NextToken})
+var sListGroupMembershipsForMemberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembershipsForMemberResponse, Members: &mListGroupMembershipsForMemberResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembershipsForMemberResponse})
+var sListGroupMembershipsForMemberResponse_GroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupMemberships", ID: &i_GroupMemberships, Members: &m_GroupMemberships, Type: smithy.ShapeTypeList, Ext: &eListGroupMembershipsForMemberResponse_GroupMemberships})
+var sListGroupMembershipsForMemberResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsForMemberResponse_NextToken})
+var sListGroupMembershipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembershipsRequest, Members: &mListGroupMembershipsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembershipsRequest})
+var sListGroupMembershipsRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsRequest_IdentityStoreId})
+var sListGroupMembershipsRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsRequest_GroupId})
+var sListGroupMembershipsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupMembershipsRequest_MaxResults})
+var sListGroupMembershipsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsRequest_NextToken})
+var sListGroupMembershipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembershipsResponse, Members: &mListGroupMembershipsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembershipsResponse})
+var sListGroupMembershipsResponse_GroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupMemberships", ID: &i_GroupMemberships, Members: &m_GroupMemberships, Type: smithy.ShapeTypeList, Ext: &eListGroupMembershipsResponse_GroupMemberships})
+var sListGroupMembershipsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupMembershipsResponse_NextToken})
+var sListGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsRequest, Members: &mListGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsRequest})
+var sListGroupsRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_IdentityStoreId})
+var sListGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupsRequest_MaxResults})
+var sListGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_NextToken})
+var sListGroupsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListGroupsRequest_Filters})
+var sListGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsResponse, Members: &mListGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsResponse})
+var sListGroupsResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &eListGroupsResponse_Groups})
+var sListGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListGroupsResponse_NextToken})
+var sListIdentityStoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityStoresRequest, Members: &mListIdentityStoresRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIdentityStoresRequest})
+var sListIdentityStoresRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListIdentityStoresRequest_MaxResults})
+var sListIdentityStoresRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIdentityStoresRequest_NextToken})
+var sListIdentityStoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityStoresResponse, Members: &mListIdentityStoresResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIdentityStoresResponse})
+var sListIdentityStoresResponse_IdentityStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStores", ID: &i_IdentityStores, Members: &m_IdentityStores, Type: smithy.ShapeTypeList, Ext: &eListIdentityStoresResponse_IdentityStores})
+var sListIdentityStoresResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIdentityStoresResponse_NextToken})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListUsersRequest})
+var sListUsersRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_IdentityStoreId})
+var sListUsersRequest_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &i_ExtensionNames, Members: &m_ExtensionNames, Type: smithy.ShapeTypeList, Ext: &eListUsersRequest_Extensions})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListUsersRequest_MaxResults})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_NextToken})
+var sListUsersRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList, Ext: &eListUsersRequest_Filters})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListUsersResponse})
+var sListUsersResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &eListUsersResponse_Users})
+var sListUsersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListUsersResponse_NextToken})
+var sUpdateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupRequest, Members: &mUpdateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGroupRequest})
+var sUpdateGroupRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_IdentityStoreId})
+var sUpdateGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_GroupId})
+var sUpdateGroupRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_AttributeOperations, Members: &m_AttributeOperations, Type: smithy.ShapeTypeList, Ext: &eUpdateGroupRequest_Operations})
+var sUpdateGroupRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_Revision})
+var sUpdateGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupResponse, Members: &mUpdateGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGroupResponse})
+var sUpdateGroupResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupResponse_IdentityStoreId})
+var sUpdateGroupResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupResponse_GroupId})
+var sUpdateGroupResponse_GroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupResponse_GroupArn})
+var sUpdateGroupResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupResponse_Revision})
+var sUpdateIdentityStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityStoreRequest, Members: &mUpdateIdentityStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIdentityStoreRequest})
+var sUpdateIdentityStoreRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentityStoreRequest_IdentityStoreId})
+var sUpdateIdentityStoreRequest_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIdentityStoreRequest_NetworkConfiguration})
+var sUpdateIdentityStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityStoreResponse, Members: &mUpdateIdentityStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIdentityStoreResponse})
+var sUpdateIdentityStoreResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentityStoreResponse_IdentityStoreId})
+var sUpdateIdentityStoreResponse_IdentityStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreArn", ID: &i_IdentityStoreArn, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentityStoreResponse_IdentityStoreArn})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserRequest})
+var sUpdateUserRequest_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_IdentityStoreId})
+var sUpdateUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_UserId})
+var sUpdateUserRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_AttributeOperations, Members: &m_AttributeOperations, Type: smithy.ShapeTypeList, Ext: &eUpdateUserRequest_Operations})
+var sUpdateUserRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_Revision})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Members: &mUpdateUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserResponse})
+var sUpdateUserResponse_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateUserResponse_IdentityStoreId})
+var sUpdateUserResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateUserResponse_UserId})
+var sUpdateUserResponse_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateUserResponse_UserArn})
+var sUpdateUserResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceRevision, Type: smithy.ShapeTypeString, Ext: &eUpdateUserResponse_Revision})
+
+var CreateGroup = &sCreateGroup
+
+var CreateGroupMembership = &sCreateGroupMembership
+
+var CreateUser = &sCreateUser
+
+var DeleteGroup = &sDeleteGroup
+
+var DeleteGroupMembership = &sDeleteGroupMembership
+
+var DeleteUser = &sDeleteUser
+
+var DescribeGroup = &sDescribeGroup
+
+var DescribeGroupMembership = &sDescribeGroupMembership
+
+var DescribeIdentityStore = &sDescribeIdentityStore
+
+var DescribeUser = &sDescribeUser
+
+var GetGroupId = &sGetGroupId
+
+var GetGroupMembershipId = &sGetGroupMembershipId
+
+var GetUserId = &sGetUserId
+
+var IsMemberInGroups = &sIsMemberInGroups
+
+var ListGroupMemberships = &sListGroupMemberships
+
+var ListGroupMembershipsForMember = &sListGroupMembershipsForMember
+
+var ListGroups = &sListGroups
+
+var ListIdentityStores = &sListIdentityStores
+
+var ListUsers = &sListUsers
+
+var UpdateGroup = &sUpdateGroup
+
+var UpdateIdentityStore = &sUpdateIdentityStore
+
+var UpdateUser = &sUpdateUser
+
+var _AWSIdentityStore = &s_AWSIdentityStore
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_RequestId = &sAccessDeniedException_RequestId
+var AccessDeniedException_Reason = &sAccessDeniedException_Reason
+
+var AccessDeniedExceptionReason = &sAccessDeniedExceptionReason
+var AccessDeniedExceptionReason_KMS_ACCESS_DENIED = &sAccessDeniedExceptionReason_KMS_ACCESS_DENIED
+
+var Address = &sAddress
+var Address_StreetAddress = &sAddress_StreetAddress
+var Address_Locality = &sAddress_Locality
+var Address_Region = &sAddress_Region
+var Address_PostalCode = &sAddress_PostalCode
+var Address_Country = &sAddress_Country
+var Address_Formatted = &sAddress_Formatted
+var Address_Type = &sAddress_Type
+var Address_Primary = &sAddress_Primary
+
+var _Addresses = &s_Addresses
+var _Addresses_member = &s_Addresses_member
+
+var AlternateIdentifier = &sAlternateIdentifier
+var AlternateIdentifier_ExternalId = &sAlternateIdentifier_ExternalId
+var AlternateIdentifier_UniqueAttribute = &sAlternateIdentifier_UniqueAttribute
+
+var AttributeOperation = &sAttributeOperation
+var AttributeOperation_AttributePath = &sAttributeOperation_AttributePath
+var AttributeOperation_AttributeValue = &sAttributeOperation_AttributeValue
+
+var _AttributeOperations = &s_AttributeOperations
+var _AttributeOperations_member = &s_AttributeOperations_member
+
+var _AttributePath = &s_AttributePath
+
+var _AttributeValue = &s_AttributeValue
+
+var _BooleanType = &s_BooleanType
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_RequestId = &sConflictException_RequestId
+var ConflictException_Reason = &sConflictException_Reason
+
+var ConflictExceptionReason = &sConflictExceptionReason
+var ConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION = &sConflictExceptionReason_UNIQUENESS_CONSTRAINT_VIOLATION
+var ConflictExceptionReason_CONCURRENT_MODIFICATION = &sConflictExceptionReason_CONCURRENT_MODIFICATION
+
+var _DateType = &s_DateType
+
+var Email = &sEmail
+var Email_Value = &sEmail_Value
+var Email_Type = &sEmail_Type
+var Email_Primary = &sEmail_Primary
+
+var _Emails = &s_Emails
+var _Emails_member = &s_Emails_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _ExtensionName = &s_ExtensionName
+
+var _ExtensionNames = &s_ExtensionNames
+var _ExtensionNames_member = &s_ExtensionNames_member
+
+var _Extensions = &s_Extensions
+var _Extensions_key = &s_Extensions_key
+var _Extensions_value = &s_Extensions_value
+
+var ExternalId = &sExternalId
+var ExternalId_Issuer = &sExternalId_Issuer
+var ExternalId_Id = &sExternalId_Id
+
+var _ExternalIdIdentifier = &s_ExternalIdIdentifier
+
+var _ExternalIdIssuer = &s_ExternalIdIssuer
+
+var _ExternalIds = &s_ExternalIds
+var _ExternalIds_member = &s_ExternalIds_member
+
+var Filter = &sFilter
+var Filter_AttributePath = &sFilter_AttributePath
+var Filter_AttributeValue = &sFilter_AttributeValue
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var Group = &sGroup
+var Group_IdentityStoreId = &sGroup_IdentityStoreId
+var Group_GroupId = &sGroup_GroupId
+var Group_GroupArn = &sGroup_GroupArn
+var Group_Revision = &sGroup_Revision
+var Group_DisplayName = &sGroup_DisplayName
+var Group_ExternalIds = &sGroup_ExternalIds
+var Group_Description = &sGroup_Description
+var Group_CreatedAt = &sGroup_CreatedAt
+var Group_UpdatedAt = &sGroup_UpdatedAt
+var Group_CreatedBy = &sGroup_CreatedBy
+var Group_UpdatedBy = &sGroup_UpdatedBy
+
+var _GroupDisplayName = &s_GroupDisplayName
+
+var _GroupIds = &s_GroupIds
+var _GroupIds_member = &s_GroupIds_member
+
+var GroupMembership = &sGroupMembership
+var GroupMembership_IdentityStoreId = &sGroupMembership_IdentityStoreId
+var GroupMembership_MembershipId = &sGroupMembership_MembershipId
+var GroupMembership_MembershipArn = &sGroupMembership_MembershipArn
+var GroupMembership_GroupId = &sGroupMembership_GroupId
+var GroupMembership_MemberId = &sGroupMembership_MemberId
+var GroupMembership_CreatedAt = &sGroupMembership_CreatedAt
+var GroupMembership_UpdatedAt = &sGroupMembership_UpdatedAt
+var GroupMembership_CreatedBy = &sGroupMembership_CreatedBy
+var GroupMembership_UpdatedBy = &sGroupMembership_UpdatedBy
+
+var GroupMembershipExistenceResult = &sGroupMembershipExistenceResult
+var GroupMembershipExistenceResult_GroupId = &sGroupMembershipExistenceResult_GroupId
+var GroupMembershipExistenceResult_MemberId = &sGroupMembershipExistenceResult_MemberId
+var GroupMembershipExistenceResult_MembershipExists = &sGroupMembershipExistenceResult_MembershipExists
+
+var _GroupMembershipExistenceResults = &s_GroupMembershipExistenceResults
+var _GroupMembershipExistenceResults_member = &s_GroupMembershipExistenceResults_member
+
+var _GroupMemberships = &s_GroupMemberships
+var _GroupMemberships_member = &s_GroupMemberships_member
+
+var _Groups = &s_Groups
+var _Groups_member = &s_Groups_member
+
+var IdentityStore = &sIdentityStore
+var IdentityStore_IdentityStoreId = &sIdentityStore_IdentityStoreId
+var IdentityStore_IdentityStoreArn = &sIdentityStore_IdentityStoreArn
+
+var _IdentityStoreArn = &s_IdentityStoreArn
+
+var _IdentityStoreId = &s_IdentityStoreId
+
+var _IdentityStores = &s_IdentityStores
+var _IdentityStores_member = &s_IdentityStores_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+var InternalServerException_RequestId = &sInternalServerException_RequestId
+var InternalServerException_RetryAfterSeconds = &sInternalServerException_RetryAfterSeconds
+
+var _IpCidrList = &s_IpCidrList
+var _IpCidrList_member = &s_IpCidrList_member
+
+var _IpCidrType = &s_IpCidrType
+
+var _MaxResults = &s_MaxResults
+
+var MemberId = &sMemberId
+var MemberId_UserId = &sMemberId_UserId
+
+var Name = &sName
+var Name_Formatted = &sName_Formatted
+var Name_FamilyName = &sName_FamilyName
+var Name_GivenName = &sName_GivenName
+var Name_MiddleName = &sName_MiddleName
+var Name_HonorificPrefix = &sName_HonorificPrefix
+var Name_HonorificSuffix = &sName_HonorificSuffix
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_VpceAccessRequired = &sNetworkConfiguration_VpceAccessRequired
+var NetworkConfiguration_ApiRestrictSourceVpcs = &sNetworkConfiguration_ApiRestrictSourceVpcs
+var NetworkConfiguration_ApiAllowSourceIps = &sNetworkConfiguration_ApiAllowSourceIps
+var NetworkConfiguration_ScimAllowSourceIps = &sNetworkConfiguration_ScimAllowSourceIps
+
+var NetworkConfigurationDetails = &sNetworkConfigurationDetails
+var NetworkConfigurationDetails_VpceAccessRequired = &sNetworkConfigurationDetails_VpceAccessRequired
+var NetworkConfigurationDetails_ApiRestrictSourceVpcs = &sNetworkConfigurationDetails_ApiRestrictSourceVpcs
+var NetworkConfigurationDetails_ApiAllowSourceIps = &sNetworkConfigurationDetails_ApiAllowSourceIps
+var NetworkConfigurationDetails_ScimAllowSourceIps = &sNetworkConfigurationDetails_ScimAllowSourceIps
+
+var _NextToken = &s_NextToken
+
+var PhoneNumber = &sPhoneNumber
+var PhoneNumber_Value = &sPhoneNumber_Value
+var PhoneNumber_Type = &sPhoneNumber_Type
+var PhoneNumber_Primary = &sPhoneNumber_Primary
+
+var _PhoneNumbers = &s_PhoneNumbers
+var _PhoneNumbers_member = &s_PhoneNumbers_member
+
+var Photo = &sPhoto
+var Photo_Value = &sPhoto_Value
+var Photo_Type = &sPhoto_Type
+var Photo_Display = &sPhoto_Display
+var Photo_Primary = &sPhoto_Primary
+
+var _Photos = &s_Photos
+var _Photos_member = &s_Photos_member
+
+var _RequestId = &s_RequestId
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_Reason = &sResourceNotFoundException_Reason
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_RequestId = &sResourceNotFoundException_RequestId
+
+var ResourceNotFoundExceptionReason = &sResourceNotFoundExceptionReason
+var ResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND = &sResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND
+
+var _ResourceRevision = &s_ResourceRevision
+
+var ResourceType = &sResourceType
+var ResourceType_GROUP = &sResourceType_GROUP
+var ResourceType_USER = &sResourceType_USER
+var ResourceType_IDENTITY_STORE = &sResourceType_IDENTITY_STORE
+var ResourceType_GROUP_MEMBERSHIP = &sResourceType_GROUP_MEMBERSHIP
+var ResourceType_RESOURCE_POLICY = &sResourceType_RESOURCE_POLICY
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var Role = &sRole
+var Role_Value = &sRole_Value
+var Role_Type = &sRole_Type
+var Role_Primary = &sRole_Primary
+
+var _Roles = &s_Roles
+var _Roles_member = &s_Roles_member
+
+var _SensitiveStringType = &s_SensitiveStringType
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_RequestId = &sServiceQuotaExceededException_RequestId
+
+var _StringType = &s_StringType
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_RequestId = &sThrottlingException_RequestId
+var ThrottlingException_RetryAfterSeconds = &sThrottlingException_RetryAfterSeconds
+var ThrottlingException_Reason = &sThrottlingException_Reason
+
+var ThrottlingExceptionReason = &sThrottlingExceptionReason
+var ThrottlingExceptionReason_KMS_THROTTLING = &sThrottlingExceptionReason_KMS_THROTTLING
+
+var UniqueAttribute = &sUniqueAttribute
+var UniqueAttribute_AttributePath = &sUniqueAttribute_AttributePath
+var UniqueAttribute_AttributeValue = &sUniqueAttribute_AttributeValue
+
+var User = &sUser
+var User_IdentityStoreId = &sUser_IdentityStoreId
+var User_UserId = &sUser_UserId
+var User_UserArn = &sUser_UserArn
+var User_Revision = &sUser_Revision
+var User_UserName = &sUser_UserName
+var User_ExternalIds = &sUser_ExternalIds
+var User_Name = &sUser_Name
+var User_DisplayName = &sUser_DisplayName
+var User_NickName = &sUser_NickName
+var User_ProfileUrl = &sUser_ProfileUrl
+var User_Emails = &sUser_Emails
+var User_Addresses = &sUser_Addresses
+var User_PhoneNumbers = &sUser_PhoneNumbers
+var User_UserType = &sUser_UserType
+var User_Title = &sUser_Title
+var User_PreferredLanguage = &sUser_PreferredLanguage
+var User_Locale = &sUser_Locale
+var User_Timezone = &sUser_Timezone
+var User_UserStatus = &sUser_UserStatus
+var User_Photos = &sUser_Photos
+var User_Website = &sUser_Website
+var User_Birthdate = &sUser_Birthdate
+var User_Roles = &sUser_Roles
+var User_CreatedAt = &sUser_CreatedAt
+var User_CreatedBy = &sUser_CreatedBy
+var User_UpdatedAt = &sUser_UpdatedAt
+var User_UpdatedBy = &sUser_UpdatedBy
+var User_Extensions = &sUser_Extensions
+
+var _UserName = &s_UserName
+
+var _Users = &s_Users
+var _Users_member = &s_Users_member
+
+var UserStatus = &sUserStatus
+var UserStatus_ENABLED = &sUserStatus_ENABLED
+var UserStatus_DISABLED = &sUserStatus_DISABLED
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_RequestId = &sValidationException_RequestId
+var ValidationException_Reason = &sValidationException_Reason
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_KMS_INVALID_ARN = &sValidationExceptionReason_KMS_INVALID_ARN
+var ValidationExceptionReason_KMS_INVALID_KEY_USAGE = &sValidationExceptionReason_KMS_INVALID_KEY_USAGE
+var ValidationExceptionReason_KMS_INVALID_STATE = &sValidationExceptionReason_KMS_INVALID_STATE
+var ValidationExceptionReason_KMS_DISABLED = &sValidationExceptionReason_KMS_DISABLED
+
+var _VpcIdList = &s_VpcIdList
+var _VpcIdList_member = &s_VpcIdList_member
+
+var _VpcIdType = &s_VpcIdType
+
+var CreateGroupRequest = &sCreateGroupRequest
+var CreateGroupRequest_IdentityStoreId = &sCreateGroupRequest_IdentityStoreId
+var CreateGroupRequest_DisplayName = &sCreateGroupRequest_DisplayName
+var CreateGroupRequest_Description = &sCreateGroupRequest_Description
+
+var CreateGroupMembershipRequest = &sCreateGroupMembershipRequest
+var CreateGroupMembershipRequest_IdentityStoreId = &sCreateGroupMembershipRequest_IdentityStoreId
+var CreateGroupMembershipRequest_GroupId = &sCreateGroupMembershipRequest_GroupId
+var CreateGroupMembershipRequest_MemberId = &sCreateGroupMembershipRequest_MemberId
+
+var CreateGroupMembershipResponse = &sCreateGroupMembershipResponse
+var CreateGroupMembershipResponse_IdentityStoreId = &sCreateGroupMembershipResponse_IdentityStoreId
+var CreateGroupMembershipResponse_MembershipId = &sCreateGroupMembershipResponse_MembershipId
+var CreateGroupMembershipResponse_MembershipArn = &sCreateGroupMembershipResponse_MembershipArn
+
+var CreateGroupResponse = &sCreateGroupResponse
+var CreateGroupResponse_IdentityStoreId = &sCreateGroupResponse_IdentityStoreId
+var CreateGroupResponse_GroupId = &sCreateGroupResponse_GroupId
+var CreateGroupResponse_GroupArn = &sCreateGroupResponse_GroupArn
+var CreateGroupResponse_Revision = &sCreateGroupResponse_Revision
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_IdentityStoreId = &sCreateUserRequest_IdentityStoreId
+var CreateUserRequest_UserName = &sCreateUserRequest_UserName
+var CreateUserRequest_Name = &sCreateUserRequest_Name
+var CreateUserRequest_DisplayName = &sCreateUserRequest_DisplayName
+var CreateUserRequest_NickName = &sCreateUserRequest_NickName
+var CreateUserRequest_ProfileUrl = &sCreateUserRequest_ProfileUrl
+var CreateUserRequest_Emails = &sCreateUserRequest_Emails
+var CreateUserRequest_Addresses = &sCreateUserRequest_Addresses
+var CreateUserRequest_PhoneNumbers = &sCreateUserRequest_PhoneNumbers
+var CreateUserRequest_UserType = &sCreateUserRequest_UserType
+var CreateUserRequest_Title = &sCreateUserRequest_Title
+var CreateUserRequest_PreferredLanguage = &sCreateUserRequest_PreferredLanguage
+var CreateUserRequest_Locale = &sCreateUserRequest_Locale
+var CreateUserRequest_Timezone = &sCreateUserRequest_Timezone
+var CreateUserRequest_Photos = &sCreateUserRequest_Photos
+var CreateUserRequest_Website = &sCreateUserRequest_Website
+var CreateUserRequest_Birthdate = &sCreateUserRequest_Birthdate
+var CreateUserRequest_Roles = &sCreateUserRequest_Roles
+var CreateUserRequest_Extensions = &sCreateUserRequest_Extensions
+
+var CreateUserResponse = &sCreateUserResponse
+var CreateUserResponse_IdentityStoreId = &sCreateUserResponse_IdentityStoreId
+var CreateUserResponse_UserId = &sCreateUserResponse_UserId
+var CreateUserResponse_UserArn = &sCreateUserResponse_UserArn
+var CreateUserResponse_Revision = &sCreateUserResponse_Revision
+
+var DeleteGroupRequest = &sDeleteGroupRequest
+var DeleteGroupRequest_IdentityStoreId = &sDeleteGroupRequest_IdentityStoreId
+var DeleteGroupRequest_GroupId = &sDeleteGroupRequest_GroupId
+var DeleteGroupRequest_Revision = &sDeleteGroupRequest_Revision
+
+var DeleteGroupMembershipRequest = &sDeleteGroupMembershipRequest
+var DeleteGroupMembershipRequest_IdentityStoreId = &sDeleteGroupMembershipRequest_IdentityStoreId
+var DeleteGroupMembershipRequest_MembershipId = &sDeleteGroupMembershipRequest_MembershipId
+
+var DeleteGroupMembershipResponse = &sDeleteGroupMembershipResponse
+
+var DeleteGroupResponse = &sDeleteGroupResponse
+
+var DeleteUserRequest = &sDeleteUserRequest
+var DeleteUserRequest_IdentityStoreId = &sDeleteUserRequest_IdentityStoreId
+var DeleteUserRequest_UserId = &sDeleteUserRequest_UserId
+var DeleteUserRequest_Revision = &sDeleteUserRequest_Revision
+
+var DeleteUserResponse = &sDeleteUserResponse
+
+var DescribeGroupRequest = &sDescribeGroupRequest
+var DescribeGroupRequest_IdentityStoreId = &sDescribeGroupRequest_IdentityStoreId
+var DescribeGroupRequest_GroupId = &sDescribeGroupRequest_GroupId
+
+var DescribeGroupMembershipRequest = &sDescribeGroupMembershipRequest
+var DescribeGroupMembershipRequest_IdentityStoreId = &sDescribeGroupMembershipRequest_IdentityStoreId
+var DescribeGroupMembershipRequest_MembershipId = &sDescribeGroupMembershipRequest_MembershipId
+
+var DescribeGroupMembershipResponse = &sDescribeGroupMembershipResponse
+var DescribeGroupMembershipResponse_IdentityStoreId = &sDescribeGroupMembershipResponse_IdentityStoreId
+var DescribeGroupMembershipResponse_MembershipId = &sDescribeGroupMembershipResponse_MembershipId
+var DescribeGroupMembershipResponse_MembershipArn = &sDescribeGroupMembershipResponse_MembershipArn
+var DescribeGroupMembershipResponse_GroupId = &sDescribeGroupMembershipResponse_GroupId
+var DescribeGroupMembershipResponse_MemberId = &sDescribeGroupMembershipResponse_MemberId
+var DescribeGroupMembershipResponse_CreatedAt = &sDescribeGroupMembershipResponse_CreatedAt
+var DescribeGroupMembershipResponse_UpdatedAt = &sDescribeGroupMembershipResponse_UpdatedAt
+var DescribeGroupMembershipResponse_CreatedBy = &sDescribeGroupMembershipResponse_CreatedBy
+var DescribeGroupMembershipResponse_UpdatedBy = &sDescribeGroupMembershipResponse_UpdatedBy
+
+var DescribeGroupResponse = &sDescribeGroupResponse
+var DescribeGroupResponse_IdentityStoreId = &sDescribeGroupResponse_IdentityStoreId
+var DescribeGroupResponse_GroupId = &sDescribeGroupResponse_GroupId
+var DescribeGroupResponse_GroupArn = &sDescribeGroupResponse_GroupArn
+var DescribeGroupResponse_Revision = &sDescribeGroupResponse_Revision
+var DescribeGroupResponse_DisplayName = &sDescribeGroupResponse_DisplayName
+var DescribeGroupResponse_ExternalIds = &sDescribeGroupResponse_ExternalIds
+var DescribeGroupResponse_Description = &sDescribeGroupResponse_Description
+var DescribeGroupResponse_CreatedAt = &sDescribeGroupResponse_CreatedAt
+var DescribeGroupResponse_UpdatedAt = &sDescribeGroupResponse_UpdatedAt
+var DescribeGroupResponse_CreatedBy = &sDescribeGroupResponse_CreatedBy
+var DescribeGroupResponse_UpdatedBy = &sDescribeGroupResponse_UpdatedBy
+
+var DescribeIdentityStoreRequest = &sDescribeIdentityStoreRequest
+var DescribeIdentityStoreRequest_IdentityStoreId = &sDescribeIdentityStoreRequest_IdentityStoreId
+
+var DescribeIdentityStoreResponse = &sDescribeIdentityStoreResponse
+var DescribeIdentityStoreResponse_IdentityStoreId = &sDescribeIdentityStoreResponse_IdentityStoreId
+var DescribeIdentityStoreResponse_IdentityStoreArn = &sDescribeIdentityStoreResponse_IdentityStoreArn
+var DescribeIdentityStoreResponse_NetworkConfiguration = &sDescribeIdentityStoreResponse_NetworkConfiguration
+
+var DescribeUserRequest = &sDescribeUserRequest
+var DescribeUserRequest_IdentityStoreId = &sDescribeUserRequest_IdentityStoreId
+var DescribeUserRequest_UserId = &sDescribeUserRequest_UserId
+var DescribeUserRequest_Extensions = &sDescribeUserRequest_Extensions
+
+var DescribeUserResponse = &sDescribeUserResponse
+var DescribeUserResponse_IdentityStoreId = &sDescribeUserResponse_IdentityStoreId
+var DescribeUserResponse_UserId = &sDescribeUserResponse_UserId
+var DescribeUserResponse_UserArn = &sDescribeUserResponse_UserArn
+var DescribeUserResponse_Revision = &sDescribeUserResponse_Revision
+var DescribeUserResponse_UserName = &sDescribeUserResponse_UserName
+var DescribeUserResponse_ExternalIds = &sDescribeUserResponse_ExternalIds
+var DescribeUserResponse_Name = &sDescribeUserResponse_Name
+var DescribeUserResponse_DisplayName = &sDescribeUserResponse_DisplayName
+var DescribeUserResponse_NickName = &sDescribeUserResponse_NickName
+var DescribeUserResponse_ProfileUrl = &sDescribeUserResponse_ProfileUrl
+var DescribeUserResponse_Emails = &sDescribeUserResponse_Emails
+var DescribeUserResponse_Addresses = &sDescribeUserResponse_Addresses
+var DescribeUserResponse_PhoneNumbers = &sDescribeUserResponse_PhoneNumbers
+var DescribeUserResponse_UserType = &sDescribeUserResponse_UserType
+var DescribeUserResponse_Title = &sDescribeUserResponse_Title
+var DescribeUserResponse_PreferredLanguage = &sDescribeUserResponse_PreferredLanguage
+var DescribeUserResponse_Locale = &sDescribeUserResponse_Locale
+var DescribeUserResponse_Timezone = &sDescribeUserResponse_Timezone
+var DescribeUserResponse_UserStatus = &sDescribeUserResponse_UserStatus
+var DescribeUserResponse_Photos = &sDescribeUserResponse_Photos
+var DescribeUserResponse_Website = &sDescribeUserResponse_Website
+var DescribeUserResponse_Birthdate = &sDescribeUserResponse_Birthdate
+var DescribeUserResponse_Roles = &sDescribeUserResponse_Roles
+var DescribeUserResponse_CreatedAt = &sDescribeUserResponse_CreatedAt
+var DescribeUserResponse_CreatedBy = &sDescribeUserResponse_CreatedBy
+var DescribeUserResponse_UpdatedAt = &sDescribeUserResponse_UpdatedAt
+var DescribeUserResponse_UpdatedBy = &sDescribeUserResponse_UpdatedBy
+var DescribeUserResponse_Extensions = &sDescribeUserResponse_Extensions
+
+var GetGroupIdRequest = &sGetGroupIdRequest
+var GetGroupIdRequest_IdentityStoreId = &sGetGroupIdRequest_IdentityStoreId
+var GetGroupIdRequest_AlternateIdentifier = &sGetGroupIdRequest_AlternateIdentifier
+
+var GetGroupIdResponse = &sGetGroupIdResponse
+var GetGroupIdResponse_IdentityStoreId = &sGetGroupIdResponse_IdentityStoreId
+var GetGroupIdResponse_GroupId = &sGetGroupIdResponse_GroupId
+var GetGroupIdResponse_GroupArn = &sGetGroupIdResponse_GroupArn
+
+var GetGroupMembershipIdRequest = &sGetGroupMembershipIdRequest
+var GetGroupMembershipIdRequest_IdentityStoreId = &sGetGroupMembershipIdRequest_IdentityStoreId
+var GetGroupMembershipIdRequest_GroupId = &sGetGroupMembershipIdRequest_GroupId
+var GetGroupMembershipIdRequest_MemberId = &sGetGroupMembershipIdRequest_MemberId
+
+var GetGroupMembershipIdResponse = &sGetGroupMembershipIdResponse
+var GetGroupMembershipIdResponse_IdentityStoreId = &sGetGroupMembershipIdResponse_IdentityStoreId
+var GetGroupMembershipIdResponse_MembershipId = &sGetGroupMembershipIdResponse_MembershipId
+var GetGroupMembershipIdResponse_MembershipArn = &sGetGroupMembershipIdResponse_MembershipArn
+
+var GetUserIdRequest = &sGetUserIdRequest
+var GetUserIdRequest_IdentityStoreId = &sGetUserIdRequest_IdentityStoreId
+var GetUserIdRequest_AlternateIdentifier = &sGetUserIdRequest_AlternateIdentifier
+
+var GetUserIdResponse = &sGetUserIdResponse
+var GetUserIdResponse_IdentityStoreId = &sGetUserIdResponse_IdentityStoreId
+var GetUserIdResponse_UserId = &sGetUserIdResponse_UserId
+var GetUserIdResponse_UserArn = &sGetUserIdResponse_UserArn
+
+var IsMemberInGroupsRequest = &sIsMemberInGroupsRequest
+var IsMemberInGroupsRequest_IdentityStoreId = &sIsMemberInGroupsRequest_IdentityStoreId
+var IsMemberInGroupsRequest_MemberId = &sIsMemberInGroupsRequest_MemberId
+var IsMemberInGroupsRequest_GroupIds = &sIsMemberInGroupsRequest_GroupIds
+
+var IsMemberInGroupsResponse = &sIsMemberInGroupsResponse
+var IsMemberInGroupsResponse_Results = &sIsMemberInGroupsResponse_Results
+
+var ListGroupMembershipsForMemberRequest = &sListGroupMembershipsForMemberRequest
+var ListGroupMembershipsForMemberRequest_IdentityStoreId = &sListGroupMembershipsForMemberRequest_IdentityStoreId
+var ListGroupMembershipsForMemberRequest_MemberId = &sListGroupMembershipsForMemberRequest_MemberId
+var ListGroupMembershipsForMemberRequest_MaxResults = &sListGroupMembershipsForMemberRequest_MaxResults
+var ListGroupMembershipsForMemberRequest_NextToken = &sListGroupMembershipsForMemberRequest_NextToken
+
+var ListGroupMembershipsForMemberResponse = &sListGroupMembershipsForMemberResponse
+var ListGroupMembershipsForMemberResponse_GroupMemberships = &sListGroupMembershipsForMemberResponse_GroupMemberships
+var ListGroupMembershipsForMemberResponse_NextToken = &sListGroupMembershipsForMemberResponse_NextToken
+
+var ListGroupMembershipsRequest = &sListGroupMembershipsRequest
+var ListGroupMembershipsRequest_IdentityStoreId = &sListGroupMembershipsRequest_IdentityStoreId
+var ListGroupMembershipsRequest_GroupId = &sListGroupMembershipsRequest_GroupId
+var ListGroupMembershipsRequest_MaxResults = &sListGroupMembershipsRequest_MaxResults
+var ListGroupMembershipsRequest_NextToken = &sListGroupMembershipsRequest_NextToken
+
+var ListGroupMembershipsResponse = &sListGroupMembershipsResponse
+var ListGroupMembershipsResponse_GroupMemberships = &sListGroupMembershipsResponse_GroupMemberships
+var ListGroupMembershipsResponse_NextToken = &sListGroupMembershipsResponse_NextToken
+
+var ListGroupsRequest = &sListGroupsRequest
+var ListGroupsRequest_IdentityStoreId = &sListGroupsRequest_IdentityStoreId
+var ListGroupsRequest_MaxResults = &sListGroupsRequest_MaxResults
+var ListGroupsRequest_NextToken = &sListGroupsRequest_NextToken
+var ListGroupsRequest_Filters = &sListGroupsRequest_Filters
+
+var ListGroupsResponse = &sListGroupsResponse
+var ListGroupsResponse_Groups = &sListGroupsResponse_Groups
+var ListGroupsResponse_NextToken = &sListGroupsResponse_NextToken
+
+var ListIdentityStoresRequest = &sListIdentityStoresRequest
+var ListIdentityStoresRequest_MaxResults = &sListIdentityStoresRequest_MaxResults
+var ListIdentityStoresRequest_NextToken = &sListIdentityStoresRequest_NextToken
+
+var ListIdentityStoresResponse = &sListIdentityStoresResponse
+var ListIdentityStoresResponse_IdentityStores = &sListIdentityStoresResponse_IdentityStores
+var ListIdentityStoresResponse_NextToken = &sListIdentityStoresResponse_NextToken
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_IdentityStoreId = &sListUsersRequest_IdentityStoreId
+var ListUsersRequest_Extensions = &sListUsersRequest_Extensions
+var ListUsersRequest_MaxResults = &sListUsersRequest_MaxResults
+var ListUsersRequest_NextToken = &sListUsersRequest_NextToken
+var ListUsersRequest_Filters = &sListUsersRequest_Filters
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_Users = &sListUsersResponse_Users
+var ListUsersResponse_NextToken = &sListUsersResponse_NextToken
+
+var UpdateGroupRequest = &sUpdateGroupRequest
+var UpdateGroupRequest_IdentityStoreId = &sUpdateGroupRequest_IdentityStoreId
+var UpdateGroupRequest_GroupId = &sUpdateGroupRequest_GroupId
+var UpdateGroupRequest_Operations = &sUpdateGroupRequest_Operations
+var UpdateGroupRequest_Revision = &sUpdateGroupRequest_Revision
+
+var UpdateGroupResponse = &sUpdateGroupResponse
+var UpdateGroupResponse_IdentityStoreId = &sUpdateGroupResponse_IdentityStoreId
+var UpdateGroupResponse_GroupId = &sUpdateGroupResponse_GroupId
+var UpdateGroupResponse_GroupArn = &sUpdateGroupResponse_GroupArn
+var UpdateGroupResponse_Revision = &sUpdateGroupResponse_Revision
+
+var UpdateIdentityStoreRequest = &sUpdateIdentityStoreRequest
+var UpdateIdentityStoreRequest_IdentityStoreId = &sUpdateIdentityStoreRequest_IdentityStoreId
+var UpdateIdentityStoreRequest_NetworkConfiguration = &sUpdateIdentityStoreRequest_NetworkConfiguration
+
+var UpdateIdentityStoreResponse = &sUpdateIdentityStoreResponse
+var UpdateIdentityStoreResponse_IdentityStoreId = &sUpdateIdentityStoreResponse_IdentityStoreId
+var UpdateIdentityStoreResponse_IdentityStoreArn = &sUpdateIdentityStoreResponse_IdentityStoreArn
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_IdentityStoreId = &sUpdateUserRequest_IdentityStoreId
+var UpdateUserRequest_UserId = &sUpdateUserRequest_UserId
+var UpdateUserRequest_Operations = &sUpdateUserRequest_Operations
+var UpdateUserRequest_Revision = &sUpdateUserRequest_Revision
+
+var UpdateUserResponse = &sUpdateUserResponse
+var UpdateUserResponse_IdentityStoreId = &sUpdateUserResponse_IdentityStoreId
+var UpdateUserResponse_UserId = &sUpdateUserResponse_UserId
+var UpdateUserResponse_UserArn = &sUpdateUserResponse_UserArn
+var UpdateUserResponse_Revision = &sUpdateUserResponse_Revision
+
+var AWSIdentityStore = &smithy.ServiceSchema{Schema: &s_AWSIdentityStore, Version: "2020-06-15"}

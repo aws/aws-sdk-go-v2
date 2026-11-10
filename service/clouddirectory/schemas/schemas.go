@@ -4,4687 +4,4635 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddFacetToObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AddFacetToObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eAddFacetToObject                                               smithy.SchemaExtensions
+	eApplySchema                                                    smithy.SchemaExtensions
+	eAttachObject                                                   smithy.SchemaExtensions
+	eAttachPolicy                                                   smithy.SchemaExtensions
+	eAttachToIndex                                                  smithy.SchemaExtensions
+	eAttachTypedLink                                                smithy.SchemaExtensions
+	eBatchRead                                                      smithy.SchemaExtensions
+	eBatchWrite                                                     smithy.SchemaExtensions
+	eCreateDirectory                                                smithy.SchemaExtensions
+	eCreateFacet                                                    smithy.SchemaExtensions
+	eCreateIndex                                                    smithy.SchemaExtensions
+	eCreateObject                                                   smithy.SchemaExtensions
+	eCreateSchema                                                   smithy.SchemaExtensions
+	eCreateTypedLinkFacet                                           smithy.SchemaExtensions
+	eDeleteDirectory                                                smithy.SchemaExtensions
+	eDeleteFacet                                                    smithy.SchemaExtensions
+	eDeleteObject                                                   smithy.SchemaExtensions
+	eDeleteSchema                                                   smithy.SchemaExtensions
+	eDeleteTypedLinkFacet                                           smithy.SchemaExtensions
+	eDetachFromIndex                                                smithy.SchemaExtensions
+	eDetachObject                                                   smithy.SchemaExtensions
+	eDetachPolicy                                                   smithy.SchemaExtensions
+	eDetachTypedLink                                                smithy.SchemaExtensions
+	eDisableDirectory                                               smithy.SchemaExtensions
+	eEnableDirectory                                                smithy.SchemaExtensions
+	eGetAppliedSchemaVersion                                        smithy.SchemaExtensions
+	eGetDirectory                                                   smithy.SchemaExtensions
+	eGetFacet                                                       smithy.SchemaExtensions
+	eGetLinkAttributes                                              smithy.SchemaExtensions
+	eGetObjectAttributes                                            smithy.SchemaExtensions
+	eGetObjectInformation                                           smithy.SchemaExtensions
+	eGetSchemaAsJson                                                smithy.SchemaExtensions
+	eGetTypedLinkFacetInformation                                   smithy.SchemaExtensions
+	eListAppliedSchemaArns                                          smithy.SchemaExtensions
+	eListAttachedIndices                                            smithy.SchemaExtensions
+	eListDevelopmentSchemaArns                                      smithy.SchemaExtensions
+	eListDirectories                                                smithy.SchemaExtensions
+	eListFacetAttributes                                            smithy.SchemaExtensions
+	eListFacetNames                                                 smithy.SchemaExtensions
+	eListIncomingTypedLinks                                         smithy.SchemaExtensions
+	eListIndex                                                      smithy.SchemaExtensions
+	eListManagedSchemaArns                                          smithy.SchemaExtensions
+	eListObjectAttributes                                           smithy.SchemaExtensions
+	eListObjectChildren                                             smithy.SchemaExtensions
+	eListObjectParentPaths                                          smithy.SchemaExtensions
+	eListObjectParents                                              smithy.SchemaExtensions
+	eListObjectPolicies                                             smithy.SchemaExtensions
+	eListOutgoingTypedLinks                                         smithy.SchemaExtensions
+	eListPolicyAttachments                                          smithy.SchemaExtensions
+	eListPublishedSchemaArns                                        smithy.SchemaExtensions
+	eListTagsForResource                                            smithy.SchemaExtensions
+	eListTypedLinkFacetAttributes                                   smithy.SchemaExtensions
+	eListTypedLinkFacetNames                                        smithy.SchemaExtensions
+	eLookupPolicy                                                   smithy.SchemaExtensions
+	ePublishSchema                                                  smithy.SchemaExtensions
+	ePutSchemaFromJson                                              smithy.SchemaExtensions
+	eRemoveFacetFromObject                                          smithy.SchemaExtensions
+	eTagResource                                                    smithy.SchemaExtensions
+	eUntagResource                                                  smithy.SchemaExtensions
+	eUpdateFacet                                                    smithy.SchemaExtensions
+	eUpdateLinkAttributes                                           smithy.SchemaExtensions
+	eUpdateObjectAttributes                                         smithy.SchemaExtensions
+	eUpdateSchema                                                   smithy.SchemaExtensions
+	eUpdateTypedLinkFacet                                           smithy.SchemaExtensions
+	eUpgradeAppliedSchema                                           smithy.SchemaExtensions
+	eUpgradePublishedSchema                                         smithy.SchemaExtensions
+	e_AmazonCloudDirectory_20170111                                 smithy.SchemaExtensions
+	eAccessDeniedException                                          smithy.SchemaExtensions
+	eAccessDeniedException_Message                                  smithy.SchemaExtensions
+	e_Arn                                                           smithy.SchemaExtensions
+	e_Arns                                                          smithy.SchemaExtensions
+	e_Arns_member                                                   smithy.SchemaExtensions
+	eAttributeKey                                                   smithy.SchemaExtensions
+	eAttributeKey_SchemaArn                                         smithy.SchemaExtensions
+	eAttributeKey_FacetName                                         smithy.SchemaExtensions
+	eAttributeKey_Name                                              smithy.SchemaExtensions
+	eAttributeKeyAndValue                                           smithy.SchemaExtensions
+	eAttributeKeyAndValue_Key                                       smithy.SchemaExtensions
+	eAttributeKeyAndValue_Value                                     smithy.SchemaExtensions
+	e_AttributeKeyAndValueList                                      smithy.SchemaExtensions
+	e_AttributeKeyAndValueList_member                               smithy.SchemaExtensions
+	e_AttributeKeyList                                              smithy.SchemaExtensions
+	e_AttributeKeyList_member                                       smithy.SchemaExtensions
+	e_AttributeName                                                 smithy.SchemaExtensions
+	eAttributeNameAndValue                                          smithy.SchemaExtensions
+	eAttributeNameAndValue_AttributeName                            smithy.SchemaExtensions
+	eAttributeNameAndValue_Value                                    smithy.SchemaExtensions
+	e_AttributeNameAndValueList                                     smithy.SchemaExtensions
+	e_AttributeNameAndValueList_member                              smithy.SchemaExtensions
+	e_AttributeNameList                                             smithy.SchemaExtensions
+	e_AttributeNameList_member                                      smithy.SchemaExtensions
+	eBatchAddFacetToObject                                          smithy.SchemaExtensions
+	eBatchAddFacetToObject_SchemaFacet                              smithy.SchemaExtensions
+	eBatchAddFacetToObject_ObjectAttributeList                      smithy.SchemaExtensions
+	eBatchAddFacetToObject_ObjectReference                          smithy.SchemaExtensions
+	eBatchAddFacetToObjectResponse                                  smithy.SchemaExtensions
+	eBatchAttachObject                                              smithy.SchemaExtensions
+	eBatchAttachObject_ParentReference                              smithy.SchemaExtensions
+	eBatchAttachObject_ChildReference                               smithy.SchemaExtensions
+	eBatchAttachObject_LinkName                                     smithy.SchemaExtensions
+	eBatchAttachObjectResponse                                      smithy.SchemaExtensions
+	eBatchAttachObjectResponse_attachedObjectIdentifier             smithy.SchemaExtensions
+	eBatchAttachPolicy                                              smithy.SchemaExtensions
+	eBatchAttachPolicy_PolicyReference                              smithy.SchemaExtensions
+	eBatchAttachPolicy_ObjectReference                              smithy.SchemaExtensions
+	eBatchAttachPolicyResponse                                      smithy.SchemaExtensions
+	eBatchAttachToIndex                                             smithy.SchemaExtensions
+	eBatchAttachToIndex_IndexReference                              smithy.SchemaExtensions
+	eBatchAttachToIndex_TargetReference                             smithy.SchemaExtensions
+	eBatchAttachToIndexResponse                                     smithy.SchemaExtensions
+	eBatchAttachToIndexResponse_AttachedObjectIdentifier            smithy.SchemaExtensions
+	eBatchAttachTypedLink                                           smithy.SchemaExtensions
+	eBatchAttachTypedLink_SourceObjectReference                     smithy.SchemaExtensions
+	eBatchAttachTypedLink_TargetObjectReference                     smithy.SchemaExtensions
+	eBatchAttachTypedLink_TypedLinkFacet                            smithy.SchemaExtensions
+	eBatchAttachTypedLink_Attributes                                smithy.SchemaExtensions
+	eBatchAttachTypedLinkResponse                                   smithy.SchemaExtensions
+	eBatchAttachTypedLinkResponse_TypedLinkSpecifier                smithy.SchemaExtensions
+	eBatchCreateIndex                                               smithy.SchemaExtensions
+	eBatchCreateIndex_OrderedIndexedAttributeList                   smithy.SchemaExtensions
+	eBatchCreateIndex_IsUnique                                      smithy.SchemaExtensions
+	eBatchCreateIndex_ParentReference                               smithy.SchemaExtensions
+	eBatchCreateIndex_LinkName                                      smithy.SchemaExtensions
+	eBatchCreateIndex_BatchReferenceName                            smithy.SchemaExtensions
+	eBatchCreateIndexResponse                                       smithy.SchemaExtensions
+	eBatchCreateIndexResponse_ObjectIdentifier                      smithy.SchemaExtensions
+	eBatchCreateObject                                              smithy.SchemaExtensions
+	eBatchCreateObject_SchemaFacet                                  smithy.SchemaExtensions
+	eBatchCreateObject_ObjectAttributeList                          smithy.SchemaExtensions
+	eBatchCreateObject_ParentReference                              smithy.SchemaExtensions
+	eBatchCreateObject_LinkName                                     smithy.SchemaExtensions
+	eBatchCreateObject_BatchReferenceName                           smithy.SchemaExtensions
+	eBatchCreateObjectResponse                                      smithy.SchemaExtensions
+	eBatchCreateObjectResponse_ObjectIdentifier                     smithy.SchemaExtensions
+	eBatchDeleteObject                                              smithy.SchemaExtensions
+	eBatchDeleteObject_ObjectReference                              smithy.SchemaExtensions
+	eBatchDeleteObjectResponse                                      smithy.SchemaExtensions
+	eBatchDetachFromIndex                                           smithy.SchemaExtensions
+	eBatchDetachFromIndex_IndexReference                            smithy.SchemaExtensions
+	eBatchDetachFromIndex_TargetReference                           smithy.SchemaExtensions
+	eBatchDetachFromIndexResponse                                   smithy.SchemaExtensions
+	eBatchDetachFromIndexResponse_DetachedObjectIdentifier          smithy.SchemaExtensions
+	eBatchDetachObject                                              smithy.SchemaExtensions
+	eBatchDetachObject_ParentReference                              smithy.SchemaExtensions
+	eBatchDetachObject_LinkName                                     smithy.SchemaExtensions
+	eBatchDetachObject_BatchReferenceName                           smithy.SchemaExtensions
+	eBatchDetachObjectResponse                                      smithy.SchemaExtensions
+	eBatchDetachObjectResponse_detachedObjectIdentifier             smithy.SchemaExtensions
+	eBatchDetachPolicy                                              smithy.SchemaExtensions
+	eBatchDetachPolicy_PolicyReference                              smithy.SchemaExtensions
+	eBatchDetachPolicy_ObjectReference                              smithy.SchemaExtensions
+	eBatchDetachPolicyResponse                                      smithy.SchemaExtensions
+	eBatchDetachTypedLink                                           smithy.SchemaExtensions
+	eBatchDetachTypedLink_TypedLinkSpecifier                        smithy.SchemaExtensions
+	eBatchDetachTypedLinkResponse                                   smithy.SchemaExtensions
+	eBatchGetLinkAttributes                                         smithy.SchemaExtensions
+	eBatchGetLinkAttributes_TypedLinkSpecifier                      smithy.SchemaExtensions
+	eBatchGetLinkAttributes_AttributeNames                          smithy.SchemaExtensions
+	eBatchGetLinkAttributesResponse                                 smithy.SchemaExtensions
+	eBatchGetLinkAttributesResponse_Attributes                      smithy.SchemaExtensions
+	eBatchGetObjectAttributes                                       smithy.SchemaExtensions
+	eBatchGetObjectAttributes_ObjectReference                       smithy.SchemaExtensions
+	eBatchGetObjectAttributes_SchemaFacet                           smithy.SchemaExtensions
+	eBatchGetObjectAttributes_AttributeNames                        smithy.SchemaExtensions
+	eBatchGetObjectAttributesResponse                               smithy.SchemaExtensions
+	eBatchGetObjectAttributesResponse_Attributes                    smithy.SchemaExtensions
+	eBatchGetObjectInformation                                      smithy.SchemaExtensions
+	eBatchGetObjectInformation_ObjectReference                      smithy.SchemaExtensions
+	eBatchGetObjectInformationResponse                              smithy.SchemaExtensions
+	eBatchGetObjectInformationResponse_SchemaFacets                 smithy.SchemaExtensions
+	eBatchGetObjectInformationResponse_ObjectIdentifier             smithy.SchemaExtensions
+	eBatchListAttachedIndices                                       smithy.SchemaExtensions
+	eBatchListAttachedIndices_TargetReference                       smithy.SchemaExtensions
+	eBatchListAttachedIndices_NextToken                             smithy.SchemaExtensions
+	eBatchListAttachedIndices_MaxResults                            smithy.SchemaExtensions
+	eBatchListAttachedIndicesResponse                               smithy.SchemaExtensions
+	eBatchListAttachedIndicesResponse_IndexAttachments              smithy.SchemaExtensions
+	eBatchListAttachedIndicesResponse_NextToken                     smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks                                    smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks_ObjectReference                    smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks_FilterAttributeRanges              smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks_FilterTypedLink                    smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks_NextToken                          smithy.SchemaExtensions
+	eBatchListIncomingTypedLinks_MaxResults                         smithy.SchemaExtensions
+	eBatchListIncomingTypedLinksResponse                            smithy.SchemaExtensions
+	eBatchListIncomingTypedLinksResponse_LinkSpecifiers             smithy.SchemaExtensions
+	eBatchListIncomingTypedLinksResponse_NextToken                  smithy.SchemaExtensions
+	eBatchListIndex                                                 smithy.SchemaExtensions
+	eBatchListIndex_RangesOnIndexedValues                           smithy.SchemaExtensions
+	eBatchListIndex_IndexReference                                  smithy.SchemaExtensions
+	eBatchListIndex_MaxResults                                      smithy.SchemaExtensions
+	eBatchListIndex_NextToken                                       smithy.SchemaExtensions
+	eBatchListIndexResponse                                         smithy.SchemaExtensions
+	eBatchListIndexResponse_IndexAttachments                        smithy.SchemaExtensions
+	eBatchListIndexResponse_NextToken                               smithy.SchemaExtensions
+	eBatchListObjectAttributes                                      smithy.SchemaExtensions
+	eBatchListObjectAttributes_ObjectReference                      smithy.SchemaExtensions
+	eBatchListObjectAttributes_NextToken                            smithy.SchemaExtensions
+	eBatchListObjectAttributes_MaxResults                           smithy.SchemaExtensions
+	eBatchListObjectAttributes_FacetFilter                          smithy.SchemaExtensions
+	eBatchListObjectAttributesResponse                              smithy.SchemaExtensions
+	eBatchListObjectAttributesResponse_Attributes                   smithy.SchemaExtensions
+	eBatchListObjectAttributesResponse_NextToken                    smithy.SchemaExtensions
+	eBatchListObjectChildren                                        smithy.SchemaExtensions
+	eBatchListObjectChildren_ObjectReference                        smithy.SchemaExtensions
+	eBatchListObjectChildren_NextToken                              smithy.SchemaExtensions
+	eBatchListObjectChildren_MaxResults                             smithy.SchemaExtensions
+	eBatchListObjectChildrenResponse                                smithy.SchemaExtensions
+	eBatchListObjectChildrenResponse_Children                       smithy.SchemaExtensions
+	eBatchListObjectChildrenResponse_NextToken                      smithy.SchemaExtensions
+	eBatchListObjectParentPaths                                     smithy.SchemaExtensions
+	eBatchListObjectParentPaths_ObjectReference                     smithy.SchemaExtensions
+	eBatchListObjectParentPaths_NextToken                           smithy.SchemaExtensions
+	eBatchListObjectParentPaths_MaxResults                          smithy.SchemaExtensions
+	eBatchListObjectParentPathsResponse                             smithy.SchemaExtensions
+	eBatchListObjectParentPathsResponse_PathToObjectIdentifiersList smithy.SchemaExtensions
+	eBatchListObjectParentPathsResponse_NextToken                   smithy.SchemaExtensions
+	eBatchListObjectParents                                         smithy.SchemaExtensions
+	eBatchListObjectParents_ObjectReference                         smithy.SchemaExtensions
+	eBatchListObjectParents_NextToken                               smithy.SchemaExtensions
+	eBatchListObjectParents_MaxResults                              smithy.SchemaExtensions
+	eBatchListObjectParentsResponse                                 smithy.SchemaExtensions
+	eBatchListObjectParentsResponse_ParentLinks                     smithy.SchemaExtensions
+	eBatchListObjectParentsResponse_NextToken                       smithy.SchemaExtensions
+	eBatchListObjectPolicies                                        smithy.SchemaExtensions
+	eBatchListObjectPolicies_ObjectReference                        smithy.SchemaExtensions
+	eBatchListObjectPolicies_NextToken                              smithy.SchemaExtensions
+	eBatchListObjectPolicies_MaxResults                             smithy.SchemaExtensions
+	eBatchListObjectPoliciesResponse                                smithy.SchemaExtensions
+	eBatchListObjectPoliciesResponse_AttachedPolicyIds              smithy.SchemaExtensions
+	eBatchListObjectPoliciesResponse_NextToken                      smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks                                    smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks_ObjectReference                    smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks_FilterAttributeRanges              smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks_FilterTypedLink                    smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks_NextToken                          smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinks_MaxResults                         smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinksResponse                            smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers        smithy.SchemaExtensions
+	eBatchListOutgoingTypedLinksResponse_NextToken                  smithy.SchemaExtensions
+	eBatchListPolicyAttachments                                     smithy.SchemaExtensions
+	eBatchListPolicyAttachments_PolicyReference                     smithy.SchemaExtensions
+	eBatchListPolicyAttachments_NextToken                           smithy.SchemaExtensions
+	eBatchListPolicyAttachments_MaxResults                          smithy.SchemaExtensions
+	eBatchListPolicyAttachmentsResponse                             smithy.SchemaExtensions
+	eBatchListPolicyAttachmentsResponse_ObjectIdentifiers           smithy.SchemaExtensions
+	eBatchListPolicyAttachmentsResponse_NextToken                   smithy.SchemaExtensions
+	eBatchLookupPolicy                                              smithy.SchemaExtensions
+	eBatchLookupPolicy_ObjectReference                              smithy.SchemaExtensions
+	eBatchLookupPolicy_NextToken                                    smithy.SchemaExtensions
+	eBatchLookupPolicy_MaxResults                                   smithy.SchemaExtensions
+	eBatchLookupPolicyResponse                                      smithy.SchemaExtensions
+	eBatchLookupPolicyResponse_PolicyToPathList                     smithy.SchemaExtensions
+	eBatchLookupPolicyResponse_NextToken                            smithy.SchemaExtensions
+	e_BatchOperationIndex                                           smithy.SchemaExtensions
+	eBatchReadException                                             smithy.SchemaExtensions
+	eBatchReadException_Type                                        smithy.SchemaExtensions
+	eBatchReadException_Message                                     smithy.SchemaExtensions
+	eBatchReadExceptionType                                         smithy.SchemaExtensions
+	eBatchReadExceptionType_ValidationException                     smithy.SchemaExtensions
+	eBatchReadExceptionType_InvalidArnException                     smithy.SchemaExtensions
+	eBatchReadExceptionType_ResourceNotFoundException               smithy.SchemaExtensions
+	eBatchReadExceptionType_InvalidNextTokenException               smithy.SchemaExtensions
+	eBatchReadExceptionType_AccessDeniedException                   smithy.SchemaExtensions
+	eBatchReadExceptionType_NotNodeException                        smithy.SchemaExtensions
+	eBatchReadExceptionType_FacetValidationException                smithy.SchemaExtensions
+	eBatchReadExceptionType_CannotListParentOfRootException         smithy.SchemaExtensions
+	eBatchReadExceptionType_NotIndexException                       smithy.SchemaExtensions
+	eBatchReadExceptionType_NotPolicyException                      smithy.SchemaExtensions
+	eBatchReadExceptionType_DirectoryNotEnabledException            smithy.SchemaExtensions
+	eBatchReadExceptionType_LimitExceededException                  smithy.SchemaExtensions
+	eBatchReadExceptionType_InternalServiceException                smithy.SchemaExtensions
+	eBatchReadOperation                                             smithy.SchemaExtensions
+	eBatchReadOperation_ListObjectAttributes                        smithy.SchemaExtensions
+	eBatchReadOperation_ListObjectChildren                          smithy.SchemaExtensions
+	eBatchReadOperation_ListAttachedIndices                         smithy.SchemaExtensions
+	eBatchReadOperation_ListObjectParentPaths                       smithy.SchemaExtensions
+	eBatchReadOperation_GetObjectInformation                        smithy.SchemaExtensions
+	eBatchReadOperation_GetObjectAttributes                         smithy.SchemaExtensions
+	eBatchReadOperation_ListObjectParents                           smithy.SchemaExtensions
+	eBatchReadOperation_ListObjectPolicies                          smithy.SchemaExtensions
+	eBatchReadOperation_ListPolicyAttachments                       smithy.SchemaExtensions
+	eBatchReadOperation_LookupPolicy                                smithy.SchemaExtensions
+	eBatchReadOperation_ListIndex                                   smithy.SchemaExtensions
+	eBatchReadOperation_ListOutgoingTypedLinks                      smithy.SchemaExtensions
+	eBatchReadOperation_ListIncomingTypedLinks                      smithy.SchemaExtensions
+	eBatchReadOperation_GetLinkAttributes                           smithy.SchemaExtensions
+	e_BatchReadOperationList                                        smithy.SchemaExtensions
+	e_BatchReadOperationList_member                                 smithy.SchemaExtensions
+	eBatchReadOperationResponse                                     smithy.SchemaExtensions
+	eBatchReadOperationResponse_SuccessfulResponse                  smithy.SchemaExtensions
+	eBatchReadOperationResponse_ExceptionResponse                   smithy.SchemaExtensions
+	e_BatchReadOperationResponseList                                smithy.SchemaExtensions
+	e_BatchReadOperationResponseList_member                         smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse                                    smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListObjectAttributes               smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListObjectChildren                 smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_GetObjectInformation               smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_GetObjectAttributes                smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListAttachedIndices                smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListObjectParentPaths              smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListObjectPolicies                 smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListPolicyAttachments              smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_LookupPolicy                       smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListIndex                          smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListOutgoingTypedLinks             smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListIncomingTypedLinks             smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_GetLinkAttributes                  smithy.SchemaExtensions
+	eBatchReadSuccessfulResponse_ListObjectParents                  smithy.SchemaExtensions
+	e_BatchReferenceName                                            smithy.SchemaExtensions
+	eBatchRemoveFacetFromObject                                     smithy.SchemaExtensions
+	eBatchRemoveFacetFromObject_SchemaFacet                         smithy.SchemaExtensions
+	eBatchRemoveFacetFromObject_ObjectReference                     smithy.SchemaExtensions
+	eBatchRemoveFacetFromObjectResponse                             smithy.SchemaExtensions
+	eBatchUpdateLinkAttributes                                      smithy.SchemaExtensions
+	eBatchUpdateLinkAttributes_TypedLinkSpecifier                   smithy.SchemaExtensions
+	eBatchUpdateLinkAttributes_AttributeUpdates                     smithy.SchemaExtensions
+	eBatchUpdateLinkAttributesResponse                              smithy.SchemaExtensions
+	eBatchUpdateObjectAttributes                                    smithy.SchemaExtensions
+	eBatchUpdateObjectAttributes_ObjectReference                    smithy.SchemaExtensions
+	eBatchUpdateObjectAttributes_AttributeUpdates                   smithy.SchemaExtensions
+	eBatchUpdateObjectAttributesResponse                            smithy.SchemaExtensions
+	eBatchUpdateObjectAttributesResponse_ObjectIdentifier           smithy.SchemaExtensions
+	eBatchWriteException                                            smithy.SchemaExtensions
+	eBatchWriteException_Index                                      smithy.SchemaExtensions
+	eBatchWriteException_Type                                       smithy.SchemaExtensions
+	eBatchWriteException_Message                                    smithy.SchemaExtensions
+	eBatchWriteExceptionType                                        smithy.SchemaExtensions
+	eBatchWriteExceptionType_InternalServiceException               smithy.SchemaExtensions
+	eBatchWriteExceptionType_ValidationException                    smithy.SchemaExtensions
+	eBatchWriteExceptionType_InvalidArnException                    smithy.SchemaExtensions
+	eBatchWriteExceptionType_LinkNameAlreadyInUseException          smithy.SchemaExtensions
+	eBatchWriteExceptionType_StillContainsLinksException            smithy.SchemaExtensions
+	eBatchWriteExceptionType_FacetValidationException               smithy.SchemaExtensions
+	eBatchWriteExceptionType_ObjectNotDetachedException             smithy.SchemaExtensions
+	eBatchWriteExceptionType_ResourceNotFoundException              smithy.SchemaExtensions
+	eBatchWriteExceptionType_AccessDeniedException                  smithy.SchemaExtensions
+	eBatchWriteExceptionType_InvalidAttachmentException             smithy.SchemaExtensions
+	eBatchWriteExceptionType_NotIndexException                      smithy.SchemaExtensions
+	eBatchWriteExceptionType_NotNodeException                       smithy.SchemaExtensions
+	eBatchWriteExceptionType_IndexedAttributeMissingException       smithy.SchemaExtensions
+	eBatchWriteExceptionType_ObjectAlreadyDetachedException         smithy.SchemaExtensions
+	eBatchWriteExceptionType_NotPolicyException                     smithy.SchemaExtensions
+	eBatchWriteExceptionType_DirectoryNotEnabledException           smithy.SchemaExtensions
+	eBatchWriteExceptionType_LimitExceededException                 smithy.SchemaExtensions
+	eBatchWriteExceptionType_UnsupportedIndexTypeException          smithy.SchemaExtensions
+	eBatchWriteOperation                                            smithy.SchemaExtensions
+	eBatchWriteOperation_CreateObject                               smithy.SchemaExtensions
+	eBatchWriteOperation_AttachObject                               smithy.SchemaExtensions
+	eBatchWriteOperation_DetachObject                               smithy.SchemaExtensions
+	eBatchWriteOperation_UpdateObjectAttributes                     smithy.SchemaExtensions
+	eBatchWriteOperation_DeleteObject                               smithy.SchemaExtensions
+	eBatchWriteOperation_AddFacetToObject                           smithy.SchemaExtensions
+	eBatchWriteOperation_RemoveFacetFromObject                      smithy.SchemaExtensions
+	eBatchWriteOperation_AttachPolicy                               smithy.SchemaExtensions
+	eBatchWriteOperation_DetachPolicy                               smithy.SchemaExtensions
+	eBatchWriteOperation_CreateIndex                                smithy.SchemaExtensions
+	eBatchWriteOperation_AttachToIndex                              smithy.SchemaExtensions
+	eBatchWriteOperation_DetachFromIndex                            smithy.SchemaExtensions
+	eBatchWriteOperation_AttachTypedLink                            smithy.SchemaExtensions
+	eBatchWriteOperation_DetachTypedLink                            smithy.SchemaExtensions
+	eBatchWriteOperation_UpdateLinkAttributes                       smithy.SchemaExtensions
+	e_BatchWriteOperationList                                       smithy.SchemaExtensions
+	e_BatchWriteOperationList_member                                smithy.SchemaExtensions
+	eBatchWriteOperationResponse                                    smithy.SchemaExtensions
+	eBatchWriteOperationResponse_CreateObject                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_AttachObject                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_DetachObject                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_UpdateObjectAttributes             smithy.SchemaExtensions
+	eBatchWriteOperationResponse_DeleteObject                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_AddFacetToObject                   smithy.SchemaExtensions
+	eBatchWriteOperationResponse_RemoveFacetFromObject              smithy.SchemaExtensions
+	eBatchWriteOperationResponse_AttachPolicy                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_DetachPolicy                       smithy.SchemaExtensions
+	eBatchWriteOperationResponse_CreateIndex                        smithy.SchemaExtensions
+	eBatchWriteOperationResponse_AttachToIndex                      smithy.SchemaExtensions
+	eBatchWriteOperationResponse_DetachFromIndex                    smithy.SchemaExtensions
+	eBatchWriteOperationResponse_AttachTypedLink                    smithy.SchemaExtensions
+	eBatchWriteOperationResponse_DetachTypedLink                    smithy.SchemaExtensions
+	eBatchWriteOperationResponse_UpdateLinkAttributes               smithy.SchemaExtensions
+	e_BatchWriteOperationResponseList                               smithy.SchemaExtensions
+	e_BatchWriteOperationResponseList_member                        smithy.SchemaExtensions
+	e_BinaryAttributeValue                                          smithy.SchemaExtensions
+	e_Bool                                                          smithy.SchemaExtensions
+	e_BooleanAttributeValue                                         smithy.SchemaExtensions
+	eCannotListParentOfRootException                                smithy.SchemaExtensions
+	eCannotListParentOfRootException_Message                        smithy.SchemaExtensions
+	eConsistencyLevel                                               smithy.SchemaExtensions
+	eConsistencyLevel_SERIALIZABLE                                  smithy.SchemaExtensions
+	eConsistencyLevel_EVENTUAL                                      smithy.SchemaExtensions
+	e_Date                                                          smithy.SchemaExtensions
+	e_DatetimeAttributeValue                                        smithy.SchemaExtensions
+	eDirectory                                                      smithy.SchemaExtensions
+	eDirectory_Name                                                 smithy.SchemaExtensions
+	eDirectory_DirectoryArn                                         smithy.SchemaExtensions
+	eDirectory_State                                                smithy.SchemaExtensions
+	eDirectory_CreationDateTime                                     smithy.SchemaExtensions
+	eDirectoryAlreadyExistsException                                smithy.SchemaExtensions
+	eDirectoryAlreadyExistsException_Message                        smithy.SchemaExtensions
+	e_DirectoryArn                                                  smithy.SchemaExtensions
+	eDirectoryDeletedException                                      smithy.SchemaExtensions
+	eDirectoryDeletedException_Message                              smithy.SchemaExtensions
+	e_DirectoryList                                                 smithy.SchemaExtensions
+	e_DirectoryList_member                                          smithy.SchemaExtensions
+	e_DirectoryName                                                 smithy.SchemaExtensions
+	eDirectoryNotDisabledException                                  smithy.SchemaExtensions
+	eDirectoryNotDisabledException_Message                          smithy.SchemaExtensions
+	eDirectoryNotEnabledException                                   smithy.SchemaExtensions
+	eDirectoryNotEnabledException_Message                           smithy.SchemaExtensions
+	eDirectoryState                                                 smithy.SchemaExtensions
+	eDirectoryState_ENABLED                                         smithy.SchemaExtensions
+	eDirectoryState_DISABLED                                        smithy.SchemaExtensions
+	eDirectoryState_DELETED                                         smithy.SchemaExtensions
+	e_ExceptionMessage                                              smithy.SchemaExtensions
+	eFacet                                                          smithy.SchemaExtensions
+	eFacet_Name                                                     smithy.SchemaExtensions
+	eFacet_ObjectType                                               smithy.SchemaExtensions
+	eFacet_FacetStyle                                               smithy.SchemaExtensions
+	eFacetAlreadyExistsException                                    smithy.SchemaExtensions
+	eFacetAlreadyExistsException_Message                            smithy.SchemaExtensions
+	eFacetAttribute                                                 smithy.SchemaExtensions
+	eFacetAttribute_Name                                            smithy.SchemaExtensions
+	eFacetAttribute_AttributeDefinition                             smithy.SchemaExtensions
+	eFacetAttribute_AttributeReference                              smithy.SchemaExtensions
+	eFacetAttribute_RequiredBehavior                                smithy.SchemaExtensions
+	eFacetAttributeDefinition                                       smithy.SchemaExtensions
+	eFacetAttributeDefinition_Type                                  smithy.SchemaExtensions
+	eFacetAttributeDefinition_DefaultValue                          smithy.SchemaExtensions
+	eFacetAttributeDefinition_IsImmutable                           smithy.SchemaExtensions
+	eFacetAttributeDefinition_Rules                                 smithy.SchemaExtensions
+	e_FacetAttributeList                                            smithy.SchemaExtensions
+	e_FacetAttributeList_member                                     smithy.SchemaExtensions
+	eFacetAttributeReference                                        smithy.SchemaExtensions
+	eFacetAttributeReference_TargetFacetName                        smithy.SchemaExtensions
+	eFacetAttributeReference_TargetAttributeName                    smithy.SchemaExtensions
+	eFacetAttributeType                                             smithy.SchemaExtensions
+	eFacetAttributeType_STRING                                      smithy.SchemaExtensions
+	eFacetAttributeType_BINARY                                      smithy.SchemaExtensions
+	eFacetAttributeType_BOOLEAN                                     smithy.SchemaExtensions
+	eFacetAttributeType_NUMBER                                      smithy.SchemaExtensions
+	eFacetAttributeType_DATETIME                                    smithy.SchemaExtensions
+	eFacetAttributeType_VARIANT                                     smithy.SchemaExtensions
+	eFacetAttributeUpdate                                           smithy.SchemaExtensions
+	eFacetAttributeUpdate_Attribute                                 smithy.SchemaExtensions
+	eFacetAttributeUpdate_Action                                    smithy.SchemaExtensions
+	e_FacetAttributeUpdateList                                      smithy.SchemaExtensions
+	e_FacetAttributeUpdateList_member                               smithy.SchemaExtensions
+	eFacetInUseException                                            smithy.SchemaExtensions
+	eFacetInUseException_Message                                    smithy.SchemaExtensions
+	e_FacetName                                                     smithy.SchemaExtensions
+	e_FacetNameList                                                 smithy.SchemaExtensions
+	e_FacetNameList_member                                          smithy.SchemaExtensions
+	eFacetNotFoundException                                         smithy.SchemaExtensions
+	eFacetNotFoundException_Message                                 smithy.SchemaExtensions
+	eFacetStyle                                                     smithy.SchemaExtensions
+	eFacetStyle_STATIC                                              smithy.SchemaExtensions
+	eFacetStyle_DYNAMIC                                             smithy.SchemaExtensions
+	eFacetValidationException                                       smithy.SchemaExtensions
+	eFacetValidationException_Message                               smithy.SchemaExtensions
+	eIncompatibleSchemaException                                    smithy.SchemaExtensions
+	eIncompatibleSchemaException_Message                            smithy.SchemaExtensions
+	eIndexAttachment                                                smithy.SchemaExtensions
+	eIndexAttachment_IndexedAttributes                              smithy.SchemaExtensions
+	eIndexAttachment_ObjectIdentifier                               smithy.SchemaExtensions
+	e_IndexAttachmentList                                           smithy.SchemaExtensions
+	e_IndexAttachmentList_member                                    smithy.SchemaExtensions
+	eIndexedAttributeMissingException                               smithy.SchemaExtensions
+	eIndexedAttributeMissingException_Message                       smithy.SchemaExtensions
+	eInternalServiceException                                       smithy.SchemaExtensions
+	eInternalServiceException_Message                               smithy.SchemaExtensions
+	eInvalidArnException                                            smithy.SchemaExtensions
+	eInvalidArnException_Message                                    smithy.SchemaExtensions
+	eInvalidAttachmentException                                     smithy.SchemaExtensions
+	eInvalidAttachmentException_Message                             smithy.SchemaExtensions
+	eInvalidFacetUpdateException                                    smithy.SchemaExtensions
+	eInvalidFacetUpdateException_Message                            smithy.SchemaExtensions
+	eInvalidNextTokenException                                      smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                              smithy.SchemaExtensions
+	eInvalidRuleException                                           smithy.SchemaExtensions
+	eInvalidRuleException_Message                                   smithy.SchemaExtensions
+	eInvalidSchemaDocException                                      smithy.SchemaExtensions
+	eInvalidSchemaDocException_Message                              smithy.SchemaExtensions
+	eInvalidTaggingRequestException                                 smithy.SchemaExtensions
+	eInvalidTaggingRequestException_Message                         smithy.SchemaExtensions
+	eLimitExceededException                                         smithy.SchemaExtensions
+	eLimitExceededException_Message                                 smithy.SchemaExtensions
+	eLinkAttributeAction                                            smithy.SchemaExtensions
+	eLinkAttributeAction_AttributeActionType                        smithy.SchemaExtensions
+	eLinkAttributeAction_AttributeUpdateValue                       smithy.SchemaExtensions
+	eLinkAttributeUpdate                                            smithy.SchemaExtensions
+	eLinkAttributeUpdate_AttributeKey                               smithy.SchemaExtensions
+	eLinkAttributeUpdate_AttributeAction                            smithy.SchemaExtensions
+	e_LinkAttributeUpdateList                                       smithy.SchemaExtensions
+	e_LinkAttributeUpdateList_member                                smithy.SchemaExtensions
+	e_LinkName                                                      smithy.SchemaExtensions
+	eLinkNameAlreadyInUseException                                  smithy.SchemaExtensions
+	eLinkNameAlreadyInUseException_Message                          smithy.SchemaExtensions
+	e_LinkNameToObjectIdentifierMap                                 smithy.SchemaExtensions
+	e_LinkNameToObjectIdentifierMap_key                             smithy.SchemaExtensions
+	e_LinkNameToObjectIdentifierMap_value                           smithy.SchemaExtensions
+	e_NextToken                                                     smithy.SchemaExtensions
+	eNotIndexException                                              smithy.SchemaExtensions
+	eNotIndexException_Message                                      smithy.SchemaExtensions
+	eNotNodeException                                               smithy.SchemaExtensions
+	eNotNodeException_Message                                       smithy.SchemaExtensions
+	eNotPolicyException                                             smithy.SchemaExtensions
+	eNotPolicyException_Message                                     smithy.SchemaExtensions
+	e_NumberAttributeValue                                          smithy.SchemaExtensions
+	e_NumberResults                                                 smithy.SchemaExtensions
+	eObjectAlreadyDetachedException                                 smithy.SchemaExtensions
+	eObjectAlreadyDetachedException_Message                         smithy.SchemaExtensions
+	eObjectAttributeAction                                          smithy.SchemaExtensions
+	eObjectAttributeAction_ObjectAttributeActionType                smithy.SchemaExtensions
+	eObjectAttributeAction_ObjectAttributeUpdateValue               smithy.SchemaExtensions
+	eObjectAttributeRange                                           smithy.SchemaExtensions
+	eObjectAttributeRange_AttributeKey                              smithy.SchemaExtensions
+	eObjectAttributeRange_Range                                     smithy.SchemaExtensions
+	e_ObjectAttributeRangeList                                      smithy.SchemaExtensions
+	e_ObjectAttributeRangeList_member                               smithy.SchemaExtensions
+	eObjectAttributeUpdate                                          smithy.SchemaExtensions
+	eObjectAttributeUpdate_ObjectAttributeKey                       smithy.SchemaExtensions
+	eObjectAttributeUpdate_ObjectAttributeAction                    smithy.SchemaExtensions
+	e_ObjectAttributeUpdateList                                     smithy.SchemaExtensions
+	e_ObjectAttributeUpdateList_member                              smithy.SchemaExtensions
+	e_ObjectIdentifier                                              smithy.SchemaExtensions
+	e_ObjectIdentifierAndLinkNameList                               smithy.SchemaExtensions
+	e_ObjectIdentifierAndLinkNameList_member                        smithy.SchemaExtensions
+	eObjectIdentifierAndLinkNameTuple                               smithy.SchemaExtensions
+	eObjectIdentifierAndLinkNameTuple_ObjectIdentifier              smithy.SchemaExtensions
+	eObjectIdentifierAndLinkNameTuple_LinkName                      smithy.SchemaExtensions
+	e_ObjectIdentifierList                                          smithy.SchemaExtensions
+	e_ObjectIdentifierList_member                                   smithy.SchemaExtensions
+	e_ObjectIdentifierToLinkNameMap                                 smithy.SchemaExtensions
+	e_ObjectIdentifierToLinkNameMap_key                             smithy.SchemaExtensions
+	e_ObjectIdentifierToLinkNameMap_value                           smithy.SchemaExtensions
+	eObjectNotDetachedException                                     smithy.SchemaExtensions
+	eObjectNotDetachedException_Message                             smithy.SchemaExtensions
+	eObjectReference                                                smithy.SchemaExtensions
+	eObjectReference_Selector                                       smithy.SchemaExtensions
+	eObjectType                                                     smithy.SchemaExtensions
+	eObjectType_NODE                                                smithy.SchemaExtensions
+	eObjectType_LEAF_NODE                                           smithy.SchemaExtensions
+	eObjectType_POLICY                                              smithy.SchemaExtensions
+	eObjectType_INDEX                                               smithy.SchemaExtensions
+	e_PathString                                                    smithy.SchemaExtensions
+	ePathToObjectIdentifiers                                        smithy.SchemaExtensions
+	ePathToObjectIdentifiers_Path                                   smithy.SchemaExtensions
+	ePathToObjectIdentifiers_ObjectIdentifiers                      smithy.SchemaExtensions
+	e_PathToObjectIdentifiersList                                   smithy.SchemaExtensions
+	e_PathToObjectIdentifiersList_member                            smithy.SchemaExtensions
+	ePolicyAttachment                                               smithy.SchemaExtensions
+	ePolicyAttachment_PolicyId                                      smithy.SchemaExtensions
+	ePolicyAttachment_ObjectIdentifier                              smithy.SchemaExtensions
+	ePolicyAttachment_PolicyType                                    smithy.SchemaExtensions
+	e_PolicyAttachmentList                                          smithy.SchemaExtensions
+	e_PolicyAttachmentList_member                                   smithy.SchemaExtensions
+	ePolicyToPath                                                   smithy.SchemaExtensions
+	ePolicyToPath_Path                                              smithy.SchemaExtensions
+	ePolicyToPath_Policies                                          smithy.SchemaExtensions
+	e_PolicyToPathList                                              smithy.SchemaExtensions
+	e_PolicyToPathList_member                                       smithy.SchemaExtensions
+	e_PolicyType                                                    smithy.SchemaExtensions
+	eRangeMode                                                      smithy.SchemaExtensions
+	eRangeMode_FIRST                                                smithy.SchemaExtensions
+	eRangeMode_LAST                                                 smithy.SchemaExtensions
+	eRangeMode_LAST_BEFORE_MISSING_VALUES                           smithy.SchemaExtensions
+	eRangeMode_INCLUSIVE                                            smithy.SchemaExtensions
+	eRangeMode_EXCLUSIVE                                            smithy.SchemaExtensions
+	eRequiredAttributeBehavior                                      smithy.SchemaExtensions
+	eRequiredAttributeBehavior_REQUIRED_ALWAYS                      smithy.SchemaExtensions
+	eRequiredAttributeBehavior_NOT_REQUIRED                         smithy.SchemaExtensions
+	eResourceNotFoundException                                      smithy.SchemaExtensions
+	eResourceNotFoundException_Message                              smithy.SchemaExtensions
+	eRetryableConflictException                                     smithy.SchemaExtensions
+	eRetryableConflictException_Message                             smithy.SchemaExtensions
+	eRule                                                           smithy.SchemaExtensions
+	eRule_Type                                                      smithy.SchemaExtensions
+	eRule_Parameters                                                smithy.SchemaExtensions
+	e_RuleKey                                                       smithy.SchemaExtensions
+	e_RuleMap                                                       smithy.SchemaExtensions
+	e_RuleMap_key                                                   smithy.SchemaExtensions
+	e_RuleMap_value                                                 smithy.SchemaExtensions
+	e_RuleParameterKey                                              smithy.SchemaExtensions
+	e_RuleParameterMap                                              smithy.SchemaExtensions
+	e_RuleParameterMap_key                                          smithy.SchemaExtensions
+	e_RuleParameterMap_value                                        smithy.SchemaExtensions
+	e_RuleParameterValue                                            smithy.SchemaExtensions
+	eRuleType                                                       smithy.SchemaExtensions
+	eRuleType_BINARY_LENGTH                                         smithy.SchemaExtensions
+	eRuleType_NUMBER_COMPARISON                                     smithy.SchemaExtensions
+	eRuleType_STRING_FROM_SET                                       smithy.SchemaExtensions
+	eRuleType_STRING_LENGTH                                         smithy.SchemaExtensions
+	eSchemaAlreadyExistsException                                   smithy.SchemaExtensions
+	eSchemaAlreadyExistsException_Message                           smithy.SchemaExtensions
+	eSchemaAlreadyPublishedException                                smithy.SchemaExtensions
+	eSchemaAlreadyPublishedException_Message                        smithy.SchemaExtensions
+	eSchemaFacet                                                    smithy.SchemaExtensions
+	eSchemaFacet_SchemaArn                                          smithy.SchemaExtensions
+	eSchemaFacet_FacetName                                          smithy.SchemaExtensions
+	e_SchemaFacetList                                               smithy.SchemaExtensions
+	e_SchemaFacetList_member                                        smithy.SchemaExtensions
+	e_SchemaJsonDocument                                            smithy.SchemaExtensions
+	e_SchemaName                                                    smithy.SchemaExtensions
+	e_SelectorObjectReference                                       smithy.SchemaExtensions
+	eStillContainsLinksException                                    smithy.SchemaExtensions
+	eStillContainsLinksException_Message                            smithy.SchemaExtensions
+	e_StringAttributeValue                                          smithy.SchemaExtensions
+	eTag                                                            smithy.SchemaExtensions
+	eTag_Key                                                        smithy.SchemaExtensions
+	eTag_Value                                                      smithy.SchemaExtensions
+	e_TagKey                                                        smithy.SchemaExtensions
+	e_TagKeyList                                                    smithy.SchemaExtensions
+	e_TagKeyList_member                                             smithy.SchemaExtensions
+	e_TagList                                                       smithy.SchemaExtensions
+	e_TagList_member                                                smithy.SchemaExtensions
+	e_TagsNumberResults                                             smithy.SchemaExtensions
+	e_TagValue                                                      smithy.SchemaExtensions
+	eTypedAttributeValue                                            smithy.SchemaExtensions
+	eTypedAttributeValue_StringValue                                smithy.SchemaExtensions
+	eTypedAttributeValue_BinaryValue                                smithy.SchemaExtensions
+	eTypedAttributeValue_BooleanValue                               smithy.SchemaExtensions
+	eTypedAttributeValue_NumberValue                                smithy.SchemaExtensions
+	eTypedAttributeValue_DatetimeValue                              smithy.SchemaExtensions
+	eTypedAttributeValueRange                                       smithy.SchemaExtensions
+	eTypedAttributeValueRange_StartMode                             smithy.SchemaExtensions
+	eTypedAttributeValueRange_StartValue                            smithy.SchemaExtensions
+	eTypedAttributeValueRange_EndMode                               smithy.SchemaExtensions
+	eTypedAttributeValueRange_EndValue                              smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition                                   smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_Name                              smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_Type                              smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_DefaultValue                      smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_IsImmutable                       smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_Rules                             smithy.SchemaExtensions
+	eTypedLinkAttributeDefinition_RequiredBehavior                  smithy.SchemaExtensions
+	e_TypedLinkAttributeDefinitionList                              smithy.SchemaExtensions
+	e_TypedLinkAttributeDefinitionList_member                       smithy.SchemaExtensions
+	eTypedLinkAttributeRange                                        smithy.SchemaExtensions
+	eTypedLinkAttributeRange_AttributeName                          smithy.SchemaExtensions
+	eTypedLinkAttributeRange_Range                                  smithy.SchemaExtensions
+	e_TypedLinkAttributeRangeList                                   smithy.SchemaExtensions
+	e_TypedLinkAttributeRangeList_member                            smithy.SchemaExtensions
+	eTypedLinkFacet                                                 smithy.SchemaExtensions
+	eTypedLinkFacet_Name                                            smithy.SchemaExtensions
+	eTypedLinkFacet_Attributes                                      smithy.SchemaExtensions
+	eTypedLinkFacet_IdentityAttributeOrder                          smithy.SchemaExtensions
+	eTypedLinkFacetAttributeUpdate                                  smithy.SchemaExtensions
+	eTypedLinkFacetAttributeUpdate_Attribute                        smithy.SchemaExtensions
+	eTypedLinkFacetAttributeUpdate_Action                           smithy.SchemaExtensions
+	e_TypedLinkFacetAttributeUpdateList                             smithy.SchemaExtensions
+	e_TypedLinkFacetAttributeUpdateList_member                      smithy.SchemaExtensions
+	e_TypedLinkName                                                 smithy.SchemaExtensions
+	e_TypedLinkNameList                                             smithy.SchemaExtensions
+	e_TypedLinkNameList_member                                      smithy.SchemaExtensions
+	eTypedLinkSchemaAndFacetName                                    smithy.SchemaExtensions
+	eTypedLinkSchemaAndFacetName_SchemaArn                          smithy.SchemaExtensions
+	eTypedLinkSchemaAndFacetName_TypedLinkName                      smithy.SchemaExtensions
+	eTypedLinkSpecifier                                             smithy.SchemaExtensions
+	eTypedLinkSpecifier_TypedLinkFacet                              smithy.SchemaExtensions
+	eTypedLinkSpecifier_SourceObjectReference                       smithy.SchemaExtensions
+	eTypedLinkSpecifier_TargetObjectReference                       smithy.SchemaExtensions
+	eTypedLinkSpecifier_IdentityAttributeValues                     smithy.SchemaExtensions
+	e_TypedLinkSpecifierList                                        smithy.SchemaExtensions
+	e_TypedLinkSpecifierList_member                                 smithy.SchemaExtensions
+	eUnsupportedIndexTypeException                                  smithy.SchemaExtensions
+	eUnsupportedIndexTypeException_Message                          smithy.SchemaExtensions
+	eUpdateActionType                                               smithy.SchemaExtensions
+	eUpdateActionType_CREATE_OR_UPDATE                              smithy.SchemaExtensions
+	eUpdateActionType_DELETE                                        smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_Message                                    smithy.SchemaExtensions
+	e_Version                                                       smithy.SchemaExtensions
+	eAddFacetToObjectRequest                                        smithy.SchemaExtensions
+	eAddFacetToObjectRequest_DirectoryArn                           smithy.SchemaExtensions
+	eAddFacetToObjectRequest_SchemaFacet                            smithy.SchemaExtensions
+	eAddFacetToObjectRequest_ObjectAttributeList                    smithy.SchemaExtensions
+	eAddFacetToObjectRequest_ObjectReference                        smithy.SchemaExtensions
+	eAddFacetToObjectResponse                                       smithy.SchemaExtensions
+	eApplySchemaRequest                                             smithy.SchemaExtensions
+	eApplySchemaRequest_PublishedSchemaArn                          smithy.SchemaExtensions
+	eApplySchemaRequest_DirectoryArn                                smithy.SchemaExtensions
+	eApplySchemaResponse                                            smithy.SchemaExtensions
+	eApplySchemaResponse_AppliedSchemaArn                           smithy.SchemaExtensions
+	eApplySchemaResponse_DirectoryArn                               smithy.SchemaExtensions
+	eAttachObjectRequest                                            smithy.SchemaExtensions
+	eAttachObjectRequest_DirectoryArn                               smithy.SchemaExtensions
+	eAttachObjectRequest_ParentReference                            smithy.SchemaExtensions
+	eAttachObjectRequest_ChildReference                             smithy.SchemaExtensions
+	eAttachObjectRequest_LinkName                                   smithy.SchemaExtensions
+	eAttachObjectResponse                                           smithy.SchemaExtensions
+	eAttachObjectResponse_AttachedObjectIdentifier                  smithy.SchemaExtensions
+	eAttachPolicyRequest                                            smithy.SchemaExtensions
+	eAttachPolicyRequest_DirectoryArn                               smithy.SchemaExtensions
+	eAttachPolicyRequest_PolicyReference                            smithy.SchemaExtensions
+	eAttachPolicyRequest_ObjectReference                            smithy.SchemaExtensions
+	eAttachPolicyResponse                                           smithy.SchemaExtensions
+	eAttachToIndexRequest                                           smithy.SchemaExtensions
+	eAttachToIndexRequest_DirectoryArn                              smithy.SchemaExtensions
+	eAttachToIndexRequest_IndexReference                            smithy.SchemaExtensions
+	eAttachToIndexRequest_TargetReference                           smithy.SchemaExtensions
+	eAttachToIndexResponse                                          smithy.SchemaExtensions
+	eAttachToIndexResponse_AttachedObjectIdentifier                 smithy.SchemaExtensions
+	eAttachTypedLinkRequest                                         smithy.SchemaExtensions
+	eAttachTypedLinkRequest_DirectoryArn                            smithy.SchemaExtensions
+	eAttachTypedLinkRequest_SourceObjectReference                   smithy.SchemaExtensions
+	eAttachTypedLinkRequest_TargetObjectReference                   smithy.SchemaExtensions
+	eAttachTypedLinkRequest_TypedLinkFacet                          smithy.SchemaExtensions
+	eAttachTypedLinkRequest_Attributes                              smithy.SchemaExtensions
+	eAttachTypedLinkResponse                                        smithy.SchemaExtensions
+	eAttachTypedLinkResponse_TypedLinkSpecifier                     smithy.SchemaExtensions
+	eBatchReadRequest                                               smithy.SchemaExtensions
+	eBatchReadRequest_DirectoryArn                                  smithy.SchemaExtensions
+	eBatchReadRequest_Operations                                    smithy.SchemaExtensions
+	eBatchReadRequest_ConsistencyLevel                              smithy.SchemaExtensions
+	eBatchReadResponse                                              smithy.SchemaExtensions
+	eBatchReadResponse_Responses                                    smithy.SchemaExtensions
+	eBatchWriteRequest                                              smithy.SchemaExtensions
+	eBatchWriteRequest_DirectoryArn                                 smithy.SchemaExtensions
+	eBatchWriteRequest_Operations                                   smithy.SchemaExtensions
+	eBatchWriteResponse                                             smithy.SchemaExtensions
+	eBatchWriteResponse_Responses                                   smithy.SchemaExtensions
+	eCreateDirectoryRequest                                         smithy.SchemaExtensions
+	eCreateDirectoryRequest_Name                                    smithy.SchemaExtensions
+	eCreateDirectoryRequest_SchemaArn                               smithy.SchemaExtensions
+	eCreateDirectoryResponse                                        smithy.SchemaExtensions
+	eCreateDirectoryResponse_DirectoryArn                           smithy.SchemaExtensions
+	eCreateDirectoryResponse_Name                                   smithy.SchemaExtensions
+	eCreateDirectoryResponse_ObjectIdentifier                       smithy.SchemaExtensions
+	eCreateDirectoryResponse_AppliedSchemaArn                       smithy.SchemaExtensions
+	eCreateFacetRequest                                             smithy.SchemaExtensions
+	eCreateFacetRequest_SchemaArn                                   smithy.SchemaExtensions
+	eCreateFacetRequest_Name                                        smithy.SchemaExtensions
+	eCreateFacetRequest_Attributes                                  smithy.SchemaExtensions
+	eCreateFacetRequest_ObjectType                                  smithy.SchemaExtensions
+	eCreateFacetRequest_FacetStyle                                  smithy.SchemaExtensions
+	eCreateFacetResponse                                            smithy.SchemaExtensions
+	eCreateIndexRequest                                             smithy.SchemaExtensions
+	eCreateIndexRequest_DirectoryArn                                smithy.SchemaExtensions
+	eCreateIndexRequest_OrderedIndexedAttributeList                 smithy.SchemaExtensions
+	eCreateIndexRequest_IsUnique                                    smithy.SchemaExtensions
+	eCreateIndexRequest_ParentReference                             smithy.SchemaExtensions
+	eCreateIndexRequest_LinkName                                    smithy.SchemaExtensions
+	eCreateIndexResponse                                            smithy.SchemaExtensions
+	eCreateIndexResponse_ObjectIdentifier                           smithy.SchemaExtensions
+	eCreateObjectRequest                                            smithy.SchemaExtensions
+	eCreateObjectRequest_DirectoryArn                               smithy.SchemaExtensions
+	eCreateObjectRequest_SchemaFacets                               smithy.SchemaExtensions
+	eCreateObjectRequest_ObjectAttributeList                        smithy.SchemaExtensions
+	eCreateObjectRequest_ParentReference                            smithy.SchemaExtensions
+	eCreateObjectRequest_LinkName                                   smithy.SchemaExtensions
+	eCreateObjectResponse                                           smithy.SchemaExtensions
+	eCreateObjectResponse_ObjectIdentifier                          smithy.SchemaExtensions
+	eCreateSchemaRequest                                            smithy.SchemaExtensions
+	eCreateSchemaRequest_Name                                       smithy.SchemaExtensions
+	eCreateSchemaResponse                                           smithy.SchemaExtensions
+	eCreateSchemaResponse_SchemaArn                                 smithy.SchemaExtensions
+	eCreateTypedLinkFacetRequest                                    smithy.SchemaExtensions
+	eCreateTypedLinkFacetRequest_SchemaArn                          smithy.SchemaExtensions
+	eCreateTypedLinkFacetRequest_Facet                              smithy.SchemaExtensions
+	eCreateTypedLinkFacetResponse                                   smithy.SchemaExtensions
+	eDeleteDirectoryRequest                                         smithy.SchemaExtensions
+	eDeleteDirectoryRequest_DirectoryArn                            smithy.SchemaExtensions
+	eDeleteDirectoryResponse                                        smithy.SchemaExtensions
+	eDeleteDirectoryResponse_DirectoryArn                           smithy.SchemaExtensions
+	eDeleteFacetRequest                                             smithy.SchemaExtensions
+	eDeleteFacetRequest_SchemaArn                                   smithy.SchemaExtensions
+	eDeleteFacetRequest_Name                                        smithy.SchemaExtensions
+	eDeleteFacetResponse                                            smithy.SchemaExtensions
+	eDeleteObjectRequest                                            smithy.SchemaExtensions
+	eDeleteObjectRequest_DirectoryArn                               smithy.SchemaExtensions
+	eDeleteObjectRequest_ObjectReference                            smithy.SchemaExtensions
+	eDeleteObjectResponse                                           smithy.SchemaExtensions
+	eDeleteSchemaRequest                                            smithy.SchemaExtensions
+	eDeleteSchemaRequest_SchemaArn                                  smithy.SchemaExtensions
+	eDeleteSchemaResponse                                           smithy.SchemaExtensions
+	eDeleteSchemaResponse_SchemaArn                                 smithy.SchemaExtensions
+	eDeleteTypedLinkFacetRequest                                    smithy.SchemaExtensions
+	eDeleteTypedLinkFacetRequest_SchemaArn                          smithy.SchemaExtensions
+	eDeleteTypedLinkFacetRequest_Name                               smithy.SchemaExtensions
+	eDeleteTypedLinkFacetResponse                                   smithy.SchemaExtensions
+	eDetachFromIndexRequest                                         smithy.SchemaExtensions
+	eDetachFromIndexRequest_DirectoryArn                            smithy.SchemaExtensions
+	eDetachFromIndexRequest_IndexReference                          smithy.SchemaExtensions
+	eDetachFromIndexRequest_TargetReference                         smithy.SchemaExtensions
+	eDetachFromIndexResponse                                        smithy.SchemaExtensions
+	eDetachFromIndexResponse_DetachedObjectIdentifier               smithy.SchemaExtensions
+	eDetachObjectRequest                                            smithy.SchemaExtensions
+	eDetachObjectRequest_DirectoryArn                               smithy.SchemaExtensions
+	eDetachObjectRequest_ParentReference                            smithy.SchemaExtensions
+	eDetachObjectRequest_LinkName                                   smithy.SchemaExtensions
+	eDetachObjectResponse                                           smithy.SchemaExtensions
+	eDetachObjectResponse_DetachedObjectIdentifier                  smithy.SchemaExtensions
+	eDetachPolicyRequest                                            smithy.SchemaExtensions
+	eDetachPolicyRequest_DirectoryArn                               smithy.SchemaExtensions
+	eDetachPolicyRequest_PolicyReference                            smithy.SchemaExtensions
+	eDetachPolicyRequest_ObjectReference                            smithy.SchemaExtensions
+	eDetachPolicyResponse                                           smithy.SchemaExtensions
+	eDetachTypedLinkRequest                                         smithy.SchemaExtensions
+	eDetachTypedLinkRequest_DirectoryArn                            smithy.SchemaExtensions
+	eDetachTypedLinkRequest_TypedLinkSpecifier                      smithy.SchemaExtensions
+	eDisableDirectoryRequest                                        smithy.SchemaExtensions
+	eDisableDirectoryRequest_DirectoryArn                           smithy.SchemaExtensions
+	eDisableDirectoryResponse                                       smithy.SchemaExtensions
+	eDisableDirectoryResponse_DirectoryArn                          smithy.SchemaExtensions
+	eEnableDirectoryRequest                                         smithy.SchemaExtensions
+	eEnableDirectoryRequest_DirectoryArn                            smithy.SchemaExtensions
+	eEnableDirectoryResponse                                        smithy.SchemaExtensions
+	eEnableDirectoryResponse_DirectoryArn                           smithy.SchemaExtensions
+	eGetAppliedSchemaVersionRequest                                 smithy.SchemaExtensions
+	eGetAppliedSchemaVersionRequest_SchemaArn                       smithy.SchemaExtensions
+	eGetAppliedSchemaVersionResponse                                smithy.SchemaExtensions
+	eGetAppliedSchemaVersionResponse_AppliedSchemaArn               smithy.SchemaExtensions
+	eGetDirectoryRequest                                            smithy.SchemaExtensions
+	eGetDirectoryRequest_DirectoryArn                               smithy.SchemaExtensions
+	eGetDirectoryResponse                                           smithy.SchemaExtensions
+	eGetDirectoryResponse_Directory                                 smithy.SchemaExtensions
+	eGetFacetRequest                                                smithy.SchemaExtensions
+	eGetFacetRequest_SchemaArn                                      smithy.SchemaExtensions
+	eGetFacetRequest_Name                                           smithy.SchemaExtensions
+	eGetFacetResponse                                               smithy.SchemaExtensions
+	eGetFacetResponse_Facet                                         smithy.SchemaExtensions
+	eGetLinkAttributesRequest                                       smithy.SchemaExtensions
+	eGetLinkAttributesRequest_DirectoryArn                          smithy.SchemaExtensions
+	eGetLinkAttributesRequest_TypedLinkSpecifier                    smithy.SchemaExtensions
+	eGetLinkAttributesRequest_AttributeNames                        smithy.SchemaExtensions
+	eGetLinkAttributesRequest_ConsistencyLevel                      smithy.SchemaExtensions
+	eGetLinkAttributesResponse                                      smithy.SchemaExtensions
+	eGetLinkAttributesResponse_Attributes                           smithy.SchemaExtensions
+	eGetObjectAttributesRequest                                     smithy.SchemaExtensions
+	eGetObjectAttributesRequest_DirectoryArn                        smithy.SchemaExtensions
+	eGetObjectAttributesRequest_ObjectReference                     smithy.SchemaExtensions
+	eGetObjectAttributesRequest_ConsistencyLevel                    smithy.SchemaExtensions
+	eGetObjectAttributesRequest_SchemaFacet                         smithy.SchemaExtensions
+	eGetObjectAttributesRequest_AttributeNames                      smithy.SchemaExtensions
+	eGetObjectAttributesResponse                                    smithy.SchemaExtensions
+	eGetObjectAttributesResponse_Attributes                         smithy.SchemaExtensions
+	eGetObjectInformationRequest                                    smithy.SchemaExtensions
+	eGetObjectInformationRequest_DirectoryArn                       smithy.SchemaExtensions
+	eGetObjectInformationRequest_ObjectReference                    smithy.SchemaExtensions
+	eGetObjectInformationRequest_ConsistencyLevel                   smithy.SchemaExtensions
+	eGetObjectInformationResponse                                   smithy.SchemaExtensions
+	eGetObjectInformationResponse_SchemaFacets                      smithy.SchemaExtensions
+	eGetObjectInformationResponse_ObjectIdentifier                  smithy.SchemaExtensions
+	eGetSchemaAsJsonRequest                                         smithy.SchemaExtensions
+	eGetSchemaAsJsonRequest_SchemaArn                               smithy.SchemaExtensions
+	eGetSchemaAsJsonResponse                                        smithy.SchemaExtensions
+	eGetSchemaAsJsonResponse_Name                                   smithy.SchemaExtensions
+	eGetSchemaAsJsonResponse_Document                               smithy.SchemaExtensions
+	eGetTypedLinkFacetInformationRequest                            smithy.SchemaExtensions
+	eGetTypedLinkFacetInformationRequest_SchemaArn                  smithy.SchemaExtensions
+	eGetTypedLinkFacetInformationRequest_Name                       smithy.SchemaExtensions
+	eGetTypedLinkFacetInformationResponse                           smithy.SchemaExtensions
+	eGetTypedLinkFacetInformationResponse_IdentityAttributeOrder    smithy.SchemaExtensions
+	eListAppliedSchemaArnsRequest                                   smithy.SchemaExtensions
+	eListAppliedSchemaArnsRequest_DirectoryArn                      smithy.SchemaExtensions
+	eListAppliedSchemaArnsRequest_SchemaArn                         smithy.SchemaExtensions
+	eListAppliedSchemaArnsRequest_NextToken                         smithy.SchemaExtensions
+	eListAppliedSchemaArnsRequest_MaxResults                        smithy.SchemaExtensions
+	eListAppliedSchemaArnsResponse                                  smithy.SchemaExtensions
+	eListAppliedSchemaArnsResponse_SchemaArns                       smithy.SchemaExtensions
+	eListAppliedSchemaArnsResponse_NextToken                        smithy.SchemaExtensions
+	eListAttachedIndicesRequest                                     smithy.SchemaExtensions
+	eListAttachedIndicesRequest_DirectoryArn                        smithy.SchemaExtensions
+	eListAttachedIndicesRequest_TargetReference                     smithy.SchemaExtensions
+	eListAttachedIndicesRequest_NextToken                           smithy.SchemaExtensions
+	eListAttachedIndicesRequest_MaxResults                          smithy.SchemaExtensions
+	eListAttachedIndicesRequest_ConsistencyLevel                    smithy.SchemaExtensions
+	eListAttachedIndicesResponse                                    smithy.SchemaExtensions
+	eListAttachedIndicesResponse_IndexAttachments                   smithy.SchemaExtensions
+	eListAttachedIndicesResponse_NextToken                          smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsRequest                               smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsRequest_NextToken                     smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsRequest_MaxResults                    smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsResponse                              smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsResponse_SchemaArns                   smithy.SchemaExtensions
+	eListDevelopmentSchemaArnsResponse_NextToken                    smithy.SchemaExtensions
+	eListDirectoriesRequest                                         smithy.SchemaExtensions
+	eListDirectoriesRequest_NextToken                               smithy.SchemaExtensions
+	eListDirectoriesRequest_MaxResults                              smithy.SchemaExtensions
+	eListDirectoriesRequest_state                                   smithy.SchemaExtensions
+	eListDirectoriesResponse                                        smithy.SchemaExtensions
+	eListDirectoriesResponse_Directories                            smithy.SchemaExtensions
+	eListDirectoriesResponse_NextToken                              smithy.SchemaExtensions
+	eListFacetAttributesRequest                                     smithy.SchemaExtensions
+	eListFacetAttributesRequest_SchemaArn                           smithy.SchemaExtensions
+	eListFacetAttributesRequest_Name                                smithy.SchemaExtensions
+	eListFacetAttributesRequest_NextToken                           smithy.SchemaExtensions
+	eListFacetAttributesRequest_MaxResults                          smithy.SchemaExtensions
+	eListFacetAttributesResponse                                    smithy.SchemaExtensions
+	eListFacetAttributesResponse_Attributes                         smithy.SchemaExtensions
+	eListFacetAttributesResponse_NextToken                          smithy.SchemaExtensions
+	eListFacetNamesRequest                                          smithy.SchemaExtensions
+	eListFacetNamesRequest_SchemaArn                                smithy.SchemaExtensions
+	eListFacetNamesRequest_NextToken                                smithy.SchemaExtensions
+	eListFacetNamesRequest_MaxResults                               smithy.SchemaExtensions
+	eListFacetNamesResponse                                         smithy.SchemaExtensions
+	eListFacetNamesResponse_FacetNames                              smithy.SchemaExtensions
+	eListFacetNamesResponse_NextToken                               smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest                                  smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_DirectoryArn                     smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_ObjectReference                  smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_FilterAttributeRanges            smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_FilterTypedLink                  smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_NextToken                        smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_MaxResults                       smithy.SchemaExtensions
+	eListIncomingTypedLinksRequest_ConsistencyLevel                 smithy.SchemaExtensions
+	eListIncomingTypedLinksResponse                                 smithy.SchemaExtensions
+	eListIncomingTypedLinksResponse_LinkSpecifiers                  smithy.SchemaExtensions
+	eListIncomingTypedLinksResponse_NextToken                       smithy.SchemaExtensions
+	eListIndexRequest                                               smithy.SchemaExtensions
+	eListIndexRequest_DirectoryArn                                  smithy.SchemaExtensions
+	eListIndexRequest_RangesOnIndexedValues                         smithy.SchemaExtensions
+	eListIndexRequest_IndexReference                                smithy.SchemaExtensions
+	eListIndexRequest_MaxResults                                    smithy.SchemaExtensions
+	eListIndexRequest_NextToken                                     smithy.SchemaExtensions
+	eListIndexRequest_ConsistencyLevel                              smithy.SchemaExtensions
+	eListIndexResponse                                              smithy.SchemaExtensions
+	eListIndexResponse_IndexAttachments                             smithy.SchemaExtensions
+	eListIndexResponse_NextToken                                    smithy.SchemaExtensions
+	eListManagedSchemaArnsRequest                                   smithy.SchemaExtensions
+	eListManagedSchemaArnsRequest_SchemaArn                         smithy.SchemaExtensions
+	eListManagedSchemaArnsRequest_NextToken                         smithy.SchemaExtensions
+	eListManagedSchemaArnsRequest_MaxResults                        smithy.SchemaExtensions
+	eListManagedSchemaArnsResponse                                  smithy.SchemaExtensions
+	eListManagedSchemaArnsResponse_SchemaArns                       smithy.SchemaExtensions
+	eListManagedSchemaArnsResponse_NextToken                        smithy.SchemaExtensions
+	eListObjectAttributesRequest                                    smithy.SchemaExtensions
+	eListObjectAttributesRequest_DirectoryArn                       smithy.SchemaExtensions
+	eListObjectAttributesRequest_ObjectReference                    smithy.SchemaExtensions
+	eListObjectAttributesRequest_NextToken                          smithy.SchemaExtensions
+	eListObjectAttributesRequest_MaxResults                         smithy.SchemaExtensions
+	eListObjectAttributesRequest_ConsistencyLevel                   smithy.SchemaExtensions
+	eListObjectAttributesRequest_FacetFilter                        smithy.SchemaExtensions
+	eListObjectAttributesResponse                                   smithy.SchemaExtensions
+	eListObjectAttributesResponse_Attributes                        smithy.SchemaExtensions
+	eListObjectAttributesResponse_NextToken                         smithy.SchemaExtensions
+	eListObjectChildrenRequest                                      smithy.SchemaExtensions
+	eListObjectChildrenRequest_DirectoryArn                         smithy.SchemaExtensions
+	eListObjectChildrenRequest_ObjectReference                      smithy.SchemaExtensions
+	eListObjectChildrenRequest_NextToken                            smithy.SchemaExtensions
+	eListObjectChildrenRequest_MaxResults                           smithy.SchemaExtensions
+	eListObjectChildrenRequest_ConsistencyLevel                     smithy.SchemaExtensions
+	eListObjectChildrenResponse                                     smithy.SchemaExtensions
+	eListObjectChildrenResponse_Children                            smithy.SchemaExtensions
+	eListObjectChildrenResponse_NextToken                           smithy.SchemaExtensions
+	eListObjectParentPathsRequest                                   smithy.SchemaExtensions
+	eListObjectParentPathsRequest_DirectoryArn                      smithy.SchemaExtensions
+	eListObjectParentPathsRequest_ObjectReference                   smithy.SchemaExtensions
+	eListObjectParentPathsRequest_NextToken                         smithy.SchemaExtensions
+	eListObjectParentPathsRequest_MaxResults                        smithy.SchemaExtensions
+	eListObjectParentPathsResponse                                  smithy.SchemaExtensions
+	eListObjectParentPathsResponse_PathToObjectIdentifiersList      smithy.SchemaExtensions
+	eListObjectParentPathsResponse_NextToken                        smithy.SchemaExtensions
+	eListObjectParentsRequest                                       smithy.SchemaExtensions
+	eListObjectParentsRequest_DirectoryArn                          smithy.SchemaExtensions
+	eListObjectParentsRequest_ObjectReference                       smithy.SchemaExtensions
+	eListObjectParentsRequest_NextToken                             smithy.SchemaExtensions
+	eListObjectParentsRequest_MaxResults                            smithy.SchemaExtensions
+	eListObjectParentsRequest_ConsistencyLevel                      smithy.SchemaExtensions
+	eListObjectParentsRequest_IncludeAllLinksToEachParent           smithy.SchemaExtensions
+	eListObjectParentsResponse                                      smithy.SchemaExtensions
+	eListObjectParentsResponse_Parents                              smithy.SchemaExtensions
+	eListObjectParentsResponse_NextToken                            smithy.SchemaExtensions
+	eListObjectParentsResponse_ParentLinks                          smithy.SchemaExtensions
+	eListObjectPoliciesRequest                                      smithy.SchemaExtensions
+	eListObjectPoliciesRequest_DirectoryArn                         smithy.SchemaExtensions
+	eListObjectPoliciesRequest_ObjectReference                      smithy.SchemaExtensions
+	eListObjectPoliciesRequest_NextToken                            smithy.SchemaExtensions
+	eListObjectPoliciesRequest_MaxResults                           smithy.SchemaExtensions
+	eListObjectPoliciesRequest_ConsistencyLevel                     smithy.SchemaExtensions
+	eListObjectPoliciesResponse                                     smithy.SchemaExtensions
+	eListObjectPoliciesResponse_AttachedPolicyIds                   smithy.SchemaExtensions
+	eListObjectPoliciesResponse_NextToken                           smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest                                  smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_DirectoryArn                     smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_ObjectReference                  smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_FilterAttributeRanges            smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_FilterTypedLink                  smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_NextToken                        smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_MaxResults                       smithy.SchemaExtensions
+	eListOutgoingTypedLinksRequest_ConsistencyLevel                 smithy.SchemaExtensions
+	eListOutgoingTypedLinksResponse                                 smithy.SchemaExtensions
+	eListOutgoingTypedLinksResponse_TypedLinkSpecifiers             smithy.SchemaExtensions
+	eListOutgoingTypedLinksResponse_NextToken                       smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest                                   smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest_DirectoryArn                      smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest_PolicyReference                   smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest_NextToken                         smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest_MaxResults                        smithy.SchemaExtensions
+	eListPolicyAttachmentsRequest_ConsistencyLevel                  smithy.SchemaExtensions
+	eListPolicyAttachmentsResponse                                  smithy.SchemaExtensions
+	eListPolicyAttachmentsResponse_ObjectIdentifiers                smithy.SchemaExtensions
+	eListPolicyAttachmentsResponse_NextToken                        smithy.SchemaExtensions
+	eListPublishedSchemaArnsRequest                                 smithy.SchemaExtensions
+	eListPublishedSchemaArnsRequest_SchemaArn                       smithy.SchemaExtensions
+	eListPublishedSchemaArnsRequest_NextToken                       smithy.SchemaExtensions
+	eListPublishedSchemaArnsRequest_MaxResults                      smithy.SchemaExtensions
+	eListPublishedSchemaArnsResponse                                smithy.SchemaExtensions
+	eListPublishedSchemaArnsResponse_SchemaArns                     smithy.SchemaExtensions
+	eListPublishedSchemaArnsResponse_NextToken                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_NextToken                           smithy.SchemaExtensions
+	eListTagsForResourceRequest_MaxResults                          smithy.SchemaExtensions
+	eListTagsForResourceResponse                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                               smithy.SchemaExtensions
+	eListTagsForResourceResponse_NextToken                          smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesRequest                            smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesRequest_SchemaArn                  smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesRequest_Name                       smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesRequest_NextToken                  smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesRequest_MaxResults                 smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesResponse                           smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesResponse_Attributes                smithy.SchemaExtensions
+	eListTypedLinkFacetAttributesResponse_NextToken                 smithy.SchemaExtensions
+	eListTypedLinkFacetNamesRequest                                 smithy.SchemaExtensions
+	eListTypedLinkFacetNamesRequest_SchemaArn                       smithy.SchemaExtensions
+	eListTypedLinkFacetNamesRequest_NextToken                       smithy.SchemaExtensions
+	eListTypedLinkFacetNamesRequest_MaxResults                      smithy.SchemaExtensions
+	eListTypedLinkFacetNamesResponse                                smithy.SchemaExtensions
+	eListTypedLinkFacetNamesResponse_FacetNames                     smithy.SchemaExtensions
+	eListTypedLinkFacetNamesResponse_NextToken                      smithy.SchemaExtensions
+	eLookupPolicyRequest                                            smithy.SchemaExtensions
+	eLookupPolicyRequest_DirectoryArn                               smithy.SchemaExtensions
+	eLookupPolicyRequest_ObjectReference                            smithy.SchemaExtensions
+	eLookupPolicyRequest_NextToken                                  smithy.SchemaExtensions
+	eLookupPolicyRequest_MaxResults                                 smithy.SchemaExtensions
+	eLookupPolicyResponse                                           smithy.SchemaExtensions
+	eLookupPolicyResponse_PolicyToPathList                          smithy.SchemaExtensions
+	eLookupPolicyResponse_NextToken                                 smithy.SchemaExtensions
+	ePublishSchemaRequest                                           smithy.SchemaExtensions
+	ePublishSchemaRequest_DevelopmentSchemaArn                      smithy.SchemaExtensions
+	ePublishSchemaRequest_Version                                   smithy.SchemaExtensions
+	ePublishSchemaRequest_MinorVersion                              smithy.SchemaExtensions
+	ePublishSchemaRequest_Name                                      smithy.SchemaExtensions
+	ePublishSchemaResponse                                          smithy.SchemaExtensions
+	ePublishSchemaResponse_PublishedSchemaArn                       smithy.SchemaExtensions
+	ePutSchemaFromJsonRequest                                       smithy.SchemaExtensions
+	ePutSchemaFromJsonRequest_SchemaArn                             smithy.SchemaExtensions
+	ePutSchemaFromJsonRequest_Document                              smithy.SchemaExtensions
+	ePutSchemaFromJsonResponse                                      smithy.SchemaExtensions
+	ePutSchemaFromJsonResponse_Arn                                  smithy.SchemaExtensions
+	eRemoveFacetFromObjectRequest                                   smithy.SchemaExtensions
+	eRemoveFacetFromObjectRequest_DirectoryArn                      smithy.SchemaExtensions
+	eRemoveFacetFromObjectRequest_SchemaFacet                       smithy.SchemaExtensions
+	eRemoveFacetFromObjectRequest_ObjectReference                   smithy.SchemaExtensions
+	eRemoveFacetFromObjectResponse                                  smithy.SchemaExtensions
+	eTagResourceRequest                                             smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                 smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                        smithy.SchemaExtensions
+	eTagResourceResponse                                            smithy.SchemaExtensions
+	eUntagResourceRequest                                           smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                               smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                   smithy.SchemaExtensions
+	eUntagResourceResponse                                          smithy.SchemaExtensions
+	eUpdateFacetRequest                                             smithy.SchemaExtensions
+	eUpdateFacetRequest_SchemaArn                                   smithy.SchemaExtensions
+	eUpdateFacetRequest_Name                                        smithy.SchemaExtensions
+	eUpdateFacetRequest_AttributeUpdates                            smithy.SchemaExtensions
+	eUpdateFacetRequest_ObjectType                                  smithy.SchemaExtensions
+	eUpdateFacetResponse                                            smithy.SchemaExtensions
+	eUpdateLinkAttributesRequest                                    smithy.SchemaExtensions
+	eUpdateLinkAttributesRequest_DirectoryArn                       smithy.SchemaExtensions
+	eUpdateLinkAttributesRequest_TypedLinkSpecifier                 smithy.SchemaExtensions
+	eUpdateLinkAttributesRequest_AttributeUpdates                   smithy.SchemaExtensions
+	eUpdateLinkAttributesResponse                                   smithy.SchemaExtensions
+	eUpdateObjectAttributesRequest                                  smithy.SchemaExtensions
+	eUpdateObjectAttributesRequest_DirectoryArn                     smithy.SchemaExtensions
+	eUpdateObjectAttributesRequest_ObjectReference                  smithy.SchemaExtensions
+	eUpdateObjectAttributesRequest_AttributeUpdates                 smithy.SchemaExtensions
+	eUpdateObjectAttributesResponse                                 smithy.SchemaExtensions
+	eUpdateObjectAttributesResponse_ObjectIdentifier                smithy.SchemaExtensions
+	eUpdateSchemaRequest                                            smithy.SchemaExtensions
+	eUpdateSchemaRequest_SchemaArn                                  smithy.SchemaExtensions
+	eUpdateSchemaRequest_Name                                       smithy.SchemaExtensions
+	eUpdateSchemaResponse                                           smithy.SchemaExtensions
+	eUpdateSchemaResponse_SchemaArn                                 smithy.SchemaExtensions
+	eUpdateTypedLinkFacetRequest                                    smithy.SchemaExtensions
+	eUpdateTypedLinkFacetRequest_SchemaArn                          smithy.SchemaExtensions
+	eUpdateTypedLinkFacetRequest_Name                               smithy.SchemaExtensions
+	eUpdateTypedLinkFacetRequest_AttributeUpdates                   smithy.SchemaExtensions
+	eUpdateTypedLinkFacetRequest_IdentityAttributeOrder             smithy.SchemaExtensions
+	eUpdateTypedLinkFacetResponse                                   smithy.SchemaExtensions
+	eUpgradeAppliedSchemaRequest                                    smithy.SchemaExtensions
+	eUpgradeAppliedSchemaRequest_PublishedSchemaArn                 smithy.SchemaExtensions
+	eUpgradeAppliedSchemaRequest_DirectoryArn                       smithy.SchemaExtensions
+	eUpgradeAppliedSchemaRequest_DryRun                             smithy.SchemaExtensions
+	eUpgradeAppliedSchemaResponse                                   smithy.SchemaExtensions
+	eUpgradeAppliedSchemaResponse_UpgradedSchemaArn                 smithy.SchemaExtensions
+	eUpgradeAppliedSchemaResponse_DirectoryArn                      smithy.SchemaExtensions
+	eUpgradePublishedSchemaRequest                                  smithy.SchemaExtensions
+	eUpgradePublishedSchemaRequest_DevelopmentSchemaArn             smithy.SchemaExtensions
+	eUpgradePublishedSchemaRequest_PublishedSchemaArn               smithy.SchemaExtensions
+	eUpgradePublishedSchemaRequest_MinorVersion                     smithy.SchemaExtensions
+	eUpgradePublishedSchemaRequest_DryRun                           smithy.SchemaExtensions
+	eUpgradePublishedSchemaResponse                                 smithy.SchemaExtensions
+	eUpgradePublishedSchemaResponse_UpgradedSchemaArn               smithy.SchemaExtensions
+)
+
+var (
+	iAddFacetToObject                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AddFacetToObject"}
+	iApplySchema                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ApplySchema"}
+	iAttachObject                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachObject"}
+	iAttachPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachPolicy"}
+	iAttachToIndex                        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachToIndex"}
+	iAttachTypedLink                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachTypedLink"}
+	iBatchRead                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchRead"}
+	iBatchWrite                           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWrite"}
+	iCreateDirectory                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateDirectory"}
+	iCreateFacet                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateFacet"}
+	iCreateIndex                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateIndex"}
+	iCreateObject                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateObject"}
+	iCreateSchema                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateSchema"}
+	iCreateTypedLinkFacet                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateTypedLinkFacet"}
+	iDeleteDirectory                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteDirectory"}
+	iDeleteFacet                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteFacet"}
+	iDeleteObject                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteObject"}
+	iDeleteSchema                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteSchema"}
+	iDeleteTypedLinkFacet                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteTypedLinkFacet"}
+	iDetachFromIndex                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachFromIndex"}
+	iDetachObject                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachObject"}
+	iDetachPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachPolicy"}
+	iDetachTypedLink                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachTypedLink"}
+	iDisableDirectory                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DisableDirectory"}
+	iEnableDirectory                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "EnableDirectory"}
+	iGetAppliedSchemaVersion              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetAppliedSchemaVersion"}
+	iGetDirectory                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetDirectory"}
+	iGetFacet                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetFacet"}
+	iGetLinkAttributes                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetLinkAttributes"}
+	iGetObjectAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectAttributes"}
+	iGetObjectInformation                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectInformation"}
+	iGetSchemaAsJson                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetSchemaAsJson"}
+	iGetTypedLinkFacetInformation         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetTypedLinkFacetInformation"}
+	iListAppliedSchemaArns                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAppliedSchemaArns"}
+	iListAttachedIndices                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAttachedIndices"}
+	iListDevelopmentSchemaArns            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDevelopmentSchemaArns"}
+	iListDirectories                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDirectories"}
+	iListFacetAttributes                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetAttributes"}
+	iListFacetNames                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetNames"}
+	iListIncomingTypedLinks               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIncomingTypedLinks"}
+	iListIndex                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIndex"}
+	iListManagedSchemaArns                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListManagedSchemaArns"}
+	iListObjectAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectAttributes"}
+	iListObjectChildren                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectChildren"}
+	iListObjectParentPaths                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParentPaths"}
+	iListObjectParents                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParents"}
+	iListObjectPolicies                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectPolicies"}
+	iListOutgoingTypedLinks               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListOutgoingTypedLinks"}
+	iListPolicyAttachments                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPolicyAttachments"}
+	iListPublishedSchemaArns              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPublishedSchemaArns"}
+	iListTagsForResource                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTagsForResource"}
+	iListTypedLinkFacetAttributes         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetAttributes"}
+	iListTypedLinkFacetNames              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetNames"}
+	iLookupPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LookupPolicy"}
+	iPublishSchema                        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PublishSchema"}
+	iPutSchemaFromJson                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PutSchemaFromJson"}
+	iRemoveFacetFromObject                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RemoveFacetFromObject"}
+	iTagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagResource"}
+	iUntagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UntagResource"}
+	iUpdateFacet                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateFacet"}
+	iUpdateLinkAttributes                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateLinkAttributes"}
+	iUpdateObjectAttributes               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateObjectAttributes"}
+	iUpdateSchema                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateSchema"}
+	iUpdateTypedLinkFacet                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateTypedLinkFacet"}
+	iUpgradeAppliedSchema                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradeAppliedSchema"}
+	iUpgradePublishedSchema               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradePublishedSchema"}
+	i_AmazonCloudDirectory_20170111       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AmazonCloudDirectory_20170111"}
+	iAccessDeniedException                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AccessDeniedException"}
+	i_Arn                                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Arn"}
+	i_Arns                                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Arns"}
+	iAttributeKey                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeKey"}
+	iAttributeKeyAndValue                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeKeyAndValue"}
+	i_AttributeKeyAndValueList            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeKeyAndValueList"}
+	i_AttributeKeyList                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeKeyList"}
+	i_AttributeName                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeName"}
+	iAttributeNameAndValue                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeNameAndValue"}
+	i_AttributeNameAndValueList           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeNameAndValueList"}
+	i_AttributeNameList                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttributeNameList"}
+	iBatchAddFacetToObject                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAddFacetToObject"}
+	iBatchAddFacetToObjectResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAddFacetToObjectResponse"}
+	iBatchAttachObject                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachObject"}
+	iBatchAttachObjectResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachObjectResponse"}
+	iBatchAttachPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachPolicy"}
+	iBatchAttachPolicyResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachPolicyResponse"}
+	iBatchAttachToIndex                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachToIndex"}
+	iBatchAttachToIndexResponse           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachToIndexResponse"}
+	iBatchAttachTypedLink                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachTypedLink"}
+	iBatchAttachTypedLinkResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchAttachTypedLinkResponse"}
+	iBatchCreateIndex                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchCreateIndex"}
+	iBatchCreateIndexResponse             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchCreateIndexResponse"}
+	iBatchCreateObject                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchCreateObject"}
+	iBatchCreateObjectResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchCreateObjectResponse"}
+	iBatchDeleteObject                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDeleteObject"}
+	iBatchDeleteObjectResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDeleteObjectResponse"}
+	iBatchDetachFromIndex                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachFromIndex"}
+	iBatchDetachFromIndexResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachFromIndexResponse"}
+	iBatchDetachObject                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachObject"}
+	iBatchDetachObjectResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachObjectResponse"}
+	iBatchDetachPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachPolicy"}
+	iBatchDetachPolicyResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachPolicyResponse"}
+	iBatchDetachTypedLink                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachTypedLink"}
+	iBatchDetachTypedLinkResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchDetachTypedLinkResponse"}
+	iBatchGetLinkAttributes               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetLinkAttributes"}
+	iBatchGetLinkAttributesResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetLinkAttributesResponse"}
+	iBatchGetObjectAttributes             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetObjectAttributes"}
+	iBatchGetObjectAttributesResponse     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetObjectAttributesResponse"}
+	iBatchGetObjectInformation            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetObjectInformation"}
+	iBatchGetObjectInformationResponse    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchGetObjectInformationResponse"}
+	iBatchListAttachedIndices             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListAttachedIndices"}
+	iBatchListAttachedIndicesResponse     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListAttachedIndicesResponse"}
+	iBatchListIncomingTypedLinks          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListIncomingTypedLinks"}
+	iBatchListIncomingTypedLinksResponse  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListIncomingTypedLinksResponse"}
+	iBatchListIndex                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListIndex"}
+	iBatchListIndexResponse               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListIndexResponse"}
+	iBatchListObjectAttributes            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectAttributes"}
+	iBatchListObjectAttributesResponse    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectAttributesResponse"}
+	iBatchListObjectChildren              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectChildren"}
+	iBatchListObjectChildrenResponse      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectChildrenResponse"}
+	iBatchListObjectParentPaths           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectParentPaths"}
+	iBatchListObjectParentPathsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectParentPathsResponse"}
+	iBatchListObjectParents               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectParents"}
+	iBatchListObjectParentsResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectParentsResponse"}
+	iBatchListObjectPolicies              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectPolicies"}
+	iBatchListObjectPoliciesResponse      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListObjectPoliciesResponse"}
+	iBatchListOutgoingTypedLinks          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListOutgoingTypedLinks"}
+	iBatchListOutgoingTypedLinksResponse  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListOutgoingTypedLinksResponse"}
+	iBatchListPolicyAttachments           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListPolicyAttachments"}
+	iBatchListPolicyAttachmentsResponse   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchListPolicyAttachmentsResponse"}
+	iBatchLookupPolicy                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchLookupPolicy"}
+	iBatchLookupPolicyResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchLookupPolicyResponse"}
+	i_BatchOperationIndex                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchOperationIndex"}
+	iBatchReadException                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadException"}
+	iBatchReadExceptionType               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadExceptionType"}
+	iBatchReadOperation                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadOperation"}
+	i_BatchReadOperationList              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadOperationList"}
+	iBatchReadOperationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadOperationResponse"}
+	i_BatchReadOperationResponseList      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadOperationResponseList"}
+	iBatchReadSuccessfulResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadSuccessfulResponse"}
+	i_BatchReferenceName                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReferenceName"}
+	iBatchRemoveFacetFromObject           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchRemoveFacetFromObject"}
+	iBatchRemoveFacetFromObjectResponse   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchRemoveFacetFromObjectResponse"}
+	iBatchUpdateLinkAttributes            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchUpdateLinkAttributes"}
+	iBatchUpdateLinkAttributesResponse    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchUpdateLinkAttributesResponse"}
+	iBatchUpdateObjectAttributes          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchUpdateObjectAttributes"}
+	iBatchUpdateObjectAttributesResponse  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchUpdateObjectAttributesResponse"}
+	iBatchWriteException                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteException"}
+	iBatchWriteExceptionType              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteExceptionType"}
+	iBatchWriteOperation                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteOperation"}
+	i_BatchWriteOperationList             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteOperationList"}
+	iBatchWriteOperationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteOperationResponse"}
+	i_BatchWriteOperationResponseList     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteOperationResponseList"}
+	i_BinaryAttributeValue                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BinaryAttributeValue"}
+	i_Bool                                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Bool"}
+	i_BooleanAttributeValue               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BooleanAttributeValue"}
+	iCannotListParentOfRootException      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CannotListParentOfRootException"}
+	iConsistencyLevel                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ConsistencyLevel"}
+	i_Date                                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Date"}
+	i_DatetimeAttributeValue              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DatetimeAttributeValue"}
+	iDirectory                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Directory"}
+	iDirectoryAlreadyExistsException      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryAlreadyExistsException"}
+	i_DirectoryArn                        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryArn"}
+	iDirectoryDeletedException            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryDeletedException"}
+	i_DirectoryList                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryList"}
+	i_DirectoryName                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryName"}
+	iDirectoryNotDisabledException        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryNotDisabledException"}
+	iDirectoryNotEnabledException         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryNotEnabledException"}
+	iDirectoryState                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DirectoryState"}
+	i_ExceptionMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ExceptionMessage"}
+	iFacet                                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Facet"}
+	iFacetAlreadyExistsException          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAlreadyExistsException"}
+	iFacetAttribute                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttribute"}
+	iFacetAttributeDefinition             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeDefinition"}
+	i_FacetAttributeList                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeList"}
+	iFacetAttributeReference              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeReference"}
+	iFacetAttributeType                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeType"}
+	iFacetAttributeUpdate                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeUpdate"}
+	i_FacetAttributeUpdateList            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetAttributeUpdateList"}
+	iFacetInUseException                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetInUseException"}
+	i_FacetName                           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetName"}
+	i_FacetNameList                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetNameList"}
+	iFacetNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetNotFoundException"}
+	iFacetStyle                           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetStyle"}
+	iFacetValidationException             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "FacetValidationException"}
+	iIncompatibleSchemaException          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "IncompatibleSchemaException"}
+	iIndexAttachment                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "IndexAttachment"}
+	i_IndexAttachmentList                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "IndexAttachmentList"}
+	iIndexedAttributeMissingException     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "IndexedAttributeMissingException"}
+	iInternalServiceException             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InternalServiceException"}
+	iInvalidArnException                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidArnException"}
+	iInvalidAttachmentException           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidAttachmentException"}
+	iInvalidFacetUpdateException          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidFacetUpdateException"}
+	iInvalidNextTokenException            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidNextTokenException"}
+	iInvalidRuleException                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidRuleException"}
+	iInvalidSchemaDocException            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidSchemaDocException"}
+	iInvalidTaggingRequestException       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "InvalidTaggingRequestException"}
+	iLimitExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LimitExceededException"}
+	iLinkAttributeAction                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkAttributeAction"}
+	iLinkAttributeUpdate                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkAttributeUpdate"}
+	i_LinkAttributeUpdateList             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkAttributeUpdateList"}
+	i_LinkName                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkName"}
+	iLinkNameAlreadyInUseException        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkNameAlreadyInUseException"}
+	i_LinkNameToObjectIdentifierMap       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LinkNameToObjectIdentifierMap"}
+	i_NextToken                           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NextToken"}
+	iNotIndexException                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NotIndexException"}
+	iNotNodeException                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NotNodeException"}
+	iNotPolicyException                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NotPolicyException"}
+	i_NumberAttributeValue                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NumberAttributeValue"}
+	i_NumberResults                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "NumberResults"}
+	iObjectAlreadyDetachedException       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAlreadyDetachedException"}
+	iObjectAttributeAction                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAttributeAction"}
+	iObjectAttributeRange                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAttributeRange"}
+	i_ObjectAttributeRangeList            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAttributeRangeList"}
+	iObjectAttributeUpdate                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAttributeUpdate"}
+	i_ObjectAttributeUpdateList           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectAttributeUpdateList"}
+	i_ObjectIdentifier                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectIdentifier"}
+	i_ObjectIdentifierAndLinkNameList     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectIdentifierAndLinkNameList"}
+	iObjectIdentifierAndLinkNameTuple     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectIdentifierAndLinkNameTuple"}
+	i_ObjectIdentifierList                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectIdentifierList"}
+	i_ObjectIdentifierToLinkNameMap       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectIdentifierToLinkNameMap"}
+	iObjectNotDetachedException           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectNotDetachedException"}
+	iObjectReference                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectReference"}
+	iObjectType                           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ObjectType"}
+	i_PathString                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PathString"}
+	iPathToObjectIdentifiers              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PathToObjectIdentifiers"}
+	i_PathToObjectIdentifiersList         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PathToObjectIdentifiersList"}
+	iPolicyAttachment                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PolicyAttachment"}
+	i_PolicyAttachmentList                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PolicyAttachmentList"}
+	iPolicyToPath                         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PolicyToPath"}
+	i_PolicyToPathList                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PolicyToPathList"}
+	i_PolicyType                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PolicyType"}
+	iRangeMode                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RangeMode"}
+	iRequiredAttributeBehavior            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RequiredAttributeBehavior"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ResourceNotFoundException"}
+	iRetryableConflictException           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RetryableConflictException"}
+	iRule                                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Rule"}
+	i_RuleKey                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleKey"}
+	i_RuleMap                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleMap"}
+	i_RuleParameterKey                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleParameterKey"}
+	i_RuleParameterMap                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleParameterMap"}
+	i_RuleParameterValue                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleParameterValue"}
+	iRuleType                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RuleType"}
+	iSchemaAlreadyExistsException         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaAlreadyExistsException"}
+	iSchemaAlreadyPublishedException      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaAlreadyPublishedException"}
+	iSchemaFacet                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaFacet"}
+	i_SchemaFacetList                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaFacetList"}
+	i_SchemaJsonDocument                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaJsonDocument"}
+	i_SchemaName                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SchemaName"}
+	i_SelectorObjectReference             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "SelectorObjectReference"}
+	iStillContainsLinksException          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "StillContainsLinksException"}
+	i_StringAttributeValue                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "StringAttributeValue"}
+	iTag                                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Tag"}
+	i_TagKey                              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagKey"}
+	i_TagKeyList                          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagKeyList"}
+	i_TagList                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagList"}
+	i_TagsNumberResults                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagsNumberResults"}
+	i_TagValue                            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagValue"}
+	iTypedAttributeValue                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedAttributeValue"}
+	iTypedAttributeValueRange             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedAttributeValueRange"}
+	iTypedLinkAttributeDefinition         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkAttributeDefinition"}
+	i_TypedLinkAttributeDefinitionList    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkAttributeDefinitionList"}
+	iTypedLinkAttributeRange              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkAttributeRange"}
+	i_TypedLinkAttributeRangeList         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkAttributeRangeList"}
+	iTypedLinkFacet                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkFacet"}
+	iTypedLinkFacetAttributeUpdate        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkFacetAttributeUpdate"}
+	i_TypedLinkFacetAttributeUpdateList   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkFacetAttributeUpdateList"}
+	i_TypedLinkName                       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkName"}
+	i_TypedLinkNameList                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkNameList"}
+	iTypedLinkSchemaAndFacetName          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkSchemaAndFacetName"}
+	iTypedLinkSpecifier                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkSpecifier"}
+	i_TypedLinkSpecifierList              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TypedLinkSpecifierList"}
+	iUnsupportedIndexTypeException        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UnsupportedIndexTypeException"}
+	iUpdateActionType                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateActionType"}
+	iValidationException                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ValidationException"}
+	i_Version                             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "Version"}
+	iAddFacetToObjectRequest              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AddFacetToObjectRequest"}
+	iAddFacetToObjectResponse             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AddFacetToObjectResponse"}
+	iApplySchemaRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ApplySchemaRequest"}
+	iApplySchemaResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ApplySchemaResponse"}
+	iAttachObjectRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachObjectRequest"}
+	iAttachObjectResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachObjectResponse"}
+	iAttachPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachPolicyRequest"}
+	iAttachPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachPolicyResponse"}
+	iAttachToIndexRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachToIndexRequest"}
+	iAttachToIndexResponse                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachToIndexResponse"}
+	iAttachTypedLinkRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachTypedLinkRequest"}
+	iAttachTypedLinkResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "AttachTypedLinkResponse"}
+	iBatchReadRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadRequest"}
+	iBatchReadResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchReadResponse"}
+	iBatchWriteRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteRequest"}
+	iBatchWriteResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "BatchWriteResponse"}
+	iCreateDirectoryRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateDirectoryRequest"}
+	iCreateDirectoryResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateDirectoryResponse"}
+	iCreateFacetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateFacetRequest"}
+	iCreateFacetResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateFacetResponse"}
+	iCreateIndexRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateIndexRequest"}
+	iCreateIndexResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateIndexResponse"}
+	iCreateObjectRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateObjectRequest"}
+	iCreateObjectResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateObjectResponse"}
+	iCreateSchemaRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateSchemaRequest"}
+	iCreateSchemaResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateSchemaResponse"}
+	iCreateTypedLinkFacetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateTypedLinkFacetRequest"}
+	iCreateTypedLinkFacetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "CreateTypedLinkFacetResponse"}
+	iDeleteDirectoryRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteDirectoryRequest"}
+	iDeleteDirectoryResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteDirectoryResponse"}
+	iDeleteFacetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteFacetRequest"}
+	iDeleteFacetResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteFacetResponse"}
+	iDeleteObjectRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteObjectRequest"}
+	iDeleteObjectResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteObjectResponse"}
+	iDeleteSchemaRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteSchemaRequest"}
+	iDeleteSchemaResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteSchemaResponse"}
+	iDeleteTypedLinkFacetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteTypedLinkFacetRequest"}
+	iDeleteTypedLinkFacetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DeleteTypedLinkFacetResponse"}
+	iDetachFromIndexRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachFromIndexRequest"}
+	iDetachFromIndexResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachFromIndexResponse"}
+	iDetachObjectRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachObjectRequest"}
+	iDetachObjectResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachObjectResponse"}
+	iDetachPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachPolicyRequest"}
+	iDetachPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachPolicyResponse"}
+	iDetachTypedLinkRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DetachTypedLinkRequest"}
+	iDisableDirectoryRequest              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DisableDirectoryRequest"}
+	iDisableDirectoryResponse             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "DisableDirectoryResponse"}
+	iEnableDirectoryRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "EnableDirectoryRequest"}
+	iEnableDirectoryResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "EnableDirectoryResponse"}
+	iGetAppliedSchemaVersionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetAppliedSchemaVersionRequest"}
+	iGetAppliedSchemaVersionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetAppliedSchemaVersionResponse"}
+	iGetDirectoryRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetDirectoryRequest"}
+	iGetDirectoryResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetDirectoryResponse"}
+	iGetFacetRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetFacetRequest"}
+	iGetFacetResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetFacetResponse"}
+	iGetLinkAttributesRequest             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetLinkAttributesRequest"}
+	iGetLinkAttributesResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetLinkAttributesResponse"}
+	iGetObjectAttributesRequest           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectAttributesRequest"}
+	iGetObjectAttributesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectAttributesResponse"}
+	iGetObjectInformationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectInformationRequest"}
+	iGetObjectInformationResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetObjectInformationResponse"}
+	iGetSchemaAsJsonRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetSchemaAsJsonRequest"}
+	iGetSchemaAsJsonResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetSchemaAsJsonResponse"}
+	iGetTypedLinkFacetInformationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetTypedLinkFacetInformationRequest"}
+	iGetTypedLinkFacetInformationResponse = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "GetTypedLinkFacetInformationResponse"}
+	iListAppliedSchemaArnsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAppliedSchemaArnsRequest"}
+	iListAppliedSchemaArnsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAppliedSchemaArnsResponse"}
+	iListAttachedIndicesRequest           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAttachedIndicesRequest"}
+	iListAttachedIndicesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListAttachedIndicesResponse"}
+	iListDevelopmentSchemaArnsRequest     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDevelopmentSchemaArnsRequest"}
+	iListDevelopmentSchemaArnsResponse    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDevelopmentSchemaArnsResponse"}
+	iListDirectoriesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDirectoriesRequest"}
+	iListDirectoriesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListDirectoriesResponse"}
+	iListFacetAttributesRequest           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetAttributesRequest"}
+	iListFacetAttributesResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetAttributesResponse"}
+	iListFacetNamesRequest                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetNamesRequest"}
+	iListFacetNamesResponse               = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListFacetNamesResponse"}
+	iListIncomingTypedLinksRequest        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIncomingTypedLinksRequest"}
+	iListIncomingTypedLinksResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIncomingTypedLinksResponse"}
+	iListIndexRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIndexRequest"}
+	iListIndexResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListIndexResponse"}
+	iListManagedSchemaArnsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListManagedSchemaArnsRequest"}
+	iListManagedSchemaArnsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListManagedSchemaArnsResponse"}
+	iListObjectAttributesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectAttributesRequest"}
+	iListObjectAttributesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectAttributesResponse"}
+	iListObjectChildrenRequest            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectChildrenRequest"}
+	iListObjectChildrenResponse           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectChildrenResponse"}
+	iListObjectParentPathsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParentPathsRequest"}
+	iListObjectParentPathsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParentPathsResponse"}
+	iListObjectParentsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParentsRequest"}
+	iListObjectParentsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectParentsResponse"}
+	iListObjectPoliciesRequest            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectPoliciesRequest"}
+	iListObjectPoliciesResponse           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListObjectPoliciesResponse"}
+	iListOutgoingTypedLinksRequest        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListOutgoingTypedLinksRequest"}
+	iListOutgoingTypedLinksResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListOutgoingTypedLinksResponse"}
+	iListPolicyAttachmentsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPolicyAttachmentsRequest"}
+	iListPolicyAttachmentsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPolicyAttachmentsResponse"}
+	iListPublishedSchemaArnsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPublishedSchemaArnsRequest"}
+	iListPublishedSchemaArnsResponse      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListPublishedSchemaArnsResponse"}
+	iListTagsForResourceRequest           = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTagsForResourceResponse"}
+	iListTypedLinkFacetAttributesRequest  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetAttributesRequest"}
+	iListTypedLinkFacetAttributesResponse = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetAttributesResponse"}
+	iListTypedLinkFacetNamesRequest       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetNamesRequest"}
+	iListTypedLinkFacetNamesResponse      = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "ListTypedLinkFacetNamesResponse"}
+	iLookupPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LookupPolicyRequest"}
+	iLookupPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "LookupPolicyResponse"}
+	iPublishSchemaRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PublishSchemaRequest"}
+	iPublishSchemaResponse                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PublishSchemaResponse"}
+	iPutSchemaFromJsonRequest             = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PutSchemaFromJsonRequest"}
+	iPutSchemaFromJsonResponse            = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "PutSchemaFromJsonResponse"}
+	iRemoveFacetFromObjectRequest         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RemoveFacetFromObjectRequest"}
+	iRemoveFacetFromObjectResponse        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "RemoveFacetFromObjectResponse"}
+	iTagResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagResourceRequest"}
+	iTagResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "TagResourceResponse"}
+	iUntagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UntagResourceResponse"}
+	iUpdateFacetRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateFacetRequest"}
+	iUpdateFacetResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateFacetResponse"}
+	iUpdateLinkAttributesRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateLinkAttributesRequest"}
+	iUpdateLinkAttributesResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateLinkAttributesResponse"}
+	iUpdateObjectAttributesRequest        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateObjectAttributesRequest"}
+	iUpdateObjectAttributesResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateObjectAttributesResponse"}
+	iUpdateSchemaRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateSchemaRequest"}
+	iUpdateSchemaResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateSchemaResponse"}
+	iUpdateTypedLinkFacetRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateTypedLinkFacetRequest"}
+	iUpdateTypedLinkFacetResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpdateTypedLinkFacetResponse"}
+	iUpgradeAppliedSchemaRequest          = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradeAppliedSchemaRequest"}
+	iUpgradeAppliedSchemaResponse         = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradeAppliedSchemaResponse"}
+	iUpgradePublishedSchemaRequest        = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradePublishedSchemaRequest"}
+	iUpgradePublishedSchemaResponse       = smithy.ShapeName{Namespace: "com.amazonaws.clouddirectory", Name: "UpgradePublishedSchemaResponse"}
+	pUnit                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/facets",
-	Code: 200})
-
-var ApplySchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ApplySchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/apply",
-	Code: 200})
-
-var AttachObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/attach",
-	Code: 200})
-
-var AttachPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/policy/attach",
-	Code: 200})
-
-var AttachToIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachToIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/index/attach",
-	Code: 200})
-
-var AttachTypedLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachTypedLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/attach",
-	Code: 200})
-
-var BatchRead = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchRead",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/batchread",
-	Code: 200})
-
-var BatchWrite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWrite",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/batchwrite",
-	Code: 200})
-
-var CreateDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateDirectory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/directory/create",
-	Code: 200})
-
-var CreateFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/facet/create",
-	Code: 200})
-
-var CreateIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/index",
-	Code: 200})
-
-var CreateObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object",
-	Code: 200})
-
-var CreateSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/create",
-	Code: 200})
-
-var CreateTypedLinkFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateTypedLinkFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet/create",
-	Code: 200})
-
-var DeleteDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteDirectory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/directory",
-	Code: 200})
-
-var DeleteFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/facet/delete",
-	Code: 200})
-
-var DeleteObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/delete",
-	Code: 200})
-
-var DeleteSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema",
-	Code: 200})
-
-var DeleteTypedLinkFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteTypedLinkFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet/delete",
-	Code: 200})
-
-var DetachFromIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachFromIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/index/detach",
-	Code: 200})
-
-var DetachObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/detach",
-	Code: 200})
-
-var DetachPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/policy/detach",
-	Code: 200})
-
-var DetachTypedLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachTypedLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/detach",
-	Code: 200})
-
-var DisableDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DisableDirectory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/directory/disable",
-	Code: 200})
-
-var EnableDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "EnableDirectory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/directory/enable",
-	Code: 200})
-
-var GetAppliedSchemaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetAppliedSchemaVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/getappliedschema",
-	Code: 200})
-
-var GetDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetDirectory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/directory/get",
-	Code: 200})
-
-var GetFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/facet",
-	Code: 200})
-
-var GetLinkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetLinkAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/attributes/get",
-	Code: 200})
-
-var GetObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/attributes/get",
-	Code: 200})
-
-var GetObjectInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectInformation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/information",
-	Code: 200})
-
-var GetSchemaAsJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetSchemaAsJson",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/json",
-	Code: 200})
-
-var GetTypedLinkFacetInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetTypedLinkFacetInformation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet/get",
-	Code: 200})
-
-var ListAppliedSchemaArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAppliedSchemaArns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/applied",
-	Code: 200})
-
-var ListAttachedIndices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAttachedIndices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/indices",
-	Code: 200})
-
-var ListDevelopmentSchemaArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDevelopmentSchemaArns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/development",
-	Code: 200})
-
-var ListDirectories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDirectories",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/directory/list",
-	Code: 200})
-
-var ListFacetAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/facet/attributes",
-	Code: 200})
-
-var ListFacetNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/facet/list",
-	Code: 200})
-
-var ListIncomingTypedLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIncomingTypedLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/incoming",
-	Code: 200})
-
-var ListIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/index/targets",
-	Code: 200})
-
-var ListManagedSchemaArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListManagedSchemaArns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/managed",
-	Code: 200})
-
-var ListObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/attributes",
-	Code: 200})
-
-var ListObjectChildren = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectChildren",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/children",
-	Code: 200})
-
-var ListObjectParentPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParentPaths",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/parentpaths",
-	Code: 200})
-
-var ListObjectParents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/parent",
-	Code: 200})
-
-var ListObjectPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectPolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/object/policy",
-	Code: 200})
-
-var ListOutgoingTypedLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListOutgoingTypedLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/outgoing",
-	Code: 200})
-
-var ListPolicyAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPolicyAttachments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/policy/attachment",
-	Code: 200})
-
-var ListPublishedSchemaArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPublishedSchemaArns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/published",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/tags",
-	Code: 200})
-
-var ListTypedLinkFacetAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet/attributes",
-	Code: 200})
-
-var ListTypedLinkFacetNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet/list",
-	Code: 200})
-
-var LookupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LookupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/policy/lookup",
-	Code: 200})
-
-var PublishSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PublishSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/publish",
-	Code: 200})
-
-var PutSchemaFromJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PutSchemaFromJson",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/json",
-	Code: 200})
-
-var RemoveFacetFromObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RemoveFacetFromObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/facets/delete",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/tags/add",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/tags/remove",
-	Code: 200})
-
-var UpdateFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/facet",
-	Code: 200})
-
-var UpdateLinkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateLinkAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/attributes/update",
-	Code: 200})
-
-var UpdateObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateObjectAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/object/update",
-	Code: 200})
-
-var UpdateSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/update",
-	Code: 200})
-
-var UpdateTypedLinkFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateTypedLinkFacet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/typedlink/facet",
-	Code: 200})
-
-var UpgradeAppliedSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradeAppliedSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/upgradeapplied",
-	Code: 200})
-
-var UpgradePublishedSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradePublishedSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/amazonclouddirectory/2017-01-11/schema/upgradepublished",
-	Code: 200})
-
-var _AmazonCloudDirectory_20170111 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AmazonCloudDirectory_20170111",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonCloudDirectory_20170111 = smithy.NewServiceSchema(_AmazonCloudDirectory_20170111, "2017-01-11")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Arns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Arns",
-}, smithy.ShapeTypeList, 1)
-var _Arns_member *smithy.Schema
-
-var AttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeKey",
-}, smithy.ShapeTypeStructure, 3)
-var AttributeKey_SchemaArn *smithy.Schema
-
-var AttributeKey_FacetName *smithy.Schema
-
-var AttributeKey_Name *smithy.Schema
-
-var AttributeKeyAndValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeKeyAndValue",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeKeyAndValue_Key *smithy.Schema
-
-var AttributeKeyAndValue_Value *smithy.Schema
-
-var _AttributeKeyAndValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeKeyAndValueList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeKeyAndValueList_member *smithy.Schema
-
-var _AttributeKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeKeyList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeKeyList_member *smithy.Schema
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeNameAndValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeNameAndValue",
-}, smithy.ShapeTypeStructure, 2)
-var AttributeNameAndValue_AttributeName *smithy.Schema
-
-var AttributeNameAndValue_Value *smithy.Schema
-
-var _AttributeNameAndValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeNameAndValueList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeNameAndValueList_member *smithy.Schema
-
-var _AttributeNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttributeNameList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeNameList_member *smithy.Schema
-
-var BatchAddFacetToObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAddFacetToObject",
-}, smithy.ShapeTypeStructure, 3)
-var BatchAddFacetToObject_SchemaFacet *smithy.Schema
-
-var BatchAddFacetToObject_ObjectAttributeList *smithy.Schema
-
-var BatchAddFacetToObject_ObjectReference *smithy.Schema
-
-var BatchAddFacetToObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAddFacetToObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchAttachObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachObject",
-}, smithy.ShapeTypeStructure, 3)
-var BatchAttachObject_ParentReference *smithy.Schema
-
-var BatchAttachObject_ChildReference *smithy.Schema
-
-var BatchAttachObject_LinkName *smithy.Schema
-
-var BatchAttachObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAttachObjectResponse_attachedObjectIdentifier *smithy.Schema
-
-var BatchAttachPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAttachPolicy_PolicyReference *smithy.Schema
-
-var BatchAttachPolicy_ObjectReference *smithy.Schema
-
-var BatchAttachPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchAttachToIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachToIndex",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAttachToIndex_IndexReference *smithy.Schema
-
-var BatchAttachToIndex_TargetReference *smithy.Schema
-
-var BatchAttachToIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachToIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAttachToIndexResponse_AttachedObjectIdentifier *smithy.Schema
-
-var BatchAttachTypedLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachTypedLink",
-}, smithy.ShapeTypeStructure, 4)
-var BatchAttachTypedLink_SourceObjectReference *smithy.Schema
-
-var BatchAttachTypedLink_TargetObjectReference *smithy.Schema
-
-var BatchAttachTypedLink_TypedLinkFacet *smithy.Schema
-
-var BatchAttachTypedLink_Attributes *smithy.Schema
-
-var BatchAttachTypedLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchAttachTypedLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAttachTypedLinkResponse_TypedLinkSpecifier *smithy.Schema
-
-var BatchCreateIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchCreateIndex",
-}, smithy.ShapeTypeStructure, 5)
-var BatchCreateIndex_OrderedIndexedAttributeList *smithy.Schema
-
-var BatchCreateIndex_IsUnique *smithy.Schema
-
-var BatchCreateIndex_ParentReference *smithy.Schema
-
-var BatchCreateIndex_LinkName *smithy.Schema
-
-var BatchCreateIndex_BatchReferenceName *smithy.Schema
-
-var BatchCreateIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchCreateIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateIndexResponse_ObjectIdentifier *smithy.Schema
-
-var BatchCreateObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchCreateObject",
-}, smithy.ShapeTypeStructure, 5)
-var BatchCreateObject_SchemaFacet *smithy.Schema
-
-var BatchCreateObject_ObjectAttributeList *smithy.Schema
-
-var BatchCreateObject_ParentReference *smithy.Schema
-
-var BatchCreateObject_LinkName *smithy.Schema
-
-var BatchCreateObject_BatchReferenceName *smithy.Schema
-
-var BatchCreateObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchCreateObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateObjectResponse_ObjectIdentifier *smithy.Schema
-
-var BatchDeleteObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDeleteObject",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteObject_ObjectReference *smithy.Schema
-
-var BatchDeleteObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDeleteObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchDetachFromIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachFromIndex",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDetachFromIndex_IndexReference *smithy.Schema
-
-var BatchDetachFromIndex_TargetReference *smithy.Schema
-
-var BatchDetachFromIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachFromIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDetachFromIndexResponse_DetachedObjectIdentifier *smithy.Schema
-
-var BatchDetachObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachObject",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDetachObject_ParentReference *smithy.Schema
-
-var BatchDetachObject_LinkName *smithy.Schema
-
-var BatchDetachObject_BatchReferenceName *smithy.Schema
-
-var BatchDetachObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDetachObjectResponse_detachedObjectIdentifier *smithy.Schema
-
-var BatchDetachPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDetachPolicy_PolicyReference *smithy.Schema
-
-var BatchDetachPolicy_ObjectReference *smithy.Schema
-
-var BatchDetachPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchDetachTypedLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachTypedLink",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDetachTypedLink_TypedLinkSpecifier *smithy.Schema
-
-var BatchDetachTypedLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchDetachTypedLinkResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchGetLinkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetLinkAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetLinkAttributes_TypedLinkSpecifier *smithy.Schema
-
-var BatchGetLinkAttributes_AttributeNames *smithy.Schema
-
-var BatchGetLinkAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetLinkAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetLinkAttributesResponse_Attributes *smithy.Schema
-
-var BatchGetObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetObjectAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetObjectAttributes_ObjectReference *smithy.Schema
-
-var BatchGetObjectAttributes_SchemaFacet *smithy.Schema
-
-var BatchGetObjectAttributes_AttributeNames *smithy.Schema
-
-var BatchGetObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetObjectAttributesResponse_Attributes *smithy.Schema
-
-var BatchGetObjectInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetObjectInformation",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetObjectInformation_ObjectReference *smithy.Schema
-
-var BatchGetObjectInformationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchGetObjectInformationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetObjectInformationResponse_SchemaFacets *smithy.Schema
-
-var BatchGetObjectInformationResponse_ObjectIdentifier *smithy.Schema
-
-var BatchListAttachedIndices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListAttachedIndices",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListAttachedIndices_TargetReference *smithy.Schema
-
-var BatchListAttachedIndices_NextToken *smithy.Schema
-
-var BatchListAttachedIndices_MaxResults *smithy.Schema
-
-var BatchListAttachedIndicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListAttachedIndicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListAttachedIndicesResponse_IndexAttachments *smithy.Schema
-
-var BatchListAttachedIndicesResponse_NextToken *smithy.Schema
-
-var BatchListIncomingTypedLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListIncomingTypedLinks",
-}, smithy.ShapeTypeStructure, 5)
-var BatchListIncomingTypedLinks_ObjectReference *smithy.Schema
-
-var BatchListIncomingTypedLinks_FilterAttributeRanges *smithy.Schema
-
-var BatchListIncomingTypedLinks_FilterTypedLink *smithy.Schema
-
-var BatchListIncomingTypedLinks_NextToken *smithy.Schema
-
-var BatchListIncomingTypedLinks_MaxResults *smithy.Schema
-
-var BatchListIncomingTypedLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListIncomingTypedLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListIncomingTypedLinksResponse_LinkSpecifiers *smithy.Schema
-
-var BatchListIncomingTypedLinksResponse_NextToken *smithy.Schema
-
-var BatchListIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListIndex",
-}, smithy.ShapeTypeStructure, 4)
-var BatchListIndex_RangesOnIndexedValues *smithy.Schema
-
-var BatchListIndex_IndexReference *smithy.Schema
-
-var BatchListIndex_MaxResults *smithy.Schema
-
-var BatchListIndex_NextToken *smithy.Schema
-
-var BatchListIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListIndexResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListIndexResponse_IndexAttachments *smithy.Schema
-
-var BatchListIndexResponse_NextToken *smithy.Schema
-
-var BatchListObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var BatchListObjectAttributes_ObjectReference *smithy.Schema
-
-var BatchListObjectAttributes_NextToken *smithy.Schema
-
-var BatchListObjectAttributes_MaxResults *smithy.Schema
-
-var BatchListObjectAttributes_FacetFilter *smithy.Schema
-
-var BatchListObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListObjectAttributesResponse_Attributes *smithy.Schema
-
-var BatchListObjectAttributesResponse_NextToken *smithy.Schema
-
-var BatchListObjectChildren = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectChildren",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListObjectChildren_ObjectReference *smithy.Schema
-
-var BatchListObjectChildren_NextToken *smithy.Schema
-
-var BatchListObjectChildren_MaxResults *smithy.Schema
-
-var BatchListObjectChildrenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectChildrenResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListObjectChildrenResponse_Children *smithy.Schema
-
-var BatchListObjectChildrenResponse_NextToken *smithy.Schema
-
-var BatchListObjectParentPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectParentPaths",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListObjectParentPaths_ObjectReference *smithy.Schema
-
-var BatchListObjectParentPaths_NextToken *smithy.Schema
-
-var BatchListObjectParentPaths_MaxResults *smithy.Schema
-
-var BatchListObjectParentPathsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectParentPathsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListObjectParentPathsResponse_PathToObjectIdentifiersList *smithy.Schema
-
-var BatchListObjectParentPathsResponse_NextToken *smithy.Schema
-
-var BatchListObjectParents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectParents",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListObjectParents_ObjectReference *smithy.Schema
-
-var BatchListObjectParents_NextToken *smithy.Schema
-
-var BatchListObjectParents_MaxResults *smithy.Schema
-
-var BatchListObjectParentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectParentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListObjectParentsResponse_ParentLinks *smithy.Schema
-
-var BatchListObjectParentsResponse_NextToken *smithy.Schema
-
-var BatchListObjectPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectPolicies",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListObjectPolicies_ObjectReference *smithy.Schema
-
-var BatchListObjectPolicies_NextToken *smithy.Schema
-
-var BatchListObjectPolicies_MaxResults *smithy.Schema
-
-var BatchListObjectPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListObjectPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListObjectPoliciesResponse_AttachedPolicyIds *smithy.Schema
-
-var BatchListObjectPoliciesResponse_NextToken *smithy.Schema
-
-var BatchListOutgoingTypedLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListOutgoingTypedLinks",
-}, smithy.ShapeTypeStructure, 5)
-var BatchListOutgoingTypedLinks_ObjectReference *smithy.Schema
-
-var BatchListOutgoingTypedLinks_FilterAttributeRanges *smithy.Schema
-
-var BatchListOutgoingTypedLinks_FilterTypedLink *smithy.Schema
-
-var BatchListOutgoingTypedLinks_NextToken *smithy.Schema
-
-var BatchListOutgoingTypedLinks_MaxResults *smithy.Schema
-
-var BatchListOutgoingTypedLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListOutgoingTypedLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers *smithy.Schema
-
-var BatchListOutgoingTypedLinksResponse_NextToken *smithy.Schema
-
-var BatchListPolicyAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListPolicyAttachments",
-}, smithy.ShapeTypeStructure, 3)
-var BatchListPolicyAttachments_PolicyReference *smithy.Schema
-
-var BatchListPolicyAttachments_NextToken *smithy.Schema
-
-var BatchListPolicyAttachments_MaxResults *smithy.Schema
-
-var BatchListPolicyAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchListPolicyAttachmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchListPolicyAttachmentsResponse_ObjectIdentifiers *smithy.Schema
-
-var BatchListPolicyAttachmentsResponse_NextToken *smithy.Schema
-
-var BatchLookupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchLookupPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var BatchLookupPolicy_ObjectReference *smithy.Schema
-
-var BatchLookupPolicy_NextToken *smithy.Schema
-
-var BatchLookupPolicy_MaxResults *smithy.Schema
-
-var BatchLookupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchLookupPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchLookupPolicyResponse_PolicyToPathList *smithy.Schema
-
-var BatchLookupPolicyResponse_NextToken *smithy.Schema
-
-var _BatchOperationIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchOperationIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchReadException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadException",
-}, smithy.ShapeTypeStructure, 2)
-var BatchReadException_Type *smithy.Schema
-
-var BatchReadException_Message *smithy.Schema
-
-var BatchReadExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadExceptionType",
-}, smithy.ShapeTypeEnum, 13)
-var BatchReadExceptionType_ValidationException *smithy.Schema
-
-var BatchReadExceptionType_InvalidArnException *smithy.Schema
-
-var BatchReadExceptionType_ResourceNotFoundException *smithy.Schema
-
-var BatchReadExceptionType_InvalidNextTokenException *smithy.Schema
-
-var BatchReadExceptionType_AccessDeniedException *smithy.Schema
-
-var BatchReadExceptionType_NotNodeException *smithy.Schema
-
-var BatchReadExceptionType_FacetValidationException *smithy.Schema
-
-var BatchReadExceptionType_CannotListParentOfRootException *smithy.Schema
-
-var BatchReadExceptionType_NotIndexException *smithy.Schema
-
-var BatchReadExceptionType_NotPolicyException *smithy.Schema
-
-var BatchReadExceptionType_DirectoryNotEnabledException *smithy.Schema
-
-var BatchReadExceptionType_LimitExceededException *smithy.Schema
-
-var BatchReadExceptionType_InternalServiceException *smithy.Schema
-
-var BatchReadOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadOperation",
-}, smithy.ShapeTypeStructure, 14)
-var BatchReadOperation_ListObjectAttributes *smithy.Schema
-
-var BatchReadOperation_ListObjectChildren *smithy.Schema
-
-var BatchReadOperation_ListAttachedIndices *smithy.Schema
-
-var BatchReadOperation_ListObjectParentPaths *smithy.Schema
-
-var BatchReadOperation_GetObjectInformation *smithy.Schema
-
-var BatchReadOperation_GetObjectAttributes *smithy.Schema
-
-var BatchReadOperation_ListObjectParents *smithy.Schema
-
-var BatchReadOperation_ListObjectPolicies *smithy.Schema
-
-var BatchReadOperation_ListPolicyAttachments *smithy.Schema
-
-var BatchReadOperation_LookupPolicy *smithy.Schema
-
-var BatchReadOperation_ListIndex *smithy.Schema
-
-var BatchReadOperation_ListOutgoingTypedLinks *smithy.Schema
-
-var BatchReadOperation_ListIncomingTypedLinks *smithy.Schema
-
-var BatchReadOperation_GetLinkAttributes *smithy.Schema
-
-var _BatchReadOperationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadOperationList",
-}, smithy.ShapeTypeList, 1)
-var _BatchReadOperationList_member *smithy.Schema
-
-var BatchReadOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadOperationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchReadOperationResponse_SuccessfulResponse *smithy.Schema
-
-var BatchReadOperationResponse_ExceptionResponse *smithy.Schema
-
-var _BatchReadOperationResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadOperationResponseList",
-}, smithy.ShapeTypeList, 1)
-var _BatchReadOperationResponseList_member *smithy.Schema
-
-var BatchReadSuccessfulResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadSuccessfulResponse",
-}, smithy.ShapeTypeStructure, 14)
-var BatchReadSuccessfulResponse_ListObjectAttributes *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListObjectChildren *smithy.Schema
-
-var BatchReadSuccessfulResponse_GetObjectInformation *smithy.Schema
-
-var BatchReadSuccessfulResponse_GetObjectAttributes *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListAttachedIndices *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListObjectParentPaths *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListObjectPolicies *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListPolicyAttachments *smithy.Schema
-
-var BatchReadSuccessfulResponse_LookupPolicy *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListIndex *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListOutgoingTypedLinks *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListIncomingTypedLinks *smithy.Schema
-
-var BatchReadSuccessfulResponse_GetLinkAttributes *smithy.Schema
-
-var BatchReadSuccessfulResponse_ListObjectParents *smithy.Schema
-
-var _BatchReferenceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReferenceName",
-}, smithy.ShapeTypeString, 0)
-
-var BatchRemoveFacetFromObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchRemoveFacetFromObject",
-}, smithy.ShapeTypeStructure, 2)
-var BatchRemoveFacetFromObject_SchemaFacet *smithy.Schema
-
-var BatchRemoveFacetFromObject_ObjectReference *smithy.Schema
-
-var BatchRemoveFacetFromObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchRemoveFacetFromObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchUpdateLinkAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchUpdateLinkAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateLinkAttributes_TypedLinkSpecifier *smithy.Schema
-
-var BatchUpdateLinkAttributes_AttributeUpdates *smithy.Schema
-
-var BatchUpdateLinkAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchUpdateLinkAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchUpdateObjectAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchUpdateObjectAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateObjectAttributes_ObjectReference *smithy.Schema
-
-var BatchUpdateObjectAttributes_AttributeUpdates *smithy.Schema
-
-var BatchUpdateObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchUpdateObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdateObjectAttributesResponse_ObjectIdentifier *smithy.Schema
-
-var BatchWriteException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
-var BatchWriteException_Index *smithy.Schema
-
-var BatchWriteException_Type *smithy.Schema
-
-var BatchWriteException_Message *smithy.Schema
-
-var BatchWriteExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteExceptionType",
-}, smithy.ShapeTypeEnum, 18)
-var BatchWriteExceptionType_InternalServiceException *smithy.Schema
-
-var BatchWriteExceptionType_ValidationException *smithy.Schema
-
-var BatchWriteExceptionType_InvalidArnException *smithy.Schema
-
-var BatchWriteExceptionType_LinkNameAlreadyInUseException *smithy.Schema
-
-var BatchWriteExceptionType_StillContainsLinksException *smithy.Schema
-
-var BatchWriteExceptionType_FacetValidationException *smithy.Schema
-
-var BatchWriteExceptionType_ObjectNotDetachedException *smithy.Schema
-
-var BatchWriteExceptionType_ResourceNotFoundException *smithy.Schema
-
-var BatchWriteExceptionType_AccessDeniedException *smithy.Schema
-
-var BatchWriteExceptionType_InvalidAttachmentException *smithy.Schema
-
-var BatchWriteExceptionType_NotIndexException *smithy.Schema
-
-var BatchWriteExceptionType_NotNodeException *smithy.Schema
-
-var BatchWriteExceptionType_IndexedAttributeMissingException *smithy.Schema
-
-var BatchWriteExceptionType_ObjectAlreadyDetachedException *smithy.Schema
-
-var BatchWriteExceptionType_NotPolicyException *smithy.Schema
-
-var BatchWriteExceptionType_DirectoryNotEnabledException *smithy.Schema
-
-var BatchWriteExceptionType_LimitExceededException *smithy.Schema
-
-var BatchWriteExceptionType_UnsupportedIndexTypeException *smithy.Schema
-
-var BatchWriteOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteOperation",
-}, smithy.ShapeTypeStructure, 15)
-var BatchWriteOperation_CreateObject *smithy.Schema
-
-var BatchWriteOperation_AttachObject *smithy.Schema
-
-var BatchWriteOperation_DetachObject *smithy.Schema
-
-var BatchWriteOperation_UpdateObjectAttributes *smithy.Schema
-
-var BatchWriteOperation_DeleteObject *smithy.Schema
-
-var BatchWriteOperation_AddFacetToObject *smithy.Schema
-
-var BatchWriteOperation_RemoveFacetFromObject *smithy.Schema
-
-var BatchWriteOperation_AttachPolicy *smithy.Schema
-
-var BatchWriteOperation_DetachPolicy *smithy.Schema
-
-var BatchWriteOperation_CreateIndex *smithy.Schema
-
-var BatchWriteOperation_AttachToIndex *smithy.Schema
-
-var BatchWriteOperation_DetachFromIndex *smithy.Schema
-
-var BatchWriteOperation_AttachTypedLink *smithy.Schema
-
-var BatchWriteOperation_DetachTypedLink *smithy.Schema
-
-var BatchWriteOperation_UpdateLinkAttributes *smithy.Schema
-
-var _BatchWriteOperationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteOperationList",
-}, smithy.ShapeTypeList, 1)
-var _BatchWriteOperationList_member *smithy.Schema
-
-var BatchWriteOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteOperationResponse",
-}, smithy.ShapeTypeStructure, 15)
-var BatchWriteOperationResponse_CreateObject *smithy.Schema
-
-var BatchWriteOperationResponse_AttachObject *smithy.Schema
-
-var BatchWriteOperationResponse_DetachObject *smithy.Schema
-
-var BatchWriteOperationResponse_UpdateObjectAttributes *smithy.Schema
-
-var BatchWriteOperationResponse_DeleteObject *smithy.Schema
-
-var BatchWriteOperationResponse_AddFacetToObject *smithy.Schema
-
-var BatchWriteOperationResponse_RemoveFacetFromObject *smithy.Schema
-
-var BatchWriteOperationResponse_AttachPolicy *smithy.Schema
-
-var BatchWriteOperationResponse_DetachPolicy *smithy.Schema
-
-var BatchWriteOperationResponse_CreateIndex *smithy.Schema
-
-var BatchWriteOperationResponse_AttachToIndex *smithy.Schema
-
-var BatchWriteOperationResponse_DetachFromIndex *smithy.Schema
-
-var BatchWriteOperationResponse_AttachTypedLink *smithy.Schema
-
-var BatchWriteOperationResponse_DetachTypedLink *smithy.Schema
-
-var BatchWriteOperationResponse_UpdateLinkAttributes *smithy.Schema
-
-var _BatchWriteOperationResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteOperationResponseList",
-}, smithy.ShapeTypeList, 1)
-var _BatchWriteOperationResponseList_member *smithy.Schema
-
-var _BinaryAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BinaryAttributeValue",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Bool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Bool",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BooleanAttributeValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CannotListParentOfRootException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CannotListParentOfRootException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var CannotListParentOfRootException_Message *smithy.Schema
-
-var ConsistencyLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ConsistencyLevel",
-}, smithy.ShapeTypeEnum, 2)
-var ConsistencyLevel_SERIALIZABLE *smithy.Schema
-
-var ConsistencyLevel_EVENTUAL *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DatetimeAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DatetimeAttributeValue",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Directory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Directory",
-}, smithy.ShapeTypeStructure, 4)
-var Directory_Name *smithy.Schema
-
-var Directory_DirectoryArn *smithy.Schema
-
-var Directory_State *smithy.Schema
-
-var Directory_CreationDateTime *smithy.Schema
-
-var DirectoryAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DirectoryAlreadyExistsException_Message *smithy.Schema
-
-var _DirectoryArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryArn",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryDeletedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryDeletedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DirectoryDeletedException_Message *smithy.Schema
-
-var _DirectoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryList",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryList_member *smithy.Schema
-
-var _DirectoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryName",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryNotDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryNotDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DirectoryNotDisabledException_Message *smithy.Schema
-
-var DirectoryNotEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DirectoryNotEnabledException_Message *smithy.Schema
-
-var DirectoryState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DirectoryState",
-}, smithy.ShapeTypeEnum, 3)
-var DirectoryState_ENABLED *smithy.Schema
-
-var DirectoryState_DISABLED *smithy.Schema
-
-var DirectoryState_DELETED *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Facet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Facet",
-}, smithy.ShapeTypeStructure, 3)
-var Facet_Name *smithy.Schema
-
-var Facet_ObjectType *smithy.Schema
-
-var Facet_FacetStyle *smithy.Schema
-
-var FacetAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var FacetAlreadyExistsException_Message *smithy.Schema
-
-var FacetAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttribute",
-}, smithy.ShapeTypeStructure, 4)
-var FacetAttribute_Name *smithy.Schema
-
-var FacetAttribute_AttributeDefinition *smithy.Schema
-
-var FacetAttribute_AttributeReference *smithy.Schema
-
-var FacetAttribute_RequiredBehavior *smithy.Schema
-
-var FacetAttributeDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var FacetAttributeDefinition_Type *smithy.Schema
-
-var FacetAttributeDefinition_DefaultValue *smithy.Schema
-
-var FacetAttributeDefinition_IsImmutable *smithy.Schema
-
-var FacetAttributeDefinition_Rules *smithy.Schema
-
-var _FacetAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _FacetAttributeList_member *smithy.Schema
-
-var FacetAttributeReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeReference",
-}, smithy.ShapeTypeStructure, 2)
-var FacetAttributeReference_TargetFacetName *smithy.Schema
-
-var FacetAttributeReference_TargetAttributeName *smithy.Schema
-
-var FacetAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeType",
-}, smithy.ShapeTypeEnum, 6)
-var FacetAttributeType_STRING *smithy.Schema
-
-var FacetAttributeType_BINARY *smithy.Schema
-
-var FacetAttributeType_BOOLEAN *smithy.Schema
-
-var FacetAttributeType_NUMBER *smithy.Schema
-
-var FacetAttributeType_DATETIME *smithy.Schema
-
-var FacetAttributeType_VARIANT *smithy.Schema
-
-var FacetAttributeUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var FacetAttributeUpdate_Attribute *smithy.Schema
-
-var FacetAttributeUpdate_Action *smithy.Schema
-
-var _FacetAttributeUpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetAttributeUpdateList",
-}, smithy.ShapeTypeList, 1)
-var _FacetAttributeUpdateList_member *smithy.Schema
-
-var FacetInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var FacetInUseException_Message *smithy.Schema
-
-var _FacetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetName",
-}, smithy.ShapeTypeString, 0)
-
-var _FacetNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetNameList",
-}, smithy.ShapeTypeList, 1)
-var _FacetNameList_member *smithy.Schema
-
-var FacetNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var FacetNotFoundException_Message *smithy.Schema
-
-var FacetStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetStyle",
-}, smithy.ShapeTypeEnum, 2)
-var FacetStyle_STATIC *smithy.Schema
-
-var FacetStyle_DYNAMIC *smithy.Schema
-
-var FacetValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "FacetValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var FacetValidationException_Message *smithy.Schema
-
-var IncompatibleSchemaException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "IncompatibleSchemaException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IncompatibleSchemaException_Message *smithy.Schema
-
-var IndexAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "IndexAttachment",
-}, smithy.ShapeTypeStructure, 2)
-var IndexAttachment_IndexedAttributes *smithy.Schema
-
-var IndexAttachment_ObjectIdentifier *smithy.Schema
-
-var _IndexAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "IndexAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _IndexAttachmentList_member *smithy.Schema
-
-var IndexedAttributeMissingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "IndexedAttributeMissingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IndexedAttributeMissingException_Message *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArnException_Message *smithy.Schema
-
-var InvalidAttachmentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidAttachmentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidAttachmentException_Message *smithy.Schema
-
-var InvalidFacetUpdateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidFacetUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidFacetUpdateException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidRuleException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidRuleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRuleException_Message *smithy.Schema
-
-var InvalidSchemaDocException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidSchemaDocException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSchemaDocException_Message *smithy.Schema
-
-var InvalidTaggingRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "InvalidTaggingRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidTaggingRequestException_Message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var LinkAttributeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkAttributeAction",
-}, smithy.ShapeTypeStructure, 2)
-var LinkAttributeAction_AttributeActionType *smithy.Schema
-
-var LinkAttributeAction_AttributeUpdateValue *smithy.Schema
-
-var LinkAttributeUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkAttributeUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var LinkAttributeUpdate_AttributeKey *smithy.Schema
-
-var LinkAttributeUpdate_AttributeAction *smithy.Schema
-
-var _LinkAttributeUpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkAttributeUpdateList",
-}, smithy.ShapeTypeList, 1)
-var _LinkAttributeUpdateList_member *smithy.Schema
-
-var _LinkName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkName",
-}, smithy.ShapeTypeString, 0)
-
-var LinkNameAlreadyInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkNameAlreadyInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LinkNameAlreadyInUseException_Message *smithy.Schema
-
-var _LinkNameToObjectIdentifierMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LinkNameToObjectIdentifierMap",
-}, smithy.ShapeTypeMap, 2)
-var _LinkNameToObjectIdentifierMap_key *smithy.Schema
-
-var _LinkNameToObjectIdentifierMap_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotIndexException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NotIndexException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NotIndexException_Message *smithy.Schema
-
-var NotNodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NotNodeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NotNodeException_Message *smithy.Schema
-
-var NotPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NotPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NotPolicyException_Message *smithy.Schema
-
-var _NumberAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NumberAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _NumberResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "NumberResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObjectAlreadyDetachedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAlreadyDetachedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ObjectAlreadyDetachedException_Message *smithy.Schema
-
-var ObjectAttributeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAttributeAction",
-}, smithy.ShapeTypeStructure, 2)
-var ObjectAttributeAction_ObjectAttributeActionType *smithy.Schema
-
-var ObjectAttributeAction_ObjectAttributeUpdateValue *smithy.Schema
-
-var ObjectAttributeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAttributeRange",
-}, smithy.ShapeTypeStructure, 2)
-var ObjectAttributeRange_AttributeKey *smithy.Schema
-
-var ObjectAttributeRange_Range *smithy.Schema
-
-var _ObjectAttributeRangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAttributeRangeList",
-}, smithy.ShapeTypeList, 1)
-var _ObjectAttributeRangeList_member *smithy.Schema
-
-var ObjectAttributeUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAttributeUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ObjectAttributeUpdate_ObjectAttributeKey *smithy.Schema
-
-var ObjectAttributeUpdate_ObjectAttributeAction *smithy.Schema
-
-var _ObjectAttributeUpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectAttributeUpdateList",
-}, smithy.ShapeTypeList, 1)
-var _ObjectAttributeUpdateList_member *smithy.Schema
-
-var _ObjectIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ObjectIdentifierAndLinkNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectIdentifierAndLinkNameList",
-}, smithy.ShapeTypeList, 1)
-var _ObjectIdentifierAndLinkNameList_member *smithy.Schema
-
-var ObjectIdentifierAndLinkNameTuple = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectIdentifierAndLinkNameTuple",
-}, smithy.ShapeTypeStructure, 2)
-var ObjectIdentifierAndLinkNameTuple_ObjectIdentifier *smithy.Schema
-
-var ObjectIdentifierAndLinkNameTuple_LinkName *smithy.Schema
-
-var _ObjectIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ObjectIdentifierList_member *smithy.Schema
-
-var _ObjectIdentifierToLinkNameMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectIdentifierToLinkNameMap",
-}, smithy.ShapeTypeMap, 2)
-var _ObjectIdentifierToLinkNameMap_key *smithy.Schema
-
-var _ObjectIdentifierToLinkNameMap_value *smithy.Schema
-
-var ObjectNotDetachedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectNotDetachedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ObjectNotDetachedException_Message *smithy.Schema
-
-var ObjectReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectReference",
-}, smithy.ShapeTypeStructure, 1)
-var ObjectReference_Selector *smithy.Schema
-
-var ObjectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ObjectType",
-}, smithy.ShapeTypeEnum, 4)
-var ObjectType_NODE *smithy.Schema
-
-var ObjectType_LEAF_NODE *smithy.Schema
-
-var ObjectType_POLICY *smithy.Schema
-
-var ObjectType_INDEX *smithy.Schema
-
-var _PathString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PathString",
-}, smithy.ShapeTypeString, 0)
-
-var PathToObjectIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PathToObjectIdentifiers",
-}, smithy.ShapeTypeStructure, 2)
-var PathToObjectIdentifiers_Path *smithy.Schema
-
-var PathToObjectIdentifiers_ObjectIdentifiers *smithy.Schema
-
-var _PathToObjectIdentifiersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PathToObjectIdentifiersList",
-}, smithy.ShapeTypeList, 1)
-var _PathToObjectIdentifiersList_member *smithy.Schema
-
-var PolicyAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PolicyAttachment",
-}, smithy.ShapeTypeStructure, 3)
-var PolicyAttachment_PolicyId *smithy.Schema
-
-var PolicyAttachment_ObjectIdentifier *smithy.Schema
-
-var PolicyAttachment_PolicyType *smithy.Schema
-
-var _PolicyAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PolicyAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyAttachmentList_member *smithy.Schema
-
-var PolicyToPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PolicyToPath",
-}, smithy.ShapeTypeStructure, 2)
-var PolicyToPath_Path *smithy.Schema
-
-var PolicyToPath_Policies *smithy.Schema
-
-var _PolicyToPathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PolicyToPathList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyToPathList_member *smithy.Schema
-
-var _PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeString, 0)
-
-var RangeMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RangeMode",
-}, smithy.ShapeTypeEnum, 5)
-var RangeMode_FIRST *smithy.Schema
-
-var RangeMode_LAST *smithy.Schema
-
-var RangeMode_LAST_BEFORE_MISSING_VALUES *smithy.Schema
-
-var RangeMode_INCLUSIVE *smithy.Schema
-
-var RangeMode_EXCLUSIVE *smithy.Schema
-
-var RequiredAttributeBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RequiredAttributeBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var RequiredAttributeBehavior_REQUIRED_ALWAYS *smithy.Schema
-
-var RequiredAttributeBehavior_NOT_REQUIRED *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RetryableConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RetryableConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var RetryableConflictException_Message *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 2)
-var Rule_Type *smithy.Schema
-
-var Rule_Parameters *smithy.Schema
-
-var _RuleKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleKey",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleMap",
-}, smithy.ShapeTypeMap, 2)
-var _RuleMap_key *smithy.Schema
-
-var _RuleMap_value *smithy.Schema
-
-var _RuleParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleParameterMap",
-}, smithy.ShapeTypeMap, 2)
-var _RuleParameterMap_key *smithy.Schema
-
-var _RuleParameterMap_value *smithy.Schema
-
-var _RuleParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var RuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RuleType",
-}, smithy.ShapeTypeEnum, 4)
-var RuleType_BINARY_LENGTH *smithy.Schema
-
-var RuleType_NUMBER_COMPARISON *smithy.Schema
-
-var RuleType_STRING_FROM_SET *smithy.Schema
-
-var RuleType_STRING_LENGTH *smithy.Schema
-
-var SchemaAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SchemaAlreadyExistsException_Message *smithy.Schema
-
-var SchemaAlreadyPublishedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaAlreadyPublishedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SchemaAlreadyPublishedException_Message *smithy.Schema
-
-var SchemaFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaFacet",
-}, smithy.ShapeTypeStructure, 2)
-var SchemaFacet_SchemaArn *smithy.Schema
-
-var SchemaFacet_FacetName *smithy.Schema
-
-var _SchemaFacetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaFacetList",
-}, smithy.ShapeTypeList, 1)
-var _SchemaFacetList_member *smithy.Schema
-
-var _SchemaJsonDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaJsonDocument",
-}, smithy.ShapeTypeString, 0)
-
-var _SchemaName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SchemaName",
-}, smithy.ShapeTypeString, 0)
-
-var _SelectorObjectReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "SelectorObjectReference",
-}, smithy.ShapeTypeString, 0)
-
-var StillContainsLinksException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "StillContainsLinksException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var StillContainsLinksException_Message *smithy.Schema
-
-var _StringAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "StringAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagsNumberResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagsNumberResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TypedAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedAttributeValue",
-}, smithy.ShapeTypeUnion, 5)
-var TypedAttributeValue_StringValue *smithy.Schema
-
-var TypedAttributeValue_BinaryValue *smithy.Schema
-
-var TypedAttributeValue_BooleanValue *smithy.Schema
-
-var TypedAttributeValue_NumberValue *smithy.Schema
-
-var TypedAttributeValue_DatetimeValue *smithy.Schema
-
-var TypedAttributeValueRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedAttributeValueRange",
-}, smithy.ShapeTypeStructure, 4)
-var TypedAttributeValueRange_StartMode *smithy.Schema
-
-var TypedAttributeValueRange_StartValue *smithy.Schema
-
-var TypedAttributeValueRange_EndMode *smithy.Schema
-
-var TypedAttributeValueRange_EndValue *smithy.Schema
-
-var TypedLinkAttributeDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkAttributeDefinition",
-}, smithy.ShapeTypeStructure, 6)
-var TypedLinkAttributeDefinition_Name *smithy.Schema
-
-var TypedLinkAttributeDefinition_Type *smithy.Schema
-
-var TypedLinkAttributeDefinition_DefaultValue *smithy.Schema
-
-var TypedLinkAttributeDefinition_IsImmutable *smithy.Schema
-
-var TypedLinkAttributeDefinition_Rules *smithy.Schema
-
-var TypedLinkAttributeDefinition_RequiredBehavior *smithy.Schema
-
-var _TypedLinkAttributeDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkAttributeDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _TypedLinkAttributeDefinitionList_member *smithy.Schema
-
-var TypedLinkAttributeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkAttributeRange",
-}, smithy.ShapeTypeStructure, 2)
-var TypedLinkAttributeRange_AttributeName *smithy.Schema
-
-var TypedLinkAttributeRange_Range *smithy.Schema
-
-var _TypedLinkAttributeRangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkAttributeRangeList",
-}, smithy.ShapeTypeList, 1)
-var _TypedLinkAttributeRangeList_member *smithy.Schema
-
-var TypedLinkFacet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkFacet",
-}, smithy.ShapeTypeStructure, 3)
-var TypedLinkFacet_Name *smithy.Schema
-
-var TypedLinkFacet_Attributes *smithy.Schema
-
-var TypedLinkFacet_IdentityAttributeOrder *smithy.Schema
-
-var TypedLinkFacetAttributeUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkFacetAttributeUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var TypedLinkFacetAttributeUpdate_Attribute *smithy.Schema
-
-var TypedLinkFacetAttributeUpdate_Action *smithy.Schema
-
-var _TypedLinkFacetAttributeUpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkFacetAttributeUpdateList",
-}, smithy.ShapeTypeList, 1)
-var _TypedLinkFacetAttributeUpdateList_member *smithy.Schema
-
-var _TypedLinkName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkName",
-}, smithy.ShapeTypeString, 0)
-
-var _TypedLinkNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkNameList",
-}, smithy.ShapeTypeList, 1)
-var _TypedLinkNameList_member *smithy.Schema
-
-var TypedLinkSchemaAndFacetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkSchemaAndFacetName",
-}, smithy.ShapeTypeStructure, 2)
-var TypedLinkSchemaAndFacetName_SchemaArn *smithy.Schema
-
-var TypedLinkSchemaAndFacetName_TypedLinkName *smithy.Schema
-
-var TypedLinkSpecifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkSpecifier",
-}, smithy.ShapeTypeStructure, 4)
-var TypedLinkSpecifier_TypedLinkFacet *smithy.Schema
-
-var TypedLinkSpecifier_SourceObjectReference *smithy.Schema
-
-var TypedLinkSpecifier_TargetObjectReference *smithy.Schema
-
-var TypedLinkSpecifier_IdentityAttributeValues *smithy.Schema
-
-var _TypedLinkSpecifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TypedLinkSpecifierList",
-}, smithy.ShapeTypeList, 1)
-var _TypedLinkSpecifierList_member *smithy.Schema
-
-var UnsupportedIndexTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UnsupportedIndexTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedIndexTypeException_Message *smithy.Schema
-
-var UpdateActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateActionType",
-}, smithy.ShapeTypeEnum, 2)
-var UpdateActionType_CREATE_OR_UPDATE *smithy.Schema
-
-var UpdateActionType_DELETE *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var AddFacetToObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AddFacetToObjectRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AddFacetToObjectRequest_DirectoryArn *smithy.Schema
-
-var AddFacetToObjectRequest_SchemaFacet *smithy.Schema
-
-var AddFacetToObjectRequest_ObjectAttributeList *smithy.Schema
-
-var AddFacetToObjectRequest_ObjectReference *smithy.Schema
-
-var AddFacetToObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AddFacetToObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var ApplySchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ApplySchemaRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ApplySchemaRequest_PublishedSchemaArn *smithy.Schema
-
-var ApplySchemaRequest_DirectoryArn *smithy.Schema
-
-var ApplySchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ApplySchemaResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ApplySchemaResponse_AppliedSchemaArn *smithy.Schema
-
-var ApplySchemaResponse_DirectoryArn *smithy.Schema
-
-var AttachObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachObjectRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AttachObjectRequest_DirectoryArn *smithy.Schema
-
-var AttachObjectRequest_ParentReference *smithy.Schema
-
-var AttachObjectRequest_ChildReference *smithy.Schema
-
-var AttachObjectRequest_LinkName *smithy.Schema
-
-var AttachObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AttachObjectResponse_AttachedObjectIdentifier *smithy.Schema
-
-var AttachPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AttachPolicyRequest_DirectoryArn *smithy.Schema
-
-var AttachPolicyRequest_PolicyReference *smithy.Schema
-
-var AttachPolicyRequest_ObjectReference *smithy.Schema
-
-var AttachPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AttachToIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachToIndexRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AttachToIndexRequest_DirectoryArn *smithy.Schema
-
-var AttachToIndexRequest_IndexReference *smithy.Schema
-
-var AttachToIndexRequest_TargetReference *smithy.Schema
-
-var AttachToIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachToIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AttachToIndexResponse_AttachedObjectIdentifier *smithy.Schema
-
-var AttachTypedLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachTypedLinkRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AttachTypedLinkRequest_DirectoryArn *smithy.Schema
-
-var AttachTypedLinkRequest_SourceObjectReference *smithy.Schema
-
-var AttachTypedLinkRequest_TargetObjectReference *smithy.Schema
-
-var AttachTypedLinkRequest_TypedLinkFacet *smithy.Schema
-
-var AttachTypedLinkRequest_Attributes *smithy.Schema
-
-var AttachTypedLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "AttachTypedLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AttachTypedLinkResponse_TypedLinkSpecifier *smithy.Schema
-
-var BatchReadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchReadRequest_DirectoryArn *smithy.Schema
-
-var BatchReadRequest_Operations *smithy.Schema
-
-var BatchReadRequest_ConsistencyLevel *smithy.Schema
-
-var BatchReadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchReadResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchReadResponse_Responses *smithy.Schema
-
-var BatchWriteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchWriteRequest_DirectoryArn *smithy.Schema
-
-var BatchWriteRequest_Operations *smithy.Schema
-
-var BatchWriteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "BatchWriteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchWriteResponse_Responses *smithy.Schema
-
-var CreateDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateDirectoryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDirectoryRequest_Name *smithy.Schema
-
-var CreateDirectoryRequest_SchemaArn *smithy.Schema
-
-var CreateDirectoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateDirectoryResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDirectoryResponse_DirectoryArn *smithy.Schema
-
-var CreateDirectoryResponse_Name *smithy.Schema
-
-var CreateDirectoryResponse_ObjectIdentifier *smithy.Schema
-
-var CreateDirectoryResponse_AppliedSchemaArn *smithy.Schema
-
-var CreateFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateFacetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateFacetRequest_SchemaArn *smithy.Schema
-
-var CreateFacetRequest_Name *smithy.Schema
-
-var CreateFacetRequest_Attributes *smithy.Schema
-
-var CreateFacetRequest_ObjectType *smithy.Schema
-
-var CreateFacetRequest_FacetStyle *smithy.Schema
-
-var CreateFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateIndexRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateIndexRequest_DirectoryArn *smithy.Schema
-
-var CreateIndexRequest_OrderedIndexedAttributeList *smithy.Schema
-
-var CreateIndexRequest_IsUnique *smithy.Schema
-
-var CreateIndexRequest_ParentReference *smithy.Schema
-
-var CreateIndexRequest_LinkName *smithy.Schema
-
-var CreateIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIndexResponse_ObjectIdentifier *smithy.Schema
-
-var CreateObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateObjectRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateObjectRequest_DirectoryArn *smithy.Schema
-
-var CreateObjectRequest_SchemaFacets *smithy.Schema
-
-var CreateObjectRequest_ObjectAttributeList *smithy.Schema
-
-var CreateObjectRequest_ParentReference *smithy.Schema
-
-var CreateObjectRequest_LinkName *smithy.Schema
-
-var CreateObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateObjectResponse_ObjectIdentifier *smithy.Schema
-
-var CreateSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateSchemaRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSchemaRequest_Name *smithy.Schema
-
-var CreateSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSchemaResponse_SchemaArn *smithy.Schema
-
-var CreateTypedLinkFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateTypedLinkFacetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTypedLinkFacetRequest_SchemaArn *smithy.Schema
-
-var CreateTypedLinkFacetRequest_Facet *smithy.Schema
-
-var CreateTypedLinkFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "CreateTypedLinkFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryRequest_DirectoryArn *smithy.Schema
-
-var DeleteDirectoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteDirectoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryResponse_DirectoryArn *smithy.Schema
-
-var DeleteFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteFacetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFacetRequest_SchemaArn *smithy.Schema
-
-var DeleteFacetRequest_Name *smithy.Schema
-
-var DeleteFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteObjectRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteObjectRequest_DirectoryArn *smithy.Schema
-
-var DeleteObjectRequest_ObjectReference *smithy.Schema
-
-var DeleteObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteSchemaRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSchemaRequest_SchemaArn *smithy.Schema
-
-var DeleteSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSchemaResponse_SchemaArn *smithy.Schema
-
-var DeleteTypedLinkFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteTypedLinkFacetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTypedLinkFacetRequest_SchemaArn *smithy.Schema
-
-var DeleteTypedLinkFacetRequest_Name *smithy.Schema
-
-var DeleteTypedLinkFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DeleteTypedLinkFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DetachFromIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachFromIndexRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DetachFromIndexRequest_DirectoryArn *smithy.Schema
-
-var DetachFromIndexRequest_IndexReference *smithy.Schema
-
-var DetachFromIndexRequest_TargetReference *smithy.Schema
-
-var DetachFromIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachFromIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DetachFromIndexResponse_DetachedObjectIdentifier *smithy.Schema
-
-var DetachObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachObjectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DetachObjectRequest_DirectoryArn *smithy.Schema
-
-var DetachObjectRequest_ParentReference *smithy.Schema
-
-var DetachObjectRequest_LinkName *smithy.Schema
-
-var DetachObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachObjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DetachObjectResponse_DetachedObjectIdentifier *smithy.Schema
-
-var DetachPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DetachPolicyRequest_DirectoryArn *smithy.Schema
-
-var DetachPolicyRequest_PolicyReference *smithy.Schema
-
-var DetachPolicyRequest_ObjectReference *smithy.Schema
-
-var DetachPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DetachTypedLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DetachTypedLinkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DetachTypedLinkRequest_DirectoryArn *smithy.Schema
-
-var DetachTypedLinkRequest_TypedLinkSpecifier *smithy.Schema
-
-var DisableDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DisableDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDirectoryRequest_DirectoryArn *smithy.Schema
-
-var DisableDirectoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "DisableDirectoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDirectoryResponse_DirectoryArn *smithy.Schema
-
-var EnableDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "EnableDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDirectoryRequest_DirectoryArn *smithy.Schema
-
-var EnableDirectoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "EnableDirectoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDirectoryResponse_DirectoryArn *smithy.Schema
-
-var GetAppliedSchemaVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetAppliedSchemaVersionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppliedSchemaVersionRequest_SchemaArn *smithy.Schema
-
-var GetAppliedSchemaVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetAppliedSchemaVersionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppliedSchemaVersionResponse_AppliedSchemaArn *smithy.Schema
-
-var GetDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectoryRequest_DirectoryArn *smithy.Schema
-
-var GetDirectoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetDirectoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectoryResponse_Directory *smithy.Schema
-
-var GetFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetFacetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetFacetRequest_SchemaArn *smithy.Schema
-
-var GetFacetRequest_Name *smithy.Schema
-
-var GetFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetFacetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetFacetResponse_Facet *smithy.Schema
-
-var GetLinkAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetLinkAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetLinkAttributesRequest_DirectoryArn *smithy.Schema
-
-var GetLinkAttributesRequest_TypedLinkSpecifier *smithy.Schema
-
-var GetLinkAttributesRequest_AttributeNames *smithy.Schema
-
-var GetLinkAttributesRequest_ConsistencyLevel *smithy.Schema
-
-var GetLinkAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetLinkAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkAttributesResponse_Attributes *smithy.Schema
-
-var GetObjectAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectAttributesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetObjectAttributesRequest_DirectoryArn *smithy.Schema
-
-var GetObjectAttributesRequest_ObjectReference *smithy.Schema
-
-var GetObjectAttributesRequest_ConsistencyLevel *smithy.Schema
-
-var GetObjectAttributesRequest_SchemaFacet *smithy.Schema
-
-var GetObjectAttributesRequest_AttributeNames *smithy.Schema
-
-var GetObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetObjectAttributesResponse_Attributes *smithy.Schema
-
-var GetObjectInformationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectInformationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetObjectInformationRequest_DirectoryArn *smithy.Schema
-
-var GetObjectInformationRequest_ObjectReference *smithy.Schema
-
-var GetObjectInformationRequest_ConsistencyLevel *smithy.Schema
-
-var GetObjectInformationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetObjectInformationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetObjectInformationResponse_SchemaFacets *smithy.Schema
-
-var GetObjectInformationResponse_ObjectIdentifier *smithy.Schema
-
-var GetSchemaAsJsonRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetSchemaAsJsonRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSchemaAsJsonRequest_SchemaArn *smithy.Schema
-
-var GetSchemaAsJsonResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetSchemaAsJsonResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSchemaAsJsonResponse_Name *smithy.Schema
-
-var GetSchemaAsJsonResponse_Document *smithy.Schema
-
-var GetTypedLinkFacetInformationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetTypedLinkFacetInformationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTypedLinkFacetInformationRequest_SchemaArn *smithy.Schema
-
-var GetTypedLinkFacetInformationRequest_Name *smithy.Schema
-
-var GetTypedLinkFacetInformationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "GetTypedLinkFacetInformationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTypedLinkFacetInformationResponse_IdentityAttributeOrder *smithy.Schema
-
-var ListAppliedSchemaArnsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAppliedSchemaArnsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAppliedSchemaArnsRequest_DirectoryArn *smithy.Schema
-
-var ListAppliedSchemaArnsRequest_SchemaArn *smithy.Schema
-
-var ListAppliedSchemaArnsRequest_NextToken *smithy.Schema
-
-var ListAppliedSchemaArnsRequest_MaxResults *smithy.Schema
-
-var ListAppliedSchemaArnsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAppliedSchemaArnsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppliedSchemaArnsResponse_SchemaArns *smithy.Schema
-
-var ListAppliedSchemaArnsResponse_NextToken *smithy.Schema
-
-var ListAttachedIndicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAttachedIndicesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListAttachedIndicesRequest_DirectoryArn *smithy.Schema
-
-var ListAttachedIndicesRequest_TargetReference *smithy.Schema
-
-var ListAttachedIndicesRequest_NextToken *smithy.Schema
-
-var ListAttachedIndicesRequest_MaxResults *smithy.Schema
-
-var ListAttachedIndicesRequest_ConsistencyLevel *smithy.Schema
-
-var ListAttachedIndicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListAttachedIndicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachedIndicesResponse_IndexAttachments *smithy.Schema
-
-var ListAttachedIndicesResponse_NextToken *smithy.Schema
-
-var ListDevelopmentSchemaArnsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDevelopmentSchemaArnsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevelopmentSchemaArnsRequest_NextToken *smithy.Schema
-
-var ListDevelopmentSchemaArnsRequest_MaxResults *smithy.Schema
-
-var ListDevelopmentSchemaArnsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDevelopmentSchemaArnsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevelopmentSchemaArnsResponse_SchemaArns *smithy.Schema
-
-var ListDevelopmentSchemaArnsResponse_NextToken *smithy.Schema
-
-var ListDirectoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDirectoriesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDirectoriesRequest_NextToken *smithy.Schema
-
-var ListDirectoriesRequest_MaxResults *smithy.Schema
-
-var ListDirectoriesRequest_state *smithy.Schema
-
-var ListDirectoriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListDirectoriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDirectoriesResponse_Directories *smithy.Schema
-
-var ListDirectoriesResponse_NextToken *smithy.Schema
-
-var ListFacetAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListFacetAttributesRequest_SchemaArn *smithy.Schema
-
-var ListFacetAttributesRequest_Name *smithy.Schema
-
-var ListFacetAttributesRequest_NextToken *smithy.Schema
-
-var ListFacetAttributesRequest_MaxResults *smithy.Schema
-
-var ListFacetAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetAttributesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFacetAttributesResponse_Attributes *smithy.Schema
-
-var ListFacetAttributesResponse_NextToken *smithy.Schema
-
-var ListFacetNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetNamesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFacetNamesRequest_SchemaArn *smithy.Schema
-
-var ListFacetNamesRequest_NextToken *smithy.Schema
-
-var ListFacetNamesRequest_MaxResults *smithy.Schema
-
-var ListFacetNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListFacetNamesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFacetNamesResponse_FacetNames *smithy.Schema
-
-var ListFacetNamesResponse_NextToken *smithy.Schema
-
-var ListIncomingTypedLinksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIncomingTypedLinksRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListIncomingTypedLinksRequest_DirectoryArn *smithy.Schema
-
-var ListIncomingTypedLinksRequest_ObjectReference *smithy.Schema
-
-var ListIncomingTypedLinksRequest_FilterAttributeRanges *smithy.Schema
-
-var ListIncomingTypedLinksRequest_FilterTypedLink *smithy.Schema
-
-var ListIncomingTypedLinksRequest_NextToken *smithy.Schema
-
-var ListIncomingTypedLinksRequest_MaxResults *smithy.Schema
-
-var ListIncomingTypedLinksRequest_ConsistencyLevel *smithy.Schema
-
-var ListIncomingTypedLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIncomingTypedLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIncomingTypedLinksResponse_LinkSpecifiers *smithy.Schema
-
-var ListIncomingTypedLinksResponse_NextToken *smithy.Schema
-
-var ListIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIndexRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListIndexRequest_DirectoryArn *smithy.Schema
-
-var ListIndexRequest_RangesOnIndexedValues *smithy.Schema
-
-var ListIndexRequest_IndexReference *smithy.Schema
-
-var ListIndexRequest_MaxResults *smithy.Schema
-
-var ListIndexRequest_NextToken *smithy.Schema
-
-var ListIndexRequest_ConsistencyLevel *smithy.Schema
-
-var ListIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListIndexResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIndexResponse_IndexAttachments *smithy.Schema
-
-var ListIndexResponse_NextToken *smithy.Schema
-
-var ListManagedSchemaArnsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListManagedSchemaArnsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedSchemaArnsRequest_SchemaArn *smithy.Schema
-
-var ListManagedSchemaArnsRequest_NextToken *smithy.Schema
-
-var ListManagedSchemaArnsRequest_MaxResults *smithy.Schema
-
-var ListManagedSchemaArnsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListManagedSchemaArnsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedSchemaArnsResponse_SchemaArns *smithy.Schema
-
-var ListManagedSchemaArnsResponse_NextToken *smithy.Schema
-
-var ListObjectAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectAttributesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListObjectAttributesRequest_DirectoryArn *smithy.Schema
-
-var ListObjectAttributesRequest_ObjectReference *smithy.Schema
-
-var ListObjectAttributesRequest_NextToken *smithy.Schema
-
-var ListObjectAttributesRequest_MaxResults *smithy.Schema
-
-var ListObjectAttributesRequest_ConsistencyLevel *smithy.Schema
-
-var ListObjectAttributesRequest_FacetFilter *smithy.Schema
-
-var ListObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListObjectAttributesResponse_Attributes *smithy.Schema
-
-var ListObjectAttributesResponse_NextToken *smithy.Schema
-
-var ListObjectChildrenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectChildrenRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListObjectChildrenRequest_DirectoryArn *smithy.Schema
-
-var ListObjectChildrenRequest_ObjectReference *smithy.Schema
-
-var ListObjectChildrenRequest_NextToken *smithy.Schema
-
-var ListObjectChildrenRequest_MaxResults *smithy.Schema
-
-var ListObjectChildrenRequest_ConsistencyLevel *smithy.Schema
-
-var ListObjectChildrenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectChildrenResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListObjectChildrenResponse_Children *smithy.Schema
-
-var ListObjectChildrenResponse_NextToken *smithy.Schema
-
-var ListObjectParentPathsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParentPathsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListObjectParentPathsRequest_DirectoryArn *smithy.Schema
-
-var ListObjectParentPathsRequest_ObjectReference *smithy.Schema
-
-var ListObjectParentPathsRequest_NextToken *smithy.Schema
-
-var ListObjectParentPathsRequest_MaxResults *smithy.Schema
-
-var ListObjectParentPathsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParentPathsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListObjectParentPathsResponse_PathToObjectIdentifiersList *smithy.Schema
-
-var ListObjectParentPathsResponse_NextToken *smithy.Schema
-
-var ListObjectParentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParentsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListObjectParentsRequest_DirectoryArn *smithy.Schema
-
-var ListObjectParentsRequest_ObjectReference *smithy.Schema
-
-var ListObjectParentsRequest_NextToken *smithy.Schema
-
-var ListObjectParentsRequest_MaxResults *smithy.Schema
-
-var ListObjectParentsRequest_ConsistencyLevel *smithy.Schema
-
-var ListObjectParentsRequest_IncludeAllLinksToEachParent *smithy.Schema
-
-var ListObjectParentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectParentsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListObjectParentsResponse_Parents *smithy.Schema
-
-var ListObjectParentsResponse_NextToken *smithy.Schema
-
-var ListObjectParentsResponse_ParentLinks *smithy.Schema
-
-var ListObjectPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectPoliciesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListObjectPoliciesRequest_DirectoryArn *smithy.Schema
-
-var ListObjectPoliciesRequest_ObjectReference *smithy.Schema
-
-var ListObjectPoliciesRequest_NextToken *smithy.Schema
-
-var ListObjectPoliciesRequest_MaxResults *smithy.Schema
-
-var ListObjectPoliciesRequest_ConsistencyLevel *smithy.Schema
-
-var ListObjectPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListObjectPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListObjectPoliciesResponse_AttachedPolicyIds *smithy.Schema
-
-var ListObjectPoliciesResponse_NextToken *smithy.Schema
-
-var ListOutgoingTypedLinksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListOutgoingTypedLinksRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListOutgoingTypedLinksRequest_DirectoryArn *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_ObjectReference *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_FilterAttributeRanges *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_FilterTypedLink *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_NextToken *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_MaxResults *smithy.Schema
-
-var ListOutgoingTypedLinksRequest_ConsistencyLevel *smithy.Schema
-
-var ListOutgoingTypedLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListOutgoingTypedLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOutgoingTypedLinksResponse_TypedLinkSpecifiers *smithy.Schema
-
-var ListOutgoingTypedLinksResponse_NextToken *smithy.Schema
-
-var ListPolicyAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPolicyAttachmentsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListPolicyAttachmentsRequest_DirectoryArn *smithy.Schema
-
-var ListPolicyAttachmentsRequest_PolicyReference *smithy.Schema
-
-var ListPolicyAttachmentsRequest_NextToken *smithy.Schema
-
-var ListPolicyAttachmentsRequest_MaxResults *smithy.Schema
-
-var ListPolicyAttachmentsRequest_ConsistencyLevel *smithy.Schema
-
-var ListPolicyAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPolicyAttachmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyAttachmentsResponse_ObjectIdentifiers *smithy.Schema
-
-var ListPolicyAttachmentsResponse_NextToken *smithy.Schema
-
-var ListPublishedSchemaArnsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPublishedSchemaArnsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPublishedSchemaArnsRequest_SchemaArn *smithy.Schema
-
-var ListPublishedSchemaArnsRequest_NextToken *smithy.Schema
-
-var ListPublishedSchemaArnsRequest_MaxResults *smithy.Schema
-
-var ListPublishedSchemaArnsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListPublishedSchemaArnsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPublishedSchemaArnsResponse_SchemaArns *smithy.Schema
-
-var ListPublishedSchemaArnsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest_MaxResults *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTagsForResourceResponse_NextToken *smithy.Schema
-
-var ListTypedLinkFacetAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTypedLinkFacetAttributesRequest_SchemaArn *smithy.Schema
-
-var ListTypedLinkFacetAttributesRequest_Name *smithy.Schema
-
-var ListTypedLinkFacetAttributesRequest_NextToken *smithy.Schema
-
-var ListTypedLinkFacetAttributesRequest_MaxResults *smithy.Schema
-
-var ListTypedLinkFacetAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetAttributesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTypedLinkFacetAttributesResponse_Attributes *smithy.Schema
-
-var ListTypedLinkFacetAttributesResponse_NextToken *smithy.Schema
-
-var ListTypedLinkFacetNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetNamesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTypedLinkFacetNamesRequest_SchemaArn *smithy.Schema
-
-var ListTypedLinkFacetNamesRequest_NextToken *smithy.Schema
-
-var ListTypedLinkFacetNamesRequest_MaxResults *smithy.Schema
-
-var ListTypedLinkFacetNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "ListTypedLinkFacetNamesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTypedLinkFacetNamesResponse_FacetNames *smithy.Schema
-
-var ListTypedLinkFacetNamesResponse_NextToken *smithy.Schema
-
-var LookupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LookupPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var LookupPolicyRequest_DirectoryArn *smithy.Schema
-
-var LookupPolicyRequest_ObjectReference *smithy.Schema
-
-var LookupPolicyRequest_NextToken *smithy.Schema
-
-var LookupPolicyRequest_MaxResults *smithy.Schema
-
-var LookupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "LookupPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var LookupPolicyResponse_PolicyToPathList *smithy.Schema
-
-var LookupPolicyResponse_NextToken *smithy.Schema
-
-var PublishSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PublishSchemaRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PublishSchemaRequest_DevelopmentSchemaArn *smithy.Schema
-
-var PublishSchemaRequest_Version *smithy.Schema
-
-var PublishSchemaRequest_MinorVersion *smithy.Schema
-
-var PublishSchemaRequest_Name *smithy.Schema
-
-var PublishSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PublishSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PublishSchemaResponse_PublishedSchemaArn *smithy.Schema
-
-var PutSchemaFromJsonRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PutSchemaFromJsonRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutSchemaFromJsonRequest_SchemaArn *smithy.Schema
-
-var PutSchemaFromJsonRequest_Document *smithy.Schema
-
-var PutSchemaFromJsonResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "PutSchemaFromJsonResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutSchemaFromJsonResponse_Arn *smithy.Schema
-
-var RemoveFacetFromObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RemoveFacetFromObjectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveFacetFromObjectRequest_DirectoryArn *smithy.Schema
-
-var RemoveFacetFromObjectRequest_SchemaFacet *smithy.Schema
-
-var RemoveFacetFromObjectRequest_ObjectReference *smithy.Schema
-
-var RemoveFacetFromObjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "RemoveFacetFromObjectResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateFacetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateFacetRequest_SchemaArn *smithy.Schema
-
-var UpdateFacetRequest_Name *smithy.Schema
-
-var UpdateFacetRequest_AttributeUpdates *smithy.Schema
-
-var UpdateFacetRequest_ObjectType *smithy.Schema
-
-var UpdateFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLinkAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateLinkAttributesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLinkAttributesRequest_DirectoryArn *smithy.Schema
-
-var UpdateLinkAttributesRequest_TypedLinkSpecifier *smithy.Schema
-
-var UpdateLinkAttributesRequest_AttributeUpdates *smithy.Schema
-
-var UpdateLinkAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateLinkAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateObjectAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateObjectAttributesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateObjectAttributesRequest_DirectoryArn *smithy.Schema
-
-var UpdateObjectAttributesRequest_ObjectReference *smithy.Schema
-
-var UpdateObjectAttributesRequest_AttributeUpdates *smithy.Schema
-
-var UpdateObjectAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateObjectAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateObjectAttributesResponse_ObjectIdentifier *smithy.Schema
-
-var UpdateSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateSchemaRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSchemaRequest_SchemaArn *smithy.Schema
-
-var UpdateSchemaRequest_Name *smithy.Schema
-
-var UpdateSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSchemaResponse_SchemaArn *smithy.Schema
-
-var UpdateTypedLinkFacetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateTypedLinkFacetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTypedLinkFacetRequest_SchemaArn *smithy.Schema
-
-var UpdateTypedLinkFacetRequest_Name *smithy.Schema
-
-var UpdateTypedLinkFacetRequest_AttributeUpdates *smithy.Schema
-
-var UpdateTypedLinkFacetRequest_IdentityAttributeOrder *smithy.Schema
-
-var UpdateTypedLinkFacetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpdateTypedLinkFacetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpgradeAppliedSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradeAppliedSchemaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpgradeAppliedSchemaRequest_PublishedSchemaArn *smithy.Schema
-
-var UpgradeAppliedSchemaRequest_DirectoryArn *smithy.Schema
-
-var UpgradeAppliedSchemaRequest_DryRun *smithy.Schema
-
-var UpgradeAppliedSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradeAppliedSchemaResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpgradeAppliedSchemaResponse_UpgradedSchemaArn *smithy.Schema
-
-var UpgradeAppliedSchemaResponse_DirectoryArn *smithy.Schema
-
-var UpgradePublishedSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradePublishedSchemaRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpgradePublishedSchemaRequest_DevelopmentSchemaArn *smithy.Schema
-
-var UpgradePublishedSchemaRequest_PublishedSchemaArn *smithy.Schema
-
-var UpgradePublishedSchemaRequest_MinorVersion *smithy.Schema
-
-var UpgradePublishedSchemaRequest_DryRun *smithy.Schema
-
-var UpgradePublishedSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.clouddirectory",
-	Name:      "UpgradePublishedSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpgradePublishedSchemaResponse_UpgradedSchemaArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
-
-	_Arns_member = _Arns.AddMember("member", _Arn)
-
-	AttributeKey_SchemaArn = AttributeKey.AddMember("SchemaArn", _Arn)
-
-	AttributeKey_FacetName = AttributeKey.AddMember("FacetName", _FacetName)
-
-	AttributeKey_Name = AttributeKey.AddMember("Name", _AttributeName)
-
-	TypedAttributeValue_StringValue = TypedAttributeValue.AddMember("StringValue", _StringAttributeValue)
-
-	TypedAttributeValue_BinaryValue = TypedAttributeValue.AddMember("BinaryValue", _BinaryAttributeValue)
-
-	TypedAttributeValue_BooleanValue = TypedAttributeValue.AddMember("BooleanValue", _BooleanAttributeValue)
-
-	TypedAttributeValue_NumberValue = TypedAttributeValue.AddMember("NumberValue", _NumberAttributeValue)
-
-	TypedAttributeValue_DatetimeValue = TypedAttributeValue.AddMember("DatetimeValue", _DatetimeAttributeValue)
-
-	AttributeKeyAndValue_Key = AttributeKeyAndValue.AddMember("Key", AttributeKey)
-
-	AttributeKeyAndValue_Value = AttributeKeyAndValue.AddMember("Value", TypedAttributeValue)
-
-	_AttributeKeyAndValueList_member = _AttributeKeyAndValueList.AddMember("member", AttributeKeyAndValue)
-
-	_AttributeKeyList_member = _AttributeKeyList.AddMember("member", AttributeKey)
-
-	AttributeNameAndValue_AttributeName = AttributeNameAndValue.AddMember("AttributeName", _AttributeName)
-
-	AttributeNameAndValue_Value = AttributeNameAndValue.AddMember("Value", TypedAttributeValue)
-
-	_AttributeNameAndValueList_member = _AttributeNameAndValueList.AddMember("member", AttributeNameAndValue)
-
-	_AttributeNameList_member = _AttributeNameList.AddMember("member", _AttributeName)
-
-	SchemaFacet_SchemaArn = SchemaFacet.AddMember("SchemaArn", _Arn)
-
-	SchemaFacet_FacetName = SchemaFacet.AddMember("FacetName", _FacetName)
-
-	ObjectReference_Selector = ObjectReference.AddMember("Selector", _SelectorObjectReference)
-
-	BatchAddFacetToObject_SchemaFacet = BatchAddFacetToObject.AddMember("SchemaFacet", SchemaFacet)
-
-	BatchAddFacetToObject_ObjectAttributeList = BatchAddFacetToObject.AddMember("ObjectAttributeList", _AttributeKeyAndValueList)
-
-	BatchAddFacetToObject_ObjectReference = BatchAddFacetToObject.AddMember("ObjectReference", ObjectReference)
-
-	BatchAttachObject_ParentReference = BatchAttachObject.AddMember("ParentReference", ObjectReference)
-
-	BatchAttachObject_ChildReference = BatchAttachObject.AddMember("ChildReference", ObjectReference)
-
-	BatchAttachObject_LinkName = BatchAttachObject.AddMember("LinkName", _LinkName)
-
-	BatchAttachObjectResponse_attachedObjectIdentifier = BatchAttachObjectResponse.AddMember("attachedObjectIdentifier", _ObjectIdentifier)
-
-	BatchAttachPolicy_PolicyReference = BatchAttachPolicy.AddMember("PolicyReference", ObjectReference)
-
-	BatchAttachPolicy_ObjectReference = BatchAttachPolicy.AddMember("ObjectReference", ObjectReference)
-
-	BatchAttachToIndex_IndexReference = BatchAttachToIndex.AddMember("IndexReference", ObjectReference)
-
-	BatchAttachToIndex_TargetReference = BatchAttachToIndex.AddMember("TargetReference", ObjectReference)
-
-	BatchAttachToIndexResponse_AttachedObjectIdentifier = BatchAttachToIndexResponse.AddMember("AttachedObjectIdentifier", _ObjectIdentifier)
-
-	TypedLinkSchemaAndFacetName_SchemaArn = TypedLinkSchemaAndFacetName.AddMember("SchemaArn", _Arn)
-
-	TypedLinkSchemaAndFacetName_TypedLinkName = TypedLinkSchemaAndFacetName.AddMember("TypedLinkName", _TypedLinkName)
-
-	BatchAttachTypedLink_SourceObjectReference = BatchAttachTypedLink.AddMember("SourceObjectReference", ObjectReference)
-
-	BatchAttachTypedLink_TargetObjectReference = BatchAttachTypedLink.AddMember("TargetObjectReference", ObjectReference)
-
-	BatchAttachTypedLink_TypedLinkFacet = BatchAttachTypedLink.AddMember("TypedLinkFacet", TypedLinkSchemaAndFacetName)
-
-	BatchAttachTypedLink_Attributes = BatchAttachTypedLink.AddMember("Attributes", _AttributeNameAndValueList)
-
-	TypedLinkSpecifier_TypedLinkFacet = TypedLinkSpecifier.AddMember("TypedLinkFacet", TypedLinkSchemaAndFacetName)
-
-	TypedLinkSpecifier_SourceObjectReference = TypedLinkSpecifier.AddMember("SourceObjectReference", ObjectReference)
-
-	TypedLinkSpecifier_TargetObjectReference = TypedLinkSpecifier.AddMember("TargetObjectReference", ObjectReference)
-
-	TypedLinkSpecifier_IdentityAttributeValues = TypedLinkSpecifier.AddMember("IdentityAttributeValues", _AttributeNameAndValueList)
-
-	BatchAttachTypedLinkResponse_TypedLinkSpecifier = BatchAttachTypedLinkResponse.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	BatchCreateIndex_OrderedIndexedAttributeList = BatchCreateIndex.AddMember("OrderedIndexedAttributeList", _AttributeKeyList)
-
-	BatchCreateIndex_IsUnique = BatchCreateIndex.AddMember("IsUnique", _Bool)
-
-	BatchCreateIndex_ParentReference = BatchCreateIndex.AddMember("ParentReference", ObjectReference)
-
-	BatchCreateIndex_LinkName = BatchCreateIndex.AddMember("LinkName", _LinkName)
-
-	BatchCreateIndex_BatchReferenceName = BatchCreateIndex.AddMember("BatchReferenceName", _BatchReferenceName)
-
-	BatchCreateIndexResponse_ObjectIdentifier = BatchCreateIndexResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	_SchemaFacetList_member = _SchemaFacetList.AddMember("member", SchemaFacet)
-
-	BatchCreateObject_SchemaFacet = BatchCreateObject.AddMember("SchemaFacet", _SchemaFacetList)
-
-	BatchCreateObject_ObjectAttributeList = BatchCreateObject.AddMember("ObjectAttributeList", _AttributeKeyAndValueList)
-
-	BatchCreateObject_ParentReference = BatchCreateObject.AddMember("ParentReference", ObjectReference)
-
-	BatchCreateObject_LinkName = BatchCreateObject.AddMember("LinkName", _LinkName)
-
-	BatchCreateObject_BatchReferenceName = BatchCreateObject.AddMember("BatchReferenceName", _BatchReferenceName)
-
-	BatchCreateObjectResponse_ObjectIdentifier = BatchCreateObjectResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	BatchDeleteObject_ObjectReference = BatchDeleteObject.AddMember("ObjectReference", ObjectReference)
-
-	BatchDetachFromIndex_IndexReference = BatchDetachFromIndex.AddMember("IndexReference", ObjectReference)
-
-	BatchDetachFromIndex_TargetReference = BatchDetachFromIndex.AddMember("TargetReference", ObjectReference)
-
-	BatchDetachFromIndexResponse_DetachedObjectIdentifier = BatchDetachFromIndexResponse.AddMember("DetachedObjectIdentifier", _ObjectIdentifier)
-
-	BatchDetachObject_ParentReference = BatchDetachObject.AddMember("ParentReference", ObjectReference)
-
-	BatchDetachObject_LinkName = BatchDetachObject.AddMember("LinkName", _LinkName)
-
-	BatchDetachObject_BatchReferenceName = BatchDetachObject.AddMember("BatchReferenceName", _BatchReferenceName)
-
-	BatchDetachObjectResponse_detachedObjectIdentifier = BatchDetachObjectResponse.AddMember("detachedObjectIdentifier", _ObjectIdentifier)
-
-	BatchDetachPolicy_PolicyReference = BatchDetachPolicy.AddMember("PolicyReference", ObjectReference)
-
-	BatchDetachPolicy_ObjectReference = BatchDetachPolicy.AddMember("ObjectReference", ObjectReference)
-
-	BatchDetachTypedLink_TypedLinkSpecifier = BatchDetachTypedLink.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	BatchGetLinkAttributes_TypedLinkSpecifier = BatchGetLinkAttributes.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	BatchGetLinkAttributes_AttributeNames = BatchGetLinkAttributes.AddMember("AttributeNames", _AttributeNameList)
-
-	BatchGetLinkAttributesResponse_Attributes = BatchGetLinkAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	BatchGetObjectAttributes_ObjectReference = BatchGetObjectAttributes.AddMember("ObjectReference", ObjectReference)
-
-	BatchGetObjectAttributes_SchemaFacet = BatchGetObjectAttributes.AddMember("SchemaFacet", SchemaFacet)
-
-	BatchGetObjectAttributes_AttributeNames = BatchGetObjectAttributes.AddMember("AttributeNames", _AttributeNameList)
-
-	BatchGetObjectAttributesResponse_Attributes = BatchGetObjectAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	BatchGetObjectInformation_ObjectReference = BatchGetObjectInformation.AddMember("ObjectReference", ObjectReference)
-
-	BatchGetObjectInformationResponse_SchemaFacets = BatchGetObjectInformationResponse.AddMember("SchemaFacets", _SchemaFacetList)
-
-	BatchGetObjectInformationResponse_ObjectIdentifier = BatchGetObjectInformationResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	BatchListAttachedIndices_TargetReference = BatchListAttachedIndices.AddMember("TargetReference", ObjectReference)
-
-	BatchListAttachedIndices_NextToken = BatchListAttachedIndices.AddMember("NextToken", _NextToken)
-
-	BatchListAttachedIndices_MaxResults = BatchListAttachedIndices.AddMember("MaxResults", _NumberResults)
-
-	IndexAttachment_IndexedAttributes = IndexAttachment.AddMember("IndexedAttributes", _AttributeKeyAndValueList)
-
-	IndexAttachment_ObjectIdentifier = IndexAttachment.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	_IndexAttachmentList_member = _IndexAttachmentList.AddMember("member", IndexAttachment)
-
-	BatchListAttachedIndicesResponse_IndexAttachments = BatchListAttachedIndicesResponse.AddMember("IndexAttachments", _IndexAttachmentList)
-
-	BatchListAttachedIndicesResponse_NextToken = BatchListAttachedIndicesResponse.AddMember("NextToken", _NextToken)
-
-	RangeMode_FIRST = RangeMode.AddMember("FIRST", smithyprelude.Unit)
-
-	RangeMode_LAST = RangeMode.AddMember("LAST", smithyprelude.Unit)
-
-	RangeMode_LAST_BEFORE_MISSING_VALUES = RangeMode.AddMember("LAST_BEFORE_MISSING_VALUES", smithyprelude.Unit)
-
-	RangeMode_INCLUSIVE = RangeMode.AddMember("INCLUSIVE", smithyprelude.Unit)
-
-	RangeMode_EXCLUSIVE = RangeMode.AddMember("EXCLUSIVE", smithyprelude.Unit)
-
-	TypedAttributeValueRange_StartMode = TypedAttributeValueRange.AddMember("StartMode", RangeMode)
-
-	TypedAttributeValueRange_StartValue = TypedAttributeValueRange.AddMember("StartValue", TypedAttributeValue)
-
-	TypedAttributeValueRange_EndMode = TypedAttributeValueRange.AddMember("EndMode", RangeMode)
-
-	TypedAttributeValueRange_EndValue = TypedAttributeValueRange.AddMember("EndValue", TypedAttributeValue)
-
-	TypedLinkAttributeRange_AttributeName = TypedLinkAttributeRange.AddMember("AttributeName", _AttributeName)
-
-	TypedLinkAttributeRange_Range = TypedLinkAttributeRange.AddMember("Range", TypedAttributeValueRange)
-
-	_TypedLinkAttributeRangeList_member = _TypedLinkAttributeRangeList.AddMember("member", TypedLinkAttributeRange)
-
-	BatchListIncomingTypedLinks_ObjectReference = BatchListIncomingTypedLinks.AddMember("ObjectReference", ObjectReference)
-
-	BatchListIncomingTypedLinks_FilterAttributeRanges = BatchListIncomingTypedLinks.AddMember("FilterAttributeRanges", _TypedLinkAttributeRangeList)
-
-	BatchListIncomingTypedLinks_FilterTypedLink = BatchListIncomingTypedLinks.AddMember("FilterTypedLink", TypedLinkSchemaAndFacetName)
-
-	BatchListIncomingTypedLinks_NextToken = BatchListIncomingTypedLinks.AddMember("NextToken", _NextToken)
-
-	BatchListIncomingTypedLinks_MaxResults = BatchListIncomingTypedLinks.AddMember("MaxResults", _NumberResults)
-
-	_TypedLinkSpecifierList_member = _TypedLinkSpecifierList.AddMember("member", TypedLinkSpecifier)
-
-	BatchListIncomingTypedLinksResponse_LinkSpecifiers = BatchListIncomingTypedLinksResponse.AddMember("LinkSpecifiers", _TypedLinkSpecifierList)
-
-	BatchListIncomingTypedLinksResponse_NextToken = BatchListIncomingTypedLinksResponse.AddMember("NextToken", _NextToken)
-
-	ObjectAttributeRange_AttributeKey = ObjectAttributeRange.AddMember("AttributeKey", AttributeKey)
-
-	ObjectAttributeRange_Range = ObjectAttributeRange.AddMember("Range", TypedAttributeValueRange)
-
-	_ObjectAttributeRangeList_member = _ObjectAttributeRangeList.AddMember("member", ObjectAttributeRange)
-
-	BatchListIndex_RangesOnIndexedValues = BatchListIndex.AddMember("RangesOnIndexedValues", _ObjectAttributeRangeList)
-
-	BatchListIndex_IndexReference = BatchListIndex.AddMember("IndexReference", ObjectReference)
-
-	BatchListIndex_MaxResults = BatchListIndex.AddMember("MaxResults", _NumberResults)
-
-	BatchListIndex_NextToken = BatchListIndex.AddMember("NextToken", _NextToken)
-
-	BatchListIndexResponse_IndexAttachments = BatchListIndexResponse.AddMember("IndexAttachments", _IndexAttachmentList)
-
-	BatchListIndexResponse_NextToken = BatchListIndexResponse.AddMember("NextToken", _NextToken)
-
-	BatchListObjectAttributes_ObjectReference = BatchListObjectAttributes.AddMember("ObjectReference", ObjectReference)
-
-	BatchListObjectAttributes_NextToken = BatchListObjectAttributes.AddMember("NextToken", _NextToken)
-
-	BatchListObjectAttributes_MaxResults = BatchListObjectAttributes.AddMember("MaxResults", _NumberResults)
-
-	BatchListObjectAttributes_FacetFilter = BatchListObjectAttributes.AddMember("FacetFilter", SchemaFacet)
-
-	BatchListObjectAttributesResponse_Attributes = BatchListObjectAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	BatchListObjectAttributesResponse_NextToken = BatchListObjectAttributesResponse.AddMember("NextToken", _NextToken)
-
-	BatchListObjectChildren_ObjectReference = BatchListObjectChildren.AddMember("ObjectReference", ObjectReference)
-
-	BatchListObjectChildren_NextToken = BatchListObjectChildren.AddMember("NextToken", _NextToken)
-
-	BatchListObjectChildren_MaxResults = BatchListObjectChildren.AddMember("MaxResults", _NumberResults)
-
-	_LinkNameToObjectIdentifierMap_key = _LinkNameToObjectIdentifierMap.AddMember("key", _LinkName)
-
-	_LinkNameToObjectIdentifierMap_value = _LinkNameToObjectIdentifierMap.AddMember("value", _ObjectIdentifier)
-
-	BatchListObjectChildrenResponse_Children = BatchListObjectChildrenResponse.AddMember("Children", _LinkNameToObjectIdentifierMap)
-
-	BatchListObjectChildrenResponse_NextToken = BatchListObjectChildrenResponse.AddMember("NextToken", _NextToken)
-
-	BatchListObjectParentPaths_ObjectReference = BatchListObjectParentPaths.AddMember("ObjectReference", ObjectReference)
-
-	BatchListObjectParentPaths_NextToken = BatchListObjectParentPaths.AddMember("NextToken", _NextToken)
-
-	BatchListObjectParentPaths_MaxResults = BatchListObjectParentPaths.AddMember("MaxResults", _NumberResults)
-
-	_ObjectIdentifierList_member = _ObjectIdentifierList.AddMember("member", _ObjectIdentifier)
-
-	PathToObjectIdentifiers_Path = PathToObjectIdentifiers.AddMember("Path", _PathString)
-
-	PathToObjectIdentifiers_ObjectIdentifiers = PathToObjectIdentifiers.AddMember("ObjectIdentifiers", _ObjectIdentifierList)
-
-	_PathToObjectIdentifiersList_member = _PathToObjectIdentifiersList.AddMember("member", PathToObjectIdentifiers)
-
-	BatchListObjectParentPathsResponse_PathToObjectIdentifiersList = BatchListObjectParentPathsResponse.AddMember("PathToObjectIdentifiersList", _PathToObjectIdentifiersList)
-
-	BatchListObjectParentPathsResponse_NextToken = BatchListObjectParentPathsResponse.AddMember("NextToken", _NextToken)
-
-	BatchListObjectParents_ObjectReference = BatchListObjectParents.AddMember("ObjectReference", ObjectReference)
-
-	BatchListObjectParents_NextToken = BatchListObjectParents.AddMember("NextToken", _NextToken)
-
-	BatchListObjectParents_MaxResults = BatchListObjectParents.AddMember("MaxResults", _NumberResults)
-
-	ObjectIdentifierAndLinkNameTuple_ObjectIdentifier = ObjectIdentifierAndLinkNameTuple.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	ObjectIdentifierAndLinkNameTuple_LinkName = ObjectIdentifierAndLinkNameTuple.AddMember("LinkName", _LinkName)
-
-	_ObjectIdentifierAndLinkNameList_member = _ObjectIdentifierAndLinkNameList.AddMember("member", ObjectIdentifierAndLinkNameTuple)
-
-	BatchListObjectParentsResponse_ParentLinks = BatchListObjectParentsResponse.AddMember("ParentLinks", _ObjectIdentifierAndLinkNameList)
-
-	BatchListObjectParentsResponse_NextToken = BatchListObjectParentsResponse.AddMember("NextToken", _NextToken)
-
-	BatchListObjectPolicies_ObjectReference = BatchListObjectPolicies.AddMember("ObjectReference", ObjectReference)
-
-	BatchListObjectPolicies_NextToken = BatchListObjectPolicies.AddMember("NextToken", _NextToken)
-
-	BatchListObjectPolicies_MaxResults = BatchListObjectPolicies.AddMember("MaxResults", _NumberResults)
-
-	BatchListObjectPoliciesResponse_AttachedPolicyIds = BatchListObjectPoliciesResponse.AddMember("AttachedPolicyIds", _ObjectIdentifierList)
-
-	BatchListObjectPoliciesResponse_NextToken = BatchListObjectPoliciesResponse.AddMember("NextToken", _NextToken)
-
-	BatchListOutgoingTypedLinks_ObjectReference = BatchListOutgoingTypedLinks.AddMember("ObjectReference", ObjectReference)
-
-	BatchListOutgoingTypedLinks_FilterAttributeRanges = BatchListOutgoingTypedLinks.AddMember("FilterAttributeRanges", _TypedLinkAttributeRangeList)
-
-	BatchListOutgoingTypedLinks_FilterTypedLink = BatchListOutgoingTypedLinks.AddMember("FilterTypedLink", TypedLinkSchemaAndFacetName)
-
-	BatchListOutgoingTypedLinks_NextToken = BatchListOutgoingTypedLinks.AddMember("NextToken", _NextToken)
-
-	BatchListOutgoingTypedLinks_MaxResults = BatchListOutgoingTypedLinks.AddMember("MaxResults", _NumberResults)
-
-	BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers = BatchListOutgoingTypedLinksResponse.AddMember("TypedLinkSpecifiers", _TypedLinkSpecifierList)
-
-	BatchListOutgoingTypedLinksResponse_NextToken = BatchListOutgoingTypedLinksResponse.AddMember("NextToken", _NextToken)
-
-	BatchListPolicyAttachments_PolicyReference = BatchListPolicyAttachments.AddMember("PolicyReference", ObjectReference)
-
-	BatchListPolicyAttachments_NextToken = BatchListPolicyAttachments.AddMember("NextToken", _NextToken)
-
-	BatchListPolicyAttachments_MaxResults = BatchListPolicyAttachments.AddMember("MaxResults", _NumberResults)
-
-	BatchListPolicyAttachmentsResponse_ObjectIdentifiers = BatchListPolicyAttachmentsResponse.AddMember("ObjectIdentifiers", _ObjectIdentifierList)
-
-	BatchListPolicyAttachmentsResponse_NextToken = BatchListPolicyAttachmentsResponse.AddMember("NextToken", _NextToken)
-
-	BatchLookupPolicy_ObjectReference = BatchLookupPolicy.AddMember("ObjectReference", ObjectReference)
-
-	BatchLookupPolicy_NextToken = BatchLookupPolicy.AddMember("NextToken", _NextToken)
-
-	BatchLookupPolicy_MaxResults = BatchLookupPolicy.AddMember("MaxResults", _NumberResults)
-
-	PolicyAttachment_PolicyId = PolicyAttachment.AddMember("PolicyId", _ObjectIdentifier)
-
-	PolicyAttachment_ObjectIdentifier = PolicyAttachment.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	PolicyAttachment_PolicyType = PolicyAttachment.AddMember("PolicyType", _PolicyType)
-
-	_PolicyAttachmentList_member = _PolicyAttachmentList.AddMember("member", PolicyAttachment)
-
-	PolicyToPath_Path = PolicyToPath.AddMember("Path", _PathString)
-
-	PolicyToPath_Policies = PolicyToPath.AddMember("Policies", _PolicyAttachmentList)
-
-	_PolicyToPathList_member = _PolicyToPathList.AddMember("member", PolicyToPath)
-
-	BatchLookupPolicyResponse_PolicyToPathList = BatchLookupPolicyResponse.AddMember("PolicyToPathList", _PolicyToPathList)
-
-	BatchLookupPolicyResponse_NextToken = BatchLookupPolicyResponse.AddMember("NextToken", _NextToken)
-
-	BatchReadExceptionType_ValidationException = BatchReadExceptionType.AddMember("ValidationException", smithyprelude.Unit)
-
-	BatchReadExceptionType_InvalidArnException = BatchReadExceptionType.AddMember("InvalidArnException", smithyprelude.Unit)
-
-	BatchReadExceptionType_ResourceNotFoundException = BatchReadExceptionType.AddMember("ResourceNotFoundException", smithyprelude.Unit)
-
-	BatchReadExceptionType_InvalidNextTokenException = BatchReadExceptionType.AddMember("InvalidNextTokenException", smithyprelude.Unit)
-
-	BatchReadExceptionType_AccessDeniedException = BatchReadExceptionType.AddMember("AccessDeniedException", smithyprelude.Unit)
-
-	BatchReadExceptionType_NotNodeException = BatchReadExceptionType.AddMember("NotNodeException", smithyprelude.Unit)
-
-	BatchReadExceptionType_FacetValidationException = BatchReadExceptionType.AddMember("FacetValidationException", smithyprelude.Unit)
-
-	BatchReadExceptionType_CannotListParentOfRootException = BatchReadExceptionType.AddMember("CannotListParentOfRootException", smithyprelude.Unit)
-
-	BatchReadExceptionType_NotIndexException = BatchReadExceptionType.AddMember("NotIndexException", smithyprelude.Unit)
-
-	BatchReadExceptionType_NotPolicyException = BatchReadExceptionType.AddMember("NotPolicyException", smithyprelude.Unit)
-
-	BatchReadExceptionType_DirectoryNotEnabledException = BatchReadExceptionType.AddMember("DirectoryNotEnabledException", smithyprelude.Unit)
-
-	BatchReadExceptionType_LimitExceededException = BatchReadExceptionType.AddMember("LimitExceededException", smithyprelude.Unit)
-
-	BatchReadExceptionType_InternalServiceException = BatchReadExceptionType.AddMember("InternalServiceException", smithyprelude.Unit)
-
-	BatchReadException_Type = BatchReadException.AddMember("Type", BatchReadExceptionType)
-
-	BatchReadException_Message = BatchReadException.AddMember("Message", _ExceptionMessage)
-
-	BatchReadOperation_ListObjectAttributes = BatchReadOperation.AddMember("ListObjectAttributes", BatchListObjectAttributes)
-
-	BatchReadOperation_ListObjectChildren = BatchReadOperation.AddMember("ListObjectChildren", BatchListObjectChildren)
-
-	BatchReadOperation_ListAttachedIndices = BatchReadOperation.AddMember("ListAttachedIndices", BatchListAttachedIndices)
-
-	BatchReadOperation_ListObjectParentPaths = BatchReadOperation.AddMember("ListObjectParentPaths", BatchListObjectParentPaths)
-
-	BatchReadOperation_GetObjectInformation = BatchReadOperation.AddMember("GetObjectInformation", BatchGetObjectInformation)
-
-	BatchReadOperation_GetObjectAttributes = BatchReadOperation.AddMember("GetObjectAttributes", BatchGetObjectAttributes)
-
-	BatchReadOperation_ListObjectParents = BatchReadOperation.AddMember("ListObjectParents", BatchListObjectParents)
-
-	BatchReadOperation_ListObjectPolicies = BatchReadOperation.AddMember("ListObjectPolicies", BatchListObjectPolicies)
-
-	BatchReadOperation_ListPolicyAttachments = BatchReadOperation.AddMember("ListPolicyAttachments", BatchListPolicyAttachments)
-
-	BatchReadOperation_LookupPolicy = BatchReadOperation.AddMember("LookupPolicy", BatchLookupPolicy)
-
-	BatchReadOperation_ListIndex = BatchReadOperation.AddMember("ListIndex", BatchListIndex)
-
-	BatchReadOperation_ListOutgoingTypedLinks = BatchReadOperation.AddMember("ListOutgoingTypedLinks", BatchListOutgoingTypedLinks)
-
-	BatchReadOperation_ListIncomingTypedLinks = BatchReadOperation.AddMember("ListIncomingTypedLinks", BatchListIncomingTypedLinks)
-
-	BatchReadOperation_GetLinkAttributes = BatchReadOperation.AddMember("GetLinkAttributes", BatchGetLinkAttributes)
-
-	_BatchReadOperationList_member = _BatchReadOperationList.AddMember("member", BatchReadOperation)
-
-	BatchReadSuccessfulResponse_ListObjectAttributes = BatchReadSuccessfulResponse.AddMember("ListObjectAttributes", BatchListObjectAttributesResponse)
-
-	BatchReadSuccessfulResponse_ListObjectChildren = BatchReadSuccessfulResponse.AddMember("ListObjectChildren", BatchListObjectChildrenResponse)
-
-	BatchReadSuccessfulResponse_GetObjectInformation = BatchReadSuccessfulResponse.AddMember("GetObjectInformation", BatchGetObjectInformationResponse)
-
-	BatchReadSuccessfulResponse_GetObjectAttributes = BatchReadSuccessfulResponse.AddMember("GetObjectAttributes", BatchGetObjectAttributesResponse)
-
-	BatchReadSuccessfulResponse_ListAttachedIndices = BatchReadSuccessfulResponse.AddMember("ListAttachedIndices", BatchListAttachedIndicesResponse)
-
-	BatchReadSuccessfulResponse_ListObjectParentPaths = BatchReadSuccessfulResponse.AddMember("ListObjectParentPaths", BatchListObjectParentPathsResponse)
-
-	BatchReadSuccessfulResponse_ListObjectPolicies = BatchReadSuccessfulResponse.AddMember("ListObjectPolicies", BatchListObjectPoliciesResponse)
-
-	BatchReadSuccessfulResponse_ListPolicyAttachments = BatchReadSuccessfulResponse.AddMember("ListPolicyAttachments", BatchListPolicyAttachmentsResponse)
-
-	BatchReadSuccessfulResponse_LookupPolicy = BatchReadSuccessfulResponse.AddMember("LookupPolicy", BatchLookupPolicyResponse)
-
-	BatchReadSuccessfulResponse_ListIndex = BatchReadSuccessfulResponse.AddMember("ListIndex", BatchListIndexResponse)
-
-	BatchReadSuccessfulResponse_ListOutgoingTypedLinks = BatchReadSuccessfulResponse.AddMember("ListOutgoingTypedLinks", BatchListOutgoingTypedLinksResponse)
-
-	BatchReadSuccessfulResponse_ListIncomingTypedLinks = BatchReadSuccessfulResponse.AddMember("ListIncomingTypedLinks", BatchListIncomingTypedLinksResponse)
-
-	BatchReadSuccessfulResponse_GetLinkAttributes = BatchReadSuccessfulResponse.AddMember("GetLinkAttributes", BatchGetLinkAttributesResponse)
-
-	BatchReadSuccessfulResponse_ListObjectParents = BatchReadSuccessfulResponse.AddMember("ListObjectParents", BatchListObjectParentsResponse)
-
-	BatchReadOperationResponse_SuccessfulResponse = BatchReadOperationResponse.AddMember("SuccessfulResponse", BatchReadSuccessfulResponse)
-
-	BatchReadOperationResponse_ExceptionResponse = BatchReadOperationResponse.AddMember("ExceptionResponse", BatchReadException)
-
-	_BatchReadOperationResponseList_member = _BatchReadOperationResponseList.AddMember("member", BatchReadOperationResponse)
-
-	BatchRemoveFacetFromObject_SchemaFacet = BatchRemoveFacetFromObject.AddMember("SchemaFacet", SchemaFacet)
-
-	BatchRemoveFacetFromObject_ObjectReference = BatchRemoveFacetFromObject.AddMember("ObjectReference", ObjectReference)
-
-	UpdateActionType_CREATE_OR_UPDATE = UpdateActionType.AddMember("CREATE_OR_UPDATE", smithyprelude.Unit)
-
-	UpdateActionType_DELETE = UpdateActionType.AddMember("DELETE", smithyprelude.Unit)
-
-	LinkAttributeAction_AttributeActionType = LinkAttributeAction.AddMember("AttributeActionType", UpdateActionType)
-
-	LinkAttributeAction_AttributeUpdateValue = LinkAttributeAction.AddMember("AttributeUpdateValue", TypedAttributeValue)
-
-	LinkAttributeUpdate_AttributeKey = LinkAttributeUpdate.AddMember("AttributeKey", AttributeKey)
-
-	LinkAttributeUpdate_AttributeAction = LinkAttributeUpdate.AddMember("AttributeAction", LinkAttributeAction)
-
-	_LinkAttributeUpdateList_member = _LinkAttributeUpdateList.AddMember("member", LinkAttributeUpdate)
-
-	BatchUpdateLinkAttributes_TypedLinkSpecifier = BatchUpdateLinkAttributes.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	BatchUpdateLinkAttributes_AttributeUpdates = BatchUpdateLinkAttributes.AddMember("AttributeUpdates", _LinkAttributeUpdateList)
-
-	ObjectAttributeAction_ObjectAttributeActionType = ObjectAttributeAction.AddMember("ObjectAttributeActionType", UpdateActionType)
-
-	ObjectAttributeAction_ObjectAttributeUpdateValue = ObjectAttributeAction.AddMember("ObjectAttributeUpdateValue", TypedAttributeValue)
-
-	ObjectAttributeUpdate_ObjectAttributeKey = ObjectAttributeUpdate.AddMember("ObjectAttributeKey", AttributeKey)
-
-	ObjectAttributeUpdate_ObjectAttributeAction = ObjectAttributeUpdate.AddMember("ObjectAttributeAction", ObjectAttributeAction)
-
-	_ObjectAttributeUpdateList_member = _ObjectAttributeUpdateList.AddMember("member", ObjectAttributeUpdate)
-
-	BatchUpdateObjectAttributes_ObjectReference = BatchUpdateObjectAttributes.AddMember("ObjectReference", ObjectReference)
-
-	BatchUpdateObjectAttributes_AttributeUpdates = BatchUpdateObjectAttributes.AddMember("AttributeUpdates", _ObjectAttributeUpdateList)
-
-	BatchUpdateObjectAttributesResponse_ObjectIdentifier = BatchUpdateObjectAttributesResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	BatchWriteExceptionType_InternalServiceException = BatchWriteExceptionType.AddMember("InternalServiceException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_ValidationException = BatchWriteExceptionType.AddMember("ValidationException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_InvalidArnException = BatchWriteExceptionType.AddMember("InvalidArnException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_LinkNameAlreadyInUseException = BatchWriteExceptionType.AddMember("LinkNameAlreadyInUseException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_StillContainsLinksException = BatchWriteExceptionType.AddMember("StillContainsLinksException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_FacetValidationException = BatchWriteExceptionType.AddMember("FacetValidationException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_ObjectNotDetachedException = BatchWriteExceptionType.AddMember("ObjectNotDetachedException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_ResourceNotFoundException = BatchWriteExceptionType.AddMember("ResourceNotFoundException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_AccessDeniedException = BatchWriteExceptionType.AddMember("AccessDeniedException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_InvalidAttachmentException = BatchWriteExceptionType.AddMember("InvalidAttachmentException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_NotIndexException = BatchWriteExceptionType.AddMember("NotIndexException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_NotNodeException = BatchWriteExceptionType.AddMember("NotNodeException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_IndexedAttributeMissingException = BatchWriteExceptionType.AddMember("IndexedAttributeMissingException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_ObjectAlreadyDetachedException = BatchWriteExceptionType.AddMember("ObjectAlreadyDetachedException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_NotPolicyException = BatchWriteExceptionType.AddMember("NotPolicyException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_DirectoryNotEnabledException = BatchWriteExceptionType.AddMember("DirectoryNotEnabledException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_LimitExceededException = BatchWriteExceptionType.AddMember("LimitExceededException", smithyprelude.Unit)
-
-	BatchWriteExceptionType_UnsupportedIndexTypeException = BatchWriteExceptionType.AddMember("UnsupportedIndexTypeException", smithyprelude.Unit)
-
-	BatchWriteException_Index = BatchWriteException.AddMember("Index", _BatchOperationIndex)
-
-	BatchWriteException_Type = BatchWriteException.AddMember("Type", BatchWriteExceptionType)
-
-	BatchWriteException_Message = BatchWriteException.AddMember("Message", _ExceptionMessage)
-
-	BatchWriteOperation_CreateObject = BatchWriteOperation.AddMember("CreateObject", BatchCreateObject)
-
-	BatchWriteOperation_AttachObject = BatchWriteOperation.AddMember("AttachObject", BatchAttachObject)
-
-	BatchWriteOperation_DetachObject = BatchWriteOperation.AddMember("DetachObject", BatchDetachObject)
-
-	BatchWriteOperation_UpdateObjectAttributes = BatchWriteOperation.AddMember("UpdateObjectAttributes", BatchUpdateObjectAttributes)
-
-	BatchWriteOperation_DeleteObject = BatchWriteOperation.AddMember("DeleteObject", BatchDeleteObject)
-
-	BatchWriteOperation_AddFacetToObject = BatchWriteOperation.AddMember("AddFacetToObject", BatchAddFacetToObject)
-
-	BatchWriteOperation_RemoveFacetFromObject = BatchWriteOperation.AddMember("RemoveFacetFromObject", BatchRemoveFacetFromObject)
-
-	BatchWriteOperation_AttachPolicy = BatchWriteOperation.AddMember("AttachPolicy", BatchAttachPolicy)
-
-	BatchWriteOperation_DetachPolicy = BatchWriteOperation.AddMember("DetachPolicy", BatchDetachPolicy)
-
-	BatchWriteOperation_CreateIndex = BatchWriteOperation.AddMember("CreateIndex", BatchCreateIndex)
-
-	BatchWriteOperation_AttachToIndex = BatchWriteOperation.AddMember("AttachToIndex", BatchAttachToIndex)
-
-	BatchWriteOperation_DetachFromIndex = BatchWriteOperation.AddMember("DetachFromIndex", BatchDetachFromIndex)
-
-	BatchWriteOperation_AttachTypedLink = BatchWriteOperation.AddMember("AttachTypedLink", BatchAttachTypedLink)
-
-	BatchWriteOperation_DetachTypedLink = BatchWriteOperation.AddMember("DetachTypedLink", BatchDetachTypedLink)
-
-	BatchWriteOperation_UpdateLinkAttributes = BatchWriteOperation.AddMember("UpdateLinkAttributes", BatchUpdateLinkAttributes)
-
-	_BatchWriteOperationList_member = _BatchWriteOperationList.AddMember("member", BatchWriteOperation)
-
-	BatchWriteOperationResponse_CreateObject = BatchWriteOperationResponse.AddMember("CreateObject", BatchCreateObjectResponse)
-
-	BatchWriteOperationResponse_AttachObject = BatchWriteOperationResponse.AddMember("AttachObject", BatchAttachObjectResponse)
-
-	BatchWriteOperationResponse_DetachObject = BatchWriteOperationResponse.AddMember("DetachObject", BatchDetachObjectResponse)
-
-	BatchWriteOperationResponse_UpdateObjectAttributes = BatchWriteOperationResponse.AddMember("UpdateObjectAttributes", BatchUpdateObjectAttributesResponse)
-
-	BatchWriteOperationResponse_DeleteObject = BatchWriteOperationResponse.AddMember("DeleteObject", BatchDeleteObjectResponse)
-
-	BatchWriteOperationResponse_AddFacetToObject = BatchWriteOperationResponse.AddMember("AddFacetToObject", BatchAddFacetToObjectResponse)
-
-	BatchWriteOperationResponse_RemoveFacetFromObject = BatchWriteOperationResponse.AddMember("RemoveFacetFromObject", BatchRemoveFacetFromObjectResponse)
-
-	BatchWriteOperationResponse_AttachPolicy = BatchWriteOperationResponse.AddMember("AttachPolicy", BatchAttachPolicyResponse)
-
-	BatchWriteOperationResponse_DetachPolicy = BatchWriteOperationResponse.AddMember("DetachPolicy", BatchDetachPolicyResponse)
-
-	BatchWriteOperationResponse_CreateIndex = BatchWriteOperationResponse.AddMember("CreateIndex", BatchCreateIndexResponse)
-
-	BatchWriteOperationResponse_AttachToIndex = BatchWriteOperationResponse.AddMember("AttachToIndex", BatchAttachToIndexResponse)
-
-	BatchWriteOperationResponse_DetachFromIndex = BatchWriteOperationResponse.AddMember("DetachFromIndex", BatchDetachFromIndexResponse)
-
-	BatchWriteOperationResponse_AttachTypedLink = BatchWriteOperationResponse.AddMember("AttachTypedLink", BatchAttachTypedLinkResponse)
-
-	BatchWriteOperationResponse_DetachTypedLink = BatchWriteOperationResponse.AddMember("DetachTypedLink", BatchDetachTypedLinkResponse)
-
-	BatchWriteOperationResponse_UpdateLinkAttributes = BatchWriteOperationResponse.AddMember("UpdateLinkAttributes", BatchUpdateLinkAttributesResponse)
-
-	_BatchWriteOperationResponseList_member = _BatchWriteOperationResponseList.AddMember("member", BatchWriteOperationResponse)
-
-	CannotListParentOfRootException_Message = CannotListParentOfRootException.AddMember("Message", _ExceptionMessage)
-
-	ConsistencyLevel_SERIALIZABLE = ConsistencyLevel.AddMember("SERIALIZABLE", smithyprelude.Unit)
-
-	ConsistencyLevel_EVENTUAL = ConsistencyLevel.AddMember("EVENTUAL", smithyprelude.Unit)
-
-	DirectoryState_ENABLED = DirectoryState.AddMember("ENABLED", smithyprelude.Unit)
-
-	DirectoryState_DISABLED = DirectoryState.AddMember("DISABLED", smithyprelude.Unit)
-
-	DirectoryState_DELETED = DirectoryState.AddMember("DELETED", smithyprelude.Unit)
-
-	Directory_Name = Directory.AddMember("Name", _DirectoryName)
-
-	Directory_DirectoryArn = Directory.AddMember("DirectoryArn", _DirectoryArn)
-
-	Directory_State = Directory.AddMember("State", DirectoryState)
-
-	Directory_CreationDateTime = Directory.AddMember("CreationDateTime", _Date)
-
-	DirectoryAlreadyExistsException_Message = DirectoryAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryDeletedException_Message = DirectoryDeletedException.AddMember("Message", _ExceptionMessage)
-
-	_DirectoryList_member = _DirectoryList.AddMember("member", Directory)
-
-	DirectoryNotDisabledException_Message = DirectoryNotDisabledException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryNotEnabledException_Message = DirectoryNotEnabledException.AddMember("Message", _ExceptionMessage)
-
-	ObjectType_NODE = ObjectType.AddMember("NODE", smithyprelude.Unit)
-
-	ObjectType_LEAF_NODE = ObjectType.AddMember("LEAF_NODE", smithyprelude.Unit)
-
-	ObjectType_POLICY = ObjectType.AddMember("POLICY", smithyprelude.Unit)
-
-	ObjectType_INDEX = ObjectType.AddMember("INDEX", smithyprelude.Unit)
-
-	FacetStyle_STATIC = FacetStyle.AddMember("STATIC", smithyprelude.Unit)
-
-	FacetStyle_DYNAMIC = FacetStyle.AddMember("DYNAMIC", smithyprelude.Unit)
-
-	Facet_Name = Facet.AddMember("Name", _FacetName)
-
-	Facet_ObjectType = Facet.AddMember("ObjectType", ObjectType)
-
-	Facet_FacetStyle = Facet.AddMember("FacetStyle", FacetStyle)
-
-	FacetAlreadyExistsException_Message = FacetAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	FacetAttributeType_STRING = FacetAttributeType.AddMember("STRING", smithyprelude.Unit)
-
-	FacetAttributeType_BINARY = FacetAttributeType.AddMember("BINARY", smithyprelude.Unit)
-
-	FacetAttributeType_BOOLEAN = FacetAttributeType.AddMember("BOOLEAN", smithyprelude.Unit)
-
-	FacetAttributeType_NUMBER = FacetAttributeType.AddMember("NUMBER", smithyprelude.Unit)
-
-	FacetAttributeType_DATETIME = FacetAttributeType.AddMember("DATETIME", smithyprelude.Unit)
-
-	FacetAttributeType_VARIANT = FacetAttributeType.AddMember("VARIANT", smithyprelude.Unit)
-
-	RuleType_BINARY_LENGTH = RuleType.AddMember("BINARY_LENGTH", smithyprelude.Unit)
-
-	RuleType_NUMBER_COMPARISON = RuleType.AddMember("NUMBER_COMPARISON", smithyprelude.Unit)
-
-	RuleType_STRING_FROM_SET = RuleType.AddMember("STRING_FROM_SET", smithyprelude.Unit)
-
-	RuleType_STRING_LENGTH = RuleType.AddMember("STRING_LENGTH", smithyprelude.Unit)
-
-	_RuleParameterMap_key = _RuleParameterMap.AddMember("key", _RuleParameterKey)
-
-	_RuleParameterMap_value = _RuleParameterMap.AddMember("value", _RuleParameterValue)
-
-	Rule_Type = Rule.AddMember("Type", RuleType)
-
-	Rule_Parameters = Rule.AddMember("Parameters", _RuleParameterMap)
-
-	_RuleMap_key = _RuleMap.AddMember("key", _RuleKey)
-
-	_RuleMap_value = _RuleMap.AddMember("value", Rule)
-
-	FacetAttributeDefinition_Type = FacetAttributeDefinition.AddMember("Type", FacetAttributeType)
-
-	FacetAttributeDefinition_DefaultValue = FacetAttributeDefinition.AddMember("DefaultValue", TypedAttributeValue)
-
-	FacetAttributeDefinition_IsImmutable = FacetAttributeDefinition.AddMember("IsImmutable", _Bool)
-
-	FacetAttributeDefinition_Rules = FacetAttributeDefinition.AddMember("Rules", _RuleMap)
-
-	FacetAttributeReference_TargetFacetName = FacetAttributeReference.AddMember("TargetFacetName", _FacetName)
-
-	FacetAttributeReference_TargetAttributeName = FacetAttributeReference.AddMember("TargetAttributeName", _AttributeName)
-
-	RequiredAttributeBehavior_REQUIRED_ALWAYS = RequiredAttributeBehavior.AddMember("REQUIRED_ALWAYS", smithyprelude.Unit)
-
-	RequiredAttributeBehavior_NOT_REQUIRED = RequiredAttributeBehavior.AddMember("NOT_REQUIRED", smithyprelude.Unit)
-
-	FacetAttribute_Name = FacetAttribute.AddMember("Name", _AttributeName)
-
-	FacetAttribute_AttributeDefinition = FacetAttribute.AddMember("AttributeDefinition", FacetAttributeDefinition)
-
-	FacetAttribute_AttributeReference = FacetAttribute.AddMember("AttributeReference", FacetAttributeReference)
-
-	FacetAttribute_RequiredBehavior = FacetAttribute.AddMember("RequiredBehavior", RequiredAttributeBehavior)
-
-	_FacetAttributeList_member = _FacetAttributeList.AddMember("member", FacetAttribute)
-
-	FacetAttributeUpdate_Attribute = FacetAttributeUpdate.AddMember("Attribute", FacetAttribute)
-
-	FacetAttributeUpdate_Action = FacetAttributeUpdate.AddMember("Action", UpdateActionType)
-
-	_FacetAttributeUpdateList_member = _FacetAttributeUpdateList.AddMember("member", FacetAttributeUpdate)
-
-	FacetInUseException_Message = FacetInUseException.AddMember("Message", _ExceptionMessage)
-
-	_FacetNameList_member = _FacetNameList.AddMember("member", _FacetName)
-
-	FacetNotFoundException_Message = FacetNotFoundException.AddMember("Message", _ExceptionMessage)
-
-	FacetValidationException_Message = FacetValidationException.AddMember("Message", _ExceptionMessage)
-
-	IncompatibleSchemaException_Message = IncompatibleSchemaException.AddMember("Message", _ExceptionMessage)
-
-	IndexedAttributeMissingException_Message = IndexedAttributeMissingException.AddMember("Message", _ExceptionMessage)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ExceptionMessage)
-
-	InvalidArnException_Message = InvalidArnException.AddMember("Message", _ExceptionMessage)
-
-	InvalidAttachmentException_Message = InvalidAttachmentException.AddMember("Message", _ExceptionMessage)
-
-	InvalidFacetUpdateException_Message = InvalidFacetUpdateException.AddMember("Message", _ExceptionMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ExceptionMessage)
-
-	InvalidRuleException_Message = InvalidRuleException.AddMember("Message", _ExceptionMessage)
-
-	InvalidSchemaDocException_Message = InvalidSchemaDocException.AddMember("Message", _ExceptionMessage)
-
-	InvalidTaggingRequestException_Message = InvalidTaggingRequestException.AddMember("Message", _ExceptionMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	LinkNameAlreadyInUseException_Message = LinkNameAlreadyInUseException.AddMember("Message", _ExceptionMessage)
-
-	NotIndexException_Message = NotIndexException.AddMember("Message", _ExceptionMessage)
-
-	NotNodeException_Message = NotNodeException.AddMember("Message", _ExceptionMessage)
-
-	NotPolicyException_Message = NotPolicyException.AddMember("Message", _ExceptionMessage)
-
-	ObjectAlreadyDetachedException_Message = ObjectAlreadyDetachedException.AddMember("Message", _ExceptionMessage)
-
-	_ObjectIdentifierToLinkNameMap_key = _ObjectIdentifierToLinkNameMap.AddMember("key", _ObjectIdentifier)
-
-	_ObjectIdentifierToLinkNameMap_value = _ObjectIdentifierToLinkNameMap.AddMember("value", _LinkName)
-
-	ObjectNotDetachedException_Message = ObjectNotDetachedException.AddMember("Message", _ExceptionMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ExceptionMessage)
-
-	RetryableConflictException_Message = RetryableConflictException.AddMember("Message", _ExceptionMessage)
-
-	SchemaAlreadyExistsException_Message = SchemaAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	SchemaAlreadyPublishedException_Message = SchemaAlreadyPublishedException.AddMember("Message", _ExceptionMessage)
-
-	StillContainsLinksException_Message = StillContainsLinksException.AddMember("Message", _ExceptionMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TypedLinkAttributeDefinition_Name = TypedLinkAttributeDefinition.AddMember("Name", _AttributeName)
-
-	TypedLinkAttributeDefinition_Type = TypedLinkAttributeDefinition.AddMember("Type", FacetAttributeType)
-
-	TypedLinkAttributeDefinition_DefaultValue = TypedLinkAttributeDefinition.AddMember("DefaultValue", TypedAttributeValue)
-
-	TypedLinkAttributeDefinition_IsImmutable = TypedLinkAttributeDefinition.AddMember("IsImmutable", _Bool)
-
-	TypedLinkAttributeDefinition_Rules = TypedLinkAttributeDefinition.AddMember("Rules", _RuleMap)
-
-	TypedLinkAttributeDefinition_RequiredBehavior = TypedLinkAttributeDefinition.AddMember("RequiredBehavior", RequiredAttributeBehavior)
-
-	_TypedLinkAttributeDefinitionList_member = _TypedLinkAttributeDefinitionList.AddMember("member", TypedLinkAttributeDefinition)
-
-	TypedLinkFacet_Name = TypedLinkFacet.AddMember("Name", _TypedLinkName)
-
-	TypedLinkFacet_Attributes = TypedLinkFacet.AddMember("Attributes", _TypedLinkAttributeDefinitionList)
-
-	TypedLinkFacet_IdentityAttributeOrder = TypedLinkFacet.AddMember("IdentityAttributeOrder", _AttributeNameList)
-
-	TypedLinkFacetAttributeUpdate_Attribute = TypedLinkFacetAttributeUpdate.AddMember("Attribute", TypedLinkAttributeDefinition)
-
-	TypedLinkFacetAttributeUpdate_Action = TypedLinkFacetAttributeUpdate.AddMember("Action", UpdateActionType)
-
-	_TypedLinkFacetAttributeUpdateList_member = _TypedLinkFacetAttributeUpdateList.AddMember("member", TypedLinkFacetAttributeUpdate)
-
-	_TypedLinkNameList_member = _TypedLinkNameList.AddMember("member", _TypedLinkName)
-
-	UnsupportedIndexTypeException_Message = UnsupportedIndexTypeException.AddMember("Message", _ExceptionMessage)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ExceptionMessage)
-
-	AddFacetToObjectRequest_DirectoryArn = AddFacetToObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	AddFacetToObjectRequest_SchemaFacet = AddFacetToObjectRequest.AddMember("SchemaFacet", SchemaFacet)
-
-	AddFacetToObjectRequest_ObjectAttributeList = AddFacetToObjectRequest.AddMember("ObjectAttributeList", _AttributeKeyAndValueList)
-
-	AddFacetToObjectRequest_ObjectReference = AddFacetToObjectRequest.AddMember("ObjectReference", ObjectReference)
-
-	ApplySchemaRequest_PublishedSchemaArn = ApplySchemaRequest.AddMember("PublishedSchemaArn", _Arn)
-
-	ApplySchemaRequest_DirectoryArn = ApplySchemaRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ApplySchemaResponse_AppliedSchemaArn = ApplySchemaResponse.AddMember("AppliedSchemaArn", _Arn)
-
-	ApplySchemaResponse_DirectoryArn = ApplySchemaResponse.AddMember("DirectoryArn", _Arn)
-
-	AttachObjectRequest_DirectoryArn = AttachObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	AttachObjectRequest_ParentReference = AttachObjectRequest.AddMember("ParentReference", ObjectReference)
-
-	AttachObjectRequest_ChildReference = AttachObjectRequest.AddMember("ChildReference", ObjectReference)
-
-	AttachObjectRequest_LinkName = AttachObjectRequest.AddMember("LinkName", _LinkName)
-
-	AttachObjectResponse_AttachedObjectIdentifier = AttachObjectResponse.AddMember("AttachedObjectIdentifier", _ObjectIdentifier)
-
-	AttachPolicyRequest_DirectoryArn = AttachPolicyRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	AttachPolicyRequest_PolicyReference = AttachPolicyRequest.AddMember("PolicyReference", ObjectReference)
-
-	AttachPolicyRequest_ObjectReference = AttachPolicyRequest.AddMember("ObjectReference", ObjectReference)
-
-	AttachToIndexRequest_DirectoryArn = AttachToIndexRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	AttachToIndexRequest_IndexReference = AttachToIndexRequest.AddMember("IndexReference", ObjectReference)
-
-	AttachToIndexRequest_TargetReference = AttachToIndexRequest.AddMember("TargetReference", ObjectReference)
-
-	AttachToIndexResponse_AttachedObjectIdentifier = AttachToIndexResponse.AddMember("AttachedObjectIdentifier", _ObjectIdentifier)
-
-	AttachTypedLinkRequest_DirectoryArn = AttachTypedLinkRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	AttachTypedLinkRequest_SourceObjectReference = AttachTypedLinkRequest.AddMember("SourceObjectReference", ObjectReference)
-
-	AttachTypedLinkRequest_TargetObjectReference = AttachTypedLinkRequest.AddMember("TargetObjectReference", ObjectReference)
-
-	AttachTypedLinkRequest_TypedLinkFacet = AttachTypedLinkRequest.AddMember("TypedLinkFacet", TypedLinkSchemaAndFacetName)
-
-	AttachTypedLinkRequest_Attributes = AttachTypedLinkRequest.AddMember("Attributes", _AttributeNameAndValueList)
-
-	AttachTypedLinkResponse_TypedLinkSpecifier = AttachTypedLinkResponse.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	BatchReadRequest_DirectoryArn = BatchReadRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	BatchReadRequest_Operations = BatchReadRequest.AddMember("Operations", _BatchReadOperationList)
-
-	BatchReadRequest_ConsistencyLevel = BatchReadRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	BatchReadResponse_Responses = BatchReadResponse.AddMember("Responses", _BatchReadOperationResponseList)
-
-	BatchWriteRequest_DirectoryArn = BatchWriteRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	BatchWriteRequest_Operations = BatchWriteRequest.AddMember("Operations", _BatchWriteOperationList)
-
-	BatchWriteResponse_Responses = BatchWriteResponse.AddMember("Responses", _BatchWriteOperationResponseList)
-
-	CreateDirectoryRequest_Name = CreateDirectoryRequest.AddMember("Name", _DirectoryName)
-
-	CreateDirectoryRequest_SchemaArn = CreateDirectoryRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	CreateDirectoryResponse_DirectoryArn = CreateDirectoryResponse.AddMember("DirectoryArn", _DirectoryArn)
-
-	CreateDirectoryResponse_Name = CreateDirectoryResponse.AddMember("Name", _DirectoryName)
-
-	CreateDirectoryResponse_ObjectIdentifier = CreateDirectoryResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	CreateDirectoryResponse_AppliedSchemaArn = CreateDirectoryResponse.AddMember("AppliedSchemaArn", _Arn)
-
-	CreateFacetRequest_SchemaArn = CreateFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	CreateFacetRequest_Name = CreateFacetRequest.AddMember("Name", _FacetName)
-
-	CreateFacetRequest_Attributes = CreateFacetRequest.AddMember("Attributes", _FacetAttributeList)
-
-	CreateFacetRequest_ObjectType = CreateFacetRequest.AddMember("ObjectType", ObjectType)
-
-	CreateFacetRequest_FacetStyle = CreateFacetRequest.AddMember("FacetStyle", FacetStyle)
-
-	CreateIndexRequest_DirectoryArn = CreateIndexRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	CreateIndexRequest_OrderedIndexedAttributeList = CreateIndexRequest.AddMember("OrderedIndexedAttributeList", _AttributeKeyList)
-
-	CreateIndexRequest_IsUnique = CreateIndexRequest.AddMember("IsUnique", _Bool)
-
-	CreateIndexRequest_ParentReference = CreateIndexRequest.AddMember("ParentReference", ObjectReference)
-
-	CreateIndexRequest_LinkName = CreateIndexRequest.AddMember("LinkName", _LinkName)
-
-	CreateIndexResponse_ObjectIdentifier = CreateIndexResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	CreateObjectRequest_DirectoryArn = CreateObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	CreateObjectRequest_SchemaFacets = CreateObjectRequest.AddMember("SchemaFacets", _SchemaFacetList)
-
-	CreateObjectRequest_ObjectAttributeList = CreateObjectRequest.AddMember("ObjectAttributeList", _AttributeKeyAndValueList)
-
-	CreateObjectRequest_ParentReference = CreateObjectRequest.AddMember("ParentReference", ObjectReference)
-
-	CreateObjectRequest_LinkName = CreateObjectRequest.AddMember("LinkName", _LinkName)
-
-	CreateObjectResponse_ObjectIdentifier = CreateObjectResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	CreateSchemaRequest_Name = CreateSchemaRequest.AddMember("Name", _SchemaName)
-
-	CreateSchemaResponse_SchemaArn = CreateSchemaResponse.AddMember("SchemaArn", _Arn)
-
-	CreateTypedLinkFacetRequest_SchemaArn = CreateTypedLinkFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	CreateTypedLinkFacetRequest_Facet = CreateTypedLinkFacetRequest.AddMember("Facet", TypedLinkFacet)
-
-	DeleteDirectoryRequest_DirectoryArn = DeleteDirectoryRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DeleteDirectoryResponse_DirectoryArn = DeleteDirectoryResponse.AddMember("DirectoryArn", _Arn)
-
-	DeleteFacetRequest_SchemaArn = DeleteFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DeleteFacetRequest_Name = DeleteFacetRequest.AddMember("Name", _FacetName)
-
-	DeleteObjectRequest_DirectoryArn = DeleteObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DeleteObjectRequest_ObjectReference = DeleteObjectRequest.AddMember("ObjectReference", ObjectReference)
-
-	DeleteSchemaRequest_SchemaArn = DeleteSchemaRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DeleteSchemaResponse_SchemaArn = DeleteSchemaResponse.AddMember("SchemaArn", _Arn)
-
-	DeleteTypedLinkFacetRequest_SchemaArn = DeleteTypedLinkFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DeleteTypedLinkFacetRequest_Name = DeleteTypedLinkFacetRequest.AddMember("Name", _TypedLinkName)
-
-	DetachFromIndexRequest_DirectoryArn = DetachFromIndexRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DetachFromIndexRequest_IndexReference = DetachFromIndexRequest.AddMember("IndexReference", ObjectReference)
-
-	DetachFromIndexRequest_TargetReference = DetachFromIndexRequest.AddMember("TargetReference", ObjectReference)
-
-	DetachFromIndexResponse_DetachedObjectIdentifier = DetachFromIndexResponse.AddMember("DetachedObjectIdentifier", _ObjectIdentifier)
-
-	DetachObjectRequest_DirectoryArn = DetachObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DetachObjectRequest_ParentReference = DetachObjectRequest.AddMember("ParentReference", ObjectReference)
-
-	DetachObjectRequest_LinkName = DetachObjectRequest.AddMember("LinkName", _LinkName)
-
-	DetachObjectResponse_DetachedObjectIdentifier = DetachObjectResponse.AddMember("DetachedObjectIdentifier", _ObjectIdentifier)
-
-	DetachPolicyRequest_DirectoryArn = DetachPolicyRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DetachPolicyRequest_PolicyReference = DetachPolicyRequest.AddMember("PolicyReference", ObjectReference)
-
-	DetachPolicyRequest_ObjectReference = DetachPolicyRequest.AddMember("ObjectReference", ObjectReference)
-
-	DetachTypedLinkRequest_DirectoryArn = DetachTypedLinkRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DetachTypedLinkRequest_TypedLinkSpecifier = DetachTypedLinkRequest.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	DisableDirectoryRequest_DirectoryArn = DisableDirectoryRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	DisableDirectoryResponse_DirectoryArn = DisableDirectoryResponse.AddMember("DirectoryArn", _Arn)
-
-	EnableDirectoryRequest_DirectoryArn = EnableDirectoryRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	EnableDirectoryResponse_DirectoryArn = EnableDirectoryResponse.AddMember("DirectoryArn", _Arn)
-
-	GetAppliedSchemaVersionRequest_SchemaArn = GetAppliedSchemaVersionRequest.AddMember("SchemaArn", _Arn)
-
-	GetAppliedSchemaVersionResponse_AppliedSchemaArn = GetAppliedSchemaVersionResponse.AddMember("AppliedSchemaArn", _Arn)
-
-	GetDirectoryRequest_DirectoryArn = GetDirectoryRequest.AddMember("DirectoryArn", _DirectoryArn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetDirectoryResponse_Directory = GetDirectoryResponse.AddMember("Directory", Directory)
-
-	GetFacetRequest_SchemaArn = GetFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetFacetRequest_Name = GetFacetRequest.AddMember("Name", _FacetName)
-
-	GetFacetResponse_Facet = GetFacetResponse.AddMember("Facet", Facet)
-
-	GetLinkAttributesRequest_DirectoryArn = GetLinkAttributesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetLinkAttributesRequest_TypedLinkSpecifier = GetLinkAttributesRequest.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	GetLinkAttributesRequest_AttributeNames = GetLinkAttributesRequest.AddMember("AttributeNames", _AttributeNameList)
-
-	GetLinkAttributesRequest_ConsistencyLevel = GetLinkAttributesRequest.AddMember("ConsistencyLevel", ConsistencyLevel)
-
-	GetLinkAttributesResponse_Attributes = GetLinkAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	GetObjectAttributesRequest_DirectoryArn = GetObjectAttributesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetObjectAttributesRequest_ObjectReference = GetObjectAttributesRequest.AddMember("ObjectReference", ObjectReference)
-
-	GetObjectAttributesRequest_ConsistencyLevel = GetObjectAttributesRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	GetObjectAttributesRequest_SchemaFacet = GetObjectAttributesRequest.AddMember("SchemaFacet", SchemaFacet)
-
-	GetObjectAttributesRequest_AttributeNames = GetObjectAttributesRequest.AddMember("AttributeNames", _AttributeNameList)
-
-	GetObjectAttributesResponse_Attributes = GetObjectAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	GetObjectInformationRequest_DirectoryArn = GetObjectInformationRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetObjectInformationRequest_ObjectReference = GetObjectInformationRequest.AddMember("ObjectReference", ObjectReference)
-
-	GetObjectInformationRequest_ConsistencyLevel = GetObjectInformationRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	GetObjectInformationResponse_SchemaFacets = GetObjectInformationResponse.AddMember("SchemaFacets", _SchemaFacetList)
-
-	GetObjectInformationResponse_ObjectIdentifier = GetObjectInformationResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	GetSchemaAsJsonRequest_SchemaArn = GetSchemaAsJsonRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetSchemaAsJsonResponse_Name = GetSchemaAsJsonResponse.AddMember("Name", _SchemaName)
-
-	GetSchemaAsJsonResponse_Document = GetSchemaAsJsonResponse.AddMember("Document", _SchemaJsonDocument)
-
-	GetTypedLinkFacetInformationRequest_SchemaArn = GetTypedLinkFacetInformationRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	GetTypedLinkFacetInformationRequest_Name = GetTypedLinkFacetInformationRequest.AddMember("Name", _TypedLinkName)
-
-	GetTypedLinkFacetInformationResponse_IdentityAttributeOrder = GetTypedLinkFacetInformationResponse.AddMember("IdentityAttributeOrder", _AttributeNameList)
-
-	ListAppliedSchemaArnsRequest_DirectoryArn = ListAppliedSchemaArnsRequest.AddMember("DirectoryArn", _Arn)
-
-	ListAppliedSchemaArnsRequest_SchemaArn = ListAppliedSchemaArnsRequest.AddMember("SchemaArn", _Arn)
-
-	ListAppliedSchemaArnsRequest_NextToken = ListAppliedSchemaArnsRequest.AddMember("NextToken", _NextToken)
-
-	ListAppliedSchemaArnsRequest_MaxResults = ListAppliedSchemaArnsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListAppliedSchemaArnsResponse_SchemaArns = ListAppliedSchemaArnsResponse.AddMember("SchemaArns", _Arns)
-
-	ListAppliedSchemaArnsResponse_NextToken = ListAppliedSchemaArnsResponse.AddMember("NextToken", _NextToken)
-
-	ListAttachedIndicesRequest_DirectoryArn = ListAttachedIndicesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListAttachedIndicesRequest_TargetReference = ListAttachedIndicesRequest.AddMember("TargetReference", ObjectReference)
-
-	ListAttachedIndicesRequest_NextToken = ListAttachedIndicesRequest.AddMember("NextToken", _NextToken)
-
-	ListAttachedIndicesRequest_MaxResults = ListAttachedIndicesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListAttachedIndicesRequest_ConsistencyLevel = ListAttachedIndicesRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListAttachedIndicesResponse_IndexAttachments = ListAttachedIndicesResponse.AddMember("IndexAttachments", _IndexAttachmentList)
-
-	ListAttachedIndicesResponse_NextToken = ListAttachedIndicesResponse.AddMember("NextToken", _NextToken)
-
-	ListDevelopmentSchemaArnsRequest_NextToken = ListDevelopmentSchemaArnsRequest.AddMember("NextToken", _NextToken)
-
-	ListDevelopmentSchemaArnsRequest_MaxResults = ListDevelopmentSchemaArnsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListDevelopmentSchemaArnsResponse_SchemaArns = ListDevelopmentSchemaArnsResponse.AddMember("SchemaArns", _Arns)
-
-	ListDevelopmentSchemaArnsResponse_NextToken = ListDevelopmentSchemaArnsResponse.AddMember("NextToken", _NextToken)
-
-	ListDirectoriesRequest_NextToken = ListDirectoriesRequest.AddMember("NextToken", _NextToken)
-
-	ListDirectoriesRequest_MaxResults = ListDirectoriesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListDirectoriesRequest_state = ListDirectoriesRequest.AddMember("state", DirectoryState)
-
-	ListDirectoriesResponse_Directories = ListDirectoriesResponse.AddMember("Directories", _DirectoryList)
-
-	ListDirectoriesResponse_NextToken = ListDirectoriesResponse.AddMember("NextToken", _NextToken)
-
-	ListFacetAttributesRequest_SchemaArn = ListFacetAttributesRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListFacetAttributesRequest_Name = ListFacetAttributesRequest.AddMember("Name", _FacetName)
-
-	ListFacetAttributesRequest_NextToken = ListFacetAttributesRequest.AddMember("NextToken", _NextToken)
-
-	ListFacetAttributesRequest_MaxResults = ListFacetAttributesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListFacetAttributesResponse_Attributes = ListFacetAttributesResponse.AddMember("Attributes", _FacetAttributeList)
-
-	ListFacetAttributesResponse_NextToken = ListFacetAttributesResponse.AddMember("NextToken", _NextToken)
-
-	ListFacetNamesRequest_SchemaArn = ListFacetNamesRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListFacetNamesRequest_NextToken = ListFacetNamesRequest.AddMember("NextToken", _NextToken)
-
-	ListFacetNamesRequest_MaxResults = ListFacetNamesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListFacetNamesResponse_FacetNames = ListFacetNamesResponse.AddMember("FacetNames", _FacetNameList)
-
-	ListFacetNamesResponse_NextToken = ListFacetNamesResponse.AddMember("NextToken", _NextToken)
-
-	ListIncomingTypedLinksRequest_DirectoryArn = ListIncomingTypedLinksRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListIncomingTypedLinksRequest_ObjectReference = ListIncomingTypedLinksRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListIncomingTypedLinksRequest_FilterAttributeRanges = ListIncomingTypedLinksRequest.AddMember("FilterAttributeRanges", _TypedLinkAttributeRangeList)
-
-	ListIncomingTypedLinksRequest_FilterTypedLink = ListIncomingTypedLinksRequest.AddMember("FilterTypedLink", TypedLinkSchemaAndFacetName)
-
-	ListIncomingTypedLinksRequest_NextToken = ListIncomingTypedLinksRequest.AddMember("NextToken", _NextToken)
-
-	ListIncomingTypedLinksRequest_MaxResults = ListIncomingTypedLinksRequest.AddMember("MaxResults", _NumberResults)
-
-	ListIncomingTypedLinksRequest_ConsistencyLevel = ListIncomingTypedLinksRequest.AddMember("ConsistencyLevel", ConsistencyLevel)
-
-	ListIncomingTypedLinksResponse_LinkSpecifiers = ListIncomingTypedLinksResponse.AddMember("LinkSpecifiers", _TypedLinkSpecifierList)
-
-	ListIncomingTypedLinksResponse_NextToken = ListIncomingTypedLinksResponse.AddMember("NextToken", _NextToken)
-
-	ListIndexRequest_DirectoryArn = ListIndexRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListIndexRequest_RangesOnIndexedValues = ListIndexRequest.AddMember("RangesOnIndexedValues", _ObjectAttributeRangeList)
-
-	ListIndexRequest_IndexReference = ListIndexRequest.AddMember("IndexReference", ObjectReference)
-
-	ListIndexRequest_MaxResults = ListIndexRequest.AddMember("MaxResults", _NumberResults)
-
-	ListIndexRequest_NextToken = ListIndexRequest.AddMember("NextToken", _NextToken)
-
-	ListIndexRequest_ConsistencyLevel = ListIndexRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListIndexResponse_IndexAttachments = ListIndexResponse.AddMember("IndexAttachments", _IndexAttachmentList)
-
-	ListIndexResponse_NextToken = ListIndexResponse.AddMember("NextToken", _NextToken)
-
-	ListManagedSchemaArnsRequest_SchemaArn = ListManagedSchemaArnsRequest.AddMember("SchemaArn", _Arn)
-
-	ListManagedSchemaArnsRequest_NextToken = ListManagedSchemaArnsRequest.AddMember("NextToken", _NextToken)
-
-	ListManagedSchemaArnsRequest_MaxResults = ListManagedSchemaArnsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListManagedSchemaArnsResponse_SchemaArns = ListManagedSchemaArnsResponse.AddMember("SchemaArns", _Arns)
-
-	ListManagedSchemaArnsResponse_NextToken = ListManagedSchemaArnsResponse.AddMember("NextToken", _NextToken)
-
-	ListObjectAttributesRequest_DirectoryArn = ListObjectAttributesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListObjectAttributesRequest_ObjectReference = ListObjectAttributesRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListObjectAttributesRequest_NextToken = ListObjectAttributesRequest.AddMember("NextToken", _NextToken)
-
-	ListObjectAttributesRequest_MaxResults = ListObjectAttributesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListObjectAttributesRequest_ConsistencyLevel = ListObjectAttributesRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListObjectAttributesRequest_FacetFilter = ListObjectAttributesRequest.AddMember("FacetFilter", SchemaFacet)
-
-	ListObjectAttributesResponse_Attributes = ListObjectAttributesResponse.AddMember("Attributes", _AttributeKeyAndValueList)
-
-	ListObjectAttributesResponse_NextToken = ListObjectAttributesResponse.AddMember("NextToken", _NextToken)
-
-	ListObjectChildrenRequest_DirectoryArn = ListObjectChildrenRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListObjectChildrenRequest_ObjectReference = ListObjectChildrenRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListObjectChildrenRequest_NextToken = ListObjectChildrenRequest.AddMember("NextToken", _NextToken)
-
-	ListObjectChildrenRequest_MaxResults = ListObjectChildrenRequest.AddMember("MaxResults", _NumberResults)
-
-	ListObjectChildrenRequest_ConsistencyLevel = ListObjectChildrenRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListObjectChildrenResponse_Children = ListObjectChildrenResponse.AddMember("Children", _LinkNameToObjectIdentifierMap)
-
-	ListObjectChildrenResponse_NextToken = ListObjectChildrenResponse.AddMember("NextToken", _NextToken)
-
-	ListObjectParentPathsRequest_DirectoryArn = ListObjectParentPathsRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListObjectParentPathsRequest_ObjectReference = ListObjectParentPathsRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListObjectParentPathsRequest_NextToken = ListObjectParentPathsRequest.AddMember("NextToken", _NextToken)
-
-	ListObjectParentPathsRequest_MaxResults = ListObjectParentPathsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListObjectParentPathsResponse_PathToObjectIdentifiersList = ListObjectParentPathsResponse.AddMember("PathToObjectIdentifiersList", _PathToObjectIdentifiersList)
-
-	ListObjectParentPathsResponse_NextToken = ListObjectParentPathsResponse.AddMember("NextToken", _NextToken)
-
-	ListObjectParentsRequest_DirectoryArn = ListObjectParentsRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListObjectParentsRequest_ObjectReference = ListObjectParentsRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListObjectParentsRequest_NextToken = ListObjectParentsRequest.AddMember("NextToken", _NextToken)
-
-	ListObjectParentsRequest_MaxResults = ListObjectParentsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListObjectParentsRequest_ConsistencyLevel = ListObjectParentsRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListObjectParentsRequest_IncludeAllLinksToEachParent = ListObjectParentsRequest.AddMember("IncludeAllLinksToEachParent", _Bool)
-
-	ListObjectParentsResponse_Parents = ListObjectParentsResponse.AddMember("Parents", _ObjectIdentifierToLinkNameMap)
-
-	ListObjectParentsResponse_NextToken = ListObjectParentsResponse.AddMember("NextToken", _NextToken)
-
-	ListObjectParentsResponse_ParentLinks = ListObjectParentsResponse.AddMember("ParentLinks", _ObjectIdentifierAndLinkNameList)
-
-	ListObjectPoliciesRequest_DirectoryArn = ListObjectPoliciesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListObjectPoliciesRequest_ObjectReference = ListObjectPoliciesRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListObjectPoliciesRequest_NextToken = ListObjectPoliciesRequest.AddMember("NextToken", _NextToken)
-
-	ListObjectPoliciesRequest_MaxResults = ListObjectPoliciesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListObjectPoliciesRequest_ConsistencyLevel = ListObjectPoliciesRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListObjectPoliciesResponse_AttachedPolicyIds = ListObjectPoliciesResponse.AddMember("AttachedPolicyIds", _ObjectIdentifierList)
-
-	ListObjectPoliciesResponse_NextToken = ListObjectPoliciesResponse.AddMember("NextToken", _NextToken)
-
-	ListOutgoingTypedLinksRequest_DirectoryArn = ListOutgoingTypedLinksRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListOutgoingTypedLinksRequest_ObjectReference = ListOutgoingTypedLinksRequest.AddMember("ObjectReference", ObjectReference)
-
-	ListOutgoingTypedLinksRequest_FilterAttributeRanges = ListOutgoingTypedLinksRequest.AddMember("FilterAttributeRanges", _TypedLinkAttributeRangeList)
-
-	ListOutgoingTypedLinksRequest_FilterTypedLink = ListOutgoingTypedLinksRequest.AddMember("FilterTypedLink", TypedLinkSchemaAndFacetName)
-
-	ListOutgoingTypedLinksRequest_NextToken = ListOutgoingTypedLinksRequest.AddMember("NextToken", _NextToken)
-
-	ListOutgoingTypedLinksRequest_MaxResults = ListOutgoingTypedLinksRequest.AddMember("MaxResults", _NumberResults)
-
-	ListOutgoingTypedLinksRequest_ConsistencyLevel = ListOutgoingTypedLinksRequest.AddMember("ConsistencyLevel", ConsistencyLevel)
-
-	ListOutgoingTypedLinksResponse_TypedLinkSpecifiers = ListOutgoingTypedLinksResponse.AddMember("TypedLinkSpecifiers", _TypedLinkSpecifierList)
-
-	ListOutgoingTypedLinksResponse_NextToken = ListOutgoingTypedLinksResponse.AddMember("NextToken", _NextToken)
-
-	ListPolicyAttachmentsRequest_DirectoryArn = ListPolicyAttachmentsRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListPolicyAttachmentsRequest_PolicyReference = ListPolicyAttachmentsRequest.AddMember("PolicyReference", ObjectReference)
-
-	ListPolicyAttachmentsRequest_NextToken = ListPolicyAttachmentsRequest.AddMember("NextToken", _NextToken)
-
-	ListPolicyAttachmentsRequest_MaxResults = ListPolicyAttachmentsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListPolicyAttachmentsRequest_ConsistencyLevel = ListPolicyAttachmentsRequest.AddMember("ConsistencyLevel", ConsistencyLevel, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"})
-
-	ListPolicyAttachmentsResponse_ObjectIdentifiers = ListPolicyAttachmentsResponse.AddMember("ObjectIdentifiers", _ObjectIdentifierList)
-
-	ListPolicyAttachmentsResponse_NextToken = ListPolicyAttachmentsResponse.AddMember("NextToken", _NextToken)
-
-	ListPublishedSchemaArnsRequest_SchemaArn = ListPublishedSchemaArnsRequest.AddMember("SchemaArn", _Arn)
-
-	ListPublishedSchemaArnsRequest_NextToken = ListPublishedSchemaArnsRequest.AddMember("NextToken", _NextToken)
-
-	ListPublishedSchemaArnsRequest_MaxResults = ListPublishedSchemaArnsRequest.AddMember("MaxResults", _NumberResults)
-
-	ListPublishedSchemaArnsResponse_SchemaArns = ListPublishedSchemaArnsResponse.AddMember("SchemaArns", _Arns)
-
-	ListPublishedSchemaArnsResponse_NextToken = ListPublishedSchemaArnsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_MaxResults = ListTagsForResourceRequest.AddMember("MaxResults", _TagsNumberResults)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTagsForResourceResponse_NextToken = ListTagsForResourceResponse.AddMember("NextToken", _NextToken)
-
-	ListTypedLinkFacetAttributesRequest_SchemaArn = ListTypedLinkFacetAttributesRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListTypedLinkFacetAttributesRequest_Name = ListTypedLinkFacetAttributesRequest.AddMember("Name", _TypedLinkName)
-
-	ListTypedLinkFacetAttributesRequest_NextToken = ListTypedLinkFacetAttributesRequest.AddMember("NextToken", _NextToken)
-
-	ListTypedLinkFacetAttributesRequest_MaxResults = ListTypedLinkFacetAttributesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListTypedLinkFacetAttributesResponse_Attributes = ListTypedLinkFacetAttributesResponse.AddMember("Attributes", _TypedLinkAttributeDefinitionList)
-
-	ListTypedLinkFacetAttributesResponse_NextToken = ListTypedLinkFacetAttributesResponse.AddMember("NextToken", _NextToken)
-
-	ListTypedLinkFacetNamesRequest_SchemaArn = ListTypedLinkFacetNamesRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	ListTypedLinkFacetNamesRequest_NextToken = ListTypedLinkFacetNamesRequest.AddMember("NextToken", _NextToken)
-
-	ListTypedLinkFacetNamesRequest_MaxResults = ListTypedLinkFacetNamesRequest.AddMember("MaxResults", _NumberResults)
-
-	ListTypedLinkFacetNamesResponse_FacetNames = ListTypedLinkFacetNamesResponse.AddMember("FacetNames", _TypedLinkNameList)
-
-	ListTypedLinkFacetNamesResponse_NextToken = ListTypedLinkFacetNamesResponse.AddMember("NextToken", _NextToken)
-
-	LookupPolicyRequest_DirectoryArn = LookupPolicyRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	LookupPolicyRequest_ObjectReference = LookupPolicyRequest.AddMember("ObjectReference", ObjectReference)
-
-	LookupPolicyRequest_NextToken = LookupPolicyRequest.AddMember("NextToken", _NextToken)
-
-	LookupPolicyRequest_MaxResults = LookupPolicyRequest.AddMember("MaxResults", _NumberResults)
-
-	LookupPolicyResponse_PolicyToPathList = LookupPolicyResponse.AddMember("PolicyToPathList", _PolicyToPathList)
-
-	LookupPolicyResponse_NextToken = LookupPolicyResponse.AddMember("NextToken", _NextToken)
-
-	PublishSchemaRequest_DevelopmentSchemaArn = PublishSchemaRequest.AddMember("DevelopmentSchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	PublishSchemaRequest_Version = PublishSchemaRequest.AddMember("Version", _Version)
-
-	PublishSchemaRequest_MinorVersion = PublishSchemaRequest.AddMember("MinorVersion", _Version)
-
-	PublishSchemaRequest_Name = PublishSchemaRequest.AddMember("Name", _SchemaName)
-
-	PublishSchemaResponse_PublishedSchemaArn = PublishSchemaResponse.AddMember("PublishedSchemaArn", _Arn)
-
-	PutSchemaFromJsonRequest_SchemaArn = PutSchemaFromJsonRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	PutSchemaFromJsonRequest_Document = PutSchemaFromJsonRequest.AddMember("Document", _SchemaJsonDocument)
-
-	PutSchemaFromJsonResponse_Arn = PutSchemaFromJsonResponse.AddMember("Arn", _Arn)
-
-	RemoveFacetFromObjectRequest_DirectoryArn = RemoveFacetFromObjectRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	RemoveFacetFromObjectRequest_SchemaFacet = RemoveFacetFromObjectRequest.AddMember("SchemaFacet", SchemaFacet)
-
-	RemoveFacetFromObjectRequest_ObjectReference = RemoveFacetFromObjectRequest.AddMember("ObjectReference", ObjectReference)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateFacetRequest_SchemaArn = UpdateFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	UpdateFacetRequest_Name = UpdateFacetRequest.AddMember("Name", _FacetName)
-
-	UpdateFacetRequest_AttributeUpdates = UpdateFacetRequest.AddMember("AttributeUpdates", _FacetAttributeUpdateList)
-
-	UpdateFacetRequest_ObjectType = UpdateFacetRequest.AddMember("ObjectType", ObjectType)
-
-	UpdateLinkAttributesRequest_DirectoryArn = UpdateLinkAttributesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	UpdateLinkAttributesRequest_TypedLinkSpecifier = UpdateLinkAttributesRequest.AddMember("TypedLinkSpecifier", TypedLinkSpecifier)
-
-	UpdateLinkAttributesRequest_AttributeUpdates = UpdateLinkAttributesRequest.AddMember("AttributeUpdates", _LinkAttributeUpdateList)
-
-	UpdateObjectAttributesRequest_DirectoryArn = UpdateObjectAttributesRequest.AddMember("DirectoryArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	UpdateObjectAttributesRequest_ObjectReference = UpdateObjectAttributesRequest.AddMember("ObjectReference", ObjectReference)
-
-	UpdateObjectAttributesRequest_AttributeUpdates = UpdateObjectAttributesRequest.AddMember("AttributeUpdates", _ObjectAttributeUpdateList)
-
-	UpdateObjectAttributesResponse_ObjectIdentifier = UpdateObjectAttributesResponse.AddMember("ObjectIdentifier", _ObjectIdentifier)
-
-	UpdateSchemaRequest_SchemaArn = UpdateSchemaRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	UpdateSchemaRequest_Name = UpdateSchemaRequest.AddMember("Name", _SchemaName)
-
-	UpdateSchemaResponse_SchemaArn = UpdateSchemaResponse.AddMember("SchemaArn", _Arn)
-
-	UpdateTypedLinkFacetRequest_SchemaArn = UpdateTypedLinkFacetRequest.AddMember("SchemaArn", _Arn, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"})
-
-	UpdateTypedLinkFacetRequest_Name = UpdateTypedLinkFacetRequest.AddMember("Name", _TypedLinkName)
-
-	UpdateTypedLinkFacetRequest_AttributeUpdates = UpdateTypedLinkFacetRequest.AddMember("AttributeUpdates", _TypedLinkFacetAttributeUpdateList)
-
-	UpdateTypedLinkFacetRequest_IdentityAttributeOrder = UpdateTypedLinkFacetRequest.AddMember("IdentityAttributeOrder", _AttributeNameList)
-
-	UpgradeAppliedSchemaRequest_PublishedSchemaArn = UpgradeAppliedSchemaRequest.AddMember("PublishedSchemaArn", _Arn)
-
-	UpgradeAppliedSchemaRequest_DirectoryArn = UpgradeAppliedSchemaRequest.AddMember("DirectoryArn", _Arn)
-
-	UpgradeAppliedSchemaRequest_DryRun = UpgradeAppliedSchemaRequest.AddMember("DryRun", _Bool)
-
-	UpgradeAppliedSchemaResponse_UpgradedSchemaArn = UpgradeAppliedSchemaResponse.AddMember("UpgradedSchemaArn", _Arn)
-
-	UpgradeAppliedSchemaResponse_DirectoryArn = UpgradeAppliedSchemaResponse.AddMember("DirectoryArn", _Arn)
-
-	UpgradePublishedSchemaRequest_DevelopmentSchemaArn = UpgradePublishedSchemaRequest.AddMember("DevelopmentSchemaArn", _Arn)
-
-	UpgradePublishedSchemaRequest_PublishedSchemaArn = UpgradePublishedSchemaRequest.AddMember("PublishedSchemaArn", _Arn)
-
-	UpgradePublishedSchemaRequest_MinorVersion = UpgradePublishedSchemaRequest.AddMember("MinorVersion", _Version)
-
-	UpgradePublishedSchemaRequest_DryRun = UpgradePublishedSchemaRequest.AddMember("DryRun", _Bool)
-
-	UpgradePublishedSchemaResponse_UpgradedSchemaArn = UpgradePublishedSchemaResponse.AddMember("UpgradedSchemaArn", _Arn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t67 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-data-partition"}}, DirectMask: 0x80}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-consistency-level"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_Arns = smithy.SchemaMembers{List: []*smithy.Schema{&s_Arns_member}}
+var mAttributeKey = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeKey_SchemaArn, &sAttributeKey_FacetName, &sAttributeKey_Name}}
+var mAttributeKeyAndValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeKeyAndValue_Key, &sAttributeKeyAndValue_Value}}
+var m_AttributeKeyAndValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeKeyAndValueList_member}}
+var m_AttributeKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeKeyList_member}}
+var mAttributeNameAndValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeNameAndValue_AttributeName, &sAttributeNameAndValue_Value}}
+var m_AttributeNameAndValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeNameAndValueList_member}}
+var m_AttributeNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeNameList_member}}
+var mBatchAddFacetToObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAddFacetToObject_SchemaFacet, &sBatchAddFacetToObject_ObjectAttributeList, &sBatchAddFacetToObject_ObjectReference}}
+var mBatchAttachObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachObject_ParentReference, &sBatchAttachObject_ChildReference, &sBatchAttachObject_LinkName}}
+var mBatchAttachObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachObjectResponse_attachedObjectIdentifier}}
+var mBatchAttachPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachPolicy_PolicyReference, &sBatchAttachPolicy_ObjectReference}}
+var mBatchAttachToIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachToIndex_IndexReference, &sBatchAttachToIndex_TargetReference}}
+var mBatchAttachToIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachToIndexResponse_AttachedObjectIdentifier}}
+var mBatchAttachTypedLink = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachTypedLink_SourceObjectReference, &sBatchAttachTypedLink_TargetObjectReference, &sBatchAttachTypedLink_TypedLinkFacet, &sBatchAttachTypedLink_Attributes}}
+var mBatchAttachTypedLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAttachTypedLinkResponse_TypedLinkSpecifier}}
+var mBatchCreateIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateIndex_OrderedIndexedAttributeList, &sBatchCreateIndex_IsUnique, &sBatchCreateIndex_ParentReference, &sBatchCreateIndex_LinkName, &sBatchCreateIndex_BatchReferenceName}}
+var mBatchCreateIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateIndexResponse_ObjectIdentifier}}
+var mBatchCreateObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateObject_SchemaFacet, &sBatchCreateObject_ObjectAttributeList, &sBatchCreateObject_ParentReference, &sBatchCreateObject_LinkName, &sBatchCreateObject_BatchReferenceName}}
+var mBatchCreateObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateObjectResponse_ObjectIdentifier}}
+var mBatchDeleteObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteObject_ObjectReference}}
+var mBatchDetachFromIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachFromIndex_IndexReference, &sBatchDetachFromIndex_TargetReference}}
+var mBatchDetachFromIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachFromIndexResponse_DetachedObjectIdentifier}}
+var mBatchDetachObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachObject_ParentReference, &sBatchDetachObject_LinkName, &sBatchDetachObject_BatchReferenceName}}
+var mBatchDetachObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachObjectResponse_detachedObjectIdentifier}}
+var mBatchDetachPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachPolicy_PolicyReference, &sBatchDetachPolicy_ObjectReference}}
+var mBatchDetachTypedLink = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDetachTypedLink_TypedLinkSpecifier}}
+var mBatchGetLinkAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetLinkAttributes_TypedLinkSpecifier, &sBatchGetLinkAttributes_AttributeNames}}
+var mBatchGetLinkAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetLinkAttributesResponse_Attributes}}
+var mBatchGetObjectAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetObjectAttributes_ObjectReference, &sBatchGetObjectAttributes_SchemaFacet, &sBatchGetObjectAttributes_AttributeNames}}
+var mBatchGetObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetObjectAttributesResponse_Attributes}}
+var mBatchGetObjectInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetObjectInformation_ObjectReference}}
+var mBatchGetObjectInformationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetObjectInformationResponse_SchemaFacets, &sBatchGetObjectInformationResponse_ObjectIdentifier}}
+var mBatchListAttachedIndices = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListAttachedIndices_TargetReference, &sBatchListAttachedIndices_NextToken, &sBatchListAttachedIndices_MaxResults}}
+var mBatchListAttachedIndicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListAttachedIndicesResponse_IndexAttachments, &sBatchListAttachedIndicesResponse_NextToken}}
+var mBatchListIncomingTypedLinks = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListIncomingTypedLinks_ObjectReference, &sBatchListIncomingTypedLinks_FilterAttributeRanges, &sBatchListIncomingTypedLinks_FilterTypedLink, &sBatchListIncomingTypedLinks_NextToken, &sBatchListIncomingTypedLinks_MaxResults}}
+var mBatchListIncomingTypedLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListIncomingTypedLinksResponse_LinkSpecifiers, &sBatchListIncomingTypedLinksResponse_NextToken}}
+var mBatchListIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListIndex_RangesOnIndexedValues, &sBatchListIndex_IndexReference, &sBatchListIndex_MaxResults, &sBatchListIndex_NextToken}}
+var mBatchListIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListIndexResponse_IndexAttachments, &sBatchListIndexResponse_NextToken}}
+var mBatchListObjectAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectAttributes_ObjectReference, &sBatchListObjectAttributes_NextToken, &sBatchListObjectAttributes_MaxResults, &sBatchListObjectAttributes_FacetFilter}}
+var mBatchListObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectAttributesResponse_Attributes, &sBatchListObjectAttributesResponse_NextToken}}
+var mBatchListObjectChildren = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectChildren_ObjectReference, &sBatchListObjectChildren_NextToken, &sBatchListObjectChildren_MaxResults}}
+var mBatchListObjectChildrenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectChildrenResponse_Children, &sBatchListObjectChildrenResponse_NextToken}}
+var mBatchListObjectParentPaths = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectParentPaths_ObjectReference, &sBatchListObjectParentPaths_NextToken, &sBatchListObjectParentPaths_MaxResults}}
+var mBatchListObjectParentPathsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectParentPathsResponse_PathToObjectIdentifiersList, &sBatchListObjectParentPathsResponse_NextToken}}
+var mBatchListObjectParents = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectParents_ObjectReference, &sBatchListObjectParents_NextToken, &sBatchListObjectParents_MaxResults}}
+var mBatchListObjectParentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectParentsResponse_ParentLinks, &sBatchListObjectParentsResponse_NextToken}}
+var mBatchListObjectPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectPolicies_ObjectReference, &sBatchListObjectPolicies_NextToken, &sBatchListObjectPolicies_MaxResults}}
+var mBatchListObjectPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListObjectPoliciesResponse_AttachedPolicyIds, &sBatchListObjectPoliciesResponse_NextToken}}
+var mBatchListOutgoingTypedLinks = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListOutgoingTypedLinks_ObjectReference, &sBatchListOutgoingTypedLinks_FilterAttributeRanges, &sBatchListOutgoingTypedLinks_FilterTypedLink, &sBatchListOutgoingTypedLinks_NextToken, &sBatchListOutgoingTypedLinks_MaxResults}}
+var mBatchListOutgoingTypedLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers, &sBatchListOutgoingTypedLinksResponse_NextToken}}
+var mBatchListPolicyAttachments = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListPolicyAttachments_PolicyReference, &sBatchListPolicyAttachments_NextToken, &sBatchListPolicyAttachments_MaxResults}}
+var mBatchListPolicyAttachmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchListPolicyAttachmentsResponse_ObjectIdentifiers, &sBatchListPolicyAttachmentsResponse_NextToken}}
+var mBatchLookupPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLookupPolicy_ObjectReference, &sBatchLookupPolicy_NextToken, &sBatchLookupPolicy_MaxResults}}
+var mBatchLookupPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLookupPolicyResponse_PolicyToPathList, &sBatchLookupPolicyResponse_NextToken}}
+var mBatchReadException = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadException_Type, &sBatchReadException_Message}}
+var mBatchReadExceptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadExceptionType_ValidationException, &sBatchReadExceptionType_InvalidArnException, &sBatchReadExceptionType_ResourceNotFoundException, &sBatchReadExceptionType_InvalidNextTokenException, &sBatchReadExceptionType_AccessDeniedException, &sBatchReadExceptionType_NotNodeException, &sBatchReadExceptionType_FacetValidationException, &sBatchReadExceptionType_CannotListParentOfRootException, &sBatchReadExceptionType_NotIndexException, &sBatchReadExceptionType_NotPolicyException, &sBatchReadExceptionType_DirectoryNotEnabledException, &sBatchReadExceptionType_LimitExceededException, &sBatchReadExceptionType_InternalServiceException}, Hash: &hBatchReadExceptionType}
+var mBatchReadOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadOperation_ListObjectAttributes, &sBatchReadOperation_ListObjectChildren, &sBatchReadOperation_ListAttachedIndices, &sBatchReadOperation_ListObjectParentPaths, &sBatchReadOperation_GetObjectInformation, &sBatchReadOperation_GetObjectAttributes, &sBatchReadOperation_ListObjectParents, &sBatchReadOperation_ListObjectPolicies, &sBatchReadOperation_ListPolicyAttachments, &sBatchReadOperation_LookupPolicy, &sBatchReadOperation_ListIndex, &sBatchReadOperation_ListOutgoingTypedLinks, &sBatchReadOperation_ListIncomingTypedLinks, &sBatchReadOperation_GetLinkAttributes}, Hash: &hBatchReadOperation}
+var m_BatchReadOperationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchReadOperationList_member}}
+var mBatchReadOperationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadOperationResponse_SuccessfulResponse, &sBatchReadOperationResponse_ExceptionResponse}}
+var m_BatchReadOperationResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchReadOperationResponseList_member}}
+var mBatchReadSuccessfulResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadSuccessfulResponse_ListObjectAttributes, &sBatchReadSuccessfulResponse_ListObjectChildren, &sBatchReadSuccessfulResponse_GetObjectInformation, &sBatchReadSuccessfulResponse_GetObjectAttributes, &sBatchReadSuccessfulResponse_ListAttachedIndices, &sBatchReadSuccessfulResponse_ListObjectParentPaths, &sBatchReadSuccessfulResponse_ListObjectPolicies, &sBatchReadSuccessfulResponse_ListPolicyAttachments, &sBatchReadSuccessfulResponse_LookupPolicy, &sBatchReadSuccessfulResponse_ListIndex, &sBatchReadSuccessfulResponse_ListOutgoingTypedLinks, &sBatchReadSuccessfulResponse_ListIncomingTypedLinks, &sBatchReadSuccessfulResponse_GetLinkAttributes, &sBatchReadSuccessfulResponse_ListObjectParents}, Hash: &hBatchReadSuccessfulResponse}
+var mBatchRemoveFacetFromObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRemoveFacetFromObject_SchemaFacet, &sBatchRemoveFacetFromObject_ObjectReference}}
+var mBatchUpdateLinkAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateLinkAttributes_TypedLinkSpecifier, &sBatchUpdateLinkAttributes_AttributeUpdates}}
+var mBatchUpdateObjectAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateObjectAttributes_ObjectReference, &sBatchUpdateObjectAttributes_AttributeUpdates}}
+var mBatchUpdateObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateObjectAttributesResponse_ObjectIdentifier}}
+var mBatchWriteException = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteException_Index, &sBatchWriteException_Type, &sBatchWriteException_Message}}
+var mBatchWriteExceptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteExceptionType_InternalServiceException, &sBatchWriteExceptionType_ValidationException, &sBatchWriteExceptionType_InvalidArnException, &sBatchWriteExceptionType_LinkNameAlreadyInUseException, &sBatchWriteExceptionType_StillContainsLinksException, &sBatchWriteExceptionType_FacetValidationException, &sBatchWriteExceptionType_ObjectNotDetachedException, &sBatchWriteExceptionType_ResourceNotFoundException, &sBatchWriteExceptionType_AccessDeniedException, &sBatchWriteExceptionType_InvalidAttachmentException, &sBatchWriteExceptionType_NotIndexException, &sBatchWriteExceptionType_NotNodeException, &sBatchWriteExceptionType_IndexedAttributeMissingException, &sBatchWriteExceptionType_ObjectAlreadyDetachedException, &sBatchWriteExceptionType_NotPolicyException, &sBatchWriteExceptionType_DirectoryNotEnabledException, &sBatchWriteExceptionType_LimitExceededException, &sBatchWriteExceptionType_UnsupportedIndexTypeException}, Hash: &hBatchWriteExceptionType}
+var mBatchWriteOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteOperation_CreateObject, &sBatchWriteOperation_AttachObject, &sBatchWriteOperation_DetachObject, &sBatchWriteOperation_UpdateObjectAttributes, &sBatchWriteOperation_DeleteObject, &sBatchWriteOperation_AddFacetToObject, &sBatchWriteOperation_RemoveFacetFromObject, &sBatchWriteOperation_AttachPolicy, &sBatchWriteOperation_DetachPolicy, &sBatchWriteOperation_CreateIndex, &sBatchWriteOperation_AttachToIndex, &sBatchWriteOperation_DetachFromIndex, &sBatchWriteOperation_AttachTypedLink, &sBatchWriteOperation_DetachTypedLink, &sBatchWriteOperation_UpdateLinkAttributes}, Hash: &hBatchWriteOperation}
+var m_BatchWriteOperationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchWriteOperationList_member}}
+var mBatchWriteOperationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteOperationResponse_CreateObject, &sBatchWriteOperationResponse_AttachObject, &sBatchWriteOperationResponse_DetachObject, &sBatchWriteOperationResponse_UpdateObjectAttributes, &sBatchWriteOperationResponse_DeleteObject, &sBatchWriteOperationResponse_AddFacetToObject, &sBatchWriteOperationResponse_RemoveFacetFromObject, &sBatchWriteOperationResponse_AttachPolicy, &sBatchWriteOperationResponse_DetachPolicy, &sBatchWriteOperationResponse_CreateIndex, &sBatchWriteOperationResponse_AttachToIndex, &sBatchWriteOperationResponse_DetachFromIndex, &sBatchWriteOperationResponse_AttachTypedLink, &sBatchWriteOperationResponse_DetachTypedLink, &sBatchWriteOperationResponse_UpdateLinkAttributes}, Hash: &hBatchWriteOperationResponse}
+var m_BatchWriteOperationResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchWriteOperationResponseList_member}}
+var mCannotListParentOfRootException = smithy.SchemaMembers{List: []*smithy.Schema{&sCannotListParentOfRootException_Message}}
+var mConsistencyLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sConsistencyLevel_SERIALIZABLE, &sConsistencyLevel_EVENTUAL}}
+var mDirectory = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectory_Name, &sDirectory_DirectoryArn, &sDirectory_State, &sDirectory_CreationDateTime}}
+var mDirectoryAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryAlreadyExistsException_Message}}
+var mDirectoryDeletedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryDeletedException_Message}}
+var m_DirectoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryList_member}}
+var mDirectoryNotDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryNotDisabledException_Message}}
+var mDirectoryNotEnabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryNotEnabledException_Message}}
+var mDirectoryState = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryState_ENABLED, &sDirectoryState_DISABLED, &sDirectoryState_DELETED}}
+var mFacet = smithy.SchemaMembers{List: []*smithy.Schema{&sFacet_Name, &sFacet_ObjectType, &sFacet_FacetStyle}}
+var mFacetAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAlreadyExistsException_Message}}
+var mFacetAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAttribute_Name, &sFacetAttribute_AttributeDefinition, &sFacetAttribute_AttributeReference, &sFacetAttribute_RequiredBehavior}}
+var mFacetAttributeDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAttributeDefinition_Type, &sFacetAttributeDefinition_DefaultValue, &sFacetAttributeDefinition_IsImmutable, &sFacetAttributeDefinition_Rules}}
+var m_FacetAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FacetAttributeList_member}}
+var mFacetAttributeReference = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAttributeReference_TargetFacetName, &sFacetAttributeReference_TargetAttributeName}}
+var mFacetAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAttributeType_STRING, &sFacetAttributeType_BINARY, &sFacetAttributeType_BOOLEAN, &sFacetAttributeType_NUMBER, &sFacetAttributeType_DATETIME, &sFacetAttributeType_VARIANT}}
+var mFacetAttributeUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetAttributeUpdate_Attribute, &sFacetAttributeUpdate_Action}}
+var m_FacetAttributeUpdateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FacetAttributeUpdateList_member}}
+var mFacetInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetInUseException_Message}}
+var m_FacetNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FacetNameList_member}}
+var mFacetNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetNotFoundException_Message}}
+var mFacetStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetStyle_STATIC, &sFacetStyle_DYNAMIC}}
+var mFacetValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sFacetValidationException_Message}}
+var mIncompatibleSchemaException = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleSchemaException_Message}}
+var mIndexAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexAttachment_IndexedAttributes, &sIndexAttachment_ObjectIdentifier}}
+var m_IndexAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IndexAttachmentList_member}}
+var mIndexedAttributeMissingException = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexedAttributeMissingException_Message}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_Message}}
+var mInvalidArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArnException_Message}}
+var mInvalidAttachmentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidAttachmentException_Message}}
+var mInvalidFacetUpdateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidFacetUpdateException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mInvalidRuleException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRuleException_Message}}
+var mInvalidSchemaDocException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSchemaDocException_Message}}
+var mInvalidTaggingRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTaggingRequestException_Message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mLinkAttributeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkAttributeAction_AttributeActionType, &sLinkAttributeAction_AttributeUpdateValue}}
+var mLinkAttributeUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkAttributeUpdate_AttributeKey, &sLinkAttributeUpdate_AttributeAction}}
+var m_LinkAttributeUpdateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkAttributeUpdateList_member}}
+var mLinkNameAlreadyInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkNameAlreadyInUseException_Message}}
+var m_LinkNameToObjectIdentifierMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkNameToObjectIdentifierMap_key, &s_LinkNameToObjectIdentifierMap_value}}
+var mNotIndexException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotIndexException_Message}}
+var mNotNodeException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotNodeException_Message}}
+var mNotPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotPolicyException_Message}}
+var mObjectAlreadyDetachedException = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectAlreadyDetachedException_Message}}
+var mObjectAttributeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectAttributeAction_ObjectAttributeActionType, &sObjectAttributeAction_ObjectAttributeUpdateValue}}
+var mObjectAttributeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectAttributeRange_AttributeKey, &sObjectAttributeRange_Range}}
+var m_ObjectAttributeRangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObjectAttributeRangeList_member}}
+var mObjectAttributeUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectAttributeUpdate_ObjectAttributeKey, &sObjectAttributeUpdate_ObjectAttributeAction}}
+var m_ObjectAttributeUpdateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObjectAttributeUpdateList_member}}
+var m_ObjectIdentifierAndLinkNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObjectIdentifierAndLinkNameList_member}}
+var mObjectIdentifierAndLinkNameTuple = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectIdentifierAndLinkNameTuple_ObjectIdentifier, &sObjectIdentifierAndLinkNameTuple_LinkName}}
+var m_ObjectIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObjectIdentifierList_member}}
+var m_ObjectIdentifierToLinkNameMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObjectIdentifierToLinkNameMap_key, &s_ObjectIdentifierToLinkNameMap_value}}
+var mObjectNotDetachedException = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectNotDetachedException_Message}}
+var mObjectReference = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectReference_Selector}}
+var mObjectType = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectType_NODE, &sObjectType_LEAF_NODE, &sObjectType_POLICY, &sObjectType_INDEX}}
+var mPathToObjectIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&sPathToObjectIdentifiers_Path, &sPathToObjectIdentifiers_ObjectIdentifiers}}
+var m_PathToObjectIdentifiersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathToObjectIdentifiersList_member}}
+var mPolicyAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyAttachment_PolicyId, &sPolicyAttachment_ObjectIdentifier, &sPolicyAttachment_PolicyType}}
+var m_PolicyAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyAttachmentList_member}}
+var mPolicyToPath = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyToPath_Path, &sPolicyToPath_Policies}}
+var m_PolicyToPathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyToPathList_member}}
+var mRangeMode = smithy.SchemaMembers{List: []*smithy.Schema{&sRangeMode_FIRST, &sRangeMode_LAST, &sRangeMode_LAST_BEFORE_MISSING_VALUES, &sRangeMode_INCLUSIVE, &sRangeMode_EXCLUSIVE}}
+var mRequiredAttributeBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sRequiredAttributeBehavior_REQUIRED_ALWAYS, &sRequiredAttributeBehavior_NOT_REQUIRED}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRetryableConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryableConflictException_Message}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_Type, &sRule_Parameters}}
+var m_RuleMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleMap_key, &s_RuleMap_value}}
+var m_RuleParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleParameterMap_key, &s_RuleParameterMap_value}}
+var mRuleType = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleType_BINARY_LENGTH, &sRuleType_NUMBER_COMPARISON, &sRuleType_STRING_FROM_SET, &sRuleType_STRING_LENGTH}}
+var mSchemaAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaAlreadyExistsException_Message}}
+var mSchemaAlreadyPublishedException = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaAlreadyPublishedException_Message}}
+var mSchemaFacet = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaFacet_SchemaArn, &sSchemaFacet_FacetName}}
+var m_SchemaFacetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaFacetList_member}}
+var mStillContainsLinksException = smithy.SchemaMembers{List: []*smithy.Schema{&sStillContainsLinksException_Message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTypedAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedAttributeValue_StringValue, &sTypedAttributeValue_BinaryValue, &sTypedAttributeValue_BooleanValue, &sTypedAttributeValue_NumberValue, &sTypedAttributeValue_DatetimeValue}}
+var mTypedAttributeValueRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedAttributeValueRange_StartMode, &sTypedAttributeValueRange_StartValue, &sTypedAttributeValueRange_EndMode, &sTypedAttributeValueRange_EndValue}}
+var mTypedLinkAttributeDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkAttributeDefinition_Name, &sTypedLinkAttributeDefinition_Type, &sTypedLinkAttributeDefinition_DefaultValue, &sTypedLinkAttributeDefinition_IsImmutable, &sTypedLinkAttributeDefinition_Rules, &sTypedLinkAttributeDefinition_RequiredBehavior}}
+var m_TypedLinkAttributeDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypedLinkAttributeDefinitionList_member}}
+var mTypedLinkAttributeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkAttributeRange_AttributeName, &sTypedLinkAttributeRange_Range}}
+var m_TypedLinkAttributeRangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypedLinkAttributeRangeList_member}}
+var mTypedLinkFacet = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkFacet_Name, &sTypedLinkFacet_Attributes, &sTypedLinkFacet_IdentityAttributeOrder}}
+var mTypedLinkFacetAttributeUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkFacetAttributeUpdate_Attribute, &sTypedLinkFacetAttributeUpdate_Action}}
+var m_TypedLinkFacetAttributeUpdateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypedLinkFacetAttributeUpdateList_member}}
+var m_TypedLinkNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypedLinkNameList_member}}
+var mTypedLinkSchemaAndFacetName = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkSchemaAndFacetName_SchemaArn, &sTypedLinkSchemaAndFacetName_TypedLinkName}}
+var mTypedLinkSpecifier = smithy.SchemaMembers{List: []*smithy.Schema{&sTypedLinkSpecifier_TypedLinkFacet, &sTypedLinkSpecifier_SourceObjectReference, &sTypedLinkSpecifier_TargetObjectReference, &sTypedLinkSpecifier_IdentityAttributeValues}}
+var m_TypedLinkSpecifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypedLinkSpecifierList_member}}
+var mUnsupportedIndexTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedIndexTypeException_Message}}
+var mUpdateActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateActionType_CREATE_OR_UPDATE, &sUpdateActionType_DELETE}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mAddFacetToObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddFacetToObjectRequest_DirectoryArn, &sAddFacetToObjectRequest_SchemaFacet, &sAddFacetToObjectRequest_ObjectAttributeList, &sAddFacetToObjectRequest_ObjectReference}}
+var mApplySchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sApplySchemaRequest_PublishedSchemaArn, &sApplySchemaRequest_DirectoryArn}}
+var mApplySchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sApplySchemaResponse_AppliedSchemaArn, &sApplySchemaResponse_DirectoryArn}}
+var mAttachObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachObjectRequest_DirectoryArn, &sAttachObjectRequest_ParentReference, &sAttachObjectRequest_ChildReference, &sAttachObjectRequest_LinkName}}
+var mAttachObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachObjectResponse_AttachedObjectIdentifier}}
+var mAttachPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachPolicyRequest_DirectoryArn, &sAttachPolicyRequest_PolicyReference, &sAttachPolicyRequest_ObjectReference}}
+var mAttachToIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachToIndexRequest_DirectoryArn, &sAttachToIndexRequest_IndexReference, &sAttachToIndexRequest_TargetReference}}
+var mAttachToIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachToIndexResponse_AttachedObjectIdentifier}}
+var mAttachTypedLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachTypedLinkRequest_DirectoryArn, &sAttachTypedLinkRequest_SourceObjectReference, &sAttachTypedLinkRequest_TargetObjectReference, &sAttachTypedLinkRequest_TypedLinkFacet, &sAttachTypedLinkRequest_Attributes}}
+var mAttachTypedLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachTypedLinkResponse_TypedLinkSpecifier}}
+var mBatchReadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadRequest_DirectoryArn, &sBatchReadRequest_Operations, &sBatchReadRequest_ConsistencyLevel}}
+var mBatchReadResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReadResponse_Responses}}
+var mBatchWriteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteRequest_DirectoryArn, &sBatchWriteRequest_Operations}}
+var mBatchWriteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchWriteResponse_Responses}}
+var mCreateDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryRequest_Name, &sCreateDirectoryRequest_SchemaArn}}
+var mCreateDirectoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryResponse_DirectoryArn, &sCreateDirectoryResponse_Name, &sCreateDirectoryResponse_ObjectIdentifier, &sCreateDirectoryResponse_AppliedSchemaArn}}
+var mCreateFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFacetRequest_SchemaArn, &sCreateFacetRequest_Name, &sCreateFacetRequest_Attributes, &sCreateFacetRequest_ObjectType, &sCreateFacetRequest_FacetStyle}}
+var mCreateIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIndexRequest_DirectoryArn, &sCreateIndexRequest_OrderedIndexedAttributeList, &sCreateIndexRequest_IsUnique, &sCreateIndexRequest_ParentReference, &sCreateIndexRequest_LinkName}}
+var mCreateIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIndexResponse_ObjectIdentifier}}
+var mCreateObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateObjectRequest_DirectoryArn, &sCreateObjectRequest_SchemaFacets, &sCreateObjectRequest_ObjectAttributeList, &sCreateObjectRequest_ParentReference, &sCreateObjectRequest_LinkName}}
+var mCreateObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateObjectResponse_ObjectIdentifier}}
+var mCreateSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchemaRequest_Name}}
+var mCreateSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchemaResponse_SchemaArn}}
+var mCreateTypedLinkFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTypedLinkFacetRequest_SchemaArn, &sCreateTypedLinkFacetRequest_Facet}}
+var mDeleteDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryRequest_DirectoryArn}}
+var mDeleteDirectoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryResponse_DirectoryArn}}
+var mDeleteFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFacetRequest_SchemaArn, &sDeleteFacetRequest_Name}}
+var mDeleteObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteObjectRequest_DirectoryArn, &sDeleteObjectRequest_ObjectReference}}
+var mDeleteSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSchemaRequest_SchemaArn}}
+var mDeleteSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSchemaResponse_SchemaArn}}
+var mDeleteTypedLinkFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTypedLinkFacetRequest_SchemaArn, &sDeleteTypedLinkFacetRequest_Name}}
+var mDetachFromIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachFromIndexRequest_DirectoryArn, &sDetachFromIndexRequest_IndexReference, &sDetachFromIndexRequest_TargetReference}}
+var mDetachFromIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachFromIndexResponse_DetachedObjectIdentifier}}
+var mDetachObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachObjectRequest_DirectoryArn, &sDetachObjectRequest_ParentReference, &sDetachObjectRequest_LinkName}}
+var mDetachObjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachObjectResponse_DetachedObjectIdentifier}}
+var mDetachPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachPolicyRequest_DirectoryArn, &sDetachPolicyRequest_PolicyReference, &sDetachPolicyRequest_ObjectReference}}
+var mDetachTypedLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachTypedLinkRequest_DirectoryArn, &sDetachTypedLinkRequest_TypedLinkSpecifier}}
+var mDisableDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDirectoryRequest_DirectoryArn}}
+var mDisableDirectoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDirectoryResponse_DirectoryArn}}
+var mEnableDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDirectoryRequest_DirectoryArn}}
+var mEnableDirectoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDirectoryResponse_DirectoryArn}}
+var mGetAppliedSchemaVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppliedSchemaVersionRequest_SchemaArn}}
+var mGetAppliedSchemaVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppliedSchemaVersionResponse_AppliedSchemaArn}}
+var mGetDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectoryRequest_DirectoryArn}}
+var mGetDirectoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectoryResponse_Directory}}
+var mGetFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFacetRequest_SchemaArn, &sGetFacetRequest_Name}}
+var mGetFacetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFacetResponse_Facet}}
+var mGetLinkAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkAttributesRequest_DirectoryArn, &sGetLinkAttributesRequest_TypedLinkSpecifier, &sGetLinkAttributesRequest_AttributeNames, &sGetLinkAttributesRequest_ConsistencyLevel}}
+var mGetLinkAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkAttributesResponse_Attributes}}
+var mGetObjectAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectAttributesRequest_DirectoryArn, &sGetObjectAttributesRequest_ObjectReference, &sGetObjectAttributesRequest_ConsistencyLevel, &sGetObjectAttributesRequest_SchemaFacet, &sGetObjectAttributesRequest_AttributeNames}}
+var mGetObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectAttributesResponse_Attributes}}
+var mGetObjectInformationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectInformationRequest_DirectoryArn, &sGetObjectInformationRequest_ObjectReference, &sGetObjectInformationRequest_ConsistencyLevel}}
+var mGetObjectInformationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectInformationResponse_SchemaFacets, &sGetObjectInformationResponse_ObjectIdentifier}}
+var mGetSchemaAsJsonRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaAsJsonRequest_SchemaArn}}
+var mGetSchemaAsJsonResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaAsJsonResponse_Name, &sGetSchemaAsJsonResponse_Document}}
+var mGetTypedLinkFacetInformationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypedLinkFacetInformationRequest_SchemaArn, &sGetTypedLinkFacetInformationRequest_Name}}
+var mGetTypedLinkFacetInformationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypedLinkFacetInformationResponse_IdentityAttributeOrder}}
+var mListAppliedSchemaArnsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppliedSchemaArnsRequest_DirectoryArn, &sListAppliedSchemaArnsRequest_SchemaArn, &sListAppliedSchemaArnsRequest_NextToken, &sListAppliedSchemaArnsRequest_MaxResults}}
+var mListAppliedSchemaArnsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppliedSchemaArnsResponse_SchemaArns, &sListAppliedSchemaArnsResponse_NextToken}}
+var mListAttachedIndicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachedIndicesRequest_DirectoryArn, &sListAttachedIndicesRequest_TargetReference, &sListAttachedIndicesRequest_NextToken, &sListAttachedIndicesRequest_MaxResults, &sListAttachedIndicesRequest_ConsistencyLevel}}
+var mListAttachedIndicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachedIndicesResponse_IndexAttachments, &sListAttachedIndicesResponse_NextToken}}
+var mListDevelopmentSchemaArnsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevelopmentSchemaArnsRequest_NextToken, &sListDevelopmentSchemaArnsRequest_MaxResults}}
+var mListDevelopmentSchemaArnsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevelopmentSchemaArnsResponse_SchemaArns, &sListDevelopmentSchemaArnsResponse_NextToken}}
+var mListDirectoriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDirectoriesRequest_NextToken, &sListDirectoriesRequest_MaxResults, &sListDirectoriesRequest_state}}
+var mListDirectoriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDirectoriesResponse_Directories, &sListDirectoriesResponse_NextToken}}
+var mListFacetAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFacetAttributesRequest_SchemaArn, &sListFacetAttributesRequest_Name, &sListFacetAttributesRequest_NextToken, &sListFacetAttributesRequest_MaxResults}}
+var mListFacetAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFacetAttributesResponse_Attributes, &sListFacetAttributesResponse_NextToken}}
+var mListFacetNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFacetNamesRequest_SchemaArn, &sListFacetNamesRequest_NextToken, &sListFacetNamesRequest_MaxResults}}
+var mListFacetNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFacetNamesResponse_FacetNames, &sListFacetNamesResponse_NextToken}}
+var mListIncomingTypedLinksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncomingTypedLinksRequest_DirectoryArn, &sListIncomingTypedLinksRequest_ObjectReference, &sListIncomingTypedLinksRequest_FilterAttributeRanges, &sListIncomingTypedLinksRequest_FilterTypedLink, &sListIncomingTypedLinksRequest_NextToken, &sListIncomingTypedLinksRequest_MaxResults, &sListIncomingTypedLinksRequest_ConsistencyLevel}}
+var mListIncomingTypedLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIncomingTypedLinksResponse_LinkSpecifiers, &sListIncomingTypedLinksResponse_NextToken}}
+var mListIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexRequest_DirectoryArn, &sListIndexRequest_RangesOnIndexedValues, &sListIndexRequest_IndexReference, &sListIndexRequest_MaxResults, &sListIndexRequest_NextToken, &sListIndexRequest_ConsistencyLevel}}
+var mListIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexResponse_IndexAttachments, &sListIndexResponse_NextToken}}
+var mListManagedSchemaArnsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedSchemaArnsRequest_SchemaArn, &sListManagedSchemaArnsRequest_NextToken, &sListManagedSchemaArnsRequest_MaxResults}}
+var mListManagedSchemaArnsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedSchemaArnsResponse_SchemaArns, &sListManagedSchemaArnsResponse_NextToken}}
+var mListObjectAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectAttributesRequest_DirectoryArn, &sListObjectAttributesRequest_ObjectReference, &sListObjectAttributesRequest_NextToken, &sListObjectAttributesRequest_MaxResults, &sListObjectAttributesRequest_ConsistencyLevel, &sListObjectAttributesRequest_FacetFilter}}
+var mListObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectAttributesResponse_Attributes, &sListObjectAttributesResponse_NextToken}}
+var mListObjectChildrenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectChildrenRequest_DirectoryArn, &sListObjectChildrenRequest_ObjectReference, &sListObjectChildrenRequest_NextToken, &sListObjectChildrenRequest_MaxResults, &sListObjectChildrenRequest_ConsistencyLevel}}
+var mListObjectChildrenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectChildrenResponse_Children, &sListObjectChildrenResponse_NextToken}}
+var mListObjectParentPathsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectParentPathsRequest_DirectoryArn, &sListObjectParentPathsRequest_ObjectReference, &sListObjectParentPathsRequest_NextToken, &sListObjectParentPathsRequest_MaxResults}}
+var mListObjectParentPathsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectParentPathsResponse_PathToObjectIdentifiersList, &sListObjectParentPathsResponse_NextToken}}
+var mListObjectParentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectParentsRequest_DirectoryArn, &sListObjectParentsRequest_ObjectReference, &sListObjectParentsRequest_NextToken, &sListObjectParentsRequest_MaxResults, &sListObjectParentsRequest_ConsistencyLevel, &sListObjectParentsRequest_IncludeAllLinksToEachParent}}
+var mListObjectParentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectParentsResponse_Parents, &sListObjectParentsResponse_NextToken, &sListObjectParentsResponse_ParentLinks}}
+var mListObjectPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectPoliciesRequest_DirectoryArn, &sListObjectPoliciesRequest_ObjectReference, &sListObjectPoliciesRequest_NextToken, &sListObjectPoliciesRequest_MaxResults, &sListObjectPoliciesRequest_ConsistencyLevel}}
+var mListObjectPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObjectPoliciesResponse_AttachedPolicyIds, &sListObjectPoliciesResponse_NextToken}}
+var mListOutgoingTypedLinksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOutgoingTypedLinksRequest_DirectoryArn, &sListOutgoingTypedLinksRequest_ObjectReference, &sListOutgoingTypedLinksRequest_FilterAttributeRanges, &sListOutgoingTypedLinksRequest_FilterTypedLink, &sListOutgoingTypedLinksRequest_NextToken, &sListOutgoingTypedLinksRequest_MaxResults, &sListOutgoingTypedLinksRequest_ConsistencyLevel}}
+var mListOutgoingTypedLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOutgoingTypedLinksResponse_TypedLinkSpecifiers, &sListOutgoingTypedLinksResponse_NextToken}}
+var mListPolicyAttachmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyAttachmentsRequest_DirectoryArn, &sListPolicyAttachmentsRequest_PolicyReference, &sListPolicyAttachmentsRequest_NextToken, &sListPolicyAttachmentsRequest_MaxResults, &sListPolicyAttachmentsRequest_ConsistencyLevel}}
+var mListPolicyAttachmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyAttachmentsResponse_ObjectIdentifiers, &sListPolicyAttachmentsResponse_NextToken}}
+var mListPublishedSchemaArnsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPublishedSchemaArnsRequest_SchemaArn, &sListPublishedSchemaArnsRequest_NextToken, &sListPublishedSchemaArnsRequest_MaxResults}}
+var mListPublishedSchemaArnsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPublishedSchemaArnsResponse_SchemaArns, &sListPublishedSchemaArnsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn, &sListTagsForResourceRequest_NextToken, &sListTagsForResourceRequest_MaxResults}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags, &sListTagsForResourceResponse_NextToken}}
+var mListTypedLinkFacetAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypedLinkFacetAttributesRequest_SchemaArn, &sListTypedLinkFacetAttributesRequest_Name, &sListTypedLinkFacetAttributesRequest_NextToken, &sListTypedLinkFacetAttributesRequest_MaxResults}}
+var mListTypedLinkFacetAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypedLinkFacetAttributesResponse_Attributes, &sListTypedLinkFacetAttributesResponse_NextToken}}
+var mListTypedLinkFacetNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypedLinkFacetNamesRequest_SchemaArn, &sListTypedLinkFacetNamesRequest_NextToken, &sListTypedLinkFacetNamesRequest_MaxResults}}
+var mListTypedLinkFacetNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypedLinkFacetNamesResponse_FacetNames, &sListTypedLinkFacetNamesResponse_NextToken}}
+var mLookupPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupPolicyRequest_DirectoryArn, &sLookupPolicyRequest_ObjectReference, &sLookupPolicyRequest_NextToken, &sLookupPolicyRequest_MaxResults}}
+var mLookupPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupPolicyResponse_PolicyToPathList, &sLookupPolicyResponse_NextToken}}
+var mPublishSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishSchemaRequest_DevelopmentSchemaArn, &sPublishSchemaRequest_Version, &sPublishSchemaRequest_MinorVersion, &sPublishSchemaRequest_Name}}
+var mPublishSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishSchemaResponse_PublishedSchemaArn}}
+var mPutSchemaFromJsonRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSchemaFromJsonRequest_SchemaArn, &sPutSchemaFromJsonRequest_Document}}
+var mPutSchemaFromJsonResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSchemaFromJsonResponse_Arn}}
+var mRemoveFacetFromObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveFacetFromObjectRequest_DirectoryArn, &sRemoveFacetFromObjectRequest_SchemaFacet, &sRemoveFacetFromObjectRequest_ObjectReference}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFacetRequest_SchemaArn, &sUpdateFacetRequest_Name, &sUpdateFacetRequest_AttributeUpdates, &sUpdateFacetRequest_ObjectType}}
+var mUpdateLinkAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkAttributesRequest_DirectoryArn, &sUpdateLinkAttributesRequest_TypedLinkSpecifier, &sUpdateLinkAttributesRequest_AttributeUpdates}}
+var mUpdateObjectAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateObjectAttributesRequest_DirectoryArn, &sUpdateObjectAttributesRequest_ObjectReference, &sUpdateObjectAttributesRequest_AttributeUpdates}}
+var mUpdateObjectAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateObjectAttributesResponse_ObjectIdentifier}}
+var mUpdateSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSchemaRequest_SchemaArn, &sUpdateSchemaRequest_Name}}
+var mUpdateSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSchemaResponse_SchemaArn}}
+var mUpdateTypedLinkFacetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTypedLinkFacetRequest_SchemaArn, &sUpdateTypedLinkFacetRequest_Name, &sUpdateTypedLinkFacetRequest_AttributeUpdates, &sUpdateTypedLinkFacetRequest_IdentityAttributeOrder}}
+var mUpgradeAppliedSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeAppliedSchemaRequest_PublishedSchemaArn, &sUpgradeAppliedSchemaRequest_DirectoryArn, &sUpgradeAppliedSchemaRequest_DryRun}}
+var mUpgradeAppliedSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeAppliedSchemaResponse_UpgradedSchemaArn, &sUpgradeAppliedSchemaResponse_DirectoryArn}}
+var mUpgradePublishedSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradePublishedSchemaRequest_DevelopmentSchemaArn, &sUpgradePublishedSchemaRequest_PublishedSchemaArn, &sUpgradePublishedSchemaRequest_MinorVersion, &sUpgradePublishedSchemaRequest_DryRun}}
+var mUpgradePublishedSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradePublishedSchemaResponse_UpgradedSchemaArn}}
+
+var hBatchReadExceptionType = smithy.MemberHash{Seed: 28, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 0, 12, 0, 10, 0, 2, 0, 5, 0,
+	9, 0, 0, 13, 3, 6, 11, 8,
+}}
+var hBatchReadOperation = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 9, 8, 0, 0, 14, 11, 13, 3, 0, 0, 0, 0, 0, 5, 4, 0, 0, 0, 0, 2, 1,
+	0, 0, 0, 12, 10, 0, 6, 7,
+}}
+var hBatchReadSuccessfulResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 8, 7, 0, 0, 13, 10, 12, 5, 0, 0, 0, 0, 0, 3, 6, 0, 0, 0, 0, 2, 1,
+	0, 0, 0, 11, 9, 0, 4, 14,
+}}
+var hBatchWriteExceptionType = smithy.MemberHash{Seed: 32, Slots: []uint16{
+	0, 0, 5, 0, 0, 0, 4, 0, 0, 18, 12, 6, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 10, 13, 0, 0, 0, 3, 14, 0, 9, 0, 0, 0, 17, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+	8, 0, 0, 7, 2, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 16,
+}}
+var hBatchWriteOperation = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 14, 1, 13, 3, 11, 7, 2, 6, 0, 0, 0, 0, 15, 0, 0, 5, 0, 12, 10, 0, 0, 4, 9,
+	0, 8, 0, 0, 0, 0, 0, 0,
+}}
+var hBatchWriteOperationResponse = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 14, 1, 13, 3, 11, 7, 2, 6, 0, 0, 0, 0, 15, 0, 0, 5, 0, 12, 10, 0, 0, 4, 9,
+	0, 8, 0, 0, 0, 0, 0, 0,
+}}
+
+var sAddFacetToObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddFacetToObject, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAddFacetToObject})
+var sApplySchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySchema, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eApplySchema})
+var sAttachObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachObject, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eAttachObject})
+var sAttachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPolicy, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eAttachPolicy})
+var sAttachToIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachToIndex, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eAttachToIndex})
+var sAttachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachTypedLink, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eAttachTypedLink})
+var sBatchRead = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRead, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eBatchRead})
+var sBatchWrite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWrite, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eBatchWrite})
+var sCreateDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectory, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateDirectory})
+var sCreateFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFacet, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateFacet})
+var sCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndex, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eCreateIndex})
+var sCreateObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObject, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eCreateObject})
+var sCreateSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchema, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eCreateSchema})
+var sCreateTypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypedLinkFacet, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eCreateTypedLinkFacet})
+var sDeleteDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectory, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDirectory})
+var sDeleteFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFacet, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFacet})
+var sDeleteObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObject, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteObject})
+var sDeleteSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchema, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSchema})
+var sDeleteTypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypedLinkFacet, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTypedLinkFacet})
+var sDetachFromIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachFromIndex, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDetachFromIndex})
+var sDetachObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachObject, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDetachObject})
+var sDetachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachPolicy, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDetachPolicy})
+var sDetachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachTypedLink, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDetachTypedLink})
+var sDisableDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectory, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDisableDirectory})
+var sEnableDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectory, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eEnableDirectory})
+var sGetAppliedSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppliedSchemaVersion, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eGetAppliedSchemaVersion})
+var sGetDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectory, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eGetDirectory})
+var sGetFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFacet, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetFacet})
+var sGetLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAttributes, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetLinkAttributes})
+var sGetObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectAttributes, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetObjectAttributes})
+var sGetObjectInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectInformation, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetObjectInformation})
+var sGetSchemaAsJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaAsJson, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetSchemaAsJson})
+var sGetTypedLinkFacetInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypedLinkFacetInformation, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetTypedLinkFacetInformation})
+var sListAppliedSchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppliedSchemaArns, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListAppliedSchemaArns})
+var sListAttachedIndices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedIndices, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListAttachedIndices})
+var sListDevelopmentSchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevelopmentSchemaArns, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListDevelopmentSchemaArns})
+var sListDirectories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectories, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListDirectories})
+var sListFacetAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetAttributes, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListFacetAttributes})
+var sListFacetNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetNames, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListFacetNames})
+var sListIncomingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncomingTypedLinks, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListIncomingTypedLinks})
+var sListIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndex, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListIndex})
+var sListManagedSchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedSchemaArns, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListManagedSchemaArns})
+var sListObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectAttributes, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eListObjectAttributes})
+var sListObjectChildren = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectChildren, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eListObjectChildren})
+var sListObjectParentPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParentPaths, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListObjectParentPaths})
+var sListObjectParents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParents, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eListObjectParents})
+var sListObjectPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectPolicies, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eListObjectPolicies})
+var sListOutgoingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutgoingTypedLinks, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eListOutgoingTypedLinks})
+var sListPolicyAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyAttachments, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eListPolicyAttachments})
+var sListPublishedSchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublishedSchemaArns, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eListPublishedSchemaArns})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTypedLinkFacetAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetAttributes, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eListTypedLinkFacetAttributes})
+var sListTypedLinkFacetNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetNames, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eListTypedLinkFacetNames})
+var sLookupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupPolicy, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eLookupPolicy})
+var sPublishSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishSchema, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &ePublishSchema})
+var sPutSchemaFromJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchemaFromJson, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &ePutSchemaFromJson})
+var sRemoveFacetFromObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFacetFromObject, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eRemoveFacetFromObject})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFacet, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFacet})
+var sUpdateLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkAttributes, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLinkAttributes})
+var sUpdateObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateObjectAttributes, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eUpdateObjectAttributes})
+var sUpdateSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchema, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSchema})
+var sUpdateTypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTypedLinkFacet, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTypedLinkFacet})
+var sUpgradeAppliedSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAppliedSchema, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &eUpgradeAppliedSchema})
+var sUpgradePublishedSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradePublishedSchema, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &eUpgradePublishedSchema})
+var s_AmazonCloudDirectory_20170111 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonCloudDirectory_20170111, Type: smithy.ShapeTypeService, Ext: &e_AmazonCloudDirectory_20170111})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t66, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_Arns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &e_Arns})
+var s_Arns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arns_member})
+var sAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &eAttributeKey})
+var sAttributeKey_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAttributeKey_SchemaArn})
+var sAttributeKey_FacetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetName", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eAttributeKey_FacetName})
+var sAttributeKey_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eAttributeKey_Name})
+var sAttributeKeyAndValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeKeyAndValue, Members: &mAttributeKeyAndValue, Type: smithy.ShapeTypeStructure, Ext: &eAttributeKeyAndValue})
+var sAttributeKeyAndValue_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &eAttributeKeyAndValue_Key})
+var sAttributeKeyAndValue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeKeyAndValue_Value})
+var s_AttributeKeyAndValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &e_AttributeKeyAndValueList})
+var s_AttributeKeyAndValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeKeyAndValue, Members: &mAttributeKeyAndValue, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeKeyAndValueList_member})
+var s_AttributeKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeKeyList, Members: &m_AttributeKeyList, Type: smithy.ShapeTypeList, Ext: &e_AttributeKeyList})
+var s_AttributeKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeKeyList_member})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var sAttributeNameAndValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeNameAndValue, Members: &mAttributeNameAndValue, Type: smithy.ShapeTypeStructure, Ext: &eAttributeNameAndValue})
+var sAttributeNameAndValue_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eAttributeNameAndValue_AttributeName})
+var sAttributeNameAndValue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeNameAndValue_Value})
+var s_AttributeNameAndValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeNameAndValueList, Members: &m_AttributeNameAndValueList, Type: smithy.ShapeTypeList, Ext: &e_AttributeNameAndValueList})
+var s_AttributeNameAndValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeNameAndValue, Members: &mAttributeNameAndValue, Type: smithy.ShapeTypeStructure, Ext: &e_AttributeNameAndValueList_member})
+var s_AttributeNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &e_AttributeNameList})
+var s_AttributeNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeNameList_member})
+var sBatchAddFacetToObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddFacetToObject, Members: &mBatchAddFacetToObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchAddFacetToObject})
+var sBatchAddFacetToObject_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eBatchAddFacetToObject_SchemaFacet})
+var sBatchAddFacetToObject_ObjectAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeList", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchAddFacetToObject_ObjectAttributeList})
+var sBatchAddFacetToObject_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAddFacetToObject_ObjectReference})
+var sBatchAddFacetToObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddFacetToObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAddFacetToObjectResponse})
+var sBatchAttachObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachObject, Members: &mBatchAttachObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachObject})
+var sBatchAttachObject_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachObject_ParentReference})
+var sBatchAttachObject_ChildReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachObject_ChildReference})
+var sBatchAttachObject_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eBatchAttachObject_LinkName})
+var sBatchAttachObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachObjectResponse, Members: &mBatchAttachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachObjectResponse})
+var sBatchAttachObjectResponse_attachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchAttachObjectResponse_attachedObjectIdentifier})
+var sBatchAttachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachPolicy, Members: &mBatchAttachPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachPolicy})
+var sBatchAttachPolicy_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachPolicy_PolicyReference})
+var sBatchAttachPolicy_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachPolicy_ObjectReference})
+var sBatchAttachPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachPolicyResponse})
+var sBatchAttachToIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachToIndex, Members: &mBatchAttachToIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachToIndex})
+var sBatchAttachToIndex_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachToIndex_IndexReference})
+var sBatchAttachToIndex_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachToIndex_TargetReference})
+var sBatchAttachToIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachToIndexResponse, Members: &mBatchAttachToIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachToIndexResponse})
+var sBatchAttachToIndexResponse_AttachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchAttachToIndexResponse_AttachedObjectIdentifier})
+var sBatchAttachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachTypedLink, Members: &mBatchAttachTypedLink, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLink})
+var sBatchAttachTypedLink_SourceObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLink_SourceObjectReference})
+var sBatchAttachTypedLink_TargetObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLink_TargetObjectReference})
+var sBatchAttachTypedLink_TypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkFacet", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLink_TypedLinkFacet})
+var sBatchAttachTypedLink_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeNameAndValueList, Members: &m_AttributeNameAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchAttachTypedLink_Attributes})
+var sBatchAttachTypedLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAttachTypedLinkResponse, Members: &mBatchAttachTypedLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLinkResponse})
+var sBatchAttachTypedLinkResponse_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchAttachTypedLinkResponse_TypedLinkSpecifier})
+var sBatchCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateIndex, Members: &mBatchCreateIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateIndex})
+var sBatchCreateIndex_OrderedIndexedAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedIndexedAttributeList", ID: &i_AttributeKeyList, Members: &m_AttributeKeyList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateIndex_OrderedIndexedAttributeList})
+var sBatchCreateIndex_IsUnique = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsUnique", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eBatchCreateIndex_IsUnique})
+var sBatchCreateIndex_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateIndex_ParentReference})
+var sBatchCreateIndex_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eBatchCreateIndex_LinkName})
+var sBatchCreateIndex_BatchReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchReferenceName", ID: &i_BatchReferenceName, Type: smithy.ShapeTypeString, Ext: &eBatchCreateIndex_BatchReferenceName})
+var sBatchCreateIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateIndexResponse, Members: &mBatchCreateIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateIndexResponse})
+var sBatchCreateIndexResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchCreateIndexResponse_ObjectIdentifier})
+var sBatchCreateObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateObject, Members: &mBatchCreateObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateObject})
+var sBatchCreateObject_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &i_SchemaFacetList, Members: &m_SchemaFacetList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateObject_SchemaFacet})
+var sBatchCreateObject_ObjectAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeList", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchCreateObject_ObjectAttributeList})
+var sBatchCreateObject_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateObject_ParentReference})
+var sBatchCreateObject_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eBatchCreateObject_LinkName})
+var sBatchCreateObject_BatchReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchReferenceName", ID: &i_BatchReferenceName, Type: smithy.ShapeTypeString, Ext: &eBatchCreateObject_BatchReferenceName})
+var sBatchCreateObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateObjectResponse, Members: &mBatchCreateObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateObjectResponse})
+var sBatchCreateObjectResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchCreateObjectResponse_ObjectIdentifier})
+var sBatchDeleteObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteObject, Members: &mBatchDeleteObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteObject})
+var sBatchDeleteObject_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteObject_ObjectReference})
+var sBatchDeleteObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteObjectResponse})
+var sBatchDetachFromIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachFromIndex, Members: &mBatchDetachFromIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachFromIndex})
+var sBatchDetachFromIndex_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachFromIndex_IndexReference})
+var sBatchDetachFromIndex_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachFromIndex_TargetReference})
+var sBatchDetachFromIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachFromIndexResponse, Members: &mBatchDetachFromIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachFromIndexResponse})
+var sBatchDetachFromIndexResponse_DetachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchDetachFromIndexResponse_DetachedObjectIdentifier})
+var sBatchDetachObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachObject, Members: &mBatchDetachObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachObject})
+var sBatchDetachObject_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachObject_ParentReference})
+var sBatchDetachObject_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eBatchDetachObject_LinkName})
+var sBatchDetachObject_BatchReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchReferenceName", ID: &i_BatchReferenceName, Type: smithy.ShapeTypeString, Ext: &eBatchDetachObject_BatchReferenceName})
+var sBatchDetachObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachObjectResponse, Members: &mBatchDetachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachObjectResponse})
+var sBatchDetachObjectResponse_detachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchDetachObjectResponse_detachedObjectIdentifier})
+var sBatchDetachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachPolicy, Members: &mBatchDetachPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachPolicy})
+var sBatchDetachPolicy_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachPolicy_PolicyReference})
+var sBatchDetachPolicy_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachPolicy_ObjectReference})
+var sBatchDetachPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachPolicyResponse})
+var sBatchDetachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachTypedLink, Members: &mBatchDetachTypedLink, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachTypedLink})
+var sBatchDetachTypedLink_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachTypedLink_TypedLinkSpecifier})
+var sBatchDetachTypedLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDetachTypedLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDetachTypedLinkResponse})
+var sBatchGetLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetLinkAttributes, Members: &mBatchGetLinkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetLinkAttributes})
+var sBatchGetLinkAttributes_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetLinkAttributes_TypedLinkSpecifier})
+var sBatchGetLinkAttributes_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eBatchGetLinkAttributes_AttributeNames})
+var sBatchGetLinkAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetLinkAttributesResponse, Members: &mBatchGetLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetLinkAttributesResponse})
+var sBatchGetLinkAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchGetLinkAttributesResponse_Attributes})
+var sBatchGetObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetObjectAttributes, Members: &mBatchGetObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectAttributes})
+var sBatchGetObjectAttributes_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectAttributes_ObjectReference})
+var sBatchGetObjectAttributes_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectAttributes_SchemaFacet})
+var sBatchGetObjectAttributes_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eBatchGetObjectAttributes_AttributeNames})
+var sBatchGetObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetObjectAttributesResponse, Members: &mBatchGetObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectAttributesResponse})
+var sBatchGetObjectAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchGetObjectAttributesResponse_Attributes})
+var sBatchGetObjectInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetObjectInformation, Members: &mBatchGetObjectInformation, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectInformation})
+var sBatchGetObjectInformation_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectInformation_ObjectReference})
+var sBatchGetObjectInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetObjectInformationResponse, Members: &mBatchGetObjectInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetObjectInformationResponse})
+var sBatchGetObjectInformationResponse_SchemaFacets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacets", ID: &i_SchemaFacetList, Members: &m_SchemaFacetList, Type: smithy.ShapeTypeList, Ext: &eBatchGetObjectInformationResponse_SchemaFacets})
+var sBatchGetObjectInformationResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchGetObjectInformationResponse_ObjectIdentifier})
+var sBatchListAttachedIndices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListAttachedIndices, Members: &mBatchListAttachedIndices, Type: smithy.ShapeTypeStructure, Ext: &eBatchListAttachedIndices})
+var sBatchListAttachedIndices_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListAttachedIndices_TargetReference})
+var sBatchListAttachedIndices_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListAttachedIndices_NextToken})
+var sBatchListAttachedIndices_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListAttachedIndices_MaxResults})
+var sBatchListAttachedIndicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListAttachedIndicesResponse, Members: &mBatchListAttachedIndicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListAttachedIndicesResponse})
+var sBatchListAttachedIndicesResponse_IndexAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexAttachments", ID: &i_IndexAttachmentList, Members: &m_IndexAttachmentList, Type: smithy.ShapeTypeList, Ext: &eBatchListAttachedIndicesResponse_IndexAttachments})
+var sBatchListAttachedIndicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListAttachedIndicesResponse_NextToken})
+var sBatchListIncomingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListIncomingTypedLinks, Members: &mBatchListIncomingTypedLinks, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIncomingTypedLinks})
+var sBatchListIncomingTypedLinks_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIncomingTypedLinks_ObjectReference})
+var sBatchListIncomingTypedLinks_FilterAttributeRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterAttributeRanges", ID: &i_TypedLinkAttributeRangeList, Members: &m_TypedLinkAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eBatchListIncomingTypedLinks_FilterAttributeRanges})
+var sBatchListIncomingTypedLinks_FilterTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterTypedLink", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIncomingTypedLinks_FilterTypedLink})
+var sBatchListIncomingTypedLinks_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListIncomingTypedLinks_NextToken})
+var sBatchListIncomingTypedLinks_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListIncomingTypedLinks_MaxResults})
+var sBatchListIncomingTypedLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListIncomingTypedLinksResponse, Members: &mBatchListIncomingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIncomingTypedLinksResponse})
+var sBatchListIncomingTypedLinksResponse_LinkSpecifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkSpecifiers", ID: &i_TypedLinkSpecifierList, Members: &m_TypedLinkSpecifierList, Type: smithy.ShapeTypeList, Ext: &eBatchListIncomingTypedLinksResponse_LinkSpecifiers})
+var sBatchListIncomingTypedLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListIncomingTypedLinksResponse_NextToken})
+var sBatchListIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListIndex, Members: &mBatchListIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIndex})
+var sBatchListIndex_RangesOnIndexedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RangesOnIndexedValues", ID: &i_ObjectAttributeRangeList, Members: &m_ObjectAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eBatchListIndex_RangesOnIndexedValues})
+var sBatchListIndex_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIndex_IndexReference})
+var sBatchListIndex_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListIndex_MaxResults})
+var sBatchListIndex_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListIndex_NextToken})
+var sBatchListIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListIndexResponse, Members: &mBatchListIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListIndexResponse})
+var sBatchListIndexResponse_IndexAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexAttachments", ID: &i_IndexAttachmentList, Members: &m_IndexAttachmentList, Type: smithy.ShapeTypeList, Ext: &eBatchListIndexResponse_IndexAttachments})
+var sBatchListIndexResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListIndexResponse_NextToken})
+var sBatchListObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectAttributes, Members: &mBatchListObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectAttributes})
+var sBatchListObjectAttributes_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectAttributes_ObjectReference})
+var sBatchListObjectAttributes_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectAttributes_NextToken})
+var sBatchListObjectAttributes_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListObjectAttributes_MaxResults})
+var sBatchListObjectAttributes_FacetFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetFilter", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectAttributes_FacetFilter})
+var sBatchListObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectAttributesResponse, Members: &mBatchListObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectAttributesResponse})
+var sBatchListObjectAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eBatchListObjectAttributesResponse_Attributes})
+var sBatchListObjectAttributesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectAttributesResponse_NextToken})
+var sBatchListObjectChildren = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectChildren, Members: &mBatchListObjectChildren, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectChildren})
+var sBatchListObjectChildren_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectChildren_ObjectReference})
+var sBatchListObjectChildren_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectChildren_NextToken})
+var sBatchListObjectChildren_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListObjectChildren_MaxResults})
+var sBatchListObjectChildrenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectChildrenResponse, Members: &mBatchListObjectChildrenResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectChildrenResponse})
+var sBatchListObjectChildrenResponse_Children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Children", ID: &i_LinkNameToObjectIdentifierMap, Members: &m_LinkNameToObjectIdentifierMap, Type: smithy.ShapeTypeMap, Ext: &eBatchListObjectChildrenResponse_Children})
+var sBatchListObjectChildrenResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectChildrenResponse_NextToken})
+var sBatchListObjectParentPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectParentPaths, Members: &mBatchListObjectParentPaths, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParentPaths})
+var sBatchListObjectParentPaths_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParentPaths_ObjectReference})
+var sBatchListObjectParentPaths_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectParentPaths_NextToken})
+var sBatchListObjectParentPaths_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListObjectParentPaths_MaxResults})
+var sBatchListObjectParentPathsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectParentPathsResponse, Members: &mBatchListObjectParentPathsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParentPathsResponse})
+var sBatchListObjectParentPathsResponse_PathToObjectIdentifiersList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathToObjectIdentifiersList", ID: &i_PathToObjectIdentifiersList, Members: &m_PathToObjectIdentifiersList, Type: smithy.ShapeTypeList, Ext: &eBatchListObjectParentPathsResponse_PathToObjectIdentifiersList})
+var sBatchListObjectParentPathsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectParentPathsResponse_NextToken})
+var sBatchListObjectParents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectParents, Members: &mBatchListObjectParents, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParents})
+var sBatchListObjectParents_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParents_ObjectReference})
+var sBatchListObjectParents_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectParents_NextToken})
+var sBatchListObjectParents_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListObjectParents_MaxResults})
+var sBatchListObjectParentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectParentsResponse, Members: &mBatchListObjectParentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectParentsResponse})
+var sBatchListObjectParentsResponse_ParentLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentLinks", ID: &i_ObjectIdentifierAndLinkNameList, Members: &m_ObjectIdentifierAndLinkNameList, Type: smithy.ShapeTypeList, Ext: &eBatchListObjectParentsResponse_ParentLinks})
+var sBatchListObjectParentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectParentsResponse_NextToken})
+var sBatchListObjectPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectPolicies, Members: &mBatchListObjectPolicies, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectPolicies})
+var sBatchListObjectPolicies_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectPolicies_ObjectReference})
+var sBatchListObjectPolicies_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectPolicies_NextToken})
+var sBatchListObjectPolicies_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListObjectPolicies_MaxResults})
+var sBatchListObjectPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListObjectPoliciesResponse, Members: &mBatchListObjectPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListObjectPoliciesResponse})
+var sBatchListObjectPoliciesResponse_AttachedPolicyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedPolicyIds", ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &eBatchListObjectPoliciesResponse_AttachedPolicyIds})
+var sBatchListObjectPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListObjectPoliciesResponse_NextToken})
+var sBatchListOutgoingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListOutgoingTypedLinks, Members: &mBatchListOutgoingTypedLinks, Type: smithy.ShapeTypeStructure, Ext: &eBatchListOutgoingTypedLinks})
+var sBatchListOutgoingTypedLinks_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListOutgoingTypedLinks_ObjectReference})
+var sBatchListOutgoingTypedLinks_FilterAttributeRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterAttributeRanges", ID: &i_TypedLinkAttributeRangeList, Members: &m_TypedLinkAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eBatchListOutgoingTypedLinks_FilterAttributeRanges})
+var sBatchListOutgoingTypedLinks_FilterTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterTypedLink", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eBatchListOutgoingTypedLinks_FilterTypedLink})
+var sBatchListOutgoingTypedLinks_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListOutgoingTypedLinks_NextToken})
+var sBatchListOutgoingTypedLinks_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListOutgoingTypedLinks_MaxResults})
+var sBatchListOutgoingTypedLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListOutgoingTypedLinksResponse, Members: &mBatchListOutgoingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListOutgoingTypedLinksResponse})
+var sBatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifiers", ID: &i_TypedLinkSpecifierList, Members: &m_TypedLinkSpecifierList, Type: smithy.ShapeTypeList, Ext: &eBatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers})
+var sBatchListOutgoingTypedLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListOutgoingTypedLinksResponse_NextToken})
+var sBatchListPolicyAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListPolicyAttachments, Members: &mBatchListPolicyAttachments, Type: smithy.ShapeTypeStructure, Ext: &eBatchListPolicyAttachments})
+var sBatchListPolicyAttachments_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchListPolicyAttachments_PolicyReference})
+var sBatchListPolicyAttachments_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListPolicyAttachments_NextToken})
+var sBatchListPolicyAttachments_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchListPolicyAttachments_MaxResults})
+var sBatchListPolicyAttachmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchListPolicyAttachmentsResponse, Members: &mBatchListPolicyAttachmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchListPolicyAttachmentsResponse})
+var sBatchListPolicyAttachmentsResponse_ObjectIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifiers", ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &eBatchListPolicyAttachmentsResponse_ObjectIdentifiers})
+var sBatchListPolicyAttachmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchListPolicyAttachmentsResponse_NextToken})
+var sBatchLookupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLookupPolicy, Members: &mBatchLookupPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchLookupPolicy})
+var sBatchLookupPolicy_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchLookupPolicy_ObjectReference})
+var sBatchLookupPolicy_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchLookupPolicy_NextToken})
+var sBatchLookupPolicy_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchLookupPolicy_MaxResults})
+var sBatchLookupPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLookupPolicyResponse, Members: &mBatchLookupPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchLookupPolicyResponse})
+var sBatchLookupPolicyResponse_PolicyToPathList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyToPathList", ID: &i_PolicyToPathList, Members: &m_PolicyToPathList, Type: smithy.ShapeTypeList, Ext: &eBatchLookupPolicyResponse_PolicyToPathList})
+var sBatchLookupPolicyResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchLookupPolicyResponse_NextToken})
+var s_BatchOperationIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchOperationIndex, Type: smithy.ShapeTypeInteger, Ext: &e_BatchOperationIndex})
+var sBatchReadException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadException, Members: &mBatchReadException, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadException})
+var sBatchReadException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iBatchReadExceptionType, Members: &mBatchReadExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eBatchReadException_Type})
+var sBatchReadException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eBatchReadException_Message})
+var sBatchReadExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadExceptionType, Members: &mBatchReadExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eBatchReadExceptionType})
+var sBatchReadExceptionType_ValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_ValidationException})
+var sBatchReadExceptionType_InvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidArnException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_InvalidArnException})
+var sBatchReadExceptionType_ResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceNotFoundException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_ResourceNotFoundException})
+var sBatchReadExceptionType_InvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidNextTokenException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_InvalidNextTokenException})
+var sBatchReadExceptionType_AccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDeniedException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_AccessDeniedException})
+var sBatchReadExceptionType_NotNodeException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotNodeException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_NotNodeException})
+var sBatchReadExceptionType_FacetValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetValidationException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_FacetValidationException})
+var sBatchReadExceptionType_CannotListParentOfRootException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CannotListParentOfRootException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_CannotListParentOfRootException})
+var sBatchReadExceptionType_NotIndexException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIndexException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_NotIndexException})
+var sBatchReadExceptionType_NotPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotPolicyException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_NotPolicyException})
+var sBatchReadExceptionType_DirectoryNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryNotEnabledException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_DirectoryNotEnabledException})
+var sBatchReadExceptionType_LimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitExceededException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_LimitExceededException})
+var sBatchReadExceptionType_InternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalServiceException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadExceptionType_InternalServiceException})
+var sBatchReadOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadOperation, Members: &mBatchReadOperation, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation})
+var sBatchReadOperation_ListObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectAttributes", ID: &iBatchListObjectAttributes, Members: &mBatchListObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListObjectAttributes})
+var sBatchReadOperation_ListObjectChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectChildren", ID: &iBatchListObjectChildren, Members: &mBatchListObjectChildren, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListObjectChildren})
+var sBatchReadOperation_ListAttachedIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListAttachedIndices", ID: &iBatchListAttachedIndices, Members: &mBatchListAttachedIndices, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListAttachedIndices})
+var sBatchReadOperation_ListObjectParentPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectParentPaths", ID: &iBatchListObjectParentPaths, Members: &mBatchListObjectParentPaths, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListObjectParentPaths})
+var sBatchReadOperation_GetObjectInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetObjectInformation", ID: &iBatchGetObjectInformation, Members: &mBatchGetObjectInformation, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_GetObjectInformation})
+var sBatchReadOperation_GetObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetObjectAttributes", ID: &iBatchGetObjectAttributes, Members: &mBatchGetObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_GetObjectAttributes})
+var sBatchReadOperation_ListObjectParents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectParents", ID: &iBatchListObjectParents, Members: &mBatchListObjectParents, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListObjectParents})
+var sBatchReadOperation_ListObjectPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectPolicies", ID: &iBatchListObjectPolicies, Members: &mBatchListObjectPolicies, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListObjectPolicies})
+var sBatchReadOperation_ListPolicyAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListPolicyAttachments", ID: &iBatchListPolicyAttachments, Members: &mBatchListPolicyAttachments, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListPolicyAttachments})
+var sBatchReadOperation_LookupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookupPolicy", ID: &iBatchLookupPolicy, Members: &mBatchLookupPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_LookupPolicy})
+var sBatchReadOperation_ListIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListIndex", ID: &iBatchListIndex, Members: &mBatchListIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListIndex})
+var sBatchReadOperation_ListOutgoingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListOutgoingTypedLinks", ID: &iBatchListOutgoingTypedLinks, Members: &mBatchListOutgoingTypedLinks, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListOutgoingTypedLinks})
+var sBatchReadOperation_ListIncomingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListIncomingTypedLinks", ID: &iBatchListIncomingTypedLinks, Members: &mBatchListIncomingTypedLinks, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_ListIncomingTypedLinks})
+var sBatchReadOperation_GetLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetLinkAttributes", ID: &iBatchGetLinkAttributes, Members: &mBatchGetLinkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperation_GetLinkAttributes})
+var s_BatchReadOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchReadOperationList, Members: &m_BatchReadOperationList, Type: smithy.ShapeTypeList, Ext: &e_BatchReadOperationList})
+var s_BatchReadOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchReadOperation, Members: &mBatchReadOperation, Type: smithy.ShapeTypeStructure, Ext: &e_BatchReadOperationList_member})
+var sBatchReadOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadOperationResponse, Members: &mBatchReadOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperationResponse})
+var sBatchReadOperationResponse_SuccessfulResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfulResponse", ID: &iBatchReadSuccessfulResponse, Members: &mBatchReadSuccessfulResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperationResponse_SuccessfulResponse})
+var sBatchReadOperationResponse_ExceptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExceptionResponse", ID: &iBatchReadException, Members: &mBatchReadException, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadOperationResponse_ExceptionResponse})
+var s_BatchReadOperationResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchReadOperationResponseList, Members: &m_BatchReadOperationResponseList, Type: smithy.ShapeTypeList, Ext: &e_BatchReadOperationResponseList})
+var s_BatchReadOperationResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchReadOperationResponse, Members: &mBatchReadOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &e_BatchReadOperationResponseList_member})
+var sBatchReadSuccessfulResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadSuccessfulResponse, Members: &mBatchReadSuccessfulResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse})
+var sBatchReadSuccessfulResponse_ListObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectAttributes", ID: &iBatchListObjectAttributesResponse, Members: &mBatchListObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListObjectAttributes})
+var sBatchReadSuccessfulResponse_ListObjectChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectChildren", ID: &iBatchListObjectChildrenResponse, Members: &mBatchListObjectChildrenResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListObjectChildren})
+var sBatchReadSuccessfulResponse_GetObjectInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetObjectInformation", ID: &iBatchGetObjectInformationResponse, Members: &mBatchGetObjectInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_GetObjectInformation})
+var sBatchReadSuccessfulResponse_GetObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetObjectAttributes", ID: &iBatchGetObjectAttributesResponse, Members: &mBatchGetObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_GetObjectAttributes})
+var sBatchReadSuccessfulResponse_ListAttachedIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListAttachedIndices", ID: &iBatchListAttachedIndicesResponse, Members: &mBatchListAttachedIndicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListAttachedIndices})
+var sBatchReadSuccessfulResponse_ListObjectParentPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectParentPaths", ID: &iBatchListObjectParentPathsResponse, Members: &mBatchListObjectParentPathsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListObjectParentPaths})
+var sBatchReadSuccessfulResponse_ListObjectPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectPolicies", ID: &iBatchListObjectPoliciesResponse, Members: &mBatchListObjectPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListObjectPolicies})
+var sBatchReadSuccessfulResponse_ListPolicyAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListPolicyAttachments", ID: &iBatchListPolicyAttachmentsResponse, Members: &mBatchListPolicyAttachmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListPolicyAttachments})
+var sBatchReadSuccessfulResponse_LookupPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookupPolicy", ID: &iBatchLookupPolicyResponse, Members: &mBatchLookupPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_LookupPolicy})
+var sBatchReadSuccessfulResponse_ListIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListIndex", ID: &iBatchListIndexResponse, Members: &mBatchListIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListIndex})
+var sBatchReadSuccessfulResponse_ListOutgoingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListOutgoingTypedLinks", ID: &iBatchListOutgoingTypedLinksResponse, Members: &mBatchListOutgoingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListOutgoingTypedLinks})
+var sBatchReadSuccessfulResponse_ListIncomingTypedLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListIncomingTypedLinks", ID: &iBatchListIncomingTypedLinksResponse, Members: &mBatchListIncomingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListIncomingTypedLinks})
+var sBatchReadSuccessfulResponse_GetLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetLinkAttributes", ID: &iBatchGetLinkAttributesResponse, Members: &mBatchGetLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_GetLinkAttributes})
+var sBatchReadSuccessfulResponse_ListObjectParents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListObjectParents", ID: &iBatchListObjectParentsResponse, Members: &mBatchListObjectParentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadSuccessfulResponse_ListObjectParents})
+var s_BatchReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchReferenceName, Type: smithy.ShapeTypeString, Ext: &e_BatchReferenceName})
+var sBatchRemoveFacetFromObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveFacetFromObject, Members: &mBatchRemoveFacetFromObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchRemoveFacetFromObject})
+var sBatchRemoveFacetFromObject_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eBatchRemoveFacetFromObject_SchemaFacet})
+var sBatchRemoveFacetFromObject_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchRemoveFacetFromObject_ObjectReference})
+var sBatchRemoveFacetFromObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveFacetFromObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchRemoveFacetFromObjectResponse})
+var sBatchUpdateLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateLinkAttributes, Members: &mBatchUpdateLinkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateLinkAttributes})
+var sBatchUpdateLinkAttributes_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateLinkAttributes_TypedLinkSpecifier})
+var sBatchUpdateLinkAttributes_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_LinkAttributeUpdateList, Members: &m_LinkAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateLinkAttributes_AttributeUpdates})
+var sBatchUpdateLinkAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateLinkAttributesResponse})
+var sBatchUpdateObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateObjectAttributes, Members: &mBatchUpdateObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateObjectAttributes})
+var sBatchUpdateObjectAttributes_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateObjectAttributes_ObjectReference})
+var sBatchUpdateObjectAttributes_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_ObjectAttributeUpdateList, Members: &m_ObjectAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateObjectAttributes_AttributeUpdates})
+var sBatchUpdateObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateObjectAttributesResponse, Members: &mBatchUpdateObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateObjectAttributesResponse})
+var sBatchUpdateObjectAttributesResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateObjectAttributesResponse_ObjectIdentifier})
+var sBatchWriteException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteException, Members: &mBatchWriteException, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteException})
+var sBatchWriteException_Index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Index", ID: &i_BatchOperationIndex, Type: smithy.ShapeTypeInteger, Ext: &eBatchWriteException_Index})
+var sBatchWriteException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iBatchWriteExceptionType, Members: &mBatchWriteExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eBatchWriteException_Type})
+var sBatchWriteException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eBatchWriteException_Message})
+var sBatchWriteExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteExceptionType, Members: &mBatchWriteExceptionType, Type: smithy.ShapeTypeEnum, Ext: &eBatchWriteExceptionType})
+var sBatchWriteExceptionType_InternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalServiceException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_InternalServiceException})
+var sBatchWriteExceptionType_ValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_ValidationException})
+var sBatchWriteExceptionType_InvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidArnException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_InvalidArnException})
+var sBatchWriteExceptionType_LinkNameAlreadyInUseException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkNameAlreadyInUseException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_LinkNameAlreadyInUseException})
+var sBatchWriteExceptionType_StillContainsLinksException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StillContainsLinksException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_StillContainsLinksException})
+var sBatchWriteExceptionType_FacetValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetValidationException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_FacetValidationException})
+var sBatchWriteExceptionType_ObjectNotDetachedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectNotDetachedException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_ObjectNotDetachedException})
+var sBatchWriteExceptionType_ResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceNotFoundException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_ResourceNotFoundException})
+var sBatchWriteExceptionType_AccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDeniedException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_AccessDeniedException})
+var sBatchWriteExceptionType_InvalidAttachmentException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidAttachmentException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_InvalidAttachmentException})
+var sBatchWriteExceptionType_NotIndexException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIndexException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_NotIndexException})
+var sBatchWriteExceptionType_NotNodeException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotNodeException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_NotNodeException})
+var sBatchWriteExceptionType_IndexedAttributeMissingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexedAttributeMissingException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_IndexedAttributeMissingException})
+var sBatchWriteExceptionType_ObjectAlreadyDetachedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAlreadyDetachedException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_ObjectAlreadyDetachedException})
+var sBatchWriteExceptionType_NotPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotPolicyException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_NotPolicyException})
+var sBatchWriteExceptionType_DirectoryNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryNotEnabledException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_DirectoryNotEnabledException})
+var sBatchWriteExceptionType_LimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitExceededException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_LimitExceededException})
+var sBatchWriteExceptionType_UnsupportedIndexTypeException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnsupportedIndexTypeException", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteExceptionType_UnsupportedIndexTypeException})
+var sBatchWriteOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteOperation, Members: &mBatchWriteOperation, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation})
+var sBatchWriteOperation_CreateObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateObject", ID: &iBatchCreateObject, Members: &mBatchCreateObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_CreateObject})
+var sBatchWriteOperation_AttachObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachObject", ID: &iBatchAttachObject, Members: &mBatchAttachObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_AttachObject})
+var sBatchWriteOperation_DetachObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachObject", ID: &iBatchDetachObject, Members: &mBatchDetachObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_DetachObject})
+var sBatchWriteOperation_UpdateObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateObjectAttributes", ID: &iBatchUpdateObjectAttributes, Members: &mBatchUpdateObjectAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_UpdateObjectAttributes})
+var sBatchWriteOperation_DeleteObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteObject", ID: &iBatchDeleteObject, Members: &mBatchDeleteObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_DeleteObject})
+var sBatchWriteOperation_AddFacetToObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddFacetToObject", ID: &iBatchAddFacetToObject, Members: &mBatchAddFacetToObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_AddFacetToObject})
+var sBatchWriteOperation_RemoveFacetFromObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveFacetFromObject", ID: &iBatchRemoveFacetFromObject, Members: &mBatchRemoveFacetFromObject, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_RemoveFacetFromObject})
+var sBatchWriteOperation_AttachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachPolicy", ID: &iBatchAttachPolicy, Members: &mBatchAttachPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_AttachPolicy})
+var sBatchWriteOperation_DetachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachPolicy", ID: &iBatchDetachPolicy, Members: &mBatchDetachPolicy, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_DetachPolicy})
+var sBatchWriteOperation_CreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateIndex", ID: &iBatchCreateIndex, Members: &mBatchCreateIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_CreateIndex})
+var sBatchWriteOperation_AttachToIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachToIndex", ID: &iBatchAttachToIndex, Members: &mBatchAttachToIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_AttachToIndex})
+var sBatchWriteOperation_DetachFromIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachFromIndex", ID: &iBatchDetachFromIndex, Members: &mBatchDetachFromIndex, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_DetachFromIndex})
+var sBatchWriteOperation_AttachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachTypedLink", ID: &iBatchAttachTypedLink, Members: &mBatchAttachTypedLink, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_AttachTypedLink})
+var sBatchWriteOperation_DetachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachTypedLink", ID: &iBatchDetachTypedLink, Members: &mBatchDetachTypedLink, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_DetachTypedLink})
+var sBatchWriteOperation_UpdateLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateLinkAttributes", ID: &iBatchUpdateLinkAttributes, Members: &mBatchUpdateLinkAttributes, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperation_UpdateLinkAttributes})
+var s_BatchWriteOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteOperationList, Members: &m_BatchWriteOperationList, Type: smithy.ShapeTypeList, Ext: &e_BatchWriteOperationList})
+var s_BatchWriteOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteOperation, Members: &mBatchWriteOperation, Type: smithy.ShapeTypeStructure, Ext: &e_BatchWriteOperationList_member})
+var sBatchWriteOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteOperationResponse, Members: &mBatchWriteOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse})
+var sBatchWriteOperationResponse_CreateObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateObject", ID: &iBatchCreateObjectResponse, Members: &mBatchCreateObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_CreateObject})
+var sBatchWriteOperationResponse_AttachObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachObject", ID: &iBatchAttachObjectResponse, Members: &mBatchAttachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_AttachObject})
+var sBatchWriteOperationResponse_DetachObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachObject", ID: &iBatchDetachObjectResponse, Members: &mBatchDetachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_DetachObject})
+var sBatchWriteOperationResponse_UpdateObjectAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateObjectAttributes", ID: &iBatchUpdateObjectAttributesResponse, Members: &mBatchUpdateObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_UpdateObjectAttributes})
+var sBatchWriteOperationResponse_DeleteObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteObject", ID: &iBatchDeleteObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_DeleteObject})
+var sBatchWriteOperationResponse_AddFacetToObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddFacetToObject", ID: &iBatchAddFacetToObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_AddFacetToObject})
+var sBatchWriteOperationResponse_RemoveFacetFromObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveFacetFromObject", ID: &iBatchRemoveFacetFromObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_RemoveFacetFromObject})
+var sBatchWriteOperationResponse_AttachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachPolicy", ID: &iBatchAttachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_AttachPolicy})
+var sBatchWriteOperationResponse_DetachPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachPolicy", ID: &iBatchDetachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_DetachPolicy})
+var sBatchWriteOperationResponse_CreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateIndex", ID: &iBatchCreateIndexResponse, Members: &mBatchCreateIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_CreateIndex})
+var sBatchWriteOperationResponse_AttachToIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachToIndex", ID: &iBatchAttachToIndexResponse, Members: &mBatchAttachToIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_AttachToIndex})
+var sBatchWriteOperationResponse_DetachFromIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachFromIndex", ID: &iBatchDetachFromIndexResponse, Members: &mBatchDetachFromIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_DetachFromIndex})
+var sBatchWriteOperationResponse_AttachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachTypedLink", ID: &iBatchAttachTypedLinkResponse, Members: &mBatchAttachTypedLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_AttachTypedLink})
+var sBatchWriteOperationResponse_DetachTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachTypedLink", ID: &iBatchDetachTypedLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_DetachTypedLink})
+var sBatchWriteOperationResponse_UpdateLinkAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateLinkAttributes", ID: &iBatchUpdateLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteOperationResponse_UpdateLinkAttributes})
+var s_BatchWriteOperationResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteOperationResponseList, Members: &m_BatchWriteOperationResponseList, Type: smithy.ShapeTypeList, Ext: &e_BatchWriteOperationResponseList})
+var s_BatchWriteOperationResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteOperationResponse, Members: &mBatchWriteOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &e_BatchWriteOperationResponseList_member})
+var s_BinaryAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &e_BinaryAttributeValue})
+var s_Bool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &e_Bool})
+var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanAttributeValue})
+var sCannotListParentOfRootException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotListParentOfRootException, Members: &mCannotListParentOfRootException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eCannotListParentOfRootException})
+var sCannotListParentOfRootException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eCannotListParentOfRootException_Message})
+var sConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsistencyLevel, Members: &mConsistencyLevel, Type: smithy.ShapeTypeEnum, Ext: &eConsistencyLevel})
+var sConsistencyLevel_SERIALIZABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERIALIZABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConsistencyLevel_SERIALIZABLE})
+var sConsistencyLevel_EVENTUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENTUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConsistencyLevel_EVENTUAL})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var s_DatetimeAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatetimeAttributeValue, Type: smithy.ShapeTypeTimestamp, Ext: &e_DatetimeAttributeValue})
+var sDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectory, Members: &mDirectory, Type: smithy.ShapeTypeStructure, Ext: &eDirectory})
+var sDirectory_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eDirectory_Name})
+var sDirectory_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_DirectoryArn, Type: smithy.ShapeTypeString, Ext: &eDirectory_DirectoryArn})
+var sDirectory_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDirectoryState, Members: &mDirectoryState, Type: smithy.ShapeTypeEnum, Ext: &eDirectory_State})
+var sDirectory_CreationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDirectory_CreationDateTime})
+var sDirectoryAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryAlreadyExistsException, Members: &mDirectoryAlreadyExistsException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryAlreadyExistsException})
+var sDirectoryAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDirectoryAlreadyExistsException_Message})
+var s_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryArn, Type: smithy.ShapeTypeString, Ext: &e_DirectoryArn})
+var sDirectoryDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryDeletedException, Members: &mDirectoryDeletedException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryDeletedException})
+var sDirectoryDeletedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDirectoryDeletedException_Message})
+var s_DirectoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryList, Members: &m_DirectoryList, Type: smithy.ShapeTypeList, Ext: &e_DirectoryList})
+var s_DirectoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectory, Members: &mDirectory, Type: smithy.ShapeTypeStructure, Ext: &e_DirectoryList_member})
+var s_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &e_DirectoryName})
+var sDirectoryNotDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryNotDisabledException, Members: &mDirectoryNotDisabledException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryNotDisabledException})
+var sDirectoryNotDisabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDirectoryNotDisabledException_Message})
+var sDirectoryNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryNotEnabledException, Members: &mDirectoryNotEnabledException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryNotEnabledException})
+var sDirectoryNotEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDirectoryNotEnabledException_Message})
+var sDirectoryState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryState, Members: &mDirectoryState, Type: smithy.ShapeTypeEnum, Ext: &eDirectoryState})
+var sDirectoryState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryState_ENABLED})
+var sDirectoryState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryState_DISABLED})
+var sDirectoryState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryState_DELETED})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacet, Members: &mFacet, Type: smithy.ShapeTypeStructure, Ext: &eFacet})
+var sFacet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eFacet_Name})
+var sFacet_ObjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectType", ID: &iObjectType, Members: &mObjectType, Type: smithy.ShapeTypeEnum, Ext: &eFacet_ObjectType})
+var sFacet_FacetStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetStyle", ID: &iFacetStyle, Members: &mFacetStyle, Type: smithy.ShapeTypeEnum, Ext: &eFacet_FacetStyle})
+var sFacetAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAlreadyExistsException, Members: &mFacetAlreadyExistsException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eFacetAlreadyExistsException})
+var sFacetAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eFacetAlreadyExistsException_Message})
+var sFacetAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAttribute, Members: &mFacetAttribute, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttribute})
+var sFacetAttribute_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eFacetAttribute_Name})
+var sFacetAttribute_AttributeDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeDefinition", ID: &iFacetAttributeDefinition, Members: &mFacetAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttribute_AttributeDefinition})
+var sFacetAttribute_AttributeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeReference", ID: &iFacetAttributeReference, Members: &mFacetAttributeReference, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttribute_AttributeReference})
+var sFacetAttribute_RequiredBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredBehavior", ID: &iRequiredAttributeBehavior, Members: &mRequiredAttributeBehavior, Type: smithy.ShapeTypeEnum, Ext: &eFacetAttribute_RequiredBehavior})
+var sFacetAttributeDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAttributeDefinition, Members: &mFacetAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeDefinition})
+var sFacetAttributeDefinition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iFacetAttributeType, Members: &mFacetAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eFacetAttributeDefinition_Type})
+var sFacetAttributeDefinition_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eFacetAttributeDefinition_DefaultValue})
+var sFacetAttributeDefinition_IsImmutable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsImmutable", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eFacetAttributeDefinition_IsImmutable})
+var sFacetAttributeDefinition_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleMap, Members: &m_RuleMap, Type: smithy.ShapeTypeMap, Ext: &eFacetAttributeDefinition_Rules})
+var s_FacetAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FacetAttributeList, Members: &m_FacetAttributeList, Type: smithy.ShapeTypeList, Ext: &e_FacetAttributeList})
+var s_FacetAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFacetAttribute, Members: &mFacetAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_FacetAttributeList_member})
+var sFacetAttributeReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAttributeReference, Members: &mFacetAttributeReference, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeReference})
+var sFacetAttributeReference_TargetFacetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetFacetName", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eFacetAttributeReference_TargetFacetName})
+var sFacetAttributeReference_TargetAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eFacetAttributeReference_TargetAttributeName})
+var sFacetAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAttributeType, Members: &mFacetAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eFacetAttributeType})
+var sFacetAttributeType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_STRING})
+var sFacetAttributeType_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_BINARY})
+var sFacetAttributeType_BOOLEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOLEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_BOOLEAN})
+var sFacetAttributeType_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_NUMBER})
+var sFacetAttributeType_DATETIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATETIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_DATETIME})
+var sFacetAttributeType_VARIANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARIANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeType_VARIANT})
+var sFacetAttributeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetAttributeUpdate, Members: &mFacetAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeUpdate})
+var sFacetAttributeUpdate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iFacetAttribute, Members: &mFacetAttribute, Type: smithy.ShapeTypeStructure, Ext: &eFacetAttributeUpdate_Attribute})
+var sFacetAttributeUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iUpdateActionType, Members: &mUpdateActionType, Type: smithy.ShapeTypeEnum, Ext: &eFacetAttributeUpdate_Action})
+var s_FacetAttributeUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FacetAttributeUpdateList, Members: &m_FacetAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &e_FacetAttributeUpdateList})
+var s_FacetAttributeUpdateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFacetAttributeUpdate, Members: &mFacetAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_FacetAttributeUpdateList_member})
+var sFacetInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetInUseException, Members: &mFacetInUseException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eFacetInUseException})
+var sFacetInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eFacetInUseException_Message})
+var s_FacetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &e_FacetName})
+var s_FacetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FacetNameList, Members: &m_FacetNameList, Type: smithy.ShapeTypeList, Ext: &e_FacetNameList})
+var s_FacetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &e_FacetNameList_member})
+var sFacetNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetNotFoundException, Members: &mFacetNotFoundException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eFacetNotFoundException})
+var sFacetNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eFacetNotFoundException_Message})
+var sFacetStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetStyle, Members: &mFacetStyle, Type: smithy.ShapeTypeEnum, Ext: &eFacetStyle})
+var sFacetStyle_STATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetStyle_STATIC})
+var sFacetStyle_DYNAMIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFacetStyle_DYNAMIC})
+var sFacetValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFacetValidationException, Members: &mFacetValidationException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eFacetValidationException})
+var sFacetValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eFacetValidationException_Message})
+var sIncompatibleSchemaException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleSchemaException, Members: &mIncompatibleSchemaException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eIncompatibleSchemaException})
+var sIncompatibleSchemaException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eIncompatibleSchemaException_Message})
+var sIndexAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexAttachment, Members: &mIndexAttachment, Type: smithy.ShapeTypeStructure, Ext: &eIndexAttachment})
+var sIndexAttachment_IndexedAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexedAttributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eIndexAttachment_IndexedAttributes})
+var sIndexAttachment_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eIndexAttachment_ObjectIdentifier})
+var s_IndexAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexAttachmentList, Members: &m_IndexAttachmentList, Type: smithy.ShapeTypeList, Ext: &e_IndexAttachmentList})
+var s_IndexAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndexAttachment, Members: &mIndexAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_IndexAttachmentList_member})
+var sIndexedAttributeMissingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexedAttributeMissingException, Members: &mIndexedAttributeMissingException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eIndexedAttributeMissingException})
+var sIndexedAttributeMissingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eIndexedAttributeMissingException_Message})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceException})
+var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceException_Message})
+var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArnException})
+var sInvalidArnException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidArnException_Message})
+var sInvalidAttachmentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAttachmentException, Members: &mInvalidAttachmentException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAttachmentException})
+var sInvalidAttachmentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidAttachmentException_Message})
+var sInvalidFacetUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFacetUpdateException, Members: &mInvalidFacetUpdateException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFacetUpdateException})
+var sInvalidFacetUpdateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidFacetUpdateException_Message})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var sInvalidRuleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRuleException, Members: &mInvalidRuleException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRuleException})
+var sInvalidRuleException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRuleException_Message})
+var sInvalidSchemaDocException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSchemaDocException, Members: &mInvalidSchemaDocException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSchemaDocException})
+var sInvalidSchemaDocException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSchemaDocException_Message})
+var sInvalidTaggingRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTaggingRequestException, Members: &mInvalidTaggingRequestException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTaggingRequestException})
+var sInvalidTaggingRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTaggingRequestException_Message})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sLinkAttributeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkAttributeAction, Members: &mLinkAttributeAction, Type: smithy.ShapeTypeStructure, Ext: &eLinkAttributeAction})
+var sLinkAttributeAction_AttributeActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeActionType", ID: &iUpdateActionType, Members: &mUpdateActionType, Type: smithy.ShapeTypeEnum, Ext: &eLinkAttributeAction_AttributeActionType})
+var sLinkAttributeAction_AttributeUpdateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdateValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eLinkAttributeAction_AttributeUpdateValue})
+var sLinkAttributeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkAttributeUpdate, Members: &mLinkAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &eLinkAttributeUpdate})
+var sLinkAttributeUpdate_AttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeKey", ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &eLinkAttributeUpdate_AttributeKey})
+var sLinkAttributeUpdate_AttributeAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeAction", ID: &iLinkAttributeAction, Members: &mLinkAttributeAction, Type: smithy.ShapeTypeStructure, Ext: &eLinkAttributeUpdate_AttributeAction})
+var s_LinkAttributeUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkAttributeUpdateList, Members: &m_LinkAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &e_LinkAttributeUpdateList})
+var s_LinkAttributeUpdateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLinkAttributeUpdate, Members: &mLinkAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_LinkAttributeUpdateList_member})
+var s_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &e_LinkName})
+var sLinkNameAlreadyInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkNameAlreadyInUseException, Members: &mLinkNameAlreadyInUseException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eLinkNameAlreadyInUseException})
+var sLinkNameAlreadyInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eLinkNameAlreadyInUseException_Message})
+var s_LinkNameToObjectIdentifierMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkNameToObjectIdentifierMap, Members: &m_LinkNameToObjectIdentifierMap, Type: smithy.ShapeTypeMap, Ext: &e_LinkNameToObjectIdentifierMap})
+var s_LinkNameToObjectIdentifierMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &e_LinkNameToObjectIdentifierMap_key})
+var s_LinkNameToObjectIdentifierMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &e_LinkNameToObjectIdentifierMap_value})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotIndexException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotIndexException, Members: &mNotIndexException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eNotIndexException})
+var sNotIndexException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNotIndexException_Message})
+var sNotNodeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotNodeException, Members: &mNotNodeException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eNotNodeException})
+var sNotNodeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNotNodeException_Message})
+var sNotPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotPolicyException, Members: &mNotPolicyException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eNotPolicyException})
+var sNotPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNotPolicyException_Message})
+var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_NumberAttributeValue})
+var s_NumberResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &e_NumberResults})
+var sObjectAlreadyDetachedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectAlreadyDetachedException, Members: &mObjectAlreadyDetachedException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eObjectAlreadyDetachedException})
+var sObjectAlreadyDetachedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eObjectAlreadyDetachedException_Message})
+var sObjectAttributeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectAttributeAction, Members: &mObjectAttributeAction, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeAction})
+var sObjectAttributeAction_ObjectAttributeActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeActionType", ID: &iUpdateActionType, Members: &mUpdateActionType, Type: smithy.ShapeTypeEnum, Ext: &eObjectAttributeAction_ObjectAttributeActionType})
+var sObjectAttributeAction_ObjectAttributeUpdateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeUpdateValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eObjectAttributeAction_ObjectAttributeUpdateValue})
+var sObjectAttributeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectAttributeRange, Members: &mObjectAttributeRange, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeRange})
+var sObjectAttributeRange_AttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeKey", ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeRange_AttributeKey})
+var sObjectAttributeRange_Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Range", ID: &iTypedAttributeValueRange, Members: &mTypedAttributeValueRange, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeRange_Range})
+var s_ObjectAttributeRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectAttributeRangeList, Members: &m_ObjectAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &e_ObjectAttributeRangeList})
+var s_ObjectAttributeRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iObjectAttributeRange, Members: &mObjectAttributeRange, Type: smithy.ShapeTypeStructure, Ext: &e_ObjectAttributeRangeList_member})
+var sObjectAttributeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectAttributeUpdate, Members: &mObjectAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeUpdate})
+var sObjectAttributeUpdate_ObjectAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeKey", ID: &iAttributeKey, Members: &mAttributeKey, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeUpdate_ObjectAttributeKey})
+var sObjectAttributeUpdate_ObjectAttributeAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeAction", ID: &iObjectAttributeAction, Members: &mObjectAttributeAction, Type: smithy.ShapeTypeStructure, Ext: &eObjectAttributeUpdate_ObjectAttributeAction})
+var s_ObjectAttributeUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectAttributeUpdateList, Members: &m_ObjectAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &e_ObjectAttributeUpdateList})
+var s_ObjectAttributeUpdateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iObjectAttributeUpdate, Members: &mObjectAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_ObjectAttributeUpdateList_member})
+var s_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ObjectIdentifier})
+var s_ObjectIdentifierAndLinkNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectIdentifierAndLinkNameList, Members: &m_ObjectIdentifierAndLinkNameList, Type: smithy.ShapeTypeList, Ext: &e_ObjectIdentifierAndLinkNameList})
+var s_ObjectIdentifierAndLinkNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iObjectIdentifierAndLinkNameTuple, Members: &mObjectIdentifierAndLinkNameTuple, Type: smithy.ShapeTypeStructure, Ext: &e_ObjectIdentifierAndLinkNameList_member})
+var sObjectIdentifierAndLinkNameTuple = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectIdentifierAndLinkNameTuple, Members: &mObjectIdentifierAndLinkNameTuple, Type: smithy.ShapeTypeStructure, Ext: &eObjectIdentifierAndLinkNameTuple})
+var sObjectIdentifierAndLinkNameTuple_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eObjectIdentifierAndLinkNameTuple_ObjectIdentifier})
+var sObjectIdentifierAndLinkNameTuple_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eObjectIdentifierAndLinkNameTuple_LinkName})
+var s_ObjectIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ObjectIdentifierList})
+var s_ObjectIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ObjectIdentifierList_member})
+var s_ObjectIdentifierToLinkNameMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectIdentifierToLinkNameMap, Members: &m_ObjectIdentifierToLinkNameMap, Type: smithy.ShapeTypeMap, Ext: &e_ObjectIdentifierToLinkNameMap})
+var s_ObjectIdentifierToLinkNameMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ObjectIdentifierToLinkNameMap_key})
+var s_ObjectIdentifierToLinkNameMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &e_ObjectIdentifierToLinkNameMap_value})
+var sObjectNotDetachedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectNotDetachedException, Members: &mObjectNotDetachedException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eObjectNotDetachedException})
+var sObjectNotDetachedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eObjectNotDetachedException_Message})
+var sObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eObjectReference})
+var sObjectReference_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &i_SelectorObjectReference, Type: smithy.ShapeTypeString, Ext: &eObjectReference_Selector})
+var sObjectType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectType, Members: &mObjectType, Type: smithy.ShapeTypeEnum, Ext: &eObjectType})
+var sObjectType_NODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectType_NODE})
+var sObjectType_LEAF_NODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEAF_NODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectType_LEAF_NODE})
+var sObjectType_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectType_POLICY})
+var sObjectType_INDEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDEX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectType_INDEX})
+var s_PathString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathString, Type: smithy.ShapeTypeString, Ext: &e_PathString})
+var sPathToObjectIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathToObjectIdentifiers, Members: &mPathToObjectIdentifiers, Type: smithy.ShapeTypeStructure, Ext: &ePathToObjectIdentifiers})
+var sPathToObjectIdentifiers_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathString, Type: smithy.ShapeTypeString, Ext: &ePathToObjectIdentifiers_Path})
+var sPathToObjectIdentifiers_ObjectIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifiers", ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &ePathToObjectIdentifiers_ObjectIdentifiers})
+var s_PathToObjectIdentifiersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathToObjectIdentifiersList, Members: &m_PathToObjectIdentifiersList, Type: smithy.ShapeTypeList, Ext: &e_PathToObjectIdentifiersList})
+var s_PathToObjectIdentifiersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPathToObjectIdentifiers, Members: &mPathToObjectIdentifiers, Type: smithy.ShapeTypeStructure, Ext: &e_PathToObjectIdentifiersList_member})
+var sPolicyAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyAttachment, Members: &mPolicyAttachment, Type: smithy.ShapeTypeStructure, Ext: &ePolicyAttachment})
+var sPolicyAttachment_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &ePolicyAttachment_PolicyId})
+var sPolicyAttachment_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &ePolicyAttachment_ObjectIdentifier})
+var sPolicyAttachment_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ePolicyAttachment_PolicyType})
+var s_PolicyAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyAttachmentList, Members: &m_PolicyAttachmentList, Type: smithy.ShapeTypeList, Ext: &e_PolicyAttachmentList})
+var s_PolicyAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyAttachment, Members: &mPolicyAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyAttachmentList_member})
+var sPolicyToPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyToPath, Members: &mPolicyToPath, Type: smithy.ShapeTypeStructure, Ext: &ePolicyToPath})
+var sPolicyToPath_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathString, Type: smithy.ShapeTypeString, Ext: &ePolicyToPath_Path})
+var sPolicyToPath_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_PolicyAttachmentList, Members: &m_PolicyAttachmentList, Type: smithy.ShapeTypeList, Ext: &ePolicyToPath_Policies})
+var s_PolicyToPathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyToPathList, Members: &m_PolicyToPathList, Type: smithy.ShapeTypeList, Ext: &e_PolicyToPathList})
+var s_PolicyToPathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyToPath, Members: &mPolicyToPath, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyToPathList_member})
+var s_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &e_PolicyType})
+var sRangeMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRangeMode, Members: &mRangeMode, Type: smithy.ShapeTypeEnum, Ext: &eRangeMode})
+var sRangeMode_FIRST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRangeMode_FIRST})
+var sRangeMode_LAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRangeMode_LAST})
+var sRangeMode_LAST_BEFORE_MISSING_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_BEFORE_MISSING_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRangeMode_LAST_BEFORE_MISSING_VALUES})
+var sRangeMode_INCLUSIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCLUSIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRangeMode_INCLUSIVE})
+var sRangeMode_EXCLUSIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCLUSIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRangeMode_EXCLUSIVE})
+var sRequiredAttributeBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequiredAttributeBehavior, Members: &mRequiredAttributeBehavior, Type: smithy.ShapeTypeEnum, Ext: &eRequiredAttributeBehavior})
+var sRequiredAttributeBehavior_REQUIRED_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredAttributeBehavior_REQUIRED_ALWAYS})
+var sRequiredAttributeBehavior_NOT_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredAttributeBehavior_NOT_REQUIRED})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRetryableConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryableConflictException, Members: &mRetryableConflictException, Traits: &t71, Type: smithy.ShapeTypeStructure, Ext: &eRetryableConflictException})
+var sRetryableConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eRetryableConflictException_Message})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &eRule_Type})
+var sRule_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_RuleParameterMap, Members: &m_RuleParameterMap, Type: smithy.ShapeTypeMap, Ext: &eRule_Parameters})
+var s_RuleKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleKey, Type: smithy.ShapeTypeString, Ext: &e_RuleKey})
+var s_RuleMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleMap, Members: &m_RuleMap, Type: smithy.ShapeTypeMap, Ext: &e_RuleMap})
+var s_RuleMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleKey, Type: smithy.ShapeTypeString, Ext: &e_RuleMap_key})
+var s_RuleMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &e_RuleMap_value})
+var s_RuleParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleParameterKey, Type: smithy.ShapeTypeString, Ext: &e_RuleParameterKey})
+var s_RuleParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleParameterMap, Members: &m_RuleParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_RuleParameterMap})
+var s_RuleParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleParameterKey, Type: smithy.ShapeTypeString, Ext: &e_RuleParameterMap_key})
+var s_RuleParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RuleParameterValue, Type: smithy.ShapeTypeString, Ext: &e_RuleParameterMap_value})
+var s_RuleParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleParameterValue, Type: smithy.ShapeTypeString, Ext: &e_RuleParameterValue})
+var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &eRuleType})
+var sRuleType_BINARY_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_BINARY_LENGTH})
+var sRuleType_NUMBER_COMPARISON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_COMPARISON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_NUMBER_COMPARISON})
+var sRuleType_STRING_FROM_SET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_FROM_SET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_STRING_FROM_SET})
+var sRuleType_STRING_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_STRING_LENGTH})
+var sSchemaAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaAlreadyExistsException, Members: &mSchemaAlreadyExistsException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eSchemaAlreadyExistsException})
+var sSchemaAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSchemaAlreadyExistsException_Message})
+var sSchemaAlreadyPublishedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaAlreadyPublishedException, Members: &mSchemaAlreadyPublishedException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eSchemaAlreadyPublishedException})
+var sSchemaAlreadyPublishedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSchemaAlreadyPublishedException_Message})
+var sSchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eSchemaFacet})
+var sSchemaFacet_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eSchemaFacet_SchemaArn})
+var sSchemaFacet_FacetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetName", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eSchemaFacet_FacetName})
+var s_SchemaFacetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaFacetList, Members: &m_SchemaFacetList, Type: smithy.ShapeTypeList, Ext: &e_SchemaFacetList})
+var s_SchemaFacetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &e_SchemaFacetList_member})
+var s_SchemaJsonDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaJsonDocument, Type: smithy.ShapeTypeString, Ext: &e_SchemaJsonDocument})
+var s_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &e_SchemaName})
+var s_SelectorObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectorObjectReference, Type: smithy.ShapeTypeString, Ext: &e_SelectorObjectReference})
+var sStillContainsLinksException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStillContainsLinksException, Members: &mStillContainsLinksException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eStillContainsLinksException})
+var sStillContainsLinksException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eStillContainsLinksException_Message})
+var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_StringAttributeValue})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagsNumberResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsNumberResults, Type: smithy.ShapeTypeInteger, Ext: &e_TagsNumberResults})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTypedAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eTypedAttributeValue})
+var sTypedAttributeValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &eTypedAttributeValue_StringValue})
+var sTypedAttributeValue_BinaryValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryValue", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &eTypedAttributeValue_BinaryValue})
+var sTypedAttributeValue_BooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanValue", ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &eTypedAttributeValue_BooleanValue})
+var sTypedAttributeValue_NumberValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberValue", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &eTypedAttributeValue_NumberValue})
+var sTypedAttributeValue_DatetimeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatetimeValue", ID: &i_DatetimeAttributeValue, Type: smithy.ShapeTypeTimestamp, Ext: &eTypedAttributeValue_DatetimeValue})
+var sTypedAttributeValueRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedAttributeValueRange, Members: &mTypedAttributeValueRange, Type: smithy.ShapeTypeStructure, Ext: &eTypedAttributeValueRange})
+var sTypedAttributeValueRange_StartMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartMode", ID: &iRangeMode, Members: &mRangeMode, Type: smithy.ShapeTypeEnum, Ext: &eTypedAttributeValueRange_StartMode})
+var sTypedAttributeValueRange_StartValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eTypedAttributeValueRange_StartValue})
+var sTypedAttributeValueRange_EndMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndMode", ID: &iRangeMode, Members: &mRangeMode, Type: smithy.ShapeTypeEnum, Ext: &eTypedAttributeValueRange_EndMode})
+var sTypedAttributeValueRange_EndValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eTypedAttributeValueRange_EndValue})
+var sTypedLinkAttributeDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkAttributeDefinition, Members: &mTypedLinkAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkAttributeDefinition})
+var sTypedLinkAttributeDefinition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eTypedLinkAttributeDefinition_Name})
+var sTypedLinkAttributeDefinition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iFacetAttributeType, Members: &mFacetAttributeType, Type: smithy.ShapeTypeEnum, Ext: &eTypedLinkAttributeDefinition_Type})
+var sTypedLinkAttributeDefinition_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &iTypedAttributeValue, Members: &mTypedAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eTypedLinkAttributeDefinition_DefaultValue})
+var sTypedLinkAttributeDefinition_IsImmutable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsImmutable", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eTypedLinkAttributeDefinition_IsImmutable})
+var sTypedLinkAttributeDefinition_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleMap, Members: &m_RuleMap, Type: smithy.ShapeTypeMap, Ext: &eTypedLinkAttributeDefinition_Rules})
+var sTypedLinkAttributeDefinition_RequiredBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredBehavior", ID: &iRequiredAttributeBehavior, Members: &mRequiredAttributeBehavior, Type: smithy.ShapeTypeEnum, Ext: &eTypedLinkAttributeDefinition_RequiredBehavior})
+var s_TypedLinkAttributeDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkAttributeDefinitionList, Members: &m_TypedLinkAttributeDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_TypedLinkAttributeDefinitionList})
+var s_TypedLinkAttributeDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTypedLinkAttributeDefinition, Members: &mTypedLinkAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_TypedLinkAttributeDefinitionList_member})
+var sTypedLinkAttributeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkAttributeRange, Members: &mTypedLinkAttributeRange, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkAttributeRange})
+var sTypedLinkAttributeRange_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &eTypedLinkAttributeRange_AttributeName})
+var sTypedLinkAttributeRange_Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Range", ID: &iTypedAttributeValueRange, Members: &mTypedAttributeValueRange, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkAttributeRange_Range})
+var s_TypedLinkAttributeRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkAttributeRangeList, Members: &m_TypedLinkAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &e_TypedLinkAttributeRangeList})
+var s_TypedLinkAttributeRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTypedLinkAttributeRange, Members: &mTypedLinkAttributeRange, Type: smithy.ShapeTypeStructure, Ext: &e_TypedLinkAttributeRangeList_member})
+var sTypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkFacet, Members: &mTypedLinkFacet, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkFacet})
+var sTypedLinkFacet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eTypedLinkFacet_Name})
+var sTypedLinkFacet_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TypedLinkAttributeDefinitionList, Members: &m_TypedLinkAttributeDefinitionList, Type: smithy.ShapeTypeList, Ext: &eTypedLinkFacet_Attributes})
+var sTypedLinkFacet_IdentityAttributeOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityAttributeOrder", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eTypedLinkFacet_IdentityAttributeOrder})
+var sTypedLinkFacetAttributeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkFacetAttributeUpdate, Members: &mTypedLinkFacetAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkFacetAttributeUpdate})
+var sTypedLinkFacetAttributeUpdate_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iTypedLinkAttributeDefinition, Members: &mTypedLinkAttributeDefinition, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkFacetAttributeUpdate_Attribute})
+var sTypedLinkFacetAttributeUpdate_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iUpdateActionType, Members: &mUpdateActionType, Type: smithy.ShapeTypeEnum, Ext: &eTypedLinkFacetAttributeUpdate_Action})
+var s_TypedLinkFacetAttributeUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkFacetAttributeUpdateList, Members: &m_TypedLinkFacetAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &e_TypedLinkFacetAttributeUpdateList})
+var s_TypedLinkFacetAttributeUpdateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTypedLinkFacetAttributeUpdate, Members: &mTypedLinkFacetAttributeUpdate, Type: smithy.ShapeTypeStructure, Ext: &e_TypedLinkFacetAttributeUpdateList_member})
+var s_TypedLinkName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &e_TypedLinkName})
+var s_TypedLinkNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkNameList, Members: &m_TypedLinkNameList, Type: smithy.ShapeTypeList, Ext: &e_TypedLinkNameList})
+var s_TypedLinkNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &e_TypedLinkNameList_member})
+var sTypedLinkSchemaAndFacetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkSchemaAndFacetName})
+var sTypedLinkSchemaAndFacetName_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTypedLinkSchemaAndFacetName_SchemaArn})
+var sTypedLinkSchemaAndFacetName_TypedLinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkName", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eTypedLinkSchemaAndFacetName_TypedLinkName})
+var sTypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkSpecifier})
+var sTypedLinkSpecifier_TypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkFacet", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkSpecifier_TypedLinkFacet})
+var sTypedLinkSpecifier_SourceObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkSpecifier_SourceObjectReference})
+var sTypedLinkSpecifier_TargetObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eTypedLinkSpecifier_TargetObjectReference})
+var sTypedLinkSpecifier_IdentityAttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityAttributeValues", ID: &i_AttributeNameAndValueList, Members: &m_AttributeNameAndValueList, Type: smithy.ShapeTypeList, Ext: &eTypedLinkSpecifier_IdentityAttributeValues})
+var s_TypedLinkSpecifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypedLinkSpecifierList, Members: &m_TypedLinkSpecifierList, Type: smithy.ShapeTypeList, Ext: &e_TypedLinkSpecifierList})
+var s_TypedLinkSpecifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &e_TypedLinkSpecifierList_member})
+var sUnsupportedIndexTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedIndexTypeException, Members: &mUnsupportedIndexTypeException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedIndexTypeException})
+var sUnsupportedIndexTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedIndexTypeException_Message})
+var sUpdateActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActionType, Members: &mUpdateActionType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateActionType})
+var sUpdateActionType_CREATE_OR_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_OR_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateActionType_CREATE_OR_UPDATE})
+var sUpdateActionType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateActionType_DELETE})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_Version})
+var sAddFacetToObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddFacetToObjectRequest, Members: &mAddFacetToObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddFacetToObjectRequest})
+var sAddFacetToObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eAddFacetToObjectRequest_DirectoryArn})
+var sAddFacetToObjectRequest_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eAddFacetToObjectRequest_SchemaFacet})
+var sAddFacetToObjectRequest_ObjectAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeList", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eAddFacetToObjectRequest_ObjectAttributeList})
+var sAddFacetToObjectRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAddFacetToObjectRequest_ObjectReference})
+var sAddFacetToObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddFacetToObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eAddFacetToObjectResponse})
+var sApplySchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySchemaRequest, Members: &mApplySchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eApplySchemaRequest})
+var sApplySchemaRequest_PublishedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplySchemaRequest_PublishedSchemaArn})
+var sApplySchemaRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eApplySchemaRequest_DirectoryArn})
+var sApplySchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplySchemaResponse, Members: &mApplySchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eApplySchemaResponse})
+var sApplySchemaResponse_AppliedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplySchemaResponse_AppliedSchemaArn})
+var sApplySchemaResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApplySchemaResponse_DirectoryArn})
+var sAttachObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachObjectRequest, Members: &mAttachObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eAttachObjectRequest})
+var sAttachObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eAttachObjectRequest_DirectoryArn})
+var sAttachObjectRequest_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachObjectRequest_ParentReference})
+var sAttachObjectRequest_ChildReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachObjectRequest_ChildReference})
+var sAttachObjectRequest_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eAttachObjectRequest_LinkName})
+var sAttachObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachObjectResponse, Members: &mAttachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eAttachObjectResponse})
+var sAttachObjectResponse_AttachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eAttachObjectResponse_AttachedObjectIdentifier})
+var sAttachPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPolicyRequest, Members: &mAttachPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eAttachPolicyRequest})
+var sAttachPolicyRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eAttachPolicyRequest_DirectoryArn})
+var sAttachPolicyRequest_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachPolicyRequest_PolicyReference})
+var sAttachPolicyRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachPolicyRequest_ObjectReference})
+var sAttachPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eAttachPolicyResponse})
+var sAttachToIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachToIndexRequest, Members: &mAttachToIndexRequest, Type: smithy.ShapeTypeStructure, Ext: &eAttachToIndexRequest})
+var sAttachToIndexRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eAttachToIndexRequest_DirectoryArn})
+var sAttachToIndexRequest_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachToIndexRequest_IndexReference})
+var sAttachToIndexRequest_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachToIndexRequest_TargetReference})
+var sAttachToIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachToIndexResponse, Members: &mAttachToIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eAttachToIndexResponse})
+var sAttachToIndexResponse_AttachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eAttachToIndexResponse_AttachedObjectIdentifier})
+var sAttachTypedLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachTypedLinkRequest, Members: &mAttachTypedLinkRequest, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkRequest})
+var sAttachTypedLinkRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eAttachTypedLinkRequest_DirectoryArn})
+var sAttachTypedLinkRequest_SourceObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkRequest_SourceObjectReference})
+var sAttachTypedLinkRequest_TargetObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkRequest_TargetObjectReference})
+var sAttachTypedLinkRequest_TypedLinkFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkFacet", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkRequest_TypedLinkFacet})
+var sAttachTypedLinkRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeNameAndValueList, Members: &m_AttributeNameAndValueList, Type: smithy.ShapeTypeList, Ext: &eAttachTypedLinkRequest_Attributes})
+var sAttachTypedLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachTypedLinkResponse, Members: &mAttachTypedLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkResponse})
+var sAttachTypedLinkResponse_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eAttachTypedLinkResponse_TypedLinkSpecifier})
+var sBatchReadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadRequest, Members: &mBatchReadRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadRequest})
+var sBatchReadRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eBatchReadRequest_DirectoryArn})
+var sBatchReadRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_BatchReadOperationList, Members: &m_BatchReadOperationList, Type: smithy.ShapeTypeList, Ext: &eBatchReadRequest_Operations})
+var sBatchReadRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eBatchReadRequest_ConsistencyLevel})
+var sBatchReadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReadResponse, Members: &mBatchReadResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchReadResponse})
+var sBatchReadResponse_Responses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Responses", ID: &i_BatchReadOperationResponseList, Members: &m_BatchReadOperationResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchReadResponse_Responses})
+var sBatchWriteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRequest, Members: &mBatchWriteRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRequest})
+var sBatchWriteRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eBatchWriteRequest_DirectoryArn})
+var sBatchWriteRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_BatchWriteOperationList, Members: &m_BatchWriteOperationList, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRequest_Operations})
+var sBatchWriteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteResponse, Members: &mBatchWriteResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteResponse})
+var sBatchWriteResponse_Responses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Responses", ID: &i_BatchWriteOperationResponseList, Members: &m_BatchWriteOperationResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchWriteResponse_Responses})
+var sCreateDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryRequest, Members: &mCreateDirectoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryRequest})
+var sCreateDirectoryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryRequest_Name})
+var sCreateDirectoryRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryRequest_SchemaArn})
+var sCreateDirectoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryResponse, Members: &mCreateDirectoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDirectoryResponse})
+var sCreateDirectoryResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_DirectoryArn, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryResponse_DirectoryArn})
+var sCreateDirectoryResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryResponse_Name})
+var sCreateDirectoryResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryResponse_ObjectIdentifier})
+var sCreateDirectoryResponse_AppliedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateDirectoryResponse_AppliedSchemaArn})
+var sCreateFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFacetRequest, Members: &mCreateFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFacetRequest})
+var sCreateFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eCreateFacetRequest_SchemaArn})
+var sCreateFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eCreateFacetRequest_Name})
+var sCreateFacetRequest_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_FacetAttributeList, Members: &m_FacetAttributeList, Type: smithy.ShapeTypeList, Ext: &eCreateFacetRequest_Attributes})
+var sCreateFacetRequest_ObjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectType", ID: &iObjectType, Members: &mObjectType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFacetRequest_ObjectType})
+var sCreateFacetRequest_FacetStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetStyle", ID: &iFacetStyle, Members: &mFacetStyle, Type: smithy.ShapeTypeEnum, Ext: &eCreateFacetRequest_FacetStyle})
+var sCreateFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFacetResponse})
+var sCreateIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexRequest, Members: &mCreateIndexRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexRequest})
+var sCreateIndexRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eCreateIndexRequest_DirectoryArn})
+var sCreateIndexRequest_OrderedIndexedAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedIndexedAttributeList", ID: &i_AttributeKeyList, Members: &m_AttributeKeyList, Type: smithy.ShapeTypeList, Ext: &eCreateIndexRequest_OrderedIndexedAttributeList})
+var sCreateIndexRequest_IsUnique = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsUnique", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eCreateIndexRequest_IsUnique})
+var sCreateIndexRequest_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexRequest_ParentReference})
+var sCreateIndexRequest_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eCreateIndexRequest_LinkName})
+var sCreateIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexResponse, Members: &mCreateIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexResponse})
+var sCreateIndexResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateIndexResponse_ObjectIdentifier})
+var sCreateObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObjectRequest, Members: &mCreateObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateObjectRequest})
+var sCreateObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eCreateObjectRequest_DirectoryArn})
+var sCreateObjectRequest_SchemaFacets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacets", ID: &i_SchemaFacetList, Members: &m_SchemaFacetList, Type: smithy.ShapeTypeList, Ext: &eCreateObjectRequest_SchemaFacets})
+var sCreateObjectRequest_ObjectAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectAttributeList", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eCreateObjectRequest_ObjectAttributeList})
+var sCreateObjectRequest_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eCreateObjectRequest_ParentReference})
+var sCreateObjectRequest_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eCreateObjectRequest_LinkName})
+var sCreateObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObjectResponse, Members: &mCreateObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateObjectResponse})
+var sCreateObjectResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateObjectResponse_ObjectIdentifier})
+var sCreateSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchemaRequest, Members: &mCreateSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSchemaRequest})
+var sCreateSchemaRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eCreateSchemaRequest_Name})
+var sCreateSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchemaResponse, Members: &mCreateSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSchemaResponse})
+var sCreateSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateSchemaResponse_SchemaArn})
+var sCreateTypedLinkFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypedLinkFacetRequest, Members: &mCreateTypedLinkFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypedLinkFacetRequest})
+var sCreateTypedLinkFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eCreateTypedLinkFacetRequest_SchemaArn})
+var sCreateTypedLinkFacetRequest_Facet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Facet", ID: &iTypedLinkFacet, Members: &mTypedLinkFacet, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypedLinkFacetRequest_Facet})
+var sCreateTypedLinkFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypedLinkFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTypedLinkFacetResponse})
+var sDeleteDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryRequest, Members: &mDeleteDirectoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDirectoryRequest})
+var sDeleteDirectoryRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteDirectoryRequest_DirectoryArn})
+var sDeleteDirectoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryResponse, Members: &mDeleteDirectoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDirectoryResponse})
+var sDeleteDirectoryResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteDirectoryResponse_DirectoryArn})
+var sDeleteFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFacetRequest, Members: &mDeleteFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFacetRequest})
+var sDeleteFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteFacetRequest_SchemaArn})
+var sDeleteFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eDeleteFacetRequest_Name})
+var sDeleteFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFacetResponse})
+var sDeleteObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObjectRequest, Members: &mDeleteObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteObjectRequest})
+var sDeleteObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteObjectRequest_DirectoryArn})
+var sDeleteObjectRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDeleteObjectRequest_ObjectReference})
+var sDeleteObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteObjectResponse})
+var sDeleteSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchemaRequest, Members: &mDeleteSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSchemaRequest})
+var sDeleteSchemaRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteSchemaRequest_SchemaArn})
+var sDeleteSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchemaResponse, Members: &mDeleteSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSchemaResponse})
+var sDeleteSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteSchemaResponse_SchemaArn})
+var sDeleteTypedLinkFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypedLinkFacetRequest, Members: &mDeleteTypedLinkFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTypedLinkFacetRequest})
+var sDeleteTypedLinkFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDeleteTypedLinkFacetRequest_SchemaArn})
+var sDeleteTypedLinkFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eDeleteTypedLinkFacetRequest_Name})
+var sDeleteTypedLinkFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypedLinkFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTypedLinkFacetResponse})
+var sDetachFromIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachFromIndexRequest, Members: &mDetachFromIndexRequest, Type: smithy.ShapeTypeStructure, Ext: &eDetachFromIndexRequest})
+var sDetachFromIndexRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDetachFromIndexRequest_DirectoryArn})
+var sDetachFromIndexRequest_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDetachFromIndexRequest_IndexReference})
+var sDetachFromIndexRequest_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDetachFromIndexRequest_TargetReference})
+var sDetachFromIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachFromIndexResponse, Members: &mDetachFromIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eDetachFromIndexResponse})
+var sDetachFromIndexResponse_DetachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eDetachFromIndexResponse_DetachedObjectIdentifier})
+var sDetachObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachObjectRequest, Members: &mDetachObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eDetachObjectRequest})
+var sDetachObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDetachObjectRequest_DirectoryArn})
+var sDetachObjectRequest_ParentReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDetachObjectRequest_ParentReference})
+var sDetachObjectRequest_LinkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkName", ID: &i_LinkName, Type: smithy.ShapeTypeString, Ext: &eDetachObjectRequest_LinkName})
+var sDetachObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachObjectResponse, Members: &mDetachObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eDetachObjectResponse})
+var sDetachObjectResponse_DetachedObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetachedObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eDetachObjectResponse_DetachedObjectIdentifier})
+var sDetachPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachPolicyRequest, Members: &mDetachPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDetachPolicyRequest})
+var sDetachPolicyRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDetachPolicyRequest_DirectoryArn})
+var sDetachPolicyRequest_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDetachPolicyRequest_PolicyReference})
+var sDetachPolicyRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eDetachPolicyRequest_ObjectReference})
+var sDetachPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDetachPolicyResponse})
+var sDetachTypedLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachTypedLinkRequest, Members: &mDetachTypedLinkRequest, Type: smithy.ShapeTypeStructure, Ext: &eDetachTypedLinkRequest})
+var sDetachTypedLinkRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDetachTypedLinkRequest_DirectoryArn})
+var sDetachTypedLinkRequest_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eDetachTypedLinkRequest_TypedLinkSpecifier})
+var sDisableDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectoryRequest, Members: &mDisableDirectoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableDirectoryRequest})
+var sDisableDirectoryRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eDisableDirectoryRequest_DirectoryArn})
+var sDisableDirectoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectoryResponse, Members: &mDisableDirectoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisableDirectoryResponse})
+var sDisableDirectoryResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisableDirectoryResponse_DirectoryArn})
+var sEnableDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectoryRequest, Members: &mEnableDirectoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableDirectoryRequest})
+var sEnableDirectoryRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eEnableDirectoryRequest_DirectoryArn})
+var sEnableDirectoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectoryResponse, Members: &mEnableDirectoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eEnableDirectoryResponse})
+var sEnableDirectoryResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnableDirectoryResponse_DirectoryArn})
+var sGetAppliedSchemaVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppliedSchemaVersionRequest, Members: &mGetAppliedSchemaVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAppliedSchemaVersionRequest})
+var sGetAppliedSchemaVersionRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetAppliedSchemaVersionRequest_SchemaArn})
+var sGetAppliedSchemaVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppliedSchemaVersionResponse, Members: &mGetAppliedSchemaVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAppliedSchemaVersionResponse})
+var sGetAppliedSchemaVersionResponse_AppliedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetAppliedSchemaVersionResponse_AppliedSchemaArn})
+var sGetDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryRequest, Members: &mGetDirectoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDirectoryRequest})
+var sGetDirectoryRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_DirectoryArn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetDirectoryRequest_DirectoryArn})
+var sGetDirectoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryResponse, Members: &mGetDirectoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDirectoryResponse})
+var sGetDirectoryResponse_Directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directory", ID: &iDirectory, Members: &mDirectory, Type: smithy.ShapeTypeStructure, Ext: &eGetDirectoryResponse_Directory})
+var sGetFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFacetRequest, Members: &mGetFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFacetRequest})
+var sGetFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetFacetRequest_SchemaArn})
+var sGetFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eGetFacetRequest_Name})
+var sGetFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFacetResponse, Members: &mGetFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFacetResponse})
+var sGetFacetResponse_Facet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Facet", ID: &iFacet, Members: &mFacet, Type: smithy.ShapeTypeStructure, Ext: &eGetFacetResponse_Facet})
+var sGetLinkAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAttributesRequest, Members: &mGetLinkAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLinkAttributesRequest})
+var sGetLinkAttributesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetLinkAttributesRequest_DirectoryArn})
+var sGetLinkAttributesRequest_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eGetLinkAttributesRequest_TypedLinkSpecifier})
+var sGetLinkAttributesRequest_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eGetLinkAttributesRequest_AttributeNames})
+var sGetLinkAttributesRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Type: smithy.ShapeTypeEnum, Ext: &eGetLinkAttributesRequest_ConsistencyLevel})
+var sGetLinkAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAttributesResponse, Members: &mGetLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLinkAttributesResponse})
+var sGetLinkAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eGetLinkAttributesResponse_Attributes})
+var sGetObjectAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectAttributesRequest, Members: &mGetObjectAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectAttributesRequest})
+var sGetObjectAttributesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetObjectAttributesRequest_DirectoryArn})
+var sGetObjectAttributesRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectAttributesRequest_ObjectReference})
+var sGetObjectAttributesRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eGetObjectAttributesRequest_ConsistencyLevel})
+var sGetObjectAttributesRequest_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectAttributesRequest_SchemaFacet})
+var sGetObjectAttributesRequest_AttributeNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeNames", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eGetObjectAttributesRequest_AttributeNames})
+var sGetObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectAttributesResponse, Members: &mGetObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectAttributesResponse})
+var sGetObjectAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eGetObjectAttributesResponse_Attributes})
+var sGetObjectInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectInformationRequest, Members: &mGetObjectInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectInformationRequest})
+var sGetObjectInformationRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetObjectInformationRequest_DirectoryArn})
+var sGetObjectInformationRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectInformationRequest_ObjectReference})
+var sGetObjectInformationRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eGetObjectInformationRequest_ConsistencyLevel})
+var sGetObjectInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectInformationResponse, Members: &mGetObjectInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectInformationResponse})
+var sGetObjectInformationResponse_SchemaFacets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacets", ID: &i_SchemaFacetList, Members: &m_SchemaFacetList, Type: smithy.ShapeTypeList, Ext: &eGetObjectInformationResponse_SchemaFacets})
+var sGetObjectInformationResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetObjectInformationResponse_ObjectIdentifier})
+var sGetSchemaAsJsonRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaAsJsonRequest, Members: &mGetSchemaAsJsonRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaAsJsonRequest})
+var sGetSchemaAsJsonRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetSchemaAsJsonRequest_SchemaArn})
+var sGetSchemaAsJsonResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaAsJsonResponse, Members: &mGetSchemaAsJsonResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaAsJsonResponse})
+var sGetSchemaAsJsonResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eGetSchemaAsJsonResponse_Name})
+var sGetSchemaAsJsonResponse_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &i_SchemaJsonDocument, Type: smithy.ShapeTypeString, Ext: &eGetSchemaAsJsonResponse_Document})
+var sGetTypedLinkFacetInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypedLinkFacetInformationRequest, Members: &mGetTypedLinkFacetInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTypedLinkFacetInformationRequest})
+var sGetTypedLinkFacetInformationRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetTypedLinkFacetInformationRequest_SchemaArn})
+var sGetTypedLinkFacetInformationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eGetTypedLinkFacetInformationRequest_Name})
+var sGetTypedLinkFacetInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypedLinkFacetInformationResponse, Members: &mGetTypedLinkFacetInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTypedLinkFacetInformationResponse})
+var sGetTypedLinkFacetInformationResponse_IdentityAttributeOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityAttributeOrder", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eGetTypedLinkFacetInformationResponse_IdentityAttributeOrder})
+var sListAppliedSchemaArnsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppliedSchemaArnsRequest, Members: &mListAppliedSchemaArnsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAppliedSchemaArnsRequest})
+var sListAppliedSchemaArnsRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListAppliedSchemaArnsRequest_DirectoryArn})
+var sListAppliedSchemaArnsRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListAppliedSchemaArnsRequest_SchemaArn})
+var sListAppliedSchemaArnsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAppliedSchemaArnsRequest_NextToken})
+var sListAppliedSchemaArnsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListAppliedSchemaArnsRequest_MaxResults})
+var sListAppliedSchemaArnsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppliedSchemaArnsResponse, Members: &mListAppliedSchemaArnsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAppliedSchemaArnsResponse})
+var sListAppliedSchemaArnsResponse_SchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eListAppliedSchemaArnsResponse_SchemaArns})
+var sListAppliedSchemaArnsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAppliedSchemaArnsResponse_NextToken})
+var sListAttachedIndicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedIndicesRequest, Members: &mListAttachedIndicesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAttachedIndicesRequest})
+var sListAttachedIndicesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListAttachedIndicesRequest_DirectoryArn})
+var sListAttachedIndicesRequest_TargetReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListAttachedIndicesRequest_TargetReference})
+var sListAttachedIndicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAttachedIndicesRequest_NextToken})
+var sListAttachedIndicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListAttachedIndicesRequest_MaxResults})
+var sListAttachedIndicesRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListAttachedIndicesRequest_ConsistencyLevel})
+var sListAttachedIndicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedIndicesResponse, Members: &mListAttachedIndicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAttachedIndicesResponse})
+var sListAttachedIndicesResponse_IndexAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexAttachments", ID: &i_IndexAttachmentList, Members: &m_IndexAttachmentList, Type: smithy.ShapeTypeList, Ext: &eListAttachedIndicesResponse_IndexAttachments})
+var sListAttachedIndicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAttachedIndicesResponse_NextToken})
+var sListDevelopmentSchemaArnsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevelopmentSchemaArnsRequest, Members: &mListDevelopmentSchemaArnsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDevelopmentSchemaArnsRequest})
+var sListDevelopmentSchemaArnsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDevelopmentSchemaArnsRequest_NextToken})
+var sListDevelopmentSchemaArnsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListDevelopmentSchemaArnsRequest_MaxResults})
+var sListDevelopmentSchemaArnsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevelopmentSchemaArnsResponse, Members: &mListDevelopmentSchemaArnsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDevelopmentSchemaArnsResponse})
+var sListDevelopmentSchemaArnsResponse_SchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eListDevelopmentSchemaArnsResponse_SchemaArns})
+var sListDevelopmentSchemaArnsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDevelopmentSchemaArnsResponse_NextToken})
+var sListDirectoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectoriesRequest, Members: &mListDirectoriesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDirectoriesRequest})
+var sListDirectoriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDirectoriesRequest_NextToken})
+var sListDirectoriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListDirectoriesRequest_MaxResults})
+var sListDirectoriesRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iDirectoryState, Members: &mDirectoryState, Type: smithy.ShapeTypeEnum, Ext: &eListDirectoriesRequest_state})
+var sListDirectoriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectoriesResponse, Members: &mListDirectoriesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDirectoriesResponse})
+var sListDirectoriesResponse_Directories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directories", ID: &i_DirectoryList, Members: &m_DirectoryList, Type: smithy.ShapeTypeList, Ext: &eListDirectoriesResponse_Directories})
+var sListDirectoriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDirectoriesResponse_NextToken})
+var sListFacetAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetAttributesRequest, Members: &mListFacetAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFacetAttributesRequest})
+var sListFacetAttributesRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListFacetAttributesRequest_SchemaArn})
+var sListFacetAttributesRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eListFacetAttributesRequest_Name})
+var sListFacetAttributesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFacetAttributesRequest_NextToken})
+var sListFacetAttributesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListFacetAttributesRequest_MaxResults})
+var sListFacetAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetAttributesResponse, Members: &mListFacetAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFacetAttributesResponse})
+var sListFacetAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_FacetAttributeList, Members: &m_FacetAttributeList, Type: smithy.ShapeTypeList, Ext: &eListFacetAttributesResponse_Attributes})
+var sListFacetAttributesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFacetAttributesResponse_NextToken})
+var sListFacetNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetNamesRequest, Members: &mListFacetNamesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFacetNamesRequest})
+var sListFacetNamesRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListFacetNamesRequest_SchemaArn})
+var sListFacetNamesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFacetNamesRequest_NextToken})
+var sListFacetNamesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListFacetNamesRequest_MaxResults})
+var sListFacetNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFacetNamesResponse, Members: &mListFacetNamesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFacetNamesResponse})
+var sListFacetNamesResponse_FacetNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetNames", ID: &i_FacetNameList, Members: &m_FacetNameList, Type: smithy.ShapeTypeList, Ext: &eListFacetNamesResponse_FacetNames})
+var sListFacetNamesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFacetNamesResponse_NextToken})
+var sListIncomingTypedLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncomingTypedLinksRequest, Members: &mListIncomingTypedLinksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIncomingTypedLinksRequest})
+var sListIncomingTypedLinksRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListIncomingTypedLinksRequest_DirectoryArn})
+var sListIncomingTypedLinksRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListIncomingTypedLinksRequest_ObjectReference})
+var sListIncomingTypedLinksRequest_FilterAttributeRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterAttributeRanges", ID: &i_TypedLinkAttributeRangeList, Members: &m_TypedLinkAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eListIncomingTypedLinksRequest_FilterAttributeRanges})
+var sListIncomingTypedLinksRequest_FilterTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterTypedLink", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eListIncomingTypedLinksRequest_FilterTypedLink})
+var sListIncomingTypedLinksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncomingTypedLinksRequest_NextToken})
+var sListIncomingTypedLinksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListIncomingTypedLinksRequest_MaxResults})
+var sListIncomingTypedLinksRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Type: smithy.ShapeTypeEnum, Ext: &eListIncomingTypedLinksRequest_ConsistencyLevel})
+var sListIncomingTypedLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIncomingTypedLinksResponse, Members: &mListIncomingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIncomingTypedLinksResponse})
+var sListIncomingTypedLinksResponse_LinkSpecifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkSpecifiers", ID: &i_TypedLinkSpecifierList, Members: &m_TypedLinkSpecifierList, Type: smithy.ShapeTypeList, Ext: &eListIncomingTypedLinksResponse_LinkSpecifiers})
+var sListIncomingTypedLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIncomingTypedLinksResponse_NextToken})
+var sListIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexRequest, Members: &mListIndexRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIndexRequest})
+var sListIndexRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListIndexRequest_DirectoryArn})
+var sListIndexRequest_RangesOnIndexedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RangesOnIndexedValues", ID: &i_ObjectAttributeRangeList, Members: &m_ObjectAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eListIndexRequest_RangesOnIndexedValues})
+var sListIndexRequest_IndexReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListIndexRequest_IndexReference})
+var sListIndexRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListIndexRequest_MaxResults})
+var sListIndexRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIndexRequest_NextToken})
+var sListIndexRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListIndexRequest_ConsistencyLevel})
+var sListIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexResponse, Members: &mListIndexResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIndexResponse})
+var sListIndexResponse_IndexAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexAttachments", ID: &i_IndexAttachmentList, Members: &m_IndexAttachmentList, Type: smithy.ShapeTypeList, Ext: &eListIndexResponse_IndexAttachments})
+var sListIndexResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIndexResponse_NextToken})
+var sListManagedSchemaArnsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedSchemaArnsRequest, Members: &mListManagedSchemaArnsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedSchemaArnsRequest})
+var sListManagedSchemaArnsRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListManagedSchemaArnsRequest_SchemaArn})
+var sListManagedSchemaArnsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedSchemaArnsRequest_NextToken})
+var sListManagedSchemaArnsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListManagedSchemaArnsRequest_MaxResults})
+var sListManagedSchemaArnsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedSchemaArnsResponse, Members: &mListManagedSchemaArnsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedSchemaArnsResponse})
+var sListManagedSchemaArnsResponse_SchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eListManagedSchemaArnsResponse_SchemaArns})
+var sListManagedSchemaArnsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedSchemaArnsResponse_NextToken})
+var sListObjectAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectAttributesRequest, Members: &mListObjectAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListObjectAttributesRequest})
+var sListObjectAttributesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListObjectAttributesRequest_DirectoryArn})
+var sListObjectAttributesRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListObjectAttributesRequest_ObjectReference})
+var sListObjectAttributesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectAttributesRequest_NextToken})
+var sListObjectAttributesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListObjectAttributesRequest_MaxResults})
+var sListObjectAttributesRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListObjectAttributesRequest_ConsistencyLevel})
+var sListObjectAttributesRequest_FacetFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetFilter", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eListObjectAttributesRequest_FacetFilter})
+var sListObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectAttributesResponse, Members: &mListObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListObjectAttributesResponse})
+var sListObjectAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeKeyAndValueList, Members: &m_AttributeKeyAndValueList, Type: smithy.ShapeTypeList, Ext: &eListObjectAttributesResponse_Attributes})
+var sListObjectAttributesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectAttributesResponse_NextToken})
+var sListObjectChildrenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectChildrenRequest, Members: &mListObjectChildrenRequest, Type: smithy.ShapeTypeStructure, Ext: &eListObjectChildrenRequest})
+var sListObjectChildrenRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListObjectChildrenRequest_DirectoryArn})
+var sListObjectChildrenRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListObjectChildrenRequest_ObjectReference})
+var sListObjectChildrenRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectChildrenRequest_NextToken})
+var sListObjectChildrenRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListObjectChildrenRequest_MaxResults})
+var sListObjectChildrenRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListObjectChildrenRequest_ConsistencyLevel})
+var sListObjectChildrenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectChildrenResponse, Members: &mListObjectChildrenResponse, Type: smithy.ShapeTypeStructure, Ext: &eListObjectChildrenResponse})
+var sListObjectChildrenResponse_Children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Children", ID: &i_LinkNameToObjectIdentifierMap, Members: &m_LinkNameToObjectIdentifierMap, Type: smithy.ShapeTypeMap, Ext: &eListObjectChildrenResponse_Children})
+var sListObjectChildrenResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectChildrenResponse_NextToken})
+var sListObjectParentPathsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParentPathsRequest, Members: &mListObjectParentPathsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentPathsRequest})
+var sListObjectParentPathsRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListObjectParentPathsRequest_DirectoryArn})
+var sListObjectParentPathsRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentPathsRequest_ObjectReference})
+var sListObjectParentPathsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectParentPathsRequest_NextToken})
+var sListObjectParentPathsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListObjectParentPathsRequest_MaxResults})
+var sListObjectParentPathsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParentPathsResponse, Members: &mListObjectParentPathsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentPathsResponse})
+var sListObjectParentPathsResponse_PathToObjectIdentifiersList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathToObjectIdentifiersList", ID: &i_PathToObjectIdentifiersList, Members: &m_PathToObjectIdentifiersList, Type: smithy.ShapeTypeList, Ext: &eListObjectParentPathsResponse_PathToObjectIdentifiersList})
+var sListObjectParentPathsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectParentPathsResponse_NextToken})
+var sListObjectParentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParentsRequest, Members: &mListObjectParentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentsRequest})
+var sListObjectParentsRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListObjectParentsRequest_DirectoryArn})
+var sListObjectParentsRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentsRequest_ObjectReference})
+var sListObjectParentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectParentsRequest_NextToken})
+var sListObjectParentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListObjectParentsRequest_MaxResults})
+var sListObjectParentsRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListObjectParentsRequest_ConsistencyLevel})
+var sListObjectParentsRequest_IncludeAllLinksToEachParent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeAllLinksToEachParent", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eListObjectParentsRequest_IncludeAllLinksToEachParent})
+var sListObjectParentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectParentsResponse, Members: &mListObjectParentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListObjectParentsResponse})
+var sListObjectParentsResponse_Parents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parents", ID: &i_ObjectIdentifierToLinkNameMap, Members: &m_ObjectIdentifierToLinkNameMap, Type: smithy.ShapeTypeMap, Ext: &eListObjectParentsResponse_Parents})
+var sListObjectParentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectParentsResponse_NextToken})
+var sListObjectParentsResponse_ParentLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentLinks", ID: &i_ObjectIdentifierAndLinkNameList, Members: &m_ObjectIdentifierAndLinkNameList, Type: smithy.ShapeTypeList, Ext: &eListObjectParentsResponse_ParentLinks})
+var sListObjectPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectPoliciesRequest, Members: &mListObjectPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListObjectPoliciesRequest})
+var sListObjectPoliciesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListObjectPoliciesRequest_DirectoryArn})
+var sListObjectPoliciesRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListObjectPoliciesRequest_ObjectReference})
+var sListObjectPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectPoliciesRequest_NextToken})
+var sListObjectPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListObjectPoliciesRequest_MaxResults})
+var sListObjectPoliciesRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListObjectPoliciesRequest_ConsistencyLevel})
+var sListObjectPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObjectPoliciesResponse, Members: &mListObjectPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListObjectPoliciesResponse})
+var sListObjectPoliciesResponse_AttachedPolicyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedPolicyIds", ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListObjectPoliciesResponse_AttachedPolicyIds})
+var sListObjectPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListObjectPoliciesResponse_NextToken})
+var sListOutgoingTypedLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutgoingTypedLinksRequest, Members: &mListOutgoingTypedLinksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOutgoingTypedLinksRequest})
+var sListOutgoingTypedLinksRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListOutgoingTypedLinksRequest_DirectoryArn})
+var sListOutgoingTypedLinksRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListOutgoingTypedLinksRequest_ObjectReference})
+var sListOutgoingTypedLinksRequest_FilterAttributeRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterAttributeRanges", ID: &i_TypedLinkAttributeRangeList, Members: &m_TypedLinkAttributeRangeList, Type: smithy.ShapeTypeList, Ext: &eListOutgoingTypedLinksRequest_FilterAttributeRanges})
+var sListOutgoingTypedLinksRequest_FilterTypedLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterTypedLink", ID: &iTypedLinkSchemaAndFacetName, Members: &mTypedLinkSchemaAndFacetName, Type: smithy.ShapeTypeStructure, Ext: &eListOutgoingTypedLinksRequest_FilterTypedLink})
+var sListOutgoingTypedLinksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOutgoingTypedLinksRequest_NextToken})
+var sListOutgoingTypedLinksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListOutgoingTypedLinksRequest_MaxResults})
+var sListOutgoingTypedLinksRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Type: smithy.ShapeTypeEnum, Ext: &eListOutgoingTypedLinksRequest_ConsistencyLevel})
+var sListOutgoingTypedLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutgoingTypedLinksResponse, Members: &mListOutgoingTypedLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListOutgoingTypedLinksResponse})
+var sListOutgoingTypedLinksResponse_TypedLinkSpecifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifiers", ID: &i_TypedLinkSpecifierList, Members: &m_TypedLinkSpecifierList, Type: smithy.ShapeTypeList, Ext: &eListOutgoingTypedLinksResponse_TypedLinkSpecifiers})
+var sListOutgoingTypedLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOutgoingTypedLinksResponse_NextToken})
+var sListPolicyAttachmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyAttachmentsRequest, Members: &mListPolicyAttachmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyAttachmentsRequest})
+var sListPolicyAttachmentsRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListPolicyAttachmentsRequest_DirectoryArn})
+var sListPolicyAttachmentsRequest_PolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyAttachmentsRequest_PolicyReference})
+var sListPolicyAttachmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyAttachmentsRequest_NextToken})
+var sListPolicyAttachmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListPolicyAttachmentsRequest_MaxResults})
+var sListPolicyAttachmentsRequest_ConsistencyLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsistencyLevel", ID: &iConsistencyLevel, Members: &mConsistencyLevel, Traits: &t73, Type: smithy.ShapeTypeEnum, Ext: &eListPolicyAttachmentsRequest_ConsistencyLevel})
+var sListPolicyAttachmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyAttachmentsResponse, Members: &mListPolicyAttachmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyAttachmentsResponse})
+var sListPolicyAttachmentsResponse_ObjectIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifiers", ID: &i_ObjectIdentifierList, Members: &m_ObjectIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListPolicyAttachmentsResponse_ObjectIdentifiers})
+var sListPolicyAttachmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyAttachmentsResponse_NextToken})
+var sListPublishedSchemaArnsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublishedSchemaArnsRequest, Members: &mListPublishedSchemaArnsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPublishedSchemaArnsRequest})
+var sListPublishedSchemaArnsRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListPublishedSchemaArnsRequest_SchemaArn})
+var sListPublishedSchemaArnsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPublishedSchemaArnsRequest_NextToken})
+var sListPublishedSchemaArnsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListPublishedSchemaArnsRequest_MaxResults})
+var sListPublishedSchemaArnsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublishedSchemaArnsResponse, Members: &mListPublishedSchemaArnsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPublishedSchemaArnsResponse})
+var sListPublishedSchemaArnsResponse_SchemaArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eListPublishedSchemaArnsResponse_SchemaArns})
+var sListPublishedSchemaArnsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPublishedSchemaArnsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_NextToken})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_TagsNumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_MaxResults})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_NextToken})
+var sListTypedLinkFacetAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetAttributesRequest, Members: &mListTypedLinkFacetAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTypedLinkFacetAttributesRequest})
+var sListTypedLinkFacetAttributesRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetAttributesRequest_SchemaArn})
+var sListTypedLinkFacetAttributesRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetAttributesRequest_Name})
+var sListTypedLinkFacetAttributesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetAttributesRequest_NextToken})
+var sListTypedLinkFacetAttributesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListTypedLinkFacetAttributesRequest_MaxResults})
+var sListTypedLinkFacetAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetAttributesResponse, Members: &mListTypedLinkFacetAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTypedLinkFacetAttributesResponse})
+var sListTypedLinkFacetAttributesResponse_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_TypedLinkAttributeDefinitionList, Members: &m_TypedLinkAttributeDefinitionList, Type: smithy.ShapeTypeList, Ext: &eListTypedLinkFacetAttributesResponse_Attributes})
+var sListTypedLinkFacetAttributesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetAttributesResponse_NextToken})
+var sListTypedLinkFacetNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetNamesRequest, Members: &mListTypedLinkFacetNamesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTypedLinkFacetNamesRequest})
+var sListTypedLinkFacetNamesRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetNamesRequest_SchemaArn})
+var sListTypedLinkFacetNamesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetNamesRequest_NextToken})
+var sListTypedLinkFacetNamesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eListTypedLinkFacetNamesRequest_MaxResults})
+var sListTypedLinkFacetNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypedLinkFacetNamesResponse, Members: &mListTypedLinkFacetNamesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTypedLinkFacetNamesResponse})
+var sListTypedLinkFacetNamesResponse_FacetNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FacetNames", ID: &i_TypedLinkNameList, Members: &m_TypedLinkNameList, Type: smithy.ShapeTypeList, Ext: &eListTypedLinkFacetNamesResponse_FacetNames})
+var sListTypedLinkFacetNamesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTypedLinkFacetNamesResponse_NextToken})
+var sLookupPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupPolicyRequest, Members: &mLookupPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eLookupPolicyRequest})
+var sLookupPolicyRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eLookupPolicyRequest_DirectoryArn})
+var sLookupPolicyRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eLookupPolicyRequest_ObjectReference})
+var sLookupPolicyRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eLookupPolicyRequest_NextToken})
+var sLookupPolicyRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_NumberResults, Type: smithy.ShapeTypeInteger, Ext: &eLookupPolicyRequest_MaxResults})
+var sLookupPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupPolicyResponse, Members: &mLookupPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eLookupPolicyResponse})
+var sLookupPolicyResponse_PolicyToPathList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyToPathList", ID: &i_PolicyToPathList, Members: &m_PolicyToPathList, Type: smithy.ShapeTypeList, Ext: &eLookupPolicyResponse_PolicyToPathList})
+var sLookupPolicyResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eLookupPolicyResponse_NextToken})
+var sPublishSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishSchemaRequest, Members: &mPublishSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &ePublishSchemaRequest})
+var sPublishSchemaRequest_DevelopmentSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DevelopmentSchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ePublishSchemaRequest_DevelopmentSchemaArn})
+var sPublishSchemaRequest_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePublishSchemaRequest_Version})
+var sPublishSchemaRequest_MinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinorVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ePublishSchemaRequest_MinorVersion})
+var sPublishSchemaRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &ePublishSchemaRequest_Name})
+var sPublishSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishSchemaResponse, Members: &mPublishSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &ePublishSchemaResponse})
+var sPublishSchemaResponse_PublishedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePublishSchemaResponse_PublishedSchemaArn})
+var sPutSchemaFromJsonRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchemaFromJsonRequest, Members: &mPutSchemaFromJsonRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSchemaFromJsonRequest})
+var sPutSchemaFromJsonRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ePutSchemaFromJsonRequest_SchemaArn})
+var sPutSchemaFromJsonRequest_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &i_SchemaJsonDocument, Type: smithy.ShapeTypeString, Ext: &ePutSchemaFromJsonRequest_Document})
+var sPutSchemaFromJsonResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchemaFromJsonResponse, Members: &mPutSchemaFromJsonResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSchemaFromJsonResponse})
+var sPutSchemaFromJsonResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePutSchemaFromJsonResponse_Arn})
+var sRemoveFacetFromObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFacetFromObjectRequest, Members: &mRemoveFacetFromObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFacetFromObjectRequest})
+var sRemoveFacetFromObjectRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eRemoveFacetFromObjectRequest_DirectoryArn})
+var sRemoveFacetFromObjectRequest_SchemaFacet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaFacet", ID: &iSchemaFacet, Members: &mSchemaFacet, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFacetFromObjectRequest_SchemaFacet})
+var sRemoveFacetFromObjectRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFacetFromObjectRequest_ObjectReference})
+var sRemoveFacetFromObjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFacetFromObjectResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFacetFromObjectResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFacetRequest, Members: &mUpdateFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFacetRequest})
+var sUpdateFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUpdateFacetRequest_SchemaArn})
+var sUpdateFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FacetName, Type: smithy.ShapeTypeString, Ext: &eUpdateFacetRequest_Name})
+var sUpdateFacetRequest_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_FacetAttributeUpdateList, Members: &m_FacetAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eUpdateFacetRequest_AttributeUpdates})
+var sUpdateFacetRequest_ObjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectType", ID: &iObjectType, Members: &mObjectType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFacetRequest_ObjectType})
+var sUpdateFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFacetResponse})
+var sUpdateLinkAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkAttributesRequest, Members: &mUpdateLinkAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLinkAttributesRequest})
+var sUpdateLinkAttributesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUpdateLinkAttributesRequest_DirectoryArn})
+var sUpdateLinkAttributesRequest_TypedLinkSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypedLinkSpecifier", ID: &iTypedLinkSpecifier, Members: &mTypedLinkSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLinkAttributesRequest_TypedLinkSpecifier})
+var sUpdateLinkAttributesRequest_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_LinkAttributeUpdateList, Members: &m_LinkAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eUpdateLinkAttributesRequest_AttributeUpdates})
+var sUpdateLinkAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLinkAttributesResponse})
+var sUpdateObjectAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateObjectAttributesRequest, Members: &mUpdateObjectAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateObjectAttributesRequest})
+var sUpdateObjectAttributesRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUpdateObjectAttributesRequest_DirectoryArn})
+var sUpdateObjectAttributesRequest_ObjectReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectReference", ID: &iObjectReference, Members: &mObjectReference, Type: smithy.ShapeTypeStructure, Ext: &eUpdateObjectAttributesRequest_ObjectReference})
+var sUpdateObjectAttributesRequest_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_ObjectAttributeUpdateList, Members: &m_ObjectAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eUpdateObjectAttributesRequest_AttributeUpdates})
+var sUpdateObjectAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateObjectAttributesResponse, Members: &mUpdateObjectAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateObjectAttributesResponse})
+var sUpdateObjectAttributesResponse_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_ObjectIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateObjectAttributesResponse_ObjectIdentifier})
+var sUpdateSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchemaRequest, Members: &mUpdateSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSchemaRequest})
+var sUpdateSchemaRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUpdateSchemaRequest_SchemaArn})
+var sUpdateSchemaRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SchemaName, Type: smithy.ShapeTypeString, Ext: &eUpdateSchemaRequest_Name})
+var sUpdateSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchemaResponse, Members: &mUpdateSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSchemaResponse})
+var sUpdateSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateSchemaResponse_SchemaArn})
+var sUpdateTypedLinkFacetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTypedLinkFacetRequest, Members: &mUpdateTypedLinkFacetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTypedLinkFacetRequest})
+var sUpdateTypedLinkFacetRequest_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i_Arn, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUpdateTypedLinkFacetRequest_SchemaArn})
+var sUpdateTypedLinkFacetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TypedLinkName, Type: smithy.ShapeTypeString, Ext: &eUpdateTypedLinkFacetRequest_Name})
+var sUpdateTypedLinkFacetRequest_AttributeUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeUpdates", ID: &i_TypedLinkFacetAttributeUpdateList, Members: &m_TypedLinkFacetAttributeUpdateList, Type: smithy.ShapeTypeList, Ext: &eUpdateTypedLinkFacetRequest_AttributeUpdates})
+var sUpdateTypedLinkFacetRequest_IdentityAttributeOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityAttributeOrder", ID: &i_AttributeNameList, Members: &m_AttributeNameList, Type: smithy.ShapeTypeList, Ext: &eUpdateTypedLinkFacetRequest_IdentityAttributeOrder})
+var sUpdateTypedLinkFacetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTypedLinkFacetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTypedLinkFacetResponse})
+var sUpgradeAppliedSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAppliedSchemaRequest, Members: &mUpgradeAppliedSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeAppliedSchemaRequest})
+var sUpgradeAppliedSchemaRequest_PublishedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradeAppliedSchemaRequest_PublishedSchemaArn})
+var sUpgradeAppliedSchemaRequest_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradeAppliedSchemaRequest_DirectoryArn})
+var sUpgradeAppliedSchemaRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeAppliedSchemaRequest_DryRun})
+var sUpgradeAppliedSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAppliedSchemaResponse, Members: &mUpgradeAppliedSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeAppliedSchemaResponse})
+var sUpgradeAppliedSchemaResponse_UpgradedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradeAppliedSchemaResponse_UpgradedSchemaArn})
+var sUpgradeAppliedSchemaResponse_DirectoryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradeAppliedSchemaResponse_DirectoryArn})
+var sUpgradePublishedSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradePublishedSchemaRequest, Members: &mUpgradePublishedSchemaRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpgradePublishedSchemaRequest})
+var sUpgradePublishedSchemaRequest_DevelopmentSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DevelopmentSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradePublishedSchemaRequest_DevelopmentSchemaArn})
+var sUpgradePublishedSchemaRequest_PublishedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradePublishedSchemaRequest_PublishedSchemaArn})
+var sUpgradePublishedSchemaRequest_MinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinorVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eUpgradePublishedSchemaRequest_MinorVersion})
+var sUpgradePublishedSchemaRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Bool, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradePublishedSchemaRequest_DryRun})
+var sUpgradePublishedSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradePublishedSchemaResponse, Members: &mUpgradePublishedSchemaResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpgradePublishedSchemaResponse})
+var sUpgradePublishedSchemaResponse_UpgradedSchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpgradedSchemaArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpgradePublishedSchemaResponse_UpgradedSchemaArn})
+
+var AddFacetToObject = &sAddFacetToObject
+
+var ApplySchema = &sApplySchema
+
+var AttachObject = &sAttachObject
+
+var AttachPolicy = &sAttachPolicy
+
+var AttachToIndex = &sAttachToIndex
+
+var AttachTypedLink = &sAttachTypedLink
+
+var BatchRead = &sBatchRead
+
+var BatchWrite = &sBatchWrite
+
+var CreateDirectory = &sCreateDirectory
+
+var CreateFacet = &sCreateFacet
+
+var CreateIndex = &sCreateIndex
+
+var CreateObject = &sCreateObject
+
+var CreateSchema = &sCreateSchema
+
+var CreateTypedLinkFacet = &sCreateTypedLinkFacet
+
+var DeleteDirectory = &sDeleteDirectory
+
+var DeleteFacet = &sDeleteFacet
+
+var DeleteObject = &sDeleteObject
+
+var DeleteSchema = &sDeleteSchema
+
+var DeleteTypedLinkFacet = &sDeleteTypedLinkFacet
+
+var DetachFromIndex = &sDetachFromIndex
+
+var DetachObject = &sDetachObject
+
+var DetachPolicy = &sDetachPolicy
+
+var DetachTypedLink = &sDetachTypedLink
+
+var DisableDirectory = &sDisableDirectory
+
+var EnableDirectory = &sEnableDirectory
+
+var GetAppliedSchemaVersion = &sGetAppliedSchemaVersion
+
+var GetDirectory = &sGetDirectory
+
+var GetFacet = &sGetFacet
+
+var GetLinkAttributes = &sGetLinkAttributes
+
+var GetObjectAttributes = &sGetObjectAttributes
+
+var GetObjectInformation = &sGetObjectInformation
+
+var GetSchemaAsJson = &sGetSchemaAsJson
+
+var GetTypedLinkFacetInformation = &sGetTypedLinkFacetInformation
+
+var ListAppliedSchemaArns = &sListAppliedSchemaArns
+
+var ListAttachedIndices = &sListAttachedIndices
+
+var ListDevelopmentSchemaArns = &sListDevelopmentSchemaArns
+
+var ListDirectories = &sListDirectories
+
+var ListFacetAttributes = &sListFacetAttributes
+
+var ListFacetNames = &sListFacetNames
+
+var ListIncomingTypedLinks = &sListIncomingTypedLinks
+
+var ListIndex = &sListIndex
+
+var ListManagedSchemaArns = &sListManagedSchemaArns
+
+var ListObjectAttributes = &sListObjectAttributes
+
+var ListObjectChildren = &sListObjectChildren
+
+var ListObjectParentPaths = &sListObjectParentPaths
+
+var ListObjectParents = &sListObjectParents
+
+var ListObjectPolicies = &sListObjectPolicies
+
+var ListOutgoingTypedLinks = &sListOutgoingTypedLinks
+
+var ListPolicyAttachments = &sListPolicyAttachments
+
+var ListPublishedSchemaArns = &sListPublishedSchemaArns
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTypedLinkFacetAttributes = &sListTypedLinkFacetAttributes
+
+var ListTypedLinkFacetNames = &sListTypedLinkFacetNames
+
+var LookupPolicy = &sLookupPolicy
+
+var PublishSchema = &sPublishSchema
+
+var PutSchemaFromJson = &sPutSchemaFromJson
+
+var RemoveFacetFromObject = &sRemoveFacetFromObject
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateFacet = &sUpdateFacet
+
+var UpdateLinkAttributes = &sUpdateLinkAttributes
+
+var UpdateObjectAttributes = &sUpdateObjectAttributes
+
+var UpdateSchema = &sUpdateSchema
+
+var UpdateTypedLinkFacet = &sUpdateTypedLinkFacet
+
+var UpgradeAppliedSchema = &sUpgradeAppliedSchema
+
+var UpgradePublishedSchema = &sUpgradePublishedSchema
+
+var _AmazonCloudDirectory_20170111 = &s_AmazonCloudDirectory_20170111
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _Arn = &s_Arn
+
+var _Arns = &s_Arns
+var _Arns_member = &s_Arns_member
+
+var AttributeKey = &sAttributeKey
+var AttributeKey_SchemaArn = &sAttributeKey_SchemaArn
+var AttributeKey_FacetName = &sAttributeKey_FacetName
+var AttributeKey_Name = &sAttributeKey_Name
+
+var AttributeKeyAndValue = &sAttributeKeyAndValue
+var AttributeKeyAndValue_Key = &sAttributeKeyAndValue_Key
+var AttributeKeyAndValue_Value = &sAttributeKeyAndValue_Value
+
+var _AttributeKeyAndValueList = &s_AttributeKeyAndValueList
+var _AttributeKeyAndValueList_member = &s_AttributeKeyAndValueList_member
+
+var _AttributeKeyList = &s_AttributeKeyList
+var _AttributeKeyList_member = &s_AttributeKeyList_member
+
+var _AttributeName = &s_AttributeName
+
+var AttributeNameAndValue = &sAttributeNameAndValue
+var AttributeNameAndValue_AttributeName = &sAttributeNameAndValue_AttributeName
+var AttributeNameAndValue_Value = &sAttributeNameAndValue_Value
+
+var _AttributeNameAndValueList = &s_AttributeNameAndValueList
+var _AttributeNameAndValueList_member = &s_AttributeNameAndValueList_member
+
+var _AttributeNameList = &s_AttributeNameList
+var _AttributeNameList_member = &s_AttributeNameList_member
+
+var BatchAddFacetToObject = &sBatchAddFacetToObject
+var BatchAddFacetToObject_SchemaFacet = &sBatchAddFacetToObject_SchemaFacet
+var BatchAddFacetToObject_ObjectAttributeList = &sBatchAddFacetToObject_ObjectAttributeList
+var BatchAddFacetToObject_ObjectReference = &sBatchAddFacetToObject_ObjectReference
+
+var BatchAddFacetToObjectResponse = &sBatchAddFacetToObjectResponse
+
+var BatchAttachObject = &sBatchAttachObject
+var BatchAttachObject_ParentReference = &sBatchAttachObject_ParentReference
+var BatchAttachObject_ChildReference = &sBatchAttachObject_ChildReference
+var BatchAttachObject_LinkName = &sBatchAttachObject_LinkName
+
+var BatchAttachObjectResponse = &sBatchAttachObjectResponse
+var BatchAttachObjectResponse_attachedObjectIdentifier = &sBatchAttachObjectResponse_attachedObjectIdentifier
+
+var BatchAttachPolicy = &sBatchAttachPolicy
+var BatchAttachPolicy_PolicyReference = &sBatchAttachPolicy_PolicyReference
+var BatchAttachPolicy_ObjectReference = &sBatchAttachPolicy_ObjectReference
+
+var BatchAttachPolicyResponse = &sBatchAttachPolicyResponse
+
+var BatchAttachToIndex = &sBatchAttachToIndex
+var BatchAttachToIndex_IndexReference = &sBatchAttachToIndex_IndexReference
+var BatchAttachToIndex_TargetReference = &sBatchAttachToIndex_TargetReference
+
+var BatchAttachToIndexResponse = &sBatchAttachToIndexResponse
+var BatchAttachToIndexResponse_AttachedObjectIdentifier = &sBatchAttachToIndexResponse_AttachedObjectIdentifier
+
+var BatchAttachTypedLink = &sBatchAttachTypedLink
+var BatchAttachTypedLink_SourceObjectReference = &sBatchAttachTypedLink_SourceObjectReference
+var BatchAttachTypedLink_TargetObjectReference = &sBatchAttachTypedLink_TargetObjectReference
+var BatchAttachTypedLink_TypedLinkFacet = &sBatchAttachTypedLink_TypedLinkFacet
+var BatchAttachTypedLink_Attributes = &sBatchAttachTypedLink_Attributes
+
+var BatchAttachTypedLinkResponse = &sBatchAttachTypedLinkResponse
+var BatchAttachTypedLinkResponse_TypedLinkSpecifier = &sBatchAttachTypedLinkResponse_TypedLinkSpecifier
+
+var BatchCreateIndex = &sBatchCreateIndex
+var BatchCreateIndex_OrderedIndexedAttributeList = &sBatchCreateIndex_OrderedIndexedAttributeList
+var BatchCreateIndex_IsUnique = &sBatchCreateIndex_IsUnique
+var BatchCreateIndex_ParentReference = &sBatchCreateIndex_ParentReference
+var BatchCreateIndex_LinkName = &sBatchCreateIndex_LinkName
+var BatchCreateIndex_BatchReferenceName = &sBatchCreateIndex_BatchReferenceName
+
+var BatchCreateIndexResponse = &sBatchCreateIndexResponse
+var BatchCreateIndexResponse_ObjectIdentifier = &sBatchCreateIndexResponse_ObjectIdentifier
+
+var BatchCreateObject = &sBatchCreateObject
+var BatchCreateObject_SchemaFacet = &sBatchCreateObject_SchemaFacet
+var BatchCreateObject_ObjectAttributeList = &sBatchCreateObject_ObjectAttributeList
+var BatchCreateObject_ParentReference = &sBatchCreateObject_ParentReference
+var BatchCreateObject_LinkName = &sBatchCreateObject_LinkName
+var BatchCreateObject_BatchReferenceName = &sBatchCreateObject_BatchReferenceName
+
+var BatchCreateObjectResponse = &sBatchCreateObjectResponse
+var BatchCreateObjectResponse_ObjectIdentifier = &sBatchCreateObjectResponse_ObjectIdentifier
+
+var BatchDeleteObject = &sBatchDeleteObject
+var BatchDeleteObject_ObjectReference = &sBatchDeleteObject_ObjectReference
+
+var BatchDeleteObjectResponse = &sBatchDeleteObjectResponse
+
+var BatchDetachFromIndex = &sBatchDetachFromIndex
+var BatchDetachFromIndex_IndexReference = &sBatchDetachFromIndex_IndexReference
+var BatchDetachFromIndex_TargetReference = &sBatchDetachFromIndex_TargetReference
+
+var BatchDetachFromIndexResponse = &sBatchDetachFromIndexResponse
+var BatchDetachFromIndexResponse_DetachedObjectIdentifier = &sBatchDetachFromIndexResponse_DetachedObjectIdentifier
+
+var BatchDetachObject = &sBatchDetachObject
+var BatchDetachObject_ParentReference = &sBatchDetachObject_ParentReference
+var BatchDetachObject_LinkName = &sBatchDetachObject_LinkName
+var BatchDetachObject_BatchReferenceName = &sBatchDetachObject_BatchReferenceName
+
+var BatchDetachObjectResponse = &sBatchDetachObjectResponse
+var BatchDetachObjectResponse_detachedObjectIdentifier = &sBatchDetachObjectResponse_detachedObjectIdentifier
+
+var BatchDetachPolicy = &sBatchDetachPolicy
+var BatchDetachPolicy_PolicyReference = &sBatchDetachPolicy_PolicyReference
+var BatchDetachPolicy_ObjectReference = &sBatchDetachPolicy_ObjectReference
+
+var BatchDetachPolicyResponse = &sBatchDetachPolicyResponse
+
+var BatchDetachTypedLink = &sBatchDetachTypedLink
+var BatchDetachTypedLink_TypedLinkSpecifier = &sBatchDetachTypedLink_TypedLinkSpecifier
+
+var BatchDetachTypedLinkResponse = &sBatchDetachTypedLinkResponse
+
+var BatchGetLinkAttributes = &sBatchGetLinkAttributes
+var BatchGetLinkAttributes_TypedLinkSpecifier = &sBatchGetLinkAttributes_TypedLinkSpecifier
+var BatchGetLinkAttributes_AttributeNames = &sBatchGetLinkAttributes_AttributeNames
+
+var BatchGetLinkAttributesResponse = &sBatchGetLinkAttributesResponse
+var BatchGetLinkAttributesResponse_Attributes = &sBatchGetLinkAttributesResponse_Attributes
+
+var BatchGetObjectAttributes = &sBatchGetObjectAttributes
+var BatchGetObjectAttributes_ObjectReference = &sBatchGetObjectAttributes_ObjectReference
+var BatchGetObjectAttributes_SchemaFacet = &sBatchGetObjectAttributes_SchemaFacet
+var BatchGetObjectAttributes_AttributeNames = &sBatchGetObjectAttributes_AttributeNames
+
+var BatchGetObjectAttributesResponse = &sBatchGetObjectAttributesResponse
+var BatchGetObjectAttributesResponse_Attributes = &sBatchGetObjectAttributesResponse_Attributes
+
+var BatchGetObjectInformation = &sBatchGetObjectInformation
+var BatchGetObjectInformation_ObjectReference = &sBatchGetObjectInformation_ObjectReference
+
+var BatchGetObjectInformationResponse = &sBatchGetObjectInformationResponse
+var BatchGetObjectInformationResponse_SchemaFacets = &sBatchGetObjectInformationResponse_SchemaFacets
+var BatchGetObjectInformationResponse_ObjectIdentifier = &sBatchGetObjectInformationResponse_ObjectIdentifier
+
+var BatchListAttachedIndices = &sBatchListAttachedIndices
+var BatchListAttachedIndices_TargetReference = &sBatchListAttachedIndices_TargetReference
+var BatchListAttachedIndices_NextToken = &sBatchListAttachedIndices_NextToken
+var BatchListAttachedIndices_MaxResults = &sBatchListAttachedIndices_MaxResults
+
+var BatchListAttachedIndicesResponse = &sBatchListAttachedIndicesResponse
+var BatchListAttachedIndicesResponse_IndexAttachments = &sBatchListAttachedIndicesResponse_IndexAttachments
+var BatchListAttachedIndicesResponse_NextToken = &sBatchListAttachedIndicesResponse_NextToken
+
+var BatchListIncomingTypedLinks = &sBatchListIncomingTypedLinks
+var BatchListIncomingTypedLinks_ObjectReference = &sBatchListIncomingTypedLinks_ObjectReference
+var BatchListIncomingTypedLinks_FilterAttributeRanges = &sBatchListIncomingTypedLinks_FilterAttributeRanges
+var BatchListIncomingTypedLinks_FilterTypedLink = &sBatchListIncomingTypedLinks_FilterTypedLink
+var BatchListIncomingTypedLinks_NextToken = &sBatchListIncomingTypedLinks_NextToken
+var BatchListIncomingTypedLinks_MaxResults = &sBatchListIncomingTypedLinks_MaxResults
+
+var BatchListIncomingTypedLinksResponse = &sBatchListIncomingTypedLinksResponse
+var BatchListIncomingTypedLinksResponse_LinkSpecifiers = &sBatchListIncomingTypedLinksResponse_LinkSpecifiers
+var BatchListIncomingTypedLinksResponse_NextToken = &sBatchListIncomingTypedLinksResponse_NextToken
+
+var BatchListIndex = &sBatchListIndex
+var BatchListIndex_RangesOnIndexedValues = &sBatchListIndex_RangesOnIndexedValues
+var BatchListIndex_IndexReference = &sBatchListIndex_IndexReference
+var BatchListIndex_MaxResults = &sBatchListIndex_MaxResults
+var BatchListIndex_NextToken = &sBatchListIndex_NextToken
+
+var BatchListIndexResponse = &sBatchListIndexResponse
+var BatchListIndexResponse_IndexAttachments = &sBatchListIndexResponse_IndexAttachments
+var BatchListIndexResponse_NextToken = &sBatchListIndexResponse_NextToken
+
+var BatchListObjectAttributes = &sBatchListObjectAttributes
+var BatchListObjectAttributes_ObjectReference = &sBatchListObjectAttributes_ObjectReference
+var BatchListObjectAttributes_NextToken = &sBatchListObjectAttributes_NextToken
+var BatchListObjectAttributes_MaxResults = &sBatchListObjectAttributes_MaxResults
+var BatchListObjectAttributes_FacetFilter = &sBatchListObjectAttributes_FacetFilter
+
+var BatchListObjectAttributesResponse = &sBatchListObjectAttributesResponse
+var BatchListObjectAttributesResponse_Attributes = &sBatchListObjectAttributesResponse_Attributes
+var BatchListObjectAttributesResponse_NextToken = &sBatchListObjectAttributesResponse_NextToken
+
+var BatchListObjectChildren = &sBatchListObjectChildren
+var BatchListObjectChildren_ObjectReference = &sBatchListObjectChildren_ObjectReference
+var BatchListObjectChildren_NextToken = &sBatchListObjectChildren_NextToken
+var BatchListObjectChildren_MaxResults = &sBatchListObjectChildren_MaxResults
+
+var BatchListObjectChildrenResponse = &sBatchListObjectChildrenResponse
+var BatchListObjectChildrenResponse_Children = &sBatchListObjectChildrenResponse_Children
+var BatchListObjectChildrenResponse_NextToken = &sBatchListObjectChildrenResponse_NextToken
+
+var BatchListObjectParentPaths = &sBatchListObjectParentPaths
+var BatchListObjectParentPaths_ObjectReference = &sBatchListObjectParentPaths_ObjectReference
+var BatchListObjectParentPaths_NextToken = &sBatchListObjectParentPaths_NextToken
+var BatchListObjectParentPaths_MaxResults = &sBatchListObjectParentPaths_MaxResults
+
+var BatchListObjectParentPathsResponse = &sBatchListObjectParentPathsResponse
+var BatchListObjectParentPathsResponse_PathToObjectIdentifiersList = &sBatchListObjectParentPathsResponse_PathToObjectIdentifiersList
+var BatchListObjectParentPathsResponse_NextToken = &sBatchListObjectParentPathsResponse_NextToken
+
+var BatchListObjectParents = &sBatchListObjectParents
+var BatchListObjectParents_ObjectReference = &sBatchListObjectParents_ObjectReference
+var BatchListObjectParents_NextToken = &sBatchListObjectParents_NextToken
+var BatchListObjectParents_MaxResults = &sBatchListObjectParents_MaxResults
+
+var BatchListObjectParentsResponse = &sBatchListObjectParentsResponse
+var BatchListObjectParentsResponse_ParentLinks = &sBatchListObjectParentsResponse_ParentLinks
+var BatchListObjectParentsResponse_NextToken = &sBatchListObjectParentsResponse_NextToken
+
+var BatchListObjectPolicies = &sBatchListObjectPolicies
+var BatchListObjectPolicies_ObjectReference = &sBatchListObjectPolicies_ObjectReference
+var BatchListObjectPolicies_NextToken = &sBatchListObjectPolicies_NextToken
+var BatchListObjectPolicies_MaxResults = &sBatchListObjectPolicies_MaxResults
+
+var BatchListObjectPoliciesResponse = &sBatchListObjectPoliciesResponse
+var BatchListObjectPoliciesResponse_AttachedPolicyIds = &sBatchListObjectPoliciesResponse_AttachedPolicyIds
+var BatchListObjectPoliciesResponse_NextToken = &sBatchListObjectPoliciesResponse_NextToken
+
+var BatchListOutgoingTypedLinks = &sBatchListOutgoingTypedLinks
+var BatchListOutgoingTypedLinks_ObjectReference = &sBatchListOutgoingTypedLinks_ObjectReference
+var BatchListOutgoingTypedLinks_FilterAttributeRanges = &sBatchListOutgoingTypedLinks_FilterAttributeRanges
+var BatchListOutgoingTypedLinks_FilterTypedLink = &sBatchListOutgoingTypedLinks_FilterTypedLink
+var BatchListOutgoingTypedLinks_NextToken = &sBatchListOutgoingTypedLinks_NextToken
+var BatchListOutgoingTypedLinks_MaxResults = &sBatchListOutgoingTypedLinks_MaxResults
+
+var BatchListOutgoingTypedLinksResponse = &sBatchListOutgoingTypedLinksResponse
+var BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers = &sBatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers
+var BatchListOutgoingTypedLinksResponse_NextToken = &sBatchListOutgoingTypedLinksResponse_NextToken
+
+var BatchListPolicyAttachments = &sBatchListPolicyAttachments
+var BatchListPolicyAttachments_PolicyReference = &sBatchListPolicyAttachments_PolicyReference
+var BatchListPolicyAttachments_NextToken = &sBatchListPolicyAttachments_NextToken
+var BatchListPolicyAttachments_MaxResults = &sBatchListPolicyAttachments_MaxResults
+
+var BatchListPolicyAttachmentsResponse = &sBatchListPolicyAttachmentsResponse
+var BatchListPolicyAttachmentsResponse_ObjectIdentifiers = &sBatchListPolicyAttachmentsResponse_ObjectIdentifiers
+var BatchListPolicyAttachmentsResponse_NextToken = &sBatchListPolicyAttachmentsResponse_NextToken
+
+var BatchLookupPolicy = &sBatchLookupPolicy
+var BatchLookupPolicy_ObjectReference = &sBatchLookupPolicy_ObjectReference
+var BatchLookupPolicy_NextToken = &sBatchLookupPolicy_NextToken
+var BatchLookupPolicy_MaxResults = &sBatchLookupPolicy_MaxResults
+
+var BatchLookupPolicyResponse = &sBatchLookupPolicyResponse
+var BatchLookupPolicyResponse_PolicyToPathList = &sBatchLookupPolicyResponse_PolicyToPathList
+var BatchLookupPolicyResponse_NextToken = &sBatchLookupPolicyResponse_NextToken
+
+var _BatchOperationIndex = &s_BatchOperationIndex
+
+var BatchReadException = &sBatchReadException
+var BatchReadException_Type = &sBatchReadException_Type
+var BatchReadException_Message = &sBatchReadException_Message
+
+var BatchReadExceptionType = &sBatchReadExceptionType
+var BatchReadExceptionType_ValidationException = &sBatchReadExceptionType_ValidationException
+var BatchReadExceptionType_InvalidArnException = &sBatchReadExceptionType_InvalidArnException
+var BatchReadExceptionType_ResourceNotFoundException = &sBatchReadExceptionType_ResourceNotFoundException
+var BatchReadExceptionType_InvalidNextTokenException = &sBatchReadExceptionType_InvalidNextTokenException
+var BatchReadExceptionType_AccessDeniedException = &sBatchReadExceptionType_AccessDeniedException
+var BatchReadExceptionType_NotNodeException = &sBatchReadExceptionType_NotNodeException
+var BatchReadExceptionType_FacetValidationException = &sBatchReadExceptionType_FacetValidationException
+var BatchReadExceptionType_CannotListParentOfRootException = &sBatchReadExceptionType_CannotListParentOfRootException
+var BatchReadExceptionType_NotIndexException = &sBatchReadExceptionType_NotIndexException
+var BatchReadExceptionType_NotPolicyException = &sBatchReadExceptionType_NotPolicyException
+var BatchReadExceptionType_DirectoryNotEnabledException = &sBatchReadExceptionType_DirectoryNotEnabledException
+var BatchReadExceptionType_LimitExceededException = &sBatchReadExceptionType_LimitExceededException
+var BatchReadExceptionType_InternalServiceException = &sBatchReadExceptionType_InternalServiceException
+
+var BatchReadOperation = &sBatchReadOperation
+var BatchReadOperation_ListObjectAttributes = &sBatchReadOperation_ListObjectAttributes
+var BatchReadOperation_ListObjectChildren = &sBatchReadOperation_ListObjectChildren
+var BatchReadOperation_ListAttachedIndices = &sBatchReadOperation_ListAttachedIndices
+var BatchReadOperation_ListObjectParentPaths = &sBatchReadOperation_ListObjectParentPaths
+var BatchReadOperation_GetObjectInformation = &sBatchReadOperation_GetObjectInformation
+var BatchReadOperation_GetObjectAttributes = &sBatchReadOperation_GetObjectAttributes
+var BatchReadOperation_ListObjectParents = &sBatchReadOperation_ListObjectParents
+var BatchReadOperation_ListObjectPolicies = &sBatchReadOperation_ListObjectPolicies
+var BatchReadOperation_ListPolicyAttachments = &sBatchReadOperation_ListPolicyAttachments
+var BatchReadOperation_LookupPolicy = &sBatchReadOperation_LookupPolicy
+var BatchReadOperation_ListIndex = &sBatchReadOperation_ListIndex
+var BatchReadOperation_ListOutgoingTypedLinks = &sBatchReadOperation_ListOutgoingTypedLinks
+var BatchReadOperation_ListIncomingTypedLinks = &sBatchReadOperation_ListIncomingTypedLinks
+var BatchReadOperation_GetLinkAttributes = &sBatchReadOperation_GetLinkAttributes
+
+var _BatchReadOperationList = &s_BatchReadOperationList
+var _BatchReadOperationList_member = &s_BatchReadOperationList_member
+
+var BatchReadOperationResponse = &sBatchReadOperationResponse
+var BatchReadOperationResponse_SuccessfulResponse = &sBatchReadOperationResponse_SuccessfulResponse
+var BatchReadOperationResponse_ExceptionResponse = &sBatchReadOperationResponse_ExceptionResponse
+
+var _BatchReadOperationResponseList = &s_BatchReadOperationResponseList
+var _BatchReadOperationResponseList_member = &s_BatchReadOperationResponseList_member
+
+var BatchReadSuccessfulResponse = &sBatchReadSuccessfulResponse
+var BatchReadSuccessfulResponse_ListObjectAttributes = &sBatchReadSuccessfulResponse_ListObjectAttributes
+var BatchReadSuccessfulResponse_ListObjectChildren = &sBatchReadSuccessfulResponse_ListObjectChildren
+var BatchReadSuccessfulResponse_GetObjectInformation = &sBatchReadSuccessfulResponse_GetObjectInformation
+var BatchReadSuccessfulResponse_GetObjectAttributes = &sBatchReadSuccessfulResponse_GetObjectAttributes
+var BatchReadSuccessfulResponse_ListAttachedIndices = &sBatchReadSuccessfulResponse_ListAttachedIndices
+var BatchReadSuccessfulResponse_ListObjectParentPaths = &sBatchReadSuccessfulResponse_ListObjectParentPaths
+var BatchReadSuccessfulResponse_ListObjectPolicies = &sBatchReadSuccessfulResponse_ListObjectPolicies
+var BatchReadSuccessfulResponse_ListPolicyAttachments = &sBatchReadSuccessfulResponse_ListPolicyAttachments
+var BatchReadSuccessfulResponse_LookupPolicy = &sBatchReadSuccessfulResponse_LookupPolicy
+var BatchReadSuccessfulResponse_ListIndex = &sBatchReadSuccessfulResponse_ListIndex
+var BatchReadSuccessfulResponse_ListOutgoingTypedLinks = &sBatchReadSuccessfulResponse_ListOutgoingTypedLinks
+var BatchReadSuccessfulResponse_ListIncomingTypedLinks = &sBatchReadSuccessfulResponse_ListIncomingTypedLinks
+var BatchReadSuccessfulResponse_GetLinkAttributes = &sBatchReadSuccessfulResponse_GetLinkAttributes
+var BatchReadSuccessfulResponse_ListObjectParents = &sBatchReadSuccessfulResponse_ListObjectParents
+
+var _BatchReferenceName = &s_BatchReferenceName
+
+var BatchRemoveFacetFromObject = &sBatchRemoveFacetFromObject
+var BatchRemoveFacetFromObject_SchemaFacet = &sBatchRemoveFacetFromObject_SchemaFacet
+var BatchRemoveFacetFromObject_ObjectReference = &sBatchRemoveFacetFromObject_ObjectReference
+
+var BatchRemoveFacetFromObjectResponse = &sBatchRemoveFacetFromObjectResponse
+
+var BatchUpdateLinkAttributes = &sBatchUpdateLinkAttributes
+var BatchUpdateLinkAttributes_TypedLinkSpecifier = &sBatchUpdateLinkAttributes_TypedLinkSpecifier
+var BatchUpdateLinkAttributes_AttributeUpdates = &sBatchUpdateLinkAttributes_AttributeUpdates
+
+var BatchUpdateLinkAttributesResponse = &sBatchUpdateLinkAttributesResponse
+
+var BatchUpdateObjectAttributes = &sBatchUpdateObjectAttributes
+var BatchUpdateObjectAttributes_ObjectReference = &sBatchUpdateObjectAttributes_ObjectReference
+var BatchUpdateObjectAttributes_AttributeUpdates = &sBatchUpdateObjectAttributes_AttributeUpdates
+
+var BatchUpdateObjectAttributesResponse = &sBatchUpdateObjectAttributesResponse
+var BatchUpdateObjectAttributesResponse_ObjectIdentifier = &sBatchUpdateObjectAttributesResponse_ObjectIdentifier
+
+var BatchWriteException = &sBatchWriteException
+var BatchWriteException_Index = &sBatchWriteException_Index
+var BatchWriteException_Type = &sBatchWriteException_Type
+var BatchWriteException_Message = &sBatchWriteException_Message
+
+var BatchWriteExceptionType = &sBatchWriteExceptionType
+var BatchWriteExceptionType_InternalServiceException = &sBatchWriteExceptionType_InternalServiceException
+var BatchWriteExceptionType_ValidationException = &sBatchWriteExceptionType_ValidationException
+var BatchWriteExceptionType_InvalidArnException = &sBatchWriteExceptionType_InvalidArnException
+var BatchWriteExceptionType_LinkNameAlreadyInUseException = &sBatchWriteExceptionType_LinkNameAlreadyInUseException
+var BatchWriteExceptionType_StillContainsLinksException = &sBatchWriteExceptionType_StillContainsLinksException
+var BatchWriteExceptionType_FacetValidationException = &sBatchWriteExceptionType_FacetValidationException
+var BatchWriteExceptionType_ObjectNotDetachedException = &sBatchWriteExceptionType_ObjectNotDetachedException
+var BatchWriteExceptionType_ResourceNotFoundException = &sBatchWriteExceptionType_ResourceNotFoundException
+var BatchWriteExceptionType_AccessDeniedException = &sBatchWriteExceptionType_AccessDeniedException
+var BatchWriteExceptionType_InvalidAttachmentException = &sBatchWriteExceptionType_InvalidAttachmentException
+var BatchWriteExceptionType_NotIndexException = &sBatchWriteExceptionType_NotIndexException
+var BatchWriteExceptionType_NotNodeException = &sBatchWriteExceptionType_NotNodeException
+var BatchWriteExceptionType_IndexedAttributeMissingException = &sBatchWriteExceptionType_IndexedAttributeMissingException
+var BatchWriteExceptionType_ObjectAlreadyDetachedException = &sBatchWriteExceptionType_ObjectAlreadyDetachedException
+var BatchWriteExceptionType_NotPolicyException = &sBatchWriteExceptionType_NotPolicyException
+var BatchWriteExceptionType_DirectoryNotEnabledException = &sBatchWriteExceptionType_DirectoryNotEnabledException
+var BatchWriteExceptionType_LimitExceededException = &sBatchWriteExceptionType_LimitExceededException
+var BatchWriteExceptionType_UnsupportedIndexTypeException = &sBatchWriteExceptionType_UnsupportedIndexTypeException
+
+var BatchWriteOperation = &sBatchWriteOperation
+var BatchWriteOperation_CreateObject = &sBatchWriteOperation_CreateObject
+var BatchWriteOperation_AttachObject = &sBatchWriteOperation_AttachObject
+var BatchWriteOperation_DetachObject = &sBatchWriteOperation_DetachObject
+var BatchWriteOperation_UpdateObjectAttributes = &sBatchWriteOperation_UpdateObjectAttributes
+var BatchWriteOperation_DeleteObject = &sBatchWriteOperation_DeleteObject
+var BatchWriteOperation_AddFacetToObject = &sBatchWriteOperation_AddFacetToObject
+var BatchWriteOperation_RemoveFacetFromObject = &sBatchWriteOperation_RemoveFacetFromObject
+var BatchWriteOperation_AttachPolicy = &sBatchWriteOperation_AttachPolicy
+var BatchWriteOperation_DetachPolicy = &sBatchWriteOperation_DetachPolicy
+var BatchWriteOperation_CreateIndex = &sBatchWriteOperation_CreateIndex
+var BatchWriteOperation_AttachToIndex = &sBatchWriteOperation_AttachToIndex
+var BatchWriteOperation_DetachFromIndex = &sBatchWriteOperation_DetachFromIndex
+var BatchWriteOperation_AttachTypedLink = &sBatchWriteOperation_AttachTypedLink
+var BatchWriteOperation_DetachTypedLink = &sBatchWriteOperation_DetachTypedLink
+var BatchWriteOperation_UpdateLinkAttributes = &sBatchWriteOperation_UpdateLinkAttributes
+
+var _BatchWriteOperationList = &s_BatchWriteOperationList
+var _BatchWriteOperationList_member = &s_BatchWriteOperationList_member
+
+var BatchWriteOperationResponse = &sBatchWriteOperationResponse
+var BatchWriteOperationResponse_CreateObject = &sBatchWriteOperationResponse_CreateObject
+var BatchWriteOperationResponse_AttachObject = &sBatchWriteOperationResponse_AttachObject
+var BatchWriteOperationResponse_DetachObject = &sBatchWriteOperationResponse_DetachObject
+var BatchWriteOperationResponse_UpdateObjectAttributes = &sBatchWriteOperationResponse_UpdateObjectAttributes
+var BatchWriteOperationResponse_DeleteObject = &sBatchWriteOperationResponse_DeleteObject
+var BatchWriteOperationResponse_AddFacetToObject = &sBatchWriteOperationResponse_AddFacetToObject
+var BatchWriteOperationResponse_RemoveFacetFromObject = &sBatchWriteOperationResponse_RemoveFacetFromObject
+var BatchWriteOperationResponse_AttachPolicy = &sBatchWriteOperationResponse_AttachPolicy
+var BatchWriteOperationResponse_DetachPolicy = &sBatchWriteOperationResponse_DetachPolicy
+var BatchWriteOperationResponse_CreateIndex = &sBatchWriteOperationResponse_CreateIndex
+var BatchWriteOperationResponse_AttachToIndex = &sBatchWriteOperationResponse_AttachToIndex
+var BatchWriteOperationResponse_DetachFromIndex = &sBatchWriteOperationResponse_DetachFromIndex
+var BatchWriteOperationResponse_AttachTypedLink = &sBatchWriteOperationResponse_AttachTypedLink
+var BatchWriteOperationResponse_DetachTypedLink = &sBatchWriteOperationResponse_DetachTypedLink
+var BatchWriteOperationResponse_UpdateLinkAttributes = &sBatchWriteOperationResponse_UpdateLinkAttributes
+
+var _BatchWriteOperationResponseList = &s_BatchWriteOperationResponseList
+var _BatchWriteOperationResponseList_member = &s_BatchWriteOperationResponseList_member
+
+var _BinaryAttributeValue = &s_BinaryAttributeValue
+
+var _Bool = &s_Bool
+
+var _BooleanAttributeValue = &s_BooleanAttributeValue
+
+var CannotListParentOfRootException = &sCannotListParentOfRootException
+var CannotListParentOfRootException_Message = &sCannotListParentOfRootException_Message
+
+var ConsistencyLevel = &sConsistencyLevel
+var ConsistencyLevel_SERIALIZABLE = &sConsistencyLevel_SERIALIZABLE
+var ConsistencyLevel_EVENTUAL = &sConsistencyLevel_EVENTUAL
+
+var _Date = &s_Date
+
+var _DatetimeAttributeValue = &s_DatetimeAttributeValue
+
+var Directory = &sDirectory
+var Directory_Name = &sDirectory_Name
+var Directory_DirectoryArn = &sDirectory_DirectoryArn
+var Directory_State = &sDirectory_State
+var Directory_CreationDateTime = &sDirectory_CreationDateTime
+
+var DirectoryAlreadyExistsException = &sDirectoryAlreadyExistsException
+var DirectoryAlreadyExistsException_Message = &sDirectoryAlreadyExistsException_Message
+
+var _DirectoryArn = &s_DirectoryArn
+
+var DirectoryDeletedException = &sDirectoryDeletedException
+var DirectoryDeletedException_Message = &sDirectoryDeletedException_Message
+
+var _DirectoryList = &s_DirectoryList
+var _DirectoryList_member = &s_DirectoryList_member
+
+var _DirectoryName = &s_DirectoryName
+
+var DirectoryNotDisabledException = &sDirectoryNotDisabledException
+var DirectoryNotDisabledException_Message = &sDirectoryNotDisabledException_Message
+
+var DirectoryNotEnabledException = &sDirectoryNotEnabledException
+var DirectoryNotEnabledException_Message = &sDirectoryNotEnabledException_Message
+
+var DirectoryState = &sDirectoryState
+var DirectoryState_ENABLED = &sDirectoryState_ENABLED
+var DirectoryState_DISABLED = &sDirectoryState_DISABLED
+var DirectoryState_DELETED = &sDirectoryState_DELETED
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var Facet = &sFacet
+var Facet_Name = &sFacet_Name
+var Facet_ObjectType = &sFacet_ObjectType
+var Facet_FacetStyle = &sFacet_FacetStyle
+
+var FacetAlreadyExistsException = &sFacetAlreadyExistsException
+var FacetAlreadyExistsException_Message = &sFacetAlreadyExistsException_Message
+
+var FacetAttribute = &sFacetAttribute
+var FacetAttribute_Name = &sFacetAttribute_Name
+var FacetAttribute_AttributeDefinition = &sFacetAttribute_AttributeDefinition
+var FacetAttribute_AttributeReference = &sFacetAttribute_AttributeReference
+var FacetAttribute_RequiredBehavior = &sFacetAttribute_RequiredBehavior
+
+var FacetAttributeDefinition = &sFacetAttributeDefinition
+var FacetAttributeDefinition_Type = &sFacetAttributeDefinition_Type
+var FacetAttributeDefinition_DefaultValue = &sFacetAttributeDefinition_DefaultValue
+var FacetAttributeDefinition_IsImmutable = &sFacetAttributeDefinition_IsImmutable
+var FacetAttributeDefinition_Rules = &sFacetAttributeDefinition_Rules
+
+var _FacetAttributeList = &s_FacetAttributeList
+var _FacetAttributeList_member = &s_FacetAttributeList_member
+
+var FacetAttributeReference = &sFacetAttributeReference
+var FacetAttributeReference_TargetFacetName = &sFacetAttributeReference_TargetFacetName
+var FacetAttributeReference_TargetAttributeName = &sFacetAttributeReference_TargetAttributeName
+
+var FacetAttributeType = &sFacetAttributeType
+var FacetAttributeType_STRING = &sFacetAttributeType_STRING
+var FacetAttributeType_BINARY = &sFacetAttributeType_BINARY
+var FacetAttributeType_BOOLEAN = &sFacetAttributeType_BOOLEAN
+var FacetAttributeType_NUMBER = &sFacetAttributeType_NUMBER
+var FacetAttributeType_DATETIME = &sFacetAttributeType_DATETIME
+var FacetAttributeType_VARIANT = &sFacetAttributeType_VARIANT
+
+var FacetAttributeUpdate = &sFacetAttributeUpdate
+var FacetAttributeUpdate_Attribute = &sFacetAttributeUpdate_Attribute
+var FacetAttributeUpdate_Action = &sFacetAttributeUpdate_Action
+
+var _FacetAttributeUpdateList = &s_FacetAttributeUpdateList
+var _FacetAttributeUpdateList_member = &s_FacetAttributeUpdateList_member
+
+var FacetInUseException = &sFacetInUseException
+var FacetInUseException_Message = &sFacetInUseException_Message
+
+var _FacetName = &s_FacetName
+
+var _FacetNameList = &s_FacetNameList
+var _FacetNameList_member = &s_FacetNameList_member
+
+var FacetNotFoundException = &sFacetNotFoundException
+var FacetNotFoundException_Message = &sFacetNotFoundException_Message
+
+var FacetStyle = &sFacetStyle
+var FacetStyle_STATIC = &sFacetStyle_STATIC
+var FacetStyle_DYNAMIC = &sFacetStyle_DYNAMIC
+
+var FacetValidationException = &sFacetValidationException
+var FacetValidationException_Message = &sFacetValidationException_Message
+
+var IncompatibleSchemaException = &sIncompatibleSchemaException
+var IncompatibleSchemaException_Message = &sIncompatibleSchemaException_Message
+
+var IndexAttachment = &sIndexAttachment
+var IndexAttachment_IndexedAttributes = &sIndexAttachment_IndexedAttributes
+var IndexAttachment_ObjectIdentifier = &sIndexAttachment_ObjectIdentifier
+
+var _IndexAttachmentList = &s_IndexAttachmentList
+var _IndexAttachmentList_member = &s_IndexAttachmentList_member
+
+var IndexedAttributeMissingException = &sIndexedAttributeMissingException
+var IndexedAttributeMissingException_Message = &sIndexedAttributeMissingException_Message
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_Message = &sInternalServiceException_Message
+
+var InvalidArnException = &sInvalidArnException
+var InvalidArnException_Message = &sInvalidArnException_Message
+
+var InvalidAttachmentException = &sInvalidAttachmentException
+var InvalidAttachmentException_Message = &sInvalidAttachmentException_Message
+
+var InvalidFacetUpdateException = &sInvalidFacetUpdateException
+var InvalidFacetUpdateException_Message = &sInvalidFacetUpdateException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var InvalidRuleException = &sInvalidRuleException
+var InvalidRuleException_Message = &sInvalidRuleException_Message
+
+var InvalidSchemaDocException = &sInvalidSchemaDocException
+var InvalidSchemaDocException_Message = &sInvalidSchemaDocException_Message
+
+var InvalidTaggingRequestException = &sInvalidTaggingRequestException
+var InvalidTaggingRequestException_Message = &sInvalidTaggingRequestException_Message
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var LinkAttributeAction = &sLinkAttributeAction
+var LinkAttributeAction_AttributeActionType = &sLinkAttributeAction_AttributeActionType
+var LinkAttributeAction_AttributeUpdateValue = &sLinkAttributeAction_AttributeUpdateValue
+
+var LinkAttributeUpdate = &sLinkAttributeUpdate
+var LinkAttributeUpdate_AttributeKey = &sLinkAttributeUpdate_AttributeKey
+var LinkAttributeUpdate_AttributeAction = &sLinkAttributeUpdate_AttributeAction
+
+var _LinkAttributeUpdateList = &s_LinkAttributeUpdateList
+var _LinkAttributeUpdateList_member = &s_LinkAttributeUpdateList_member
+
+var _LinkName = &s_LinkName
+
+var LinkNameAlreadyInUseException = &sLinkNameAlreadyInUseException
+var LinkNameAlreadyInUseException_Message = &sLinkNameAlreadyInUseException_Message
+
+var _LinkNameToObjectIdentifierMap = &s_LinkNameToObjectIdentifierMap
+var _LinkNameToObjectIdentifierMap_key = &s_LinkNameToObjectIdentifierMap_key
+var _LinkNameToObjectIdentifierMap_value = &s_LinkNameToObjectIdentifierMap_value
+
+var _NextToken = &s_NextToken
+
+var NotIndexException = &sNotIndexException
+var NotIndexException_Message = &sNotIndexException_Message
+
+var NotNodeException = &sNotNodeException
+var NotNodeException_Message = &sNotNodeException_Message
+
+var NotPolicyException = &sNotPolicyException
+var NotPolicyException_Message = &sNotPolicyException_Message
+
+var _NumberAttributeValue = &s_NumberAttributeValue
+
+var _NumberResults = &s_NumberResults
+
+var ObjectAlreadyDetachedException = &sObjectAlreadyDetachedException
+var ObjectAlreadyDetachedException_Message = &sObjectAlreadyDetachedException_Message
+
+var ObjectAttributeAction = &sObjectAttributeAction
+var ObjectAttributeAction_ObjectAttributeActionType = &sObjectAttributeAction_ObjectAttributeActionType
+var ObjectAttributeAction_ObjectAttributeUpdateValue = &sObjectAttributeAction_ObjectAttributeUpdateValue
+
+var ObjectAttributeRange = &sObjectAttributeRange
+var ObjectAttributeRange_AttributeKey = &sObjectAttributeRange_AttributeKey
+var ObjectAttributeRange_Range = &sObjectAttributeRange_Range
+
+var _ObjectAttributeRangeList = &s_ObjectAttributeRangeList
+var _ObjectAttributeRangeList_member = &s_ObjectAttributeRangeList_member
+
+var ObjectAttributeUpdate = &sObjectAttributeUpdate
+var ObjectAttributeUpdate_ObjectAttributeKey = &sObjectAttributeUpdate_ObjectAttributeKey
+var ObjectAttributeUpdate_ObjectAttributeAction = &sObjectAttributeUpdate_ObjectAttributeAction
+
+var _ObjectAttributeUpdateList = &s_ObjectAttributeUpdateList
+var _ObjectAttributeUpdateList_member = &s_ObjectAttributeUpdateList_member
+
+var _ObjectIdentifier = &s_ObjectIdentifier
+
+var _ObjectIdentifierAndLinkNameList = &s_ObjectIdentifierAndLinkNameList
+var _ObjectIdentifierAndLinkNameList_member = &s_ObjectIdentifierAndLinkNameList_member
+
+var ObjectIdentifierAndLinkNameTuple = &sObjectIdentifierAndLinkNameTuple
+var ObjectIdentifierAndLinkNameTuple_ObjectIdentifier = &sObjectIdentifierAndLinkNameTuple_ObjectIdentifier
+var ObjectIdentifierAndLinkNameTuple_LinkName = &sObjectIdentifierAndLinkNameTuple_LinkName
+
+var _ObjectIdentifierList = &s_ObjectIdentifierList
+var _ObjectIdentifierList_member = &s_ObjectIdentifierList_member
+
+var _ObjectIdentifierToLinkNameMap = &s_ObjectIdentifierToLinkNameMap
+var _ObjectIdentifierToLinkNameMap_key = &s_ObjectIdentifierToLinkNameMap_key
+var _ObjectIdentifierToLinkNameMap_value = &s_ObjectIdentifierToLinkNameMap_value
+
+var ObjectNotDetachedException = &sObjectNotDetachedException
+var ObjectNotDetachedException_Message = &sObjectNotDetachedException_Message
+
+var ObjectReference = &sObjectReference
+var ObjectReference_Selector = &sObjectReference_Selector
+
+var ObjectType = &sObjectType
+var ObjectType_NODE = &sObjectType_NODE
+var ObjectType_LEAF_NODE = &sObjectType_LEAF_NODE
+var ObjectType_POLICY = &sObjectType_POLICY
+var ObjectType_INDEX = &sObjectType_INDEX
+
+var _PathString = &s_PathString
+
+var PathToObjectIdentifiers = &sPathToObjectIdentifiers
+var PathToObjectIdentifiers_Path = &sPathToObjectIdentifiers_Path
+var PathToObjectIdentifiers_ObjectIdentifiers = &sPathToObjectIdentifiers_ObjectIdentifiers
+
+var _PathToObjectIdentifiersList = &s_PathToObjectIdentifiersList
+var _PathToObjectIdentifiersList_member = &s_PathToObjectIdentifiersList_member
+
+var PolicyAttachment = &sPolicyAttachment
+var PolicyAttachment_PolicyId = &sPolicyAttachment_PolicyId
+var PolicyAttachment_ObjectIdentifier = &sPolicyAttachment_ObjectIdentifier
+var PolicyAttachment_PolicyType = &sPolicyAttachment_PolicyType
+
+var _PolicyAttachmentList = &s_PolicyAttachmentList
+var _PolicyAttachmentList_member = &s_PolicyAttachmentList_member
+
+var PolicyToPath = &sPolicyToPath
+var PolicyToPath_Path = &sPolicyToPath_Path
+var PolicyToPath_Policies = &sPolicyToPath_Policies
+
+var _PolicyToPathList = &s_PolicyToPathList
+var _PolicyToPathList_member = &s_PolicyToPathList_member
+
+var _PolicyType = &s_PolicyType
+
+var RangeMode = &sRangeMode
+var RangeMode_FIRST = &sRangeMode_FIRST
+var RangeMode_LAST = &sRangeMode_LAST
+var RangeMode_LAST_BEFORE_MISSING_VALUES = &sRangeMode_LAST_BEFORE_MISSING_VALUES
+var RangeMode_INCLUSIVE = &sRangeMode_INCLUSIVE
+var RangeMode_EXCLUSIVE = &sRangeMode_EXCLUSIVE
+
+var RequiredAttributeBehavior = &sRequiredAttributeBehavior
+var RequiredAttributeBehavior_REQUIRED_ALWAYS = &sRequiredAttributeBehavior_REQUIRED_ALWAYS
+var RequiredAttributeBehavior_NOT_REQUIRED = &sRequiredAttributeBehavior_NOT_REQUIRED
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RetryableConflictException = &sRetryableConflictException
+var RetryableConflictException_Message = &sRetryableConflictException_Message
+
+var Rule = &sRule
+var Rule_Type = &sRule_Type
+var Rule_Parameters = &sRule_Parameters
+
+var _RuleKey = &s_RuleKey
+
+var _RuleMap = &s_RuleMap
+var _RuleMap_key = &s_RuleMap_key
+var _RuleMap_value = &s_RuleMap_value
+
+var _RuleParameterKey = &s_RuleParameterKey
+
+var _RuleParameterMap = &s_RuleParameterMap
+var _RuleParameterMap_key = &s_RuleParameterMap_key
+var _RuleParameterMap_value = &s_RuleParameterMap_value
+
+var _RuleParameterValue = &s_RuleParameterValue
+
+var RuleType = &sRuleType
+var RuleType_BINARY_LENGTH = &sRuleType_BINARY_LENGTH
+var RuleType_NUMBER_COMPARISON = &sRuleType_NUMBER_COMPARISON
+var RuleType_STRING_FROM_SET = &sRuleType_STRING_FROM_SET
+var RuleType_STRING_LENGTH = &sRuleType_STRING_LENGTH
+
+var SchemaAlreadyExistsException = &sSchemaAlreadyExistsException
+var SchemaAlreadyExistsException_Message = &sSchemaAlreadyExistsException_Message
+
+var SchemaAlreadyPublishedException = &sSchemaAlreadyPublishedException
+var SchemaAlreadyPublishedException_Message = &sSchemaAlreadyPublishedException_Message
+
+var SchemaFacet = &sSchemaFacet
+var SchemaFacet_SchemaArn = &sSchemaFacet_SchemaArn
+var SchemaFacet_FacetName = &sSchemaFacet_FacetName
+
+var _SchemaFacetList = &s_SchemaFacetList
+var _SchemaFacetList_member = &s_SchemaFacetList_member
+
+var _SchemaJsonDocument = &s_SchemaJsonDocument
+
+var _SchemaName = &s_SchemaName
+
+var _SelectorObjectReference = &s_SelectorObjectReference
+
+var StillContainsLinksException = &sStillContainsLinksException
+var StillContainsLinksException_Message = &sStillContainsLinksException_Message
+
+var _StringAttributeValue = &s_StringAttributeValue
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagsNumberResults = &s_TagsNumberResults
+
+var _TagValue = &s_TagValue
+
+var TypedAttributeValue = &sTypedAttributeValue
+var TypedAttributeValue_StringValue = &sTypedAttributeValue_StringValue
+var TypedAttributeValue_BinaryValue = &sTypedAttributeValue_BinaryValue
+var TypedAttributeValue_BooleanValue = &sTypedAttributeValue_BooleanValue
+var TypedAttributeValue_NumberValue = &sTypedAttributeValue_NumberValue
+var TypedAttributeValue_DatetimeValue = &sTypedAttributeValue_DatetimeValue
+
+var TypedAttributeValueRange = &sTypedAttributeValueRange
+var TypedAttributeValueRange_StartMode = &sTypedAttributeValueRange_StartMode
+var TypedAttributeValueRange_StartValue = &sTypedAttributeValueRange_StartValue
+var TypedAttributeValueRange_EndMode = &sTypedAttributeValueRange_EndMode
+var TypedAttributeValueRange_EndValue = &sTypedAttributeValueRange_EndValue
+
+var TypedLinkAttributeDefinition = &sTypedLinkAttributeDefinition
+var TypedLinkAttributeDefinition_Name = &sTypedLinkAttributeDefinition_Name
+var TypedLinkAttributeDefinition_Type = &sTypedLinkAttributeDefinition_Type
+var TypedLinkAttributeDefinition_DefaultValue = &sTypedLinkAttributeDefinition_DefaultValue
+var TypedLinkAttributeDefinition_IsImmutable = &sTypedLinkAttributeDefinition_IsImmutable
+var TypedLinkAttributeDefinition_Rules = &sTypedLinkAttributeDefinition_Rules
+var TypedLinkAttributeDefinition_RequiredBehavior = &sTypedLinkAttributeDefinition_RequiredBehavior
+
+var _TypedLinkAttributeDefinitionList = &s_TypedLinkAttributeDefinitionList
+var _TypedLinkAttributeDefinitionList_member = &s_TypedLinkAttributeDefinitionList_member
+
+var TypedLinkAttributeRange = &sTypedLinkAttributeRange
+var TypedLinkAttributeRange_AttributeName = &sTypedLinkAttributeRange_AttributeName
+var TypedLinkAttributeRange_Range = &sTypedLinkAttributeRange_Range
+
+var _TypedLinkAttributeRangeList = &s_TypedLinkAttributeRangeList
+var _TypedLinkAttributeRangeList_member = &s_TypedLinkAttributeRangeList_member
+
+var TypedLinkFacet = &sTypedLinkFacet
+var TypedLinkFacet_Name = &sTypedLinkFacet_Name
+var TypedLinkFacet_Attributes = &sTypedLinkFacet_Attributes
+var TypedLinkFacet_IdentityAttributeOrder = &sTypedLinkFacet_IdentityAttributeOrder
+
+var TypedLinkFacetAttributeUpdate = &sTypedLinkFacetAttributeUpdate
+var TypedLinkFacetAttributeUpdate_Attribute = &sTypedLinkFacetAttributeUpdate_Attribute
+var TypedLinkFacetAttributeUpdate_Action = &sTypedLinkFacetAttributeUpdate_Action
+
+var _TypedLinkFacetAttributeUpdateList = &s_TypedLinkFacetAttributeUpdateList
+var _TypedLinkFacetAttributeUpdateList_member = &s_TypedLinkFacetAttributeUpdateList_member
+
+var _TypedLinkName = &s_TypedLinkName
+
+var _TypedLinkNameList = &s_TypedLinkNameList
+var _TypedLinkNameList_member = &s_TypedLinkNameList_member
+
+var TypedLinkSchemaAndFacetName = &sTypedLinkSchemaAndFacetName
+var TypedLinkSchemaAndFacetName_SchemaArn = &sTypedLinkSchemaAndFacetName_SchemaArn
+var TypedLinkSchemaAndFacetName_TypedLinkName = &sTypedLinkSchemaAndFacetName_TypedLinkName
+
+var TypedLinkSpecifier = &sTypedLinkSpecifier
+var TypedLinkSpecifier_TypedLinkFacet = &sTypedLinkSpecifier_TypedLinkFacet
+var TypedLinkSpecifier_SourceObjectReference = &sTypedLinkSpecifier_SourceObjectReference
+var TypedLinkSpecifier_TargetObjectReference = &sTypedLinkSpecifier_TargetObjectReference
+var TypedLinkSpecifier_IdentityAttributeValues = &sTypedLinkSpecifier_IdentityAttributeValues
+
+var _TypedLinkSpecifierList = &s_TypedLinkSpecifierList
+var _TypedLinkSpecifierList_member = &s_TypedLinkSpecifierList_member
+
+var UnsupportedIndexTypeException = &sUnsupportedIndexTypeException
+var UnsupportedIndexTypeException_Message = &sUnsupportedIndexTypeException_Message
+
+var UpdateActionType = &sUpdateActionType
+var UpdateActionType_CREATE_OR_UPDATE = &sUpdateActionType_CREATE_OR_UPDATE
+var UpdateActionType_DELETE = &sUpdateActionType_DELETE
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var _Version = &s_Version
+
+var AddFacetToObjectRequest = &sAddFacetToObjectRequest
+var AddFacetToObjectRequest_DirectoryArn = &sAddFacetToObjectRequest_DirectoryArn
+var AddFacetToObjectRequest_SchemaFacet = &sAddFacetToObjectRequest_SchemaFacet
+var AddFacetToObjectRequest_ObjectAttributeList = &sAddFacetToObjectRequest_ObjectAttributeList
+var AddFacetToObjectRequest_ObjectReference = &sAddFacetToObjectRequest_ObjectReference
+
+var AddFacetToObjectResponse = &sAddFacetToObjectResponse
+
+var ApplySchemaRequest = &sApplySchemaRequest
+var ApplySchemaRequest_PublishedSchemaArn = &sApplySchemaRequest_PublishedSchemaArn
+var ApplySchemaRequest_DirectoryArn = &sApplySchemaRequest_DirectoryArn
+
+var ApplySchemaResponse = &sApplySchemaResponse
+var ApplySchemaResponse_AppliedSchemaArn = &sApplySchemaResponse_AppliedSchemaArn
+var ApplySchemaResponse_DirectoryArn = &sApplySchemaResponse_DirectoryArn
+
+var AttachObjectRequest = &sAttachObjectRequest
+var AttachObjectRequest_DirectoryArn = &sAttachObjectRequest_DirectoryArn
+var AttachObjectRequest_ParentReference = &sAttachObjectRequest_ParentReference
+var AttachObjectRequest_ChildReference = &sAttachObjectRequest_ChildReference
+var AttachObjectRequest_LinkName = &sAttachObjectRequest_LinkName
+
+var AttachObjectResponse = &sAttachObjectResponse
+var AttachObjectResponse_AttachedObjectIdentifier = &sAttachObjectResponse_AttachedObjectIdentifier
+
+var AttachPolicyRequest = &sAttachPolicyRequest
+var AttachPolicyRequest_DirectoryArn = &sAttachPolicyRequest_DirectoryArn
+var AttachPolicyRequest_PolicyReference = &sAttachPolicyRequest_PolicyReference
+var AttachPolicyRequest_ObjectReference = &sAttachPolicyRequest_ObjectReference
+
+var AttachPolicyResponse = &sAttachPolicyResponse
+
+var AttachToIndexRequest = &sAttachToIndexRequest
+var AttachToIndexRequest_DirectoryArn = &sAttachToIndexRequest_DirectoryArn
+var AttachToIndexRequest_IndexReference = &sAttachToIndexRequest_IndexReference
+var AttachToIndexRequest_TargetReference = &sAttachToIndexRequest_TargetReference
+
+var AttachToIndexResponse = &sAttachToIndexResponse
+var AttachToIndexResponse_AttachedObjectIdentifier = &sAttachToIndexResponse_AttachedObjectIdentifier
+
+var AttachTypedLinkRequest = &sAttachTypedLinkRequest
+var AttachTypedLinkRequest_DirectoryArn = &sAttachTypedLinkRequest_DirectoryArn
+var AttachTypedLinkRequest_SourceObjectReference = &sAttachTypedLinkRequest_SourceObjectReference
+var AttachTypedLinkRequest_TargetObjectReference = &sAttachTypedLinkRequest_TargetObjectReference
+var AttachTypedLinkRequest_TypedLinkFacet = &sAttachTypedLinkRequest_TypedLinkFacet
+var AttachTypedLinkRequest_Attributes = &sAttachTypedLinkRequest_Attributes
+
+var AttachTypedLinkResponse = &sAttachTypedLinkResponse
+var AttachTypedLinkResponse_TypedLinkSpecifier = &sAttachTypedLinkResponse_TypedLinkSpecifier
+
+var BatchReadRequest = &sBatchReadRequest
+var BatchReadRequest_DirectoryArn = &sBatchReadRequest_DirectoryArn
+var BatchReadRequest_Operations = &sBatchReadRequest_Operations
+var BatchReadRequest_ConsistencyLevel = &sBatchReadRequest_ConsistencyLevel
+
+var BatchReadResponse = &sBatchReadResponse
+var BatchReadResponse_Responses = &sBatchReadResponse_Responses
+
+var BatchWriteRequest = &sBatchWriteRequest
+var BatchWriteRequest_DirectoryArn = &sBatchWriteRequest_DirectoryArn
+var BatchWriteRequest_Operations = &sBatchWriteRequest_Operations
+
+var BatchWriteResponse = &sBatchWriteResponse
+var BatchWriteResponse_Responses = &sBatchWriteResponse_Responses
+
+var CreateDirectoryRequest = &sCreateDirectoryRequest
+var CreateDirectoryRequest_Name = &sCreateDirectoryRequest_Name
+var CreateDirectoryRequest_SchemaArn = &sCreateDirectoryRequest_SchemaArn
+
+var CreateDirectoryResponse = &sCreateDirectoryResponse
+var CreateDirectoryResponse_DirectoryArn = &sCreateDirectoryResponse_DirectoryArn
+var CreateDirectoryResponse_Name = &sCreateDirectoryResponse_Name
+var CreateDirectoryResponse_ObjectIdentifier = &sCreateDirectoryResponse_ObjectIdentifier
+var CreateDirectoryResponse_AppliedSchemaArn = &sCreateDirectoryResponse_AppliedSchemaArn
+
+var CreateFacetRequest = &sCreateFacetRequest
+var CreateFacetRequest_SchemaArn = &sCreateFacetRequest_SchemaArn
+var CreateFacetRequest_Name = &sCreateFacetRequest_Name
+var CreateFacetRequest_Attributes = &sCreateFacetRequest_Attributes
+var CreateFacetRequest_ObjectType = &sCreateFacetRequest_ObjectType
+var CreateFacetRequest_FacetStyle = &sCreateFacetRequest_FacetStyle
+
+var CreateFacetResponse = &sCreateFacetResponse
+
+var CreateIndexRequest = &sCreateIndexRequest
+var CreateIndexRequest_DirectoryArn = &sCreateIndexRequest_DirectoryArn
+var CreateIndexRequest_OrderedIndexedAttributeList = &sCreateIndexRequest_OrderedIndexedAttributeList
+var CreateIndexRequest_IsUnique = &sCreateIndexRequest_IsUnique
+var CreateIndexRequest_ParentReference = &sCreateIndexRequest_ParentReference
+var CreateIndexRequest_LinkName = &sCreateIndexRequest_LinkName
+
+var CreateIndexResponse = &sCreateIndexResponse
+var CreateIndexResponse_ObjectIdentifier = &sCreateIndexResponse_ObjectIdentifier
+
+var CreateObjectRequest = &sCreateObjectRequest
+var CreateObjectRequest_DirectoryArn = &sCreateObjectRequest_DirectoryArn
+var CreateObjectRequest_SchemaFacets = &sCreateObjectRequest_SchemaFacets
+var CreateObjectRequest_ObjectAttributeList = &sCreateObjectRequest_ObjectAttributeList
+var CreateObjectRequest_ParentReference = &sCreateObjectRequest_ParentReference
+var CreateObjectRequest_LinkName = &sCreateObjectRequest_LinkName
+
+var CreateObjectResponse = &sCreateObjectResponse
+var CreateObjectResponse_ObjectIdentifier = &sCreateObjectResponse_ObjectIdentifier
+
+var CreateSchemaRequest = &sCreateSchemaRequest
+var CreateSchemaRequest_Name = &sCreateSchemaRequest_Name
+
+var CreateSchemaResponse = &sCreateSchemaResponse
+var CreateSchemaResponse_SchemaArn = &sCreateSchemaResponse_SchemaArn
+
+var CreateTypedLinkFacetRequest = &sCreateTypedLinkFacetRequest
+var CreateTypedLinkFacetRequest_SchemaArn = &sCreateTypedLinkFacetRequest_SchemaArn
+var CreateTypedLinkFacetRequest_Facet = &sCreateTypedLinkFacetRequest_Facet
+
+var CreateTypedLinkFacetResponse = &sCreateTypedLinkFacetResponse
+
+var DeleteDirectoryRequest = &sDeleteDirectoryRequest
+var DeleteDirectoryRequest_DirectoryArn = &sDeleteDirectoryRequest_DirectoryArn
+
+var DeleteDirectoryResponse = &sDeleteDirectoryResponse
+var DeleteDirectoryResponse_DirectoryArn = &sDeleteDirectoryResponse_DirectoryArn
+
+var DeleteFacetRequest = &sDeleteFacetRequest
+var DeleteFacetRequest_SchemaArn = &sDeleteFacetRequest_SchemaArn
+var DeleteFacetRequest_Name = &sDeleteFacetRequest_Name
+
+var DeleteFacetResponse = &sDeleteFacetResponse
+
+var DeleteObjectRequest = &sDeleteObjectRequest
+var DeleteObjectRequest_DirectoryArn = &sDeleteObjectRequest_DirectoryArn
+var DeleteObjectRequest_ObjectReference = &sDeleteObjectRequest_ObjectReference
+
+var DeleteObjectResponse = &sDeleteObjectResponse
+
+var DeleteSchemaRequest = &sDeleteSchemaRequest
+var DeleteSchemaRequest_SchemaArn = &sDeleteSchemaRequest_SchemaArn
+
+var DeleteSchemaResponse = &sDeleteSchemaResponse
+var DeleteSchemaResponse_SchemaArn = &sDeleteSchemaResponse_SchemaArn
+
+var DeleteTypedLinkFacetRequest = &sDeleteTypedLinkFacetRequest
+var DeleteTypedLinkFacetRequest_SchemaArn = &sDeleteTypedLinkFacetRequest_SchemaArn
+var DeleteTypedLinkFacetRequest_Name = &sDeleteTypedLinkFacetRequest_Name
+
+var DeleteTypedLinkFacetResponse = &sDeleteTypedLinkFacetResponse
+
+var DetachFromIndexRequest = &sDetachFromIndexRequest
+var DetachFromIndexRequest_DirectoryArn = &sDetachFromIndexRequest_DirectoryArn
+var DetachFromIndexRequest_IndexReference = &sDetachFromIndexRequest_IndexReference
+var DetachFromIndexRequest_TargetReference = &sDetachFromIndexRequest_TargetReference
+
+var DetachFromIndexResponse = &sDetachFromIndexResponse
+var DetachFromIndexResponse_DetachedObjectIdentifier = &sDetachFromIndexResponse_DetachedObjectIdentifier
+
+var DetachObjectRequest = &sDetachObjectRequest
+var DetachObjectRequest_DirectoryArn = &sDetachObjectRequest_DirectoryArn
+var DetachObjectRequest_ParentReference = &sDetachObjectRequest_ParentReference
+var DetachObjectRequest_LinkName = &sDetachObjectRequest_LinkName
+
+var DetachObjectResponse = &sDetachObjectResponse
+var DetachObjectResponse_DetachedObjectIdentifier = &sDetachObjectResponse_DetachedObjectIdentifier
+
+var DetachPolicyRequest = &sDetachPolicyRequest
+var DetachPolicyRequest_DirectoryArn = &sDetachPolicyRequest_DirectoryArn
+var DetachPolicyRequest_PolicyReference = &sDetachPolicyRequest_PolicyReference
+var DetachPolicyRequest_ObjectReference = &sDetachPolicyRequest_ObjectReference
+
+var DetachPolicyResponse = &sDetachPolicyResponse
+
+var DetachTypedLinkRequest = &sDetachTypedLinkRequest
+var DetachTypedLinkRequest_DirectoryArn = &sDetachTypedLinkRequest_DirectoryArn
+var DetachTypedLinkRequest_TypedLinkSpecifier = &sDetachTypedLinkRequest_TypedLinkSpecifier
+
+var DisableDirectoryRequest = &sDisableDirectoryRequest
+var DisableDirectoryRequest_DirectoryArn = &sDisableDirectoryRequest_DirectoryArn
+
+var DisableDirectoryResponse = &sDisableDirectoryResponse
+var DisableDirectoryResponse_DirectoryArn = &sDisableDirectoryResponse_DirectoryArn
+
+var EnableDirectoryRequest = &sEnableDirectoryRequest
+var EnableDirectoryRequest_DirectoryArn = &sEnableDirectoryRequest_DirectoryArn
+
+var EnableDirectoryResponse = &sEnableDirectoryResponse
+var EnableDirectoryResponse_DirectoryArn = &sEnableDirectoryResponse_DirectoryArn
+
+var GetAppliedSchemaVersionRequest = &sGetAppliedSchemaVersionRequest
+var GetAppliedSchemaVersionRequest_SchemaArn = &sGetAppliedSchemaVersionRequest_SchemaArn
+
+var GetAppliedSchemaVersionResponse = &sGetAppliedSchemaVersionResponse
+var GetAppliedSchemaVersionResponse_AppliedSchemaArn = &sGetAppliedSchemaVersionResponse_AppliedSchemaArn
+
+var GetDirectoryRequest = &sGetDirectoryRequest
+var GetDirectoryRequest_DirectoryArn = &sGetDirectoryRequest_DirectoryArn
+
+var GetDirectoryResponse = &sGetDirectoryResponse
+var GetDirectoryResponse_Directory = &sGetDirectoryResponse_Directory
+
+var GetFacetRequest = &sGetFacetRequest
+var GetFacetRequest_SchemaArn = &sGetFacetRequest_SchemaArn
+var GetFacetRequest_Name = &sGetFacetRequest_Name
+
+var GetFacetResponse = &sGetFacetResponse
+var GetFacetResponse_Facet = &sGetFacetResponse_Facet
+
+var GetLinkAttributesRequest = &sGetLinkAttributesRequest
+var GetLinkAttributesRequest_DirectoryArn = &sGetLinkAttributesRequest_DirectoryArn
+var GetLinkAttributesRequest_TypedLinkSpecifier = &sGetLinkAttributesRequest_TypedLinkSpecifier
+var GetLinkAttributesRequest_AttributeNames = &sGetLinkAttributesRequest_AttributeNames
+var GetLinkAttributesRequest_ConsistencyLevel = &sGetLinkAttributesRequest_ConsistencyLevel
+
+var GetLinkAttributesResponse = &sGetLinkAttributesResponse
+var GetLinkAttributesResponse_Attributes = &sGetLinkAttributesResponse_Attributes
+
+var GetObjectAttributesRequest = &sGetObjectAttributesRequest
+var GetObjectAttributesRequest_DirectoryArn = &sGetObjectAttributesRequest_DirectoryArn
+var GetObjectAttributesRequest_ObjectReference = &sGetObjectAttributesRequest_ObjectReference
+var GetObjectAttributesRequest_ConsistencyLevel = &sGetObjectAttributesRequest_ConsistencyLevel
+var GetObjectAttributesRequest_SchemaFacet = &sGetObjectAttributesRequest_SchemaFacet
+var GetObjectAttributesRequest_AttributeNames = &sGetObjectAttributesRequest_AttributeNames
+
+var GetObjectAttributesResponse = &sGetObjectAttributesResponse
+var GetObjectAttributesResponse_Attributes = &sGetObjectAttributesResponse_Attributes
+
+var GetObjectInformationRequest = &sGetObjectInformationRequest
+var GetObjectInformationRequest_DirectoryArn = &sGetObjectInformationRequest_DirectoryArn
+var GetObjectInformationRequest_ObjectReference = &sGetObjectInformationRequest_ObjectReference
+var GetObjectInformationRequest_ConsistencyLevel = &sGetObjectInformationRequest_ConsistencyLevel
+
+var GetObjectInformationResponse = &sGetObjectInformationResponse
+var GetObjectInformationResponse_SchemaFacets = &sGetObjectInformationResponse_SchemaFacets
+var GetObjectInformationResponse_ObjectIdentifier = &sGetObjectInformationResponse_ObjectIdentifier
+
+var GetSchemaAsJsonRequest = &sGetSchemaAsJsonRequest
+var GetSchemaAsJsonRequest_SchemaArn = &sGetSchemaAsJsonRequest_SchemaArn
+
+var GetSchemaAsJsonResponse = &sGetSchemaAsJsonResponse
+var GetSchemaAsJsonResponse_Name = &sGetSchemaAsJsonResponse_Name
+var GetSchemaAsJsonResponse_Document = &sGetSchemaAsJsonResponse_Document
+
+var GetTypedLinkFacetInformationRequest = &sGetTypedLinkFacetInformationRequest
+var GetTypedLinkFacetInformationRequest_SchemaArn = &sGetTypedLinkFacetInformationRequest_SchemaArn
+var GetTypedLinkFacetInformationRequest_Name = &sGetTypedLinkFacetInformationRequest_Name
+
+var GetTypedLinkFacetInformationResponse = &sGetTypedLinkFacetInformationResponse
+var GetTypedLinkFacetInformationResponse_IdentityAttributeOrder = &sGetTypedLinkFacetInformationResponse_IdentityAttributeOrder
+
+var ListAppliedSchemaArnsRequest = &sListAppliedSchemaArnsRequest
+var ListAppliedSchemaArnsRequest_DirectoryArn = &sListAppliedSchemaArnsRequest_DirectoryArn
+var ListAppliedSchemaArnsRequest_SchemaArn = &sListAppliedSchemaArnsRequest_SchemaArn
+var ListAppliedSchemaArnsRequest_NextToken = &sListAppliedSchemaArnsRequest_NextToken
+var ListAppliedSchemaArnsRequest_MaxResults = &sListAppliedSchemaArnsRequest_MaxResults
+
+var ListAppliedSchemaArnsResponse = &sListAppliedSchemaArnsResponse
+var ListAppliedSchemaArnsResponse_SchemaArns = &sListAppliedSchemaArnsResponse_SchemaArns
+var ListAppliedSchemaArnsResponse_NextToken = &sListAppliedSchemaArnsResponse_NextToken
+
+var ListAttachedIndicesRequest = &sListAttachedIndicesRequest
+var ListAttachedIndicesRequest_DirectoryArn = &sListAttachedIndicesRequest_DirectoryArn
+var ListAttachedIndicesRequest_TargetReference = &sListAttachedIndicesRequest_TargetReference
+var ListAttachedIndicesRequest_NextToken = &sListAttachedIndicesRequest_NextToken
+var ListAttachedIndicesRequest_MaxResults = &sListAttachedIndicesRequest_MaxResults
+var ListAttachedIndicesRequest_ConsistencyLevel = &sListAttachedIndicesRequest_ConsistencyLevel
+
+var ListAttachedIndicesResponse = &sListAttachedIndicesResponse
+var ListAttachedIndicesResponse_IndexAttachments = &sListAttachedIndicesResponse_IndexAttachments
+var ListAttachedIndicesResponse_NextToken = &sListAttachedIndicesResponse_NextToken
+
+var ListDevelopmentSchemaArnsRequest = &sListDevelopmentSchemaArnsRequest
+var ListDevelopmentSchemaArnsRequest_NextToken = &sListDevelopmentSchemaArnsRequest_NextToken
+var ListDevelopmentSchemaArnsRequest_MaxResults = &sListDevelopmentSchemaArnsRequest_MaxResults
+
+var ListDevelopmentSchemaArnsResponse = &sListDevelopmentSchemaArnsResponse
+var ListDevelopmentSchemaArnsResponse_SchemaArns = &sListDevelopmentSchemaArnsResponse_SchemaArns
+var ListDevelopmentSchemaArnsResponse_NextToken = &sListDevelopmentSchemaArnsResponse_NextToken
+
+var ListDirectoriesRequest = &sListDirectoriesRequest
+var ListDirectoriesRequest_NextToken = &sListDirectoriesRequest_NextToken
+var ListDirectoriesRequest_MaxResults = &sListDirectoriesRequest_MaxResults
+var ListDirectoriesRequest_state = &sListDirectoriesRequest_state
+
+var ListDirectoriesResponse = &sListDirectoriesResponse
+var ListDirectoriesResponse_Directories = &sListDirectoriesResponse_Directories
+var ListDirectoriesResponse_NextToken = &sListDirectoriesResponse_NextToken
+
+var ListFacetAttributesRequest = &sListFacetAttributesRequest
+var ListFacetAttributesRequest_SchemaArn = &sListFacetAttributesRequest_SchemaArn
+var ListFacetAttributesRequest_Name = &sListFacetAttributesRequest_Name
+var ListFacetAttributesRequest_NextToken = &sListFacetAttributesRequest_NextToken
+var ListFacetAttributesRequest_MaxResults = &sListFacetAttributesRequest_MaxResults
+
+var ListFacetAttributesResponse = &sListFacetAttributesResponse
+var ListFacetAttributesResponse_Attributes = &sListFacetAttributesResponse_Attributes
+var ListFacetAttributesResponse_NextToken = &sListFacetAttributesResponse_NextToken
+
+var ListFacetNamesRequest = &sListFacetNamesRequest
+var ListFacetNamesRequest_SchemaArn = &sListFacetNamesRequest_SchemaArn
+var ListFacetNamesRequest_NextToken = &sListFacetNamesRequest_NextToken
+var ListFacetNamesRequest_MaxResults = &sListFacetNamesRequest_MaxResults
+
+var ListFacetNamesResponse = &sListFacetNamesResponse
+var ListFacetNamesResponse_FacetNames = &sListFacetNamesResponse_FacetNames
+var ListFacetNamesResponse_NextToken = &sListFacetNamesResponse_NextToken
+
+var ListIncomingTypedLinksRequest = &sListIncomingTypedLinksRequest
+var ListIncomingTypedLinksRequest_DirectoryArn = &sListIncomingTypedLinksRequest_DirectoryArn
+var ListIncomingTypedLinksRequest_ObjectReference = &sListIncomingTypedLinksRequest_ObjectReference
+var ListIncomingTypedLinksRequest_FilterAttributeRanges = &sListIncomingTypedLinksRequest_FilterAttributeRanges
+var ListIncomingTypedLinksRequest_FilterTypedLink = &sListIncomingTypedLinksRequest_FilterTypedLink
+var ListIncomingTypedLinksRequest_NextToken = &sListIncomingTypedLinksRequest_NextToken
+var ListIncomingTypedLinksRequest_MaxResults = &sListIncomingTypedLinksRequest_MaxResults
+var ListIncomingTypedLinksRequest_ConsistencyLevel = &sListIncomingTypedLinksRequest_ConsistencyLevel
+
+var ListIncomingTypedLinksResponse = &sListIncomingTypedLinksResponse
+var ListIncomingTypedLinksResponse_LinkSpecifiers = &sListIncomingTypedLinksResponse_LinkSpecifiers
+var ListIncomingTypedLinksResponse_NextToken = &sListIncomingTypedLinksResponse_NextToken
+
+var ListIndexRequest = &sListIndexRequest
+var ListIndexRequest_DirectoryArn = &sListIndexRequest_DirectoryArn
+var ListIndexRequest_RangesOnIndexedValues = &sListIndexRequest_RangesOnIndexedValues
+var ListIndexRequest_IndexReference = &sListIndexRequest_IndexReference
+var ListIndexRequest_MaxResults = &sListIndexRequest_MaxResults
+var ListIndexRequest_NextToken = &sListIndexRequest_NextToken
+var ListIndexRequest_ConsistencyLevel = &sListIndexRequest_ConsistencyLevel
+
+var ListIndexResponse = &sListIndexResponse
+var ListIndexResponse_IndexAttachments = &sListIndexResponse_IndexAttachments
+var ListIndexResponse_NextToken = &sListIndexResponse_NextToken
+
+var ListManagedSchemaArnsRequest = &sListManagedSchemaArnsRequest
+var ListManagedSchemaArnsRequest_SchemaArn = &sListManagedSchemaArnsRequest_SchemaArn
+var ListManagedSchemaArnsRequest_NextToken = &sListManagedSchemaArnsRequest_NextToken
+var ListManagedSchemaArnsRequest_MaxResults = &sListManagedSchemaArnsRequest_MaxResults
+
+var ListManagedSchemaArnsResponse = &sListManagedSchemaArnsResponse
+var ListManagedSchemaArnsResponse_SchemaArns = &sListManagedSchemaArnsResponse_SchemaArns
+var ListManagedSchemaArnsResponse_NextToken = &sListManagedSchemaArnsResponse_NextToken
+
+var ListObjectAttributesRequest = &sListObjectAttributesRequest
+var ListObjectAttributesRequest_DirectoryArn = &sListObjectAttributesRequest_DirectoryArn
+var ListObjectAttributesRequest_ObjectReference = &sListObjectAttributesRequest_ObjectReference
+var ListObjectAttributesRequest_NextToken = &sListObjectAttributesRequest_NextToken
+var ListObjectAttributesRequest_MaxResults = &sListObjectAttributesRequest_MaxResults
+var ListObjectAttributesRequest_ConsistencyLevel = &sListObjectAttributesRequest_ConsistencyLevel
+var ListObjectAttributesRequest_FacetFilter = &sListObjectAttributesRequest_FacetFilter
+
+var ListObjectAttributesResponse = &sListObjectAttributesResponse
+var ListObjectAttributesResponse_Attributes = &sListObjectAttributesResponse_Attributes
+var ListObjectAttributesResponse_NextToken = &sListObjectAttributesResponse_NextToken
+
+var ListObjectChildrenRequest = &sListObjectChildrenRequest
+var ListObjectChildrenRequest_DirectoryArn = &sListObjectChildrenRequest_DirectoryArn
+var ListObjectChildrenRequest_ObjectReference = &sListObjectChildrenRequest_ObjectReference
+var ListObjectChildrenRequest_NextToken = &sListObjectChildrenRequest_NextToken
+var ListObjectChildrenRequest_MaxResults = &sListObjectChildrenRequest_MaxResults
+var ListObjectChildrenRequest_ConsistencyLevel = &sListObjectChildrenRequest_ConsistencyLevel
+
+var ListObjectChildrenResponse = &sListObjectChildrenResponse
+var ListObjectChildrenResponse_Children = &sListObjectChildrenResponse_Children
+var ListObjectChildrenResponse_NextToken = &sListObjectChildrenResponse_NextToken
+
+var ListObjectParentPathsRequest = &sListObjectParentPathsRequest
+var ListObjectParentPathsRequest_DirectoryArn = &sListObjectParentPathsRequest_DirectoryArn
+var ListObjectParentPathsRequest_ObjectReference = &sListObjectParentPathsRequest_ObjectReference
+var ListObjectParentPathsRequest_NextToken = &sListObjectParentPathsRequest_NextToken
+var ListObjectParentPathsRequest_MaxResults = &sListObjectParentPathsRequest_MaxResults
+
+var ListObjectParentPathsResponse = &sListObjectParentPathsResponse
+var ListObjectParentPathsResponse_PathToObjectIdentifiersList = &sListObjectParentPathsResponse_PathToObjectIdentifiersList
+var ListObjectParentPathsResponse_NextToken = &sListObjectParentPathsResponse_NextToken
+
+var ListObjectParentsRequest = &sListObjectParentsRequest
+var ListObjectParentsRequest_DirectoryArn = &sListObjectParentsRequest_DirectoryArn
+var ListObjectParentsRequest_ObjectReference = &sListObjectParentsRequest_ObjectReference
+var ListObjectParentsRequest_NextToken = &sListObjectParentsRequest_NextToken
+var ListObjectParentsRequest_MaxResults = &sListObjectParentsRequest_MaxResults
+var ListObjectParentsRequest_ConsistencyLevel = &sListObjectParentsRequest_ConsistencyLevel
+var ListObjectParentsRequest_IncludeAllLinksToEachParent = &sListObjectParentsRequest_IncludeAllLinksToEachParent
+
+var ListObjectParentsResponse = &sListObjectParentsResponse
+var ListObjectParentsResponse_Parents = &sListObjectParentsResponse_Parents
+var ListObjectParentsResponse_NextToken = &sListObjectParentsResponse_NextToken
+var ListObjectParentsResponse_ParentLinks = &sListObjectParentsResponse_ParentLinks
+
+var ListObjectPoliciesRequest = &sListObjectPoliciesRequest
+var ListObjectPoliciesRequest_DirectoryArn = &sListObjectPoliciesRequest_DirectoryArn
+var ListObjectPoliciesRequest_ObjectReference = &sListObjectPoliciesRequest_ObjectReference
+var ListObjectPoliciesRequest_NextToken = &sListObjectPoliciesRequest_NextToken
+var ListObjectPoliciesRequest_MaxResults = &sListObjectPoliciesRequest_MaxResults
+var ListObjectPoliciesRequest_ConsistencyLevel = &sListObjectPoliciesRequest_ConsistencyLevel
+
+var ListObjectPoliciesResponse = &sListObjectPoliciesResponse
+var ListObjectPoliciesResponse_AttachedPolicyIds = &sListObjectPoliciesResponse_AttachedPolicyIds
+var ListObjectPoliciesResponse_NextToken = &sListObjectPoliciesResponse_NextToken
+
+var ListOutgoingTypedLinksRequest = &sListOutgoingTypedLinksRequest
+var ListOutgoingTypedLinksRequest_DirectoryArn = &sListOutgoingTypedLinksRequest_DirectoryArn
+var ListOutgoingTypedLinksRequest_ObjectReference = &sListOutgoingTypedLinksRequest_ObjectReference
+var ListOutgoingTypedLinksRequest_FilterAttributeRanges = &sListOutgoingTypedLinksRequest_FilterAttributeRanges
+var ListOutgoingTypedLinksRequest_FilterTypedLink = &sListOutgoingTypedLinksRequest_FilterTypedLink
+var ListOutgoingTypedLinksRequest_NextToken = &sListOutgoingTypedLinksRequest_NextToken
+var ListOutgoingTypedLinksRequest_MaxResults = &sListOutgoingTypedLinksRequest_MaxResults
+var ListOutgoingTypedLinksRequest_ConsistencyLevel = &sListOutgoingTypedLinksRequest_ConsistencyLevel
+
+var ListOutgoingTypedLinksResponse = &sListOutgoingTypedLinksResponse
+var ListOutgoingTypedLinksResponse_TypedLinkSpecifiers = &sListOutgoingTypedLinksResponse_TypedLinkSpecifiers
+var ListOutgoingTypedLinksResponse_NextToken = &sListOutgoingTypedLinksResponse_NextToken
+
+var ListPolicyAttachmentsRequest = &sListPolicyAttachmentsRequest
+var ListPolicyAttachmentsRequest_DirectoryArn = &sListPolicyAttachmentsRequest_DirectoryArn
+var ListPolicyAttachmentsRequest_PolicyReference = &sListPolicyAttachmentsRequest_PolicyReference
+var ListPolicyAttachmentsRequest_NextToken = &sListPolicyAttachmentsRequest_NextToken
+var ListPolicyAttachmentsRequest_MaxResults = &sListPolicyAttachmentsRequest_MaxResults
+var ListPolicyAttachmentsRequest_ConsistencyLevel = &sListPolicyAttachmentsRequest_ConsistencyLevel
+
+var ListPolicyAttachmentsResponse = &sListPolicyAttachmentsResponse
+var ListPolicyAttachmentsResponse_ObjectIdentifiers = &sListPolicyAttachmentsResponse_ObjectIdentifiers
+var ListPolicyAttachmentsResponse_NextToken = &sListPolicyAttachmentsResponse_NextToken
+
+var ListPublishedSchemaArnsRequest = &sListPublishedSchemaArnsRequest
+var ListPublishedSchemaArnsRequest_SchemaArn = &sListPublishedSchemaArnsRequest_SchemaArn
+var ListPublishedSchemaArnsRequest_NextToken = &sListPublishedSchemaArnsRequest_NextToken
+var ListPublishedSchemaArnsRequest_MaxResults = &sListPublishedSchemaArnsRequest_MaxResults
+
+var ListPublishedSchemaArnsResponse = &sListPublishedSchemaArnsResponse
+var ListPublishedSchemaArnsResponse_SchemaArns = &sListPublishedSchemaArnsResponse_SchemaArns
+var ListPublishedSchemaArnsResponse_NextToken = &sListPublishedSchemaArnsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+var ListTagsForResourceRequest_MaxResults = &sListTagsForResourceRequest_MaxResults
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+var ListTagsForResourceResponse_NextToken = &sListTagsForResourceResponse_NextToken
+
+var ListTypedLinkFacetAttributesRequest = &sListTypedLinkFacetAttributesRequest
+var ListTypedLinkFacetAttributesRequest_SchemaArn = &sListTypedLinkFacetAttributesRequest_SchemaArn
+var ListTypedLinkFacetAttributesRequest_Name = &sListTypedLinkFacetAttributesRequest_Name
+var ListTypedLinkFacetAttributesRequest_NextToken = &sListTypedLinkFacetAttributesRequest_NextToken
+var ListTypedLinkFacetAttributesRequest_MaxResults = &sListTypedLinkFacetAttributesRequest_MaxResults
+
+var ListTypedLinkFacetAttributesResponse = &sListTypedLinkFacetAttributesResponse
+var ListTypedLinkFacetAttributesResponse_Attributes = &sListTypedLinkFacetAttributesResponse_Attributes
+var ListTypedLinkFacetAttributesResponse_NextToken = &sListTypedLinkFacetAttributesResponse_NextToken
+
+var ListTypedLinkFacetNamesRequest = &sListTypedLinkFacetNamesRequest
+var ListTypedLinkFacetNamesRequest_SchemaArn = &sListTypedLinkFacetNamesRequest_SchemaArn
+var ListTypedLinkFacetNamesRequest_NextToken = &sListTypedLinkFacetNamesRequest_NextToken
+var ListTypedLinkFacetNamesRequest_MaxResults = &sListTypedLinkFacetNamesRequest_MaxResults
+
+var ListTypedLinkFacetNamesResponse = &sListTypedLinkFacetNamesResponse
+var ListTypedLinkFacetNamesResponse_FacetNames = &sListTypedLinkFacetNamesResponse_FacetNames
+var ListTypedLinkFacetNamesResponse_NextToken = &sListTypedLinkFacetNamesResponse_NextToken
+
+var LookupPolicyRequest = &sLookupPolicyRequest
+var LookupPolicyRequest_DirectoryArn = &sLookupPolicyRequest_DirectoryArn
+var LookupPolicyRequest_ObjectReference = &sLookupPolicyRequest_ObjectReference
+var LookupPolicyRequest_NextToken = &sLookupPolicyRequest_NextToken
+var LookupPolicyRequest_MaxResults = &sLookupPolicyRequest_MaxResults
+
+var LookupPolicyResponse = &sLookupPolicyResponse
+var LookupPolicyResponse_PolicyToPathList = &sLookupPolicyResponse_PolicyToPathList
+var LookupPolicyResponse_NextToken = &sLookupPolicyResponse_NextToken
+
+var PublishSchemaRequest = &sPublishSchemaRequest
+var PublishSchemaRequest_DevelopmentSchemaArn = &sPublishSchemaRequest_DevelopmentSchemaArn
+var PublishSchemaRequest_Version = &sPublishSchemaRequest_Version
+var PublishSchemaRequest_MinorVersion = &sPublishSchemaRequest_MinorVersion
+var PublishSchemaRequest_Name = &sPublishSchemaRequest_Name
+
+var PublishSchemaResponse = &sPublishSchemaResponse
+var PublishSchemaResponse_PublishedSchemaArn = &sPublishSchemaResponse_PublishedSchemaArn
+
+var PutSchemaFromJsonRequest = &sPutSchemaFromJsonRequest
+var PutSchemaFromJsonRequest_SchemaArn = &sPutSchemaFromJsonRequest_SchemaArn
+var PutSchemaFromJsonRequest_Document = &sPutSchemaFromJsonRequest_Document
+
+var PutSchemaFromJsonResponse = &sPutSchemaFromJsonResponse
+var PutSchemaFromJsonResponse_Arn = &sPutSchemaFromJsonResponse_Arn
+
+var RemoveFacetFromObjectRequest = &sRemoveFacetFromObjectRequest
+var RemoveFacetFromObjectRequest_DirectoryArn = &sRemoveFacetFromObjectRequest_DirectoryArn
+var RemoveFacetFromObjectRequest_SchemaFacet = &sRemoveFacetFromObjectRequest_SchemaFacet
+var RemoveFacetFromObjectRequest_ObjectReference = &sRemoveFacetFromObjectRequest_ObjectReference
+
+var RemoveFacetFromObjectResponse = &sRemoveFacetFromObjectResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateFacetRequest = &sUpdateFacetRequest
+var UpdateFacetRequest_SchemaArn = &sUpdateFacetRequest_SchemaArn
+var UpdateFacetRequest_Name = &sUpdateFacetRequest_Name
+var UpdateFacetRequest_AttributeUpdates = &sUpdateFacetRequest_AttributeUpdates
+var UpdateFacetRequest_ObjectType = &sUpdateFacetRequest_ObjectType
+
+var UpdateFacetResponse = &sUpdateFacetResponse
+
+var UpdateLinkAttributesRequest = &sUpdateLinkAttributesRequest
+var UpdateLinkAttributesRequest_DirectoryArn = &sUpdateLinkAttributesRequest_DirectoryArn
+var UpdateLinkAttributesRequest_TypedLinkSpecifier = &sUpdateLinkAttributesRequest_TypedLinkSpecifier
+var UpdateLinkAttributesRequest_AttributeUpdates = &sUpdateLinkAttributesRequest_AttributeUpdates
+
+var UpdateLinkAttributesResponse = &sUpdateLinkAttributesResponse
+
+var UpdateObjectAttributesRequest = &sUpdateObjectAttributesRequest
+var UpdateObjectAttributesRequest_DirectoryArn = &sUpdateObjectAttributesRequest_DirectoryArn
+var UpdateObjectAttributesRequest_ObjectReference = &sUpdateObjectAttributesRequest_ObjectReference
+var UpdateObjectAttributesRequest_AttributeUpdates = &sUpdateObjectAttributesRequest_AttributeUpdates
+
+var UpdateObjectAttributesResponse = &sUpdateObjectAttributesResponse
+var UpdateObjectAttributesResponse_ObjectIdentifier = &sUpdateObjectAttributesResponse_ObjectIdentifier
+
+var UpdateSchemaRequest = &sUpdateSchemaRequest
+var UpdateSchemaRequest_SchemaArn = &sUpdateSchemaRequest_SchemaArn
+var UpdateSchemaRequest_Name = &sUpdateSchemaRequest_Name
+
+var UpdateSchemaResponse = &sUpdateSchemaResponse
+var UpdateSchemaResponse_SchemaArn = &sUpdateSchemaResponse_SchemaArn
+
+var UpdateTypedLinkFacetRequest = &sUpdateTypedLinkFacetRequest
+var UpdateTypedLinkFacetRequest_SchemaArn = &sUpdateTypedLinkFacetRequest_SchemaArn
+var UpdateTypedLinkFacetRequest_Name = &sUpdateTypedLinkFacetRequest_Name
+var UpdateTypedLinkFacetRequest_AttributeUpdates = &sUpdateTypedLinkFacetRequest_AttributeUpdates
+var UpdateTypedLinkFacetRequest_IdentityAttributeOrder = &sUpdateTypedLinkFacetRequest_IdentityAttributeOrder
+
+var UpdateTypedLinkFacetResponse = &sUpdateTypedLinkFacetResponse
+
+var UpgradeAppliedSchemaRequest = &sUpgradeAppliedSchemaRequest
+var UpgradeAppliedSchemaRequest_PublishedSchemaArn = &sUpgradeAppliedSchemaRequest_PublishedSchemaArn
+var UpgradeAppliedSchemaRequest_DirectoryArn = &sUpgradeAppliedSchemaRequest_DirectoryArn
+var UpgradeAppliedSchemaRequest_DryRun = &sUpgradeAppliedSchemaRequest_DryRun
+
+var UpgradeAppliedSchemaResponse = &sUpgradeAppliedSchemaResponse
+var UpgradeAppliedSchemaResponse_UpgradedSchemaArn = &sUpgradeAppliedSchemaResponse_UpgradedSchemaArn
+var UpgradeAppliedSchemaResponse_DirectoryArn = &sUpgradeAppliedSchemaResponse_DirectoryArn
+
+var UpgradePublishedSchemaRequest = &sUpgradePublishedSchemaRequest
+var UpgradePublishedSchemaRequest_DevelopmentSchemaArn = &sUpgradePublishedSchemaRequest_DevelopmentSchemaArn
+var UpgradePublishedSchemaRequest_PublishedSchemaArn = &sUpgradePublishedSchemaRequest_PublishedSchemaArn
+var UpgradePublishedSchemaRequest_MinorVersion = &sUpgradePublishedSchemaRequest_MinorVersion
+var UpgradePublishedSchemaRequest_DryRun = &sUpgradePublishedSchemaRequest_DryRun
+
+var UpgradePublishedSchemaResponse = &sUpgradePublishedSchemaResponse
+var UpgradePublishedSchemaResponse_UpgradedSchemaArn = &sUpgradePublishedSchemaResponse_UpgradedSchemaArn
+
+var AmazonCloudDirectory_20170111 = &smithy.ServiceSchema{Schema: &s_AmazonCloudDirectory_20170111, Version: "2017-01-11"}

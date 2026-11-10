@@ -4,2492 +4,2430 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDeleteTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchDeleteTaxRegistration                                          smithy.SchemaExtensions
+	eBatchGetTaxExemptions                                               smithy.SchemaExtensions
+	eBatchPutTaxRegistration                                             smithy.SchemaExtensions
+	eDeleteSupplementalTaxRegistration                                   smithy.SchemaExtensions
+	eDeleteTaxRegistration                                               smithy.SchemaExtensions
+	eGetTaxExemptionTypes                                                smithy.SchemaExtensions
+	eGetTaxInheritance                                                   smithy.SchemaExtensions
+	eGetTaxRegistration                                                  smithy.SchemaExtensions
+	eGetTaxRegistrationDocument                                          smithy.SchemaExtensions
+	eListSupplementalTaxRegistrations                                    smithy.SchemaExtensions
+	eListTaxExemptions                                                   smithy.SchemaExtensions
+	eListTaxRegistrations                                                smithy.SchemaExtensions
+	ePutSupplementalTaxRegistration                                      smithy.SchemaExtensions
+	ePutTaxExemption                                                     smithy.SchemaExtensions
+	ePutTaxInheritance                                                   smithy.SchemaExtensions
+	ePutTaxRegistration                                                  smithy.SchemaExtensions
+	e_TaxSettings                                                        smithy.SchemaExtensions
+	eAccessDeniedException                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                       smithy.SchemaExtensions
+	eAccountDetails                                                      smithy.SchemaExtensions
+	eAccountDetails_accountId                                            smithy.SchemaExtensions
+	eAccountDetails_taxRegistration                                      smithy.SchemaExtensions
+	eAccountDetails_taxInheritanceDetails                                smithy.SchemaExtensions
+	eAccountDetails_accountMetaData                                      smithy.SchemaExtensions
+	e_AccountDetailsList                                                 smithy.SchemaExtensions
+	e_AccountDetailsList_member                                          smithy.SchemaExtensions
+	e_AccountId                                                          smithy.SchemaExtensions
+	e_AccountIds                                                         smithy.SchemaExtensions
+	e_AccountIds_member                                                  smithy.SchemaExtensions
+	eAccountMetaData                                                     smithy.SchemaExtensions
+	eAccountMetaData_accountName                                         smithy.SchemaExtensions
+	eAccountMetaData_seller                                              smithy.SchemaExtensions
+	eAccountMetaData_address                                             smithy.SchemaExtensions
+	eAccountMetaData_addressType                                         smithy.SchemaExtensions
+	eAccountMetaData_addressRoleMap                                      smithy.SchemaExtensions
+	e_AccountName                                                        smithy.SchemaExtensions
+	eAdditionalInfoRequest                                               smithy.SchemaExtensions
+	eAdditionalInfoRequest_malaysiaAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoRequest_israelAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_estoniaAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_canadaAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_spainAdditionalInfo                           smithy.SchemaExtensions
+	eAdditionalInfoRequest_kenyaAdditionalInfo                           smithy.SchemaExtensions
+	eAdditionalInfoRequest_southKoreaAdditionalInfo                      smithy.SchemaExtensions
+	eAdditionalInfoRequest_turkeyAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_georgiaAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_italyAdditionalInfo                           smithy.SchemaExtensions
+	eAdditionalInfoRequest_romaniaAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_ukraineAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_polandAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_saudiArabiaAdditionalInfo                     smithy.SchemaExtensions
+	eAdditionalInfoRequest_indonesiaAdditionalInfo                       smithy.SchemaExtensions
+	eAdditionalInfoRequest_vietnamAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_egyptAdditionalInfo                           smithy.SchemaExtensions
+	eAdditionalInfoRequest_greeceAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_uzbekistanAdditionalInfo                      smithy.SchemaExtensions
+	eAdditionalInfoRequest_philippinesAdditionalInfo                     smithy.SchemaExtensions
+	eAdditionalInfoRequest_belgiumAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_chileAdditionalInfo                           smithy.SchemaExtensions
+	eAdditionalInfoRequest_franceAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_monacoAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoRequest_germanyAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoRequest_mexicoAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse                                              smithy.SchemaExtensions
+	eAdditionalInfoResponse_malaysiaAdditionalInfo                       smithy.SchemaExtensions
+	eAdditionalInfoResponse_israelAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_estoniaAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_canadaAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_brazilAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_spainAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_kenyaAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_southKoreaAdditionalInfo                     smithy.SchemaExtensions
+	eAdditionalInfoResponse_turkeyAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_georgiaAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_italyAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_romaniaAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_ukraineAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_polandAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_saudiArabiaAdditionalInfo                    smithy.SchemaExtensions
+	eAdditionalInfoResponse_indiaAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_indonesiaAdditionalInfo                      smithy.SchemaExtensions
+	eAdditionalInfoResponse_vietnamAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_egyptAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_greeceAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_uzbekistanAdditionalInfo                     smithy.SchemaExtensions
+	eAdditionalInfoResponse_philippinesAdditionalInfo                    smithy.SchemaExtensions
+	eAdditionalInfoResponse_belgiumAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_chileAdditionalInfo                          smithy.SchemaExtensions
+	eAdditionalInfoResponse_franceAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_monacoAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_germanyAdditionalInfo                        smithy.SchemaExtensions
+	eAdditionalInfoResponse_mexicoAdditionalInfo                         smithy.SchemaExtensions
+	eAdditionalInfoResponse_colombiaAdditionalInfo                       smithy.SchemaExtensions
+	eAddress                                                             smithy.SchemaExtensions
+	eAddress_addressLine1                                                smithy.SchemaExtensions
+	eAddress_addressLine2                                                smithy.SchemaExtensions
+	eAddress_addressLine3                                                smithy.SchemaExtensions
+	eAddress_districtOrCounty                                            smithy.SchemaExtensions
+	eAddress_city                                                        smithy.SchemaExtensions
+	eAddress_stateOrRegion                                               smithy.SchemaExtensions
+	eAddress_postalCode                                                  smithy.SchemaExtensions
+	eAddress_countryCode                                                 smithy.SchemaExtensions
+	e_AddressLine1                                                       smithy.SchemaExtensions
+	e_AddressLine2                                                       smithy.SchemaExtensions
+	e_AddressLine3                                                       smithy.SchemaExtensions
+	e_AddressRoleMap                                                     smithy.SchemaExtensions
+	e_AddressRoleMap_key                                                 smithy.SchemaExtensions
+	e_AddressRoleMap_value                                               smithy.SchemaExtensions
+	eAddressRoleType                                                     smithy.SchemaExtensions
+	eAddressRoleType_TAX_ADDRESS                                         smithy.SchemaExtensions
+	eAddressRoleType_BILLING_ADDRESS                                     smithy.SchemaExtensions
+	eAddressRoleType_CONTACT_ADDRESS                                     smithy.SchemaExtensions
+	eAttachmentUploadException                                           smithy.SchemaExtensions
+	eAttachmentUploadException_message                                   smithy.SchemaExtensions
+	e_Authorities                                                        smithy.SchemaExtensions
+	e_Authorities_member                                                 smithy.SchemaExtensions
+	eAuthority                                                           smithy.SchemaExtensions
+	eAuthority_country                                                   smithy.SchemaExtensions
+	eAuthority_state                                                     smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationError                                     smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationError_accountId                           smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationError_message                             smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationError_code                                smithy.SchemaExtensions
+	e_BatchDeleteTaxRegistrationErrors                                   smithy.SchemaExtensions
+	e_BatchDeleteTaxRegistrationErrors_member                            smithy.SchemaExtensions
+	eBatchPutTaxRegistrationError                                        smithy.SchemaExtensions
+	eBatchPutTaxRegistrationError_accountId                              smithy.SchemaExtensions
+	eBatchPutTaxRegistrationError_message                                smithy.SchemaExtensions
+	eBatchPutTaxRegistrationError_code                                   smithy.SchemaExtensions
+	e_BatchPutTaxRegistrationErrors                                      smithy.SchemaExtensions
+	e_BatchPutTaxRegistrationErrors_member                               smithy.SchemaExtensions
+	eBelgiumAdditionalInfo                                               smithy.SchemaExtensions
+	eBelgiumAdditionalInfo_peppolId                                      smithy.SchemaExtensions
+	eBelgiumAdditionalInfo_isMercuriusBoxEnabled                         smithy.SchemaExtensions
+	eBrazilAdditionalInfo                                                smithy.SchemaExtensions
+	eBrazilAdditionalInfo_ccmCode                                        smithy.SchemaExtensions
+	eBrazilAdditionalInfo_legalNatureCode                                smithy.SchemaExtensions
+	e_BusinessNumber                                                     smithy.SchemaExtensions
+	e_BusinessRegistrationNumber                                         smithy.SchemaExtensions
+	e_BusinessRepresentativeName                                         smithy.SchemaExtensions
+	eCanadaAdditionalInfo                                                smithy.SchemaExtensions
+	eCanadaAdditionalInfo_provincialSalesTaxId                           smithy.SchemaExtensions
+	eCanadaAdditionalInfo_canadaQuebecSalesTaxNumber                     smithy.SchemaExtensions
+	eCanadaAdditionalInfo_canadaRetailSalesTaxNumber                     smithy.SchemaExtensions
+	eCanadaAdditionalInfo_isResellerAccount                              smithy.SchemaExtensions
+	e_CanadaProvincialSalesTaxIdString                                   smithy.SchemaExtensions
+	e_CanadaQuebecSalesTaxNumberString                                   smithy.SchemaExtensions
+	e_CanadaRetailSalesTaxNumberString                                   smithy.SchemaExtensions
+	eCaseCreationLimitExceededException                                  smithy.SchemaExtensions
+	eCaseCreationLimitExceededException_message                          smithy.SchemaExtensions
+	e_CcmCode                                                            smithy.SchemaExtensions
+	e_CertifiedEmailId                                                   smithy.SchemaExtensions
+	eChileAdditionalInfo                                                 smithy.SchemaExtensions
+	eChileAdditionalInfo_documentType                                    smithy.SchemaExtensions
+	eChileAdditionalInfo_businessActivity                                smithy.SchemaExtensions
+	eChileDocumentType                                                   smithy.SchemaExtensions
+	eChileDocumentType_INVOICE                                           smithy.SchemaExtensions
+	eChileDocumentType_RECEIPT                                           smithy.SchemaExtensions
+	e_CigNumber                                                          smithy.SchemaExtensions
+	e_City                                                               smithy.SchemaExtensions
+	eColombiaAdditionalInfo                                              smithy.SchemaExtensions
+	eColombiaAdditionalInfo_responsibilityCodes                          smithy.SchemaExtensions
+	eColombiaAdditionalInfo_taxpayerTypeCode                             smithy.SchemaExtensions
+	eColombiaAdditionalInfo_issueDate                                    smithy.SchemaExtensions
+	e_ColombiaResponsabilidadCode                                        smithy.SchemaExtensions
+	e_ColombiaResponsabilidadesList                                      smithy.SchemaExtensions
+	e_ColombiaResponsabilidadesList_member                               smithy.SchemaExtensions
+	e_ColombiaTipoContribuyenteCode                                      smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	eConflictException_errorCode                                         smithy.SchemaExtensions
+	e_ContractingAuthorityCode                                           smithy.SchemaExtensions
+	e_CountryCode                                                        smithy.SchemaExtensions
+	e_CupNumber                                                          smithy.SchemaExtensions
+	eCustomerType                                                        smithy.SchemaExtensions
+	eCustomerType_BUSINESS                                               smithy.SchemaExtensions
+	eCustomerType_INDIVIDUAL                                             smithy.SchemaExtensions
+	e_DateOfBirth                                                        smithy.SchemaExtensions
+	e_DateString                                                         smithy.SchemaExtensions
+	e_DecisionNumber                                                     smithy.SchemaExtensions
+	e_DestinationFilePath                                                smithy.SchemaExtensions
+	eDestinationS3Location                                               smithy.SchemaExtensions
+	eDestinationS3Location_bucket                                        smithy.SchemaExtensions
+	eDestinationS3Location_prefix                                        smithy.SchemaExtensions
+	e_DisplayName                                                        smithy.SchemaExtensions
+	e_District                                                           smithy.SchemaExtensions
+	e_EconomicIdentificationNumber                                       smithy.SchemaExtensions
+	eEgyptAdditionalInfo                                                 smithy.SchemaExtensions
+	eEgyptAdditionalInfo_uniqueIdentificationNumber                      smithy.SchemaExtensions
+	eEgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate        smithy.SchemaExtensions
+	e_ElectronicTransactionCodeNumber                                    smithy.SchemaExtensions
+	e_EnterpriseIdentificationNumber                                     smithy.SchemaExtensions
+	eEntityExemptionAccountStatus                                        smithy.SchemaExtensions
+	eEntityExemptionAccountStatus_None                                   smithy.SchemaExtensions
+	eEntityExemptionAccountStatus_Valid                                  smithy.SchemaExtensions
+	eEntityExemptionAccountStatus_Expired                                smithy.SchemaExtensions
+	eEntityExemptionAccountStatus_Pending                                smithy.SchemaExtensions
+	e_ErrorCode                                                          smithy.SchemaExtensions
+	e_ErrorMessage                                                       smithy.SchemaExtensions
+	eEstoniaAdditionalInfo                                               smithy.SchemaExtensions
+	eEstoniaAdditionalInfo_registryCommercialCode                        smithy.SchemaExtensions
+	eExemptionCertificate                                                smithy.SchemaExtensions
+	eExemptionCertificate_documentName                                   smithy.SchemaExtensions
+	eExemptionCertificate_documentFile                                   smithy.SchemaExtensions
+	e_ExemptionDocumentName                                              smithy.SchemaExtensions
+	e_ExemptionFileBlob                                                  smithy.SchemaExtensions
+	e_FieldName                                                          smithy.SchemaExtensions
+	e_FileBlob                                                           smithy.SchemaExtensions
+	eFranceAdditionalInfo                                                smithy.SchemaExtensions
+	eFranceAdditionalInfo_sirenNumber                                    smithy.SchemaExtensions
+	eFranceAdditionalInfo_eInvoiceRoutingCode                            smithy.SchemaExtensions
+	e_GenericString                                                      smithy.SchemaExtensions
+	eGeorgiaAdditionalInfo                                               smithy.SchemaExtensions
+	eGeorgiaAdditionalInfo_personType                                    smithy.SchemaExtensions
+	eGermanyAdditionalInfo                                               smithy.SchemaExtensions
+	eGermanyAdditionalInfo_economicIdentificationNumber                  smithy.SchemaExtensions
+	eGermanyAdditionalInfo_steuernummer                                  smithy.SchemaExtensions
+	eGreeceAdditionalInfo                                                smithy.SchemaExtensions
+	eGreeceAdditionalInfo_contractingAuthorityCode                       smithy.SchemaExtensions
+	eHeritageStatus                                                      smithy.SchemaExtensions
+	eHeritageStatus_OptIn                                                smithy.SchemaExtensions
+	eHeritageStatus_OptOut                                               smithy.SchemaExtensions
+	eIndiaAdditionalInfo                                                 smithy.SchemaExtensions
+	eIndiaAdditionalInfo_pan                                             smithy.SchemaExtensions
+	e_IndividualRegistrationNumber                                       smithy.SchemaExtensions
+	eIndonesiaAdditionalInfo                                             smithy.SchemaExtensions
+	eIndonesiaAdditionalInfo_taxRegistrationNumberType                   smithy.SchemaExtensions
+	eIndonesiaAdditionalInfo_ppnExceptionDesignationCode                 smithy.SchemaExtensions
+	eIndonesiaAdditionalInfo_decisionNumber                              smithy.SchemaExtensions
+	eIndonesiaTaxRegistrationNumberType                                  smithy.SchemaExtensions
+	eIndonesiaTaxRegistrationNumberType_NIK                              smithy.SchemaExtensions
+	eIndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER                  smithy.SchemaExtensions
+	eIndonesiaTaxRegistrationNumberType_NPWP                             smithy.SchemaExtensions
+	eIndonesiaTaxRegistrationNumberType_NITKU                            smithy.SchemaExtensions
+	eIndustries                                                          smithy.SchemaExtensions
+	eIndustries_CIRCULATING_ORG                                          smithy.SchemaExtensions
+	eIndustries_PROFESSIONAL_ORG                                         smithy.SchemaExtensions
+	eIndustries_BANKS                                                    smithy.SchemaExtensions
+	eIndustries_INSURANCE                                                smithy.SchemaExtensions
+	eIndustries_PENSION_AND_BENEFIT_FUNDS                                smithy.SchemaExtensions
+	eIndustries_DEVELOPMENT_AGENCIES                                     smithy.SchemaExtensions
+	e_InheritanceObtainedReason                                          smithy.SchemaExtensions
+	eInternalServerException                                             smithy.SchemaExtensions
+	eInternalServerException_message                                     smithy.SchemaExtensions
+	eInternalServerException_errorCode                                   smithy.SchemaExtensions
+	eIsraelAdditionalInfo                                                smithy.SchemaExtensions
+	eIsraelAdditionalInfo_dealerType                                     smithy.SchemaExtensions
+	eIsraelAdditionalInfo_customerType                                   smithy.SchemaExtensions
+	eIsraelCustomerType                                                  smithy.SchemaExtensions
+	eIsraelCustomerType_BUSINESS                                         smithy.SchemaExtensions
+	eIsraelCustomerType_INDIVIDUAL                                       smithy.SchemaExtensions
+	eIsraelDealerType                                                    smithy.SchemaExtensions
+	eIsraelDealerType_AUTHORIZED                                         smithy.SchemaExtensions
+	eIsraelDealerType_NON_AUTHORIZED                                     smithy.SchemaExtensions
+	eItalyAdditionalInfo                                                 smithy.SchemaExtensions
+	eItalyAdditionalInfo_sdiAccountId                                    smithy.SchemaExtensions
+	eItalyAdditionalInfo_cigNumber                                       smithy.SchemaExtensions
+	eItalyAdditionalInfo_cupNumber                                       smithy.SchemaExtensions
+	eItalyAdditionalInfo_taxCode                                         smithy.SchemaExtensions
+	eItalyAdditionalInfo_customerType                                    smithy.SchemaExtensions
+	e_ItemOfBusiness                                                     smithy.SchemaExtensions
+	eJurisdiction                                                        smithy.SchemaExtensions
+	eJurisdiction_stateOrRegion                                          smithy.SchemaExtensions
+	eJurisdiction_countryCode                                            smithy.SchemaExtensions
+	eKenyaAdditionalInfo                                                 smithy.SchemaExtensions
+	eKenyaAdditionalInfo_personType                                      smithy.SchemaExtensions
+	e_KepEmailId                                                         smithy.SchemaExtensions
+	e_LegalName                                                          smithy.SchemaExtensions
+	e_LegalNatureCode                                                    smithy.SchemaExtensions
+	e_LineOfBusiness                                                     smithy.SchemaExtensions
+	eMalaysiaAdditionalInfo                                              smithy.SchemaExtensions
+	eMalaysiaAdditionalInfo_serviceTaxCodes                              smithy.SchemaExtensions
+	eMalaysiaAdditionalInfo_taxInformationNumber                         smithy.SchemaExtensions
+	eMalaysiaAdditionalInfo_businessRegistrationNumber                   smithy.SchemaExtensions
+	eMalaysiaServiceTaxCode                                              smithy.SchemaExtensions
+	eMalaysiaServiceTaxCode_CONSULTANCY                                  smithy.SchemaExtensions
+	eMalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM                smithy.SchemaExtensions
+	eMalaysiaServiceTaxCode_IT_SERVICES                                  smithy.SchemaExtensions
+	eMalaysiaServiceTaxCode_TRAINING_OR_COACHING                         smithy.SchemaExtensions
+	e_MalaysiaServiceTaxCodesList                                        smithy.SchemaExtensions
+	e_MalaysiaServiceTaxCodesList_member                                 smithy.SchemaExtensions
+	e_MaxResults                                                         smithy.SchemaExtensions
+	eMexicoAdditionalInfo                                                smithy.SchemaExtensions
+	eMexicoAdditionalInfo_taxRegime                                      smithy.SchemaExtensions
+	eMexicoAdditionalInfo_taxRegimeFullName                              smithy.SchemaExtensions
+	eMexicoAdditionalInfo_cfdiUsageCode                                  smithy.SchemaExtensions
+	e_MexicoCfdiUsageCode                                                smithy.SchemaExtensions
+	e_MexicoTaxRegimeCode                                                smithy.SchemaExtensions
+	e_MexicoTaxRegimeFullName                                            smithy.SchemaExtensions
+	eMonacoAdditionalInfo                                                smithy.SchemaExtensions
+	eMonacoAdditionalInfo_businessNumber                                 smithy.SchemaExtensions
+	e_PaginationTokenString                                              smithy.SchemaExtensions
+	e_Pan                                                                smithy.SchemaExtensions
+	e_PaymentVoucherNumber                                               smithy.SchemaExtensions
+	e_PeppolId                                                           smithy.SchemaExtensions
+	ePersonType                                                          smithy.SchemaExtensions
+	ePersonType_LEGAL_PERSON                                             smithy.SchemaExtensions
+	ePersonType_PHYSICAL_PERSON                                          smithy.SchemaExtensions
+	ePersonType_BUSINESS                                                 smithy.SchemaExtensions
+	ePhilippinesAdditionalInfo                                           smithy.SchemaExtensions
+	ePhilippinesAdditionalInfo_isVatRegistered                           smithy.SchemaExtensions
+	ePolandAdditionalInfo                                                smithy.SchemaExtensions
+	ePolandAdditionalInfo_individualRegistrationNumber                   smithy.SchemaExtensions
+	ePolandAdditionalInfo_isGroupVatEnabled                              smithy.SchemaExtensions
+	ePolandAdditionalInfo_taxRegistrationNumberType                      smithy.SchemaExtensions
+	ePolandTaxRegistrationNumberType                                     smithy.SchemaExtensions
+	ePolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER          smithy.SchemaExtensions
+	ePolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER       smithy.SchemaExtensions
+	ePolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER           smithy.SchemaExtensions
+	e_PostalCode                                                         smithy.SchemaExtensions
+	e_PpnExceptionDesignationCode                                        smithy.SchemaExtensions
+	e_RegistrationId                                                     smithy.SchemaExtensions
+	eRegistrationType                                                    smithy.SchemaExtensions
+	eRegistrationType_INTRA_EU                                           smithy.SchemaExtensions
+	eRegistrationType_LOCAL                                              smithy.SchemaExtensions
+	e_RegistryCommercialCode                                             smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	eResourceNotFoundException_errorCode                                 smithy.SchemaExtensions
+	eRomaniaAdditionalInfo                                               smithy.SchemaExtensions
+	eRomaniaAdditionalInfo_taxRegistrationNumberType                     smithy.SchemaExtensions
+	e_S3BucketName                                                       smithy.SchemaExtensions
+	e_S3Key                                                              smithy.SchemaExtensions
+	e_S3Prefix                                                           smithy.SchemaExtensions
+	eSaudiArabiaAdditionalInfo                                           smithy.SchemaExtensions
+	eSaudiArabiaAdditionalInfo_taxRegistrationNumberType                 smithy.SchemaExtensions
+	eSaudiArabiaTaxRegistrationNumberType                                smithy.SchemaExtensions
+	eSaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER        smithy.SchemaExtensions
+	eSaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER      smithy.SchemaExtensions
+	eSaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER smithy.SchemaExtensions
+	e_SdiAccountId                                                       smithy.SchemaExtensions
+	e_SecondaryTaxId                                                     smithy.SchemaExtensions
+	eSector                                                              smithy.SchemaExtensions
+	eSector_BUSINESS                                                     smithy.SchemaExtensions
+	eSector_INDIVIDUAL                                                   smithy.SchemaExtensions
+	eSector_PUBLIC_INSTITUTIONS                                          smithy.SchemaExtensions
+	e_Seller                                                             smithy.SchemaExtensions
+	e_SirenNumber                                                        smithy.SchemaExtensions
+	eSourceS3Location                                                    smithy.SchemaExtensions
+	eSourceS3Location_bucket                                             smithy.SchemaExtensions
+	eSourceS3Location_key                                                smithy.SchemaExtensions
+	eSouthKoreaAdditionalInfo                                            smithy.SchemaExtensions
+	eSouthKoreaAdditionalInfo_businessRepresentativeName                 smithy.SchemaExtensions
+	eSouthKoreaAdditionalInfo_lineOfBusiness                             smithy.SchemaExtensions
+	eSouthKoreaAdditionalInfo_itemOfBusiness                             smithy.SchemaExtensions
+	eSpainAdditionalInfo                                                 smithy.SchemaExtensions
+	eSpainAdditionalInfo_registrationType                                smithy.SchemaExtensions
+	e_State                                                              smithy.SchemaExtensions
+	e_StatusReasonCode                                                   smithy.SchemaExtensions
+	e_StatusReasonMessage                                                smithy.SchemaExtensions
+	e_Steuernummer                                                       smithy.SchemaExtensions
+	eSupplementalTaxRegistration                                         smithy.SchemaExtensions
+	eSupplementalTaxRegistration_registrationId                          smithy.SchemaExtensions
+	eSupplementalTaxRegistration_registrationType                        smithy.SchemaExtensions
+	eSupplementalTaxRegistration_legalName                               smithy.SchemaExtensions
+	eSupplementalTaxRegistration_address                                 smithy.SchemaExtensions
+	eSupplementalTaxRegistration_authorityId                             smithy.SchemaExtensions
+	eSupplementalTaxRegistration_status                                  smithy.SchemaExtensions
+	eSupplementalTaxRegistrationEntry                                    smithy.SchemaExtensions
+	eSupplementalTaxRegistrationEntry_registrationId                     smithy.SchemaExtensions
+	eSupplementalTaxRegistrationEntry_registrationType                   smithy.SchemaExtensions
+	eSupplementalTaxRegistrationEntry_legalName                          smithy.SchemaExtensions
+	eSupplementalTaxRegistrationEntry_address                            smithy.SchemaExtensions
+	e_SupplementalTaxRegistrationList                                    smithy.SchemaExtensions
+	e_SupplementalTaxRegistrationList_member                             smithy.SchemaExtensions
+	eSupplementalTaxRegistrationType                                     smithy.SchemaExtensions
+	eSupplementalTaxRegistrationType_VAT                                 smithy.SchemaExtensions
+	e_TaxCode                                                            smithy.SchemaExtensions
+	e_TaxDocumentAccessToken                                             smithy.SchemaExtensions
+	eTaxDocumentMetadata                                                 smithy.SchemaExtensions
+	eTaxDocumentMetadata_taxDocumentAccessToken                          smithy.SchemaExtensions
+	eTaxDocumentMetadata_taxDocumentName                                 smithy.SchemaExtensions
+	e_TaxDocumentMetadatas                                               smithy.SchemaExtensions
+	e_TaxDocumentMetadatas_member                                        smithy.SchemaExtensions
+	e_TaxDocumentName                                                    smithy.SchemaExtensions
+	eTaxExemption                                                        smithy.SchemaExtensions
+	eTaxExemption_authority                                              smithy.SchemaExtensions
+	eTaxExemption_taxExemptionType                                       smithy.SchemaExtensions
+	eTaxExemption_effectiveDate                                          smithy.SchemaExtensions
+	eTaxExemption_expirationDate                                         smithy.SchemaExtensions
+	eTaxExemption_systemEffectiveDate                                    smithy.SchemaExtensions
+	eTaxExemption_status                                                 smithy.SchemaExtensions
+	eTaxExemptionDetails                                                 smithy.SchemaExtensions
+	eTaxExemptionDetails_taxExemptions                                   smithy.SchemaExtensions
+	eTaxExemptionDetails_heritageObtainedDetails                         smithy.SchemaExtensions
+	eTaxExemptionDetails_heritageObtainedParentEntity                    smithy.SchemaExtensions
+	eTaxExemptionDetails_heritageObtainedReason                          smithy.SchemaExtensions
+	e_TaxExemptionDetailsMap                                             smithy.SchemaExtensions
+	e_TaxExemptionDetailsMap_key                                         smithy.SchemaExtensions
+	e_TaxExemptionDetailsMap_value                                       smithy.SchemaExtensions
+	e_TaxExemptions                                                      smithy.SchemaExtensions
+	e_TaxExemptions_member                                               smithy.SchemaExtensions
+	eTaxExemptionType                                                    smithy.SchemaExtensions
+	eTaxExemptionType_displayName                                        smithy.SchemaExtensions
+	eTaxExemptionType_description                                        smithy.SchemaExtensions
+	eTaxExemptionType_applicableJurisdictions                            smithy.SchemaExtensions
+	e_TaxExemptionTypes                                                  smithy.SchemaExtensions
+	e_TaxExemptionTypes_member                                           smithy.SchemaExtensions
+	e_TaxInformationNumber                                               smithy.SchemaExtensions
+	eTaxInheritanceDetails                                               smithy.SchemaExtensions
+	eTaxInheritanceDetails_parentEntityId                                smithy.SchemaExtensions
+	eTaxInheritanceDetails_inheritanceObtainedReason                     smithy.SchemaExtensions
+	e_TaxOffice                                                          smithy.SchemaExtensions
+	eTaxRegistration                                                     smithy.SchemaExtensions
+	eTaxRegistration_registrationId                                      smithy.SchemaExtensions
+	eTaxRegistration_registrationType                                    smithy.SchemaExtensions
+	eTaxRegistration_legalName                                           smithy.SchemaExtensions
+	eTaxRegistration_status                                              smithy.SchemaExtensions
+	eTaxRegistration_sector                                              smithy.SchemaExtensions
+	eTaxRegistration_taxDocumentMetadatas                                smithy.SchemaExtensions
+	eTaxRegistration_certifiedEmailId                                    smithy.SchemaExtensions
+	eTaxRegistration_additionalTaxInformation                            smithy.SchemaExtensions
+	eTaxRegistration_statusReason                                        smithy.SchemaExtensions
+	eTaxRegistration_legalAddress                                        smithy.SchemaExtensions
+	eTaxRegistrationDocFile                                              smithy.SchemaExtensions
+	eTaxRegistrationDocFile_fileName                                     smithy.SchemaExtensions
+	eTaxRegistrationDocFile_fileContent                                  smithy.SchemaExtensions
+	eTaxRegistrationDocument                                             smithy.SchemaExtensions
+	eTaxRegistrationDocument_s3Location                                  smithy.SchemaExtensions
+	eTaxRegistrationDocument_file                                        smithy.SchemaExtensions
+	e_TaxRegistrationDocuments                                           smithy.SchemaExtensions
+	e_TaxRegistrationDocuments_member                                    smithy.SchemaExtensions
+	eTaxRegistrationEntry                                                smithy.SchemaExtensions
+	eTaxRegistrationEntry_registrationId                                 smithy.SchemaExtensions
+	eTaxRegistrationEntry_registrationType                               smithy.SchemaExtensions
+	eTaxRegistrationEntry_legalName                                      smithy.SchemaExtensions
+	eTaxRegistrationEntry_legalAddress                                   smithy.SchemaExtensions
+	eTaxRegistrationEntry_sector                                         smithy.SchemaExtensions
+	eTaxRegistrationEntry_additionalTaxInformation                       smithy.SchemaExtensions
+	eTaxRegistrationEntry_verificationDetails                            smithy.SchemaExtensions
+	eTaxRegistrationEntry_certifiedEmailId                               smithy.SchemaExtensions
+	eTaxRegistrationNumberType                                           smithy.SchemaExtensions
+	eTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER                   smithy.SchemaExtensions
+	eTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER                 smithy.SchemaExtensions
+	eTaxRegistrationStatus                                               smithy.SchemaExtensions
+	eTaxRegistrationStatus_VERIFIED                                      smithy.SchemaExtensions
+	eTaxRegistrationStatus_PENDING                                       smithy.SchemaExtensions
+	eTaxRegistrationStatus_DELETED                                       smithy.SchemaExtensions
+	eTaxRegistrationStatus_REJECTED                                      smithy.SchemaExtensions
+	eTaxRegistrationStatusReason                                         smithy.SchemaExtensions
+	eTaxRegistrationStatusReason_code                                    smithy.SchemaExtensions
+	eTaxRegistrationStatusReason_message                                 smithy.SchemaExtensions
+	eTaxRegistrationType                                                 smithy.SchemaExtensions
+	eTaxRegistrationType_VAT                                             smithy.SchemaExtensions
+	eTaxRegistrationType_GST                                             smithy.SchemaExtensions
+	eTaxRegistrationType_CPF                                             smithy.SchemaExtensions
+	eTaxRegistrationType_CNPJ                                            smithy.SchemaExtensions
+	eTaxRegistrationType_SST                                             smithy.SchemaExtensions
+	eTaxRegistrationType_TIN                                             smithy.SchemaExtensions
+	eTaxRegistrationType_NRIC                                            smithy.SchemaExtensions
+	eTaxRegistrationType_PAN                                             smithy.SchemaExtensions
+	eTaxRegistrationType_NIP                                             smithy.SchemaExtensions
+	eTaxRegistrationType_CUIT                                            smithy.SchemaExtensions
+	eTaxRegistrationType_CDI                                             smithy.SchemaExtensions
+	eTaxRegistrationType_RUT                                             smithy.SchemaExtensions
+	eTaxRegistrationType_NIE                                             smithy.SchemaExtensions
+	eTaxRegistrationType_CI                                              smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction                                     smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_registrationId                      smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_registrationType                    smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_legalName                           smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_status                              smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_sector                              smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_taxDocumentMetadatas                smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_certifiedEmailId                    smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_additionalTaxInformation            smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_statusReason                        smithy.SchemaExtensions
+	eTaxRegistrationWithJurisdiction_jurisdiction                        smithy.SchemaExtensions
+	eTurkeyAdditionalInfo                                                smithy.SchemaExtensions
+	eTurkeyAdditionalInfo_taxOffice                                      smithy.SchemaExtensions
+	eTurkeyAdditionalInfo_kepEmailId                                     smithy.SchemaExtensions
+	eTurkeyAdditionalInfo_secondaryTaxId                                 smithy.SchemaExtensions
+	eTurkeyAdditionalInfo_industries                                     smithy.SchemaExtensions
+	eUkraineAdditionalInfo                                               smithy.SchemaExtensions
+	eUkraineAdditionalInfo_ukraineTrnType                                smithy.SchemaExtensions
+	eUkraineTrnType                                                      smithy.SchemaExtensions
+	eUkraineTrnType_BUSINESS                                             smithy.SchemaExtensions
+	eUkraineTrnType_INDIVIDUAL                                           smithy.SchemaExtensions
+	e_UniqueIdentificationNumber                                         smithy.SchemaExtensions
+	e_Url                                                                smithy.SchemaExtensions
+	eUzbekistanAdditionalInfo                                            smithy.SchemaExtensions
+	eUzbekistanAdditionalInfo_taxRegistrationNumberType                  smithy.SchemaExtensions
+	eUzbekistanAdditionalInfo_vatRegistrationNumber                      smithy.SchemaExtensions
+	eUzbekistanTaxRegistrationNumberType                                 smithy.SchemaExtensions
+	eUzbekistanTaxRegistrationNumberType_BUSINESS                        smithy.SchemaExtensions
+	eUzbekistanTaxRegistrationNumberType_INDIVIDUAL                      smithy.SchemaExtensions
+	eValidationException                                                 smithy.SchemaExtensions
+	eValidationException_message                                         smithy.SchemaExtensions
+	eValidationException_errorCode                                       smithy.SchemaExtensions
+	eValidationException_fieldList                                       smithy.SchemaExtensions
+	eValidationExceptionErrorCode                                        smithy.SchemaExtensions
+	eValidationExceptionErrorCode_MALFORMED_TOKEN                        smithy.SchemaExtensions
+	eValidationExceptionErrorCode_EXPIRED_TOKEN                          smithy.SchemaExtensions
+	eValidationExceptionErrorCode_INVALID_TOKEN                          smithy.SchemaExtensions
+	eValidationExceptionErrorCode_FIELD_VALIDATION_FAILED                smithy.SchemaExtensions
+	eValidationExceptionErrorCode_MISSING_INPUT                          smithy.SchemaExtensions
+	eValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN     smithy.SchemaExtensions
+	eValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN            smithy.SchemaExtensions
+	eValidationExceptionField                                            smithy.SchemaExtensions
+	eValidationExceptionField_name                                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                smithy.SchemaExtensions
+	e_VatRegistrationNumber                                              smithy.SchemaExtensions
+	eVerificationDetails                                                 smithy.SchemaExtensions
+	eVerificationDetails_dateOfBirth                                     smithy.SchemaExtensions
+	eVerificationDetails_taxRegistrationDocuments                        smithy.SchemaExtensions
+	eVietnamAdditionalInfo                                               smithy.SchemaExtensions
+	eVietnamAdditionalInfo_enterpriseIdentificationNumber                smithy.SchemaExtensions
+	eVietnamAdditionalInfo_electronicTransactionCodeNumber               smithy.SchemaExtensions
+	eVietnamAdditionalInfo_paymentVoucherNumber                          smithy.SchemaExtensions
+	eVietnamAdditionalInfo_paymentVoucherNumberDate                      smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationRequest                                   smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationRequest_accountIds                        smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationResponse                                  smithy.SchemaExtensions
+	eBatchDeleteTaxRegistrationResponse_errors                           smithy.SchemaExtensions
+	eBatchGetTaxExemptionsRequest                                        smithy.SchemaExtensions
+	eBatchGetTaxExemptionsRequest_accountIds                             smithy.SchemaExtensions
+	eBatchGetTaxExemptionsResponse                                       smithy.SchemaExtensions
+	eBatchGetTaxExemptionsResponse_taxExemptionDetailsMap                smithy.SchemaExtensions
+	eBatchGetTaxExemptionsResponse_failedAccounts                        smithy.SchemaExtensions
+	eBatchPutTaxRegistrationRequest                                      smithy.SchemaExtensions
+	eBatchPutTaxRegistrationRequest_accountIds                           smithy.SchemaExtensions
+	eBatchPutTaxRegistrationRequest_taxRegistrationEntry                 smithy.SchemaExtensions
+	eBatchPutTaxRegistrationResponse                                     smithy.SchemaExtensions
+	eBatchPutTaxRegistrationResponse_status                              smithy.SchemaExtensions
+	eBatchPutTaxRegistrationResponse_errors                              smithy.SchemaExtensions
+	eDeleteSupplementalTaxRegistrationRequest                            smithy.SchemaExtensions
+	eDeleteSupplementalTaxRegistrationRequest_authorityId                smithy.SchemaExtensions
+	eDeleteSupplementalTaxRegistrationResponse                           smithy.SchemaExtensions
+	eDeleteTaxRegistrationRequest                                        smithy.SchemaExtensions
+	eDeleteTaxRegistrationRequest_accountId                              smithy.SchemaExtensions
+	eDeleteTaxRegistrationResponse                                       smithy.SchemaExtensions
+	eGetTaxExemptionTypesRequest                                         smithy.SchemaExtensions
+	eGetTaxExemptionTypesResponse                                        smithy.SchemaExtensions
+	eGetTaxExemptionTypesResponse_taxExemptionTypes                      smithy.SchemaExtensions
+	eGetTaxInheritanceRequest                                            smithy.SchemaExtensions
+	eGetTaxInheritanceResponse                                           smithy.SchemaExtensions
+	eGetTaxInheritanceResponse_heritageStatus                            smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentRequest                                   smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentRequest_destinationS3Location             smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentRequest_taxDocumentMetadata               smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentResponse                                  smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentResponse_destinationFilePath              smithy.SchemaExtensions
+	eGetTaxRegistrationDocumentResponse_presignedS3Url                   smithy.SchemaExtensions
+	eGetTaxRegistrationRequest                                           smithy.SchemaExtensions
+	eGetTaxRegistrationRequest_accountId                                 smithy.SchemaExtensions
+	eGetTaxRegistrationResponse                                          smithy.SchemaExtensions
+	eGetTaxRegistrationResponse_taxRegistration                          smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsRequest                             smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsRequest_maxResults                  smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsRequest_nextToken                   smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsResponse                            smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsResponse_taxRegistrations           smithy.SchemaExtensions
+	eListSupplementalTaxRegistrationsResponse_nextToken                  smithy.SchemaExtensions
+	eListTaxExemptionsRequest                                            smithy.SchemaExtensions
+	eListTaxExemptionsRequest_maxResults                                 smithy.SchemaExtensions
+	eListTaxExemptionsRequest_nextToken                                  smithy.SchemaExtensions
+	eListTaxExemptionsResponse                                           smithy.SchemaExtensions
+	eListTaxExemptionsResponse_nextToken                                 smithy.SchemaExtensions
+	eListTaxExemptionsResponse_taxExemptionDetailsMap                    smithy.SchemaExtensions
+	eListTaxRegistrationsRequest                                         smithy.SchemaExtensions
+	eListTaxRegistrationsRequest_maxResults                              smithy.SchemaExtensions
+	eListTaxRegistrationsRequest_nextToken                               smithy.SchemaExtensions
+	eListTaxRegistrationsResponse                                        smithy.SchemaExtensions
+	eListTaxRegistrationsResponse_accountDetails                         smithy.SchemaExtensions
+	eListTaxRegistrationsResponse_nextToken                              smithy.SchemaExtensions
+	ePutSupplementalTaxRegistrationRequest                               smithy.SchemaExtensions
+	ePutSupplementalTaxRegistrationRequest_taxRegistrationEntry          smithy.SchemaExtensions
+	ePutSupplementalTaxRegistrationResponse                              smithy.SchemaExtensions
+	ePutSupplementalTaxRegistrationResponse_authorityId                  smithy.SchemaExtensions
+	ePutSupplementalTaxRegistrationResponse_status                       smithy.SchemaExtensions
+	ePutTaxExemptionRequest                                              smithy.SchemaExtensions
+	ePutTaxExemptionRequest_accountIds                                   smithy.SchemaExtensions
+	ePutTaxExemptionRequest_authority                                    smithy.SchemaExtensions
+	ePutTaxExemptionRequest_exemptionType                                smithy.SchemaExtensions
+	ePutTaxExemptionRequest_exemptionCertificate                         smithy.SchemaExtensions
+	ePutTaxExemptionResponse                                             smithy.SchemaExtensions
+	ePutTaxExemptionResponse_caseId                                      smithy.SchemaExtensions
+	ePutTaxInheritanceRequest                                            smithy.SchemaExtensions
+	ePutTaxInheritanceRequest_heritageStatus                             smithy.SchemaExtensions
+	ePutTaxInheritanceResponse                                           smithy.SchemaExtensions
+	ePutTaxRegistrationRequest                                           smithy.SchemaExtensions
+	ePutTaxRegistrationRequest_accountId                                 smithy.SchemaExtensions
+	ePutTaxRegistrationRequest_taxRegistrationEntry                      smithy.SchemaExtensions
+	ePutTaxRegistrationResponse                                          smithy.SchemaExtensions
+	ePutTaxRegistrationResponse_status                                   smithy.SchemaExtensions
+)
+
+var (
+	iBatchDeleteTaxRegistration                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchDeleteTaxRegistration"}
+	iBatchGetTaxExemptions                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchGetTaxExemptions"}
+	iBatchPutTaxRegistration                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchPutTaxRegistration"}
+	iDeleteSupplementalTaxRegistration         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteSupplementalTaxRegistration"}
+	iDeleteTaxRegistration                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteTaxRegistration"}
+	iGetTaxExemptionTypes                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxExemptionTypes"}
+	iGetTaxInheritance                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxInheritance"}
+	iGetTaxRegistration                        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistration"}
+	iGetTaxRegistrationDocument                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistrationDocument"}
+	iListSupplementalTaxRegistrations          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListSupplementalTaxRegistrations"}
+	iListTaxExemptions                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxExemptions"}
+	iListTaxRegistrations                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxRegistrations"}
+	iPutSupplementalTaxRegistration            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutSupplementalTaxRegistration"}
+	iPutTaxExemption                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxExemption"}
+	iPutTaxInheritance                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxInheritance"}
+	iPutTaxRegistration                        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxRegistration"}
+	i_TaxSettings                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxSettings"}
+	iAccessDeniedException                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccessDeniedException"}
+	iAccountDetails                            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountDetails"}
+	i_AccountDetailsList                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountDetailsList"}
+	i_AccountId                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountId"}
+	i_AccountIds                               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountIds"}
+	iAccountMetaData                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountMetaData"}
+	i_AccountName                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AccountName"}
+	iAdditionalInfoRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AdditionalInfoRequest"}
+	iAdditionalInfoResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AdditionalInfoResponse"}
+	iAddress                                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Address"}
+	i_AddressLine1                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AddressLine1"}
+	i_AddressLine2                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AddressLine2"}
+	i_AddressLine3                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AddressLine3"}
+	i_AddressRoleMap                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AddressRoleMap"}
+	iAddressRoleType                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AddressRoleType"}
+	iAttachmentUploadException                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "AttachmentUploadException"}
+	i_Authorities                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Authorities"}
+	iAuthority                                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Authority"}
+	iBatchDeleteTaxRegistrationError           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchDeleteTaxRegistrationError"}
+	i_BatchDeleteTaxRegistrationErrors         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchDeleteTaxRegistrationErrors"}
+	iBatchPutTaxRegistrationError              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchPutTaxRegistrationError"}
+	i_BatchPutTaxRegistrationErrors            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchPutTaxRegistrationErrors"}
+	iBelgiumAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BelgiumAdditionalInfo"}
+	iBrazilAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BrazilAdditionalInfo"}
+	i_BusinessNumber                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BusinessNumber"}
+	i_BusinessRegistrationNumber               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BusinessRegistrationNumber"}
+	i_BusinessRepresentativeName               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BusinessRepresentativeName"}
+	iCanadaAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CanadaAdditionalInfo"}
+	i_CanadaProvincialSalesTaxIdString         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CanadaProvincialSalesTaxIdString"}
+	i_CanadaQuebecSalesTaxNumberString         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CanadaQuebecSalesTaxNumberString"}
+	i_CanadaRetailSalesTaxNumberString         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CanadaRetailSalesTaxNumberString"}
+	iCaseCreationLimitExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CaseCreationLimitExceededException"}
+	i_CcmCode                                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CcmCode"}
+	i_CertifiedEmailId                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CertifiedEmailId"}
+	iChileAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ChileAdditionalInfo"}
+	iChileDocumentType                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ChileDocumentType"}
+	i_CigNumber                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CigNumber"}
+	i_City                                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "City"}
+	iColombiaAdditionalInfo                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ColombiaAdditionalInfo"}
+	i_ColombiaResponsabilidadCode              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ColombiaResponsabilidadCode"}
+	i_ColombiaResponsabilidadesList            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ColombiaResponsabilidadesList"}
+	i_ColombiaTipoContribuyenteCode            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ColombiaTipoContribuyenteCode"}
+	iConflictException                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ConflictException"}
+	i_ContractingAuthorityCode                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ContractingAuthorityCode"}
+	i_CountryCode                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CountryCode"}
+	i_CupNumber                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CupNumber"}
+	iCustomerType                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "CustomerType"}
+	i_DateOfBirth                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DateOfBirth"}
+	i_DateString                               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DateString"}
+	i_DecisionNumber                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DecisionNumber"}
+	i_DestinationFilePath                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DestinationFilePath"}
+	iDestinationS3Location                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DestinationS3Location"}
+	i_DisplayName                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DisplayName"}
+	i_District                                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "District"}
+	i_EconomicIdentificationNumber             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "EconomicIdentificationNumber"}
+	iEgyptAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "EgyptAdditionalInfo"}
+	i_ElectronicTransactionCodeNumber          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ElectronicTransactionCodeNumber"}
+	i_EnterpriseIdentificationNumber           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "EnterpriseIdentificationNumber"}
+	iEntityExemptionAccountStatus              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "EntityExemptionAccountStatus"}
+	i_ErrorCode                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ErrorCode"}
+	i_ErrorMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ErrorMessage"}
+	iEstoniaAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "EstoniaAdditionalInfo"}
+	iExemptionCertificate                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ExemptionCertificate"}
+	i_ExemptionDocumentName                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ExemptionDocumentName"}
+	i_ExemptionFileBlob                        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ExemptionFileBlob"}
+	i_FieldName                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "FieldName"}
+	i_FileBlob                                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "FileBlob"}
+	iFranceAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "FranceAdditionalInfo"}
+	i_GenericString                            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GenericString"}
+	iGeorgiaAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GeorgiaAdditionalInfo"}
+	iGermanyAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GermanyAdditionalInfo"}
+	iGreeceAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GreeceAdditionalInfo"}
+	iHeritageStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "HeritageStatus"}
+	iIndiaAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IndiaAdditionalInfo"}
+	i_IndividualRegistrationNumber             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IndividualRegistrationNumber"}
+	iIndonesiaAdditionalInfo                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IndonesiaAdditionalInfo"}
+	iIndonesiaTaxRegistrationNumberType        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IndonesiaTaxRegistrationNumberType"}
+	iIndustries                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Industries"}
+	i_InheritanceObtainedReason                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "InheritanceObtainedReason"}
+	iInternalServerException                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "InternalServerException"}
+	iIsraelAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IsraelAdditionalInfo"}
+	iIsraelCustomerType                        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IsraelCustomerType"}
+	iIsraelDealerType                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "IsraelDealerType"}
+	iItalyAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ItalyAdditionalInfo"}
+	i_ItemOfBusiness                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ItemOfBusiness"}
+	iJurisdiction                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Jurisdiction"}
+	iKenyaAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "KenyaAdditionalInfo"}
+	i_KepEmailId                               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "KepEmailId"}
+	i_LegalName                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "LegalName"}
+	i_LegalNatureCode                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "LegalNatureCode"}
+	i_LineOfBusiness                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "LineOfBusiness"}
+	iMalaysiaAdditionalInfo                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MalaysiaAdditionalInfo"}
+	iMalaysiaServiceTaxCode                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MalaysiaServiceTaxCode"}
+	i_MalaysiaServiceTaxCodesList              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MalaysiaServiceTaxCodesList"}
+	i_MaxResults                               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MaxResults"}
+	iMexicoAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MexicoAdditionalInfo"}
+	i_MexicoCfdiUsageCode                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MexicoCfdiUsageCode"}
+	i_MexicoTaxRegimeCode                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MexicoTaxRegimeCode"}
+	i_MexicoTaxRegimeFullName                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MexicoTaxRegimeFullName"}
+	iMonacoAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "MonacoAdditionalInfo"}
+	i_PaginationTokenString                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PaginationTokenString"}
+	i_Pan                                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Pan"}
+	i_PaymentVoucherNumber                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PaymentVoucherNumber"}
+	i_PeppolId                                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PeppolId"}
+	iPersonType                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PersonType"}
+	iPhilippinesAdditionalInfo                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PhilippinesAdditionalInfo"}
+	iPolandAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PolandAdditionalInfo"}
+	iPolandTaxRegistrationNumberType           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PolandTaxRegistrationNumberType"}
+	i_PostalCode                               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PostalCode"}
+	i_PpnExceptionDesignationCode              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PpnExceptionDesignationCode"}
+	i_RegistrationId                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "RegistrationId"}
+	iRegistrationType                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "RegistrationType"}
+	i_RegistryCommercialCode                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "RegistryCommercialCode"}
+	iResourceNotFoundException                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ResourceNotFoundException"}
+	iRomaniaAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "RomaniaAdditionalInfo"}
+	i_S3BucketName                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "S3BucketName"}
+	i_S3Key                                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "S3Key"}
+	i_S3Prefix                                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "S3Prefix"}
+	iSaudiArabiaAdditionalInfo                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SaudiArabiaAdditionalInfo"}
+	iSaudiArabiaTaxRegistrationNumberType      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SaudiArabiaTaxRegistrationNumberType"}
+	i_SdiAccountId                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SdiAccountId"}
+	i_SecondaryTaxId                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SecondaryTaxId"}
+	iSector                                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Sector"}
+	i_Seller                                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Seller"}
+	i_SirenNumber                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SirenNumber"}
+	iSourceS3Location                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SourceS3Location"}
+	iSouthKoreaAdditionalInfo                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SouthKoreaAdditionalInfo"}
+	iSpainAdditionalInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SpainAdditionalInfo"}
+	i_State                                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "State"}
+	i_StatusReasonCode                         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "StatusReasonCode"}
+	i_StatusReasonMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "StatusReasonMessage"}
+	i_Steuernummer                             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Steuernummer"}
+	iSupplementalTaxRegistration               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SupplementalTaxRegistration"}
+	iSupplementalTaxRegistrationEntry          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SupplementalTaxRegistrationEntry"}
+	i_SupplementalTaxRegistrationList          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SupplementalTaxRegistrationList"}
+	iSupplementalTaxRegistrationType           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "SupplementalTaxRegistrationType"}
+	i_TaxCode                                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxCode"}
+	i_TaxDocumentAccessToken                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxDocumentAccessToken"}
+	iTaxDocumentMetadata                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxDocumentMetadata"}
+	i_TaxDocumentMetadatas                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxDocumentMetadatas"}
+	i_TaxDocumentName                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxDocumentName"}
+	iTaxExemption                              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemption"}
+	iTaxExemptionDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemptionDetails"}
+	i_TaxExemptionDetailsMap                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemptionDetailsMap"}
+	i_TaxExemptions                            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemptions"}
+	iTaxExemptionType                          = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemptionType"}
+	i_TaxExemptionTypes                        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxExemptionTypes"}
+	i_TaxInformationNumber                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxInformationNumber"}
+	iTaxInheritanceDetails                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxInheritanceDetails"}
+	i_TaxOffice                                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxOffice"}
+	iTaxRegistration                           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistration"}
+	iTaxRegistrationDocFile                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationDocFile"}
+	iTaxRegistrationDocument                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationDocument"}
+	i_TaxRegistrationDocuments                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationDocuments"}
+	iTaxRegistrationEntry                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationEntry"}
+	iTaxRegistrationNumberType                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationNumberType"}
+	iTaxRegistrationStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationStatus"}
+	iTaxRegistrationStatusReason               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationStatusReason"}
+	iTaxRegistrationType                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationType"}
+	iTaxRegistrationWithJurisdiction           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TaxRegistrationWithJurisdiction"}
+	iTurkeyAdditionalInfo                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "TurkeyAdditionalInfo"}
+	iUkraineAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "UkraineAdditionalInfo"}
+	iUkraineTrnType                            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "UkraineTrnType"}
+	i_UniqueIdentificationNumber               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "UniqueIdentificationNumber"}
+	i_Url                                      = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "Url"}
+	iUzbekistanAdditionalInfo                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "UzbekistanAdditionalInfo"}
+	iUzbekistanTaxRegistrationNumberType       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "UzbekistanTaxRegistrationNumberType"}
+	iValidationException                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ValidationException"}
+	iValidationExceptionErrorCode              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ValidationExceptionErrorCode"}
+	iValidationExceptionField                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ValidationExceptionFieldList"}
+	i_VatRegistrationNumber                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "VatRegistrationNumber"}
+	iVerificationDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "VerificationDetails"}
+	iVietnamAdditionalInfo                     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "VietnamAdditionalInfo"}
+	iBatchDeleteTaxRegistrationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchDeleteTaxRegistrationRequest"}
+	iBatchDeleteTaxRegistrationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchDeleteTaxRegistrationResponse"}
+	iBatchGetTaxExemptionsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchGetTaxExemptionsRequest"}
+	iBatchGetTaxExemptionsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchGetTaxExemptionsResponse"}
+	iBatchPutTaxRegistrationRequest            = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchPutTaxRegistrationRequest"}
+	iBatchPutTaxRegistrationResponse           = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "BatchPutTaxRegistrationResponse"}
+	iDeleteSupplementalTaxRegistrationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteSupplementalTaxRegistrationRequest"}
+	iDeleteSupplementalTaxRegistrationResponse = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteSupplementalTaxRegistrationResponse"}
+	iDeleteTaxRegistrationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteTaxRegistrationRequest"}
+	iDeleteTaxRegistrationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "DeleteTaxRegistrationResponse"}
+	iGetTaxExemptionTypesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxExemptionTypesRequest"}
+	iGetTaxExemptionTypesResponse              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxExemptionTypesResponse"}
+	iGetTaxInheritanceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxInheritanceRequest"}
+	iGetTaxInheritanceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxInheritanceResponse"}
+	iGetTaxRegistrationDocumentRequest         = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistrationDocumentRequest"}
+	iGetTaxRegistrationDocumentResponse        = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistrationDocumentResponse"}
+	iGetTaxRegistrationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistrationRequest"}
+	iGetTaxRegistrationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "GetTaxRegistrationResponse"}
+	iListSupplementalTaxRegistrationsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListSupplementalTaxRegistrationsRequest"}
+	iListSupplementalTaxRegistrationsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListSupplementalTaxRegistrationsResponse"}
+	iListTaxExemptionsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxExemptionsRequest"}
+	iListTaxExemptionsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxExemptionsResponse"}
+	iListTaxRegistrationsRequest               = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxRegistrationsRequest"}
+	iListTaxRegistrationsResponse              = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "ListTaxRegistrationsResponse"}
+	iPutSupplementalTaxRegistrationRequest     = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutSupplementalTaxRegistrationRequest"}
+	iPutSupplementalTaxRegistrationResponse    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutSupplementalTaxRegistrationResponse"}
+	iPutTaxExemptionRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxExemptionRequest"}
+	iPutTaxExemptionResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxExemptionResponse"}
+	iPutTaxInheritanceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxInheritanceRequest"}
+	iPutTaxInheritanceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxInheritanceResponse"}
+	iPutTaxRegistrationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxRegistrationRequest"}
+	iPutTaxRegistrationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.taxsettings", Name: "PutTaxRegistrationResponse"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pString                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchDeleteTaxRegistration",
-	Code: 200})
-
-var BatchGetTaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchGetTaxExemptions",
-	Code: 200})
-
-var BatchPutTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchPutTaxRegistration",
-	Code: 200})
-
-var DeleteSupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteSupplementalTaxRegistration",
-	Code: 200})
-
-var DeleteTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteTaxRegistration",
-	Code: 200})
-
-var GetTaxExemptionTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTaxExemptionTypes",
-	Code: 200})
-
-var GetTaxInheritance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTaxInheritance",
-	Code: 200})
-
-var GetTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTaxRegistration",
-	Code: 200})
-
-var GetTaxRegistrationDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocument",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTaxRegistrationDocument",
-	Code: 200})
-
-var ListSupplementalTaxRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListSupplementalTaxRegistrations",
-	Code: 200})
-
-var ListTaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTaxExemptions",
-	Code: 200})
-
-var ListTaxRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTaxRegistrations",
-	Code: 200})
-
-var PutSupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutSupplementalTaxRegistration",
-	Code: 200})
-
-var PutTaxExemption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutTaxExemption",
-	Code: 200})
-
-var PutTaxInheritance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutTaxInheritance",
-	Code: 200})
-
-var PutTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutTaxRegistration",
-	Code: 200})
-
-var _TaxSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxSettings",
-}, smithy.ShapeTypeService, 0)
-
-var TaxSettings = smithy.NewServiceSchema(_TaxSettings, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountDetails",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var AccountDetails_accountId *smithy.Schema
-
-var AccountDetails_taxRegistration *smithy.Schema
-
-var AccountDetails_taxInheritanceDetails *smithy.Schema
-
-var AccountDetails_accountMetaData *smithy.Schema
-
-var _AccountDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AccountDetailsList_member *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountIds",
-}, smithy.ShapeTypeList, 1)
-var _AccountIds_member *smithy.Schema
-
-var AccountMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountMetaData",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
-var AccountMetaData_accountName *smithy.Schema
-
-var AccountMetaData_seller *smithy.Schema
-
-var AccountMetaData_address *smithy.Schema
-
-var AccountMetaData_addressType *smithy.Schema
-
-var AccountMetaData_addressRoleMap *smithy.Schema
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0)
-
-var AdditionalInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AdditionalInfoRequest",
-}, smithy.ShapeTypeStructure, 26)
-var AdditionalInfoRequest_malaysiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_israelAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_estoniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_canadaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_spainAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_kenyaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_southKoreaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_turkeyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_georgiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_italyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_romaniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_ukraineAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_polandAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_saudiArabiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_indonesiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_vietnamAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_egyptAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_greeceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_uzbekistanAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_philippinesAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_belgiumAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_chileAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_franceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_monacoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_germanyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_mexicoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 29)
-var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_estoniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_canadaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_brazilAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_spainAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_kenyaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_southKoreaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_turkeyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_georgiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_italyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_romaniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_ukraineAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_polandAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_saudiArabiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_indiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_indonesiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_vietnamAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_egyptAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_greeceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_uzbekistanAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_philippinesAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_belgiumAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_chileAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_franceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_monacoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_germanyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_mexicoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_colombiaAdditionalInfo *smithy.Schema
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 8)
-var Address_addressLine1 *smithy.Schema
-
-var Address_addressLine2 *smithy.Schema
-
-var Address_addressLine3 *smithy.Schema
-
-var Address_districtOrCounty *smithy.Schema
-
-var Address_city *smithy.Schema
-
-var Address_stateOrRegion *smithy.Schema
-
-var Address_postalCode *smithy.Schema
-
-var Address_countryCode *smithy.Schema
-
-var _AddressLine1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine1",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressLine2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine2",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressLine3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine3",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressRoleMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressRoleMap",
-}, smithy.ShapeTypeMap, 2)
-var _AddressRoleMap_key *smithy.Schema
-
-var _AddressRoleMap_value *smithy.Schema
-
-var AddressRoleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressRoleType",
-}, smithy.ShapeTypeEnum, 3)
-var AddressRoleType_TAX_ADDRESS *smithy.Schema
-
-var AddressRoleType_BILLING_ADDRESS *smithy.Schema
-
-var AddressRoleType_CONTACT_ADDRESS *smithy.Schema
-
-var AttachmentUploadException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AttachmentUploadException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AttachmentUploadException_message *smithy.Schema
-
-var _Authorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Authorities",
-}, smithy.ShapeTypeList, 1)
-var _Authorities_member *smithy.Schema
-
-var Authority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Authority",
-}, smithy.ShapeTypeStructure, 2)
-var Authority_country *smithy.Schema
-
-var Authority_state *smithy.Schema
-
-var BatchDeleteTaxRegistrationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteTaxRegistrationError_accountId *smithy.Schema
-
-var BatchDeleteTaxRegistrationError_message *smithy.Schema
-
-var BatchDeleteTaxRegistrationError_code *smithy.Schema
-
-var _BatchDeleteTaxRegistrationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteTaxRegistrationErrors_member *smithy.Schema
-
-var BatchPutTaxRegistrationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchPutTaxRegistrationError_accountId *smithy.Schema
-
-var BatchPutTaxRegistrationError_message *smithy.Schema
-
-var BatchPutTaxRegistrationError_code *smithy.Schema
-
-var _BatchPutTaxRegistrationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchPutTaxRegistrationErrors_member *smithy.Schema
-
-var BelgiumAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BelgiumAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var BelgiumAdditionalInfo_peppolId *smithy.Schema
-
-var BelgiumAdditionalInfo_isMercuriusBoxEnabled *smithy.Schema
-
-var BrazilAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BrazilAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var BrazilAdditionalInfo_ccmCode *smithy.Schema
-
-var BrazilAdditionalInfo_legalNatureCode *smithy.Schema
-
-var _BusinessNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessRepresentativeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessRepresentativeName",
-}, smithy.ShapeTypeString, 0)
-
-var CanadaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var CanadaAdditionalInfo_provincialSalesTaxId *smithy.Schema
-
-var CanadaAdditionalInfo_canadaQuebecSalesTaxNumber *smithy.Schema
-
-var CanadaAdditionalInfo_canadaRetailSalesTaxNumber *smithy.Schema
-
-var CanadaAdditionalInfo_isResellerAccount *smithy.Schema
-
-var _CanadaProvincialSalesTaxIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaProvincialSalesTaxIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _CanadaQuebecSalesTaxNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaQuebecSalesTaxNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var _CanadaRetailSalesTaxNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaRetailSalesTaxNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var CaseCreationLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CaseCreationLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var CaseCreationLimitExceededException_message *smithy.Schema
-
-var _CcmCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CcmCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CertifiedEmailId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CertifiedEmailId",
-}, smithy.ShapeTypeString, 0)
-
-var ChileAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ChileAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ChileAdditionalInfo_documentType *smithy.Schema
-
-var ChileAdditionalInfo_businessActivity *smithy.Schema
-
-var ChileDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ChileDocumentType",
-}, smithy.ShapeTypeEnum, 2)
-var ChileDocumentType_INVOICE *smithy.Schema
-
-var ChileDocumentType_RECEIPT *smithy.Schema
-
-var _CigNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CigNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _City = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "City",
-}, smithy.ShapeTypeString, 0)
-
-var ColombiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ColombiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var ColombiaAdditionalInfo_responsibilityCodes *smithy.Schema
-
-var ColombiaAdditionalInfo_taxpayerTypeCode *smithy.Schema
-
-var ColombiaAdditionalInfo_issueDate *smithy.Schema
-
-var _ColombiaResponsabilidadCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ColombiaResponsabilidadCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ColombiaResponsabilidadesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ColombiaResponsabilidadesList",
-}, smithy.ShapeTypeList, 1)
-var _ColombiaResponsabilidadesList_member *smithy.Schema
-
-var _ColombiaTipoContribuyenteCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ColombiaTipoContribuyenteCode",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_errorCode *smithy.Schema
-
-var _ContractingAuthorityCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ContractingAuthorityCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CupNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CupNumber",
-}, smithy.ShapeTypeString, 0)
-
-var CustomerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CustomerType",
-}, smithy.ShapeTypeEnum, 2)
-var CustomerType_BUSINESS *smithy.Schema
-
-var CustomerType_INDIVIDUAL *smithy.Schema
-
-var _DateOfBirth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DateOfBirth",
-}, smithy.ShapeTypeString, 0)
-
-var _DateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DateString",
-}, smithy.ShapeTypeString, 0)
-
-var _DecisionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DecisionNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DestinationFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationS3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DestinationS3Location",
-}, smithy.ShapeTypeStructure, 2)
-var DestinationS3Location_bucket *smithy.Schema
-
-var DestinationS3Location_prefix *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _District = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "District",
-}, smithy.ShapeTypeString, 0)
-
-var _EconomicIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EconomicIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var EgyptAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EgyptAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var EgyptAdditionalInfo_uniqueIdentificationNumber *smithy.Schema
-
-var EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate *smithy.Schema
-
-var _ElectronicTransactionCodeNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ElectronicTransactionCodeNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _EnterpriseIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EnterpriseIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var EntityExemptionAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EntityExemptionAccountStatus",
-}, smithy.ShapeTypeEnum, 4)
-var EntityExemptionAccountStatus_None *smithy.Schema
-
-var EntityExemptionAccountStatus_Valid *smithy.Schema
-
-var EntityExemptionAccountStatus_Expired *smithy.Schema
-
-var EntityExemptionAccountStatus_Pending *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EstoniaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EstoniaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var EstoniaAdditionalInfo_registryCommercialCode *smithy.Schema
-
-var ExemptionCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionCertificate",
-}, smithy.ShapeTypeStructure, 2)
-var ExemptionCertificate_documentName *smithy.Schema
-
-var ExemptionCertificate_documentFile *smithy.Schema
-
-var _ExemptionDocumentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionDocumentName",
-}, smithy.ShapeTypeString, 0)
-
-var _ExemptionFileBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionFileBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _FileBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FileBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var FranceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FranceAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var FranceAdditionalInfo_sirenNumber *smithy.Schema
-
-var FranceAdditionalInfo_eInvoiceRoutingCode *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var GeorgiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GeorgiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var GeorgiaAdditionalInfo_personType *smithy.Schema
-
-var GermanyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GermanyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var GermanyAdditionalInfo_economicIdentificationNumber *smithy.Schema
-
-var GermanyAdditionalInfo_steuernummer *smithy.Schema
-
-var GreeceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GreeceAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var GreeceAdditionalInfo_contractingAuthorityCode *smithy.Schema
-
-var HeritageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "HeritageStatus",
-}, smithy.ShapeTypeEnum, 2)
-var HeritageStatus_OptIn *smithy.Schema
-
-var HeritageStatus_OptOut *smithy.Schema
-
-var IndiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var IndiaAdditionalInfo_pan *smithy.Schema
-
-var _IndividualRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndividualRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var IndonesiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndonesiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var IndonesiaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var IndonesiaAdditionalInfo_ppnExceptionDesignationCode *smithy.Schema
-
-var IndonesiaAdditionalInfo_decisionNumber *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndonesiaTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 4)
-var IndonesiaTaxRegistrationNumberType_NIK *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_NPWP *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_NITKU *smithy.Schema
-
-var Industries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Industries",
-}, smithy.ShapeTypeEnum, 6)
-var Industries_CIRCULATING_ORG *smithy.Schema
-
-var Industries_PROFESSIONAL_ORG *smithy.Schema
-
-var Industries_BANKS *smithy.Schema
-
-var Industries_INSURANCE *smithy.Schema
-
-var Industries_PENSION_AND_BENEFIT_FUNDS *smithy.Schema
-
-var Industries_DEVELOPMENT_AGENCIES *smithy.Schema
-
-var _InheritanceObtainedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "InheritanceObtainedReason",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_errorCode *smithy.Schema
-
-var IsraelAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var IsraelAdditionalInfo_dealerType *smithy.Schema
-
-var IsraelAdditionalInfo_customerType *smithy.Schema
-
-var IsraelCustomerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelCustomerType",
-}, smithy.ShapeTypeEnum, 2)
-var IsraelCustomerType_BUSINESS *smithy.Schema
-
-var IsraelCustomerType_INDIVIDUAL *smithy.Schema
-
-var IsraelDealerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelDealerType",
-}, smithy.ShapeTypeEnum, 2)
-var IsraelDealerType_AUTHORIZED *smithy.Schema
-
-var IsraelDealerType_NON_AUTHORIZED *smithy.Schema
-
-var ItalyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ItalyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 5)
-var ItalyAdditionalInfo_sdiAccountId *smithy.Schema
-
-var ItalyAdditionalInfo_cigNumber *smithy.Schema
-
-var ItalyAdditionalInfo_cupNumber *smithy.Schema
-
-var ItalyAdditionalInfo_taxCode *smithy.Schema
-
-var ItalyAdditionalInfo_customerType *smithy.Schema
-
-var _ItemOfBusiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ItemOfBusiness",
-}, smithy.ShapeTypeString, 0)
-
-var Jurisdiction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Jurisdiction",
-}, smithy.ShapeTypeStructure, 2)
-var Jurisdiction_stateOrRegion *smithy.Schema
-
-var Jurisdiction_countryCode *smithy.Schema
-
-var KenyaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "KenyaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var KenyaAdditionalInfo_personType *smithy.Schema
-
-var _KepEmailId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "KepEmailId",
-}, smithy.ShapeTypeString, 0)
-
-var _LegalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LegalName",
-}, smithy.ShapeTypeString, 0)
-
-var _LegalNatureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LegalNatureCode",
-}, smithy.ShapeTypeString, 0)
-
-var _LineOfBusiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LineOfBusiness",
-}, smithy.ShapeTypeString, 0)
-
-var MalaysiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MalaysiaAdditionalInfo_serviceTaxCodes *smithy.Schema
-
-var MalaysiaAdditionalInfo_taxInformationNumber *smithy.Schema
-
-var MalaysiaAdditionalInfo_businessRegistrationNumber *smithy.Schema
-
-var MalaysiaServiceTaxCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaServiceTaxCode",
-}, smithy.ShapeTypeEnum, 4)
-var MalaysiaServiceTaxCode_CONSULTANCY *smithy.Schema
-
-var MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM *smithy.Schema
-
-var MalaysiaServiceTaxCode_IT_SERVICES *smithy.Schema
-
-var MalaysiaServiceTaxCode_TRAINING_OR_COACHING *smithy.Schema
-
-var _MalaysiaServiceTaxCodesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaServiceTaxCodesList",
-}, smithy.ShapeTypeList, 1)
-var _MalaysiaServiceTaxCodesList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MexicoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MexicoAdditionalInfo_taxRegime *smithy.Schema
-
-var MexicoAdditionalInfo_taxRegimeFullName *smithy.Schema
-
-var MexicoAdditionalInfo_cfdiUsageCode *smithy.Schema
-
-var _MexicoCfdiUsageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoCfdiUsageCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MexicoTaxRegimeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoTaxRegimeCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MexicoTaxRegimeFullName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoTaxRegimeFullName",
-}, smithy.ShapeTypeString, 0)
-
-var MonacoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MonacoAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var MonacoAdditionalInfo_businessNumber *smithy.Schema
-
-var _PaginationTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PaginationTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _Pan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Pan",
-}, smithy.ShapeTypeString, 0)
-
-var _PaymentVoucherNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PaymentVoucherNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _PeppolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PeppolId",
-}, smithy.ShapeTypeString, 0)
-
-var PersonType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PersonType",
-}, smithy.ShapeTypeEnum, 3)
-var PersonType_LEGAL_PERSON *smithy.Schema
-
-var PersonType_PHYSICAL_PERSON *smithy.Schema
-
-var PersonType_BUSINESS *smithy.Schema
-
-var PhilippinesAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PhilippinesAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var PhilippinesAdditionalInfo_isVatRegistered *smithy.Schema
-
-var PolandAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PolandAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var PolandAdditionalInfo_individualRegistrationNumber *smithy.Schema
-
-var PolandAdditionalInfo_isGroupVatEnabled *smithy.Schema
-
-var PolandAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var PolandTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PolandTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 3)
-var PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER *smithy.Schema
-
-var _PostalCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PostalCode",
-}, smithy.ShapeTypeString, 0)
-
-var _PpnExceptionDesignationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PpnExceptionDesignationCode",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistrationId",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistrationType",
-}, smithy.ShapeTypeEnum, 2)
-var RegistrationType_INTRA_EU *smithy.Schema
-
-var RegistrationType_LOCAL *smithy.Schema
-
-var _RegistryCommercialCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistryCommercialCode",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_errorCode *smithy.Schema
-
-var RomaniaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RomaniaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var RomaniaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var SaudiArabiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SaudiArabiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var SaudiArabiaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SaudiArabiaTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 3)
-var SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER *smithy.Schema
-
-var _SdiAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SdiAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecondaryTaxId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SecondaryTaxId",
-}, smithy.ShapeTypeString, 0)
-
-var Sector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Sector",
-}, smithy.ShapeTypeEnum, 3)
-var Sector_BUSINESS *smithy.Schema
-
-var Sector_INDIVIDUAL *smithy.Schema
-
-var Sector_PUBLIC_INSTITUTIONS *smithy.Schema
-
-var _Seller = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Seller",
-}, smithy.ShapeTypeString, 0)
-
-var _SirenNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SirenNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SourceS3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SourceS3Location",
-}, smithy.ShapeTypeStructure, 2)
-var SourceS3Location_bucket *smithy.Schema
-
-var SourceS3Location_key *smithy.Schema
-
-var SouthKoreaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SouthKoreaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var SouthKoreaAdditionalInfo_businessRepresentativeName *smithy.Schema
-
-var SouthKoreaAdditionalInfo_lineOfBusiness *smithy.Schema
-
-var SouthKoreaAdditionalInfo_itemOfBusiness *smithy.Schema
-
-var SpainAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SpainAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var SpainAdditionalInfo_registrationType *smithy.Schema
-
-var _State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "State",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "StatusReasonCode",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusReasonMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "StatusReasonMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Steuernummer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Steuernummer",
-}, smithy.ShapeTypeString, 0)
-
-var SupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistration",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.Sensitive{})
-var SupplementalTaxRegistration_registrationId *smithy.Schema
-
-var SupplementalTaxRegistration_registrationType *smithy.Schema
-
-var SupplementalTaxRegistration_legalName *smithy.Schema
-
-var SupplementalTaxRegistration_address *smithy.Schema
-
-var SupplementalTaxRegistration_authorityId *smithy.Schema
-
-var SupplementalTaxRegistration_status *smithy.Schema
-
-var SupplementalTaxRegistrationEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationEntry",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var SupplementalTaxRegistrationEntry_registrationId *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_registrationType *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_legalName *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_address *smithy.Schema
-
-var _SupplementalTaxRegistrationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationList",
-}, smithy.ShapeTypeList, 1)
-var _SupplementalTaxRegistrationList_member *smithy.Schema
-
-var SupplementalTaxRegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationType",
-}, smithy.ShapeTypeEnum, 1)
-var SupplementalTaxRegistrationType_VAT *smithy.Schema
-
-var _TaxCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxCode",
-}, smithy.ShapeTypeString, 0)
-
-var _TaxDocumentAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentAccessToken",
-}, smithy.ShapeTypeString, 0)
-
-var TaxDocumentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var TaxDocumentMetadata_taxDocumentAccessToken *smithy.Schema
-
-var TaxDocumentMetadata_taxDocumentName *smithy.Schema
-
-var _TaxDocumentMetadatas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentMetadatas",
-}, smithy.ShapeTypeList, 1)
-var _TaxDocumentMetadatas_member *smithy.Schema
-
-var _TaxDocumentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentName",
-}, smithy.ShapeTypeString, 0)
-
-var TaxExemption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemption",
-}, smithy.ShapeTypeStructure, 6)
-var TaxExemption_authority *smithy.Schema
-
-var TaxExemption_taxExemptionType *smithy.Schema
-
-var TaxExemption_effectiveDate *smithy.Schema
-
-var TaxExemption_expirationDate *smithy.Schema
-
-var TaxExemption_systemEffectiveDate *smithy.Schema
-
-var TaxExemption_status *smithy.Schema
-
-var TaxExemptionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionDetails",
-}, smithy.ShapeTypeStructure, 4)
-var TaxExemptionDetails_taxExemptions *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedDetails *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedParentEntity *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedReason *smithy.Schema
-
-var _TaxExemptionDetailsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionDetailsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TaxExemptionDetailsMap_key *smithy.Schema
-
-var _TaxExemptionDetailsMap_value *smithy.Schema
-
-var _TaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptions",
-}, smithy.ShapeTypeList, 1)
-var _TaxExemptions_member *smithy.Schema
-
-var TaxExemptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionType",
-}, smithy.ShapeTypeStructure, 3)
-var TaxExemptionType_displayName *smithy.Schema
-
-var TaxExemptionType_description *smithy.Schema
-
-var TaxExemptionType_applicableJurisdictions *smithy.Schema
-
-var _TaxExemptionTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionTypes",
-}, smithy.ShapeTypeList, 1)
-var _TaxExemptionTypes_member *smithy.Schema
-
-var _TaxInformationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxInformationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var TaxInheritanceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxInheritanceDetails",
-}, smithy.ShapeTypeStructure, 2)
-var TaxInheritanceDetails_parentEntityId *smithy.Schema
-
-var TaxInheritanceDetails_inheritanceObtainedReason *smithy.Schema
-
-var _TaxOffice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxOffice",
-}, smithy.ShapeTypeString, 0)
-
-var TaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistration",
-}, smithy.ShapeTypeStructure, 10, &smithytraits.Sensitive{})
-var TaxRegistration_registrationId *smithy.Schema
-
-var TaxRegistration_registrationType *smithy.Schema
-
-var TaxRegistration_legalName *smithy.Schema
-
-var TaxRegistration_status *smithy.Schema
-
-var TaxRegistration_sector *smithy.Schema
-
-var TaxRegistration_taxDocumentMetadatas *smithy.Schema
-
-var TaxRegistration_certifiedEmailId *smithy.Schema
-
-var TaxRegistration_additionalTaxInformation *smithy.Schema
-
-var TaxRegistration_statusReason *smithy.Schema
-
-var TaxRegistration_legalAddress *smithy.Schema
-
-var TaxRegistrationDocFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocFile",
-}, smithy.ShapeTypeStructure, 2)
-var TaxRegistrationDocFile_fileName *smithy.Schema
-
-var TaxRegistrationDocFile_fileContent *smithy.Schema
-
-var TaxRegistrationDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocument",
-}, smithy.ShapeTypeStructure, 2)
-var TaxRegistrationDocument_s3Location *smithy.Schema
-
-var TaxRegistrationDocument_file *smithy.Schema
-
-var _TaxRegistrationDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocuments",
-}, smithy.ShapeTypeList, 1)
-var _TaxRegistrationDocuments_member *smithy.Schema
-
-var TaxRegistrationEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationEntry",
-}, smithy.ShapeTypeStructure, 8, &smithytraits.Sensitive{})
-var TaxRegistrationEntry_registrationId *smithy.Schema
-
-var TaxRegistrationEntry_registrationType *smithy.Schema
-
-var TaxRegistrationEntry_legalName *smithy.Schema
-
-var TaxRegistrationEntry_legalAddress *smithy.Schema
-
-var TaxRegistrationEntry_sector *smithy.Schema
-
-var TaxRegistrationEntry_additionalTaxInformation *smithy.Schema
-
-var TaxRegistrationEntry_verificationDetails *smithy.Schema
-
-var TaxRegistrationEntry_certifiedEmailId *smithy.Schema
-
-var TaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER *smithy.Schema
-
-var TaxRegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TaxRegistrationStatus_VERIFIED *smithy.Schema
-
-var TaxRegistrationStatus_PENDING *smithy.Schema
-
-var TaxRegistrationStatus_DELETED *smithy.Schema
-
-var TaxRegistrationStatus_REJECTED *smithy.Schema
-
-var TaxRegistrationStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationStatusReason",
-}, smithy.ShapeTypeStructure, 2)
-var TaxRegistrationStatusReason_code *smithy.Schema
-
-var TaxRegistrationStatusReason_message *smithy.Schema
-
-var TaxRegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationType",
-}, smithy.ShapeTypeEnum, 14)
-var TaxRegistrationType_VAT *smithy.Schema
-
-var TaxRegistrationType_GST *smithy.Schema
-
-var TaxRegistrationType_CPF *smithy.Schema
-
-var TaxRegistrationType_CNPJ *smithy.Schema
-
-var TaxRegistrationType_SST *smithy.Schema
-
-var TaxRegistrationType_TIN *smithy.Schema
-
-var TaxRegistrationType_NRIC *smithy.Schema
-
-var TaxRegistrationType_PAN *smithy.Schema
-
-var TaxRegistrationType_NIP *smithy.Schema
-
-var TaxRegistrationType_CUIT *smithy.Schema
-
-var TaxRegistrationType_CDI *smithy.Schema
-
-var TaxRegistrationType_RUT *smithy.Schema
-
-var TaxRegistrationType_NIE *smithy.Schema
-
-var TaxRegistrationType_CI *smithy.Schema
-
-var TaxRegistrationWithJurisdiction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationWithJurisdiction",
-}, smithy.ShapeTypeStructure, 10, &smithytraits.Sensitive{})
-var TaxRegistrationWithJurisdiction_registrationId *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_registrationType *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_legalName *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_status *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_sector *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_taxDocumentMetadatas *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_certifiedEmailId *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_additionalTaxInformation *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_statusReason *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_jurisdiction *smithy.Schema
-
-var TurkeyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TurkeyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var TurkeyAdditionalInfo_taxOffice *smithy.Schema
-
-var TurkeyAdditionalInfo_kepEmailId *smithy.Schema
-
-var TurkeyAdditionalInfo_secondaryTaxId *smithy.Schema
-
-var TurkeyAdditionalInfo_industries *smithy.Schema
-
-var UkraineAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UkraineAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var UkraineAdditionalInfo_ukraineTrnType *smithy.Schema
-
-var UkraineTrnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UkraineTrnType",
-}, smithy.ShapeTypeEnum, 2)
-var UkraineTrnType_BUSINESS *smithy.Schema
-
-var UkraineTrnType_INDIVIDUAL *smithy.Schema
-
-var _UniqueIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UniqueIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var UzbekistanAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UzbekistanAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var UzbekistanAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var UzbekistanAdditionalInfo_vatRegistrationNumber *smithy.Schema
-
-var UzbekistanTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UzbekistanTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var UzbekistanTaxRegistrationNumberType_BUSINESS *smithy.Schema
-
-var UzbekistanTaxRegistrationNumberType_INDIVIDUAL *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_errorCode *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 7)
-var ValidationExceptionErrorCode_MALFORMED_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_EXPIRED_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionErrorCode_MISSING_INPUT *smithy.Schema
-
-var ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN *smithy.Schema
-
-var ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationExceptionField_name *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _VatRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VatRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var VerificationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VerificationDetails",
-}, smithy.ShapeTypeStructure, 2)
-var VerificationDetails_dateOfBirth *smithy.Schema
-
-var VerificationDetails_taxRegistrationDocuments *smithy.Schema
-
-var VietnamAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VietnamAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VietnamAdditionalInfo_enterpriseIdentificationNumber *smithy.Schema
-
-var VietnamAdditionalInfo_electronicTransactionCodeNumber *smithy.Schema
-
-var VietnamAdditionalInfo_paymentVoucherNumber *smithy.Schema
-
-var VietnamAdditionalInfo_paymentVoucherNumberDate *smithy.Schema
-
-var BatchDeleteTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteTaxRegistrationRequest_accountIds *smithy.Schema
-
-var BatchDeleteTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteTaxRegistrationResponse_errors *smithy.Schema
-
-var BatchGetTaxExemptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetTaxExemptionsRequest_accountIds *smithy.Schema
-
-var BatchGetTaxExemptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetTaxExemptionsResponse_taxExemptionDetailsMap *smithy.Schema
-
-var BatchGetTaxExemptionsResponse_failedAccounts *smithy.Schema
-
-var BatchPutTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutTaxRegistrationRequest_accountIds *smithy.Schema
-
-var BatchPutTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var BatchPutTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutTaxRegistrationResponse_status *smithy.Schema
-
-var BatchPutTaxRegistrationResponse_errors *smithy.Schema
-
-var DeleteSupplementalTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSupplementalTaxRegistrationRequest_authorityId *smithy.Schema
-
-var DeleteSupplementalTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTaxRegistrationRequest_accountId *smithy.Schema
-
-var DeleteTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxExemptionTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxExemptionTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxExemptionTypesResponse_taxExemptionTypes *smithy.Schema
-
-var GetTaxInheritanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritanceRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxInheritanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritanceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxInheritanceResponse_heritageStatus *smithy.Schema
-
-var GetTaxRegistrationDocumentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocumentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTaxRegistrationDocumentRequest_destinationS3Location *smithy.Schema
-
-var GetTaxRegistrationDocumentRequest_taxDocumentMetadata *smithy.Schema
-
-var GetTaxRegistrationDocumentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocumentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTaxRegistrationDocumentResponse_destinationFilePath *smithy.Schema
-
-var GetTaxRegistrationDocumentResponse_presignedS3Url *smithy.Schema
-
-var GetTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxRegistrationRequest_accountId *smithy.Schema
-
-var GetTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxRegistrationResponse_taxRegistration *smithy.Schema
-
-var ListSupplementalTaxRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupplementalTaxRegistrationsRequest_maxResults *smithy.Schema
-
-var ListSupplementalTaxRegistrationsRequest_nextToken *smithy.Schema
-
-var ListSupplementalTaxRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupplementalTaxRegistrationsResponse_taxRegistrations *smithy.Schema
-
-var ListSupplementalTaxRegistrationsResponse_nextToken *smithy.Schema
-
-var ListTaxExemptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxExemptionsRequest_maxResults *smithy.Schema
-
-var ListTaxExemptionsRequest_nextToken *smithy.Schema
-
-var ListTaxExemptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxExemptionsResponse_nextToken *smithy.Schema
-
-var ListTaxExemptionsResponse_taxExemptionDetailsMap *smithy.Schema
-
-var ListTaxRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxRegistrationsRequest_maxResults *smithy.Schema
-
-var ListTaxRegistrationsRequest_nextToken *smithy.Schema
-
-var ListTaxRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxRegistrationsResponse_accountDetails *smithy.Schema
-
-var ListTaxRegistrationsResponse_nextToken *smithy.Schema
-
-var PutSupplementalTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutSupplementalTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var PutSupplementalTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutSupplementalTaxRegistrationResponse_authorityId *smithy.Schema
-
-var PutSupplementalTaxRegistrationResponse_status *smithy.Schema
-
-var PutTaxExemptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemptionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutTaxExemptionRequest_accountIds *smithy.Schema
-
-var PutTaxExemptionRequest_authority *smithy.Schema
-
-var PutTaxExemptionRequest_exemptionType *smithy.Schema
-
-var PutTaxExemptionRequest_exemptionCertificate *smithy.Schema
-
-var PutTaxExemptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxExemptionResponse_caseId *smithy.Schema
-
-var PutTaxInheritanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxInheritanceRequest_heritageStatus *smithy.Schema
-
-var PutTaxInheritanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritanceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTaxRegistrationRequest_accountId *smithy.Schema
-
-var PutTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var PutTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxRegistrationResponse_status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	TaxRegistrationType_VAT = TaxRegistrationType.AddMember("VAT", smithyprelude.Unit)
-
-	TaxRegistrationType_GST = TaxRegistrationType.AddMember("GST", smithyprelude.Unit)
-
-	TaxRegistrationType_CPF = TaxRegistrationType.AddMember("CPF", smithyprelude.Unit)
-
-	TaxRegistrationType_CNPJ = TaxRegistrationType.AddMember("CNPJ", smithyprelude.Unit)
-
-	TaxRegistrationType_SST = TaxRegistrationType.AddMember("SST", smithyprelude.Unit)
-
-	TaxRegistrationType_TIN = TaxRegistrationType.AddMember("TIN", smithyprelude.Unit)
-
-	TaxRegistrationType_NRIC = TaxRegistrationType.AddMember("NRIC", smithyprelude.Unit)
-
-	TaxRegistrationType_PAN = TaxRegistrationType.AddMember("PAN", smithyprelude.Unit)
-
-	TaxRegistrationType_NIP = TaxRegistrationType.AddMember("NIP", smithyprelude.Unit)
-
-	TaxRegistrationType_CUIT = TaxRegistrationType.AddMember("CUIT", smithyprelude.Unit)
-
-	TaxRegistrationType_CDI = TaxRegistrationType.AddMember("CDI", smithyprelude.Unit)
-
-	TaxRegistrationType_RUT = TaxRegistrationType.AddMember("RUT", smithyprelude.Unit)
-
-	TaxRegistrationType_NIE = TaxRegistrationType.AddMember("NIE", smithyprelude.Unit)
-
-	TaxRegistrationType_CI = TaxRegistrationType.AddMember("CI", smithyprelude.Unit)
-
-	TaxRegistrationStatus_VERIFIED = TaxRegistrationStatus.AddMember("VERIFIED", smithyprelude.Unit)
-
-	TaxRegistrationStatus_PENDING = TaxRegistrationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	TaxRegistrationStatus_DELETED = TaxRegistrationStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	TaxRegistrationStatus_REJECTED = TaxRegistrationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	Sector_BUSINESS = Sector.AddMember("BUSINESS", smithyprelude.Unit)
-
-	Sector_INDIVIDUAL = Sector.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	Sector_PUBLIC_INSTITUTIONS = Sector.AddMember("PUBLIC_INSTITUTIONS", smithyprelude.Unit)
-
-	TaxDocumentMetadata_taxDocumentAccessToken = TaxDocumentMetadata.AddMember("taxDocumentAccessToken", _TaxDocumentAccessToken)
-
-	TaxDocumentMetadata_taxDocumentName = TaxDocumentMetadata.AddMember("taxDocumentName", _TaxDocumentName)
-
-	_TaxDocumentMetadatas_member = _TaxDocumentMetadatas.AddMember("member", TaxDocumentMetadata)
-
-	MalaysiaServiceTaxCode_CONSULTANCY = MalaysiaServiceTaxCode.AddMember("CONSULTANCY", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM = MalaysiaServiceTaxCode.AddMember("DIGITAL_SVC_ELECTRONIC_MEDIUM", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_IT_SERVICES = MalaysiaServiceTaxCode.AddMember("IT_SERVICES", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_TRAINING_OR_COACHING = MalaysiaServiceTaxCode.AddMember("TRAINING_OR_COACHING", smithyprelude.Unit)
-
-	_MalaysiaServiceTaxCodesList_member = _MalaysiaServiceTaxCodesList.AddMember("member", MalaysiaServiceTaxCode)
-
-	MalaysiaAdditionalInfo_serviceTaxCodes = MalaysiaAdditionalInfo.AddMember("serviceTaxCodes", _MalaysiaServiceTaxCodesList)
-
-	MalaysiaAdditionalInfo_taxInformationNumber = MalaysiaAdditionalInfo.AddMember("taxInformationNumber", _TaxInformationNumber)
-
-	MalaysiaAdditionalInfo_businessRegistrationNumber = MalaysiaAdditionalInfo.AddMember("businessRegistrationNumber", _BusinessRegistrationNumber)
-
-	IsraelDealerType_AUTHORIZED = IsraelDealerType.AddMember("AUTHORIZED", smithyprelude.Unit)
-
-	IsraelDealerType_NON_AUTHORIZED = IsraelDealerType.AddMember("NON_AUTHORIZED", smithyprelude.Unit)
-
-	IsraelCustomerType_BUSINESS = IsraelCustomerType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	IsraelCustomerType_INDIVIDUAL = IsraelCustomerType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	IsraelAdditionalInfo_dealerType = IsraelAdditionalInfo.AddMember("dealerType", IsraelDealerType)
-
-	IsraelAdditionalInfo_customerType = IsraelAdditionalInfo.AddMember("customerType", IsraelCustomerType)
-
-	EstoniaAdditionalInfo_registryCommercialCode = EstoniaAdditionalInfo.AddMember("registryCommercialCode", _RegistryCommercialCode)
-
-	CanadaAdditionalInfo_provincialSalesTaxId = CanadaAdditionalInfo.AddMember("provincialSalesTaxId", _CanadaProvincialSalesTaxIdString)
-
-	CanadaAdditionalInfo_canadaQuebecSalesTaxNumber = CanadaAdditionalInfo.AddMember("canadaQuebecSalesTaxNumber", _CanadaQuebecSalesTaxNumberString)
-
-	CanadaAdditionalInfo_canadaRetailSalesTaxNumber = CanadaAdditionalInfo.AddMember("canadaRetailSalesTaxNumber", _CanadaRetailSalesTaxNumberString)
-
-	CanadaAdditionalInfo_isResellerAccount = CanadaAdditionalInfo.AddMember("isResellerAccount", smithyprelude.Boolean)
-
-	BrazilAdditionalInfo_ccmCode = BrazilAdditionalInfo.AddMember("ccmCode", _CcmCode)
-
-	BrazilAdditionalInfo_legalNatureCode = BrazilAdditionalInfo.AddMember("legalNatureCode", _LegalNatureCode)
-
-	RegistrationType_INTRA_EU = RegistrationType.AddMember("INTRA_EU", smithyprelude.Unit)
-
-	RegistrationType_LOCAL = RegistrationType.AddMember("LOCAL", smithyprelude.Unit)
-
-	SpainAdditionalInfo_registrationType = SpainAdditionalInfo.AddMember("registrationType", RegistrationType)
-
-	PersonType_LEGAL_PERSON = PersonType.AddMember("LEGAL_PERSON", smithyprelude.Unit)
-
-	PersonType_PHYSICAL_PERSON = PersonType.AddMember("PHYSICAL_PERSON", smithyprelude.Unit)
-
-	PersonType_BUSINESS = PersonType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	KenyaAdditionalInfo_personType = KenyaAdditionalInfo.AddMember("personType", PersonType)
-
-	SouthKoreaAdditionalInfo_businessRepresentativeName = SouthKoreaAdditionalInfo.AddMember("businessRepresentativeName", _BusinessRepresentativeName)
-
-	SouthKoreaAdditionalInfo_lineOfBusiness = SouthKoreaAdditionalInfo.AddMember("lineOfBusiness", _LineOfBusiness)
-
-	SouthKoreaAdditionalInfo_itemOfBusiness = SouthKoreaAdditionalInfo.AddMember("itemOfBusiness", _ItemOfBusiness)
-
-	Industries_CIRCULATING_ORG = Industries.AddMember("CIRCULATING_ORG", smithyprelude.Unit)
-
-	Industries_PROFESSIONAL_ORG = Industries.AddMember("PROFESSIONAL_ORG", smithyprelude.Unit)
-
-	Industries_BANKS = Industries.AddMember("BANKS", smithyprelude.Unit)
-
-	Industries_INSURANCE = Industries.AddMember("INSURANCE", smithyprelude.Unit)
-
-	Industries_PENSION_AND_BENEFIT_FUNDS = Industries.AddMember("PENSION_AND_BENEFIT_FUNDS", smithyprelude.Unit)
-
-	Industries_DEVELOPMENT_AGENCIES = Industries.AddMember("DEVELOPMENT_AGENCIES", smithyprelude.Unit)
-
-	TurkeyAdditionalInfo_taxOffice = TurkeyAdditionalInfo.AddMember("taxOffice", _TaxOffice)
-
-	TurkeyAdditionalInfo_kepEmailId = TurkeyAdditionalInfo.AddMember("kepEmailId", _KepEmailId)
-
-	TurkeyAdditionalInfo_secondaryTaxId = TurkeyAdditionalInfo.AddMember("secondaryTaxId", _SecondaryTaxId)
-
-	TurkeyAdditionalInfo_industries = TurkeyAdditionalInfo.AddMember("industries", Industries)
-
-	GeorgiaAdditionalInfo_personType = GeorgiaAdditionalInfo.AddMember("personType", PersonType)
-
-	CustomerType_BUSINESS = CustomerType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	CustomerType_INDIVIDUAL = CustomerType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	ItalyAdditionalInfo_sdiAccountId = ItalyAdditionalInfo.AddMember("sdiAccountId", _SdiAccountId)
-
-	ItalyAdditionalInfo_cigNumber = ItalyAdditionalInfo.AddMember("cigNumber", _CigNumber)
-
-	ItalyAdditionalInfo_cupNumber = ItalyAdditionalInfo.AddMember("cupNumber", _CupNumber)
-
-	ItalyAdditionalInfo_taxCode = ItalyAdditionalInfo.AddMember("taxCode", _TaxCode)
-
-	ItalyAdditionalInfo_customerType = ItalyAdditionalInfo.AddMember("customerType", CustomerType)
-
-	TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = TaxRegistrationNumberType.AddMember("TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = TaxRegistrationNumberType.AddMember("LOCAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	RomaniaAdditionalInfo_taxRegistrationNumberType = RomaniaAdditionalInfo.AddMember("taxRegistrationNumberType", TaxRegistrationNumberType)
-
-	UkraineTrnType_BUSINESS = UkraineTrnType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	UkraineTrnType_INDIVIDUAL = UkraineTrnType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	UkraineAdditionalInfo_ukraineTrnType = UkraineAdditionalInfo.AddMember("ukraineTrnType", UkraineTrnType)
-
-	PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("EU_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("LOCAL_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("LOCAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandAdditionalInfo_individualRegistrationNumber = PolandAdditionalInfo.AddMember("individualRegistrationNumber", _IndividualRegistrationNumber)
-
-	PolandAdditionalInfo_isGroupVatEnabled = PolandAdditionalInfo.AddMember("isGroupVatEnabled", smithyprelude.Boolean)
-
-	PolandAdditionalInfo_taxRegistrationNumberType = PolandAdditionalInfo.AddMember("taxRegistrationNumberType", PolandTaxRegistrationNumberType)
-
-	SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("COMMERCIAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaAdditionalInfo_taxRegistrationNumberType = SaudiArabiaAdditionalInfo.AddMember("taxRegistrationNumberType", SaudiArabiaTaxRegistrationNumberType)
-
-	IndiaAdditionalInfo_pan = IndiaAdditionalInfo.AddMember("pan", _Pan)
-
-	IndonesiaTaxRegistrationNumberType_NIK = IndonesiaTaxRegistrationNumberType.AddMember("NIK", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER = IndonesiaTaxRegistrationNumberType.AddMember("PASSPORT_NUMBER", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_NPWP = IndonesiaTaxRegistrationNumberType.AddMember("NPWP", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_NITKU = IndonesiaTaxRegistrationNumberType.AddMember("NITKU", smithyprelude.Unit)
-
-	IndonesiaAdditionalInfo_taxRegistrationNumberType = IndonesiaAdditionalInfo.AddMember("taxRegistrationNumberType", IndonesiaTaxRegistrationNumberType)
-
-	IndonesiaAdditionalInfo_ppnExceptionDesignationCode = IndonesiaAdditionalInfo.AddMember("ppnExceptionDesignationCode", _PpnExceptionDesignationCode)
-
-	IndonesiaAdditionalInfo_decisionNumber = IndonesiaAdditionalInfo.AddMember("decisionNumber", _DecisionNumber)
-
-	VietnamAdditionalInfo_enterpriseIdentificationNumber = VietnamAdditionalInfo.AddMember("enterpriseIdentificationNumber", _EnterpriseIdentificationNumber)
-
-	VietnamAdditionalInfo_electronicTransactionCodeNumber = VietnamAdditionalInfo.AddMember("electronicTransactionCodeNumber", _ElectronicTransactionCodeNumber)
-
-	VietnamAdditionalInfo_paymentVoucherNumber = VietnamAdditionalInfo.AddMember("paymentVoucherNumber", _PaymentVoucherNumber)
-
-	VietnamAdditionalInfo_paymentVoucherNumberDate = VietnamAdditionalInfo.AddMember("paymentVoucherNumberDate", _DateString)
-
-	EgyptAdditionalInfo_uniqueIdentificationNumber = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumber", _UniqueIdentificationNumber)
-
-	EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumberExpirationDate", _DateString)
-
-	GreeceAdditionalInfo_contractingAuthorityCode = GreeceAdditionalInfo.AddMember("contractingAuthorityCode", _ContractingAuthorityCode)
-
-	UzbekistanTaxRegistrationNumberType_BUSINESS = UzbekistanTaxRegistrationNumberType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	UzbekistanTaxRegistrationNumberType_INDIVIDUAL = UzbekistanTaxRegistrationNumberType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	UzbekistanAdditionalInfo_taxRegistrationNumberType = UzbekistanAdditionalInfo.AddMember("taxRegistrationNumberType", UzbekistanTaxRegistrationNumberType)
-
-	UzbekistanAdditionalInfo_vatRegistrationNumber = UzbekistanAdditionalInfo.AddMember("vatRegistrationNumber", _VatRegistrationNumber)
-
-	PhilippinesAdditionalInfo_isVatRegistered = PhilippinesAdditionalInfo.AddMember("isVatRegistered", smithyprelude.Boolean)
-
-	BelgiumAdditionalInfo_peppolId = BelgiumAdditionalInfo.AddMember("peppolId", _PeppolId)
-
-	BelgiumAdditionalInfo_isMercuriusBoxEnabled = BelgiumAdditionalInfo.AddMember("isMercuriusBoxEnabled", smithyprelude.Boolean)
-
-	ChileDocumentType_INVOICE = ChileDocumentType.AddMember("INVOICE", smithyprelude.Unit)
-
-	ChileDocumentType_RECEIPT = ChileDocumentType.AddMember("RECEIPT", smithyprelude.Unit)
-
-	ChileAdditionalInfo_documentType = ChileAdditionalInfo.AddMember("documentType", ChileDocumentType)
-
-	ChileAdditionalInfo_businessActivity = ChileAdditionalInfo.AddMember("businessActivity", _GenericString)
-
-	FranceAdditionalInfo_sirenNumber = FranceAdditionalInfo.AddMember("sirenNumber", _SirenNumber)
-
-	FranceAdditionalInfo_eInvoiceRoutingCode = FranceAdditionalInfo.AddMember("eInvoiceRoutingCode", smithyprelude.String)
-
-	MonacoAdditionalInfo_businessNumber = MonacoAdditionalInfo.AddMember("businessNumber", _BusinessNumber)
-
-	GermanyAdditionalInfo_economicIdentificationNumber = GermanyAdditionalInfo.AddMember("economicIdentificationNumber", _EconomicIdentificationNumber)
-
-	GermanyAdditionalInfo_steuernummer = GermanyAdditionalInfo.AddMember("steuernummer", _Steuernummer)
-
-	MexicoAdditionalInfo_taxRegime = MexicoAdditionalInfo.AddMember("taxRegime", _MexicoTaxRegimeCode)
-
-	MexicoAdditionalInfo_taxRegimeFullName = MexicoAdditionalInfo.AddMember("taxRegimeFullName", _MexicoTaxRegimeFullName)
-
-	MexicoAdditionalInfo_cfdiUsageCode = MexicoAdditionalInfo.AddMember("cfdiUsageCode", _MexicoCfdiUsageCode)
-
-	_ColombiaResponsabilidadesList_member = _ColombiaResponsabilidadesList.AddMember("member", _ColombiaResponsabilidadCode)
-
-	ColombiaAdditionalInfo_responsibilityCodes = ColombiaAdditionalInfo.AddMember("responsibilityCodes", _ColombiaResponsabilidadesList)
-
-	ColombiaAdditionalInfo_taxpayerTypeCode = ColombiaAdditionalInfo.AddMember("taxpayerTypeCode", _ColombiaTipoContribuyenteCode)
-
-	ColombiaAdditionalInfo_issueDate = ColombiaAdditionalInfo.AddMember("issueDate", _DateString)
-
-	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
-
-	AdditionalInfoResponse_israelAdditionalInfo = AdditionalInfoResponse.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
-
-	AdditionalInfoResponse_estoniaAdditionalInfo = AdditionalInfoResponse.AddMember("estoniaAdditionalInfo", EstoniaAdditionalInfo)
-
-	AdditionalInfoResponse_canadaAdditionalInfo = AdditionalInfoResponse.AddMember("canadaAdditionalInfo", CanadaAdditionalInfo)
-
-	AdditionalInfoResponse_brazilAdditionalInfo = AdditionalInfoResponse.AddMember("brazilAdditionalInfo", BrazilAdditionalInfo)
-
-	AdditionalInfoResponse_spainAdditionalInfo = AdditionalInfoResponse.AddMember("spainAdditionalInfo", SpainAdditionalInfo)
-
-	AdditionalInfoResponse_kenyaAdditionalInfo = AdditionalInfoResponse.AddMember("kenyaAdditionalInfo", KenyaAdditionalInfo)
-
-	AdditionalInfoResponse_southKoreaAdditionalInfo = AdditionalInfoResponse.AddMember("southKoreaAdditionalInfo", SouthKoreaAdditionalInfo)
-
-	AdditionalInfoResponse_turkeyAdditionalInfo = AdditionalInfoResponse.AddMember("turkeyAdditionalInfo", TurkeyAdditionalInfo)
-
-	AdditionalInfoResponse_georgiaAdditionalInfo = AdditionalInfoResponse.AddMember("georgiaAdditionalInfo", GeorgiaAdditionalInfo)
-
-	AdditionalInfoResponse_italyAdditionalInfo = AdditionalInfoResponse.AddMember("italyAdditionalInfo", ItalyAdditionalInfo)
-
-	AdditionalInfoResponse_romaniaAdditionalInfo = AdditionalInfoResponse.AddMember("romaniaAdditionalInfo", RomaniaAdditionalInfo)
-
-	AdditionalInfoResponse_ukraineAdditionalInfo = AdditionalInfoResponse.AddMember("ukraineAdditionalInfo", UkraineAdditionalInfo)
-
-	AdditionalInfoResponse_polandAdditionalInfo = AdditionalInfoResponse.AddMember("polandAdditionalInfo", PolandAdditionalInfo)
-
-	AdditionalInfoResponse_saudiArabiaAdditionalInfo = AdditionalInfoResponse.AddMember("saudiArabiaAdditionalInfo", SaudiArabiaAdditionalInfo)
-
-	AdditionalInfoResponse_indiaAdditionalInfo = AdditionalInfoResponse.AddMember("indiaAdditionalInfo", IndiaAdditionalInfo)
-
-	AdditionalInfoResponse_indonesiaAdditionalInfo = AdditionalInfoResponse.AddMember("indonesiaAdditionalInfo", IndonesiaAdditionalInfo)
-
-	AdditionalInfoResponse_vietnamAdditionalInfo = AdditionalInfoResponse.AddMember("vietnamAdditionalInfo", VietnamAdditionalInfo)
-
-	AdditionalInfoResponse_egyptAdditionalInfo = AdditionalInfoResponse.AddMember("egyptAdditionalInfo", EgyptAdditionalInfo)
-
-	AdditionalInfoResponse_greeceAdditionalInfo = AdditionalInfoResponse.AddMember("greeceAdditionalInfo", GreeceAdditionalInfo)
-
-	AdditionalInfoResponse_uzbekistanAdditionalInfo = AdditionalInfoResponse.AddMember("uzbekistanAdditionalInfo", UzbekistanAdditionalInfo)
-
-	AdditionalInfoResponse_philippinesAdditionalInfo = AdditionalInfoResponse.AddMember("philippinesAdditionalInfo", PhilippinesAdditionalInfo)
-
-	AdditionalInfoResponse_belgiumAdditionalInfo = AdditionalInfoResponse.AddMember("belgiumAdditionalInfo", BelgiumAdditionalInfo)
-
-	AdditionalInfoResponse_chileAdditionalInfo = AdditionalInfoResponse.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
-
-	AdditionalInfoResponse_franceAdditionalInfo = AdditionalInfoResponse.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
-
-	AdditionalInfoResponse_monacoAdditionalInfo = AdditionalInfoResponse.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
-
-	AdditionalInfoResponse_germanyAdditionalInfo = AdditionalInfoResponse.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
-
-	AdditionalInfoResponse_mexicoAdditionalInfo = AdditionalInfoResponse.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
-
-	AdditionalInfoResponse_colombiaAdditionalInfo = AdditionalInfoResponse.AddMember("colombiaAdditionalInfo", ColombiaAdditionalInfo)
-
-	TaxRegistrationStatusReason_code = TaxRegistrationStatusReason.AddMember("code", _StatusReasonCode)
-
-	TaxRegistrationStatusReason_message = TaxRegistrationStatusReason.AddMember("message", _StatusReasonMessage)
-
-	Jurisdiction_stateOrRegion = Jurisdiction.AddMember("stateOrRegion", _State)
-
-	Jurisdiction_countryCode = Jurisdiction.AddMember("countryCode", _CountryCode)
-
-	TaxRegistrationWithJurisdiction_registrationId = TaxRegistrationWithJurisdiction.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistrationWithJurisdiction_registrationType = TaxRegistrationWithJurisdiction.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistrationWithJurisdiction_legalName = TaxRegistrationWithJurisdiction.AddMember("legalName", _LegalName)
-
-	TaxRegistrationWithJurisdiction_status = TaxRegistrationWithJurisdiction.AddMember("status", TaxRegistrationStatus)
-
-	TaxRegistrationWithJurisdiction_sector = TaxRegistrationWithJurisdiction.AddMember("sector", Sector)
-
-	TaxRegistrationWithJurisdiction_taxDocumentMetadatas = TaxRegistrationWithJurisdiction.AddMember("taxDocumentMetadatas", _TaxDocumentMetadatas)
-
-	TaxRegistrationWithJurisdiction_certifiedEmailId = TaxRegistrationWithJurisdiction.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	TaxRegistrationWithJurisdiction_additionalTaxInformation = TaxRegistrationWithJurisdiction.AddMember("additionalTaxInformation", AdditionalInfoResponse)
-
-	TaxRegistrationWithJurisdiction_statusReason = TaxRegistrationWithJurisdiction.AddMember("statusReason", TaxRegistrationStatusReason)
-
-	TaxRegistrationWithJurisdiction_jurisdiction = TaxRegistrationWithJurisdiction.AddMember("jurisdiction", Jurisdiction)
-
-	TaxInheritanceDetails_parentEntityId = TaxInheritanceDetails.AddMember("parentEntityId", _AccountId)
-
-	TaxInheritanceDetails_inheritanceObtainedReason = TaxInheritanceDetails.AddMember("inheritanceObtainedReason", _InheritanceObtainedReason)
-
-	Address_addressLine1 = Address.AddMember("addressLine1", _AddressLine1)
-
-	Address_addressLine2 = Address.AddMember("addressLine2", _AddressLine2)
-
-	Address_addressLine3 = Address.AddMember("addressLine3", _AddressLine3)
-
-	Address_districtOrCounty = Address.AddMember("districtOrCounty", _District)
-
-	Address_city = Address.AddMember("city", _City)
-
-	Address_stateOrRegion = Address.AddMember("stateOrRegion", _State)
-
-	Address_postalCode = Address.AddMember("postalCode", _PostalCode)
-
-	Address_countryCode = Address.AddMember("countryCode", _CountryCode)
-
-	AddressRoleType_TAX_ADDRESS = AddressRoleType.AddMember("TAX_ADDRESS", smithyprelude.Unit)
-
-	AddressRoleType_BILLING_ADDRESS = AddressRoleType.AddMember("BILLING_ADDRESS", smithyprelude.Unit)
-
-	AddressRoleType_CONTACT_ADDRESS = AddressRoleType.AddMember("CONTACT_ADDRESS", smithyprelude.Unit)
-
-	_AddressRoleMap_key = _AddressRoleMap.AddMember("key", AddressRoleType)
-
-	_AddressRoleMap_value = _AddressRoleMap.AddMember("value", Jurisdiction)
-
-	AccountMetaData_accountName = AccountMetaData.AddMember("accountName", _AccountName)
-
-	AccountMetaData_seller = AccountMetaData.AddMember("seller", _Seller)
-
-	AccountMetaData_address = AccountMetaData.AddMember("address", Address)
-
-	AccountMetaData_addressType = AccountMetaData.AddMember("addressType", AddressRoleType)
-
-	AccountMetaData_addressRoleMap = AccountMetaData.AddMember("addressRoleMap", _AddressRoleMap)
-
-	AccountDetails_accountId = AccountDetails.AddMember("accountId", _AccountId)
-
-	AccountDetails_taxRegistration = AccountDetails.AddMember("taxRegistration", TaxRegistrationWithJurisdiction)
-
-	AccountDetails_taxInheritanceDetails = AccountDetails.AddMember("taxInheritanceDetails", TaxInheritanceDetails)
-
-	AccountDetails_accountMetaData = AccountDetails.AddMember("accountMetaData", AccountMetaData)
-
-	_AccountDetailsList_member = _AccountDetailsList.AddMember("member", AccountDetails)
-
-	_AccountIds_member = _AccountIds.AddMember("member", _AccountId)
-
-	AdditionalInfoRequest_malaysiaAdditionalInfo = AdditionalInfoRequest.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
-
-	AdditionalInfoRequest_israelAdditionalInfo = AdditionalInfoRequest.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
-
-	AdditionalInfoRequest_estoniaAdditionalInfo = AdditionalInfoRequest.AddMember("estoniaAdditionalInfo", EstoniaAdditionalInfo)
-
-	AdditionalInfoRequest_canadaAdditionalInfo = AdditionalInfoRequest.AddMember("canadaAdditionalInfo", CanadaAdditionalInfo)
-
-	AdditionalInfoRequest_spainAdditionalInfo = AdditionalInfoRequest.AddMember("spainAdditionalInfo", SpainAdditionalInfo)
-
-	AdditionalInfoRequest_kenyaAdditionalInfo = AdditionalInfoRequest.AddMember("kenyaAdditionalInfo", KenyaAdditionalInfo)
-
-	AdditionalInfoRequest_southKoreaAdditionalInfo = AdditionalInfoRequest.AddMember("southKoreaAdditionalInfo", SouthKoreaAdditionalInfo)
-
-	AdditionalInfoRequest_turkeyAdditionalInfo = AdditionalInfoRequest.AddMember("turkeyAdditionalInfo", TurkeyAdditionalInfo)
-
-	AdditionalInfoRequest_georgiaAdditionalInfo = AdditionalInfoRequest.AddMember("georgiaAdditionalInfo", GeorgiaAdditionalInfo)
-
-	AdditionalInfoRequest_italyAdditionalInfo = AdditionalInfoRequest.AddMember("italyAdditionalInfo", ItalyAdditionalInfo)
-
-	AdditionalInfoRequest_romaniaAdditionalInfo = AdditionalInfoRequest.AddMember("romaniaAdditionalInfo", RomaniaAdditionalInfo)
-
-	AdditionalInfoRequest_ukraineAdditionalInfo = AdditionalInfoRequest.AddMember("ukraineAdditionalInfo", UkraineAdditionalInfo)
-
-	AdditionalInfoRequest_polandAdditionalInfo = AdditionalInfoRequest.AddMember("polandAdditionalInfo", PolandAdditionalInfo)
-
-	AdditionalInfoRequest_saudiArabiaAdditionalInfo = AdditionalInfoRequest.AddMember("saudiArabiaAdditionalInfo", SaudiArabiaAdditionalInfo)
-
-	AdditionalInfoRequest_indonesiaAdditionalInfo = AdditionalInfoRequest.AddMember("indonesiaAdditionalInfo", IndonesiaAdditionalInfo)
-
-	AdditionalInfoRequest_vietnamAdditionalInfo = AdditionalInfoRequest.AddMember("vietnamAdditionalInfo", VietnamAdditionalInfo)
-
-	AdditionalInfoRequest_egyptAdditionalInfo = AdditionalInfoRequest.AddMember("egyptAdditionalInfo", EgyptAdditionalInfo)
-
-	AdditionalInfoRequest_greeceAdditionalInfo = AdditionalInfoRequest.AddMember("greeceAdditionalInfo", GreeceAdditionalInfo)
-
-	AdditionalInfoRequest_uzbekistanAdditionalInfo = AdditionalInfoRequest.AddMember("uzbekistanAdditionalInfo", UzbekistanAdditionalInfo)
-
-	AdditionalInfoRequest_philippinesAdditionalInfo = AdditionalInfoRequest.AddMember("philippinesAdditionalInfo", PhilippinesAdditionalInfo)
-
-	AdditionalInfoRequest_belgiumAdditionalInfo = AdditionalInfoRequest.AddMember("belgiumAdditionalInfo", BelgiumAdditionalInfo)
-
-	AdditionalInfoRequest_chileAdditionalInfo = AdditionalInfoRequest.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
-
-	AdditionalInfoRequest_franceAdditionalInfo = AdditionalInfoRequest.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
-
-	AdditionalInfoRequest_monacoAdditionalInfo = AdditionalInfoRequest.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
-
-	AdditionalInfoRequest_germanyAdditionalInfo = AdditionalInfoRequest.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
-
-	AdditionalInfoRequest_mexicoAdditionalInfo = AdditionalInfoRequest.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
-
-	AttachmentUploadException_message = AttachmentUploadException.AddMember("message", _ErrorMessage)
-
-	Authority_country = Authority.AddMember("country", _CountryCode)
-
-	Authority_state = Authority.AddMember("state", _State)
-
-	_Authorities_member = _Authorities.AddMember("member", Authority)
-
-	BatchDeleteTaxRegistrationError_accountId = BatchDeleteTaxRegistrationError.AddMember("accountId", _AccountId)
-
-	BatchDeleteTaxRegistrationError_message = BatchDeleteTaxRegistrationError.AddMember("message", _ErrorMessage)
-
-	BatchDeleteTaxRegistrationError_code = BatchDeleteTaxRegistrationError.AddMember("code", _ErrorCode)
-
-	_BatchDeleteTaxRegistrationErrors_member = _BatchDeleteTaxRegistrationErrors.AddMember("member", BatchDeleteTaxRegistrationError)
-
-	BatchPutTaxRegistrationError_accountId = BatchPutTaxRegistrationError.AddMember("accountId", _AccountId)
-
-	BatchPutTaxRegistrationError_message = BatchPutTaxRegistrationError.AddMember("message", _ErrorMessage)
-
-	BatchPutTaxRegistrationError_code = BatchPutTaxRegistrationError.AddMember("code", _ErrorCode)
-
-	_BatchPutTaxRegistrationErrors_member = _BatchPutTaxRegistrationErrors.AddMember("member", BatchPutTaxRegistrationError)
-
-	CaseCreationLimitExceededException_message = CaseCreationLimitExceededException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_errorCode = ConflictException.AddMember("errorCode", _ErrorCode)
-
-	DestinationS3Location_bucket = DestinationS3Location.AddMember("bucket", _S3BucketName)
-
-	DestinationS3Location_prefix = DestinationS3Location.AddMember("prefix", _S3Prefix)
-
-	EntityExemptionAccountStatus_None = EntityExemptionAccountStatus.AddMember("None", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Valid = EntityExemptionAccountStatus.AddMember("Valid", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Expired = EntityExemptionAccountStatus.AddMember("Expired", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Pending = EntityExemptionAccountStatus.AddMember("Pending", smithyprelude.Unit)
-
-	ExemptionCertificate_documentName = ExemptionCertificate.AddMember("documentName", _ExemptionDocumentName)
-
-	ExemptionCertificate_documentFile = ExemptionCertificate.AddMember("documentFile", _ExemptionFileBlob)
-
-	HeritageStatus_OptIn = HeritageStatus.AddMember("OptIn", smithyprelude.Unit)
-
-	HeritageStatus_OptOut = HeritageStatus.AddMember("OptOut", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	InternalServerException_errorCode = InternalServerException.AddMember("errorCode", _ErrorCode)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_errorCode = ResourceNotFoundException.AddMember("errorCode", _ErrorCode)
-
-	SourceS3Location_bucket = SourceS3Location.AddMember("bucket", _S3BucketName)
-
-	SourceS3Location_key = SourceS3Location.AddMember("key", _S3Key)
-
-	SupplementalTaxRegistrationType_VAT = SupplementalTaxRegistrationType.AddMember("VAT", smithyprelude.Unit)
-
-	SupplementalTaxRegistration_registrationId = SupplementalTaxRegistration.AddMember("registrationId", _RegistrationId)
-
-	SupplementalTaxRegistration_registrationType = SupplementalTaxRegistration.AddMember("registrationType", SupplementalTaxRegistrationType)
-
-	SupplementalTaxRegistration_legalName = SupplementalTaxRegistration.AddMember("legalName", _LegalName)
-
-	SupplementalTaxRegistration_address = SupplementalTaxRegistration.AddMember("address", Address)
-
-	SupplementalTaxRegistration_authorityId = SupplementalTaxRegistration.AddMember("authorityId", _GenericString)
-
-	SupplementalTaxRegistration_status = SupplementalTaxRegistration.AddMember("status", TaxRegistrationStatus)
-
-	SupplementalTaxRegistrationEntry_registrationId = SupplementalTaxRegistrationEntry.AddMember("registrationId", _RegistrationId)
-
-	SupplementalTaxRegistrationEntry_registrationType = SupplementalTaxRegistrationEntry.AddMember("registrationType", SupplementalTaxRegistrationType)
-
-	SupplementalTaxRegistrationEntry_legalName = SupplementalTaxRegistrationEntry.AddMember("legalName", _LegalName)
-
-	SupplementalTaxRegistrationEntry_address = SupplementalTaxRegistrationEntry.AddMember("address", Address)
-
-	_SupplementalTaxRegistrationList_member = _SupplementalTaxRegistrationList.AddMember("member", SupplementalTaxRegistration)
-
-	TaxExemptionType_displayName = TaxExemptionType.AddMember("displayName", _DisplayName)
-
-	TaxExemptionType_description = TaxExemptionType.AddMember("description", _GenericString)
-
-	TaxExemptionType_applicableJurisdictions = TaxExemptionType.AddMember("applicableJurisdictions", _Authorities)
-
-	TaxExemption_authority = TaxExemption.AddMember("authority", Authority)
-
-	TaxExemption_taxExemptionType = TaxExemption.AddMember("taxExemptionType", TaxExemptionType)
-
-	TaxExemption_effectiveDate = TaxExemption.AddMember("effectiveDate", smithyprelude.Timestamp)
-
-	TaxExemption_expirationDate = TaxExemption.AddMember("expirationDate", smithyprelude.Timestamp)
-
-	TaxExemption_systemEffectiveDate = TaxExemption.AddMember("systemEffectiveDate", smithyprelude.Timestamp)
-
-	TaxExemption_status = TaxExemption.AddMember("status", EntityExemptionAccountStatus)
-
-	_TaxExemptions_member = _TaxExemptions.AddMember("member", TaxExemption)
-
-	TaxExemptionDetails_taxExemptions = TaxExemptionDetails.AddMember("taxExemptions", _TaxExemptions)
-
-	TaxExemptionDetails_heritageObtainedDetails = TaxExemptionDetails.AddMember("heritageObtainedDetails", smithyprelude.Boolean)
-
-	TaxExemptionDetails_heritageObtainedParentEntity = TaxExemptionDetails.AddMember("heritageObtainedParentEntity", _GenericString)
-
-	TaxExemptionDetails_heritageObtainedReason = TaxExemptionDetails.AddMember("heritageObtainedReason", _GenericString)
-
-	_TaxExemptionDetailsMap_key = _TaxExemptionDetailsMap.AddMember("key", _AccountId)
-
-	_TaxExemptionDetailsMap_value = _TaxExemptionDetailsMap.AddMember("value", TaxExemptionDetails)
-
-	_TaxExemptionTypes_member = _TaxExemptionTypes.AddMember("member", TaxExemptionType)
-
-	TaxRegistration_registrationId = TaxRegistration.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistration_registrationType = TaxRegistration.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistration_legalName = TaxRegistration.AddMember("legalName", _LegalName)
-
-	TaxRegistration_status = TaxRegistration.AddMember("status", TaxRegistrationStatus)
-
-	TaxRegistration_sector = TaxRegistration.AddMember("sector", Sector)
-
-	TaxRegistration_taxDocumentMetadatas = TaxRegistration.AddMember("taxDocumentMetadatas", _TaxDocumentMetadatas)
-
-	TaxRegistration_certifiedEmailId = TaxRegistration.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	TaxRegistration_additionalTaxInformation = TaxRegistration.AddMember("additionalTaxInformation", AdditionalInfoResponse)
-
-	TaxRegistration_statusReason = TaxRegistration.AddMember("statusReason", TaxRegistrationStatusReason)
-
-	TaxRegistration_legalAddress = TaxRegistration.AddMember("legalAddress", Address)
-
-	TaxRegistrationDocFile_fileName = TaxRegistrationDocFile.AddMember("fileName", _TaxDocumentName)
-
-	TaxRegistrationDocFile_fileContent = TaxRegistrationDocFile.AddMember("fileContent", _FileBlob)
-
-	TaxRegistrationDocument_s3Location = TaxRegistrationDocument.AddMember("s3Location", SourceS3Location)
-
-	TaxRegistrationDocument_file = TaxRegistrationDocument.AddMember("file", TaxRegistrationDocFile)
-
-	_TaxRegistrationDocuments_member = _TaxRegistrationDocuments.AddMember("member", TaxRegistrationDocument)
-
-	VerificationDetails_dateOfBirth = VerificationDetails.AddMember("dateOfBirth", _DateOfBirth)
-
-	VerificationDetails_taxRegistrationDocuments = VerificationDetails.AddMember("taxRegistrationDocuments", _TaxRegistrationDocuments)
-
-	TaxRegistrationEntry_registrationId = TaxRegistrationEntry.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistrationEntry_registrationType = TaxRegistrationEntry.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistrationEntry_legalName = TaxRegistrationEntry.AddMember("legalName", _LegalName)
-
-	TaxRegistrationEntry_legalAddress = TaxRegistrationEntry.AddMember("legalAddress", Address)
-
-	TaxRegistrationEntry_sector = TaxRegistrationEntry.AddMember("sector", Sector)
-
-	TaxRegistrationEntry_additionalTaxInformation = TaxRegistrationEntry.AddMember("additionalTaxInformation", AdditionalInfoRequest)
-
-	TaxRegistrationEntry_verificationDetails = TaxRegistrationEntry.AddMember("verificationDetails", VerificationDetails)
-
-	TaxRegistrationEntry_certifiedEmailId = TaxRegistrationEntry.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	ValidationExceptionErrorCode_MALFORMED_TOKEN = ValidationExceptionErrorCode.AddMember("MALFORMED_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_EXPIRED_TOKEN = ValidationExceptionErrorCode.AddMember("EXPIRED_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_TOKEN = ValidationExceptionErrorCode.AddMember("INVALID_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED = ValidationExceptionErrorCode.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_MISSING_INPUT = ValidationExceptionErrorCode.AddMember("MISSING_INPUT", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN = ValidationExceptionErrorCode.AddMember("NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN = ValidationExceptionErrorCode.AddMember("GST_EXISTENCE_BLOCK_SET_PAN", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _FieldName)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_errorCode = ValidationException.AddMember("errorCode", ValidationExceptionErrorCode)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchDeleteTaxRegistrationRequest_accountIds = BatchDeleteTaxRegistrationRequest.AddMember("accountIds", _AccountIds)
-
-	BatchDeleteTaxRegistrationResponse_errors = BatchDeleteTaxRegistrationResponse.AddMember("errors", _BatchDeleteTaxRegistrationErrors)
-
-	BatchGetTaxExemptionsRequest_accountIds = BatchGetTaxExemptionsRequest.AddMember("accountIds", _AccountIds)
-
-	BatchGetTaxExemptionsResponse_taxExemptionDetailsMap = BatchGetTaxExemptionsResponse.AddMember("taxExemptionDetailsMap", _TaxExemptionDetailsMap)
-
-	BatchGetTaxExemptionsResponse_failedAccounts = BatchGetTaxExemptionsResponse.AddMember("failedAccounts", _AccountIds)
-
-	BatchPutTaxRegistrationRequest_accountIds = BatchPutTaxRegistrationRequest.AddMember("accountIds", _AccountIds)
-
-	BatchPutTaxRegistrationRequest_taxRegistrationEntry = BatchPutTaxRegistrationRequest.AddMember("taxRegistrationEntry", TaxRegistrationEntry)
-
-	BatchPutTaxRegistrationResponse_status = BatchPutTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
-	BatchPutTaxRegistrationResponse_errors = BatchPutTaxRegistrationResponse.AddMember("errors", _BatchPutTaxRegistrationErrors)
-
-	DeleteSupplementalTaxRegistrationRequest_authorityId = DeleteSupplementalTaxRegistrationRequest.AddMember("authorityId", _GenericString)
-
-	DeleteTaxRegistrationRequest_accountId = DeleteTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	GetTaxExemptionTypesResponse_taxExemptionTypes = GetTaxExemptionTypesResponse.AddMember("taxExemptionTypes", _TaxExemptionTypes)
-
-	GetTaxInheritanceResponse_heritageStatus = GetTaxInheritanceResponse.AddMember("heritageStatus", HeritageStatus)
-
-	GetTaxRegistrationDocumentRequest_destinationS3Location = GetTaxRegistrationDocumentRequest.AddMember("destinationS3Location", DestinationS3Location)
-
-	GetTaxRegistrationDocumentRequest_taxDocumentMetadata = GetTaxRegistrationDocumentRequest.AddMember("taxDocumentMetadata", TaxDocumentMetadata)
-
-	GetTaxRegistrationDocumentResponse_destinationFilePath = GetTaxRegistrationDocumentResponse.AddMember("destinationFilePath", _DestinationFilePath)
-
-	GetTaxRegistrationDocumentResponse_presignedS3Url = GetTaxRegistrationDocumentResponse.AddMember("presignedS3Url", _Url)
-
-	GetTaxRegistrationRequest_accountId = GetTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	GetTaxRegistrationResponse_taxRegistration = GetTaxRegistrationResponse.AddMember("taxRegistration", TaxRegistration)
-
-	ListSupplementalTaxRegistrationsRequest_maxResults = ListSupplementalTaxRegistrationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListSupplementalTaxRegistrationsRequest_nextToken = ListSupplementalTaxRegistrationsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListSupplementalTaxRegistrationsResponse_taxRegistrations = ListSupplementalTaxRegistrationsResponse.AddMember("taxRegistrations", _SupplementalTaxRegistrationList)
-
-	ListSupplementalTaxRegistrationsResponse_nextToken = ListSupplementalTaxRegistrationsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsRequest_maxResults = ListTaxExemptionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListTaxExemptionsRequest_nextToken = ListTaxExemptionsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsResponse_nextToken = ListTaxExemptionsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsResponse_taxExemptionDetailsMap = ListTaxExemptionsResponse.AddMember("taxExemptionDetailsMap", _TaxExemptionDetailsMap)
-
-	ListTaxRegistrationsRequest_maxResults = ListTaxRegistrationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListTaxRegistrationsRequest_nextToken = ListTaxRegistrationsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxRegistrationsResponse_accountDetails = ListTaxRegistrationsResponse.AddMember("accountDetails", _AccountDetailsList)
-
-	ListTaxRegistrationsResponse_nextToken = ListTaxRegistrationsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	PutSupplementalTaxRegistrationRequest_taxRegistrationEntry = PutSupplementalTaxRegistrationRequest.AddMember("taxRegistrationEntry", SupplementalTaxRegistrationEntry)
-
-	PutSupplementalTaxRegistrationResponse_authorityId = PutSupplementalTaxRegistrationResponse.AddMember("authorityId", _GenericString)
-
-	PutSupplementalTaxRegistrationResponse_status = PutSupplementalTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
-	PutTaxExemptionRequest_accountIds = PutTaxExemptionRequest.AddMember("accountIds", _AccountIds)
-
-	PutTaxExemptionRequest_authority = PutTaxExemptionRequest.AddMember("authority", Authority)
-
-	PutTaxExemptionRequest_exemptionType = PutTaxExemptionRequest.AddMember("exemptionType", _GenericString)
-
-	PutTaxExemptionRequest_exemptionCertificate = PutTaxExemptionRequest.AddMember("exemptionCertificate", ExemptionCertificate)
-
-	PutTaxExemptionResponse_caseId = PutTaxExemptionResponse.AddMember("caseId", _GenericString)
-
-	PutTaxInheritanceRequest_heritageStatus = PutTaxInheritanceRequest.AddMember("heritageStatus", HeritageStatus)
-
-	PutTaxRegistrationRequest_accountId = PutTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	PutTaxRegistrationRequest_taxRegistrationEntry = PutTaxRegistrationRequest.AddMember("taxRegistrationEntry", TaxRegistrationEntry)
-
-	PutTaxRegistrationResponse_status = PutTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccountDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountDetails_accountId, &sAccountDetails_taxRegistration, &sAccountDetails_taxInheritanceDetails, &sAccountDetails_accountMetaData}}
+var m_AccountDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountDetailsList_member}}
+var m_AccountIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIds_member}}
+var mAccountMetaData = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountMetaData_accountName, &sAccountMetaData_seller, &sAccountMetaData_address, &sAccountMetaData_addressType, &sAccountMetaData_addressRoleMap}}
+var mAdditionalInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalInfoRequest_malaysiaAdditionalInfo, &sAdditionalInfoRequest_israelAdditionalInfo, &sAdditionalInfoRequest_estoniaAdditionalInfo, &sAdditionalInfoRequest_canadaAdditionalInfo, &sAdditionalInfoRequest_spainAdditionalInfo, &sAdditionalInfoRequest_kenyaAdditionalInfo, &sAdditionalInfoRequest_southKoreaAdditionalInfo, &sAdditionalInfoRequest_turkeyAdditionalInfo, &sAdditionalInfoRequest_georgiaAdditionalInfo, &sAdditionalInfoRequest_italyAdditionalInfo, &sAdditionalInfoRequest_romaniaAdditionalInfo, &sAdditionalInfoRequest_ukraineAdditionalInfo, &sAdditionalInfoRequest_polandAdditionalInfo, &sAdditionalInfoRequest_saudiArabiaAdditionalInfo, &sAdditionalInfoRequest_indonesiaAdditionalInfo, &sAdditionalInfoRequest_vietnamAdditionalInfo, &sAdditionalInfoRequest_egyptAdditionalInfo, &sAdditionalInfoRequest_greeceAdditionalInfo, &sAdditionalInfoRequest_uzbekistanAdditionalInfo, &sAdditionalInfoRequest_philippinesAdditionalInfo, &sAdditionalInfoRequest_belgiumAdditionalInfo, &sAdditionalInfoRequest_chileAdditionalInfo, &sAdditionalInfoRequest_franceAdditionalInfo, &sAdditionalInfoRequest_monacoAdditionalInfo, &sAdditionalInfoRequest_germanyAdditionalInfo, &sAdditionalInfoRequest_mexicoAdditionalInfo}, Hash: &hAdditionalInfoRequest}
+var mAdditionalInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalInfoResponse_malaysiaAdditionalInfo, &sAdditionalInfoResponse_israelAdditionalInfo, &sAdditionalInfoResponse_estoniaAdditionalInfo, &sAdditionalInfoResponse_canadaAdditionalInfo, &sAdditionalInfoResponse_brazilAdditionalInfo, &sAdditionalInfoResponse_spainAdditionalInfo, &sAdditionalInfoResponse_kenyaAdditionalInfo, &sAdditionalInfoResponse_southKoreaAdditionalInfo, &sAdditionalInfoResponse_turkeyAdditionalInfo, &sAdditionalInfoResponse_georgiaAdditionalInfo, &sAdditionalInfoResponse_italyAdditionalInfo, &sAdditionalInfoResponse_romaniaAdditionalInfo, &sAdditionalInfoResponse_ukraineAdditionalInfo, &sAdditionalInfoResponse_polandAdditionalInfo, &sAdditionalInfoResponse_saudiArabiaAdditionalInfo, &sAdditionalInfoResponse_indiaAdditionalInfo, &sAdditionalInfoResponse_indonesiaAdditionalInfo, &sAdditionalInfoResponse_vietnamAdditionalInfo, &sAdditionalInfoResponse_egyptAdditionalInfo, &sAdditionalInfoResponse_greeceAdditionalInfo, &sAdditionalInfoResponse_uzbekistanAdditionalInfo, &sAdditionalInfoResponse_philippinesAdditionalInfo, &sAdditionalInfoResponse_belgiumAdditionalInfo, &sAdditionalInfoResponse_chileAdditionalInfo, &sAdditionalInfoResponse_franceAdditionalInfo, &sAdditionalInfoResponse_monacoAdditionalInfo, &sAdditionalInfoResponse_germanyAdditionalInfo, &sAdditionalInfoResponse_mexicoAdditionalInfo, &sAdditionalInfoResponse_colombiaAdditionalInfo}, Hash: &hAdditionalInfoResponse}
+var mAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sAddress_addressLine1, &sAddress_addressLine2, &sAddress_addressLine3, &sAddress_districtOrCounty, &sAddress_city, &sAddress_stateOrRegion, &sAddress_postalCode, &sAddress_countryCode}}
+var m_AddressRoleMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddressRoleMap_key, &s_AddressRoleMap_value}}
+var mAddressRoleType = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressRoleType_TAX_ADDRESS, &sAddressRoleType_BILLING_ADDRESS, &sAddressRoleType_CONTACT_ADDRESS}}
+var mAttachmentUploadException = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentUploadException_message}}
+var m_Authorities = smithy.SchemaMembers{List: []*smithy.Schema{&s_Authorities_member}}
+var mAuthority = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthority_country, &sAuthority_state}}
+var mBatchDeleteTaxRegistrationError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteTaxRegistrationError_accountId, &sBatchDeleteTaxRegistrationError_message, &sBatchDeleteTaxRegistrationError_code}}
+var m_BatchDeleteTaxRegistrationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteTaxRegistrationErrors_member}}
+var mBatchPutTaxRegistrationError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutTaxRegistrationError_accountId, &sBatchPutTaxRegistrationError_message, &sBatchPutTaxRegistrationError_code}}
+var m_BatchPutTaxRegistrationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchPutTaxRegistrationErrors_member}}
+var mBelgiumAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBelgiumAdditionalInfo_peppolId, &sBelgiumAdditionalInfo_isMercuriusBoxEnabled}}
+var mBrazilAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrazilAdditionalInfo_ccmCode, &sBrazilAdditionalInfo_legalNatureCode}}
+var mCanadaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sCanadaAdditionalInfo_provincialSalesTaxId, &sCanadaAdditionalInfo_canadaQuebecSalesTaxNumber, &sCanadaAdditionalInfo_canadaRetailSalesTaxNumber, &sCanadaAdditionalInfo_isResellerAccount}}
+var mCaseCreationLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseCreationLimitExceededException_message}}
+var mChileAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChileAdditionalInfo_documentType, &sChileAdditionalInfo_businessActivity}}
+var mChileDocumentType = smithy.SchemaMembers{List: []*smithy.Schema{&sChileDocumentType_INVOICE, &sChileDocumentType_RECEIPT}}
+var mColombiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sColombiaAdditionalInfo_responsibilityCodes, &sColombiaAdditionalInfo_taxpayerTypeCode, &sColombiaAdditionalInfo_issueDate}}
+var m_ColombiaResponsabilidadesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColombiaResponsabilidadesList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_errorCode}}
+var mCustomerType = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerType_BUSINESS, &sCustomerType_INDIVIDUAL}}
+var mDestinationS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationS3Location_bucket, &sDestinationS3Location_prefix}}
+var mEgyptAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sEgyptAdditionalInfo_uniqueIdentificationNumber, &sEgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate}}
+var mEntityExemptionAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityExemptionAccountStatus_None, &sEntityExemptionAccountStatus_Valid, &sEntityExemptionAccountStatus_Expired, &sEntityExemptionAccountStatus_Pending}}
+var mEstoniaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sEstoniaAdditionalInfo_registryCommercialCode}}
+var mExemptionCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sExemptionCertificate_documentName, &sExemptionCertificate_documentFile}}
+var mFranceAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sFranceAdditionalInfo_sirenNumber, &sFranceAdditionalInfo_eInvoiceRoutingCode}}
+var mGeorgiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sGeorgiaAdditionalInfo_personType}}
+var mGermanyAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sGermanyAdditionalInfo_economicIdentificationNumber, &sGermanyAdditionalInfo_steuernummer}}
+var mGreeceAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sGreeceAdditionalInfo_contractingAuthorityCode}}
+var mHeritageStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHeritageStatus_OptIn, &sHeritageStatus_OptOut}}
+var mIndiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIndiaAdditionalInfo_pan}}
+var mIndonesiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIndonesiaAdditionalInfo_taxRegistrationNumberType, &sIndonesiaAdditionalInfo_ppnExceptionDesignationCode, &sIndonesiaAdditionalInfo_decisionNumber}}
+var mIndonesiaTaxRegistrationNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sIndonesiaTaxRegistrationNumberType_NIK, &sIndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER, &sIndonesiaTaxRegistrationNumberType_NPWP, &sIndonesiaTaxRegistrationNumberType_NITKU}}
+var mIndustries = smithy.SchemaMembers{List: []*smithy.Schema{&sIndustries_CIRCULATING_ORG, &sIndustries_PROFESSIONAL_ORG, &sIndustries_BANKS, &sIndustries_INSURANCE, &sIndustries_PENSION_AND_BENEFIT_FUNDS, &sIndustries_DEVELOPMENT_AGENCIES}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_errorCode}}
+var mIsraelAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIsraelAdditionalInfo_dealerType, &sIsraelAdditionalInfo_customerType}}
+var mIsraelCustomerType = smithy.SchemaMembers{List: []*smithy.Schema{&sIsraelCustomerType_BUSINESS, &sIsraelCustomerType_INDIVIDUAL}}
+var mIsraelDealerType = smithy.SchemaMembers{List: []*smithy.Schema{&sIsraelDealerType_AUTHORIZED, &sIsraelDealerType_NON_AUTHORIZED}}
+var mItalyAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sItalyAdditionalInfo_sdiAccountId, &sItalyAdditionalInfo_cigNumber, &sItalyAdditionalInfo_cupNumber, &sItalyAdditionalInfo_taxCode, &sItalyAdditionalInfo_customerType}}
+var mJurisdiction = smithy.SchemaMembers{List: []*smithy.Schema{&sJurisdiction_stateOrRegion, &sJurisdiction_countryCode}}
+var mKenyaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sKenyaAdditionalInfo_personType}}
+var mMalaysiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMalaysiaAdditionalInfo_serviceTaxCodes, &sMalaysiaAdditionalInfo_taxInformationNumber, &sMalaysiaAdditionalInfo_businessRegistrationNumber}}
+var mMalaysiaServiceTaxCode = smithy.SchemaMembers{List: []*smithy.Schema{&sMalaysiaServiceTaxCode_CONSULTANCY, &sMalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM, &sMalaysiaServiceTaxCode_IT_SERVICES, &sMalaysiaServiceTaxCode_TRAINING_OR_COACHING}}
+var m_MalaysiaServiceTaxCodesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MalaysiaServiceTaxCodesList_member}}
+var mMexicoAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMexicoAdditionalInfo_taxRegime, &sMexicoAdditionalInfo_taxRegimeFullName, &sMexicoAdditionalInfo_cfdiUsageCode}}
+var mMonacoAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMonacoAdditionalInfo_businessNumber}}
+var mPersonType = smithy.SchemaMembers{List: []*smithy.Schema{&sPersonType_LEGAL_PERSON, &sPersonType_PHYSICAL_PERSON, &sPersonType_BUSINESS}}
+var mPhilippinesAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPhilippinesAdditionalInfo_isVatRegistered}}
+var mPolandAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPolandAdditionalInfo_individualRegistrationNumber, &sPolandAdditionalInfo_isGroupVatEnabled, &sPolandAdditionalInfo_taxRegistrationNumberType}}
+var mPolandTaxRegistrationNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER, &sPolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER, &sPolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER}}
+var mRegistrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationType_INTRA_EU, &sRegistrationType_LOCAL}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_errorCode}}
+var mRomaniaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRomaniaAdditionalInfo_taxRegistrationNumberType}}
+var mSaudiArabiaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSaudiArabiaAdditionalInfo_taxRegistrationNumberType}}
+var mSaudiArabiaTaxRegistrationNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sSaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER, &sSaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER, &sSaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER}}
+var mSector = smithy.SchemaMembers{List: []*smithy.Schema{&sSector_BUSINESS, &sSector_INDIVIDUAL, &sSector_PUBLIC_INSTITUTIONS}}
+var mSourceS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceS3Location_bucket, &sSourceS3Location_key}}
+var mSouthKoreaAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSouthKoreaAdditionalInfo_businessRepresentativeName, &sSouthKoreaAdditionalInfo_lineOfBusiness, &sSouthKoreaAdditionalInfo_itemOfBusiness}}
+var mSpainAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSpainAdditionalInfo_registrationType}}
+var mSupplementalTaxRegistration = smithy.SchemaMembers{List: []*smithy.Schema{&sSupplementalTaxRegistration_registrationId, &sSupplementalTaxRegistration_registrationType, &sSupplementalTaxRegistration_legalName, &sSupplementalTaxRegistration_address, &sSupplementalTaxRegistration_authorityId, &sSupplementalTaxRegistration_status}}
+var mSupplementalTaxRegistrationEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sSupplementalTaxRegistrationEntry_registrationId, &sSupplementalTaxRegistrationEntry_registrationType, &sSupplementalTaxRegistrationEntry_legalName, &sSupplementalTaxRegistrationEntry_address}}
+var m_SupplementalTaxRegistrationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupplementalTaxRegistrationList_member}}
+var mSupplementalTaxRegistrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sSupplementalTaxRegistrationType_VAT}}
+var mTaxDocumentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxDocumentMetadata_taxDocumentAccessToken, &sTaxDocumentMetadata_taxDocumentName}}
+var m_TaxDocumentMetadatas = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaxDocumentMetadatas_member}}
+var mTaxExemption = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxExemption_authority, &sTaxExemption_taxExemptionType, &sTaxExemption_effectiveDate, &sTaxExemption_expirationDate, &sTaxExemption_systemEffectiveDate, &sTaxExemption_status}}
+var mTaxExemptionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxExemptionDetails_taxExemptions, &sTaxExemptionDetails_heritageObtainedDetails, &sTaxExemptionDetails_heritageObtainedParentEntity, &sTaxExemptionDetails_heritageObtainedReason}}
+var m_TaxExemptionDetailsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaxExemptionDetailsMap_key, &s_TaxExemptionDetailsMap_value}}
+var m_TaxExemptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaxExemptions_member}}
+var mTaxExemptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxExemptionType_displayName, &sTaxExemptionType_description, &sTaxExemptionType_applicableJurisdictions}}
+var m_TaxExemptionTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaxExemptionTypes_member}}
+var mTaxInheritanceDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxInheritanceDetails_parentEntityId, &sTaxInheritanceDetails_inheritanceObtainedReason}}
+var mTaxRegistration = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistration_registrationId, &sTaxRegistration_registrationType, &sTaxRegistration_legalName, &sTaxRegistration_status, &sTaxRegistration_sector, &sTaxRegistration_taxDocumentMetadatas, &sTaxRegistration_certifiedEmailId, &sTaxRegistration_additionalTaxInformation, &sTaxRegistration_statusReason, &sTaxRegistration_legalAddress}, Hash: &hTaxRegistration}
+var mTaxRegistrationDocFile = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationDocFile_fileName, &sTaxRegistrationDocFile_fileContent}}
+var mTaxRegistrationDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationDocument_s3Location, &sTaxRegistrationDocument_file}}
+var m_TaxRegistrationDocuments = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaxRegistrationDocuments_member}}
+var mTaxRegistrationEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationEntry_registrationId, &sTaxRegistrationEntry_registrationType, &sTaxRegistrationEntry_legalName, &sTaxRegistrationEntry_legalAddress, &sTaxRegistrationEntry_sector, &sTaxRegistrationEntry_additionalTaxInformation, &sTaxRegistrationEntry_verificationDetails, &sTaxRegistrationEntry_certifiedEmailId}}
+var mTaxRegistrationNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER, &sTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER}}
+var mTaxRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationStatus_VERIFIED, &sTaxRegistrationStatus_PENDING, &sTaxRegistrationStatus_DELETED, &sTaxRegistrationStatus_REJECTED}}
+var mTaxRegistrationStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationStatusReason_code, &sTaxRegistrationStatusReason_message}}
+var mTaxRegistrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationType_VAT, &sTaxRegistrationType_GST, &sTaxRegistrationType_CPF, &sTaxRegistrationType_CNPJ, &sTaxRegistrationType_SST, &sTaxRegistrationType_TIN, &sTaxRegistrationType_NRIC, &sTaxRegistrationType_PAN, &sTaxRegistrationType_NIP, &sTaxRegistrationType_CUIT, &sTaxRegistrationType_CDI, &sTaxRegistrationType_RUT, &sTaxRegistrationType_NIE, &sTaxRegistrationType_CI}, Hash: &hTaxRegistrationType}
+var mTaxRegistrationWithJurisdiction = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxRegistrationWithJurisdiction_registrationId, &sTaxRegistrationWithJurisdiction_registrationType, &sTaxRegistrationWithJurisdiction_legalName, &sTaxRegistrationWithJurisdiction_status, &sTaxRegistrationWithJurisdiction_sector, &sTaxRegistrationWithJurisdiction_taxDocumentMetadatas, &sTaxRegistrationWithJurisdiction_certifiedEmailId, &sTaxRegistrationWithJurisdiction_additionalTaxInformation, &sTaxRegistrationWithJurisdiction_statusReason, &sTaxRegistrationWithJurisdiction_jurisdiction}, Hash: &hTaxRegistrationWithJurisdiction}
+var mTurkeyAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTurkeyAdditionalInfo_taxOffice, &sTurkeyAdditionalInfo_kepEmailId, &sTurkeyAdditionalInfo_secondaryTaxId, &sTurkeyAdditionalInfo_industries}}
+var mUkraineAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sUkraineAdditionalInfo_ukraineTrnType}}
+var mUkraineTrnType = smithy.SchemaMembers{List: []*smithy.Schema{&sUkraineTrnType_BUSINESS, &sUkraineTrnType_INDIVIDUAL}}
+var mUzbekistanAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sUzbekistanAdditionalInfo_taxRegistrationNumberType, &sUzbekistanAdditionalInfo_vatRegistrationNumber}}
+var mUzbekistanTaxRegistrationNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sUzbekistanTaxRegistrationNumberType_BUSINESS, &sUzbekistanTaxRegistrationNumberType_INDIVIDUAL}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_errorCode, &sValidationException_fieldList}}
+var mValidationExceptionErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionErrorCode_MALFORMED_TOKEN, &sValidationExceptionErrorCode_EXPIRED_TOKEN, &sValidationExceptionErrorCode_INVALID_TOKEN, &sValidationExceptionErrorCode_FIELD_VALIDATION_FAILED, &sValidationExceptionErrorCode_MISSING_INPUT, &sValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN, &sValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mVerificationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sVerificationDetails_dateOfBirth, &sVerificationDetails_taxRegistrationDocuments}}
+var mVietnamAdditionalInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVietnamAdditionalInfo_enterpriseIdentificationNumber, &sVietnamAdditionalInfo_electronicTransactionCodeNumber, &sVietnamAdditionalInfo_paymentVoucherNumber, &sVietnamAdditionalInfo_paymentVoucherNumberDate}}
+var mBatchDeleteTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteTaxRegistrationRequest_accountIds}}
+var mBatchDeleteTaxRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteTaxRegistrationResponse_errors}}
+var mBatchGetTaxExemptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTaxExemptionsRequest_accountIds}}
+var mBatchGetTaxExemptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetTaxExemptionsResponse_taxExemptionDetailsMap, &sBatchGetTaxExemptionsResponse_failedAccounts}}
+var mBatchPutTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutTaxRegistrationRequest_accountIds, &sBatchPutTaxRegistrationRequest_taxRegistrationEntry}}
+var mBatchPutTaxRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutTaxRegistrationResponse_status, &sBatchPutTaxRegistrationResponse_errors}}
+var mDeleteSupplementalTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSupplementalTaxRegistrationRequest_authorityId}}
+var mDeleteTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTaxRegistrationRequest_accountId}}
+var mGetTaxExemptionTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxExemptionTypesResponse_taxExemptionTypes}}
+var mGetTaxInheritanceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxInheritanceResponse_heritageStatus}}
+var mGetTaxRegistrationDocumentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxRegistrationDocumentRequest_destinationS3Location, &sGetTaxRegistrationDocumentRequest_taxDocumentMetadata}}
+var mGetTaxRegistrationDocumentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxRegistrationDocumentResponse_destinationFilePath, &sGetTaxRegistrationDocumentResponse_presignedS3Url}}
+var mGetTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxRegistrationRequest_accountId}}
+var mGetTaxRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTaxRegistrationResponse_taxRegistration}}
+var mListSupplementalTaxRegistrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupplementalTaxRegistrationsRequest_maxResults, &sListSupplementalTaxRegistrationsRequest_nextToken}}
+var mListSupplementalTaxRegistrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupplementalTaxRegistrationsResponse_taxRegistrations, &sListSupplementalTaxRegistrationsResponse_nextToken}}
+var mListTaxExemptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaxExemptionsRequest_maxResults, &sListTaxExemptionsRequest_nextToken}}
+var mListTaxExemptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaxExemptionsResponse_nextToken, &sListTaxExemptionsResponse_taxExemptionDetailsMap}}
+var mListTaxRegistrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaxRegistrationsRequest_maxResults, &sListTaxRegistrationsRequest_nextToken}}
+var mListTaxRegistrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTaxRegistrationsResponse_accountDetails, &sListTaxRegistrationsResponse_nextToken}}
+var mPutSupplementalTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSupplementalTaxRegistrationRequest_taxRegistrationEntry}}
+var mPutSupplementalTaxRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSupplementalTaxRegistrationResponse_authorityId, &sPutSupplementalTaxRegistrationResponse_status}}
+var mPutTaxExemptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTaxExemptionRequest_accountIds, &sPutTaxExemptionRequest_authority, &sPutTaxExemptionRequest_exemptionType, &sPutTaxExemptionRequest_exemptionCertificate}}
+var mPutTaxExemptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTaxExemptionResponse_caseId}}
+var mPutTaxInheritanceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTaxInheritanceRequest_heritageStatus}}
+var mPutTaxRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTaxRegistrationRequest_accountId, &sPutTaxRegistrationRequest_taxRegistrationEntry}}
+var mPutTaxRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTaxRegistrationResponse_status}}
+
+var hAdditionalInfoRequest = smithy.MemberHash{Seed: 1022, Slots: []uint16{
+	25, 0, 0, 0, 0, 0, 0, 14, 4, 24, 0, 0, 21, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0,
+	10, 15, 0, 3, 2, 0, 0, 0, 0, 20, 9, 22, 16, 0, 0, 12, 6, 26, 0, 0, 17, 0, 0, 0,
+	1, 19, 0, 7, 0, 0, 8, 0, 0, 18, 0, 11, 0, 5, 23, 0,
+}}
+var hAdditionalInfoResponse = smithy.MemberHash{Seed: 3585, Slots: []uint16{
+	0, 0, 17, 0, 0, 0, 21, 0, 3, 1, 0, 10, 11, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 12,
+	29, 24, 18, 14, 0, 25, 15, 0, 5, 0, 0, 23, 0, 9, 0, 13, 0, 6, 26, 0, 19, 4, 0, 0,
+	0, 27, 0, 7, 0, 20, 0, 8, 16, 28, 0, 0, 0, 22, 0, 0,
+}}
+var hTaxRegistration = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 3, 0, 5, 0, 0, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 10, 1, 6, 0, 0, 9,
+	0, 0, 0, 8, 0, 0, 7, 0,
+}}
+var hTaxRegistrationType = smithy.MemberHash{Seed: 452, Slots: []uint16{
+	0, 0, 3, 0, 0, 0, 0, 9, 0, 12, 0, 0, 0, 0, 2, 1, 5, 4, 6, 0, 0, 0, 8, 7,
+	0, 14, 0, 11, 0, 0, 10, 13,
+}}
+var hTaxRegistrationWithJurisdiction = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	5, 0, 1, 0, 3, 7, 2, 0, 0, 0, 0, 0, 0, 6, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0,
+	10, 0, 0, 4, 0, 0, 0, 0,
+}}
+
+var sBatchDeleteTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteTaxRegistration, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchDeleteTaxRegistration})
+var sBatchGetTaxExemptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTaxExemptions, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetTaxExemptions})
+var sBatchPutTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutTaxRegistration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchPutTaxRegistration})
+var sDeleteSupplementalTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupplementalTaxRegistration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSupplementalTaxRegistration})
+var sDeleteTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTaxRegistration, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTaxRegistration})
+var sGetTaxExemptionTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxExemptionTypes, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetTaxExemptionTypes})
+var sGetTaxInheritance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxInheritance, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetTaxInheritance})
+var sGetTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetTaxRegistration})
+var sGetTaxRegistrationDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistrationDocument, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetTaxRegistrationDocument})
+var sListSupplementalTaxRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupplementalTaxRegistrations, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListSupplementalTaxRegistrations})
+var sListTaxExemptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxExemptions, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTaxExemptions})
+var sListTaxRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxRegistrations, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTaxRegistrations})
+var sPutSupplementalTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSupplementalTaxRegistration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ePutSupplementalTaxRegistration})
+var sPutTaxExemption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxExemption, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ePutTaxExemption})
+var sPutTaxInheritance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxInheritance, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ePutTaxInheritance})
+var sPutTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxRegistration, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ePutTaxRegistration})
+var s_TaxSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxSettings, Type: smithy.ShapeTypeService, Ext: &e_TaxSettings})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccountDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountDetails, Members: &mAccountDetails, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccountDetails})
+var sAccountDetails_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAccountDetails_accountId})
+var sAccountDetails_taxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistration", ID: &iTaxRegistrationWithJurisdiction, Members: &mTaxRegistrationWithJurisdiction, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccountDetails_taxRegistration})
+var sAccountDetails_taxInheritanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxInheritanceDetails", ID: &iTaxInheritanceDetails, Members: &mTaxInheritanceDetails, Type: smithy.ShapeTypeStructure, Ext: &eAccountDetails_taxInheritanceDetails})
+var sAccountDetails_accountMetaData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountMetaData", ID: &iAccountMetaData, Members: &mAccountMetaData, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccountDetails_accountMetaData})
+var s_AccountDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountDetailsList, Members: &m_AccountDetailsList, Type: smithy.ShapeTypeList, Ext: &e_AccountDetailsList})
+var s_AccountDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountDetails, Members: &mAccountDetails, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &e_AccountDetailsList_member})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &e_AccountIds})
+var s_AccountIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountIds_member})
+var sAccountMetaData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountMetaData, Members: &mAccountMetaData, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccountMetaData})
+var sAccountMetaData_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &i_AccountName, Type: smithy.ShapeTypeString, Ext: &eAccountMetaData_accountName})
+var sAccountMetaData_seller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seller", ID: &i_Seller, Type: smithy.ShapeTypeString, Ext: &eAccountMetaData_seller})
+var sAccountMetaData_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAccountMetaData_address})
+var sAccountMetaData_addressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressType", ID: &iAddressRoleType, Members: &mAddressRoleType, Type: smithy.ShapeTypeEnum, Ext: &eAccountMetaData_addressType})
+var sAccountMetaData_addressRoleMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressRoleMap", ID: &i_AddressRoleMap, Members: &m_AddressRoleMap, Type: smithy.ShapeTypeMap, Ext: &eAccountMetaData_addressRoleMap})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Type: smithy.ShapeTypeString, Ext: &e_AccountName})
+var sAdditionalInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalInfoRequest, Members: &mAdditionalInfoRequest, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest})
+var sAdditionalInfoRequest_malaysiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "malaysiaAdditionalInfo", ID: &iMalaysiaAdditionalInfo, Members: &mMalaysiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_malaysiaAdditionalInfo})
+var sAdditionalInfoRequest_israelAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "israelAdditionalInfo", ID: &iIsraelAdditionalInfo, Members: &mIsraelAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_israelAdditionalInfo})
+var sAdditionalInfoRequest_estoniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estoniaAdditionalInfo", ID: &iEstoniaAdditionalInfo, Members: &mEstoniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_estoniaAdditionalInfo})
+var sAdditionalInfoRequest_canadaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canadaAdditionalInfo", ID: &iCanadaAdditionalInfo, Members: &mCanadaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_canadaAdditionalInfo})
+var sAdditionalInfoRequest_spainAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spainAdditionalInfo", ID: &iSpainAdditionalInfo, Members: &mSpainAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_spainAdditionalInfo})
+var sAdditionalInfoRequest_kenyaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kenyaAdditionalInfo", ID: &iKenyaAdditionalInfo, Members: &mKenyaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_kenyaAdditionalInfo})
+var sAdditionalInfoRequest_southKoreaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "southKoreaAdditionalInfo", ID: &iSouthKoreaAdditionalInfo, Members: &mSouthKoreaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_southKoreaAdditionalInfo})
+var sAdditionalInfoRequest_turkeyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "turkeyAdditionalInfo", ID: &iTurkeyAdditionalInfo, Members: &mTurkeyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_turkeyAdditionalInfo})
+var sAdditionalInfoRequest_georgiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "georgiaAdditionalInfo", ID: &iGeorgiaAdditionalInfo, Members: &mGeorgiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_georgiaAdditionalInfo})
+var sAdditionalInfoRequest_italyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "italyAdditionalInfo", ID: &iItalyAdditionalInfo, Members: &mItalyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_italyAdditionalInfo})
+var sAdditionalInfoRequest_romaniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "romaniaAdditionalInfo", ID: &iRomaniaAdditionalInfo, Members: &mRomaniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_romaniaAdditionalInfo})
+var sAdditionalInfoRequest_ukraineAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ukraineAdditionalInfo", ID: &iUkraineAdditionalInfo, Members: &mUkraineAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_ukraineAdditionalInfo})
+var sAdditionalInfoRequest_polandAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "polandAdditionalInfo", ID: &iPolandAdditionalInfo, Members: &mPolandAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_polandAdditionalInfo})
+var sAdditionalInfoRequest_saudiArabiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saudiArabiaAdditionalInfo", ID: &iSaudiArabiaAdditionalInfo, Members: &mSaudiArabiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_saudiArabiaAdditionalInfo})
+var sAdditionalInfoRequest_indonesiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indonesiaAdditionalInfo", ID: &iIndonesiaAdditionalInfo, Members: &mIndonesiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_indonesiaAdditionalInfo})
+var sAdditionalInfoRequest_vietnamAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vietnamAdditionalInfo", ID: &iVietnamAdditionalInfo, Members: &mVietnamAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_vietnamAdditionalInfo})
+var sAdditionalInfoRequest_egyptAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egyptAdditionalInfo", ID: &iEgyptAdditionalInfo, Members: &mEgyptAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_egyptAdditionalInfo})
+var sAdditionalInfoRequest_greeceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeceAdditionalInfo", ID: &iGreeceAdditionalInfo, Members: &mGreeceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_greeceAdditionalInfo})
+var sAdditionalInfoRequest_uzbekistanAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uzbekistanAdditionalInfo", ID: &iUzbekistanAdditionalInfo, Members: &mUzbekistanAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_uzbekistanAdditionalInfo})
+var sAdditionalInfoRequest_philippinesAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "philippinesAdditionalInfo", ID: &iPhilippinesAdditionalInfo, Members: &mPhilippinesAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_philippinesAdditionalInfo})
+var sAdditionalInfoRequest_belgiumAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "belgiumAdditionalInfo", ID: &iBelgiumAdditionalInfo, Members: &mBelgiumAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_belgiumAdditionalInfo})
+var sAdditionalInfoRequest_chileAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chileAdditionalInfo", ID: &iChileAdditionalInfo, Members: &mChileAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_chileAdditionalInfo})
+var sAdditionalInfoRequest_franceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "franceAdditionalInfo", ID: &iFranceAdditionalInfo, Members: &mFranceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_franceAdditionalInfo})
+var sAdditionalInfoRequest_monacoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monacoAdditionalInfo", ID: &iMonacoAdditionalInfo, Members: &mMonacoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_monacoAdditionalInfo})
+var sAdditionalInfoRequest_germanyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "germanyAdditionalInfo", ID: &iGermanyAdditionalInfo, Members: &mGermanyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_germanyAdditionalInfo})
+var sAdditionalInfoRequest_mexicoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mexicoAdditionalInfo", ID: &iMexicoAdditionalInfo, Members: &mMexicoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoRequest_mexicoAdditionalInfo})
+var sAdditionalInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalInfoResponse, Members: &mAdditionalInfoResponse, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse})
+var sAdditionalInfoResponse_malaysiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "malaysiaAdditionalInfo", ID: &iMalaysiaAdditionalInfo, Members: &mMalaysiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_malaysiaAdditionalInfo})
+var sAdditionalInfoResponse_israelAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "israelAdditionalInfo", ID: &iIsraelAdditionalInfo, Members: &mIsraelAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_israelAdditionalInfo})
+var sAdditionalInfoResponse_estoniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estoniaAdditionalInfo", ID: &iEstoniaAdditionalInfo, Members: &mEstoniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_estoniaAdditionalInfo})
+var sAdditionalInfoResponse_canadaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canadaAdditionalInfo", ID: &iCanadaAdditionalInfo, Members: &mCanadaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_canadaAdditionalInfo})
+var sAdditionalInfoResponse_brazilAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brazilAdditionalInfo", ID: &iBrazilAdditionalInfo, Members: &mBrazilAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_brazilAdditionalInfo})
+var sAdditionalInfoResponse_spainAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spainAdditionalInfo", ID: &iSpainAdditionalInfo, Members: &mSpainAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_spainAdditionalInfo})
+var sAdditionalInfoResponse_kenyaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kenyaAdditionalInfo", ID: &iKenyaAdditionalInfo, Members: &mKenyaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_kenyaAdditionalInfo})
+var sAdditionalInfoResponse_southKoreaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "southKoreaAdditionalInfo", ID: &iSouthKoreaAdditionalInfo, Members: &mSouthKoreaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_southKoreaAdditionalInfo})
+var sAdditionalInfoResponse_turkeyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "turkeyAdditionalInfo", ID: &iTurkeyAdditionalInfo, Members: &mTurkeyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_turkeyAdditionalInfo})
+var sAdditionalInfoResponse_georgiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "georgiaAdditionalInfo", ID: &iGeorgiaAdditionalInfo, Members: &mGeorgiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_georgiaAdditionalInfo})
+var sAdditionalInfoResponse_italyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "italyAdditionalInfo", ID: &iItalyAdditionalInfo, Members: &mItalyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_italyAdditionalInfo})
+var sAdditionalInfoResponse_romaniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "romaniaAdditionalInfo", ID: &iRomaniaAdditionalInfo, Members: &mRomaniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_romaniaAdditionalInfo})
+var sAdditionalInfoResponse_ukraineAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ukraineAdditionalInfo", ID: &iUkraineAdditionalInfo, Members: &mUkraineAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_ukraineAdditionalInfo})
+var sAdditionalInfoResponse_polandAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "polandAdditionalInfo", ID: &iPolandAdditionalInfo, Members: &mPolandAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_polandAdditionalInfo})
+var sAdditionalInfoResponse_saudiArabiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saudiArabiaAdditionalInfo", ID: &iSaudiArabiaAdditionalInfo, Members: &mSaudiArabiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_saudiArabiaAdditionalInfo})
+var sAdditionalInfoResponse_indiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indiaAdditionalInfo", ID: &iIndiaAdditionalInfo, Members: &mIndiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_indiaAdditionalInfo})
+var sAdditionalInfoResponse_indonesiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indonesiaAdditionalInfo", ID: &iIndonesiaAdditionalInfo, Members: &mIndonesiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_indonesiaAdditionalInfo})
+var sAdditionalInfoResponse_vietnamAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vietnamAdditionalInfo", ID: &iVietnamAdditionalInfo, Members: &mVietnamAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_vietnamAdditionalInfo})
+var sAdditionalInfoResponse_egyptAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egyptAdditionalInfo", ID: &iEgyptAdditionalInfo, Members: &mEgyptAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_egyptAdditionalInfo})
+var sAdditionalInfoResponse_greeceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeceAdditionalInfo", ID: &iGreeceAdditionalInfo, Members: &mGreeceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_greeceAdditionalInfo})
+var sAdditionalInfoResponse_uzbekistanAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uzbekistanAdditionalInfo", ID: &iUzbekistanAdditionalInfo, Members: &mUzbekistanAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_uzbekistanAdditionalInfo})
+var sAdditionalInfoResponse_philippinesAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "philippinesAdditionalInfo", ID: &iPhilippinesAdditionalInfo, Members: &mPhilippinesAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_philippinesAdditionalInfo})
+var sAdditionalInfoResponse_belgiumAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "belgiumAdditionalInfo", ID: &iBelgiumAdditionalInfo, Members: &mBelgiumAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_belgiumAdditionalInfo})
+var sAdditionalInfoResponse_chileAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chileAdditionalInfo", ID: &iChileAdditionalInfo, Members: &mChileAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_chileAdditionalInfo})
+var sAdditionalInfoResponse_franceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "franceAdditionalInfo", ID: &iFranceAdditionalInfo, Members: &mFranceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_franceAdditionalInfo})
+var sAdditionalInfoResponse_monacoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monacoAdditionalInfo", ID: &iMonacoAdditionalInfo, Members: &mMonacoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_monacoAdditionalInfo})
+var sAdditionalInfoResponse_germanyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "germanyAdditionalInfo", ID: &iGermanyAdditionalInfo, Members: &mGermanyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_germanyAdditionalInfo})
+var sAdditionalInfoResponse_mexicoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mexicoAdditionalInfo", ID: &iMexicoAdditionalInfo, Members: &mMexicoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_mexicoAdditionalInfo})
+var sAdditionalInfoResponse_colombiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "colombiaAdditionalInfo", ID: &iColombiaAdditionalInfo, Members: &mColombiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalInfoResponse_colombiaAdditionalInfo})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var sAddress_addressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressLine1", ID: &i_AddressLine1, Type: smithy.ShapeTypeString, Ext: &eAddress_addressLine1})
+var sAddress_addressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressLine2", ID: &i_AddressLine2, Type: smithy.ShapeTypeString, Ext: &eAddress_addressLine2})
+var sAddress_addressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressLine3", ID: &i_AddressLine3, Type: smithy.ShapeTypeString, Ext: &eAddress_addressLine3})
+var sAddress_districtOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "districtOrCounty", ID: &i_District, Type: smithy.ShapeTypeString, Ext: &eAddress_districtOrCounty})
+var sAddress_city = smithy.NewStaticSchema(smithy.StaticSchema{Member: "city", ID: &i_City, Type: smithy.ShapeTypeString, Ext: &eAddress_city})
+var sAddress_stateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateOrRegion", ID: &i_State, Type: smithy.ShapeTypeString, Ext: &eAddress_stateOrRegion})
+var sAddress_postalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCode", ID: &i_PostalCode, Type: smithy.ShapeTypeString, Ext: &eAddress_postalCode})
+var sAddress_countryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "countryCode", ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &eAddress_countryCode})
+var s_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine1, Type: smithy.ShapeTypeString, Ext: &e_AddressLine1})
+var s_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine2, Type: smithy.ShapeTypeString, Ext: &e_AddressLine2})
+var s_AddressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine3, Type: smithy.ShapeTypeString, Ext: &e_AddressLine3})
+var s_AddressRoleMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressRoleMap, Members: &m_AddressRoleMap, Type: smithy.ShapeTypeMap, Ext: &e_AddressRoleMap})
+var s_AddressRoleMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iAddressRoleType, Members: &mAddressRoleType, Type: smithy.ShapeTypeEnum, Ext: &e_AddressRoleMap_key})
+var s_AddressRoleMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iJurisdiction, Members: &mJurisdiction, Type: smithy.ShapeTypeStructure, Ext: &e_AddressRoleMap_value})
+var sAddressRoleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressRoleType, Members: &mAddressRoleType, Type: smithy.ShapeTypeEnum, Ext: &eAddressRoleType})
+var sAddressRoleType_TAX_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressRoleType_TAX_ADDRESS})
+var sAddressRoleType_BILLING_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressRoleType_BILLING_ADDRESS})
+var sAddressRoleType_CONTACT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressRoleType_CONTACT_ADDRESS})
+var sAttachmentUploadException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentUploadException, Members: &mAttachmentUploadException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentUploadException})
+var sAttachmentUploadException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eAttachmentUploadException_message})
+var s_Authorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Authorities, Members: &m_Authorities, Type: smithy.ShapeTypeList, Ext: &e_Authorities})
+var s_Authorities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthority, Members: &mAuthority, Type: smithy.ShapeTypeStructure, Ext: &e_Authorities_member})
+var sAuthority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthority, Members: &mAuthority, Type: smithy.ShapeTypeStructure, Ext: &eAuthority})
+var sAuthority_country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "country", ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &eAuthority_country})
+var sAuthority_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString, Ext: &eAuthority_state})
+var sBatchDeleteTaxRegistrationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteTaxRegistrationError, Members: &mBatchDeleteTaxRegistrationError, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteTaxRegistrationError})
+var sBatchDeleteTaxRegistrationError_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteTaxRegistrationError_accountId})
+var sBatchDeleteTaxRegistrationError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteTaxRegistrationError_message})
+var sBatchDeleteTaxRegistrationError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteTaxRegistrationError_code})
+var s_BatchDeleteTaxRegistrationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteTaxRegistrationErrors, Members: &m_BatchDeleteTaxRegistrationErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteTaxRegistrationErrors})
+var s_BatchDeleteTaxRegistrationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteTaxRegistrationError, Members: &mBatchDeleteTaxRegistrationError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteTaxRegistrationErrors_member})
+var sBatchPutTaxRegistrationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutTaxRegistrationError, Members: &mBatchPutTaxRegistrationError, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutTaxRegistrationError})
+var sBatchPutTaxRegistrationError_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eBatchPutTaxRegistrationError_accountId})
+var sBatchPutTaxRegistrationError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eBatchPutTaxRegistrationError_message})
+var sBatchPutTaxRegistrationError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchPutTaxRegistrationError_code})
+var s_BatchPutTaxRegistrationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchPutTaxRegistrationErrors, Members: &m_BatchPutTaxRegistrationErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchPutTaxRegistrationErrors})
+var s_BatchPutTaxRegistrationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPutTaxRegistrationError, Members: &mBatchPutTaxRegistrationError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchPutTaxRegistrationErrors_member})
+var sBelgiumAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBelgiumAdditionalInfo, Members: &mBelgiumAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eBelgiumAdditionalInfo})
+var sBelgiumAdditionalInfo_peppolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "peppolId", ID: &i_PeppolId, Type: smithy.ShapeTypeString, Ext: &eBelgiumAdditionalInfo_peppolId})
+var sBelgiumAdditionalInfo_isMercuriusBoxEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMercuriusBoxEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eBelgiumAdditionalInfo_isMercuriusBoxEnabled})
+var sBrazilAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrazilAdditionalInfo, Members: &mBrazilAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrazilAdditionalInfo})
+var sBrazilAdditionalInfo_ccmCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccmCode", ID: &i_CcmCode, Type: smithy.ShapeTypeString, Ext: &eBrazilAdditionalInfo_ccmCode})
+var sBrazilAdditionalInfo_legalNatureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalNatureCode", ID: &i_LegalNatureCode, Type: smithy.ShapeTypeString, Ext: &eBrazilAdditionalInfo_legalNatureCode})
+var s_BusinessNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessNumber, Type: smithy.ShapeTypeString, Ext: &e_BusinessNumber})
+var s_BusinessRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &e_BusinessRegistrationNumber})
+var s_BusinessRepresentativeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessRepresentativeName, Type: smithy.ShapeTypeString, Ext: &e_BusinessRepresentativeName})
+var sCanadaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanadaAdditionalInfo, Members: &mCanadaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eCanadaAdditionalInfo})
+var sCanadaAdditionalInfo_provincialSalesTaxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provincialSalesTaxId", ID: &i_CanadaProvincialSalesTaxIdString, Type: smithy.ShapeTypeString, Ext: &eCanadaAdditionalInfo_provincialSalesTaxId})
+var sCanadaAdditionalInfo_canadaQuebecSalesTaxNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canadaQuebecSalesTaxNumber", ID: &i_CanadaQuebecSalesTaxNumberString, Type: smithy.ShapeTypeString, Ext: &eCanadaAdditionalInfo_canadaQuebecSalesTaxNumber})
+var sCanadaAdditionalInfo_canadaRetailSalesTaxNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canadaRetailSalesTaxNumber", ID: &i_CanadaRetailSalesTaxNumberString, Type: smithy.ShapeTypeString, Ext: &eCanadaAdditionalInfo_canadaRetailSalesTaxNumber})
+var sCanadaAdditionalInfo_isResellerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isResellerAccount", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCanadaAdditionalInfo_isResellerAccount})
+var s_CanadaProvincialSalesTaxIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanadaProvincialSalesTaxIdString, Type: smithy.ShapeTypeString, Ext: &e_CanadaProvincialSalesTaxIdString})
+var s_CanadaQuebecSalesTaxNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanadaQuebecSalesTaxNumberString, Type: smithy.ShapeTypeString, Ext: &e_CanadaQuebecSalesTaxNumberString})
+var s_CanadaRetailSalesTaxNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CanadaRetailSalesTaxNumberString, Type: smithy.ShapeTypeString, Ext: &e_CanadaRetailSalesTaxNumberString})
+var sCaseCreationLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseCreationLimitExceededException, Members: &mCaseCreationLimitExceededException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eCaseCreationLimitExceededException})
+var sCaseCreationLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eCaseCreationLimitExceededException_message})
+var s_CcmCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CcmCode, Type: smithy.ShapeTypeString, Ext: &e_CcmCode})
+var s_CertifiedEmailId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertifiedEmailId, Type: smithy.ShapeTypeString, Ext: &e_CertifiedEmailId})
+var sChileAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChileAdditionalInfo, Members: &mChileAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eChileAdditionalInfo})
+var sChileAdditionalInfo_documentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentType", ID: &iChileDocumentType, Members: &mChileDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eChileAdditionalInfo_documentType})
+var sChileAdditionalInfo_businessActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessActivity", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eChileAdditionalInfo_businessActivity})
+var sChileDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChileDocumentType, Members: &mChileDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eChileDocumentType})
+var sChileDocumentType_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChileDocumentType_INVOICE})
+var sChileDocumentType_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChileDocumentType_RECEIPT})
+var s_CigNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CigNumber, Type: smithy.ShapeTypeString, Ext: &e_CigNumber})
+var s_City = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_City, Type: smithy.ShapeTypeString, Ext: &e_City})
+var sColombiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColombiaAdditionalInfo, Members: &mColombiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eColombiaAdditionalInfo})
+var sColombiaAdditionalInfo_responsibilityCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responsibilityCodes", ID: &i_ColombiaResponsabilidadesList, Members: &m_ColombiaResponsabilidadesList, Type: smithy.ShapeTypeList, Ext: &eColombiaAdditionalInfo_responsibilityCodes})
+var sColombiaAdditionalInfo_taxpayerTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxpayerTypeCode", ID: &i_ColombiaTipoContribuyenteCode, Type: smithy.ShapeTypeString, Ext: &eColombiaAdditionalInfo_taxpayerTypeCode})
+var sColombiaAdditionalInfo_issueDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueDate", ID: &i_DateString, Type: smithy.ShapeTypeString, Ext: &eColombiaAdditionalInfo_issueDate})
+var s_ColombiaResponsabilidadCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColombiaResponsabilidadCode, Type: smithy.ShapeTypeString, Ext: &e_ColombiaResponsabilidadCode})
+var s_ColombiaResponsabilidadesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColombiaResponsabilidadesList, Members: &m_ColombiaResponsabilidadesList, Type: smithy.ShapeTypeList, Ext: &e_ColombiaResponsabilidadesList})
+var s_ColombiaResponsabilidadesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ColombiaResponsabilidadCode, Type: smithy.ShapeTypeString, Ext: &e_ColombiaResponsabilidadesList_member})
+var s_ColombiaTipoContribuyenteCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColombiaTipoContribuyenteCode, Type: smithy.ShapeTypeString, Ext: &e_ColombiaTipoContribuyenteCode})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eConflictException_errorCode})
+var s_ContractingAuthorityCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContractingAuthorityCode, Type: smithy.ShapeTypeString, Ext: &e_ContractingAuthorityCode})
+var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &e_CountryCode})
+var s_CupNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CupNumber, Type: smithy.ShapeTypeString, Ext: &e_CupNumber})
+var sCustomerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerType, Members: &mCustomerType, Type: smithy.ShapeTypeEnum, Ext: &eCustomerType})
+var sCustomerType_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerType_BUSINESS})
+var sCustomerType_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerType_INDIVIDUAL})
+var s_DateOfBirth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateOfBirth, Type: smithy.ShapeTypeString, Ext: &e_DateOfBirth})
+var s_DateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateString, Type: smithy.ShapeTypeString, Ext: &e_DateString})
+var s_DecisionNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DecisionNumber, Type: smithy.ShapeTypeString, Ext: &e_DecisionNumber})
+var s_DestinationFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationFilePath, Type: smithy.ShapeTypeString, Ext: &e_DestinationFilePath})
+var sDestinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationS3Location, Members: &mDestinationS3Location, Type: smithy.ShapeTypeStructure, Ext: &eDestinationS3Location})
+var sDestinationS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eDestinationS3Location_bucket})
+var sDestinationS3Location_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &eDestinationS3Location_prefix})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &e_DisplayName})
+var s_District = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_District, Type: smithy.ShapeTypeString, Ext: &e_District})
+var s_EconomicIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EconomicIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &e_EconomicIdentificationNumber})
+var sEgyptAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgyptAdditionalInfo, Members: &mEgyptAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eEgyptAdditionalInfo})
+var sEgyptAdditionalInfo_uniqueIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uniqueIdentificationNumber", ID: &i_UniqueIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &eEgyptAdditionalInfo_uniqueIdentificationNumber})
+var sEgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uniqueIdentificationNumberExpirationDate", ID: &i_DateString, Type: smithy.ShapeTypeString, Ext: &eEgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate})
+var s_ElectronicTransactionCodeNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElectronicTransactionCodeNumber, Type: smithy.ShapeTypeString, Ext: &e_ElectronicTransactionCodeNumber})
+var s_EnterpriseIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnterpriseIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &e_EnterpriseIdentificationNumber})
+var sEntityExemptionAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityExemptionAccountStatus, Members: &mEntityExemptionAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eEntityExemptionAccountStatus})
+var sEntityExemptionAccountStatus_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityExemptionAccountStatus_None})
+var sEntityExemptionAccountStatus_Valid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Valid", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityExemptionAccountStatus_Valid})
+var sEntityExemptionAccountStatus_Expired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expired", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityExemptionAccountStatus_Expired})
+var sEntityExemptionAccountStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityExemptionAccountStatus_Pending})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEstoniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstoniaAdditionalInfo, Members: &mEstoniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eEstoniaAdditionalInfo})
+var sEstoniaAdditionalInfo_registryCommercialCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryCommercialCode", ID: &i_RegistryCommercialCode, Type: smithy.ShapeTypeString, Ext: &eEstoniaAdditionalInfo_registryCommercialCode})
+var sExemptionCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExemptionCertificate, Members: &mExemptionCertificate, Type: smithy.ShapeTypeStructure, Ext: &eExemptionCertificate})
+var sExemptionCertificate_documentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentName", ID: &i_ExemptionDocumentName, Type: smithy.ShapeTypeString, Ext: &eExemptionCertificate_documentName})
+var sExemptionCertificate_documentFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentFile", ID: &i_ExemptionFileBlob, Type: smithy.ShapeTypeBlob, Ext: &eExemptionCertificate_documentFile})
+var s_ExemptionDocumentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExemptionDocumentName, Type: smithy.ShapeTypeString, Ext: &e_ExemptionDocumentName})
+var s_ExemptionFileBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExemptionFileBlob, Type: smithy.ShapeTypeBlob, Ext: &e_ExemptionFileBlob})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &e_FieldName})
+var s_FileBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileBlob, Type: smithy.ShapeTypeBlob, Ext: &e_FileBlob})
+var sFranceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFranceAdditionalInfo, Members: &mFranceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eFranceAdditionalInfo})
+var sFranceAdditionalInfo_sirenNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sirenNumber", ID: &i_SirenNumber, Type: smithy.ShapeTypeString, Ext: &eFranceAdditionalInfo_sirenNumber})
+var sFranceAdditionalInfo_eInvoiceRoutingCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eInvoiceRoutingCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFranceAdditionalInfo_eInvoiceRoutingCode})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericString})
+var sGeorgiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeorgiaAdditionalInfo, Members: &mGeorgiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eGeorgiaAdditionalInfo})
+var sGeorgiaAdditionalInfo_personType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personType", ID: &iPersonType, Members: &mPersonType, Type: smithy.ShapeTypeEnum, Ext: &eGeorgiaAdditionalInfo_personType})
+var sGermanyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGermanyAdditionalInfo, Members: &mGermanyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eGermanyAdditionalInfo})
+var sGermanyAdditionalInfo_economicIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "economicIdentificationNumber", ID: &i_EconomicIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &eGermanyAdditionalInfo_economicIdentificationNumber})
+var sGermanyAdditionalInfo_steuernummer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "steuernummer", ID: &i_Steuernummer, Type: smithy.ShapeTypeString, Ext: &eGermanyAdditionalInfo_steuernummer})
+var sGreeceAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreeceAdditionalInfo, Members: &mGreeceAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eGreeceAdditionalInfo})
+var sGreeceAdditionalInfo_contractingAuthorityCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contractingAuthorityCode", ID: &i_ContractingAuthorityCode, Type: smithy.ShapeTypeString, Ext: &eGreeceAdditionalInfo_contractingAuthorityCode})
+var sHeritageStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeritageStatus, Members: &mHeritageStatus, Type: smithy.ShapeTypeEnum, Ext: &eHeritageStatus})
+var sHeritageStatus_OptIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptIn", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHeritageStatus_OptIn})
+var sHeritageStatus_OptOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptOut", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHeritageStatus_OptOut})
+var sIndiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndiaAdditionalInfo, Members: &mIndiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eIndiaAdditionalInfo})
+var sIndiaAdditionalInfo_pan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pan", ID: &i_Pan, Type: smithy.ShapeTypeString, Ext: &eIndiaAdditionalInfo_pan})
+var s_IndividualRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndividualRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &e_IndividualRegistrationNumber})
+var sIndonesiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndonesiaAdditionalInfo, Members: &mIndonesiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eIndonesiaAdditionalInfo})
+var sIndonesiaAdditionalInfo_taxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationNumberType", ID: &iIndonesiaTaxRegistrationNumberType, Members: &mIndonesiaTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eIndonesiaAdditionalInfo_taxRegistrationNumberType})
+var sIndonesiaAdditionalInfo_ppnExceptionDesignationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ppnExceptionDesignationCode", ID: &i_PpnExceptionDesignationCode, Type: smithy.ShapeTypeString, Ext: &eIndonesiaAdditionalInfo_ppnExceptionDesignationCode})
+var sIndonesiaAdditionalInfo_decisionNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionNumber", ID: &i_DecisionNumber, Type: smithy.ShapeTypeString, Ext: &eIndonesiaAdditionalInfo_decisionNumber})
+var sIndonesiaTaxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndonesiaTaxRegistrationNumberType, Members: &mIndonesiaTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eIndonesiaTaxRegistrationNumberType})
+var sIndonesiaTaxRegistrationNumberType_NIK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndonesiaTaxRegistrationNumberType_NIK})
+var sIndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSPORT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER})
+var sIndonesiaTaxRegistrationNumberType_NPWP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NPWP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndonesiaTaxRegistrationNumberType_NPWP})
+var sIndonesiaTaxRegistrationNumberType_NITKU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NITKU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndonesiaTaxRegistrationNumberType_NITKU})
+var sIndustries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndustries, Members: &mIndustries, Type: smithy.ShapeTypeEnum, Ext: &eIndustries})
+var sIndustries_CIRCULATING_ORG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CIRCULATING_ORG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_CIRCULATING_ORG})
+var sIndustries_PROFESSIONAL_ORG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSIONAL_ORG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_PROFESSIONAL_ORG})
+var sIndustries_BANKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BANKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_BANKS})
+var sIndustries_INSURANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSURANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_INSURANCE})
+var sIndustries_PENSION_AND_BENEFIT_FUNDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENSION_AND_BENEFIT_FUNDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_PENSION_AND_BENEFIT_FUNDS})
+var sIndustries_DEVELOPMENT_AGENCIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEVELOPMENT_AGENCIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndustries_DEVELOPMENT_AGENCIES})
+var s_InheritanceObtainedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InheritanceObtainedReason, Type: smithy.ShapeTypeString, Ext: &e_InheritanceObtainedReason})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_errorCode})
+var sIsraelAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsraelAdditionalInfo, Members: &mIsraelAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eIsraelAdditionalInfo})
+var sIsraelAdditionalInfo_dealerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dealerType", ID: &iIsraelDealerType, Members: &mIsraelDealerType, Type: smithy.ShapeTypeEnum, Ext: &eIsraelAdditionalInfo_dealerType})
+var sIsraelAdditionalInfo_customerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerType", ID: &iIsraelCustomerType, Members: &mIsraelCustomerType, Type: smithy.ShapeTypeEnum, Ext: &eIsraelAdditionalInfo_customerType})
+var sIsraelCustomerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsraelCustomerType, Members: &mIsraelCustomerType, Type: smithy.ShapeTypeEnum, Ext: &eIsraelCustomerType})
+var sIsraelCustomerType_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIsraelCustomerType_BUSINESS})
+var sIsraelCustomerType_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIsraelCustomerType_INDIVIDUAL})
+var sIsraelDealerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsraelDealerType, Members: &mIsraelDealerType, Type: smithy.ShapeTypeEnum, Ext: &eIsraelDealerType})
+var sIsraelDealerType_AUTHORIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHORIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIsraelDealerType_AUTHORIZED})
+var sIsraelDealerType_NON_AUTHORIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_AUTHORIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIsraelDealerType_NON_AUTHORIZED})
+var sItalyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItalyAdditionalInfo, Members: &mItalyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eItalyAdditionalInfo})
+var sItalyAdditionalInfo_sdiAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sdiAccountId", ID: &i_SdiAccountId, Type: smithy.ShapeTypeString, Ext: &eItalyAdditionalInfo_sdiAccountId})
+var sItalyAdditionalInfo_cigNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cigNumber", ID: &i_CigNumber, Type: smithy.ShapeTypeString, Ext: &eItalyAdditionalInfo_cigNumber})
+var sItalyAdditionalInfo_cupNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cupNumber", ID: &i_CupNumber, Type: smithy.ShapeTypeString, Ext: &eItalyAdditionalInfo_cupNumber})
+var sItalyAdditionalInfo_taxCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxCode", ID: &i_TaxCode, Type: smithy.ShapeTypeString, Ext: &eItalyAdditionalInfo_taxCode})
+var sItalyAdditionalInfo_customerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerType", ID: &iCustomerType, Members: &mCustomerType, Type: smithy.ShapeTypeEnum, Ext: &eItalyAdditionalInfo_customerType})
+var s_ItemOfBusiness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemOfBusiness, Type: smithy.ShapeTypeString, Ext: &e_ItemOfBusiness})
+var sJurisdiction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJurisdiction, Members: &mJurisdiction, Type: smithy.ShapeTypeStructure, Ext: &eJurisdiction})
+var sJurisdiction_stateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateOrRegion", ID: &i_State, Type: smithy.ShapeTypeString, Ext: &eJurisdiction_stateOrRegion})
+var sJurisdiction_countryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "countryCode", ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &eJurisdiction_countryCode})
+var sKenyaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKenyaAdditionalInfo, Members: &mKenyaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eKenyaAdditionalInfo})
+var sKenyaAdditionalInfo_personType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personType", ID: &iPersonType, Members: &mPersonType, Type: smithy.ShapeTypeEnum, Ext: &eKenyaAdditionalInfo_personType})
+var s_KepEmailId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KepEmailId, Type: smithy.ShapeTypeString, Ext: &e_KepEmailId})
+var s_LegalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &e_LegalName})
+var s_LegalNatureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LegalNatureCode, Type: smithy.ShapeTypeString, Ext: &e_LegalNatureCode})
+var s_LineOfBusiness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineOfBusiness, Type: smithy.ShapeTypeString, Ext: &e_LineOfBusiness})
+var sMalaysiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalaysiaAdditionalInfo, Members: &mMalaysiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eMalaysiaAdditionalInfo})
+var sMalaysiaAdditionalInfo_serviceTaxCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTaxCodes", ID: &i_MalaysiaServiceTaxCodesList, Members: &m_MalaysiaServiceTaxCodesList, Type: smithy.ShapeTypeList, Ext: &eMalaysiaAdditionalInfo_serviceTaxCodes})
+var sMalaysiaAdditionalInfo_taxInformationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxInformationNumber", ID: &i_TaxInformationNumber, Type: smithy.ShapeTypeString, Ext: &eMalaysiaAdditionalInfo_taxInformationNumber})
+var sMalaysiaAdditionalInfo_businessRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessRegistrationNumber", ID: &i_BusinessRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &eMalaysiaAdditionalInfo_businessRegistrationNumber})
+var sMalaysiaServiceTaxCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalaysiaServiceTaxCode, Members: &mMalaysiaServiceTaxCode, Type: smithy.ShapeTypeEnum, Ext: &eMalaysiaServiceTaxCode})
+var sMalaysiaServiceTaxCode_CONSULTANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONSULTANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMalaysiaServiceTaxCode_CONSULTANCY})
+var sMalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIGITAL_SVC_ELECTRONIC_MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM})
+var sMalaysiaServiceTaxCode_IT_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMalaysiaServiceTaxCode_IT_SERVICES})
+var sMalaysiaServiceTaxCode_TRAINING_OR_COACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING_OR_COACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMalaysiaServiceTaxCode_TRAINING_OR_COACHING})
+var s_MalaysiaServiceTaxCodesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MalaysiaServiceTaxCodesList, Members: &m_MalaysiaServiceTaxCodesList, Type: smithy.ShapeTypeList, Ext: &e_MalaysiaServiceTaxCodesList})
+var s_MalaysiaServiceTaxCodesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMalaysiaServiceTaxCode, Members: &mMalaysiaServiceTaxCode, Type: smithy.ShapeTypeEnum, Ext: &e_MalaysiaServiceTaxCodesList_member})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMexicoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMexicoAdditionalInfo, Members: &mMexicoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eMexicoAdditionalInfo})
+var sMexicoAdditionalInfo_taxRegime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegime", ID: &i_MexicoTaxRegimeCode, Type: smithy.ShapeTypeString, Ext: &eMexicoAdditionalInfo_taxRegime})
+var sMexicoAdditionalInfo_taxRegimeFullName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegimeFullName", ID: &i_MexicoTaxRegimeFullName, Type: smithy.ShapeTypeString, Ext: &eMexicoAdditionalInfo_taxRegimeFullName})
+var sMexicoAdditionalInfo_cfdiUsageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cfdiUsageCode", ID: &i_MexicoCfdiUsageCode, Type: smithy.ShapeTypeString, Ext: &eMexicoAdditionalInfo_cfdiUsageCode})
+var s_MexicoCfdiUsageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MexicoCfdiUsageCode, Type: smithy.ShapeTypeString, Ext: &e_MexicoCfdiUsageCode})
+var s_MexicoTaxRegimeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MexicoTaxRegimeCode, Type: smithy.ShapeTypeString, Ext: &e_MexicoTaxRegimeCode})
+var s_MexicoTaxRegimeFullName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MexicoTaxRegimeFullName, Type: smithy.ShapeTypeString, Ext: &e_MexicoTaxRegimeFullName})
+var sMonacoAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonacoAdditionalInfo, Members: &mMonacoAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eMonacoAdditionalInfo})
+var sMonacoAdditionalInfo_businessNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessNumber", ID: &i_BusinessNumber, Type: smithy.ShapeTypeString, Ext: &eMonacoAdditionalInfo_businessNumber})
+var s_PaginationTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &e_PaginationTokenString})
+var s_Pan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Pan, Type: smithy.ShapeTypeString, Ext: &e_Pan})
+var s_PaymentVoucherNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaymentVoucherNumber, Type: smithy.ShapeTypeString, Ext: &e_PaymentVoucherNumber})
+var s_PeppolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeppolId, Type: smithy.ShapeTypeString, Ext: &e_PeppolId})
+var sPersonType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersonType, Members: &mPersonType, Type: smithy.ShapeTypeEnum, Ext: &ePersonType})
+var sPersonType_LEGAL_PERSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_PERSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePersonType_LEGAL_PERSON})
+var sPersonType_PHYSICAL_PERSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHYSICAL_PERSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePersonType_PHYSICAL_PERSON})
+var sPersonType_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePersonType_BUSINESS})
+var sPhilippinesAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhilippinesAdditionalInfo, Members: &mPhilippinesAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &ePhilippinesAdditionalInfo})
+var sPhilippinesAdditionalInfo_isVatRegistered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isVatRegistered", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhilippinesAdditionalInfo_isVatRegistered})
+var sPolandAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolandAdditionalInfo, Members: &mPolandAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &ePolandAdditionalInfo})
+var sPolandAdditionalInfo_individualRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "individualRegistrationNumber", ID: &i_IndividualRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &ePolandAdditionalInfo_individualRegistrationNumber})
+var sPolandAdditionalInfo_isGroupVatEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isGroupVatEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePolandAdditionalInfo_isGroupVatEnabled})
+var sPolandAdditionalInfo_taxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationNumberType", ID: &iPolandTaxRegistrationNumberType, Members: &mPolandTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &ePolandAdditionalInfo_taxRegistrationNumberType})
+var sPolandTaxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolandTaxRegistrationNumberType, Members: &mPolandTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &ePolandTaxRegistrationNumberType})
+var sPolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_TAX_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER})
+var sPolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_TAX_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER})
+var sPolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER})
+var s_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostalCode, Type: smithy.ShapeTypeString, Ext: &e_PostalCode})
+var s_PpnExceptionDesignationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PpnExceptionDesignationCode, Type: smithy.ShapeTypeString, Ext: &e_PpnExceptionDesignationCode})
+var s_RegistrationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &e_RegistrationId})
+var sRegistrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationType, Members: &mRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eRegistrationType})
+var sRegistrationType_INTRA_EU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTRA_EU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationType_INTRA_EU})
+var sRegistrationType_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationType_LOCAL})
+var s_RegistryCommercialCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryCommercialCode, Type: smithy.ShapeTypeString, Ext: &e_RegistryCommercialCode})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_errorCode})
+var sRomaniaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRomaniaAdditionalInfo, Members: &mRomaniaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eRomaniaAdditionalInfo})
+var sRomaniaAdditionalInfo_taxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationNumberType", ID: &iTaxRegistrationNumberType, Members: &mTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eRomaniaAdditionalInfo_taxRegistrationNumberType})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var s_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &e_S3Prefix})
+var sSaudiArabiaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaudiArabiaAdditionalInfo, Members: &mSaudiArabiaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eSaudiArabiaAdditionalInfo})
+var sSaudiArabiaAdditionalInfo_taxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationNumberType", ID: &iSaudiArabiaTaxRegistrationNumberType, Members: &mSaudiArabiaTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eSaudiArabiaAdditionalInfo_taxRegistrationNumberType})
+var sSaudiArabiaTaxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaudiArabiaTaxRegistrationNumberType, Members: &mSaudiArabiaTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eSaudiArabiaTaxRegistrationNumberType})
+var sSaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER})
+var sSaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_IDENTIFICATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER})
+var sSaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMERCIAL_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER})
+var s_SdiAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SdiAccountId, Type: smithy.ShapeTypeString, Ext: &e_SdiAccountId})
+var s_SecondaryTaxId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryTaxId, Type: smithy.ShapeTypeString, Ext: &e_SecondaryTaxId})
+var sSector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eSector})
+var sSector_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_BUSINESS})
+var sSector_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_INDIVIDUAL})
+var sSector_PUBLIC_INSTITUTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_INSTITUTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_PUBLIC_INSTITUTIONS})
+var s_Seller = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Seller, Type: smithy.ShapeTypeString, Ext: &e_Seller})
+var s_SirenNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SirenNumber, Type: smithy.ShapeTypeString, Ext: &e_SirenNumber})
+var sSourceS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceS3Location, Members: &mSourceS3Location, Type: smithy.ShapeTypeStructure, Ext: &eSourceS3Location})
+var sSourceS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eSourceS3Location_bucket})
+var sSourceS3Location_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eSourceS3Location_key})
+var sSouthKoreaAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSouthKoreaAdditionalInfo, Members: &mSouthKoreaAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eSouthKoreaAdditionalInfo})
+var sSouthKoreaAdditionalInfo_businessRepresentativeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessRepresentativeName", ID: &i_BusinessRepresentativeName, Type: smithy.ShapeTypeString, Ext: &eSouthKoreaAdditionalInfo_businessRepresentativeName})
+var sSouthKoreaAdditionalInfo_lineOfBusiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lineOfBusiness", ID: &i_LineOfBusiness, Type: smithy.ShapeTypeString, Ext: &eSouthKoreaAdditionalInfo_lineOfBusiness})
+var sSouthKoreaAdditionalInfo_itemOfBusiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemOfBusiness", ID: &i_ItemOfBusiness, Type: smithy.ShapeTypeString, Ext: &eSouthKoreaAdditionalInfo_itemOfBusiness})
+var sSpainAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpainAdditionalInfo, Members: &mSpainAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eSpainAdditionalInfo})
+var sSpainAdditionalInfo_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iRegistrationType, Members: &mRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eSpainAdditionalInfo_registrationType})
+var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Type: smithy.ShapeTypeString, Ext: &e_State})
+var s_StatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &e_StatusReasonCode})
+var s_StatusReasonMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonMessage, Type: smithy.ShapeTypeString, Ext: &e_StatusReasonMessage})
+var s_Steuernummer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Steuernummer, Type: smithy.ShapeTypeString, Ext: &e_Steuernummer})
+var sSupplementalTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalTaxRegistration, Members: &mSupplementalTaxRegistration, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalTaxRegistration})
+var sSupplementalTaxRegistration_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eSupplementalTaxRegistration_registrationId})
+var sSupplementalTaxRegistration_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iSupplementalTaxRegistrationType, Members: &mSupplementalTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalTaxRegistration_registrationType})
+var sSupplementalTaxRegistration_legalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalName", ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &eSupplementalTaxRegistration_legalName})
+var sSupplementalTaxRegistration_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalTaxRegistration_address})
+var sSupplementalTaxRegistration_authorityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorityId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eSupplementalTaxRegistration_authorityId})
+var sSupplementalTaxRegistration_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalTaxRegistration_status})
+var sSupplementalTaxRegistrationEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalTaxRegistrationEntry, Members: &mSupplementalTaxRegistrationEntry, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalTaxRegistrationEntry})
+var sSupplementalTaxRegistrationEntry_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eSupplementalTaxRegistrationEntry_registrationId})
+var sSupplementalTaxRegistrationEntry_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iSupplementalTaxRegistrationType, Members: &mSupplementalTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalTaxRegistrationEntry_registrationType})
+var sSupplementalTaxRegistrationEntry_legalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalName", ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &eSupplementalTaxRegistrationEntry_legalName})
+var sSupplementalTaxRegistrationEntry_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalTaxRegistrationEntry_address})
+var s_SupplementalTaxRegistrationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplementalTaxRegistrationList, Members: &m_SupplementalTaxRegistrationList, Type: smithy.ShapeTypeList, Ext: &e_SupplementalTaxRegistrationList})
+var s_SupplementalTaxRegistrationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupplementalTaxRegistration, Members: &mSupplementalTaxRegistration, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &e_SupplementalTaxRegistrationList_member})
+var sSupplementalTaxRegistrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalTaxRegistrationType, Members: &mSupplementalTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalTaxRegistrationType})
+var sSupplementalTaxRegistrationType_VAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalTaxRegistrationType_VAT})
+var s_TaxCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxCode, Type: smithy.ShapeTypeString, Ext: &e_TaxCode})
+var s_TaxDocumentAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxDocumentAccessToken, Type: smithy.ShapeTypeString, Ext: &e_TaxDocumentAccessToken})
+var sTaxDocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxDocumentMetadata, Members: &mTaxDocumentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eTaxDocumentMetadata})
+var sTaxDocumentMetadata_taxDocumentAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxDocumentAccessToken", ID: &i_TaxDocumentAccessToken, Type: smithy.ShapeTypeString, Ext: &eTaxDocumentMetadata_taxDocumentAccessToken})
+var sTaxDocumentMetadata_taxDocumentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxDocumentName", ID: &i_TaxDocumentName, Type: smithy.ShapeTypeString, Ext: &eTaxDocumentMetadata_taxDocumentName})
+var s_TaxDocumentMetadatas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxDocumentMetadatas, Members: &m_TaxDocumentMetadatas, Type: smithy.ShapeTypeList, Ext: &e_TaxDocumentMetadatas})
+var s_TaxDocumentMetadatas_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxDocumentMetadata, Members: &mTaxDocumentMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_TaxDocumentMetadatas_member})
+var s_TaxDocumentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxDocumentName, Type: smithy.ShapeTypeString, Ext: &e_TaxDocumentName})
+var sTaxExemption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxExemption, Members: &mTaxExemption, Type: smithy.ShapeTypeStructure, Ext: &eTaxExemption})
+var sTaxExemption_authority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authority", ID: &iAuthority, Members: &mAuthority, Type: smithy.ShapeTypeStructure, Ext: &eTaxExemption_authority})
+var sTaxExemption_taxExemptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxExemptionType", ID: &iTaxExemptionType, Members: &mTaxExemptionType, Type: smithy.ShapeTypeStructure, Ext: &eTaxExemption_taxExemptionType})
+var sTaxExemption_effectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTaxExemption_effectiveDate})
+var sTaxExemption_expirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTaxExemption_expirationDate})
+var sTaxExemption_systemEffectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemEffectiveDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTaxExemption_systemEffectiveDate})
+var sTaxExemption_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEntityExemptionAccountStatus, Members: &mEntityExemptionAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaxExemption_status})
+var sTaxExemptionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxExemptionDetails, Members: &mTaxExemptionDetails, Type: smithy.ShapeTypeStructure, Ext: &eTaxExemptionDetails})
+var sTaxExemptionDetails_taxExemptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxExemptions", ID: &i_TaxExemptions, Members: &m_TaxExemptions, Type: smithy.ShapeTypeList, Ext: &eTaxExemptionDetails_taxExemptions})
+var sTaxExemptionDetails_heritageObtainedDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heritageObtainedDetails", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eTaxExemptionDetails_heritageObtainedDetails})
+var sTaxExemptionDetails_heritageObtainedParentEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heritageObtainedParentEntity", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTaxExemptionDetails_heritageObtainedParentEntity})
+var sTaxExemptionDetails_heritageObtainedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heritageObtainedReason", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTaxExemptionDetails_heritageObtainedReason})
+var s_TaxExemptionDetailsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxExemptionDetailsMap, Members: &m_TaxExemptionDetailsMap, Type: smithy.ShapeTypeMap, Ext: &e_TaxExemptionDetailsMap})
+var s_TaxExemptionDetailsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_TaxExemptionDetailsMap_key})
+var s_TaxExemptionDetailsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTaxExemptionDetails, Members: &mTaxExemptionDetails, Type: smithy.ShapeTypeStructure, Ext: &e_TaxExemptionDetailsMap_value})
+var s_TaxExemptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxExemptions, Members: &m_TaxExemptions, Type: smithy.ShapeTypeList, Ext: &e_TaxExemptions})
+var s_TaxExemptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxExemption, Members: &mTaxExemption, Type: smithy.ShapeTypeStructure, Ext: &e_TaxExemptions_member})
+var sTaxExemptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxExemptionType, Members: &mTaxExemptionType, Type: smithy.ShapeTypeStructure, Ext: &eTaxExemptionType})
+var sTaxExemptionType_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString, Ext: &eTaxExemptionType_displayName})
+var sTaxExemptionType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eTaxExemptionType_description})
+var sTaxExemptionType_applicableJurisdictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicableJurisdictions", ID: &i_Authorities, Members: &m_Authorities, Type: smithy.ShapeTypeList, Ext: &eTaxExemptionType_applicableJurisdictions})
+var s_TaxExemptionTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxExemptionTypes, Members: &m_TaxExemptionTypes, Type: smithy.ShapeTypeList, Ext: &e_TaxExemptionTypes})
+var s_TaxExemptionTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxExemptionType, Members: &mTaxExemptionType, Type: smithy.ShapeTypeStructure, Ext: &e_TaxExemptionTypes_member})
+var s_TaxInformationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxInformationNumber, Type: smithy.ShapeTypeString, Ext: &e_TaxInformationNumber})
+var sTaxInheritanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxInheritanceDetails, Members: &mTaxInheritanceDetails, Type: smithy.ShapeTypeStructure, Ext: &eTaxInheritanceDetails})
+var sTaxInheritanceDetails_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eTaxInheritanceDetails_parentEntityId})
+var sTaxInheritanceDetails_inheritanceObtainedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceObtainedReason", ID: &i_InheritanceObtainedReason, Type: smithy.ShapeTypeString, Ext: &eTaxInheritanceDetails_inheritanceObtainedReason})
+var s_TaxOffice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxOffice, Type: smithy.ShapeTypeString, Ext: &e_TaxOffice})
+var sTaxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistration, Members: &mTaxRegistration, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistration})
+var sTaxRegistration_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistration_registrationId})
+var sTaxRegistration_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iTaxRegistrationType, Members: &mTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistration_registrationType})
+var sTaxRegistration_legalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalName", ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &eTaxRegistration_legalName})
+var sTaxRegistration_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistration_status})
+var sTaxRegistration_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistration_sector})
+var sTaxRegistration_taxDocumentMetadatas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxDocumentMetadatas", ID: &i_TaxDocumentMetadatas, Members: &m_TaxDocumentMetadatas, Type: smithy.ShapeTypeList, Ext: &eTaxRegistration_taxDocumentMetadatas})
+var sTaxRegistration_certifiedEmailId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certifiedEmailId", ID: &i_CertifiedEmailId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistration_certifiedEmailId})
+var sTaxRegistration_additionalTaxInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalTaxInformation", ID: &iAdditionalInfoResponse, Members: &mAdditionalInfoResponse, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistration_additionalTaxInformation})
+var sTaxRegistration_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &iTaxRegistrationStatusReason, Members: &mTaxRegistrationStatusReason, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistration_statusReason})
+var sTaxRegistration_legalAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistration_legalAddress})
+var sTaxRegistrationDocFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationDocFile, Members: &mTaxRegistrationDocFile, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationDocFile})
+var sTaxRegistrationDocFile_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_TaxDocumentName, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationDocFile_fileName})
+var sTaxRegistrationDocFile_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileBlob, Type: smithy.ShapeTypeBlob, Ext: &eTaxRegistrationDocFile_fileContent})
+var sTaxRegistrationDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationDocument, Members: &mTaxRegistrationDocument, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationDocument})
+var sTaxRegistrationDocument_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iSourceS3Location, Members: &mSourceS3Location, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationDocument_s3Location})
+var sTaxRegistrationDocument_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iTaxRegistrationDocFile, Members: &mTaxRegistrationDocFile, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationDocument_file})
+var s_TaxRegistrationDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxRegistrationDocuments, Members: &m_TaxRegistrationDocuments, Type: smithy.ShapeTypeList, Ext: &e_TaxRegistrationDocuments})
+var s_TaxRegistrationDocuments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxRegistrationDocument, Members: &mTaxRegistrationDocument, Type: smithy.ShapeTypeStructure, Ext: &e_TaxRegistrationDocuments_member})
+var sTaxRegistrationEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationEntry, Members: &mTaxRegistrationEntry, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationEntry})
+var sTaxRegistrationEntry_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationEntry_registrationId})
+var sTaxRegistrationEntry_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iTaxRegistrationType, Members: &mTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationEntry_registrationType})
+var sTaxRegistrationEntry_legalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalName", ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationEntry_legalName})
+var sTaxRegistrationEntry_legalAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationEntry_legalAddress})
+var sTaxRegistrationEntry_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationEntry_sector})
+var sTaxRegistrationEntry_additionalTaxInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalTaxInformation", ID: &iAdditionalInfoRequest, Members: &mAdditionalInfoRequest, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationEntry_additionalTaxInformation})
+var sTaxRegistrationEntry_verificationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verificationDetails", ID: &iVerificationDetails, Members: &mVerificationDetails, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationEntry_verificationDetails})
+var sTaxRegistrationEntry_certifiedEmailId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certifiedEmailId", ID: &i_CertifiedEmailId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationEntry_certifiedEmailId})
+var sTaxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationNumberType, Members: &mTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationNumberType})
+var sTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER})
+var sTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER})
+var sTaxRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationStatus})
+var sTaxRegistrationStatus_VERIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationStatus_VERIFIED})
+var sTaxRegistrationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationStatus_PENDING})
+var sTaxRegistrationStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationStatus_DELETED})
+var sTaxRegistrationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationStatus_REJECTED})
+var sTaxRegistrationStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationStatusReason, Members: &mTaxRegistrationStatusReason, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationStatusReason})
+var sTaxRegistrationStatusReason_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationStatusReason_code})
+var sTaxRegistrationStatusReason_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_StatusReasonMessage, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationStatusReason_message})
+var sTaxRegistrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationType, Members: &mTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationType})
+var sTaxRegistrationType_VAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_VAT})
+var sTaxRegistrationType_GST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_GST})
+var sTaxRegistrationType_CPF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CPF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_CPF})
+var sTaxRegistrationType_CNPJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNPJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_CNPJ})
+var sTaxRegistrationType_SST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_SST})
+var sTaxRegistrationType_TIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_TIN})
+var sTaxRegistrationType_NRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_NRIC})
+var sTaxRegistrationType_PAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_PAN})
+var sTaxRegistrationType_NIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_NIP})
+var sTaxRegistrationType_CUIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_CUIT})
+var sTaxRegistrationType_CDI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CDI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_CDI})
+var sTaxRegistrationType_RUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_RUT})
+var sTaxRegistrationType_NIE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_NIE})
+var sTaxRegistrationType_CI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationType_CI})
+var sTaxRegistrationWithJurisdiction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxRegistrationWithJurisdiction, Members: &mTaxRegistrationWithJurisdiction, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationWithJurisdiction})
+var sTaxRegistrationWithJurisdiction_registrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationId", ID: &i_RegistrationId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationWithJurisdiction_registrationId})
+var sTaxRegistrationWithJurisdiction_registrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationType", ID: &iTaxRegistrationType, Members: &mTaxRegistrationType, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationWithJurisdiction_registrationType})
+var sTaxRegistrationWithJurisdiction_legalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "legalName", ID: &i_LegalName, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationWithJurisdiction_legalName})
+var sTaxRegistrationWithJurisdiction_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationWithJurisdiction_status})
+var sTaxRegistrationWithJurisdiction_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eTaxRegistrationWithJurisdiction_sector})
+var sTaxRegistrationWithJurisdiction_taxDocumentMetadatas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxDocumentMetadatas", ID: &i_TaxDocumentMetadatas, Members: &m_TaxDocumentMetadatas, Type: smithy.ShapeTypeList, Ext: &eTaxRegistrationWithJurisdiction_taxDocumentMetadatas})
+var sTaxRegistrationWithJurisdiction_certifiedEmailId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certifiedEmailId", ID: &i_CertifiedEmailId, Type: smithy.ShapeTypeString, Ext: &eTaxRegistrationWithJurisdiction_certifiedEmailId})
+var sTaxRegistrationWithJurisdiction_additionalTaxInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalTaxInformation", ID: &iAdditionalInfoResponse, Members: &mAdditionalInfoResponse, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationWithJurisdiction_additionalTaxInformation})
+var sTaxRegistrationWithJurisdiction_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &iTaxRegistrationStatusReason, Members: &mTaxRegistrationStatusReason, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationWithJurisdiction_statusReason})
+var sTaxRegistrationWithJurisdiction_jurisdiction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jurisdiction", ID: &iJurisdiction, Members: &mJurisdiction, Type: smithy.ShapeTypeStructure, Ext: &eTaxRegistrationWithJurisdiction_jurisdiction})
+var sTurkeyAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTurkeyAdditionalInfo, Members: &mTurkeyAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eTurkeyAdditionalInfo})
+var sTurkeyAdditionalInfo_taxOffice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxOffice", ID: &i_TaxOffice, Type: smithy.ShapeTypeString, Ext: &eTurkeyAdditionalInfo_taxOffice})
+var sTurkeyAdditionalInfo_kepEmailId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kepEmailId", ID: &i_KepEmailId, Type: smithy.ShapeTypeString, Ext: &eTurkeyAdditionalInfo_kepEmailId})
+var sTurkeyAdditionalInfo_secondaryTaxId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secondaryTaxId", ID: &i_SecondaryTaxId, Type: smithy.ShapeTypeString, Ext: &eTurkeyAdditionalInfo_secondaryTaxId})
+var sTurkeyAdditionalInfo_industries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "industries", ID: &iIndustries, Members: &mIndustries, Type: smithy.ShapeTypeEnum, Ext: &eTurkeyAdditionalInfo_industries})
+var sUkraineAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUkraineAdditionalInfo, Members: &mUkraineAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eUkraineAdditionalInfo})
+var sUkraineAdditionalInfo_ukraineTrnType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ukraineTrnType", ID: &iUkraineTrnType, Members: &mUkraineTrnType, Type: smithy.ShapeTypeEnum, Ext: &eUkraineAdditionalInfo_ukraineTrnType})
+var sUkraineTrnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUkraineTrnType, Members: &mUkraineTrnType, Type: smithy.ShapeTypeEnum, Ext: &eUkraineTrnType})
+var sUkraineTrnType_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUkraineTrnType_BUSINESS})
+var sUkraineTrnType_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUkraineTrnType_INDIVIDUAL})
+var s_UniqueIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UniqueIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &e_UniqueIdentificationNumber})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &e_Url})
+var sUzbekistanAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUzbekistanAdditionalInfo, Members: &mUzbekistanAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eUzbekistanAdditionalInfo})
+var sUzbekistanAdditionalInfo_taxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationNumberType", ID: &iUzbekistanTaxRegistrationNumberType, Members: &mUzbekistanTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eUzbekistanAdditionalInfo_taxRegistrationNumberType})
+var sUzbekistanAdditionalInfo_vatRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vatRegistrationNumber", ID: &i_VatRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &eUzbekistanAdditionalInfo_vatRegistrationNumber})
+var sUzbekistanTaxRegistrationNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUzbekistanTaxRegistrationNumberType, Members: &mUzbekistanTaxRegistrationNumberType, Type: smithy.ShapeTypeEnum, Ext: &eUzbekistanTaxRegistrationNumberType})
+var sUzbekistanTaxRegistrationNumberType_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUzbekistanTaxRegistrationNumberType_BUSINESS})
+var sUzbekistanTaxRegistrationNumberType_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUzbekistanTaxRegistrationNumberType_INDIVIDUAL})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_errorCode})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionErrorCode})
+var sValidationExceptionErrorCode_MALFORMED_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MALFORMED_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_MALFORMED_TOKEN})
+var sValidationExceptionErrorCode_EXPIRED_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_EXPIRED_TOKEN})
+var sValidationExceptionErrorCode_INVALID_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_INVALID_TOKEN})
+var sValidationExceptionErrorCode_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_FIELD_VALIDATION_FAILED})
+var sValidationExceptionErrorCode_MISSING_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_MISSING_INPUT})
+var sValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN})
+var sValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GST_EXISTENCE_BLOCK_SET_PAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_VatRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VatRegistrationNumber, Type: smithy.ShapeTypeString, Ext: &e_VatRegistrationNumber})
+var sVerificationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerificationDetails, Members: &mVerificationDetails, Type: smithy.ShapeTypeStructure, Ext: &eVerificationDetails})
+var sVerificationDetails_dateOfBirth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateOfBirth", ID: &i_DateOfBirth, Type: smithy.ShapeTypeString, Ext: &eVerificationDetails_dateOfBirth})
+var sVerificationDetails_taxRegistrationDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationDocuments", ID: &i_TaxRegistrationDocuments, Members: &m_TaxRegistrationDocuments, Type: smithy.ShapeTypeList, Ext: &eVerificationDetails_taxRegistrationDocuments})
+var sVietnamAdditionalInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVietnamAdditionalInfo, Members: &mVietnamAdditionalInfo, Type: smithy.ShapeTypeStructure, Ext: &eVietnamAdditionalInfo})
+var sVietnamAdditionalInfo_enterpriseIdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enterpriseIdentificationNumber", ID: &i_EnterpriseIdentificationNumber, Type: smithy.ShapeTypeString, Ext: &eVietnamAdditionalInfo_enterpriseIdentificationNumber})
+var sVietnamAdditionalInfo_electronicTransactionCodeNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "electronicTransactionCodeNumber", ID: &i_ElectronicTransactionCodeNumber, Type: smithy.ShapeTypeString, Ext: &eVietnamAdditionalInfo_electronicTransactionCodeNumber})
+var sVietnamAdditionalInfo_paymentVoucherNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentVoucherNumber", ID: &i_PaymentVoucherNumber, Type: smithy.ShapeTypeString, Ext: &eVietnamAdditionalInfo_paymentVoucherNumber})
+var sVietnamAdditionalInfo_paymentVoucherNumberDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentVoucherNumberDate", ID: &i_DateString, Type: smithy.ShapeTypeString, Ext: &eVietnamAdditionalInfo_paymentVoucherNumberDate})
+var sBatchDeleteTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteTaxRegistrationRequest, Members: &mBatchDeleteTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteTaxRegistrationRequest})
+var sBatchDeleteTaxRegistrationRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteTaxRegistrationRequest_accountIds})
+var sBatchDeleteTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteTaxRegistrationResponse, Members: &mBatchDeleteTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteTaxRegistrationResponse})
+var sBatchDeleteTaxRegistrationResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDeleteTaxRegistrationErrors, Members: &m_BatchDeleteTaxRegistrationErrors, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteTaxRegistrationResponse_errors})
+var sBatchGetTaxExemptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTaxExemptionsRequest, Members: &mBatchGetTaxExemptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTaxExemptionsRequest})
+var sBatchGetTaxExemptionsRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetTaxExemptionsRequest_accountIds})
+var sBatchGetTaxExemptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetTaxExemptionsResponse, Members: &mBatchGetTaxExemptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetTaxExemptionsResponse})
+var sBatchGetTaxExemptionsResponse_taxExemptionDetailsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxExemptionDetailsMap", ID: &i_TaxExemptionDetailsMap, Members: &m_TaxExemptionDetailsMap, Type: smithy.ShapeTypeMap, Ext: &eBatchGetTaxExemptionsResponse_taxExemptionDetailsMap})
+var sBatchGetTaxExemptionsResponse_failedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedAccounts", ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &eBatchGetTaxExemptionsResponse_failedAccounts})
+var sBatchPutTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutTaxRegistrationRequest, Members: &mBatchPutTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutTaxRegistrationRequest})
+var sBatchPutTaxRegistrationRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &eBatchPutTaxRegistrationRequest_accountIds})
+var sBatchPutTaxRegistrationRequest_taxRegistrationEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationEntry", ID: &iTaxRegistrationEntry, Members: &mTaxRegistrationEntry, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutTaxRegistrationRequest_taxRegistrationEntry})
+var sBatchPutTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutTaxRegistrationResponse, Members: &mBatchPutTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutTaxRegistrationResponse})
+var sBatchPutTaxRegistrationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchPutTaxRegistrationResponse_status})
+var sBatchPutTaxRegistrationResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchPutTaxRegistrationErrors, Members: &m_BatchPutTaxRegistrationErrors, Type: smithy.ShapeTypeList, Ext: &eBatchPutTaxRegistrationResponse_errors})
+var sDeleteSupplementalTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupplementalTaxRegistrationRequest, Members: &mDeleteSupplementalTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSupplementalTaxRegistrationRequest})
+var sDeleteSupplementalTaxRegistrationRequest_authorityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorityId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDeleteSupplementalTaxRegistrationRequest_authorityId})
+var sDeleteSupplementalTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupplementalTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSupplementalTaxRegistrationResponse})
+var sDeleteTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTaxRegistrationRequest, Members: &mDeleteTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTaxRegistrationRequest})
+var sDeleteTaxRegistrationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteTaxRegistrationRequest_accountId})
+var sDeleteTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTaxRegistrationResponse})
+var sGetTaxExemptionTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxExemptionTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxExemptionTypesRequest})
+var sGetTaxExemptionTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxExemptionTypesResponse, Members: &mGetTaxExemptionTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxExemptionTypesResponse})
+var sGetTaxExemptionTypesResponse_taxExemptionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxExemptionTypes", ID: &i_TaxExemptionTypes, Members: &m_TaxExemptionTypes, Type: smithy.ShapeTypeList, Ext: &eGetTaxExemptionTypesResponse_taxExemptionTypes})
+var sGetTaxInheritanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxInheritanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxInheritanceRequest})
+var sGetTaxInheritanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxInheritanceResponse, Members: &mGetTaxInheritanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxInheritanceResponse})
+var sGetTaxInheritanceResponse_heritageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heritageStatus", ID: &iHeritageStatus, Members: &mHeritageStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetTaxInheritanceResponse_heritageStatus})
+var sGetTaxRegistrationDocumentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistrationDocumentRequest, Members: &mGetTaxRegistrationDocumentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationDocumentRequest})
+var sGetTaxRegistrationDocumentRequest_destinationS3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3Location", ID: &iDestinationS3Location, Members: &mDestinationS3Location, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationDocumentRequest_destinationS3Location})
+var sGetTaxRegistrationDocumentRequest_taxDocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxDocumentMetadata", ID: &iTaxDocumentMetadata, Members: &mTaxDocumentMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationDocumentRequest_taxDocumentMetadata})
+var sGetTaxRegistrationDocumentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistrationDocumentResponse, Members: &mGetTaxRegistrationDocumentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationDocumentResponse})
+var sGetTaxRegistrationDocumentResponse_destinationFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationFilePath", ID: &i_DestinationFilePath, Type: smithy.ShapeTypeString, Ext: &eGetTaxRegistrationDocumentResponse_destinationFilePath})
+var sGetTaxRegistrationDocumentResponse_presignedS3Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "presignedS3Url", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eGetTaxRegistrationDocumentResponse_presignedS3Url})
+var sGetTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistrationRequest, Members: &mGetTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationRequest})
+var sGetTaxRegistrationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetTaxRegistrationRequest_accountId})
+var sGetTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTaxRegistrationResponse, Members: &mGetTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationResponse})
+var sGetTaxRegistrationResponse_taxRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistration", ID: &iTaxRegistration, Members: &mTaxRegistration, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eGetTaxRegistrationResponse_taxRegistration})
+var sListSupplementalTaxRegistrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupplementalTaxRegistrationsRequest, Members: &mListSupplementalTaxRegistrationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSupplementalTaxRegistrationsRequest})
+var sListSupplementalTaxRegistrationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListSupplementalTaxRegistrationsRequest_maxResults})
+var sListSupplementalTaxRegistrationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListSupplementalTaxRegistrationsRequest_nextToken})
+var sListSupplementalTaxRegistrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupplementalTaxRegistrationsResponse, Members: &mListSupplementalTaxRegistrationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSupplementalTaxRegistrationsResponse})
+var sListSupplementalTaxRegistrationsResponse_taxRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrations", ID: &i_SupplementalTaxRegistrationList, Members: &m_SupplementalTaxRegistrationList, Type: smithy.ShapeTypeList, Ext: &eListSupplementalTaxRegistrationsResponse_taxRegistrations})
+var sListSupplementalTaxRegistrationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListSupplementalTaxRegistrationsResponse_nextToken})
+var sListTaxExemptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxExemptionsRequest, Members: &mListTaxExemptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTaxExemptionsRequest})
+var sListTaxExemptionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTaxExemptionsRequest_maxResults})
+var sListTaxExemptionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListTaxExemptionsRequest_nextToken})
+var sListTaxExemptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxExemptionsResponse, Members: &mListTaxExemptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTaxExemptionsResponse})
+var sListTaxExemptionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListTaxExemptionsResponse_nextToken})
+var sListTaxExemptionsResponse_taxExemptionDetailsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxExemptionDetailsMap", ID: &i_TaxExemptionDetailsMap, Members: &m_TaxExemptionDetailsMap, Type: smithy.ShapeTypeMap, Ext: &eListTaxExemptionsResponse_taxExemptionDetailsMap})
+var sListTaxRegistrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxRegistrationsRequest, Members: &mListTaxRegistrationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTaxRegistrationsRequest})
+var sListTaxRegistrationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTaxRegistrationsRequest_maxResults})
+var sListTaxRegistrationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListTaxRegistrationsRequest_nextToken})
+var sListTaxRegistrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTaxRegistrationsResponse, Members: &mListTaxRegistrationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTaxRegistrationsResponse})
+var sListTaxRegistrationsResponse_accountDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountDetails", ID: &i_AccountDetailsList, Members: &m_AccountDetailsList, Type: smithy.ShapeTypeList, Ext: &eListTaxRegistrationsResponse_accountDetails})
+var sListTaxRegistrationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationTokenString, Type: smithy.ShapeTypeString, Ext: &eListTaxRegistrationsResponse_nextToken})
+var sPutSupplementalTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSupplementalTaxRegistrationRequest, Members: &mPutSupplementalTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSupplementalTaxRegistrationRequest})
+var sPutSupplementalTaxRegistrationRequest_taxRegistrationEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationEntry", ID: &iSupplementalTaxRegistrationEntry, Members: &mSupplementalTaxRegistrationEntry, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ePutSupplementalTaxRegistrationRequest_taxRegistrationEntry})
+var sPutSupplementalTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSupplementalTaxRegistrationResponse, Members: &mPutSupplementalTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSupplementalTaxRegistrationResponse})
+var sPutSupplementalTaxRegistrationResponse_authorityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorityId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ePutSupplementalTaxRegistrationResponse_authorityId})
+var sPutSupplementalTaxRegistrationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutSupplementalTaxRegistrationResponse_status})
+var sPutTaxExemptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxExemptionRequest, Members: &mPutTaxExemptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxExemptionRequest})
+var sPutTaxExemptionRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIds, Members: &m_AccountIds, Type: smithy.ShapeTypeList, Ext: &ePutTaxExemptionRequest_accountIds})
+var sPutTaxExemptionRequest_authority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authority", ID: &iAuthority, Members: &mAuthority, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxExemptionRequest_authority})
+var sPutTaxExemptionRequest_exemptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exemptionType", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ePutTaxExemptionRequest_exemptionType})
+var sPutTaxExemptionRequest_exemptionCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exemptionCertificate", ID: &iExemptionCertificate, Members: &mExemptionCertificate, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxExemptionRequest_exemptionCertificate})
+var sPutTaxExemptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxExemptionResponse, Members: &mPutTaxExemptionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxExemptionResponse})
+var sPutTaxExemptionResponse_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ePutTaxExemptionResponse_caseId})
+var sPutTaxInheritanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxInheritanceRequest, Members: &mPutTaxInheritanceRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxInheritanceRequest})
+var sPutTaxInheritanceRequest_heritageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heritageStatus", ID: &iHeritageStatus, Members: &mHeritageStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutTaxInheritanceRequest_heritageStatus})
+var sPutTaxInheritanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxInheritanceResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxInheritanceResponse})
+var sPutTaxRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxRegistrationRequest, Members: &mPutTaxRegistrationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxRegistrationRequest})
+var sPutTaxRegistrationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ePutTaxRegistrationRequest_accountId})
+var sPutTaxRegistrationRequest_taxRegistrationEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taxRegistrationEntry", ID: &iTaxRegistrationEntry, Members: &mTaxRegistrationEntry, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxRegistrationRequest_taxRegistrationEntry})
+var sPutTaxRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTaxRegistrationResponse, Members: &mPutTaxRegistrationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutTaxRegistrationResponse})
+var sPutTaxRegistrationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTaxRegistrationStatus, Members: &mTaxRegistrationStatus, Type: smithy.ShapeTypeEnum, Ext: &ePutTaxRegistrationResponse_status})
+
+var BatchDeleteTaxRegistration = &sBatchDeleteTaxRegistration
+
+var BatchGetTaxExemptions = &sBatchGetTaxExemptions
+
+var BatchPutTaxRegistration = &sBatchPutTaxRegistration
+
+var DeleteSupplementalTaxRegistration = &sDeleteSupplementalTaxRegistration
+
+var DeleteTaxRegistration = &sDeleteTaxRegistration
+
+var GetTaxExemptionTypes = &sGetTaxExemptionTypes
+
+var GetTaxInheritance = &sGetTaxInheritance
+
+var GetTaxRegistration = &sGetTaxRegistration
+
+var GetTaxRegistrationDocument = &sGetTaxRegistrationDocument
+
+var ListSupplementalTaxRegistrations = &sListSupplementalTaxRegistrations
+
+var ListTaxExemptions = &sListTaxExemptions
+
+var ListTaxRegistrations = &sListTaxRegistrations
+
+var PutSupplementalTaxRegistration = &sPutSupplementalTaxRegistration
+
+var PutTaxExemption = &sPutTaxExemption
+
+var PutTaxInheritance = &sPutTaxInheritance
+
+var PutTaxRegistration = &sPutTaxRegistration
+
+var _TaxSettings = &s_TaxSettings
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AccountDetails = &sAccountDetails
+var AccountDetails_accountId = &sAccountDetails_accountId
+var AccountDetails_taxRegistration = &sAccountDetails_taxRegistration
+var AccountDetails_taxInheritanceDetails = &sAccountDetails_taxInheritanceDetails
+var AccountDetails_accountMetaData = &sAccountDetails_accountMetaData
+
+var _AccountDetailsList = &s_AccountDetailsList
+var _AccountDetailsList_member = &s_AccountDetailsList_member
+
+var _AccountId = &s_AccountId
+
+var _AccountIds = &s_AccountIds
+var _AccountIds_member = &s_AccountIds_member
+
+var AccountMetaData = &sAccountMetaData
+var AccountMetaData_accountName = &sAccountMetaData_accountName
+var AccountMetaData_seller = &sAccountMetaData_seller
+var AccountMetaData_address = &sAccountMetaData_address
+var AccountMetaData_addressType = &sAccountMetaData_addressType
+var AccountMetaData_addressRoleMap = &sAccountMetaData_addressRoleMap
+
+var _AccountName = &s_AccountName
+
+var AdditionalInfoRequest = &sAdditionalInfoRequest
+var AdditionalInfoRequest_malaysiaAdditionalInfo = &sAdditionalInfoRequest_malaysiaAdditionalInfo
+var AdditionalInfoRequest_israelAdditionalInfo = &sAdditionalInfoRequest_israelAdditionalInfo
+var AdditionalInfoRequest_estoniaAdditionalInfo = &sAdditionalInfoRequest_estoniaAdditionalInfo
+var AdditionalInfoRequest_canadaAdditionalInfo = &sAdditionalInfoRequest_canadaAdditionalInfo
+var AdditionalInfoRequest_spainAdditionalInfo = &sAdditionalInfoRequest_spainAdditionalInfo
+var AdditionalInfoRequest_kenyaAdditionalInfo = &sAdditionalInfoRequest_kenyaAdditionalInfo
+var AdditionalInfoRequest_southKoreaAdditionalInfo = &sAdditionalInfoRequest_southKoreaAdditionalInfo
+var AdditionalInfoRequest_turkeyAdditionalInfo = &sAdditionalInfoRequest_turkeyAdditionalInfo
+var AdditionalInfoRequest_georgiaAdditionalInfo = &sAdditionalInfoRequest_georgiaAdditionalInfo
+var AdditionalInfoRequest_italyAdditionalInfo = &sAdditionalInfoRequest_italyAdditionalInfo
+var AdditionalInfoRequest_romaniaAdditionalInfo = &sAdditionalInfoRequest_romaniaAdditionalInfo
+var AdditionalInfoRequest_ukraineAdditionalInfo = &sAdditionalInfoRequest_ukraineAdditionalInfo
+var AdditionalInfoRequest_polandAdditionalInfo = &sAdditionalInfoRequest_polandAdditionalInfo
+var AdditionalInfoRequest_saudiArabiaAdditionalInfo = &sAdditionalInfoRequest_saudiArabiaAdditionalInfo
+var AdditionalInfoRequest_indonesiaAdditionalInfo = &sAdditionalInfoRequest_indonesiaAdditionalInfo
+var AdditionalInfoRequest_vietnamAdditionalInfo = &sAdditionalInfoRequest_vietnamAdditionalInfo
+var AdditionalInfoRequest_egyptAdditionalInfo = &sAdditionalInfoRequest_egyptAdditionalInfo
+var AdditionalInfoRequest_greeceAdditionalInfo = &sAdditionalInfoRequest_greeceAdditionalInfo
+var AdditionalInfoRequest_uzbekistanAdditionalInfo = &sAdditionalInfoRequest_uzbekistanAdditionalInfo
+var AdditionalInfoRequest_philippinesAdditionalInfo = &sAdditionalInfoRequest_philippinesAdditionalInfo
+var AdditionalInfoRequest_belgiumAdditionalInfo = &sAdditionalInfoRequest_belgiumAdditionalInfo
+var AdditionalInfoRequest_chileAdditionalInfo = &sAdditionalInfoRequest_chileAdditionalInfo
+var AdditionalInfoRequest_franceAdditionalInfo = &sAdditionalInfoRequest_franceAdditionalInfo
+var AdditionalInfoRequest_monacoAdditionalInfo = &sAdditionalInfoRequest_monacoAdditionalInfo
+var AdditionalInfoRequest_germanyAdditionalInfo = &sAdditionalInfoRequest_germanyAdditionalInfo
+var AdditionalInfoRequest_mexicoAdditionalInfo = &sAdditionalInfoRequest_mexicoAdditionalInfo
+
+var AdditionalInfoResponse = &sAdditionalInfoResponse
+var AdditionalInfoResponse_malaysiaAdditionalInfo = &sAdditionalInfoResponse_malaysiaAdditionalInfo
+var AdditionalInfoResponse_israelAdditionalInfo = &sAdditionalInfoResponse_israelAdditionalInfo
+var AdditionalInfoResponse_estoniaAdditionalInfo = &sAdditionalInfoResponse_estoniaAdditionalInfo
+var AdditionalInfoResponse_canadaAdditionalInfo = &sAdditionalInfoResponse_canadaAdditionalInfo
+var AdditionalInfoResponse_brazilAdditionalInfo = &sAdditionalInfoResponse_brazilAdditionalInfo
+var AdditionalInfoResponse_spainAdditionalInfo = &sAdditionalInfoResponse_spainAdditionalInfo
+var AdditionalInfoResponse_kenyaAdditionalInfo = &sAdditionalInfoResponse_kenyaAdditionalInfo
+var AdditionalInfoResponse_southKoreaAdditionalInfo = &sAdditionalInfoResponse_southKoreaAdditionalInfo
+var AdditionalInfoResponse_turkeyAdditionalInfo = &sAdditionalInfoResponse_turkeyAdditionalInfo
+var AdditionalInfoResponse_georgiaAdditionalInfo = &sAdditionalInfoResponse_georgiaAdditionalInfo
+var AdditionalInfoResponse_italyAdditionalInfo = &sAdditionalInfoResponse_italyAdditionalInfo
+var AdditionalInfoResponse_romaniaAdditionalInfo = &sAdditionalInfoResponse_romaniaAdditionalInfo
+var AdditionalInfoResponse_ukraineAdditionalInfo = &sAdditionalInfoResponse_ukraineAdditionalInfo
+var AdditionalInfoResponse_polandAdditionalInfo = &sAdditionalInfoResponse_polandAdditionalInfo
+var AdditionalInfoResponse_saudiArabiaAdditionalInfo = &sAdditionalInfoResponse_saudiArabiaAdditionalInfo
+var AdditionalInfoResponse_indiaAdditionalInfo = &sAdditionalInfoResponse_indiaAdditionalInfo
+var AdditionalInfoResponse_indonesiaAdditionalInfo = &sAdditionalInfoResponse_indonesiaAdditionalInfo
+var AdditionalInfoResponse_vietnamAdditionalInfo = &sAdditionalInfoResponse_vietnamAdditionalInfo
+var AdditionalInfoResponse_egyptAdditionalInfo = &sAdditionalInfoResponse_egyptAdditionalInfo
+var AdditionalInfoResponse_greeceAdditionalInfo = &sAdditionalInfoResponse_greeceAdditionalInfo
+var AdditionalInfoResponse_uzbekistanAdditionalInfo = &sAdditionalInfoResponse_uzbekistanAdditionalInfo
+var AdditionalInfoResponse_philippinesAdditionalInfo = &sAdditionalInfoResponse_philippinesAdditionalInfo
+var AdditionalInfoResponse_belgiumAdditionalInfo = &sAdditionalInfoResponse_belgiumAdditionalInfo
+var AdditionalInfoResponse_chileAdditionalInfo = &sAdditionalInfoResponse_chileAdditionalInfo
+var AdditionalInfoResponse_franceAdditionalInfo = &sAdditionalInfoResponse_franceAdditionalInfo
+var AdditionalInfoResponse_monacoAdditionalInfo = &sAdditionalInfoResponse_monacoAdditionalInfo
+var AdditionalInfoResponse_germanyAdditionalInfo = &sAdditionalInfoResponse_germanyAdditionalInfo
+var AdditionalInfoResponse_mexicoAdditionalInfo = &sAdditionalInfoResponse_mexicoAdditionalInfo
+var AdditionalInfoResponse_colombiaAdditionalInfo = &sAdditionalInfoResponse_colombiaAdditionalInfo
+
+var Address = &sAddress
+var Address_addressLine1 = &sAddress_addressLine1
+var Address_addressLine2 = &sAddress_addressLine2
+var Address_addressLine3 = &sAddress_addressLine3
+var Address_districtOrCounty = &sAddress_districtOrCounty
+var Address_city = &sAddress_city
+var Address_stateOrRegion = &sAddress_stateOrRegion
+var Address_postalCode = &sAddress_postalCode
+var Address_countryCode = &sAddress_countryCode
+
+var _AddressLine1 = &s_AddressLine1
+
+var _AddressLine2 = &s_AddressLine2
+
+var _AddressLine3 = &s_AddressLine3
+
+var _AddressRoleMap = &s_AddressRoleMap
+var _AddressRoleMap_key = &s_AddressRoleMap_key
+var _AddressRoleMap_value = &s_AddressRoleMap_value
+
+var AddressRoleType = &sAddressRoleType
+var AddressRoleType_TAX_ADDRESS = &sAddressRoleType_TAX_ADDRESS
+var AddressRoleType_BILLING_ADDRESS = &sAddressRoleType_BILLING_ADDRESS
+var AddressRoleType_CONTACT_ADDRESS = &sAddressRoleType_CONTACT_ADDRESS
+
+var AttachmentUploadException = &sAttachmentUploadException
+var AttachmentUploadException_message = &sAttachmentUploadException_message
+
+var _Authorities = &s_Authorities
+var _Authorities_member = &s_Authorities_member
+
+var Authority = &sAuthority
+var Authority_country = &sAuthority_country
+var Authority_state = &sAuthority_state
+
+var BatchDeleteTaxRegistrationError = &sBatchDeleteTaxRegistrationError
+var BatchDeleteTaxRegistrationError_accountId = &sBatchDeleteTaxRegistrationError_accountId
+var BatchDeleteTaxRegistrationError_message = &sBatchDeleteTaxRegistrationError_message
+var BatchDeleteTaxRegistrationError_code = &sBatchDeleteTaxRegistrationError_code
+
+var _BatchDeleteTaxRegistrationErrors = &s_BatchDeleteTaxRegistrationErrors
+var _BatchDeleteTaxRegistrationErrors_member = &s_BatchDeleteTaxRegistrationErrors_member
+
+var BatchPutTaxRegistrationError = &sBatchPutTaxRegistrationError
+var BatchPutTaxRegistrationError_accountId = &sBatchPutTaxRegistrationError_accountId
+var BatchPutTaxRegistrationError_message = &sBatchPutTaxRegistrationError_message
+var BatchPutTaxRegistrationError_code = &sBatchPutTaxRegistrationError_code
+
+var _BatchPutTaxRegistrationErrors = &s_BatchPutTaxRegistrationErrors
+var _BatchPutTaxRegistrationErrors_member = &s_BatchPutTaxRegistrationErrors_member
+
+var BelgiumAdditionalInfo = &sBelgiumAdditionalInfo
+var BelgiumAdditionalInfo_peppolId = &sBelgiumAdditionalInfo_peppolId
+var BelgiumAdditionalInfo_isMercuriusBoxEnabled = &sBelgiumAdditionalInfo_isMercuriusBoxEnabled
+
+var BrazilAdditionalInfo = &sBrazilAdditionalInfo
+var BrazilAdditionalInfo_ccmCode = &sBrazilAdditionalInfo_ccmCode
+var BrazilAdditionalInfo_legalNatureCode = &sBrazilAdditionalInfo_legalNatureCode
+
+var _BusinessNumber = &s_BusinessNumber
+
+var _BusinessRegistrationNumber = &s_BusinessRegistrationNumber
+
+var _BusinessRepresentativeName = &s_BusinessRepresentativeName
+
+var CanadaAdditionalInfo = &sCanadaAdditionalInfo
+var CanadaAdditionalInfo_provincialSalesTaxId = &sCanadaAdditionalInfo_provincialSalesTaxId
+var CanadaAdditionalInfo_canadaQuebecSalesTaxNumber = &sCanadaAdditionalInfo_canadaQuebecSalesTaxNumber
+var CanadaAdditionalInfo_canadaRetailSalesTaxNumber = &sCanadaAdditionalInfo_canadaRetailSalesTaxNumber
+var CanadaAdditionalInfo_isResellerAccount = &sCanadaAdditionalInfo_isResellerAccount
+
+var _CanadaProvincialSalesTaxIdString = &s_CanadaProvincialSalesTaxIdString
+
+var _CanadaQuebecSalesTaxNumberString = &s_CanadaQuebecSalesTaxNumberString
+
+var _CanadaRetailSalesTaxNumberString = &s_CanadaRetailSalesTaxNumberString
+
+var CaseCreationLimitExceededException = &sCaseCreationLimitExceededException
+var CaseCreationLimitExceededException_message = &sCaseCreationLimitExceededException_message
+
+var _CcmCode = &s_CcmCode
+
+var _CertifiedEmailId = &s_CertifiedEmailId
+
+var ChileAdditionalInfo = &sChileAdditionalInfo
+var ChileAdditionalInfo_documentType = &sChileAdditionalInfo_documentType
+var ChileAdditionalInfo_businessActivity = &sChileAdditionalInfo_businessActivity
+
+var ChileDocumentType = &sChileDocumentType
+var ChileDocumentType_INVOICE = &sChileDocumentType_INVOICE
+var ChileDocumentType_RECEIPT = &sChileDocumentType_RECEIPT
+
+var _CigNumber = &s_CigNumber
+
+var _City = &s_City
+
+var ColombiaAdditionalInfo = &sColombiaAdditionalInfo
+var ColombiaAdditionalInfo_responsibilityCodes = &sColombiaAdditionalInfo_responsibilityCodes
+var ColombiaAdditionalInfo_taxpayerTypeCode = &sColombiaAdditionalInfo_taxpayerTypeCode
+var ColombiaAdditionalInfo_issueDate = &sColombiaAdditionalInfo_issueDate
+
+var _ColombiaResponsabilidadCode = &s_ColombiaResponsabilidadCode
+
+var _ColombiaResponsabilidadesList = &s_ColombiaResponsabilidadesList
+var _ColombiaResponsabilidadesList_member = &s_ColombiaResponsabilidadesList_member
+
+var _ColombiaTipoContribuyenteCode = &s_ColombiaTipoContribuyenteCode
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_errorCode = &sConflictException_errorCode
+
+var _ContractingAuthorityCode = &s_ContractingAuthorityCode
+
+var _CountryCode = &s_CountryCode
+
+var _CupNumber = &s_CupNumber
+
+var CustomerType = &sCustomerType
+var CustomerType_BUSINESS = &sCustomerType_BUSINESS
+var CustomerType_INDIVIDUAL = &sCustomerType_INDIVIDUAL
+
+var _DateOfBirth = &s_DateOfBirth
+
+var _DateString = &s_DateString
+
+var _DecisionNumber = &s_DecisionNumber
+
+var _DestinationFilePath = &s_DestinationFilePath
+
+var DestinationS3Location = &sDestinationS3Location
+var DestinationS3Location_bucket = &sDestinationS3Location_bucket
+var DestinationS3Location_prefix = &sDestinationS3Location_prefix
+
+var _DisplayName = &s_DisplayName
+
+var _District = &s_District
+
+var _EconomicIdentificationNumber = &s_EconomicIdentificationNumber
+
+var EgyptAdditionalInfo = &sEgyptAdditionalInfo
+var EgyptAdditionalInfo_uniqueIdentificationNumber = &sEgyptAdditionalInfo_uniqueIdentificationNumber
+var EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = &sEgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate
+
+var _ElectronicTransactionCodeNumber = &s_ElectronicTransactionCodeNumber
+
+var _EnterpriseIdentificationNumber = &s_EnterpriseIdentificationNumber
+
+var EntityExemptionAccountStatus = &sEntityExemptionAccountStatus
+var EntityExemptionAccountStatus_None = &sEntityExemptionAccountStatus_None
+var EntityExemptionAccountStatus_Valid = &sEntityExemptionAccountStatus_Valid
+var EntityExemptionAccountStatus_Expired = &sEntityExemptionAccountStatus_Expired
+var EntityExemptionAccountStatus_Pending = &sEntityExemptionAccountStatus_Pending
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EstoniaAdditionalInfo = &sEstoniaAdditionalInfo
+var EstoniaAdditionalInfo_registryCommercialCode = &sEstoniaAdditionalInfo_registryCommercialCode
+
+var ExemptionCertificate = &sExemptionCertificate
+var ExemptionCertificate_documentName = &sExemptionCertificate_documentName
+var ExemptionCertificate_documentFile = &sExemptionCertificate_documentFile
+
+var _ExemptionDocumentName = &s_ExemptionDocumentName
+
+var _ExemptionFileBlob = &s_ExemptionFileBlob
+
+var _FieldName = &s_FieldName
+
+var _FileBlob = &s_FileBlob
+
+var FranceAdditionalInfo = &sFranceAdditionalInfo
+var FranceAdditionalInfo_sirenNumber = &sFranceAdditionalInfo_sirenNumber
+var FranceAdditionalInfo_eInvoiceRoutingCode = &sFranceAdditionalInfo_eInvoiceRoutingCode
+
+var _GenericString = &s_GenericString
+
+var GeorgiaAdditionalInfo = &sGeorgiaAdditionalInfo
+var GeorgiaAdditionalInfo_personType = &sGeorgiaAdditionalInfo_personType
+
+var GermanyAdditionalInfo = &sGermanyAdditionalInfo
+var GermanyAdditionalInfo_economicIdentificationNumber = &sGermanyAdditionalInfo_economicIdentificationNumber
+var GermanyAdditionalInfo_steuernummer = &sGermanyAdditionalInfo_steuernummer
+
+var GreeceAdditionalInfo = &sGreeceAdditionalInfo
+var GreeceAdditionalInfo_contractingAuthorityCode = &sGreeceAdditionalInfo_contractingAuthorityCode
+
+var HeritageStatus = &sHeritageStatus
+var HeritageStatus_OptIn = &sHeritageStatus_OptIn
+var HeritageStatus_OptOut = &sHeritageStatus_OptOut
+
+var IndiaAdditionalInfo = &sIndiaAdditionalInfo
+var IndiaAdditionalInfo_pan = &sIndiaAdditionalInfo_pan
+
+var _IndividualRegistrationNumber = &s_IndividualRegistrationNumber
+
+var IndonesiaAdditionalInfo = &sIndonesiaAdditionalInfo
+var IndonesiaAdditionalInfo_taxRegistrationNumberType = &sIndonesiaAdditionalInfo_taxRegistrationNumberType
+var IndonesiaAdditionalInfo_ppnExceptionDesignationCode = &sIndonesiaAdditionalInfo_ppnExceptionDesignationCode
+var IndonesiaAdditionalInfo_decisionNumber = &sIndonesiaAdditionalInfo_decisionNumber
+
+var IndonesiaTaxRegistrationNumberType = &sIndonesiaTaxRegistrationNumberType
+var IndonesiaTaxRegistrationNumberType_NIK = &sIndonesiaTaxRegistrationNumberType_NIK
+var IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER = &sIndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER
+var IndonesiaTaxRegistrationNumberType_NPWP = &sIndonesiaTaxRegistrationNumberType_NPWP
+var IndonesiaTaxRegistrationNumberType_NITKU = &sIndonesiaTaxRegistrationNumberType_NITKU
+
+var Industries = &sIndustries
+var Industries_CIRCULATING_ORG = &sIndustries_CIRCULATING_ORG
+var Industries_PROFESSIONAL_ORG = &sIndustries_PROFESSIONAL_ORG
+var Industries_BANKS = &sIndustries_BANKS
+var Industries_INSURANCE = &sIndustries_INSURANCE
+var Industries_PENSION_AND_BENEFIT_FUNDS = &sIndustries_PENSION_AND_BENEFIT_FUNDS
+var Industries_DEVELOPMENT_AGENCIES = &sIndustries_DEVELOPMENT_AGENCIES
+
+var _InheritanceObtainedReason = &s_InheritanceObtainedReason
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_errorCode = &sInternalServerException_errorCode
+
+var IsraelAdditionalInfo = &sIsraelAdditionalInfo
+var IsraelAdditionalInfo_dealerType = &sIsraelAdditionalInfo_dealerType
+var IsraelAdditionalInfo_customerType = &sIsraelAdditionalInfo_customerType
+
+var IsraelCustomerType = &sIsraelCustomerType
+var IsraelCustomerType_BUSINESS = &sIsraelCustomerType_BUSINESS
+var IsraelCustomerType_INDIVIDUAL = &sIsraelCustomerType_INDIVIDUAL
+
+var IsraelDealerType = &sIsraelDealerType
+var IsraelDealerType_AUTHORIZED = &sIsraelDealerType_AUTHORIZED
+var IsraelDealerType_NON_AUTHORIZED = &sIsraelDealerType_NON_AUTHORIZED
+
+var ItalyAdditionalInfo = &sItalyAdditionalInfo
+var ItalyAdditionalInfo_sdiAccountId = &sItalyAdditionalInfo_sdiAccountId
+var ItalyAdditionalInfo_cigNumber = &sItalyAdditionalInfo_cigNumber
+var ItalyAdditionalInfo_cupNumber = &sItalyAdditionalInfo_cupNumber
+var ItalyAdditionalInfo_taxCode = &sItalyAdditionalInfo_taxCode
+var ItalyAdditionalInfo_customerType = &sItalyAdditionalInfo_customerType
+
+var _ItemOfBusiness = &s_ItemOfBusiness
+
+var Jurisdiction = &sJurisdiction
+var Jurisdiction_stateOrRegion = &sJurisdiction_stateOrRegion
+var Jurisdiction_countryCode = &sJurisdiction_countryCode
+
+var KenyaAdditionalInfo = &sKenyaAdditionalInfo
+var KenyaAdditionalInfo_personType = &sKenyaAdditionalInfo_personType
+
+var _KepEmailId = &s_KepEmailId
+
+var _LegalName = &s_LegalName
+
+var _LegalNatureCode = &s_LegalNatureCode
+
+var _LineOfBusiness = &s_LineOfBusiness
+
+var MalaysiaAdditionalInfo = &sMalaysiaAdditionalInfo
+var MalaysiaAdditionalInfo_serviceTaxCodes = &sMalaysiaAdditionalInfo_serviceTaxCodes
+var MalaysiaAdditionalInfo_taxInformationNumber = &sMalaysiaAdditionalInfo_taxInformationNumber
+var MalaysiaAdditionalInfo_businessRegistrationNumber = &sMalaysiaAdditionalInfo_businessRegistrationNumber
+
+var MalaysiaServiceTaxCode = &sMalaysiaServiceTaxCode
+var MalaysiaServiceTaxCode_CONSULTANCY = &sMalaysiaServiceTaxCode_CONSULTANCY
+var MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM = &sMalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM
+var MalaysiaServiceTaxCode_IT_SERVICES = &sMalaysiaServiceTaxCode_IT_SERVICES
+var MalaysiaServiceTaxCode_TRAINING_OR_COACHING = &sMalaysiaServiceTaxCode_TRAINING_OR_COACHING
+
+var _MalaysiaServiceTaxCodesList = &s_MalaysiaServiceTaxCodesList
+var _MalaysiaServiceTaxCodesList_member = &s_MalaysiaServiceTaxCodesList_member
+
+var _MaxResults = &s_MaxResults
+
+var MexicoAdditionalInfo = &sMexicoAdditionalInfo
+var MexicoAdditionalInfo_taxRegime = &sMexicoAdditionalInfo_taxRegime
+var MexicoAdditionalInfo_taxRegimeFullName = &sMexicoAdditionalInfo_taxRegimeFullName
+var MexicoAdditionalInfo_cfdiUsageCode = &sMexicoAdditionalInfo_cfdiUsageCode
+
+var _MexicoCfdiUsageCode = &s_MexicoCfdiUsageCode
+
+var _MexicoTaxRegimeCode = &s_MexicoTaxRegimeCode
+
+var _MexicoTaxRegimeFullName = &s_MexicoTaxRegimeFullName
+
+var MonacoAdditionalInfo = &sMonacoAdditionalInfo
+var MonacoAdditionalInfo_businessNumber = &sMonacoAdditionalInfo_businessNumber
+
+var _PaginationTokenString = &s_PaginationTokenString
+
+var _Pan = &s_Pan
+
+var _PaymentVoucherNumber = &s_PaymentVoucherNumber
+
+var _PeppolId = &s_PeppolId
+
+var PersonType = &sPersonType
+var PersonType_LEGAL_PERSON = &sPersonType_LEGAL_PERSON
+var PersonType_PHYSICAL_PERSON = &sPersonType_PHYSICAL_PERSON
+var PersonType_BUSINESS = &sPersonType_BUSINESS
+
+var PhilippinesAdditionalInfo = &sPhilippinesAdditionalInfo
+var PhilippinesAdditionalInfo_isVatRegistered = &sPhilippinesAdditionalInfo_isVatRegistered
+
+var PolandAdditionalInfo = &sPolandAdditionalInfo
+var PolandAdditionalInfo_individualRegistrationNumber = &sPolandAdditionalInfo_individualRegistrationNumber
+var PolandAdditionalInfo_isGroupVatEnabled = &sPolandAdditionalInfo_isGroupVatEnabled
+var PolandAdditionalInfo_taxRegistrationNumberType = &sPolandAdditionalInfo_taxRegistrationNumberType
+
+var PolandTaxRegistrationNumberType = &sPolandTaxRegistrationNumberType
+var PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER = &sPolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER
+var PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = &sPolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER
+var PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = &sPolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER
+
+var _PostalCode = &s_PostalCode
+
+var _PpnExceptionDesignationCode = &s_PpnExceptionDesignationCode
+
+var _RegistrationId = &s_RegistrationId
+
+var RegistrationType = &sRegistrationType
+var RegistrationType_INTRA_EU = &sRegistrationType_INTRA_EU
+var RegistrationType_LOCAL = &sRegistrationType_LOCAL
+
+var _RegistryCommercialCode = &s_RegistryCommercialCode
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_errorCode = &sResourceNotFoundException_errorCode
+
+var RomaniaAdditionalInfo = &sRomaniaAdditionalInfo
+var RomaniaAdditionalInfo_taxRegistrationNumberType = &sRomaniaAdditionalInfo_taxRegistrationNumberType
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3Key = &s_S3Key
+
+var _S3Prefix = &s_S3Prefix
+
+var SaudiArabiaAdditionalInfo = &sSaudiArabiaAdditionalInfo
+var SaudiArabiaAdditionalInfo_taxRegistrationNumberType = &sSaudiArabiaAdditionalInfo_taxRegistrationNumberType
+
+var SaudiArabiaTaxRegistrationNumberType = &sSaudiArabiaTaxRegistrationNumberType
+var SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = &sSaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER
+var SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER = &sSaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER
+var SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER = &sSaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER
+
+var _SdiAccountId = &s_SdiAccountId
+
+var _SecondaryTaxId = &s_SecondaryTaxId
+
+var Sector = &sSector
+var Sector_BUSINESS = &sSector_BUSINESS
+var Sector_INDIVIDUAL = &sSector_INDIVIDUAL
+var Sector_PUBLIC_INSTITUTIONS = &sSector_PUBLIC_INSTITUTIONS
+
+var _Seller = &s_Seller
+
+var _SirenNumber = &s_SirenNumber
+
+var SourceS3Location = &sSourceS3Location
+var SourceS3Location_bucket = &sSourceS3Location_bucket
+var SourceS3Location_key = &sSourceS3Location_key
+
+var SouthKoreaAdditionalInfo = &sSouthKoreaAdditionalInfo
+var SouthKoreaAdditionalInfo_businessRepresentativeName = &sSouthKoreaAdditionalInfo_businessRepresentativeName
+var SouthKoreaAdditionalInfo_lineOfBusiness = &sSouthKoreaAdditionalInfo_lineOfBusiness
+var SouthKoreaAdditionalInfo_itemOfBusiness = &sSouthKoreaAdditionalInfo_itemOfBusiness
+
+var SpainAdditionalInfo = &sSpainAdditionalInfo
+var SpainAdditionalInfo_registrationType = &sSpainAdditionalInfo_registrationType
+
+var _State = &s_State
+
+var _StatusReasonCode = &s_StatusReasonCode
+
+var _StatusReasonMessage = &s_StatusReasonMessage
+
+var _Steuernummer = &s_Steuernummer
+
+var SupplementalTaxRegistration = &sSupplementalTaxRegistration
+var SupplementalTaxRegistration_registrationId = &sSupplementalTaxRegistration_registrationId
+var SupplementalTaxRegistration_registrationType = &sSupplementalTaxRegistration_registrationType
+var SupplementalTaxRegistration_legalName = &sSupplementalTaxRegistration_legalName
+var SupplementalTaxRegistration_address = &sSupplementalTaxRegistration_address
+var SupplementalTaxRegistration_authorityId = &sSupplementalTaxRegistration_authorityId
+var SupplementalTaxRegistration_status = &sSupplementalTaxRegistration_status
+
+var SupplementalTaxRegistrationEntry = &sSupplementalTaxRegistrationEntry
+var SupplementalTaxRegistrationEntry_registrationId = &sSupplementalTaxRegistrationEntry_registrationId
+var SupplementalTaxRegistrationEntry_registrationType = &sSupplementalTaxRegistrationEntry_registrationType
+var SupplementalTaxRegistrationEntry_legalName = &sSupplementalTaxRegistrationEntry_legalName
+var SupplementalTaxRegistrationEntry_address = &sSupplementalTaxRegistrationEntry_address
+
+var _SupplementalTaxRegistrationList = &s_SupplementalTaxRegistrationList
+var _SupplementalTaxRegistrationList_member = &s_SupplementalTaxRegistrationList_member
+
+var SupplementalTaxRegistrationType = &sSupplementalTaxRegistrationType
+var SupplementalTaxRegistrationType_VAT = &sSupplementalTaxRegistrationType_VAT
+
+var _TaxCode = &s_TaxCode
+
+var _TaxDocumentAccessToken = &s_TaxDocumentAccessToken
+
+var TaxDocumentMetadata = &sTaxDocumentMetadata
+var TaxDocumentMetadata_taxDocumentAccessToken = &sTaxDocumentMetadata_taxDocumentAccessToken
+var TaxDocumentMetadata_taxDocumentName = &sTaxDocumentMetadata_taxDocumentName
+
+var _TaxDocumentMetadatas = &s_TaxDocumentMetadatas
+var _TaxDocumentMetadatas_member = &s_TaxDocumentMetadatas_member
+
+var _TaxDocumentName = &s_TaxDocumentName
+
+var TaxExemption = &sTaxExemption
+var TaxExemption_authority = &sTaxExemption_authority
+var TaxExemption_taxExemptionType = &sTaxExemption_taxExemptionType
+var TaxExemption_effectiveDate = &sTaxExemption_effectiveDate
+var TaxExemption_expirationDate = &sTaxExemption_expirationDate
+var TaxExemption_systemEffectiveDate = &sTaxExemption_systemEffectiveDate
+var TaxExemption_status = &sTaxExemption_status
+
+var TaxExemptionDetails = &sTaxExemptionDetails
+var TaxExemptionDetails_taxExemptions = &sTaxExemptionDetails_taxExemptions
+var TaxExemptionDetails_heritageObtainedDetails = &sTaxExemptionDetails_heritageObtainedDetails
+var TaxExemptionDetails_heritageObtainedParentEntity = &sTaxExemptionDetails_heritageObtainedParentEntity
+var TaxExemptionDetails_heritageObtainedReason = &sTaxExemptionDetails_heritageObtainedReason
+
+var _TaxExemptionDetailsMap = &s_TaxExemptionDetailsMap
+var _TaxExemptionDetailsMap_key = &s_TaxExemptionDetailsMap_key
+var _TaxExemptionDetailsMap_value = &s_TaxExemptionDetailsMap_value
+
+var _TaxExemptions = &s_TaxExemptions
+var _TaxExemptions_member = &s_TaxExemptions_member
+
+var TaxExemptionType = &sTaxExemptionType
+var TaxExemptionType_displayName = &sTaxExemptionType_displayName
+var TaxExemptionType_description = &sTaxExemptionType_description
+var TaxExemptionType_applicableJurisdictions = &sTaxExemptionType_applicableJurisdictions
+
+var _TaxExemptionTypes = &s_TaxExemptionTypes
+var _TaxExemptionTypes_member = &s_TaxExemptionTypes_member
+
+var _TaxInformationNumber = &s_TaxInformationNumber
+
+var TaxInheritanceDetails = &sTaxInheritanceDetails
+var TaxInheritanceDetails_parentEntityId = &sTaxInheritanceDetails_parentEntityId
+var TaxInheritanceDetails_inheritanceObtainedReason = &sTaxInheritanceDetails_inheritanceObtainedReason
+
+var _TaxOffice = &s_TaxOffice
+
+var TaxRegistration = &sTaxRegistration
+var TaxRegistration_registrationId = &sTaxRegistration_registrationId
+var TaxRegistration_registrationType = &sTaxRegistration_registrationType
+var TaxRegistration_legalName = &sTaxRegistration_legalName
+var TaxRegistration_status = &sTaxRegistration_status
+var TaxRegistration_sector = &sTaxRegistration_sector
+var TaxRegistration_taxDocumentMetadatas = &sTaxRegistration_taxDocumentMetadatas
+var TaxRegistration_certifiedEmailId = &sTaxRegistration_certifiedEmailId
+var TaxRegistration_additionalTaxInformation = &sTaxRegistration_additionalTaxInformation
+var TaxRegistration_statusReason = &sTaxRegistration_statusReason
+var TaxRegistration_legalAddress = &sTaxRegistration_legalAddress
+
+var TaxRegistrationDocFile = &sTaxRegistrationDocFile
+var TaxRegistrationDocFile_fileName = &sTaxRegistrationDocFile_fileName
+var TaxRegistrationDocFile_fileContent = &sTaxRegistrationDocFile_fileContent
+
+var TaxRegistrationDocument = &sTaxRegistrationDocument
+var TaxRegistrationDocument_s3Location = &sTaxRegistrationDocument_s3Location
+var TaxRegistrationDocument_file = &sTaxRegistrationDocument_file
+
+var _TaxRegistrationDocuments = &s_TaxRegistrationDocuments
+var _TaxRegistrationDocuments_member = &s_TaxRegistrationDocuments_member
+
+var TaxRegistrationEntry = &sTaxRegistrationEntry
+var TaxRegistrationEntry_registrationId = &sTaxRegistrationEntry_registrationId
+var TaxRegistrationEntry_registrationType = &sTaxRegistrationEntry_registrationType
+var TaxRegistrationEntry_legalName = &sTaxRegistrationEntry_legalName
+var TaxRegistrationEntry_legalAddress = &sTaxRegistrationEntry_legalAddress
+var TaxRegistrationEntry_sector = &sTaxRegistrationEntry_sector
+var TaxRegistrationEntry_additionalTaxInformation = &sTaxRegistrationEntry_additionalTaxInformation
+var TaxRegistrationEntry_verificationDetails = &sTaxRegistrationEntry_verificationDetails
+var TaxRegistrationEntry_certifiedEmailId = &sTaxRegistrationEntry_certifiedEmailId
+
+var TaxRegistrationNumberType = &sTaxRegistrationNumberType
+var TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = &sTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER
+var TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = &sTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER
+
+var TaxRegistrationStatus = &sTaxRegistrationStatus
+var TaxRegistrationStatus_VERIFIED = &sTaxRegistrationStatus_VERIFIED
+var TaxRegistrationStatus_PENDING = &sTaxRegistrationStatus_PENDING
+var TaxRegistrationStatus_DELETED = &sTaxRegistrationStatus_DELETED
+var TaxRegistrationStatus_REJECTED = &sTaxRegistrationStatus_REJECTED
+
+var TaxRegistrationStatusReason = &sTaxRegistrationStatusReason
+var TaxRegistrationStatusReason_code = &sTaxRegistrationStatusReason_code
+var TaxRegistrationStatusReason_message = &sTaxRegistrationStatusReason_message
+
+var TaxRegistrationType = &sTaxRegistrationType
+var TaxRegistrationType_VAT = &sTaxRegistrationType_VAT
+var TaxRegistrationType_GST = &sTaxRegistrationType_GST
+var TaxRegistrationType_CPF = &sTaxRegistrationType_CPF
+var TaxRegistrationType_CNPJ = &sTaxRegistrationType_CNPJ
+var TaxRegistrationType_SST = &sTaxRegistrationType_SST
+var TaxRegistrationType_TIN = &sTaxRegistrationType_TIN
+var TaxRegistrationType_NRIC = &sTaxRegistrationType_NRIC
+var TaxRegistrationType_PAN = &sTaxRegistrationType_PAN
+var TaxRegistrationType_NIP = &sTaxRegistrationType_NIP
+var TaxRegistrationType_CUIT = &sTaxRegistrationType_CUIT
+var TaxRegistrationType_CDI = &sTaxRegistrationType_CDI
+var TaxRegistrationType_RUT = &sTaxRegistrationType_RUT
+var TaxRegistrationType_NIE = &sTaxRegistrationType_NIE
+var TaxRegistrationType_CI = &sTaxRegistrationType_CI
+
+var TaxRegistrationWithJurisdiction = &sTaxRegistrationWithJurisdiction
+var TaxRegistrationWithJurisdiction_registrationId = &sTaxRegistrationWithJurisdiction_registrationId
+var TaxRegistrationWithJurisdiction_registrationType = &sTaxRegistrationWithJurisdiction_registrationType
+var TaxRegistrationWithJurisdiction_legalName = &sTaxRegistrationWithJurisdiction_legalName
+var TaxRegistrationWithJurisdiction_status = &sTaxRegistrationWithJurisdiction_status
+var TaxRegistrationWithJurisdiction_sector = &sTaxRegistrationWithJurisdiction_sector
+var TaxRegistrationWithJurisdiction_taxDocumentMetadatas = &sTaxRegistrationWithJurisdiction_taxDocumentMetadatas
+var TaxRegistrationWithJurisdiction_certifiedEmailId = &sTaxRegistrationWithJurisdiction_certifiedEmailId
+var TaxRegistrationWithJurisdiction_additionalTaxInformation = &sTaxRegistrationWithJurisdiction_additionalTaxInformation
+var TaxRegistrationWithJurisdiction_statusReason = &sTaxRegistrationWithJurisdiction_statusReason
+var TaxRegistrationWithJurisdiction_jurisdiction = &sTaxRegistrationWithJurisdiction_jurisdiction
+
+var TurkeyAdditionalInfo = &sTurkeyAdditionalInfo
+var TurkeyAdditionalInfo_taxOffice = &sTurkeyAdditionalInfo_taxOffice
+var TurkeyAdditionalInfo_kepEmailId = &sTurkeyAdditionalInfo_kepEmailId
+var TurkeyAdditionalInfo_secondaryTaxId = &sTurkeyAdditionalInfo_secondaryTaxId
+var TurkeyAdditionalInfo_industries = &sTurkeyAdditionalInfo_industries
+
+var UkraineAdditionalInfo = &sUkraineAdditionalInfo
+var UkraineAdditionalInfo_ukraineTrnType = &sUkraineAdditionalInfo_ukraineTrnType
+
+var UkraineTrnType = &sUkraineTrnType
+var UkraineTrnType_BUSINESS = &sUkraineTrnType_BUSINESS
+var UkraineTrnType_INDIVIDUAL = &sUkraineTrnType_INDIVIDUAL
+
+var _UniqueIdentificationNumber = &s_UniqueIdentificationNumber
+
+var _Url = &s_Url
+
+var UzbekistanAdditionalInfo = &sUzbekistanAdditionalInfo
+var UzbekistanAdditionalInfo_taxRegistrationNumberType = &sUzbekistanAdditionalInfo_taxRegistrationNumberType
+var UzbekistanAdditionalInfo_vatRegistrationNumber = &sUzbekistanAdditionalInfo_vatRegistrationNumber
+
+var UzbekistanTaxRegistrationNumberType = &sUzbekistanTaxRegistrationNumberType
+var UzbekistanTaxRegistrationNumberType_BUSINESS = &sUzbekistanTaxRegistrationNumberType_BUSINESS
+var UzbekistanTaxRegistrationNumberType_INDIVIDUAL = &sUzbekistanTaxRegistrationNumberType_INDIVIDUAL
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_errorCode = &sValidationException_errorCode
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionErrorCode = &sValidationExceptionErrorCode
+var ValidationExceptionErrorCode_MALFORMED_TOKEN = &sValidationExceptionErrorCode_MALFORMED_TOKEN
+var ValidationExceptionErrorCode_EXPIRED_TOKEN = &sValidationExceptionErrorCode_EXPIRED_TOKEN
+var ValidationExceptionErrorCode_INVALID_TOKEN = &sValidationExceptionErrorCode_INVALID_TOKEN
+var ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED = &sValidationExceptionErrorCode_FIELD_VALIDATION_FAILED
+var ValidationExceptionErrorCode_MISSING_INPUT = &sValidationExceptionErrorCode_MISSING_INPUT
+var ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN = &sValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN
+var ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN = &sValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _VatRegistrationNumber = &s_VatRegistrationNumber
+
+var VerificationDetails = &sVerificationDetails
+var VerificationDetails_dateOfBirth = &sVerificationDetails_dateOfBirth
+var VerificationDetails_taxRegistrationDocuments = &sVerificationDetails_taxRegistrationDocuments
+
+var VietnamAdditionalInfo = &sVietnamAdditionalInfo
+var VietnamAdditionalInfo_enterpriseIdentificationNumber = &sVietnamAdditionalInfo_enterpriseIdentificationNumber
+var VietnamAdditionalInfo_electronicTransactionCodeNumber = &sVietnamAdditionalInfo_electronicTransactionCodeNumber
+var VietnamAdditionalInfo_paymentVoucherNumber = &sVietnamAdditionalInfo_paymentVoucherNumber
+var VietnamAdditionalInfo_paymentVoucherNumberDate = &sVietnamAdditionalInfo_paymentVoucherNumberDate
+
+var BatchDeleteTaxRegistrationRequest = &sBatchDeleteTaxRegistrationRequest
+var BatchDeleteTaxRegistrationRequest_accountIds = &sBatchDeleteTaxRegistrationRequest_accountIds
+
+var BatchDeleteTaxRegistrationResponse = &sBatchDeleteTaxRegistrationResponse
+var BatchDeleteTaxRegistrationResponse_errors = &sBatchDeleteTaxRegistrationResponse_errors
+
+var BatchGetTaxExemptionsRequest = &sBatchGetTaxExemptionsRequest
+var BatchGetTaxExemptionsRequest_accountIds = &sBatchGetTaxExemptionsRequest_accountIds
+
+var BatchGetTaxExemptionsResponse = &sBatchGetTaxExemptionsResponse
+var BatchGetTaxExemptionsResponse_taxExemptionDetailsMap = &sBatchGetTaxExemptionsResponse_taxExemptionDetailsMap
+var BatchGetTaxExemptionsResponse_failedAccounts = &sBatchGetTaxExemptionsResponse_failedAccounts
+
+var BatchPutTaxRegistrationRequest = &sBatchPutTaxRegistrationRequest
+var BatchPutTaxRegistrationRequest_accountIds = &sBatchPutTaxRegistrationRequest_accountIds
+var BatchPutTaxRegistrationRequest_taxRegistrationEntry = &sBatchPutTaxRegistrationRequest_taxRegistrationEntry
+
+var BatchPutTaxRegistrationResponse = &sBatchPutTaxRegistrationResponse
+var BatchPutTaxRegistrationResponse_status = &sBatchPutTaxRegistrationResponse_status
+var BatchPutTaxRegistrationResponse_errors = &sBatchPutTaxRegistrationResponse_errors
+
+var DeleteSupplementalTaxRegistrationRequest = &sDeleteSupplementalTaxRegistrationRequest
+var DeleteSupplementalTaxRegistrationRequest_authorityId = &sDeleteSupplementalTaxRegistrationRequest_authorityId
+
+var DeleteSupplementalTaxRegistrationResponse = &sDeleteSupplementalTaxRegistrationResponse
+
+var DeleteTaxRegistrationRequest = &sDeleteTaxRegistrationRequest
+var DeleteTaxRegistrationRequest_accountId = &sDeleteTaxRegistrationRequest_accountId
+
+var DeleteTaxRegistrationResponse = &sDeleteTaxRegistrationResponse
+
+var GetTaxExemptionTypesRequest = &sGetTaxExemptionTypesRequest
+
+var GetTaxExemptionTypesResponse = &sGetTaxExemptionTypesResponse
+var GetTaxExemptionTypesResponse_taxExemptionTypes = &sGetTaxExemptionTypesResponse_taxExemptionTypes
+
+var GetTaxInheritanceRequest = &sGetTaxInheritanceRequest
+
+var GetTaxInheritanceResponse = &sGetTaxInheritanceResponse
+var GetTaxInheritanceResponse_heritageStatus = &sGetTaxInheritanceResponse_heritageStatus
+
+var GetTaxRegistrationDocumentRequest = &sGetTaxRegistrationDocumentRequest
+var GetTaxRegistrationDocumentRequest_destinationS3Location = &sGetTaxRegistrationDocumentRequest_destinationS3Location
+var GetTaxRegistrationDocumentRequest_taxDocumentMetadata = &sGetTaxRegistrationDocumentRequest_taxDocumentMetadata
+
+var GetTaxRegistrationDocumentResponse = &sGetTaxRegistrationDocumentResponse
+var GetTaxRegistrationDocumentResponse_destinationFilePath = &sGetTaxRegistrationDocumentResponse_destinationFilePath
+var GetTaxRegistrationDocumentResponse_presignedS3Url = &sGetTaxRegistrationDocumentResponse_presignedS3Url
+
+var GetTaxRegistrationRequest = &sGetTaxRegistrationRequest
+var GetTaxRegistrationRequest_accountId = &sGetTaxRegistrationRequest_accountId
+
+var GetTaxRegistrationResponse = &sGetTaxRegistrationResponse
+var GetTaxRegistrationResponse_taxRegistration = &sGetTaxRegistrationResponse_taxRegistration
+
+var ListSupplementalTaxRegistrationsRequest = &sListSupplementalTaxRegistrationsRequest
+var ListSupplementalTaxRegistrationsRequest_maxResults = &sListSupplementalTaxRegistrationsRequest_maxResults
+var ListSupplementalTaxRegistrationsRequest_nextToken = &sListSupplementalTaxRegistrationsRequest_nextToken
+
+var ListSupplementalTaxRegistrationsResponse = &sListSupplementalTaxRegistrationsResponse
+var ListSupplementalTaxRegistrationsResponse_taxRegistrations = &sListSupplementalTaxRegistrationsResponse_taxRegistrations
+var ListSupplementalTaxRegistrationsResponse_nextToken = &sListSupplementalTaxRegistrationsResponse_nextToken
+
+var ListTaxExemptionsRequest = &sListTaxExemptionsRequest
+var ListTaxExemptionsRequest_maxResults = &sListTaxExemptionsRequest_maxResults
+var ListTaxExemptionsRequest_nextToken = &sListTaxExemptionsRequest_nextToken
+
+var ListTaxExemptionsResponse = &sListTaxExemptionsResponse
+var ListTaxExemptionsResponse_nextToken = &sListTaxExemptionsResponse_nextToken
+var ListTaxExemptionsResponse_taxExemptionDetailsMap = &sListTaxExemptionsResponse_taxExemptionDetailsMap
+
+var ListTaxRegistrationsRequest = &sListTaxRegistrationsRequest
+var ListTaxRegistrationsRequest_maxResults = &sListTaxRegistrationsRequest_maxResults
+var ListTaxRegistrationsRequest_nextToken = &sListTaxRegistrationsRequest_nextToken
+
+var ListTaxRegistrationsResponse = &sListTaxRegistrationsResponse
+var ListTaxRegistrationsResponse_accountDetails = &sListTaxRegistrationsResponse_accountDetails
+var ListTaxRegistrationsResponse_nextToken = &sListTaxRegistrationsResponse_nextToken
+
+var PutSupplementalTaxRegistrationRequest = &sPutSupplementalTaxRegistrationRequest
+var PutSupplementalTaxRegistrationRequest_taxRegistrationEntry = &sPutSupplementalTaxRegistrationRequest_taxRegistrationEntry
+
+var PutSupplementalTaxRegistrationResponse = &sPutSupplementalTaxRegistrationResponse
+var PutSupplementalTaxRegistrationResponse_authorityId = &sPutSupplementalTaxRegistrationResponse_authorityId
+var PutSupplementalTaxRegistrationResponse_status = &sPutSupplementalTaxRegistrationResponse_status
+
+var PutTaxExemptionRequest = &sPutTaxExemptionRequest
+var PutTaxExemptionRequest_accountIds = &sPutTaxExemptionRequest_accountIds
+var PutTaxExemptionRequest_authority = &sPutTaxExemptionRequest_authority
+var PutTaxExemptionRequest_exemptionType = &sPutTaxExemptionRequest_exemptionType
+var PutTaxExemptionRequest_exemptionCertificate = &sPutTaxExemptionRequest_exemptionCertificate
+
+var PutTaxExemptionResponse = &sPutTaxExemptionResponse
+var PutTaxExemptionResponse_caseId = &sPutTaxExemptionResponse_caseId
+
+var PutTaxInheritanceRequest = &sPutTaxInheritanceRequest
+var PutTaxInheritanceRequest_heritageStatus = &sPutTaxInheritanceRequest_heritageStatus
+
+var PutTaxInheritanceResponse = &sPutTaxInheritanceResponse
+
+var PutTaxRegistrationRequest = &sPutTaxRegistrationRequest
+var PutTaxRegistrationRequest_accountId = &sPutTaxRegistrationRequest_accountId
+var PutTaxRegistrationRequest_taxRegistrationEntry = &sPutTaxRegistrationRequest_taxRegistrationEntry
+
+var PutTaxRegistrationResponse = &sPutTaxRegistrationResponse
+var PutTaxRegistrationResponse_status = &sPutTaxRegistrationResponse_status
+
+var TaxSettings = &smithy.ServiceSchema{Schema: &s_TaxSettings, Version: "2018-05-10"}

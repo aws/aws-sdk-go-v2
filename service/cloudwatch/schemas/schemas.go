@@ -4,4960 +4,4769 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateDatasetKmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AssociateDatasetKmsKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "CreateResourceMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAlarmMuteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAlarmMuteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAlarms",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDashboards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteDashboards",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMetricStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteMetricStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteResourceMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAlarmContributors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmContributors",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAlarmHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarms",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAlarmsForMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmsForMetric",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAnomalyDetectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAnomalyDetectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableAlarmActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisableAlarmActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisableInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateDatasetKmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisassociateDatasetKmsKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableAlarmActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EnableAlarmActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EnableInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAlarmMuteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetAlarmMuteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInsightRuleReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetInsightRuleReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricData",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMetricStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStatistics",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMetricStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMetricWidgetImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricWidgetImage",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetOTelEnrichment",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetResourceMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAlarmMuteRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListAlarmMuteRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDashboards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListDashboards",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListManagedInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListManagedInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMetricStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAlarmMuteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutAlarmMuteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutAnomalyDetector",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutCompositeAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutCompositeAlarm",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutInsightRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutInsightRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutLogAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutLogAlarm",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutManagedInsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutManagedInsightRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMetricAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricAlarm",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricData",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMetricStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetAlarmState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "SetAlarmState",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartMetricStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartMetricStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartOTelEnrichment",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopMetricStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopMetricStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopOTelEnrichment",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateOTelEnrichment",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateResourceMetricsConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var _GraniteServiceVersion20100801 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GraniteServiceVersion20100801",
-}, smithy.ShapeTypeService, 0, &smithytraits.AWSQueryCompatible{},
-	&smithytraits.XMLNamespace{URI: "http://monitoring.amazonaws.com/doc/2010-08-01/"})
-
-var GraniteServiceVersion20100801 = smithy.NewServiceSchema(_GraniteServiceVersion20100801, "2010-08-01")
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var ActionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ActionConfiguration_AlarmTagsPropagation *smithy.Schema
-
-var _ActionLogLineCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionLogLineCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ActionLogLineRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionLogLineRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionsEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionsEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ActionsSuppressedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionsSuppressedBy",
-}, smithy.ShapeTypeEnum, 3)
-var ActionsSuppressedBy_WaitPeriod *smithy.Schema
-
-var ActionsSuppressedBy_ExtensionPeriod *smithy.Schema
-
-var ActionsSuppressedBy_Alarm *smithy.Schema
-
-var _ActionsSuppressedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ActionsSuppressedReason",
-}, smithy.ShapeTypeString, 0)
-
-var _AggregationExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AggregationExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _AlarmArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmArn",
-}, smithy.ShapeTypeString, 0)
-
-var AlarmContributor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmContributor",
-}, smithy.ShapeTypeStructure, 4)
-var AlarmContributor_ContributorId *smithy.Schema
-
-var AlarmContributor_ContributorAttributes *smithy.Schema
-
-var AlarmContributor_StateReason *smithy.Schema
-
-var AlarmContributor_StateTransitionedTimestamp *smithy.Schema
-
-var _AlarmContributors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmContributors",
-}, smithy.ShapeTypeList, 1)
-var _AlarmContributors_member *smithy.Schema
-
-var _AlarmDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmDescription",
-}, smithy.ShapeTypeString, 0)
-
-var AlarmHistoryItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmHistoryItem",
-}, smithy.ShapeTypeStructure, 8)
-var AlarmHistoryItem_AlarmName *smithy.Schema
-
-var AlarmHistoryItem_AlarmContributorId *smithy.Schema
-
-var AlarmHistoryItem_AlarmType *smithy.Schema
-
-var AlarmHistoryItem_Timestamp *smithy.Schema
-
-var AlarmHistoryItem_HistoryItemType *smithy.Schema
-
-var AlarmHistoryItem_HistorySummary *smithy.Schema
-
-var AlarmHistoryItem_HistoryData *smithy.Schema
-
-var AlarmHistoryItem_AlarmContributorAttributes *smithy.Schema
-
-var _AlarmHistoryItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmHistoryItems",
-}, smithy.ShapeTypeList, 1)
-var _AlarmHistoryItems_member *smithy.Schema
-
-var AlarmMuteRuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmMuteRuleStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AlarmMuteRuleStatus_SCHEDULED *smithy.Schema
-
-var AlarmMuteRuleStatus_ACTIVE *smithy.Schema
-
-var AlarmMuteRuleStatus_EXPIRED *smithy.Schema
-
-var _AlarmMuteRuleStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmMuteRuleStatuses",
-}, smithy.ShapeTypeList, 1)
-var _AlarmMuteRuleStatuses_member *smithy.Schema
-
-var _AlarmMuteRuleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmMuteRuleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _AlarmMuteRuleSummaries_member *smithy.Schema
-
-var AlarmMuteRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmMuteRuleSummary",
-}, smithy.ShapeTypeStructure, 5)
-var AlarmMuteRuleSummary_AlarmMuteRuleArn *smithy.Schema
-
-var AlarmMuteRuleSummary_ExpireDate *smithy.Schema
-
-var AlarmMuteRuleSummary_Status *smithy.Schema
-
-var AlarmMuteRuleSummary_MuteType *smithy.Schema
-
-var AlarmMuteRuleSummary_LastUpdatedTimestamp *smithy.Schema
-
-var _AlarmName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmName",
-}, smithy.ShapeTypeString, 0)
-
-var _AlarmNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _AlarmNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmNames",
-}, smithy.ShapeTypeList, 1)
-var _AlarmNames_member *smithy.Schema
-
-var AlarmPromQLCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmPromQLCriteria",
-}, smithy.ShapeTypeStructure, 3)
-var AlarmPromQLCriteria_Query *smithy.Schema
-
-var AlarmPromQLCriteria_PendingPeriod *smithy.Schema
-
-var AlarmPromQLCriteria_RecoveryPeriod *smithy.Schema
-
-var _AlarmRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmRule",
-}, smithy.ShapeTypeString, 0)
-
-var AlarmTagsPropagation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmTagsPropagation",
-}, smithy.ShapeTypeStructure, 3)
-var AlarmTagsPropagation_Enabled *smithy.Schema
-
-var AlarmTagsPropagation_IncludedTagKeys *smithy.Schema
-
-var AlarmTagsPropagation_ExcludedTagKeys *smithy.Schema
-
-var _AlarmTagsPropagationEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmTagsPropagationEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AlarmTagsPropagationTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmTagsPropagationTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AlarmTagsPropagationTagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmTagsPropagationTagKeys",
-}, smithy.ShapeTypeList, 1)
-var _AlarmTagsPropagationTagKeys_member *smithy.Schema
-
-var AlarmType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmType",
-}, smithy.ShapeTypeEnum, 3)
-var AlarmType_CompositeAlarm *smithy.Schema
-
-var AlarmType_MetricAlarm *smithy.Schema
-
-var AlarmType_LogAlarm *smithy.Schema
-
-var _AlarmTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AlarmTypes",
-}, smithy.ShapeTypeList, 1)
-var _AlarmTypes_member *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetector",
-}, smithy.ShapeTypeStructure, 10)
-var AnomalyDetector_AnomalyDetectorId *smithy.Schema
-
-var AnomalyDetector_Namespace *smithy.Schema
-
-var AnomalyDetector_MetricName *smithy.Schema
-
-var AnomalyDetector_Dimensions *smithy.Schema
-
-var AnomalyDetector_Stat *smithy.Schema
-
-var AnomalyDetector_Configuration *smithy.Schema
-
-var AnomalyDetector_StateValue *smithy.Schema
-
-var AnomalyDetector_MetricCharacteristics *smithy.Schema
-
-var AnomalyDetector_SingleMetricAnomalyDetector *smithy.Schema
-
-var AnomalyDetector_MetricMathAnomalyDetector *smithy.Schema
-
-var AnomalyDetectorAdaptationSpeed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorAdaptationSpeed",
-}, smithy.ShapeTypeEnum, 3)
-var AnomalyDetectorAdaptationSpeed_FAST *smithy.Schema
-
-var AnomalyDetectorAdaptationSpeed_NORMAL *smithy.Schema
-
-var AnomalyDetectorAdaptationSpeed_SLOW *smithy.Schema
-
-var AnomalyDetectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var AnomalyDetectorConfiguration_ExcludedTimeRanges *smithy.Schema
-
-var AnomalyDetectorConfiguration_MetricTimezone *smithy.Schema
-
-var AnomalyDetectorConfiguration_AdaptationSpeed *smithy.Schema
-
-var AnomalyDetectorConfiguration_OutlierFilteringStrength *smithy.Schema
-
-var _AnomalyDetectorExcludedTimeRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorExcludedTimeRanges",
-}, smithy.ShapeTypeList, 1)
-var _AnomalyDetectorExcludedTimeRanges_member *smithy.Schema
-
-var _AnomalyDetectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorId",
-}, smithy.ShapeTypeString, 0)
-
-var _AnomalyDetectorIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorIds",
-}, smithy.ShapeTypeList, 1)
-var _AnomalyDetectorIds_member *smithy.Schema
-
-var _AnomalyDetectorMetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorMetricStat",
-}, smithy.ShapeTypeString, 0)
-
-var _AnomalyDetectorMetricTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorMetricTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var AnomalyDetectorOutlierFilteringStrength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorOutlierFilteringStrength",
-}, smithy.ShapeTypeEnum, 3)
-var AnomalyDetectorOutlierFilteringStrength_MINIMAL *smithy.Schema
-
-var AnomalyDetectorOutlierFilteringStrength_MODERATE *smithy.Schema
-
-var AnomalyDetectorOutlierFilteringStrength_STRICT *smithy.Schema
-
-var _AnomalyDetectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectors",
-}, smithy.ShapeTypeList, 1)
-var _AnomalyDetectors_member *smithy.Schema
-
-var AnomalyDetectorStateValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorStateValue",
-}, smithy.ShapeTypeEnum, 3)
-var AnomalyDetectorStateValue_PENDING_TRAINING *smithy.Schema
-
-var AnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA *smithy.Schema
-
-var AnomalyDetectorStateValue_TRAINED *smithy.Schema
-
-var AnomalyDetectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorType",
-}, smithy.ShapeTypeEnum, 2)
-var AnomalyDetectorType_SINGLE_METRIC *smithy.Schema
-
-var AnomalyDetectorType_METRIC_MATH *smithy.Schema
-
-var _AnomalyDetectorTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AnomalyDetectorTypes",
-}, smithy.ShapeTypeList, 1)
-var _AnomalyDetectorTypes_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsQueryErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AwsQueryErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _BatchFailures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "BatchFailures",
-}, smithy.ShapeTypeList, 1)
-var _BatchFailures_member *smithy.Schema
-
-var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 7)
-var ComparisonOperator_GreaterThanOrEqualToThreshold *smithy.Schema
-
-var ComparisonOperator_GreaterThanThreshold *smithy.Schema
-
-var ComparisonOperator_LessThanThreshold *smithy.Schema
-
-var ComparisonOperator_LessThanOrEqualToThreshold *smithy.Schema
-
-var ComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold *smithy.Schema
-
-var ComparisonOperator_LessThanLowerThreshold *smithy.Schema
-
-var ComparisonOperator_GreaterThanUpperThreshold *smithy.Schema
-
-var CompositeAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "CompositeAlarm",
-}, smithy.ShapeTypeStructure, 20)
-var CompositeAlarm_ActionsEnabled *smithy.Schema
-
-var CompositeAlarm_AlarmActions *smithy.Schema
-
-var CompositeAlarm_AlarmArn *smithy.Schema
-
-var CompositeAlarm_AlarmConfigurationUpdatedTimestamp *smithy.Schema
-
-var CompositeAlarm_AlarmDescription *smithy.Schema
-
-var CompositeAlarm_AlarmName *smithy.Schema
-
-var CompositeAlarm_AlarmRule *smithy.Schema
-
-var CompositeAlarm_InsufficientDataActions *smithy.Schema
-
-var CompositeAlarm_OKActions *smithy.Schema
-
-var CompositeAlarm_StateReason *smithy.Schema
-
-var CompositeAlarm_StateReasonData *smithy.Schema
-
-var CompositeAlarm_StateUpdatedTimestamp *smithy.Schema
-
-var CompositeAlarm_StateValue *smithy.Schema
-
-var CompositeAlarm_StateTransitionedTimestamp *smithy.Schema
-
-var CompositeAlarm_ActionsSuppressedBy *smithy.Schema
-
-var CompositeAlarm_ActionsSuppressedReason *smithy.Schema
-
-var CompositeAlarm_ActionsSuppressor *smithy.Schema
-
-var CompositeAlarm_ActionsSuppressorWaitPeriod *smithy.Schema
-
-var CompositeAlarm_ActionsSuppressorExtensionPeriod *smithy.Schema
-
-var CompositeAlarm_ActionConfiguration *smithy.Schema
-
-var _CompositeAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "CompositeAlarms",
-}, smithy.ShapeTypeList, 1)
-var _CompositeAlarms_member *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
-		StatusCode: 429})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _ContributorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ContributorAttributes",
-}, smithy.ShapeTypeMap, 2)
-var _ContributorAttributes_key *smithy.Schema
-
-var _ContributorAttributes_value *smithy.Schema
-
-var _ContributorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ContributorId",
-}, smithy.ShapeTypeString, 0)
-
-var _Counts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Counts",
-}, smithy.ShapeTypeList, 1)
-var _Counts_member *smithy.Schema
-
-var _DashboardArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DashboardBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardBody",
-}, smithy.ShapeTypeString, 0)
-
-var _DashboardEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardEntries",
-}, smithy.ShapeTypeList, 1)
-var _DashboardEntries_member *smithy.Schema
-
-var DashboardEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardEntry",
-}, smithy.ShapeTypeStructure, 4)
-var DashboardEntry_DashboardName *smithy.Schema
-
-var DashboardEntry_DashboardArn *smithy.Schema
-
-var DashboardEntry_LastModified *smithy.Schema
-
-var DashboardEntry_Size *smithy.Schema
-
-var _DashboardErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var DashboardInvalidInputError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardInvalidInputError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterInput",
-		StatusCode: 400})
-var DashboardInvalidInputError_message *smithy.Schema
-
-var DashboardInvalidInputError_dashboardValidationMessages *smithy.Schema
-
-var _DashboardName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardName",
-}, smithy.ShapeTypeString, 0)
-
-var _DashboardNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _DashboardNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardNames",
-}, smithy.ShapeTypeList, 1)
-var _DashboardNames_member *smithy.Schema
-
-var DashboardNotFoundError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardNotFoundError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 404})
-var DashboardNotFoundError_message *smithy.Schema
-
-var DashboardValidationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardValidationMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DashboardValidationMessage_DataPath *smithy.Schema
-
-var DashboardValidationMessage_Message *smithy.Schema
-
-var _DashboardValidationMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DashboardValidationMessages",
-}, smithy.ShapeTypeList, 1)
-var _DashboardValidationMessages_member *smithy.Schema
-
-var _DataPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DataPath",
-}, smithy.ShapeTypeString, 0)
-
-var Datapoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Datapoint",
-}, smithy.ShapeTypeStructure, 8)
-var Datapoint_Timestamp *smithy.Schema
-
-var Datapoint_SampleCount *smithy.Schema
-
-var Datapoint_Average *smithy.Schema
-
-var Datapoint_Sum *smithy.Schema
-
-var Datapoint_Minimum *smithy.Schema
-
-var Datapoint_Maximum *smithy.Schema
-
-var Datapoint_Unit *smithy.Schema
-
-var Datapoint_ExtendedStatistics *smithy.Schema
-
-var _Datapoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Datapoints",
-}, smithy.ShapeTypeList, 1)
-var _Datapoints_member *smithy.Schema
-
-var _DatapointsToAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatapointsToAlarm",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DatapointValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatapointValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DatapointValueMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatapointValueMap",
-}, smithy.ShapeTypeMap, 2)
-var _DatapointValueMap_key *smithy.Schema
-
-var _DatapointValueMap_value *smithy.Schema
-
-var _DatapointValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatapointValues",
-}, smithy.ShapeTypeList, 1)
-var _DatapointValues_member *smithy.Schema
-
-var _DatasetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatasetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DatasetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatasetId",
-}, smithy.ShapeTypeString, 0)
-
-var _DatasetIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DatasetIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 2)
-var Dimension_Name *smithy.Schema
-
-var Dimension_Value *smithy.Schema
-
-var DimensionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DimensionFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DimensionFilter_Name *smithy.Schema
-
-var DimensionFilter_Value *smithy.Schema
-
-var _DimensionFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DimensionFilters",
-}, smithy.ShapeTypeList, 1)
-var _DimensionFilters_member *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Duration",
-}, smithy.ShapeTypeString, 0)
-
-var _EndTimeOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EndTimeOffset",
-}, smithy.ShapeTypeLong, 0)
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2)
-var Entity_KeyAttributes *smithy.Schema
-
-var Entity_Attributes *smithy.Schema
-
-var _EntityAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _EntityAttributesMap_key *smithy.Schema
-
-var _EntityAttributesMap_value *smithy.Schema
-
-var _EntityAttributesMapKeyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityAttributesMapKeyString",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityAttributesMapValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityAttributesMapValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityKeyAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityKeyAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _EntityKeyAttributesMap_key *smithy.Schema
-
-var _EntityKeyAttributesMap_value *smithy.Schema
-
-var _EntityKeyAttributesMapKeyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityKeyAttributesMapKeyString",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityKeyAttributesMapValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityKeyAttributesMapValueString",
-}, smithy.ShapeTypeString, 0)
-
-var EntityMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityMetricData",
-}, smithy.ShapeTypeStructure, 2)
-var EntityMetricData_Entity *smithy.Schema
-
-var EntityMetricData_MetricData *smithy.Schema
-
-var _EntityMetricDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EntityMetricDataList",
-}, smithy.ShapeTypeList, 1)
-var _EntityMetricDataList_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EvaluateLowSampleCountPercentile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluateLowSampleCountPercentile",
-}, smithy.ShapeTypeString, 0)
-
-var EvaluationCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluationCriteria",
-}, smithy.ShapeTypeUnion, 1)
-var EvaluationCriteria_PromQLCriteria *smithy.Schema
-
-var _EvaluationInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluationInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _EvaluationPeriods = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluationPeriods",
-}, smithy.ShapeTypeInteger, 0)
-
-var EvaluationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluationState",
-}, smithy.ShapeTypeEnum, 3)
-var EvaluationState_PARTIAL_DATA *smithy.Schema
-
-var EvaluationState_EVALUATION_FAILURE *smithy.Schema
-
-var EvaluationState_EVALUATION_ERROR *smithy.Schema
-
-var EvaluationWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EvaluationWindow",
-}, smithy.ShapeTypeUnion, 2)
-var EvaluationWindow_WallClockWindow *smithy.Schema
-
-var EvaluationWindow_SlidingWindow *smithy.Schema
-
-var _ExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ExceptionType",
-}, smithy.ShapeTypeString, 0)
-
-var _Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Expression",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtendedStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ExtendedStatistic",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtendedStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ExtendedStatistics",
-}, smithy.ShapeTypeList, 1)
-var _ExtendedStatistics_member *smithy.Schema
-
-var _FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "FailureDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "FailureResource",
-}, smithy.ShapeTypeString, 0)
-
-var _FaultDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "FaultDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _GetMetricDataLabelTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricDataLabelTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var _GetMetricDataMaxDatapoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricDataMaxDatapoints",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HistoryData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "HistoryData",
-}, smithy.ShapeTypeString, 0)
-
-var HistoryItemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "HistoryItemType",
-}, smithy.ShapeTypeEnum, 5)
-var HistoryItemType_ConfigurationUpdate *smithy.Schema
-
-var HistoryItemType_StateUpdate *smithy.Schema
-
-var HistoryItemType_Action *smithy.Schema
-
-var HistoryItemType_AlarmContributorStateUpdate *smithy.Schema
-
-var HistoryItemType_AlarmContributorAction *smithy.Schema
-
-var _HistorySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "HistorySummary",
-}, smithy.ShapeTypeString, 0)
-
-var _IncludeLinkedAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "IncludeLinkedAccounts",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IncludeLinkedAccountsMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "IncludeLinkedAccountsMetrics",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InsightRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRule",
-}, smithy.ShapeTypeStructure, 6)
-var InsightRule_Name *smithy.Schema
-
-var InsightRule_State *smithy.Schema
-
-var InsightRule_Schema *smithy.Schema
-
-var InsightRule_Definition *smithy.Schema
-
-var InsightRule_ManagedRule *smithy.Schema
-
-var InsightRule_ApplyOnTransformedLogs *smithy.Schema
-
-var _InsightRuleAggregationStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleAggregationStatistic",
-}, smithy.ShapeTypeString, 0)
-
-var InsightRuleContributor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributor",
-}, smithy.ShapeTypeStructure, 3)
-var InsightRuleContributor_Keys *smithy.Schema
-
-var InsightRuleContributor_ApproximateAggregateValue *smithy.Schema
-
-var InsightRuleContributor_Datapoints *smithy.Schema
-
-var InsightRuleContributorDatapoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorDatapoint",
-}, smithy.ShapeTypeStructure, 2)
-var InsightRuleContributorDatapoint_Timestamp *smithy.Schema
-
-var InsightRuleContributorDatapoint_ApproximateValue *smithy.Schema
-
-var _InsightRuleContributorDatapoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorDatapoints",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleContributorDatapoints_member *smithy.Schema
-
-var _InsightRuleContributorKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorKey",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleContributorKeyLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorKeyLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleContributorKeyLabels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorKeyLabels",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleContributorKeyLabels_member *smithy.Schema
-
-var _InsightRuleContributorKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributorKeys",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleContributorKeys_member *smithy.Schema
-
-var _InsightRuleContributors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleContributors",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleContributors_member *smithy.Schema
-
-var _InsightRuleDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleDefinition",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleIsManaged = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleIsManaged",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _InsightRuleMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var InsightRuleMetricDatapoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleMetricDatapoint",
-}, smithy.ShapeTypeStructure, 8)
-var InsightRuleMetricDatapoint_Timestamp *smithy.Schema
-
-var InsightRuleMetricDatapoint_UniqueContributors *smithy.Schema
-
-var InsightRuleMetricDatapoint_MaxContributorValue *smithy.Schema
-
-var InsightRuleMetricDatapoint_SampleCount *smithy.Schema
-
-var InsightRuleMetricDatapoint_Average *smithy.Schema
-
-var InsightRuleMetricDatapoint_Sum *smithy.Schema
-
-var InsightRuleMetricDatapoint_Minimum *smithy.Schema
-
-var InsightRuleMetricDatapoint_Maximum *smithy.Schema
-
-var _InsightRuleMetricDatapoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleMetricDatapoints",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleMetricDatapoints_member *smithy.Schema
-
-var _InsightRuleMetricList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleMetricList",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleMetricList_member *smithy.Schema
-
-var _InsightRuleMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleMetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleNames",
-}, smithy.ShapeTypeList, 1)
-var _InsightRuleNames_member *smithy.Schema
-
-var _InsightRuleOnTransformedLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleOnTransformedLogs",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _InsightRuleOrderBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleOrderBy",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRules",
-}, smithy.ShapeTypeList, 1)
-var _InsightRules_member *smithy.Schema
-
-var _InsightRuleSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleSchema",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleState",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightRuleUnboundDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleUnboundDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _InsightRuleUnboundInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleUnboundInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InsightRuleUnboundLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InsightRuleUnboundLong",
-}, smithy.ShapeTypeLong, 0)
-
-var InternalServiceFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InternalServiceFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
-		StatusCode: 500})
-var InternalServiceFault_Message *smithy.Schema
-
-var InvalidFormatFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InvalidFormatFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidFormat",
-		StatusCode: 400})
-var InvalidFormatFault_message *smithy.Schema
-
-var InvalidNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InvalidNextToken",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
-		StatusCode: 400})
-var InvalidNextToken_message *smithy.Schema
-
-var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombination",
-		StatusCode: 400})
-var InvalidParameterCombinationException_message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValue",
-		StatusCode: 400})
-var InvalidParameterValueException_message *smithy.Schema
-
-var KmsAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "KmsAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KmsAccessDeniedException_Message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var KmsKeyDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "KmsKeyDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KmsKeyDisabledException_Message *smithy.Schema
-
-var KmsKeyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "KmsKeyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KmsKeyNotFoundException_Message *smithy.Schema
-
-var LabelOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LabelOptions",
-}, smithy.ShapeTypeStructure, 1)
-var LabelOptions_Timezone *smithy.Schema
-
-var _LastModified = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LastModified",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
-		StatusCode: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var LimitExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LimitExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
-		StatusCode: 400})
-var LimitExceededFault_message *smithy.Schema
-
-var _ListMetricStreamsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricStreamsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var LogAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LogAlarm",
-}, smithy.ShapeTypeStructure, 24)
-var LogAlarm_AlarmName *smithy.Schema
-
-var LogAlarm_AlarmArn *smithy.Schema
-
-var LogAlarm_AlarmDescription *smithy.Schema
-
-var LogAlarm_AlarmConfigurationUpdatedTimestamp *smithy.Schema
-
-var LogAlarm_ActionsEnabled *smithy.Schema
-
-var LogAlarm_OKActions *smithy.Schema
-
-var LogAlarm_AlarmActions *smithy.Schema
-
-var LogAlarm_InsufficientDataActions *smithy.Schema
-
-var LogAlarm_StateValue *smithy.Schema
-
-var LogAlarm_StateReason *smithy.Schema
-
-var LogAlarm_StateReasonData *smithy.Schema
-
-var LogAlarm_StateUpdatedTimestamp *smithy.Schema
-
-var LogAlarm_ScheduledQueryConfiguration *smithy.Schema
-
-var LogAlarm_QueryResultsToEvaluate *smithy.Schema
-
-var LogAlarm_QueryResultsToAlarm *smithy.Schema
-
-var LogAlarm_Threshold *smithy.Schema
-
-var LogAlarm_ComparisonOperator *smithy.Schema
-
-var LogAlarm_TreatMissingData *smithy.Schema
-
-var LogAlarm_StateTransitionedTimestamp *smithy.Schema
-
-var LogAlarm_EvaluationState *smithy.Schema
-
-var LogAlarm_ActionLogLineCount *smithy.Schema
-
-var LogAlarm_ActionLogLineRoleArn *smithy.Schema
-
-var LogAlarm_WarmUpConfiguration *smithy.Schema
-
-var LogAlarm_ActionConfiguration *smithy.Schema
-
-var _LogAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LogAlarms",
-}, smithy.ShapeTypeList, 1)
-var _LogAlarms_member *smithy.Schema
-
-var _LogGroupIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "LogGroupIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _LogGroupIdentifiers_member *smithy.Schema
-
-var ManagedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ManagedRule",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedRule_TemplateName *smithy.Schema
-
-var ManagedRule_ResourceARN *smithy.Schema
-
-var ManagedRule_Tags *smithy.Schema
-
-var ManagedRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ManagedRuleDescription",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedRuleDescription_TemplateName *smithy.Schema
-
-var ManagedRuleDescription_ResourceARN *smithy.Schema
-
-var ManagedRuleDescription_RuleState *smithy.Schema
-
-var _ManagedRuleDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ManagedRuleDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _ManagedRuleDescriptions_member *smithy.Schema
-
-var _ManagedRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ManagedRules",
-}, smithy.ShapeTypeList, 1)
-var _ManagedRules_member *smithy.Schema
-
-var ManagedRuleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ManagedRuleState",
-}, smithy.ShapeTypeStructure, 2)
-var ManagedRuleState_RuleName *smithy.Schema
-
-var ManagedRuleState_State *smithy.Schema
-
-var _MaxRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MaxRecords",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxReturnedResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MaxReturnedResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var MessageData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MessageData",
-}, smithy.ShapeTypeStructure, 2)
-var MessageData_Code *smithy.Schema
-
-var MessageData_Value *smithy.Schema
-
-var _MessageDataCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MessageDataCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageDataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MessageDataValue",
-}, smithy.ShapeTypeString, 0)
-
-var Metric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Metric",
-}, smithy.ShapeTypeStructure, 3)
-var Metric_Namespace *smithy.Schema
-
-var Metric_MetricName *smithy.Schema
-
-var Metric_Dimensions *smithy.Schema
-
-var MetricAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricAlarm",
-}, smithy.ShapeTypeStructure, 34)
-var MetricAlarm_AlarmName *smithy.Schema
-
-var MetricAlarm_AlarmArn *smithy.Schema
-
-var MetricAlarm_AlarmDescription *smithy.Schema
-
-var MetricAlarm_AlarmConfigurationUpdatedTimestamp *smithy.Schema
-
-var MetricAlarm_ActionsEnabled *smithy.Schema
-
-var MetricAlarm_OKActions *smithy.Schema
-
-var MetricAlarm_AlarmActions *smithy.Schema
-
-var MetricAlarm_InsufficientDataActions *smithy.Schema
-
-var MetricAlarm_StateValue *smithy.Schema
-
-var MetricAlarm_StateReason *smithy.Schema
-
-var MetricAlarm_StateReasonData *smithy.Schema
-
-var MetricAlarm_StateUpdatedTimestamp *smithy.Schema
-
-var MetricAlarm_MetricName *smithy.Schema
-
-var MetricAlarm_Namespace *smithy.Schema
-
-var MetricAlarm_Statistic *smithy.Schema
-
-var MetricAlarm_ExtendedStatistic *smithy.Schema
-
-var MetricAlarm_Dimensions *smithy.Schema
-
-var MetricAlarm_Period *smithy.Schema
-
-var MetricAlarm_Unit *smithy.Schema
-
-var MetricAlarm_EvaluationPeriods *smithy.Schema
-
-var MetricAlarm_DatapointsToAlarm *smithy.Schema
-
-var MetricAlarm_Threshold *smithy.Schema
-
-var MetricAlarm_ComparisonOperator *smithy.Schema
-
-var MetricAlarm_TreatMissingData *smithy.Schema
-
-var MetricAlarm_EvaluateLowSampleCountPercentile *smithy.Schema
-
-var MetricAlarm_Metrics *smithy.Schema
-
-var MetricAlarm_ThresholdMetricId *smithy.Schema
-
-var MetricAlarm_EvaluationState *smithy.Schema
-
-var MetricAlarm_StateTransitionedTimestamp *smithy.Schema
-
-var MetricAlarm_EvaluationWindow *smithy.Schema
-
-var MetricAlarm_WarmUpConfiguration *smithy.Schema
-
-var MetricAlarm_EvaluationCriteria *smithy.Schema
-
-var MetricAlarm_EvaluationInterval *smithy.Schema
-
-var MetricAlarm_ActionConfiguration *smithy.Schema
-
-var _MetricAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricAlarms",
-}, smithy.ShapeTypeList, 1)
-var _MetricAlarms_member *smithy.Schema
-
-var MetricCharacteristics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricCharacteristics",
-}, smithy.ShapeTypeStructure, 1)
-var MetricCharacteristics_PeriodicSpikes *smithy.Schema
-
-var _MetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricData",
-}, smithy.ShapeTypeList, 1)
-var _MetricData_member *smithy.Schema
-
-var _MetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDataQueries",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataQueries_member *smithy.Schema
-
-var MetricDataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDataQuery",
-}, smithy.ShapeTypeStructure, 7)
-var MetricDataQuery_Id *smithy.Schema
-
-var MetricDataQuery_MetricStat *smithy.Schema
-
-var MetricDataQuery_Expression *smithy.Schema
-
-var MetricDataQuery_Label *smithy.Schema
-
-var MetricDataQuery_ReturnData *smithy.Schema
-
-var MetricDataQuery_Period *smithy.Schema
-
-var MetricDataQuery_AccountId *smithy.Schema
-
-var MetricDataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDataResult",
-}, smithy.ShapeTypeStructure, 6)
-var MetricDataResult_Id *smithy.Schema
-
-var MetricDataResult_Label *smithy.Schema
-
-var MetricDataResult_Timestamps *smithy.Schema
-
-var MetricDataResult_Values *smithy.Schema
-
-var MetricDataResult_StatusCode *smithy.Schema
-
-var MetricDataResult_Messages *smithy.Schema
-
-var _MetricDataResultMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDataResultMessages",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataResultMessages_member *smithy.Schema
-
-var _MetricDataResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDataResults",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataResults_member *smithy.Schema
-
-var MetricDatum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricDatum",
-}, smithy.ShapeTypeStructure, 9)
-var MetricDatum_MetricName *smithy.Schema
-
-var MetricDatum_Dimensions *smithy.Schema
-
-var MetricDatum_Timestamp *smithy.Schema
-
-var MetricDatum_Value *smithy.Schema
-
-var MetricDatum_StatisticValues *smithy.Schema
-
-var MetricDatum_Values *smithy.Schema
-
-var MetricDatum_Counts *smithy.Schema
-
-var MetricDatum_Unit *smithy.Schema
-
-var MetricDatum_StorageResolution *smithy.Schema
-
-var _MetricExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricLabel",
-}, smithy.ShapeTypeString, 0)
-
-var MetricMathAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricMathAnomalyDetector",
-}, smithy.ShapeTypeStructure, 1)
-var MetricMathAnomalyDetector_MetricDataQueries *smithy.Schema
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricNameList",
-}, smithy.ShapeTypeList, 1)
-var _MetricNameList_member *smithy.Schema
-
-var _Metrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Metrics",
-}, smithy.ShapeTypeList, 1)
-var _Metrics_member *smithy.Schema
-
-var MetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStat",
-}, smithy.ShapeTypeStructure, 4)
-var MetricStat_Metric *smithy.Schema
-
-var MetricStat_Period *smithy.Schema
-
-var MetricStat_Stat *smithy.Schema
-
-var MetricStat_Unit *smithy.Schema
-
-var _MetricStreamEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamEntries",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamEntries_member *smithy.Schema
-
-var MetricStreamEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamEntry",
-}, smithy.ShapeTypeStructure, 7)
-var MetricStreamEntry_Arn *smithy.Schema
-
-var MetricStreamEntry_CreationDate *smithy.Schema
-
-var MetricStreamEntry_LastUpdateDate *smithy.Schema
-
-var MetricStreamEntry_Name *smithy.Schema
-
-var MetricStreamEntry_FirehoseArn *smithy.Schema
-
-var MetricStreamEntry_State *smithy.Schema
-
-var MetricStreamEntry_OutputFormat *smithy.Schema
-
-var MetricStreamFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamFilter",
-}, smithy.ShapeTypeStructure, 2)
-var MetricStreamFilter_Namespace *smithy.Schema
-
-var MetricStreamFilter_MetricNames *smithy.Schema
-
-var _MetricStreamFilterMetricNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamFilterMetricNames",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamFilterMetricNames_member *smithy.Schema
-
-var _MetricStreamFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamFilters",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamFilters_member *smithy.Schema
-
-var _MetricStreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricStreamNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamNames",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamNames_member *smithy.Schema
-
-var MetricStreamOutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamOutputFormat",
-}, smithy.ShapeTypeEnum, 3)
-var MetricStreamOutputFormat_JSON *smithy.Schema
-
-var MetricStreamOutputFormat_OPEN_TELEMETRY_0_7 *smithy.Schema
-
-var MetricStreamOutputFormat_OPEN_TELEMETRY_1_0 *smithy.Schema
-
-var _MetricStreamState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamState",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricStreamStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatistic",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricStreamStatisticsAdditionalStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatisticsAdditionalStatistics",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamStatisticsAdditionalStatistics_member *smithy.Schema
-
-var MetricStreamStatisticsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatisticsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MetricStreamStatisticsConfiguration_IncludeMetrics *smithy.Schema
-
-var MetricStreamStatisticsConfiguration_AdditionalStatistics *smithy.Schema
-
-var _MetricStreamStatisticsConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatisticsConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamStatisticsConfigurations_member *smithy.Schema
-
-var _MetricStreamStatisticsIncludeMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatisticsIncludeMetrics",
-}, smithy.ShapeTypeList, 1)
-var _MetricStreamStatisticsIncludeMetrics_member *smithy.Schema
-
-var MetricStreamStatisticsMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricStreamStatisticsMetric",
-}, smithy.ShapeTypeStructure, 2)
-var MetricStreamStatisticsMetric_Namespace *smithy.Schema
-
-var MetricStreamStatisticsMetric_MetricName *smithy.Schema
-
-var _MetricWidget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricWidget",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricWidgetImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MetricWidgetImage",
-}, smithy.ShapeTypeBlob, 0)
-
-var MissingRequiredParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MissingRequiredParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "MissingParameter",
-		StatusCode: 400})
-var MissingRequiredParameterException_message *smithy.Schema
-
-var _MuteTargetAlarmNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MuteTargetAlarmNameList",
-}, smithy.ShapeTypeList, 1)
-var _MuteTargetAlarmNameList_member *smithy.Schema
-
-var MuteTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MuteTargets",
-}, smithy.ShapeTypeStructure, 1)
-var MuteTargets_AlarmNames *smithy.Schema
-
-var _MuteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "MuteType",
-}, smithy.ShapeTypeString, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OnlyStartEvaluatingAfterWarmUpPeriodEnds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _OTelEnrichmentMetricNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OTelEnrichmentMetricNameList",
-}, smithy.ShapeTypeList, 1)
-var _OTelEnrichmentMetricNameList_member *smithy.Schema
-
-var OTelEnrichmentMetricSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OTelEnrichmentMetricSelector",
-}, smithy.ShapeTypeStructure, 2)
-var OTelEnrichmentMetricSelector_Namespace *smithy.Schema
-
-var OTelEnrichmentMetricSelector_MetricNames *smithy.Schema
-
-var _OTelEnrichmentMetricSelectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OTelEnrichmentMetricSelectorList",
-}, smithy.ShapeTypeList, 1)
-var _OTelEnrichmentMetricSelectorList_member *smithy.Schema
-
-var OTelEnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OTelEnrichmentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var OTelEnrichmentStatus_RUNNING *smithy.Schema
-
-var OTelEnrichmentStatus_STOPPED *smithy.Schema
-
-var _OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _OwningAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "OwningAccounts",
-}, smithy.ShapeTypeList, 1)
-var _OwningAccounts_member *smithy.Schema
-
-var PartialFailure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PartialFailure",
-}, smithy.ShapeTypeStructure, 4)
-var PartialFailure_FailureResource *smithy.Schema
-
-var PartialFailure_ExceptionType *smithy.Schema
-
-var PartialFailure_FailureCode *smithy.Schema
-
-var PartialFailure_FailureDescription *smithy.Schema
-
-var _PendingPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PendingPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Period = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Period",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PeriodicSpikes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PeriodicSpikes",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Query = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Query",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryResultsToAlarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "QueryResultsToAlarm",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryResultsToEvaluate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "QueryResultsToEvaluate",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "QueryString",
-}, smithy.ShapeTypeString, 0)
-
-var Range = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Range",
-}, smithy.ShapeTypeStructure, 2)
-var Range_StartTime *smithy.Schema
-
-var Range_EndTime *smithy.Schema
-
-var RecentlyActive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "RecentlyActive",
-}, smithy.ShapeTypeEnum, 1)
-var RecentlyActive_PT3H *smithy.Schema
-
-var _RecoveryPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "RecoveryPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceConflict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceConflict",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
-		StatusCode: 409})
-var ResourceConflict_message *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceMetricsConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ResourceMetricsConfiguration_ResourceArn *smithy.Schema
-
-var ResourceMetricsConfiguration_CreatedAt *smithy.Schema
-
-var ResourceMetricsConfiguration_UpdatedAt *smithy.Schema
-
-var ResourceMetricsConfiguration_MetricSelections *smithy.Schema
-
-var ResourceMetricSelection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceMetricSelection",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceMetricSelection_IncludeMetrics *smithy.Schema
-
-var _ResourceMetricSelectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceMetricSelectionList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceMetricSelectionList_member *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 404})
-var ResourceNotFound_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ReturnData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ReturnData",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 1)
-var Rule_Schedule *smithy.Schema
-
-var ScanBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ScanBy",
-}, smithy.ShapeTypeEnum, 2)
-var ScanBy_TIMESTAMP_DESCENDING *smithy.Schema
-
-var ScanBy_TIMESTAMP_ASCENDING *smithy.Schema
-
-var Schedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Schedule",
-}, smithy.ShapeTypeStructure, 3)
-var Schedule_Expression *smithy.Schema
-
-var Schedule_Duration *smithy.Schema
-
-var Schedule_Timezone *smithy.Schema
-
-var ScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ScheduleConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ScheduleConfiguration_ScheduleExpression *smithy.Schema
-
-var ScheduleConfiguration_StartTimeOffset *smithy.Schema
-
-var ScheduleConfiguration_EndTimeOffset *smithy.Schema
-
-var ScheduledQueryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ScheduledQueryConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var ScheduledQueryConfiguration_QueryString *smithy.Schema
-
-var ScheduledQueryConfiguration_LogGroupIdentifiers *smithy.Schema
-
-var ScheduledQueryConfiguration_QueryARN *smithy.Schema
-
-var ScheduledQueryConfiguration_ScheduledQueryRoleARN *smithy.Schema
-
-var ScheduledQueryConfiguration_ScheduleConfiguration *smithy.Schema
-
-var ScheduledQueryConfiguration_AggregationExpression *smithy.Schema
-
-var ScheduledQueryConfiguration_Tags *smithy.Schema
-
-var _ScheduleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ScheduleExpression",
-}, smithy.ShapeTypeString, 0)
-
-var SingleMetricAnomalyDetector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "SingleMetricAnomalyDetector",
-}, smithy.ShapeTypeStructure, 5)
-var SingleMetricAnomalyDetector_AccountId *smithy.Schema
-
-var SingleMetricAnomalyDetector_Namespace *smithy.Schema
-
-var SingleMetricAnomalyDetector_MetricName *smithy.Schema
-
-var SingleMetricAnomalyDetector_Dimensions *smithy.Schema
-
-var SingleMetricAnomalyDetector_Stat *smithy.Schema
-
-var _Size = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Size",
-}, smithy.ShapeTypeLong, 0)
-
-var SlidingWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "SlidingWindow",
-}, smithy.ShapeTypeStructure, 0)
-
-var StandardUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StandardUnit",
-}, smithy.ShapeTypeEnum, 27)
-var StandardUnit_Seconds *smithy.Schema
-
-var StandardUnit_Microseconds *smithy.Schema
-
-var StandardUnit_Milliseconds *smithy.Schema
-
-var StandardUnit_Bytes *smithy.Schema
-
-var StandardUnit_Kilobytes *smithy.Schema
-
-var StandardUnit_Megabytes *smithy.Schema
-
-var StandardUnit_Gigabytes *smithy.Schema
-
-var StandardUnit_Terabytes *smithy.Schema
-
-var StandardUnit_Bits *smithy.Schema
-
-var StandardUnit_Kilobits *smithy.Schema
-
-var StandardUnit_Megabits *smithy.Schema
-
-var StandardUnit_Gigabits *smithy.Schema
-
-var StandardUnit_Terabits *smithy.Schema
-
-var StandardUnit_Percent *smithy.Schema
-
-var StandardUnit_Count *smithy.Schema
-
-var StandardUnit_Bytes_Second *smithy.Schema
-
-var StandardUnit_Kilobytes_Second *smithy.Schema
-
-var StandardUnit_Megabytes_Second *smithy.Schema
-
-var StandardUnit_Gigabytes_Second *smithy.Schema
-
-var StandardUnit_Terabytes_Second *smithy.Schema
-
-var StandardUnit_Bits_Second *smithy.Schema
-
-var StandardUnit_Kilobits_Second *smithy.Schema
-
-var StandardUnit_Megabits_Second *smithy.Schema
-
-var StandardUnit_Gigabits_Second *smithy.Schema
-
-var StandardUnit_Terabits_Second *smithy.Schema
-
-var StandardUnit_Count_Second *smithy.Schema
-
-var StandardUnit_None *smithy.Schema
-
-var _StartTimeOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartTimeOffset",
-}, smithy.ShapeTypeLong, 0)
-
-var _Stat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Stat",
-}, smithy.ShapeTypeString, 0)
-
-var _StateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StateReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StateReasonData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StateReasonData",
-}, smithy.ShapeTypeString, 0)
-
-var StateValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StateValue",
-}, smithy.ShapeTypeEnum, 3)
-var StateValue_OK *smithy.Schema
-
-var StateValue_ALARM *smithy.Schema
-
-var StateValue_INSUFFICIENT_DATA *smithy.Schema
-
-var Statistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Statistic",
-}, smithy.ShapeTypeEnum, 5)
-var Statistic_SampleCount *smithy.Schema
-
-var Statistic_Average *smithy.Schema
-
-var Statistic_Sum *smithy.Schema
-
-var Statistic_Minimum *smithy.Schema
-
-var Statistic_Maximum *smithy.Schema
-
-var _Statistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Statistics",
-}, smithy.ShapeTypeList, 1)
-var _Statistics_member *smithy.Schema
-
-var StatisticSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StatisticSet",
-}, smithy.ShapeTypeStructure, 4)
-var StatisticSet_SampleCount *smithy.Schema
-
-var StatisticSet_Sum *smithy.Schema
-
-var StatisticSet_Minimum *smithy.Schema
-
-var StatisticSet_Maximum *smithy.Schema
-
-var StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeEnum, 4)
-var StatusCode_COMPLETE *smithy.Schema
-
-var StatusCode_INTERNAL_ERROR *smithy.Schema
-
-var StatusCode_PARTIAL_DATA *smithy.Schema
-
-var StatusCode_FORBIDDEN *smithy.Schema
-
-var _StorageResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StorageResolution",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StrictEntityValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StrictEntityValidation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SuppressorPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "SuppressorPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _Threshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Threshold",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Timestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Timestamps",
-}, smithy.ShapeTypeList, 1)
-var _Timestamps_member *smithy.Schema
-
-var _Timezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Timezone",
-}, smithy.ShapeTypeString, 0)
-
-var _TreatMissingData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TreatMissingData",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValidationExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ValidationExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var WallClockWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "WallClockWindow",
-}, smithy.ShapeTypeStructure, 1)
-var WallClockWindow_Timezone *smithy.Schema
-
-var WarmUpConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "WarmUpConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var WarmUpConfiguration_WarmUpPeriodDurationInMinutes *smithy.Schema
-
-var WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds *smithy.Schema
-
-var _WarmUpPeriodDurationInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "WarmUpPeriodDurationInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var AssociateDatasetKmsKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AssociateDatasetKmsKeyInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateDatasetKmsKeyInput_DatasetIdentifier *smithy.Schema
-
-var AssociateDatasetKmsKeyInput_KmsKeyArn *smithy.Schema
-
-var AssociateDatasetKmsKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "AssociateDatasetKmsKeyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "CreateResourceMetricsConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
-
-var CreateResourceMetricsConfigurationInput_MetricSelections *smithy.Schema
-
-var CreateResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "CreateResourceMetricsConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
-
-var DeleteAlarmMuteRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAlarmMuteRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAlarmMuteRuleInput_AlarmMuteRuleName *smithy.Schema
-
-var DeleteAlarmsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAlarmsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAlarmsInput_AlarmNames *smithy.Schema
-
-var DeleteAnomalyDetectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAnomalyDetectorInput",
-}, smithy.ShapeTypeStructure, 7)
-var DeleteAnomalyDetectorInput_AnomalyDetectorId *smithy.Schema
-
-var DeleteAnomalyDetectorInput_Namespace *smithy.Schema
-
-var DeleteAnomalyDetectorInput_MetricName *smithy.Schema
-
-var DeleteAnomalyDetectorInput_Dimensions *smithy.Schema
-
-var DeleteAnomalyDetectorInput_Stat *smithy.Schema
-
-var DeleteAnomalyDetectorInput_SingleMetricAnomalyDetector *smithy.Schema
-
-var DeleteAnomalyDetectorInput_MetricMathAnomalyDetector *smithy.Schema
-
-var DeleteAnomalyDetectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteAnomalyDetectorOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDashboardsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteDashboardsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDashboardsInput_DashboardNames *smithy.Schema
-
-var DeleteDashboardsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteDashboardsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteInsightRulesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInsightRulesInput_RuleNames *smithy.Schema
-
-var DeleteInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInsightRulesOutput_Failures *smithy.Schema
-
-var DeleteMetricStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteMetricStreamInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMetricStreamInput_Name *smithy.Schema
-
-var DeleteMetricStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteMetricStreamOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteResourceMetricsConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
-
-var DeleteResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DeleteResourceMetricsConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAlarmContributorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmContributorsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAlarmContributorsInput_AlarmName *smithy.Schema
-
-var DescribeAlarmContributorsInput_NextToken *smithy.Schema
-
-var DescribeAlarmContributorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmContributorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAlarmContributorsOutput_AlarmContributors *smithy.Schema
-
-var DescribeAlarmContributorsOutput_NextToken *smithy.Schema
-
-var DescribeAlarmHistoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmHistoryInput",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeAlarmHistoryInput_AlarmName *smithy.Schema
-
-var DescribeAlarmHistoryInput_AlarmContributorId *smithy.Schema
-
-var DescribeAlarmHistoryInput_AlarmTypes *smithy.Schema
-
-var DescribeAlarmHistoryInput_HistoryItemType *smithy.Schema
-
-var DescribeAlarmHistoryInput_StartDate *smithy.Schema
-
-var DescribeAlarmHistoryInput_EndDate *smithy.Schema
-
-var DescribeAlarmHistoryInput_MaxRecords *smithy.Schema
-
-var DescribeAlarmHistoryInput_NextToken *smithy.Schema
-
-var DescribeAlarmHistoryInput_ScanBy *smithy.Schema
-
-var DescribeAlarmHistoryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmHistoryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAlarmHistoryOutput_AlarmHistoryItems *smithy.Schema
-
-var DescribeAlarmHistoryOutput_NextToken *smithy.Schema
-
-var DescribeAlarmsForMetricInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmsForMetricInput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeAlarmsForMetricInput_MetricName *smithy.Schema
-
-var DescribeAlarmsForMetricInput_Namespace *smithy.Schema
-
-var DescribeAlarmsForMetricInput_Statistic *smithy.Schema
-
-var DescribeAlarmsForMetricInput_ExtendedStatistic *smithy.Schema
-
-var DescribeAlarmsForMetricInput_Dimensions *smithy.Schema
-
-var DescribeAlarmsForMetricInput_Period *smithy.Schema
-
-var DescribeAlarmsForMetricInput_Unit *smithy.Schema
-
-var DescribeAlarmsForMetricOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmsForMetricOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAlarmsForMetricOutput_MetricAlarms *smithy.Schema
-
-var DescribeAlarmsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmsInput",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeAlarmsInput_AlarmNames *smithy.Schema
-
-var DescribeAlarmsInput_AlarmNamePrefix *smithy.Schema
-
-var DescribeAlarmsInput_AlarmTypes *smithy.Schema
-
-var DescribeAlarmsInput_ChildrenOfAlarmName *smithy.Schema
-
-var DescribeAlarmsInput_ParentsOfAlarmName *smithy.Schema
-
-var DescribeAlarmsInput_StateValue *smithy.Schema
-
-var DescribeAlarmsInput_ActionPrefix *smithy.Schema
-
-var DescribeAlarmsInput_MaxRecords *smithy.Schema
-
-var DescribeAlarmsInput_NextToken *smithy.Schema
-
-var DescribeAlarmsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAlarmsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeAlarmsOutput_CompositeAlarms *smithy.Schema
-
-var DescribeAlarmsOutput_MetricAlarms *smithy.Schema
-
-var DescribeAlarmsOutput_LogAlarms *smithy.Schema
-
-var DescribeAlarmsOutput_NextToken *smithy.Schema
-
-var DescribeAnomalyDetectorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAnomalyDetectorsInput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeAnomalyDetectorsInput_AnomalyDetectorIds *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_NextToken *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_MaxResults *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_Namespace *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_MetricName *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_Dimensions *smithy.Schema
-
-var DescribeAnomalyDetectorsInput_AnomalyDetectorTypes *smithy.Schema
-
-var DescribeAnomalyDetectorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeAnomalyDetectorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAnomalyDetectorsOutput_AnomalyDetectors *smithy.Schema
-
-var DescribeAnomalyDetectorsOutput_NextToken *smithy.Schema
-
-var DescribeInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeInsightRulesInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeInsightRulesInput_NextToken *smithy.Schema
-
-var DescribeInsightRulesInput_MaxResults *smithy.Schema
-
-var DescribeInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DescribeInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeInsightRulesOutput_NextToken *smithy.Schema
-
-var DescribeInsightRulesOutput_InsightRules *smithy.Schema
-
-var DisableAlarmActionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisableAlarmActionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableAlarmActionsInput_AlarmNames *smithy.Schema
-
-var DisableInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisableInsightRulesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableInsightRulesInput_RuleNames *smithy.Schema
-
-var DisableInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisableInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableInsightRulesOutput_Failures *smithy.Schema
-
-var DisassociateDatasetKmsKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisassociateDatasetKmsKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateDatasetKmsKeyInput_DatasetIdentifier *smithy.Schema
-
-var DisassociateDatasetKmsKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "DisassociateDatasetKmsKeyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableAlarmActionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EnableAlarmActionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableAlarmActionsInput_AlarmNames *smithy.Schema
-
-var EnableInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EnableInsightRulesInput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableInsightRulesInput_RuleNames *smithy.Schema
-
-var EnableInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "EnableInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableInsightRulesOutput_Failures *smithy.Schema
-
-var GetAlarmMuteRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetAlarmMuteRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAlarmMuteRuleInput_AlarmMuteRuleName *smithy.Schema
-
-var GetAlarmMuteRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetAlarmMuteRuleOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetAlarmMuteRuleOutput_Name *smithy.Schema
-
-var GetAlarmMuteRuleOutput_AlarmMuteRuleArn *smithy.Schema
-
-var GetAlarmMuteRuleOutput_Description *smithy.Schema
-
-var GetAlarmMuteRuleOutput_Rule *smithy.Schema
-
-var GetAlarmMuteRuleOutput_MuteTargets *smithy.Schema
-
-var GetAlarmMuteRuleOutput_StartDate *smithy.Schema
-
-var GetAlarmMuteRuleOutput_ExpireDate *smithy.Schema
-
-var GetAlarmMuteRuleOutput_Status *smithy.Schema
-
-var GetAlarmMuteRuleOutput_LastUpdatedTimestamp *smithy.Schema
-
-var GetAlarmMuteRuleOutput_MuteType *smithy.Schema
-
-var GetDashboardInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDashboardInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDashboardInput_DashboardName *smithy.Schema
-
-var GetDashboardOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDashboardOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDashboardOutput_DashboardArn *smithy.Schema
-
-var GetDashboardOutput_DashboardBody *smithy.Schema
-
-var GetDashboardOutput_DashboardName *smithy.Schema
-
-var GetDatasetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDatasetInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDatasetInput_DatasetIdentifier *smithy.Schema
-
-var GetDatasetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetDatasetOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDatasetOutput_DatasetId *smithy.Schema
-
-var GetDatasetOutput_Arn *smithy.Schema
-
-var GetDatasetOutput_KmsKeyArn *smithy.Schema
-
-var GetInsightRuleReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetInsightRuleReportInput",
-}, smithy.ShapeTypeStructure, 7)
-var GetInsightRuleReportInput_RuleName *smithy.Schema
-
-var GetInsightRuleReportInput_StartTime *smithy.Schema
-
-var GetInsightRuleReportInput_EndTime *smithy.Schema
-
-var GetInsightRuleReportInput_Period *smithy.Schema
-
-var GetInsightRuleReportInput_MaxContributorCount *smithy.Schema
-
-var GetInsightRuleReportInput_Metrics *smithy.Schema
-
-var GetInsightRuleReportInput_OrderBy *smithy.Schema
-
-var GetInsightRuleReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetInsightRuleReportOutput",
-}, smithy.ShapeTypeStructure, 6)
-var GetInsightRuleReportOutput_KeyLabels *smithy.Schema
-
-var GetInsightRuleReportOutput_AggregationStatistic *smithy.Schema
-
-var GetInsightRuleReportOutput_AggregateValue *smithy.Schema
-
-var GetInsightRuleReportOutput_ApproximateUniqueCount *smithy.Schema
-
-var GetInsightRuleReportOutput_Contributors *smithy.Schema
-
-var GetInsightRuleReportOutput_MetricDatapoints *smithy.Schema
-
-var GetMetricDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricDataInput",
-}, smithy.ShapeTypeStructure, 7)
-var GetMetricDataInput_MetricDataQueries *smithy.Schema
-
-var GetMetricDataInput_StartTime *smithy.Schema
-
-var GetMetricDataInput_EndTime *smithy.Schema
-
-var GetMetricDataInput_NextToken *smithy.Schema
-
-var GetMetricDataInput_ScanBy *smithy.Schema
-
-var GetMetricDataInput_MaxDatapoints *smithy.Schema
-
-var GetMetricDataInput_LabelOptions *smithy.Schema
-
-var GetMetricDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMetricDataOutput_MetricDataResults *smithy.Schema
-
-var GetMetricDataOutput_NextToken *smithy.Schema
-
-var GetMetricDataOutput_Messages *smithy.Schema
-
-var GetMetricStatisticsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStatisticsInput",
-}, smithy.ShapeTypeStructure, 9)
-var GetMetricStatisticsInput_Namespace *smithy.Schema
-
-var GetMetricStatisticsInput_MetricName *smithy.Schema
-
-var GetMetricStatisticsInput_Dimensions *smithy.Schema
-
-var GetMetricStatisticsInput_StartTime *smithy.Schema
-
-var GetMetricStatisticsInput_EndTime *smithy.Schema
-
-var GetMetricStatisticsInput_Period *smithy.Schema
-
-var GetMetricStatisticsInput_Statistics *smithy.Schema
-
-var GetMetricStatisticsInput_ExtendedStatistics *smithy.Schema
-
-var GetMetricStatisticsInput_Unit *smithy.Schema
-
-var GetMetricStatisticsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStatisticsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMetricStatisticsOutput_Label *smithy.Schema
-
-var GetMetricStatisticsOutput_Datapoints *smithy.Schema
-
-var GetMetricStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStreamInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMetricStreamInput_Name *smithy.Schema
-
-var GetMetricStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricStreamOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetMetricStreamOutput_Arn *smithy.Schema
-
-var GetMetricStreamOutput_Name *smithy.Schema
-
-var GetMetricStreamOutput_IncludeFilters *smithy.Schema
-
-var GetMetricStreamOutput_ExcludeFilters *smithy.Schema
-
-var GetMetricStreamOutput_FirehoseArn *smithy.Schema
-
-var GetMetricStreamOutput_RoleArn *smithy.Schema
-
-var GetMetricStreamOutput_State *smithy.Schema
-
-var GetMetricStreamOutput_CreationDate *smithy.Schema
-
-var GetMetricStreamOutput_LastUpdateDate *smithy.Schema
-
-var GetMetricStreamOutput_OutputFormat *smithy.Schema
-
-var GetMetricStreamOutput_StatisticsConfigurations *smithy.Schema
-
-var GetMetricStreamOutput_IncludeLinkedAccountsMetrics *smithy.Schema
-
-var GetMetricWidgetImageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricWidgetImageInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMetricWidgetImageInput_MetricWidget *smithy.Schema
-
-var GetMetricWidgetImageInput_OutputFormat *smithy.Schema
-
-var GetMetricWidgetImageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetMetricWidgetImageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMetricWidgetImageOutput_MetricWidgetImage *smithy.Schema
-
-var GetOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetOTelEnrichmentOutput_Status *smithy.Schema
-
-var GetOTelEnrichmentOutput_IncludeFilters *smithy.Schema
-
-var GetOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
-
-var GetOTelEnrichmentOutput_CreatedAt *smithy.Schema
-
-var GetOTelEnrichmentOutput_UpdatedAt *smithy.Schema
-
-var GetResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetResourceMetricsConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
-
-var GetResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "GetResourceMetricsConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
-
-var ListAlarmMuteRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListAlarmMuteRulesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListAlarmMuteRulesInput_AlarmName *smithy.Schema
-
-var ListAlarmMuteRulesInput_Statuses *smithy.Schema
-
-var ListAlarmMuteRulesInput_MaxRecords *smithy.Schema
-
-var ListAlarmMuteRulesInput_NextToken *smithy.Schema
-
-var ListAlarmMuteRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListAlarmMuteRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAlarmMuteRulesOutput_AlarmMuteRuleSummaries *smithy.Schema
-
-var ListAlarmMuteRulesOutput_NextToken *smithy.Schema
-
-var ListDashboardsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListDashboardsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashboardsInput_DashboardNamePrefix *smithy.Schema
-
-var ListDashboardsInput_NextToken *smithy.Schema
-
-var ListDashboardsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListDashboardsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashboardsOutput_DashboardEntries *smithy.Schema
-
-var ListDashboardsOutput_NextToken *smithy.Schema
-
-var ListManagedInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListManagedInsightRulesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedInsightRulesInput_ResourceARN *smithy.Schema
-
-var ListManagedInsightRulesInput_NextToken *smithy.Schema
-
-var ListManagedInsightRulesInput_MaxResults *smithy.Schema
-
-var ListManagedInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListManagedInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedInsightRulesOutput_ManagedRules *smithy.Schema
-
-var ListManagedInsightRulesOutput_NextToken *smithy.Schema
-
-var ListMetricsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricsInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListMetricsInput_Namespace *smithy.Schema
-
-var ListMetricsInput_MetricName *smithy.Schema
-
-var ListMetricsInput_Dimensions *smithy.Schema
-
-var ListMetricsInput_NextToken *smithy.Schema
-
-var ListMetricsInput_RecentlyActive *smithy.Schema
-
-var ListMetricsInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListMetricsInput_OwningAccount *smithy.Schema
-
-var ListMetricsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListMetricsOutput_Metrics *smithy.Schema
-
-var ListMetricsOutput_NextToken *smithy.Schema
-
-var ListMetricsOutput_OwningAccounts *smithy.Schema
-
-var ListMetricStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricStreamsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMetricStreamsInput_NextToken *smithy.Schema
-
-var ListMetricStreamsInput_MaxResults *smithy.Schema
-
-var ListMetricStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListMetricStreamsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMetricStreamsOutput_NextToken *smithy.Schema
-
-var ListMetricStreamsOutput_Entries *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var PutAlarmMuteRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutAlarmMuteRuleInput",
-}, smithy.ShapeTypeStructure, 7)
-var PutAlarmMuteRuleInput_Name *smithy.Schema
-
-var PutAlarmMuteRuleInput_Description *smithy.Schema
-
-var PutAlarmMuteRuleInput_Rule *smithy.Schema
-
-var PutAlarmMuteRuleInput_MuteTargets *smithy.Schema
-
-var PutAlarmMuteRuleInput_Tags *smithy.Schema
-
-var PutAlarmMuteRuleInput_StartDate *smithy.Schema
-
-var PutAlarmMuteRuleInput_ExpireDate *smithy.Schema
-
-var PutAnomalyDetectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutAnomalyDetectorInput",
-}, smithy.ShapeTypeStructure, 8)
-var PutAnomalyDetectorInput_Namespace *smithy.Schema
-
-var PutAnomalyDetectorInput_MetricName *smithy.Schema
-
-var PutAnomalyDetectorInput_Dimensions *smithy.Schema
-
-var PutAnomalyDetectorInput_Stat *smithy.Schema
-
-var PutAnomalyDetectorInput_Configuration *smithy.Schema
-
-var PutAnomalyDetectorInput_MetricCharacteristics *smithy.Schema
-
-var PutAnomalyDetectorInput_SingleMetricAnomalyDetector *smithy.Schema
-
-var PutAnomalyDetectorInput_MetricMathAnomalyDetector *smithy.Schema
-
-var PutAnomalyDetectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutAnomalyDetectorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutAnomalyDetectorOutput_AnomalyDetectorId *smithy.Schema
-
-var PutCompositeAlarmInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutCompositeAlarmInput",
-}, smithy.ShapeTypeStructure, 12)
-var PutCompositeAlarmInput_ActionsEnabled *smithy.Schema
-
-var PutCompositeAlarmInput_AlarmActions *smithy.Schema
-
-var PutCompositeAlarmInput_AlarmDescription *smithy.Schema
-
-var PutCompositeAlarmInput_AlarmName *smithy.Schema
-
-var PutCompositeAlarmInput_AlarmRule *smithy.Schema
-
-var PutCompositeAlarmInput_InsufficientDataActions *smithy.Schema
-
-var PutCompositeAlarmInput_OKActions *smithy.Schema
-
-var PutCompositeAlarmInput_Tags *smithy.Schema
-
-var PutCompositeAlarmInput_ActionsSuppressor *smithy.Schema
-
-var PutCompositeAlarmInput_ActionsSuppressorWaitPeriod *smithy.Schema
-
-var PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod *smithy.Schema
-
-var PutCompositeAlarmInput_ActionConfiguration *smithy.Schema
-
-var PutDashboardInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutDashboardInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutDashboardInput_DashboardName *smithy.Schema
-
-var PutDashboardInput_DashboardBody *smithy.Schema
-
-var PutDashboardInput_Tags *smithy.Schema
-
-var PutDashboardOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutDashboardOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutDashboardOutput_DashboardValidationMessages *smithy.Schema
-
-var PutInsightRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutInsightRuleInput",
-}, smithy.ShapeTypeStructure, 5)
-var PutInsightRuleInput_RuleName *smithy.Schema
-
-var PutInsightRuleInput_RuleState *smithy.Schema
-
-var PutInsightRuleInput_RuleDefinition *smithy.Schema
-
-var PutInsightRuleInput_Tags *smithy.Schema
-
-var PutInsightRuleInput_ApplyOnTransformedLogs *smithy.Schema
-
-var PutInsightRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutInsightRuleOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutLogAlarmInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutLogAlarmInput",
-}, smithy.ShapeTypeStructure, 17)
-var PutLogAlarmInput_AlarmName *smithy.Schema
-
-var PutLogAlarmInput_AlarmDescription *smithy.Schema
-
-var PutLogAlarmInput_ScheduledQueryConfiguration *smithy.Schema
-
-var PutLogAlarmInput_ActionLogLineCount *smithy.Schema
-
-var PutLogAlarmInput_ActionLogLineRoleArn *smithy.Schema
-
-var PutLogAlarmInput_ActionsEnabled *smithy.Schema
-
-var PutLogAlarmInput_OKActions *smithy.Schema
-
-var PutLogAlarmInput_AlarmActions *smithy.Schema
-
-var PutLogAlarmInput_InsufficientDataActions *smithy.Schema
-
-var PutLogAlarmInput_QueryResultsToEvaluate *smithy.Schema
-
-var PutLogAlarmInput_QueryResultsToAlarm *smithy.Schema
-
-var PutLogAlarmInput_Threshold *smithy.Schema
-
-var PutLogAlarmInput_ComparisonOperator *smithy.Schema
-
-var PutLogAlarmInput_TreatMissingData *smithy.Schema
-
-var PutLogAlarmInput_Tags *smithy.Schema
-
-var PutLogAlarmInput_WarmUpConfiguration *smithy.Schema
-
-var PutLogAlarmInput_ActionConfiguration *smithy.Schema
-
-var PutManagedInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutManagedInsightRulesInput",
-}, smithy.ShapeTypeStructure, 1)
-var PutManagedInsightRulesInput_ManagedRules *smithy.Schema
-
-var PutManagedInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutManagedInsightRulesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutManagedInsightRulesOutput_Failures *smithy.Schema
-
-var PutMetricAlarmInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricAlarmInput",
-}, smithy.ShapeTypeStructure, 27)
-var PutMetricAlarmInput_AlarmName *smithy.Schema
-
-var PutMetricAlarmInput_AlarmDescription *smithy.Schema
-
-var PutMetricAlarmInput_ActionsEnabled *smithy.Schema
-
-var PutMetricAlarmInput_OKActions *smithy.Schema
-
-var PutMetricAlarmInput_AlarmActions *smithy.Schema
-
-var PutMetricAlarmInput_InsufficientDataActions *smithy.Schema
-
-var PutMetricAlarmInput_MetricName *smithy.Schema
-
-var PutMetricAlarmInput_Namespace *smithy.Schema
-
-var PutMetricAlarmInput_Statistic *smithy.Schema
-
-var PutMetricAlarmInput_ExtendedStatistic *smithy.Schema
-
-var PutMetricAlarmInput_Dimensions *smithy.Schema
-
-var PutMetricAlarmInput_Period *smithy.Schema
-
-var PutMetricAlarmInput_Unit *smithy.Schema
-
-var PutMetricAlarmInput_EvaluationPeriods *smithy.Schema
-
-var PutMetricAlarmInput_DatapointsToAlarm *smithy.Schema
-
-var PutMetricAlarmInput_Threshold *smithy.Schema
-
-var PutMetricAlarmInput_ComparisonOperator *smithy.Schema
-
-var PutMetricAlarmInput_TreatMissingData *smithy.Schema
-
-var PutMetricAlarmInput_EvaluateLowSampleCountPercentile *smithy.Schema
-
-var PutMetricAlarmInput_Metrics *smithy.Schema
-
-var PutMetricAlarmInput_Tags *smithy.Schema
-
-var PutMetricAlarmInput_ThresholdMetricId *smithy.Schema
-
-var PutMetricAlarmInput_EvaluationWindow *smithy.Schema
-
-var PutMetricAlarmInput_WarmUpConfiguration *smithy.Schema
-
-var PutMetricAlarmInput_EvaluationCriteria *smithy.Schema
-
-var PutMetricAlarmInput_EvaluationInterval *smithy.Schema
-
-var PutMetricAlarmInput_ActionConfiguration *smithy.Schema
-
-var PutMetricDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var PutMetricDataInput_Namespace *smithy.Schema
-
-var PutMetricDataInput_MetricData *smithy.Schema
-
-var PutMetricDataInput_EntityMetricData *smithy.Schema
-
-var PutMetricDataInput_StrictEntityValidation *smithy.Schema
-
-var PutMetricStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricStreamInput",
-}, smithy.ShapeTypeStructure, 9)
-var PutMetricStreamInput_Name *smithy.Schema
-
-var PutMetricStreamInput_IncludeFilters *smithy.Schema
-
-var PutMetricStreamInput_ExcludeFilters *smithy.Schema
-
-var PutMetricStreamInput_FirehoseArn *smithy.Schema
-
-var PutMetricStreamInput_RoleArn *smithy.Schema
-
-var PutMetricStreamInput_OutputFormat *smithy.Schema
-
-var PutMetricStreamInput_Tags *smithy.Schema
-
-var PutMetricStreamInput_StatisticsConfigurations *smithy.Schema
-
-var PutMetricStreamInput_IncludeLinkedAccountsMetrics *smithy.Schema
-
-var PutMetricStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "PutMetricStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutMetricStreamOutput_Arn *smithy.Schema
-
-var SetAlarmStateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "SetAlarmStateInput",
-}, smithy.ShapeTypeStructure, 4)
-var SetAlarmStateInput_AlarmName *smithy.Schema
-
-var SetAlarmStateInput_StateValue *smithy.Schema
-
-var SetAlarmStateInput_StateReason *smithy.Schema
-
-var SetAlarmStateInput_StateReasonData *smithy.Schema
-
-var StartMetricStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartMetricStreamsInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartMetricStreamsInput_Names *smithy.Schema
-
-var StartMetricStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartMetricStreamsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 2)
-var StartOTelEnrichmentInput_IncludeFilters *smithy.Schema
-
-var StartOTelEnrichmentInput_ExcludeFilters *smithy.Schema
-
-var StartOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StartOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 4)
-var StartOTelEnrichmentOutput_IncludeFilters *smithy.Schema
-
-var StartOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
-
-var StartOTelEnrichmentOutput_CreatedAt *smithy.Schema
-
-var StartOTelEnrichmentOutput_UpdatedAt *smithy.Schema
-
-var StopMetricStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopMetricStreamsInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopMetricStreamsInput_Names *smithy.Schema
-
-var StopMetricStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopMetricStreamsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "StopOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOTelEnrichmentInput_IncludeFilters *smithy.Schema
-
-var UpdateOTelEnrichmentInput_ExcludeFilters *smithy.Schema
-
-var UpdateOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateOTelEnrichmentOutput_IncludeFilters *smithy.Schema
-
-var UpdateOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
-
-var UpdateOTelEnrichmentOutput_CreatedAt *smithy.Schema
-
-var UpdateOTelEnrichmentOutput_UpdatedAt *smithy.Schema
-
-var UpdateResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateResourceMetricsConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
-
-var UpdateResourceMetricsConfigurationInput_MetricSelections *smithy.Schema
-
-var UpdateResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatch",
-	Name:      "UpdateResourceMetricsConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_AlarmTagsPropagationTagKeys_member = _AlarmTagsPropagationTagKeys.AddMember("member", _AlarmTagsPropagationTagKey)
-
-	AlarmTagsPropagation_Enabled = AlarmTagsPropagation.AddMember("Enabled", _AlarmTagsPropagationEnabled)
-
-	AlarmTagsPropagation_IncludedTagKeys = AlarmTagsPropagation.AddMember("IncludedTagKeys", _AlarmTagsPropagationTagKeys)
-
-	AlarmTagsPropagation_ExcludedTagKeys = AlarmTagsPropagation.AddMember("ExcludedTagKeys", _AlarmTagsPropagationTagKeys)
-
-	ActionConfiguration_AlarmTagsPropagation = ActionConfiguration.AddMember("AlarmTagsPropagation", AlarmTagsPropagation)
-
-	ActionsSuppressedBy_WaitPeriod = ActionsSuppressedBy.AddMember("WaitPeriod", smithyprelude.Unit)
-
-	ActionsSuppressedBy_ExtensionPeriod = ActionsSuppressedBy.AddMember("ExtensionPeriod", smithyprelude.Unit)
-
-	ActionsSuppressedBy_Alarm = ActionsSuppressedBy.AddMember("Alarm", smithyprelude.Unit)
-
-	_ContributorAttributes_key = _ContributorAttributes.AddMember("key", _AttributeName)
-
-	_ContributorAttributes_value = _ContributorAttributes.AddMember("value", _AttributeValue)
-
-	AlarmContributor_ContributorId = AlarmContributor.AddMember("ContributorId", _ContributorId)
-
-	AlarmContributor_ContributorAttributes = AlarmContributor.AddMember("ContributorAttributes", _ContributorAttributes)
-
-	AlarmContributor_StateReason = AlarmContributor.AddMember("StateReason", _StateReason)
-
-	AlarmContributor_StateTransitionedTimestamp = AlarmContributor.AddMember("StateTransitionedTimestamp", _Timestamp)
-
-	_AlarmContributors_member = _AlarmContributors.AddMember("member", AlarmContributor)
-
-	AlarmType_CompositeAlarm = AlarmType.AddMember("CompositeAlarm", smithyprelude.Unit)
-
-	AlarmType_MetricAlarm = AlarmType.AddMember("MetricAlarm", smithyprelude.Unit)
-
-	AlarmType_LogAlarm = AlarmType.AddMember("LogAlarm", smithyprelude.Unit)
-
-	HistoryItemType_ConfigurationUpdate = HistoryItemType.AddMember("ConfigurationUpdate", smithyprelude.Unit)
-
-	HistoryItemType_StateUpdate = HistoryItemType.AddMember("StateUpdate", smithyprelude.Unit)
-
-	HistoryItemType_Action = HistoryItemType.AddMember("Action", smithyprelude.Unit)
-
-	HistoryItemType_AlarmContributorStateUpdate = HistoryItemType.AddMember("AlarmContributorStateUpdate", smithyprelude.Unit)
-
-	HistoryItemType_AlarmContributorAction = HistoryItemType.AddMember("AlarmContributorAction", smithyprelude.Unit)
-
-	AlarmHistoryItem_AlarmName = AlarmHistoryItem.AddMember("AlarmName", _AlarmName)
-
-	AlarmHistoryItem_AlarmContributorId = AlarmHistoryItem.AddMember("AlarmContributorId", _ContributorId)
-
-	AlarmHistoryItem_AlarmType = AlarmHistoryItem.AddMember("AlarmType", AlarmType)
-
-	AlarmHistoryItem_Timestamp = AlarmHistoryItem.AddMember("Timestamp", _Timestamp)
-
-	AlarmHistoryItem_HistoryItemType = AlarmHistoryItem.AddMember("HistoryItemType", HistoryItemType)
-
-	AlarmHistoryItem_HistorySummary = AlarmHistoryItem.AddMember("HistorySummary", _HistorySummary)
-
-	AlarmHistoryItem_HistoryData = AlarmHistoryItem.AddMember("HistoryData", _HistoryData)
-
-	AlarmHistoryItem_AlarmContributorAttributes = AlarmHistoryItem.AddMember("AlarmContributorAttributes", _ContributorAttributes)
-
-	_AlarmHistoryItems_member = _AlarmHistoryItems.AddMember("member", AlarmHistoryItem)
-
-	AlarmMuteRuleStatus_SCHEDULED = AlarmMuteRuleStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	AlarmMuteRuleStatus_ACTIVE = AlarmMuteRuleStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AlarmMuteRuleStatus_EXPIRED = AlarmMuteRuleStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	_AlarmMuteRuleStatuses_member = _AlarmMuteRuleStatuses.AddMember("member", AlarmMuteRuleStatus)
-
-	AlarmMuteRuleSummary_AlarmMuteRuleArn = AlarmMuteRuleSummary.AddMember("AlarmMuteRuleArn", _Arn)
-
-	AlarmMuteRuleSummary_ExpireDate = AlarmMuteRuleSummary.AddMember("ExpireDate", _Timestamp)
-
-	AlarmMuteRuleSummary_Status = AlarmMuteRuleSummary.AddMember("Status", AlarmMuteRuleStatus)
-
-	AlarmMuteRuleSummary_MuteType = AlarmMuteRuleSummary.AddMember("MuteType", _MuteType)
-
-	AlarmMuteRuleSummary_LastUpdatedTimestamp = AlarmMuteRuleSummary.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	_AlarmMuteRuleSummaries_member = _AlarmMuteRuleSummaries.AddMember("member", AlarmMuteRuleSummary)
-
-	_AlarmNames_member = _AlarmNames.AddMember("member", _AlarmName)
-
-	AlarmPromQLCriteria_Query = AlarmPromQLCriteria.AddMember("Query", _Query)
-
-	AlarmPromQLCriteria_PendingPeriod = AlarmPromQLCriteria.AddMember("PendingPeriod", _PendingPeriod)
-
-	AlarmPromQLCriteria_RecoveryPeriod = AlarmPromQLCriteria.AddMember("RecoveryPeriod", _RecoveryPeriod)
-
-	_AlarmTypes_member = _AlarmTypes.AddMember("member", AlarmType)
-
-	Dimension_Name = Dimension.AddMember("Name", _DimensionName)
-
-	Dimension_Value = Dimension.AddMember("Value", _DimensionValue)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	Range_StartTime = Range.AddMember("StartTime", _Timestamp)
-
-	Range_EndTime = Range.AddMember("EndTime", _Timestamp)
-
-	_AnomalyDetectorExcludedTimeRanges_member = _AnomalyDetectorExcludedTimeRanges.AddMember("member", Range)
-
-	AnomalyDetectorAdaptationSpeed_FAST = AnomalyDetectorAdaptationSpeed.AddMember("FAST", smithyprelude.Unit)
-
-	AnomalyDetectorAdaptationSpeed_NORMAL = AnomalyDetectorAdaptationSpeed.AddMember("NORMAL", smithyprelude.Unit)
-
-	AnomalyDetectorAdaptationSpeed_SLOW = AnomalyDetectorAdaptationSpeed.AddMember("SLOW", smithyprelude.Unit)
-
-	AnomalyDetectorOutlierFilteringStrength_MINIMAL = AnomalyDetectorOutlierFilteringStrength.AddMember("MINIMAL", smithyprelude.Unit)
-
-	AnomalyDetectorOutlierFilteringStrength_MODERATE = AnomalyDetectorOutlierFilteringStrength.AddMember("MODERATE", smithyprelude.Unit)
-
-	AnomalyDetectorOutlierFilteringStrength_STRICT = AnomalyDetectorOutlierFilteringStrength.AddMember("STRICT", smithyprelude.Unit)
-
-	AnomalyDetectorConfiguration_ExcludedTimeRanges = AnomalyDetectorConfiguration.AddMember("ExcludedTimeRanges", _AnomalyDetectorExcludedTimeRanges)
-
-	AnomalyDetectorConfiguration_MetricTimezone = AnomalyDetectorConfiguration.AddMember("MetricTimezone", _AnomalyDetectorMetricTimezone)
-
-	AnomalyDetectorConfiguration_AdaptationSpeed = AnomalyDetectorConfiguration.AddMember("AdaptationSpeed", AnomalyDetectorAdaptationSpeed)
-
-	AnomalyDetectorConfiguration_OutlierFilteringStrength = AnomalyDetectorConfiguration.AddMember("OutlierFilteringStrength", AnomalyDetectorOutlierFilteringStrength)
-
-	AnomalyDetectorStateValue_PENDING_TRAINING = AnomalyDetectorStateValue.AddMember("PENDING_TRAINING", smithyprelude.Unit)
-
-	AnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA = AnomalyDetectorStateValue.AddMember("TRAINED_INSUFFICIENT_DATA", smithyprelude.Unit)
-
-	AnomalyDetectorStateValue_TRAINED = AnomalyDetectorStateValue.AddMember("TRAINED", smithyprelude.Unit)
-
-	MetricCharacteristics_PeriodicSpikes = MetricCharacteristics.AddMember("PeriodicSpikes", _PeriodicSpikes)
-
-	SingleMetricAnomalyDetector_AccountId = SingleMetricAnomalyDetector.AddMember("AccountId", _AccountId)
-
-	SingleMetricAnomalyDetector_Namespace = SingleMetricAnomalyDetector.AddMember("Namespace", _Namespace)
-
-	SingleMetricAnomalyDetector_MetricName = SingleMetricAnomalyDetector.AddMember("MetricName", _MetricName)
-
-	SingleMetricAnomalyDetector_Dimensions = SingleMetricAnomalyDetector.AddMember("Dimensions", _Dimensions)
-
-	SingleMetricAnomalyDetector_Stat = SingleMetricAnomalyDetector.AddMember("Stat", _AnomalyDetectorMetricStat)
-
-	Metric_Namespace = Metric.AddMember("Namespace", _Namespace)
-
-	Metric_MetricName = Metric.AddMember("MetricName", _MetricName)
-
-	Metric_Dimensions = Metric.AddMember("Dimensions", _Dimensions)
-
-	StandardUnit_Seconds = StandardUnit.AddMember("Seconds", smithyprelude.Unit)
-
-	StandardUnit_Microseconds = StandardUnit.AddMember("Microseconds", smithyprelude.Unit)
-
-	StandardUnit_Milliseconds = StandardUnit.AddMember("Milliseconds", smithyprelude.Unit)
-
-	StandardUnit_Bytes = StandardUnit.AddMember("Bytes", smithyprelude.Unit)
-
-	StandardUnit_Kilobytes = StandardUnit.AddMember("Kilobytes", smithyprelude.Unit)
-
-	StandardUnit_Megabytes = StandardUnit.AddMember("Megabytes", smithyprelude.Unit)
-
-	StandardUnit_Gigabytes = StandardUnit.AddMember("Gigabytes", smithyprelude.Unit)
-
-	StandardUnit_Terabytes = StandardUnit.AddMember("Terabytes", smithyprelude.Unit)
-
-	StandardUnit_Bits = StandardUnit.AddMember("Bits", smithyprelude.Unit)
-
-	StandardUnit_Kilobits = StandardUnit.AddMember("Kilobits", smithyprelude.Unit)
-
-	StandardUnit_Megabits = StandardUnit.AddMember("Megabits", smithyprelude.Unit)
-
-	StandardUnit_Gigabits = StandardUnit.AddMember("Gigabits", smithyprelude.Unit)
-
-	StandardUnit_Terabits = StandardUnit.AddMember("Terabits", smithyprelude.Unit)
-
-	StandardUnit_Percent = StandardUnit.AddMember("Percent", smithyprelude.Unit)
-
-	StandardUnit_Count = StandardUnit.AddMember("Count", smithyprelude.Unit)
-
-	StandardUnit_Bytes_Second = StandardUnit.AddMember("Bytes_Second", smithyprelude.Unit)
-
-	StandardUnit_Kilobytes_Second = StandardUnit.AddMember("Kilobytes_Second", smithyprelude.Unit)
-
-	StandardUnit_Megabytes_Second = StandardUnit.AddMember("Megabytes_Second", smithyprelude.Unit)
-
-	StandardUnit_Gigabytes_Second = StandardUnit.AddMember("Gigabytes_Second", smithyprelude.Unit)
-
-	StandardUnit_Terabytes_Second = StandardUnit.AddMember("Terabytes_Second", smithyprelude.Unit)
-
-	StandardUnit_Bits_Second = StandardUnit.AddMember("Bits_Second", smithyprelude.Unit)
-
-	StandardUnit_Kilobits_Second = StandardUnit.AddMember("Kilobits_Second", smithyprelude.Unit)
-
-	StandardUnit_Megabits_Second = StandardUnit.AddMember("Megabits_Second", smithyprelude.Unit)
-
-	StandardUnit_Gigabits_Second = StandardUnit.AddMember("Gigabits_Second", smithyprelude.Unit)
-
-	StandardUnit_Terabits_Second = StandardUnit.AddMember("Terabits_Second", smithyprelude.Unit)
-
-	StandardUnit_Count_Second = StandardUnit.AddMember("Count_Second", smithyprelude.Unit)
-
-	StandardUnit_None = StandardUnit.AddMember("None", smithyprelude.Unit)
-
-	MetricStat_Metric = MetricStat.AddMember("Metric", Metric)
-
-	MetricStat_Period = MetricStat.AddMember("Period", _Period)
-
-	MetricStat_Stat = MetricStat.AddMember("Stat", _Stat)
-
-	MetricStat_Unit = MetricStat.AddMember("Unit", StandardUnit)
-
-	MetricDataQuery_Id = MetricDataQuery.AddMember("Id", _MetricId)
-
-	MetricDataQuery_MetricStat = MetricDataQuery.AddMember("MetricStat", MetricStat)
-
-	MetricDataQuery_Expression = MetricDataQuery.AddMember("Expression", _MetricExpression)
-
-	MetricDataQuery_Label = MetricDataQuery.AddMember("Label", _MetricLabel)
-
-	MetricDataQuery_ReturnData = MetricDataQuery.AddMember("ReturnData", _ReturnData)
-
-	MetricDataQuery_Period = MetricDataQuery.AddMember("Period", _Period)
-
-	MetricDataQuery_AccountId = MetricDataQuery.AddMember("AccountId", _AccountId)
-
-	_MetricDataQueries_member = _MetricDataQueries.AddMember("member", MetricDataQuery)
-
-	MetricMathAnomalyDetector_MetricDataQueries = MetricMathAnomalyDetector.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	AnomalyDetector_AnomalyDetectorId = AnomalyDetector.AddMember("AnomalyDetectorId", _AnomalyDetectorId)
-
-	AnomalyDetector_Namespace = AnomalyDetector.AddMember("Namespace", _Namespace)
-
-	AnomalyDetector_MetricName = AnomalyDetector.AddMember("MetricName", _MetricName)
-
-	AnomalyDetector_Dimensions = AnomalyDetector.AddMember("Dimensions", _Dimensions)
-
-	AnomalyDetector_Stat = AnomalyDetector.AddMember("Stat", _AnomalyDetectorMetricStat)
-
-	AnomalyDetector_Configuration = AnomalyDetector.AddMember("Configuration", AnomalyDetectorConfiguration)
-
-	AnomalyDetector_StateValue = AnomalyDetector.AddMember("StateValue", AnomalyDetectorStateValue)
-
-	AnomalyDetector_MetricCharacteristics = AnomalyDetector.AddMember("MetricCharacteristics", MetricCharacteristics)
-
-	AnomalyDetector_SingleMetricAnomalyDetector = AnomalyDetector.AddMember("SingleMetricAnomalyDetector", SingleMetricAnomalyDetector)
-
-	AnomalyDetector_MetricMathAnomalyDetector = AnomalyDetector.AddMember("MetricMathAnomalyDetector", MetricMathAnomalyDetector)
-
-	_AnomalyDetectorIds_member = _AnomalyDetectorIds.AddMember("member", _AnomalyDetectorId)
-
-	_AnomalyDetectors_member = _AnomalyDetectors.AddMember("member", AnomalyDetector)
-
-	AnomalyDetectorType_SINGLE_METRIC = AnomalyDetectorType.AddMember("SINGLE_METRIC", smithyprelude.Unit)
-
-	AnomalyDetectorType_METRIC_MATH = AnomalyDetectorType.AddMember("METRIC_MATH", smithyprelude.Unit)
-
-	_AnomalyDetectorTypes_member = _AnomalyDetectorTypes.AddMember("member", AnomalyDetectorType)
-
-	PartialFailure_FailureResource = PartialFailure.AddMember("FailureResource", _FailureResource)
-
-	PartialFailure_ExceptionType = PartialFailure.AddMember("ExceptionType", _ExceptionType)
-
-	PartialFailure_FailureCode = PartialFailure.AddMember("FailureCode", _FailureCode)
-
-	PartialFailure_FailureDescription = PartialFailure.AddMember("FailureDescription", _FailureDescription)
-
-	_BatchFailures_member = _BatchFailures.AddMember("member", PartialFailure)
-
-	ComparisonOperator_GreaterThanOrEqualToThreshold = ComparisonOperator.AddMember("GreaterThanOrEqualToThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_GreaterThanThreshold = ComparisonOperator.AddMember("GreaterThanThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_LessThanThreshold = ComparisonOperator.AddMember("LessThanThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_LessThanOrEqualToThreshold = ComparisonOperator.AddMember("LessThanOrEqualToThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold = ComparisonOperator.AddMember("LessThanLowerOrGreaterThanUpperThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_LessThanLowerThreshold = ComparisonOperator.AddMember("LessThanLowerThreshold", smithyprelude.Unit)
-
-	ComparisonOperator_GreaterThanUpperThreshold = ComparisonOperator.AddMember("GreaterThanUpperThreshold", smithyprelude.Unit)
-
-	_ResourceList_member = _ResourceList.AddMember("member", _ResourceName)
-
-	StateValue_OK = StateValue.AddMember("OK", smithyprelude.Unit)
-
-	StateValue_ALARM = StateValue.AddMember("ALARM", smithyprelude.Unit)
-
-	StateValue_INSUFFICIENT_DATA = StateValue.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
-
-	CompositeAlarm_ActionsEnabled = CompositeAlarm.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	CompositeAlarm_AlarmActions = CompositeAlarm.AddMember("AlarmActions", _ResourceList)
-
-	CompositeAlarm_AlarmArn = CompositeAlarm.AddMember("AlarmArn", _AlarmArn)
-
-	CompositeAlarm_AlarmConfigurationUpdatedTimestamp = CompositeAlarm.AddMember("AlarmConfigurationUpdatedTimestamp", _Timestamp)
-
-	CompositeAlarm_AlarmDescription = CompositeAlarm.AddMember("AlarmDescription", _AlarmDescription)
-
-	CompositeAlarm_AlarmName = CompositeAlarm.AddMember("AlarmName", _AlarmName)
-
-	CompositeAlarm_AlarmRule = CompositeAlarm.AddMember("AlarmRule", _AlarmRule)
-
-	CompositeAlarm_InsufficientDataActions = CompositeAlarm.AddMember("InsufficientDataActions", _ResourceList)
-
-	CompositeAlarm_OKActions = CompositeAlarm.AddMember("OKActions", _ResourceList)
-
-	CompositeAlarm_StateReason = CompositeAlarm.AddMember("StateReason", _StateReason)
-
-	CompositeAlarm_StateReasonData = CompositeAlarm.AddMember("StateReasonData", _StateReasonData)
-
-	CompositeAlarm_StateUpdatedTimestamp = CompositeAlarm.AddMember("StateUpdatedTimestamp", _Timestamp)
-
-	CompositeAlarm_StateValue = CompositeAlarm.AddMember("StateValue", StateValue)
-
-	CompositeAlarm_StateTransitionedTimestamp = CompositeAlarm.AddMember("StateTransitionedTimestamp", _Timestamp)
-
-	CompositeAlarm_ActionsSuppressedBy = CompositeAlarm.AddMember("ActionsSuppressedBy", ActionsSuppressedBy)
-
-	CompositeAlarm_ActionsSuppressedReason = CompositeAlarm.AddMember("ActionsSuppressedReason", _ActionsSuppressedReason)
-
-	CompositeAlarm_ActionsSuppressor = CompositeAlarm.AddMember("ActionsSuppressor", _AlarmArn)
-
-	CompositeAlarm_ActionsSuppressorWaitPeriod = CompositeAlarm.AddMember("ActionsSuppressorWaitPeriod", _SuppressorPeriod)
-
-	CompositeAlarm_ActionsSuppressorExtensionPeriod = CompositeAlarm.AddMember("ActionsSuppressorExtensionPeriod", _SuppressorPeriod)
-
-	CompositeAlarm_ActionConfiguration = CompositeAlarm.AddMember("ActionConfiguration", ActionConfiguration)
-
-	_CompositeAlarms_member = _CompositeAlarms.AddMember("member", CompositeAlarm)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _FaultDescription)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	_Counts_member = _Counts.AddMember("member", _DatapointValue)
-
-	DashboardEntry_DashboardName = DashboardEntry.AddMember("DashboardName", _DashboardName)
-
-	DashboardEntry_DashboardArn = DashboardEntry.AddMember("DashboardArn", _DashboardArn)
-
-	DashboardEntry_LastModified = DashboardEntry.AddMember("LastModified", _LastModified)
-
-	DashboardEntry_Size = DashboardEntry.AddMember("Size", _Size)
-
-	_DashboardEntries_member = _DashboardEntries.AddMember("member", DashboardEntry)
-
-	DashboardValidationMessage_DataPath = DashboardValidationMessage.AddMember("DataPath", _DataPath)
-
-	DashboardValidationMessage_Message = DashboardValidationMessage.AddMember("Message", _Message)
-
-	_DashboardValidationMessages_member = _DashboardValidationMessages.AddMember("member", DashboardValidationMessage)
-
-	DashboardInvalidInputError_message = DashboardInvalidInputError.AddMember("message", _DashboardErrorMessage)
-
-	DashboardInvalidInputError_dashboardValidationMessages = DashboardInvalidInputError.AddMember("dashboardValidationMessages", _DashboardValidationMessages)
-
-	_DashboardNames_member = _DashboardNames.AddMember("member", _DashboardName)
-
-	DashboardNotFoundError_message = DashboardNotFoundError.AddMember("message", _DashboardErrorMessage)
-
-	_DatapointValueMap_key = _DatapointValueMap.AddMember("key", _ExtendedStatistic)
-
-	_DatapointValueMap_value = _DatapointValueMap.AddMember("value", _DatapointValue)
-
-	Datapoint_Timestamp = Datapoint.AddMember("Timestamp", _Timestamp)
-
-	Datapoint_SampleCount = Datapoint.AddMember("SampleCount", _DatapointValue)
-
-	Datapoint_Average = Datapoint.AddMember("Average", _DatapointValue)
-
-	Datapoint_Sum = Datapoint.AddMember("Sum", _DatapointValue)
-
-	Datapoint_Minimum = Datapoint.AddMember("Minimum", _DatapointValue)
-
-	Datapoint_Maximum = Datapoint.AddMember("Maximum", _DatapointValue)
-
-	Datapoint_Unit = Datapoint.AddMember("Unit", StandardUnit)
-
-	Datapoint_ExtendedStatistics = Datapoint.AddMember("ExtendedStatistics", _DatapointValueMap)
-
-	_Datapoints_member = _Datapoints.AddMember("member", Datapoint)
-
-	_DatapointValues_member = _DatapointValues.AddMember("member", _DatapointValue)
-
-	DimensionFilter_Name = DimensionFilter.AddMember("Name", _DimensionName)
-
-	DimensionFilter_Value = DimensionFilter.AddMember("Value", _DimensionValue)
-
-	_DimensionFilters_member = _DimensionFilters.AddMember("member", DimensionFilter)
-
-	_EntityKeyAttributesMap_key = _EntityKeyAttributesMap.AddMember("key", _EntityKeyAttributesMapKeyString)
-
-	_EntityKeyAttributesMap_value = _EntityKeyAttributesMap.AddMember("value", _EntityKeyAttributesMapValueString)
-
-	_EntityAttributesMap_key = _EntityAttributesMap.AddMember("key", _EntityAttributesMapKeyString)
-
-	_EntityAttributesMap_value = _EntityAttributesMap.AddMember("value", _EntityAttributesMapValueString)
-
-	Entity_KeyAttributes = Entity.AddMember("KeyAttributes", _EntityKeyAttributesMap)
-
-	Entity_Attributes = Entity.AddMember("Attributes", _EntityAttributesMap)
-
-	StatisticSet_SampleCount = StatisticSet.AddMember("SampleCount", _DatapointValue)
-
-	StatisticSet_Sum = StatisticSet.AddMember("Sum", _DatapointValue)
-
-	StatisticSet_Minimum = StatisticSet.AddMember("Minimum", _DatapointValue)
-
-	StatisticSet_Maximum = StatisticSet.AddMember("Maximum", _DatapointValue)
-
-	_Values_member = _Values.AddMember("member", _DatapointValue)
-
-	MetricDatum_MetricName = MetricDatum.AddMember("MetricName", _MetricName)
-
-	MetricDatum_Dimensions = MetricDatum.AddMember("Dimensions", _Dimensions)
-
-	MetricDatum_Timestamp = MetricDatum.AddMember("Timestamp", _Timestamp)
-
-	MetricDatum_Value = MetricDatum.AddMember("Value", _DatapointValue)
-
-	MetricDatum_StatisticValues = MetricDatum.AddMember("StatisticValues", StatisticSet)
-
-	MetricDatum_Values = MetricDatum.AddMember("Values", _Values)
-
-	MetricDatum_Counts = MetricDatum.AddMember("Counts", _Counts)
-
-	MetricDatum_Unit = MetricDatum.AddMember("Unit", StandardUnit)
-
-	MetricDatum_StorageResolution = MetricDatum.AddMember("StorageResolution", _StorageResolution)
-
-	_MetricData_member = _MetricData.AddMember("member", MetricDatum)
-
-	EntityMetricData_Entity = EntityMetricData.AddMember("Entity", Entity)
-
-	EntityMetricData_MetricData = EntityMetricData.AddMember("MetricData", _MetricData)
-
-	_EntityMetricDataList_member = _EntityMetricDataList.AddMember("member", EntityMetricData)
-
-	EvaluationCriteria_PromQLCriteria = EvaluationCriteria.AddMember("PromQLCriteria", AlarmPromQLCriteria)
-
-	EvaluationState_PARTIAL_DATA = EvaluationState.AddMember("PARTIAL_DATA", smithyprelude.Unit)
-
-	EvaluationState_EVALUATION_FAILURE = EvaluationState.AddMember("EVALUATION_FAILURE", smithyprelude.Unit)
-
-	EvaluationState_EVALUATION_ERROR = EvaluationState.AddMember("EVALUATION_ERROR", smithyprelude.Unit)
-
-	WallClockWindow_Timezone = WallClockWindow.AddMember("Timezone", _Timezone)
-
-	EvaluationWindow_WallClockWindow = EvaluationWindow.AddMember("WallClockWindow", WallClockWindow)
-
-	EvaluationWindow_SlidingWindow = EvaluationWindow.AddMember("SlidingWindow", SlidingWindow)
-
-	_ExtendedStatistics_member = _ExtendedStatistics.AddMember("member", _ExtendedStatistic)
-
-	InsightRule_Name = InsightRule.AddMember("Name", _InsightRuleName)
-
-	InsightRule_State = InsightRule.AddMember("State", _InsightRuleState)
-
-	InsightRule_Schema = InsightRule.AddMember("Schema", _InsightRuleSchema)
-
-	InsightRule_Definition = InsightRule.AddMember("Definition", _InsightRuleDefinition)
-
-	InsightRule_ManagedRule = InsightRule.AddMember("ManagedRule", _InsightRuleIsManaged)
-
-	InsightRule_ApplyOnTransformedLogs = InsightRule.AddMember("ApplyOnTransformedLogs", _InsightRuleOnTransformedLogs)
-
-	_InsightRuleContributorKeys_member = _InsightRuleContributorKeys.AddMember("member", _InsightRuleContributorKey)
-
-	InsightRuleContributorDatapoint_Timestamp = InsightRuleContributorDatapoint.AddMember("Timestamp", _Timestamp)
-
-	InsightRuleContributorDatapoint_ApproximateValue = InsightRuleContributorDatapoint.AddMember("ApproximateValue", _InsightRuleUnboundDouble)
-
-	_InsightRuleContributorDatapoints_member = _InsightRuleContributorDatapoints.AddMember("member", InsightRuleContributorDatapoint)
-
-	InsightRuleContributor_Keys = InsightRuleContributor.AddMember("Keys", _InsightRuleContributorKeys)
-
-	InsightRuleContributor_ApproximateAggregateValue = InsightRuleContributor.AddMember("ApproximateAggregateValue", _InsightRuleUnboundDouble)
-
-	InsightRuleContributor_Datapoints = InsightRuleContributor.AddMember("Datapoints", _InsightRuleContributorDatapoints)
-
-	_InsightRuleContributorKeyLabels_member = _InsightRuleContributorKeyLabels.AddMember("member", _InsightRuleContributorKeyLabel)
-
-	_InsightRuleContributors_member = _InsightRuleContributors.AddMember("member", InsightRuleContributor)
-
-	InsightRuleMetricDatapoint_Timestamp = InsightRuleMetricDatapoint.AddMember("Timestamp", _Timestamp)
-
-	InsightRuleMetricDatapoint_UniqueContributors = InsightRuleMetricDatapoint.AddMember("UniqueContributors", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_MaxContributorValue = InsightRuleMetricDatapoint.AddMember("MaxContributorValue", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_SampleCount = InsightRuleMetricDatapoint.AddMember("SampleCount", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_Average = InsightRuleMetricDatapoint.AddMember("Average", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_Sum = InsightRuleMetricDatapoint.AddMember("Sum", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_Minimum = InsightRuleMetricDatapoint.AddMember("Minimum", _InsightRuleUnboundDouble)
-
-	InsightRuleMetricDatapoint_Maximum = InsightRuleMetricDatapoint.AddMember("Maximum", _InsightRuleUnboundDouble)
-
-	_InsightRuleMetricDatapoints_member = _InsightRuleMetricDatapoints.AddMember("member", InsightRuleMetricDatapoint)
-
-	_InsightRuleMetricList_member = _InsightRuleMetricList.AddMember("member", _InsightRuleMetricName)
-
-	_InsightRuleNames_member = _InsightRuleNames.AddMember("member", _InsightRuleName)
-
-	_InsightRules_member = _InsightRules.AddMember("member", InsightRule)
-
-	InternalServiceFault_Message = InternalServiceFault.AddMember("Message", _FaultDescription)
-
-	InvalidFormatFault_message = InvalidFormatFault.AddMember("message", _ErrorMessage)
-
-	InvalidNextToken_message = InvalidNextToken.AddMember("message", _ErrorMessage)
-
-	InvalidParameterCombinationException_message = InvalidParameterCombinationException.AddMember("message", _AwsQueryErrorMessage)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _AwsQueryErrorMessage)
-
-	KmsAccessDeniedException_Message = KmsAccessDeniedException.AddMember("Message", _String)
-
-	KmsKeyDisabledException_Message = KmsKeyDisabledException.AddMember("Message", _String)
-
-	KmsKeyNotFoundException_Message = KmsKeyNotFoundException.AddMember("Message", _String)
-
-	LabelOptions_Timezone = LabelOptions.AddMember("Timezone", _GetMetricDataLabelTimezone)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _FaultDescription)
-
-	LimitExceededFault_message = LimitExceededFault.AddMember("message", _ErrorMessage)
-
-	_LogGroupIdentifiers_member = _LogGroupIdentifiers.AddMember("member", _AmazonResourceName)
-
-	ScheduleConfiguration_ScheduleExpression = ScheduleConfiguration.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	ScheduleConfiguration_StartTimeOffset = ScheduleConfiguration.AddMember("StartTimeOffset", _StartTimeOffset)
-
-	ScheduleConfiguration_EndTimeOffset = ScheduleConfiguration.AddMember("EndTimeOffset", _EndTimeOffset)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ScheduledQueryConfiguration_QueryString = ScheduledQueryConfiguration.AddMember("QueryString", _QueryString)
-
-	ScheduledQueryConfiguration_LogGroupIdentifiers = ScheduledQueryConfiguration.AddMember("LogGroupIdentifiers", _LogGroupIdentifiers)
-
-	ScheduledQueryConfiguration_QueryARN = ScheduledQueryConfiguration.AddMember("QueryARN", _AmazonResourceName)
-
-	ScheduledQueryConfiguration_ScheduledQueryRoleARN = ScheduledQueryConfiguration.AddMember("ScheduledQueryRoleARN", _AmazonResourceName)
-
-	ScheduledQueryConfiguration_ScheduleConfiguration = ScheduledQueryConfiguration.AddMember("ScheduleConfiguration", ScheduleConfiguration)
-
-	ScheduledQueryConfiguration_AggregationExpression = ScheduledQueryConfiguration.AddMember("AggregationExpression", _AggregationExpression)
-
-	ScheduledQueryConfiguration_Tags = ScheduledQueryConfiguration.AddMember("Tags", _TagList)
-
-	WarmUpConfiguration_WarmUpPeriodDurationInMinutes = WarmUpConfiguration.AddMember("WarmUpPeriodDurationInMinutes", _WarmUpPeriodDurationInMinutes)
-
-	WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds = WarmUpConfiguration.AddMember("OnlyStartEvaluatingAfterWarmUpPeriodEnds", _OnlyStartEvaluatingAfterWarmUpPeriodEnds)
-
-	LogAlarm_AlarmName = LogAlarm.AddMember("AlarmName", _AlarmName)
-
-	LogAlarm_AlarmArn = LogAlarm.AddMember("AlarmArn", _AlarmArn)
-
-	LogAlarm_AlarmDescription = LogAlarm.AddMember("AlarmDescription", _AlarmDescription)
-
-	LogAlarm_AlarmConfigurationUpdatedTimestamp = LogAlarm.AddMember("AlarmConfigurationUpdatedTimestamp", _Timestamp)
-
-	LogAlarm_ActionsEnabled = LogAlarm.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	LogAlarm_OKActions = LogAlarm.AddMember("OKActions", _ResourceList)
-
-	LogAlarm_AlarmActions = LogAlarm.AddMember("AlarmActions", _ResourceList)
-
-	LogAlarm_InsufficientDataActions = LogAlarm.AddMember("InsufficientDataActions", _ResourceList)
-
-	LogAlarm_StateValue = LogAlarm.AddMember("StateValue", StateValue)
-
-	LogAlarm_StateReason = LogAlarm.AddMember("StateReason", _StateReason)
-
-	LogAlarm_StateReasonData = LogAlarm.AddMember("StateReasonData", _StateReasonData)
-
-	LogAlarm_StateUpdatedTimestamp = LogAlarm.AddMember("StateUpdatedTimestamp", _Timestamp)
-
-	LogAlarm_ScheduledQueryConfiguration = LogAlarm.AddMember("ScheduledQueryConfiguration", ScheduledQueryConfiguration)
-
-	LogAlarm_QueryResultsToEvaluate = LogAlarm.AddMember("QueryResultsToEvaluate", _QueryResultsToEvaluate)
-
-	LogAlarm_QueryResultsToAlarm = LogAlarm.AddMember("QueryResultsToAlarm", _QueryResultsToAlarm)
-
-	LogAlarm_Threshold = LogAlarm.AddMember("Threshold", _Threshold)
-
-	LogAlarm_ComparisonOperator = LogAlarm.AddMember("ComparisonOperator", ComparisonOperator)
-
-	LogAlarm_TreatMissingData = LogAlarm.AddMember("TreatMissingData", _TreatMissingData)
-
-	LogAlarm_StateTransitionedTimestamp = LogAlarm.AddMember("StateTransitionedTimestamp", _Timestamp)
-
-	LogAlarm_EvaluationState = LogAlarm.AddMember("EvaluationState", EvaluationState)
-
-	LogAlarm_ActionLogLineCount = LogAlarm.AddMember("ActionLogLineCount", _ActionLogLineCount)
-
-	LogAlarm_ActionLogLineRoleArn = LogAlarm.AddMember("ActionLogLineRoleArn", _ActionLogLineRoleArn)
-
-	LogAlarm_WarmUpConfiguration = LogAlarm.AddMember("WarmUpConfiguration", WarmUpConfiguration)
-
-	LogAlarm_ActionConfiguration = LogAlarm.AddMember("ActionConfiguration", ActionConfiguration)
-
-	_LogAlarms_member = _LogAlarms.AddMember("member", LogAlarm)
-
-	ManagedRule_TemplateName = ManagedRule.AddMember("TemplateName", _TemplateName)
-
-	ManagedRule_ResourceARN = ManagedRule.AddMember("ResourceARN", _AmazonResourceName)
-
-	ManagedRule_Tags = ManagedRule.AddMember("Tags", _TagList)
-
-	ManagedRuleState_RuleName = ManagedRuleState.AddMember("RuleName", _InsightRuleName)
-
-	ManagedRuleState_State = ManagedRuleState.AddMember("State", _InsightRuleState)
-
-	ManagedRuleDescription_TemplateName = ManagedRuleDescription.AddMember("TemplateName", _TemplateName)
-
-	ManagedRuleDescription_ResourceARN = ManagedRuleDescription.AddMember("ResourceARN", _AmazonResourceName)
-
-	ManagedRuleDescription_RuleState = ManagedRuleDescription.AddMember("RuleState", ManagedRuleState)
-
-	_ManagedRuleDescriptions_member = _ManagedRuleDescriptions.AddMember("member", ManagedRuleDescription)
-
-	_ManagedRules_member = _ManagedRules.AddMember("member", ManagedRule)
-
-	MessageData_Code = MessageData.AddMember("Code", _MessageDataCode)
-
-	MessageData_Value = MessageData.AddMember("Value", _MessageDataValue)
-
-	Statistic_SampleCount = Statistic.AddMember("SampleCount", smithyprelude.Unit)
-
-	Statistic_Average = Statistic.AddMember("Average", smithyprelude.Unit)
-
-	Statistic_Sum = Statistic.AddMember("Sum", smithyprelude.Unit)
-
-	Statistic_Minimum = Statistic.AddMember("Minimum", smithyprelude.Unit)
-
-	Statistic_Maximum = Statistic.AddMember("Maximum", smithyprelude.Unit)
-
-	MetricAlarm_AlarmName = MetricAlarm.AddMember("AlarmName", _AlarmName)
-
-	MetricAlarm_AlarmArn = MetricAlarm.AddMember("AlarmArn", _AlarmArn)
-
-	MetricAlarm_AlarmDescription = MetricAlarm.AddMember("AlarmDescription", _AlarmDescription)
-
-	MetricAlarm_AlarmConfigurationUpdatedTimestamp = MetricAlarm.AddMember("AlarmConfigurationUpdatedTimestamp", _Timestamp)
-
-	MetricAlarm_ActionsEnabled = MetricAlarm.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	MetricAlarm_OKActions = MetricAlarm.AddMember("OKActions", _ResourceList)
-
-	MetricAlarm_AlarmActions = MetricAlarm.AddMember("AlarmActions", _ResourceList)
-
-	MetricAlarm_InsufficientDataActions = MetricAlarm.AddMember("InsufficientDataActions", _ResourceList)
-
-	MetricAlarm_StateValue = MetricAlarm.AddMember("StateValue", StateValue)
-
-	MetricAlarm_StateReason = MetricAlarm.AddMember("StateReason", _StateReason)
-
-	MetricAlarm_StateReasonData = MetricAlarm.AddMember("StateReasonData", _StateReasonData)
-
-	MetricAlarm_StateUpdatedTimestamp = MetricAlarm.AddMember("StateUpdatedTimestamp", _Timestamp)
-
-	MetricAlarm_MetricName = MetricAlarm.AddMember("MetricName", _MetricName)
-
-	MetricAlarm_Namespace = MetricAlarm.AddMember("Namespace", _Namespace)
-
-	MetricAlarm_Statistic = MetricAlarm.AddMember("Statistic", Statistic)
-
-	MetricAlarm_ExtendedStatistic = MetricAlarm.AddMember("ExtendedStatistic", _ExtendedStatistic)
-
-	MetricAlarm_Dimensions = MetricAlarm.AddMember("Dimensions", _Dimensions)
-
-	MetricAlarm_Period = MetricAlarm.AddMember("Period", _Period)
-
-	MetricAlarm_Unit = MetricAlarm.AddMember("Unit", StandardUnit)
-
-	MetricAlarm_EvaluationPeriods = MetricAlarm.AddMember("EvaluationPeriods", _EvaluationPeriods)
-
-	MetricAlarm_DatapointsToAlarm = MetricAlarm.AddMember("DatapointsToAlarm", _DatapointsToAlarm)
-
-	MetricAlarm_Threshold = MetricAlarm.AddMember("Threshold", _Threshold)
-
-	MetricAlarm_ComparisonOperator = MetricAlarm.AddMember("ComparisonOperator", ComparisonOperator)
-
-	MetricAlarm_TreatMissingData = MetricAlarm.AddMember("TreatMissingData", _TreatMissingData)
-
-	MetricAlarm_EvaluateLowSampleCountPercentile = MetricAlarm.AddMember("EvaluateLowSampleCountPercentile", _EvaluateLowSampleCountPercentile)
-
-	MetricAlarm_Metrics = MetricAlarm.AddMember("Metrics", _MetricDataQueries)
-
-	MetricAlarm_ThresholdMetricId = MetricAlarm.AddMember("ThresholdMetricId", _MetricId)
-
-	MetricAlarm_EvaluationState = MetricAlarm.AddMember("EvaluationState", EvaluationState)
-
-	MetricAlarm_StateTransitionedTimestamp = MetricAlarm.AddMember("StateTransitionedTimestamp", _Timestamp)
-
-	MetricAlarm_EvaluationWindow = MetricAlarm.AddMember("EvaluationWindow", EvaluationWindow)
-
-	MetricAlarm_WarmUpConfiguration = MetricAlarm.AddMember("WarmUpConfiguration", WarmUpConfiguration)
-
-	MetricAlarm_EvaluationCriteria = MetricAlarm.AddMember("EvaluationCriteria", EvaluationCriteria)
-
-	MetricAlarm_EvaluationInterval = MetricAlarm.AddMember("EvaluationInterval", _EvaluationInterval)
-
-	MetricAlarm_ActionConfiguration = MetricAlarm.AddMember("ActionConfiguration", ActionConfiguration)
-
-	_MetricAlarms_member = _MetricAlarms.AddMember("member", MetricAlarm)
-
-	_Timestamps_member = _Timestamps.AddMember("member", _Timestamp)
-
-	StatusCode_COMPLETE = StatusCode.AddMember("COMPLETE", smithyprelude.Unit)
-
-	StatusCode_INTERNAL_ERROR = StatusCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	StatusCode_PARTIAL_DATA = StatusCode.AddMember("PARTIAL_DATA", smithyprelude.Unit)
-
-	StatusCode_FORBIDDEN = StatusCode.AddMember("FORBIDDEN", smithyprelude.Unit)
-
-	_MetricDataResultMessages_member = _MetricDataResultMessages.AddMember("member", MessageData)
-
-	MetricDataResult_Id = MetricDataResult.AddMember("Id", _MetricId)
-
-	MetricDataResult_Label = MetricDataResult.AddMember("Label", _MetricLabel)
-
-	MetricDataResult_Timestamps = MetricDataResult.AddMember("Timestamps", _Timestamps)
-
-	MetricDataResult_Values = MetricDataResult.AddMember("Values", _DatapointValues)
-
-	MetricDataResult_StatusCode = MetricDataResult.AddMember("StatusCode", StatusCode)
-
-	MetricDataResult_Messages = MetricDataResult.AddMember("Messages", _MetricDataResultMessages)
-
-	_MetricDataResults_member = _MetricDataResults.AddMember("member", MetricDataResult)
-
-	_MetricNameList_member = _MetricNameList.AddMember("member", _MetricName)
-
-	_Metrics_member = _Metrics.AddMember("member", Metric)
-
-	MetricStreamOutputFormat_JSON = MetricStreamOutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	MetricStreamOutputFormat_OPEN_TELEMETRY_0_7 = MetricStreamOutputFormat.AddMember("OPEN_TELEMETRY_0_7", smithyprelude.Unit)
-
-	MetricStreamOutputFormat_OPEN_TELEMETRY_1_0 = MetricStreamOutputFormat.AddMember("OPEN_TELEMETRY_1_0", smithyprelude.Unit)
-
-	MetricStreamEntry_Arn = MetricStreamEntry.AddMember("Arn", _AmazonResourceName)
-
-	MetricStreamEntry_CreationDate = MetricStreamEntry.AddMember("CreationDate", _Timestamp)
-
-	MetricStreamEntry_LastUpdateDate = MetricStreamEntry.AddMember("LastUpdateDate", _Timestamp)
-
-	MetricStreamEntry_Name = MetricStreamEntry.AddMember("Name", _MetricStreamName)
-
-	MetricStreamEntry_FirehoseArn = MetricStreamEntry.AddMember("FirehoseArn", _AmazonResourceName)
-
-	MetricStreamEntry_State = MetricStreamEntry.AddMember("State", _MetricStreamState)
-
-	MetricStreamEntry_OutputFormat = MetricStreamEntry.AddMember("OutputFormat", MetricStreamOutputFormat)
-
-	_MetricStreamEntries_member = _MetricStreamEntries.AddMember("member", MetricStreamEntry)
-
-	_MetricStreamFilterMetricNames_member = _MetricStreamFilterMetricNames.AddMember("member", _MetricName)
-
-	MetricStreamFilter_Namespace = MetricStreamFilter.AddMember("Namespace", _Namespace)
-
-	MetricStreamFilter_MetricNames = MetricStreamFilter.AddMember("MetricNames", _MetricStreamFilterMetricNames)
-
-	_MetricStreamFilters_member = _MetricStreamFilters.AddMember("member", MetricStreamFilter)
-
-	_MetricStreamNames_member = _MetricStreamNames.AddMember("member", _MetricStreamName)
-
-	_MetricStreamStatisticsAdditionalStatistics_member = _MetricStreamStatisticsAdditionalStatistics.AddMember("member", _MetricStreamStatistic)
-
-	MetricStreamStatisticsMetric_Namespace = MetricStreamStatisticsMetric.AddMember("Namespace", _Namespace)
-
-	MetricStreamStatisticsMetric_MetricName = MetricStreamStatisticsMetric.AddMember("MetricName", _MetricName)
-
-	_MetricStreamStatisticsIncludeMetrics_member = _MetricStreamStatisticsIncludeMetrics.AddMember("member", MetricStreamStatisticsMetric)
-
-	MetricStreamStatisticsConfiguration_IncludeMetrics = MetricStreamStatisticsConfiguration.AddMember("IncludeMetrics", _MetricStreamStatisticsIncludeMetrics)
-
-	MetricStreamStatisticsConfiguration_AdditionalStatistics = MetricStreamStatisticsConfiguration.AddMember("AdditionalStatistics", _MetricStreamStatisticsAdditionalStatistics)
-
-	_MetricStreamStatisticsConfigurations_member = _MetricStreamStatisticsConfigurations.AddMember("member", MetricStreamStatisticsConfiguration)
-
-	MissingRequiredParameterException_message = MissingRequiredParameterException.AddMember("message", _AwsQueryErrorMessage)
-
-	_MuteTargetAlarmNameList_member = _MuteTargetAlarmNameList.AddMember("member", _Name)
-
-	MuteTargets_AlarmNames = MuteTargets.AddMember("AlarmNames", _MuteTargetAlarmNameList)
-
-	_OTelEnrichmentMetricNameList_member = _OTelEnrichmentMetricNameList.AddMember("member", _MetricName)
-
-	OTelEnrichmentMetricSelector_Namespace = OTelEnrichmentMetricSelector.AddMember("Namespace", _Namespace)
-
-	OTelEnrichmentMetricSelector_MetricNames = OTelEnrichmentMetricSelector.AddMember("MetricNames", _OTelEnrichmentMetricNameList)
-
-	_OTelEnrichmentMetricSelectorList_member = _OTelEnrichmentMetricSelectorList.AddMember("member", OTelEnrichmentMetricSelector)
-
-	OTelEnrichmentStatus_RUNNING = OTelEnrichmentStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	OTelEnrichmentStatus_STOPPED = OTelEnrichmentStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	_OwningAccounts_member = _OwningAccounts.AddMember("member", _AccountId)
-
-	RecentlyActive_PT3H = RecentlyActive.AddMember("PT3H", smithyprelude.Unit)
-
-	ResourceConflict_message = ResourceConflict.AddMember("message", _ErrorMessage)
-
-	ResourceMetricSelection_IncludeMetrics = ResourceMetricSelection.AddMember("IncludeMetrics", _MetricNameList)
-
-	_ResourceMetricSelectionList_member = _ResourceMetricSelectionList.AddMember("member", ResourceMetricSelection)
-
-	ResourceMetricsConfiguration_ResourceArn = ResourceMetricsConfiguration.AddMember("ResourceArn", _ResourceArn)
-
-	ResourceMetricsConfiguration_CreatedAt = ResourceMetricsConfiguration.AddMember("CreatedAt", _Timestamp)
-
-	ResourceMetricsConfiguration_UpdatedAt = ResourceMetricsConfiguration.AddMember("UpdatedAt", _Timestamp)
-
-	ResourceMetricsConfiguration_MetricSelections = ResourceMetricsConfiguration.AddMember("MetricSelections", _ResourceMetricSelectionList)
-
-	ResourceNotFound_message = ResourceNotFound.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ResourceType)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _ResourceId)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _FaultDescription)
-
-	Schedule_Expression = Schedule.AddMember("Expression", _Expression)
-
-	Schedule_Duration = Schedule.AddMember("Duration", _Duration)
-
-	Schedule_Timezone = Schedule.AddMember("Timezone", _Timezone)
-
-	Rule_Schedule = Rule.AddMember("Schedule", Schedule)
-
-	ScanBy_TIMESTAMP_DESCENDING = ScanBy.AddMember("TIMESTAMP_DESCENDING", smithyprelude.Unit)
-
-	ScanBy_TIMESTAMP_ASCENDING = ScanBy.AddMember("TIMESTAMP_ASCENDING", smithyprelude.Unit)
-
-	_Statistics_member = _Statistics.AddMember("member", Statistic)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ValidationException_message = ValidationException.AddMember("message", _ValidationExceptionMessage)
-
-	AssociateDatasetKmsKeyInput_DatasetIdentifier = AssociateDatasetKmsKeyInput.AddMember("DatasetIdentifier", _DatasetIdentifier)
-
-	AssociateDatasetKmsKeyInput_KmsKeyArn = AssociateDatasetKmsKeyInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CreateResourceMetricsConfigurationInput_ResourceArn = CreateResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
-
-	CreateResourceMetricsConfigurationInput_MetricSelections = CreateResourceMetricsConfigurationInput.AddMember("MetricSelections", _ResourceMetricSelectionList)
-
-	CreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = CreateResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
-
-	DeleteAlarmMuteRuleInput_AlarmMuteRuleName = DeleteAlarmMuteRuleInput.AddMember("AlarmMuteRuleName", _Name)
-
-	DeleteAlarmsInput_AlarmNames = DeleteAlarmsInput.AddMember("AlarmNames", _AlarmNames)
-
-	DeleteAnomalyDetectorInput_AnomalyDetectorId = DeleteAnomalyDetectorInput.AddMember("AnomalyDetectorId", _AnomalyDetectorId)
-
-	DeleteAnomalyDetectorInput_Namespace = DeleteAnomalyDetectorInput.AddMember("Namespace", _Namespace)
-
-	DeleteAnomalyDetectorInput_MetricName = DeleteAnomalyDetectorInput.AddMember("MetricName", _MetricName)
-
-	DeleteAnomalyDetectorInput_Dimensions = DeleteAnomalyDetectorInput.AddMember("Dimensions", _Dimensions)
-
-	DeleteAnomalyDetectorInput_Stat = DeleteAnomalyDetectorInput.AddMember("Stat", _AnomalyDetectorMetricStat)
-
-	DeleteAnomalyDetectorInput_SingleMetricAnomalyDetector = DeleteAnomalyDetectorInput.AddMember("SingleMetricAnomalyDetector", SingleMetricAnomalyDetector)
-
-	DeleteAnomalyDetectorInput_MetricMathAnomalyDetector = DeleteAnomalyDetectorInput.AddMember("MetricMathAnomalyDetector", MetricMathAnomalyDetector)
-
-	DeleteDashboardsInput_DashboardNames = DeleteDashboardsInput.AddMember("DashboardNames", _DashboardNames)
-
-	DeleteInsightRulesInput_RuleNames = DeleteInsightRulesInput.AddMember("RuleNames", _InsightRuleNames)
-
-	DeleteInsightRulesOutput_Failures = DeleteInsightRulesOutput.AddMember("Failures", _BatchFailures)
-
-	DeleteMetricStreamInput_Name = DeleteMetricStreamInput.AddMember("Name", _MetricStreamName)
-
-	DeleteResourceMetricsConfigurationInput_ResourceArn = DeleteResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
-
-	DescribeAlarmContributorsInput_AlarmName = DescribeAlarmContributorsInput.AddMember("AlarmName", _AlarmName)
-
-	DescribeAlarmContributorsInput_NextToken = DescribeAlarmContributorsInput.AddMember("NextToken", _NextToken)
-
-	DescribeAlarmContributorsOutput_AlarmContributors = DescribeAlarmContributorsOutput.AddMember("AlarmContributors", _AlarmContributors)
-
-	DescribeAlarmContributorsOutput_NextToken = DescribeAlarmContributorsOutput.AddMember("NextToken", _NextToken)
-
-	DescribeAlarmHistoryInput_AlarmName = DescribeAlarmHistoryInput.AddMember("AlarmName", _AlarmName)
-
-	DescribeAlarmHistoryInput_AlarmContributorId = DescribeAlarmHistoryInput.AddMember("AlarmContributorId", _ContributorId)
-
-	DescribeAlarmHistoryInput_AlarmTypes = DescribeAlarmHistoryInput.AddMember("AlarmTypes", _AlarmTypes)
-
-	DescribeAlarmHistoryInput_HistoryItemType = DescribeAlarmHistoryInput.AddMember("HistoryItemType", HistoryItemType)
-
-	DescribeAlarmHistoryInput_StartDate = DescribeAlarmHistoryInput.AddMember("StartDate", _Timestamp)
-
-	DescribeAlarmHistoryInput_EndDate = DescribeAlarmHistoryInput.AddMember("EndDate", _Timestamp)
-
-	DescribeAlarmHistoryInput_MaxRecords = DescribeAlarmHistoryInput.AddMember("MaxRecords", _MaxRecords)
-
-	DescribeAlarmHistoryInput_NextToken = DescribeAlarmHistoryInput.AddMember("NextToken", _NextToken)
-
-	DescribeAlarmHistoryInput_ScanBy = DescribeAlarmHistoryInput.AddMember("ScanBy", ScanBy)
-
-	DescribeAlarmHistoryOutput_AlarmHistoryItems = DescribeAlarmHistoryOutput.AddMember("AlarmHistoryItems", _AlarmHistoryItems)
-
-	DescribeAlarmHistoryOutput_NextToken = DescribeAlarmHistoryOutput.AddMember("NextToken", _NextToken)
-
-	DescribeAlarmsForMetricInput_MetricName = DescribeAlarmsForMetricInput.AddMember("MetricName", _MetricName)
-
-	DescribeAlarmsForMetricInput_Namespace = DescribeAlarmsForMetricInput.AddMember("Namespace", _Namespace)
-
-	DescribeAlarmsForMetricInput_Statistic = DescribeAlarmsForMetricInput.AddMember("Statistic", Statistic)
-
-	DescribeAlarmsForMetricInput_ExtendedStatistic = DescribeAlarmsForMetricInput.AddMember("ExtendedStatistic", _ExtendedStatistic)
-
-	DescribeAlarmsForMetricInput_Dimensions = DescribeAlarmsForMetricInput.AddMember("Dimensions", _Dimensions)
-
-	DescribeAlarmsForMetricInput_Period = DescribeAlarmsForMetricInput.AddMember("Period", _Period)
-
-	DescribeAlarmsForMetricInput_Unit = DescribeAlarmsForMetricInput.AddMember("Unit", StandardUnit)
-
-	DescribeAlarmsForMetricOutput_MetricAlarms = DescribeAlarmsForMetricOutput.AddMember("MetricAlarms", _MetricAlarms)
-
-	DescribeAlarmsInput_AlarmNames = DescribeAlarmsInput.AddMember("AlarmNames", _AlarmNames)
-
-	DescribeAlarmsInput_AlarmNamePrefix = DescribeAlarmsInput.AddMember("AlarmNamePrefix", _AlarmNamePrefix)
-
-	DescribeAlarmsInput_AlarmTypes = DescribeAlarmsInput.AddMember("AlarmTypes", _AlarmTypes)
-
-	DescribeAlarmsInput_ChildrenOfAlarmName = DescribeAlarmsInput.AddMember("ChildrenOfAlarmName", _AlarmName)
-
-	DescribeAlarmsInput_ParentsOfAlarmName = DescribeAlarmsInput.AddMember("ParentsOfAlarmName", _AlarmName)
-
-	DescribeAlarmsInput_StateValue = DescribeAlarmsInput.AddMember("StateValue", StateValue)
-
-	DescribeAlarmsInput_ActionPrefix = DescribeAlarmsInput.AddMember("ActionPrefix", _ActionPrefix)
-
-	DescribeAlarmsInput_MaxRecords = DescribeAlarmsInput.AddMember("MaxRecords", _MaxRecords)
-
-	DescribeAlarmsInput_NextToken = DescribeAlarmsInput.AddMember("NextToken", _NextToken)
-
-	DescribeAlarmsOutput_CompositeAlarms = DescribeAlarmsOutput.AddMember("CompositeAlarms", _CompositeAlarms)
-
-	DescribeAlarmsOutput_MetricAlarms = DescribeAlarmsOutput.AddMember("MetricAlarms", _MetricAlarms)
-
-	DescribeAlarmsOutput_LogAlarms = DescribeAlarmsOutput.AddMember("LogAlarms", _LogAlarms)
-
-	DescribeAlarmsOutput_NextToken = DescribeAlarmsOutput.AddMember("NextToken", _NextToken)
-
-	DescribeAnomalyDetectorsInput_AnomalyDetectorIds = DescribeAnomalyDetectorsInput.AddMember("AnomalyDetectorIds", _AnomalyDetectorIds)
-
-	DescribeAnomalyDetectorsInput_NextToken = DescribeAnomalyDetectorsInput.AddMember("NextToken", _NextToken)
-
-	DescribeAnomalyDetectorsInput_MaxResults = DescribeAnomalyDetectorsInput.AddMember("MaxResults", _MaxReturnedResultsCount)
-
-	DescribeAnomalyDetectorsInput_Namespace = DescribeAnomalyDetectorsInput.AddMember("Namespace", _Namespace)
-
-	DescribeAnomalyDetectorsInput_MetricName = DescribeAnomalyDetectorsInput.AddMember("MetricName", _MetricName)
-
-	DescribeAnomalyDetectorsInput_Dimensions = DescribeAnomalyDetectorsInput.AddMember("Dimensions", _Dimensions)
-
-	DescribeAnomalyDetectorsInput_AnomalyDetectorTypes = DescribeAnomalyDetectorsInput.AddMember("AnomalyDetectorTypes", _AnomalyDetectorTypes)
-
-	DescribeAnomalyDetectorsOutput_AnomalyDetectors = DescribeAnomalyDetectorsOutput.AddMember("AnomalyDetectors", _AnomalyDetectors)
-
-	DescribeAnomalyDetectorsOutput_NextToken = DescribeAnomalyDetectorsOutput.AddMember("NextToken", _NextToken)
-
-	DescribeInsightRulesInput_NextToken = DescribeInsightRulesInput.AddMember("NextToken", _NextToken)
-
-	DescribeInsightRulesInput_MaxResults = DescribeInsightRulesInput.AddMember("MaxResults", _InsightRuleMaxResults)
-
-	DescribeInsightRulesOutput_NextToken = DescribeInsightRulesOutput.AddMember("NextToken", _NextToken)
-
-	DescribeInsightRulesOutput_InsightRules = DescribeInsightRulesOutput.AddMember("InsightRules", _InsightRules)
-
-	DisableAlarmActionsInput_AlarmNames = DisableAlarmActionsInput.AddMember("AlarmNames", _AlarmNames)
-
-	DisableInsightRulesInput_RuleNames = DisableInsightRulesInput.AddMember("RuleNames", _InsightRuleNames)
-
-	DisableInsightRulesOutput_Failures = DisableInsightRulesOutput.AddMember("Failures", _BatchFailures)
-
-	DisassociateDatasetKmsKeyInput_DatasetIdentifier = DisassociateDatasetKmsKeyInput.AddMember("DatasetIdentifier", _DatasetIdentifier)
-
-	EnableAlarmActionsInput_AlarmNames = EnableAlarmActionsInput.AddMember("AlarmNames", _AlarmNames)
-
-	EnableInsightRulesInput_RuleNames = EnableInsightRulesInput.AddMember("RuleNames", _InsightRuleNames)
-
-	EnableInsightRulesOutput_Failures = EnableInsightRulesOutput.AddMember("Failures", _BatchFailures)
-
-	GetAlarmMuteRuleInput_AlarmMuteRuleName = GetAlarmMuteRuleInput.AddMember("AlarmMuteRuleName", _Name)
-
-	GetAlarmMuteRuleOutput_Name = GetAlarmMuteRuleOutput.AddMember("Name", _Name)
-
-	GetAlarmMuteRuleOutput_AlarmMuteRuleArn = GetAlarmMuteRuleOutput.AddMember("AlarmMuteRuleArn", _Arn)
-
-	GetAlarmMuteRuleOutput_Description = GetAlarmMuteRuleOutput.AddMember("Description", _AlarmDescription)
-
-	GetAlarmMuteRuleOutput_Rule = GetAlarmMuteRuleOutput.AddMember("Rule", Rule)
-
-	GetAlarmMuteRuleOutput_MuteTargets = GetAlarmMuteRuleOutput.AddMember("MuteTargets", MuteTargets)
-
-	GetAlarmMuteRuleOutput_StartDate = GetAlarmMuteRuleOutput.AddMember("StartDate", _Timestamp)
-
-	GetAlarmMuteRuleOutput_ExpireDate = GetAlarmMuteRuleOutput.AddMember("ExpireDate", _Timestamp)
-
-	GetAlarmMuteRuleOutput_Status = GetAlarmMuteRuleOutput.AddMember("Status", AlarmMuteRuleStatus)
-
-	GetAlarmMuteRuleOutput_LastUpdatedTimestamp = GetAlarmMuteRuleOutput.AddMember("LastUpdatedTimestamp", _Timestamp)
-
-	GetAlarmMuteRuleOutput_MuteType = GetAlarmMuteRuleOutput.AddMember("MuteType", _MuteType)
-
-	GetDashboardInput_DashboardName = GetDashboardInput.AddMember("DashboardName", _DashboardName)
-
-	GetDashboardOutput_DashboardArn = GetDashboardOutput.AddMember("DashboardArn", _DashboardArn)
-
-	GetDashboardOutput_DashboardBody = GetDashboardOutput.AddMember("DashboardBody", _DashboardBody)
-
-	GetDashboardOutput_DashboardName = GetDashboardOutput.AddMember("DashboardName", _DashboardName)
-
-	GetDatasetInput_DatasetIdentifier = GetDatasetInput.AddMember("DatasetIdentifier", _DatasetIdentifier)
-
-	GetDatasetOutput_DatasetId = GetDatasetOutput.AddMember("DatasetId", _DatasetId)
-
-	GetDatasetOutput_Arn = GetDatasetOutput.AddMember("Arn", _DatasetArn)
-
-	GetDatasetOutput_KmsKeyArn = GetDatasetOutput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	GetInsightRuleReportInput_RuleName = GetInsightRuleReportInput.AddMember("RuleName", _InsightRuleName)
-
-	GetInsightRuleReportInput_StartTime = GetInsightRuleReportInput.AddMember("StartTime", _Timestamp)
-
-	GetInsightRuleReportInput_EndTime = GetInsightRuleReportInput.AddMember("EndTime", _Timestamp)
-
-	GetInsightRuleReportInput_Period = GetInsightRuleReportInput.AddMember("Period", _Period)
-
-	GetInsightRuleReportInput_MaxContributorCount = GetInsightRuleReportInput.AddMember("MaxContributorCount", _InsightRuleUnboundInteger)
-
-	GetInsightRuleReportInput_Metrics = GetInsightRuleReportInput.AddMember("Metrics", _InsightRuleMetricList)
-
-	GetInsightRuleReportInput_OrderBy = GetInsightRuleReportInput.AddMember("OrderBy", _InsightRuleOrderBy)
-
-	GetInsightRuleReportOutput_KeyLabels = GetInsightRuleReportOutput.AddMember("KeyLabels", _InsightRuleContributorKeyLabels)
-
-	GetInsightRuleReportOutput_AggregationStatistic = GetInsightRuleReportOutput.AddMember("AggregationStatistic", _InsightRuleAggregationStatistic)
-
-	GetInsightRuleReportOutput_AggregateValue = GetInsightRuleReportOutput.AddMember("AggregateValue", _InsightRuleUnboundDouble)
-
-	GetInsightRuleReportOutput_ApproximateUniqueCount = GetInsightRuleReportOutput.AddMember("ApproximateUniqueCount", _InsightRuleUnboundLong)
-
-	GetInsightRuleReportOutput_Contributors = GetInsightRuleReportOutput.AddMember("Contributors", _InsightRuleContributors)
-
-	GetInsightRuleReportOutput_MetricDatapoints = GetInsightRuleReportOutput.AddMember("MetricDatapoints", _InsightRuleMetricDatapoints)
-
-	GetMetricDataInput_MetricDataQueries = GetMetricDataInput.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	GetMetricDataInput_StartTime = GetMetricDataInput.AddMember("StartTime", _Timestamp)
-
-	GetMetricDataInput_EndTime = GetMetricDataInput.AddMember("EndTime", _Timestamp)
-
-	GetMetricDataInput_NextToken = GetMetricDataInput.AddMember("NextToken", _NextToken)
-
-	GetMetricDataInput_ScanBy = GetMetricDataInput.AddMember("ScanBy", ScanBy)
-
-	GetMetricDataInput_MaxDatapoints = GetMetricDataInput.AddMember("MaxDatapoints", _GetMetricDataMaxDatapoints)
-
-	GetMetricDataInput_LabelOptions = GetMetricDataInput.AddMember("LabelOptions", LabelOptions)
-
-	GetMetricDataOutput_MetricDataResults = GetMetricDataOutput.AddMember("MetricDataResults", _MetricDataResults)
-
-	GetMetricDataOutput_NextToken = GetMetricDataOutput.AddMember("NextToken", _NextToken)
-
-	GetMetricDataOutput_Messages = GetMetricDataOutput.AddMember("Messages", _MetricDataResultMessages)
-
-	GetMetricStatisticsInput_Namespace = GetMetricStatisticsInput.AddMember("Namespace", _Namespace)
-
-	GetMetricStatisticsInput_MetricName = GetMetricStatisticsInput.AddMember("MetricName", _MetricName)
-
-	GetMetricStatisticsInput_Dimensions = GetMetricStatisticsInput.AddMember("Dimensions", _Dimensions)
-
-	GetMetricStatisticsInput_StartTime = GetMetricStatisticsInput.AddMember("StartTime", _Timestamp)
-
-	GetMetricStatisticsInput_EndTime = GetMetricStatisticsInput.AddMember("EndTime", _Timestamp)
-
-	GetMetricStatisticsInput_Period = GetMetricStatisticsInput.AddMember("Period", _Period)
-
-	GetMetricStatisticsInput_Statistics = GetMetricStatisticsInput.AddMember("Statistics", _Statistics)
-
-	GetMetricStatisticsInput_ExtendedStatistics = GetMetricStatisticsInput.AddMember("ExtendedStatistics", _ExtendedStatistics)
-
-	GetMetricStatisticsInput_Unit = GetMetricStatisticsInput.AddMember("Unit", StandardUnit)
-
-	GetMetricStatisticsOutput_Label = GetMetricStatisticsOutput.AddMember("Label", _MetricLabel)
-
-	GetMetricStatisticsOutput_Datapoints = GetMetricStatisticsOutput.AddMember("Datapoints", _Datapoints)
-
-	GetMetricStreamInput_Name = GetMetricStreamInput.AddMember("Name", _MetricStreamName)
-
-	GetMetricStreamOutput_Arn = GetMetricStreamOutput.AddMember("Arn", _AmazonResourceName)
-
-	GetMetricStreamOutput_Name = GetMetricStreamOutput.AddMember("Name", _MetricStreamName)
-
-	GetMetricStreamOutput_IncludeFilters = GetMetricStreamOutput.AddMember("IncludeFilters", _MetricStreamFilters)
-
-	GetMetricStreamOutput_ExcludeFilters = GetMetricStreamOutput.AddMember("ExcludeFilters", _MetricStreamFilters)
-
-	GetMetricStreamOutput_FirehoseArn = GetMetricStreamOutput.AddMember("FirehoseArn", _AmazonResourceName)
-
-	GetMetricStreamOutput_RoleArn = GetMetricStreamOutput.AddMember("RoleArn", _AmazonResourceName)
-
-	GetMetricStreamOutput_State = GetMetricStreamOutput.AddMember("State", _MetricStreamState)
-
-	GetMetricStreamOutput_CreationDate = GetMetricStreamOutput.AddMember("CreationDate", _Timestamp)
-
-	GetMetricStreamOutput_LastUpdateDate = GetMetricStreamOutput.AddMember("LastUpdateDate", _Timestamp)
-
-	GetMetricStreamOutput_OutputFormat = GetMetricStreamOutput.AddMember("OutputFormat", MetricStreamOutputFormat)
-
-	GetMetricStreamOutput_StatisticsConfigurations = GetMetricStreamOutput.AddMember("StatisticsConfigurations", _MetricStreamStatisticsConfigurations)
-
-	GetMetricStreamOutput_IncludeLinkedAccountsMetrics = GetMetricStreamOutput.AddMember("IncludeLinkedAccountsMetrics", _IncludeLinkedAccountsMetrics)
-
-	GetMetricWidgetImageInput_MetricWidget = GetMetricWidgetImageInput.AddMember("MetricWidget", _MetricWidget)
-
-	GetMetricWidgetImageInput_OutputFormat = GetMetricWidgetImageInput.AddMember("OutputFormat", _OutputFormat)
-
-	GetMetricWidgetImageOutput_MetricWidgetImage = GetMetricWidgetImageOutput.AddMember("MetricWidgetImage", _MetricWidgetImage)
-
-	GetOTelEnrichmentOutput_Status = GetOTelEnrichmentOutput.AddMember("Status", OTelEnrichmentStatus)
-
-	GetOTelEnrichmentOutput_IncludeFilters = GetOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	GetOTelEnrichmentOutput_ExcludeFilters = GetOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	GetOTelEnrichmentOutput_CreatedAt = GetOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
-
-	GetOTelEnrichmentOutput_UpdatedAt = GetOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
-
-	GetResourceMetricsConfigurationInput_ResourceArn = GetResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = GetResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
-
-	ListAlarmMuteRulesInput_AlarmName = ListAlarmMuteRulesInput.AddMember("AlarmName", _Name)
-
-	ListAlarmMuteRulesInput_Statuses = ListAlarmMuteRulesInput.AddMember("Statuses", _AlarmMuteRuleStatuses)
-
-	ListAlarmMuteRulesInput_MaxRecords = ListAlarmMuteRulesInput.AddMember("MaxRecords", _MaxRecords)
-
-	ListAlarmMuteRulesInput_NextToken = ListAlarmMuteRulesInput.AddMember("NextToken", _NextToken)
-
-	ListAlarmMuteRulesOutput_AlarmMuteRuleSummaries = ListAlarmMuteRulesOutput.AddMember("AlarmMuteRuleSummaries", _AlarmMuteRuleSummaries)
-
-	ListAlarmMuteRulesOutput_NextToken = ListAlarmMuteRulesOutput.AddMember("NextToken", _NextToken)
-
-	ListDashboardsInput_DashboardNamePrefix = ListDashboardsInput.AddMember("DashboardNamePrefix", _DashboardNamePrefix)
-
-	ListDashboardsInput_NextToken = ListDashboardsInput.AddMember("NextToken", _NextToken)
-
-	ListDashboardsOutput_DashboardEntries = ListDashboardsOutput.AddMember("DashboardEntries", _DashboardEntries)
-
-	ListDashboardsOutput_NextToken = ListDashboardsOutput.AddMember("NextToken", _NextToken)
-
-	ListManagedInsightRulesInput_ResourceARN = ListManagedInsightRulesInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListManagedInsightRulesInput_NextToken = ListManagedInsightRulesInput.AddMember("NextToken", _NextToken)
-
-	ListManagedInsightRulesInput_MaxResults = ListManagedInsightRulesInput.AddMember("MaxResults", _InsightRuleMaxResults)
-
-	ListManagedInsightRulesOutput_ManagedRules = ListManagedInsightRulesOutput.AddMember("ManagedRules", _ManagedRuleDescriptions)
-
-	ListManagedInsightRulesOutput_NextToken = ListManagedInsightRulesOutput.AddMember("NextToken", _NextToken)
-
-	ListMetricsInput_Namespace = ListMetricsInput.AddMember("Namespace", _Namespace)
-
-	ListMetricsInput_MetricName = ListMetricsInput.AddMember("MetricName", _MetricName)
-
-	ListMetricsInput_Dimensions = ListMetricsInput.AddMember("Dimensions", _DimensionFilters)
-
-	ListMetricsInput_NextToken = ListMetricsInput.AddMember("NextToken", _NextToken)
-
-	ListMetricsInput_RecentlyActive = ListMetricsInput.AddMember("RecentlyActive", RecentlyActive)
-
-	ListMetricsInput_IncludeLinkedAccounts = ListMetricsInput.AddMember("IncludeLinkedAccounts", _IncludeLinkedAccounts)
-
-	ListMetricsInput_OwningAccount = ListMetricsInput.AddMember("OwningAccount", _AccountId)
-
-	ListMetricsOutput_Metrics = ListMetricsOutput.AddMember("Metrics", _Metrics)
-
-	ListMetricsOutput_NextToken = ListMetricsOutput.AddMember("NextToken", _NextToken)
-
-	ListMetricsOutput_OwningAccounts = ListMetricsOutput.AddMember("OwningAccounts", _OwningAccounts)
-
-	ListMetricStreamsInput_NextToken = ListMetricStreamsInput.AddMember("NextToken", _NextToken)
-
-	ListMetricStreamsInput_MaxResults = ListMetricStreamsInput.AddMember("MaxResults", _ListMetricStreamsMaxResults)
-
-	ListMetricStreamsOutput_NextToken = ListMetricStreamsOutput.AddMember("NextToken", _NextToken)
-
-	ListMetricStreamsOutput_Entries = ListMetricStreamsOutput.AddMember("Entries", _MetricStreamEntries)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagList)
-
-	PutAlarmMuteRuleInput_Name = PutAlarmMuteRuleInput.AddMember("Name", _Name)
-
-	PutAlarmMuteRuleInput_Description = PutAlarmMuteRuleInput.AddMember("Description", _AlarmDescription)
-
-	PutAlarmMuteRuleInput_Rule = PutAlarmMuteRuleInput.AddMember("Rule", Rule)
-
-	PutAlarmMuteRuleInput_MuteTargets = PutAlarmMuteRuleInput.AddMember("MuteTargets", MuteTargets)
-
-	PutAlarmMuteRuleInput_Tags = PutAlarmMuteRuleInput.AddMember("Tags", _TagList)
-
-	PutAlarmMuteRuleInput_StartDate = PutAlarmMuteRuleInput.AddMember("StartDate", _Timestamp)
-
-	PutAlarmMuteRuleInput_ExpireDate = PutAlarmMuteRuleInput.AddMember("ExpireDate", _Timestamp)
-
-	PutAnomalyDetectorInput_Namespace = PutAnomalyDetectorInput.AddMember("Namespace", _Namespace)
-
-	PutAnomalyDetectorInput_MetricName = PutAnomalyDetectorInput.AddMember("MetricName", _MetricName)
-
-	PutAnomalyDetectorInput_Dimensions = PutAnomalyDetectorInput.AddMember("Dimensions", _Dimensions)
-
-	PutAnomalyDetectorInput_Stat = PutAnomalyDetectorInput.AddMember("Stat", _AnomalyDetectorMetricStat)
-
-	PutAnomalyDetectorInput_Configuration = PutAnomalyDetectorInput.AddMember("Configuration", AnomalyDetectorConfiguration)
-
-	PutAnomalyDetectorInput_MetricCharacteristics = PutAnomalyDetectorInput.AddMember("MetricCharacteristics", MetricCharacteristics)
-
-	PutAnomalyDetectorInput_SingleMetricAnomalyDetector = PutAnomalyDetectorInput.AddMember("SingleMetricAnomalyDetector", SingleMetricAnomalyDetector)
-
-	PutAnomalyDetectorInput_MetricMathAnomalyDetector = PutAnomalyDetectorInput.AddMember("MetricMathAnomalyDetector", MetricMathAnomalyDetector)
-
-	PutAnomalyDetectorOutput_AnomalyDetectorId = PutAnomalyDetectorOutput.AddMember("AnomalyDetectorId", _AnomalyDetectorId)
-
-	PutCompositeAlarmInput_ActionsEnabled = PutCompositeAlarmInput.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	PutCompositeAlarmInput_AlarmActions = PutCompositeAlarmInput.AddMember("AlarmActions", _ResourceList)
-
-	PutCompositeAlarmInput_AlarmDescription = PutCompositeAlarmInput.AddMember("AlarmDescription", _AlarmDescription)
-
-	PutCompositeAlarmInput_AlarmName = PutCompositeAlarmInput.AddMember("AlarmName", _AlarmName)
-
-	PutCompositeAlarmInput_AlarmRule = PutCompositeAlarmInput.AddMember("AlarmRule", _AlarmRule)
-
-	PutCompositeAlarmInput_InsufficientDataActions = PutCompositeAlarmInput.AddMember("InsufficientDataActions", _ResourceList)
-
-	PutCompositeAlarmInput_OKActions = PutCompositeAlarmInput.AddMember("OKActions", _ResourceList)
-
-	PutCompositeAlarmInput_Tags = PutCompositeAlarmInput.AddMember("Tags", _TagList)
-
-	PutCompositeAlarmInput_ActionsSuppressor = PutCompositeAlarmInput.AddMember("ActionsSuppressor", _AlarmArn)
-
-	PutCompositeAlarmInput_ActionsSuppressorWaitPeriod = PutCompositeAlarmInput.AddMember("ActionsSuppressorWaitPeriod", _SuppressorPeriod)
-
-	PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod = PutCompositeAlarmInput.AddMember("ActionsSuppressorExtensionPeriod", _SuppressorPeriod)
-
-	PutCompositeAlarmInput_ActionConfiguration = PutCompositeAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
-
-	PutDashboardInput_DashboardName = PutDashboardInput.AddMember("DashboardName", _DashboardName)
-
-	PutDashboardInput_DashboardBody = PutDashboardInput.AddMember("DashboardBody", _DashboardBody)
-
-	PutDashboardInput_Tags = PutDashboardInput.AddMember("Tags", _TagList)
-
-	PutDashboardOutput_DashboardValidationMessages = PutDashboardOutput.AddMember("DashboardValidationMessages", _DashboardValidationMessages)
-
-	PutInsightRuleInput_RuleName = PutInsightRuleInput.AddMember("RuleName", _InsightRuleName)
-
-	PutInsightRuleInput_RuleState = PutInsightRuleInput.AddMember("RuleState", _InsightRuleState)
-
-	PutInsightRuleInput_RuleDefinition = PutInsightRuleInput.AddMember("RuleDefinition", _InsightRuleDefinition)
-
-	PutInsightRuleInput_Tags = PutInsightRuleInput.AddMember("Tags", _TagList)
-
-	PutInsightRuleInput_ApplyOnTransformedLogs = PutInsightRuleInput.AddMember("ApplyOnTransformedLogs", _InsightRuleOnTransformedLogs)
-
-	PutLogAlarmInput_AlarmName = PutLogAlarmInput.AddMember("AlarmName", _AlarmName)
-
-	PutLogAlarmInput_AlarmDescription = PutLogAlarmInput.AddMember("AlarmDescription", _AlarmDescription)
-
-	PutLogAlarmInput_ScheduledQueryConfiguration = PutLogAlarmInput.AddMember("ScheduledQueryConfiguration", ScheduledQueryConfiguration)
-
-	PutLogAlarmInput_ActionLogLineCount = PutLogAlarmInput.AddMember("ActionLogLineCount", _ActionLogLineCount)
-
-	PutLogAlarmInput_ActionLogLineRoleArn = PutLogAlarmInput.AddMember("ActionLogLineRoleArn", _ActionLogLineRoleArn)
-
-	PutLogAlarmInput_ActionsEnabled = PutLogAlarmInput.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	PutLogAlarmInput_OKActions = PutLogAlarmInput.AddMember("OKActions", _ResourceList)
-
-	PutLogAlarmInput_AlarmActions = PutLogAlarmInput.AddMember("AlarmActions", _ResourceList)
-
-	PutLogAlarmInput_InsufficientDataActions = PutLogAlarmInput.AddMember("InsufficientDataActions", _ResourceList)
-
-	PutLogAlarmInput_QueryResultsToEvaluate = PutLogAlarmInput.AddMember("QueryResultsToEvaluate", _QueryResultsToEvaluate)
-
-	PutLogAlarmInput_QueryResultsToAlarm = PutLogAlarmInput.AddMember("QueryResultsToAlarm", _QueryResultsToAlarm)
-
-	PutLogAlarmInput_Threshold = PutLogAlarmInput.AddMember("Threshold", _Threshold)
-
-	PutLogAlarmInput_ComparisonOperator = PutLogAlarmInput.AddMember("ComparisonOperator", ComparisonOperator)
-
-	PutLogAlarmInput_TreatMissingData = PutLogAlarmInput.AddMember("TreatMissingData", _TreatMissingData)
-
-	PutLogAlarmInput_Tags = PutLogAlarmInput.AddMember("Tags", _TagList)
-
-	PutLogAlarmInput_WarmUpConfiguration = PutLogAlarmInput.AddMember("WarmUpConfiguration", WarmUpConfiguration)
-
-	PutLogAlarmInput_ActionConfiguration = PutLogAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
-
-	PutManagedInsightRulesInput_ManagedRules = PutManagedInsightRulesInput.AddMember("ManagedRules", _ManagedRules)
-
-	PutManagedInsightRulesOutput_Failures = PutManagedInsightRulesOutput.AddMember("Failures", _BatchFailures)
-
-	PutMetricAlarmInput_AlarmName = PutMetricAlarmInput.AddMember("AlarmName", _AlarmName)
-
-	PutMetricAlarmInput_AlarmDescription = PutMetricAlarmInput.AddMember("AlarmDescription", _AlarmDescription)
-
-	PutMetricAlarmInput_ActionsEnabled = PutMetricAlarmInput.AddMember("ActionsEnabled", _ActionsEnabled)
-
-	PutMetricAlarmInput_OKActions = PutMetricAlarmInput.AddMember("OKActions", _ResourceList)
-
-	PutMetricAlarmInput_AlarmActions = PutMetricAlarmInput.AddMember("AlarmActions", _ResourceList)
-
-	PutMetricAlarmInput_InsufficientDataActions = PutMetricAlarmInput.AddMember("InsufficientDataActions", _ResourceList)
-
-	PutMetricAlarmInput_MetricName = PutMetricAlarmInput.AddMember("MetricName", _MetricName)
-
-	PutMetricAlarmInput_Namespace = PutMetricAlarmInput.AddMember("Namespace", _Namespace)
-
-	PutMetricAlarmInput_Statistic = PutMetricAlarmInput.AddMember("Statistic", Statistic)
-
-	PutMetricAlarmInput_ExtendedStatistic = PutMetricAlarmInput.AddMember("ExtendedStatistic", _ExtendedStatistic)
-
-	PutMetricAlarmInput_Dimensions = PutMetricAlarmInput.AddMember("Dimensions", _Dimensions)
-
-	PutMetricAlarmInput_Period = PutMetricAlarmInput.AddMember("Period", _Period)
-
-	PutMetricAlarmInput_Unit = PutMetricAlarmInput.AddMember("Unit", StandardUnit)
-
-	PutMetricAlarmInput_EvaluationPeriods = PutMetricAlarmInput.AddMember("EvaluationPeriods", _EvaluationPeriods)
-
-	PutMetricAlarmInput_DatapointsToAlarm = PutMetricAlarmInput.AddMember("DatapointsToAlarm", _DatapointsToAlarm)
-
-	PutMetricAlarmInput_Threshold = PutMetricAlarmInput.AddMember("Threshold", _Threshold)
-
-	PutMetricAlarmInput_ComparisonOperator = PutMetricAlarmInput.AddMember("ComparisonOperator", ComparisonOperator)
-
-	PutMetricAlarmInput_TreatMissingData = PutMetricAlarmInput.AddMember("TreatMissingData", _TreatMissingData)
-
-	PutMetricAlarmInput_EvaluateLowSampleCountPercentile = PutMetricAlarmInput.AddMember("EvaluateLowSampleCountPercentile", _EvaluateLowSampleCountPercentile)
-
-	PutMetricAlarmInput_Metrics = PutMetricAlarmInput.AddMember("Metrics", _MetricDataQueries)
-
-	PutMetricAlarmInput_Tags = PutMetricAlarmInput.AddMember("Tags", _TagList)
-
-	PutMetricAlarmInput_ThresholdMetricId = PutMetricAlarmInput.AddMember("ThresholdMetricId", _MetricId)
-
-	PutMetricAlarmInput_EvaluationWindow = PutMetricAlarmInput.AddMember("EvaluationWindow", EvaluationWindow)
-
-	PutMetricAlarmInput_WarmUpConfiguration = PutMetricAlarmInput.AddMember("WarmUpConfiguration", WarmUpConfiguration)
-
-	PutMetricAlarmInput_EvaluationCriteria = PutMetricAlarmInput.AddMember("EvaluationCriteria", EvaluationCriteria)
-
-	PutMetricAlarmInput_EvaluationInterval = PutMetricAlarmInput.AddMember("EvaluationInterval", _EvaluationInterval)
-
-	PutMetricAlarmInput_ActionConfiguration = PutMetricAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
-
-	PutMetricDataInput_Namespace = PutMetricDataInput.AddMember("Namespace", _Namespace)
-
-	PutMetricDataInput_MetricData = PutMetricDataInput.AddMember("MetricData", _MetricData)
-
-	PutMetricDataInput_EntityMetricData = PutMetricDataInput.AddMember("EntityMetricData", _EntityMetricDataList)
-
-	PutMetricDataInput_StrictEntityValidation = PutMetricDataInput.AddMember("StrictEntityValidation", _StrictEntityValidation)
-
-	PutMetricStreamInput_Name = PutMetricStreamInput.AddMember("Name", _MetricStreamName)
-
-	PutMetricStreamInput_IncludeFilters = PutMetricStreamInput.AddMember("IncludeFilters", _MetricStreamFilters)
-
-	PutMetricStreamInput_ExcludeFilters = PutMetricStreamInput.AddMember("ExcludeFilters", _MetricStreamFilters)
-
-	PutMetricStreamInput_FirehoseArn = PutMetricStreamInput.AddMember("FirehoseArn", _AmazonResourceName)
-
-	PutMetricStreamInput_RoleArn = PutMetricStreamInput.AddMember("RoleArn", _AmazonResourceName)
-
-	PutMetricStreamInput_OutputFormat = PutMetricStreamInput.AddMember("OutputFormat", MetricStreamOutputFormat)
-
-	PutMetricStreamInput_Tags = PutMetricStreamInput.AddMember("Tags", _TagList)
-
-	PutMetricStreamInput_StatisticsConfigurations = PutMetricStreamInput.AddMember("StatisticsConfigurations", _MetricStreamStatisticsConfigurations)
-
-	PutMetricStreamInput_IncludeLinkedAccountsMetrics = PutMetricStreamInput.AddMember("IncludeLinkedAccountsMetrics", _IncludeLinkedAccountsMetrics)
-
-	PutMetricStreamOutput_Arn = PutMetricStreamOutput.AddMember("Arn", _AmazonResourceName)
-
-	SetAlarmStateInput_AlarmName = SetAlarmStateInput.AddMember("AlarmName", _AlarmName)
-
-	SetAlarmStateInput_StateValue = SetAlarmStateInput.AddMember("StateValue", StateValue)
-
-	SetAlarmStateInput_StateReason = SetAlarmStateInput.AddMember("StateReason", _StateReason)
-
-	SetAlarmStateInput_StateReasonData = SetAlarmStateInput.AddMember("StateReasonData", _StateReasonData)
-
-	StartMetricStreamsInput_Names = StartMetricStreamsInput.AddMember("Names", _MetricStreamNames)
-
-	StartOTelEnrichmentInput_IncludeFilters = StartOTelEnrichmentInput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	StartOTelEnrichmentInput_ExcludeFilters = StartOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	StartOTelEnrichmentOutput_IncludeFilters = StartOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	StartOTelEnrichmentOutput_ExcludeFilters = StartOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	StartOTelEnrichmentOutput_CreatedAt = StartOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
-
-	StartOTelEnrichmentOutput_UpdatedAt = StartOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
-
-	StopMetricStreamsInput_Names = StopMetricStreamsInput.AddMember("Names", _MetricStreamNames)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-	UpdateOTelEnrichmentInput_IncludeFilters = UpdateOTelEnrichmentInput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	UpdateOTelEnrichmentInput_ExcludeFilters = UpdateOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	UpdateOTelEnrichmentOutput_IncludeFilters = UpdateOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	UpdateOTelEnrichmentOutput_ExcludeFilters = UpdateOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
-
-	UpdateOTelEnrichmentOutput_CreatedAt = UpdateOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
-
-	UpdateOTelEnrichmentOutput_UpdatedAt = UpdateOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
-
-	UpdateResourceMetricsConfigurationInput_ResourceArn = UpdateResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
-
-	UpdateResourceMetricsConfigurationInput_MetricSelections = UpdateResourceMetricsConfigurationInput.AddMember("MetricSelections", _ResourceMetricSelectionList)
-
-	UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = UpdateResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
-
-}
+var (
+	eAssociateDatasetKmsKey                                                smithy.SchemaExtensions
+	eCreateResourceMetricsConfiguration                                    smithy.SchemaExtensions
+	eDeleteAlarmMuteRule                                                   smithy.SchemaExtensions
+	eDeleteAlarms                                                          smithy.SchemaExtensions
+	eDeleteAnomalyDetector                                                 smithy.SchemaExtensions
+	eDeleteDashboards                                                      smithy.SchemaExtensions
+	eDeleteInsightRules                                                    smithy.SchemaExtensions
+	eDeleteMetricStream                                                    smithy.SchemaExtensions
+	eDeleteResourceMetricsConfiguration                                    smithy.SchemaExtensions
+	eDescribeAlarmContributors                                             smithy.SchemaExtensions
+	eDescribeAlarmHistory                                                  smithy.SchemaExtensions
+	eDescribeAlarms                                                        smithy.SchemaExtensions
+	eDescribeAlarmsForMetric                                               smithy.SchemaExtensions
+	eDescribeAnomalyDetectors                                              smithy.SchemaExtensions
+	eDescribeInsightRules                                                  smithy.SchemaExtensions
+	eDisableAlarmActions                                                   smithy.SchemaExtensions
+	eDisableInsightRules                                                   smithy.SchemaExtensions
+	eDisassociateDatasetKmsKey                                             smithy.SchemaExtensions
+	eEnableAlarmActions                                                    smithy.SchemaExtensions
+	eEnableInsightRules                                                    smithy.SchemaExtensions
+	eGetAlarmMuteRule                                                      smithy.SchemaExtensions
+	eGetDashboard                                                          smithy.SchemaExtensions
+	eGetDataset                                                            smithy.SchemaExtensions
+	eGetInsightRuleReport                                                  smithy.SchemaExtensions
+	eGetMetricData                                                         smithy.SchemaExtensions
+	eGetMetricStatistics                                                   smithy.SchemaExtensions
+	eGetMetricStream                                                       smithy.SchemaExtensions
+	eGetMetricWidgetImage                                                  smithy.SchemaExtensions
+	eGetOTelEnrichment                                                     smithy.SchemaExtensions
+	eGetResourceMetricsConfiguration                                       smithy.SchemaExtensions
+	eListAlarmMuteRules                                                    smithy.SchemaExtensions
+	eListDashboards                                                        smithy.SchemaExtensions
+	eListManagedInsightRules                                               smithy.SchemaExtensions
+	eListMetrics                                                           smithy.SchemaExtensions
+	eListMetricStreams                                                     smithy.SchemaExtensions
+	eListTagsForResource                                                   smithy.SchemaExtensions
+	ePutAlarmMuteRule                                                      smithy.SchemaExtensions
+	ePutAnomalyDetector                                                    smithy.SchemaExtensions
+	ePutCompositeAlarm                                                     smithy.SchemaExtensions
+	ePutDashboard                                                          smithy.SchemaExtensions
+	ePutInsightRule                                                        smithy.SchemaExtensions
+	ePutLogAlarm                                                           smithy.SchemaExtensions
+	ePutManagedInsightRules                                                smithy.SchemaExtensions
+	ePutMetricAlarm                                                        smithy.SchemaExtensions
+	ePutMetricData                                                         smithy.SchemaExtensions
+	ePutMetricStream                                                       smithy.SchemaExtensions
+	eSetAlarmState                                                         smithy.SchemaExtensions
+	eStartMetricStreams                                                    smithy.SchemaExtensions
+	eStartOTelEnrichment                                                   smithy.SchemaExtensions
+	eStopMetricStreams                                                     smithy.SchemaExtensions
+	eStopOTelEnrichment                                                    smithy.SchemaExtensions
+	eTagResource                                                           smithy.SchemaExtensions
+	eUntagResource                                                         smithy.SchemaExtensions
+	eUpdateOTelEnrichment                                                  smithy.SchemaExtensions
+	eUpdateResourceMetricsConfiguration                                    smithy.SchemaExtensions
+	e_GraniteServiceVersion20100801                                        smithy.SchemaExtensions
+	e_AccountId                                                            smithy.SchemaExtensions
+	eActionConfiguration                                                   smithy.SchemaExtensions
+	eActionConfiguration_AlarmTagsPropagation                              smithy.SchemaExtensions
+	e_ActionLogLineCount                                                   smithy.SchemaExtensions
+	e_ActionLogLineRoleArn                                                 smithy.SchemaExtensions
+	e_ActionPrefix                                                         smithy.SchemaExtensions
+	e_ActionsEnabled                                                       smithy.SchemaExtensions
+	eActionsSuppressedBy                                                   smithy.SchemaExtensions
+	eActionsSuppressedBy_WaitPeriod                                        smithy.SchemaExtensions
+	eActionsSuppressedBy_ExtensionPeriod                                   smithy.SchemaExtensions
+	eActionsSuppressedBy_Alarm                                             smithy.SchemaExtensions
+	e_ActionsSuppressedReason                                              smithy.SchemaExtensions
+	e_AggregationExpression                                                smithy.SchemaExtensions
+	e_AlarmArn                                                             smithy.SchemaExtensions
+	eAlarmContributor                                                      smithy.SchemaExtensions
+	eAlarmContributor_ContributorId                                        smithy.SchemaExtensions
+	eAlarmContributor_ContributorAttributes                                smithy.SchemaExtensions
+	eAlarmContributor_StateReason                                          smithy.SchemaExtensions
+	eAlarmContributor_StateTransitionedTimestamp                           smithy.SchemaExtensions
+	e_AlarmContributors                                                    smithy.SchemaExtensions
+	e_AlarmContributors_member                                             smithy.SchemaExtensions
+	e_AlarmDescription                                                     smithy.SchemaExtensions
+	eAlarmHistoryItem                                                      smithy.SchemaExtensions
+	eAlarmHistoryItem_AlarmName                                            smithy.SchemaExtensions
+	eAlarmHistoryItem_AlarmContributorId                                   smithy.SchemaExtensions
+	eAlarmHistoryItem_AlarmType                                            smithy.SchemaExtensions
+	eAlarmHistoryItem_Timestamp                                            smithy.SchemaExtensions
+	eAlarmHistoryItem_HistoryItemType                                      smithy.SchemaExtensions
+	eAlarmHistoryItem_HistorySummary                                       smithy.SchemaExtensions
+	eAlarmHistoryItem_HistoryData                                          smithy.SchemaExtensions
+	eAlarmHistoryItem_AlarmContributorAttributes                           smithy.SchemaExtensions
+	e_AlarmHistoryItems                                                    smithy.SchemaExtensions
+	e_AlarmHistoryItems_member                                             smithy.SchemaExtensions
+	eAlarmMuteRuleStatus                                                   smithy.SchemaExtensions
+	eAlarmMuteRuleStatus_SCHEDULED                                         smithy.SchemaExtensions
+	eAlarmMuteRuleStatus_ACTIVE                                            smithy.SchemaExtensions
+	eAlarmMuteRuleStatus_EXPIRED                                           smithy.SchemaExtensions
+	e_AlarmMuteRuleStatuses                                                smithy.SchemaExtensions
+	e_AlarmMuteRuleStatuses_member                                         smithy.SchemaExtensions
+	e_AlarmMuteRuleSummaries                                               smithy.SchemaExtensions
+	e_AlarmMuteRuleSummaries_member                                        smithy.SchemaExtensions
+	eAlarmMuteRuleSummary                                                  smithy.SchemaExtensions
+	eAlarmMuteRuleSummary_AlarmMuteRuleArn                                 smithy.SchemaExtensions
+	eAlarmMuteRuleSummary_ExpireDate                                       smithy.SchemaExtensions
+	eAlarmMuteRuleSummary_Status                                           smithy.SchemaExtensions
+	eAlarmMuteRuleSummary_MuteType                                         smithy.SchemaExtensions
+	eAlarmMuteRuleSummary_LastUpdatedTimestamp                             smithy.SchemaExtensions
+	e_AlarmName                                                            smithy.SchemaExtensions
+	e_AlarmNamePrefix                                                      smithy.SchemaExtensions
+	e_AlarmNames                                                           smithy.SchemaExtensions
+	e_AlarmNames_member                                                    smithy.SchemaExtensions
+	eAlarmPromQLCriteria                                                   smithy.SchemaExtensions
+	eAlarmPromQLCriteria_Query                                             smithy.SchemaExtensions
+	eAlarmPromQLCriteria_PendingPeriod                                     smithy.SchemaExtensions
+	eAlarmPromQLCriteria_RecoveryPeriod                                    smithy.SchemaExtensions
+	e_AlarmRule                                                            smithy.SchemaExtensions
+	eAlarmTagsPropagation                                                  smithy.SchemaExtensions
+	eAlarmTagsPropagation_Enabled                                          smithy.SchemaExtensions
+	eAlarmTagsPropagation_IncludedTagKeys                                  smithy.SchemaExtensions
+	eAlarmTagsPropagation_ExcludedTagKeys                                  smithy.SchemaExtensions
+	e_AlarmTagsPropagationEnabled                                          smithy.SchemaExtensions
+	e_AlarmTagsPropagationTagKey                                           smithy.SchemaExtensions
+	e_AlarmTagsPropagationTagKeys                                          smithy.SchemaExtensions
+	e_AlarmTagsPropagationTagKeys_member                                   smithy.SchemaExtensions
+	eAlarmType                                                             smithy.SchemaExtensions
+	eAlarmType_CompositeAlarm                                              smithy.SchemaExtensions
+	eAlarmType_MetricAlarm                                                 smithy.SchemaExtensions
+	eAlarmType_LogAlarm                                                    smithy.SchemaExtensions
+	e_AlarmTypes                                                           smithy.SchemaExtensions
+	e_AlarmTypes_member                                                    smithy.SchemaExtensions
+	e_AmazonResourceName                                                   smithy.SchemaExtensions
+	eAnomalyDetector                                                       smithy.SchemaExtensions
+	eAnomalyDetector_AnomalyDetectorId                                     smithy.SchemaExtensions
+	eAnomalyDetector_Namespace                                             smithy.SchemaExtensions
+	eAnomalyDetector_MetricName                                            smithy.SchemaExtensions
+	eAnomalyDetector_Dimensions                                            smithy.SchemaExtensions
+	eAnomalyDetector_Stat                                                  smithy.SchemaExtensions
+	eAnomalyDetector_Configuration                                         smithy.SchemaExtensions
+	eAnomalyDetector_StateValue                                            smithy.SchemaExtensions
+	eAnomalyDetector_MetricCharacteristics                                 smithy.SchemaExtensions
+	eAnomalyDetector_SingleMetricAnomalyDetector                           smithy.SchemaExtensions
+	eAnomalyDetector_MetricMathAnomalyDetector                             smithy.SchemaExtensions
+	eAnomalyDetectorAdaptationSpeed                                        smithy.SchemaExtensions
+	eAnomalyDetectorAdaptationSpeed_FAST                                   smithy.SchemaExtensions
+	eAnomalyDetectorAdaptationSpeed_NORMAL                                 smithy.SchemaExtensions
+	eAnomalyDetectorAdaptationSpeed_SLOW                                   smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration                                          smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration_ExcludedTimeRanges                       smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration_MetricTimezone                           smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration_AdaptationSpeed                          smithy.SchemaExtensions
+	eAnomalyDetectorConfiguration_OutlierFilteringStrength                 smithy.SchemaExtensions
+	e_AnomalyDetectorExcludedTimeRanges                                    smithy.SchemaExtensions
+	e_AnomalyDetectorExcludedTimeRanges_member                             smithy.SchemaExtensions
+	e_AnomalyDetectorId                                                    smithy.SchemaExtensions
+	e_AnomalyDetectorIds                                                   smithy.SchemaExtensions
+	e_AnomalyDetectorIds_member                                            smithy.SchemaExtensions
+	e_AnomalyDetectorMetricStat                                            smithy.SchemaExtensions
+	e_AnomalyDetectorMetricTimezone                                        smithy.SchemaExtensions
+	eAnomalyDetectorOutlierFilteringStrength                               smithy.SchemaExtensions
+	eAnomalyDetectorOutlierFilteringStrength_MINIMAL                       smithy.SchemaExtensions
+	eAnomalyDetectorOutlierFilteringStrength_MODERATE                      smithy.SchemaExtensions
+	eAnomalyDetectorOutlierFilteringStrength_STRICT                        smithy.SchemaExtensions
+	e_AnomalyDetectors                                                     smithy.SchemaExtensions
+	e_AnomalyDetectors_member                                              smithy.SchemaExtensions
+	eAnomalyDetectorStateValue                                             smithy.SchemaExtensions
+	eAnomalyDetectorStateValue_PENDING_TRAINING                            smithy.SchemaExtensions
+	eAnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA                   smithy.SchemaExtensions
+	eAnomalyDetectorStateValue_TRAINED                                     smithy.SchemaExtensions
+	eAnomalyDetectorType                                                   smithy.SchemaExtensions
+	eAnomalyDetectorType_SINGLE_METRIC                                     smithy.SchemaExtensions
+	eAnomalyDetectorType_METRIC_MATH                                       smithy.SchemaExtensions
+	e_AnomalyDetectorTypes                                                 smithy.SchemaExtensions
+	e_AnomalyDetectorTypes_member                                          smithy.SchemaExtensions
+	e_Arn                                                                  smithy.SchemaExtensions
+	e_AttributeName                                                        smithy.SchemaExtensions
+	e_AttributeValue                                                       smithy.SchemaExtensions
+	e_AwsQueryErrorMessage                                                 smithy.SchemaExtensions
+	e_BatchFailures                                                        smithy.SchemaExtensions
+	e_BatchFailures_member                                                 smithy.SchemaExtensions
+	eComparisonOperator                                                    smithy.SchemaExtensions
+	eComparisonOperator_GreaterThanOrEqualToThreshold                      smithy.SchemaExtensions
+	eComparisonOperator_GreaterThanThreshold                               smithy.SchemaExtensions
+	eComparisonOperator_LessThanThreshold                                  smithy.SchemaExtensions
+	eComparisonOperator_LessThanOrEqualToThreshold                         smithy.SchemaExtensions
+	eComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold           smithy.SchemaExtensions
+	eComparisonOperator_LessThanLowerThreshold                             smithy.SchemaExtensions
+	eComparisonOperator_GreaterThanUpperThreshold                          smithy.SchemaExtensions
+	eCompositeAlarm                                                        smithy.SchemaExtensions
+	eCompositeAlarm_ActionsEnabled                                         smithy.SchemaExtensions
+	eCompositeAlarm_AlarmActions                                           smithy.SchemaExtensions
+	eCompositeAlarm_AlarmArn                                               smithy.SchemaExtensions
+	eCompositeAlarm_AlarmConfigurationUpdatedTimestamp                     smithy.SchemaExtensions
+	eCompositeAlarm_AlarmDescription                                       smithy.SchemaExtensions
+	eCompositeAlarm_AlarmName                                              smithy.SchemaExtensions
+	eCompositeAlarm_AlarmRule                                              smithy.SchemaExtensions
+	eCompositeAlarm_InsufficientDataActions                                smithy.SchemaExtensions
+	eCompositeAlarm_OKActions                                              smithy.SchemaExtensions
+	eCompositeAlarm_StateReason                                            smithy.SchemaExtensions
+	eCompositeAlarm_StateReasonData                                        smithy.SchemaExtensions
+	eCompositeAlarm_StateUpdatedTimestamp                                  smithy.SchemaExtensions
+	eCompositeAlarm_StateValue                                             smithy.SchemaExtensions
+	eCompositeAlarm_StateTransitionedTimestamp                             smithy.SchemaExtensions
+	eCompositeAlarm_ActionsSuppressedBy                                    smithy.SchemaExtensions
+	eCompositeAlarm_ActionsSuppressedReason                                smithy.SchemaExtensions
+	eCompositeAlarm_ActionsSuppressor                                      smithy.SchemaExtensions
+	eCompositeAlarm_ActionsSuppressorWaitPeriod                            smithy.SchemaExtensions
+	eCompositeAlarm_ActionsSuppressorExtensionPeriod                       smithy.SchemaExtensions
+	eCompositeAlarm_ActionConfiguration                                    smithy.SchemaExtensions
+	e_CompositeAlarms                                                      smithy.SchemaExtensions
+	e_CompositeAlarms_member                                               smithy.SchemaExtensions
+	eConcurrentModificationException                                       smithy.SchemaExtensions
+	eConcurrentModificationException_Message                               smithy.SchemaExtensions
+	eConflictException                                                     smithy.SchemaExtensions
+	eConflictException_Message                                             smithy.SchemaExtensions
+	e_ContributorAttributes                                                smithy.SchemaExtensions
+	e_ContributorAttributes_key                                            smithy.SchemaExtensions
+	e_ContributorAttributes_value                                          smithy.SchemaExtensions
+	e_ContributorId                                                        smithy.SchemaExtensions
+	e_Counts                                                               smithy.SchemaExtensions
+	e_Counts_member                                                        smithy.SchemaExtensions
+	e_DashboardArn                                                         smithy.SchemaExtensions
+	e_DashboardBody                                                        smithy.SchemaExtensions
+	e_DashboardEntries                                                     smithy.SchemaExtensions
+	e_DashboardEntries_member                                              smithy.SchemaExtensions
+	eDashboardEntry                                                        smithy.SchemaExtensions
+	eDashboardEntry_DashboardName                                          smithy.SchemaExtensions
+	eDashboardEntry_DashboardArn                                           smithy.SchemaExtensions
+	eDashboardEntry_LastModified                                           smithy.SchemaExtensions
+	eDashboardEntry_Size                                                   smithy.SchemaExtensions
+	e_DashboardErrorMessage                                                smithy.SchemaExtensions
+	eDashboardInvalidInputError                                            smithy.SchemaExtensions
+	eDashboardInvalidInputError_message                                    smithy.SchemaExtensions
+	eDashboardInvalidInputError_dashboardValidationMessages                smithy.SchemaExtensions
+	e_DashboardName                                                        smithy.SchemaExtensions
+	e_DashboardNamePrefix                                                  smithy.SchemaExtensions
+	e_DashboardNames                                                       smithy.SchemaExtensions
+	e_DashboardNames_member                                                smithy.SchemaExtensions
+	eDashboardNotFoundError                                                smithy.SchemaExtensions
+	eDashboardNotFoundError_message                                        smithy.SchemaExtensions
+	eDashboardValidationMessage                                            smithy.SchemaExtensions
+	eDashboardValidationMessage_DataPath                                   smithy.SchemaExtensions
+	eDashboardValidationMessage_Message                                    smithy.SchemaExtensions
+	e_DashboardValidationMessages                                          smithy.SchemaExtensions
+	e_DashboardValidationMessages_member                                   smithy.SchemaExtensions
+	e_DataPath                                                             smithy.SchemaExtensions
+	eDatapoint                                                             smithy.SchemaExtensions
+	eDatapoint_Timestamp                                                   smithy.SchemaExtensions
+	eDatapoint_SampleCount                                                 smithy.SchemaExtensions
+	eDatapoint_Average                                                     smithy.SchemaExtensions
+	eDatapoint_Sum                                                         smithy.SchemaExtensions
+	eDatapoint_Minimum                                                     smithy.SchemaExtensions
+	eDatapoint_Maximum                                                     smithy.SchemaExtensions
+	eDatapoint_Unit                                                        smithy.SchemaExtensions
+	eDatapoint_ExtendedStatistics                                          smithy.SchemaExtensions
+	e_Datapoints                                                           smithy.SchemaExtensions
+	e_Datapoints_member                                                    smithy.SchemaExtensions
+	e_DatapointsToAlarm                                                    smithy.SchemaExtensions
+	e_DatapointValue                                                       smithy.SchemaExtensions
+	e_DatapointValueMap                                                    smithy.SchemaExtensions
+	e_DatapointValueMap_key                                                smithy.SchemaExtensions
+	e_DatapointValueMap_value                                              smithy.SchemaExtensions
+	e_DatapointValues                                                      smithy.SchemaExtensions
+	e_DatapointValues_member                                               smithy.SchemaExtensions
+	e_DatasetArn                                                           smithy.SchemaExtensions
+	e_DatasetId                                                            smithy.SchemaExtensions
+	e_DatasetIdentifier                                                    smithy.SchemaExtensions
+	eDimension                                                             smithy.SchemaExtensions
+	eDimension_Name                                                        smithy.SchemaExtensions
+	eDimension_Value                                                       smithy.SchemaExtensions
+	eDimensionFilter                                                       smithy.SchemaExtensions
+	eDimensionFilter_Name                                                  smithy.SchemaExtensions
+	eDimensionFilter_Value                                                 smithy.SchemaExtensions
+	e_DimensionFilters                                                     smithy.SchemaExtensions
+	e_DimensionFilters_member                                              smithy.SchemaExtensions
+	e_DimensionName                                                        smithy.SchemaExtensions
+	e_Dimensions                                                           smithy.SchemaExtensions
+	e_Dimensions_member                                                    smithy.SchemaExtensions
+	e_DimensionValue                                                       smithy.SchemaExtensions
+	e_Duration                                                             smithy.SchemaExtensions
+	e_EndTimeOffset                                                        smithy.SchemaExtensions
+	eEntity                                                                smithy.SchemaExtensions
+	eEntity_KeyAttributes                                                  smithy.SchemaExtensions
+	eEntity_Attributes                                                     smithy.SchemaExtensions
+	e_EntityAttributesMap                                                  smithy.SchemaExtensions
+	e_EntityAttributesMap_key                                              smithy.SchemaExtensions
+	e_EntityAttributesMap_value                                            smithy.SchemaExtensions
+	e_EntityAttributesMapKeyString                                         smithy.SchemaExtensions
+	e_EntityAttributesMapValueString                                       smithy.SchemaExtensions
+	e_EntityKeyAttributesMap                                               smithy.SchemaExtensions
+	e_EntityKeyAttributesMap_key                                           smithy.SchemaExtensions
+	e_EntityKeyAttributesMap_value                                         smithy.SchemaExtensions
+	e_EntityKeyAttributesMapKeyString                                      smithy.SchemaExtensions
+	e_EntityKeyAttributesMapValueString                                    smithy.SchemaExtensions
+	eEntityMetricData                                                      smithy.SchemaExtensions
+	eEntityMetricData_Entity                                               smithy.SchemaExtensions
+	eEntityMetricData_MetricData                                           smithy.SchemaExtensions
+	e_EntityMetricDataList                                                 smithy.SchemaExtensions
+	e_EntityMetricDataList_member                                          smithy.SchemaExtensions
+	e_ErrorMessage                                                         smithy.SchemaExtensions
+	e_EvaluateLowSampleCountPercentile                                     smithy.SchemaExtensions
+	eEvaluationCriteria                                                    smithy.SchemaExtensions
+	eEvaluationCriteria_PromQLCriteria                                     smithy.SchemaExtensions
+	e_EvaluationInterval                                                   smithy.SchemaExtensions
+	e_EvaluationPeriods                                                    smithy.SchemaExtensions
+	eEvaluationState                                                       smithy.SchemaExtensions
+	eEvaluationState_PARTIAL_DATA                                          smithy.SchemaExtensions
+	eEvaluationState_EVALUATION_FAILURE                                    smithy.SchemaExtensions
+	eEvaluationState_EVALUATION_ERROR                                      smithy.SchemaExtensions
+	eEvaluationWindow                                                      smithy.SchemaExtensions
+	eEvaluationWindow_WallClockWindow                                      smithy.SchemaExtensions
+	eEvaluationWindow_SlidingWindow                                        smithy.SchemaExtensions
+	e_ExceptionType                                                        smithy.SchemaExtensions
+	e_Expression                                                           smithy.SchemaExtensions
+	e_ExtendedStatistic                                                    smithy.SchemaExtensions
+	e_ExtendedStatistics                                                   smithy.SchemaExtensions
+	e_ExtendedStatistics_member                                            smithy.SchemaExtensions
+	e_FailureCode                                                          smithy.SchemaExtensions
+	e_FailureDescription                                                   smithy.SchemaExtensions
+	e_FailureResource                                                      smithy.SchemaExtensions
+	e_FaultDescription                                                     smithy.SchemaExtensions
+	e_GetMetricDataLabelTimezone                                           smithy.SchemaExtensions
+	e_GetMetricDataMaxDatapoints                                           smithy.SchemaExtensions
+	e_HistoryData                                                          smithy.SchemaExtensions
+	eHistoryItemType                                                       smithy.SchemaExtensions
+	eHistoryItemType_ConfigurationUpdate                                   smithy.SchemaExtensions
+	eHistoryItemType_StateUpdate                                           smithy.SchemaExtensions
+	eHistoryItemType_Action                                                smithy.SchemaExtensions
+	eHistoryItemType_AlarmContributorStateUpdate                           smithy.SchemaExtensions
+	eHistoryItemType_AlarmContributorAction                                smithy.SchemaExtensions
+	e_HistorySummary                                                       smithy.SchemaExtensions
+	e_IncludeLinkedAccounts                                                smithy.SchemaExtensions
+	e_IncludeLinkedAccountsMetrics                                         smithy.SchemaExtensions
+	eInsightRule                                                           smithy.SchemaExtensions
+	eInsightRule_Name                                                      smithy.SchemaExtensions
+	eInsightRule_State                                                     smithy.SchemaExtensions
+	eInsightRule_Schema                                                    smithy.SchemaExtensions
+	eInsightRule_Definition                                                smithy.SchemaExtensions
+	eInsightRule_ManagedRule                                               smithy.SchemaExtensions
+	eInsightRule_ApplyOnTransformedLogs                                    smithy.SchemaExtensions
+	e_InsightRuleAggregationStatistic                                      smithy.SchemaExtensions
+	eInsightRuleContributor                                                smithy.SchemaExtensions
+	eInsightRuleContributor_Keys                                           smithy.SchemaExtensions
+	eInsightRuleContributor_ApproximateAggregateValue                      smithy.SchemaExtensions
+	eInsightRuleContributor_Datapoints                                     smithy.SchemaExtensions
+	eInsightRuleContributorDatapoint                                       smithy.SchemaExtensions
+	eInsightRuleContributorDatapoint_Timestamp                             smithy.SchemaExtensions
+	eInsightRuleContributorDatapoint_ApproximateValue                      smithy.SchemaExtensions
+	e_InsightRuleContributorDatapoints                                     smithy.SchemaExtensions
+	e_InsightRuleContributorDatapoints_member                              smithy.SchemaExtensions
+	e_InsightRuleContributorKey                                            smithy.SchemaExtensions
+	e_InsightRuleContributorKeyLabel                                       smithy.SchemaExtensions
+	e_InsightRuleContributorKeyLabels                                      smithy.SchemaExtensions
+	e_InsightRuleContributorKeyLabels_member                               smithy.SchemaExtensions
+	e_InsightRuleContributorKeys                                           smithy.SchemaExtensions
+	e_InsightRuleContributorKeys_member                                    smithy.SchemaExtensions
+	e_InsightRuleContributors                                              smithy.SchemaExtensions
+	e_InsightRuleContributors_member                                       smithy.SchemaExtensions
+	e_InsightRuleDefinition                                                smithy.SchemaExtensions
+	e_InsightRuleIsManaged                                                 smithy.SchemaExtensions
+	e_InsightRuleMaxResults                                                smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint                                            smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_Timestamp                                  smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_UniqueContributors                         smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_MaxContributorValue                        smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_SampleCount                                smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_Average                                    smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_Sum                                        smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_Minimum                                    smithy.SchemaExtensions
+	eInsightRuleMetricDatapoint_Maximum                                    smithy.SchemaExtensions
+	e_InsightRuleMetricDatapoints                                          smithy.SchemaExtensions
+	e_InsightRuleMetricDatapoints_member                                   smithy.SchemaExtensions
+	e_InsightRuleMetricList                                                smithy.SchemaExtensions
+	e_InsightRuleMetricList_member                                         smithy.SchemaExtensions
+	e_InsightRuleMetricName                                                smithy.SchemaExtensions
+	e_InsightRuleName                                                      smithy.SchemaExtensions
+	e_InsightRuleNames                                                     smithy.SchemaExtensions
+	e_InsightRuleNames_member                                              smithy.SchemaExtensions
+	e_InsightRuleOnTransformedLogs                                         smithy.SchemaExtensions
+	e_InsightRuleOrderBy                                                   smithy.SchemaExtensions
+	e_InsightRules                                                         smithy.SchemaExtensions
+	e_InsightRules_member                                                  smithy.SchemaExtensions
+	e_InsightRuleSchema                                                    smithy.SchemaExtensions
+	e_InsightRuleState                                                     smithy.SchemaExtensions
+	e_InsightRuleUnboundDouble                                             smithy.SchemaExtensions
+	e_InsightRuleUnboundInteger                                            smithy.SchemaExtensions
+	e_InsightRuleUnboundLong                                               smithy.SchemaExtensions
+	eInternalServiceFault                                                  smithy.SchemaExtensions
+	eInternalServiceFault_Message                                          smithy.SchemaExtensions
+	eInvalidFormatFault                                                    smithy.SchemaExtensions
+	eInvalidFormatFault_message                                            smithy.SchemaExtensions
+	eInvalidNextToken                                                      smithy.SchemaExtensions
+	eInvalidNextToken_message                                              smithy.SchemaExtensions
+	eInvalidParameterCombinationException                                  smithy.SchemaExtensions
+	eInvalidParameterCombinationException_message                          smithy.SchemaExtensions
+	eInvalidParameterValueException                                        smithy.SchemaExtensions
+	eInvalidParameterValueException_message                                smithy.SchemaExtensions
+	eKmsAccessDeniedException                                              smithy.SchemaExtensions
+	eKmsAccessDeniedException_Message                                      smithy.SchemaExtensions
+	e_KmsKeyArn                                                            smithy.SchemaExtensions
+	eKmsKeyDisabledException                                               smithy.SchemaExtensions
+	eKmsKeyDisabledException_Message                                       smithy.SchemaExtensions
+	eKmsKeyNotFoundException                                               smithy.SchemaExtensions
+	eKmsKeyNotFoundException_Message                                       smithy.SchemaExtensions
+	eLabelOptions                                                          smithy.SchemaExtensions
+	eLabelOptions_Timezone                                                 smithy.SchemaExtensions
+	e_LastModified                                                         smithy.SchemaExtensions
+	eLimitExceededException                                                smithy.SchemaExtensions
+	eLimitExceededException_Message                                        smithy.SchemaExtensions
+	eLimitExceededFault                                                    smithy.SchemaExtensions
+	eLimitExceededFault_message                                            smithy.SchemaExtensions
+	e_ListMetricStreamsMaxResults                                          smithy.SchemaExtensions
+	eLogAlarm                                                              smithy.SchemaExtensions
+	eLogAlarm_AlarmName                                                    smithy.SchemaExtensions
+	eLogAlarm_AlarmArn                                                     smithy.SchemaExtensions
+	eLogAlarm_AlarmDescription                                             smithy.SchemaExtensions
+	eLogAlarm_AlarmConfigurationUpdatedTimestamp                           smithy.SchemaExtensions
+	eLogAlarm_ActionsEnabled                                               smithy.SchemaExtensions
+	eLogAlarm_OKActions                                                    smithy.SchemaExtensions
+	eLogAlarm_AlarmActions                                                 smithy.SchemaExtensions
+	eLogAlarm_InsufficientDataActions                                      smithy.SchemaExtensions
+	eLogAlarm_StateValue                                                   smithy.SchemaExtensions
+	eLogAlarm_StateReason                                                  smithy.SchemaExtensions
+	eLogAlarm_StateReasonData                                              smithy.SchemaExtensions
+	eLogAlarm_StateUpdatedTimestamp                                        smithy.SchemaExtensions
+	eLogAlarm_ScheduledQueryConfiguration                                  smithy.SchemaExtensions
+	eLogAlarm_QueryResultsToEvaluate                                       smithy.SchemaExtensions
+	eLogAlarm_QueryResultsToAlarm                                          smithy.SchemaExtensions
+	eLogAlarm_Threshold                                                    smithy.SchemaExtensions
+	eLogAlarm_ComparisonOperator                                           smithy.SchemaExtensions
+	eLogAlarm_TreatMissingData                                             smithy.SchemaExtensions
+	eLogAlarm_StateTransitionedTimestamp                                   smithy.SchemaExtensions
+	eLogAlarm_EvaluationState                                              smithy.SchemaExtensions
+	eLogAlarm_ActionLogLineCount                                           smithy.SchemaExtensions
+	eLogAlarm_ActionLogLineRoleArn                                         smithy.SchemaExtensions
+	eLogAlarm_WarmUpConfiguration                                          smithy.SchemaExtensions
+	eLogAlarm_ActionConfiguration                                          smithy.SchemaExtensions
+	e_LogAlarms                                                            smithy.SchemaExtensions
+	e_LogAlarms_member                                                     smithy.SchemaExtensions
+	e_LogGroupIdentifiers                                                  smithy.SchemaExtensions
+	e_LogGroupIdentifiers_member                                           smithy.SchemaExtensions
+	eManagedRule                                                           smithy.SchemaExtensions
+	eManagedRule_TemplateName                                              smithy.SchemaExtensions
+	eManagedRule_ResourceARN                                               smithy.SchemaExtensions
+	eManagedRule_Tags                                                      smithy.SchemaExtensions
+	eManagedRuleDescription                                                smithy.SchemaExtensions
+	eManagedRuleDescription_TemplateName                                   smithy.SchemaExtensions
+	eManagedRuleDescription_ResourceARN                                    smithy.SchemaExtensions
+	eManagedRuleDescription_RuleState                                      smithy.SchemaExtensions
+	e_ManagedRuleDescriptions                                              smithy.SchemaExtensions
+	e_ManagedRuleDescriptions_member                                       smithy.SchemaExtensions
+	e_ManagedRules                                                         smithy.SchemaExtensions
+	e_ManagedRules_member                                                  smithy.SchemaExtensions
+	eManagedRuleState                                                      smithy.SchemaExtensions
+	eManagedRuleState_RuleName                                             smithy.SchemaExtensions
+	eManagedRuleState_State                                                smithy.SchemaExtensions
+	e_MaxRecords                                                           smithy.SchemaExtensions
+	e_MaxReturnedResultsCount                                              smithy.SchemaExtensions
+	e_Message                                                              smithy.SchemaExtensions
+	eMessageData                                                           smithy.SchemaExtensions
+	eMessageData_Code                                                      smithy.SchemaExtensions
+	eMessageData_Value                                                     smithy.SchemaExtensions
+	e_MessageDataCode                                                      smithy.SchemaExtensions
+	e_MessageDataValue                                                     smithy.SchemaExtensions
+	eMetric                                                                smithy.SchemaExtensions
+	eMetric_Namespace                                                      smithy.SchemaExtensions
+	eMetric_MetricName                                                     smithy.SchemaExtensions
+	eMetric_Dimensions                                                     smithy.SchemaExtensions
+	eMetricAlarm                                                           smithy.SchemaExtensions
+	eMetricAlarm_AlarmName                                                 smithy.SchemaExtensions
+	eMetricAlarm_AlarmArn                                                  smithy.SchemaExtensions
+	eMetricAlarm_AlarmDescription                                          smithy.SchemaExtensions
+	eMetricAlarm_AlarmConfigurationUpdatedTimestamp                        smithy.SchemaExtensions
+	eMetricAlarm_ActionsEnabled                                            smithy.SchemaExtensions
+	eMetricAlarm_OKActions                                                 smithy.SchemaExtensions
+	eMetricAlarm_AlarmActions                                              smithy.SchemaExtensions
+	eMetricAlarm_InsufficientDataActions                                   smithy.SchemaExtensions
+	eMetricAlarm_StateValue                                                smithy.SchemaExtensions
+	eMetricAlarm_StateReason                                               smithy.SchemaExtensions
+	eMetricAlarm_StateReasonData                                           smithy.SchemaExtensions
+	eMetricAlarm_StateUpdatedTimestamp                                     smithy.SchemaExtensions
+	eMetricAlarm_MetricName                                                smithy.SchemaExtensions
+	eMetricAlarm_Namespace                                                 smithy.SchemaExtensions
+	eMetricAlarm_Statistic                                                 smithy.SchemaExtensions
+	eMetricAlarm_ExtendedStatistic                                         smithy.SchemaExtensions
+	eMetricAlarm_Dimensions                                                smithy.SchemaExtensions
+	eMetricAlarm_Period                                                    smithy.SchemaExtensions
+	eMetricAlarm_Unit                                                      smithy.SchemaExtensions
+	eMetricAlarm_EvaluationPeriods                                         smithy.SchemaExtensions
+	eMetricAlarm_DatapointsToAlarm                                         smithy.SchemaExtensions
+	eMetricAlarm_Threshold                                                 smithy.SchemaExtensions
+	eMetricAlarm_ComparisonOperator                                        smithy.SchemaExtensions
+	eMetricAlarm_TreatMissingData                                          smithy.SchemaExtensions
+	eMetricAlarm_EvaluateLowSampleCountPercentile                          smithy.SchemaExtensions
+	eMetricAlarm_Metrics                                                   smithy.SchemaExtensions
+	eMetricAlarm_ThresholdMetricId                                         smithy.SchemaExtensions
+	eMetricAlarm_EvaluationState                                           smithy.SchemaExtensions
+	eMetricAlarm_StateTransitionedTimestamp                                smithy.SchemaExtensions
+	eMetricAlarm_EvaluationWindow                                          smithy.SchemaExtensions
+	eMetricAlarm_WarmUpConfiguration                                       smithy.SchemaExtensions
+	eMetricAlarm_EvaluationCriteria                                        smithy.SchemaExtensions
+	eMetricAlarm_EvaluationInterval                                        smithy.SchemaExtensions
+	eMetricAlarm_ActionConfiguration                                       smithy.SchemaExtensions
+	e_MetricAlarms                                                         smithy.SchemaExtensions
+	e_MetricAlarms_member                                                  smithy.SchemaExtensions
+	eMetricCharacteristics                                                 smithy.SchemaExtensions
+	eMetricCharacteristics_PeriodicSpikes                                  smithy.SchemaExtensions
+	e_MetricData                                                           smithy.SchemaExtensions
+	e_MetricData_member                                                    smithy.SchemaExtensions
+	e_MetricDataQueries                                                    smithy.SchemaExtensions
+	e_MetricDataQueries_member                                             smithy.SchemaExtensions
+	eMetricDataQuery                                                       smithy.SchemaExtensions
+	eMetricDataQuery_Id                                                    smithy.SchemaExtensions
+	eMetricDataQuery_MetricStat                                            smithy.SchemaExtensions
+	eMetricDataQuery_Expression                                            smithy.SchemaExtensions
+	eMetricDataQuery_Label                                                 smithy.SchemaExtensions
+	eMetricDataQuery_ReturnData                                            smithy.SchemaExtensions
+	eMetricDataQuery_Period                                                smithy.SchemaExtensions
+	eMetricDataQuery_AccountId                                             smithy.SchemaExtensions
+	eMetricDataResult                                                      smithy.SchemaExtensions
+	eMetricDataResult_Id                                                   smithy.SchemaExtensions
+	eMetricDataResult_Label                                                smithy.SchemaExtensions
+	eMetricDataResult_Timestamps                                           smithy.SchemaExtensions
+	eMetricDataResult_Values                                               smithy.SchemaExtensions
+	eMetricDataResult_StatusCode                                           smithy.SchemaExtensions
+	eMetricDataResult_Messages                                             smithy.SchemaExtensions
+	e_MetricDataResultMessages                                             smithy.SchemaExtensions
+	e_MetricDataResultMessages_member                                      smithy.SchemaExtensions
+	e_MetricDataResults                                                    smithy.SchemaExtensions
+	e_MetricDataResults_member                                             smithy.SchemaExtensions
+	eMetricDatum                                                           smithy.SchemaExtensions
+	eMetricDatum_MetricName                                                smithy.SchemaExtensions
+	eMetricDatum_Dimensions                                                smithy.SchemaExtensions
+	eMetricDatum_Timestamp                                                 smithy.SchemaExtensions
+	eMetricDatum_Value                                                     smithy.SchemaExtensions
+	eMetricDatum_StatisticValues                                           smithy.SchemaExtensions
+	eMetricDatum_Values                                                    smithy.SchemaExtensions
+	eMetricDatum_Counts                                                    smithy.SchemaExtensions
+	eMetricDatum_Unit                                                      smithy.SchemaExtensions
+	eMetricDatum_StorageResolution                                         smithy.SchemaExtensions
+	e_MetricExpression                                                     smithy.SchemaExtensions
+	e_MetricId                                                             smithy.SchemaExtensions
+	e_MetricLabel                                                          smithy.SchemaExtensions
+	eMetricMathAnomalyDetector                                             smithy.SchemaExtensions
+	eMetricMathAnomalyDetector_MetricDataQueries                           smithy.SchemaExtensions
+	e_MetricName                                                           smithy.SchemaExtensions
+	e_MetricNameList                                                       smithy.SchemaExtensions
+	e_MetricNameList_member                                                smithy.SchemaExtensions
+	e_Metrics                                                              smithy.SchemaExtensions
+	e_Metrics_member                                                       smithy.SchemaExtensions
+	eMetricStat                                                            smithy.SchemaExtensions
+	eMetricStat_Metric                                                     smithy.SchemaExtensions
+	eMetricStat_Period                                                     smithy.SchemaExtensions
+	eMetricStat_Stat                                                       smithy.SchemaExtensions
+	eMetricStat_Unit                                                       smithy.SchemaExtensions
+	e_MetricStreamEntries                                                  smithy.SchemaExtensions
+	e_MetricStreamEntries_member                                           smithy.SchemaExtensions
+	eMetricStreamEntry                                                     smithy.SchemaExtensions
+	eMetricStreamEntry_Arn                                                 smithy.SchemaExtensions
+	eMetricStreamEntry_CreationDate                                        smithy.SchemaExtensions
+	eMetricStreamEntry_LastUpdateDate                                      smithy.SchemaExtensions
+	eMetricStreamEntry_Name                                                smithy.SchemaExtensions
+	eMetricStreamEntry_FirehoseArn                                         smithy.SchemaExtensions
+	eMetricStreamEntry_State                                               smithy.SchemaExtensions
+	eMetricStreamEntry_OutputFormat                                        smithy.SchemaExtensions
+	eMetricStreamFilter                                                    smithy.SchemaExtensions
+	eMetricStreamFilter_Namespace                                          smithy.SchemaExtensions
+	eMetricStreamFilter_MetricNames                                        smithy.SchemaExtensions
+	e_MetricStreamFilterMetricNames                                        smithy.SchemaExtensions
+	e_MetricStreamFilterMetricNames_member                                 smithy.SchemaExtensions
+	e_MetricStreamFilters                                                  smithy.SchemaExtensions
+	e_MetricStreamFilters_member                                           smithy.SchemaExtensions
+	e_MetricStreamName                                                     smithy.SchemaExtensions
+	e_MetricStreamNames                                                    smithy.SchemaExtensions
+	e_MetricStreamNames_member                                             smithy.SchemaExtensions
+	eMetricStreamOutputFormat                                              smithy.SchemaExtensions
+	eMetricStreamOutputFormat_JSON                                         smithy.SchemaExtensions
+	eMetricStreamOutputFormat_OPEN_TELEMETRY_0_7                           smithy.SchemaExtensions
+	eMetricStreamOutputFormat_OPEN_TELEMETRY_1_0                           smithy.SchemaExtensions
+	e_MetricStreamState                                                    smithy.SchemaExtensions
+	e_MetricStreamStatistic                                                smithy.SchemaExtensions
+	e_MetricStreamStatisticsAdditionalStatistics                           smithy.SchemaExtensions
+	e_MetricStreamStatisticsAdditionalStatistics_member                    smithy.SchemaExtensions
+	eMetricStreamStatisticsConfiguration                                   smithy.SchemaExtensions
+	eMetricStreamStatisticsConfiguration_IncludeMetrics                    smithy.SchemaExtensions
+	eMetricStreamStatisticsConfiguration_AdditionalStatistics              smithy.SchemaExtensions
+	e_MetricStreamStatisticsConfigurations                                 smithy.SchemaExtensions
+	e_MetricStreamStatisticsConfigurations_member                          smithy.SchemaExtensions
+	e_MetricStreamStatisticsIncludeMetrics                                 smithy.SchemaExtensions
+	e_MetricStreamStatisticsIncludeMetrics_member                          smithy.SchemaExtensions
+	eMetricStreamStatisticsMetric                                          smithy.SchemaExtensions
+	eMetricStreamStatisticsMetric_Namespace                                smithy.SchemaExtensions
+	eMetricStreamStatisticsMetric_MetricName                               smithy.SchemaExtensions
+	e_MetricWidget                                                         smithy.SchemaExtensions
+	e_MetricWidgetImage                                                    smithy.SchemaExtensions
+	eMissingRequiredParameterException                                     smithy.SchemaExtensions
+	eMissingRequiredParameterException_message                             smithy.SchemaExtensions
+	e_MuteTargetAlarmNameList                                              smithy.SchemaExtensions
+	e_MuteTargetAlarmNameList_member                                       smithy.SchemaExtensions
+	eMuteTargets                                                           smithy.SchemaExtensions
+	eMuteTargets_AlarmNames                                                smithy.SchemaExtensions
+	e_MuteType                                                             smithy.SchemaExtensions
+	e_Name                                                                 smithy.SchemaExtensions
+	e_Namespace                                                            smithy.SchemaExtensions
+	e_NextToken                                                            smithy.SchemaExtensions
+	e_OnlyStartEvaluatingAfterWarmUpPeriodEnds                             smithy.SchemaExtensions
+	e_OTelEnrichmentMetricNameList                                         smithy.SchemaExtensions
+	e_OTelEnrichmentMetricNameList_member                                  smithy.SchemaExtensions
+	eOTelEnrichmentMetricSelector                                          smithy.SchemaExtensions
+	eOTelEnrichmentMetricSelector_Namespace                                smithy.SchemaExtensions
+	eOTelEnrichmentMetricSelector_MetricNames                              smithy.SchemaExtensions
+	e_OTelEnrichmentMetricSelectorList                                     smithy.SchemaExtensions
+	e_OTelEnrichmentMetricSelectorList_member                              smithy.SchemaExtensions
+	eOTelEnrichmentStatus                                                  smithy.SchemaExtensions
+	eOTelEnrichmentStatus_RUNNING                                          smithy.SchemaExtensions
+	eOTelEnrichmentStatus_STOPPED                                          smithy.SchemaExtensions
+	e_OutputFormat                                                         smithy.SchemaExtensions
+	e_OwningAccounts                                                       smithy.SchemaExtensions
+	e_OwningAccounts_member                                                smithy.SchemaExtensions
+	ePartialFailure                                                        smithy.SchemaExtensions
+	ePartialFailure_FailureResource                                        smithy.SchemaExtensions
+	ePartialFailure_ExceptionType                                          smithy.SchemaExtensions
+	ePartialFailure_FailureCode                                            smithy.SchemaExtensions
+	ePartialFailure_FailureDescription                                     smithy.SchemaExtensions
+	e_PendingPeriod                                                        smithy.SchemaExtensions
+	e_Period                                                               smithy.SchemaExtensions
+	e_PeriodicSpikes                                                       smithy.SchemaExtensions
+	e_Query                                                                smithy.SchemaExtensions
+	e_QueryResultsToAlarm                                                  smithy.SchemaExtensions
+	e_QueryResultsToEvaluate                                               smithy.SchemaExtensions
+	e_QueryString                                                          smithy.SchemaExtensions
+	eRange                                                                 smithy.SchemaExtensions
+	eRange_StartTime                                                       smithy.SchemaExtensions
+	eRange_EndTime                                                         smithy.SchemaExtensions
+	eRecentlyActive                                                        smithy.SchemaExtensions
+	eRecentlyActive_PT3H                                                   smithy.SchemaExtensions
+	e_RecoveryPeriod                                                       smithy.SchemaExtensions
+	e_ResourceArn                                                          smithy.SchemaExtensions
+	eResourceConflict                                                      smithy.SchemaExtensions
+	eResourceConflict_message                                              smithy.SchemaExtensions
+	e_ResourceId                                                           smithy.SchemaExtensions
+	e_ResourceList                                                         smithy.SchemaExtensions
+	e_ResourceList_member                                                  smithy.SchemaExtensions
+	eResourceMetricsConfiguration                                          smithy.SchemaExtensions
+	eResourceMetricsConfiguration_ResourceArn                              smithy.SchemaExtensions
+	eResourceMetricsConfiguration_CreatedAt                                smithy.SchemaExtensions
+	eResourceMetricsConfiguration_UpdatedAt                                smithy.SchemaExtensions
+	eResourceMetricsConfiguration_MetricSelections                         smithy.SchemaExtensions
+	eResourceMetricSelection                                               smithy.SchemaExtensions
+	eResourceMetricSelection_IncludeMetrics                                smithy.SchemaExtensions
+	e_ResourceMetricSelectionList                                          smithy.SchemaExtensions
+	e_ResourceMetricSelectionList_member                                   smithy.SchemaExtensions
+	e_ResourceName                                                         smithy.SchemaExtensions
+	eResourceNotFound                                                      smithy.SchemaExtensions
+	eResourceNotFound_message                                              smithy.SchemaExtensions
+	eResourceNotFoundException                                             smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                                smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                                  smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                     smithy.SchemaExtensions
+	e_ResourceType                                                         smithy.SchemaExtensions
+	e_ReturnData                                                           smithy.SchemaExtensions
+	eRule                                                                  smithy.SchemaExtensions
+	eRule_Schedule                                                         smithy.SchemaExtensions
+	eScanBy                                                                smithy.SchemaExtensions
+	eScanBy_TIMESTAMP_DESCENDING                                           smithy.SchemaExtensions
+	eScanBy_TIMESTAMP_ASCENDING                                            smithy.SchemaExtensions
+	eSchedule                                                              smithy.SchemaExtensions
+	eSchedule_Expression                                                   smithy.SchemaExtensions
+	eSchedule_Duration                                                     smithy.SchemaExtensions
+	eSchedule_Timezone                                                     smithy.SchemaExtensions
+	eScheduleConfiguration                                                 smithy.SchemaExtensions
+	eScheduleConfiguration_ScheduleExpression                              smithy.SchemaExtensions
+	eScheduleConfiguration_StartTimeOffset                                 smithy.SchemaExtensions
+	eScheduleConfiguration_EndTimeOffset                                   smithy.SchemaExtensions
+	eScheduledQueryConfiguration                                           smithy.SchemaExtensions
+	eScheduledQueryConfiguration_QueryString                               smithy.SchemaExtensions
+	eScheduledQueryConfiguration_LogGroupIdentifiers                       smithy.SchemaExtensions
+	eScheduledQueryConfiguration_QueryARN                                  smithy.SchemaExtensions
+	eScheduledQueryConfiguration_ScheduledQueryRoleARN                     smithy.SchemaExtensions
+	eScheduledQueryConfiguration_ScheduleConfiguration                     smithy.SchemaExtensions
+	eScheduledQueryConfiguration_AggregationExpression                     smithy.SchemaExtensions
+	eScheduledQueryConfiguration_Tags                                      smithy.SchemaExtensions
+	e_ScheduleExpression                                                   smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector                                           smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector_AccountId                                 smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector_Namespace                                 smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector_MetricName                                smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector_Dimensions                                smithy.SchemaExtensions
+	eSingleMetricAnomalyDetector_Stat                                      smithy.SchemaExtensions
+	e_Size                                                                 smithy.SchemaExtensions
+	eSlidingWindow                                                         smithy.SchemaExtensions
+	eStandardUnit                                                          smithy.SchemaExtensions
+	eStandardUnit_Seconds                                                  smithy.SchemaExtensions
+	eStandardUnit_Microseconds                                             smithy.SchemaExtensions
+	eStandardUnit_Milliseconds                                             smithy.SchemaExtensions
+	eStandardUnit_Bytes                                                    smithy.SchemaExtensions
+	eStandardUnit_Kilobytes                                                smithy.SchemaExtensions
+	eStandardUnit_Megabytes                                                smithy.SchemaExtensions
+	eStandardUnit_Gigabytes                                                smithy.SchemaExtensions
+	eStandardUnit_Terabytes                                                smithy.SchemaExtensions
+	eStandardUnit_Bits                                                     smithy.SchemaExtensions
+	eStandardUnit_Kilobits                                                 smithy.SchemaExtensions
+	eStandardUnit_Megabits                                                 smithy.SchemaExtensions
+	eStandardUnit_Gigabits                                                 smithy.SchemaExtensions
+	eStandardUnit_Terabits                                                 smithy.SchemaExtensions
+	eStandardUnit_Percent                                                  smithy.SchemaExtensions
+	eStandardUnit_Count                                                    smithy.SchemaExtensions
+	eStandardUnit_Bytes_Second                                             smithy.SchemaExtensions
+	eStandardUnit_Kilobytes_Second                                         smithy.SchemaExtensions
+	eStandardUnit_Megabytes_Second                                         smithy.SchemaExtensions
+	eStandardUnit_Gigabytes_Second                                         smithy.SchemaExtensions
+	eStandardUnit_Terabytes_Second                                         smithy.SchemaExtensions
+	eStandardUnit_Bits_Second                                              smithy.SchemaExtensions
+	eStandardUnit_Kilobits_Second                                          smithy.SchemaExtensions
+	eStandardUnit_Megabits_Second                                          smithy.SchemaExtensions
+	eStandardUnit_Gigabits_Second                                          smithy.SchemaExtensions
+	eStandardUnit_Terabits_Second                                          smithy.SchemaExtensions
+	eStandardUnit_Count_Second                                             smithy.SchemaExtensions
+	eStandardUnit_None                                                     smithy.SchemaExtensions
+	e_StartTimeOffset                                                      smithy.SchemaExtensions
+	e_Stat                                                                 smithy.SchemaExtensions
+	e_StateReason                                                          smithy.SchemaExtensions
+	e_StateReasonData                                                      smithy.SchemaExtensions
+	eStateValue                                                            smithy.SchemaExtensions
+	eStateValue_OK                                                         smithy.SchemaExtensions
+	eStateValue_ALARM                                                      smithy.SchemaExtensions
+	eStateValue_INSUFFICIENT_DATA                                          smithy.SchemaExtensions
+	eStatistic                                                             smithy.SchemaExtensions
+	eStatistic_SampleCount                                                 smithy.SchemaExtensions
+	eStatistic_Average                                                     smithy.SchemaExtensions
+	eStatistic_Sum                                                         smithy.SchemaExtensions
+	eStatistic_Minimum                                                     smithy.SchemaExtensions
+	eStatistic_Maximum                                                     smithy.SchemaExtensions
+	e_Statistics                                                           smithy.SchemaExtensions
+	e_Statistics_member                                                    smithy.SchemaExtensions
+	eStatisticSet                                                          smithy.SchemaExtensions
+	eStatisticSet_SampleCount                                              smithy.SchemaExtensions
+	eStatisticSet_Sum                                                      smithy.SchemaExtensions
+	eStatisticSet_Minimum                                                  smithy.SchemaExtensions
+	eStatisticSet_Maximum                                                  smithy.SchemaExtensions
+	eStatusCode                                                            smithy.SchemaExtensions
+	eStatusCode_COMPLETE                                                   smithy.SchemaExtensions
+	eStatusCode_INTERNAL_ERROR                                             smithy.SchemaExtensions
+	eStatusCode_PARTIAL_DATA                                               smithy.SchemaExtensions
+	eStatusCode_FORBIDDEN                                                  smithy.SchemaExtensions
+	e_StorageResolution                                                    smithy.SchemaExtensions
+	e_StrictEntityValidation                                               smithy.SchemaExtensions
+	e_String                                                               smithy.SchemaExtensions
+	e_SuppressorPeriod                                                     smithy.SchemaExtensions
+	eTag                                                                   smithy.SchemaExtensions
+	eTag_Key                                                               smithy.SchemaExtensions
+	eTag_Value                                                             smithy.SchemaExtensions
+	e_TagKey                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                    smithy.SchemaExtensions
+	e_TagList                                                              smithy.SchemaExtensions
+	e_TagList_member                                                       smithy.SchemaExtensions
+	e_TagValue                                                             smithy.SchemaExtensions
+	e_TemplateName                                                         smithy.SchemaExtensions
+	e_Threshold                                                            smithy.SchemaExtensions
+	e_Timestamp                                                            smithy.SchemaExtensions
+	e_Timestamps                                                           smithy.SchemaExtensions
+	e_Timestamps_member                                                    smithy.SchemaExtensions
+	e_Timezone                                                             smithy.SchemaExtensions
+	e_TreatMissingData                                                     smithy.SchemaExtensions
+	eValidationException                                                   smithy.SchemaExtensions
+	eValidationException_message                                           smithy.SchemaExtensions
+	e_ValidationExceptionMessage                                           smithy.SchemaExtensions
+	e_Values                                                               smithy.SchemaExtensions
+	e_Values_member                                                        smithy.SchemaExtensions
+	eWallClockWindow                                                       smithy.SchemaExtensions
+	eWallClockWindow_Timezone                                              smithy.SchemaExtensions
+	eWarmUpConfiguration                                                   smithy.SchemaExtensions
+	eWarmUpConfiguration_WarmUpPeriodDurationInMinutes                     smithy.SchemaExtensions
+	eWarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds          smithy.SchemaExtensions
+	e_WarmUpPeriodDurationInMinutes                                        smithy.SchemaExtensions
+	eAssociateDatasetKmsKeyInput                                           smithy.SchemaExtensions
+	eAssociateDatasetKmsKeyInput_DatasetIdentifier                         smithy.SchemaExtensions
+	eAssociateDatasetKmsKeyInput_KmsKeyArn                                 smithy.SchemaExtensions
+	eAssociateDatasetKmsKeyOutput                                          smithy.SchemaExtensions
+	eCreateResourceMetricsConfigurationInput                               smithy.SchemaExtensions
+	eCreateResourceMetricsConfigurationInput_ResourceArn                   smithy.SchemaExtensions
+	eCreateResourceMetricsConfigurationInput_MetricSelections              smithy.SchemaExtensions
+	eCreateResourceMetricsConfigurationOutput                              smithy.SchemaExtensions
+	eCreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration smithy.SchemaExtensions
+	eDeleteAlarmMuteRuleInput                                              smithy.SchemaExtensions
+	eDeleteAlarmMuteRuleInput_AlarmMuteRuleName                            smithy.SchemaExtensions
+	eDeleteAlarmsInput                                                     smithy.SchemaExtensions
+	eDeleteAlarmsInput_AlarmNames                                          smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput                                            smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_AnomalyDetectorId                          smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_Namespace                                  smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_MetricName                                 smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_Dimensions                                 smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_Stat                                       smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_SingleMetricAnomalyDetector                smithy.SchemaExtensions
+	eDeleteAnomalyDetectorInput_MetricMathAnomalyDetector                  smithy.SchemaExtensions
+	eDeleteAnomalyDetectorOutput                                           smithy.SchemaExtensions
+	eDeleteDashboardsInput                                                 smithy.SchemaExtensions
+	eDeleteDashboardsInput_DashboardNames                                  smithy.SchemaExtensions
+	eDeleteDashboardsOutput                                                smithy.SchemaExtensions
+	eDeleteInsightRulesInput                                               smithy.SchemaExtensions
+	eDeleteInsightRulesInput_RuleNames                                     smithy.SchemaExtensions
+	eDeleteInsightRulesOutput                                              smithy.SchemaExtensions
+	eDeleteInsightRulesOutput_Failures                                     smithy.SchemaExtensions
+	eDeleteMetricStreamInput                                               smithy.SchemaExtensions
+	eDeleteMetricStreamInput_Name                                          smithy.SchemaExtensions
+	eDeleteMetricStreamOutput                                              smithy.SchemaExtensions
+	eDeleteResourceMetricsConfigurationInput                               smithy.SchemaExtensions
+	eDeleteResourceMetricsConfigurationInput_ResourceArn                   smithy.SchemaExtensions
+	eDeleteResourceMetricsConfigurationOutput                              smithy.SchemaExtensions
+	eDescribeAlarmContributorsInput                                        smithy.SchemaExtensions
+	eDescribeAlarmContributorsInput_AlarmName                              smithy.SchemaExtensions
+	eDescribeAlarmContributorsInput_NextToken                              smithy.SchemaExtensions
+	eDescribeAlarmContributorsOutput                                       smithy.SchemaExtensions
+	eDescribeAlarmContributorsOutput_AlarmContributors                     smithy.SchemaExtensions
+	eDescribeAlarmContributorsOutput_NextToken                             smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput                                             smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_AlarmName                                   smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_AlarmContributorId                          smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_AlarmTypes                                  smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_HistoryItemType                             smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_StartDate                                   smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_EndDate                                     smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_MaxRecords                                  smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_NextToken                                   smithy.SchemaExtensions
+	eDescribeAlarmHistoryInput_ScanBy                                      smithy.SchemaExtensions
+	eDescribeAlarmHistoryOutput                                            smithy.SchemaExtensions
+	eDescribeAlarmHistoryOutput_AlarmHistoryItems                          smithy.SchemaExtensions
+	eDescribeAlarmHistoryOutput_NextToken                                  smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput                                          smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_MetricName                               smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_Namespace                                smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_Statistic                                smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_ExtendedStatistic                        smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_Dimensions                               smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_Period                                   smithy.SchemaExtensions
+	eDescribeAlarmsForMetricInput_Unit                                     smithy.SchemaExtensions
+	eDescribeAlarmsForMetricOutput                                         smithy.SchemaExtensions
+	eDescribeAlarmsForMetricOutput_MetricAlarms                            smithy.SchemaExtensions
+	eDescribeAlarmsInput                                                   smithy.SchemaExtensions
+	eDescribeAlarmsInput_AlarmNames                                        smithy.SchemaExtensions
+	eDescribeAlarmsInput_AlarmNamePrefix                                   smithy.SchemaExtensions
+	eDescribeAlarmsInput_AlarmTypes                                        smithy.SchemaExtensions
+	eDescribeAlarmsInput_ChildrenOfAlarmName                               smithy.SchemaExtensions
+	eDescribeAlarmsInput_ParentsOfAlarmName                                smithy.SchemaExtensions
+	eDescribeAlarmsInput_StateValue                                        smithy.SchemaExtensions
+	eDescribeAlarmsInput_ActionPrefix                                      smithy.SchemaExtensions
+	eDescribeAlarmsInput_MaxRecords                                        smithy.SchemaExtensions
+	eDescribeAlarmsInput_NextToken                                         smithy.SchemaExtensions
+	eDescribeAlarmsOutput                                                  smithy.SchemaExtensions
+	eDescribeAlarmsOutput_CompositeAlarms                                  smithy.SchemaExtensions
+	eDescribeAlarmsOutput_MetricAlarms                                     smithy.SchemaExtensions
+	eDescribeAlarmsOutput_LogAlarms                                        smithy.SchemaExtensions
+	eDescribeAlarmsOutput_NextToken                                        smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput                                         smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_AnomalyDetectorIds                      smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_NextToken                               smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_MaxResults                              smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_Namespace                               smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_MetricName                              smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_Dimensions                              smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsInput_AnomalyDetectorTypes                    smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsOutput                                        smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsOutput_AnomalyDetectors                       smithy.SchemaExtensions
+	eDescribeAnomalyDetectorsOutput_NextToken                              smithy.SchemaExtensions
+	eDescribeInsightRulesInput                                             smithy.SchemaExtensions
+	eDescribeInsightRulesInput_NextToken                                   smithy.SchemaExtensions
+	eDescribeInsightRulesInput_MaxResults                                  smithy.SchemaExtensions
+	eDescribeInsightRulesOutput                                            smithy.SchemaExtensions
+	eDescribeInsightRulesOutput_NextToken                                  smithy.SchemaExtensions
+	eDescribeInsightRulesOutput_InsightRules                               smithy.SchemaExtensions
+	eDisableAlarmActionsInput                                              smithy.SchemaExtensions
+	eDisableAlarmActionsInput_AlarmNames                                   smithy.SchemaExtensions
+	eDisableInsightRulesInput                                              smithy.SchemaExtensions
+	eDisableInsightRulesInput_RuleNames                                    smithy.SchemaExtensions
+	eDisableInsightRulesOutput                                             smithy.SchemaExtensions
+	eDisableInsightRulesOutput_Failures                                    smithy.SchemaExtensions
+	eDisassociateDatasetKmsKeyInput                                        smithy.SchemaExtensions
+	eDisassociateDatasetKmsKeyInput_DatasetIdentifier                      smithy.SchemaExtensions
+	eDisassociateDatasetKmsKeyOutput                                       smithy.SchemaExtensions
+	eEnableAlarmActionsInput                                               smithy.SchemaExtensions
+	eEnableAlarmActionsInput_AlarmNames                                    smithy.SchemaExtensions
+	eEnableInsightRulesInput                                               smithy.SchemaExtensions
+	eEnableInsightRulesInput_RuleNames                                     smithy.SchemaExtensions
+	eEnableInsightRulesOutput                                              smithy.SchemaExtensions
+	eEnableInsightRulesOutput_Failures                                     smithy.SchemaExtensions
+	eGetAlarmMuteRuleInput                                                 smithy.SchemaExtensions
+	eGetAlarmMuteRuleInput_AlarmMuteRuleName                               smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput                                                smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_Name                                           smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_AlarmMuteRuleArn                               smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_Description                                    smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_Rule                                           smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_MuteTargets                                    smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_StartDate                                      smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_ExpireDate                                     smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_Status                                         smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_LastUpdatedTimestamp                           smithy.SchemaExtensions
+	eGetAlarmMuteRuleOutput_MuteType                                       smithy.SchemaExtensions
+	eGetDashboardInput                                                     smithy.SchemaExtensions
+	eGetDashboardInput_DashboardName                                       smithy.SchemaExtensions
+	eGetDashboardOutput                                                    smithy.SchemaExtensions
+	eGetDashboardOutput_DashboardArn                                       smithy.SchemaExtensions
+	eGetDashboardOutput_DashboardBody                                      smithy.SchemaExtensions
+	eGetDashboardOutput_DashboardName                                      smithy.SchemaExtensions
+	eGetDatasetInput                                                       smithy.SchemaExtensions
+	eGetDatasetInput_DatasetIdentifier                                     smithy.SchemaExtensions
+	eGetDatasetOutput                                                      smithy.SchemaExtensions
+	eGetDatasetOutput_DatasetId                                            smithy.SchemaExtensions
+	eGetDatasetOutput_Arn                                                  smithy.SchemaExtensions
+	eGetDatasetOutput_KmsKeyArn                                            smithy.SchemaExtensions
+	eGetInsightRuleReportInput                                             smithy.SchemaExtensions
+	eGetInsightRuleReportInput_RuleName                                    smithy.SchemaExtensions
+	eGetInsightRuleReportInput_StartTime                                   smithy.SchemaExtensions
+	eGetInsightRuleReportInput_EndTime                                     smithy.SchemaExtensions
+	eGetInsightRuleReportInput_Period                                      smithy.SchemaExtensions
+	eGetInsightRuleReportInput_MaxContributorCount                         smithy.SchemaExtensions
+	eGetInsightRuleReportInput_Metrics                                     smithy.SchemaExtensions
+	eGetInsightRuleReportInput_OrderBy                                     smithy.SchemaExtensions
+	eGetInsightRuleReportOutput                                            smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_KeyLabels                                  smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_AggregationStatistic                       smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_AggregateValue                             smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_ApproximateUniqueCount                     smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_Contributors                               smithy.SchemaExtensions
+	eGetInsightRuleReportOutput_MetricDatapoints                           smithy.SchemaExtensions
+	eGetMetricDataInput                                                    smithy.SchemaExtensions
+	eGetMetricDataInput_MetricDataQueries                                  smithy.SchemaExtensions
+	eGetMetricDataInput_StartTime                                          smithy.SchemaExtensions
+	eGetMetricDataInput_EndTime                                            smithy.SchemaExtensions
+	eGetMetricDataInput_NextToken                                          smithy.SchemaExtensions
+	eGetMetricDataInput_ScanBy                                             smithy.SchemaExtensions
+	eGetMetricDataInput_MaxDatapoints                                      smithy.SchemaExtensions
+	eGetMetricDataInput_LabelOptions                                       smithy.SchemaExtensions
+	eGetMetricDataOutput                                                   smithy.SchemaExtensions
+	eGetMetricDataOutput_MetricDataResults                                 smithy.SchemaExtensions
+	eGetMetricDataOutput_NextToken                                         smithy.SchemaExtensions
+	eGetMetricDataOutput_Messages                                          smithy.SchemaExtensions
+	eGetMetricStatisticsInput                                              smithy.SchemaExtensions
+	eGetMetricStatisticsInput_Namespace                                    smithy.SchemaExtensions
+	eGetMetricStatisticsInput_MetricName                                   smithy.SchemaExtensions
+	eGetMetricStatisticsInput_Dimensions                                   smithy.SchemaExtensions
+	eGetMetricStatisticsInput_StartTime                                    smithy.SchemaExtensions
+	eGetMetricStatisticsInput_EndTime                                      smithy.SchemaExtensions
+	eGetMetricStatisticsInput_Period                                       smithy.SchemaExtensions
+	eGetMetricStatisticsInput_Statistics                                   smithy.SchemaExtensions
+	eGetMetricStatisticsInput_ExtendedStatistics                           smithy.SchemaExtensions
+	eGetMetricStatisticsInput_Unit                                         smithy.SchemaExtensions
+	eGetMetricStatisticsOutput                                             smithy.SchemaExtensions
+	eGetMetricStatisticsOutput_Label                                       smithy.SchemaExtensions
+	eGetMetricStatisticsOutput_Datapoints                                  smithy.SchemaExtensions
+	eGetMetricStreamInput                                                  smithy.SchemaExtensions
+	eGetMetricStreamInput_Name                                             smithy.SchemaExtensions
+	eGetMetricStreamOutput                                                 smithy.SchemaExtensions
+	eGetMetricStreamOutput_Arn                                             smithy.SchemaExtensions
+	eGetMetricStreamOutput_Name                                            smithy.SchemaExtensions
+	eGetMetricStreamOutput_IncludeFilters                                  smithy.SchemaExtensions
+	eGetMetricStreamOutput_ExcludeFilters                                  smithy.SchemaExtensions
+	eGetMetricStreamOutput_FirehoseArn                                     smithy.SchemaExtensions
+	eGetMetricStreamOutput_RoleArn                                         smithy.SchemaExtensions
+	eGetMetricStreamOutput_State                                           smithy.SchemaExtensions
+	eGetMetricStreamOutput_CreationDate                                    smithy.SchemaExtensions
+	eGetMetricStreamOutput_LastUpdateDate                                  smithy.SchemaExtensions
+	eGetMetricStreamOutput_OutputFormat                                    smithy.SchemaExtensions
+	eGetMetricStreamOutput_StatisticsConfigurations                        smithy.SchemaExtensions
+	eGetMetricStreamOutput_IncludeLinkedAccountsMetrics                    smithy.SchemaExtensions
+	eGetMetricWidgetImageInput                                             smithy.SchemaExtensions
+	eGetMetricWidgetImageInput_MetricWidget                                smithy.SchemaExtensions
+	eGetMetricWidgetImageInput_OutputFormat                                smithy.SchemaExtensions
+	eGetMetricWidgetImageOutput                                            smithy.SchemaExtensions
+	eGetMetricWidgetImageOutput_MetricWidgetImage                          smithy.SchemaExtensions
+	eGetOTelEnrichmentInput                                                smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput                                               smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput_Status                                        smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput_IncludeFilters                                smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput_ExcludeFilters                                smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput_CreatedAt                                     smithy.SchemaExtensions
+	eGetOTelEnrichmentOutput_UpdatedAt                                     smithy.SchemaExtensions
+	eGetResourceMetricsConfigurationInput                                  smithy.SchemaExtensions
+	eGetResourceMetricsConfigurationInput_ResourceArn                      smithy.SchemaExtensions
+	eGetResourceMetricsConfigurationOutput                                 smithy.SchemaExtensions
+	eGetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration    smithy.SchemaExtensions
+	eListAlarmMuteRulesInput                                               smithy.SchemaExtensions
+	eListAlarmMuteRulesInput_AlarmName                                     smithy.SchemaExtensions
+	eListAlarmMuteRulesInput_Statuses                                      smithy.SchemaExtensions
+	eListAlarmMuteRulesInput_MaxRecords                                    smithy.SchemaExtensions
+	eListAlarmMuteRulesInput_NextToken                                     smithy.SchemaExtensions
+	eListAlarmMuteRulesOutput                                              smithy.SchemaExtensions
+	eListAlarmMuteRulesOutput_AlarmMuteRuleSummaries                       smithy.SchemaExtensions
+	eListAlarmMuteRulesOutput_NextToken                                    smithy.SchemaExtensions
+	eListDashboardsInput                                                   smithy.SchemaExtensions
+	eListDashboardsInput_DashboardNamePrefix                               smithy.SchemaExtensions
+	eListDashboardsInput_NextToken                                         smithy.SchemaExtensions
+	eListDashboardsOutput                                                  smithy.SchemaExtensions
+	eListDashboardsOutput_DashboardEntries                                 smithy.SchemaExtensions
+	eListDashboardsOutput_NextToken                                        smithy.SchemaExtensions
+	eListManagedInsightRulesInput                                          smithy.SchemaExtensions
+	eListManagedInsightRulesInput_ResourceARN                              smithy.SchemaExtensions
+	eListManagedInsightRulesInput_NextToken                                smithy.SchemaExtensions
+	eListManagedInsightRulesInput_MaxResults                               smithy.SchemaExtensions
+	eListManagedInsightRulesOutput                                         smithy.SchemaExtensions
+	eListManagedInsightRulesOutput_ManagedRules                            smithy.SchemaExtensions
+	eListManagedInsightRulesOutput_NextToken                               smithy.SchemaExtensions
+	eListMetricsInput                                                      smithy.SchemaExtensions
+	eListMetricsInput_Namespace                                            smithy.SchemaExtensions
+	eListMetricsInput_MetricName                                           smithy.SchemaExtensions
+	eListMetricsInput_Dimensions                                           smithy.SchemaExtensions
+	eListMetricsInput_NextToken                                            smithy.SchemaExtensions
+	eListMetricsInput_RecentlyActive                                       smithy.SchemaExtensions
+	eListMetricsInput_IncludeLinkedAccounts                                smithy.SchemaExtensions
+	eListMetricsInput_OwningAccount                                        smithy.SchemaExtensions
+	eListMetricsOutput                                                     smithy.SchemaExtensions
+	eListMetricsOutput_Metrics                                             smithy.SchemaExtensions
+	eListMetricsOutput_NextToken                                           smithy.SchemaExtensions
+	eListMetricsOutput_OwningAccounts                                      smithy.SchemaExtensions
+	eListMetricStreamsInput                                                smithy.SchemaExtensions
+	eListMetricStreamsInput_NextToken                                      smithy.SchemaExtensions
+	eListMetricStreamsInput_MaxResults                                     smithy.SchemaExtensions
+	eListMetricStreamsOutput                                               smithy.SchemaExtensions
+	eListMetricStreamsOutput_NextToken                                     smithy.SchemaExtensions
+	eListMetricStreamsOutput_Entries                                       smithy.SchemaExtensions
+	eListTagsForResourceInput                                              smithy.SchemaExtensions
+	eListTagsForResourceInput_ResourceARN                                  smithy.SchemaExtensions
+	eListTagsForResourceOutput                                             smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags                                        smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput                                                 smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_Name                                            smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_Description                                     smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_Rule                                            smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_MuteTargets                                     smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_Tags                                            smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_StartDate                                       smithy.SchemaExtensions
+	ePutAlarmMuteRuleInput_ExpireDate                                      smithy.SchemaExtensions
+	ePutAnomalyDetectorInput                                               smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_Namespace                                     smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_MetricName                                    smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_Dimensions                                    smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_Stat                                          smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_Configuration                                 smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_MetricCharacteristics                         smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_SingleMetricAnomalyDetector                   smithy.SchemaExtensions
+	ePutAnomalyDetectorInput_MetricMathAnomalyDetector                     smithy.SchemaExtensions
+	ePutAnomalyDetectorOutput                                              smithy.SchemaExtensions
+	ePutAnomalyDetectorOutput_AnomalyDetectorId                            smithy.SchemaExtensions
+	ePutCompositeAlarmInput                                                smithy.SchemaExtensions
+	ePutCompositeAlarmInput_ActionsEnabled                                 smithy.SchemaExtensions
+	ePutCompositeAlarmInput_AlarmActions                                   smithy.SchemaExtensions
+	ePutCompositeAlarmInput_AlarmDescription                               smithy.SchemaExtensions
+	ePutCompositeAlarmInput_AlarmName                                      smithy.SchemaExtensions
+	ePutCompositeAlarmInput_AlarmRule                                      smithy.SchemaExtensions
+	ePutCompositeAlarmInput_InsufficientDataActions                        smithy.SchemaExtensions
+	ePutCompositeAlarmInput_OKActions                                      smithy.SchemaExtensions
+	ePutCompositeAlarmInput_Tags                                           smithy.SchemaExtensions
+	ePutCompositeAlarmInput_ActionsSuppressor                              smithy.SchemaExtensions
+	ePutCompositeAlarmInput_ActionsSuppressorWaitPeriod                    smithy.SchemaExtensions
+	ePutCompositeAlarmInput_ActionsSuppressorExtensionPeriod               smithy.SchemaExtensions
+	ePutCompositeAlarmInput_ActionConfiguration                            smithy.SchemaExtensions
+	ePutDashboardInput                                                     smithy.SchemaExtensions
+	ePutDashboardInput_DashboardName                                       smithy.SchemaExtensions
+	ePutDashboardInput_DashboardBody                                       smithy.SchemaExtensions
+	ePutDashboardInput_Tags                                                smithy.SchemaExtensions
+	ePutDashboardOutput                                                    smithy.SchemaExtensions
+	ePutDashboardOutput_DashboardValidationMessages                        smithy.SchemaExtensions
+	ePutInsightRuleInput                                                   smithy.SchemaExtensions
+	ePutInsightRuleInput_RuleName                                          smithy.SchemaExtensions
+	ePutInsightRuleInput_RuleState                                         smithy.SchemaExtensions
+	ePutInsightRuleInput_RuleDefinition                                    smithy.SchemaExtensions
+	ePutInsightRuleInput_Tags                                              smithy.SchemaExtensions
+	ePutInsightRuleInput_ApplyOnTransformedLogs                            smithy.SchemaExtensions
+	ePutInsightRuleOutput                                                  smithy.SchemaExtensions
+	ePutLogAlarmInput                                                      smithy.SchemaExtensions
+	ePutLogAlarmInput_AlarmName                                            smithy.SchemaExtensions
+	ePutLogAlarmInput_AlarmDescription                                     smithy.SchemaExtensions
+	ePutLogAlarmInput_ScheduledQueryConfiguration                          smithy.SchemaExtensions
+	ePutLogAlarmInput_ActionLogLineCount                                   smithy.SchemaExtensions
+	ePutLogAlarmInput_ActionLogLineRoleArn                                 smithy.SchemaExtensions
+	ePutLogAlarmInput_ActionsEnabled                                       smithy.SchemaExtensions
+	ePutLogAlarmInput_OKActions                                            smithy.SchemaExtensions
+	ePutLogAlarmInput_AlarmActions                                         smithy.SchemaExtensions
+	ePutLogAlarmInput_InsufficientDataActions                              smithy.SchemaExtensions
+	ePutLogAlarmInput_QueryResultsToEvaluate                               smithy.SchemaExtensions
+	ePutLogAlarmInput_QueryResultsToAlarm                                  smithy.SchemaExtensions
+	ePutLogAlarmInput_Threshold                                            smithy.SchemaExtensions
+	ePutLogAlarmInput_ComparisonOperator                                   smithy.SchemaExtensions
+	ePutLogAlarmInput_TreatMissingData                                     smithy.SchemaExtensions
+	ePutLogAlarmInput_Tags                                                 smithy.SchemaExtensions
+	ePutLogAlarmInput_WarmUpConfiguration                                  smithy.SchemaExtensions
+	ePutLogAlarmInput_ActionConfiguration                                  smithy.SchemaExtensions
+	ePutManagedInsightRulesInput                                           smithy.SchemaExtensions
+	ePutManagedInsightRulesInput_ManagedRules                              smithy.SchemaExtensions
+	ePutManagedInsightRulesOutput                                          smithy.SchemaExtensions
+	ePutManagedInsightRulesOutput_Failures                                 smithy.SchemaExtensions
+	ePutMetricAlarmInput                                                   smithy.SchemaExtensions
+	ePutMetricAlarmInput_AlarmName                                         smithy.SchemaExtensions
+	ePutMetricAlarmInput_AlarmDescription                                  smithy.SchemaExtensions
+	ePutMetricAlarmInput_ActionsEnabled                                    smithy.SchemaExtensions
+	ePutMetricAlarmInput_OKActions                                         smithy.SchemaExtensions
+	ePutMetricAlarmInput_AlarmActions                                      smithy.SchemaExtensions
+	ePutMetricAlarmInput_InsufficientDataActions                           smithy.SchemaExtensions
+	ePutMetricAlarmInput_MetricName                                        smithy.SchemaExtensions
+	ePutMetricAlarmInput_Namespace                                         smithy.SchemaExtensions
+	ePutMetricAlarmInput_Statistic                                         smithy.SchemaExtensions
+	ePutMetricAlarmInput_ExtendedStatistic                                 smithy.SchemaExtensions
+	ePutMetricAlarmInput_Dimensions                                        smithy.SchemaExtensions
+	ePutMetricAlarmInput_Period                                            smithy.SchemaExtensions
+	ePutMetricAlarmInput_Unit                                              smithy.SchemaExtensions
+	ePutMetricAlarmInput_EvaluationPeriods                                 smithy.SchemaExtensions
+	ePutMetricAlarmInput_DatapointsToAlarm                                 smithy.SchemaExtensions
+	ePutMetricAlarmInput_Threshold                                         smithy.SchemaExtensions
+	ePutMetricAlarmInput_ComparisonOperator                                smithy.SchemaExtensions
+	ePutMetricAlarmInput_TreatMissingData                                  smithy.SchemaExtensions
+	ePutMetricAlarmInput_EvaluateLowSampleCountPercentile                  smithy.SchemaExtensions
+	ePutMetricAlarmInput_Metrics                                           smithy.SchemaExtensions
+	ePutMetricAlarmInput_Tags                                              smithy.SchemaExtensions
+	ePutMetricAlarmInput_ThresholdMetricId                                 smithy.SchemaExtensions
+	ePutMetricAlarmInput_EvaluationWindow                                  smithy.SchemaExtensions
+	ePutMetricAlarmInput_WarmUpConfiguration                               smithy.SchemaExtensions
+	ePutMetricAlarmInput_EvaluationCriteria                                smithy.SchemaExtensions
+	ePutMetricAlarmInput_EvaluationInterval                                smithy.SchemaExtensions
+	ePutMetricAlarmInput_ActionConfiguration                               smithy.SchemaExtensions
+	ePutMetricDataInput                                                    smithy.SchemaExtensions
+	ePutMetricDataInput_Namespace                                          smithy.SchemaExtensions
+	ePutMetricDataInput_MetricData                                         smithy.SchemaExtensions
+	ePutMetricDataInput_EntityMetricData                                   smithy.SchemaExtensions
+	ePutMetricDataInput_StrictEntityValidation                             smithy.SchemaExtensions
+	ePutMetricStreamInput                                                  smithy.SchemaExtensions
+	ePutMetricStreamInput_Name                                             smithy.SchemaExtensions
+	ePutMetricStreamInput_IncludeFilters                                   smithy.SchemaExtensions
+	ePutMetricStreamInput_ExcludeFilters                                   smithy.SchemaExtensions
+	ePutMetricStreamInput_FirehoseArn                                      smithy.SchemaExtensions
+	ePutMetricStreamInput_RoleArn                                          smithy.SchemaExtensions
+	ePutMetricStreamInput_OutputFormat                                     smithy.SchemaExtensions
+	ePutMetricStreamInput_Tags                                             smithy.SchemaExtensions
+	ePutMetricStreamInput_StatisticsConfigurations                         smithy.SchemaExtensions
+	ePutMetricStreamInput_IncludeLinkedAccountsMetrics                     smithy.SchemaExtensions
+	ePutMetricStreamOutput                                                 smithy.SchemaExtensions
+	ePutMetricStreamOutput_Arn                                             smithy.SchemaExtensions
+	eSetAlarmStateInput                                                    smithy.SchemaExtensions
+	eSetAlarmStateInput_AlarmName                                          smithy.SchemaExtensions
+	eSetAlarmStateInput_StateValue                                         smithy.SchemaExtensions
+	eSetAlarmStateInput_StateReason                                        smithy.SchemaExtensions
+	eSetAlarmStateInput_StateReasonData                                    smithy.SchemaExtensions
+	eStartMetricStreamsInput                                               smithy.SchemaExtensions
+	eStartMetricStreamsInput_Names                                         smithy.SchemaExtensions
+	eStartMetricStreamsOutput                                              smithy.SchemaExtensions
+	eStartOTelEnrichmentInput                                              smithy.SchemaExtensions
+	eStartOTelEnrichmentInput_IncludeFilters                               smithy.SchemaExtensions
+	eStartOTelEnrichmentInput_ExcludeFilters                               smithy.SchemaExtensions
+	eStartOTelEnrichmentOutput                                             smithy.SchemaExtensions
+	eStartOTelEnrichmentOutput_IncludeFilters                              smithy.SchemaExtensions
+	eStartOTelEnrichmentOutput_ExcludeFilters                              smithy.SchemaExtensions
+	eStartOTelEnrichmentOutput_CreatedAt                                   smithy.SchemaExtensions
+	eStartOTelEnrichmentOutput_UpdatedAt                                   smithy.SchemaExtensions
+	eStopMetricStreamsInput                                                smithy.SchemaExtensions
+	eStopMetricStreamsInput_Names                                          smithy.SchemaExtensions
+	eStopMetricStreamsOutput                                               smithy.SchemaExtensions
+	eStopOTelEnrichmentInput                                               smithy.SchemaExtensions
+	eStopOTelEnrichmentOutput                                              smithy.SchemaExtensions
+	eTagResourceInput                                                      smithy.SchemaExtensions
+	eTagResourceInput_ResourceARN                                          smithy.SchemaExtensions
+	eTagResourceInput_Tags                                                 smithy.SchemaExtensions
+	eTagResourceOutput                                                     smithy.SchemaExtensions
+	eUntagResourceInput                                                    smithy.SchemaExtensions
+	eUntagResourceInput_ResourceARN                                        smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys                                            smithy.SchemaExtensions
+	eUntagResourceOutput                                                   smithy.SchemaExtensions
+	eUpdateOTelEnrichmentInput                                             smithy.SchemaExtensions
+	eUpdateOTelEnrichmentInput_IncludeFilters                              smithy.SchemaExtensions
+	eUpdateOTelEnrichmentInput_ExcludeFilters                              smithy.SchemaExtensions
+	eUpdateOTelEnrichmentOutput                                            smithy.SchemaExtensions
+	eUpdateOTelEnrichmentOutput_IncludeFilters                             smithy.SchemaExtensions
+	eUpdateOTelEnrichmentOutput_ExcludeFilters                             smithy.SchemaExtensions
+	eUpdateOTelEnrichmentOutput_CreatedAt                                  smithy.SchemaExtensions
+	eUpdateOTelEnrichmentOutput_UpdatedAt                                  smithy.SchemaExtensions
+	eUpdateResourceMetricsConfigurationInput                               smithy.SchemaExtensions
+	eUpdateResourceMetricsConfigurationInput_ResourceArn                   smithy.SchemaExtensions
+	eUpdateResourceMetricsConfigurationInput_MetricSelections              smithy.SchemaExtensions
+	eUpdateResourceMetricsConfigurationOutput                              smithy.SchemaExtensions
+	eUpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration smithy.SchemaExtensions
+)
+
+var (
+	iAssociateDatasetKmsKey                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AssociateDatasetKmsKey"}
+	iCreateResourceMetricsConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "CreateResourceMetricsConfiguration"}
+	iDeleteAlarmMuteRule                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAlarmMuteRule"}
+	iDeleteAlarms                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAlarms"}
+	iDeleteAnomalyDetector                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAnomalyDetector"}
+	iDeleteDashboards                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteDashboards"}
+	iDeleteInsightRules                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteInsightRules"}
+	iDeleteMetricStream                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteMetricStream"}
+	iDeleteResourceMetricsConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteResourceMetricsConfiguration"}
+	iDescribeAlarmContributors                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmContributors"}
+	iDescribeAlarmHistory                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmHistory"}
+	iDescribeAlarms                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarms"}
+	iDescribeAlarmsForMetric                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmsForMetric"}
+	iDescribeAnomalyDetectors                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAnomalyDetectors"}
+	iDescribeInsightRules                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeInsightRules"}
+	iDisableAlarmActions                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisableAlarmActions"}
+	iDisableInsightRules                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisableInsightRules"}
+	iDisassociateDatasetKmsKey                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisassociateDatasetKmsKey"}
+	iEnableAlarmActions                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EnableAlarmActions"}
+	iEnableInsightRules                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EnableInsightRules"}
+	iGetAlarmMuteRule                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetAlarmMuteRule"}
+	iGetDashboard                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDashboard"}
+	iGetDataset                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDataset"}
+	iGetInsightRuleReport                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetInsightRuleReport"}
+	iGetMetricData                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricData"}
+	iGetMetricStatistics                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStatistics"}
+	iGetMetricStream                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStream"}
+	iGetMetricWidgetImage                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricWidgetImage"}
+	iGetOTelEnrichment                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetOTelEnrichment"}
+	iGetResourceMetricsConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetResourceMetricsConfiguration"}
+	iListAlarmMuteRules                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListAlarmMuteRules"}
+	iListDashboards                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListDashboards"}
+	iListManagedInsightRules                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListManagedInsightRules"}
+	iListMetrics                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetrics"}
+	iListMetricStreams                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricStreams"}
+	iListTagsForResource                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListTagsForResource"}
+	iPutAlarmMuteRule                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutAlarmMuteRule"}
+	iPutAnomalyDetector                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutAnomalyDetector"}
+	iPutCompositeAlarm                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutCompositeAlarm"}
+	iPutDashboard                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutDashboard"}
+	iPutInsightRule                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutInsightRule"}
+	iPutLogAlarm                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutLogAlarm"}
+	iPutManagedInsightRules                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutManagedInsightRules"}
+	iPutMetricAlarm                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricAlarm"}
+	iPutMetricData                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricData"}
+	iPutMetricStream                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricStream"}
+	iSetAlarmState                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "SetAlarmState"}
+	iStartMetricStreams                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartMetricStreams"}
+	iStartOTelEnrichment                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartOTelEnrichment"}
+	iStopMetricStreams                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopMetricStreams"}
+	iStopOTelEnrichment                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopOTelEnrichment"}
+	iTagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UntagResource"}
+	iUpdateOTelEnrichment                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateOTelEnrichment"}
+	iUpdateResourceMetricsConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateResourceMetricsConfiguration"}
+	i_GraniteServiceVersion20100801              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GraniteServiceVersion20100801"}
+	i_AccountId                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AccountId"}
+	iActionConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionConfiguration"}
+	i_ActionLogLineCount                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionLogLineCount"}
+	i_ActionLogLineRoleArn                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionLogLineRoleArn"}
+	i_ActionPrefix                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionPrefix"}
+	i_ActionsEnabled                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionsEnabled"}
+	iActionsSuppressedBy                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionsSuppressedBy"}
+	i_ActionsSuppressedReason                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ActionsSuppressedReason"}
+	i_AggregationExpression                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AggregationExpression"}
+	i_AlarmArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmArn"}
+	iAlarmContributor                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmContributor"}
+	i_AlarmContributors                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmContributors"}
+	i_AlarmDescription                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmDescription"}
+	iAlarmHistoryItem                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmHistoryItem"}
+	i_AlarmHistoryItems                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmHistoryItems"}
+	iAlarmMuteRuleStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmMuteRuleStatus"}
+	i_AlarmMuteRuleStatuses                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmMuteRuleStatuses"}
+	i_AlarmMuteRuleSummaries                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmMuteRuleSummaries"}
+	iAlarmMuteRuleSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmMuteRuleSummary"}
+	i_AlarmName                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmName"}
+	i_AlarmNamePrefix                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmNamePrefix"}
+	i_AlarmNames                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmNames"}
+	iAlarmPromQLCriteria                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmPromQLCriteria"}
+	i_AlarmRule                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmRule"}
+	iAlarmTagsPropagation                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmTagsPropagation"}
+	i_AlarmTagsPropagationEnabled                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmTagsPropagationEnabled"}
+	i_AlarmTagsPropagationTagKey                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmTagsPropagationTagKey"}
+	i_AlarmTagsPropagationTagKeys                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmTagsPropagationTagKeys"}
+	iAlarmType                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmType"}
+	i_AlarmTypes                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AlarmTypes"}
+	i_AmazonResourceName                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AmazonResourceName"}
+	iAnomalyDetector                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetector"}
+	iAnomalyDetectorAdaptationSpeed              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorAdaptationSpeed"}
+	iAnomalyDetectorConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorConfiguration"}
+	i_AnomalyDetectorExcludedTimeRanges          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorExcludedTimeRanges"}
+	i_AnomalyDetectorId                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorId"}
+	i_AnomalyDetectorIds                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorIds"}
+	i_AnomalyDetectorMetricStat                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorMetricStat"}
+	i_AnomalyDetectorMetricTimezone              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorMetricTimezone"}
+	iAnomalyDetectorOutlierFilteringStrength     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorOutlierFilteringStrength"}
+	i_AnomalyDetectors                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectors"}
+	iAnomalyDetectorStateValue                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorStateValue"}
+	iAnomalyDetectorType                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorType"}
+	i_AnomalyDetectorTypes                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AnomalyDetectorTypes"}
+	i_Arn                                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Arn"}
+	i_AttributeName                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AttributeName"}
+	i_AttributeValue                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AttributeValue"}
+	i_AwsQueryErrorMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AwsQueryErrorMessage"}
+	i_BatchFailures                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "BatchFailures"}
+	iComparisonOperator                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ComparisonOperator"}
+	iCompositeAlarm                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "CompositeAlarm"}
+	i_CompositeAlarms                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "CompositeAlarms"}
+	iConcurrentModificationException             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ConcurrentModificationException"}
+	iConflictException                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ConflictException"}
+	i_ContributorAttributes                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ContributorAttributes"}
+	i_ContributorId                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ContributorId"}
+	i_Counts                                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Counts"}
+	i_DashboardArn                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardArn"}
+	i_DashboardBody                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardBody"}
+	i_DashboardEntries                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardEntries"}
+	iDashboardEntry                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardEntry"}
+	i_DashboardErrorMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardErrorMessage"}
+	iDashboardInvalidInputError                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardInvalidInputError"}
+	i_DashboardName                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardName"}
+	i_DashboardNamePrefix                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardNamePrefix"}
+	i_DashboardNames                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardNames"}
+	iDashboardNotFoundError                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardNotFoundError"}
+	iDashboardValidationMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardValidationMessage"}
+	i_DashboardValidationMessages                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DashboardValidationMessages"}
+	i_DataPath                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DataPath"}
+	iDatapoint                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Datapoint"}
+	i_Datapoints                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Datapoints"}
+	i_DatapointsToAlarm                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatapointsToAlarm"}
+	i_DatapointValue                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatapointValue"}
+	i_DatapointValueMap                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatapointValueMap"}
+	i_DatapointValues                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatapointValues"}
+	i_DatasetArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatasetArn"}
+	i_DatasetId                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatasetId"}
+	i_DatasetIdentifier                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DatasetIdentifier"}
+	iDimension                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Dimension"}
+	iDimensionFilter                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DimensionFilter"}
+	i_DimensionFilters                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DimensionFilters"}
+	i_DimensionName                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DimensionName"}
+	i_Dimensions                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Dimensions"}
+	i_DimensionValue                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DimensionValue"}
+	i_Duration                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Duration"}
+	i_EndTimeOffset                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EndTimeOffset"}
+	iEntity                                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Entity"}
+	i_EntityAttributesMap                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityAttributesMap"}
+	i_EntityAttributesMapKeyString               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityAttributesMapKeyString"}
+	i_EntityAttributesMapValueString             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityAttributesMapValueString"}
+	i_EntityKeyAttributesMap                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityKeyAttributesMap"}
+	i_EntityKeyAttributesMapKeyString            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityKeyAttributesMapKeyString"}
+	i_EntityKeyAttributesMapValueString          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityKeyAttributesMapValueString"}
+	iEntityMetricData                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityMetricData"}
+	i_EntityMetricDataList                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EntityMetricDataList"}
+	i_ErrorMessage                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ErrorMessage"}
+	i_EvaluateLowSampleCountPercentile           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluateLowSampleCountPercentile"}
+	iEvaluationCriteria                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluationCriteria"}
+	i_EvaluationInterval                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluationInterval"}
+	i_EvaluationPeriods                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluationPeriods"}
+	iEvaluationState                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluationState"}
+	iEvaluationWindow                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EvaluationWindow"}
+	i_ExceptionType                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ExceptionType"}
+	i_Expression                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Expression"}
+	i_ExtendedStatistic                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ExtendedStatistic"}
+	i_ExtendedStatistics                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ExtendedStatistics"}
+	i_FailureCode                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "FailureCode"}
+	i_FailureDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "FailureDescription"}
+	i_FailureResource                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "FailureResource"}
+	i_FaultDescription                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "FaultDescription"}
+	i_GetMetricDataLabelTimezone                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricDataLabelTimezone"}
+	i_GetMetricDataMaxDatapoints                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricDataMaxDatapoints"}
+	i_HistoryData                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "HistoryData"}
+	iHistoryItemType                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "HistoryItemType"}
+	i_HistorySummary                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "HistorySummary"}
+	i_IncludeLinkedAccounts                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "IncludeLinkedAccounts"}
+	i_IncludeLinkedAccountsMetrics               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "IncludeLinkedAccountsMetrics"}
+	iInsightRule                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRule"}
+	i_InsightRuleAggregationStatistic            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleAggregationStatistic"}
+	iInsightRuleContributor                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributor"}
+	iInsightRuleContributorDatapoint             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorDatapoint"}
+	i_InsightRuleContributorDatapoints           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorDatapoints"}
+	i_InsightRuleContributorKey                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorKey"}
+	i_InsightRuleContributorKeyLabel             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorKeyLabel"}
+	i_InsightRuleContributorKeyLabels            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorKeyLabels"}
+	i_InsightRuleContributorKeys                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributorKeys"}
+	i_InsightRuleContributors                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleContributors"}
+	i_InsightRuleDefinition                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleDefinition"}
+	i_InsightRuleIsManaged                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleIsManaged"}
+	i_InsightRuleMaxResults                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleMaxResults"}
+	iInsightRuleMetricDatapoint                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleMetricDatapoint"}
+	i_InsightRuleMetricDatapoints                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleMetricDatapoints"}
+	i_InsightRuleMetricList                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleMetricList"}
+	i_InsightRuleMetricName                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleMetricName"}
+	i_InsightRuleName                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleName"}
+	i_InsightRuleNames                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleNames"}
+	i_InsightRuleOnTransformedLogs               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleOnTransformedLogs"}
+	i_InsightRuleOrderBy                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleOrderBy"}
+	i_InsightRules                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRules"}
+	i_InsightRuleSchema                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleSchema"}
+	i_InsightRuleState                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleState"}
+	i_InsightRuleUnboundDouble                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleUnboundDouble"}
+	i_InsightRuleUnboundInteger                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleUnboundInteger"}
+	i_InsightRuleUnboundLong                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InsightRuleUnboundLong"}
+	iInternalServiceFault                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InternalServiceFault"}
+	iInvalidFormatFault                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InvalidFormatFault"}
+	iInvalidNextToken                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InvalidNextToken"}
+	iInvalidParameterCombinationException        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InvalidParameterCombinationException"}
+	iInvalidParameterValueException              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "InvalidParameterValueException"}
+	iKmsAccessDeniedException                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "KmsAccessDeniedException"}
+	i_KmsKeyArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "KmsKeyArn"}
+	iKmsKeyDisabledException                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "KmsKeyDisabledException"}
+	iKmsKeyNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "KmsKeyNotFoundException"}
+	iLabelOptions                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LabelOptions"}
+	i_LastModified                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LastModified"}
+	iLimitExceededException                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LimitExceededException"}
+	iLimitExceededFault                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LimitExceededFault"}
+	i_ListMetricStreamsMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricStreamsMaxResults"}
+	iLogAlarm                                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LogAlarm"}
+	i_LogAlarms                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LogAlarms"}
+	i_LogGroupIdentifiers                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "LogGroupIdentifiers"}
+	iManagedRule                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ManagedRule"}
+	iManagedRuleDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ManagedRuleDescription"}
+	i_ManagedRuleDescriptions                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ManagedRuleDescriptions"}
+	i_ManagedRules                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ManagedRules"}
+	iManagedRuleState                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ManagedRuleState"}
+	i_MaxRecords                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MaxRecords"}
+	i_MaxReturnedResultsCount                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MaxReturnedResultsCount"}
+	i_Message                                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Message"}
+	iMessageData                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MessageData"}
+	i_MessageDataCode                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MessageDataCode"}
+	i_MessageDataValue                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MessageDataValue"}
+	iMetric                                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Metric"}
+	iMetricAlarm                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricAlarm"}
+	i_MetricAlarms                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricAlarms"}
+	iMetricCharacteristics                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricCharacteristics"}
+	i_MetricData                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricData"}
+	i_MetricDataQueries                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDataQueries"}
+	iMetricDataQuery                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDataQuery"}
+	iMetricDataResult                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDataResult"}
+	i_MetricDataResultMessages                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDataResultMessages"}
+	i_MetricDataResults                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDataResults"}
+	iMetricDatum                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricDatum"}
+	i_MetricExpression                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricExpression"}
+	i_MetricId                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricId"}
+	i_MetricLabel                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricLabel"}
+	iMetricMathAnomalyDetector                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricMathAnomalyDetector"}
+	i_MetricName                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricName"}
+	i_MetricNameList                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricNameList"}
+	i_Metrics                                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Metrics"}
+	iMetricStat                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStat"}
+	i_MetricStreamEntries                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamEntries"}
+	iMetricStreamEntry                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamEntry"}
+	iMetricStreamFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamFilter"}
+	i_MetricStreamFilterMetricNames              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamFilterMetricNames"}
+	i_MetricStreamFilters                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamFilters"}
+	i_MetricStreamName                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamName"}
+	i_MetricStreamNames                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamNames"}
+	iMetricStreamOutputFormat                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamOutputFormat"}
+	i_MetricStreamState                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamState"}
+	i_MetricStreamStatistic                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatistic"}
+	i_MetricStreamStatisticsAdditionalStatistics = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatisticsAdditionalStatistics"}
+	iMetricStreamStatisticsConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatisticsConfiguration"}
+	i_MetricStreamStatisticsConfigurations       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatisticsConfigurations"}
+	i_MetricStreamStatisticsIncludeMetrics       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatisticsIncludeMetrics"}
+	iMetricStreamStatisticsMetric                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricStreamStatisticsMetric"}
+	i_MetricWidget                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricWidget"}
+	i_MetricWidgetImage                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MetricWidgetImage"}
+	iMissingRequiredParameterException           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MissingRequiredParameterException"}
+	i_MuteTargetAlarmNameList                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MuteTargetAlarmNameList"}
+	iMuteTargets                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MuteTargets"}
+	i_MuteType                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "MuteType"}
+	i_Name                                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Name"}
+	i_Namespace                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Namespace"}
+	i_NextToken                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "NextToken"}
+	i_OnlyStartEvaluatingAfterWarmUpPeriodEnds   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OnlyStartEvaluatingAfterWarmUpPeriodEnds"}
+	i_OTelEnrichmentMetricNameList               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OTelEnrichmentMetricNameList"}
+	iOTelEnrichmentMetricSelector                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OTelEnrichmentMetricSelector"}
+	i_OTelEnrichmentMetricSelectorList           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OTelEnrichmentMetricSelectorList"}
+	iOTelEnrichmentStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OTelEnrichmentStatus"}
+	i_OutputFormat                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OutputFormat"}
+	i_OwningAccounts                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "OwningAccounts"}
+	iPartialFailure                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PartialFailure"}
+	i_PendingPeriod                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PendingPeriod"}
+	i_Period                                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Period"}
+	i_PeriodicSpikes                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PeriodicSpikes"}
+	i_Query                                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Query"}
+	i_QueryResultsToAlarm                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "QueryResultsToAlarm"}
+	i_QueryResultsToEvaluate                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "QueryResultsToEvaluate"}
+	i_QueryString                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "QueryString"}
+	iRange                                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Range"}
+	iRecentlyActive                              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "RecentlyActive"}
+	i_RecoveryPeriod                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "RecoveryPeriod"}
+	i_ResourceArn                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceArn"}
+	iResourceConflict                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceConflict"}
+	i_ResourceId                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceId"}
+	i_ResourceList                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceList"}
+	iResourceMetricsConfiguration                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceMetricsConfiguration"}
+	iResourceMetricSelection                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceMetricSelection"}
+	i_ResourceMetricSelectionList                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceMetricSelectionList"}
+	i_ResourceName                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceName"}
+	iResourceNotFound                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceNotFound"}
+	iResourceNotFoundException                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceNotFoundException"}
+	i_ResourceType                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ResourceType"}
+	i_ReturnData                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ReturnData"}
+	iRule                                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Rule"}
+	iScanBy                                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ScanBy"}
+	iSchedule                                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Schedule"}
+	iScheduleConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ScheduleConfiguration"}
+	iScheduledQueryConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ScheduledQueryConfiguration"}
+	i_ScheduleExpression                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ScheduleExpression"}
+	iSingleMetricAnomalyDetector                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "SingleMetricAnomalyDetector"}
+	i_Size                                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Size"}
+	iSlidingWindow                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "SlidingWindow"}
+	iStandardUnit                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StandardUnit"}
+	i_StartTimeOffset                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartTimeOffset"}
+	i_Stat                                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Stat"}
+	i_StateReason                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StateReason"}
+	i_StateReasonData                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StateReasonData"}
+	iStateValue                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StateValue"}
+	iStatistic                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Statistic"}
+	i_Statistics                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Statistics"}
+	iStatisticSet                                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StatisticSet"}
+	iStatusCode                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StatusCode"}
+	i_StorageResolution                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StorageResolution"}
+	i_StrictEntityValidation                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StrictEntityValidation"}
+	i_String                                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "String"}
+	i_SuppressorPeriod                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "SuppressorPeriod"}
+	iTag                                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Tag"}
+	i_TagKey                                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagKey"}
+	i_TagKeyList                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagKeyList"}
+	i_TagList                                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagList"}
+	i_TagValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagValue"}
+	i_TemplateName                               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TemplateName"}
+	i_Threshold                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Threshold"}
+	i_Timestamp                                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Timestamp"}
+	i_Timestamps                                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Timestamps"}
+	i_Timezone                                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Timezone"}
+	i_TreatMissingData                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TreatMissingData"}
+	iValidationException                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ValidationException"}
+	i_ValidationExceptionMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ValidationExceptionMessage"}
+	i_Values                                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "Values"}
+	iWallClockWindow                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "WallClockWindow"}
+	iWarmUpConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "WarmUpConfiguration"}
+	i_WarmUpPeriodDurationInMinutes              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "WarmUpPeriodDurationInMinutes"}
+	iAssociateDatasetKmsKeyInput                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AssociateDatasetKmsKeyInput"}
+	iAssociateDatasetKmsKeyOutput                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "AssociateDatasetKmsKeyOutput"}
+	iCreateResourceMetricsConfigurationInput     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "CreateResourceMetricsConfigurationInput"}
+	iCreateResourceMetricsConfigurationOutput    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "CreateResourceMetricsConfigurationOutput"}
+	iDeleteAlarmMuteRuleInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAlarmMuteRuleInput"}
+	iDeleteAlarmsInput                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAlarmsInput"}
+	iDeleteAnomalyDetectorInput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAnomalyDetectorInput"}
+	iDeleteAnomalyDetectorOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteAnomalyDetectorOutput"}
+	iDeleteDashboardsInput                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteDashboardsInput"}
+	iDeleteDashboardsOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteDashboardsOutput"}
+	iDeleteInsightRulesInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteInsightRulesInput"}
+	iDeleteInsightRulesOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteInsightRulesOutput"}
+	iDeleteMetricStreamInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteMetricStreamInput"}
+	iDeleteMetricStreamOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteMetricStreamOutput"}
+	iDeleteResourceMetricsConfigurationInput     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteResourceMetricsConfigurationInput"}
+	iDeleteResourceMetricsConfigurationOutput    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DeleteResourceMetricsConfigurationOutput"}
+	iDescribeAlarmContributorsInput              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmContributorsInput"}
+	iDescribeAlarmContributorsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmContributorsOutput"}
+	iDescribeAlarmHistoryInput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmHistoryInput"}
+	iDescribeAlarmHistoryOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmHistoryOutput"}
+	iDescribeAlarmsForMetricInput                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmsForMetricInput"}
+	iDescribeAlarmsForMetricOutput               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmsForMetricOutput"}
+	iDescribeAlarmsInput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmsInput"}
+	iDescribeAlarmsOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAlarmsOutput"}
+	iDescribeAnomalyDetectorsInput               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAnomalyDetectorsInput"}
+	iDescribeAnomalyDetectorsOutput              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeAnomalyDetectorsOutput"}
+	iDescribeInsightRulesInput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeInsightRulesInput"}
+	iDescribeInsightRulesOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DescribeInsightRulesOutput"}
+	iDisableAlarmActionsInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisableAlarmActionsInput"}
+	iDisableInsightRulesInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisableInsightRulesInput"}
+	iDisableInsightRulesOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisableInsightRulesOutput"}
+	iDisassociateDatasetKmsKeyInput              = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisassociateDatasetKmsKeyInput"}
+	iDisassociateDatasetKmsKeyOutput             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "DisassociateDatasetKmsKeyOutput"}
+	iEnableAlarmActionsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EnableAlarmActionsInput"}
+	iEnableInsightRulesInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EnableInsightRulesInput"}
+	iEnableInsightRulesOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "EnableInsightRulesOutput"}
+	iGetAlarmMuteRuleInput                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetAlarmMuteRuleInput"}
+	iGetAlarmMuteRuleOutput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetAlarmMuteRuleOutput"}
+	iGetDashboardInput                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDashboardInput"}
+	iGetDashboardOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDashboardOutput"}
+	iGetDatasetInput                             = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDatasetInput"}
+	iGetDatasetOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetDatasetOutput"}
+	iGetInsightRuleReportInput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetInsightRuleReportInput"}
+	iGetInsightRuleReportOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetInsightRuleReportOutput"}
+	iGetMetricDataInput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricDataInput"}
+	iGetMetricDataOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricDataOutput"}
+	iGetMetricStatisticsInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStatisticsInput"}
+	iGetMetricStatisticsOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStatisticsOutput"}
+	iGetMetricStreamInput                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStreamInput"}
+	iGetMetricStreamOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricStreamOutput"}
+	iGetMetricWidgetImageInput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricWidgetImageInput"}
+	iGetMetricWidgetImageOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetMetricWidgetImageOutput"}
+	iGetOTelEnrichmentInput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetOTelEnrichmentInput"}
+	iGetOTelEnrichmentOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetOTelEnrichmentOutput"}
+	iGetResourceMetricsConfigurationInput        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetResourceMetricsConfigurationInput"}
+	iGetResourceMetricsConfigurationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "GetResourceMetricsConfigurationOutput"}
+	iListAlarmMuteRulesInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListAlarmMuteRulesInput"}
+	iListAlarmMuteRulesOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListAlarmMuteRulesOutput"}
+	iListDashboardsInput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListDashboardsInput"}
+	iListDashboardsOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListDashboardsOutput"}
+	iListManagedInsightRulesInput                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListManagedInsightRulesInput"}
+	iListManagedInsightRulesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListManagedInsightRulesOutput"}
+	iListMetricsInput                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricsInput"}
+	iListMetricsOutput                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricsOutput"}
+	iListMetricStreamsInput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricStreamsInput"}
+	iListMetricStreamsOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListMetricStreamsOutput"}
+	iListTagsForResourceInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "ListTagsForResourceOutput"}
+	iPutAlarmMuteRuleInput                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutAlarmMuteRuleInput"}
+	iPutAnomalyDetectorInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutAnomalyDetectorInput"}
+	iPutAnomalyDetectorOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutAnomalyDetectorOutput"}
+	iPutCompositeAlarmInput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutCompositeAlarmInput"}
+	iPutDashboardInput                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutDashboardInput"}
+	iPutDashboardOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutDashboardOutput"}
+	iPutInsightRuleInput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutInsightRuleInput"}
+	iPutInsightRuleOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutInsightRuleOutput"}
+	iPutLogAlarmInput                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutLogAlarmInput"}
+	iPutManagedInsightRulesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutManagedInsightRulesInput"}
+	iPutManagedInsightRulesOutput                = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutManagedInsightRulesOutput"}
+	iPutMetricAlarmInput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricAlarmInput"}
+	iPutMetricDataInput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricDataInput"}
+	iPutMetricStreamInput                        = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricStreamInput"}
+	iPutMetricStreamOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "PutMetricStreamOutput"}
+	iSetAlarmStateInput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "SetAlarmStateInput"}
+	iStartMetricStreamsInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartMetricStreamsInput"}
+	iStartMetricStreamsOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartMetricStreamsOutput"}
+	iStartOTelEnrichmentInput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartOTelEnrichmentInput"}
+	iStartOTelEnrichmentOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StartOTelEnrichmentOutput"}
+	iStopMetricStreamsInput                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopMetricStreamsInput"}
+	iStopMetricStreamsOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopMetricStreamsOutput"}
+	iStopOTelEnrichmentInput                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopOTelEnrichmentInput"}
+	iStopOTelEnrichmentOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "StopOTelEnrichmentOutput"}
+	iTagResourceInput                            = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagResourceInput"}
+	iTagResourceOutput                           = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "TagResourceOutput"}
+	iUntagResourceInput                          = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UntagResourceInput"}
+	iUntagResourceOutput                         = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UntagResourceOutput"}
+	iUpdateOTelEnrichmentInput                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateOTelEnrichmentInput"}
+	iUpdateOTelEnrichmentOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateOTelEnrichmentOutput"}
+	iUpdateResourceMetricsConfigurationInput     = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateResourceMetricsConfigurationInput"}
+	iUpdateResourceMetricsConfigurationOutput    = smithy.ShapeName{Namespace: "com.amazonaws.cloudwatch", Name: "UpdateResourceMetricsConfigurationOutput"}
+	pUnit                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://monitoring.amazonaws.com/doc/2010-08-01/"}}, Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameterInput",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidFormat",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombination",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValue",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MissingParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mActionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sActionConfiguration_AlarmTagsPropagation}}
+var mActionsSuppressedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sActionsSuppressedBy_WaitPeriod, &sActionsSuppressedBy_ExtensionPeriod, &sActionsSuppressedBy_Alarm}}
+var mAlarmContributor = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmContributor_ContributorId, &sAlarmContributor_ContributorAttributes, &sAlarmContributor_StateReason, &sAlarmContributor_StateTransitionedTimestamp}}
+var m_AlarmContributors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmContributors_member}}
+var mAlarmHistoryItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmHistoryItem_AlarmName, &sAlarmHistoryItem_AlarmContributorId, &sAlarmHistoryItem_AlarmType, &sAlarmHistoryItem_Timestamp, &sAlarmHistoryItem_HistoryItemType, &sAlarmHistoryItem_HistorySummary, &sAlarmHistoryItem_HistoryData, &sAlarmHistoryItem_AlarmContributorAttributes}}
+var m_AlarmHistoryItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmHistoryItems_member}}
+var mAlarmMuteRuleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmMuteRuleStatus_SCHEDULED, &sAlarmMuteRuleStatus_ACTIVE, &sAlarmMuteRuleStatus_EXPIRED}}
+var m_AlarmMuteRuleStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmMuteRuleStatuses_member}}
+var m_AlarmMuteRuleSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmMuteRuleSummaries_member}}
+var mAlarmMuteRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmMuteRuleSummary_AlarmMuteRuleArn, &sAlarmMuteRuleSummary_ExpireDate, &sAlarmMuteRuleSummary_Status, &sAlarmMuteRuleSummary_MuteType, &sAlarmMuteRuleSummary_LastUpdatedTimestamp}}
+var m_AlarmNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmNames_member}}
+var mAlarmPromQLCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmPromQLCriteria_Query, &sAlarmPromQLCriteria_PendingPeriod, &sAlarmPromQLCriteria_RecoveryPeriod}}
+var mAlarmTagsPropagation = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmTagsPropagation_Enabled, &sAlarmTagsPropagation_IncludedTagKeys, &sAlarmTagsPropagation_ExcludedTagKeys}}
+var m_AlarmTagsPropagationTagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmTagsPropagationTagKeys_member}}
+var mAlarmType = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarmType_CompositeAlarm, &sAlarmType_MetricAlarm, &sAlarmType_LogAlarm}}
+var m_AlarmTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlarmTypes_member}}
+var mAnomalyDetector = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetector_AnomalyDetectorId, &sAnomalyDetector_Namespace, &sAnomalyDetector_MetricName, &sAnomalyDetector_Dimensions, &sAnomalyDetector_Stat, &sAnomalyDetector_Configuration, &sAnomalyDetector_StateValue, &sAnomalyDetector_MetricCharacteristics, &sAnomalyDetector_SingleMetricAnomalyDetector, &sAnomalyDetector_MetricMathAnomalyDetector}, Hash: &hAnomalyDetector}
+var mAnomalyDetectorAdaptationSpeed = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorAdaptationSpeed_FAST, &sAnomalyDetectorAdaptationSpeed_NORMAL, &sAnomalyDetectorAdaptationSpeed_SLOW}}
+var mAnomalyDetectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorConfiguration_ExcludedTimeRanges, &sAnomalyDetectorConfiguration_MetricTimezone, &sAnomalyDetectorConfiguration_AdaptationSpeed, &sAnomalyDetectorConfiguration_OutlierFilteringStrength}}
+var m_AnomalyDetectorExcludedTimeRanges = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnomalyDetectorExcludedTimeRanges_member}}
+var m_AnomalyDetectorIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnomalyDetectorIds_member}}
+var mAnomalyDetectorOutlierFilteringStrength = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorOutlierFilteringStrength_MINIMAL, &sAnomalyDetectorOutlierFilteringStrength_MODERATE, &sAnomalyDetectorOutlierFilteringStrength_STRICT}}
+var m_AnomalyDetectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnomalyDetectors_member}}
+var mAnomalyDetectorStateValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorStateValue_PENDING_TRAINING, &sAnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA, &sAnomalyDetectorStateValue_TRAINED}}
+var mAnomalyDetectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sAnomalyDetectorType_SINGLE_METRIC, &sAnomalyDetectorType_METRIC_MATH}}
+var m_AnomalyDetectorTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnomalyDetectorTypes_member}}
+var m_BatchFailures = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchFailures_member}}
+var mComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sComparisonOperator_GreaterThanOrEqualToThreshold, &sComparisonOperator_GreaterThanThreshold, &sComparisonOperator_LessThanThreshold, &sComparisonOperator_LessThanOrEqualToThreshold, &sComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold, &sComparisonOperator_LessThanLowerThreshold, &sComparisonOperator_GreaterThanUpperThreshold}}
+var mCompositeAlarm = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeAlarm_ActionsEnabled, &sCompositeAlarm_AlarmActions, &sCompositeAlarm_AlarmArn, &sCompositeAlarm_AlarmConfigurationUpdatedTimestamp, &sCompositeAlarm_AlarmDescription, &sCompositeAlarm_AlarmName, &sCompositeAlarm_AlarmRule, &sCompositeAlarm_InsufficientDataActions, &sCompositeAlarm_OKActions, &sCompositeAlarm_StateReason, &sCompositeAlarm_StateReasonData, &sCompositeAlarm_StateUpdatedTimestamp, &sCompositeAlarm_StateValue, &sCompositeAlarm_StateTransitionedTimestamp, &sCompositeAlarm_ActionsSuppressedBy, &sCompositeAlarm_ActionsSuppressedReason, &sCompositeAlarm_ActionsSuppressor, &sCompositeAlarm_ActionsSuppressorWaitPeriod, &sCompositeAlarm_ActionsSuppressorExtensionPeriod, &sCompositeAlarm_ActionConfiguration}, Hash: &hCompositeAlarm}
+var m_CompositeAlarms = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeAlarms_member}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var m_ContributorAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContributorAttributes_key, &s_ContributorAttributes_value}}
+var m_Counts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Counts_member}}
+var m_DashboardEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashboardEntries_member}}
+var mDashboardEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardEntry_DashboardName, &sDashboardEntry_DashboardArn, &sDashboardEntry_LastModified, &sDashboardEntry_Size}}
+var mDashboardInvalidInputError = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardInvalidInputError_message, &sDashboardInvalidInputError_dashboardValidationMessages}}
+var m_DashboardNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashboardNames_member}}
+var mDashboardNotFoundError = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardNotFoundError_message}}
+var mDashboardValidationMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardValidationMessage_DataPath, &sDashboardValidationMessage_Message}}
+var m_DashboardValidationMessages = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashboardValidationMessages_member}}
+var mDatapoint = smithy.SchemaMembers{List: []*smithy.Schema{&sDatapoint_Timestamp, &sDatapoint_SampleCount, &sDatapoint_Average, &sDatapoint_Sum, &sDatapoint_Minimum, &sDatapoint_Maximum, &sDatapoint_Unit, &sDatapoint_ExtendedStatistics}}
+var m_Datapoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_Datapoints_member}}
+var m_DatapointValueMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatapointValueMap_key, &s_DatapointValueMap_value}}
+var m_DatapointValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatapointValues_member}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_Name, &sDimension_Value}}
+var mDimensionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionFilter_Name, &sDimensionFilter_Value}}
+var m_DimensionFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_DimensionFilters_member}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var mEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sEntity_KeyAttributes, &sEntity_Attributes}}
+var m_EntityAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityAttributesMap_key, &s_EntityAttributesMap_value}}
+var m_EntityKeyAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityKeyAttributesMap_key, &s_EntityKeyAttributesMap_value}}
+var mEntityMetricData = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityMetricData_Entity, &sEntityMetricData_MetricData}}
+var m_EntityMetricDataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityMetricDataList_member}}
+var mEvaluationCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationCriteria_PromQLCriteria}}
+var mEvaluationState = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationState_PARTIAL_DATA, &sEvaluationState_EVALUATION_FAILURE, &sEvaluationState_EVALUATION_ERROR}}
+var mEvaluationWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationWindow_WallClockWindow, &sEvaluationWindow_SlidingWindow}}
+var m_ExtendedStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtendedStatistics_member}}
+var mHistoryItemType = smithy.SchemaMembers{List: []*smithy.Schema{&sHistoryItemType_ConfigurationUpdate, &sHistoryItemType_StateUpdate, &sHistoryItemType_Action, &sHistoryItemType_AlarmContributorStateUpdate, &sHistoryItemType_AlarmContributorAction}}
+var mInsightRule = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightRule_Name, &sInsightRule_State, &sInsightRule_Schema, &sInsightRule_Definition, &sInsightRule_ManagedRule, &sInsightRule_ApplyOnTransformedLogs}}
+var mInsightRuleContributor = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightRuleContributor_Keys, &sInsightRuleContributor_ApproximateAggregateValue, &sInsightRuleContributor_Datapoints}}
+var mInsightRuleContributorDatapoint = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightRuleContributorDatapoint_Timestamp, &sInsightRuleContributorDatapoint_ApproximateValue}}
+var m_InsightRuleContributorDatapoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleContributorDatapoints_member}}
+var m_InsightRuleContributorKeyLabels = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleContributorKeyLabels_member}}
+var m_InsightRuleContributorKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleContributorKeys_member}}
+var m_InsightRuleContributors = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleContributors_member}}
+var mInsightRuleMetricDatapoint = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightRuleMetricDatapoint_Timestamp, &sInsightRuleMetricDatapoint_UniqueContributors, &sInsightRuleMetricDatapoint_MaxContributorValue, &sInsightRuleMetricDatapoint_SampleCount, &sInsightRuleMetricDatapoint_Average, &sInsightRuleMetricDatapoint_Sum, &sInsightRuleMetricDatapoint_Minimum, &sInsightRuleMetricDatapoint_Maximum}}
+var m_InsightRuleMetricDatapoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleMetricDatapoints_member}}
+var m_InsightRuleMetricList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleMetricList_member}}
+var m_InsightRuleNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRuleNames_member}}
+var m_InsightRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightRules_member}}
+var mInternalServiceFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceFault_Message}}
+var mInvalidFormatFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidFormatFault_message}}
+var mInvalidNextToken = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextToken_message}}
+var mInvalidParameterCombinationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterCombinationException_message}}
+var mInvalidParameterValueException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterValueException_message}}
+var mKmsAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsAccessDeniedException_Message}}
+var mKmsKeyDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsKeyDisabledException_Message}}
+var mKmsKeyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsKeyNotFoundException_Message}}
+var mLabelOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelOptions_Timezone}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mLimitExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededFault_message}}
+var mLogAlarm = smithy.SchemaMembers{List: []*smithy.Schema{&sLogAlarm_AlarmName, &sLogAlarm_AlarmArn, &sLogAlarm_AlarmDescription, &sLogAlarm_AlarmConfigurationUpdatedTimestamp, &sLogAlarm_ActionsEnabled, &sLogAlarm_OKActions, &sLogAlarm_AlarmActions, &sLogAlarm_InsufficientDataActions, &sLogAlarm_StateValue, &sLogAlarm_StateReason, &sLogAlarm_StateReasonData, &sLogAlarm_StateUpdatedTimestamp, &sLogAlarm_ScheduledQueryConfiguration, &sLogAlarm_QueryResultsToEvaluate, &sLogAlarm_QueryResultsToAlarm, &sLogAlarm_Threshold, &sLogAlarm_ComparisonOperator, &sLogAlarm_TreatMissingData, &sLogAlarm_StateTransitionedTimestamp, &sLogAlarm_EvaluationState, &sLogAlarm_ActionLogLineCount, &sLogAlarm_ActionLogLineRoleArn, &sLogAlarm_WarmUpConfiguration, &sLogAlarm_ActionConfiguration}, Hash: &hLogAlarm}
+var m_LogAlarms = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogAlarms_member}}
+var m_LogGroupIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogGroupIdentifiers_member}}
+var mManagedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedRule_TemplateName, &sManagedRule_ResourceARN, &sManagedRule_Tags}}
+var mManagedRuleDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedRuleDescription_TemplateName, &sManagedRuleDescription_ResourceARN, &sManagedRuleDescription_RuleState}}
+var m_ManagedRuleDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedRuleDescriptions_member}}
+var m_ManagedRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedRules_member}}
+var mManagedRuleState = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedRuleState_RuleName, &sManagedRuleState_State}}
+var mMessageData = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageData_Code, &sMessageData_Value}}
+var mMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sMetric_Namespace, &sMetric_MetricName, &sMetric_Dimensions}}
+var mMetricAlarm = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricAlarm_AlarmName, &sMetricAlarm_AlarmArn, &sMetricAlarm_AlarmDescription, &sMetricAlarm_AlarmConfigurationUpdatedTimestamp, &sMetricAlarm_ActionsEnabled, &sMetricAlarm_OKActions, &sMetricAlarm_AlarmActions, &sMetricAlarm_InsufficientDataActions, &sMetricAlarm_StateValue, &sMetricAlarm_StateReason, &sMetricAlarm_StateReasonData, &sMetricAlarm_StateUpdatedTimestamp, &sMetricAlarm_MetricName, &sMetricAlarm_Namespace, &sMetricAlarm_Statistic, &sMetricAlarm_ExtendedStatistic, &sMetricAlarm_Dimensions, &sMetricAlarm_Period, &sMetricAlarm_Unit, &sMetricAlarm_EvaluationPeriods, &sMetricAlarm_DatapointsToAlarm, &sMetricAlarm_Threshold, &sMetricAlarm_ComparisonOperator, &sMetricAlarm_TreatMissingData, &sMetricAlarm_EvaluateLowSampleCountPercentile, &sMetricAlarm_Metrics, &sMetricAlarm_ThresholdMetricId, &sMetricAlarm_EvaluationState, &sMetricAlarm_StateTransitionedTimestamp, &sMetricAlarm_EvaluationWindow, &sMetricAlarm_WarmUpConfiguration, &sMetricAlarm_EvaluationCriteria, &sMetricAlarm_EvaluationInterval, &sMetricAlarm_ActionConfiguration}, Hash: &hMetricAlarm}
+var m_MetricAlarms = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricAlarms_member}}
+var mMetricCharacteristics = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricCharacteristics_PeriodicSpikes}}
+var m_MetricData = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricData_member}}
+var m_MetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataQueries_member}}
+var mMetricDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataQuery_Id, &sMetricDataQuery_MetricStat, &sMetricDataQuery_Expression, &sMetricDataQuery_Label, &sMetricDataQuery_ReturnData, &sMetricDataQuery_Period, &sMetricDataQuery_AccountId}}
+var mMetricDataResult = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataResult_Id, &sMetricDataResult_Label, &sMetricDataResult_Timestamps, &sMetricDataResult_Values, &sMetricDataResult_StatusCode, &sMetricDataResult_Messages}}
+var m_MetricDataResultMessages = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataResultMessages_member}}
+var m_MetricDataResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataResults_member}}
+var mMetricDatum = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDatum_MetricName, &sMetricDatum_Dimensions, &sMetricDatum_Timestamp, &sMetricDatum_Value, &sMetricDatum_StatisticValues, &sMetricDatum_Values, &sMetricDatum_Counts, &sMetricDatum_Unit, &sMetricDatum_StorageResolution}, Hash: &hMetricDatum}
+var mMetricMathAnomalyDetector = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricMathAnomalyDetector_MetricDataQueries}}
+var m_MetricNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricNameList_member}}
+var m_Metrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metrics_member}}
+var mMetricStat = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStat_Metric, &sMetricStat_Period, &sMetricStat_Stat, &sMetricStat_Unit}}
+var m_MetricStreamEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamEntries_member}}
+var mMetricStreamEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStreamEntry_Arn, &sMetricStreamEntry_CreationDate, &sMetricStreamEntry_LastUpdateDate, &sMetricStreamEntry_Name, &sMetricStreamEntry_FirehoseArn, &sMetricStreamEntry_State, &sMetricStreamEntry_OutputFormat}}
+var mMetricStreamFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStreamFilter_Namespace, &sMetricStreamFilter_MetricNames}}
+var m_MetricStreamFilterMetricNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamFilterMetricNames_member}}
+var m_MetricStreamFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamFilters_member}}
+var m_MetricStreamNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamNames_member}}
+var mMetricStreamOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStreamOutputFormat_JSON, &sMetricStreamOutputFormat_OPEN_TELEMETRY_0_7, &sMetricStreamOutputFormat_OPEN_TELEMETRY_1_0}}
+var m_MetricStreamStatisticsAdditionalStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamStatisticsAdditionalStatistics_member}}
+var mMetricStreamStatisticsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStreamStatisticsConfiguration_IncludeMetrics, &sMetricStreamStatisticsConfiguration_AdditionalStatistics}}
+var m_MetricStreamStatisticsConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamStatisticsConfigurations_member}}
+var m_MetricStreamStatisticsIncludeMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricStreamStatisticsIncludeMetrics_member}}
+var mMetricStreamStatisticsMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStreamStatisticsMetric_Namespace, &sMetricStreamStatisticsMetric_MetricName}}
+var mMissingRequiredParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingRequiredParameterException_message}}
+var m_MuteTargetAlarmNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MuteTargetAlarmNameList_member}}
+var mMuteTargets = smithy.SchemaMembers{List: []*smithy.Schema{&sMuteTargets_AlarmNames}}
+var m_OTelEnrichmentMetricNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OTelEnrichmentMetricNameList_member}}
+var mOTelEnrichmentMetricSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sOTelEnrichmentMetricSelector_Namespace, &sOTelEnrichmentMetricSelector_MetricNames}}
+var m_OTelEnrichmentMetricSelectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OTelEnrichmentMetricSelectorList_member}}
+var mOTelEnrichmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOTelEnrichmentStatus_RUNNING, &sOTelEnrichmentStatus_STOPPED}}
+var m_OwningAccounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_OwningAccounts_member}}
+var mPartialFailure = smithy.SchemaMembers{List: []*smithy.Schema{&sPartialFailure_FailureResource, &sPartialFailure_ExceptionType, &sPartialFailure_FailureCode, &sPartialFailure_FailureDescription}}
+var mRange = smithy.SchemaMembers{List: []*smithy.Schema{&sRange_StartTime, &sRange_EndTime}}
+var mRecentlyActive = smithy.SchemaMembers{List: []*smithy.Schema{&sRecentlyActive_PT3H}}
+var mResourceConflict = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConflict_message}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceMetricsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceMetricsConfiguration_ResourceArn, &sResourceMetricsConfiguration_CreatedAt, &sResourceMetricsConfiguration_UpdatedAt, &sResourceMetricsConfiguration_MetricSelections}}
+var mResourceMetricSelection = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceMetricSelection_IncludeMetrics}}
+var m_ResourceMetricSelectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceMetricSelectionList_member}}
+var mResourceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFound_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_ResourceType, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_Message}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_Schedule}}
+var mScanBy = smithy.SchemaMembers{List: []*smithy.Schema{&sScanBy_TIMESTAMP_DESCENDING, &sScanBy_TIMESTAMP_ASCENDING}}
+var mSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedule_Expression, &sSchedule_Duration, &sSchedule_Timezone}}
+var mScheduleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleConfiguration_ScheduleExpression, &sScheduleConfiguration_StartTimeOffset, &sScheduleConfiguration_EndTimeOffset}}
+var mScheduledQueryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledQueryConfiguration_QueryString, &sScheduledQueryConfiguration_LogGroupIdentifiers, &sScheduledQueryConfiguration_QueryARN, &sScheduledQueryConfiguration_ScheduledQueryRoleARN, &sScheduledQueryConfiguration_ScheduleConfiguration, &sScheduledQueryConfiguration_AggregationExpression, &sScheduledQueryConfiguration_Tags}}
+var mSingleMetricAnomalyDetector = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleMetricAnomalyDetector_AccountId, &sSingleMetricAnomalyDetector_Namespace, &sSingleMetricAnomalyDetector_MetricName, &sSingleMetricAnomalyDetector_Dimensions, &sSingleMetricAnomalyDetector_Stat}}
+var mStandardUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStandardUnit_Seconds, &sStandardUnit_Microseconds, &sStandardUnit_Milliseconds, &sStandardUnit_Bytes, &sStandardUnit_Kilobytes, &sStandardUnit_Megabytes, &sStandardUnit_Gigabytes, &sStandardUnit_Terabytes, &sStandardUnit_Bits, &sStandardUnit_Kilobits, &sStandardUnit_Megabits, &sStandardUnit_Gigabits, &sStandardUnit_Terabits, &sStandardUnit_Percent, &sStandardUnit_Count, &sStandardUnit_Bytes_Second, &sStandardUnit_Kilobytes_Second, &sStandardUnit_Megabytes_Second, &sStandardUnit_Gigabytes_Second, &sStandardUnit_Terabytes_Second, &sStandardUnit_Bits_Second, &sStandardUnit_Kilobits_Second, &sStandardUnit_Megabits_Second, &sStandardUnit_Gigabits_Second, &sStandardUnit_Terabits_Second, &sStandardUnit_Count_Second, &sStandardUnit_None}, Hash: &hStandardUnit}
+var mStateValue = smithy.SchemaMembers{List: []*smithy.Schema{&sStateValue_OK, &sStateValue_ALARM, &sStateValue_INSUFFICIENT_DATA}}
+var mStatistic = smithy.SchemaMembers{List: []*smithy.Schema{&sStatistic_SampleCount, &sStatistic_Average, &sStatistic_Sum, &sStatistic_Minimum, &sStatistic_Maximum}}
+var m_Statistics = smithy.SchemaMembers{List: []*smithy.Schema{&s_Statistics_member}}
+var mStatisticSet = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticSet_SampleCount, &sStatisticSet_Sum, &sStatisticSet_Minimum, &sStatisticSet_Maximum}}
+var mStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusCode_COMPLETE, &sStatusCode_INTERNAL_ERROR, &sStatusCode_PARTIAL_DATA, &sStatusCode_FORBIDDEN}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_Timestamps = smithy.SchemaMembers{List: []*smithy.Schema{&s_Timestamps_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var mWallClockWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sWallClockWindow_Timezone}}
+var mWarmUpConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWarmUpConfiguration_WarmUpPeriodDurationInMinutes, &sWarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds}}
+var mAssociateDatasetKmsKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDatasetKmsKeyInput_DatasetIdentifier, &sAssociateDatasetKmsKeyInput_KmsKeyArn}}
+var mCreateResourceMetricsConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceMetricsConfigurationInput_ResourceArn, &sCreateResourceMetricsConfigurationInput_MetricSelections}}
+var mCreateResourceMetricsConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration}}
+var mDeleteAlarmMuteRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAlarmMuteRuleInput_AlarmMuteRuleName}}
+var mDeleteAlarmsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAlarmsInput_AlarmNames}}
+var mDeleteAnomalyDetectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAnomalyDetectorInput_AnomalyDetectorId, &sDeleteAnomalyDetectorInput_Namespace, &sDeleteAnomalyDetectorInput_MetricName, &sDeleteAnomalyDetectorInput_Dimensions, &sDeleteAnomalyDetectorInput_Stat, &sDeleteAnomalyDetectorInput_SingleMetricAnomalyDetector, &sDeleteAnomalyDetectorInput_MetricMathAnomalyDetector}}
+var mDeleteDashboardsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDashboardsInput_DashboardNames}}
+var mDeleteInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInsightRulesInput_RuleNames}}
+var mDeleteInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInsightRulesOutput_Failures}}
+var mDeleteMetricStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMetricStreamInput_Name}}
+var mDeleteResourceMetricsConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceMetricsConfigurationInput_ResourceArn}}
+var mDescribeAlarmContributorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmContributorsInput_AlarmName, &sDescribeAlarmContributorsInput_NextToken}}
+var mDescribeAlarmContributorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmContributorsOutput_AlarmContributors, &sDescribeAlarmContributorsOutput_NextToken}}
+var mDescribeAlarmHistoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmHistoryInput_AlarmName, &sDescribeAlarmHistoryInput_AlarmContributorId, &sDescribeAlarmHistoryInput_AlarmTypes, &sDescribeAlarmHistoryInput_HistoryItemType, &sDescribeAlarmHistoryInput_StartDate, &sDescribeAlarmHistoryInput_EndDate, &sDescribeAlarmHistoryInput_MaxRecords, &sDescribeAlarmHistoryInput_NextToken, &sDescribeAlarmHistoryInput_ScanBy}, Hash: &hDescribeAlarmHistoryInput}
+var mDescribeAlarmHistoryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmHistoryOutput_AlarmHistoryItems, &sDescribeAlarmHistoryOutput_NextToken}}
+var mDescribeAlarmsForMetricInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmsForMetricInput_MetricName, &sDescribeAlarmsForMetricInput_Namespace, &sDescribeAlarmsForMetricInput_Statistic, &sDescribeAlarmsForMetricInput_ExtendedStatistic, &sDescribeAlarmsForMetricInput_Dimensions, &sDescribeAlarmsForMetricInput_Period, &sDescribeAlarmsForMetricInput_Unit}}
+var mDescribeAlarmsForMetricOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmsForMetricOutput_MetricAlarms}}
+var mDescribeAlarmsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmsInput_AlarmNames, &sDescribeAlarmsInput_AlarmNamePrefix, &sDescribeAlarmsInput_AlarmTypes, &sDescribeAlarmsInput_ChildrenOfAlarmName, &sDescribeAlarmsInput_ParentsOfAlarmName, &sDescribeAlarmsInput_StateValue, &sDescribeAlarmsInput_ActionPrefix, &sDescribeAlarmsInput_MaxRecords, &sDescribeAlarmsInput_NextToken}, Hash: &hDescribeAlarmsInput}
+var mDescribeAlarmsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAlarmsOutput_CompositeAlarms, &sDescribeAlarmsOutput_MetricAlarms, &sDescribeAlarmsOutput_LogAlarms, &sDescribeAlarmsOutput_NextToken}}
+var mDescribeAnomalyDetectorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnomalyDetectorsInput_AnomalyDetectorIds, &sDescribeAnomalyDetectorsInput_NextToken, &sDescribeAnomalyDetectorsInput_MaxResults, &sDescribeAnomalyDetectorsInput_Namespace, &sDescribeAnomalyDetectorsInput_MetricName, &sDescribeAnomalyDetectorsInput_Dimensions, &sDescribeAnomalyDetectorsInput_AnomalyDetectorTypes}}
+var mDescribeAnomalyDetectorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAnomalyDetectorsOutput_AnomalyDetectors, &sDescribeAnomalyDetectorsOutput_NextToken}}
+var mDescribeInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInsightRulesInput_NextToken, &sDescribeInsightRulesInput_MaxResults}}
+var mDescribeInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInsightRulesOutput_NextToken, &sDescribeInsightRulesOutput_InsightRules}}
+var mDisableAlarmActionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableAlarmActionsInput_AlarmNames}}
+var mDisableInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableInsightRulesInput_RuleNames}}
+var mDisableInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableInsightRulesOutput_Failures}}
+var mDisassociateDatasetKmsKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateDatasetKmsKeyInput_DatasetIdentifier}}
+var mEnableAlarmActionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableAlarmActionsInput_AlarmNames}}
+var mEnableInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableInsightRulesInput_RuleNames}}
+var mEnableInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableInsightRulesOutput_Failures}}
+var mGetAlarmMuteRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAlarmMuteRuleInput_AlarmMuteRuleName}}
+var mGetAlarmMuteRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAlarmMuteRuleOutput_Name, &sGetAlarmMuteRuleOutput_AlarmMuteRuleArn, &sGetAlarmMuteRuleOutput_Description, &sGetAlarmMuteRuleOutput_Rule, &sGetAlarmMuteRuleOutput_MuteTargets, &sGetAlarmMuteRuleOutput_StartDate, &sGetAlarmMuteRuleOutput_ExpireDate, &sGetAlarmMuteRuleOutput_Status, &sGetAlarmMuteRuleOutput_LastUpdatedTimestamp, &sGetAlarmMuteRuleOutput_MuteType}, Hash: &hGetAlarmMuteRuleOutput}
+var mGetDashboardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardInput_DashboardName}}
+var mGetDashboardOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardOutput_DashboardArn, &sGetDashboardOutput_DashboardBody, &sGetDashboardOutput_DashboardName}}
+var mGetDatasetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatasetInput_DatasetIdentifier}}
+var mGetDatasetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatasetOutput_DatasetId, &sGetDatasetOutput_Arn, &sGetDatasetOutput_KmsKeyArn}}
+var mGetInsightRuleReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightRuleReportInput_RuleName, &sGetInsightRuleReportInput_StartTime, &sGetInsightRuleReportInput_EndTime, &sGetInsightRuleReportInput_Period, &sGetInsightRuleReportInput_MaxContributorCount, &sGetInsightRuleReportInput_Metrics, &sGetInsightRuleReportInput_OrderBy}}
+var mGetInsightRuleReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightRuleReportOutput_KeyLabels, &sGetInsightRuleReportOutput_AggregationStatistic, &sGetInsightRuleReportOutput_AggregateValue, &sGetInsightRuleReportOutput_ApproximateUniqueCount, &sGetInsightRuleReportOutput_Contributors, &sGetInsightRuleReportOutput_MetricDatapoints}}
+var mGetMetricDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricDataInput_MetricDataQueries, &sGetMetricDataInput_StartTime, &sGetMetricDataInput_EndTime, &sGetMetricDataInput_NextToken, &sGetMetricDataInput_ScanBy, &sGetMetricDataInput_MaxDatapoints, &sGetMetricDataInput_LabelOptions}}
+var mGetMetricDataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricDataOutput_MetricDataResults, &sGetMetricDataOutput_NextToken, &sGetMetricDataOutput_Messages}}
+var mGetMetricStatisticsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricStatisticsInput_Namespace, &sGetMetricStatisticsInput_MetricName, &sGetMetricStatisticsInput_Dimensions, &sGetMetricStatisticsInput_StartTime, &sGetMetricStatisticsInput_EndTime, &sGetMetricStatisticsInput_Period, &sGetMetricStatisticsInput_Statistics, &sGetMetricStatisticsInput_ExtendedStatistics, &sGetMetricStatisticsInput_Unit}, Hash: &hGetMetricStatisticsInput}
+var mGetMetricStatisticsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricStatisticsOutput_Label, &sGetMetricStatisticsOutput_Datapoints}}
+var mGetMetricStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricStreamInput_Name}}
+var mGetMetricStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricStreamOutput_Arn, &sGetMetricStreamOutput_Name, &sGetMetricStreamOutput_IncludeFilters, &sGetMetricStreamOutput_ExcludeFilters, &sGetMetricStreamOutput_FirehoseArn, &sGetMetricStreamOutput_RoleArn, &sGetMetricStreamOutput_State, &sGetMetricStreamOutput_CreationDate, &sGetMetricStreamOutput_LastUpdateDate, &sGetMetricStreamOutput_OutputFormat, &sGetMetricStreamOutput_StatisticsConfigurations, &sGetMetricStreamOutput_IncludeLinkedAccountsMetrics}, Hash: &hGetMetricStreamOutput}
+var mGetMetricWidgetImageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricWidgetImageInput_MetricWidget, &sGetMetricWidgetImageInput_OutputFormat}}
+var mGetMetricWidgetImageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricWidgetImageOutput_MetricWidgetImage}}
+var mGetOTelEnrichmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOTelEnrichmentOutput_Status, &sGetOTelEnrichmentOutput_IncludeFilters, &sGetOTelEnrichmentOutput_ExcludeFilters, &sGetOTelEnrichmentOutput_CreatedAt, &sGetOTelEnrichmentOutput_UpdatedAt}}
+var mGetResourceMetricsConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceMetricsConfigurationInput_ResourceArn}}
+var mGetResourceMetricsConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration}}
+var mListAlarmMuteRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAlarmMuteRulesInput_AlarmName, &sListAlarmMuteRulesInput_Statuses, &sListAlarmMuteRulesInput_MaxRecords, &sListAlarmMuteRulesInput_NextToken}}
+var mListAlarmMuteRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAlarmMuteRulesOutput_AlarmMuteRuleSummaries, &sListAlarmMuteRulesOutput_NextToken}}
+var mListDashboardsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsInput_DashboardNamePrefix, &sListDashboardsInput_NextToken}}
+var mListDashboardsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsOutput_DashboardEntries, &sListDashboardsOutput_NextToken}}
+var mListManagedInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedInsightRulesInput_ResourceARN, &sListManagedInsightRulesInput_NextToken, &sListManagedInsightRulesInput_MaxResults}}
+var mListManagedInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedInsightRulesOutput_ManagedRules, &sListManagedInsightRulesOutput_NextToken}}
+var mListMetricsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetricsInput_Namespace, &sListMetricsInput_MetricName, &sListMetricsInput_Dimensions, &sListMetricsInput_NextToken, &sListMetricsInput_RecentlyActive, &sListMetricsInput_IncludeLinkedAccounts, &sListMetricsInput_OwningAccount}}
+var mListMetricsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetricsOutput_Metrics, &sListMetricsOutput_NextToken, &sListMetricsOutput_OwningAccounts}}
+var mListMetricStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetricStreamsInput_NextToken, &sListMetricStreamsInput_MaxResults}}
+var mListMetricStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetricStreamsOutput_NextToken, &sListMetricStreamsOutput_Entries}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceARN}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mPutAlarmMuteRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAlarmMuteRuleInput_Name, &sPutAlarmMuteRuleInput_Description, &sPutAlarmMuteRuleInput_Rule, &sPutAlarmMuteRuleInput_MuteTargets, &sPutAlarmMuteRuleInput_Tags, &sPutAlarmMuteRuleInput_StartDate, &sPutAlarmMuteRuleInput_ExpireDate}}
+var mPutAnomalyDetectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAnomalyDetectorInput_Namespace, &sPutAnomalyDetectorInput_MetricName, &sPutAnomalyDetectorInput_Dimensions, &sPutAnomalyDetectorInput_Stat, &sPutAnomalyDetectorInput_Configuration, &sPutAnomalyDetectorInput_MetricCharacteristics, &sPutAnomalyDetectorInput_SingleMetricAnomalyDetector, &sPutAnomalyDetectorInput_MetricMathAnomalyDetector}}
+var mPutAnomalyDetectorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAnomalyDetectorOutput_AnomalyDetectorId}}
+var mPutCompositeAlarmInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCompositeAlarmInput_ActionsEnabled, &sPutCompositeAlarmInput_AlarmActions, &sPutCompositeAlarmInput_AlarmDescription, &sPutCompositeAlarmInput_AlarmName, &sPutCompositeAlarmInput_AlarmRule, &sPutCompositeAlarmInput_InsufficientDataActions, &sPutCompositeAlarmInput_OKActions, &sPutCompositeAlarmInput_Tags, &sPutCompositeAlarmInput_ActionsSuppressor, &sPutCompositeAlarmInput_ActionsSuppressorWaitPeriod, &sPutCompositeAlarmInput_ActionsSuppressorExtensionPeriod, &sPutCompositeAlarmInput_ActionConfiguration}, Hash: &hPutCompositeAlarmInput}
+var mPutDashboardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDashboardInput_DashboardName, &sPutDashboardInput_DashboardBody, &sPutDashboardInput_Tags}}
+var mPutDashboardOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDashboardOutput_DashboardValidationMessages}}
+var mPutInsightRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInsightRuleInput_RuleName, &sPutInsightRuleInput_RuleState, &sPutInsightRuleInput_RuleDefinition, &sPutInsightRuleInput_Tags, &sPutInsightRuleInput_ApplyOnTransformedLogs}}
+var mPutLogAlarmInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutLogAlarmInput_AlarmName, &sPutLogAlarmInput_AlarmDescription, &sPutLogAlarmInput_ScheduledQueryConfiguration, &sPutLogAlarmInput_ActionLogLineCount, &sPutLogAlarmInput_ActionLogLineRoleArn, &sPutLogAlarmInput_ActionsEnabled, &sPutLogAlarmInput_OKActions, &sPutLogAlarmInput_AlarmActions, &sPutLogAlarmInput_InsufficientDataActions, &sPutLogAlarmInput_QueryResultsToEvaluate, &sPutLogAlarmInput_QueryResultsToAlarm, &sPutLogAlarmInput_Threshold, &sPutLogAlarmInput_ComparisonOperator, &sPutLogAlarmInput_TreatMissingData, &sPutLogAlarmInput_Tags, &sPutLogAlarmInput_WarmUpConfiguration, &sPutLogAlarmInput_ActionConfiguration}, Hash: &hPutLogAlarmInput}
+var mPutManagedInsightRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutManagedInsightRulesInput_ManagedRules}}
+var mPutManagedInsightRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutManagedInsightRulesOutput_Failures}}
+var mPutMetricAlarmInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetricAlarmInput_AlarmName, &sPutMetricAlarmInput_AlarmDescription, &sPutMetricAlarmInput_ActionsEnabled, &sPutMetricAlarmInput_OKActions, &sPutMetricAlarmInput_AlarmActions, &sPutMetricAlarmInput_InsufficientDataActions, &sPutMetricAlarmInput_MetricName, &sPutMetricAlarmInput_Namespace, &sPutMetricAlarmInput_Statistic, &sPutMetricAlarmInput_ExtendedStatistic, &sPutMetricAlarmInput_Dimensions, &sPutMetricAlarmInput_Period, &sPutMetricAlarmInput_Unit, &sPutMetricAlarmInput_EvaluationPeriods, &sPutMetricAlarmInput_DatapointsToAlarm, &sPutMetricAlarmInput_Threshold, &sPutMetricAlarmInput_ComparisonOperator, &sPutMetricAlarmInput_TreatMissingData, &sPutMetricAlarmInput_EvaluateLowSampleCountPercentile, &sPutMetricAlarmInput_Metrics, &sPutMetricAlarmInput_Tags, &sPutMetricAlarmInput_ThresholdMetricId, &sPutMetricAlarmInput_EvaluationWindow, &sPutMetricAlarmInput_WarmUpConfiguration, &sPutMetricAlarmInput_EvaluationCriteria, &sPutMetricAlarmInput_EvaluationInterval, &sPutMetricAlarmInput_ActionConfiguration}, Hash: &hPutMetricAlarmInput}
+var mPutMetricDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetricDataInput_Namespace, &sPutMetricDataInput_MetricData, &sPutMetricDataInput_EntityMetricData, &sPutMetricDataInput_StrictEntityValidation}}
+var mPutMetricStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetricStreamInput_Name, &sPutMetricStreamInput_IncludeFilters, &sPutMetricStreamInput_ExcludeFilters, &sPutMetricStreamInput_FirehoseArn, &sPutMetricStreamInput_RoleArn, &sPutMetricStreamInput_OutputFormat, &sPutMetricStreamInput_Tags, &sPutMetricStreamInput_StatisticsConfigurations, &sPutMetricStreamInput_IncludeLinkedAccountsMetrics}, Hash: &hPutMetricStreamInput}
+var mPutMetricStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetricStreamOutput_Arn}}
+var mSetAlarmStateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetAlarmStateInput_AlarmName, &sSetAlarmStateInput_StateValue, &sSetAlarmStateInput_StateReason, &sSetAlarmStateInput_StateReasonData}}
+var mStartMetricStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMetricStreamsInput_Names}}
+var mStartOTelEnrichmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOTelEnrichmentInput_IncludeFilters, &sStartOTelEnrichmentInput_ExcludeFilters}}
+var mStartOTelEnrichmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOTelEnrichmentOutput_IncludeFilters, &sStartOTelEnrichmentOutput_ExcludeFilters, &sStartOTelEnrichmentOutput_CreatedAt, &sStartOTelEnrichmentOutput_UpdatedAt}}
+var mStopMetricStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopMetricStreamsInput_Names}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceARN, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceARN, &sUntagResourceInput_TagKeys}}
+var mUpdateOTelEnrichmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOTelEnrichmentInput_IncludeFilters, &sUpdateOTelEnrichmentInput_ExcludeFilters}}
+var mUpdateOTelEnrichmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOTelEnrichmentOutput_IncludeFilters, &sUpdateOTelEnrichmentOutput_ExcludeFilters, &sUpdateOTelEnrichmentOutput_CreatedAt, &sUpdateOTelEnrichmentOutput_UpdatedAt}}
+var mUpdateResourceMetricsConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceMetricsConfigurationInput_ResourceArn, &sUpdateResourceMetricsConfigurationInput_MetricSelections}}
+var mUpdateResourceMetricsConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration}}
+
+var hAnomalyDetector = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	10, 8, 4, 0, 0, 0, 6, 5, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 7,
+	0, 0, 0, 9, 0, 0, 0, 0,
+}}
+var hCompositeAlarm = smithy.MemberHash{Seed: 23, Slots: []uint16{
+	0, 0, 14, 1, 5, 20, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 17, 0, 0, 0, 18, 0,
+	0, 0, 0, 0, 0, 7, 0, 0, 11, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 16, 0, 0,
+	4, 12, 0, 10, 13, 0, 19, 0, 0, 15, 0, 0, 0, 0, 0, 9,
+}}
+var hLogAlarm = smithy.MemberHash{Seed: 39, Slots: []uint16{
+	0, 0, 15, 0, 0, 0, 0, 9, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 8, 14, 16, 0, 0, 10,
+	0, 0, 0, 0, 11, 0, 1, 2, 0, 0, 0, 0, 23, 0, 0, 0, 0, 24, 0, 0, 21, 0, 7, 0,
+	13, 12, 6, 0, 17, 5, 4, 3, 18, 0, 0, 22, 0, 20, 0, 0,
+}}
+var hMetricAlarm = smithy.MemberHash{Seed: 26, Slots: []uint16{
+	0, 0, 0, 22, 0, 0, 0, 0, 0, 19, 0, 0, 7, 0, 17, 0, 0, 0, 0, 2, 0, 0, 0, 33,
+	5, 4, 0, 0, 8, 0, 0, 0, 0, 25, 0, 0, 0, 14, 23, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+	0, 20, 21, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 16, 0, 0, 18, 0,
+	0, 0, 0, 0, 0, 0, 30, 32, 0, 0, 0, 0, 9, 0, 26, 0, 0, 0, 10, 0, 24, 0, 3, 0,
+	0, 27, 11, 0, 0, 0, 0, 15, 34, 0, 0, 31, 0, 0, 0, 0, 12, 0, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 28, 0, 0, 0,
+}}
+var hMetricDatum = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 7, 0, 0, 0, 1, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 9,
+	3, 0, 2, 0, 0, 8, 0, 0,
+}}
+var hStandardUnit = smithy.MemberHash{Seed: 1970, Slots: []uint16{
+	0, 5, 9, 0, 0, 12, 19, 25, 0, 0, 0, 22, 0, 0, 0, 0, 13, 0, 0, 0, 18, 0, 0, 1,
+	4, 0, 0, 0, 8, 0, 0, 16, 0, 0, 26, 0, 0, 0, 0, 23, 0, 0, 10, 0, 3, 27, 20, 21,
+	0, 11, 24, 14, 0, 0, 0, 7, 0, 6, 2, 0, 17, 15, 0, 0,
+}}
+var hDescribeAlarmHistoryInput = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 3, 0, 0, 1, 0, 2, 0, 4, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 9, 5, 8, 7, 0, 0,
+}}
+var hDescribeAlarmsInput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 5, 0, 0, 4, 0, 0, 0, 0, 7, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 8,
+	0, 0, 6, 0, 9, 2, 0, 0,
+}}
+var hGetAlarmMuteRuleOutput = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 1, 0, 0, 5, 0, 0, 2, 0, 4, 8, 0, 0, 7, 0, 0, 0, 0, 3, 6,
+	0, 10, 9, 0, 0, 0, 0, 0,
+}}
+var hGetMetricStatisticsInput = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 2, 8, 7, 4, 0, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0,
+	3, 0, 0, 0, 9, 0, 0, 0,
+}}
+var hGetMetricStreamOutput = smithy.MemberHash{Seed: 23, Slots: []uint16{
+	6, 3, 2, 10, 0, 4, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 11, 7, 0, 5, 0, 1, 12,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hPutCompositeAlarmInput = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	11, 0, 1, 0, 12, 0, 0, 0, 0, 0, 6, 0, 7, 0, 3, 0, 8, 0, 5, 0, 0, 0, 4, 0,
+	0, 2, 0, 0, 0, 9, 10, 0,
+}}
+var hPutLogAlarmInput = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	3, 0, 10, 0, 0, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0,
+	0, 0, 0, 2, 12, 0, 7, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 11, 17, 0,
+	9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 5, 0, 0, 4,
+}}
+var hPutMetricAlarmInput = smithy.MemberHash{Seed: 39, Slots: []uint16{
+	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 8, 0, 6, 20, 16, 0, 0, 0,
+	0, 25, 0, 0, 26, 0, 1, 15, 9, 23, 0, 0, 24, 0, 0, 11, 0, 27, 0, 0, 12, 0, 5, 0,
+	0, 7, 4, 0, 17, 3, 22, 2, 18, 0, 0, 0, 0, 10, 14, 19,
+}}
+var hPutMetricStreamInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	4, 7, 0, 1, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 0, 9,
+}}
+
+var sAssociateDatasetKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDatasetKmsKey, Type: smithy.ShapeTypeOperation, Ext: &eAssociateDatasetKmsKey})
+var sCreateResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceMetricsConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eCreateResourceMetricsConfiguration})
+var sDeleteAlarmMuteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlarmMuteRule, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAlarmMuteRule})
+var sDeleteAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlarms, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAlarms})
+var sDeleteAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnomalyDetector, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAnomalyDetector})
+var sDeleteDashboards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboards, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDashboards})
+var sDeleteInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInsightRules, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInsightRules})
+var sDeleteMetricStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricStream, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMetricStream})
+var sDeleteResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceMetricsConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourceMetricsConfiguration})
+var sDescribeAlarmContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmContributors, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAlarmContributors})
+var sDescribeAlarmHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmHistory, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAlarmHistory})
+var sDescribeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarms, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAlarms})
+var sDescribeAlarmsForMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmsForMetric, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAlarmsForMetric})
+var sDescribeAnomalyDetectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetectors, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAnomalyDetectors})
+var sDescribeInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInsightRules, Type: smithy.ShapeTypeOperation, Ext: &eDescribeInsightRules})
+var sDisableAlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableAlarmActions, Type: smithy.ShapeTypeOperation, Ext: &eDisableAlarmActions})
+var sDisableInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableInsightRules, Type: smithy.ShapeTypeOperation, Ext: &eDisableInsightRules})
+var sDisassociateDatasetKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDatasetKmsKey, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateDatasetKmsKey})
+var sEnableAlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableAlarmActions, Type: smithy.ShapeTypeOperation, Ext: &eEnableAlarmActions})
+var sEnableInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableInsightRules, Type: smithy.ShapeTypeOperation, Ext: &eEnableInsightRules})
+var sGetAlarmMuteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlarmMuteRule, Type: smithy.ShapeTypeOperation, Ext: &eGetAlarmMuteRule})
+var sGetDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboard, Type: smithy.ShapeTypeOperation, Ext: &eGetDashboard})
+var sGetDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataset, Type: smithy.ShapeTypeOperation, Ext: &eGetDataset})
+var sGetInsightRuleReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightRuleReport, Type: smithy.ShapeTypeOperation, Ext: &eGetInsightRuleReport})
+var sGetMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricData, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricData})
+var sGetMetricStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStatistics, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricStatistics})
+var sGetMetricStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStream, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricStream})
+var sGetMetricWidgetImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricWidgetImage, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricWidgetImage})
+var sGetOTelEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOTelEnrichment, Type: smithy.ShapeTypeOperation, Ext: &eGetOTelEnrichment})
+var sGetResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceMetricsConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceMetricsConfiguration})
+var sListAlarmMuteRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlarmMuteRules, Type: smithy.ShapeTypeOperation, Ext: &eListAlarmMuteRules})
+var sListDashboards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboards, Type: smithy.ShapeTypeOperation, Ext: &eListDashboards})
+var sListManagedInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedInsightRules, Type: smithy.ShapeTypeOperation, Ext: &eListManagedInsightRules})
+var sListMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetrics, Type: smithy.ShapeTypeOperation, Ext: &eListMetrics})
+var sListMetricStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetricStreams, Type: smithy.ShapeTypeOperation, Ext: &eListMetricStreams})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutAlarmMuteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlarmMuteRule, Type: smithy.ShapeTypeOperation, Ext: &ePutAlarmMuteRule})
+var sPutAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetector, Type: smithy.ShapeTypeOperation, Ext: &ePutAnomalyDetector})
+var sPutCompositeAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompositeAlarm, Type: smithy.ShapeTypeOperation, Ext: &ePutCompositeAlarm})
+var sPutDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDashboard, Type: smithy.ShapeTypeOperation, Ext: &ePutDashboard})
+var sPutInsightRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightRule, Type: smithy.ShapeTypeOperation, Ext: &ePutInsightRule})
+var sPutLogAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLogAlarm, Type: smithy.ShapeTypeOperation, Ext: &ePutLogAlarm})
+var sPutManagedInsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutManagedInsightRules, Type: smithy.ShapeTypeOperation, Ext: &ePutManagedInsightRules})
+var sPutMetricAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricAlarm, Type: smithy.ShapeTypeOperation, Ext: &ePutMetricAlarm})
+var sPutMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricData, Type: smithy.ShapeTypeOperation, Ext: &ePutMetricData})
+var sPutMetricStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricStream, Type: smithy.ShapeTypeOperation, Ext: &ePutMetricStream})
+var sSetAlarmState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetAlarmState, Type: smithy.ShapeTypeOperation, Ext: &eSetAlarmState})
+var sStartMetricStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMetricStreams, Type: smithy.ShapeTypeOperation, Ext: &eStartMetricStreams})
+var sStartOTelEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOTelEnrichment, Type: smithy.ShapeTypeOperation, Ext: &eStartOTelEnrichment})
+var sStopMetricStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMetricStreams, Type: smithy.ShapeTypeOperation, Ext: &eStopMetricStreams})
+var sStopOTelEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopOTelEnrichment, Type: smithy.ShapeTypeOperation, Ext: &eStopOTelEnrichment})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateOTelEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOTelEnrichment, Type: smithy.ShapeTypeOperation, Ext: &eUpdateOTelEnrichment})
+var sUpdateResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceMetricsConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResourceMetricsConfiguration})
+var s_GraniteServiceVersion20100801 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraniteServiceVersion20100801, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_GraniteServiceVersion20100801})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eActionConfiguration})
+var sActionConfiguration_AlarmTagsPropagation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmTagsPropagation", ID: &iAlarmTagsPropagation, Members: &mAlarmTagsPropagation, Type: smithy.ShapeTypeStructure, Ext: &eActionConfiguration_AlarmTagsPropagation})
+var s_ActionLogLineCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionLogLineCount, Type: smithy.ShapeTypeInteger, Ext: &e_ActionLogLineCount})
+var s_ActionLogLineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionLogLineRoleArn, Type: smithy.ShapeTypeString, Ext: &e_ActionLogLineRoleArn})
+var s_ActionPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionPrefix, Type: smithy.ShapeTypeString, Ext: &e_ActionPrefix})
+var s_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_ActionsEnabled})
+var sActionsSuppressedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionsSuppressedBy, Members: &mActionsSuppressedBy, Type: smithy.ShapeTypeEnum, Ext: &eActionsSuppressedBy})
+var sActionsSuppressedBy_WaitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriod", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionsSuppressedBy_WaitPeriod})
+var sActionsSuppressedBy_ExtensionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtensionPeriod", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionsSuppressedBy_ExtensionPeriod})
+var sActionsSuppressedBy_Alarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alarm", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionsSuppressedBy_Alarm})
+var s_ActionsSuppressedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsSuppressedReason, Type: smithy.ShapeTypeString, Ext: &e_ActionsSuppressedReason})
+var s_AggregationExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationExpression, Type: smithy.ShapeTypeString, Ext: &e_AggregationExpression})
+var s_AlarmArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &e_AlarmArn})
+var sAlarmContributor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmContributor, Members: &mAlarmContributor, Type: smithy.ShapeTypeStructure, Ext: &eAlarmContributor})
+var sAlarmContributor_ContributorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContributorId", ID: &i_ContributorId, Type: smithy.ShapeTypeString, Ext: &eAlarmContributor_ContributorId})
+var sAlarmContributor_ContributorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContributorAttributes", ID: &i_ContributorAttributes, Members: &m_ContributorAttributes, Type: smithy.ShapeTypeMap, Ext: &eAlarmContributor_ContributorAttributes})
+var sAlarmContributor_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eAlarmContributor_StateReason})
+var sAlarmContributor_StateTransitionedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateTransitionedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlarmContributor_StateTransitionedTimestamp})
+var s_AlarmContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmContributors, Members: &m_AlarmContributors, Type: smithy.ShapeTypeList, Ext: &e_AlarmContributors})
+var s_AlarmContributors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarmContributor, Members: &mAlarmContributor, Type: smithy.ShapeTypeStructure, Ext: &e_AlarmContributors_member})
+var s_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &e_AlarmDescription})
+var sAlarmHistoryItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmHistoryItem, Members: &mAlarmHistoryItem, Type: smithy.ShapeTypeStructure, Ext: &eAlarmHistoryItem})
+var sAlarmHistoryItem_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eAlarmHistoryItem_AlarmName})
+var sAlarmHistoryItem_AlarmContributorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributorId", ID: &i_ContributorId, Type: smithy.ShapeTypeString, Ext: &eAlarmHistoryItem_AlarmContributorId})
+var sAlarmHistoryItem_AlarmType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmType", ID: &iAlarmType, Members: &mAlarmType, Type: smithy.ShapeTypeEnum, Ext: &eAlarmHistoryItem_AlarmType})
+var sAlarmHistoryItem_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlarmHistoryItem_Timestamp})
+var sAlarmHistoryItem_HistoryItemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistoryItemType", ID: &iHistoryItemType, Members: &mHistoryItemType, Type: smithy.ShapeTypeEnum, Ext: &eAlarmHistoryItem_HistoryItemType})
+var sAlarmHistoryItem_HistorySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistorySummary", ID: &i_HistorySummary, Type: smithy.ShapeTypeString, Ext: &eAlarmHistoryItem_HistorySummary})
+var sAlarmHistoryItem_HistoryData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistoryData", ID: &i_HistoryData, Type: smithy.ShapeTypeString, Ext: &eAlarmHistoryItem_HistoryData})
+var sAlarmHistoryItem_AlarmContributorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributorAttributes", ID: &i_ContributorAttributes, Members: &m_ContributorAttributes, Type: smithy.ShapeTypeMap, Ext: &eAlarmHistoryItem_AlarmContributorAttributes})
+var s_AlarmHistoryItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmHistoryItems, Members: &m_AlarmHistoryItems, Type: smithy.ShapeTypeList, Ext: &e_AlarmHistoryItems})
+var s_AlarmHistoryItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarmHistoryItem, Members: &mAlarmHistoryItem, Type: smithy.ShapeTypeStructure, Ext: &e_AlarmHistoryItems_member})
+var sAlarmMuteRuleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmMuteRuleStatus, Members: &mAlarmMuteRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eAlarmMuteRuleStatus})
+var sAlarmMuteRuleStatus_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmMuteRuleStatus_SCHEDULED})
+var sAlarmMuteRuleStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmMuteRuleStatus_ACTIVE})
+var sAlarmMuteRuleStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmMuteRuleStatus_EXPIRED})
+var s_AlarmMuteRuleStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmMuteRuleStatuses, Members: &m_AlarmMuteRuleStatuses, Type: smithy.ShapeTypeList, Ext: &e_AlarmMuteRuleStatuses})
+var s_AlarmMuteRuleStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarmMuteRuleStatus, Members: &mAlarmMuteRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &e_AlarmMuteRuleStatuses_member})
+var s_AlarmMuteRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmMuteRuleSummaries, Members: &m_AlarmMuteRuleSummaries, Type: smithy.ShapeTypeList, Ext: &e_AlarmMuteRuleSummaries})
+var s_AlarmMuteRuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarmMuteRuleSummary, Members: &mAlarmMuteRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AlarmMuteRuleSummaries_member})
+var sAlarmMuteRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmMuteRuleSummary, Members: &mAlarmMuteRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &eAlarmMuteRuleSummary})
+var sAlarmMuteRuleSummary_AlarmMuteRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmMuteRuleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAlarmMuteRuleSummary_AlarmMuteRuleArn})
+var sAlarmMuteRuleSummary_ExpireDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpireDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlarmMuteRuleSummary_ExpireDate})
+var sAlarmMuteRuleSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAlarmMuteRuleStatus, Members: &mAlarmMuteRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eAlarmMuteRuleSummary_Status})
+var sAlarmMuteRuleSummary_MuteType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuteType", ID: &i_MuteType, Type: smithy.ShapeTypeString, Ext: &eAlarmMuteRuleSummary_MuteType})
+var sAlarmMuteRuleSummary_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAlarmMuteRuleSummary_LastUpdatedTimestamp})
+var s_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &e_AlarmName})
+var s_AlarmNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmNamePrefix, Type: smithy.ShapeTypeString, Ext: &e_AlarmNamePrefix})
+var s_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmNames, Members: &m_AlarmNames, Type: smithy.ShapeTypeList, Ext: &e_AlarmNames})
+var s_AlarmNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &e_AlarmNames_member})
+var sAlarmPromQLCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmPromQLCriteria, Members: &mAlarmPromQLCriteria, Type: smithy.ShapeTypeStructure, Ext: &eAlarmPromQLCriteria})
+var sAlarmPromQLCriteria_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &i_Query, Type: smithy.ShapeTypeString, Ext: &eAlarmPromQLCriteria_Query})
+var sAlarmPromQLCriteria_PendingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingPeriod", ID: &i_PendingPeriod, Type: smithy.ShapeTypeInteger, Ext: &eAlarmPromQLCriteria_PendingPeriod})
+var sAlarmPromQLCriteria_RecoveryPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryPeriod", ID: &i_RecoveryPeriod, Type: smithy.ShapeTypeInteger, Ext: &eAlarmPromQLCriteria_RecoveryPeriod})
+var s_AlarmRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmRule, Type: smithy.ShapeTypeString, Ext: &e_AlarmRule})
+var sAlarmTagsPropagation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmTagsPropagation, Members: &mAlarmTagsPropagation, Type: smithy.ShapeTypeStructure, Ext: &eAlarmTagsPropagation})
+var sAlarmTagsPropagation_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_AlarmTagsPropagationEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eAlarmTagsPropagation_Enabled})
+var sAlarmTagsPropagation_IncludedTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedTagKeys", ID: &i_AlarmTagsPropagationTagKeys, Members: &m_AlarmTagsPropagationTagKeys, Type: smithy.ShapeTypeList, Ext: &eAlarmTagsPropagation_IncludedTagKeys})
+var sAlarmTagsPropagation_ExcludedTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedTagKeys", ID: &i_AlarmTagsPropagationTagKeys, Members: &m_AlarmTagsPropagationTagKeys, Type: smithy.ShapeTypeList, Ext: &eAlarmTagsPropagation_ExcludedTagKeys})
+var s_AlarmTagsPropagationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmTagsPropagationEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_AlarmTagsPropagationEnabled})
+var s_AlarmTagsPropagationTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmTagsPropagationTagKey, Type: smithy.ShapeTypeString, Ext: &e_AlarmTagsPropagationTagKey})
+var s_AlarmTagsPropagationTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmTagsPropagationTagKeys, Members: &m_AlarmTagsPropagationTagKeys, Type: smithy.ShapeTypeList, Ext: &e_AlarmTagsPropagationTagKeys})
+var s_AlarmTagsPropagationTagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlarmTagsPropagationTagKey, Type: smithy.ShapeTypeString, Ext: &e_AlarmTagsPropagationTagKeys_member})
+var sAlarmType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarmType, Members: &mAlarmType, Type: smithy.ShapeTypeEnum, Ext: &eAlarmType})
+var sAlarmType_CompositeAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeAlarm", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmType_CompositeAlarm})
+var sAlarmType_MetricAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricAlarm", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmType_MetricAlarm})
+var sAlarmType_LogAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogAlarm", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlarmType_LogAlarm})
+var s_AlarmTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlarmTypes, Members: &m_AlarmTypes, Type: smithy.ShapeTypeList, Ext: &e_AlarmTypes})
+var s_AlarmTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarmType, Members: &mAlarmType, Type: smithy.ShapeTypeEnum, Ext: &e_AlarmTypes_member})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetector, Members: &mAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetector})
+var sAnomalyDetector_AnomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetector_AnomalyDetectorId})
+var sAnomalyDetector_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetector_Namespace})
+var sAnomalyDetector_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetector_MetricName})
+var sAnomalyDetector_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eAnomalyDetector_Dimensions})
+var sAnomalyDetector_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_AnomalyDetectorMetricStat, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetector_Stat})
+var sAnomalyDetector_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetector_Configuration})
+var sAnomalyDetector_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iAnomalyDetectorStateValue, Members: &mAnomalyDetectorStateValue, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetector_StateValue})
+var sAnomalyDetector_MetricCharacteristics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricCharacteristics", ID: &iMetricCharacteristics, Members: &mMetricCharacteristics, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetector_MetricCharacteristics})
+var sAnomalyDetector_SingleMetricAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMetricAnomalyDetector", ID: &iSingleMetricAnomalyDetector, Members: &mSingleMetricAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetector_SingleMetricAnomalyDetector})
+var sAnomalyDetector_MetricMathAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricMathAnomalyDetector", ID: &iMetricMathAnomalyDetector, Members: &mMetricMathAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetector_MetricMathAnomalyDetector})
+var sAnomalyDetectorAdaptationSpeed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorAdaptationSpeed, Members: &mAnomalyDetectorAdaptationSpeed, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorAdaptationSpeed})
+var sAnomalyDetectorAdaptationSpeed_FAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorAdaptationSpeed_FAST})
+var sAnomalyDetectorAdaptationSpeed_NORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorAdaptationSpeed_NORMAL})
+var sAnomalyDetectorAdaptationSpeed_SLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorAdaptationSpeed_SLOW})
+var sAnomalyDetectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorConfiguration})
+var sAnomalyDetectorConfiguration_ExcludedTimeRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedTimeRanges", ID: &i_AnomalyDetectorExcludedTimeRanges, Members: &m_AnomalyDetectorExcludedTimeRanges, Type: smithy.ShapeTypeList, Ext: &eAnomalyDetectorConfiguration_ExcludedTimeRanges})
+var sAnomalyDetectorConfiguration_MetricTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricTimezone", ID: &i_AnomalyDetectorMetricTimezone, Type: smithy.ShapeTypeString, Ext: &eAnomalyDetectorConfiguration_MetricTimezone})
+var sAnomalyDetectorConfiguration_AdaptationSpeed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdaptationSpeed", ID: &iAnomalyDetectorAdaptationSpeed, Members: &mAnomalyDetectorAdaptationSpeed, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorConfiguration_AdaptationSpeed})
+var sAnomalyDetectorConfiguration_OutlierFilteringStrength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutlierFilteringStrength", ID: &iAnomalyDetectorOutlierFilteringStrength, Members: &mAnomalyDetectorOutlierFilteringStrength, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorConfiguration_OutlierFilteringStrength})
+var s_AnomalyDetectorExcludedTimeRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorExcludedTimeRanges, Members: &m_AnomalyDetectorExcludedTimeRanges, Type: smithy.ShapeTypeList, Ext: &e_AnomalyDetectorExcludedTimeRanges})
+var s_AnomalyDetectorExcludedTimeRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure, Ext: &e_AnomalyDetectorExcludedTimeRanges_member})
+var s_AnomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorId})
+var s_AnomalyDetectorIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorIds, Members: &m_AnomalyDetectorIds, Type: smithy.ShapeTypeList, Ext: &e_AnomalyDetectorIds})
+var s_AnomalyDetectorIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorIds_member})
+var s_AnomalyDetectorMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorMetricStat, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorMetricStat})
+var s_AnomalyDetectorMetricTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorMetricTimezone, Type: smithy.ShapeTypeString, Ext: &e_AnomalyDetectorMetricTimezone})
+var sAnomalyDetectorOutlierFilteringStrength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorOutlierFilteringStrength, Members: &mAnomalyDetectorOutlierFilteringStrength, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorOutlierFilteringStrength})
+var sAnomalyDetectorOutlierFilteringStrength_MINIMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINIMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorOutlierFilteringStrength_MINIMAL})
+var sAnomalyDetectorOutlierFilteringStrength_MODERATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODERATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorOutlierFilteringStrength_MODERATE})
+var sAnomalyDetectorOutlierFilteringStrength_STRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorOutlierFilteringStrength_STRICT})
+var s_AnomalyDetectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectors, Members: &m_AnomalyDetectors, Type: smithy.ShapeTypeList, Ext: &e_AnomalyDetectors})
+var s_AnomalyDetectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnomalyDetector, Members: &mAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &e_AnomalyDetectors_member})
+var sAnomalyDetectorStateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorStateValue, Members: &mAnomalyDetectorStateValue, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorStateValue})
+var sAnomalyDetectorStateValue_PENDING_TRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_TRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStateValue_PENDING_TRAINING})
+var sAnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINED_INSUFFICIENT_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA})
+var sAnomalyDetectorStateValue_TRAINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorStateValue_TRAINED})
+var sAnomalyDetectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnomalyDetectorType, Members: &mAnomalyDetectorType, Type: smithy.ShapeTypeEnum, Ext: &eAnomalyDetectorType})
+var sAnomalyDetectorType_SINGLE_METRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_METRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorType_SINGLE_METRIC})
+var sAnomalyDetectorType_METRIC_MATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRIC_MATH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnomalyDetectorType_METRIC_MATH})
+var s_AnomalyDetectorTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnomalyDetectorTypes, Members: &m_AnomalyDetectorTypes, Type: smithy.ShapeTypeList, Ext: &e_AnomalyDetectorTypes})
+var s_AnomalyDetectorTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnomalyDetectorType, Members: &mAnomalyDetectorType, Type: smithy.ShapeTypeEnum, Ext: &e_AnomalyDetectorTypes_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var s_AwsQueryErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsQueryErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_AwsQueryErrorMessage})
+var s_BatchFailures = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchFailures, Members: &m_BatchFailures, Type: smithy.ShapeTypeList, Ext: &e_BatchFailures})
+var s_BatchFailures_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartialFailure, Members: &mPartialFailure, Type: smithy.ShapeTypeStructure, Ext: &e_BatchFailures_member})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eComparisonOperator})
+var sComparisonOperator_GreaterThanOrEqualToThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanOrEqualToThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GreaterThanOrEqualToThreshold})
+var sComparisonOperator_GreaterThanThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GreaterThanThreshold})
+var sComparisonOperator_LessThanThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LessThanThreshold})
+var sComparisonOperator_LessThanOrEqualToThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanOrEqualToThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LessThanOrEqualToThreshold})
+var sComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanLowerOrGreaterThanUpperThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold})
+var sComparisonOperator_LessThanLowerThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanLowerThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LessThanLowerThreshold})
+var sComparisonOperator_GreaterThanUpperThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanUpperThreshold", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GreaterThanUpperThreshold})
+var sCompositeAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeAlarm, Members: &mCompositeAlarm, Type: smithy.ShapeTypeStructure, Ext: &eCompositeAlarm})
+var sCompositeAlarm_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eCompositeAlarm_ActionsEnabled})
+var sCompositeAlarm_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eCompositeAlarm_AlarmActions})
+var sCompositeAlarm_AlarmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmArn", ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_AlarmArn})
+var sCompositeAlarm_AlarmConfigurationUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmConfigurationUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCompositeAlarm_AlarmConfigurationUpdatedTimestamp})
+var sCompositeAlarm_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_AlarmDescription})
+var sCompositeAlarm_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_AlarmName})
+var sCompositeAlarm_AlarmRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmRule", ID: &i_AlarmRule, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_AlarmRule})
+var sCompositeAlarm_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eCompositeAlarm_InsufficientDataActions})
+var sCompositeAlarm_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eCompositeAlarm_OKActions})
+var sCompositeAlarm_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_StateReason})
+var sCompositeAlarm_StateReasonData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonData", ID: &i_StateReasonData, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_StateReasonData})
+var sCompositeAlarm_StateUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCompositeAlarm_StateUpdatedTimestamp})
+var sCompositeAlarm_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eCompositeAlarm_StateValue})
+var sCompositeAlarm_StateTransitionedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateTransitionedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCompositeAlarm_StateTransitionedTimestamp})
+var sCompositeAlarm_ActionsSuppressedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressedBy", ID: &iActionsSuppressedBy, Members: &mActionsSuppressedBy, Type: smithy.ShapeTypeEnum, Ext: &eCompositeAlarm_ActionsSuppressedBy})
+var sCompositeAlarm_ActionsSuppressedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressedReason", ID: &i_ActionsSuppressedReason, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_ActionsSuppressedReason})
+var sCompositeAlarm_ActionsSuppressor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressor", ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &eCompositeAlarm_ActionsSuppressor})
+var sCompositeAlarm_ActionsSuppressorWaitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressorWaitPeriod", ID: &i_SuppressorPeriod, Type: smithy.ShapeTypeInteger, Ext: &eCompositeAlarm_ActionsSuppressorWaitPeriod})
+var sCompositeAlarm_ActionsSuppressorExtensionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressorExtensionPeriod", ID: &i_SuppressorPeriod, Type: smithy.ShapeTypeInteger, Ext: &eCompositeAlarm_ActionsSuppressorExtensionPeriod})
+var sCompositeAlarm_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCompositeAlarm_ActionConfiguration})
+var s_CompositeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeAlarms, Members: &m_CompositeAlarms, Type: smithy.ShapeTypeList, Ext: &e_CompositeAlarms})
+var s_CompositeAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompositeAlarm, Members: &mCompositeAlarm, Type: smithy.ShapeTypeStructure, Ext: &e_CompositeAlarms_member})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var s_ContributorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContributorAttributes, Members: &m_ContributorAttributes, Type: smithy.ShapeTypeMap, Ext: &e_ContributorAttributes})
+var s_ContributorAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_ContributorAttributes_key})
+var s_ContributorAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_ContributorAttributes_value})
+var s_ContributorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContributorId, Type: smithy.ShapeTypeString, Ext: &e_ContributorId})
+var s_Counts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Counts, Members: &m_Counts, Type: smithy.ShapeTypeList, Ext: &e_Counts})
+var s_Counts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &e_Counts_member})
+var s_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardArn, Type: smithy.ShapeTypeString, Ext: &e_DashboardArn})
+var s_DashboardBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardBody, Type: smithy.ShapeTypeString, Ext: &e_DashboardBody})
+var s_DashboardEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardEntries, Members: &m_DashboardEntries, Type: smithy.ShapeTypeList, Ext: &e_DashboardEntries})
+var s_DashboardEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashboardEntry, Members: &mDashboardEntry, Type: smithy.ShapeTypeStructure, Ext: &e_DashboardEntries_member})
+var sDashboardEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardEntry, Members: &mDashboardEntry, Type: smithy.ShapeTypeStructure, Ext: &eDashboardEntry})
+var sDashboardEntry_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardName", ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &eDashboardEntry_DashboardName})
+var sDashboardEntry_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString, Ext: &eDashboardEntry_DashboardArn})
+var sDashboardEntry_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModified, Type: smithy.ShapeTypeTimestamp, Ext: &eDashboardEntry_LastModified})
+var sDashboardEntry_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_Size, Type: smithy.ShapeTypeLong, Ext: &eDashboardEntry_Size})
+var s_DashboardErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_DashboardErrorMessage})
+var sDashboardInvalidInputError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardInvalidInputError, Members: &mDashboardInvalidInputError, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDashboardInvalidInputError})
+var sDashboardInvalidInputError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_DashboardErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDashboardInvalidInputError_message})
+var sDashboardInvalidInputError_dashboardValidationMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardValidationMessages", ID: &i_DashboardValidationMessages, Members: &m_DashboardValidationMessages, Type: smithy.ShapeTypeList, Ext: &eDashboardInvalidInputError_dashboardValidationMessages})
+var s_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &e_DashboardName})
+var s_DashboardNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardNamePrefix, Type: smithy.ShapeTypeString, Ext: &e_DashboardNamePrefix})
+var s_DashboardNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardNames, Members: &m_DashboardNames, Type: smithy.ShapeTypeList, Ext: &e_DashboardNames})
+var s_DashboardNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &e_DashboardNames_member})
+var sDashboardNotFoundError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardNotFoundError, Members: &mDashboardNotFoundError, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eDashboardNotFoundError})
+var sDashboardNotFoundError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_DashboardErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDashboardNotFoundError_message})
+var sDashboardValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardValidationMessage, Members: &mDashboardValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &eDashboardValidationMessage})
+var sDashboardValidationMessage_DataPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPath", ID: &i_DataPath, Type: smithy.ShapeTypeString, Ext: &eDashboardValidationMessage_DataPath})
+var sDashboardValidationMessage_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDashboardValidationMessage_Message})
+var s_DashboardValidationMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardValidationMessages, Members: &m_DashboardValidationMessages, Type: smithy.ShapeTypeList, Ext: &e_DashboardValidationMessages})
+var s_DashboardValidationMessages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashboardValidationMessage, Members: &mDashboardValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &e_DashboardValidationMessages_member})
+var s_DataPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataPath, Type: smithy.ShapeTypeString, Ext: &e_DataPath})
+var sDatapoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatapoint, Members: &mDatapoint, Type: smithy.ShapeTypeStructure, Ext: &eDatapoint})
+var sDatapoint_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatapoint_Timestamp})
+var sDatapoint_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eDatapoint_SampleCount})
+var sDatapoint_Average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Average", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eDatapoint_Average})
+var sDatapoint_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eDatapoint_Sum})
+var sDatapoint_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eDatapoint_Minimum})
+var sDatapoint_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eDatapoint_Maximum})
+var sDatapoint_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eDatapoint_Unit})
+var sDatapoint_ExtendedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedStatistics", ID: &i_DatapointValueMap, Members: &m_DatapointValueMap, Type: smithy.ShapeTypeMap, Ext: &eDatapoint_ExtendedStatistics})
+var s_Datapoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Datapoints, Members: &m_Datapoints, Type: smithy.ShapeTypeList, Ext: &e_Datapoints})
+var s_Datapoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatapoint, Members: &mDatapoint, Type: smithy.ShapeTypeStructure, Ext: &e_Datapoints_member})
+var s_DatapointsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatapointsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &e_DatapointsToAlarm})
+var s_DatapointValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &e_DatapointValue})
+var s_DatapointValueMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatapointValueMap, Members: &m_DatapointValueMap, Type: smithy.ShapeTypeMap, Ext: &e_DatapointValueMap})
+var s_DatapointValueMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &e_DatapointValueMap_key})
+var s_DatapointValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &e_DatapointValueMap_value})
+var s_DatapointValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatapointValues, Members: &m_DatapointValues, Type: smithy.ShapeTypeList, Ext: &e_DatapointValues})
+var s_DatapointValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &e_DatapointValues_member})
+var s_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetArn, Type: smithy.ShapeTypeString, Ext: &e_DatasetArn})
+var s_DatasetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetId, Type: smithy.ShapeTypeString, Ext: &e_DatasetId})
+var s_DatasetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString, Ext: &e_DatasetIdentifier})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var sDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &eDimension_Name})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &eDimension_Value})
+var sDimensionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionFilter, Members: &mDimensionFilter, Type: smithy.ShapeTypeStructure, Ext: &eDimensionFilter})
+var sDimensionFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &eDimensionFilter_Name})
+var sDimensionFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &eDimensionFilter_Value})
+var s_DimensionFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionFilters, Members: &m_DimensionFilters, Type: smithy.ShapeTypeList, Ext: &e_DimensionFilters})
+var s_DimensionFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionFilter, Members: &mDimensionFilter, Type: smithy.ShapeTypeStructure, Ext: &e_DimensionFilters_member})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &e_DimensionName})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValue})
+var s_Duration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Duration, Type: smithy.ShapeTypeString, Ext: &e_Duration})
+var s_EndTimeOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTimeOffset, Type: smithy.ShapeTypeLong, Ext: &e_EndTimeOffset})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eEntity})
+var sEntity_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_EntityKeyAttributesMap, Members: &m_EntityKeyAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eEntity_KeyAttributes})
+var sEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_EntityAttributesMap, Members: &m_EntityAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eEntity_Attributes})
+var s_EntityAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAttributesMap, Members: &m_EntityAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_EntityAttributesMap})
+var s_EntityAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EntityAttributesMapKeyString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMap_key})
+var s_EntityAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EntityAttributesMapValueString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMap_value})
+var s_EntityAttributesMapKeyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAttributesMapKeyString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMapKeyString})
+var s_EntityAttributesMapValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAttributesMapValueString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMapValueString})
+var s_EntityKeyAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityKeyAttributesMap, Members: &m_EntityKeyAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_EntityKeyAttributesMap})
+var s_EntityKeyAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EntityKeyAttributesMapKeyString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMap_key})
+var s_EntityKeyAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EntityKeyAttributesMapValueString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMap_value})
+var s_EntityKeyAttributesMapKeyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityKeyAttributesMapKeyString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMapKeyString})
+var s_EntityKeyAttributesMapValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityKeyAttributesMapValueString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMapValueString})
+var sEntityMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityMetricData, Members: &mEntityMetricData, Type: smithy.ShapeTypeStructure, Ext: &eEntityMetricData})
+var sEntityMetricData_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eEntityMetricData_Entity})
+var sEntityMetricData_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &eEntityMetricData_MetricData})
+var s_EntityMetricDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityMetricDataList, Members: &m_EntityMetricDataList, Type: smithy.ShapeTypeList, Ext: &e_EntityMetricDataList})
+var s_EntityMetricDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityMetricData, Members: &mEntityMetricData, Type: smithy.ShapeTypeStructure, Ext: &e_EntityMetricDataList_member})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_EvaluateLowSampleCountPercentile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluateLowSampleCountPercentile, Type: smithy.ShapeTypeString, Ext: &e_EvaluateLowSampleCountPercentile})
+var sEvaluationCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationCriteria, Members: &mEvaluationCriteria, Type: smithy.ShapeTypeUnion, Ext: &eEvaluationCriteria})
+var sEvaluationCriteria_PromQLCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromQLCriteria", ID: &iAlarmPromQLCriteria, Members: &mAlarmPromQLCriteria, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationCriteria_PromQLCriteria})
+var s_EvaluationInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &e_EvaluationInterval})
+var s_EvaluationPeriods = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationPeriods, Type: smithy.ShapeTypeInteger, Ext: &e_EvaluationPeriods})
+var sEvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationState, Members: &mEvaluationState, Type: smithy.ShapeTypeEnum, Ext: &eEvaluationState})
+var sEvaluationState_PARTIAL_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationState_PARTIAL_DATA})
+var sEvaluationState_EVALUATION_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVALUATION_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationState_EVALUATION_FAILURE})
+var sEvaluationState_EVALUATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVALUATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationState_EVALUATION_ERROR})
+var sEvaluationWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationWindow, Members: &mEvaluationWindow, Type: smithy.ShapeTypeUnion, Ext: &eEvaluationWindow})
+var sEvaluationWindow_WallClockWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WallClockWindow", ID: &iWallClockWindow, Members: &mWallClockWindow, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationWindow_WallClockWindow})
+var sEvaluationWindow_SlidingWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlidingWindow", ID: &iSlidingWindow, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationWindow_SlidingWindow})
+var s_ExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionType, Type: smithy.ShapeTypeString, Ext: &e_ExceptionType})
+var s_Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expression, Type: smithy.ShapeTypeString, Ext: &e_Expression})
+var s_ExtendedStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &e_ExtendedStatistic})
+var s_ExtendedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendedStatistics, Members: &m_ExtendedStatistics, Type: smithy.ShapeTypeList, Ext: &e_ExtendedStatistics})
+var s_ExtendedStatistics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &e_ExtendedStatistics_member})
+var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &e_FailureCode})
+var s_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureDescription, Type: smithy.ShapeTypeString, Ext: &e_FailureDescription})
+var s_FailureResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureResource, Type: smithy.ShapeTypeString, Ext: &e_FailureResource})
+var s_FaultDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &e_FaultDescription})
+var s_GetMetricDataLabelTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetMetricDataLabelTimezone, Type: smithy.ShapeTypeString, Ext: &e_GetMetricDataLabelTimezone})
+var s_GetMetricDataMaxDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetMetricDataMaxDatapoints, Type: smithy.ShapeTypeInteger, Ext: &e_GetMetricDataMaxDatapoints})
+var s_HistoryData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HistoryData, Type: smithy.ShapeTypeString, Ext: &e_HistoryData})
+var sHistoryItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHistoryItemType, Members: &mHistoryItemType, Type: smithy.ShapeTypeEnum, Ext: &eHistoryItemType})
+var sHistoryItemType_ConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationUpdate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHistoryItemType_ConfigurationUpdate})
+var sHistoryItemType_StateUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateUpdate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHistoryItemType_StateUpdate})
+var sHistoryItemType_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHistoryItemType_Action})
+var sHistoryItemType_AlarmContributorStateUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributorStateUpdate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHistoryItemType_AlarmContributorStateUpdate})
+var sHistoryItemType_AlarmContributorAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributorAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHistoryItemType_AlarmContributorAction})
+var s_HistorySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HistorySummary, Type: smithy.ShapeTypeString, Ext: &e_HistorySummary})
+var s_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeLinkedAccounts, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeLinkedAccounts})
+var s_IncludeLinkedAccountsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeLinkedAccountsMetrics, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeLinkedAccountsMetrics})
+var sInsightRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightRule, Members: &mInsightRule, Type: smithy.ShapeTypeStructure, Ext: &eInsightRule})
+var sInsightRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &eInsightRule_Name})
+var sInsightRule_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_InsightRuleState, Type: smithy.ShapeTypeString, Ext: &eInsightRule_State})
+var sInsightRule_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_InsightRuleSchema, Type: smithy.ShapeTypeString, Ext: &eInsightRule_Schema})
+var sInsightRule_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_InsightRuleDefinition, Type: smithy.ShapeTypeString, Ext: &eInsightRule_Definition})
+var sInsightRule_ManagedRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedRule", ID: &i_InsightRuleIsManaged, Type: smithy.ShapeTypeBoolean, Ext: &eInsightRule_ManagedRule})
+var sInsightRule_ApplyOnTransformedLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyOnTransformedLogs", ID: &i_InsightRuleOnTransformedLogs, Type: smithy.ShapeTypeBoolean, Ext: &eInsightRule_ApplyOnTransformedLogs})
+var s_InsightRuleAggregationStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleAggregationStatistic, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleAggregationStatistic})
+var sInsightRuleContributor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightRuleContributor, Members: &mInsightRuleContributor, Type: smithy.ShapeTypeStructure, Ext: &eInsightRuleContributor})
+var sInsightRuleContributor_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_InsightRuleContributorKeys, Members: &m_InsightRuleContributorKeys, Type: smithy.ShapeTypeList, Ext: &eInsightRuleContributor_Keys})
+var sInsightRuleContributor_ApproximateAggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateAggregateValue", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleContributor_ApproximateAggregateValue})
+var sInsightRuleContributor_Datapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datapoints", ID: &i_InsightRuleContributorDatapoints, Members: &m_InsightRuleContributorDatapoints, Type: smithy.ShapeTypeList, Ext: &eInsightRuleContributor_Datapoints})
+var sInsightRuleContributorDatapoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightRuleContributorDatapoint, Members: &mInsightRuleContributorDatapoint, Type: smithy.ShapeTypeStructure, Ext: &eInsightRuleContributorDatapoint})
+var sInsightRuleContributorDatapoint_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInsightRuleContributorDatapoint_Timestamp})
+var sInsightRuleContributorDatapoint_ApproximateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateValue", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleContributorDatapoint_ApproximateValue})
+var s_InsightRuleContributorDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributorDatapoints, Members: &m_InsightRuleContributorDatapoints, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleContributorDatapoints})
+var s_InsightRuleContributorDatapoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInsightRuleContributorDatapoint, Members: &mInsightRuleContributorDatapoint, Type: smithy.ShapeTypeStructure, Ext: &e_InsightRuleContributorDatapoints_member})
+var s_InsightRuleContributorKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributorKey, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleContributorKey})
+var s_InsightRuleContributorKeyLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributorKeyLabel, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleContributorKeyLabel})
+var s_InsightRuleContributorKeyLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributorKeyLabels, Members: &m_InsightRuleContributorKeyLabels, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleContributorKeyLabels})
+var s_InsightRuleContributorKeyLabels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InsightRuleContributorKeyLabel, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleContributorKeyLabels_member})
+var s_InsightRuleContributorKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributorKeys, Members: &m_InsightRuleContributorKeys, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleContributorKeys})
+var s_InsightRuleContributorKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InsightRuleContributorKey, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleContributorKeys_member})
+var s_InsightRuleContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleContributors, Members: &m_InsightRuleContributors, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleContributors})
+var s_InsightRuleContributors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInsightRuleContributor, Members: &mInsightRuleContributor, Type: smithy.ShapeTypeStructure, Ext: &e_InsightRuleContributors_member})
+var s_InsightRuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleDefinition, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleDefinition})
+var s_InsightRuleIsManaged = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleIsManaged, Type: smithy.ShapeTypeBoolean, Ext: &e_InsightRuleIsManaged})
+var s_InsightRuleMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_InsightRuleMaxResults})
+var sInsightRuleMetricDatapoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightRuleMetricDatapoint, Members: &mInsightRuleMetricDatapoint, Type: smithy.ShapeTypeStructure, Ext: &eInsightRuleMetricDatapoint})
+var sInsightRuleMetricDatapoint_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInsightRuleMetricDatapoint_Timestamp})
+var sInsightRuleMetricDatapoint_UniqueContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueContributors", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_UniqueContributors})
+var sInsightRuleMetricDatapoint_MaxContributorValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxContributorValue", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_MaxContributorValue})
+var sInsightRuleMetricDatapoint_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_SampleCount})
+var sInsightRuleMetricDatapoint_Average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Average", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_Average})
+var sInsightRuleMetricDatapoint_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_Sum})
+var sInsightRuleMetricDatapoint_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_Minimum})
+var sInsightRuleMetricDatapoint_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eInsightRuleMetricDatapoint_Maximum})
+var s_InsightRuleMetricDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleMetricDatapoints, Members: &m_InsightRuleMetricDatapoints, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleMetricDatapoints})
+var s_InsightRuleMetricDatapoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInsightRuleMetricDatapoint, Members: &mInsightRuleMetricDatapoint, Type: smithy.ShapeTypeStructure, Ext: &e_InsightRuleMetricDatapoints_member})
+var s_InsightRuleMetricList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleMetricList, Members: &m_InsightRuleMetricList, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleMetricList})
+var s_InsightRuleMetricList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InsightRuleMetricName, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleMetricList_member})
+var s_InsightRuleMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleMetricName, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleMetricName})
+var s_InsightRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleName})
+var s_InsightRuleNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleNames, Members: &m_InsightRuleNames, Type: smithy.ShapeTypeList, Ext: &e_InsightRuleNames})
+var s_InsightRuleNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleNames_member})
+var s_InsightRuleOnTransformedLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleOnTransformedLogs, Type: smithy.ShapeTypeBoolean, Ext: &e_InsightRuleOnTransformedLogs})
+var s_InsightRuleOrderBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleOrderBy, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleOrderBy})
+var s_InsightRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRules, Members: &m_InsightRules, Type: smithy.ShapeTypeList, Ext: &e_InsightRules})
+var s_InsightRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInsightRule, Members: &mInsightRule, Type: smithy.ShapeTypeStructure, Ext: &e_InsightRules_member})
+var s_InsightRuleSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleSchema, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleSchema})
+var s_InsightRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleState, Type: smithy.ShapeTypeString, Ext: &e_InsightRuleState})
+var s_InsightRuleUnboundDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &e_InsightRuleUnboundDouble})
+var s_InsightRuleUnboundInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleUnboundInteger, Type: smithy.ShapeTypeInteger, Ext: &e_InsightRuleUnboundInteger})
+var s_InsightRuleUnboundLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightRuleUnboundLong, Type: smithy.ShapeTypeLong, Ext: &e_InsightRuleUnboundLong})
+var sInternalServiceFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceFault, Members: &mInternalServiceFault, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceFault})
+var sInternalServiceFault_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &eInternalServiceFault_Message})
+var sInvalidFormatFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFormatFault, Members: &mInvalidFormatFault, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFormatFault})
+var sInvalidFormatFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidFormatFault_message})
+var sInvalidNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextToken, Members: &mInvalidNextToken, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextToken})
+var sInvalidNextToken_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextToken_message})
+var sInvalidParameterCombinationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterCombinationException, Members: &mInvalidParameterCombinationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterCombinationException})
+var sInvalidParameterCombinationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AwsQueryErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterCombinationException_message})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterValueException})
+var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AwsQueryErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterValueException_message})
+var sKmsAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsAccessDeniedException, Members: &mKmsAccessDeniedException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eKmsAccessDeniedException})
+var sKmsAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKmsAccessDeniedException_Message})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sKmsKeyDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsKeyDisabledException, Members: &mKmsKeyDisabledException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eKmsKeyDisabledException})
+var sKmsKeyDisabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKmsKeyDisabledException_Message})
+var sKmsKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsKeyNotFoundException, Members: &mKmsKeyNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eKmsKeyNotFoundException})
+var sKmsKeyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKmsKeyNotFoundException_Message})
+var sLabelOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelOptions, Members: &mLabelOptions, Type: smithy.ShapeTypeStructure, Ext: &eLabelOptions})
+var sLabelOptions_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_GetMetricDataLabelTimezone, Type: smithy.ShapeTypeString, Ext: &eLabelOptions_Timezone})
+var s_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModified, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModified})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sLimitExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededFault, Members: &mLimitExceededFault, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededFault})
+var sLimitExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededFault_message})
+var s_ListMetricStreamsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListMetricStreamsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListMetricStreamsMaxResults})
+var sLogAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogAlarm, Members: &mLogAlarm, Type: smithy.ShapeTypeStructure, Ext: &eLogAlarm})
+var sLogAlarm_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_AlarmName})
+var sLogAlarm_AlarmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmArn", ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_AlarmArn})
+var sLogAlarm_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_AlarmDescription})
+var sLogAlarm_AlarmConfigurationUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmConfigurationUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLogAlarm_AlarmConfigurationUpdatedTimestamp})
+var sLogAlarm_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eLogAlarm_ActionsEnabled})
+var sLogAlarm_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eLogAlarm_OKActions})
+var sLogAlarm_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eLogAlarm_AlarmActions})
+var sLogAlarm_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eLogAlarm_InsufficientDataActions})
+var sLogAlarm_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eLogAlarm_StateValue})
+var sLogAlarm_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_StateReason})
+var sLogAlarm_StateReasonData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonData", ID: &i_StateReasonData, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_StateReasonData})
+var sLogAlarm_StateUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLogAlarm_StateUpdatedTimestamp})
+var sLogAlarm_ScheduledQueryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledQueryConfiguration", ID: &iScheduledQueryConfiguration, Members: &mScheduledQueryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogAlarm_ScheduledQueryConfiguration})
+var sLogAlarm_QueryResultsToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsToEvaluate", ID: &i_QueryResultsToEvaluate, Type: smithy.ShapeTypeInteger, Ext: &eLogAlarm_QueryResultsToEvaluate})
+var sLogAlarm_QueryResultsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsToAlarm", ID: &i_QueryResultsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &eLogAlarm_QueryResultsToAlarm})
+var sLogAlarm_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_Threshold, Type: smithy.ShapeTypeDouble, Ext: &eLogAlarm_Threshold})
+var sLogAlarm_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eLogAlarm_ComparisonOperator})
+var sLogAlarm_TreatMissingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatMissingData", ID: &i_TreatMissingData, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_TreatMissingData})
+var sLogAlarm_StateTransitionedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateTransitionedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLogAlarm_StateTransitionedTimestamp})
+var sLogAlarm_EvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationState", ID: &iEvaluationState, Members: &mEvaluationState, Type: smithy.ShapeTypeEnum, Ext: &eLogAlarm_EvaluationState})
+var sLogAlarm_ActionLogLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionLogLineCount", ID: &i_ActionLogLineCount, Type: smithy.ShapeTypeInteger, Ext: &eLogAlarm_ActionLogLineCount})
+var sLogAlarm_ActionLogLineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionLogLineRoleArn", ID: &i_ActionLogLineRoleArn, Type: smithy.ShapeTypeString, Ext: &eLogAlarm_ActionLogLineRoleArn})
+var sLogAlarm_WarmUpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmUpConfiguration", ID: &iWarmUpConfiguration, Members: &mWarmUpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogAlarm_WarmUpConfiguration})
+var sLogAlarm_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLogAlarm_ActionConfiguration})
+var s_LogAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogAlarms, Members: &m_LogAlarms, Type: smithy.ShapeTypeList, Ext: &e_LogAlarms})
+var s_LogAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogAlarm, Members: &mLogAlarm, Type: smithy.ShapeTypeStructure, Ext: &e_LogAlarms_member})
+var s_LogGroupIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupIdentifiers, Members: &m_LogGroupIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_LogGroupIdentifiers})
+var s_LogGroupIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_LogGroupIdentifiers_member})
+var sManagedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedRule, Members: &mManagedRule, Type: smithy.ShapeTypeStructure, Ext: &eManagedRule})
+var sManagedRule_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_TemplateName, Type: smithy.ShapeTypeString, Ext: &eManagedRule_TemplateName})
+var sManagedRule_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eManagedRule_ResourceARN})
+var sManagedRule_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eManagedRule_Tags})
+var sManagedRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedRuleDescription, Members: &mManagedRuleDescription, Type: smithy.ShapeTypeStructure, Ext: &eManagedRuleDescription})
+var sManagedRuleDescription_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateName", ID: &i_TemplateName, Type: smithy.ShapeTypeString, Ext: &eManagedRuleDescription_TemplateName})
+var sManagedRuleDescription_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eManagedRuleDescription_ResourceARN})
+var sManagedRuleDescription_RuleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleState", ID: &iManagedRuleState, Members: &mManagedRuleState, Type: smithy.ShapeTypeStructure, Ext: &eManagedRuleDescription_RuleState})
+var s_ManagedRuleDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedRuleDescriptions, Members: &m_ManagedRuleDescriptions, Type: smithy.ShapeTypeList, Ext: &e_ManagedRuleDescriptions})
+var s_ManagedRuleDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedRuleDescription, Members: &mManagedRuleDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedRuleDescriptions_member})
+var s_ManagedRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedRules, Members: &m_ManagedRules, Type: smithy.ShapeTypeList, Ext: &e_ManagedRules})
+var s_ManagedRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedRule, Members: &mManagedRule, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedRules_member})
+var sManagedRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedRuleState, Members: &mManagedRuleState, Type: smithy.ShapeTypeStructure, Ext: &eManagedRuleState})
+var sManagedRuleState_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &eManagedRuleState_RuleName})
+var sManagedRuleState_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_InsightRuleState, Type: smithy.ShapeTypeString, Ext: &eManagedRuleState_State})
+var s_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRecords})
+var s_MaxReturnedResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxReturnedResultsCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaxReturnedResultsCount})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sMessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageData, Members: &mMessageData, Type: smithy.ShapeTypeStructure, Ext: &eMessageData})
+var sMessageData_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_MessageDataCode, Type: smithy.ShapeTypeString, Ext: &eMessageData_Code})
+var sMessageData_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_MessageDataValue, Type: smithy.ShapeTypeString, Ext: &eMessageData_Value})
+var s_MessageDataCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageDataCode, Type: smithy.ShapeTypeString, Ext: &e_MessageDataCode})
+var s_MessageDataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageDataValue, Type: smithy.ShapeTypeString, Ext: &e_MessageDataValue})
+var sMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetric})
+var sMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetric_Namespace})
+var sMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetric_MetricName})
+var sMetric_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetric_Dimensions})
+var sMetricAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricAlarm, Members: &mMetricAlarm, Type: smithy.ShapeTypeStructure, Ext: &eMetricAlarm})
+var sMetricAlarm_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_AlarmName})
+var sMetricAlarm_AlarmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmArn", ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_AlarmArn})
+var sMetricAlarm_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_AlarmDescription})
+var sMetricAlarm_AlarmConfigurationUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmConfigurationUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricAlarm_AlarmConfigurationUpdatedTimestamp})
+var sMetricAlarm_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eMetricAlarm_ActionsEnabled})
+var sMetricAlarm_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eMetricAlarm_OKActions})
+var sMetricAlarm_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eMetricAlarm_AlarmActions})
+var sMetricAlarm_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &eMetricAlarm_InsufficientDataActions})
+var sMetricAlarm_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eMetricAlarm_StateValue})
+var sMetricAlarm_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_StateReason})
+var sMetricAlarm_StateReasonData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonData", ID: &i_StateReasonData, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_StateReasonData})
+var sMetricAlarm_StateUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricAlarm_StateUpdatedTimestamp})
+var sMetricAlarm_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_MetricName})
+var sMetricAlarm_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_Namespace})
+var sMetricAlarm_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &iStatistic, Members: &mStatistic, Type: smithy.ShapeTypeEnum, Ext: &eMetricAlarm_Statistic})
+var sMetricAlarm_ExtendedStatistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedStatistic", ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_ExtendedStatistic})
+var sMetricAlarm_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetricAlarm_Dimensions})
+var sMetricAlarm_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eMetricAlarm_Period})
+var sMetricAlarm_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricAlarm_Unit})
+var sMetricAlarm_EvaluationPeriods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationPeriods", ID: &i_EvaluationPeriods, Type: smithy.ShapeTypeInteger, Ext: &eMetricAlarm_EvaluationPeriods})
+var sMetricAlarm_DatapointsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatapointsToAlarm", ID: &i_DatapointsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &eMetricAlarm_DatapointsToAlarm})
+var sMetricAlarm_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_Threshold, Type: smithy.ShapeTypeDouble, Ext: &eMetricAlarm_Threshold})
+var sMetricAlarm_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eMetricAlarm_ComparisonOperator})
+var sMetricAlarm_TreatMissingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatMissingData", ID: &i_TreatMissingData, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_TreatMissingData})
+var sMetricAlarm_EvaluateLowSampleCountPercentile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluateLowSampleCountPercentile", ID: &i_EvaluateLowSampleCountPercentile, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_EvaluateLowSampleCountPercentile})
+var sMetricAlarm_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eMetricAlarm_Metrics})
+var sMetricAlarm_ThresholdMetricId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdMetricId", ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &eMetricAlarm_ThresholdMetricId})
+var sMetricAlarm_EvaluationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationState", ID: &iEvaluationState, Members: &mEvaluationState, Type: smithy.ShapeTypeEnum, Ext: &eMetricAlarm_EvaluationState})
+var sMetricAlarm_StateTransitionedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateTransitionedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricAlarm_StateTransitionedTimestamp})
+var sMetricAlarm_EvaluationWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationWindow", ID: &iEvaluationWindow, Members: &mEvaluationWindow, Type: smithy.ShapeTypeUnion, Ext: &eMetricAlarm_EvaluationWindow})
+var sMetricAlarm_WarmUpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmUpConfiguration", ID: &iWarmUpConfiguration, Members: &mWarmUpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMetricAlarm_WarmUpConfiguration})
+var sMetricAlarm_EvaluationCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationCriteria", ID: &iEvaluationCriteria, Members: &mEvaluationCriteria, Type: smithy.ShapeTypeUnion, Ext: &eMetricAlarm_EvaluationCriteria})
+var sMetricAlarm_EvaluationInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationInterval", ID: &i_EvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &eMetricAlarm_EvaluationInterval})
+var sMetricAlarm_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMetricAlarm_ActionConfiguration})
+var s_MetricAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricAlarms, Members: &m_MetricAlarms, Type: smithy.ShapeTypeList, Ext: &e_MetricAlarms})
+var s_MetricAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricAlarm, Members: &mMetricAlarm, Type: smithy.ShapeTypeStructure, Ext: &e_MetricAlarms_member})
+var sMetricCharacteristics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricCharacteristics, Members: &mMetricCharacteristics, Type: smithy.ShapeTypeStructure, Ext: &eMetricCharacteristics})
+var sMetricCharacteristics_PeriodicSpikes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodicSpikes", ID: &i_PeriodicSpikes, Type: smithy.ShapeTypeBoolean, Ext: &eMetricCharacteristics_PeriodicSpikes})
+var s_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &e_MetricData})
+var s_MetricData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &e_MetricData_member})
+var s_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &e_MetricDataQueries})
+var s_MetricDataQueries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataQueries_member})
+var sMetricDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery})
+var sMetricDataQuery_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Id})
+var sMetricDataQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery_MetricStat})
+var sMetricDataQuery_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_MetricExpression, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Expression})
+var sMetricDataQuery_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Label})
+var sMetricDataQuery_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnData", ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean, Ext: &eMetricDataQuery_ReturnData})
+var sMetricDataQuery_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eMetricDataQuery_Period})
+var sMetricDataQuery_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_AccountId})
+var sMetricDataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataResult, Members: &mMetricDataResult, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataResult})
+var sMetricDataResult_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &eMetricDataResult_Id})
+var sMetricDataResult_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &eMetricDataResult_Label})
+var sMetricDataResult_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamps", ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Timestamps})
+var sMetricDataResult_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_DatapointValues, Members: &m_DatapointValues, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Values})
+var sMetricDataResult_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iStatusCode, Members: &mStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eMetricDataResult_StatusCode})
+var sMetricDataResult_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Messages})
+var s_MetricDataResultMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &e_MetricDataResultMessages})
+var s_MetricDataResultMessages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessageData, Members: &mMessageData, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataResultMessages_member})
+var s_MetricDataResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataResults, Members: &m_MetricDataResults, Type: smithy.ShapeTypeList, Ext: &e_MetricDataResults})
+var s_MetricDataResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataResult, Members: &mMetricDataResult, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataResults_member})
+var sMetricDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &eMetricDatum})
+var sMetricDatum_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricDatum_MetricName})
+var sMetricDatum_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Dimensions})
+var sMetricDatum_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricDatum_Timestamp})
+var sMetricDatum_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eMetricDatum_Value})
+var sMetricDatum_StatisticValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatisticValues", ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure, Ext: &eMetricDatum_StatisticValues})
+var sMetricDatum_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Values})
+var sMetricDatum_Counts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Counts", ID: &i_Counts, Members: &m_Counts, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Counts})
+var sMetricDatum_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricDatum_Unit})
+var sMetricDatum_StorageResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageResolution", ID: &i_StorageResolution, Type: smithy.ShapeTypeInteger, Ext: &eMetricDatum_StorageResolution})
+var s_MetricExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricExpression, Type: smithy.ShapeTypeString, Ext: &e_MetricExpression})
+var s_MetricId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &e_MetricId})
+var s_MetricLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &e_MetricLabel})
+var sMetricMathAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricMathAnomalyDetector, Members: &mMetricMathAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eMetricMathAnomalyDetector})
+var sMetricMathAnomalyDetector_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eMetricMathAnomalyDetector_MetricDataQueries})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var s_MetricNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricNameList, Members: &m_MetricNameList, Type: smithy.ShapeTypeList, Ext: &e_MetricNameList})
+var s_MetricNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricNameList_member})
+var s_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &e_Metrics})
+var s_Metrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &e_Metrics_member})
+var sMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat})
+var sMetricStat_Metric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metric", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat_Metric})
+var sMetricStat_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eMetricStat_Period})
+var sMetricStat_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_Stat, Type: smithy.ShapeTypeString, Ext: &eMetricStat_Stat})
+var sMetricStat_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricStat_Unit})
+var s_MetricStreamEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamEntries, Members: &m_MetricStreamEntries, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamEntries})
+var s_MetricStreamEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricStreamEntry, Members: &mMetricStreamEntry, Type: smithy.ShapeTypeStructure, Ext: &e_MetricStreamEntries_member})
+var sMetricStreamEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStreamEntry, Members: &mMetricStreamEntry, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamEntry})
+var sMetricStreamEntry_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eMetricStreamEntry_Arn})
+var sMetricStreamEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricStreamEntry_CreationDate})
+var sMetricStreamEntry_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricStreamEntry_LastUpdateDate})
+var sMetricStreamEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &eMetricStreamEntry_Name})
+var sMetricStreamEntry_FirehoseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirehoseArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eMetricStreamEntry_FirehoseArn})
+var sMetricStreamEntry_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_MetricStreamState, Type: smithy.ShapeTypeString, Ext: &eMetricStreamEntry_State})
+var sMetricStreamEntry_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iMetricStreamOutputFormat, Members: &mMetricStreamOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eMetricStreamEntry_OutputFormat})
+var sMetricStreamFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStreamFilter, Members: &mMetricStreamFilter, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamFilter})
+var sMetricStreamFilter_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetricStreamFilter_Namespace})
+var sMetricStreamFilter_MetricNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricNames", ID: &i_MetricStreamFilterMetricNames, Members: &m_MetricStreamFilterMetricNames, Type: smithy.ShapeTypeList, Ext: &eMetricStreamFilter_MetricNames})
+var s_MetricStreamFilterMetricNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamFilterMetricNames, Members: &m_MetricStreamFilterMetricNames, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamFilterMetricNames})
+var s_MetricStreamFilterMetricNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamFilterMetricNames_member})
+var s_MetricStreamFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamFilters, Members: &m_MetricStreamFilters, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamFilters})
+var s_MetricStreamFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricStreamFilter, Members: &mMetricStreamFilter, Type: smithy.ShapeTypeStructure, Ext: &e_MetricStreamFilters_member})
+var s_MetricStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamName})
+var s_MetricStreamNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamNames, Members: &m_MetricStreamNames, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamNames})
+var s_MetricStreamNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamNames_member})
+var sMetricStreamOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStreamOutputFormat, Members: &mMetricStreamOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eMetricStreamOutputFormat})
+var sMetricStreamOutputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamOutputFormat_JSON})
+var sMetricStreamOutputFormat_OPEN_TELEMETRY_0_7 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_TELEMETRY_0_7", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamOutputFormat_OPEN_TELEMETRY_0_7})
+var sMetricStreamOutputFormat_OPEN_TELEMETRY_1_0 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_TELEMETRY_1_0", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamOutputFormat_OPEN_TELEMETRY_1_0})
+var s_MetricStreamState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamState, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamState})
+var s_MetricStreamStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamStatistic, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamStatistic})
+var s_MetricStreamStatisticsAdditionalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamStatisticsAdditionalStatistics, Members: &m_MetricStreamStatisticsAdditionalStatistics, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamStatisticsAdditionalStatistics})
+var s_MetricStreamStatisticsAdditionalStatistics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricStreamStatistic, Type: smithy.ShapeTypeString, Ext: &e_MetricStreamStatisticsAdditionalStatistics_member})
+var sMetricStreamStatisticsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStreamStatisticsConfiguration, Members: &mMetricStreamStatisticsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamStatisticsConfiguration})
+var sMetricStreamStatisticsConfiguration_IncludeMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeMetrics", ID: &i_MetricStreamStatisticsIncludeMetrics, Members: &m_MetricStreamStatisticsIncludeMetrics, Type: smithy.ShapeTypeList, Ext: &eMetricStreamStatisticsConfiguration_IncludeMetrics})
+var sMetricStreamStatisticsConfiguration_AdditionalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalStatistics", ID: &i_MetricStreamStatisticsAdditionalStatistics, Members: &m_MetricStreamStatisticsAdditionalStatistics, Type: smithy.ShapeTypeList, Ext: &eMetricStreamStatisticsConfiguration_AdditionalStatistics})
+var s_MetricStreamStatisticsConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamStatisticsConfigurations, Members: &m_MetricStreamStatisticsConfigurations, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamStatisticsConfigurations})
+var s_MetricStreamStatisticsConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricStreamStatisticsConfiguration, Members: &mMetricStreamStatisticsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_MetricStreamStatisticsConfigurations_member})
+var s_MetricStreamStatisticsIncludeMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricStreamStatisticsIncludeMetrics, Members: &m_MetricStreamStatisticsIncludeMetrics, Type: smithy.ShapeTypeList, Ext: &e_MetricStreamStatisticsIncludeMetrics})
+var s_MetricStreamStatisticsIncludeMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricStreamStatisticsMetric, Members: &mMetricStreamStatisticsMetric, Type: smithy.ShapeTypeStructure, Ext: &e_MetricStreamStatisticsIncludeMetrics_member})
+var sMetricStreamStatisticsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStreamStatisticsMetric, Members: &mMetricStreamStatisticsMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetricStreamStatisticsMetric})
+var sMetricStreamStatisticsMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eMetricStreamStatisticsMetric_Namespace})
+var sMetricStreamStatisticsMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricStreamStatisticsMetric_MetricName})
+var s_MetricWidget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricWidget, Type: smithy.ShapeTypeString, Ext: &e_MetricWidget})
+var s_MetricWidgetImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricWidgetImage, Type: smithy.ShapeTypeBlob, Ext: &e_MetricWidgetImage})
+var sMissingRequiredParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingRequiredParameterException, Members: &mMissingRequiredParameterException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eMissingRequiredParameterException})
+var sMissingRequiredParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AwsQueryErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMissingRequiredParameterException_message})
+var s_MuteTargetAlarmNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MuteTargetAlarmNameList, Members: &m_MuteTargetAlarmNameList, Type: smithy.ShapeTypeList, Ext: &e_MuteTargetAlarmNameList})
+var s_MuteTargetAlarmNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_MuteTargetAlarmNameList_member})
+var sMuteTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMuteTargets, Members: &mMuteTargets, Type: smithy.ShapeTypeStructure, Ext: &eMuteTargets})
+var sMuteTargets_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNames", ID: &i_MuteTargetAlarmNameList, Members: &m_MuteTargetAlarmNameList, Type: smithy.ShapeTypeList, Ext: &eMuteTargets_AlarmNames})
+var s_MuteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MuteType, Type: smithy.ShapeTypeString, Ext: &e_MuteType})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &e_Namespace})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_OnlyStartEvaluatingAfterWarmUpPeriodEnds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnlyStartEvaluatingAfterWarmUpPeriodEnds, Type: smithy.ShapeTypeBoolean, Ext: &e_OnlyStartEvaluatingAfterWarmUpPeriodEnds})
+var s_OTelEnrichmentMetricNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OTelEnrichmentMetricNameList, Members: &m_OTelEnrichmentMetricNameList, Type: smithy.ShapeTypeList, Ext: &e_OTelEnrichmentMetricNameList})
+var s_OTelEnrichmentMetricNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_OTelEnrichmentMetricNameList_member})
+var sOTelEnrichmentMetricSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOTelEnrichmentMetricSelector, Members: &mOTelEnrichmentMetricSelector, Type: smithy.ShapeTypeStructure, Ext: &eOTelEnrichmentMetricSelector})
+var sOTelEnrichmentMetricSelector_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eOTelEnrichmentMetricSelector_Namespace})
+var sOTelEnrichmentMetricSelector_MetricNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricNames", ID: &i_OTelEnrichmentMetricNameList, Members: &m_OTelEnrichmentMetricNameList, Type: smithy.ShapeTypeList, Ext: &eOTelEnrichmentMetricSelector_MetricNames})
+var s_OTelEnrichmentMetricSelectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &e_OTelEnrichmentMetricSelectorList})
+var s_OTelEnrichmentMetricSelectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOTelEnrichmentMetricSelector, Members: &mOTelEnrichmentMetricSelector, Type: smithy.ShapeTypeStructure, Ext: &e_OTelEnrichmentMetricSelectorList_member})
+var sOTelEnrichmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOTelEnrichmentStatus, Members: &mOTelEnrichmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eOTelEnrichmentStatus})
+var sOTelEnrichmentStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOTelEnrichmentStatus_RUNNING})
+var sOTelEnrichmentStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOTelEnrichmentStatus_STOPPED})
+var s_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputFormat, Type: smithy.ShapeTypeString, Ext: &e_OutputFormat})
+var s_OwningAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwningAccounts, Members: &m_OwningAccounts, Type: smithy.ShapeTypeList, Ext: &e_OwningAccounts})
+var s_OwningAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_OwningAccounts_member})
+var sPartialFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartialFailure, Members: &mPartialFailure, Type: smithy.ShapeTypeStructure, Ext: &ePartialFailure})
+var sPartialFailure_FailureResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureResource", ID: &i_FailureResource, Type: smithy.ShapeTypeString, Ext: &ePartialFailure_FailureResource})
+var sPartialFailure_ExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExceptionType", ID: &i_ExceptionType, Type: smithy.ShapeTypeString, Ext: &ePartialFailure_ExceptionType})
+var sPartialFailure_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ePartialFailure_FailureCode})
+var sPartialFailure_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDescription", ID: &i_FailureDescription, Type: smithy.ShapeTypeString, Ext: &ePartialFailure_FailureDescription})
+var s_PendingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingPeriod, Type: smithy.ShapeTypeInteger, Ext: &e_PendingPeriod})
+var s_Period = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &e_Period})
+var s_PeriodicSpikes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeriodicSpikes, Type: smithy.ShapeTypeBoolean, Ext: &e_PeriodicSpikes})
+var s_Query = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Query, Type: smithy.ShapeTypeString, Ext: &e_Query})
+var s_QueryResultsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &e_QueryResultsToAlarm})
+var s_QueryResultsToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultsToEvaluate, Type: smithy.ShapeTypeInteger, Ext: &e_QueryResultsToEvaluate})
+var s_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryString, Type: smithy.ShapeTypeString, Ext: &e_QueryString})
+var sRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure, Ext: &eRange})
+var sRange_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRange_StartTime})
+var sRange_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRange_EndTime})
+var sRecentlyActive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecentlyActive, Members: &mRecentlyActive, Type: smithy.ShapeTypeEnum, Ext: &eRecentlyActive})
+var sRecentlyActive_PT3H = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT3H", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecentlyActive_PT3H})
+var s_RecoveryPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPeriod, Type: smithy.ShapeTypeInteger, Ext: &e_RecoveryPeriod})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflict, Members: &mResourceConflict, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflict})
+var sResourceConflict_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceConflict_message})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &e_ResourceList})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceList_member})
+var sResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceMetricsConfiguration, Members: &mResourceMetricsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eResourceMetricsConfiguration})
+var sResourceMetricsConfiguration_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eResourceMetricsConfiguration_ResourceArn})
+var sResourceMetricsConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceMetricsConfiguration_CreatedAt})
+var sResourceMetricsConfiguration_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eResourceMetricsConfiguration_UpdatedAt})
+var sResourceMetricsConfiguration_MetricSelections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSelections", ID: &i_ResourceMetricSelectionList, Members: &m_ResourceMetricSelectionList, Type: smithy.ShapeTypeList, Ext: &eResourceMetricsConfiguration_MetricSelections})
+var sResourceMetricSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceMetricSelection, Members: &mResourceMetricSelection, Type: smithy.ShapeTypeStructure, Ext: &eResourceMetricSelection})
+var sResourceMetricSelection_IncludeMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeMetrics", ID: &i_MetricNameList, Members: &m_MetricNameList, Type: smithy.ShapeTypeList, Ext: &eResourceMetricSelection_IncludeMetrics})
+var s_ResourceMetricSelectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceMetricSelectionList, Members: &m_ResourceMetricSelectionList, Type: smithy.ShapeTypeList, Ext: &e_ResourceMetricSelectionList})
+var s_ResourceMetricSelectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceMetricSelection, Members: &mResourceMetricSelection, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceMetricSelectionList_member})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFound, Members: &mResourceNotFound, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFound})
+var sResourceNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFound_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FaultDescription, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean, Ext: &e_ReturnData})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRule_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &eRule_Schedule})
+var sScanBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanBy, Members: &mScanBy, Type: smithy.ShapeTypeEnum, Ext: &eScanBy})
+var sScanBy_TIMESTAMP_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP_DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanBy_TIMESTAMP_DESCENDING})
+var sScanBy_TIMESTAMP_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP_ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanBy_TIMESTAMP_ASCENDING})
+var sSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule})
+var sSchedule_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_Expression, Type: smithy.ShapeTypeString, Ext: &eSchedule_Expression})
+var sSchedule_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_Duration, Type: smithy.ShapeTypeString, Ext: &eSchedule_Duration})
+var sSchedule_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_Timezone, Type: smithy.ShapeTypeString, Ext: &eSchedule_Timezone})
+var sScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleConfiguration, Members: &mScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScheduleConfiguration})
+var sScheduleConfiguration_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString, Ext: &eScheduleConfiguration_ScheduleExpression})
+var sScheduleConfiguration_StartTimeOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimeOffset", ID: &i_StartTimeOffset, Type: smithy.ShapeTypeLong, Ext: &eScheduleConfiguration_StartTimeOffset})
+var sScheduleConfiguration_EndTimeOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimeOffset", ID: &i_EndTimeOffset, Type: smithy.ShapeTypeLong, Ext: &eScheduleConfiguration_EndTimeOffset})
+var sScheduledQueryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledQueryConfiguration, Members: &mScheduledQueryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScheduledQueryConfiguration})
+var sScheduledQueryConfiguration_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString, Ext: &eScheduledQueryConfiguration_QueryString})
+var sScheduledQueryConfiguration_LogGroupIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupIdentifiers", ID: &i_LogGroupIdentifiers, Members: &m_LogGroupIdentifiers, Type: smithy.ShapeTypeList, Ext: &eScheduledQueryConfiguration_LogGroupIdentifiers})
+var sScheduledQueryConfiguration_QueryARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eScheduledQueryConfiguration_QueryARN})
+var sScheduledQueryConfiguration_ScheduledQueryRoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledQueryRoleARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eScheduledQueryConfiguration_ScheduledQueryRoleARN})
+var sScheduledQueryConfiguration_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iScheduleConfiguration, Members: &mScheduleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScheduledQueryConfiguration_ScheduleConfiguration})
+var sScheduledQueryConfiguration_AggregationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregationExpression", ID: &i_AggregationExpression, Type: smithy.ShapeTypeString, Ext: &eScheduledQueryConfiguration_AggregationExpression})
+var sScheduledQueryConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eScheduledQueryConfiguration_Tags})
+var s_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString, Ext: &e_ScheduleExpression})
+var sSingleMetricAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleMetricAnomalyDetector, Members: &mSingleMetricAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eSingleMetricAnomalyDetector})
+var sSingleMetricAnomalyDetector_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eSingleMetricAnomalyDetector_AccountId})
+var sSingleMetricAnomalyDetector_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eSingleMetricAnomalyDetector_Namespace})
+var sSingleMetricAnomalyDetector_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eSingleMetricAnomalyDetector_MetricName})
+var sSingleMetricAnomalyDetector_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eSingleMetricAnomalyDetector_Dimensions})
+var sSingleMetricAnomalyDetector_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_AnomalyDetectorMetricStat, Type: smithy.ShapeTypeString, Ext: &eSingleMetricAnomalyDetector_Stat})
+var s_Size = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Size, Type: smithy.ShapeTypeLong, Ext: &e_Size})
+var sSlidingWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlidingWindow, Type: smithy.ShapeTypeStructure, Ext: &eSlidingWindow})
+var sStandardUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eStandardUnit})
+var sStandardUnit_Seconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Seconds", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Seconds})
+var sStandardUnit_Microseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Microseconds", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Microseconds})
+var sStandardUnit_Milliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Milliseconds", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Milliseconds})
+var sStandardUnit_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Bytes})
+var sStandardUnit_Kilobytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kilobytes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Kilobytes})
+var sStandardUnit_Megabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Megabytes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Megabytes})
+var sStandardUnit_Gigabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gigabytes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Gigabytes})
+var sStandardUnit_Terabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terabytes", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Terabytes})
+var sStandardUnit_Bits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bits", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Bits})
+var sStandardUnit_Kilobits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kilobits", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Kilobits})
+var sStandardUnit_Megabits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Megabits", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Megabits})
+var sStandardUnit_Gigabits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gigabits", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Gigabits})
+var sStandardUnit_Terabits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terabits", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Terabits})
+var sStandardUnit_Percent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percent", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Percent})
+var sStandardUnit_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Count})
+var sStandardUnit_Bytes_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Bytes_Second})
+var sStandardUnit_Kilobytes_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kilobytes_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Kilobytes_Second})
+var sStandardUnit_Megabytes_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Megabytes_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Megabytes_Second})
+var sStandardUnit_Gigabytes_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gigabytes_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Gigabytes_Second})
+var sStandardUnit_Terabytes_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terabytes_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Terabytes_Second})
+var sStandardUnit_Bits_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bits_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Bits_Second})
+var sStandardUnit_Kilobits_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Kilobits_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Kilobits_Second})
+var sStandardUnit_Megabits_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Megabits_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Megabits_Second})
+var sStandardUnit_Gigabits_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gigabits_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Gigabits_Second})
+var sStandardUnit_Terabits_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terabits_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Terabits_Second})
+var sStandardUnit_Count_Second = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count_Second", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_Count_Second})
+var sStandardUnit_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_None})
+var s_StartTimeOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTimeOffset, Type: smithy.ShapeTypeLong, Ext: &e_StartTimeOffset})
+var s_Stat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stat, Type: smithy.ShapeTypeString, Ext: &e_Stat})
+var s_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &e_StateReason})
+var s_StateReasonData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateReasonData, Type: smithy.ShapeTypeString, Ext: &e_StateReasonData})
+var sStateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eStateValue})
+var sStateValue_OK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStateValue_OK})
+var sStateValue_ALARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStateValue_ALARM})
+var sStateValue_INSUFFICIENT_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStateValue_INSUFFICIENT_DATA})
+var sStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatistic, Members: &mStatistic, Type: smithy.ShapeTypeEnum, Ext: &eStatistic})
+var sStatistic_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatistic_SampleCount})
+var sStatistic_Average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Average", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatistic_Average})
+var sStatistic_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatistic_Sum})
+var sStatistic_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatistic_Minimum})
+var sStatistic_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatistic_Maximum})
+var s_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistics, Members: &m_Statistics, Type: smithy.ShapeTypeList, Ext: &e_Statistics})
+var s_Statistics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatistic, Members: &mStatistic, Type: smithy.ShapeTypeEnum, Ext: &e_Statistics_member})
+var sStatisticSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure, Ext: &eStatisticSet})
+var sStatisticSet_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_SampleCount})
+var sStatisticSet_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Sum})
+var sStatisticSet_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Minimum})
+var sStatisticSet_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Maximum})
+var sStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusCode, Members: &mStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eStatusCode})
+var sStatusCode_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_COMPLETE})
+var sStatusCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_INTERNAL_ERROR})
+var sStatusCode_PARTIAL_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_PARTIAL_DATA})
+var sStatusCode_FORBIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORBIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_FORBIDDEN})
+var s_StorageResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageResolution, Type: smithy.ShapeTypeInteger, Ext: &e_StorageResolution})
+var s_StrictEntityValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StrictEntityValidation, Type: smithy.ShapeTypeBoolean, Ext: &e_StrictEntityValidation})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_SuppressorPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuppressorPeriod, Type: smithy.ShapeTypeInteger, Ext: &e_SuppressorPeriod})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateName, Type: smithy.ShapeTypeString, Ext: &e_TemplateName})
+var s_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Threshold, Type: smithy.ShapeTypeDouble, Ext: &e_Threshold})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList, Ext: &e_Timestamps})
+var s_Timestamps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamps_member})
+var s_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timezone, Type: smithy.ShapeTypeString, Ext: &e_Timezone})
+var s_TreatMissingData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TreatMissingData, Type: smithy.ShapeTypeString, Ext: &e_TreatMissingData})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_ValidationExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionMessage})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatapointValue, Type: smithy.ShapeTypeDouble, Ext: &e_Values_member})
+var sWallClockWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWallClockWindow, Members: &mWallClockWindow, Type: smithy.ShapeTypeStructure, Ext: &eWallClockWindow})
+var sWallClockWindow_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_Timezone, Type: smithy.ShapeTypeString, Ext: &eWallClockWindow_Timezone})
+var sWarmUpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmUpConfiguration, Members: &mWarmUpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWarmUpConfiguration})
+var sWarmUpConfiguration_WarmUpPeriodDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmUpPeriodDurationInMinutes", ID: &i_WarmUpPeriodDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &eWarmUpConfiguration_WarmUpPeriodDurationInMinutes})
+var sWarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnlyStartEvaluatingAfterWarmUpPeriodEnds", ID: &i_OnlyStartEvaluatingAfterWarmUpPeriodEnds, Type: smithy.ShapeTypeBoolean, Ext: &eWarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds})
+var s_WarmUpPeriodDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarmUpPeriodDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_WarmUpPeriodDurationInMinutes})
+var sAssociateDatasetKmsKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDatasetKmsKeyInput, Members: &mAssociateDatasetKmsKeyInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateDatasetKmsKeyInput})
+var sAssociateDatasetKmsKeyInput_DatasetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetIdentifier", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString, Ext: &eAssociateDatasetKmsKeyInput_DatasetIdentifier})
+var sAssociateDatasetKmsKeyInput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eAssociateDatasetKmsKeyInput_KmsKeyArn})
+var sAssociateDatasetKmsKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDatasetKmsKeyOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateDatasetKmsKeyOutput})
+var sCreateResourceMetricsConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceMetricsConfigurationInput, Members: &mCreateResourceMetricsConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceMetricsConfigurationInput})
+var sCreateResourceMetricsConfigurationInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateResourceMetricsConfigurationInput_ResourceArn})
+var sCreateResourceMetricsConfigurationInput_MetricSelections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSelections", ID: &i_ResourceMetricSelectionList, Members: &m_ResourceMetricSelectionList, Type: smithy.ShapeTypeList, Ext: &eCreateResourceMetricsConfigurationInput_MetricSelections})
+var sCreateResourceMetricsConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceMetricsConfigurationOutput, Members: &mCreateResourceMetricsConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceMetricsConfigurationOutput})
+var sCreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMetricsConfiguration", ID: &iResourceMetricsConfiguration, Members: &mResourceMetricsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration})
+var sDeleteAlarmMuteRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlarmMuteRuleInput, Members: &mDeleteAlarmMuteRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAlarmMuteRuleInput})
+var sDeleteAlarmMuteRuleInput_AlarmMuteRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmMuteRuleName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteAlarmMuteRuleInput_AlarmMuteRuleName})
+var sDeleteAlarmsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlarmsInput, Members: &mDeleteAlarmsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAlarmsInput})
+var sDeleteAlarmsInput_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNames", ID: &i_AlarmNames, Members: &m_AlarmNames, Type: smithy.ShapeTypeList, Ext: &eDeleteAlarmsInput_AlarmNames})
+var sDeleteAnomalyDetectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnomalyDetectorInput, Members: &mDeleteAnomalyDetectorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnomalyDetectorInput})
+var sDeleteAnomalyDetectorInput_AnomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorInput_AnomalyDetectorId})
+var sDeleteAnomalyDetectorInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorInput_Namespace})
+var sDeleteAnomalyDetectorInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorInput_MetricName})
+var sDeleteAnomalyDetectorInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eDeleteAnomalyDetectorInput_Dimensions})
+var sDeleteAnomalyDetectorInput_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_AnomalyDetectorMetricStat, Type: smithy.ShapeTypeString, Ext: &eDeleteAnomalyDetectorInput_Stat})
+var sDeleteAnomalyDetectorInput_SingleMetricAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMetricAnomalyDetector", ID: &iSingleMetricAnomalyDetector, Members: &mSingleMetricAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnomalyDetectorInput_SingleMetricAnomalyDetector})
+var sDeleteAnomalyDetectorInput_MetricMathAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricMathAnomalyDetector", ID: &iMetricMathAnomalyDetector, Members: &mMetricMathAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnomalyDetectorInput_MetricMathAnomalyDetector})
+var sDeleteAnomalyDetectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAnomalyDetectorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAnomalyDetectorOutput})
+var sDeleteDashboardsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardsInput, Members: &mDeleteDashboardsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDashboardsInput})
+var sDeleteDashboardsInput_DashboardNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardNames", ID: &i_DashboardNames, Members: &m_DashboardNames, Type: smithy.ShapeTypeList, Ext: &eDeleteDashboardsInput_DashboardNames})
+var sDeleteDashboardsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDashboardsOutput})
+var sDeleteInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInsightRulesInput, Members: &mDeleteInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInsightRulesInput})
+var sDeleteInsightRulesInput_RuleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNames", ID: &i_InsightRuleNames, Members: &m_InsightRuleNames, Type: smithy.ShapeTypeList, Ext: &eDeleteInsightRulesInput_RuleNames})
+var sDeleteInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInsightRulesOutput, Members: &mDeleteInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInsightRulesOutput})
+var sDeleteInsightRulesOutput_Failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failures", ID: &i_BatchFailures, Members: &m_BatchFailures, Type: smithy.ShapeTypeList, Ext: &eDeleteInsightRulesOutput_Failures})
+var sDeleteMetricStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricStreamInput, Members: &mDeleteMetricStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMetricStreamInput})
+var sDeleteMetricStreamInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &eDeleteMetricStreamInput_Name})
+var sDeleteMetricStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMetricStreamOutput})
+var sDeleteResourceMetricsConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceMetricsConfigurationInput, Members: &mDeleteResourceMetricsConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceMetricsConfigurationInput})
+var sDeleteResourceMetricsConfigurationInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceMetricsConfigurationInput_ResourceArn})
+var sDeleteResourceMetricsConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceMetricsConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceMetricsConfigurationOutput})
+var sDescribeAlarmContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmContributorsInput, Members: &mDescribeAlarmContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmContributorsInput})
+var sDescribeAlarmContributorsInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmContributorsInput_AlarmName})
+var sDescribeAlarmContributorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmContributorsInput_NextToken})
+var sDescribeAlarmContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmContributorsOutput, Members: &mDescribeAlarmContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmContributorsOutput})
+var sDescribeAlarmContributorsOutput_AlarmContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributors", ID: &i_AlarmContributors, Members: &m_AlarmContributors, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmContributorsOutput_AlarmContributors})
+var sDescribeAlarmContributorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmContributorsOutput_NextToken})
+var sDescribeAlarmHistoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmHistoryInput, Members: &mDescribeAlarmHistoryInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmHistoryInput})
+var sDescribeAlarmHistoryInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmHistoryInput_AlarmName})
+var sDescribeAlarmHistoryInput_AlarmContributorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmContributorId", ID: &i_ContributorId, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmHistoryInput_AlarmContributorId})
+var sDescribeAlarmHistoryInput_AlarmTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmTypes", ID: &i_AlarmTypes, Members: &m_AlarmTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmHistoryInput_AlarmTypes})
+var sDescribeAlarmHistoryInput_HistoryItemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistoryItemType", ID: &iHistoryItemType, Members: &mHistoryItemType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAlarmHistoryInput_HistoryItemType})
+var sDescribeAlarmHistoryInput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAlarmHistoryInput_StartDate})
+var sDescribeAlarmHistoryInput_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeAlarmHistoryInput_EndDate})
+var sDescribeAlarmHistoryInput_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAlarmHistoryInput_MaxRecords})
+var sDescribeAlarmHistoryInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmHistoryInput_NextToken})
+var sDescribeAlarmHistoryInput_ScanBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScanBy", ID: &iScanBy, Members: &mScanBy, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAlarmHistoryInput_ScanBy})
+var sDescribeAlarmHistoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmHistoryOutput, Members: &mDescribeAlarmHistoryOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmHistoryOutput})
+var sDescribeAlarmHistoryOutput_AlarmHistoryItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmHistoryItems", ID: &i_AlarmHistoryItems, Members: &m_AlarmHistoryItems, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmHistoryOutput_AlarmHistoryItems})
+var sDescribeAlarmHistoryOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmHistoryOutput_NextToken})
+var sDescribeAlarmsForMetricInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmsForMetricInput, Members: &mDescribeAlarmsForMetricInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmsForMetricInput})
+var sDescribeAlarmsForMetricInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsForMetricInput_MetricName})
+var sDescribeAlarmsForMetricInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsForMetricInput_Namespace})
+var sDescribeAlarmsForMetricInput_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &iStatistic, Members: &mStatistic, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAlarmsForMetricInput_Statistic})
+var sDescribeAlarmsForMetricInput_ExtendedStatistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedStatistic", ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsForMetricInput_ExtendedStatistic})
+var sDescribeAlarmsForMetricInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsForMetricInput_Dimensions})
+var sDescribeAlarmsForMetricInput_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAlarmsForMetricInput_Period})
+var sDescribeAlarmsForMetricInput_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAlarmsForMetricInput_Unit})
+var sDescribeAlarmsForMetricOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmsForMetricOutput, Members: &mDescribeAlarmsForMetricOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmsForMetricOutput})
+var sDescribeAlarmsForMetricOutput_MetricAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricAlarms", ID: &i_MetricAlarms, Members: &m_MetricAlarms, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsForMetricOutput_MetricAlarms})
+var sDescribeAlarmsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmsInput, Members: &mDescribeAlarmsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmsInput})
+var sDescribeAlarmsInput_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNames", ID: &i_AlarmNames, Members: &m_AlarmNames, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsInput_AlarmNames})
+var sDescribeAlarmsInput_AlarmNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNamePrefix", ID: &i_AlarmNamePrefix, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsInput_AlarmNamePrefix})
+var sDescribeAlarmsInput_AlarmTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmTypes", ID: &i_AlarmTypes, Members: &m_AlarmTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsInput_AlarmTypes})
+var sDescribeAlarmsInput_ChildrenOfAlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildrenOfAlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsInput_ChildrenOfAlarmName})
+var sDescribeAlarmsInput_ParentsOfAlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentsOfAlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsInput_ParentsOfAlarmName})
+var sDescribeAlarmsInput_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAlarmsInput_StateValue})
+var sDescribeAlarmsInput_ActionPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionPrefix", ID: &i_ActionPrefix, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsInput_ActionPrefix})
+var sDescribeAlarmsInput_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAlarmsInput_MaxRecords})
+var sDescribeAlarmsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsInput_NextToken})
+var sDescribeAlarmsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAlarmsOutput, Members: &mDescribeAlarmsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAlarmsOutput})
+var sDescribeAlarmsOutput_CompositeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositeAlarms", ID: &i_CompositeAlarms, Members: &m_CompositeAlarms, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsOutput_CompositeAlarms})
+var sDescribeAlarmsOutput_MetricAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricAlarms", ID: &i_MetricAlarms, Members: &m_MetricAlarms, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsOutput_MetricAlarms})
+var sDescribeAlarmsOutput_LogAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogAlarms", ID: &i_LogAlarms, Members: &m_LogAlarms, Type: smithy.ShapeTypeList, Ext: &eDescribeAlarmsOutput_LogAlarms})
+var sDescribeAlarmsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAlarmsOutput_NextToken})
+var sDescribeAnomalyDetectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetectorsInput, Members: &mDescribeAnomalyDetectorsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnomalyDetectorsInput})
+var sDescribeAnomalyDetectorsInput_AnomalyDetectorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectorIds", ID: &i_AnomalyDetectorIds, Members: &m_AnomalyDetectorIds, Type: smithy.ShapeTypeList, Ext: &eDescribeAnomalyDetectorsInput_AnomalyDetectorIds})
+var sDescribeAnomalyDetectorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorsInput_NextToken})
+var sDescribeAnomalyDetectorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxReturnedResultsCount, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAnomalyDetectorsInput_MaxResults})
+var sDescribeAnomalyDetectorsInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorsInput_Namespace})
+var sDescribeAnomalyDetectorsInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorsInput_MetricName})
+var sDescribeAnomalyDetectorsInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eDescribeAnomalyDetectorsInput_Dimensions})
+var sDescribeAnomalyDetectorsInput_AnomalyDetectorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectorTypes", ID: &i_AnomalyDetectorTypes, Members: &m_AnomalyDetectorTypes, Type: smithy.ShapeTypeList, Ext: &eDescribeAnomalyDetectorsInput_AnomalyDetectorTypes})
+var sDescribeAnomalyDetectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAnomalyDetectorsOutput, Members: &mDescribeAnomalyDetectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAnomalyDetectorsOutput})
+var sDescribeAnomalyDetectorsOutput_AnomalyDetectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectors", ID: &i_AnomalyDetectors, Members: &m_AnomalyDetectors, Type: smithy.ShapeTypeList, Ext: &eDescribeAnomalyDetectorsOutput_AnomalyDetectors})
+var sDescribeAnomalyDetectorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAnomalyDetectorsOutput_NextToken})
+var sDescribeInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInsightRulesInput, Members: &mDescribeInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInsightRulesInput})
+var sDescribeInsightRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInsightRulesInput_NextToken})
+var sDescribeInsightRulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InsightRuleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeInsightRulesInput_MaxResults})
+var sDescribeInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInsightRulesOutput, Members: &mDescribeInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeInsightRulesOutput})
+var sDescribeInsightRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeInsightRulesOutput_NextToken})
+var sDescribeInsightRulesOutput_InsightRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightRules", ID: &i_InsightRules, Members: &m_InsightRules, Type: smithy.ShapeTypeList, Ext: &eDescribeInsightRulesOutput_InsightRules})
+var sDisableAlarmActionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableAlarmActionsInput, Members: &mDisableAlarmActionsInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableAlarmActionsInput})
+var sDisableAlarmActionsInput_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNames", ID: &i_AlarmNames, Members: &m_AlarmNames, Type: smithy.ShapeTypeList, Ext: &eDisableAlarmActionsInput_AlarmNames})
+var sDisableInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableInsightRulesInput, Members: &mDisableInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableInsightRulesInput})
+var sDisableInsightRulesInput_RuleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNames", ID: &i_InsightRuleNames, Members: &m_InsightRuleNames, Type: smithy.ShapeTypeList, Ext: &eDisableInsightRulesInput_RuleNames})
+var sDisableInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableInsightRulesOutput, Members: &mDisableInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisableInsightRulesOutput})
+var sDisableInsightRulesOutput_Failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failures", ID: &i_BatchFailures, Members: &m_BatchFailures, Type: smithy.ShapeTypeList, Ext: &eDisableInsightRulesOutput_Failures})
+var sDisassociateDatasetKmsKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDatasetKmsKeyInput, Members: &mDisassociateDatasetKmsKeyInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateDatasetKmsKeyInput})
+var sDisassociateDatasetKmsKeyInput_DatasetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetIdentifier", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisassociateDatasetKmsKeyInput_DatasetIdentifier})
+var sDisassociateDatasetKmsKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDatasetKmsKeyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateDatasetKmsKeyOutput})
+var sEnableAlarmActionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableAlarmActionsInput, Members: &mEnableAlarmActionsInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableAlarmActionsInput})
+var sEnableAlarmActionsInput_AlarmNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmNames", ID: &i_AlarmNames, Members: &m_AlarmNames, Type: smithy.ShapeTypeList, Ext: &eEnableAlarmActionsInput_AlarmNames})
+var sEnableInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableInsightRulesInput, Members: &mEnableInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableInsightRulesInput})
+var sEnableInsightRulesInput_RuleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNames", ID: &i_InsightRuleNames, Members: &m_InsightRuleNames, Type: smithy.ShapeTypeList, Ext: &eEnableInsightRulesInput_RuleNames})
+var sEnableInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableInsightRulesOutput, Members: &mEnableInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eEnableInsightRulesOutput})
+var sEnableInsightRulesOutput_Failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failures", ID: &i_BatchFailures, Members: &m_BatchFailures, Type: smithy.ShapeTypeList, Ext: &eEnableInsightRulesOutput_Failures})
+var sGetAlarmMuteRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlarmMuteRuleInput, Members: &mGetAlarmMuteRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAlarmMuteRuleInput})
+var sGetAlarmMuteRuleInput_AlarmMuteRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmMuteRuleName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGetAlarmMuteRuleInput_AlarmMuteRuleName})
+var sGetAlarmMuteRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlarmMuteRuleOutput, Members: &mGetAlarmMuteRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAlarmMuteRuleOutput})
+var sGetAlarmMuteRuleOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGetAlarmMuteRuleOutput_Name})
+var sGetAlarmMuteRuleOutput_AlarmMuteRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmMuteRuleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetAlarmMuteRuleOutput_AlarmMuteRuleArn})
+var sGetAlarmMuteRuleOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &eGetAlarmMuteRuleOutput_Description})
+var sGetAlarmMuteRuleOutput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eGetAlarmMuteRuleOutput_Rule})
+var sGetAlarmMuteRuleOutput_MuteTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuteTargets", ID: &iMuteTargets, Members: &mMuteTargets, Type: smithy.ShapeTypeStructure, Ext: &eGetAlarmMuteRuleOutput_MuteTargets})
+var sGetAlarmMuteRuleOutput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAlarmMuteRuleOutput_StartDate})
+var sGetAlarmMuteRuleOutput_ExpireDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpireDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAlarmMuteRuleOutput_ExpireDate})
+var sGetAlarmMuteRuleOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAlarmMuteRuleStatus, Members: &mAlarmMuteRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAlarmMuteRuleOutput_Status})
+var sGetAlarmMuteRuleOutput_LastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAlarmMuteRuleOutput_LastUpdatedTimestamp})
+var sGetAlarmMuteRuleOutput_MuteType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuteType", ID: &i_MuteType, Type: smithy.ShapeTypeString, Ext: &eGetAlarmMuteRuleOutput_MuteType})
+var sGetDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardInput, Members: &mGetDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDashboardInput})
+var sGetDashboardInput_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardName", ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &eGetDashboardInput_DashboardName})
+var sGetDashboardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardOutput, Members: &mGetDashboardOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDashboardOutput})
+var sGetDashboardOutput_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString, Ext: &eGetDashboardOutput_DashboardArn})
+var sGetDashboardOutput_DashboardBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardBody", ID: &i_DashboardBody, Type: smithy.ShapeTypeString, Ext: &eGetDashboardOutput_DashboardBody})
+var sGetDashboardOutput_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardName", ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &eGetDashboardOutput_DashboardName})
+var sGetDatasetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatasetInput, Members: &mGetDatasetInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDatasetInput})
+var sGetDatasetInput_DatasetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetIdentifier", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetDatasetInput_DatasetIdentifier})
+var sGetDatasetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatasetOutput, Members: &mGetDatasetOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDatasetOutput})
+var sGetDatasetOutput_DatasetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetId", ID: &i_DatasetId, Type: smithy.ShapeTypeString, Ext: &eGetDatasetOutput_DatasetId})
+var sGetDatasetOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString, Ext: &eGetDatasetOutput_Arn})
+var sGetDatasetOutput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eGetDatasetOutput_KmsKeyArn})
+var sGetInsightRuleReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightRuleReportInput, Members: &mGetInsightRuleReportInput, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightRuleReportInput})
+var sGetInsightRuleReportInput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &eGetInsightRuleReportInput_RuleName})
+var sGetInsightRuleReportInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInsightRuleReportInput_StartTime})
+var sGetInsightRuleReportInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInsightRuleReportInput_EndTime})
+var sGetInsightRuleReportInput_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eGetInsightRuleReportInput_Period})
+var sGetInsightRuleReportInput_MaxContributorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxContributorCount", ID: &i_InsightRuleUnboundInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetInsightRuleReportInput_MaxContributorCount})
+var sGetInsightRuleReportInput_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_InsightRuleMetricList, Members: &m_InsightRuleMetricList, Type: smithy.ShapeTypeList, Ext: &eGetInsightRuleReportInput_Metrics})
+var sGetInsightRuleReportInput_OrderBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderBy", ID: &i_InsightRuleOrderBy, Type: smithy.ShapeTypeString, Ext: &eGetInsightRuleReportInput_OrderBy})
+var sGetInsightRuleReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightRuleReportOutput, Members: &mGetInsightRuleReportOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetInsightRuleReportOutput})
+var sGetInsightRuleReportOutput_KeyLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyLabels", ID: &i_InsightRuleContributorKeyLabels, Members: &m_InsightRuleContributorKeyLabels, Type: smithy.ShapeTypeList, Ext: &eGetInsightRuleReportOutput_KeyLabels})
+var sGetInsightRuleReportOutput_AggregationStatistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregationStatistic", ID: &i_InsightRuleAggregationStatistic, Type: smithy.ShapeTypeString, Ext: &eGetInsightRuleReportOutput_AggregationStatistic})
+var sGetInsightRuleReportOutput_AggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregateValue", ID: &i_InsightRuleUnboundDouble, Type: smithy.ShapeTypeDouble, Ext: &eGetInsightRuleReportOutput_AggregateValue})
+var sGetInsightRuleReportOutput_ApproximateUniqueCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateUniqueCount", ID: &i_InsightRuleUnboundLong, Type: smithy.ShapeTypeLong, Ext: &eGetInsightRuleReportOutput_ApproximateUniqueCount})
+var sGetInsightRuleReportOutput_Contributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contributors", ID: &i_InsightRuleContributors, Members: &m_InsightRuleContributors, Type: smithy.ShapeTypeList, Ext: &eGetInsightRuleReportOutput_Contributors})
+var sGetInsightRuleReportOutput_MetricDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDatapoints", ID: &i_InsightRuleMetricDatapoints, Members: &m_InsightRuleMetricDatapoints, Type: smithy.ShapeTypeList, Ext: &eGetInsightRuleReportOutput_MetricDatapoints})
+var sGetMetricDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricDataInput, Members: &mGetMetricDataInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataInput})
+var sGetMetricDataInput_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataInput_MetricDataQueries})
+var sGetMetricDataInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricDataInput_StartTime})
+var sGetMetricDataInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricDataInput_EndTime})
+var sGetMetricDataInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetMetricDataInput_NextToken})
+var sGetMetricDataInput_ScanBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScanBy", ID: &iScanBy, Members: &mScanBy, Type: smithy.ShapeTypeEnum, Ext: &eGetMetricDataInput_ScanBy})
+var sGetMetricDataInput_MaxDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxDatapoints", ID: &i_GetMetricDataMaxDatapoints, Type: smithy.ShapeTypeInteger, Ext: &eGetMetricDataInput_MaxDatapoints})
+var sGetMetricDataInput_LabelOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelOptions", ID: &iLabelOptions, Members: &mLabelOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataInput_LabelOptions})
+var sGetMetricDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricDataOutput, Members: &mGetMetricDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataOutput})
+var sGetMetricDataOutput_MetricDataResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataResults", ID: &i_MetricDataResults, Members: &m_MetricDataResults, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataOutput_MetricDataResults})
+var sGetMetricDataOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetMetricDataOutput_NextToken})
+var sGetMetricDataOutput_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataOutput_Messages})
+var sGetMetricStatisticsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStatisticsInput, Members: &mGetMetricStatisticsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricStatisticsInput})
+var sGetMetricStatisticsInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eGetMetricStatisticsInput_Namespace})
+var sGetMetricStatisticsInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStatisticsInput_MetricName})
+var sGetMetricStatisticsInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eGetMetricStatisticsInput_Dimensions})
+var sGetMetricStatisticsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricStatisticsInput_StartTime})
+var sGetMetricStatisticsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricStatisticsInput_EndTime})
+var sGetMetricStatisticsInput_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &eGetMetricStatisticsInput_Period})
+var sGetMetricStatisticsInput_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_Statistics, Members: &m_Statistics, Type: smithy.ShapeTypeList, Ext: &eGetMetricStatisticsInput_Statistics})
+var sGetMetricStatisticsInput_ExtendedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedStatistics", ID: &i_ExtendedStatistics, Members: &m_ExtendedStatistics, Type: smithy.ShapeTypeList, Ext: &eGetMetricStatisticsInput_ExtendedStatistics})
+var sGetMetricStatisticsInput_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eGetMetricStatisticsInput_Unit})
+var sGetMetricStatisticsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStatisticsOutput, Members: &mGetMetricStatisticsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricStatisticsOutput})
+var sGetMetricStatisticsOutput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_MetricLabel, Type: smithy.ShapeTypeString, Ext: &eGetMetricStatisticsOutput_Label})
+var sGetMetricStatisticsOutput_Datapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datapoints", ID: &i_Datapoints, Members: &m_Datapoints, Type: smithy.ShapeTypeList, Ext: &eGetMetricStatisticsOutput_Datapoints})
+var sGetMetricStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStreamInput, Members: &mGetMetricStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricStreamInput})
+var sGetMetricStreamInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamInput_Name})
+var sGetMetricStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricStreamOutput, Members: &mGetMetricStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricStreamOutput})
+var sGetMetricStreamOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamOutput_Arn})
+var sGetMetricStreamOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamOutput_Name})
+var sGetMetricStreamOutput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_MetricStreamFilters, Members: &m_MetricStreamFilters, Type: smithy.ShapeTypeList, Ext: &eGetMetricStreamOutput_IncludeFilters})
+var sGetMetricStreamOutput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_MetricStreamFilters, Members: &m_MetricStreamFilters, Type: smithy.ShapeTypeList, Ext: &eGetMetricStreamOutput_ExcludeFilters})
+var sGetMetricStreamOutput_FirehoseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirehoseArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamOutput_FirehoseArn})
+var sGetMetricStreamOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamOutput_RoleArn})
+var sGetMetricStreamOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_MetricStreamState, Type: smithy.ShapeTypeString, Ext: &eGetMetricStreamOutput_State})
+var sGetMetricStreamOutput_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricStreamOutput_CreationDate})
+var sGetMetricStreamOutput_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricStreamOutput_LastUpdateDate})
+var sGetMetricStreamOutput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iMetricStreamOutputFormat, Members: &mMetricStreamOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &eGetMetricStreamOutput_OutputFormat})
+var sGetMetricStreamOutput_StatisticsConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatisticsConfigurations", ID: &i_MetricStreamStatisticsConfigurations, Members: &m_MetricStreamStatisticsConfigurations, Type: smithy.ShapeTypeList, Ext: &eGetMetricStreamOutput_StatisticsConfigurations})
+var sGetMetricStreamOutput_IncludeLinkedAccountsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccountsMetrics", ID: &i_IncludeLinkedAccountsMetrics, Type: smithy.ShapeTypeBoolean, Ext: &eGetMetricStreamOutput_IncludeLinkedAccountsMetrics})
+var sGetMetricWidgetImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricWidgetImageInput, Members: &mGetMetricWidgetImageInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricWidgetImageInput})
+var sGetMetricWidgetImageInput_MetricWidget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricWidget", ID: &i_MetricWidget, Type: smithy.ShapeTypeString, Ext: &eGetMetricWidgetImageInput_MetricWidget})
+var sGetMetricWidgetImageInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &i_OutputFormat, Type: smithy.ShapeTypeString, Ext: &eGetMetricWidgetImageInput_OutputFormat})
+var sGetMetricWidgetImageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricWidgetImageOutput, Members: &mGetMetricWidgetImageOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricWidgetImageOutput})
+var sGetMetricWidgetImageOutput_MetricWidgetImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricWidgetImage", ID: &i_MetricWidgetImage, Type: smithy.ShapeTypeBlob, Ext: &eGetMetricWidgetImageOutput_MetricWidgetImage})
+var sGetOTelEnrichmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOTelEnrichmentInput, Type: smithy.ShapeTypeStructure, Ext: &eGetOTelEnrichmentInput})
+var sGetOTelEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOTelEnrichmentOutput, Members: &mGetOTelEnrichmentOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetOTelEnrichmentOutput})
+var sGetOTelEnrichmentOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOTelEnrichmentStatus, Members: &mOTelEnrichmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetOTelEnrichmentOutput_Status})
+var sGetOTelEnrichmentOutput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eGetOTelEnrichmentOutput_IncludeFilters})
+var sGetOTelEnrichmentOutput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eGetOTelEnrichmentOutput_ExcludeFilters})
+var sGetOTelEnrichmentOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOTelEnrichmentOutput_CreatedAt})
+var sGetOTelEnrichmentOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOTelEnrichmentOutput_UpdatedAt})
+var sGetResourceMetricsConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceMetricsConfigurationInput, Members: &mGetResourceMetricsConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceMetricsConfigurationInput})
+var sGetResourceMetricsConfigurationInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetResourceMetricsConfigurationInput_ResourceArn})
+var sGetResourceMetricsConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceMetricsConfigurationOutput, Members: &mGetResourceMetricsConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceMetricsConfigurationOutput})
+var sGetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMetricsConfiguration", ID: &iResourceMetricsConfiguration, Members: &mResourceMetricsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration})
+var sListAlarmMuteRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlarmMuteRulesInput, Members: &mListAlarmMuteRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eListAlarmMuteRulesInput})
+var sListAlarmMuteRulesInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eListAlarmMuteRulesInput_AlarmName})
+var sListAlarmMuteRulesInput_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statuses", ID: &i_AlarmMuteRuleStatuses, Members: &m_AlarmMuteRuleStatuses, Type: smithy.ShapeTypeList, Ext: &eListAlarmMuteRulesInput_Statuses})
+var sListAlarmMuteRulesInput_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_MaxRecords, Type: smithy.ShapeTypeInteger, Ext: &eListAlarmMuteRulesInput_MaxRecords})
+var sListAlarmMuteRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAlarmMuteRulesInput_NextToken})
+var sListAlarmMuteRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAlarmMuteRulesOutput, Members: &mListAlarmMuteRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAlarmMuteRulesOutput})
+var sListAlarmMuteRulesOutput_AlarmMuteRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmMuteRuleSummaries", ID: &i_AlarmMuteRuleSummaries, Members: &m_AlarmMuteRuleSummaries, Type: smithy.ShapeTypeList, Ext: &eListAlarmMuteRulesOutput_AlarmMuteRuleSummaries})
+var sListAlarmMuteRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAlarmMuteRulesOutput_NextToken})
+var sListDashboardsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsInput, Members: &mListDashboardsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDashboardsInput})
+var sListDashboardsInput_DashboardNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardNamePrefix", ID: &i_DashboardNamePrefix, Type: smithy.ShapeTypeString, Ext: &eListDashboardsInput_DashboardNamePrefix})
+var sListDashboardsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDashboardsInput_NextToken})
+var sListDashboardsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsOutput, Members: &mListDashboardsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDashboardsOutput})
+var sListDashboardsOutput_DashboardEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEntries", ID: &i_DashboardEntries, Members: &m_DashboardEntries, Type: smithy.ShapeTypeList, Ext: &eListDashboardsOutput_DashboardEntries})
+var sListDashboardsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDashboardsOutput_NextToken})
+var sListManagedInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedInsightRulesInput, Members: &mListManagedInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedInsightRulesInput})
+var sListManagedInsightRulesInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListManagedInsightRulesInput_ResourceARN})
+var sListManagedInsightRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedInsightRulesInput_NextToken})
+var sListManagedInsightRulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InsightRuleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListManagedInsightRulesInput_MaxResults})
+var sListManagedInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedInsightRulesOutput, Members: &mListManagedInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedInsightRulesOutput})
+var sListManagedInsightRulesOutput_ManagedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedRules", ID: &i_ManagedRuleDescriptions, Members: &m_ManagedRuleDescriptions, Type: smithy.ShapeTypeList, Ext: &eListManagedInsightRulesOutput_ManagedRules})
+var sListManagedInsightRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedInsightRulesOutput_NextToken})
+var sListMetricsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetricsInput, Members: &mListMetricsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMetricsInput})
+var sListMetricsInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &eListMetricsInput_Namespace})
+var sListMetricsInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eListMetricsInput_MetricName})
+var sListMetricsInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionFilters, Members: &m_DimensionFilters, Type: smithy.ShapeTypeList, Ext: &eListMetricsInput_Dimensions})
+var sListMetricsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMetricsInput_NextToken})
+var sListMetricsInput_RecentlyActive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecentlyActive", ID: &iRecentlyActive, Members: &mRecentlyActive, Type: smithy.ShapeTypeEnum, Ext: &eListMetricsInput_RecentlyActive})
+var sListMetricsInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &i_IncludeLinkedAccounts, Type: smithy.ShapeTypeBoolean, Ext: &eListMetricsInput_IncludeLinkedAccounts})
+var sListMetricsInput_OwningAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListMetricsInput_OwningAccount})
+var sListMetricsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetricsOutput, Members: &mListMetricsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMetricsOutput})
+var sListMetricsOutput_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &eListMetricsOutput_Metrics})
+var sListMetricsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMetricsOutput_NextToken})
+var sListMetricsOutput_OwningAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningAccounts", ID: &i_OwningAccounts, Members: &m_OwningAccounts, Type: smithy.ShapeTypeList, Ext: &eListMetricsOutput_OwningAccounts})
+var sListMetricStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetricStreamsInput, Members: &mListMetricStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMetricStreamsInput})
+var sListMetricStreamsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMetricStreamsInput_NextToken})
+var sListMetricStreamsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListMetricStreamsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListMetricStreamsInput_MaxResults})
+var sListMetricStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetricStreamsOutput, Members: &mListMetricStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMetricStreamsOutput})
+var sListMetricStreamsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMetricStreamsOutput_NextToken})
+var sListMetricStreamsOutput_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_MetricStreamEntries, Members: &m_MetricStreamEntries, Type: smithy.ShapeTypeList, Ext: &eListMetricStreamsOutput_Entries})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_ResourceARN})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_Tags})
+var sPutAlarmMuteRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlarmMuteRuleInput, Members: &mPutAlarmMuteRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ePutAlarmMuteRuleInput})
+var sPutAlarmMuteRuleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ePutAlarmMuteRuleInput_Name})
+var sPutAlarmMuteRuleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &ePutAlarmMuteRuleInput_Description})
+var sPutAlarmMuteRuleInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &ePutAlarmMuteRuleInput_Rule})
+var sPutAlarmMuteRuleInput_MuteTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuteTargets", ID: &iMuteTargets, Members: &mMuteTargets, Type: smithy.ShapeTypeStructure, Ext: &ePutAlarmMuteRuleInput_MuteTargets})
+var sPutAlarmMuteRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutAlarmMuteRuleInput_Tags})
+var sPutAlarmMuteRuleInput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutAlarmMuteRuleInput_StartDate})
+var sPutAlarmMuteRuleInput_ExpireDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpireDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutAlarmMuteRuleInput_ExpireDate})
+var sPutAnomalyDetectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetectorInput, Members: &mPutAnomalyDetectorInput, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorInput})
+var sPutAnomalyDetectorInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorInput_Namespace})
+var sPutAnomalyDetectorInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorInput_MetricName})
+var sPutAnomalyDetectorInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &ePutAnomalyDetectorInput_Dimensions})
+var sPutAnomalyDetectorInput_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_AnomalyDetectorMetricStat, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorInput_Stat})
+var sPutAnomalyDetectorInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iAnomalyDetectorConfiguration, Members: &mAnomalyDetectorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorInput_Configuration})
+var sPutAnomalyDetectorInput_MetricCharacteristics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricCharacteristics", ID: &iMetricCharacteristics, Members: &mMetricCharacteristics, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorInput_MetricCharacteristics})
+var sPutAnomalyDetectorInput_SingleMetricAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMetricAnomalyDetector", ID: &iSingleMetricAnomalyDetector, Members: &mSingleMetricAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorInput_SingleMetricAnomalyDetector})
+var sPutAnomalyDetectorInput_MetricMathAnomalyDetector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricMathAnomalyDetector", ID: &iMetricMathAnomalyDetector, Members: &mMetricMathAnomalyDetector, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorInput_MetricMathAnomalyDetector})
+var sPutAnomalyDetectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAnomalyDetectorOutput, Members: &mPutAnomalyDetectorOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutAnomalyDetectorOutput})
+var sPutAnomalyDetectorOutput_AnomalyDetectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnomalyDetectorId", ID: &i_AnomalyDetectorId, Type: smithy.ShapeTypeString, Ext: &ePutAnomalyDetectorOutput_AnomalyDetectorId})
+var sPutCompositeAlarmInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompositeAlarmInput, Members: &mPutCompositeAlarmInput, Type: smithy.ShapeTypeStructure, Ext: &ePutCompositeAlarmInput})
+var sPutCompositeAlarmInput_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutCompositeAlarmInput_ActionsEnabled})
+var sPutCompositeAlarmInput_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutCompositeAlarmInput_AlarmActions})
+var sPutCompositeAlarmInput_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &ePutCompositeAlarmInput_AlarmDescription})
+var sPutCompositeAlarmInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &ePutCompositeAlarmInput_AlarmName})
+var sPutCompositeAlarmInput_AlarmRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmRule", ID: &i_AlarmRule, Type: smithy.ShapeTypeString, Ext: &ePutCompositeAlarmInput_AlarmRule})
+var sPutCompositeAlarmInput_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutCompositeAlarmInput_InsufficientDataActions})
+var sPutCompositeAlarmInput_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutCompositeAlarmInput_OKActions})
+var sPutCompositeAlarmInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutCompositeAlarmInput_Tags})
+var sPutCompositeAlarmInput_ActionsSuppressor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressor", ID: &i_AlarmArn, Type: smithy.ShapeTypeString, Ext: &ePutCompositeAlarmInput_ActionsSuppressor})
+var sPutCompositeAlarmInput_ActionsSuppressorWaitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressorWaitPeriod", ID: &i_SuppressorPeriod, Type: smithy.ShapeTypeInteger, Ext: &ePutCompositeAlarmInput_ActionsSuppressorWaitPeriod})
+var sPutCompositeAlarmInput_ActionsSuppressorExtensionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsSuppressorExtensionPeriod", ID: &i_SuppressorPeriod, Type: smithy.ShapeTypeInteger, Ext: &ePutCompositeAlarmInput_ActionsSuppressorExtensionPeriod})
+var sPutCompositeAlarmInput_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutCompositeAlarmInput_ActionConfiguration})
+var sPutDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDashboardInput, Members: &mPutDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &ePutDashboardInput})
+var sPutDashboardInput_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardName", ID: &i_DashboardName, Type: smithy.ShapeTypeString, Ext: &ePutDashboardInput_DashboardName})
+var sPutDashboardInput_DashboardBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardBody", ID: &i_DashboardBody, Type: smithy.ShapeTypeString, Ext: &ePutDashboardInput_DashboardBody})
+var sPutDashboardInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutDashboardInput_Tags})
+var sPutDashboardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDashboardOutput, Members: &mPutDashboardOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutDashboardOutput})
+var sPutDashboardOutput_DashboardValidationMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardValidationMessages", ID: &i_DashboardValidationMessages, Members: &m_DashboardValidationMessages, Type: smithy.ShapeTypeList, Ext: &ePutDashboardOutput_DashboardValidationMessages})
+var sPutInsightRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightRuleInput, Members: &mPutInsightRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ePutInsightRuleInput})
+var sPutInsightRuleInput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_InsightRuleName, Type: smithy.ShapeTypeString, Ext: &ePutInsightRuleInput_RuleName})
+var sPutInsightRuleInput_RuleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleState", ID: &i_InsightRuleState, Type: smithy.ShapeTypeString, Ext: &ePutInsightRuleInput_RuleState})
+var sPutInsightRuleInput_RuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleDefinition", ID: &i_InsightRuleDefinition, Type: smithy.ShapeTypeString, Ext: &ePutInsightRuleInput_RuleDefinition})
+var sPutInsightRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutInsightRuleInput_Tags})
+var sPutInsightRuleInput_ApplyOnTransformedLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyOnTransformedLogs", ID: &i_InsightRuleOnTransformedLogs, Type: smithy.ShapeTypeBoolean, Ext: &ePutInsightRuleInput_ApplyOnTransformedLogs})
+var sPutInsightRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutInsightRuleOutput})
+var sPutLogAlarmInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLogAlarmInput, Members: &mPutLogAlarmInput, Type: smithy.ShapeTypeStructure, Ext: &ePutLogAlarmInput})
+var sPutLogAlarmInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &ePutLogAlarmInput_AlarmName})
+var sPutLogAlarmInput_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &ePutLogAlarmInput_AlarmDescription})
+var sPutLogAlarmInput_ScheduledQueryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledQueryConfiguration", ID: &iScheduledQueryConfiguration, Members: &mScheduledQueryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutLogAlarmInput_ScheduledQueryConfiguration})
+var sPutLogAlarmInput_ActionLogLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionLogLineCount", ID: &i_ActionLogLineCount, Type: smithy.ShapeTypeInteger, Ext: &ePutLogAlarmInput_ActionLogLineCount})
+var sPutLogAlarmInput_ActionLogLineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionLogLineRoleArn", ID: &i_ActionLogLineRoleArn, Type: smithy.ShapeTypeString, Ext: &ePutLogAlarmInput_ActionLogLineRoleArn})
+var sPutLogAlarmInput_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutLogAlarmInput_ActionsEnabled})
+var sPutLogAlarmInput_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutLogAlarmInput_OKActions})
+var sPutLogAlarmInput_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutLogAlarmInput_AlarmActions})
+var sPutLogAlarmInput_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutLogAlarmInput_InsufficientDataActions})
+var sPutLogAlarmInput_QueryResultsToEvaluate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsToEvaluate", ID: &i_QueryResultsToEvaluate, Type: smithy.ShapeTypeInteger, Ext: &ePutLogAlarmInput_QueryResultsToEvaluate})
+var sPutLogAlarmInput_QueryResultsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsToAlarm", ID: &i_QueryResultsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &ePutLogAlarmInput_QueryResultsToAlarm})
+var sPutLogAlarmInput_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_Threshold, Type: smithy.ShapeTypeDouble, Ext: &ePutLogAlarmInput_Threshold})
+var sPutLogAlarmInput_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &ePutLogAlarmInput_ComparisonOperator})
+var sPutLogAlarmInput_TreatMissingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatMissingData", ID: &i_TreatMissingData, Type: smithy.ShapeTypeString, Ext: &ePutLogAlarmInput_TreatMissingData})
+var sPutLogAlarmInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutLogAlarmInput_Tags})
+var sPutLogAlarmInput_WarmUpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmUpConfiguration", ID: &iWarmUpConfiguration, Members: &mWarmUpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutLogAlarmInput_WarmUpConfiguration})
+var sPutLogAlarmInput_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutLogAlarmInput_ActionConfiguration})
+var sPutManagedInsightRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutManagedInsightRulesInput, Members: &mPutManagedInsightRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ePutManagedInsightRulesInput})
+var sPutManagedInsightRulesInput_ManagedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedRules", ID: &i_ManagedRules, Members: &m_ManagedRules, Type: smithy.ShapeTypeList, Ext: &ePutManagedInsightRulesInput_ManagedRules})
+var sPutManagedInsightRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutManagedInsightRulesOutput, Members: &mPutManagedInsightRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutManagedInsightRulesOutput})
+var sPutManagedInsightRulesOutput_Failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failures", ID: &i_BatchFailures, Members: &m_BatchFailures, Type: smithy.ShapeTypeList, Ext: &ePutManagedInsightRulesOutput_Failures})
+var sPutMetricAlarmInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricAlarmInput, Members: &mPutMetricAlarmInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricAlarmInput})
+var sPutMetricAlarmInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_AlarmName})
+var sPutMetricAlarmInput_AlarmDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmDescription", ID: &i_AlarmDescription, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_AlarmDescription})
+var sPutMetricAlarmInput_ActionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsEnabled", ID: &i_ActionsEnabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutMetricAlarmInput_ActionsEnabled})
+var sPutMetricAlarmInput_OKActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OKActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_OKActions})
+var sPutMetricAlarmInput_AlarmActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_AlarmActions})
+var sPutMetricAlarmInput_InsufficientDataActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientDataActions", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_InsufficientDataActions})
+var sPutMetricAlarmInput_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_MetricName})
+var sPutMetricAlarmInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_Namespace})
+var sPutMetricAlarmInput_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &iStatistic, Members: &mStatistic, Type: smithy.ShapeTypeEnum, Ext: &ePutMetricAlarmInput_Statistic})
+var sPutMetricAlarmInput_ExtendedStatistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedStatistic", ID: &i_ExtendedStatistic, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_ExtendedStatistic})
+var sPutMetricAlarmInput_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_Dimensions})
+var sPutMetricAlarmInput_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_Period, Type: smithy.ShapeTypeInteger, Ext: &ePutMetricAlarmInput_Period})
+var sPutMetricAlarmInput_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &ePutMetricAlarmInput_Unit})
+var sPutMetricAlarmInput_EvaluationPeriods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationPeriods", ID: &i_EvaluationPeriods, Type: smithy.ShapeTypeInteger, Ext: &ePutMetricAlarmInput_EvaluationPeriods})
+var sPutMetricAlarmInput_DatapointsToAlarm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatapointsToAlarm", ID: &i_DatapointsToAlarm, Type: smithy.ShapeTypeInteger, Ext: &ePutMetricAlarmInput_DatapointsToAlarm})
+var sPutMetricAlarmInput_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_Threshold, Type: smithy.ShapeTypeDouble, Ext: &ePutMetricAlarmInput_Threshold})
+var sPutMetricAlarmInput_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &ePutMetricAlarmInput_ComparisonOperator})
+var sPutMetricAlarmInput_TreatMissingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TreatMissingData", ID: &i_TreatMissingData, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_TreatMissingData})
+var sPutMetricAlarmInput_EvaluateLowSampleCountPercentile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluateLowSampleCountPercentile", ID: &i_EvaluateLowSampleCountPercentile, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_EvaluateLowSampleCountPercentile})
+var sPutMetricAlarmInput_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_Metrics})
+var sPutMetricAlarmInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutMetricAlarmInput_Tags})
+var sPutMetricAlarmInput_ThresholdMetricId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdMetricId", ID: &i_MetricId, Type: smithy.ShapeTypeString, Ext: &ePutMetricAlarmInput_ThresholdMetricId})
+var sPutMetricAlarmInput_EvaluationWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationWindow", ID: &iEvaluationWindow, Members: &mEvaluationWindow, Type: smithy.ShapeTypeUnion, Ext: &ePutMetricAlarmInput_EvaluationWindow})
+var sPutMetricAlarmInput_WarmUpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmUpConfiguration", ID: &iWarmUpConfiguration, Members: &mWarmUpConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricAlarmInput_WarmUpConfiguration})
+var sPutMetricAlarmInput_EvaluationCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationCriteria", ID: &iEvaluationCriteria, Members: &mEvaluationCriteria, Type: smithy.ShapeTypeUnion, Ext: &ePutMetricAlarmInput_EvaluationCriteria})
+var sPutMetricAlarmInput_EvaluationInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationInterval", ID: &i_EvaluationInterval, Type: smithy.ShapeTypeInteger, Ext: &ePutMetricAlarmInput_EvaluationInterval})
+var sPutMetricAlarmInput_ActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricAlarmInput_ActionConfiguration})
+var sPutMetricDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricDataInput, Members: &mPutMetricDataInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricDataInput})
+var sPutMetricDataInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString, Ext: &ePutMetricDataInput_Namespace})
+var sPutMetricDataInput_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &ePutMetricDataInput_MetricData})
+var sPutMetricDataInput_EntityMetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityMetricData", ID: &i_EntityMetricDataList, Members: &m_EntityMetricDataList, Type: smithy.ShapeTypeList, Ext: &ePutMetricDataInput_EntityMetricData})
+var sPutMetricDataInput_StrictEntityValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrictEntityValidation", ID: &i_StrictEntityValidation, Type: smithy.ShapeTypeBoolean, Ext: &ePutMetricDataInput_StrictEntityValidation})
+var sPutMetricStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricStreamInput, Members: &mPutMetricStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricStreamInput})
+var sPutMetricStreamInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricStreamName, Type: smithy.ShapeTypeString, Ext: &ePutMetricStreamInput_Name})
+var sPutMetricStreamInput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_MetricStreamFilters, Members: &m_MetricStreamFilters, Type: smithy.ShapeTypeList, Ext: &ePutMetricStreamInput_IncludeFilters})
+var sPutMetricStreamInput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_MetricStreamFilters, Members: &m_MetricStreamFilters, Type: smithy.ShapeTypeList, Ext: &ePutMetricStreamInput_ExcludeFilters})
+var sPutMetricStreamInput_FirehoseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirehoseArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ePutMetricStreamInput_FirehoseArn})
+var sPutMetricStreamInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ePutMetricStreamInput_RoleArn})
+var sPutMetricStreamInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iMetricStreamOutputFormat, Members: &mMetricStreamOutputFormat, Type: smithy.ShapeTypeEnum, Ext: &ePutMetricStreamInput_OutputFormat})
+var sPutMetricStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutMetricStreamInput_Tags})
+var sPutMetricStreamInput_StatisticsConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatisticsConfigurations", ID: &i_MetricStreamStatisticsConfigurations, Members: &m_MetricStreamStatisticsConfigurations, Type: smithy.ShapeTypeList, Ext: &ePutMetricStreamInput_StatisticsConfigurations})
+var sPutMetricStreamInput_IncludeLinkedAccountsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccountsMetrics", ID: &i_IncludeLinkedAccountsMetrics, Type: smithy.ShapeTypeBoolean, Ext: &ePutMetricStreamInput_IncludeLinkedAccountsMetrics})
+var sPutMetricStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricStreamOutput, Members: &mPutMetricStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricStreamOutput})
+var sPutMetricStreamOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ePutMetricStreamOutput_Arn})
+var sSetAlarmStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetAlarmStateInput, Members: &mSetAlarmStateInput, Type: smithy.ShapeTypeStructure, Ext: &eSetAlarmStateInput})
+var sSetAlarmStateInput_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_AlarmName, Type: smithy.ShapeTypeString, Ext: &eSetAlarmStateInput_AlarmName})
+var sSetAlarmStateInput_StateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateValue", ID: &iStateValue, Members: &mStateValue, Type: smithy.ShapeTypeEnum, Ext: &eSetAlarmStateInput_StateValue})
+var sSetAlarmStateInput_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString, Ext: &eSetAlarmStateInput_StateReason})
+var sSetAlarmStateInput_StateReasonData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonData", ID: &i_StateReasonData, Type: smithy.ShapeTypeString, Ext: &eSetAlarmStateInput_StateReasonData})
+var sStartMetricStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMetricStreamsInput, Members: &mStartMetricStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eStartMetricStreamsInput})
+var sStartMetricStreamsInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_MetricStreamNames, Members: &m_MetricStreamNames, Type: smithy.ShapeTypeList, Ext: &eStartMetricStreamsInput_Names})
+var sStartMetricStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMetricStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartMetricStreamsOutput})
+var sStartOTelEnrichmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOTelEnrichmentInput, Members: &mStartOTelEnrichmentInput, Type: smithy.ShapeTypeStructure, Ext: &eStartOTelEnrichmentInput})
+var sStartOTelEnrichmentInput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eStartOTelEnrichmentInput_IncludeFilters})
+var sStartOTelEnrichmentInput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eStartOTelEnrichmentInput_ExcludeFilters})
+var sStartOTelEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOTelEnrichmentOutput, Members: &mStartOTelEnrichmentOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartOTelEnrichmentOutput})
+var sStartOTelEnrichmentOutput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eStartOTelEnrichmentOutput_IncludeFilters})
+var sStartOTelEnrichmentOutput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eStartOTelEnrichmentOutput_ExcludeFilters})
+var sStartOTelEnrichmentOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartOTelEnrichmentOutput_CreatedAt})
+var sStartOTelEnrichmentOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartOTelEnrichmentOutput_UpdatedAt})
+var sStopMetricStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMetricStreamsInput, Members: &mStopMetricStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eStopMetricStreamsInput})
+var sStopMetricStreamsInput_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_MetricStreamNames, Members: &m_MetricStreamNames, Type: smithy.ShapeTypeList, Ext: &eStopMetricStreamsInput_Names})
+var sStopMetricStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMetricStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopMetricStreamsOutput})
+var sStopOTelEnrichmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopOTelEnrichmentInput, Type: smithy.ShapeTypeStructure, Ext: &eStopOTelEnrichmentInput})
+var sStopOTelEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopOTelEnrichmentOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopOTelEnrichmentOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_ResourceARN})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_Tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_ResourceARN})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateOTelEnrichmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOTelEnrichmentInput, Members: &mUpdateOTelEnrichmentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOTelEnrichmentInput})
+var sUpdateOTelEnrichmentInput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateOTelEnrichmentInput_IncludeFilters})
+var sUpdateOTelEnrichmentInput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateOTelEnrichmentInput_ExcludeFilters})
+var sUpdateOTelEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOTelEnrichmentOutput, Members: &mUpdateOTelEnrichmentOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOTelEnrichmentOutput})
+var sUpdateOTelEnrichmentOutput_IncludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateOTelEnrichmentOutput_IncludeFilters})
+var sUpdateOTelEnrichmentOutput_ExcludeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFilters", ID: &i_OTelEnrichmentMetricSelectorList, Members: &m_OTelEnrichmentMetricSelectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateOTelEnrichmentOutput_ExcludeFilters})
+var sUpdateOTelEnrichmentOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateOTelEnrichmentOutput_CreatedAt})
+var sUpdateOTelEnrichmentOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateOTelEnrichmentOutput_UpdatedAt})
+var sUpdateResourceMetricsConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceMetricsConfigurationInput, Members: &mUpdateResourceMetricsConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceMetricsConfigurationInput})
+var sUpdateResourceMetricsConfigurationInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceMetricsConfigurationInput_ResourceArn})
+var sUpdateResourceMetricsConfigurationInput_MetricSelections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSelections", ID: &i_ResourceMetricSelectionList, Members: &m_ResourceMetricSelectionList, Type: smithy.ShapeTypeList, Ext: &eUpdateResourceMetricsConfigurationInput_MetricSelections})
+var sUpdateResourceMetricsConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceMetricsConfigurationOutput, Members: &mUpdateResourceMetricsConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceMetricsConfigurationOutput})
+var sUpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMetricsConfiguration", ID: &iResourceMetricsConfiguration, Members: &mResourceMetricsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration})
+
+var AssociateDatasetKmsKey = &sAssociateDatasetKmsKey
+
+var CreateResourceMetricsConfiguration = &sCreateResourceMetricsConfiguration
+
+var DeleteAlarmMuteRule = &sDeleteAlarmMuteRule
+
+var DeleteAlarms = &sDeleteAlarms
+
+var DeleteAnomalyDetector = &sDeleteAnomalyDetector
+
+var DeleteDashboards = &sDeleteDashboards
+
+var DeleteInsightRules = &sDeleteInsightRules
+
+var DeleteMetricStream = &sDeleteMetricStream
+
+var DeleteResourceMetricsConfiguration = &sDeleteResourceMetricsConfiguration
+
+var DescribeAlarmContributors = &sDescribeAlarmContributors
+
+var DescribeAlarmHistory = &sDescribeAlarmHistory
+
+var DescribeAlarms = &sDescribeAlarms
+
+var DescribeAlarmsForMetric = &sDescribeAlarmsForMetric
+
+var DescribeAnomalyDetectors = &sDescribeAnomalyDetectors
+
+var DescribeInsightRules = &sDescribeInsightRules
+
+var DisableAlarmActions = &sDisableAlarmActions
+
+var DisableInsightRules = &sDisableInsightRules
+
+var DisassociateDatasetKmsKey = &sDisassociateDatasetKmsKey
+
+var EnableAlarmActions = &sEnableAlarmActions
+
+var EnableInsightRules = &sEnableInsightRules
+
+var GetAlarmMuteRule = &sGetAlarmMuteRule
+
+var GetDashboard = &sGetDashboard
+
+var GetDataset = &sGetDataset
+
+var GetInsightRuleReport = &sGetInsightRuleReport
+
+var GetMetricData = &sGetMetricData
+
+var GetMetricStatistics = &sGetMetricStatistics
+
+var GetMetricStream = &sGetMetricStream
+
+var GetMetricWidgetImage = &sGetMetricWidgetImage
+
+var GetOTelEnrichment = &sGetOTelEnrichment
+
+var GetResourceMetricsConfiguration = &sGetResourceMetricsConfiguration
+
+var ListAlarmMuteRules = &sListAlarmMuteRules
+
+var ListDashboards = &sListDashboards
+
+var ListManagedInsightRules = &sListManagedInsightRules
+
+var ListMetrics = &sListMetrics
+
+var ListMetricStreams = &sListMetricStreams
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutAlarmMuteRule = &sPutAlarmMuteRule
+
+var PutAnomalyDetector = &sPutAnomalyDetector
+
+var PutCompositeAlarm = &sPutCompositeAlarm
+
+var PutDashboard = &sPutDashboard
+
+var PutInsightRule = &sPutInsightRule
+
+var PutLogAlarm = &sPutLogAlarm
+
+var PutManagedInsightRules = &sPutManagedInsightRules
+
+var PutMetricAlarm = &sPutMetricAlarm
+
+var PutMetricData = &sPutMetricData
+
+var PutMetricStream = &sPutMetricStream
+
+var SetAlarmState = &sSetAlarmState
+
+var StartMetricStreams = &sStartMetricStreams
+
+var StartOTelEnrichment = &sStartOTelEnrichment
+
+var StopMetricStreams = &sStopMetricStreams
+
+var StopOTelEnrichment = &sStopOTelEnrichment
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateOTelEnrichment = &sUpdateOTelEnrichment
+
+var UpdateResourceMetricsConfiguration = &sUpdateResourceMetricsConfiguration
+
+var _GraniteServiceVersion20100801 = &s_GraniteServiceVersion20100801
+
+var _AccountId = &s_AccountId
+
+var ActionConfiguration = &sActionConfiguration
+var ActionConfiguration_AlarmTagsPropagation = &sActionConfiguration_AlarmTagsPropagation
+
+var _ActionLogLineCount = &s_ActionLogLineCount
+
+var _ActionLogLineRoleArn = &s_ActionLogLineRoleArn
+
+var _ActionPrefix = &s_ActionPrefix
+
+var _ActionsEnabled = &s_ActionsEnabled
+
+var ActionsSuppressedBy = &sActionsSuppressedBy
+var ActionsSuppressedBy_WaitPeriod = &sActionsSuppressedBy_WaitPeriod
+var ActionsSuppressedBy_ExtensionPeriod = &sActionsSuppressedBy_ExtensionPeriod
+var ActionsSuppressedBy_Alarm = &sActionsSuppressedBy_Alarm
+
+var _ActionsSuppressedReason = &s_ActionsSuppressedReason
+
+var _AggregationExpression = &s_AggregationExpression
+
+var _AlarmArn = &s_AlarmArn
+
+var AlarmContributor = &sAlarmContributor
+var AlarmContributor_ContributorId = &sAlarmContributor_ContributorId
+var AlarmContributor_ContributorAttributes = &sAlarmContributor_ContributorAttributes
+var AlarmContributor_StateReason = &sAlarmContributor_StateReason
+var AlarmContributor_StateTransitionedTimestamp = &sAlarmContributor_StateTransitionedTimestamp
+
+var _AlarmContributors = &s_AlarmContributors
+var _AlarmContributors_member = &s_AlarmContributors_member
+
+var _AlarmDescription = &s_AlarmDescription
+
+var AlarmHistoryItem = &sAlarmHistoryItem
+var AlarmHistoryItem_AlarmName = &sAlarmHistoryItem_AlarmName
+var AlarmHistoryItem_AlarmContributorId = &sAlarmHistoryItem_AlarmContributorId
+var AlarmHistoryItem_AlarmType = &sAlarmHistoryItem_AlarmType
+var AlarmHistoryItem_Timestamp = &sAlarmHistoryItem_Timestamp
+var AlarmHistoryItem_HistoryItemType = &sAlarmHistoryItem_HistoryItemType
+var AlarmHistoryItem_HistorySummary = &sAlarmHistoryItem_HistorySummary
+var AlarmHistoryItem_HistoryData = &sAlarmHistoryItem_HistoryData
+var AlarmHistoryItem_AlarmContributorAttributes = &sAlarmHistoryItem_AlarmContributorAttributes
+
+var _AlarmHistoryItems = &s_AlarmHistoryItems
+var _AlarmHistoryItems_member = &s_AlarmHistoryItems_member
+
+var AlarmMuteRuleStatus = &sAlarmMuteRuleStatus
+var AlarmMuteRuleStatus_SCHEDULED = &sAlarmMuteRuleStatus_SCHEDULED
+var AlarmMuteRuleStatus_ACTIVE = &sAlarmMuteRuleStatus_ACTIVE
+var AlarmMuteRuleStatus_EXPIRED = &sAlarmMuteRuleStatus_EXPIRED
+
+var _AlarmMuteRuleStatuses = &s_AlarmMuteRuleStatuses
+var _AlarmMuteRuleStatuses_member = &s_AlarmMuteRuleStatuses_member
+
+var _AlarmMuteRuleSummaries = &s_AlarmMuteRuleSummaries
+var _AlarmMuteRuleSummaries_member = &s_AlarmMuteRuleSummaries_member
+
+var AlarmMuteRuleSummary = &sAlarmMuteRuleSummary
+var AlarmMuteRuleSummary_AlarmMuteRuleArn = &sAlarmMuteRuleSummary_AlarmMuteRuleArn
+var AlarmMuteRuleSummary_ExpireDate = &sAlarmMuteRuleSummary_ExpireDate
+var AlarmMuteRuleSummary_Status = &sAlarmMuteRuleSummary_Status
+var AlarmMuteRuleSummary_MuteType = &sAlarmMuteRuleSummary_MuteType
+var AlarmMuteRuleSummary_LastUpdatedTimestamp = &sAlarmMuteRuleSummary_LastUpdatedTimestamp
+
+var _AlarmName = &s_AlarmName
+
+var _AlarmNamePrefix = &s_AlarmNamePrefix
+
+var _AlarmNames = &s_AlarmNames
+var _AlarmNames_member = &s_AlarmNames_member
+
+var AlarmPromQLCriteria = &sAlarmPromQLCriteria
+var AlarmPromQLCriteria_Query = &sAlarmPromQLCriteria_Query
+var AlarmPromQLCriteria_PendingPeriod = &sAlarmPromQLCriteria_PendingPeriod
+var AlarmPromQLCriteria_RecoveryPeriod = &sAlarmPromQLCriteria_RecoveryPeriod
+
+var _AlarmRule = &s_AlarmRule
+
+var AlarmTagsPropagation = &sAlarmTagsPropagation
+var AlarmTagsPropagation_Enabled = &sAlarmTagsPropagation_Enabled
+var AlarmTagsPropagation_IncludedTagKeys = &sAlarmTagsPropagation_IncludedTagKeys
+var AlarmTagsPropagation_ExcludedTagKeys = &sAlarmTagsPropagation_ExcludedTagKeys
+
+var _AlarmTagsPropagationEnabled = &s_AlarmTagsPropagationEnabled
+
+var _AlarmTagsPropagationTagKey = &s_AlarmTagsPropagationTagKey
+
+var _AlarmTagsPropagationTagKeys = &s_AlarmTagsPropagationTagKeys
+var _AlarmTagsPropagationTagKeys_member = &s_AlarmTagsPropagationTagKeys_member
+
+var AlarmType = &sAlarmType
+var AlarmType_CompositeAlarm = &sAlarmType_CompositeAlarm
+var AlarmType_MetricAlarm = &sAlarmType_MetricAlarm
+var AlarmType_LogAlarm = &sAlarmType_LogAlarm
+
+var _AlarmTypes = &s_AlarmTypes
+var _AlarmTypes_member = &s_AlarmTypes_member
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var AnomalyDetector = &sAnomalyDetector
+var AnomalyDetector_AnomalyDetectorId = &sAnomalyDetector_AnomalyDetectorId
+var AnomalyDetector_Namespace = &sAnomalyDetector_Namespace
+var AnomalyDetector_MetricName = &sAnomalyDetector_MetricName
+var AnomalyDetector_Dimensions = &sAnomalyDetector_Dimensions
+var AnomalyDetector_Stat = &sAnomalyDetector_Stat
+var AnomalyDetector_Configuration = &sAnomalyDetector_Configuration
+var AnomalyDetector_StateValue = &sAnomalyDetector_StateValue
+var AnomalyDetector_MetricCharacteristics = &sAnomalyDetector_MetricCharacteristics
+var AnomalyDetector_SingleMetricAnomalyDetector = &sAnomalyDetector_SingleMetricAnomalyDetector
+var AnomalyDetector_MetricMathAnomalyDetector = &sAnomalyDetector_MetricMathAnomalyDetector
+
+var AnomalyDetectorAdaptationSpeed = &sAnomalyDetectorAdaptationSpeed
+var AnomalyDetectorAdaptationSpeed_FAST = &sAnomalyDetectorAdaptationSpeed_FAST
+var AnomalyDetectorAdaptationSpeed_NORMAL = &sAnomalyDetectorAdaptationSpeed_NORMAL
+var AnomalyDetectorAdaptationSpeed_SLOW = &sAnomalyDetectorAdaptationSpeed_SLOW
+
+var AnomalyDetectorConfiguration = &sAnomalyDetectorConfiguration
+var AnomalyDetectorConfiguration_ExcludedTimeRanges = &sAnomalyDetectorConfiguration_ExcludedTimeRanges
+var AnomalyDetectorConfiguration_MetricTimezone = &sAnomalyDetectorConfiguration_MetricTimezone
+var AnomalyDetectorConfiguration_AdaptationSpeed = &sAnomalyDetectorConfiguration_AdaptationSpeed
+var AnomalyDetectorConfiguration_OutlierFilteringStrength = &sAnomalyDetectorConfiguration_OutlierFilteringStrength
+
+var _AnomalyDetectorExcludedTimeRanges = &s_AnomalyDetectorExcludedTimeRanges
+var _AnomalyDetectorExcludedTimeRanges_member = &s_AnomalyDetectorExcludedTimeRanges_member
+
+var _AnomalyDetectorId = &s_AnomalyDetectorId
+
+var _AnomalyDetectorIds = &s_AnomalyDetectorIds
+var _AnomalyDetectorIds_member = &s_AnomalyDetectorIds_member
+
+var _AnomalyDetectorMetricStat = &s_AnomalyDetectorMetricStat
+
+var _AnomalyDetectorMetricTimezone = &s_AnomalyDetectorMetricTimezone
+
+var AnomalyDetectorOutlierFilteringStrength = &sAnomalyDetectorOutlierFilteringStrength
+var AnomalyDetectorOutlierFilteringStrength_MINIMAL = &sAnomalyDetectorOutlierFilteringStrength_MINIMAL
+var AnomalyDetectorOutlierFilteringStrength_MODERATE = &sAnomalyDetectorOutlierFilteringStrength_MODERATE
+var AnomalyDetectorOutlierFilteringStrength_STRICT = &sAnomalyDetectorOutlierFilteringStrength_STRICT
+
+var _AnomalyDetectors = &s_AnomalyDetectors
+var _AnomalyDetectors_member = &s_AnomalyDetectors_member
+
+var AnomalyDetectorStateValue = &sAnomalyDetectorStateValue
+var AnomalyDetectorStateValue_PENDING_TRAINING = &sAnomalyDetectorStateValue_PENDING_TRAINING
+var AnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA = &sAnomalyDetectorStateValue_TRAINED_INSUFFICIENT_DATA
+var AnomalyDetectorStateValue_TRAINED = &sAnomalyDetectorStateValue_TRAINED
+
+var AnomalyDetectorType = &sAnomalyDetectorType
+var AnomalyDetectorType_SINGLE_METRIC = &sAnomalyDetectorType_SINGLE_METRIC
+var AnomalyDetectorType_METRIC_MATH = &sAnomalyDetectorType_METRIC_MATH
+
+var _AnomalyDetectorTypes = &s_AnomalyDetectorTypes
+var _AnomalyDetectorTypes_member = &s_AnomalyDetectorTypes_member
+
+var _Arn = &s_Arn
+
+var _AttributeName = &s_AttributeName
+
+var _AttributeValue = &s_AttributeValue
+
+var _AwsQueryErrorMessage = &s_AwsQueryErrorMessage
+
+var _BatchFailures = &s_BatchFailures
+var _BatchFailures_member = &s_BatchFailures_member
+
+var ComparisonOperator = &sComparisonOperator
+var ComparisonOperator_GreaterThanOrEqualToThreshold = &sComparisonOperator_GreaterThanOrEqualToThreshold
+var ComparisonOperator_GreaterThanThreshold = &sComparisonOperator_GreaterThanThreshold
+var ComparisonOperator_LessThanThreshold = &sComparisonOperator_LessThanThreshold
+var ComparisonOperator_LessThanOrEqualToThreshold = &sComparisonOperator_LessThanOrEqualToThreshold
+var ComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold = &sComparisonOperator_LessThanLowerOrGreaterThanUpperThreshold
+var ComparisonOperator_LessThanLowerThreshold = &sComparisonOperator_LessThanLowerThreshold
+var ComparisonOperator_GreaterThanUpperThreshold = &sComparisonOperator_GreaterThanUpperThreshold
+
+var CompositeAlarm = &sCompositeAlarm
+var CompositeAlarm_ActionsEnabled = &sCompositeAlarm_ActionsEnabled
+var CompositeAlarm_AlarmActions = &sCompositeAlarm_AlarmActions
+var CompositeAlarm_AlarmArn = &sCompositeAlarm_AlarmArn
+var CompositeAlarm_AlarmConfigurationUpdatedTimestamp = &sCompositeAlarm_AlarmConfigurationUpdatedTimestamp
+var CompositeAlarm_AlarmDescription = &sCompositeAlarm_AlarmDescription
+var CompositeAlarm_AlarmName = &sCompositeAlarm_AlarmName
+var CompositeAlarm_AlarmRule = &sCompositeAlarm_AlarmRule
+var CompositeAlarm_InsufficientDataActions = &sCompositeAlarm_InsufficientDataActions
+var CompositeAlarm_OKActions = &sCompositeAlarm_OKActions
+var CompositeAlarm_StateReason = &sCompositeAlarm_StateReason
+var CompositeAlarm_StateReasonData = &sCompositeAlarm_StateReasonData
+var CompositeAlarm_StateUpdatedTimestamp = &sCompositeAlarm_StateUpdatedTimestamp
+var CompositeAlarm_StateValue = &sCompositeAlarm_StateValue
+var CompositeAlarm_StateTransitionedTimestamp = &sCompositeAlarm_StateTransitionedTimestamp
+var CompositeAlarm_ActionsSuppressedBy = &sCompositeAlarm_ActionsSuppressedBy
+var CompositeAlarm_ActionsSuppressedReason = &sCompositeAlarm_ActionsSuppressedReason
+var CompositeAlarm_ActionsSuppressor = &sCompositeAlarm_ActionsSuppressor
+var CompositeAlarm_ActionsSuppressorWaitPeriod = &sCompositeAlarm_ActionsSuppressorWaitPeriod
+var CompositeAlarm_ActionsSuppressorExtensionPeriod = &sCompositeAlarm_ActionsSuppressorExtensionPeriod
+var CompositeAlarm_ActionConfiguration = &sCompositeAlarm_ActionConfiguration
+
+var _CompositeAlarms = &s_CompositeAlarms
+var _CompositeAlarms_member = &s_CompositeAlarms_member
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _ContributorAttributes = &s_ContributorAttributes
+var _ContributorAttributes_key = &s_ContributorAttributes_key
+var _ContributorAttributes_value = &s_ContributorAttributes_value
+
+var _ContributorId = &s_ContributorId
+
+var _Counts = &s_Counts
+var _Counts_member = &s_Counts_member
+
+var _DashboardArn = &s_DashboardArn
+
+var _DashboardBody = &s_DashboardBody
+
+var _DashboardEntries = &s_DashboardEntries
+var _DashboardEntries_member = &s_DashboardEntries_member
+
+var DashboardEntry = &sDashboardEntry
+var DashboardEntry_DashboardName = &sDashboardEntry_DashboardName
+var DashboardEntry_DashboardArn = &sDashboardEntry_DashboardArn
+var DashboardEntry_LastModified = &sDashboardEntry_LastModified
+var DashboardEntry_Size = &sDashboardEntry_Size
+
+var _DashboardErrorMessage = &s_DashboardErrorMessage
+
+var DashboardInvalidInputError = &sDashboardInvalidInputError
+var DashboardInvalidInputError_message = &sDashboardInvalidInputError_message
+var DashboardInvalidInputError_dashboardValidationMessages = &sDashboardInvalidInputError_dashboardValidationMessages
+
+var _DashboardName = &s_DashboardName
+
+var _DashboardNamePrefix = &s_DashboardNamePrefix
+
+var _DashboardNames = &s_DashboardNames
+var _DashboardNames_member = &s_DashboardNames_member
+
+var DashboardNotFoundError = &sDashboardNotFoundError
+var DashboardNotFoundError_message = &sDashboardNotFoundError_message
+
+var DashboardValidationMessage = &sDashboardValidationMessage
+var DashboardValidationMessage_DataPath = &sDashboardValidationMessage_DataPath
+var DashboardValidationMessage_Message = &sDashboardValidationMessage_Message
+
+var _DashboardValidationMessages = &s_DashboardValidationMessages
+var _DashboardValidationMessages_member = &s_DashboardValidationMessages_member
+
+var _DataPath = &s_DataPath
+
+var Datapoint = &sDatapoint
+var Datapoint_Timestamp = &sDatapoint_Timestamp
+var Datapoint_SampleCount = &sDatapoint_SampleCount
+var Datapoint_Average = &sDatapoint_Average
+var Datapoint_Sum = &sDatapoint_Sum
+var Datapoint_Minimum = &sDatapoint_Minimum
+var Datapoint_Maximum = &sDatapoint_Maximum
+var Datapoint_Unit = &sDatapoint_Unit
+var Datapoint_ExtendedStatistics = &sDatapoint_ExtendedStatistics
+
+var _Datapoints = &s_Datapoints
+var _Datapoints_member = &s_Datapoints_member
+
+var _DatapointsToAlarm = &s_DatapointsToAlarm
+
+var _DatapointValue = &s_DatapointValue
+
+var _DatapointValueMap = &s_DatapointValueMap
+var _DatapointValueMap_key = &s_DatapointValueMap_key
+var _DatapointValueMap_value = &s_DatapointValueMap_value
+
+var _DatapointValues = &s_DatapointValues
+var _DatapointValues_member = &s_DatapointValues_member
+
+var _DatasetArn = &s_DatasetArn
+
+var _DatasetId = &s_DatasetId
+
+var _DatasetIdentifier = &s_DatasetIdentifier
+
+var Dimension = &sDimension
+var Dimension_Name = &sDimension_Name
+var Dimension_Value = &sDimension_Value
+
+var DimensionFilter = &sDimensionFilter
+var DimensionFilter_Name = &sDimensionFilter_Name
+var DimensionFilter_Value = &sDimensionFilter_Value
+
+var _DimensionFilters = &s_DimensionFilters
+var _DimensionFilters_member = &s_DimensionFilters_member
+
+var _DimensionName = &s_DimensionName
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var _DimensionValue = &s_DimensionValue
+
+var _Duration = &s_Duration
+
+var _EndTimeOffset = &s_EndTimeOffset
+
+var Entity = &sEntity
+var Entity_KeyAttributes = &sEntity_KeyAttributes
+var Entity_Attributes = &sEntity_Attributes
+
+var _EntityAttributesMap = &s_EntityAttributesMap
+var _EntityAttributesMap_key = &s_EntityAttributesMap_key
+var _EntityAttributesMap_value = &s_EntityAttributesMap_value
+
+var _EntityAttributesMapKeyString = &s_EntityAttributesMapKeyString
+
+var _EntityAttributesMapValueString = &s_EntityAttributesMapValueString
+
+var _EntityKeyAttributesMap = &s_EntityKeyAttributesMap
+var _EntityKeyAttributesMap_key = &s_EntityKeyAttributesMap_key
+var _EntityKeyAttributesMap_value = &s_EntityKeyAttributesMap_value
+
+var _EntityKeyAttributesMapKeyString = &s_EntityKeyAttributesMapKeyString
+
+var _EntityKeyAttributesMapValueString = &s_EntityKeyAttributesMapValueString
+
+var EntityMetricData = &sEntityMetricData
+var EntityMetricData_Entity = &sEntityMetricData_Entity
+var EntityMetricData_MetricData = &sEntityMetricData_MetricData
+
+var _EntityMetricDataList = &s_EntityMetricDataList
+var _EntityMetricDataList_member = &s_EntityMetricDataList_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EvaluateLowSampleCountPercentile = &s_EvaluateLowSampleCountPercentile
+
+var EvaluationCriteria = &sEvaluationCriteria
+var EvaluationCriteria_PromQLCriteria = &sEvaluationCriteria_PromQLCriteria
+
+var _EvaluationInterval = &s_EvaluationInterval
+
+var _EvaluationPeriods = &s_EvaluationPeriods
+
+var EvaluationState = &sEvaluationState
+var EvaluationState_PARTIAL_DATA = &sEvaluationState_PARTIAL_DATA
+var EvaluationState_EVALUATION_FAILURE = &sEvaluationState_EVALUATION_FAILURE
+var EvaluationState_EVALUATION_ERROR = &sEvaluationState_EVALUATION_ERROR
+
+var EvaluationWindow = &sEvaluationWindow
+var EvaluationWindow_WallClockWindow = &sEvaluationWindow_WallClockWindow
+var EvaluationWindow_SlidingWindow = &sEvaluationWindow_SlidingWindow
+
+var _ExceptionType = &s_ExceptionType
+
+var _Expression = &s_Expression
+
+var _ExtendedStatistic = &s_ExtendedStatistic
+
+var _ExtendedStatistics = &s_ExtendedStatistics
+var _ExtendedStatistics_member = &s_ExtendedStatistics_member
+
+var _FailureCode = &s_FailureCode
+
+var _FailureDescription = &s_FailureDescription
+
+var _FailureResource = &s_FailureResource
+
+var _FaultDescription = &s_FaultDescription
+
+var _GetMetricDataLabelTimezone = &s_GetMetricDataLabelTimezone
+
+var _GetMetricDataMaxDatapoints = &s_GetMetricDataMaxDatapoints
+
+var _HistoryData = &s_HistoryData
+
+var HistoryItemType = &sHistoryItemType
+var HistoryItemType_ConfigurationUpdate = &sHistoryItemType_ConfigurationUpdate
+var HistoryItemType_StateUpdate = &sHistoryItemType_StateUpdate
+var HistoryItemType_Action = &sHistoryItemType_Action
+var HistoryItemType_AlarmContributorStateUpdate = &sHistoryItemType_AlarmContributorStateUpdate
+var HistoryItemType_AlarmContributorAction = &sHistoryItemType_AlarmContributorAction
+
+var _HistorySummary = &s_HistorySummary
+
+var _IncludeLinkedAccounts = &s_IncludeLinkedAccounts
+
+var _IncludeLinkedAccountsMetrics = &s_IncludeLinkedAccountsMetrics
+
+var InsightRule = &sInsightRule
+var InsightRule_Name = &sInsightRule_Name
+var InsightRule_State = &sInsightRule_State
+var InsightRule_Schema = &sInsightRule_Schema
+var InsightRule_Definition = &sInsightRule_Definition
+var InsightRule_ManagedRule = &sInsightRule_ManagedRule
+var InsightRule_ApplyOnTransformedLogs = &sInsightRule_ApplyOnTransformedLogs
+
+var _InsightRuleAggregationStatistic = &s_InsightRuleAggregationStatistic
+
+var InsightRuleContributor = &sInsightRuleContributor
+var InsightRuleContributor_Keys = &sInsightRuleContributor_Keys
+var InsightRuleContributor_ApproximateAggregateValue = &sInsightRuleContributor_ApproximateAggregateValue
+var InsightRuleContributor_Datapoints = &sInsightRuleContributor_Datapoints
+
+var InsightRuleContributorDatapoint = &sInsightRuleContributorDatapoint
+var InsightRuleContributorDatapoint_Timestamp = &sInsightRuleContributorDatapoint_Timestamp
+var InsightRuleContributorDatapoint_ApproximateValue = &sInsightRuleContributorDatapoint_ApproximateValue
+
+var _InsightRuleContributorDatapoints = &s_InsightRuleContributorDatapoints
+var _InsightRuleContributorDatapoints_member = &s_InsightRuleContributorDatapoints_member
+
+var _InsightRuleContributorKey = &s_InsightRuleContributorKey
+
+var _InsightRuleContributorKeyLabel = &s_InsightRuleContributorKeyLabel
+
+var _InsightRuleContributorKeyLabels = &s_InsightRuleContributorKeyLabels
+var _InsightRuleContributorKeyLabels_member = &s_InsightRuleContributorKeyLabels_member
+
+var _InsightRuleContributorKeys = &s_InsightRuleContributorKeys
+var _InsightRuleContributorKeys_member = &s_InsightRuleContributorKeys_member
+
+var _InsightRuleContributors = &s_InsightRuleContributors
+var _InsightRuleContributors_member = &s_InsightRuleContributors_member
+
+var _InsightRuleDefinition = &s_InsightRuleDefinition
+
+var _InsightRuleIsManaged = &s_InsightRuleIsManaged
+
+var _InsightRuleMaxResults = &s_InsightRuleMaxResults
+
+var InsightRuleMetricDatapoint = &sInsightRuleMetricDatapoint
+var InsightRuleMetricDatapoint_Timestamp = &sInsightRuleMetricDatapoint_Timestamp
+var InsightRuleMetricDatapoint_UniqueContributors = &sInsightRuleMetricDatapoint_UniqueContributors
+var InsightRuleMetricDatapoint_MaxContributorValue = &sInsightRuleMetricDatapoint_MaxContributorValue
+var InsightRuleMetricDatapoint_SampleCount = &sInsightRuleMetricDatapoint_SampleCount
+var InsightRuleMetricDatapoint_Average = &sInsightRuleMetricDatapoint_Average
+var InsightRuleMetricDatapoint_Sum = &sInsightRuleMetricDatapoint_Sum
+var InsightRuleMetricDatapoint_Minimum = &sInsightRuleMetricDatapoint_Minimum
+var InsightRuleMetricDatapoint_Maximum = &sInsightRuleMetricDatapoint_Maximum
+
+var _InsightRuleMetricDatapoints = &s_InsightRuleMetricDatapoints
+var _InsightRuleMetricDatapoints_member = &s_InsightRuleMetricDatapoints_member
+
+var _InsightRuleMetricList = &s_InsightRuleMetricList
+var _InsightRuleMetricList_member = &s_InsightRuleMetricList_member
+
+var _InsightRuleMetricName = &s_InsightRuleMetricName
+
+var _InsightRuleName = &s_InsightRuleName
+
+var _InsightRuleNames = &s_InsightRuleNames
+var _InsightRuleNames_member = &s_InsightRuleNames_member
+
+var _InsightRuleOnTransformedLogs = &s_InsightRuleOnTransformedLogs
+
+var _InsightRuleOrderBy = &s_InsightRuleOrderBy
+
+var _InsightRules = &s_InsightRules
+var _InsightRules_member = &s_InsightRules_member
+
+var _InsightRuleSchema = &s_InsightRuleSchema
+
+var _InsightRuleState = &s_InsightRuleState
+
+var _InsightRuleUnboundDouble = &s_InsightRuleUnboundDouble
+
+var _InsightRuleUnboundInteger = &s_InsightRuleUnboundInteger
+
+var _InsightRuleUnboundLong = &s_InsightRuleUnboundLong
+
+var InternalServiceFault = &sInternalServiceFault
+var InternalServiceFault_Message = &sInternalServiceFault_Message
+
+var InvalidFormatFault = &sInvalidFormatFault
+var InvalidFormatFault_message = &sInvalidFormatFault_message
+
+var InvalidNextToken = &sInvalidNextToken
+var InvalidNextToken_message = &sInvalidNextToken_message
+
+var InvalidParameterCombinationException = &sInvalidParameterCombinationException
+var InvalidParameterCombinationException_message = &sInvalidParameterCombinationException_message
+
+var InvalidParameterValueException = &sInvalidParameterValueException
+var InvalidParameterValueException_message = &sInvalidParameterValueException_message
+
+var KmsAccessDeniedException = &sKmsAccessDeniedException
+var KmsAccessDeniedException_Message = &sKmsAccessDeniedException_Message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var KmsKeyDisabledException = &sKmsKeyDisabledException
+var KmsKeyDisabledException_Message = &sKmsKeyDisabledException_Message
+
+var KmsKeyNotFoundException = &sKmsKeyNotFoundException
+var KmsKeyNotFoundException_Message = &sKmsKeyNotFoundException_Message
+
+var LabelOptions = &sLabelOptions
+var LabelOptions_Timezone = &sLabelOptions_Timezone
+
+var _LastModified = &s_LastModified
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var LimitExceededFault = &sLimitExceededFault
+var LimitExceededFault_message = &sLimitExceededFault_message
+
+var _ListMetricStreamsMaxResults = &s_ListMetricStreamsMaxResults
+
+var LogAlarm = &sLogAlarm
+var LogAlarm_AlarmName = &sLogAlarm_AlarmName
+var LogAlarm_AlarmArn = &sLogAlarm_AlarmArn
+var LogAlarm_AlarmDescription = &sLogAlarm_AlarmDescription
+var LogAlarm_AlarmConfigurationUpdatedTimestamp = &sLogAlarm_AlarmConfigurationUpdatedTimestamp
+var LogAlarm_ActionsEnabled = &sLogAlarm_ActionsEnabled
+var LogAlarm_OKActions = &sLogAlarm_OKActions
+var LogAlarm_AlarmActions = &sLogAlarm_AlarmActions
+var LogAlarm_InsufficientDataActions = &sLogAlarm_InsufficientDataActions
+var LogAlarm_StateValue = &sLogAlarm_StateValue
+var LogAlarm_StateReason = &sLogAlarm_StateReason
+var LogAlarm_StateReasonData = &sLogAlarm_StateReasonData
+var LogAlarm_StateUpdatedTimestamp = &sLogAlarm_StateUpdatedTimestamp
+var LogAlarm_ScheduledQueryConfiguration = &sLogAlarm_ScheduledQueryConfiguration
+var LogAlarm_QueryResultsToEvaluate = &sLogAlarm_QueryResultsToEvaluate
+var LogAlarm_QueryResultsToAlarm = &sLogAlarm_QueryResultsToAlarm
+var LogAlarm_Threshold = &sLogAlarm_Threshold
+var LogAlarm_ComparisonOperator = &sLogAlarm_ComparisonOperator
+var LogAlarm_TreatMissingData = &sLogAlarm_TreatMissingData
+var LogAlarm_StateTransitionedTimestamp = &sLogAlarm_StateTransitionedTimestamp
+var LogAlarm_EvaluationState = &sLogAlarm_EvaluationState
+var LogAlarm_ActionLogLineCount = &sLogAlarm_ActionLogLineCount
+var LogAlarm_ActionLogLineRoleArn = &sLogAlarm_ActionLogLineRoleArn
+var LogAlarm_WarmUpConfiguration = &sLogAlarm_WarmUpConfiguration
+var LogAlarm_ActionConfiguration = &sLogAlarm_ActionConfiguration
+
+var _LogAlarms = &s_LogAlarms
+var _LogAlarms_member = &s_LogAlarms_member
+
+var _LogGroupIdentifiers = &s_LogGroupIdentifiers
+var _LogGroupIdentifiers_member = &s_LogGroupIdentifiers_member
+
+var ManagedRule = &sManagedRule
+var ManagedRule_TemplateName = &sManagedRule_TemplateName
+var ManagedRule_ResourceARN = &sManagedRule_ResourceARN
+var ManagedRule_Tags = &sManagedRule_Tags
+
+var ManagedRuleDescription = &sManagedRuleDescription
+var ManagedRuleDescription_TemplateName = &sManagedRuleDescription_TemplateName
+var ManagedRuleDescription_ResourceARN = &sManagedRuleDescription_ResourceARN
+var ManagedRuleDescription_RuleState = &sManagedRuleDescription_RuleState
+
+var _ManagedRuleDescriptions = &s_ManagedRuleDescriptions
+var _ManagedRuleDescriptions_member = &s_ManagedRuleDescriptions_member
+
+var _ManagedRules = &s_ManagedRules
+var _ManagedRules_member = &s_ManagedRules_member
+
+var ManagedRuleState = &sManagedRuleState
+var ManagedRuleState_RuleName = &sManagedRuleState_RuleName
+var ManagedRuleState_State = &sManagedRuleState_State
+
+var _MaxRecords = &s_MaxRecords
+
+var _MaxReturnedResultsCount = &s_MaxReturnedResultsCount
+
+var _Message = &s_Message
+
+var MessageData = &sMessageData
+var MessageData_Code = &sMessageData_Code
+var MessageData_Value = &sMessageData_Value
+
+var _MessageDataCode = &s_MessageDataCode
+
+var _MessageDataValue = &s_MessageDataValue
+
+var Metric = &sMetric
+var Metric_Namespace = &sMetric_Namespace
+var Metric_MetricName = &sMetric_MetricName
+var Metric_Dimensions = &sMetric_Dimensions
+
+var MetricAlarm = &sMetricAlarm
+var MetricAlarm_AlarmName = &sMetricAlarm_AlarmName
+var MetricAlarm_AlarmArn = &sMetricAlarm_AlarmArn
+var MetricAlarm_AlarmDescription = &sMetricAlarm_AlarmDescription
+var MetricAlarm_AlarmConfigurationUpdatedTimestamp = &sMetricAlarm_AlarmConfigurationUpdatedTimestamp
+var MetricAlarm_ActionsEnabled = &sMetricAlarm_ActionsEnabled
+var MetricAlarm_OKActions = &sMetricAlarm_OKActions
+var MetricAlarm_AlarmActions = &sMetricAlarm_AlarmActions
+var MetricAlarm_InsufficientDataActions = &sMetricAlarm_InsufficientDataActions
+var MetricAlarm_StateValue = &sMetricAlarm_StateValue
+var MetricAlarm_StateReason = &sMetricAlarm_StateReason
+var MetricAlarm_StateReasonData = &sMetricAlarm_StateReasonData
+var MetricAlarm_StateUpdatedTimestamp = &sMetricAlarm_StateUpdatedTimestamp
+var MetricAlarm_MetricName = &sMetricAlarm_MetricName
+var MetricAlarm_Namespace = &sMetricAlarm_Namespace
+var MetricAlarm_Statistic = &sMetricAlarm_Statistic
+var MetricAlarm_ExtendedStatistic = &sMetricAlarm_ExtendedStatistic
+var MetricAlarm_Dimensions = &sMetricAlarm_Dimensions
+var MetricAlarm_Period = &sMetricAlarm_Period
+var MetricAlarm_Unit = &sMetricAlarm_Unit
+var MetricAlarm_EvaluationPeriods = &sMetricAlarm_EvaluationPeriods
+var MetricAlarm_DatapointsToAlarm = &sMetricAlarm_DatapointsToAlarm
+var MetricAlarm_Threshold = &sMetricAlarm_Threshold
+var MetricAlarm_ComparisonOperator = &sMetricAlarm_ComparisonOperator
+var MetricAlarm_TreatMissingData = &sMetricAlarm_TreatMissingData
+var MetricAlarm_EvaluateLowSampleCountPercentile = &sMetricAlarm_EvaluateLowSampleCountPercentile
+var MetricAlarm_Metrics = &sMetricAlarm_Metrics
+var MetricAlarm_ThresholdMetricId = &sMetricAlarm_ThresholdMetricId
+var MetricAlarm_EvaluationState = &sMetricAlarm_EvaluationState
+var MetricAlarm_StateTransitionedTimestamp = &sMetricAlarm_StateTransitionedTimestamp
+var MetricAlarm_EvaluationWindow = &sMetricAlarm_EvaluationWindow
+var MetricAlarm_WarmUpConfiguration = &sMetricAlarm_WarmUpConfiguration
+var MetricAlarm_EvaluationCriteria = &sMetricAlarm_EvaluationCriteria
+var MetricAlarm_EvaluationInterval = &sMetricAlarm_EvaluationInterval
+var MetricAlarm_ActionConfiguration = &sMetricAlarm_ActionConfiguration
+
+var _MetricAlarms = &s_MetricAlarms
+var _MetricAlarms_member = &s_MetricAlarms_member
+
+var MetricCharacteristics = &sMetricCharacteristics
+var MetricCharacteristics_PeriodicSpikes = &sMetricCharacteristics_PeriodicSpikes
+
+var _MetricData = &s_MetricData
+var _MetricData_member = &s_MetricData_member
+
+var _MetricDataQueries = &s_MetricDataQueries
+var _MetricDataQueries_member = &s_MetricDataQueries_member
+
+var MetricDataQuery = &sMetricDataQuery
+var MetricDataQuery_Id = &sMetricDataQuery_Id
+var MetricDataQuery_MetricStat = &sMetricDataQuery_MetricStat
+var MetricDataQuery_Expression = &sMetricDataQuery_Expression
+var MetricDataQuery_Label = &sMetricDataQuery_Label
+var MetricDataQuery_ReturnData = &sMetricDataQuery_ReturnData
+var MetricDataQuery_Period = &sMetricDataQuery_Period
+var MetricDataQuery_AccountId = &sMetricDataQuery_AccountId
+
+var MetricDataResult = &sMetricDataResult
+var MetricDataResult_Id = &sMetricDataResult_Id
+var MetricDataResult_Label = &sMetricDataResult_Label
+var MetricDataResult_Timestamps = &sMetricDataResult_Timestamps
+var MetricDataResult_Values = &sMetricDataResult_Values
+var MetricDataResult_StatusCode = &sMetricDataResult_StatusCode
+var MetricDataResult_Messages = &sMetricDataResult_Messages
+
+var _MetricDataResultMessages = &s_MetricDataResultMessages
+var _MetricDataResultMessages_member = &s_MetricDataResultMessages_member
+
+var _MetricDataResults = &s_MetricDataResults
+var _MetricDataResults_member = &s_MetricDataResults_member
+
+var MetricDatum = &sMetricDatum
+var MetricDatum_MetricName = &sMetricDatum_MetricName
+var MetricDatum_Dimensions = &sMetricDatum_Dimensions
+var MetricDatum_Timestamp = &sMetricDatum_Timestamp
+var MetricDatum_Value = &sMetricDatum_Value
+var MetricDatum_StatisticValues = &sMetricDatum_StatisticValues
+var MetricDatum_Values = &sMetricDatum_Values
+var MetricDatum_Counts = &sMetricDatum_Counts
+var MetricDatum_Unit = &sMetricDatum_Unit
+var MetricDatum_StorageResolution = &sMetricDatum_StorageResolution
+
+var _MetricExpression = &s_MetricExpression
+
+var _MetricId = &s_MetricId
+
+var _MetricLabel = &s_MetricLabel
+
+var MetricMathAnomalyDetector = &sMetricMathAnomalyDetector
+var MetricMathAnomalyDetector_MetricDataQueries = &sMetricMathAnomalyDetector_MetricDataQueries
+
+var _MetricName = &s_MetricName
+
+var _MetricNameList = &s_MetricNameList
+var _MetricNameList_member = &s_MetricNameList_member
+
+var _Metrics = &s_Metrics
+var _Metrics_member = &s_Metrics_member
+
+var MetricStat = &sMetricStat
+var MetricStat_Metric = &sMetricStat_Metric
+var MetricStat_Period = &sMetricStat_Period
+var MetricStat_Stat = &sMetricStat_Stat
+var MetricStat_Unit = &sMetricStat_Unit
+
+var _MetricStreamEntries = &s_MetricStreamEntries
+var _MetricStreamEntries_member = &s_MetricStreamEntries_member
+
+var MetricStreamEntry = &sMetricStreamEntry
+var MetricStreamEntry_Arn = &sMetricStreamEntry_Arn
+var MetricStreamEntry_CreationDate = &sMetricStreamEntry_CreationDate
+var MetricStreamEntry_LastUpdateDate = &sMetricStreamEntry_LastUpdateDate
+var MetricStreamEntry_Name = &sMetricStreamEntry_Name
+var MetricStreamEntry_FirehoseArn = &sMetricStreamEntry_FirehoseArn
+var MetricStreamEntry_State = &sMetricStreamEntry_State
+var MetricStreamEntry_OutputFormat = &sMetricStreamEntry_OutputFormat
+
+var MetricStreamFilter = &sMetricStreamFilter
+var MetricStreamFilter_Namespace = &sMetricStreamFilter_Namespace
+var MetricStreamFilter_MetricNames = &sMetricStreamFilter_MetricNames
+
+var _MetricStreamFilterMetricNames = &s_MetricStreamFilterMetricNames
+var _MetricStreamFilterMetricNames_member = &s_MetricStreamFilterMetricNames_member
+
+var _MetricStreamFilters = &s_MetricStreamFilters
+var _MetricStreamFilters_member = &s_MetricStreamFilters_member
+
+var _MetricStreamName = &s_MetricStreamName
+
+var _MetricStreamNames = &s_MetricStreamNames
+var _MetricStreamNames_member = &s_MetricStreamNames_member
+
+var MetricStreamOutputFormat = &sMetricStreamOutputFormat
+var MetricStreamOutputFormat_JSON = &sMetricStreamOutputFormat_JSON
+var MetricStreamOutputFormat_OPEN_TELEMETRY_0_7 = &sMetricStreamOutputFormat_OPEN_TELEMETRY_0_7
+var MetricStreamOutputFormat_OPEN_TELEMETRY_1_0 = &sMetricStreamOutputFormat_OPEN_TELEMETRY_1_0
+
+var _MetricStreamState = &s_MetricStreamState
+
+var _MetricStreamStatistic = &s_MetricStreamStatistic
+
+var _MetricStreamStatisticsAdditionalStatistics = &s_MetricStreamStatisticsAdditionalStatistics
+var _MetricStreamStatisticsAdditionalStatistics_member = &s_MetricStreamStatisticsAdditionalStatistics_member
+
+var MetricStreamStatisticsConfiguration = &sMetricStreamStatisticsConfiguration
+var MetricStreamStatisticsConfiguration_IncludeMetrics = &sMetricStreamStatisticsConfiguration_IncludeMetrics
+var MetricStreamStatisticsConfiguration_AdditionalStatistics = &sMetricStreamStatisticsConfiguration_AdditionalStatistics
+
+var _MetricStreamStatisticsConfigurations = &s_MetricStreamStatisticsConfigurations
+var _MetricStreamStatisticsConfigurations_member = &s_MetricStreamStatisticsConfigurations_member
+
+var _MetricStreamStatisticsIncludeMetrics = &s_MetricStreamStatisticsIncludeMetrics
+var _MetricStreamStatisticsIncludeMetrics_member = &s_MetricStreamStatisticsIncludeMetrics_member
+
+var MetricStreamStatisticsMetric = &sMetricStreamStatisticsMetric
+var MetricStreamStatisticsMetric_Namespace = &sMetricStreamStatisticsMetric_Namespace
+var MetricStreamStatisticsMetric_MetricName = &sMetricStreamStatisticsMetric_MetricName
+
+var _MetricWidget = &s_MetricWidget
+
+var _MetricWidgetImage = &s_MetricWidgetImage
+
+var MissingRequiredParameterException = &sMissingRequiredParameterException
+var MissingRequiredParameterException_message = &sMissingRequiredParameterException_message
+
+var _MuteTargetAlarmNameList = &s_MuteTargetAlarmNameList
+var _MuteTargetAlarmNameList_member = &s_MuteTargetAlarmNameList_member
+
+var MuteTargets = &sMuteTargets
+var MuteTargets_AlarmNames = &sMuteTargets_AlarmNames
+
+var _MuteType = &s_MuteType
+
+var _Name = &s_Name
+
+var _Namespace = &s_Namespace
+
+var _NextToken = &s_NextToken
+
+var _OnlyStartEvaluatingAfterWarmUpPeriodEnds = &s_OnlyStartEvaluatingAfterWarmUpPeriodEnds
+
+var _OTelEnrichmentMetricNameList = &s_OTelEnrichmentMetricNameList
+var _OTelEnrichmentMetricNameList_member = &s_OTelEnrichmentMetricNameList_member
+
+var OTelEnrichmentMetricSelector = &sOTelEnrichmentMetricSelector
+var OTelEnrichmentMetricSelector_Namespace = &sOTelEnrichmentMetricSelector_Namespace
+var OTelEnrichmentMetricSelector_MetricNames = &sOTelEnrichmentMetricSelector_MetricNames
+
+var _OTelEnrichmentMetricSelectorList = &s_OTelEnrichmentMetricSelectorList
+var _OTelEnrichmentMetricSelectorList_member = &s_OTelEnrichmentMetricSelectorList_member
+
+var OTelEnrichmentStatus = &sOTelEnrichmentStatus
+var OTelEnrichmentStatus_RUNNING = &sOTelEnrichmentStatus_RUNNING
+var OTelEnrichmentStatus_STOPPED = &sOTelEnrichmentStatus_STOPPED
+
+var _OutputFormat = &s_OutputFormat
+
+var _OwningAccounts = &s_OwningAccounts
+var _OwningAccounts_member = &s_OwningAccounts_member
+
+var PartialFailure = &sPartialFailure
+var PartialFailure_FailureResource = &sPartialFailure_FailureResource
+var PartialFailure_ExceptionType = &sPartialFailure_ExceptionType
+var PartialFailure_FailureCode = &sPartialFailure_FailureCode
+var PartialFailure_FailureDescription = &sPartialFailure_FailureDescription
+
+var _PendingPeriod = &s_PendingPeriod
+
+var _Period = &s_Period
+
+var _PeriodicSpikes = &s_PeriodicSpikes
+
+var _Query = &s_Query
+
+var _QueryResultsToAlarm = &s_QueryResultsToAlarm
+
+var _QueryResultsToEvaluate = &s_QueryResultsToEvaluate
+
+var _QueryString = &s_QueryString
+
+var Range = &sRange
+var Range_StartTime = &sRange_StartTime
+var Range_EndTime = &sRange_EndTime
+
+var RecentlyActive = &sRecentlyActive
+var RecentlyActive_PT3H = &sRecentlyActive_PT3H
+
+var _RecoveryPeriod = &s_RecoveryPeriod
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceConflict = &sResourceConflict
+var ResourceConflict_message = &sResourceConflict_message
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceMetricsConfiguration = &sResourceMetricsConfiguration
+var ResourceMetricsConfiguration_ResourceArn = &sResourceMetricsConfiguration_ResourceArn
+var ResourceMetricsConfiguration_CreatedAt = &sResourceMetricsConfiguration_CreatedAt
+var ResourceMetricsConfiguration_UpdatedAt = &sResourceMetricsConfiguration_UpdatedAt
+var ResourceMetricsConfiguration_MetricSelections = &sResourceMetricsConfiguration_MetricSelections
+
+var ResourceMetricSelection = &sResourceMetricSelection
+var ResourceMetricSelection_IncludeMetrics = &sResourceMetricSelection_IncludeMetrics
+
+var _ResourceMetricSelectionList = &s_ResourceMetricSelectionList
+var _ResourceMetricSelectionList_member = &s_ResourceMetricSelectionList_member
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFound = &sResourceNotFound
+var ResourceNotFound_message = &sResourceNotFound_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceType = &s_ResourceType
+
+var _ReturnData = &s_ReturnData
+
+var Rule = &sRule
+var Rule_Schedule = &sRule_Schedule
+
+var ScanBy = &sScanBy
+var ScanBy_TIMESTAMP_DESCENDING = &sScanBy_TIMESTAMP_DESCENDING
+var ScanBy_TIMESTAMP_ASCENDING = &sScanBy_TIMESTAMP_ASCENDING
+
+var Schedule = &sSchedule
+var Schedule_Expression = &sSchedule_Expression
+var Schedule_Duration = &sSchedule_Duration
+var Schedule_Timezone = &sSchedule_Timezone
+
+var ScheduleConfiguration = &sScheduleConfiguration
+var ScheduleConfiguration_ScheduleExpression = &sScheduleConfiguration_ScheduleExpression
+var ScheduleConfiguration_StartTimeOffset = &sScheduleConfiguration_StartTimeOffset
+var ScheduleConfiguration_EndTimeOffset = &sScheduleConfiguration_EndTimeOffset
+
+var ScheduledQueryConfiguration = &sScheduledQueryConfiguration
+var ScheduledQueryConfiguration_QueryString = &sScheduledQueryConfiguration_QueryString
+var ScheduledQueryConfiguration_LogGroupIdentifiers = &sScheduledQueryConfiguration_LogGroupIdentifiers
+var ScheduledQueryConfiguration_QueryARN = &sScheduledQueryConfiguration_QueryARN
+var ScheduledQueryConfiguration_ScheduledQueryRoleARN = &sScheduledQueryConfiguration_ScheduledQueryRoleARN
+var ScheduledQueryConfiguration_ScheduleConfiguration = &sScheduledQueryConfiguration_ScheduleConfiguration
+var ScheduledQueryConfiguration_AggregationExpression = &sScheduledQueryConfiguration_AggregationExpression
+var ScheduledQueryConfiguration_Tags = &sScheduledQueryConfiguration_Tags
+
+var _ScheduleExpression = &s_ScheduleExpression
+
+var SingleMetricAnomalyDetector = &sSingleMetricAnomalyDetector
+var SingleMetricAnomalyDetector_AccountId = &sSingleMetricAnomalyDetector_AccountId
+var SingleMetricAnomalyDetector_Namespace = &sSingleMetricAnomalyDetector_Namespace
+var SingleMetricAnomalyDetector_MetricName = &sSingleMetricAnomalyDetector_MetricName
+var SingleMetricAnomalyDetector_Dimensions = &sSingleMetricAnomalyDetector_Dimensions
+var SingleMetricAnomalyDetector_Stat = &sSingleMetricAnomalyDetector_Stat
+
+var _Size = &s_Size
+
+var SlidingWindow = &sSlidingWindow
+
+var StandardUnit = &sStandardUnit
+var StandardUnit_Seconds = &sStandardUnit_Seconds
+var StandardUnit_Microseconds = &sStandardUnit_Microseconds
+var StandardUnit_Milliseconds = &sStandardUnit_Milliseconds
+var StandardUnit_Bytes = &sStandardUnit_Bytes
+var StandardUnit_Kilobytes = &sStandardUnit_Kilobytes
+var StandardUnit_Megabytes = &sStandardUnit_Megabytes
+var StandardUnit_Gigabytes = &sStandardUnit_Gigabytes
+var StandardUnit_Terabytes = &sStandardUnit_Terabytes
+var StandardUnit_Bits = &sStandardUnit_Bits
+var StandardUnit_Kilobits = &sStandardUnit_Kilobits
+var StandardUnit_Megabits = &sStandardUnit_Megabits
+var StandardUnit_Gigabits = &sStandardUnit_Gigabits
+var StandardUnit_Terabits = &sStandardUnit_Terabits
+var StandardUnit_Percent = &sStandardUnit_Percent
+var StandardUnit_Count = &sStandardUnit_Count
+var StandardUnit_Bytes_Second = &sStandardUnit_Bytes_Second
+var StandardUnit_Kilobytes_Second = &sStandardUnit_Kilobytes_Second
+var StandardUnit_Megabytes_Second = &sStandardUnit_Megabytes_Second
+var StandardUnit_Gigabytes_Second = &sStandardUnit_Gigabytes_Second
+var StandardUnit_Terabytes_Second = &sStandardUnit_Terabytes_Second
+var StandardUnit_Bits_Second = &sStandardUnit_Bits_Second
+var StandardUnit_Kilobits_Second = &sStandardUnit_Kilobits_Second
+var StandardUnit_Megabits_Second = &sStandardUnit_Megabits_Second
+var StandardUnit_Gigabits_Second = &sStandardUnit_Gigabits_Second
+var StandardUnit_Terabits_Second = &sStandardUnit_Terabits_Second
+var StandardUnit_Count_Second = &sStandardUnit_Count_Second
+var StandardUnit_None = &sStandardUnit_None
+
+var _StartTimeOffset = &s_StartTimeOffset
+
+var _Stat = &s_Stat
+
+var _StateReason = &s_StateReason
+
+var _StateReasonData = &s_StateReasonData
+
+var StateValue = &sStateValue
+var StateValue_OK = &sStateValue_OK
+var StateValue_ALARM = &sStateValue_ALARM
+var StateValue_INSUFFICIENT_DATA = &sStateValue_INSUFFICIENT_DATA
+
+var Statistic = &sStatistic
+var Statistic_SampleCount = &sStatistic_SampleCount
+var Statistic_Average = &sStatistic_Average
+var Statistic_Sum = &sStatistic_Sum
+var Statistic_Minimum = &sStatistic_Minimum
+var Statistic_Maximum = &sStatistic_Maximum
+
+var _Statistics = &s_Statistics
+var _Statistics_member = &s_Statistics_member
+
+var StatisticSet = &sStatisticSet
+var StatisticSet_SampleCount = &sStatisticSet_SampleCount
+var StatisticSet_Sum = &sStatisticSet_Sum
+var StatisticSet_Minimum = &sStatisticSet_Minimum
+var StatisticSet_Maximum = &sStatisticSet_Maximum
+
+var StatusCode = &sStatusCode
+var StatusCode_COMPLETE = &sStatusCode_COMPLETE
+var StatusCode_INTERNAL_ERROR = &sStatusCode_INTERNAL_ERROR
+var StatusCode_PARTIAL_DATA = &sStatusCode_PARTIAL_DATA
+var StatusCode_FORBIDDEN = &sStatusCode_FORBIDDEN
+
+var _StorageResolution = &s_StorageResolution
+
+var _StrictEntityValidation = &s_StrictEntityValidation
+
+var _String = &s_String
+
+var _SuppressorPeriod = &s_SuppressorPeriod
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TemplateName = &s_TemplateName
+
+var _Threshold = &s_Threshold
+
+var _Timestamp = &s_Timestamp
+
+var _Timestamps = &s_Timestamps
+var _Timestamps_member = &s_Timestamps_member
+
+var _Timezone = &s_Timezone
+
+var _TreatMissingData = &s_TreatMissingData
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValidationExceptionMessage = &s_ValidationExceptionMessage
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var WallClockWindow = &sWallClockWindow
+var WallClockWindow_Timezone = &sWallClockWindow_Timezone
+
+var WarmUpConfiguration = &sWarmUpConfiguration
+var WarmUpConfiguration_WarmUpPeriodDurationInMinutes = &sWarmUpConfiguration_WarmUpPeriodDurationInMinutes
+var WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds = &sWarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds
+
+var _WarmUpPeriodDurationInMinutes = &s_WarmUpPeriodDurationInMinutes
+
+var AssociateDatasetKmsKeyInput = &sAssociateDatasetKmsKeyInput
+var AssociateDatasetKmsKeyInput_DatasetIdentifier = &sAssociateDatasetKmsKeyInput_DatasetIdentifier
+var AssociateDatasetKmsKeyInput_KmsKeyArn = &sAssociateDatasetKmsKeyInput_KmsKeyArn
+
+var AssociateDatasetKmsKeyOutput = &sAssociateDatasetKmsKeyOutput
+
+var CreateResourceMetricsConfigurationInput = &sCreateResourceMetricsConfigurationInput
+var CreateResourceMetricsConfigurationInput_ResourceArn = &sCreateResourceMetricsConfigurationInput_ResourceArn
+var CreateResourceMetricsConfigurationInput_MetricSelections = &sCreateResourceMetricsConfigurationInput_MetricSelections
+
+var CreateResourceMetricsConfigurationOutput = &sCreateResourceMetricsConfigurationOutput
+var CreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = &sCreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration
+
+var DeleteAlarmMuteRuleInput = &sDeleteAlarmMuteRuleInput
+var DeleteAlarmMuteRuleInput_AlarmMuteRuleName = &sDeleteAlarmMuteRuleInput_AlarmMuteRuleName
+
+var DeleteAlarmsInput = &sDeleteAlarmsInput
+var DeleteAlarmsInput_AlarmNames = &sDeleteAlarmsInput_AlarmNames
+
+var DeleteAnomalyDetectorInput = &sDeleteAnomalyDetectorInput
+var DeleteAnomalyDetectorInput_AnomalyDetectorId = &sDeleteAnomalyDetectorInput_AnomalyDetectorId
+var DeleteAnomalyDetectorInput_Namespace = &sDeleteAnomalyDetectorInput_Namespace
+var DeleteAnomalyDetectorInput_MetricName = &sDeleteAnomalyDetectorInput_MetricName
+var DeleteAnomalyDetectorInput_Dimensions = &sDeleteAnomalyDetectorInput_Dimensions
+var DeleteAnomalyDetectorInput_Stat = &sDeleteAnomalyDetectorInput_Stat
+var DeleteAnomalyDetectorInput_SingleMetricAnomalyDetector = &sDeleteAnomalyDetectorInput_SingleMetricAnomalyDetector
+var DeleteAnomalyDetectorInput_MetricMathAnomalyDetector = &sDeleteAnomalyDetectorInput_MetricMathAnomalyDetector
+
+var DeleteAnomalyDetectorOutput = &sDeleteAnomalyDetectorOutput
+
+var DeleteDashboardsInput = &sDeleteDashboardsInput
+var DeleteDashboardsInput_DashboardNames = &sDeleteDashboardsInput_DashboardNames
+
+var DeleteDashboardsOutput = &sDeleteDashboardsOutput
+
+var DeleteInsightRulesInput = &sDeleteInsightRulesInput
+var DeleteInsightRulesInput_RuleNames = &sDeleteInsightRulesInput_RuleNames
+
+var DeleteInsightRulesOutput = &sDeleteInsightRulesOutput
+var DeleteInsightRulesOutput_Failures = &sDeleteInsightRulesOutput_Failures
+
+var DeleteMetricStreamInput = &sDeleteMetricStreamInput
+var DeleteMetricStreamInput_Name = &sDeleteMetricStreamInput_Name
+
+var DeleteMetricStreamOutput = &sDeleteMetricStreamOutput
+
+var DeleteResourceMetricsConfigurationInput = &sDeleteResourceMetricsConfigurationInput
+var DeleteResourceMetricsConfigurationInput_ResourceArn = &sDeleteResourceMetricsConfigurationInput_ResourceArn
+
+var DeleteResourceMetricsConfigurationOutput = &sDeleteResourceMetricsConfigurationOutput
+
+var DescribeAlarmContributorsInput = &sDescribeAlarmContributorsInput
+var DescribeAlarmContributorsInput_AlarmName = &sDescribeAlarmContributorsInput_AlarmName
+var DescribeAlarmContributorsInput_NextToken = &sDescribeAlarmContributorsInput_NextToken
+
+var DescribeAlarmContributorsOutput = &sDescribeAlarmContributorsOutput
+var DescribeAlarmContributorsOutput_AlarmContributors = &sDescribeAlarmContributorsOutput_AlarmContributors
+var DescribeAlarmContributorsOutput_NextToken = &sDescribeAlarmContributorsOutput_NextToken
+
+var DescribeAlarmHistoryInput = &sDescribeAlarmHistoryInput
+var DescribeAlarmHistoryInput_AlarmName = &sDescribeAlarmHistoryInput_AlarmName
+var DescribeAlarmHistoryInput_AlarmContributorId = &sDescribeAlarmHistoryInput_AlarmContributorId
+var DescribeAlarmHistoryInput_AlarmTypes = &sDescribeAlarmHistoryInput_AlarmTypes
+var DescribeAlarmHistoryInput_HistoryItemType = &sDescribeAlarmHistoryInput_HistoryItemType
+var DescribeAlarmHistoryInput_StartDate = &sDescribeAlarmHistoryInput_StartDate
+var DescribeAlarmHistoryInput_EndDate = &sDescribeAlarmHistoryInput_EndDate
+var DescribeAlarmHistoryInput_MaxRecords = &sDescribeAlarmHistoryInput_MaxRecords
+var DescribeAlarmHistoryInput_NextToken = &sDescribeAlarmHistoryInput_NextToken
+var DescribeAlarmHistoryInput_ScanBy = &sDescribeAlarmHistoryInput_ScanBy
+
+var DescribeAlarmHistoryOutput = &sDescribeAlarmHistoryOutput
+var DescribeAlarmHistoryOutput_AlarmHistoryItems = &sDescribeAlarmHistoryOutput_AlarmHistoryItems
+var DescribeAlarmHistoryOutput_NextToken = &sDescribeAlarmHistoryOutput_NextToken
+
+var DescribeAlarmsForMetricInput = &sDescribeAlarmsForMetricInput
+var DescribeAlarmsForMetricInput_MetricName = &sDescribeAlarmsForMetricInput_MetricName
+var DescribeAlarmsForMetricInput_Namespace = &sDescribeAlarmsForMetricInput_Namespace
+var DescribeAlarmsForMetricInput_Statistic = &sDescribeAlarmsForMetricInput_Statistic
+var DescribeAlarmsForMetricInput_ExtendedStatistic = &sDescribeAlarmsForMetricInput_ExtendedStatistic
+var DescribeAlarmsForMetricInput_Dimensions = &sDescribeAlarmsForMetricInput_Dimensions
+var DescribeAlarmsForMetricInput_Period = &sDescribeAlarmsForMetricInput_Period
+var DescribeAlarmsForMetricInput_Unit = &sDescribeAlarmsForMetricInput_Unit
+
+var DescribeAlarmsForMetricOutput = &sDescribeAlarmsForMetricOutput
+var DescribeAlarmsForMetricOutput_MetricAlarms = &sDescribeAlarmsForMetricOutput_MetricAlarms
+
+var DescribeAlarmsInput = &sDescribeAlarmsInput
+var DescribeAlarmsInput_AlarmNames = &sDescribeAlarmsInput_AlarmNames
+var DescribeAlarmsInput_AlarmNamePrefix = &sDescribeAlarmsInput_AlarmNamePrefix
+var DescribeAlarmsInput_AlarmTypes = &sDescribeAlarmsInput_AlarmTypes
+var DescribeAlarmsInput_ChildrenOfAlarmName = &sDescribeAlarmsInput_ChildrenOfAlarmName
+var DescribeAlarmsInput_ParentsOfAlarmName = &sDescribeAlarmsInput_ParentsOfAlarmName
+var DescribeAlarmsInput_StateValue = &sDescribeAlarmsInput_StateValue
+var DescribeAlarmsInput_ActionPrefix = &sDescribeAlarmsInput_ActionPrefix
+var DescribeAlarmsInput_MaxRecords = &sDescribeAlarmsInput_MaxRecords
+var DescribeAlarmsInput_NextToken = &sDescribeAlarmsInput_NextToken
+
+var DescribeAlarmsOutput = &sDescribeAlarmsOutput
+var DescribeAlarmsOutput_CompositeAlarms = &sDescribeAlarmsOutput_CompositeAlarms
+var DescribeAlarmsOutput_MetricAlarms = &sDescribeAlarmsOutput_MetricAlarms
+var DescribeAlarmsOutput_LogAlarms = &sDescribeAlarmsOutput_LogAlarms
+var DescribeAlarmsOutput_NextToken = &sDescribeAlarmsOutput_NextToken
+
+var DescribeAnomalyDetectorsInput = &sDescribeAnomalyDetectorsInput
+var DescribeAnomalyDetectorsInput_AnomalyDetectorIds = &sDescribeAnomalyDetectorsInput_AnomalyDetectorIds
+var DescribeAnomalyDetectorsInput_NextToken = &sDescribeAnomalyDetectorsInput_NextToken
+var DescribeAnomalyDetectorsInput_MaxResults = &sDescribeAnomalyDetectorsInput_MaxResults
+var DescribeAnomalyDetectorsInput_Namespace = &sDescribeAnomalyDetectorsInput_Namespace
+var DescribeAnomalyDetectorsInput_MetricName = &sDescribeAnomalyDetectorsInput_MetricName
+var DescribeAnomalyDetectorsInput_Dimensions = &sDescribeAnomalyDetectorsInput_Dimensions
+var DescribeAnomalyDetectorsInput_AnomalyDetectorTypes = &sDescribeAnomalyDetectorsInput_AnomalyDetectorTypes
+
+var DescribeAnomalyDetectorsOutput = &sDescribeAnomalyDetectorsOutput
+var DescribeAnomalyDetectorsOutput_AnomalyDetectors = &sDescribeAnomalyDetectorsOutput_AnomalyDetectors
+var DescribeAnomalyDetectorsOutput_NextToken = &sDescribeAnomalyDetectorsOutput_NextToken
+
+var DescribeInsightRulesInput = &sDescribeInsightRulesInput
+var DescribeInsightRulesInput_NextToken = &sDescribeInsightRulesInput_NextToken
+var DescribeInsightRulesInput_MaxResults = &sDescribeInsightRulesInput_MaxResults
+
+var DescribeInsightRulesOutput = &sDescribeInsightRulesOutput
+var DescribeInsightRulesOutput_NextToken = &sDescribeInsightRulesOutput_NextToken
+var DescribeInsightRulesOutput_InsightRules = &sDescribeInsightRulesOutput_InsightRules
+
+var DisableAlarmActionsInput = &sDisableAlarmActionsInput
+var DisableAlarmActionsInput_AlarmNames = &sDisableAlarmActionsInput_AlarmNames
+
+var DisableInsightRulesInput = &sDisableInsightRulesInput
+var DisableInsightRulesInput_RuleNames = &sDisableInsightRulesInput_RuleNames
+
+var DisableInsightRulesOutput = &sDisableInsightRulesOutput
+var DisableInsightRulesOutput_Failures = &sDisableInsightRulesOutput_Failures
+
+var DisassociateDatasetKmsKeyInput = &sDisassociateDatasetKmsKeyInput
+var DisassociateDatasetKmsKeyInput_DatasetIdentifier = &sDisassociateDatasetKmsKeyInput_DatasetIdentifier
+
+var DisassociateDatasetKmsKeyOutput = &sDisassociateDatasetKmsKeyOutput
+
+var EnableAlarmActionsInput = &sEnableAlarmActionsInput
+var EnableAlarmActionsInput_AlarmNames = &sEnableAlarmActionsInput_AlarmNames
+
+var EnableInsightRulesInput = &sEnableInsightRulesInput
+var EnableInsightRulesInput_RuleNames = &sEnableInsightRulesInput_RuleNames
+
+var EnableInsightRulesOutput = &sEnableInsightRulesOutput
+var EnableInsightRulesOutput_Failures = &sEnableInsightRulesOutput_Failures
+
+var GetAlarmMuteRuleInput = &sGetAlarmMuteRuleInput
+var GetAlarmMuteRuleInput_AlarmMuteRuleName = &sGetAlarmMuteRuleInput_AlarmMuteRuleName
+
+var GetAlarmMuteRuleOutput = &sGetAlarmMuteRuleOutput
+var GetAlarmMuteRuleOutput_Name = &sGetAlarmMuteRuleOutput_Name
+var GetAlarmMuteRuleOutput_AlarmMuteRuleArn = &sGetAlarmMuteRuleOutput_AlarmMuteRuleArn
+var GetAlarmMuteRuleOutput_Description = &sGetAlarmMuteRuleOutput_Description
+var GetAlarmMuteRuleOutput_Rule = &sGetAlarmMuteRuleOutput_Rule
+var GetAlarmMuteRuleOutput_MuteTargets = &sGetAlarmMuteRuleOutput_MuteTargets
+var GetAlarmMuteRuleOutput_StartDate = &sGetAlarmMuteRuleOutput_StartDate
+var GetAlarmMuteRuleOutput_ExpireDate = &sGetAlarmMuteRuleOutput_ExpireDate
+var GetAlarmMuteRuleOutput_Status = &sGetAlarmMuteRuleOutput_Status
+var GetAlarmMuteRuleOutput_LastUpdatedTimestamp = &sGetAlarmMuteRuleOutput_LastUpdatedTimestamp
+var GetAlarmMuteRuleOutput_MuteType = &sGetAlarmMuteRuleOutput_MuteType
+
+var GetDashboardInput = &sGetDashboardInput
+var GetDashboardInput_DashboardName = &sGetDashboardInput_DashboardName
+
+var GetDashboardOutput = &sGetDashboardOutput
+var GetDashboardOutput_DashboardArn = &sGetDashboardOutput_DashboardArn
+var GetDashboardOutput_DashboardBody = &sGetDashboardOutput_DashboardBody
+var GetDashboardOutput_DashboardName = &sGetDashboardOutput_DashboardName
+
+var GetDatasetInput = &sGetDatasetInput
+var GetDatasetInput_DatasetIdentifier = &sGetDatasetInput_DatasetIdentifier
+
+var GetDatasetOutput = &sGetDatasetOutput
+var GetDatasetOutput_DatasetId = &sGetDatasetOutput_DatasetId
+var GetDatasetOutput_Arn = &sGetDatasetOutput_Arn
+var GetDatasetOutput_KmsKeyArn = &sGetDatasetOutput_KmsKeyArn
+
+var GetInsightRuleReportInput = &sGetInsightRuleReportInput
+var GetInsightRuleReportInput_RuleName = &sGetInsightRuleReportInput_RuleName
+var GetInsightRuleReportInput_StartTime = &sGetInsightRuleReportInput_StartTime
+var GetInsightRuleReportInput_EndTime = &sGetInsightRuleReportInput_EndTime
+var GetInsightRuleReportInput_Period = &sGetInsightRuleReportInput_Period
+var GetInsightRuleReportInput_MaxContributorCount = &sGetInsightRuleReportInput_MaxContributorCount
+var GetInsightRuleReportInput_Metrics = &sGetInsightRuleReportInput_Metrics
+var GetInsightRuleReportInput_OrderBy = &sGetInsightRuleReportInput_OrderBy
+
+var GetInsightRuleReportOutput = &sGetInsightRuleReportOutput
+var GetInsightRuleReportOutput_KeyLabels = &sGetInsightRuleReportOutput_KeyLabels
+var GetInsightRuleReportOutput_AggregationStatistic = &sGetInsightRuleReportOutput_AggregationStatistic
+var GetInsightRuleReportOutput_AggregateValue = &sGetInsightRuleReportOutput_AggregateValue
+var GetInsightRuleReportOutput_ApproximateUniqueCount = &sGetInsightRuleReportOutput_ApproximateUniqueCount
+var GetInsightRuleReportOutput_Contributors = &sGetInsightRuleReportOutput_Contributors
+var GetInsightRuleReportOutput_MetricDatapoints = &sGetInsightRuleReportOutput_MetricDatapoints
+
+var GetMetricDataInput = &sGetMetricDataInput
+var GetMetricDataInput_MetricDataQueries = &sGetMetricDataInput_MetricDataQueries
+var GetMetricDataInput_StartTime = &sGetMetricDataInput_StartTime
+var GetMetricDataInput_EndTime = &sGetMetricDataInput_EndTime
+var GetMetricDataInput_NextToken = &sGetMetricDataInput_NextToken
+var GetMetricDataInput_ScanBy = &sGetMetricDataInput_ScanBy
+var GetMetricDataInput_MaxDatapoints = &sGetMetricDataInput_MaxDatapoints
+var GetMetricDataInput_LabelOptions = &sGetMetricDataInput_LabelOptions
+
+var GetMetricDataOutput = &sGetMetricDataOutput
+var GetMetricDataOutput_MetricDataResults = &sGetMetricDataOutput_MetricDataResults
+var GetMetricDataOutput_NextToken = &sGetMetricDataOutput_NextToken
+var GetMetricDataOutput_Messages = &sGetMetricDataOutput_Messages
+
+var GetMetricStatisticsInput = &sGetMetricStatisticsInput
+var GetMetricStatisticsInput_Namespace = &sGetMetricStatisticsInput_Namespace
+var GetMetricStatisticsInput_MetricName = &sGetMetricStatisticsInput_MetricName
+var GetMetricStatisticsInput_Dimensions = &sGetMetricStatisticsInput_Dimensions
+var GetMetricStatisticsInput_StartTime = &sGetMetricStatisticsInput_StartTime
+var GetMetricStatisticsInput_EndTime = &sGetMetricStatisticsInput_EndTime
+var GetMetricStatisticsInput_Period = &sGetMetricStatisticsInput_Period
+var GetMetricStatisticsInput_Statistics = &sGetMetricStatisticsInput_Statistics
+var GetMetricStatisticsInput_ExtendedStatistics = &sGetMetricStatisticsInput_ExtendedStatistics
+var GetMetricStatisticsInput_Unit = &sGetMetricStatisticsInput_Unit
+
+var GetMetricStatisticsOutput = &sGetMetricStatisticsOutput
+var GetMetricStatisticsOutput_Label = &sGetMetricStatisticsOutput_Label
+var GetMetricStatisticsOutput_Datapoints = &sGetMetricStatisticsOutput_Datapoints
+
+var GetMetricStreamInput = &sGetMetricStreamInput
+var GetMetricStreamInput_Name = &sGetMetricStreamInput_Name
+
+var GetMetricStreamOutput = &sGetMetricStreamOutput
+var GetMetricStreamOutput_Arn = &sGetMetricStreamOutput_Arn
+var GetMetricStreamOutput_Name = &sGetMetricStreamOutput_Name
+var GetMetricStreamOutput_IncludeFilters = &sGetMetricStreamOutput_IncludeFilters
+var GetMetricStreamOutput_ExcludeFilters = &sGetMetricStreamOutput_ExcludeFilters
+var GetMetricStreamOutput_FirehoseArn = &sGetMetricStreamOutput_FirehoseArn
+var GetMetricStreamOutput_RoleArn = &sGetMetricStreamOutput_RoleArn
+var GetMetricStreamOutput_State = &sGetMetricStreamOutput_State
+var GetMetricStreamOutput_CreationDate = &sGetMetricStreamOutput_CreationDate
+var GetMetricStreamOutput_LastUpdateDate = &sGetMetricStreamOutput_LastUpdateDate
+var GetMetricStreamOutput_OutputFormat = &sGetMetricStreamOutput_OutputFormat
+var GetMetricStreamOutput_StatisticsConfigurations = &sGetMetricStreamOutput_StatisticsConfigurations
+var GetMetricStreamOutput_IncludeLinkedAccountsMetrics = &sGetMetricStreamOutput_IncludeLinkedAccountsMetrics
+
+var GetMetricWidgetImageInput = &sGetMetricWidgetImageInput
+var GetMetricWidgetImageInput_MetricWidget = &sGetMetricWidgetImageInput_MetricWidget
+var GetMetricWidgetImageInput_OutputFormat = &sGetMetricWidgetImageInput_OutputFormat
+
+var GetMetricWidgetImageOutput = &sGetMetricWidgetImageOutput
+var GetMetricWidgetImageOutput_MetricWidgetImage = &sGetMetricWidgetImageOutput_MetricWidgetImage
+
+var GetOTelEnrichmentInput = &sGetOTelEnrichmentInput
+
+var GetOTelEnrichmentOutput = &sGetOTelEnrichmentOutput
+var GetOTelEnrichmentOutput_Status = &sGetOTelEnrichmentOutput_Status
+var GetOTelEnrichmentOutput_IncludeFilters = &sGetOTelEnrichmentOutput_IncludeFilters
+var GetOTelEnrichmentOutput_ExcludeFilters = &sGetOTelEnrichmentOutput_ExcludeFilters
+var GetOTelEnrichmentOutput_CreatedAt = &sGetOTelEnrichmentOutput_CreatedAt
+var GetOTelEnrichmentOutput_UpdatedAt = &sGetOTelEnrichmentOutput_UpdatedAt
+
+var GetResourceMetricsConfigurationInput = &sGetResourceMetricsConfigurationInput
+var GetResourceMetricsConfigurationInput_ResourceArn = &sGetResourceMetricsConfigurationInput_ResourceArn
+
+var GetResourceMetricsConfigurationOutput = &sGetResourceMetricsConfigurationOutput
+var GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = &sGetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration
+
+var ListAlarmMuteRulesInput = &sListAlarmMuteRulesInput
+var ListAlarmMuteRulesInput_AlarmName = &sListAlarmMuteRulesInput_AlarmName
+var ListAlarmMuteRulesInput_Statuses = &sListAlarmMuteRulesInput_Statuses
+var ListAlarmMuteRulesInput_MaxRecords = &sListAlarmMuteRulesInput_MaxRecords
+var ListAlarmMuteRulesInput_NextToken = &sListAlarmMuteRulesInput_NextToken
+
+var ListAlarmMuteRulesOutput = &sListAlarmMuteRulesOutput
+var ListAlarmMuteRulesOutput_AlarmMuteRuleSummaries = &sListAlarmMuteRulesOutput_AlarmMuteRuleSummaries
+var ListAlarmMuteRulesOutput_NextToken = &sListAlarmMuteRulesOutput_NextToken
+
+var ListDashboardsInput = &sListDashboardsInput
+var ListDashboardsInput_DashboardNamePrefix = &sListDashboardsInput_DashboardNamePrefix
+var ListDashboardsInput_NextToken = &sListDashboardsInput_NextToken
+
+var ListDashboardsOutput = &sListDashboardsOutput
+var ListDashboardsOutput_DashboardEntries = &sListDashboardsOutput_DashboardEntries
+var ListDashboardsOutput_NextToken = &sListDashboardsOutput_NextToken
+
+var ListManagedInsightRulesInput = &sListManagedInsightRulesInput
+var ListManagedInsightRulesInput_ResourceARN = &sListManagedInsightRulesInput_ResourceARN
+var ListManagedInsightRulesInput_NextToken = &sListManagedInsightRulesInput_NextToken
+var ListManagedInsightRulesInput_MaxResults = &sListManagedInsightRulesInput_MaxResults
+
+var ListManagedInsightRulesOutput = &sListManagedInsightRulesOutput
+var ListManagedInsightRulesOutput_ManagedRules = &sListManagedInsightRulesOutput_ManagedRules
+var ListManagedInsightRulesOutput_NextToken = &sListManagedInsightRulesOutput_NextToken
+
+var ListMetricsInput = &sListMetricsInput
+var ListMetricsInput_Namespace = &sListMetricsInput_Namespace
+var ListMetricsInput_MetricName = &sListMetricsInput_MetricName
+var ListMetricsInput_Dimensions = &sListMetricsInput_Dimensions
+var ListMetricsInput_NextToken = &sListMetricsInput_NextToken
+var ListMetricsInput_RecentlyActive = &sListMetricsInput_RecentlyActive
+var ListMetricsInput_IncludeLinkedAccounts = &sListMetricsInput_IncludeLinkedAccounts
+var ListMetricsInput_OwningAccount = &sListMetricsInput_OwningAccount
+
+var ListMetricsOutput = &sListMetricsOutput
+var ListMetricsOutput_Metrics = &sListMetricsOutput_Metrics
+var ListMetricsOutput_NextToken = &sListMetricsOutput_NextToken
+var ListMetricsOutput_OwningAccounts = &sListMetricsOutput_OwningAccounts
+
+var ListMetricStreamsInput = &sListMetricStreamsInput
+var ListMetricStreamsInput_NextToken = &sListMetricStreamsInput_NextToken
+var ListMetricStreamsInput_MaxResults = &sListMetricStreamsInput_MaxResults
+
+var ListMetricStreamsOutput = &sListMetricStreamsOutput
+var ListMetricStreamsOutput_NextToken = &sListMetricStreamsOutput_NextToken
+var ListMetricStreamsOutput_Entries = &sListMetricStreamsOutput_Entries
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var PutAlarmMuteRuleInput = &sPutAlarmMuteRuleInput
+var PutAlarmMuteRuleInput_Name = &sPutAlarmMuteRuleInput_Name
+var PutAlarmMuteRuleInput_Description = &sPutAlarmMuteRuleInput_Description
+var PutAlarmMuteRuleInput_Rule = &sPutAlarmMuteRuleInput_Rule
+var PutAlarmMuteRuleInput_MuteTargets = &sPutAlarmMuteRuleInput_MuteTargets
+var PutAlarmMuteRuleInput_Tags = &sPutAlarmMuteRuleInput_Tags
+var PutAlarmMuteRuleInput_StartDate = &sPutAlarmMuteRuleInput_StartDate
+var PutAlarmMuteRuleInput_ExpireDate = &sPutAlarmMuteRuleInput_ExpireDate
+
+var PutAnomalyDetectorInput = &sPutAnomalyDetectorInput
+var PutAnomalyDetectorInput_Namespace = &sPutAnomalyDetectorInput_Namespace
+var PutAnomalyDetectorInput_MetricName = &sPutAnomalyDetectorInput_MetricName
+var PutAnomalyDetectorInput_Dimensions = &sPutAnomalyDetectorInput_Dimensions
+var PutAnomalyDetectorInput_Stat = &sPutAnomalyDetectorInput_Stat
+var PutAnomalyDetectorInput_Configuration = &sPutAnomalyDetectorInput_Configuration
+var PutAnomalyDetectorInput_MetricCharacteristics = &sPutAnomalyDetectorInput_MetricCharacteristics
+var PutAnomalyDetectorInput_SingleMetricAnomalyDetector = &sPutAnomalyDetectorInput_SingleMetricAnomalyDetector
+var PutAnomalyDetectorInput_MetricMathAnomalyDetector = &sPutAnomalyDetectorInput_MetricMathAnomalyDetector
+
+var PutAnomalyDetectorOutput = &sPutAnomalyDetectorOutput
+var PutAnomalyDetectorOutput_AnomalyDetectorId = &sPutAnomalyDetectorOutput_AnomalyDetectorId
+
+var PutCompositeAlarmInput = &sPutCompositeAlarmInput
+var PutCompositeAlarmInput_ActionsEnabled = &sPutCompositeAlarmInput_ActionsEnabled
+var PutCompositeAlarmInput_AlarmActions = &sPutCompositeAlarmInput_AlarmActions
+var PutCompositeAlarmInput_AlarmDescription = &sPutCompositeAlarmInput_AlarmDescription
+var PutCompositeAlarmInput_AlarmName = &sPutCompositeAlarmInput_AlarmName
+var PutCompositeAlarmInput_AlarmRule = &sPutCompositeAlarmInput_AlarmRule
+var PutCompositeAlarmInput_InsufficientDataActions = &sPutCompositeAlarmInput_InsufficientDataActions
+var PutCompositeAlarmInput_OKActions = &sPutCompositeAlarmInput_OKActions
+var PutCompositeAlarmInput_Tags = &sPutCompositeAlarmInput_Tags
+var PutCompositeAlarmInput_ActionsSuppressor = &sPutCompositeAlarmInput_ActionsSuppressor
+var PutCompositeAlarmInput_ActionsSuppressorWaitPeriod = &sPutCompositeAlarmInput_ActionsSuppressorWaitPeriod
+var PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod = &sPutCompositeAlarmInput_ActionsSuppressorExtensionPeriod
+var PutCompositeAlarmInput_ActionConfiguration = &sPutCompositeAlarmInput_ActionConfiguration
+
+var PutDashboardInput = &sPutDashboardInput
+var PutDashboardInput_DashboardName = &sPutDashboardInput_DashboardName
+var PutDashboardInput_DashboardBody = &sPutDashboardInput_DashboardBody
+var PutDashboardInput_Tags = &sPutDashboardInput_Tags
+
+var PutDashboardOutput = &sPutDashboardOutput
+var PutDashboardOutput_DashboardValidationMessages = &sPutDashboardOutput_DashboardValidationMessages
+
+var PutInsightRuleInput = &sPutInsightRuleInput
+var PutInsightRuleInput_RuleName = &sPutInsightRuleInput_RuleName
+var PutInsightRuleInput_RuleState = &sPutInsightRuleInput_RuleState
+var PutInsightRuleInput_RuleDefinition = &sPutInsightRuleInput_RuleDefinition
+var PutInsightRuleInput_Tags = &sPutInsightRuleInput_Tags
+var PutInsightRuleInput_ApplyOnTransformedLogs = &sPutInsightRuleInput_ApplyOnTransformedLogs
+
+var PutInsightRuleOutput = &sPutInsightRuleOutput
+
+var PutLogAlarmInput = &sPutLogAlarmInput
+var PutLogAlarmInput_AlarmName = &sPutLogAlarmInput_AlarmName
+var PutLogAlarmInput_AlarmDescription = &sPutLogAlarmInput_AlarmDescription
+var PutLogAlarmInput_ScheduledQueryConfiguration = &sPutLogAlarmInput_ScheduledQueryConfiguration
+var PutLogAlarmInput_ActionLogLineCount = &sPutLogAlarmInput_ActionLogLineCount
+var PutLogAlarmInput_ActionLogLineRoleArn = &sPutLogAlarmInput_ActionLogLineRoleArn
+var PutLogAlarmInput_ActionsEnabled = &sPutLogAlarmInput_ActionsEnabled
+var PutLogAlarmInput_OKActions = &sPutLogAlarmInput_OKActions
+var PutLogAlarmInput_AlarmActions = &sPutLogAlarmInput_AlarmActions
+var PutLogAlarmInput_InsufficientDataActions = &sPutLogAlarmInput_InsufficientDataActions
+var PutLogAlarmInput_QueryResultsToEvaluate = &sPutLogAlarmInput_QueryResultsToEvaluate
+var PutLogAlarmInput_QueryResultsToAlarm = &sPutLogAlarmInput_QueryResultsToAlarm
+var PutLogAlarmInput_Threshold = &sPutLogAlarmInput_Threshold
+var PutLogAlarmInput_ComparisonOperator = &sPutLogAlarmInput_ComparisonOperator
+var PutLogAlarmInput_TreatMissingData = &sPutLogAlarmInput_TreatMissingData
+var PutLogAlarmInput_Tags = &sPutLogAlarmInput_Tags
+var PutLogAlarmInput_WarmUpConfiguration = &sPutLogAlarmInput_WarmUpConfiguration
+var PutLogAlarmInput_ActionConfiguration = &sPutLogAlarmInput_ActionConfiguration
+
+var PutManagedInsightRulesInput = &sPutManagedInsightRulesInput
+var PutManagedInsightRulesInput_ManagedRules = &sPutManagedInsightRulesInput_ManagedRules
+
+var PutManagedInsightRulesOutput = &sPutManagedInsightRulesOutput
+var PutManagedInsightRulesOutput_Failures = &sPutManagedInsightRulesOutput_Failures
+
+var PutMetricAlarmInput = &sPutMetricAlarmInput
+var PutMetricAlarmInput_AlarmName = &sPutMetricAlarmInput_AlarmName
+var PutMetricAlarmInput_AlarmDescription = &sPutMetricAlarmInput_AlarmDescription
+var PutMetricAlarmInput_ActionsEnabled = &sPutMetricAlarmInput_ActionsEnabled
+var PutMetricAlarmInput_OKActions = &sPutMetricAlarmInput_OKActions
+var PutMetricAlarmInput_AlarmActions = &sPutMetricAlarmInput_AlarmActions
+var PutMetricAlarmInput_InsufficientDataActions = &sPutMetricAlarmInput_InsufficientDataActions
+var PutMetricAlarmInput_MetricName = &sPutMetricAlarmInput_MetricName
+var PutMetricAlarmInput_Namespace = &sPutMetricAlarmInput_Namespace
+var PutMetricAlarmInput_Statistic = &sPutMetricAlarmInput_Statistic
+var PutMetricAlarmInput_ExtendedStatistic = &sPutMetricAlarmInput_ExtendedStatistic
+var PutMetricAlarmInput_Dimensions = &sPutMetricAlarmInput_Dimensions
+var PutMetricAlarmInput_Period = &sPutMetricAlarmInput_Period
+var PutMetricAlarmInput_Unit = &sPutMetricAlarmInput_Unit
+var PutMetricAlarmInput_EvaluationPeriods = &sPutMetricAlarmInput_EvaluationPeriods
+var PutMetricAlarmInput_DatapointsToAlarm = &sPutMetricAlarmInput_DatapointsToAlarm
+var PutMetricAlarmInput_Threshold = &sPutMetricAlarmInput_Threshold
+var PutMetricAlarmInput_ComparisonOperator = &sPutMetricAlarmInput_ComparisonOperator
+var PutMetricAlarmInput_TreatMissingData = &sPutMetricAlarmInput_TreatMissingData
+var PutMetricAlarmInput_EvaluateLowSampleCountPercentile = &sPutMetricAlarmInput_EvaluateLowSampleCountPercentile
+var PutMetricAlarmInput_Metrics = &sPutMetricAlarmInput_Metrics
+var PutMetricAlarmInput_Tags = &sPutMetricAlarmInput_Tags
+var PutMetricAlarmInput_ThresholdMetricId = &sPutMetricAlarmInput_ThresholdMetricId
+var PutMetricAlarmInput_EvaluationWindow = &sPutMetricAlarmInput_EvaluationWindow
+var PutMetricAlarmInput_WarmUpConfiguration = &sPutMetricAlarmInput_WarmUpConfiguration
+var PutMetricAlarmInput_EvaluationCriteria = &sPutMetricAlarmInput_EvaluationCriteria
+var PutMetricAlarmInput_EvaluationInterval = &sPutMetricAlarmInput_EvaluationInterval
+var PutMetricAlarmInput_ActionConfiguration = &sPutMetricAlarmInput_ActionConfiguration
+
+var PutMetricDataInput = &sPutMetricDataInput
+var PutMetricDataInput_Namespace = &sPutMetricDataInput_Namespace
+var PutMetricDataInput_MetricData = &sPutMetricDataInput_MetricData
+var PutMetricDataInput_EntityMetricData = &sPutMetricDataInput_EntityMetricData
+var PutMetricDataInput_StrictEntityValidation = &sPutMetricDataInput_StrictEntityValidation
+
+var PutMetricStreamInput = &sPutMetricStreamInput
+var PutMetricStreamInput_Name = &sPutMetricStreamInput_Name
+var PutMetricStreamInput_IncludeFilters = &sPutMetricStreamInput_IncludeFilters
+var PutMetricStreamInput_ExcludeFilters = &sPutMetricStreamInput_ExcludeFilters
+var PutMetricStreamInput_FirehoseArn = &sPutMetricStreamInput_FirehoseArn
+var PutMetricStreamInput_RoleArn = &sPutMetricStreamInput_RoleArn
+var PutMetricStreamInput_OutputFormat = &sPutMetricStreamInput_OutputFormat
+var PutMetricStreamInput_Tags = &sPutMetricStreamInput_Tags
+var PutMetricStreamInput_StatisticsConfigurations = &sPutMetricStreamInput_StatisticsConfigurations
+var PutMetricStreamInput_IncludeLinkedAccountsMetrics = &sPutMetricStreamInput_IncludeLinkedAccountsMetrics
+
+var PutMetricStreamOutput = &sPutMetricStreamOutput
+var PutMetricStreamOutput_Arn = &sPutMetricStreamOutput_Arn
+
+var SetAlarmStateInput = &sSetAlarmStateInput
+var SetAlarmStateInput_AlarmName = &sSetAlarmStateInput_AlarmName
+var SetAlarmStateInput_StateValue = &sSetAlarmStateInput_StateValue
+var SetAlarmStateInput_StateReason = &sSetAlarmStateInput_StateReason
+var SetAlarmStateInput_StateReasonData = &sSetAlarmStateInput_StateReasonData
+
+var StartMetricStreamsInput = &sStartMetricStreamsInput
+var StartMetricStreamsInput_Names = &sStartMetricStreamsInput_Names
+
+var StartMetricStreamsOutput = &sStartMetricStreamsOutput
+
+var StartOTelEnrichmentInput = &sStartOTelEnrichmentInput
+var StartOTelEnrichmentInput_IncludeFilters = &sStartOTelEnrichmentInput_IncludeFilters
+var StartOTelEnrichmentInput_ExcludeFilters = &sStartOTelEnrichmentInput_ExcludeFilters
+
+var StartOTelEnrichmentOutput = &sStartOTelEnrichmentOutput
+var StartOTelEnrichmentOutput_IncludeFilters = &sStartOTelEnrichmentOutput_IncludeFilters
+var StartOTelEnrichmentOutput_ExcludeFilters = &sStartOTelEnrichmentOutput_ExcludeFilters
+var StartOTelEnrichmentOutput_CreatedAt = &sStartOTelEnrichmentOutput_CreatedAt
+var StartOTelEnrichmentOutput_UpdatedAt = &sStartOTelEnrichmentOutput_UpdatedAt
+
+var StopMetricStreamsInput = &sStopMetricStreamsInput
+var StopMetricStreamsInput_Names = &sStopMetricStreamsInput_Names
+
+var StopMetricStreamsOutput = &sStopMetricStreamsOutput
+
+var StopOTelEnrichmentInput = &sStopOTelEnrichmentInput
+
+var StopOTelEnrichmentOutput = &sStopOTelEnrichmentOutput
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateOTelEnrichmentInput = &sUpdateOTelEnrichmentInput
+var UpdateOTelEnrichmentInput_IncludeFilters = &sUpdateOTelEnrichmentInput_IncludeFilters
+var UpdateOTelEnrichmentInput_ExcludeFilters = &sUpdateOTelEnrichmentInput_ExcludeFilters
+
+var UpdateOTelEnrichmentOutput = &sUpdateOTelEnrichmentOutput
+var UpdateOTelEnrichmentOutput_IncludeFilters = &sUpdateOTelEnrichmentOutput_IncludeFilters
+var UpdateOTelEnrichmentOutput_ExcludeFilters = &sUpdateOTelEnrichmentOutput_ExcludeFilters
+var UpdateOTelEnrichmentOutput_CreatedAt = &sUpdateOTelEnrichmentOutput_CreatedAt
+var UpdateOTelEnrichmentOutput_UpdatedAt = &sUpdateOTelEnrichmentOutput_UpdatedAt
+
+var UpdateResourceMetricsConfigurationInput = &sUpdateResourceMetricsConfigurationInput
+var UpdateResourceMetricsConfigurationInput_ResourceArn = &sUpdateResourceMetricsConfigurationInput_ResourceArn
+var UpdateResourceMetricsConfigurationInput_MetricSelections = &sUpdateResourceMetricsConfigurationInput_MetricSelections
+
+var UpdateResourceMetricsConfigurationOutput = &sUpdateResourceMetricsConfigurationOutput
+var UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = &sUpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration
+
+var GraniteServiceVersion20100801 = &smithy.ServiceSchema{Schema: &s_GraniteServiceVersion20100801, Version: "2010-08-01"}

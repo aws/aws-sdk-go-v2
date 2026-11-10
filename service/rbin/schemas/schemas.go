@@ -4,853 +4,846 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "CreateRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateRule                                                 smithy.SchemaExtensions
+	eDeleteRule                                                 smithy.SchemaExtensions
+	eGetRule                                                    smithy.SchemaExtensions
+	eListRules                                                  smithy.SchemaExtensions
+	eListTagsForResource                                        smithy.SchemaExtensions
+	eLockRule                                                   smithy.SchemaExtensions
+	eTagResource                                                smithy.SchemaExtensions
+	eUnlockRule                                                 smithy.SchemaExtensions
+	eUntagResource                                              smithy.SchemaExtensions
+	eUpdateRule                                                 smithy.SchemaExtensions
+	e_AmazonRecycleBin                                          smithy.SchemaExtensions
+	eConflictException                                          smithy.SchemaExtensions
+	eConflictException_Message                                  smithy.SchemaExtensions
+	eConflictException_Reason                                   smithy.SchemaExtensions
+	eConflictExceptionReason                                    smithy.SchemaExtensions
+	eConflictExceptionReason_INVALID_RULE_STATE                 smithy.SchemaExtensions
+	e_Description                                               smithy.SchemaExtensions
+	e_ErrorMessage                                              smithy.SchemaExtensions
+	e_ExcludeResourceTags                                       smithy.SchemaExtensions
+	e_ExcludeResourceTags_member                                smithy.SchemaExtensions
+	eInternalServerException                                    smithy.SchemaExtensions
+	eInternalServerException_Message                            smithy.SchemaExtensions
+	eLockConfiguration                                          smithy.SchemaExtensions
+	eLockConfiguration_UnlockDelay                              smithy.SchemaExtensions
+	eLockState                                                  smithy.SchemaExtensions
+	eLockState_LOCKED                                           smithy.SchemaExtensions
+	eLockState_PENDING_UNLOCK                                   smithy.SchemaExtensions
+	eLockState_UNLOCKED                                         smithy.SchemaExtensions
+	e_MaxResults                                                smithy.SchemaExtensions
+	e_NextToken                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                  smithy.SchemaExtensions
+	eResourceNotFoundException_Message                          smithy.SchemaExtensions
+	eResourceNotFoundException_Reason                           smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason                            smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_RULE_NOT_FOUND             smithy.SchemaExtensions
+	eResourceTag                                                smithy.SchemaExtensions
+	eResourceTag_ResourceTagKey                                 smithy.SchemaExtensions
+	eResourceTag_ResourceTagValue                               smithy.SchemaExtensions
+	e_ResourceTagKey                                            smithy.SchemaExtensions
+	e_ResourceTags                                              smithy.SchemaExtensions
+	e_ResourceTags_member                                       smithy.SchemaExtensions
+	e_ResourceTagValue                                          smithy.SchemaExtensions
+	eResourceType                                               smithy.SchemaExtensions
+	eResourceType_EBS_SNAPSHOT                                  smithy.SchemaExtensions
+	eResourceType_EC2_IMAGE                                     smithy.SchemaExtensions
+	eResourceType_EBS_VOLUME                                    smithy.SchemaExtensions
+	eRetentionPeriod                                            smithy.SchemaExtensions
+	eRetentionPeriod_RetentionPeriodValue                       smithy.SchemaExtensions
+	eRetentionPeriod_RetentionPeriodUnit                        smithy.SchemaExtensions
+	eRetentionPeriodUnit                                        smithy.SchemaExtensions
+	eRetentionPeriodUnit_DAYS                                   smithy.SchemaExtensions
+	e_RetentionPeriodValue                                      smithy.SchemaExtensions
+	e_RuleArn                                                   smithy.SchemaExtensions
+	e_RuleIdentifier                                            smithy.SchemaExtensions
+	eRuleStatus                                                 smithy.SchemaExtensions
+	eRuleStatus_PENDING                                         smithy.SchemaExtensions
+	eRuleStatus_AVAILABLE                                       smithy.SchemaExtensions
+	eRuleSummary                                                smithy.SchemaExtensions
+	eRuleSummary_Identifier                                     smithy.SchemaExtensions
+	eRuleSummary_Description                                    smithy.SchemaExtensions
+	eRuleSummary_RetentionPeriod                                smithy.SchemaExtensions
+	eRuleSummary_LockState                                      smithy.SchemaExtensions
+	eRuleSummary_RuleArn                                        smithy.SchemaExtensions
+	e_RuleSummaryList                                           smithy.SchemaExtensions
+	e_RuleSummaryList_member                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_Reason                       smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason                        smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED smithy.SchemaExtensions
+	eTag                                                        smithy.SchemaExtensions
+	eTag_Key                                                    smithy.SchemaExtensions
+	eTag_Value                                                  smithy.SchemaExtensions
+	e_TagKey                                                    smithy.SchemaExtensions
+	e_TagKeyList                                                smithy.SchemaExtensions
+	e_TagKeyList_member                                         smithy.SchemaExtensions
+	e_TagList                                                   smithy.SchemaExtensions
+	e_TagList_member                                            smithy.SchemaExtensions
+	e_TagValue                                                  smithy.SchemaExtensions
+	e_TimeStamp                                                 smithy.SchemaExtensions
+	eUnlockDelay                                                smithy.SchemaExtensions
+	eUnlockDelay_UnlockDelayValue                               smithy.SchemaExtensions
+	eUnlockDelay_UnlockDelayUnit                                smithy.SchemaExtensions
+	eUnlockDelayUnit                                            smithy.SchemaExtensions
+	eUnlockDelayUnit_DAYS                                       smithy.SchemaExtensions
+	e_UnlockDelayValue                                          smithy.SchemaExtensions
+	eValidationException                                        smithy.SchemaExtensions
+	eValidationException_Message                                smithy.SchemaExtensions
+	eValidationException_Reason                                 smithy.SchemaExtensions
+	eValidationExceptionReason                                  smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PAGE_TOKEN               smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PARAMETER_VALUE          smithy.SchemaExtensions
+	eCreateRuleRequest                                          smithy.SchemaExtensions
+	eCreateRuleRequest_RetentionPeriod                          smithy.SchemaExtensions
+	eCreateRuleRequest_Description                              smithy.SchemaExtensions
+	eCreateRuleRequest_Tags                                     smithy.SchemaExtensions
+	eCreateRuleRequest_ResourceType                             smithy.SchemaExtensions
+	eCreateRuleRequest_ResourceTags                             smithy.SchemaExtensions
+	eCreateRuleRequest_LockConfiguration                        smithy.SchemaExtensions
+	eCreateRuleRequest_ExcludeResourceTags                      smithy.SchemaExtensions
+	eCreateRuleResponse                                         smithy.SchemaExtensions
+	eCreateRuleResponse_Identifier                              smithy.SchemaExtensions
+	eCreateRuleResponse_RetentionPeriod                         smithy.SchemaExtensions
+	eCreateRuleResponse_Description                             smithy.SchemaExtensions
+	eCreateRuleResponse_Tags                                    smithy.SchemaExtensions
+	eCreateRuleResponse_ResourceType                            smithy.SchemaExtensions
+	eCreateRuleResponse_ResourceTags                            smithy.SchemaExtensions
+	eCreateRuleResponse_Status                                  smithy.SchemaExtensions
+	eCreateRuleResponse_LockConfiguration                       smithy.SchemaExtensions
+	eCreateRuleResponse_LockState                               smithy.SchemaExtensions
+	eCreateRuleResponse_RuleArn                                 smithy.SchemaExtensions
+	eCreateRuleResponse_ExcludeResourceTags                     smithy.SchemaExtensions
+	eDeleteRuleRequest                                          smithy.SchemaExtensions
+	eDeleteRuleRequest_Identifier                               smithy.SchemaExtensions
+	eDeleteRuleResponse                                         smithy.SchemaExtensions
+	eGetRuleRequest                                             smithy.SchemaExtensions
+	eGetRuleRequest_Identifier                                  smithy.SchemaExtensions
+	eGetRuleResponse                                            smithy.SchemaExtensions
+	eGetRuleResponse_Identifier                                 smithy.SchemaExtensions
+	eGetRuleResponse_Description                                smithy.SchemaExtensions
+	eGetRuleResponse_ResourceType                               smithy.SchemaExtensions
+	eGetRuleResponse_RetentionPeriod                            smithy.SchemaExtensions
+	eGetRuleResponse_ResourceTags                               smithy.SchemaExtensions
+	eGetRuleResponse_Status                                     smithy.SchemaExtensions
+	eGetRuleResponse_LockConfiguration                          smithy.SchemaExtensions
+	eGetRuleResponse_LockState                                  smithy.SchemaExtensions
+	eGetRuleResponse_LockEndTime                                smithy.SchemaExtensions
+	eGetRuleResponse_RuleArn                                    smithy.SchemaExtensions
+	eGetRuleResponse_ExcludeResourceTags                        smithy.SchemaExtensions
+	eListRulesRequest                                           smithy.SchemaExtensions
+	eListRulesRequest_MaxResults                                smithy.SchemaExtensions
+	eListRulesRequest_NextToken                                 smithy.SchemaExtensions
+	eListRulesRequest_ResourceType                              smithy.SchemaExtensions
+	eListRulesRequest_ResourceTags                              smithy.SchemaExtensions
+	eListRulesRequest_LockState                                 smithy.SchemaExtensions
+	eListRulesRequest_ExcludeResourceTags                       smithy.SchemaExtensions
+	eListRulesResponse                                          smithy.SchemaExtensions
+	eListRulesResponse_Rules                                    smithy.SchemaExtensions
+	eListRulesResponse_NextToken                                smithy.SchemaExtensions
+	eListTagsForResourceRequest                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                     smithy.SchemaExtensions
+	eListTagsForResourceResponse                                smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                           smithy.SchemaExtensions
+	eLockRuleRequest                                            smithy.SchemaExtensions
+	eLockRuleRequest_Identifier                                 smithy.SchemaExtensions
+	eLockRuleRequest_LockConfiguration                          smithy.SchemaExtensions
+	eLockRuleResponse                                           smithy.SchemaExtensions
+	eLockRuleResponse_Identifier                                smithy.SchemaExtensions
+	eLockRuleResponse_Description                               smithy.SchemaExtensions
+	eLockRuleResponse_ResourceType                              smithy.SchemaExtensions
+	eLockRuleResponse_RetentionPeriod                           smithy.SchemaExtensions
+	eLockRuleResponse_ResourceTags                              smithy.SchemaExtensions
+	eLockRuleResponse_Status                                    smithy.SchemaExtensions
+	eLockRuleResponse_LockConfiguration                         smithy.SchemaExtensions
+	eLockRuleResponse_LockState                                 smithy.SchemaExtensions
+	eLockRuleResponse_RuleArn                                   smithy.SchemaExtensions
+	eLockRuleResponse_ExcludeResourceTags                       smithy.SchemaExtensions
+	eTagResourceRequest                                         smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                             smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                    smithy.SchemaExtensions
+	eTagResourceResponse                                        smithy.SchemaExtensions
+	eUnlockRuleRequest                                          smithy.SchemaExtensions
+	eUnlockRuleRequest_Identifier                               smithy.SchemaExtensions
+	eUnlockRuleResponse                                         smithy.SchemaExtensions
+	eUnlockRuleResponse_Identifier                              smithy.SchemaExtensions
+	eUnlockRuleResponse_Description                             smithy.SchemaExtensions
+	eUnlockRuleResponse_ResourceType                            smithy.SchemaExtensions
+	eUnlockRuleResponse_RetentionPeriod                         smithy.SchemaExtensions
+	eUnlockRuleResponse_ResourceTags                            smithy.SchemaExtensions
+	eUnlockRuleResponse_Status                                  smithy.SchemaExtensions
+	eUnlockRuleResponse_LockConfiguration                       smithy.SchemaExtensions
+	eUnlockRuleResponse_LockState                               smithy.SchemaExtensions
+	eUnlockRuleResponse_LockEndTime                             smithy.SchemaExtensions
+	eUnlockRuleResponse_RuleArn                                 smithy.SchemaExtensions
+	eUnlockRuleResponse_ExcludeResourceTags                     smithy.SchemaExtensions
+	eUntagResourceRequest                                       smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                           smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                               smithy.SchemaExtensions
+	eUntagResourceResponse                                      smithy.SchemaExtensions
+	eUpdateRuleRequest                                          smithy.SchemaExtensions
+	eUpdateRuleRequest_Identifier                               smithy.SchemaExtensions
+	eUpdateRuleRequest_RetentionPeriod                          smithy.SchemaExtensions
+	eUpdateRuleRequest_Description                              smithy.SchemaExtensions
+	eUpdateRuleRequest_ResourceType                             smithy.SchemaExtensions
+	eUpdateRuleRequest_ResourceTags                             smithy.SchemaExtensions
+	eUpdateRuleRequest_ExcludeResourceTags                      smithy.SchemaExtensions
+	eUpdateRuleResponse                                         smithy.SchemaExtensions
+	eUpdateRuleResponse_Identifier                              smithy.SchemaExtensions
+	eUpdateRuleResponse_RetentionPeriod                         smithy.SchemaExtensions
+	eUpdateRuleResponse_Description                             smithy.SchemaExtensions
+	eUpdateRuleResponse_ResourceType                            smithy.SchemaExtensions
+	eUpdateRuleResponse_ResourceTags                            smithy.SchemaExtensions
+	eUpdateRuleResponse_Status                                  smithy.SchemaExtensions
+	eUpdateRuleResponse_LockState                               smithy.SchemaExtensions
+	eUpdateRuleResponse_LockEndTime                             smithy.SchemaExtensions
+	eUpdateRuleResponse_RuleArn                                 smithy.SchemaExtensions
+	eUpdateRuleResponse_ExcludeResourceTags                     smithy.SchemaExtensions
+)
+
+var (
+	iCreateRule                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "CreateRule"}
+	iDeleteRule                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "DeleteRule"}
+	iGetRule                             = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "GetRule"}
+	iListRules                           = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListRules"}
+	iListTagsForResource                 = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListTagsForResource"}
+	iLockRule                            = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "LockRule"}
+	iTagResource                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagResource"}
+	iUnlockRule                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockRule"}
+	iUntagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UntagResource"}
+	iUpdateRule                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UpdateRule"}
+	i_AmazonRecycleBin                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "AmazonRecycleBin"}
+	iConflictException                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ConflictException"}
+	iConflictExceptionReason             = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ConflictExceptionReason"}
+	i_Description                        = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "Description"}
+	i_ErrorMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ErrorMessage"}
+	i_ExcludeResourceTags                = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ExcludeResourceTags"}
+	iInternalServerException             = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "InternalServerException"}
+	iLockConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "LockConfiguration"}
+	iLockState                           = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "LockState"}
+	i_MaxResults                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "MaxResults"}
+	i_NextToken                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "NextToken"}
+	iResourceNotFoundException           = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceNotFoundException"}
+	iResourceNotFoundExceptionReason     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceNotFoundExceptionReason"}
+	iResourceTag                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceTag"}
+	i_ResourceTagKey                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceTagKey"}
+	i_ResourceTags                       = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceTags"}
+	i_ResourceTagValue                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceTagValue"}
+	iResourceType                        = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ResourceType"}
+	iRetentionPeriod                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RetentionPeriod"}
+	iRetentionPeriodUnit                 = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RetentionPeriodUnit"}
+	i_RetentionPeriodValue               = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RetentionPeriodValue"}
+	i_RuleArn                            = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RuleArn"}
+	i_RuleIdentifier                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RuleIdentifier"}
+	iRuleStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RuleStatus"}
+	iRuleSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RuleSummary"}
+	i_RuleSummaryList                    = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "RuleSummaryList"}
+	iServiceQuotaExceededException       = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ServiceQuotaExceededException"}
+	iServiceQuotaExceededExceptionReason = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ServiceQuotaExceededExceptionReason"}
+	iTag                                 = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "Tag"}
+	i_TagKey                             = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagKey"}
+	i_TagKeyList                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagKeyList"}
+	i_TagList                            = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagList"}
+	i_TagValue                           = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagValue"}
+	i_TimeStamp                          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TimeStamp"}
+	iUnlockDelay                         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockDelay"}
+	iUnlockDelayUnit                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockDelayUnit"}
+	i_UnlockDelayValue                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockDelayValue"}
+	iValidationException                 = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ValidationException"}
+	iValidationExceptionReason           = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ValidationExceptionReason"}
+	iCreateRuleRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "CreateRuleRequest"}
+	iCreateRuleResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "CreateRuleResponse"}
+	iDeleteRuleRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "DeleteRuleRequest"}
+	iDeleteRuleResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "DeleteRuleResponse"}
+	iGetRuleRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "GetRuleRequest"}
+	iGetRuleResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "GetRuleResponse"}
+	iListRulesRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListRulesRequest"}
+	iListRulesResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListRulesResponse"}
+	iListTagsForResourceRequest          = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse         = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "ListTagsForResourceResponse"}
+	iLockRuleRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "LockRuleRequest"}
+	iLockRuleResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "LockRuleResponse"}
+	iTagResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagResourceRequest"}
+	iTagResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "TagResourceResponse"}
+	iUnlockRuleRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockRuleRequest"}
+	iUnlockRuleResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UnlockRuleResponse"}
+	iUntagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UntagResourceRequest"}
+	iUntagResourceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UntagResourceResponse"}
+	iUpdateRuleRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UpdateRuleRequest"}
+	iUpdateRuleResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.rbin", Name: "UpdateRuleResponse"}
+	pUnit                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rules",
-	Code: 201})
-
-var DeleteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "DeleteRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/rules/{Identifier}",
-	Code: 204})
-
-var GetRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "GetRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rules/{Identifier}",
-	Code: 200})
-
-var ListRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-rules",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var LockRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "LockRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/rules/{Identifier}/lock",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 201})
-
-var UnlockRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/rules/{Identifier}/unlock",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UpdateRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/rules/{Identifier}",
-	Code: 200})
-
-var _AmazonRecycleBin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "AmazonRecycleBin",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonRecycleBin = smithy.NewServiceSchema(_AmazonRecycleBin, "2021-06-15")
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_Reason *smithy.Schema
-
-var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ConflictExceptionReason_INVALID_RULE_STATE *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExcludeResourceTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ExcludeResourceTags",
-}, smithy.ShapeTypeList, 1)
-var _ExcludeResourceTags_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var LockConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "LockConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LockConfiguration_UnlockDelay *smithy.Schema
-
-var LockState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "LockState",
-}, smithy.ShapeTypeEnum, 3)
-var LockState_LOCKED *smithy.Schema
-
-var LockState_PENDING_UNLOCK *smithy.Schema
-
-var LockState_UNLOCKED *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_Reason *smithy.Schema
-
-var ResourceNotFoundExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceNotFoundExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceNotFoundExceptionReason_RULE_NOT_FOUND *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_ResourceTagKey *smithy.Schema
-
-var ResourceTag_ResourceTagValue *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceTags",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTags_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceType_EBS_SNAPSHOT *smithy.Schema
-
-var ResourceType_EC2_IMAGE *smithy.Schema
-
-var ResourceType_EBS_VOLUME *smithy.Schema
-
-var RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RetentionPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var RetentionPeriod_RetentionPeriodValue *smithy.Schema
-
-var RetentionPeriod_RetentionPeriodUnit *smithy.Schema
-
-var RetentionPeriodUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RetentionPeriodUnit",
-}, smithy.ShapeTypeEnum, 1)
-var RetentionPeriodUnit_DAYS *smithy.Schema
-
-var _RetentionPeriodValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RetentionPeriodValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RuleIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var RuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RuleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RuleStatus_PENDING *smithy.Schema
-
-var RuleStatus_AVAILABLE *smithy.Schema
-
-var RuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RuleSummary",
-}, smithy.ShapeTypeStructure, 5)
-var RuleSummary_Identifier *smithy.Schema
-
-var RuleSummary_Description *smithy.Schema
-
-var RuleSummary_RetentionPeriod *smithy.Schema
-
-var RuleSummary_LockState *smithy.Schema
-
-var RuleSummary_RuleArn *smithy.Schema
-
-var _RuleSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "RuleSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RuleSummaryList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_Reason *smithy.Schema
-
-var ServiceQuotaExceededExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ServiceQuotaExceededExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UnlockDelay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockDelay",
-}, smithy.ShapeTypeStructure, 2)
-var UnlockDelay_UnlockDelayValue *smithy.Schema
-
-var UnlockDelay_UnlockDelayUnit *smithy.Schema
-
-var UnlockDelayUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockDelayUnit",
-}, smithy.ShapeTypeEnum, 1)
-var UnlockDelayUnit_DAYS *smithy.Schema
-
-var _UnlockDelayValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockDelayValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_INVALID_PAGE_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_INVALID_PARAMETER_VALUE *smithy.Schema
-
-var CreateRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "CreateRuleRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRuleRequest_RetentionPeriod *smithy.Schema
-
-var CreateRuleRequest_Description *smithy.Schema
-
-var CreateRuleRequest_Tags *smithy.Schema
-
-var CreateRuleRequest_ResourceType *smithy.Schema
-
-var CreateRuleRequest_ResourceTags *smithy.Schema
-
-var CreateRuleRequest_LockConfiguration *smithy.Schema
-
-var CreateRuleRequest_ExcludeResourceTags *smithy.Schema
-
-var CreateRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "CreateRuleResponse",
-}, smithy.ShapeTypeStructure, 11)
-var CreateRuleResponse_Identifier *smithy.Schema
-
-var CreateRuleResponse_RetentionPeriod *smithy.Schema
-
-var CreateRuleResponse_Description *smithy.Schema
-
-var CreateRuleResponse_Tags *smithy.Schema
-
-var CreateRuleResponse_ResourceType *smithy.Schema
-
-var CreateRuleResponse_ResourceTags *smithy.Schema
-
-var CreateRuleResponse_Status *smithy.Schema
-
-var CreateRuleResponse_LockConfiguration *smithy.Schema
-
-var CreateRuleResponse_LockState *smithy.Schema
-
-var CreateRuleResponse_RuleArn *smithy.Schema
-
-var CreateRuleResponse_ExcludeResourceTags *smithy.Schema
-
-var DeleteRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "DeleteRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRuleRequest_Identifier *smithy.Schema
-
-var DeleteRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "DeleteRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "GetRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRuleRequest_Identifier *smithy.Schema
-
-var GetRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "GetRuleResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetRuleResponse_Identifier *smithy.Schema
-
-var GetRuleResponse_Description *smithy.Schema
-
-var GetRuleResponse_ResourceType *smithy.Schema
-
-var GetRuleResponse_RetentionPeriod *smithy.Schema
-
-var GetRuleResponse_ResourceTags *smithy.Schema
-
-var GetRuleResponse_Status *smithy.Schema
-
-var GetRuleResponse_LockConfiguration *smithy.Schema
-
-var GetRuleResponse_LockState *smithy.Schema
-
-var GetRuleResponse_LockEndTime *smithy.Schema
-
-var GetRuleResponse_RuleArn *smithy.Schema
-
-var GetRuleResponse_ExcludeResourceTags *smithy.Schema
-
-var ListRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListRulesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListRulesRequest_MaxResults *smithy.Schema
-
-var ListRulesRequest_NextToken *smithy.Schema
-
-var ListRulesRequest_ResourceType *smithy.Schema
-
-var ListRulesRequest_ResourceTags *smithy.Schema
-
-var ListRulesRequest_LockState *smithy.Schema
-
-var ListRulesRequest_ExcludeResourceTags *smithy.Schema
-
-var ListRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesResponse_Rules *smithy.Schema
-
-var ListRulesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var LockRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "LockRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var LockRuleRequest_Identifier *smithy.Schema
-
-var LockRuleRequest_LockConfiguration *smithy.Schema
-
-var LockRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "LockRuleResponse",
-}, smithy.ShapeTypeStructure, 10)
-var LockRuleResponse_Identifier *smithy.Schema
-
-var LockRuleResponse_Description *smithy.Schema
-
-var LockRuleResponse_ResourceType *smithy.Schema
-
-var LockRuleResponse_RetentionPeriod *smithy.Schema
-
-var LockRuleResponse_ResourceTags *smithy.Schema
-
-var LockRuleResponse_Status *smithy.Schema
-
-var LockRuleResponse_LockConfiguration *smithy.Schema
-
-var LockRuleResponse_LockState *smithy.Schema
-
-var LockRuleResponse_RuleArn *smithy.Schema
-
-var LockRuleResponse_ExcludeResourceTags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UnlockRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UnlockRuleRequest_Identifier *smithy.Schema
-
-var UnlockRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UnlockRuleResponse",
-}, smithy.ShapeTypeStructure, 11)
-var UnlockRuleResponse_Identifier *smithy.Schema
-
-var UnlockRuleResponse_Description *smithy.Schema
-
-var UnlockRuleResponse_ResourceType *smithy.Schema
-
-var UnlockRuleResponse_RetentionPeriod *smithy.Schema
-
-var UnlockRuleResponse_ResourceTags *smithy.Schema
-
-var UnlockRuleResponse_Status *smithy.Schema
-
-var UnlockRuleResponse_LockConfiguration *smithy.Schema
-
-var UnlockRuleResponse_LockState *smithy.Schema
-
-var UnlockRuleResponse_LockEndTime *smithy.Schema
-
-var UnlockRuleResponse_RuleArn *smithy.Schema
-
-var UnlockRuleResponse_ExcludeResourceTags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UpdateRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateRuleRequest_Identifier *smithy.Schema
-
-var UpdateRuleRequest_RetentionPeriod *smithy.Schema
-
-var UpdateRuleRequest_Description *smithy.Schema
-
-var UpdateRuleRequest_ResourceType *smithy.Schema
-
-var UpdateRuleRequest_ResourceTags *smithy.Schema
-
-var UpdateRuleRequest_ExcludeResourceTags *smithy.Schema
-
-var UpdateRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rbin",
-	Name:      "UpdateRuleResponse",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateRuleResponse_Identifier *smithy.Schema
-
-var UpdateRuleResponse_RetentionPeriod *smithy.Schema
-
-var UpdateRuleResponse_Description *smithy.Schema
-
-var UpdateRuleResponse_ResourceType *smithy.Schema
-
-var UpdateRuleResponse_ResourceTags *smithy.Schema
-
-var UpdateRuleResponse_Status *smithy.Schema
-
-var UpdateRuleResponse_LockState *smithy.Schema
-
-var UpdateRuleResponse_LockEndTime *smithy.Schema
-
-var UpdateRuleResponse_RuleArn *smithy.Schema
-
-var UpdateRuleResponse_ExcludeResourceTags *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictExceptionReason_INVALID_RULE_STATE = ConflictExceptionReason.AddMember("INVALID_RULE_STATE", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	ConflictException_Reason = ConflictException.AddMember("Reason", ConflictExceptionReason)
-
-	ResourceTag_ResourceTagKey = ResourceTag.AddMember("ResourceTagKey", _ResourceTagKey)
-
-	ResourceTag_ResourceTagValue = ResourceTag.AddMember("ResourceTagValue", _ResourceTagValue)
-
-	_ExcludeResourceTags_member = _ExcludeResourceTags.AddMember("member", ResourceTag)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	UnlockDelayUnit_DAYS = UnlockDelayUnit.AddMember("DAYS", smithyprelude.Unit)
-
-	UnlockDelay_UnlockDelayValue = UnlockDelay.AddMember("UnlockDelayValue", _UnlockDelayValue)
-
-	UnlockDelay_UnlockDelayUnit = UnlockDelay.AddMember("UnlockDelayUnit", UnlockDelayUnit)
-
-	LockConfiguration_UnlockDelay = LockConfiguration.AddMember("UnlockDelay", UnlockDelay)
-
-	LockState_LOCKED = LockState.AddMember("LOCKED", smithyprelude.Unit)
-
-	LockState_PENDING_UNLOCK = LockState.AddMember("PENDING_UNLOCK", smithyprelude.Unit)
-
-	LockState_UNLOCKED = LockState.AddMember("UNLOCKED", smithyprelude.Unit)
-
-	ResourceNotFoundExceptionReason_RULE_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("RULE_NOT_FOUND", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Reason = ResourceNotFoundException.AddMember("Reason", ResourceNotFoundExceptionReason)
-
-	_ResourceTags_member = _ResourceTags.AddMember("member", ResourceTag)
-
-	ResourceType_EBS_SNAPSHOT = ResourceType.AddMember("EBS_SNAPSHOT", smithyprelude.Unit)
-
-	ResourceType_EC2_IMAGE = ResourceType.AddMember("EC2_IMAGE", smithyprelude.Unit)
-
-	ResourceType_EBS_VOLUME = ResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	RetentionPeriodUnit_DAYS = RetentionPeriodUnit.AddMember("DAYS", smithyprelude.Unit)
-
-	RetentionPeriod_RetentionPeriodValue = RetentionPeriod.AddMember("RetentionPeriodValue", _RetentionPeriodValue)
-
-	RetentionPeriod_RetentionPeriodUnit = RetentionPeriod.AddMember("RetentionPeriodUnit", RetentionPeriodUnit)
-
-	RuleStatus_PENDING = RuleStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	RuleStatus_AVAILABLE = RuleStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	RuleSummary_Identifier = RuleSummary.AddMember("Identifier", _RuleIdentifier)
-
-	RuleSummary_Description = RuleSummary.AddMember("Description", _Description)
-
-	RuleSummary_RetentionPeriod = RuleSummary.AddMember("RetentionPeriod", RetentionPeriod)
-
-	RuleSummary_LockState = RuleSummary.AddMember("LockState", LockState)
-
-	RuleSummary_RuleArn = RuleSummary.AddMember("RuleArn", _RuleArn)
-
-	_RuleSummaryList_member = _RuleSummaryList.AddMember("member", RuleSummary)
-
-	ServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED = ServiceQuotaExceededExceptionReason.AddMember("SERVICE_QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	ServiceQuotaExceededException_Reason = ServiceQuotaExceededException.AddMember("Reason", ServiceQuotaExceededExceptionReason)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ValidationExceptionReason_INVALID_PAGE_TOKEN = ValidationExceptionReason.AddMember("INVALID_PAGE_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_PARAMETER_VALUE = ValidationExceptionReason.AddMember("INVALID_PARAMETER_VALUE", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	CreateRuleRequest_RetentionPeriod = CreateRuleRequest.AddMember("RetentionPeriod", RetentionPeriod)
-
-	CreateRuleRequest_Description = CreateRuleRequest.AddMember("Description", _Description)
-
-	CreateRuleRequest_Tags = CreateRuleRequest.AddMember("Tags", _TagList)
-
-	CreateRuleRequest_ResourceType = CreateRuleRequest.AddMember("ResourceType", ResourceType)
-
-	CreateRuleRequest_ResourceTags = CreateRuleRequest.AddMember("ResourceTags", _ResourceTags)
-
-	CreateRuleRequest_LockConfiguration = CreateRuleRequest.AddMember("LockConfiguration", LockConfiguration)
-
-	CreateRuleRequest_ExcludeResourceTags = CreateRuleRequest.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	CreateRuleResponse_Identifier = CreateRuleResponse.AddMember("Identifier", _RuleIdentifier)
-
-	CreateRuleResponse_RetentionPeriod = CreateRuleResponse.AddMember("RetentionPeriod", RetentionPeriod)
-
-	CreateRuleResponse_Description = CreateRuleResponse.AddMember("Description", _Description)
-
-	CreateRuleResponse_Tags = CreateRuleResponse.AddMember("Tags", _TagList)
-
-	CreateRuleResponse_ResourceType = CreateRuleResponse.AddMember("ResourceType", ResourceType)
-
-	CreateRuleResponse_ResourceTags = CreateRuleResponse.AddMember("ResourceTags", _ResourceTags)
-
-	CreateRuleResponse_Status = CreateRuleResponse.AddMember("Status", RuleStatus)
-
-	CreateRuleResponse_LockConfiguration = CreateRuleResponse.AddMember("LockConfiguration", LockConfiguration)
-
-	CreateRuleResponse_LockState = CreateRuleResponse.AddMember("LockState", LockState)
-
-	CreateRuleResponse_RuleArn = CreateRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	CreateRuleResponse_ExcludeResourceTags = CreateRuleResponse.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	DeleteRuleRequest_Identifier = DeleteRuleRequest.AddMember("Identifier", _RuleIdentifier, &smithytraits.HTTPLabel{})
-
-	GetRuleRequest_Identifier = GetRuleRequest.AddMember("Identifier", _RuleIdentifier, &smithytraits.HTTPLabel{})
-
-	GetRuleResponse_Identifier = GetRuleResponse.AddMember("Identifier", _RuleIdentifier)
-
-	GetRuleResponse_Description = GetRuleResponse.AddMember("Description", _Description)
-
-	GetRuleResponse_ResourceType = GetRuleResponse.AddMember("ResourceType", ResourceType)
-
-	GetRuleResponse_RetentionPeriod = GetRuleResponse.AddMember("RetentionPeriod", RetentionPeriod)
-
-	GetRuleResponse_ResourceTags = GetRuleResponse.AddMember("ResourceTags", _ResourceTags)
-
-	GetRuleResponse_Status = GetRuleResponse.AddMember("Status", RuleStatus)
-
-	GetRuleResponse_LockConfiguration = GetRuleResponse.AddMember("LockConfiguration", LockConfiguration)
-
-	GetRuleResponse_LockState = GetRuleResponse.AddMember("LockState", LockState)
-
-	GetRuleResponse_LockEndTime = GetRuleResponse.AddMember("LockEndTime", _TimeStamp)
-
-	GetRuleResponse_RuleArn = GetRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	GetRuleResponse_ExcludeResourceTags = GetRuleResponse.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	ListRulesRequest_MaxResults = ListRulesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRulesRequest_NextToken = ListRulesRequest.AddMember("NextToken", _NextToken)
-
-	ListRulesRequest_ResourceType = ListRulesRequest.AddMember("ResourceType", ResourceType)
-
-	ListRulesRequest_ResourceTags = ListRulesRequest.AddMember("ResourceTags", _ResourceTags)
-
-	ListRulesRequest_LockState = ListRulesRequest.AddMember("LockState", LockState)
-
-	ListRulesRequest_ExcludeResourceTags = ListRulesRequest.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	ListRulesResponse_Rules = ListRulesResponse.AddMember("Rules", _RuleSummaryList)
-
-	ListRulesResponse_NextToken = ListRulesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _RuleArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	LockRuleRequest_Identifier = LockRuleRequest.AddMember("Identifier", _RuleIdentifier, &smithytraits.HTTPLabel{})
-
-	LockRuleRequest_LockConfiguration = LockRuleRequest.AddMember("LockConfiguration", LockConfiguration)
-
-	LockRuleResponse_Identifier = LockRuleResponse.AddMember("Identifier", _RuleIdentifier)
-
-	LockRuleResponse_Description = LockRuleResponse.AddMember("Description", _Description)
-
-	LockRuleResponse_ResourceType = LockRuleResponse.AddMember("ResourceType", ResourceType)
-
-	LockRuleResponse_RetentionPeriod = LockRuleResponse.AddMember("RetentionPeriod", RetentionPeriod)
-
-	LockRuleResponse_ResourceTags = LockRuleResponse.AddMember("ResourceTags", _ResourceTags)
-
-	LockRuleResponse_Status = LockRuleResponse.AddMember("Status", RuleStatus)
-
-	LockRuleResponse_LockConfiguration = LockRuleResponse.AddMember("LockConfiguration", LockConfiguration)
-
-	LockRuleResponse_LockState = LockRuleResponse.AddMember("LockState", LockState)
-
-	LockRuleResponse_RuleArn = LockRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	LockRuleResponse_ExcludeResourceTags = LockRuleResponse.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _RuleArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UnlockRuleRequest_Identifier = UnlockRuleRequest.AddMember("Identifier", _RuleIdentifier, &smithytraits.HTTPLabel{})
-
-	UnlockRuleResponse_Identifier = UnlockRuleResponse.AddMember("Identifier", _RuleIdentifier)
-
-	UnlockRuleResponse_Description = UnlockRuleResponse.AddMember("Description", _Description)
-
-	UnlockRuleResponse_ResourceType = UnlockRuleResponse.AddMember("ResourceType", ResourceType)
-
-	UnlockRuleResponse_RetentionPeriod = UnlockRuleResponse.AddMember("RetentionPeriod", RetentionPeriod)
-
-	UnlockRuleResponse_ResourceTags = UnlockRuleResponse.AddMember("ResourceTags", _ResourceTags)
-
-	UnlockRuleResponse_Status = UnlockRuleResponse.AddMember("Status", RuleStatus)
-
-	UnlockRuleResponse_LockConfiguration = UnlockRuleResponse.AddMember("LockConfiguration", LockConfiguration)
-
-	UnlockRuleResponse_LockState = UnlockRuleResponse.AddMember("LockState", LockState)
-
-	UnlockRuleResponse_LockEndTime = UnlockRuleResponse.AddMember("LockEndTime", _TimeStamp)
-
-	UnlockRuleResponse_RuleArn = UnlockRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	UnlockRuleResponse_ExcludeResourceTags = UnlockRuleResponse.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _RuleArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateRuleRequest_Identifier = UpdateRuleRequest.AddMember("Identifier", _RuleIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateRuleRequest_RetentionPeriod = UpdateRuleRequest.AddMember("RetentionPeriod", RetentionPeriod)
-
-	UpdateRuleRequest_Description = UpdateRuleRequest.AddMember("Description", _Description)
-
-	UpdateRuleRequest_ResourceType = UpdateRuleRequest.AddMember("ResourceType", ResourceType)
-
-	UpdateRuleRequest_ResourceTags = UpdateRuleRequest.AddMember("ResourceTags", _ResourceTags)
-
-	UpdateRuleRequest_ExcludeResourceTags = UpdateRuleRequest.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-	UpdateRuleResponse_Identifier = UpdateRuleResponse.AddMember("Identifier", _RuleIdentifier)
-
-	UpdateRuleResponse_RetentionPeriod = UpdateRuleResponse.AddMember("RetentionPeriod", RetentionPeriod)
-
-	UpdateRuleResponse_Description = UpdateRuleResponse.AddMember("Description", _Description)
-
-	UpdateRuleResponse_ResourceType = UpdateRuleResponse.AddMember("ResourceType", ResourceType)
-
-	UpdateRuleResponse_ResourceTags = UpdateRuleResponse.AddMember("ResourceTags", _ResourceTags)
-
-	UpdateRuleResponse_Status = UpdateRuleResponse.AddMember("Status", RuleStatus)
-
-	UpdateRuleResponse_LockState = UpdateRuleResponse.AddMember("LockState", LockState)
-
-	UpdateRuleResponse_LockEndTime = UpdateRuleResponse.AddMember("LockEndTime", _TimeStamp)
-
-	UpdateRuleResponse_RuleArn = UpdateRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	UpdateRuleResponse_ExcludeResourceTags = UpdateRuleResponse.AddMember("ExcludeResourceTags", _ExcludeResourceTags)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_Reason}}
+var mConflictExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictExceptionReason_INVALID_RULE_STATE}}
+var m_ExcludeResourceTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExcludeResourceTags_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mLockConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLockConfiguration_UnlockDelay}}
+var mLockState = smithy.SchemaMembers{List: []*smithy.Schema{&sLockState_LOCKED, &sLockState_PENDING_UNLOCK, &sLockState_UNLOCKED}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_Reason}}
+var mResourceNotFoundExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundExceptionReason_RULE_NOT_FOUND}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_ResourceTagKey, &sResourceTag_ResourceTagValue}}
+var m_ResourceTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTags_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_EBS_SNAPSHOT, &sResourceType_EC2_IMAGE, &sResourceType_EBS_VOLUME}}
+var mRetentionPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionPeriod_RetentionPeriodValue, &sRetentionPeriod_RetentionPeriodUnit}}
+var mRetentionPeriodUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionPeriodUnit_DAYS}}
+var mRuleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStatus_PENDING, &sRuleStatus_AVAILABLE}}
+var mRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleSummary_Identifier, &sRuleSummary_Description, &sRuleSummary_RetentionPeriod, &sRuleSummary_LockState, &sRuleSummary_RuleArn}}
+var m_RuleSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleSummaryList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_Reason}}
+var mServiceQuotaExceededExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mUnlockDelay = smithy.SchemaMembers{List: []*smithy.Schema{&sUnlockDelay_UnlockDelayValue, &sUnlockDelay_UnlockDelayUnit}}
+var mUnlockDelayUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sUnlockDelayUnit_DAYS}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_INVALID_PAGE_TOKEN, &sValidationExceptionReason_INVALID_PARAMETER_VALUE}}
+var mCreateRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleRequest_RetentionPeriod, &sCreateRuleRequest_Description, &sCreateRuleRequest_Tags, &sCreateRuleRequest_ResourceType, &sCreateRuleRequest_ResourceTags, &sCreateRuleRequest_LockConfiguration, &sCreateRuleRequest_ExcludeResourceTags}}
+var mCreateRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRuleResponse_Identifier, &sCreateRuleResponse_RetentionPeriod, &sCreateRuleResponse_Description, &sCreateRuleResponse_Tags, &sCreateRuleResponse_ResourceType, &sCreateRuleResponse_ResourceTags, &sCreateRuleResponse_Status, &sCreateRuleResponse_LockConfiguration, &sCreateRuleResponse_LockState, &sCreateRuleResponse_RuleArn, &sCreateRuleResponse_ExcludeResourceTags}, Hash: &hCreateRuleResponse}
+var mDeleteRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleRequest_Identifier}}
+var mGetRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleRequest_Identifier}}
+var mGetRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRuleResponse_Identifier, &sGetRuleResponse_Description, &sGetRuleResponse_ResourceType, &sGetRuleResponse_RetentionPeriod, &sGetRuleResponse_ResourceTags, &sGetRuleResponse_Status, &sGetRuleResponse_LockConfiguration, &sGetRuleResponse_LockState, &sGetRuleResponse_LockEndTime, &sGetRuleResponse_RuleArn, &sGetRuleResponse_ExcludeResourceTags}, Hash: &hGetRuleResponse}
+var mListRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesRequest_MaxResults, &sListRulesRequest_NextToken, &sListRulesRequest_ResourceType, &sListRulesRequest_ResourceTags, &sListRulesRequest_LockState, &sListRulesRequest_ExcludeResourceTags}}
+var mListRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesResponse_Rules, &sListRulesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mLockRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLockRuleRequest_Identifier, &sLockRuleRequest_LockConfiguration}}
+var mLockRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sLockRuleResponse_Identifier, &sLockRuleResponse_Description, &sLockRuleResponse_ResourceType, &sLockRuleResponse_RetentionPeriod, &sLockRuleResponse_ResourceTags, &sLockRuleResponse_Status, &sLockRuleResponse_LockConfiguration, &sLockRuleResponse_LockState, &sLockRuleResponse_RuleArn, &sLockRuleResponse_ExcludeResourceTags}, Hash: &hLockRuleResponse}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUnlockRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUnlockRuleRequest_Identifier}}
+var mUnlockRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUnlockRuleResponse_Identifier, &sUnlockRuleResponse_Description, &sUnlockRuleResponse_ResourceType, &sUnlockRuleResponse_RetentionPeriod, &sUnlockRuleResponse_ResourceTags, &sUnlockRuleResponse_Status, &sUnlockRuleResponse_LockConfiguration, &sUnlockRuleResponse_LockState, &sUnlockRuleResponse_LockEndTime, &sUnlockRuleResponse_RuleArn, &sUnlockRuleResponse_ExcludeResourceTags}, Hash: &hUnlockRuleResponse}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleRequest_Identifier, &sUpdateRuleRequest_RetentionPeriod, &sUpdateRuleRequest_Description, &sUpdateRuleRequest_ResourceType, &sUpdateRuleRequest_ResourceTags, &sUpdateRuleRequest_ExcludeResourceTags}}
+var mUpdateRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRuleResponse_Identifier, &sUpdateRuleResponse_RetentionPeriod, &sUpdateRuleResponse_Description, &sUpdateRuleResponse_ResourceType, &sUpdateRuleResponse_ResourceTags, &sUpdateRuleResponse_Status, &sUpdateRuleResponse_LockState, &sUpdateRuleResponse_LockEndTime, &sUpdateRuleResponse_RuleArn, &sUpdateRuleResponse_ExcludeResourceTags}, Hash: &hUpdateRuleResponse}
+
+var hCreateRuleResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 0, 9, 3, 0, 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5, 0, 11, 0, 0, 0,
+	7, 0, 10, 0, 0, 8, 0, 6,
+}}
+var hGetRuleResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 8, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 11, 0, 0, 0,
+	6, 0, 10, 0, 0, 7, 0, 5,
+}}
+var hLockRuleResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 8, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 10, 0, 0, 0,
+	6, 0, 9, 0, 0, 7, 0, 5,
+}}
+var hUnlockRuleResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 4, 0, 8, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 11, 0, 0, 0,
+	6, 0, 10, 0, 0, 7, 0, 5,
+}}
+var hUpdateRuleResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 0, 7, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 8, 10, 0, 0, 0,
+	6, 0, 9, 0, 0, 0, 0, 5,
+}}
+
+var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateRule})
+var sDeleteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRule, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRule})
+var sGetRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRule, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetRule})
+var sListRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRules, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListRules})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sLockRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLockRule, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eLockRule})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUnlockRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlockRule, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eUnlockRule})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRule, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRule})
+var s_AmazonRecycleBin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonRecycleBin, Type: smithy.ShapeTypeService, Ext: &e_AmazonRecycleBin})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Reason})
+var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictExceptionReason})
+var sConflictExceptionReason_INVALID_RULE_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RULE_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_INVALID_RULE_STATE})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &e_ExcludeResourceTags})
+var s_ExcludeResourceTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &e_ExcludeResourceTags_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sLockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLockConfiguration})
+var sLockConfiguration_UnlockDelay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnlockDelay", ID: &iUnlockDelay, Members: &mUnlockDelay, Type: smithy.ShapeTypeStructure, Ext: &eLockConfiguration_UnlockDelay})
+var sLockState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eLockState})
+var sLockState_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLockState_LOCKED})
+var sLockState_PENDING_UNLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_UNLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLockState_PENDING_UNLOCK})
+var sLockState_UNLOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNLOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLockState_UNLOCKED})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_Reason})
+var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundExceptionReason})
+var sResourceNotFoundExceptionReason_RULE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RULE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_RULE_NOT_FOUND})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &eResourceTag})
+var sResourceTag_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKey", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &eResourceTag_ResourceTagKey})
+var sResourceTag_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagValue", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &eResourceTag_ResourceTagValue})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKey})
+var s_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &e_ResourceTags})
+var s_ResourceTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceTags_member})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagValue})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_EBS_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_EBS_SNAPSHOT})
+var sResourceType_EC2_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_EC2_IMAGE})
+var sResourceType_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_EBS_VOLUME})
+var sRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriod})
+var sRetentionPeriod_RetentionPeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodValue", ID: &i_RetentionPeriodValue, Type: smithy.ShapeTypeInteger, Ext: &eRetentionPeriod_RetentionPeriodValue})
+var sRetentionPeriod_RetentionPeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodUnit", ID: &iRetentionPeriodUnit, Members: &mRetentionPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &eRetentionPeriod_RetentionPeriodUnit})
+var sRetentionPeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionPeriodUnit, Members: &mRetentionPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &eRetentionPeriodUnit})
+var sRetentionPeriodUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionPeriodUnit_DAYS})
+var s_RetentionPeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriodValue, Type: smithy.ShapeTypeInteger, Ext: &e_RetentionPeriodValue})
+var s_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &e_RuleArn})
+var s_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RuleIdentifier})
+var sRuleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eRuleStatus})
+var sRuleStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStatus_PENDING})
+var sRuleStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleStatus_AVAILABLE})
+var sRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &eRuleSummary})
+var sRuleSummary_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_Identifier})
+var sRuleSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_Description})
+var sRuleSummary_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eRuleSummary_RetentionPeriod})
+var sRuleSummary_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eRuleSummary_LockState})
+var sRuleSummary_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_RuleArn})
+var s_RuleSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSummaryList, Members: &m_RuleSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RuleSummaryList})
+var s_RuleSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RuleSummaryList_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_Reason})
+var sServiceQuotaExceededExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededExceptionReason})
+var sServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sUnlockDelay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlockDelay, Members: &mUnlockDelay, Type: smithy.ShapeTypeStructure, Ext: &eUnlockDelay})
+var sUnlockDelay_UnlockDelayValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnlockDelayValue", ID: &i_UnlockDelayValue, Type: smithy.ShapeTypeInteger, Ext: &eUnlockDelay_UnlockDelayValue})
+var sUnlockDelay_UnlockDelayUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnlockDelayUnit", ID: &iUnlockDelayUnit, Members: &mUnlockDelayUnit, Type: smithy.ShapeTypeEnum, Ext: &eUnlockDelay_UnlockDelayUnit})
+var sUnlockDelayUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlockDelayUnit, Members: &mUnlockDelayUnit, Type: smithy.ShapeTypeEnum, Ext: &eUnlockDelayUnit})
+var sUnlockDelayUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnlockDelayUnit_DAYS})
+var s_UnlockDelayValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnlockDelayValue, Type: smithy.ShapeTypeInteger, Ext: &e_UnlockDelayValue})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_INVALID_PAGE_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGE_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PAGE_TOKEN})
+var sValidationExceptionReason_INVALID_PARAMETER_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PARAMETER_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PARAMETER_VALUE})
+var sCreateRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleRequest, Members: &mCreateRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleRequest})
+var sCreateRuleRequest_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleRequest_RetentionPeriod})
+var sCreateRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateRuleRequest_Description})
+var sCreateRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_Tags})
+var sCreateRuleRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleRequest_ResourceType})
+var sCreateRuleRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_ResourceTags})
+var sCreateRuleRequest_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleRequest_LockConfiguration})
+var sCreateRuleRequest_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eCreateRuleRequest_ExcludeResourceTags})
+var sCreateRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleResponse, Members: &mCreateRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResponse})
+var sCreateRuleResponse_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateRuleResponse_Identifier})
+var sCreateRuleResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResponse_RetentionPeriod})
+var sCreateRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateRuleResponse_Description})
+var sCreateRuleResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleResponse_Tags})
+var sCreateRuleResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleResponse_ResourceType})
+var sCreateRuleResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eCreateRuleResponse_ResourceTags})
+var sCreateRuleResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleResponse_Status})
+var sCreateRuleResponse_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleResponse_LockConfiguration})
+var sCreateRuleResponse_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleResponse_LockState})
+var sCreateRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eCreateRuleResponse_RuleArn})
+var sCreateRuleResponse_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eCreateRuleResponse_ExcludeResourceTags})
+var sDeleteRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleRequest, Members: &mDeleteRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleRequest})
+var sDeleteRuleRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleRequest_Identifier})
+var sDeleteRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleResponse})
+var sGetRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleRequest, Members: &mGetRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleRequest})
+var sGetRuleRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eGetRuleRequest_Identifier})
+var sGetRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRuleResponse, Members: &mGetRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleResponse})
+var sGetRuleResponse_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRuleResponse_Identifier})
+var sGetRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetRuleResponse_Description})
+var sGetRuleResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eGetRuleResponse_ResourceType})
+var sGetRuleResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleResponse_RetentionPeriod})
+var sGetRuleResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eGetRuleResponse_ResourceTags})
+var sGetRuleResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetRuleResponse_Status})
+var sGetRuleResponse_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetRuleResponse_LockConfiguration})
+var sGetRuleResponse_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eGetRuleResponse_LockState})
+var sGetRuleResponse_LockEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockEndTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRuleResponse_LockEndTime})
+var sGetRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eGetRuleResponse_RuleArn})
+var sGetRuleResponse_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eGetRuleResponse_ExcludeResourceTags})
+var sListRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesRequest, Members: &mListRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRulesRequest})
+var sListRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRulesRequest_MaxResults})
+var sListRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRulesRequest_NextToken})
+var sListRulesRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eListRulesRequest_ResourceType})
+var sListRulesRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eListRulesRequest_ResourceTags})
+var sListRulesRequest_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eListRulesRequest_LockState})
+var sListRulesRequest_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eListRulesRequest_ExcludeResourceTags})
+var sListRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesResponse, Members: &mListRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRulesResponse})
+var sListRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleSummaryList, Members: &m_RuleSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRulesResponse_Rules})
+var sListRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRulesResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_RuleArn, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sLockRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLockRuleRequest, Members: &mLockRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eLockRuleRequest})
+var sLockRuleRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eLockRuleRequest_Identifier})
+var sLockRuleRequest_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLockRuleRequest_LockConfiguration})
+var sLockRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLockRuleResponse, Members: &mLockRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eLockRuleResponse})
+var sLockRuleResponse_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eLockRuleResponse_Identifier})
+var sLockRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eLockRuleResponse_Description})
+var sLockRuleResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eLockRuleResponse_ResourceType})
+var sLockRuleResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eLockRuleResponse_RetentionPeriod})
+var sLockRuleResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eLockRuleResponse_ResourceTags})
+var sLockRuleResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eLockRuleResponse_Status})
+var sLockRuleResponse_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLockRuleResponse_LockConfiguration})
+var sLockRuleResponse_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eLockRuleResponse_LockState})
+var sLockRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eLockRuleResponse_RuleArn})
+var sLockRuleResponse_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eLockRuleResponse_ExcludeResourceTags})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_RuleArn, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUnlockRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlockRuleRequest, Members: &mUnlockRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUnlockRuleRequest})
+var sUnlockRuleRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eUnlockRuleRequest_Identifier})
+var sUnlockRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlockRuleResponse, Members: &mUnlockRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUnlockRuleResponse})
+var sUnlockRuleResponse_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eUnlockRuleResponse_Identifier})
+var sUnlockRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUnlockRuleResponse_Description})
+var sUnlockRuleResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eUnlockRuleResponse_ResourceType})
+var sUnlockRuleResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eUnlockRuleResponse_RetentionPeriod})
+var sUnlockRuleResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eUnlockRuleResponse_ResourceTags})
+var sUnlockRuleResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eUnlockRuleResponse_Status})
+var sUnlockRuleResponse_LockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockConfiguration", ID: &iLockConfiguration, Members: &mLockConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUnlockRuleResponse_LockConfiguration})
+var sUnlockRuleResponse_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eUnlockRuleResponse_LockState})
+var sUnlockRuleResponse_LockEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockEndTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUnlockRuleResponse_LockEndTime})
+var sUnlockRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eUnlockRuleResponse_RuleArn})
+var sUnlockRuleResponse_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eUnlockRuleResponse_ExcludeResourceTags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_RuleArn, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t16, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleRequest, Members: &mUpdateRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleRequest})
+var sUpdateRuleRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleRequest_Identifier})
+var sUpdateRuleRequest_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleRequest_RetentionPeriod})
+var sUpdateRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleRequest_Description})
+var sUpdateRuleRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleRequest_ResourceType})
+var sUpdateRuleRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleRequest_ResourceTags})
+var sUpdateRuleRequest_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleRequest_ExcludeResourceTags})
+var sUpdateRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleResponse, Members: &mUpdateRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleResponse})
+var sUpdateRuleResponse_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleResponse_Identifier})
+var sUpdateRuleResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleResponse_RetentionPeriod})
+var sUpdateRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleResponse_Description})
+var sUpdateRuleResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleResponse_ResourceType})
+var sUpdateRuleResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleResponse_ResourceTags})
+var sUpdateRuleResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleResponse_Status})
+var sUpdateRuleResponse_LockState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockState", ID: &iLockState, Members: &mLockState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleResponse_LockState})
+var sUpdateRuleResponse_LockEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LockEndTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateRuleResponse_LockEndTime})
+var sUpdateRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleResponse_RuleArn})
+var sUpdateRuleResponse_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_ExcludeResourceTags, Members: &m_ExcludeResourceTags, Type: smithy.ShapeTypeList, Ext: &eUpdateRuleResponse_ExcludeResourceTags})
+
+var CreateRule = &sCreateRule
+
+var DeleteRule = &sDeleteRule
+
+var GetRule = &sGetRule
+
+var ListRules = &sListRules
+
+var ListTagsForResource = &sListTagsForResource
+
+var LockRule = &sLockRule
+
+var TagResource = &sTagResource
+
+var UnlockRule = &sUnlockRule
+
+var UntagResource = &sUntagResource
+
+var UpdateRule = &sUpdateRule
+
+var _AmazonRecycleBin = &s_AmazonRecycleBin
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_Reason = &sConflictException_Reason
+
+var ConflictExceptionReason = &sConflictExceptionReason
+var ConflictExceptionReason_INVALID_RULE_STATE = &sConflictExceptionReason_INVALID_RULE_STATE
+
+var _Description = &s_Description
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExcludeResourceTags = &s_ExcludeResourceTags
+var _ExcludeResourceTags_member = &s_ExcludeResourceTags_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var LockConfiguration = &sLockConfiguration
+var LockConfiguration_UnlockDelay = &sLockConfiguration_UnlockDelay
+
+var LockState = &sLockState
+var LockState_LOCKED = &sLockState_LOCKED
+var LockState_PENDING_UNLOCK = &sLockState_PENDING_UNLOCK
+var LockState_UNLOCKED = &sLockState_UNLOCKED
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_Reason = &sResourceNotFoundException_Reason
+
+var ResourceNotFoundExceptionReason = &sResourceNotFoundExceptionReason
+var ResourceNotFoundExceptionReason_RULE_NOT_FOUND = &sResourceNotFoundExceptionReason_RULE_NOT_FOUND
+
+var ResourceTag = &sResourceTag
+var ResourceTag_ResourceTagKey = &sResourceTag_ResourceTagKey
+var ResourceTag_ResourceTagValue = &sResourceTag_ResourceTagValue
+
+var _ResourceTagKey = &s_ResourceTagKey
+
+var _ResourceTags = &s_ResourceTags
+var _ResourceTags_member = &s_ResourceTags_member
+
+var _ResourceTagValue = &s_ResourceTagValue
+
+var ResourceType = &sResourceType
+var ResourceType_EBS_SNAPSHOT = &sResourceType_EBS_SNAPSHOT
+var ResourceType_EC2_IMAGE = &sResourceType_EC2_IMAGE
+var ResourceType_EBS_VOLUME = &sResourceType_EBS_VOLUME
+
+var RetentionPeriod = &sRetentionPeriod
+var RetentionPeriod_RetentionPeriodValue = &sRetentionPeriod_RetentionPeriodValue
+var RetentionPeriod_RetentionPeriodUnit = &sRetentionPeriod_RetentionPeriodUnit
+
+var RetentionPeriodUnit = &sRetentionPeriodUnit
+var RetentionPeriodUnit_DAYS = &sRetentionPeriodUnit_DAYS
+
+var _RetentionPeriodValue = &s_RetentionPeriodValue
+
+var _RuleArn = &s_RuleArn
+
+var _RuleIdentifier = &s_RuleIdentifier
+
+var RuleStatus = &sRuleStatus
+var RuleStatus_PENDING = &sRuleStatus_PENDING
+var RuleStatus_AVAILABLE = &sRuleStatus_AVAILABLE
+
+var RuleSummary = &sRuleSummary
+var RuleSummary_Identifier = &sRuleSummary_Identifier
+var RuleSummary_Description = &sRuleSummary_Description
+var RuleSummary_RetentionPeriod = &sRuleSummary_RetentionPeriod
+var RuleSummary_LockState = &sRuleSummary_LockState
+var RuleSummary_RuleArn = &sRuleSummary_RuleArn
+
+var _RuleSummaryList = &s_RuleSummaryList
+var _RuleSummaryList_member = &s_RuleSummaryList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_Reason = &sServiceQuotaExceededException_Reason
+
+var ServiceQuotaExceededExceptionReason = &sServiceQuotaExceededExceptionReason
+var ServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED = &sServiceQuotaExceededExceptionReason_SERVICE_QUOTA_EXCEEDED
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TimeStamp = &s_TimeStamp
+
+var UnlockDelay = &sUnlockDelay
+var UnlockDelay_UnlockDelayValue = &sUnlockDelay_UnlockDelayValue
+var UnlockDelay_UnlockDelayUnit = &sUnlockDelay_UnlockDelayUnit
+
+var UnlockDelayUnit = &sUnlockDelayUnit
+var UnlockDelayUnit_DAYS = &sUnlockDelayUnit_DAYS
+
+var _UnlockDelayValue = &s_UnlockDelayValue
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_INVALID_PAGE_TOKEN = &sValidationExceptionReason_INVALID_PAGE_TOKEN
+var ValidationExceptionReason_INVALID_PARAMETER_VALUE = &sValidationExceptionReason_INVALID_PARAMETER_VALUE
+
+var CreateRuleRequest = &sCreateRuleRequest
+var CreateRuleRequest_RetentionPeriod = &sCreateRuleRequest_RetentionPeriod
+var CreateRuleRequest_Description = &sCreateRuleRequest_Description
+var CreateRuleRequest_Tags = &sCreateRuleRequest_Tags
+var CreateRuleRequest_ResourceType = &sCreateRuleRequest_ResourceType
+var CreateRuleRequest_ResourceTags = &sCreateRuleRequest_ResourceTags
+var CreateRuleRequest_LockConfiguration = &sCreateRuleRequest_LockConfiguration
+var CreateRuleRequest_ExcludeResourceTags = &sCreateRuleRequest_ExcludeResourceTags
+
+var CreateRuleResponse = &sCreateRuleResponse
+var CreateRuleResponse_Identifier = &sCreateRuleResponse_Identifier
+var CreateRuleResponse_RetentionPeriod = &sCreateRuleResponse_RetentionPeriod
+var CreateRuleResponse_Description = &sCreateRuleResponse_Description
+var CreateRuleResponse_Tags = &sCreateRuleResponse_Tags
+var CreateRuleResponse_ResourceType = &sCreateRuleResponse_ResourceType
+var CreateRuleResponse_ResourceTags = &sCreateRuleResponse_ResourceTags
+var CreateRuleResponse_Status = &sCreateRuleResponse_Status
+var CreateRuleResponse_LockConfiguration = &sCreateRuleResponse_LockConfiguration
+var CreateRuleResponse_LockState = &sCreateRuleResponse_LockState
+var CreateRuleResponse_RuleArn = &sCreateRuleResponse_RuleArn
+var CreateRuleResponse_ExcludeResourceTags = &sCreateRuleResponse_ExcludeResourceTags
+
+var DeleteRuleRequest = &sDeleteRuleRequest
+var DeleteRuleRequest_Identifier = &sDeleteRuleRequest_Identifier
+
+var DeleteRuleResponse = &sDeleteRuleResponse
+
+var GetRuleRequest = &sGetRuleRequest
+var GetRuleRequest_Identifier = &sGetRuleRequest_Identifier
+
+var GetRuleResponse = &sGetRuleResponse
+var GetRuleResponse_Identifier = &sGetRuleResponse_Identifier
+var GetRuleResponse_Description = &sGetRuleResponse_Description
+var GetRuleResponse_ResourceType = &sGetRuleResponse_ResourceType
+var GetRuleResponse_RetentionPeriod = &sGetRuleResponse_RetentionPeriod
+var GetRuleResponse_ResourceTags = &sGetRuleResponse_ResourceTags
+var GetRuleResponse_Status = &sGetRuleResponse_Status
+var GetRuleResponse_LockConfiguration = &sGetRuleResponse_LockConfiguration
+var GetRuleResponse_LockState = &sGetRuleResponse_LockState
+var GetRuleResponse_LockEndTime = &sGetRuleResponse_LockEndTime
+var GetRuleResponse_RuleArn = &sGetRuleResponse_RuleArn
+var GetRuleResponse_ExcludeResourceTags = &sGetRuleResponse_ExcludeResourceTags
+
+var ListRulesRequest = &sListRulesRequest
+var ListRulesRequest_MaxResults = &sListRulesRequest_MaxResults
+var ListRulesRequest_NextToken = &sListRulesRequest_NextToken
+var ListRulesRequest_ResourceType = &sListRulesRequest_ResourceType
+var ListRulesRequest_ResourceTags = &sListRulesRequest_ResourceTags
+var ListRulesRequest_LockState = &sListRulesRequest_LockState
+var ListRulesRequest_ExcludeResourceTags = &sListRulesRequest_ExcludeResourceTags
+
+var ListRulesResponse = &sListRulesResponse
+var ListRulesResponse_Rules = &sListRulesResponse_Rules
+var ListRulesResponse_NextToken = &sListRulesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var LockRuleRequest = &sLockRuleRequest
+var LockRuleRequest_Identifier = &sLockRuleRequest_Identifier
+var LockRuleRequest_LockConfiguration = &sLockRuleRequest_LockConfiguration
+
+var LockRuleResponse = &sLockRuleResponse
+var LockRuleResponse_Identifier = &sLockRuleResponse_Identifier
+var LockRuleResponse_Description = &sLockRuleResponse_Description
+var LockRuleResponse_ResourceType = &sLockRuleResponse_ResourceType
+var LockRuleResponse_RetentionPeriod = &sLockRuleResponse_RetentionPeriod
+var LockRuleResponse_ResourceTags = &sLockRuleResponse_ResourceTags
+var LockRuleResponse_Status = &sLockRuleResponse_Status
+var LockRuleResponse_LockConfiguration = &sLockRuleResponse_LockConfiguration
+var LockRuleResponse_LockState = &sLockRuleResponse_LockState
+var LockRuleResponse_RuleArn = &sLockRuleResponse_RuleArn
+var LockRuleResponse_ExcludeResourceTags = &sLockRuleResponse_ExcludeResourceTags
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UnlockRuleRequest = &sUnlockRuleRequest
+var UnlockRuleRequest_Identifier = &sUnlockRuleRequest_Identifier
+
+var UnlockRuleResponse = &sUnlockRuleResponse
+var UnlockRuleResponse_Identifier = &sUnlockRuleResponse_Identifier
+var UnlockRuleResponse_Description = &sUnlockRuleResponse_Description
+var UnlockRuleResponse_ResourceType = &sUnlockRuleResponse_ResourceType
+var UnlockRuleResponse_RetentionPeriod = &sUnlockRuleResponse_RetentionPeriod
+var UnlockRuleResponse_ResourceTags = &sUnlockRuleResponse_ResourceTags
+var UnlockRuleResponse_Status = &sUnlockRuleResponse_Status
+var UnlockRuleResponse_LockConfiguration = &sUnlockRuleResponse_LockConfiguration
+var UnlockRuleResponse_LockState = &sUnlockRuleResponse_LockState
+var UnlockRuleResponse_LockEndTime = &sUnlockRuleResponse_LockEndTime
+var UnlockRuleResponse_RuleArn = &sUnlockRuleResponse_RuleArn
+var UnlockRuleResponse_ExcludeResourceTags = &sUnlockRuleResponse_ExcludeResourceTags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateRuleRequest = &sUpdateRuleRequest
+var UpdateRuleRequest_Identifier = &sUpdateRuleRequest_Identifier
+var UpdateRuleRequest_RetentionPeriod = &sUpdateRuleRequest_RetentionPeriod
+var UpdateRuleRequest_Description = &sUpdateRuleRequest_Description
+var UpdateRuleRequest_ResourceType = &sUpdateRuleRequest_ResourceType
+var UpdateRuleRequest_ResourceTags = &sUpdateRuleRequest_ResourceTags
+var UpdateRuleRequest_ExcludeResourceTags = &sUpdateRuleRequest_ExcludeResourceTags
+
+var UpdateRuleResponse = &sUpdateRuleResponse
+var UpdateRuleResponse_Identifier = &sUpdateRuleResponse_Identifier
+var UpdateRuleResponse_RetentionPeriod = &sUpdateRuleResponse_RetentionPeriod
+var UpdateRuleResponse_Description = &sUpdateRuleResponse_Description
+var UpdateRuleResponse_ResourceType = &sUpdateRuleResponse_ResourceType
+var UpdateRuleResponse_ResourceTags = &sUpdateRuleResponse_ResourceTags
+var UpdateRuleResponse_Status = &sUpdateRuleResponse_Status
+var UpdateRuleResponse_LockState = &sUpdateRuleResponse_LockState
+var UpdateRuleResponse_LockEndTime = &sUpdateRuleResponse_LockEndTime
+var UpdateRuleResponse_RuleArn = &sUpdateRuleResponse_RuleArn
+var UpdateRuleResponse_ExcludeResourceTags = &sUpdateRuleResponse_ExcludeResourceTags
+
+var AmazonRecycleBin = &smithy.ServiceSchema{Schema: &s_AmazonRecycleBin, Version: "2021-06-15"}

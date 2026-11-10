@@ -4,41 +4,49 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var QueryCompatibleOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "QueryCompatibleOperation",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	eQueryCompatibleOperation      smithy.SchemaExtensions
+	e_QueryCompatibleRpcV2Protocol smithy.SchemaExtensions
+	eCustomCodeError               smithy.SchemaExtensions
+	eCustomCodeError_message       smithy.SchemaExtensions
+	eNoCustomCodeError             smithy.SchemaExtensions
+	eNoCustomCodeError_message     smithy.SchemaExtensions
+)
 
-var _QueryCompatibleRpcV2Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "QueryCompatibleRpcV2Protocol",
-}, smithy.ShapeTypeService, 0, &smithytraits.AWSQueryCompatible{})
+var (
+	iQueryCompatibleOperation      = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "QueryCompatibleOperation"}
+	i_QueryCompatibleRpcV2Protocol = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "QueryCompatibleRpcV2Protocol"}
+	iCustomCodeError               = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "CustomCodeError"}
+	iNoCustomCodeError             = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NoCustomCodeError"}
+	pString                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+)
 
-var QueryCompatibleRpcV2Protocol = smithy.NewServiceSchema(_QueryCompatibleRpcV2Protocol, "2025-06-20")
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Customized",
+	StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
 
-var CustomCodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "CustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "Customized",
-		StatusCode: 402})
-var CustomCodeError_message *smithy.Schema
+var mCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomCodeError_message}}
+var mNoCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sNoCustomCodeError_message}}
 
-var NoCustomCodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "NoCustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var NoCustomCodeError_message *smithy.Schema
+var sQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryCompatibleOperation, Type: smithy.ShapeTypeOperation, Ext: &eQueryCompatibleOperation})
+var s_QueryCompatibleRpcV2Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryCompatibleRpcV2Protocol, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_QueryCompatibleRpcV2Protocol})
+var sCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomCodeError, Members: &mCustomCodeError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCustomCodeError})
+var sCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCustomCodeError_message})
+var sNoCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoCustomCodeError, Members: &mNoCustomCodeError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eNoCustomCodeError})
+var sNoCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNoCustomCodeError_message})
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CustomCodeError_message = CustomCodeError.AddMember("message", smithyprelude.String)
+var QueryCompatibleOperation = &sQueryCompatibleOperation
 
-	NoCustomCodeError_message = NoCustomCodeError.AddMember("message", smithyprelude.String)
+var _QueryCompatibleRpcV2Protocol = &s_QueryCompatibleRpcV2Protocol
 
-}
+var CustomCodeError = &sCustomCodeError
+var CustomCodeError_message = &sCustomCodeError_message
+
+var NoCustomCodeError = &sNoCustomCodeError
+var NoCustomCodeError_message = &sNoCustomCodeError_message
+
+var QueryCompatibleRpcV2Protocol = &smithy.ServiceSchema{Schema: &s_QueryCompatibleRpcV2Protocol, Version: "2025-06-20"}

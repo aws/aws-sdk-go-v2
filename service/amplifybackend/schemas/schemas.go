@@ -4,2516 +4,2469 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CloneBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CloneBackend",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCloneBackend                                                smithy.SchemaExtensions
+	eCreateBackend                                               smithy.SchemaExtensions
+	eCreateBackendAPI                                            smithy.SchemaExtensions
+	eCreateBackendAuth                                           smithy.SchemaExtensions
+	eCreateBackendConfig                                         smithy.SchemaExtensions
+	eCreateBackendStorage                                        smithy.SchemaExtensions
+	eCreateToken                                                 smithy.SchemaExtensions
+	eDeleteBackend                                               smithy.SchemaExtensions
+	eDeleteBackendAPI                                            smithy.SchemaExtensions
+	eDeleteBackendAuth                                           smithy.SchemaExtensions
+	eDeleteBackendStorage                                        smithy.SchemaExtensions
+	eDeleteToken                                                 smithy.SchemaExtensions
+	eGenerateBackendAPIModels                                    smithy.SchemaExtensions
+	eGetBackend                                                  smithy.SchemaExtensions
+	eGetBackendAPI                                               smithy.SchemaExtensions
+	eGetBackendAPIModels                                         smithy.SchemaExtensions
+	eGetBackendAuth                                              smithy.SchemaExtensions
+	eGetBackendJob                                               smithy.SchemaExtensions
+	eGetBackendStorage                                           smithy.SchemaExtensions
+	eGetToken                                                    smithy.SchemaExtensions
+	eImportBackendAuth                                           smithy.SchemaExtensions
+	eImportBackendStorage                                        smithy.SchemaExtensions
+	eListBackendJobs                                             smithy.SchemaExtensions
+	eListS3Buckets                                               smithy.SchemaExtensions
+	eRemoveAllBackends                                           smithy.SchemaExtensions
+	eRemoveBackendConfig                                         smithy.SchemaExtensions
+	eUpdateBackendAPI                                            smithy.SchemaExtensions
+	eUpdateBackendAuth                                           smithy.SchemaExtensions
+	eUpdateBackendConfig                                         smithy.SchemaExtensions
+	eUpdateBackendJob                                            smithy.SchemaExtensions
+	eUpdateBackendStorage                                        smithy.SchemaExtensions
+	e_AmplifyBackend                                             smithy.SchemaExtensions
+	e___boolean                                                  smithy.SchemaExtensions
+	e___double                                                   smithy.SchemaExtensions
+	e___integerMin1Max25                                         smithy.SchemaExtensions
+	e___string                                                   smithy.SchemaExtensions
+	eAdditionalConstraintsElement                                smithy.SchemaExtensions
+	eAdditionalConstraintsElement_REQUIRE_DIGIT                  smithy.SchemaExtensions
+	eAdditionalConstraintsElement_REQUIRE_LOWERCASE              smithy.SchemaExtensions
+	eAdditionalConstraintsElement_REQUIRE_SYMBOL                 smithy.SchemaExtensions
+	eAdditionalConstraintsElement_REQUIRE_UPPERCASE              smithy.SchemaExtensions
+	eAuthenticatedElement                                        smithy.SchemaExtensions
+	eAuthenticatedElement_READ                                   smithy.SchemaExtensions
+	eAuthenticatedElement_CREATE_AND_UPDATE                      smithy.SchemaExtensions
+	eAuthenticatedElement_DELETE                                 smithy.SchemaExtensions
+	eAuthResources                                               smithy.SchemaExtensions
+	eAuthResources_USER_POOL_ONLY                                smithy.SchemaExtensions
+	eAuthResources_IDENTITY_POOL_AND_USER_POOL                   smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings                               smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_CognitoUserPoolId             smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_Description                   smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_ExpirationTime                smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_OpenIDAuthTTL                 smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_OpenIDClientId                smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_OpenIDIatTTL                  smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_OpenIDIssueURL                smithy.SchemaExtensions
+	eBackendAPIAppSyncAuthSettings_OpenIDProviderName            smithy.SchemaExtensions
+	eBackendAPIAuthType                                          smithy.SchemaExtensions
+	eBackendAPIAuthType_Mode                                     smithy.SchemaExtensions
+	eBackendAPIAuthType_Settings                                 smithy.SchemaExtensions
+	eBackendAPIConflictResolution                                smithy.SchemaExtensions
+	eBackendAPIConflictResolution_ResolutionStrategy             smithy.SchemaExtensions
+	eBackendAPIResourceConfig                                    smithy.SchemaExtensions
+	eBackendAPIResourceConfig_AdditionalAuthTypes                smithy.SchemaExtensions
+	eBackendAPIResourceConfig_ApiName                            smithy.SchemaExtensions
+	eBackendAPIResourceConfig_ConflictResolution                 smithy.SchemaExtensions
+	eBackendAPIResourceConfig_DefaultAuthType                    smithy.SchemaExtensions
+	eBackendAPIResourceConfig_Service                            smithy.SchemaExtensions
+	eBackendAPIResourceConfig_TransformSchema                    smithy.SchemaExtensions
+	eBackendAuthAppleProviderConfig                              smithy.SchemaExtensions
+	eBackendAuthAppleProviderConfig_ClientId                     smithy.SchemaExtensions
+	eBackendAuthAppleProviderConfig_KeyId                        smithy.SchemaExtensions
+	eBackendAuthAppleProviderConfig_PrivateKey                   smithy.SchemaExtensions
+	eBackendAuthAppleProviderConfig_TeamId                       smithy.SchemaExtensions
+	eBackendAuthSocialProviderConfig                             smithy.SchemaExtensions
+	eBackendAuthSocialProviderConfig_ClientId                    smithy.SchemaExtensions
+	eBackendAuthSocialProviderConfig_ClientSecret                smithy.SchemaExtensions
+	eBackendJobRespObj                                           smithy.SchemaExtensions
+	eBackendJobRespObj_AppId                                     smithy.SchemaExtensions
+	eBackendJobRespObj_BackendEnvironmentName                    smithy.SchemaExtensions
+	eBackendJobRespObj_CreateTime                                smithy.SchemaExtensions
+	eBackendJobRespObj_Error                                     smithy.SchemaExtensions
+	eBackendJobRespObj_JobId                                     smithy.SchemaExtensions
+	eBackendJobRespObj_Operation                                 smithy.SchemaExtensions
+	eBackendJobRespObj_Status                                    smithy.SchemaExtensions
+	eBackendJobRespObj_UpdateTime                                smithy.SchemaExtensions
+	eBackendStoragePermissions                                   smithy.SchemaExtensions
+	eBackendStoragePermissions_Authenticated                     smithy.SchemaExtensions
+	eBackendStoragePermissions_UnAuthenticated                   smithy.SchemaExtensions
+	eBadRequestException                                         smithy.SchemaExtensions
+	eBadRequestException_Message                                 smithy.SchemaExtensions
+	eCreateBackendAuthForgotPasswordConfig                       smithy.SchemaExtensions
+	eCreateBackendAuthForgotPasswordConfig_DeliveryMethod        smithy.SchemaExtensions
+	eCreateBackendAuthForgotPasswordConfig_EmailSettings         smithy.SchemaExtensions
+	eCreateBackendAuthForgotPasswordConfig_SmsSettings           smithy.SchemaExtensions
+	eCreateBackendAuthIdentityPoolConfig                         smithy.SchemaExtensions
+	eCreateBackendAuthIdentityPoolConfig_IdentityPoolName        smithy.SchemaExtensions
+	eCreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin    smithy.SchemaExtensions
+	eCreateBackendAuthMFAConfig                                  smithy.SchemaExtensions
+	eCreateBackendAuthMFAConfig_MFAMode                          smithy.SchemaExtensions
+	eCreateBackendAuthMFAConfig_Settings                         smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig                                smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_DomainPrefix                   smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_OAuthGrantType                 smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_OAuthScopes                    smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_RedirectSignInURIs             smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_RedirectSignOutURIs            smithy.SchemaExtensions
+	eCreateBackendAuthOAuthConfig_SocialProviderSettings         smithy.SchemaExtensions
+	eCreateBackendAuthPasswordPolicyConfig                       smithy.SchemaExtensions
+	eCreateBackendAuthPasswordPolicyConfig_AdditionalConstraints smithy.SchemaExtensions
+	eCreateBackendAuthPasswordPolicyConfig_MinimumLength         smithy.SchemaExtensions
+	eCreateBackendAuthResourceConfig                             smithy.SchemaExtensions
+	eCreateBackendAuthResourceConfig_AuthResources               smithy.SchemaExtensions
+	eCreateBackendAuthResourceConfig_IdentityPoolConfigs         smithy.SchemaExtensions
+	eCreateBackendAuthResourceConfig_Service                     smithy.SchemaExtensions
+	eCreateBackendAuthResourceConfig_UserPoolConfigs             smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig                             smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_ForgotPassword              smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_Mfa                         smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_OAuth                       smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_PasswordPolicy              smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_RequiredSignUpAttributes    smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_SignInMethod                smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_UserPoolName                smithy.SchemaExtensions
+	eCreateBackendAuthUserPoolConfig_VerificationMessage         smithy.SchemaExtensions
+	eCreateBackendAuthVerificationMessageConfig                  smithy.SchemaExtensions
+	eCreateBackendAuthVerificationMessageConfig_DeliveryMethod   smithy.SchemaExtensions
+	eCreateBackendAuthVerificationMessageConfig_EmailSettings    smithy.SchemaExtensions
+	eCreateBackendAuthVerificationMessageConfig_SmsSettings      smithy.SchemaExtensions
+	eCreateBackendStorageResourceConfig                          smithy.SchemaExtensions
+	eCreateBackendStorageResourceConfig_BucketName               smithy.SchemaExtensions
+	eCreateBackendStorageResourceConfig_Permissions              smithy.SchemaExtensions
+	eCreateBackendStorageResourceConfig_ServiceName              smithy.SchemaExtensions
+	eDeliveryMethod                                              smithy.SchemaExtensions
+	eDeliveryMethod_EMAIL                                        smithy.SchemaExtensions
+	eDeliveryMethod_SMS                                          smithy.SchemaExtensions
+	eEmailSettings                                               smithy.SchemaExtensions
+	eEmailSettings_EmailMessage                                  smithy.SchemaExtensions
+	eEmailSettings_EmailSubject                                  smithy.SchemaExtensions
+	eGatewayTimeoutException                                     smithy.SchemaExtensions
+	eGatewayTimeoutException_Message                             smithy.SchemaExtensions
+	eGetBackendStorageResourceConfig                             smithy.SchemaExtensions
+	eGetBackendStorageResourceConfig_BucketName                  smithy.SchemaExtensions
+	eGetBackendStorageResourceConfig_Imported                    smithy.SchemaExtensions
+	eGetBackendStorageResourceConfig_Permissions                 smithy.SchemaExtensions
+	eGetBackendStorageResourceConfig_ServiceName                 smithy.SchemaExtensions
+	e_ListOf__string                                             smithy.SchemaExtensions
+	e_ListOf__string_member                                      smithy.SchemaExtensions
+	e_ListOfAdditionalConstraintsElement                         smithy.SchemaExtensions
+	e_ListOfAdditionalConstraintsElement_member                  smithy.SchemaExtensions
+	e_ListOfAuthenticatedElement                                 smithy.SchemaExtensions
+	e_ListOfAuthenticatedElement_member                          smithy.SchemaExtensions
+	e_ListOfBackendAPIAuthType                                   smithy.SchemaExtensions
+	e_ListOfBackendAPIAuthType_member                            smithy.SchemaExtensions
+	e_ListOfBackendJobRespObj                                    smithy.SchemaExtensions
+	e_ListOfBackendJobRespObj_member                             smithy.SchemaExtensions
+	e_ListOfMfaTypesElement                                      smithy.SchemaExtensions
+	e_ListOfMfaTypesElement_member                               smithy.SchemaExtensions
+	e_ListOfOAuthScopesElement                                   smithy.SchemaExtensions
+	e_ListOfOAuthScopesElement_member                            smithy.SchemaExtensions
+	e_ListOfRequiredSignUpAttributesElement                      smithy.SchemaExtensions
+	e_ListOfRequiredSignUpAttributesElement_member               smithy.SchemaExtensions
+	e_ListOfS3BucketInfo                                         smithy.SchemaExtensions
+	e_ListOfS3BucketInfo_member                                  smithy.SchemaExtensions
+	e_ListOfUnAuthenticatedElement                               smithy.SchemaExtensions
+	e_ListOfUnAuthenticatedElement_member                        smithy.SchemaExtensions
+	eLoginAuthConfigReqObj                                       smithy.SchemaExtensions
+	eLoginAuthConfigReqObj_AwsCognitoIdentityPoolId              smithy.SchemaExtensions
+	eLoginAuthConfigReqObj_AwsCognitoRegion                      smithy.SchemaExtensions
+	eLoginAuthConfigReqObj_AwsUserPoolsId                        smithy.SchemaExtensions
+	eLoginAuthConfigReqObj_AwsUserPoolsWebClientId               smithy.SchemaExtensions
+	eMFAMode                                                     smithy.SchemaExtensions
+	eMFAMode_ON                                                  smithy.SchemaExtensions
+	eMFAMode_OFF                                                 smithy.SchemaExtensions
+	eMFAMode_OPTIONAL                                            smithy.SchemaExtensions
+	eMfaTypesElement                                             smithy.SchemaExtensions
+	eMfaTypesElement_SMS                                         smithy.SchemaExtensions
+	eMfaTypesElement_TOTP                                        smithy.SchemaExtensions
+	eMode                                                        smithy.SchemaExtensions
+	eMode_API_KEY                                                smithy.SchemaExtensions
+	eMode_AWS_IAM                                                smithy.SchemaExtensions
+	eMode_AMAZON_COGNITO_USER_POOLS                              smithy.SchemaExtensions
+	eMode_OPENID_CONNECT                                         smithy.SchemaExtensions
+	eNotFoundException                                           smithy.SchemaExtensions
+	eNotFoundException_Message                                   smithy.SchemaExtensions
+	eNotFoundException_ResourceType                              smithy.SchemaExtensions
+	eOAuthGrantType                                              smithy.SchemaExtensions
+	eOAuthGrantType_CODE                                         smithy.SchemaExtensions
+	eOAuthGrantType_IMPLICIT                                     smithy.SchemaExtensions
+	eOAuthScopesElement                                          smithy.SchemaExtensions
+	eOAuthScopesElement_PHONE                                    smithy.SchemaExtensions
+	eOAuthScopesElement_EMAIL                                    smithy.SchemaExtensions
+	eOAuthScopesElement_OPENID                                   smithy.SchemaExtensions
+	eOAuthScopesElement_PROFILE                                  smithy.SchemaExtensions
+	eOAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN            smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement                             smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_ADDRESS                     smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_BIRTHDATE                   smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_EMAIL                       smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_FAMILY_NAME                 smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_GENDER                      smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_GIVEN_NAME                  smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_LOCALE                      smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_MIDDLE_NAME                 smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_NAME                        smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_NICKNAME                    smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_PHONE_NUMBER                smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_PICTURE                     smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_PREFERRED_USERNAME          smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_PROFILE                     smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_UPDATED_AT                  smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_WEBSITE                     smithy.SchemaExtensions
+	eRequiredSignUpAttributesElement_ZONE_INFO                   smithy.SchemaExtensions
+	eResolutionStrategy                                          smithy.SchemaExtensions
+	eResolutionStrategy_OPTIMISTIC_CONCURRENCY                   smithy.SchemaExtensions
+	eResolutionStrategy_LAMBDA                                   smithy.SchemaExtensions
+	eResolutionStrategy_AUTOMERGE                                smithy.SchemaExtensions
+	eResolutionStrategy_NONE                                     smithy.SchemaExtensions
+	eResourceConfig                                              smithy.SchemaExtensions
+	eS3BucketInfo                                                smithy.SchemaExtensions
+	eS3BucketInfo_CreationDate                                   smithy.SchemaExtensions
+	eS3BucketInfo_Name                                           smithy.SchemaExtensions
+	eService                                                     smithy.SchemaExtensions
+	eService_COGNITO                                             smithy.SchemaExtensions
+	eServiceName                                                 smithy.SchemaExtensions
+	eServiceName_S3                                              smithy.SchemaExtensions
+	eSettings                                                    smithy.SchemaExtensions
+	eSettings_MfaTypes                                           smithy.SchemaExtensions
+	eSettings_SmsMessage                                         smithy.SchemaExtensions
+	eSignInMethod                                                smithy.SchemaExtensions
+	eSignInMethod_EMAIL                                          smithy.SchemaExtensions
+	eSignInMethod_EMAIL_AND_PHONE_NUMBER                         smithy.SchemaExtensions
+	eSignInMethod_PHONE_NUMBER                                   smithy.SchemaExtensions
+	eSignInMethod_USERNAME                                       smithy.SchemaExtensions
+	eSmsSettings                                                 smithy.SchemaExtensions
+	eSmsSettings_SmsMessage                                      smithy.SchemaExtensions
+	eSocialProviderSettings                                      smithy.SchemaExtensions
+	eSocialProviderSettings_Facebook                             smithy.SchemaExtensions
+	eSocialProviderSettings_Google                               smithy.SchemaExtensions
+	eSocialProviderSettings_LoginWithAmazon                      smithy.SchemaExtensions
+	eSocialProviderSettings_SignInWithApple                      smithy.SchemaExtensions
+	eStatus                                                      smithy.SchemaExtensions
+	eStatus_LATEST                                               smithy.SchemaExtensions
+	eStatus_STALE                                                smithy.SchemaExtensions
+	eTooManyRequestsException                                    smithy.SchemaExtensions
+	eTooManyRequestsException_LimitType                          smithy.SchemaExtensions
+	eTooManyRequestsException_Message                            smithy.SchemaExtensions
+	eUnAuthenticatedElement                                      smithy.SchemaExtensions
+	eUnAuthenticatedElement_READ                                 smithy.SchemaExtensions
+	eUnAuthenticatedElement_CREATE_AND_UPDATE                    smithy.SchemaExtensions
+	eUnAuthenticatedElement_DELETE                               smithy.SchemaExtensions
+	eUpdateBackendAuthForgotPasswordConfig                       smithy.SchemaExtensions
+	eUpdateBackendAuthForgotPasswordConfig_DeliveryMethod        smithy.SchemaExtensions
+	eUpdateBackendAuthForgotPasswordConfig_EmailSettings         smithy.SchemaExtensions
+	eUpdateBackendAuthForgotPasswordConfig_SmsSettings           smithy.SchemaExtensions
+	eUpdateBackendAuthIdentityPoolConfig                         smithy.SchemaExtensions
+	eUpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin    smithy.SchemaExtensions
+	eUpdateBackendAuthMFAConfig                                  smithy.SchemaExtensions
+	eUpdateBackendAuthMFAConfig_MFAMode                          smithy.SchemaExtensions
+	eUpdateBackendAuthMFAConfig_Settings                         smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig                                smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_DomainPrefix                   smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_OAuthGrantType                 smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_OAuthScopes                    smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_RedirectSignInURIs             smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_RedirectSignOutURIs            smithy.SchemaExtensions
+	eUpdateBackendAuthOAuthConfig_SocialProviderSettings         smithy.SchemaExtensions
+	eUpdateBackendAuthPasswordPolicyConfig                       smithy.SchemaExtensions
+	eUpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints smithy.SchemaExtensions
+	eUpdateBackendAuthPasswordPolicyConfig_MinimumLength         smithy.SchemaExtensions
+	eUpdateBackendAuthResourceConfig                             smithy.SchemaExtensions
+	eUpdateBackendAuthResourceConfig_AuthResources               smithy.SchemaExtensions
+	eUpdateBackendAuthResourceConfig_IdentityPoolConfigs         smithy.SchemaExtensions
+	eUpdateBackendAuthResourceConfig_Service                     smithy.SchemaExtensions
+	eUpdateBackendAuthResourceConfig_UserPoolConfigs             smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig                             smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig_ForgotPassword              smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig_Mfa                         smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig_OAuth                       smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig_PasswordPolicy              smithy.SchemaExtensions
+	eUpdateBackendAuthUserPoolConfig_VerificationMessage         smithy.SchemaExtensions
+	eUpdateBackendAuthVerificationMessageConfig                  smithy.SchemaExtensions
+	eUpdateBackendAuthVerificationMessageConfig_DeliveryMethod   smithy.SchemaExtensions
+	eUpdateBackendAuthVerificationMessageConfig_EmailSettings    smithy.SchemaExtensions
+	eUpdateBackendAuthVerificationMessageConfig_SmsSettings      smithy.SchemaExtensions
+	eUpdateBackendStorageResourceConfig                          smithy.SchemaExtensions
+	eUpdateBackendStorageResourceConfig_Permissions              smithy.SchemaExtensions
+	eUpdateBackendStorageResourceConfig_ServiceName              smithy.SchemaExtensions
+	eCloneBackendRequest                                         smithy.SchemaExtensions
+	eCloneBackendRequest_AppId                                   smithy.SchemaExtensions
+	eCloneBackendRequest_BackendEnvironmentName                  smithy.SchemaExtensions
+	eCloneBackendRequest_TargetEnvironmentName                   smithy.SchemaExtensions
+	eCloneBackendResponse                                        smithy.SchemaExtensions
+	eCloneBackendResponse_AppId                                  smithy.SchemaExtensions
+	eCloneBackendResponse_BackendEnvironmentName                 smithy.SchemaExtensions
+	eCloneBackendResponse_Error                                  smithy.SchemaExtensions
+	eCloneBackendResponse_JobId                                  smithy.SchemaExtensions
+	eCloneBackendResponse_Operation                              smithy.SchemaExtensions
+	eCloneBackendResponse_Status                                 smithy.SchemaExtensions
+	eCreateBackendAPIRequest                                     smithy.SchemaExtensions
+	eCreateBackendAPIRequest_AppId                               smithy.SchemaExtensions
+	eCreateBackendAPIRequest_BackendEnvironmentName              smithy.SchemaExtensions
+	eCreateBackendAPIRequest_ResourceConfig                      smithy.SchemaExtensions
+	eCreateBackendAPIRequest_ResourceName                        smithy.SchemaExtensions
+	eCreateBackendAPIResponse                                    smithy.SchemaExtensions
+	eCreateBackendAPIResponse_AppId                              smithy.SchemaExtensions
+	eCreateBackendAPIResponse_BackendEnvironmentName             smithy.SchemaExtensions
+	eCreateBackendAPIResponse_Error                              smithy.SchemaExtensions
+	eCreateBackendAPIResponse_JobId                              smithy.SchemaExtensions
+	eCreateBackendAPIResponse_Operation                          smithy.SchemaExtensions
+	eCreateBackendAPIResponse_Status                             smithy.SchemaExtensions
+	eCreateBackendAuthRequest                                    smithy.SchemaExtensions
+	eCreateBackendAuthRequest_AppId                              smithy.SchemaExtensions
+	eCreateBackendAuthRequest_BackendEnvironmentName             smithy.SchemaExtensions
+	eCreateBackendAuthRequest_ResourceConfig                     smithy.SchemaExtensions
+	eCreateBackendAuthRequest_ResourceName                       smithy.SchemaExtensions
+	eCreateBackendAuthResponse                                   smithy.SchemaExtensions
+	eCreateBackendAuthResponse_AppId                             smithy.SchemaExtensions
+	eCreateBackendAuthResponse_BackendEnvironmentName            smithy.SchemaExtensions
+	eCreateBackendAuthResponse_Error                             smithy.SchemaExtensions
+	eCreateBackendAuthResponse_JobId                             smithy.SchemaExtensions
+	eCreateBackendAuthResponse_Operation                         smithy.SchemaExtensions
+	eCreateBackendAuthResponse_Status                            smithy.SchemaExtensions
+	eCreateBackendConfigRequest                                  smithy.SchemaExtensions
+	eCreateBackendConfigRequest_AppId                            smithy.SchemaExtensions
+	eCreateBackendConfigRequest_BackendManagerAppId              smithy.SchemaExtensions
+	eCreateBackendConfigResponse                                 smithy.SchemaExtensions
+	eCreateBackendConfigResponse_AppId                           smithy.SchemaExtensions
+	eCreateBackendConfigResponse_BackendEnvironmentName          smithy.SchemaExtensions
+	eCreateBackendConfigResponse_JobId                           smithy.SchemaExtensions
+	eCreateBackendConfigResponse_Status                          smithy.SchemaExtensions
+	eCreateBackendRequest                                        smithy.SchemaExtensions
+	eCreateBackendRequest_AppId                                  smithy.SchemaExtensions
+	eCreateBackendRequest_AppName                                smithy.SchemaExtensions
+	eCreateBackendRequest_BackendEnvironmentName                 smithy.SchemaExtensions
+	eCreateBackendRequest_ResourceConfig                         smithy.SchemaExtensions
+	eCreateBackendRequest_ResourceName                           smithy.SchemaExtensions
+	eCreateBackendResponse                                       smithy.SchemaExtensions
+	eCreateBackendResponse_AppId                                 smithy.SchemaExtensions
+	eCreateBackendResponse_BackendEnvironmentName                smithy.SchemaExtensions
+	eCreateBackendResponse_Error                                 smithy.SchemaExtensions
+	eCreateBackendResponse_JobId                                 smithy.SchemaExtensions
+	eCreateBackendResponse_Operation                             smithy.SchemaExtensions
+	eCreateBackendResponse_Status                                smithy.SchemaExtensions
+	eCreateBackendStorageRequest                                 smithy.SchemaExtensions
+	eCreateBackendStorageRequest_AppId                           smithy.SchemaExtensions
+	eCreateBackendStorageRequest_BackendEnvironmentName          smithy.SchemaExtensions
+	eCreateBackendStorageRequest_ResourceConfig                  smithy.SchemaExtensions
+	eCreateBackendStorageRequest_ResourceName                    smithy.SchemaExtensions
+	eCreateBackendStorageResponse                                smithy.SchemaExtensions
+	eCreateBackendStorageResponse_AppId                          smithy.SchemaExtensions
+	eCreateBackendStorageResponse_BackendEnvironmentName         smithy.SchemaExtensions
+	eCreateBackendStorageResponse_JobId                          smithy.SchemaExtensions
+	eCreateBackendStorageResponse_Status                         smithy.SchemaExtensions
+	eCreateTokenRequest                                          smithy.SchemaExtensions
+	eCreateTokenRequest_AppId                                    smithy.SchemaExtensions
+	eCreateTokenResponse                                         smithy.SchemaExtensions
+	eCreateTokenResponse_AppId                                   smithy.SchemaExtensions
+	eCreateTokenResponse_ChallengeCode                           smithy.SchemaExtensions
+	eCreateTokenResponse_SessionId                               smithy.SchemaExtensions
+	eCreateTokenResponse_Ttl                                     smithy.SchemaExtensions
+	eDeleteBackendAPIRequest                                     smithy.SchemaExtensions
+	eDeleteBackendAPIRequest_AppId                               smithy.SchemaExtensions
+	eDeleteBackendAPIRequest_BackendEnvironmentName              smithy.SchemaExtensions
+	eDeleteBackendAPIRequest_ResourceConfig                      smithy.SchemaExtensions
+	eDeleteBackendAPIRequest_ResourceName                        smithy.SchemaExtensions
+	eDeleteBackendAPIResponse                                    smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_AppId                              smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_BackendEnvironmentName             smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_Error                              smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_JobId                              smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_Operation                          smithy.SchemaExtensions
+	eDeleteBackendAPIResponse_Status                             smithy.SchemaExtensions
+	eDeleteBackendAuthRequest                                    smithy.SchemaExtensions
+	eDeleteBackendAuthRequest_AppId                              smithy.SchemaExtensions
+	eDeleteBackendAuthRequest_BackendEnvironmentName             smithy.SchemaExtensions
+	eDeleteBackendAuthRequest_ResourceName                       smithy.SchemaExtensions
+	eDeleteBackendAuthResponse                                   smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_AppId                             smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_BackendEnvironmentName            smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_Error                             smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_JobId                             smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_Operation                         smithy.SchemaExtensions
+	eDeleteBackendAuthResponse_Status                            smithy.SchemaExtensions
+	eDeleteBackendRequest                                        smithy.SchemaExtensions
+	eDeleteBackendRequest_AppId                                  smithy.SchemaExtensions
+	eDeleteBackendRequest_BackendEnvironmentName                 smithy.SchemaExtensions
+	eDeleteBackendResponse                                       smithy.SchemaExtensions
+	eDeleteBackendResponse_AppId                                 smithy.SchemaExtensions
+	eDeleteBackendResponse_BackendEnvironmentName                smithy.SchemaExtensions
+	eDeleteBackendResponse_Error                                 smithy.SchemaExtensions
+	eDeleteBackendResponse_JobId                                 smithy.SchemaExtensions
+	eDeleteBackendResponse_Operation                             smithy.SchemaExtensions
+	eDeleteBackendResponse_Status                                smithy.SchemaExtensions
+	eDeleteBackendStorageRequest                                 smithy.SchemaExtensions
+	eDeleteBackendStorageRequest_AppId                           smithy.SchemaExtensions
+	eDeleteBackendStorageRequest_BackendEnvironmentName          smithy.SchemaExtensions
+	eDeleteBackendStorageRequest_ResourceName                    smithy.SchemaExtensions
+	eDeleteBackendStorageRequest_ServiceName                     smithy.SchemaExtensions
+	eDeleteBackendStorageResponse                                smithy.SchemaExtensions
+	eDeleteBackendStorageResponse_AppId                          smithy.SchemaExtensions
+	eDeleteBackendStorageResponse_BackendEnvironmentName         smithy.SchemaExtensions
+	eDeleteBackendStorageResponse_JobId                          smithy.SchemaExtensions
+	eDeleteBackendStorageResponse_Status                         smithy.SchemaExtensions
+	eDeleteTokenRequest                                          smithy.SchemaExtensions
+	eDeleteTokenRequest_AppId                                    smithy.SchemaExtensions
+	eDeleteTokenRequest_SessionId                                smithy.SchemaExtensions
+	eDeleteTokenResponse                                         smithy.SchemaExtensions
+	eDeleteTokenResponse_IsSuccess                               smithy.SchemaExtensions
+	eGenerateBackendAPIModelsRequest                             smithy.SchemaExtensions
+	eGenerateBackendAPIModelsRequest_AppId                       smithy.SchemaExtensions
+	eGenerateBackendAPIModelsRequest_BackendEnvironmentName      smithy.SchemaExtensions
+	eGenerateBackendAPIModelsRequest_ResourceName                smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse                            smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_AppId                      smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_BackendEnvironmentName     smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_Error                      smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_JobId                      smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_Operation                  smithy.SchemaExtensions
+	eGenerateBackendAPIModelsResponse_Status                     smithy.SchemaExtensions
+	eGetBackendAPIRequest                                        smithy.SchemaExtensions
+	eGetBackendAPIRequest_AppId                                  smithy.SchemaExtensions
+	eGetBackendAPIRequest_BackendEnvironmentName                 smithy.SchemaExtensions
+	eGetBackendAPIRequest_ResourceConfig                         smithy.SchemaExtensions
+	eGetBackendAPIRequest_ResourceName                           smithy.SchemaExtensions
+	eGetBackendAPIModelsRequest                                  smithy.SchemaExtensions
+	eGetBackendAPIModelsRequest_AppId                            smithy.SchemaExtensions
+	eGetBackendAPIModelsRequest_BackendEnvironmentName           smithy.SchemaExtensions
+	eGetBackendAPIModelsRequest_ResourceName                     smithy.SchemaExtensions
+	eGetBackendAPIModelsResponse                                 smithy.SchemaExtensions
+	eGetBackendAPIModelsResponse_Models                          smithy.SchemaExtensions
+	eGetBackendAPIModelsResponse_Status                          smithy.SchemaExtensions
+	eGetBackendAPIModelsResponse_ModelIntrospectionSchema        smithy.SchemaExtensions
+	eGetBackendAPIResponse                                       smithy.SchemaExtensions
+	eGetBackendAPIResponse_AppId                                 smithy.SchemaExtensions
+	eGetBackendAPIResponse_BackendEnvironmentName                smithy.SchemaExtensions
+	eGetBackendAPIResponse_Error                                 smithy.SchemaExtensions
+	eGetBackendAPIResponse_ResourceConfig                        smithy.SchemaExtensions
+	eGetBackendAPIResponse_ResourceName                          smithy.SchemaExtensions
+	eGetBackendAuthRequest                                       smithy.SchemaExtensions
+	eGetBackendAuthRequest_AppId                                 smithy.SchemaExtensions
+	eGetBackendAuthRequest_BackendEnvironmentName                smithy.SchemaExtensions
+	eGetBackendAuthRequest_ResourceName                          smithy.SchemaExtensions
+	eGetBackendAuthResponse                                      smithy.SchemaExtensions
+	eGetBackendAuthResponse_AppId                                smithy.SchemaExtensions
+	eGetBackendAuthResponse_BackendEnvironmentName               smithy.SchemaExtensions
+	eGetBackendAuthResponse_Error                                smithy.SchemaExtensions
+	eGetBackendAuthResponse_ResourceConfig                       smithy.SchemaExtensions
+	eGetBackendAuthResponse_ResourceName                         smithy.SchemaExtensions
+	eGetBackendRequest                                           smithy.SchemaExtensions
+	eGetBackendRequest_AppId                                     smithy.SchemaExtensions
+	eGetBackendRequest_BackendEnvironmentName                    smithy.SchemaExtensions
+	eGetBackendJobRequest                                        smithy.SchemaExtensions
+	eGetBackendJobRequest_AppId                                  smithy.SchemaExtensions
+	eGetBackendJobRequest_BackendEnvironmentName                 smithy.SchemaExtensions
+	eGetBackendJobRequest_JobId                                  smithy.SchemaExtensions
+	eGetBackendJobResponse                                       smithy.SchemaExtensions
+	eGetBackendJobResponse_AppId                                 smithy.SchemaExtensions
+	eGetBackendJobResponse_BackendEnvironmentName                smithy.SchemaExtensions
+	eGetBackendJobResponse_CreateTime                            smithy.SchemaExtensions
+	eGetBackendJobResponse_Error                                 smithy.SchemaExtensions
+	eGetBackendJobResponse_JobId                                 smithy.SchemaExtensions
+	eGetBackendJobResponse_Operation                             smithy.SchemaExtensions
+	eGetBackendJobResponse_Status                                smithy.SchemaExtensions
+	eGetBackendJobResponse_UpdateTime                            smithy.SchemaExtensions
+	eGetBackendResponse                                          smithy.SchemaExtensions
+	eGetBackendResponse_AmplifyFeatureFlags                      smithy.SchemaExtensions
+	eGetBackendResponse_AmplifyMetaConfig                        smithy.SchemaExtensions
+	eGetBackendResponse_AppId                                    smithy.SchemaExtensions
+	eGetBackendResponse_AppName                                  smithy.SchemaExtensions
+	eGetBackendResponse_BackendEnvironmentList                   smithy.SchemaExtensions
+	eGetBackendResponse_BackendEnvironmentName                   smithy.SchemaExtensions
+	eGetBackendResponse_Error                                    smithy.SchemaExtensions
+	eGetBackendStorageRequest                                    smithy.SchemaExtensions
+	eGetBackendStorageRequest_AppId                              smithy.SchemaExtensions
+	eGetBackendStorageRequest_BackendEnvironmentName             smithy.SchemaExtensions
+	eGetBackendStorageRequest_ResourceName                       smithy.SchemaExtensions
+	eGetBackendStorageResponse                                   smithy.SchemaExtensions
+	eGetBackendStorageResponse_AppId                             smithy.SchemaExtensions
+	eGetBackendStorageResponse_BackendEnvironmentName            smithy.SchemaExtensions
+	eGetBackendStorageResponse_ResourceConfig                    smithy.SchemaExtensions
+	eGetBackendStorageResponse_ResourceName                      smithy.SchemaExtensions
+	eGetTokenRequest                                             smithy.SchemaExtensions
+	eGetTokenRequest_AppId                                       smithy.SchemaExtensions
+	eGetTokenRequest_SessionId                                   smithy.SchemaExtensions
+	eGetTokenResponse                                            smithy.SchemaExtensions
+	eGetTokenResponse_AppId                                      smithy.SchemaExtensions
+	eGetTokenResponse_ChallengeCode                              smithy.SchemaExtensions
+	eGetTokenResponse_SessionId                                  smithy.SchemaExtensions
+	eGetTokenResponse_Ttl                                        smithy.SchemaExtensions
+	eImportBackendAuthRequest                                    smithy.SchemaExtensions
+	eImportBackendAuthRequest_AppId                              smithy.SchemaExtensions
+	eImportBackendAuthRequest_BackendEnvironmentName             smithy.SchemaExtensions
+	eImportBackendAuthRequest_IdentityPoolId                     smithy.SchemaExtensions
+	eImportBackendAuthRequest_NativeClientId                     smithy.SchemaExtensions
+	eImportBackendAuthRequest_UserPoolId                         smithy.SchemaExtensions
+	eImportBackendAuthRequest_WebClientId                        smithy.SchemaExtensions
+	eImportBackendAuthResponse                                   smithy.SchemaExtensions
+	eImportBackendAuthResponse_AppId                             smithy.SchemaExtensions
+	eImportBackendAuthResponse_BackendEnvironmentName            smithy.SchemaExtensions
+	eImportBackendAuthResponse_Error                             smithy.SchemaExtensions
+	eImportBackendAuthResponse_JobId                             smithy.SchemaExtensions
+	eImportBackendAuthResponse_Operation                         smithy.SchemaExtensions
+	eImportBackendAuthResponse_Status                            smithy.SchemaExtensions
+	eImportBackendStorageRequest                                 smithy.SchemaExtensions
+	eImportBackendStorageRequest_AppId                           smithy.SchemaExtensions
+	eImportBackendStorageRequest_BackendEnvironmentName          smithy.SchemaExtensions
+	eImportBackendStorageRequest_BucketName                      smithy.SchemaExtensions
+	eImportBackendStorageRequest_ServiceName                     smithy.SchemaExtensions
+	eImportBackendStorageResponse                                smithy.SchemaExtensions
+	eImportBackendStorageResponse_AppId                          smithy.SchemaExtensions
+	eImportBackendStorageResponse_BackendEnvironmentName         smithy.SchemaExtensions
+	eImportBackendStorageResponse_JobId                          smithy.SchemaExtensions
+	eImportBackendStorageResponse_Status                         smithy.SchemaExtensions
+	eListBackendJobsRequest                                      smithy.SchemaExtensions
+	eListBackendJobsRequest_AppId                                smithy.SchemaExtensions
+	eListBackendJobsRequest_BackendEnvironmentName               smithy.SchemaExtensions
+	eListBackendJobsRequest_JobId                                smithy.SchemaExtensions
+	eListBackendJobsRequest_MaxResults                           smithy.SchemaExtensions
+	eListBackendJobsRequest_NextToken                            smithy.SchemaExtensions
+	eListBackendJobsRequest_Operation                            smithy.SchemaExtensions
+	eListBackendJobsRequest_Status                               smithy.SchemaExtensions
+	eListBackendJobsResponse                                     smithy.SchemaExtensions
+	eListBackendJobsResponse_Jobs                                smithy.SchemaExtensions
+	eListBackendJobsResponse_NextToken                           smithy.SchemaExtensions
+	eListS3BucketsRequest                                        smithy.SchemaExtensions
+	eListS3BucketsRequest_NextToken                              smithy.SchemaExtensions
+	eListS3BucketsResponse                                       smithy.SchemaExtensions
+	eListS3BucketsResponse_Buckets                               smithy.SchemaExtensions
+	eListS3BucketsResponse_NextToken                             smithy.SchemaExtensions
+	eRemoveAllBackendsRequest                                    smithy.SchemaExtensions
+	eRemoveAllBackendsRequest_AppId                              smithy.SchemaExtensions
+	eRemoveAllBackendsRequest_CleanAmplifyApp                    smithy.SchemaExtensions
+	eRemoveAllBackendsResponse                                   smithy.SchemaExtensions
+	eRemoveAllBackendsResponse_AppId                             smithy.SchemaExtensions
+	eRemoveAllBackendsResponse_Error                             smithy.SchemaExtensions
+	eRemoveAllBackendsResponse_JobId                             smithy.SchemaExtensions
+	eRemoveAllBackendsResponse_Operation                         smithy.SchemaExtensions
+	eRemoveAllBackendsResponse_Status                            smithy.SchemaExtensions
+	eRemoveBackendConfigRequest                                  smithy.SchemaExtensions
+	eRemoveBackendConfigRequest_AppId                            smithy.SchemaExtensions
+	eRemoveBackendConfigResponse                                 smithy.SchemaExtensions
+	eRemoveBackendConfigResponse_Error                           smithy.SchemaExtensions
+	eUpdateBackendAPIRequest                                     smithy.SchemaExtensions
+	eUpdateBackendAPIRequest_AppId                               smithy.SchemaExtensions
+	eUpdateBackendAPIRequest_BackendEnvironmentName              smithy.SchemaExtensions
+	eUpdateBackendAPIRequest_ResourceConfig                      smithy.SchemaExtensions
+	eUpdateBackendAPIRequest_ResourceName                        smithy.SchemaExtensions
+	eUpdateBackendAPIResponse                                    smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_AppId                              smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_BackendEnvironmentName             smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_Error                              smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_JobId                              smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_Operation                          smithy.SchemaExtensions
+	eUpdateBackendAPIResponse_Status                             smithy.SchemaExtensions
+	eUpdateBackendAuthRequest                                    smithy.SchemaExtensions
+	eUpdateBackendAuthRequest_AppId                              smithy.SchemaExtensions
+	eUpdateBackendAuthRequest_BackendEnvironmentName             smithy.SchemaExtensions
+	eUpdateBackendAuthRequest_ResourceConfig                     smithy.SchemaExtensions
+	eUpdateBackendAuthRequest_ResourceName                       smithy.SchemaExtensions
+	eUpdateBackendAuthResponse                                   smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_AppId                             smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_BackendEnvironmentName            smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_Error                             smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_JobId                             smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_Operation                         smithy.SchemaExtensions
+	eUpdateBackendAuthResponse_Status                            smithy.SchemaExtensions
+	eUpdateBackendConfigRequest                                  smithy.SchemaExtensions
+	eUpdateBackendConfigRequest_AppId                            smithy.SchemaExtensions
+	eUpdateBackendConfigRequest_LoginAuthConfig                  smithy.SchemaExtensions
+	eUpdateBackendConfigResponse                                 smithy.SchemaExtensions
+	eUpdateBackendConfigResponse_AppId                           smithy.SchemaExtensions
+	eUpdateBackendConfigResponse_BackendManagerAppId             smithy.SchemaExtensions
+	eUpdateBackendConfigResponse_Error                           smithy.SchemaExtensions
+	eUpdateBackendConfigResponse_LoginAuthConfig                 smithy.SchemaExtensions
+	eUpdateBackendJobRequest                                     smithy.SchemaExtensions
+	eUpdateBackendJobRequest_AppId                               smithy.SchemaExtensions
+	eUpdateBackendJobRequest_BackendEnvironmentName              smithy.SchemaExtensions
+	eUpdateBackendJobRequest_JobId                               smithy.SchemaExtensions
+	eUpdateBackendJobRequest_Operation                           smithy.SchemaExtensions
+	eUpdateBackendJobRequest_Status                              smithy.SchemaExtensions
+	eUpdateBackendJobResponse                                    smithy.SchemaExtensions
+	eUpdateBackendJobResponse_AppId                              smithy.SchemaExtensions
+	eUpdateBackendJobResponse_BackendEnvironmentName             smithy.SchemaExtensions
+	eUpdateBackendJobResponse_CreateTime                         smithy.SchemaExtensions
+	eUpdateBackendJobResponse_Error                              smithy.SchemaExtensions
+	eUpdateBackendJobResponse_JobId                              smithy.SchemaExtensions
+	eUpdateBackendJobResponse_Operation                          smithy.SchemaExtensions
+	eUpdateBackendJobResponse_Status                             smithy.SchemaExtensions
+	eUpdateBackendJobResponse_UpdateTime                         smithy.SchemaExtensions
+	eUpdateBackendStorageRequest                                 smithy.SchemaExtensions
+	eUpdateBackendStorageRequest_AppId                           smithy.SchemaExtensions
+	eUpdateBackendStorageRequest_BackendEnvironmentName          smithy.SchemaExtensions
+	eUpdateBackendStorageRequest_ResourceConfig                  smithy.SchemaExtensions
+	eUpdateBackendStorageRequest_ResourceName                    smithy.SchemaExtensions
+	eUpdateBackendStorageResponse                                smithy.SchemaExtensions
+	eUpdateBackendStorageResponse_AppId                          smithy.SchemaExtensions
+	eUpdateBackendStorageResponse_BackendEnvironmentName         smithy.SchemaExtensions
+	eUpdateBackendStorageResponse_JobId                          smithy.SchemaExtensions
+	eUpdateBackendStorageResponse_Status                         smithy.SchemaExtensions
+)
+
+var (
+	iCloneBackend                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CloneBackend"}
+	iCreateBackend                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackend"}
+	iCreateBackendAPI                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAPI"}
+	iCreateBackendAuth                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuth"}
+	iCreateBackendConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendConfig"}
+	iCreateBackendStorage                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendStorage"}
+	iCreateToken                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateToken"}
+	iDeleteBackend                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackend"}
+	iDeleteBackendAPI                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAPI"}
+	iDeleteBackendAuth                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAuth"}
+	iDeleteBackendStorage                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendStorage"}
+	iDeleteToken                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteToken"}
+	iGenerateBackendAPIModels                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GenerateBackendAPIModels"}
+	iGetBackend                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackend"}
+	iGetBackendAPI                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPI"}
+	iGetBackendAPIModels                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPIModels"}
+	iGetBackendAuth                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAuth"}
+	iGetBackendJob                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendJob"}
+	iGetBackendStorage                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendStorage"}
+	iGetToken                                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetToken"}
+	iImportBackendAuth                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendAuth"}
+	iImportBackendStorage                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendStorage"}
+	iListBackendJobs                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListBackendJobs"}
+	iListS3Buckets                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListS3Buckets"}
+	iRemoveAllBackends                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveAllBackends"}
+	iRemoveBackendConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveBackendConfig"}
+	iUpdateBackendAPI                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAPI"}
+	iUpdateBackendAuth                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuth"}
+	iUpdateBackendConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendConfig"}
+	iUpdateBackendJob                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendJob"}
+	iUpdateBackendStorage                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendStorage"}
+	i_AmplifyBackend                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "AmplifyBackend"}
+	i___boolean                                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "__boolean"}
+	i___double                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "__double"}
+	i___integerMin1Max25                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "__integerMin1Max25"}
+	i___string                                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "__string"}
+	iAdditionalConstraintsElement               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "AdditionalConstraintsElement"}
+	iAuthenticatedElement                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "AuthenticatedElement"}
+	iAuthResources                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "AuthResources"}
+	iBackendAPIAppSyncAuthSettings              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAPIAppSyncAuthSettings"}
+	iBackendAPIAuthType                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAPIAuthType"}
+	iBackendAPIConflictResolution               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAPIConflictResolution"}
+	iBackendAPIResourceConfig                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAPIResourceConfig"}
+	iBackendAuthAppleProviderConfig             = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAuthAppleProviderConfig"}
+	iBackendAuthSocialProviderConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendAuthSocialProviderConfig"}
+	iBackendJobRespObj                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendJobRespObj"}
+	iBackendStoragePermissions                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BackendStoragePermissions"}
+	iBadRequestException                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "BadRequestException"}
+	iCreateBackendAuthForgotPasswordConfig      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthForgotPasswordConfig"}
+	iCreateBackendAuthIdentityPoolConfig        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthIdentityPoolConfig"}
+	iCreateBackendAuthMFAConfig                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthMFAConfig"}
+	iCreateBackendAuthOAuthConfig               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthOAuthConfig"}
+	iCreateBackendAuthPasswordPolicyConfig      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthPasswordPolicyConfig"}
+	iCreateBackendAuthResourceConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthResourceConfig"}
+	iCreateBackendAuthUserPoolConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthUserPoolConfig"}
+	iCreateBackendAuthVerificationMessageConfig = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthVerificationMessageConfig"}
+	iCreateBackendStorageResourceConfig         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendStorageResourceConfig"}
+	iDeliveryMethod                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeliveryMethod"}
+	iEmailSettings                              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "EmailSettings"}
+	iGatewayTimeoutException                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GatewayTimeoutException"}
+	iGetBackendStorageResourceConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendStorageResourceConfig"}
+	i_ListOf__string                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOf__string"}
+	i_ListOfAdditionalConstraintsElement        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfAdditionalConstraintsElement"}
+	i_ListOfAuthenticatedElement                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfAuthenticatedElement"}
+	i_ListOfBackendAPIAuthType                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfBackendAPIAuthType"}
+	i_ListOfBackendJobRespObj                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfBackendJobRespObj"}
+	i_ListOfMfaTypesElement                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfMfaTypesElement"}
+	i_ListOfOAuthScopesElement                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfOAuthScopesElement"}
+	i_ListOfRequiredSignUpAttributesElement     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfRequiredSignUpAttributesElement"}
+	i_ListOfS3BucketInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfS3BucketInfo"}
+	i_ListOfUnAuthenticatedElement              = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListOfUnAuthenticatedElement"}
+	iLoginAuthConfigReqObj                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "LoginAuthConfigReqObj"}
+	iMFAMode                                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "MFAMode"}
+	iMfaTypesElement                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "MfaTypesElement"}
+	iMode                                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "Mode"}
+	iNotFoundException                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "NotFoundException"}
+	iOAuthGrantType                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "OAuthGrantType"}
+	iOAuthScopesElement                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "OAuthScopesElement"}
+	iRequiredSignUpAttributesElement            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RequiredSignUpAttributesElement"}
+	iResolutionStrategy                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ResolutionStrategy"}
+	iResourceConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ResourceConfig"}
+	iS3BucketInfo                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "S3BucketInfo"}
+	iService                                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "Service"}
+	iServiceName                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ServiceName"}
+	iSettings                                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "Settings"}
+	iSignInMethod                               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "SignInMethod"}
+	iSmsSettings                                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "SmsSettings"}
+	iSocialProviderSettings                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "SocialProviderSettings"}
+	iStatus                                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "Status"}
+	iTooManyRequestsException                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "TooManyRequestsException"}
+	iUnAuthenticatedElement                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UnAuthenticatedElement"}
+	iUpdateBackendAuthForgotPasswordConfig      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthForgotPasswordConfig"}
+	iUpdateBackendAuthIdentityPoolConfig        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthIdentityPoolConfig"}
+	iUpdateBackendAuthMFAConfig                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthMFAConfig"}
+	iUpdateBackendAuthOAuthConfig               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthOAuthConfig"}
+	iUpdateBackendAuthPasswordPolicyConfig      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthPasswordPolicyConfig"}
+	iUpdateBackendAuthResourceConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthResourceConfig"}
+	iUpdateBackendAuthUserPoolConfig            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthUserPoolConfig"}
+	iUpdateBackendAuthVerificationMessageConfig = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthVerificationMessageConfig"}
+	iUpdateBackendStorageResourceConfig         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendStorageResourceConfig"}
+	iCloneBackendRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CloneBackendRequest"}
+	iCloneBackendResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CloneBackendResponse"}
+	iCreateBackendAPIRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAPIRequest"}
+	iCreateBackendAPIResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAPIResponse"}
+	iCreateBackendAuthRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthRequest"}
+	iCreateBackendAuthResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendAuthResponse"}
+	iCreateBackendConfigRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendConfigRequest"}
+	iCreateBackendConfigResponse                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendConfigResponse"}
+	iCreateBackendRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendRequest"}
+	iCreateBackendResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendResponse"}
+	iCreateBackendStorageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendStorageRequest"}
+	iCreateBackendStorageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateBackendStorageResponse"}
+	iCreateTokenRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateTokenRequest"}
+	iCreateTokenResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "CreateTokenResponse"}
+	iDeleteBackendAPIRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAPIRequest"}
+	iDeleteBackendAPIResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAPIResponse"}
+	iDeleteBackendAuthRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAuthRequest"}
+	iDeleteBackendAuthResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendAuthResponse"}
+	iDeleteBackendRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendRequest"}
+	iDeleteBackendResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendResponse"}
+	iDeleteBackendStorageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendStorageRequest"}
+	iDeleteBackendStorageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteBackendStorageResponse"}
+	iDeleteTokenRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteTokenRequest"}
+	iDeleteTokenResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "DeleteTokenResponse"}
+	iGenerateBackendAPIModelsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GenerateBackendAPIModelsRequest"}
+	iGenerateBackendAPIModelsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GenerateBackendAPIModelsResponse"}
+	iGetBackendAPIRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPIRequest"}
+	iGetBackendAPIModelsRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPIModelsRequest"}
+	iGetBackendAPIModelsResponse                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPIModelsResponse"}
+	iGetBackendAPIResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAPIResponse"}
+	iGetBackendAuthRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAuthRequest"}
+	iGetBackendAuthResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendAuthResponse"}
+	iGetBackendRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendRequest"}
+	iGetBackendJobRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendJobRequest"}
+	iGetBackendJobResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendJobResponse"}
+	iGetBackendResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendResponse"}
+	iGetBackendStorageRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendStorageRequest"}
+	iGetBackendStorageResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetBackendStorageResponse"}
+	iGetTokenRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetTokenRequest"}
+	iGetTokenResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "GetTokenResponse"}
+	iImportBackendAuthRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendAuthRequest"}
+	iImportBackendAuthResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendAuthResponse"}
+	iImportBackendStorageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendStorageRequest"}
+	iImportBackendStorageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ImportBackendStorageResponse"}
+	iListBackendJobsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListBackendJobsRequest"}
+	iListBackendJobsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListBackendJobsResponse"}
+	iListS3BucketsRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListS3BucketsRequest"}
+	iListS3BucketsResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "ListS3BucketsResponse"}
+	iRemoveAllBackendsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveAllBackendsRequest"}
+	iRemoveAllBackendsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveAllBackendsResponse"}
+	iRemoveBackendConfigRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveBackendConfigRequest"}
+	iRemoveBackendConfigResponse                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "RemoveBackendConfigResponse"}
+	iUpdateBackendAPIRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAPIRequest"}
+	iUpdateBackendAPIResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAPIResponse"}
+	iUpdateBackendAuthRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthRequest"}
+	iUpdateBackendAuthResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendAuthResponse"}
+	iUpdateBackendConfigRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendConfigRequest"}
+	iUpdateBackendConfigResponse                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendConfigResponse"}
+	iUpdateBackendJobRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendJobRequest"}
+	iUpdateBackendJobResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendJobResponse"}
+	iUpdateBackendStorageRequest                = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendStorageRequest"}
+	iUpdateBackendStorageResponse               = smithy.ShapeName{Namespace: "com.amazonaws.amplifybackend", Name: "UpdateBackendStorageResponse"}
+	pUnit                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/environments/{BackendEnvironmentName}/clone",
-	Code: 200})
-
-var CreateBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackend",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend",
-	Code: 200})
-
-var CreateBackendAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAPI",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api",
-	Code: 200})
-
-var CreateBackendAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/auth",
-	Code: 200})
-
-var CreateBackendConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/config",
-	Code: 200})
-
-var CreateBackendStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/storage",
-	Code: 200})
-
-var CreateToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/challenge",
-	Code: 200})
-
-var DeleteBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackend",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/environments/{BackendEnvironmentName}/remove",
-	Code: 200})
-
-var DeleteBackendAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAPI",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api/{BackendEnvironmentName}/remove",
-	Code: 200})
-
-var DeleteBackendAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAuth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/auth/{BackendEnvironmentName}/remove",
-	Code: 200})
-
-var DeleteBackendStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/storage/{BackendEnvironmentName}/remove",
-	Code: 200})
-
-var DeleteToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/challenge/{SessionId}/remove",
-	Code: 200})
-
-var GenerateBackendAPIModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GenerateBackendAPIModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api/{BackendEnvironmentName}/generateModels",
-	Code: 200})
-
-var GetBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackend",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/details",
-	Code: 200})
-
-var GetBackendAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPI",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api/{BackendEnvironmentName}/details",
-	Code: 200})
-
-var GetBackendAPIModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPIModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api/{BackendEnvironmentName}/getModels",
-	Code: 200})
-
-var GetBackendAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAuth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/auth/{BackendEnvironmentName}/details",
-	Code: 200})
-
-var GetBackendJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/backend/{AppId}/job/{BackendEnvironmentName}/{JobId}",
-	Code: 200})
-
-var GetBackendStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/storage/{BackendEnvironmentName}/details",
-	Code: 200})
-
-var GetToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/backend/{AppId}/challenge/{SessionId}",
-	Code: 200})
-
-var ImportBackendAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendAuth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/auth/{BackendEnvironmentName}/import",
-	Code: 200})
-
-var ImportBackendStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/storage/{BackendEnvironmentName}/import",
-	Code: 200})
-
-var ListBackendJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListBackendJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/job/{BackendEnvironmentName}",
-	Code: 200})
-
-var ListS3Buckets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListS3Buckets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/s3Buckets",
-	Code: 200})
-
-var RemoveAllBackends = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveAllBackends",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/remove",
-	Code: 200})
-
-var RemoveBackendConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveBackendConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/config/remove",
-	Code: 200})
-
-var UpdateBackendAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAPI",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/api/{BackendEnvironmentName}",
-	Code: 200})
-
-var UpdateBackendAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/auth/{BackendEnvironmentName}",
-	Code: 200})
-
-var UpdateBackendConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/config/update",
-	Code: 200})
-
-var UpdateBackendJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/job/{BackendEnvironmentName}/{JobId}",
-	Code: 200})
-
-var UpdateBackendStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/backend/{AppId}/storage/{BackendEnvironmentName}",
-	Code: 200})
-
-var _AmplifyBackend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "AmplifyBackend",
-}, smithy.ShapeTypeService, 0)
-
-var AmplifyBackend = smithy.NewServiceSchema(_AmplifyBackend, "2020-08-11")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "__double",
-}, smithy.ShapeTypeDouble, 0)
-
-var ___integerMin1Max25 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "__integerMin1Max25",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var AdditionalConstraintsElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "AdditionalConstraintsElement",
-}, smithy.ShapeTypeEnum, 4)
-var AdditionalConstraintsElement_REQUIRE_DIGIT *smithy.Schema
-
-var AdditionalConstraintsElement_REQUIRE_LOWERCASE *smithy.Schema
-
-var AdditionalConstraintsElement_REQUIRE_SYMBOL *smithy.Schema
-
-var AdditionalConstraintsElement_REQUIRE_UPPERCASE *smithy.Schema
-
-var AuthenticatedElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "AuthenticatedElement",
-}, smithy.ShapeTypeEnum, 3)
-var AuthenticatedElement_READ *smithy.Schema
-
-var AuthenticatedElement_CREATE_AND_UPDATE *smithy.Schema
-
-var AuthenticatedElement_DELETE *smithy.Schema
-
-var AuthResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "AuthResources",
-}, smithy.ShapeTypeEnum, 2)
-var AuthResources_USER_POOL_ONLY *smithy.Schema
-
-var AuthResources_IDENTITY_POOL_AND_USER_POOL *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAPIAppSyncAuthSettings",
-}, smithy.ShapeTypeStructure, 8)
-var BackendAPIAppSyncAuthSettings_CognitoUserPoolId *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_Description *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_ExpirationTime *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_OpenIDAuthTTL *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_OpenIDClientId *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_OpenIDIatTTL *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_OpenIDIssueURL *smithy.Schema
-
-var BackendAPIAppSyncAuthSettings_OpenIDProviderName *smithy.Schema
-
-var BackendAPIAuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAPIAuthType",
-}, smithy.ShapeTypeStructure, 2)
-var BackendAPIAuthType_Mode *smithy.Schema
-
-var BackendAPIAuthType_Settings *smithy.Schema
-
-var BackendAPIConflictResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAPIConflictResolution",
-}, smithy.ShapeTypeStructure, 1)
-var BackendAPIConflictResolution_ResolutionStrategy *smithy.Schema
-
-var BackendAPIResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAPIResourceConfig",
-}, smithy.ShapeTypeStructure, 6)
-var BackendAPIResourceConfig_AdditionalAuthTypes *smithy.Schema
-
-var BackendAPIResourceConfig_ApiName *smithy.Schema
-
-var BackendAPIResourceConfig_ConflictResolution *smithy.Schema
-
-var BackendAPIResourceConfig_DefaultAuthType *smithy.Schema
-
-var BackendAPIResourceConfig_Service *smithy.Schema
-
-var BackendAPIResourceConfig_TransformSchema *smithy.Schema
-
-var BackendAuthAppleProviderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAuthAppleProviderConfig",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var BackendAuthAppleProviderConfig_ClientId *smithy.Schema
-
-var BackendAuthAppleProviderConfig_KeyId *smithy.Schema
-
-var BackendAuthAppleProviderConfig_PrivateKey *smithy.Schema
-
-var BackendAuthAppleProviderConfig_TeamId *smithy.Schema
-
-var BackendAuthSocialProviderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendAuthSocialProviderConfig",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var BackendAuthSocialProviderConfig_ClientId *smithy.Schema
-
-var BackendAuthSocialProviderConfig_ClientSecret *smithy.Schema
-
-var BackendJobRespObj = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendJobRespObj",
-}, smithy.ShapeTypeStructure, 8)
-var BackendJobRespObj_AppId *smithy.Schema
-
-var BackendJobRespObj_BackendEnvironmentName *smithy.Schema
-
-var BackendJobRespObj_CreateTime *smithy.Schema
-
-var BackendJobRespObj_Error *smithy.Schema
-
-var BackendJobRespObj_JobId *smithy.Schema
-
-var BackendJobRespObj_Operation *smithy.Schema
-
-var BackendJobRespObj_Status *smithy.Schema
-
-var BackendJobRespObj_UpdateTime *smithy.Schema
-
-var BackendStoragePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BackendStoragePermissions",
-}, smithy.ShapeTypeStructure, 2)
-var BackendStoragePermissions_Authenticated *smithy.Schema
-
-var BackendStoragePermissions_UnAuthenticated *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var CreateBackendAuthForgotPasswordConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthForgotPasswordConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBackendAuthForgotPasswordConfig_DeliveryMethod *smithy.Schema
-
-var CreateBackendAuthForgotPasswordConfig_EmailSettings *smithy.Schema
-
-var CreateBackendAuthForgotPasswordConfig_SmsSettings *smithy.Schema
-
-var CreateBackendAuthIdentityPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthIdentityPoolConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBackendAuthIdentityPoolConfig_IdentityPoolName *smithy.Schema
-
-var CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin *smithy.Schema
-
-var CreateBackendAuthMFAConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthMFAConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBackendAuthMFAConfig_MFAMode *smithy.Schema
-
-var CreateBackendAuthMFAConfig_Settings *smithy.Schema
-
-var CreateBackendAuthOAuthConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthOAuthConfig",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBackendAuthOAuthConfig_DomainPrefix *smithy.Schema
-
-var CreateBackendAuthOAuthConfig_OAuthGrantType *smithy.Schema
-
-var CreateBackendAuthOAuthConfig_OAuthScopes *smithy.Schema
-
-var CreateBackendAuthOAuthConfig_RedirectSignInURIs *smithy.Schema
-
-var CreateBackendAuthOAuthConfig_RedirectSignOutURIs *smithy.Schema
-
-var CreateBackendAuthOAuthConfig_SocialProviderSettings *smithy.Schema
-
-var CreateBackendAuthPasswordPolicyConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthPasswordPolicyConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints *smithy.Schema
-
-var CreateBackendAuthPasswordPolicyConfig_MinimumLength *smithy.Schema
-
-var CreateBackendAuthResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthResourceConfig",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendAuthResourceConfig_AuthResources *smithy.Schema
-
-var CreateBackendAuthResourceConfig_IdentityPoolConfigs *smithy.Schema
-
-var CreateBackendAuthResourceConfig_Service *smithy.Schema
-
-var CreateBackendAuthResourceConfig_UserPoolConfigs *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthUserPoolConfig",
-}, smithy.ShapeTypeStructure, 8)
-var CreateBackendAuthUserPoolConfig_ForgotPassword *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_Mfa *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_OAuth *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_PasswordPolicy *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_SignInMethod *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_UserPoolName *smithy.Schema
-
-var CreateBackendAuthUserPoolConfig_VerificationMessage *smithy.Schema
-
-var CreateBackendAuthVerificationMessageConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthVerificationMessageConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBackendAuthVerificationMessageConfig_DeliveryMethod *smithy.Schema
-
-var CreateBackendAuthVerificationMessageConfig_EmailSettings *smithy.Schema
-
-var CreateBackendAuthVerificationMessageConfig_SmsSettings *smithy.Schema
-
-var CreateBackendStorageResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendStorageResourceConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBackendStorageResourceConfig_BucketName *smithy.Schema
-
-var CreateBackendStorageResourceConfig_Permissions *smithy.Schema
-
-var CreateBackendStorageResourceConfig_ServiceName *smithy.Schema
-
-var DeliveryMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeliveryMethod",
-}, smithy.ShapeTypeEnum, 2)
-var DeliveryMethod_EMAIL *smithy.Schema
-
-var DeliveryMethod_SMS *smithy.Schema
-
-var EmailSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "EmailSettings",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var EmailSettings_EmailMessage *smithy.Schema
-
-var EmailSettings_EmailSubject *smithy.Schema
-
-var GatewayTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GatewayTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 504})
-var GatewayTimeoutException_Message *smithy.Schema
-
-var GetBackendStorageResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendStorageResourceConfig",
-}, smithy.ShapeTypeStructure, 4)
-var GetBackendStorageResourceConfig_BucketName *smithy.Schema
-
-var GetBackendStorageResourceConfig_Imported *smithy.Schema
-
-var GetBackendStorageResourceConfig_Permissions *smithy.Schema
-
-var GetBackendStorageResourceConfig_ServiceName *smithy.Schema
-
-var _ListOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOf__string",
-}, smithy.ShapeTypeList, 1)
-var _ListOf__string_member *smithy.Schema
-
-var _ListOfAdditionalConstraintsElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfAdditionalConstraintsElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfAdditionalConstraintsElement_member *smithy.Schema
-
-var _ListOfAuthenticatedElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfAuthenticatedElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfAuthenticatedElement_member *smithy.Schema
-
-var _ListOfBackendAPIAuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfBackendAPIAuthType",
-}, smithy.ShapeTypeList, 1)
-var _ListOfBackendAPIAuthType_member *smithy.Schema
-
-var _ListOfBackendJobRespObj = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfBackendJobRespObj",
-}, smithy.ShapeTypeList, 1)
-var _ListOfBackendJobRespObj_member *smithy.Schema
-
-var _ListOfMfaTypesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfMfaTypesElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfMfaTypesElement_member *smithy.Schema
-
-var _ListOfOAuthScopesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfOAuthScopesElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfOAuthScopesElement_member *smithy.Schema
-
-var _ListOfRequiredSignUpAttributesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfRequiredSignUpAttributesElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfRequiredSignUpAttributesElement_member *smithy.Schema
-
-var _ListOfS3BucketInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfS3BucketInfo",
-}, smithy.ShapeTypeList, 1)
-var _ListOfS3BucketInfo_member *smithy.Schema
-
-var _ListOfUnAuthenticatedElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListOfUnAuthenticatedElement",
-}, smithy.ShapeTypeList, 1)
-var _ListOfUnAuthenticatedElement_member *smithy.Schema
-
-var LoginAuthConfigReqObj = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "LoginAuthConfigReqObj",
-}, smithy.ShapeTypeStructure, 4)
-var LoginAuthConfigReqObj_AwsCognitoIdentityPoolId *smithy.Schema
-
-var LoginAuthConfigReqObj_AwsCognitoRegion *smithy.Schema
-
-var LoginAuthConfigReqObj_AwsUserPoolsId *smithy.Schema
-
-var LoginAuthConfigReqObj_AwsUserPoolsWebClientId *smithy.Schema
-
-var MFAMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "MFAMode",
-}, smithy.ShapeTypeEnum, 3)
-var MFAMode_ON *smithy.Schema
-
-var MFAMode_OFF *smithy.Schema
-
-var MFAMode_OPTIONAL *smithy.Schema
-
-var MfaTypesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "MfaTypesElement",
-}, smithy.ShapeTypeEnum, 2)
-var MfaTypesElement_SMS *smithy.Schema
-
-var MfaTypesElement_TOTP *smithy.Schema
-
-var Mode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "Mode",
-}, smithy.ShapeTypeEnum, 4)
-var Mode_API_KEY *smithy.Schema
-
-var Mode_AWS_IAM *smithy.Schema
-
-var Mode_AMAZON_COGNITO_USER_POOLS *smithy.Schema
-
-var Mode_OPENID_CONNECT *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var NotFoundException_ResourceType *smithy.Schema
-
-var OAuthGrantType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "OAuthGrantType",
-}, smithy.ShapeTypeEnum, 2)
-var OAuthGrantType_CODE *smithy.Schema
-
-var OAuthGrantType_IMPLICIT *smithy.Schema
-
-var OAuthScopesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "OAuthScopesElement",
-}, smithy.ShapeTypeEnum, 5)
-var OAuthScopesElement_PHONE *smithy.Schema
-
-var OAuthScopesElement_EMAIL *smithy.Schema
-
-var OAuthScopesElement_OPENID *smithy.Schema
-
-var OAuthScopesElement_PROFILE *smithy.Schema
-
-var OAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN *smithy.Schema
-
-var RequiredSignUpAttributesElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RequiredSignUpAttributesElement",
-}, smithy.ShapeTypeEnum, 17)
-var RequiredSignUpAttributesElement_ADDRESS *smithy.Schema
-
-var RequiredSignUpAttributesElement_BIRTHDATE *smithy.Schema
-
-var RequiredSignUpAttributesElement_EMAIL *smithy.Schema
-
-var RequiredSignUpAttributesElement_FAMILY_NAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_GENDER *smithy.Schema
-
-var RequiredSignUpAttributesElement_GIVEN_NAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_LOCALE *smithy.Schema
-
-var RequiredSignUpAttributesElement_MIDDLE_NAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_NAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_NICKNAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_PHONE_NUMBER *smithy.Schema
-
-var RequiredSignUpAttributesElement_PICTURE *smithy.Schema
-
-var RequiredSignUpAttributesElement_PREFERRED_USERNAME *smithy.Schema
-
-var RequiredSignUpAttributesElement_PROFILE *smithy.Schema
-
-var RequiredSignUpAttributesElement_UPDATED_AT *smithy.Schema
-
-var RequiredSignUpAttributesElement_WEBSITE *smithy.Schema
-
-var RequiredSignUpAttributesElement_ZONE_INFO *smithy.Schema
-
-var ResolutionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ResolutionStrategy",
-}, smithy.ShapeTypeEnum, 4)
-var ResolutionStrategy_OPTIMISTIC_CONCURRENCY *smithy.Schema
-
-var ResolutionStrategy_LAMBDA *smithy.Schema
-
-var ResolutionStrategy_AUTOMERGE *smithy.Schema
-
-var ResolutionStrategy_NONE *smithy.Schema
-
-var ResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ResourceConfig",
-}, smithy.ShapeTypeStructure, 0)
-
-var S3BucketInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "S3BucketInfo",
-}, smithy.ShapeTypeStructure, 2)
-var S3BucketInfo_CreationDate *smithy.Schema
-
-var S3BucketInfo_Name *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "Service",
-}, smithy.ShapeTypeEnum, 1)
-var Service_COGNITO *smithy.Schema
-
-var ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceName_S3 *smithy.Schema
-
-var Settings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "Settings",
-}, smithy.ShapeTypeStructure, 2)
-var Settings_MfaTypes *smithy.Schema
-
-var Settings_SmsMessage *smithy.Schema
-
-var SignInMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "SignInMethod",
-}, smithy.ShapeTypeEnum, 4)
-var SignInMethod_EMAIL *smithy.Schema
-
-var SignInMethod_EMAIL_AND_PHONE_NUMBER *smithy.Schema
-
-var SignInMethod_PHONE_NUMBER *smithy.Schema
-
-var SignInMethod_USERNAME *smithy.Schema
-
-var SmsSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "SmsSettings",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var SmsSettings_SmsMessage *smithy.Schema
-
-var SocialProviderSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "SocialProviderSettings",
-}, smithy.ShapeTypeStructure, 4)
-var SocialProviderSettings_Facebook *smithy.Schema
-
-var SocialProviderSettings_Google *smithy.Schema
-
-var SocialProviderSettings_LoginWithAmazon *smithy.Schema
-
-var SocialProviderSettings_SignInWithApple *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 2)
-var Status_LATEST *smithy.Schema
-
-var Status_STALE *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_LimitType *smithy.Schema
-
-var TooManyRequestsException_Message *smithy.Schema
-
-var UnAuthenticatedElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UnAuthenticatedElement",
-}, smithy.ShapeTypeEnum, 3)
-var UnAuthenticatedElement_READ *smithy.Schema
-
-var UnAuthenticatedElement_CREATE_AND_UPDATE *smithy.Schema
-
-var UnAuthenticatedElement_DELETE *smithy.Schema
-
-var UpdateBackendAuthForgotPasswordConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthForgotPasswordConfig",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBackendAuthForgotPasswordConfig_DeliveryMethod *smithy.Schema
-
-var UpdateBackendAuthForgotPasswordConfig_EmailSettings *smithy.Schema
-
-var UpdateBackendAuthForgotPasswordConfig_SmsSettings *smithy.Schema
-
-var UpdateBackendAuthIdentityPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthIdentityPoolConfig",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin *smithy.Schema
-
-var UpdateBackendAuthMFAConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthMFAConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBackendAuthMFAConfig_MFAMode *smithy.Schema
-
-var UpdateBackendAuthMFAConfig_Settings *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthOAuthConfig",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateBackendAuthOAuthConfig_DomainPrefix *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig_OAuthGrantType *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig_OAuthScopes *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig_RedirectSignInURIs *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig_RedirectSignOutURIs *smithy.Schema
-
-var UpdateBackendAuthOAuthConfig_SocialProviderSettings *smithy.Schema
-
-var UpdateBackendAuthPasswordPolicyConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthPasswordPolicyConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints *smithy.Schema
-
-var UpdateBackendAuthPasswordPolicyConfig_MinimumLength *smithy.Schema
-
-var UpdateBackendAuthResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthResourceConfig",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendAuthResourceConfig_AuthResources *smithy.Schema
-
-var UpdateBackendAuthResourceConfig_IdentityPoolConfigs *smithy.Schema
-
-var UpdateBackendAuthResourceConfig_Service *smithy.Schema
-
-var UpdateBackendAuthResourceConfig_UserPoolConfigs *smithy.Schema
-
-var UpdateBackendAuthUserPoolConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthUserPoolConfig",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateBackendAuthUserPoolConfig_ForgotPassword *smithy.Schema
-
-var UpdateBackendAuthUserPoolConfig_Mfa *smithy.Schema
-
-var UpdateBackendAuthUserPoolConfig_OAuth *smithy.Schema
-
-var UpdateBackendAuthUserPoolConfig_PasswordPolicy *smithy.Schema
-
-var UpdateBackendAuthUserPoolConfig_VerificationMessage *smithy.Schema
-
-var UpdateBackendAuthVerificationMessageConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthVerificationMessageConfig",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBackendAuthVerificationMessageConfig_DeliveryMethod *smithy.Schema
-
-var UpdateBackendAuthVerificationMessageConfig_EmailSettings *smithy.Schema
-
-var UpdateBackendAuthVerificationMessageConfig_SmsSettings *smithy.Schema
-
-var UpdateBackendStorageResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendStorageResourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBackendStorageResourceConfig_Permissions *smithy.Schema
-
-var UpdateBackendStorageResourceConfig_ServiceName *smithy.Schema
-
-var CloneBackendRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CloneBackendRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CloneBackendRequest_AppId *smithy.Schema
-
-var CloneBackendRequest_BackendEnvironmentName *smithy.Schema
-
-var CloneBackendRequest_TargetEnvironmentName *smithy.Schema
-
-var CloneBackendResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CloneBackendResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CloneBackendResponse_AppId *smithy.Schema
-
-var CloneBackendResponse_BackendEnvironmentName *smithy.Schema
-
-var CloneBackendResponse_Error *smithy.Schema
-
-var CloneBackendResponse_JobId *smithy.Schema
-
-var CloneBackendResponse_Operation *smithy.Schema
-
-var CloneBackendResponse_Status *smithy.Schema
-
-var CreateBackendAPIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAPIRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendAPIRequest_AppId *smithy.Schema
-
-var CreateBackendAPIRequest_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendAPIRequest_ResourceConfig *smithy.Schema
-
-var CreateBackendAPIRequest_ResourceName *smithy.Schema
-
-var CreateBackendAPIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAPIResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBackendAPIResponse_AppId *smithy.Schema
-
-var CreateBackendAPIResponse_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendAPIResponse_Error *smithy.Schema
-
-var CreateBackendAPIResponse_JobId *smithy.Schema
-
-var CreateBackendAPIResponse_Operation *smithy.Schema
-
-var CreateBackendAPIResponse_Status *smithy.Schema
-
-var CreateBackendAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendAuthRequest_AppId *smithy.Schema
-
-var CreateBackendAuthRequest_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendAuthRequest_ResourceConfig *smithy.Schema
-
-var CreateBackendAuthRequest_ResourceName *smithy.Schema
-
-var CreateBackendAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendAuthResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBackendAuthResponse_AppId *smithy.Schema
-
-var CreateBackendAuthResponse_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendAuthResponse_Error *smithy.Schema
-
-var CreateBackendAuthResponse_JobId *smithy.Schema
-
-var CreateBackendAuthResponse_Operation *smithy.Schema
-
-var CreateBackendAuthResponse_Status *smithy.Schema
-
-var CreateBackendConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBackendConfigRequest_AppId *smithy.Schema
-
-var CreateBackendConfigRequest_BackendManagerAppId *smithy.Schema
-
-var CreateBackendConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendConfigResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendConfigResponse_AppId *smithy.Schema
-
-var CreateBackendConfigResponse_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendConfigResponse_JobId *smithy.Schema
-
-var CreateBackendConfigResponse_Status *smithy.Schema
-
-var CreateBackendRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateBackendRequest_AppId *smithy.Schema
-
-var CreateBackendRequest_AppName *smithy.Schema
-
-var CreateBackendRequest_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendRequest_ResourceConfig *smithy.Schema
-
-var CreateBackendRequest_ResourceName *smithy.Schema
-
-var CreateBackendResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBackendResponse_AppId *smithy.Schema
-
-var CreateBackendResponse_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendResponse_Error *smithy.Schema
-
-var CreateBackendResponse_JobId *smithy.Schema
-
-var CreateBackendResponse_Operation *smithy.Schema
-
-var CreateBackendResponse_Status *smithy.Schema
-
-var CreateBackendStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendStorageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendStorageRequest_AppId *smithy.Schema
-
-var CreateBackendStorageRequest_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendStorageRequest_ResourceConfig *smithy.Schema
-
-var CreateBackendStorageRequest_ResourceName *smithy.Schema
-
-var CreateBackendStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateBackendStorageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackendStorageResponse_AppId *smithy.Schema
-
-var CreateBackendStorageResponse_BackendEnvironmentName *smithy.Schema
-
-var CreateBackendStorageResponse_JobId *smithy.Schema
-
-var CreateBackendStorageResponse_Status *smithy.Schema
-
-var CreateTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateTokenRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTokenRequest_AppId *smithy.Schema
-
-var CreateTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "CreateTokenResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateTokenResponse_AppId *smithy.Schema
-
-var CreateTokenResponse_ChallengeCode *smithy.Schema
-
-var CreateTokenResponse_SessionId *smithy.Schema
-
-var CreateTokenResponse_Ttl *smithy.Schema
-
-var DeleteBackendAPIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAPIRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteBackendAPIRequest_AppId *smithy.Schema
-
-var DeleteBackendAPIRequest_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendAPIRequest_ResourceConfig *smithy.Schema
-
-var DeleteBackendAPIRequest_ResourceName *smithy.Schema
-
-var DeleteBackendAPIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAPIResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DeleteBackendAPIResponse_AppId *smithy.Schema
-
-var DeleteBackendAPIResponse_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendAPIResponse_Error *smithy.Schema
-
-var DeleteBackendAPIResponse_JobId *smithy.Schema
-
-var DeleteBackendAPIResponse_Operation *smithy.Schema
-
-var DeleteBackendAPIResponse_Status *smithy.Schema
-
-var DeleteBackendAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAuthRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteBackendAuthRequest_AppId *smithy.Schema
-
-var DeleteBackendAuthRequest_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendAuthRequest_ResourceName *smithy.Schema
-
-var DeleteBackendAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendAuthResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DeleteBackendAuthResponse_AppId *smithy.Schema
-
-var DeleteBackendAuthResponse_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendAuthResponse_Error *smithy.Schema
-
-var DeleteBackendAuthResponse_JobId *smithy.Schema
-
-var DeleteBackendAuthResponse_Operation *smithy.Schema
-
-var DeleteBackendAuthResponse_Status *smithy.Schema
-
-var DeleteBackendRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBackendRequest_AppId *smithy.Schema
-
-var DeleteBackendRequest_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DeleteBackendResponse_AppId *smithy.Schema
-
-var DeleteBackendResponse_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendResponse_Error *smithy.Schema
-
-var DeleteBackendResponse_JobId *smithy.Schema
-
-var DeleteBackendResponse_Operation *smithy.Schema
-
-var DeleteBackendResponse_Status *smithy.Schema
-
-var DeleteBackendStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendStorageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteBackendStorageRequest_AppId *smithy.Schema
-
-var DeleteBackendStorageRequest_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendStorageRequest_ResourceName *smithy.Schema
-
-var DeleteBackendStorageRequest_ServiceName *smithy.Schema
-
-var DeleteBackendStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteBackendStorageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteBackendStorageResponse_AppId *smithy.Schema
-
-var DeleteBackendStorageResponse_BackendEnvironmentName *smithy.Schema
-
-var DeleteBackendStorageResponse_JobId *smithy.Schema
-
-var DeleteBackendStorageResponse_Status *smithy.Schema
-
-var DeleteTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTokenRequest_AppId *smithy.Schema
-
-var DeleteTokenRequest_SessionId *smithy.Schema
-
-var DeleteTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "DeleteTokenResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTokenResponse_IsSuccess *smithy.Schema
-
-var GenerateBackendAPIModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GenerateBackendAPIModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateBackendAPIModelsRequest_AppId *smithy.Schema
-
-var GenerateBackendAPIModelsRequest_BackendEnvironmentName *smithy.Schema
-
-var GenerateBackendAPIModelsRequest_ResourceName *smithy.Schema
-
-var GenerateBackendAPIModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GenerateBackendAPIModelsResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GenerateBackendAPIModelsResponse_AppId *smithy.Schema
-
-var GenerateBackendAPIModelsResponse_BackendEnvironmentName *smithy.Schema
-
-var GenerateBackendAPIModelsResponse_Error *smithy.Schema
-
-var GenerateBackendAPIModelsResponse_JobId *smithy.Schema
-
-var GenerateBackendAPIModelsResponse_Operation *smithy.Schema
-
-var GenerateBackendAPIModelsResponse_Status *smithy.Schema
-
-var GetBackendAPIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPIRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBackendAPIRequest_AppId *smithy.Schema
-
-var GetBackendAPIRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendAPIRequest_ResourceConfig *smithy.Schema
-
-var GetBackendAPIRequest_ResourceName *smithy.Schema
-
-var GetBackendAPIModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPIModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBackendAPIModelsRequest_AppId *smithy.Schema
-
-var GetBackendAPIModelsRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendAPIModelsRequest_ResourceName *smithy.Schema
-
-var GetBackendAPIModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPIModelsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetBackendAPIModelsResponse_Models *smithy.Schema
-
-var GetBackendAPIModelsResponse_Status *smithy.Schema
-
-var GetBackendAPIModelsResponse_ModelIntrospectionSchema *smithy.Schema
-
-var GetBackendAPIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAPIResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetBackendAPIResponse_AppId *smithy.Schema
-
-var GetBackendAPIResponse_BackendEnvironmentName *smithy.Schema
-
-var GetBackendAPIResponse_Error *smithy.Schema
-
-var GetBackendAPIResponse_ResourceConfig *smithy.Schema
-
-var GetBackendAPIResponse_ResourceName *smithy.Schema
-
-var GetBackendAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAuthRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBackendAuthRequest_AppId *smithy.Schema
-
-var GetBackendAuthRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendAuthRequest_ResourceName *smithy.Schema
-
-var GetBackendAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendAuthResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetBackendAuthResponse_AppId *smithy.Schema
-
-var GetBackendAuthResponse_BackendEnvironmentName *smithy.Schema
-
-var GetBackendAuthResponse_Error *smithy.Schema
-
-var GetBackendAuthResponse_ResourceConfig *smithy.Schema
-
-var GetBackendAuthResponse_ResourceName *smithy.Schema
-
-var GetBackendRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBackendRequest_AppId *smithy.Schema
-
-var GetBackendRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendJobRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBackendJobRequest_AppId *smithy.Schema
-
-var GetBackendJobRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendJobRequest_JobId *smithy.Schema
-
-var GetBackendJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendJobResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetBackendJobResponse_AppId *smithy.Schema
-
-var GetBackendJobResponse_BackendEnvironmentName *smithy.Schema
-
-var GetBackendJobResponse_CreateTime *smithy.Schema
-
-var GetBackendJobResponse_Error *smithy.Schema
-
-var GetBackendJobResponse_JobId *smithy.Schema
-
-var GetBackendJobResponse_Operation *smithy.Schema
-
-var GetBackendJobResponse_Status *smithy.Schema
-
-var GetBackendJobResponse_UpdateTime *smithy.Schema
-
-var GetBackendResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetBackendResponse_AmplifyFeatureFlags *smithy.Schema
-
-var GetBackendResponse_AmplifyMetaConfig *smithy.Schema
-
-var GetBackendResponse_AppId *smithy.Schema
-
-var GetBackendResponse_AppName *smithy.Schema
-
-var GetBackendResponse_BackendEnvironmentList *smithy.Schema
-
-var GetBackendResponse_BackendEnvironmentName *smithy.Schema
-
-var GetBackendResponse_Error *smithy.Schema
-
-var GetBackendStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendStorageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBackendStorageRequest_AppId *smithy.Schema
-
-var GetBackendStorageRequest_BackendEnvironmentName *smithy.Schema
-
-var GetBackendStorageRequest_ResourceName *smithy.Schema
-
-var GetBackendStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetBackendStorageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetBackendStorageResponse_AppId *smithy.Schema
-
-var GetBackendStorageResponse_BackendEnvironmentName *smithy.Schema
-
-var GetBackendStorageResponse_ResourceConfig *smithy.Schema
-
-var GetBackendStorageResponse_ResourceName *smithy.Schema
-
-var GetTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTokenRequest_AppId *smithy.Schema
-
-var GetTokenRequest_SessionId *smithy.Schema
-
-var GetTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "GetTokenResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetTokenResponse_AppId *smithy.Schema
-
-var GetTokenResponse_ChallengeCode *smithy.Schema
-
-var GetTokenResponse_SessionId *smithy.Schema
-
-var GetTokenResponse_Ttl *smithy.Schema
-
-var ImportBackendAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendAuthRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ImportBackendAuthRequest_AppId *smithy.Schema
-
-var ImportBackendAuthRequest_BackendEnvironmentName *smithy.Schema
-
-var ImportBackendAuthRequest_IdentityPoolId *smithy.Schema
-
-var ImportBackendAuthRequest_NativeClientId *smithy.Schema
-
-var ImportBackendAuthRequest_UserPoolId *smithy.Schema
-
-var ImportBackendAuthRequest_WebClientId *smithy.Schema
-
-var ImportBackendAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendAuthResponse",
-}, smithy.ShapeTypeStructure, 6)
-var ImportBackendAuthResponse_AppId *smithy.Schema
-
-var ImportBackendAuthResponse_BackendEnvironmentName *smithy.Schema
-
-var ImportBackendAuthResponse_Error *smithy.Schema
-
-var ImportBackendAuthResponse_JobId *smithy.Schema
-
-var ImportBackendAuthResponse_Operation *smithy.Schema
-
-var ImportBackendAuthResponse_Status *smithy.Schema
-
-var ImportBackendStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendStorageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ImportBackendStorageRequest_AppId *smithy.Schema
-
-var ImportBackendStorageRequest_BackendEnvironmentName *smithy.Schema
-
-var ImportBackendStorageRequest_BucketName *smithy.Schema
-
-var ImportBackendStorageRequest_ServiceName *smithy.Schema
-
-var ImportBackendStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ImportBackendStorageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ImportBackendStorageResponse_AppId *smithy.Schema
-
-var ImportBackendStorageResponse_BackendEnvironmentName *smithy.Schema
-
-var ImportBackendStorageResponse_JobId *smithy.Schema
-
-var ImportBackendStorageResponse_Status *smithy.Schema
-
-var ListBackendJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListBackendJobsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListBackendJobsRequest_AppId *smithy.Schema
-
-var ListBackendJobsRequest_BackendEnvironmentName *smithy.Schema
-
-var ListBackendJobsRequest_JobId *smithy.Schema
-
-var ListBackendJobsRequest_MaxResults *smithy.Schema
-
-var ListBackendJobsRequest_NextToken *smithy.Schema
-
-var ListBackendJobsRequest_Operation *smithy.Schema
-
-var ListBackendJobsRequest_Status *smithy.Schema
-
-var ListBackendJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListBackendJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBackendJobsResponse_Jobs *smithy.Schema
-
-var ListBackendJobsResponse_NextToken *smithy.Schema
-
-var ListS3BucketsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListS3BucketsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListS3BucketsRequest_NextToken *smithy.Schema
-
-var ListS3BucketsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "ListS3BucketsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListS3BucketsResponse_Buckets *smithy.Schema
-
-var ListS3BucketsResponse_NextToken *smithy.Schema
-
-var RemoveAllBackendsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveAllBackendsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveAllBackendsRequest_AppId *smithy.Schema
-
-var RemoveAllBackendsRequest_CleanAmplifyApp *smithy.Schema
-
-var RemoveAllBackendsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveAllBackendsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var RemoveAllBackendsResponse_AppId *smithy.Schema
-
-var RemoveAllBackendsResponse_Error *smithy.Schema
-
-var RemoveAllBackendsResponse_JobId *smithy.Schema
-
-var RemoveAllBackendsResponse_Operation *smithy.Schema
-
-var RemoveAllBackendsResponse_Status *smithy.Schema
-
-var RemoveBackendConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveBackendConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveBackendConfigRequest_AppId *smithy.Schema
-
-var RemoveBackendConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "RemoveBackendConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveBackendConfigResponse_Error *smithy.Schema
-
-var UpdateBackendAPIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAPIRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendAPIRequest_AppId *smithy.Schema
-
-var UpdateBackendAPIRequest_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendAPIRequest_ResourceConfig *smithy.Schema
-
-var UpdateBackendAPIRequest_ResourceName *smithy.Schema
-
-var UpdateBackendAPIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAPIResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateBackendAPIResponse_AppId *smithy.Schema
-
-var UpdateBackendAPIResponse_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendAPIResponse_Error *smithy.Schema
-
-var UpdateBackendAPIResponse_JobId *smithy.Schema
-
-var UpdateBackendAPIResponse_Operation *smithy.Schema
-
-var UpdateBackendAPIResponse_Status *smithy.Schema
-
-var UpdateBackendAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendAuthRequest_AppId *smithy.Schema
-
-var UpdateBackendAuthRequest_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendAuthRequest_ResourceConfig *smithy.Schema
-
-var UpdateBackendAuthRequest_ResourceName *smithy.Schema
-
-var UpdateBackendAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendAuthResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateBackendAuthResponse_AppId *smithy.Schema
-
-var UpdateBackendAuthResponse_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendAuthResponse_Error *smithy.Schema
-
-var UpdateBackendAuthResponse_JobId *smithy.Schema
-
-var UpdateBackendAuthResponse_Operation *smithy.Schema
-
-var UpdateBackendAuthResponse_Status *smithy.Schema
-
-var UpdateBackendConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBackendConfigRequest_AppId *smithy.Schema
-
-var UpdateBackendConfigRequest_LoginAuthConfig *smithy.Schema
-
-var UpdateBackendConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendConfigResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendConfigResponse_AppId *smithy.Schema
-
-var UpdateBackendConfigResponse_BackendManagerAppId *smithy.Schema
-
-var UpdateBackendConfigResponse_Error *smithy.Schema
-
-var UpdateBackendConfigResponse_LoginAuthConfig *smithy.Schema
-
-var UpdateBackendJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateBackendJobRequest_AppId *smithy.Schema
-
-var UpdateBackendJobRequest_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendJobRequest_JobId *smithy.Schema
-
-var UpdateBackendJobRequest_Operation *smithy.Schema
-
-var UpdateBackendJobRequest_Status *smithy.Schema
-
-var UpdateBackendJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendJobResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateBackendJobResponse_AppId *smithy.Schema
-
-var UpdateBackendJobResponse_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendJobResponse_CreateTime *smithy.Schema
-
-var UpdateBackendJobResponse_Error *smithy.Schema
-
-var UpdateBackendJobResponse_JobId *smithy.Schema
-
-var UpdateBackendJobResponse_Operation *smithy.Schema
-
-var UpdateBackendJobResponse_Status *smithy.Schema
-
-var UpdateBackendJobResponse_UpdateTime *smithy.Schema
-
-var UpdateBackendStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendStorageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendStorageRequest_AppId *smithy.Schema
-
-var UpdateBackendStorageRequest_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendStorageRequest_ResourceConfig *smithy.Schema
-
-var UpdateBackendStorageRequest_ResourceName *smithy.Schema
-
-var UpdateBackendStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.amplifybackend",
-	Name:      "UpdateBackendStorageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBackendStorageResponse_AppId *smithy.Schema
-
-var UpdateBackendStorageResponse_BackendEnvironmentName *smithy.Schema
-
-var UpdateBackendStorageResponse_JobId *smithy.Schema
-
-var UpdateBackendStorageResponse_Status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AdditionalConstraintsElement_REQUIRE_DIGIT = AdditionalConstraintsElement.AddMember("REQUIRE_DIGIT", smithyprelude.Unit)
-
-	AdditionalConstraintsElement_REQUIRE_LOWERCASE = AdditionalConstraintsElement.AddMember("REQUIRE_LOWERCASE", smithyprelude.Unit)
-
-	AdditionalConstraintsElement_REQUIRE_SYMBOL = AdditionalConstraintsElement.AddMember("REQUIRE_SYMBOL", smithyprelude.Unit)
-
-	AdditionalConstraintsElement_REQUIRE_UPPERCASE = AdditionalConstraintsElement.AddMember("REQUIRE_UPPERCASE", smithyprelude.Unit)
-
-	AuthenticatedElement_READ = AuthenticatedElement.AddMember("READ", smithyprelude.Unit)
-
-	AuthenticatedElement_CREATE_AND_UPDATE = AuthenticatedElement.AddMember("CREATE_AND_UPDATE", smithyprelude.Unit)
-
-	AuthenticatedElement_DELETE = AuthenticatedElement.AddMember("DELETE", smithyprelude.Unit)
-
-	AuthResources_USER_POOL_ONLY = AuthResources.AddMember("USER_POOL_ONLY", smithyprelude.Unit)
-
-	AuthResources_IDENTITY_POOL_AND_USER_POOL = AuthResources.AddMember("IDENTITY_POOL_AND_USER_POOL", smithyprelude.Unit)
-
-	BackendAPIAppSyncAuthSettings_CognitoUserPoolId = BackendAPIAppSyncAuthSettings.AddMember("CognitoUserPoolId", ___string, &smithytraits.JSONName{Name: "cognitoUserPoolId"})
-
-	BackendAPIAppSyncAuthSettings_Description = BackendAPIAppSyncAuthSettings.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	BackendAPIAppSyncAuthSettings_ExpirationTime = BackendAPIAppSyncAuthSettings.AddMember("ExpirationTime", ___double, &smithytraits.JSONName{Name: "expirationTime"})
-
-	BackendAPIAppSyncAuthSettings_OpenIDAuthTTL = BackendAPIAppSyncAuthSettings.AddMember("OpenIDAuthTTL", ___string, &smithytraits.JSONName{Name: "openIDAuthTTL"})
-
-	BackendAPIAppSyncAuthSettings_OpenIDClientId = BackendAPIAppSyncAuthSettings.AddMember("OpenIDClientId", ___string, &smithytraits.JSONName{Name: "openIDClientId"})
-
-	BackendAPIAppSyncAuthSettings_OpenIDIatTTL = BackendAPIAppSyncAuthSettings.AddMember("OpenIDIatTTL", ___string, &smithytraits.JSONName{Name: "openIDIatTTL"})
-
-	BackendAPIAppSyncAuthSettings_OpenIDIssueURL = BackendAPIAppSyncAuthSettings.AddMember("OpenIDIssueURL", ___string, &smithytraits.JSONName{Name: "openIDIssueURL"})
-
-	BackendAPIAppSyncAuthSettings_OpenIDProviderName = BackendAPIAppSyncAuthSettings.AddMember("OpenIDProviderName", ___string, &smithytraits.JSONName{Name: "openIDProviderName"})
-
-	Mode_API_KEY = Mode.AddMember("API_KEY", smithyprelude.Unit)
-
-	Mode_AWS_IAM = Mode.AddMember("AWS_IAM", smithyprelude.Unit)
-
-	Mode_AMAZON_COGNITO_USER_POOLS = Mode.AddMember("AMAZON_COGNITO_USER_POOLS", smithyprelude.Unit)
-
-	Mode_OPENID_CONNECT = Mode.AddMember("OPENID_CONNECT", smithyprelude.Unit)
-
-	BackendAPIAuthType_Mode = BackendAPIAuthType.AddMember("Mode", Mode, &smithytraits.JSONName{Name: "mode"})
-
-	BackendAPIAuthType_Settings = BackendAPIAuthType.AddMember("Settings", BackendAPIAppSyncAuthSettings, &smithytraits.JSONName{Name: "settings"})
-
-	ResolutionStrategy_OPTIMISTIC_CONCURRENCY = ResolutionStrategy.AddMember("OPTIMISTIC_CONCURRENCY", smithyprelude.Unit)
-
-	ResolutionStrategy_LAMBDA = ResolutionStrategy.AddMember("LAMBDA", smithyprelude.Unit)
-
-	ResolutionStrategy_AUTOMERGE = ResolutionStrategy.AddMember("AUTOMERGE", smithyprelude.Unit)
-
-	ResolutionStrategy_NONE = ResolutionStrategy.AddMember("NONE", smithyprelude.Unit)
-
-	BackendAPIConflictResolution_ResolutionStrategy = BackendAPIConflictResolution.AddMember("ResolutionStrategy", ResolutionStrategy, &smithytraits.JSONName{Name: "resolutionStrategy"})
-
-	_ListOfBackendAPIAuthType_member = _ListOfBackendAPIAuthType.AddMember("member", BackendAPIAuthType)
-
-	BackendAPIResourceConfig_AdditionalAuthTypes = BackendAPIResourceConfig.AddMember("AdditionalAuthTypes", _ListOfBackendAPIAuthType, &smithytraits.JSONName{Name: "additionalAuthTypes"})
-
-	BackendAPIResourceConfig_ApiName = BackendAPIResourceConfig.AddMember("ApiName", ___string, &smithytraits.JSONName{Name: "apiName"})
-
-	BackendAPIResourceConfig_ConflictResolution = BackendAPIResourceConfig.AddMember("ConflictResolution", BackendAPIConflictResolution, &smithytraits.JSONName{Name: "conflictResolution"})
-
-	BackendAPIResourceConfig_DefaultAuthType = BackendAPIResourceConfig.AddMember("DefaultAuthType", BackendAPIAuthType, &smithytraits.JSONName{Name: "defaultAuthType"})
-
-	BackendAPIResourceConfig_Service = BackendAPIResourceConfig.AddMember("Service", ___string, &smithytraits.JSONName{Name: "service"})
-
-	BackendAPIResourceConfig_TransformSchema = BackendAPIResourceConfig.AddMember("TransformSchema", ___string, &smithytraits.JSONName{Name: "transformSchema"})
-
-	BackendAuthAppleProviderConfig_ClientId = BackendAuthAppleProviderConfig.AddMember("ClientId", ___string, &smithytraits.JSONName{Name: "client_id"})
-
-	BackendAuthAppleProviderConfig_KeyId = BackendAuthAppleProviderConfig.AddMember("KeyId", ___string, &smithytraits.JSONName{Name: "key_id"})
-
-	BackendAuthAppleProviderConfig_PrivateKey = BackendAuthAppleProviderConfig.AddMember("PrivateKey", ___string, &smithytraits.JSONName{Name: "private_key"})
-
-	BackendAuthAppleProviderConfig_TeamId = BackendAuthAppleProviderConfig.AddMember("TeamId", ___string, &smithytraits.JSONName{Name: "team_id"})
-
-	BackendAuthSocialProviderConfig_ClientId = BackendAuthSocialProviderConfig.AddMember("ClientId", ___string, &smithytraits.JSONName{Name: "client_id"})
-
-	BackendAuthSocialProviderConfig_ClientSecret = BackendAuthSocialProviderConfig.AddMember("ClientSecret", ___string, &smithytraits.JSONName{Name: "client_secret"})
-
-	BackendJobRespObj_AppId = BackendJobRespObj.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	BackendJobRespObj_BackendEnvironmentName = BackendJobRespObj.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	BackendJobRespObj_CreateTime = BackendJobRespObj.AddMember("CreateTime", ___string, &smithytraits.JSONName{Name: "createTime"})
-
-	BackendJobRespObj_Error = BackendJobRespObj.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	BackendJobRespObj_JobId = BackendJobRespObj.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	BackendJobRespObj_Operation = BackendJobRespObj.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	BackendJobRespObj_Status = BackendJobRespObj.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	BackendJobRespObj_UpdateTime = BackendJobRespObj.AddMember("UpdateTime", ___string, &smithytraits.JSONName{Name: "updateTime"})
-
-	_ListOfAuthenticatedElement_member = _ListOfAuthenticatedElement.AddMember("member", AuthenticatedElement)
-
-	UnAuthenticatedElement_READ = UnAuthenticatedElement.AddMember("READ", smithyprelude.Unit)
-
-	UnAuthenticatedElement_CREATE_AND_UPDATE = UnAuthenticatedElement.AddMember("CREATE_AND_UPDATE", smithyprelude.Unit)
-
-	UnAuthenticatedElement_DELETE = UnAuthenticatedElement.AddMember("DELETE", smithyprelude.Unit)
-
-	_ListOfUnAuthenticatedElement_member = _ListOfUnAuthenticatedElement.AddMember("member", UnAuthenticatedElement)
-
-	BackendStoragePermissions_Authenticated = BackendStoragePermissions.AddMember("Authenticated", _ListOfAuthenticatedElement, &smithytraits.JSONName{Name: "authenticated"})
-
-	BackendStoragePermissions_UnAuthenticated = BackendStoragePermissions.AddMember("UnAuthenticated", _ListOfUnAuthenticatedElement, &smithytraits.JSONName{Name: "unAuthenticated"})
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	DeliveryMethod_EMAIL = DeliveryMethod.AddMember("EMAIL", smithyprelude.Unit)
-
-	DeliveryMethod_SMS = DeliveryMethod.AddMember("SMS", smithyprelude.Unit)
-
-	EmailSettings_EmailMessage = EmailSettings.AddMember("EmailMessage", ___string, &smithytraits.JSONName{Name: "emailMessage"})
-
-	EmailSettings_EmailSubject = EmailSettings.AddMember("EmailSubject", ___string, &smithytraits.JSONName{Name: "emailSubject"})
-
-	SmsSettings_SmsMessage = SmsSettings.AddMember("SmsMessage", ___string, &smithytraits.JSONName{Name: "smsMessage"})
-
-	CreateBackendAuthForgotPasswordConfig_DeliveryMethod = CreateBackendAuthForgotPasswordConfig.AddMember("DeliveryMethod", DeliveryMethod, &smithytraits.JSONName{Name: "deliveryMethod"})
-
-	CreateBackendAuthForgotPasswordConfig_EmailSettings = CreateBackendAuthForgotPasswordConfig.AddMember("EmailSettings", EmailSettings, &smithytraits.JSONName{Name: "emailSettings"})
-
-	CreateBackendAuthForgotPasswordConfig_SmsSettings = CreateBackendAuthForgotPasswordConfig.AddMember("SmsSettings", SmsSettings, &smithytraits.JSONName{Name: "smsSettings"})
-
-	CreateBackendAuthIdentityPoolConfig_IdentityPoolName = CreateBackendAuthIdentityPoolConfig.AddMember("IdentityPoolName", ___string, &smithytraits.JSONName{Name: "identityPoolName"})
-
-	CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = CreateBackendAuthIdentityPoolConfig.AddMember("UnauthenticatedLogin", ___boolean, &smithytraits.JSONName{Name: "unauthenticatedLogin"})
-
-	MFAMode_ON = MFAMode.AddMember("ON", smithyprelude.Unit)
-
-	MFAMode_OFF = MFAMode.AddMember("OFF", smithyprelude.Unit)
-
-	MFAMode_OPTIONAL = MFAMode.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	MfaTypesElement_SMS = MfaTypesElement.AddMember("SMS", smithyprelude.Unit)
-
-	MfaTypesElement_TOTP = MfaTypesElement.AddMember("TOTP", smithyprelude.Unit)
-
-	_ListOfMfaTypesElement_member = _ListOfMfaTypesElement.AddMember("member", MfaTypesElement)
-
-	Settings_MfaTypes = Settings.AddMember("MfaTypes", _ListOfMfaTypesElement, &smithytraits.JSONName{Name: "mfaTypes"})
-
-	Settings_SmsMessage = Settings.AddMember("SmsMessage", ___string, &smithytraits.JSONName{Name: "smsMessage"})
-
-	CreateBackendAuthMFAConfig_MFAMode = CreateBackendAuthMFAConfig.AddMember("MFAMode", MFAMode)
-
-	CreateBackendAuthMFAConfig_Settings = CreateBackendAuthMFAConfig.AddMember("Settings", Settings, &smithytraits.JSONName{Name: "settings"})
-
-	OAuthGrantType_CODE = OAuthGrantType.AddMember("CODE", smithyprelude.Unit)
-
-	OAuthGrantType_IMPLICIT = OAuthGrantType.AddMember("IMPLICIT", smithyprelude.Unit)
-
-	OAuthScopesElement_PHONE = OAuthScopesElement.AddMember("PHONE", smithyprelude.Unit)
-
-	OAuthScopesElement_EMAIL = OAuthScopesElement.AddMember("EMAIL", smithyprelude.Unit)
-
-	OAuthScopesElement_OPENID = OAuthScopesElement.AddMember("OPENID", smithyprelude.Unit)
-
-	OAuthScopesElement_PROFILE = OAuthScopesElement.AddMember("PROFILE", smithyprelude.Unit)
-
-	OAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN = OAuthScopesElement.AddMember("AWS_COGNITO_SIGNIN_USER_ADMIN", smithyprelude.Unit)
-
-	_ListOfOAuthScopesElement_member = _ListOfOAuthScopesElement.AddMember("member", OAuthScopesElement)
-
-	_ListOf__string_member = _ListOf__string.AddMember("member", ___string)
-
-	SocialProviderSettings_Facebook = SocialProviderSettings.AddMember("Facebook", BackendAuthSocialProviderConfig)
-
-	SocialProviderSettings_Google = SocialProviderSettings.AddMember("Google", BackendAuthSocialProviderConfig)
-
-	SocialProviderSettings_LoginWithAmazon = SocialProviderSettings.AddMember("LoginWithAmazon", BackendAuthSocialProviderConfig)
-
-	SocialProviderSettings_SignInWithApple = SocialProviderSettings.AddMember("SignInWithApple", BackendAuthAppleProviderConfig)
-
-	CreateBackendAuthOAuthConfig_DomainPrefix = CreateBackendAuthOAuthConfig.AddMember("DomainPrefix", ___string, &smithytraits.JSONName{Name: "domainPrefix"})
-
-	CreateBackendAuthOAuthConfig_OAuthGrantType = CreateBackendAuthOAuthConfig.AddMember("OAuthGrantType", OAuthGrantType, &smithytraits.JSONName{Name: "oAuthGrantType"})
-
-	CreateBackendAuthOAuthConfig_OAuthScopes = CreateBackendAuthOAuthConfig.AddMember("OAuthScopes", _ListOfOAuthScopesElement, &smithytraits.JSONName{Name: "oAuthScopes"})
-
-	CreateBackendAuthOAuthConfig_RedirectSignInURIs = CreateBackendAuthOAuthConfig.AddMember("RedirectSignInURIs", _ListOf__string, &smithytraits.JSONName{Name: "redirectSignInURIs"})
-
-	CreateBackendAuthOAuthConfig_RedirectSignOutURIs = CreateBackendAuthOAuthConfig.AddMember("RedirectSignOutURIs", _ListOf__string, &smithytraits.JSONName{Name: "redirectSignOutURIs"})
-
-	CreateBackendAuthOAuthConfig_SocialProviderSettings = CreateBackendAuthOAuthConfig.AddMember("SocialProviderSettings", SocialProviderSettings, &smithytraits.JSONName{Name: "socialProviderSettings"})
-
-	_ListOfAdditionalConstraintsElement_member = _ListOfAdditionalConstraintsElement.AddMember("member", AdditionalConstraintsElement)
-
-	CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints = CreateBackendAuthPasswordPolicyConfig.AddMember("AdditionalConstraints", _ListOfAdditionalConstraintsElement, &smithytraits.JSONName{Name: "additionalConstraints"})
-
-	CreateBackendAuthPasswordPolicyConfig_MinimumLength = CreateBackendAuthPasswordPolicyConfig.AddMember("MinimumLength", ___double, &smithytraits.JSONName{Name: "minimumLength"})
-
-	Service_COGNITO = Service.AddMember("COGNITO", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_ADDRESS = RequiredSignUpAttributesElement.AddMember("ADDRESS", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_BIRTHDATE = RequiredSignUpAttributesElement.AddMember("BIRTHDATE", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_EMAIL = RequiredSignUpAttributesElement.AddMember("EMAIL", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_FAMILY_NAME = RequiredSignUpAttributesElement.AddMember("FAMILY_NAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_GENDER = RequiredSignUpAttributesElement.AddMember("GENDER", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_GIVEN_NAME = RequiredSignUpAttributesElement.AddMember("GIVEN_NAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_LOCALE = RequiredSignUpAttributesElement.AddMember("LOCALE", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_MIDDLE_NAME = RequiredSignUpAttributesElement.AddMember("MIDDLE_NAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_NAME = RequiredSignUpAttributesElement.AddMember("NAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_NICKNAME = RequiredSignUpAttributesElement.AddMember("NICKNAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_PHONE_NUMBER = RequiredSignUpAttributesElement.AddMember("PHONE_NUMBER", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_PICTURE = RequiredSignUpAttributesElement.AddMember("PICTURE", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_PREFERRED_USERNAME = RequiredSignUpAttributesElement.AddMember("PREFERRED_USERNAME", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_PROFILE = RequiredSignUpAttributesElement.AddMember("PROFILE", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_UPDATED_AT = RequiredSignUpAttributesElement.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_WEBSITE = RequiredSignUpAttributesElement.AddMember("WEBSITE", smithyprelude.Unit)
-
-	RequiredSignUpAttributesElement_ZONE_INFO = RequiredSignUpAttributesElement.AddMember("ZONE_INFO", smithyprelude.Unit)
-
-	_ListOfRequiredSignUpAttributesElement_member = _ListOfRequiredSignUpAttributesElement.AddMember("member", RequiredSignUpAttributesElement)
-
-	SignInMethod_EMAIL = SignInMethod.AddMember("EMAIL", smithyprelude.Unit)
-
-	SignInMethod_EMAIL_AND_PHONE_NUMBER = SignInMethod.AddMember("EMAIL_AND_PHONE_NUMBER", smithyprelude.Unit)
-
-	SignInMethod_PHONE_NUMBER = SignInMethod.AddMember("PHONE_NUMBER", smithyprelude.Unit)
-
-	SignInMethod_USERNAME = SignInMethod.AddMember("USERNAME", smithyprelude.Unit)
-
-	CreateBackendAuthVerificationMessageConfig_DeliveryMethod = CreateBackendAuthVerificationMessageConfig.AddMember("DeliveryMethod", DeliveryMethod, &smithytraits.JSONName{Name: "deliveryMethod"})
-
-	CreateBackendAuthVerificationMessageConfig_EmailSettings = CreateBackendAuthVerificationMessageConfig.AddMember("EmailSettings", EmailSettings, &smithytraits.JSONName{Name: "emailSettings"})
-
-	CreateBackendAuthVerificationMessageConfig_SmsSettings = CreateBackendAuthVerificationMessageConfig.AddMember("SmsSettings", SmsSettings, &smithytraits.JSONName{Name: "smsSettings"})
-
-	CreateBackendAuthUserPoolConfig_ForgotPassword = CreateBackendAuthUserPoolConfig.AddMember("ForgotPassword", CreateBackendAuthForgotPasswordConfig, &smithytraits.JSONName{Name: "forgotPassword"})
-
-	CreateBackendAuthUserPoolConfig_Mfa = CreateBackendAuthUserPoolConfig.AddMember("Mfa", CreateBackendAuthMFAConfig, &smithytraits.JSONName{Name: "mfa"})
-
-	CreateBackendAuthUserPoolConfig_OAuth = CreateBackendAuthUserPoolConfig.AddMember("OAuth", CreateBackendAuthOAuthConfig, &smithytraits.JSONName{Name: "oAuth"})
-
-	CreateBackendAuthUserPoolConfig_PasswordPolicy = CreateBackendAuthUserPoolConfig.AddMember("PasswordPolicy", CreateBackendAuthPasswordPolicyConfig, &smithytraits.JSONName{Name: "passwordPolicy"})
-
-	CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes = CreateBackendAuthUserPoolConfig.AddMember("RequiredSignUpAttributes", _ListOfRequiredSignUpAttributesElement, &smithytraits.JSONName{Name: "requiredSignUpAttributes"})
-
-	CreateBackendAuthUserPoolConfig_SignInMethod = CreateBackendAuthUserPoolConfig.AddMember("SignInMethod", SignInMethod, &smithytraits.JSONName{Name: "signInMethod"})
-
-	CreateBackendAuthUserPoolConfig_UserPoolName = CreateBackendAuthUserPoolConfig.AddMember("UserPoolName", ___string, &smithytraits.JSONName{Name: "userPoolName"})
-
-	CreateBackendAuthUserPoolConfig_VerificationMessage = CreateBackendAuthUserPoolConfig.AddMember("VerificationMessage", CreateBackendAuthVerificationMessageConfig, &smithytraits.JSONName{Name: "verificationMessage"})
-
-	CreateBackendAuthResourceConfig_AuthResources = CreateBackendAuthResourceConfig.AddMember("AuthResources", AuthResources, &smithytraits.JSONName{Name: "authResources"})
-
-	CreateBackendAuthResourceConfig_IdentityPoolConfigs = CreateBackendAuthResourceConfig.AddMember("IdentityPoolConfigs", CreateBackendAuthIdentityPoolConfig, &smithytraits.JSONName{Name: "identityPoolConfigs"})
-
-	CreateBackendAuthResourceConfig_Service = CreateBackendAuthResourceConfig.AddMember("Service", Service, &smithytraits.JSONName{Name: "service"})
-
-	CreateBackendAuthResourceConfig_UserPoolConfigs = CreateBackendAuthResourceConfig.AddMember("UserPoolConfigs", CreateBackendAuthUserPoolConfig, &smithytraits.JSONName{Name: "userPoolConfigs"})
-
-	ServiceName_S3 = ServiceName.AddMember("S3", smithyprelude.Unit)
-
-	CreateBackendStorageResourceConfig_BucketName = CreateBackendStorageResourceConfig.AddMember("BucketName", ___string, &smithytraits.JSONName{Name: "bucketName"})
-
-	CreateBackendStorageResourceConfig_Permissions = CreateBackendStorageResourceConfig.AddMember("Permissions", BackendStoragePermissions, &smithytraits.JSONName{Name: "permissions"})
-
-	CreateBackendStorageResourceConfig_ServiceName = CreateBackendStorageResourceConfig.AddMember("ServiceName", ServiceName, &smithytraits.JSONName{Name: "serviceName"})
-
-	GatewayTimeoutException_Message = GatewayTimeoutException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	GetBackendStorageResourceConfig_BucketName = GetBackendStorageResourceConfig.AddMember("BucketName", ___string, &smithytraits.JSONName{Name: "bucketName"})
-
-	GetBackendStorageResourceConfig_Imported = GetBackendStorageResourceConfig.AddMember("Imported", ___boolean, &smithytraits.JSONName{Name: "imported"})
-
-	GetBackendStorageResourceConfig_Permissions = GetBackendStorageResourceConfig.AddMember("Permissions", BackendStoragePermissions, &smithytraits.JSONName{Name: "permissions"})
-
-	GetBackendStorageResourceConfig_ServiceName = GetBackendStorageResourceConfig.AddMember("ServiceName", ServiceName, &smithytraits.JSONName{Name: "serviceName"})
-
-	_ListOfBackendJobRespObj_member = _ListOfBackendJobRespObj.AddMember("member", BackendJobRespObj)
-
-	S3BucketInfo_CreationDate = S3BucketInfo.AddMember("CreationDate", ___string, &smithytraits.JSONName{Name: "creationDate"})
-
-	S3BucketInfo_Name = S3BucketInfo.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	_ListOfS3BucketInfo_member = _ListOfS3BucketInfo.AddMember("member", S3BucketInfo)
-
-	LoginAuthConfigReqObj_AwsCognitoIdentityPoolId = LoginAuthConfigReqObj.AddMember("AwsCognitoIdentityPoolId", ___string, &smithytraits.JSONName{Name: "aws_cognito_identity_pool_id"})
-
-	LoginAuthConfigReqObj_AwsCognitoRegion = LoginAuthConfigReqObj.AddMember("AwsCognitoRegion", ___string, &smithytraits.JSONName{Name: "aws_cognito_region"})
-
-	LoginAuthConfigReqObj_AwsUserPoolsId = LoginAuthConfigReqObj.AddMember("AwsUserPoolsId", ___string, &smithytraits.JSONName{Name: "aws_user_pools_id"})
-
-	LoginAuthConfigReqObj_AwsUserPoolsWebClientId = LoginAuthConfigReqObj.AddMember("AwsUserPoolsWebClientId", ___string, &smithytraits.JSONName{Name: "aws_user_pools_web_client_id"})
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	NotFoundException_ResourceType = NotFoundException.AddMember("ResourceType", ___string, &smithytraits.JSONName{Name: "resourceType"})
-
-	Status_LATEST = Status.AddMember("LATEST", smithyprelude.Unit)
-
-	Status_STALE = Status.AddMember("STALE", smithyprelude.Unit)
-
-	TooManyRequestsException_LimitType = TooManyRequestsException.AddMember("LimitType", ___string, &smithytraits.JSONName{Name: "limitType"})
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	UpdateBackendAuthForgotPasswordConfig_DeliveryMethod = UpdateBackendAuthForgotPasswordConfig.AddMember("DeliveryMethod", DeliveryMethod, &smithytraits.JSONName{Name: "deliveryMethod"})
-
-	UpdateBackendAuthForgotPasswordConfig_EmailSettings = UpdateBackendAuthForgotPasswordConfig.AddMember("EmailSettings", EmailSettings, &smithytraits.JSONName{Name: "emailSettings"})
-
-	UpdateBackendAuthForgotPasswordConfig_SmsSettings = UpdateBackendAuthForgotPasswordConfig.AddMember("SmsSettings", SmsSettings, &smithytraits.JSONName{Name: "smsSettings"})
-
-	UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = UpdateBackendAuthIdentityPoolConfig.AddMember("UnauthenticatedLogin", ___boolean, &smithytraits.JSONName{Name: "unauthenticatedLogin"})
-
-	UpdateBackendAuthMFAConfig_MFAMode = UpdateBackendAuthMFAConfig.AddMember("MFAMode", MFAMode)
-
-	UpdateBackendAuthMFAConfig_Settings = UpdateBackendAuthMFAConfig.AddMember("Settings", Settings, &smithytraits.JSONName{Name: "settings"})
-
-	UpdateBackendAuthOAuthConfig_DomainPrefix = UpdateBackendAuthOAuthConfig.AddMember("DomainPrefix", ___string, &smithytraits.JSONName{Name: "domainPrefix"})
-
-	UpdateBackendAuthOAuthConfig_OAuthGrantType = UpdateBackendAuthOAuthConfig.AddMember("OAuthGrantType", OAuthGrantType, &smithytraits.JSONName{Name: "oAuthGrantType"})
-
-	UpdateBackendAuthOAuthConfig_OAuthScopes = UpdateBackendAuthOAuthConfig.AddMember("OAuthScopes", _ListOfOAuthScopesElement, &smithytraits.JSONName{Name: "oAuthScopes"})
-
-	UpdateBackendAuthOAuthConfig_RedirectSignInURIs = UpdateBackendAuthOAuthConfig.AddMember("RedirectSignInURIs", _ListOf__string, &smithytraits.JSONName{Name: "redirectSignInURIs"})
-
-	UpdateBackendAuthOAuthConfig_RedirectSignOutURIs = UpdateBackendAuthOAuthConfig.AddMember("RedirectSignOutURIs", _ListOf__string, &smithytraits.JSONName{Name: "redirectSignOutURIs"})
-
-	UpdateBackendAuthOAuthConfig_SocialProviderSettings = UpdateBackendAuthOAuthConfig.AddMember("SocialProviderSettings", SocialProviderSettings, &smithytraits.JSONName{Name: "socialProviderSettings"})
-
-	UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints = UpdateBackendAuthPasswordPolicyConfig.AddMember("AdditionalConstraints", _ListOfAdditionalConstraintsElement, &smithytraits.JSONName{Name: "additionalConstraints"})
-
-	UpdateBackendAuthPasswordPolicyConfig_MinimumLength = UpdateBackendAuthPasswordPolicyConfig.AddMember("MinimumLength", ___double, &smithytraits.JSONName{Name: "minimumLength"})
-
-	UpdateBackendAuthVerificationMessageConfig_DeliveryMethod = UpdateBackendAuthVerificationMessageConfig.AddMember("DeliveryMethod", DeliveryMethod, &smithytraits.JSONName{Name: "deliveryMethod"})
-
-	UpdateBackendAuthVerificationMessageConfig_EmailSettings = UpdateBackendAuthVerificationMessageConfig.AddMember("EmailSettings", EmailSettings, &smithytraits.JSONName{Name: "emailSettings"})
-
-	UpdateBackendAuthVerificationMessageConfig_SmsSettings = UpdateBackendAuthVerificationMessageConfig.AddMember("SmsSettings", SmsSettings, &smithytraits.JSONName{Name: "smsSettings"})
-
-	UpdateBackendAuthUserPoolConfig_ForgotPassword = UpdateBackendAuthUserPoolConfig.AddMember("ForgotPassword", UpdateBackendAuthForgotPasswordConfig, &smithytraits.JSONName{Name: "forgotPassword"})
-
-	UpdateBackendAuthUserPoolConfig_Mfa = UpdateBackendAuthUserPoolConfig.AddMember("Mfa", UpdateBackendAuthMFAConfig, &smithytraits.JSONName{Name: "mfa"})
-
-	UpdateBackendAuthUserPoolConfig_OAuth = UpdateBackendAuthUserPoolConfig.AddMember("OAuth", UpdateBackendAuthOAuthConfig, &smithytraits.JSONName{Name: "oAuth"})
-
-	UpdateBackendAuthUserPoolConfig_PasswordPolicy = UpdateBackendAuthUserPoolConfig.AddMember("PasswordPolicy", UpdateBackendAuthPasswordPolicyConfig, &smithytraits.JSONName{Name: "passwordPolicy"})
-
-	UpdateBackendAuthUserPoolConfig_VerificationMessage = UpdateBackendAuthUserPoolConfig.AddMember("VerificationMessage", UpdateBackendAuthVerificationMessageConfig, &smithytraits.JSONName{Name: "verificationMessage"})
-
-	UpdateBackendAuthResourceConfig_AuthResources = UpdateBackendAuthResourceConfig.AddMember("AuthResources", AuthResources, &smithytraits.JSONName{Name: "authResources"})
-
-	UpdateBackendAuthResourceConfig_IdentityPoolConfigs = UpdateBackendAuthResourceConfig.AddMember("IdentityPoolConfigs", UpdateBackendAuthIdentityPoolConfig, &smithytraits.JSONName{Name: "identityPoolConfigs"})
-
-	UpdateBackendAuthResourceConfig_Service = UpdateBackendAuthResourceConfig.AddMember("Service", Service, &smithytraits.JSONName{Name: "service"})
-
-	UpdateBackendAuthResourceConfig_UserPoolConfigs = UpdateBackendAuthResourceConfig.AddMember("UserPoolConfigs", UpdateBackendAuthUserPoolConfig, &smithytraits.JSONName{Name: "userPoolConfigs"})
-
-	UpdateBackendStorageResourceConfig_Permissions = UpdateBackendStorageResourceConfig.AddMember("Permissions", BackendStoragePermissions, &smithytraits.JSONName{Name: "permissions"})
-
-	UpdateBackendStorageResourceConfig_ServiceName = UpdateBackendStorageResourceConfig.AddMember("ServiceName", ServiceName, &smithytraits.JSONName{Name: "serviceName"})
-
-	CloneBackendRequest_AppId = CloneBackendRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CloneBackendRequest_BackendEnvironmentName = CloneBackendRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	CloneBackendRequest_TargetEnvironmentName = CloneBackendRequest.AddMember("TargetEnvironmentName", ___string, &smithytraits.JSONName{Name: "targetEnvironmentName"})
-
-	CloneBackendResponse_AppId = CloneBackendResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CloneBackendResponse_BackendEnvironmentName = CloneBackendResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CloneBackendResponse_Error = CloneBackendResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	CloneBackendResponse_JobId = CloneBackendResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CloneBackendResponse_Operation = CloneBackendResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	CloneBackendResponse_Status = CloneBackendResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateBackendAPIRequest_AppId = CreateBackendAPIRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateBackendAPIRequest_BackendEnvironmentName = CreateBackendAPIRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendAPIRequest_ResourceConfig = CreateBackendAPIRequest.AddMember("ResourceConfig", BackendAPIResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	CreateBackendAPIRequest_ResourceName = CreateBackendAPIRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	CreateBackendAPIResponse_AppId = CreateBackendAPIResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendAPIResponse_BackendEnvironmentName = CreateBackendAPIResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendAPIResponse_Error = CreateBackendAPIResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	CreateBackendAPIResponse_JobId = CreateBackendAPIResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CreateBackendAPIResponse_Operation = CreateBackendAPIResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	CreateBackendAPIResponse_Status = CreateBackendAPIResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateBackendAuthRequest_AppId = CreateBackendAuthRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateBackendAuthRequest_BackendEnvironmentName = CreateBackendAuthRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendAuthRequest_ResourceConfig = CreateBackendAuthRequest.AddMember("ResourceConfig", CreateBackendAuthResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	CreateBackendAuthRequest_ResourceName = CreateBackendAuthRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	CreateBackendAuthResponse_AppId = CreateBackendAuthResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendAuthResponse_BackendEnvironmentName = CreateBackendAuthResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendAuthResponse_Error = CreateBackendAuthResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	CreateBackendAuthResponse_JobId = CreateBackendAuthResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CreateBackendAuthResponse_Operation = CreateBackendAuthResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	CreateBackendAuthResponse_Status = CreateBackendAuthResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateBackendConfigRequest_AppId = CreateBackendConfigRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateBackendConfigRequest_BackendManagerAppId = CreateBackendConfigRequest.AddMember("BackendManagerAppId", ___string, &smithytraits.JSONName{Name: "backendManagerAppId"})
-
-	CreateBackendConfigResponse_AppId = CreateBackendConfigResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendConfigResponse_BackendEnvironmentName = CreateBackendConfigResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendConfigResponse_JobId = CreateBackendConfigResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CreateBackendConfigResponse_Status = CreateBackendConfigResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateBackendRequest_AppId = CreateBackendRequest.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendRequest_AppName = CreateBackendRequest.AddMember("AppName", ___string, &smithytraits.JSONName{Name: "appName"})
-
-	CreateBackendRequest_BackendEnvironmentName = CreateBackendRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendRequest_ResourceConfig = CreateBackendRequest.AddMember("ResourceConfig", ResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	CreateBackendRequest_ResourceName = CreateBackendRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	CreateBackendResponse_AppId = CreateBackendResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendResponse_BackendEnvironmentName = CreateBackendResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendResponse_Error = CreateBackendResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	CreateBackendResponse_JobId = CreateBackendResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CreateBackendResponse_Operation = CreateBackendResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	CreateBackendResponse_Status = CreateBackendResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateBackendStorageRequest_AppId = CreateBackendStorageRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateBackendStorageRequest_BackendEnvironmentName = CreateBackendStorageRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendStorageRequest_ResourceConfig = CreateBackendStorageRequest.AddMember("ResourceConfig", CreateBackendStorageResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	CreateBackendStorageRequest_ResourceName = CreateBackendStorageRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	CreateBackendStorageResponse_AppId = CreateBackendStorageResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateBackendStorageResponse_BackendEnvironmentName = CreateBackendStorageResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	CreateBackendStorageResponse_JobId = CreateBackendStorageResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	CreateBackendStorageResponse_Status = CreateBackendStorageResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	CreateTokenRequest_AppId = CreateTokenRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateTokenResponse_AppId = CreateTokenResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	CreateTokenResponse_ChallengeCode = CreateTokenResponse.AddMember("ChallengeCode", ___string, &smithytraits.JSONName{Name: "challengeCode"})
-
-	CreateTokenResponse_SessionId = CreateTokenResponse.AddMember("SessionId", ___string, &smithytraits.JSONName{Name: "sessionId"})
-
-	CreateTokenResponse_Ttl = CreateTokenResponse.AddMember("Ttl", ___string, &smithytraits.JSONName{Name: "ttl"})
-
-	DeleteBackendAPIRequest_AppId = DeleteBackendAPIRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendAPIRequest_BackendEnvironmentName = DeleteBackendAPIRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendAPIRequest_ResourceConfig = DeleteBackendAPIRequest.AddMember("ResourceConfig", BackendAPIResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	DeleteBackendAPIRequest_ResourceName = DeleteBackendAPIRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	DeleteBackendAPIResponse_AppId = DeleteBackendAPIResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	DeleteBackendAPIResponse_BackendEnvironmentName = DeleteBackendAPIResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	DeleteBackendAPIResponse_Error = DeleteBackendAPIResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	DeleteBackendAPIResponse_JobId = DeleteBackendAPIResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	DeleteBackendAPIResponse_Operation = DeleteBackendAPIResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	DeleteBackendAPIResponse_Status = DeleteBackendAPIResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	DeleteBackendAuthRequest_AppId = DeleteBackendAuthRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendAuthRequest_BackendEnvironmentName = DeleteBackendAuthRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendAuthRequest_ResourceName = DeleteBackendAuthRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	DeleteBackendAuthResponse_AppId = DeleteBackendAuthResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	DeleteBackendAuthResponse_BackendEnvironmentName = DeleteBackendAuthResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	DeleteBackendAuthResponse_Error = DeleteBackendAuthResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	DeleteBackendAuthResponse_JobId = DeleteBackendAuthResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	DeleteBackendAuthResponse_Operation = DeleteBackendAuthResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	DeleteBackendAuthResponse_Status = DeleteBackendAuthResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	DeleteBackendRequest_AppId = DeleteBackendRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendRequest_BackendEnvironmentName = DeleteBackendRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendResponse_AppId = DeleteBackendResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	DeleteBackendResponse_BackendEnvironmentName = DeleteBackendResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	DeleteBackendResponse_Error = DeleteBackendResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	DeleteBackendResponse_JobId = DeleteBackendResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	DeleteBackendResponse_Operation = DeleteBackendResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	DeleteBackendResponse_Status = DeleteBackendResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	DeleteBackendStorageRequest_AppId = DeleteBackendStorageRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendStorageRequest_BackendEnvironmentName = DeleteBackendStorageRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteBackendStorageRequest_ResourceName = DeleteBackendStorageRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	DeleteBackendStorageRequest_ServiceName = DeleteBackendStorageRequest.AddMember("ServiceName", ServiceName, &smithytraits.JSONName{Name: "serviceName"})
-
-	DeleteBackendStorageResponse_AppId = DeleteBackendStorageResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	DeleteBackendStorageResponse_BackendEnvironmentName = DeleteBackendStorageResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	DeleteBackendStorageResponse_JobId = DeleteBackendStorageResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	DeleteBackendStorageResponse_Status = DeleteBackendStorageResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	DeleteTokenRequest_AppId = DeleteTokenRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteTokenRequest_SessionId = DeleteTokenRequest.AddMember("SessionId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteTokenResponse_IsSuccess = DeleteTokenResponse.AddMember("IsSuccess", ___boolean, &smithytraits.JSONName{Name: "isSuccess"})
-
-	GenerateBackendAPIModelsRequest_AppId = GenerateBackendAPIModelsRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GenerateBackendAPIModelsRequest_BackendEnvironmentName = GenerateBackendAPIModelsRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GenerateBackendAPIModelsRequest_ResourceName = GenerateBackendAPIModelsRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GenerateBackendAPIModelsResponse_AppId = GenerateBackendAPIModelsResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GenerateBackendAPIModelsResponse_BackendEnvironmentName = GenerateBackendAPIModelsResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GenerateBackendAPIModelsResponse_Error = GenerateBackendAPIModelsResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	GenerateBackendAPIModelsResponse_JobId = GenerateBackendAPIModelsResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	GenerateBackendAPIModelsResponse_Operation = GenerateBackendAPIModelsResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	GenerateBackendAPIModelsResponse_Status = GenerateBackendAPIModelsResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	GetBackendAPIRequest_AppId = GetBackendAPIRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAPIRequest_BackendEnvironmentName = GetBackendAPIRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAPIRequest_ResourceConfig = GetBackendAPIRequest.AddMember("ResourceConfig", BackendAPIResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	GetBackendAPIRequest_ResourceName = GetBackendAPIRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendAPIModelsRequest_AppId = GetBackendAPIModelsRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAPIModelsRequest_BackendEnvironmentName = GetBackendAPIModelsRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAPIModelsRequest_ResourceName = GetBackendAPIModelsRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendAPIModelsResponse_Models = GetBackendAPIModelsResponse.AddMember("Models", ___string, &smithytraits.JSONName{Name: "models"})
-
-	GetBackendAPIModelsResponse_Status = GetBackendAPIModelsResponse.AddMember("Status", Status, &smithytraits.JSONName{Name: "status"})
-
-	GetBackendAPIModelsResponse_ModelIntrospectionSchema = GetBackendAPIModelsResponse.AddMember("ModelIntrospectionSchema", ___string, &smithytraits.JSONName{Name: "modelIntrospectionSchema"})
-
-	GetBackendAPIResponse_AppId = GetBackendAPIResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetBackendAPIResponse_BackendEnvironmentName = GetBackendAPIResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendAPIResponse_Error = GetBackendAPIResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	GetBackendAPIResponse_ResourceConfig = GetBackendAPIResponse.AddMember("ResourceConfig", BackendAPIResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	GetBackendAPIResponse_ResourceName = GetBackendAPIResponse.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendAuthRequest_AppId = GetBackendAuthRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAuthRequest_BackendEnvironmentName = GetBackendAuthRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendAuthRequest_ResourceName = GetBackendAuthRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendAuthResponse_AppId = GetBackendAuthResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetBackendAuthResponse_BackendEnvironmentName = GetBackendAuthResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendAuthResponse_Error = GetBackendAuthResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	GetBackendAuthResponse_ResourceConfig = GetBackendAuthResponse.AddMember("ResourceConfig", CreateBackendAuthResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	GetBackendAuthResponse_ResourceName = GetBackendAuthResponse.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendRequest_AppId = GetBackendRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendRequest_BackendEnvironmentName = GetBackendRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendJobRequest_AppId = GetBackendJobRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendJobRequest_BackendEnvironmentName = GetBackendJobRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendJobRequest_JobId = GetBackendJobRequest.AddMember("JobId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendJobResponse_AppId = GetBackendJobResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetBackendJobResponse_BackendEnvironmentName = GetBackendJobResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendJobResponse_CreateTime = GetBackendJobResponse.AddMember("CreateTime", ___string, &smithytraits.JSONName{Name: "createTime"})
-
-	GetBackendJobResponse_Error = GetBackendJobResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	GetBackendJobResponse_JobId = GetBackendJobResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	GetBackendJobResponse_Operation = GetBackendJobResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	GetBackendJobResponse_Status = GetBackendJobResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	GetBackendJobResponse_UpdateTime = GetBackendJobResponse.AddMember("UpdateTime", ___string, &smithytraits.JSONName{Name: "updateTime"})
-
-	GetBackendResponse_AmplifyFeatureFlags = GetBackendResponse.AddMember("AmplifyFeatureFlags", ___string, &smithytraits.JSONName{Name: "amplifyFeatureFlags"})
-
-	GetBackendResponse_AmplifyMetaConfig = GetBackendResponse.AddMember("AmplifyMetaConfig", ___string, &smithytraits.JSONName{Name: "amplifyMetaConfig"})
-
-	GetBackendResponse_AppId = GetBackendResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetBackendResponse_AppName = GetBackendResponse.AddMember("AppName", ___string, &smithytraits.JSONName{Name: "appName"})
-
-	GetBackendResponse_BackendEnvironmentList = GetBackendResponse.AddMember("BackendEnvironmentList", _ListOf__string, &smithytraits.JSONName{Name: "backendEnvironmentList"})
-
-	GetBackendResponse_BackendEnvironmentName = GetBackendResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendResponse_Error = GetBackendResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	GetBackendStorageRequest_AppId = GetBackendStorageRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendStorageRequest_BackendEnvironmentName = GetBackendStorageRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	GetBackendStorageRequest_ResourceName = GetBackendStorageRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetBackendStorageResponse_AppId = GetBackendStorageResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetBackendStorageResponse_BackendEnvironmentName = GetBackendStorageResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	GetBackendStorageResponse_ResourceConfig = GetBackendStorageResponse.AddMember("ResourceConfig", GetBackendStorageResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	GetBackendStorageResponse_ResourceName = GetBackendStorageResponse.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	GetTokenRequest_AppId = GetTokenRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	GetTokenRequest_SessionId = GetTokenRequest.AddMember("SessionId", ___string, &smithytraits.HTTPLabel{})
-
-	GetTokenResponse_AppId = GetTokenResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	GetTokenResponse_ChallengeCode = GetTokenResponse.AddMember("ChallengeCode", ___string, &smithytraits.JSONName{Name: "challengeCode"})
-
-	GetTokenResponse_SessionId = GetTokenResponse.AddMember("SessionId", ___string, &smithytraits.JSONName{Name: "sessionId"})
-
-	GetTokenResponse_Ttl = GetTokenResponse.AddMember("Ttl", ___string, &smithytraits.JSONName{Name: "ttl"})
-
-	ImportBackendAuthRequest_AppId = ImportBackendAuthRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	ImportBackendAuthRequest_BackendEnvironmentName = ImportBackendAuthRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	ImportBackendAuthRequest_IdentityPoolId = ImportBackendAuthRequest.AddMember("IdentityPoolId", ___string, &smithytraits.JSONName{Name: "identityPoolId"})
-
-	ImportBackendAuthRequest_NativeClientId = ImportBackendAuthRequest.AddMember("NativeClientId", ___string, &smithytraits.JSONName{Name: "nativeClientId"})
-
-	ImportBackendAuthRequest_UserPoolId = ImportBackendAuthRequest.AddMember("UserPoolId", ___string, &smithytraits.JSONName{Name: "userPoolId"})
-
-	ImportBackendAuthRequest_WebClientId = ImportBackendAuthRequest.AddMember("WebClientId", ___string, &smithytraits.JSONName{Name: "webClientId"})
-
-	ImportBackendAuthResponse_AppId = ImportBackendAuthResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	ImportBackendAuthResponse_BackendEnvironmentName = ImportBackendAuthResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	ImportBackendAuthResponse_Error = ImportBackendAuthResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	ImportBackendAuthResponse_JobId = ImportBackendAuthResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	ImportBackendAuthResponse_Operation = ImportBackendAuthResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	ImportBackendAuthResponse_Status = ImportBackendAuthResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	ImportBackendStorageRequest_AppId = ImportBackendStorageRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	ImportBackendStorageRequest_BackendEnvironmentName = ImportBackendStorageRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	ImportBackendStorageRequest_BucketName = ImportBackendStorageRequest.AddMember("BucketName", ___string, &smithytraits.JSONName{Name: "bucketName"})
-
-	ImportBackendStorageRequest_ServiceName = ImportBackendStorageRequest.AddMember("ServiceName", ServiceName, &smithytraits.JSONName{Name: "serviceName"})
-
-	ImportBackendStorageResponse_AppId = ImportBackendStorageResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	ImportBackendStorageResponse_BackendEnvironmentName = ImportBackendStorageResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	ImportBackendStorageResponse_JobId = ImportBackendStorageResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	ImportBackendStorageResponse_Status = ImportBackendStorageResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	ListBackendJobsRequest_AppId = ListBackendJobsRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	ListBackendJobsRequest_BackendEnvironmentName = ListBackendJobsRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	ListBackendJobsRequest_JobId = ListBackendJobsRequest.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	ListBackendJobsRequest_MaxResults = ListBackendJobsRequest.AddMember("MaxResults", ___integerMin1Max25, &smithytraits.JSONName{Name: "maxResults"})
-
-	ListBackendJobsRequest_NextToken = ListBackendJobsRequest.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListBackendJobsRequest_Operation = ListBackendJobsRequest.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	ListBackendJobsRequest_Status = ListBackendJobsRequest.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	ListBackendJobsResponse_Jobs = ListBackendJobsResponse.AddMember("Jobs", _ListOfBackendJobRespObj, &smithytraits.JSONName{Name: "jobs"})
-
-	ListBackendJobsResponse_NextToken = ListBackendJobsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListS3BucketsRequest_NextToken = ListS3BucketsRequest.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListS3BucketsResponse_Buckets = ListS3BucketsResponse.AddMember("Buckets", _ListOfS3BucketInfo, &smithytraits.JSONName{Name: "buckets"})
-
-	ListS3BucketsResponse_NextToken = ListS3BucketsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	RemoveAllBackendsRequest_AppId = RemoveAllBackendsRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	RemoveAllBackendsRequest_CleanAmplifyApp = RemoveAllBackendsRequest.AddMember("CleanAmplifyApp", ___boolean, &smithytraits.JSONName{Name: "cleanAmplifyApp"})
-
-	RemoveAllBackendsResponse_AppId = RemoveAllBackendsResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	RemoveAllBackendsResponse_Error = RemoveAllBackendsResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	RemoveAllBackendsResponse_JobId = RemoveAllBackendsResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	RemoveAllBackendsResponse_Operation = RemoveAllBackendsResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	RemoveAllBackendsResponse_Status = RemoveAllBackendsResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	RemoveBackendConfigRequest_AppId = RemoveBackendConfigRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	RemoveBackendConfigResponse_Error = RemoveBackendConfigResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	UpdateBackendAPIRequest_AppId = UpdateBackendAPIRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendAPIRequest_BackendEnvironmentName = UpdateBackendAPIRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendAPIRequest_ResourceConfig = UpdateBackendAPIRequest.AddMember("ResourceConfig", BackendAPIResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	UpdateBackendAPIRequest_ResourceName = UpdateBackendAPIRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	UpdateBackendAPIResponse_AppId = UpdateBackendAPIResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	UpdateBackendAPIResponse_BackendEnvironmentName = UpdateBackendAPIResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	UpdateBackendAPIResponse_Error = UpdateBackendAPIResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	UpdateBackendAPIResponse_JobId = UpdateBackendAPIResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	UpdateBackendAPIResponse_Operation = UpdateBackendAPIResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	UpdateBackendAPIResponse_Status = UpdateBackendAPIResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	UpdateBackendAuthRequest_AppId = UpdateBackendAuthRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendAuthRequest_BackendEnvironmentName = UpdateBackendAuthRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendAuthRequest_ResourceConfig = UpdateBackendAuthRequest.AddMember("ResourceConfig", UpdateBackendAuthResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	UpdateBackendAuthRequest_ResourceName = UpdateBackendAuthRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	UpdateBackendAuthResponse_AppId = UpdateBackendAuthResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	UpdateBackendAuthResponse_BackendEnvironmentName = UpdateBackendAuthResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	UpdateBackendAuthResponse_Error = UpdateBackendAuthResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	UpdateBackendAuthResponse_JobId = UpdateBackendAuthResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	UpdateBackendAuthResponse_Operation = UpdateBackendAuthResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	UpdateBackendAuthResponse_Status = UpdateBackendAuthResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	UpdateBackendConfigRequest_AppId = UpdateBackendConfigRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendConfigRequest_LoginAuthConfig = UpdateBackendConfigRequest.AddMember("LoginAuthConfig", LoginAuthConfigReqObj, &smithytraits.JSONName{Name: "loginAuthConfig"})
-
-	UpdateBackendConfigResponse_AppId = UpdateBackendConfigResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	UpdateBackendConfigResponse_BackendManagerAppId = UpdateBackendConfigResponse.AddMember("BackendManagerAppId", ___string, &smithytraits.JSONName{Name: "backendManagerAppId"})
-
-	UpdateBackendConfigResponse_Error = UpdateBackendConfigResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	UpdateBackendConfigResponse_LoginAuthConfig = UpdateBackendConfigResponse.AddMember("LoginAuthConfig", LoginAuthConfigReqObj, &smithytraits.JSONName{Name: "loginAuthConfig"})
-
-	UpdateBackendJobRequest_AppId = UpdateBackendJobRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendJobRequest_BackendEnvironmentName = UpdateBackendJobRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendJobRequest_JobId = UpdateBackendJobRequest.AddMember("JobId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendJobRequest_Operation = UpdateBackendJobRequest.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	UpdateBackendJobRequest_Status = UpdateBackendJobRequest.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	UpdateBackendJobResponse_AppId = UpdateBackendJobResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	UpdateBackendJobResponse_BackendEnvironmentName = UpdateBackendJobResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	UpdateBackendJobResponse_CreateTime = UpdateBackendJobResponse.AddMember("CreateTime", ___string, &smithytraits.JSONName{Name: "createTime"})
-
-	UpdateBackendJobResponse_Error = UpdateBackendJobResponse.AddMember("Error", ___string, &smithytraits.JSONName{Name: "error"})
-
-	UpdateBackendJobResponse_JobId = UpdateBackendJobResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	UpdateBackendJobResponse_Operation = UpdateBackendJobResponse.AddMember("Operation", ___string, &smithytraits.JSONName{Name: "operation"})
-
-	UpdateBackendJobResponse_Status = UpdateBackendJobResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-	UpdateBackendJobResponse_UpdateTime = UpdateBackendJobResponse.AddMember("UpdateTime", ___string, &smithytraits.JSONName{Name: "updateTime"})
-
-	UpdateBackendStorageRequest_AppId = UpdateBackendStorageRequest.AddMember("AppId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendStorageRequest_BackendEnvironmentName = UpdateBackendStorageRequest.AddMember("BackendEnvironmentName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBackendStorageRequest_ResourceConfig = UpdateBackendStorageRequest.AddMember("ResourceConfig", UpdateBackendStorageResourceConfig, &smithytraits.JSONName{Name: "resourceConfig"})
-
-	UpdateBackendStorageRequest_ResourceName = UpdateBackendStorageRequest.AddMember("ResourceName", ___string, &smithytraits.JSONName{Name: "resourceName"})
-
-	UpdateBackendStorageResponse_AppId = UpdateBackendStorageResponse.AddMember("AppId", ___string, &smithytraits.JSONName{Name: "appId"})
-
-	UpdateBackendStorageResponse_BackendEnvironmentName = UpdateBackendStorageResponse.AddMember("BackendEnvironmentName", ___string, &smithytraits.JSONName{Name: "backendEnvironmentName"})
-
-	UpdateBackendStorageResponse_JobId = UpdateBackendStorageResponse.AddMember("JobId", ___string, &smithytraits.JSONName{Name: "jobId"})
-
-	UpdateBackendStorageResponse_Status = UpdateBackendStorageResponse.AddMember("Status", ___string, &smithytraits.JSONName{Name: "status"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cognitoUserPoolId"}}, DirectMask: 0x1}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "description"}}, DirectMask: 0x1}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "expirationTime"}}, DirectMask: 0x1}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openIDAuthTTL"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openIDClientId"}}, DirectMask: 0x1}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openIDIatTTL"}}, DirectMask: 0x1}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openIDIssueURL"}}, DirectMask: 0x1}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openIDProviderName"}}, DirectMask: 0x1}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mode"}}, DirectMask: 0x1}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "settings"}}, DirectMask: 0x1}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resolutionStrategy"}}, DirectMask: 0x1}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "additionalAuthTypes"}}, DirectMask: 0x1}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiName"}}, DirectMask: 0x1}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "conflictResolution"}}, DirectMask: 0x1}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "defaultAuthType"}}, DirectMask: 0x1}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "service"}}, DirectMask: 0x1}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "transformSchema"}}, DirectMask: 0x1}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "client_id"}}, DirectMask: 0x1}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "key_id"}}, DirectMask: 0x1}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "private_key"}}, DirectMask: 0x1}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "team_id"}}, DirectMask: 0x1}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "client_secret"}}, DirectMask: 0x1}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "appId"}}, DirectMask: 0x1}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "backendEnvironmentName"}}, DirectMask: 0x1}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "createTime"}}, DirectMask: 0x1}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "error"}}, DirectMask: 0x1}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "jobId"}}, DirectMask: 0x1}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operation"}}, DirectMask: 0x1}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "status"}}, DirectMask: 0x1}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "updateTime"}}, DirectMask: 0x1}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authenticated"}}, DirectMask: 0x1}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "unAuthenticated"}}, DirectMask: 0x1}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deliveryMethod"}}, DirectMask: 0x1}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "emailSettings"}, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x1}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "smsSettings"}, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x1}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identityPoolName"}}, DirectMask: 0x1}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "unauthenticatedLogin"}}, DirectMask: 0x1}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainPrefix"}}, DirectMask: 0x1}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "oAuthGrantType"}}, DirectMask: 0x1}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "oAuthScopes"}}, DirectMask: 0x1}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "redirectSignInURIs"}}, DirectMask: 0x1}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "redirectSignOutURIs"}}, DirectMask: 0x1}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "socialProviderSettings"}}, DirectMask: 0x1}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "additionalConstraints"}}, DirectMask: 0x1}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "minimumLength"}}, DirectMask: 0x1}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authResources"}}, DirectMask: 0x1}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identityPoolConfigs"}}, DirectMask: 0x1}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userPoolConfigs"}}, DirectMask: 0x1}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "forgotPassword"}}, DirectMask: 0x1}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mfa"}}, DirectMask: 0x1}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "oAuth"}}, DirectMask: 0x1}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "passwordPolicy"}}, DirectMask: 0x1}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "requiredSignUpAttributes"}}, DirectMask: 0x1}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "signInMethod"}}, DirectMask: 0x1}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userPoolName"}}, DirectMask: 0x1}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "verificationMessage"}}, DirectMask: 0x1}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bucketName"}}, DirectMask: 0x1}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "permissions"}}, DirectMask: 0x1}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serviceName"}}, DirectMask: 0x1}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "emailMessage"}}, DirectMask: 0x1}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "emailSubject"}}, DirectMask: 0x1}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 504}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "imported"}}, DirectMask: 0x1}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "aws_cognito_identity_pool_id"}}, DirectMask: 0x1}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "aws_cognito_region"}}, DirectMask: 0x1}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "aws_user_pools_id"}}, DirectMask: 0x1}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "aws_user_pools_web_client_id"}}, DirectMask: 0x1}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceType"}}, DirectMask: 0x1}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "creationDate"}}, DirectMask: 0x1}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mfaTypes"}}, DirectMask: 0x1}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "smsMessage"}}, DirectMask: 0x1}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "limitType"}}, DirectMask: 0x1}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetEnvironmentName"}}, DirectMask: 0x1}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceConfig"}}, DirectMask: 0x1}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceName"}}, DirectMask: 0x1}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "backendManagerAppId"}}, DirectMask: 0x1}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "appName"}}, DirectMask: 0x1}
+var t116 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "challengeCode"}}, DirectMask: 0x1}
+var t117 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sessionId"}}, DirectMask: 0x1}
+var t118 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ttl"}}, DirectMask: 0x1}
+var t119 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "isSuccess"}}, DirectMask: 0x1}
+var t120 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "models"}}, DirectMask: 0x1}
+var t121 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "modelIntrospectionSchema"}}, DirectMask: 0x1}
+var t122 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "amplifyFeatureFlags"}}, DirectMask: 0x1}
+var t123 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "amplifyMetaConfig"}}, DirectMask: 0x1}
+var t124 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "backendEnvironmentList"}}, DirectMask: 0x1}
+var t125 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identityPoolId"}}, DirectMask: 0x1}
+var t126 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nativeClientId"}}, DirectMask: 0x1}
+var t127 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userPoolId"}}, DirectMask: 0x1}
+var t128 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "webClientId"}}, DirectMask: 0x1}
+var t129 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "maxResults"}}, DirectMask: 0x1}
+var t130 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nextToken"}}, DirectMask: 0x1}
+var t131 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "jobs"}}, DirectMask: 0x1}
+var t132 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "buckets"}}, DirectMask: 0x1}
+var t133 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cleanAmplifyApp"}}, DirectMask: 0x1}
+var t134 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "loginAuthConfig"}}, DirectMask: 0x1}
+
+var mAdditionalConstraintsElement = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalConstraintsElement_REQUIRE_DIGIT, &sAdditionalConstraintsElement_REQUIRE_LOWERCASE, &sAdditionalConstraintsElement_REQUIRE_SYMBOL, &sAdditionalConstraintsElement_REQUIRE_UPPERCASE}}
+var mAuthenticatedElement = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticatedElement_READ, &sAuthenticatedElement_CREATE_AND_UPDATE, &sAuthenticatedElement_DELETE}}
+var mAuthResources = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthResources_USER_POOL_ONLY, &sAuthResources_IDENTITY_POOL_AND_USER_POOL}}
+var mBackendAPIAppSyncAuthSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAPIAppSyncAuthSettings_CognitoUserPoolId, &sBackendAPIAppSyncAuthSettings_Description, &sBackendAPIAppSyncAuthSettings_ExpirationTime, &sBackendAPIAppSyncAuthSettings_OpenIDAuthTTL, &sBackendAPIAppSyncAuthSettings_OpenIDClientId, &sBackendAPIAppSyncAuthSettings_OpenIDIatTTL, &sBackendAPIAppSyncAuthSettings_OpenIDIssueURL, &sBackendAPIAppSyncAuthSettings_OpenIDProviderName}}
+var mBackendAPIAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAPIAuthType_Mode, &sBackendAPIAuthType_Settings}}
+var mBackendAPIConflictResolution = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAPIConflictResolution_ResolutionStrategy}}
+var mBackendAPIResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAPIResourceConfig_AdditionalAuthTypes, &sBackendAPIResourceConfig_ApiName, &sBackendAPIResourceConfig_ConflictResolution, &sBackendAPIResourceConfig_DefaultAuthType, &sBackendAPIResourceConfig_Service, &sBackendAPIResourceConfig_TransformSchema}}
+var mBackendAuthAppleProviderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAuthAppleProviderConfig_ClientId, &sBackendAuthAppleProviderConfig_KeyId, &sBackendAuthAppleProviderConfig_PrivateKey, &sBackendAuthAppleProviderConfig_TeamId}}
+var mBackendAuthSocialProviderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendAuthSocialProviderConfig_ClientId, &sBackendAuthSocialProviderConfig_ClientSecret}}
+var mBackendJobRespObj = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendJobRespObj_AppId, &sBackendJobRespObj_BackendEnvironmentName, &sBackendJobRespObj_CreateTime, &sBackendJobRespObj_Error, &sBackendJobRespObj_JobId, &sBackendJobRespObj_Operation, &sBackendJobRespObj_Status, &sBackendJobRespObj_UpdateTime}}
+var mBackendStoragePermissions = smithy.SchemaMembers{List: []*smithy.Schema{&sBackendStoragePermissions_Authenticated, &sBackendStoragePermissions_UnAuthenticated}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message}}
+var mCreateBackendAuthForgotPasswordConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthForgotPasswordConfig_DeliveryMethod, &sCreateBackendAuthForgotPasswordConfig_EmailSettings, &sCreateBackendAuthForgotPasswordConfig_SmsSettings}}
+var mCreateBackendAuthIdentityPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthIdentityPoolConfig_IdentityPoolName, &sCreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin}}
+var mCreateBackendAuthMFAConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthMFAConfig_MFAMode, &sCreateBackendAuthMFAConfig_Settings}}
+var mCreateBackendAuthOAuthConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthOAuthConfig_DomainPrefix, &sCreateBackendAuthOAuthConfig_OAuthGrantType, &sCreateBackendAuthOAuthConfig_OAuthScopes, &sCreateBackendAuthOAuthConfig_RedirectSignInURIs, &sCreateBackendAuthOAuthConfig_RedirectSignOutURIs, &sCreateBackendAuthOAuthConfig_SocialProviderSettings}}
+var mCreateBackendAuthPasswordPolicyConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthPasswordPolicyConfig_AdditionalConstraints, &sCreateBackendAuthPasswordPolicyConfig_MinimumLength}}
+var mCreateBackendAuthResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthResourceConfig_AuthResources, &sCreateBackendAuthResourceConfig_IdentityPoolConfigs, &sCreateBackendAuthResourceConfig_Service, &sCreateBackendAuthResourceConfig_UserPoolConfigs}}
+var mCreateBackendAuthUserPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthUserPoolConfig_ForgotPassword, &sCreateBackendAuthUserPoolConfig_Mfa, &sCreateBackendAuthUserPoolConfig_OAuth, &sCreateBackendAuthUserPoolConfig_PasswordPolicy, &sCreateBackendAuthUserPoolConfig_RequiredSignUpAttributes, &sCreateBackendAuthUserPoolConfig_SignInMethod, &sCreateBackendAuthUserPoolConfig_UserPoolName, &sCreateBackendAuthUserPoolConfig_VerificationMessage}}
+var mCreateBackendAuthVerificationMessageConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthVerificationMessageConfig_DeliveryMethod, &sCreateBackendAuthVerificationMessageConfig_EmailSettings, &sCreateBackendAuthVerificationMessageConfig_SmsSettings}}
+var mCreateBackendStorageResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendStorageResourceConfig_BucketName, &sCreateBackendStorageResourceConfig_Permissions, &sCreateBackendStorageResourceConfig_ServiceName}}
+var mDeliveryMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryMethod_EMAIL, &sDeliveryMethod_SMS}}
+var mEmailSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailSettings_EmailMessage, &sEmailSettings_EmailSubject}}
+var mGatewayTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayTimeoutException_Message}}
+var mGetBackendStorageResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendStorageResourceConfig_BucketName, &sGetBackendStorageResourceConfig_Imported, &sGetBackendStorageResourceConfig_Permissions, &sGetBackendStorageResourceConfig_ServiceName}}
+var m_ListOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOf__string_member}}
+var m_ListOfAdditionalConstraintsElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfAdditionalConstraintsElement_member}}
+var m_ListOfAuthenticatedElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfAuthenticatedElement_member}}
+var m_ListOfBackendAPIAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfBackendAPIAuthType_member}}
+var m_ListOfBackendJobRespObj = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfBackendJobRespObj_member}}
+var m_ListOfMfaTypesElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfMfaTypesElement_member}}
+var m_ListOfOAuthScopesElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfOAuthScopesElement_member}}
+var m_ListOfRequiredSignUpAttributesElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfRequiredSignUpAttributesElement_member}}
+var m_ListOfS3BucketInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfS3BucketInfo_member}}
+var m_ListOfUnAuthenticatedElement = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfUnAuthenticatedElement_member}}
+var mLoginAuthConfigReqObj = smithy.SchemaMembers{List: []*smithy.Schema{&sLoginAuthConfigReqObj_AwsCognitoIdentityPoolId, &sLoginAuthConfigReqObj_AwsCognitoRegion, &sLoginAuthConfigReqObj_AwsUserPoolsId, &sLoginAuthConfigReqObj_AwsUserPoolsWebClientId}}
+var mMFAMode = smithy.SchemaMembers{List: []*smithy.Schema{&sMFAMode_ON, &sMFAMode_OFF, &sMFAMode_OPTIONAL}}
+var mMfaTypesElement = smithy.SchemaMembers{List: []*smithy.Schema{&sMfaTypesElement_SMS, &sMfaTypesElement_TOTP}}
+var mMode = smithy.SchemaMembers{List: []*smithy.Schema{&sMode_API_KEY, &sMode_AWS_IAM, &sMode_AMAZON_COGNITO_USER_POOLS, &sMode_OPENID_CONNECT}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Message, &sNotFoundException_ResourceType}}
+var mOAuthGrantType = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthGrantType_CODE, &sOAuthGrantType_IMPLICIT}}
+var mOAuthScopesElement = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthScopesElement_PHONE, &sOAuthScopesElement_EMAIL, &sOAuthScopesElement_OPENID, &sOAuthScopesElement_PROFILE, &sOAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN}}
+var mRequiredSignUpAttributesElement = smithy.SchemaMembers{List: []*smithy.Schema{&sRequiredSignUpAttributesElement_ADDRESS, &sRequiredSignUpAttributesElement_BIRTHDATE, &sRequiredSignUpAttributesElement_EMAIL, &sRequiredSignUpAttributesElement_FAMILY_NAME, &sRequiredSignUpAttributesElement_GENDER, &sRequiredSignUpAttributesElement_GIVEN_NAME, &sRequiredSignUpAttributesElement_LOCALE, &sRequiredSignUpAttributesElement_MIDDLE_NAME, &sRequiredSignUpAttributesElement_NAME, &sRequiredSignUpAttributesElement_NICKNAME, &sRequiredSignUpAttributesElement_PHONE_NUMBER, &sRequiredSignUpAttributesElement_PICTURE, &sRequiredSignUpAttributesElement_PREFERRED_USERNAME, &sRequiredSignUpAttributesElement_PROFILE, &sRequiredSignUpAttributesElement_UPDATED_AT, &sRequiredSignUpAttributesElement_WEBSITE, &sRequiredSignUpAttributesElement_ZONE_INFO}, Hash: &hRequiredSignUpAttributesElement}
+var mResolutionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sResolutionStrategy_OPTIMISTIC_CONCURRENCY, &sResolutionStrategy_LAMBDA, &sResolutionStrategy_AUTOMERGE, &sResolutionStrategy_NONE}}
+var mS3BucketInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sS3BucketInfo_CreationDate, &sS3BucketInfo_Name}}
+var mService = smithy.SchemaMembers{List: []*smithy.Schema{&sService_COGNITO}}
+var mServiceName = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceName_S3}}
+var mSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sSettings_MfaTypes, &sSettings_SmsMessage}}
+var mSignInMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sSignInMethod_EMAIL, &sSignInMethod_EMAIL_AND_PHONE_NUMBER, &sSignInMethod_PHONE_NUMBER, &sSignInMethod_USERNAME}}
+var mSmsSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sSmsSettings_SmsMessage}}
+var mSocialProviderSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sSocialProviderSettings_Facebook, &sSocialProviderSettings_Google, &sSocialProviderSettings_LoginWithAmazon, &sSocialProviderSettings_SignInWithApple}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_LATEST, &sStatus_STALE}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_LimitType, &sTooManyRequestsException_Message}}
+var mUnAuthenticatedElement = smithy.SchemaMembers{List: []*smithy.Schema{&sUnAuthenticatedElement_READ, &sUnAuthenticatedElement_CREATE_AND_UPDATE, &sUnAuthenticatedElement_DELETE}}
+var mUpdateBackendAuthForgotPasswordConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthForgotPasswordConfig_DeliveryMethod, &sUpdateBackendAuthForgotPasswordConfig_EmailSettings, &sUpdateBackendAuthForgotPasswordConfig_SmsSettings}}
+var mUpdateBackendAuthIdentityPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin}}
+var mUpdateBackendAuthMFAConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthMFAConfig_MFAMode, &sUpdateBackendAuthMFAConfig_Settings}}
+var mUpdateBackendAuthOAuthConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthOAuthConfig_DomainPrefix, &sUpdateBackendAuthOAuthConfig_OAuthGrantType, &sUpdateBackendAuthOAuthConfig_OAuthScopes, &sUpdateBackendAuthOAuthConfig_RedirectSignInURIs, &sUpdateBackendAuthOAuthConfig_RedirectSignOutURIs, &sUpdateBackendAuthOAuthConfig_SocialProviderSettings}}
+var mUpdateBackendAuthPasswordPolicyConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints, &sUpdateBackendAuthPasswordPolicyConfig_MinimumLength}}
+var mUpdateBackendAuthResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthResourceConfig_AuthResources, &sUpdateBackendAuthResourceConfig_IdentityPoolConfigs, &sUpdateBackendAuthResourceConfig_Service, &sUpdateBackendAuthResourceConfig_UserPoolConfigs}}
+var mUpdateBackendAuthUserPoolConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthUserPoolConfig_ForgotPassword, &sUpdateBackendAuthUserPoolConfig_Mfa, &sUpdateBackendAuthUserPoolConfig_OAuth, &sUpdateBackendAuthUserPoolConfig_PasswordPolicy, &sUpdateBackendAuthUserPoolConfig_VerificationMessage}}
+var mUpdateBackendAuthVerificationMessageConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthVerificationMessageConfig_DeliveryMethod, &sUpdateBackendAuthVerificationMessageConfig_EmailSettings, &sUpdateBackendAuthVerificationMessageConfig_SmsSettings}}
+var mUpdateBackendStorageResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendStorageResourceConfig_Permissions, &sUpdateBackendStorageResourceConfig_ServiceName}}
+var mCloneBackendRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCloneBackendRequest_AppId, &sCloneBackendRequest_BackendEnvironmentName, &sCloneBackendRequest_TargetEnvironmentName}}
+var mCloneBackendResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCloneBackendResponse_AppId, &sCloneBackendResponse_BackendEnvironmentName, &sCloneBackendResponse_Error, &sCloneBackendResponse_JobId, &sCloneBackendResponse_Operation, &sCloneBackendResponse_Status}}
+var mCreateBackendAPIRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAPIRequest_AppId, &sCreateBackendAPIRequest_BackendEnvironmentName, &sCreateBackendAPIRequest_ResourceConfig, &sCreateBackendAPIRequest_ResourceName}}
+var mCreateBackendAPIResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAPIResponse_AppId, &sCreateBackendAPIResponse_BackendEnvironmentName, &sCreateBackendAPIResponse_Error, &sCreateBackendAPIResponse_JobId, &sCreateBackendAPIResponse_Operation, &sCreateBackendAPIResponse_Status}}
+var mCreateBackendAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthRequest_AppId, &sCreateBackendAuthRequest_BackendEnvironmentName, &sCreateBackendAuthRequest_ResourceConfig, &sCreateBackendAuthRequest_ResourceName}}
+var mCreateBackendAuthResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendAuthResponse_AppId, &sCreateBackendAuthResponse_BackendEnvironmentName, &sCreateBackendAuthResponse_Error, &sCreateBackendAuthResponse_JobId, &sCreateBackendAuthResponse_Operation, &sCreateBackendAuthResponse_Status}}
+var mCreateBackendConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendConfigRequest_AppId, &sCreateBackendConfigRequest_BackendManagerAppId}}
+var mCreateBackendConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendConfigResponse_AppId, &sCreateBackendConfigResponse_BackendEnvironmentName, &sCreateBackendConfigResponse_JobId, &sCreateBackendConfigResponse_Status}}
+var mCreateBackendRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendRequest_AppId, &sCreateBackendRequest_AppName, &sCreateBackendRequest_BackendEnvironmentName, &sCreateBackendRequest_ResourceConfig, &sCreateBackendRequest_ResourceName}}
+var mCreateBackendResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendResponse_AppId, &sCreateBackendResponse_BackendEnvironmentName, &sCreateBackendResponse_Error, &sCreateBackendResponse_JobId, &sCreateBackendResponse_Operation, &sCreateBackendResponse_Status}}
+var mCreateBackendStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendStorageRequest_AppId, &sCreateBackendStorageRequest_BackendEnvironmentName, &sCreateBackendStorageRequest_ResourceConfig, &sCreateBackendStorageRequest_ResourceName}}
+var mCreateBackendStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackendStorageResponse_AppId, &sCreateBackendStorageResponse_BackendEnvironmentName, &sCreateBackendStorageResponse_JobId, &sCreateBackendStorageResponse_Status}}
+var mCreateTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenRequest_AppId}}
+var mCreateTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenResponse_AppId, &sCreateTokenResponse_ChallengeCode, &sCreateTokenResponse_SessionId, &sCreateTokenResponse_Ttl}}
+var mDeleteBackendAPIRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendAPIRequest_AppId, &sDeleteBackendAPIRequest_BackendEnvironmentName, &sDeleteBackendAPIRequest_ResourceConfig, &sDeleteBackendAPIRequest_ResourceName}}
+var mDeleteBackendAPIResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendAPIResponse_AppId, &sDeleteBackendAPIResponse_BackendEnvironmentName, &sDeleteBackendAPIResponse_Error, &sDeleteBackendAPIResponse_JobId, &sDeleteBackendAPIResponse_Operation, &sDeleteBackendAPIResponse_Status}}
+var mDeleteBackendAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendAuthRequest_AppId, &sDeleteBackendAuthRequest_BackendEnvironmentName, &sDeleteBackendAuthRequest_ResourceName}}
+var mDeleteBackendAuthResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendAuthResponse_AppId, &sDeleteBackendAuthResponse_BackendEnvironmentName, &sDeleteBackendAuthResponse_Error, &sDeleteBackendAuthResponse_JobId, &sDeleteBackendAuthResponse_Operation, &sDeleteBackendAuthResponse_Status}}
+var mDeleteBackendRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendRequest_AppId, &sDeleteBackendRequest_BackendEnvironmentName}}
+var mDeleteBackendResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendResponse_AppId, &sDeleteBackendResponse_BackendEnvironmentName, &sDeleteBackendResponse_Error, &sDeleteBackendResponse_JobId, &sDeleteBackendResponse_Operation, &sDeleteBackendResponse_Status}}
+var mDeleteBackendStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendStorageRequest_AppId, &sDeleteBackendStorageRequest_BackendEnvironmentName, &sDeleteBackendStorageRequest_ResourceName, &sDeleteBackendStorageRequest_ServiceName}}
+var mDeleteBackendStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackendStorageResponse_AppId, &sDeleteBackendStorageResponse_BackendEnvironmentName, &sDeleteBackendStorageResponse_JobId, &sDeleteBackendStorageResponse_Status}}
+var mDeleteTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTokenRequest_AppId, &sDeleteTokenRequest_SessionId}}
+var mDeleteTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTokenResponse_IsSuccess}}
+var mGenerateBackendAPIModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateBackendAPIModelsRequest_AppId, &sGenerateBackendAPIModelsRequest_BackendEnvironmentName, &sGenerateBackendAPIModelsRequest_ResourceName}}
+var mGenerateBackendAPIModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateBackendAPIModelsResponse_AppId, &sGenerateBackendAPIModelsResponse_BackendEnvironmentName, &sGenerateBackendAPIModelsResponse_Error, &sGenerateBackendAPIModelsResponse_JobId, &sGenerateBackendAPIModelsResponse_Operation, &sGenerateBackendAPIModelsResponse_Status}}
+var mGetBackendAPIRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAPIRequest_AppId, &sGetBackendAPIRequest_BackendEnvironmentName, &sGetBackendAPIRequest_ResourceConfig, &sGetBackendAPIRequest_ResourceName}}
+var mGetBackendAPIModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAPIModelsRequest_AppId, &sGetBackendAPIModelsRequest_BackendEnvironmentName, &sGetBackendAPIModelsRequest_ResourceName}}
+var mGetBackendAPIModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAPIModelsResponse_Models, &sGetBackendAPIModelsResponse_Status, &sGetBackendAPIModelsResponse_ModelIntrospectionSchema}}
+var mGetBackendAPIResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAPIResponse_AppId, &sGetBackendAPIResponse_BackendEnvironmentName, &sGetBackendAPIResponse_Error, &sGetBackendAPIResponse_ResourceConfig, &sGetBackendAPIResponse_ResourceName}}
+var mGetBackendAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAuthRequest_AppId, &sGetBackendAuthRequest_BackendEnvironmentName, &sGetBackendAuthRequest_ResourceName}}
+var mGetBackendAuthResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendAuthResponse_AppId, &sGetBackendAuthResponse_BackendEnvironmentName, &sGetBackendAuthResponse_Error, &sGetBackendAuthResponse_ResourceConfig, &sGetBackendAuthResponse_ResourceName}}
+var mGetBackendRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendRequest_AppId, &sGetBackendRequest_BackendEnvironmentName}}
+var mGetBackendJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendJobRequest_AppId, &sGetBackendJobRequest_BackendEnvironmentName, &sGetBackendJobRequest_JobId}}
+var mGetBackendJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendJobResponse_AppId, &sGetBackendJobResponse_BackendEnvironmentName, &sGetBackendJobResponse_CreateTime, &sGetBackendJobResponse_Error, &sGetBackendJobResponse_JobId, &sGetBackendJobResponse_Operation, &sGetBackendJobResponse_Status, &sGetBackendJobResponse_UpdateTime}}
+var mGetBackendResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendResponse_AmplifyFeatureFlags, &sGetBackendResponse_AmplifyMetaConfig, &sGetBackendResponse_AppId, &sGetBackendResponse_AppName, &sGetBackendResponse_BackendEnvironmentList, &sGetBackendResponse_BackendEnvironmentName, &sGetBackendResponse_Error}}
+var mGetBackendStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendStorageRequest_AppId, &sGetBackendStorageRequest_BackendEnvironmentName, &sGetBackendStorageRequest_ResourceName}}
+var mGetBackendStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBackendStorageResponse_AppId, &sGetBackendStorageResponse_BackendEnvironmentName, &sGetBackendStorageResponse_ResourceConfig, &sGetBackendStorageResponse_ResourceName}}
+var mGetTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTokenRequest_AppId, &sGetTokenRequest_SessionId}}
+var mGetTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTokenResponse_AppId, &sGetTokenResponse_ChallengeCode, &sGetTokenResponse_SessionId, &sGetTokenResponse_Ttl}}
+var mImportBackendAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportBackendAuthRequest_AppId, &sImportBackendAuthRequest_BackendEnvironmentName, &sImportBackendAuthRequest_IdentityPoolId, &sImportBackendAuthRequest_NativeClientId, &sImportBackendAuthRequest_UserPoolId, &sImportBackendAuthRequest_WebClientId}}
+var mImportBackendAuthResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportBackendAuthResponse_AppId, &sImportBackendAuthResponse_BackendEnvironmentName, &sImportBackendAuthResponse_Error, &sImportBackendAuthResponse_JobId, &sImportBackendAuthResponse_Operation, &sImportBackendAuthResponse_Status}}
+var mImportBackendStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportBackendStorageRequest_AppId, &sImportBackendStorageRequest_BackendEnvironmentName, &sImportBackendStorageRequest_BucketName, &sImportBackendStorageRequest_ServiceName}}
+var mImportBackendStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportBackendStorageResponse_AppId, &sImportBackendStorageResponse_BackendEnvironmentName, &sImportBackendStorageResponse_JobId, &sImportBackendStorageResponse_Status}}
+var mListBackendJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBackendJobsRequest_AppId, &sListBackendJobsRequest_BackendEnvironmentName, &sListBackendJobsRequest_JobId, &sListBackendJobsRequest_MaxResults, &sListBackendJobsRequest_NextToken, &sListBackendJobsRequest_Operation, &sListBackendJobsRequest_Status}}
+var mListBackendJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBackendJobsResponse_Jobs, &sListBackendJobsResponse_NextToken}}
+var mListS3BucketsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListS3BucketsRequest_NextToken}}
+var mListS3BucketsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListS3BucketsResponse_Buckets, &sListS3BucketsResponse_NextToken}}
+var mRemoveAllBackendsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAllBackendsRequest_AppId, &sRemoveAllBackendsRequest_CleanAmplifyApp}}
+var mRemoveAllBackendsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAllBackendsResponse_AppId, &sRemoveAllBackendsResponse_Error, &sRemoveAllBackendsResponse_JobId, &sRemoveAllBackendsResponse_Operation, &sRemoveAllBackendsResponse_Status}}
+var mRemoveBackendConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveBackendConfigRequest_AppId}}
+var mRemoveBackendConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveBackendConfigResponse_Error}}
+var mUpdateBackendAPIRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAPIRequest_AppId, &sUpdateBackendAPIRequest_BackendEnvironmentName, &sUpdateBackendAPIRequest_ResourceConfig, &sUpdateBackendAPIRequest_ResourceName}}
+var mUpdateBackendAPIResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAPIResponse_AppId, &sUpdateBackendAPIResponse_BackendEnvironmentName, &sUpdateBackendAPIResponse_Error, &sUpdateBackendAPIResponse_JobId, &sUpdateBackendAPIResponse_Operation, &sUpdateBackendAPIResponse_Status}}
+var mUpdateBackendAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthRequest_AppId, &sUpdateBackendAuthRequest_BackendEnvironmentName, &sUpdateBackendAuthRequest_ResourceConfig, &sUpdateBackendAuthRequest_ResourceName}}
+var mUpdateBackendAuthResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendAuthResponse_AppId, &sUpdateBackendAuthResponse_BackendEnvironmentName, &sUpdateBackendAuthResponse_Error, &sUpdateBackendAuthResponse_JobId, &sUpdateBackendAuthResponse_Operation, &sUpdateBackendAuthResponse_Status}}
+var mUpdateBackendConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendConfigRequest_AppId, &sUpdateBackendConfigRequest_LoginAuthConfig}}
+var mUpdateBackendConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendConfigResponse_AppId, &sUpdateBackendConfigResponse_BackendManagerAppId, &sUpdateBackendConfigResponse_Error, &sUpdateBackendConfigResponse_LoginAuthConfig}}
+var mUpdateBackendJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendJobRequest_AppId, &sUpdateBackendJobRequest_BackendEnvironmentName, &sUpdateBackendJobRequest_JobId, &sUpdateBackendJobRequest_Operation, &sUpdateBackendJobRequest_Status}}
+var mUpdateBackendJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendJobResponse_AppId, &sUpdateBackendJobResponse_BackendEnvironmentName, &sUpdateBackendJobResponse_CreateTime, &sUpdateBackendJobResponse_Error, &sUpdateBackendJobResponse_JobId, &sUpdateBackendJobResponse_Operation, &sUpdateBackendJobResponse_Status, &sUpdateBackendJobResponse_UpdateTime}}
+var mUpdateBackendStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendStorageRequest_AppId, &sUpdateBackendStorageRequest_BackendEnvironmentName, &sUpdateBackendStorageRequest_ResourceConfig, &sUpdateBackendStorageRequest_ResourceName}}
+var mUpdateBackendStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBackendStorageResponse_AppId, &sUpdateBackendStorageResponse_BackendEnvironmentName, &sUpdateBackendStorageResponse_JobId, &sUpdateBackendStorageResponse_Status}}
+
+var hRequiredSignUpAttributesElement = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	14, 0, 0, 1, 0, 0, 0, 2, 17, 7, 0, 0, 0, 15, 0, 0, 0, 0, 3, 0, 12, 11, 0, 0,
+	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0,
+	9, 0, 0, 10, 0, 8, 0, 0, 16, 0, 0, 0, 0, 0, 6, 0,
+}}
+
+var sCloneBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloneBackend, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCloneBackend})
+var sCreateBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackend, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateBackend})
+var sCreateBackendAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAPI, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateBackendAPI})
+var sCreateBackendAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuth, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateBackendAuth})
+var sCreateBackendConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendConfig, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateBackendConfig})
+var sCreateBackendStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendStorage, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateBackendStorage})
+var sCreateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateToken, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateToken})
+var sDeleteBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackend, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBackend})
+var sDeleteBackendAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAPI, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBackendAPI})
+var sDeleteBackendAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAuth, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBackendAuth})
+var sDeleteBackendStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendStorage, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBackendStorage})
+var sDeleteToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteToken, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteToken})
+var sGenerateBackendAPIModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateBackendAPIModels, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGenerateBackendAPIModels})
+var sGetBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackend, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetBackend})
+var sGetBackendAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPI, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetBackendAPI})
+var sGetBackendAPIModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPIModels, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetBackendAPIModels})
+var sGetBackendAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAuth, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetBackendAuth})
+var sGetBackendJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendJob, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetBackendJob})
+var sGetBackendStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendStorage, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetBackendStorage})
+var sGetToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetToken, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetToken})
+var sImportBackendAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendAuth, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eImportBackendAuth})
+var sImportBackendStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendStorage, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eImportBackendStorage})
+var sListBackendJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBackendJobs, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListBackendJobs})
+var sListS3Buckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3Buckets, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListS3Buckets})
+var sRemoveAllBackends = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAllBackends, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eRemoveAllBackends})
+var sRemoveBackendConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveBackendConfig, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eRemoveBackendConfig})
+var sUpdateBackendAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAPI, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBackendAPI})
+var sUpdateBackendAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuth, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBackendAuth})
+var sUpdateBackendConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendConfig, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBackendConfig})
+var sUpdateBackendJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendJob, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBackendJob})
+var sUpdateBackendStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendStorage, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBackendStorage})
+var s_AmplifyBackend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmplifyBackend, Type: smithy.ShapeTypeService, Ext: &e_AmplifyBackend})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___double, Type: smithy.ShapeTypeDouble, Ext: &e___double})
+var s___integerMin1Max25 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max25, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max25})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var sAdditionalConstraintsElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalConstraintsElement, Members: &mAdditionalConstraintsElement, Type: smithy.ShapeTypeEnum, Ext: &eAdditionalConstraintsElement})
+var sAdditionalConstraintsElement_REQUIRE_DIGIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE_DIGIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalConstraintsElement_REQUIRE_DIGIT})
+var sAdditionalConstraintsElement_REQUIRE_LOWERCASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE_LOWERCASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalConstraintsElement_REQUIRE_LOWERCASE})
+var sAdditionalConstraintsElement_REQUIRE_SYMBOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE_SYMBOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalConstraintsElement_REQUIRE_SYMBOL})
+var sAdditionalConstraintsElement_REQUIRE_UPPERCASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE_UPPERCASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalConstraintsElement_REQUIRE_UPPERCASE})
+var sAuthenticatedElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticatedElement, Members: &mAuthenticatedElement, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticatedElement})
+var sAuthenticatedElement_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticatedElement_READ})
+var sAuthenticatedElement_CREATE_AND_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_AND_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticatedElement_CREATE_AND_UPDATE})
+var sAuthenticatedElement_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticatedElement_DELETE})
+var sAuthResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthResources, Members: &mAuthResources, Type: smithy.ShapeTypeEnum, Ext: &eAuthResources})
+var sAuthResources_USER_POOL_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_POOL_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthResources_USER_POOL_ONLY})
+var sAuthResources_IDENTITY_POOL_AND_USER_POOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_POOL_AND_USER_POOL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthResources_IDENTITY_POOL_AND_USER_POOL})
+var sBackendAPIAppSyncAuthSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAPIAppSyncAuthSettings, Members: &mBackendAPIAppSyncAuthSettings, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIAppSyncAuthSettings})
+var sBackendAPIAppSyncAuthSettings_CognitoUserPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoUserPoolId", ID: &i___string, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_CognitoUserPoolId})
+var sBackendAPIAppSyncAuthSettings_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_Description})
+var sBackendAPIAppSyncAuthSettings_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i___double, Traits: &t33, Type: smithy.ShapeTypeDouble, Ext: &eBackendAPIAppSyncAuthSettings_ExpirationTime})
+var sBackendAPIAppSyncAuthSettings_OpenIDAuthTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIDAuthTTL", ID: &i___string, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_OpenIDAuthTTL})
+var sBackendAPIAppSyncAuthSettings_OpenIDClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIDClientId", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_OpenIDClientId})
+var sBackendAPIAppSyncAuthSettings_OpenIDIatTTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIDIatTTL", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_OpenIDIatTTL})
+var sBackendAPIAppSyncAuthSettings_OpenIDIssueURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIDIssueURL", ID: &i___string, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_OpenIDIssueURL})
+var sBackendAPIAppSyncAuthSettings_OpenIDProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIDProviderName", ID: &i___string, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eBackendAPIAppSyncAuthSettings_OpenIDProviderName})
+var sBackendAPIAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAPIAuthType, Members: &mBackendAPIAuthType, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIAuthType})
+var sBackendAPIAuthType_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iMode, Members: &mMode, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eBackendAPIAuthType_Mode})
+var sBackendAPIAuthType_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iBackendAPIAppSyncAuthSettings, Members: &mBackendAPIAppSyncAuthSettings, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIAuthType_Settings})
+var sBackendAPIConflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAPIConflictResolution, Members: &mBackendAPIConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIConflictResolution})
+var sBackendAPIConflictResolution_ResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolutionStrategy", ID: &iResolutionStrategy, Members: &mResolutionStrategy, Traits: &t41, Type: smithy.ShapeTypeEnum, Ext: &eBackendAPIConflictResolution_ResolutionStrategy})
+var sBackendAPIResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIResourceConfig})
+var sBackendAPIResourceConfig_AdditionalAuthTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalAuthTypes", ID: &i_ListOfBackendAPIAuthType, Members: &m_ListOfBackendAPIAuthType, Traits: &t42, Type: smithy.ShapeTypeList, Ext: &eBackendAPIResourceConfig_AdditionalAuthTypes})
+var sBackendAPIResourceConfig_ApiName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiName", ID: &i___string, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eBackendAPIResourceConfig_ApiName})
+var sBackendAPIResourceConfig_ConflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictResolution", ID: &iBackendAPIConflictResolution, Members: &mBackendAPIConflictResolution, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIResourceConfig_ConflictResolution})
+var sBackendAPIResourceConfig_DefaultAuthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAuthType", ID: &iBackendAPIAuthType, Members: &mBackendAPIAuthType, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eBackendAPIResourceConfig_DefaultAuthType})
+var sBackendAPIResourceConfig_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i___string, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eBackendAPIResourceConfig_Service})
+var sBackendAPIResourceConfig_TransformSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransformSchema", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eBackendAPIResourceConfig_TransformSchema})
+var sBackendAuthAppleProviderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAuthAppleProviderConfig, Members: &mBackendAuthAppleProviderConfig, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eBackendAuthAppleProviderConfig})
+var sBackendAuthAppleProviderConfig_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientId", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eBackendAuthAppleProviderConfig_ClientId})
+var sBackendAuthAppleProviderConfig_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i___string, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eBackendAuthAppleProviderConfig_KeyId})
+var sBackendAuthAppleProviderConfig_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eBackendAuthAppleProviderConfig_PrivateKey})
+var sBackendAuthAppleProviderConfig_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i___string, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eBackendAuthAppleProviderConfig_TeamId})
+var sBackendAuthSocialProviderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendAuthSocialProviderConfig, Members: &mBackendAuthSocialProviderConfig, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eBackendAuthSocialProviderConfig})
+var sBackendAuthSocialProviderConfig_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientId", ID: &i___string, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eBackendAuthSocialProviderConfig_ClientId})
+var sBackendAuthSocialProviderConfig_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSecret", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eBackendAuthSocialProviderConfig_ClientSecret})
+var sBackendJobRespObj = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendJobRespObj, Members: &mBackendJobRespObj, Type: smithy.ShapeTypeStructure, Ext: &eBackendJobRespObj})
+var sBackendJobRespObj_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_AppId})
+var sBackendJobRespObj_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_BackendEnvironmentName})
+var sBackendJobRespObj_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_CreateTime})
+var sBackendJobRespObj_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_Error})
+var sBackendJobRespObj_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_JobId})
+var sBackendJobRespObj_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_Operation})
+var sBackendJobRespObj_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_Status})
+var sBackendJobRespObj_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i___string, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eBackendJobRespObj_UpdateTime})
+var sBackendStoragePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackendStoragePermissions, Members: &mBackendStoragePermissions, Type: smithy.ShapeTypeStructure, Ext: &eBackendStoragePermissions})
+var sBackendStoragePermissions_Authenticated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authenticated", ID: &i_ListOfAuthenticatedElement, Members: &m_ListOfAuthenticatedElement, Traits: &t62, Type: smithy.ShapeTypeList, Ext: &eBackendStoragePermissions_Authenticated})
+var sBackendStoragePermissions_UnAuthenticated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnAuthenticated", ID: &i_ListOfUnAuthenticatedElement, Members: &m_ListOfUnAuthenticatedElement, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &eBackendStoragePermissions_UnAuthenticated})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sCreateBackendAuthForgotPasswordConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthForgotPasswordConfig, Members: &mCreateBackendAuthForgotPasswordConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthForgotPasswordConfig})
+var sCreateBackendAuthForgotPasswordConfig_DeliveryMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryMethod", ID: &iDeliveryMethod, Members: &mDeliveryMethod, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthForgotPasswordConfig_DeliveryMethod})
+var sCreateBackendAuthForgotPasswordConfig_EmailSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailSettings", ID: &iEmailSettings, Members: &mEmailSettings, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthForgotPasswordConfig_EmailSettings})
+var sCreateBackendAuthForgotPasswordConfig_SmsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsSettings", ID: &iSmsSettings, Members: &mSmsSettings, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthForgotPasswordConfig_SmsSettings})
+var sCreateBackendAuthIdentityPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthIdentityPoolConfig, Members: &mCreateBackendAuthIdentityPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthIdentityPoolConfig})
+var sCreateBackendAuthIdentityPoolConfig_IdentityPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolName", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthIdentityPoolConfig_IdentityPoolName})
+var sCreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnauthenticatedLogin", ID: &i___boolean, Traits: &t70, Type: smithy.ShapeTypeBoolean, Ext: &eCreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin})
+var sCreateBackendAuthMFAConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthMFAConfig, Members: &mCreateBackendAuthMFAConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthMFAConfig})
+var sCreateBackendAuthMFAConfig_MFAMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MFAMode", ID: &iMFAMode, Members: &mMFAMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthMFAConfig_MFAMode})
+var sCreateBackendAuthMFAConfig_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iSettings, Members: &mSettings, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthMFAConfig_Settings})
+var sCreateBackendAuthOAuthConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthOAuthConfig, Members: &mCreateBackendAuthOAuthConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthOAuthConfig})
+var sCreateBackendAuthOAuthConfig_DomainPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPrefix", ID: &i___string, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthOAuthConfig_DomainPrefix})
+var sCreateBackendAuthOAuthConfig_OAuthGrantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthGrantType", ID: &iOAuthGrantType, Members: &mOAuthGrantType, Traits: &t72, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthOAuthConfig_OAuthGrantType})
+var sCreateBackendAuthOAuthConfig_OAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthScopes", ID: &i_ListOfOAuthScopesElement, Members: &m_ListOfOAuthScopesElement, Traits: &t73, Type: smithy.ShapeTypeList, Ext: &eCreateBackendAuthOAuthConfig_OAuthScopes})
+var sCreateBackendAuthOAuthConfig_RedirectSignInURIs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectSignInURIs", ID: &i_ListOf__string, Members: &m_ListOf__string, Traits: &t74, Type: smithy.ShapeTypeList, Ext: &eCreateBackendAuthOAuthConfig_RedirectSignInURIs})
+var sCreateBackendAuthOAuthConfig_RedirectSignOutURIs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectSignOutURIs", ID: &i_ListOf__string, Members: &m_ListOf__string, Traits: &t75, Type: smithy.ShapeTypeList, Ext: &eCreateBackendAuthOAuthConfig_RedirectSignOutURIs})
+var sCreateBackendAuthOAuthConfig_SocialProviderSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SocialProviderSettings", ID: &iSocialProviderSettings, Members: &mSocialProviderSettings, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthOAuthConfig_SocialProviderSettings})
+var sCreateBackendAuthPasswordPolicyConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthPasswordPolicyConfig, Members: &mCreateBackendAuthPasswordPolicyConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthPasswordPolicyConfig})
+var sCreateBackendAuthPasswordPolicyConfig_AdditionalConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalConstraints", ID: &i_ListOfAdditionalConstraintsElement, Members: &m_ListOfAdditionalConstraintsElement, Traits: &t77, Type: smithy.ShapeTypeList, Ext: &eCreateBackendAuthPasswordPolicyConfig_AdditionalConstraints})
+var sCreateBackendAuthPasswordPolicyConfig_MinimumLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumLength", ID: &i___double, Traits: &t78, Type: smithy.ShapeTypeDouble, Ext: &eCreateBackendAuthPasswordPolicyConfig_MinimumLength})
+var sCreateBackendAuthResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthResourceConfig, Members: &mCreateBackendAuthResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthResourceConfig})
+var sCreateBackendAuthResourceConfig_AuthResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthResources", ID: &iAuthResources, Members: &mAuthResources, Traits: &t79, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthResourceConfig_AuthResources})
+var sCreateBackendAuthResourceConfig_IdentityPoolConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolConfigs", ID: &iCreateBackendAuthIdentityPoolConfig, Members: &mCreateBackendAuthIdentityPoolConfig, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthResourceConfig_IdentityPoolConfigs})
+var sCreateBackendAuthResourceConfig_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthResourceConfig_Service})
+var sCreateBackendAuthResourceConfig_UserPoolConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolConfigs", ID: &iCreateBackendAuthUserPoolConfig, Members: &mCreateBackendAuthUserPoolConfig, Traits: &t81, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthResourceConfig_UserPoolConfigs})
+var sCreateBackendAuthUserPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthUserPoolConfig, Members: &mCreateBackendAuthUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig})
+var sCreateBackendAuthUserPoolConfig_ForgotPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForgotPassword", ID: &iCreateBackendAuthForgotPasswordConfig, Members: &mCreateBackendAuthForgotPasswordConfig, Traits: &t82, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig_ForgotPassword})
+var sCreateBackendAuthUserPoolConfig_Mfa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mfa", ID: &iCreateBackendAuthMFAConfig, Members: &mCreateBackendAuthMFAConfig, Traits: &t83, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig_Mfa})
+var sCreateBackendAuthUserPoolConfig_OAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuth", ID: &iCreateBackendAuthOAuthConfig, Members: &mCreateBackendAuthOAuthConfig, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig_OAuth})
+var sCreateBackendAuthUserPoolConfig_PasswordPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PasswordPolicy", ID: &iCreateBackendAuthPasswordPolicyConfig, Members: &mCreateBackendAuthPasswordPolicyConfig, Traits: &t85, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig_PasswordPolicy})
+var sCreateBackendAuthUserPoolConfig_RequiredSignUpAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredSignUpAttributes", ID: &i_ListOfRequiredSignUpAttributesElement, Members: &m_ListOfRequiredSignUpAttributesElement, Traits: &t86, Type: smithy.ShapeTypeList, Ext: &eCreateBackendAuthUserPoolConfig_RequiredSignUpAttributes})
+var sCreateBackendAuthUserPoolConfig_SignInMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignInMethod", ID: &iSignInMethod, Members: &mSignInMethod, Traits: &t87, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthUserPoolConfig_SignInMethod})
+var sCreateBackendAuthUserPoolConfig_UserPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolName", ID: &i___string, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthUserPoolConfig_UserPoolName})
+var sCreateBackendAuthUserPoolConfig_VerificationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerificationMessage", ID: &iCreateBackendAuthVerificationMessageConfig, Members: &mCreateBackendAuthVerificationMessageConfig, Traits: &t89, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthUserPoolConfig_VerificationMessage})
+var sCreateBackendAuthVerificationMessageConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthVerificationMessageConfig, Members: &mCreateBackendAuthVerificationMessageConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthVerificationMessageConfig})
+var sCreateBackendAuthVerificationMessageConfig_DeliveryMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryMethod", ID: &iDeliveryMethod, Members: &mDeliveryMethod, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendAuthVerificationMessageConfig_DeliveryMethod})
+var sCreateBackendAuthVerificationMessageConfig_EmailSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailSettings", ID: &iEmailSettings, Members: &mEmailSettings, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthVerificationMessageConfig_EmailSettings})
+var sCreateBackendAuthVerificationMessageConfig_SmsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsSettings", ID: &iSmsSettings, Members: &mSmsSettings, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthVerificationMessageConfig_SmsSettings})
+var sCreateBackendStorageResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendStorageResourceConfig, Members: &mCreateBackendStorageResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendStorageResourceConfig})
+var sCreateBackendStorageResourceConfig_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i___string, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageResourceConfig_BucketName})
+var sCreateBackendStorageResourceConfig_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permissions", ID: &iBackendStoragePermissions, Members: &mBackendStoragePermissions, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendStorageResourceConfig_Permissions})
+var sCreateBackendStorageResourceConfig_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Traits: &t92, Type: smithy.ShapeTypeEnum, Ext: &eCreateBackendStorageResourceConfig_ServiceName})
+var sDeliveryMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryMethod, Members: &mDeliveryMethod, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryMethod})
+var sDeliveryMethod_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryMethod_EMAIL})
+var sDeliveryMethod_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryMethod_SMS})
+var sEmailSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailSettings, Members: &mEmailSettings, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eEmailSettings})
+var sEmailSettings_EmailMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailMessage", ID: &i___string, Traits: &t93, Type: smithy.ShapeTypeString, Ext: &eEmailSettings_EmailMessage})
+var sEmailSettings_EmailSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailSubject", ID: &i___string, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eEmailSettings_EmailSubject})
+var sGatewayTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayTimeoutException, Members: &mGatewayTimeoutException, Traits: &t95, Type: smithy.ShapeTypeStructure, Ext: &eGatewayTimeoutException})
+var sGatewayTimeoutException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eGatewayTimeoutException_Message})
+var sGetBackendStorageResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendStorageResourceConfig, Members: &mGetBackendStorageResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendStorageResourceConfig})
+var sGetBackendStorageResourceConfig_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i___string, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageResourceConfig_BucketName})
+var sGetBackendStorageResourceConfig_Imported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Imported", ID: &i___boolean, Traits: &t96, Type: smithy.ShapeTypeBoolean, Ext: &eGetBackendStorageResourceConfig_Imported})
+var sGetBackendStorageResourceConfig_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permissions", ID: &iBackendStoragePermissions, Members: &mBackendStoragePermissions, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendStorageResourceConfig_Permissions})
+var sGetBackendStorageResourceConfig_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Traits: &t92, Type: smithy.ShapeTypeEnum, Ext: &eGetBackendStorageResourceConfig_ServiceName})
+var s_ListOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOf__string, Members: &m_ListOf__string, Type: smithy.ShapeTypeList, Ext: &e_ListOf__string})
+var s_ListOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_ListOf__string_member})
+var s_ListOfAdditionalConstraintsElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfAdditionalConstraintsElement, Members: &m_ListOfAdditionalConstraintsElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfAdditionalConstraintsElement})
+var s_ListOfAdditionalConstraintsElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalConstraintsElement, Members: &mAdditionalConstraintsElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfAdditionalConstraintsElement_member})
+var s_ListOfAuthenticatedElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfAuthenticatedElement, Members: &m_ListOfAuthenticatedElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfAuthenticatedElement})
+var s_ListOfAuthenticatedElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthenticatedElement, Members: &mAuthenticatedElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfAuthenticatedElement_member})
+var s_ListOfBackendAPIAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfBackendAPIAuthType, Members: &m_ListOfBackendAPIAuthType, Type: smithy.ShapeTypeList, Ext: &e_ListOfBackendAPIAuthType})
+var s_ListOfBackendAPIAuthType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBackendAPIAuthType, Members: &mBackendAPIAuthType, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfBackendAPIAuthType_member})
+var s_ListOfBackendJobRespObj = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfBackendJobRespObj, Members: &m_ListOfBackendJobRespObj, Type: smithy.ShapeTypeList, Ext: &e_ListOfBackendJobRespObj})
+var s_ListOfBackendJobRespObj_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBackendJobRespObj, Members: &mBackendJobRespObj, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfBackendJobRespObj_member})
+var s_ListOfMfaTypesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfMfaTypesElement, Members: &m_ListOfMfaTypesElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfMfaTypesElement})
+var s_ListOfMfaTypesElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMfaTypesElement, Members: &mMfaTypesElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfMfaTypesElement_member})
+var s_ListOfOAuthScopesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfOAuthScopesElement, Members: &m_ListOfOAuthScopesElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfOAuthScopesElement})
+var s_ListOfOAuthScopesElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOAuthScopesElement, Members: &mOAuthScopesElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfOAuthScopesElement_member})
+var s_ListOfRequiredSignUpAttributesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfRequiredSignUpAttributesElement, Members: &m_ListOfRequiredSignUpAttributesElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfRequiredSignUpAttributesElement})
+var s_ListOfRequiredSignUpAttributesElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequiredSignUpAttributesElement, Members: &mRequiredSignUpAttributesElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfRequiredSignUpAttributesElement_member})
+var s_ListOfS3BucketInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfS3BucketInfo, Members: &m_ListOfS3BucketInfo, Type: smithy.ShapeTypeList, Ext: &e_ListOfS3BucketInfo})
+var s_ListOfS3BucketInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3BucketInfo, Members: &mS3BucketInfo, Type: smithy.ShapeTypeStructure, Ext: &e_ListOfS3BucketInfo_member})
+var s_ListOfUnAuthenticatedElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfUnAuthenticatedElement, Members: &m_ListOfUnAuthenticatedElement, Type: smithy.ShapeTypeList, Ext: &e_ListOfUnAuthenticatedElement})
+var s_ListOfUnAuthenticatedElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnAuthenticatedElement, Members: &mUnAuthenticatedElement, Type: smithy.ShapeTypeEnum, Ext: &e_ListOfUnAuthenticatedElement_member})
+var sLoginAuthConfigReqObj = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoginAuthConfigReqObj, Members: &mLoginAuthConfigReqObj, Type: smithy.ShapeTypeStructure, Ext: &eLoginAuthConfigReqObj})
+var sLoginAuthConfigReqObj_AwsCognitoIdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsCognitoIdentityPoolId", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eLoginAuthConfigReqObj_AwsCognitoIdentityPoolId})
+var sLoginAuthConfigReqObj_AwsCognitoRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsCognitoRegion", ID: &i___string, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &eLoginAuthConfigReqObj_AwsCognitoRegion})
+var sLoginAuthConfigReqObj_AwsUserPoolsId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsUserPoolsId", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eLoginAuthConfigReqObj_AwsUserPoolsId})
+var sLoginAuthConfigReqObj_AwsUserPoolsWebClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsUserPoolsWebClientId", ID: &i___string, Traits: &t100, Type: smithy.ShapeTypeString, Ext: &eLoginAuthConfigReqObj_AwsUserPoolsWebClientId})
+var sMFAMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMFAMode, Members: &mMFAMode, Type: smithy.ShapeTypeEnum, Ext: &eMFAMode})
+var sMFAMode_ON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMFAMode_ON})
+var sMFAMode_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMFAMode_OFF})
+var sMFAMode_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMFAMode_OPTIONAL})
+var sMfaTypesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMfaTypesElement, Members: &mMfaTypesElement, Type: smithy.ShapeTypeEnum, Ext: &eMfaTypesElement})
+var sMfaTypesElement_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMfaTypesElement_SMS})
+var sMfaTypesElement_TOTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMfaTypesElement_TOTP})
+var sMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMode, Members: &mMode, Type: smithy.ShapeTypeEnum, Ext: &eMode})
+var sMode_API_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_API_KEY})
+var sMode_AWS_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_AWS_IAM})
+var sMode_AMAZON_COGNITO_USER_POOLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_COGNITO_USER_POOLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_AMAZON_COGNITO_USER_POOLS})
+var sMode_OPENID_CONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENID_CONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMode_OPENID_CONNECT})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t101, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_ResourceType})
+var sOAuthGrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthGrantType, Members: &mOAuthGrantType, Type: smithy.ShapeTypeEnum, Ext: &eOAuthGrantType})
+var sOAuthGrantType_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthGrantType_CODE})
+var sOAuthGrantType_IMPLICIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPLICIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthGrantType_IMPLICIT})
+var sOAuthScopesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthScopesElement, Members: &mOAuthScopesElement, Type: smithy.ShapeTypeEnum, Ext: &eOAuthScopesElement})
+var sOAuthScopesElement_PHONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthScopesElement_PHONE})
+var sOAuthScopesElement_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthScopesElement_EMAIL})
+var sOAuthScopesElement_OPENID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthScopesElement_OPENID})
+var sOAuthScopesElement_PROFILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthScopesElement_PROFILE})
+var sOAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_COGNITO_SIGNIN_USER_ADMIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN})
+var sRequiredSignUpAttributesElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequiredSignUpAttributesElement, Members: &mRequiredSignUpAttributesElement, Type: smithy.ShapeTypeEnum, Ext: &eRequiredSignUpAttributesElement})
+var sRequiredSignUpAttributesElement_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_ADDRESS})
+var sRequiredSignUpAttributesElement_BIRTHDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTHDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_BIRTHDATE})
+var sRequiredSignUpAttributesElement_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_EMAIL})
+var sRequiredSignUpAttributesElement_FAMILY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAMILY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_FAMILY_NAME})
+var sRequiredSignUpAttributesElement_GENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_GENDER})
+var sRequiredSignUpAttributesElement_GIVEN_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIVEN_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_GIVEN_NAME})
+var sRequiredSignUpAttributesElement_LOCALE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_LOCALE})
+var sRequiredSignUpAttributesElement_MIDDLE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIDDLE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_MIDDLE_NAME})
+var sRequiredSignUpAttributesElement_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_NAME})
+var sRequiredSignUpAttributesElement_NICKNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NICKNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_NICKNAME})
+var sRequiredSignUpAttributesElement_PHONE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_PHONE_NUMBER})
+var sRequiredSignUpAttributesElement_PICTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PICTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_PICTURE})
+var sRequiredSignUpAttributesElement_PREFERRED_USERNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREFERRED_USERNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_PREFERRED_USERNAME})
+var sRequiredSignUpAttributesElement_PROFILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_PROFILE})
+var sRequiredSignUpAttributesElement_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_UPDATED_AT})
+var sRequiredSignUpAttributesElement_WEBSITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBSITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_WEBSITE})
+var sRequiredSignUpAttributesElement_ZONE_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONE_INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequiredSignUpAttributesElement_ZONE_INFO})
+var sResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolutionStrategy, Members: &mResolutionStrategy, Type: smithy.ShapeTypeEnum, Ext: &eResolutionStrategy})
+var sResolutionStrategy_OPTIMISTIC_CONCURRENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIMISTIC_CONCURRENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionStrategy_OPTIMISTIC_CONCURRENCY})
+var sResolutionStrategy_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionStrategy_LAMBDA})
+var sResolutionStrategy_AUTOMERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionStrategy_AUTOMERGE})
+var sResolutionStrategy_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResolutionStrategy_NONE})
+var sResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eResourceConfig})
+var sS3BucketInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BucketInfo, Members: &mS3BucketInfo, Type: smithy.ShapeTypeStructure, Ext: &eS3BucketInfo})
+var sS3BucketInfo_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eS3BucketInfo_CreationDate})
+var sS3BucketInfo_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t104, Type: smithy.ShapeTypeString, Ext: &eS3BucketInfo_Name})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeEnum, Ext: &eService})
+var sService_COGNITO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COGNITO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eService_COGNITO})
+var sServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceName, Members: &mServiceName, Type: smithy.ShapeTypeEnum, Ext: &eServiceName})
+var sServiceName_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceName_S3})
+var sSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettings, Members: &mSettings, Type: smithy.ShapeTypeStructure, Ext: &eSettings})
+var sSettings_MfaTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MfaTypes", ID: &i_ListOfMfaTypesElement, Members: &m_ListOfMfaTypesElement, Traits: &t105, Type: smithy.ShapeTypeList, Ext: &eSettings_MfaTypes})
+var sSettings_SmsMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsMessage", ID: &i___string, Traits: &t106, Type: smithy.ShapeTypeString, Ext: &eSettings_SmsMessage})
+var sSignInMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignInMethod, Members: &mSignInMethod, Type: smithy.ShapeTypeEnum, Ext: &eSignInMethod})
+var sSignInMethod_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignInMethod_EMAIL})
+var sSignInMethod_EMAIL_AND_PHONE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_AND_PHONE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignInMethod_EMAIL_AND_PHONE_NUMBER})
+var sSignInMethod_PHONE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignInMethod_PHONE_NUMBER})
+var sSignInMethod_USERNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSignInMethod_USERNAME})
+var sSmsSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSmsSettings, Members: &mSmsSettings, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eSmsSettings})
+var sSmsSettings_SmsMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsMessage", ID: &i___string, Traits: &t106, Type: smithy.ShapeTypeString, Ext: &eSmsSettings_SmsMessage})
+var sSocialProviderSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSocialProviderSettings, Members: &mSocialProviderSettings, Type: smithy.ShapeTypeStructure, Ext: &eSocialProviderSettings})
+var sSocialProviderSettings_Facebook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Facebook", ID: &iBackendAuthSocialProviderConfig, Members: &mBackendAuthSocialProviderConfig, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eSocialProviderSettings_Facebook})
+var sSocialProviderSettings_Google = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Google", ID: &iBackendAuthSocialProviderConfig, Members: &mBackendAuthSocialProviderConfig, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eSocialProviderSettings_Google})
+var sSocialProviderSettings_LoginWithAmazon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoginWithAmazon", ID: &iBackendAuthSocialProviderConfig, Members: &mBackendAuthSocialProviderConfig, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eSocialProviderSettings_LoginWithAmazon})
+var sSocialProviderSettings_SignInWithApple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignInWithApple", ID: &iBackendAuthAppleProviderConfig, Members: &mBackendAuthAppleProviderConfig, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eSocialProviderSettings_SignInWithApple})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sStatus_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_LATEST})
+var sStatus_STALE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STALE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_STALE})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t108, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_LimitType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitType", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_LimitType})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var sUnAuthenticatedElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnAuthenticatedElement, Members: &mUnAuthenticatedElement, Type: smithy.ShapeTypeEnum, Ext: &eUnAuthenticatedElement})
+var sUnAuthenticatedElement_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnAuthenticatedElement_READ})
+var sUnAuthenticatedElement_CREATE_AND_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_AND_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnAuthenticatedElement_CREATE_AND_UPDATE})
+var sUnAuthenticatedElement_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUnAuthenticatedElement_DELETE})
+var sUpdateBackendAuthForgotPasswordConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthForgotPasswordConfig, Members: &mUpdateBackendAuthForgotPasswordConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthForgotPasswordConfig})
+var sUpdateBackendAuthForgotPasswordConfig_DeliveryMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryMethod", ID: &iDeliveryMethod, Members: &mDeliveryMethod, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthForgotPasswordConfig_DeliveryMethod})
+var sUpdateBackendAuthForgotPasswordConfig_EmailSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailSettings", ID: &iEmailSettings, Members: &mEmailSettings, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthForgotPasswordConfig_EmailSettings})
+var sUpdateBackendAuthForgotPasswordConfig_SmsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsSettings", ID: &iSmsSettings, Members: &mSmsSettings, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthForgotPasswordConfig_SmsSettings})
+var sUpdateBackendAuthIdentityPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthIdentityPoolConfig, Members: &mUpdateBackendAuthIdentityPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthIdentityPoolConfig})
+var sUpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnauthenticatedLogin", ID: &i___boolean, Traits: &t70, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin})
+var sUpdateBackendAuthMFAConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthMFAConfig, Members: &mUpdateBackendAuthMFAConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthMFAConfig})
+var sUpdateBackendAuthMFAConfig_MFAMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MFAMode", ID: &iMFAMode, Members: &mMFAMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthMFAConfig_MFAMode})
+var sUpdateBackendAuthMFAConfig_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &iSettings, Members: &mSettings, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthMFAConfig_Settings})
+var sUpdateBackendAuthOAuthConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthOAuthConfig, Members: &mUpdateBackendAuthOAuthConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthOAuthConfig})
+var sUpdateBackendAuthOAuthConfig_DomainPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPrefix", ID: &i___string, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthOAuthConfig_DomainPrefix})
+var sUpdateBackendAuthOAuthConfig_OAuthGrantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthGrantType", ID: &iOAuthGrantType, Members: &mOAuthGrantType, Traits: &t72, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthOAuthConfig_OAuthGrantType})
+var sUpdateBackendAuthOAuthConfig_OAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthScopes", ID: &i_ListOfOAuthScopesElement, Members: &m_ListOfOAuthScopesElement, Traits: &t73, Type: smithy.ShapeTypeList, Ext: &eUpdateBackendAuthOAuthConfig_OAuthScopes})
+var sUpdateBackendAuthOAuthConfig_RedirectSignInURIs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectSignInURIs", ID: &i_ListOf__string, Members: &m_ListOf__string, Traits: &t74, Type: smithy.ShapeTypeList, Ext: &eUpdateBackendAuthOAuthConfig_RedirectSignInURIs})
+var sUpdateBackendAuthOAuthConfig_RedirectSignOutURIs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedirectSignOutURIs", ID: &i_ListOf__string, Members: &m_ListOf__string, Traits: &t75, Type: smithy.ShapeTypeList, Ext: &eUpdateBackendAuthOAuthConfig_RedirectSignOutURIs})
+var sUpdateBackendAuthOAuthConfig_SocialProviderSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SocialProviderSettings", ID: &iSocialProviderSettings, Members: &mSocialProviderSettings, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthOAuthConfig_SocialProviderSettings})
+var sUpdateBackendAuthPasswordPolicyConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthPasswordPolicyConfig, Members: &mUpdateBackendAuthPasswordPolicyConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthPasswordPolicyConfig})
+var sUpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalConstraints", ID: &i_ListOfAdditionalConstraintsElement, Members: &m_ListOfAdditionalConstraintsElement, Traits: &t77, Type: smithy.ShapeTypeList, Ext: &eUpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints})
+var sUpdateBackendAuthPasswordPolicyConfig_MinimumLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumLength", ID: &i___double, Traits: &t78, Type: smithy.ShapeTypeDouble, Ext: &eUpdateBackendAuthPasswordPolicyConfig_MinimumLength})
+var sUpdateBackendAuthResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthResourceConfig, Members: &mUpdateBackendAuthResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthResourceConfig})
+var sUpdateBackendAuthResourceConfig_AuthResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthResources", ID: &iAuthResources, Members: &mAuthResources, Traits: &t79, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthResourceConfig_AuthResources})
+var sUpdateBackendAuthResourceConfig_IdentityPoolConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolConfigs", ID: &iUpdateBackendAuthIdentityPoolConfig, Members: &mUpdateBackendAuthIdentityPoolConfig, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthResourceConfig_IdentityPoolConfigs})
+var sUpdateBackendAuthResourceConfig_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthResourceConfig_Service})
+var sUpdateBackendAuthResourceConfig_UserPoolConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolConfigs", ID: &iUpdateBackendAuthUserPoolConfig, Members: &mUpdateBackendAuthUserPoolConfig, Traits: &t81, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthResourceConfig_UserPoolConfigs})
+var sUpdateBackendAuthUserPoolConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthUserPoolConfig, Members: &mUpdateBackendAuthUserPoolConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig})
+var sUpdateBackendAuthUserPoolConfig_ForgotPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForgotPassword", ID: &iUpdateBackendAuthForgotPasswordConfig, Members: &mUpdateBackendAuthForgotPasswordConfig, Traits: &t82, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig_ForgotPassword})
+var sUpdateBackendAuthUserPoolConfig_Mfa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mfa", ID: &iUpdateBackendAuthMFAConfig, Members: &mUpdateBackendAuthMFAConfig, Traits: &t83, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig_Mfa})
+var sUpdateBackendAuthUserPoolConfig_OAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuth", ID: &iUpdateBackendAuthOAuthConfig, Members: &mUpdateBackendAuthOAuthConfig, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig_OAuth})
+var sUpdateBackendAuthUserPoolConfig_PasswordPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PasswordPolicy", ID: &iUpdateBackendAuthPasswordPolicyConfig, Members: &mUpdateBackendAuthPasswordPolicyConfig, Traits: &t85, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig_PasswordPolicy})
+var sUpdateBackendAuthUserPoolConfig_VerificationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerificationMessage", ID: &iUpdateBackendAuthVerificationMessageConfig, Members: &mUpdateBackendAuthVerificationMessageConfig, Traits: &t89, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthUserPoolConfig_VerificationMessage})
+var sUpdateBackendAuthVerificationMessageConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthVerificationMessageConfig, Members: &mUpdateBackendAuthVerificationMessageConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthVerificationMessageConfig})
+var sUpdateBackendAuthVerificationMessageConfig_DeliveryMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryMethod", ID: &iDeliveryMethod, Members: &mDeliveryMethod, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendAuthVerificationMessageConfig_DeliveryMethod})
+var sUpdateBackendAuthVerificationMessageConfig_EmailSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailSettings", ID: &iEmailSettings, Members: &mEmailSettings, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthVerificationMessageConfig_EmailSettings})
+var sUpdateBackendAuthVerificationMessageConfig_SmsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SmsSettings", ID: &iSmsSettings, Members: &mSmsSettings, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthVerificationMessageConfig_SmsSettings})
+var sUpdateBackendStorageResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendStorageResourceConfig, Members: &mUpdateBackendStorageResourceConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendStorageResourceConfig})
+var sUpdateBackendStorageResourceConfig_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permissions", ID: &iBackendStoragePermissions, Members: &mBackendStoragePermissions, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendStorageResourceConfig_Permissions})
+var sUpdateBackendStorageResourceConfig_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Traits: &t92, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBackendStorageResourceConfig_ServiceName})
+var sCloneBackendRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloneBackendRequest, Members: &mCloneBackendRequest, Type: smithy.ShapeTypeStructure, Ext: &eCloneBackendRequest})
+var sCloneBackendRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCloneBackendRequest_AppId})
+var sCloneBackendRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCloneBackendRequest_BackendEnvironmentName})
+var sCloneBackendRequest_TargetEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetEnvironmentName", ID: &i___string, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eCloneBackendRequest_TargetEnvironmentName})
+var sCloneBackendResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloneBackendResponse, Members: &mCloneBackendResponse, Type: smithy.ShapeTypeStructure, Ext: &eCloneBackendResponse})
+var sCloneBackendResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_AppId})
+var sCloneBackendResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_BackendEnvironmentName})
+var sCloneBackendResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_Error})
+var sCloneBackendResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_JobId})
+var sCloneBackendResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_Operation})
+var sCloneBackendResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCloneBackendResponse_Status})
+var sCreateBackendAPIRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAPIRequest, Members: &mCreateBackendAPIRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAPIRequest})
+var sCreateBackendAPIRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIRequest_AppId})
+var sCreateBackendAPIRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIRequest_BackendEnvironmentName})
+var sCreateBackendAPIRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAPIRequest_ResourceConfig})
+var sCreateBackendAPIRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIRequest_ResourceName})
+var sCreateBackendAPIResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAPIResponse, Members: &mCreateBackendAPIResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAPIResponse})
+var sCreateBackendAPIResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_AppId})
+var sCreateBackendAPIResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_BackendEnvironmentName})
+var sCreateBackendAPIResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_Error})
+var sCreateBackendAPIResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_JobId})
+var sCreateBackendAPIResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_Operation})
+var sCreateBackendAPIResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAPIResponse_Status})
+var sCreateBackendAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthRequest, Members: &mCreateBackendAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthRequest})
+var sCreateBackendAuthRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthRequest_AppId})
+var sCreateBackendAuthRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthRequest_BackendEnvironmentName})
+var sCreateBackendAuthRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iCreateBackendAuthResourceConfig, Members: &mCreateBackendAuthResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthRequest_ResourceConfig})
+var sCreateBackendAuthRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthRequest_ResourceName})
+var sCreateBackendAuthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendAuthResponse, Members: &mCreateBackendAuthResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendAuthResponse})
+var sCreateBackendAuthResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_AppId})
+var sCreateBackendAuthResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_BackendEnvironmentName})
+var sCreateBackendAuthResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_Error})
+var sCreateBackendAuthResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_JobId})
+var sCreateBackendAuthResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_Operation})
+var sCreateBackendAuthResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateBackendAuthResponse_Status})
+var sCreateBackendConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendConfigRequest, Members: &mCreateBackendConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendConfigRequest})
+var sCreateBackendConfigRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigRequest_AppId})
+var sCreateBackendConfigRequest_BackendManagerAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendManagerAppId", ID: &i___string, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigRequest_BackendManagerAppId})
+var sCreateBackendConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendConfigResponse, Members: &mCreateBackendConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendConfigResponse})
+var sCreateBackendConfigResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigResponse_AppId})
+var sCreateBackendConfigResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigResponse_BackendEnvironmentName})
+var sCreateBackendConfigResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigResponse_JobId})
+var sCreateBackendConfigResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateBackendConfigResponse_Status})
+var sCreateBackendRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendRequest, Members: &mCreateBackendRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendRequest})
+var sCreateBackendRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendRequest_AppId})
+var sCreateBackendRequest_AppName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppName", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eCreateBackendRequest_AppName})
+var sCreateBackendRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendRequest_BackendEnvironmentName})
+var sCreateBackendRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendRequest_ResourceConfig})
+var sCreateBackendRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eCreateBackendRequest_ResourceName})
+var sCreateBackendResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendResponse, Members: &mCreateBackendResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendResponse})
+var sCreateBackendResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_AppId})
+var sCreateBackendResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_BackendEnvironmentName})
+var sCreateBackendResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_Error})
+var sCreateBackendResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_JobId})
+var sCreateBackendResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_Operation})
+var sCreateBackendResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateBackendResponse_Status})
+var sCreateBackendStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendStorageRequest, Members: &mCreateBackendStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendStorageRequest})
+var sCreateBackendStorageRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageRequest_AppId})
+var sCreateBackendStorageRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageRequest_BackendEnvironmentName})
+var sCreateBackendStorageRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iCreateBackendStorageResourceConfig, Members: &mCreateBackendStorageResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendStorageRequest_ResourceConfig})
+var sCreateBackendStorageRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageRequest_ResourceName})
+var sCreateBackendStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackendStorageResponse, Members: &mCreateBackendStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBackendStorageResponse})
+var sCreateBackendStorageResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageResponse_AppId})
+var sCreateBackendStorageResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageResponse_BackendEnvironmentName})
+var sCreateBackendStorageResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageResponse_JobId})
+var sCreateBackendStorageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateBackendStorageResponse_Status})
+var sCreateTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenRequest, Members: &mCreateTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenRequest})
+var sCreateTokenRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_AppId})
+var sCreateTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenResponse, Members: &mCreateTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenResponse})
+var sCreateTokenResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_AppId})
+var sCreateTokenResponse_ChallengeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeCode", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_ChallengeCode})
+var sCreateTokenResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_SessionId})
+var sCreateTokenResponse_Ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ttl", ID: &i___string, Traits: &t118, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_Ttl})
+var sDeleteBackendAPIRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAPIRequest, Members: &mDeleteBackendAPIRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendAPIRequest})
+var sDeleteBackendAPIRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIRequest_AppId})
+var sDeleteBackendAPIRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIRequest_BackendEnvironmentName})
+var sDeleteBackendAPIRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendAPIRequest_ResourceConfig})
+var sDeleteBackendAPIRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIRequest_ResourceName})
+var sDeleteBackendAPIResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAPIResponse, Members: &mDeleteBackendAPIResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendAPIResponse})
+var sDeleteBackendAPIResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_AppId})
+var sDeleteBackendAPIResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_BackendEnvironmentName})
+var sDeleteBackendAPIResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_Error})
+var sDeleteBackendAPIResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_JobId})
+var sDeleteBackendAPIResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_Operation})
+var sDeleteBackendAPIResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAPIResponse_Status})
+var sDeleteBackendAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAuthRequest, Members: &mDeleteBackendAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendAuthRequest})
+var sDeleteBackendAuthRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthRequest_AppId})
+var sDeleteBackendAuthRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthRequest_BackendEnvironmentName})
+var sDeleteBackendAuthRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthRequest_ResourceName})
+var sDeleteBackendAuthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendAuthResponse, Members: &mDeleteBackendAuthResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendAuthResponse})
+var sDeleteBackendAuthResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_AppId})
+var sDeleteBackendAuthResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_BackendEnvironmentName})
+var sDeleteBackendAuthResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_Error})
+var sDeleteBackendAuthResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_JobId})
+var sDeleteBackendAuthResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_Operation})
+var sDeleteBackendAuthResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendAuthResponse_Status})
+var sDeleteBackendRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendRequest, Members: &mDeleteBackendRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendRequest})
+var sDeleteBackendRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendRequest_AppId})
+var sDeleteBackendRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendRequest_BackendEnvironmentName})
+var sDeleteBackendResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendResponse, Members: &mDeleteBackendResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendResponse})
+var sDeleteBackendResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_AppId})
+var sDeleteBackendResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_BackendEnvironmentName})
+var sDeleteBackendResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_Error})
+var sDeleteBackendResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_JobId})
+var sDeleteBackendResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_Operation})
+var sDeleteBackendResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendResponse_Status})
+var sDeleteBackendStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendStorageRequest, Members: &mDeleteBackendStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendStorageRequest})
+var sDeleteBackendStorageRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageRequest_AppId})
+var sDeleteBackendStorageRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageRequest_BackendEnvironmentName})
+var sDeleteBackendStorageRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageRequest_ResourceName})
+var sDeleteBackendStorageRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Traits: &t92, Type: smithy.ShapeTypeEnum, Ext: &eDeleteBackendStorageRequest_ServiceName})
+var sDeleteBackendStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackendStorageResponse, Members: &mDeleteBackendStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBackendStorageResponse})
+var sDeleteBackendStorageResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageResponse_AppId})
+var sDeleteBackendStorageResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageResponse_BackendEnvironmentName})
+var sDeleteBackendStorageResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageResponse_JobId})
+var sDeleteBackendStorageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eDeleteBackendStorageResponse_Status})
+var sDeleteTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTokenRequest, Members: &mDeleteTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTokenRequest})
+var sDeleteTokenRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteTokenRequest_AppId})
+var sDeleteTokenRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eDeleteTokenRequest_SessionId})
+var sDeleteTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTokenResponse, Members: &mDeleteTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTokenResponse})
+var sDeleteTokenResponse_IsSuccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsSuccess", ID: &i___boolean, Traits: &t119, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteTokenResponse_IsSuccess})
+var sGenerateBackendAPIModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateBackendAPIModelsRequest, Members: &mGenerateBackendAPIModelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateBackendAPIModelsRequest})
+var sGenerateBackendAPIModelsRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsRequest_AppId})
+var sGenerateBackendAPIModelsRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsRequest_BackendEnvironmentName})
+var sGenerateBackendAPIModelsRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsRequest_ResourceName})
+var sGenerateBackendAPIModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateBackendAPIModelsResponse, Members: &mGenerateBackendAPIModelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateBackendAPIModelsResponse})
+var sGenerateBackendAPIModelsResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_AppId})
+var sGenerateBackendAPIModelsResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_BackendEnvironmentName})
+var sGenerateBackendAPIModelsResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_Error})
+var sGenerateBackendAPIModelsResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_JobId})
+var sGenerateBackendAPIModelsResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_Operation})
+var sGenerateBackendAPIModelsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eGenerateBackendAPIModelsResponse_Status})
+var sGetBackendAPIRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPIRequest, Members: &mGetBackendAPIRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIRequest})
+var sGetBackendAPIRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIRequest_AppId})
+var sGetBackendAPIRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIRequest_BackendEnvironmentName})
+var sGetBackendAPIRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIRequest_ResourceConfig})
+var sGetBackendAPIRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIRequest_ResourceName})
+var sGetBackendAPIModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPIModelsRequest, Members: &mGetBackendAPIModelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIModelsRequest})
+var sGetBackendAPIModelsRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIModelsRequest_AppId})
+var sGetBackendAPIModelsRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIModelsRequest_BackendEnvironmentName})
+var sGetBackendAPIModelsRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIModelsRequest_ResourceName})
+var sGetBackendAPIModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPIModelsResponse, Members: &mGetBackendAPIModelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIModelsResponse})
+var sGetBackendAPIModelsResponse_Models = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Models", ID: &i___string, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIModelsResponse_Models})
+var sGetBackendAPIModelsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t60, Type: smithy.ShapeTypeEnum, Ext: &eGetBackendAPIModelsResponse_Status})
+var sGetBackendAPIModelsResponse_ModelIntrospectionSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelIntrospectionSchema", ID: &i___string, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIModelsResponse_ModelIntrospectionSchema})
+var sGetBackendAPIResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAPIResponse, Members: &mGetBackendAPIResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIResponse})
+var sGetBackendAPIResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIResponse_AppId})
+var sGetBackendAPIResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIResponse_BackendEnvironmentName})
+var sGetBackendAPIResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIResponse_Error})
+var sGetBackendAPIResponse_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAPIResponse_ResourceConfig})
+var sGetBackendAPIResponse_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendAPIResponse_ResourceName})
+var sGetBackendAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAuthRequest, Members: &mGetBackendAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAuthRequest})
+var sGetBackendAuthRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthRequest_AppId})
+var sGetBackendAuthRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthRequest_BackendEnvironmentName})
+var sGetBackendAuthRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthRequest_ResourceName})
+var sGetBackendAuthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendAuthResponse, Members: &mGetBackendAuthResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAuthResponse})
+var sGetBackendAuthResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthResponse_AppId})
+var sGetBackendAuthResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthResponse_BackendEnvironmentName})
+var sGetBackendAuthResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthResponse_Error})
+var sGetBackendAuthResponse_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iCreateBackendAuthResourceConfig, Members: &mCreateBackendAuthResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendAuthResponse_ResourceConfig})
+var sGetBackendAuthResponse_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendAuthResponse_ResourceName})
+var sGetBackendRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendRequest, Members: &mGetBackendRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendRequest})
+var sGetBackendRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendRequest_AppId})
+var sGetBackendRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendRequest_BackendEnvironmentName})
+var sGetBackendJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendJobRequest, Members: &mGetBackendJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendJobRequest})
+var sGetBackendJobRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobRequest_AppId})
+var sGetBackendJobRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobRequest_BackendEnvironmentName})
+var sGetBackendJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobRequest_JobId})
+var sGetBackendJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendJobResponse, Members: &mGetBackendJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendJobResponse})
+var sGetBackendJobResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_AppId})
+var sGetBackendJobResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_BackendEnvironmentName})
+var sGetBackendJobResponse_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_CreateTime})
+var sGetBackendJobResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_Error})
+var sGetBackendJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_JobId})
+var sGetBackendJobResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_Operation})
+var sGetBackendJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_Status})
+var sGetBackendJobResponse_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i___string, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetBackendJobResponse_UpdateTime})
+var sGetBackendResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendResponse, Members: &mGetBackendResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendResponse})
+var sGetBackendResponse_AmplifyFeatureFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmplifyFeatureFlags", ID: &i___string, Traits: &t122, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_AmplifyFeatureFlags})
+var sGetBackendResponse_AmplifyMetaConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmplifyMetaConfig", ID: &i___string, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_AmplifyMetaConfig})
+var sGetBackendResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_AppId})
+var sGetBackendResponse_AppName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppName", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_AppName})
+var sGetBackendResponse_BackendEnvironmentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentList", ID: &i_ListOf__string, Members: &m_ListOf__string, Traits: &t124, Type: smithy.ShapeTypeList, Ext: &eGetBackendResponse_BackendEnvironmentList})
+var sGetBackendResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_BackendEnvironmentName})
+var sGetBackendResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetBackendResponse_Error})
+var sGetBackendStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendStorageRequest, Members: &mGetBackendStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendStorageRequest})
+var sGetBackendStorageRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageRequest_AppId})
+var sGetBackendStorageRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageRequest_BackendEnvironmentName})
+var sGetBackendStorageRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageRequest_ResourceName})
+var sGetBackendStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBackendStorageResponse, Members: &mGetBackendStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendStorageResponse})
+var sGetBackendStorageResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageResponse_AppId})
+var sGetBackendStorageResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageResponse_BackendEnvironmentName})
+var sGetBackendStorageResponse_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iGetBackendStorageResourceConfig, Members: &mGetBackendStorageResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eGetBackendStorageResponse_ResourceConfig})
+var sGetBackendStorageResponse_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eGetBackendStorageResponse_ResourceName})
+var sGetTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTokenRequest, Members: &mGetTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenRequest})
+var sGetTokenRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetTokenRequest_AppId})
+var sGetTokenRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eGetTokenRequest_SessionId})
+var sGetTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTokenResponse, Members: &mGetTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTokenResponse})
+var sGetTokenResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetTokenResponse_AppId})
+var sGetTokenResponse_ChallengeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeCode", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eGetTokenResponse_ChallengeCode})
+var sGetTokenResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eGetTokenResponse_SessionId})
+var sGetTokenResponse_Ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ttl", ID: &i___string, Traits: &t118, Type: smithy.ShapeTypeString, Ext: &eGetTokenResponse_Ttl})
+var sImportBackendAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendAuthRequest, Members: &mImportBackendAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportBackendAuthRequest})
+var sImportBackendAuthRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_AppId})
+var sImportBackendAuthRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_BackendEnvironmentName})
+var sImportBackendAuthRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i___string, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_IdentityPoolId})
+var sImportBackendAuthRequest_NativeClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NativeClientId", ID: &i___string, Traits: &t126, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_NativeClientId})
+var sImportBackendAuthRequest_UserPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolId", ID: &i___string, Traits: &t127, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_UserPoolId})
+var sImportBackendAuthRequest_WebClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebClientId", ID: &i___string, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthRequest_WebClientId})
+var sImportBackendAuthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendAuthResponse, Members: &mImportBackendAuthResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportBackendAuthResponse})
+var sImportBackendAuthResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_AppId})
+var sImportBackendAuthResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_BackendEnvironmentName})
+var sImportBackendAuthResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_Error})
+var sImportBackendAuthResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_JobId})
+var sImportBackendAuthResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_Operation})
+var sImportBackendAuthResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eImportBackendAuthResponse_Status})
+var sImportBackendStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendStorageRequest, Members: &mImportBackendStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportBackendStorageRequest})
+var sImportBackendStorageRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageRequest_AppId})
+var sImportBackendStorageRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageRequest_BackendEnvironmentName})
+var sImportBackendStorageRequest_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i___string, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageRequest_BucketName})
+var sImportBackendStorageRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Traits: &t92, Type: smithy.ShapeTypeEnum, Ext: &eImportBackendStorageRequest_ServiceName})
+var sImportBackendStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportBackendStorageResponse, Members: &mImportBackendStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportBackendStorageResponse})
+var sImportBackendStorageResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageResponse_AppId})
+var sImportBackendStorageResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageResponse_BackendEnvironmentName})
+var sImportBackendStorageResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageResponse_JobId})
+var sImportBackendStorageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eImportBackendStorageResponse_Status})
+var sListBackendJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBackendJobsRequest, Members: &mListBackendJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListBackendJobsRequest})
+var sListBackendJobsRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_AppId})
+var sListBackendJobsRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_BackendEnvironmentName})
+var sListBackendJobsRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_JobId})
+var sListBackendJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___integerMin1Max25, Traits: &t129, Type: smithy.ShapeTypeInteger, Ext: &eListBackendJobsRequest_MaxResults})
+var sListBackendJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t130, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_NextToken})
+var sListBackendJobsRequest_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_Operation})
+var sListBackendJobsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsRequest_Status})
+var sListBackendJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBackendJobsResponse, Members: &mListBackendJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListBackendJobsResponse})
+var sListBackendJobsResponse_Jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jobs", ID: &i_ListOfBackendJobRespObj, Members: &m_ListOfBackendJobRespObj, Traits: &t131, Type: smithy.ShapeTypeList, Ext: &eListBackendJobsResponse_Jobs})
+var sListBackendJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t130, Type: smithy.ShapeTypeString, Ext: &eListBackendJobsResponse_NextToken})
+var sListS3BucketsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3BucketsRequest, Members: &mListS3BucketsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListS3BucketsRequest})
+var sListS3BucketsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t130, Type: smithy.ShapeTypeString, Ext: &eListS3BucketsRequest_NextToken})
+var sListS3BucketsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3BucketsResponse, Members: &mListS3BucketsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListS3BucketsResponse})
+var sListS3BucketsResponse_Buckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Buckets", ID: &i_ListOfS3BucketInfo, Members: &m_ListOfS3BucketInfo, Traits: &t132, Type: smithy.ShapeTypeList, Ext: &eListS3BucketsResponse_Buckets})
+var sListS3BucketsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t130, Type: smithy.ShapeTypeString, Ext: &eListS3BucketsResponse_NextToken})
+var sRemoveAllBackendsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAllBackendsRequest, Members: &mRemoveAllBackendsRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveAllBackendsRequest})
+var sRemoveAllBackendsRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsRequest_AppId})
+var sRemoveAllBackendsRequest_CleanAmplifyApp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CleanAmplifyApp", ID: &i___boolean, Traits: &t133, Type: smithy.ShapeTypeBoolean, Ext: &eRemoveAllBackendsRequest_CleanAmplifyApp})
+var sRemoveAllBackendsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAllBackendsResponse, Members: &mRemoveAllBackendsResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveAllBackendsResponse})
+var sRemoveAllBackendsResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsResponse_AppId})
+var sRemoveAllBackendsResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsResponse_Error})
+var sRemoveAllBackendsResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsResponse_JobId})
+var sRemoveAllBackendsResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsResponse_Operation})
+var sRemoveAllBackendsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eRemoveAllBackendsResponse_Status})
+var sRemoveBackendConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveBackendConfigRequest, Members: &mRemoveBackendConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveBackendConfigRequest})
+var sRemoveBackendConfigRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eRemoveBackendConfigRequest_AppId})
+var sRemoveBackendConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveBackendConfigResponse, Members: &mRemoveBackendConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveBackendConfigResponse})
+var sRemoveBackendConfigResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eRemoveBackendConfigResponse_Error})
+var sUpdateBackendAPIRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAPIRequest, Members: &mUpdateBackendAPIRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAPIRequest})
+var sUpdateBackendAPIRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIRequest_AppId})
+var sUpdateBackendAPIRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIRequest_BackendEnvironmentName})
+var sUpdateBackendAPIRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iBackendAPIResourceConfig, Members: &mBackendAPIResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAPIRequest_ResourceConfig})
+var sUpdateBackendAPIRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIRequest_ResourceName})
+var sUpdateBackendAPIResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAPIResponse, Members: &mUpdateBackendAPIResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAPIResponse})
+var sUpdateBackendAPIResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_AppId})
+var sUpdateBackendAPIResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_BackendEnvironmentName})
+var sUpdateBackendAPIResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_Error})
+var sUpdateBackendAPIResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_JobId})
+var sUpdateBackendAPIResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_Operation})
+var sUpdateBackendAPIResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAPIResponse_Status})
+var sUpdateBackendAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthRequest, Members: &mUpdateBackendAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthRequest})
+var sUpdateBackendAuthRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthRequest_AppId})
+var sUpdateBackendAuthRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthRequest_BackendEnvironmentName})
+var sUpdateBackendAuthRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iUpdateBackendAuthResourceConfig, Members: &mUpdateBackendAuthResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthRequest_ResourceConfig})
+var sUpdateBackendAuthRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthRequest_ResourceName})
+var sUpdateBackendAuthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendAuthResponse, Members: &mUpdateBackendAuthResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendAuthResponse})
+var sUpdateBackendAuthResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_AppId})
+var sUpdateBackendAuthResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_BackendEnvironmentName})
+var sUpdateBackendAuthResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_Error})
+var sUpdateBackendAuthResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_JobId})
+var sUpdateBackendAuthResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_Operation})
+var sUpdateBackendAuthResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendAuthResponse_Status})
+var sUpdateBackendConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendConfigRequest, Members: &mUpdateBackendConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendConfigRequest})
+var sUpdateBackendConfigRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendConfigRequest_AppId})
+var sUpdateBackendConfigRequest_LoginAuthConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoginAuthConfig", ID: &iLoginAuthConfigReqObj, Members: &mLoginAuthConfigReqObj, Traits: &t134, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendConfigRequest_LoginAuthConfig})
+var sUpdateBackendConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendConfigResponse, Members: &mUpdateBackendConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendConfigResponse})
+var sUpdateBackendConfigResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendConfigResponse_AppId})
+var sUpdateBackendConfigResponse_BackendManagerAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendManagerAppId", ID: &i___string, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendConfigResponse_BackendManagerAppId})
+var sUpdateBackendConfigResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendConfigResponse_Error})
+var sUpdateBackendConfigResponse_LoginAuthConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoginAuthConfig", ID: &iLoginAuthConfigReqObj, Members: &mLoginAuthConfigReqObj, Traits: &t134, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendConfigResponse_LoginAuthConfig})
+var sUpdateBackendJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendJobRequest, Members: &mUpdateBackendJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendJobRequest})
+var sUpdateBackendJobRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobRequest_AppId})
+var sUpdateBackendJobRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobRequest_BackendEnvironmentName})
+var sUpdateBackendJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobRequest_JobId})
+var sUpdateBackendJobRequest_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobRequest_Operation})
+var sUpdateBackendJobRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobRequest_Status})
+var sUpdateBackendJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendJobResponse, Members: &mUpdateBackendJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendJobResponse})
+var sUpdateBackendJobResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_AppId})
+var sUpdateBackendJobResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_BackendEnvironmentName})
+var sUpdateBackendJobResponse_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_CreateTime})
+var sUpdateBackendJobResponse_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_Error})
+var sUpdateBackendJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_JobId})
+var sUpdateBackendJobResponse_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i___string, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_Operation})
+var sUpdateBackendJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_Status})
+var sUpdateBackendJobResponse_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i___string, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendJobResponse_UpdateTime})
+var sUpdateBackendStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendStorageRequest, Members: &mUpdateBackendStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendStorageRequest})
+var sUpdateBackendStorageRequest_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageRequest_AppId})
+var sUpdateBackendStorageRequest_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageRequest_BackendEnvironmentName})
+var sUpdateBackendStorageRequest_ResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfig", ID: &iUpdateBackendStorageResourceConfig, Members: &mUpdateBackendStorageResourceConfig, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendStorageRequest_ResourceConfig})
+var sUpdateBackendStorageRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageRequest_ResourceName})
+var sUpdateBackendStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBackendStorageResponse, Members: &mUpdateBackendStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBackendStorageResponse})
+var sUpdateBackendStorageResponse_AppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppId", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageResponse_AppId})
+var sUpdateBackendStorageResponse_BackendEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackendEnvironmentName", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageResponse_BackendEnvironmentName})
+var sUpdateBackendStorageResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageResponse_JobId})
+var sUpdateBackendStorageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eUpdateBackendStorageResponse_Status})
+
+var CloneBackend = &sCloneBackend
+
+var CreateBackend = &sCreateBackend
+
+var CreateBackendAPI = &sCreateBackendAPI
+
+var CreateBackendAuth = &sCreateBackendAuth
+
+var CreateBackendConfig = &sCreateBackendConfig
+
+var CreateBackendStorage = &sCreateBackendStorage
+
+var CreateToken = &sCreateToken
+
+var DeleteBackend = &sDeleteBackend
+
+var DeleteBackendAPI = &sDeleteBackendAPI
+
+var DeleteBackendAuth = &sDeleteBackendAuth
+
+var DeleteBackendStorage = &sDeleteBackendStorage
+
+var DeleteToken = &sDeleteToken
+
+var GenerateBackendAPIModels = &sGenerateBackendAPIModels
+
+var GetBackend = &sGetBackend
+
+var GetBackendAPI = &sGetBackendAPI
+
+var GetBackendAPIModels = &sGetBackendAPIModels
+
+var GetBackendAuth = &sGetBackendAuth
+
+var GetBackendJob = &sGetBackendJob
+
+var GetBackendStorage = &sGetBackendStorage
+
+var GetToken = &sGetToken
+
+var ImportBackendAuth = &sImportBackendAuth
+
+var ImportBackendStorage = &sImportBackendStorage
+
+var ListBackendJobs = &sListBackendJobs
+
+var ListS3Buckets = &sListS3Buckets
+
+var RemoveAllBackends = &sRemoveAllBackends
+
+var RemoveBackendConfig = &sRemoveBackendConfig
+
+var UpdateBackendAPI = &sUpdateBackendAPI
+
+var UpdateBackendAuth = &sUpdateBackendAuth
+
+var UpdateBackendConfig = &sUpdateBackendConfig
+
+var UpdateBackendJob = &sUpdateBackendJob
+
+var UpdateBackendStorage = &sUpdateBackendStorage
+
+var _AmplifyBackend = &s_AmplifyBackend
+
+var ___boolean = &s___boolean
+
+var ___double = &s___double
+
+var ___integerMin1Max25 = &s___integerMin1Max25
+
+var ___string = &s___string
+
+var AdditionalConstraintsElement = &sAdditionalConstraintsElement
+var AdditionalConstraintsElement_REQUIRE_DIGIT = &sAdditionalConstraintsElement_REQUIRE_DIGIT
+var AdditionalConstraintsElement_REQUIRE_LOWERCASE = &sAdditionalConstraintsElement_REQUIRE_LOWERCASE
+var AdditionalConstraintsElement_REQUIRE_SYMBOL = &sAdditionalConstraintsElement_REQUIRE_SYMBOL
+var AdditionalConstraintsElement_REQUIRE_UPPERCASE = &sAdditionalConstraintsElement_REQUIRE_UPPERCASE
+
+var AuthenticatedElement = &sAuthenticatedElement
+var AuthenticatedElement_READ = &sAuthenticatedElement_READ
+var AuthenticatedElement_CREATE_AND_UPDATE = &sAuthenticatedElement_CREATE_AND_UPDATE
+var AuthenticatedElement_DELETE = &sAuthenticatedElement_DELETE
+
+var AuthResources = &sAuthResources
+var AuthResources_USER_POOL_ONLY = &sAuthResources_USER_POOL_ONLY
+var AuthResources_IDENTITY_POOL_AND_USER_POOL = &sAuthResources_IDENTITY_POOL_AND_USER_POOL
+
+var BackendAPIAppSyncAuthSettings = &sBackendAPIAppSyncAuthSettings
+var BackendAPIAppSyncAuthSettings_CognitoUserPoolId = &sBackendAPIAppSyncAuthSettings_CognitoUserPoolId
+var BackendAPIAppSyncAuthSettings_Description = &sBackendAPIAppSyncAuthSettings_Description
+var BackendAPIAppSyncAuthSettings_ExpirationTime = &sBackendAPIAppSyncAuthSettings_ExpirationTime
+var BackendAPIAppSyncAuthSettings_OpenIDAuthTTL = &sBackendAPIAppSyncAuthSettings_OpenIDAuthTTL
+var BackendAPIAppSyncAuthSettings_OpenIDClientId = &sBackendAPIAppSyncAuthSettings_OpenIDClientId
+var BackendAPIAppSyncAuthSettings_OpenIDIatTTL = &sBackendAPIAppSyncAuthSettings_OpenIDIatTTL
+var BackendAPIAppSyncAuthSettings_OpenIDIssueURL = &sBackendAPIAppSyncAuthSettings_OpenIDIssueURL
+var BackendAPIAppSyncAuthSettings_OpenIDProviderName = &sBackendAPIAppSyncAuthSettings_OpenIDProviderName
+
+var BackendAPIAuthType = &sBackendAPIAuthType
+var BackendAPIAuthType_Mode = &sBackendAPIAuthType_Mode
+var BackendAPIAuthType_Settings = &sBackendAPIAuthType_Settings
+
+var BackendAPIConflictResolution = &sBackendAPIConflictResolution
+var BackendAPIConflictResolution_ResolutionStrategy = &sBackendAPIConflictResolution_ResolutionStrategy
+
+var BackendAPIResourceConfig = &sBackendAPIResourceConfig
+var BackendAPIResourceConfig_AdditionalAuthTypes = &sBackendAPIResourceConfig_AdditionalAuthTypes
+var BackendAPIResourceConfig_ApiName = &sBackendAPIResourceConfig_ApiName
+var BackendAPIResourceConfig_ConflictResolution = &sBackendAPIResourceConfig_ConflictResolution
+var BackendAPIResourceConfig_DefaultAuthType = &sBackendAPIResourceConfig_DefaultAuthType
+var BackendAPIResourceConfig_Service = &sBackendAPIResourceConfig_Service
+var BackendAPIResourceConfig_TransformSchema = &sBackendAPIResourceConfig_TransformSchema
+
+var BackendAuthAppleProviderConfig = &sBackendAuthAppleProviderConfig
+var BackendAuthAppleProviderConfig_ClientId = &sBackendAuthAppleProviderConfig_ClientId
+var BackendAuthAppleProviderConfig_KeyId = &sBackendAuthAppleProviderConfig_KeyId
+var BackendAuthAppleProviderConfig_PrivateKey = &sBackendAuthAppleProviderConfig_PrivateKey
+var BackendAuthAppleProviderConfig_TeamId = &sBackendAuthAppleProviderConfig_TeamId
+
+var BackendAuthSocialProviderConfig = &sBackendAuthSocialProviderConfig
+var BackendAuthSocialProviderConfig_ClientId = &sBackendAuthSocialProviderConfig_ClientId
+var BackendAuthSocialProviderConfig_ClientSecret = &sBackendAuthSocialProviderConfig_ClientSecret
+
+var BackendJobRespObj = &sBackendJobRespObj
+var BackendJobRespObj_AppId = &sBackendJobRespObj_AppId
+var BackendJobRespObj_BackendEnvironmentName = &sBackendJobRespObj_BackendEnvironmentName
+var BackendJobRespObj_CreateTime = &sBackendJobRespObj_CreateTime
+var BackendJobRespObj_Error = &sBackendJobRespObj_Error
+var BackendJobRespObj_JobId = &sBackendJobRespObj_JobId
+var BackendJobRespObj_Operation = &sBackendJobRespObj_Operation
+var BackendJobRespObj_Status = &sBackendJobRespObj_Status
+var BackendJobRespObj_UpdateTime = &sBackendJobRespObj_UpdateTime
+
+var BackendStoragePermissions = &sBackendStoragePermissions
+var BackendStoragePermissions_Authenticated = &sBackendStoragePermissions_Authenticated
+var BackendStoragePermissions_UnAuthenticated = &sBackendStoragePermissions_UnAuthenticated
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+
+var CreateBackendAuthForgotPasswordConfig = &sCreateBackendAuthForgotPasswordConfig
+var CreateBackendAuthForgotPasswordConfig_DeliveryMethod = &sCreateBackendAuthForgotPasswordConfig_DeliveryMethod
+var CreateBackendAuthForgotPasswordConfig_EmailSettings = &sCreateBackendAuthForgotPasswordConfig_EmailSettings
+var CreateBackendAuthForgotPasswordConfig_SmsSettings = &sCreateBackendAuthForgotPasswordConfig_SmsSettings
+
+var CreateBackendAuthIdentityPoolConfig = &sCreateBackendAuthIdentityPoolConfig
+var CreateBackendAuthIdentityPoolConfig_IdentityPoolName = &sCreateBackendAuthIdentityPoolConfig_IdentityPoolName
+var CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = &sCreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin
+
+var CreateBackendAuthMFAConfig = &sCreateBackendAuthMFAConfig
+var CreateBackendAuthMFAConfig_MFAMode = &sCreateBackendAuthMFAConfig_MFAMode
+var CreateBackendAuthMFAConfig_Settings = &sCreateBackendAuthMFAConfig_Settings
+
+var CreateBackendAuthOAuthConfig = &sCreateBackendAuthOAuthConfig
+var CreateBackendAuthOAuthConfig_DomainPrefix = &sCreateBackendAuthOAuthConfig_DomainPrefix
+var CreateBackendAuthOAuthConfig_OAuthGrantType = &sCreateBackendAuthOAuthConfig_OAuthGrantType
+var CreateBackendAuthOAuthConfig_OAuthScopes = &sCreateBackendAuthOAuthConfig_OAuthScopes
+var CreateBackendAuthOAuthConfig_RedirectSignInURIs = &sCreateBackendAuthOAuthConfig_RedirectSignInURIs
+var CreateBackendAuthOAuthConfig_RedirectSignOutURIs = &sCreateBackendAuthOAuthConfig_RedirectSignOutURIs
+var CreateBackendAuthOAuthConfig_SocialProviderSettings = &sCreateBackendAuthOAuthConfig_SocialProviderSettings
+
+var CreateBackendAuthPasswordPolicyConfig = &sCreateBackendAuthPasswordPolicyConfig
+var CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints = &sCreateBackendAuthPasswordPolicyConfig_AdditionalConstraints
+var CreateBackendAuthPasswordPolicyConfig_MinimumLength = &sCreateBackendAuthPasswordPolicyConfig_MinimumLength
+
+var CreateBackendAuthResourceConfig = &sCreateBackendAuthResourceConfig
+var CreateBackendAuthResourceConfig_AuthResources = &sCreateBackendAuthResourceConfig_AuthResources
+var CreateBackendAuthResourceConfig_IdentityPoolConfigs = &sCreateBackendAuthResourceConfig_IdentityPoolConfigs
+var CreateBackendAuthResourceConfig_Service = &sCreateBackendAuthResourceConfig_Service
+var CreateBackendAuthResourceConfig_UserPoolConfigs = &sCreateBackendAuthResourceConfig_UserPoolConfigs
+
+var CreateBackendAuthUserPoolConfig = &sCreateBackendAuthUserPoolConfig
+var CreateBackendAuthUserPoolConfig_ForgotPassword = &sCreateBackendAuthUserPoolConfig_ForgotPassword
+var CreateBackendAuthUserPoolConfig_Mfa = &sCreateBackendAuthUserPoolConfig_Mfa
+var CreateBackendAuthUserPoolConfig_OAuth = &sCreateBackendAuthUserPoolConfig_OAuth
+var CreateBackendAuthUserPoolConfig_PasswordPolicy = &sCreateBackendAuthUserPoolConfig_PasswordPolicy
+var CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes = &sCreateBackendAuthUserPoolConfig_RequiredSignUpAttributes
+var CreateBackendAuthUserPoolConfig_SignInMethod = &sCreateBackendAuthUserPoolConfig_SignInMethod
+var CreateBackendAuthUserPoolConfig_UserPoolName = &sCreateBackendAuthUserPoolConfig_UserPoolName
+var CreateBackendAuthUserPoolConfig_VerificationMessage = &sCreateBackendAuthUserPoolConfig_VerificationMessage
+
+var CreateBackendAuthVerificationMessageConfig = &sCreateBackendAuthVerificationMessageConfig
+var CreateBackendAuthVerificationMessageConfig_DeliveryMethod = &sCreateBackendAuthVerificationMessageConfig_DeliveryMethod
+var CreateBackendAuthVerificationMessageConfig_EmailSettings = &sCreateBackendAuthVerificationMessageConfig_EmailSettings
+var CreateBackendAuthVerificationMessageConfig_SmsSettings = &sCreateBackendAuthVerificationMessageConfig_SmsSettings
+
+var CreateBackendStorageResourceConfig = &sCreateBackendStorageResourceConfig
+var CreateBackendStorageResourceConfig_BucketName = &sCreateBackendStorageResourceConfig_BucketName
+var CreateBackendStorageResourceConfig_Permissions = &sCreateBackendStorageResourceConfig_Permissions
+var CreateBackendStorageResourceConfig_ServiceName = &sCreateBackendStorageResourceConfig_ServiceName
+
+var DeliveryMethod = &sDeliveryMethod
+var DeliveryMethod_EMAIL = &sDeliveryMethod_EMAIL
+var DeliveryMethod_SMS = &sDeliveryMethod_SMS
+
+var EmailSettings = &sEmailSettings
+var EmailSettings_EmailMessage = &sEmailSettings_EmailMessage
+var EmailSettings_EmailSubject = &sEmailSettings_EmailSubject
+
+var GatewayTimeoutException = &sGatewayTimeoutException
+var GatewayTimeoutException_Message = &sGatewayTimeoutException_Message
+
+var GetBackendStorageResourceConfig = &sGetBackendStorageResourceConfig
+var GetBackendStorageResourceConfig_BucketName = &sGetBackendStorageResourceConfig_BucketName
+var GetBackendStorageResourceConfig_Imported = &sGetBackendStorageResourceConfig_Imported
+var GetBackendStorageResourceConfig_Permissions = &sGetBackendStorageResourceConfig_Permissions
+var GetBackendStorageResourceConfig_ServiceName = &sGetBackendStorageResourceConfig_ServiceName
+
+var _ListOf__string = &s_ListOf__string
+var _ListOf__string_member = &s_ListOf__string_member
+
+var _ListOfAdditionalConstraintsElement = &s_ListOfAdditionalConstraintsElement
+var _ListOfAdditionalConstraintsElement_member = &s_ListOfAdditionalConstraintsElement_member
+
+var _ListOfAuthenticatedElement = &s_ListOfAuthenticatedElement
+var _ListOfAuthenticatedElement_member = &s_ListOfAuthenticatedElement_member
+
+var _ListOfBackendAPIAuthType = &s_ListOfBackendAPIAuthType
+var _ListOfBackendAPIAuthType_member = &s_ListOfBackendAPIAuthType_member
+
+var _ListOfBackendJobRespObj = &s_ListOfBackendJobRespObj
+var _ListOfBackendJobRespObj_member = &s_ListOfBackendJobRespObj_member
+
+var _ListOfMfaTypesElement = &s_ListOfMfaTypesElement
+var _ListOfMfaTypesElement_member = &s_ListOfMfaTypesElement_member
+
+var _ListOfOAuthScopesElement = &s_ListOfOAuthScopesElement
+var _ListOfOAuthScopesElement_member = &s_ListOfOAuthScopesElement_member
+
+var _ListOfRequiredSignUpAttributesElement = &s_ListOfRequiredSignUpAttributesElement
+var _ListOfRequiredSignUpAttributesElement_member = &s_ListOfRequiredSignUpAttributesElement_member
+
+var _ListOfS3BucketInfo = &s_ListOfS3BucketInfo
+var _ListOfS3BucketInfo_member = &s_ListOfS3BucketInfo_member
+
+var _ListOfUnAuthenticatedElement = &s_ListOfUnAuthenticatedElement
+var _ListOfUnAuthenticatedElement_member = &s_ListOfUnAuthenticatedElement_member
+
+var LoginAuthConfigReqObj = &sLoginAuthConfigReqObj
+var LoginAuthConfigReqObj_AwsCognitoIdentityPoolId = &sLoginAuthConfigReqObj_AwsCognitoIdentityPoolId
+var LoginAuthConfigReqObj_AwsCognitoRegion = &sLoginAuthConfigReqObj_AwsCognitoRegion
+var LoginAuthConfigReqObj_AwsUserPoolsId = &sLoginAuthConfigReqObj_AwsUserPoolsId
+var LoginAuthConfigReqObj_AwsUserPoolsWebClientId = &sLoginAuthConfigReqObj_AwsUserPoolsWebClientId
+
+var MFAMode = &sMFAMode
+var MFAMode_ON = &sMFAMode_ON
+var MFAMode_OFF = &sMFAMode_OFF
+var MFAMode_OPTIONAL = &sMFAMode_OPTIONAL
+
+var MfaTypesElement = &sMfaTypesElement
+var MfaTypesElement_SMS = &sMfaTypesElement_SMS
+var MfaTypesElement_TOTP = &sMfaTypesElement_TOTP
+
+var Mode = &sMode
+var Mode_API_KEY = &sMode_API_KEY
+var Mode_AWS_IAM = &sMode_AWS_IAM
+var Mode_AMAZON_COGNITO_USER_POOLS = &sMode_AMAZON_COGNITO_USER_POOLS
+var Mode_OPENID_CONNECT = &sMode_OPENID_CONNECT
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Message = &sNotFoundException_Message
+var NotFoundException_ResourceType = &sNotFoundException_ResourceType
+
+var OAuthGrantType = &sOAuthGrantType
+var OAuthGrantType_CODE = &sOAuthGrantType_CODE
+var OAuthGrantType_IMPLICIT = &sOAuthGrantType_IMPLICIT
+
+var OAuthScopesElement = &sOAuthScopesElement
+var OAuthScopesElement_PHONE = &sOAuthScopesElement_PHONE
+var OAuthScopesElement_EMAIL = &sOAuthScopesElement_EMAIL
+var OAuthScopesElement_OPENID = &sOAuthScopesElement_OPENID
+var OAuthScopesElement_PROFILE = &sOAuthScopesElement_PROFILE
+var OAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN = &sOAuthScopesElement_AWS_COGNITO_SIGNIN_USER_ADMIN
+
+var RequiredSignUpAttributesElement = &sRequiredSignUpAttributesElement
+var RequiredSignUpAttributesElement_ADDRESS = &sRequiredSignUpAttributesElement_ADDRESS
+var RequiredSignUpAttributesElement_BIRTHDATE = &sRequiredSignUpAttributesElement_BIRTHDATE
+var RequiredSignUpAttributesElement_EMAIL = &sRequiredSignUpAttributesElement_EMAIL
+var RequiredSignUpAttributesElement_FAMILY_NAME = &sRequiredSignUpAttributesElement_FAMILY_NAME
+var RequiredSignUpAttributesElement_GENDER = &sRequiredSignUpAttributesElement_GENDER
+var RequiredSignUpAttributesElement_GIVEN_NAME = &sRequiredSignUpAttributesElement_GIVEN_NAME
+var RequiredSignUpAttributesElement_LOCALE = &sRequiredSignUpAttributesElement_LOCALE
+var RequiredSignUpAttributesElement_MIDDLE_NAME = &sRequiredSignUpAttributesElement_MIDDLE_NAME
+var RequiredSignUpAttributesElement_NAME = &sRequiredSignUpAttributesElement_NAME
+var RequiredSignUpAttributesElement_NICKNAME = &sRequiredSignUpAttributesElement_NICKNAME
+var RequiredSignUpAttributesElement_PHONE_NUMBER = &sRequiredSignUpAttributesElement_PHONE_NUMBER
+var RequiredSignUpAttributesElement_PICTURE = &sRequiredSignUpAttributesElement_PICTURE
+var RequiredSignUpAttributesElement_PREFERRED_USERNAME = &sRequiredSignUpAttributesElement_PREFERRED_USERNAME
+var RequiredSignUpAttributesElement_PROFILE = &sRequiredSignUpAttributesElement_PROFILE
+var RequiredSignUpAttributesElement_UPDATED_AT = &sRequiredSignUpAttributesElement_UPDATED_AT
+var RequiredSignUpAttributesElement_WEBSITE = &sRequiredSignUpAttributesElement_WEBSITE
+var RequiredSignUpAttributesElement_ZONE_INFO = &sRequiredSignUpAttributesElement_ZONE_INFO
+
+var ResolutionStrategy = &sResolutionStrategy
+var ResolutionStrategy_OPTIMISTIC_CONCURRENCY = &sResolutionStrategy_OPTIMISTIC_CONCURRENCY
+var ResolutionStrategy_LAMBDA = &sResolutionStrategy_LAMBDA
+var ResolutionStrategy_AUTOMERGE = &sResolutionStrategy_AUTOMERGE
+var ResolutionStrategy_NONE = &sResolutionStrategy_NONE
+
+var ResourceConfig = &sResourceConfig
+
+var S3BucketInfo = &sS3BucketInfo
+var S3BucketInfo_CreationDate = &sS3BucketInfo_CreationDate
+var S3BucketInfo_Name = &sS3BucketInfo_Name
+
+var Service = &sService
+var Service_COGNITO = &sService_COGNITO
+
+var ServiceName = &sServiceName
+var ServiceName_S3 = &sServiceName_S3
+
+var Settings = &sSettings
+var Settings_MfaTypes = &sSettings_MfaTypes
+var Settings_SmsMessage = &sSettings_SmsMessage
+
+var SignInMethod = &sSignInMethod
+var SignInMethod_EMAIL = &sSignInMethod_EMAIL
+var SignInMethod_EMAIL_AND_PHONE_NUMBER = &sSignInMethod_EMAIL_AND_PHONE_NUMBER
+var SignInMethod_PHONE_NUMBER = &sSignInMethod_PHONE_NUMBER
+var SignInMethod_USERNAME = &sSignInMethod_USERNAME
+
+var SmsSettings = &sSmsSettings
+var SmsSettings_SmsMessage = &sSmsSettings_SmsMessage
+
+var SocialProviderSettings = &sSocialProviderSettings
+var SocialProviderSettings_Facebook = &sSocialProviderSettings_Facebook
+var SocialProviderSettings_Google = &sSocialProviderSettings_Google
+var SocialProviderSettings_LoginWithAmazon = &sSocialProviderSettings_LoginWithAmazon
+var SocialProviderSettings_SignInWithApple = &sSocialProviderSettings_SignInWithApple
+
+var Status = &sStatus
+var Status_LATEST = &sStatus_LATEST
+var Status_STALE = &sStatus_STALE
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_LimitType = &sTooManyRequestsException_LimitType
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var UnAuthenticatedElement = &sUnAuthenticatedElement
+var UnAuthenticatedElement_READ = &sUnAuthenticatedElement_READ
+var UnAuthenticatedElement_CREATE_AND_UPDATE = &sUnAuthenticatedElement_CREATE_AND_UPDATE
+var UnAuthenticatedElement_DELETE = &sUnAuthenticatedElement_DELETE
+
+var UpdateBackendAuthForgotPasswordConfig = &sUpdateBackendAuthForgotPasswordConfig
+var UpdateBackendAuthForgotPasswordConfig_DeliveryMethod = &sUpdateBackendAuthForgotPasswordConfig_DeliveryMethod
+var UpdateBackendAuthForgotPasswordConfig_EmailSettings = &sUpdateBackendAuthForgotPasswordConfig_EmailSettings
+var UpdateBackendAuthForgotPasswordConfig_SmsSettings = &sUpdateBackendAuthForgotPasswordConfig_SmsSettings
+
+var UpdateBackendAuthIdentityPoolConfig = &sUpdateBackendAuthIdentityPoolConfig
+var UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin = &sUpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin
+
+var UpdateBackendAuthMFAConfig = &sUpdateBackendAuthMFAConfig
+var UpdateBackendAuthMFAConfig_MFAMode = &sUpdateBackendAuthMFAConfig_MFAMode
+var UpdateBackendAuthMFAConfig_Settings = &sUpdateBackendAuthMFAConfig_Settings
+
+var UpdateBackendAuthOAuthConfig = &sUpdateBackendAuthOAuthConfig
+var UpdateBackendAuthOAuthConfig_DomainPrefix = &sUpdateBackendAuthOAuthConfig_DomainPrefix
+var UpdateBackendAuthOAuthConfig_OAuthGrantType = &sUpdateBackendAuthOAuthConfig_OAuthGrantType
+var UpdateBackendAuthOAuthConfig_OAuthScopes = &sUpdateBackendAuthOAuthConfig_OAuthScopes
+var UpdateBackendAuthOAuthConfig_RedirectSignInURIs = &sUpdateBackendAuthOAuthConfig_RedirectSignInURIs
+var UpdateBackendAuthOAuthConfig_RedirectSignOutURIs = &sUpdateBackendAuthOAuthConfig_RedirectSignOutURIs
+var UpdateBackendAuthOAuthConfig_SocialProviderSettings = &sUpdateBackendAuthOAuthConfig_SocialProviderSettings
+
+var UpdateBackendAuthPasswordPolicyConfig = &sUpdateBackendAuthPasswordPolicyConfig
+var UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints = &sUpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints
+var UpdateBackendAuthPasswordPolicyConfig_MinimumLength = &sUpdateBackendAuthPasswordPolicyConfig_MinimumLength
+
+var UpdateBackendAuthResourceConfig = &sUpdateBackendAuthResourceConfig
+var UpdateBackendAuthResourceConfig_AuthResources = &sUpdateBackendAuthResourceConfig_AuthResources
+var UpdateBackendAuthResourceConfig_IdentityPoolConfigs = &sUpdateBackendAuthResourceConfig_IdentityPoolConfigs
+var UpdateBackendAuthResourceConfig_Service = &sUpdateBackendAuthResourceConfig_Service
+var UpdateBackendAuthResourceConfig_UserPoolConfigs = &sUpdateBackendAuthResourceConfig_UserPoolConfigs
+
+var UpdateBackendAuthUserPoolConfig = &sUpdateBackendAuthUserPoolConfig
+var UpdateBackendAuthUserPoolConfig_ForgotPassword = &sUpdateBackendAuthUserPoolConfig_ForgotPassword
+var UpdateBackendAuthUserPoolConfig_Mfa = &sUpdateBackendAuthUserPoolConfig_Mfa
+var UpdateBackendAuthUserPoolConfig_OAuth = &sUpdateBackendAuthUserPoolConfig_OAuth
+var UpdateBackendAuthUserPoolConfig_PasswordPolicy = &sUpdateBackendAuthUserPoolConfig_PasswordPolicy
+var UpdateBackendAuthUserPoolConfig_VerificationMessage = &sUpdateBackendAuthUserPoolConfig_VerificationMessage
+
+var UpdateBackendAuthVerificationMessageConfig = &sUpdateBackendAuthVerificationMessageConfig
+var UpdateBackendAuthVerificationMessageConfig_DeliveryMethod = &sUpdateBackendAuthVerificationMessageConfig_DeliveryMethod
+var UpdateBackendAuthVerificationMessageConfig_EmailSettings = &sUpdateBackendAuthVerificationMessageConfig_EmailSettings
+var UpdateBackendAuthVerificationMessageConfig_SmsSettings = &sUpdateBackendAuthVerificationMessageConfig_SmsSettings
+
+var UpdateBackendStorageResourceConfig = &sUpdateBackendStorageResourceConfig
+var UpdateBackendStorageResourceConfig_Permissions = &sUpdateBackendStorageResourceConfig_Permissions
+var UpdateBackendStorageResourceConfig_ServiceName = &sUpdateBackendStorageResourceConfig_ServiceName
+
+var CloneBackendRequest = &sCloneBackendRequest
+var CloneBackendRequest_AppId = &sCloneBackendRequest_AppId
+var CloneBackendRequest_BackendEnvironmentName = &sCloneBackendRequest_BackendEnvironmentName
+var CloneBackendRequest_TargetEnvironmentName = &sCloneBackendRequest_TargetEnvironmentName
+
+var CloneBackendResponse = &sCloneBackendResponse
+var CloneBackendResponse_AppId = &sCloneBackendResponse_AppId
+var CloneBackendResponse_BackendEnvironmentName = &sCloneBackendResponse_BackendEnvironmentName
+var CloneBackendResponse_Error = &sCloneBackendResponse_Error
+var CloneBackendResponse_JobId = &sCloneBackendResponse_JobId
+var CloneBackendResponse_Operation = &sCloneBackendResponse_Operation
+var CloneBackendResponse_Status = &sCloneBackendResponse_Status
+
+var CreateBackendAPIRequest = &sCreateBackendAPIRequest
+var CreateBackendAPIRequest_AppId = &sCreateBackendAPIRequest_AppId
+var CreateBackendAPIRequest_BackendEnvironmentName = &sCreateBackendAPIRequest_BackendEnvironmentName
+var CreateBackendAPIRequest_ResourceConfig = &sCreateBackendAPIRequest_ResourceConfig
+var CreateBackendAPIRequest_ResourceName = &sCreateBackendAPIRequest_ResourceName
+
+var CreateBackendAPIResponse = &sCreateBackendAPIResponse
+var CreateBackendAPIResponse_AppId = &sCreateBackendAPIResponse_AppId
+var CreateBackendAPIResponse_BackendEnvironmentName = &sCreateBackendAPIResponse_BackendEnvironmentName
+var CreateBackendAPIResponse_Error = &sCreateBackendAPIResponse_Error
+var CreateBackendAPIResponse_JobId = &sCreateBackendAPIResponse_JobId
+var CreateBackendAPIResponse_Operation = &sCreateBackendAPIResponse_Operation
+var CreateBackendAPIResponse_Status = &sCreateBackendAPIResponse_Status
+
+var CreateBackendAuthRequest = &sCreateBackendAuthRequest
+var CreateBackendAuthRequest_AppId = &sCreateBackendAuthRequest_AppId
+var CreateBackendAuthRequest_BackendEnvironmentName = &sCreateBackendAuthRequest_BackendEnvironmentName
+var CreateBackendAuthRequest_ResourceConfig = &sCreateBackendAuthRequest_ResourceConfig
+var CreateBackendAuthRequest_ResourceName = &sCreateBackendAuthRequest_ResourceName
+
+var CreateBackendAuthResponse = &sCreateBackendAuthResponse
+var CreateBackendAuthResponse_AppId = &sCreateBackendAuthResponse_AppId
+var CreateBackendAuthResponse_BackendEnvironmentName = &sCreateBackendAuthResponse_BackendEnvironmentName
+var CreateBackendAuthResponse_Error = &sCreateBackendAuthResponse_Error
+var CreateBackendAuthResponse_JobId = &sCreateBackendAuthResponse_JobId
+var CreateBackendAuthResponse_Operation = &sCreateBackendAuthResponse_Operation
+var CreateBackendAuthResponse_Status = &sCreateBackendAuthResponse_Status
+
+var CreateBackendConfigRequest = &sCreateBackendConfigRequest
+var CreateBackendConfigRequest_AppId = &sCreateBackendConfigRequest_AppId
+var CreateBackendConfigRequest_BackendManagerAppId = &sCreateBackendConfigRequest_BackendManagerAppId
+
+var CreateBackendConfigResponse = &sCreateBackendConfigResponse
+var CreateBackendConfigResponse_AppId = &sCreateBackendConfigResponse_AppId
+var CreateBackendConfigResponse_BackendEnvironmentName = &sCreateBackendConfigResponse_BackendEnvironmentName
+var CreateBackendConfigResponse_JobId = &sCreateBackendConfigResponse_JobId
+var CreateBackendConfigResponse_Status = &sCreateBackendConfigResponse_Status
+
+var CreateBackendRequest = &sCreateBackendRequest
+var CreateBackendRequest_AppId = &sCreateBackendRequest_AppId
+var CreateBackendRequest_AppName = &sCreateBackendRequest_AppName
+var CreateBackendRequest_BackendEnvironmentName = &sCreateBackendRequest_BackendEnvironmentName
+var CreateBackendRequest_ResourceConfig = &sCreateBackendRequest_ResourceConfig
+var CreateBackendRequest_ResourceName = &sCreateBackendRequest_ResourceName
+
+var CreateBackendResponse = &sCreateBackendResponse
+var CreateBackendResponse_AppId = &sCreateBackendResponse_AppId
+var CreateBackendResponse_BackendEnvironmentName = &sCreateBackendResponse_BackendEnvironmentName
+var CreateBackendResponse_Error = &sCreateBackendResponse_Error
+var CreateBackendResponse_JobId = &sCreateBackendResponse_JobId
+var CreateBackendResponse_Operation = &sCreateBackendResponse_Operation
+var CreateBackendResponse_Status = &sCreateBackendResponse_Status
+
+var CreateBackendStorageRequest = &sCreateBackendStorageRequest
+var CreateBackendStorageRequest_AppId = &sCreateBackendStorageRequest_AppId
+var CreateBackendStorageRequest_BackendEnvironmentName = &sCreateBackendStorageRequest_BackendEnvironmentName
+var CreateBackendStorageRequest_ResourceConfig = &sCreateBackendStorageRequest_ResourceConfig
+var CreateBackendStorageRequest_ResourceName = &sCreateBackendStorageRequest_ResourceName
+
+var CreateBackendStorageResponse = &sCreateBackendStorageResponse
+var CreateBackendStorageResponse_AppId = &sCreateBackendStorageResponse_AppId
+var CreateBackendStorageResponse_BackendEnvironmentName = &sCreateBackendStorageResponse_BackendEnvironmentName
+var CreateBackendStorageResponse_JobId = &sCreateBackendStorageResponse_JobId
+var CreateBackendStorageResponse_Status = &sCreateBackendStorageResponse_Status
+
+var CreateTokenRequest = &sCreateTokenRequest
+var CreateTokenRequest_AppId = &sCreateTokenRequest_AppId
+
+var CreateTokenResponse = &sCreateTokenResponse
+var CreateTokenResponse_AppId = &sCreateTokenResponse_AppId
+var CreateTokenResponse_ChallengeCode = &sCreateTokenResponse_ChallengeCode
+var CreateTokenResponse_SessionId = &sCreateTokenResponse_SessionId
+var CreateTokenResponse_Ttl = &sCreateTokenResponse_Ttl
+
+var DeleteBackendAPIRequest = &sDeleteBackendAPIRequest
+var DeleteBackendAPIRequest_AppId = &sDeleteBackendAPIRequest_AppId
+var DeleteBackendAPIRequest_BackendEnvironmentName = &sDeleteBackendAPIRequest_BackendEnvironmentName
+var DeleteBackendAPIRequest_ResourceConfig = &sDeleteBackendAPIRequest_ResourceConfig
+var DeleteBackendAPIRequest_ResourceName = &sDeleteBackendAPIRequest_ResourceName
+
+var DeleteBackendAPIResponse = &sDeleteBackendAPIResponse
+var DeleteBackendAPIResponse_AppId = &sDeleteBackendAPIResponse_AppId
+var DeleteBackendAPIResponse_BackendEnvironmentName = &sDeleteBackendAPIResponse_BackendEnvironmentName
+var DeleteBackendAPIResponse_Error = &sDeleteBackendAPIResponse_Error
+var DeleteBackendAPIResponse_JobId = &sDeleteBackendAPIResponse_JobId
+var DeleteBackendAPIResponse_Operation = &sDeleteBackendAPIResponse_Operation
+var DeleteBackendAPIResponse_Status = &sDeleteBackendAPIResponse_Status
+
+var DeleteBackendAuthRequest = &sDeleteBackendAuthRequest
+var DeleteBackendAuthRequest_AppId = &sDeleteBackendAuthRequest_AppId
+var DeleteBackendAuthRequest_BackendEnvironmentName = &sDeleteBackendAuthRequest_BackendEnvironmentName
+var DeleteBackendAuthRequest_ResourceName = &sDeleteBackendAuthRequest_ResourceName
+
+var DeleteBackendAuthResponse = &sDeleteBackendAuthResponse
+var DeleteBackendAuthResponse_AppId = &sDeleteBackendAuthResponse_AppId
+var DeleteBackendAuthResponse_BackendEnvironmentName = &sDeleteBackendAuthResponse_BackendEnvironmentName
+var DeleteBackendAuthResponse_Error = &sDeleteBackendAuthResponse_Error
+var DeleteBackendAuthResponse_JobId = &sDeleteBackendAuthResponse_JobId
+var DeleteBackendAuthResponse_Operation = &sDeleteBackendAuthResponse_Operation
+var DeleteBackendAuthResponse_Status = &sDeleteBackendAuthResponse_Status
+
+var DeleteBackendRequest = &sDeleteBackendRequest
+var DeleteBackendRequest_AppId = &sDeleteBackendRequest_AppId
+var DeleteBackendRequest_BackendEnvironmentName = &sDeleteBackendRequest_BackendEnvironmentName
+
+var DeleteBackendResponse = &sDeleteBackendResponse
+var DeleteBackendResponse_AppId = &sDeleteBackendResponse_AppId
+var DeleteBackendResponse_BackendEnvironmentName = &sDeleteBackendResponse_BackendEnvironmentName
+var DeleteBackendResponse_Error = &sDeleteBackendResponse_Error
+var DeleteBackendResponse_JobId = &sDeleteBackendResponse_JobId
+var DeleteBackendResponse_Operation = &sDeleteBackendResponse_Operation
+var DeleteBackendResponse_Status = &sDeleteBackendResponse_Status
+
+var DeleteBackendStorageRequest = &sDeleteBackendStorageRequest
+var DeleteBackendStorageRequest_AppId = &sDeleteBackendStorageRequest_AppId
+var DeleteBackendStorageRequest_BackendEnvironmentName = &sDeleteBackendStorageRequest_BackendEnvironmentName
+var DeleteBackendStorageRequest_ResourceName = &sDeleteBackendStorageRequest_ResourceName
+var DeleteBackendStorageRequest_ServiceName = &sDeleteBackendStorageRequest_ServiceName
+
+var DeleteBackendStorageResponse = &sDeleteBackendStorageResponse
+var DeleteBackendStorageResponse_AppId = &sDeleteBackendStorageResponse_AppId
+var DeleteBackendStorageResponse_BackendEnvironmentName = &sDeleteBackendStorageResponse_BackendEnvironmentName
+var DeleteBackendStorageResponse_JobId = &sDeleteBackendStorageResponse_JobId
+var DeleteBackendStorageResponse_Status = &sDeleteBackendStorageResponse_Status
+
+var DeleteTokenRequest = &sDeleteTokenRequest
+var DeleteTokenRequest_AppId = &sDeleteTokenRequest_AppId
+var DeleteTokenRequest_SessionId = &sDeleteTokenRequest_SessionId
+
+var DeleteTokenResponse = &sDeleteTokenResponse
+var DeleteTokenResponse_IsSuccess = &sDeleteTokenResponse_IsSuccess
+
+var GenerateBackendAPIModelsRequest = &sGenerateBackendAPIModelsRequest
+var GenerateBackendAPIModelsRequest_AppId = &sGenerateBackendAPIModelsRequest_AppId
+var GenerateBackendAPIModelsRequest_BackendEnvironmentName = &sGenerateBackendAPIModelsRequest_BackendEnvironmentName
+var GenerateBackendAPIModelsRequest_ResourceName = &sGenerateBackendAPIModelsRequest_ResourceName
+
+var GenerateBackendAPIModelsResponse = &sGenerateBackendAPIModelsResponse
+var GenerateBackendAPIModelsResponse_AppId = &sGenerateBackendAPIModelsResponse_AppId
+var GenerateBackendAPIModelsResponse_BackendEnvironmentName = &sGenerateBackendAPIModelsResponse_BackendEnvironmentName
+var GenerateBackendAPIModelsResponse_Error = &sGenerateBackendAPIModelsResponse_Error
+var GenerateBackendAPIModelsResponse_JobId = &sGenerateBackendAPIModelsResponse_JobId
+var GenerateBackendAPIModelsResponse_Operation = &sGenerateBackendAPIModelsResponse_Operation
+var GenerateBackendAPIModelsResponse_Status = &sGenerateBackendAPIModelsResponse_Status
+
+var GetBackendAPIRequest = &sGetBackendAPIRequest
+var GetBackendAPIRequest_AppId = &sGetBackendAPIRequest_AppId
+var GetBackendAPIRequest_BackendEnvironmentName = &sGetBackendAPIRequest_BackendEnvironmentName
+var GetBackendAPIRequest_ResourceConfig = &sGetBackendAPIRequest_ResourceConfig
+var GetBackendAPIRequest_ResourceName = &sGetBackendAPIRequest_ResourceName
+
+var GetBackendAPIModelsRequest = &sGetBackendAPIModelsRequest
+var GetBackendAPIModelsRequest_AppId = &sGetBackendAPIModelsRequest_AppId
+var GetBackendAPIModelsRequest_BackendEnvironmentName = &sGetBackendAPIModelsRequest_BackendEnvironmentName
+var GetBackendAPIModelsRequest_ResourceName = &sGetBackendAPIModelsRequest_ResourceName
+
+var GetBackendAPIModelsResponse = &sGetBackendAPIModelsResponse
+var GetBackendAPIModelsResponse_Models = &sGetBackendAPIModelsResponse_Models
+var GetBackendAPIModelsResponse_Status = &sGetBackendAPIModelsResponse_Status
+var GetBackendAPIModelsResponse_ModelIntrospectionSchema = &sGetBackendAPIModelsResponse_ModelIntrospectionSchema
+
+var GetBackendAPIResponse = &sGetBackendAPIResponse
+var GetBackendAPIResponse_AppId = &sGetBackendAPIResponse_AppId
+var GetBackendAPIResponse_BackendEnvironmentName = &sGetBackendAPIResponse_BackendEnvironmentName
+var GetBackendAPIResponse_Error = &sGetBackendAPIResponse_Error
+var GetBackendAPIResponse_ResourceConfig = &sGetBackendAPIResponse_ResourceConfig
+var GetBackendAPIResponse_ResourceName = &sGetBackendAPIResponse_ResourceName
+
+var GetBackendAuthRequest = &sGetBackendAuthRequest
+var GetBackendAuthRequest_AppId = &sGetBackendAuthRequest_AppId
+var GetBackendAuthRequest_BackendEnvironmentName = &sGetBackendAuthRequest_BackendEnvironmentName
+var GetBackendAuthRequest_ResourceName = &sGetBackendAuthRequest_ResourceName
+
+var GetBackendAuthResponse = &sGetBackendAuthResponse
+var GetBackendAuthResponse_AppId = &sGetBackendAuthResponse_AppId
+var GetBackendAuthResponse_BackendEnvironmentName = &sGetBackendAuthResponse_BackendEnvironmentName
+var GetBackendAuthResponse_Error = &sGetBackendAuthResponse_Error
+var GetBackendAuthResponse_ResourceConfig = &sGetBackendAuthResponse_ResourceConfig
+var GetBackendAuthResponse_ResourceName = &sGetBackendAuthResponse_ResourceName
+
+var GetBackendRequest = &sGetBackendRequest
+var GetBackendRequest_AppId = &sGetBackendRequest_AppId
+var GetBackendRequest_BackendEnvironmentName = &sGetBackendRequest_BackendEnvironmentName
+
+var GetBackendJobRequest = &sGetBackendJobRequest
+var GetBackendJobRequest_AppId = &sGetBackendJobRequest_AppId
+var GetBackendJobRequest_BackendEnvironmentName = &sGetBackendJobRequest_BackendEnvironmentName
+var GetBackendJobRequest_JobId = &sGetBackendJobRequest_JobId
+
+var GetBackendJobResponse = &sGetBackendJobResponse
+var GetBackendJobResponse_AppId = &sGetBackendJobResponse_AppId
+var GetBackendJobResponse_BackendEnvironmentName = &sGetBackendJobResponse_BackendEnvironmentName
+var GetBackendJobResponse_CreateTime = &sGetBackendJobResponse_CreateTime
+var GetBackendJobResponse_Error = &sGetBackendJobResponse_Error
+var GetBackendJobResponse_JobId = &sGetBackendJobResponse_JobId
+var GetBackendJobResponse_Operation = &sGetBackendJobResponse_Operation
+var GetBackendJobResponse_Status = &sGetBackendJobResponse_Status
+var GetBackendJobResponse_UpdateTime = &sGetBackendJobResponse_UpdateTime
+
+var GetBackendResponse = &sGetBackendResponse
+var GetBackendResponse_AmplifyFeatureFlags = &sGetBackendResponse_AmplifyFeatureFlags
+var GetBackendResponse_AmplifyMetaConfig = &sGetBackendResponse_AmplifyMetaConfig
+var GetBackendResponse_AppId = &sGetBackendResponse_AppId
+var GetBackendResponse_AppName = &sGetBackendResponse_AppName
+var GetBackendResponse_BackendEnvironmentList = &sGetBackendResponse_BackendEnvironmentList
+var GetBackendResponse_BackendEnvironmentName = &sGetBackendResponse_BackendEnvironmentName
+var GetBackendResponse_Error = &sGetBackendResponse_Error
+
+var GetBackendStorageRequest = &sGetBackendStorageRequest
+var GetBackendStorageRequest_AppId = &sGetBackendStorageRequest_AppId
+var GetBackendStorageRequest_BackendEnvironmentName = &sGetBackendStorageRequest_BackendEnvironmentName
+var GetBackendStorageRequest_ResourceName = &sGetBackendStorageRequest_ResourceName
+
+var GetBackendStorageResponse = &sGetBackendStorageResponse
+var GetBackendStorageResponse_AppId = &sGetBackendStorageResponse_AppId
+var GetBackendStorageResponse_BackendEnvironmentName = &sGetBackendStorageResponse_BackendEnvironmentName
+var GetBackendStorageResponse_ResourceConfig = &sGetBackendStorageResponse_ResourceConfig
+var GetBackendStorageResponse_ResourceName = &sGetBackendStorageResponse_ResourceName
+
+var GetTokenRequest = &sGetTokenRequest
+var GetTokenRequest_AppId = &sGetTokenRequest_AppId
+var GetTokenRequest_SessionId = &sGetTokenRequest_SessionId
+
+var GetTokenResponse = &sGetTokenResponse
+var GetTokenResponse_AppId = &sGetTokenResponse_AppId
+var GetTokenResponse_ChallengeCode = &sGetTokenResponse_ChallengeCode
+var GetTokenResponse_SessionId = &sGetTokenResponse_SessionId
+var GetTokenResponse_Ttl = &sGetTokenResponse_Ttl
+
+var ImportBackendAuthRequest = &sImportBackendAuthRequest
+var ImportBackendAuthRequest_AppId = &sImportBackendAuthRequest_AppId
+var ImportBackendAuthRequest_BackendEnvironmentName = &sImportBackendAuthRequest_BackendEnvironmentName
+var ImportBackendAuthRequest_IdentityPoolId = &sImportBackendAuthRequest_IdentityPoolId
+var ImportBackendAuthRequest_NativeClientId = &sImportBackendAuthRequest_NativeClientId
+var ImportBackendAuthRequest_UserPoolId = &sImportBackendAuthRequest_UserPoolId
+var ImportBackendAuthRequest_WebClientId = &sImportBackendAuthRequest_WebClientId
+
+var ImportBackendAuthResponse = &sImportBackendAuthResponse
+var ImportBackendAuthResponse_AppId = &sImportBackendAuthResponse_AppId
+var ImportBackendAuthResponse_BackendEnvironmentName = &sImportBackendAuthResponse_BackendEnvironmentName
+var ImportBackendAuthResponse_Error = &sImportBackendAuthResponse_Error
+var ImportBackendAuthResponse_JobId = &sImportBackendAuthResponse_JobId
+var ImportBackendAuthResponse_Operation = &sImportBackendAuthResponse_Operation
+var ImportBackendAuthResponse_Status = &sImportBackendAuthResponse_Status
+
+var ImportBackendStorageRequest = &sImportBackendStorageRequest
+var ImportBackendStorageRequest_AppId = &sImportBackendStorageRequest_AppId
+var ImportBackendStorageRequest_BackendEnvironmentName = &sImportBackendStorageRequest_BackendEnvironmentName
+var ImportBackendStorageRequest_BucketName = &sImportBackendStorageRequest_BucketName
+var ImportBackendStorageRequest_ServiceName = &sImportBackendStorageRequest_ServiceName
+
+var ImportBackendStorageResponse = &sImportBackendStorageResponse
+var ImportBackendStorageResponse_AppId = &sImportBackendStorageResponse_AppId
+var ImportBackendStorageResponse_BackendEnvironmentName = &sImportBackendStorageResponse_BackendEnvironmentName
+var ImportBackendStorageResponse_JobId = &sImportBackendStorageResponse_JobId
+var ImportBackendStorageResponse_Status = &sImportBackendStorageResponse_Status
+
+var ListBackendJobsRequest = &sListBackendJobsRequest
+var ListBackendJobsRequest_AppId = &sListBackendJobsRequest_AppId
+var ListBackendJobsRequest_BackendEnvironmentName = &sListBackendJobsRequest_BackendEnvironmentName
+var ListBackendJobsRequest_JobId = &sListBackendJobsRequest_JobId
+var ListBackendJobsRequest_MaxResults = &sListBackendJobsRequest_MaxResults
+var ListBackendJobsRequest_NextToken = &sListBackendJobsRequest_NextToken
+var ListBackendJobsRequest_Operation = &sListBackendJobsRequest_Operation
+var ListBackendJobsRequest_Status = &sListBackendJobsRequest_Status
+
+var ListBackendJobsResponse = &sListBackendJobsResponse
+var ListBackendJobsResponse_Jobs = &sListBackendJobsResponse_Jobs
+var ListBackendJobsResponse_NextToken = &sListBackendJobsResponse_NextToken
+
+var ListS3BucketsRequest = &sListS3BucketsRequest
+var ListS3BucketsRequest_NextToken = &sListS3BucketsRequest_NextToken
+
+var ListS3BucketsResponse = &sListS3BucketsResponse
+var ListS3BucketsResponse_Buckets = &sListS3BucketsResponse_Buckets
+var ListS3BucketsResponse_NextToken = &sListS3BucketsResponse_NextToken
+
+var RemoveAllBackendsRequest = &sRemoveAllBackendsRequest
+var RemoveAllBackendsRequest_AppId = &sRemoveAllBackendsRequest_AppId
+var RemoveAllBackendsRequest_CleanAmplifyApp = &sRemoveAllBackendsRequest_CleanAmplifyApp
+
+var RemoveAllBackendsResponse = &sRemoveAllBackendsResponse
+var RemoveAllBackendsResponse_AppId = &sRemoveAllBackendsResponse_AppId
+var RemoveAllBackendsResponse_Error = &sRemoveAllBackendsResponse_Error
+var RemoveAllBackendsResponse_JobId = &sRemoveAllBackendsResponse_JobId
+var RemoveAllBackendsResponse_Operation = &sRemoveAllBackendsResponse_Operation
+var RemoveAllBackendsResponse_Status = &sRemoveAllBackendsResponse_Status
+
+var RemoveBackendConfigRequest = &sRemoveBackendConfigRequest
+var RemoveBackendConfigRequest_AppId = &sRemoveBackendConfigRequest_AppId
+
+var RemoveBackendConfigResponse = &sRemoveBackendConfigResponse
+var RemoveBackendConfigResponse_Error = &sRemoveBackendConfigResponse_Error
+
+var UpdateBackendAPIRequest = &sUpdateBackendAPIRequest
+var UpdateBackendAPIRequest_AppId = &sUpdateBackendAPIRequest_AppId
+var UpdateBackendAPIRequest_BackendEnvironmentName = &sUpdateBackendAPIRequest_BackendEnvironmentName
+var UpdateBackendAPIRequest_ResourceConfig = &sUpdateBackendAPIRequest_ResourceConfig
+var UpdateBackendAPIRequest_ResourceName = &sUpdateBackendAPIRequest_ResourceName
+
+var UpdateBackendAPIResponse = &sUpdateBackendAPIResponse
+var UpdateBackendAPIResponse_AppId = &sUpdateBackendAPIResponse_AppId
+var UpdateBackendAPIResponse_BackendEnvironmentName = &sUpdateBackendAPIResponse_BackendEnvironmentName
+var UpdateBackendAPIResponse_Error = &sUpdateBackendAPIResponse_Error
+var UpdateBackendAPIResponse_JobId = &sUpdateBackendAPIResponse_JobId
+var UpdateBackendAPIResponse_Operation = &sUpdateBackendAPIResponse_Operation
+var UpdateBackendAPIResponse_Status = &sUpdateBackendAPIResponse_Status
+
+var UpdateBackendAuthRequest = &sUpdateBackendAuthRequest
+var UpdateBackendAuthRequest_AppId = &sUpdateBackendAuthRequest_AppId
+var UpdateBackendAuthRequest_BackendEnvironmentName = &sUpdateBackendAuthRequest_BackendEnvironmentName
+var UpdateBackendAuthRequest_ResourceConfig = &sUpdateBackendAuthRequest_ResourceConfig
+var UpdateBackendAuthRequest_ResourceName = &sUpdateBackendAuthRequest_ResourceName
+
+var UpdateBackendAuthResponse = &sUpdateBackendAuthResponse
+var UpdateBackendAuthResponse_AppId = &sUpdateBackendAuthResponse_AppId
+var UpdateBackendAuthResponse_BackendEnvironmentName = &sUpdateBackendAuthResponse_BackendEnvironmentName
+var UpdateBackendAuthResponse_Error = &sUpdateBackendAuthResponse_Error
+var UpdateBackendAuthResponse_JobId = &sUpdateBackendAuthResponse_JobId
+var UpdateBackendAuthResponse_Operation = &sUpdateBackendAuthResponse_Operation
+var UpdateBackendAuthResponse_Status = &sUpdateBackendAuthResponse_Status
+
+var UpdateBackendConfigRequest = &sUpdateBackendConfigRequest
+var UpdateBackendConfigRequest_AppId = &sUpdateBackendConfigRequest_AppId
+var UpdateBackendConfigRequest_LoginAuthConfig = &sUpdateBackendConfigRequest_LoginAuthConfig
+
+var UpdateBackendConfigResponse = &sUpdateBackendConfigResponse
+var UpdateBackendConfigResponse_AppId = &sUpdateBackendConfigResponse_AppId
+var UpdateBackendConfigResponse_BackendManagerAppId = &sUpdateBackendConfigResponse_BackendManagerAppId
+var UpdateBackendConfigResponse_Error = &sUpdateBackendConfigResponse_Error
+var UpdateBackendConfigResponse_LoginAuthConfig = &sUpdateBackendConfigResponse_LoginAuthConfig
+
+var UpdateBackendJobRequest = &sUpdateBackendJobRequest
+var UpdateBackendJobRequest_AppId = &sUpdateBackendJobRequest_AppId
+var UpdateBackendJobRequest_BackendEnvironmentName = &sUpdateBackendJobRequest_BackendEnvironmentName
+var UpdateBackendJobRequest_JobId = &sUpdateBackendJobRequest_JobId
+var UpdateBackendJobRequest_Operation = &sUpdateBackendJobRequest_Operation
+var UpdateBackendJobRequest_Status = &sUpdateBackendJobRequest_Status
+
+var UpdateBackendJobResponse = &sUpdateBackendJobResponse
+var UpdateBackendJobResponse_AppId = &sUpdateBackendJobResponse_AppId
+var UpdateBackendJobResponse_BackendEnvironmentName = &sUpdateBackendJobResponse_BackendEnvironmentName
+var UpdateBackendJobResponse_CreateTime = &sUpdateBackendJobResponse_CreateTime
+var UpdateBackendJobResponse_Error = &sUpdateBackendJobResponse_Error
+var UpdateBackendJobResponse_JobId = &sUpdateBackendJobResponse_JobId
+var UpdateBackendJobResponse_Operation = &sUpdateBackendJobResponse_Operation
+var UpdateBackendJobResponse_Status = &sUpdateBackendJobResponse_Status
+var UpdateBackendJobResponse_UpdateTime = &sUpdateBackendJobResponse_UpdateTime
+
+var UpdateBackendStorageRequest = &sUpdateBackendStorageRequest
+var UpdateBackendStorageRequest_AppId = &sUpdateBackendStorageRequest_AppId
+var UpdateBackendStorageRequest_BackendEnvironmentName = &sUpdateBackendStorageRequest_BackendEnvironmentName
+var UpdateBackendStorageRequest_ResourceConfig = &sUpdateBackendStorageRequest_ResourceConfig
+var UpdateBackendStorageRequest_ResourceName = &sUpdateBackendStorageRequest_ResourceName
+
+var UpdateBackendStorageResponse = &sUpdateBackendStorageResponse
+var UpdateBackendStorageResponse_AppId = &sUpdateBackendStorageResponse_AppId
+var UpdateBackendStorageResponse_BackendEnvironmentName = &sUpdateBackendStorageResponse_BackendEnvironmentName
+var UpdateBackendStorageResponse_JobId = &sUpdateBackendStorageResponse_JobId
+var UpdateBackendStorageResponse_Status = &sUpdateBackendStorageResponse_Status
+
+var AmplifyBackend = &smithy.ServiceSchema{Schema: &s_AmplifyBackend, Version: "2020-08-11"}

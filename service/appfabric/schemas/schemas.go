@@ -4,1648 +4,1656 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetUserAccessTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "BatchGetUserAccessTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eBatchGetUserAccessTasks                                          smithy.SchemaExtensions
+	eConnectAppAuthorization                                          smithy.SchemaExtensions
+	eCreateAppAuthorization                                           smithy.SchemaExtensions
+	eCreateAppBundle                                                  smithy.SchemaExtensions
+	eCreateIngestion                                                  smithy.SchemaExtensions
+	eCreateIngestionDestination                                       smithy.SchemaExtensions
+	eDeleteAppAuthorization                                           smithy.SchemaExtensions
+	eDeleteAppBundle                                                  smithy.SchemaExtensions
+	eDeleteIngestion                                                  smithy.SchemaExtensions
+	eDeleteIngestionDestination                                       smithy.SchemaExtensions
+	eGetAppAuthorization                                              smithy.SchemaExtensions
+	eGetAppBundle                                                     smithy.SchemaExtensions
+	eGetIngestion                                                     smithy.SchemaExtensions
+	eGetIngestionDestination                                          smithy.SchemaExtensions
+	eListAppAuthorizations                                            smithy.SchemaExtensions
+	eListAppBundles                                                   smithy.SchemaExtensions
+	eListIngestionDestinations                                        smithy.SchemaExtensions
+	eListIngestions                                                   smithy.SchemaExtensions
+	eListTagsForResource                                              smithy.SchemaExtensions
+	eStartIngestion                                                   smithy.SchemaExtensions
+	eStartUserAccessTasks                                             smithy.SchemaExtensions
+	eStopIngestion                                                    smithy.SchemaExtensions
+	eTagResource                                                      smithy.SchemaExtensions
+	eUntagResource                                                    smithy.SchemaExtensions
+	eUpdateAppAuthorization                                           smithy.SchemaExtensions
+	eUpdateIngestionDestination                                       smithy.SchemaExtensions
+	e_FabricFrontEndService                                           smithy.SchemaExtensions
+	eAccessDeniedException                                            smithy.SchemaExtensions
+	eAccessDeniedException_message                                    smithy.SchemaExtensions
+	eApiKeyCredential                                                 smithy.SchemaExtensions
+	eApiKeyCredential_apiKey                                          smithy.SchemaExtensions
+	eAppAuthorization                                                 smithy.SchemaExtensions
+	eAppAuthorization_appAuthorizationArn                             smithy.SchemaExtensions
+	eAppAuthorization_appBundleArn                                    smithy.SchemaExtensions
+	eAppAuthorization_app                                             smithy.SchemaExtensions
+	eAppAuthorization_tenant                                          smithy.SchemaExtensions
+	eAppAuthorization_authType                                        smithy.SchemaExtensions
+	eAppAuthorization_status                                          smithy.SchemaExtensions
+	eAppAuthorization_createdAt                                       smithy.SchemaExtensions
+	eAppAuthorization_updatedAt                                       smithy.SchemaExtensions
+	eAppAuthorization_persona                                         smithy.SchemaExtensions
+	eAppAuthorization_authUrl                                         smithy.SchemaExtensions
+	eAppAuthorizationStatus                                           smithy.SchemaExtensions
+	eAppAuthorizationStatus_PENDING_CONNECT                           smithy.SchemaExtensions
+	eAppAuthorizationStatus_CONNECTED                                 smithy.SchemaExtensions
+	eAppAuthorizationStatus_CONNECTION_VALIDATION_FAILED              smithy.SchemaExtensions
+	eAppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED                smithy.SchemaExtensions
+	eAppAuthorizationSummary                                          smithy.SchemaExtensions
+	eAppAuthorizationSummary_appAuthorizationArn                      smithy.SchemaExtensions
+	eAppAuthorizationSummary_appBundleArn                             smithy.SchemaExtensions
+	eAppAuthorizationSummary_app                                      smithy.SchemaExtensions
+	eAppAuthorizationSummary_tenant                                   smithy.SchemaExtensions
+	eAppAuthorizationSummary_status                                   smithy.SchemaExtensions
+	eAppAuthorizationSummary_updatedAt                                smithy.SchemaExtensions
+	e_AppAuthorizationSummaryList                                     smithy.SchemaExtensions
+	e_AppAuthorizationSummaryList_member                              smithy.SchemaExtensions
+	eAppBundle                                                        smithy.SchemaExtensions
+	eAppBundle_arn                                                    smithy.SchemaExtensions
+	eAppBundle_customerManagedKeyArn                                  smithy.SchemaExtensions
+	eAppBundleSummary                                                 smithy.SchemaExtensions
+	eAppBundleSummary_arn                                             smithy.SchemaExtensions
+	e_AppBundleSummaryList                                            smithy.SchemaExtensions
+	e_AppBundleSummaryList_member                                     smithy.SchemaExtensions
+	e_Arn                                                             smithy.SchemaExtensions
+	eAuditLogDestinationConfiguration                                 smithy.SchemaExtensions
+	eAuditLogDestinationConfiguration_destination                     smithy.SchemaExtensions
+	eAuditLogProcessingConfiguration                                  smithy.SchemaExtensions
+	eAuditLogProcessingConfiguration_schema                           smithy.SchemaExtensions
+	eAuditLogProcessingConfiguration_format                           smithy.SchemaExtensions
+	eAuthRequest                                                      smithy.SchemaExtensions
+	eAuthRequest_redirectUri                                          smithy.SchemaExtensions
+	eAuthRequest_code                                                 smithy.SchemaExtensions
+	eAuthType                                                         smithy.SchemaExtensions
+	eAuthType_OAUTH2                                                  smithy.SchemaExtensions
+	eAuthType_API_KEY                                                 smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_message                                        smithy.SchemaExtensions
+	eConflictException_resourceId                                     smithy.SchemaExtensions
+	eConflictException_resourceType                                   smithy.SchemaExtensions
+	eCredential                                                       smithy.SchemaExtensions
+	eCredential_oauth2Credential                                      smithy.SchemaExtensions
+	eCredential_apiKeyCredential                                      smithy.SchemaExtensions
+	e_DateTime                                                        smithy.SchemaExtensions
+	eDestination                                                      smithy.SchemaExtensions
+	eDestination_s3Bucket                                             smithy.SchemaExtensions
+	eDestination_firehoseStream                                       smithy.SchemaExtensions
+	eDestinationConfiguration                                         smithy.SchemaExtensions
+	eDestinationConfiguration_auditLog                                smithy.SchemaExtensions
+	e_Email                                                           smithy.SchemaExtensions
+	eFirehoseStream                                                   smithy.SchemaExtensions
+	eFirehoseStream_streamName                                        smithy.SchemaExtensions
+	eFormat                                                           smithy.SchemaExtensions
+	eFormat_JSON                                                      smithy.SchemaExtensions
+	eFormat_PARQUET                                                   smithy.SchemaExtensions
+	e_Identifier                                                      smithy.SchemaExtensions
+	eIngestion                                                        smithy.SchemaExtensions
+	eIngestion_arn                                                    smithy.SchemaExtensions
+	eIngestion_appBundleArn                                           smithy.SchemaExtensions
+	eIngestion_app                                                    smithy.SchemaExtensions
+	eIngestion_tenantId                                               smithy.SchemaExtensions
+	eIngestion_createdAt                                              smithy.SchemaExtensions
+	eIngestion_updatedAt                                              smithy.SchemaExtensions
+	eIngestion_state                                                  smithy.SchemaExtensions
+	eIngestion_ingestionType                                          smithy.SchemaExtensions
+	eIngestionDestination                                             smithy.SchemaExtensions
+	eIngestionDestination_arn                                         smithy.SchemaExtensions
+	eIngestionDestination_ingestionArn                                smithy.SchemaExtensions
+	eIngestionDestination_processingConfiguration                     smithy.SchemaExtensions
+	eIngestionDestination_destinationConfiguration                    smithy.SchemaExtensions
+	eIngestionDestination_status                                      smithy.SchemaExtensions
+	eIngestionDestination_statusReason                                smithy.SchemaExtensions
+	eIngestionDestination_createdAt                                   smithy.SchemaExtensions
+	eIngestionDestination_updatedAt                                   smithy.SchemaExtensions
+	e_IngestionDestinationList                                        smithy.SchemaExtensions
+	e_IngestionDestinationList_member                                 smithy.SchemaExtensions
+	eIngestionDestinationStatus                                       smithy.SchemaExtensions
+	eIngestionDestinationStatus_ACTIVE                                smithy.SchemaExtensions
+	eIngestionDestinationStatus_FAILED                                smithy.SchemaExtensions
+	eIngestionDestinationSummary                                      smithy.SchemaExtensions
+	eIngestionDestinationSummary_arn                                  smithy.SchemaExtensions
+	e_IngestionList                                                   smithy.SchemaExtensions
+	e_IngestionList_member                                            smithy.SchemaExtensions
+	eIngestionState                                                   smithy.SchemaExtensions
+	eIngestionState_ENABLED                                           smithy.SchemaExtensions
+	eIngestionState_DISABLED                                          smithy.SchemaExtensions
+	eIngestionSummary                                                 smithy.SchemaExtensions
+	eIngestionSummary_arn                                             smithy.SchemaExtensions
+	eIngestionSummary_app                                             smithy.SchemaExtensions
+	eIngestionSummary_tenantId                                        smithy.SchemaExtensions
+	eIngestionSummary_state                                           smithy.SchemaExtensions
+	eIngestionType                                                    smithy.SchemaExtensions
+	eIngestionType_AUDIT_LOG                                          smithy.SchemaExtensions
+	e_Integer                                                         smithy.SchemaExtensions
+	eInternalServerException                                          smithy.SchemaExtensions
+	eInternalServerException_message                                  smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                        smithy.SchemaExtensions
+	e_MaxResults                                                      smithy.SchemaExtensions
+	eOauth2Credential                                                 smithy.SchemaExtensions
+	eOauth2Credential_clientId                                        smithy.SchemaExtensions
+	eOauth2Credential_clientSecret                                    smithy.SchemaExtensions
+	ePersona                                                          smithy.SchemaExtensions
+	ePersona_ADMIN                                                    smithy.SchemaExtensions
+	ePersona_ENDUSER                                                  smithy.SchemaExtensions
+	eProcessingConfiguration                                          smithy.SchemaExtensions
+	eProcessingConfiguration_auditLog                                 smithy.SchemaExtensions
+	e_RedirectUri                                                     smithy.SchemaExtensions
+	eResourceNotFoundException                                        smithy.SchemaExtensions
+	eResourceNotFoundException_message                                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                             smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                           smithy.SchemaExtensions
+	eResultStatus                                                     smithy.SchemaExtensions
+	eResultStatus_IN_PROGRESS                                         smithy.SchemaExtensions
+	eResultStatus_COMPLETED                                           smithy.SchemaExtensions
+	eResultStatus_FAILED                                              smithy.SchemaExtensions
+	eResultStatus_EXPIRED                                             smithy.SchemaExtensions
+	eS3Bucket                                                         smithy.SchemaExtensions
+	eS3Bucket_bucketName                                              smithy.SchemaExtensions
+	eS3Bucket_prefix                                                  smithy.SchemaExtensions
+	eSchema                                                           smithy.SchemaExtensions
+	eSchema_OCSF                                                      smithy.SchemaExtensions
+	eSchema_RAW                                                       smithy.SchemaExtensions
+	e_SensitiveString2048                                             smithy.SchemaExtensions
+	eServiceQuotaExceededException                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                        smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                          smithy.SchemaExtensions
+	e_String120                                                       smithy.SchemaExtensions
+	e_String2048                                                      smithy.SchemaExtensions
+	e_String255                                                       smithy.SchemaExtensions
+	e_String63                                                        smithy.SchemaExtensions
+	e_String64                                                        smithy.SchemaExtensions
+	eTag                                                              smithy.SchemaExtensions
+	eTag_key                                                          smithy.SchemaExtensions
+	eTag_value                                                        smithy.SchemaExtensions
+	e_TagKey                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                               smithy.SchemaExtensions
+	e_TagList                                                         smithy.SchemaExtensions
+	e_TagList_member                                                  smithy.SchemaExtensions
+	e_TagValue                                                        smithy.SchemaExtensions
+	eTaskError                                                        smithy.SchemaExtensions
+	eTaskError_errorCode                                              smithy.SchemaExtensions
+	eTaskError_errorMessage                                           smithy.SchemaExtensions
+	e_TaskIdList                                                      smithy.SchemaExtensions
+	e_TaskIdList_member                                               smithy.SchemaExtensions
+	eTenant                                                           smithy.SchemaExtensions
+	eTenant_tenantIdentifier                                          smithy.SchemaExtensions
+	eTenant_tenantDisplayName                                         smithy.SchemaExtensions
+	e_TenantIdentifier                                                smithy.SchemaExtensions
+	eThrottlingException                                              smithy.SchemaExtensions
+	eThrottlingException_message                                      smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                  smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                    smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                            smithy.SchemaExtensions
+	eUserAccessResultItem                                             smithy.SchemaExtensions
+	eUserAccessResultItem_app                                         smithy.SchemaExtensions
+	eUserAccessResultItem_tenantId                                    smithy.SchemaExtensions
+	eUserAccessResultItem_tenantDisplayName                           smithy.SchemaExtensions
+	eUserAccessResultItem_taskId                                      smithy.SchemaExtensions
+	eUserAccessResultItem_resultStatus                                smithy.SchemaExtensions
+	eUserAccessResultItem_email                                       smithy.SchemaExtensions
+	eUserAccessResultItem_userId                                      smithy.SchemaExtensions
+	eUserAccessResultItem_userFullName                                smithy.SchemaExtensions
+	eUserAccessResultItem_userFirstName                               smithy.SchemaExtensions
+	eUserAccessResultItem_userLastName                                smithy.SchemaExtensions
+	eUserAccessResultItem_userStatus                                  smithy.SchemaExtensions
+	eUserAccessResultItem_taskError                                   smithy.SchemaExtensions
+	e_UserAccessResultsList                                           smithy.SchemaExtensions
+	e_UserAccessResultsList_member                                    smithy.SchemaExtensions
+	eUserAccessTaskItem                                               smithy.SchemaExtensions
+	eUserAccessTaskItem_app                                           smithy.SchemaExtensions
+	eUserAccessTaskItem_tenantId                                      smithy.SchemaExtensions
+	eUserAccessTaskItem_taskId                                        smithy.SchemaExtensions
+	eUserAccessTaskItem_error                                         smithy.SchemaExtensions
+	e_UserAccessTasksList                                             smithy.SchemaExtensions
+	e_UserAccessTasksList_member                                      smithy.SchemaExtensions
+	e_UUID                                                            smithy.SchemaExtensions
+	eValidationException                                              smithy.SchemaExtensions
+	eValidationException_message                                      smithy.SchemaExtensions
+	eValidationException_reason                                       smithy.SchemaExtensions
+	eValidationException_fieldList                                    smithy.SchemaExtensions
+	eValidationExceptionField                                         smithy.SchemaExtensions
+	eValidationExceptionField_name                                    smithy.SchemaExtensions
+	eValidationExceptionField_message                                 smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                             smithy.SchemaExtensions
+	eValidationExceptionReason                                        smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                      smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                           smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                  smithy.SchemaExtensions
+	eBatchGetUserAccessTasksRequest                                   smithy.SchemaExtensions
+	eBatchGetUserAccessTasksRequest_appBundleIdentifier               smithy.SchemaExtensions
+	eBatchGetUserAccessTasksRequest_taskIdList                        smithy.SchemaExtensions
+	eBatchGetUserAccessTasksResponse                                  smithy.SchemaExtensions
+	eBatchGetUserAccessTasksResponse_userAccessResultsList            smithy.SchemaExtensions
+	eConnectAppAuthorizationRequest                                   smithy.SchemaExtensions
+	eConnectAppAuthorizationRequest_appBundleIdentifier               smithy.SchemaExtensions
+	eConnectAppAuthorizationRequest_appAuthorizationIdentifier        smithy.SchemaExtensions
+	eConnectAppAuthorizationRequest_authRequest                       smithy.SchemaExtensions
+	eConnectAppAuthorizationResponse                                  smithy.SchemaExtensions
+	eConnectAppAuthorizationResponse_appAuthorizationSummary          smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest                                    smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_appBundleIdentifier                smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_app                                smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_credential                         smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_tenant                             smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_authType                           smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_clientToken                        smithy.SchemaExtensions
+	eCreateAppAuthorizationRequest_tags                               smithy.SchemaExtensions
+	eCreateAppAuthorizationResponse                                   smithy.SchemaExtensions
+	eCreateAppAuthorizationResponse_appAuthorization                  smithy.SchemaExtensions
+	eCreateAppBundleRequest                                           smithy.SchemaExtensions
+	eCreateAppBundleRequest_clientToken                               smithy.SchemaExtensions
+	eCreateAppBundleRequest_customerManagedKeyIdentifier              smithy.SchemaExtensions
+	eCreateAppBundleRequest_tags                                      smithy.SchemaExtensions
+	eCreateAppBundleResponse                                          smithy.SchemaExtensions
+	eCreateAppBundleResponse_appBundle                                smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest                                smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_appBundleIdentifier            smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_ingestionIdentifier            smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_processingConfiguration        smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_destinationConfiguration       smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_clientToken                    smithy.SchemaExtensions
+	eCreateIngestionDestinationRequest_tags                           smithy.SchemaExtensions
+	eCreateIngestionDestinationResponse                               smithy.SchemaExtensions
+	eCreateIngestionDestinationResponse_ingestionDestination          smithy.SchemaExtensions
+	eCreateIngestionRequest                                           smithy.SchemaExtensions
+	eCreateIngestionRequest_appBundleIdentifier                       smithy.SchemaExtensions
+	eCreateIngestionRequest_app                                       smithy.SchemaExtensions
+	eCreateIngestionRequest_tenantId                                  smithy.SchemaExtensions
+	eCreateIngestionRequest_ingestionType                             smithy.SchemaExtensions
+	eCreateIngestionRequest_clientToken                               smithy.SchemaExtensions
+	eCreateIngestionRequest_tags                                      smithy.SchemaExtensions
+	eCreateIngestionResponse                                          smithy.SchemaExtensions
+	eCreateIngestionResponse_ingestion                                smithy.SchemaExtensions
+	eDeleteAppAuthorizationRequest                                    smithy.SchemaExtensions
+	eDeleteAppAuthorizationRequest_appBundleIdentifier                smithy.SchemaExtensions
+	eDeleteAppAuthorizationRequest_appAuthorizationIdentifier         smithy.SchemaExtensions
+	eDeleteAppAuthorizationResponse                                   smithy.SchemaExtensions
+	eDeleteAppBundleRequest                                           smithy.SchemaExtensions
+	eDeleteAppBundleRequest_appBundleIdentifier                       smithy.SchemaExtensions
+	eDeleteAppBundleResponse                                          smithy.SchemaExtensions
+	eDeleteIngestionDestinationRequest                                smithy.SchemaExtensions
+	eDeleteIngestionDestinationRequest_appBundleIdentifier            smithy.SchemaExtensions
+	eDeleteIngestionDestinationRequest_ingestionIdentifier            smithy.SchemaExtensions
+	eDeleteIngestionDestinationRequest_ingestionDestinationIdentifier smithy.SchemaExtensions
+	eDeleteIngestionDestinationResponse                               smithy.SchemaExtensions
+	eDeleteIngestionRequest                                           smithy.SchemaExtensions
+	eDeleteIngestionRequest_appBundleIdentifier                       smithy.SchemaExtensions
+	eDeleteIngestionRequest_ingestionIdentifier                       smithy.SchemaExtensions
+	eDeleteIngestionResponse                                          smithy.SchemaExtensions
+	eGetAppAuthorizationRequest                                       smithy.SchemaExtensions
+	eGetAppAuthorizationRequest_appBundleIdentifier                   smithy.SchemaExtensions
+	eGetAppAuthorizationRequest_appAuthorizationIdentifier            smithy.SchemaExtensions
+	eGetAppAuthorizationResponse                                      smithy.SchemaExtensions
+	eGetAppAuthorizationResponse_appAuthorization                     smithy.SchemaExtensions
+	eGetAppBundleRequest                                              smithy.SchemaExtensions
+	eGetAppBundleRequest_appBundleIdentifier                          smithy.SchemaExtensions
+	eGetAppBundleResponse                                             smithy.SchemaExtensions
+	eGetAppBundleResponse_appBundle                                   smithy.SchemaExtensions
+	eGetIngestionDestinationRequest                                   smithy.SchemaExtensions
+	eGetIngestionDestinationRequest_appBundleIdentifier               smithy.SchemaExtensions
+	eGetIngestionDestinationRequest_ingestionIdentifier               smithy.SchemaExtensions
+	eGetIngestionDestinationRequest_ingestionDestinationIdentifier    smithy.SchemaExtensions
+	eGetIngestionDestinationResponse                                  smithy.SchemaExtensions
+	eGetIngestionDestinationResponse_ingestionDestination             smithy.SchemaExtensions
+	eGetIngestionRequest                                              smithy.SchemaExtensions
+	eGetIngestionRequest_appBundleIdentifier                          smithy.SchemaExtensions
+	eGetIngestionRequest_ingestionIdentifier                          smithy.SchemaExtensions
+	eGetIngestionResponse                                             smithy.SchemaExtensions
+	eGetIngestionResponse_ingestion                                   smithy.SchemaExtensions
+	eListAppAuthorizationsRequest                                     smithy.SchemaExtensions
+	eListAppAuthorizationsRequest_appBundleIdentifier                 smithy.SchemaExtensions
+	eListAppAuthorizationsRequest_maxResults                          smithy.SchemaExtensions
+	eListAppAuthorizationsRequest_nextToken                           smithy.SchemaExtensions
+	eListAppAuthorizationsResponse                                    smithy.SchemaExtensions
+	eListAppAuthorizationsResponse_appAuthorizationSummaryList        smithy.SchemaExtensions
+	eListAppAuthorizationsResponse_nextToken                          smithy.SchemaExtensions
+	eListAppBundlesRequest                                            smithy.SchemaExtensions
+	eListAppBundlesRequest_maxResults                                 smithy.SchemaExtensions
+	eListAppBundlesRequest_nextToken                                  smithy.SchemaExtensions
+	eListAppBundlesResponse                                           smithy.SchemaExtensions
+	eListAppBundlesResponse_appBundleSummaryList                      smithy.SchemaExtensions
+	eListAppBundlesResponse_nextToken                                 smithy.SchemaExtensions
+	eListIngestionDestinationsRequest                                 smithy.SchemaExtensions
+	eListIngestionDestinationsRequest_appBundleIdentifier             smithy.SchemaExtensions
+	eListIngestionDestinationsRequest_ingestionIdentifier             smithy.SchemaExtensions
+	eListIngestionDestinationsRequest_maxResults                      smithy.SchemaExtensions
+	eListIngestionDestinationsRequest_nextToken                       smithy.SchemaExtensions
+	eListIngestionDestinationsResponse                                smithy.SchemaExtensions
+	eListIngestionDestinationsResponse_ingestionDestinations          smithy.SchemaExtensions
+	eListIngestionDestinationsResponse_nextToken                      smithy.SchemaExtensions
+	eListIngestionsRequest                                            smithy.SchemaExtensions
+	eListIngestionsRequest_appBundleIdentifier                        smithy.SchemaExtensions
+	eListIngestionsRequest_maxResults                                 smithy.SchemaExtensions
+	eListIngestionsRequest_nextToken                                  smithy.SchemaExtensions
+	eListIngestionsResponse                                           smithy.SchemaExtensions
+	eListIngestionsResponse_ingestions                                smithy.SchemaExtensions
+	eListIngestionsResponse_nextToken                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                           smithy.SchemaExtensions
+	eListTagsForResourceResponse                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                 smithy.SchemaExtensions
+	eStartIngestionRequest                                            smithy.SchemaExtensions
+	eStartIngestionRequest_ingestionIdentifier                        smithy.SchemaExtensions
+	eStartIngestionRequest_appBundleIdentifier                        smithy.SchemaExtensions
+	eStartIngestionResponse                                           smithy.SchemaExtensions
+	eStartUserAccessTasksRequest                                      smithy.SchemaExtensions
+	eStartUserAccessTasksRequest_appBundleIdentifier                  smithy.SchemaExtensions
+	eStartUserAccessTasksRequest_email                                smithy.SchemaExtensions
+	eStartUserAccessTasksResponse                                     smithy.SchemaExtensions
+	eStartUserAccessTasksResponse_userAccessTasksList                 smithy.SchemaExtensions
+	eStopIngestionRequest                                             smithy.SchemaExtensions
+	eStopIngestionRequest_ingestionIdentifier                         smithy.SchemaExtensions
+	eStopIngestionRequest_appBundleIdentifier                         smithy.SchemaExtensions
+	eStopIngestionResponse                                            smithy.SchemaExtensions
+	eTagResourceRequest                                               smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                   smithy.SchemaExtensions
+	eTagResourceRequest_tags                                          smithy.SchemaExtensions
+	eTagResourceResponse                                              smithy.SchemaExtensions
+	eUntagResourceRequest                                             smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                 smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                     smithy.SchemaExtensions
+	eUntagResourceResponse                                            smithy.SchemaExtensions
+	eUpdateAppAuthorizationRequest                                    smithy.SchemaExtensions
+	eUpdateAppAuthorizationRequest_appBundleIdentifier                smithy.SchemaExtensions
+	eUpdateAppAuthorizationRequest_appAuthorizationIdentifier         smithy.SchemaExtensions
+	eUpdateAppAuthorizationRequest_credential                         smithy.SchemaExtensions
+	eUpdateAppAuthorizationRequest_tenant                             smithy.SchemaExtensions
+	eUpdateAppAuthorizationResponse                                   smithy.SchemaExtensions
+	eUpdateAppAuthorizationResponse_appAuthorization                  smithy.SchemaExtensions
+	eUpdateIngestionDestinationRequest                                smithy.SchemaExtensions
+	eUpdateIngestionDestinationRequest_appBundleIdentifier            smithy.SchemaExtensions
+	eUpdateIngestionDestinationRequest_ingestionIdentifier            smithy.SchemaExtensions
+	eUpdateIngestionDestinationRequest_ingestionDestinationIdentifier smithy.SchemaExtensions
+	eUpdateIngestionDestinationRequest_destinationConfiguration       smithy.SchemaExtensions
+	eUpdateIngestionDestinationResponse                               smithy.SchemaExtensions
+	eUpdateIngestionDestinationResponse_ingestionDestination          smithy.SchemaExtensions
+)
+
+var (
+	iBatchGetUserAccessTasks            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "BatchGetUserAccessTasks"}
+	iConnectAppAuthorization            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ConnectAppAuthorization"}
+	iCreateAppAuthorization             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppAuthorization"}
+	iCreateAppBundle                    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppBundle"}
+	iCreateIngestion                    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestion"}
+	iCreateIngestionDestination         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestionDestination"}
+	iDeleteAppAuthorization             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppAuthorization"}
+	iDeleteAppBundle                    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppBundle"}
+	iDeleteIngestion                    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestion"}
+	iDeleteIngestionDestination         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestionDestination"}
+	iGetAppAuthorization                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppAuthorization"}
+	iGetAppBundle                       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppBundle"}
+	iGetIngestion                       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestion"}
+	iGetIngestionDestination            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestionDestination"}
+	iListAppAuthorizations              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppAuthorizations"}
+	iListAppBundles                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppBundles"}
+	iListIngestionDestinations          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestionDestinations"}
+	iListIngestions                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestions"}
+	iListTagsForResource                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListTagsForResource"}
+	iStartIngestion                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartIngestion"}
+	iStartUserAccessTasks               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartUserAccessTasks"}
+	iStopIngestion                      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StopIngestion"}
+	iTagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagResource"}
+	iUntagResource                      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UntagResource"}
+	iUpdateAppAuthorization             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateAppAuthorization"}
+	iUpdateIngestionDestination         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateIngestionDestination"}
+	i_FabricFrontEndService             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "FabricFrontEndService"}
+	iAccessDeniedException              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AccessDeniedException"}
+	iApiKeyCredential                   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ApiKeyCredential"}
+	iAppAuthorization                   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppAuthorization"}
+	iAppAuthorizationStatus             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppAuthorizationStatus"}
+	iAppAuthorizationSummary            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppAuthorizationSummary"}
+	i_AppAuthorizationSummaryList       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppAuthorizationSummaryList"}
+	iAppBundle                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppBundle"}
+	iAppBundleSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppBundleSummary"}
+	i_AppBundleSummaryList              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AppBundleSummaryList"}
+	i_Arn                               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Arn"}
+	iAuditLogDestinationConfiguration   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AuditLogDestinationConfiguration"}
+	iAuditLogProcessingConfiguration    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AuditLogProcessingConfiguration"}
+	iAuthRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AuthRequest"}
+	iAuthType                           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "AuthType"}
+	iConflictException                  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ConflictException"}
+	iCredential                         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Credential"}
+	i_DateTime                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DateTime"}
+	iDestination                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Destination"}
+	iDestinationConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DestinationConfiguration"}
+	i_Email                             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Email"}
+	iFirehoseStream                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "FirehoseStream"}
+	iFormat                             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Format"}
+	i_Identifier                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Identifier"}
+	iIngestion                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Ingestion"}
+	iIngestionDestination               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionDestination"}
+	i_IngestionDestinationList          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionDestinationList"}
+	iIngestionDestinationStatus         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionDestinationStatus"}
+	iIngestionDestinationSummary        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionDestinationSummary"}
+	i_IngestionList                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionList"}
+	iIngestionState                     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionState"}
+	iIngestionSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionSummary"}
+	iIngestionType                      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "IngestionType"}
+	i_Integer                           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Integer"}
+	iInternalServerException            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "InternalServerException"}
+	i_MaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "MaxResults"}
+	iOauth2Credential                   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Oauth2Credential"}
+	iPersona                            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Persona"}
+	iProcessingConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ProcessingConfiguration"}
+	i_RedirectUri                       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "RedirectUri"}
+	iResourceNotFoundException          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ResourceNotFoundException"}
+	iResultStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ResultStatus"}
+	iS3Bucket                           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "S3Bucket"}
+	iSchema                             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Schema"}
+	i_SensitiveString2048               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "SensitiveString2048"}
+	iServiceQuotaExceededException      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ServiceQuotaExceededException"}
+	i_String120                         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "String120"}
+	i_String2048                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "String2048"}
+	i_String255                         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "String255"}
+	i_String63                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "String63"}
+	i_String64                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "String64"}
+	iTag                                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Tag"}
+	i_TagKey                            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagKey"}
+	i_TagKeyList                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagKeyList"}
+	i_TagList                           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagList"}
+	i_TagValue                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagValue"}
+	iTaskError                          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TaskError"}
+	i_TaskIdList                        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TaskIdList"}
+	iTenant                             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "Tenant"}
+	i_TenantIdentifier                  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TenantIdentifier"}
+	iThrottlingException                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ThrottlingException"}
+	iUserAccessResultItem               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UserAccessResultItem"}
+	i_UserAccessResultsList             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UserAccessResultsList"}
+	iUserAccessTaskItem                 = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UserAccessTaskItem"}
+	i_UserAccessTasksList               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UserAccessTasksList"}
+	i_UUID                              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UUID"}
+	iValidationException                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ValidationException"}
+	iValidationExceptionField           = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason          = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ValidationExceptionReason"}
+	iBatchGetUserAccessTasksRequest     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "BatchGetUserAccessTasksRequest"}
+	iBatchGetUserAccessTasksResponse    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "BatchGetUserAccessTasksResponse"}
+	iConnectAppAuthorizationRequest     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ConnectAppAuthorizationRequest"}
+	iConnectAppAuthorizationResponse    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ConnectAppAuthorizationResponse"}
+	iCreateAppAuthorizationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppAuthorizationRequest"}
+	iCreateAppAuthorizationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppAuthorizationResponse"}
+	iCreateAppBundleRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppBundleRequest"}
+	iCreateAppBundleResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateAppBundleResponse"}
+	iCreateIngestionDestinationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestionDestinationRequest"}
+	iCreateIngestionDestinationResponse = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestionDestinationResponse"}
+	iCreateIngestionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestionRequest"}
+	iCreateIngestionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "CreateIngestionResponse"}
+	iDeleteAppAuthorizationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppAuthorizationRequest"}
+	iDeleteAppAuthorizationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppAuthorizationResponse"}
+	iDeleteAppBundleRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppBundleRequest"}
+	iDeleteAppBundleResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteAppBundleResponse"}
+	iDeleteIngestionDestinationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestionDestinationRequest"}
+	iDeleteIngestionDestinationResponse = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestionDestinationResponse"}
+	iDeleteIngestionRequest             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestionRequest"}
+	iDeleteIngestionResponse            = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "DeleteIngestionResponse"}
+	iGetAppAuthorizationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppAuthorizationRequest"}
+	iGetAppAuthorizationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppAuthorizationResponse"}
+	iGetAppBundleRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppBundleRequest"}
+	iGetAppBundleResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetAppBundleResponse"}
+	iGetIngestionDestinationRequest     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestionDestinationRequest"}
+	iGetIngestionDestinationResponse    = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestionDestinationResponse"}
+	iGetIngestionRequest                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestionRequest"}
+	iGetIngestionResponse               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "GetIngestionResponse"}
+	iListAppAuthorizationsRequest       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppAuthorizationsRequest"}
+	iListAppAuthorizationsResponse      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppAuthorizationsResponse"}
+	iListAppBundlesRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppBundlesRequest"}
+	iListAppBundlesResponse             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListAppBundlesResponse"}
+	iListIngestionDestinationsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestionDestinationsRequest"}
+	iListIngestionDestinationsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestionDestinationsResponse"}
+	iListIngestionsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestionsRequest"}
+	iListIngestionsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListIngestionsResponse"}
+	iListTagsForResourceRequest         = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "ListTagsForResourceResponse"}
+	iStartIngestionRequest              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartIngestionRequest"}
+	iStartIngestionResponse             = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartIngestionResponse"}
+	iStartUserAccessTasksRequest        = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartUserAccessTasksRequest"}
+	iStartUserAccessTasksResponse       = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StartUserAccessTasksResponse"}
+	iStopIngestionRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StopIngestionRequest"}
+	iStopIngestionResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "StopIngestionResponse"}
+	iTagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagResourceRequest"}
+	iTagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "TagResourceResponse"}
+	iUntagResourceRequest               = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UntagResourceRequest"}
+	iUntagResourceResponse              = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UntagResourceResponse"}
+	iUpdateAppAuthorizationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateAppAuthorizationRequest"}
+	iUpdateAppAuthorizationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateAppAuthorizationResponse"}
+	iUpdateIngestionDestinationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateIngestionDestinationRequest"}
+	iUpdateIngestionDestinationResponse = smithy.ShapeName{Namespace: "com.amazonaws.appfabric", Name: "UpdateIngestionDestinationResponse"}
+	pString                             = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                               = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/useraccess/batchget",
-	Code: 200})
-
-var ConnectAppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ConnectAppAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations/{appAuthorizationIdentifier}/connect",
-	Code: 200})
-
-var CreateAppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations",
-	Code: 201})
-
-var CreateAppBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppBundle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles",
-	Code: 201})
-
-var CreateIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions",
-	Code: 201})
-
-var CreateIngestionDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestionDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/ingestiondestinations",
-	Code: 201})
-
-var DeleteAppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations/{appAuthorizationIdentifier}",
-	Code: 204})
-
-var DeleteAppBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppBundle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appbundles/{appBundleIdentifier}",
-	Code: 204})
-
-var DeleteIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}",
-	Code: 204})
-
-var DeleteIngestionDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestionDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/ingestiondestinations/{ingestionDestinationIdentifier}",
-	Code: 204})
-
-var GetAppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations/{appAuthorizationIdentifier}",
-	Code: 200})
-
-var GetAppBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppBundle",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}",
-	Code: 200})
-
-var GetIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}",
-	Code: 200})
-
-var GetIngestionDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestionDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/ingestiondestinations/{ingestionDestinationIdentifier}",
-	Code: 200})
-
-var ListAppAuthorizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppAuthorizations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations",
-	Code: 200})
-
-var ListAppBundles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppBundles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles",
-	Code: 200})
-
-var ListIngestionDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestionDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/ingestiondestinations",
-	Code: 200})
-
-var ListIngestions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var StartIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartIngestion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/start",
-	Code: 200})
-
-var StartUserAccessTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartUserAccessTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/useraccess/start",
-	Code: 201})
-
-var StopIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StopIngestion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateAppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateAppAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/appbundles/{appBundleIdentifier}/appauthorizations/{appAuthorizationIdentifier}",
-	Code: 200})
-
-var UpdateIngestionDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateIngestionDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/appbundles/{appBundleIdentifier}/ingestions/{ingestionIdentifier}/ingestiondestinations/{ingestionDestinationIdentifier}",
-	Code: 200})
-
-var _FabricFrontEndService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "FabricFrontEndService",
-}, smithy.ShapeTypeService, 0)
-
-var FabricFrontEndService = smithy.NewServiceSchema(_FabricFrontEndService, "2023-05-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ApiKeyCredential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ApiKeyCredential",
-}, smithy.ShapeTypeStructure, 1)
-var ApiKeyCredential_apiKey *smithy.Schema
-
-var AppAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppAuthorization",
-}, smithy.ShapeTypeStructure, 10)
-var AppAuthorization_appAuthorizationArn *smithy.Schema
-
-var AppAuthorization_appBundleArn *smithy.Schema
-
-var AppAuthorization_app *smithy.Schema
-
-var AppAuthorization_tenant *smithy.Schema
-
-var AppAuthorization_authType *smithy.Schema
-
-var AppAuthorization_status *smithy.Schema
-
-var AppAuthorization_createdAt *smithy.Schema
-
-var AppAuthorization_updatedAt *smithy.Schema
-
-var AppAuthorization_persona *smithy.Schema
-
-var AppAuthorization_authUrl *smithy.Schema
-
-var AppAuthorizationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppAuthorizationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AppAuthorizationStatus_PENDING_CONNECT *smithy.Schema
-
-var AppAuthorizationStatus_CONNECTED *smithy.Schema
-
-var AppAuthorizationStatus_CONNECTION_VALIDATION_FAILED *smithy.Schema
-
-var AppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED *smithy.Schema
-
-var AppAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AppAuthorizationSummary_appAuthorizationArn *smithy.Schema
-
-var AppAuthorizationSummary_appBundleArn *smithy.Schema
-
-var AppAuthorizationSummary_app *smithy.Schema
-
-var AppAuthorizationSummary_tenant *smithy.Schema
-
-var AppAuthorizationSummary_status *smithy.Schema
-
-var AppAuthorizationSummary_updatedAt *smithy.Schema
-
-var _AppAuthorizationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppAuthorizationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AppAuthorizationSummaryList_member *smithy.Schema
-
-var AppBundle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppBundle",
-}, smithy.ShapeTypeStructure, 2)
-var AppBundle_arn *smithy.Schema
-
-var AppBundle_customerManagedKeyArn *smithy.Schema
-
-var AppBundleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppBundleSummary",
-}, smithy.ShapeTypeStructure, 1)
-var AppBundleSummary_arn *smithy.Schema
-
-var _AppBundleSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AppBundleSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AppBundleSummaryList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AuditLogDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AuditLogDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AuditLogDestinationConfiguration_destination *smithy.Schema
-
-var AuditLogProcessingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AuditLogProcessingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AuditLogProcessingConfiguration_schema *smithy.Schema
-
-var AuditLogProcessingConfiguration_format *smithy.Schema
-
-var AuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AuthRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AuthRequest_redirectUri *smithy.Schema
-
-var AuthRequest_code *smithy.Schema
-
-var AuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "AuthType",
-}, smithy.ShapeTypeEnum, 2)
-var AuthType_OAUTH2 *smithy.Schema
-
-var AuthType_API_KEY *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var Credential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Credential",
-}, smithy.ShapeTypeUnion, 2)
-var Credential_oauth2Credential *smithy.Schema
-
-var Credential_apiKeyCredential *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Destination",
-}, smithy.ShapeTypeUnion, 2)
-var Destination_s3Bucket *smithy.Schema
-
-var Destination_firehoseStream *smithy.Schema
-
-var DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DestinationConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var DestinationConfiguration_auditLog *smithy.Schema
-
-var _Email = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Email",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var FirehoseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "FirehoseStream",
-}, smithy.ShapeTypeStructure, 1)
-var FirehoseStream_streamName *smithy.Schema
-
-var Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Format",
-}, smithy.ShapeTypeEnum, 2)
-var Format_JSON *smithy.Schema
-
-var Format_PARQUET *smithy.Schema
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var Ingestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Ingestion",
-}, smithy.ShapeTypeStructure, 8)
-var Ingestion_arn *smithy.Schema
-
-var Ingestion_appBundleArn *smithy.Schema
-
-var Ingestion_app *smithy.Schema
-
-var Ingestion_tenantId *smithy.Schema
-
-var Ingestion_createdAt *smithy.Schema
-
-var Ingestion_updatedAt *smithy.Schema
-
-var Ingestion_state *smithy.Schema
-
-var Ingestion_ingestionType *smithy.Schema
-
-var IngestionDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionDestination",
-}, smithy.ShapeTypeStructure, 8)
-var IngestionDestination_arn *smithy.Schema
-
-var IngestionDestination_ingestionArn *smithy.Schema
-
-var IngestionDestination_processingConfiguration *smithy.Schema
-
-var IngestionDestination_destinationConfiguration *smithy.Schema
-
-var IngestionDestination_status *smithy.Schema
-
-var IngestionDestination_statusReason *smithy.Schema
-
-var IngestionDestination_createdAt *smithy.Schema
-
-var IngestionDestination_updatedAt *smithy.Schema
-
-var _IngestionDestinationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionDestinationList",
-}, smithy.ShapeTypeList, 1)
-var _IngestionDestinationList_member *smithy.Schema
-
-var IngestionDestinationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionDestinationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var IngestionDestinationStatus_ACTIVE *smithy.Schema
-
-var IngestionDestinationStatus_FAILED *smithy.Schema
-
-var IngestionDestinationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionDestinationSummary",
-}, smithy.ShapeTypeStructure, 1)
-var IngestionDestinationSummary_arn *smithy.Schema
-
-var _IngestionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionList",
-}, smithy.ShapeTypeList, 1)
-var _IngestionList_member *smithy.Schema
-
-var IngestionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionState",
-}, smithy.ShapeTypeEnum, 2)
-var IngestionState_ENABLED *smithy.Schema
-
-var IngestionState_DISABLED *smithy.Schema
-
-var IngestionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var IngestionSummary_arn *smithy.Schema
-
-var IngestionSummary_app *smithy.Schema
-
-var IngestionSummary_tenantId *smithy.Schema
-
-var IngestionSummary_state *smithy.Schema
-
-var IngestionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "IngestionType",
-}, smithy.ShapeTypeEnum, 1)
-var IngestionType_AUDIT_LOG *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Oauth2Credential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Oauth2Credential",
-}, smithy.ShapeTypeStructure, 2)
-var Oauth2Credential_clientId *smithy.Schema
-
-var Oauth2Credential_clientSecret *smithy.Schema
-
-var Persona = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Persona",
-}, smithy.ShapeTypeEnum, 2)
-var Persona_ADMIN *smithy.Schema
-
-var Persona_ENDUSER *smithy.Schema
-
-var ProcessingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ProcessingConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var ProcessingConfiguration_auditLog *smithy.Schema
-
-var _RedirectUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "RedirectUri",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResultStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ResultStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ResultStatus_IN_PROGRESS *smithy.Schema
-
-var ResultStatus_COMPLETED *smithy.Schema
-
-var ResultStatus_FAILED *smithy.Schema
-
-var ResultStatus_EXPIRED *smithy.Schema
-
-var S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeStructure, 2)
-var S3Bucket_bucketName *smithy.Schema
-
-var S3Bucket_prefix *smithy.Schema
-
-var Schema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Schema",
-}, smithy.ShapeTypeEnum, 2)
-var Schema_OCSF *smithy.Schema
-
-var Schema_RAW *smithy.Schema
-
-var _SensitiveString2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "SensitiveString2048",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _String120 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "String120",
-}, smithy.ShapeTypeString, 0)
-
-var _String2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "String2048",
-}, smithy.ShapeTypeString, 0)
-
-var _String255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "String255",
-}, smithy.ShapeTypeString, 0)
-
-var _String63 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "String63",
-}, smithy.ShapeTypeString, 0)
-
-var _String64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "String64",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TaskError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TaskError",
-}, smithy.ShapeTypeStructure, 2)
-var TaskError_errorCode *smithy.Schema
-
-var TaskError_errorMessage *smithy.Schema
-
-var _TaskIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TaskIdList",
-}, smithy.ShapeTypeList, 1)
-var _TaskIdList_member *smithy.Schema
-
-var Tenant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "Tenant",
-}, smithy.ShapeTypeStructure, 2)
-var Tenant_tenantIdentifier *smithy.Schema
-
-var Tenant_tenantDisplayName *smithy.Schema
-
-var _TenantIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TenantIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var UserAccessResultItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UserAccessResultItem",
-}, smithy.ShapeTypeStructure, 12)
-var UserAccessResultItem_app *smithy.Schema
-
-var UserAccessResultItem_tenantId *smithy.Schema
-
-var UserAccessResultItem_tenantDisplayName *smithy.Schema
-
-var UserAccessResultItem_taskId *smithy.Schema
-
-var UserAccessResultItem_resultStatus *smithy.Schema
-
-var UserAccessResultItem_email *smithy.Schema
-
-var UserAccessResultItem_userId *smithy.Schema
-
-var UserAccessResultItem_userFullName *smithy.Schema
-
-var UserAccessResultItem_userFirstName *smithy.Schema
-
-var UserAccessResultItem_userLastName *smithy.Schema
-
-var UserAccessResultItem_userStatus *smithy.Schema
-
-var UserAccessResultItem_taskError *smithy.Schema
-
-var _UserAccessResultsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UserAccessResultsList",
-}, smithy.ShapeTypeList, 1)
-var _UserAccessResultsList_member *smithy.Schema
-
-var UserAccessTaskItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UserAccessTaskItem",
-}, smithy.ShapeTypeStructure, 4)
-var UserAccessTaskItem_app *smithy.Schema
-
-var UserAccessTaskItem_tenantId *smithy.Schema
-
-var UserAccessTaskItem_taskId *smithy.Schema
-
-var UserAccessTaskItem_error *smithy.Schema
-
-var _UserAccessTasksList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UserAccessTasksList",
-}, smithy.ShapeTypeList, 1)
-var _UserAccessTasksList_member *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var BatchGetUserAccessTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "BatchGetUserAccessTasksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetUserAccessTasksRequest_appBundleIdentifier *smithy.Schema
-
-var BatchGetUserAccessTasksRequest_taskIdList *smithy.Schema
-
-var BatchGetUserAccessTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "BatchGetUserAccessTasksResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetUserAccessTasksResponse_userAccessResultsList *smithy.Schema
-
-var ConnectAppAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ConnectAppAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectAppAuthorizationRequest_appBundleIdentifier *smithy.Schema
-
-var ConnectAppAuthorizationRequest_appAuthorizationIdentifier *smithy.Schema
-
-var ConnectAppAuthorizationRequest_authRequest *smithy.Schema
-
-var ConnectAppAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ConnectAppAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectAppAuthorizationResponse_appAuthorizationSummary *smithy.Schema
-
-var CreateAppAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateAppAuthorizationRequest_appBundleIdentifier *smithy.Schema
-
-var CreateAppAuthorizationRequest_app *smithy.Schema
-
-var CreateAppAuthorizationRequest_credential *smithy.Schema
-
-var CreateAppAuthorizationRequest_tenant *smithy.Schema
-
-var CreateAppAuthorizationRequest_authType *smithy.Schema
-
-var CreateAppAuthorizationRequest_clientToken *smithy.Schema
-
-var CreateAppAuthorizationRequest_tags *smithy.Schema
-
-var CreateAppAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppAuthorizationResponse_appAuthorization *smithy.Schema
-
-var CreateAppBundleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppBundleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAppBundleRequest_clientToken *smithy.Schema
-
-var CreateAppBundleRequest_customerManagedKeyIdentifier *smithy.Schema
-
-var CreateAppBundleRequest_tags *smithy.Schema
-
-var CreateAppBundleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateAppBundleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppBundleResponse_appBundle *smithy.Schema
-
-var CreateIngestionDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestionDestinationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateIngestionDestinationRequest_appBundleIdentifier *smithy.Schema
-
-var CreateIngestionDestinationRequest_ingestionIdentifier *smithy.Schema
-
-var CreateIngestionDestinationRequest_processingConfiguration *smithy.Schema
-
-var CreateIngestionDestinationRequest_destinationConfiguration *smithy.Schema
-
-var CreateIngestionDestinationRequest_clientToken *smithy.Schema
-
-var CreateIngestionDestinationRequest_tags *smithy.Schema
-
-var CreateIngestionDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestionDestinationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIngestionDestinationResponse_ingestionDestination *smithy.Schema
-
-var CreateIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateIngestionRequest_appBundleIdentifier *smithy.Schema
-
-var CreateIngestionRequest_app *smithy.Schema
-
-var CreateIngestionRequest_tenantId *smithy.Schema
-
-var CreateIngestionRequest_ingestionType *smithy.Schema
-
-var CreateIngestionRequest_clientToken *smithy.Schema
-
-var CreateIngestionRequest_tags *smithy.Schema
-
-var CreateIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "CreateIngestionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIngestionResponse_ingestion *smithy.Schema
-
-var DeleteAppAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAppAuthorizationRequest_appBundleIdentifier *smithy.Schema
-
-var DeleteAppAuthorizationRequest_appAuthorizationIdentifier *smithy.Schema
-
-var DeleteAppAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAppBundleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppBundleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppBundleRequest_appBundleIdentifier *smithy.Schema
-
-var DeleteAppBundleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteAppBundleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIngestionDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestionDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteIngestionDestinationRequest_appBundleIdentifier *smithy.Schema
-
-var DeleteIngestionDestinationRequest_ingestionIdentifier *smithy.Schema
-
-var DeleteIngestionDestinationRequest_ingestionDestinationIdentifier *smithy.Schema
-
-var DeleteIngestionDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestionDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIngestionRequest_appBundleIdentifier *smithy.Schema
-
-var DeleteIngestionRequest_ingestionIdentifier *smithy.Schema
-
-var DeleteIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "DeleteIngestionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAppAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAppAuthorizationRequest_appBundleIdentifier *smithy.Schema
-
-var GetAppAuthorizationRequest_appAuthorizationIdentifier *smithy.Schema
-
-var GetAppAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppAuthorizationResponse_appAuthorization *smithy.Schema
-
-var GetAppBundleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppBundleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppBundleRequest_appBundleIdentifier *smithy.Schema
-
-var GetAppBundleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetAppBundleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppBundleResponse_appBundle *smithy.Schema
-
-var GetIngestionDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestionDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIngestionDestinationRequest_appBundleIdentifier *smithy.Schema
-
-var GetIngestionDestinationRequest_ingestionIdentifier *smithy.Schema
-
-var GetIngestionDestinationRequest_ingestionDestinationIdentifier *smithy.Schema
-
-var GetIngestionDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestionDestinationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIngestionDestinationResponse_ingestionDestination *smithy.Schema
-
-var GetIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIngestionRequest_appBundleIdentifier *smithy.Schema
-
-var GetIngestionRequest_ingestionIdentifier *smithy.Schema
-
-var GetIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "GetIngestionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIngestionResponse_ingestion *smithy.Schema
-
-var ListAppAuthorizationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppAuthorizationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAppAuthorizationsRequest_appBundleIdentifier *smithy.Schema
-
-var ListAppAuthorizationsRequest_maxResults *smithy.Schema
-
-var ListAppAuthorizationsRequest_nextToken *smithy.Schema
-
-var ListAppAuthorizationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppAuthorizationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppAuthorizationsResponse_appAuthorizationSummaryList *smithy.Schema
-
-var ListAppAuthorizationsResponse_nextToken *smithy.Schema
-
-var ListAppBundlesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppBundlesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppBundlesRequest_maxResults *smithy.Schema
-
-var ListAppBundlesRequest_nextToken *smithy.Schema
-
-var ListAppBundlesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListAppBundlesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppBundlesResponse_appBundleSummaryList *smithy.Schema
-
-var ListAppBundlesResponse_nextToken *smithy.Schema
-
-var ListIngestionDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestionDestinationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListIngestionDestinationsRequest_appBundleIdentifier *smithy.Schema
-
-var ListIngestionDestinationsRequest_ingestionIdentifier *smithy.Schema
-
-var ListIngestionDestinationsRequest_maxResults *smithy.Schema
-
-var ListIngestionDestinationsRequest_nextToken *smithy.Schema
-
-var ListIngestionDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestionDestinationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngestionDestinationsResponse_ingestionDestinations *smithy.Schema
-
-var ListIngestionDestinationsResponse_nextToken *smithy.Schema
-
-var ListIngestionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListIngestionsRequest_appBundleIdentifier *smithy.Schema
-
-var ListIngestionsRequest_maxResults *smithy.Schema
-
-var ListIngestionsRequest_nextToken *smithy.Schema
-
-var ListIngestionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListIngestionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngestionsResponse_ingestions *smithy.Schema
-
-var ListIngestionsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var StartIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartIngestionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartIngestionRequest_ingestionIdentifier *smithy.Schema
-
-var StartIngestionRequest_appBundleIdentifier *smithy.Schema
-
-var StartIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartIngestionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartUserAccessTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartUserAccessTasksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartUserAccessTasksRequest_appBundleIdentifier *smithy.Schema
-
-var StartUserAccessTasksRequest_email *smithy.Schema
-
-var StartUserAccessTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StartUserAccessTasksResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartUserAccessTasksResponse_userAccessTasksList *smithy.Schema
-
-var StopIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StopIngestionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopIngestionRequest_ingestionIdentifier *smithy.Schema
-
-var StopIngestionRequest_appBundleIdentifier *smithy.Schema
-
-var StopIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "StopIngestionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAppAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateAppAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAppAuthorizationRequest_appBundleIdentifier *smithy.Schema
-
-var UpdateAppAuthorizationRequest_appAuthorizationIdentifier *smithy.Schema
-
-var UpdateAppAuthorizationRequest_credential *smithy.Schema
-
-var UpdateAppAuthorizationRequest_tenant *smithy.Schema
-
-var UpdateAppAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateAppAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAppAuthorizationResponse_appAuthorization *smithy.Schema
-
-var UpdateIngestionDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateIngestionDestinationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateIngestionDestinationRequest_appBundleIdentifier *smithy.Schema
-
-var UpdateIngestionDestinationRequest_ingestionIdentifier *smithy.Schema
-
-var UpdateIngestionDestinationRequest_ingestionDestinationIdentifier *smithy.Schema
-
-var UpdateIngestionDestinationRequest_destinationConfiguration *smithy.Schema
-
-var UpdateIngestionDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appfabric",
-	Name:      "UpdateIngestionDestinationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateIngestionDestinationResponse_ingestionDestination *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ApiKeyCredential_apiKey = ApiKeyCredential.AddMember("apiKey", _SensitiveString2048)
-
-	Tenant_tenantIdentifier = Tenant.AddMember("tenantIdentifier", _TenantIdentifier)
-
-	Tenant_tenantDisplayName = Tenant.AddMember("tenantDisplayName", _String2048)
-
-	AuthType_OAUTH2 = AuthType.AddMember("OAUTH2", smithyprelude.Unit)
-
-	AuthType_API_KEY = AuthType.AddMember("API_KEY", smithyprelude.Unit)
-
-	AppAuthorizationStatus_PENDING_CONNECT = AppAuthorizationStatus.AddMember("PENDING_CONNECT", smithyprelude.Unit)
-
-	AppAuthorizationStatus_CONNECTED = AppAuthorizationStatus.AddMember("CONNECTED", smithyprelude.Unit)
-
-	AppAuthorizationStatus_CONNECTION_VALIDATION_FAILED = AppAuthorizationStatus.AddMember("CONNECTION_VALIDATION_FAILED", smithyprelude.Unit)
-
-	AppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED = AppAuthorizationStatus.AddMember("TOKEN_AUTO_ROTATION_FAILED", smithyprelude.Unit)
-
-	Persona_ADMIN = Persona.AddMember("ADMIN", smithyprelude.Unit)
-
-	Persona_ENDUSER = Persona.AddMember("ENDUSER", smithyprelude.Unit)
-
-	AppAuthorization_appAuthorizationArn = AppAuthorization.AddMember("appAuthorizationArn", _Arn)
-
-	AppAuthorization_appBundleArn = AppAuthorization.AddMember("appBundleArn", _Arn)
-
-	AppAuthorization_app = AppAuthorization.AddMember("app", _String255)
-
-	AppAuthorization_tenant = AppAuthorization.AddMember("tenant", Tenant)
-
-	AppAuthorization_authType = AppAuthorization.AddMember("authType", AuthType)
-
-	AppAuthorization_status = AppAuthorization.AddMember("status", AppAuthorizationStatus)
-
-	AppAuthorization_createdAt = AppAuthorization.AddMember("createdAt", _DateTime)
-
-	AppAuthorization_updatedAt = AppAuthorization.AddMember("updatedAt", _DateTime)
-
-	AppAuthorization_persona = AppAuthorization.AddMember("persona", Persona)
-
-	AppAuthorization_authUrl = AppAuthorization.AddMember("authUrl", smithyprelude.String)
-
-	AppAuthorizationSummary_appAuthorizationArn = AppAuthorizationSummary.AddMember("appAuthorizationArn", _Arn)
-
-	AppAuthorizationSummary_appBundleArn = AppAuthorizationSummary.AddMember("appBundleArn", _Arn)
-
-	AppAuthorizationSummary_app = AppAuthorizationSummary.AddMember("app", _String255)
-
-	AppAuthorizationSummary_tenant = AppAuthorizationSummary.AddMember("tenant", Tenant)
-
-	AppAuthorizationSummary_status = AppAuthorizationSummary.AddMember("status", AppAuthorizationStatus)
-
-	AppAuthorizationSummary_updatedAt = AppAuthorizationSummary.AddMember("updatedAt", _DateTime)
-
-	_AppAuthorizationSummaryList_member = _AppAuthorizationSummaryList.AddMember("member", AppAuthorizationSummary)
-
-	AppBundle_arn = AppBundle.AddMember("arn", _Arn)
-
-	AppBundle_customerManagedKeyArn = AppBundle.AddMember("customerManagedKeyArn", _Arn)
-
-	AppBundleSummary_arn = AppBundleSummary.AddMember("arn", _Arn)
-
-	_AppBundleSummaryList_member = _AppBundleSummaryList.AddMember("member", AppBundleSummary)
-
-	S3Bucket_bucketName = S3Bucket.AddMember("bucketName", _String63)
-
-	S3Bucket_prefix = S3Bucket.AddMember("prefix", _String120)
-
-	FirehoseStream_streamName = FirehoseStream.AddMember("streamName", _String64)
-
-	Destination_s3Bucket = Destination.AddMember("s3Bucket", S3Bucket)
-
-	Destination_firehoseStream = Destination.AddMember("firehoseStream", FirehoseStream)
-
-	AuditLogDestinationConfiguration_destination = AuditLogDestinationConfiguration.AddMember("destination", Destination)
-
-	Schema_OCSF = Schema.AddMember("OCSF", smithyprelude.Unit)
-
-	Schema_RAW = Schema.AddMember("RAW", smithyprelude.Unit)
-
-	Format_JSON = Format.AddMember("JSON", smithyprelude.Unit)
-
-	Format_PARQUET = Format.AddMember("PARQUET", smithyprelude.Unit)
-
-	AuditLogProcessingConfiguration_schema = AuditLogProcessingConfiguration.AddMember("schema", Schema)
-
-	AuditLogProcessingConfiguration_format = AuditLogProcessingConfiguration.AddMember("format", Format)
-
-	AuthRequest_redirectUri = AuthRequest.AddMember("redirectUri", _RedirectUri)
-
-	AuthRequest_code = AuthRequest.AddMember("code", _SensitiveString2048)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	Oauth2Credential_clientId = Oauth2Credential.AddMember("clientId", _String2048)
-
-	Oauth2Credential_clientSecret = Oauth2Credential.AddMember("clientSecret", _SensitiveString2048)
-
-	Credential_oauth2Credential = Credential.AddMember("oauth2Credential", Oauth2Credential)
-
-	Credential_apiKeyCredential = Credential.AddMember("apiKeyCredential", ApiKeyCredential)
-
-	DestinationConfiguration_auditLog = DestinationConfiguration.AddMember("auditLog", AuditLogDestinationConfiguration)
-
-	IngestionState_ENABLED = IngestionState.AddMember("ENABLED", smithyprelude.Unit)
-
-	IngestionState_DISABLED = IngestionState.AddMember("DISABLED", smithyprelude.Unit)
-
-	IngestionType_AUDIT_LOG = IngestionType.AddMember("AUDIT_LOG", smithyprelude.Unit)
-
-	Ingestion_arn = Ingestion.AddMember("arn", _Arn)
-
-	Ingestion_appBundleArn = Ingestion.AddMember("appBundleArn", _Arn)
-
-	Ingestion_app = Ingestion.AddMember("app", _String255)
-
-	Ingestion_tenantId = Ingestion.AddMember("tenantId", _TenantIdentifier)
-
-	Ingestion_createdAt = Ingestion.AddMember("createdAt", _DateTime)
-
-	Ingestion_updatedAt = Ingestion.AddMember("updatedAt", _DateTime)
-
-	Ingestion_state = Ingestion.AddMember("state", IngestionState)
-
-	Ingestion_ingestionType = Ingestion.AddMember("ingestionType", IngestionType)
-
-	ProcessingConfiguration_auditLog = ProcessingConfiguration.AddMember("auditLog", AuditLogProcessingConfiguration)
-
-	IngestionDestinationStatus_ACTIVE = IngestionDestinationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	IngestionDestinationStatus_FAILED = IngestionDestinationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IngestionDestination_arn = IngestionDestination.AddMember("arn", _Arn)
-
-	IngestionDestination_ingestionArn = IngestionDestination.AddMember("ingestionArn", _Arn)
-
-	IngestionDestination_processingConfiguration = IngestionDestination.AddMember("processingConfiguration", ProcessingConfiguration)
-
-	IngestionDestination_destinationConfiguration = IngestionDestination.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	IngestionDestination_status = IngestionDestination.AddMember("status", IngestionDestinationStatus)
-
-	IngestionDestination_statusReason = IngestionDestination.AddMember("statusReason", smithyprelude.String)
-
-	IngestionDestination_createdAt = IngestionDestination.AddMember("createdAt", _DateTime)
-
-	IngestionDestination_updatedAt = IngestionDestination.AddMember("updatedAt", _DateTime)
-
-	IngestionDestinationSummary_arn = IngestionDestinationSummary.AddMember("arn", _Arn)
-
-	_IngestionDestinationList_member = _IngestionDestinationList.AddMember("member", IngestionDestinationSummary)
-
-	IngestionSummary_arn = IngestionSummary.AddMember("arn", _Arn)
-
-	IngestionSummary_app = IngestionSummary.AddMember("app", _String255)
-
-	IngestionSummary_tenantId = IngestionSummary.AddMember("tenantId", _TenantIdentifier)
-
-	IngestionSummary_state = IngestionSummary.AddMember("state", IngestionState)
-
-	_IngestionList_member = _IngestionList.AddMember("member", IngestionSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ResultStatus_IN_PROGRESS = ResultStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ResultStatus_COMPLETED = ResultStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ResultStatus_FAILED = ResultStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResultStatus_EXPIRED = ResultStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TaskError_errorCode = TaskError.AddMember("errorCode", smithyprelude.String)
-
-	TaskError_errorMessage = TaskError.AddMember("errorMessage", smithyprelude.String)
-
-	_TaskIdList_member = _TaskIdList.AddMember("member", _UUID)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UserAccessResultItem_app = UserAccessResultItem.AddMember("app", _String255)
-
-	UserAccessResultItem_tenantId = UserAccessResultItem.AddMember("tenantId", _TenantIdentifier)
-
-	UserAccessResultItem_tenantDisplayName = UserAccessResultItem.AddMember("tenantDisplayName", _String2048)
-
-	UserAccessResultItem_taskId = UserAccessResultItem.AddMember("taskId", _UUID)
-
-	UserAccessResultItem_resultStatus = UserAccessResultItem.AddMember("resultStatus", ResultStatus)
-
-	UserAccessResultItem_email = UserAccessResultItem.AddMember("email", _Email)
-
-	UserAccessResultItem_userId = UserAccessResultItem.AddMember("userId", _SensitiveString2048)
-
-	UserAccessResultItem_userFullName = UserAccessResultItem.AddMember("userFullName", _SensitiveString2048)
-
-	UserAccessResultItem_userFirstName = UserAccessResultItem.AddMember("userFirstName", _SensitiveString2048)
-
-	UserAccessResultItem_userLastName = UserAccessResultItem.AddMember("userLastName", _SensitiveString2048)
-
-	UserAccessResultItem_userStatus = UserAccessResultItem.AddMember("userStatus", smithyprelude.String)
-
-	UserAccessResultItem_taskError = UserAccessResultItem.AddMember("taskError", TaskError)
-
-	_UserAccessResultsList_member = _UserAccessResultsList.AddMember("member", UserAccessResultItem)
-
-	UserAccessTaskItem_app = UserAccessTaskItem.AddMember("app", _String255)
-
-	UserAccessTaskItem_tenantId = UserAccessTaskItem.AddMember("tenantId", _TenantIdentifier)
-
-	UserAccessTaskItem_taskId = UserAccessTaskItem.AddMember("taskId", _UUID)
-
-	UserAccessTaskItem_error = UserAccessTaskItem.AddMember("error", TaskError)
-
-	_UserAccessTasksList_member = _UserAccessTasksList.AddMember("member", UserAccessTaskItem)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchGetUserAccessTasksRequest_appBundleIdentifier = BatchGetUserAccessTasksRequest.AddMember("appBundleIdentifier", _Identifier)
-
-	BatchGetUserAccessTasksRequest_taskIdList = BatchGetUserAccessTasksRequest.AddMember("taskIdList", _TaskIdList)
-
-	BatchGetUserAccessTasksResponse_userAccessResultsList = BatchGetUserAccessTasksResponse.AddMember("userAccessResultsList", _UserAccessResultsList)
-
-	ConnectAppAuthorizationRequest_appBundleIdentifier = ConnectAppAuthorizationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ConnectAppAuthorizationRequest_appAuthorizationIdentifier = ConnectAppAuthorizationRequest.AddMember("appAuthorizationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ConnectAppAuthorizationRequest_authRequest = ConnectAppAuthorizationRequest.AddMember("authRequest", AuthRequest)
-
-	ConnectAppAuthorizationResponse_appAuthorizationSummary = ConnectAppAuthorizationResponse.AddMember("appAuthorizationSummary", AppAuthorizationSummary)
-
-	CreateAppAuthorizationRequest_appBundleIdentifier = CreateAppAuthorizationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	CreateAppAuthorizationRequest_app = CreateAppAuthorizationRequest.AddMember("app", _String255)
-
-	CreateAppAuthorizationRequest_credential = CreateAppAuthorizationRequest.AddMember("credential", Credential)
-
-	CreateAppAuthorizationRequest_tenant = CreateAppAuthorizationRequest.AddMember("tenant", Tenant)
-
-	CreateAppAuthorizationRequest_authType = CreateAppAuthorizationRequest.AddMember("authType", AuthType)
-
-	CreateAppAuthorizationRequest_clientToken = CreateAppAuthorizationRequest.AddMember("clientToken", _UUID)
-
-	CreateAppAuthorizationRequest_tags = CreateAppAuthorizationRequest.AddMember("tags", _TagList)
-
-	CreateAppAuthorizationResponse_appAuthorization = CreateAppAuthorizationResponse.AddMember("appAuthorization", AppAuthorization)
-
-	CreateAppBundleRequest_clientToken = CreateAppBundleRequest.AddMember("clientToken", _UUID)
-
-	CreateAppBundleRequest_customerManagedKeyIdentifier = CreateAppBundleRequest.AddMember("customerManagedKeyIdentifier", _Identifier)
-
-	CreateAppBundleRequest_tags = CreateAppBundleRequest.AddMember("tags", _TagList)
-
-	CreateAppBundleResponse_appBundle = CreateAppBundleResponse.AddMember("appBundle", AppBundle)
-
-	CreateIngestionDestinationRequest_appBundleIdentifier = CreateIngestionDestinationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	CreateIngestionDestinationRequest_ingestionIdentifier = CreateIngestionDestinationRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	CreateIngestionDestinationRequest_processingConfiguration = CreateIngestionDestinationRequest.AddMember("processingConfiguration", ProcessingConfiguration)
-
-	CreateIngestionDestinationRequest_destinationConfiguration = CreateIngestionDestinationRequest.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	CreateIngestionDestinationRequest_clientToken = CreateIngestionDestinationRequest.AddMember("clientToken", _UUID)
-
-	CreateIngestionDestinationRequest_tags = CreateIngestionDestinationRequest.AddMember("tags", _TagList)
-
-	CreateIngestionDestinationResponse_ingestionDestination = CreateIngestionDestinationResponse.AddMember("ingestionDestination", IngestionDestination)
-
-	CreateIngestionRequest_appBundleIdentifier = CreateIngestionRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	CreateIngestionRequest_app = CreateIngestionRequest.AddMember("app", _String255)
-
-	CreateIngestionRequest_tenantId = CreateIngestionRequest.AddMember("tenantId", _TenantIdentifier)
-
-	CreateIngestionRequest_ingestionType = CreateIngestionRequest.AddMember("ingestionType", IngestionType)
-
-	CreateIngestionRequest_clientToken = CreateIngestionRequest.AddMember("clientToken", _UUID)
-
-	CreateIngestionRequest_tags = CreateIngestionRequest.AddMember("tags", _TagList)
-
-	CreateIngestionResponse_ingestion = CreateIngestionResponse.AddMember("ingestion", Ingestion)
-
-	DeleteAppAuthorizationRequest_appBundleIdentifier = DeleteAppAuthorizationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteAppAuthorizationRequest_appAuthorizationIdentifier = DeleteAppAuthorizationRequest.AddMember("appAuthorizationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteAppBundleRequest_appBundleIdentifier = DeleteAppBundleRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteIngestionDestinationRequest_appBundleIdentifier = DeleteIngestionDestinationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteIngestionDestinationRequest_ingestionIdentifier = DeleteIngestionDestinationRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteIngestionDestinationRequest_ingestionDestinationIdentifier = DeleteIngestionDestinationRequest.AddMember("ingestionDestinationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteIngestionRequest_appBundleIdentifier = DeleteIngestionRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	DeleteIngestionRequest_ingestionIdentifier = DeleteIngestionRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetAppAuthorizationRequest_appBundleIdentifier = GetAppAuthorizationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetAppAuthorizationRequest_appAuthorizationIdentifier = GetAppAuthorizationRequest.AddMember("appAuthorizationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetAppAuthorizationResponse_appAuthorization = GetAppAuthorizationResponse.AddMember("appAuthorization", AppAuthorization)
-
-	GetAppBundleRequest_appBundleIdentifier = GetAppBundleRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetAppBundleResponse_appBundle = GetAppBundleResponse.AddMember("appBundle", AppBundle)
-
-	GetIngestionDestinationRequest_appBundleIdentifier = GetIngestionDestinationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetIngestionDestinationRequest_ingestionIdentifier = GetIngestionDestinationRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetIngestionDestinationRequest_ingestionDestinationIdentifier = GetIngestionDestinationRequest.AddMember("ingestionDestinationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetIngestionDestinationResponse_ingestionDestination = GetIngestionDestinationResponse.AddMember("ingestionDestination", IngestionDestination)
-
-	GetIngestionRequest_appBundleIdentifier = GetIngestionRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetIngestionRequest_ingestionIdentifier = GetIngestionRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	GetIngestionResponse_ingestion = GetIngestionResponse.AddMember("ingestion", Ingestion)
-
-	ListAppAuthorizationsRequest_appBundleIdentifier = ListAppAuthorizationsRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListAppAuthorizationsRequest_maxResults = ListAppAuthorizationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAppAuthorizationsRequest_nextToken = ListAppAuthorizationsRequest.AddMember("nextToken", _String2048, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAppAuthorizationsResponse_appAuthorizationSummaryList = ListAppAuthorizationsResponse.AddMember("appAuthorizationSummaryList", _AppAuthorizationSummaryList)
-
-	ListAppAuthorizationsResponse_nextToken = ListAppAuthorizationsResponse.AddMember("nextToken", _String2048)
-
-	ListAppBundlesRequest_maxResults = ListAppBundlesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAppBundlesRequest_nextToken = ListAppBundlesRequest.AddMember("nextToken", _String2048, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAppBundlesResponse_appBundleSummaryList = ListAppBundlesResponse.AddMember("appBundleSummaryList", _AppBundleSummaryList)
-
-	ListAppBundlesResponse_nextToken = ListAppBundlesResponse.AddMember("nextToken", _String2048)
-
-	ListIngestionDestinationsRequest_appBundleIdentifier = ListIngestionDestinationsRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListIngestionDestinationsRequest_ingestionIdentifier = ListIngestionDestinationsRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListIngestionDestinationsRequest_maxResults = ListIngestionDestinationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIngestionDestinationsRequest_nextToken = ListIngestionDestinationsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIngestionDestinationsResponse_ingestionDestinations = ListIngestionDestinationsResponse.AddMember("ingestionDestinations", _IngestionDestinationList)
-
-	ListIngestionDestinationsResponse_nextToken = ListIngestionDestinationsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListIngestionsRequest_appBundleIdentifier = ListIngestionsRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	ListIngestionsRequest_maxResults = ListIngestionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIngestionsRequest_nextToken = ListIngestionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIngestionsResponse_ingestions = ListIngestionsResponse.AddMember("ingestions", _IngestionList)
-
-	ListIngestionsResponse_nextToken = ListIngestionsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	StartIngestionRequest_ingestionIdentifier = StartIngestionRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StartIngestionRequest_appBundleIdentifier = StartIngestionRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StartUserAccessTasksRequest_appBundleIdentifier = StartUserAccessTasksRequest.AddMember("appBundleIdentifier", _Identifier)
-
-	StartUserAccessTasksRequest_email = StartUserAccessTasksRequest.AddMember("email", _Email)
-
-	StartUserAccessTasksResponse_userAccessTasksList = StartUserAccessTasksResponse.AddMember("userAccessTasksList", _UserAccessTasksList)
-
-	StopIngestionRequest_ingestionIdentifier = StopIngestionRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	StopIngestionRequest_appBundleIdentifier = StopIngestionRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAppAuthorizationRequest_appBundleIdentifier = UpdateAppAuthorizationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateAppAuthorizationRequest_appAuthorizationIdentifier = UpdateAppAuthorizationRequest.AddMember("appAuthorizationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateAppAuthorizationRequest_credential = UpdateAppAuthorizationRequest.AddMember("credential", Credential)
-
-	UpdateAppAuthorizationRequest_tenant = UpdateAppAuthorizationRequest.AddMember("tenant", Tenant)
-
-	UpdateAppAuthorizationResponse_appAuthorization = UpdateAppAuthorizationResponse.AddMember("appAuthorization", AppAuthorization)
-
-	UpdateIngestionDestinationRequest_appBundleIdentifier = UpdateIngestionDestinationRequest.AddMember("appBundleIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateIngestionDestinationRequest_ingestionIdentifier = UpdateIngestionDestinationRequest.AddMember("ingestionIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateIngestionDestinationRequest_ingestionDestinationIdentifier = UpdateIngestionDestinationRequest.AddMember("ingestionDestinationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
-
-	UpdateIngestionDestinationRequest_destinationConfiguration = UpdateIngestionDestinationRequest.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	UpdateIngestionDestinationResponse_ingestionDestination = UpdateIngestionDestinationResponse.AddMember("ingestionDestination", IngestionDestination)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mApiKeyCredential = smithy.SchemaMembers{List: []*smithy.Schema{&sApiKeyCredential_apiKey}}
+var mAppAuthorization = smithy.SchemaMembers{List: []*smithy.Schema{&sAppAuthorization_appAuthorizationArn, &sAppAuthorization_appBundleArn, &sAppAuthorization_app, &sAppAuthorization_tenant, &sAppAuthorization_authType, &sAppAuthorization_status, &sAppAuthorization_createdAt, &sAppAuthorization_updatedAt, &sAppAuthorization_persona, &sAppAuthorization_authUrl}, Hash: &hAppAuthorization}
+var mAppAuthorizationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAppAuthorizationStatus_PENDING_CONNECT, &sAppAuthorizationStatus_CONNECTED, &sAppAuthorizationStatus_CONNECTION_VALIDATION_FAILED, &sAppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED}}
+var mAppAuthorizationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAppAuthorizationSummary_appAuthorizationArn, &sAppAuthorizationSummary_appBundleArn, &sAppAuthorizationSummary_app, &sAppAuthorizationSummary_tenant, &sAppAuthorizationSummary_status, &sAppAuthorizationSummary_updatedAt}}
+var m_AppAuthorizationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppAuthorizationSummaryList_member}}
+var mAppBundle = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBundle_arn, &sAppBundle_customerManagedKeyArn}}
+var mAppBundleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAppBundleSummary_arn}}
+var m_AppBundleSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppBundleSummaryList_member}}
+var mAuditLogDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditLogDestinationConfiguration_destination}}
+var mAuditLogProcessingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditLogProcessingConfiguration_schema, &sAuditLogProcessingConfiguration_format}}
+var mAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthRequest_redirectUri, &sAuthRequest_code}}
+var mAuthType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthType_OAUTH2, &sAuthType_API_KEY}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mCredential = smithy.SchemaMembers{List: []*smithy.Schema{&sCredential_oauth2Credential, &sCredential_apiKeyCredential}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_s3Bucket, &sDestination_firehoseStream}}
+var mDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationConfiguration_auditLog}}
+var mFirehoseStream = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehoseStream_streamName}}
+var mFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sFormat_JSON, &sFormat_PARQUET}}
+var mIngestion = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestion_arn, &sIngestion_appBundleArn, &sIngestion_app, &sIngestion_tenantId, &sIngestion_createdAt, &sIngestion_updatedAt, &sIngestion_state, &sIngestion_ingestionType}}
+var mIngestionDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionDestination_arn, &sIngestionDestination_ingestionArn, &sIngestionDestination_processingConfiguration, &sIngestionDestination_destinationConfiguration, &sIngestionDestination_status, &sIngestionDestination_statusReason, &sIngestionDestination_createdAt, &sIngestionDestination_updatedAt}}
+var m_IngestionDestinationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionDestinationList_member}}
+var mIngestionDestinationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionDestinationStatus_ACTIVE, &sIngestionDestinationStatus_FAILED}}
+var mIngestionDestinationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionDestinationSummary_arn}}
+var m_IngestionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionList_member}}
+var mIngestionState = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionState_ENABLED, &sIngestionState_DISABLED}}
+var mIngestionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionSummary_arn, &sIngestionSummary_app, &sIngestionSummary_tenantId, &sIngestionSummary_state}}
+var mIngestionType = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionType_AUDIT_LOG}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mOauth2Credential = smithy.SchemaMembers{List: []*smithy.Schema{&sOauth2Credential_clientId, &sOauth2Credential_clientSecret}}
+var mPersona = smithy.SchemaMembers{List: []*smithy.Schema{&sPersona_ADMIN, &sPersona_ENDUSER}}
+var mProcessingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessingConfiguration_auditLog}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResultStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResultStatus_IN_PROGRESS, &sResultStatus_COMPLETED, &sResultStatus_FAILED, &sResultStatus_EXPIRED}}
+var mS3Bucket = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Bucket_bucketName, &sS3Bucket_prefix}}
+var mSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sSchema_OCSF, &sSchema_RAW}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTaskError = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskError_errorCode, &sTaskError_errorMessage}}
+var m_TaskIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskIdList_member}}
+var mTenant = smithy.SchemaMembers{List: []*smithy.Schema{&sTenant_tenantIdentifier, &sTenant_tenantDisplayName}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mUserAccessResultItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUserAccessResultItem_app, &sUserAccessResultItem_tenantId, &sUserAccessResultItem_tenantDisplayName, &sUserAccessResultItem_taskId, &sUserAccessResultItem_resultStatus, &sUserAccessResultItem_email, &sUserAccessResultItem_userId, &sUserAccessResultItem_userFullName, &sUserAccessResultItem_userFirstName, &sUserAccessResultItem_userLastName, &sUserAccessResultItem_userStatus, &sUserAccessResultItem_taskError}, Hash: &hUserAccessResultItem}
+var m_UserAccessResultsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserAccessResultsList_member}}
+var mUserAccessTaskItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUserAccessTaskItem_app, &sUserAccessTaskItem_tenantId, &sUserAccessTaskItem_taskId, &sUserAccessTaskItem_error}}
+var m_UserAccessTasksList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserAccessTasksList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mBatchGetUserAccessTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetUserAccessTasksRequest_appBundleIdentifier, &sBatchGetUserAccessTasksRequest_taskIdList}}
+var mBatchGetUserAccessTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetUserAccessTasksResponse_userAccessResultsList}}
+var mConnectAppAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectAppAuthorizationRequest_appBundleIdentifier, &sConnectAppAuthorizationRequest_appAuthorizationIdentifier, &sConnectAppAuthorizationRequest_authRequest}}
+var mConnectAppAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectAppAuthorizationResponse_appAuthorizationSummary}}
+var mCreateAppAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppAuthorizationRequest_appBundleIdentifier, &sCreateAppAuthorizationRequest_app, &sCreateAppAuthorizationRequest_credential, &sCreateAppAuthorizationRequest_tenant, &sCreateAppAuthorizationRequest_authType, &sCreateAppAuthorizationRequest_clientToken, &sCreateAppAuthorizationRequest_tags}}
+var mCreateAppAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppAuthorizationResponse_appAuthorization}}
+var mCreateAppBundleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBundleRequest_clientToken, &sCreateAppBundleRequest_customerManagedKeyIdentifier, &sCreateAppBundleRequest_tags}}
+var mCreateAppBundleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppBundleResponse_appBundle}}
+var mCreateIngestionDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionDestinationRequest_appBundleIdentifier, &sCreateIngestionDestinationRequest_ingestionIdentifier, &sCreateIngestionDestinationRequest_processingConfiguration, &sCreateIngestionDestinationRequest_destinationConfiguration, &sCreateIngestionDestinationRequest_clientToken, &sCreateIngestionDestinationRequest_tags}}
+var mCreateIngestionDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionDestinationResponse_ingestionDestination}}
+var mCreateIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionRequest_appBundleIdentifier, &sCreateIngestionRequest_app, &sCreateIngestionRequest_tenantId, &sCreateIngestionRequest_ingestionType, &sCreateIngestionRequest_clientToken, &sCreateIngestionRequest_tags}}
+var mCreateIngestionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionResponse_ingestion}}
+var mDeleteAppAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppAuthorizationRequest_appBundleIdentifier, &sDeleteAppAuthorizationRequest_appAuthorizationIdentifier}}
+var mDeleteAppBundleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppBundleRequest_appBundleIdentifier}}
+var mDeleteIngestionDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIngestionDestinationRequest_appBundleIdentifier, &sDeleteIngestionDestinationRequest_ingestionIdentifier, &sDeleteIngestionDestinationRequest_ingestionDestinationIdentifier}}
+var mDeleteIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIngestionRequest_appBundleIdentifier, &sDeleteIngestionRequest_ingestionIdentifier}}
+var mGetAppAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppAuthorizationRequest_appBundleIdentifier, &sGetAppAuthorizationRequest_appAuthorizationIdentifier}}
+var mGetAppAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppAuthorizationResponse_appAuthorization}}
+var mGetAppBundleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppBundleRequest_appBundleIdentifier}}
+var mGetAppBundleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppBundleResponse_appBundle}}
+var mGetIngestionDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionDestinationRequest_appBundleIdentifier, &sGetIngestionDestinationRequest_ingestionIdentifier, &sGetIngestionDestinationRequest_ingestionDestinationIdentifier}}
+var mGetIngestionDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionDestinationResponse_ingestionDestination}}
+var mGetIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionRequest_appBundleIdentifier, &sGetIngestionRequest_ingestionIdentifier}}
+var mGetIngestionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionResponse_ingestion}}
+var mListAppAuthorizationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppAuthorizationsRequest_appBundleIdentifier, &sListAppAuthorizationsRequest_maxResults, &sListAppAuthorizationsRequest_nextToken}}
+var mListAppAuthorizationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppAuthorizationsResponse_appAuthorizationSummaryList, &sListAppAuthorizationsResponse_nextToken}}
+var mListAppBundlesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppBundlesRequest_maxResults, &sListAppBundlesRequest_nextToken}}
+var mListAppBundlesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppBundlesResponse_appBundleSummaryList, &sListAppBundlesResponse_nextToken}}
+var mListIngestionDestinationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionDestinationsRequest_appBundleIdentifier, &sListIngestionDestinationsRequest_ingestionIdentifier, &sListIngestionDestinationsRequest_maxResults, &sListIngestionDestinationsRequest_nextToken}}
+var mListIngestionDestinationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionDestinationsResponse_ingestionDestinations, &sListIngestionDestinationsResponse_nextToken}}
+var mListIngestionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionsRequest_appBundleIdentifier, &sListIngestionsRequest_maxResults, &sListIngestionsRequest_nextToken}}
+var mListIngestionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionsResponse_ingestions, &sListIngestionsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mStartIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartIngestionRequest_ingestionIdentifier, &sStartIngestionRequest_appBundleIdentifier}}
+var mStartUserAccessTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartUserAccessTasksRequest_appBundleIdentifier, &sStartUserAccessTasksRequest_email}}
+var mStartUserAccessTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartUserAccessTasksResponse_userAccessTasksList}}
+var mStopIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopIngestionRequest_ingestionIdentifier, &sStopIngestionRequest_appBundleIdentifier}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateAppAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAppAuthorizationRequest_appBundleIdentifier, &sUpdateAppAuthorizationRequest_appAuthorizationIdentifier, &sUpdateAppAuthorizationRequest_credential, &sUpdateAppAuthorizationRequest_tenant}}
+var mUpdateAppAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAppAuthorizationResponse_appAuthorization}}
+var mUpdateIngestionDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIngestionDestinationRequest_appBundleIdentifier, &sUpdateIngestionDestinationRequest_ingestionIdentifier, &sUpdateIngestionDestinationRequest_ingestionDestinationIdentifier, &sUpdateIngestionDestinationRequest_destinationConfiguration}}
+var mUpdateIngestionDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIngestionDestinationResponse_ingestionDestination}}
+
+var hAppAuthorization = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 3, 0, 5, 0, 10, 0, 0, 0, 0, 0, 7, 0, 0, 2, 0, 0, 9, 0,
+	4, 0, 0, 0, 0, 8, 0, 1,
+}}
+var hUserAccessResultItem = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 0, 0, 5, 0, 10, 0, 0, 0, 11, 9, 8, 0, 6, 2, 0, 0, 0, 0, 0, 0, 4, 12,
+	0, 0, 0, 0, 7, 3, 0, 0,
+}}
+
+var sBatchGetUserAccessTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetUserAccessTasks, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetUserAccessTasks})
+var sConnectAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectAppAuthorization, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eConnectAppAuthorization})
+var sCreateAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppAuthorization, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppAuthorization})
+var sCreateAppBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBundle, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateAppBundle})
+var sCreateIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestion, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateIngestion})
+var sCreateIngestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionDestination, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateIngestionDestination})
+var sDeleteAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppAuthorization, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAppAuthorization})
+var sDeleteAppBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBundle, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAppBundle})
+var sDeleteIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestion, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIngestion})
+var sDeleteIngestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionDestination, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIngestionDestination})
+var sGetAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppAuthorization, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetAppAuthorization})
+var sGetAppBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppBundle, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetAppBundle})
+var sGetIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestion, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetIngestion})
+var sGetIngestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionDestination, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetIngestionDestination})
+var sListAppAuthorizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppAuthorizations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListAppAuthorizations})
+var sListAppBundles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppBundles, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListAppBundles})
+var sListIngestionDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionDestinations, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListIngestionDestinations})
+var sListIngestions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestions, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListIngestions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIngestion, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eStartIngestion})
+var sStartUserAccessTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartUserAccessTasks, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eStartUserAccessTasks})
+var sStopIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopIngestion, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eStopIngestion})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppAuthorization, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAppAuthorization})
+var sUpdateIngestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngestionDestination, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIngestionDestination})
+var s_FabricFrontEndService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FabricFrontEndService, Type: smithy.ShapeTypeService, Ext: &e_FabricFrontEndService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sApiKeyCredential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiKeyCredential, Members: &mApiKeyCredential, Type: smithy.ShapeTypeStructure, Ext: &eApiKeyCredential})
+var sApiKeyCredential_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eApiKeyCredential_apiKey})
+var sAppAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppAuthorization, Members: &mAppAuthorization, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorization})
+var sAppAuthorization_appAuthorizationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppAuthorization_appAuthorizationArn})
+var sAppAuthorization_appBundleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppAuthorization_appBundleArn})
+var sAppAuthorization_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eAppAuthorization_app})
+var sAppAuthorization_tenant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenant", ID: &iTenant, Members: &mTenant, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorization_tenant})
+var sAppAuthorization_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eAppAuthorization_authType})
+var sAppAuthorization_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAppAuthorizationStatus, Members: &mAppAuthorizationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAppAuthorization_status})
+var sAppAuthorization_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eAppAuthorization_createdAt})
+var sAppAuthorization_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eAppAuthorization_updatedAt})
+var sAppAuthorization_persona = smithy.NewStaticSchema(smithy.StaticSchema{Member: "persona", ID: &iPersona, Members: &mPersona, Type: smithy.ShapeTypeEnum, Ext: &eAppAuthorization_persona})
+var sAppAuthorization_authUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAppAuthorization_authUrl})
+var sAppAuthorizationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppAuthorizationStatus, Members: &mAppAuthorizationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAppAuthorizationStatus})
+var sAppAuthorizationStatus_PENDING_CONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationStatus_PENDING_CONNECT})
+var sAppAuthorizationStatus_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationStatus_CONNECTED})
+var sAppAuthorizationStatus_CONNECTION_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTION_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationStatus_CONNECTION_VALIDATION_FAILED})
+var sAppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKEN_AUTO_ROTATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED})
+var sAppAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppAuthorizationSummary, Members: &mAppAuthorizationSummary, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationSummary})
+var sAppAuthorizationSummary_appAuthorizationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppAuthorizationSummary_appAuthorizationArn})
+var sAppAuthorizationSummary_appBundleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppAuthorizationSummary_appBundleArn})
+var sAppAuthorizationSummary_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eAppAuthorizationSummary_app})
+var sAppAuthorizationSummary_tenant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenant", ID: &iTenant, Members: &mTenant, Type: smithy.ShapeTypeStructure, Ext: &eAppAuthorizationSummary_tenant})
+var sAppAuthorizationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAppAuthorizationStatus, Members: &mAppAuthorizationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAppAuthorizationSummary_status})
+var sAppAuthorizationSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eAppAuthorizationSummary_updatedAt})
+var s_AppAuthorizationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppAuthorizationSummaryList, Members: &m_AppAuthorizationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_AppAuthorizationSummaryList})
+var s_AppAuthorizationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppAuthorizationSummary, Members: &mAppAuthorizationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AppAuthorizationSummaryList_member})
+var sAppBundle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBundle, Members: &mAppBundle, Type: smithy.ShapeTypeStructure, Ext: &eAppBundle})
+var sAppBundle_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBundle_arn})
+var sAppBundle_customerManagedKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKeyArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBundle_customerManagedKeyArn})
+var sAppBundleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppBundleSummary, Members: &mAppBundleSummary, Type: smithy.ShapeTypeStructure, Ext: &eAppBundleSummary})
+var sAppBundleSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAppBundleSummary_arn})
+var s_AppBundleSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppBundleSummaryList, Members: &m_AppBundleSummaryList, Type: smithy.ShapeTypeList, Ext: &e_AppBundleSummaryList})
+var s_AppBundleSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppBundleSummary, Members: &mAppBundleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AppBundleSummaryList_member})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAuditLogDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditLogDestinationConfiguration, Members: &mAuditLogDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuditLogDestinationConfiguration})
+var sAuditLogDestinationConfiguration_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eAuditLogDestinationConfiguration_destination})
+var sAuditLogProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditLogProcessingConfiguration, Members: &mAuditLogProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuditLogProcessingConfiguration})
+var sAuditLogProcessingConfiguration_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeEnum, Ext: &eAuditLogProcessingConfiguration_schema})
+var sAuditLogProcessingConfiguration_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eAuditLogProcessingConfiguration_format})
+var sAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthRequest, Members: &mAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eAuthRequest})
+var sAuthRequest_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_RedirectUri, Type: smithy.ShapeTypeString, Ext: &eAuthRequest_redirectUri})
+var sAuthRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eAuthRequest_code})
+var sAuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eAuthType})
+var sAuthType_OAUTH2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_OAUTH2})
+var sAuthType_API_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuthType_API_KEY})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCredential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeUnion, Ext: &eCredential})
+var sCredential_oauth2Credential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauth2Credential", ID: &iOauth2Credential, Members: &mOauth2Credential, Type: smithy.ShapeTypeStructure, Ext: &eCredential_oauth2Credential})
+var sCredential_apiKeyCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKeyCredential", ID: &iApiKeyCredential, Members: &mApiKeyCredential, Type: smithy.ShapeTypeStructure, Ext: &eCredential_apiKeyCredential})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t30, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeUnion, Ext: &eDestination})
+var sDestination_s3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Bucket", ID: &iS3Bucket, Members: &mS3Bucket, Type: smithy.ShapeTypeStructure, Ext: &eDestination_s3Bucket})
+var sDestination_firehoseStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firehoseStream", ID: &iFirehoseStream, Members: &mFirehoseStream, Type: smithy.ShapeTypeStructure, Ext: &eDestination_firehoseStream})
+var sDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eDestinationConfiguration})
+var sDestinationConfiguration_auditLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditLog", ID: &iAuditLogDestinationConfiguration, Members: &mAuditLogDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration_auditLog})
+var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &e_Email})
+var sFirehoseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseStream, Members: &mFirehoseStream, Type: smithy.ShapeTypeStructure, Ext: &eFirehoseStream})
+var sFirehoseStream_streamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamName", ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &eFirehoseStream_streamName})
+var sFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum, Ext: &eFormat})
+var sFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormat_JSON})
+var sFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFormat_PARQUET})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &e_Identifier})
+var sIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestion, Members: &mIngestion, Type: smithy.ShapeTypeStructure, Ext: &eIngestion})
+var sIngestion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestion_arn})
+var sIngestion_appBundleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestion_appBundleArn})
+var sIngestion_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eIngestion_app})
+var sIngestion_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eIngestion_tenantId})
+var sIngestion_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eIngestion_createdAt})
+var sIngestion_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eIngestion_updatedAt})
+var sIngestion_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iIngestionState, Members: &mIngestionState, Type: smithy.ShapeTypeEnum, Ext: &eIngestion_state})
+var sIngestion_ingestionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionType", ID: &iIngestionType, Members: &mIngestionType, Type: smithy.ShapeTypeEnum, Ext: &eIngestion_ingestionType})
+var sIngestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionDestination, Members: &mIngestionDestination, Type: smithy.ShapeTypeStructure, Ext: &eIngestionDestination})
+var sIngestionDestination_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestionDestination_arn})
+var sIngestionDestination_ingestionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestionDestination_ingestionArn})
+var sIngestionDestination_processingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "processingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eIngestionDestination_processingConfiguration})
+var sIngestionDestination_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eIngestionDestination_destinationConfiguration})
+var sIngestionDestination_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iIngestionDestinationStatus, Members: &mIngestionDestinationStatus, Type: smithy.ShapeTypeEnum, Ext: &eIngestionDestination_status})
+var sIngestionDestination_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIngestionDestination_statusReason})
+var sIngestionDestination_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eIngestionDestination_createdAt})
+var sIngestionDestination_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eIngestionDestination_updatedAt})
+var s_IngestionDestinationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionDestinationList, Members: &m_IngestionDestinationList, Type: smithy.ShapeTypeList, Ext: &e_IngestionDestinationList})
+var s_IngestionDestinationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionDestinationSummary, Members: &mIngestionDestinationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_IngestionDestinationList_member})
+var sIngestionDestinationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionDestinationStatus, Members: &mIngestionDestinationStatus, Type: smithy.ShapeTypeEnum, Ext: &eIngestionDestinationStatus})
+var sIngestionDestinationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngestionDestinationStatus_ACTIVE})
+var sIngestionDestinationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngestionDestinationStatus_FAILED})
+var sIngestionDestinationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionDestinationSummary, Members: &mIngestionDestinationSummary, Type: smithy.ShapeTypeStructure, Ext: &eIngestionDestinationSummary})
+var sIngestionDestinationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestionDestinationSummary_arn})
+var s_IngestionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionList, Members: &m_IngestionList, Type: smithy.ShapeTypeList, Ext: &e_IngestionList})
+var s_IngestionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionSummary, Members: &mIngestionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_IngestionList_member})
+var sIngestionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionState, Members: &mIngestionState, Type: smithy.ShapeTypeEnum, Ext: &eIngestionState})
+var sIngestionState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngestionState_ENABLED})
+var sIngestionState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngestionState_DISABLED})
+var sIngestionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionSummary, Members: &mIngestionSummary, Type: smithy.ShapeTypeStructure, Ext: &eIngestionSummary})
+var sIngestionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eIngestionSummary_arn})
+var sIngestionSummary_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eIngestionSummary_app})
+var sIngestionSummary_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eIngestionSummary_tenantId})
+var sIngestionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iIngestionState, Members: &mIngestionState, Type: smithy.ShapeTypeEnum, Ext: &eIngestionSummary_state})
+var sIngestionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionType, Members: &mIngestionType, Type: smithy.ShapeTypeEnum, Ext: &eIngestionType})
+var sIngestionType_AUDIT_LOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIT_LOG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIngestionType_AUDIT_LOG})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_Integer, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sOauth2Credential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOauth2Credential, Members: &mOauth2Credential, Type: smithy.ShapeTypeStructure, Ext: &eOauth2Credential})
+var sOauth2Credential_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eOauth2Credential_clientId})
+var sOauth2Credential_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eOauth2Credential_clientSecret})
+var sPersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersona, Members: &mPersona, Type: smithy.ShapeTypeEnum, Ext: &ePersona})
+var sPersona_ADMIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePersona_ADMIN})
+var sPersona_ENDUSER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDUSER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePersona_ENDUSER})
+var sProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eProcessingConfiguration})
+var sProcessingConfiguration_auditLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditLog", ID: &iAuditLogProcessingConfiguration, Members: &mAuditLogProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessingConfiguration_auditLog})
+var s_RedirectUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUri, Type: smithy.ShapeTypeString, Ext: &e_RedirectUri})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sResultStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultStatus, Members: &mResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eResultStatus})
+var sResultStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResultStatus_IN_PROGRESS})
+var sResultStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResultStatus_COMPLETED})
+var sResultStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResultStatus_FAILED})
+var sResultStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResultStatus_EXPIRED})
+var sS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Bucket, Members: &mS3Bucket, Type: smithy.ShapeTypeStructure, Ext: &eS3Bucket})
+var sS3Bucket_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_String63, Type: smithy.ShapeTypeString, Ext: &eS3Bucket_bucketName})
+var sS3Bucket_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_String120, Type: smithy.ShapeTypeString, Ext: &eS3Bucket_prefix})
+var sSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchema, Members: &mSchema, Type: smithy.ShapeTypeEnum, Ext: &eSchema})
+var sSchema_OCSF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCSF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchema_OCSF})
+var sSchema_RAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchema_RAW})
+var s_SensitiveString2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString2048, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString2048})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_String120 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String120, Type: smithy.ShapeTypeString, Ext: &e_String120})
+var s_String2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &e_String2048})
+var s_String255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &e_String255})
+var s_String63 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String63, Type: smithy.ShapeTypeString, Ext: &e_String63})
+var s_String64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String64, Type: smithy.ShapeTypeString, Ext: &e_String64})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTaskError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskError, Members: &mTaskError, Type: smithy.ShapeTypeStructure, Ext: &eTaskError})
+var sTaskError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTaskError_errorCode})
+var sTaskError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTaskError_errorMessage})
+var s_TaskIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskIdList, Members: &m_TaskIdList, Type: smithy.ShapeTypeList, Ext: &e_TaskIdList})
+var s_TaskIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_TaskIdList_member})
+var sTenant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTenant, Members: &mTenant, Type: smithy.ShapeTypeStructure, Ext: &eTenant})
+var sTenant_tenantIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantIdentifier", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eTenant_tenantIdentifier})
+var sTenant_tenantDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantDisplayName", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eTenant_tenantDisplayName})
+var s_TenantIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &e_TenantIdentifier})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_Integer, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sUserAccessResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserAccessResultItem, Members: &mUserAccessResultItem, Type: smithy.ShapeTypeStructure, Ext: &eUserAccessResultItem})
+var sUserAccessResultItem_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_app})
+var sUserAccessResultItem_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_tenantId})
+var sUserAccessResultItem_tenantDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantDisplayName", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_tenantDisplayName})
+var sUserAccessResultItem_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_taskId})
+var sUserAccessResultItem_resultStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultStatus", ID: &iResultStatus, Members: &mResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eUserAccessResultItem_resultStatus})
+var sUserAccessResultItem_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_email})
+var sUserAccessResultItem_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_userId})
+var sUserAccessResultItem_userFullName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userFullName", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_userFullName})
+var sUserAccessResultItem_userFirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userFirstName", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_userFirstName})
+var sUserAccessResultItem_userLastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userLastName", ID: &i_SensitiveString2048, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_userLastName})
+var sUserAccessResultItem_userStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userStatus", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUserAccessResultItem_userStatus})
+var sUserAccessResultItem_taskError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskError", ID: &iTaskError, Members: &mTaskError, Type: smithy.ShapeTypeStructure, Ext: &eUserAccessResultItem_taskError})
+var s_UserAccessResultsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAccessResultsList, Members: &m_UserAccessResultsList, Type: smithy.ShapeTypeList, Ext: &e_UserAccessResultsList})
+var s_UserAccessResultsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserAccessResultItem, Members: &mUserAccessResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_UserAccessResultsList_member})
+var sUserAccessTaskItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserAccessTaskItem, Members: &mUserAccessTaskItem, Type: smithy.ShapeTypeStructure, Ext: &eUserAccessTaskItem})
+var sUserAccessTaskItem_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eUserAccessTaskItem_app})
+var sUserAccessTaskItem_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eUserAccessTaskItem_tenantId})
+var sUserAccessTaskItem_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eUserAccessTaskItem_taskId})
+var sUserAccessTaskItem_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iTaskError, Members: &mTaskError, Type: smithy.ShapeTypeStructure, Ext: &eUserAccessTaskItem_error})
+var s_UserAccessTasksList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAccessTasksList, Members: &m_UserAccessTasksList, Type: smithy.ShapeTypeList, Ext: &e_UserAccessTasksList})
+var s_UserAccessTasksList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserAccessTaskItem, Members: &mUserAccessTaskItem, Type: smithy.ShapeTypeStructure, Ext: &e_UserAccessTasksList_member})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sBatchGetUserAccessTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetUserAccessTasksRequest, Members: &mBatchGetUserAccessTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetUserAccessTasksRequest})
+var sBatchGetUserAccessTasksRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eBatchGetUserAccessTasksRequest_appBundleIdentifier})
+var sBatchGetUserAccessTasksRequest_taskIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskIdList", ID: &i_TaskIdList, Members: &m_TaskIdList, Type: smithy.ShapeTypeList, Ext: &eBatchGetUserAccessTasksRequest_taskIdList})
+var sBatchGetUserAccessTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetUserAccessTasksResponse, Members: &mBatchGetUserAccessTasksResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetUserAccessTasksResponse})
+var sBatchGetUserAccessTasksResponse_userAccessResultsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessResultsList", ID: &i_UserAccessResultsList, Members: &m_UserAccessResultsList, Type: smithy.ShapeTypeList, Ext: &eBatchGetUserAccessTasksResponse_userAccessResultsList})
+var sConnectAppAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectAppAuthorizationRequest, Members: &mConnectAppAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eConnectAppAuthorizationRequest})
+var sConnectAppAuthorizationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eConnectAppAuthorizationRequest_appBundleIdentifier})
+var sConnectAppAuthorizationRequest_appAuthorizationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eConnectAppAuthorizationRequest_appAuthorizationIdentifier})
+var sConnectAppAuthorizationRequest_authRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authRequest", ID: &iAuthRequest, Members: &mAuthRequest, Type: smithy.ShapeTypeStructure, Ext: &eConnectAppAuthorizationRequest_authRequest})
+var sConnectAppAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectAppAuthorizationResponse, Members: &mConnectAppAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eConnectAppAuthorizationResponse})
+var sConnectAppAuthorizationResponse_appAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationSummary", ID: &iAppAuthorizationSummary, Members: &mAppAuthorizationSummary, Type: smithy.ShapeTypeStructure, Ext: &eConnectAppAuthorizationResponse_appAuthorizationSummary})
+var sCreateAppAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppAuthorizationRequest, Members: &mCreateAppAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppAuthorizationRequest})
+var sCreateAppAuthorizationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateAppAuthorizationRequest_appBundleIdentifier})
+var sCreateAppAuthorizationRequest_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eCreateAppAuthorizationRequest_app})
+var sCreateAppAuthorizationRequest_credential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credential", ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeUnion, Ext: &eCreateAppAuthorizationRequest_credential})
+var sCreateAppAuthorizationRequest_tenant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenant", ID: &iTenant, Members: &mTenant, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppAuthorizationRequest_tenant})
+var sCreateAppAuthorizationRequest_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &iAuthType, Members: &mAuthType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAppAuthorizationRequest_authType})
+var sCreateAppAuthorizationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateAppAuthorizationRequest_clientToken})
+var sCreateAppAuthorizationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAppAuthorizationRequest_tags})
+var sCreateAppAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppAuthorizationResponse, Members: &mCreateAppAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppAuthorizationResponse})
+var sCreateAppAuthorizationResponse_appAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorization", ID: &iAppAuthorization, Members: &mAppAuthorization, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppAuthorizationResponse_appAuthorization})
+var sCreateAppBundleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBundleRequest, Members: &mCreateAppBundleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBundleRequest})
+var sCreateAppBundleRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateAppBundleRequest_clientToken})
+var sCreateAppBundleRequest_customerManagedKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKeyIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateAppBundleRequest_customerManagedKeyIdentifier})
+var sCreateAppBundleRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateAppBundleRequest_tags})
+var sCreateAppBundleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppBundleResponse, Members: &mCreateAppBundleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBundleResponse})
+var sCreateAppBundleResponse_appBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundle", ID: &iAppBundle, Members: &mAppBundle, Type: smithy.ShapeTypeStructure, Ext: &eCreateAppBundleResponse_appBundle})
+var sCreateIngestionDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionDestinationRequest, Members: &mCreateIngestionDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionDestinationRequest})
+var sCreateIngestionDestinationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionDestinationRequest_appBundleIdentifier})
+var sCreateIngestionDestinationRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionDestinationRequest_ingestionIdentifier})
+var sCreateIngestionDestinationRequest_processingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "processingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateIngestionDestinationRequest_processingConfiguration})
+var sCreateIngestionDestinationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateIngestionDestinationRequest_destinationConfiguration})
+var sCreateIngestionDestinationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionDestinationRequest_clientToken})
+var sCreateIngestionDestinationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateIngestionDestinationRequest_tags})
+var sCreateIngestionDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionDestinationResponse, Members: &mCreateIngestionDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionDestinationResponse})
+var sCreateIngestionDestinationResponse_ingestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestination", ID: &iIngestionDestination, Members: &mIngestionDestination, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionDestinationResponse_ingestionDestination})
+var sCreateIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionRequest, Members: &mCreateIngestionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionRequest})
+var sCreateIngestionRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionRequest_appBundleIdentifier})
+var sCreateIngestionRequest_app = smithy.NewStaticSchema(smithy.StaticSchema{Member: "app", ID: &i_String255, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionRequest_app})
+var sCreateIngestionRequest_tenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenantId", ID: &i_TenantIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionRequest_tenantId})
+var sCreateIngestionRequest_ingestionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionType", ID: &iIngestionType, Members: &mIngestionType, Type: smithy.ShapeTypeEnum, Ext: &eCreateIngestionRequest_ingestionType})
+var sCreateIngestionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eCreateIngestionRequest_clientToken})
+var sCreateIngestionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateIngestionRequest_tags})
+var sCreateIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionResponse, Members: &mCreateIngestionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionResponse})
+var sCreateIngestionResponse_ingestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestion", ID: &iIngestion, Members: &mIngestion, Type: smithy.ShapeTypeStructure, Ext: &eCreateIngestionResponse_ingestion})
+var sDeleteAppAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppAuthorizationRequest, Members: &mDeleteAppAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppAuthorizationRequest})
+var sDeleteAppAuthorizationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteAppAuthorizationRequest_appBundleIdentifier})
+var sDeleteAppAuthorizationRequest_appAuthorizationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteAppAuthorizationRequest_appAuthorizationIdentifier})
+var sDeleteAppAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppAuthorizationResponse})
+var sDeleteAppBundleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBundleRequest, Members: &mDeleteAppBundleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBundleRequest})
+var sDeleteAppBundleRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteAppBundleRequest_appBundleIdentifier})
+var sDeleteAppBundleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppBundleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAppBundleResponse})
+var sDeleteIngestionDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionDestinationRequest, Members: &mDeleteIngestionDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngestionDestinationRequest})
+var sDeleteIngestionDestinationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteIngestionDestinationRequest_appBundleIdentifier})
+var sDeleteIngestionDestinationRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteIngestionDestinationRequest_ingestionIdentifier})
+var sDeleteIngestionDestinationRequest_ingestionDestinationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestinationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteIngestionDestinationRequest_ingestionDestinationIdentifier})
+var sDeleteIngestionDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngestionDestinationResponse})
+var sDeleteIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionRequest, Members: &mDeleteIngestionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngestionRequest})
+var sDeleteIngestionRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteIngestionRequest_appBundleIdentifier})
+var sDeleteIngestionRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eDeleteIngestionRequest_ingestionIdentifier})
+var sDeleteIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIngestionResponse})
+var sGetAppAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppAuthorizationRequest, Members: &mGetAppAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAppAuthorizationRequest})
+var sGetAppAuthorizationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetAppAuthorizationRequest_appBundleIdentifier})
+var sGetAppAuthorizationRequest_appAuthorizationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetAppAuthorizationRequest_appAuthorizationIdentifier})
+var sGetAppAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppAuthorizationResponse, Members: &mGetAppAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAppAuthorizationResponse})
+var sGetAppAuthorizationResponse_appAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorization", ID: &iAppAuthorization, Members: &mAppAuthorization, Type: smithy.ShapeTypeStructure, Ext: &eGetAppAuthorizationResponse_appAuthorization})
+var sGetAppBundleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppBundleRequest, Members: &mGetAppBundleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAppBundleRequest})
+var sGetAppBundleRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetAppBundleRequest_appBundleIdentifier})
+var sGetAppBundleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppBundleResponse, Members: &mGetAppBundleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAppBundleResponse})
+var sGetAppBundleResponse_appBundle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundle", ID: &iAppBundle, Members: &mAppBundle, Type: smithy.ShapeTypeStructure, Ext: &eGetAppBundleResponse_appBundle})
+var sGetIngestionDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionDestinationRequest, Members: &mGetIngestionDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionDestinationRequest})
+var sGetIngestionDestinationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIngestionDestinationRequest_appBundleIdentifier})
+var sGetIngestionDestinationRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIngestionDestinationRequest_ingestionIdentifier})
+var sGetIngestionDestinationRequest_ingestionDestinationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestinationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIngestionDestinationRequest_ingestionDestinationIdentifier})
+var sGetIngestionDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionDestinationResponse, Members: &mGetIngestionDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionDestinationResponse})
+var sGetIngestionDestinationResponse_ingestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestination", ID: &iIngestionDestination, Members: &mIngestionDestination, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionDestinationResponse_ingestionDestination})
+var sGetIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionRequest, Members: &mGetIngestionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionRequest})
+var sGetIngestionRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIngestionRequest_appBundleIdentifier})
+var sGetIngestionRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetIngestionRequest_ingestionIdentifier})
+var sGetIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionResponse, Members: &mGetIngestionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionResponse})
+var sGetIngestionResponse_ingestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestion", ID: &iIngestion, Members: &mIngestion, Type: smithy.ShapeTypeStructure, Ext: &eGetIngestionResponse_ingestion})
+var sListAppAuthorizationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppAuthorizationsRequest, Members: &mListAppAuthorizationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAppAuthorizationsRequest})
+var sListAppAuthorizationsRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListAppAuthorizationsRequest_appBundleIdentifier})
+var sListAppAuthorizationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListAppAuthorizationsRequest_maxResults})
+var sListAppAuthorizationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String2048, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListAppAuthorizationsRequest_nextToken})
+var sListAppAuthorizationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppAuthorizationsResponse, Members: &mListAppAuthorizationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAppAuthorizationsResponse})
+var sListAppAuthorizationsResponse_appAuthorizationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationSummaryList", ID: &i_AppAuthorizationSummaryList, Members: &m_AppAuthorizationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListAppAuthorizationsResponse_appAuthorizationSummaryList})
+var sListAppAuthorizationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eListAppAuthorizationsResponse_nextToken})
+var sListAppBundlesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppBundlesRequest, Members: &mListAppBundlesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAppBundlesRequest})
+var sListAppBundlesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListAppBundlesRequest_maxResults})
+var sListAppBundlesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String2048, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListAppBundlesRequest_nextToken})
+var sListAppBundlesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppBundlesResponse, Members: &mListAppBundlesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAppBundlesResponse})
+var sListAppBundlesResponse_appBundleSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleSummaryList", ID: &i_AppBundleSummaryList, Members: &m_AppBundleSummaryList, Type: smithy.ShapeTypeList, Ext: &eListAppBundlesResponse_appBundleSummaryList})
+var sListAppBundlesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String2048, Type: smithy.ShapeTypeString, Ext: &eListAppBundlesResponse_nextToken})
+var sListIngestionDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionDestinationsRequest, Members: &mListIngestionDestinationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIngestionDestinationsRequest})
+var sListIngestionDestinationsRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListIngestionDestinationsRequest_appBundleIdentifier})
+var sListIngestionDestinationsRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListIngestionDestinationsRequest_ingestionIdentifier})
+var sListIngestionDestinationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListIngestionDestinationsRequest_maxResults})
+var sListIngestionDestinationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListIngestionDestinationsRequest_nextToken})
+var sListIngestionDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionDestinationsResponse, Members: &mListIngestionDestinationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIngestionDestinationsResponse})
+var sListIngestionDestinationsResponse_ingestionDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestinations", ID: &i_IngestionDestinationList, Members: &m_IngestionDestinationList, Type: smithy.ShapeTypeList, Ext: &eListIngestionDestinationsResponse_ingestionDestinations})
+var sListIngestionDestinationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListIngestionDestinationsResponse_nextToken})
+var sListIngestionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionsRequest, Members: &mListIngestionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIngestionsRequest})
+var sListIngestionsRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListIngestionsRequest_appBundleIdentifier})
+var sListIngestionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eListIngestionsRequest_maxResults})
+var sListIngestionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListIngestionsRequest_nextToken})
+var sListIngestionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionsResponse, Members: &mListIngestionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIngestionsResponse})
+var sListIngestionsResponse_ingestions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestions", ID: &i_IngestionList, Members: &m_IngestionList, Type: smithy.ShapeTypeList, Ext: &eListIngestionsResponse_ingestions})
+var sListIngestionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListIngestionsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sStartIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIngestionRequest, Members: &mStartIngestionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartIngestionRequest})
+var sStartIngestionRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStartIngestionRequest_ingestionIdentifier})
+var sStartIngestionRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStartIngestionRequest_appBundleIdentifier})
+var sStartIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIngestionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartIngestionResponse})
+var sStartUserAccessTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartUserAccessTasksRequest, Members: &mStartUserAccessTasksRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartUserAccessTasksRequest})
+var sStartUserAccessTasksRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eStartUserAccessTasksRequest_appBundleIdentifier})
+var sStartUserAccessTasksRequest_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eStartUserAccessTasksRequest_email})
+var sStartUserAccessTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartUserAccessTasksResponse, Members: &mStartUserAccessTasksResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartUserAccessTasksResponse})
+var sStartUserAccessTasksResponse_userAccessTasksList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessTasksList", ID: &i_UserAccessTasksList, Members: &m_UserAccessTasksList, Type: smithy.ShapeTypeList, Ext: &eStartUserAccessTasksResponse_userAccessTasksList})
+var sStopIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopIngestionRequest, Members: &mStopIngestionRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopIngestionRequest})
+var sStopIngestionRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStopIngestionRequest_ingestionIdentifier})
+var sStopIngestionRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eStopIngestionRequest_appBundleIdentifier})
+var sStopIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopIngestionResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopIngestionResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t41, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAppAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppAuthorizationRequest, Members: &mUpdateAppAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppAuthorizationRequest})
+var sUpdateAppAuthorizationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateAppAuthorizationRequest_appBundleIdentifier})
+var sUpdateAppAuthorizationRequest_appAuthorizationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorizationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateAppAuthorizationRequest_appAuthorizationIdentifier})
+var sUpdateAppAuthorizationRequest_credential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credential", ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeUnion, Ext: &eUpdateAppAuthorizationRequest_credential})
+var sUpdateAppAuthorizationRequest_tenant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tenant", ID: &iTenant, Members: &mTenant, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppAuthorizationRequest_tenant})
+var sUpdateAppAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppAuthorizationResponse, Members: &mUpdateAppAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppAuthorizationResponse})
+var sUpdateAppAuthorizationResponse_appAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appAuthorization", ID: &iAppAuthorization, Members: &mAppAuthorization, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAppAuthorizationResponse_appAuthorization})
+var sUpdateIngestionDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngestionDestinationRequest, Members: &mUpdateIngestionDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIngestionDestinationRequest})
+var sUpdateIngestionDestinationRequest_appBundleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appBundleIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateIngestionDestinationRequest_appBundleIdentifier})
+var sUpdateIngestionDestinationRequest_ingestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateIngestionDestinationRequest_ingestionIdentifier})
+var sUpdateIngestionDestinationRequest_ingestionDestinationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestinationIdentifier", ID: &i_Identifier, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUpdateIngestionDestinationRequest_ingestionDestinationIdentifier})
+var sUpdateIngestionDestinationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateIngestionDestinationRequest_destinationConfiguration})
+var sUpdateIngestionDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIngestionDestinationResponse, Members: &mUpdateIngestionDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIngestionDestinationResponse})
+var sUpdateIngestionDestinationResponse_ingestionDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionDestination", ID: &iIngestionDestination, Members: &mIngestionDestination, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIngestionDestinationResponse_ingestionDestination})
+
+var BatchGetUserAccessTasks = &sBatchGetUserAccessTasks
+
+var ConnectAppAuthorization = &sConnectAppAuthorization
+
+var CreateAppAuthorization = &sCreateAppAuthorization
+
+var CreateAppBundle = &sCreateAppBundle
+
+var CreateIngestion = &sCreateIngestion
+
+var CreateIngestionDestination = &sCreateIngestionDestination
+
+var DeleteAppAuthorization = &sDeleteAppAuthorization
+
+var DeleteAppBundle = &sDeleteAppBundle
+
+var DeleteIngestion = &sDeleteIngestion
+
+var DeleteIngestionDestination = &sDeleteIngestionDestination
+
+var GetAppAuthorization = &sGetAppAuthorization
+
+var GetAppBundle = &sGetAppBundle
+
+var GetIngestion = &sGetIngestion
+
+var GetIngestionDestination = &sGetIngestionDestination
+
+var ListAppAuthorizations = &sListAppAuthorizations
+
+var ListAppBundles = &sListAppBundles
+
+var ListIngestionDestinations = &sListIngestionDestinations
+
+var ListIngestions = &sListIngestions
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartIngestion = &sStartIngestion
+
+var StartUserAccessTasks = &sStartUserAccessTasks
+
+var StopIngestion = &sStopIngestion
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAppAuthorization = &sUpdateAppAuthorization
+
+var UpdateIngestionDestination = &sUpdateIngestionDestination
+
+var _FabricFrontEndService = &s_FabricFrontEndService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ApiKeyCredential = &sApiKeyCredential
+var ApiKeyCredential_apiKey = &sApiKeyCredential_apiKey
+
+var AppAuthorization = &sAppAuthorization
+var AppAuthorization_appAuthorizationArn = &sAppAuthorization_appAuthorizationArn
+var AppAuthorization_appBundleArn = &sAppAuthorization_appBundleArn
+var AppAuthorization_app = &sAppAuthorization_app
+var AppAuthorization_tenant = &sAppAuthorization_tenant
+var AppAuthorization_authType = &sAppAuthorization_authType
+var AppAuthorization_status = &sAppAuthorization_status
+var AppAuthorization_createdAt = &sAppAuthorization_createdAt
+var AppAuthorization_updatedAt = &sAppAuthorization_updatedAt
+var AppAuthorization_persona = &sAppAuthorization_persona
+var AppAuthorization_authUrl = &sAppAuthorization_authUrl
+
+var AppAuthorizationStatus = &sAppAuthorizationStatus
+var AppAuthorizationStatus_PENDING_CONNECT = &sAppAuthorizationStatus_PENDING_CONNECT
+var AppAuthorizationStatus_CONNECTED = &sAppAuthorizationStatus_CONNECTED
+var AppAuthorizationStatus_CONNECTION_VALIDATION_FAILED = &sAppAuthorizationStatus_CONNECTION_VALIDATION_FAILED
+var AppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED = &sAppAuthorizationStatus_TOKEN_AUTO_ROTATION_FAILED
+
+var AppAuthorizationSummary = &sAppAuthorizationSummary
+var AppAuthorizationSummary_appAuthorizationArn = &sAppAuthorizationSummary_appAuthorizationArn
+var AppAuthorizationSummary_appBundleArn = &sAppAuthorizationSummary_appBundleArn
+var AppAuthorizationSummary_app = &sAppAuthorizationSummary_app
+var AppAuthorizationSummary_tenant = &sAppAuthorizationSummary_tenant
+var AppAuthorizationSummary_status = &sAppAuthorizationSummary_status
+var AppAuthorizationSummary_updatedAt = &sAppAuthorizationSummary_updatedAt
+
+var _AppAuthorizationSummaryList = &s_AppAuthorizationSummaryList
+var _AppAuthorizationSummaryList_member = &s_AppAuthorizationSummaryList_member
+
+var AppBundle = &sAppBundle
+var AppBundle_arn = &sAppBundle_arn
+var AppBundle_customerManagedKeyArn = &sAppBundle_customerManagedKeyArn
+
+var AppBundleSummary = &sAppBundleSummary
+var AppBundleSummary_arn = &sAppBundleSummary_arn
+
+var _AppBundleSummaryList = &s_AppBundleSummaryList
+var _AppBundleSummaryList_member = &s_AppBundleSummaryList_member
+
+var _Arn = &s_Arn
+
+var AuditLogDestinationConfiguration = &sAuditLogDestinationConfiguration
+var AuditLogDestinationConfiguration_destination = &sAuditLogDestinationConfiguration_destination
+
+var AuditLogProcessingConfiguration = &sAuditLogProcessingConfiguration
+var AuditLogProcessingConfiguration_schema = &sAuditLogProcessingConfiguration_schema
+var AuditLogProcessingConfiguration_format = &sAuditLogProcessingConfiguration_format
+
+var AuthRequest = &sAuthRequest
+var AuthRequest_redirectUri = &sAuthRequest_redirectUri
+var AuthRequest_code = &sAuthRequest_code
+
+var AuthType = &sAuthType
+var AuthType_OAUTH2 = &sAuthType_OAUTH2
+var AuthType_API_KEY = &sAuthType_API_KEY
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var Credential = &sCredential
+var Credential_oauth2Credential = &sCredential_oauth2Credential
+var Credential_apiKeyCredential = &sCredential_apiKeyCredential
+
+var _DateTime = &s_DateTime
+
+var Destination = &sDestination
+var Destination_s3Bucket = &sDestination_s3Bucket
+var Destination_firehoseStream = &sDestination_firehoseStream
+
+var DestinationConfiguration = &sDestinationConfiguration
+var DestinationConfiguration_auditLog = &sDestinationConfiguration_auditLog
+
+var _Email = &s_Email
+
+var FirehoseStream = &sFirehoseStream
+var FirehoseStream_streamName = &sFirehoseStream_streamName
+
+var Format = &sFormat
+var Format_JSON = &sFormat_JSON
+var Format_PARQUET = &sFormat_PARQUET
+
+var _Identifier = &s_Identifier
+
+var Ingestion = &sIngestion
+var Ingestion_arn = &sIngestion_arn
+var Ingestion_appBundleArn = &sIngestion_appBundleArn
+var Ingestion_app = &sIngestion_app
+var Ingestion_tenantId = &sIngestion_tenantId
+var Ingestion_createdAt = &sIngestion_createdAt
+var Ingestion_updatedAt = &sIngestion_updatedAt
+var Ingestion_state = &sIngestion_state
+var Ingestion_ingestionType = &sIngestion_ingestionType
+
+var IngestionDestination = &sIngestionDestination
+var IngestionDestination_arn = &sIngestionDestination_arn
+var IngestionDestination_ingestionArn = &sIngestionDestination_ingestionArn
+var IngestionDestination_processingConfiguration = &sIngestionDestination_processingConfiguration
+var IngestionDestination_destinationConfiguration = &sIngestionDestination_destinationConfiguration
+var IngestionDestination_status = &sIngestionDestination_status
+var IngestionDestination_statusReason = &sIngestionDestination_statusReason
+var IngestionDestination_createdAt = &sIngestionDestination_createdAt
+var IngestionDestination_updatedAt = &sIngestionDestination_updatedAt
+
+var _IngestionDestinationList = &s_IngestionDestinationList
+var _IngestionDestinationList_member = &s_IngestionDestinationList_member
+
+var IngestionDestinationStatus = &sIngestionDestinationStatus
+var IngestionDestinationStatus_ACTIVE = &sIngestionDestinationStatus_ACTIVE
+var IngestionDestinationStatus_FAILED = &sIngestionDestinationStatus_FAILED
+
+var IngestionDestinationSummary = &sIngestionDestinationSummary
+var IngestionDestinationSummary_arn = &sIngestionDestinationSummary_arn
+
+var _IngestionList = &s_IngestionList
+var _IngestionList_member = &s_IngestionList_member
+
+var IngestionState = &sIngestionState
+var IngestionState_ENABLED = &sIngestionState_ENABLED
+var IngestionState_DISABLED = &sIngestionState_DISABLED
+
+var IngestionSummary = &sIngestionSummary
+var IngestionSummary_arn = &sIngestionSummary_arn
+var IngestionSummary_app = &sIngestionSummary_app
+var IngestionSummary_tenantId = &sIngestionSummary_tenantId
+var IngestionSummary_state = &sIngestionSummary_state
+
+var IngestionType = &sIngestionType
+var IngestionType_AUDIT_LOG = &sIngestionType_AUDIT_LOG
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var _MaxResults = &s_MaxResults
+
+var Oauth2Credential = &sOauth2Credential
+var Oauth2Credential_clientId = &sOauth2Credential_clientId
+var Oauth2Credential_clientSecret = &sOauth2Credential_clientSecret
+
+var Persona = &sPersona
+var Persona_ADMIN = &sPersona_ADMIN
+var Persona_ENDUSER = &sPersona_ENDUSER
+
+var ProcessingConfiguration = &sProcessingConfiguration
+var ProcessingConfiguration_auditLog = &sProcessingConfiguration_auditLog
+
+var _RedirectUri = &s_RedirectUri
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResultStatus = &sResultStatus
+var ResultStatus_IN_PROGRESS = &sResultStatus_IN_PROGRESS
+var ResultStatus_COMPLETED = &sResultStatus_COMPLETED
+var ResultStatus_FAILED = &sResultStatus_FAILED
+var ResultStatus_EXPIRED = &sResultStatus_EXPIRED
+
+var S3Bucket = &sS3Bucket
+var S3Bucket_bucketName = &sS3Bucket_bucketName
+var S3Bucket_prefix = &sS3Bucket_prefix
+
+var Schema = &sSchema
+var Schema_OCSF = &sSchema_OCSF
+var Schema_RAW = &sSchema_RAW
+
+var _SensitiveString2048 = &s_SensitiveString2048
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _String120 = &s_String120
+
+var _String2048 = &s_String2048
+
+var _String255 = &s_String255
+
+var _String63 = &s_String63
+
+var _String64 = &s_String64
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TaskError = &sTaskError
+var TaskError_errorCode = &sTaskError_errorCode
+var TaskError_errorMessage = &sTaskError_errorMessage
+
+var _TaskIdList = &s_TaskIdList
+var _TaskIdList_member = &s_TaskIdList_member
+
+var Tenant = &sTenant
+var Tenant_tenantIdentifier = &sTenant_tenantIdentifier
+var Tenant_tenantDisplayName = &sTenant_tenantDisplayName
+
+var _TenantIdentifier = &s_TenantIdentifier
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var UserAccessResultItem = &sUserAccessResultItem
+var UserAccessResultItem_app = &sUserAccessResultItem_app
+var UserAccessResultItem_tenantId = &sUserAccessResultItem_tenantId
+var UserAccessResultItem_tenantDisplayName = &sUserAccessResultItem_tenantDisplayName
+var UserAccessResultItem_taskId = &sUserAccessResultItem_taskId
+var UserAccessResultItem_resultStatus = &sUserAccessResultItem_resultStatus
+var UserAccessResultItem_email = &sUserAccessResultItem_email
+var UserAccessResultItem_userId = &sUserAccessResultItem_userId
+var UserAccessResultItem_userFullName = &sUserAccessResultItem_userFullName
+var UserAccessResultItem_userFirstName = &sUserAccessResultItem_userFirstName
+var UserAccessResultItem_userLastName = &sUserAccessResultItem_userLastName
+var UserAccessResultItem_userStatus = &sUserAccessResultItem_userStatus
+var UserAccessResultItem_taskError = &sUserAccessResultItem_taskError
+
+var _UserAccessResultsList = &s_UserAccessResultsList
+var _UserAccessResultsList_member = &s_UserAccessResultsList_member
+
+var UserAccessTaskItem = &sUserAccessTaskItem
+var UserAccessTaskItem_app = &sUserAccessTaskItem_app
+var UserAccessTaskItem_tenantId = &sUserAccessTaskItem_tenantId
+var UserAccessTaskItem_taskId = &sUserAccessTaskItem_taskId
+var UserAccessTaskItem_error = &sUserAccessTaskItem_error
+
+var _UserAccessTasksList = &s_UserAccessTasksList
+var _UserAccessTasksList_member = &s_UserAccessTasksList_member
+
+var _UUID = &s_UUID
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var BatchGetUserAccessTasksRequest = &sBatchGetUserAccessTasksRequest
+var BatchGetUserAccessTasksRequest_appBundleIdentifier = &sBatchGetUserAccessTasksRequest_appBundleIdentifier
+var BatchGetUserAccessTasksRequest_taskIdList = &sBatchGetUserAccessTasksRequest_taskIdList
+
+var BatchGetUserAccessTasksResponse = &sBatchGetUserAccessTasksResponse
+var BatchGetUserAccessTasksResponse_userAccessResultsList = &sBatchGetUserAccessTasksResponse_userAccessResultsList
+
+var ConnectAppAuthorizationRequest = &sConnectAppAuthorizationRequest
+var ConnectAppAuthorizationRequest_appBundleIdentifier = &sConnectAppAuthorizationRequest_appBundleIdentifier
+var ConnectAppAuthorizationRequest_appAuthorizationIdentifier = &sConnectAppAuthorizationRequest_appAuthorizationIdentifier
+var ConnectAppAuthorizationRequest_authRequest = &sConnectAppAuthorizationRequest_authRequest
+
+var ConnectAppAuthorizationResponse = &sConnectAppAuthorizationResponse
+var ConnectAppAuthorizationResponse_appAuthorizationSummary = &sConnectAppAuthorizationResponse_appAuthorizationSummary
+
+var CreateAppAuthorizationRequest = &sCreateAppAuthorizationRequest
+var CreateAppAuthorizationRequest_appBundleIdentifier = &sCreateAppAuthorizationRequest_appBundleIdentifier
+var CreateAppAuthorizationRequest_app = &sCreateAppAuthorizationRequest_app
+var CreateAppAuthorizationRequest_credential = &sCreateAppAuthorizationRequest_credential
+var CreateAppAuthorizationRequest_tenant = &sCreateAppAuthorizationRequest_tenant
+var CreateAppAuthorizationRequest_authType = &sCreateAppAuthorizationRequest_authType
+var CreateAppAuthorizationRequest_clientToken = &sCreateAppAuthorizationRequest_clientToken
+var CreateAppAuthorizationRequest_tags = &sCreateAppAuthorizationRequest_tags
+
+var CreateAppAuthorizationResponse = &sCreateAppAuthorizationResponse
+var CreateAppAuthorizationResponse_appAuthorization = &sCreateAppAuthorizationResponse_appAuthorization
+
+var CreateAppBundleRequest = &sCreateAppBundleRequest
+var CreateAppBundleRequest_clientToken = &sCreateAppBundleRequest_clientToken
+var CreateAppBundleRequest_customerManagedKeyIdentifier = &sCreateAppBundleRequest_customerManagedKeyIdentifier
+var CreateAppBundleRequest_tags = &sCreateAppBundleRequest_tags
+
+var CreateAppBundleResponse = &sCreateAppBundleResponse
+var CreateAppBundleResponse_appBundle = &sCreateAppBundleResponse_appBundle
+
+var CreateIngestionDestinationRequest = &sCreateIngestionDestinationRequest
+var CreateIngestionDestinationRequest_appBundleIdentifier = &sCreateIngestionDestinationRequest_appBundleIdentifier
+var CreateIngestionDestinationRequest_ingestionIdentifier = &sCreateIngestionDestinationRequest_ingestionIdentifier
+var CreateIngestionDestinationRequest_processingConfiguration = &sCreateIngestionDestinationRequest_processingConfiguration
+var CreateIngestionDestinationRequest_destinationConfiguration = &sCreateIngestionDestinationRequest_destinationConfiguration
+var CreateIngestionDestinationRequest_clientToken = &sCreateIngestionDestinationRequest_clientToken
+var CreateIngestionDestinationRequest_tags = &sCreateIngestionDestinationRequest_tags
+
+var CreateIngestionDestinationResponse = &sCreateIngestionDestinationResponse
+var CreateIngestionDestinationResponse_ingestionDestination = &sCreateIngestionDestinationResponse_ingestionDestination
+
+var CreateIngestionRequest = &sCreateIngestionRequest
+var CreateIngestionRequest_appBundleIdentifier = &sCreateIngestionRequest_appBundleIdentifier
+var CreateIngestionRequest_app = &sCreateIngestionRequest_app
+var CreateIngestionRequest_tenantId = &sCreateIngestionRequest_tenantId
+var CreateIngestionRequest_ingestionType = &sCreateIngestionRequest_ingestionType
+var CreateIngestionRequest_clientToken = &sCreateIngestionRequest_clientToken
+var CreateIngestionRequest_tags = &sCreateIngestionRequest_tags
+
+var CreateIngestionResponse = &sCreateIngestionResponse
+var CreateIngestionResponse_ingestion = &sCreateIngestionResponse_ingestion
+
+var DeleteAppAuthorizationRequest = &sDeleteAppAuthorizationRequest
+var DeleteAppAuthorizationRequest_appBundleIdentifier = &sDeleteAppAuthorizationRequest_appBundleIdentifier
+var DeleteAppAuthorizationRequest_appAuthorizationIdentifier = &sDeleteAppAuthorizationRequest_appAuthorizationIdentifier
+
+var DeleteAppAuthorizationResponse = &sDeleteAppAuthorizationResponse
+
+var DeleteAppBundleRequest = &sDeleteAppBundleRequest
+var DeleteAppBundleRequest_appBundleIdentifier = &sDeleteAppBundleRequest_appBundleIdentifier
+
+var DeleteAppBundleResponse = &sDeleteAppBundleResponse
+
+var DeleteIngestionDestinationRequest = &sDeleteIngestionDestinationRequest
+var DeleteIngestionDestinationRequest_appBundleIdentifier = &sDeleteIngestionDestinationRequest_appBundleIdentifier
+var DeleteIngestionDestinationRequest_ingestionIdentifier = &sDeleteIngestionDestinationRequest_ingestionIdentifier
+var DeleteIngestionDestinationRequest_ingestionDestinationIdentifier = &sDeleteIngestionDestinationRequest_ingestionDestinationIdentifier
+
+var DeleteIngestionDestinationResponse = &sDeleteIngestionDestinationResponse
+
+var DeleteIngestionRequest = &sDeleteIngestionRequest
+var DeleteIngestionRequest_appBundleIdentifier = &sDeleteIngestionRequest_appBundleIdentifier
+var DeleteIngestionRequest_ingestionIdentifier = &sDeleteIngestionRequest_ingestionIdentifier
+
+var DeleteIngestionResponse = &sDeleteIngestionResponse
+
+var GetAppAuthorizationRequest = &sGetAppAuthorizationRequest
+var GetAppAuthorizationRequest_appBundleIdentifier = &sGetAppAuthorizationRequest_appBundleIdentifier
+var GetAppAuthorizationRequest_appAuthorizationIdentifier = &sGetAppAuthorizationRequest_appAuthorizationIdentifier
+
+var GetAppAuthorizationResponse = &sGetAppAuthorizationResponse
+var GetAppAuthorizationResponse_appAuthorization = &sGetAppAuthorizationResponse_appAuthorization
+
+var GetAppBundleRequest = &sGetAppBundleRequest
+var GetAppBundleRequest_appBundleIdentifier = &sGetAppBundleRequest_appBundleIdentifier
+
+var GetAppBundleResponse = &sGetAppBundleResponse
+var GetAppBundleResponse_appBundle = &sGetAppBundleResponse_appBundle
+
+var GetIngestionDestinationRequest = &sGetIngestionDestinationRequest
+var GetIngestionDestinationRequest_appBundleIdentifier = &sGetIngestionDestinationRequest_appBundleIdentifier
+var GetIngestionDestinationRequest_ingestionIdentifier = &sGetIngestionDestinationRequest_ingestionIdentifier
+var GetIngestionDestinationRequest_ingestionDestinationIdentifier = &sGetIngestionDestinationRequest_ingestionDestinationIdentifier
+
+var GetIngestionDestinationResponse = &sGetIngestionDestinationResponse
+var GetIngestionDestinationResponse_ingestionDestination = &sGetIngestionDestinationResponse_ingestionDestination
+
+var GetIngestionRequest = &sGetIngestionRequest
+var GetIngestionRequest_appBundleIdentifier = &sGetIngestionRequest_appBundleIdentifier
+var GetIngestionRequest_ingestionIdentifier = &sGetIngestionRequest_ingestionIdentifier
+
+var GetIngestionResponse = &sGetIngestionResponse
+var GetIngestionResponse_ingestion = &sGetIngestionResponse_ingestion
+
+var ListAppAuthorizationsRequest = &sListAppAuthorizationsRequest
+var ListAppAuthorizationsRequest_appBundleIdentifier = &sListAppAuthorizationsRequest_appBundleIdentifier
+var ListAppAuthorizationsRequest_maxResults = &sListAppAuthorizationsRequest_maxResults
+var ListAppAuthorizationsRequest_nextToken = &sListAppAuthorizationsRequest_nextToken
+
+var ListAppAuthorizationsResponse = &sListAppAuthorizationsResponse
+var ListAppAuthorizationsResponse_appAuthorizationSummaryList = &sListAppAuthorizationsResponse_appAuthorizationSummaryList
+var ListAppAuthorizationsResponse_nextToken = &sListAppAuthorizationsResponse_nextToken
+
+var ListAppBundlesRequest = &sListAppBundlesRequest
+var ListAppBundlesRequest_maxResults = &sListAppBundlesRequest_maxResults
+var ListAppBundlesRequest_nextToken = &sListAppBundlesRequest_nextToken
+
+var ListAppBundlesResponse = &sListAppBundlesResponse
+var ListAppBundlesResponse_appBundleSummaryList = &sListAppBundlesResponse_appBundleSummaryList
+var ListAppBundlesResponse_nextToken = &sListAppBundlesResponse_nextToken
+
+var ListIngestionDestinationsRequest = &sListIngestionDestinationsRequest
+var ListIngestionDestinationsRequest_appBundleIdentifier = &sListIngestionDestinationsRequest_appBundleIdentifier
+var ListIngestionDestinationsRequest_ingestionIdentifier = &sListIngestionDestinationsRequest_ingestionIdentifier
+var ListIngestionDestinationsRequest_maxResults = &sListIngestionDestinationsRequest_maxResults
+var ListIngestionDestinationsRequest_nextToken = &sListIngestionDestinationsRequest_nextToken
+
+var ListIngestionDestinationsResponse = &sListIngestionDestinationsResponse
+var ListIngestionDestinationsResponse_ingestionDestinations = &sListIngestionDestinationsResponse_ingestionDestinations
+var ListIngestionDestinationsResponse_nextToken = &sListIngestionDestinationsResponse_nextToken
+
+var ListIngestionsRequest = &sListIngestionsRequest
+var ListIngestionsRequest_appBundleIdentifier = &sListIngestionsRequest_appBundleIdentifier
+var ListIngestionsRequest_maxResults = &sListIngestionsRequest_maxResults
+var ListIngestionsRequest_nextToken = &sListIngestionsRequest_nextToken
+
+var ListIngestionsResponse = &sListIngestionsResponse
+var ListIngestionsResponse_ingestions = &sListIngestionsResponse_ingestions
+var ListIngestionsResponse_nextToken = &sListIngestionsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var StartIngestionRequest = &sStartIngestionRequest
+var StartIngestionRequest_ingestionIdentifier = &sStartIngestionRequest_ingestionIdentifier
+var StartIngestionRequest_appBundleIdentifier = &sStartIngestionRequest_appBundleIdentifier
+
+var StartIngestionResponse = &sStartIngestionResponse
+
+var StartUserAccessTasksRequest = &sStartUserAccessTasksRequest
+var StartUserAccessTasksRequest_appBundleIdentifier = &sStartUserAccessTasksRequest_appBundleIdentifier
+var StartUserAccessTasksRequest_email = &sStartUserAccessTasksRequest_email
+
+var StartUserAccessTasksResponse = &sStartUserAccessTasksResponse
+var StartUserAccessTasksResponse_userAccessTasksList = &sStartUserAccessTasksResponse_userAccessTasksList
+
+var StopIngestionRequest = &sStopIngestionRequest
+var StopIngestionRequest_ingestionIdentifier = &sStopIngestionRequest_ingestionIdentifier
+var StopIngestionRequest_appBundleIdentifier = &sStopIngestionRequest_appBundleIdentifier
+
+var StopIngestionResponse = &sStopIngestionResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAppAuthorizationRequest = &sUpdateAppAuthorizationRequest
+var UpdateAppAuthorizationRequest_appBundleIdentifier = &sUpdateAppAuthorizationRequest_appBundleIdentifier
+var UpdateAppAuthorizationRequest_appAuthorizationIdentifier = &sUpdateAppAuthorizationRequest_appAuthorizationIdentifier
+var UpdateAppAuthorizationRequest_credential = &sUpdateAppAuthorizationRequest_credential
+var UpdateAppAuthorizationRequest_tenant = &sUpdateAppAuthorizationRequest_tenant
+
+var UpdateAppAuthorizationResponse = &sUpdateAppAuthorizationResponse
+var UpdateAppAuthorizationResponse_appAuthorization = &sUpdateAppAuthorizationResponse_appAuthorization
+
+var UpdateIngestionDestinationRequest = &sUpdateIngestionDestinationRequest
+var UpdateIngestionDestinationRequest_appBundleIdentifier = &sUpdateIngestionDestinationRequest_appBundleIdentifier
+var UpdateIngestionDestinationRequest_ingestionIdentifier = &sUpdateIngestionDestinationRequest_ingestionIdentifier
+var UpdateIngestionDestinationRequest_ingestionDestinationIdentifier = &sUpdateIngestionDestinationRequest_ingestionDestinationIdentifier
+var UpdateIngestionDestinationRequest_destinationConfiguration = &sUpdateIngestionDestinationRequest_destinationConfiguration
+
+var UpdateIngestionDestinationResponse = &sUpdateIngestionDestinationResponse
+var UpdateIngestionDestinationResponse_ingestionDestination = &sUpdateIngestionDestinationResponse_ingestionDestination
+
+var FabricFrontEndService = &smithy.ServiceSchema{Schema: &s_FabricFrontEndService, Version: "2023-05-19"}

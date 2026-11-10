@@ -4,214 +4,232 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteConnectionRecordingPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "DeleteConnectionRecordingPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eDeleteConnectionRecordingPreferences                                        smithy.SchemaExtensions
+	eGetConnectionRecordingPreferences                                           smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferences                                        smithy.SchemaExtensions
+	e_SSMGuiConnect                                                              smithy.SchemaExtensions
+	eAccessDeniedException                                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                                               smithy.SchemaExtensions
+	e_AccountId                                                                  smithy.SchemaExtensions
+	e_BucketName                                                                 smithy.SchemaExtensions
+	e_ClientToken                                                                smithy.SchemaExtensions
+	eConflictException                                                           smithy.SchemaExtensions
+	eConflictException_message                                                   smithy.SchemaExtensions
+	eConnectionRecordingPreferences                                              smithy.SchemaExtensions
+	eConnectionRecordingPreferences_RecordingDestinations                        smithy.SchemaExtensions
+	eConnectionRecordingPreferences_KMSKeyArn                                    smithy.SchemaExtensions
+	e_ErrorMessage                                                               smithy.SchemaExtensions
+	eInternalServerException                                                     smithy.SchemaExtensions
+	eInternalServerException_message                                             smithy.SchemaExtensions
+	eRecordingDestinations                                                       smithy.SchemaExtensions
+	eRecordingDestinations_S3Buckets                                             smithy.SchemaExtensions
+	eResourceNotFoundException                                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                                           smithy.SchemaExtensions
+	eS3Bucket                                                                    smithy.SchemaExtensions
+	eS3Bucket_BucketOwner                                                        smithy.SchemaExtensions
+	eS3Bucket_BucketName                                                         smithy.SchemaExtensions
+	e_S3Buckets                                                                  smithy.SchemaExtensions
+	e_S3Buckets_member                                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                       smithy.SchemaExtensions
+	eThrottlingException                                                         smithy.SchemaExtensions
+	eThrottlingException_message                                                 smithy.SchemaExtensions
+	eValidationException                                                         smithy.SchemaExtensions
+	eValidationException_message                                                 smithy.SchemaExtensions
+	eDeleteConnectionRecordingPreferencesRequest                                 smithy.SchemaExtensions
+	eDeleteConnectionRecordingPreferencesRequest_ClientToken                     smithy.SchemaExtensions
+	eDeleteConnectionRecordingPreferencesResponse                                smithy.SchemaExtensions
+	eDeleteConnectionRecordingPreferencesResponse_ClientToken                    smithy.SchemaExtensions
+	eGetConnectionRecordingPreferencesResponse                                   smithy.SchemaExtensions
+	eGetConnectionRecordingPreferencesResponse_ClientToken                       smithy.SchemaExtensions
+	eGetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences    smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesRequest                                 smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences  smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesRequest_ClientToken                     smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesResponse                                smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesResponse_ClientToken                    smithy.SchemaExtensions
+	eUpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences smithy.SchemaExtensions
+)
+
+var (
+	iDeleteConnectionRecordingPreferences         = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "DeleteConnectionRecordingPreferences"}
+	iGetConnectionRecordingPreferences            = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "GetConnectionRecordingPreferences"}
+	iUpdateConnectionRecordingPreferences         = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "UpdateConnectionRecordingPreferences"}
+	i_SSMGuiConnect                               = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "SSMGuiConnect"}
+	iAccessDeniedException                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "AccessDeniedException"}
+	i_AccountId                                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "AccountId"}
+	i_BucketName                                  = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "BucketName"}
+	i_ClientToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ClientToken"}
+	iConflictException                            = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ConflictException"}
+	iConnectionRecordingPreferences               = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ConnectionRecordingPreferences"}
+	i_ErrorMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ErrorMessage"}
+	iInternalServerException                      = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "InternalServerException"}
+	iRecordingDestinations                        = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "RecordingDestinations"}
+	iResourceNotFoundException                    = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ResourceNotFoundException"}
+	iS3Bucket                                     = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "S3Bucket"}
+	i_S3Buckets                                   = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "S3Buckets"}
+	iServiceQuotaExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ServiceQuotaExceededException"}
+	iThrottlingException                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ThrottlingException"}
+	iValidationException                          = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "ValidationException"}
+	iDeleteConnectionRecordingPreferencesRequest  = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "DeleteConnectionRecordingPreferencesRequest"}
+	iDeleteConnectionRecordingPreferencesResponse = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "DeleteConnectionRecordingPreferencesResponse"}
+	iGetConnectionRecordingPreferencesResponse    = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "GetConnectionRecordingPreferencesResponse"}
+	iUpdateConnectionRecordingPreferencesRequest  = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "UpdateConnectionRecordingPreferencesRequest"}
+	iUpdateConnectionRecordingPreferencesResponse = smithy.ShapeName{Namespace: "com.amazonaws.ssmguiconnect", Name: "UpdateConnectionRecordingPreferencesResponse"}
+	pString                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteConnectionRecordingPreferences",
-	Code: 200})
-
-var GetConnectionRecordingPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "GetConnectionRecordingPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetConnectionRecordingPreferences",
-	Code: 200})
-
-var UpdateConnectionRecordingPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "UpdateConnectionRecordingPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateConnectionRecordingPreferences",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
 
-var _SSMGuiConnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "SSMGuiConnect",
-}, smithy.ShapeTypeService, 0)
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConnectionRecordingPreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionRecordingPreferences_RecordingDestinations, &sConnectionRecordingPreferences_KMSKeyArn}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mRecordingDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordingDestinations_S3Buckets}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3Bucket = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Bucket_BucketOwner, &sS3Bucket_BucketName}}
+var m_S3Buckets = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3Buckets_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mDeleteConnectionRecordingPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRecordingPreferencesRequest_ClientToken}}
+var mDeleteConnectionRecordingPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRecordingPreferencesResponse_ClientToken}}
+var mGetConnectionRecordingPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionRecordingPreferencesResponse_ClientToken, &sGetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences}}
+var mUpdateConnectionRecordingPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences, &sUpdateConnectionRecordingPreferencesRequest_ClientToken}}
+var mUpdateConnectionRecordingPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRecordingPreferencesResponse_ClientToken, &sUpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences}}
 
-var SSMGuiConnect = smithy.NewServiceSchema(_SSMGuiConnect, "2021-05-01")
+var sDeleteConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRecordingPreferences, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnectionRecordingPreferences})
+var sGetConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRecordingPreferences, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetConnectionRecordingPreferences})
+var sUpdateConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRecordingPreferences, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConnectionRecordingPreferences})
+var s_SSMGuiConnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SSMGuiConnect, Type: smithy.ShapeTypeService, Ext: &e_SSMGuiConnect})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &e_BucketName})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionRecordingPreferences, Members: &mConnectionRecordingPreferences, Type: smithy.ShapeTypeStructure, Ext: &eConnectionRecordingPreferences})
+var sConnectionRecordingPreferences_RecordingDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordingDestinations", ID: &iRecordingDestinations, Members: &mRecordingDestinations, Type: smithy.ShapeTypeStructure, Ext: &eConnectionRecordingPreferences_RecordingDestinations})
+var sConnectionRecordingPreferences_KMSKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConnectionRecordingPreferences_KMSKeyArn})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sRecordingDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordingDestinations, Members: &mRecordingDestinations, Type: smithy.ShapeTypeStructure, Ext: &eRecordingDestinations})
+var sRecordingDestinations_S3Buckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Buckets", ID: &i_S3Buckets, Members: &m_S3Buckets, Type: smithy.ShapeTypeList, Ext: &eRecordingDestinations_S3Buckets})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Bucket, Members: &mS3Bucket, Type: smithy.ShapeTypeStructure, Ext: &eS3Bucket})
+var sS3Bucket_BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eS3Bucket_BucketOwner})
+var sS3Bucket_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &eS3Bucket_BucketName})
+var s_S3Buckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Buckets, Members: &m_S3Buckets, Type: smithy.ShapeTypeList, Ext: &e_S3Buckets})
+var s_S3Buckets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3Bucket, Members: &mS3Bucket, Type: smithy.ShapeTypeStructure, Ext: &e_S3Buckets_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sDeleteConnectionRecordingPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRecordingPreferencesRequest, Members: &mDeleteConnectionRecordingPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionRecordingPreferencesRequest})
+var sDeleteConnectionRecordingPreferencesRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRecordingPreferencesRequest_ClientToken})
+var sDeleteConnectionRecordingPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRecordingPreferencesResponse, Members: &mDeleteConnectionRecordingPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionRecordingPreferencesResponse})
+var sDeleteConnectionRecordingPreferencesResponse_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRecordingPreferencesResponse_ClientToken})
+var sGetConnectionRecordingPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRecordingPreferencesResponse, Members: &mGetConnectionRecordingPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionRecordingPreferencesResponse})
+var sGetConnectionRecordingPreferencesResponse_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetConnectionRecordingPreferencesResponse_ClientToken})
+var sGetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionRecordingPreferences", ID: &iConnectionRecordingPreferences, Members: &mConnectionRecordingPreferences, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences})
+var sUpdateConnectionRecordingPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRecordingPreferencesRequest, Members: &mUpdateConnectionRecordingPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionRecordingPreferencesRequest})
+var sUpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionRecordingPreferences", ID: &iConnectionRecordingPreferences, Members: &mConnectionRecordingPreferences, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences})
+var sUpdateConnectionRecordingPreferencesRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRecordingPreferencesRequest_ClientToken})
+var sUpdateConnectionRecordingPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRecordingPreferencesResponse, Members: &mUpdateConnectionRecordingPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionRecordingPreferencesResponse})
+var sUpdateConnectionRecordingPreferencesResponse_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRecordingPreferencesResponse_ClientToken})
+var sUpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionRecordingPreferences", ID: &iConnectionRecordingPreferences, Members: &mConnectionRecordingPreferences, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences})
 
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
+var DeleteConnectionRecordingPreferences = &sDeleteConnectionRecordingPreferences
 
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
+var GetConnectionRecordingPreferences = &sGetConnectionRecordingPreferences
 
-var _BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "BucketName",
-}, smithy.ShapeTypeString, 0)
+var UpdateConnectionRecordingPreferences = &sUpdateConnectionRecordingPreferences
 
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
+var _SSMGuiConnect = &s_SSMGuiConnect
 
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
 
-var ConnectionRecordingPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ConnectionRecordingPreferences",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectionRecordingPreferences_RecordingDestinations *smithy.Schema
+var _AccountId = &s_AccountId
 
-var ConnectionRecordingPreferences_KMSKeyArn *smithy.Schema
+var _BucketName = &s_BucketName
 
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
+var _ClientToken = &s_ClientToken
 
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
 
-var RecordingDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "RecordingDestinations",
-}, smithy.ShapeTypeStructure, 1)
-var RecordingDestinations_S3Buckets *smithy.Schema
+var ConnectionRecordingPreferences = &sConnectionRecordingPreferences
+var ConnectionRecordingPreferences_RecordingDestinations = &sConnectionRecordingPreferences_RecordingDestinations
+var ConnectionRecordingPreferences_KMSKeyArn = &sConnectionRecordingPreferences_KMSKeyArn
 
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
+var _ErrorMessage = &s_ErrorMessage
 
-var S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeStructure, 2)
-var S3Bucket_BucketOwner *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
 
-var S3Bucket_BucketName *smithy.Schema
+var RecordingDestinations = &sRecordingDestinations
+var RecordingDestinations_S3Buckets = &sRecordingDestinations_S3Buckets
 
-var _S3Buckets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "S3Buckets",
-}, smithy.ShapeTypeList, 1)
-var _S3Buckets_member *smithy.Schema
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
 
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
+var S3Bucket = &sS3Bucket
+var S3Bucket_BucketOwner = &sS3Bucket_BucketOwner
+var S3Bucket_BucketName = &sS3Bucket_BucketName
 
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
+var _S3Buckets = &s_S3Buckets
+var _S3Buckets_member = &s_S3Buckets_member
 
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
 
-var DeleteConnectionRecordingPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "DeleteConnectionRecordingPreferencesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRecordingPreferencesRequest_ClientToken *smithy.Schema
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
 
-var DeleteConnectionRecordingPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "DeleteConnectionRecordingPreferencesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRecordingPreferencesResponse_ClientToken *smithy.Schema
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
 
-var GetConnectionRecordingPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "GetConnectionRecordingPreferencesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectionRecordingPreferencesResponse_ClientToken *smithy.Schema
+var DeleteConnectionRecordingPreferencesRequest = &sDeleteConnectionRecordingPreferencesRequest
+var DeleteConnectionRecordingPreferencesRequest_ClientToken = &sDeleteConnectionRecordingPreferencesRequest_ClientToken
 
-var GetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences *smithy.Schema
+var DeleteConnectionRecordingPreferencesResponse = &sDeleteConnectionRecordingPreferencesResponse
+var DeleteConnectionRecordingPreferencesResponse_ClientToken = &sDeleteConnectionRecordingPreferencesResponse_ClientToken
 
-var UpdateConnectionRecordingPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "UpdateConnectionRecordingPreferencesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences *smithy.Schema
+var GetConnectionRecordingPreferencesResponse = &sGetConnectionRecordingPreferencesResponse
+var GetConnectionRecordingPreferencesResponse_ClientToken = &sGetConnectionRecordingPreferencesResponse_ClientToken
+var GetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = &sGetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences
 
-var UpdateConnectionRecordingPreferencesRequest_ClientToken *smithy.Schema
+var UpdateConnectionRecordingPreferencesRequest = &sUpdateConnectionRecordingPreferencesRequest
+var UpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences = &sUpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences
+var UpdateConnectionRecordingPreferencesRequest_ClientToken = &sUpdateConnectionRecordingPreferencesRequest_ClientToken
 
-var UpdateConnectionRecordingPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmguiconnect",
-	Name:      "UpdateConnectionRecordingPreferencesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionRecordingPreferencesResponse_ClientToken *smithy.Schema
+var UpdateConnectionRecordingPreferencesResponse = &sUpdateConnectionRecordingPreferencesResponse
+var UpdateConnectionRecordingPreferencesResponse_ClientToken = &sUpdateConnectionRecordingPreferencesResponse_ClientToken
+var UpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = &sUpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences
 
-var UpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	S3Bucket_BucketOwner = S3Bucket.AddMember("BucketOwner", _AccountId)
-
-	S3Bucket_BucketName = S3Bucket.AddMember("BucketName", _BucketName)
-
-	_S3Buckets_member = _S3Buckets.AddMember("member", S3Bucket)
-
-	RecordingDestinations_S3Buckets = RecordingDestinations.AddMember("S3Buckets", _S3Buckets)
-
-	ConnectionRecordingPreferences_RecordingDestinations = ConnectionRecordingPreferences.AddMember("RecordingDestinations", RecordingDestinations)
-
-	ConnectionRecordingPreferences_KMSKeyArn = ConnectionRecordingPreferences.AddMember("KMSKeyArn", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	DeleteConnectionRecordingPreferencesRequest_ClientToken = DeleteConnectionRecordingPreferencesRequest.AddMember("ClientToken", _ClientToken)
-
-	DeleteConnectionRecordingPreferencesResponse_ClientToken = DeleteConnectionRecordingPreferencesResponse.AddMember("ClientToken", _ClientToken)
-
-	GetConnectionRecordingPreferencesResponse_ClientToken = GetConnectionRecordingPreferencesResponse.AddMember("ClientToken", _ClientToken)
-
-	GetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = GetConnectionRecordingPreferencesResponse.AddMember("ConnectionRecordingPreferences", ConnectionRecordingPreferences)
-
-	UpdateConnectionRecordingPreferencesRequest_ConnectionRecordingPreferences = UpdateConnectionRecordingPreferencesRequest.AddMember("ConnectionRecordingPreferences", ConnectionRecordingPreferences)
-
-	UpdateConnectionRecordingPreferencesRequest_ClientToken = UpdateConnectionRecordingPreferencesRequest.AddMember("ClientToken", _ClientToken)
-
-	UpdateConnectionRecordingPreferencesResponse_ClientToken = UpdateConnectionRecordingPreferencesResponse.AddMember("ClientToken", _ClientToken)
-
-	UpdateConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences = UpdateConnectionRecordingPreferencesResponse.AddMember("ConnectionRecordingPreferences", ConnectionRecordingPreferences)
-
-}
+var SSMGuiConnect = &smithy.ServiceSchema{Schema: &s_SSMGuiConnect, Version: "2021-05-01"}

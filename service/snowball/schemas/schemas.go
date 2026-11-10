@@ -4,2285 +4,2213 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateAddress",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLongTermPricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateLongTermPricing",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateReturnShippingLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateReturnShippingLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddress",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddresses",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeReturnShippingLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeReturnShippingLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetJobManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobManifest",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetJobUnlockCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobUnlockCode",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSnowballUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSnowballUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSoftwareUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSoftwareUpdates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListClusterJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClusterJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCompatibleImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListCompatibleImages",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLongTermPricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListLongTermPricing",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPickupLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListPickupLocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListServiceVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateJobShipmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJobShipmentState",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLongTermPricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateLongTermPricing",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSIESnowballJobManagementService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "AWSIESnowballJobManagementService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSIESnowballJobManagementService = smithy.NewServiceSchema(_AWSIESnowballJobManagementService, "2016-06-30")
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 15)
-var Address_AddressId *smithy.Schema
-
-var Address_Name *smithy.Schema
-
-var Address_Company *smithy.Schema
-
-var Address_Street1 *smithy.Schema
-
-var Address_Street2 *smithy.Schema
-
-var Address_Street3 *smithy.Schema
-
-var Address_City *smithy.Schema
-
-var Address_StateOrProvince *smithy.Schema
-
-var Address_PrefectureOrDistrict *smithy.Schema
-
-var Address_Landmark *smithy.Schema
-
-var Address_Country *smithy.Schema
-
-var Address_PostalCode *smithy.Schema
-
-var Address_PhoneNumber *smithy.Schema
-
-var Address_IsRestricted *smithy.Schema
-
-var Address_Type *smithy.Schema
-
-var _AddressId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "AddressId",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "AddressList",
-}, smithy.ShapeTypeList, 1)
-var _AddressList_member *smithy.Schema
-
-var AddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "AddressType",
-}, smithy.ShapeTypeEnum, 2)
-var AddressType_CUST_PICKUP *smithy.Schema
-
-var AddressType_AWS_SHIP *smithy.Schema
-
-var _AmiId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "AmiId",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClusterId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterId",
-}, smithy.ShapeTypeString, 0)
-
-var ClusterLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ClusterLimitExceededException_Message *smithy.Schema
-
-var ClusterListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterListEntry",
-}, smithy.ShapeTypeStructure, 4)
-var ClusterListEntry_ClusterId *smithy.Schema
-
-var ClusterListEntry_ClusterState *smithy.Schema
-
-var ClusterListEntry_CreationDate *smithy.Schema
-
-var ClusterListEntry_Description *smithy.Schema
-
-var _ClusterListEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterListEntryList",
-}, smithy.ShapeTypeList, 1)
-var _ClusterListEntryList_member *smithy.Schema
-
-var ClusterMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterMetadata",
-}, smithy.ShapeTypeStructure, 15)
-var ClusterMetadata_ClusterId *smithy.Schema
-
-var ClusterMetadata_Description *smithy.Schema
-
-var ClusterMetadata_KmsKeyARN *smithy.Schema
-
-var ClusterMetadata_RoleARN *smithy.Schema
-
-var ClusterMetadata_ClusterState *smithy.Schema
-
-var ClusterMetadata_JobType *smithy.Schema
-
-var ClusterMetadata_SnowballType *smithy.Schema
-
-var ClusterMetadata_CreationDate *smithy.Schema
-
-var ClusterMetadata_Resources *smithy.Schema
-
-var ClusterMetadata_AddressId *smithy.Schema
-
-var ClusterMetadata_ShippingOption *smithy.Schema
-
-var ClusterMetadata_Notification *smithy.Schema
-
-var ClusterMetadata_ForwardingAddressId *smithy.Schema
-
-var ClusterMetadata_TaxDocuments *smithy.Schema
-
-var ClusterMetadata_OnDeviceServiceConfiguration *smithy.Schema
-
-var ClusterState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ClusterState",
-}, smithy.ShapeTypeEnum, 5)
-var ClusterState_AWAITING_QUORUM *smithy.Schema
-
-var ClusterState_PENDING *smithy.Schema
-
-var ClusterState_IN_USE *smithy.Schema
-
-var ClusterState_COMPLETE *smithy.Schema
-
-var ClusterState_CANCELLED *smithy.Schema
-
-var CompatibleImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CompatibleImage",
-}, smithy.ShapeTypeStructure, 2)
-var CompatibleImage_AmiId *smithy.Schema
-
-var CompatibleImage_Name *smithy.Schema
-
-var _CompatibleImageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CompatibleImageList",
-}, smithy.ShapeTypeList, 1)
-var _CompatibleImageList_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ConflictException_ConflictResource *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var DataTransfer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DataTransfer",
-}, smithy.ShapeTypeStructure, 4)
-var DataTransfer_BytesTransferred *smithy.Schema
-
-var DataTransfer_ObjectsTransferred *smithy.Schema
-
-var DataTransfer_TotalBytes *smithy.Schema
-
-var DataTransfer_TotalObjects *smithy.Schema
-
-var DependentService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DependentService",
-}, smithy.ShapeTypeStructure, 2)
-var DependentService_ServiceName *smithy.Schema
-
-var DependentService_ServiceVersion *smithy.Schema
-
-var _DependentServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DependentServiceList",
-}, smithy.ShapeTypeList, 1)
-var _DependentServiceList_member *smithy.Schema
-
-var DeviceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DeviceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DeviceConfiguration_SnowconeDeviceConfiguration *smithy.Schema
-
-var _DevicePickupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DevicePickupId",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DeviceServiceName",
-}, smithy.ShapeTypeEnum, 2)
-var DeviceServiceName_NFS_ON_DEVICE_SERVICE *smithy.Schema
-
-var DeviceServiceName_S3_ON_DEVICE_SERVICE *smithy.Schema
-
-var Ec2AmiResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Ec2AmiResource",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2AmiResource_AmiId *smithy.Schema
-
-var Ec2AmiResource_SnowballAmiId *smithy.Schema
-
-var _Ec2AmiResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Ec2AmiResourceList",
-}, smithy.ShapeTypeList, 1)
-var _Ec2AmiResourceList_member *smithy.Schema
-
-var Ec2RequestFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Ec2RequestFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var Ec2RequestFailedException_Message *smithy.Schema
-
-var EKSOnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "EKSOnDeviceServiceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EKSOnDeviceServiceConfiguration_KubernetesVersion *smithy.Schema
-
-var EKSOnDeviceServiceConfiguration_EKSAnywhereVersion *smithy.Schema
-
-var _Email = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Email",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EventTriggerDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "EventTriggerDefinition",
-}, smithy.ShapeTypeStructure, 1)
-var EventTriggerDefinition_EventResourceARN *smithy.Schema
-
-var _EventTriggerDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "EventTriggerDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _EventTriggerDefinitionList_member *smithy.Schema
-
-var _GSTIN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GSTIN",
-}, smithy.ShapeTypeString, 0)
-
-var ImpactLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ImpactLevel",
-}, smithy.ShapeTypeEnum, 5)
-var ImpactLevel_IL2 *smithy.Schema
-
-var ImpactLevel_IL4 *smithy.Schema
-
-var ImpactLevel_IL5 *smithy.Schema
-
-var ImpactLevel_IL6 *smithy.Schema
-
-var ImpactLevel_IL99 *smithy.Schema
-
-var INDTaxDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "INDTaxDocuments",
-}, smithy.ShapeTypeStructure, 1)
-var INDTaxDocuments_GSTIN *smithy.Schema
-
-var _InitialClusterSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InitialClusterSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidAddressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InvalidAddressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidAddressException_Message *smithy.Schema
-
-var InvalidInputCombinationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InvalidInputCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidInputCombinationException_Message *smithy.Schema
-
-var InvalidJobStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InvalidJobStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidJobStateException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidResourceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "InvalidResourceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidResourceException_Message *smithy.Schema
-
-var InvalidResourceException_ResourceType *smithy.Schema
-
-var _JavaBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JavaBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var JobListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobListEntry",
-}, smithy.ShapeTypeStructure, 7)
-var JobListEntry_JobId *smithy.Schema
-
-var JobListEntry_JobState *smithy.Schema
-
-var JobListEntry_IsMaster *smithy.Schema
-
-var JobListEntry_JobType *smithy.Schema
-
-var JobListEntry_SnowballType *smithy.Schema
-
-var JobListEntry_CreationDate *smithy.Schema
-
-var JobListEntry_Description *smithy.Schema
-
-var _JobListEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobListEntryList",
-}, smithy.ShapeTypeList, 1)
-var _JobListEntryList_member *smithy.Schema
-
-var JobLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobLogs",
-}, smithy.ShapeTypeStructure, 3)
-var JobLogs_JobCompletionReportURI *smithy.Schema
-
-var JobLogs_JobSuccessLogURI *smithy.Schema
-
-var JobLogs_JobFailureLogURI *smithy.Schema
-
-var JobMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobMetadata",
-}, smithy.ShapeTypeStructure, 25)
-var JobMetadata_JobId *smithy.Schema
-
-var JobMetadata_JobState *smithy.Schema
-
-var JobMetadata_JobType *smithy.Schema
-
-var JobMetadata_SnowballType *smithy.Schema
-
-var JobMetadata_CreationDate *smithy.Schema
-
-var JobMetadata_Resources *smithy.Schema
-
-var JobMetadata_Description *smithy.Schema
-
-var JobMetadata_KmsKeyARN *smithy.Schema
-
-var JobMetadata_RoleARN *smithy.Schema
-
-var JobMetadata_AddressId *smithy.Schema
-
-var JobMetadata_ShippingDetails *smithy.Schema
-
-var JobMetadata_SnowballCapacityPreference *smithy.Schema
-
-var JobMetadata_Notification *smithy.Schema
-
-var JobMetadata_DataTransferProgress *smithy.Schema
-
-var JobMetadata_JobLogInfo *smithy.Schema
-
-var JobMetadata_ClusterId *smithy.Schema
-
-var JobMetadata_ForwardingAddressId *smithy.Schema
-
-var JobMetadata_TaxDocuments *smithy.Schema
-
-var JobMetadata_DeviceConfiguration *smithy.Schema
-
-var JobMetadata_RemoteManagement *smithy.Schema
-
-var JobMetadata_LongTermPricingId *smithy.Schema
-
-var JobMetadata_OnDeviceServiceConfiguration *smithy.Schema
-
-var JobMetadata_ImpactLevel *smithy.Schema
-
-var JobMetadata_PickupDetails *smithy.Schema
-
-var JobMetadata_SnowballId *smithy.Schema
-
-var _JobMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _JobMetadataList_member *smithy.Schema
-
-var JobResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobResource",
-}, smithy.ShapeTypeStructure, 3)
-var JobResource_S3Resources *smithy.Schema
-
-var JobResource_LambdaResources *smithy.Schema
-
-var JobResource_Ec2AmiResources *smithy.Schema
-
-var JobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobState",
-}, smithy.ShapeTypeEnum, 13)
-var JobState_NEW *smithy.Schema
-
-var JobState_PREPARING_APPLIANCE *smithy.Schema
-
-var JobState_PREPARING_SHIPMENT *smithy.Schema
-
-var JobState_IN_TRANSIT_TO_CUSTOMER *smithy.Schema
-
-var JobState_WITH_CUSTOMER *smithy.Schema
-
-var JobState_IN_TRANSIT_TO_AWS *smithy.Schema
-
-var JobState_WITH_AWS_SORTING_FACILITY *smithy.Schema
-
-var JobState_WITH_AWS *smithy.Schema
-
-var JobState_IN_PROGRESS *smithy.Schema
-
-var JobState_COMPLETE *smithy.Schema
-
-var JobState_CANCELLED *smithy.Schema
-
-var JobState_LISTING *smithy.Schema
-
-var JobState_PENDING *smithy.Schema
-
-var _JobStateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobStateList",
-}, smithy.ShapeTypeList, 1)
-var _JobStateList_member *smithy.Schema
-
-var JobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "JobType",
-}, smithy.ShapeTypeEnum, 3)
-var JobType_IMPORT *smithy.Schema
-
-var JobType_EXPORT *smithy.Schema
-
-var JobType_LOCAL_USE *smithy.Schema
-
-var KeyRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "KeyRange",
-}, smithy.ShapeTypeStructure, 2)
-var KeyRange_BeginMarker *smithy.Schema
-
-var KeyRange_EndMarker *smithy.Schema
-
-var _KmsKeyARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "KmsKeyARN",
-}, smithy.ShapeTypeString, 0)
-
-var KMSRequestFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "KMSRequestFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSRequestFailedException_Message *smithy.Schema
-
-var LambdaResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LambdaResource",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaResource_LambdaArn *smithy.Schema
-
-var LambdaResource_EventTriggers *smithy.Schema
-
-var _LambdaResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LambdaResourceList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaResourceList_member *smithy.Schema
-
-var _ListLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _LongTermPricingAssociatedJobIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingAssociatedJobIdList",
-}, smithy.ShapeTypeList, 1)
-var _LongTermPricingAssociatedJobIdList_member *smithy.Schema
-
-var _LongTermPricingEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingEntryList",
-}, smithy.ShapeTypeList, 1)
-var _LongTermPricingEntryList_member *smithy.Schema
-
-var _LongTermPricingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingId",
-}, smithy.ShapeTypeString, 0)
-
-var _LongTermPricingIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingIdList",
-}, smithy.ShapeTypeList, 1)
-var _LongTermPricingIdList_member *smithy.Schema
-
-var LongTermPricingListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingListEntry",
-}, smithy.ShapeTypeStructure, 10)
-var LongTermPricingListEntry_LongTermPricingId *smithy.Schema
-
-var LongTermPricingListEntry_LongTermPricingEndDate *smithy.Schema
-
-var LongTermPricingListEntry_LongTermPricingStartDate *smithy.Schema
-
-var LongTermPricingListEntry_LongTermPricingType *smithy.Schema
-
-var LongTermPricingListEntry_CurrentActiveJob *smithy.Schema
-
-var LongTermPricingListEntry_ReplacementJob *smithy.Schema
-
-var LongTermPricingListEntry_IsLongTermPricingAutoRenew *smithy.Schema
-
-var LongTermPricingListEntry_LongTermPricingStatus *smithy.Schema
-
-var LongTermPricingListEntry_SnowballType *smithy.Schema
-
-var LongTermPricingListEntry_JobIds *smithy.Schema
-
-var LongTermPricingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "LongTermPricingType",
-}, smithy.ShapeTypeEnum, 3)
-var LongTermPricingType_ONE_YEAR *smithy.Schema
-
-var LongTermPricingType_THREE_YEAR *smithy.Schema
-
-var LongTermPricingType_ONE_MONTH *smithy.Schema
-
-var NFSOnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "NFSOnDeviceServiceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var NFSOnDeviceServiceConfiguration_StorageLimit *smithy.Schema
-
-var NFSOnDeviceServiceConfiguration_StorageUnit *smithy.Schema
-
-var _NodeFaultTolerance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "NodeFaultTolerance",
-}, smithy.ShapeTypeInteger, 0)
-
-var Notification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Notification",
-}, smithy.ShapeTypeStructure, 4)
-var Notification_SnsTopicARN *smithy.Schema
-
-var Notification_JobStatesToNotify *smithy.Schema
-
-var Notification_NotifyAll *smithy.Schema
-
-var Notification_DevicePickupSnsTopicARN *smithy.Schema
-
-var OnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "OnDeviceServiceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var OnDeviceServiceConfiguration_NFSOnDeviceService *smithy.Schema
-
-var OnDeviceServiceConfiguration_TGWOnDeviceService *smithy.Schema
-
-var OnDeviceServiceConfiguration_EKSOnDeviceService *smithy.Schema
-
-var OnDeviceServiceConfiguration_S3OnDeviceService *smithy.Schema
-
-var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PickupDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "PickupDetails",
-}, smithy.ShapeTypeStructure, 7)
-var PickupDetails_Name *smithy.Schema
-
-var PickupDetails_PhoneNumber *smithy.Schema
-
-var PickupDetails_Email *smithy.Schema
-
-var PickupDetails_IdentificationNumber *smithy.Schema
-
-var PickupDetails_IdentificationExpirationDate *smithy.Schema
-
-var PickupDetails_IdentificationIssuingOrg *smithy.Schema
-
-var PickupDetails_DevicePickupId *smithy.Schema
-
-var RemoteManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "RemoteManagement",
-}, smithy.ShapeTypeEnum, 3)
-var RemoteManagement_INSTALLED_ONLY *smithy.Schema
-
-var RemoteManagement_INSTALLED_AUTOSTART *smithy.Schema
-
-var RemoteManagement_NOT_INSTALLED *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ReturnShippingLabelAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ReturnShippingLabelAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ReturnShippingLabelAlreadyExistsException_Message *smithy.Schema
-
-var _RoleARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "RoleARN",
-}, smithy.ShapeTypeString, 0)
-
-var S3OnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "S3OnDeviceServiceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var S3OnDeviceServiceConfiguration_StorageLimit *smithy.Schema
-
-var S3OnDeviceServiceConfiguration_StorageUnit *smithy.Schema
-
-var S3OnDeviceServiceConfiguration_ServiceSize *smithy.Schema
-
-var S3OnDeviceServiceConfiguration_FaultTolerance *smithy.Schema
-
-var S3Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "S3Resource",
-}, smithy.ShapeTypeStructure, 3)
-var S3Resource_BucketArn *smithy.Schema
-
-var S3Resource_KeyRange *smithy.Schema
-
-var S3Resource_TargetOnDeviceServices *smithy.Schema
-
-var _S3ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "S3ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _S3ResourceList_member *smithy.Schema
-
-var _S3StorageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "S3StorageLimit",
-}, smithy.ShapeTypeDouble, 0)
-
-var ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceName_KUBERNETES *smithy.Schema
-
-var ServiceName_EKS_ANYWHERE *smithy.Schema
-
-var _ServiceSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ServiceSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServiceVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ServiceVersion",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceVersion_Version *smithy.Schema
-
-var _ServiceVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ServiceVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceVersionList_member *smithy.Schema
-
-var Shipment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Shipment",
-}, smithy.ShapeTypeStructure, 2)
-var Shipment_Status *smithy.Schema
-
-var Shipment_TrackingNumber *smithy.Schema
-
-var ShipmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ShipmentState",
-}, smithy.ShapeTypeEnum, 2)
-var ShipmentState_RECEIVED *smithy.Schema
-
-var ShipmentState_RETURNED *smithy.Schema
-
-var ShippingDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ShippingDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ShippingDetails_ShippingOption *smithy.Schema
-
-var ShippingDetails_InboundShipment *smithy.Schema
-
-var ShippingDetails_OutboundShipment *smithy.Schema
-
-var ShippingLabelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ShippingLabelStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ShippingLabelStatus_IN_PROGRESS *smithy.Schema
-
-var ShippingLabelStatus_TIMED_OUT *smithy.Schema
-
-var ShippingLabelStatus_SUCCEEDED *smithy.Schema
-
-var ShippingLabelStatus_FAILED *smithy.Schema
-
-var ShippingOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ShippingOption",
-}, smithy.ShapeTypeEnum, 4)
-var ShippingOption_SECOND_DAY *smithy.Schema
-
-var ShippingOption_NEXT_DAY *smithy.Schema
-
-var ShippingOption_EXPRESS *smithy.Schema
-
-var ShippingOption_STANDARD *smithy.Schema
-
-var SnowballCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "SnowballCapacity",
-}, smithy.ShapeTypeEnum, 11)
-var SnowballCapacity_T50 *smithy.Schema
-
-var SnowballCapacity_T80 *smithy.Schema
-
-var SnowballCapacity_T100 *smithy.Schema
-
-var SnowballCapacity_T42 *smithy.Schema
-
-var SnowballCapacity_T98 *smithy.Schema
-
-var SnowballCapacity_T8 *smithy.Schema
-
-var SnowballCapacity_T14 *smithy.Schema
-
-var SnowballCapacity_T32 *smithy.Schema
-
-var SnowballCapacity_NO_PREFERENCE *smithy.Schema
-
-var SnowballCapacity_T240 *smithy.Schema
-
-var SnowballCapacity_T13 *smithy.Schema
-
-var SnowballType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "SnowballType",
-}, smithy.ShapeTypeEnum, 10)
-var SnowballType_STANDARD *smithy.Schema
-
-var SnowballType_EDGE *smithy.Schema
-
-var SnowballType_EDGE_C *smithy.Schema
-
-var SnowballType_EDGE_CG *smithy.Schema
-
-var SnowballType_EDGE_S *smithy.Schema
-
-var SnowballType_SNC1_HDD *smithy.Schema
-
-var SnowballType_SNC1_SSD *smithy.Schema
-
-var SnowballType_V3_5C *smithy.Schema
-
-var SnowballType_V3_5S *smithy.Schema
-
-var SnowballType_RACK_5U_C *smithy.Schema
-
-var SnowconeDeviceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "SnowconeDeviceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SnowconeDeviceConfiguration_WirelessConnection *smithy.Schema
-
-var _SnsTopicARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "SnsTopicARN",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "StorageLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var StorageUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "StorageUnit",
-}, smithy.ShapeTypeEnum, 1)
-var StorageUnit_TB *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var TargetOnDeviceService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "TargetOnDeviceService",
-}, smithy.ShapeTypeStructure, 2)
-var TargetOnDeviceService_ServiceName *smithy.Schema
-
-var TargetOnDeviceService_TransferOption *smithy.Schema
-
-var _TargetOnDeviceServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "TargetOnDeviceServiceList",
-}, smithy.ShapeTypeList, 1)
-var _TargetOnDeviceServiceList_member *smithy.Schema
-
-var TaxDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "TaxDocuments",
-}, smithy.ShapeTypeStructure, 1)
-var TaxDocuments_IND *smithy.Schema
-
-var TGWOnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "TGWOnDeviceServiceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TGWOnDeviceServiceConfiguration_StorageLimit *smithy.Schema
-
-var TGWOnDeviceServiceConfiguration_StorageUnit *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TransferOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "TransferOption",
-}, smithy.ShapeTypeEnum, 3)
-var TransferOption_IMPORT *smithy.Schema
-
-var TransferOption_EXPORT *smithy.Schema
-
-var TransferOption_LOCAL_USE *smithy.Schema
-
-var UnsupportedAddressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UnsupportedAddressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnsupportedAddressException_Message *smithy.Schema
-
-var WirelessConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "WirelessConnection",
-}, smithy.ShapeTypeStructure, 1)
-var WirelessConnection_IsWifiEnabled *smithy.Schema
-
-var CancelClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelClusterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelClusterRequest_ClusterId *smithy.Schema
-
-var CancelClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelClusterResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CancelJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelJobRequest_JobId *smithy.Schema
-
-var CancelJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CancelJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAddressRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateAddressRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAddressRequest_Address *smithy.Schema
-
-var CreateAddressResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateAddressResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAddressResult_AddressId *smithy.Schema
-
-var CreateClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateClusterRequest",
-}, smithy.ShapeTypeStructure, 17)
-var CreateClusterRequest_JobType *smithy.Schema
-
-var CreateClusterRequest_Resources *smithy.Schema
-
-var CreateClusterRequest_OnDeviceServiceConfiguration *smithy.Schema
-
-var CreateClusterRequest_Description *smithy.Schema
-
-var CreateClusterRequest_AddressId *smithy.Schema
-
-var CreateClusterRequest_KmsKeyARN *smithy.Schema
-
-var CreateClusterRequest_RoleARN *smithy.Schema
-
-var CreateClusterRequest_SnowballType *smithy.Schema
-
-var CreateClusterRequest_ShippingOption *smithy.Schema
-
-var CreateClusterRequest_Notification *smithy.Schema
-
-var CreateClusterRequest_ForwardingAddressId *smithy.Schema
-
-var CreateClusterRequest_TaxDocuments *smithy.Schema
-
-var CreateClusterRequest_RemoteManagement *smithy.Schema
-
-var CreateClusterRequest_InitialClusterSize *smithy.Schema
-
-var CreateClusterRequest_ForceCreateJobs *smithy.Schema
-
-var CreateClusterRequest_LongTermPricingIds *smithy.Schema
-
-var CreateClusterRequest_SnowballCapacityPreference *smithy.Schema
-
-var CreateClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateClusterResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateClusterResult_ClusterId *smithy.Schema
-
-var CreateClusterResult_JobListEntries *smithy.Schema
-
-var CreateJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateJobRequest",
-}, smithy.ShapeTypeStructure, 19)
-var CreateJobRequest_JobType *smithy.Schema
-
-var CreateJobRequest_Resources *smithy.Schema
-
-var CreateJobRequest_OnDeviceServiceConfiguration *smithy.Schema
-
-var CreateJobRequest_Description *smithy.Schema
-
-var CreateJobRequest_AddressId *smithy.Schema
-
-var CreateJobRequest_KmsKeyARN *smithy.Schema
-
-var CreateJobRequest_RoleARN *smithy.Schema
-
-var CreateJobRequest_SnowballCapacityPreference *smithy.Schema
-
-var CreateJobRequest_ShippingOption *smithy.Schema
-
-var CreateJobRequest_Notification *smithy.Schema
-
-var CreateJobRequest_ClusterId *smithy.Schema
-
-var CreateJobRequest_SnowballType *smithy.Schema
-
-var CreateJobRequest_ForwardingAddressId *smithy.Schema
-
-var CreateJobRequest_TaxDocuments *smithy.Schema
-
-var CreateJobRequest_DeviceConfiguration *smithy.Schema
-
-var CreateJobRequest_RemoteManagement *smithy.Schema
-
-var CreateJobRequest_LongTermPricingId *smithy.Schema
-
-var CreateJobRequest_ImpactLevel *smithy.Schema
-
-var CreateJobRequest_PickupDetails *smithy.Schema
-
-var CreateJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateJobResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateJobResult_JobId *smithy.Schema
-
-var CreateLongTermPricingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateLongTermPricingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateLongTermPricingRequest_LongTermPricingType *smithy.Schema
-
-var CreateLongTermPricingRequest_IsLongTermPricingAutoRenew *smithy.Schema
-
-var CreateLongTermPricingRequest_SnowballType *smithy.Schema
-
-var CreateLongTermPricingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateLongTermPricingResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLongTermPricingResult_LongTermPricingId *smithy.Schema
-
-var CreateReturnShippingLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateReturnShippingLabelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateReturnShippingLabelRequest_JobId *smithy.Schema
-
-var CreateReturnShippingLabelRequest_ShippingOption *smithy.Schema
-
-var CreateReturnShippingLabelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "CreateReturnShippingLabelResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateReturnShippingLabelResult_Status *smithy.Schema
-
-var DescribeAddressesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddressesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAddressesRequest_MaxResults *smithy.Schema
-
-var DescribeAddressesRequest_NextToken *smithy.Schema
-
-var DescribeAddressesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddressesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAddressesResult_Addresses *smithy.Schema
-
-var DescribeAddressesResult_NextToken *smithy.Schema
-
-var DescribeAddressRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddressRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAddressRequest_AddressId *smithy.Schema
-
-var DescribeAddressResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeAddressResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAddressResult_Address *smithy.Schema
-
-var DescribeClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeClusterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterRequest_ClusterId *smithy.Schema
-
-var DescribeClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterResult_ClusterMetadata *smithy.Schema
-
-var DescribeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeJobRequest_JobId *smithy.Schema
-
-var DescribeJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeJobResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobResult_JobMetadata *smithy.Schema
-
-var DescribeJobResult_SubJobMetadata *smithy.Schema
-
-var DescribeReturnShippingLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeReturnShippingLabelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeReturnShippingLabelRequest_JobId *smithy.Schema
-
-var DescribeReturnShippingLabelResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "DescribeReturnShippingLabelResult",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeReturnShippingLabelResult_Status *smithy.Schema
-
-var DescribeReturnShippingLabelResult_ExpirationDate *smithy.Schema
-
-var DescribeReturnShippingLabelResult_ReturnShippingLabelURI *smithy.Schema
-
-var GetJobManifestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobManifestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobManifestRequest_JobId *smithy.Schema
-
-var GetJobManifestResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobManifestResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobManifestResult_ManifestURI *smithy.Schema
-
-var GetJobUnlockCodeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobUnlockCodeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobUnlockCodeRequest_JobId *smithy.Schema
-
-var GetJobUnlockCodeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetJobUnlockCodeResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobUnlockCodeResult_UnlockCode *smithy.Schema
-
-var GetSnowballUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSnowballUsageRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetSnowballUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSnowballUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetSnowballUsageResult_SnowballLimit *smithy.Schema
-
-var GetSnowballUsageResult_SnowballsInUse *smithy.Schema
-
-var GetSoftwareUpdatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSoftwareUpdatesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSoftwareUpdatesRequest_JobId *smithy.Schema
-
-var GetSoftwareUpdatesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "GetSoftwareUpdatesResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetSoftwareUpdatesResult_UpdatesURI *smithy.Schema
-
-var ListClusterJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClusterJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClusterJobsRequest_ClusterId *smithy.Schema
-
-var ListClusterJobsRequest_MaxResults *smithy.Schema
-
-var ListClusterJobsRequest_NextToken *smithy.Schema
-
-var ListClusterJobsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClusterJobsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListClusterJobsResult_JobListEntries *smithy.Schema
-
-var ListClusterJobsResult_NextToken *smithy.Schema
-
-var ListClustersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClustersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersRequest_MaxResults *smithy.Schema
-
-var ListClustersRequest_NextToken *smithy.Schema
-
-var ListClustersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListClustersResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersResult_ClusterListEntries *smithy.Schema
-
-var ListClustersResult_NextToken *smithy.Schema
-
-var ListCompatibleImagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListCompatibleImagesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCompatibleImagesRequest_MaxResults *smithy.Schema
-
-var ListCompatibleImagesRequest_NextToken *smithy.Schema
-
-var ListCompatibleImagesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListCompatibleImagesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListCompatibleImagesResult_CompatibleImages *smithy.Schema
-
-var ListCompatibleImagesResult_NextToken *smithy.Schema
-
-var ListJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListJobsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsRequest_MaxResults *smithy.Schema
-
-var ListJobsRequest_NextToken *smithy.Schema
-
-var ListJobsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListJobsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsResult_JobListEntries *smithy.Schema
-
-var ListJobsResult_NextToken *smithy.Schema
-
-var ListLongTermPricingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListLongTermPricingRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListLongTermPricingRequest_MaxResults *smithy.Schema
-
-var ListLongTermPricingRequest_NextToken *smithy.Schema
-
-var ListLongTermPricingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListLongTermPricingResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListLongTermPricingResult_LongTermPricingEntries *smithy.Schema
-
-var ListLongTermPricingResult_NextToken *smithy.Schema
-
-var ListPickupLocationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListPickupLocationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPickupLocationsRequest_MaxResults *smithy.Schema
-
-var ListPickupLocationsRequest_NextToken *smithy.Schema
-
-var ListPickupLocationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListPickupLocationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPickupLocationsResult_Addresses *smithy.Schema
-
-var ListPickupLocationsResult_NextToken *smithy.Schema
-
-var ListServiceVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListServiceVersionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceVersionsRequest_ServiceName *smithy.Schema
-
-var ListServiceVersionsRequest_DependentServices *smithy.Schema
-
-var ListServiceVersionsRequest_MaxResults *smithy.Schema
-
-var ListServiceVersionsRequest_NextToken *smithy.Schema
-
-var ListServiceVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "ListServiceVersionsResult",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceVersionsResult_ServiceVersions *smithy.Schema
-
-var ListServiceVersionsResult_ServiceName *smithy.Schema
-
-var ListServiceVersionsResult_DependentServices *smithy.Schema
-
-var ListServiceVersionsResult_NextToken *smithy.Schema
-
-var UpdateClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateClusterRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateClusterRequest_ClusterId *smithy.Schema
-
-var UpdateClusterRequest_RoleARN *smithy.Schema
-
-var UpdateClusterRequest_Description *smithy.Schema
-
-var UpdateClusterRequest_Resources *smithy.Schema
-
-var UpdateClusterRequest_OnDeviceServiceConfiguration *smithy.Schema
-
-var UpdateClusterRequest_AddressId *smithy.Schema
-
-var UpdateClusterRequest_ShippingOption *smithy.Schema
-
-var UpdateClusterRequest_Notification *smithy.Schema
-
-var UpdateClusterRequest_ForwardingAddressId *smithy.Schema
-
-var UpdateClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateClusterResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJobRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateJobRequest_JobId *smithy.Schema
-
-var UpdateJobRequest_RoleARN *smithy.Schema
-
-var UpdateJobRequest_Notification *smithy.Schema
-
-var UpdateJobRequest_Resources *smithy.Schema
-
-var UpdateJobRequest_OnDeviceServiceConfiguration *smithy.Schema
-
-var UpdateJobRequest_AddressId *smithy.Schema
-
-var UpdateJobRequest_ShippingOption *smithy.Schema
-
-var UpdateJobRequest_Description *smithy.Schema
-
-var UpdateJobRequest_SnowballCapacityPreference *smithy.Schema
-
-var UpdateJobRequest_ForwardingAddressId *smithy.Schema
-
-var UpdateJobRequest_PickupDetails *smithy.Schema
-
-var UpdateJobResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJobResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateJobShipmentStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJobShipmentStateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateJobShipmentStateRequest_JobId *smithy.Schema
-
-var UpdateJobShipmentStateRequest_ShipmentState *smithy.Schema
-
-var UpdateJobShipmentStateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateJobShipmentStateResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLongTermPricingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateLongTermPricingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLongTermPricingRequest_LongTermPricingId *smithy.Schema
-
-var UpdateLongTermPricingRequest_ReplacementJob *smithy.Schema
-
-var UpdateLongTermPricingRequest_IsLongTermPricingAutoRenew *smithy.Schema
-
-var UpdateLongTermPricingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowball",
-	Name:      "UpdateLongTermPricingResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AddressType_CUST_PICKUP = AddressType.AddMember("CUST_PICKUP", smithyprelude.Unit)
-
-	AddressType_AWS_SHIP = AddressType.AddMember("AWS_SHIP", smithyprelude.Unit)
-
-	Address_AddressId = Address.AddMember("AddressId", _AddressId)
-
-	Address_Name = Address.AddMember("Name", _String)
-
-	Address_Company = Address.AddMember("Company", _String)
-
-	Address_Street1 = Address.AddMember("Street1", _String)
-
-	Address_Street2 = Address.AddMember("Street2", _String)
-
-	Address_Street3 = Address.AddMember("Street3", _String)
-
-	Address_City = Address.AddMember("City", _String)
-
-	Address_StateOrProvince = Address.AddMember("StateOrProvince", _String)
-
-	Address_PrefectureOrDistrict = Address.AddMember("PrefectureOrDistrict", _String)
-
-	Address_Landmark = Address.AddMember("Landmark", _String)
-
-	Address_Country = Address.AddMember("Country", _String)
-
-	Address_PostalCode = Address.AddMember("PostalCode", _String)
-
-	Address_PhoneNumber = Address.AddMember("PhoneNumber", _String)
-
-	Address_IsRestricted = Address.AddMember("IsRestricted", _Boolean)
-
-	Address_Type = Address.AddMember("Type", AddressType)
-
-	_AddressList_member = _AddressList.AddMember("member", Address)
-
-	ClusterLimitExceededException_Message = ClusterLimitExceededException.AddMember("Message", _String)
-
-	ClusterState_AWAITING_QUORUM = ClusterState.AddMember("AWAITING_QUORUM", smithyprelude.Unit)
-
-	ClusterState_PENDING = ClusterState.AddMember("PENDING", smithyprelude.Unit)
-
-	ClusterState_IN_USE = ClusterState.AddMember("IN_USE", smithyprelude.Unit)
-
-	ClusterState_COMPLETE = ClusterState.AddMember("COMPLETE", smithyprelude.Unit)
-
-	ClusterState_CANCELLED = ClusterState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ClusterListEntry_ClusterId = ClusterListEntry.AddMember("ClusterId", _String)
-
-	ClusterListEntry_ClusterState = ClusterListEntry.AddMember("ClusterState", ClusterState)
-
-	ClusterListEntry_CreationDate = ClusterListEntry.AddMember("CreationDate", _Timestamp)
-
-	ClusterListEntry_Description = ClusterListEntry.AddMember("Description", _String)
-
-	_ClusterListEntryList_member = _ClusterListEntryList.AddMember("member", ClusterListEntry)
-
-	JobType_IMPORT = JobType.AddMember("IMPORT", smithyprelude.Unit)
-
-	JobType_EXPORT = JobType.AddMember("EXPORT", smithyprelude.Unit)
-
-	JobType_LOCAL_USE = JobType.AddMember("LOCAL_USE", smithyprelude.Unit)
-
-	SnowballType_STANDARD = SnowballType.AddMember("STANDARD", smithyprelude.Unit)
-
-	SnowballType_EDGE = SnowballType.AddMember("EDGE", smithyprelude.Unit)
-
-	SnowballType_EDGE_C = SnowballType.AddMember("EDGE_C", smithyprelude.Unit)
-
-	SnowballType_EDGE_CG = SnowballType.AddMember("EDGE_CG", smithyprelude.Unit)
-
-	SnowballType_EDGE_S = SnowballType.AddMember("EDGE_S", smithyprelude.Unit)
-
-	SnowballType_SNC1_HDD = SnowballType.AddMember("SNC1_HDD", smithyprelude.Unit)
-
-	SnowballType_SNC1_SSD = SnowballType.AddMember("SNC1_SSD", smithyprelude.Unit)
-
-	SnowballType_V3_5C = SnowballType.AddMember("V3_5C", smithyprelude.Unit)
-
-	SnowballType_V3_5S = SnowballType.AddMember("V3_5S", smithyprelude.Unit)
-
-	SnowballType_RACK_5U_C = SnowballType.AddMember("RACK_5U_C", smithyprelude.Unit)
-
-	KeyRange_BeginMarker = KeyRange.AddMember("BeginMarker", _String)
-
-	KeyRange_EndMarker = KeyRange.AddMember("EndMarker", _String)
-
-	DeviceServiceName_NFS_ON_DEVICE_SERVICE = DeviceServiceName.AddMember("NFS_ON_DEVICE_SERVICE", smithyprelude.Unit)
-
-	DeviceServiceName_S3_ON_DEVICE_SERVICE = DeviceServiceName.AddMember("S3_ON_DEVICE_SERVICE", smithyprelude.Unit)
-
-	TransferOption_IMPORT = TransferOption.AddMember("IMPORT", smithyprelude.Unit)
-
-	TransferOption_EXPORT = TransferOption.AddMember("EXPORT", smithyprelude.Unit)
-
-	TransferOption_LOCAL_USE = TransferOption.AddMember("LOCAL_USE", smithyprelude.Unit)
-
-	TargetOnDeviceService_ServiceName = TargetOnDeviceService.AddMember("ServiceName", DeviceServiceName)
-
-	TargetOnDeviceService_TransferOption = TargetOnDeviceService.AddMember("TransferOption", TransferOption)
-
-	_TargetOnDeviceServiceList_member = _TargetOnDeviceServiceList.AddMember("member", TargetOnDeviceService)
-
-	S3Resource_BucketArn = S3Resource.AddMember("BucketArn", _ResourceARN)
-
-	S3Resource_KeyRange = S3Resource.AddMember("KeyRange", KeyRange)
-
-	S3Resource_TargetOnDeviceServices = S3Resource.AddMember("TargetOnDeviceServices", _TargetOnDeviceServiceList)
-
-	_S3ResourceList_member = _S3ResourceList.AddMember("member", S3Resource)
-
-	EventTriggerDefinition_EventResourceARN = EventTriggerDefinition.AddMember("EventResourceARN", _ResourceARN)
-
-	_EventTriggerDefinitionList_member = _EventTriggerDefinitionList.AddMember("member", EventTriggerDefinition)
-
-	LambdaResource_LambdaArn = LambdaResource.AddMember("LambdaArn", _ResourceARN)
-
-	LambdaResource_EventTriggers = LambdaResource.AddMember("EventTriggers", _EventTriggerDefinitionList)
-
-	_LambdaResourceList_member = _LambdaResourceList.AddMember("member", LambdaResource)
-
-	Ec2AmiResource_AmiId = Ec2AmiResource.AddMember("AmiId", _AmiId)
-
-	Ec2AmiResource_SnowballAmiId = Ec2AmiResource.AddMember("SnowballAmiId", _String)
-
-	_Ec2AmiResourceList_member = _Ec2AmiResourceList.AddMember("member", Ec2AmiResource)
-
-	JobResource_S3Resources = JobResource.AddMember("S3Resources", _S3ResourceList)
-
-	JobResource_LambdaResources = JobResource.AddMember("LambdaResources", _LambdaResourceList)
-
-	JobResource_Ec2AmiResources = JobResource.AddMember("Ec2AmiResources", _Ec2AmiResourceList)
-
-	ShippingOption_SECOND_DAY = ShippingOption.AddMember("SECOND_DAY", smithyprelude.Unit)
-
-	ShippingOption_NEXT_DAY = ShippingOption.AddMember("NEXT_DAY", smithyprelude.Unit)
-
-	ShippingOption_EXPRESS = ShippingOption.AddMember("EXPRESS", smithyprelude.Unit)
-
-	ShippingOption_STANDARD = ShippingOption.AddMember("STANDARD", smithyprelude.Unit)
-
-	JobState_NEW = JobState.AddMember("NEW", smithyprelude.Unit)
-
-	JobState_PREPARING_APPLIANCE = JobState.AddMember("PREPARING_APPLIANCE", smithyprelude.Unit)
-
-	JobState_PREPARING_SHIPMENT = JobState.AddMember("PREPARING_SHIPMENT", smithyprelude.Unit)
-
-	JobState_IN_TRANSIT_TO_CUSTOMER = JobState.AddMember("IN_TRANSIT_TO_CUSTOMER", smithyprelude.Unit)
-
-	JobState_WITH_CUSTOMER = JobState.AddMember("WITH_CUSTOMER", smithyprelude.Unit)
-
-	JobState_IN_TRANSIT_TO_AWS = JobState.AddMember("IN_TRANSIT_TO_AWS", smithyprelude.Unit)
-
-	JobState_WITH_AWS_SORTING_FACILITY = JobState.AddMember("WITH_AWS_SORTING_FACILITY", smithyprelude.Unit)
-
-	JobState_WITH_AWS = JobState.AddMember("WITH_AWS", smithyprelude.Unit)
-
-	JobState_IN_PROGRESS = JobState.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobState_COMPLETE = JobState.AddMember("COMPLETE", smithyprelude.Unit)
-
-	JobState_CANCELLED = JobState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	JobState_LISTING = JobState.AddMember("LISTING", smithyprelude.Unit)
-
-	JobState_PENDING = JobState.AddMember("PENDING", smithyprelude.Unit)
-
-	_JobStateList_member = _JobStateList.AddMember("member", JobState)
-
-	Notification_SnsTopicARN = Notification.AddMember("SnsTopicARN", _SnsTopicARN)
-
-	Notification_JobStatesToNotify = Notification.AddMember("JobStatesToNotify", _JobStateList)
-
-	Notification_NotifyAll = Notification.AddMember("NotifyAll", _Boolean)
-
-	Notification_DevicePickupSnsTopicARN = Notification.AddMember("DevicePickupSnsTopicARN", _SnsTopicARN)
-
-	INDTaxDocuments_GSTIN = INDTaxDocuments.AddMember("GSTIN", _GSTIN)
-
-	TaxDocuments_IND = TaxDocuments.AddMember("IND", INDTaxDocuments)
-
-	StorageUnit_TB = StorageUnit.AddMember("TB", smithyprelude.Unit)
-
-	NFSOnDeviceServiceConfiguration_StorageLimit = NFSOnDeviceServiceConfiguration.AddMember("StorageLimit", _StorageLimit)
-
-	NFSOnDeviceServiceConfiguration_StorageUnit = NFSOnDeviceServiceConfiguration.AddMember("StorageUnit", StorageUnit)
-
-	TGWOnDeviceServiceConfiguration_StorageLimit = TGWOnDeviceServiceConfiguration.AddMember("StorageLimit", _StorageLimit)
-
-	TGWOnDeviceServiceConfiguration_StorageUnit = TGWOnDeviceServiceConfiguration.AddMember("StorageUnit", StorageUnit)
-
-	EKSOnDeviceServiceConfiguration_KubernetesVersion = EKSOnDeviceServiceConfiguration.AddMember("KubernetesVersion", _String)
-
-	EKSOnDeviceServiceConfiguration_EKSAnywhereVersion = EKSOnDeviceServiceConfiguration.AddMember("EKSAnywhereVersion", _String)
-
-	S3OnDeviceServiceConfiguration_StorageLimit = S3OnDeviceServiceConfiguration.AddMember("StorageLimit", _S3StorageLimit)
-
-	S3OnDeviceServiceConfiguration_StorageUnit = S3OnDeviceServiceConfiguration.AddMember("StorageUnit", StorageUnit)
-
-	S3OnDeviceServiceConfiguration_ServiceSize = S3OnDeviceServiceConfiguration.AddMember("ServiceSize", _ServiceSize)
-
-	S3OnDeviceServiceConfiguration_FaultTolerance = S3OnDeviceServiceConfiguration.AddMember("FaultTolerance", _NodeFaultTolerance)
-
-	OnDeviceServiceConfiguration_NFSOnDeviceService = OnDeviceServiceConfiguration.AddMember("NFSOnDeviceService", NFSOnDeviceServiceConfiguration)
-
-	OnDeviceServiceConfiguration_TGWOnDeviceService = OnDeviceServiceConfiguration.AddMember("TGWOnDeviceService", TGWOnDeviceServiceConfiguration)
-
-	OnDeviceServiceConfiguration_EKSOnDeviceService = OnDeviceServiceConfiguration.AddMember("EKSOnDeviceService", EKSOnDeviceServiceConfiguration)
-
-	OnDeviceServiceConfiguration_S3OnDeviceService = OnDeviceServiceConfiguration.AddMember("S3OnDeviceService", S3OnDeviceServiceConfiguration)
-
-	ClusterMetadata_ClusterId = ClusterMetadata.AddMember("ClusterId", _String)
-
-	ClusterMetadata_Description = ClusterMetadata.AddMember("Description", _String)
-
-	ClusterMetadata_KmsKeyARN = ClusterMetadata.AddMember("KmsKeyARN", _KmsKeyARN)
-
-	ClusterMetadata_RoleARN = ClusterMetadata.AddMember("RoleARN", _RoleARN)
-
-	ClusterMetadata_ClusterState = ClusterMetadata.AddMember("ClusterState", ClusterState)
-
-	ClusterMetadata_JobType = ClusterMetadata.AddMember("JobType", JobType)
-
-	ClusterMetadata_SnowballType = ClusterMetadata.AddMember("SnowballType", SnowballType)
-
-	ClusterMetadata_CreationDate = ClusterMetadata.AddMember("CreationDate", _Timestamp)
-
-	ClusterMetadata_Resources = ClusterMetadata.AddMember("Resources", JobResource)
-
-	ClusterMetadata_AddressId = ClusterMetadata.AddMember("AddressId", _AddressId)
-
-	ClusterMetadata_ShippingOption = ClusterMetadata.AddMember("ShippingOption", ShippingOption)
-
-	ClusterMetadata_Notification = ClusterMetadata.AddMember("Notification", Notification)
-
-	ClusterMetadata_ForwardingAddressId = ClusterMetadata.AddMember("ForwardingAddressId", _AddressId)
-
-	ClusterMetadata_TaxDocuments = ClusterMetadata.AddMember("TaxDocuments", TaxDocuments)
-
-	ClusterMetadata_OnDeviceServiceConfiguration = ClusterMetadata.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	CompatibleImage_AmiId = CompatibleImage.AddMember("AmiId", _String)
-
-	CompatibleImage_Name = CompatibleImage.AddMember("Name", _String)
-
-	_CompatibleImageList_member = _CompatibleImageList.AddMember("member", CompatibleImage)
-
-	ConflictException_ConflictResource = ConflictException.AddMember("ConflictResource", _String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	DataTransfer_BytesTransferred = DataTransfer.AddMember("BytesTransferred", _Long)
-
-	DataTransfer_ObjectsTransferred = DataTransfer.AddMember("ObjectsTransferred", _Long)
-
-	DataTransfer_TotalBytes = DataTransfer.AddMember("TotalBytes", _Long)
-
-	DataTransfer_TotalObjects = DataTransfer.AddMember("TotalObjects", _Long)
-
-	ServiceName_KUBERNETES = ServiceName.AddMember("KUBERNETES", smithyprelude.Unit)
-
-	ServiceName_EKS_ANYWHERE = ServiceName.AddMember("EKS_ANYWHERE", smithyprelude.Unit)
-
-	ServiceVersion_Version = ServiceVersion.AddMember("Version", _String)
-
-	DependentService_ServiceName = DependentService.AddMember("ServiceName", ServiceName)
-
-	DependentService_ServiceVersion = DependentService.AddMember("ServiceVersion", ServiceVersion)
-
-	_DependentServiceList_member = _DependentServiceList.AddMember("member", DependentService)
-
-	WirelessConnection_IsWifiEnabled = WirelessConnection.AddMember("IsWifiEnabled", _Boolean)
-
-	SnowconeDeviceConfiguration_WirelessConnection = SnowconeDeviceConfiguration.AddMember("WirelessConnection", WirelessConnection)
-
-	DeviceConfiguration_SnowconeDeviceConfiguration = DeviceConfiguration.AddMember("SnowconeDeviceConfiguration", SnowconeDeviceConfiguration)
-
-	Ec2RequestFailedException_Message = Ec2RequestFailedException.AddMember("Message", _String)
-
-	ImpactLevel_IL2 = ImpactLevel.AddMember("IL2", smithyprelude.Unit)
-
-	ImpactLevel_IL4 = ImpactLevel.AddMember("IL4", smithyprelude.Unit)
-
-	ImpactLevel_IL5 = ImpactLevel.AddMember("IL5", smithyprelude.Unit)
-
-	ImpactLevel_IL6 = ImpactLevel.AddMember("IL6", smithyprelude.Unit)
-
-	ImpactLevel_IL99 = ImpactLevel.AddMember("IL99", smithyprelude.Unit)
-
-	InvalidAddressException_Message = InvalidAddressException.AddMember("Message", _String)
-
-	InvalidInputCombinationException_Message = InvalidInputCombinationException.AddMember("Message", _String)
-
-	InvalidJobStateException_Message = InvalidJobStateException.AddMember("Message", _String)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _String)
-
-	InvalidResourceException_Message = InvalidResourceException.AddMember("Message", _String)
-
-	InvalidResourceException_ResourceType = InvalidResourceException.AddMember("ResourceType", _String)
-
-	JobListEntry_JobId = JobListEntry.AddMember("JobId", _String)
-
-	JobListEntry_JobState = JobListEntry.AddMember("JobState", JobState)
-
-	JobListEntry_IsMaster = JobListEntry.AddMember("IsMaster", _Boolean)
-
-	JobListEntry_JobType = JobListEntry.AddMember("JobType", JobType)
-
-	JobListEntry_SnowballType = JobListEntry.AddMember("SnowballType", SnowballType)
-
-	JobListEntry_CreationDate = JobListEntry.AddMember("CreationDate", _Timestamp)
-
-	JobListEntry_Description = JobListEntry.AddMember("Description", _String)
-
-	_JobListEntryList_member = _JobListEntryList.AddMember("member", JobListEntry)
-
-	JobLogs_JobCompletionReportURI = JobLogs.AddMember("JobCompletionReportURI", _String)
-
-	JobLogs_JobSuccessLogURI = JobLogs.AddMember("JobSuccessLogURI", _String)
-
-	JobLogs_JobFailureLogURI = JobLogs.AddMember("JobFailureLogURI", _String)
-
-	Shipment_Status = Shipment.AddMember("Status", _String)
-
-	Shipment_TrackingNumber = Shipment.AddMember("TrackingNumber", _String)
-
-	ShippingDetails_ShippingOption = ShippingDetails.AddMember("ShippingOption", ShippingOption)
-
-	ShippingDetails_InboundShipment = ShippingDetails.AddMember("InboundShipment", Shipment)
-
-	ShippingDetails_OutboundShipment = ShippingDetails.AddMember("OutboundShipment", Shipment)
-
-	SnowballCapacity_T50 = SnowballCapacity.AddMember("T50", smithyprelude.Unit)
-
-	SnowballCapacity_T80 = SnowballCapacity.AddMember("T80", smithyprelude.Unit)
-
-	SnowballCapacity_T100 = SnowballCapacity.AddMember("T100", smithyprelude.Unit)
-
-	SnowballCapacity_T42 = SnowballCapacity.AddMember("T42", smithyprelude.Unit)
-
-	SnowballCapacity_T98 = SnowballCapacity.AddMember("T98", smithyprelude.Unit)
-
-	SnowballCapacity_T8 = SnowballCapacity.AddMember("T8", smithyprelude.Unit)
-
-	SnowballCapacity_T14 = SnowballCapacity.AddMember("T14", smithyprelude.Unit)
-
-	SnowballCapacity_T32 = SnowballCapacity.AddMember("T32", smithyprelude.Unit)
-
-	SnowballCapacity_NO_PREFERENCE = SnowballCapacity.AddMember("NO_PREFERENCE", smithyprelude.Unit)
-
-	SnowballCapacity_T240 = SnowballCapacity.AddMember("T240", smithyprelude.Unit)
-
-	SnowballCapacity_T13 = SnowballCapacity.AddMember("T13", smithyprelude.Unit)
-
-	RemoteManagement_INSTALLED_ONLY = RemoteManagement.AddMember("INSTALLED_ONLY", smithyprelude.Unit)
-
-	RemoteManagement_INSTALLED_AUTOSTART = RemoteManagement.AddMember("INSTALLED_AUTOSTART", smithyprelude.Unit)
-
-	RemoteManagement_NOT_INSTALLED = RemoteManagement.AddMember("NOT_INSTALLED", smithyprelude.Unit)
-
-	PickupDetails_Name = PickupDetails.AddMember("Name", _String)
-
-	PickupDetails_PhoneNumber = PickupDetails.AddMember("PhoneNumber", _PhoneNumber)
-
-	PickupDetails_Email = PickupDetails.AddMember("Email", _Email)
-
-	PickupDetails_IdentificationNumber = PickupDetails.AddMember("IdentificationNumber", _String)
-
-	PickupDetails_IdentificationExpirationDate = PickupDetails.AddMember("IdentificationExpirationDate", _Timestamp)
-
-	PickupDetails_IdentificationIssuingOrg = PickupDetails.AddMember("IdentificationIssuingOrg", _String)
-
-	PickupDetails_DevicePickupId = PickupDetails.AddMember("DevicePickupId", _DevicePickupId)
-
-	JobMetadata_JobId = JobMetadata.AddMember("JobId", _String)
-
-	JobMetadata_JobState = JobMetadata.AddMember("JobState", JobState)
-
-	JobMetadata_JobType = JobMetadata.AddMember("JobType", JobType)
-
-	JobMetadata_SnowballType = JobMetadata.AddMember("SnowballType", SnowballType)
-
-	JobMetadata_CreationDate = JobMetadata.AddMember("CreationDate", _Timestamp)
-
-	JobMetadata_Resources = JobMetadata.AddMember("Resources", JobResource)
-
-	JobMetadata_Description = JobMetadata.AddMember("Description", _String)
-
-	JobMetadata_KmsKeyARN = JobMetadata.AddMember("KmsKeyARN", _KmsKeyARN)
-
-	JobMetadata_RoleARN = JobMetadata.AddMember("RoleARN", _RoleARN)
-
-	JobMetadata_AddressId = JobMetadata.AddMember("AddressId", _AddressId)
-
-	JobMetadata_ShippingDetails = JobMetadata.AddMember("ShippingDetails", ShippingDetails)
-
-	JobMetadata_SnowballCapacityPreference = JobMetadata.AddMember("SnowballCapacityPreference", SnowballCapacity)
-
-	JobMetadata_Notification = JobMetadata.AddMember("Notification", Notification)
-
-	JobMetadata_DataTransferProgress = JobMetadata.AddMember("DataTransferProgress", DataTransfer)
-
-	JobMetadata_JobLogInfo = JobMetadata.AddMember("JobLogInfo", JobLogs)
-
-	JobMetadata_ClusterId = JobMetadata.AddMember("ClusterId", _String)
-
-	JobMetadata_ForwardingAddressId = JobMetadata.AddMember("ForwardingAddressId", _AddressId)
-
-	JobMetadata_TaxDocuments = JobMetadata.AddMember("TaxDocuments", TaxDocuments)
-
-	JobMetadata_DeviceConfiguration = JobMetadata.AddMember("DeviceConfiguration", DeviceConfiguration)
-
-	JobMetadata_RemoteManagement = JobMetadata.AddMember("RemoteManagement", RemoteManagement)
-
-	JobMetadata_LongTermPricingId = JobMetadata.AddMember("LongTermPricingId", _LongTermPricingId)
-
-	JobMetadata_OnDeviceServiceConfiguration = JobMetadata.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	JobMetadata_ImpactLevel = JobMetadata.AddMember("ImpactLevel", ImpactLevel)
-
-	JobMetadata_PickupDetails = JobMetadata.AddMember("PickupDetails", PickupDetails)
-
-	JobMetadata_SnowballId = JobMetadata.AddMember("SnowballId", _String)
-
-	_JobMetadataList_member = _JobMetadataList.AddMember("member", JobMetadata)
-
-	KMSRequestFailedException_Message = KMSRequestFailedException.AddMember("Message", _String)
-
-	_LongTermPricingAssociatedJobIdList_member = _LongTermPricingAssociatedJobIdList.AddMember("member", _JobId)
-
-	LongTermPricingType_ONE_YEAR = LongTermPricingType.AddMember("ONE_YEAR", smithyprelude.Unit)
-
-	LongTermPricingType_THREE_YEAR = LongTermPricingType.AddMember("THREE_YEAR", smithyprelude.Unit)
-
-	LongTermPricingType_ONE_MONTH = LongTermPricingType.AddMember("ONE_MONTH", smithyprelude.Unit)
-
-	LongTermPricingListEntry_LongTermPricingId = LongTermPricingListEntry.AddMember("LongTermPricingId", _LongTermPricingId)
-
-	LongTermPricingListEntry_LongTermPricingEndDate = LongTermPricingListEntry.AddMember("LongTermPricingEndDate", _Timestamp)
-
-	LongTermPricingListEntry_LongTermPricingStartDate = LongTermPricingListEntry.AddMember("LongTermPricingStartDate", _Timestamp)
-
-	LongTermPricingListEntry_LongTermPricingType = LongTermPricingListEntry.AddMember("LongTermPricingType", LongTermPricingType)
-
-	LongTermPricingListEntry_CurrentActiveJob = LongTermPricingListEntry.AddMember("CurrentActiveJob", _JobId)
-
-	LongTermPricingListEntry_ReplacementJob = LongTermPricingListEntry.AddMember("ReplacementJob", _JobId)
-
-	LongTermPricingListEntry_IsLongTermPricingAutoRenew = LongTermPricingListEntry.AddMember("IsLongTermPricingAutoRenew", _JavaBoolean)
-
-	LongTermPricingListEntry_LongTermPricingStatus = LongTermPricingListEntry.AddMember("LongTermPricingStatus", _String)
-
-	LongTermPricingListEntry_SnowballType = LongTermPricingListEntry.AddMember("SnowballType", SnowballType)
-
-	LongTermPricingListEntry_JobIds = LongTermPricingListEntry.AddMember("JobIds", _LongTermPricingAssociatedJobIdList)
-
-	_LongTermPricingEntryList_member = _LongTermPricingEntryList.AddMember("member", LongTermPricingListEntry)
-
-	_LongTermPricingIdList_member = _LongTermPricingIdList.AddMember("member", _LongTermPricingId)
-
-	ReturnShippingLabelAlreadyExistsException_Message = ReturnShippingLabelAlreadyExistsException.AddMember("Message", _String)
-
-	_ServiceVersionList_member = _ServiceVersionList.AddMember("member", ServiceVersion)
-
-	ShipmentState_RECEIVED = ShipmentState.AddMember("RECEIVED", smithyprelude.Unit)
-
-	ShipmentState_RETURNED = ShipmentState.AddMember("RETURNED", smithyprelude.Unit)
-
-	ShippingLabelStatus_IN_PROGRESS = ShippingLabelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ShippingLabelStatus_TIMED_OUT = ShippingLabelStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	ShippingLabelStatus_SUCCEEDED = ShippingLabelStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ShippingLabelStatus_FAILED = ShippingLabelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	UnsupportedAddressException_Message = UnsupportedAddressException.AddMember("Message", _String)
-
-	CancelClusterRequest_ClusterId = CancelClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	CancelJobRequest_JobId = CancelJobRequest.AddMember("JobId", _JobId)
-
-	CreateAddressRequest_Address = CreateAddressRequest.AddMember("Address", Address)
-
-	CreateAddressResult_AddressId = CreateAddressResult.AddMember("AddressId", _String)
-
-	CreateClusterRequest_JobType = CreateClusterRequest.AddMember("JobType", JobType)
-
-	CreateClusterRequest_Resources = CreateClusterRequest.AddMember("Resources", JobResource)
-
-	CreateClusterRequest_OnDeviceServiceConfiguration = CreateClusterRequest.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	CreateClusterRequest_Description = CreateClusterRequest.AddMember("Description", _String)
-
-	CreateClusterRequest_AddressId = CreateClusterRequest.AddMember("AddressId", _AddressId)
-
-	CreateClusterRequest_KmsKeyARN = CreateClusterRequest.AddMember("KmsKeyARN", _KmsKeyARN)
-
-	CreateClusterRequest_RoleARN = CreateClusterRequest.AddMember("RoleARN", _RoleARN)
-
-	CreateClusterRequest_SnowballType = CreateClusterRequest.AddMember("SnowballType", SnowballType)
-
-	CreateClusterRequest_ShippingOption = CreateClusterRequest.AddMember("ShippingOption", ShippingOption)
-
-	CreateClusterRequest_Notification = CreateClusterRequest.AddMember("Notification", Notification)
-
-	CreateClusterRequest_ForwardingAddressId = CreateClusterRequest.AddMember("ForwardingAddressId", _AddressId)
-
-	CreateClusterRequest_TaxDocuments = CreateClusterRequest.AddMember("TaxDocuments", TaxDocuments)
-
-	CreateClusterRequest_RemoteManagement = CreateClusterRequest.AddMember("RemoteManagement", RemoteManagement)
-
-	CreateClusterRequest_InitialClusterSize = CreateClusterRequest.AddMember("InitialClusterSize", _InitialClusterSize)
-
-	CreateClusterRequest_ForceCreateJobs = CreateClusterRequest.AddMember("ForceCreateJobs", _Boolean)
-
-	CreateClusterRequest_LongTermPricingIds = CreateClusterRequest.AddMember("LongTermPricingIds", _LongTermPricingIdList)
-
-	CreateClusterRequest_SnowballCapacityPreference = CreateClusterRequest.AddMember("SnowballCapacityPreference", SnowballCapacity)
-
-	CreateClusterResult_ClusterId = CreateClusterResult.AddMember("ClusterId", _ClusterId)
-
-	CreateClusterResult_JobListEntries = CreateClusterResult.AddMember("JobListEntries", _JobListEntryList)
-
-	CreateJobRequest_JobType = CreateJobRequest.AddMember("JobType", JobType)
-
-	CreateJobRequest_Resources = CreateJobRequest.AddMember("Resources", JobResource)
-
-	CreateJobRequest_OnDeviceServiceConfiguration = CreateJobRequest.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	CreateJobRequest_Description = CreateJobRequest.AddMember("Description", _String)
-
-	CreateJobRequest_AddressId = CreateJobRequest.AddMember("AddressId", _AddressId)
-
-	CreateJobRequest_KmsKeyARN = CreateJobRequest.AddMember("KmsKeyARN", _KmsKeyARN)
-
-	CreateJobRequest_RoleARN = CreateJobRequest.AddMember("RoleARN", _RoleARN)
-
-	CreateJobRequest_SnowballCapacityPreference = CreateJobRequest.AddMember("SnowballCapacityPreference", SnowballCapacity)
-
-	CreateJobRequest_ShippingOption = CreateJobRequest.AddMember("ShippingOption", ShippingOption)
-
-	CreateJobRequest_Notification = CreateJobRequest.AddMember("Notification", Notification)
-
-	CreateJobRequest_ClusterId = CreateJobRequest.AddMember("ClusterId", _ClusterId)
-
-	CreateJobRequest_SnowballType = CreateJobRequest.AddMember("SnowballType", SnowballType)
-
-	CreateJobRequest_ForwardingAddressId = CreateJobRequest.AddMember("ForwardingAddressId", _AddressId)
-
-	CreateJobRequest_TaxDocuments = CreateJobRequest.AddMember("TaxDocuments", TaxDocuments)
-
-	CreateJobRequest_DeviceConfiguration = CreateJobRequest.AddMember("DeviceConfiguration", DeviceConfiguration)
-
-	CreateJobRequest_RemoteManagement = CreateJobRequest.AddMember("RemoteManagement", RemoteManagement)
-
-	CreateJobRequest_LongTermPricingId = CreateJobRequest.AddMember("LongTermPricingId", _LongTermPricingId)
-
-	CreateJobRequest_ImpactLevel = CreateJobRequest.AddMember("ImpactLevel", ImpactLevel)
-
-	CreateJobRequest_PickupDetails = CreateJobRequest.AddMember("PickupDetails", PickupDetails)
-
-	CreateJobResult_JobId = CreateJobResult.AddMember("JobId", _JobId)
-
-	CreateLongTermPricingRequest_LongTermPricingType = CreateLongTermPricingRequest.AddMember("LongTermPricingType", LongTermPricingType)
-
-	CreateLongTermPricingRequest_IsLongTermPricingAutoRenew = CreateLongTermPricingRequest.AddMember("IsLongTermPricingAutoRenew", _JavaBoolean)
-
-	CreateLongTermPricingRequest_SnowballType = CreateLongTermPricingRequest.AddMember("SnowballType", SnowballType)
-
-	CreateLongTermPricingResult_LongTermPricingId = CreateLongTermPricingResult.AddMember("LongTermPricingId", _LongTermPricingId)
-
-	CreateReturnShippingLabelRequest_JobId = CreateReturnShippingLabelRequest.AddMember("JobId", _JobId)
-
-	CreateReturnShippingLabelRequest_ShippingOption = CreateReturnShippingLabelRequest.AddMember("ShippingOption", ShippingOption)
-
-	CreateReturnShippingLabelResult_Status = CreateReturnShippingLabelResult.AddMember("Status", ShippingLabelStatus)
-
-	DescribeAddressesRequest_MaxResults = DescribeAddressesRequest.AddMember("MaxResults", _ListLimit)
-
-	DescribeAddressesRequest_NextToken = DescribeAddressesRequest.AddMember("NextToken", _String)
-
-	DescribeAddressesResult_Addresses = DescribeAddressesResult.AddMember("Addresses", _AddressList)
-
-	DescribeAddressesResult_NextToken = DescribeAddressesResult.AddMember("NextToken", _String)
-
-	DescribeAddressRequest_AddressId = DescribeAddressRequest.AddMember("AddressId", _AddressId)
-
-	DescribeAddressResult_Address = DescribeAddressResult.AddMember("Address", Address)
-
-	DescribeClusterRequest_ClusterId = DescribeClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	DescribeClusterResult_ClusterMetadata = DescribeClusterResult.AddMember("ClusterMetadata", ClusterMetadata)
-
-	DescribeJobRequest_JobId = DescribeJobRequest.AddMember("JobId", _JobId)
-
-	DescribeJobResult_JobMetadata = DescribeJobResult.AddMember("JobMetadata", JobMetadata)
-
-	DescribeJobResult_SubJobMetadata = DescribeJobResult.AddMember("SubJobMetadata", _JobMetadataList)
-
-	DescribeReturnShippingLabelRequest_JobId = DescribeReturnShippingLabelRequest.AddMember("JobId", _JobId)
-
-	DescribeReturnShippingLabelResult_Status = DescribeReturnShippingLabelResult.AddMember("Status", ShippingLabelStatus)
-
-	DescribeReturnShippingLabelResult_ExpirationDate = DescribeReturnShippingLabelResult.AddMember("ExpirationDate", _Timestamp)
-
-	DescribeReturnShippingLabelResult_ReturnShippingLabelURI = DescribeReturnShippingLabelResult.AddMember("ReturnShippingLabelURI", _String)
-
-	GetJobManifestRequest_JobId = GetJobManifestRequest.AddMember("JobId", _JobId)
-
-	GetJobManifestResult_ManifestURI = GetJobManifestResult.AddMember("ManifestURI", _String)
-
-	GetJobUnlockCodeRequest_JobId = GetJobUnlockCodeRequest.AddMember("JobId", _JobId)
-
-	GetJobUnlockCodeResult_UnlockCode = GetJobUnlockCodeResult.AddMember("UnlockCode", _String)
-
-	GetSnowballUsageResult_SnowballLimit = GetSnowballUsageResult.AddMember("SnowballLimit", _Integer)
-
-	GetSnowballUsageResult_SnowballsInUse = GetSnowballUsageResult.AddMember("SnowballsInUse", _Integer)
-
-	GetSoftwareUpdatesRequest_JobId = GetSoftwareUpdatesRequest.AddMember("JobId", _JobId)
-
-	GetSoftwareUpdatesResult_UpdatesURI = GetSoftwareUpdatesResult.AddMember("UpdatesURI", _String)
-
-	ListClusterJobsRequest_ClusterId = ListClusterJobsRequest.AddMember("ClusterId", _ClusterId)
-
-	ListClusterJobsRequest_MaxResults = ListClusterJobsRequest.AddMember("MaxResults", _ListLimit)
-
-	ListClusterJobsRequest_NextToken = ListClusterJobsRequest.AddMember("NextToken", _String)
-
-	ListClusterJobsResult_JobListEntries = ListClusterJobsResult.AddMember("JobListEntries", _JobListEntryList)
-
-	ListClusterJobsResult_NextToken = ListClusterJobsResult.AddMember("NextToken", _String)
-
-	ListClustersRequest_MaxResults = ListClustersRequest.AddMember("MaxResults", _ListLimit)
-
-	ListClustersRequest_NextToken = ListClustersRequest.AddMember("NextToken", _String)
-
-	ListClustersResult_ClusterListEntries = ListClustersResult.AddMember("ClusterListEntries", _ClusterListEntryList)
-
-	ListClustersResult_NextToken = ListClustersResult.AddMember("NextToken", _String)
-
-	ListCompatibleImagesRequest_MaxResults = ListCompatibleImagesRequest.AddMember("MaxResults", _ListLimit)
-
-	ListCompatibleImagesRequest_NextToken = ListCompatibleImagesRequest.AddMember("NextToken", _String)
-
-	ListCompatibleImagesResult_CompatibleImages = ListCompatibleImagesResult.AddMember("CompatibleImages", _CompatibleImageList)
-
-	ListCompatibleImagesResult_NextToken = ListCompatibleImagesResult.AddMember("NextToken", _String)
-
-	ListJobsRequest_MaxResults = ListJobsRequest.AddMember("MaxResults", _ListLimit)
-
-	ListJobsRequest_NextToken = ListJobsRequest.AddMember("NextToken", _String)
-
-	ListJobsResult_JobListEntries = ListJobsResult.AddMember("JobListEntries", _JobListEntryList)
-
-	ListJobsResult_NextToken = ListJobsResult.AddMember("NextToken", _String)
-
-	ListLongTermPricingRequest_MaxResults = ListLongTermPricingRequest.AddMember("MaxResults", _ListLimit)
-
-	ListLongTermPricingRequest_NextToken = ListLongTermPricingRequest.AddMember("NextToken", _String)
-
-	ListLongTermPricingResult_LongTermPricingEntries = ListLongTermPricingResult.AddMember("LongTermPricingEntries", _LongTermPricingEntryList)
-
-	ListLongTermPricingResult_NextToken = ListLongTermPricingResult.AddMember("NextToken", _String)
-
-	ListPickupLocationsRequest_MaxResults = ListPickupLocationsRequest.AddMember("MaxResults", _ListLimit)
-
-	ListPickupLocationsRequest_NextToken = ListPickupLocationsRequest.AddMember("NextToken", _String)
-
-	ListPickupLocationsResult_Addresses = ListPickupLocationsResult.AddMember("Addresses", _AddressList)
-
-	ListPickupLocationsResult_NextToken = ListPickupLocationsResult.AddMember("NextToken", _String)
-
-	ListServiceVersionsRequest_ServiceName = ListServiceVersionsRequest.AddMember("ServiceName", ServiceName)
-
-	ListServiceVersionsRequest_DependentServices = ListServiceVersionsRequest.AddMember("DependentServices", _DependentServiceList)
-
-	ListServiceVersionsRequest_MaxResults = ListServiceVersionsRequest.AddMember("MaxResults", _ListLimit)
-
-	ListServiceVersionsRequest_NextToken = ListServiceVersionsRequest.AddMember("NextToken", _String)
-
-	ListServiceVersionsResult_ServiceVersions = ListServiceVersionsResult.AddMember("ServiceVersions", _ServiceVersionList)
-
-	ListServiceVersionsResult_ServiceName = ListServiceVersionsResult.AddMember("ServiceName", ServiceName)
-
-	ListServiceVersionsResult_DependentServices = ListServiceVersionsResult.AddMember("DependentServices", _DependentServiceList)
-
-	ListServiceVersionsResult_NextToken = ListServiceVersionsResult.AddMember("NextToken", _String)
-
-	UpdateClusterRequest_ClusterId = UpdateClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	UpdateClusterRequest_RoleARN = UpdateClusterRequest.AddMember("RoleARN", _RoleARN)
-
-	UpdateClusterRequest_Description = UpdateClusterRequest.AddMember("Description", _String)
-
-	UpdateClusterRequest_Resources = UpdateClusterRequest.AddMember("Resources", JobResource)
-
-	UpdateClusterRequest_OnDeviceServiceConfiguration = UpdateClusterRequest.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	UpdateClusterRequest_AddressId = UpdateClusterRequest.AddMember("AddressId", _AddressId)
-
-	UpdateClusterRequest_ShippingOption = UpdateClusterRequest.AddMember("ShippingOption", ShippingOption)
-
-	UpdateClusterRequest_Notification = UpdateClusterRequest.AddMember("Notification", Notification)
-
-	UpdateClusterRequest_ForwardingAddressId = UpdateClusterRequest.AddMember("ForwardingAddressId", _AddressId)
-
-	UpdateJobRequest_JobId = UpdateJobRequest.AddMember("JobId", _JobId)
-
-	UpdateJobRequest_RoleARN = UpdateJobRequest.AddMember("RoleARN", _RoleARN)
-
-	UpdateJobRequest_Notification = UpdateJobRequest.AddMember("Notification", Notification)
-
-	UpdateJobRequest_Resources = UpdateJobRequest.AddMember("Resources", JobResource)
-
-	UpdateJobRequest_OnDeviceServiceConfiguration = UpdateJobRequest.AddMember("OnDeviceServiceConfiguration", OnDeviceServiceConfiguration)
-
-	UpdateJobRequest_AddressId = UpdateJobRequest.AddMember("AddressId", _AddressId)
-
-	UpdateJobRequest_ShippingOption = UpdateJobRequest.AddMember("ShippingOption", ShippingOption)
-
-	UpdateJobRequest_Description = UpdateJobRequest.AddMember("Description", _String)
-
-	UpdateJobRequest_SnowballCapacityPreference = UpdateJobRequest.AddMember("SnowballCapacityPreference", SnowballCapacity)
-
-	UpdateJobRequest_ForwardingAddressId = UpdateJobRequest.AddMember("ForwardingAddressId", _AddressId)
-
-	UpdateJobRequest_PickupDetails = UpdateJobRequest.AddMember("PickupDetails", PickupDetails)
-
-	UpdateJobShipmentStateRequest_JobId = UpdateJobShipmentStateRequest.AddMember("JobId", _JobId)
-
-	UpdateJobShipmentStateRequest_ShipmentState = UpdateJobShipmentStateRequest.AddMember("ShipmentState", ShipmentState)
-
-	UpdateLongTermPricingRequest_LongTermPricingId = UpdateLongTermPricingRequest.AddMember("LongTermPricingId", _LongTermPricingId)
-
-	UpdateLongTermPricingRequest_ReplacementJob = UpdateLongTermPricingRequest.AddMember("ReplacementJob", _JobId)
-
-	UpdateLongTermPricingRequest_IsLongTermPricingAutoRenew = UpdateLongTermPricingRequest.AddMember("IsLongTermPricingAutoRenew", _JavaBoolean)
-
-}
+var (
+	eCancelCluster                                            smithy.SchemaExtensions
+	eCancelJob                                                smithy.SchemaExtensions
+	eCreateAddress                                            smithy.SchemaExtensions
+	eCreateCluster                                            smithy.SchemaExtensions
+	eCreateJob                                                smithy.SchemaExtensions
+	eCreateLongTermPricing                                    smithy.SchemaExtensions
+	eCreateReturnShippingLabel                                smithy.SchemaExtensions
+	eDescribeAddress                                          smithy.SchemaExtensions
+	eDescribeAddresses                                        smithy.SchemaExtensions
+	eDescribeCluster                                          smithy.SchemaExtensions
+	eDescribeJob                                              smithy.SchemaExtensions
+	eDescribeReturnShippingLabel                              smithy.SchemaExtensions
+	eGetJobManifest                                           smithy.SchemaExtensions
+	eGetJobUnlockCode                                         smithy.SchemaExtensions
+	eGetSnowballUsage                                         smithy.SchemaExtensions
+	eGetSoftwareUpdates                                       smithy.SchemaExtensions
+	eListClusterJobs                                          smithy.SchemaExtensions
+	eListClusters                                             smithy.SchemaExtensions
+	eListCompatibleImages                                     smithy.SchemaExtensions
+	eListJobs                                                 smithy.SchemaExtensions
+	eListLongTermPricing                                      smithy.SchemaExtensions
+	eListPickupLocations                                      smithy.SchemaExtensions
+	eListServiceVersions                                      smithy.SchemaExtensions
+	eUpdateCluster                                            smithy.SchemaExtensions
+	eUpdateJob                                                smithy.SchemaExtensions
+	eUpdateJobShipmentState                                   smithy.SchemaExtensions
+	eUpdateLongTermPricing                                    smithy.SchemaExtensions
+	e_AWSIESnowballJobManagementService                       smithy.SchemaExtensions
+	eAddress                                                  smithy.SchemaExtensions
+	eAddress_AddressId                                        smithy.SchemaExtensions
+	eAddress_Name                                             smithy.SchemaExtensions
+	eAddress_Company                                          smithy.SchemaExtensions
+	eAddress_Street1                                          smithy.SchemaExtensions
+	eAddress_Street2                                          smithy.SchemaExtensions
+	eAddress_Street3                                          smithy.SchemaExtensions
+	eAddress_City                                             smithy.SchemaExtensions
+	eAddress_StateOrProvince                                  smithy.SchemaExtensions
+	eAddress_PrefectureOrDistrict                             smithy.SchemaExtensions
+	eAddress_Landmark                                         smithy.SchemaExtensions
+	eAddress_Country                                          smithy.SchemaExtensions
+	eAddress_PostalCode                                       smithy.SchemaExtensions
+	eAddress_PhoneNumber                                      smithy.SchemaExtensions
+	eAddress_IsRestricted                                     smithy.SchemaExtensions
+	eAddress_Type                                             smithy.SchemaExtensions
+	e_AddressId                                               smithy.SchemaExtensions
+	e_AddressList                                             smithy.SchemaExtensions
+	e_AddressList_member                                      smithy.SchemaExtensions
+	eAddressType                                              smithy.SchemaExtensions
+	eAddressType_CUST_PICKUP                                  smithy.SchemaExtensions
+	eAddressType_AWS_SHIP                                     smithy.SchemaExtensions
+	e_AmiId                                                   smithy.SchemaExtensions
+	e_Boolean                                                 smithy.SchemaExtensions
+	e_ClusterId                                               smithy.SchemaExtensions
+	eClusterLimitExceededException                            smithy.SchemaExtensions
+	eClusterLimitExceededException_Message                    smithy.SchemaExtensions
+	eClusterListEntry                                         smithy.SchemaExtensions
+	eClusterListEntry_ClusterId                               smithy.SchemaExtensions
+	eClusterListEntry_ClusterState                            smithy.SchemaExtensions
+	eClusterListEntry_CreationDate                            smithy.SchemaExtensions
+	eClusterListEntry_Description                             smithy.SchemaExtensions
+	e_ClusterListEntryList                                    smithy.SchemaExtensions
+	e_ClusterListEntryList_member                             smithy.SchemaExtensions
+	eClusterMetadata                                          smithy.SchemaExtensions
+	eClusterMetadata_ClusterId                                smithy.SchemaExtensions
+	eClusterMetadata_Description                              smithy.SchemaExtensions
+	eClusterMetadata_KmsKeyARN                                smithy.SchemaExtensions
+	eClusterMetadata_RoleARN                                  smithy.SchemaExtensions
+	eClusterMetadata_ClusterState                             smithy.SchemaExtensions
+	eClusterMetadata_JobType                                  smithy.SchemaExtensions
+	eClusterMetadata_SnowballType                             smithy.SchemaExtensions
+	eClusterMetadata_CreationDate                             smithy.SchemaExtensions
+	eClusterMetadata_Resources                                smithy.SchemaExtensions
+	eClusterMetadata_AddressId                                smithy.SchemaExtensions
+	eClusterMetadata_ShippingOption                           smithy.SchemaExtensions
+	eClusterMetadata_Notification                             smithy.SchemaExtensions
+	eClusterMetadata_ForwardingAddressId                      smithy.SchemaExtensions
+	eClusterMetadata_TaxDocuments                             smithy.SchemaExtensions
+	eClusterMetadata_OnDeviceServiceConfiguration             smithy.SchemaExtensions
+	eClusterState                                             smithy.SchemaExtensions
+	eClusterState_AWAITING_QUORUM                             smithy.SchemaExtensions
+	eClusterState_PENDING                                     smithy.SchemaExtensions
+	eClusterState_IN_USE                                      smithy.SchemaExtensions
+	eClusterState_COMPLETE                                    smithy.SchemaExtensions
+	eClusterState_CANCELLED                                   smithy.SchemaExtensions
+	eCompatibleImage                                          smithy.SchemaExtensions
+	eCompatibleImage_AmiId                                    smithy.SchemaExtensions
+	eCompatibleImage_Name                                     smithy.SchemaExtensions
+	e_CompatibleImageList                                     smithy.SchemaExtensions
+	e_CompatibleImageList_member                              smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_ConflictResource                       smithy.SchemaExtensions
+	eConflictException_Message                                smithy.SchemaExtensions
+	eDataTransfer                                             smithy.SchemaExtensions
+	eDataTransfer_BytesTransferred                            smithy.SchemaExtensions
+	eDataTransfer_ObjectsTransferred                          smithy.SchemaExtensions
+	eDataTransfer_TotalBytes                                  smithy.SchemaExtensions
+	eDataTransfer_TotalObjects                                smithy.SchemaExtensions
+	eDependentService                                         smithy.SchemaExtensions
+	eDependentService_ServiceName                             smithy.SchemaExtensions
+	eDependentService_ServiceVersion                          smithy.SchemaExtensions
+	e_DependentServiceList                                    smithy.SchemaExtensions
+	e_DependentServiceList_member                             smithy.SchemaExtensions
+	eDeviceConfiguration                                      smithy.SchemaExtensions
+	eDeviceConfiguration_SnowconeDeviceConfiguration          smithy.SchemaExtensions
+	e_DevicePickupId                                          smithy.SchemaExtensions
+	eDeviceServiceName                                        smithy.SchemaExtensions
+	eDeviceServiceName_NFS_ON_DEVICE_SERVICE                  smithy.SchemaExtensions
+	eDeviceServiceName_S3_ON_DEVICE_SERVICE                   smithy.SchemaExtensions
+	eEc2AmiResource                                           smithy.SchemaExtensions
+	eEc2AmiResource_AmiId                                     smithy.SchemaExtensions
+	eEc2AmiResource_SnowballAmiId                             smithy.SchemaExtensions
+	e_Ec2AmiResourceList                                      smithy.SchemaExtensions
+	e_Ec2AmiResourceList_member                               smithy.SchemaExtensions
+	eEc2RequestFailedException                                smithy.SchemaExtensions
+	eEc2RequestFailedException_Message                        smithy.SchemaExtensions
+	eEKSOnDeviceServiceConfiguration                          smithy.SchemaExtensions
+	eEKSOnDeviceServiceConfiguration_KubernetesVersion        smithy.SchemaExtensions
+	eEKSOnDeviceServiceConfiguration_EKSAnywhereVersion       smithy.SchemaExtensions
+	e_Email                                                   smithy.SchemaExtensions
+	eEventTriggerDefinition                                   smithy.SchemaExtensions
+	eEventTriggerDefinition_EventResourceARN                  smithy.SchemaExtensions
+	e_EventTriggerDefinitionList                              smithy.SchemaExtensions
+	e_EventTriggerDefinitionList_member                       smithy.SchemaExtensions
+	e_GSTIN                                                   smithy.SchemaExtensions
+	eImpactLevel                                              smithy.SchemaExtensions
+	eImpactLevel_IL2                                          smithy.SchemaExtensions
+	eImpactLevel_IL4                                          smithy.SchemaExtensions
+	eImpactLevel_IL5                                          smithy.SchemaExtensions
+	eImpactLevel_IL6                                          smithy.SchemaExtensions
+	eImpactLevel_IL99                                         smithy.SchemaExtensions
+	eINDTaxDocuments                                          smithy.SchemaExtensions
+	eINDTaxDocuments_GSTIN                                    smithy.SchemaExtensions
+	e_InitialClusterSize                                      smithy.SchemaExtensions
+	e_Integer                                                 smithy.SchemaExtensions
+	eInvalidAddressException                                  smithy.SchemaExtensions
+	eInvalidAddressException_Message                          smithy.SchemaExtensions
+	eInvalidInputCombinationException                         smithy.SchemaExtensions
+	eInvalidInputCombinationException_Message                 smithy.SchemaExtensions
+	eInvalidJobStateException                                 smithy.SchemaExtensions
+	eInvalidJobStateException_Message                         smithy.SchemaExtensions
+	eInvalidNextTokenException                                smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                        smithy.SchemaExtensions
+	eInvalidResourceException                                 smithy.SchemaExtensions
+	eInvalidResourceException_Message                         smithy.SchemaExtensions
+	eInvalidResourceException_ResourceType                    smithy.SchemaExtensions
+	e_JavaBoolean                                             smithy.SchemaExtensions
+	e_JobId                                                   smithy.SchemaExtensions
+	eJobListEntry                                             smithy.SchemaExtensions
+	eJobListEntry_JobId                                       smithy.SchemaExtensions
+	eJobListEntry_JobState                                    smithy.SchemaExtensions
+	eJobListEntry_IsMaster                                    smithy.SchemaExtensions
+	eJobListEntry_JobType                                     smithy.SchemaExtensions
+	eJobListEntry_SnowballType                                smithy.SchemaExtensions
+	eJobListEntry_CreationDate                                smithy.SchemaExtensions
+	eJobListEntry_Description                                 smithy.SchemaExtensions
+	e_JobListEntryList                                        smithy.SchemaExtensions
+	e_JobListEntryList_member                                 smithy.SchemaExtensions
+	eJobLogs                                                  smithy.SchemaExtensions
+	eJobLogs_JobCompletionReportURI                           smithy.SchemaExtensions
+	eJobLogs_JobSuccessLogURI                                 smithy.SchemaExtensions
+	eJobLogs_JobFailureLogURI                                 smithy.SchemaExtensions
+	eJobMetadata                                              smithy.SchemaExtensions
+	eJobMetadata_JobId                                        smithy.SchemaExtensions
+	eJobMetadata_JobState                                     smithy.SchemaExtensions
+	eJobMetadata_JobType                                      smithy.SchemaExtensions
+	eJobMetadata_SnowballType                                 smithy.SchemaExtensions
+	eJobMetadata_CreationDate                                 smithy.SchemaExtensions
+	eJobMetadata_Resources                                    smithy.SchemaExtensions
+	eJobMetadata_Description                                  smithy.SchemaExtensions
+	eJobMetadata_KmsKeyARN                                    smithy.SchemaExtensions
+	eJobMetadata_RoleARN                                      smithy.SchemaExtensions
+	eJobMetadata_AddressId                                    smithy.SchemaExtensions
+	eJobMetadata_ShippingDetails                              smithy.SchemaExtensions
+	eJobMetadata_SnowballCapacityPreference                   smithy.SchemaExtensions
+	eJobMetadata_Notification                                 smithy.SchemaExtensions
+	eJobMetadata_DataTransferProgress                         smithy.SchemaExtensions
+	eJobMetadata_JobLogInfo                                   smithy.SchemaExtensions
+	eJobMetadata_ClusterId                                    smithy.SchemaExtensions
+	eJobMetadata_ForwardingAddressId                          smithy.SchemaExtensions
+	eJobMetadata_TaxDocuments                                 smithy.SchemaExtensions
+	eJobMetadata_DeviceConfiguration                          smithy.SchemaExtensions
+	eJobMetadata_RemoteManagement                             smithy.SchemaExtensions
+	eJobMetadata_LongTermPricingId                            smithy.SchemaExtensions
+	eJobMetadata_OnDeviceServiceConfiguration                 smithy.SchemaExtensions
+	eJobMetadata_ImpactLevel                                  smithy.SchemaExtensions
+	eJobMetadata_PickupDetails                                smithy.SchemaExtensions
+	eJobMetadata_SnowballId                                   smithy.SchemaExtensions
+	e_JobMetadataList                                         smithy.SchemaExtensions
+	e_JobMetadataList_member                                  smithy.SchemaExtensions
+	eJobResource                                              smithy.SchemaExtensions
+	eJobResource_S3Resources                                  smithy.SchemaExtensions
+	eJobResource_LambdaResources                              smithy.SchemaExtensions
+	eJobResource_Ec2AmiResources                              smithy.SchemaExtensions
+	eJobState                                                 smithy.SchemaExtensions
+	eJobState_NEW                                             smithy.SchemaExtensions
+	eJobState_PREPARING_APPLIANCE                             smithy.SchemaExtensions
+	eJobState_PREPARING_SHIPMENT                              smithy.SchemaExtensions
+	eJobState_IN_TRANSIT_TO_CUSTOMER                          smithy.SchemaExtensions
+	eJobState_WITH_CUSTOMER                                   smithy.SchemaExtensions
+	eJobState_IN_TRANSIT_TO_AWS                               smithy.SchemaExtensions
+	eJobState_WITH_AWS_SORTING_FACILITY                       smithy.SchemaExtensions
+	eJobState_WITH_AWS                                        smithy.SchemaExtensions
+	eJobState_IN_PROGRESS                                     smithy.SchemaExtensions
+	eJobState_COMPLETE                                        smithy.SchemaExtensions
+	eJobState_CANCELLED                                       smithy.SchemaExtensions
+	eJobState_LISTING                                         smithy.SchemaExtensions
+	eJobState_PENDING                                         smithy.SchemaExtensions
+	e_JobStateList                                            smithy.SchemaExtensions
+	e_JobStateList_member                                     smithy.SchemaExtensions
+	eJobType                                                  smithy.SchemaExtensions
+	eJobType_IMPORT                                           smithy.SchemaExtensions
+	eJobType_EXPORT                                           smithy.SchemaExtensions
+	eJobType_LOCAL_USE                                        smithy.SchemaExtensions
+	eKeyRange                                                 smithy.SchemaExtensions
+	eKeyRange_BeginMarker                                     smithy.SchemaExtensions
+	eKeyRange_EndMarker                                       smithy.SchemaExtensions
+	e_KmsKeyARN                                               smithy.SchemaExtensions
+	eKMSRequestFailedException                                smithy.SchemaExtensions
+	eKMSRequestFailedException_Message                        smithy.SchemaExtensions
+	eLambdaResource                                           smithy.SchemaExtensions
+	eLambdaResource_LambdaArn                                 smithy.SchemaExtensions
+	eLambdaResource_EventTriggers                             smithy.SchemaExtensions
+	e_LambdaResourceList                                      smithy.SchemaExtensions
+	e_LambdaResourceList_member                               smithy.SchemaExtensions
+	e_ListLimit                                               smithy.SchemaExtensions
+	e_Long                                                    smithy.SchemaExtensions
+	e_LongTermPricingAssociatedJobIdList                      smithy.SchemaExtensions
+	e_LongTermPricingAssociatedJobIdList_member               smithy.SchemaExtensions
+	e_LongTermPricingEntryList                                smithy.SchemaExtensions
+	e_LongTermPricingEntryList_member                         smithy.SchemaExtensions
+	e_LongTermPricingId                                       smithy.SchemaExtensions
+	e_LongTermPricingIdList                                   smithy.SchemaExtensions
+	e_LongTermPricingIdList_member                            smithy.SchemaExtensions
+	eLongTermPricingListEntry                                 smithy.SchemaExtensions
+	eLongTermPricingListEntry_LongTermPricingId               smithy.SchemaExtensions
+	eLongTermPricingListEntry_LongTermPricingEndDate          smithy.SchemaExtensions
+	eLongTermPricingListEntry_LongTermPricingStartDate        smithy.SchemaExtensions
+	eLongTermPricingListEntry_LongTermPricingType             smithy.SchemaExtensions
+	eLongTermPricingListEntry_CurrentActiveJob                smithy.SchemaExtensions
+	eLongTermPricingListEntry_ReplacementJob                  smithy.SchemaExtensions
+	eLongTermPricingListEntry_IsLongTermPricingAutoRenew      smithy.SchemaExtensions
+	eLongTermPricingListEntry_LongTermPricingStatus           smithy.SchemaExtensions
+	eLongTermPricingListEntry_SnowballType                    smithy.SchemaExtensions
+	eLongTermPricingListEntry_JobIds                          smithy.SchemaExtensions
+	eLongTermPricingType                                      smithy.SchemaExtensions
+	eLongTermPricingType_ONE_YEAR                             smithy.SchemaExtensions
+	eLongTermPricingType_THREE_YEAR                           smithy.SchemaExtensions
+	eLongTermPricingType_ONE_MONTH                            smithy.SchemaExtensions
+	eNFSOnDeviceServiceConfiguration                          smithy.SchemaExtensions
+	eNFSOnDeviceServiceConfiguration_StorageLimit             smithy.SchemaExtensions
+	eNFSOnDeviceServiceConfiguration_StorageUnit              smithy.SchemaExtensions
+	e_NodeFaultTolerance                                      smithy.SchemaExtensions
+	eNotification                                             smithy.SchemaExtensions
+	eNotification_SnsTopicARN                                 smithy.SchemaExtensions
+	eNotification_JobStatesToNotify                           smithy.SchemaExtensions
+	eNotification_NotifyAll                                   smithy.SchemaExtensions
+	eNotification_DevicePickupSnsTopicARN                     smithy.SchemaExtensions
+	eOnDeviceServiceConfiguration                             smithy.SchemaExtensions
+	eOnDeviceServiceConfiguration_NFSOnDeviceService          smithy.SchemaExtensions
+	eOnDeviceServiceConfiguration_TGWOnDeviceService          smithy.SchemaExtensions
+	eOnDeviceServiceConfiguration_EKSOnDeviceService          smithy.SchemaExtensions
+	eOnDeviceServiceConfiguration_S3OnDeviceService           smithy.SchemaExtensions
+	e_PhoneNumber                                             smithy.SchemaExtensions
+	ePickupDetails                                            smithy.SchemaExtensions
+	ePickupDetails_Name                                       smithy.SchemaExtensions
+	ePickupDetails_PhoneNumber                                smithy.SchemaExtensions
+	ePickupDetails_Email                                      smithy.SchemaExtensions
+	ePickupDetails_IdentificationNumber                       smithy.SchemaExtensions
+	ePickupDetails_IdentificationExpirationDate               smithy.SchemaExtensions
+	ePickupDetails_IdentificationIssuingOrg                   smithy.SchemaExtensions
+	ePickupDetails_DevicePickupId                             smithy.SchemaExtensions
+	eRemoteManagement                                         smithy.SchemaExtensions
+	eRemoteManagement_INSTALLED_ONLY                          smithy.SchemaExtensions
+	eRemoteManagement_INSTALLED_AUTOSTART                     smithy.SchemaExtensions
+	eRemoteManagement_NOT_INSTALLED                           smithy.SchemaExtensions
+	e_ResourceARN                                             smithy.SchemaExtensions
+	eReturnShippingLabelAlreadyExistsException                smithy.SchemaExtensions
+	eReturnShippingLabelAlreadyExistsException_Message        smithy.SchemaExtensions
+	e_RoleARN                                                 smithy.SchemaExtensions
+	eS3OnDeviceServiceConfiguration                           smithy.SchemaExtensions
+	eS3OnDeviceServiceConfiguration_StorageLimit              smithy.SchemaExtensions
+	eS3OnDeviceServiceConfiguration_StorageUnit               smithy.SchemaExtensions
+	eS3OnDeviceServiceConfiguration_ServiceSize               smithy.SchemaExtensions
+	eS3OnDeviceServiceConfiguration_FaultTolerance            smithy.SchemaExtensions
+	eS3Resource                                               smithy.SchemaExtensions
+	eS3Resource_BucketArn                                     smithy.SchemaExtensions
+	eS3Resource_KeyRange                                      smithy.SchemaExtensions
+	eS3Resource_TargetOnDeviceServices                        smithy.SchemaExtensions
+	e_S3ResourceList                                          smithy.SchemaExtensions
+	e_S3ResourceList_member                                   smithy.SchemaExtensions
+	e_S3StorageLimit                                          smithy.SchemaExtensions
+	eServiceName                                              smithy.SchemaExtensions
+	eServiceName_KUBERNETES                                   smithy.SchemaExtensions
+	eServiceName_EKS_ANYWHERE                                 smithy.SchemaExtensions
+	e_ServiceSize                                             smithy.SchemaExtensions
+	eServiceVersion                                           smithy.SchemaExtensions
+	eServiceVersion_Version                                   smithy.SchemaExtensions
+	e_ServiceVersionList                                      smithy.SchemaExtensions
+	e_ServiceVersionList_member                               smithy.SchemaExtensions
+	eShipment                                                 smithy.SchemaExtensions
+	eShipment_Status                                          smithy.SchemaExtensions
+	eShipment_TrackingNumber                                  smithy.SchemaExtensions
+	eShipmentState                                            smithy.SchemaExtensions
+	eShipmentState_RECEIVED                                   smithy.SchemaExtensions
+	eShipmentState_RETURNED                                   smithy.SchemaExtensions
+	eShippingDetails                                          smithy.SchemaExtensions
+	eShippingDetails_ShippingOption                           smithy.SchemaExtensions
+	eShippingDetails_InboundShipment                          smithy.SchemaExtensions
+	eShippingDetails_OutboundShipment                         smithy.SchemaExtensions
+	eShippingLabelStatus                                      smithy.SchemaExtensions
+	eShippingLabelStatus_IN_PROGRESS                          smithy.SchemaExtensions
+	eShippingLabelStatus_TIMED_OUT                            smithy.SchemaExtensions
+	eShippingLabelStatus_SUCCEEDED                            smithy.SchemaExtensions
+	eShippingLabelStatus_FAILED                               smithy.SchemaExtensions
+	eShippingOption                                           smithy.SchemaExtensions
+	eShippingOption_SECOND_DAY                                smithy.SchemaExtensions
+	eShippingOption_NEXT_DAY                                  smithy.SchemaExtensions
+	eShippingOption_EXPRESS                                   smithy.SchemaExtensions
+	eShippingOption_STANDARD                                  smithy.SchemaExtensions
+	eSnowballCapacity                                         smithy.SchemaExtensions
+	eSnowballCapacity_T50                                     smithy.SchemaExtensions
+	eSnowballCapacity_T80                                     smithy.SchemaExtensions
+	eSnowballCapacity_T100                                    smithy.SchemaExtensions
+	eSnowballCapacity_T42                                     smithy.SchemaExtensions
+	eSnowballCapacity_T98                                     smithy.SchemaExtensions
+	eSnowballCapacity_T8                                      smithy.SchemaExtensions
+	eSnowballCapacity_T14                                     smithy.SchemaExtensions
+	eSnowballCapacity_T32                                     smithy.SchemaExtensions
+	eSnowballCapacity_NO_PREFERENCE                           smithy.SchemaExtensions
+	eSnowballCapacity_T240                                    smithy.SchemaExtensions
+	eSnowballCapacity_T13                                     smithy.SchemaExtensions
+	eSnowballType                                             smithy.SchemaExtensions
+	eSnowballType_STANDARD                                    smithy.SchemaExtensions
+	eSnowballType_EDGE                                        smithy.SchemaExtensions
+	eSnowballType_EDGE_C                                      smithy.SchemaExtensions
+	eSnowballType_EDGE_CG                                     smithy.SchemaExtensions
+	eSnowballType_EDGE_S                                      smithy.SchemaExtensions
+	eSnowballType_SNC1_HDD                                    smithy.SchemaExtensions
+	eSnowballType_SNC1_SSD                                    smithy.SchemaExtensions
+	eSnowballType_V3_5C                                       smithy.SchemaExtensions
+	eSnowballType_V3_5S                                       smithy.SchemaExtensions
+	eSnowballType_RACK_5U_C                                   smithy.SchemaExtensions
+	eSnowconeDeviceConfiguration                              smithy.SchemaExtensions
+	eSnowconeDeviceConfiguration_WirelessConnection           smithy.SchemaExtensions
+	e_SnsTopicARN                                             smithy.SchemaExtensions
+	e_StorageLimit                                            smithy.SchemaExtensions
+	eStorageUnit                                              smithy.SchemaExtensions
+	eStorageUnit_TB                                           smithy.SchemaExtensions
+	e_String                                                  smithy.SchemaExtensions
+	eTargetOnDeviceService                                    smithy.SchemaExtensions
+	eTargetOnDeviceService_ServiceName                        smithy.SchemaExtensions
+	eTargetOnDeviceService_TransferOption                     smithy.SchemaExtensions
+	e_TargetOnDeviceServiceList                               smithy.SchemaExtensions
+	e_TargetOnDeviceServiceList_member                        smithy.SchemaExtensions
+	eTaxDocuments                                             smithy.SchemaExtensions
+	eTaxDocuments_IND                                         smithy.SchemaExtensions
+	eTGWOnDeviceServiceConfiguration                          smithy.SchemaExtensions
+	eTGWOnDeviceServiceConfiguration_StorageLimit             smithy.SchemaExtensions
+	eTGWOnDeviceServiceConfiguration_StorageUnit              smithy.SchemaExtensions
+	e_Timestamp                                               smithy.SchemaExtensions
+	eTransferOption                                           smithy.SchemaExtensions
+	eTransferOption_IMPORT                                    smithy.SchemaExtensions
+	eTransferOption_EXPORT                                    smithy.SchemaExtensions
+	eTransferOption_LOCAL_USE                                 smithy.SchemaExtensions
+	eUnsupportedAddressException                              smithy.SchemaExtensions
+	eUnsupportedAddressException_Message                      smithy.SchemaExtensions
+	eWirelessConnection                                       smithy.SchemaExtensions
+	eWirelessConnection_IsWifiEnabled                         smithy.SchemaExtensions
+	eCancelClusterRequest                                     smithy.SchemaExtensions
+	eCancelClusterRequest_ClusterId                           smithy.SchemaExtensions
+	eCancelClusterResult                                      smithy.SchemaExtensions
+	eCancelJobRequest                                         smithy.SchemaExtensions
+	eCancelJobRequest_JobId                                   smithy.SchemaExtensions
+	eCancelJobResult                                          smithy.SchemaExtensions
+	eCreateAddressRequest                                     smithy.SchemaExtensions
+	eCreateAddressRequest_Address                             smithy.SchemaExtensions
+	eCreateAddressResult                                      smithy.SchemaExtensions
+	eCreateAddressResult_AddressId                            smithy.SchemaExtensions
+	eCreateClusterRequest                                     smithy.SchemaExtensions
+	eCreateClusterRequest_JobType                             smithy.SchemaExtensions
+	eCreateClusterRequest_Resources                           smithy.SchemaExtensions
+	eCreateClusterRequest_OnDeviceServiceConfiguration        smithy.SchemaExtensions
+	eCreateClusterRequest_Description                         smithy.SchemaExtensions
+	eCreateClusterRequest_AddressId                           smithy.SchemaExtensions
+	eCreateClusterRequest_KmsKeyARN                           smithy.SchemaExtensions
+	eCreateClusterRequest_RoleARN                             smithy.SchemaExtensions
+	eCreateClusterRequest_SnowballType                        smithy.SchemaExtensions
+	eCreateClusterRequest_ShippingOption                      smithy.SchemaExtensions
+	eCreateClusterRequest_Notification                        smithy.SchemaExtensions
+	eCreateClusterRequest_ForwardingAddressId                 smithy.SchemaExtensions
+	eCreateClusterRequest_TaxDocuments                        smithy.SchemaExtensions
+	eCreateClusterRequest_RemoteManagement                    smithy.SchemaExtensions
+	eCreateClusterRequest_InitialClusterSize                  smithy.SchemaExtensions
+	eCreateClusterRequest_ForceCreateJobs                     smithy.SchemaExtensions
+	eCreateClusterRequest_LongTermPricingIds                  smithy.SchemaExtensions
+	eCreateClusterRequest_SnowballCapacityPreference          smithy.SchemaExtensions
+	eCreateClusterResult                                      smithy.SchemaExtensions
+	eCreateClusterResult_ClusterId                            smithy.SchemaExtensions
+	eCreateClusterResult_JobListEntries                       smithy.SchemaExtensions
+	eCreateJobRequest                                         smithy.SchemaExtensions
+	eCreateJobRequest_JobType                                 smithy.SchemaExtensions
+	eCreateJobRequest_Resources                               smithy.SchemaExtensions
+	eCreateJobRequest_OnDeviceServiceConfiguration            smithy.SchemaExtensions
+	eCreateJobRequest_Description                             smithy.SchemaExtensions
+	eCreateJobRequest_AddressId                               smithy.SchemaExtensions
+	eCreateJobRequest_KmsKeyARN                               smithy.SchemaExtensions
+	eCreateJobRequest_RoleARN                                 smithy.SchemaExtensions
+	eCreateJobRequest_SnowballCapacityPreference              smithy.SchemaExtensions
+	eCreateJobRequest_ShippingOption                          smithy.SchemaExtensions
+	eCreateJobRequest_Notification                            smithy.SchemaExtensions
+	eCreateJobRequest_ClusterId                               smithy.SchemaExtensions
+	eCreateJobRequest_SnowballType                            smithy.SchemaExtensions
+	eCreateJobRequest_ForwardingAddressId                     smithy.SchemaExtensions
+	eCreateJobRequest_TaxDocuments                            smithy.SchemaExtensions
+	eCreateJobRequest_DeviceConfiguration                     smithy.SchemaExtensions
+	eCreateJobRequest_RemoteManagement                        smithy.SchemaExtensions
+	eCreateJobRequest_LongTermPricingId                       smithy.SchemaExtensions
+	eCreateJobRequest_ImpactLevel                             smithy.SchemaExtensions
+	eCreateJobRequest_PickupDetails                           smithy.SchemaExtensions
+	eCreateJobResult                                          smithy.SchemaExtensions
+	eCreateJobResult_JobId                                    smithy.SchemaExtensions
+	eCreateLongTermPricingRequest                             smithy.SchemaExtensions
+	eCreateLongTermPricingRequest_LongTermPricingType         smithy.SchemaExtensions
+	eCreateLongTermPricingRequest_IsLongTermPricingAutoRenew  smithy.SchemaExtensions
+	eCreateLongTermPricingRequest_SnowballType                smithy.SchemaExtensions
+	eCreateLongTermPricingResult                              smithy.SchemaExtensions
+	eCreateLongTermPricingResult_LongTermPricingId            smithy.SchemaExtensions
+	eCreateReturnShippingLabelRequest                         smithy.SchemaExtensions
+	eCreateReturnShippingLabelRequest_JobId                   smithy.SchemaExtensions
+	eCreateReturnShippingLabelRequest_ShippingOption          smithy.SchemaExtensions
+	eCreateReturnShippingLabelResult                          smithy.SchemaExtensions
+	eCreateReturnShippingLabelResult_Status                   smithy.SchemaExtensions
+	eDescribeAddressesRequest                                 smithy.SchemaExtensions
+	eDescribeAddressesRequest_MaxResults                      smithy.SchemaExtensions
+	eDescribeAddressesRequest_NextToken                       smithy.SchemaExtensions
+	eDescribeAddressesResult                                  smithy.SchemaExtensions
+	eDescribeAddressesResult_Addresses                        smithy.SchemaExtensions
+	eDescribeAddressesResult_NextToken                        smithy.SchemaExtensions
+	eDescribeAddressRequest                                   smithy.SchemaExtensions
+	eDescribeAddressRequest_AddressId                         smithy.SchemaExtensions
+	eDescribeAddressResult                                    smithy.SchemaExtensions
+	eDescribeAddressResult_Address                            smithy.SchemaExtensions
+	eDescribeClusterRequest                                   smithy.SchemaExtensions
+	eDescribeClusterRequest_ClusterId                         smithy.SchemaExtensions
+	eDescribeClusterResult                                    smithy.SchemaExtensions
+	eDescribeClusterResult_ClusterMetadata                    smithy.SchemaExtensions
+	eDescribeJobRequest                                       smithy.SchemaExtensions
+	eDescribeJobRequest_JobId                                 smithy.SchemaExtensions
+	eDescribeJobResult                                        smithy.SchemaExtensions
+	eDescribeJobResult_JobMetadata                            smithy.SchemaExtensions
+	eDescribeJobResult_SubJobMetadata                         smithy.SchemaExtensions
+	eDescribeReturnShippingLabelRequest                       smithy.SchemaExtensions
+	eDescribeReturnShippingLabelRequest_JobId                 smithy.SchemaExtensions
+	eDescribeReturnShippingLabelResult                        smithy.SchemaExtensions
+	eDescribeReturnShippingLabelResult_Status                 smithy.SchemaExtensions
+	eDescribeReturnShippingLabelResult_ExpirationDate         smithy.SchemaExtensions
+	eDescribeReturnShippingLabelResult_ReturnShippingLabelURI smithy.SchemaExtensions
+	eGetJobManifestRequest                                    smithy.SchemaExtensions
+	eGetJobManifestRequest_JobId                              smithy.SchemaExtensions
+	eGetJobManifestResult                                     smithy.SchemaExtensions
+	eGetJobManifestResult_ManifestURI                         smithy.SchemaExtensions
+	eGetJobUnlockCodeRequest                                  smithy.SchemaExtensions
+	eGetJobUnlockCodeRequest_JobId                            smithy.SchemaExtensions
+	eGetJobUnlockCodeResult                                   smithy.SchemaExtensions
+	eGetJobUnlockCodeResult_UnlockCode                        smithy.SchemaExtensions
+	eGetSnowballUsageRequest                                  smithy.SchemaExtensions
+	eGetSnowballUsageResult                                   smithy.SchemaExtensions
+	eGetSnowballUsageResult_SnowballLimit                     smithy.SchemaExtensions
+	eGetSnowballUsageResult_SnowballsInUse                    smithy.SchemaExtensions
+	eGetSoftwareUpdatesRequest                                smithy.SchemaExtensions
+	eGetSoftwareUpdatesRequest_JobId                          smithy.SchemaExtensions
+	eGetSoftwareUpdatesResult                                 smithy.SchemaExtensions
+	eGetSoftwareUpdatesResult_UpdatesURI                      smithy.SchemaExtensions
+	eListClusterJobsRequest                                   smithy.SchemaExtensions
+	eListClusterJobsRequest_ClusterId                         smithy.SchemaExtensions
+	eListClusterJobsRequest_MaxResults                        smithy.SchemaExtensions
+	eListClusterJobsRequest_NextToken                         smithy.SchemaExtensions
+	eListClusterJobsResult                                    smithy.SchemaExtensions
+	eListClusterJobsResult_JobListEntries                     smithy.SchemaExtensions
+	eListClusterJobsResult_NextToken                          smithy.SchemaExtensions
+	eListClustersRequest                                      smithy.SchemaExtensions
+	eListClustersRequest_MaxResults                           smithy.SchemaExtensions
+	eListClustersRequest_NextToken                            smithy.SchemaExtensions
+	eListClustersResult                                       smithy.SchemaExtensions
+	eListClustersResult_ClusterListEntries                    smithy.SchemaExtensions
+	eListClustersResult_NextToken                             smithy.SchemaExtensions
+	eListCompatibleImagesRequest                              smithy.SchemaExtensions
+	eListCompatibleImagesRequest_MaxResults                   smithy.SchemaExtensions
+	eListCompatibleImagesRequest_NextToken                    smithy.SchemaExtensions
+	eListCompatibleImagesResult                               smithy.SchemaExtensions
+	eListCompatibleImagesResult_CompatibleImages              smithy.SchemaExtensions
+	eListCompatibleImagesResult_NextToken                     smithy.SchemaExtensions
+	eListJobsRequest                                          smithy.SchemaExtensions
+	eListJobsRequest_MaxResults                               smithy.SchemaExtensions
+	eListJobsRequest_NextToken                                smithy.SchemaExtensions
+	eListJobsResult                                           smithy.SchemaExtensions
+	eListJobsResult_JobListEntries                            smithy.SchemaExtensions
+	eListJobsResult_NextToken                                 smithy.SchemaExtensions
+	eListLongTermPricingRequest                               smithy.SchemaExtensions
+	eListLongTermPricingRequest_MaxResults                    smithy.SchemaExtensions
+	eListLongTermPricingRequest_NextToken                     smithy.SchemaExtensions
+	eListLongTermPricingResult                                smithy.SchemaExtensions
+	eListLongTermPricingResult_LongTermPricingEntries         smithy.SchemaExtensions
+	eListLongTermPricingResult_NextToken                      smithy.SchemaExtensions
+	eListPickupLocationsRequest                               smithy.SchemaExtensions
+	eListPickupLocationsRequest_MaxResults                    smithy.SchemaExtensions
+	eListPickupLocationsRequest_NextToken                     smithy.SchemaExtensions
+	eListPickupLocationsResult                                smithy.SchemaExtensions
+	eListPickupLocationsResult_Addresses                      smithy.SchemaExtensions
+	eListPickupLocationsResult_NextToken                      smithy.SchemaExtensions
+	eListServiceVersionsRequest                               smithy.SchemaExtensions
+	eListServiceVersionsRequest_ServiceName                   smithy.SchemaExtensions
+	eListServiceVersionsRequest_DependentServices             smithy.SchemaExtensions
+	eListServiceVersionsRequest_MaxResults                    smithy.SchemaExtensions
+	eListServiceVersionsRequest_NextToken                     smithy.SchemaExtensions
+	eListServiceVersionsResult                                smithy.SchemaExtensions
+	eListServiceVersionsResult_ServiceVersions                smithy.SchemaExtensions
+	eListServiceVersionsResult_ServiceName                    smithy.SchemaExtensions
+	eListServiceVersionsResult_DependentServices              smithy.SchemaExtensions
+	eListServiceVersionsResult_NextToken                      smithy.SchemaExtensions
+	eUpdateClusterRequest                                     smithy.SchemaExtensions
+	eUpdateClusterRequest_ClusterId                           smithy.SchemaExtensions
+	eUpdateClusterRequest_RoleARN                             smithy.SchemaExtensions
+	eUpdateClusterRequest_Description                         smithy.SchemaExtensions
+	eUpdateClusterRequest_Resources                           smithy.SchemaExtensions
+	eUpdateClusterRequest_OnDeviceServiceConfiguration        smithy.SchemaExtensions
+	eUpdateClusterRequest_AddressId                           smithy.SchemaExtensions
+	eUpdateClusterRequest_ShippingOption                      smithy.SchemaExtensions
+	eUpdateClusterRequest_Notification                        smithy.SchemaExtensions
+	eUpdateClusterRequest_ForwardingAddressId                 smithy.SchemaExtensions
+	eUpdateClusterResult                                      smithy.SchemaExtensions
+	eUpdateJobRequest                                         smithy.SchemaExtensions
+	eUpdateJobRequest_JobId                                   smithy.SchemaExtensions
+	eUpdateJobRequest_RoleARN                                 smithy.SchemaExtensions
+	eUpdateJobRequest_Notification                            smithy.SchemaExtensions
+	eUpdateJobRequest_Resources                               smithy.SchemaExtensions
+	eUpdateJobRequest_OnDeviceServiceConfiguration            smithy.SchemaExtensions
+	eUpdateJobRequest_AddressId                               smithy.SchemaExtensions
+	eUpdateJobRequest_ShippingOption                          smithy.SchemaExtensions
+	eUpdateJobRequest_Description                             smithy.SchemaExtensions
+	eUpdateJobRequest_SnowballCapacityPreference              smithy.SchemaExtensions
+	eUpdateJobRequest_ForwardingAddressId                     smithy.SchemaExtensions
+	eUpdateJobRequest_PickupDetails                           smithy.SchemaExtensions
+	eUpdateJobResult                                          smithy.SchemaExtensions
+	eUpdateJobShipmentStateRequest                            smithy.SchemaExtensions
+	eUpdateJobShipmentStateRequest_JobId                      smithy.SchemaExtensions
+	eUpdateJobShipmentStateRequest_ShipmentState              smithy.SchemaExtensions
+	eUpdateJobShipmentStateResult                             smithy.SchemaExtensions
+	eUpdateLongTermPricingRequest                             smithy.SchemaExtensions
+	eUpdateLongTermPricingRequest_LongTermPricingId           smithy.SchemaExtensions
+	eUpdateLongTermPricingRequest_ReplacementJob              smithy.SchemaExtensions
+	eUpdateLongTermPricingRequest_IsLongTermPricingAutoRenew  smithy.SchemaExtensions
+	eUpdateLongTermPricingResult                              smithy.SchemaExtensions
+)
+
+var (
+	iCancelCluster                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelCluster"}
+	iCancelJob                                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelJob"}
+	iCreateAddress                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateAddress"}
+	iCreateCluster                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateCluster"}
+	iCreateJob                                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateJob"}
+	iCreateLongTermPricing                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateLongTermPricing"}
+	iCreateReturnShippingLabel                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateReturnShippingLabel"}
+	iDescribeAddress                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddress"}
+	iDescribeAddresses                         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddresses"}
+	iDescribeCluster                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeCluster"}
+	iDescribeJob                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeJob"}
+	iDescribeReturnShippingLabel               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeReturnShippingLabel"}
+	iGetJobManifest                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobManifest"}
+	iGetJobUnlockCode                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobUnlockCode"}
+	iGetSnowballUsage                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSnowballUsage"}
+	iGetSoftwareUpdates                        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSoftwareUpdates"}
+	iListClusterJobs                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClusterJobs"}
+	iListClusters                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClusters"}
+	iListCompatibleImages                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListCompatibleImages"}
+	iListJobs                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListJobs"}
+	iListLongTermPricing                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListLongTermPricing"}
+	iListPickupLocations                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListPickupLocations"}
+	iListServiceVersions                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListServiceVersions"}
+	iUpdateCluster                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateCluster"}
+	iUpdateJob                                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJob"}
+	iUpdateJobShipmentState                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJobShipmentState"}
+	iUpdateLongTermPricing                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateLongTermPricing"}
+	i_AWSIESnowballJobManagementService        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "AWSIESnowballJobManagementService"}
+	iAddress                                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Address"}
+	i_AddressId                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "AddressId"}
+	i_AddressList                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "AddressList"}
+	iAddressType                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "AddressType"}
+	i_AmiId                                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "AmiId"}
+	i_Boolean                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Boolean"}
+	i_ClusterId                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterId"}
+	iClusterLimitExceededException             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterLimitExceededException"}
+	iClusterListEntry                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterListEntry"}
+	i_ClusterListEntryList                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterListEntryList"}
+	iClusterMetadata                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterMetadata"}
+	iClusterState                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ClusterState"}
+	iCompatibleImage                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CompatibleImage"}
+	i_CompatibleImageList                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CompatibleImageList"}
+	iConflictException                         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ConflictException"}
+	iDataTransfer                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DataTransfer"}
+	iDependentService                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DependentService"}
+	i_DependentServiceList                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DependentServiceList"}
+	iDeviceConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DeviceConfiguration"}
+	i_DevicePickupId                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DevicePickupId"}
+	iDeviceServiceName                         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DeviceServiceName"}
+	iEc2AmiResource                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Ec2AmiResource"}
+	i_Ec2AmiResourceList                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Ec2AmiResourceList"}
+	iEc2RequestFailedException                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Ec2RequestFailedException"}
+	iEKSOnDeviceServiceConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "EKSOnDeviceServiceConfiguration"}
+	i_Email                                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Email"}
+	iEventTriggerDefinition                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "EventTriggerDefinition"}
+	i_EventTriggerDefinitionList               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "EventTriggerDefinitionList"}
+	i_GSTIN                                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GSTIN"}
+	iImpactLevel                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ImpactLevel"}
+	iINDTaxDocuments                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "INDTaxDocuments"}
+	i_InitialClusterSize                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InitialClusterSize"}
+	i_Integer                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Integer"}
+	iInvalidAddressException                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InvalidAddressException"}
+	iInvalidInputCombinationException          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InvalidInputCombinationException"}
+	iInvalidJobStateException                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InvalidJobStateException"}
+	iInvalidNextTokenException                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InvalidNextTokenException"}
+	iInvalidResourceException                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "InvalidResourceException"}
+	i_JavaBoolean                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JavaBoolean"}
+	i_JobId                                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobId"}
+	iJobListEntry                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobListEntry"}
+	i_JobListEntryList                         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobListEntryList"}
+	iJobLogs                                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobLogs"}
+	iJobMetadata                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobMetadata"}
+	i_JobMetadataList                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobMetadataList"}
+	iJobResource                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobResource"}
+	iJobState                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobState"}
+	i_JobStateList                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobStateList"}
+	iJobType                                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "JobType"}
+	iKeyRange                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "KeyRange"}
+	i_KmsKeyARN                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "KmsKeyARN"}
+	iKMSRequestFailedException                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "KMSRequestFailedException"}
+	iLambdaResource                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LambdaResource"}
+	i_LambdaResourceList                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LambdaResourceList"}
+	i_ListLimit                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListLimit"}
+	i_Long                                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Long"}
+	i_LongTermPricingAssociatedJobIdList       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingAssociatedJobIdList"}
+	i_LongTermPricingEntryList                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingEntryList"}
+	i_LongTermPricingId                        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingId"}
+	i_LongTermPricingIdList                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingIdList"}
+	iLongTermPricingListEntry                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingListEntry"}
+	iLongTermPricingType                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "LongTermPricingType"}
+	iNFSOnDeviceServiceConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "NFSOnDeviceServiceConfiguration"}
+	i_NodeFaultTolerance                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "NodeFaultTolerance"}
+	iNotification                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Notification"}
+	iOnDeviceServiceConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "OnDeviceServiceConfiguration"}
+	i_PhoneNumber                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "PhoneNumber"}
+	iPickupDetails                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "PickupDetails"}
+	iRemoteManagement                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "RemoteManagement"}
+	i_ResourceARN                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ResourceARN"}
+	iReturnShippingLabelAlreadyExistsException = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ReturnShippingLabelAlreadyExistsException"}
+	i_RoleARN                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "RoleARN"}
+	iS3OnDeviceServiceConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "S3OnDeviceServiceConfiguration"}
+	iS3Resource                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "S3Resource"}
+	i_S3ResourceList                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "S3ResourceList"}
+	i_S3StorageLimit                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "S3StorageLimit"}
+	iServiceName                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ServiceName"}
+	i_ServiceSize                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ServiceSize"}
+	iServiceVersion                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ServiceVersion"}
+	i_ServiceVersionList                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ServiceVersionList"}
+	iShipment                                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Shipment"}
+	iShipmentState                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ShipmentState"}
+	iShippingDetails                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ShippingDetails"}
+	iShippingLabelStatus                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ShippingLabelStatus"}
+	iShippingOption                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ShippingOption"}
+	iSnowballCapacity                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "SnowballCapacity"}
+	iSnowballType                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "SnowballType"}
+	iSnowconeDeviceConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "SnowconeDeviceConfiguration"}
+	i_SnsTopicARN                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "SnsTopicARN"}
+	i_StorageLimit                             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "StorageLimit"}
+	iStorageUnit                               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "StorageUnit"}
+	i_String                                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "String"}
+	iTargetOnDeviceService                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "TargetOnDeviceService"}
+	i_TargetOnDeviceServiceList                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "TargetOnDeviceServiceList"}
+	iTaxDocuments                              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "TaxDocuments"}
+	iTGWOnDeviceServiceConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "TGWOnDeviceServiceConfiguration"}
+	i_Timestamp                                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "Timestamp"}
+	iTransferOption                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "TransferOption"}
+	iUnsupportedAddressException               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UnsupportedAddressException"}
+	iWirelessConnection                        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "WirelessConnection"}
+	iCancelClusterRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelClusterRequest"}
+	iCancelClusterResult                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelClusterResult"}
+	iCancelJobRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelJobRequest"}
+	iCancelJobResult                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CancelJobResult"}
+	iCreateAddressRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateAddressRequest"}
+	iCreateAddressResult                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateAddressResult"}
+	iCreateClusterRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateClusterRequest"}
+	iCreateClusterResult                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateClusterResult"}
+	iCreateJobRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateJobRequest"}
+	iCreateJobResult                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateJobResult"}
+	iCreateLongTermPricingRequest              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateLongTermPricingRequest"}
+	iCreateLongTermPricingResult               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateLongTermPricingResult"}
+	iCreateReturnShippingLabelRequest          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateReturnShippingLabelRequest"}
+	iCreateReturnShippingLabelResult           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "CreateReturnShippingLabelResult"}
+	iDescribeAddressesRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddressesRequest"}
+	iDescribeAddressesResult                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddressesResult"}
+	iDescribeAddressRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddressRequest"}
+	iDescribeAddressResult                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeAddressResult"}
+	iDescribeClusterRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeClusterRequest"}
+	iDescribeClusterResult                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeClusterResult"}
+	iDescribeJobRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeJobRequest"}
+	iDescribeJobResult                         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeJobResult"}
+	iDescribeReturnShippingLabelRequest        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeReturnShippingLabelRequest"}
+	iDescribeReturnShippingLabelResult         = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "DescribeReturnShippingLabelResult"}
+	iGetJobManifestRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobManifestRequest"}
+	iGetJobManifestResult                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobManifestResult"}
+	iGetJobUnlockCodeRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobUnlockCodeRequest"}
+	iGetJobUnlockCodeResult                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetJobUnlockCodeResult"}
+	iGetSnowballUsageRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSnowballUsageRequest"}
+	iGetSnowballUsageResult                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSnowballUsageResult"}
+	iGetSoftwareUpdatesRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSoftwareUpdatesRequest"}
+	iGetSoftwareUpdatesResult                  = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "GetSoftwareUpdatesResult"}
+	iListClusterJobsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClusterJobsRequest"}
+	iListClusterJobsResult                     = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClusterJobsResult"}
+	iListClustersRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClustersRequest"}
+	iListClustersResult                        = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListClustersResult"}
+	iListCompatibleImagesRequest               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListCompatibleImagesRequest"}
+	iListCompatibleImagesResult                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListCompatibleImagesResult"}
+	iListJobsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListJobsRequest"}
+	iListJobsResult                            = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListJobsResult"}
+	iListLongTermPricingRequest                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListLongTermPricingRequest"}
+	iListLongTermPricingResult                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListLongTermPricingResult"}
+	iListPickupLocationsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListPickupLocationsRequest"}
+	iListPickupLocationsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListPickupLocationsResult"}
+	iListServiceVersionsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListServiceVersionsRequest"}
+	iListServiceVersionsResult                 = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "ListServiceVersionsResult"}
+	iUpdateClusterRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateClusterRequest"}
+	iUpdateClusterResult                       = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateClusterResult"}
+	iUpdateJobRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJobRequest"}
+	iUpdateJobResult                           = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJobResult"}
+	iUpdateJobShipmentStateRequest             = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJobShipmentStateRequest"}
+	iUpdateJobShipmentStateResult              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateJobShipmentStateResult"}
+	iUpdateLongTermPricingRequest              = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateLongTermPricingRequest"}
+	iUpdateLongTermPricingResult               = smithy.ShapeName{Namespace: "com.amazonaws.snowball", Name: "UpdateLongTermPricingResult"}
+	pUnit                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sAddress_AddressId, &sAddress_Name, &sAddress_Company, &sAddress_Street1, &sAddress_Street2, &sAddress_Street3, &sAddress_City, &sAddress_StateOrProvince, &sAddress_PrefectureOrDistrict, &sAddress_Landmark, &sAddress_Country, &sAddress_PostalCode, &sAddress_PhoneNumber, &sAddress_IsRestricted, &sAddress_Type}, Hash: &hAddress}
+var m_AddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddressList_member}}
+var mAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressType_CUST_PICKUP, &sAddressType_AWS_SHIP}}
+var mClusterLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterLimitExceededException_Message}}
+var mClusterListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterListEntry_ClusterId, &sClusterListEntry_ClusterState, &sClusterListEntry_CreationDate, &sClusterListEntry_Description}}
+var m_ClusterListEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClusterListEntryList_member}}
+var mClusterMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterMetadata_ClusterId, &sClusterMetadata_Description, &sClusterMetadata_KmsKeyARN, &sClusterMetadata_RoleARN, &sClusterMetadata_ClusterState, &sClusterMetadata_JobType, &sClusterMetadata_SnowballType, &sClusterMetadata_CreationDate, &sClusterMetadata_Resources, &sClusterMetadata_AddressId, &sClusterMetadata_ShippingOption, &sClusterMetadata_Notification, &sClusterMetadata_ForwardingAddressId, &sClusterMetadata_TaxDocuments, &sClusterMetadata_OnDeviceServiceConfiguration}, Hash: &hClusterMetadata}
+var mClusterState = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterState_AWAITING_QUORUM, &sClusterState_PENDING, &sClusterState_IN_USE, &sClusterState_COMPLETE, &sClusterState_CANCELLED}}
+var mCompatibleImage = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibleImage_AmiId, &sCompatibleImage_Name}}
+var m_CompatibleImageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompatibleImageList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_ConflictResource, &sConflictException_Message}}
+var mDataTransfer = smithy.SchemaMembers{List: []*smithy.Schema{&sDataTransfer_BytesTransferred, &sDataTransfer_ObjectsTransferred, &sDataTransfer_TotalBytes, &sDataTransfer_TotalObjects}}
+var mDependentService = smithy.SchemaMembers{List: []*smithy.Schema{&sDependentService_ServiceName, &sDependentService_ServiceVersion}}
+var m_DependentServiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DependentServiceList_member}}
+var mDeviceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceConfiguration_SnowconeDeviceConfiguration}}
+var mDeviceServiceName = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceServiceName_NFS_ON_DEVICE_SERVICE, &sDeviceServiceName_S3_ON_DEVICE_SERVICE}}
+var mEc2AmiResource = smithy.SchemaMembers{List: []*smithy.Schema{&sEc2AmiResource_AmiId, &sEc2AmiResource_SnowballAmiId}}
+var m_Ec2AmiResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ec2AmiResourceList_member}}
+var mEc2RequestFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sEc2RequestFailedException_Message}}
+var mEKSOnDeviceServiceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEKSOnDeviceServiceConfiguration_KubernetesVersion, &sEKSOnDeviceServiceConfiguration_EKSAnywhereVersion}}
+var mEventTriggerDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTriggerDefinition_EventResourceARN}}
+var m_EventTriggerDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTriggerDefinitionList_member}}
+var mImpactLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sImpactLevel_IL2, &sImpactLevel_IL4, &sImpactLevel_IL5, &sImpactLevel_IL6, &sImpactLevel_IL99}}
+var mINDTaxDocuments = smithy.SchemaMembers{List: []*smithy.Schema{&sINDTaxDocuments_GSTIN}}
+var mInvalidAddressException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidAddressException_Message}}
+var mInvalidInputCombinationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputCombinationException_Message}}
+var mInvalidJobStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidJobStateException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mInvalidResourceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidResourceException_Message, &sInvalidResourceException_ResourceType}}
+var mJobListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sJobListEntry_JobId, &sJobListEntry_JobState, &sJobListEntry_IsMaster, &sJobListEntry_JobType, &sJobListEntry_SnowballType, &sJobListEntry_CreationDate, &sJobListEntry_Description}}
+var m_JobListEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobListEntryList_member}}
+var mJobLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sJobLogs_JobCompletionReportURI, &sJobLogs_JobSuccessLogURI, &sJobLogs_JobFailureLogURI}}
+var mJobMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sJobMetadata_JobId, &sJobMetadata_JobState, &sJobMetadata_JobType, &sJobMetadata_SnowballType, &sJobMetadata_CreationDate, &sJobMetadata_Resources, &sJobMetadata_Description, &sJobMetadata_KmsKeyARN, &sJobMetadata_RoleARN, &sJobMetadata_AddressId, &sJobMetadata_ShippingDetails, &sJobMetadata_SnowballCapacityPreference, &sJobMetadata_Notification, &sJobMetadata_DataTransferProgress, &sJobMetadata_JobLogInfo, &sJobMetadata_ClusterId, &sJobMetadata_ForwardingAddressId, &sJobMetadata_TaxDocuments, &sJobMetadata_DeviceConfiguration, &sJobMetadata_RemoteManagement, &sJobMetadata_LongTermPricingId, &sJobMetadata_OnDeviceServiceConfiguration, &sJobMetadata_ImpactLevel, &sJobMetadata_PickupDetails, &sJobMetadata_SnowballId}, Hash: &hJobMetadata}
+var m_JobMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobMetadataList_member}}
+var mJobResource = smithy.SchemaMembers{List: []*smithy.Schema{&sJobResource_S3Resources, &sJobResource_LambdaResources, &sJobResource_Ec2AmiResources}}
+var mJobState = smithy.SchemaMembers{List: []*smithy.Schema{&sJobState_NEW, &sJobState_PREPARING_APPLIANCE, &sJobState_PREPARING_SHIPMENT, &sJobState_IN_TRANSIT_TO_CUSTOMER, &sJobState_WITH_CUSTOMER, &sJobState_IN_TRANSIT_TO_AWS, &sJobState_WITH_AWS_SORTING_FACILITY, &sJobState_WITH_AWS, &sJobState_IN_PROGRESS, &sJobState_COMPLETE, &sJobState_CANCELLED, &sJobState_LISTING, &sJobState_PENDING}, Hash: &hJobState}
+var m_JobStateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobStateList_member}}
+var mJobType = smithy.SchemaMembers{List: []*smithy.Schema{&sJobType_IMPORT, &sJobType_EXPORT, &sJobType_LOCAL_USE}}
+var mKeyRange = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyRange_BeginMarker, &sKeyRange_EndMarker}}
+var mKMSRequestFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSRequestFailedException_Message}}
+var mLambdaResource = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaResource_LambdaArn, &sLambdaResource_EventTriggers}}
+var m_LambdaResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaResourceList_member}}
+var m_LongTermPricingAssociatedJobIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongTermPricingAssociatedJobIdList_member}}
+var m_LongTermPricingEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongTermPricingEntryList_member}}
+var m_LongTermPricingIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongTermPricingIdList_member}}
+var mLongTermPricingListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sLongTermPricingListEntry_LongTermPricingId, &sLongTermPricingListEntry_LongTermPricingEndDate, &sLongTermPricingListEntry_LongTermPricingStartDate, &sLongTermPricingListEntry_LongTermPricingType, &sLongTermPricingListEntry_CurrentActiveJob, &sLongTermPricingListEntry_ReplacementJob, &sLongTermPricingListEntry_IsLongTermPricingAutoRenew, &sLongTermPricingListEntry_LongTermPricingStatus, &sLongTermPricingListEntry_SnowballType, &sLongTermPricingListEntry_JobIds}, Hash: &hLongTermPricingListEntry}
+var mLongTermPricingType = smithy.SchemaMembers{List: []*smithy.Schema{&sLongTermPricingType_ONE_YEAR, &sLongTermPricingType_THREE_YEAR, &sLongTermPricingType_ONE_MONTH}}
+var mNFSOnDeviceServiceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNFSOnDeviceServiceConfiguration_StorageLimit, &sNFSOnDeviceServiceConfiguration_StorageUnit}}
+var mNotification = smithy.SchemaMembers{List: []*smithy.Schema{&sNotification_SnsTopicARN, &sNotification_JobStatesToNotify, &sNotification_NotifyAll, &sNotification_DevicePickupSnsTopicARN}}
+var mOnDeviceServiceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOnDeviceServiceConfiguration_NFSOnDeviceService, &sOnDeviceServiceConfiguration_TGWOnDeviceService, &sOnDeviceServiceConfiguration_EKSOnDeviceService, &sOnDeviceServiceConfiguration_S3OnDeviceService}}
+var mPickupDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sPickupDetails_Name, &sPickupDetails_PhoneNumber, &sPickupDetails_Email, &sPickupDetails_IdentificationNumber, &sPickupDetails_IdentificationExpirationDate, &sPickupDetails_IdentificationIssuingOrg, &sPickupDetails_DevicePickupId}}
+var mRemoteManagement = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoteManagement_INSTALLED_ONLY, &sRemoteManagement_INSTALLED_AUTOSTART, &sRemoteManagement_NOT_INSTALLED}}
+var mReturnShippingLabelAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sReturnShippingLabelAlreadyExistsException_Message}}
+var mS3OnDeviceServiceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3OnDeviceServiceConfiguration_StorageLimit, &sS3OnDeviceServiceConfiguration_StorageUnit, &sS3OnDeviceServiceConfiguration_ServiceSize, &sS3OnDeviceServiceConfiguration_FaultTolerance}}
+var mS3Resource = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Resource_BucketArn, &sS3Resource_KeyRange, &sS3Resource_TargetOnDeviceServices}}
+var m_S3ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3ResourceList_member}}
+var mServiceName = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceName_KUBERNETES, &sServiceName_EKS_ANYWHERE}}
+var mServiceVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceVersion_Version}}
+var m_ServiceVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceVersionList_member}}
+var mShipment = smithy.SchemaMembers{List: []*smithy.Schema{&sShipment_Status, &sShipment_TrackingNumber}}
+var mShipmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sShipmentState_RECEIVED, &sShipmentState_RETURNED}}
+var mShippingDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sShippingDetails_ShippingOption, &sShippingDetails_InboundShipment, &sShippingDetails_OutboundShipment}}
+var mShippingLabelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sShippingLabelStatus_IN_PROGRESS, &sShippingLabelStatus_TIMED_OUT, &sShippingLabelStatus_SUCCEEDED, &sShippingLabelStatus_FAILED}}
+var mShippingOption = smithy.SchemaMembers{List: []*smithy.Schema{&sShippingOption_SECOND_DAY, &sShippingOption_NEXT_DAY, &sShippingOption_EXPRESS, &sShippingOption_STANDARD}}
+var mSnowballCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowballCapacity_T50, &sSnowballCapacity_T80, &sSnowballCapacity_T100, &sSnowballCapacity_T42, &sSnowballCapacity_T98, &sSnowballCapacity_T8, &sSnowballCapacity_T14, &sSnowballCapacity_T32, &sSnowballCapacity_NO_PREFERENCE, &sSnowballCapacity_T240, &sSnowballCapacity_T13}, Hash: &hSnowballCapacity}
+var mSnowballType = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowballType_STANDARD, &sSnowballType_EDGE, &sSnowballType_EDGE_C, &sSnowballType_EDGE_CG, &sSnowballType_EDGE_S, &sSnowballType_SNC1_HDD, &sSnowballType_SNC1_SSD, &sSnowballType_V3_5C, &sSnowballType_V3_5S, &sSnowballType_RACK_5U_C}, Hash: &hSnowballType}
+var mSnowconeDeviceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowconeDeviceConfiguration_WirelessConnection}}
+var mStorageUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageUnit_TB}}
+var mTargetOnDeviceService = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetOnDeviceService_ServiceName, &sTargetOnDeviceService_TransferOption}}
+var m_TargetOnDeviceServiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetOnDeviceServiceList_member}}
+var mTaxDocuments = smithy.SchemaMembers{List: []*smithy.Schema{&sTaxDocuments_IND}}
+var mTGWOnDeviceServiceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTGWOnDeviceServiceConfiguration_StorageLimit, &sTGWOnDeviceServiceConfiguration_StorageUnit}}
+var mTransferOption = smithy.SchemaMembers{List: []*smithy.Schema{&sTransferOption_IMPORT, &sTransferOption_EXPORT, &sTransferOption_LOCAL_USE}}
+var mUnsupportedAddressException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedAddressException_Message}}
+var mWirelessConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sWirelessConnection_IsWifiEnabled}}
+var mCancelClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelClusterRequest_ClusterId}}
+var mCancelJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobRequest_JobId}}
+var mCreateAddressRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressRequest_Address}}
+var mCreateAddressResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAddressResult_AddressId}}
+var mCreateClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterRequest_JobType, &sCreateClusterRequest_Resources, &sCreateClusterRequest_OnDeviceServiceConfiguration, &sCreateClusterRequest_Description, &sCreateClusterRequest_AddressId, &sCreateClusterRequest_KmsKeyARN, &sCreateClusterRequest_RoleARN, &sCreateClusterRequest_SnowballType, &sCreateClusterRequest_ShippingOption, &sCreateClusterRequest_Notification, &sCreateClusterRequest_ForwardingAddressId, &sCreateClusterRequest_TaxDocuments, &sCreateClusterRequest_RemoteManagement, &sCreateClusterRequest_InitialClusterSize, &sCreateClusterRequest_ForceCreateJobs, &sCreateClusterRequest_LongTermPricingIds, &sCreateClusterRequest_SnowballCapacityPreference}, Hash: &hCreateClusterRequest}
+var mCreateClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterResult_ClusterId, &sCreateClusterResult_JobListEntries}}
+var mCreateJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobRequest_JobType, &sCreateJobRequest_Resources, &sCreateJobRequest_OnDeviceServiceConfiguration, &sCreateJobRequest_Description, &sCreateJobRequest_AddressId, &sCreateJobRequest_KmsKeyARN, &sCreateJobRequest_RoleARN, &sCreateJobRequest_SnowballCapacityPreference, &sCreateJobRequest_ShippingOption, &sCreateJobRequest_Notification, &sCreateJobRequest_ClusterId, &sCreateJobRequest_SnowballType, &sCreateJobRequest_ForwardingAddressId, &sCreateJobRequest_TaxDocuments, &sCreateJobRequest_DeviceConfiguration, &sCreateJobRequest_RemoteManagement, &sCreateJobRequest_LongTermPricingId, &sCreateJobRequest_ImpactLevel, &sCreateJobRequest_PickupDetails}, Hash: &hCreateJobRequest}
+var mCreateJobResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobResult_JobId}}
+var mCreateLongTermPricingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLongTermPricingRequest_LongTermPricingType, &sCreateLongTermPricingRequest_IsLongTermPricingAutoRenew, &sCreateLongTermPricingRequest_SnowballType}}
+var mCreateLongTermPricingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLongTermPricingResult_LongTermPricingId}}
+var mCreateReturnShippingLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReturnShippingLabelRequest_JobId, &sCreateReturnShippingLabelRequest_ShippingOption}}
+var mCreateReturnShippingLabelResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReturnShippingLabelResult_Status}}
+var mDescribeAddressesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAddressesRequest_MaxResults, &sDescribeAddressesRequest_NextToken}}
+var mDescribeAddressesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAddressesResult_Addresses, &sDescribeAddressesResult_NextToken}}
+var mDescribeAddressRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAddressRequest_AddressId}}
+var mDescribeAddressResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAddressResult_Address}}
+var mDescribeClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterRequest_ClusterId}}
+var mDescribeClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterResult_ClusterMetadata}}
+var mDescribeJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobRequest_JobId}}
+var mDescribeJobResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobResult_JobMetadata, &sDescribeJobResult_SubJobMetadata}}
+var mDescribeReturnShippingLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReturnShippingLabelRequest_JobId}}
+var mDescribeReturnShippingLabelResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReturnShippingLabelResult_Status, &sDescribeReturnShippingLabelResult_ExpirationDate, &sDescribeReturnShippingLabelResult_ReturnShippingLabelURI}}
+var mGetJobManifestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobManifestRequest_JobId}}
+var mGetJobManifestResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobManifestResult_ManifestURI}}
+var mGetJobUnlockCodeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobUnlockCodeRequest_JobId}}
+var mGetJobUnlockCodeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobUnlockCodeResult_UnlockCode}}
+var mGetSnowballUsageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSnowballUsageResult_SnowballLimit, &sGetSnowballUsageResult_SnowballsInUse}}
+var mGetSoftwareUpdatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSoftwareUpdatesRequest_JobId}}
+var mGetSoftwareUpdatesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSoftwareUpdatesResult_UpdatesURI}}
+var mListClusterJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterJobsRequest_ClusterId, &sListClusterJobsRequest_MaxResults, &sListClusterJobsRequest_NextToken}}
+var mListClusterJobsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterJobsResult_JobListEntries, &sListClusterJobsResult_NextToken}}
+var mListClustersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersRequest_MaxResults, &sListClustersRequest_NextToken}}
+var mListClustersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersResult_ClusterListEntries, &sListClustersResult_NextToken}}
+var mListCompatibleImagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCompatibleImagesRequest_MaxResults, &sListCompatibleImagesRequest_NextToken}}
+var mListCompatibleImagesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListCompatibleImagesResult_CompatibleImages, &sListCompatibleImagesResult_NextToken}}
+var mListJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsRequest_MaxResults, &sListJobsRequest_NextToken}}
+var mListJobsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsResult_JobListEntries, &sListJobsResult_NextToken}}
+var mListLongTermPricingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLongTermPricingRequest_MaxResults, &sListLongTermPricingRequest_NextToken}}
+var mListLongTermPricingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListLongTermPricingResult_LongTermPricingEntries, &sListLongTermPricingResult_NextToken}}
+var mListPickupLocationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPickupLocationsRequest_MaxResults, &sListPickupLocationsRequest_NextToken}}
+var mListPickupLocationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPickupLocationsResult_Addresses, &sListPickupLocationsResult_NextToken}}
+var mListServiceVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceVersionsRequest_ServiceName, &sListServiceVersionsRequest_DependentServices, &sListServiceVersionsRequest_MaxResults, &sListServiceVersionsRequest_NextToken}}
+var mListServiceVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceVersionsResult_ServiceVersions, &sListServiceVersionsResult_ServiceName, &sListServiceVersionsResult_DependentServices, &sListServiceVersionsResult_NextToken}}
+var mUpdateClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterRequest_ClusterId, &sUpdateClusterRequest_RoleARN, &sUpdateClusterRequest_Description, &sUpdateClusterRequest_Resources, &sUpdateClusterRequest_OnDeviceServiceConfiguration, &sUpdateClusterRequest_AddressId, &sUpdateClusterRequest_ShippingOption, &sUpdateClusterRequest_Notification, &sUpdateClusterRequest_ForwardingAddressId}, Hash: &hUpdateClusterRequest}
+var mUpdateJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobRequest_JobId, &sUpdateJobRequest_RoleARN, &sUpdateJobRequest_Notification, &sUpdateJobRequest_Resources, &sUpdateJobRequest_OnDeviceServiceConfiguration, &sUpdateJobRequest_AddressId, &sUpdateJobRequest_ShippingOption, &sUpdateJobRequest_Description, &sUpdateJobRequest_SnowballCapacityPreference, &sUpdateJobRequest_ForwardingAddressId, &sUpdateJobRequest_PickupDetails}, Hash: &hUpdateJobRequest}
+var mUpdateJobShipmentStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobShipmentStateRequest_JobId, &sUpdateJobShipmentStateRequest_ShipmentState}}
+var mUpdateLongTermPricingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLongTermPricingRequest_LongTermPricingId, &sUpdateLongTermPricingRequest_ReplacementJob, &sUpdateLongTermPricingRequest_IsLongTermPricingAutoRenew}}
+
+var hAddress = smithy.MemberHash{Seed: 48, Slots: []uint16{
+	13, 12, 0, 11, 1, 0, 8, 0, 2, 3, 15, 0, 9, 0, 7, 0, 0, 5, 0, 6, 0, 0, 0, 0,
+	0, 0, 0, 10, 0, 14, 4, 0,
+}}
+var hClusterMetadata = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 11, 0, 0, 7, 13, 2, 0, 0, 9, 0, 15, 0, 0, 0, 5, 12, 0, 14, 0, 0, 8, 4, 10,
+	0, 0, 0, 3, 0, 1, 0, 6,
+}}
+var hJobMetadata = smithy.MemberHash{Seed: 209, Slots: []uint16{
+	0, 0, 15, 23, 22, 0, 0, 0, 11, 0, 0, 0, 18, 0, 0, 0, 2, 0, 0, 4, 0, 0, 3, 0,
+	0, 16, 0, 0, 7, 0, 17, 0, 0, 0, 0, 0, 19, 13, 0, 1, 0, 8, 5, 0, 0, 24, 20, 21,
+	0, 14, 0, 0, 0, 0, 25, 0, 0, 12, 9, 0, 0, 10, 6, 0,
+}}
+var hJobState = smithy.MemberHash{Seed: 31, Slots: []uint16{
+	0, 0, 4, 7, 0, 13, 0, 0, 0, 0, 0, 10, 6, 3, 0, 0, 0, 5, 0, 1, 8, 0, 0, 0,
+	0, 12, 9, 0, 0, 11, 2, 0,
+}}
+var hLongTermPricingListEntry = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 4, 8, 0, 0, 0, 10, 2, 0, 0, 0, 0, 7, 9, 0, 0, 6, 3,
+	0, 0, 5, 0, 0, 0, 0, 0,
+}}
+var hSnowballCapacity = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	5, 0, 0, 6, 0, 10, 0, 0, 0, 11, 7, 0, 0, 0, 0, 0, 0, 8, 0, 9, 0, 0, 0, 0,
+	0, 0, 4, 1, 2, 0, 0, 3,
+}}
+var hSnowballType = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 0, 8, 3, 0, 0, 0, 2, 0, 0, 0, 0, 9, 5, 0, 4, 0, 0, 0,
+	0, 0, 10, 0, 1, 0, 7, 0,
+}}
+var hCreateClusterRequest = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 14, 0, 0, 0, 0, 13, 0, 0, 16, 11, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 3, 0, 0, 0, 6, 0, 0, 15, 0, 0, 5, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 8, 0, 0, 10, 2, 0, 7, 0, 17, 0, 12, 0,
+}}
+var hCreateJobRequest = smithy.MemberHash{Seed: 19, Slots: []uint16{
+	0, 0, 13, 19, 12, 0, 0, 18, 0, 0, 3, 1, 0, 0, 0, 4, 0, 0, 11, 9, 10, 0, 15, 0,
+	8, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 14, 0, 0, 0, 2,
+	0, 0, 5, 16, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0,
+}}
+var hUpdateClusterRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 7, 0, 0, 0, 5, 9, 0, 0, 0, 4, 2, 0, 8, 0, 0, 3, 0, 1, 0,
+	0, 0, 0, 6, 0, 0, 0, 0,
+}}
+var hUpdateJobRequest = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 7, 0, 0, 0, 10, 8, 0, 0, 4, 0, 5, 0, 0, 0, 0, 3, 0, 0, 0, 9, 0, 2, 6,
+	0, 0, 0, 1, 0, 0, 0, 11,
+}}
+
+var sCancelCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCluster, Type: smithy.ShapeTypeOperation, Ext: &eCancelCluster})
+var sCancelJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJob, Type: smithy.ShapeTypeOperation, Ext: &eCancelJob})
+var sCreateAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddress, Type: smithy.ShapeTypeOperation, Ext: &eCreateAddress})
+var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Type: smithy.ShapeTypeOperation, Ext: &eCreateCluster})
+var sCreateJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJob, Type: smithy.ShapeTypeOperation, Ext: &eCreateJob})
+var sCreateLongTermPricing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLongTermPricing, Type: smithy.ShapeTypeOperation, Ext: &eCreateLongTermPricing})
+var sCreateReturnShippingLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReturnShippingLabel, Type: smithy.ShapeTypeOperation, Ext: &eCreateReturnShippingLabel})
+var sDescribeAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddress, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAddress})
+var sDescribeAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddresses, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAddresses})
+var sDescribeCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCluster, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCluster})
+var sDescribeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeJob})
+var sDescribeReturnShippingLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReturnShippingLabel, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReturnShippingLabel})
+var sGetJobManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobManifest, Type: smithy.ShapeTypeOperation, Ext: &eGetJobManifest})
+var sGetJobUnlockCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobUnlockCode, Type: smithy.ShapeTypeOperation, Ext: &eGetJobUnlockCode})
+var sGetSnowballUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnowballUsage, Type: smithy.ShapeTypeOperation, Ext: &eGetSnowballUsage})
+var sGetSoftwareUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSoftwareUpdates, Type: smithy.ShapeTypeOperation, Ext: &eGetSoftwareUpdates})
+var sListClusterJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterJobs, Type: smithy.ShapeTypeOperation, Ext: &eListClusterJobs})
+var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Type: smithy.ShapeTypeOperation, Ext: &eListClusters})
+var sListCompatibleImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCompatibleImages, Type: smithy.ShapeTypeOperation, Ext: &eListCompatibleImages})
+var sListJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobs, Type: smithy.ShapeTypeOperation, Ext: &eListJobs})
+var sListLongTermPricing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLongTermPricing, Type: smithy.ShapeTypeOperation, Ext: &eListLongTermPricing})
+var sListPickupLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPickupLocations, Type: smithy.ShapeTypeOperation, Ext: &eListPickupLocations})
+var sListServiceVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceVersions, Type: smithy.ShapeTypeOperation, Ext: &eListServiceVersions})
+var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCluster})
+var sUpdateJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJob, Type: smithy.ShapeTypeOperation, Ext: &eUpdateJob})
+var sUpdateJobShipmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobShipmentState, Type: smithy.ShapeTypeOperation, Ext: &eUpdateJobShipmentState})
+var sUpdateLongTermPricing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLongTermPricing, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLongTermPricing})
+var s_AWSIESnowballJobManagementService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSIESnowballJobManagementService, Type: smithy.ShapeTypeService, Ext: &e_AWSIESnowballJobManagementService})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var sAddress_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eAddress_AddressId})
+var sAddress_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Name})
+var sAddress_Company = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Company", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Company})
+var sAddress_Street1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street1", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Street1})
+var sAddress_Street2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street2", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Street2})
+var sAddress_Street3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street3", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Street3})
+var sAddress_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_City})
+var sAddress_StateOrProvince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrProvince", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_StateOrProvince})
+var sAddress_PrefectureOrDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefectureOrDistrict", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_PrefectureOrDistrict})
+var sAddress_Landmark = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Landmark", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Landmark})
+var sAddress_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_Country})
+var sAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_PostalCode})
+var sAddress_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddress_PhoneNumber})
+var sAddress_IsRestricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsRestricted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAddress_IsRestricted})
+var sAddress_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAddressType, Members: &mAddressType, Type: smithy.ShapeTypeEnum, Ext: &eAddress_Type})
+var s_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &e_AddressId})
+var s_AddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressList, Members: &m_AddressList, Type: smithy.ShapeTypeList, Ext: &e_AddressList})
+var s_AddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &e_AddressList_member})
+var sAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressType, Members: &mAddressType, Type: smithy.ShapeTypeEnum, Ext: &eAddressType})
+var sAddressType_CUST_PICKUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUST_PICKUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressType_CUST_PICKUP})
+var sAddressType_AWS_SHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressType_AWS_SHIP})
+var s_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &e_AmiId})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &e_ClusterId})
+var sClusterLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterLimitExceededException, Members: &mClusterLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eClusterLimitExceededException})
+var sClusterLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterLimitExceededException_Message})
+var sClusterListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterListEntry, Members: &mClusterListEntry, Type: smithy.ShapeTypeStructure, Ext: &eClusterListEntry})
+var sClusterListEntry_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterListEntry_ClusterId})
+var sClusterListEntry_ClusterState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterState", ID: &iClusterState, Members: &mClusterState, Type: smithy.ShapeTypeEnum, Ext: &eClusterListEntry_ClusterState})
+var sClusterListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterListEntry_CreationDate})
+var sClusterListEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterListEntry_Description})
+var s_ClusterListEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterListEntryList, Members: &m_ClusterListEntryList, Type: smithy.ShapeTypeList, Ext: &e_ClusterListEntryList})
+var s_ClusterListEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterListEntry, Members: &mClusterListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_ClusterListEntryList_member})
+var sClusterMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterMetadata, Members: &mClusterMetadata, Type: smithy.ShapeTypeStructure, Ext: &eClusterMetadata})
+var sClusterMetadata_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_ClusterId})
+var sClusterMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_Description})
+var sClusterMetadata_KmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyARN", ID: &i_KmsKeyARN, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_KmsKeyARN})
+var sClusterMetadata_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_RoleARN})
+var sClusterMetadata_ClusterState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterState", ID: &iClusterState, Members: &mClusterState, Type: smithy.ShapeTypeEnum, Ext: &eClusterMetadata_ClusterState})
+var sClusterMetadata_JobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobType", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eClusterMetadata_JobType})
+var sClusterMetadata_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eClusterMetadata_SnowballType})
+var sClusterMetadata_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterMetadata_CreationDate})
+var sClusterMetadata_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eClusterMetadata_Resources})
+var sClusterMetadata_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_AddressId})
+var sClusterMetadata_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eClusterMetadata_ShippingOption})
+var sClusterMetadata_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eClusterMetadata_Notification})
+var sClusterMetadata_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eClusterMetadata_ForwardingAddressId})
+var sClusterMetadata_TaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxDocuments", ID: &iTaxDocuments, Members: &mTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eClusterMetadata_TaxDocuments})
+var sClusterMetadata_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eClusterMetadata_OnDeviceServiceConfiguration})
+var sClusterState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterState, Members: &mClusterState, Type: smithy.ShapeTypeEnum, Ext: &eClusterState})
+var sClusterState_AWAITING_QUORUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWAITING_QUORUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_AWAITING_QUORUM})
+var sClusterState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_PENDING})
+var sClusterState_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_IN_USE})
+var sClusterState_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_COMPLETE})
+var sClusterState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_CANCELLED})
+var sCompatibleImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibleImage, Members: &mCompatibleImage, Type: smithy.ShapeTypeStructure, Ext: &eCompatibleImage})
+var sCompatibleImage_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCompatibleImage_AmiId})
+var sCompatibleImage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCompatibleImage_Name})
+var s_CompatibleImageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompatibleImageList, Members: &m_CompatibleImageList, Type: smithy.ShapeTypeList, Ext: &e_CompatibleImageList})
+var s_CompatibleImageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompatibleImage, Members: &mCompatibleImage, Type: smithy.ShapeTypeStructure, Ext: &e_CompatibleImageList_member})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_ConflictResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictResource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_ConflictResource})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDataTransfer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataTransfer, Members: &mDataTransfer, Type: smithy.ShapeTypeStructure, Ext: &eDataTransfer})
+var sDataTransfer_BytesTransferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesTransferred", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataTransfer_BytesTransferred})
+var sDataTransfer_ObjectsTransferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectsTransferred", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataTransfer_ObjectsTransferred})
+var sDataTransfer_TotalBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalBytes", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataTransfer_TotalBytes})
+var sDataTransfer_TotalObjects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalObjects", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataTransfer_TotalObjects})
+var sDependentService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependentService, Members: &mDependentService, Type: smithy.ShapeTypeStructure, Ext: &eDependentService})
+var sDependentService_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Type: smithy.ShapeTypeEnum, Ext: &eDependentService_ServiceName})
+var sDependentService_ServiceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceVersion", ID: &iServiceVersion, Members: &mServiceVersion, Type: smithy.ShapeTypeStructure, Ext: &eDependentService_ServiceVersion})
+var s_DependentServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DependentServiceList, Members: &m_DependentServiceList, Type: smithy.ShapeTypeList, Ext: &e_DependentServiceList})
+var s_DependentServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDependentService, Members: &mDependentService, Type: smithy.ShapeTypeStructure, Ext: &e_DependentServiceList_member})
+var sDeviceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceConfiguration, Members: &mDeviceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDeviceConfiguration})
+var sDeviceConfiguration_SnowconeDeviceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowconeDeviceConfiguration", ID: &iSnowconeDeviceConfiguration, Members: &mSnowconeDeviceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDeviceConfiguration_SnowconeDeviceConfiguration})
+var s_DevicePickupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevicePickupId, Type: smithy.ShapeTypeString, Ext: &e_DevicePickupId})
+var sDeviceServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceServiceName, Members: &mDeviceServiceName, Type: smithy.ShapeTypeEnum, Ext: &eDeviceServiceName})
+var sDeviceServiceName_NFS_ON_DEVICE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS_ON_DEVICE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeviceServiceName_NFS_ON_DEVICE_SERVICE})
+var sDeviceServiceName_S3_ON_DEVICE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_ON_DEVICE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeviceServiceName_S3_ON_DEVICE_SERVICE})
+var sEc2AmiResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEc2AmiResource, Members: &mEc2AmiResource, Type: smithy.ShapeTypeStructure, Ext: &eEc2AmiResource})
+var sEc2AmiResource_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &eEc2AmiResource_AmiId})
+var sEc2AmiResource_SnowballAmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballAmiId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEc2AmiResource_SnowballAmiId})
+var s_Ec2AmiResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2AmiResourceList, Members: &m_Ec2AmiResourceList, Type: smithy.ShapeTypeList, Ext: &e_Ec2AmiResourceList})
+var s_Ec2AmiResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEc2AmiResource, Members: &mEc2AmiResource, Type: smithy.ShapeTypeStructure, Ext: &e_Ec2AmiResourceList_member})
+var sEc2RequestFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEc2RequestFailedException, Members: &mEc2RequestFailedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eEc2RequestFailedException})
+var sEc2RequestFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEc2RequestFailedException_Message})
+var sEKSOnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEKSOnDeviceServiceConfiguration, Members: &mEKSOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEKSOnDeviceServiceConfiguration})
+var sEKSOnDeviceServiceConfiguration_KubernetesVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KubernetesVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEKSOnDeviceServiceConfiguration_KubernetesVersion})
+var sEKSOnDeviceServiceConfiguration_EKSAnywhereVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKSAnywhereVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEKSOnDeviceServiceConfiguration_EKSAnywhereVersion})
+var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Email})
+var sEventTriggerDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTriggerDefinition, Members: &mEventTriggerDefinition, Type: smithy.ShapeTypeStructure, Ext: &eEventTriggerDefinition})
+var sEventTriggerDefinition_EventResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eEventTriggerDefinition_EventResourceARN})
+var s_EventTriggerDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTriggerDefinitionList, Members: &m_EventTriggerDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_EventTriggerDefinitionList})
+var s_EventTriggerDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTriggerDefinition, Members: &mEventTriggerDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_EventTriggerDefinitionList_member})
+var s_GSTIN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GSTIN, Type: smithy.ShapeTypeString, Ext: &e_GSTIN})
+var sImpactLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpactLevel, Members: &mImpactLevel, Type: smithy.ShapeTypeEnum, Ext: &eImpactLevel})
+var sImpactLevel_IL2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImpactLevel_IL2})
+var sImpactLevel_IL4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImpactLevel_IL4})
+var sImpactLevel_IL5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImpactLevel_IL5})
+var sImpactLevel_IL6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImpactLevel_IL6})
+var sImpactLevel_IL99 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL99", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImpactLevel_IL99})
+var sINDTaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iINDTaxDocuments, Members: &mINDTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eINDTaxDocuments})
+var sINDTaxDocuments_GSTIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GSTIN", ID: &i_GSTIN, Type: smithy.ShapeTypeString, Ext: &eINDTaxDocuments_GSTIN})
+var s_InitialClusterSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InitialClusterSize, Type: smithy.ShapeTypeInteger, Ext: &e_InitialClusterSize})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInvalidAddressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAddressException, Members: &mInvalidAddressException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAddressException})
+var sInvalidAddressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidAddressException_Message})
+var sInvalidInputCombinationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputCombinationException, Members: &mInvalidInputCombinationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInputCombinationException})
+var sInvalidInputCombinationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidInputCombinationException_Message})
+var sInvalidJobStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobStateException, Members: &mInvalidJobStateException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidJobStateException})
+var sInvalidJobStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidJobStateException_Message})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var sInvalidResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceException, Members: &mInvalidResourceException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidResourceException})
+var sInvalidResourceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidResourceException_Message})
+var sInvalidResourceException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidResourceException_ResourceType})
+var s_JavaBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_JavaBoolean})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var sJobListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobListEntry, Members: &mJobListEntry, Type: smithy.ShapeTypeStructure, Ext: &eJobListEntry})
+var sJobListEntry_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobListEntry_JobId})
+var sJobListEntry_JobState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobState", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eJobListEntry_JobState})
+var sJobListEntry_IsMaster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMaster", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eJobListEntry_IsMaster})
+var sJobListEntry_JobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobType", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eJobListEntry_JobType})
+var sJobListEntry_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eJobListEntry_SnowballType})
+var sJobListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJobListEntry_CreationDate})
+var sJobListEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobListEntry_Description})
+var s_JobListEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobListEntryList, Members: &m_JobListEntryList, Type: smithy.ShapeTypeList, Ext: &e_JobListEntryList})
+var s_JobListEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobListEntry, Members: &mJobListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_JobListEntryList_member})
+var sJobLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobLogs, Members: &mJobLogs, Type: smithy.ShapeTypeStructure, Ext: &eJobLogs})
+var sJobLogs_JobCompletionReportURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobCompletionReportURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobLogs_JobCompletionReportURI})
+var sJobLogs_JobSuccessLogURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSuccessLogURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobLogs_JobSuccessLogURI})
+var sJobLogs_JobFailureLogURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobFailureLogURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobLogs_JobFailureLogURI})
+var sJobMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobMetadata, Members: &mJobMetadata, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata})
+var sJobMetadata_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_JobId})
+var sJobMetadata_JobState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobState", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_JobState})
+var sJobMetadata_JobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobType", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_JobType})
+var sJobMetadata_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_SnowballType})
+var sJobMetadata_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJobMetadata_CreationDate})
+var sJobMetadata_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_Resources})
+var sJobMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_Description})
+var sJobMetadata_KmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyARN", ID: &i_KmsKeyARN, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_KmsKeyARN})
+var sJobMetadata_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_RoleARN})
+var sJobMetadata_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_AddressId})
+var sJobMetadata_ShippingDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingDetails", ID: &iShippingDetails, Members: &mShippingDetails, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_ShippingDetails})
+var sJobMetadata_SnowballCapacityPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballCapacityPreference", ID: &iSnowballCapacity, Members: &mSnowballCapacity, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_SnowballCapacityPreference})
+var sJobMetadata_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_Notification})
+var sJobMetadata_DataTransferProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataTransferProgress", ID: &iDataTransfer, Members: &mDataTransfer, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_DataTransferProgress})
+var sJobMetadata_JobLogInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobLogInfo", ID: &iJobLogs, Members: &mJobLogs, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_JobLogInfo})
+var sJobMetadata_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_ClusterId})
+var sJobMetadata_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_ForwardingAddressId})
+var sJobMetadata_TaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxDocuments", ID: &iTaxDocuments, Members: &mTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_TaxDocuments})
+var sJobMetadata_DeviceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceConfiguration", ID: &iDeviceConfiguration, Members: &mDeviceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_DeviceConfiguration})
+var sJobMetadata_RemoteManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteManagement", ID: &iRemoteManagement, Members: &mRemoteManagement, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_RemoteManagement})
+var sJobMetadata_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingId", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_LongTermPricingId})
+var sJobMetadata_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_OnDeviceServiceConfiguration})
+var sJobMetadata_ImpactLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactLevel", ID: &iImpactLevel, Members: &mImpactLevel, Type: smithy.ShapeTypeEnum, Ext: &eJobMetadata_ImpactLevel})
+var sJobMetadata_PickupDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PickupDetails", ID: &iPickupDetails, Members: &mPickupDetails, Type: smithy.ShapeTypeStructure, Ext: &eJobMetadata_PickupDetails})
+var sJobMetadata_SnowballId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eJobMetadata_SnowballId})
+var s_JobMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobMetadataList, Members: &m_JobMetadataList, Type: smithy.ShapeTypeList, Ext: &e_JobMetadataList})
+var s_JobMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobMetadata, Members: &mJobMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_JobMetadataList_member})
+var sJobResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eJobResource})
+var sJobResource_S3Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Resources", ID: &i_S3ResourceList, Members: &m_S3ResourceList, Type: smithy.ShapeTypeList, Ext: &eJobResource_S3Resources})
+var sJobResource_LambdaResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaResources", ID: &i_LambdaResourceList, Members: &m_LambdaResourceList, Type: smithy.ShapeTypeList, Ext: &eJobResource_LambdaResources})
+var sJobResource_Ec2AmiResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2AmiResources", ID: &i_Ec2AmiResourceList, Members: &m_Ec2AmiResourceList, Type: smithy.ShapeTypeList, Ext: &eJobResource_Ec2AmiResources})
+var sJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &eJobState})
+var sJobState_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_NEW})
+var sJobState_PREPARING_APPLIANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPARING_APPLIANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_PREPARING_APPLIANCE})
+var sJobState_PREPARING_SHIPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPARING_SHIPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_PREPARING_SHIPMENT})
+var sJobState_IN_TRANSIT_TO_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_TRANSIT_TO_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_IN_TRANSIT_TO_CUSTOMER})
+var sJobState_WITH_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WITH_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_WITH_CUSTOMER})
+var sJobState_IN_TRANSIT_TO_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_TRANSIT_TO_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_IN_TRANSIT_TO_AWS})
+var sJobState_WITH_AWS_SORTING_FACILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WITH_AWS_SORTING_FACILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_WITH_AWS_SORTING_FACILITY})
+var sJobState_WITH_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WITH_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_WITH_AWS})
+var sJobState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_IN_PROGRESS})
+var sJobState_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_COMPLETE})
+var sJobState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_CANCELLED})
+var sJobState_LISTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LISTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_LISTING})
+var sJobState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobState_PENDING})
+var s_JobStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobStateList, Members: &m_JobStateList, Type: smithy.ShapeTypeList, Ext: &e_JobStateList})
+var s_JobStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobState, Members: &mJobState, Type: smithy.ShapeTypeEnum, Ext: &e_JobStateList_member})
+var sJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eJobType})
+var sJobType_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobType_IMPORT})
+var sJobType_EXPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobType_EXPORT})
+var sJobType_LOCAL_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobType_LOCAL_USE})
+var sKeyRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyRange, Members: &mKeyRange, Type: smithy.ShapeTypeStructure, Ext: &eKeyRange})
+var sKeyRange_BeginMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginMarker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKeyRange_BeginMarker})
+var sKeyRange_EndMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndMarker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKeyRange_EndMarker})
+var s_KmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyARN, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyARN})
+var sKMSRequestFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSRequestFailedException, Members: &mKMSRequestFailedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eKMSRequestFailedException})
+var sKMSRequestFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eKMSRequestFailedException_Message})
+var sLambdaResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaResource, Members: &mLambdaResource, Type: smithy.ShapeTypeStructure, Ext: &eLambdaResource})
+var sLambdaResource_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eLambdaResource_LambdaArn})
+var sLambdaResource_EventTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTriggers", ID: &i_EventTriggerDefinitionList, Members: &m_EventTriggerDefinitionList, Type: smithy.ShapeTypeList, Ext: &eLambdaResource_EventTriggers})
+var s_LambdaResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaResourceList, Members: &m_LambdaResourceList, Type: smithy.ShapeTypeList, Ext: &e_LambdaResourceList})
+var s_LambdaResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLambdaResource, Members: &mLambdaResource, Type: smithy.ShapeTypeStructure, Ext: &e_LambdaResourceList_member})
+var s_ListLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListLimit})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_LongTermPricingAssociatedJobIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongTermPricingAssociatedJobIdList, Members: &m_LongTermPricingAssociatedJobIdList, Type: smithy.ShapeTypeList, Ext: &e_LongTermPricingAssociatedJobIdList})
+var s_LongTermPricingAssociatedJobIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_LongTermPricingAssociatedJobIdList_member})
+var s_LongTermPricingEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongTermPricingEntryList, Members: &m_LongTermPricingEntryList, Type: smithy.ShapeTypeList, Ext: &e_LongTermPricingEntryList})
+var s_LongTermPricingEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLongTermPricingListEntry, Members: &mLongTermPricingListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_LongTermPricingEntryList_member})
+var s_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &e_LongTermPricingId})
+var s_LongTermPricingIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongTermPricingIdList, Members: &m_LongTermPricingIdList, Type: smithy.ShapeTypeList, Ext: &e_LongTermPricingIdList})
+var s_LongTermPricingIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &e_LongTermPricingIdList_member})
+var sLongTermPricingListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLongTermPricingListEntry, Members: &mLongTermPricingListEntry, Type: smithy.ShapeTypeStructure, Ext: &eLongTermPricingListEntry})
+var sLongTermPricingListEntry_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingId", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &eLongTermPricingListEntry_LongTermPricingId})
+var sLongTermPricingListEntry_LongTermPricingEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingEndDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLongTermPricingListEntry_LongTermPricingEndDate})
+var sLongTermPricingListEntry_LongTermPricingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLongTermPricingListEntry_LongTermPricingStartDate})
+var sLongTermPricingListEntry_LongTermPricingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingType", ID: &iLongTermPricingType, Members: &mLongTermPricingType, Type: smithy.ShapeTypeEnum, Ext: &eLongTermPricingListEntry_LongTermPricingType})
+var sLongTermPricingListEntry_CurrentActiveJob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentActiveJob", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eLongTermPricingListEntry_CurrentActiveJob})
+var sLongTermPricingListEntry_ReplacementJob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplacementJob", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eLongTermPricingListEntry_ReplacementJob})
+var sLongTermPricingListEntry_IsLongTermPricingAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLongTermPricingAutoRenew", ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLongTermPricingListEntry_IsLongTermPricingAutoRenew})
+var sLongTermPricingListEntry_LongTermPricingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLongTermPricingListEntry_LongTermPricingStatus})
+var sLongTermPricingListEntry_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eLongTermPricingListEntry_SnowballType})
+var sLongTermPricingListEntry_JobIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobIds", ID: &i_LongTermPricingAssociatedJobIdList, Members: &m_LongTermPricingAssociatedJobIdList, Type: smithy.ShapeTypeList, Ext: &eLongTermPricingListEntry_JobIds})
+var sLongTermPricingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLongTermPricingType, Members: &mLongTermPricingType, Type: smithy.ShapeTypeEnum, Ext: &eLongTermPricingType})
+var sLongTermPricingType_ONE_YEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_YEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLongTermPricingType_ONE_YEAR})
+var sLongTermPricingType_THREE_YEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_YEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLongTermPricingType_THREE_YEAR})
+var sLongTermPricingType_ONE_MONTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_MONTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLongTermPricingType_ONE_MONTH})
+var sNFSOnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNFSOnDeviceServiceConfiguration, Members: &mNFSOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNFSOnDeviceServiceConfiguration})
+var sNFSOnDeviceServiceConfiguration_StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageLimit", ID: &i_StorageLimit, Type: smithy.ShapeTypeInteger, Ext: &eNFSOnDeviceServiceConfiguration_StorageLimit})
+var sNFSOnDeviceServiceConfiguration_StorageUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageUnit", ID: &iStorageUnit, Members: &mStorageUnit, Type: smithy.ShapeTypeEnum, Ext: &eNFSOnDeviceServiceConfiguration_StorageUnit})
+var s_NodeFaultTolerance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeFaultTolerance, Type: smithy.ShapeTypeInteger, Ext: &e_NodeFaultTolerance})
+var sNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eNotification})
+var sNotification_SnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicARN", ID: &i_SnsTopicARN, Type: smithy.ShapeTypeString, Ext: &eNotification_SnsTopicARN})
+var sNotification_JobStatesToNotify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatesToNotify", ID: &i_JobStateList, Members: &m_JobStateList, Type: smithy.ShapeTypeList, Ext: &eNotification_JobStatesToNotify})
+var sNotification_NotifyAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyAll", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eNotification_NotifyAll})
+var sNotification_DevicePickupSnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DevicePickupSnsTopicARN", ID: &i_SnsTopicARN, Type: smithy.ShapeTypeString, Ext: &eNotification_DevicePickupSnsTopicARN})
+var sOnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOnDeviceServiceConfiguration})
+var sOnDeviceServiceConfiguration_NFSOnDeviceService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFSOnDeviceService", ID: &iNFSOnDeviceServiceConfiguration, Members: &mNFSOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOnDeviceServiceConfiguration_NFSOnDeviceService})
+var sOnDeviceServiceConfiguration_TGWOnDeviceService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TGWOnDeviceService", ID: &iTGWOnDeviceServiceConfiguration, Members: &mTGWOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOnDeviceServiceConfiguration_TGWOnDeviceService})
+var sOnDeviceServiceConfiguration_EKSOnDeviceService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKSOnDeviceService", ID: &iEKSOnDeviceServiceConfiguration, Members: &mEKSOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOnDeviceServiceConfiguration_EKSOnDeviceService})
+var sOnDeviceServiceConfiguration_S3OnDeviceService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OnDeviceService", ID: &iS3OnDeviceServiceConfiguration, Members: &mS3OnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOnDeviceServiceConfiguration_S3OnDeviceService})
+var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumber})
+var sPickupDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPickupDetails, Members: &mPickupDetails, Type: smithy.ShapeTypeStructure, Ext: &ePickupDetails})
+var sPickupDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_Name})
+var sPickupDetails_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_PhoneNumber})
+var sPickupDetails_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_Email})
+var sPickupDetails_IdentificationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentificationNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_IdentificationNumber})
+var sPickupDetails_IdentificationExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentificationExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePickupDetails_IdentificationExpirationDate})
+var sPickupDetails_IdentificationIssuingOrg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentificationIssuingOrg", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_IdentificationIssuingOrg})
+var sPickupDetails_DevicePickupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DevicePickupId", ID: &i_DevicePickupId, Type: smithy.ShapeTypeString, Ext: &ePickupDetails_DevicePickupId})
+var sRemoteManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteManagement, Members: &mRemoteManagement, Type: smithy.ShapeTypeEnum, Ext: &eRemoteManagement})
+var sRemoteManagement_INSTALLED_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTALLED_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoteManagement_INSTALLED_ONLY})
+var sRemoteManagement_INSTALLED_AUTOSTART = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTALLED_AUTOSTART", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoteManagement_INSTALLED_AUTOSTART})
+var sRemoteManagement_NOT_INSTALLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_INSTALLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoteManagement_NOT_INSTALLED})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var sReturnShippingLabelAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReturnShippingLabelAlreadyExistsException, Members: &mReturnShippingLabelAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eReturnShippingLabelAlreadyExistsException})
+var sReturnShippingLabelAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReturnShippingLabelAlreadyExistsException_Message})
+var s_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &e_RoleARN})
+var sS3OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3OnDeviceServiceConfiguration, Members: &mS3OnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3OnDeviceServiceConfiguration})
+var sS3OnDeviceServiceConfiguration_StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageLimit", ID: &i_S3StorageLimit, Type: smithy.ShapeTypeDouble, Ext: &eS3OnDeviceServiceConfiguration_StorageLimit})
+var sS3OnDeviceServiceConfiguration_StorageUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageUnit", ID: &iStorageUnit, Members: &mStorageUnit, Type: smithy.ShapeTypeEnum, Ext: &eS3OnDeviceServiceConfiguration_StorageUnit})
+var sS3OnDeviceServiceConfiguration_ServiceSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSize", ID: &i_ServiceSize, Type: smithy.ShapeTypeInteger, Ext: &eS3OnDeviceServiceConfiguration_ServiceSize})
+var sS3OnDeviceServiceConfiguration_FaultTolerance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultTolerance", ID: &i_NodeFaultTolerance, Type: smithy.ShapeTypeInteger, Ext: &eS3OnDeviceServiceConfiguration_FaultTolerance})
+var sS3Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Resource, Members: &mS3Resource, Type: smithy.ShapeTypeStructure, Ext: &eS3Resource})
+var sS3Resource_BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eS3Resource_BucketArn})
+var sS3Resource_KeyRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRange", ID: &iKeyRange, Members: &mKeyRange, Type: smithy.ShapeTypeStructure, Ext: &eS3Resource_KeyRange})
+var sS3Resource_TargetOnDeviceServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetOnDeviceServices", ID: &i_TargetOnDeviceServiceList, Members: &m_TargetOnDeviceServiceList, Type: smithy.ShapeTypeList, Ext: &eS3Resource_TargetOnDeviceServices})
+var s_S3ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ResourceList, Members: &m_S3ResourceList, Type: smithy.ShapeTypeList, Ext: &e_S3ResourceList})
+var s_S3ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3Resource, Members: &mS3Resource, Type: smithy.ShapeTypeStructure, Ext: &e_S3ResourceList_member})
+var s_S3StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3StorageLimit, Type: smithy.ShapeTypeDouble, Ext: &e_S3StorageLimit})
+var sServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceName, Members: &mServiceName, Type: smithy.ShapeTypeEnum, Ext: &eServiceName})
+var sServiceName_KUBERNETES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KUBERNETES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceName_KUBERNETES})
+var sServiceName_EKS_ANYWHERE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_ANYWHERE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceName_EKS_ANYWHERE})
+var s_ServiceSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceSize, Type: smithy.ShapeTypeInteger, Ext: &e_ServiceSize})
+var sServiceVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceVersion, Members: &mServiceVersion, Type: smithy.ShapeTypeStructure, Ext: &eServiceVersion})
+var sServiceVersion_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceVersion_Version})
+var s_ServiceVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceVersionList, Members: &m_ServiceVersionList, Type: smithy.ShapeTypeList, Ext: &e_ServiceVersionList})
+var s_ServiceVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceVersion, Members: &mServiceVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceVersionList_member})
+var sShipment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShipment, Members: &mShipment, Type: smithy.ShapeTypeStructure, Ext: &eShipment})
+var sShipment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eShipment_Status})
+var sShipment_TrackingNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingNumber", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eShipment_TrackingNumber})
+var sShipmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShipmentState, Members: &mShipmentState, Type: smithy.ShapeTypeEnum, Ext: &eShipmentState})
+var sShipmentState_RECEIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShipmentState_RECEIVED})
+var sShipmentState_RETURNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETURNED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShipmentState_RETURNED})
+var sShippingDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShippingDetails, Members: &mShippingDetails, Type: smithy.ShapeTypeStructure, Ext: &eShippingDetails})
+var sShippingDetails_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eShippingDetails_ShippingOption})
+var sShippingDetails_InboundShipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundShipment", ID: &iShipment, Members: &mShipment, Type: smithy.ShapeTypeStructure, Ext: &eShippingDetails_InboundShipment})
+var sShippingDetails_OutboundShipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundShipment", ID: &iShipment, Members: &mShipment, Type: smithy.ShapeTypeStructure, Ext: &eShippingDetails_OutboundShipment})
+var sShippingLabelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShippingLabelStatus, Members: &mShippingLabelStatus, Type: smithy.ShapeTypeEnum, Ext: &eShippingLabelStatus})
+var sShippingLabelStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingLabelStatus_IN_PROGRESS})
+var sShippingLabelStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingLabelStatus_TIMED_OUT})
+var sShippingLabelStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingLabelStatus_SUCCEEDED})
+var sShippingLabelStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingLabelStatus_FAILED})
+var sShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eShippingOption})
+var sShippingOption_SECOND_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECOND_DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingOption_SECOND_DAY})
+var sShippingOption_NEXT_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEXT_DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingOption_NEXT_DAY})
+var sShippingOption_EXPRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingOption_EXPRESS})
+var sShippingOption_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShippingOption_STANDARD})
+var sSnowballCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowballCapacity, Members: &mSnowballCapacity, Type: smithy.ShapeTypeEnum, Ext: &eSnowballCapacity})
+var sSnowballCapacity_T50 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T50", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T50})
+var sSnowballCapacity_T80 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T80", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T80})
+var sSnowballCapacity_T100 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T100", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T100})
+var sSnowballCapacity_T42 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T42", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T42})
+var sSnowballCapacity_T98 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T98", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T98})
+var sSnowballCapacity_T8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T8})
+var sSnowballCapacity_T14 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T14", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T14})
+var sSnowballCapacity_T32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T32})
+var sSnowballCapacity_NO_PREFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_PREFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_NO_PREFERENCE})
+var sSnowballCapacity_T240 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T240", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T240})
+var sSnowballCapacity_T13 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "T13", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballCapacity_T13})
+var sSnowballType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eSnowballType})
+var sSnowballType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_STANDARD})
+var sSnowballType_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_EDGE})
+var sSnowballType_EDGE_C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_EDGE_C})
+var sSnowballType_EDGE_CG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_CG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_EDGE_CG})
+var sSnowballType_EDGE_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_S", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_EDGE_S})
+var sSnowballType_SNC1_HDD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNC1_HDD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_SNC1_HDD})
+var sSnowballType_SNC1_SSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNC1_SSD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_SNC1_SSD})
+var sSnowballType_V3_5C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V3_5C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_V3_5C})
+var sSnowballType_V3_5S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V3_5S", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_V3_5S})
+var sSnowballType_RACK_5U_C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RACK_5U_C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowballType_RACK_5U_C})
+var sSnowconeDeviceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowconeDeviceConfiguration, Members: &mSnowconeDeviceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowconeDeviceConfiguration})
+var sSnowconeDeviceConfiguration_WirelessConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WirelessConnection", ID: &iWirelessConnection, Members: &mWirelessConnection, Type: smithy.ShapeTypeStructure, Ext: &eSnowconeDeviceConfiguration_WirelessConnection})
+var s_SnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsTopicARN, Type: smithy.ShapeTypeString, Ext: &e_SnsTopicARN})
+var s_StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageLimit, Type: smithy.ShapeTypeInteger, Ext: &e_StorageLimit})
+var sStorageUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageUnit, Members: &mStorageUnit, Type: smithy.ShapeTypeEnum, Ext: &eStorageUnit})
+var sStorageUnit_TB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageUnit_TB})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTargetOnDeviceService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetOnDeviceService, Members: &mTargetOnDeviceService, Type: smithy.ShapeTypeStructure, Ext: &eTargetOnDeviceService})
+var sTargetOnDeviceService_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iDeviceServiceName, Members: &mDeviceServiceName, Type: smithy.ShapeTypeEnum, Ext: &eTargetOnDeviceService_ServiceName})
+var sTargetOnDeviceService_TransferOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferOption", ID: &iTransferOption, Members: &mTransferOption, Type: smithy.ShapeTypeEnum, Ext: &eTargetOnDeviceService_TransferOption})
+var s_TargetOnDeviceServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetOnDeviceServiceList, Members: &m_TargetOnDeviceServiceList, Type: smithy.ShapeTypeList, Ext: &e_TargetOnDeviceServiceList})
+var s_TargetOnDeviceServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetOnDeviceService, Members: &mTargetOnDeviceService, Type: smithy.ShapeTypeStructure, Ext: &e_TargetOnDeviceServiceList_member})
+var sTaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxDocuments, Members: &mTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eTaxDocuments})
+var sTaxDocuments_IND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IND", ID: &iINDTaxDocuments, Members: &mINDTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eTaxDocuments_IND})
+var sTGWOnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTGWOnDeviceServiceConfiguration, Members: &mTGWOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTGWOnDeviceServiceConfiguration})
+var sTGWOnDeviceServiceConfiguration_StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageLimit", ID: &i_StorageLimit, Type: smithy.ShapeTypeInteger, Ext: &eTGWOnDeviceServiceConfiguration_StorageLimit})
+var sTGWOnDeviceServiceConfiguration_StorageUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageUnit", ID: &iStorageUnit, Members: &mStorageUnit, Type: smithy.ShapeTypeEnum, Ext: &eTGWOnDeviceServiceConfiguration_StorageUnit})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTransferOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferOption, Members: &mTransferOption, Type: smithy.ShapeTypeEnum, Ext: &eTransferOption})
+var sTransferOption_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferOption_IMPORT})
+var sTransferOption_EXPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferOption_EXPORT})
+var sTransferOption_LOCAL_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferOption_LOCAL_USE})
+var sUnsupportedAddressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedAddressException, Members: &mUnsupportedAddressException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedAddressException})
+var sUnsupportedAddressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnsupportedAddressException_Message})
+var sWirelessConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWirelessConnection, Members: &mWirelessConnection, Type: smithy.ShapeTypeStructure, Ext: &eWirelessConnection})
+var sWirelessConnection_IsWifiEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsWifiEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eWirelessConnection_IsWifiEnabled})
+var sCancelClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelClusterRequest, Members: &mCancelClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelClusterRequest})
+var sCancelClusterRequest_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eCancelClusterRequest_ClusterId})
+var sCancelClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eCancelClusterResult})
+var sCancelJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobRequest, Members: &mCancelJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelJobRequest})
+var sCancelJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eCancelJobRequest_JobId})
+var sCancelJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCancelJobResult})
+var sCreateAddressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressRequest, Members: &mCreateAddressRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressRequest})
+var sCreateAddressRequest_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressRequest_Address})
+var sCreateAddressResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAddressResult, Members: &mCreateAddressResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateAddressResult})
+var sCreateAddressResult_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateAddressResult_AddressId})
+var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest})
+var sCreateClusterRequest_JobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobType", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_JobType})
+var sCreateClusterRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_Resources})
+var sCreateClusterRequest_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_OnDeviceServiceConfiguration})
+var sCreateClusterRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_Description})
+var sCreateClusterRequest_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_AddressId})
+var sCreateClusterRequest_KmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyARN", ID: &i_KmsKeyARN, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_KmsKeyARN})
+var sCreateClusterRequest_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_RoleARN})
+var sCreateClusterRequest_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_SnowballType})
+var sCreateClusterRequest_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_ShippingOption})
+var sCreateClusterRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_Notification})
+var sCreateClusterRequest_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_ForwardingAddressId})
+var sCreateClusterRequest_TaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxDocuments", ID: &iTaxDocuments, Members: &mTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_TaxDocuments})
+var sCreateClusterRequest_RemoteManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteManagement", ID: &iRemoteManagement, Members: &mRemoteManagement, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_RemoteManagement})
+var sCreateClusterRequest_InitialClusterSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitialClusterSize", ID: &i_InitialClusterSize, Type: smithy.ShapeTypeInteger, Ext: &eCreateClusterRequest_InitialClusterSize})
+var sCreateClusterRequest_ForceCreateJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceCreateJobs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateClusterRequest_ForceCreateJobs})
+var sCreateClusterRequest_LongTermPricingIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingIds", ID: &i_LongTermPricingIdList, Members: &m_LongTermPricingIdList, Type: smithy.ShapeTypeList, Ext: &eCreateClusterRequest_LongTermPricingIds})
+var sCreateClusterRequest_SnowballCapacityPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballCapacityPreference", ID: &iSnowballCapacity, Members: &mSnowballCapacity, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_SnowballCapacityPreference})
+var sCreateClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResult, Members: &mCreateClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResult})
+var sCreateClusterResult_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eCreateClusterResult_ClusterId})
+var sCreateClusterResult_JobListEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobListEntries", ID: &i_JobListEntryList, Members: &m_JobListEntryList, Type: smithy.ShapeTypeList, Ext: &eCreateClusterResult_JobListEntries})
+var sCreateJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobRequest, Members: &mCreateJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest})
+var sCreateJobRequest_JobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobType", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_JobType})
+var sCreateJobRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_Resources})
+var sCreateJobRequest_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_OnDeviceServiceConfiguration})
+var sCreateJobRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_Description})
+var sCreateJobRequest_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_AddressId})
+var sCreateJobRequest_KmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyARN", ID: &i_KmsKeyARN, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_KmsKeyARN})
+var sCreateJobRequest_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_RoleARN})
+var sCreateJobRequest_SnowballCapacityPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballCapacityPreference", ID: &iSnowballCapacity, Members: &mSnowballCapacity, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_SnowballCapacityPreference})
+var sCreateJobRequest_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_ShippingOption})
+var sCreateJobRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_Notification})
+var sCreateJobRequest_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_ClusterId})
+var sCreateJobRequest_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_SnowballType})
+var sCreateJobRequest_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_ForwardingAddressId})
+var sCreateJobRequest_TaxDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxDocuments", ID: &iTaxDocuments, Members: &mTaxDocuments, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_TaxDocuments})
+var sCreateJobRequest_DeviceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceConfiguration", ID: &iDeviceConfiguration, Members: &mDeviceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_DeviceConfiguration})
+var sCreateJobRequest_RemoteManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteManagement", ID: &iRemoteManagement, Members: &mRemoteManagement, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_RemoteManagement})
+var sCreateJobRequest_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingId", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &eCreateJobRequest_LongTermPricingId})
+var sCreateJobRequest_ImpactLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactLevel", ID: &iImpactLevel, Members: &mImpactLevel, Type: smithy.ShapeTypeEnum, Ext: &eCreateJobRequest_ImpactLevel})
+var sCreateJobRequest_PickupDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PickupDetails", ID: &iPickupDetails, Members: &mPickupDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobRequest_PickupDetails})
+var sCreateJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobResult, Members: &mCreateJobResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateJobResult})
+var sCreateJobResult_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eCreateJobResult_JobId})
+var sCreateLongTermPricingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLongTermPricingRequest, Members: &mCreateLongTermPricingRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLongTermPricingRequest})
+var sCreateLongTermPricingRequest_LongTermPricingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingType", ID: &iLongTermPricingType, Members: &mLongTermPricingType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLongTermPricingRequest_LongTermPricingType})
+var sCreateLongTermPricingRequest_IsLongTermPricingAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLongTermPricingAutoRenew", ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLongTermPricingRequest_IsLongTermPricingAutoRenew})
+var sCreateLongTermPricingRequest_SnowballType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballType", ID: &iSnowballType, Members: &mSnowballType, Type: smithy.ShapeTypeEnum, Ext: &eCreateLongTermPricingRequest_SnowballType})
+var sCreateLongTermPricingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLongTermPricingResult, Members: &mCreateLongTermPricingResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateLongTermPricingResult})
+var sCreateLongTermPricingResult_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingId", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &eCreateLongTermPricingResult_LongTermPricingId})
+var sCreateReturnShippingLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReturnShippingLabelRequest, Members: &mCreateReturnShippingLabelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateReturnShippingLabelRequest})
+var sCreateReturnShippingLabelRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eCreateReturnShippingLabelRequest_JobId})
+var sCreateReturnShippingLabelRequest_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateReturnShippingLabelRequest_ShippingOption})
+var sCreateReturnShippingLabelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReturnShippingLabelResult, Members: &mCreateReturnShippingLabelResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateReturnShippingLabelResult})
+var sCreateReturnShippingLabelResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iShippingLabelStatus, Members: &mShippingLabelStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateReturnShippingLabelResult_Status})
+var sDescribeAddressesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddressesRequest, Members: &mDescribeAddressesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAddressesRequest})
+var sDescribeAddressesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAddressesRequest_MaxResults})
+var sDescribeAddressesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAddressesRequest_NextToken})
+var sDescribeAddressesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddressesResult, Members: &mDescribeAddressesResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAddressesResult})
+var sDescribeAddressesResult_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_AddressList, Members: &m_AddressList, Type: smithy.ShapeTypeList, Ext: &eDescribeAddressesResult_Addresses})
+var sDescribeAddressesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeAddressesResult_NextToken})
+var sDescribeAddressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddressRequest, Members: &mDescribeAddressRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAddressRequest})
+var sDescribeAddressRequest_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eDescribeAddressRequest_AddressId})
+var sDescribeAddressResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAddressResult, Members: &mDescribeAddressResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAddressResult})
+var sDescribeAddressResult_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAddressResult_Address})
+var sDescribeClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterRequest, Members: &mDescribeClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterRequest})
+var sDescribeClusterRequest_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterRequest_ClusterId})
+var sDescribeClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterResult, Members: &mDescribeClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResult})
+var sDescribeClusterResult_ClusterMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterMetadata", ID: &iClusterMetadata, Members: &mClusterMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResult_ClusterMetadata})
+var sDescribeJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobRequest, Members: &mDescribeJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobRequest})
+var sDescribeJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDescribeJobRequest_JobId})
+var sDescribeJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobResult, Members: &mDescribeJobResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobResult})
+var sDescribeJobResult_JobMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobMetadata", ID: &iJobMetadata, Members: &mJobMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeJobResult_JobMetadata})
+var sDescribeJobResult_SubJobMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubJobMetadata", ID: &i_JobMetadataList, Members: &m_JobMetadataList, Type: smithy.ShapeTypeList, Ext: &eDescribeJobResult_SubJobMetadata})
+var sDescribeReturnShippingLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReturnShippingLabelRequest, Members: &mDescribeReturnShippingLabelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReturnShippingLabelRequest})
+var sDescribeReturnShippingLabelRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDescribeReturnShippingLabelRequest_JobId})
+var sDescribeReturnShippingLabelResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReturnShippingLabelResult, Members: &mDescribeReturnShippingLabelResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReturnShippingLabelResult})
+var sDescribeReturnShippingLabelResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iShippingLabelStatus, Members: &mShippingLabelStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeReturnShippingLabelResult_Status})
+var sDescribeReturnShippingLabelResult_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeReturnShippingLabelResult_ExpirationDate})
+var sDescribeReturnShippingLabelResult_ReturnShippingLabelURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnShippingLabelURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeReturnShippingLabelResult_ReturnShippingLabelURI})
+var sGetJobManifestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobManifestRequest, Members: &mGetJobManifestRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetJobManifestRequest})
+var sGetJobManifestRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetJobManifestRequest_JobId})
+var sGetJobManifestResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobManifestResult, Members: &mGetJobManifestResult, Type: smithy.ShapeTypeStructure, Ext: &eGetJobManifestResult})
+var sGetJobManifestResult_ManifestURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetJobManifestResult_ManifestURI})
+var sGetJobUnlockCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobUnlockCodeRequest, Members: &mGetJobUnlockCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetJobUnlockCodeRequest})
+var sGetJobUnlockCodeRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetJobUnlockCodeRequest_JobId})
+var sGetJobUnlockCodeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobUnlockCodeResult, Members: &mGetJobUnlockCodeResult, Type: smithy.ShapeTypeStructure, Ext: &eGetJobUnlockCodeResult})
+var sGetJobUnlockCodeResult_UnlockCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnlockCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetJobUnlockCodeResult_UnlockCode})
+var sGetSnowballUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnowballUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSnowballUsageRequest})
+var sGetSnowballUsageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnowballUsageResult, Members: &mGetSnowballUsageResult, Type: smithy.ShapeTypeStructure, Ext: &eGetSnowballUsageResult})
+var sGetSnowballUsageResult_SnowballLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballLimit", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetSnowballUsageResult_SnowballLimit})
+var sGetSnowballUsageResult_SnowballsInUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballsInUse", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetSnowballUsageResult_SnowballsInUse})
+var sGetSoftwareUpdatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSoftwareUpdatesRequest, Members: &mGetSoftwareUpdatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSoftwareUpdatesRequest})
+var sGetSoftwareUpdatesRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetSoftwareUpdatesRequest_JobId})
+var sGetSoftwareUpdatesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSoftwareUpdatesResult, Members: &mGetSoftwareUpdatesResult, Type: smithy.ShapeTypeStructure, Ext: &eGetSoftwareUpdatesResult})
+var sGetSoftwareUpdatesResult_UpdatesURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatesURI", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetSoftwareUpdatesResult_UpdatesURI})
+var sListClusterJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterJobsRequest, Members: &mListClusterJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClusterJobsRequest})
+var sListClusterJobsRequest_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eListClusterJobsRequest_ClusterId})
+var sListClusterJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListClusterJobsRequest_MaxResults})
+var sListClusterJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListClusterJobsRequest_NextToken})
+var sListClusterJobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterJobsResult, Members: &mListClusterJobsResult, Type: smithy.ShapeTypeStructure, Ext: &eListClusterJobsResult})
+var sListClusterJobsResult_JobListEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobListEntries", ID: &i_JobListEntryList, Members: &m_JobListEntryList, Type: smithy.ShapeTypeList, Ext: &eListClusterJobsResult_JobListEntries})
+var sListClusterJobsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListClusterJobsResult_NextToken})
+var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClustersRequest})
+var sListClustersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListClustersRequest_MaxResults})
+var sListClustersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListClustersRequest_NextToken})
+var sListClustersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResult, Members: &mListClustersResult, Type: smithy.ShapeTypeStructure, Ext: &eListClustersResult})
+var sListClustersResult_ClusterListEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterListEntries", ID: &i_ClusterListEntryList, Members: &m_ClusterListEntryList, Type: smithy.ShapeTypeList, Ext: &eListClustersResult_ClusterListEntries})
+var sListClustersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListClustersResult_NextToken})
+var sListCompatibleImagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCompatibleImagesRequest, Members: &mListCompatibleImagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCompatibleImagesRequest})
+var sListCompatibleImagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListCompatibleImagesRequest_MaxResults})
+var sListCompatibleImagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListCompatibleImagesRequest_NextToken})
+var sListCompatibleImagesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCompatibleImagesResult, Members: &mListCompatibleImagesResult, Type: smithy.ShapeTypeStructure, Ext: &eListCompatibleImagesResult})
+var sListCompatibleImagesResult_CompatibleImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompatibleImages", ID: &i_CompatibleImageList, Members: &m_CompatibleImageList, Type: smithy.ShapeTypeList, Ext: &eListCompatibleImagesResult_CompatibleImages})
+var sListCompatibleImagesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListCompatibleImagesResult_NextToken})
+var sListJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsRequest, Members: &mListJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListJobsRequest})
+var sListJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListJobsRequest_MaxResults})
+var sListJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListJobsRequest_NextToken})
+var sListJobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsResult, Members: &mListJobsResult, Type: smithy.ShapeTypeStructure, Ext: &eListJobsResult})
+var sListJobsResult_JobListEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobListEntries", ID: &i_JobListEntryList, Members: &m_JobListEntryList, Type: smithy.ShapeTypeList, Ext: &eListJobsResult_JobListEntries})
+var sListJobsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListJobsResult_NextToken})
+var sListLongTermPricingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLongTermPricingRequest, Members: &mListLongTermPricingRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLongTermPricingRequest})
+var sListLongTermPricingRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListLongTermPricingRequest_MaxResults})
+var sListLongTermPricingRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListLongTermPricingRequest_NextToken})
+var sListLongTermPricingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLongTermPricingResult, Members: &mListLongTermPricingResult, Type: smithy.ShapeTypeStructure, Ext: &eListLongTermPricingResult})
+var sListLongTermPricingResult_LongTermPricingEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingEntries", ID: &i_LongTermPricingEntryList, Members: &m_LongTermPricingEntryList, Type: smithy.ShapeTypeList, Ext: &eListLongTermPricingResult_LongTermPricingEntries})
+var sListLongTermPricingResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListLongTermPricingResult_NextToken})
+var sListPickupLocationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPickupLocationsRequest, Members: &mListPickupLocationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPickupLocationsRequest})
+var sListPickupLocationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListPickupLocationsRequest_MaxResults})
+var sListPickupLocationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPickupLocationsRequest_NextToken})
+var sListPickupLocationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPickupLocationsResult, Members: &mListPickupLocationsResult, Type: smithy.ShapeTypeStructure, Ext: &eListPickupLocationsResult})
+var sListPickupLocationsResult_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Addresses", ID: &i_AddressList, Members: &m_AddressList, Type: smithy.ShapeTypeList, Ext: &eListPickupLocationsResult_Addresses})
+var sListPickupLocationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPickupLocationsResult_NextToken})
+var sListServiceVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceVersionsRequest, Members: &mListServiceVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListServiceVersionsRequest})
+var sListServiceVersionsRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Type: smithy.ShapeTypeEnum, Ext: &eListServiceVersionsRequest_ServiceName})
+var sListServiceVersionsRequest_DependentServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentServices", ID: &i_DependentServiceList, Members: &m_DependentServiceList, Type: smithy.ShapeTypeList, Ext: &eListServiceVersionsRequest_DependentServices})
+var sListServiceVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListServiceVersionsRequest_MaxResults})
+var sListServiceVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListServiceVersionsRequest_NextToken})
+var sListServiceVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceVersionsResult, Members: &mListServiceVersionsResult, Type: smithy.ShapeTypeStructure, Ext: &eListServiceVersionsResult})
+var sListServiceVersionsResult_ServiceVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceVersions", ID: &i_ServiceVersionList, Members: &m_ServiceVersionList, Type: smithy.ShapeTypeList, Ext: &eListServiceVersionsResult_ServiceVersions})
+var sListServiceVersionsResult_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iServiceName, Members: &mServiceName, Type: smithy.ShapeTypeEnum, Ext: &eListServiceVersionsResult_ServiceName})
+var sListServiceVersionsResult_DependentServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependentServices", ID: &i_DependentServiceList, Members: &m_DependentServiceList, Type: smithy.ShapeTypeList, Ext: &eListServiceVersionsResult_DependentServices})
+var sListServiceVersionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListServiceVersionsResult_NextToken})
+var sUpdateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterRequest, Members: &mUpdateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest})
+var sUpdateClusterRequest_ClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterId", ID: &i_ClusterId, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_ClusterId})
+var sUpdateClusterRequest_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_RoleARN})
+var sUpdateClusterRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_Description})
+var sUpdateClusterRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest_Resources})
+var sUpdateClusterRequest_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest_OnDeviceServiceConfiguration})
+var sUpdateClusterRequest_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_AddressId})
+var sUpdateClusterRequest_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eUpdateClusterRequest_ShippingOption})
+var sUpdateClusterRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest_Notification})
+var sUpdateClusterRequest_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_ForwardingAddressId})
+var sUpdateClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterResult})
+var sUpdateJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobRequest, Members: &mUpdateJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobRequest})
+var sUpdateJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eUpdateJobRequest_JobId})
+var sUpdateJobRequest_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eUpdateJobRequest_RoleARN})
+var sUpdateJobRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobRequest_Notification})
+var sUpdateJobRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &iJobResource, Members: &mJobResource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobRequest_Resources})
+var sUpdateJobRequest_OnDeviceServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDeviceServiceConfiguration", ID: &iOnDeviceServiceConfiguration, Members: &mOnDeviceServiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobRequest_OnDeviceServiceConfiguration})
+var sUpdateJobRequest_AddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eUpdateJobRequest_AddressId})
+var sUpdateJobRequest_ShippingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShippingOption", ID: &iShippingOption, Members: &mShippingOption, Type: smithy.ShapeTypeEnum, Ext: &eUpdateJobRequest_ShippingOption})
+var sUpdateJobRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateJobRequest_Description})
+var sUpdateJobRequest_SnowballCapacityPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowballCapacityPreference", ID: &iSnowballCapacity, Members: &mSnowballCapacity, Type: smithy.ShapeTypeEnum, Ext: &eUpdateJobRequest_SnowballCapacityPreference})
+var sUpdateJobRequest_ForwardingAddressId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardingAddressId", ID: &i_AddressId, Type: smithy.ShapeTypeString, Ext: &eUpdateJobRequest_ForwardingAddressId})
+var sUpdateJobRequest_PickupDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PickupDetails", ID: &iPickupDetails, Members: &mPickupDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobRequest_PickupDetails})
+var sUpdateJobResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobResult})
+var sUpdateJobShipmentStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobShipmentStateRequest, Members: &mUpdateJobShipmentStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobShipmentStateRequest})
+var sUpdateJobShipmentStateRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eUpdateJobShipmentStateRequest_JobId})
+var sUpdateJobShipmentStateRequest_ShipmentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShipmentState", ID: &iShipmentState, Members: &mShipmentState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateJobShipmentStateRequest_ShipmentState})
+var sUpdateJobShipmentStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobShipmentStateResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateJobShipmentStateResult})
+var sUpdateLongTermPricingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLongTermPricingRequest, Members: &mUpdateLongTermPricingRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLongTermPricingRequest})
+var sUpdateLongTermPricingRequest_LongTermPricingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongTermPricingId", ID: &i_LongTermPricingId, Type: smithy.ShapeTypeString, Ext: &eUpdateLongTermPricingRequest_LongTermPricingId})
+var sUpdateLongTermPricingRequest_ReplacementJob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplacementJob", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eUpdateLongTermPricingRequest_ReplacementJob})
+var sUpdateLongTermPricingRequest_IsLongTermPricingAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLongTermPricingAutoRenew", ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLongTermPricingRequest_IsLongTermPricingAutoRenew})
+var sUpdateLongTermPricingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLongTermPricingResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLongTermPricingResult})
+
+var CancelCluster = &sCancelCluster
+
+var CancelJob = &sCancelJob
+
+var CreateAddress = &sCreateAddress
+
+var CreateCluster = &sCreateCluster
+
+var CreateJob = &sCreateJob
+
+var CreateLongTermPricing = &sCreateLongTermPricing
+
+var CreateReturnShippingLabel = &sCreateReturnShippingLabel
+
+var DescribeAddress = &sDescribeAddress
+
+var DescribeAddresses = &sDescribeAddresses
+
+var DescribeCluster = &sDescribeCluster
+
+var DescribeJob = &sDescribeJob
+
+var DescribeReturnShippingLabel = &sDescribeReturnShippingLabel
+
+var GetJobManifest = &sGetJobManifest
+
+var GetJobUnlockCode = &sGetJobUnlockCode
+
+var GetSnowballUsage = &sGetSnowballUsage
+
+var GetSoftwareUpdates = &sGetSoftwareUpdates
+
+var ListClusterJobs = &sListClusterJobs
+
+var ListClusters = &sListClusters
+
+var ListCompatibleImages = &sListCompatibleImages
+
+var ListJobs = &sListJobs
+
+var ListLongTermPricing = &sListLongTermPricing
+
+var ListPickupLocations = &sListPickupLocations
+
+var ListServiceVersions = &sListServiceVersions
+
+var UpdateCluster = &sUpdateCluster
+
+var UpdateJob = &sUpdateJob
+
+var UpdateJobShipmentState = &sUpdateJobShipmentState
+
+var UpdateLongTermPricing = &sUpdateLongTermPricing
+
+var _AWSIESnowballJobManagementService = &s_AWSIESnowballJobManagementService
+
+var Address = &sAddress
+var Address_AddressId = &sAddress_AddressId
+var Address_Name = &sAddress_Name
+var Address_Company = &sAddress_Company
+var Address_Street1 = &sAddress_Street1
+var Address_Street2 = &sAddress_Street2
+var Address_Street3 = &sAddress_Street3
+var Address_City = &sAddress_City
+var Address_StateOrProvince = &sAddress_StateOrProvince
+var Address_PrefectureOrDistrict = &sAddress_PrefectureOrDistrict
+var Address_Landmark = &sAddress_Landmark
+var Address_Country = &sAddress_Country
+var Address_PostalCode = &sAddress_PostalCode
+var Address_PhoneNumber = &sAddress_PhoneNumber
+var Address_IsRestricted = &sAddress_IsRestricted
+var Address_Type = &sAddress_Type
+
+var _AddressId = &s_AddressId
+
+var _AddressList = &s_AddressList
+var _AddressList_member = &s_AddressList_member
+
+var AddressType = &sAddressType
+var AddressType_CUST_PICKUP = &sAddressType_CUST_PICKUP
+var AddressType_AWS_SHIP = &sAddressType_AWS_SHIP
+
+var _AmiId = &s_AmiId
+
+var _Boolean = &s_Boolean
+
+var _ClusterId = &s_ClusterId
+
+var ClusterLimitExceededException = &sClusterLimitExceededException
+var ClusterLimitExceededException_Message = &sClusterLimitExceededException_Message
+
+var ClusterListEntry = &sClusterListEntry
+var ClusterListEntry_ClusterId = &sClusterListEntry_ClusterId
+var ClusterListEntry_ClusterState = &sClusterListEntry_ClusterState
+var ClusterListEntry_CreationDate = &sClusterListEntry_CreationDate
+var ClusterListEntry_Description = &sClusterListEntry_Description
+
+var _ClusterListEntryList = &s_ClusterListEntryList
+var _ClusterListEntryList_member = &s_ClusterListEntryList_member
+
+var ClusterMetadata = &sClusterMetadata
+var ClusterMetadata_ClusterId = &sClusterMetadata_ClusterId
+var ClusterMetadata_Description = &sClusterMetadata_Description
+var ClusterMetadata_KmsKeyARN = &sClusterMetadata_KmsKeyARN
+var ClusterMetadata_RoleARN = &sClusterMetadata_RoleARN
+var ClusterMetadata_ClusterState = &sClusterMetadata_ClusterState
+var ClusterMetadata_JobType = &sClusterMetadata_JobType
+var ClusterMetadata_SnowballType = &sClusterMetadata_SnowballType
+var ClusterMetadata_CreationDate = &sClusterMetadata_CreationDate
+var ClusterMetadata_Resources = &sClusterMetadata_Resources
+var ClusterMetadata_AddressId = &sClusterMetadata_AddressId
+var ClusterMetadata_ShippingOption = &sClusterMetadata_ShippingOption
+var ClusterMetadata_Notification = &sClusterMetadata_Notification
+var ClusterMetadata_ForwardingAddressId = &sClusterMetadata_ForwardingAddressId
+var ClusterMetadata_TaxDocuments = &sClusterMetadata_TaxDocuments
+var ClusterMetadata_OnDeviceServiceConfiguration = &sClusterMetadata_OnDeviceServiceConfiguration
+
+var ClusterState = &sClusterState
+var ClusterState_AWAITING_QUORUM = &sClusterState_AWAITING_QUORUM
+var ClusterState_PENDING = &sClusterState_PENDING
+var ClusterState_IN_USE = &sClusterState_IN_USE
+var ClusterState_COMPLETE = &sClusterState_COMPLETE
+var ClusterState_CANCELLED = &sClusterState_CANCELLED
+
+var CompatibleImage = &sCompatibleImage
+var CompatibleImage_AmiId = &sCompatibleImage_AmiId
+var CompatibleImage_Name = &sCompatibleImage_Name
+
+var _CompatibleImageList = &s_CompatibleImageList
+var _CompatibleImageList_member = &s_CompatibleImageList_member
+
+var ConflictException = &sConflictException
+var ConflictException_ConflictResource = &sConflictException_ConflictResource
+var ConflictException_Message = &sConflictException_Message
+
+var DataTransfer = &sDataTransfer
+var DataTransfer_BytesTransferred = &sDataTransfer_BytesTransferred
+var DataTransfer_ObjectsTransferred = &sDataTransfer_ObjectsTransferred
+var DataTransfer_TotalBytes = &sDataTransfer_TotalBytes
+var DataTransfer_TotalObjects = &sDataTransfer_TotalObjects
+
+var DependentService = &sDependentService
+var DependentService_ServiceName = &sDependentService_ServiceName
+var DependentService_ServiceVersion = &sDependentService_ServiceVersion
+
+var _DependentServiceList = &s_DependentServiceList
+var _DependentServiceList_member = &s_DependentServiceList_member
+
+var DeviceConfiguration = &sDeviceConfiguration
+var DeviceConfiguration_SnowconeDeviceConfiguration = &sDeviceConfiguration_SnowconeDeviceConfiguration
+
+var _DevicePickupId = &s_DevicePickupId
+
+var DeviceServiceName = &sDeviceServiceName
+var DeviceServiceName_NFS_ON_DEVICE_SERVICE = &sDeviceServiceName_NFS_ON_DEVICE_SERVICE
+var DeviceServiceName_S3_ON_DEVICE_SERVICE = &sDeviceServiceName_S3_ON_DEVICE_SERVICE
+
+var Ec2AmiResource = &sEc2AmiResource
+var Ec2AmiResource_AmiId = &sEc2AmiResource_AmiId
+var Ec2AmiResource_SnowballAmiId = &sEc2AmiResource_SnowballAmiId
+
+var _Ec2AmiResourceList = &s_Ec2AmiResourceList
+var _Ec2AmiResourceList_member = &s_Ec2AmiResourceList_member
+
+var Ec2RequestFailedException = &sEc2RequestFailedException
+var Ec2RequestFailedException_Message = &sEc2RequestFailedException_Message
+
+var EKSOnDeviceServiceConfiguration = &sEKSOnDeviceServiceConfiguration
+var EKSOnDeviceServiceConfiguration_KubernetesVersion = &sEKSOnDeviceServiceConfiguration_KubernetesVersion
+var EKSOnDeviceServiceConfiguration_EKSAnywhereVersion = &sEKSOnDeviceServiceConfiguration_EKSAnywhereVersion
+
+var _Email = &s_Email
+
+var EventTriggerDefinition = &sEventTriggerDefinition
+var EventTriggerDefinition_EventResourceARN = &sEventTriggerDefinition_EventResourceARN
+
+var _EventTriggerDefinitionList = &s_EventTriggerDefinitionList
+var _EventTriggerDefinitionList_member = &s_EventTriggerDefinitionList_member
+
+var _GSTIN = &s_GSTIN
+
+var ImpactLevel = &sImpactLevel
+var ImpactLevel_IL2 = &sImpactLevel_IL2
+var ImpactLevel_IL4 = &sImpactLevel_IL4
+var ImpactLevel_IL5 = &sImpactLevel_IL5
+var ImpactLevel_IL6 = &sImpactLevel_IL6
+var ImpactLevel_IL99 = &sImpactLevel_IL99
+
+var INDTaxDocuments = &sINDTaxDocuments
+var INDTaxDocuments_GSTIN = &sINDTaxDocuments_GSTIN
+
+var _InitialClusterSize = &s_InitialClusterSize
+
+var _Integer = &s_Integer
+
+var InvalidAddressException = &sInvalidAddressException
+var InvalidAddressException_Message = &sInvalidAddressException_Message
+
+var InvalidInputCombinationException = &sInvalidInputCombinationException
+var InvalidInputCombinationException_Message = &sInvalidInputCombinationException_Message
+
+var InvalidJobStateException = &sInvalidJobStateException
+var InvalidJobStateException_Message = &sInvalidJobStateException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var InvalidResourceException = &sInvalidResourceException
+var InvalidResourceException_Message = &sInvalidResourceException_Message
+var InvalidResourceException_ResourceType = &sInvalidResourceException_ResourceType
+
+var _JavaBoolean = &s_JavaBoolean
+
+var _JobId = &s_JobId
+
+var JobListEntry = &sJobListEntry
+var JobListEntry_JobId = &sJobListEntry_JobId
+var JobListEntry_JobState = &sJobListEntry_JobState
+var JobListEntry_IsMaster = &sJobListEntry_IsMaster
+var JobListEntry_JobType = &sJobListEntry_JobType
+var JobListEntry_SnowballType = &sJobListEntry_SnowballType
+var JobListEntry_CreationDate = &sJobListEntry_CreationDate
+var JobListEntry_Description = &sJobListEntry_Description
+
+var _JobListEntryList = &s_JobListEntryList
+var _JobListEntryList_member = &s_JobListEntryList_member
+
+var JobLogs = &sJobLogs
+var JobLogs_JobCompletionReportURI = &sJobLogs_JobCompletionReportURI
+var JobLogs_JobSuccessLogURI = &sJobLogs_JobSuccessLogURI
+var JobLogs_JobFailureLogURI = &sJobLogs_JobFailureLogURI
+
+var JobMetadata = &sJobMetadata
+var JobMetadata_JobId = &sJobMetadata_JobId
+var JobMetadata_JobState = &sJobMetadata_JobState
+var JobMetadata_JobType = &sJobMetadata_JobType
+var JobMetadata_SnowballType = &sJobMetadata_SnowballType
+var JobMetadata_CreationDate = &sJobMetadata_CreationDate
+var JobMetadata_Resources = &sJobMetadata_Resources
+var JobMetadata_Description = &sJobMetadata_Description
+var JobMetadata_KmsKeyARN = &sJobMetadata_KmsKeyARN
+var JobMetadata_RoleARN = &sJobMetadata_RoleARN
+var JobMetadata_AddressId = &sJobMetadata_AddressId
+var JobMetadata_ShippingDetails = &sJobMetadata_ShippingDetails
+var JobMetadata_SnowballCapacityPreference = &sJobMetadata_SnowballCapacityPreference
+var JobMetadata_Notification = &sJobMetadata_Notification
+var JobMetadata_DataTransferProgress = &sJobMetadata_DataTransferProgress
+var JobMetadata_JobLogInfo = &sJobMetadata_JobLogInfo
+var JobMetadata_ClusterId = &sJobMetadata_ClusterId
+var JobMetadata_ForwardingAddressId = &sJobMetadata_ForwardingAddressId
+var JobMetadata_TaxDocuments = &sJobMetadata_TaxDocuments
+var JobMetadata_DeviceConfiguration = &sJobMetadata_DeviceConfiguration
+var JobMetadata_RemoteManagement = &sJobMetadata_RemoteManagement
+var JobMetadata_LongTermPricingId = &sJobMetadata_LongTermPricingId
+var JobMetadata_OnDeviceServiceConfiguration = &sJobMetadata_OnDeviceServiceConfiguration
+var JobMetadata_ImpactLevel = &sJobMetadata_ImpactLevel
+var JobMetadata_PickupDetails = &sJobMetadata_PickupDetails
+var JobMetadata_SnowballId = &sJobMetadata_SnowballId
+
+var _JobMetadataList = &s_JobMetadataList
+var _JobMetadataList_member = &s_JobMetadataList_member
+
+var JobResource = &sJobResource
+var JobResource_S3Resources = &sJobResource_S3Resources
+var JobResource_LambdaResources = &sJobResource_LambdaResources
+var JobResource_Ec2AmiResources = &sJobResource_Ec2AmiResources
+
+var JobState = &sJobState
+var JobState_NEW = &sJobState_NEW
+var JobState_PREPARING_APPLIANCE = &sJobState_PREPARING_APPLIANCE
+var JobState_PREPARING_SHIPMENT = &sJobState_PREPARING_SHIPMENT
+var JobState_IN_TRANSIT_TO_CUSTOMER = &sJobState_IN_TRANSIT_TO_CUSTOMER
+var JobState_WITH_CUSTOMER = &sJobState_WITH_CUSTOMER
+var JobState_IN_TRANSIT_TO_AWS = &sJobState_IN_TRANSIT_TO_AWS
+var JobState_WITH_AWS_SORTING_FACILITY = &sJobState_WITH_AWS_SORTING_FACILITY
+var JobState_WITH_AWS = &sJobState_WITH_AWS
+var JobState_IN_PROGRESS = &sJobState_IN_PROGRESS
+var JobState_COMPLETE = &sJobState_COMPLETE
+var JobState_CANCELLED = &sJobState_CANCELLED
+var JobState_LISTING = &sJobState_LISTING
+var JobState_PENDING = &sJobState_PENDING
+
+var _JobStateList = &s_JobStateList
+var _JobStateList_member = &s_JobStateList_member
+
+var JobType = &sJobType
+var JobType_IMPORT = &sJobType_IMPORT
+var JobType_EXPORT = &sJobType_EXPORT
+var JobType_LOCAL_USE = &sJobType_LOCAL_USE
+
+var KeyRange = &sKeyRange
+var KeyRange_BeginMarker = &sKeyRange_BeginMarker
+var KeyRange_EndMarker = &sKeyRange_EndMarker
+
+var _KmsKeyARN = &s_KmsKeyARN
+
+var KMSRequestFailedException = &sKMSRequestFailedException
+var KMSRequestFailedException_Message = &sKMSRequestFailedException_Message
+
+var LambdaResource = &sLambdaResource
+var LambdaResource_LambdaArn = &sLambdaResource_LambdaArn
+var LambdaResource_EventTriggers = &sLambdaResource_EventTriggers
+
+var _LambdaResourceList = &s_LambdaResourceList
+var _LambdaResourceList_member = &s_LambdaResourceList_member
+
+var _ListLimit = &s_ListLimit
+
+var _Long = &s_Long
+
+var _LongTermPricingAssociatedJobIdList = &s_LongTermPricingAssociatedJobIdList
+var _LongTermPricingAssociatedJobIdList_member = &s_LongTermPricingAssociatedJobIdList_member
+
+var _LongTermPricingEntryList = &s_LongTermPricingEntryList
+var _LongTermPricingEntryList_member = &s_LongTermPricingEntryList_member
+
+var _LongTermPricingId = &s_LongTermPricingId
+
+var _LongTermPricingIdList = &s_LongTermPricingIdList
+var _LongTermPricingIdList_member = &s_LongTermPricingIdList_member
+
+var LongTermPricingListEntry = &sLongTermPricingListEntry
+var LongTermPricingListEntry_LongTermPricingId = &sLongTermPricingListEntry_LongTermPricingId
+var LongTermPricingListEntry_LongTermPricingEndDate = &sLongTermPricingListEntry_LongTermPricingEndDate
+var LongTermPricingListEntry_LongTermPricingStartDate = &sLongTermPricingListEntry_LongTermPricingStartDate
+var LongTermPricingListEntry_LongTermPricingType = &sLongTermPricingListEntry_LongTermPricingType
+var LongTermPricingListEntry_CurrentActiveJob = &sLongTermPricingListEntry_CurrentActiveJob
+var LongTermPricingListEntry_ReplacementJob = &sLongTermPricingListEntry_ReplacementJob
+var LongTermPricingListEntry_IsLongTermPricingAutoRenew = &sLongTermPricingListEntry_IsLongTermPricingAutoRenew
+var LongTermPricingListEntry_LongTermPricingStatus = &sLongTermPricingListEntry_LongTermPricingStatus
+var LongTermPricingListEntry_SnowballType = &sLongTermPricingListEntry_SnowballType
+var LongTermPricingListEntry_JobIds = &sLongTermPricingListEntry_JobIds
+
+var LongTermPricingType = &sLongTermPricingType
+var LongTermPricingType_ONE_YEAR = &sLongTermPricingType_ONE_YEAR
+var LongTermPricingType_THREE_YEAR = &sLongTermPricingType_THREE_YEAR
+var LongTermPricingType_ONE_MONTH = &sLongTermPricingType_ONE_MONTH
+
+var NFSOnDeviceServiceConfiguration = &sNFSOnDeviceServiceConfiguration
+var NFSOnDeviceServiceConfiguration_StorageLimit = &sNFSOnDeviceServiceConfiguration_StorageLimit
+var NFSOnDeviceServiceConfiguration_StorageUnit = &sNFSOnDeviceServiceConfiguration_StorageUnit
+
+var _NodeFaultTolerance = &s_NodeFaultTolerance
+
+var Notification = &sNotification
+var Notification_SnsTopicARN = &sNotification_SnsTopicARN
+var Notification_JobStatesToNotify = &sNotification_JobStatesToNotify
+var Notification_NotifyAll = &sNotification_NotifyAll
+var Notification_DevicePickupSnsTopicARN = &sNotification_DevicePickupSnsTopicARN
+
+var OnDeviceServiceConfiguration = &sOnDeviceServiceConfiguration
+var OnDeviceServiceConfiguration_NFSOnDeviceService = &sOnDeviceServiceConfiguration_NFSOnDeviceService
+var OnDeviceServiceConfiguration_TGWOnDeviceService = &sOnDeviceServiceConfiguration_TGWOnDeviceService
+var OnDeviceServiceConfiguration_EKSOnDeviceService = &sOnDeviceServiceConfiguration_EKSOnDeviceService
+var OnDeviceServiceConfiguration_S3OnDeviceService = &sOnDeviceServiceConfiguration_S3OnDeviceService
+
+var _PhoneNumber = &s_PhoneNumber
+
+var PickupDetails = &sPickupDetails
+var PickupDetails_Name = &sPickupDetails_Name
+var PickupDetails_PhoneNumber = &sPickupDetails_PhoneNumber
+var PickupDetails_Email = &sPickupDetails_Email
+var PickupDetails_IdentificationNumber = &sPickupDetails_IdentificationNumber
+var PickupDetails_IdentificationExpirationDate = &sPickupDetails_IdentificationExpirationDate
+var PickupDetails_IdentificationIssuingOrg = &sPickupDetails_IdentificationIssuingOrg
+var PickupDetails_DevicePickupId = &sPickupDetails_DevicePickupId
+
+var RemoteManagement = &sRemoteManagement
+var RemoteManagement_INSTALLED_ONLY = &sRemoteManagement_INSTALLED_ONLY
+var RemoteManagement_INSTALLED_AUTOSTART = &sRemoteManagement_INSTALLED_AUTOSTART
+var RemoteManagement_NOT_INSTALLED = &sRemoteManagement_NOT_INSTALLED
+
+var _ResourceARN = &s_ResourceARN
+
+var ReturnShippingLabelAlreadyExistsException = &sReturnShippingLabelAlreadyExistsException
+var ReturnShippingLabelAlreadyExistsException_Message = &sReturnShippingLabelAlreadyExistsException_Message
+
+var _RoleARN = &s_RoleARN
+
+var S3OnDeviceServiceConfiguration = &sS3OnDeviceServiceConfiguration
+var S3OnDeviceServiceConfiguration_StorageLimit = &sS3OnDeviceServiceConfiguration_StorageLimit
+var S3OnDeviceServiceConfiguration_StorageUnit = &sS3OnDeviceServiceConfiguration_StorageUnit
+var S3OnDeviceServiceConfiguration_ServiceSize = &sS3OnDeviceServiceConfiguration_ServiceSize
+var S3OnDeviceServiceConfiguration_FaultTolerance = &sS3OnDeviceServiceConfiguration_FaultTolerance
+
+var S3Resource = &sS3Resource
+var S3Resource_BucketArn = &sS3Resource_BucketArn
+var S3Resource_KeyRange = &sS3Resource_KeyRange
+var S3Resource_TargetOnDeviceServices = &sS3Resource_TargetOnDeviceServices
+
+var _S3ResourceList = &s_S3ResourceList
+var _S3ResourceList_member = &s_S3ResourceList_member
+
+var _S3StorageLimit = &s_S3StorageLimit
+
+var ServiceName = &sServiceName
+var ServiceName_KUBERNETES = &sServiceName_KUBERNETES
+var ServiceName_EKS_ANYWHERE = &sServiceName_EKS_ANYWHERE
+
+var _ServiceSize = &s_ServiceSize
+
+var ServiceVersion = &sServiceVersion
+var ServiceVersion_Version = &sServiceVersion_Version
+
+var _ServiceVersionList = &s_ServiceVersionList
+var _ServiceVersionList_member = &s_ServiceVersionList_member
+
+var Shipment = &sShipment
+var Shipment_Status = &sShipment_Status
+var Shipment_TrackingNumber = &sShipment_TrackingNumber
+
+var ShipmentState = &sShipmentState
+var ShipmentState_RECEIVED = &sShipmentState_RECEIVED
+var ShipmentState_RETURNED = &sShipmentState_RETURNED
+
+var ShippingDetails = &sShippingDetails
+var ShippingDetails_ShippingOption = &sShippingDetails_ShippingOption
+var ShippingDetails_InboundShipment = &sShippingDetails_InboundShipment
+var ShippingDetails_OutboundShipment = &sShippingDetails_OutboundShipment
+
+var ShippingLabelStatus = &sShippingLabelStatus
+var ShippingLabelStatus_IN_PROGRESS = &sShippingLabelStatus_IN_PROGRESS
+var ShippingLabelStatus_TIMED_OUT = &sShippingLabelStatus_TIMED_OUT
+var ShippingLabelStatus_SUCCEEDED = &sShippingLabelStatus_SUCCEEDED
+var ShippingLabelStatus_FAILED = &sShippingLabelStatus_FAILED
+
+var ShippingOption = &sShippingOption
+var ShippingOption_SECOND_DAY = &sShippingOption_SECOND_DAY
+var ShippingOption_NEXT_DAY = &sShippingOption_NEXT_DAY
+var ShippingOption_EXPRESS = &sShippingOption_EXPRESS
+var ShippingOption_STANDARD = &sShippingOption_STANDARD
+
+var SnowballCapacity = &sSnowballCapacity
+var SnowballCapacity_T50 = &sSnowballCapacity_T50
+var SnowballCapacity_T80 = &sSnowballCapacity_T80
+var SnowballCapacity_T100 = &sSnowballCapacity_T100
+var SnowballCapacity_T42 = &sSnowballCapacity_T42
+var SnowballCapacity_T98 = &sSnowballCapacity_T98
+var SnowballCapacity_T8 = &sSnowballCapacity_T8
+var SnowballCapacity_T14 = &sSnowballCapacity_T14
+var SnowballCapacity_T32 = &sSnowballCapacity_T32
+var SnowballCapacity_NO_PREFERENCE = &sSnowballCapacity_NO_PREFERENCE
+var SnowballCapacity_T240 = &sSnowballCapacity_T240
+var SnowballCapacity_T13 = &sSnowballCapacity_T13
+
+var SnowballType = &sSnowballType
+var SnowballType_STANDARD = &sSnowballType_STANDARD
+var SnowballType_EDGE = &sSnowballType_EDGE
+var SnowballType_EDGE_C = &sSnowballType_EDGE_C
+var SnowballType_EDGE_CG = &sSnowballType_EDGE_CG
+var SnowballType_EDGE_S = &sSnowballType_EDGE_S
+var SnowballType_SNC1_HDD = &sSnowballType_SNC1_HDD
+var SnowballType_SNC1_SSD = &sSnowballType_SNC1_SSD
+var SnowballType_V3_5C = &sSnowballType_V3_5C
+var SnowballType_V3_5S = &sSnowballType_V3_5S
+var SnowballType_RACK_5U_C = &sSnowballType_RACK_5U_C
+
+var SnowconeDeviceConfiguration = &sSnowconeDeviceConfiguration
+var SnowconeDeviceConfiguration_WirelessConnection = &sSnowconeDeviceConfiguration_WirelessConnection
+
+var _SnsTopicARN = &s_SnsTopicARN
+
+var _StorageLimit = &s_StorageLimit
+
+var StorageUnit = &sStorageUnit
+var StorageUnit_TB = &sStorageUnit_TB
+
+var _String = &s_String
+
+var TargetOnDeviceService = &sTargetOnDeviceService
+var TargetOnDeviceService_ServiceName = &sTargetOnDeviceService_ServiceName
+var TargetOnDeviceService_TransferOption = &sTargetOnDeviceService_TransferOption
+
+var _TargetOnDeviceServiceList = &s_TargetOnDeviceServiceList
+var _TargetOnDeviceServiceList_member = &s_TargetOnDeviceServiceList_member
+
+var TaxDocuments = &sTaxDocuments
+var TaxDocuments_IND = &sTaxDocuments_IND
+
+var TGWOnDeviceServiceConfiguration = &sTGWOnDeviceServiceConfiguration
+var TGWOnDeviceServiceConfiguration_StorageLimit = &sTGWOnDeviceServiceConfiguration_StorageLimit
+var TGWOnDeviceServiceConfiguration_StorageUnit = &sTGWOnDeviceServiceConfiguration_StorageUnit
+
+var _Timestamp = &s_Timestamp
+
+var TransferOption = &sTransferOption
+var TransferOption_IMPORT = &sTransferOption_IMPORT
+var TransferOption_EXPORT = &sTransferOption_EXPORT
+var TransferOption_LOCAL_USE = &sTransferOption_LOCAL_USE
+
+var UnsupportedAddressException = &sUnsupportedAddressException
+var UnsupportedAddressException_Message = &sUnsupportedAddressException_Message
+
+var WirelessConnection = &sWirelessConnection
+var WirelessConnection_IsWifiEnabled = &sWirelessConnection_IsWifiEnabled
+
+var CancelClusterRequest = &sCancelClusterRequest
+var CancelClusterRequest_ClusterId = &sCancelClusterRequest_ClusterId
+
+var CancelClusterResult = &sCancelClusterResult
+
+var CancelJobRequest = &sCancelJobRequest
+var CancelJobRequest_JobId = &sCancelJobRequest_JobId
+
+var CancelJobResult = &sCancelJobResult
+
+var CreateAddressRequest = &sCreateAddressRequest
+var CreateAddressRequest_Address = &sCreateAddressRequest_Address
+
+var CreateAddressResult = &sCreateAddressResult
+var CreateAddressResult_AddressId = &sCreateAddressResult_AddressId
+
+var CreateClusterRequest = &sCreateClusterRequest
+var CreateClusterRequest_JobType = &sCreateClusterRequest_JobType
+var CreateClusterRequest_Resources = &sCreateClusterRequest_Resources
+var CreateClusterRequest_OnDeviceServiceConfiguration = &sCreateClusterRequest_OnDeviceServiceConfiguration
+var CreateClusterRequest_Description = &sCreateClusterRequest_Description
+var CreateClusterRequest_AddressId = &sCreateClusterRequest_AddressId
+var CreateClusterRequest_KmsKeyARN = &sCreateClusterRequest_KmsKeyARN
+var CreateClusterRequest_RoleARN = &sCreateClusterRequest_RoleARN
+var CreateClusterRequest_SnowballType = &sCreateClusterRequest_SnowballType
+var CreateClusterRequest_ShippingOption = &sCreateClusterRequest_ShippingOption
+var CreateClusterRequest_Notification = &sCreateClusterRequest_Notification
+var CreateClusterRequest_ForwardingAddressId = &sCreateClusterRequest_ForwardingAddressId
+var CreateClusterRequest_TaxDocuments = &sCreateClusterRequest_TaxDocuments
+var CreateClusterRequest_RemoteManagement = &sCreateClusterRequest_RemoteManagement
+var CreateClusterRequest_InitialClusterSize = &sCreateClusterRequest_InitialClusterSize
+var CreateClusterRequest_ForceCreateJobs = &sCreateClusterRequest_ForceCreateJobs
+var CreateClusterRequest_LongTermPricingIds = &sCreateClusterRequest_LongTermPricingIds
+var CreateClusterRequest_SnowballCapacityPreference = &sCreateClusterRequest_SnowballCapacityPreference
+
+var CreateClusterResult = &sCreateClusterResult
+var CreateClusterResult_ClusterId = &sCreateClusterResult_ClusterId
+var CreateClusterResult_JobListEntries = &sCreateClusterResult_JobListEntries
+
+var CreateJobRequest = &sCreateJobRequest
+var CreateJobRequest_JobType = &sCreateJobRequest_JobType
+var CreateJobRequest_Resources = &sCreateJobRequest_Resources
+var CreateJobRequest_OnDeviceServiceConfiguration = &sCreateJobRequest_OnDeviceServiceConfiguration
+var CreateJobRequest_Description = &sCreateJobRequest_Description
+var CreateJobRequest_AddressId = &sCreateJobRequest_AddressId
+var CreateJobRequest_KmsKeyARN = &sCreateJobRequest_KmsKeyARN
+var CreateJobRequest_RoleARN = &sCreateJobRequest_RoleARN
+var CreateJobRequest_SnowballCapacityPreference = &sCreateJobRequest_SnowballCapacityPreference
+var CreateJobRequest_ShippingOption = &sCreateJobRequest_ShippingOption
+var CreateJobRequest_Notification = &sCreateJobRequest_Notification
+var CreateJobRequest_ClusterId = &sCreateJobRequest_ClusterId
+var CreateJobRequest_SnowballType = &sCreateJobRequest_SnowballType
+var CreateJobRequest_ForwardingAddressId = &sCreateJobRequest_ForwardingAddressId
+var CreateJobRequest_TaxDocuments = &sCreateJobRequest_TaxDocuments
+var CreateJobRequest_DeviceConfiguration = &sCreateJobRequest_DeviceConfiguration
+var CreateJobRequest_RemoteManagement = &sCreateJobRequest_RemoteManagement
+var CreateJobRequest_LongTermPricingId = &sCreateJobRequest_LongTermPricingId
+var CreateJobRequest_ImpactLevel = &sCreateJobRequest_ImpactLevel
+var CreateJobRequest_PickupDetails = &sCreateJobRequest_PickupDetails
+
+var CreateJobResult = &sCreateJobResult
+var CreateJobResult_JobId = &sCreateJobResult_JobId
+
+var CreateLongTermPricingRequest = &sCreateLongTermPricingRequest
+var CreateLongTermPricingRequest_LongTermPricingType = &sCreateLongTermPricingRequest_LongTermPricingType
+var CreateLongTermPricingRequest_IsLongTermPricingAutoRenew = &sCreateLongTermPricingRequest_IsLongTermPricingAutoRenew
+var CreateLongTermPricingRequest_SnowballType = &sCreateLongTermPricingRequest_SnowballType
+
+var CreateLongTermPricingResult = &sCreateLongTermPricingResult
+var CreateLongTermPricingResult_LongTermPricingId = &sCreateLongTermPricingResult_LongTermPricingId
+
+var CreateReturnShippingLabelRequest = &sCreateReturnShippingLabelRequest
+var CreateReturnShippingLabelRequest_JobId = &sCreateReturnShippingLabelRequest_JobId
+var CreateReturnShippingLabelRequest_ShippingOption = &sCreateReturnShippingLabelRequest_ShippingOption
+
+var CreateReturnShippingLabelResult = &sCreateReturnShippingLabelResult
+var CreateReturnShippingLabelResult_Status = &sCreateReturnShippingLabelResult_Status
+
+var DescribeAddressesRequest = &sDescribeAddressesRequest
+var DescribeAddressesRequest_MaxResults = &sDescribeAddressesRequest_MaxResults
+var DescribeAddressesRequest_NextToken = &sDescribeAddressesRequest_NextToken
+
+var DescribeAddressesResult = &sDescribeAddressesResult
+var DescribeAddressesResult_Addresses = &sDescribeAddressesResult_Addresses
+var DescribeAddressesResult_NextToken = &sDescribeAddressesResult_NextToken
+
+var DescribeAddressRequest = &sDescribeAddressRequest
+var DescribeAddressRequest_AddressId = &sDescribeAddressRequest_AddressId
+
+var DescribeAddressResult = &sDescribeAddressResult
+var DescribeAddressResult_Address = &sDescribeAddressResult_Address
+
+var DescribeClusterRequest = &sDescribeClusterRequest
+var DescribeClusterRequest_ClusterId = &sDescribeClusterRequest_ClusterId
+
+var DescribeClusterResult = &sDescribeClusterResult
+var DescribeClusterResult_ClusterMetadata = &sDescribeClusterResult_ClusterMetadata
+
+var DescribeJobRequest = &sDescribeJobRequest
+var DescribeJobRequest_JobId = &sDescribeJobRequest_JobId
+
+var DescribeJobResult = &sDescribeJobResult
+var DescribeJobResult_JobMetadata = &sDescribeJobResult_JobMetadata
+var DescribeJobResult_SubJobMetadata = &sDescribeJobResult_SubJobMetadata
+
+var DescribeReturnShippingLabelRequest = &sDescribeReturnShippingLabelRequest
+var DescribeReturnShippingLabelRequest_JobId = &sDescribeReturnShippingLabelRequest_JobId
+
+var DescribeReturnShippingLabelResult = &sDescribeReturnShippingLabelResult
+var DescribeReturnShippingLabelResult_Status = &sDescribeReturnShippingLabelResult_Status
+var DescribeReturnShippingLabelResult_ExpirationDate = &sDescribeReturnShippingLabelResult_ExpirationDate
+var DescribeReturnShippingLabelResult_ReturnShippingLabelURI = &sDescribeReturnShippingLabelResult_ReturnShippingLabelURI
+
+var GetJobManifestRequest = &sGetJobManifestRequest
+var GetJobManifestRequest_JobId = &sGetJobManifestRequest_JobId
+
+var GetJobManifestResult = &sGetJobManifestResult
+var GetJobManifestResult_ManifestURI = &sGetJobManifestResult_ManifestURI
+
+var GetJobUnlockCodeRequest = &sGetJobUnlockCodeRequest
+var GetJobUnlockCodeRequest_JobId = &sGetJobUnlockCodeRequest_JobId
+
+var GetJobUnlockCodeResult = &sGetJobUnlockCodeResult
+var GetJobUnlockCodeResult_UnlockCode = &sGetJobUnlockCodeResult_UnlockCode
+
+var GetSnowballUsageRequest = &sGetSnowballUsageRequest
+
+var GetSnowballUsageResult = &sGetSnowballUsageResult
+var GetSnowballUsageResult_SnowballLimit = &sGetSnowballUsageResult_SnowballLimit
+var GetSnowballUsageResult_SnowballsInUse = &sGetSnowballUsageResult_SnowballsInUse
+
+var GetSoftwareUpdatesRequest = &sGetSoftwareUpdatesRequest
+var GetSoftwareUpdatesRequest_JobId = &sGetSoftwareUpdatesRequest_JobId
+
+var GetSoftwareUpdatesResult = &sGetSoftwareUpdatesResult
+var GetSoftwareUpdatesResult_UpdatesURI = &sGetSoftwareUpdatesResult_UpdatesURI
+
+var ListClusterJobsRequest = &sListClusterJobsRequest
+var ListClusterJobsRequest_ClusterId = &sListClusterJobsRequest_ClusterId
+var ListClusterJobsRequest_MaxResults = &sListClusterJobsRequest_MaxResults
+var ListClusterJobsRequest_NextToken = &sListClusterJobsRequest_NextToken
+
+var ListClusterJobsResult = &sListClusterJobsResult
+var ListClusterJobsResult_JobListEntries = &sListClusterJobsResult_JobListEntries
+var ListClusterJobsResult_NextToken = &sListClusterJobsResult_NextToken
+
+var ListClustersRequest = &sListClustersRequest
+var ListClustersRequest_MaxResults = &sListClustersRequest_MaxResults
+var ListClustersRequest_NextToken = &sListClustersRequest_NextToken
+
+var ListClustersResult = &sListClustersResult
+var ListClustersResult_ClusterListEntries = &sListClustersResult_ClusterListEntries
+var ListClustersResult_NextToken = &sListClustersResult_NextToken
+
+var ListCompatibleImagesRequest = &sListCompatibleImagesRequest
+var ListCompatibleImagesRequest_MaxResults = &sListCompatibleImagesRequest_MaxResults
+var ListCompatibleImagesRequest_NextToken = &sListCompatibleImagesRequest_NextToken
+
+var ListCompatibleImagesResult = &sListCompatibleImagesResult
+var ListCompatibleImagesResult_CompatibleImages = &sListCompatibleImagesResult_CompatibleImages
+var ListCompatibleImagesResult_NextToken = &sListCompatibleImagesResult_NextToken
+
+var ListJobsRequest = &sListJobsRequest
+var ListJobsRequest_MaxResults = &sListJobsRequest_MaxResults
+var ListJobsRequest_NextToken = &sListJobsRequest_NextToken
+
+var ListJobsResult = &sListJobsResult
+var ListJobsResult_JobListEntries = &sListJobsResult_JobListEntries
+var ListJobsResult_NextToken = &sListJobsResult_NextToken
+
+var ListLongTermPricingRequest = &sListLongTermPricingRequest
+var ListLongTermPricingRequest_MaxResults = &sListLongTermPricingRequest_MaxResults
+var ListLongTermPricingRequest_NextToken = &sListLongTermPricingRequest_NextToken
+
+var ListLongTermPricingResult = &sListLongTermPricingResult
+var ListLongTermPricingResult_LongTermPricingEntries = &sListLongTermPricingResult_LongTermPricingEntries
+var ListLongTermPricingResult_NextToken = &sListLongTermPricingResult_NextToken
+
+var ListPickupLocationsRequest = &sListPickupLocationsRequest
+var ListPickupLocationsRequest_MaxResults = &sListPickupLocationsRequest_MaxResults
+var ListPickupLocationsRequest_NextToken = &sListPickupLocationsRequest_NextToken
+
+var ListPickupLocationsResult = &sListPickupLocationsResult
+var ListPickupLocationsResult_Addresses = &sListPickupLocationsResult_Addresses
+var ListPickupLocationsResult_NextToken = &sListPickupLocationsResult_NextToken
+
+var ListServiceVersionsRequest = &sListServiceVersionsRequest
+var ListServiceVersionsRequest_ServiceName = &sListServiceVersionsRequest_ServiceName
+var ListServiceVersionsRequest_DependentServices = &sListServiceVersionsRequest_DependentServices
+var ListServiceVersionsRequest_MaxResults = &sListServiceVersionsRequest_MaxResults
+var ListServiceVersionsRequest_NextToken = &sListServiceVersionsRequest_NextToken
+
+var ListServiceVersionsResult = &sListServiceVersionsResult
+var ListServiceVersionsResult_ServiceVersions = &sListServiceVersionsResult_ServiceVersions
+var ListServiceVersionsResult_ServiceName = &sListServiceVersionsResult_ServiceName
+var ListServiceVersionsResult_DependentServices = &sListServiceVersionsResult_DependentServices
+var ListServiceVersionsResult_NextToken = &sListServiceVersionsResult_NextToken
+
+var UpdateClusterRequest = &sUpdateClusterRequest
+var UpdateClusterRequest_ClusterId = &sUpdateClusterRequest_ClusterId
+var UpdateClusterRequest_RoleARN = &sUpdateClusterRequest_RoleARN
+var UpdateClusterRequest_Description = &sUpdateClusterRequest_Description
+var UpdateClusterRequest_Resources = &sUpdateClusterRequest_Resources
+var UpdateClusterRequest_OnDeviceServiceConfiguration = &sUpdateClusterRequest_OnDeviceServiceConfiguration
+var UpdateClusterRequest_AddressId = &sUpdateClusterRequest_AddressId
+var UpdateClusterRequest_ShippingOption = &sUpdateClusterRequest_ShippingOption
+var UpdateClusterRequest_Notification = &sUpdateClusterRequest_Notification
+var UpdateClusterRequest_ForwardingAddressId = &sUpdateClusterRequest_ForwardingAddressId
+
+var UpdateClusterResult = &sUpdateClusterResult
+
+var UpdateJobRequest = &sUpdateJobRequest
+var UpdateJobRequest_JobId = &sUpdateJobRequest_JobId
+var UpdateJobRequest_RoleARN = &sUpdateJobRequest_RoleARN
+var UpdateJobRequest_Notification = &sUpdateJobRequest_Notification
+var UpdateJobRequest_Resources = &sUpdateJobRequest_Resources
+var UpdateJobRequest_OnDeviceServiceConfiguration = &sUpdateJobRequest_OnDeviceServiceConfiguration
+var UpdateJobRequest_AddressId = &sUpdateJobRequest_AddressId
+var UpdateJobRequest_ShippingOption = &sUpdateJobRequest_ShippingOption
+var UpdateJobRequest_Description = &sUpdateJobRequest_Description
+var UpdateJobRequest_SnowballCapacityPreference = &sUpdateJobRequest_SnowballCapacityPreference
+var UpdateJobRequest_ForwardingAddressId = &sUpdateJobRequest_ForwardingAddressId
+var UpdateJobRequest_PickupDetails = &sUpdateJobRequest_PickupDetails
+
+var UpdateJobResult = &sUpdateJobResult
+
+var UpdateJobShipmentStateRequest = &sUpdateJobShipmentStateRequest
+var UpdateJobShipmentStateRequest_JobId = &sUpdateJobShipmentStateRequest_JobId
+var UpdateJobShipmentStateRequest_ShipmentState = &sUpdateJobShipmentStateRequest_ShipmentState
+
+var UpdateJobShipmentStateResult = &sUpdateJobShipmentStateResult
+
+var UpdateLongTermPricingRequest = &sUpdateLongTermPricingRequest
+var UpdateLongTermPricingRequest_LongTermPricingId = &sUpdateLongTermPricingRequest_LongTermPricingId
+var UpdateLongTermPricingRequest_ReplacementJob = &sUpdateLongTermPricingRequest_ReplacementJob
+var UpdateLongTermPricingRequest_IsLongTermPricingAutoRenew = &sUpdateLongTermPricingRequest_IsLongTermPricingAutoRenew
+
+var UpdateLongTermPricingResult = &sUpdateLongTermPricingResult
+
+var AWSIESnowballJobManagementService = &smithy.ServiceSchema{Schema: &s_AWSIESnowballJobManagementService, Version: "2016-06-30"}

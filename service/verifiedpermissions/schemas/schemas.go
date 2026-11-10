@@ -4,3350 +4,3254 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchIsAuthorized = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorized",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchIsAuthorizedWithToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreateIdentitySource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePolicyStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePolicyStoreAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStoreAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePolicyTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeleteIdentitySource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePolicyStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePolicyStoreAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStoreAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePolicyTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetIdentitySource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPolicyStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPolicyStoreAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStoreAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPolicyTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetSchema",
-}, smithy.ShapeTypeOperation, 0)
-
-var IsAuthorized = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorized",
-}, smithy.ShapeTypeOperation, 0)
-
-var IsAuthorizedWithToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorizedWithToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIdentitySources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListIdentitySources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPolicyStoreAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStoreAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPolicyStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStores",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPolicyTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyTemplates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PutSchema",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateIdentitySource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePolicyStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePolicyTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var _VerifiedPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "VerifiedPermissions",
-}, smithy.ShapeTypeService, 0)
-
-var VerifiedPermissions = smithy.NewServiceSchema(_VerifiedPermissions, "2021-12-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ActionId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ActionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ActionIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var ActionIdentifier_actionType *smithy.Schema
-
-var ActionIdentifier_actionId *smithy.Schema
-
-var _ActionIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ActionIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ActionIdentifierList_member *smithy.Schema
-
-var _ActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ActionType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Alias",
-}, smithy.ShapeTypeString, 0)
-
-var AliasState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "AliasState",
-}, smithy.ShapeTypeEnum, 2)
-var AliasState_ACTIVE *smithy.Schema
-
-var AliasState_PENDING_DELETION *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeUnion, 10)
-var AttributeValue_boolean *smithy.Schema
-
-var AttributeValue_entityIdentifier *smithy.Schema
-
-var AttributeValue_long *smithy.Schema
-
-var AttributeValue_string *smithy.Schema
-
-var AttributeValue_set *smithy.Schema
-
-var AttributeValue_record *smithy.Schema
-
-var AttributeValue_ipaddr *smithy.Schema
-
-var AttributeValue_decimal *smithy.Schema
-
-var AttributeValue_datetime *smithy.Schema
-
-var AttributeValue_duration *smithy.Schema
-
-var _Audience = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Audience",
-}, smithy.ShapeTypeString, 0)
-
-var _Audiences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Audiences",
-}, smithy.ShapeTypeList, 1)
-var _Audiences_member *smithy.Schema
-
-var BatchGetPolicyErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyErrorCode",
-}, smithy.ShapeTypeEnum, 3)
-var BatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND *smithy.Schema
-
-var BatchGetPolicyErrorCode_POLICY_NOT_FOUND *smithy.Schema
-
-var BatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND *smithy.Schema
-
-var BatchGetPolicyErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyErrorItem",
-}, smithy.ShapeTypeStructure, 4)
-var BatchGetPolicyErrorItem_code *smithy.Schema
-
-var BatchGetPolicyErrorItem_policyStoreId *smithy.Schema
-
-var BatchGetPolicyErrorItem_policyId *smithy.Schema
-
-var BatchGetPolicyErrorItem_message *smithy.Schema
-
-var _BatchGetPolicyErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetPolicyErrorList_member *smithy.Schema
-
-var BatchGetPolicyInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyInputItem",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetPolicyInputItem_policyStoreId *smithy.Schema
-
-var BatchGetPolicyInputItem_policyId *smithy.Schema
-
-var _BatchGetPolicyInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyInputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetPolicyInputList_member *smithy.Schema
-
-var BatchGetPolicyOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyOutputItem",
-}, smithy.ShapeTypeStructure, 7)
-var BatchGetPolicyOutputItem_policyStoreId *smithy.Schema
-
-var BatchGetPolicyOutputItem_policyId *smithy.Schema
-
-var BatchGetPolicyOutputItem_policyType *smithy.Schema
-
-var BatchGetPolicyOutputItem_definition *smithy.Schema
-
-var BatchGetPolicyOutputItem_createdDate *smithy.Schema
-
-var BatchGetPolicyOutputItem_lastUpdatedDate *smithy.Schema
-
-var BatchGetPolicyOutputItem_name *smithy.Schema
-
-var _BatchGetPolicyOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetPolicyOutputList_member *smithy.Schema
-
-var BatchIsAuthorizedInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedInputItem",
-}, smithy.ShapeTypeStructure, 4)
-var BatchIsAuthorizedInputItem_principal *smithy.Schema
-
-var BatchIsAuthorizedInputItem_action *smithy.Schema
-
-var BatchIsAuthorizedInputItem_resource *smithy.Schema
-
-var BatchIsAuthorizedInputItem_context *smithy.Schema
-
-var _BatchIsAuthorizedInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedInputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchIsAuthorizedInputList_member *smithy.Schema
-
-var BatchIsAuthorizedOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedOutputItem",
-}, smithy.ShapeTypeStructure, 4)
-var BatchIsAuthorizedOutputItem_request *smithy.Schema
-
-var BatchIsAuthorizedOutputItem_decision *smithy.Schema
-
-var BatchIsAuthorizedOutputItem_determiningPolicies *smithy.Schema
-
-var BatchIsAuthorizedOutputItem_errors *smithy.Schema
-
-var _BatchIsAuthorizedOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchIsAuthorizedOutputList_member *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenInputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchIsAuthorizedWithTokenInputItem_action *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInputItem_resource *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInputItem_context *smithy.Schema
-
-var _BatchIsAuthorizedWithTokenInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenInputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchIsAuthorizedWithTokenInputList_member *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenOutputItem",
-}, smithy.ShapeTypeStructure, 4)
-var BatchIsAuthorizedWithTokenOutputItem_request *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutputItem_decision *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutputItem_determiningPolicies *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutputItem_errors *smithy.Schema
-
-var _BatchIsAuthorizedWithTokenOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchIsAuthorizedWithTokenOutputList_member *smithy.Schema
-
-var _BooleanAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BooleanAttribute",
-}, smithy.ShapeTypeBoolean, 0, &smithytraits.Sensitive{})
-
-var _CedarJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CedarJson",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CedarTagRecordAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CedarTagRecordAttribute",
-}, smithy.ShapeTypeMap, 2)
-var _CedarTagRecordAttribute_key *smithy.Schema
-
-var _CedarTagRecordAttribute_value *smithy.Schema
-
-var _CedarTagSetAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CedarTagSetAttribute",
-}, smithy.ShapeTypeList, 1)
-var _CedarTagSetAttribute_member *smithy.Schema
-
-var CedarTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CedarTagValue",
-}, smithy.ShapeTypeUnion, 10)
-var CedarTagValue_boolean *smithy.Schema
-
-var CedarTagValue_entityIdentifier *smithy.Schema
-
-var CedarTagValue_long *smithy.Schema
-
-var CedarTagValue_string *smithy.Schema
-
-var CedarTagValue_set *smithy.Schema
-
-var CedarTagValue_record *smithy.Schema
-
-var CedarTagValue_ipaddr *smithy.Schema
-
-var CedarTagValue_decimal *smithy.Schema
-
-var CedarTagValue_datetime *smithy.Schema
-
-var CedarTagValue_duration *smithy.Schema
-
-var CedarVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CedarVersion",
-}, smithy.ShapeTypeEnum, 2)
-var CedarVersion_CEDAR_2 *smithy.Schema
-
-var CedarVersion_CEDAR_4 *smithy.Schema
-
-var _Claim = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Claim",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ClientIds",
-}, smithy.ShapeTypeList, 1)
-var _ClientIds_member *smithy.Schema
-
-var CognitoGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoGroupConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CognitoGroupConfiguration_groupEntityType *smithy.Schema
-
-var CognitoGroupConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoGroupConfigurationDetail",
-}, smithy.ShapeTypeStructure, 1)
-var CognitoGroupConfigurationDetail_groupEntityType *smithy.Schema
-
-var CognitoGroupConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoGroupConfigurationItem",
-}, smithy.ShapeTypeStructure, 1)
-var CognitoGroupConfigurationItem_groupEntityType *smithy.Schema
-
-var CognitoUserPoolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoUserPoolConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CognitoUserPoolConfiguration_userPoolArn *smithy.Schema
-
-var CognitoUserPoolConfiguration_clientIds *smithy.Schema
-
-var CognitoUserPoolConfiguration_groupConfiguration *smithy.Schema
-
-var CognitoUserPoolConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoUserPoolConfigurationDetail",
-}, smithy.ShapeTypeStructure, 4)
-var CognitoUserPoolConfigurationDetail_userPoolArn *smithy.Schema
-
-var CognitoUserPoolConfigurationDetail_clientIds *smithy.Schema
-
-var CognitoUserPoolConfigurationDetail_issuer *smithy.Schema
-
-var CognitoUserPoolConfigurationDetail_groupConfiguration *smithy.Schema
-
-var CognitoUserPoolConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CognitoUserPoolConfigurationItem",
-}, smithy.ShapeTypeStructure, 4)
-var CognitoUserPoolConfigurationItem_userPoolArn *smithy.Schema
-
-var CognitoUserPoolConfigurationItem_clientIds *smithy.Schema
-
-var CognitoUserPoolConfigurationItem_issuer *smithy.Schema
-
-var CognitoUserPoolConfigurationItem_groupConfiguration *smithy.Schema
-
-var Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Configuration",
-}, smithy.ShapeTypeUnion, 2)
-var Configuration_cognitoUserPoolConfiguration *smithy.Schema
-
-var Configuration_openIdConnectConfiguration *smithy.Schema
-
-var ConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ConfigurationDetail",
-}, smithy.ShapeTypeUnion, 2)
-var ConfigurationDetail_cognitoUserPoolConfiguration *smithy.Schema
-
-var ConfigurationDetail_openIdConnectConfiguration *smithy.Schema
-
-var ConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ConfigurationItem",
-}, smithy.ShapeTypeUnion, 2)
-var ConfigurationItem_cognitoUserPoolConfiguration *smithy.Schema
-
-var ConfigurationItem_openIdConnectConfiguration *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resources *smithy.Schema
-
-var ContextDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ContextDefinition",
-}, smithy.ShapeTypeUnion, 2)
-var ContextDefinition_contextMap *smithy.Schema
-
-var ContextDefinition_cedarJson *smithy.Schema
-
-var _ContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ContextMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ContextMap_key *smithy.Schema
-
-var _ContextMap_value *smithy.Schema
-
-var _DatetimeAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DatetimeAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Decimal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Decimal",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Decision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Decision",
-}, smithy.ShapeTypeEnum, 2)
-var Decision_ALLOW *smithy.Schema
-
-var Decision_DENY *smithy.Schema
-
-var DeletionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletionMode",
-}, smithy.ShapeTypeEnum, 2)
-var DeletionMode_SOFT_DELETE *smithy.Schema
-
-var DeletionMode_HARD_DELETE *smithy.Schema
-
-var DeletionProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletionProtection",
-}, smithy.ShapeTypeEnum, 2)
-var DeletionProtection_ENABLED *smithy.Schema
-
-var DeletionProtection_DISABLED *smithy.Schema
-
-var DeterminingPolicyItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeterminingPolicyItem",
-}, smithy.ShapeTypeStructure, 1)
-var DeterminingPolicyItem_policyId *smithy.Schema
-
-var _DeterminingPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeterminingPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _DeterminingPolicyList_member *smithy.Schema
-
-var _DiscoveryUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DiscoveryUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Duration",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EncryptionContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EncryptionContext",
-}, smithy.ShapeTypeMap, 2)
-var _EncryptionContext_key *smithy.Schema
-
-var _EncryptionContext_value *smithy.Schema
-
-var _EncryptionContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EncryptionContextKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EncryptionContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EncryptionContextValue",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EncryptionSettings",
-}, smithy.ShapeTypeUnion, 2)
-var EncryptionSettings_kmsEncryptionSettings *smithy.Schema
-
-var EncryptionSettings_default *smithy.Schema
-
-var EncryptionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EncryptionState",
-}, smithy.ShapeTypeUnion, 2)
-var EncryptionState_kmsEncryptionState *smithy.Schema
-
-var EncryptionState_default *smithy.Schema
-
-var EntitiesDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntitiesDefinition",
-}, smithy.ShapeTypeUnion, 2)
-var EntitiesDefinition_entityList *smithy.Schema
-
-var EntitiesDefinition_cedarJson *smithy.Schema
-
-var _EntityAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityAttributes",
-}, smithy.ShapeTypeMap, 2)
-var _EntityAttributes_key *smithy.Schema
-
-var _EntityAttributes_value *smithy.Schema
-
-var _EntityCedarTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityCedarTags",
-}, smithy.ShapeTypeMap, 2)
-var _EntityCedarTags_key *smithy.Schema
-
-var _EntityCedarTags_value *smithy.Schema
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EntityIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var EntityIdentifier_entityType *smithy.Schema
-
-var EntityIdentifier_entityId *smithy.Schema
-
-var _EntityIdPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityIdPrefix",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EntityItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityItem",
-}, smithy.ShapeTypeStructure, 4)
-var EntityItem_identifier *smithy.Schema
-
-var EntityItem_attributes *smithy.Schema
-
-var EntityItem_parents *smithy.Schema
-
-var EntityItem_tags *smithy.Schema
-
-var _EntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityList",
-}, smithy.ShapeTypeList, 1)
-var _EntityList_member *smithy.Schema
-
-var EntityReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityReference",
-}, smithy.ShapeTypeUnion, 2)
-var EntityReference_unspecified *smithy.Schema
-
-var EntityReference_identifier *smithy.Schema
-
-var _EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EntityType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EvaluationErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EvaluationErrorItem",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var EvaluationErrorItem_errorDescription *smithy.Schema
-
-var _EvaluationErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "EvaluationErrorList",
-}, smithy.ShapeTypeList, 1)
-var _EvaluationErrorList_member *smithy.Schema
-
-var _GroupEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GroupEntityType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var IdentitySourceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceDetails",
-}, smithy.ShapeTypeStructure, 4)
-var IdentitySourceDetails_clientIds *smithy.Schema
-
-var IdentitySourceDetails_userPoolArn *smithy.Schema
-
-var IdentitySourceDetails_discoveryUrl *smithy.Schema
-
-var IdentitySourceDetails_openIdIssuer *smithy.Schema
-
-var IdentitySourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceFilter",
-}, smithy.ShapeTypeStructure, 1)
-var IdentitySourceFilter_principalEntityType *smithy.Schema
-
-var _IdentitySourceFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceFilters",
-}, smithy.ShapeTypeList, 1)
-var _IdentitySourceFilters_member *smithy.Schema
-
-var _IdentitySourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceId",
-}, smithy.ShapeTypeString, 0)
-
-var IdentitySourceItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceItem",
-}, smithy.ShapeTypeStructure, 7)
-var IdentitySourceItem_createdDate *smithy.Schema
-
-var IdentitySourceItem_details *smithy.Schema
-
-var IdentitySourceItem_identitySourceId *smithy.Schema
-
-var IdentitySourceItem_lastUpdatedDate *smithy.Schema
-
-var IdentitySourceItem_policyStoreId *smithy.Schema
-
-var IdentitySourceItem_principalEntityType *smithy.Schema
-
-var IdentitySourceItem_configuration *smithy.Schema
-
-var IdentitySourceItemDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySourceItemDetails",
-}, smithy.ShapeTypeStructure, 4)
-var IdentitySourceItemDetails_clientIds *smithy.Schema
-
-var IdentitySourceItemDetails_userPoolArn *smithy.Schema
-
-var IdentitySourceItemDetails_discoveryUrl *smithy.Schema
-
-var IdentitySourceItemDetails_openIdIssuer *smithy.Schema
-
-var _IdentitySources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IdentitySources",
-}, smithy.ShapeTypeList, 1)
-var _IdentitySources_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 406})
-var InvalidStateException_message *smithy.Schema
-
-var _IpAddr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IpAddr",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Issuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Issuer",
-}, smithy.ShapeTypeString, 0)
-
-var KmsEncryptionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "KmsEncryptionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var KmsEncryptionSettings_key *smithy.Schema
-
-var KmsEncryptionSettings_encryptionContext *smithy.Schema
-
-var KmsEncryptionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "KmsEncryptionState",
-}, smithy.ShapeTypeStructure, 2)
-var KmsEncryptionState_key *smithy.Schema
-
-var KmsEncryptionState_encryptionContext *smithy.Schema
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ListIdentitySourcesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListIdentitySourcesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LongAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "LongAttribute",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NamespaceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "NamespaceList",
-}, smithy.ShapeTypeList, 1)
-var _NamespaceList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OpenIdConnectAccessTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectAccessTokenConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectAccessTokenConfiguration_principalIdClaim *smithy.Schema
-
-var OpenIdConnectAccessTokenConfiguration_audiences *smithy.Schema
-
-var OpenIdConnectAccessTokenConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectAccessTokenConfigurationDetail",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim *smithy.Schema
-
-var OpenIdConnectAccessTokenConfigurationDetail_audiences *smithy.Schema
-
-var OpenIdConnectAccessTokenConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectAccessTokenConfigurationItem",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectAccessTokenConfigurationItem_principalIdClaim *smithy.Schema
-
-var OpenIdConnectAccessTokenConfigurationItem_audiences *smithy.Schema
-
-var OpenIdConnectConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var OpenIdConnectConfiguration_issuer *smithy.Schema
-
-var OpenIdConnectConfiguration_entityIdPrefix *smithy.Schema
-
-var OpenIdConnectConfiguration_groupConfiguration *smithy.Schema
-
-var OpenIdConnectConfiguration_tokenSelection *smithy.Schema
-
-var OpenIdConnectConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectConfigurationDetail",
-}, smithy.ShapeTypeStructure, 4)
-var OpenIdConnectConfigurationDetail_issuer *smithy.Schema
-
-var OpenIdConnectConfigurationDetail_entityIdPrefix *smithy.Schema
-
-var OpenIdConnectConfigurationDetail_groupConfiguration *smithy.Schema
-
-var OpenIdConnectConfigurationDetail_tokenSelection *smithy.Schema
-
-var OpenIdConnectConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectConfigurationItem",
-}, smithy.ShapeTypeStructure, 4)
-var OpenIdConnectConfigurationItem_issuer *smithy.Schema
-
-var OpenIdConnectConfigurationItem_entityIdPrefix *smithy.Schema
-
-var OpenIdConnectConfigurationItem_groupConfiguration *smithy.Schema
-
-var OpenIdConnectConfigurationItem_tokenSelection *smithy.Schema
-
-var OpenIdConnectGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectGroupConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectGroupConfiguration_groupClaim *smithy.Schema
-
-var OpenIdConnectGroupConfiguration_groupEntityType *smithy.Schema
-
-var OpenIdConnectGroupConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectGroupConfigurationDetail",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectGroupConfigurationDetail_groupClaim *smithy.Schema
-
-var OpenIdConnectGroupConfigurationDetail_groupEntityType *smithy.Schema
-
-var OpenIdConnectGroupConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectGroupConfigurationItem",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectGroupConfigurationItem_groupClaim *smithy.Schema
-
-var OpenIdConnectGroupConfigurationItem_groupEntityType *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectIdentityTokenConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectIdentityTokenConfiguration_principalIdClaim *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfiguration_clientIds *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectIdentityTokenConfigurationDetail",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfigurationDetail_clientIds *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfigurationItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectIdentityTokenConfigurationItem",
-}, smithy.ShapeTypeStructure, 2)
-var OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim *smithy.Schema
-
-var OpenIdConnectIdentityTokenConfigurationItem_clientIds *smithy.Schema
-
-var OpenIdConnectTokenSelection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectTokenSelection",
-}, smithy.ShapeTypeUnion, 2)
-var OpenIdConnectTokenSelection_accessTokenOnly *smithy.Schema
-
-var OpenIdConnectTokenSelection_identityTokenOnly *smithy.Schema
-
-var OpenIdConnectTokenSelectionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectTokenSelectionDetail",
-}, smithy.ShapeTypeUnion, 2)
-var OpenIdConnectTokenSelectionDetail_accessTokenOnly *smithy.Schema
-
-var OpenIdConnectTokenSelectionDetail_identityTokenOnly *smithy.Schema
-
-var OpenIdConnectTokenSelectionItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdConnectTokenSelectionItem",
-}, smithy.ShapeTypeUnion, 2)
-var OpenIdConnectTokenSelectionItem_accessTokenOnly *smithy.Schema
-
-var OpenIdConnectTokenSelectionItem_identityTokenOnly *smithy.Schema
-
-var OpenIdIssuer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "OpenIdIssuer",
-}, smithy.ShapeTypeEnum, 1)
-var OpenIdIssuer_COGNITO *smithy.Schema
-
-var _ParentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ParentList",
-}, smithy.ShapeTypeList, 1)
-var _ParentList_member *smithy.Schema
-
-var PolicyDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyDefinition",
-}, smithy.ShapeTypeUnion, 2)
-var PolicyDefinition_static *smithy.Schema
-
-var PolicyDefinition_templateLinked *smithy.Schema
-
-var PolicyDefinitionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyDefinitionDetail",
-}, smithy.ShapeTypeUnion, 2)
-var PolicyDefinitionDetail_static *smithy.Schema
-
-var PolicyDefinitionDetail_templateLinked *smithy.Schema
-
-var PolicyDefinitionItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyDefinitionItem",
-}, smithy.ShapeTypeUnion, 2)
-var PolicyDefinitionItem_static *smithy.Schema
-
-var PolicyDefinitionItem_templateLinked *smithy.Schema
-
-var PolicyEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyEffect",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyEffect_PERMIT *smithy.Schema
-
-var PolicyEffect_FORBID *smithy.Schema
-
-var PolicyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyFilter",
-}, smithy.ShapeTypeStructure, 4)
-var PolicyFilter_principal *smithy.Schema
-
-var PolicyFilter_resource *smithy.Schema
-
-var PolicyFilter_policyType *smithy.Schema
-
-var PolicyFilter_policyTemplateId *smithy.Schema
-
-var _PolicyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyItem",
-}, smithy.ShapeTypeStructure, 11)
-var PolicyItem_policyStoreId *smithy.Schema
-
-var PolicyItem_policyId *smithy.Schema
-
-var PolicyItem_policyType *smithy.Schema
-
-var PolicyItem_principal *smithy.Schema
-
-var PolicyItem_resource *smithy.Schema
-
-var PolicyItem_actions *smithy.Schema
-
-var PolicyItem_definition *smithy.Schema
-
-var PolicyItem_createdDate *smithy.Schema
-
-var PolicyItem_lastUpdatedDate *smithy.Schema
-
-var PolicyItem_effect *smithy.Schema
-
-var PolicyItem_name *smithy.Schema
-
-var _PolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyList_member *smithy.Schema
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStatement",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PolicyStoreAliasFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreAliasFilter",
-}, smithy.ShapeTypeStructure, 1)
-var PolicyStoreAliasFilter_policyStoreId *smithy.Schema
-
-var PolicyStoreAliasItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreAliasItem",
-}, smithy.ShapeTypeStructure, 5)
-var PolicyStoreAliasItem_aliasName *smithy.Schema
-
-var PolicyStoreAliasItem_policyStoreId *smithy.Schema
-
-var PolicyStoreAliasItem_aliasArn *smithy.Schema
-
-var PolicyStoreAliasItem_createdAt *smithy.Schema
-
-var PolicyStoreAliasItem_state *smithy.Schema
-
-var _PolicyStoreAliasList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreAliasList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyStoreAliasList_member *smithy.Schema
-
-var _PolicyStoreDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PolicyStoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyStoreItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreItem",
-}, smithy.ShapeTypeStructure, 5)
-var PolicyStoreItem_policyStoreId *smithy.Schema
-
-var PolicyStoreItem_arn *smithy.Schema
-
-var PolicyStoreItem_createdDate *smithy.Schema
-
-var PolicyStoreItem_lastUpdatedDate *smithy.Schema
-
-var PolicyStoreItem_description *smithy.Schema
-
-var _PolicyStoreList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyStoreList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyStoreList_member *smithy.Schema
-
-var _PolicyTemplateDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyTemplateDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PolicyTemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyTemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyTemplateItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyTemplateItem",
-}, smithy.ShapeTypeStructure, 6)
-var PolicyTemplateItem_policyStoreId *smithy.Schema
-
-var PolicyTemplateItem_policyTemplateId *smithy.Schema
-
-var PolicyTemplateItem_description *smithy.Schema
-
-var PolicyTemplateItem_createdDate *smithy.Schema
-
-var PolicyTemplateItem_lastUpdatedDate *smithy.Schema
-
-var PolicyTemplateItem_name *smithy.Schema
-
-var _PolicyTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyTemplatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyTemplatesList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyTemplatesList_member *smithy.Schema
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyType_STATIC *smithy.Schema
-
-var PolicyType_TEMPLATE_LINKED *smithy.Schema
-
-var _PrincipalEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PrincipalEntityType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RecordAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "RecordAttribute",
-}, smithy.ShapeTypeMap, 2)
-var _RecordAttribute_key *smithy.Schema
-
-var _RecordAttribute_value *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceConflict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ResourceConflict",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceConflict_resourceId *smithy.Schema
-
-var ResourceConflict_resourceType *smithy.Schema
-
-var _ResourceConflictList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ResourceConflictList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceConflictList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 6)
-var ResourceType_IDENTITY_SOURCE *smithy.Schema
-
-var ResourceType_POLICY_STORE *smithy.Schema
-
-var ResourceType_POLICY *smithy.Schema
-
-var ResourceType_POLICY_TEMPLATE *smithy.Schema
-
-var ResourceType_SCHEMA *smithy.Schema
-
-var ResourceType_POLICY_STORE_ALIAS *smithy.Schema
-
-var SchemaDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "SchemaDefinition",
-}, smithy.ShapeTypeUnion, 1)
-var SchemaDefinition_cedarJson *smithy.Schema
-
-var _SchemaJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "SchemaJson",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SetAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "SetAttribute",
-}, smithy.ShapeTypeList, 1)
-var _SetAttribute_member *smithy.Schema
-
-var StaticPolicyDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "StaticPolicyDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var StaticPolicyDefinition_description *smithy.Schema
-
-var StaticPolicyDefinition_statement *smithy.Schema
-
-var StaticPolicyDefinitionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "StaticPolicyDefinitionDetail",
-}, smithy.ShapeTypeStructure, 2)
-var StaticPolicyDefinitionDetail_description *smithy.Schema
-
-var StaticPolicyDefinitionDetail_statement *smithy.Schema
-
-var StaticPolicyDefinitionItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "StaticPolicyDefinitionItem",
-}, smithy.ShapeTypeStructure, 1)
-var StaticPolicyDefinitionItem_description *smithy.Schema
-
-var _StaticPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "StaticPolicyDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _StringAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "StringAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateLinkedPolicyDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TemplateLinkedPolicyDefinition",
-}, smithy.ShapeTypeStructure, 3)
-var TemplateLinkedPolicyDefinition_policyTemplateId *smithy.Schema
-
-var TemplateLinkedPolicyDefinition_principal *smithy.Schema
-
-var TemplateLinkedPolicyDefinition_resource *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TemplateLinkedPolicyDefinitionDetail",
-}, smithy.ShapeTypeStructure, 3)
-var TemplateLinkedPolicyDefinitionDetail_policyTemplateId *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionDetail_principal *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionDetail_resource *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TemplateLinkedPolicyDefinitionItem",
-}, smithy.ShapeTypeStructure, 3)
-var TemplateLinkedPolicyDefinitionItem_policyTemplateId *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionItem_principal *smithy.Schema
-
-var TemplateLinkedPolicyDefinitionItem_resource *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var _TimestampFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TimestampFormat",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var TooManyTagsException_resourceName *smithy.Schema
-
-var UpdateCognitoGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateCognitoGroupConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCognitoGroupConfiguration_groupEntityType *smithy.Schema
-
-var UpdateCognitoUserPoolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateCognitoUserPoolConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateCognitoUserPoolConfiguration_userPoolArn *smithy.Schema
-
-var UpdateCognitoUserPoolConfiguration_clientIds *smithy.Schema
-
-var UpdateCognitoUserPoolConfiguration_groupConfiguration *smithy.Schema
-
-var UpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var UpdateConfiguration_cognitoUserPoolConfiguration *smithy.Schema
-
-var UpdateConfiguration_openIdConnectConfiguration *smithy.Schema
-
-var UpdateOpenIdConnectAccessTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateOpenIdConnectAccessTokenConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim *smithy.Schema
-
-var UpdateOpenIdConnectAccessTokenConfiguration_audiences *smithy.Schema
-
-var UpdateOpenIdConnectConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateOpenIdConnectConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateOpenIdConnectConfiguration_issuer *smithy.Schema
-
-var UpdateOpenIdConnectConfiguration_entityIdPrefix *smithy.Schema
-
-var UpdateOpenIdConnectConfiguration_groupConfiguration *smithy.Schema
-
-var UpdateOpenIdConnectConfiguration_tokenSelection *smithy.Schema
-
-var UpdateOpenIdConnectGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateOpenIdConnectGroupConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOpenIdConnectGroupConfiguration_groupClaim *smithy.Schema
-
-var UpdateOpenIdConnectGroupConfiguration_groupEntityType *smithy.Schema
-
-var UpdateOpenIdConnectIdentityTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateOpenIdConnectIdentityTokenConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim *smithy.Schema
-
-var UpdateOpenIdConnectIdentityTokenConfiguration_clientIds *smithy.Schema
-
-var UpdateOpenIdConnectTokenSelection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateOpenIdConnectTokenSelection",
-}, smithy.ShapeTypeUnion, 2)
-var UpdateOpenIdConnectTokenSelection_accessTokenOnly *smithy.Schema
-
-var UpdateOpenIdConnectTokenSelection_identityTokenOnly *smithy.Schema
-
-var UpdatePolicyDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyDefinition",
-}, smithy.ShapeTypeUnion, 1)
-var UpdatePolicyDefinition_static *smithy.Schema
-
-var UpdateStaticPolicyDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateStaticPolicyDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateStaticPolicyDefinition_description *smithy.Schema
-
-var UpdateStaticPolicyDefinition_statement *smithy.Schema
-
-var _UserPoolArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UserPoolArn",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ValidationMode",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationMode_OFF *smithy.Schema
-
-var ValidationMode_STRICT *smithy.Schema
-
-var ValidationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ValidationSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationSettings_mode *smithy.Schema
-
-var BatchGetPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetPolicyInput_requests *smithy.Schema
-
-var BatchGetPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchGetPolicyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetPolicyOutput_results *smithy.Schema
-
-var BatchGetPolicyOutput_errors *smithy.Schema
-
-var BatchIsAuthorizedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchIsAuthorizedInput_policyStoreId *smithy.Schema
-
-var BatchIsAuthorizedInput_entities *smithy.Schema
-
-var BatchIsAuthorizedInput_requests *smithy.Schema
-
-var BatchIsAuthorizedOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedOutput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchIsAuthorizedOutput_results *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenInput",
-}, smithy.ShapeTypeStructure, 5)
-var BatchIsAuthorizedWithTokenInput_policyStoreId *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInput_identityToken *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInput_accessToken *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInput_entities *smithy.Schema
-
-var BatchIsAuthorizedWithTokenInput_requests *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "BatchIsAuthorizedWithTokenOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchIsAuthorizedWithTokenOutput_principal *smithy.Schema
-
-var BatchIsAuthorizedWithTokenOutput_results *smithy.Schema
-
-var CreateIdentitySourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreateIdentitySourceInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateIdentitySourceInput_clientToken *smithy.Schema
-
-var CreateIdentitySourceInput_policyStoreId *smithy.Schema
-
-var CreateIdentitySourceInput_configuration *smithy.Schema
-
-var CreateIdentitySourceInput_principalEntityType *smithy.Schema
-
-var CreateIdentitySourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreateIdentitySourceOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateIdentitySourceOutput_createdDate *smithy.Schema
-
-var CreateIdentitySourceOutput_identitySourceId *smithy.Schema
-
-var CreateIdentitySourceOutput_lastUpdatedDate *smithy.Schema
-
-var CreateIdentitySourceOutput_policyStoreId *smithy.Schema
-
-var CreatePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePolicyInput_clientToken *smithy.Schema
-
-var CreatePolicyInput_policyStoreId *smithy.Schema
-
-var CreatePolicyInput_definition *smithy.Schema
-
-var CreatePolicyInput_name *smithy.Schema
-
-var CreatePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreatePolicyOutput_policyStoreId *smithy.Schema
-
-var CreatePolicyOutput_policyId *smithy.Schema
-
-var CreatePolicyOutput_policyType *smithy.Schema
-
-var CreatePolicyOutput_principal *smithy.Schema
-
-var CreatePolicyOutput_resource *smithy.Schema
-
-var CreatePolicyOutput_actions *smithy.Schema
-
-var CreatePolicyOutput_createdDate *smithy.Schema
-
-var CreatePolicyOutput_lastUpdatedDate *smithy.Schema
-
-var CreatePolicyOutput_effect *smithy.Schema
-
-var CreatePolicyStoreAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStoreAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePolicyStoreAliasInput_aliasName *smithy.Schema
-
-var CreatePolicyStoreAliasInput_policyStoreId *smithy.Schema
-
-var CreatePolicyStoreAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStoreAliasOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePolicyStoreAliasOutput_aliasName *smithy.Schema
-
-var CreatePolicyStoreAliasOutput_policyStoreId *smithy.Schema
-
-var CreatePolicyStoreAliasOutput_aliasArn *smithy.Schema
-
-var CreatePolicyStoreAliasOutput_createdAt *smithy.Schema
-
-var CreatePolicyStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStoreInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePolicyStoreInput_clientToken *smithy.Schema
-
-var CreatePolicyStoreInput_validationSettings *smithy.Schema
-
-var CreatePolicyStoreInput_description *smithy.Schema
-
-var CreatePolicyStoreInput_deletionProtection *smithy.Schema
-
-var CreatePolicyStoreInput_encryptionSettings *smithy.Schema
-
-var CreatePolicyStoreInput_tags *smithy.Schema
-
-var CreatePolicyStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyStoreOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePolicyStoreOutput_policyStoreId *smithy.Schema
-
-var CreatePolicyStoreOutput_arn *smithy.Schema
-
-var CreatePolicyStoreOutput_createdDate *smithy.Schema
-
-var CreatePolicyStoreOutput_lastUpdatedDate *smithy.Schema
-
-var CreatePolicyTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyTemplateInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreatePolicyTemplateInput_clientToken *smithy.Schema
-
-var CreatePolicyTemplateInput_policyStoreId *smithy.Schema
-
-var CreatePolicyTemplateInput_description *smithy.Schema
-
-var CreatePolicyTemplateInput_statement *smithy.Schema
-
-var CreatePolicyTemplateInput_name *smithy.Schema
-
-var CreatePolicyTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "CreatePolicyTemplateOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePolicyTemplateOutput_policyStoreId *smithy.Schema
-
-var CreatePolicyTemplateOutput_policyTemplateId *smithy.Schema
-
-var CreatePolicyTemplateOutput_createdDate *smithy.Schema
-
-var CreatePolicyTemplateOutput_lastUpdatedDate *smithy.Schema
-
-var DeleteIdentitySourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeleteIdentitySourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIdentitySourceInput_policyStoreId *smithy.Schema
-
-var DeleteIdentitySourceInput_identitySourceId *smithy.Schema
-
-var DeleteIdentitySourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeleteIdentitySourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePolicyInput_policyStoreId *smithy.Schema
-
-var DeletePolicyInput_policyId *smithy.Schema
-
-var DeletePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePolicyStoreAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStoreAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePolicyStoreAliasInput_aliasName *smithy.Schema
-
-var DeletePolicyStoreAliasInput_deletionMode *smithy.Schema
-
-var DeletePolicyStoreAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStoreAliasOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePolicyStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStoreInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePolicyStoreInput_policyStoreId *smithy.Schema
-
-var DeletePolicyStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyStoreOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePolicyTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyTemplateInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePolicyTemplateInput_policyStoreId *smithy.Schema
-
-var DeletePolicyTemplateInput_policyTemplateId *smithy.Schema
-
-var DeletePolicyTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "DeletePolicyTemplateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetIdentitySourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetIdentitySourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetIdentitySourceInput_policyStoreId *smithy.Schema
-
-var GetIdentitySourceInput_identitySourceId *smithy.Schema
-
-var GetIdentitySourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetIdentitySourceOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetIdentitySourceOutput_createdDate *smithy.Schema
-
-var GetIdentitySourceOutput_details *smithy.Schema
-
-var GetIdentitySourceOutput_identitySourceId *smithy.Schema
-
-var GetIdentitySourceOutput_lastUpdatedDate *smithy.Schema
-
-var GetIdentitySourceOutput_policyStoreId *smithy.Schema
-
-var GetIdentitySourceOutput_principalEntityType *smithy.Schema
-
-var GetIdentitySourceOutput_configuration *smithy.Schema
-
-var GetPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPolicyInput_policyStoreId *smithy.Schema
-
-var GetPolicyInput_policyId *smithy.Schema
-
-var GetPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetPolicyOutput_policyStoreId *smithy.Schema
-
-var GetPolicyOutput_policyId *smithy.Schema
-
-var GetPolicyOutput_policyType *smithy.Schema
-
-var GetPolicyOutput_principal *smithy.Schema
-
-var GetPolicyOutput_resource *smithy.Schema
-
-var GetPolicyOutput_actions *smithy.Schema
-
-var GetPolicyOutput_definition *smithy.Schema
-
-var GetPolicyOutput_createdDate *smithy.Schema
-
-var GetPolicyOutput_lastUpdatedDate *smithy.Schema
-
-var GetPolicyOutput_effect *smithy.Schema
-
-var GetPolicyOutput_name *smithy.Schema
-
-var GetPolicyStoreAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStoreAliasInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPolicyStoreAliasInput_aliasName *smithy.Schema
-
-var GetPolicyStoreAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStoreAliasOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetPolicyStoreAliasOutput_aliasName *smithy.Schema
-
-var GetPolicyStoreAliasOutput_policyStoreId *smithy.Schema
-
-var GetPolicyStoreAliasOutput_aliasArn *smithy.Schema
-
-var GetPolicyStoreAliasOutput_createdAt *smithy.Schema
-
-var GetPolicyStoreAliasOutput_state *smithy.Schema
-
-var GetPolicyStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStoreInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPolicyStoreInput_policyStoreId *smithy.Schema
-
-var GetPolicyStoreInput_tags *smithy.Schema
-
-var GetPolicyStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyStoreOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetPolicyStoreOutput_policyStoreId *smithy.Schema
-
-var GetPolicyStoreOutput_arn *smithy.Schema
-
-var GetPolicyStoreOutput_validationSettings *smithy.Schema
-
-var GetPolicyStoreOutput_createdDate *smithy.Schema
-
-var GetPolicyStoreOutput_lastUpdatedDate *smithy.Schema
-
-var GetPolicyStoreOutput_description *smithy.Schema
-
-var GetPolicyStoreOutput_deletionProtection *smithy.Schema
-
-var GetPolicyStoreOutput_encryptionState *smithy.Schema
-
-var GetPolicyStoreOutput_cedarVersion *smithy.Schema
-
-var GetPolicyStoreOutput_tags *smithy.Schema
-
-var GetPolicyTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyTemplateInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPolicyTemplateInput_policyStoreId *smithy.Schema
-
-var GetPolicyTemplateInput_policyTemplateId *smithy.Schema
-
-var GetPolicyTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetPolicyTemplateOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetPolicyTemplateOutput_policyStoreId *smithy.Schema
-
-var GetPolicyTemplateOutput_policyTemplateId *smithy.Schema
-
-var GetPolicyTemplateOutput_description *smithy.Schema
-
-var GetPolicyTemplateOutput_statement *smithy.Schema
-
-var GetPolicyTemplateOutput_createdDate *smithy.Schema
-
-var GetPolicyTemplateOutput_lastUpdatedDate *smithy.Schema
-
-var GetPolicyTemplateOutput_name *smithy.Schema
-
-var GetSchemaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetSchemaInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSchemaInput_policyStoreId *smithy.Schema
-
-var GetSchemaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "GetSchemaOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetSchemaOutput_policyStoreId *smithy.Schema
-
-var GetSchemaOutput_schema *smithy.Schema
-
-var GetSchemaOutput_createdDate *smithy.Schema
-
-var GetSchemaOutput_lastUpdatedDate *smithy.Schema
-
-var GetSchemaOutput_namespaces *smithy.Schema
-
-var IsAuthorizedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorizedInput",
-}, smithy.ShapeTypeStructure, 6)
-var IsAuthorizedInput_policyStoreId *smithy.Schema
-
-var IsAuthorizedInput_principal *smithy.Schema
-
-var IsAuthorizedInput_action *smithy.Schema
-
-var IsAuthorizedInput_resource *smithy.Schema
-
-var IsAuthorizedInput_context *smithy.Schema
-
-var IsAuthorizedInput_entities *smithy.Schema
-
-var IsAuthorizedOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorizedOutput",
-}, smithy.ShapeTypeStructure, 3)
-var IsAuthorizedOutput_decision *smithy.Schema
-
-var IsAuthorizedOutput_determiningPolicies *smithy.Schema
-
-var IsAuthorizedOutput_errors *smithy.Schema
-
-var IsAuthorizedWithTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorizedWithTokenInput",
-}, smithy.ShapeTypeStructure, 7)
-var IsAuthorizedWithTokenInput_policyStoreId *smithy.Schema
-
-var IsAuthorizedWithTokenInput_identityToken *smithy.Schema
-
-var IsAuthorizedWithTokenInput_accessToken *smithy.Schema
-
-var IsAuthorizedWithTokenInput_action *smithy.Schema
-
-var IsAuthorizedWithTokenInput_resource *smithy.Schema
-
-var IsAuthorizedWithTokenInput_context *smithy.Schema
-
-var IsAuthorizedWithTokenInput_entities *smithy.Schema
-
-var IsAuthorizedWithTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "IsAuthorizedWithTokenOutput",
-}, smithy.ShapeTypeStructure, 4)
-var IsAuthorizedWithTokenOutput_decision *smithy.Schema
-
-var IsAuthorizedWithTokenOutput_determiningPolicies *smithy.Schema
-
-var IsAuthorizedWithTokenOutput_errors *smithy.Schema
-
-var IsAuthorizedWithTokenOutput_principal *smithy.Schema
-
-var ListIdentitySourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListIdentitySourcesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListIdentitySourcesInput_policyStoreId *smithy.Schema
-
-var ListIdentitySourcesInput_nextToken *smithy.Schema
-
-var ListIdentitySourcesInput_maxResults *smithy.Schema
-
-var ListIdentitySourcesInput_filters *smithy.Schema
-
-var ListIdentitySourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListIdentitySourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentitySourcesOutput_nextToken *smithy.Schema
-
-var ListIdentitySourcesOutput_identitySources *smithy.Schema
-
-var ListPoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPoliciesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListPoliciesInput_policyStoreId *smithy.Schema
-
-var ListPoliciesInput_nextToken *smithy.Schema
-
-var ListPoliciesInput_maxResults *smithy.Schema
-
-var ListPoliciesInput_filter *smithy.Schema
-
-var ListPoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPoliciesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPoliciesOutput_nextToken *smithy.Schema
-
-var ListPoliciesOutput_policies *smithy.Schema
-
-var ListPolicyStoreAliasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStoreAliasesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListPolicyStoreAliasesInput_nextToken *smithy.Schema
-
-var ListPolicyStoreAliasesInput_maxResults *smithy.Schema
-
-var ListPolicyStoreAliasesInput_filter *smithy.Schema
-
-var ListPolicyStoreAliasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStoreAliasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyStoreAliasesOutput_nextToken *smithy.Schema
-
-var ListPolicyStoreAliasesOutput_policyStoreAliases *smithy.Schema
-
-var ListPolicyStoresInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStoresInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyStoresInput_nextToken *smithy.Schema
-
-var ListPolicyStoresInput_maxResults *smithy.Schema
-
-var ListPolicyStoresOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyStoresOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyStoresOutput_nextToken *smithy.Schema
-
-var ListPolicyStoresOutput_policyStores *smithy.Schema
-
-var ListPolicyTemplatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyTemplatesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListPolicyTemplatesInput_policyStoreId *smithy.Schema
-
-var ListPolicyTemplatesInput_nextToken *smithy.Schema
-
-var ListPolicyTemplatesInput_maxResults *smithy.Schema
-
-var ListPolicyTemplatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListPolicyTemplatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyTemplatesOutput_nextToken *smithy.Schema
-
-var ListPolicyTemplatesOutput_policyTemplates *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var PutSchemaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PutSchemaInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutSchemaInput_policyStoreId *smithy.Schema
-
-var PutSchemaInput_definition *smithy.Schema
-
-var PutSchemaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "PutSchemaOutput",
-}, smithy.ShapeTypeStructure, 4)
-var PutSchemaOutput_policyStoreId *smithy.Schema
-
-var PutSchemaOutput_namespaces *smithy.Schema
-
-var PutSchemaOutput_createdDate *smithy.Schema
-
-var PutSchemaOutput_lastUpdatedDate *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateIdentitySourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateIdentitySourceInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateIdentitySourceInput_policyStoreId *smithy.Schema
-
-var UpdateIdentitySourceInput_identitySourceId *smithy.Schema
-
-var UpdateIdentitySourceInput_updateConfiguration *smithy.Schema
-
-var UpdateIdentitySourceInput_principalEntityType *smithy.Schema
-
-var UpdateIdentitySourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdateIdentitySourceOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateIdentitySourceOutput_createdDate *smithy.Schema
-
-var UpdateIdentitySourceOutput_identitySourceId *smithy.Schema
-
-var UpdateIdentitySourceOutput_lastUpdatedDate *smithy.Schema
-
-var UpdateIdentitySourceOutput_policyStoreId *smithy.Schema
-
-var UpdatePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePolicyInput_policyStoreId *smithy.Schema
-
-var UpdatePolicyInput_policyId *smithy.Schema
-
-var UpdatePolicyInput_definition *smithy.Schema
-
-var UpdatePolicyInput_name *smithy.Schema
-
-var UpdatePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyOutput",
-}, smithy.ShapeTypeStructure, 9)
-var UpdatePolicyOutput_policyStoreId *smithy.Schema
-
-var UpdatePolicyOutput_policyId *smithy.Schema
-
-var UpdatePolicyOutput_policyType *smithy.Schema
-
-var UpdatePolicyOutput_principal *smithy.Schema
-
-var UpdatePolicyOutput_resource *smithy.Schema
-
-var UpdatePolicyOutput_actions *smithy.Schema
-
-var UpdatePolicyOutput_createdDate *smithy.Schema
-
-var UpdatePolicyOutput_lastUpdatedDate *smithy.Schema
-
-var UpdatePolicyOutput_effect *smithy.Schema
-
-var UpdatePolicyStoreInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyStoreInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePolicyStoreInput_policyStoreId *smithy.Schema
-
-var UpdatePolicyStoreInput_validationSettings *smithy.Schema
-
-var UpdatePolicyStoreInput_deletionProtection *smithy.Schema
-
-var UpdatePolicyStoreInput_description *smithy.Schema
-
-var UpdatePolicyStoreOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyStoreOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePolicyStoreOutput_policyStoreId *smithy.Schema
-
-var UpdatePolicyStoreOutput_arn *smithy.Schema
-
-var UpdatePolicyStoreOutput_createdDate *smithy.Schema
-
-var UpdatePolicyStoreOutput_lastUpdatedDate *smithy.Schema
-
-var UpdatePolicyTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyTemplateInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdatePolicyTemplateInput_policyStoreId *smithy.Schema
-
-var UpdatePolicyTemplateInput_policyTemplateId *smithy.Schema
-
-var UpdatePolicyTemplateInput_description *smithy.Schema
-
-var UpdatePolicyTemplateInput_statement *smithy.Schema
-
-var UpdatePolicyTemplateInput_name *smithy.Schema
-
-var UpdatePolicyTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.verifiedpermissions",
-	Name:      "UpdatePolicyTemplateOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePolicyTemplateOutput_policyStoreId *smithy.Schema
-
-var UpdatePolicyTemplateOutput_policyTemplateId *smithy.Schema
-
-var UpdatePolicyTemplateOutput_createdDate *smithy.Schema
-
-var UpdatePolicyTemplateOutput_lastUpdatedDate *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	eBatchGetPolicy                                                 smithy.SchemaExtensions
+	eBatchIsAuthorized                                              smithy.SchemaExtensions
+	eBatchIsAuthorizedWithToken                                     smithy.SchemaExtensions
+	eCreateIdentitySource                                           smithy.SchemaExtensions
+	eCreatePolicy                                                   smithy.SchemaExtensions
+	eCreatePolicyStore                                              smithy.SchemaExtensions
+	eCreatePolicyStoreAlias                                         smithy.SchemaExtensions
+	eCreatePolicyTemplate                                           smithy.SchemaExtensions
+	eDeleteIdentitySource                                           smithy.SchemaExtensions
+	eDeletePolicy                                                   smithy.SchemaExtensions
+	eDeletePolicyStore                                              smithy.SchemaExtensions
+	eDeletePolicyStoreAlias                                         smithy.SchemaExtensions
+	eDeletePolicyTemplate                                           smithy.SchemaExtensions
+	eGetIdentitySource                                              smithy.SchemaExtensions
+	eGetPolicy                                                      smithy.SchemaExtensions
+	eGetPolicyStore                                                 smithy.SchemaExtensions
+	eGetPolicyStoreAlias                                            smithy.SchemaExtensions
+	eGetPolicyTemplate                                              smithy.SchemaExtensions
+	eGetSchema                                                      smithy.SchemaExtensions
+	eIsAuthorized                                                   smithy.SchemaExtensions
+	eIsAuthorizedWithToken                                          smithy.SchemaExtensions
+	eListIdentitySources                                            smithy.SchemaExtensions
+	eListPolicies                                                   smithy.SchemaExtensions
+	eListPolicyStoreAliases                                         smithy.SchemaExtensions
+	eListPolicyStores                                               smithy.SchemaExtensions
+	eListPolicyTemplates                                            smithy.SchemaExtensions
+	eListTagsForResource                                            smithy.SchemaExtensions
+	ePutSchema                                                      smithy.SchemaExtensions
+	eTagResource                                                    smithy.SchemaExtensions
+	eUntagResource                                                  smithy.SchemaExtensions
+	eUpdateIdentitySource                                           smithy.SchemaExtensions
+	eUpdatePolicy                                                   smithy.SchemaExtensions
+	eUpdatePolicyStore                                              smithy.SchemaExtensions
+	eUpdatePolicyTemplate                                           smithy.SchemaExtensions
+	e_VerifiedPermissions                                           smithy.SchemaExtensions
+	eAccessDeniedException                                          smithy.SchemaExtensions
+	eAccessDeniedException_message                                  smithy.SchemaExtensions
+	e_ActionId                                                      smithy.SchemaExtensions
+	eActionIdentifier                                               smithy.SchemaExtensions
+	eActionIdentifier_actionType                                    smithy.SchemaExtensions
+	eActionIdentifier_actionId                                      smithy.SchemaExtensions
+	e_ActionIdentifierList                                          smithy.SchemaExtensions
+	e_ActionIdentifierList_member                                   smithy.SchemaExtensions
+	e_ActionType                                                    smithy.SchemaExtensions
+	e_Alias                                                         smithy.SchemaExtensions
+	eAliasState                                                     smithy.SchemaExtensions
+	eAliasState_ACTIVE                                              smithy.SchemaExtensions
+	eAliasState_PENDING_DELETION                                    smithy.SchemaExtensions
+	e_AmazonResourceName                                            smithy.SchemaExtensions
+	eAttributeValue                                                 smithy.SchemaExtensions
+	eAttributeValue_boolean                                         smithy.SchemaExtensions
+	eAttributeValue_entityIdentifier                                smithy.SchemaExtensions
+	eAttributeValue_long                                            smithy.SchemaExtensions
+	eAttributeValue_string                                          smithy.SchemaExtensions
+	eAttributeValue_set                                             smithy.SchemaExtensions
+	eAttributeValue_record                                          smithy.SchemaExtensions
+	eAttributeValue_ipaddr                                          smithy.SchemaExtensions
+	eAttributeValue_decimal                                         smithy.SchemaExtensions
+	eAttributeValue_datetime                                        smithy.SchemaExtensions
+	eAttributeValue_duration                                        smithy.SchemaExtensions
+	e_Audience                                                      smithy.SchemaExtensions
+	e_Audiences                                                     smithy.SchemaExtensions
+	e_Audiences_member                                              smithy.SchemaExtensions
+	eBatchGetPolicyErrorCode                                        smithy.SchemaExtensions
+	eBatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND                 smithy.SchemaExtensions
+	eBatchGetPolicyErrorCode_POLICY_NOT_FOUND                       smithy.SchemaExtensions
+	eBatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND           smithy.SchemaExtensions
+	eBatchGetPolicyErrorItem                                        smithy.SchemaExtensions
+	eBatchGetPolicyErrorItem_code                                   smithy.SchemaExtensions
+	eBatchGetPolicyErrorItem_policyStoreId                          smithy.SchemaExtensions
+	eBatchGetPolicyErrorItem_policyId                               smithy.SchemaExtensions
+	eBatchGetPolicyErrorItem_message                                smithy.SchemaExtensions
+	e_BatchGetPolicyErrorList                                       smithy.SchemaExtensions
+	e_BatchGetPolicyErrorList_member                                smithy.SchemaExtensions
+	eBatchGetPolicyInputItem                                        smithy.SchemaExtensions
+	eBatchGetPolicyInputItem_policyStoreId                          smithy.SchemaExtensions
+	eBatchGetPolicyInputItem_policyId                               smithy.SchemaExtensions
+	e_BatchGetPolicyInputList                                       smithy.SchemaExtensions
+	e_BatchGetPolicyInputList_member                                smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem                                       smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_policyStoreId                         smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_policyId                              smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_policyType                            smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_definition                            smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_createdDate                           smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_lastUpdatedDate                       smithy.SchemaExtensions
+	eBatchGetPolicyOutputItem_name                                  smithy.SchemaExtensions
+	e_BatchGetPolicyOutputList                                      smithy.SchemaExtensions
+	e_BatchGetPolicyOutputList_member                               smithy.SchemaExtensions
+	eBatchIsAuthorizedInputItem                                     smithy.SchemaExtensions
+	eBatchIsAuthorizedInputItem_principal                           smithy.SchemaExtensions
+	eBatchIsAuthorizedInputItem_action                              smithy.SchemaExtensions
+	eBatchIsAuthorizedInputItem_resource                            smithy.SchemaExtensions
+	eBatchIsAuthorizedInputItem_context                             smithy.SchemaExtensions
+	e_BatchIsAuthorizedInputList                                    smithy.SchemaExtensions
+	e_BatchIsAuthorizedInputList_member                             smithy.SchemaExtensions
+	eBatchIsAuthorizedOutputItem                                    smithy.SchemaExtensions
+	eBatchIsAuthorizedOutputItem_request                            smithy.SchemaExtensions
+	eBatchIsAuthorizedOutputItem_decision                           smithy.SchemaExtensions
+	eBatchIsAuthorizedOutputItem_determiningPolicies                smithy.SchemaExtensions
+	eBatchIsAuthorizedOutputItem_errors                             smithy.SchemaExtensions
+	e_BatchIsAuthorizedOutputList                                   smithy.SchemaExtensions
+	e_BatchIsAuthorizedOutputList_member                            smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInputItem                            smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInputItem_action                     smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInputItem_resource                   smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInputItem_context                    smithy.SchemaExtensions
+	e_BatchIsAuthorizedWithTokenInputList                           smithy.SchemaExtensions
+	e_BatchIsAuthorizedWithTokenInputList_member                    smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutputItem                           smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutputItem_request                   smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutputItem_decision                  smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutputItem_determiningPolicies       smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutputItem_errors                    smithy.SchemaExtensions
+	e_BatchIsAuthorizedWithTokenOutputList                          smithy.SchemaExtensions
+	e_BatchIsAuthorizedWithTokenOutputList_member                   smithy.SchemaExtensions
+	e_BooleanAttribute                                              smithy.SchemaExtensions
+	e_CedarJson                                                     smithy.SchemaExtensions
+	e_CedarTagRecordAttribute                                       smithy.SchemaExtensions
+	e_CedarTagRecordAttribute_key                                   smithy.SchemaExtensions
+	e_CedarTagRecordAttribute_value                                 smithy.SchemaExtensions
+	e_CedarTagSetAttribute                                          smithy.SchemaExtensions
+	e_CedarTagSetAttribute_member                                   smithy.SchemaExtensions
+	eCedarTagValue                                                  smithy.SchemaExtensions
+	eCedarTagValue_boolean                                          smithy.SchemaExtensions
+	eCedarTagValue_entityIdentifier                                 smithy.SchemaExtensions
+	eCedarTagValue_long                                             smithy.SchemaExtensions
+	eCedarTagValue_string                                           smithy.SchemaExtensions
+	eCedarTagValue_set                                              smithy.SchemaExtensions
+	eCedarTagValue_record                                           smithy.SchemaExtensions
+	eCedarTagValue_ipaddr                                           smithy.SchemaExtensions
+	eCedarTagValue_decimal                                          smithy.SchemaExtensions
+	eCedarTagValue_datetime                                         smithy.SchemaExtensions
+	eCedarTagValue_duration                                         smithy.SchemaExtensions
+	eCedarVersion                                                   smithy.SchemaExtensions
+	eCedarVersion_CEDAR_2                                           smithy.SchemaExtensions
+	eCedarVersion_CEDAR_4                                           smithy.SchemaExtensions
+	e_Claim                                                         smithy.SchemaExtensions
+	e_ClientId                                                      smithy.SchemaExtensions
+	e_ClientIds                                                     smithy.SchemaExtensions
+	e_ClientIds_member                                              smithy.SchemaExtensions
+	eCognitoGroupConfiguration                                      smithy.SchemaExtensions
+	eCognitoGroupConfiguration_groupEntityType                      smithy.SchemaExtensions
+	eCognitoGroupConfigurationDetail                                smithy.SchemaExtensions
+	eCognitoGroupConfigurationDetail_groupEntityType                smithy.SchemaExtensions
+	eCognitoGroupConfigurationItem                                  smithy.SchemaExtensions
+	eCognitoGroupConfigurationItem_groupEntityType                  smithy.SchemaExtensions
+	eCognitoUserPoolConfiguration                                   smithy.SchemaExtensions
+	eCognitoUserPoolConfiguration_userPoolArn                       smithy.SchemaExtensions
+	eCognitoUserPoolConfiguration_clientIds                         smithy.SchemaExtensions
+	eCognitoUserPoolConfiguration_groupConfiguration                smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationDetail                             smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationDetail_userPoolArn                 smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationDetail_clientIds                   smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationDetail_issuer                      smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationDetail_groupConfiguration          smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationItem                               smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationItem_userPoolArn                   smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationItem_clientIds                     smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationItem_issuer                        smithy.SchemaExtensions
+	eCognitoUserPoolConfigurationItem_groupConfiguration            smithy.SchemaExtensions
+	eConfiguration                                                  smithy.SchemaExtensions
+	eConfiguration_cognitoUserPoolConfiguration                     smithy.SchemaExtensions
+	eConfiguration_openIdConnectConfiguration                       smithy.SchemaExtensions
+	eConfigurationDetail                                            smithy.SchemaExtensions
+	eConfigurationDetail_cognitoUserPoolConfiguration               smithy.SchemaExtensions
+	eConfigurationDetail_openIdConnectConfiguration                 smithy.SchemaExtensions
+	eConfigurationItem                                              smithy.SchemaExtensions
+	eConfigurationItem_cognitoUserPoolConfiguration                 smithy.SchemaExtensions
+	eConfigurationItem_openIdConnectConfiguration                   smithy.SchemaExtensions
+	eConflictException                                              smithy.SchemaExtensions
+	eConflictException_message                                      smithy.SchemaExtensions
+	eConflictException_resources                                    smithy.SchemaExtensions
+	eContextDefinition                                              smithy.SchemaExtensions
+	eContextDefinition_contextMap                                   smithy.SchemaExtensions
+	eContextDefinition_cedarJson                                    smithy.SchemaExtensions
+	e_ContextMap                                                    smithy.SchemaExtensions
+	e_ContextMap_key                                                smithy.SchemaExtensions
+	e_ContextMap_value                                              smithy.SchemaExtensions
+	e_DatetimeAttribute                                             smithy.SchemaExtensions
+	e_Decimal                                                       smithy.SchemaExtensions
+	eDecision                                                       smithy.SchemaExtensions
+	eDecision_ALLOW                                                 smithy.SchemaExtensions
+	eDecision_DENY                                                  smithy.SchemaExtensions
+	eDeletionMode                                                   smithy.SchemaExtensions
+	eDeletionMode_SOFT_DELETE                                       smithy.SchemaExtensions
+	eDeletionMode_HARD_DELETE                                       smithy.SchemaExtensions
+	eDeletionProtection                                             smithy.SchemaExtensions
+	eDeletionProtection_ENABLED                                     smithy.SchemaExtensions
+	eDeletionProtection_DISABLED                                    smithy.SchemaExtensions
+	eDeterminingPolicyItem                                          smithy.SchemaExtensions
+	eDeterminingPolicyItem_policyId                                 smithy.SchemaExtensions
+	e_DeterminingPolicyList                                         smithy.SchemaExtensions
+	e_DeterminingPolicyList_member                                  smithy.SchemaExtensions
+	e_DiscoveryUrl                                                  smithy.SchemaExtensions
+	e_Duration                                                      smithy.SchemaExtensions
+	e_EncryptionContext                                             smithy.SchemaExtensions
+	e_EncryptionContext_key                                         smithy.SchemaExtensions
+	e_EncryptionContext_value                                       smithy.SchemaExtensions
+	e_EncryptionContextKey                                          smithy.SchemaExtensions
+	e_EncryptionContextValue                                        smithy.SchemaExtensions
+	eEncryptionSettings                                             smithy.SchemaExtensions
+	eEncryptionSettings_kmsEncryptionSettings                       smithy.SchemaExtensions
+	eEncryptionSettings_default                                     smithy.SchemaExtensions
+	eEncryptionState                                                smithy.SchemaExtensions
+	eEncryptionState_kmsEncryptionState                             smithy.SchemaExtensions
+	eEncryptionState_default                                        smithy.SchemaExtensions
+	eEntitiesDefinition                                             smithy.SchemaExtensions
+	eEntitiesDefinition_entityList                                  smithy.SchemaExtensions
+	eEntitiesDefinition_cedarJson                                   smithy.SchemaExtensions
+	e_EntityAttributes                                              smithy.SchemaExtensions
+	e_EntityAttributes_key                                          smithy.SchemaExtensions
+	e_EntityAttributes_value                                        smithy.SchemaExtensions
+	e_EntityCedarTags                                               smithy.SchemaExtensions
+	e_EntityCedarTags_key                                           smithy.SchemaExtensions
+	e_EntityCedarTags_value                                         smithy.SchemaExtensions
+	e_EntityId                                                      smithy.SchemaExtensions
+	eEntityIdentifier                                               smithy.SchemaExtensions
+	eEntityIdentifier_entityType                                    smithy.SchemaExtensions
+	eEntityIdentifier_entityId                                      smithy.SchemaExtensions
+	e_EntityIdPrefix                                                smithy.SchemaExtensions
+	eEntityItem                                                     smithy.SchemaExtensions
+	eEntityItem_identifier                                          smithy.SchemaExtensions
+	eEntityItem_attributes                                          smithy.SchemaExtensions
+	eEntityItem_parents                                             smithy.SchemaExtensions
+	eEntityItem_tags                                                smithy.SchemaExtensions
+	e_EntityList                                                    smithy.SchemaExtensions
+	e_EntityList_member                                             smithy.SchemaExtensions
+	eEntityReference                                                smithy.SchemaExtensions
+	eEntityReference_unspecified                                    smithy.SchemaExtensions
+	eEntityReference_identifier                                     smithy.SchemaExtensions
+	e_EntityType                                                    smithy.SchemaExtensions
+	eEvaluationErrorItem                                            smithy.SchemaExtensions
+	eEvaluationErrorItem_errorDescription                           smithy.SchemaExtensions
+	e_EvaluationErrorList                                           smithy.SchemaExtensions
+	e_EvaluationErrorList_member                                    smithy.SchemaExtensions
+	e_GroupEntityType                                               smithy.SchemaExtensions
+	e_IdempotencyToken                                              smithy.SchemaExtensions
+	eIdentitySourceDetails                                          smithy.SchemaExtensions
+	eIdentitySourceDetails_clientIds                                smithy.SchemaExtensions
+	eIdentitySourceDetails_userPoolArn                              smithy.SchemaExtensions
+	eIdentitySourceDetails_discoveryUrl                             smithy.SchemaExtensions
+	eIdentitySourceDetails_openIdIssuer                             smithy.SchemaExtensions
+	eIdentitySourceFilter                                           smithy.SchemaExtensions
+	eIdentitySourceFilter_principalEntityType                       smithy.SchemaExtensions
+	e_IdentitySourceFilters                                         smithy.SchemaExtensions
+	e_IdentitySourceFilters_member                                  smithy.SchemaExtensions
+	e_IdentitySourceId                                              smithy.SchemaExtensions
+	eIdentitySourceItem                                             smithy.SchemaExtensions
+	eIdentitySourceItem_createdDate                                 smithy.SchemaExtensions
+	eIdentitySourceItem_details                                     smithy.SchemaExtensions
+	eIdentitySourceItem_identitySourceId                            smithy.SchemaExtensions
+	eIdentitySourceItem_lastUpdatedDate                             smithy.SchemaExtensions
+	eIdentitySourceItem_policyStoreId                               smithy.SchemaExtensions
+	eIdentitySourceItem_principalEntityType                         smithy.SchemaExtensions
+	eIdentitySourceItem_configuration                               smithy.SchemaExtensions
+	eIdentitySourceItemDetails                                      smithy.SchemaExtensions
+	eIdentitySourceItemDetails_clientIds                            smithy.SchemaExtensions
+	eIdentitySourceItemDetails_userPoolArn                          smithy.SchemaExtensions
+	eIdentitySourceItemDetails_discoveryUrl                         smithy.SchemaExtensions
+	eIdentitySourceItemDetails_openIdIssuer                         smithy.SchemaExtensions
+	e_IdentitySources                                               smithy.SchemaExtensions
+	e_IdentitySources_member                                        smithy.SchemaExtensions
+	eInternalServerException                                        smithy.SchemaExtensions
+	eInternalServerException_message                                smithy.SchemaExtensions
+	eInvalidStateException                                          smithy.SchemaExtensions
+	eInvalidStateException_message                                  smithy.SchemaExtensions
+	e_IpAddr                                                        smithy.SchemaExtensions
+	e_Issuer                                                        smithy.SchemaExtensions
+	eKmsEncryptionSettings                                          smithy.SchemaExtensions
+	eKmsEncryptionSettings_key                                      smithy.SchemaExtensions
+	eKmsEncryptionSettings_encryptionContext                        smithy.SchemaExtensions
+	eKmsEncryptionState                                             smithy.SchemaExtensions
+	eKmsEncryptionState_key                                         smithy.SchemaExtensions
+	eKmsEncryptionState_encryptionContext                           smithy.SchemaExtensions
+	e_KmsKey                                                        smithy.SchemaExtensions
+	e_ListIdentitySourcesMaxResults                                 smithy.SchemaExtensions
+	e_LongAttribute                                                 smithy.SchemaExtensions
+	e_MaxResults                                                    smithy.SchemaExtensions
+	e_Namespace                                                     smithy.SchemaExtensions
+	e_NamespaceList                                                 smithy.SchemaExtensions
+	e_NamespaceList_member                                          smithy.SchemaExtensions
+	e_NextToken                                                     smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfiguration                          smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfiguration_principalIdClaim         smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfiguration_audiences                smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationDetail                    smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationDetail_principalIdClaim   smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationDetail_audiences          smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationItem                      smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationItem_principalIdClaim     smithy.SchemaExtensions
+	eOpenIdConnectAccessTokenConfigurationItem_audiences            smithy.SchemaExtensions
+	eOpenIdConnectConfiguration                                     smithy.SchemaExtensions
+	eOpenIdConnectConfiguration_issuer                              smithy.SchemaExtensions
+	eOpenIdConnectConfiguration_entityIdPrefix                      smithy.SchemaExtensions
+	eOpenIdConnectConfiguration_groupConfiguration                  smithy.SchemaExtensions
+	eOpenIdConnectConfiguration_tokenSelection                      smithy.SchemaExtensions
+	eOpenIdConnectConfigurationDetail                               smithy.SchemaExtensions
+	eOpenIdConnectConfigurationDetail_issuer                        smithy.SchemaExtensions
+	eOpenIdConnectConfigurationDetail_entityIdPrefix                smithy.SchemaExtensions
+	eOpenIdConnectConfigurationDetail_groupConfiguration            smithy.SchemaExtensions
+	eOpenIdConnectConfigurationDetail_tokenSelection                smithy.SchemaExtensions
+	eOpenIdConnectConfigurationItem                                 smithy.SchemaExtensions
+	eOpenIdConnectConfigurationItem_issuer                          smithy.SchemaExtensions
+	eOpenIdConnectConfigurationItem_entityIdPrefix                  smithy.SchemaExtensions
+	eOpenIdConnectConfigurationItem_groupConfiguration              smithy.SchemaExtensions
+	eOpenIdConnectConfigurationItem_tokenSelection                  smithy.SchemaExtensions
+	eOpenIdConnectGroupConfiguration                                smithy.SchemaExtensions
+	eOpenIdConnectGroupConfiguration_groupClaim                     smithy.SchemaExtensions
+	eOpenIdConnectGroupConfiguration_groupEntityType                smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationDetail                          smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationDetail_groupClaim               smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationDetail_groupEntityType          smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationItem                            smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationItem_groupClaim                 smithy.SchemaExtensions
+	eOpenIdConnectGroupConfigurationItem_groupEntityType            smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfiguration                        smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfiguration_principalIdClaim       smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfiguration_clientIds              smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationDetail                  smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationDetail_clientIds        smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationItem                    smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationItem_principalIdClaim   smithy.SchemaExtensions
+	eOpenIdConnectIdentityTokenConfigurationItem_clientIds          smithy.SchemaExtensions
+	eOpenIdConnectTokenSelection                                    smithy.SchemaExtensions
+	eOpenIdConnectTokenSelection_accessTokenOnly                    smithy.SchemaExtensions
+	eOpenIdConnectTokenSelection_identityTokenOnly                  smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionDetail                              smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionDetail_accessTokenOnly              smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionDetail_identityTokenOnly            smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionItem                                smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionItem_accessTokenOnly                smithy.SchemaExtensions
+	eOpenIdConnectTokenSelectionItem_identityTokenOnly              smithy.SchemaExtensions
+	eOpenIdIssuer                                                   smithy.SchemaExtensions
+	eOpenIdIssuer_COGNITO                                           smithy.SchemaExtensions
+	e_ParentList                                                    smithy.SchemaExtensions
+	e_ParentList_member                                             smithy.SchemaExtensions
+	ePolicyDefinition                                               smithy.SchemaExtensions
+	ePolicyDefinition_static                                        smithy.SchemaExtensions
+	ePolicyDefinition_templateLinked                                smithy.SchemaExtensions
+	ePolicyDefinitionDetail                                         smithy.SchemaExtensions
+	ePolicyDefinitionDetail_static                                  smithy.SchemaExtensions
+	ePolicyDefinitionDetail_templateLinked                          smithy.SchemaExtensions
+	ePolicyDefinitionItem                                           smithy.SchemaExtensions
+	ePolicyDefinitionItem_static                                    smithy.SchemaExtensions
+	ePolicyDefinitionItem_templateLinked                            smithy.SchemaExtensions
+	ePolicyEffect                                                   smithy.SchemaExtensions
+	ePolicyEffect_PERMIT                                            smithy.SchemaExtensions
+	ePolicyEffect_FORBID                                            smithy.SchemaExtensions
+	ePolicyFilter                                                   smithy.SchemaExtensions
+	ePolicyFilter_principal                                         smithy.SchemaExtensions
+	ePolicyFilter_resource                                          smithy.SchemaExtensions
+	ePolicyFilter_policyType                                        smithy.SchemaExtensions
+	ePolicyFilter_policyTemplateId                                  smithy.SchemaExtensions
+	e_PolicyId                                                      smithy.SchemaExtensions
+	ePolicyItem                                                     smithy.SchemaExtensions
+	ePolicyItem_policyStoreId                                       smithy.SchemaExtensions
+	ePolicyItem_policyId                                            smithy.SchemaExtensions
+	ePolicyItem_policyType                                          smithy.SchemaExtensions
+	ePolicyItem_principal                                           smithy.SchemaExtensions
+	ePolicyItem_resource                                            smithy.SchemaExtensions
+	ePolicyItem_actions                                             smithy.SchemaExtensions
+	ePolicyItem_definition                                          smithy.SchemaExtensions
+	ePolicyItem_createdDate                                         smithy.SchemaExtensions
+	ePolicyItem_lastUpdatedDate                                     smithy.SchemaExtensions
+	ePolicyItem_effect                                              smithy.SchemaExtensions
+	ePolicyItem_name                                                smithy.SchemaExtensions
+	e_PolicyList                                                    smithy.SchemaExtensions
+	e_PolicyList_member                                             smithy.SchemaExtensions
+	e_PolicyName                                                    smithy.SchemaExtensions
+	e_PolicyStatement                                               smithy.SchemaExtensions
+	ePolicyStoreAliasFilter                                         smithy.SchemaExtensions
+	ePolicyStoreAliasFilter_policyStoreId                           smithy.SchemaExtensions
+	ePolicyStoreAliasItem                                           smithy.SchemaExtensions
+	ePolicyStoreAliasItem_aliasName                                 smithy.SchemaExtensions
+	ePolicyStoreAliasItem_policyStoreId                             smithy.SchemaExtensions
+	ePolicyStoreAliasItem_aliasArn                                  smithy.SchemaExtensions
+	ePolicyStoreAliasItem_createdAt                                 smithy.SchemaExtensions
+	ePolicyStoreAliasItem_state                                     smithy.SchemaExtensions
+	e_PolicyStoreAliasList                                          smithy.SchemaExtensions
+	e_PolicyStoreAliasList_member                                   smithy.SchemaExtensions
+	e_PolicyStoreDescription                                        smithy.SchemaExtensions
+	e_PolicyStoreId                                                 smithy.SchemaExtensions
+	ePolicyStoreItem                                                smithy.SchemaExtensions
+	ePolicyStoreItem_policyStoreId                                  smithy.SchemaExtensions
+	ePolicyStoreItem_arn                                            smithy.SchemaExtensions
+	ePolicyStoreItem_createdDate                                    smithy.SchemaExtensions
+	ePolicyStoreItem_lastUpdatedDate                                smithy.SchemaExtensions
+	ePolicyStoreItem_description                                    smithy.SchemaExtensions
+	e_PolicyStoreList                                               smithy.SchemaExtensions
+	e_PolicyStoreList_member                                        smithy.SchemaExtensions
+	e_PolicyTemplateDescription                                     smithy.SchemaExtensions
+	e_PolicyTemplateId                                              smithy.SchemaExtensions
+	ePolicyTemplateItem                                             smithy.SchemaExtensions
+	ePolicyTemplateItem_policyStoreId                               smithy.SchemaExtensions
+	ePolicyTemplateItem_policyTemplateId                            smithy.SchemaExtensions
+	ePolicyTemplateItem_description                                 smithy.SchemaExtensions
+	ePolicyTemplateItem_createdDate                                 smithy.SchemaExtensions
+	ePolicyTemplateItem_lastUpdatedDate                             smithy.SchemaExtensions
+	ePolicyTemplateItem_name                                        smithy.SchemaExtensions
+	e_PolicyTemplateName                                            smithy.SchemaExtensions
+	e_PolicyTemplatesList                                           smithy.SchemaExtensions
+	e_PolicyTemplatesList_member                                    smithy.SchemaExtensions
+	ePolicyType                                                     smithy.SchemaExtensions
+	ePolicyType_STATIC                                              smithy.SchemaExtensions
+	ePolicyType_TEMPLATE_LINKED                                     smithy.SchemaExtensions
+	e_PrincipalEntityType                                           smithy.SchemaExtensions
+	e_RecordAttribute                                               smithy.SchemaExtensions
+	e_RecordAttribute_key                                           smithy.SchemaExtensions
+	e_RecordAttribute_value                                         smithy.SchemaExtensions
+	e_ResourceArn                                                   smithy.SchemaExtensions
+	eResourceConflict                                               smithy.SchemaExtensions
+	eResourceConflict_resourceId                                    smithy.SchemaExtensions
+	eResourceConflict_resourceType                                  smithy.SchemaExtensions
+	e_ResourceConflictList                                          smithy.SchemaExtensions
+	e_ResourceConflictList_member                                   smithy.SchemaExtensions
+	eResourceNotFoundException                                      smithy.SchemaExtensions
+	eResourceNotFoundException_message                              smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                         smithy.SchemaExtensions
+	eResourceType                                                   smithy.SchemaExtensions
+	eResourceType_IDENTITY_SOURCE                                   smithy.SchemaExtensions
+	eResourceType_POLICY_STORE                                      smithy.SchemaExtensions
+	eResourceType_POLICY                                            smithy.SchemaExtensions
+	eResourceType_POLICY_TEMPLATE                                   smithy.SchemaExtensions
+	eResourceType_SCHEMA                                            smithy.SchemaExtensions
+	eResourceType_POLICY_STORE_ALIAS                                smithy.SchemaExtensions
+	eSchemaDefinition                                               smithy.SchemaExtensions
+	eSchemaDefinition_cedarJson                                     smithy.SchemaExtensions
+	e_SchemaJson                                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException                                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                          smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                        smithy.SchemaExtensions
+	e_SetAttribute                                                  smithy.SchemaExtensions
+	e_SetAttribute_member                                           smithy.SchemaExtensions
+	eStaticPolicyDefinition                                         smithy.SchemaExtensions
+	eStaticPolicyDefinition_description                             smithy.SchemaExtensions
+	eStaticPolicyDefinition_statement                               smithy.SchemaExtensions
+	eStaticPolicyDefinitionDetail                                   smithy.SchemaExtensions
+	eStaticPolicyDefinitionDetail_description                       smithy.SchemaExtensions
+	eStaticPolicyDefinitionDetail_statement                         smithy.SchemaExtensions
+	eStaticPolicyDefinitionItem                                     smithy.SchemaExtensions
+	eStaticPolicyDefinitionItem_description                         smithy.SchemaExtensions
+	e_StaticPolicyDescription                                       smithy.SchemaExtensions
+	e_StringAttribute                                               smithy.SchemaExtensions
+	e_TagKey                                                        smithy.SchemaExtensions
+	e_TagKeyList                                                    smithy.SchemaExtensions
+	e_TagKeyList_member                                             smithy.SchemaExtensions
+	e_TagMap                                                        smithy.SchemaExtensions
+	e_TagMap_key                                                    smithy.SchemaExtensions
+	e_TagMap_value                                                  smithy.SchemaExtensions
+	e_TagValue                                                      smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinition                                 smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinition_policyTemplateId                smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinition_principal                       smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinition_resource                        smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionDetail                           smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionDetail_policyTemplateId          smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionDetail_principal                 smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionDetail_resource                  smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionItem                             smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionItem_policyTemplateId            smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionItem_principal                   smithy.SchemaExtensions
+	eTemplateLinkedPolicyDefinitionItem_resource                    smithy.SchemaExtensions
+	eThrottlingException                                            smithy.SchemaExtensions
+	eThrottlingException_message                                    smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                  smithy.SchemaExtensions
+	e_TimestampFormat                                               smithy.SchemaExtensions
+	e_Token                                                         smithy.SchemaExtensions
+	eTooManyTagsException                                           smithy.SchemaExtensions
+	eTooManyTagsException_message                                   smithy.SchemaExtensions
+	eTooManyTagsException_resourceName                              smithy.SchemaExtensions
+	eUpdateCognitoGroupConfiguration                                smithy.SchemaExtensions
+	eUpdateCognitoGroupConfiguration_groupEntityType                smithy.SchemaExtensions
+	eUpdateCognitoUserPoolConfiguration                             smithy.SchemaExtensions
+	eUpdateCognitoUserPoolConfiguration_userPoolArn                 smithy.SchemaExtensions
+	eUpdateCognitoUserPoolConfiguration_clientIds                   smithy.SchemaExtensions
+	eUpdateCognitoUserPoolConfiguration_groupConfiguration          smithy.SchemaExtensions
+	eUpdateConfiguration                                            smithy.SchemaExtensions
+	eUpdateConfiguration_cognitoUserPoolConfiguration               smithy.SchemaExtensions
+	eUpdateConfiguration_openIdConnectConfiguration                 smithy.SchemaExtensions
+	eUpdateOpenIdConnectAccessTokenConfiguration                    smithy.SchemaExtensions
+	eUpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim   smithy.SchemaExtensions
+	eUpdateOpenIdConnectAccessTokenConfiguration_audiences          smithy.SchemaExtensions
+	eUpdateOpenIdConnectConfiguration                               smithy.SchemaExtensions
+	eUpdateOpenIdConnectConfiguration_issuer                        smithy.SchemaExtensions
+	eUpdateOpenIdConnectConfiguration_entityIdPrefix                smithy.SchemaExtensions
+	eUpdateOpenIdConnectConfiguration_groupConfiguration            smithy.SchemaExtensions
+	eUpdateOpenIdConnectConfiguration_tokenSelection                smithy.SchemaExtensions
+	eUpdateOpenIdConnectGroupConfiguration                          smithy.SchemaExtensions
+	eUpdateOpenIdConnectGroupConfiguration_groupClaim               smithy.SchemaExtensions
+	eUpdateOpenIdConnectGroupConfiguration_groupEntityType          smithy.SchemaExtensions
+	eUpdateOpenIdConnectIdentityTokenConfiguration                  smithy.SchemaExtensions
+	eUpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim smithy.SchemaExtensions
+	eUpdateOpenIdConnectIdentityTokenConfiguration_clientIds        smithy.SchemaExtensions
+	eUpdateOpenIdConnectTokenSelection                              smithy.SchemaExtensions
+	eUpdateOpenIdConnectTokenSelection_accessTokenOnly              smithy.SchemaExtensions
+	eUpdateOpenIdConnectTokenSelection_identityTokenOnly            smithy.SchemaExtensions
+	eUpdatePolicyDefinition                                         smithy.SchemaExtensions
+	eUpdatePolicyDefinition_static                                  smithy.SchemaExtensions
+	eUpdateStaticPolicyDefinition                                   smithy.SchemaExtensions
+	eUpdateStaticPolicyDefinition_description                       smithy.SchemaExtensions
+	eUpdateStaticPolicyDefinition_statement                         smithy.SchemaExtensions
+	e_UserPoolArn                                                   smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_message                                    smithy.SchemaExtensions
+	eValidationException_fieldList                                  smithy.SchemaExtensions
+	eValidationExceptionField                                       smithy.SchemaExtensions
+	eValidationExceptionField_path                                  smithy.SchemaExtensions
+	eValidationExceptionField_message                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                  smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                           smithy.SchemaExtensions
+	eValidationMode                                                 smithy.SchemaExtensions
+	eValidationMode_OFF                                             smithy.SchemaExtensions
+	eValidationMode_STRICT                                          smithy.SchemaExtensions
+	eValidationSettings                                             smithy.SchemaExtensions
+	eValidationSettings_mode                                        smithy.SchemaExtensions
+	eBatchGetPolicyInput                                            smithy.SchemaExtensions
+	eBatchGetPolicyInput_requests                                   smithy.SchemaExtensions
+	eBatchGetPolicyOutput                                           smithy.SchemaExtensions
+	eBatchGetPolicyOutput_results                                   smithy.SchemaExtensions
+	eBatchGetPolicyOutput_errors                                    smithy.SchemaExtensions
+	eBatchIsAuthorizedInput                                         smithy.SchemaExtensions
+	eBatchIsAuthorizedInput_policyStoreId                           smithy.SchemaExtensions
+	eBatchIsAuthorizedInput_entities                                smithy.SchemaExtensions
+	eBatchIsAuthorizedInput_requests                                smithy.SchemaExtensions
+	eBatchIsAuthorizedOutput                                        smithy.SchemaExtensions
+	eBatchIsAuthorizedOutput_results                                smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput                                smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput_policyStoreId                  smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput_identityToken                  smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput_accessToken                    smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput_entities                       smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenInput_requests                       smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutput                               smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutput_principal                     smithy.SchemaExtensions
+	eBatchIsAuthorizedWithTokenOutput_results                       smithy.SchemaExtensions
+	eCreateIdentitySourceInput                                      smithy.SchemaExtensions
+	eCreateIdentitySourceInput_clientToken                          smithy.SchemaExtensions
+	eCreateIdentitySourceInput_policyStoreId                        smithy.SchemaExtensions
+	eCreateIdentitySourceInput_configuration                        smithy.SchemaExtensions
+	eCreateIdentitySourceInput_principalEntityType                  smithy.SchemaExtensions
+	eCreateIdentitySourceOutput                                     smithy.SchemaExtensions
+	eCreateIdentitySourceOutput_createdDate                         smithy.SchemaExtensions
+	eCreateIdentitySourceOutput_identitySourceId                    smithy.SchemaExtensions
+	eCreateIdentitySourceOutput_lastUpdatedDate                     smithy.SchemaExtensions
+	eCreateIdentitySourceOutput_policyStoreId                       smithy.SchemaExtensions
+	eCreatePolicyInput                                              smithy.SchemaExtensions
+	eCreatePolicyInput_clientToken                                  smithy.SchemaExtensions
+	eCreatePolicyInput_policyStoreId                                smithy.SchemaExtensions
+	eCreatePolicyInput_definition                                   smithy.SchemaExtensions
+	eCreatePolicyInput_name                                         smithy.SchemaExtensions
+	eCreatePolicyOutput                                             smithy.SchemaExtensions
+	eCreatePolicyOutput_policyStoreId                               smithy.SchemaExtensions
+	eCreatePolicyOutput_policyId                                    smithy.SchemaExtensions
+	eCreatePolicyOutput_policyType                                  smithy.SchemaExtensions
+	eCreatePolicyOutput_principal                                   smithy.SchemaExtensions
+	eCreatePolicyOutput_resource                                    smithy.SchemaExtensions
+	eCreatePolicyOutput_actions                                     smithy.SchemaExtensions
+	eCreatePolicyOutput_createdDate                                 smithy.SchemaExtensions
+	eCreatePolicyOutput_lastUpdatedDate                             smithy.SchemaExtensions
+	eCreatePolicyOutput_effect                                      smithy.SchemaExtensions
+	eCreatePolicyStoreAliasInput                                    smithy.SchemaExtensions
+	eCreatePolicyStoreAliasInput_aliasName                          smithy.SchemaExtensions
+	eCreatePolicyStoreAliasInput_policyStoreId                      smithy.SchemaExtensions
+	eCreatePolicyStoreAliasOutput                                   smithy.SchemaExtensions
+	eCreatePolicyStoreAliasOutput_aliasName                         smithy.SchemaExtensions
+	eCreatePolicyStoreAliasOutput_policyStoreId                     smithy.SchemaExtensions
+	eCreatePolicyStoreAliasOutput_aliasArn                          smithy.SchemaExtensions
+	eCreatePolicyStoreAliasOutput_createdAt                         smithy.SchemaExtensions
+	eCreatePolicyStoreInput                                         smithy.SchemaExtensions
+	eCreatePolicyStoreInput_clientToken                             smithy.SchemaExtensions
+	eCreatePolicyStoreInput_validationSettings                      smithy.SchemaExtensions
+	eCreatePolicyStoreInput_description                             smithy.SchemaExtensions
+	eCreatePolicyStoreInput_deletionProtection                      smithy.SchemaExtensions
+	eCreatePolicyStoreInput_encryptionSettings                      smithy.SchemaExtensions
+	eCreatePolicyStoreInput_tags                                    smithy.SchemaExtensions
+	eCreatePolicyStoreOutput                                        smithy.SchemaExtensions
+	eCreatePolicyStoreOutput_policyStoreId                          smithy.SchemaExtensions
+	eCreatePolicyStoreOutput_arn                                    smithy.SchemaExtensions
+	eCreatePolicyStoreOutput_createdDate                            smithy.SchemaExtensions
+	eCreatePolicyStoreOutput_lastUpdatedDate                        smithy.SchemaExtensions
+	eCreatePolicyTemplateInput                                      smithy.SchemaExtensions
+	eCreatePolicyTemplateInput_clientToken                          smithy.SchemaExtensions
+	eCreatePolicyTemplateInput_policyStoreId                        smithy.SchemaExtensions
+	eCreatePolicyTemplateInput_description                          smithy.SchemaExtensions
+	eCreatePolicyTemplateInput_statement                            smithy.SchemaExtensions
+	eCreatePolicyTemplateInput_name                                 smithy.SchemaExtensions
+	eCreatePolicyTemplateOutput                                     smithy.SchemaExtensions
+	eCreatePolicyTemplateOutput_policyStoreId                       smithy.SchemaExtensions
+	eCreatePolicyTemplateOutput_policyTemplateId                    smithy.SchemaExtensions
+	eCreatePolicyTemplateOutput_createdDate                         smithy.SchemaExtensions
+	eCreatePolicyTemplateOutput_lastUpdatedDate                     smithy.SchemaExtensions
+	eDeleteIdentitySourceInput                                      smithy.SchemaExtensions
+	eDeleteIdentitySourceInput_policyStoreId                        smithy.SchemaExtensions
+	eDeleteIdentitySourceInput_identitySourceId                     smithy.SchemaExtensions
+	eDeleteIdentitySourceOutput                                     smithy.SchemaExtensions
+	eDeletePolicyInput                                              smithy.SchemaExtensions
+	eDeletePolicyInput_policyStoreId                                smithy.SchemaExtensions
+	eDeletePolicyInput_policyId                                     smithy.SchemaExtensions
+	eDeletePolicyOutput                                             smithy.SchemaExtensions
+	eDeletePolicyStoreAliasInput                                    smithy.SchemaExtensions
+	eDeletePolicyStoreAliasInput_aliasName                          smithy.SchemaExtensions
+	eDeletePolicyStoreAliasInput_deletionMode                       smithy.SchemaExtensions
+	eDeletePolicyStoreAliasOutput                                   smithy.SchemaExtensions
+	eDeletePolicyStoreInput                                         smithy.SchemaExtensions
+	eDeletePolicyStoreInput_policyStoreId                           smithy.SchemaExtensions
+	eDeletePolicyStoreOutput                                        smithy.SchemaExtensions
+	eDeletePolicyTemplateInput                                      smithy.SchemaExtensions
+	eDeletePolicyTemplateInput_policyStoreId                        smithy.SchemaExtensions
+	eDeletePolicyTemplateInput_policyTemplateId                     smithy.SchemaExtensions
+	eDeletePolicyTemplateOutput                                     smithy.SchemaExtensions
+	eGetIdentitySourceInput                                         smithy.SchemaExtensions
+	eGetIdentitySourceInput_policyStoreId                           smithy.SchemaExtensions
+	eGetIdentitySourceInput_identitySourceId                        smithy.SchemaExtensions
+	eGetIdentitySourceOutput                                        smithy.SchemaExtensions
+	eGetIdentitySourceOutput_createdDate                            smithy.SchemaExtensions
+	eGetIdentitySourceOutput_details                                smithy.SchemaExtensions
+	eGetIdentitySourceOutput_identitySourceId                       smithy.SchemaExtensions
+	eGetIdentitySourceOutput_lastUpdatedDate                        smithy.SchemaExtensions
+	eGetIdentitySourceOutput_policyStoreId                          smithy.SchemaExtensions
+	eGetIdentitySourceOutput_principalEntityType                    smithy.SchemaExtensions
+	eGetIdentitySourceOutput_configuration                          smithy.SchemaExtensions
+	eGetPolicyInput                                                 smithy.SchemaExtensions
+	eGetPolicyInput_policyStoreId                                   smithy.SchemaExtensions
+	eGetPolicyInput_policyId                                        smithy.SchemaExtensions
+	eGetPolicyOutput                                                smithy.SchemaExtensions
+	eGetPolicyOutput_policyStoreId                                  smithy.SchemaExtensions
+	eGetPolicyOutput_policyId                                       smithy.SchemaExtensions
+	eGetPolicyOutput_policyType                                     smithy.SchemaExtensions
+	eGetPolicyOutput_principal                                      smithy.SchemaExtensions
+	eGetPolicyOutput_resource                                       smithy.SchemaExtensions
+	eGetPolicyOutput_actions                                        smithy.SchemaExtensions
+	eGetPolicyOutput_definition                                     smithy.SchemaExtensions
+	eGetPolicyOutput_createdDate                                    smithy.SchemaExtensions
+	eGetPolicyOutput_lastUpdatedDate                                smithy.SchemaExtensions
+	eGetPolicyOutput_effect                                         smithy.SchemaExtensions
+	eGetPolicyOutput_name                                           smithy.SchemaExtensions
+	eGetPolicyStoreAliasInput                                       smithy.SchemaExtensions
+	eGetPolicyStoreAliasInput_aliasName                             smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput                                      smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput_aliasName                            smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput_policyStoreId                        smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput_aliasArn                             smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput_createdAt                            smithy.SchemaExtensions
+	eGetPolicyStoreAliasOutput_state                                smithy.SchemaExtensions
+	eGetPolicyStoreInput                                            smithy.SchemaExtensions
+	eGetPolicyStoreInput_policyStoreId                              smithy.SchemaExtensions
+	eGetPolicyStoreInput_tags                                       smithy.SchemaExtensions
+	eGetPolicyStoreOutput                                           smithy.SchemaExtensions
+	eGetPolicyStoreOutput_policyStoreId                             smithy.SchemaExtensions
+	eGetPolicyStoreOutput_arn                                       smithy.SchemaExtensions
+	eGetPolicyStoreOutput_validationSettings                        smithy.SchemaExtensions
+	eGetPolicyStoreOutput_createdDate                               smithy.SchemaExtensions
+	eGetPolicyStoreOutput_lastUpdatedDate                           smithy.SchemaExtensions
+	eGetPolicyStoreOutput_description                               smithy.SchemaExtensions
+	eGetPolicyStoreOutput_deletionProtection                        smithy.SchemaExtensions
+	eGetPolicyStoreOutput_encryptionState                           smithy.SchemaExtensions
+	eGetPolicyStoreOutput_cedarVersion                              smithy.SchemaExtensions
+	eGetPolicyStoreOutput_tags                                      smithy.SchemaExtensions
+	eGetPolicyTemplateInput                                         smithy.SchemaExtensions
+	eGetPolicyTemplateInput_policyStoreId                           smithy.SchemaExtensions
+	eGetPolicyTemplateInput_policyTemplateId                        smithy.SchemaExtensions
+	eGetPolicyTemplateOutput                                        smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_policyStoreId                          smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_policyTemplateId                       smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_description                            smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_statement                              smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_createdDate                            smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_lastUpdatedDate                        smithy.SchemaExtensions
+	eGetPolicyTemplateOutput_name                                   smithy.SchemaExtensions
+	eGetSchemaInput                                                 smithy.SchemaExtensions
+	eGetSchemaInput_policyStoreId                                   smithy.SchemaExtensions
+	eGetSchemaOutput                                                smithy.SchemaExtensions
+	eGetSchemaOutput_policyStoreId                                  smithy.SchemaExtensions
+	eGetSchemaOutput_schema                                         smithy.SchemaExtensions
+	eGetSchemaOutput_createdDate                                    smithy.SchemaExtensions
+	eGetSchemaOutput_lastUpdatedDate                                smithy.SchemaExtensions
+	eGetSchemaOutput_namespaces                                     smithy.SchemaExtensions
+	eIsAuthorizedInput                                              smithy.SchemaExtensions
+	eIsAuthorizedInput_policyStoreId                                smithy.SchemaExtensions
+	eIsAuthorizedInput_principal                                    smithy.SchemaExtensions
+	eIsAuthorizedInput_action                                       smithy.SchemaExtensions
+	eIsAuthorizedInput_resource                                     smithy.SchemaExtensions
+	eIsAuthorizedInput_context                                      smithy.SchemaExtensions
+	eIsAuthorizedInput_entities                                     smithy.SchemaExtensions
+	eIsAuthorizedOutput                                             smithy.SchemaExtensions
+	eIsAuthorizedOutput_decision                                    smithy.SchemaExtensions
+	eIsAuthorizedOutput_determiningPolicies                         smithy.SchemaExtensions
+	eIsAuthorizedOutput_errors                                      smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput                                     smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_policyStoreId                       smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_identityToken                       smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_accessToken                         smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_action                              smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_resource                            smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_context                             smithy.SchemaExtensions
+	eIsAuthorizedWithTokenInput_entities                            smithy.SchemaExtensions
+	eIsAuthorizedWithTokenOutput                                    smithy.SchemaExtensions
+	eIsAuthorizedWithTokenOutput_decision                           smithy.SchemaExtensions
+	eIsAuthorizedWithTokenOutput_determiningPolicies                smithy.SchemaExtensions
+	eIsAuthorizedWithTokenOutput_errors                             smithy.SchemaExtensions
+	eIsAuthorizedWithTokenOutput_principal                          smithy.SchemaExtensions
+	eListIdentitySourcesInput                                       smithy.SchemaExtensions
+	eListIdentitySourcesInput_policyStoreId                         smithy.SchemaExtensions
+	eListIdentitySourcesInput_nextToken                             smithy.SchemaExtensions
+	eListIdentitySourcesInput_maxResults                            smithy.SchemaExtensions
+	eListIdentitySourcesInput_filters                               smithy.SchemaExtensions
+	eListIdentitySourcesOutput                                      smithy.SchemaExtensions
+	eListIdentitySourcesOutput_nextToken                            smithy.SchemaExtensions
+	eListIdentitySourcesOutput_identitySources                      smithy.SchemaExtensions
+	eListPoliciesInput                                              smithy.SchemaExtensions
+	eListPoliciesInput_policyStoreId                                smithy.SchemaExtensions
+	eListPoliciesInput_nextToken                                    smithy.SchemaExtensions
+	eListPoliciesInput_maxResults                                   smithy.SchemaExtensions
+	eListPoliciesInput_filter                                       smithy.SchemaExtensions
+	eListPoliciesOutput                                             smithy.SchemaExtensions
+	eListPoliciesOutput_nextToken                                   smithy.SchemaExtensions
+	eListPoliciesOutput_policies                                    smithy.SchemaExtensions
+	eListPolicyStoreAliasesInput                                    smithy.SchemaExtensions
+	eListPolicyStoreAliasesInput_nextToken                          smithy.SchemaExtensions
+	eListPolicyStoreAliasesInput_maxResults                         smithy.SchemaExtensions
+	eListPolicyStoreAliasesInput_filter                             smithy.SchemaExtensions
+	eListPolicyStoreAliasesOutput                                   smithy.SchemaExtensions
+	eListPolicyStoreAliasesOutput_nextToken                         smithy.SchemaExtensions
+	eListPolicyStoreAliasesOutput_policyStoreAliases                smithy.SchemaExtensions
+	eListPolicyStoresInput                                          smithy.SchemaExtensions
+	eListPolicyStoresInput_nextToken                                smithy.SchemaExtensions
+	eListPolicyStoresInput_maxResults                               smithy.SchemaExtensions
+	eListPolicyStoresOutput                                         smithy.SchemaExtensions
+	eListPolicyStoresOutput_nextToken                               smithy.SchemaExtensions
+	eListPolicyStoresOutput_policyStores                            smithy.SchemaExtensions
+	eListPolicyTemplatesInput                                       smithy.SchemaExtensions
+	eListPolicyTemplatesInput_policyStoreId                         smithy.SchemaExtensions
+	eListPolicyTemplatesInput_nextToken                             smithy.SchemaExtensions
+	eListPolicyTemplatesInput_maxResults                            smithy.SchemaExtensions
+	eListPolicyTemplatesOutput                                      smithy.SchemaExtensions
+	eListPolicyTemplatesOutput_nextToken                            smithy.SchemaExtensions
+	eListPolicyTemplatesOutput_policyTemplates                      smithy.SchemaExtensions
+	eListTagsForResourceInput                                       smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                           smithy.SchemaExtensions
+	eListTagsForResourceOutput                                      smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                 smithy.SchemaExtensions
+	ePutSchemaInput                                                 smithy.SchemaExtensions
+	ePutSchemaInput_policyStoreId                                   smithy.SchemaExtensions
+	ePutSchemaInput_definition                                      smithy.SchemaExtensions
+	ePutSchemaOutput                                                smithy.SchemaExtensions
+	ePutSchemaOutput_policyStoreId                                  smithy.SchemaExtensions
+	ePutSchemaOutput_namespaces                                     smithy.SchemaExtensions
+	ePutSchemaOutput_createdDate                                    smithy.SchemaExtensions
+	ePutSchemaOutput_lastUpdatedDate                                smithy.SchemaExtensions
+	eTagResourceInput                                               smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                   smithy.SchemaExtensions
+	eTagResourceInput_tags                                          smithy.SchemaExtensions
+	eTagResourceOutput                                              smithy.SchemaExtensions
+	eUntagResourceInput                                             smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                 smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                     smithy.SchemaExtensions
+	eUntagResourceOutput                                            smithy.SchemaExtensions
+	eUpdateIdentitySourceInput                                      smithy.SchemaExtensions
+	eUpdateIdentitySourceInput_policyStoreId                        smithy.SchemaExtensions
+	eUpdateIdentitySourceInput_identitySourceId                     smithy.SchemaExtensions
+	eUpdateIdentitySourceInput_updateConfiguration                  smithy.SchemaExtensions
+	eUpdateIdentitySourceInput_principalEntityType                  smithy.SchemaExtensions
+	eUpdateIdentitySourceOutput                                     smithy.SchemaExtensions
+	eUpdateIdentitySourceOutput_createdDate                         smithy.SchemaExtensions
+	eUpdateIdentitySourceOutput_identitySourceId                    smithy.SchemaExtensions
+	eUpdateIdentitySourceOutput_lastUpdatedDate                     smithy.SchemaExtensions
+	eUpdateIdentitySourceOutput_policyStoreId                       smithy.SchemaExtensions
+	eUpdatePolicyInput                                              smithy.SchemaExtensions
+	eUpdatePolicyInput_policyStoreId                                smithy.SchemaExtensions
+	eUpdatePolicyInput_policyId                                     smithy.SchemaExtensions
+	eUpdatePolicyInput_definition                                   smithy.SchemaExtensions
+	eUpdatePolicyInput_name                                         smithy.SchemaExtensions
+	eUpdatePolicyOutput                                             smithy.SchemaExtensions
+	eUpdatePolicyOutput_policyStoreId                               smithy.SchemaExtensions
+	eUpdatePolicyOutput_policyId                                    smithy.SchemaExtensions
+	eUpdatePolicyOutput_policyType                                  smithy.SchemaExtensions
+	eUpdatePolicyOutput_principal                                   smithy.SchemaExtensions
+	eUpdatePolicyOutput_resource                                    smithy.SchemaExtensions
+	eUpdatePolicyOutput_actions                                     smithy.SchemaExtensions
+	eUpdatePolicyOutput_createdDate                                 smithy.SchemaExtensions
+	eUpdatePolicyOutput_lastUpdatedDate                             smithy.SchemaExtensions
+	eUpdatePolicyOutput_effect                                      smithy.SchemaExtensions
+	eUpdatePolicyStoreInput                                         smithy.SchemaExtensions
+	eUpdatePolicyStoreInput_policyStoreId                           smithy.SchemaExtensions
+	eUpdatePolicyStoreInput_validationSettings                      smithy.SchemaExtensions
+	eUpdatePolicyStoreInput_deletionProtection                      smithy.SchemaExtensions
+	eUpdatePolicyStoreInput_description                             smithy.SchemaExtensions
+	eUpdatePolicyStoreOutput                                        smithy.SchemaExtensions
+	eUpdatePolicyStoreOutput_policyStoreId                          smithy.SchemaExtensions
+	eUpdatePolicyStoreOutput_arn                                    smithy.SchemaExtensions
+	eUpdatePolicyStoreOutput_createdDate                            smithy.SchemaExtensions
+	eUpdatePolicyStoreOutput_lastUpdatedDate                        smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput                                      smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput_policyStoreId                        smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput_policyTemplateId                     smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput_description                          smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput_statement                            smithy.SchemaExtensions
+	eUpdatePolicyTemplateInput_name                                 smithy.SchemaExtensions
+	eUpdatePolicyTemplateOutput                                     smithy.SchemaExtensions
+	eUpdatePolicyTemplateOutput_policyStoreId                       smithy.SchemaExtensions
+	eUpdatePolicyTemplateOutput_policyTemplateId                    smithy.SchemaExtensions
+	eUpdatePolicyTemplateOutput_createdDate                         smithy.SchemaExtensions
+	eUpdatePolicyTemplateOutput_lastUpdatedDate                     smithy.SchemaExtensions
+)
+
+var (
+	iBatchGetPolicy                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicy"}
+	iBatchIsAuthorized                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorized"}
+	iBatchIsAuthorizedWithToken                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithToken"}
+	iCreateIdentitySource                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreateIdentitySource"}
+	iCreatePolicy                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicy"}
+	iCreatePolicyStore                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStore"}
+	iCreatePolicyStoreAlias                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStoreAlias"}
+	iCreatePolicyTemplate                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyTemplate"}
+	iDeleteIdentitySource                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeleteIdentitySource"}
+	iDeletePolicy                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicy"}
+	iDeletePolicyStore                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStore"}
+	iDeletePolicyStoreAlias                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStoreAlias"}
+	iDeletePolicyTemplate                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyTemplate"}
+	iGetIdentitySource                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetIdentitySource"}
+	iGetPolicy                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicy"}
+	iGetPolicyStore                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStore"}
+	iGetPolicyStoreAlias                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStoreAlias"}
+	iGetPolicyTemplate                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyTemplate"}
+	iGetSchema                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetSchema"}
+	iIsAuthorized                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorized"}
+	iIsAuthorizedWithToken                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorizedWithToken"}
+	iListIdentitySources                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListIdentitySources"}
+	iListPolicies                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicies"}
+	iListPolicyStoreAliases                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStoreAliases"}
+	iListPolicyStores                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStores"}
+	iListPolicyTemplates                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyTemplates"}
+	iListTagsForResource                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListTagsForResource"}
+	iPutSchema                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PutSchema"}
+	iTagResource                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UntagResource"}
+	iUpdateIdentitySource                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateIdentitySource"}
+	iUpdatePolicy                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicy"}
+	iUpdatePolicyStore                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyStore"}
+	iUpdatePolicyTemplate                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyTemplate"}
+	i_VerifiedPermissions                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "VerifiedPermissions"}
+	iAccessDeniedException                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "AccessDeniedException"}
+	i_ActionId                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ActionId"}
+	iActionIdentifier                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ActionIdentifier"}
+	i_ActionIdentifierList                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ActionIdentifierList"}
+	i_ActionType                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ActionType"}
+	i_Alias                                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Alias"}
+	iAliasState                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "AliasState"}
+	i_AmazonResourceName                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "AmazonResourceName"}
+	iAttributeValue                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "AttributeValue"}
+	i_Audience                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Audience"}
+	i_Audiences                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Audiences"}
+	iBatchGetPolicyErrorCode                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyErrorCode"}
+	iBatchGetPolicyErrorItem                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyErrorItem"}
+	i_BatchGetPolicyErrorList                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyErrorList"}
+	iBatchGetPolicyInputItem                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyInputItem"}
+	i_BatchGetPolicyInputList                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyInputList"}
+	iBatchGetPolicyOutputItem                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyOutputItem"}
+	i_BatchGetPolicyOutputList                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyOutputList"}
+	iBatchIsAuthorizedInputItem                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedInputItem"}
+	i_BatchIsAuthorizedInputList                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedInputList"}
+	iBatchIsAuthorizedOutputItem                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedOutputItem"}
+	i_BatchIsAuthorizedOutputList                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedOutputList"}
+	iBatchIsAuthorizedWithTokenInputItem           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenInputItem"}
+	i_BatchIsAuthorizedWithTokenInputList          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenInputList"}
+	iBatchIsAuthorizedWithTokenOutputItem          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenOutputItem"}
+	i_BatchIsAuthorizedWithTokenOutputList         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenOutputList"}
+	i_BooleanAttribute                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BooleanAttribute"}
+	i_CedarJson                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CedarJson"}
+	i_CedarTagRecordAttribute                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CedarTagRecordAttribute"}
+	i_CedarTagSetAttribute                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CedarTagSetAttribute"}
+	iCedarTagValue                                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CedarTagValue"}
+	iCedarVersion                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CedarVersion"}
+	i_Claim                                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Claim"}
+	i_ClientId                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ClientId"}
+	i_ClientIds                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ClientIds"}
+	iCognitoGroupConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoGroupConfiguration"}
+	iCognitoGroupConfigurationDetail               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoGroupConfigurationDetail"}
+	iCognitoGroupConfigurationItem                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoGroupConfigurationItem"}
+	iCognitoUserPoolConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoUserPoolConfiguration"}
+	iCognitoUserPoolConfigurationDetail            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoUserPoolConfigurationDetail"}
+	iCognitoUserPoolConfigurationItem              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CognitoUserPoolConfigurationItem"}
+	iConfiguration                                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Configuration"}
+	iConfigurationDetail                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ConfigurationDetail"}
+	iConfigurationItem                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ConfigurationItem"}
+	iConflictException                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ConflictException"}
+	iContextDefinition                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ContextDefinition"}
+	i_ContextMap                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ContextMap"}
+	i_DatetimeAttribute                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DatetimeAttribute"}
+	i_Decimal                                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Decimal"}
+	iDecision                                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Decision"}
+	iDeletionMode                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletionMode"}
+	iDeletionProtection                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletionProtection"}
+	iDeterminingPolicyItem                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeterminingPolicyItem"}
+	i_DeterminingPolicyList                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeterminingPolicyList"}
+	i_DiscoveryUrl                                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DiscoveryUrl"}
+	i_Duration                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Duration"}
+	i_EncryptionContext                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EncryptionContext"}
+	i_EncryptionContextKey                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EncryptionContextKey"}
+	i_EncryptionContextValue                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EncryptionContextValue"}
+	iEncryptionSettings                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EncryptionSettings"}
+	iEncryptionState                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EncryptionState"}
+	iEntitiesDefinition                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntitiesDefinition"}
+	i_EntityAttributes                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityAttributes"}
+	i_EntityCedarTags                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityCedarTags"}
+	i_EntityId                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityId"}
+	iEntityIdentifier                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityIdentifier"}
+	i_EntityIdPrefix                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityIdPrefix"}
+	iEntityItem                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityItem"}
+	i_EntityList                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityList"}
+	iEntityReference                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityReference"}
+	i_EntityType                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EntityType"}
+	iEvaluationErrorItem                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EvaluationErrorItem"}
+	i_EvaluationErrorList                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "EvaluationErrorList"}
+	i_GroupEntityType                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GroupEntityType"}
+	i_IdempotencyToken                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdempotencyToken"}
+	iIdentitySourceDetails                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceDetails"}
+	iIdentitySourceFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceFilter"}
+	i_IdentitySourceFilters                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceFilters"}
+	i_IdentitySourceId                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceId"}
+	iIdentitySourceItem                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceItem"}
+	iIdentitySourceItemDetails                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySourceItemDetails"}
+	i_IdentitySources                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IdentitySources"}
+	iInternalServerException                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "InternalServerException"}
+	iInvalidStateException                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "InvalidStateException"}
+	i_IpAddr                                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IpAddr"}
+	i_Issuer                                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Issuer"}
+	iKmsEncryptionSettings                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "KmsEncryptionSettings"}
+	iKmsEncryptionState                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "KmsEncryptionState"}
+	i_KmsKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "KmsKey"}
+	i_ListIdentitySourcesMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListIdentitySourcesMaxResults"}
+	i_LongAttribute                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "LongAttribute"}
+	i_MaxResults                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "MaxResults"}
+	i_Namespace                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Namespace"}
+	i_NamespaceList                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "NamespaceList"}
+	i_NextToken                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "NextToken"}
+	iOpenIdConnectAccessTokenConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectAccessTokenConfiguration"}
+	iOpenIdConnectAccessTokenConfigurationDetail   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectAccessTokenConfigurationDetail"}
+	iOpenIdConnectAccessTokenConfigurationItem     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectAccessTokenConfigurationItem"}
+	iOpenIdConnectConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectConfiguration"}
+	iOpenIdConnectConfigurationDetail              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectConfigurationDetail"}
+	iOpenIdConnectConfigurationItem                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectConfigurationItem"}
+	iOpenIdConnectGroupConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectGroupConfiguration"}
+	iOpenIdConnectGroupConfigurationDetail         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectGroupConfigurationDetail"}
+	iOpenIdConnectGroupConfigurationItem           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectGroupConfigurationItem"}
+	iOpenIdConnectIdentityTokenConfiguration       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectIdentityTokenConfiguration"}
+	iOpenIdConnectIdentityTokenConfigurationDetail = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectIdentityTokenConfigurationDetail"}
+	iOpenIdConnectIdentityTokenConfigurationItem   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectIdentityTokenConfigurationItem"}
+	iOpenIdConnectTokenSelection                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectTokenSelection"}
+	iOpenIdConnectTokenSelectionDetail             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectTokenSelectionDetail"}
+	iOpenIdConnectTokenSelectionItem               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdConnectTokenSelectionItem"}
+	iOpenIdIssuer                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "OpenIdIssuer"}
+	i_ParentList                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ParentList"}
+	iPolicyDefinition                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyDefinition"}
+	iPolicyDefinitionDetail                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyDefinitionDetail"}
+	iPolicyDefinitionItem                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyDefinitionItem"}
+	iPolicyEffect                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyEffect"}
+	iPolicyFilter                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyFilter"}
+	i_PolicyId                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyId"}
+	iPolicyItem                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyItem"}
+	i_PolicyList                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyList"}
+	i_PolicyName                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyName"}
+	i_PolicyStatement                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStatement"}
+	iPolicyStoreAliasFilter                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreAliasFilter"}
+	iPolicyStoreAliasItem                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreAliasItem"}
+	i_PolicyStoreAliasList                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreAliasList"}
+	i_PolicyStoreDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreDescription"}
+	i_PolicyStoreId                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreId"}
+	iPolicyStoreItem                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreItem"}
+	i_PolicyStoreList                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyStoreList"}
+	i_PolicyTemplateDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyTemplateDescription"}
+	i_PolicyTemplateId                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyTemplateId"}
+	iPolicyTemplateItem                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyTemplateItem"}
+	i_PolicyTemplateName                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyTemplateName"}
+	i_PolicyTemplatesList                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyTemplatesList"}
+	iPolicyType                                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PolicyType"}
+	i_PrincipalEntityType                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PrincipalEntityType"}
+	i_RecordAttribute                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "RecordAttribute"}
+	i_ResourceArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ResourceArn"}
+	iResourceConflict                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ResourceConflict"}
+	i_ResourceConflictList                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ResourceConflictList"}
+	iResourceNotFoundException                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ResourceNotFoundException"}
+	iResourceType                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ResourceType"}
+	iSchemaDefinition                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "SchemaDefinition"}
+	i_SchemaJson                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "SchemaJson"}
+	iServiceQuotaExceededException                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ServiceQuotaExceededException"}
+	i_SetAttribute                                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "SetAttribute"}
+	iStaticPolicyDefinition                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "StaticPolicyDefinition"}
+	iStaticPolicyDefinitionDetail                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "StaticPolicyDefinitionDetail"}
+	iStaticPolicyDefinitionItem                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "StaticPolicyDefinitionItem"}
+	i_StaticPolicyDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "StaticPolicyDescription"}
+	i_StringAttribute                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "StringAttribute"}
+	i_TagKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagKeyList"}
+	i_TagMap                                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagMap"}
+	i_TagValue                                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagValue"}
+	iTemplateLinkedPolicyDefinition                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TemplateLinkedPolicyDefinition"}
+	iTemplateLinkedPolicyDefinitionDetail          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TemplateLinkedPolicyDefinitionDetail"}
+	iTemplateLinkedPolicyDefinitionItem            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TemplateLinkedPolicyDefinitionItem"}
+	iThrottlingException                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ThrottlingException"}
+	i_TimestampFormat                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TimestampFormat"}
+	i_Token                                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "Token"}
+	iTooManyTagsException                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TooManyTagsException"}
+	iUpdateCognitoGroupConfiguration               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateCognitoGroupConfiguration"}
+	iUpdateCognitoUserPoolConfiguration            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateCognitoUserPoolConfiguration"}
+	iUpdateConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateConfiguration"}
+	iUpdateOpenIdConnectAccessTokenConfiguration   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateOpenIdConnectAccessTokenConfiguration"}
+	iUpdateOpenIdConnectConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateOpenIdConnectConfiguration"}
+	iUpdateOpenIdConnectGroupConfiguration         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateOpenIdConnectGroupConfiguration"}
+	iUpdateOpenIdConnectIdentityTokenConfiguration = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateOpenIdConnectIdentityTokenConfiguration"}
+	iUpdateOpenIdConnectTokenSelection             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateOpenIdConnectTokenSelection"}
+	iUpdatePolicyDefinition                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyDefinition"}
+	iUpdateStaticPolicyDefinition                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateStaticPolicyDefinition"}
+	i_UserPoolArn                                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UserPoolArn"}
+	iValidationException                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ValidationException"}
+	iValidationExceptionField                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                 = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ValidationExceptionFieldList"}
+	iValidationMode                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ValidationMode"}
+	iValidationSettings                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ValidationSettings"}
+	iBatchGetPolicyInput                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyInput"}
+	iBatchGetPolicyOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchGetPolicyOutput"}
+	iBatchIsAuthorizedInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedInput"}
+	iBatchIsAuthorizedOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedOutput"}
+	iBatchIsAuthorizedWithTokenInput               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenInput"}
+	iBatchIsAuthorizedWithTokenOutput              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "BatchIsAuthorizedWithTokenOutput"}
+	iCreateIdentitySourceInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreateIdentitySourceInput"}
+	iCreateIdentitySourceOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreateIdentitySourceOutput"}
+	iCreatePolicyInput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyInput"}
+	iCreatePolicyOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyOutput"}
+	iCreatePolicyStoreAliasInput                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStoreAliasInput"}
+	iCreatePolicyStoreAliasOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStoreAliasOutput"}
+	iCreatePolicyStoreInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStoreInput"}
+	iCreatePolicyStoreOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyStoreOutput"}
+	iCreatePolicyTemplateInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyTemplateInput"}
+	iCreatePolicyTemplateOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "CreatePolicyTemplateOutput"}
+	iDeleteIdentitySourceInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeleteIdentitySourceInput"}
+	iDeleteIdentitySourceOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeleteIdentitySourceOutput"}
+	iDeletePolicyInput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyInput"}
+	iDeletePolicyOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyOutput"}
+	iDeletePolicyStoreAliasInput                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStoreAliasInput"}
+	iDeletePolicyStoreAliasOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStoreAliasOutput"}
+	iDeletePolicyStoreInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStoreInput"}
+	iDeletePolicyStoreOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyStoreOutput"}
+	iDeletePolicyTemplateInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyTemplateInput"}
+	iDeletePolicyTemplateOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "DeletePolicyTemplateOutput"}
+	iGetIdentitySourceInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetIdentitySourceInput"}
+	iGetIdentitySourceOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetIdentitySourceOutput"}
+	iGetPolicyInput                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyInput"}
+	iGetPolicyOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyOutput"}
+	iGetPolicyStoreAliasInput                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStoreAliasInput"}
+	iGetPolicyStoreAliasOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStoreAliasOutput"}
+	iGetPolicyStoreInput                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStoreInput"}
+	iGetPolicyStoreOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyStoreOutput"}
+	iGetPolicyTemplateInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyTemplateInput"}
+	iGetPolicyTemplateOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetPolicyTemplateOutput"}
+	iGetSchemaInput                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetSchemaInput"}
+	iGetSchemaOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "GetSchemaOutput"}
+	iIsAuthorizedInput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorizedInput"}
+	iIsAuthorizedOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorizedOutput"}
+	iIsAuthorizedWithTokenInput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorizedWithTokenInput"}
+	iIsAuthorizedWithTokenOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "IsAuthorizedWithTokenOutput"}
+	iListIdentitySourcesInput                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListIdentitySourcesInput"}
+	iListIdentitySourcesOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListIdentitySourcesOutput"}
+	iListPoliciesInput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPoliciesInput"}
+	iListPoliciesOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPoliciesOutput"}
+	iListPolicyStoreAliasesInput                   = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStoreAliasesInput"}
+	iListPolicyStoreAliasesOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStoreAliasesOutput"}
+	iListPolicyStoresInput                         = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStoresInput"}
+	iListPolicyStoresOutput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyStoresOutput"}
+	iListPolicyTemplatesInput                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyTemplatesInput"}
+	iListPolicyTemplatesOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListPolicyTemplatesOutput"}
+	iListTagsForResourceInput                      = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "ListTagsForResourceOutput"}
+	iPutSchemaInput                                = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PutSchemaInput"}
+	iPutSchemaOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "PutSchemaOutput"}
+	iTagResourceInput                              = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagResourceInput"}
+	iTagResourceOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "TagResourceOutput"}
+	iUntagResourceInput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UntagResourceInput"}
+	iUntagResourceOutput                           = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UntagResourceOutput"}
+	iUpdateIdentitySourceInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateIdentitySourceInput"}
+	iUpdateIdentitySourceOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdateIdentitySourceOutput"}
+	iUpdatePolicyInput                             = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyInput"}
+	iUpdatePolicyOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyOutput"}
+	iUpdatePolicyStoreInput                        = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyStoreInput"}
+	iUpdatePolicyStoreOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyStoreOutput"}
+	iUpdatePolicyTemplateInput                     = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyTemplateInput"}
+	iUpdatePolicyTemplateOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.verifiedpermissions", Name: "UpdatePolicyTemplateOutput"}
+	pString                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 406}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mActionIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sActionIdentifier_actionType, &sActionIdentifier_actionId}}
+var m_ActionIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionIdentifierList_member}}
+var mAliasState = smithy.SchemaMembers{List: []*smithy.Schema{&sAliasState_ACTIVE, &sAliasState_PENDING_DELETION}}
+var mAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeValue_boolean, &sAttributeValue_entityIdentifier, &sAttributeValue_long, &sAttributeValue_string, &sAttributeValue_set, &sAttributeValue_record, &sAttributeValue_ipaddr, &sAttributeValue_decimal, &sAttributeValue_datetime, &sAttributeValue_duration}, Hash: &hAttributeValue}
+var m_Audiences = smithy.SchemaMembers{List: []*smithy.Schema{&s_Audiences_member}}
+var mBatchGetPolicyErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND, &sBatchGetPolicyErrorCode_POLICY_NOT_FOUND, &sBatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND}}
+var mBatchGetPolicyErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyErrorItem_code, &sBatchGetPolicyErrorItem_policyStoreId, &sBatchGetPolicyErrorItem_policyId, &sBatchGetPolicyErrorItem_message}}
+var m_BatchGetPolicyErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetPolicyErrorList_member}}
+var mBatchGetPolicyInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyInputItem_policyStoreId, &sBatchGetPolicyInputItem_policyId}}
+var m_BatchGetPolicyInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetPolicyInputList_member}}
+var mBatchGetPolicyOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyOutputItem_policyStoreId, &sBatchGetPolicyOutputItem_policyId, &sBatchGetPolicyOutputItem_policyType, &sBatchGetPolicyOutputItem_definition, &sBatchGetPolicyOutputItem_createdDate, &sBatchGetPolicyOutputItem_lastUpdatedDate, &sBatchGetPolicyOutputItem_name}}
+var m_BatchGetPolicyOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetPolicyOutputList_member}}
+var mBatchIsAuthorizedInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedInputItem_principal, &sBatchIsAuthorizedInputItem_action, &sBatchIsAuthorizedInputItem_resource, &sBatchIsAuthorizedInputItem_context}}
+var m_BatchIsAuthorizedInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchIsAuthorizedInputList_member}}
+var mBatchIsAuthorizedOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedOutputItem_request, &sBatchIsAuthorizedOutputItem_decision, &sBatchIsAuthorizedOutputItem_determiningPolicies, &sBatchIsAuthorizedOutputItem_errors}}
+var m_BatchIsAuthorizedOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchIsAuthorizedOutputList_member}}
+var mBatchIsAuthorizedWithTokenInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedWithTokenInputItem_action, &sBatchIsAuthorizedWithTokenInputItem_resource, &sBatchIsAuthorizedWithTokenInputItem_context}}
+var m_BatchIsAuthorizedWithTokenInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchIsAuthorizedWithTokenInputList_member}}
+var mBatchIsAuthorizedWithTokenOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedWithTokenOutputItem_request, &sBatchIsAuthorizedWithTokenOutputItem_decision, &sBatchIsAuthorizedWithTokenOutputItem_determiningPolicies, &sBatchIsAuthorizedWithTokenOutputItem_errors}}
+var m_BatchIsAuthorizedWithTokenOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchIsAuthorizedWithTokenOutputList_member}}
+var m_CedarTagRecordAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&s_CedarTagRecordAttribute_key, &s_CedarTagRecordAttribute_value}}
+var m_CedarTagSetAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&s_CedarTagSetAttribute_member}}
+var mCedarTagValue = smithy.SchemaMembers{List: []*smithy.Schema{&sCedarTagValue_boolean, &sCedarTagValue_entityIdentifier, &sCedarTagValue_long, &sCedarTagValue_string, &sCedarTagValue_set, &sCedarTagValue_record, &sCedarTagValue_ipaddr, &sCedarTagValue_decimal, &sCedarTagValue_datetime, &sCedarTagValue_duration}, Hash: &hCedarTagValue}
+var mCedarVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sCedarVersion_CEDAR_2, &sCedarVersion_CEDAR_4}}
+var m_ClientIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClientIds_member}}
+var mCognitoGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoGroupConfiguration_groupEntityType}}
+var mCognitoGroupConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoGroupConfigurationDetail_groupEntityType}}
+var mCognitoGroupConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoGroupConfigurationItem_groupEntityType}}
+var mCognitoUserPoolConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoUserPoolConfiguration_userPoolArn, &sCognitoUserPoolConfiguration_clientIds, &sCognitoUserPoolConfiguration_groupConfiguration}}
+var mCognitoUserPoolConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoUserPoolConfigurationDetail_userPoolArn, &sCognitoUserPoolConfigurationDetail_clientIds, &sCognitoUserPoolConfigurationDetail_issuer, &sCognitoUserPoolConfigurationDetail_groupConfiguration}}
+var mCognitoUserPoolConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoUserPoolConfigurationItem_userPoolArn, &sCognitoUserPoolConfigurationItem_clientIds, &sCognitoUserPoolConfigurationItem_issuer, &sCognitoUserPoolConfigurationItem_groupConfiguration}}
+var mConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguration_cognitoUserPoolConfiguration, &sConfiguration_openIdConnectConfiguration}}
+var mConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationDetail_cognitoUserPoolConfiguration, &sConfigurationDetail_openIdConnectConfiguration}}
+var mConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationItem_cognitoUserPoolConfiguration, &sConfigurationItem_openIdConnectConfiguration}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resources}}
+var mContextDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sContextDefinition_contextMap, &sContextDefinition_cedarJson}}
+var m_ContextMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContextMap_key, &s_ContextMap_value}}
+var mDecision = smithy.SchemaMembers{List: []*smithy.Schema{&sDecision_ALLOW, &sDecision_DENY}}
+var mDeletionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionMode_SOFT_DELETE, &sDeletionMode_HARD_DELETE}}
+var mDeletionProtection = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionProtection_ENABLED, &sDeletionProtection_DISABLED}}
+var mDeterminingPolicyItem = smithy.SchemaMembers{List: []*smithy.Schema{&sDeterminingPolicyItem_policyId}}
+var m_DeterminingPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeterminingPolicyList_member}}
+var m_EncryptionContext = smithy.SchemaMembers{List: []*smithy.Schema{&s_EncryptionContext_key, &s_EncryptionContext_value}}
+var mEncryptionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionSettings_kmsEncryptionSettings, &sEncryptionSettings_default}}
+var mEncryptionState = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionState_kmsEncryptionState, &sEncryptionState_default}}
+var mEntitiesDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitiesDefinition_entityList, &sEntitiesDefinition_cedarJson}}
+var m_EntityAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityAttributes_key, &s_EntityAttributes_value}}
+var m_EntityCedarTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityCedarTags_key, &s_EntityCedarTags_value}}
+var mEntityIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityIdentifier_entityType, &sEntityIdentifier_entityId}}
+var mEntityItem = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityItem_identifier, &sEntityItem_attributes, &sEntityItem_parents, &sEntityItem_tags}}
+var m_EntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityList_member}}
+var mEntityReference = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityReference_unspecified, &sEntityReference_identifier}}
+var mEvaluationErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationErrorItem_errorDescription}}
+var m_EvaluationErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvaluationErrorList_member}}
+var mIdentitySourceDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceDetails_clientIds, &sIdentitySourceDetails_userPoolArn, &sIdentitySourceDetails_discoveryUrl, &sIdentitySourceDetails_openIdIssuer}}
+var mIdentitySourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceFilter_principalEntityType}}
+var m_IdentitySourceFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentitySourceFilters_member}}
+var mIdentitySourceItem = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceItem_createdDate, &sIdentitySourceItem_details, &sIdentitySourceItem_identitySourceId, &sIdentitySourceItem_lastUpdatedDate, &sIdentitySourceItem_policyStoreId, &sIdentitySourceItem_principalEntityType, &sIdentitySourceItem_configuration}}
+var mIdentitySourceItemDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceItemDetails_clientIds, &sIdentitySourceItemDetails_userPoolArn, &sIdentitySourceItemDetails_discoveryUrl, &sIdentitySourceItemDetails_openIdIssuer}}
+var m_IdentitySources = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentitySources_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_message}}
+var mKmsEncryptionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsEncryptionSettings_key, &sKmsEncryptionSettings_encryptionContext}}
+var mKmsEncryptionState = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsEncryptionState_key, &sKmsEncryptionState_encryptionContext}}
+var m_NamespaceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamespaceList_member}}
+var mOpenIdConnectAccessTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectAccessTokenConfiguration_principalIdClaim, &sOpenIdConnectAccessTokenConfiguration_audiences}}
+var mOpenIdConnectAccessTokenConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectAccessTokenConfigurationDetail_principalIdClaim, &sOpenIdConnectAccessTokenConfigurationDetail_audiences}}
+var mOpenIdConnectAccessTokenConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectAccessTokenConfigurationItem_principalIdClaim, &sOpenIdConnectAccessTokenConfigurationItem_audiences}}
+var mOpenIdConnectConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectConfiguration_issuer, &sOpenIdConnectConfiguration_entityIdPrefix, &sOpenIdConnectConfiguration_groupConfiguration, &sOpenIdConnectConfiguration_tokenSelection}}
+var mOpenIdConnectConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectConfigurationDetail_issuer, &sOpenIdConnectConfigurationDetail_entityIdPrefix, &sOpenIdConnectConfigurationDetail_groupConfiguration, &sOpenIdConnectConfigurationDetail_tokenSelection}}
+var mOpenIdConnectConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectConfigurationItem_issuer, &sOpenIdConnectConfigurationItem_entityIdPrefix, &sOpenIdConnectConfigurationItem_groupConfiguration, &sOpenIdConnectConfigurationItem_tokenSelection}}
+var mOpenIdConnectGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectGroupConfiguration_groupClaim, &sOpenIdConnectGroupConfiguration_groupEntityType}}
+var mOpenIdConnectGroupConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectGroupConfigurationDetail_groupClaim, &sOpenIdConnectGroupConfigurationDetail_groupEntityType}}
+var mOpenIdConnectGroupConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectGroupConfigurationItem_groupClaim, &sOpenIdConnectGroupConfigurationItem_groupEntityType}}
+var mOpenIdConnectIdentityTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectIdentityTokenConfiguration_principalIdClaim, &sOpenIdConnectIdentityTokenConfiguration_clientIds}}
+var mOpenIdConnectIdentityTokenConfigurationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim, &sOpenIdConnectIdentityTokenConfigurationDetail_clientIds}}
+var mOpenIdConnectIdentityTokenConfigurationItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectIdentityTokenConfigurationItem_principalIdClaim, &sOpenIdConnectIdentityTokenConfigurationItem_clientIds}}
+var mOpenIdConnectTokenSelection = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectTokenSelection_accessTokenOnly, &sOpenIdConnectTokenSelection_identityTokenOnly}}
+var mOpenIdConnectTokenSelectionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectTokenSelectionDetail_accessTokenOnly, &sOpenIdConnectTokenSelectionDetail_identityTokenOnly}}
+var mOpenIdConnectTokenSelectionItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdConnectTokenSelectionItem_accessTokenOnly, &sOpenIdConnectTokenSelectionItem_identityTokenOnly}}
+var mOpenIdIssuer = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenIdIssuer_COGNITO}}
+var m_ParentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParentList_member}}
+var mPolicyDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyDefinition_static, &sPolicyDefinition_templateLinked}}
+var mPolicyDefinitionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyDefinitionDetail_static, &sPolicyDefinitionDetail_templateLinked}}
+var mPolicyDefinitionItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyDefinitionItem_static, &sPolicyDefinitionItem_templateLinked}}
+var mPolicyEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyEffect_PERMIT, &sPolicyEffect_FORBID}}
+var mPolicyFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyFilter_principal, &sPolicyFilter_resource, &sPolicyFilter_policyType, &sPolicyFilter_policyTemplateId}}
+var mPolicyItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyItem_policyStoreId, &sPolicyItem_policyId, &sPolicyItem_policyType, &sPolicyItem_principal, &sPolicyItem_resource, &sPolicyItem_actions, &sPolicyItem_definition, &sPolicyItem_createdDate, &sPolicyItem_lastUpdatedDate, &sPolicyItem_effect, &sPolicyItem_name}, Hash: &hPolicyItem}
+var m_PolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyList_member}}
+var mPolicyStoreAliasFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyStoreAliasFilter_policyStoreId}}
+var mPolicyStoreAliasItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyStoreAliasItem_aliasName, &sPolicyStoreAliasItem_policyStoreId, &sPolicyStoreAliasItem_aliasArn, &sPolicyStoreAliasItem_createdAt, &sPolicyStoreAliasItem_state}}
+var m_PolicyStoreAliasList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyStoreAliasList_member}}
+var mPolicyStoreItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyStoreItem_policyStoreId, &sPolicyStoreItem_arn, &sPolicyStoreItem_createdDate, &sPolicyStoreItem_lastUpdatedDate, &sPolicyStoreItem_description}}
+var m_PolicyStoreList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyStoreList_member}}
+var mPolicyTemplateItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyTemplateItem_policyStoreId, &sPolicyTemplateItem_policyTemplateId, &sPolicyTemplateItem_description, &sPolicyTemplateItem_createdDate, &sPolicyTemplateItem_lastUpdatedDate, &sPolicyTemplateItem_name}}
+var m_PolicyTemplatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyTemplatesList_member}}
+var mPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyType_STATIC, &sPolicyType_TEMPLATE_LINKED}}
+var m_RecordAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordAttribute_key, &s_RecordAttribute_value}}
+var mResourceConflict = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConflict_resourceId, &sResourceConflict_resourceType}}
+var m_ResourceConflictList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceConflictList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_IDENTITY_SOURCE, &sResourceType_POLICY_STORE, &sResourceType_POLICY, &sResourceType_POLICY_TEMPLATE, &sResourceType_SCHEMA, &sResourceType_POLICY_STORE_ALIAS}}
+var mSchemaDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaDefinition_cedarJson}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var m_SetAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&s_SetAttribute_member}}
+var mStaticPolicyDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sStaticPolicyDefinition_description, &sStaticPolicyDefinition_statement}}
+var mStaticPolicyDefinitionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sStaticPolicyDefinitionDetail_description, &sStaticPolicyDefinitionDetail_statement}}
+var mStaticPolicyDefinitionItem = smithy.SchemaMembers{List: []*smithy.Schema{&sStaticPolicyDefinitionItem_description}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTemplateLinkedPolicyDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateLinkedPolicyDefinition_policyTemplateId, &sTemplateLinkedPolicyDefinition_principal, &sTemplateLinkedPolicyDefinition_resource}}
+var mTemplateLinkedPolicyDefinitionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateLinkedPolicyDefinitionDetail_policyTemplateId, &sTemplateLinkedPolicyDefinitionDetail_principal, &sTemplateLinkedPolicyDefinitionDetail_resource}}
+var mTemplateLinkedPolicyDefinitionItem = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateLinkedPolicyDefinitionItem_policyTemplateId, &sTemplateLinkedPolicyDefinitionItem_principal, &sTemplateLinkedPolicyDefinitionItem_resource}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message, &sTooManyTagsException_resourceName}}
+var mUpdateCognitoGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCognitoGroupConfiguration_groupEntityType}}
+var mUpdateCognitoUserPoolConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCognitoUserPoolConfiguration_userPoolArn, &sUpdateCognitoUserPoolConfiguration_clientIds, &sUpdateCognitoUserPoolConfiguration_groupConfiguration}}
+var mUpdateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfiguration_cognitoUserPoolConfiguration, &sUpdateConfiguration_openIdConnectConfiguration}}
+var mUpdateOpenIdConnectAccessTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim, &sUpdateOpenIdConnectAccessTokenConfiguration_audiences}}
+var mUpdateOpenIdConnectConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenIdConnectConfiguration_issuer, &sUpdateOpenIdConnectConfiguration_entityIdPrefix, &sUpdateOpenIdConnectConfiguration_groupConfiguration, &sUpdateOpenIdConnectConfiguration_tokenSelection}}
+var mUpdateOpenIdConnectGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenIdConnectGroupConfiguration_groupClaim, &sUpdateOpenIdConnectGroupConfiguration_groupEntityType}}
+var mUpdateOpenIdConnectIdentityTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim, &sUpdateOpenIdConnectIdentityTokenConfiguration_clientIds}}
+var mUpdateOpenIdConnectTokenSelection = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenIdConnectTokenSelection_accessTokenOnly, &sUpdateOpenIdConnectTokenSelection_identityTokenOnly}}
+var mUpdatePolicyDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyDefinition_static}}
+var mUpdateStaticPolicyDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStaticPolicyDefinition_description, &sUpdateStaticPolicyDefinition_statement}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_path, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationMode_OFF, &sValidationMode_STRICT}}
+var mValidationSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationSettings_mode}}
+var mBatchGetPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyInput_requests}}
+var mBatchGetPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPolicyOutput_results, &sBatchGetPolicyOutput_errors}}
+var mBatchIsAuthorizedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedInput_policyStoreId, &sBatchIsAuthorizedInput_entities, &sBatchIsAuthorizedInput_requests}}
+var mBatchIsAuthorizedOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedOutput_results}}
+var mBatchIsAuthorizedWithTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedWithTokenInput_policyStoreId, &sBatchIsAuthorizedWithTokenInput_identityToken, &sBatchIsAuthorizedWithTokenInput_accessToken, &sBatchIsAuthorizedWithTokenInput_entities, &sBatchIsAuthorizedWithTokenInput_requests}}
+var mBatchIsAuthorizedWithTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchIsAuthorizedWithTokenOutput_principal, &sBatchIsAuthorizedWithTokenOutput_results}}
+var mCreateIdentitySourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentitySourceInput_clientToken, &sCreateIdentitySourceInput_policyStoreId, &sCreateIdentitySourceInput_configuration, &sCreateIdentitySourceInput_principalEntityType}}
+var mCreateIdentitySourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentitySourceOutput_createdDate, &sCreateIdentitySourceOutput_identitySourceId, &sCreateIdentitySourceOutput_lastUpdatedDate, &sCreateIdentitySourceOutput_policyStoreId}}
+var mCreatePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyInput_clientToken, &sCreatePolicyInput_policyStoreId, &sCreatePolicyInput_definition, &sCreatePolicyInput_name}}
+var mCreatePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyOutput_policyStoreId, &sCreatePolicyOutput_policyId, &sCreatePolicyOutput_policyType, &sCreatePolicyOutput_principal, &sCreatePolicyOutput_resource, &sCreatePolicyOutput_actions, &sCreatePolicyOutput_createdDate, &sCreatePolicyOutput_lastUpdatedDate, &sCreatePolicyOutput_effect}, Hash: &hCreatePolicyOutput}
+var mCreatePolicyStoreAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyStoreAliasInput_aliasName, &sCreatePolicyStoreAliasInput_policyStoreId}}
+var mCreatePolicyStoreAliasOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyStoreAliasOutput_aliasName, &sCreatePolicyStoreAliasOutput_policyStoreId, &sCreatePolicyStoreAliasOutput_aliasArn, &sCreatePolicyStoreAliasOutput_createdAt}}
+var mCreatePolicyStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyStoreInput_clientToken, &sCreatePolicyStoreInput_validationSettings, &sCreatePolicyStoreInput_description, &sCreatePolicyStoreInput_deletionProtection, &sCreatePolicyStoreInput_encryptionSettings, &sCreatePolicyStoreInput_tags}}
+var mCreatePolicyStoreOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyStoreOutput_policyStoreId, &sCreatePolicyStoreOutput_arn, &sCreatePolicyStoreOutput_createdDate, &sCreatePolicyStoreOutput_lastUpdatedDate}}
+var mCreatePolicyTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyTemplateInput_clientToken, &sCreatePolicyTemplateInput_policyStoreId, &sCreatePolicyTemplateInput_description, &sCreatePolicyTemplateInput_statement, &sCreatePolicyTemplateInput_name}}
+var mCreatePolicyTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePolicyTemplateOutput_policyStoreId, &sCreatePolicyTemplateOutput_policyTemplateId, &sCreatePolicyTemplateOutput_createdDate, &sCreatePolicyTemplateOutput_lastUpdatedDate}}
+var mDeleteIdentitySourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIdentitySourceInput_policyStoreId, &sDeleteIdentitySourceInput_identitySourceId}}
+var mDeletePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePolicyInput_policyStoreId, &sDeletePolicyInput_policyId}}
+var mDeletePolicyStoreAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePolicyStoreAliasInput_aliasName, &sDeletePolicyStoreAliasInput_deletionMode}}
+var mDeletePolicyStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePolicyStoreInput_policyStoreId}}
+var mDeletePolicyTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePolicyTemplateInput_policyStoreId, &sDeletePolicyTemplateInput_policyTemplateId}}
+var mGetIdentitySourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentitySourceInput_policyStoreId, &sGetIdentitySourceInput_identitySourceId}}
+var mGetIdentitySourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentitySourceOutput_createdDate, &sGetIdentitySourceOutput_details, &sGetIdentitySourceOutput_identitySourceId, &sGetIdentitySourceOutput_lastUpdatedDate, &sGetIdentitySourceOutput_policyStoreId, &sGetIdentitySourceOutput_principalEntityType, &sGetIdentitySourceOutput_configuration}}
+var mGetPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyInput_policyStoreId, &sGetPolicyInput_policyId}}
+var mGetPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyOutput_policyStoreId, &sGetPolicyOutput_policyId, &sGetPolicyOutput_policyType, &sGetPolicyOutput_principal, &sGetPolicyOutput_resource, &sGetPolicyOutput_actions, &sGetPolicyOutput_definition, &sGetPolicyOutput_createdDate, &sGetPolicyOutput_lastUpdatedDate, &sGetPolicyOutput_effect, &sGetPolicyOutput_name}, Hash: &hGetPolicyOutput}
+var mGetPolicyStoreAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyStoreAliasInput_aliasName}}
+var mGetPolicyStoreAliasOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyStoreAliasOutput_aliasName, &sGetPolicyStoreAliasOutput_policyStoreId, &sGetPolicyStoreAliasOutput_aliasArn, &sGetPolicyStoreAliasOutput_createdAt, &sGetPolicyStoreAliasOutput_state}}
+var mGetPolicyStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyStoreInput_policyStoreId, &sGetPolicyStoreInput_tags}}
+var mGetPolicyStoreOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyStoreOutput_policyStoreId, &sGetPolicyStoreOutput_arn, &sGetPolicyStoreOutput_validationSettings, &sGetPolicyStoreOutput_createdDate, &sGetPolicyStoreOutput_lastUpdatedDate, &sGetPolicyStoreOutput_description, &sGetPolicyStoreOutput_deletionProtection, &sGetPolicyStoreOutput_encryptionState, &sGetPolicyStoreOutput_cedarVersion, &sGetPolicyStoreOutput_tags}, Hash: &hGetPolicyStoreOutput}
+var mGetPolicyTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyTemplateInput_policyStoreId, &sGetPolicyTemplateInput_policyTemplateId}}
+var mGetPolicyTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyTemplateOutput_policyStoreId, &sGetPolicyTemplateOutput_policyTemplateId, &sGetPolicyTemplateOutput_description, &sGetPolicyTemplateOutput_statement, &sGetPolicyTemplateOutput_createdDate, &sGetPolicyTemplateOutput_lastUpdatedDate, &sGetPolicyTemplateOutput_name}}
+var mGetSchemaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaInput_policyStoreId}}
+var mGetSchemaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSchemaOutput_policyStoreId, &sGetSchemaOutput_schema, &sGetSchemaOutput_createdDate, &sGetSchemaOutput_lastUpdatedDate, &sGetSchemaOutput_namespaces}}
+var mIsAuthorizedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sIsAuthorizedInput_policyStoreId, &sIsAuthorizedInput_principal, &sIsAuthorizedInput_action, &sIsAuthorizedInput_resource, &sIsAuthorizedInput_context, &sIsAuthorizedInput_entities}}
+var mIsAuthorizedOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sIsAuthorizedOutput_decision, &sIsAuthorizedOutput_determiningPolicies, &sIsAuthorizedOutput_errors}}
+var mIsAuthorizedWithTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sIsAuthorizedWithTokenInput_policyStoreId, &sIsAuthorizedWithTokenInput_identityToken, &sIsAuthorizedWithTokenInput_accessToken, &sIsAuthorizedWithTokenInput_action, &sIsAuthorizedWithTokenInput_resource, &sIsAuthorizedWithTokenInput_context, &sIsAuthorizedWithTokenInput_entities}}
+var mIsAuthorizedWithTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sIsAuthorizedWithTokenOutput_decision, &sIsAuthorizedWithTokenOutput_determiningPolicies, &sIsAuthorizedWithTokenOutput_errors, &sIsAuthorizedWithTokenOutput_principal}}
+var mListIdentitySourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentitySourcesInput_policyStoreId, &sListIdentitySourcesInput_nextToken, &sListIdentitySourcesInput_maxResults, &sListIdentitySourcesInput_filters}}
+var mListIdentitySourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentitySourcesOutput_nextToken, &sListIdentitySourcesOutput_identitySources}}
+var mListPoliciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesInput_policyStoreId, &sListPoliciesInput_nextToken, &sListPoliciesInput_maxResults, &sListPoliciesInput_filter}}
+var mListPoliciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesOutput_nextToken, &sListPoliciesOutput_policies}}
+var mListPolicyStoreAliasesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyStoreAliasesInput_nextToken, &sListPolicyStoreAliasesInput_maxResults, &sListPolicyStoreAliasesInput_filter}}
+var mListPolicyStoreAliasesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyStoreAliasesOutput_nextToken, &sListPolicyStoreAliasesOutput_policyStoreAliases}}
+var mListPolicyStoresInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyStoresInput_nextToken, &sListPolicyStoresInput_maxResults}}
+var mListPolicyStoresOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyStoresOutput_nextToken, &sListPolicyStoresOutput_policyStores}}
+var mListPolicyTemplatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyTemplatesInput_policyStoreId, &sListPolicyTemplatesInput_nextToken, &sListPolicyTemplatesInput_maxResults}}
+var mListPolicyTemplatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyTemplatesOutput_nextToken, &sListPolicyTemplatesOutput_policyTemplates}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mPutSchemaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSchemaInput_policyStoreId, &sPutSchemaInput_definition}}
+var mPutSchemaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSchemaOutput_policyStoreId, &sPutSchemaOutput_namespaces, &sPutSchemaOutput_createdDate, &sPutSchemaOutput_lastUpdatedDate}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateIdentitySourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentitySourceInput_policyStoreId, &sUpdateIdentitySourceInput_identitySourceId, &sUpdateIdentitySourceInput_updateConfiguration, &sUpdateIdentitySourceInput_principalEntityType}}
+var mUpdateIdentitySourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentitySourceOutput_createdDate, &sUpdateIdentitySourceOutput_identitySourceId, &sUpdateIdentitySourceOutput_lastUpdatedDate, &sUpdateIdentitySourceOutput_policyStoreId}}
+var mUpdatePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyInput_policyStoreId, &sUpdatePolicyInput_policyId, &sUpdatePolicyInput_definition, &sUpdatePolicyInput_name}}
+var mUpdatePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyOutput_policyStoreId, &sUpdatePolicyOutput_policyId, &sUpdatePolicyOutput_policyType, &sUpdatePolicyOutput_principal, &sUpdatePolicyOutput_resource, &sUpdatePolicyOutput_actions, &sUpdatePolicyOutput_createdDate, &sUpdatePolicyOutput_lastUpdatedDate, &sUpdatePolicyOutput_effect}, Hash: &hUpdatePolicyOutput}
+var mUpdatePolicyStoreInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyStoreInput_policyStoreId, &sUpdatePolicyStoreInput_validationSettings, &sUpdatePolicyStoreInput_deletionProtection, &sUpdatePolicyStoreInput_description}}
+var mUpdatePolicyStoreOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyStoreOutput_policyStoreId, &sUpdatePolicyStoreOutput_arn, &sUpdatePolicyStoreOutput_createdDate, &sUpdatePolicyStoreOutput_lastUpdatedDate}}
+var mUpdatePolicyTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyTemplateInput_policyStoreId, &sUpdatePolicyTemplateInput_policyTemplateId, &sUpdatePolicyTemplateInput_description, &sUpdatePolicyTemplateInput_statement, &sUpdatePolicyTemplateInput_name}}
+var mUpdatePolicyTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicyTemplateOutput_policyStoreId, &sUpdatePolicyTemplateOutput_policyTemplateId, &sUpdatePolicyTemplateOutput_createdDate, &sUpdatePolicyTemplateOutput_lastUpdatedDate}}
+
+var hAttributeValue = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	5, 0, 8, 0, 10, 9, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 0,
+	0, 0, 0, 2, 1, 0, 0, 7,
+}}
+var hCedarTagValue = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	5, 0, 8, 0, 10, 9, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 0,
+	0, 0, 0, 2, 1, 0, 0, 7,
+}}
+var hPolicyItem = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	2, 5, 0, 0, 0, 1, 4, 0, 9, 0, 0, 11, 0, 10, 0, 0, 8, 0, 0, 7, 0, 0, 0, 3,
+	0, 6, 0, 0, 0, 0, 0, 0,
+}}
+var hCreatePolicyOutput = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	8, 7, 0, 0, 0, 0, 3, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 9, 1,
+	0, 0, 0, 0, 0, 0, 6, 0,
+}}
+var hGetPolicyOutput = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	2, 5, 0, 0, 0, 1, 4, 0, 9, 0, 0, 11, 0, 10, 0, 0, 8, 0, 0, 7, 0, 0, 0, 3,
+	0, 6, 0, 0, 0, 0, 0, 0,
+}}
+var hGetPolicyStoreOutput = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 6, 0, 5, 0, 0, 0, 3, 0, 4, 0, 0, 1,
+	9, 0, 0, 0, 0, 8, 10, 0,
+}}
+var hUpdatePolicyOutput = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	8, 7, 0, 0, 0, 0, 3, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 9, 1,
+	0, 0, 0, 0, 0, 0, 6, 0,
+}}
+
+var sBatchGetPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicy, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetPolicy})
+var sBatchIsAuthorized = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorized, Type: smithy.ShapeTypeOperation, Ext: &eBatchIsAuthorized})
+var sBatchIsAuthorizedWithToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedWithToken, Type: smithy.ShapeTypeOperation, Ext: &eBatchIsAuthorizedWithToken})
+var sCreateIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySource, Type: smithy.ShapeTypeOperation, Ext: &eCreateIdentitySource})
+var sCreatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreatePolicy})
+var sCreatePolicyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStore, Type: smithy.ShapeTypeOperation, Ext: &eCreatePolicyStore})
+var sCreatePolicyStoreAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStoreAlias, Type: smithy.ShapeTypeOperation, Ext: &eCreatePolicyStoreAlias})
+var sCreatePolicyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyTemplate, Type: smithy.ShapeTypeOperation, Ext: &eCreatePolicyTemplate})
+var sDeleteIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentitySource, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIdentitySource})
+var sDeletePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeletePolicy})
+var sDeletePolicyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStore, Type: smithy.ShapeTypeOperation, Ext: &eDeletePolicyStore})
+var sDeletePolicyStoreAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStoreAlias, Type: smithy.ShapeTypeOperation, Ext: &eDeletePolicyStoreAlias})
+var sDeletePolicyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyTemplate, Type: smithy.ShapeTypeOperation, Ext: &eDeletePolicyTemplate})
+var sGetIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySource, Type: smithy.ShapeTypeOperation, Ext: &eGetIdentitySource})
+var sGetPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetPolicy})
+var sGetPolicyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStore, Type: smithy.ShapeTypeOperation, Ext: &eGetPolicyStore})
+var sGetPolicyStoreAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStoreAlias, Type: smithy.ShapeTypeOperation, Ext: &eGetPolicyStoreAlias})
+var sGetPolicyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyTemplate, Type: smithy.ShapeTypeOperation, Ext: &eGetPolicyTemplate})
+var sGetSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchema, Type: smithy.ShapeTypeOperation, Ext: &eGetSchema})
+var sIsAuthorized = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorized, Type: smithy.ShapeTypeOperation, Ext: &eIsAuthorized})
+var sIsAuthorizedWithToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorizedWithToken, Type: smithy.ShapeTypeOperation, Ext: &eIsAuthorizedWithToken})
+var sListIdentitySources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySources, Type: smithy.ShapeTypeOperation, Ext: &eListIdentitySources})
+var sListPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicies, Type: smithy.ShapeTypeOperation, Ext: &eListPolicies})
+var sListPolicyStoreAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStoreAliases, Type: smithy.ShapeTypeOperation, Ext: &eListPolicyStoreAliases})
+var sListPolicyStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStores, Type: smithy.ShapeTypeOperation, Ext: &eListPolicyStores})
+var sListPolicyTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyTemplates, Type: smithy.ShapeTypeOperation, Ext: &eListPolicyTemplates})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchema, Type: smithy.ShapeTypeOperation, Ext: &ePutSchema})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentitySource, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIdentitySource})
+var sUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicy, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePolicy})
+var sUpdatePolicyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyStore, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePolicyStore})
+var sUpdatePolicyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyTemplate, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePolicyTemplate})
+var s_VerifiedPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VerifiedPermissions, Type: smithy.ShapeTypeService, Ext: &e_VerifiedPermissions})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ActionId})
+var sActionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eActionIdentifier})
+var sActionIdentifier_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &i_ActionType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eActionIdentifier_actionType})
+var sActionIdentifier_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eActionIdentifier_actionId})
+var s_ActionIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionIdentifierList, Members: &m_ActionIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ActionIdentifierList})
+var s_ActionIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_ActionIdentifierList_member})
+var s_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ActionType})
+var s_Alias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &e_Alias})
+var sAliasState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAliasState, Members: &mAliasState, Type: smithy.ShapeTypeEnum, Ext: &eAliasState})
+var sAliasState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAliasState_ACTIVE})
+var sAliasState_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAliasState_PENDING_DELETION})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeValue})
+var sAttributeValue_boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "boolean", ID: &i_BooleanAttribute, Traits: &t2, Type: smithy.ShapeTypeBoolean, Ext: &eAttributeValue_boolean})
+var sAttributeValue_entityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdentifier", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eAttributeValue_entityIdentifier})
+var sAttributeValue_long = smithy.NewStaticSchema(smithy.StaticSchema{Member: "long", ID: &i_LongAttribute, Traits: &t2, Type: smithy.ShapeTypeLong, Ext: &eAttributeValue_long})
+var sAttributeValue_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &i_StringAttribute, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_string})
+var sAttributeValue_set = smithy.NewStaticSchema(smithy.StaticSchema{Member: "set", ID: &i_SetAttribute, Members: &m_SetAttribute, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_set})
+var sAttributeValue_record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "record", ID: &i_RecordAttribute, Members: &m_RecordAttribute, Type: smithy.ShapeTypeMap, Ext: &eAttributeValue_record})
+var sAttributeValue_ipaddr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipaddr", ID: &i_IpAddr, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_ipaddr})
+var sAttributeValue_decimal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decimal", ID: &i_Decimal, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_decimal})
+var sAttributeValue_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DatetimeAttribute, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_datetime})
+var sAttributeValue_duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duration", ID: &i_Duration, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_duration})
+var s_Audience = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Audience, Type: smithy.ShapeTypeString, Ext: &e_Audience})
+var s_Audiences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &e_Audiences})
+var s_Audiences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Audience, Type: smithy.ShapeTypeString, Ext: &e_Audiences_member})
+var sBatchGetPolicyErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyErrorCode, Members: &mBatchGetPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetPolicyErrorCode})
+var sBatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_STORE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND})
+var sBatchGetPolicyErrorCode_POLICY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyErrorCode_POLICY_NOT_FOUND})
+var sBatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_STORE_ALIAS_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND})
+var sBatchGetPolicyErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyErrorItem, Members: &mBatchGetPolicyErrorItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyErrorItem})
+var sBatchGetPolicyErrorItem_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &iBatchGetPolicyErrorCode, Members: &mBatchGetPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetPolicyErrorItem_code})
+var sBatchGetPolicyErrorItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyErrorItem_policyStoreId})
+var sBatchGetPolicyErrorItem_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyErrorItem_policyId})
+var sBatchGetPolicyErrorItem_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyErrorItem_message})
+var s_BatchGetPolicyErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetPolicyErrorList, Members: &m_BatchGetPolicyErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetPolicyErrorList})
+var s_BatchGetPolicyErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetPolicyErrorItem, Members: &mBatchGetPolicyErrorItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetPolicyErrorList_member})
+var sBatchGetPolicyInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyInputItem, Members: &mBatchGetPolicyInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyInputItem})
+var sBatchGetPolicyInputItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyInputItem_policyStoreId})
+var sBatchGetPolicyInputItem_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyInputItem_policyId})
+var s_BatchGetPolicyInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetPolicyInputList, Members: &m_BatchGetPolicyInputList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetPolicyInputList})
+var s_BatchGetPolicyInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetPolicyInputItem, Members: &mBatchGetPolicyInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetPolicyInputList_member})
+var sBatchGetPolicyOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyOutputItem, Members: &mBatchGetPolicyOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyOutputItem})
+var sBatchGetPolicyOutputItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyOutputItem_policyStoreId})
+var sBatchGetPolicyOutputItem_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyOutputItem_policyId})
+var sBatchGetPolicyOutputItem_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetPolicyOutputItem_policyType})
+var sBatchGetPolicyOutputItem_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPolicyDefinitionDetail, Members: &mPolicyDefinitionDetail, Type: smithy.ShapeTypeUnion, Ext: &eBatchGetPolicyOutputItem_definition})
+var sBatchGetPolicyOutputItem_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchGetPolicyOutputItem_createdDate})
+var sBatchGetPolicyOutputItem_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchGetPolicyOutputItem_lastUpdatedDate})
+var sBatchGetPolicyOutputItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eBatchGetPolicyOutputItem_name})
+var s_BatchGetPolicyOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetPolicyOutputList, Members: &m_BatchGetPolicyOutputList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetPolicyOutputList})
+var s_BatchGetPolicyOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetPolicyOutputItem, Members: &mBatchGetPolicyOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetPolicyOutputList_member})
+var sBatchIsAuthorizedInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedInputItem, Members: &mBatchIsAuthorizedInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedInputItem})
+var sBatchIsAuthorizedInputItem_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedInputItem_principal})
+var sBatchIsAuthorizedInputItem_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedInputItem_action})
+var sBatchIsAuthorizedInputItem_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedInputItem_resource})
+var sBatchIsAuthorizedInputItem_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iContextDefinition, Members: &mContextDefinition, Type: smithy.ShapeTypeUnion, Ext: &eBatchIsAuthorizedInputItem_context})
+var s_BatchIsAuthorizedInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchIsAuthorizedInputList, Members: &m_BatchIsAuthorizedInputList, Type: smithy.ShapeTypeList, Ext: &e_BatchIsAuthorizedInputList})
+var s_BatchIsAuthorizedInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchIsAuthorizedInputItem, Members: &mBatchIsAuthorizedInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchIsAuthorizedInputList_member})
+var sBatchIsAuthorizedOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedOutputItem, Members: &mBatchIsAuthorizedOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedOutputItem})
+var sBatchIsAuthorizedOutputItem_request = smithy.NewStaticSchema(smithy.StaticSchema{Member: "request", ID: &iBatchIsAuthorizedInputItem, Members: &mBatchIsAuthorizedInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedOutputItem_request})
+var sBatchIsAuthorizedOutputItem_decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decision", ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeEnum, Ext: &eBatchIsAuthorizedOutputItem_decision})
+var sBatchIsAuthorizedOutputItem_determiningPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "determiningPolicies", ID: &i_DeterminingPolicyList, Members: &m_DeterminingPolicyList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedOutputItem_determiningPolicies})
+var sBatchIsAuthorizedOutputItem_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_EvaluationErrorList, Members: &m_EvaluationErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedOutputItem_errors})
+var s_BatchIsAuthorizedOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchIsAuthorizedOutputList, Members: &m_BatchIsAuthorizedOutputList, Type: smithy.ShapeTypeList, Ext: &e_BatchIsAuthorizedOutputList})
+var s_BatchIsAuthorizedOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchIsAuthorizedOutputItem, Members: &mBatchIsAuthorizedOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchIsAuthorizedOutputList_member})
+var sBatchIsAuthorizedWithTokenInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedWithTokenInputItem, Members: &mBatchIsAuthorizedWithTokenInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenInputItem})
+var sBatchIsAuthorizedWithTokenInputItem_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenInputItem_action})
+var sBatchIsAuthorizedWithTokenInputItem_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenInputItem_resource})
+var sBatchIsAuthorizedWithTokenInputItem_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iContextDefinition, Members: &mContextDefinition, Type: smithy.ShapeTypeUnion, Ext: &eBatchIsAuthorizedWithTokenInputItem_context})
+var s_BatchIsAuthorizedWithTokenInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchIsAuthorizedWithTokenInputList, Members: &m_BatchIsAuthorizedWithTokenInputList, Type: smithy.ShapeTypeList, Ext: &e_BatchIsAuthorizedWithTokenInputList})
+var s_BatchIsAuthorizedWithTokenInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchIsAuthorizedWithTokenInputItem, Members: &mBatchIsAuthorizedWithTokenInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchIsAuthorizedWithTokenInputList_member})
+var sBatchIsAuthorizedWithTokenOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedWithTokenOutputItem, Members: &mBatchIsAuthorizedWithTokenOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenOutputItem})
+var sBatchIsAuthorizedWithTokenOutputItem_request = smithy.NewStaticSchema(smithy.StaticSchema{Member: "request", ID: &iBatchIsAuthorizedWithTokenInputItem, Members: &mBatchIsAuthorizedWithTokenInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenOutputItem_request})
+var sBatchIsAuthorizedWithTokenOutputItem_decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decision", ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeEnum, Ext: &eBatchIsAuthorizedWithTokenOutputItem_decision})
+var sBatchIsAuthorizedWithTokenOutputItem_determiningPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "determiningPolicies", ID: &i_DeterminingPolicyList, Members: &m_DeterminingPolicyList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedWithTokenOutputItem_determiningPolicies})
+var sBatchIsAuthorizedWithTokenOutputItem_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_EvaluationErrorList, Members: &m_EvaluationErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedWithTokenOutputItem_errors})
+var s_BatchIsAuthorizedWithTokenOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchIsAuthorizedWithTokenOutputList, Members: &m_BatchIsAuthorizedWithTokenOutputList, Type: smithy.ShapeTypeList, Ext: &e_BatchIsAuthorizedWithTokenOutputList})
+var s_BatchIsAuthorizedWithTokenOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchIsAuthorizedWithTokenOutputItem, Members: &mBatchIsAuthorizedWithTokenOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchIsAuthorizedWithTokenOutputList_member})
+var s_BooleanAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttribute, Traits: &t1, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanAttribute})
+var s_CedarJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CedarJson, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_CedarJson})
+var s_CedarTagRecordAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CedarTagRecordAttribute, Members: &m_CedarTagRecordAttribute, Type: smithy.ShapeTypeMap, Ext: &e_CedarTagRecordAttribute})
+var s_CedarTagRecordAttribute_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_CedarTagRecordAttribute_key})
+var s_CedarTagRecordAttribute_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCedarTagValue, Members: &mCedarTagValue, Type: smithy.ShapeTypeUnion, Ext: &e_CedarTagRecordAttribute_value})
+var s_CedarTagSetAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CedarTagSetAttribute, Members: &m_CedarTagSetAttribute, Type: smithy.ShapeTypeList, Ext: &e_CedarTagSetAttribute})
+var s_CedarTagSetAttribute_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCedarTagValue, Type: smithy.ShapeTypeUnion, Ext: &e_CedarTagSetAttribute_member})
+var sCedarTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCedarTagValue, Members: &mCedarTagValue, Type: smithy.ShapeTypeUnion, Ext: &eCedarTagValue})
+var sCedarTagValue_boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "boolean", ID: &i_BooleanAttribute, Traits: &t2, Type: smithy.ShapeTypeBoolean, Ext: &eCedarTagValue_boolean})
+var sCedarTagValue_entityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdentifier", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eCedarTagValue_entityIdentifier})
+var sCedarTagValue_long = smithy.NewStaticSchema(smithy.StaticSchema{Member: "long", ID: &i_LongAttribute, Traits: &t2, Type: smithy.ShapeTypeLong, Ext: &eCedarTagValue_long})
+var sCedarTagValue_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &i_StringAttribute, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCedarTagValue_string})
+var sCedarTagValue_set = smithy.NewStaticSchema(smithy.StaticSchema{Member: "set", ID: &i_CedarTagSetAttribute, Members: &m_CedarTagSetAttribute, Type: smithy.ShapeTypeList, Ext: &eCedarTagValue_set})
+var sCedarTagValue_record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "record", ID: &i_CedarTagRecordAttribute, Type: smithy.ShapeTypeMap, Ext: &eCedarTagValue_record})
+var sCedarTagValue_ipaddr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipaddr", ID: &i_IpAddr, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCedarTagValue_ipaddr})
+var sCedarTagValue_decimal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decimal", ID: &i_Decimal, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCedarTagValue_decimal})
+var sCedarTagValue_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DatetimeAttribute, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCedarTagValue_datetime})
+var sCedarTagValue_duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duration", ID: &i_Duration, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCedarTagValue_duration})
+var sCedarVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCedarVersion, Members: &mCedarVersion, Type: smithy.ShapeTypeEnum, Ext: &eCedarVersion})
+var sCedarVersion_CEDAR_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CEDAR_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCedarVersion_CEDAR_2})
+var sCedarVersion_CEDAR_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CEDAR_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCedarVersion_CEDAR_4})
+var s_Claim = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Claim, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Claim})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var s_ClientIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &e_ClientIds})
+var s_ClientIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ClientId, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_ClientIds_member})
+var sCognitoGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoGroupConfiguration, Members: &mCognitoGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCognitoGroupConfiguration})
+var sCognitoGroupConfiguration_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCognitoGroupConfiguration_groupEntityType})
+var sCognitoGroupConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoGroupConfigurationDetail, Members: &mCognitoGroupConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eCognitoGroupConfigurationDetail})
+var sCognitoGroupConfigurationDetail_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCognitoGroupConfigurationDetail_groupEntityType})
+var sCognitoGroupConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoGroupConfigurationItem, Members: &mCognitoGroupConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eCognitoGroupConfigurationItem})
+var sCognitoGroupConfigurationItem_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCognitoGroupConfigurationItem_groupEntityType})
+var sCognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoUserPoolConfiguration, Members: &mCognitoUserPoolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfiguration})
+var sCognitoUserPoolConfiguration_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfiguration_userPoolArn})
+var sCognitoUserPoolConfiguration_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eCognitoUserPoolConfiguration_clientIds})
+var sCognitoUserPoolConfiguration_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iCognitoGroupConfiguration, Members: &mCognitoGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfiguration_groupConfiguration})
+var sCognitoUserPoolConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoUserPoolConfigurationDetail, Members: &mCognitoUserPoolConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfigurationDetail})
+var sCognitoUserPoolConfigurationDetail_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfigurationDetail_userPoolArn})
+var sCognitoUserPoolConfigurationDetail_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eCognitoUserPoolConfigurationDetail_clientIds})
+var sCognitoUserPoolConfigurationDetail_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfigurationDetail_issuer})
+var sCognitoUserPoolConfigurationDetail_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iCognitoGroupConfigurationDetail, Members: &mCognitoGroupConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfigurationDetail_groupConfiguration})
+var sCognitoUserPoolConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoUserPoolConfigurationItem, Members: &mCognitoUserPoolConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfigurationItem})
+var sCognitoUserPoolConfigurationItem_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfigurationItem_userPoolArn})
+var sCognitoUserPoolConfigurationItem_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eCognitoUserPoolConfigurationItem_clientIds})
+var sCognitoUserPoolConfigurationItem_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eCognitoUserPoolConfigurationItem_issuer})
+var sCognitoUserPoolConfigurationItem_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iCognitoGroupConfigurationItem, Members: &mCognitoGroupConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eCognitoUserPoolConfigurationItem_groupConfiguration})
+var sConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eConfiguration})
+var sConfiguration_cognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cognitoUserPoolConfiguration", ID: &iCognitoUserPoolConfiguration, Members: &mCognitoUserPoolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration_cognitoUserPoolConfiguration})
+var sConfiguration_openIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdConnectConfiguration", ID: &iOpenIdConnectConfiguration, Members: &mOpenIdConnectConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration_openIdConnectConfiguration})
+var sConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationDetail, Members: &mConfigurationDetail, Type: smithy.ShapeTypeUnion, Ext: &eConfigurationDetail})
+var sConfigurationDetail_cognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cognitoUserPoolConfiguration", ID: &iCognitoUserPoolConfigurationDetail, Members: &mCognitoUserPoolConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationDetail_cognitoUserPoolConfiguration})
+var sConfigurationDetail_openIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdConnectConfiguration", ID: &iOpenIdConnectConfigurationDetail, Members: &mOpenIdConnectConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationDetail_openIdConnectConfiguration})
+var sConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationItem, Members: &mConfigurationItem, Type: smithy.ShapeTypeUnion, Ext: &eConfigurationItem})
+var sConfigurationItem_cognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cognitoUserPoolConfiguration", ID: &iCognitoUserPoolConfigurationItem, Members: &mCognitoUserPoolConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationItem_cognitoUserPoolConfiguration})
+var sConfigurationItem_openIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdConnectConfiguration", ID: &iOpenIdConnectConfigurationItem, Members: &mOpenIdConnectConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationItem_openIdConnectConfiguration})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceConflictList, Members: &m_ResourceConflictList, Type: smithy.ShapeTypeList, Ext: &eConflictException_resources})
+var sContextDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContextDefinition, Members: &mContextDefinition, Type: smithy.ShapeTypeUnion, Ext: &eContextDefinition})
+var sContextDefinition_contextMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextMap", ID: &i_ContextMap, Members: &m_ContextMap, Traits: &t2, Type: smithy.ShapeTypeMap, Ext: &eContextDefinition_contextMap})
+var sContextDefinition_cedarJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cedarJson", ID: &i_CedarJson, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContextDefinition_cedarJson})
+var s_ContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextMap, Members: &m_ContextMap, Traits: &t1, Type: smithy.ShapeTypeMap, Ext: &e_ContextMap})
+var s_ContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ContextMap_key})
+var s_ContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_ContextMap_value})
+var s_DatetimeAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatetimeAttribute, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_DatetimeAttribute})
+var s_Decimal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Decimal, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Decimal})
+var sDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeEnum, Ext: &eDecision})
+var sDecision_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDecision_ALLOW})
+var sDecision_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDecision_DENY})
+var sDeletionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionMode, Members: &mDeletionMode, Type: smithy.ShapeTypeEnum, Ext: &eDeletionMode})
+var sDeletionMode_SOFT_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFT_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionMode_SOFT_DELETE})
+var sDeletionMode_HARD_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARD_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionMode_HARD_DELETE})
+var sDeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum, Ext: &eDeletionProtection})
+var sDeletionProtection_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtection_ENABLED})
+var sDeletionProtection_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionProtection_DISABLED})
+var sDeterminingPolicyItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeterminingPolicyItem, Members: &mDeterminingPolicyItem, Type: smithy.ShapeTypeStructure, Ext: &eDeterminingPolicyItem})
+var sDeterminingPolicyItem_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eDeterminingPolicyItem_policyId})
+var s_DeterminingPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeterminingPolicyList, Members: &m_DeterminingPolicyList, Type: smithy.ShapeTypeList, Ext: &e_DeterminingPolicyList})
+var s_DeterminingPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeterminingPolicyItem, Members: &mDeterminingPolicyItem, Type: smithy.ShapeTypeStructure, Ext: &e_DeterminingPolicyList_member})
+var s_DiscoveryUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoveryUrl, Type: smithy.ShapeTypeString, Ext: &e_DiscoveryUrl})
+var s_Duration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Duration, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Duration})
+var s_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContext, Members: &m_EncryptionContext, Type: smithy.ShapeTypeMap, Ext: &e_EncryptionContext})
+var s_EncryptionContext_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContext_key})
+var s_EncryptionContext_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContext_value})
+var s_EncryptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextKey})
+var s_EncryptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextValue})
+var sEncryptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionSettings, Members: &mEncryptionSettings, Type: smithy.ShapeTypeUnion, Ext: &eEncryptionSettings})
+var sEncryptionSettings_kmsEncryptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionSettings", ID: &iKmsEncryptionSettings, Members: &mKmsEncryptionSettings, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionSettings_kmsEncryptionSettings})
+var sEncryptionSettings_default = smithy.NewStaticSchema(smithy.StaticSchema{Member: "default", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionSettings_default})
+var sEncryptionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionState, Members: &mEncryptionState, Type: smithy.ShapeTypeUnion, Ext: &eEncryptionState})
+var sEncryptionState_kmsEncryptionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionState", ID: &iKmsEncryptionState, Members: &mKmsEncryptionState, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionState_kmsEncryptionState})
+var sEncryptionState_default = smithy.NewStaticSchema(smithy.StaticSchema{Member: "default", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionState_default})
+var sEntitiesDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitiesDefinition, Members: &mEntitiesDefinition, Type: smithy.ShapeTypeUnion, Ext: &eEntitiesDefinition})
+var sEntitiesDefinition_entityList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityList", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &eEntitiesDefinition_entityList})
+var sEntitiesDefinition_cedarJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cedarJson", ID: &i_CedarJson, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eEntitiesDefinition_cedarJson})
+var s_EntityAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAttributes, Members: &m_EntityAttributes, Type: smithy.ShapeTypeMap, Ext: &e_EntityAttributes})
+var s_EntityAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributes_key})
+var s_EntityAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_EntityAttributes_value})
+var s_EntityCedarTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityCedarTags, Members: &m_EntityCedarTags, Type: smithy.ShapeTypeMap, Ext: &e_EntityCedarTags})
+var s_EntityCedarTags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityCedarTags_key})
+var s_EntityCedarTags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCedarTagValue, Members: &mCedarTagValue, Type: smithy.ShapeTypeUnion, Ext: &e_EntityCedarTags_value})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_EntityId})
+var sEntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eEntityIdentifier})
+var sEntityIdentifier_entityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityType", ID: &i_EntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eEntityIdentifier_entityType})
+var sEntityIdentifier_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eEntityIdentifier_entityId})
+var s_EntityIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdPrefix, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_EntityIdPrefix})
+var sEntityItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityItem, Members: &mEntityItem, Type: smithy.ShapeTypeStructure, Ext: &eEntityItem})
+var sEntityItem_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eEntityItem_identifier})
+var sEntityItem_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_EntityAttributes, Members: &m_EntityAttributes, Type: smithy.ShapeTypeMap, Ext: &eEntityItem_attributes})
+var sEntityItem_parents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parents", ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &eEntityItem_parents})
+var sEntityItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_EntityCedarTags, Members: &m_EntityCedarTags, Type: smithy.ShapeTypeMap, Ext: &eEntityItem_tags})
+var s_EntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &e_EntityList})
+var s_EntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityItem, Members: &mEntityItem, Type: smithy.ShapeTypeStructure, Ext: &e_EntityList_member})
+var sEntityReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityReference, Members: &mEntityReference, Type: smithy.ShapeTypeUnion, Ext: &eEntityReference})
+var sEntityReference_unspecified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unspecified", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eEntityReference_unspecified})
+var sEntityReference_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eEntityReference_identifier})
+var s_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_EntityType})
+var sEvaluationErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationErrorItem, Members: &mEvaluationErrorItem, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEvaluationErrorItem})
+var sEvaluationErrorItem_errorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEvaluationErrorItem_errorDescription})
+var s_EvaluationErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationErrorList, Members: &m_EvaluationErrorList, Type: smithy.ShapeTypeList, Ext: &e_EvaluationErrorList})
+var s_EvaluationErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluationErrorItem, Members: &mEvaluationErrorItem, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &e_EvaluationErrorList_member})
+var s_GroupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupEntityType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_GroupEntityType})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sIdentitySourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceDetails, Members: &mIdentitySourceDetails, Type: smithy.ShapeTypeStructure, Ext: &eIdentitySourceDetails})
+var sIdentitySourceDetails_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eIdentitySourceDetails_clientIds})
+var sIdentitySourceDetails_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceDetails_userPoolArn})
+var sIdentitySourceDetails_discoveryUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discoveryUrl", ID: &i_DiscoveryUrl, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceDetails_discoveryUrl})
+var sIdentitySourceDetails_openIdIssuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdIssuer", ID: &iOpenIdIssuer, Members: &mOpenIdIssuer, Type: smithy.ShapeTypeEnum, Ext: &eIdentitySourceDetails_openIdIssuer})
+var sIdentitySourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceFilter, Members: &mIdentitySourceFilter, Type: smithy.ShapeTypeStructure, Ext: &eIdentitySourceFilter})
+var sIdentitySourceFilter_principalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalEntityType", ID: &i_PrincipalEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceFilter_principalEntityType})
+var s_IdentitySourceFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentitySourceFilters, Members: &m_IdentitySourceFilters, Type: smithy.ShapeTypeList, Ext: &e_IdentitySourceFilters})
+var s_IdentitySourceFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentitySourceFilter, Members: &mIdentitySourceFilter, Type: smithy.ShapeTypeStructure, Ext: &e_IdentitySourceFilters_member})
+var s_IdentitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &e_IdentitySourceId})
+var sIdentitySourceItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceItem, Members: &mIdentitySourceItem, Type: smithy.ShapeTypeStructure, Ext: &eIdentitySourceItem})
+var sIdentitySourceItem_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eIdentitySourceItem_createdDate})
+var sIdentitySourceItem_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &iIdentitySourceItemDetails, Members: &mIdentitySourceItemDetails, Type: smithy.ShapeTypeStructure, Ext: &eIdentitySourceItem_details})
+var sIdentitySourceItem_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceItem_identitySourceId})
+var sIdentitySourceItem_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eIdentitySourceItem_lastUpdatedDate})
+var sIdentitySourceItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceItem_policyStoreId})
+var sIdentitySourceItem_principalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalEntityType", ID: &i_PrincipalEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceItem_principalEntityType})
+var sIdentitySourceItem_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iConfigurationItem, Members: &mConfigurationItem, Type: smithy.ShapeTypeUnion, Ext: &eIdentitySourceItem_configuration})
+var sIdentitySourceItemDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceItemDetails, Members: &mIdentitySourceItemDetails, Type: smithy.ShapeTypeStructure, Ext: &eIdentitySourceItemDetails})
+var sIdentitySourceItemDetails_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eIdentitySourceItemDetails_clientIds})
+var sIdentitySourceItemDetails_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceItemDetails_userPoolArn})
+var sIdentitySourceItemDetails_discoveryUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discoveryUrl", ID: &i_DiscoveryUrl, Type: smithy.ShapeTypeString, Ext: &eIdentitySourceItemDetails_discoveryUrl})
+var sIdentitySourceItemDetails_openIdIssuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdIssuer", ID: &iOpenIdIssuer, Members: &mOpenIdIssuer, Type: smithy.ShapeTypeEnum, Ext: &eIdentitySourceItemDetails_openIdIssuer})
+var s_IdentitySources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentitySources, Members: &m_IdentitySources, Type: smithy.ShapeTypeList, Ext: &e_IdentitySources})
+var s_IdentitySources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentitySourceItem, Members: &mIdentitySourceItem, Type: smithy.ShapeTypeStructure, Ext: &e_IdentitySources_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateException})
+var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidStateException_message})
+var s_IpAddr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddr, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_IpAddr})
+var s_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &e_Issuer})
+var sKmsEncryptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsEncryptionSettings, Members: &mKmsEncryptionSettings, Type: smithy.ShapeTypeStructure, Ext: &eKmsEncryptionSettings})
+var sKmsEncryptionSettings_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eKmsEncryptionSettings_key})
+var sKmsEncryptionSettings_encryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionContext", ID: &i_EncryptionContext, Members: &m_EncryptionContext, Type: smithy.ShapeTypeMap, Ext: &eKmsEncryptionSettings_encryptionContext})
+var sKmsEncryptionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsEncryptionState, Members: &mKmsEncryptionState, Type: smithy.ShapeTypeStructure, Ext: &eKmsEncryptionState})
+var sKmsEncryptionState_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eKmsEncryptionState_key})
+var sKmsEncryptionState_encryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionContext", ID: &i_EncryptionContext, Members: &m_EncryptionContext, Type: smithy.ShapeTypeMap, Ext: &eKmsEncryptionState_encryptionContext})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &e_KmsKey})
+var s_ListIdentitySourcesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIdentitySourcesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListIdentitySourcesMaxResults})
+var s_LongAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongAttribute, Traits: &t1, Type: smithy.ShapeTypeLong, Ext: &e_LongAttribute})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Namespace})
+var s_NamespaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &e_NamespaceList})
+var s_NamespaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Namespace, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_NamespaceList_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOpenIdConnectAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectAccessTokenConfiguration, Members: &mOpenIdConnectAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectAccessTokenConfiguration})
+var sOpenIdConnectAccessTokenConfiguration_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectAccessTokenConfiguration_principalIdClaim})
+var sOpenIdConnectAccessTokenConfiguration_audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectAccessTokenConfiguration_audiences})
+var sOpenIdConnectAccessTokenConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectAccessTokenConfigurationDetail, Members: &mOpenIdConnectAccessTokenConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectAccessTokenConfigurationDetail})
+var sOpenIdConnectAccessTokenConfigurationDetail_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectAccessTokenConfigurationDetail_principalIdClaim})
+var sOpenIdConnectAccessTokenConfigurationDetail_audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectAccessTokenConfigurationDetail_audiences})
+var sOpenIdConnectAccessTokenConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectAccessTokenConfigurationItem, Members: &mOpenIdConnectAccessTokenConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectAccessTokenConfigurationItem})
+var sOpenIdConnectAccessTokenConfigurationItem_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectAccessTokenConfigurationItem_principalIdClaim})
+var sOpenIdConnectAccessTokenConfigurationItem_audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectAccessTokenConfigurationItem_audiences})
+var sOpenIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectConfiguration, Members: &mOpenIdConnectConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfiguration})
+var sOpenIdConnectConfiguration_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfiguration_issuer})
+var sOpenIdConnectConfiguration_entityIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdPrefix", ID: &i_EntityIdPrefix, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfiguration_entityIdPrefix})
+var sOpenIdConnectConfiguration_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iOpenIdConnectGroupConfiguration, Members: &mOpenIdConnectGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfiguration_groupConfiguration})
+var sOpenIdConnectConfiguration_tokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenSelection", ID: &iOpenIdConnectTokenSelection, Members: &mOpenIdConnectTokenSelection, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectConfiguration_tokenSelection})
+var sOpenIdConnectConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectConfigurationDetail, Members: &mOpenIdConnectConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfigurationDetail})
+var sOpenIdConnectConfigurationDetail_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfigurationDetail_issuer})
+var sOpenIdConnectConfigurationDetail_entityIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdPrefix", ID: &i_EntityIdPrefix, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfigurationDetail_entityIdPrefix})
+var sOpenIdConnectConfigurationDetail_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iOpenIdConnectGroupConfigurationDetail, Members: &mOpenIdConnectGroupConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfigurationDetail_groupConfiguration})
+var sOpenIdConnectConfigurationDetail_tokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenSelection", ID: &iOpenIdConnectTokenSelectionDetail, Members: &mOpenIdConnectTokenSelectionDetail, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectConfigurationDetail_tokenSelection})
+var sOpenIdConnectConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectConfigurationItem, Members: &mOpenIdConnectConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfigurationItem})
+var sOpenIdConnectConfigurationItem_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfigurationItem_issuer})
+var sOpenIdConnectConfigurationItem_entityIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdPrefix", ID: &i_EntityIdPrefix, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectConfigurationItem_entityIdPrefix})
+var sOpenIdConnectConfigurationItem_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iOpenIdConnectGroupConfigurationItem, Members: &mOpenIdConnectGroupConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectConfigurationItem_groupConfiguration})
+var sOpenIdConnectConfigurationItem_tokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenSelection", ID: &iOpenIdConnectTokenSelectionItem, Members: &mOpenIdConnectTokenSelectionItem, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectConfigurationItem_tokenSelection})
+var sOpenIdConnectGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectGroupConfiguration, Members: &mOpenIdConnectGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectGroupConfiguration})
+var sOpenIdConnectGroupConfiguration_groupClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfiguration_groupClaim})
+var sOpenIdConnectGroupConfiguration_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfiguration_groupEntityType})
+var sOpenIdConnectGroupConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectGroupConfigurationDetail, Members: &mOpenIdConnectGroupConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectGroupConfigurationDetail})
+var sOpenIdConnectGroupConfigurationDetail_groupClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfigurationDetail_groupClaim})
+var sOpenIdConnectGroupConfigurationDetail_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfigurationDetail_groupEntityType})
+var sOpenIdConnectGroupConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectGroupConfigurationItem, Members: &mOpenIdConnectGroupConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectGroupConfigurationItem})
+var sOpenIdConnectGroupConfigurationItem_groupClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfigurationItem_groupClaim})
+var sOpenIdConnectGroupConfigurationItem_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectGroupConfigurationItem_groupEntityType})
+var sOpenIdConnectIdentityTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectIdentityTokenConfiguration, Members: &mOpenIdConnectIdentityTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectIdentityTokenConfiguration})
+var sOpenIdConnectIdentityTokenConfiguration_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectIdentityTokenConfiguration_principalIdClaim})
+var sOpenIdConnectIdentityTokenConfiguration_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectIdentityTokenConfiguration_clientIds})
+var sOpenIdConnectIdentityTokenConfigurationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectIdentityTokenConfigurationDetail, Members: &mOpenIdConnectIdentityTokenConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectIdentityTokenConfigurationDetail})
+var sOpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim})
+var sOpenIdConnectIdentityTokenConfigurationDetail_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectIdentityTokenConfigurationDetail_clientIds})
+var sOpenIdConnectIdentityTokenConfigurationItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectIdentityTokenConfigurationItem, Members: &mOpenIdConnectIdentityTokenConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectIdentityTokenConfigurationItem})
+var sOpenIdConnectIdentityTokenConfigurationItem_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eOpenIdConnectIdentityTokenConfigurationItem_principalIdClaim})
+var sOpenIdConnectIdentityTokenConfigurationItem_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eOpenIdConnectIdentityTokenConfigurationItem_clientIds})
+var sOpenIdConnectTokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectTokenSelection, Members: &mOpenIdConnectTokenSelection, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectTokenSelection})
+var sOpenIdConnectTokenSelection_accessTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenOnly", ID: &iOpenIdConnectAccessTokenConfiguration, Members: &mOpenIdConnectAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelection_accessTokenOnly})
+var sOpenIdConnectTokenSelection_identityTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityTokenOnly", ID: &iOpenIdConnectIdentityTokenConfiguration, Members: &mOpenIdConnectIdentityTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelection_identityTokenOnly})
+var sOpenIdConnectTokenSelectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectTokenSelectionDetail, Members: &mOpenIdConnectTokenSelectionDetail, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectTokenSelectionDetail})
+var sOpenIdConnectTokenSelectionDetail_accessTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenOnly", ID: &iOpenIdConnectAccessTokenConfigurationDetail, Members: &mOpenIdConnectAccessTokenConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelectionDetail_accessTokenOnly})
+var sOpenIdConnectTokenSelectionDetail_identityTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityTokenOnly", ID: &iOpenIdConnectIdentityTokenConfigurationDetail, Members: &mOpenIdConnectIdentityTokenConfigurationDetail, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelectionDetail_identityTokenOnly})
+var sOpenIdConnectTokenSelectionItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConnectTokenSelectionItem, Members: &mOpenIdConnectTokenSelectionItem, Type: smithy.ShapeTypeUnion, Ext: &eOpenIdConnectTokenSelectionItem})
+var sOpenIdConnectTokenSelectionItem_accessTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenOnly", ID: &iOpenIdConnectAccessTokenConfigurationItem, Members: &mOpenIdConnectAccessTokenConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelectionItem_accessTokenOnly})
+var sOpenIdConnectTokenSelectionItem_identityTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityTokenOnly", ID: &iOpenIdConnectIdentityTokenConfigurationItem, Members: &mOpenIdConnectIdentityTokenConfigurationItem, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConnectTokenSelectionItem_identityTokenOnly})
+var sOpenIdIssuer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdIssuer, Members: &mOpenIdIssuer, Type: smithy.ShapeTypeEnum, Ext: &eOpenIdIssuer})
+var sOpenIdIssuer_COGNITO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COGNITO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdIssuer_COGNITO})
+var s_ParentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &e_ParentList})
+var s_ParentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_ParentList_member})
+var sPolicyDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDefinition, Members: &mPolicyDefinition, Type: smithy.ShapeTypeUnion, Ext: &ePolicyDefinition})
+var sPolicyDefinition_static = smithy.NewStaticSchema(smithy.StaticSchema{Member: "static", ID: &iStaticPolicyDefinition, Members: &mStaticPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinition_static})
+var sPolicyDefinition_templateLinked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLinked", ID: &iTemplateLinkedPolicyDefinition, Members: &mTemplateLinkedPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinition_templateLinked})
+var sPolicyDefinitionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDefinitionDetail, Members: &mPolicyDefinitionDetail, Type: smithy.ShapeTypeUnion, Ext: &ePolicyDefinitionDetail})
+var sPolicyDefinitionDetail_static = smithy.NewStaticSchema(smithy.StaticSchema{Member: "static", ID: &iStaticPolicyDefinitionDetail, Members: &mStaticPolicyDefinitionDetail, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinitionDetail_static})
+var sPolicyDefinitionDetail_templateLinked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLinked", ID: &iTemplateLinkedPolicyDefinitionDetail, Members: &mTemplateLinkedPolicyDefinitionDetail, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinitionDetail_templateLinked})
+var sPolicyDefinitionItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDefinitionItem, Members: &mPolicyDefinitionItem, Type: smithy.ShapeTypeUnion, Ext: &ePolicyDefinitionItem})
+var sPolicyDefinitionItem_static = smithy.NewStaticSchema(smithy.StaticSchema{Member: "static", ID: &iStaticPolicyDefinitionItem, Members: &mStaticPolicyDefinitionItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinitionItem_static})
+var sPolicyDefinitionItem_templateLinked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLinked", ID: &iTemplateLinkedPolicyDefinitionItem, Members: &mTemplateLinkedPolicyDefinitionItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDefinitionItem_templateLinked})
+var sPolicyEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyEffect, Members: &mPolicyEffect, Type: smithy.ShapeTypeEnum, Ext: &ePolicyEffect})
+var sPolicyEffect_PERMIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyEffect_PERMIT})
+var sPolicyEffect_FORBID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORBID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyEffect_FORBID})
+var sPolicyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyFilter, Members: &mPolicyFilter, Type: smithy.ShapeTypeStructure, Ext: &ePolicyFilter})
+var sPolicyFilter_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityReference, Members: &mEntityReference, Type: smithy.ShapeTypeUnion, Ext: &ePolicyFilter_principal})
+var sPolicyFilter_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityReference, Members: &mEntityReference, Type: smithy.ShapeTypeUnion, Ext: &ePolicyFilter_resource})
+var sPolicyFilter_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &ePolicyFilter_policyType})
+var sPolicyFilter_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &ePolicyFilter_policyTemplateId})
+var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &e_PolicyId})
+var sPolicyItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyItem, Members: &mPolicyItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyItem})
+var sPolicyItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePolicyItem_policyStoreId})
+var sPolicyItem_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ePolicyItem_policyId})
+var sPolicyItem_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &ePolicyItem_policyType})
+var sPolicyItem_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ePolicyItem_principal})
+var sPolicyItem_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ePolicyItem_resource})
+var sPolicyItem_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionIdentifierList, Members: &m_ActionIdentifierList, Type: smithy.ShapeTypeList, Ext: &ePolicyItem_actions})
+var sPolicyItem_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPolicyDefinitionItem, Members: &mPolicyDefinitionItem, Type: smithy.ShapeTypeUnion, Ext: &ePolicyItem_definition})
+var sPolicyItem_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyItem_createdDate})
+var sPolicyItem_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyItem_lastUpdatedDate})
+var sPolicyItem_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iPolicyEffect, Members: &mPolicyEffect, Type: smithy.ShapeTypeEnum, Ext: &ePolicyItem_effect})
+var sPolicyItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &ePolicyItem_name})
+var s_PolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyList, Members: &m_PolicyList, Type: smithy.ShapeTypeList, Ext: &e_PolicyList})
+var s_PolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyItem, Members: &mPolicyItem, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyList_member})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &e_PolicyName})
+var s_PolicyStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatement, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PolicyStatement})
+var sPolicyStoreAliasFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStoreAliasFilter, Members: &mPolicyStoreAliasFilter, Type: smithy.ShapeTypeStructure, Ext: &ePolicyStoreAliasFilter})
+var sPolicyStoreAliasFilter_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreAliasFilter_policyStoreId})
+var sPolicyStoreAliasItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStoreAliasItem, Members: &mPolicyStoreAliasItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyStoreAliasItem})
+var sPolicyStoreAliasItem_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreAliasItem_aliasName})
+var sPolicyStoreAliasItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreAliasItem_policyStoreId})
+var sPolicyStoreAliasItem_aliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreAliasItem_aliasArn})
+var sPolicyStoreAliasItem_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyStoreAliasItem_createdAt})
+var sPolicyStoreAliasItem_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iAliasState, Members: &mAliasState, Type: smithy.ShapeTypeEnum, Ext: &ePolicyStoreAliasItem_state})
+var s_PolicyStoreAliasList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStoreAliasList, Members: &m_PolicyStoreAliasList, Type: smithy.ShapeTypeList, Ext: &e_PolicyStoreAliasList})
+var s_PolicyStoreAliasList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyStoreAliasItem, Members: &mPolicyStoreAliasItem, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyStoreAliasList_member})
+var s_PolicyStoreDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStoreDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PolicyStoreDescription})
+var s_PolicyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &e_PolicyStoreId})
+var sPolicyStoreItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStoreItem, Members: &mPolicyStoreItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyStoreItem})
+var sPolicyStoreItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreItem_policyStoreId})
+var sPolicyStoreItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreItem_arn})
+var sPolicyStoreItem_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyStoreItem_createdDate})
+var sPolicyStoreItem_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyStoreItem_lastUpdatedDate})
+var sPolicyStoreItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyStoreDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ePolicyStoreItem_description})
+var s_PolicyStoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStoreList, Members: &m_PolicyStoreList, Type: smithy.ShapeTypeList, Ext: &e_PolicyStoreList})
+var s_PolicyStoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyStoreItem, Members: &mPolicyStoreItem, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyStoreList_member})
+var s_PolicyTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTemplateDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PolicyTemplateDescription})
+var s_PolicyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &e_PolicyTemplateId})
+var sPolicyTemplateItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTemplateItem, Members: &mPolicyTemplateItem, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTemplateItem})
+var sPolicyTemplateItem_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePolicyTemplateItem_policyStoreId})
+var sPolicyTemplateItem_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &ePolicyTemplateItem_policyTemplateId})
+var sPolicyTemplateItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyTemplateDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ePolicyTemplateItem_description})
+var sPolicyTemplateItem_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyTemplateItem_createdDate})
+var sPolicyTemplateItem_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePolicyTemplateItem_lastUpdatedDate})
+var sPolicyTemplateItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyTemplateName, Type: smithy.ShapeTypeString, Ext: &ePolicyTemplateItem_name})
+var s_PolicyTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTemplateName, Type: smithy.ShapeTypeString, Ext: &e_PolicyTemplateName})
+var s_PolicyTemplatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyTemplatesList, Members: &m_PolicyTemplatesList, Type: smithy.ShapeTypeList, Ext: &e_PolicyTemplatesList})
+var s_PolicyTemplatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyTemplateItem, Members: &mPolicyTemplateItem, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyTemplatesList_member})
+var sPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &ePolicyType})
+var sPolicyType_STATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_STATIC})
+var sPolicyType_TEMPLATE_LINKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPLATE_LINKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyType_TEMPLATE_LINKED})
+var s_PrincipalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalEntityType, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_PrincipalEntityType})
+var s_RecordAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordAttribute, Members: &m_RecordAttribute, Type: smithy.ShapeTypeMap, Ext: &e_RecordAttribute})
+var s_RecordAttribute_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_RecordAttribute_key})
+var s_RecordAttribute_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_RecordAttribute_value})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflict, Members: &mResourceConflict, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflict})
+var sResourceConflict_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceConflict_resourceId})
+var sResourceConflict_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceConflict_resourceType})
+var s_ResourceConflictList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceConflictList, Members: &m_ResourceConflictList, Type: smithy.ShapeTypeList, Ext: &e_ResourceConflictList})
+var s_ResourceConflictList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceConflict, Members: &mResourceConflict, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceConflictList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_resourceType})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sResourceType_IDENTITY_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_IDENTITY_SOURCE})
+var sResourceType_POLICY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_POLICY_STORE})
+var sResourceType_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_POLICY})
+var sResourceType_POLICY_TEMPLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_TEMPLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_POLICY_TEMPLATE})
+var sResourceType_SCHEMA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEMA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_SCHEMA})
+var sResourceType_POLICY_STORE_ALIAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_STORE_ALIAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_POLICY_STORE_ALIAS})
+var sSchemaDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaDefinition, Members: &mSchemaDefinition, Type: smithy.ShapeTypeUnion, Ext: &eSchemaDefinition})
+var sSchemaDefinition_cedarJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cedarJson", ID: &i_SchemaJson, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eSchemaDefinition_cedarJson})
+var s_SchemaJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaJson, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SchemaJson})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SetAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetAttribute, Members: &m_SetAttribute, Type: smithy.ShapeTypeList, Ext: &e_SetAttribute})
+var s_SetAttribute_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_SetAttribute_member})
+var sStaticPolicyDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaticPolicyDefinition, Members: &mStaticPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &eStaticPolicyDefinition})
+var sStaticPolicyDefinition_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StaticPolicyDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eStaticPolicyDefinition_description})
+var sStaticPolicyDefinition_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eStaticPolicyDefinition_statement})
+var sStaticPolicyDefinitionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaticPolicyDefinitionDetail, Members: &mStaticPolicyDefinitionDetail, Type: smithy.ShapeTypeStructure, Ext: &eStaticPolicyDefinitionDetail})
+var sStaticPolicyDefinitionDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StaticPolicyDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eStaticPolicyDefinitionDetail_description})
+var sStaticPolicyDefinitionDetail_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eStaticPolicyDefinitionDetail_statement})
+var sStaticPolicyDefinitionItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaticPolicyDefinitionItem, Members: &mStaticPolicyDefinitionItem, Type: smithy.ShapeTypeStructure, Ext: &eStaticPolicyDefinitionItem})
+var sStaticPolicyDefinitionItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StaticPolicyDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eStaticPolicyDefinitionItem_description})
+var s_StaticPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StaticPolicyDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_StaticPolicyDescription})
+var s_StringAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttribute, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_StringAttribute})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTemplateLinkedPolicyDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateLinkedPolicyDefinition, Members: &mTemplateLinkedPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinition})
+var sTemplateLinkedPolicyDefinition_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eTemplateLinkedPolicyDefinition_policyTemplateId})
+var sTemplateLinkedPolicyDefinition_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinition_principal})
+var sTemplateLinkedPolicyDefinition_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinition_resource})
+var sTemplateLinkedPolicyDefinitionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateLinkedPolicyDefinitionDetail, Members: &mTemplateLinkedPolicyDefinitionDetail, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionDetail})
+var sTemplateLinkedPolicyDefinitionDetail_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eTemplateLinkedPolicyDefinitionDetail_policyTemplateId})
+var sTemplateLinkedPolicyDefinitionDetail_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionDetail_principal})
+var sTemplateLinkedPolicyDefinitionDetail_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionDetail_resource})
+var sTemplateLinkedPolicyDefinitionItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateLinkedPolicyDefinitionItem, Members: &mTemplateLinkedPolicyDefinitionItem, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionItem})
+var sTemplateLinkedPolicyDefinitionItem_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eTemplateLinkedPolicyDefinitionItem_policyTemplateId})
+var sTemplateLinkedPolicyDefinitionItem_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionItem_principal})
+var sTemplateLinkedPolicyDefinitionItem_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTemplateLinkedPolicyDefinitionItem_resource})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var s_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampFormat, Traits: &t10, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimestampFormat})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sTooManyTagsException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_resourceName})
+var sUpdateCognitoGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCognitoGroupConfiguration, Members: &mUpdateCognitoGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCognitoGroupConfiguration})
+var sUpdateCognitoGroupConfiguration_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateCognitoGroupConfiguration_groupEntityType})
+var sUpdateCognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCognitoUserPoolConfiguration, Members: &mUpdateCognitoUserPoolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCognitoUserPoolConfiguration})
+var sUpdateCognitoUserPoolConfiguration_userPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userPoolArn", ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCognitoUserPoolConfiguration_userPoolArn})
+var sUpdateCognitoUserPoolConfiguration_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eUpdateCognitoUserPoolConfiguration_clientIds})
+var sUpdateCognitoUserPoolConfiguration_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iUpdateCognitoGroupConfiguration, Members: &mUpdateCognitoGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCognitoUserPoolConfiguration_groupConfiguration})
+var sUpdateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguration, Members: &mUpdateConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateConfiguration})
+var sUpdateConfiguration_cognitoUserPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cognitoUserPoolConfiguration", ID: &iUpdateCognitoUserPoolConfiguration, Members: &mUpdateCognitoUserPoolConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfiguration_cognitoUserPoolConfiguration})
+var sUpdateConfiguration_openIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openIdConnectConfiguration", ID: &iUpdateOpenIdConnectConfiguration, Members: &mUpdateOpenIdConnectConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfiguration_openIdConnectConfiguration})
+var sUpdateOpenIdConnectAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenIdConnectAccessTokenConfiguration, Members: &mUpdateOpenIdConnectAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectAccessTokenConfiguration})
+var sUpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim})
+var sUpdateOpenIdConnectAccessTokenConfiguration_audiences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audiences", ID: &i_Audiences, Members: &m_Audiences, Type: smithy.ShapeTypeList, Ext: &eUpdateOpenIdConnectAccessTokenConfiguration_audiences})
+var sUpdateOpenIdConnectConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenIdConnectConfiguration, Members: &mUpdateOpenIdConnectConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectConfiguration})
+var sUpdateOpenIdConnectConfiguration_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_Issuer, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectConfiguration_issuer})
+var sUpdateOpenIdConnectConfiguration_entityIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityIdPrefix", ID: &i_EntityIdPrefix, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectConfiguration_entityIdPrefix})
+var sUpdateOpenIdConnectConfiguration_groupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupConfiguration", ID: &iUpdateOpenIdConnectGroupConfiguration, Members: &mUpdateOpenIdConnectGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectConfiguration_groupConfiguration})
+var sUpdateOpenIdConnectConfiguration_tokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenSelection", ID: &iUpdateOpenIdConnectTokenSelection, Members: &mUpdateOpenIdConnectTokenSelection, Type: smithy.ShapeTypeUnion, Ext: &eUpdateOpenIdConnectConfiguration_tokenSelection})
+var sUpdateOpenIdConnectGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenIdConnectGroupConfiguration, Members: &mUpdateOpenIdConnectGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectGroupConfiguration})
+var sUpdateOpenIdConnectGroupConfiguration_groupClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectGroupConfiguration_groupClaim})
+var sUpdateOpenIdConnectGroupConfiguration_groupEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupEntityType", ID: &i_GroupEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectGroupConfiguration_groupEntityType})
+var sUpdateOpenIdConnectIdentityTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenIdConnectIdentityTokenConfiguration, Members: &mUpdateOpenIdConnectIdentityTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectIdentityTokenConfiguration})
+var sUpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalIdClaim", ID: &i_Claim, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim})
+var sUpdateOpenIdConnectIdentityTokenConfiguration_clientIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIds", ID: &i_ClientIds, Members: &m_ClientIds, Type: smithy.ShapeTypeList, Ext: &eUpdateOpenIdConnectIdentityTokenConfiguration_clientIds})
+var sUpdateOpenIdConnectTokenSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenIdConnectTokenSelection, Members: &mUpdateOpenIdConnectTokenSelection, Type: smithy.ShapeTypeUnion, Ext: &eUpdateOpenIdConnectTokenSelection})
+var sUpdateOpenIdConnectTokenSelection_accessTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenOnly", ID: &iUpdateOpenIdConnectAccessTokenConfiguration, Members: &mUpdateOpenIdConnectAccessTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectTokenSelection_accessTokenOnly})
+var sUpdateOpenIdConnectTokenSelection_identityTokenOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityTokenOnly", ID: &iUpdateOpenIdConnectIdentityTokenConfiguration, Members: &mUpdateOpenIdConnectIdentityTokenConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOpenIdConnectTokenSelection_identityTokenOnly})
+var sUpdatePolicyDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyDefinition, Members: &mUpdatePolicyDefinition, Type: smithy.ShapeTypeUnion, Ext: &eUpdatePolicyDefinition})
+var sUpdatePolicyDefinition_static = smithy.NewStaticSchema(smithy.StaticSchema{Member: "static", ID: &iUpdateStaticPolicyDefinition, Members: &mUpdateStaticPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyDefinition_static})
+var sUpdateStaticPolicyDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStaticPolicyDefinition, Members: &mUpdateStaticPolicyDefinition, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStaticPolicyDefinition})
+var sUpdateStaticPolicyDefinition_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StaticPolicyDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateStaticPolicyDefinition_description})
+var sUpdateStaticPolicyDefinition_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateStaticPolicyDefinition_statement})
+var s_UserPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPoolArn, Type: smithy.ShapeTypeString, Ext: &e_UserPoolArn})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_path})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMode, Members: &mValidationMode, Type: smithy.ShapeTypeEnum, Ext: &eValidationMode})
+var sValidationMode_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationMode_OFF})
+var sValidationMode_STRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationMode_STRICT})
+var sValidationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationSettings, Members: &mValidationSettings, Type: smithy.ShapeTypeStructure, Ext: &eValidationSettings})
+var sValidationSettings_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iValidationMode, Members: &mValidationMode, Type: smithy.ShapeTypeEnum, Ext: &eValidationSettings_mode})
+var sBatchGetPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyInput, Members: &mBatchGetPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyInput})
+var sBatchGetPolicyInput_requests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requests", ID: &i_BatchGetPolicyInputList, Members: &m_BatchGetPolicyInputList, Type: smithy.ShapeTypeList, Ext: &eBatchGetPolicyInput_requests})
+var sBatchGetPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPolicyOutput, Members: &mBatchGetPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetPolicyOutput})
+var sBatchGetPolicyOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_BatchGetPolicyOutputList, Members: &m_BatchGetPolicyOutputList, Type: smithy.ShapeTypeList, Ext: &eBatchGetPolicyOutput_results})
+var sBatchGetPolicyOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetPolicyErrorList, Members: &m_BatchGetPolicyErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchGetPolicyOutput_errors})
+var sBatchIsAuthorizedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedInput, Members: &mBatchIsAuthorizedInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedInput})
+var sBatchIsAuthorizedInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eBatchIsAuthorizedInput_policyStoreId})
+var sBatchIsAuthorizedInput_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &iEntitiesDefinition, Members: &mEntitiesDefinition, Type: smithy.ShapeTypeUnion, Ext: &eBatchIsAuthorizedInput_entities})
+var sBatchIsAuthorizedInput_requests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requests", ID: &i_BatchIsAuthorizedInputList, Members: &m_BatchIsAuthorizedInputList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedInput_requests})
+var sBatchIsAuthorizedOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedOutput, Members: &mBatchIsAuthorizedOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedOutput})
+var sBatchIsAuthorizedOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_BatchIsAuthorizedOutputList, Members: &m_BatchIsAuthorizedOutputList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedOutput_results})
+var sBatchIsAuthorizedWithTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedWithTokenInput, Members: &mBatchIsAuthorizedWithTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenInput})
+var sBatchIsAuthorizedWithTokenInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eBatchIsAuthorizedWithTokenInput_policyStoreId})
+var sBatchIsAuthorizedWithTokenInput_identityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityToken", ID: &i_Token, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eBatchIsAuthorizedWithTokenInput_identityToken})
+var sBatchIsAuthorizedWithTokenInput_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_Token, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eBatchIsAuthorizedWithTokenInput_accessToken})
+var sBatchIsAuthorizedWithTokenInput_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &iEntitiesDefinition, Members: &mEntitiesDefinition, Type: smithy.ShapeTypeUnion, Ext: &eBatchIsAuthorizedWithTokenInput_entities})
+var sBatchIsAuthorizedWithTokenInput_requests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requests", ID: &i_BatchIsAuthorizedWithTokenInputList, Members: &m_BatchIsAuthorizedWithTokenInputList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedWithTokenInput_requests})
+var sBatchIsAuthorizedWithTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchIsAuthorizedWithTokenOutput, Members: &mBatchIsAuthorizedWithTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenOutput})
+var sBatchIsAuthorizedWithTokenOutput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchIsAuthorizedWithTokenOutput_principal})
+var sBatchIsAuthorizedWithTokenOutput_results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "results", ID: &i_BatchIsAuthorizedWithTokenOutputList, Members: &m_BatchIsAuthorizedWithTokenOutputList, Type: smithy.ShapeTypeList, Ext: &eBatchIsAuthorizedWithTokenOutput_results})
+var sCreateIdentitySourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySourceInput, Members: &mCreateIdentitySourceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateIdentitySourceInput})
+var sCreateIdentitySourceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateIdentitySourceInput_clientToken})
+var sCreateIdentitySourceInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateIdentitySourceInput_policyStoreId})
+var sCreateIdentitySourceInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateIdentitySourceInput_configuration})
+var sCreateIdentitySourceInput_principalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalEntityType", ID: &i_PrincipalEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCreateIdentitySourceInput_principalEntityType})
+var sCreateIdentitySourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySourceOutput, Members: &mCreateIdentitySourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateIdentitySourceOutput})
+var sCreateIdentitySourceOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateIdentitySourceOutput_createdDate})
+var sCreateIdentitySourceOutput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eCreateIdentitySourceOutput_identitySourceId})
+var sCreateIdentitySourceOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateIdentitySourceOutput_lastUpdatedDate})
+var sCreateIdentitySourceOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreateIdentitySourceOutput_policyStoreId})
+var sCreatePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyInput, Members: &mCreatePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyInput})
+var sCreatePolicyInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyInput_clientToken})
+var sCreatePolicyInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyInput_policyStoreId})
+var sCreatePolicyInput_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPolicyDefinition, Members: &mPolicyDefinition, Type: smithy.ShapeTypeUnion, Ext: &eCreatePolicyInput_definition})
+var sCreatePolicyInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyInput_name})
+var sCreatePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyOutput, Members: &mCreatePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyOutput})
+var sCreatePolicyOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyOutput_policyStoreId})
+var sCreatePolicyOutput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyOutput_policyId})
+var sCreatePolicyOutput_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePolicyOutput_policyType})
+var sCreatePolicyOutput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyOutput_principal})
+var sCreatePolicyOutput_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyOutput_resource})
+var sCreatePolicyOutput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionIdentifierList, Members: &m_ActionIdentifierList, Type: smithy.ShapeTypeList, Ext: &eCreatePolicyOutput_actions})
+var sCreatePolicyOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyOutput_createdDate})
+var sCreatePolicyOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyOutput_lastUpdatedDate})
+var sCreatePolicyOutput_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iPolicyEffect, Members: &mPolicyEffect, Type: smithy.ShapeTypeEnum, Ext: &eCreatePolicyOutput_effect})
+var sCreatePolicyStoreAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStoreAliasInput, Members: &mCreatePolicyStoreAliasInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyStoreAliasInput})
+var sCreatePolicyStoreAliasInput_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreAliasInput_aliasName})
+var sCreatePolicyStoreAliasInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreAliasInput_policyStoreId})
+var sCreatePolicyStoreAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStoreAliasOutput, Members: &mCreatePolicyStoreAliasOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyStoreAliasOutput})
+var sCreatePolicyStoreAliasOutput_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreAliasOutput_aliasName})
+var sCreatePolicyStoreAliasOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreAliasOutput_policyStoreId})
+var sCreatePolicyStoreAliasOutput_aliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreAliasOutput_aliasArn})
+var sCreatePolicyStoreAliasOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyStoreAliasOutput_createdAt})
+var sCreatePolicyStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStoreInput, Members: &mCreatePolicyStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyStoreInput})
+var sCreatePolicyStoreInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreInput_clientToken})
+var sCreatePolicyStoreInput_validationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationSettings", ID: &iValidationSettings, Members: &mValidationSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyStoreInput_validationSettings})
+var sCreatePolicyStoreInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyStoreDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreInput_description})
+var sCreatePolicyStoreInput_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum, Ext: &eCreatePolicyStoreInput_deletionProtection})
+var sCreatePolicyStoreInput_encryptionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionSettings", ID: &iEncryptionSettings, Members: &mEncryptionSettings, Type: smithy.ShapeTypeUnion, Ext: &eCreatePolicyStoreInput_encryptionSettings})
+var sCreatePolicyStoreInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreatePolicyStoreInput_tags})
+var sCreatePolicyStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyStoreOutput, Members: &mCreatePolicyStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyStoreOutput})
+var sCreatePolicyStoreOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreOutput_policyStoreId})
+var sCreatePolicyStoreOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyStoreOutput_arn})
+var sCreatePolicyStoreOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyStoreOutput_createdDate})
+var sCreatePolicyStoreOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyStoreOutput_lastUpdatedDate})
+var sCreatePolicyTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyTemplateInput, Members: &mCreatePolicyTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyTemplateInput})
+var sCreatePolicyTemplateInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateInput_clientToken})
+var sCreatePolicyTemplateInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateInput_policyStoreId})
+var sCreatePolicyTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyTemplateDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateInput_description})
+var sCreatePolicyTemplateInput_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateInput_statement})
+var sCreatePolicyTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyTemplateName, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateInput_name})
+var sCreatePolicyTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePolicyTemplateOutput, Members: &mCreatePolicyTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePolicyTemplateOutput})
+var sCreatePolicyTemplateOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateOutput_policyStoreId})
+var sCreatePolicyTemplateOutput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eCreatePolicyTemplateOutput_policyTemplateId})
+var sCreatePolicyTemplateOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyTemplateOutput_createdDate})
+var sCreatePolicyTemplateOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eCreatePolicyTemplateOutput_lastUpdatedDate})
+var sDeleteIdentitySourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentitySourceInput, Members: &mDeleteIdentitySourceInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIdentitySourceInput})
+var sDeleteIdentitySourceInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eDeleteIdentitySourceInput_policyStoreId})
+var sDeleteIdentitySourceInput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteIdentitySourceInput_identitySourceId})
+var sDeleteIdentitySourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentitySourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIdentitySourceOutput})
+var sDeletePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyInput, Members: &mDeletePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyInput})
+var sDeletePolicyInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyInput_policyStoreId})
+var sDeletePolicyInput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyInput_policyId})
+var sDeletePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyOutput})
+var sDeletePolicyStoreAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStoreAliasInput, Members: &mDeletePolicyStoreAliasInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyStoreAliasInput})
+var sDeletePolicyStoreAliasInput_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyStoreAliasInput_aliasName})
+var sDeletePolicyStoreAliasInput_deletionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionMode", ID: &iDeletionMode, Members: &mDeletionMode, Type: smithy.ShapeTypeEnum, Ext: &eDeletePolicyStoreAliasInput_deletionMode})
+var sDeletePolicyStoreAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStoreAliasOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyStoreAliasOutput})
+var sDeletePolicyStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStoreInput, Members: &mDeletePolicyStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyStoreInput})
+var sDeletePolicyStoreInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyStoreInput_policyStoreId})
+var sDeletePolicyStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyStoreOutput})
+var sDeletePolicyTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyTemplateInput, Members: &mDeletePolicyTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyTemplateInput})
+var sDeletePolicyTemplateInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyTemplateInput_policyStoreId})
+var sDeletePolicyTemplateInput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eDeletePolicyTemplateInput_policyTemplateId})
+var sDeletePolicyTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePolicyTemplateOutput})
+var sGetIdentitySourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySourceInput, Members: &mGetIdentitySourceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentitySourceInput})
+var sGetIdentitySourceInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetIdentitySourceInput_policyStoreId})
+var sGetIdentitySourceInput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eGetIdentitySourceInput_identitySourceId})
+var sGetIdentitySourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySourceOutput, Members: &mGetIdentitySourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentitySourceOutput})
+var sGetIdentitySourceOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIdentitySourceOutput_createdDate})
+var sGetIdentitySourceOutput_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &iIdentitySourceDetails, Members: &mIdentitySourceDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentitySourceOutput_details})
+var sGetIdentitySourceOutput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eGetIdentitySourceOutput_identitySourceId})
+var sGetIdentitySourceOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetIdentitySourceOutput_lastUpdatedDate})
+var sGetIdentitySourceOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetIdentitySourceOutput_policyStoreId})
+var sGetIdentitySourceOutput_principalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalEntityType", ID: &i_PrincipalEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetIdentitySourceOutput_principalEntityType})
+var sGetIdentitySourceOutput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iConfigurationDetail, Members: &mConfigurationDetail, Type: smithy.ShapeTypeUnion, Ext: &eGetIdentitySourceOutput_configuration})
+var sGetPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyInput, Members: &mGetPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyInput})
+var sGetPolicyInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyInput_policyStoreId})
+var sGetPolicyInput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyInput_policyId})
+var sGetPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyOutput, Members: &mGetPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyOutput})
+var sGetPolicyOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyOutput_policyStoreId})
+var sGetPolicyOutput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyOutput_policyId})
+var sGetPolicyOutput_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &eGetPolicyOutput_policyType})
+var sGetPolicyOutput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyOutput_principal})
+var sGetPolicyOutput_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyOutput_resource})
+var sGetPolicyOutput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionIdentifierList, Members: &m_ActionIdentifierList, Type: smithy.ShapeTypeList, Ext: &eGetPolicyOutput_actions})
+var sGetPolicyOutput_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPolicyDefinitionDetail, Members: &mPolicyDefinitionDetail, Type: smithy.ShapeTypeUnion, Ext: &eGetPolicyOutput_definition})
+var sGetPolicyOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyOutput_createdDate})
+var sGetPolicyOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyOutput_lastUpdatedDate})
+var sGetPolicyOutput_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iPolicyEffect, Members: &mPolicyEffect, Type: smithy.ShapeTypeEnum, Ext: &eGetPolicyOutput_effect})
+var sGetPolicyOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eGetPolicyOutput_name})
+var sGetPolicyStoreAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStoreAliasInput, Members: &mGetPolicyStoreAliasInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyStoreAliasInput})
+var sGetPolicyStoreAliasInput_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreAliasInput_aliasName})
+var sGetPolicyStoreAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStoreAliasOutput, Members: &mGetPolicyStoreAliasOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyStoreAliasOutput})
+var sGetPolicyStoreAliasOutput_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_Alias, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreAliasOutput_aliasName})
+var sGetPolicyStoreAliasOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreAliasOutput_policyStoreId})
+var sGetPolicyStoreAliasOutput_aliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreAliasOutput_aliasArn})
+var sGetPolicyStoreAliasOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyStoreAliasOutput_createdAt})
+var sGetPolicyStoreAliasOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iAliasState, Members: &mAliasState, Type: smithy.ShapeTypeEnum, Ext: &eGetPolicyStoreAliasOutput_state})
+var sGetPolicyStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStoreInput, Members: &mGetPolicyStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyStoreInput})
+var sGetPolicyStoreInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreInput_policyStoreId})
+var sGetPolicyStoreInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetPolicyStoreInput_tags})
+var sGetPolicyStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyStoreOutput, Members: &mGetPolicyStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyStoreOutput})
+var sGetPolicyStoreOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreOutput_policyStoreId})
+var sGetPolicyStoreOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreOutput_arn})
+var sGetPolicyStoreOutput_validationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationSettings", ID: &iValidationSettings, Members: &mValidationSettings, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyStoreOutput_validationSettings})
+var sGetPolicyStoreOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyStoreOutput_createdDate})
+var sGetPolicyStoreOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyStoreOutput_lastUpdatedDate})
+var sGetPolicyStoreOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyStoreDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetPolicyStoreOutput_description})
+var sGetPolicyStoreOutput_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum, Ext: &eGetPolicyStoreOutput_deletionProtection})
+var sGetPolicyStoreOutput_encryptionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionState", ID: &iEncryptionState, Members: &mEncryptionState, Type: smithy.ShapeTypeUnion, Ext: &eGetPolicyStoreOutput_encryptionState})
+var sGetPolicyStoreOutput_cedarVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cedarVersion", ID: &iCedarVersion, Members: &mCedarVersion, Type: smithy.ShapeTypeEnum, Ext: &eGetPolicyStoreOutput_cedarVersion})
+var sGetPolicyStoreOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetPolicyStoreOutput_tags})
+var sGetPolicyTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyTemplateInput, Members: &mGetPolicyTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyTemplateInput})
+var sGetPolicyTemplateInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateInput_policyStoreId})
+var sGetPolicyTemplateInput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateInput_policyTemplateId})
+var sGetPolicyTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyTemplateOutput, Members: &mGetPolicyTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPolicyTemplateOutput})
+var sGetPolicyTemplateOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateOutput_policyStoreId})
+var sGetPolicyTemplateOutput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateOutput_policyTemplateId})
+var sGetPolicyTemplateOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyTemplateDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateOutput_description})
+var sGetPolicyTemplateOutput_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateOutput_statement})
+var sGetPolicyTemplateOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyTemplateOutput_createdDate})
+var sGetPolicyTemplateOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPolicyTemplateOutput_lastUpdatedDate})
+var sGetPolicyTemplateOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyTemplateName, Type: smithy.ShapeTypeString, Ext: &eGetPolicyTemplateOutput_name})
+var sGetSchemaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaInput, Members: &mGetSchemaInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaInput})
+var sGetSchemaInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetSchemaInput_policyStoreId})
+var sGetSchemaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchemaOutput, Members: &mGetSchemaOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSchemaOutput})
+var sGetSchemaOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eGetSchemaOutput_policyStoreId})
+var sGetSchemaOutput_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_SchemaJson, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetSchemaOutput_schema})
+var sGetSchemaOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSchemaOutput_createdDate})
+var sGetSchemaOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSchemaOutput_lastUpdatedDate})
+var sGetSchemaOutput_namespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaces", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &eGetSchemaOutput_namespaces})
+var sIsAuthorizedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorizedInput, Members: &mIsAuthorizedInput, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedInput})
+var sIsAuthorizedInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eIsAuthorizedInput_policyStoreId})
+var sIsAuthorizedInput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedInput_principal})
+var sIsAuthorizedInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedInput_action})
+var sIsAuthorizedInput_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedInput_resource})
+var sIsAuthorizedInput_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iContextDefinition, Members: &mContextDefinition, Type: smithy.ShapeTypeUnion, Ext: &eIsAuthorizedInput_context})
+var sIsAuthorizedInput_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &iEntitiesDefinition, Members: &mEntitiesDefinition, Type: smithy.ShapeTypeUnion, Ext: &eIsAuthorizedInput_entities})
+var sIsAuthorizedOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorizedOutput, Members: &mIsAuthorizedOutput, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedOutput})
+var sIsAuthorizedOutput_decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decision", ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeEnum, Ext: &eIsAuthorizedOutput_decision})
+var sIsAuthorizedOutput_determiningPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "determiningPolicies", ID: &i_DeterminingPolicyList, Members: &m_DeterminingPolicyList, Type: smithy.ShapeTypeList, Ext: &eIsAuthorizedOutput_determiningPolicies})
+var sIsAuthorizedOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_EvaluationErrorList, Members: &m_EvaluationErrorList, Type: smithy.ShapeTypeList, Ext: &eIsAuthorizedOutput_errors})
+var sIsAuthorizedWithTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorizedWithTokenInput, Members: &mIsAuthorizedWithTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedWithTokenInput})
+var sIsAuthorizedWithTokenInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eIsAuthorizedWithTokenInput_policyStoreId})
+var sIsAuthorizedWithTokenInput_identityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityToken", ID: &i_Token, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eIsAuthorizedWithTokenInput_identityToken})
+var sIsAuthorizedWithTokenInput_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_Token, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eIsAuthorizedWithTokenInput_accessToken})
+var sIsAuthorizedWithTokenInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionIdentifier, Members: &mActionIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedWithTokenInput_action})
+var sIsAuthorizedWithTokenInput_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedWithTokenInput_resource})
+var sIsAuthorizedWithTokenInput_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iContextDefinition, Members: &mContextDefinition, Type: smithy.ShapeTypeUnion, Ext: &eIsAuthorizedWithTokenInput_context})
+var sIsAuthorizedWithTokenInput_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &iEntitiesDefinition, Members: &mEntitiesDefinition, Type: smithy.ShapeTypeUnion, Ext: &eIsAuthorizedWithTokenInput_entities})
+var sIsAuthorizedWithTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsAuthorizedWithTokenOutput, Members: &mIsAuthorizedWithTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedWithTokenOutput})
+var sIsAuthorizedWithTokenOutput_decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decision", ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeEnum, Ext: &eIsAuthorizedWithTokenOutput_decision})
+var sIsAuthorizedWithTokenOutput_determiningPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "determiningPolicies", ID: &i_DeterminingPolicyList, Members: &m_DeterminingPolicyList, Type: smithy.ShapeTypeList, Ext: &eIsAuthorizedWithTokenOutput_determiningPolicies})
+var sIsAuthorizedWithTokenOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_EvaluationErrorList, Members: &m_EvaluationErrorList, Type: smithy.ShapeTypeList, Ext: &eIsAuthorizedWithTokenOutput_errors})
+var sIsAuthorizedWithTokenOutput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eIsAuthorizedWithTokenOutput_principal})
+var sListIdentitySourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySourcesInput, Members: &mListIdentitySourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eListIdentitySourcesInput})
+var sListIdentitySourcesInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eListIdentitySourcesInput_policyStoreId})
+var sListIdentitySourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIdentitySourcesInput_nextToken})
+var sListIdentitySourcesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListIdentitySourcesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListIdentitySourcesInput_maxResults})
+var sListIdentitySourcesInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_IdentitySourceFilters, Members: &m_IdentitySourceFilters, Type: smithy.ShapeTypeList, Ext: &eListIdentitySourcesInput_filters})
+var sListIdentitySourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySourcesOutput, Members: &mListIdentitySourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListIdentitySourcesOutput})
+var sListIdentitySourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListIdentitySourcesOutput_nextToken})
+var sListIdentitySourcesOutput_identitySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySources", ID: &i_IdentitySources, Members: &m_IdentitySources, Type: smithy.ShapeTypeList, Ext: &eListIdentitySourcesOutput_identitySources})
+var sListPoliciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesInput, Members: &mListPoliciesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPoliciesInput})
+var sListPoliciesInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eListPoliciesInput_policyStoreId})
+var sListPoliciesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPoliciesInput_nextToken})
+var sListPoliciesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPoliciesInput_maxResults})
+var sListPoliciesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iPolicyFilter, Members: &mPolicyFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPoliciesInput_filter})
+var sListPoliciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesOutput, Members: &mListPoliciesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPoliciesOutput})
+var sListPoliciesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPoliciesOutput_nextToken})
+var sListPoliciesOutput_policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policies", ID: &i_PolicyList, Members: &m_PolicyList, Type: smithy.ShapeTypeList, Ext: &eListPoliciesOutput_policies})
+var sListPolicyStoreAliasesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStoreAliasesInput, Members: &mListPolicyStoreAliasesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyStoreAliasesInput})
+var sListPolicyStoreAliasesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyStoreAliasesInput_nextToken})
+var sListPolicyStoreAliasesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPolicyStoreAliasesInput_maxResults})
+var sListPolicyStoreAliasesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iPolicyStoreAliasFilter, Members: &mPolicyStoreAliasFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyStoreAliasesInput_filter})
+var sListPolicyStoreAliasesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStoreAliasesOutput, Members: &mListPolicyStoreAliasesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyStoreAliasesOutput})
+var sListPolicyStoreAliasesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyStoreAliasesOutput_nextToken})
+var sListPolicyStoreAliasesOutput_policyStoreAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreAliases", ID: &i_PolicyStoreAliasList, Members: &m_PolicyStoreAliasList, Type: smithy.ShapeTypeList, Ext: &eListPolicyStoreAliasesOutput_policyStoreAliases})
+var sListPolicyStoresInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStoresInput, Members: &mListPolicyStoresInput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyStoresInput})
+var sListPolicyStoresInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyStoresInput_nextToken})
+var sListPolicyStoresInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPolicyStoresInput_maxResults})
+var sListPolicyStoresOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyStoresOutput, Members: &mListPolicyStoresOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyStoresOutput})
+var sListPolicyStoresOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyStoresOutput_nextToken})
+var sListPolicyStoresOutput_policyStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStores", ID: &i_PolicyStoreList, Members: &m_PolicyStoreList, Type: smithy.ShapeTypeList, Ext: &eListPolicyStoresOutput_policyStores})
+var sListPolicyTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyTemplatesInput, Members: &mListPolicyTemplatesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyTemplatesInput})
+var sListPolicyTemplatesInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eListPolicyTemplatesInput_policyStoreId})
+var sListPolicyTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyTemplatesInput_nextToken})
+var sListPolicyTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPolicyTemplatesInput_maxResults})
+var sListPolicyTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyTemplatesOutput, Members: &mListPolicyTemplatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPolicyTemplatesOutput})
+var sListPolicyTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPolicyTemplatesOutput_nextToken})
+var sListPolicyTemplatesOutput_policyTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplates", ID: &i_PolicyTemplatesList, Members: &m_PolicyTemplatesList, Type: smithy.ShapeTypeList, Ext: &eListPolicyTemplatesOutput_policyTemplates})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sPutSchemaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchemaInput, Members: &mPutSchemaInput, Type: smithy.ShapeTypeStructure, Ext: &ePutSchemaInput})
+var sPutSchemaInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePutSchemaInput_policyStoreId})
+var sPutSchemaInput_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iSchemaDefinition, Members: &mSchemaDefinition, Type: smithy.ShapeTypeUnion, Ext: &ePutSchemaInput_definition})
+var sPutSchemaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSchemaOutput, Members: &mPutSchemaOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutSchemaOutput})
+var sPutSchemaOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &ePutSchemaOutput_policyStoreId})
+var sPutSchemaOutput_namespaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespaces", ID: &i_NamespaceList, Members: &m_NamespaceList, Type: smithy.ShapeTypeList, Ext: &ePutSchemaOutput_namespaces})
+var sPutSchemaOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePutSchemaOutput_createdDate})
+var sPutSchemaOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ePutSchemaOutput_lastUpdatedDate})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateIdentitySourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentitySourceInput, Members: &mUpdateIdentitySourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIdentitySourceInput})
+var sUpdateIdentitySourceInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentitySourceInput_policyStoreId})
+var sUpdateIdentitySourceInput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentitySourceInput_identitySourceId})
+var sUpdateIdentitySourceInput_updateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateConfiguration", ID: &iUpdateConfiguration, Members: &mUpdateConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateIdentitySourceInput_updateConfiguration})
+var sUpdateIdentitySourceInput_principalEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principalEntityType", ID: &i_PrincipalEntityType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentitySourceInput_principalEntityType})
+var sUpdateIdentitySourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentitySourceOutput, Members: &mUpdateIdentitySourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIdentitySourceOutput})
+var sUpdateIdentitySourceOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateIdentitySourceOutput_createdDate})
+var sUpdateIdentitySourceOutput_identitySourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identitySourceId", ID: &i_IdentitySourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentitySourceOutput_identitySourceId})
+var sUpdateIdentitySourceOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateIdentitySourceOutput_lastUpdatedDate})
+var sUpdateIdentitySourceOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdateIdentitySourceOutput_policyStoreId})
+var sUpdatePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyInput, Members: &mUpdatePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyInput})
+var sUpdatePolicyInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyInput_policyStoreId})
+var sUpdatePolicyInput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyInput_policyId})
+var sUpdatePolicyInput_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iUpdatePolicyDefinition, Members: &mUpdatePolicyDefinition, Type: smithy.ShapeTypeUnion, Ext: &eUpdatePolicyInput_definition})
+var sUpdatePolicyInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyInput_name})
+var sUpdatePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyOutput, Members: &mUpdatePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyOutput})
+var sUpdatePolicyOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyOutput_policyStoreId})
+var sUpdatePolicyOutput_policyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyOutput_policyId})
+var sUpdatePolicyOutput_policyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePolicyOutput_policyType})
+var sUpdatePolicyOutput_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyOutput_principal})
+var sUpdatePolicyOutput_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEntityIdentifier, Members: &mEntityIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyOutput_resource})
+var sUpdatePolicyOutput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionIdentifierList, Members: &m_ActionIdentifierList, Type: smithy.ShapeTypeList, Ext: &eUpdatePolicyOutput_actions})
+var sUpdatePolicyOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyOutput_createdDate})
+var sUpdatePolicyOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyOutput_lastUpdatedDate})
+var sUpdatePolicyOutput_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iPolicyEffect, Members: &mPolicyEffect, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePolicyOutput_effect})
+var sUpdatePolicyStoreInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyStoreInput, Members: &mUpdatePolicyStoreInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyStoreInput})
+var sUpdatePolicyStoreInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyStoreInput_policyStoreId})
+var sUpdatePolicyStoreInput_validationSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationSettings", ID: &iValidationSettings, Members: &mValidationSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyStoreInput_validationSettings})
+var sUpdatePolicyStoreInput_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePolicyStoreInput_deletionProtection})
+var sUpdatePolicyStoreInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyStoreDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyStoreInput_description})
+var sUpdatePolicyStoreOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyStoreOutput, Members: &mUpdatePolicyStoreOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyStoreOutput})
+var sUpdatePolicyStoreOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyStoreOutput_policyStoreId})
+var sUpdatePolicyStoreOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyStoreOutput_arn})
+var sUpdatePolicyStoreOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyStoreOutput_createdDate})
+var sUpdatePolicyStoreOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyStoreOutput_lastUpdatedDate})
+var sUpdatePolicyTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyTemplateInput, Members: &mUpdatePolicyTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyTemplateInput})
+var sUpdatePolicyTemplateInput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateInput_policyStoreId})
+var sUpdatePolicyTemplateInput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateInput_policyTemplateId})
+var sUpdatePolicyTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyTemplateDescription, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateInput_description})
+var sUpdatePolicyTemplateInput_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatement, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateInput_statement})
+var sUpdatePolicyTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateInput_name})
+var sUpdatePolicyTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicyTemplateOutput, Members: &mUpdatePolicyTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePolicyTemplateOutput})
+var sUpdatePolicyTemplateOutput_policyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStoreId", ID: &i_PolicyStoreId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateOutput_policyStoreId})
+var sUpdatePolicyTemplateOutput_policyTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyTemplateId", ID: &i_PolicyTemplateId, Type: smithy.ShapeTypeString, Ext: &eUpdatePolicyTemplateOutput_policyTemplateId})
+var sUpdatePolicyTemplateOutput_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyTemplateOutput_createdDate})
+var sUpdatePolicyTemplateOutput_lastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedDate", ID: &i_TimestampFormat, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdatePolicyTemplateOutput_lastUpdatedDate})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ActionIdentifier_actionType = ActionIdentifier.AddMember("actionType", _ActionType)
-
-	ActionIdentifier_actionId = ActionIdentifier.AddMember("actionId", _ActionId)
-
-	_ActionIdentifierList_member = _ActionIdentifierList.AddMember("member", ActionIdentifier)
-
-	AliasState_ACTIVE = AliasState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AliasState_PENDING_DELETION = AliasState.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	EntityIdentifier_entityType = EntityIdentifier.AddMember("entityType", _EntityType)
-
-	EntityIdentifier_entityId = EntityIdentifier.AddMember("entityId", _EntityId)
-
-	_SetAttribute_member = _SetAttribute.AddMember("member", AttributeValue)
-
-	_RecordAttribute_key = _RecordAttribute.AddMember("key", smithyprelude.String)
-
-	_RecordAttribute_value = _RecordAttribute.AddMember("value", AttributeValue)
-
-	AttributeValue_boolean = AttributeValue.AddMember("boolean", _BooleanAttribute)
-
-	AttributeValue_entityIdentifier = AttributeValue.AddMember("entityIdentifier", EntityIdentifier)
-
-	AttributeValue_long = AttributeValue.AddMember("long", _LongAttribute)
-
-	AttributeValue_string = AttributeValue.AddMember("string", _StringAttribute)
-
-	AttributeValue_set = AttributeValue.AddMember("set", _SetAttribute)
-
-	AttributeValue_record = AttributeValue.AddMember("record", _RecordAttribute)
-
-	AttributeValue_ipaddr = AttributeValue.AddMember("ipaddr", _IpAddr)
-
-	AttributeValue_decimal = AttributeValue.AddMember("decimal", _Decimal)
-
-	AttributeValue_datetime = AttributeValue.AddMember("datetime", _DatetimeAttribute)
-
-	AttributeValue_duration = AttributeValue.AddMember("duration", _Duration)
-
-	_Audiences_member = _Audiences.AddMember("member", _Audience)
-
-	BatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND = BatchGetPolicyErrorCode.AddMember("POLICY_STORE_NOT_FOUND", smithyprelude.Unit)
-
-	BatchGetPolicyErrorCode_POLICY_NOT_FOUND = BatchGetPolicyErrorCode.AddMember("POLICY_NOT_FOUND", smithyprelude.Unit)
-
-	BatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND = BatchGetPolicyErrorCode.AddMember("POLICY_STORE_ALIAS_NOT_FOUND", smithyprelude.Unit)
-
-	BatchGetPolicyErrorItem_code = BatchGetPolicyErrorItem.AddMember("code", BatchGetPolicyErrorCode)
-
-	BatchGetPolicyErrorItem_policyStoreId = BatchGetPolicyErrorItem.AddMember("policyStoreId", smithyprelude.String)
-
-	BatchGetPolicyErrorItem_policyId = BatchGetPolicyErrorItem.AddMember("policyId", smithyprelude.String)
-
-	BatchGetPolicyErrorItem_message = BatchGetPolicyErrorItem.AddMember("message", smithyprelude.String)
-
-	_BatchGetPolicyErrorList_member = _BatchGetPolicyErrorList.AddMember("member", BatchGetPolicyErrorItem)
-
-	BatchGetPolicyInputItem_policyStoreId = BatchGetPolicyInputItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	BatchGetPolicyInputItem_policyId = BatchGetPolicyInputItem.AddMember("policyId", _PolicyId)
-
-	_BatchGetPolicyInputList_member = _BatchGetPolicyInputList.AddMember("member", BatchGetPolicyInputItem)
-
-	PolicyType_STATIC = PolicyType.AddMember("STATIC", smithyprelude.Unit)
-
-	PolicyType_TEMPLATE_LINKED = PolicyType.AddMember("TEMPLATE_LINKED", smithyprelude.Unit)
-
-	StaticPolicyDefinitionDetail_description = StaticPolicyDefinitionDetail.AddMember("description", _StaticPolicyDescription)
-
-	StaticPolicyDefinitionDetail_statement = StaticPolicyDefinitionDetail.AddMember("statement", _PolicyStatement)
-
-	TemplateLinkedPolicyDefinitionDetail_policyTemplateId = TemplateLinkedPolicyDefinitionDetail.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	TemplateLinkedPolicyDefinitionDetail_principal = TemplateLinkedPolicyDefinitionDetail.AddMember("principal", EntityIdentifier)
-
-	TemplateLinkedPolicyDefinitionDetail_resource = TemplateLinkedPolicyDefinitionDetail.AddMember("resource", EntityIdentifier)
-
-	PolicyDefinitionDetail_static = PolicyDefinitionDetail.AddMember("static", StaticPolicyDefinitionDetail)
-
-	PolicyDefinitionDetail_templateLinked = PolicyDefinitionDetail.AddMember("templateLinked", TemplateLinkedPolicyDefinitionDetail)
-
-	BatchGetPolicyOutputItem_policyStoreId = BatchGetPolicyOutputItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	BatchGetPolicyOutputItem_policyId = BatchGetPolicyOutputItem.AddMember("policyId", _PolicyId)
-
-	BatchGetPolicyOutputItem_policyType = BatchGetPolicyOutputItem.AddMember("policyType", PolicyType)
-
-	BatchGetPolicyOutputItem_definition = BatchGetPolicyOutputItem.AddMember("definition", PolicyDefinitionDetail)
-
-	BatchGetPolicyOutputItem_createdDate = BatchGetPolicyOutputItem.AddMember("createdDate", _TimestampFormat)
-
-	BatchGetPolicyOutputItem_lastUpdatedDate = BatchGetPolicyOutputItem.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	BatchGetPolicyOutputItem_name = BatchGetPolicyOutputItem.AddMember("name", _PolicyName)
-
-	_BatchGetPolicyOutputList_member = _BatchGetPolicyOutputList.AddMember("member", BatchGetPolicyOutputItem)
-
-	_ContextMap_key = _ContextMap.AddMember("key", smithyprelude.String)
-
-	_ContextMap_value = _ContextMap.AddMember("value", AttributeValue)
-
-	ContextDefinition_contextMap = ContextDefinition.AddMember("contextMap", _ContextMap)
-
-	ContextDefinition_cedarJson = ContextDefinition.AddMember("cedarJson", _CedarJson)
-
-	BatchIsAuthorizedInputItem_principal = BatchIsAuthorizedInputItem.AddMember("principal", EntityIdentifier)
-
-	BatchIsAuthorizedInputItem_action = BatchIsAuthorizedInputItem.AddMember("action", ActionIdentifier)
-
-	BatchIsAuthorizedInputItem_resource = BatchIsAuthorizedInputItem.AddMember("resource", EntityIdentifier)
-
-	BatchIsAuthorizedInputItem_context = BatchIsAuthorizedInputItem.AddMember("context", ContextDefinition)
-
-	_BatchIsAuthorizedInputList_member = _BatchIsAuthorizedInputList.AddMember("member", BatchIsAuthorizedInputItem)
-
-	Decision_ALLOW = Decision.AddMember("ALLOW", smithyprelude.Unit)
-
-	Decision_DENY = Decision.AddMember("DENY", smithyprelude.Unit)
-
-	DeterminingPolicyItem_policyId = DeterminingPolicyItem.AddMember("policyId", _PolicyId)
-
-	_DeterminingPolicyList_member = _DeterminingPolicyList.AddMember("member", DeterminingPolicyItem)
-
-	EvaluationErrorItem_errorDescription = EvaluationErrorItem.AddMember("errorDescription", smithyprelude.String)
-
-	_EvaluationErrorList_member = _EvaluationErrorList.AddMember("member", EvaluationErrorItem)
-
-	BatchIsAuthorizedOutputItem_request = BatchIsAuthorizedOutputItem.AddMember("request", BatchIsAuthorizedInputItem)
-
-	BatchIsAuthorizedOutputItem_decision = BatchIsAuthorizedOutputItem.AddMember("decision", Decision)
-
-	BatchIsAuthorizedOutputItem_determiningPolicies = BatchIsAuthorizedOutputItem.AddMember("determiningPolicies", _DeterminingPolicyList)
-
-	BatchIsAuthorizedOutputItem_errors = BatchIsAuthorizedOutputItem.AddMember("errors", _EvaluationErrorList)
-
-	_BatchIsAuthorizedOutputList_member = _BatchIsAuthorizedOutputList.AddMember("member", BatchIsAuthorizedOutputItem)
-
-	BatchIsAuthorizedWithTokenInputItem_action = BatchIsAuthorizedWithTokenInputItem.AddMember("action", ActionIdentifier)
-
-	BatchIsAuthorizedWithTokenInputItem_resource = BatchIsAuthorizedWithTokenInputItem.AddMember("resource", EntityIdentifier)
-
-	BatchIsAuthorizedWithTokenInputItem_context = BatchIsAuthorizedWithTokenInputItem.AddMember("context", ContextDefinition)
-
-	_BatchIsAuthorizedWithTokenInputList_member = _BatchIsAuthorizedWithTokenInputList.AddMember("member", BatchIsAuthorizedWithTokenInputItem)
-
-	BatchIsAuthorizedWithTokenOutputItem_request = BatchIsAuthorizedWithTokenOutputItem.AddMember("request", BatchIsAuthorizedWithTokenInputItem)
-
-	BatchIsAuthorizedWithTokenOutputItem_decision = BatchIsAuthorizedWithTokenOutputItem.AddMember("decision", Decision)
-
-	BatchIsAuthorizedWithTokenOutputItem_determiningPolicies = BatchIsAuthorizedWithTokenOutputItem.AddMember("determiningPolicies", _DeterminingPolicyList)
-
-	BatchIsAuthorizedWithTokenOutputItem_errors = BatchIsAuthorizedWithTokenOutputItem.AddMember("errors", _EvaluationErrorList)
-
-	_BatchIsAuthorizedWithTokenOutputList_member = _BatchIsAuthorizedWithTokenOutputList.AddMember("member", BatchIsAuthorizedWithTokenOutputItem)
-
-	_CedarTagSetAttribute_member = _CedarTagSetAttribute.AddMember("member", CedarTagValue)
-
-	CedarTagValue_boolean = CedarTagValue.AddMember("boolean", _BooleanAttribute)
-
-	CedarTagValue_entityIdentifier = CedarTagValue.AddMember("entityIdentifier", EntityIdentifier)
-
-	CedarTagValue_long = CedarTagValue.AddMember("long", _LongAttribute)
-
-	CedarTagValue_string = CedarTagValue.AddMember("string", _StringAttribute)
-
-	CedarTagValue_set = CedarTagValue.AddMember("set", _CedarTagSetAttribute)
-
-	CedarTagValue_record = CedarTagValue.AddMember("record", _CedarTagRecordAttribute)
-
-	CedarTagValue_ipaddr = CedarTagValue.AddMember("ipaddr", _IpAddr)
-
-	CedarTagValue_decimal = CedarTagValue.AddMember("decimal", _Decimal)
-
-	CedarTagValue_datetime = CedarTagValue.AddMember("datetime", _DatetimeAttribute)
-
-	CedarTagValue_duration = CedarTagValue.AddMember("duration", _Duration)
-
-	_CedarTagRecordAttribute_key = _CedarTagRecordAttribute.AddMember("key", smithyprelude.String)
-
-	_CedarTagRecordAttribute_value = _CedarTagRecordAttribute.AddMember("value", CedarTagValue)
-
-	CedarVersion_CEDAR_2 = CedarVersion.AddMember("CEDAR_2", smithyprelude.Unit)
-
-	CedarVersion_CEDAR_4 = CedarVersion.AddMember("CEDAR_4", smithyprelude.Unit)
-
-	_ClientIds_member = _ClientIds.AddMember("member", _ClientId)
-
-	CognitoGroupConfiguration_groupEntityType = CognitoGroupConfiguration.AddMember("groupEntityType", _GroupEntityType)
-
-	CognitoGroupConfigurationDetail_groupEntityType = CognitoGroupConfigurationDetail.AddMember("groupEntityType", _GroupEntityType)
-
-	CognitoGroupConfigurationItem_groupEntityType = CognitoGroupConfigurationItem.AddMember("groupEntityType", _GroupEntityType)
-
-	CognitoUserPoolConfiguration_userPoolArn = CognitoUserPoolConfiguration.AddMember("userPoolArn", _UserPoolArn)
-
-	CognitoUserPoolConfiguration_clientIds = CognitoUserPoolConfiguration.AddMember("clientIds", _ClientIds)
-
-	CognitoUserPoolConfiguration_groupConfiguration = CognitoUserPoolConfiguration.AddMember("groupConfiguration", CognitoGroupConfiguration)
-
-	CognitoUserPoolConfigurationDetail_userPoolArn = CognitoUserPoolConfigurationDetail.AddMember("userPoolArn", _UserPoolArn)
-
-	CognitoUserPoolConfigurationDetail_clientIds = CognitoUserPoolConfigurationDetail.AddMember("clientIds", _ClientIds)
-
-	CognitoUserPoolConfigurationDetail_issuer = CognitoUserPoolConfigurationDetail.AddMember("issuer", _Issuer)
-
-	CognitoUserPoolConfigurationDetail_groupConfiguration = CognitoUserPoolConfigurationDetail.AddMember("groupConfiguration", CognitoGroupConfigurationDetail)
-
-	CognitoUserPoolConfigurationItem_userPoolArn = CognitoUserPoolConfigurationItem.AddMember("userPoolArn", _UserPoolArn)
-
-	CognitoUserPoolConfigurationItem_clientIds = CognitoUserPoolConfigurationItem.AddMember("clientIds", _ClientIds)
-
-	CognitoUserPoolConfigurationItem_issuer = CognitoUserPoolConfigurationItem.AddMember("issuer", _Issuer)
-
-	CognitoUserPoolConfigurationItem_groupConfiguration = CognitoUserPoolConfigurationItem.AddMember("groupConfiguration", CognitoGroupConfigurationItem)
-
-	OpenIdConnectGroupConfiguration_groupClaim = OpenIdConnectGroupConfiguration.AddMember("groupClaim", _Claim)
-
-	OpenIdConnectGroupConfiguration_groupEntityType = OpenIdConnectGroupConfiguration.AddMember("groupEntityType", _GroupEntityType)
-
-	OpenIdConnectAccessTokenConfiguration_principalIdClaim = OpenIdConnectAccessTokenConfiguration.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectAccessTokenConfiguration_audiences = OpenIdConnectAccessTokenConfiguration.AddMember("audiences", _Audiences)
-
-	OpenIdConnectIdentityTokenConfiguration_principalIdClaim = OpenIdConnectIdentityTokenConfiguration.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectIdentityTokenConfiguration_clientIds = OpenIdConnectIdentityTokenConfiguration.AddMember("clientIds", _ClientIds)
-
-	OpenIdConnectTokenSelection_accessTokenOnly = OpenIdConnectTokenSelection.AddMember("accessTokenOnly", OpenIdConnectAccessTokenConfiguration)
-
-	OpenIdConnectTokenSelection_identityTokenOnly = OpenIdConnectTokenSelection.AddMember("identityTokenOnly", OpenIdConnectIdentityTokenConfiguration)
-
-	OpenIdConnectConfiguration_issuer = OpenIdConnectConfiguration.AddMember("issuer", _Issuer)
-
-	OpenIdConnectConfiguration_entityIdPrefix = OpenIdConnectConfiguration.AddMember("entityIdPrefix", _EntityIdPrefix)
-
-	OpenIdConnectConfiguration_groupConfiguration = OpenIdConnectConfiguration.AddMember("groupConfiguration", OpenIdConnectGroupConfiguration)
-
-	OpenIdConnectConfiguration_tokenSelection = OpenIdConnectConfiguration.AddMember("tokenSelection", OpenIdConnectTokenSelection)
-
-	Configuration_cognitoUserPoolConfiguration = Configuration.AddMember("cognitoUserPoolConfiguration", CognitoUserPoolConfiguration)
-
-	Configuration_openIdConnectConfiguration = Configuration.AddMember("openIdConnectConfiguration", OpenIdConnectConfiguration)
-
-	OpenIdConnectGroupConfigurationDetail_groupClaim = OpenIdConnectGroupConfigurationDetail.AddMember("groupClaim", _Claim)
-
-	OpenIdConnectGroupConfigurationDetail_groupEntityType = OpenIdConnectGroupConfigurationDetail.AddMember("groupEntityType", _GroupEntityType)
-
-	OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim = OpenIdConnectAccessTokenConfigurationDetail.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectAccessTokenConfigurationDetail_audiences = OpenIdConnectAccessTokenConfigurationDetail.AddMember("audiences", _Audiences)
-
-	OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim = OpenIdConnectIdentityTokenConfigurationDetail.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectIdentityTokenConfigurationDetail_clientIds = OpenIdConnectIdentityTokenConfigurationDetail.AddMember("clientIds", _ClientIds)
-
-	OpenIdConnectTokenSelectionDetail_accessTokenOnly = OpenIdConnectTokenSelectionDetail.AddMember("accessTokenOnly", OpenIdConnectAccessTokenConfigurationDetail)
-
-	OpenIdConnectTokenSelectionDetail_identityTokenOnly = OpenIdConnectTokenSelectionDetail.AddMember("identityTokenOnly", OpenIdConnectIdentityTokenConfigurationDetail)
-
-	OpenIdConnectConfigurationDetail_issuer = OpenIdConnectConfigurationDetail.AddMember("issuer", _Issuer)
-
-	OpenIdConnectConfigurationDetail_entityIdPrefix = OpenIdConnectConfigurationDetail.AddMember("entityIdPrefix", _EntityIdPrefix)
-
-	OpenIdConnectConfigurationDetail_groupConfiguration = OpenIdConnectConfigurationDetail.AddMember("groupConfiguration", OpenIdConnectGroupConfigurationDetail)
-
-	OpenIdConnectConfigurationDetail_tokenSelection = OpenIdConnectConfigurationDetail.AddMember("tokenSelection", OpenIdConnectTokenSelectionDetail)
-
-	ConfigurationDetail_cognitoUserPoolConfiguration = ConfigurationDetail.AddMember("cognitoUserPoolConfiguration", CognitoUserPoolConfigurationDetail)
-
-	ConfigurationDetail_openIdConnectConfiguration = ConfigurationDetail.AddMember("openIdConnectConfiguration", OpenIdConnectConfigurationDetail)
-
-	OpenIdConnectGroupConfigurationItem_groupClaim = OpenIdConnectGroupConfigurationItem.AddMember("groupClaim", _Claim)
-
-	OpenIdConnectGroupConfigurationItem_groupEntityType = OpenIdConnectGroupConfigurationItem.AddMember("groupEntityType", _GroupEntityType)
-
-	OpenIdConnectAccessTokenConfigurationItem_principalIdClaim = OpenIdConnectAccessTokenConfigurationItem.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectAccessTokenConfigurationItem_audiences = OpenIdConnectAccessTokenConfigurationItem.AddMember("audiences", _Audiences)
-
-	OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim = OpenIdConnectIdentityTokenConfigurationItem.AddMember("principalIdClaim", _Claim)
-
-	OpenIdConnectIdentityTokenConfigurationItem_clientIds = OpenIdConnectIdentityTokenConfigurationItem.AddMember("clientIds", _ClientIds)
-
-	OpenIdConnectTokenSelectionItem_accessTokenOnly = OpenIdConnectTokenSelectionItem.AddMember("accessTokenOnly", OpenIdConnectAccessTokenConfigurationItem)
-
-	OpenIdConnectTokenSelectionItem_identityTokenOnly = OpenIdConnectTokenSelectionItem.AddMember("identityTokenOnly", OpenIdConnectIdentityTokenConfigurationItem)
-
-	OpenIdConnectConfigurationItem_issuer = OpenIdConnectConfigurationItem.AddMember("issuer", _Issuer)
-
-	OpenIdConnectConfigurationItem_entityIdPrefix = OpenIdConnectConfigurationItem.AddMember("entityIdPrefix", _EntityIdPrefix)
-
-	OpenIdConnectConfigurationItem_groupConfiguration = OpenIdConnectConfigurationItem.AddMember("groupConfiguration", OpenIdConnectGroupConfigurationItem)
-
-	OpenIdConnectConfigurationItem_tokenSelection = OpenIdConnectConfigurationItem.AddMember("tokenSelection", OpenIdConnectTokenSelectionItem)
-
-	ConfigurationItem_cognitoUserPoolConfiguration = ConfigurationItem.AddMember("cognitoUserPoolConfiguration", CognitoUserPoolConfigurationItem)
-
-	ConfigurationItem_openIdConnectConfiguration = ConfigurationItem.AddMember("openIdConnectConfiguration", OpenIdConnectConfigurationItem)
-
-	ResourceType_IDENTITY_SOURCE = ResourceType.AddMember("IDENTITY_SOURCE", smithyprelude.Unit)
-
-	ResourceType_POLICY_STORE = ResourceType.AddMember("POLICY_STORE", smithyprelude.Unit)
-
-	ResourceType_POLICY = ResourceType.AddMember("POLICY", smithyprelude.Unit)
-
-	ResourceType_POLICY_TEMPLATE = ResourceType.AddMember("POLICY_TEMPLATE", smithyprelude.Unit)
-
-	ResourceType_SCHEMA = ResourceType.AddMember("SCHEMA", smithyprelude.Unit)
-
-	ResourceType_POLICY_STORE_ALIAS = ResourceType.AddMember("POLICY_STORE_ALIAS", smithyprelude.Unit)
-
-	ResourceConflict_resourceId = ResourceConflict.AddMember("resourceId", smithyprelude.String)
-
-	ResourceConflict_resourceType = ResourceConflict.AddMember("resourceType", ResourceType)
-
-	_ResourceConflictList_member = _ResourceConflictList.AddMember("member", ResourceConflict)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resources = ConflictException.AddMember("resources", _ResourceConflictList)
-
-	DeletionMode_SOFT_DELETE = DeletionMode.AddMember("SOFT_DELETE", smithyprelude.Unit)
-
-	DeletionMode_HARD_DELETE = DeletionMode.AddMember("HARD_DELETE", smithyprelude.Unit)
-
-	DeletionProtection_ENABLED = DeletionProtection.AddMember("ENABLED", smithyprelude.Unit)
-
-	DeletionProtection_DISABLED = DeletionProtection.AddMember("DISABLED", smithyprelude.Unit)
-
-	_EncryptionContext_key = _EncryptionContext.AddMember("key", _EncryptionContextKey)
-
-	_EncryptionContext_value = _EncryptionContext.AddMember("value", _EncryptionContextValue)
-
-	KmsEncryptionSettings_key = KmsEncryptionSettings.AddMember("key", _KmsKey)
-
-	KmsEncryptionSettings_encryptionContext = KmsEncryptionSettings.AddMember("encryptionContext", _EncryptionContext)
-
-	EncryptionSettings_kmsEncryptionSettings = EncryptionSettings.AddMember("kmsEncryptionSettings", KmsEncryptionSettings)
-
-	EncryptionSettings_default = EncryptionSettings.AddMember("default", smithyprelude.Unit)
-
-	KmsEncryptionState_key = KmsEncryptionState.AddMember("key", _KmsKey)
-
-	KmsEncryptionState_encryptionContext = KmsEncryptionState.AddMember("encryptionContext", _EncryptionContext)
-
-	EncryptionState_kmsEncryptionState = EncryptionState.AddMember("kmsEncryptionState", KmsEncryptionState)
-
-	EncryptionState_default = EncryptionState.AddMember("default", smithyprelude.Unit)
-
-	_EntityAttributes_key = _EntityAttributes.AddMember("key", smithyprelude.String)
-
-	_EntityAttributes_value = _EntityAttributes.AddMember("value", AttributeValue)
-
-	_ParentList_member = _ParentList.AddMember("member", EntityIdentifier)
-
-	_EntityCedarTags_key = _EntityCedarTags.AddMember("key", smithyprelude.String)
-
-	_EntityCedarTags_value = _EntityCedarTags.AddMember("value", CedarTagValue)
-
-	EntityItem_identifier = EntityItem.AddMember("identifier", EntityIdentifier)
-
-	EntityItem_attributes = EntityItem.AddMember("attributes", _EntityAttributes)
-
-	EntityItem_parents = EntityItem.AddMember("parents", _ParentList)
-
-	EntityItem_tags = EntityItem.AddMember("tags", _EntityCedarTags)
-
-	_EntityList_member = _EntityList.AddMember("member", EntityItem)
-
-	EntitiesDefinition_entityList = EntitiesDefinition.AddMember("entityList", _EntityList)
-
-	EntitiesDefinition_cedarJson = EntitiesDefinition.AddMember("cedarJson", _CedarJson)
-
-	EntityReference_unspecified = EntityReference.AddMember("unspecified", smithyprelude.Boolean)
-
-	EntityReference_identifier = EntityReference.AddMember("identifier", EntityIdentifier)
-
-	OpenIdIssuer_COGNITO = OpenIdIssuer.AddMember("COGNITO", smithyprelude.Unit)
-
-	IdentitySourceDetails_clientIds = IdentitySourceDetails.AddMember("clientIds", _ClientIds)
-
-	IdentitySourceDetails_userPoolArn = IdentitySourceDetails.AddMember("userPoolArn", _UserPoolArn)
-
-	IdentitySourceDetails_discoveryUrl = IdentitySourceDetails.AddMember("discoveryUrl", _DiscoveryUrl)
-
-	IdentitySourceDetails_openIdIssuer = IdentitySourceDetails.AddMember("openIdIssuer", OpenIdIssuer)
-
-	IdentitySourceFilter_principalEntityType = IdentitySourceFilter.AddMember("principalEntityType", _PrincipalEntityType)
-
-	_IdentitySourceFilters_member = _IdentitySourceFilters.AddMember("member", IdentitySourceFilter)
-
-	IdentitySourceItemDetails_clientIds = IdentitySourceItemDetails.AddMember("clientIds", _ClientIds)
-
-	IdentitySourceItemDetails_userPoolArn = IdentitySourceItemDetails.AddMember("userPoolArn", _UserPoolArn)
-
-	IdentitySourceItemDetails_discoveryUrl = IdentitySourceItemDetails.AddMember("discoveryUrl", _DiscoveryUrl)
-
-	IdentitySourceItemDetails_openIdIssuer = IdentitySourceItemDetails.AddMember("openIdIssuer", OpenIdIssuer)
-
-	IdentitySourceItem_createdDate = IdentitySourceItem.AddMember("createdDate", _TimestampFormat)
-
-	IdentitySourceItem_details = IdentitySourceItem.AddMember("details", IdentitySourceItemDetails)
-
-	IdentitySourceItem_identitySourceId = IdentitySourceItem.AddMember("identitySourceId", _IdentitySourceId)
-
-	IdentitySourceItem_lastUpdatedDate = IdentitySourceItem.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	IdentitySourceItem_policyStoreId = IdentitySourceItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	IdentitySourceItem_principalEntityType = IdentitySourceItem.AddMember("principalEntityType", _PrincipalEntityType)
-
-	IdentitySourceItem_configuration = IdentitySourceItem.AddMember("configuration", ConfigurationItem)
-
-	_IdentitySources_member = _IdentitySources.AddMember("member", IdentitySourceItem)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InvalidStateException_message = InvalidStateException.AddMember("message", smithyprelude.String)
-
-	_NamespaceList_member = _NamespaceList.AddMember("member", _Namespace)
-
-	StaticPolicyDefinition_description = StaticPolicyDefinition.AddMember("description", _StaticPolicyDescription)
-
-	StaticPolicyDefinition_statement = StaticPolicyDefinition.AddMember("statement", _PolicyStatement)
-
-	TemplateLinkedPolicyDefinition_policyTemplateId = TemplateLinkedPolicyDefinition.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	TemplateLinkedPolicyDefinition_principal = TemplateLinkedPolicyDefinition.AddMember("principal", EntityIdentifier)
-
-	TemplateLinkedPolicyDefinition_resource = TemplateLinkedPolicyDefinition.AddMember("resource", EntityIdentifier)
-
-	PolicyDefinition_static = PolicyDefinition.AddMember("static", StaticPolicyDefinition)
-
-	PolicyDefinition_templateLinked = PolicyDefinition.AddMember("templateLinked", TemplateLinkedPolicyDefinition)
-
-	StaticPolicyDefinitionItem_description = StaticPolicyDefinitionItem.AddMember("description", _StaticPolicyDescription)
-
-	TemplateLinkedPolicyDefinitionItem_policyTemplateId = TemplateLinkedPolicyDefinitionItem.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	TemplateLinkedPolicyDefinitionItem_principal = TemplateLinkedPolicyDefinitionItem.AddMember("principal", EntityIdentifier)
-
-	TemplateLinkedPolicyDefinitionItem_resource = TemplateLinkedPolicyDefinitionItem.AddMember("resource", EntityIdentifier)
-
-	PolicyDefinitionItem_static = PolicyDefinitionItem.AddMember("static", StaticPolicyDefinitionItem)
-
-	PolicyDefinitionItem_templateLinked = PolicyDefinitionItem.AddMember("templateLinked", TemplateLinkedPolicyDefinitionItem)
-
-	PolicyEffect_PERMIT = PolicyEffect.AddMember("PERMIT", smithyprelude.Unit)
-
-	PolicyEffect_FORBID = PolicyEffect.AddMember("FORBID", smithyprelude.Unit)
-
-	PolicyFilter_principal = PolicyFilter.AddMember("principal", EntityReference)
-
-	PolicyFilter_resource = PolicyFilter.AddMember("resource", EntityReference)
-
-	PolicyFilter_policyType = PolicyFilter.AddMember("policyType", PolicyType)
-
-	PolicyFilter_policyTemplateId = PolicyFilter.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	PolicyItem_policyStoreId = PolicyItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	PolicyItem_policyId = PolicyItem.AddMember("policyId", _PolicyId)
-
-	PolicyItem_policyType = PolicyItem.AddMember("policyType", PolicyType)
-
-	PolicyItem_principal = PolicyItem.AddMember("principal", EntityIdentifier)
-
-	PolicyItem_resource = PolicyItem.AddMember("resource", EntityIdentifier)
-
-	PolicyItem_actions = PolicyItem.AddMember("actions", _ActionIdentifierList)
-
-	PolicyItem_definition = PolicyItem.AddMember("definition", PolicyDefinitionItem)
-
-	PolicyItem_createdDate = PolicyItem.AddMember("createdDate", _TimestampFormat)
-
-	PolicyItem_lastUpdatedDate = PolicyItem.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	PolicyItem_effect = PolicyItem.AddMember("effect", PolicyEffect)
-
-	PolicyItem_name = PolicyItem.AddMember("name", _PolicyName)
-
-	_PolicyList_member = _PolicyList.AddMember("member", PolicyItem)
-
-	PolicyStoreAliasFilter_policyStoreId = PolicyStoreAliasFilter.AddMember("policyStoreId", _PolicyStoreId)
-
-	PolicyStoreAliasItem_aliasName = PolicyStoreAliasItem.AddMember("aliasName", _Alias)
-
-	PolicyStoreAliasItem_policyStoreId = PolicyStoreAliasItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	PolicyStoreAliasItem_aliasArn = PolicyStoreAliasItem.AddMember("aliasArn", _ResourceArn)
-
-	PolicyStoreAliasItem_createdAt = PolicyStoreAliasItem.AddMember("createdAt", _TimestampFormat)
-
-	PolicyStoreAliasItem_state = PolicyStoreAliasItem.AddMember("state", AliasState)
-
-	_PolicyStoreAliasList_member = _PolicyStoreAliasList.AddMember("member", PolicyStoreAliasItem)
-
-	PolicyStoreItem_policyStoreId = PolicyStoreItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	PolicyStoreItem_arn = PolicyStoreItem.AddMember("arn", _ResourceArn)
-
-	PolicyStoreItem_createdDate = PolicyStoreItem.AddMember("createdDate", _TimestampFormat)
-
-	PolicyStoreItem_lastUpdatedDate = PolicyStoreItem.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	PolicyStoreItem_description = PolicyStoreItem.AddMember("description", _PolicyStoreDescription)
-
-	_PolicyStoreList_member = _PolicyStoreList.AddMember("member", PolicyStoreItem)
-
-	PolicyTemplateItem_policyStoreId = PolicyTemplateItem.AddMember("policyStoreId", _PolicyStoreId)
-
-	PolicyTemplateItem_policyTemplateId = PolicyTemplateItem.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	PolicyTemplateItem_description = PolicyTemplateItem.AddMember("description", _PolicyTemplateDescription)
-
-	PolicyTemplateItem_createdDate = PolicyTemplateItem.AddMember("createdDate", _TimestampFormat)
-
-	PolicyTemplateItem_lastUpdatedDate = PolicyTemplateItem.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	PolicyTemplateItem_name = PolicyTemplateItem.AddMember("name", _PolicyTemplateName)
-
-	_PolicyTemplatesList_member = _PolicyTemplatesList.AddMember("member", PolicyTemplateItem)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", ResourceType)
-
-	SchemaDefinition_cedarJson = SchemaDefinition.AddMember("cedarJson", _SchemaJson)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", smithyprelude.String)
-
-	TooManyTagsException_resourceName = TooManyTagsException.AddMember("resourceName", _AmazonResourceName)
-
-	UpdateCognitoGroupConfiguration_groupEntityType = UpdateCognitoGroupConfiguration.AddMember("groupEntityType", _GroupEntityType)
-
-	UpdateCognitoUserPoolConfiguration_userPoolArn = UpdateCognitoUserPoolConfiguration.AddMember("userPoolArn", _UserPoolArn)
-
-	UpdateCognitoUserPoolConfiguration_clientIds = UpdateCognitoUserPoolConfiguration.AddMember("clientIds", _ClientIds)
-
-	UpdateCognitoUserPoolConfiguration_groupConfiguration = UpdateCognitoUserPoolConfiguration.AddMember("groupConfiguration", UpdateCognitoGroupConfiguration)
-
-	UpdateOpenIdConnectGroupConfiguration_groupClaim = UpdateOpenIdConnectGroupConfiguration.AddMember("groupClaim", _Claim)
-
-	UpdateOpenIdConnectGroupConfiguration_groupEntityType = UpdateOpenIdConnectGroupConfiguration.AddMember("groupEntityType", _GroupEntityType)
-
-	UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim = UpdateOpenIdConnectAccessTokenConfiguration.AddMember("principalIdClaim", _Claim)
-
-	UpdateOpenIdConnectAccessTokenConfiguration_audiences = UpdateOpenIdConnectAccessTokenConfiguration.AddMember("audiences", _Audiences)
-
-	UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim = UpdateOpenIdConnectIdentityTokenConfiguration.AddMember("principalIdClaim", _Claim)
-
-	UpdateOpenIdConnectIdentityTokenConfiguration_clientIds = UpdateOpenIdConnectIdentityTokenConfiguration.AddMember("clientIds", _ClientIds)
-
-	UpdateOpenIdConnectTokenSelection_accessTokenOnly = UpdateOpenIdConnectTokenSelection.AddMember("accessTokenOnly", UpdateOpenIdConnectAccessTokenConfiguration)
-
-	UpdateOpenIdConnectTokenSelection_identityTokenOnly = UpdateOpenIdConnectTokenSelection.AddMember("identityTokenOnly", UpdateOpenIdConnectIdentityTokenConfiguration)
-
-	UpdateOpenIdConnectConfiguration_issuer = UpdateOpenIdConnectConfiguration.AddMember("issuer", _Issuer)
-
-	UpdateOpenIdConnectConfiguration_entityIdPrefix = UpdateOpenIdConnectConfiguration.AddMember("entityIdPrefix", _EntityIdPrefix)
-
-	UpdateOpenIdConnectConfiguration_groupConfiguration = UpdateOpenIdConnectConfiguration.AddMember("groupConfiguration", UpdateOpenIdConnectGroupConfiguration)
-
-	UpdateOpenIdConnectConfiguration_tokenSelection = UpdateOpenIdConnectConfiguration.AddMember("tokenSelection", UpdateOpenIdConnectTokenSelection)
-
-	UpdateConfiguration_cognitoUserPoolConfiguration = UpdateConfiguration.AddMember("cognitoUserPoolConfiguration", UpdateCognitoUserPoolConfiguration)
-
-	UpdateConfiguration_openIdConnectConfiguration = UpdateConfiguration.AddMember("openIdConnectConfiguration", UpdateOpenIdConnectConfiguration)
-
-	UpdateStaticPolicyDefinition_description = UpdateStaticPolicyDefinition.AddMember("description", _StaticPolicyDescription)
-
-	UpdateStaticPolicyDefinition_statement = UpdateStaticPolicyDefinition.AddMember("statement", _PolicyStatement)
-
-	UpdatePolicyDefinition_static = UpdatePolicyDefinition.AddMember("static", UpdateStaticPolicyDefinition)
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	ValidationMode_OFF = ValidationMode.AddMember("OFF", smithyprelude.Unit)
-
-	ValidationMode_STRICT = ValidationMode.AddMember("STRICT", smithyprelude.Unit)
-
-	ValidationSettings_mode = ValidationSettings.AddMember("mode", ValidationMode)
-
-	BatchGetPolicyInput_requests = BatchGetPolicyInput.AddMember("requests", _BatchGetPolicyInputList)
-
-	BatchGetPolicyOutput_results = BatchGetPolicyOutput.AddMember("results", _BatchGetPolicyOutputList)
-
-	BatchGetPolicyOutput_errors = BatchGetPolicyOutput.AddMember("errors", _BatchGetPolicyErrorList)
-
-	BatchIsAuthorizedInput_policyStoreId = BatchIsAuthorizedInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	BatchIsAuthorizedInput_entities = BatchIsAuthorizedInput.AddMember("entities", EntitiesDefinition)
-
-	BatchIsAuthorizedInput_requests = BatchIsAuthorizedInput.AddMember("requests", _BatchIsAuthorizedInputList)
-
-	BatchIsAuthorizedOutput_results = BatchIsAuthorizedOutput.AddMember("results", _BatchIsAuthorizedOutputList)
-
-	BatchIsAuthorizedWithTokenInput_policyStoreId = BatchIsAuthorizedWithTokenInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	BatchIsAuthorizedWithTokenInput_identityToken = BatchIsAuthorizedWithTokenInput.AddMember("identityToken", _Token)
-
-	BatchIsAuthorizedWithTokenInput_accessToken = BatchIsAuthorizedWithTokenInput.AddMember("accessToken", _Token)
-
-	BatchIsAuthorizedWithTokenInput_entities = BatchIsAuthorizedWithTokenInput.AddMember("entities", EntitiesDefinition)
-
-	BatchIsAuthorizedWithTokenInput_requests = BatchIsAuthorizedWithTokenInput.AddMember("requests", _BatchIsAuthorizedWithTokenInputList)
-
-	BatchIsAuthorizedWithTokenOutput_principal = BatchIsAuthorizedWithTokenOutput.AddMember("principal", EntityIdentifier)
-
-	BatchIsAuthorizedWithTokenOutput_results = BatchIsAuthorizedWithTokenOutput.AddMember("results", _BatchIsAuthorizedWithTokenOutputList)
-
-	CreateIdentitySourceInput_clientToken = CreateIdentitySourceInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreateIdentitySourceInput_policyStoreId = CreateIdentitySourceInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreateIdentitySourceInput_configuration = CreateIdentitySourceInput.AddMember("configuration", Configuration)
-
-	CreateIdentitySourceInput_principalEntityType = CreateIdentitySourceInput.AddMember("principalEntityType", _PrincipalEntityType)
-
-	CreateIdentitySourceOutput_createdDate = CreateIdentitySourceOutput.AddMember("createdDate", _TimestampFormat)
-
-	CreateIdentitySourceOutput_identitySourceId = CreateIdentitySourceOutput.AddMember("identitySourceId", _IdentitySourceId)
-
-	CreateIdentitySourceOutput_lastUpdatedDate = CreateIdentitySourceOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	CreateIdentitySourceOutput_policyStoreId = CreateIdentitySourceOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyInput_clientToken = CreatePolicyInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreatePolicyInput_policyStoreId = CreatePolicyInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyInput_definition = CreatePolicyInput.AddMember("definition", PolicyDefinition)
-
-	CreatePolicyInput_name = CreatePolicyInput.AddMember("name", _PolicyName)
-
-	CreatePolicyOutput_policyStoreId = CreatePolicyOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyOutput_policyId = CreatePolicyOutput.AddMember("policyId", _PolicyId)
-
-	CreatePolicyOutput_policyType = CreatePolicyOutput.AddMember("policyType", PolicyType)
-
-	CreatePolicyOutput_principal = CreatePolicyOutput.AddMember("principal", EntityIdentifier)
-
-	CreatePolicyOutput_resource = CreatePolicyOutput.AddMember("resource", EntityIdentifier)
-
-	CreatePolicyOutput_actions = CreatePolicyOutput.AddMember("actions", _ActionIdentifierList)
-
-	CreatePolicyOutput_createdDate = CreatePolicyOutput.AddMember("createdDate", _TimestampFormat)
-
-	CreatePolicyOutput_lastUpdatedDate = CreatePolicyOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	CreatePolicyOutput_effect = CreatePolicyOutput.AddMember("effect", PolicyEffect)
-
-	CreatePolicyStoreAliasInput_aliasName = CreatePolicyStoreAliasInput.AddMember("aliasName", _Alias)
-
-	CreatePolicyStoreAliasInput_policyStoreId = CreatePolicyStoreAliasInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyStoreAliasOutput_aliasName = CreatePolicyStoreAliasOutput.AddMember("aliasName", _Alias)
-
-	CreatePolicyStoreAliasOutput_policyStoreId = CreatePolicyStoreAliasOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyStoreAliasOutput_aliasArn = CreatePolicyStoreAliasOutput.AddMember("aliasArn", _ResourceArn)
-
-	CreatePolicyStoreAliasOutput_createdAt = CreatePolicyStoreAliasOutput.AddMember("createdAt", _TimestampFormat)
-
-	CreatePolicyStoreInput_clientToken = CreatePolicyStoreInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreatePolicyStoreInput_validationSettings = CreatePolicyStoreInput.AddMember("validationSettings", ValidationSettings)
-
-	CreatePolicyStoreInput_description = CreatePolicyStoreInput.AddMember("description", _PolicyStoreDescription)
-
-	CreatePolicyStoreInput_deletionProtection = CreatePolicyStoreInput.AddMember("deletionProtection", DeletionProtection)
-
-	CreatePolicyStoreInput_encryptionSettings = CreatePolicyStoreInput.AddMember("encryptionSettings", EncryptionSettings)
-
-	CreatePolicyStoreInput_tags = CreatePolicyStoreInput.AddMember("tags", _TagMap)
-
-	CreatePolicyStoreOutput_policyStoreId = CreatePolicyStoreOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyStoreOutput_arn = CreatePolicyStoreOutput.AddMember("arn", _ResourceArn)
-
-	CreatePolicyStoreOutput_createdDate = CreatePolicyStoreOutput.AddMember("createdDate", _TimestampFormat)
-
-	CreatePolicyStoreOutput_lastUpdatedDate = CreatePolicyStoreOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	CreatePolicyTemplateInput_clientToken = CreatePolicyTemplateInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreatePolicyTemplateInput_policyStoreId = CreatePolicyTemplateInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyTemplateInput_description = CreatePolicyTemplateInput.AddMember("description", _PolicyTemplateDescription)
-
-	CreatePolicyTemplateInput_statement = CreatePolicyTemplateInput.AddMember("statement", _PolicyStatement)
-
-	CreatePolicyTemplateInput_name = CreatePolicyTemplateInput.AddMember("name", _PolicyTemplateName)
-
-	CreatePolicyTemplateOutput_policyStoreId = CreatePolicyTemplateOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	CreatePolicyTemplateOutput_policyTemplateId = CreatePolicyTemplateOutput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	CreatePolicyTemplateOutput_createdDate = CreatePolicyTemplateOutput.AddMember("createdDate", _TimestampFormat)
-
-	CreatePolicyTemplateOutput_lastUpdatedDate = CreatePolicyTemplateOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	DeleteIdentitySourceInput_policyStoreId = DeleteIdentitySourceInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	DeleteIdentitySourceInput_identitySourceId = DeleteIdentitySourceInput.AddMember("identitySourceId", _IdentitySourceId)
-
-	DeletePolicyInput_policyStoreId = DeletePolicyInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	DeletePolicyInput_policyId = DeletePolicyInput.AddMember("policyId", _PolicyId)
-
-	DeletePolicyStoreAliasInput_aliasName = DeletePolicyStoreAliasInput.AddMember("aliasName", _Alias)
-
-	DeletePolicyStoreAliasInput_deletionMode = DeletePolicyStoreAliasInput.AddMember("deletionMode", DeletionMode)
-
-	DeletePolicyStoreInput_policyStoreId = DeletePolicyStoreInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	DeletePolicyTemplateInput_policyStoreId = DeletePolicyTemplateInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	DeletePolicyTemplateInput_policyTemplateId = DeletePolicyTemplateInput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	GetIdentitySourceInput_policyStoreId = GetIdentitySourceInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetIdentitySourceInput_identitySourceId = GetIdentitySourceInput.AddMember("identitySourceId", _IdentitySourceId)
-
-	GetIdentitySourceOutput_createdDate = GetIdentitySourceOutput.AddMember("createdDate", _TimestampFormat)
-
-	GetIdentitySourceOutput_details = GetIdentitySourceOutput.AddMember("details", IdentitySourceDetails)
-
-	GetIdentitySourceOutput_identitySourceId = GetIdentitySourceOutput.AddMember("identitySourceId", _IdentitySourceId)
-
-	GetIdentitySourceOutput_lastUpdatedDate = GetIdentitySourceOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	GetIdentitySourceOutput_policyStoreId = GetIdentitySourceOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetIdentitySourceOutput_principalEntityType = GetIdentitySourceOutput.AddMember("principalEntityType", _PrincipalEntityType)
-
-	GetIdentitySourceOutput_configuration = GetIdentitySourceOutput.AddMember("configuration", ConfigurationDetail)
-
-	GetPolicyInput_policyStoreId = GetPolicyInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyInput_policyId = GetPolicyInput.AddMember("policyId", _PolicyId)
-
-	GetPolicyOutput_policyStoreId = GetPolicyOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyOutput_policyId = GetPolicyOutput.AddMember("policyId", _PolicyId)
-
-	GetPolicyOutput_policyType = GetPolicyOutput.AddMember("policyType", PolicyType)
-
-	GetPolicyOutput_principal = GetPolicyOutput.AddMember("principal", EntityIdentifier)
-
-	GetPolicyOutput_resource = GetPolicyOutput.AddMember("resource", EntityIdentifier)
-
-	GetPolicyOutput_actions = GetPolicyOutput.AddMember("actions", _ActionIdentifierList)
-
-	GetPolicyOutput_definition = GetPolicyOutput.AddMember("definition", PolicyDefinitionDetail)
-
-	GetPolicyOutput_createdDate = GetPolicyOutput.AddMember("createdDate", _TimestampFormat)
-
-	GetPolicyOutput_lastUpdatedDate = GetPolicyOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	GetPolicyOutput_effect = GetPolicyOutput.AddMember("effect", PolicyEffect)
-
-	GetPolicyOutput_name = GetPolicyOutput.AddMember("name", _PolicyName)
-
-	GetPolicyStoreAliasInput_aliasName = GetPolicyStoreAliasInput.AddMember("aliasName", _Alias)
-
-	GetPolicyStoreAliasOutput_aliasName = GetPolicyStoreAliasOutput.AddMember("aliasName", _Alias)
-
-	GetPolicyStoreAliasOutput_policyStoreId = GetPolicyStoreAliasOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyStoreAliasOutput_aliasArn = GetPolicyStoreAliasOutput.AddMember("aliasArn", _ResourceArn)
-
-	GetPolicyStoreAliasOutput_createdAt = GetPolicyStoreAliasOutput.AddMember("createdAt", _TimestampFormat)
-
-	GetPolicyStoreAliasOutput_state = GetPolicyStoreAliasOutput.AddMember("state", AliasState)
-
-	GetPolicyStoreInput_policyStoreId = GetPolicyStoreInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyStoreInput_tags = GetPolicyStoreInput.AddMember("tags", smithyprelude.Boolean)
-
-	GetPolicyStoreOutput_policyStoreId = GetPolicyStoreOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyStoreOutput_arn = GetPolicyStoreOutput.AddMember("arn", _ResourceArn)
-
-	GetPolicyStoreOutput_validationSettings = GetPolicyStoreOutput.AddMember("validationSettings", ValidationSettings)
-
-	GetPolicyStoreOutput_createdDate = GetPolicyStoreOutput.AddMember("createdDate", _TimestampFormat)
-
-	GetPolicyStoreOutput_lastUpdatedDate = GetPolicyStoreOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	GetPolicyStoreOutput_description = GetPolicyStoreOutput.AddMember("description", _PolicyStoreDescription)
-
-	GetPolicyStoreOutput_deletionProtection = GetPolicyStoreOutput.AddMember("deletionProtection", DeletionProtection)
-
-	GetPolicyStoreOutput_encryptionState = GetPolicyStoreOutput.AddMember("encryptionState", EncryptionState)
-
-	GetPolicyStoreOutput_cedarVersion = GetPolicyStoreOutput.AddMember("cedarVersion", CedarVersion)
-
-	GetPolicyStoreOutput_tags = GetPolicyStoreOutput.AddMember("tags", _TagMap)
-
-	GetPolicyTemplateInput_policyStoreId = GetPolicyTemplateInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyTemplateInput_policyTemplateId = GetPolicyTemplateInput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	GetPolicyTemplateOutput_policyStoreId = GetPolicyTemplateOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetPolicyTemplateOutput_policyTemplateId = GetPolicyTemplateOutput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	GetPolicyTemplateOutput_description = GetPolicyTemplateOutput.AddMember("description", _PolicyTemplateDescription)
-
-	GetPolicyTemplateOutput_statement = GetPolicyTemplateOutput.AddMember("statement", _PolicyStatement)
-
-	GetPolicyTemplateOutput_createdDate = GetPolicyTemplateOutput.AddMember("createdDate", _TimestampFormat)
-
-	GetPolicyTemplateOutput_lastUpdatedDate = GetPolicyTemplateOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	GetPolicyTemplateOutput_name = GetPolicyTemplateOutput.AddMember("name", _PolicyTemplateName)
-
-	GetSchemaInput_policyStoreId = GetSchemaInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetSchemaOutput_policyStoreId = GetSchemaOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	GetSchemaOutput_schema = GetSchemaOutput.AddMember("schema", _SchemaJson)
-
-	GetSchemaOutput_createdDate = GetSchemaOutput.AddMember("createdDate", _TimestampFormat)
-
-	GetSchemaOutput_lastUpdatedDate = GetSchemaOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	GetSchemaOutput_namespaces = GetSchemaOutput.AddMember("namespaces", _NamespaceList)
-
-	IsAuthorizedInput_policyStoreId = IsAuthorizedInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	IsAuthorizedInput_principal = IsAuthorizedInput.AddMember("principal", EntityIdentifier)
-
-	IsAuthorizedInput_action = IsAuthorizedInput.AddMember("action", ActionIdentifier)
-
-	IsAuthorizedInput_resource = IsAuthorizedInput.AddMember("resource", EntityIdentifier)
-
-	IsAuthorizedInput_context = IsAuthorizedInput.AddMember("context", ContextDefinition)
-
-	IsAuthorizedInput_entities = IsAuthorizedInput.AddMember("entities", EntitiesDefinition)
-
-	IsAuthorizedOutput_decision = IsAuthorizedOutput.AddMember("decision", Decision)
-
-	IsAuthorizedOutput_determiningPolicies = IsAuthorizedOutput.AddMember("determiningPolicies", _DeterminingPolicyList)
-
-	IsAuthorizedOutput_errors = IsAuthorizedOutput.AddMember("errors", _EvaluationErrorList)
-
-	IsAuthorizedWithTokenInput_policyStoreId = IsAuthorizedWithTokenInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	IsAuthorizedWithTokenInput_identityToken = IsAuthorizedWithTokenInput.AddMember("identityToken", _Token)
-
-	IsAuthorizedWithTokenInput_accessToken = IsAuthorizedWithTokenInput.AddMember("accessToken", _Token)
-
-	IsAuthorizedWithTokenInput_action = IsAuthorizedWithTokenInput.AddMember("action", ActionIdentifier)
-
-	IsAuthorizedWithTokenInput_resource = IsAuthorizedWithTokenInput.AddMember("resource", EntityIdentifier)
-
-	IsAuthorizedWithTokenInput_context = IsAuthorizedWithTokenInput.AddMember("context", ContextDefinition)
-
-	IsAuthorizedWithTokenInput_entities = IsAuthorizedWithTokenInput.AddMember("entities", EntitiesDefinition)
-
-	IsAuthorizedWithTokenOutput_decision = IsAuthorizedWithTokenOutput.AddMember("decision", Decision)
-
-	IsAuthorizedWithTokenOutput_determiningPolicies = IsAuthorizedWithTokenOutput.AddMember("determiningPolicies", _DeterminingPolicyList)
-
-	IsAuthorizedWithTokenOutput_errors = IsAuthorizedWithTokenOutput.AddMember("errors", _EvaluationErrorList)
-
-	IsAuthorizedWithTokenOutput_principal = IsAuthorizedWithTokenOutput.AddMember("principal", EntityIdentifier)
-
-	ListIdentitySourcesInput_policyStoreId = ListIdentitySourcesInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	ListIdentitySourcesInput_nextToken = ListIdentitySourcesInput.AddMember("nextToken", _NextToken)
-
-	ListIdentitySourcesInput_maxResults = ListIdentitySourcesInput.AddMember("maxResults", _ListIdentitySourcesMaxResults)
-
-	ListIdentitySourcesInput_filters = ListIdentitySourcesInput.AddMember("filters", _IdentitySourceFilters)
-
-	ListIdentitySourcesOutput_nextToken = ListIdentitySourcesOutput.AddMember("nextToken", _NextToken)
-
-	ListIdentitySourcesOutput_identitySources = ListIdentitySourcesOutput.AddMember("identitySources", _IdentitySources)
-
-	ListPoliciesInput_policyStoreId = ListPoliciesInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	ListPoliciesInput_nextToken = ListPoliciesInput.AddMember("nextToken", _NextToken)
-
-	ListPoliciesInput_maxResults = ListPoliciesInput.AddMember("maxResults", _MaxResults)
-
-	ListPoliciesInput_filter = ListPoliciesInput.AddMember("filter", PolicyFilter)
-
-	ListPoliciesOutput_nextToken = ListPoliciesOutput.AddMember("nextToken", _NextToken)
-
-	ListPoliciesOutput_policies = ListPoliciesOutput.AddMember("policies", _PolicyList)
-
-	ListPolicyStoreAliasesInput_nextToken = ListPolicyStoreAliasesInput.AddMember("nextToken", _NextToken)
-
-	ListPolicyStoreAliasesInput_maxResults = ListPolicyStoreAliasesInput.AddMember("maxResults", _MaxResults)
-
-	ListPolicyStoreAliasesInput_filter = ListPolicyStoreAliasesInput.AddMember("filter", PolicyStoreAliasFilter)
-
-	ListPolicyStoreAliasesOutput_nextToken = ListPolicyStoreAliasesOutput.AddMember("nextToken", _NextToken)
-
-	ListPolicyStoreAliasesOutput_policyStoreAliases = ListPolicyStoreAliasesOutput.AddMember("policyStoreAliases", _PolicyStoreAliasList)
-
-	ListPolicyStoresInput_nextToken = ListPolicyStoresInput.AddMember("nextToken", _NextToken)
-
-	ListPolicyStoresInput_maxResults = ListPolicyStoresInput.AddMember("maxResults", _MaxResults)
-
-	ListPolicyStoresOutput_nextToken = ListPolicyStoresOutput.AddMember("nextToken", _NextToken)
-
-	ListPolicyStoresOutput_policyStores = ListPolicyStoresOutput.AddMember("policyStores", _PolicyStoreList)
-
-	ListPolicyTemplatesInput_policyStoreId = ListPolicyTemplatesInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	ListPolicyTemplatesInput_nextToken = ListPolicyTemplatesInput.AddMember("nextToken", _NextToken)
-
-	ListPolicyTemplatesInput_maxResults = ListPolicyTemplatesInput.AddMember("maxResults", _MaxResults)
-
-	ListPolicyTemplatesOutput_nextToken = ListPolicyTemplatesOutput.AddMember("nextToken", _NextToken)
-
-	ListPolicyTemplatesOutput_policyTemplates = ListPolicyTemplatesOutput.AddMember("policyTemplates", _PolicyTemplatesList)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _AmazonResourceName)
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	PutSchemaInput_policyStoreId = PutSchemaInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	PutSchemaInput_definition = PutSchemaInput.AddMember("definition", SchemaDefinition)
-
-	PutSchemaOutput_policyStoreId = PutSchemaOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	PutSchemaOutput_namespaces = PutSchemaOutput.AddMember("namespaces", _NamespaceList)
-
-	PutSchemaOutput_createdDate = PutSchemaOutput.AddMember("createdDate", _TimestampFormat)
-
-	PutSchemaOutput_lastUpdatedDate = PutSchemaOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _AmazonResourceName)
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _AmazonResourceName)
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList)
-
-	UpdateIdentitySourceInput_policyStoreId = UpdateIdentitySourceInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdateIdentitySourceInput_identitySourceId = UpdateIdentitySourceInput.AddMember("identitySourceId", _IdentitySourceId)
-
-	UpdateIdentitySourceInput_updateConfiguration = UpdateIdentitySourceInput.AddMember("updateConfiguration", UpdateConfiguration)
-
-	UpdateIdentitySourceInput_principalEntityType = UpdateIdentitySourceInput.AddMember("principalEntityType", _PrincipalEntityType)
-
-	UpdateIdentitySourceOutput_createdDate = UpdateIdentitySourceOutput.AddMember("createdDate", _TimestampFormat)
-
-	UpdateIdentitySourceOutput_identitySourceId = UpdateIdentitySourceOutput.AddMember("identitySourceId", _IdentitySourceId)
-
-	UpdateIdentitySourceOutput_lastUpdatedDate = UpdateIdentitySourceOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	UpdateIdentitySourceOutput_policyStoreId = UpdateIdentitySourceOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyInput_policyStoreId = UpdatePolicyInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyInput_policyId = UpdatePolicyInput.AddMember("policyId", _PolicyId)
-
-	UpdatePolicyInput_definition = UpdatePolicyInput.AddMember("definition", UpdatePolicyDefinition)
-
-	UpdatePolicyInput_name = UpdatePolicyInput.AddMember("name", _PolicyName)
-
-	UpdatePolicyOutput_policyStoreId = UpdatePolicyOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyOutput_policyId = UpdatePolicyOutput.AddMember("policyId", _PolicyId)
-
-	UpdatePolicyOutput_policyType = UpdatePolicyOutput.AddMember("policyType", PolicyType)
-
-	UpdatePolicyOutput_principal = UpdatePolicyOutput.AddMember("principal", EntityIdentifier)
-
-	UpdatePolicyOutput_resource = UpdatePolicyOutput.AddMember("resource", EntityIdentifier)
-
-	UpdatePolicyOutput_actions = UpdatePolicyOutput.AddMember("actions", _ActionIdentifierList)
-
-	UpdatePolicyOutput_createdDate = UpdatePolicyOutput.AddMember("createdDate", _TimestampFormat)
-
-	UpdatePolicyOutput_lastUpdatedDate = UpdatePolicyOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	UpdatePolicyOutput_effect = UpdatePolicyOutput.AddMember("effect", PolicyEffect)
-
-	UpdatePolicyStoreInput_policyStoreId = UpdatePolicyStoreInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyStoreInput_validationSettings = UpdatePolicyStoreInput.AddMember("validationSettings", ValidationSettings)
-
-	UpdatePolicyStoreInput_deletionProtection = UpdatePolicyStoreInput.AddMember("deletionProtection", DeletionProtection)
-
-	UpdatePolicyStoreInput_description = UpdatePolicyStoreInput.AddMember("description", _PolicyStoreDescription)
-
-	UpdatePolicyStoreOutput_policyStoreId = UpdatePolicyStoreOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyStoreOutput_arn = UpdatePolicyStoreOutput.AddMember("arn", _ResourceArn)
-
-	UpdatePolicyStoreOutput_createdDate = UpdatePolicyStoreOutput.AddMember("createdDate", _TimestampFormat)
-
-	UpdatePolicyStoreOutput_lastUpdatedDate = UpdatePolicyStoreOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
-	UpdatePolicyTemplateInput_policyStoreId = UpdatePolicyTemplateInput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyTemplateInput_policyTemplateId = UpdatePolicyTemplateInput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	UpdatePolicyTemplateInput_description = UpdatePolicyTemplateInput.AddMember("description", _PolicyTemplateDescription)
-
-	UpdatePolicyTemplateInput_statement = UpdatePolicyTemplateInput.AddMember("statement", _PolicyStatement)
-
-	UpdatePolicyTemplateInput_name = UpdatePolicyTemplateInput.AddMember("name", _PolicyTemplateName)
-
-	UpdatePolicyTemplateOutput_policyStoreId = UpdatePolicyTemplateOutput.AddMember("policyStoreId", _PolicyStoreId)
-
-	UpdatePolicyTemplateOutput_policyTemplateId = UpdatePolicyTemplateOutput.AddMember("policyTemplateId", _PolicyTemplateId)
-
-	UpdatePolicyTemplateOutput_createdDate = UpdatePolicyTemplateOutput.AddMember("createdDate", _TimestampFormat)
-
-	UpdatePolicyTemplateOutput_lastUpdatedDate = UpdatePolicyTemplateOutput.AddMember("lastUpdatedDate", _TimestampFormat)
-
+	s_CedarTagSetAttribute_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCedarTagValue, Members: &mCedarTagValue, Type: smithy.ShapeTypeUnion, Ext: &e_CedarTagSetAttribute_member})
+	sCedarTagValue_record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "record", ID: &i_CedarTagRecordAttribute, Members: &m_CedarTagRecordAttribute, Type: smithy.ShapeTypeMap, Ext: &eCedarTagValue_record})
+	s_RecordAttribute_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_RecordAttribute_value})
+	s_SetAttribute_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_SetAttribute_member})
 }
+
+var BatchGetPolicy = &sBatchGetPolicy
+
+var BatchIsAuthorized = &sBatchIsAuthorized
+
+var BatchIsAuthorizedWithToken = &sBatchIsAuthorizedWithToken
+
+var CreateIdentitySource = &sCreateIdentitySource
+
+var CreatePolicy = &sCreatePolicy
+
+var CreatePolicyStore = &sCreatePolicyStore
+
+var CreatePolicyStoreAlias = &sCreatePolicyStoreAlias
+
+var CreatePolicyTemplate = &sCreatePolicyTemplate
+
+var DeleteIdentitySource = &sDeleteIdentitySource
+
+var DeletePolicy = &sDeletePolicy
+
+var DeletePolicyStore = &sDeletePolicyStore
+
+var DeletePolicyStoreAlias = &sDeletePolicyStoreAlias
+
+var DeletePolicyTemplate = &sDeletePolicyTemplate
+
+var GetIdentitySource = &sGetIdentitySource
+
+var GetPolicy = &sGetPolicy
+
+var GetPolicyStore = &sGetPolicyStore
+
+var GetPolicyStoreAlias = &sGetPolicyStoreAlias
+
+var GetPolicyTemplate = &sGetPolicyTemplate
+
+var GetSchema = &sGetSchema
+
+var IsAuthorized = &sIsAuthorized
+
+var IsAuthorizedWithToken = &sIsAuthorizedWithToken
+
+var ListIdentitySources = &sListIdentitySources
+
+var ListPolicies = &sListPolicies
+
+var ListPolicyStoreAliases = &sListPolicyStoreAliases
+
+var ListPolicyStores = &sListPolicyStores
+
+var ListPolicyTemplates = &sListPolicyTemplates
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutSchema = &sPutSchema
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateIdentitySource = &sUpdateIdentitySource
+
+var UpdatePolicy = &sUpdatePolicy
+
+var UpdatePolicyStore = &sUpdatePolicyStore
+
+var UpdatePolicyTemplate = &sUpdatePolicyTemplate
+
+var _VerifiedPermissions = &s_VerifiedPermissions
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _ActionId = &s_ActionId
+
+var ActionIdentifier = &sActionIdentifier
+var ActionIdentifier_actionType = &sActionIdentifier_actionType
+var ActionIdentifier_actionId = &sActionIdentifier_actionId
+
+var _ActionIdentifierList = &s_ActionIdentifierList
+var _ActionIdentifierList_member = &s_ActionIdentifierList_member
+
+var _ActionType = &s_ActionType
+
+var _Alias = &s_Alias
+
+var AliasState = &sAliasState
+var AliasState_ACTIVE = &sAliasState_ACTIVE
+var AliasState_PENDING_DELETION = &sAliasState_PENDING_DELETION
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var AttributeValue = &sAttributeValue
+var AttributeValue_boolean = &sAttributeValue_boolean
+var AttributeValue_entityIdentifier = &sAttributeValue_entityIdentifier
+var AttributeValue_long = &sAttributeValue_long
+var AttributeValue_string = &sAttributeValue_string
+var AttributeValue_set = &sAttributeValue_set
+var AttributeValue_record = &sAttributeValue_record
+var AttributeValue_ipaddr = &sAttributeValue_ipaddr
+var AttributeValue_decimal = &sAttributeValue_decimal
+var AttributeValue_datetime = &sAttributeValue_datetime
+var AttributeValue_duration = &sAttributeValue_duration
+
+var _Audience = &s_Audience
+
+var _Audiences = &s_Audiences
+var _Audiences_member = &s_Audiences_member
+
+var BatchGetPolicyErrorCode = &sBatchGetPolicyErrorCode
+var BatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND = &sBatchGetPolicyErrorCode_POLICY_STORE_NOT_FOUND
+var BatchGetPolicyErrorCode_POLICY_NOT_FOUND = &sBatchGetPolicyErrorCode_POLICY_NOT_FOUND
+var BatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND = &sBatchGetPolicyErrorCode_POLICY_STORE_ALIAS_NOT_FOUND
+
+var BatchGetPolicyErrorItem = &sBatchGetPolicyErrorItem
+var BatchGetPolicyErrorItem_code = &sBatchGetPolicyErrorItem_code
+var BatchGetPolicyErrorItem_policyStoreId = &sBatchGetPolicyErrorItem_policyStoreId
+var BatchGetPolicyErrorItem_policyId = &sBatchGetPolicyErrorItem_policyId
+var BatchGetPolicyErrorItem_message = &sBatchGetPolicyErrorItem_message
+
+var _BatchGetPolicyErrorList = &s_BatchGetPolicyErrorList
+var _BatchGetPolicyErrorList_member = &s_BatchGetPolicyErrorList_member
+
+var BatchGetPolicyInputItem = &sBatchGetPolicyInputItem
+var BatchGetPolicyInputItem_policyStoreId = &sBatchGetPolicyInputItem_policyStoreId
+var BatchGetPolicyInputItem_policyId = &sBatchGetPolicyInputItem_policyId
+
+var _BatchGetPolicyInputList = &s_BatchGetPolicyInputList
+var _BatchGetPolicyInputList_member = &s_BatchGetPolicyInputList_member
+
+var BatchGetPolicyOutputItem = &sBatchGetPolicyOutputItem
+var BatchGetPolicyOutputItem_policyStoreId = &sBatchGetPolicyOutputItem_policyStoreId
+var BatchGetPolicyOutputItem_policyId = &sBatchGetPolicyOutputItem_policyId
+var BatchGetPolicyOutputItem_policyType = &sBatchGetPolicyOutputItem_policyType
+var BatchGetPolicyOutputItem_definition = &sBatchGetPolicyOutputItem_definition
+var BatchGetPolicyOutputItem_createdDate = &sBatchGetPolicyOutputItem_createdDate
+var BatchGetPolicyOutputItem_lastUpdatedDate = &sBatchGetPolicyOutputItem_lastUpdatedDate
+var BatchGetPolicyOutputItem_name = &sBatchGetPolicyOutputItem_name
+
+var _BatchGetPolicyOutputList = &s_BatchGetPolicyOutputList
+var _BatchGetPolicyOutputList_member = &s_BatchGetPolicyOutputList_member
+
+var BatchIsAuthorizedInputItem = &sBatchIsAuthorizedInputItem
+var BatchIsAuthorizedInputItem_principal = &sBatchIsAuthorizedInputItem_principal
+var BatchIsAuthorizedInputItem_action = &sBatchIsAuthorizedInputItem_action
+var BatchIsAuthorizedInputItem_resource = &sBatchIsAuthorizedInputItem_resource
+var BatchIsAuthorizedInputItem_context = &sBatchIsAuthorizedInputItem_context
+
+var _BatchIsAuthorizedInputList = &s_BatchIsAuthorizedInputList
+var _BatchIsAuthorizedInputList_member = &s_BatchIsAuthorizedInputList_member
+
+var BatchIsAuthorizedOutputItem = &sBatchIsAuthorizedOutputItem
+var BatchIsAuthorizedOutputItem_request = &sBatchIsAuthorizedOutputItem_request
+var BatchIsAuthorizedOutputItem_decision = &sBatchIsAuthorizedOutputItem_decision
+var BatchIsAuthorizedOutputItem_determiningPolicies = &sBatchIsAuthorizedOutputItem_determiningPolicies
+var BatchIsAuthorizedOutputItem_errors = &sBatchIsAuthorizedOutputItem_errors
+
+var _BatchIsAuthorizedOutputList = &s_BatchIsAuthorizedOutputList
+var _BatchIsAuthorizedOutputList_member = &s_BatchIsAuthorizedOutputList_member
+
+var BatchIsAuthorizedWithTokenInputItem = &sBatchIsAuthorizedWithTokenInputItem
+var BatchIsAuthorizedWithTokenInputItem_action = &sBatchIsAuthorizedWithTokenInputItem_action
+var BatchIsAuthorizedWithTokenInputItem_resource = &sBatchIsAuthorizedWithTokenInputItem_resource
+var BatchIsAuthorizedWithTokenInputItem_context = &sBatchIsAuthorizedWithTokenInputItem_context
+
+var _BatchIsAuthorizedWithTokenInputList = &s_BatchIsAuthorizedWithTokenInputList
+var _BatchIsAuthorizedWithTokenInputList_member = &s_BatchIsAuthorizedWithTokenInputList_member
+
+var BatchIsAuthorizedWithTokenOutputItem = &sBatchIsAuthorizedWithTokenOutputItem
+var BatchIsAuthorizedWithTokenOutputItem_request = &sBatchIsAuthorizedWithTokenOutputItem_request
+var BatchIsAuthorizedWithTokenOutputItem_decision = &sBatchIsAuthorizedWithTokenOutputItem_decision
+var BatchIsAuthorizedWithTokenOutputItem_determiningPolicies = &sBatchIsAuthorizedWithTokenOutputItem_determiningPolicies
+var BatchIsAuthorizedWithTokenOutputItem_errors = &sBatchIsAuthorizedWithTokenOutputItem_errors
+
+var _BatchIsAuthorizedWithTokenOutputList = &s_BatchIsAuthorizedWithTokenOutputList
+var _BatchIsAuthorizedWithTokenOutputList_member = &s_BatchIsAuthorizedWithTokenOutputList_member
+
+var _BooleanAttribute = &s_BooleanAttribute
+
+var _CedarJson = &s_CedarJson
+
+var _CedarTagRecordAttribute = &s_CedarTagRecordAttribute
+var _CedarTagRecordAttribute_key = &s_CedarTagRecordAttribute_key
+var _CedarTagRecordAttribute_value = &s_CedarTagRecordAttribute_value
+
+var _CedarTagSetAttribute = &s_CedarTagSetAttribute
+var _CedarTagSetAttribute_member = &s_CedarTagSetAttribute_member
+
+var CedarTagValue = &sCedarTagValue
+var CedarTagValue_boolean = &sCedarTagValue_boolean
+var CedarTagValue_entityIdentifier = &sCedarTagValue_entityIdentifier
+var CedarTagValue_long = &sCedarTagValue_long
+var CedarTagValue_string = &sCedarTagValue_string
+var CedarTagValue_set = &sCedarTagValue_set
+var CedarTagValue_record = &sCedarTagValue_record
+var CedarTagValue_ipaddr = &sCedarTagValue_ipaddr
+var CedarTagValue_decimal = &sCedarTagValue_decimal
+var CedarTagValue_datetime = &sCedarTagValue_datetime
+var CedarTagValue_duration = &sCedarTagValue_duration
+
+var CedarVersion = &sCedarVersion
+var CedarVersion_CEDAR_2 = &sCedarVersion_CEDAR_2
+var CedarVersion_CEDAR_4 = &sCedarVersion_CEDAR_4
+
+var _Claim = &s_Claim
+
+var _ClientId = &s_ClientId
+
+var _ClientIds = &s_ClientIds
+var _ClientIds_member = &s_ClientIds_member
+
+var CognitoGroupConfiguration = &sCognitoGroupConfiguration
+var CognitoGroupConfiguration_groupEntityType = &sCognitoGroupConfiguration_groupEntityType
+
+var CognitoGroupConfigurationDetail = &sCognitoGroupConfigurationDetail
+var CognitoGroupConfigurationDetail_groupEntityType = &sCognitoGroupConfigurationDetail_groupEntityType
+
+var CognitoGroupConfigurationItem = &sCognitoGroupConfigurationItem
+var CognitoGroupConfigurationItem_groupEntityType = &sCognitoGroupConfigurationItem_groupEntityType
+
+var CognitoUserPoolConfiguration = &sCognitoUserPoolConfiguration
+var CognitoUserPoolConfiguration_userPoolArn = &sCognitoUserPoolConfiguration_userPoolArn
+var CognitoUserPoolConfiguration_clientIds = &sCognitoUserPoolConfiguration_clientIds
+var CognitoUserPoolConfiguration_groupConfiguration = &sCognitoUserPoolConfiguration_groupConfiguration
+
+var CognitoUserPoolConfigurationDetail = &sCognitoUserPoolConfigurationDetail
+var CognitoUserPoolConfigurationDetail_userPoolArn = &sCognitoUserPoolConfigurationDetail_userPoolArn
+var CognitoUserPoolConfigurationDetail_clientIds = &sCognitoUserPoolConfigurationDetail_clientIds
+var CognitoUserPoolConfigurationDetail_issuer = &sCognitoUserPoolConfigurationDetail_issuer
+var CognitoUserPoolConfigurationDetail_groupConfiguration = &sCognitoUserPoolConfigurationDetail_groupConfiguration
+
+var CognitoUserPoolConfigurationItem = &sCognitoUserPoolConfigurationItem
+var CognitoUserPoolConfigurationItem_userPoolArn = &sCognitoUserPoolConfigurationItem_userPoolArn
+var CognitoUserPoolConfigurationItem_clientIds = &sCognitoUserPoolConfigurationItem_clientIds
+var CognitoUserPoolConfigurationItem_issuer = &sCognitoUserPoolConfigurationItem_issuer
+var CognitoUserPoolConfigurationItem_groupConfiguration = &sCognitoUserPoolConfigurationItem_groupConfiguration
+
+var Configuration = &sConfiguration
+var Configuration_cognitoUserPoolConfiguration = &sConfiguration_cognitoUserPoolConfiguration
+var Configuration_openIdConnectConfiguration = &sConfiguration_openIdConnectConfiguration
+
+var ConfigurationDetail = &sConfigurationDetail
+var ConfigurationDetail_cognitoUserPoolConfiguration = &sConfigurationDetail_cognitoUserPoolConfiguration
+var ConfigurationDetail_openIdConnectConfiguration = &sConfigurationDetail_openIdConnectConfiguration
+
+var ConfigurationItem = &sConfigurationItem
+var ConfigurationItem_cognitoUserPoolConfiguration = &sConfigurationItem_cognitoUserPoolConfiguration
+var ConfigurationItem_openIdConnectConfiguration = &sConfigurationItem_openIdConnectConfiguration
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resources = &sConflictException_resources
+
+var ContextDefinition = &sContextDefinition
+var ContextDefinition_contextMap = &sContextDefinition_contextMap
+var ContextDefinition_cedarJson = &sContextDefinition_cedarJson
+
+var _ContextMap = &s_ContextMap
+var _ContextMap_key = &s_ContextMap_key
+var _ContextMap_value = &s_ContextMap_value
+
+var _DatetimeAttribute = &s_DatetimeAttribute
+
+var _Decimal = &s_Decimal
+
+var Decision = &sDecision
+var Decision_ALLOW = &sDecision_ALLOW
+var Decision_DENY = &sDecision_DENY
+
+var DeletionMode = &sDeletionMode
+var DeletionMode_SOFT_DELETE = &sDeletionMode_SOFT_DELETE
+var DeletionMode_HARD_DELETE = &sDeletionMode_HARD_DELETE
+
+var DeletionProtection = &sDeletionProtection
+var DeletionProtection_ENABLED = &sDeletionProtection_ENABLED
+var DeletionProtection_DISABLED = &sDeletionProtection_DISABLED
+
+var DeterminingPolicyItem = &sDeterminingPolicyItem
+var DeterminingPolicyItem_policyId = &sDeterminingPolicyItem_policyId
+
+var _DeterminingPolicyList = &s_DeterminingPolicyList
+var _DeterminingPolicyList_member = &s_DeterminingPolicyList_member
+
+var _DiscoveryUrl = &s_DiscoveryUrl
+
+var _Duration = &s_Duration
+
+var _EncryptionContext = &s_EncryptionContext
+var _EncryptionContext_key = &s_EncryptionContext_key
+var _EncryptionContext_value = &s_EncryptionContext_value
+
+var _EncryptionContextKey = &s_EncryptionContextKey
+
+var _EncryptionContextValue = &s_EncryptionContextValue
+
+var EncryptionSettings = &sEncryptionSettings
+var EncryptionSettings_kmsEncryptionSettings = &sEncryptionSettings_kmsEncryptionSettings
+var EncryptionSettings_default = &sEncryptionSettings_default
+
+var EncryptionState = &sEncryptionState
+var EncryptionState_kmsEncryptionState = &sEncryptionState_kmsEncryptionState
+var EncryptionState_default = &sEncryptionState_default
+
+var EntitiesDefinition = &sEntitiesDefinition
+var EntitiesDefinition_entityList = &sEntitiesDefinition_entityList
+var EntitiesDefinition_cedarJson = &sEntitiesDefinition_cedarJson
+
+var _EntityAttributes = &s_EntityAttributes
+var _EntityAttributes_key = &s_EntityAttributes_key
+var _EntityAttributes_value = &s_EntityAttributes_value
+
+var _EntityCedarTags = &s_EntityCedarTags
+var _EntityCedarTags_key = &s_EntityCedarTags_key
+var _EntityCedarTags_value = &s_EntityCedarTags_value
+
+var _EntityId = &s_EntityId
+
+var EntityIdentifier = &sEntityIdentifier
+var EntityIdentifier_entityType = &sEntityIdentifier_entityType
+var EntityIdentifier_entityId = &sEntityIdentifier_entityId
+
+var _EntityIdPrefix = &s_EntityIdPrefix
+
+var EntityItem = &sEntityItem
+var EntityItem_identifier = &sEntityItem_identifier
+var EntityItem_attributes = &sEntityItem_attributes
+var EntityItem_parents = &sEntityItem_parents
+var EntityItem_tags = &sEntityItem_tags
+
+var _EntityList = &s_EntityList
+var _EntityList_member = &s_EntityList_member
+
+var EntityReference = &sEntityReference
+var EntityReference_unspecified = &sEntityReference_unspecified
+var EntityReference_identifier = &sEntityReference_identifier
+
+var _EntityType = &s_EntityType
+
+var EvaluationErrorItem = &sEvaluationErrorItem
+var EvaluationErrorItem_errorDescription = &sEvaluationErrorItem_errorDescription
+
+var _EvaluationErrorList = &s_EvaluationErrorList
+var _EvaluationErrorList_member = &s_EvaluationErrorList_member
+
+var _GroupEntityType = &s_GroupEntityType
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var IdentitySourceDetails = &sIdentitySourceDetails
+var IdentitySourceDetails_clientIds = &sIdentitySourceDetails_clientIds
+var IdentitySourceDetails_userPoolArn = &sIdentitySourceDetails_userPoolArn
+var IdentitySourceDetails_discoveryUrl = &sIdentitySourceDetails_discoveryUrl
+var IdentitySourceDetails_openIdIssuer = &sIdentitySourceDetails_openIdIssuer
+
+var IdentitySourceFilter = &sIdentitySourceFilter
+var IdentitySourceFilter_principalEntityType = &sIdentitySourceFilter_principalEntityType
+
+var _IdentitySourceFilters = &s_IdentitySourceFilters
+var _IdentitySourceFilters_member = &s_IdentitySourceFilters_member
+
+var _IdentitySourceId = &s_IdentitySourceId
+
+var IdentitySourceItem = &sIdentitySourceItem
+var IdentitySourceItem_createdDate = &sIdentitySourceItem_createdDate
+var IdentitySourceItem_details = &sIdentitySourceItem_details
+var IdentitySourceItem_identitySourceId = &sIdentitySourceItem_identitySourceId
+var IdentitySourceItem_lastUpdatedDate = &sIdentitySourceItem_lastUpdatedDate
+var IdentitySourceItem_policyStoreId = &sIdentitySourceItem_policyStoreId
+var IdentitySourceItem_principalEntityType = &sIdentitySourceItem_principalEntityType
+var IdentitySourceItem_configuration = &sIdentitySourceItem_configuration
+
+var IdentitySourceItemDetails = &sIdentitySourceItemDetails
+var IdentitySourceItemDetails_clientIds = &sIdentitySourceItemDetails_clientIds
+var IdentitySourceItemDetails_userPoolArn = &sIdentitySourceItemDetails_userPoolArn
+var IdentitySourceItemDetails_discoveryUrl = &sIdentitySourceItemDetails_discoveryUrl
+var IdentitySourceItemDetails_openIdIssuer = &sIdentitySourceItemDetails_openIdIssuer
+
+var _IdentitySources = &s_IdentitySources
+var _IdentitySources_member = &s_IdentitySources_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_message = &sInvalidStateException_message
+
+var _IpAddr = &s_IpAddr
+
+var _Issuer = &s_Issuer
+
+var KmsEncryptionSettings = &sKmsEncryptionSettings
+var KmsEncryptionSettings_key = &sKmsEncryptionSettings_key
+var KmsEncryptionSettings_encryptionContext = &sKmsEncryptionSettings_encryptionContext
+
+var KmsEncryptionState = &sKmsEncryptionState
+var KmsEncryptionState_key = &sKmsEncryptionState_key
+var KmsEncryptionState_encryptionContext = &sKmsEncryptionState_encryptionContext
+
+var _KmsKey = &s_KmsKey
+
+var _ListIdentitySourcesMaxResults = &s_ListIdentitySourcesMaxResults
+
+var _LongAttribute = &s_LongAttribute
+
+var _MaxResults = &s_MaxResults
+
+var _Namespace = &s_Namespace
+
+var _NamespaceList = &s_NamespaceList
+var _NamespaceList_member = &s_NamespaceList_member
+
+var _NextToken = &s_NextToken
+
+var OpenIdConnectAccessTokenConfiguration = &sOpenIdConnectAccessTokenConfiguration
+var OpenIdConnectAccessTokenConfiguration_principalIdClaim = &sOpenIdConnectAccessTokenConfiguration_principalIdClaim
+var OpenIdConnectAccessTokenConfiguration_audiences = &sOpenIdConnectAccessTokenConfiguration_audiences
+
+var OpenIdConnectAccessTokenConfigurationDetail = &sOpenIdConnectAccessTokenConfigurationDetail
+var OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim = &sOpenIdConnectAccessTokenConfigurationDetail_principalIdClaim
+var OpenIdConnectAccessTokenConfigurationDetail_audiences = &sOpenIdConnectAccessTokenConfigurationDetail_audiences
+
+var OpenIdConnectAccessTokenConfigurationItem = &sOpenIdConnectAccessTokenConfigurationItem
+var OpenIdConnectAccessTokenConfigurationItem_principalIdClaim = &sOpenIdConnectAccessTokenConfigurationItem_principalIdClaim
+var OpenIdConnectAccessTokenConfigurationItem_audiences = &sOpenIdConnectAccessTokenConfigurationItem_audiences
+
+var OpenIdConnectConfiguration = &sOpenIdConnectConfiguration
+var OpenIdConnectConfiguration_issuer = &sOpenIdConnectConfiguration_issuer
+var OpenIdConnectConfiguration_entityIdPrefix = &sOpenIdConnectConfiguration_entityIdPrefix
+var OpenIdConnectConfiguration_groupConfiguration = &sOpenIdConnectConfiguration_groupConfiguration
+var OpenIdConnectConfiguration_tokenSelection = &sOpenIdConnectConfiguration_tokenSelection
+
+var OpenIdConnectConfigurationDetail = &sOpenIdConnectConfigurationDetail
+var OpenIdConnectConfigurationDetail_issuer = &sOpenIdConnectConfigurationDetail_issuer
+var OpenIdConnectConfigurationDetail_entityIdPrefix = &sOpenIdConnectConfigurationDetail_entityIdPrefix
+var OpenIdConnectConfigurationDetail_groupConfiguration = &sOpenIdConnectConfigurationDetail_groupConfiguration
+var OpenIdConnectConfigurationDetail_tokenSelection = &sOpenIdConnectConfigurationDetail_tokenSelection
+
+var OpenIdConnectConfigurationItem = &sOpenIdConnectConfigurationItem
+var OpenIdConnectConfigurationItem_issuer = &sOpenIdConnectConfigurationItem_issuer
+var OpenIdConnectConfigurationItem_entityIdPrefix = &sOpenIdConnectConfigurationItem_entityIdPrefix
+var OpenIdConnectConfigurationItem_groupConfiguration = &sOpenIdConnectConfigurationItem_groupConfiguration
+var OpenIdConnectConfigurationItem_tokenSelection = &sOpenIdConnectConfigurationItem_tokenSelection
+
+var OpenIdConnectGroupConfiguration = &sOpenIdConnectGroupConfiguration
+var OpenIdConnectGroupConfiguration_groupClaim = &sOpenIdConnectGroupConfiguration_groupClaim
+var OpenIdConnectGroupConfiguration_groupEntityType = &sOpenIdConnectGroupConfiguration_groupEntityType
+
+var OpenIdConnectGroupConfigurationDetail = &sOpenIdConnectGroupConfigurationDetail
+var OpenIdConnectGroupConfigurationDetail_groupClaim = &sOpenIdConnectGroupConfigurationDetail_groupClaim
+var OpenIdConnectGroupConfigurationDetail_groupEntityType = &sOpenIdConnectGroupConfigurationDetail_groupEntityType
+
+var OpenIdConnectGroupConfigurationItem = &sOpenIdConnectGroupConfigurationItem
+var OpenIdConnectGroupConfigurationItem_groupClaim = &sOpenIdConnectGroupConfigurationItem_groupClaim
+var OpenIdConnectGroupConfigurationItem_groupEntityType = &sOpenIdConnectGroupConfigurationItem_groupEntityType
+
+var OpenIdConnectIdentityTokenConfiguration = &sOpenIdConnectIdentityTokenConfiguration
+var OpenIdConnectIdentityTokenConfiguration_principalIdClaim = &sOpenIdConnectIdentityTokenConfiguration_principalIdClaim
+var OpenIdConnectIdentityTokenConfiguration_clientIds = &sOpenIdConnectIdentityTokenConfiguration_clientIds
+
+var OpenIdConnectIdentityTokenConfigurationDetail = &sOpenIdConnectIdentityTokenConfigurationDetail
+var OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim = &sOpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim
+var OpenIdConnectIdentityTokenConfigurationDetail_clientIds = &sOpenIdConnectIdentityTokenConfigurationDetail_clientIds
+
+var OpenIdConnectIdentityTokenConfigurationItem = &sOpenIdConnectIdentityTokenConfigurationItem
+var OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim = &sOpenIdConnectIdentityTokenConfigurationItem_principalIdClaim
+var OpenIdConnectIdentityTokenConfigurationItem_clientIds = &sOpenIdConnectIdentityTokenConfigurationItem_clientIds
+
+var OpenIdConnectTokenSelection = &sOpenIdConnectTokenSelection
+var OpenIdConnectTokenSelection_accessTokenOnly = &sOpenIdConnectTokenSelection_accessTokenOnly
+var OpenIdConnectTokenSelection_identityTokenOnly = &sOpenIdConnectTokenSelection_identityTokenOnly
+
+var OpenIdConnectTokenSelectionDetail = &sOpenIdConnectTokenSelectionDetail
+var OpenIdConnectTokenSelectionDetail_accessTokenOnly = &sOpenIdConnectTokenSelectionDetail_accessTokenOnly
+var OpenIdConnectTokenSelectionDetail_identityTokenOnly = &sOpenIdConnectTokenSelectionDetail_identityTokenOnly
+
+var OpenIdConnectTokenSelectionItem = &sOpenIdConnectTokenSelectionItem
+var OpenIdConnectTokenSelectionItem_accessTokenOnly = &sOpenIdConnectTokenSelectionItem_accessTokenOnly
+var OpenIdConnectTokenSelectionItem_identityTokenOnly = &sOpenIdConnectTokenSelectionItem_identityTokenOnly
+
+var OpenIdIssuer = &sOpenIdIssuer
+var OpenIdIssuer_COGNITO = &sOpenIdIssuer_COGNITO
+
+var _ParentList = &s_ParentList
+var _ParentList_member = &s_ParentList_member
+
+var PolicyDefinition = &sPolicyDefinition
+var PolicyDefinition_static = &sPolicyDefinition_static
+var PolicyDefinition_templateLinked = &sPolicyDefinition_templateLinked
+
+var PolicyDefinitionDetail = &sPolicyDefinitionDetail
+var PolicyDefinitionDetail_static = &sPolicyDefinitionDetail_static
+var PolicyDefinitionDetail_templateLinked = &sPolicyDefinitionDetail_templateLinked
+
+var PolicyDefinitionItem = &sPolicyDefinitionItem
+var PolicyDefinitionItem_static = &sPolicyDefinitionItem_static
+var PolicyDefinitionItem_templateLinked = &sPolicyDefinitionItem_templateLinked
+
+var PolicyEffect = &sPolicyEffect
+var PolicyEffect_PERMIT = &sPolicyEffect_PERMIT
+var PolicyEffect_FORBID = &sPolicyEffect_FORBID
+
+var PolicyFilter = &sPolicyFilter
+var PolicyFilter_principal = &sPolicyFilter_principal
+var PolicyFilter_resource = &sPolicyFilter_resource
+var PolicyFilter_policyType = &sPolicyFilter_policyType
+var PolicyFilter_policyTemplateId = &sPolicyFilter_policyTemplateId
+
+var _PolicyId = &s_PolicyId
+
+var PolicyItem = &sPolicyItem
+var PolicyItem_policyStoreId = &sPolicyItem_policyStoreId
+var PolicyItem_policyId = &sPolicyItem_policyId
+var PolicyItem_policyType = &sPolicyItem_policyType
+var PolicyItem_principal = &sPolicyItem_principal
+var PolicyItem_resource = &sPolicyItem_resource
+var PolicyItem_actions = &sPolicyItem_actions
+var PolicyItem_definition = &sPolicyItem_definition
+var PolicyItem_createdDate = &sPolicyItem_createdDate
+var PolicyItem_lastUpdatedDate = &sPolicyItem_lastUpdatedDate
+var PolicyItem_effect = &sPolicyItem_effect
+var PolicyItem_name = &sPolicyItem_name
+
+var _PolicyList = &s_PolicyList
+var _PolicyList_member = &s_PolicyList_member
+
+var _PolicyName = &s_PolicyName
+
+var _PolicyStatement = &s_PolicyStatement
+
+var PolicyStoreAliasFilter = &sPolicyStoreAliasFilter
+var PolicyStoreAliasFilter_policyStoreId = &sPolicyStoreAliasFilter_policyStoreId
+
+var PolicyStoreAliasItem = &sPolicyStoreAliasItem
+var PolicyStoreAliasItem_aliasName = &sPolicyStoreAliasItem_aliasName
+var PolicyStoreAliasItem_policyStoreId = &sPolicyStoreAliasItem_policyStoreId
+var PolicyStoreAliasItem_aliasArn = &sPolicyStoreAliasItem_aliasArn
+var PolicyStoreAliasItem_createdAt = &sPolicyStoreAliasItem_createdAt
+var PolicyStoreAliasItem_state = &sPolicyStoreAliasItem_state
+
+var _PolicyStoreAliasList = &s_PolicyStoreAliasList
+var _PolicyStoreAliasList_member = &s_PolicyStoreAliasList_member
+
+var _PolicyStoreDescription = &s_PolicyStoreDescription
+
+var _PolicyStoreId = &s_PolicyStoreId
+
+var PolicyStoreItem = &sPolicyStoreItem
+var PolicyStoreItem_policyStoreId = &sPolicyStoreItem_policyStoreId
+var PolicyStoreItem_arn = &sPolicyStoreItem_arn
+var PolicyStoreItem_createdDate = &sPolicyStoreItem_createdDate
+var PolicyStoreItem_lastUpdatedDate = &sPolicyStoreItem_lastUpdatedDate
+var PolicyStoreItem_description = &sPolicyStoreItem_description
+
+var _PolicyStoreList = &s_PolicyStoreList
+var _PolicyStoreList_member = &s_PolicyStoreList_member
+
+var _PolicyTemplateDescription = &s_PolicyTemplateDescription
+
+var _PolicyTemplateId = &s_PolicyTemplateId
+
+var PolicyTemplateItem = &sPolicyTemplateItem
+var PolicyTemplateItem_policyStoreId = &sPolicyTemplateItem_policyStoreId
+var PolicyTemplateItem_policyTemplateId = &sPolicyTemplateItem_policyTemplateId
+var PolicyTemplateItem_description = &sPolicyTemplateItem_description
+var PolicyTemplateItem_createdDate = &sPolicyTemplateItem_createdDate
+var PolicyTemplateItem_lastUpdatedDate = &sPolicyTemplateItem_lastUpdatedDate
+var PolicyTemplateItem_name = &sPolicyTemplateItem_name
+
+var _PolicyTemplateName = &s_PolicyTemplateName
+
+var _PolicyTemplatesList = &s_PolicyTemplatesList
+var _PolicyTemplatesList_member = &s_PolicyTemplatesList_member
+
+var PolicyType = &sPolicyType
+var PolicyType_STATIC = &sPolicyType_STATIC
+var PolicyType_TEMPLATE_LINKED = &sPolicyType_TEMPLATE_LINKED
+
+var _PrincipalEntityType = &s_PrincipalEntityType
+
+var _RecordAttribute = &s_RecordAttribute
+var _RecordAttribute_key = &s_RecordAttribute_key
+var _RecordAttribute_value = &s_RecordAttribute_value
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceConflict = &sResourceConflict
+var ResourceConflict_resourceId = &sResourceConflict_resourceId
+var ResourceConflict_resourceType = &sResourceConflict_resourceType
+
+var _ResourceConflictList = &s_ResourceConflictList
+var _ResourceConflictList_member = &s_ResourceConflictList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourceType = &sResourceType
+var ResourceType_IDENTITY_SOURCE = &sResourceType_IDENTITY_SOURCE
+var ResourceType_POLICY_STORE = &sResourceType_POLICY_STORE
+var ResourceType_POLICY = &sResourceType_POLICY
+var ResourceType_POLICY_TEMPLATE = &sResourceType_POLICY_TEMPLATE
+var ResourceType_SCHEMA = &sResourceType_SCHEMA
+var ResourceType_POLICY_STORE_ALIAS = &sResourceType_POLICY_STORE_ALIAS
+
+var SchemaDefinition = &sSchemaDefinition
+var SchemaDefinition_cedarJson = &sSchemaDefinition_cedarJson
+
+var _SchemaJson = &s_SchemaJson
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SetAttribute = &s_SetAttribute
+var _SetAttribute_member = &s_SetAttribute_member
+
+var StaticPolicyDefinition = &sStaticPolicyDefinition
+var StaticPolicyDefinition_description = &sStaticPolicyDefinition_description
+var StaticPolicyDefinition_statement = &sStaticPolicyDefinition_statement
+
+var StaticPolicyDefinitionDetail = &sStaticPolicyDefinitionDetail
+var StaticPolicyDefinitionDetail_description = &sStaticPolicyDefinitionDetail_description
+var StaticPolicyDefinitionDetail_statement = &sStaticPolicyDefinitionDetail_statement
+
+var StaticPolicyDefinitionItem = &sStaticPolicyDefinitionItem
+var StaticPolicyDefinitionItem_description = &sStaticPolicyDefinitionItem_description
+
+var _StaticPolicyDescription = &s_StaticPolicyDescription
+
+var _StringAttribute = &s_StringAttribute
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var TemplateLinkedPolicyDefinition = &sTemplateLinkedPolicyDefinition
+var TemplateLinkedPolicyDefinition_policyTemplateId = &sTemplateLinkedPolicyDefinition_policyTemplateId
+var TemplateLinkedPolicyDefinition_principal = &sTemplateLinkedPolicyDefinition_principal
+var TemplateLinkedPolicyDefinition_resource = &sTemplateLinkedPolicyDefinition_resource
+
+var TemplateLinkedPolicyDefinitionDetail = &sTemplateLinkedPolicyDefinitionDetail
+var TemplateLinkedPolicyDefinitionDetail_policyTemplateId = &sTemplateLinkedPolicyDefinitionDetail_policyTemplateId
+var TemplateLinkedPolicyDefinitionDetail_principal = &sTemplateLinkedPolicyDefinitionDetail_principal
+var TemplateLinkedPolicyDefinitionDetail_resource = &sTemplateLinkedPolicyDefinitionDetail_resource
+
+var TemplateLinkedPolicyDefinitionItem = &sTemplateLinkedPolicyDefinitionItem
+var TemplateLinkedPolicyDefinitionItem_policyTemplateId = &sTemplateLinkedPolicyDefinitionItem_policyTemplateId
+var TemplateLinkedPolicyDefinitionItem_principal = &sTemplateLinkedPolicyDefinitionItem_principal
+var TemplateLinkedPolicyDefinitionItem_resource = &sTemplateLinkedPolicyDefinitionItem_resource
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+
+var _TimestampFormat = &s_TimestampFormat
+
+var _Token = &s_Token
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+var TooManyTagsException_resourceName = &sTooManyTagsException_resourceName
+
+var UpdateCognitoGroupConfiguration = &sUpdateCognitoGroupConfiguration
+var UpdateCognitoGroupConfiguration_groupEntityType = &sUpdateCognitoGroupConfiguration_groupEntityType
+
+var UpdateCognitoUserPoolConfiguration = &sUpdateCognitoUserPoolConfiguration
+var UpdateCognitoUserPoolConfiguration_userPoolArn = &sUpdateCognitoUserPoolConfiguration_userPoolArn
+var UpdateCognitoUserPoolConfiguration_clientIds = &sUpdateCognitoUserPoolConfiguration_clientIds
+var UpdateCognitoUserPoolConfiguration_groupConfiguration = &sUpdateCognitoUserPoolConfiguration_groupConfiguration
+
+var UpdateConfiguration = &sUpdateConfiguration
+var UpdateConfiguration_cognitoUserPoolConfiguration = &sUpdateConfiguration_cognitoUserPoolConfiguration
+var UpdateConfiguration_openIdConnectConfiguration = &sUpdateConfiguration_openIdConnectConfiguration
+
+var UpdateOpenIdConnectAccessTokenConfiguration = &sUpdateOpenIdConnectAccessTokenConfiguration
+var UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim = &sUpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim
+var UpdateOpenIdConnectAccessTokenConfiguration_audiences = &sUpdateOpenIdConnectAccessTokenConfiguration_audiences
+
+var UpdateOpenIdConnectConfiguration = &sUpdateOpenIdConnectConfiguration
+var UpdateOpenIdConnectConfiguration_issuer = &sUpdateOpenIdConnectConfiguration_issuer
+var UpdateOpenIdConnectConfiguration_entityIdPrefix = &sUpdateOpenIdConnectConfiguration_entityIdPrefix
+var UpdateOpenIdConnectConfiguration_groupConfiguration = &sUpdateOpenIdConnectConfiguration_groupConfiguration
+var UpdateOpenIdConnectConfiguration_tokenSelection = &sUpdateOpenIdConnectConfiguration_tokenSelection
+
+var UpdateOpenIdConnectGroupConfiguration = &sUpdateOpenIdConnectGroupConfiguration
+var UpdateOpenIdConnectGroupConfiguration_groupClaim = &sUpdateOpenIdConnectGroupConfiguration_groupClaim
+var UpdateOpenIdConnectGroupConfiguration_groupEntityType = &sUpdateOpenIdConnectGroupConfiguration_groupEntityType
+
+var UpdateOpenIdConnectIdentityTokenConfiguration = &sUpdateOpenIdConnectIdentityTokenConfiguration
+var UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim = &sUpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim
+var UpdateOpenIdConnectIdentityTokenConfiguration_clientIds = &sUpdateOpenIdConnectIdentityTokenConfiguration_clientIds
+
+var UpdateOpenIdConnectTokenSelection = &sUpdateOpenIdConnectTokenSelection
+var UpdateOpenIdConnectTokenSelection_accessTokenOnly = &sUpdateOpenIdConnectTokenSelection_accessTokenOnly
+var UpdateOpenIdConnectTokenSelection_identityTokenOnly = &sUpdateOpenIdConnectTokenSelection_identityTokenOnly
+
+var UpdatePolicyDefinition = &sUpdatePolicyDefinition
+var UpdatePolicyDefinition_static = &sUpdatePolicyDefinition_static
+
+var UpdateStaticPolicyDefinition = &sUpdateStaticPolicyDefinition
+var UpdateStaticPolicyDefinition_description = &sUpdateStaticPolicyDefinition_description
+var UpdateStaticPolicyDefinition_statement = &sUpdateStaticPolicyDefinition_statement
+
+var _UserPoolArn = &s_UserPoolArn
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_path = &sValidationExceptionField_path
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationMode = &sValidationMode
+var ValidationMode_OFF = &sValidationMode_OFF
+var ValidationMode_STRICT = &sValidationMode_STRICT
+
+var ValidationSettings = &sValidationSettings
+var ValidationSettings_mode = &sValidationSettings_mode
+
+var BatchGetPolicyInput = &sBatchGetPolicyInput
+var BatchGetPolicyInput_requests = &sBatchGetPolicyInput_requests
+
+var BatchGetPolicyOutput = &sBatchGetPolicyOutput
+var BatchGetPolicyOutput_results = &sBatchGetPolicyOutput_results
+var BatchGetPolicyOutput_errors = &sBatchGetPolicyOutput_errors
+
+var BatchIsAuthorizedInput = &sBatchIsAuthorizedInput
+var BatchIsAuthorizedInput_policyStoreId = &sBatchIsAuthorizedInput_policyStoreId
+var BatchIsAuthorizedInput_entities = &sBatchIsAuthorizedInput_entities
+var BatchIsAuthorizedInput_requests = &sBatchIsAuthorizedInput_requests
+
+var BatchIsAuthorizedOutput = &sBatchIsAuthorizedOutput
+var BatchIsAuthorizedOutput_results = &sBatchIsAuthorizedOutput_results
+
+var BatchIsAuthorizedWithTokenInput = &sBatchIsAuthorizedWithTokenInput
+var BatchIsAuthorizedWithTokenInput_policyStoreId = &sBatchIsAuthorizedWithTokenInput_policyStoreId
+var BatchIsAuthorizedWithTokenInput_identityToken = &sBatchIsAuthorizedWithTokenInput_identityToken
+var BatchIsAuthorizedWithTokenInput_accessToken = &sBatchIsAuthorizedWithTokenInput_accessToken
+var BatchIsAuthorizedWithTokenInput_entities = &sBatchIsAuthorizedWithTokenInput_entities
+var BatchIsAuthorizedWithTokenInput_requests = &sBatchIsAuthorizedWithTokenInput_requests
+
+var BatchIsAuthorizedWithTokenOutput = &sBatchIsAuthorizedWithTokenOutput
+var BatchIsAuthorizedWithTokenOutput_principal = &sBatchIsAuthorizedWithTokenOutput_principal
+var BatchIsAuthorizedWithTokenOutput_results = &sBatchIsAuthorizedWithTokenOutput_results
+
+var CreateIdentitySourceInput = &sCreateIdentitySourceInput
+var CreateIdentitySourceInput_clientToken = &sCreateIdentitySourceInput_clientToken
+var CreateIdentitySourceInput_policyStoreId = &sCreateIdentitySourceInput_policyStoreId
+var CreateIdentitySourceInput_configuration = &sCreateIdentitySourceInput_configuration
+var CreateIdentitySourceInput_principalEntityType = &sCreateIdentitySourceInput_principalEntityType
+
+var CreateIdentitySourceOutput = &sCreateIdentitySourceOutput
+var CreateIdentitySourceOutput_createdDate = &sCreateIdentitySourceOutput_createdDate
+var CreateIdentitySourceOutput_identitySourceId = &sCreateIdentitySourceOutput_identitySourceId
+var CreateIdentitySourceOutput_lastUpdatedDate = &sCreateIdentitySourceOutput_lastUpdatedDate
+var CreateIdentitySourceOutput_policyStoreId = &sCreateIdentitySourceOutput_policyStoreId
+
+var CreatePolicyInput = &sCreatePolicyInput
+var CreatePolicyInput_clientToken = &sCreatePolicyInput_clientToken
+var CreatePolicyInput_policyStoreId = &sCreatePolicyInput_policyStoreId
+var CreatePolicyInput_definition = &sCreatePolicyInput_definition
+var CreatePolicyInput_name = &sCreatePolicyInput_name
+
+var CreatePolicyOutput = &sCreatePolicyOutput
+var CreatePolicyOutput_policyStoreId = &sCreatePolicyOutput_policyStoreId
+var CreatePolicyOutput_policyId = &sCreatePolicyOutput_policyId
+var CreatePolicyOutput_policyType = &sCreatePolicyOutput_policyType
+var CreatePolicyOutput_principal = &sCreatePolicyOutput_principal
+var CreatePolicyOutput_resource = &sCreatePolicyOutput_resource
+var CreatePolicyOutput_actions = &sCreatePolicyOutput_actions
+var CreatePolicyOutput_createdDate = &sCreatePolicyOutput_createdDate
+var CreatePolicyOutput_lastUpdatedDate = &sCreatePolicyOutput_lastUpdatedDate
+var CreatePolicyOutput_effect = &sCreatePolicyOutput_effect
+
+var CreatePolicyStoreAliasInput = &sCreatePolicyStoreAliasInput
+var CreatePolicyStoreAliasInput_aliasName = &sCreatePolicyStoreAliasInput_aliasName
+var CreatePolicyStoreAliasInput_policyStoreId = &sCreatePolicyStoreAliasInput_policyStoreId
+
+var CreatePolicyStoreAliasOutput = &sCreatePolicyStoreAliasOutput
+var CreatePolicyStoreAliasOutput_aliasName = &sCreatePolicyStoreAliasOutput_aliasName
+var CreatePolicyStoreAliasOutput_policyStoreId = &sCreatePolicyStoreAliasOutput_policyStoreId
+var CreatePolicyStoreAliasOutput_aliasArn = &sCreatePolicyStoreAliasOutput_aliasArn
+var CreatePolicyStoreAliasOutput_createdAt = &sCreatePolicyStoreAliasOutput_createdAt
+
+var CreatePolicyStoreInput = &sCreatePolicyStoreInput
+var CreatePolicyStoreInput_clientToken = &sCreatePolicyStoreInput_clientToken
+var CreatePolicyStoreInput_validationSettings = &sCreatePolicyStoreInput_validationSettings
+var CreatePolicyStoreInput_description = &sCreatePolicyStoreInput_description
+var CreatePolicyStoreInput_deletionProtection = &sCreatePolicyStoreInput_deletionProtection
+var CreatePolicyStoreInput_encryptionSettings = &sCreatePolicyStoreInput_encryptionSettings
+var CreatePolicyStoreInput_tags = &sCreatePolicyStoreInput_tags
+
+var CreatePolicyStoreOutput = &sCreatePolicyStoreOutput
+var CreatePolicyStoreOutput_policyStoreId = &sCreatePolicyStoreOutput_policyStoreId
+var CreatePolicyStoreOutput_arn = &sCreatePolicyStoreOutput_arn
+var CreatePolicyStoreOutput_createdDate = &sCreatePolicyStoreOutput_createdDate
+var CreatePolicyStoreOutput_lastUpdatedDate = &sCreatePolicyStoreOutput_lastUpdatedDate
+
+var CreatePolicyTemplateInput = &sCreatePolicyTemplateInput
+var CreatePolicyTemplateInput_clientToken = &sCreatePolicyTemplateInput_clientToken
+var CreatePolicyTemplateInput_policyStoreId = &sCreatePolicyTemplateInput_policyStoreId
+var CreatePolicyTemplateInput_description = &sCreatePolicyTemplateInput_description
+var CreatePolicyTemplateInput_statement = &sCreatePolicyTemplateInput_statement
+var CreatePolicyTemplateInput_name = &sCreatePolicyTemplateInput_name
+
+var CreatePolicyTemplateOutput = &sCreatePolicyTemplateOutput
+var CreatePolicyTemplateOutput_policyStoreId = &sCreatePolicyTemplateOutput_policyStoreId
+var CreatePolicyTemplateOutput_policyTemplateId = &sCreatePolicyTemplateOutput_policyTemplateId
+var CreatePolicyTemplateOutput_createdDate = &sCreatePolicyTemplateOutput_createdDate
+var CreatePolicyTemplateOutput_lastUpdatedDate = &sCreatePolicyTemplateOutput_lastUpdatedDate
+
+var DeleteIdentitySourceInput = &sDeleteIdentitySourceInput
+var DeleteIdentitySourceInput_policyStoreId = &sDeleteIdentitySourceInput_policyStoreId
+var DeleteIdentitySourceInput_identitySourceId = &sDeleteIdentitySourceInput_identitySourceId
+
+var DeleteIdentitySourceOutput = &sDeleteIdentitySourceOutput
+
+var DeletePolicyInput = &sDeletePolicyInput
+var DeletePolicyInput_policyStoreId = &sDeletePolicyInput_policyStoreId
+var DeletePolicyInput_policyId = &sDeletePolicyInput_policyId
+
+var DeletePolicyOutput = &sDeletePolicyOutput
+
+var DeletePolicyStoreAliasInput = &sDeletePolicyStoreAliasInput
+var DeletePolicyStoreAliasInput_aliasName = &sDeletePolicyStoreAliasInput_aliasName
+var DeletePolicyStoreAliasInput_deletionMode = &sDeletePolicyStoreAliasInput_deletionMode
+
+var DeletePolicyStoreAliasOutput = &sDeletePolicyStoreAliasOutput
+
+var DeletePolicyStoreInput = &sDeletePolicyStoreInput
+var DeletePolicyStoreInput_policyStoreId = &sDeletePolicyStoreInput_policyStoreId
+
+var DeletePolicyStoreOutput = &sDeletePolicyStoreOutput
+
+var DeletePolicyTemplateInput = &sDeletePolicyTemplateInput
+var DeletePolicyTemplateInput_policyStoreId = &sDeletePolicyTemplateInput_policyStoreId
+var DeletePolicyTemplateInput_policyTemplateId = &sDeletePolicyTemplateInput_policyTemplateId
+
+var DeletePolicyTemplateOutput = &sDeletePolicyTemplateOutput
+
+var GetIdentitySourceInput = &sGetIdentitySourceInput
+var GetIdentitySourceInput_policyStoreId = &sGetIdentitySourceInput_policyStoreId
+var GetIdentitySourceInput_identitySourceId = &sGetIdentitySourceInput_identitySourceId
+
+var GetIdentitySourceOutput = &sGetIdentitySourceOutput
+var GetIdentitySourceOutput_createdDate = &sGetIdentitySourceOutput_createdDate
+var GetIdentitySourceOutput_details = &sGetIdentitySourceOutput_details
+var GetIdentitySourceOutput_identitySourceId = &sGetIdentitySourceOutput_identitySourceId
+var GetIdentitySourceOutput_lastUpdatedDate = &sGetIdentitySourceOutput_lastUpdatedDate
+var GetIdentitySourceOutput_policyStoreId = &sGetIdentitySourceOutput_policyStoreId
+var GetIdentitySourceOutput_principalEntityType = &sGetIdentitySourceOutput_principalEntityType
+var GetIdentitySourceOutput_configuration = &sGetIdentitySourceOutput_configuration
+
+var GetPolicyInput = &sGetPolicyInput
+var GetPolicyInput_policyStoreId = &sGetPolicyInput_policyStoreId
+var GetPolicyInput_policyId = &sGetPolicyInput_policyId
+
+var GetPolicyOutput = &sGetPolicyOutput
+var GetPolicyOutput_policyStoreId = &sGetPolicyOutput_policyStoreId
+var GetPolicyOutput_policyId = &sGetPolicyOutput_policyId
+var GetPolicyOutput_policyType = &sGetPolicyOutput_policyType
+var GetPolicyOutput_principal = &sGetPolicyOutput_principal
+var GetPolicyOutput_resource = &sGetPolicyOutput_resource
+var GetPolicyOutput_actions = &sGetPolicyOutput_actions
+var GetPolicyOutput_definition = &sGetPolicyOutput_definition
+var GetPolicyOutput_createdDate = &sGetPolicyOutput_createdDate
+var GetPolicyOutput_lastUpdatedDate = &sGetPolicyOutput_lastUpdatedDate
+var GetPolicyOutput_effect = &sGetPolicyOutput_effect
+var GetPolicyOutput_name = &sGetPolicyOutput_name
+
+var GetPolicyStoreAliasInput = &sGetPolicyStoreAliasInput
+var GetPolicyStoreAliasInput_aliasName = &sGetPolicyStoreAliasInput_aliasName
+
+var GetPolicyStoreAliasOutput = &sGetPolicyStoreAliasOutput
+var GetPolicyStoreAliasOutput_aliasName = &sGetPolicyStoreAliasOutput_aliasName
+var GetPolicyStoreAliasOutput_policyStoreId = &sGetPolicyStoreAliasOutput_policyStoreId
+var GetPolicyStoreAliasOutput_aliasArn = &sGetPolicyStoreAliasOutput_aliasArn
+var GetPolicyStoreAliasOutput_createdAt = &sGetPolicyStoreAliasOutput_createdAt
+var GetPolicyStoreAliasOutput_state = &sGetPolicyStoreAliasOutput_state
+
+var GetPolicyStoreInput = &sGetPolicyStoreInput
+var GetPolicyStoreInput_policyStoreId = &sGetPolicyStoreInput_policyStoreId
+var GetPolicyStoreInput_tags = &sGetPolicyStoreInput_tags
+
+var GetPolicyStoreOutput = &sGetPolicyStoreOutput
+var GetPolicyStoreOutput_policyStoreId = &sGetPolicyStoreOutput_policyStoreId
+var GetPolicyStoreOutput_arn = &sGetPolicyStoreOutput_arn
+var GetPolicyStoreOutput_validationSettings = &sGetPolicyStoreOutput_validationSettings
+var GetPolicyStoreOutput_createdDate = &sGetPolicyStoreOutput_createdDate
+var GetPolicyStoreOutput_lastUpdatedDate = &sGetPolicyStoreOutput_lastUpdatedDate
+var GetPolicyStoreOutput_description = &sGetPolicyStoreOutput_description
+var GetPolicyStoreOutput_deletionProtection = &sGetPolicyStoreOutput_deletionProtection
+var GetPolicyStoreOutput_encryptionState = &sGetPolicyStoreOutput_encryptionState
+var GetPolicyStoreOutput_cedarVersion = &sGetPolicyStoreOutput_cedarVersion
+var GetPolicyStoreOutput_tags = &sGetPolicyStoreOutput_tags
+
+var GetPolicyTemplateInput = &sGetPolicyTemplateInput
+var GetPolicyTemplateInput_policyStoreId = &sGetPolicyTemplateInput_policyStoreId
+var GetPolicyTemplateInput_policyTemplateId = &sGetPolicyTemplateInput_policyTemplateId
+
+var GetPolicyTemplateOutput = &sGetPolicyTemplateOutput
+var GetPolicyTemplateOutput_policyStoreId = &sGetPolicyTemplateOutput_policyStoreId
+var GetPolicyTemplateOutput_policyTemplateId = &sGetPolicyTemplateOutput_policyTemplateId
+var GetPolicyTemplateOutput_description = &sGetPolicyTemplateOutput_description
+var GetPolicyTemplateOutput_statement = &sGetPolicyTemplateOutput_statement
+var GetPolicyTemplateOutput_createdDate = &sGetPolicyTemplateOutput_createdDate
+var GetPolicyTemplateOutput_lastUpdatedDate = &sGetPolicyTemplateOutput_lastUpdatedDate
+var GetPolicyTemplateOutput_name = &sGetPolicyTemplateOutput_name
+
+var GetSchemaInput = &sGetSchemaInput
+var GetSchemaInput_policyStoreId = &sGetSchemaInput_policyStoreId
+
+var GetSchemaOutput = &sGetSchemaOutput
+var GetSchemaOutput_policyStoreId = &sGetSchemaOutput_policyStoreId
+var GetSchemaOutput_schema = &sGetSchemaOutput_schema
+var GetSchemaOutput_createdDate = &sGetSchemaOutput_createdDate
+var GetSchemaOutput_lastUpdatedDate = &sGetSchemaOutput_lastUpdatedDate
+var GetSchemaOutput_namespaces = &sGetSchemaOutput_namespaces
+
+var IsAuthorizedInput = &sIsAuthorizedInput
+var IsAuthorizedInput_policyStoreId = &sIsAuthorizedInput_policyStoreId
+var IsAuthorizedInput_principal = &sIsAuthorizedInput_principal
+var IsAuthorizedInput_action = &sIsAuthorizedInput_action
+var IsAuthorizedInput_resource = &sIsAuthorizedInput_resource
+var IsAuthorizedInput_context = &sIsAuthorizedInput_context
+var IsAuthorizedInput_entities = &sIsAuthorizedInput_entities
+
+var IsAuthorizedOutput = &sIsAuthorizedOutput
+var IsAuthorizedOutput_decision = &sIsAuthorizedOutput_decision
+var IsAuthorizedOutput_determiningPolicies = &sIsAuthorizedOutput_determiningPolicies
+var IsAuthorizedOutput_errors = &sIsAuthorizedOutput_errors
+
+var IsAuthorizedWithTokenInput = &sIsAuthorizedWithTokenInput
+var IsAuthorizedWithTokenInput_policyStoreId = &sIsAuthorizedWithTokenInput_policyStoreId
+var IsAuthorizedWithTokenInput_identityToken = &sIsAuthorizedWithTokenInput_identityToken
+var IsAuthorizedWithTokenInput_accessToken = &sIsAuthorizedWithTokenInput_accessToken
+var IsAuthorizedWithTokenInput_action = &sIsAuthorizedWithTokenInput_action
+var IsAuthorizedWithTokenInput_resource = &sIsAuthorizedWithTokenInput_resource
+var IsAuthorizedWithTokenInput_context = &sIsAuthorizedWithTokenInput_context
+var IsAuthorizedWithTokenInput_entities = &sIsAuthorizedWithTokenInput_entities
+
+var IsAuthorizedWithTokenOutput = &sIsAuthorizedWithTokenOutput
+var IsAuthorizedWithTokenOutput_decision = &sIsAuthorizedWithTokenOutput_decision
+var IsAuthorizedWithTokenOutput_determiningPolicies = &sIsAuthorizedWithTokenOutput_determiningPolicies
+var IsAuthorizedWithTokenOutput_errors = &sIsAuthorizedWithTokenOutput_errors
+var IsAuthorizedWithTokenOutput_principal = &sIsAuthorizedWithTokenOutput_principal
+
+var ListIdentitySourcesInput = &sListIdentitySourcesInput
+var ListIdentitySourcesInput_policyStoreId = &sListIdentitySourcesInput_policyStoreId
+var ListIdentitySourcesInput_nextToken = &sListIdentitySourcesInput_nextToken
+var ListIdentitySourcesInput_maxResults = &sListIdentitySourcesInput_maxResults
+var ListIdentitySourcesInput_filters = &sListIdentitySourcesInput_filters
+
+var ListIdentitySourcesOutput = &sListIdentitySourcesOutput
+var ListIdentitySourcesOutput_nextToken = &sListIdentitySourcesOutput_nextToken
+var ListIdentitySourcesOutput_identitySources = &sListIdentitySourcesOutput_identitySources
+
+var ListPoliciesInput = &sListPoliciesInput
+var ListPoliciesInput_policyStoreId = &sListPoliciesInput_policyStoreId
+var ListPoliciesInput_nextToken = &sListPoliciesInput_nextToken
+var ListPoliciesInput_maxResults = &sListPoliciesInput_maxResults
+var ListPoliciesInput_filter = &sListPoliciesInput_filter
+
+var ListPoliciesOutput = &sListPoliciesOutput
+var ListPoliciesOutput_nextToken = &sListPoliciesOutput_nextToken
+var ListPoliciesOutput_policies = &sListPoliciesOutput_policies
+
+var ListPolicyStoreAliasesInput = &sListPolicyStoreAliasesInput
+var ListPolicyStoreAliasesInput_nextToken = &sListPolicyStoreAliasesInput_nextToken
+var ListPolicyStoreAliasesInput_maxResults = &sListPolicyStoreAliasesInput_maxResults
+var ListPolicyStoreAliasesInput_filter = &sListPolicyStoreAliasesInput_filter
+
+var ListPolicyStoreAliasesOutput = &sListPolicyStoreAliasesOutput
+var ListPolicyStoreAliasesOutput_nextToken = &sListPolicyStoreAliasesOutput_nextToken
+var ListPolicyStoreAliasesOutput_policyStoreAliases = &sListPolicyStoreAliasesOutput_policyStoreAliases
+
+var ListPolicyStoresInput = &sListPolicyStoresInput
+var ListPolicyStoresInput_nextToken = &sListPolicyStoresInput_nextToken
+var ListPolicyStoresInput_maxResults = &sListPolicyStoresInput_maxResults
+
+var ListPolicyStoresOutput = &sListPolicyStoresOutput
+var ListPolicyStoresOutput_nextToken = &sListPolicyStoresOutput_nextToken
+var ListPolicyStoresOutput_policyStores = &sListPolicyStoresOutput_policyStores
+
+var ListPolicyTemplatesInput = &sListPolicyTemplatesInput
+var ListPolicyTemplatesInput_policyStoreId = &sListPolicyTemplatesInput_policyStoreId
+var ListPolicyTemplatesInput_nextToken = &sListPolicyTemplatesInput_nextToken
+var ListPolicyTemplatesInput_maxResults = &sListPolicyTemplatesInput_maxResults
+
+var ListPolicyTemplatesOutput = &sListPolicyTemplatesOutput
+var ListPolicyTemplatesOutput_nextToken = &sListPolicyTemplatesOutput_nextToken
+var ListPolicyTemplatesOutput_policyTemplates = &sListPolicyTemplatesOutput_policyTemplates
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var PutSchemaInput = &sPutSchemaInput
+var PutSchemaInput_policyStoreId = &sPutSchemaInput_policyStoreId
+var PutSchemaInput_definition = &sPutSchemaInput_definition
+
+var PutSchemaOutput = &sPutSchemaOutput
+var PutSchemaOutput_policyStoreId = &sPutSchemaOutput_policyStoreId
+var PutSchemaOutput_namespaces = &sPutSchemaOutput_namespaces
+var PutSchemaOutput_createdDate = &sPutSchemaOutput_createdDate
+var PutSchemaOutput_lastUpdatedDate = &sPutSchemaOutput_lastUpdatedDate
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateIdentitySourceInput = &sUpdateIdentitySourceInput
+var UpdateIdentitySourceInput_policyStoreId = &sUpdateIdentitySourceInput_policyStoreId
+var UpdateIdentitySourceInput_identitySourceId = &sUpdateIdentitySourceInput_identitySourceId
+var UpdateIdentitySourceInput_updateConfiguration = &sUpdateIdentitySourceInput_updateConfiguration
+var UpdateIdentitySourceInput_principalEntityType = &sUpdateIdentitySourceInput_principalEntityType
+
+var UpdateIdentitySourceOutput = &sUpdateIdentitySourceOutput
+var UpdateIdentitySourceOutput_createdDate = &sUpdateIdentitySourceOutput_createdDate
+var UpdateIdentitySourceOutput_identitySourceId = &sUpdateIdentitySourceOutput_identitySourceId
+var UpdateIdentitySourceOutput_lastUpdatedDate = &sUpdateIdentitySourceOutput_lastUpdatedDate
+var UpdateIdentitySourceOutput_policyStoreId = &sUpdateIdentitySourceOutput_policyStoreId
+
+var UpdatePolicyInput = &sUpdatePolicyInput
+var UpdatePolicyInput_policyStoreId = &sUpdatePolicyInput_policyStoreId
+var UpdatePolicyInput_policyId = &sUpdatePolicyInput_policyId
+var UpdatePolicyInput_definition = &sUpdatePolicyInput_definition
+var UpdatePolicyInput_name = &sUpdatePolicyInput_name
+
+var UpdatePolicyOutput = &sUpdatePolicyOutput
+var UpdatePolicyOutput_policyStoreId = &sUpdatePolicyOutput_policyStoreId
+var UpdatePolicyOutput_policyId = &sUpdatePolicyOutput_policyId
+var UpdatePolicyOutput_policyType = &sUpdatePolicyOutput_policyType
+var UpdatePolicyOutput_principal = &sUpdatePolicyOutput_principal
+var UpdatePolicyOutput_resource = &sUpdatePolicyOutput_resource
+var UpdatePolicyOutput_actions = &sUpdatePolicyOutput_actions
+var UpdatePolicyOutput_createdDate = &sUpdatePolicyOutput_createdDate
+var UpdatePolicyOutput_lastUpdatedDate = &sUpdatePolicyOutput_lastUpdatedDate
+var UpdatePolicyOutput_effect = &sUpdatePolicyOutput_effect
+
+var UpdatePolicyStoreInput = &sUpdatePolicyStoreInput
+var UpdatePolicyStoreInput_policyStoreId = &sUpdatePolicyStoreInput_policyStoreId
+var UpdatePolicyStoreInput_validationSettings = &sUpdatePolicyStoreInput_validationSettings
+var UpdatePolicyStoreInput_deletionProtection = &sUpdatePolicyStoreInput_deletionProtection
+var UpdatePolicyStoreInput_description = &sUpdatePolicyStoreInput_description
+
+var UpdatePolicyStoreOutput = &sUpdatePolicyStoreOutput
+var UpdatePolicyStoreOutput_policyStoreId = &sUpdatePolicyStoreOutput_policyStoreId
+var UpdatePolicyStoreOutput_arn = &sUpdatePolicyStoreOutput_arn
+var UpdatePolicyStoreOutput_createdDate = &sUpdatePolicyStoreOutput_createdDate
+var UpdatePolicyStoreOutput_lastUpdatedDate = &sUpdatePolicyStoreOutput_lastUpdatedDate
+
+var UpdatePolicyTemplateInput = &sUpdatePolicyTemplateInput
+var UpdatePolicyTemplateInput_policyStoreId = &sUpdatePolicyTemplateInput_policyStoreId
+var UpdatePolicyTemplateInput_policyTemplateId = &sUpdatePolicyTemplateInput_policyTemplateId
+var UpdatePolicyTemplateInput_description = &sUpdatePolicyTemplateInput_description
+var UpdatePolicyTemplateInput_statement = &sUpdatePolicyTemplateInput_statement
+var UpdatePolicyTemplateInput_name = &sUpdatePolicyTemplateInput_name
+
+var UpdatePolicyTemplateOutput = &sUpdatePolicyTemplateOutput
+var UpdatePolicyTemplateOutput_policyStoreId = &sUpdatePolicyTemplateOutput_policyStoreId
+var UpdatePolicyTemplateOutput_policyTemplateId = &sUpdatePolicyTemplateOutput_policyTemplateId
+var UpdatePolicyTemplateOutput_createdDate = &sUpdatePolicyTemplateOutput_createdDate
+var UpdatePolicyTemplateOutput_lastUpdatedDate = &sUpdatePolicyTemplateOutput_lastUpdatedDate
+
+var VerifiedPermissions = &smithy.ServiceSchema{Schema: &s_VerifiedPermissions, Version: "2021-12-01"}

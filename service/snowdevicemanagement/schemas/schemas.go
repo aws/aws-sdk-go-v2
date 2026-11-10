@@ -4,1028 +4,1037 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CancelTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCancelTask                                          smithy.SchemaExtensions
+	eCreateTask                                          smithy.SchemaExtensions
+	eDescribeDevice                                      smithy.SchemaExtensions
+	eDescribeDeviceEc2Instances                          smithy.SchemaExtensions
+	eDescribeExecution                                   smithy.SchemaExtensions
+	eDescribeTask                                        smithy.SchemaExtensions
+	eListDeviceResources                                 smithy.SchemaExtensions
+	eListDevices                                         smithy.SchemaExtensions
+	eListExecutions                                      smithy.SchemaExtensions
+	eListTagsForResource                                 smithy.SchemaExtensions
+	eListTasks                                           smithy.SchemaExtensions
+	eTagResource                                         smithy.SchemaExtensions
+	eUntagResource                                       smithy.SchemaExtensions
+	e_SnowDeviceManagement                               smithy.SchemaExtensions
+	eAccessDeniedException                               smithy.SchemaExtensions
+	eAccessDeniedException_message                       smithy.SchemaExtensions
+	e_AttachmentStatus                                   smithy.SchemaExtensions
+	eCapacity                                            smithy.SchemaExtensions
+	eCapacity_name                                       smithy.SchemaExtensions
+	eCapacity_unit                                       smithy.SchemaExtensions
+	eCapacity_total                                      smithy.SchemaExtensions
+	eCapacity_used                                       smithy.SchemaExtensions
+	eCapacity_available                                  smithy.SchemaExtensions
+	e_CapacityList                                       smithy.SchemaExtensions
+	e_CapacityList_member                                smithy.SchemaExtensions
+	eCommand                                             smithy.SchemaExtensions
+	eCommand_unlock                                      smithy.SchemaExtensions
+	eCommand_reboot                                      smithy.SchemaExtensions
+	eCpuOptions                                          smithy.SchemaExtensions
+	eCpuOptions_coreCount                                smithy.SchemaExtensions
+	eCpuOptions_threadsPerCore                           smithy.SchemaExtensions
+	eDeviceSummary                                       smithy.SchemaExtensions
+	eDeviceSummary_managedDeviceId                       smithy.SchemaExtensions
+	eDeviceSummary_managedDeviceArn                      smithy.SchemaExtensions
+	eDeviceSummary_associatedWithJob                     smithy.SchemaExtensions
+	eDeviceSummary_tags                                  smithy.SchemaExtensions
+	e_DeviceSummaryList                                  smithy.SchemaExtensions
+	e_DeviceSummaryList_member                           smithy.SchemaExtensions
+	eEbsInstanceBlockDevice                              smithy.SchemaExtensions
+	eEbsInstanceBlockDevice_attachTime                   smithy.SchemaExtensions
+	eEbsInstanceBlockDevice_deleteOnTermination          smithy.SchemaExtensions
+	eEbsInstanceBlockDevice_status                       smithy.SchemaExtensions
+	eEbsInstanceBlockDevice_volumeId                     smithy.SchemaExtensions
+	e_ExecutionId                                        smithy.SchemaExtensions
+	e_ExecutionState                                     smithy.SchemaExtensions
+	eExecutionSummary                                    smithy.SchemaExtensions
+	eExecutionSummary_taskId                             smithy.SchemaExtensions
+	eExecutionSummary_executionId                        smithy.SchemaExtensions
+	eExecutionSummary_managedDeviceId                    smithy.SchemaExtensions
+	eExecutionSummary_state                              smithy.SchemaExtensions
+	e_ExecutionSummaryList                               smithy.SchemaExtensions
+	e_ExecutionSummaryList_member                        smithy.SchemaExtensions
+	e_IdempotencyToken                                   smithy.SchemaExtensions
+	eInstance                                            smithy.SchemaExtensions
+	eInstance_imageId                                    smithy.SchemaExtensions
+	eInstance_amiLaunchIndex                             smithy.SchemaExtensions
+	eInstance_instanceId                                 smithy.SchemaExtensions
+	eInstance_state                                      smithy.SchemaExtensions
+	eInstance_instanceType                               smithy.SchemaExtensions
+	eInstance_privateIpAddress                           smithy.SchemaExtensions
+	eInstance_publicIpAddress                            smithy.SchemaExtensions
+	eInstance_createdAt                                  smithy.SchemaExtensions
+	eInstance_updatedAt                                  smithy.SchemaExtensions
+	eInstance_blockDeviceMappings                        smithy.SchemaExtensions
+	eInstance_securityGroups                             smithy.SchemaExtensions
+	eInstance_cpuOptions                                 smithy.SchemaExtensions
+	eInstance_rootDeviceName                             smithy.SchemaExtensions
+	eInstanceBlockDeviceMapping                          smithy.SchemaExtensions
+	eInstanceBlockDeviceMapping_deviceName               smithy.SchemaExtensions
+	eInstanceBlockDeviceMapping_ebs                      smithy.SchemaExtensions
+	e_InstanceBlockDeviceMappingList                     smithy.SchemaExtensions
+	e_InstanceBlockDeviceMappingList_member              smithy.SchemaExtensions
+	e_InstanceIdsList                                    smithy.SchemaExtensions
+	e_InstanceIdsList_member                             smithy.SchemaExtensions
+	eInstanceState                                       smithy.SchemaExtensions
+	eInstanceState_code                                  smithy.SchemaExtensions
+	eInstanceState_name                                  smithy.SchemaExtensions
+	e_InstanceStateName                                  smithy.SchemaExtensions
+	eInstanceSummary                                     smithy.SchemaExtensions
+	eInstanceSummary_instance                            smithy.SchemaExtensions
+	eInstanceSummary_lastUpdatedAt                       smithy.SchemaExtensions
+	e_InstanceSummaryList                                smithy.SchemaExtensions
+	e_InstanceSummaryList_member                         smithy.SchemaExtensions
+	eInternalServerException                             smithy.SchemaExtensions
+	eInternalServerException_message                     smithy.SchemaExtensions
+	e_IpAddressAssignment                                smithy.SchemaExtensions
+	e_JobId                                              smithy.SchemaExtensions
+	e_ManagedDeviceId                                    smithy.SchemaExtensions
+	e_MaxResults                                         smithy.SchemaExtensions
+	e_NextToken                                          smithy.SchemaExtensions
+	e_PhysicalConnectorType                              smithy.SchemaExtensions
+	ePhysicalNetworkInterface                            smithy.SchemaExtensions
+	ePhysicalNetworkInterface_physicalNetworkInterfaceId smithy.SchemaExtensions
+	ePhysicalNetworkInterface_physicalConnectorType      smithy.SchemaExtensions
+	ePhysicalNetworkInterface_ipAddressAssignment        smithy.SchemaExtensions
+	ePhysicalNetworkInterface_ipAddress                  smithy.SchemaExtensions
+	ePhysicalNetworkInterface_netmask                    smithy.SchemaExtensions
+	ePhysicalNetworkInterface_defaultGateway             smithy.SchemaExtensions
+	ePhysicalNetworkInterface_macAddress                 smithy.SchemaExtensions
+	e_PhysicalNetworkInterfaceList                       smithy.SchemaExtensions
+	e_PhysicalNetworkInterfaceList_member                smithy.SchemaExtensions
+	eReboot                                              smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                   smithy.SchemaExtensions
+	eResourceSummary                                     smithy.SchemaExtensions
+	eResourceSummary_resourceType                        smithy.SchemaExtensions
+	eResourceSummary_arn                                 smithy.SchemaExtensions
+	eResourceSummary_id                                  smithy.SchemaExtensions
+	e_ResourceSummaryList                                smithy.SchemaExtensions
+	e_ResourceSummaryList_member                         smithy.SchemaExtensions
+	eSecurityGroupIdentifier                             smithy.SchemaExtensions
+	eSecurityGroupIdentifier_groupId                     smithy.SchemaExtensions
+	eSecurityGroupIdentifier_groupName                   smithy.SchemaExtensions
+	e_SecurityGroupIdentifierList                        smithy.SchemaExtensions
+	e_SecurityGroupIdentifierList_member                 smithy.SchemaExtensions
+	eServiceQuotaExceededException                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message               smithy.SchemaExtensions
+	eSoftwareInformation                                 smithy.SchemaExtensions
+	eSoftwareInformation_installedVersion                smithy.SchemaExtensions
+	eSoftwareInformation_installingVersion               smithy.SchemaExtensions
+	eSoftwareInformation_installState                    smithy.SchemaExtensions
+	e_TagKeys                                            smithy.SchemaExtensions
+	e_TagKeys_member                                     smithy.SchemaExtensions
+	e_TagMap                                             smithy.SchemaExtensions
+	e_TagMap_key                                         smithy.SchemaExtensions
+	e_TagMap_value                                       smithy.SchemaExtensions
+	e_TargetList                                         smithy.SchemaExtensions
+	e_TargetList_member                                  smithy.SchemaExtensions
+	e_TaskDescriptionString                              smithy.SchemaExtensions
+	e_TaskId                                             smithy.SchemaExtensions
+	e_TaskState                                          smithy.SchemaExtensions
+	eTaskSummary                                         smithy.SchemaExtensions
+	eTaskSummary_taskId                                  smithy.SchemaExtensions
+	eTaskSummary_taskArn                                 smithy.SchemaExtensions
+	eTaskSummary_state                                   smithy.SchemaExtensions
+	eTaskSummary_tags                                    smithy.SchemaExtensions
+	e_TaskSummaryList                                    smithy.SchemaExtensions
+	e_TaskSummaryList_member                             smithy.SchemaExtensions
+	eThrottlingException                                 smithy.SchemaExtensions
+	eThrottlingException_message                         smithy.SchemaExtensions
+	eUnlock                                              smithy.SchemaExtensions
+	e_UnlockState                                        smithy.SchemaExtensions
+	eValidationException                                 smithy.SchemaExtensions
+	eValidationException_message                         smithy.SchemaExtensions
+	eCancelTaskInput                                     smithy.SchemaExtensions
+	eCancelTaskInput_taskId                              smithy.SchemaExtensions
+	eCancelTaskOutput                                    smithy.SchemaExtensions
+	eCancelTaskOutput_taskId                             smithy.SchemaExtensions
+	eCreateTaskInput                                     smithy.SchemaExtensions
+	eCreateTaskInput_targets                             smithy.SchemaExtensions
+	eCreateTaskInput_command                             smithy.SchemaExtensions
+	eCreateTaskInput_description                         smithy.SchemaExtensions
+	eCreateTaskInput_tags                                smithy.SchemaExtensions
+	eCreateTaskInput_clientToken                         smithy.SchemaExtensions
+	eCreateTaskOutput                                    smithy.SchemaExtensions
+	eCreateTaskOutput_taskId                             smithy.SchemaExtensions
+	eCreateTaskOutput_taskArn                            smithy.SchemaExtensions
+	eDescribeDeviceEc2Input                              smithy.SchemaExtensions
+	eDescribeDeviceEc2Input_managedDeviceId              smithy.SchemaExtensions
+	eDescribeDeviceEc2Input_instanceIds                  smithy.SchemaExtensions
+	eDescribeDeviceEc2Output                             smithy.SchemaExtensions
+	eDescribeDeviceEc2Output_instances                   smithy.SchemaExtensions
+	eDescribeDeviceInput                                 smithy.SchemaExtensions
+	eDescribeDeviceInput_managedDeviceId                 smithy.SchemaExtensions
+	eDescribeDeviceOutput                                smithy.SchemaExtensions
+	eDescribeDeviceOutput_lastReachedOutAt               smithy.SchemaExtensions
+	eDescribeDeviceOutput_lastUpdatedAt                  smithy.SchemaExtensions
+	eDescribeDeviceOutput_tags                           smithy.SchemaExtensions
+	eDescribeDeviceOutput_managedDeviceId                smithy.SchemaExtensions
+	eDescribeDeviceOutput_managedDeviceArn               smithy.SchemaExtensions
+	eDescribeDeviceOutput_deviceType                     smithy.SchemaExtensions
+	eDescribeDeviceOutput_associatedWithJob              smithy.SchemaExtensions
+	eDescribeDeviceOutput_deviceState                    smithy.SchemaExtensions
+	eDescribeDeviceOutput_physicalNetworkInterfaces      smithy.SchemaExtensions
+	eDescribeDeviceOutput_deviceCapacities               smithy.SchemaExtensions
+	eDescribeDeviceOutput_software                       smithy.SchemaExtensions
+	eDescribeExecutionInput                              smithy.SchemaExtensions
+	eDescribeExecutionInput_taskId                       smithy.SchemaExtensions
+	eDescribeExecutionInput_managedDeviceId              smithy.SchemaExtensions
+	eDescribeExecutionOutput                             smithy.SchemaExtensions
+	eDescribeExecutionOutput_taskId                      smithy.SchemaExtensions
+	eDescribeExecutionOutput_executionId                 smithy.SchemaExtensions
+	eDescribeExecutionOutput_managedDeviceId             smithy.SchemaExtensions
+	eDescribeExecutionOutput_state                       smithy.SchemaExtensions
+	eDescribeExecutionOutput_startedAt                   smithy.SchemaExtensions
+	eDescribeExecutionOutput_lastUpdatedAt               smithy.SchemaExtensions
+	eDescribeTaskInput                                   smithy.SchemaExtensions
+	eDescribeTaskInput_taskId                            smithy.SchemaExtensions
+	eDescribeTaskOutput                                  smithy.SchemaExtensions
+	eDescribeTaskOutput_taskId                           smithy.SchemaExtensions
+	eDescribeTaskOutput_taskArn                          smithy.SchemaExtensions
+	eDescribeTaskOutput_targets                          smithy.SchemaExtensions
+	eDescribeTaskOutput_state                            smithy.SchemaExtensions
+	eDescribeTaskOutput_createdAt                        smithy.SchemaExtensions
+	eDescribeTaskOutput_lastUpdatedAt                    smithy.SchemaExtensions
+	eDescribeTaskOutput_completedAt                      smithy.SchemaExtensions
+	eDescribeTaskOutput_description                      smithy.SchemaExtensions
+	eDescribeTaskOutput_tags                             smithy.SchemaExtensions
+	eListDeviceResourcesInput                            smithy.SchemaExtensions
+	eListDeviceResourcesInput_managedDeviceId            smithy.SchemaExtensions
+	eListDeviceResourcesInput_type                       smithy.SchemaExtensions
+	eListDeviceResourcesInput_maxResults                 smithy.SchemaExtensions
+	eListDeviceResourcesInput_nextToken                  smithy.SchemaExtensions
+	eListDeviceResourcesOutput                           smithy.SchemaExtensions
+	eListDeviceResourcesOutput_resources                 smithy.SchemaExtensions
+	eListDeviceResourcesOutput_nextToken                 smithy.SchemaExtensions
+	eListDevicesInput                                    smithy.SchemaExtensions
+	eListDevicesInput_jobId                              smithy.SchemaExtensions
+	eListDevicesInput_maxResults                         smithy.SchemaExtensions
+	eListDevicesInput_nextToken                          smithy.SchemaExtensions
+	eListDevicesOutput                                   smithy.SchemaExtensions
+	eListDevicesOutput_devices                           smithy.SchemaExtensions
+	eListDevicesOutput_nextToken                         smithy.SchemaExtensions
+	eListExecutionsInput                                 smithy.SchemaExtensions
+	eListExecutionsInput_taskId                          smithy.SchemaExtensions
+	eListExecutionsInput_state                           smithy.SchemaExtensions
+	eListExecutionsInput_maxResults                      smithy.SchemaExtensions
+	eListExecutionsInput_nextToken                       smithy.SchemaExtensions
+	eListExecutionsOutput                                smithy.SchemaExtensions
+	eListExecutionsOutput_executions                     smithy.SchemaExtensions
+	eListExecutionsOutput_nextToken                      smithy.SchemaExtensions
+	eListTagsForResourceInput                            smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                smithy.SchemaExtensions
+	eListTagsForResourceOutput                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                      smithy.SchemaExtensions
+	eListTasksInput                                      smithy.SchemaExtensions
+	eListTasksInput_state                                smithy.SchemaExtensions
+	eListTasksInput_maxResults                           smithy.SchemaExtensions
+	eListTasksInput_nextToken                            smithy.SchemaExtensions
+	eListTasksOutput                                     smithy.SchemaExtensions
+	eListTasksOutput_tasks                               smithy.SchemaExtensions
+	eListTasksOutput_nextToken                           smithy.SchemaExtensions
+	eTagResourceInput                                    smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                        smithy.SchemaExtensions
+	eTagResourceInput_tags                               smithy.SchemaExtensions
+	eUntagResourceInput                                  smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                      smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                          smithy.SchemaExtensions
+)
+
+var (
+	iCancelTask                      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CancelTask"}
+	iCreateTask                      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CreateTask"}
+	iDescribeDevice                  = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDevice"}
+	iDescribeDeviceEc2Instances      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDeviceEc2Instances"}
+	iDescribeExecution               = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeExecution"}
+	iDescribeTask                    = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeTask"}
+	iListDeviceResources             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDeviceResources"}
+	iListDevices                     = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDevices"}
+	iListExecutions                  = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListExecutions"}
+	iListTagsForResource             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTagsForResource"}
+	iListTasks                       = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTasks"}
+	iTagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TagResource"}
+	iUntagResource                   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "UntagResource"}
+	i_SnowDeviceManagement           = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "SnowDeviceManagement"}
+	iAccessDeniedException           = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "AccessDeniedException"}
+	i_AttachmentStatus               = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "AttachmentStatus"}
+	iCapacity                        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "Capacity"}
+	i_CapacityList                   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CapacityList"}
+	iCommand                         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "Command"}
+	iCpuOptions                      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CpuOptions"}
+	iDeviceSummary                   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DeviceSummary"}
+	i_DeviceSummaryList              = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DeviceSummaryList"}
+	iEbsInstanceBlockDevice          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "EbsInstanceBlockDevice"}
+	i_ExecutionId                    = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ExecutionId"}
+	i_ExecutionState                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ExecutionState"}
+	iExecutionSummary                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ExecutionSummary"}
+	i_ExecutionSummaryList           = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ExecutionSummaryList"}
+	i_IdempotencyToken               = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "IdempotencyToken"}
+	iInstance                        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "Instance"}
+	iInstanceBlockDeviceMapping      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceBlockDeviceMapping"}
+	i_InstanceBlockDeviceMappingList = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceBlockDeviceMappingList"}
+	i_InstanceIdsList                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceIdsList"}
+	iInstanceState                   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceState"}
+	i_InstanceStateName              = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceStateName"}
+	iInstanceSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceSummary"}
+	i_InstanceSummaryList            = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InstanceSummaryList"}
+	iInternalServerException         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "InternalServerException"}
+	i_IpAddressAssignment            = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "IpAddressAssignment"}
+	i_JobId                          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "JobId"}
+	i_ManagedDeviceId                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ManagedDeviceId"}
+	i_MaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "MaxResults"}
+	i_NextToken                      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "NextToken"}
+	i_PhysicalConnectorType          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "PhysicalConnectorType"}
+	iPhysicalNetworkInterface        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "PhysicalNetworkInterface"}
+	i_PhysicalNetworkInterfaceList   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "PhysicalNetworkInterfaceList"}
+	iReboot                          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "Reboot"}
+	iResourceNotFoundException       = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ResourceNotFoundException"}
+	iResourceSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ResourceSummary"}
+	i_ResourceSummaryList            = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ResourceSummaryList"}
+	iSecurityGroupIdentifier         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "SecurityGroupIdentifier"}
+	i_SecurityGroupIdentifierList    = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "SecurityGroupIdentifierList"}
+	iServiceQuotaExceededException   = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ServiceQuotaExceededException"}
+	iSoftwareInformation             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "SoftwareInformation"}
+	i_TagKeys                        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TagKeys"}
+	i_TagMap                         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TagMap"}
+	i_TargetList                     = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TargetList"}
+	i_TaskDescriptionString          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TaskDescriptionString"}
+	i_TaskId                         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TaskId"}
+	i_TaskState                      = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TaskState"}
+	iTaskSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TaskSummary"}
+	i_TaskSummaryList                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TaskSummaryList"}
+	iThrottlingException             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ThrottlingException"}
+	iUnlock                          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "Unlock"}
+	i_UnlockState                    = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "UnlockState"}
+	iValidationException             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ValidationException"}
+	iCancelTaskInput                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CancelTaskInput"}
+	iCancelTaskOutput                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CancelTaskOutput"}
+	iCreateTaskInput                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CreateTaskInput"}
+	iCreateTaskOutput                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "CreateTaskOutput"}
+	iDescribeDeviceEc2Input          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDeviceEc2Input"}
+	iDescribeDeviceEc2Output         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDeviceEc2Output"}
+	iDescribeDeviceInput             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDeviceInput"}
+	iDescribeDeviceOutput            = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeDeviceOutput"}
+	iDescribeExecutionInput          = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeExecutionInput"}
+	iDescribeExecutionOutput         = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeExecutionOutput"}
+	iDescribeTaskInput               = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeTaskInput"}
+	iDescribeTaskOutput              = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "DescribeTaskOutput"}
+	iListDeviceResourcesInput        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDeviceResourcesInput"}
+	iListDeviceResourcesOutput       = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDeviceResourcesOutput"}
+	iListDevicesInput                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDevicesInput"}
+	iListDevicesOutput               = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListDevicesOutput"}
+	iListExecutionsInput             = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListExecutionsInput"}
+	iListExecutionsOutput            = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListExecutionsOutput"}
+	iListTagsForResourceInput        = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput       = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTagsForResourceOutput"}
+	iListTasksInput                  = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTasksInput"}
+	iListTasksOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "ListTasksOutput"}
+	iTagResourceInput                = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "TagResourceInput"}
+	iUntagResourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.snowdevicemanagement", Name: "UntagResourceInput"}
+	pString                          = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pLong                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pInteger                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/task/{taskId}/cancel",
-	Code: 200})
-
-var CreateTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CreateTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/task",
-	Code: 200})
-
-var DescribeDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/managed-device/{managedDeviceId}/describe",
-	Code: 200})
-
-var DescribeDeviceEc2Instances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDeviceEc2Instances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/managed-device/{managedDeviceId}/resources/ec2/describe",
-	Code: 200})
-
-var DescribeExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeExecution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/task/{taskId}/execution/{managedDeviceId}",
-	Code: 200})
-
-var DescribeTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/task/{taskId}",
-	Code: 200})
-
-var ListDeviceResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDeviceResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-device/{managedDeviceId}/resources",
-	Code: 200})
-
-var ListDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDevices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-devices",
-	Code: 200})
-
-var ListExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListExecutions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/executions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tasks",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var _SnowDeviceManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "SnowDeviceManagement",
-}, smithy.ShapeTypeService, 0)
-
-var SnowDeviceManagement = smithy.NewServiceSchema(_SnowDeviceManagement, "2021-08-04")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AttachmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "AttachmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Capacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "Capacity",
-}, smithy.ShapeTypeStructure, 5)
-var Capacity_name *smithy.Schema
-
-var Capacity_unit *smithy.Schema
-
-var Capacity_total *smithy.Schema
-
-var Capacity_used *smithy.Schema
-
-var Capacity_available *smithy.Schema
-
-var _CapacityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CapacityList",
-}, smithy.ShapeTypeList, 1)
-var _CapacityList_member *smithy.Schema
-
-var Command = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "Command",
-}, smithy.ShapeTypeUnion, 2)
-var Command_unlock *smithy.Schema
-
-var Command_reboot *smithy.Schema
-
-var CpuOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CpuOptions",
-}, smithy.ShapeTypeStructure, 2)
-var CpuOptions_coreCount *smithy.Schema
-
-var CpuOptions_threadsPerCore *smithy.Schema
-
-var DeviceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DeviceSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DeviceSummary_managedDeviceId *smithy.Schema
-
-var DeviceSummary_managedDeviceArn *smithy.Schema
-
-var DeviceSummary_associatedWithJob *smithy.Schema
-
-var DeviceSummary_tags *smithy.Schema
-
-var _DeviceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DeviceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceSummaryList_member *smithy.Schema
-
-var EbsInstanceBlockDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "EbsInstanceBlockDevice",
-}, smithy.ShapeTypeStructure, 4)
-var EbsInstanceBlockDevice_attachTime *smithy.Schema
-
-var EbsInstanceBlockDevice_deleteOnTermination *smithy.Schema
-
-var EbsInstanceBlockDevice_status *smithy.Schema
-
-var EbsInstanceBlockDevice_volumeId *smithy.Schema
-
-var _ExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ExecutionState",
-}, smithy.ShapeTypeString, 0)
-
-var ExecutionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ExecutionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ExecutionSummary_taskId *smithy.Schema
-
-var ExecutionSummary_executionId *smithy.Schema
-
-var ExecutionSummary_managedDeviceId *smithy.Schema
-
-var ExecutionSummary_state *smithy.Schema
-
-var _ExecutionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ExecutionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ExecutionSummaryList_member *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 13)
-var Instance_imageId *smithy.Schema
-
-var Instance_amiLaunchIndex *smithy.Schema
-
-var Instance_instanceId *smithy.Schema
-
-var Instance_state *smithy.Schema
-
-var Instance_instanceType *smithy.Schema
-
-var Instance_privateIpAddress *smithy.Schema
-
-var Instance_publicIpAddress *smithy.Schema
-
-var Instance_createdAt *smithy.Schema
-
-var Instance_updatedAt *smithy.Schema
-
-var Instance_blockDeviceMappings *smithy.Schema
-
-var Instance_securityGroups *smithy.Schema
-
-var Instance_cpuOptions *smithy.Schema
-
-var Instance_rootDeviceName *smithy.Schema
-
-var InstanceBlockDeviceMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceBlockDeviceMapping",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceBlockDeviceMapping_deviceName *smithy.Schema
-
-var InstanceBlockDeviceMapping_ebs *smithy.Schema
-
-var _InstanceBlockDeviceMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceBlockDeviceMappingList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceBlockDeviceMappingList_member *smithy.Schema
-
-var _InstanceIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceIdsList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceIdsList_member *smithy.Schema
-
-var InstanceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceState",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceState_code *smithy.Schema
-
-var InstanceState_name *smithy.Schema
-
-var _InstanceStateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceStateName",
-}, smithy.ShapeTypeString, 0)
-
-var InstanceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceSummary",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceSummary_instance *smithy.Schema
-
-var InstanceSummary_lastUpdatedAt *smithy.Schema
-
-var _InstanceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InstanceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceSummaryList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _IpAddressAssignment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "IpAddressAssignment",
-}, smithy.ShapeTypeString, 0)
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedDeviceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ManagedDeviceId",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PhysicalConnectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "PhysicalConnectorType",
-}, smithy.ShapeTypeString, 0)
-
-var PhysicalNetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "PhysicalNetworkInterface",
-}, smithy.ShapeTypeStructure, 7)
-var PhysicalNetworkInterface_physicalNetworkInterfaceId *smithy.Schema
-
-var PhysicalNetworkInterface_physicalConnectorType *smithy.Schema
-
-var PhysicalNetworkInterface_ipAddressAssignment *smithy.Schema
-
-var PhysicalNetworkInterface_ipAddress *smithy.Schema
-
-var PhysicalNetworkInterface_netmask *smithy.Schema
-
-var PhysicalNetworkInterface_defaultGateway *smithy.Schema
-
-var PhysicalNetworkInterface_macAddress *smithy.Schema
-
-var _PhysicalNetworkInterfaceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "PhysicalNetworkInterfaceList",
-}, smithy.ShapeTypeList, 1)
-var _PhysicalNetworkInterfaceList_member *smithy.Schema
-
-var Reboot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "Reboot",
-}, smithy.ShapeTypeStructure, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ResourceSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceSummary_resourceType *smithy.Schema
-
-var ResourceSummary_arn *smithy.Schema
-
-var ResourceSummary_id *smithy.Schema
-
-var _ResourceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ResourceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSummaryList_member *smithy.Schema
-
-var SecurityGroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "SecurityGroupIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var SecurityGroupIdentifier_groupId *smithy.Schema
-
-var SecurityGroupIdentifier_groupName *smithy.Schema
-
-var _SecurityGroupIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "SecurityGroupIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdentifierList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SoftwareInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "SoftwareInformation",
-}, smithy.ShapeTypeStructure, 3)
-var SoftwareInformation_installedVersion *smithy.Schema
-
-var SoftwareInformation_installingVersion *smithy.Schema
-
-var SoftwareInformation_installState *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TargetList",
-}, smithy.ShapeTypeList, 1)
-var _TargetList_member *smithy.Schema
-
-var _TaskDescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TaskDescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TaskId",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TaskState",
-}, smithy.ShapeTypeString, 0)
-
-var TaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TaskSummary",
-}, smithy.ShapeTypeStructure, 4)
-var TaskSummary_taskId *smithy.Schema
-
-var TaskSummary_taskArn *smithy.Schema
-
-var TaskSummary_state *smithy.Schema
-
-var TaskSummary_tags *smithy.Schema
-
-var _TaskSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TaskSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TaskSummaryList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var Unlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "Unlock",
-}, smithy.ShapeTypeStructure, 0)
-
-var _UnlockState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "UnlockState",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CancelTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CancelTaskInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelTaskInput_taskId *smithy.Schema
-
-var CancelTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CancelTaskOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelTaskOutput_taskId *smithy.Schema
-
-var CreateTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CreateTaskInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTaskInput_targets *smithy.Schema
-
-var CreateTaskInput_command *smithy.Schema
-
-var CreateTaskInput_description *smithy.Schema
-
-var CreateTaskInput_tags *smithy.Schema
-
-var CreateTaskInput_clientToken *smithy.Schema
-
-var CreateTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "CreateTaskOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTaskOutput_taskId *smithy.Schema
-
-var CreateTaskOutput_taskArn *smithy.Schema
-
-var DescribeDeviceEc2Input = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDeviceEc2Input",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDeviceEc2Input_managedDeviceId *smithy.Schema
-
-var DescribeDeviceEc2Input_instanceIds *smithy.Schema
-
-var DescribeDeviceEc2Output = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDeviceEc2Output",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDeviceEc2Output_instances *smithy.Schema
-
-var DescribeDeviceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDeviceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDeviceInput_managedDeviceId *smithy.Schema
-
-var DescribeDeviceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeDeviceOutput",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeDeviceOutput_lastReachedOutAt *smithy.Schema
-
-var DescribeDeviceOutput_lastUpdatedAt *smithy.Schema
-
-var DescribeDeviceOutput_tags *smithy.Schema
-
-var DescribeDeviceOutput_managedDeviceId *smithy.Schema
-
-var DescribeDeviceOutput_managedDeviceArn *smithy.Schema
-
-var DescribeDeviceOutput_deviceType *smithy.Schema
-
-var DescribeDeviceOutput_associatedWithJob *smithy.Schema
-
-var DescribeDeviceOutput_deviceState *smithy.Schema
-
-var DescribeDeviceOutput_physicalNetworkInterfaces *smithy.Schema
-
-var DescribeDeviceOutput_deviceCapacities *smithy.Schema
-
-var DescribeDeviceOutput_software *smithy.Schema
-
-var DescribeExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeExecutionInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeExecutionInput_taskId *smithy.Schema
-
-var DescribeExecutionInput_managedDeviceId *smithy.Schema
-
-var DescribeExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeExecutionOutput",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeExecutionOutput_taskId *smithy.Schema
-
-var DescribeExecutionOutput_executionId *smithy.Schema
-
-var DescribeExecutionOutput_managedDeviceId *smithy.Schema
-
-var DescribeExecutionOutput_state *smithy.Schema
-
-var DescribeExecutionOutput_startedAt *smithy.Schema
-
-var DescribeExecutionOutput_lastUpdatedAt *smithy.Schema
-
-var DescribeTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeTaskInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTaskInput_taskId *smithy.Schema
-
-var DescribeTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "DescribeTaskOutput",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeTaskOutput_taskId *smithy.Schema
-
-var DescribeTaskOutput_taskArn *smithy.Schema
-
-var DescribeTaskOutput_targets *smithy.Schema
-
-var DescribeTaskOutput_state *smithy.Schema
-
-var DescribeTaskOutput_createdAt *smithy.Schema
-
-var DescribeTaskOutput_lastUpdatedAt *smithy.Schema
-
-var DescribeTaskOutput_completedAt *smithy.Schema
-
-var DescribeTaskOutput_description *smithy.Schema
-
-var DescribeTaskOutput_tags *smithy.Schema
-
-var ListDeviceResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDeviceResourcesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListDeviceResourcesInput_managedDeviceId *smithy.Schema
-
-var ListDeviceResourcesInput_type *smithy.Schema
-
-var ListDeviceResourcesInput_maxResults *smithy.Schema
-
-var ListDeviceResourcesInput_nextToken *smithy.Schema
-
-var ListDeviceResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDeviceResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeviceResourcesOutput_resources *smithy.Schema
-
-var ListDeviceResourcesOutput_nextToken *smithy.Schema
-
-var ListDevicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDevicesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDevicesInput_jobId *smithy.Schema
-
-var ListDevicesInput_maxResults *smithy.Schema
-
-var ListDevicesInput_nextToken *smithy.Schema
-
-var ListDevicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListDevicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevicesOutput_devices *smithy.Schema
-
-var ListDevicesOutput_nextToken *smithy.Schema
-
-var ListExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListExecutionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListExecutionsInput_taskId *smithy.Schema
-
-var ListExecutionsInput_state *smithy.Schema
-
-var ListExecutionsInput_maxResults *smithy.Schema
-
-var ListExecutionsInput_nextToken *smithy.Schema
-
-var ListExecutionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListExecutionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListExecutionsOutput_executions *smithy.Schema
-
-var ListExecutionsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListTasksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTasksInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTasksInput_state *smithy.Schema
-
-var ListTasksInput_maxResults *smithy.Schema
-
-var ListTasksInput_nextToken *smithy.Schema
-
-var ListTasksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "ListTasksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTasksOutput_tasks *smithy.Schema
-
-var ListTasksOutput_nextToken *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.snowdevicemanagement",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	Capacity_name = Capacity.AddMember("name", smithyprelude.String)
-
-	Capacity_unit = Capacity.AddMember("unit", smithyprelude.String)
-
-	Capacity_total = Capacity.AddMember("total", smithyprelude.Long)
-
-	Capacity_used = Capacity.AddMember("used", smithyprelude.Long)
-
-	Capacity_available = Capacity.AddMember("available", smithyprelude.Long)
-
-	_CapacityList_member = _CapacityList.AddMember("member", Capacity)
-
-	Command_unlock = Command.AddMember("unlock", Unlock)
-
-	Command_reboot = Command.AddMember("reboot", Reboot)
-
-	CpuOptions_coreCount = CpuOptions.AddMember("coreCount", smithyprelude.Integer)
-
-	CpuOptions_threadsPerCore = CpuOptions.AddMember("threadsPerCore", smithyprelude.Integer)
-
-	_TagMap_key = _TagMap.AddMember("key", smithyprelude.String)
-
-	_TagMap_value = _TagMap.AddMember("value", smithyprelude.String)
-
-	DeviceSummary_managedDeviceId = DeviceSummary.AddMember("managedDeviceId", _ManagedDeviceId)
-
-	DeviceSummary_managedDeviceArn = DeviceSummary.AddMember("managedDeviceArn", smithyprelude.String)
-
-	DeviceSummary_associatedWithJob = DeviceSummary.AddMember("associatedWithJob", smithyprelude.String)
-
-	DeviceSummary_tags = DeviceSummary.AddMember("tags", _TagMap)
-
-	_DeviceSummaryList_member = _DeviceSummaryList.AddMember("member", DeviceSummary)
-
-	EbsInstanceBlockDevice_attachTime = EbsInstanceBlockDevice.AddMember("attachTime", smithyprelude.Timestamp)
-
-	EbsInstanceBlockDevice_deleteOnTermination = EbsInstanceBlockDevice.AddMember("deleteOnTermination", smithyprelude.Boolean)
-
-	EbsInstanceBlockDevice_status = EbsInstanceBlockDevice.AddMember("status", _AttachmentStatus)
-
-	EbsInstanceBlockDevice_volumeId = EbsInstanceBlockDevice.AddMember("volumeId", smithyprelude.String)
-
-	ExecutionSummary_taskId = ExecutionSummary.AddMember("taskId", _TaskId)
-
-	ExecutionSummary_executionId = ExecutionSummary.AddMember("executionId", _ExecutionId)
-
-	ExecutionSummary_managedDeviceId = ExecutionSummary.AddMember("managedDeviceId", _ManagedDeviceId)
-
-	ExecutionSummary_state = ExecutionSummary.AddMember("state", _ExecutionState)
-
-	_ExecutionSummaryList_member = _ExecutionSummaryList.AddMember("member", ExecutionSummary)
-
-	InstanceState_code = InstanceState.AddMember("code", smithyprelude.Integer)
-
-	InstanceState_name = InstanceState.AddMember("name", _InstanceStateName)
-
-	InstanceBlockDeviceMapping_deviceName = InstanceBlockDeviceMapping.AddMember("deviceName", smithyprelude.String)
-
-	InstanceBlockDeviceMapping_ebs = InstanceBlockDeviceMapping.AddMember("ebs", EbsInstanceBlockDevice)
-
-	_InstanceBlockDeviceMappingList_member = _InstanceBlockDeviceMappingList.AddMember("member", InstanceBlockDeviceMapping)
-
-	SecurityGroupIdentifier_groupId = SecurityGroupIdentifier.AddMember("groupId", smithyprelude.String)
-
-	SecurityGroupIdentifier_groupName = SecurityGroupIdentifier.AddMember("groupName", smithyprelude.String)
-
-	_SecurityGroupIdentifierList_member = _SecurityGroupIdentifierList.AddMember("member", SecurityGroupIdentifier)
-
-	Instance_imageId = Instance.AddMember("imageId", smithyprelude.String)
-
-	Instance_amiLaunchIndex = Instance.AddMember("amiLaunchIndex", smithyprelude.Integer)
-
-	Instance_instanceId = Instance.AddMember("instanceId", smithyprelude.String)
-
-	Instance_state = Instance.AddMember("state", InstanceState)
-
-	Instance_instanceType = Instance.AddMember("instanceType", smithyprelude.String)
-
-	Instance_privateIpAddress = Instance.AddMember("privateIpAddress", smithyprelude.String)
-
-	Instance_publicIpAddress = Instance.AddMember("publicIpAddress", smithyprelude.String)
-
-	Instance_createdAt = Instance.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Instance_updatedAt = Instance.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	Instance_blockDeviceMappings = Instance.AddMember("blockDeviceMappings", _InstanceBlockDeviceMappingList)
-
-	Instance_securityGroups = Instance.AddMember("securityGroups", _SecurityGroupIdentifierList)
-
-	Instance_cpuOptions = Instance.AddMember("cpuOptions", CpuOptions)
-
-	Instance_rootDeviceName = Instance.AddMember("rootDeviceName", smithyprelude.String)
-
-	_InstanceIdsList_member = _InstanceIdsList.AddMember("member", smithyprelude.String)
-
-	InstanceSummary_instance = InstanceSummary.AddMember("instance", Instance)
-
-	InstanceSummary_lastUpdatedAt = InstanceSummary.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	_InstanceSummaryList_member = _InstanceSummaryList.AddMember("member", InstanceSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	PhysicalNetworkInterface_physicalNetworkInterfaceId = PhysicalNetworkInterface.AddMember("physicalNetworkInterfaceId", smithyprelude.String)
-
-	PhysicalNetworkInterface_physicalConnectorType = PhysicalNetworkInterface.AddMember("physicalConnectorType", _PhysicalConnectorType)
-
-	PhysicalNetworkInterface_ipAddressAssignment = PhysicalNetworkInterface.AddMember("ipAddressAssignment", _IpAddressAssignment)
-
-	PhysicalNetworkInterface_ipAddress = PhysicalNetworkInterface.AddMember("ipAddress", smithyprelude.String)
-
-	PhysicalNetworkInterface_netmask = PhysicalNetworkInterface.AddMember("netmask", smithyprelude.String)
-
-	PhysicalNetworkInterface_defaultGateway = PhysicalNetworkInterface.AddMember("defaultGateway", smithyprelude.String)
-
-	PhysicalNetworkInterface_macAddress = PhysicalNetworkInterface.AddMember("macAddress", smithyprelude.String)
-
-	_PhysicalNetworkInterfaceList_member = _PhysicalNetworkInterfaceList.AddMember("member", PhysicalNetworkInterface)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceSummary_resourceType = ResourceSummary.AddMember("resourceType", smithyprelude.String)
-
-	ResourceSummary_arn = ResourceSummary.AddMember("arn", smithyprelude.String)
-
-	ResourceSummary_id = ResourceSummary.AddMember("id", smithyprelude.String)
-
-	_ResourceSummaryList_member = _ResourceSummaryList.AddMember("member", ResourceSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	SoftwareInformation_installedVersion = SoftwareInformation.AddMember("installedVersion", smithyprelude.String)
-
-	SoftwareInformation_installingVersion = SoftwareInformation.AddMember("installingVersion", smithyprelude.String)
-
-	SoftwareInformation_installState = SoftwareInformation.AddMember("installState", smithyprelude.String)
-
-	_TagKeys_member = _TagKeys.AddMember("member", smithyprelude.String)
-
-	_TargetList_member = _TargetList.AddMember("member", smithyprelude.String)
-
-	TaskSummary_taskId = TaskSummary.AddMember("taskId", _TaskId)
-
-	TaskSummary_taskArn = TaskSummary.AddMember("taskArn", smithyprelude.String)
-
-	TaskSummary_state = TaskSummary.AddMember("state", _TaskState)
-
-	TaskSummary_tags = TaskSummary.AddMember("tags", _TagMap)
-
-	_TaskSummaryList_member = _TaskSummaryList.AddMember("member", TaskSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CancelTaskInput_taskId = CancelTaskInput.AddMember("taskId", _TaskId, &smithytraits.HTTPLabel{})
-
-	CancelTaskOutput_taskId = CancelTaskOutput.AddMember("taskId", smithyprelude.String)
-
-	CreateTaskInput_targets = CreateTaskInput.AddMember("targets", _TargetList)
-
-	CreateTaskInput_command = CreateTaskInput.AddMember("command", Command)
-
-	CreateTaskInput_description = CreateTaskInput.AddMember("description", _TaskDescriptionString)
-
-	CreateTaskInput_tags = CreateTaskInput.AddMember("tags", _TagMap)
-
-	CreateTaskInput_clientToken = CreateTaskInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreateTaskOutput_taskId = CreateTaskOutput.AddMember("taskId", smithyprelude.String)
-
-	CreateTaskOutput_taskArn = CreateTaskOutput.AddMember("taskArn", smithyprelude.String)
-
-	DescribeDeviceEc2Input_managedDeviceId = DescribeDeviceEc2Input.AddMember("managedDeviceId", _ManagedDeviceId, &smithytraits.HTTPLabel{})
-
-	DescribeDeviceEc2Input_instanceIds = DescribeDeviceEc2Input.AddMember("instanceIds", _InstanceIdsList)
-
-	DescribeDeviceEc2Output_instances = DescribeDeviceEc2Output.AddMember("instances", _InstanceSummaryList)
-
-	DescribeDeviceInput_managedDeviceId = DescribeDeviceInput.AddMember("managedDeviceId", _ManagedDeviceId, &smithytraits.HTTPLabel{})
-
-	DescribeDeviceOutput_lastReachedOutAt = DescribeDeviceOutput.AddMember("lastReachedOutAt", smithyprelude.Timestamp)
-
-	DescribeDeviceOutput_lastUpdatedAt = DescribeDeviceOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	DescribeDeviceOutput_tags = DescribeDeviceOutput.AddMember("tags", _TagMap)
-
-	DescribeDeviceOutput_managedDeviceId = DescribeDeviceOutput.AddMember("managedDeviceId", _ManagedDeviceId)
-
-	DescribeDeviceOutput_managedDeviceArn = DescribeDeviceOutput.AddMember("managedDeviceArn", smithyprelude.String)
-
-	DescribeDeviceOutput_deviceType = DescribeDeviceOutput.AddMember("deviceType", smithyprelude.String)
-
-	DescribeDeviceOutput_associatedWithJob = DescribeDeviceOutput.AddMember("associatedWithJob", smithyprelude.String)
-
-	DescribeDeviceOutput_deviceState = DescribeDeviceOutput.AddMember("deviceState", _UnlockState)
-
-	DescribeDeviceOutput_physicalNetworkInterfaces = DescribeDeviceOutput.AddMember("physicalNetworkInterfaces", _PhysicalNetworkInterfaceList)
-
-	DescribeDeviceOutput_deviceCapacities = DescribeDeviceOutput.AddMember("deviceCapacities", _CapacityList)
-
-	DescribeDeviceOutput_software = DescribeDeviceOutput.AddMember("software", SoftwareInformation)
-
-	DescribeExecutionInput_taskId = DescribeExecutionInput.AddMember("taskId", _TaskId, &smithytraits.HTTPLabel{})
-
-	DescribeExecutionInput_managedDeviceId = DescribeExecutionInput.AddMember("managedDeviceId", _ManagedDeviceId, &smithytraits.HTTPLabel{})
-
-	DescribeExecutionOutput_taskId = DescribeExecutionOutput.AddMember("taskId", _TaskId)
-
-	DescribeExecutionOutput_executionId = DescribeExecutionOutput.AddMember("executionId", _ExecutionId)
-
-	DescribeExecutionOutput_managedDeviceId = DescribeExecutionOutput.AddMember("managedDeviceId", _ManagedDeviceId)
-
-	DescribeExecutionOutput_state = DescribeExecutionOutput.AddMember("state", _ExecutionState)
-
-	DescribeExecutionOutput_startedAt = DescribeExecutionOutput.AddMember("startedAt", smithyprelude.Timestamp)
-
-	DescribeExecutionOutput_lastUpdatedAt = DescribeExecutionOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	DescribeTaskInput_taskId = DescribeTaskInput.AddMember("taskId", _TaskId, &smithytraits.HTTPLabel{})
-
-	DescribeTaskOutput_taskId = DescribeTaskOutput.AddMember("taskId", smithyprelude.String)
-
-	DescribeTaskOutput_taskArn = DescribeTaskOutput.AddMember("taskArn", smithyprelude.String)
-
-	DescribeTaskOutput_targets = DescribeTaskOutput.AddMember("targets", _TargetList)
-
-	DescribeTaskOutput_state = DescribeTaskOutput.AddMember("state", _TaskState)
-
-	DescribeTaskOutput_createdAt = DescribeTaskOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	DescribeTaskOutput_lastUpdatedAt = DescribeTaskOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	DescribeTaskOutput_completedAt = DescribeTaskOutput.AddMember("completedAt", smithyprelude.Timestamp)
-
-	DescribeTaskOutput_description = DescribeTaskOutput.AddMember("description", _TaskDescriptionString)
-
-	DescribeTaskOutput_tags = DescribeTaskOutput.AddMember("tags", _TagMap)
-
-	ListDeviceResourcesInput_managedDeviceId = ListDeviceResourcesInput.AddMember("managedDeviceId", _ManagedDeviceId, &smithytraits.HTTPLabel{})
-
-	ListDeviceResourcesInput_type = ListDeviceResourcesInput.AddMember("type", smithyprelude.String, &smithytraits.HTTPQuery{Name: "type"})
-
-	ListDeviceResourcesInput_maxResults = ListDeviceResourcesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDeviceResourcesInput_nextToken = ListDeviceResourcesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDeviceResourcesOutput_resources = ListDeviceResourcesOutput.AddMember("resources", _ResourceSummaryList)
-
-	ListDeviceResourcesOutput_nextToken = ListDeviceResourcesOutput.AddMember("nextToken", _NextToken)
-
-	ListDevicesInput_jobId = ListDevicesInput.AddMember("jobId", _JobId, &smithytraits.HTTPQuery{Name: "jobId"})
-
-	ListDevicesInput_maxResults = ListDevicesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDevicesInput_nextToken = ListDevicesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDevicesOutput_devices = ListDevicesOutput.AddMember("devices", _DeviceSummaryList)
-
-	ListDevicesOutput_nextToken = ListDevicesOutput.AddMember("nextToken", _NextToken)
-
-	ListExecutionsInput_taskId = ListExecutionsInput.AddMember("taskId", _TaskId, &smithytraits.HTTPQuery{Name: "taskId"})
-
-	ListExecutionsInput_state = ListExecutionsInput.AddMember("state", _ExecutionState, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListExecutionsInput_maxResults = ListExecutionsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListExecutionsInput_nextToken = ListExecutionsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListExecutionsOutput_executions = ListExecutionsOutput.AddMember("executions", _ExecutionSummaryList)
-
-	ListExecutionsOutput_nextToken = ListExecutionsOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	ListTasksInput_state = ListTasksInput.AddMember("state", _TaskState, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListTasksInput_maxResults = ListTasksInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTasksInput_nextToken = ListTasksInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTasksOutput_tasks = ListTasksOutput.AddMember("tasks", _TaskSummaryList)
-
-	ListTasksOutput_nextToken = ListTasksOutput.AddMember("nextToken", _NextToken)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobId"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "taskId"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacity_name, &sCapacity_unit, &sCapacity_total, &sCapacity_used, &sCapacity_available}}
+var m_CapacityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityList_member}}
+var mCommand = smithy.SchemaMembers{List: []*smithy.Schema{&sCommand_unlock, &sCommand_reboot}}
+var mCpuOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCpuOptions_coreCount, &sCpuOptions_threadsPerCore}}
+var mDeviceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceSummary_managedDeviceId, &sDeviceSummary_managedDeviceArn, &sDeviceSummary_associatedWithJob, &sDeviceSummary_tags}}
+var m_DeviceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceSummaryList_member}}
+var mEbsInstanceBlockDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sEbsInstanceBlockDevice_attachTime, &sEbsInstanceBlockDevice_deleteOnTermination, &sEbsInstanceBlockDevice_status, &sEbsInstanceBlockDevice_volumeId}}
+var mExecutionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionSummary_taskId, &sExecutionSummary_executionId, &sExecutionSummary_managedDeviceId, &sExecutionSummary_state}}
+var m_ExecutionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutionSummaryList_member}}
+var mInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sInstance_imageId, &sInstance_amiLaunchIndex, &sInstance_instanceId, &sInstance_state, &sInstance_instanceType, &sInstance_privateIpAddress, &sInstance_publicIpAddress, &sInstance_createdAt, &sInstance_updatedAt, &sInstance_blockDeviceMappings, &sInstance_securityGroups, &sInstance_cpuOptions, &sInstance_rootDeviceName}, Hash: &hInstance}
+var mInstanceBlockDeviceMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceBlockDeviceMapping_deviceName, &sInstanceBlockDeviceMapping_ebs}}
+var m_InstanceBlockDeviceMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceBlockDeviceMappingList_member}}
+var m_InstanceIdsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceIdsList_member}}
+var mInstanceState = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceState_code, &sInstanceState_name}}
+var mInstanceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceSummary_instance, &sInstanceSummary_lastUpdatedAt}}
+var m_InstanceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceSummaryList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mPhysicalNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sPhysicalNetworkInterface_physicalNetworkInterfaceId, &sPhysicalNetworkInterface_physicalConnectorType, &sPhysicalNetworkInterface_ipAddressAssignment, &sPhysicalNetworkInterface_ipAddress, &sPhysicalNetworkInterface_netmask, &sPhysicalNetworkInterface_defaultGateway, &sPhysicalNetworkInterface_macAddress}}
+var m_PhysicalNetworkInterfaceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhysicalNetworkInterfaceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSummary_resourceType, &sResourceSummary_arn, &sResourceSummary_id}}
+var m_ResourceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSummaryList_member}}
+var mSecurityGroupIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroupIdentifier_groupId, &sSecurityGroupIdentifier_groupName}}
+var m_SecurityGroupIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdentifierList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSoftwareInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sSoftwareInformation_installedVersion, &sSoftwareInformation_installingVersion, &sSoftwareInformation_installState}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_TargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetList_member}}
+var mTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskSummary_taskId, &sTaskSummary_taskArn, &sTaskSummary_state, &sTaskSummary_tags}}
+var m_TaskSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskSummaryList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCancelTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTaskInput_taskId}}
+var mCancelTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTaskOutput_taskId}}
+var mCreateTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTaskInput_targets, &sCreateTaskInput_command, &sCreateTaskInput_description, &sCreateTaskInput_tags, &sCreateTaskInput_clientToken}}
+var mCreateTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTaskOutput_taskId, &sCreateTaskOutput_taskArn}}
+var mDescribeDeviceEc2Input = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDeviceEc2Input_managedDeviceId, &sDescribeDeviceEc2Input_instanceIds}}
+var mDescribeDeviceEc2Output = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDeviceEc2Output_instances}}
+var mDescribeDeviceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDeviceInput_managedDeviceId}}
+var mDescribeDeviceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDeviceOutput_lastReachedOutAt, &sDescribeDeviceOutput_lastUpdatedAt, &sDescribeDeviceOutput_tags, &sDescribeDeviceOutput_managedDeviceId, &sDescribeDeviceOutput_managedDeviceArn, &sDescribeDeviceOutput_deviceType, &sDescribeDeviceOutput_associatedWithJob, &sDescribeDeviceOutput_deviceState, &sDescribeDeviceOutput_physicalNetworkInterfaces, &sDescribeDeviceOutput_deviceCapacities, &sDescribeDeviceOutput_software}, Hash: &hDescribeDeviceOutput}
+var mDescribeExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExecutionInput_taskId, &sDescribeExecutionInput_managedDeviceId}}
+var mDescribeExecutionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExecutionOutput_taskId, &sDescribeExecutionOutput_executionId, &sDescribeExecutionOutput_managedDeviceId, &sDescribeExecutionOutput_state, &sDescribeExecutionOutput_startedAt, &sDescribeExecutionOutput_lastUpdatedAt}}
+var mDescribeTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskInput_taskId}}
+var mDescribeTaskOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTaskOutput_taskId, &sDescribeTaskOutput_taskArn, &sDescribeTaskOutput_targets, &sDescribeTaskOutput_state, &sDescribeTaskOutput_createdAt, &sDescribeTaskOutput_lastUpdatedAt, &sDescribeTaskOutput_completedAt, &sDescribeTaskOutput_description, &sDescribeTaskOutput_tags}, Hash: &hDescribeTaskOutput}
+var mListDeviceResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeviceResourcesInput_managedDeviceId, &sListDeviceResourcesInput_type, &sListDeviceResourcesInput_maxResults, &sListDeviceResourcesInput_nextToken}}
+var mListDeviceResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeviceResourcesOutput_resources, &sListDeviceResourcesOutput_nextToken}}
+var mListDevicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevicesInput_jobId, &sListDevicesInput_maxResults, &sListDevicesInput_nextToken}}
+var mListDevicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevicesOutput_devices, &sListDevicesOutput_nextToken}}
+var mListExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsInput_taskId, &sListExecutionsInput_state, &sListExecutionsInput_maxResults, &sListExecutionsInput_nextToken}}
+var mListExecutionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsOutput_executions, &sListExecutionsOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mListTasksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksInput_state, &sListTasksInput_maxResults, &sListTasksInput_nextToken}}
+var mListTasksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksOutput_tasks, &sListTasksOutput_nextToken}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+
+var hInstance = smithy.MemberHash{Seed: 46, Slots: []uint16{
+	5, 0, 2, 0, 0, 13, 6, 0, 1, 12, 0, 9, 0, 0, 10, 0, 8, 0, 0, 0, 4, 0, 11, 0,
+	0, 0, 0, 0, 0, 3, 0, 7,
+}}
+var hDescribeDeviceOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 1, 0, 3, 0, 0, 0, 7, 5, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 10,
+	6, 0, 0, 0, 4, 8, 0, 9,
+}}
+var hDescribeTaskOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 4, 5, 9, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 3, 7, 0, 0, 2, 1, 0,
+	8, 0, 0, 0, 0, 0, 0, 0,
+}}
+
+var sCancelTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTask, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCancelTask})
+var sCreateTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTask, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateTask})
+var sDescribeDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDevice, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDevice})
+var sDescribeDeviceEc2Instances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeviceEc2Instances, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDeviceEc2Instances})
+var sDescribeExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecution, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDescribeExecution})
+var sDescribeTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTask, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTask})
+var sListDeviceResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeviceResources, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListDeviceResources})
+var sListDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevices, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListDevices})
+var sListExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutions, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListExecutions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasks, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTasks})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_SnowDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowDeviceManagement, Type: smithy.ShapeTypeService, Ext: &e_SnowDeviceManagement})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentStatus, Type: smithy.ShapeTypeString, Ext: &e_AttachmentStatus})
+var sCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacity, Members: &mCapacity, Type: smithy.ShapeTypeStructure, Ext: &eCapacity})
+var sCapacity_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCapacity_name})
+var sCapacity_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCapacity_unit})
+var sCapacity_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eCapacity_total})
+var sCapacity_used = smithy.NewStaticSchema(smithy.StaticSchema{Member: "used", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eCapacity_used})
+var sCapacity_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eCapacity_available})
+var s_CapacityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityList, Members: &m_CapacityList, Type: smithy.ShapeTypeList, Ext: &e_CapacityList})
+var s_CapacityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacity, Members: &mCapacity, Type: smithy.ShapeTypeStructure, Ext: &e_CapacityList_member})
+var sCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommand, Members: &mCommand, Type: smithy.ShapeTypeUnion, Ext: &eCommand})
+var sCommand_unlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unlock", ID: &iUnlock, Type: smithy.ShapeTypeStructure, Ext: &eCommand_unlock})
+var sCommand_reboot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reboot", ID: &iReboot, Type: smithy.ShapeTypeStructure, Ext: &eCommand_reboot})
+var sCpuOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCpuOptions, Members: &mCpuOptions, Type: smithy.ShapeTypeStructure, Ext: &eCpuOptions})
+var sCpuOptions_coreCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCpuOptions_coreCount})
+var sCpuOptions_threadsPerCore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "threadsPerCore", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCpuOptions_threadsPerCore})
+var sDeviceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceSummary, Members: &mDeviceSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeviceSummary})
+var sDeviceSummary_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_managedDeviceId})
+var sDeviceSummary_managedDeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_managedDeviceArn})
+var sDeviceSummary_associatedWithJob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedWithJob", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeviceSummary_associatedWithJob})
+var sDeviceSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDeviceSummary_tags})
+var s_DeviceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceSummaryList, Members: &m_DeviceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DeviceSummaryList})
+var s_DeviceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeviceSummary, Members: &mDeviceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DeviceSummaryList_member})
+var sEbsInstanceBlockDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEbsInstanceBlockDevice, Members: &mEbsInstanceBlockDevice, Type: smithy.ShapeTypeStructure, Ext: &eEbsInstanceBlockDevice})
+var sEbsInstanceBlockDevice_attachTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEbsInstanceBlockDevice_attachTime})
+var sEbsInstanceBlockDevice_deleteOnTermination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteOnTermination", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eEbsInstanceBlockDevice_deleteOnTermination})
+var sEbsInstanceBlockDevice_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_AttachmentStatus, Type: smithy.ShapeTypeString, Ext: &eEbsInstanceBlockDevice_status})
+var sEbsInstanceBlockDevice_volumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEbsInstanceBlockDevice_volumeId})
+var s_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &e_ExecutionId})
+var s_ExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionState, Type: smithy.ShapeTypeString, Ext: &e_ExecutionState})
+var sExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionSummary, Members: &mExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &eExecutionSummary})
+var sExecutionSummary_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &eExecutionSummary_taskId})
+var sExecutionSummary_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eExecutionSummary_executionId})
+var sExecutionSummary_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Type: smithy.ShapeTypeString, Ext: &eExecutionSummary_managedDeviceId})
+var sExecutionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_ExecutionState, Type: smithy.ShapeTypeString, Ext: &eExecutionSummary_state})
+var s_ExecutionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionSummaryList, Members: &m_ExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ExecutionSummaryList})
+var s_ExecutionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExecutionSummary, Members: &mExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExecutionSummaryList_member})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eInstance})
+var sInstance_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_imageId})
+var sInstance_amiLaunchIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiLaunchIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstance_amiLaunchIndex})
+var sInstance_instanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_instanceId})
+var sInstance_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iInstanceState, Members: &mInstanceState, Type: smithy.ShapeTypeStructure, Ext: &eInstance_state})
+var sInstance_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_instanceType})
+var sInstance_privateIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_privateIpAddress})
+var sInstance_publicIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_publicIpAddress})
+var sInstance_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstance_createdAt})
+var sInstance_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstance_updatedAt})
+var sInstance_blockDeviceMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockDeviceMappings", ID: &i_InstanceBlockDeviceMappingList, Members: &m_InstanceBlockDeviceMappingList, Type: smithy.ShapeTypeList, Ext: &eInstance_blockDeviceMappings})
+var sInstance_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroupIdentifierList, Members: &m_SecurityGroupIdentifierList, Type: smithy.ShapeTypeList, Ext: &eInstance_securityGroups})
+var sInstance_cpuOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuOptions", ID: &iCpuOptions, Members: &mCpuOptions, Type: smithy.ShapeTypeStructure, Ext: &eInstance_cpuOptions})
+var sInstance_rootDeviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDeviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstance_rootDeviceName})
+var sInstanceBlockDeviceMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceBlockDeviceMapping, Members: &mInstanceBlockDeviceMapping, Type: smithy.ShapeTypeStructure, Ext: &eInstanceBlockDeviceMapping})
+var sInstanceBlockDeviceMapping_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstanceBlockDeviceMapping_deviceName})
+var sInstanceBlockDeviceMapping_ebs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebs", ID: &iEbsInstanceBlockDevice, Members: &mEbsInstanceBlockDevice, Type: smithy.ShapeTypeStructure, Ext: &eInstanceBlockDeviceMapping_ebs})
+var s_InstanceBlockDeviceMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceBlockDeviceMappingList, Members: &m_InstanceBlockDeviceMappingList, Type: smithy.ShapeTypeList, Ext: &e_InstanceBlockDeviceMappingList})
+var s_InstanceBlockDeviceMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceBlockDeviceMapping, Members: &mInstanceBlockDeviceMapping, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceBlockDeviceMappingList_member})
+var s_InstanceIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIdsList, Members: &m_InstanceIdsList, Type: smithy.ShapeTypeList, Ext: &e_InstanceIdsList})
+var s_InstanceIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_InstanceIdsList_member})
+var sInstanceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceState, Members: &mInstanceState, Type: smithy.ShapeTypeStructure, Ext: &eInstanceState})
+var sInstanceState_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInstanceState_code})
+var sInstanceState_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_InstanceStateName, Type: smithy.ShapeTypeString, Ext: &eInstanceState_name})
+var s_InstanceStateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceStateName, Type: smithy.ShapeTypeString, Ext: &e_InstanceStateName})
+var sInstanceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceSummary, Members: &mInstanceSummary, Type: smithy.ShapeTypeStructure, Ext: &eInstanceSummary})
+var sInstanceSummary_instance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instance", ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure, Ext: &eInstanceSummary_instance})
+var sInstanceSummary_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInstanceSummary_lastUpdatedAt})
+var s_InstanceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceSummaryList, Members: &m_InstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_InstanceSummaryList})
+var s_InstanceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceSummary, Members: &mInstanceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceSummaryList_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_IpAddressAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressAssignment, Type: smithy.ShapeTypeString, Ext: &e_IpAddressAssignment})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_ManagedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedDeviceId, Type: smithy.ShapeTypeString, Ext: &e_ManagedDeviceId})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_PhysicalConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhysicalConnectorType, Type: smithy.ShapeTypeString, Ext: &e_PhysicalConnectorType})
+var sPhysicalNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhysicalNetworkInterface, Members: &mPhysicalNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &ePhysicalNetworkInterface})
+var sPhysicalNetworkInterface_physicalNetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "physicalNetworkInterfaceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_physicalNetworkInterfaceId})
+var sPhysicalNetworkInterface_physicalConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "physicalConnectorType", ID: &i_PhysicalConnectorType, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_physicalConnectorType})
+var sPhysicalNetworkInterface_ipAddressAssignment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressAssignment", ID: &i_IpAddressAssignment, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_ipAddressAssignment})
+var sPhysicalNetworkInterface_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_ipAddress})
+var sPhysicalNetworkInterface_netmask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "netmask", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_netmask})
+var sPhysicalNetworkInterface_defaultGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultGateway", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_defaultGateway})
+var sPhysicalNetworkInterface_macAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePhysicalNetworkInterface_macAddress})
+var s_PhysicalNetworkInterfaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhysicalNetworkInterfaceList, Members: &m_PhysicalNetworkInterfaceList, Type: smithy.ShapeTypeList, Ext: &e_PhysicalNetworkInterfaceList})
+var s_PhysicalNetworkInterfaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhysicalNetworkInterface, Members: &mPhysicalNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &e_PhysicalNetworkInterfaceList_member})
+var sReboot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReboot, Type: smithy.ShapeTypeStructure, Ext: &eReboot})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSummary, Members: &mResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &eResourceSummary})
+var sResourceSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceSummary_resourceType})
+var sResourceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceSummary_arn})
+var sResourceSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceSummary_id})
+var s_ResourceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSummaryList, Members: &m_ResourceSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ResourceSummaryList})
+var s_ResourceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSummary, Members: &mResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceSummaryList_member})
+var sSecurityGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroupIdentifier, Members: &mSecurityGroupIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eSecurityGroupIdentifier})
+var sSecurityGroupIdentifier_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSecurityGroupIdentifier_groupId})
+var sSecurityGroupIdentifier_groupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSecurityGroupIdentifier_groupName})
+var s_SecurityGroupIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdentifierList, Members: &m_SecurityGroupIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdentifierList})
+var s_SecurityGroupIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityGroupIdentifier, Members: &mSecurityGroupIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_SecurityGroupIdentifierList_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSoftwareInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSoftwareInformation, Members: &mSoftwareInformation, Type: smithy.ShapeTypeStructure, Ext: &eSoftwareInformation})
+var sSoftwareInformation_installedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "installedVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSoftwareInformation_installedVersion})
+var sSoftwareInformation_installingVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "installingVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSoftwareInformation_installingVersion})
+var sSoftwareInformation_installState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "installState", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSoftwareInformation_installState})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &e_TargetList})
+var s_TargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TargetList_member})
+var s_TaskDescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskDescriptionString, Type: smithy.ShapeTypeString, Ext: &e_TaskDescriptionString})
+var s_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &e_TaskId})
+var s_TaskState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskState, Type: smithy.ShapeTypeString, Ext: &e_TaskState})
+var sTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskSummary, Members: &mTaskSummary, Type: smithy.ShapeTypeStructure, Ext: &eTaskSummary})
+var sTaskSummary_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &eTaskSummary_taskId})
+var sTaskSummary_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTaskSummary_taskArn})
+var sTaskSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_TaskState, Type: smithy.ShapeTypeString, Ext: &eTaskSummary_state})
+var sTaskSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTaskSummary_tags})
+var s_TaskSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskSummaryList, Members: &m_TaskSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TaskSummaryList})
+var s_TaskSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskSummary, Members: &mTaskSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TaskSummaryList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sUnlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnlock, Type: smithy.ShapeTypeStructure, Ext: &eUnlock})
+var s_UnlockState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnlockState, Type: smithy.ShapeTypeString, Ext: &e_UnlockState})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCancelTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTaskInput, Members: &mCancelTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eCancelTaskInput})
+var sCancelTaskInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCancelTaskInput_taskId})
+var sCancelTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTaskOutput, Members: &mCancelTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eCancelTaskOutput})
+var sCancelTaskOutput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCancelTaskOutput_taskId})
+var sCreateTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTaskInput, Members: &mCreateTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskInput})
+var sCreateTaskInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eCreateTaskInput_targets})
+var sCreateTaskInput_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &iCommand, Members: &mCommand, Type: smithy.ShapeTypeUnion, Ext: &eCreateTaskInput_command})
+var sCreateTaskInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TaskDescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateTaskInput_description})
+var sCreateTaskInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateTaskInput_tags})
+var sCreateTaskInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateTaskInput_clientToken})
+var sCreateTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTaskOutput, Members: &mCreateTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTaskOutput})
+var sCreateTaskOutput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTaskOutput_taskId})
+var sCreateTaskOutput_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTaskOutput_taskArn})
+var sDescribeDeviceEc2Input = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeviceEc2Input, Members: &mDescribeDeviceEc2Input, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeviceEc2Input})
+var sDescribeDeviceEc2Input_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceEc2Input_managedDeviceId})
+var sDescribeDeviceEc2Input_instanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceIds", ID: &i_InstanceIdsList, Members: &m_InstanceIdsList, Type: smithy.ShapeTypeList, Ext: &eDescribeDeviceEc2Input_instanceIds})
+var sDescribeDeviceEc2Output = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeviceEc2Output, Members: &mDescribeDeviceEc2Output, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeviceEc2Output})
+var sDescribeDeviceEc2Output_instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instances", ID: &i_InstanceSummaryList, Members: &m_InstanceSummaryList, Type: smithy.ShapeTypeList, Ext: &eDescribeDeviceEc2Output_instances})
+var sDescribeDeviceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeviceInput, Members: &mDescribeDeviceInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeviceInput})
+var sDescribeDeviceInput_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceInput_managedDeviceId})
+var sDescribeDeviceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeviceOutput, Members: &mDescribeDeviceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeviceOutput})
+var sDescribeDeviceOutput_lastReachedOutAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastReachedOutAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDeviceOutput_lastReachedOutAt})
+var sDescribeDeviceOutput_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeDeviceOutput_lastUpdatedAt})
+var sDescribeDeviceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeDeviceOutput_tags})
+var sDescribeDeviceOutput_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceOutput_managedDeviceId})
+var sDescribeDeviceOutput_managedDeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceOutput_managedDeviceArn})
+var sDescribeDeviceOutput_deviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceOutput_deviceType})
+var sDescribeDeviceOutput_associatedWithJob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedWithJob", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceOutput_associatedWithJob})
+var sDescribeDeviceOutput_deviceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceState", ID: &i_UnlockState, Type: smithy.ShapeTypeString, Ext: &eDescribeDeviceOutput_deviceState})
+var sDescribeDeviceOutput_physicalNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "physicalNetworkInterfaces", ID: &i_PhysicalNetworkInterfaceList, Members: &m_PhysicalNetworkInterfaceList, Type: smithy.ShapeTypeList, Ext: &eDescribeDeviceOutput_physicalNetworkInterfaces})
+var sDescribeDeviceOutput_deviceCapacities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceCapacities", ID: &i_CapacityList, Members: &m_CapacityList, Type: smithy.ShapeTypeList, Ext: &eDescribeDeviceOutput_deviceCapacities})
+var sDescribeDeviceOutput_software = smithy.NewStaticSchema(smithy.StaticSchema{Member: "software", ID: &iSoftwareInformation, Members: &mSoftwareInformation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeviceOutput_software})
+var sDescribeExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecutionInput, Members: &mDescribeExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExecutionInput})
+var sDescribeExecutionInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionInput_taskId})
+var sDescribeExecutionInput_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionInput_managedDeviceId})
+var sDescribeExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecutionOutput, Members: &mDescribeExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeExecutionOutput})
+var sDescribeExecutionOutput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionOutput_taskId})
+var sDescribeExecutionOutput_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionOutput_executionId})
+var sDescribeExecutionOutput_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionOutput_managedDeviceId})
+var sDescribeExecutionOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_ExecutionState, Type: smithy.ShapeTypeString, Ext: &eDescribeExecutionOutput_state})
+var sDescribeExecutionOutput_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExecutionOutput_startedAt})
+var sDescribeExecutionOutput_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeExecutionOutput_lastUpdatedAt})
+var sDescribeTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskInput, Members: &mDescribeTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskInput})
+var sDescribeTaskInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskInput_taskId})
+var sDescribeTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTaskOutput, Members: &mDescribeTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTaskOutput})
+var sDescribeTaskOutput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskOutput_taskId})
+var sDescribeTaskOutput_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskOutput_taskArn})
+var sDescribeTaskOutput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eDescribeTaskOutput_targets})
+var sDescribeTaskOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_TaskState, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskOutput_state})
+var sDescribeTaskOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskOutput_createdAt})
+var sDescribeTaskOutput_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskOutput_lastUpdatedAt})
+var sDescribeTaskOutput_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeTaskOutput_completedAt})
+var sDescribeTaskOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TaskDescriptionString, Type: smithy.ShapeTypeString, Ext: &eDescribeTaskOutput_description})
+var sDescribeTaskOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeTaskOutput_tags})
+var sListDeviceResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeviceResourcesInput, Members: &mListDeviceResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeviceResourcesInput})
+var sListDeviceResourcesInput_managedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedDeviceId", ID: &i_ManagedDeviceId, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListDeviceResourcesInput_managedDeviceId})
+var sListDeviceResourcesInput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListDeviceResourcesInput_type})
+var sListDeviceResourcesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListDeviceResourcesInput_maxResults})
+var sListDeviceResourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListDeviceResourcesInput_nextToken})
+var sListDeviceResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeviceResourcesOutput, Members: &mListDeviceResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeviceResourcesOutput})
+var sListDeviceResourcesOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourceSummaryList, Members: &m_ResourceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDeviceResourcesOutput_resources})
+var sListDeviceResourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeviceResourcesOutput_nextToken})
+var sListDevicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevicesInput, Members: &mListDevicesInput, Type: smithy.ShapeTypeStructure, Ext: &eListDevicesInput})
+var sListDevicesInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListDevicesInput_jobId})
+var sListDevicesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListDevicesInput_maxResults})
+var sListDevicesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListDevicesInput_nextToken})
+var sListDevicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevicesOutput, Members: &mListDevicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDevicesOutput})
+var sListDevicesOutput_devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devices", ID: &i_DeviceSummaryList, Members: &m_DeviceSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDevicesOutput_devices})
+var sListDevicesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDevicesOutput_nextToken})
+var sListExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsInput, Members: &mListExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListExecutionsInput})
+var sListExecutionsInput_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_TaskId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListExecutionsInput_taskId})
+var sListExecutionsInput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_ExecutionState, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListExecutionsInput_state})
+var sListExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListExecutionsInput_maxResults})
+var sListExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListExecutionsInput_nextToken})
+var sListExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsOutput, Members: &mListExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListExecutionsOutput})
+var sListExecutionsOutput_executions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executions", ID: &i_ExecutionSummaryList, Members: &m_ExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListExecutionsOutput_executions})
+var sListExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExecutionsOutput_nextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sListTasksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksInput, Members: &mListTasksInput, Type: smithy.ShapeTypeStructure, Ext: &eListTasksInput})
+var sListTasksInput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_TaskState, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListTasksInput_state})
+var sListTasksInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListTasksInput_maxResults})
+var sListTasksInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListTasksInput_nextToken})
+var sListTasksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksOutput, Members: &mListTasksOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTasksOutput})
+var sListTasksOutput_tasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tasks", ID: &i_TaskSummaryList, Members: &m_TaskSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTasksOutput_tasks})
+var sListTasksOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTasksOutput_nextToken})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t26, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+
+var CancelTask = &sCancelTask
+
+var CreateTask = &sCreateTask
+
+var DescribeDevice = &sDescribeDevice
+
+var DescribeDeviceEc2Instances = &sDescribeDeviceEc2Instances
+
+var DescribeExecution = &sDescribeExecution
+
+var DescribeTask = &sDescribeTask
+
+var ListDeviceResources = &sListDeviceResources
+
+var ListDevices = &sListDevices
+
+var ListExecutions = &sListExecutions
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTasks = &sListTasks
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _SnowDeviceManagement = &s_SnowDeviceManagement
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AttachmentStatus = &s_AttachmentStatus
+
+var Capacity = &sCapacity
+var Capacity_name = &sCapacity_name
+var Capacity_unit = &sCapacity_unit
+var Capacity_total = &sCapacity_total
+var Capacity_used = &sCapacity_used
+var Capacity_available = &sCapacity_available
+
+var _CapacityList = &s_CapacityList
+var _CapacityList_member = &s_CapacityList_member
+
+var Command = &sCommand
+var Command_unlock = &sCommand_unlock
+var Command_reboot = &sCommand_reboot
+
+var CpuOptions = &sCpuOptions
+var CpuOptions_coreCount = &sCpuOptions_coreCount
+var CpuOptions_threadsPerCore = &sCpuOptions_threadsPerCore
+
+var DeviceSummary = &sDeviceSummary
+var DeviceSummary_managedDeviceId = &sDeviceSummary_managedDeviceId
+var DeviceSummary_managedDeviceArn = &sDeviceSummary_managedDeviceArn
+var DeviceSummary_associatedWithJob = &sDeviceSummary_associatedWithJob
+var DeviceSummary_tags = &sDeviceSummary_tags
+
+var _DeviceSummaryList = &s_DeviceSummaryList
+var _DeviceSummaryList_member = &s_DeviceSummaryList_member
+
+var EbsInstanceBlockDevice = &sEbsInstanceBlockDevice
+var EbsInstanceBlockDevice_attachTime = &sEbsInstanceBlockDevice_attachTime
+var EbsInstanceBlockDevice_deleteOnTermination = &sEbsInstanceBlockDevice_deleteOnTermination
+var EbsInstanceBlockDevice_status = &sEbsInstanceBlockDevice_status
+var EbsInstanceBlockDevice_volumeId = &sEbsInstanceBlockDevice_volumeId
+
+var _ExecutionId = &s_ExecutionId
+
+var _ExecutionState = &s_ExecutionState
+
+var ExecutionSummary = &sExecutionSummary
+var ExecutionSummary_taskId = &sExecutionSummary_taskId
+var ExecutionSummary_executionId = &sExecutionSummary_executionId
+var ExecutionSummary_managedDeviceId = &sExecutionSummary_managedDeviceId
+var ExecutionSummary_state = &sExecutionSummary_state
+
+var _ExecutionSummaryList = &s_ExecutionSummaryList
+var _ExecutionSummaryList_member = &s_ExecutionSummaryList_member
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var Instance = &sInstance
+var Instance_imageId = &sInstance_imageId
+var Instance_amiLaunchIndex = &sInstance_amiLaunchIndex
+var Instance_instanceId = &sInstance_instanceId
+var Instance_state = &sInstance_state
+var Instance_instanceType = &sInstance_instanceType
+var Instance_privateIpAddress = &sInstance_privateIpAddress
+var Instance_publicIpAddress = &sInstance_publicIpAddress
+var Instance_createdAt = &sInstance_createdAt
+var Instance_updatedAt = &sInstance_updatedAt
+var Instance_blockDeviceMappings = &sInstance_blockDeviceMappings
+var Instance_securityGroups = &sInstance_securityGroups
+var Instance_cpuOptions = &sInstance_cpuOptions
+var Instance_rootDeviceName = &sInstance_rootDeviceName
+
+var InstanceBlockDeviceMapping = &sInstanceBlockDeviceMapping
+var InstanceBlockDeviceMapping_deviceName = &sInstanceBlockDeviceMapping_deviceName
+var InstanceBlockDeviceMapping_ebs = &sInstanceBlockDeviceMapping_ebs
+
+var _InstanceBlockDeviceMappingList = &s_InstanceBlockDeviceMappingList
+var _InstanceBlockDeviceMappingList_member = &s_InstanceBlockDeviceMappingList_member
+
+var _InstanceIdsList = &s_InstanceIdsList
+var _InstanceIdsList_member = &s_InstanceIdsList_member
+
+var InstanceState = &sInstanceState
+var InstanceState_code = &sInstanceState_code
+var InstanceState_name = &sInstanceState_name
+
+var _InstanceStateName = &s_InstanceStateName
+
+var InstanceSummary = &sInstanceSummary
+var InstanceSummary_instance = &sInstanceSummary_instance
+var InstanceSummary_lastUpdatedAt = &sInstanceSummary_lastUpdatedAt
+
+var _InstanceSummaryList = &s_InstanceSummaryList
+var _InstanceSummaryList_member = &s_InstanceSummaryList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _IpAddressAssignment = &s_IpAddressAssignment
+
+var _JobId = &s_JobId
+
+var _ManagedDeviceId = &s_ManagedDeviceId
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var _PhysicalConnectorType = &s_PhysicalConnectorType
+
+var PhysicalNetworkInterface = &sPhysicalNetworkInterface
+var PhysicalNetworkInterface_physicalNetworkInterfaceId = &sPhysicalNetworkInterface_physicalNetworkInterfaceId
+var PhysicalNetworkInterface_physicalConnectorType = &sPhysicalNetworkInterface_physicalConnectorType
+var PhysicalNetworkInterface_ipAddressAssignment = &sPhysicalNetworkInterface_ipAddressAssignment
+var PhysicalNetworkInterface_ipAddress = &sPhysicalNetworkInterface_ipAddress
+var PhysicalNetworkInterface_netmask = &sPhysicalNetworkInterface_netmask
+var PhysicalNetworkInterface_defaultGateway = &sPhysicalNetworkInterface_defaultGateway
+var PhysicalNetworkInterface_macAddress = &sPhysicalNetworkInterface_macAddress
+
+var _PhysicalNetworkInterfaceList = &s_PhysicalNetworkInterfaceList
+var _PhysicalNetworkInterfaceList_member = &s_PhysicalNetworkInterfaceList_member
+
+var Reboot = &sReboot
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceSummary = &sResourceSummary
+var ResourceSummary_resourceType = &sResourceSummary_resourceType
+var ResourceSummary_arn = &sResourceSummary_arn
+var ResourceSummary_id = &sResourceSummary_id
+
+var _ResourceSummaryList = &s_ResourceSummaryList
+var _ResourceSummaryList_member = &s_ResourceSummaryList_member
+
+var SecurityGroupIdentifier = &sSecurityGroupIdentifier
+var SecurityGroupIdentifier_groupId = &sSecurityGroupIdentifier_groupId
+var SecurityGroupIdentifier_groupName = &sSecurityGroupIdentifier_groupName
+
+var _SecurityGroupIdentifierList = &s_SecurityGroupIdentifierList
+var _SecurityGroupIdentifierList_member = &s_SecurityGroupIdentifierList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SoftwareInformation = &sSoftwareInformation
+var SoftwareInformation_installedVersion = &sSoftwareInformation_installedVersion
+var SoftwareInformation_installingVersion = &sSoftwareInformation_installingVersion
+var SoftwareInformation_installState = &sSoftwareInformation_installState
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TargetList = &s_TargetList
+var _TargetList_member = &s_TargetList_member
+
+var _TaskDescriptionString = &s_TaskDescriptionString
+
+var _TaskId = &s_TaskId
+
+var _TaskState = &s_TaskState
+
+var TaskSummary = &sTaskSummary
+var TaskSummary_taskId = &sTaskSummary_taskId
+var TaskSummary_taskArn = &sTaskSummary_taskArn
+var TaskSummary_state = &sTaskSummary_state
+var TaskSummary_tags = &sTaskSummary_tags
+
+var _TaskSummaryList = &s_TaskSummaryList
+var _TaskSummaryList_member = &s_TaskSummaryList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var Unlock = &sUnlock
+
+var _UnlockState = &s_UnlockState
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CancelTaskInput = &sCancelTaskInput
+var CancelTaskInput_taskId = &sCancelTaskInput_taskId
+
+var CancelTaskOutput = &sCancelTaskOutput
+var CancelTaskOutput_taskId = &sCancelTaskOutput_taskId
+
+var CreateTaskInput = &sCreateTaskInput
+var CreateTaskInput_targets = &sCreateTaskInput_targets
+var CreateTaskInput_command = &sCreateTaskInput_command
+var CreateTaskInput_description = &sCreateTaskInput_description
+var CreateTaskInput_tags = &sCreateTaskInput_tags
+var CreateTaskInput_clientToken = &sCreateTaskInput_clientToken
+
+var CreateTaskOutput = &sCreateTaskOutput
+var CreateTaskOutput_taskId = &sCreateTaskOutput_taskId
+var CreateTaskOutput_taskArn = &sCreateTaskOutput_taskArn
+
+var DescribeDeviceEc2Input = &sDescribeDeviceEc2Input
+var DescribeDeviceEc2Input_managedDeviceId = &sDescribeDeviceEc2Input_managedDeviceId
+var DescribeDeviceEc2Input_instanceIds = &sDescribeDeviceEc2Input_instanceIds
+
+var DescribeDeviceEc2Output = &sDescribeDeviceEc2Output
+var DescribeDeviceEc2Output_instances = &sDescribeDeviceEc2Output_instances
+
+var DescribeDeviceInput = &sDescribeDeviceInput
+var DescribeDeviceInput_managedDeviceId = &sDescribeDeviceInput_managedDeviceId
+
+var DescribeDeviceOutput = &sDescribeDeviceOutput
+var DescribeDeviceOutput_lastReachedOutAt = &sDescribeDeviceOutput_lastReachedOutAt
+var DescribeDeviceOutput_lastUpdatedAt = &sDescribeDeviceOutput_lastUpdatedAt
+var DescribeDeviceOutput_tags = &sDescribeDeviceOutput_tags
+var DescribeDeviceOutput_managedDeviceId = &sDescribeDeviceOutput_managedDeviceId
+var DescribeDeviceOutput_managedDeviceArn = &sDescribeDeviceOutput_managedDeviceArn
+var DescribeDeviceOutput_deviceType = &sDescribeDeviceOutput_deviceType
+var DescribeDeviceOutput_associatedWithJob = &sDescribeDeviceOutput_associatedWithJob
+var DescribeDeviceOutput_deviceState = &sDescribeDeviceOutput_deviceState
+var DescribeDeviceOutput_physicalNetworkInterfaces = &sDescribeDeviceOutput_physicalNetworkInterfaces
+var DescribeDeviceOutput_deviceCapacities = &sDescribeDeviceOutput_deviceCapacities
+var DescribeDeviceOutput_software = &sDescribeDeviceOutput_software
+
+var DescribeExecutionInput = &sDescribeExecutionInput
+var DescribeExecutionInput_taskId = &sDescribeExecutionInput_taskId
+var DescribeExecutionInput_managedDeviceId = &sDescribeExecutionInput_managedDeviceId
+
+var DescribeExecutionOutput = &sDescribeExecutionOutput
+var DescribeExecutionOutput_taskId = &sDescribeExecutionOutput_taskId
+var DescribeExecutionOutput_executionId = &sDescribeExecutionOutput_executionId
+var DescribeExecutionOutput_managedDeviceId = &sDescribeExecutionOutput_managedDeviceId
+var DescribeExecutionOutput_state = &sDescribeExecutionOutput_state
+var DescribeExecutionOutput_startedAt = &sDescribeExecutionOutput_startedAt
+var DescribeExecutionOutput_lastUpdatedAt = &sDescribeExecutionOutput_lastUpdatedAt
+
+var DescribeTaskInput = &sDescribeTaskInput
+var DescribeTaskInput_taskId = &sDescribeTaskInput_taskId
+
+var DescribeTaskOutput = &sDescribeTaskOutput
+var DescribeTaskOutput_taskId = &sDescribeTaskOutput_taskId
+var DescribeTaskOutput_taskArn = &sDescribeTaskOutput_taskArn
+var DescribeTaskOutput_targets = &sDescribeTaskOutput_targets
+var DescribeTaskOutput_state = &sDescribeTaskOutput_state
+var DescribeTaskOutput_createdAt = &sDescribeTaskOutput_createdAt
+var DescribeTaskOutput_lastUpdatedAt = &sDescribeTaskOutput_lastUpdatedAt
+var DescribeTaskOutput_completedAt = &sDescribeTaskOutput_completedAt
+var DescribeTaskOutput_description = &sDescribeTaskOutput_description
+var DescribeTaskOutput_tags = &sDescribeTaskOutput_tags
+
+var ListDeviceResourcesInput = &sListDeviceResourcesInput
+var ListDeviceResourcesInput_managedDeviceId = &sListDeviceResourcesInput_managedDeviceId
+var ListDeviceResourcesInput_type = &sListDeviceResourcesInput_type
+var ListDeviceResourcesInput_maxResults = &sListDeviceResourcesInput_maxResults
+var ListDeviceResourcesInput_nextToken = &sListDeviceResourcesInput_nextToken
+
+var ListDeviceResourcesOutput = &sListDeviceResourcesOutput
+var ListDeviceResourcesOutput_resources = &sListDeviceResourcesOutput_resources
+var ListDeviceResourcesOutput_nextToken = &sListDeviceResourcesOutput_nextToken
+
+var ListDevicesInput = &sListDevicesInput
+var ListDevicesInput_jobId = &sListDevicesInput_jobId
+var ListDevicesInput_maxResults = &sListDevicesInput_maxResults
+var ListDevicesInput_nextToken = &sListDevicesInput_nextToken
+
+var ListDevicesOutput = &sListDevicesOutput
+var ListDevicesOutput_devices = &sListDevicesOutput_devices
+var ListDevicesOutput_nextToken = &sListDevicesOutput_nextToken
+
+var ListExecutionsInput = &sListExecutionsInput
+var ListExecutionsInput_taskId = &sListExecutionsInput_taskId
+var ListExecutionsInput_state = &sListExecutionsInput_state
+var ListExecutionsInput_maxResults = &sListExecutionsInput_maxResults
+var ListExecutionsInput_nextToken = &sListExecutionsInput_nextToken
+
+var ListExecutionsOutput = &sListExecutionsOutput
+var ListExecutionsOutput_executions = &sListExecutionsOutput_executions
+var ListExecutionsOutput_nextToken = &sListExecutionsOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var ListTasksInput = &sListTasksInput
+var ListTasksInput_state = &sListTasksInput_state
+var ListTasksInput_maxResults = &sListTasksInput_maxResults
+var ListTasksInput_nextToken = &sListTasksInput_nextToken
+
+var ListTasksOutput = &sListTasksOutput
+var ListTasksOutput_tasks = &sListTasksOutput_tasks
+var ListTasksOutput_nextToken = &sListTasksOutput_nextToken
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var SnowDeviceManagement = &smithy.ServiceSchema{Schema: &s_SnowDeviceManagement, Version: "2021-08-04"}

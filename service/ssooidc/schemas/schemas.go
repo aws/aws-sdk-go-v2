@@ -4,691 +4,659 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateToken                                              smithy.SchemaExtensions
+	eCreateTokenWithIAM                                       smithy.SchemaExtensions
+	eRegisterClient                                           smithy.SchemaExtensions
+	eStartDeviceAuthorization                                 smithy.SchemaExtensions
+	e_AWSSSOOIDCService                                       smithy.SchemaExtensions
+	eAccessDeniedException                                    smithy.SchemaExtensions
+	eAccessDeniedException_error                              smithy.SchemaExtensions
+	eAccessDeniedException_reason                             smithy.SchemaExtensions
+	eAccessDeniedException_error_description                  smithy.SchemaExtensions
+	eAccessDeniedExceptionReason                              smithy.SchemaExtensions
+	eAccessDeniedExceptionReason_KMS_ACCESS_DENIED            smithy.SchemaExtensions
+	e_AccessToken                                             smithy.SchemaExtensions
+	e_ArnType                                                 smithy.SchemaExtensions
+	e_Assertion                                               smithy.SchemaExtensions
+	e_AuthCode                                                smithy.SchemaExtensions
+	eAuthorizationPendingException                            smithy.SchemaExtensions
+	eAuthorizationPendingException_error                      smithy.SchemaExtensions
+	eAuthorizationPendingException_error_description          smithy.SchemaExtensions
+	eAwsAdditionalDetails                                     smithy.SchemaExtensions
+	eAwsAdditionalDetails_identityContext                     smithy.SchemaExtensions
+	e_ClientId                                                smithy.SchemaExtensions
+	e_ClientName                                              smithy.SchemaExtensions
+	e_ClientSecret                                            smithy.SchemaExtensions
+	e_ClientType                                              smithy.SchemaExtensions
+	e_CodeVerifier                                            smithy.SchemaExtensions
+	e_DeviceCode                                              smithy.SchemaExtensions
+	e_Error                                                   smithy.SchemaExtensions
+	e_ErrorDescription                                        smithy.SchemaExtensions
+	e_ExpirationInSeconds                                     smithy.SchemaExtensions
+	eExpiredTokenException                                    smithy.SchemaExtensions
+	eExpiredTokenException_error                              smithy.SchemaExtensions
+	eExpiredTokenException_error_description                  smithy.SchemaExtensions
+	e_GrantType                                               smithy.SchemaExtensions
+	e_GrantTypes                                              smithy.SchemaExtensions
+	e_GrantTypes_member                                       smithy.SchemaExtensions
+	e_IdentityContext                                         smithy.SchemaExtensions
+	e_IdToken                                                 smithy.SchemaExtensions
+	eInternalServerException                                  smithy.SchemaExtensions
+	eInternalServerException_error                            smithy.SchemaExtensions
+	eInternalServerException_error_description                smithy.SchemaExtensions
+	e_IntervalInSeconds                                       smithy.SchemaExtensions
+	eInvalidClientException                                   smithy.SchemaExtensions
+	eInvalidClientException_error                             smithy.SchemaExtensions
+	eInvalidClientException_error_description                 smithy.SchemaExtensions
+	eInvalidClientMetadataException                           smithy.SchemaExtensions
+	eInvalidClientMetadataException_error                     smithy.SchemaExtensions
+	eInvalidClientMetadataException_error_description         smithy.SchemaExtensions
+	eInvalidGrantException                                    smithy.SchemaExtensions
+	eInvalidGrantException_error                              smithy.SchemaExtensions
+	eInvalidGrantException_error_description                  smithy.SchemaExtensions
+	eInvalidRedirectUriException                              smithy.SchemaExtensions
+	eInvalidRedirectUriException_error                        smithy.SchemaExtensions
+	eInvalidRedirectUriException_error_description            smithy.SchemaExtensions
+	eInvalidRequestException                                  smithy.SchemaExtensions
+	eInvalidRequestException_error                            smithy.SchemaExtensions
+	eInvalidRequestException_reason                           smithy.SchemaExtensions
+	eInvalidRequestException_error_description                smithy.SchemaExtensions
+	eInvalidRequestExceptionReason                            smithy.SchemaExtensions
+	eInvalidRequestExceptionReason_KMS_KEY_NOT_FOUND          smithy.SchemaExtensions
+	eInvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE      smithy.SchemaExtensions
+	eInvalidRequestExceptionReason_KMS_INVALID_STATE          smithy.SchemaExtensions
+	eInvalidRequestExceptionReason_KMS_DISABLED_KEY           smithy.SchemaExtensions
+	eInvalidRequestRegionException                            smithy.SchemaExtensions
+	eInvalidRequestRegionException_error                      smithy.SchemaExtensions
+	eInvalidRequestRegionException_error_description          smithy.SchemaExtensions
+	eInvalidRequestRegionException_endpoint                   smithy.SchemaExtensions
+	eInvalidRequestRegionException_region                     smithy.SchemaExtensions
+	eInvalidScopeException                                    smithy.SchemaExtensions
+	eInvalidScopeException_error                              smithy.SchemaExtensions
+	eInvalidScopeException_error_description                  smithy.SchemaExtensions
+	e_Location                                                smithy.SchemaExtensions
+	e_LongTimeStampType                                       smithy.SchemaExtensions
+	e_RedirectUris                                            smithy.SchemaExtensions
+	e_RedirectUris_member                                     smithy.SchemaExtensions
+	e_RefreshToken                                            smithy.SchemaExtensions
+	e_Region                                                  smithy.SchemaExtensions
+	e_Scope                                                   smithy.SchemaExtensions
+	e_Scopes                                                  smithy.SchemaExtensions
+	e_Scopes_member                                           smithy.SchemaExtensions
+	eSlowDownException                                        smithy.SchemaExtensions
+	eSlowDownException_error                                  smithy.SchemaExtensions
+	eSlowDownException_error_description                      smithy.SchemaExtensions
+	e_SubjectToken                                            smithy.SchemaExtensions
+	e_TokenType                                               smithy.SchemaExtensions
+	e_TokenTypeURI                                            smithy.SchemaExtensions
+	eUnauthorizedClientException                              smithy.SchemaExtensions
+	eUnauthorizedClientException_error                        smithy.SchemaExtensions
+	eUnauthorizedClientException_error_description            smithy.SchemaExtensions
+	eUnsupportedGrantTypeException                            smithy.SchemaExtensions
+	eUnsupportedGrantTypeException_error                      smithy.SchemaExtensions
+	eUnsupportedGrantTypeException_error_description          smithy.SchemaExtensions
+	e_URI                                                     smithy.SchemaExtensions
+	e_UserCode                                                smithy.SchemaExtensions
+	eCreateTokenRequest                                       smithy.SchemaExtensions
+	eCreateTokenRequest_clientId                              smithy.SchemaExtensions
+	eCreateTokenRequest_clientSecret                          smithy.SchemaExtensions
+	eCreateTokenRequest_grantType                             smithy.SchemaExtensions
+	eCreateTokenRequest_deviceCode                            smithy.SchemaExtensions
+	eCreateTokenRequest_code                                  smithy.SchemaExtensions
+	eCreateTokenRequest_refreshToken                          smithy.SchemaExtensions
+	eCreateTokenRequest_scope                                 smithy.SchemaExtensions
+	eCreateTokenRequest_redirectUri                           smithy.SchemaExtensions
+	eCreateTokenRequest_codeVerifier                          smithy.SchemaExtensions
+	eCreateTokenResponse                                      smithy.SchemaExtensions
+	eCreateTokenResponse_accessToken                          smithy.SchemaExtensions
+	eCreateTokenResponse_tokenType                            smithy.SchemaExtensions
+	eCreateTokenResponse_expiresIn                            smithy.SchemaExtensions
+	eCreateTokenResponse_refreshToken                         smithy.SchemaExtensions
+	eCreateTokenResponse_idToken                              smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest                                smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_clientId                       smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_grantType                      smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_code                           smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_refreshToken                   smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_assertion                      smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_scope                          smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_redirectUri                    smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_subjectToken                   smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_subjectTokenType               smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_requestedTokenType             smithy.SchemaExtensions
+	eCreateTokenWithIAMRequest_codeVerifier                   smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse                               smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_accessToken                   smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_tokenType                     smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_expiresIn                     smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_refreshToken                  smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_idToken                       smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_issuedTokenType               smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_scope                         smithy.SchemaExtensions
+	eCreateTokenWithIAMResponse_awsAdditionalDetails          smithy.SchemaExtensions
+	eRegisterClientRequest                                    smithy.SchemaExtensions
+	eRegisterClientRequest_clientName                         smithy.SchemaExtensions
+	eRegisterClientRequest_clientType                         smithy.SchemaExtensions
+	eRegisterClientRequest_scopes                             smithy.SchemaExtensions
+	eRegisterClientRequest_redirectUris                       smithy.SchemaExtensions
+	eRegisterClientRequest_grantTypes                         smithy.SchemaExtensions
+	eRegisterClientRequest_issuerUrl                          smithy.SchemaExtensions
+	eRegisterClientRequest_entitledApplicationArn             smithy.SchemaExtensions
+	eRegisterClientResponse                                   smithy.SchemaExtensions
+	eRegisterClientResponse_clientId                          smithy.SchemaExtensions
+	eRegisterClientResponse_clientSecret                      smithy.SchemaExtensions
+	eRegisterClientResponse_clientIdIssuedAt                  smithy.SchemaExtensions
+	eRegisterClientResponse_clientSecretExpiresAt             smithy.SchemaExtensions
+	eRegisterClientResponse_authorizationEndpoint             smithy.SchemaExtensions
+	eRegisterClientResponse_tokenEndpoint                     smithy.SchemaExtensions
+	eStartDeviceAuthorizationRequest                          smithy.SchemaExtensions
+	eStartDeviceAuthorizationRequest_clientId                 smithy.SchemaExtensions
+	eStartDeviceAuthorizationRequest_clientSecret             smithy.SchemaExtensions
+	eStartDeviceAuthorizationRequest_startUrl                 smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse                         smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_deviceCode              smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_userCode                smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_verificationUri         smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_verificationUriComplete smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_expiresIn               smithy.SchemaExtensions
+	eStartDeviceAuthorizationResponse_interval                smithy.SchemaExtensions
+)
+
+var (
+	iCreateToken                      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateToken"}
+	iCreateTokenWithIAM               = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateTokenWithIAM"}
+	iRegisterClient                   = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "RegisterClient"}
+	iStartDeviceAuthorization         = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "StartDeviceAuthorization"}
+	i_AWSSSOOIDCService               = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AWSSSOOIDCService"}
+	iAccessDeniedException            = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AccessDeniedException"}
+	iAccessDeniedExceptionReason      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AccessDeniedExceptionReason"}
+	i_AccessToken                     = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AccessToken"}
+	i_ArnType                         = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ArnType"}
+	i_Assertion                       = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Assertion"}
+	i_AuthCode                        = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AuthCode"}
+	iAuthorizationPendingException    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AuthorizationPendingException"}
+	iAwsAdditionalDetails             = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "AwsAdditionalDetails"}
+	i_ClientId                        = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ClientId"}
+	i_ClientName                      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ClientName"}
+	i_ClientSecret                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ClientSecret"}
+	i_ClientType                      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ClientType"}
+	i_CodeVerifier                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CodeVerifier"}
+	i_DeviceCode                      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "DeviceCode"}
+	i_Error                           = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Error"}
+	i_ErrorDescription                = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ErrorDescription"}
+	i_ExpirationInSeconds             = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ExpirationInSeconds"}
+	iExpiredTokenException            = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "ExpiredTokenException"}
+	i_GrantType                       = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "GrantType"}
+	i_GrantTypes                      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "GrantTypes"}
+	i_IdentityContext                 = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "IdentityContext"}
+	i_IdToken                         = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "IdToken"}
+	iInternalServerException          = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InternalServerException"}
+	i_IntervalInSeconds               = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "IntervalInSeconds"}
+	iInvalidClientException           = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidClientException"}
+	iInvalidClientMetadataException   = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidClientMetadataException"}
+	iInvalidGrantException            = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidGrantException"}
+	iInvalidRedirectUriException      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidRedirectUriException"}
+	iInvalidRequestException          = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidRequestException"}
+	iInvalidRequestExceptionReason    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidRequestExceptionReason"}
+	iInvalidRequestRegionException    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidRequestRegionException"}
+	iInvalidScopeException            = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "InvalidScopeException"}
+	i_Location                        = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Location"}
+	i_LongTimeStampType               = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "LongTimeStampType"}
+	i_RedirectUris                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "RedirectUris"}
+	i_RefreshToken                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "RefreshToken"}
+	i_Region                          = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Region"}
+	i_Scope                           = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Scope"}
+	i_Scopes                          = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "Scopes"}
+	iSlowDownException                = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "SlowDownException"}
+	i_SubjectToken                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "SubjectToken"}
+	i_TokenType                       = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "TokenType"}
+	i_TokenTypeURI                    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "TokenTypeURI"}
+	iUnauthorizedClientException      = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "UnauthorizedClientException"}
+	iUnsupportedGrantTypeException    = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "UnsupportedGrantTypeException"}
+	i_URI                             = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "URI"}
+	i_UserCode                        = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "UserCode"}
+	iCreateTokenRequest               = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateTokenRequest"}
+	iCreateTokenResponse              = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateTokenResponse"}
+	iCreateTokenWithIAMRequest        = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateTokenWithIAMRequest"}
+	iCreateTokenWithIAMResponse       = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "CreateTokenWithIAMResponse"}
+	iRegisterClientRequest            = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "RegisterClientRequest"}
+	iRegisterClientResponse           = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "RegisterClientResponse"}
+	iStartDeviceAuthorizationRequest  = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "StartDeviceAuthorizationRequest"}
+	iStartDeviceAuthorizationResponse = smithy.ShapeName{Namespace: "com.amazonaws.ssooidc", Name: "StartDeviceAuthorizationResponse"}
+	pUnit                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/token",
-	Code: 200})
-
-var CreateTokenWithIAM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateTokenWithIAM",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/token?aws_iam=t",
-	Code: 200})
-
-var RegisterClient = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "RegisterClient",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/client/register",
-	Code: 200})
-
-var StartDeviceAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "StartDeviceAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/device_authorization",
-	Code: 200})
-
-var _AWSSSOOIDCService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AWSSSOOIDCService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSSSOOIDCService = smithy.NewServiceSchema(_AWSSSOOIDCService, "2019-06-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccessDeniedException_error *smithy.Schema
-
-var AccessDeniedException_reason *smithy.Schema
-
-var AccessDeniedException_error_description *smithy.Schema
-
-var AccessDeniedExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AccessDeniedExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var AccessDeniedExceptionReason_KMS_ACCESS_DENIED *smithy.Schema
-
-var _AccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AccessToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ArnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ArnType",
-}, smithy.ShapeTypeString, 0)
-
-var _Assertion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Assertion",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AuthCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AuthCode",
-}, smithy.ShapeTypeString, 0)
-
-var AuthorizationPendingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AuthorizationPendingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AuthorizationPendingException_error *smithy.Schema
-
-var AuthorizationPendingException_error_description *smithy.Schema
-
-var AwsAdditionalDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "AwsAdditionalDetails",
-}, smithy.ShapeTypeStructure, 1)
-var AwsAdditionalDetails_identityContext *smithy.Schema
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ClientName",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ClientSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ClientType",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeVerifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CodeVerifier",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DeviceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "DeviceCode",
-}, smithy.ShapeTypeString, 0)
-
-var _Error = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Error",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ErrorDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ExpirationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ExpirationInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ExpiredTokenException_error *smithy.Schema
-
-var ExpiredTokenException_error_description *smithy.Schema
-
-var _GrantType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "GrantType",
-}, smithy.ShapeTypeString, 0)
-
-var _GrantTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "GrantTypes",
-}, smithy.ShapeTypeList, 1)
-var _GrantTypes_member *smithy.Schema
-
-var _IdentityContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "IdentityContext",
-}, smithy.ShapeTypeString, 0)
-
-var _IdToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "IdToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_error *smithy.Schema
-
-var InternalServerException_error_description *smithy.Schema
-
-var _IntervalInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "IntervalInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var InvalidClientException_error *smithy.Schema
-
-var InvalidClientException_error_description *smithy.Schema
-
-var InvalidClientMetadataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidClientMetadataException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidClientMetadataException_error *smithy.Schema
-
-var InvalidClientMetadataException_error_description *smithy.Schema
-
-var InvalidGrantException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidGrantException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidGrantException_error *smithy.Schema
-
-var InvalidGrantException_error_description *smithy.Schema
-
-var InvalidRedirectUriException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidRedirectUriException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRedirectUriException_error *smithy.Schema
-
-var InvalidRedirectUriException_error_description *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_error *smithy.Schema
-
-var InvalidRequestException_reason *smithy.Schema
-
-var InvalidRequestException_error_description *smithy.Schema
-
-var InvalidRequestExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidRequestExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var InvalidRequestExceptionReason_KMS_KEY_NOT_FOUND *smithy.Schema
-
-var InvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE *smithy.Schema
-
-var InvalidRequestExceptionReason_KMS_INVALID_STATE *smithy.Schema
-
-var InvalidRequestExceptionReason_KMS_DISABLED_KEY *smithy.Schema
-
-var InvalidRequestRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidRequestRegionException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestRegionException_error *smithy.Schema
-
-var InvalidRequestRegionException_error_description *smithy.Schema
-
-var InvalidRequestRegionException_endpoint *smithy.Schema
-
-var InvalidRequestRegionException_region *smithy.Schema
-
-var InvalidScopeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "InvalidScopeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidScopeException_error *smithy.Schema
-
-var InvalidScopeException_error_description *smithy.Schema
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _LongTimeStampType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "LongTimeStampType",
-}, smithy.ShapeTypeLong, 0)
-
-var _RedirectUris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "RedirectUris",
-}, smithy.ShapeTypeList, 1)
-var _RedirectUris_member *smithy.Schema
-
-var _RefreshToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "RefreshToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Scope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Scope",
-}, smithy.ShapeTypeString, 0)
-
-var _Scopes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "Scopes",
-}, smithy.ShapeTypeList, 1)
-var _Scopes_member *smithy.Schema
-
-var SlowDownException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "SlowDownException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SlowDownException_error *smithy.Schema
-
-var SlowDownException_error_description *smithy.Schema
-
-var _SubjectToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "SubjectToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "TokenType",
-}, smithy.ShapeTypeString, 0)
-
-var _TokenTypeURI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "TokenTypeURI",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnauthorizedClientException_error *smithy.Schema
-
-var UnauthorizedClientException_error_description *smithy.Schema
-
-var UnsupportedGrantTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "UnsupportedGrantTypeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedGrantTypeException_error *smithy.Schema
-
-var UnsupportedGrantTypeException_error_description *smithy.Schema
-
-var _URI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "URI",
-}, smithy.ShapeTypeString, 0)
-
-var _UserCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "UserCode",
-}, smithy.ShapeTypeString, 0)
-
-var CreateTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateTokenRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateTokenRequest_clientId *smithy.Schema
-
-var CreateTokenRequest_clientSecret *smithy.Schema
-
-var CreateTokenRequest_grantType *smithy.Schema
-
-var CreateTokenRequest_deviceCode *smithy.Schema
-
-var CreateTokenRequest_code *smithy.Schema
-
-var CreateTokenRequest_refreshToken *smithy.Schema
-
-var CreateTokenRequest_scope *smithy.Schema
-
-var CreateTokenRequest_redirectUri *smithy.Schema
-
-var CreateTokenRequest_codeVerifier *smithy.Schema
-
-var CreateTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateTokenResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTokenResponse_accessToken *smithy.Schema
-
-var CreateTokenResponse_tokenType *smithy.Schema
-
-var CreateTokenResponse_expiresIn *smithy.Schema
-
-var CreateTokenResponse_refreshToken *smithy.Schema
-
-var CreateTokenResponse_idToken *smithy.Schema
-
-var CreateTokenWithIAMRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateTokenWithIAMRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateTokenWithIAMRequest_clientId *smithy.Schema
-
-var CreateTokenWithIAMRequest_grantType *smithy.Schema
-
-var CreateTokenWithIAMRequest_code *smithy.Schema
-
-var CreateTokenWithIAMRequest_refreshToken *smithy.Schema
-
-var CreateTokenWithIAMRequest_assertion *smithy.Schema
-
-var CreateTokenWithIAMRequest_scope *smithy.Schema
-
-var CreateTokenWithIAMRequest_redirectUri *smithy.Schema
-
-var CreateTokenWithIAMRequest_subjectToken *smithy.Schema
-
-var CreateTokenWithIAMRequest_subjectTokenType *smithy.Schema
-
-var CreateTokenWithIAMRequest_requestedTokenType *smithy.Schema
-
-var CreateTokenWithIAMRequest_codeVerifier *smithy.Schema
-
-var CreateTokenWithIAMResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "CreateTokenWithIAMResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTokenWithIAMResponse_accessToken *smithy.Schema
-
-var CreateTokenWithIAMResponse_tokenType *smithy.Schema
-
-var CreateTokenWithIAMResponse_expiresIn *smithy.Schema
-
-var CreateTokenWithIAMResponse_refreshToken *smithy.Schema
-
-var CreateTokenWithIAMResponse_idToken *smithy.Schema
-
-var CreateTokenWithIAMResponse_issuedTokenType *smithy.Schema
-
-var CreateTokenWithIAMResponse_scope *smithy.Schema
-
-var CreateTokenWithIAMResponse_awsAdditionalDetails *smithy.Schema
-
-var RegisterClientRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "RegisterClientRequest",
-}, smithy.ShapeTypeStructure, 7)
-var RegisterClientRequest_clientName *smithy.Schema
-
-var RegisterClientRequest_clientType *smithy.Schema
-
-var RegisterClientRequest_scopes *smithy.Schema
-
-var RegisterClientRequest_redirectUris *smithy.Schema
-
-var RegisterClientRequest_grantTypes *smithy.Schema
-
-var RegisterClientRequest_issuerUrl *smithy.Schema
-
-var RegisterClientRequest_entitledApplicationArn *smithy.Schema
-
-var RegisterClientResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "RegisterClientResponse",
-}, smithy.ShapeTypeStructure, 6)
-var RegisterClientResponse_clientId *smithy.Schema
-
-var RegisterClientResponse_clientSecret *smithy.Schema
-
-var RegisterClientResponse_clientIdIssuedAt *smithy.Schema
-
-var RegisterClientResponse_clientSecretExpiresAt *smithy.Schema
-
-var RegisterClientResponse_authorizationEndpoint *smithy.Schema
-
-var RegisterClientResponse_tokenEndpoint *smithy.Schema
-
-var StartDeviceAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "StartDeviceAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartDeviceAuthorizationRequest_clientId *smithy.Schema
-
-var StartDeviceAuthorizationRequest_clientSecret *smithy.Schema
-
-var StartDeviceAuthorizationRequest_startUrl *smithy.Schema
-
-var StartDeviceAuthorizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssooidc",
-	Name:      "StartDeviceAuthorizationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var StartDeviceAuthorizationResponse_deviceCode *smithy.Schema
-
-var StartDeviceAuthorizationResponse_userCode *smithy.Schema
-
-var StartDeviceAuthorizationResponse_verificationUri *smithy.Schema
-
-var StartDeviceAuthorizationResponse_verificationUriComplete *smithy.Schema
-
-var StartDeviceAuthorizationResponse_expiresIn *smithy.Schema
-
-var StartDeviceAuthorizationResponse_interval *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedExceptionReason_KMS_ACCESS_DENIED = AccessDeniedExceptionReason.AddMember("KMS_ACCESS_DENIED", smithyprelude.Unit)
-
-	AccessDeniedException_error = AccessDeniedException.AddMember("error", _Error)
-
-	AccessDeniedException_reason = AccessDeniedException.AddMember("reason", AccessDeniedExceptionReason)
-
-	AccessDeniedException_error_description = AccessDeniedException.AddMember("error_description", _ErrorDescription)
-
-	AuthorizationPendingException_error = AuthorizationPendingException.AddMember("error", _Error)
-
-	AuthorizationPendingException_error_description = AuthorizationPendingException.AddMember("error_description", _ErrorDescription)
-
-	AwsAdditionalDetails_identityContext = AwsAdditionalDetails.AddMember("identityContext", _IdentityContext)
-
-	ExpiredTokenException_error = ExpiredTokenException.AddMember("error", _Error)
-
-	ExpiredTokenException_error_description = ExpiredTokenException.AddMember("error_description", _ErrorDescription)
-
-	_GrantTypes_member = _GrantTypes.AddMember("member", _GrantType)
-
-	InternalServerException_error = InternalServerException.AddMember("error", _Error)
-
-	InternalServerException_error_description = InternalServerException.AddMember("error_description", _ErrorDescription)
-
-	InvalidClientException_error = InvalidClientException.AddMember("error", _Error)
-
-	InvalidClientException_error_description = InvalidClientException.AddMember("error_description", _ErrorDescription)
-
-	InvalidClientMetadataException_error = InvalidClientMetadataException.AddMember("error", _Error)
-
-	InvalidClientMetadataException_error_description = InvalidClientMetadataException.AddMember("error_description", _ErrorDescription)
-
-	InvalidGrantException_error = InvalidGrantException.AddMember("error", _Error)
-
-	InvalidGrantException_error_description = InvalidGrantException.AddMember("error_description", _ErrorDescription)
-
-	InvalidRedirectUriException_error = InvalidRedirectUriException.AddMember("error", _Error)
-
-	InvalidRedirectUriException_error_description = InvalidRedirectUriException.AddMember("error_description", _ErrorDescription)
-
-	InvalidRequestExceptionReason_KMS_KEY_NOT_FOUND = InvalidRequestExceptionReason.AddMember("KMS_KEY_NOT_FOUND", smithyprelude.Unit)
-
-	InvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE = InvalidRequestExceptionReason.AddMember("KMS_INVALID_KEY_USAGE", smithyprelude.Unit)
-
-	InvalidRequestExceptionReason_KMS_INVALID_STATE = InvalidRequestExceptionReason.AddMember("KMS_INVALID_STATE", smithyprelude.Unit)
-
-	InvalidRequestExceptionReason_KMS_DISABLED_KEY = InvalidRequestExceptionReason.AddMember("KMS_DISABLED_KEY", smithyprelude.Unit)
-
-	InvalidRequestException_error = InvalidRequestException.AddMember("error", _Error)
-
-	InvalidRequestException_reason = InvalidRequestException.AddMember("reason", InvalidRequestExceptionReason)
-
-	InvalidRequestException_error_description = InvalidRequestException.AddMember("error_description", _ErrorDescription)
-
-	InvalidRequestRegionException_error = InvalidRequestRegionException.AddMember("error", _Error)
-
-	InvalidRequestRegionException_error_description = InvalidRequestRegionException.AddMember("error_description", _ErrorDescription)
-
-	InvalidRequestRegionException_endpoint = InvalidRequestRegionException.AddMember("endpoint", _Location)
-
-	InvalidRequestRegionException_region = InvalidRequestRegionException.AddMember("region", _Region)
-
-	InvalidScopeException_error = InvalidScopeException.AddMember("error", _Error)
-
-	InvalidScopeException_error_description = InvalidScopeException.AddMember("error_description", _ErrorDescription)
-
-	_RedirectUris_member = _RedirectUris.AddMember("member", _URI)
-
-	_Scopes_member = _Scopes.AddMember("member", _Scope)
-
-	SlowDownException_error = SlowDownException.AddMember("error", _Error)
-
-	SlowDownException_error_description = SlowDownException.AddMember("error_description", _ErrorDescription)
-
-	UnauthorizedClientException_error = UnauthorizedClientException.AddMember("error", _Error)
-
-	UnauthorizedClientException_error_description = UnauthorizedClientException.AddMember("error_description", _ErrorDescription)
-
-	UnsupportedGrantTypeException_error = UnsupportedGrantTypeException.AddMember("error", _Error)
-
-	UnsupportedGrantTypeException_error_description = UnsupportedGrantTypeException.AddMember("error_description", _ErrorDescription)
-
-	CreateTokenRequest_clientId = CreateTokenRequest.AddMember("clientId", _ClientId)
-
-	CreateTokenRequest_clientSecret = CreateTokenRequest.AddMember("clientSecret", _ClientSecret)
-
-	CreateTokenRequest_grantType = CreateTokenRequest.AddMember("grantType", _GrantType)
-
-	CreateTokenRequest_deviceCode = CreateTokenRequest.AddMember("deviceCode", _DeviceCode)
-
-	CreateTokenRequest_code = CreateTokenRequest.AddMember("code", _AuthCode)
-
-	CreateTokenRequest_refreshToken = CreateTokenRequest.AddMember("refreshToken", _RefreshToken)
-
-	CreateTokenRequest_scope = CreateTokenRequest.AddMember("scope", _Scopes)
-
-	CreateTokenRequest_redirectUri = CreateTokenRequest.AddMember("redirectUri", _URI)
-
-	CreateTokenRequest_codeVerifier = CreateTokenRequest.AddMember("codeVerifier", _CodeVerifier)
-
-	CreateTokenResponse_accessToken = CreateTokenResponse.AddMember("accessToken", _AccessToken)
-
-	CreateTokenResponse_tokenType = CreateTokenResponse.AddMember("tokenType", _TokenType)
-
-	CreateTokenResponse_expiresIn = CreateTokenResponse.AddMember("expiresIn", _ExpirationInSeconds)
-
-	CreateTokenResponse_refreshToken = CreateTokenResponse.AddMember("refreshToken", _RefreshToken)
-
-	CreateTokenResponse_idToken = CreateTokenResponse.AddMember("idToken", _IdToken)
-
-	CreateTokenWithIAMRequest_clientId = CreateTokenWithIAMRequest.AddMember("clientId", _ClientId)
-
-	CreateTokenWithIAMRequest_grantType = CreateTokenWithIAMRequest.AddMember("grantType", _GrantType)
-
-	CreateTokenWithIAMRequest_code = CreateTokenWithIAMRequest.AddMember("code", _AuthCode)
-
-	CreateTokenWithIAMRequest_refreshToken = CreateTokenWithIAMRequest.AddMember("refreshToken", _RefreshToken)
-
-	CreateTokenWithIAMRequest_assertion = CreateTokenWithIAMRequest.AddMember("assertion", _Assertion)
-
-	CreateTokenWithIAMRequest_scope = CreateTokenWithIAMRequest.AddMember("scope", _Scopes)
-
-	CreateTokenWithIAMRequest_redirectUri = CreateTokenWithIAMRequest.AddMember("redirectUri", _URI)
-
-	CreateTokenWithIAMRequest_subjectToken = CreateTokenWithIAMRequest.AddMember("subjectToken", _SubjectToken)
-
-	CreateTokenWithIAMRequest_subjectTokenType = CreateTokenWithIAMRequest.AddMember("subjectTokenType", _TokenTypeURI)
-
-	CreateTokenWithIAMRequest_requestedTokenType = CreateTokenWithIAMRequest.AddMember("requestedTokenType", _TokenTypeURI)
-
-	CreateTokenWithIAMRequest_codeVerifier = CreateTokenWithIAMRequest.AddMember("codeVerifier", _CodeVerifier)
-
-	CreateTokenWithIAMResponse_accessToken = CreateTokenWithIAMResponse.AddMember("accessToken", _AccessToken)
-
-	CreateTokenWithIAMResponse_tokenType = CreateTokenWithIAMResponse.AddMember("tokenType", _TokenType)
-
-	CreateTokenWithIAMResponse_expiresIn = CreateTokenWithIAMResponse.AddMember("expiresIn", _ExpirationInSeconds)
-
-	CreateTokenWithIAMResponse_refreshToken = CreateTokenWithIAMResponse.AddMember("refreshToken", _RefreshToken)
-
-	CreateTokenWithIAMResponse_idToken = CreateTokenWithIAMResponse.AddMember("idToken", _IdToken)
-
-	CreateTokenWithIAMResponse_issuedTokenType = CreateTokenWithIAMResponse.AddMember("issuedTokenType", _TokenTypeURI)
-
-	CreateTokenWithIAMResponse_scope = CreateTokenWithIAMResponse.AddMember("scope", _Scopes)
-
-	CreateTokenWithIAMResponse_awsAdditionalDetails = CreateTokenWithIAMResponse.AddMember("awsAdditionalDetails", AwsAdditionalDetails)
-
-	RegisterClientRequest_clientName = RegisterClientRequest.AddMember("clientName", _ClientName)
-
-	RegisterClientRequest_clientType = RegisterClientRequest.AddMember("clientType", _ClientType)
-
-	RegisterClientRequest_scopes = RegisterClientRequest.AddMember("scopes", _Scopes)
-
-	RegisterClientRequest_redirectUris = RegisterClientRequest.AddMember("redirectUris", _RedirectUris)
-
-	RegisterClientRequest_grantTypes = RegisterClientRequest.AddMember("grantTypes", _GrantTypes)
-
-	RegisterClientRequest_issuerUrl = RegisterClientRequest.AddMember("issuerUrl", _URI)
-
-	RegisterClientRequest_entitledApplicationArn = RegisterClientRequest.AddMember("entitledApplicationArn", _ArnType)
-
-	RegisterClientResponse_clientId = RegisterClientResponse.AddMember("clientId", _ClientId)
-
-	RegisterClientResponse_clientSecret = RegisterClientResponse.AddMember("clientSecret", _ClientSecret)
-
-	RegisterClientResponse_clientIdIssuedAt = RegisterClientResponse.AddMember("clientIdIssuedAt", _LongTimeStampType)
-
-	RegisterClientResponse_clientSecretExpiresAt = RegisterClientResponse.AddMember("clientSecretExpiresAt", _LongTimeStampType)
-
-	RegisterClientResponse_authorizationEndpoint = RegisterClientResponse.AddMember("authorizationEndpoint", _URI)
-
-	RegisterClientResponse_tokenEndpoint = RegisterClientResponse.AddMember("tokenEndpoint", _URI)
-
-	StartDeviceAuthorizationRequest_clientId = StartDeviceAuthorizationRequest.AddMember("clientId", _ClientId)
-
-	StartDeviceAuthorizationRequest_clientSecret = StartDeviceAuthorizationRequest.AddMember("clientSecret", _ClientSecret)
-
-	StartDeviceAuthorizationRequest_startUrl = StartDeviceAuthorizationRequest.AddMember("startUrl", _URI)
-
-	StartDeviceAuthorizationResponse_deviceCode = StartDeviceAuthorizationResponse.AddMember("deviceCode", _DeviceCode)
-
-	StartDeviceAuthorizationResponse_userCode = StartDeviceAuthorizationResponse.AddMember("userCode", _UserCode)
-
-	StartDeviceAuthorizationResponse_verificationUri = StartDeviceAuthorizationResponse.AddMember("verificationUri", _URI)
-
-	StartDeviceAuthorizationResponse_verificationUriComplete = StartDeviceAuthorizationResponse.AddMember("verificationUriComplete", _URI)
-
-	StartDeviceAuthorizationResponse_expiresIn = StartDeviceAuthorizationResponse.AddMember("expiresIn", _ExpirationInSeconds)
-
-	StartDeviceAuthorizationResponse_interval = StartDeviceAuthorizationResponse.AddMember("interval", _IntervalInSeconds)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_error, &sAccessDeniedException_reason, &sAccessDeniedException_error_description}}
+var mAccessDeniedExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedExceptionReason_KMS_ACCESS_DENIED}}
+var mAuthorizationPendingException = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationPendingException_error, &sAuthorizationPendingException_error_description}}
+var mAwsAdditionalDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsAdditionalDetails_identityContext}}
+var mExpiredTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredTokenException_error, &sExpiredTokenException_error_description}}
+var m_GrantTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_GrantTypes_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_error, &sInternalServerException_error_description}}
+var mInvalidClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidClientException_error, &sInvalidClientException_error_description}}
+var mInvalidClientMetadataException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidClientMetadataException_error, &sInvalidClientMetadataException_error_description}}
+var mInvalidGrantException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidGrantException_error, &sInvalidGrantException_error_description}}
+var mInvalidRedirectUriException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRedirectUriException_error, &sInvalidRedirectUriException_error_description}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_error, &sInvalidRequestException_reason, &sInvalidRequestException_error_description}}
+var mInvalidRequestExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestExceptionReason_KMS_KEY_NOT_FOUND, &sInvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE, &sInvalidRequestExceptionReason_KMS_INVALID_STATE, &sInvalidRequestExceptionReason_KMS_DISABLED_KEY}}
+var mInvalidRequestRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestRegionException_error, &sInvalidRequestRegionException_error_description, &sInvalidRequestRegionException_endpoint, &sInvalidRequestRegionException_region}}
+var mInvalidScopeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidScopeException_error, &sInvalidScopeException_error_description}}
+var m_RedirectUris = smithy.SchemaMembers{List: []*smithy.Schema{&s_RedirectUris_member}}
+var m_Scopes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Scopes_member}}
+var mSlowDownException = smithy.SchemaMembers{List: []*smithy.Schema{&sSlowDownException_error, &sSlowDownException_error_description}}
+var mUnauthorizedClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedClientException_error, &sUnauthorizedClientException_error_description}}
+var mUnsupportedGrantTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedGrantTypeException_error, &sUnsupportedGrantTypeException_error_description}}
+var mCreateTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenRequest_clientId, &sCreateTokenRequest_clientSecret, &sCreateTokenRequest_grantType, &sCreateTokenRequest_deviceCode, &sCreateTokenRequest_code, &sCreateTokenRequest_refreshToken, &sCreateTokenRequest_scope, &sCreateTokenRequest_redirectUri, &sCreateTokenRequest_codeVerifier}, Hash: &hCreateTokenRequest}
+var mCreateTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenResponse_accessToken, &sCreateTokenResponse_tokenType, &sCreateTokenResponse_expiresIn, &sCreateTokenResponse_refreshToken, &sCreateTokenResponse_idToken}}
+var mCreateTokenWithIAMRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenWithIAMRequest_clientId, &sCreateTokenWithIAMRequest_grantType, &sCreateTokenWithIAMRequest_code, &sCreateTokenWithIAMRequest_refreshToken, &sCreateTokenWithIAMRequest_assertion, &sCreateTokenWithIAMRequest_scope, &sCreateTokenWithIAMRequest_redirectUri, &sCreateTokenWithIAMRequest_subjectToken, &sCreateTokenWithIAMRequest_subjectTokenType, &sCreateTokenWithIAMRequest_requestedTokenType, &sCreateTokenWithIAMRequest_codeVerifier}, Hash: &hCreateTokenWithIAMRequest}
+var mCreateTokenWithIAMResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTokenWithIAMResponse_accessToken, &sCreateTokenWithIAMResponse_tokenType, &sCreateTokenWithIAMResponse_expiresIn, &sCreateTokenWithIAMResponse_refreshToken, &sCreateTokenWithIAMResponse_idToken, &sCreateTokenWithIAMResponse_issuedTokenType, &sCreateTokenWithIAMResponse_scope, &sCreateTokenWithIAMResponse_awsAdditionalDetails}}
+var mRegisterClientRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterClientRequest_clientName, &sRegisterClientRequest_clientType, &sRegisterClientRequest_scopes, &sRegisterClientRequest_redirectUris, &sRegisterClientRequest_grantTypes, &sRegisterClientRequest_issuerUrl, &sRegisterClientRequest_entitledApplicationArn}}
+var mRegisterClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterClientResponse_clientId, &sRegisterClientResponse_clientSecret, &sRegisterClientResponse_clientIdIssuedAt, &sRegisterClientResponse_clientSecretExpiresAt, &sRegisterClientResponse_authorizationEndpoint, &sRegisterClientResponse_tokenEndpoint}}
+var mStartDeviceAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDeviceAuthorizationRequest_clientId, &sStartDeviceAuthorizationRequest_clientSecret, &sStartDeviceAuthorizationRequest_startUrl}}
+var mStartDeviceAuthorizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDeviceAuthorizationResponse_deviceCode, &sStartDeviceAuthorizationResponse_userCode, &sStartDeviceAuthorizationResponse_verificationUri, &sStartDeviceAuthorizationResponse_verificationUriComplete, &sStartDeviceAuthorizationResponse_expiresIn, &sStartDeviceAuthorizationResponse_interval}}
+
+var hCreateTokenRequest = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 8, 7, 0, 0, 5, 0, 0,
+	0, 9, 4, 3, 0, 0, 0, 0,
+}}
+var hCreateTokenWithIAMRequest = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 5, 0, 7, 2, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 8, 11,
+	6, 9, 0, 0, 0, 0, 10, 0,
+}}
+
+var sCreateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateToken})
+var sCreateTokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenWithIAM, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateTokenWithIAM})
+var sRegisterClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterClient, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eRegisterClient})
+var sStartDeviceAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeviceAuthorization, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eStartDeviceAuthorization})
+var s_AWSSSOOIDCService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSSOOIDCService, Type: smithy.ShapeTypeService, Ext: &e_AWSSSOOIDCService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_error})
+var sAccessDeniedException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_reason})
+var sAccessDeniedException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_error_description})
+var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedExceptionReason})
+var sAccessDeniedExceptionReason_KMS_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedExceptionReason_KMS_ACCESS_DENIED})
+var s_AccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessToken, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_AccessToken})
+var s_ArnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &e_ArnType})
+var s_Assertion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Assertion, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_Assertion})
+var s_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthCode, Type: smithy.ShapeTypeString, Ext: &e_AuthCode})
+var sAuthorizationPendingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationPendingException, Members: &mAuthorizationPendingException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationPendingException})
+var sAuthorizationPendingException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eAuthorizationPendingException_error})
+var sAuthorizationPendingException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eAuthorizationPendingException_error_description})
+var sAwsAdditionalDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsAdditionalDetails, Members: &mAwsAdditionalDetails, Type: smithy.ShapeTypeStructure, Ext: &eAwsAdditionalDetails})
+var sAwsAdditionalDetails_identityContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityContext", ID: &i_IdentityContext, Type: smithy.ShapeTypeString, Ext: &eAwsAdditionalDetails_identityContext})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var s_ClientName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientName, Type: smithy.ShapeTypeString, Ext: &e_ClientName})
+var s_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientSecret, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_ClientSecret})
+var s_ClientType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientType, Type: smithy.ShapeTypeString, Ext: &e_ClientType})
+var s_CodeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeVerifier, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_CodeVerifier})
+var s_DeviceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceCode, Type: smithy.ShapeTypeString, Ext: &e_DeviceCode})
+var s_Error = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &e_Error})
+var s_ErrorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &e_ErrorDescription})
+var s_ExpirationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpirationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ExpirationInSeconds})
+var sExpiredTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTokenException, Members: &mExpiredTokenException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eExpiredTokenException})
+var sExpiredTokenException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eExpiredTokenException_error})
+var sExpiredTokenException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eExpiredTokenException_error_description})
+var s_GrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &e_GrantType})
+var s_GrantTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantTypes, Members: &m_GrantTypes, Type: smithy.ShapeTypeList, Ext: &e_GrantTypes})
+var s_GrantTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &e_GrantTypes_member})
+var s_IdentityContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityContext, Type: smithy.ShapeTypeString, Ext: &e_IdentityContext})
+var s_IdToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdToken, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_IdToken})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_error})
+var sInternalServerException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_error_description})
+var s_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_IntervalInSeconds})
+var sInvalidClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientException, Members: &mInvalidClientException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInvalidClientException})
+var sInvalidClientException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidClientException_error})
+var sInvalidClientException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidClientException_error_description})
+var sInvalidClientMetadataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientMetadataException, Members: &mInvalidClientMetadataException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidClientMetadataException})
+var sInvalidClientMetadataException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidClientMetadataException_error})
+var sInvalidClientMetadataException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidClientMetadataException_error_description})
+var sInvalidGrantException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantException, Members: &mInvalidGrantException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGrantException})
+var sInvalidGrantException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidGrantException_error})
+var sInvalidGrantException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidGrantException_error_description})
+var sInvalidRedirectUriException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRedirectUriException, Members: &mInvalidRedirectUriException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRedirectUriException})
+var sInvalidRedirectUriException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidRedirectUriException_error})
+var sInvalidRedirectUriException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidRedirectUriException_error_description})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidRequestException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_error})
+var sInvalidRequestException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iInvalidRequestExceptionReason, Members: &mInvalidRequestExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eInvalidRequestException_reason})
+var sInvalidRequestException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_error_description})
+var sInvalidRequestExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestExceptionReason, Members: &mInvalidRequestExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eInvalidRequestExceptionReason})
+var sInvalidRequestExceptionReason_KMS_KEY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_KEY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestExceptionReason_KMS_KEY_NOT_FOUND})
+var sInvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_INVALID_KEY_USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE})
+var sInvalidRequestExceptionReason_KMS_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestExceptionReason_KMS_INVALID_STATE})
+var sInvalidRequestExceptionReason_KMS_DISABLED_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_DISABLED_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestExceptionReason_KMS_DISABLED_KEY})
+var sInvalidRequestRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestRegionException, Members: &mInvalidRequestRegionException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestRegionException})
+var sInvalidRequestRegionException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestRegionException_error})
+var sInvalidRequestRegionException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestRegionException_error_description})
+var sInvalidRequestRegionException_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestRegionException_endpoint})
+var sInvalidRequestRegionException_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestRegionException_region})
+var sInvalidScopeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidScopeException, Members: &mInvalidScopeException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInvalidScopeException})
+var sInvalidScopeException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eInvalidScopeException_error})
+var sInvalidScopeException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidScopeException_error_description})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &e_Location})
+var s_LongTimeStampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongTimeStampType, Type: smithy.ShapeTypeLong, Ext: &e_LongTimeStampType})
+var s_RedirectUris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUris, Members: &m_RedirectUris, Type: smithy.ShapeTypeList, Ext: &e_RedirectUris})
+var s_RedirectUris_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &e_RedirectUris_member})
+var s_RefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshToken, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_RefreshToken})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_Scope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &e_Scope})
+var s_Scopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Scopes, Members: &m_Scopes, Type: smithy.ShapeTypeList, Ext: &e_Scopes})
+var s_Scopes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &e_Scopes_member})
+var sSlowDownException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlowDownException, Members: &mSlowDownException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eSlowDownException})
+var sSlowDownException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eSlowDownException_error})
+var sSlowDownException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eSlowDownException_error_description})
+var s_SubjectToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectToken, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_SubjectToken})
+var s_TokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenType, Type: smithy.ShapeTypeString, Ext: &e_TokenType})
+var s_TokenTypeURI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenTypeURI, Type: smithy.ShapeTypeString, Ext: &e_TokenTypeURI})
+var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedClientException})
+var sUnauthorizedClientException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedClientException_error})
+var sUnauthorizedClientException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedClientException_error_description})
+var sUnsupportedGrantTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedGrantTypeException, Members: &mUnsupportedGrantTypeException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedGrantTypeException})
+var sUnsupportedGrantTypeException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_Error, Type: smithy.ShapeTypeString, Ext: &eUnsupportedGrantTypeException_error})
+var sUnsupportedGrantTypeException_error_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error_description", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eUnsupportedGrantTypeException_error_description})
+var s_URI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &e_URI})
+var s_UserCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserCode, Type: smithy.ShapeTypeString, Ext: &e_UserCode})
+var sCreateTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenRequest, Members: &mCreateTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenRequest})
+var sCreateTokenRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_clientId})
+var sCreateTokenRequest_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_clientSecret})
+var sCreateTokenRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_grantType})
+var sCreateTokenRequest_deviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceCode", ID: &i_DeviceCode, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_deviceCode})
+var sCreateTokenRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_AuthCode, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_code})
+var sCreateTokenRequest_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_refreshToken})
+var sCreateTokenRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scopes, Members: &m_Scopes, Type: smithy.ShapeTypeList, Ext: &eCreateTokenRequest_scope})
+var sCreateTokenRequest_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_redirectUri})
+var sCreateTokenRequest_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_CodeVerifier, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenRequest_codeVerifier})
+var sCreateTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenResponse, Members: &mCreateTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenResponse})
+var sCreateTokenResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_accessToken})
+var sCreateTokenResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_TokenType, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_tokenType})
+var sCreateTokenResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpirationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateTokenResponse_expiresIn})
+var sCreateTokenResponse_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_refreshToken})
+var sCreateTokenResponse_idToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idToken", ID: &i_IdToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenResponse_idToken})
+var sCreateTokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenWithIAMRequest, Members: &mCreateTokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenWithIAMRequest})
+var sCreateTokenWithIAMRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_clientId})
+var sCreateTokenWithIAMRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_grantType})
+var sCreateTokenWithIAMRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_AuthCode, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_code})
+var sCreateTokenWithIAMRequest_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_refreshToken})
+var sCreateTokenWithIAMRequest_assertion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assertion", ID: &i_Assertion, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_assertion})
+var sCreateTokenWithIAMRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scopes, Members: &m_Scopes, Type: smithy.ShapeTypeList, Ext: &eCreateTokenWithIAMRequest_scope})
+var sCreateTokenWithIAMRequest_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_redirectUri})
+var sCreateTokenWithIAMRequest_subjectToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectToken", ID: &i_SubjectToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_subjectToken})
+var sCreateTokenWithIAMRequest_subjectTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectTokenType", ID: &i_TokenTypeURI, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_subjectTokenType})
+var sCreateTokenWithIAMRequest_requestedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedTokenType", ID: &i_TokenTypeURI, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_requestedTokenType})
+var sCreateTokenWithIAMRequest_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_CodeVerifier, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMRequest_codeVerifier})
+var sCreateTokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTokenWithIAMResponse, Members: &mCreateTokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenWithIAMResponse})
+var sCreateTokenWithIAMResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMResponse_accessToken})
+var sCreateTokenWithIAMResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_TokenType, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMResponse_tokenType})
+var sCreateTokenWithIAMResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpirationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateTokenWithIAMResponse_expiresIn})
+var sCreateTokenWithIAMResponse_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMResponse_refreshToken})
+var sCreateTokenWithIAMResponse_idToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idToken", ID: &i_IdToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMResponse_idToken})
+var sCreateTokenWithIAMResponse_issuedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuedTokenType", ID: &i_TokenTypeURI, Type: smithy.ShapeTypeString, Ext: &eCreateTokenWithIAMResponse_issuedTokenType})
+var sCreateTokenWithIAMResponse_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scopes, Members: &m_Scopes, Type: smithy.ShapeTypeList, Ext: &eCreateTokenWithIAMResponse_scope})
+var sCreateTokenWithIAMResponse_awsAdditionalDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAdditionalDetails", ID: &iAwsAdditionalDetails, Members: &mAwsAdditionalDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateTokenWithIAMResponse_awsAdditionalDetails})
+var sRegisterClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterClientRequest, Members: &mRegisterClientRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterClientRequest})
+var sRegisterClientRequest_clientName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientName", ID: &i_ClientName, Type: smithy.ShapeTypeString, Ext: &eRegisterClientRequest_clientName})
+var sRegisterClientRequest_clientType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientType", ID: &i_ClientType, Type: smithy.ShapeTypeString, Ext: &eRegisterClientRequest_clientType})
+var sRegisterClientRequest_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_Scopes, Members: &m_Scopes, Type: smithy.ShapeTypeList, Ext: &eRegisterClientRequest_scopes})
+var sRegisterClientRequest_redirectUris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUris", ID: &i_RedirectUris, Members: &m_RedirectUris, Type: smithy.ShapeTypeList, Ext: &eRegisterClientRequest_redirectUris})
+var sRegisterClientRequest_grantTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantTypes", ID: &i_GrantTypes, Members: &m_GrantTypes, Type: smithy.ShapeTypeList, Ext: &eRegisterClientRequest_grantTypes})
+var sRegisterClientRequest_issuerUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuerUrl", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eRegisterClientRequest_issuerUrl})
+var sRegisterClientRequest_entitledApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entitledApplicationArn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &eRegisterClientRequest_entitledApplicationArn})
+var sRegisterClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterClientResponse, Members: &mRegisterClientResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterClientResponse})
+var sRegisterClientResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eRegisterClientResponse_clientId})
+var sRegisterClientResponse_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eRegisterClientResponse_clientSecret})
+var sRegisterClientResponse_clientIdIssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIdIssuedAt", ID: &i_LongTimeStampType, Type: smithy.ShapeTypeLong, Ext: &eRegisterClientResponse_clientIdIssuedAt})
+var sRegisterClientResponse_clientSecretExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecretExpiresAt", ID: &i_LongTimeStampType, Type: smithy.ShapeTypeLong, Ext: &eRegisterClientResponse_clientSecretExpiresAt})
+var sRegisterClientResponse_authorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationEndpoint", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eRegisterClientResponse_authorizationEndpoint})
+var sRegisterClientResponse_tokenEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenEndpoint", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eRegisterClientResponse_tokenEndpoint})
+var sStartDeviceAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeviceAuthorizationRequest, Members: &mStartDeviceAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartDeviceAuthorizationRequest})
+var sStartDeviceAuthorizationRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationRequest_clientId})
+var sStartDeviceAuthorizationRequest_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationRequest_clientSecret})
+var sStartDeviceAuthorizationRequest_startUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startUrl", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationRequest_startUrl})
+var sStartDeviceAuthorizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeviceAuthorizationResponse, Members: &mStartDeviceAuthorizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartDeviceAuthorizationResponse})
+var sStartDeviceAuthorizationResponse_deviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceCode", ID: &i_DeviceCode, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationResponse_deviceCode})
+var sStartDeviceAuthorizationResponse_userCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userCode", ID: &i_UserCode, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationResponse_userCode})
+var sStartDeviceAuthorizationResponse_verificationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verificationUri", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationResponse_verificationUri})
+var sStartDeviceAuthorizationResponse_verificationUriComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verificationUriComplete", ID: &i_URI, Type: smithy.ShapeTypeString, Ext: &eStartDeviceAuthorizationResponse_verificationUriComplete})
+var sStartDeviceAuthorizationResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpirationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartDeviceAuthorizationResponse_expiresIn})
+var sStartDeviceAuthorizationResponse_interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interval", ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartDeviceAuthorizationResponse_interval})
+
+var CreateToken = &sCreateToken
+
+var CreateTokenWithIAM = &sCreateTokenWithIAM
+
+var RegisterClient = &sRegisterClient
+
+var StartDeviceAuthorization = &sStartDeviceAuthorization
+
+var _AWSSSOOIDCService = &s_AWSSSOOIDCService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_error = &sAccessDeniedException_error
+var AccessDeniedException_reason = &sAccessDeniedException_reason
+var AccessDeniedException_error_description = &sAccessDeniedException_error_description
+
+var AccessDeniedExceptionReason = &sAccessDeniedExceptionReason
+var AccessDeniedExceptionReason_KMS_ACCESS_DENIED = &sAccessDeniedExceptionReason_KMS_ACCESS_DENIED
+
+var _AccessToken = &s_AccessToken
+
+var _ArnType = &s_ArnType
+
+var _Assertion = &s_Assertion
+
+var _AuthCode = &s_AuthCode
+
+var AuthorizationPendingException = &sAuthorizationPendingException
+var AuthorizationPendingException_error = &sAuthorizationPendingException_error
+var AuthorizationPendingException_error_description = &sAuthorizationPendingException_error_description
+
+var AwsAdditionalDetails = &sAwsAdditionalDetails
+var AwsAdditionalDetails_identityContext = &sAwsAdditionalDetails_identityContext
+
+var _ClientId = &s_ClientId
+
+var _ClientName = &s_ClientName
+
+var _ClientSecret = &s_ClientSecret
+
+var _ClientType = &s_ClientType
+
+var _CodeVerifier = &s_CodeVerifier
+
+var _DeviceCode = &s_DeviceCode
+
+var _Error = &s_Error
+
+var _ErrorDescription = &s_ErrorDescription
+
+var _ExpirationInSeconds = &s_ExpirationInSeconds
+
+var ExpiredTokenException = &sExpiredTokenException
+var ExpiredTokenException_error = &sExpiredTokenException_error
+var ExpiredTokenException_error_description = &sExpiredTokenException_error_description
+
+var _GrantType = &s_GrantType
+
+var _GrantTypes = &s_GrantTypes
+var _GrantTypes_member = &s_GrantTypes_member
+
+var _IdentityContext = &s_IdentityContext
+
+var _IdToken = &s_IdToken
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_error = &sInternalServerException_error
+var InternalServerException_error_description = &sInternalServerException_error_description
+
+var _IntervalInSeconds = &s_IntervalInSeconds
+
+var InvalidClientException = &sInvalidClientException
+var InvalidClientException_error = &sInvalidClientException_error
+var InvalidClientException_error_description = &sInvalidClientException_error_description
+
+var InvalidClientMetadataException = &sInvalidClientMetadataException
+var InvalidClientMetadataException_error = &sInvalidClientMetadataException_error
+var InvalidClientMetadataException_error_description = &sInvalidClientMetadataException_error_description
+
+var InvalidGrantException = &sInvalidGrantException
+var InvalidGrantException_error = &sInvalidGrantException_error
+var InvalidGrantException_error_description = &sInvalidGrantException_error_description
+
+var InvalidRedirectUriException = &sInvalidRedirectUriException
+var InvalidRedirectUriException_error = &sInvalidRedirectUriException_error
+var InvalidRedirectUriException_error_description = &sInvalidRedirectUriException_error_description
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_error = &sInvalidRequestException_error
+var InvalidRequestException_reason = &sInvalidRequestException_reason
+var InvalidRequestException_error_description = &sInvalidRequestException_error_description
+
+var InvalidRequestExceptionReason = &sInvalidRequestExceptionReason
+var InvalidRequestExceptionReason_KMS_KEY_NOT_FOUND = &sInvalidRequestExceptionReason_KMS_KEY_NOT_FOUND
+var InvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE = &sInvalidRequestExceptionReason_KMS_INVALID_KEY_USAGE
+var InvalidRequestExceptionReason_KMS_INVALID_STATE = &sInvalidRequestExceptionReason_KMS_INVALID_STATE
+var InvalidRequestExceptionReason_KMS_DISABLED_KEY = &sInvalidRequestExceptionReason_KMS_DISABLED_KEY
+
+var InvalidRequestRegionException = &sInvalidRequestRegionException
+var InvalidRequestRegionException_error = &sInvalidRequestRegionException_error
+var InvalidRequestRegionException_error_description = &sInvalidRequestRegionException_error_description
+var InvalidRequestRegionException_endpoint = &sInvalidRequestRegionException_endpoint
+var InvalidRequestRegionException_region = &sInvalidRequestRegionException_region
+
+var InvalidScopeException = &sInvalidScopeException
+var InvalidScopeException_error = &sInvalidScopeException_error
+var InvalidScopeException_error_description = &sInvalidScopeException_error_description
+
+var _Location = &s_Location
+
+var _LongTimeStampType = &s_LongTimeStampType
+
+var _RedirectUris = &s_RedirectUris
+var _RedirectUris_member = &s_RedirectUris_member
+
+var _RefreshToken = &s_RefreshToken
+
+var _Region = &s_Region
+
+var _Scope = &s_Scope
+
+var _Scopes = &s_Scopes
+var _Scopes_member = &s_Scopes_member
+
+var SlowDownException = &sSlowDownException
+var SlowDownException_error = &sSlowDownException_error
+var SlowDownException_error_description = &sSlowDownException_error_description
+
+var _SubjectToken = &s_SubjectToken
+
+var _TokenType = &s_TokenType
+
+var _TokenTypeURI = &s_TokenTypeURI
+
+var UnauthorizedClientException = &sUnauthorizedClientException
+var UnauthorizedClientException_error = &sUnauthorizedClientException_error
+var UnauthorizedClientException_error_description = &sUnauthorizedClientException_error_description
+
+var UnsupportedGrantTypeException = &sUnsupportedGrantTypeException
+var UnsupportedGrantTypeException_error = &sUnsupportedGrantTypeException_error
+var UnsupportedGrantTypeException_error_description = &sUnsupportedGrantTypeException_error_description
+
+var _URI = &s_URI
+
+var _UserCode = &s_UserCode
+
+var CreateTokenRequest = &sCreateTokenRequest
+var CreateTokenRequest_clientId = &sCreateTokenRequest_clientId
+var CreateTokenRequest_clientSecret = &sCreateTokenRequest_clientSecret
+var CreateTokenRequest_grantType = &sCreateTokenRequest_grantType
+var CreateTokenRequest_deviceCode = &sCreateTokenRequest_deviceCode
+var CreateTokenRequest_code = &sCreateTokenRequest_code
+var CreateTokenRequest_refreshToken = &sCreateTokenRequest_refreshToken
+var CreateTokenRequest_scope = &sCreateTokenRequest_scope
+var CreateTokenRequest_redirectUri = &sCreateTokenRequest_redirectUri
+var CreateTokenRequest_codeVerifier = &sCreateTokenRequest_codeVerifier
+
+var CreateTokenResponse = &sCreateTokenResponse
+var CreateTokenResponse_accessToken = &sCreateTokenResponse_accessToken
+var CreateTokenResponse_tokenType = &sCreateTokenResponse_tokenType
+var CreateTokenResponse_expiresIn = &sCreateTokenResponse_expiresIn
+var CreateTokenResponse_refreshToken = &sCreateTokenResponse_refreshToken
+var CreateTokenResponse_idToken = &sCreateTokenResponse_idToken
+
+var CreateTokenWithIAMRequest = &sCreateTokenWithIAMRequest
+var CreateTokenWithIAMRequest_clientId = &sCreateTokenWithIAMRequest_clientId
+var CreateTokenWithIAMRequest_grantType = &sCreateTokenWithIAMRequest_grantType
+var CreateTokenWithIAMRequest_code = &sCreateTokenWithIAMRequest_code
+var CreateTokenWithIAMRequest_refreshToken = &sCreateTokenWithIAMRequest_refreshToken
+var CreateTokenWithIAMRequest_assertion = &sCreateTokenWithIAMRequest_assertion
+var CreateTokenWithIAMRequest_scope = &sCreateTokenWithIAMRequest_scope
+var CreateTokenWithIAMRequest_redirectUri = &sCreateTokenWithIAMRequest_redirectUri
+var CreateTokenWithIAMRequest_subjectToken = &sCreateTokenWithIAMRequest_subjectToken
+var CreateTokenWithIAMRequest_subjectTokenType = &sCreateTokenWithIAMRequest_subjectTokenType
+var CreateTokenWithIAMRequest_requestedTokenType = &sCreateTokenWithIAMRequest_requestedTokenType
+var CreateTokenWithIAMRequest_codeVerifier = &sCreateTokenWithIAMRequest_codeVerifier
+
+var CreateTokenWithIAMResponse = &sCreateTokenWithIAMResponse
+var CreateTokenWithIAMResponse_accessToken = &sCreateTokenWithIAMResponse_accessToken
+var CreateTokenWithIAMResponse_tokenType = &sCreateTokenWithIAMResponse_tokenType
+var CreateTokenWithIAMResponse_expiresIn = &sCreateTokenWithIAMResponse_expiresIn
+var CreateTokenWithIAMResponse_refreshToken = &sCreateTokenWithIAMResponse_refreshToken
+var CreateTokenWithIAMResponse_idToken = &sCreateTokenWithIAMResponse_idToken
+var CreateTokenWithIAMResponse_issuedTokenType = &sCreateTokenWithIAMResponse_issuedTokenType
+var CreateTokenWithIAMResponse_scope = &sCreateTokenWithIAMResponse_scope
+var CreateTokenWithIAMResponse_awsAdditionalDetails = &sCreateTokenWithIAMResponse_awsAdditionalDetails
+
+var RegisterClientRequest = &sRegisterClientRequest
+var RegisterClientRequest_clientName = &sRegisterClientRequest_clientName
+var RegisterClientRequest_clientType = &sRegisterClientRequest_clientType
+var RegisterClientRequest_scopes = &sRegisterClientRequest_scopes
+var RegisterClientRequest_redirectUris = &sRegisterClientRequest_redirectUris
+var RegisterClientRequest_grantTypes = &sRegisterClientRequest_grantTypes
+var RegisterClientRequest_issuerUrl = &sRegisterClientRequest_issuerUrl
+var RegisterClientRequest_entitledApplicationArn = &sRegisterClientRequest_entitledApplicationArn
+
+var RegisterClientResponse = &sRegisterClientResponse
+var RegisterClientResponse_clientId = &sRegisterClientResponse_clientId
+var RegisterClientResponse_clientSecret = &sRegisterClientResponse_clientSecret
+var RegisterClientResponse_clientIdIssuedAt = &sRegisterClientResponse_clientIdIssuedAt
+var RegisterClientResponse_clientSecretExpiresAt = &sRegisterClientResponse_clientSecretExpiresAt
+var RegisterClientResponse_authorizationEndpoint = &sRegisterClientResponse_authorizationEndpoint
+var RegisterClientResponse_tokenEndpoint = &sRegisterClientResponse_tokenEndpoint
+
+var StartDeviceAuthorizationRequest = &sStartDeviceAuthorizationRequest
+var StartDeviceAuthorizationRequest_clientId = &sStartDeviceAuthorizationRequest_clientId
+var StartDeviceAuthorizationRequest_clientSecret = &sStartDeviceAuthorizationRequest_clientSecret
+var StartDeviceAuthorizationRequest_startUrl = &sStartDeviceAuthorizationRequest_startUrl
+
+var StartDeviceAuthorizationResponse = &sStartDeviceAuthorizationResponse
+var StartDeviceAuthorizationResponse_deviceCode = &sStartDeviceAuthorizationResponse_deviceCode
+var StartDeviceAuthorizationResponse_userCode = &sStartDeviceAuthorizationResponse_userCode
+var StartDeviceAuthorizationResponse_verificationUri = &sStartDeviceAuthorizationResponse_verificationUri
+var StartDeviceAuthorizationResponse_verificationUriComplete = &sStartDeviceAuthorizationResponse_verificationUriComplete
+var StartDeviceAuthorizationResponse_expiresIn = &sStartDeviceAuthorizationResponse_expiresIn
+var StartDeviceAuthorizationResponse_interval = &sStartDeviceAuthorizationResponse_interval
+
+var AWSSSOOIDCService = &smithy.ServiceSchema{Schema: &s_AWSSSOOIDCService, Version: "2019-06-10"}

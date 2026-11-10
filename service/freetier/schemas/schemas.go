@@ -4,628 +4,619 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetAccountActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountActivity",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccountPlanState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountPlanState",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetFreeTierUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetFreeTierUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccountActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ListAccountActivities",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpgradeAccountPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "UpgradeAccountPlan",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSFreeTierService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "AWSFreeTierService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSFreeTierService = smithy.NewServiceSchema(_AWSFreeTierService, "2023-09-07")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AccountPlanStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "AccountPlanStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AccountPlanStatus_NOT_STARTED *smithy.Schema
-
-var AccountPlanStatus_ACTIVE *smithy.Schema
-
-var AccountPlanStatus_EXPIRED *smithy.Schema
-
-var AccountPlanType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "AccountPlanType",
-}, smithy.ShapeTypeEnum, 2)
-var AccountPlanType_FREE *smithy.Schema
-
-var AccountPlanType_PAID *smithy.Schema
-
-var _Activities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Activities",
-}, smithy.ShapeTypeList, 1)
-var _Activities_member *smithy.Schema
-
-var _ActivityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ActivityId",
-}, smithy.ShapeTypeString, 0)
-
-var ActivityReward = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ActivityReward",
-}, smithy.ShapeTypeUnion, 1)
-var ActivityReward_credit *smithy.Schema
-
-var ActivityStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ActivityStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ActivityStatus_NOT_STARTED *smithy.Schema
-
-var ActivityStatus_IN_PROGRESS *smithy.Schema
-
-var ActivityStatus_COMPLETED *smithy.Schema
-
-var ActivityStatus_EXPIRING *smithy.Schema
-
-var ActivitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ActivitySummary",
-}, smithy.ShapeTypeStructure, 4)
-var ActivitySummary_activityId *smithy.Schema
-
-var ActivitySummary_title *smithy.Schema
-
-var ActivitySummary_reward *smithy.Schema
-
-var ActivitySummary_status *smithy.Schema
-
-var CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeEnum, 1)
-var CurrencyCode_USD *smithy.Schema
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Dimension",
-}, smithy.ShapeTypeEnum, 7)
-var Dimension_SERVICE *smithy.Schema
-
-var Dimension_OPERATION *smithy.Schema
-
-var Dimension_USAGE_TYPE *smithy.Schema
-
-var Dimension_REGION *smithy.Schema
-
-var Dimension_FREE_TIER_TYPE *smithy.Schema
-
-var Dimension_DESCRIPTION *smithy.Schema
-
-var Dimension_USAGE_PERCENTAGE *smithy.Schema
-
-var DimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "DimensionValues",
-}, smithy.ShapeTypeStructure, 3)
-var DimensionValues_Key *smithy.Schema
-
-var DimensionValues_Values *smithy.Schema
-
-var DimensionValues_MatchOptions *smithy.Schema
-
-var Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Expression",
-}, smithy.ShapeTypeStructure, 4)
-var Expression_Or *smithy.Schema
-
-var Expression_And *smithy.Schema
-
-var Expression_Not *smithy.Schema
-
-var Expression_Dimensions *smithy.Schema
-
-var _Expressions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Expressions",
-}, smithy.ShapeTypeList, 1)
-var _Expressions_member *smithy.Schema
-
-var _FilterActivityStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "FilterActivityStatuses",
-}, smithy.ShapeTypeList, 1)
-var _FilterActivityStatuses_member *smithy.Schema
-
-var FreeTierUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "FreeTierUsage",
-}, smithy.ShapeTypeStructure, 10)
-var FreeTierUsage_service *smithy.Schema
-
-var FreeTierUsage_operation *smithy.Schema
-
-var FreeTierUsage_usageType *smithy.Schema
-
-var FreeTierUsage_region *smithy.Schema
-
-var FreeTierUsage_actualUsageAmount *smithy.Schema
-
-var FreeTierUsage_forecastedUsageAmount *smithy.Schema
-
-var FreeTierUsage_limit *smithy.Schema
-
-var FreeTierUsage_unit *smithy.Schema
-
-var FreeTierUsage_description *smithy.Schema
-
-var FreeTierUsage_freeTierType *smithy.Schema
-
-var _FreeTierUsages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "FreeTierUsages",
-}, smithy.ShapeTypeList, 1)
-var _FreeTierUsages_member *smithy.Schema
-
-var _GenericDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GenericDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 13)
-var LanguageCode_EN_US *smithy.Schema
-
-var LanguageCode_EN_GB *smithy.Schema
-
-var LanguageCode_ID_ID *smithy.Schema
-
-var LanguageCode_DE_DE *smithy.Schema
-
-var LanguageCode_ES_ES *smithy.Schema
-
-var LanguageCode_FR_FR *smithy.Schema
-
-var LanguageCode_JA_JP *smithy.Schema
-
-var LanguageCode_IT_IT *smithy.Schema
-
-var LanguageCode_PT_PT *smithy.Schema
-
-var LanguageCode_KO_KR *smithy.Schema
-
-var LanguageCode_ZH_CN *smithy.Schema
-
-var LanguageCode_ZH_TW *smithy.Schema
-
-var LanguageCode_TR_TR *smithy.Schema
-
-var MatchOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "MatchOption",
-}, smithy.ShapeTypeEnum, 5)
-var MatchOption_EQUALS *smithy.Schema
-
-var MatchOption_STARTS_WITH *smithy.Schema
-
-var MatchOption_ENDS_WITH *smithy.Schema
-
-var MatchOption_CONTAINS *smithy.Schema
-
-var MatchOption_GREATER_THAN_OR_EQUAL *smithy.Schema
-
-var _MatchOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "MatchOptions",
-}, smithy.ShapeTypeList, 1)
-var _MatchOptions_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MonetaryAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "MonetaryAmount",
-}, smithy.ShapeTypeStructure, 2)
-var MonetaryAmount_amount *smithy.Schema
-
-var MonetaryAmount_unit *smithy.Schema
-
-var _NextPageToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "NextPageToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var GetAccountActivityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountActivityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAccountActivityRequest_activityId *smithy.Schema
-
-var GetAccountActivityRequest_languageCode *smithy.Schema
-
-var GetAccountActivityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountActivityResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetAccountActivityResponse_activityId *smithy.Schema
-
-var GetAccountActivityResponse_title *smithy.Schema
-
-var GetAccountActivityResponse_description *smithy.Schema
-
-var GetAccountActivityResponse_status *smithy.Schema
-
-var GetAccountActivityResponse_instructionsUrl *smithy.Schema
-
-var GetAccountActivityResponse_reward *smithy.Schema
-
-var GetAccountActivityResponse_estimatedTimeToCompleteInMinutes *smithy.Schema
-
-var GetAccountActivityResponse_expiresAt *smithy.Schema
-
-var GetAccountActivityResponse_startedAt *smithy.Schema
-
-var GetAccountActivityResponse_completedAt *smithy.Schema
-
-var GetAccountPlanStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountPlanStateRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountPlanStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetAccountPlanStateResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetAccountPlanStateResponse_accountId *smithy.Schema
-
-var GetAccountPlanStateResponse_accountPlanType *smithy.Schema
-
-var GetAccountPlanStateResponse_accountPlanStatus *smithy.Schema
-
-var GetAccountPlanStateResponse_accountPlanRemainingCredits *smithy.Schema
-
-var GetAccountPlanStateResponse_accountPlanExpirationDate *smithy.Schema
-
-var GetFreeTierUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetFreeTierUsageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetFreeTierUsageRequest_filter *smithy.Schema
-
-var GetFreeTierUsageRequest_maxResults *smithy.Schema
-
-var GetFreeTierUsageRequest_nextToken *smithy.Schema
-
-var GetFreeTierUsageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "GetFreeTierUsageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetFreeTierUsageResponse_freeTierUsages *smithy.Schema
-
-var GetFreeTierUsageResponse_nextToken *smithy.Schema
-
-var ListAccountActivitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ListAccountActivitiesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAccountActivitiesRequest_filterActivityStatuses *smithy.Schema
-
-var ListAccountActivitiesRequest_nextToken *smithy.Schema
-
-var ListAccountActivitiesRequest_maxResults *smithy.Schema
-
-var ListAccountActivitiesRequest_languageCode *smithy.Schema
-
-var ListAccountActivitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "ListAccountActivitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountActivitiesResponse_activities *smithy.Schema
-
-var ListAccountActivitiesResponse_nextToken *smithy.Schema
-
-var UpgradeAccountPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "UpgradeAccountPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpgradeAccountPlanRequest_accountPlanType *smithy.Schema
-
-var UpgradeAccountPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.freetier",
-	Name:      "UpgradeAccountPlanResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpgradeAccountPlanResponse_accountId *smithy.Schema
-
-var UpgradeAccountPlanResponse_accountPlanType *smithy.Schema
-
-var UpgradeAccountPlanResponse_accountPlanStatus *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	eGetAccountActivity                                          smithy.SchemaExtensions
+	eGetAccountPlanState                                         smithy.SchemaExtensions
+	eGetFreeTierUsage                                            smithy.SchemaExtensions
+	eListAccountActivities                                       smithy.SchemaExtensions
+	eUpgradeAccountPlan                                          smithy.SchemaExtensions
+	e_AWSFreeTierService                                         smithy.SchemaExtensions
+	eAccessDeniedException                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                               smithy.SchemaExtensions
+	e_AccountId                                                  smithy.SchemaExtensions
+	eAccountPlanStatus                                           smithy.SchemaExtensions
+	eAccountPlanStatus_NOT_STARTED                               smithy.SchemaExtensions
+	eAccountPlanStatus_ACTIVE                                    smithy.SchemaExtensions
+	eAccountPlanStatus_EXPIRED                                   smithy.SchemaExtensions
+	eAccountPlanType                                             smithy.SchemaExtensions
+	eAccountPlanType_FREE                                        smithy.SchemaExtensions
+	eAccountPlanType_PAID                                        smithy.SchemaExtensions
+	e_Activities                                                 smithy.SchemaExtensions
+	e_Activities_member                                          smithy.SchemaExtensions
+	e_ActivityId                                                 smithy.SchemaExtensions
+	eActivityReward                                              smithy.SchemaExtensions
+	eActivityReward_credit                                       smithy.SchemaExtensions
+	eActivityStatus                                              smithy.SchemaExtensions
+	eActivityStatus_NOT_STARTED                                  smithy.SchemaExtensions
+	eActivityStatus_IN_PROGRESS                                  smithy.SchemaExtensions
+	eActivityStatus_COMPLETED                                    smithy.SchemaExtensions
+	eActivityStatus_EXPIRING                                     smithy.SchemaExtensions
+	eActivitySummary                                             smithy.SchemaExtensions
+	eActivitySummary_activityId                                  smithy.SchemaExtensions
+	eActivitySummary_title                                       smithy.SchemaExtensions
+	eActivitySummary_reward                                      smithy.SchemaExtensions
+	eActivitySummary_status                                      smithy.SchemaExtensions
+	eCurrencyCode                                                smithy.SchemaExtensions
+	eCurrencyCode_USD                                            smithy.SchemaExtensions
+	eDimension                                                   smithy.SchemaExtensions
+	eDimension_SERVICE                                           smithy.SchemaExtensions
+	eDimension_OPERATION                                         smithy.SchemaExtensions
+	eDimension_USAGE_TYPE                                        smithy.SchemaExtensions
+	eDimension_REGION                                            smithy.SchemaExtensions
+	eDimension_FREE_TIER_TYPE                                    smithy.SchemaExtensions
+	eDimension_DESCRIPTION                                       smithy.SchemaExtensions
+	eDimension_USAGE_PERCENTAGE                                  smithy.SchemaExtensions
+	eDimensionValues                                             smithy.SchemaExtensions
+	eDimensionValues_Key                                         smithy.SchemaExtensions
+	eDimensionValues_Values                                      smithy.SchemaExtensions
+	eDimensionValues_MatchOptions                                smithy.SchemaExtensions
+	eExpression                                                  smithy.SchemaExtensions
+	eExpression_Or                                               smithy.SchemaExtensions
+	eExpression_And                                              smithy.SchemaExtensions
+	eExpression_Not                                              smithy.SchemaExtensions
+	eExpression_Dimensions                                       smithy.SchemaExtensions
+	e_Expressions                                                smithy.SchemaExtensions
+	e_Expressions_member                                         smithy.SchemaExtensions
+	e_FilterActivityStatuses                                     smithy.SchemaExtensions
+	e_FilterActivityStatuses_member                              smithy.SchemaExtensions
+	eFreeTierUsage                                               smithy.SchemaExtensions
+	eFreeTierUsage_service                                       smithy.SchemaExtensions
+	eFreeTierUsage_operation                                     smithy.SchemaExtensions
+	eFreeTierUsage_usageType                                     smithy.SchemaExtensions
+	eFreeTierUsage_region                                        smithy.SchemaExtensions
+	eFreeTierUsage_actualUsageAmount                             smithy.SchemaExtensions
+	eFreeTierUsage_forecastedUsageAmount                         smithy.SchemaExtensions
+	eFreeTierUsage_limit                                         smithy.SchemaExtensions
+	eFreeTierUsage_unit                                          smithy.SchemaExtensions
+	eFreeTierUsage_description                                   smithy.SchemaExtensions
+	eFreeTierUsage_freeTierType                                  smithy.SchemaExtensions
+	e_FreeTierUsages                                             smithy.SchemaExtensions
+	e_FreeTierUsages_member                                      smithy.SchemaExtensions
+	e_GenericDouble                                              smithy.SchemaExtensions
+	e_GenericString                                              smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	eLanguageCode                                                smithy.SchemaExtensions
+	eLanguageCode_EN_US                                          smithy.SchemaExtensions
+	eLanguageCode_EN_GB                                          smithy.SchemaExtensions
+	eLanguageCode_ID_ID                                          smithy.SchemaExtensions
+	eLanguageCode_DE_DE                                          smithy.SchemaExtensions
+	eLanguageCode_ES_ES                                          smithy.SchemaExtensions
+	eLanguageCode_FR_FR                                          smithy.SchemaExtensions
+	eLanguageCode_JA_JP                                          smithy.SchemaExtensions
+	eLanguageCode_IT_IT                                          smithy.SchemaExtensions
+	eLanguageCode_PT_PT                                          smithy.SchemaExtensions
+	eLanguageCode_KO_KR                                          smithy.SchemaExtensions
+	eLanguageCode_ZH_CN                                          smithy.SchemaExtensions
+	eLanguageCode_ZH_TW                                          smithy.SchemaExtensions
+	eLanguageCode_TR_TR                                          smithy.SchemaExtensions
+	eMatchOption                                                 smithy.SchemaExtensions
+	eMatchOption_EQUALS                                          smithy.SchemaExtensions
+	eMatchOption_STARTS_WITH                                     smithy.SchemaExtensions
+	eMatchOption_ENDS_WITH                                       smithy.SchemaExtensions
+	eMatchOption_CONTAINS                                        smithy.SchemaExtensions
+	eMatchOption_GREATER_THAN_OR_EQUAL                           smithy.SchemaExtensions
+	e_MatchOptions                                               smithy.SchemaExtensions
+	e_MatchOptions_member                                        smithy.SchemaExtensions
+	e_MaxResults                                                 smithy.SchemaExtensions
+	eMonetaryAmount                                              smithy.SchemaExtensions
+	eMonetaryAmount_amount                                       smithy.SchemaExtensions
+	eMonetaryAmount_unit                                         smithy.SchemaExtensions
+	e_NextPageToken                                              smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	e_Value                                                      smithy.SchemaExtensions
+	e_Values                                                     smithy.SchemaExtensions
+	e_Values_member                                              smithy.SchemaExtensions
+	eGetAccountActivityRequest                                   smithy.SchemaExtensions
+	eGetAccountActivityRequest_activityId                        smithy.SchemaExtensions
+	eGetAccountActivityRequest_languageCode                      smithy.SchemaExtensions
+	eGetAccountActivityResponse                                  smithy.SchemaExtensions
+	eGetAccountActivityResponse_activityId                       smithy.SchemaExtensions
+	eGetAccountActivityResponse_title                            smithy.SchemaExtensions
+	eGetAccountActivityResponse_description                      smithy.SchemaExtensions
+	eGetAccountActivityResponse_status                           smithy.SchemaExtensions
+	eGetAccountActivityResponse_instructionsUrl                  smithy.SchemaExtensions
+	eGetAccountActivityResponse_reward                           smithy.SchemaExtensions
+	eGetAccountActivityResponse_estimatedTimeToCompleteInMinutes smithy.SchemaExtensions
+	eGetAccountActivityResponse_expiresAt                        smithy.SchemaExtensions
+	eGetAccountActivityResponse_startedAt                        smithy.SchemaExtensions
+	eGetAccountActivityResponse_completedAt                      smithy.SchemaExtensions
+	eGetAccountPlanStateRequest                                  smithy.SchemaExtensions
+	eGetAccountPlanStateResponse                                 smithy.SchemaExtensions
+	eGetAccountPlanStateResponse_accountId                       smithy.SchemaExtensions
+	eGetAccountPlanStateResponse_accountPlanType                 smithy.SchemaExtensions
+	eGetAccountPlanStateResponse_accountPlanStatus               smithy.SchemaExtensions
+	eGetAccountPlanStateResponse_accountPlanRemainingCredits     smithy.SchemaExtensions
+	eGetAccountPlanStateResponse_accountPlanExpirationDate       smithy.SchemaExtensions
+	eGetFreeTierUsageRequest                                     smithy.SchemaExtensions
+	eGetFreeTierUsageRequest_filter                              smithy.SchemaExtensions
+	eGetFreeTierUsageRequest_maxResults                          smithy.SchemaExtensions
+	eGetFreeTierUsageRequest_nextToken                           smithy.SchemaExtensions
+	eGetFreeTierUsageResponse                                    smithy.SchemaExtensions
+	eGetFreeTierUsageResponse_freeTierUsages                     smithy.SchemaExtensions
+	eGetFreeTierUsageResponse_nextToken                          smithy.SchemaExtensions
+	eListAccountActivitiesRequest                                smithy.SchemaExtensions
+	eListAccountActivitiesRequest_filterActivityStatuses         smithy.SchemaExtensions
+	eListAccountActivitiesRequest_nextToken                      smithy.SchemaExtensions
+	eListAccountActivitiesRequest_maxResults                     smithy.SchemaExtensions
+	eListAccountActivitiesRequest_languageCode                   smithy.SchemaExtensions
+	eListAccountActivitiesResponse                               smithy.SchemaExtensions
+	eListAccountActivitiesResponse_activities                    smithy.SchemaExtensions
+	eListAccountActivitiesResponse_nextToken                     smithy.SchemaExtensions
+	eUpgradeAccountPlanRequest                                   smithy.SchemaExtensions
+	eUpgradeAccountPlanRequest_accountPlanType                   smithy.SchemaExtensions
+	eUpgradeAccountPlanResponse                                  smithy.SchemaExtensions
+	eUpgradeAccountPlanResponse_accountId                        smithy.SchemaExtensions
+	eUpgradeAccountPlanResponse_accountPlanType                  smithy.SchemaExtensions
+	eUpgradeAccountPlanResponse_accountPlanStatus                smithy.SchemaExtensions
+)
+
+var (
+	iGetAccountActivity            = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountActivity"}
+	iGetAccountPlanState           = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountPlanState"}
+	iGetFreeTierUsage              = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetFreeTierUsage"}
+	iListAccountActivities         = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ListAccountActivities"}
+	iUpgradeAccountPlan            = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "UpgradeAccountPlan"}
+	i_AWSFreeTierService           = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "AWSFreeTierService"}
+	iAccessDeniedException         = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "AccessDeniedException"}
+	i_AccountId                    = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "AccountId"}
+	iAccountPlanStatus             = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "AccountPlanStatus"}
+	iAccountPlanType               = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "AccountPlanType"}
+	i_Activities                   = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Activities"}
+	i_ActivityId                   = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ActivityId"}
+	iActivityReward                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ActivityReward"}
+	iActivityStatus                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ActivityStatus"}
+	iActivitySummary               = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ActivitySummary"}
+	iCurrencyCode                  = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "CurrencyCode"}
+	iDimension                     = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Dimension"}
+	iDimensionValues               = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "DimensionValues"}
+	iExpression                    = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Expression"}
+	i_Expressions                  = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Expressions"}
+	i_FilterActivityStatuses       = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "FilterActivityStatuses"}
+	iFreeTierUsage                 = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "FreeTierUsage"}
+	i_FreeTierUsages               = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "FreeTierUsages"}
+	i_GenericDouble                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GenericDouble"}
+	i_GenericString                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GenericString"}
+	iInternalServerException       = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "InternalServerException"}
+	iLanguageCode                  = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "LanguageCode"}
+	iMatchOption                   = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "MatchOption"}
+	i_MatchOptions                 = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "MatchOptions"}
+	i_MaxResults                   = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "MaxResults"}
+	iMonetaryAmount                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "MonetaryAmount"}
+	i_NextPageToken                = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "NextPageToken"}
+	iResourceNotFoundException     = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ResourceNotFoundException"}
+	iThrottlingException           = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ThrottlingException"}
+	iValidationException           = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ValidationException"}
+	i_Value                        = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Value"}
+	i_Values                       = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "Values"}
+	iGetAccountActivityRequest     = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountActivityRequest"}
+	iGetAccountActivityResponse    = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountActivityResponse"}
+	iGetAccountPlanStateRequest    = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountPlanStateRequest"}
+	iGetAccountPlanStateResponse   = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetAccountPlanStateResponse"}
+	iGetFreeTierUsageRequest       = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetFreeTierUsageRequest"}
+	iGetFreeTierUsageResponse      = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "GetFreeTierUsageResponse"}
+	iListAccountActivitiesRequest  = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ListAccountActivitiesRequest"}
+	iListAccountActivitiesResponse = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "ListAccountActivitiesResponse"}
+	iUpgradeAccountPlanRequest     = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "UpgradeAccountPlanRequest"}
+	iUpgradeAccountPlanResponse    = smithy.ShapeName{Namespace: "com.amazonaws.freetier", Name: "UpgradeAccountPlanResponse"}
+	pUnit                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccountPlanStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountPlanStatus_NOT_STARTED, &sAccountPlanStatus_ACTIVE, &sAccountPlanStatus_EXPIRED}}
+var mAccountPlanType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountPlanType_FREE, &sAccountPlanType_PAID}}
+var m_Activities = smithy.SchemaMembers{List: []*smithy.Schema{&s_Activities_member}}
+var mActivityReward = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityReward_credit}}
+var mActivityStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityStatus_NOT_STARTED, &sActivityStatus_IN_PROGRESS, &sActivityStatus_COMPLETED, &sActivityStatus_EXPIRING}}
+var mActivitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sActivitySummary_activityId, &sActivitySummary_title, &sActivitySummary_reward, &sActivitySummary_status}}
+var mCurrencyCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCurrencyCode_USD}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_SERVICE, &sDimension_OPERATION, &sDimension_USAGE_TYPE, &sDimension_REGION, &sDimension_FREE_TIER_TYPE, &sDimension_DESCRIPTION, &sDimension_USAGE_PERCENTAGE}}
+var mDimensionValues = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionValues_Key, &sDimensionValues_Values, &sDimensionValues_MatchOptions}}
+var mExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sExpression_Or, &sExpression_And, &sExpression_Not, &sExpression_Dimensions}}
+var m_Expressions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Expressions_member}}
+var m_FilterActivityStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterActivityStatuses_member}}
+var mFreeTierUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sFreeTierUsage_service, &sFreeTierUsage_operation, &sFreeTierUsage_usageType, &sFreeTierUsage_region, &sFreeTierUsage_actualUsageAmount, &sFreeTierUsage_forecastedUsageAmount, &sFreeTierUsage_limit, &sFreeTierUsage_unit, &sFreeTierUsage_description, &sFreeTierUsage_freeTierType}, Hash: &hFreeTierUsage}
+var m_FreeTierUsages = smithy.SchemaMembers{List: []*smithy.Schema{&s_FreeTierUsages_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageCode_EN_US, &sLanguageCode_EN_GB, &sLanguageCode_ID_ID, &sLanguageCode_DE_DE, &sLanguageCode_ES_ES, &sLanguageCode_FR_FR, &sLanguageCode_JA_JP, &sLanguageCode_IT_IT, &sLanguageCode_PT_PT, &sLanguageCode_KO_KR, &sLanguageCode_ZH_CN, &sLanguageCode_ZH_TW, &sLanguageCode_TR_TR}, Hash: &hLanguageCode}
+var mMatchOption = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchOption_EQUALS, &sMatchOption_STARTS_WITH, &sMatchOption_ENDS_WITH, &sMatchOption_CONTAINS, &sMatchOption_GREATER_THAN_OR_EQUAL}}
+var m_MatchOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_MatchOptions_member}}
+var mMonetaryAmount = smithy.SchemaMembers{List: []*smithy.Schema{&sMonetaryAmount_amount, &sMonetaryAmount_unit}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var mGetAccountActivityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountActivityRequest_activityId, &sGetAccountActivityRequest_languageCode}}
+var mGetAccountActivityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountActivityResponse_activityId, &sGetAccountActivityResponse_title, &sGetAccountActivityResponse_description, &sGetAccountActivityResponse_status, &sGetAccountActivityResponse_instructionsUrl, &sGetAccountActivityResponse_reward, &sGetAccountActivityResponse_estimatedTimeToCompleteInMinutes, &sGetAccountActivityResponse_expiresAt, &sGetAccountActivityResponse_startedAt, &sGetAccountActivityResponse_completedAt}, Hash: &hGetAccountActivityResponse}
+var mGetAccountPlanStateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountPlanStateResponse_accountId, &sGetAccountPlanStateResponse_accountPlanType, &sGetAccountPlanStateResponse_accountPlanStatus, &sGetAccountPlanStateResponse_accountPlanRemainingCredits, &sGetAccountPlanStateResponse_accountPlanExpirationDate}}
+var mGetFreeTierUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFreeTierUsageRequest_filter, &sGetFreeTierUsageRequest_maxResults, &sGetFreeTierUsageRequest_nextToken}}
+var mGetFreeTierUsageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFreeTierUsageResponse_freeTierUsages, &sGetFreeTierUsageResponse_nextToken}}
+var mListAccountActivitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountActivitiesRequest_filterActivityStatuses, &sListAccountActivitiesRequest_nextToken, &sListAccountActivitiesRequest_maxResults, &sListAccountActivitiesRequest_languageCode}}
+var mListAccountActivitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountActivitiesResponse_activities, &sListAccountActivitiesResponse_nextToken}}
+var mUpgradeAccountPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeAccountPlanRequest_accountPlanType}}
+var mUpgradeAccountPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeAccountPlanResponse_accountId, &sUpgradeAccountPlanResponse_accountPlanType, &sUpgradeAccountPlanResponse_accountPlanStatus}}
+
+var hFreeTierUsage = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	8, 0, 0, 0, 5, 0, 10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 2, 0, 1, 6,
+	0, 0, 9, 0, 3, 0, 0, 0,
+}}
+var hLanguageCode = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	9, 0, 0, 3, 1, 0, 0, 4, 0, 0, 0, 11, 0, 0, 0, 0, 0, 10, 0, 5, 0, 6, 2, 12,
+	8, 13, 0, 0, 0, 0, 7, 0,
+}}
+var hGetAccountActivityResponse = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 9, 0, 0, 8, 2, 4, 3, 0, 6, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0,
+	0, 0, 0, 0, 10, 0, 7, 0,
+}}
+
+var sGetAccountActivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountActivity, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountActivity})
+var sGetAccountPlanState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPlanState, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountPlanState})
+var sGetFreeTierUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFreeTierUsage, Type: smithy.ShapeTypeOperation, Ext: &eGetFreeTierUsage})
+var sListAccountActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountActivities, Type: smithy.ShapeTypeOperation, Ext: &eListAccountActivities})
+var sUpgradeAccountPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAccountPlan, Type: smithy.ShapeTypeOperation, Ext: &eUpgradeAccountPlan})
+var s_AWSFreeTierService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSFreeTierService, Type: smithy.ShapeTypeService, Ext: &e_AWSFreeTierService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sAccountPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountPlanStatus, Members: &mAccountPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccountPlanStatus})
+var sAccountPlanStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountPlanStatus_NOT_STARTED})
+var sAccountPlanStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountPlanStatus_ACTIVE})
+var sAccountPlanStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountPlanStatus_EXPIRED})
+var sAccountPlanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountPlanType, Members: &mAccountPlanType, Type: smithy.ShapeTypeEnum, Ext: &eAccountPlanType})
+var sAccountPlanType_FREE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountPlanType_FREE})
+var sAccountPlanType_PAID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountPlanType_PAID})
+var s_Activities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Activities, Members: &m_Activities, Type: smithy.ShapeTypeList, Ext: &e_Activities})
+var s_Activities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActivitySummary, Members: &mActivitySummary, Type: smithy.ShapeTypeStructure, Ext: &e_Activities_member})
+var s_ActivityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivityId, Type: smithy.ShapeTypeString, Ext: &e_ActivityId})
+var sActivityReward = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityReward, Members: &mActivityReward, Type: smithy.ShapeTypeUnion, Ext: &eActivityReward})
+var sActivityReward_credit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credit", ID: &iMonetaryAmount, Members: &mMonetaryAmount, Type: smithy.ShapeTypeStructure, Ext: &eActivityReward_credit})
+var sActivityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityStatus, Members: &mActivityStatus, Type: smithy.ShapeTypeEnum, Ext: &eActivityStatus})
+var sActivityStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivityStatus_NOT_STARTED})
+var sActivityStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivityStatus_IN_PROGRESS})
+var sActivityStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivityStatus_COMPLETED})
+var sActivityStatus_EXPIRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActivityStatus_EXPIRING})
+var sActivitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivitySummary, Members: &mActivitySummary, Type: smithy.ShapeTypeStructure, Ext: &eActivitySummary})
+var sActivitySummary_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString, Ext: &eActivitySummary_activityId})
+var sActivitySummary_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eActivitySummary_title})
+var sActivitySummary_reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reward", ID: &iActivityReward, Members: &mActivityReward, Type: smithy.ShapeTypeUnion, Ext: &eActivitySummary_reward})
+var sActivitySummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActivityStatus, Members: &mActivityStatus, Type: smithy.ShapeTypeEnum, Ext: &eActivitySummary_status})
+var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eCurrencyCode})
+var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_USD})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eDimension})
+var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SERVICE})
+var sDimension_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_OPERATION})
+var sDimension_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_USAGE_TYPE})
+var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_REGION})
+var sDimension_FREE_TIER_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_TIER_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_FREE_TIER_TYPE})
+var sDimension_DESCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_DESCRIPTION})
+var sDimension_USAGE_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_USAGE_PERCENTAGE})
+var sDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValues, Members: &mDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &eDimensionValues})
+var sDimensionValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eDimensionValues_Key})
+var sDimensionValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eDimensionValues_Values})
+var sDimensionValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &eDimensionValues_MatchOptions})
+var sExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression})
+var sExpression_Or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Or", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &eExpression_Or})
+var sExpression_And = smithy.NewStaticSchema(smithy.StaticSchema{Member: "And", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &eExpression_And})
+var sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Not})
+var sExpression_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &iDimensionValues, Members: &mDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Dimensions})
+var s_Expressions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &e_Expressions})
+var s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &e_Expressions_member})
+var s_FilterActivityStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterActivityStatuses, Members: &m_FilterActivityStatuses, Type: smithy.ShapeTypeList, Ext: &e_FilterActivityStatuses})
+var s_FilterActivityStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActivityStatus, Members: &mActivityStatus, Type: smithy.ShapeTypeEnum, Ext: &e_FilterActivityStatuses_member})
+var sFreeTierUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFreeTierUsage, Members: &mFreeTierUsage, Type: smithy.ShapeTypeStructure, Ext: &eFreeTierUsage})
+var sFreeTierUsage_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_service})
+var sFreeTierUsage_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_operation})
+var sFreeTierUsage_usageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageType", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_usageType})
+var sFreeTierUsage_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_region})
+var sFreeTierUsage_actualUsageAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actualUsageAmount", ID: &i_GenericDouble, Type: smithy.ShapeTypeDouble, Ext: &eFreeTierUsage_actualUsageAmount})
+var sFreeTierUsage_forecastedUsageAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forecastedUsageAmount", ID: &i_GenericDouble, Type: smithy.ShapeTypeDouble, Ext: &eFreeTierUsage_forecastedUsageAmount})
+var sFreeTierUsage_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_GenericDouble, Type: smithy.ShapeTypeDouble, Ext: &eFreeTierUsage_limit})
+var sFreeTierUsage_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_unit})
+var sFreeTierUsage_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_description})
+var sFreeTierUsage_freeTierType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "freeTierType", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eFreeTierUsage_freeTierType})
+var s_FreeTierUsages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FreeTierUsages, Members: &m_FreeTierUsages, Type: smithy.ShapeTypeList, Ext: &e_FreeTierUsages})
+var s_FreeTierUsages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFreeTierUsage, Members: &mFreeTierUsage, Type: smithy.ShapeTypeStructure, Ext: &e_FreeTierUsages_member})
+var s_GenericDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericDouble, Type: smithy.ShapeTypeDouble, Ext: &e_GenericDouble})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eLanguageCode})
+var sLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_EN_US})
+var sLanguageCode_EN_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_EN_GB})
+var sLanguageCode_ID_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ID_ID})
+var sLanguageCode_DE_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE_DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_DE_DE})
+var sLanguageCode_ES_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ES_ES})
+var sLanguageCode_FR_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR_FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_FR_FR})
+var sLanguageCode_JA_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JA_JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_JA_JP})
+var sLanguageCode_IT_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_IT_IT})
+var sLanguageCode_PT_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT_PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_PT_PT})
+var sLanguageCode_KO_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KO_KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_KO_KR})
+var sLanguageCode_ZH_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZH_CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ZH_CN})
+var sLanguageCode_ZH_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZH_TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_ZH_TW})
+var sLanguageCode_TR_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TR_TR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_TR_TR})
+var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eMatchOption})
+var sMatchOption_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_EQUALS})
+var sMatchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_STARTS_WITH})
+var sMatchOption_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_ENDS_WITH})
+var sMatchOption_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_CONTAINS})
+var sMatchOption_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_GREATER_THAN_OR_EQUAL})
+var s_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &e_MatchOptions})
+var s_MatchOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &e_MatchOptions_member})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMonetaryAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonetaryAmount, Members: &mMonetaryAmount, Type: smithy.ShapeTypeStructure, Ext: &eMonetaryAmount})
+var sMonetaryAmount_amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amount", ID: &i_GenericDouble, Type: smithy.ShapeTypeDouble, Ext: &eMonetaryAmount_amount})
+var sMonetaryAmount_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eMonetaryAmount_unit})
+var s_NextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &e_NextPageToken})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Values_member})
+var sGetAccountActivityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountActivityRequest, Members: &mGetAccountActivityRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountActivityRequest})
+var sGetAccountActivityRequest_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString, Ext: &eGetAccountActivityRequest_activityId})
+var sGetAccountActivityRequest_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountActivityRequest_languageCode})
+var sGetAccountActivityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountActivityResponse, Members: &mGetAccountActivityResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountActivityResponse})
+var sGetAccountActivityResponse_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString, Ext: &eGetAccountActivityResponse_activityId})
+var sGetAccountActivityResponse_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetAccountActivityResponse_title})
+var sGetAccountActivityResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetAccountActivityResponse_description})
+var sGetAccountActivityResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActivityStatus, Members: &mActivityStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountActivityResponse_status})
+var sGetAccountActivityResponse_instructionsUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instructionsUrl", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eGetAccountActivityResponse_instructionsUrl})
+var sGetAccountActivityResponse_reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reward", ID: &iActivityReward, Members: &mActivityReward, Type: smithy.ShapeTypeUnion, Ext: &eGetAccountActivityResponse_reward})
+var sGetAccountActivityResponse_estimatedTimeToCompleteInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedTimeToCompleteInMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetAccountActivityResponse_estimatedTimeToCompleteInMinutes})
+var sGetAccountActivityResponse_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccountActivityResponse_expiresAt})
+var sGetAccountActivityResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccountActivityResponse_startedAt})
+var sGetAccountActivityResponse_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccountActivityResponse_completedAt})
+var sGetAccountPlanStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPlanStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountPlanStateRequest})
+var sGetAccountPlanStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPlanStateResponse, Members: &mGetAccountPlanStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountPlanStateResponse})
+var sGetAccountPlanStateResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetAccountPlanStateResponse_accountId})
+var sGetAccountPlanStateResponse_accountPlanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanType", ID: &iAccountPlanType, Members: &mAccountPlanType, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountPlanStateResponse_accountPlanType})
+var sGetAccountPlanStateResponse_accountPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanStatus", ID: &iAccountPlanStatus, Members: &mAccountPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountPlanStateResponse_accountPlanStatus})
+var sGetAccountPlanStateResponse_accountPlanRemainingCredits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanRemainingCredits", ID: &iMonetaryAmount, Members: &mMonetaryAmount, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountPlanStateResponse_accountPlanRemainingCredits})
+var sGetAccountPlanStateResponse_accountPlanExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanExpirationDate", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccountPlanStateResponse_accountPlanExpirationDate})
+var sGetFreeTierUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFreeTierUsageRequest, Members: &mGetFreeTierUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFreeTierUsageRequest})
+var sGetFreeTierUsageRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eGetFreeTierUsageRequest_filter})
+var sGetFreeTierUsageRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetFreeTierUsageRequest_maxResults})
+var sGetFreeTierUsageRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eGetFreeTierUsageRequest_nextToken})
+var sGetFreeTierUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFreeTierUsageResponse, Members: &mGetFreeTierUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFreeTierUsageResponse})
+var sGetFreeTierUsageResponse_freeTierUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "freeTierUsages", ID: &i_FreeTierUsages, Members: &m_FreeTierUsages, Type: smithy.ShapeTypeList, Ext: &eGetFreeTierUsageResponse_freeTierUsages})
+var sGetFreeTierUsageResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eGetFreeTierUsageResponse_nextToken})
+var sListAccountActivitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountActivitiesRequest, Members: &mListAccountActivitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAccountActivitiesRequest})
+var sListAccountActivitiesRequest_filterActivityStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterActivityStatuses", ID: &i_FilterActivityStatuses, Members: &m_FilterActivityStatuses, Type: smithy.ShapeTypeList, Ext: &eListAccountActivitiesRequest_filterActivityStatuses})
+var sListAccountActivitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListAccountActivitiesRequest_nextToken})
+var sListAccountActivitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAccountActivitiesRequest_maxResults})
+var sListAccountActivitiesRequest_languageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eListAccountActivitiesRequest_languageCode})
+var sListAccountActivitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountActivitiesResponse, Members: &mListAccountActivitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAccountActivitiesResponse})
+var sListAccountActivitiesResponse_activities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activities", ID: &i_Activities, Members: &m_Activities, Type: smithy.ShapeTypeList, Ext: &eListAccountActivitiesResponse_activities})
+var sListAccountActivitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString, Ext: &eListAccountActivitiesResponse_nextToken})
+var sUpgradeAccountPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAccountPlanRequest, Members: &mUpgradeAccountPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeAccountPlanRequest})
+var sUpgradeAccountPlanRequest_accountPlanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanType", ID: &iAccountPlanType, Members: &mAccountPlanType, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeAccountPlanRequest_accountPlanType})
+var sUpgradeAccountPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeAccountPlanResponse, Members: &mUpgradeAccountPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeAccountPlanResponse})
+var sUpgradeAccountPlanResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpgradeAccountPlanResponse_accountId})
+var sUpgradeAccountPlanResponse_accountPlanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanType", ID: &iAccountPlanType, Members: &mAccountPlanType, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeAccountPlanResponse_accountPlanType})
+var sUpgradeAccountPlanResponse_accountPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountPlanStatus", ID: &iAccountPlanStatus, Members: &mAccountPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpgradeAccountPlanResponse_accountPlanStatus})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _GenericString)
-
-	AccountPlanStatus_NOT_STARTED = AccountPlanStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	AccountPlanStatus_ACTIVE = AccountPlanStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AccountPlanStatus_EXPIRED = AccountPlanStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	AccountPlanType_FREE = AccountPlanType.AddMember("FREE", smithyprelude.Unit)
-
-	AccountPlanType_PAID = AccountPlanType.AddMember("PAID", smithyprelude.Unit)
-
-	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
-
-	MonetaryAmount_amount = MonetaryAmount.AddMember("amount", _GenericDouble)
-
-	MonetaryAmount_unit = MonetaryAmount.AddMember("unit", CurrencyCode)
-
-	ActivityReward_credit = ActivityReward.AddMember("credit", MonetaryAmount)
-
-	ActivityStatus_NOT_STARTED = ActivityStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	ActivityStatus_IN_PROGRESS = ActivityStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ActivityStatus_COMPLETED = ActivityStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ActivityStatus_EXPIRING = ActivityStatus.AddMember("EXPIRING", smithyprelude.Unit)
-
-	ActivitySummary_activityId = ActivitySummary.AddMember("activityId", _ActivityId)
-
-	ActivitySummary_title = ActivitySummary.AddMember("title", _GenericString)
-
-	ActivitySummary_reward = ActivitySummary.AddMember("reward", ActivityReward)
-
-	ActivitySummary_status = ActivitySummary.AddMember("status", ActivityStatus)
-
-	_Activities_member = _Activities.AddMember("member", ActivitySummary)
-
-	Dimension_SERVICE = Dimension.AddMember("SERVICE", smithyprelude.Unit)
-
-	Dimension_OPERATION = Dimension.AddMember("OPERATION", smithyprelude.Unit)
-
-	Dimension_USAGE_TYPE = Dimension.AddMember("USAGE_TYPE", smithyprelude.Unit)
-
-	Dimension_REGION = Dimension.AddMember("REGION", smithyprelude.Unit)
-
-	Dimension_FREE_TIER_TYPE = Dimension.AddMember("FREE_TIER_TYPE", smithyprelude.Unit)
-
-	Dimension_DESCRIPTION = Dimension.AddMember("DESCRIPTION", smithyprelude.Unit)
-
-	Dimension_USAGE_PERCENTAGE = Dimension.AddMember("USAGE_PERCENTAGE", smithyprelude.Unit)
-
-	_Values_member = _Values.AddMember("member", _Value)
-
-	MatchOption_EQUALS = MatchOption.AddMember("EQUALS", smithyprelude.Unit)
-
-	MatchOption_STARTS_WITH = MatchOption.AddMember("STARTS_WITH", smithyprelude.Unit)
-
-	MatchOption_ENDS_WITH = MatchOption.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	MatchOption_CONTAINS = MatchOption.AddMember("CONTAINS", smithyprelude.Unit)
-
-	MatchOption_GREATER_THAN_OR_EQUAL = MatchOption.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	_MatchOptions_member = _MatchOptions.AddMember("member", MatchOption)
-
-	DimensionValues_Key = DimensionValues.AddMember("Key", Dimension)
-
-	DimensionValues_Values = DimensionValues.AddMember("Values", _Values)
-
-	DimensionValues_MatchOptions = DimensionValues.AddMember("MatchOptions", _MatchOptions)
-
-	_Expressions_member = _Expressions.AddMember("member", Expression)
-
-	Expression_Or = Expression.AddMember("Or", _Expressions)
-
-	Expression_And = Expression.AddMember("And", _Expressions)
-
-	Expression_Not = Expression.AddMember("Not", Expression)
-
-	Expression_Dimensions = Expression.AddMember("Dimensions", DimensionValues)
-
-	_FilterActivityStatuses_member = _FilterActivityStatuses.AddMember("member", ActivityStatus)
-
-	FreeTierUsage_service = FreeTierUsage.AddMember("service", _GenericString)
-
-	FreeTierUsage_operation = FreeTierUsage.AddMember("operation", _GenericString)
-
-	FreeTierUsage_usageType = FreeTierUsage.AddMember("usageType", _GenericString)
-
-	FreeTierUsage_region = FreeTierUsage.AddMember("region", _GenericString)
-
-	FreeTierUsage_actualUsageAmount = FreeTierUsage.AddMember("actualUsageAmount", _GenericDouble)
-
-	FreeTierUsage_forecastedUsageAmount = FreeTierUsage.AddMember("forecastedUsageAmount", _GenericDouble)
-
-	FreeTierUsage_limit = FreeTierUsage.AddMember("limit", _GenericDouble)
-
-	FreeTierUsage_unit = FreeTierUsage.AddMember("unit", _GenericString)
-
-	FreeTierUsage_description = FreeTierUsage.AddMember("description", _GenericString)
-
-	FreeTierUsage_freeTierType = FreeTierUsage.AddMember("freeTierType", _GenericString)
-
-	_FreeTierUsages_member = _FreeTierUsages.AddMember("member", FreeTierUsage)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _GenericString)
-
-	LanguageCode_EN_US = LanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	LanguageCode_EN_GB = LanguageCode.AddMember("EN_GB", smithyprelude.Unit)
-
-	LanguageCode_ID_ID = LanguageCode.AddMember("ID_ID", smithyprelude.Unit)
-
-	LanguageCode_DE_DE = LanguageCode.AddMember("DE_DE", smithyprelude.Unit)
-
-	LanguageCode_ES_ES = LanguageCode.AddMember("ES_ES", smithyprelude.Unit)
-
-	LanguageCode_FR_FR = LanguageCode.AddMember("FR_FR", smithyprelude.Unit)
-
-	LanguageCode_JA_JP = LanguageCode.AddMember("JA_JP", smithyprelude.Unit)
-
-	LanguageCode_IT_IT = LanguageCode.AddMember("IT_IT", smithyprelude.Unit)
-
-	LanguageCode_PT_PT = LanguageCode.AddMember("PT_PT", smithyprelude.Unit)
-
-	LanguageCode_KO_KR = LanguageCode.AddMember("KO_KR", smithyprelude.Unit)
-
-	LanguageCode_ZH_CN = LanguageCode.AddMember("ZH_CN", smithyprelude.Unit)
-
-	LanguageCode_ZH_TW = LanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
-
-	LanguageCode_TR_TR = LanguageCode.AddMember("TR_TR", smithyprelude.Unit)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _GenericString)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _GenericString)
-
-	ValidationException_message = ValidationException.AddMember("message", _GenericString)
-
-	GetAccountActivityRequest_activityId = GetAccountActivityRequest.AddMember("activityId", _ActivityId)
-
-	GetAccountActivityRequest_languageCode = GetAccountActivityRequest.AddMember("languageCode", LanguageCode)
-
-	GetAccountActivityResponse_activityId = GetAccountActivityResponse.AddMember("activityId", _ActivityId)
-
-	GetAccountActivityResponse_title = GetAccountActivityResponse.AddMember("title", _GenericString)
-
-	GetAccountActivityResponse_description = GetAccountActivityResponse.AddMember("description", _GenericString)
-
-	GetAccountActivityResponse_status = GetAccountActivityResponse.AddMember("status", ActivityStatus)
-
-	GetAccountActivityResponse_instructionsUrl = GetAccountActivityResponse.AddMember("instructionsUrl", _GenericString)
-
-	GetAccountActivityResponse_reward = GetAccountActivityResponse.AddMember("reward", ActivityReward)
-
-	GetAccountActivityResponse_estimatedTimeToCompleteInMinutes = GetAccountActivityResponse.AddMember("estimatedTimeToCompleteInMinutes", smithyprelude.Integer)
-
-	GetAccountActivityResponse_expiresAt = GetAccountActivityResponse.AddMember("expiresAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAccountActivityResponse_startedAt = GetAccountActivityResponse.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAccountActivityResponse_completedAt = GetAccountActivityResponse.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAccountPlanStateResponse_accountId = GetAccountPlanStateResponse.AddMember("accountId", _AccountId)
-
-	GetAccountPlanStateResponse_accountPlanType = GetAccountPlanStateResponse.AddMember("accountPlanType", AccountPlanType)
-
-	GetAccountPlanStateResponse_accountPlanStatus = GetAccountPlanStateResponse.AddMember("accountPlanStatus", AccountPlanStatus)
-
-	GetAccountPlanStateResponse_accountPlanRemainingCredits = GetAccountPlanStateResponse.AddMember("accountPlanRemainingCredits", MonetaryAmount)
-
-	GetAccountPlanStateResponse_accountPlanExpirationDate = GetAccountPlanStateResponse.AddMember("accountPlanExpirationDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetFreeTierUsageRequest_filter = GetFreeTierUsageRequest.AddMember("filter", Expression)
-
-	GetFreeTierUsageRequest_maxResults = GetFreeTierUsageRequest.AddMember("maxResults", _MaxResults)
-
-	GetFreeTierUsageRequest_nextToken = GetFreeTierUsageRequest.AddMember("nextToken", _NextPageToken)
-
-	GetFreeTierUsageResponse_freeTierUsages = GetFreeTierUsageResponse.AddMember("freeTierUsages", _FreeTierUsages)
-
-	GetFreeTierUsageResponse_nextToken = GetFreeTierUsageResponse.AddMember("nextToken", _NextPageToken)
-
-	ListAccountActivitiesRequest_filterActivityStatuses = ListAccountActivitiesRequest.AddMember("filterActivityStatuses", _FilterActivityStatuses)
-
-	ListAccountActivitiesRequest_nextToken = ListAccountActivitiesRequest.AddMember("nextToken", _NextPageToken)
-
-	ListAccountActivitiesRequest_maxResults = ListAccountActivitiesRequest.AddMember("maxResults", _MaxResults)
-
-	ListAccountActivitiesRequest_languageCode = ListAccountActivitiesRequest.AddMember("languageCode", LanguageCode)
-
-	ListAccountActivitiesResponse_activities = ListAccountActivitiesResponse.AddMember("activities", _Activities)
-
-	ListAccountActivitiesResponse_nextToken = ListAccountActivitiesResponse.AddMember("nextToken", _NextPageToken)
-
-	UpgradeAccountPlanRequest_accountPlanType = UpgradeAccountPlanRequest.AddMember("accountPlanType", AccountPlanType)
-
-	UpgradeAccountPlanResponse_accountId = UpgradeAccountPlanResponse.AddMember("accountId", _AccountId)
-
-	UpgradeAccountPlanResponse_accountPlanType = UpgradeAccountPlanResponse.AddMember("accountPlanType", AccountPlanType)
-
-	UpgradeAccountPlanResponse_accountPlanStatus = UpgradeAccountPlanResponse.AddMember("accountPlanStatus", AccountPlanStatus)
-
+	sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Not})
+	s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &e_Expressions_member})
 }
+
+var GetAccountActivity = &sGetAccountActivity
+
+var GetAccountPlanState = &sGetAccountPlanState
+
+var GetFreeTierUsage = &sGetFreeTierUsage
+
+var ListAccountActivities = &sListAccountActivities
+
+var UpgradeAccountPlan = &sUpgradeAccountPlan
+
+var _AWSFreeTierService = &s_AWSFreeTierService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var AccountPlanStatus = &sAccountPlanStatus
+var AccountPlanStatus_NOT_STARTED = &sAccountPlanStatus_NOT_STARTED
+var AccountPlanStatus_ACTIVE = &sAccountPlanStatus_ACTIVE
+var AccountPlanStatus_EXPIRED = &sAccountPlanStatus_EXPIRED
+
+var AccountPlanType = &sAccountPlanType
+var AccountPlanType_FREE = &sAccountPlanType_FREE
+var AccountPlanType_PAID = &sAccountPlanType_PAID
+
+var _Activities = &s_Activities
+var _Activities_member = &s_Activities_member
+
+var _ActivityId = &s_ActivityId
+
+var ActivityReward = &sActivityReward
+var ActivityReward_credit = &sActivityReward_credit
+
+var ActivityStatus = &sActivityStatus
+var ActivityStatus_NOT_STARTED = &sActivityStatus_NOT_STARTED
+var ActivityStatus_IN_PROGRESS = &sActivityStatus_IN_PROGRESS
+var ActivityStatus_COMPLETED = &sActivityStatus_COMPLETED
+var ActivityStatus_EXPIRING = &sActivityStatus_EXPIRING
+
+var ActivitySummary = &sActivitySummary
+var ActivitySummary_activityId = &sActivitySummary_activityId
+var ActivitySummary_title = &sActivitySummary_title
+var ActivitySummary_reward = &sActivitySummary_reward
+var ActivitySummary_status = &sActivitySummary_status
+
+var CurrencyCode = &sCurrencyCode
+var CurrencyCode_USD = &sCurrencyCode_USD
+
+var Dimension = &sDimension
+var Dimension_SERVICE = &sDimension_SERVICE
+var Dimension_OPERATION = &sDimension_OPERATION
+var Dimension_USAGE_TYPE = &sDimension_USAGE_TYPE
+var Dimension_REGION = &sDimension_REGION
+var Dimension_FREE_TIER_TYPE = &sDimension_FREE_TIER_TYPE
+var Dimension_DESCRIPTION = &sDimension_DESCRIPTION
+var Dimension_USAGE_PERCENTAGE = &sDimension_USAGE_PERCENTAGE
+
+var DimensionValues = &sDimensionValues
+var DimensionValues_Key = &sDimensionValues_Key
+var DimensionValues_Values = &sDimensionValues_Values
+var DimensionValues_MatchOptions = &sDimensionValues_MatchOptions
+
+var Expression = &sExpression
+var Expression_Or = &sExpression_Or
+var Expression_And = &sExpression_And
+var Expression_Not = &sExpression_Not
+var Expression_Dimensions = &sExpression_Dimensions
+
+var _Expressions = &s_Expressions
+var _Expressions_member = &s_Expressions_member
+
+var _FilterActivityStatuses = &s_FilterActivityStatuses
+var _FilterActivityStatuses_member = &s_FilterActivityStatuses_member
+
+var FreeTierUsage = &sFreeTierUsage
+var FreeTierUsage_service = &sFreeTierUsage_service
+var FreeTierUsage_operation = &sFreeTierUsage_operation
+var FreeTierUsage_usageType = &sFreeTierUsage_usageType
+var FreeTierUsage_region = &sFreeTierUsage_region
+var FreeTierUsage_actualUsageAmount = &sFreeTierUsage_actualUsageAmount
+var FreeTierUsage_forecastedUsageAmount = &sFreeTierUsage_forecastedUsageAmount
+var FreeTierUsage_limit = &sFreeTierUsage_limit
+var FreeTierUsage_unit = &sFreeTierUsage_unit
+var FreeTierUsage_description = &sFreeTierUsage_description
+var FreeTierUsage_freeTierType = &sFreeTierUsage_freeTierType
+
+var _FreeTierUsages = &s_FreeTierUsages
+var _FreeTierUsages_member = &s_FreeTierUsages_member
+
+var _GenericDouble = &s_GenericDouble
+
+var _GenericString = &s_GenericString
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LanguageCode = &sLanguageCode
+var LanguageCode_EN_US = &sLanguageCode_EN_US
+var LanguageCode_EN_GB = &sLanguageCode_EN_GB
+var LanguageCode_ID_ID = &sLanguageCode_ID_ID
+var LanguageCode_DE_DE = &sLanguageCode_DE_DE
+var LanguageCode_ES_ES = &sLanguageCode_ES_ES
+var LanguageCode_FR_FR = &sLanguageCode_FR_FR
+var LanguageCode_JA_JP = &sLanguageCode_JA_JP
+var LanguageCode_IT_IT = &sLanguageCode_IT_IT
+var LanguageCode_PT_PT = &sLanguageCode_PT_PT
+var LanguageCode_KO_KR = &sLanguageCode_KO_KR
+var LanguageCode_ZH_CN = &sLanguageCode_ZH_CN
+var LanguageCode_ZH_TW = &sLanguageCode_ZH_TW
+var LanguageCode_TR_TR = &sLanguageCode_TR_TR
+
+var MatchOption = &sMatchOption
+var MatchOption_EQUALS = &sMatchOption_EQUALS
+var MatchOption_STARTS_WITH = &sMatchOption_STARTS_WITH
+var MatchOption_ENDS_WITH = &sMatchOption_ENDS_WITH
+var MatchOption_CONTAINS = &sMatchOption_CONTAINS
+var MatchOption_GREATER_THAN_OR_EQUAL = &sMatchOption_GREATER_THAN_OR_EQUAL
+
+var _MatchOptions = &s_MatchOptions
+var _MatchOptions_member = &s_MatchOptions_member
+
+var _MaxResults = &s_MaxResults
+
+var MonetaryAmount = &sMonetaryAmount
+var MonetaryAmount_amount = &sMonetaryAmount_amount
+var MonetaryAmount_unit = &sMonetaryAmount_unit
+
+var _NextPageToken = &s_NextPageToken
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _Value = &s_Value
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var GetAccountActivityRequest = &sGetAccountActivityRequest
+var GetAccountActivityRequest_activityId = &sGetAccountActivityRequest_activityId
+var GetAccountActivityRequest_languageCode = &sGetAccountActivityRequest_languageCode
+
+var GetAccountActivityResponse = &sGetAccountActivityResponse
+var GetAccountActivityResponse_activityId = &sGetAccountActivityResponse_activityId
+var GetAccountActivityResponse_title = &sGetAccountActivityResponse_title
+var GetAccountActivityResponse_description = &sGetAccountActivityResponse_description
+var GetAccountActivityResponse_status = &sGetAccountActivityResponse_status
+var GetAccountActivityResponse_instructionsUrl = &sGetAccountActivityResponse_instructionsUrl
+var GetAccountActivityResponse_reward = &sGetAccountActivityResponse_reward
+var GetAccountActivityResponse_estimatedTimeToCompleteInMinutes = &sGetAccountActivityResponse_estimatedTimeToCompleteInMinutes
+var GetAccountActivityResponse_expiresAt = &sGetAccountActivityResponse_expiresAt
+var GetAccountActivityResponse_startedAt = &sGetAccountActivityResponse_startedAt
+var GetAccountActivityResponse_completedAt = &sGetAccountActivityResponse_completedAt
+
+var GetAccountPlanStateRequest = &sGetAccountPlanStateRequest
+
+var GetAccountPlanStateResponse = &sGetAccountPlanStateResponse
+var GetAccountPlanStateResponse_accountId = &sGetAccountPlanStateResponse_accountId
+var GetAccountPlanStateResponse_accountPlanType = &sGetAccountPlanStateResponse_accountPlanType
+var GetAccountPlanStateResponse_accountPlanStatus = &sGetAccountPlanStateResponse_accountPlanStatus
+var GetAccountPlanStateResponse_accountPlanRemainingCredits = &sGetAccountPlanStateResponse_accountPlanRemainingCredits
+var GetAccountPlanStateResponse_accountPlanExpirationDate = &sGetAccountPlanStateResponse_accountPlanExpirationDate
+
+var GetFreeTierUsageRequest = &sGetFreeTierUsageRequest
+var GetFreeTierUsageRequest_filter = &sGetFreeTierUsageRequest_filter
+var GetFreeTierUsageRequest_maxResults = &sGetFreeTierUsageRequest_maxResults
+var GetFreeTierUsageRequest_nextToken = &sGetFreeTierUsageRequest_nextToken
+
+var GetFreeTierUsageResponse = &sGetFreeTierUsageResponse
+var GetFreeTierUsageResponse_freeTierUsages = &sGetFreeTierUsageResponse_freeTierUsages
+var GetFreeTierUsageResponse_nextToken = &sGetFreeTierUsageResponse_nextToken
+
+var ListAccountActivitiesRequest = &sListAccountActivitiesRequest
+var ListAccountActivitiesRequest_filterActivityStatuses = &sListAccountActivitiesRequest_filterActivityStatuses
+var ListAccountActivitiesRequest_nextToken = &sListAccountActivitiesRequest_nextToken
+var ListAccountActivitiesRequest_maxResults = &sListAccountActivitiesRequest_maxResults
+var ListAccountActivitiesRequest_languageCode = &sListAccountActivitiesRequest_languageCode
+
+var ListAccountActivitiesResponse = &sListAccountActivitiesResponse
+var ListAccountActivitiesResponse_activities = &sListAccountActivitiesResponse_activities
+var ListAccountActivitiesResponse_nextToken = &sListAccountActivitiesResponse_nextToken
+
+var UpgradeAccountPlanRequest = &sUpgradeAccountPlanRequest
+var UpgradeAccountPlanRequest_accountPlanType = &sUpgradeAccountPlanRequest_accountPlanType
+
+var UpgradeAccountPlanResponse = &sUpgradeAccountPlanResponse
+var UpgradeAccountPlanResponse_accountId = &sUpgradeAccountPlanResponse_accountId
+var UpgradeAccountPlanResponse_accountPlanType = &sUpgradeAccountPlanResponse_accountPlanType
+var UpgradeAccountPlanResponse_accountPlanStatus = &sUpgradeAccountPlanResponse_accountPlanStatus
+
+var AWSFreeTierService = &smithy.ServiceSchema{Schema: &s_AWSFreeTierService, Version: "2023-09-07"}

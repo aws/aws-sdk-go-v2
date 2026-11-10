@@ -4,596 +4,605 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var Search = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Search",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	eSearch                             smithy.SchemaExtensions
+	eSuggest                            smithy.SchemaExtensions
+	eUploadDocuments                    smithy.SchemaExtensions
+	e_AmazonCloudSearch2013             smithy.SchemaExtensions
+	e_Adds                              smithy.SchemaExtensions
+	e_Blob                              smithy.SchemaExtensions
+	eBucket                             smithy.SchemaExtensions
+	eBucket_value                       smithy.SchemaExtensions
+	eBucket_count                       smithy.SchemaExtensions
+	eBucketInfo                         smithy.SchemaExtensions
+	eBucketInfo_buckets                 smithy.SchemaExtensions
+	e_BucketList                        smithy.SchemaExtensions
+	e_BucketList_member                 smithy.SchemaExtensions
+	eContentType                        smithy.SchemaExtensions
+	eContentType_application_json       smithy.SchemaExtensions
+	eContentType_application_xml        smithy.SchemaExtensions
+	e_Cursor                            smithy.SchemaExtensions
+	e_Deletes                           smithy.SchemaExtensions
+	eDocumentServiceException           smithy.SchemaExtensions
+	eDocumentServiceException_status    smithy.SchemaExtensions
+	eDocumentServiceException_message   smithy.SchemaExtensions
+	eDocumentServiceWarning             smithy.SchemaExtensions
+	eDocumentServiceWarning_message     smithy.SchemaExtensions
+	e_DocumentServiceWarnings           smithy.SchemaExtensions
+	e_DocumentServiceWarnings_member    smithy.SchemaExtensions
+	e_Double                            smithy.SchemaExtensions
+	e_Expr                              smithy.SchemaExtensions
+	e_Exprs                             smithy.SchemaExtensions
+	e_Exprs_key                         smithy.SchemaExtensions
+	e_Exprs_value                       smithy.SchemaExtensions
+	e_Facet                             smithy.SchemaExtensions
+	e_Facets                            smithy.SchemaExtensions
+	e_Facets_key                        smithy.SchemaExtensions
+	e_Facets_value                      smithy.SchemaExtensions
+	e_Fields                            smithy.SchemaExtensions
+	e_Fields_key                        smithy.SchemaExtensions
+	e_Fields_value                      smithy.SchemaExtensions
+	eFieldStats                         smithy.SchemaExtensions
+	eFieldStats_min                     smithy.SchemaExtensions
+	eFieldStats_max                     smithy.SchemaExtensions
+	eFieldStats_count                   smithy.SchemaExtensions
+	eFieldStats_missing                 smithy.SchemaExtensions
+	eFieldStats_sum                     smithy.SchemaExtensions
+	eFieldStats_sumOfSquares            smithy.SchemaExtensions
+	eFieldStats_mean                    smithy.SchemaExtensions
+	eFieldStats_stddev                  smithy.SchemaExtensions
+	e_FieldValue                        smithy.SchemaExtensions
+	e_FieldValue_member                 smithy.SchemaExtensions
+	e_FilterQuery                       smithy.SchemaExtensions
+	e_Highlight                         smithy.SchemaExtensions
+	e_Highlights                        smithy.SchemaExtensions
+	e_Highlights_key                    smithy.SchemaExtensions
+	e_Highlights_value                  smithy.SchemaExtensions
+	eHit                                smithy.SchemaExtensions
+	eHit_id                             smithy.SchemaExtensions
+	eHit_fields                         smithy.SchemaExtensions
+	eHit_exprs                          smithy.SchemaExtensions
+	eHit_highlights                     smithy.SchemaExtensions
+	e_HitList                           smithy.SchemaExtensions
+	e_HitList_member                    smithy.SchemaExtensions
+	eHits                               smithy.SchemaExtensions
+	eHits_found                         smithy.SchemaExtensions
+	eHits_start                         smithy.SchemaExtensions
+	eHits_cursor                        smithy.SchemaExtensions
+	eHits_hit                           smithy.SchemaExtensions
+	e_Long                              smithy.SchemaExtensions
+	e_Partial                           smithy.SchemaExtensions
+	e_Query                             smithy.SchemaExtensions
+	e_QueryOptions                      smithy.SchemaExtensions
+	eQueryParser                        smithy.SchemaExtensions
+	eQueryParser_simple                 smithy.SchemaExtensions
+	eQueryParser_structured             smithy.SchemaExtensions
+	eQueryParser_lucene                 smithy.SchemaExtensions
+	eQueryParser_dismax                 smithy.SchemaExtensions
+	e_Return                            smithy.SchemaExtensions
+	eSearchException                    smithy.SchemaExtensions
+	eSearchException_message            smithy.SchemaExtensions
+	eSearchStatus                       smithy.SchemaExtensions
+	eSearchStatus_timems                smithy.SchemaExtensions
+	eSearchStatus_rid                   smithy.SchemaExtensions
+	e_Size                              smithy.SchemaExtensions
+	e_Sort                              smithy.SchemaExtensions
+	e_Start                             smithy.SchemaExtensions
+	e_Stat                              smithy.SchemaExtensions
+	e_Stats                             smithy.SchemaExtensions
+	e_Stats_key                         smithy.SchemaExtensions
+	e_Stats_value                       smithy.SchemaExtensions
+	e_String                            smithy.SchemaExtensions
+	e_Suggester                         smithy.SchemaExtensions
+	eSuggestionMatch                    smithy.SchemaExtensions
+	eSuggestionMatch_suggestion         smithy.SchemaExtensions
+	eSuggestionMatch_score              smithy.SchemaExtensions
+	eSuggestionMatch_id                 smithy.SchemaExtensions
+	e_Suggestions                       smithy.SchemaExtensions
+	e_Suggestions_member                smithy.SchemaExtensions
+	e_SuggestionsSize                   smithy.SchemaExtensions
+	eSuggestModel                       smithy.SchemaExtensions
+	eSuggestModel_query                 smithy.SchemaExtensions
+	eSuggestModel_found                 smithy.SchemaExtensions
+	eSuggestModel_suggestions           smithy.SchemaExtensions
+	eSuggestStatus                      smithy.SchemaExtensions
+	eSuggestStatus_timems               smithy.SchemaExtensions
+	eSuggestStatus_rid                  smithy.SchemaExtensions
+	eSearchRequest                      smithy.SchemaExtensions
+	eSearchRequest_cursor               smithy.SchemaExtensions
+	eSearchRequest_expr                 smithy.SchemaExtensions
+	eSearchRequest_facet                smithy.SchemaExtensions
+	eSearchRequest_filterQuery          smithy.SchemaExtensions
+	eSearchRequest_highlight            smithy.SchemaExtensions
+	eSearchRequest_partial              smithy.SchemaExtensions
+	eSearchRequest_query                smithy.SchemaExtensions
+	eSearchRequest_queryOptions         smithy.SchemaExtensions
+	eSearchRequest_queryParser          smithy.SchemaExtensions
+	eSearchRequest_return               smithy.SchemaExtensions
+	eSearchRequest_size                 smithy.SchemaExtensions
+	eSearchRequest_sort                 smithy.SchemaExtensions
+	eSearchRequest_start                smithy.SchemaExtensions
+	eSearchRequest_stats                smithy.SchemaExtensions
+	eSearchResponse                     smithy.SchemaExtensions
+	eSearchResponse_status              smithy.SchemaExtensions
+	eSearchResponse_hits                smithy.SchemaExtensions
+	eSearchResponse_facets              smithy.SchemaExtensions
+	eSearchResponse_stats               smithy.SchemaExtensions
+	eSuggestRequest                     smithy.SchemaExtensions
+	eSuggestRequest_query               smithy.SchemaExtensions
+	eSuggestRequest_suggester           smithy.SchemaExtensions
+	eSuggestRequest_size                smithy.SchemaExtensions
+	eSuggestResponse                    smithy.SchemaExtensions
+	eSuggestResponse_status             smithy.SchemaExtensions
+	eSuggestResponse_suggest            smithy.SchemaExtensions
+	eUploadDocumentsRequest             smithy.SchemaExtensions
+	eUploadDocumentsRequest_documents   smithy.SchemaExtensions
+	eUploadDocumentsRequest_contentType smithy.SchemaExtensions
+	eUploadDocumentsResponse            smithy.SchemaExtensions
+	eUploadDocumentsResponse_status     smithy.SchemaExtensions
+	eUploadDocumentsResponse_adds       smithy.SchemaExtensions
+	eUploadDocumentsResponse_deletes    smithy.SchemaExtensions
+	eUploadDocumentsResponse_warnings   smithy.SchemaExtensions
+)
+
+var (
+	iSearch                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Search"}
+	iSuggest                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Suggest"}
+	iUploadDocuments          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "UploadDocuments"}
+	i_AmazonCloudSearch2013   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "AmazonCloudSearch2013"}
+	i_Adds                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Adds"}
+	i_Blob                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Blob"}
+	iBucket                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Bucket"}
+	iBucketInfo               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "BucketInfo"}
+	i_BucketList              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "BucketList"}
+	iContentType              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "ContentType"}
+	i_Cursor                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Cursor"}
+	i_Deletes                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Deletes"}
+	iDocumentServiceException = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "DocumentServiceException"}
+	iDocumentServiceWarning   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "DocumentServiceWarning"}
+	i_DocumentServiceWarnings = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "DocumentServiceWarnings"}
+	i_Double                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Double"}
+	i_Expr                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Expr"}
+	i_Exprs                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Exprs"}
+	i_Facet                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Facet"}
+	i_Facets                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Facets"}
+	i_Fields                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Fields"}
+	iFieldStats               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "FieldStats"}
+	i_FieldValue              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "FieldValue"}
+	i_FilterQuery             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "FilterQuery"}
+	i_Highlight               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Highlight"}
+	i_Highlights              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Highlights"}
+	iHit                      = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Hit"}
+	i_HitList                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "HitList"}
+	iHits                     = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Hits"}
+	i_Long                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Long"}
+	i_Partial                 = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Partial"}
+	i_Query                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Query"}
+	i_QueryOptions            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "QueryOptions"}
+	iQueryParser              = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "QueryParser"}
+	i_Return                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Return"}
+	iSearchException          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SearchException"}
+	iSearchStatus             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SearchStatus"}
+	i_Size                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Size"}
+	i_Sort                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Sort"}
+	i_Start                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Start"}
+	i_Stat                    = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Stat"}
+	i_Stats                   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Stats"}
+	i_String                  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "String"}
+	i_Suggester               = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Suggester"}
+	iSuggestionMatch          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestionMatch"}
+	i_Suggestions             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "Suggestions"}
+	i_SuggestionsSize         = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestionsSize"}
+	iSuggestModel             = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestModel"}
+	iSuggestStatus            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestStatus"}
+	iSearchRequest            = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SearchRequest"}
+	iSearchResponse           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SearchResponse"}
+	iSuggestRequest           = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestRequest"}
+	iSuggestResponse          = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "SuggestResponse"}
+	iUploadDocumentsRequest   = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "UploadDocumentsRequest"}
+	iUploadDocumentsResponse  = smithy.ShapeName{Namespace: "com.amazonaws.cloudsearchdomain", Name: "UploadDocumentsResponse"}
+	pUnit                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2013-01-01/search?format=sdk&pretty=true",
-	Code: 200})
-
-var Suggest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Suggest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2013-01-01/suggest?format=sdk&pretty=true",
-	Code: 200})
-
-var UploadDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "UploadDocuments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2013-01-01/documents/batch?format=sdk",
-	Code: 200})
-
-var _AmazonCloudSearch2013 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "AmazonCloudSearch2013",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://cloudsearch.amazonaws.com/doc/2013-01-01/"})
-
-var AmazonCloudSearch2013 = smithy.NewServiceSchema(_AmazonCloudSearch2013, "2013-01-01")
-
-var _Adds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Adds",
-}, smithy.ShapeTypeLong, 0)
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Bucket",
-}, smithy.ShapeTypeStructure, 2)
-var Bucket_value *smithy.Schema
-
-var Bucket_count *smithy.Schema
-
-var BucketInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "BucketInfo",
-}, smithy.ShapeTypeStructure, 1)
-var BucketInfo_buckets *smithy.Schema
-
-var _BucketList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "BucketList",
-}, smithy.ShapeTypeList, 1)
-var _BucketList_member *smithy.Schema
-
-var ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "ContentType",
-}, smithy.ShapeTypeEnum, 2)
-var ContentType_application_json *smithy.Schema
-
-var ContentType_application_xml *smithy.Schema
-
-var _Cursor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Cursor",
-}, smithy.ShapeTypeString, 0)
-
-var _Deletes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Deletes",
-}, smithy.ShapeTypeLong, 0)
-
-var DocumentServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "DocumentServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DocumentServiceException_status *smithy.Schema
-
-var DocumentServiceException_message *smithy.Schema
-
-var DocumentServiceWarning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "DocumentServiceWarning",
-}, smithy.ShapeTypeStructure, 1)
-var DocumentServiceWarning_message *smithy.Schema
-
-var _DocumentServiceWarnings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "DocumentServiceWarnings",
-}, smithy.ShapeTypeList, 1)
-var _DocumentServiceWarnings_member *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Expr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Expr",
-}, smithy.ShapeTypeString, 0)
-
-var _Exprs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Exprs",
-}, smithy.ShapeTypeMap, 2)
-var _Exprs_key *smithy.Schema
-
-var _Exprs_value *smithy.Schema
-
-var _Facet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Facet",
-}, smithy.ShapeTypeString, 0)
-
-var _Facets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Facets",
-}, smithy.ShapeTypeMap, 2)
-var _Facets_key *smithy.Schema
-
-var _Facets_value *smithy.Schema
-
-var _Fields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Fields",
-}, smithy.ShapeTypeMap, 2)
-var _Fields_key *smithy.Schema
-
-var _Fields_value *smithy.Schema
-
-var FieldStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "FieldStats",
-}, smithy.ShapeTypeStructure, 8)
-var FieldStats_min *smithy.Schema
-
-var FieldStats_max *smithy.Schema
-
-var FieldStats_count *smithy.Schema
-
-var FieldStats_missing *smithy.Schema
-
-var FieldStats_sum *smithy.Schema
-
-var FieldStats_sumOfSquares *smithy.Schema
-
-var FieldStats_mean *smithy.Schema
-
-var FieldStats_stddev *smithy.Schema
-
-var _FieldValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "FieldValue",
-}, smithy.ShapeTypeList, 1)
-var _FieldValue_member *smithy.Schema
-
-var _FilterQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "FilterQuery",
-}, smithy.ShapeTypeString, 0)
-
-var _Highlight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Highlight",
-}, smithy.ShapeTypeString, 0)
-
-var _Highlights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Highlights",
-}, smithy.ShapeTypeMap, 2)
-var _Highlights_key *smithy.Schema
-
-var _Highlights_value *smithy.Schema
-
-var Hit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Hit",
-}, smithy.ShapeTypeStructure, 4)
-var Hit_id *smithy.Schema
-
-var Hit_fields *smithy.Schema
-
-var Hit_exprs *smithy.Schema
-
-var Hit_highlights *smithy.Schema
-
-var _HitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "HitList",
-}, smithy.ShapeTypeList, 1)
-var _HitList_member *smithy.Schema
-
-var Hits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Hits",
-}, smithy.ShapeTypeStructure, 4)
-var Hits_found *smithy.Schema
-
-var Hits_start *smithy.Schema
-
-var Hits_cursor *smithy.Schema
-
-var Hits_hit *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _Partial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Partial",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Query = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Query",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "QueryOptions",
-}, smithy.ShapeTypeString, 0)
-
-var QueryParser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "QueryParser",
-}, smithy.ShapeTypeEnum, 4)
-var QueryParser_simple *smithy.Schema
-
-var QueryParser_structured *smithy.Schema
-
-var QueryParser_lucene *smithy.Schema
-
-var QueryParser_dismax *smithy.Schema
-
-var _Return = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Return",
-}, smithy.ShapeTypeString, 0)
-
-var SearchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SearchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var SearchException_message *smithy.Schema
-
-var SearchStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SearchStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SearchStatus_timems *smithy.Schema
-
-var SearchStatus_rid *smithy.Schema
-
-var _Size = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Size",
-}, smithy.ShapeTypeLong, 0)
-
-var _Sort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Sort",
-}, smithy.ShapeTypeString, 0)
-
-var _Start = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Start",
-}, smithy.ShapeTypeLong, 0)
-
-var _Stat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Stat",
-}, smithy.ShapeTypeString, 0)
-
-var _Stats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Stats",
-}, smithy.ShapeTypeMap, 2)
-var _Stats_key *smithy.Schema
-
-var _Stats_value *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _Suggester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Suggester",
-}, smithy.ShapeTypeString, 0)
-
-var SuggestionMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestionMatch",
-}, smithy.ShapeTypeStructure, 3)
-var SuggestionMatch_suggestion *smithy.Schema
-
-var SuggestionMatch_score *smithy.Schema
-
-var SuggestionMatch_id *smithy.Schema
-
-var _Suggestions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "Suggestions",
-}, smithy.ShapeTypeList, 1)
-var _Suggestions_member *smithy.Schema
-
-var _SuggestionsSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestionsSize",
-}, smithy.ShapeTypeLong, 0)
-
-var SuggestModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestModel",
-}, smithy.ShapeTypeStructure, 3)
-var SuggestModel_query *smithy.Schema
-
-var SuggestModel_found *smithy.Schema
-
-var SuggestModel_suggestions *smithy.Schema
-
-var SuggestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SuggestStatus_timems *smithy.Schema
-
-var SuggestStatus_rid *smithy.Schema
-
-var SearchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SearchRequest",
-}, smithy.ShapeTypeStructure, 14)
-var SearchRequest_cursor *smithy.Schema
-
-var SearchRequest_expr *smithy.Schema
-
-var SearchRequest_facet *smithy.Schema
-
-var SearchRequest_filterQuery *smithy.Schema
-
-var SearchRequest_highlight *smithy.Schema
-
-var SearchRequest_partial *smithy.Schema
-
-var SearchRequest_query *smithy.Schema
-
-var SearchRequest_queryOptions *smithy.Schema
-
-var SearchRequest_queryParser *smithy.Schema
-
-var SearchRequest_return *smithy.Schema
-
-var SearchRequest_size *smithy.Schema
-
-var SearchRequest_sort *smithy.Schema
-
-var SearchRequest_start *smithy.Schema
-
-var SearchRequest_stats *smithy.Schema
-
-var SearchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SearchResponse",
-}, smithy.ShapeTypeStructure, 4)
-var SearchResponse_status *smithy.Schema
-
-var SearchResponse_hits *smithy.Schema
-
-var SearchResponse_facets *smithy.Schema
-
-var SearchResponse_stats *smithy.Schema
-
-var SuggestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SuggestRequest_query *smithy.Schema
-
-var SuggestRequest_suggester *smithy.Schema
-
-var SuggestRequest_size *smithy.Schema
-
-var SuggestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "SuggestResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SuggestResponse_status *smithy.Schema
-
-var SuggestResponse_suggest *smithy.Schema
-
-var UploadDocumentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "UploadDocumentsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UploadDocumentsRequest_documents *smithy.Schema
-
-var UploadDocumentsRequest_contentType *smithy.Schema
-
-var UploadDocumentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudsearchdomain",
-	Name:      "UploadDocumentsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UploadDocumentsResponse_status *smithy.Schema
-
-var UploadDocumentsResponse_adds *smithy.Schema
-
-var UploadDocumentsResponse_deletes *smithy.Schema
-
-var UploadDocumentsResponse_warnings *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Bucket_value = Bucket.AddMember("value", _String)
-
-	Bucket_count = Bucket.AddMember("count", _Long)
-
-	_BucketList_member = _BucketList.AddMember("member", Bucket)
-
-	BucketInfo_buckets = BucketInfo.AddMember("buckets", _BucketList)
-
-	ContentType_application_json = ContentType.AddMember("application_json", smithyprelude.Unit)
-
-	ContentType_application_xml = ContentType.AddMember("application_xml", smithyprelude.Unit)
-
-	DocumentServiceException_status = DocumentServiceException.AddMember("status", _String)
-
-	DocumentServiceException_message = DocumentServiceException.AddMember("message", _String)
-
-	DocumentServiceWarning_message = DocumentServiceWarning.AddMember("message", _String)
-
-	_DocumentServiceWarnings_member = _DocumentServiceWarnings.AddMember("member", DocumentServiceWarning)
-
-	_Exprs_key = _Exprs.AddMember("key", _String)
-
-	_Exprs_value = _Exprs.AddMember("value", _String)
-
-	_Facets_key = _Facets.AddMember("key", _String)
-
-	_Facets_value = _Facets.AddMember("value", BucketInfo)
-
-	_FieldValue_member = _FieldValue.AddMember("member", _String)
-
-	_Fields_key = _Fields.AddMember("key", _String)
-
-	_Fields_value = _Fields.AddMember("value", _FieldValue)
-
-	FieldStats_min = FieldStats.AddMember("min", _String)
-
-	FieldStats_max = FieldStats.AddMember("max", _String)
-
-	FieldStats_count = FieldStats.AddMember("count", _Long)
-
-	FieldStats_missing = FieldStats.AddMember("missing", _Long)
-
-	FieldStats_sum = FieldStats.AddMember("sum", _Double)
-
-	FieldStats_sumOfSquares = FieldStats.AddMember("sumOfSquares", _Double)
-
-	FieldStats_mean = FieldStats.AddMember("mean", _String)
-
-	FieldStats_stddev = FieldStats.AddMember("stddev", _Double)
-
-	_Highlights_key = _Highlights.AddMember("key", _String)
-
-	_Highlights_value = _Highlights.AddMember("value", _String)
-
-	Hit_id = Hit.AddMember("id", _String)
-
-	Hit_fields = Hit.AddMember("fields", _Fields)
-
-	Hit_exprs = Hit.AddMember("exprs", _Exprs)
-
-	Hit_highlights = Hit.AddMember("highlights", _Highlights)
-
-	_HitList_member = _HitList.AddMember("member", Hit)
-
-	Hits_found = Hits.AddMember("found", _Long)
-
-	Hits_start = Hits.AddMember("start", _Long)
-
-	Hits_cursor = Hits.AddMember("cursor", _String)
-
-	Hits_hit = Hits.AddMember("hit", _HitList)
-
-	QueryParser_simple = QueryParser.AddMember("simple", smithyprelude.Unit)
-
-	QueryParser_structured = QueryParser.AddMember("structured", smithyprelude.Unit)
-
-	QueryParser_lucene = QueryParser.AddMember("lucene", smithyprelude.Unit)
-
-	QueryParser_dismax = QueryParser.AddMember("dismax", smithyprelude.Unit)
-
-	SearchException_message = SearchException.AddMember("message", _String)
-
-	SearchStatus_timems = SearchStatus.AddMember("timems", _Long)
-
-	SearchStatus_rid = SearchStatus.AddMember("rid", _String)
-
-	_Stats_key = _Stats.AddMember("key", _String)
-
-	_Stats_value = _Stats.AddMember("value", FieldStats)
-
-	SuggestionMatch_suggestion = SuggestionMatch.AddMember("suggestion", _String)
-
-	SuggestionMatch_score = SuggestionMatch.AddMember("score", _Long)
-
-	SuggestionMatch_id = SuggestionMatch.AddMember("id", _String)
-
-	_Suggestions_member = _Suggestions.AddMember("member", SuggestionMatch)
-
-	SuggestModel_query = SuggestModel.AddMember("query", _String)
-
-	SuggestModel_found = SuggestModel.AddMember("found", _Long)
-
-	SuggestModel_suggestions = SuggestModel.AddMember("suggestions", _Suggestions)
-
-	SuggestStatus_timems = SuggestStatus.AddMember("timems", _Long)
-
-	SuggestStatus_rid = SuggestStatus.AddMember("rid", _String)
-
-	SearchRequest_cursor = SearchRequest.AddMember("cursor", _Cursor, &smithytraits.HTTPQuery{Name: "cursor"})
-
-	SearchRequest_expr = SearchRequest.AddMember("expr", _Expr, &smithytraits.HTTPQuery{Name: "expr"})
-
-	SearchRequest_facet = SearchRequest.AddMember("facet", _Facet, &smithytraits.HTTPQuery{Name: "facet"})
-
-	SearchRequest_filterQuery = SearchRequest.AddMember("filterQuery", _FilterQuery, &smithytraits.HTTPQuery{Name: "fq"})
-
-	SearchRequest_highlight = SearchRequest.AddMember("highlight", _Highlight, &smithytraits.HTTPQuery{Name: "highlight"})
-
-	SearchRequest_partial = SearchRequest.AddMember("partial", _Partial, &smithytraits.HTTPQuery{Name: "partial"})
-
-	SearchRequest_query = SearchRequest.AddMember("query", _Query, &smithytraits.HTTPQuery{Name: "q"})
-
-	SearchRequest_queryOptions = SearchRequest.AddMember("queryOptions", _QueryOptions, &smithytraits.HTTPQuery{Name: "q.options"})
-
-	SearchRequest_queryParser = SearchRequest.AddMember("queryParser", QueryParser, &smithytraits.HTTPQuery{Name: "q.parser"})
-
-	SearchRequest_return = SearchRequest.AddMember("return", _Return, &smithytraits.HTTPQuery{Name: "return"})
-
-	SearchRequest_size = SearchRequest.AddMember("size", _Size, &smithytraits.HTTPQuery{Name: "size"})
-
-	SearchRequest_sort = SearchRequest.AddMember("sort", _Sort, &smithytraits.HTTPQuery{Name: "sort"})
-
-	SearchRequest_start = SearchRequest.AddMember("start", _Start, &smithytraits.HTTPQuery{Name: "start"})
-
-	SearchRequest_stats = SearchRequest.AddMember("stats", _Stat, &smithytraits.HTTPQuery{Name: "stats"})
-
-	SearchResponse_status = SearchResponse.AddMember("status", SearchStatus)
-
-	SearchResponse_hits = SearchResponse.AddMember("hits", Hits)
-
-	SearchResponse_facets = SearchResponse.AddMember("facets", _Facets)
-
-	SearchResponse_stats = SearchResponse.AddMember("stats", _Stats)
-
-	SuggestRequest_query = SuggestRequest.AddMember("query", _Query, &smithytraits.HTTPQuery{Name: "q"})
-
-	SuggestRequest_suggester = SuggestRequest.AddMember("suggester", _Suggester, &smithytraits.HTTPQuery{Name: "suggester"})
-
-	SuggestRequest_size = SuggestRequest.AddMember("size", _SuggestionsSize, &smithytraits.HTTPQuery{Name: "size"})
-
-	SuggestResponse_status = SuggestResponse.AddMember("status", SuggestStatus)
-
-	SuggestResponse_suggest = SuggestResponse.AddMember("suggest", SuggestModel)
-
-	UploadDocumentsRequest_documents = UploadDocumentsRequest.AddMember("documents", _Blob, &smithytraits.HTTPPayload{})
-
-	UploadDocumentsRequest_contentType = UploadDocumentsRequest.AddMember("contentType", ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	UploadDocumentsResponse_status = UploadDocumentsResponse.AddMember("status", _String)
-
-	UploadDocumentsResponse_adds = UploadDocumentsResponse.AddMember("adds", _Adds)
-
-	UploadDocumentsResponse_deletes = UploadDocumentsResponse.AddMember("deletes", _Deletes)
-
-	UploadDocumentsResponse_warnings = UploadDocumentsResponse.AddMember("warnings", _DocumentServiceWarnings)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://cloudsearch.amazonaws.com/doc/2013-01-01/"}}, DirectMask: 0x8000}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t5 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "cursor"}}, DirectMask: 0x10}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "expr"}}, DirectMask: 0x10}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "facet"}}, DirectMask: 0x10}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "fq"}}, DirectMask: 0x10}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "highlight"}}, DirectMask: 0x10}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "partial"}}, DirectMask: 0x10}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "q"}}, DirectMask: 0x10}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "q.options"}}, DirectMask: 0x10}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "q.parser"}}, DirectMask: 0x10}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "return"}}, DirectMask: 0x10}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "size"}}, DirectMask: 0x10}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sort"}}, DirectMask: 0x10}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "start"}}, DirectMask: 0x10}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "stats"}}, DirectMask: 0x10}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "suggester"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+
+var mBucket = smithy.SchemaMembers{List: []*smithy.Schema{&sBucket_value, &sBucket_count}}
+var mBucketInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBucketInfo_buckets}}
+var m_BucketList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BucketList_member}}
+var mContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sContentType_application_json, &sContentType_application_xml}}
+var mDocumentServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentServiceException_status, &sDocumentServiceException_message}}
+var mDocumentServiceWarning = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentServiceWarning_message}}
+var m_DocumentServiceWarnings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentServiceWarnings_member}}
+var m_Exprs = smithy.SchemaMembers{List: []*smithy.Schema{&s_Exprs_key, &s_Exprs_value}}
+var m_Facets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Facets_key, &s_Facets_value}}
+var m_Fields = smithy.SchemaMembers{List: []*smithy.Schema{&s_Fields_key, &s_Fields_value}}
+var mFieldStats = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldStats_min, &sFieldStats_max, &sFieldStats_count, &sFieldStats_missing, &sFieldStats_sum, &sFieldStats_sumOfSquares, &sFieldStats_mean, &sFieldStats_stddev}}
+var m_FieldValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldValue_member}}
+var m_Highlights = smithy.SchemaMembers{List: []*smithy.Schema{&s_Highlights_key, &s_Highlights_value}}
+var mHit = smithy.SchemaMembers{List: []*smithy.Schema{&sHit_id, &sHit_fields, &sHit_exprs, &sHit_highlights}}
+var m_HitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HitList_member}}
+var mHits = smithy.SchemaMembers{List: []*smithy.Schema{&sHits_found, &sHits_start, &sHits_cursor, &sHits_hit}}
+var mQueryParser = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryParser_simple, &sQueryParser_structured, &sQueryParser_lucene, &sQueryParser_dismax}}
+var mSearchException = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchException_message}}
+var mSearchStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchStatus_timems, &sSearchStatus_rid}}
+var m_Stats = smithy.SchemaMembers{List: []*smithy.Schema{&s_Stats_key, &s_Stats_value}}
+var mSuggestionMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestionMatch_suggestion, &sSuggestionMatch_score, &sSuggestionMatch_id}}
+var m_Suggestions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Suggestions_member}}
+var mSuggestModel = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestModel_query, &sSuggestModel_found, &sSuggestModel_suggestions}}
+var mSuggestStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestStatus_timems, &sSuggestStatus_rid}}
+var mSearchRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchRequest_cursor, &sSearchRequest_expr, &sSearchRequest_facet, &sSearchRequest_filterQuery, &sSearchRequest_highlight, &sSearchRequest_partial, &sSearchRequest_query, &sSearchRequest_queryOptions, &sSearchRequest_queryParser, &sSearchRequest_return, &sSearchRequest_size, &sSearchRequest_sort, &sSearchRequest_start, &sSearchRequest_stats}, Hash: &hSearchRequest}
+var mSearchResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchResponse_status, &sSearchResponse_hits, &sSearchResponse_facets, &sSearchResponse_stats}}
+var mSuggestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestRequest_query, &sSuggestRequest_suggester, &sSuggestRequest_size}}
+var mSuggestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestResponse_status, &sSuggestResponse_suggest}}
+var mUploadDocumentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUploadDocumentsRequest_documents, &sUploadDocumentsRequest_contentType}}
+var mUploadDocumentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUploadDocumentsResponse_status, &sUploadDocumentsResponse_adds, &sUploadDocumentsResponse_deletes, &sUploadDocumentsResponse_warnings}}
+
+var hSearchRequest = smithy.MemberHash{Seed: 33, Slots: []uint16{
+	9, 6, 0, 0, 3, 0, 13, 0, 5, 2, 0, 0, 0, 0, 1, 0, 14, 0, 0, 0, 4, 0, 0, 0,
+	7, 8, 11, 0, 10, 12, 0, 0,
+}}
+
+var sSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearch, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eSearch})
+var sSuggest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggest, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eSuggest})
+var sUploadDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadDocuments, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eUploadDocuments})
+var s_AmazonCloudSearch2013 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonCloudSearch2013, Traits: &t3, Type: smithy.ShapeTypeService, Ext: &e_AmazonCloudSearch2013})
+var s_Adds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Adds, Type: smithy.ShapeTypeLong, Ext: &e_Adds})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Traits: &t4, Type: smithy.ShapeTypeBlob, Ext: &e_Blob})
+var sBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBucket, Members: &mBucket, Type: smithy.ShapeTypeStructure, Ext: &eBucket})
+var sBucket_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBucket_value})
+var sBucket_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eBucket_count})
+var sBucketInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBucketInfo, Members: &mBucketInfo, Type: smithy.ShapeTypeStructure, Ext: &eBucketInfo})
+var sBucketInfo_buckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buckets", ID: &i_BucketList, Members: &m_BucketList, Type: smithy.ShapeTypeList, Ext: &eBucketInfo_buckets})
+var s_BucketList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketList, Members: &m_BucketList, Type: smithy.ShapeTypeList, Ext: &e_BucketList})
+var s_BucketList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBucket, Members: &mBucket, Type: smithy.ShapeTypeStructure, Ext: &e_BucketList_member})
+var sContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum, Ext: &eContentType})
+var sContentType_application_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application_json", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentType_application_json})
+var sContentType_application_xml = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application_xml", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentType_application_xml})
+var s_Cursor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cursor, Type: smithy.ShapeTypeString, Ext: &e_Cursor})
+var s_Deletes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Deletes, Type: smithy.ShapeTypeLong, Ext: &e_Deletes})
+var sDocumentServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentServiceException, Members: &mDocumentServiceException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eDocumentServiceException})
+var sDocumentServiceException_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDocumentServiceException_status})
+var sDocumentServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDocumentServiceException_message})
+var sDocumentServiceWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentServiceWarning, Members: &mDocumentServiceWarning, Type: smithy.ShapeTypeStructure, Ext: &eDocumentServiceWarning})
+var sDocumentServiceWarning_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDocumentServiceWarning_message})
+var s_DocumentServiceWarnings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentServiceWarnings, Members: &m_DocumentServiceWarnings, Type: smithy.ShapeTypeList, Ext: &e_DocumentServiceWarnings})
+var s_DocumentServiceWarnings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocumentServiceWarning, Members: &mDocumentServiceWarning, Type: smithy.ShapeTypeStructure, Ext: &e_DocumentServiceWarnings_member})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_Expr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expr, Type: smithy.ShapeTypeString, Ext: &e_Expr})
+var s_Exprs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Exprs, Members: &m_Exprs, Type: smithy.ShapeTypeMap, Ext: &e_Exprs})
+var s_Exprs_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Exprs_key})
+var s_Exprs_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Exprs_value})
+var s_Facet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Facet, Type: smithy.ShapeTypeString, Ext: &e_Facet})
+var s_Facets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Facets, Members: &m_Facets, Type: smithy.ShapeTypeMap, Ext: &e_Facets})
+var s_Facets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Facets_key})
+var s_Facets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iBucketInfo, Members: &mBucketInfo, Type: smithy.ShapeTypeStructure, Ext: &e_Facets_value})
+var s_Fields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Fields, Members: &m_Fields, Type: smithy.ShapeTypeMap, Ext: &e_Fields})
+var s_Fields_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Fields_key})
+var s_Fields_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FieldValue, Members: &m_FieldValue, Type: smithy.ShapeTypeList, Ext: &e_Fields_value})
+var sFieldStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldStats, Members: &mFieldStats, Type: smithy.ShapeTypeStructure, Ext: &eFieldStats})
+var sFieldStats_min = smithy.NewStaticSchema(smithy.StaticSchema{Member: "min", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFieldStats_min})
+var sFieldStats_max = smithy.NewStaticSchema(smithy.StaticSchema{Member: "max", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFieldStats_max})
+var sFieldStats_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eFieldStats_count})
+var sFieldStats_missing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missing", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eFieldStats_missing})
+var sFieldStats_sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sum", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eFieldStats_sum})
+var sFieldStats_sumOfSquares = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sumOfSquares", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eFieldStats_sumOfSquares})
+var sFieldStats_mean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mean", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFieldStats_mean})
+var sFieldStats_stddev = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stddev", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eFieldStats_stddev})
+var s_FieldValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldValue, Members: &m_FieldValue, Type: smithy.ShapeTypeList, Ext: &e_FieldValue})
+var s_FieldValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_FieldValue_member})
+var s_FilterQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterQuery, Type: smithy.ShapeTypeString, Ext: &e_FilterQuery})
+var s_Highlight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Highlight, Type: smithy.ShapeTypeString, Ext: &e_Highlight})
+var s_Highlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Highlights, Members: &m_Highlights, Type: smithy.ShapeTypeMap, Ext: &e_Highlights})
+var s_Highlights_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Highlights_key})
+var s_Highlights_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Highlights_value})
+var sHit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHit, Members: &mHit, Type: smithy.ShapeTypeStructure, Ext: &eHit})
+var sHit_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHit_id})
+var sHit_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_Fields, Members: &m_Fields, Type: smithy.ShapeTypeMap, Ext: &eHit_fields})
+var sHit_exprs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exprs", ID: &i_Exprs, Members: &m_Exprs, Type: smithy.ShapeTypeMap, Ext: &eHit_exprs})
+var sHit_highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "highlights", ID: &i_Highlights, Members: &m_Highlights, Type: smithy.ShapeTypeMap, Ext: &eHit_highlights})
+var s_HitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HitList, Members: &m_HitList, Type: smithy.ShapeTypeList, Ext: &e_HitList})
+var s_HitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHit, Members: &mHit, Type: smithy.ShapeTypeStructure, Ext: &e_HitList_member})
+var sHits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &eHits})
+var sHits_found = smithy.NewStaticSchema(smithy.StaticSchema{Member: "found", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eHits_found})
+var sHits_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eHits_start})
+var sHits_cursor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cursor", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHits_cursor})
+var sHits_hit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hit", ID: &i_HitList, Members: &m_HitList, Type: smithy.ShapeTypeList, Ext: &eHits_hit})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_Partial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Partial, Type: smithy.ShapeTypeBoolean, Ext: &e_Partial})
+var s_Query = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Query, Type: smithy.ShapeTypeString, Ext: &e_Query})
+var s_QueryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryOptions, Type: smithy.ShapeTypeString, Ext: &e_QueryOptions})
+var sQueryParser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParser, Members: &mQueryParser, Type: smithy.ShapeTypeEnum, Ext: &eQueryParser})
+var sQueryParser_simple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "simple", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryParser_simple})
+var sQueryParser_structured = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structured", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryParser_structured})
+var sQueryParser_lucene = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lucene", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryParser_lucene})
+var sQueryParser_dismax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dismax", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryParser_dismax})
+var s_Return = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Return, Type: smithy.ShapeTypeString, Ext: &e_Return})
+var sSearchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchException, Members: &mSearchException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eSearchException})
+var sSearchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSearchException_message})
+var sSearchStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchStatus, Members: &mSearchStatus, Type: smithy.ShapeTypeStructure, Ext: &eSearchStatus})
+var sSearchStatus_timems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timems", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eSearchStatus_timems})
+var sSearchStatus_rid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rid", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSearchStatus_rid})
+var s_Size = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Size, Type: smithy.ShapeTypeLong, Ext: &e_Size})
+var s_Sort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sort, Type: smithy.ShapeTypeString, Ext: &e_Sort})
+var s_Start = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Start, Type: smithy.ShapeTypeLong, Ext: &e_Start})
+var s_Stat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stat, Type: smithy.ShapeTypeString, Ext: &e_Stat})
+var s_Stats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stats, Members: &m_Stats, Type: smithy.ShapeTypeMap, Ext: &e_Stats})
+var s_Stats_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_Stats_key})
+var s_Stats_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFieldStats, Members: &mFieldStats, Type: smithy.ShapeTypeStructure, Ext: &e_Stats_value})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_Suggester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Suggester, Type: smithy.ShapeTypeString, Ext: &e_Suggester})
+var sSuggestionMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestionMatch, Members: &mSuggestionMatch, Type: smithy.ShapeTypeStructure, Ext: &eSuggestionMatch})
+var sSuggestionMatch_suggestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggestion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSuggestionMatch_suggestion})
+var sSuggestionMatch_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eSuggestionMatch_score})
+var sSuggestionMatch_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSuggestionMatch_id})
+var s_Suggestions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Suggestions, Members: &m_Suggestions, Type: smithy.ShapeTypeList, Ext: &e_Suggestions})
+var s_Suggestions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestionMatch, Members: &mSuggestionMatch, Type: smithy.ShapeTypeStructure, Ext: &e_Suggestions_member})
+var s_SuggestionsSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestionsSize, Type: smithy.ShapeTypeLong, Ext: &e_SuggestionsSize})
+var sSuggestModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestModel, Members: &mSuggestModel, Type: smithy.ShapeTypeStructure, Ext: &eSuggestModel})
+var sSuggestModel_query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "query", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSuggestModel_query})
+var sSuggestModel_found = smithy.NewStaticSchema(smithy.StaticSchema{Member: "found", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eSuggestModel_found})
+var sSuggestModel_suggestions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggestions", ID: &i_Suggestions, Members: &m_Suggestions, Type: smithy.ShapeTypeList, Ext: &eSuggestModel_suggestions})
+var sSuggestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestStatus, Members: &mSuggestStatus, Type: smithy.ShapeTypeStructure, Ext: &eSuggestStatus})
+var sSuggestStatus_timems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timems", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eSuggestStatus_timems})
+var sSuggestStatus_rid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rid", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSuggestStatus_rid})
+var sSearchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRequest, Members: &mSearchRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchRequest})
+var sSearchRequest_cursor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cursor", ID: &i_Cursor, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_cursor})
+var sSearchRequest_expr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expr", ID: &i_Expr, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_expr})
+var sSearchRequest_facet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "facet", ID: &i_Facet, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_facet})
+var sSearchRequest_filterQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterQuery", ID: &i_FilterQuery, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_filterQuery})
+var sSearchRequest_highlight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "highlight", ID: &i_Highlight, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_highlight})
+var sSearchRequest_partial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partial", ID: &i_Partial, Traits: &t11, Type: smithy.ShapeTypeBoolean, Ext: &eSearchRequest_partial})
+var sSearchRequest_query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "query", ID: &i_Query, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_query})
+var sSearchRequest_queryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryOptions", ID: &i_QueryOptions, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_queryOptions})
+var sSearchRequest_queryParser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParser", ID: &iQueryParser, Members: &mQueryParser, Traits: &t14, Type: smithy.ShapeTypeEnum, Ext: &eSearchRequest_queryParser})
+var sSearchRequest_return = smithy.NewStaticSchema(smithy.StaticSchema{Member: "return", ID: &i_Return, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_return})
+var sSearchRequest_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_Size, Traits: &t16, Type: smithy.ShapeTypeLong, Ext: &eSearchRequest_size})
+var sSearchRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &i_Sort, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_sort})
+var sSearchRequest_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &i_Start, Traits: &t18, Type: smithy.ShapeTypeLong, Ext: &eSearchRequest_start})
+var sSearchRequest_stats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stats", ID: &i_Stat, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchRequest_stats})
+var sSearchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchResponse, Members: &mSearchResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchResponse})
+var sSearchResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSearchStatus, Members: &mSearchStatus, Type: smithy.ShapeTypeStructure, Ext: &eSearchResponse_status})
+var sSearchResponse_hits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hits", ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &eSearchResponse_hits})
+var sSearchResponse_facets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "facets", ID: &i_Facets, Members: &m_Facets, Type: smithy.ShapeTypeMap, Ext: &eSearchResponse_facets})
+var sSearchResponse_stats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stats", ID: &i_Stats, Members: &m_Stats, Type: smithy.ShapeTypeMap, Ext: &eSearchResponse_stats})
+var sSuggestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestRequest, Members: &mSuggestRequest, Type: smithy.ShapeTypeStructure, Ext: &eSuggestRequest})
+var sSuggestRequest_query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "query", ID: &i_Query, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_query})
+var sSuggestRequest_suggester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggester", ID: &i_Suggester, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_suggester})
+var sSuggestRequest_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_SuggestionsSize, Traits: &t16, Type: smithy.ShapeTypeLong, Ext: &eSuggestRequest_size})
+var sSuggestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResponse, Members: &mSuggestResponse, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResponse})
+var sSuggestResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSuggestStatus, Members: &mSuggestStatus, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResponse_status})
+var sSuggestResponse_suggest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggest", ID: &iSuggestModel, Members: &mSuggestModel, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResponse_suggest})
+var sUploadDocumentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadDocumentsRequest, Members: &mUploadDocumentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUploadDocumentsRequest})
+var sUploadDocumentsRequest_documents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documents", ID: &i_Blob, Traits: &t21, Type: smithy.ShapeTypeBlob, Ext: &eUploadDocumentsRequest_documents})
+var sUploadDocumentsRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iContentType, Members: &mContentType, Traits: &t22, Type: smithy.ShapeTypeEnum, Ext: &eUploadDocumentsRequest_contentType})
+var sUploadDocumentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadDocumentsResponse, Members: &mUploadDocumentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUploadDocumentsResponse})
+var sUploadDocumentsResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUploadDocumentsResponse_status})
+var sUploadDocumentsResponse_adds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adds", ID: &i_Adds, Type: smithy.ShapeTypeLong, Ext: &eUploadDocumentsResponse_adds})
+var sUploadDocumentsResponse_deletes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletes", ID: &i_Deletes, Type: smithy.ShapeTypeLong, Ext: &eUploadDocumentsResponse_deletes})
+var sUploadDocumentsResponse_warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warnings", ID: &i_DocumentServiceWarnings, Members: &m_DocumentServiceWarnings, Type: smithy.ShapeTypeList, Ext: &eUploadDocumentsResponse_warnings})
+
+var Search = &sSearch
+
+var Suggest = &sSuggest
+
+var UploadDocuments = &sUploadDocuments
+
+var _AmazonCloudSearch2013 = &s_AmazonCloudSearch2013
+
+var _Adds = &s_Adds
+
+var _Blob = &s_Blob
+
+var Bucket = &sBucket
+var Bucket_value = &sBucket_value
+var Bucket_count = &sBucket_count
+
+var BucketInfo = &sBucketInfo
+var BucketInfo_buckets = &sBucketInfo_buckets
+
+var _BucketList = &s_BucketList
+var _BucketList_member = &s_BucketList_member
+
+var ContentType = &sContentType
+var ContentType_application_json = &sContentType_application_json
+var ContentType_application_xml = &sContentType_application_xml
+
+var _Cursor = &s_Cursor
+
+var _Deletes = &s_Deletes
+
+var DocumentServiceException = &sDocumentServiceException
+var DocumentServiceException_status = &sDocumentServiceException_status
+var DocumentServiceException_message = &sDocumentServiceException_message
+
+var DocumentServiceWarning = &sDocumentServiceWarning
+var DocumentServiceWarning_message = &sDocumentServiceWarning_message
+
+var _DocumentServiceWarnings = &s_DocumentServiceWarnings
+var _DocumentServiceWarnings_member = &s_DocumentServiceWarnings_member
+
+var _Double = &s_Double
+
+var _Expr = &s_Expr
+
+var _Exprs = &s_Exprs
+var _Exprs_key = &s_Exprs_key
+var _Exprs_value = &s_Exprs_value
+
+var _Facet = &s_Facet
+
+var _Facets = &s_Facets
+var _Facets_key = &s_Facets_key
+var _Facets_value = &s_Facets_value
+
+var _Fields = &s_Fields
+var _Fields_key = &s_Fields_key
+var _Fields_value = &s_Fields_value
+
+var FieldStats = &sFieldStats
+var FieldStats_min = &sFieldStats_min
+var FieldStats_max = &sFieldStats_max
+var FieldStats_count = &sFieldStats_count
+var FieldStats_missing = &sFieldStats_missing
+var FieldStats_sum = &sFieldStats_sum
+var FieldStats_sumOfSquares = &sFieldStats_sumOfSquares
+var FieldStats_mean = &sFieldStats_mean
+var FieldStats_stddev = &sFieldStats_stddev
+
+var _FieldValue = &s_FieldValue
+var _FieldValue_member = &s_FieldValue_member
+
+var _FilterQuery = &s_FilterQuery
+
+var _Highlight = &s_Highlight
+
+var _Highlights = &s_Highlights
+var _Highlights_key = &s_Highlights_key
+var _Highlights_value = &s_Highlights_value
+
+var Hit = &sHit
+var Hit_id = &sHit_id
+var Hit_fields = &sHit_fields
+var Hit_exprs = &sHit_exprs
+var Hit_highlights = &sHit_highlights
+
+var _HitList = &s_HitList
+var _HitList_member = &s_HitList_member
+
+var Hits = &sHits
+var Hits_found = &sHits_found
+var Hits_start = &sHits_start
+var Hits_cursor = &sHits_cursor
+var Hits_hit = &sHits_hit
+
+var _Long = &s_Long
+
+var _Partial = &s_Partial
+
+var _Query = &s_Query
+
+var _QueryOptions = &s_QueryOptions
+
+var QueryParser = &sQueryParser
+var QueryParser_simple = &sQueryParser_simple
+var QueryParser_structured = &sQueryParser_structured
+var QueryParser_lucene = &sQueryParser_lucene
+var QueryParser_dismax = &sQueryParser_dismax
+
+var _Return = &s_Return
+
+var SearchException = &sSearchException
+var SearchException_message = &sSearchException_message
+
+var SearchStatus = &sSearchStatus
+var SearchStatus_timems = &sSearchStatus_timems
+var SearchStatus_rid = &sSearchStatus_rid
+
+var _Size = &s_Size
+
+var _Sort = &s_Sort
+
+var _Start = &s_Start
+
+var _Stat = &s_Stat
+
+var _Stats = &s_Stats
+var _Stats_key = &s_Stats_key
+var _Stats_value = &s_Stats_value
+
+var _String = &s_String
+
+var _Suggester = &s_Suggester
+
+var SuggestionMatch = &sSuggestionMatch
+var SuggestionMatch_suggestion = &sSuggestionMatch_suggestion
+var SuggestionMatch_score = &sSuggestionMatch_score
+var SuggestionMatch_id = &sSuggestionMatch_id
+
+var _Suggestions = &s_Suggestions
+var _Suggestions_member = &s_Suggestions_member
+
+var _SuggestionsSize = &s_SuggestionsSize
+
+var SuggestModel = &sSuggestModel
+var SuggestModel_query = &sSuggestModel_query
+var SuggestModel_found = &sSuggestModel_found
+var SuggestModel_suggestions = &sSuggestModel_suggestions
+
+var SuggestStatus = &sSuggestStatus
+var SuggestStatus_timems = &sSuggestStatus_timems
+var SuggestStatus_rid = &sSuggestStatus_rid
+
+var SearchRequest = &sSearchRequest
+var SearchRequest_cursor = &sSearchRequest_cursor
+var SearchRequest_expr = &sSearchRequest_expr
+var SearchRequest_facet = &sSearchRequest_facet
+var SearchRequest_filterQuery = &sSearchRequest_filterQuery
+var SearchRequest_highlight = &sSearchRequest_highlight
+var SearchRequest_partial = &sSearchRequest_partial
+var SearchRequest_query = &sSearchRequest_query
+var SearchRequest_queryOptions = &sSearchRequest_queryOptions
+var SearchRequest_queryParser = &sSearchRequest_queryParser
+var SearchRequest_return = &sSearchRequest_return
+var SearchRequest_size = &sSearchRequest_size
+var SearchRequest_sort = &sSearchRequest_sort
+var SearchRequest_start = &sSearchRequest_start
+var SearchRequest_stats = &sSearchRequest_stats
+
+var SearchResponse = &sSearchResponse
+var SearchResponse_status = &sSearchResponse_status
+var SearchResponse_hits = &sSearchResponse_hits
+var SearchResponse_facets = &sSearchResponse_facets
+var SearchResponse_stats = &sSearchResponse_stats
+
+var SuggestRequest = &sSuggestRequest
+var SuggestRequest_query = &sSuggestRequest_query
+var SuggestRequest_suggester = &sSuggestRequest_suggester
+var SuggestRequest_size = &sSuggestRequest_size
+
+var SuggestResponse = &sSuggestResponse
+var SuggestResponse_status = &sSuggestResponse_status
+var SuggestResponse_suggest = &sSuggestResponse_suggest
+
+var UploadDocumentsRequest = &sUploadDocumentsRequest
+var UploadDocumentsRequest_documents = &sUploadDocumentsRequest_documents
+var UploadDocumentsRequest_contentType = &sUploadDocumentsRequest_contentType
+
+var UploadDocumentsResponse = &sUploadDocumentsResponse
+var UploadDocumentsResponse_status = &sUploadDocumentsResponse_status
+var UploadDocumentsResponse_adds = &sUploadDocumentsResponse_adds
+var UploadDocumentsResponse_deletes = &sUploadDocumentsResponse_deletes
+var UploadDocumentsResponse_warnings = &sUploadDocumentsResponse_warnings
+
+var AmazonCloudSearch2013 = &smithy.ServiceSchema{Schema: &s_AmazonCloudSearch2013, Version: "2013-01-01"}

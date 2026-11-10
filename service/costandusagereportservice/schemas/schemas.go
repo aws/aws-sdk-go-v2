@@ -4,617 +4,605 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeReportDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSOrigamiServiceGatewayService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AWSOrigamiServiceGatewayService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSOrigamiServiceGatewayService = smithy.NewServiceSchema(_AWSOrigamiServiceGatewayService, "2017-01-06")
-
-var AdditionalArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AdditionalArtifact",
-}, smithy.ShapeTypeEnum, 3)
-var AdditionalArtifact_REDSHIFT *smithy.Schema
-
-var AdditionalArtifact_QUICKSIGHT *smithy.Schema
-
-var AdditionalArtifact_ATHENA *smithy.Schema
-
-var _AdditionalArtifactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AdditionalArtifactList",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalArtifactList_member *smithy.Schema
-
-var AWSRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AWSRegion",
-}, smithy.ShapeTypeEnum, 28)
-var AWSRegion_CAPE_TOWN *smithy.Schema
-
-var AWSRegion_HONG_KONG *smithy.Schema
-
-var AWSRegion_MUMBAI *smithy.Schema
-
-var AWSRegion_HYDERABAD *smithy.Schema
-
-var AWSRegion_SINGAPORE *smithy.Schema
-
-var AWSRegion_SYDNEY *smithy.Schema
-
-var AWSRegion_JAKARTA *smithy.Schema
-
-var AWSRegion_TOKYO *smithy.Schema
-
-var AWSRegion_SEOUL *smithy.Schema
-
-var AWSRegion_OSAKA *smithy.Schema
-
-var AWSRegion_CANADA_CENTRAL *smithy.Schema
-
-var AWSRegion_FRANKFURT *smithy.Schema
-
-var AWSRegion_ZURICH *smithy.Schema
-
-var AWSRegion_IRELAND *smithy.Schema
-
-var AWSRegion_LONDON *smithy.Schema
-
-var AWSRegion_PARIS *smithy.Schema
-
-var AWSRegion_STOCKHOLM *smithy.Schema
-
-var AWSRegion_MILANO *smithy.Schema
-
-var AWSRegion_SPAIN *smithy.Schema
-
-var AWSRegion_UAE *smithy.Schema
-
-var AWSRegion_BAHRAIN *smithy.Schema
-
-var AWSRegion_SAO_PAULO *smithy.Schema
-
-var AWSRegion_US_STANDARD *smithy.Schema
-
-var AWSRegion_OHIO *smithy.Schema
-
-var AWSRegion_NORTHERN_CALIFORNIA *smithy.Schema
-
-var AWSRegion_OREGON *smithy.Schema
-
-var AWSRegion_BEIJING *smithy.Schema
-
-var AWSRegion_NINGXIA *smithy.Schema
-
-var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "BillingViewArn",
-}, smithy.ShapeTypeString, 0)
-
-var CompressionFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "CompressionFormat",
-}, smithy.ShapeTypeEnum, 3)
-var CompressionFormat_ZIP *smithy.Schema
-
-var CompressionFormat_GZIP *smithy.Schema
-
-var CompressionFormat_Parquet *smithy.Schema
-
-var _DeleteResponseMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteResponseMessage",
-}, smithy.ShapeTypeString, 0)
-
-var DuplicateReportNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DuplicateReportNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicateReportNameException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalErrorException_Message *smithy.Schema
-
-var _LastDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "LastDelivery",
-}, smithy.ShapeTypeString, 0)
-
-var LastStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "LastStatus",
-}, smithy.ShapeTypeEnum, 3)
-var LastStatus_SUCCESS *smithy.Schema
-
-var LastStatus_ERROR_PERMISSIONS *smithy.Schema
-
-var LastStatus_ERROR_NO_BUCKET *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RefreshClosedReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "RefreshClosedReports",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportDefinition",
-}, smithy.ShapeTypeStructure, 13)
-var ReportDefinition_ReportName *smithy.Schema
-
-var ReportDefinition_TimeUnit *smithy.Schema
-
-var ReportDefinition_Format *smithy.Schema
-
-var ReportDefinition_Compression *smithy.Schema
-
-var ReportDefinition_AdditionalSchemaElements *smithy.Schema
-
-var ReportDefinition_S3Bucket *smithy.Schema
-
-var ReportDefinition_S3Prefix *smithy.Schema
-
-var ReportDefinition_S3Region *smithy.Schema
-
-var ReportDefinition_AdditionalArtifacts *smithy.Schema
-
-var ReportDefinition_RefreshClosedReports *smithy.Schema
-
-var ReportDefinition_ReportVersioning *smithy.Schema
-
-var ReportDefinition_BillingViewArn *smithy.Schema
-
-var ReportDefinition_ReportStatus *smithy.Schema
-
-var _ReportDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _ReportDefinitionList_member *smithy.Schema
-
-var ReportFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ReportFormat_CSV *smithy.Schema
-
-var ReportFormat_Parquet *smithy.Schema
-
-var ReportLimitReachedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportLimitReachedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ReportLimitReachedException_Message *smithy.Schema
-
-var _ReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportName",
-}, smithy.ShapeTypeString, 0)
-
-var ReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ReportStatus_lastDelivery *smithy.Schema
-
-var ReportStatus_lastStatus *smithy.Schema
-
-var ReportVersioning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportVersioning",
-}, smithy.ShapeTypeEnum, 2)
-var ReportVersioning_CREATE_NEW_REPORT *smithy.Schema
-
-var ReportVersioning_OVERWRITE_REPORT *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "SchemaElement",
-}, smithy.ShapeTypeEnum, 3)
-var SchemaElement_RESOURCES *smithy.Schema
-
-var SchemaElement_SPLIT_COST_ALLOCATION_DATA *smithy.Schema
-
-var SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY *smithy.Schema
-
-var _SchemaElementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "SchemaElementList",
-}, smithy.ShapeTypeList, 1)
-var _SchemaElementList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TimeUnit",
-}, smithy.ShapeTypeEnum, 3)
-var TimeUnit_HOURLY *smithy.Schema
-
-var TimeUnit_DAILY *smithy.Schema
-
-var TimeUnit_MONTHLY *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ValidationException_Message *smithy.Schema
-
-var DeleteReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionRequest_ReportName *smithy.Schema
-
-var DeleteReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionResponse_ResponseMessage *smithy.Schema
-
-var DescribeReportDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReportDefinitionsRequest_MaxResults *smithy.Schema
-
-var DescribeReportDefinitionsRequest_NextToken *smithy.Schema
-
-var DescribeReportDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReportDefinitionsResponse_ReportDefinitions *smithy.Schema
-
-var DescribeReportDefinitionsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ReportName *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ModifyReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyReportDefinitionRequest_ReportName *smithy.Schema
-
-var ModifyReportDefinitionRequest_ReportDefinition *smithy.Schema
-
-var ModifyReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutReportDefinitionRequest_ReportDefinition *smithy.Schema
-
-var PutReportDefinitionRequest_Tags *smithy.Schema
-
-var PutReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ReportName *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ReportName *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AdditionalArtifact_REDSHIFT = AdditionalArtifact.AddMember("REDSHIFT", smithyprelude.Unit)
-
-	AdditionalArtifact_QUICKSIGHT = AdditionalArtifact.AddMember("QUICKSIGHT", smithyprelude.Unit)
-
-	AdditionalArtifact_ATHENA = AdditionalArtifact.AddMember("ATHENA", smithyprelude.Unit)
-
-	_AdditionalArtifactList_member = _AdditionalArtifactList.AddMember("member", AdditionalArtifact)
-
-	AWSRegion_CAPE_TOWN = AWSRegion.AddMember("CAPE_TOWN", smithyprelude.Unit)
-
-	AWSRegion_HONG_KONG = AWSRegion.AddMember("HONG_KONG", smithyprelude.Unit)
-
-	AWSRegion_MUMBAI = AWSRegion.AddMember("MUMBAI", smithyprelude.Unit)
-
-	AWSRegion_HYDERABAD = AWSRegion.AddMember("HYDERABAD", smithyprelude.Unit)
-
-	AWSRegion_SINGAPORE = AWSRegion.AddMember("SINGAPORE", smithyprelude.Unit)
-
-	AWSRegion_SYDNEY = AWSRegion.AddMember("SYDNEY", smithyprelude.Unit)
-
-	AWSRegion_JAKARTA = AWSRegion.AddMember("JAKARTA", smithyprelude.Unit)
-
-	AWSRegion_TOKYO = AWSRegion.AddMember("TOKYO", smithyprelude.Unit)
-
-	AWSRegion_SEOUL = AWSRegion.AddMember("SEOUL", smithyprelude.Unit)
-
-	AWSRegion_OSAKA = AWSRegion.AddMember("OSAKA", smithyprelude.Unit)
-
-	AWSRegion_CANADA_CENTRAL = AWSRegion.AddMember("CANADA_CENTRAL", smithyprelude.Unit)
-
-	AWSRegion_FRANKFURT = AWSRegion.AddMember("FRANKFURT", smithyprelude.Unit)
-
-	AWSRegion_ZURICH = AWSRegion.AddMember("ZURICH", smithyprelude.Unit)
-
-	AWSRegion_IRELAND = AWSRegion.AddMember("IRELAND", smithyprelude.Unit)
-
-	AWSRegion_LONDON = AWSRegion.AddMember("LONDON", smithyprelude.Unit)
-
-	AWSRegion_PARIS = AWSRegion.AddMember("PARIS", smithyprelude.Unit)
-
-	AWSRegion_STOCKHOLM = AWSRegion.AddMember("STOCKHOLM", smithyprelude.Unit)
-
-	AWSRegion_MILANO = AWSRegion.AddMember("MILANO", smithyprelude.Unit)
-
-	AWSRegion_SPAIN = AWSRegion.AddMember("SPAIN", smithyprelude.Unit)
-
-	AWSRegion_UAE = AWSRegion.AddMember("UAE", smithyprelude.Unit)
-
-	AWSRegion_BAHRAIN = AWSRegion.AddMember("BAHRAIN", smithyprelude.Unit)
-
-	AWSRegion_SAO_PAULO = AWSRegion.AddMember("SAO_PAULO", smithyprelude.Unit)
-
-	AWSRegion_US_STANDARD = AWSRegion.AddMember("US_STANDARD", smithyprelude.Unit)
-
-	AWSRegion_OHIO = AWSRegion.AddMember("OHIO", smithyprelude.Unit)
-
-	AWSRegion_NORTHERN_CALIFORNIA = AWSRegion.AddMember("NORTHERN_CALIFORNIA", smithyprelude.Unit)
-
-	AWSRegion_OREGON = AWSRegion.AddMember("OREGON", smithyprelude.Unit)
-
-	AWSRegion_BEIJING = AWSRegion.AddMember("BEIJING", smithyprelude.Unit)
-
-	AWSRegion_NINGXIA = AWSRegion.AddMember("NINGXIA", smithyprelude.Unit)
-
-	CompressionFormat_ZIP = CompressionFormat.AddMember("ZIP", smithyprelude.Unit)
-
-	CompressionFormat_GZIP = CompressionFormat.AddMember("GZIP", smithyprelude.Unit)
-
-	CompressionFormat_Parquet = CompressionFormat.AddMember("Parquet", smithyprelude.Unit)
-
-	DuplicateReportNameException_Message = DuplicateReportNameException.AddMember("Message", _ErrorMessage)
-
-	InternalErrorException_Message = InternalErrorException.AddMember("Message", _ErrorMessage)
-
-	LastStatus_SUCCESS = LastStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	LastStatus_ERROR_PERMISSIONS = LastStatus.AddMember("ERROR_PERMISSIONS", smithyprelude.Unit)
-
-	LastStatus_ERROR_NO_BUCKET = LastStatus.AddMember("ERROR_NO_BUCKET", smithyprelude.Unit)
-
-	TimeUnit_HOURLY = TimeUnit.AddMember("HOURLY", smithyprelude.Unit)
-
-	TimeUnit_DAILY = TimeUnit.AddMember("DAILY", smithyprelude.Unit)
-
-	TimeUnit_MONTHLY = TimeUnit.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ReportFormat_CSV = ReportFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ReportFormat_Parquet = ReportFormat.AddMember("Parquet", smithyprelude.Unit)
-
-	SchemaElement_RESOURCES = SchemaElement.AddMember("RESOURCES", smithyprelude.Unit)
-
-	SchemaElement_SPLIT_COST_ALLOCATION_DATA = SchemaElement.AddMember("SPLIT_COST_ALLOCATION_DATA", smithyprelude.Unit)
-
-	SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY = SchemaElement.AddMember("MANUAL_DISCOUNT_COMPATIBILITY", smithyprelude.Unit)
-
-	_SchemaElementList_member = _SchemaElementList.AddMember("member", SchemaElement)
-
-	ReportVersioning_CREATE_NEW_REPORT = ReportVersioning.AddMember("CREATE_NEW_REPORT", smithyprelude.Unit)
-
-	ReportVersioning_OVERWRITE_REPORT = ReportVersioning.AddMember("OVERWRITE_REPORT", smithyprelude.Unit)
-
-	ReportStatus_lastDelivery = ReportStatus.AddMember("lastDelivery", _LastDelivery)
-
-	ReportStatus_lastStatus = ReportStatus.AddMember("lastStatus", LastStatus)
-
-	ReportDefinition_ReportName = ReportDefinition.AddMember("ReportName", _ReportName)
-
-	ReportDefinition_TimeUnit = ReportDefinition.AddMember("TimeUnit", TimeUnit)
-
-	ReportDefinition_Format = ReportDefinition.AddMember("Format", ReportFormat)
-
-	ReportDefinition_Compression = ReportDefinition.AddMember("Compression", CompressionFormat)
-
-	ReportDefinition_AdditionalSchemaElements = ReportDefinition.AddMember("AdditionalSchemaElements", _SchemaElementList)
-
-	ReportDefinition_S3Bucket = ReportDefinition.AddMember("S3Bucket", _S3Bucket)
-
-	ReportDefinition_S3Prefix = ReportDefinition.AddMember("S3Prefix", _S3Prefix)
-
-	ReportDefinition_S3Region = ReportDefinition.AddMember("S3Region", AWSRegion)
-
-	ReportDefinition_AdditionalArtifacts = ReportDefinition.AddMember("AdditionalArtifacts", _AdditionalArtifactList)
-
-	ReportDefinition_RefreshClosedReports = ReportDefinition.AddMember("RefreshClosedReports", _RefreshClosedReports)
-
-	ReportDefinition_ReportVersioning = ReportDefinition.AddMember("ReportVersioning", ReportVersioning)
-
-	ReportDefinition_BillingViewArn = ReportDefinition.AddMember("BillingViewArn", _BillingViewArn)
-
-	ReportDefinition_ReportStatus = ReportDefinition.AddMember("ReportStatus", ReportStatus)
-
-	_ReportDefinitionList_member = _ReportDefinitionList.AddMember("member", ReportDefinition)
-
-	ReportLimitReachedException_Message = ReportLimitReachedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	DeleteReportDefinitionRequest_ReportName = DeleteReportDefinitionRequest.AddMember("ReportName", _ReportName)
-
-	DeleteReportDefinitionResponse_ResponseMessage = DeleteReportDefinitionResponse.AddMember("ResponseMessage", _DeleteResponseMessage)
-
-	DescribeReportDefinitionsRequest_MaxResults = DescribeReportDefinitionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeReportDefinitionsRequest_NextToken = DescribeReportDefinitionsRequest.AddMember("NextToken", _GenericString)
-
-	DescribeReportDefinitionsResponse_ReportDefinitions = DescribeReportDefinitionsResponse.AddMember("ReportDefinitions", _ReportDefinitionList)
-
-	DescribeReportDefinitionsResponse_NextToken = DescribeReportDefinitionsResponse.AddMember("NextToken", _GenericString)
-
-	ListTagsForResourceRequest_ReportName = ListTagsForResourceRequest.AddMember("ReportName", _ReportName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ModifyReportDefinitionRequest_ReportName = ModifyReportDefinitionRequest.AddMember("ReportName", _ReportName)
-
-	ModifyReportDefinitionRequest_ReportDefinition = ModifyReportDefinitionRequest.AddMember("ReportDefinition", ReportDefinition)
-
-	PutReportDefinitionRequest_ReportDefinition = PutReportDefinitionRequest.AddMember("ReportDefinition", ReportDefinition)
-
-	PutReportDefinitionRequest_Tags = PutReportDefinitionRequest.AddMember("Tags", _TagList)
-
-	TagResourceRequest_ReportName = TagResourceRequest.AddMember("ReportName", _ReportName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ReportName = UntagResourceRequest.AddMember("ReportName", _ReportName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-}
+var (
+	eDeleteReportDefinition                              smithy.SchemaExtensions
+	eDescribeReportDefinitions                           smithy.SchemaExtensions
+	eListTagsForResource                                 smithy.SchemaExtensions
+	eModifyReportDefinition                              smithy.SchemaExtensions
+	ePutReportDefinition                                 smithy.SchemaExtensions
+	eTagResource                                         smithy.SchemaExtensions
+	eUntagResource                                       smithy.SchemaExtensions
+	e_AWSOrigamiServiceGatewayService                    smithy.SchemaExtensions
+	eAdditionalArtifact                                  smithy.SchemaExtensions
+	eAdditionalArtifact_REDSHIFT                         smithy.SchemaExtensions
+	eAdditionalArtifact_QUICKSIGHT                       smithy.SchemaExtensions
+	eAdditionalArtifact_ATHENA                           smithy.SchemaExtensions
+	e_AdditionalArtifactList                             smithy.SchemaExtensions
+	e_AdditionalArtifactList_member                      smithy.SchemaExtensions
+	eAWSRegion                                           smithy.SchemaExtensions
+	eAWSRegion_CAPE_TOWN                                 smithy.SchemaExtensions
+	eAWSRegion_HONG_KONG                                 smithy.SchemaExtensions
+	eAWSRegion_MUMBAI                                    smithy.SchemaExtensions
+	eAWSRegion_HYDERABAD                                 smithy.SchemaExtensions
+	eAWSRegion_SINGAPORE                                 smithy.SchemaExtensions
+	eAWSRegion_SYDNEY                                    smithy.SchemaExtensions
+	eAWSRegion_JAKARTA                                   smithy.SchemaExtensions
+	eAWSRegion_TOKYO                                     smithy.SchemaExtensions
+	eAWSRegion_SEOUL                                     smithy.SchemaExtensions
+	eAWSRegion_OSAKA                                     smithy.SchemaExtensions
+	eAWSRegion_CANADA_CENTRAL                            smithy.SchemaExtensions
+	eAWSRegion_FRANKFURT                                 smithy.SchemaExtensions
+	eAWSRegion_ZURICH                                    smithy.SchemaExtensions
+	eAWSRegion_IRELAND                                   smithy.SchemaExtensions
+	eAWSRegion_LONDON                                    smithy.SchemaExtensions
+	eAWSRegion_PARIS                                     smithy.SchemaExtensions
+	eAWSRegion_STOCKHOLM                                 smithy.SchemaExtensions
+	eAWSRegion_MILANO                                    smithy.SchemaExtensions
+	eAWSRegion_SPAIN                                     smithy.SchemaExtensions
+	eAWSRegion_UAE                                       smithy.SchemaExtensions
+	eAWSRegion_BAHRAIN                                   smithy.SchemaExtensions
+	eAWSRegion_SAO_PAULO                                 smithy.SchemaExtensions
+	eAWSRegion_US_STANDARD                               smithy.SchemaExtensions
+	eAWSRegion_OHIO                                      smithy.SchemaExtensions
+	eAWSRegion_NORTHERN_CALIFORNIA                       smithy.SchemaExtensions
+	eAWSRegion_OREGON                                    smithy.SchemaExtensions
+	eAWSRegion_BEIJING                                   smithy.SchemaExtensions
+	eAWSRegion_NINGXIA                                   smithy.SchemaExtensions
+	e_BillingViewArn                                     smithy.SchemaExtensions
+	eCompressionFormat                                   smithy.SchemaExtensions
+	eCompressionFormat_ZIP                               smithy.SchemaExtensions
+	eCompressionFormat_GZIP                              smithy.SchemaExtensions
+	eCompressionFormat_Parquet                           smithy.SchemaExtensions
+	e_DeleteResponseMessage                              smithy.SchemaExtensions
+	eDuplicateReportNameException                        smithy.SchemaExtensions
+	eDuplicateReportNameException_Message                smithy.SchemaExtensions
+	e_ErrorMessage                                       smithy.SchemaExtensions
+	e_GenericString                                      smithy.SchemaExtensions
+	eInternalErrorException                              smithy.SchemaExtensions
+	eInternalErrorException_Message                      smithy.SchemaExtensions
+	e_LastDelivery                                       smithy.SchemaExtensions
+	eLastStatus                                          smithy.SchemaExtensions
+	eLastStatus_SUCCESS                                  smithy.SchemaExtensions
+	eLastStatus_ERROR_PERMISSIONS                        smithy.SchemaExtensions
+	eLastStatus_ERROR_NO_BUCKET                          smithy.SchemaExtensions
+	e_MaxResults                                         smithy.SchemaExtensions
+	e_RefreshClosedReports                               smithy.SchemaExtensions
+	eReportDefinition                                    smithy.SchemaExtensions
+	eReportDefinition_ReportName                         smithy.SchemaExtensions
+	eReportDefinition_TimeUnit                           smithy.SchemaExtensions
+	eReportDefinition_Format                             smithy.SchemaExtensions
+	eReportDefinition_Compression                        smithy.SchemaExtensions
+	eReportDefinition_AdditionalSchemaElements           smithy.SchemaExtensions
+	eReportDefinition_S3Bucket                           smithy.SchemaExtensions
+	eReportDefinition_S3Prefix                           smithy.SchemaExtensions
+	eReportDefinition_S3Region                           smithy.SchemaExtensions
+	eReportDefinition_AdditionalArtifacts                smithy.SchemaExtensions
+	eReportDefinition_RefreshClosedReports               smithy.SchemaExtensions
+	eReportDefinition_ReportVersioning                   smithy.SchemaExtensions
+	eReportDefinition_BillingViewArn                     smithy.SchemaExtensions
+	eReportDefinition_ReportStatus                       smithy.SchemaExtensions
+	e_ReportDefinitionList                               smithy.SchemaExtensions
+	e_ReportDefinitionList_member                        smithy.SchemaExtensions
+	eReportFormat                                        smithy.SchemaExtensions
+	eReportFormat_CSV                                    smithy.SchemaExtensions
+	eReportFormat_Parquet                                smithy.SchemaExtensions
+	eReportLimitReachedException                         smithy.SchemaExtensions
+	eReportLimitReachedException_Message                 smithy.SchemaExtensions
+	e_ReportName                                         smithy.SchemaExtensions
+	eReportStatus                                        smithy.SchemaExtensions
+	eReportStatus_lastDelivery                           smithy.SchemaExtensions
+	eReportStatus_lastStatus                             smithy.SchemaExtensions
+	eReportVersioning                                    smithy.SchemaExtensions
+	eReportVersioning_CREATE_NEW_REPORT                  smithy.SchemaExtensions
+	eReportVersioning_OVERWRITE_REPORT                   smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_Message                   smithy.SchemaExtensions
+	e_S3Bucket                                           smithy.SchemaExtensions
+	e_S3Prefix                                           smithy.SchemaExtensions
+	eSchemaElement                                       smithy.SchemaExtensions
+	eSchemaElement_RESOURCES                             smithy.SchemaExtensions
+	eSchemaElement_SPLIT_COST_ALLOCATION_DATA            smithy.SchemaExtensions
+	eSchemaElement_MANUAL_DISCOUNT_COMPATIBILITY         smithy.SchemaExtensions
+	e_SchemaElementList                                  smithy.SchemaExtensions
+	e_SchemaElementList_member                           smithy.SchemaExtensions
+	eTag                                                 smithy.SchemaExtensions
+	eTag_Key                                             smithy.SchemaExtensions
+	eTag_Value                                           smithy.SchemaExtensions
+	e_TagKey                                             smithy.SchemaExtensions
+	e_TagKeyList                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                  smithy.SchemaExtensions
+	e_TagList                                            smithy.SchemaExtensions
+	e_TagList_member                                     smithy.SchemaExtensions
+	e_TagValue                                           smithy.SchemaExtensions
+	eTimeUnit                                            smithy.SchemaExtensions
+	eTimeUnit_HOURLY                                     smithy.SchemaExtensions
+	eTimeUnit_DAILY                                      smithy.SchemaExtensions
+	eTimeUnit_MONTHLY                                    smithy.SchemaExtensions
+	eValidationException                                 smithy.SchemaExtensions
+	eValidationException_Message                         smithy.SchemaExtensions
+	eDeleteReportDefinitionRequest                       smithy.SchemaExtensions
+	eDeleteReportDefinitionRequest_ReportName            smithy.SchemaExtensions
+	eDeleteReportDefinitionResponse                      smithy.SchemaExtensions
+	eDeleteReportDefinitionResponse_ResponseMessage      smithy.SchemaExtensions
+	eDescribeReportDefinitionsRequest                    smithy.SchemaExtensions
+	eDescribeReportDefinitionsRequest_MaxResults         smithy.SchemaExtensions
+	eDescribeReportDefinitionsRequest_NextToken          smithy.SchemaExtensions
+	eDescribeReportDefinitionsResponse                   smithy.SchemaExtensions
+	eDescribeReportDefinitionsResponse_ReportDefinitions smithy.SchemaExtensions
+	eDescribeReportDefinitionsResponse_NextToken         smithy.SchemaExtensions
+	eListTagsForResourceRequest                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_ReportName               smithy.SchemaExtensions
+	eListTagsForResourceResponse                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                    smithy.SchemaExtensions
+	eModifyReportDefinitionRequest                       smithy.SchemaExtensions
+	eModifyReportDefinitionRequest_ReportName            smithy.SchemaExtensions
+	eModifyReportDefinitionRequest_ReportDefinition      smithy.SchemaExtensions
+	eModifyReportDefinitionResponse                      smithy.SchemaExtensions
+	ePutReportDefinitionRequest                          smithy.SchemaExtensions
+	ePutReportDefinitionRequest_ReportDefinition         smithy.SchemaExtensions
+	ePutReportDefinitionRequest_Tags                     smithy.SchemaExtensions
+	ePutReportDefinitionResponse                         smithy.SchemaExtensions
+	eTagResourceRequest                                  smithy.SchemaExtensions
+	eTagResourceRequest_ReportName                       smithy.SchemaExtensions
+	eTagResourceRequest_Tags                             smithy.SchemaExtensions
+	eTagResourceResponse                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                smithy.SchemaExtensions
+	eUntagResourceRequest_ReportName                     smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                        smithy.SchemaExtensions
+	eUntagResourceResponse                               smithy.SchemaExtensions
+)
+
+var (
+	iDeleteReportDefinition            = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DeleteReportDefinition"}
+	iDescribeReportDefinitions         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DescribeReportDefinitions"}
+	iListTagsForResource               = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ListTagsForResource"}
+	iModifyReportDefinition            = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ModifyReportDefinition"}
+	iPutReportDefinition               = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "PutReportDefinition"}
+	iTagResource                       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagResource"}
+	iUntagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "UntagResource"}
+	i_AWSOrigamiServiceGatewayService  = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "AWSOrigamiServiceGatewayService"}
+	iAdditionalArtifact                = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "AdditionalArtifact"}
+	i_AdditionalArtifactList           = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "AdditionalArtifactList"}
+	iAWSRegion                         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "AWSRegion"}
+	i_BillingViewArn                   = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "BillingViewArn"}
+	iCompressionFormat                 = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "CompressionFormat"}
+	i_DeleteResponseMessage            = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DeleteResponseMessage"}
+	iDuplicateReportNameException      = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DuplicateReportNameException"}
+	i_ErrorMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ErrorMessage"}
+	i_GenericString                    = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "GenericString"}
+	iInternalErrorException            = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "InternalErrorException"}
+	i_LastDelivery                     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "LastDelivery"}
+	iLastStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "LastStatus"}
+	i_MaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "MaxResults"}
+	i_RefreshClosedReports             = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "RefreshClosedReports"}
+	iReportDefinition                  = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportDefinition"}
+	i_ReportDefinitionList             = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportDefinitionList"}
+	iReportFormat                      = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportFormat"}
+	iReportLimitReachedException       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportLimitReachedException"}
+	i_ReportName                       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportName"}
+	iReportStatus                      = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportStatus"}
+	iReportVersioning                  = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ReportVersioning"}
+	iResourceNotFoundException         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ResourceNotFoundException"}
+	i_S3Bucket                         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "S3Bucket"}
+	i_S3Prefix                         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "S3Prefix"}
+	iSchemaElement                     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "SchemaElement"}
+	i_SchemaElementList                = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "SchemaElementList"}
+	iTag                               = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "Tag"}
+	i_TagKey                           = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagKey"}
+	i_TagKeyList                       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagKeyList"}
+	i_TagList                          = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagList"}
+	i_TagValue                         = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagValue"}
+	iTimeUnit                          = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TimeUnit"}
+	iValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ValidationException"}
+	iDeleteReportDefinitionRequest     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DeleteReportDefinitionRequest"}
+	iDeleteReportDefinitionResponse    = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DeleteReportDefinitionResponse"}
+	iDescribeReportDefinitionsRequest  = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DescribeReportDefinitionsRequest"}
+	iDescribeReportDefinitionsResponse = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "DescribeReportDefinitionsResponse"}
+	iListTagsForResourceRequest        = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ListTagsForResourceResponse"}
+	iModifyReportDefinitionRequest     = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ModifyReportDefinitionRequest"}
+	iModifyReportDefinitionResponse    = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "ModifyReportDefinitionResponse"}
+	iPutReportDefinitionRequest        = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "PutReportDefinitionRequest"}
+	iPutReportDefinitionResponse       = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "PutReportDefinitionResponse"}
+	iTagResourceRequest                = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagResourceRequest"}
+	iTagResourceResponse               = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "TagResourceResponse"}
+	iUntagResourceRequest              = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "UntagResourceRequest"}
+	iUntagResourceResponse             = smithy.ShapeName{Namespace: "com.amazonaws.costandusagereportservice", Name: "UntagResourceResponse"}
+	pUnit                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var mAdditionalArtifact = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalArtifact_REDSHIFT, &sAdditionalArtifact_QUICKSIGHT, &sAdditionalArtifact_ATHENA}}
+var m_AdditionalArtifactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalArtifactList_member}}
+var mAWSRegion = smithy.SchemaMembers{List: []*smithy.Schema{&sAWSRegion_CAPE_TOWN, &sAWSRegion_HONG_KONG, &sAWSRegion_MUMBAI, &sAWSRegion_HYDERABAD, &sAWSRegion_SINGAPORE, &sAWSRegion_SYDNEY, &sAWSRegion_JAKARTA, &sAWSRegion_TOKYO, &sAWSRegion_SEOUL, &sAWSRegion_OSAKA, &sAWSRegion_CANADA_CENTRAL, &sAWSRegion_FRANKFURT, &sAWSRegion_ZURICH, &sAWSRegion_IRELAND, &sAWSRegion_LONDON, &sAWSRegion_PARIS, &sAWSRegion_STOCKHOLM, &sAWSRegion_MILANO, &sAWSRegion_SPAIN, &sAWSRegion_UAE, &sAWSRegion_BAHRAIN, &sAWSRegion_SAO_PAULO, &sAWSRegion_US_STANDARD, &sAWSRegion_OHIO, &sAWSRegion_NORTHERN_CALIFORNIA, &sAWSRegion_OREGON, &sAWSRegion_BEIJING, &sAWSRegion_NINGXIA}, Hash: &hAWSRegion}
+var mCompressionFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionFormat_ZIP, &sCompressionFormat_GZIP, &sCompressionFormat_Parquet}}
+var mDuplicateReportNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateReportNameException_Message}}
+var mInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalErrorException_Message}}
+var mLastStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLastStatus_SUCCESS, &sLastStatus_ERROR_PERMISSIONS, &sLastStatus_ERROR_NO_BUCKET}}
+var mReportDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sReportDefinition_ReportName, &sReportDefinition_TimeUnit, &sReportDefinition_Format, &sReportDefinition_Compression, &sReportDefinition_AdditionalSchemaElements, &sReportDefinition_S3Bucket, &sReportDefinition_S3Prefix, &sReportDefinition_S3Region, &sReportDefinition_AdditionalArtifacts, &sReportDefinition_RefreshClosedReports, &sReportDefinition_ReportVersioning, &sReportDefinition_BillingViewArn, &sReportDefinition_ReportStatus}, Hash: &hReportDefinition}
+var m_ReportDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReportDefinitionList_member}}
+var mReportFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sReportFormat_CSV, &sReportFormat_Parquet}}
+var mReportLimitReachedException = smithy.SchemaMembers{List: []*smithy.Schema{&sReportLimitReachedException_Message}}
+var mReportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReportStatus_lastDelivery, &sReportStatus_lastStatus}}
+var mReportVersioning = smithy.SchemaMembers{List: []*smithy.Schema{&sReportVersioning_CREATE_NEW_REPORT, &sReportVersioning_OVERWRITE_REPORT}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mSchemaElement = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaElement_RESOURCES, &sSchemaElement_SPLIT_COST_ALLOCATION_DATA, &sSchemaElement_MANUAL_DISCOUNT_COMPATIBILITY}}
+var m_SchemaElementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaElementList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTimeUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeUnit_HOURLY, &sTimeUnit_DAILY, &sTimeUnit_MONTHLY}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mDeleteReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportDefinitionRequest_ReportName}}
+var mDeleteReportDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReportDefinitionResponse_ResponseMessage}}
+var mDescribeReportDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReportDefinitionsRequest_MaxResults, &sDescribeReportDefinitionsRequest_NextToken}}
+var mDescribeReportDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReportDefinitionsResponse_ReportDefinitions, &sDescribeReportDefinitionsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ReportName}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mModifyReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyReportDefinitionRequest_ReportName, &sModifyReportDefinitionRequest_ReportDefinition}}
+var mPutReportDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutReportDefinitionRequest_ReportDefinition, &sPutReportDefinitionRequest_Tags}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ReportName, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ReportName, &sUntagResourceRequest_TagKeys}}
+
+var hAWSRegion = smithy.MemberHash{Seed: 3349, Slots: []uint16{
+	11, 0, 2, 10, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0,
+	0, 8, 16, 9, 12, 0, 0, 0, 28, 13, 0, 0, 1, 21, 7, 14, 22, 0, 6, 18, 0, 0, 0, 0,
+	23, 0, 26, 27, 0, 3, 0, 20, 4, 24, 0, 15, 25, 19, 0, 0,
+}}
+var hReportDefinition = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	1, 5, 0, 0, 9, 0, 0, 0, 0, 2, 7, 0, 13, 0, 0, 0, 11, 0, 0, 6, 3, 4, 10, 0,
+	0, 8, 0, 0, 0, 12, 0, 0,
+}}
+
+var sDeleteReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinition, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReportDefinition})
+var sDescribeReportDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportDefinitions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReportDefinitions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sModifyReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyReportDefinition, Type: smithy.ShapeTypeOperation, Ext: &eModifyReportDefinition})
+var sPutReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinition, Type: smithy.ShapeTypeOperation, Ext: &ePutReportDefinition})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_AWSOrigamiServiceGatewayService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSOrigamiServiceGatewayService, Type: smithy.ShapeTypeService, Ext: &e_AWSOrigamiServiceGatewayService})
+var sAdditionalArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalArtifact, Members: &mAdditionalArtifact, Type: smithy.ShapeTypeEnum, Ext: &eAdditionalArtifact})
+var sAdditionalArtifact_REDSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalArtifact_REDSHIFT})
+var sAdditionalArtifact_QUICKSIGHT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUICKSIGHT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalArtifact_QUICKSIGHT})
+var sAdditionalArtifact_ATHENA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATHENA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdditionalArtifact_ATHENA})
+var s_AdditionalArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalArtifactList, Members: &m_AdditionalArtifactList, Type: smithy.ShapeTypeList, Ext: &e_AdditionalArtifactList})
+var s_AdditionalArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalArtifact, Members: &mAdditionalArtifact, Type: smithy.ShapeTypeEnum, Ext: &e_AdditionalArtifactList_member})
+var sAWSRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSRegion, Members: &mAWSRegion, Type: smithy.ShapeTypeEnum, Ext: &eAWSRegion})
+var sAWSRegion_CAPE_TOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPE_TOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_CAPE_TOWN})
+var sAWSRegion_HONG_KONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HONG_KONG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_HONG_KONG})
+var sAWSRegion_MUMBAI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUMBAI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_MUMBAI})
+var sAWSRegion_HYDERABAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYDERABAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_HYDERABAD})
+var sAWSRegion_SINGAPORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGAPORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_SINGAPORE})
+var sAWSRegion_SYDNEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYDNEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_SYDNEY})
+var sAWSRegion_JAKARTA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JAKARTA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_JAKARTA})
+var sAWSRegion_TOKYO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKYO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_TOKYO})
+var sAWSRegion_SEOUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEOUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_SEOUL})
+var sAWSRegion_OSAKA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OSAKA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_OSAKA})
+var sAWSRegion_CANADA_CENTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANADA_CENTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_CANADA_CENTRAL})
+var sAWSRegion_FRANKFURT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRANKFURT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_FRANKFURT})
+var sAWSRegion_ZURICH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZURICH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_ZURICH})
+var sAWSRegion_IRELAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IRELAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_IRELAND})
+var sAWSRegion_LONDON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LONDON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_LONDON})
+var sAWSRegion_PARIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARIS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_PARIS})
+var sAWSRegion_STOCKHOLM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOCKHOLM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_STOCKHOLM})
+var sAWSRegion_MILANO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILANO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_MILANO})
+var sAWSRegion_SPAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_SPAIN})
+var sAWSRegion_UAE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UAE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_UAE})
+var sAWSRegion_BAHRAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAHRAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_BAHRAIN})
+var sAWSRegion_SAO_PAULO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAO_PAULO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_SAO_PAULO})
+var sAWSRegion_US_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_US_STANDARD})
+var sAWSRegion_OHIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OHIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_OHIO})
+var sAWSRegion_NORTHERN_CALIFORNIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORTHERN_CALIFORNIA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_NORTHERN_CALIFORNIA})
+var sAWSRegion_OREGON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OREGON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_OREGON})
+var sAWSRegion_BEIJING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEIJING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_BEIJING})
+var sAWSRegion_NINGXIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NINGXIA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAWSRegion_NINGXIA})
+var s_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &e_BillingViewArn})
+var sCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eCompressionFormat})
+var sCompressionFormat_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_ZIP})
+var sCompressionFormat_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_GZIP})
+var sCompressionFormat_Parquet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parquet", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_Parquet})
+var s_DeleteResponseMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteResponseMessage, Type: smithy.ShapeTypeString, Ext: &e_DeleteResponseMessage})
+var sDuplicateReportNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateReportNameException, Members: &mDuplicateReportNameException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateReportNameException})
+var sDuplicateReportNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateReportNameException_Message})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericString})
+var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalErrorException})
+var sInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalErrorException_Message})
+var s_LastDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastDelivery, Type: smithy.ShapeTypeString, Ext: &e_LastDelivery})
+var sLastStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastStatus, Members: &mLastStatus, Type: smithy.ShapeTypeEnum, Ext: &eLastStatus})
+var sLastStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLastStatus_SUCCESS})
+var sLastStatus_ERROR_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLastStatus_ERROR_PERMISSIONS})
+var sLastStatus_ERROR_NO_BUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_NO_BUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLastStatus_ERROR_NO_BUCKET})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_RefreshClosedReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshClosedReports, Type: smithy.ShapeTypeBoolean, Ext: &e_RefreshClosedReports})
+var sReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &eReportDefinition})
+var sReportDefinition_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_ReportName})
+var sReportDefinition_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_TimeUnit})
+var sReportDefinition_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iReportFormat, Members: &mReportFormat, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_Format})
+var sReportDefinition_Compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compression", ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_Compression})
+var sReportDefinition_AdditionalSchemaElements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalSchemaElements", ID: &i_SchemaElementList, Members: &m_SchemaElementList, Type: smithy.ShapeTypeList, Ext: &eReportDefinition_AdditionalSchemaElements})
+var sReportDefinition_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_S3Bucket})
+var sReportDefinition_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_S3Prefix})
+var sReportDefinition_S3Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Region", ID: &iAWSRegion, Members: &mAWSRegion, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_S3Region})
+var sReportDefinition_AdditionalArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalArtifacts", ID: &i_AdditionalArtifactList, Members: &m_AdditionalArtifactList, Type: smithy.ShapeTypeList, Ext: &eReportDefinition_AdditionalArtifacts})
+var sReportDefinition_RefreshClosedReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshClosedReports", ID: &i_RefreshClosedReports, Type: smithy.ShapeTypeBoolean, Ext: &eReportDefinition_RefreshClosedReports})
+var sReportDefinition_ReportVersioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportVersioning", ID: &iReportVersioning, Members: &mReportVersioning, Type: smithy.ShapeTypeEnum, Ext: &eReportDefinition_ReportVersioning})
+var sReportDefinition_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingViewArn", ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &eReportDefinition_BillingViewArn})
+var sReportDefinition_ReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportStatus", ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeStructure, Ext: &eReportDefinition_ReportStatus})
+var s_ReportDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportDefinitionList, Members: &m_ReportDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_ReportDefinitionList})
+var s_ReportDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &e_ReportDefinitionList_member})
+var sReportFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportFormat, Members: &mReportFormat, Type: smithy.ShapeTypeEnum, Ext: &eReportFormat})
+var sReportFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportFormat_CSV})
+var sReportFormat_Parquet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parquet", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportFormat_Parquet})
+var sReportLimitReachedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportLimitReachedException, Members: &mReportLimitReachedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eReportLimitReachedException})
+var sReportLimitReachedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eReportLimitReachedException_Message})
+var s_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &e_ReportName})
+var sReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeStructure, Ext: &eReportStatus})
+var sReportStatus_lastDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDelivery", ID: &i_LastDelivery, Type: smithy.ShapeTypeString, Ext: &eReportStatus_lastDelivery})
+var sReportStatus_lastStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatus", ID: &iLastStatus, Members: &mLastStatus, Type: smithy.ShapeTypeEnum, Ext: &eReportStatus_lastStatus})
+var sReportVersioning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportVersioning, Members: &mReportVersioning, Type: smithy.ShapeTypeEnum, Ext: &eReportVersioning})
+var sReportVersioning_CREATE_NEW_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_NEW_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportVersioning_CREATE_NEW_REPORT})
+var sReportVersioning_OVERWRITE_REPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE_REPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportVersioning_OVERWRITE_REPORT})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Prefix, Type: smithy.ShapeTypeString, Ext: &e_S3Prefix})
+var sSchemaElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaElement, Members: &mSchemaElement, Type: smithy.ShapeTypeEnum, Ext: &eSchemaElement})
+var sSchemaElement_RESOURCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaElement_RESOURCES})
+var sSchemaElement_SPLIT_COST_ALLOCATION_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLIT_COST_ALLOCATION_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaElement_SPLIT_COST_ALLOCATION_DATA})
+var sSchemaElement_MANUAL_DISCOUNT_COMPATIBILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL_DISCOUNT_COMPATIBILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchemaElement_MANUAL_DISCOUNT_COMPATIBILITY})
+var s_SchemaElementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaElementList, Members: &m_SchemaElementList, Type: smithy.ShapeTypeList, Ext: &e_SchemaElementList})
+var s_SchemaElementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaElement, Members: &mSchemaElement, Type: smithy.ShapeTypeEnum, Ext: &e_SchemaElementList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimeUnit})
+var sTimeUnit_HOURLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_HOURLY})
+var sTimeUnit_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_DAILY})
+var sTimeUnit_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MONTHLY})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sDeleteReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinitionRequest, Members: &mDeleteReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportDefinitionRequest})
+var sDeleteReportDefinitionRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eDeleteReportDefinitionRequest_ReportName})
+var sDeleteReportDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReportDefinitionResponse, Members: &mDeleteReportDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReportDefinitionResponse})
+var sDeleteReportDefinitionResponse_ResponseMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseMessage", ID: &i_DeleteResponseMessage, Type: smithy.ShapeTypeString, Ext: &eDeleteReportDefinitionResponse_ResponseMessage})
+var sDescribeReportDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportDefinitionsRequest, Members: &mDescribeReportDefinitionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReportDefinitionsRequest})
+var sDescribeReportDefinitionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeReportDefinitionsRequest_MaxResults})
+var sDescribeReportDefinitionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeReportDefinitionsRequest_NextToken})
+var sDescribeReportDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReportDefinitionsResponse, Members: &mDescribeReportDefinitionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReportDefinitionsResponse})
+var sDescribeReportDefinitionsResponse_ReportDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportDefinitions", ID: &i_ReportDefinitionList, Members: &m_ReportDefinitionList, Type: smithy.ShapeTypeList, Ext: &eDescribeReportDefinitionsResponse_ReportDefinitions})
+var sDescribeReportDefinitionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeReportDefinitionsResponse_NextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ReportName})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sModifyReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyReportDefinitionRequest, Members: &mModifyReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &eModifyReportDefinitionRequest})
+var sModifyReportDefinitionRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eModifyReportDefinitionRequest_ReportName})
+var sModifyReportDefinitionRequest_ReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportDefinition", ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &eModifyReportDefinitionRequest_ReportDefinition})
+var sModifyReportDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyReportDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &eModifyReportDefinitionResponse})
+var sPutReportDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinitionRequest, Members: &mPutReportDefinitionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionRequest})
+var sPutReportDefinitionRequest_ReportDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportDefinition", ID: &iReportDefinition, Members: &mReportDefinition, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionRequest_ReportDefinition})
+var sPutReportDefinitionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutReportDefinitionRequest_Tags})
+var sPutReportDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutReportDefinitionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutReportDefinitionResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ReportName})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ReportName})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+
+var DeleteReportDefinition = &sDeleteReportDefinition
+
+var DescribeReportDefinitions = &sDescribeReportDefinitions
+
+var ListTagsForResource = &sListTagsForResource
+
+var ModifyReportDefinition = &sModifyReportDefinition
+
+var PutReportDefinition = &sPutReportDefinition
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSOrigamiServiceGatewayService = &s_AWSOrigamiServiceGatewayService
+
+var AdditionalArtifact = &sAdditionalArtifact
+var AdditionalArtifact_REDSHIFT = &sAdditionalArtifact_REDSHIFT
+var AdditionalArtifact_QUICKSIGHT = &sAdditionalArtifact_QUICKSIGHT
+var AdditionalArtifact_ATHENA = &sAdditionalArtifact_ATHENA
+
+var _AdditionalArtifactList = &s_AdditionalArtifactList
+var _AdditionalArtifactList_member = &s_AdditionalArtifactList_member
+
+var AWSRegion = &sAWSRegion
+var AWSRegion_CAPE_TOWN = &sAWSRegion_CAPE_TOWN
+var AWSRegion_HONG_KONG = &sAWSRegion_HONG_KONG
+var AWSRegion_MUMBAI = &sAWSRegion_MUMBAI
+var AWSRegion_HYDERABAD = &sAWSRegion_HYDERABAD
+var AWSRegion_SINGAPORE = &sAWSRegion_SINGAPORE
+var AWSRegion_SYDNEY = &sAWSRegion_SYDNEY
+var AWSRegion_JAKARTA = &sAWSRegion_JAKARTA
+var AWSRegion_TOKYO = &sAWSRegion_TOKYO
+var AWSRegion_SEOUL = &sAWSRegion_SEOUL
+var AWSRegion_OSAKA = &sAWSRegion_OSAKA
+var AWSRegion_CANADA_CENTRAL = &sAWSRegion_CANADA_CENTRAL
+var AWSRegion_FRANKFURT = &sAWSRegion_FRANKFURT
+var AWSRegion_ZURICH = &sAWSRegion_ZURICH
+var AWSRegion_IRELAND = &sAWSRegion_IRELAND
+var AWSRegion_LONDON = &sAWSRegion_LONDON
+var AWSRegion_PARIS = &sAWSRegion_PARIS
+var AWSRegion_STOCKHOLM = &sAWSRegion_STOCKHOLM
+var AWSRegion_MILANO = &sAWSRegion_MILANO
+var AWSRegion_SPAIN = &sAWSRegion_SPAIN
+var AWSRegion_UAE = &sAWSRegion_UAE
+var AWSRegion_BAHRAIN = &sAWSRegion_BAHRAIN
+var AWSRegion_SAO_PAULO = &sAWSRegion_SAO_PAULO
+var AWSRegion_US_STANDARD = &sAWSRegion_US_STANDARD
+var AWSRegion_OHIO = &sAWSRegion_OHIO
+var AWSRegion_NORTHERN_CALIFORNIA = &sAWSRegion_NORTHERN_CALIFORNIA
+var AWSRegion_OREGON = &sAWSRegion_OREGON
+var AWSRegion_BEIJING = &sAWSRegion_BEIJING
+var AWSRegion_NINGXIA = &sAWSRegion_NINGXIA
+
+var _BillingViewArn = &s_BillingViewArn
+
+var CompressionFormat = &sCompressionFormat
+var CompressionFormat_ZIP = &sCompressionFormat_ZIP
+var CompressionFormat_GZIP = &sCompressionFormat_GZIP
+var CompressionFormat_Parquet = &sCompressionFormat_Parquet
+
+var _DeleteResponseMessage = &s_DeleteResponseMessage
+
+var DuplicateReportNameException = &sDuplicateReportNameException
+var DuplicateReportNameException_Message = &sDuplicateReportNameException_Message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _GenericString = &s_GenericString
+
+var InternalErrorException = &sInternalErrorException
+var InternalErrorException_Message = &sInternalErrorException_Message
+
+var _LastDelivery = &s_LastDelivery
+
+var LastStatus = &sLastStatus
+var LastStatus_SUCCESS = &sLastStatus_SUCCESS
+var LastStatus_ERROR_PERMISSIONS = &sLastStatus_ERROR_PERMISSIONS
+var LastStatus_ERROR_NO_BUCKET = &sLastStatus_ERROR_NO_BUCKET
+
+var _MaxResults = &s_MaxResults
+
+var _RefreshClosedReports = &s_RefreshClosedReports
+
+var ReportDefinition = &sReportDefinition
+var ReportDefinition_ReportName = &sReportDefinition_ReportName
+var ReportDefinition_TimeUnit = &sReportDefinition_TimeUnit
+var ReportDefinition_Format = &sReportDefinition_Format
+var ReportDefinition_Compression = &sReportDefinition_Compression
+var ReportDefinition_AdditionalSchemaElements = &sReportDefinition_AdditionalSchemaElements
+var ReportDefinition_S3Bucket = &sReportDefinition_S3Bucket
+var ReportDefinition_S3Prefix = &sReportDefinition_S3Prefix
+var ReportDefinition_S3Region = &sReportDefinition_S3Region
+var ReportDefinition_AdditionalArtifacts = &sReportDefinition_AdditionalArtifacts
+var ReportDefinition_RefreshClosedReports = &sReportDefinition_RefreshClosedReports
+var ReportDefinition_ReportVersioning = &sReportDefinition_ReportVersioning
+var ReportDefinition_BillingViewArn = &sReportDefinition_BillingViewArn
+var ReportDefinition_ReportStatus = &sReportDefinition_ReportStatus
+
+var _ReportDefinitionList = &s_ReportDefinitionList
+var _ReportDefinitionList_member = &s_ReportDefinitionList_member
+
+var ReportFormat = &sReportFormat
+var ReportFormat_CSV = &sReportFormat_CSV
+var ReportFormat_Parquet = &sReportFormat_Parquet
+
+var ReportLimitReachedException = &sReportLimitReachedException
+var ReportLimitReachedException_Message = &sReportLimitReachedException_Message
+
+var _ReportName = &s_ReportName
+
+var ReportStatus = &sReportStatus
+var ReportStatus_lastDelivery = &sReportStatus_lastDelivery
+var ReportStatus_lastStatus = &sReportStatus_lastStatus
+
+var ReportVersioning = &sReportVersioning
+var ReportVersioning_CREATE_NEW_REPORT = &sReportVersioning_CREATE_NEW_REPORT
+var ReportVersioning_OVERWRITE_REPORT = &sReportVersioning_OVERWRITE_REPORT
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Prefix = &s_S3Prefix
+
+var SchemaElement = &sSchemaElement
+var SchemaElement_RESOURCES = &sSchemaElement_RESOURCES
+var SchemaElement_SPLIT_COST_ALLOCATION_DATA = &sSchemaElement_SPLIT_COST_ALLOCATION_DATA
+var SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY = &sSchemaElement_MANUAL_DISCOUNT_COMPATIBILITY
+
+var _SchemaElementList = &s_SchemaElementList
+var _SchemaElementList_member = &s_SchemaElementList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TimeUnit = &sTimeUnit
+var TimeUnit_HOURLY = &sTimeUnit_HOURLY
+var TimeUnit_DAILY = &sTimeUnit_DAILY
+var TimeUnit_MONTHLY = &sTimeUnit_MONTHLY
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var DeleteReportDefinitionRequest = &sDeleteReportDefinitionRequest
+var DeleteReportDefinitionRequest_ReportName = &sDeleteReportDefinitionRequest_ReportName
+
+var DeleteReportDefinitionResponse = &sDeleteReportDefinitionResponse
+var DeleteReportDefinitionResponse_ResponseMessage = &sDeleteReportDefinitionResponse_ResponseMessage
+
+var DescribeReportDefinitionsRequest = &sDescribeReportDefinitionsRequest
+var DescribeReportDefinitionsRequest_MaxResults = &sDescribeReportDefinitionsRequest_MaxResults
+var DescribeReportDefinitionsRequest_NextToken = &sDescribeReportDefinitionsRequest_NextToken
+
+var DescribeReportDefinitionsResponse = &sDescribeReportDefinitionsResponse
+var DescribeReportDefinitionsResponse_ReportDefinitions = &sDescribeReportDefinitionsResponse_ReportDefinitions
+var DescribeReportDefinitionsResponse_NextToken = &sDescribeReportDefinitionsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ReportName = &sListTagsForResourceRequest_ReportName
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ModifyReportDefinitionRequest = &sModifyReportDefinitionRequest
+var ModifyReportDefinitionRequest_ReportName = &sModifyReportDefinitionRequest_ReportName
+var ModifyReportDefinitionRequest_ReportDefinition = &sModifyReportDefinitionRequest_ReportDefinition
+
+var ModifyReportDefinitionResponse = &sModifyReportDefinitionResponse
+
+var PutReportDefinitionRequest = &sPutReportDefinitionRequest
+var PutReportDefinitionRequest_ReportDefinition = &sPutReportDefinitionRequest_ReportDefinition
+var PutReportDefinitionRequest_Tags = &sPutReportDefinitionRequest_Tags
+
+var PutReportDefinitionResponse = &sPutReportDefinitionResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ReportName = &sTagResourceRequest_ReportName
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ReportName = &sUntagResourceRequest_ReportName
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSOrigamiServiceGatewayService = &smithy.ServiceSchema{Schema: &s_AWSOrigamiServiceGatewayService, Version: "2017-01-06"}

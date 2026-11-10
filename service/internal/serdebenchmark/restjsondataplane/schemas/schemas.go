@@ -4,1603 +4,1500 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CopyObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "CopyObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	eCopyObject                                       smithy.SchemaExtensions
+	eGetMetricData                                    smithy.SchemaExtensions
+	eGetObject                                        smithy.SchemaExtensions
+	eHeadObject                                       smithy.SchemaExtensions
+	eHealthcheck                                      smithy.SchemaExtensions
+	ePutMetricData                                    smithy.SchemaExtensions
+	ePutObject                                        smithy.SchemaExtensions
+	e_AwsRestJsonDataPlane                            smithy.SchemaExtensions
+	eChecksumAlgorithm                                smithy.SchemaExtensions
+	eChecksumAlgorithm_CRC32                          smithy.SchemaExtensions
+	eChecksumAlgorithm_CRC32C                         smithy.SchemaExtensions
+	eChecksumAlgorithm_SHA1                           smithy.SchemaExtensions
+	eChecksumAlgorithm_SHA256                         smithy.SchemaExtensions
+	eChecksumAlgorithm_CRC64NVME                      smithy.SchemaExtensions
+	eChecksumMode                                     smithy.SchemaExtensions
+	eChecksumMode_ENABLED                             smithy.SchemaExtensions
+	e_Counts                                          smithy.SchemaExtensions
+	e_Counts_member                                   smithy.SchemaExtensions
+	eDimension                                        smithy.SchemaExtensions
+	eDimension_Name                                   smithy.SchemaExtensions
+	eDimension_Value                                  smithy.SchemaExtensions
+	e_Dimensions                                      smithy.SchemaExtensions
+	e_Dimensions_member                               smithy.SchemaExtensions
+	eEntity                                           smithy.SchemaExtensions
+	eEntity_KeyAttributes                             smithy.SchemaExtensions
+	eEntity_Attributes                                smithy.SchemaExtensions
+	e_EntityAttributesMap                             smithy.SchemaExtensions
+	e_EntityAttributesMap_key                         smithy.SchemaExtensions
+	e_EntityAttributesMap_value                       smithy.SchemaExtensions
+	e_EntityKeyAttributesMap                          smithy.SchemaExtensions
+	e_EntityKeyAttributesMap_key                      smithy.SchemaExtensions
+	e_EntityKeyAttributesMap_value                    smithy.SchemaExtensions
+	e_EntityMetricDataList                            smithy.SchemaExtensions
+	e_EntityMetricDataList_member                     smithy.SchemaExtensions
+	eEntityMetricDatum                                smithy.SchemaExtensions
+	eEntityMetricDatum_Entity                         smithy.SchemaExtensions
+	eEntityMetricDatum_MetricData                     smithy.SchemaExtensions
+	eLabelOptions                                     smithy.SchemaExtensions
+	eLabelOptions_Timezone                            smithy.SchemaExtensions
+	eMessageData                                      smithy.SchemaExtensions
+	eMessageData_Code                                 smithy.SchemaExtensions
+	eMessageData_Value                                smithy.SchemaExtensions
+	e_Metadata                                        smithy.SchemaExtensions
+	e_Metadata_key                                    smithy.SchemaExtensions
+	e_Metadata_value                                  smithy.SchemaExtensions
+	eMetric                                           smithy.SchemaExtensions
+	eMetric_Namespace                                 smithy.SchemaExtensions
+	eMetric_MetricName                                smithy.SchemaExtensions
+	eMetric_Dimensions                                smithy.SchemaExtensions
+	e_MetricData                                      smithy.SchemaExtensions
+	e_MetricData_member                               smithy.SchemaExtensions
+	e_MetricDataQueries                               smithy.SchemaExtensions
+	e_MetricDataQueries_member                        smithy.SchemaExtensions
+	eMetricDataQuery                                  smithy.SchemaExtensions
+	eMetricDataQuery_Id                               smithy.SchemaExtensions
+	eMetricDataQuery_MetricStat                       smithy.SchemaExtensions
+	eMetricDataQuery_Expression                       smithy.SchemaExtensions
+	eMetricDataQuery_Label                            smithy.SchemaExtensions
+	eMetricDataQuery_ReturnData                       smithy.SchemaExtensions
+	eMetricDataQuery_Period                           smithy.SchemaExtensions
+	eMetricDataQuery_AccountId                        smithy.SchemaExtensions
+	eMetricDataResult                                 smithy.SchemaExtensions
+	eMetricDataResult_Id                              smithy.SchemaExtensions
+	eMetricDataResult_Label                           smithy.SchemaExtensions
+	eMetricDataResult_Timestamps                      smithy.SchemaExtensions
+	eMetricDataResult_Values                          smithy.SchemaExtensions
+	eMetricDataResult_StatusCode                      smithy.SchemaExtensions
+	eMetricDataResult_Messages                        smithy.SchemaExtensions
+	e_MetricDataResultMessages                        smithy.SchemaExtensions
+	e_MetricDataResultMessages_member                 smithy.SchemaExtensions
+	e_MetricDataResults                               smithy.SchemaExtensions
+	e_MetricDataResults_member                        smithy.SchemaExtensions
+	eMetricDatum                                      smithy.SchemaExtensions
+	eMetricDatum_MetricName                           smithy.SchemaExtensions
+	eMetricDatum_Dimensions                           smithy.SchemaExtensions
+	eMetricDatum_Timestamp                            smithy.SchemaExtensions
+	eMetricDatum_Value                                smithy.SchemaExtensions
+	eMetricDatum_StatisticValues                      smithy.SchemaExtensions
+	eMetricDatum_Values                               smithy.SchemaExtensions
+	eMetricDatum_Counts                               smithy.SchemaExtensions
+	eMetricDatum_Unit                                 smithy.SchemaExtensions
+	eMetricDatum_StorageResolution                    smithy.SchemaExtensions
+	eMetricStat                                       smithy.SchemaExtensions
+	eMetricStat_Metric                                smithy.SchemaExtensions
+	eMetricStat_Period                                smithy.SchemaExtensions
+	eMetricStat_Stat                                  smithy.SchemaExtensions
+	eMetricStat_Unit                                  smithy.SchemaExtensions
+	eScanBy                                           smithy.SchemaExtensions
+	eScanBy_TIMESTAMP_DESCENDING                      smithy.SchemaExtensions
+	eScanBy_TIMESTAMP_ASCENDING                       smithy.SchemaExtensions
+	eStandardUnit                                     smithy.SchemaExtensions
+	eStandardUnit_SECONDS                             smithy.SchemaExtensions
+	eStandardUnit_MICROSECONDS                        smithy.SchemaExtensions
+	eStandardUnit_MILLISECONDS                        smithy.SchemaExtensions
+	eStandardUnit_BYTES                               smithy.SchemaExtensions
+	eStandardUnit_KILOBYTES                           smithy.SchemaExtensions
+	eStandardUnit_MEGABYTES                           smithy.SchemaExtensions
+	eStandardUnit_GIGABYTES                           smithy.SchemaExtensions
+	eStandardUnit_TERABYTES                           smithy.SchemaExtensions
+	eStandardUnit_BITS                                smithy.SchemaExtensions
+	eStandardUnit_KILOBITS                            smithy.SchemaExtensions
+	eStandardUnit_MEGABITS                            smithy.SchemaExtensions
+	eStandardUnit_GIGABITS                            smithy.SchemaExtensions
+	eStandardUnit_TERABITS                            smithy.SchemaExtensions
+	eStandardUnit_PERCENT                             smithy.SchemaExtensions
+	eStandardUnit_COUNT                               smithy.SchemaExtensions
+	eStandardUnit_BYTES_SECOND                        smithy.SchemaExtensions
+	eStandardUnit_KILOBYTES_SECOND                    smithy.SchemaExtensions
+	eStandardUnit_MEGABYTES_SECOND                    smithy.SchemaExtensions
+	eStandardUnit_GIGABYTES_SECOND                    smithy.SchemaExtensions
+	eStandardUnit_TERABYTES_SECOND                    smithy.SchemaExtensions
+	eStandardUnit_BITS_SECOND                         smithy.SchemaExtensions
+	eStandardUnit_KILOBITS_SECOND                     smithy.SchemaExtensions
+	eStandardUnit_MEGABITS_SECOND                     smithy.SchemaExtensions
+	eStandardUnit_GIGABITS_SECOND                     smithy.SchemaExtensions
+	eStandardUnit_TERABITS_SECOND                     smithy.SchemaExtensions
+	eStandardUnit_COUNT_SECOND                        smithy.SchemaExtensions
+	eStandardUnit_NONE                                smithy.SchemaExtensions
+	eStatisticSet                                     smithy.SchemaExtensions
+	eStatisticSet_SampleCount                         smithy.SchemaExtensions
+	eStatisticSet_Sum                                 smithy.SchemaExtensions
+	eStatisticSet_Minimum                             smithy.SchemaExtensions
+	eStatisticSet_Maximum                             smithy.SchemaExtensions
+	eStatusCode                                       smithy.SchemaExtensions
+	eStatusCode_COMPLETE                              smithy.SchemaExtensions
+	eStatusCode_INTERNAL_ERROR                        smithy.SchemaExtensions
+	eStatusCode_PARTIAL_DATA                          smithy.SchemaExtensions
+	eStatusCode_FORBIDDEN                             smithy.SchemaExtensions
+	e_Timestamps                                      smithy.SchemaExtensions
+	e_Timestamps_member                               smithy.SchemaExtensions
+	e_Values                                          smithy.SchemaExtensions
+	e_Values_member                                   smithy.SchemaExtensions
+	eCopyObjectRequest                                smithy.SchemaExtensions
+	eCopyObjectRequest_ACL                            smithy.SchemaExtensions
+	eCopyObjectRequest_Bucket                         smithy.SchemaExtensions
+	eCopyObjectRequest_CacheControl                   smithy.SchemaExtensions
+	eCopyObjectRequest_ChecksumAlgorithm              smithy.SchemaExtensions
+	eCopyObjectRequest_ContentDisposition             smithy.SchemaExtensions
+	eCopyObjectRequest_ContentEncoding                smithy.SchemaExtensions
+	eCopyObjectRequest_ContentLanguage                smithy.SchemaExtensions
+	eCopyObjectRequest_ContentType                    smithy.SchemaExtensions
+	eCopyObjectRequest_CopySource                     smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceIfMatch              smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceIfModifiedSince      smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceIfNoneMatch          smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceIfUnmodifiedSince    smithy.SchemaExtensions
+	eCopyObjectRequest_Expires                        smithy.SchemaExtensions
+	eCopyObjectRequest_GrantFullControl               smithy.SchemaExtensions
+	eCopyObjectRequest_GrantRead                      smithy.SchemaExtensions
+	eCopyObjectRequest_GrantReadACP                   smithy.SchemaExtensions
+	eCopyObjectRequest_GrantWriteACP                  smithy.SchemaExtensions
+	eCopyObjectRequest_IfMatch                        smithy.SchemaExtensions
+	eCopyObjectRequest_IfNoneMatch                    smithy.SchemaExtensions
+	eCopyObjectRequest_Key                            smithy.SchemaExtensions
+	eCopyObjectRequest_MetadataDirective              smithy.SchemaExtensions
+	eCopyObjectRequest_TaggingDirective               smithy.SchemaExtensions
+	eCopyObjectRequest_ServerSideEncryption           smithy.SchemaExtensions
+	eCopyObjectRequest_StorageClass                   smithy.SchemaExtensions
+	eCopyObjectRequest_WebsiteRedirectLocation        smithy.SchemaExtensions
+	eCopyObjectRequest_SSECustomerAlgorithm           smithy.SchemaExtensions
+	eCopyObjectRequest_SSECustomerKey                 smithy.SchemaExtensions
+	eCopyObjectRequest_SSECustomerKeyMD5              smithy.SchemaExtensions
+	eCopyObjectRequest_SSEKMSKeyId                    smithy.SchemaExtensions
+	eCopyObjectRequest_SSEKMSEncryptionContext        smithy.SchemaExtensions
+	eCopyObjectRequest_BucketKeyEnabled               smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceSSECustomerAlgorithm smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceSSECustomerKey       smithy.SchemaExtensions
+	eCopyObjectRequest_CopySourceSSECustomerKeyMD5    smithy.SchemaExtensions
+	eCopyObjectRequest_RequestPayer                   smithy.SchemaExtensions
+	eCopyObjectRequest_Tagging                        smithy.SchemaExtensions
+	eCopyObjectRequest_ObjectLockMode                 smithy.SchemaExtensions
+	eCopyObjectRequest_ObjectLockRetainUntilDate      smithy.SchemaExtensions
+	eCopyObjectRequest_ObjectLockLegalHoldStatus      smithy.SchemaExtensions
+	eCopyObjectRequest_ExpectedBucketOwner            smithy.SchemaExtensions
+	eCopyObjectRequest_ExpectedSourceBucketOwner      smithy.SchemaExtensions
+	eCopyObjectOutput                                 smithy.SchemaExtensions
+	eCopyObjectOutput_Expiration                      smithy.SchemaExtensions
+	eCopyObjectOutput_CopySourceVersionId             smithy.SchemaExtensions
+	eCopyObjectOutput_VersionId                       smithy.SchemaExtensions
+	eCopyObjectOutput_ServerSideEncryption            smithy.SchemaExtensions
+	eCopyObjectOutput_SSECustomerAlgorithm            smithy.SchemaExtensions
+	eCopyObjectOutput_SSECustomerKeyMD5               smithy.SchemaExtensions
+	eCopyObjectOutput_SSEKMSKeyId                     smithy.SchemaExtensions
+	eCopyObjectOutput_SSEKMSEncryptionContext         smithy.SchemaExtensions
+	eCopyObjectOutput_BucketKeyEnabled                smithy.SchemaExtensions
+	eCopyObjectOutput_RequestCharged                  smithy.SchemaExtensions
+	eCopyObjectOutput_ETag                            smithy.SchemaExtensions
+	eCopyObjectOutput_LastModified                    smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumType                    smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumCRC32                   smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumCRC32C                  smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumCRC64NVME               smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumSHA1                    smithy.SchemaExtensions
+	eCopyObjectOutput_ChecksumSHA256                  smithy.SchemaExtensions
+	eGetMetricDataInput                               smithy.SchemaExtensions
+	eGetMetricDataInput_MetricDataQueries             smithy.SchemaExtensions
+	eGetMetricDataInput_StartTime                     smithy.SchemaExtensions
+	eGetMetricDataInput_EndTime                       smithy.SchemaExtensions
+	eGetMetricDataInput_NextToken                     smithy.SchemaExtensions
+	eGetMetricDataInput_ScanBy                        smithy.SchemaExtensions
+	eGetMetricDataInput_MaxDatapoints                 smithy.SchemaExtensions
+	eGetMetricDataInput_LabelOptions                  smithy.SchemaExtensions
+	eGetMetricDataOutput                              smithy.SchemaExtensions
+	eGetMetricDataOutput_MetricDataResults            smithy.SchemaExtensions
+	eGetMetricDataOutput_NextToken                    smithy.SchemaExtensions
+	eGetMetricDataOutput_Messages                     smithy.SchemaExtensions
+	eGetObjectRequest                                 smithy.SchemaExtensions
+	eGetObjectRequest_Bucket                          smithy.SchemaExtensions
+	eGetObjectRequest_Key                             smithy.SchemaExtensions
+	eGetObjectRequest_IfMatch                         smithy.SchemaExtensions
+	eGetObjectRequest_IfModifiedSince                 smithy.SchemaExtensions
+	eGetObjectRequest_IfNoneMatch                     smithy.SchemaExtensions
+	eGetObjectRequest_IfUnmodifiedSince               smithy.SchemaExtensions
+	eGetObjectRequest_Range                           smithy.SchemaExtensions
+	eGetObjectRequest_ResponseCacheControl            smithy.SchemaExtensions
+	eGetObjectRequest_ResponseContentDisposition      smithy.SchemaExtensions
+	eGetObjectRequest_ResponseContentEncoding         smithy.SchemaExtensions
+	eGetObjectRequest_ResponseContentLanguage         smithy.SchemaExtensions
+	eGetObjectRequest_ResponseContentType             smithy.SchemaExtensions
+	eGetObjectRequest_ResponseExpires                 smithy.SchemaExtensions
+	eGetObjectRequest_VersionId                       smithy.SchemaExtensions
+	eGetObjectRequest_SSECustomerAlgorithm            smithy.SchemaExtensions
+	eGetObjectRequest_SSECustomerKey                  smithy.SchemaExtensions
+	eGetObjectRequest_SSECustomerKeyMD5               smithy.SchemaExtensions
+	eGetObjectRequest_RequestPayer                    smithy.SchemaExtensions
+	eGetObjectRequest_PartNumber                      smithy.SchemaExtensions
+	eGetObjectRequest_ExpectedBucketOwner             smithy.SchemaExtensions
+	eGetObjectRequest_ChecksumMode                    smithy.SchemaExtensions
+	eGetObjectOutput                                  smithy.SchemaExtensions
+	eGetObjectOutput_Body                             smithy.SchemaExtensions
+	eGetObjectOutput_DeleteMarker                     smithy.SchemaExtensions
+	eGetObjectOutput_AcceptRanges                     smithy.SchemaExtensions
+	eGetObjectOutput_Expiration                       smithy.SchemaExtensions
+	eGetObjectOutput_Restore                          smithy.SchemaExtensions
+	eGetObjectOutput_LastModified                     smithy.SchemaExtensions
+	eGetObjectOutput_ContentLength                    smithy.SchemaExtensions
+	eGetObjectOutput_ETag                             smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumCRC32                    smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumCRC32C                   smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumCRC64NVME                smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumSHA1                     smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumSHA256                   smithy.SchemaExtensions
+	eGetObjectOutput_ChecksumType                     smithy.SchemaExtensions
+	eGetObjectOutput_MissingMeta                      smithy.SchemaExtensions
+	eGetObjectOutput_VersionId                        smithy.SchemaExtensions
+	eGetObjectOutput_CacheControl                     smithy.SchemaExtensions
+	eGetObjectOutput_ContentDisposition               smithy.SchemaExtensions
+	eGetObjectOutput_ContentEncoding                  smithy.SchemaExtensions
+	eGetObjectOutput_ContentLanguage                  smithy.SchemaExtensions
+	eGetObjectOutput_ContentType                      smithy.SchemaExtensions
+	eGetObjectOutput_Expires                          smithy.SchemaExtensions
+	eGetObjectOutput_WebsiteRedirectLocation          smithy.SchemaExtensions
+	eGetObjectOutput_ServerSideEncryption             smithy.SchemaExtensions
+	eGetObjectOutput_SSECustomerAlgorithm             smithy.SchemaExtensions
+	eGetObjectOutput_SSECustomerKeyMD5                smithy.SchemaExtensions
+	eGetObjectOutput_SSEKMSKeyId                      smithy.SchemaExtensions
+	eGetObjectOutput_BucketKeyEnabled                 smithy.SchemaExtensions
+	eGetObjectOutput_StorageClass                     smithy.SchemaExtensions
+	eGetObjectOutput_RequestCharged                   smithy.SchemaExtensions
+	eGetObjectOutput_ReplicationStatus                smithy.SchemaExtensions
+	eGetObjectOutput_PartsCount                       smithy.SchemaExtensions
+	eGetObjectOutput_TagCount                         smithy.SchemaExtensions
+	eGetObjectOutput_ObjectLockMode                   smithy.SchemaExtensions
+	eGetObjectOutput_ObjectLockRetainUntilDate        smithy.SchemaExtensions
+	eGetObjectOutput_ObjectLockLegalHoldStatus        smithy.SchemaExtensions
+	eHeadObjectRequest                                smithy.SchemaExtensions
+	eHeadObjectRequest_Bucket                         smithy.SchemaExtensions
+	eHeadObjectRequest_IfMatch                        smithy.SchemaExtensions
+	eHeadObjectRequest_IfModifiedSince                smithy.SchemaExtensions
+	eHeadObjectRequest_IfNoneMatch                    smithy.SchemaExtensions
+	eHeadObjectRequest_IfUnmodifiedSince              smithy.SchemaExtensions
+	eHeadObjectRequest_Key                            smithy.SchemaExtensions
+	eHeadObjectRequest_Range                          smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseCacheControl           smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseContentDisposition     smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseContentEncoding        smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseContentLanguage        smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseContentType            smithy.SchemaExtensions
+	eHeadObjectRequest_ResponseExpires                smithy.SchemaExtensions
+	eHeadObjectRequest_VersionId                      smithy.SchemaExtensions
+	eHeadObjectRequest_SSECustomerAlgorithm           smithy.SchemaExtensions
+	eHeadObjectRequest_SSECustomerKey                 smithy.SchemaExtensions
+	eHeadObjectRequest_SSECustomerKeyMD5              smithy.SchemaExtensions
+	eHeadObjectRequest_RequestPayer                   smithy.SchemaExtensions
+	eHeadObjectRequest_PartNumber                     smithy.SchemaExtensions
+	eHeadObjectRequest_ExpectedBucketOwner            smithy.SchemaExtensions
+	eHeadObjectRequest_ChecksumMode                   smithy.SchemaExtensions
+	eHeadObjectOutput                                 smithy.SchemaExtensions
+	eHeadObjectOutput_DeleteMarker                    smithy.SchemaExtensions
+	eHeadObjectOutput_AcceptRanges                    smithy.SchemaExtensions
+	eHeadObjectOutput_Expiration                      smithy.SchemaExtensions
+	eHeadObjectOutput_Restore                         smithy.SchemaExtensions
+	eHeadObjectOutput_ArchiveStatus                   smithy.SchemaExtensions
+	eHeadObjectOutput_LastModified                    smithy.SchemaExtensions
+	eHeadObjectOutput_ContentLength                   smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumCRC32                   smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumCRC32C                  smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumCRC64NVME               smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumSHA1                    smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumSHA256                  smithy.SchemaExtensions
+	eHeadObjectOutput_ChecksumType                    smithy.SchemaExtensions
+	eHeadObjectOutput_ETag                            smithy.SchemaExtensions
+	eHeadObjectOutput_MissingMeta                     smithy.SchemaExtensions
+	eHeadObjectOutput_VersionId                       smithy.SchemaExtensions
+	eHeadObjectOutput_CacheControl                    smithy.SchemaExtensions
+	eHeadObjectOutput_ContentDisposition              smithy.SchemaExtensions
+	eHeadObjectOutput_ContentEncoding                 smithy.SchemaExtensions
+	eHeadObjectOutput_ContentLanguage                 smithy.SchemaExtensions
+	eHeadObjectOutput_ContentType                     smithy.SchemaExtensions
+	eHeadObjectOutput_ContentRange                    smithy.SchemaExtensions
+	eHeadObjectOutput_Expires                         smithy.SchemaExtensions
+	eHeadObjectOutput_WebsiteRedirectLocation         smithy.SchemaExtensions
+	eHeadObjectOutput_ServerSideEncryption            smithy.SchemaExtensions
+	eHeadObjectOutput_SSECustomerAlgorithm            smithy.SchemaExtensions
+	eHeadObjectOutput_SSECustomerKeyMD5               smithy.SchemaExtensions
+	eHeadObjectOutput_SSEKMSKeyId                     smithy.SchemaExtensions
+	eHeadObjectOutput_BucketKeyEnabled                smithy.SchemaExtensions
+	eHeadObjectOutput_StorageClass                    smithy.SchemaExtensions
+	eHeadObjectOutput_RequestCharged                  smithy.SchemaExtensions
+	eHeadObjectOutput_ReplicationStatus               smithy.SchemaExtensions
+	eHeadObjectOutput_PartsCount                      smithy.SchemaExtensions
+	eHeadObjectOutput_TagCount                        smithy.SchemaExtensions
+	eHeadObjectOutput_ObjectLockMode                  smithy.SchemaExtensions
+	eHeadObjectOutput_ObjectLockRetainUntilDate       smithy.SchemaExtensions
+	eHeadObjectOutput_ObjectLockLegalHoldStatus       smithy.SchemaExtensions
+	eHealthcheckOutput                                smithy.SchemaExtensions
+	eHealthcheckOutput_ok                             smithy.SchemaExtensions
+	ePutMetricDataInput                               smithy.SchemaExtensions
+	ePutMetricDataInput_Namespace                     smithy.SchemaExtensions
+	ePutMetricDataInput_MetricData                    smithy.SchemaExtensions
+	ePutMetricDataInput_EntityMetricData              smithy.SchemaExtensions
+	ePutMetricDataInput_StrictEntityValidation        smithy.SchemaExtensions
+	ePutObjectRequest                                 smithy.SchemaExtensions
+	ePutObjectRequest_Bucket                          smithy.SchemaExtensions
+	ePutObjectRequest_Key                             smithy.SchemaExtensions
+	ePutObjectRequest_Body                            smithy.SchemaExtensions
+	ePutObjectRequest_ACL                             smithy.SchemaExtensions
+	ePutObjectRequest_CacheControl                    smithy.SchemaExtensions
+	ePutObjectRequest_ContentDisposition              smithy.SchemaExtensions
+	ePutObjectRequest_ContentEncoding                 smithy.SchemaExtensions
+	ePutObjectRequest_ContentLanguage                 smithy.SchemaExtensions
+	ePutObjectRequest_ContentLength                   smithy.SchemaExtensions
+	ePutObjectRequest_ContentMD5                      smithy.SchemaExtensions
+	ePutObjectRequest_ContentType                     smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumAlgorithm               smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumCRC32                   smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumCRC32C                  smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumCRC64NVME               smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumSHA1                    smithy.SchemaExtensions
+	ePutObjectRequest_ChecksumSHA256                  smithy.SchemaExtensions
+	ePutObjectRequest_Expires                         smithy.SchemaExtensions
+	ePutObjectRequest_IfMatch                         smithy.SchemaExtensions
+	ePutObjectRequest_IfNoneMatch                     smithy.SchemaExtensions
+	ePutObjectRequest_GrantFullControl                smithy.SchemaExtensions
+	ePutObjectRequest_GrantRead                       smithy.SchemaExtensions
+	ePutObjectRequest_GrantReadACP                    smithy.SchemaExtensions
+	ePutObjectRequest_GrantWriteACP                   smithy.SchemaExtensions
+	ePutObjectRequest_WriteOffsetBytes                smithy.SchemaExtensions
+	ePutObjectRequest_Metadata                        smithy.SchemaExtensions
+	ePutObjectRequest_ServerSideEncryption            smithy.SchemaExtensions
+	ePutObjectRequest_StorageClass                    smithy.SchemaExtensions
+	ePutObjectRequest_WebsiteRedirectLocation         smithy.SchemaExtensions
+	ePutObjectRequest_SSECustomerAlgorithm            smithy.SchemaExtensions
+	ePutObjectRequest_SSECustomerKey                  smithy.SchemaExtensions
+	ePutObjectRequest_SSECustomerKeyMD5               smithy.SchemaExtensions
+	ePutObjectRequest_SSEKMSKeyId                     smithy.SchemaExtensions
+	ePutObjectRequest_SSEKMSEncryptionContext         smithy.SchemaExtensions
+	ePutObjectRequest_BucketKeyEnabled                smithy.SchemaExtensions
+	ePutObjectRequest_RequestPayer                    smithy.SchemaExtensions
+	ePutObjectRequest_Tagging                         smithy.SchemaExtensions
+	ePutObjectRequest_ObjectLockMode                  smithy.SchemaExtensions
+	ePutObjectRequest_ObjectLockRetainUntilDate       smithy.SchemaExtensions
+	ePutObjectRequest_ObjectLockLegalHoldStatus       smithy.SchemaExtensions
+	ePutObjectRequest_ExpectedBucketOwner             smithy.SchemaExtensions
+	ePutObjectOutput                                  smithy.SchemaExtensions
+	ePutObjectOutput_Expiration                       smithy.SchemaExtensions
+	ePutObjectOutput_ETag                             smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumCRC32                    smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumCRC32C                   smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumCRC64NVME                smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumSHA1                     smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumSHA256                   smithy.SchemaExtensions
+	ePutObjectOutput_ChecksumType                     smithy.SchemaExtensions
+	ePutObjectOutput_ServerSideEncryption             smithy.SchemaExtensions
+	ePutObjectOutput_VersionId                        smithy.SchemaExtensions
+	ePutObjectOutput_SSECustomerAlgorithm             smithy.SchemaExtensions
+	ePutObjectOutput_SSECustomerKeyMD5                smithy.SchemaExtensions
+	ePutObjectOutput_SSEKMSKeyId                      smithy.SchemaExtensions
+	ePutObjectOutput_SSEKMSEncryptionContext          smithy.SchemaExtensions
+	ePutObjectOutput_BucketKeyEnabled                 smithy.SchemaExtensions
+	ePutObjectOutput_Size                             smithy.SchemaExtensions
+	ePutObjectOutput_RequestCharged                   smithy.SchemaExtensions
+)
+
+var (
+	iCopyObject                = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "CopyObject"}
+	iGetMetricData             = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetMetricData"}
+	iGetObject                 = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetObject"}
+	iHeadObject                = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "HeadObject"}
+	iHealthcheck               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Healthcheck"}
+	iPutMetricData             = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "PutMetricData"}
+	iPutObject                 = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "PutObject"}
+	i_AwsRestJsonDataPlane     = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "AwsRestJsonDataPlane"}
+	iChecksumAlgorithm         = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "ChecksumAlgorithm"}
+	iChecksumMode              = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "ChecksumMode"}
+	i_Counts                   = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Counts"}
+	iDimension                 = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Dimension"}
+	i_Dimensions               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Dimensions"}
+	iEntity                    = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Entity"}
+	i_EntityAttributesMap      = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "EntityAttributesMap"}
+	i_EntityKeyAttributesMap   = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "EntityKeyAttributesMap"}
+	i_EntityMetricDataList     = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "EntityMetricDataList"}
+	iEntityMetricDatum         = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "EntityMetricDatum"}
+	iLabelOptions              = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "LabelOptions"}
+	iMessageData               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MessageData"}
+	i_Metadata                 = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Metadata"}
+	iMetric                    = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Metric"}
+	i_MetricData               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricData"}
+	i_MetricDataQueries        = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDataQueries"}
+	iMetricDataQuery           = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDataQuery"}
+	iMetricDataResult          = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDataResult"}
+	i_MetricDataResultMessages = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDataResultMessages"}
+	i_MetricDataResults        = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDataResults"}
+	iMetricDatum               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricDatum"}
+	iMetricStat                = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "MetricStat"}
+	iScanBy                    = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "ScanBy"}
+	iStandardUnit              = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "StandardUnit"}
+	iStatisticSet              = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "StatisticSet"}
+	iStatusCode                = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "StatusCode"}
+	i_Timestamps               = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Timestamps"}
+	i_Values                   = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "Values"}
+	iCopyObjectRequest         = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "CopyObjectRequest"}
+	iCopyObjectOutput          = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "CopyObjectOutput"}
+	iGetMetricDataInput        = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetMetricDataInput"}
+	iGetMetricDataOutput       = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetMetricDataOutput"}
+	iGetObjectRequest          = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetObjectRequest"}
+	iGetObjectOutput           = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "GetObjectOutput"}
+	iHeadObjectRequest         = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "HeadObjectRequest"}
+	iHeadObjectOutput          = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "HeadObjectOutput"}
+	iHealthcheckOutput         = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "HealthcheckOutput"}
+	iPutMetricDataInput        = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "PutMetricDataInput"}
+	iPutObjectRequest          = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "PutObjectRequest"}
+	iPutObjectOutput           = smithy.ShapeName{Namespace: "com.amazonaws.sdk.benchmark", Name: "PutObjectOutput"}
+	pUnit                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pDouble                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+	pString                    = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                   = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBlob                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Blob"}
+	pLong                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/{Bucket}/{Key+}?x-id=CopyObject",
-	Code: 200})
-
-var GetMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetMetricData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetMetricData",
-	Code: 200})
-
-var GetObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/{Bucket}/{Key}",
-	Code: 200})
-
-var HeadObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "HeadObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "HEAD",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "HEAD",
 	URI:  "/{Bucket}/{Key+}",
-	Code: 200})
-
-var Healthcheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Healthcheck",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/Healthcheck",
-	Code: 200})
-
-var PutMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "PutMetricData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutMetricData",
-	Code: 200})
-
-var PutObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "PutObject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/{Bucket}/{Key}",
-	Code: 200})
-
-var _AwsRestJsonDataPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "AwsRestJsonDataPlane",
-}, smithy.ShapeTypeService, 0)
-
-var AwsRestJsonDataPlane = smithy.NewServiceSchema(_AwsRestJsonDataPlane, "1999-12-31")
-
-var ChecksumAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "ChecksumAlgorithm",
-}, smithy.ShapeTypeEnum, 5)
-var ChecksumAlgorithm_CRC32 *smithy.Schema
-
-var ChecksumAlgorithm_CRC32C *smithy.Schema
-
-var ChecksumAlgorithm_SHA1 *smithy.Schema
-
-var ChecksumAlgorithm_SHA256 *smithy.Schema
-
-var ChecksumAlgorithm_CRC64NVME *smithy.Schema
-
-var ChecksumMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "ChecksumMode",
-}, smithy.ShapeTypeEnum, 1)
-var ChecksumMode_ENABLED *smithy.Schema
-
-var _Counts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Counts",
-}, smithy.ShapeTypeList, 1)
-var _Counts_member *smithy.Schema
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 2)
-var Dimension_Name *smithy.Schema
-
-var Dimension_Value *smithy.Schema
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2)
-var Entity_KeyAttributes *smithy.Schema
-
-var Entity_Attributes *smithy.Schema
-
-var _EntityAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "EntityAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _EntityAttributesMap_key *smithy.Schema
-
-var _EntityAttributesMap_value *smithy.Schema
-
-var _EntityKeyAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "EntityKeyAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _EntityKeyAttributesMap_key *smithy.Schema
-
-var _EntityKeyAttributesMap_value *smithy.Schema
-
-var _EntityMetricDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "EntityMetricDataList",
-}, smithy.ShapeTypeList, 1)
-var _EntityMetricDataList_member *smithy.Schema
-
-var EntityMetricDatum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "EntityMetricDatum",
-}, smithy.ShapeTypeStructure, 2)
-var EntityMetricDatum_Entity *smithy.Schema
-
-var EntityMetricDatum_MetricData *smithy.Schema
-
-var LabelOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "LabelOptions",
-}, smithy.ShapeTypeStructure, 1)
-var LabelOptions_Timezone *smithy.Schema
-
-var MessageData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MessageData",
-}, smithy.ShapeTypeStructure, 2)
-var MessageData_Code *smithy.Schema
-
-var MessageData_Value *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2)
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var Metric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Metric",
-}, smithy.ShapeTypeStructure, 3)
-var Metric_Namespace *smithy.Schema
-
-var Metric_MetricName *smithy.Schema
-
-var Metric_Dimensions *smithy.Schema
-
-var _MetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricData",
-}, smithy.ShapeTypeList, 1)
-var _MetricData_member *smithy.Schema
-
-var _MetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDataQueries",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataQueries_member *smithy.Schema
-
-var MetricDataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDataQuery",
-}, smithy.ShapeTypeStructure, 7)
-var MetricDataQuery_Id *smithy.Schema
-
-var MetricDataQuery_MetricStat *smithy.Schema
-
-var MetricDataQuery_Expression *smithy.Schema
-
-var MetricDataQuery_Label *smithy.Schema
-
-var MetricDataQuery_ReturnData *smithy.Schema
-
-var MetricDataQuery_Period *smithy.Schema
-
-var MetricDataQuery_AccountId *smithy.Schema
-
-var MetricDataResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDataResult",
-}, smithy.ShapeTypeStructure, 6)
-var MetricDataResult_Id *smithy.Schema
-
-var MetricDataResult_Label *smithy.Schema
-
-var MetricDataResult_Timestamps *smithy.Schema
-
-var MetricDataResult_Values *smithy.Schema
-
-var MetricDataResult_StatusCode *smithy.Schema
-
-var MetricDataResult_Messages *smithy.Schema
-
-var _MetricDataResultMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDataResultMessages",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataResultMessages_member *smithy.Schema
-
-var _MetricDataResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDataResults",
-}, smithy.ShapeTypeList, 1)
-var _MetricDataResults_member *smithy.Schema
-
-var MetricDatum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricDatum",
-}, smithy.ShapeTypeStructure, 9)
-var MetricDatum_MetricName *smithy.Schema
-
-var MetricDatum_Dimensions *smithy.Schema
-
-var MetricDatum_Timestamp *smithy.Schema
-
-var MetricDatum_Value *smithy.Schema
-
-var MetricDatum_StatisticValues *smithy.Schema
-
-var MetricDatum_Values *smithy.Schema
-
-var MetricDatum_Counts *smithy.Schema
-
-var MetricDatum_Unit *smithy.Schema
-
-var MetricDatum_StorageResolution *smithy.Schema
-
-var MetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "MetricStat",
-}, smithy.ShapeTypeStructure, 4)
-var MetricStat_Metric *smithy.Schema
-
-var MetricStat_Period *smithy.Schema
-
-var MetricStat_Stat *smithy.Schema
-
-var MetricStat_Unit *smithy.Schema
-
-var ScanBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "ScanBy",
-}, smithy.ShapeTypeEnum, 2)
-var ScanBy_TIMESTAMP_DESCENDING *smithy.Schema
-
-var ScanBy_TIMESTAMP_ASCENDING *smithy.Schema
-
-var StandardUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "StandardUnit",
-}, smithy.ShapeTypeEnum, 27)
-var StandardUnit_SECONDS *smithy.Schema
-
-var StandardUnit_MICROSECONDS *smithy.Schema
-
-var StandardUnit_MILLISECONDS *smithy.Schema
-
-var StandardUnit_BYTES *smithy.Schema
-
-var StandardUnit_KILOBYTES *smithy.Schema
-
-var StandardUnit_MEGABYTES *smithy.Schema
-
-var StandardUnit_GIGABYTES *smithy.Schema
-
-var StandardUnit_TERABYTES *smithy.Schema
-
-var StandardUnit_BITS *smithy.Schema
-
-var StandardUnit_KILOBITS *smithy.Schema
-
-var StandardUnit_MEGABITS *smithy.Schema
-
-var StandardUnit_GIGABITS *smithy.Schema
-
-var StandardUnit_TERABITS *smithy.Schema
-
-var StandardUnit_PERCENT *smithy.Schema
-
-var StandardUnit_COUNT *smithy.Schema
-
-var StandardUnit_BYTES_SECOND *smithy.Schema
-
-var StandardUnit_KILOBYTES_SECOND *smithy.Schema
-
-var StandardUnit_MEGABYTES_SECOND *smithy.Schema
-
-var StandardUnit_GIGABYTES_SECOND *smithy.Schema
-
-var StandardUnit_TERABYTES_SECOND *smithy.Schema
-
-var StandardUnit_BITS_SECOND *smithy.Schema
-
-var StandardUnit_KILOBITS_SECOND *smithy.Schema
-
-var StandardUnit_MEGABITS_SECOND *smithy.Schema
-
-var StandardUnit_GIGABITS_SECOND *smithy.Schema
-
-var StandardUnit_TERABITS_SECOND *smithy.Schema
-
-var StandardUnit_COUNT_SECOND *smithy.Schema
-
-var StandardUnit_NONE *smithy.Schema
-
-var StatisticSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "StatisticSet",
-}, smithy.ShapeTypeStructure, 4)
-var StatisticSet_SampleCount *smithy.Schema
-
-var StatisticSet_Sum *smithy.Schema
-
-var StatisticSet_Minimum *smithy.Schema
-
-var StatisticSet_Maximum *smithy.Schema
-
-var StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeEnum, 4)
-var StatusCode_COMPLETE *smithy.Schema
-
-var StatusCode_INTERNAL_ERROR *smithy.Schema
-
-var StatusCode_PARTIAL_DATA *smithy.Schema
-
-var StatusCode_FORBIDDEN *smithy.Schema
-
-var _Timestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Timestamps",
-}, smithy.ShapeTypeList, 1)
-var _Timestamps_member *smithy.Schema
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var CopyObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "CopyObjectRequest",
-}, smithy.ShapeTypeStructure, 42)
-var CopyObjectRequest_ACL *smithy.Schema
-
-var CopyObjectRequest_Bucket *smithy.Schema
-
-var CopyObjectRequest_CacheControl *smithy.Schema
-
-var CopyObjectRequest_ChecksumAlgorithm *smithy.Schema
-
-var CopyObjectRequest_ContentDisposition *smithy.Schema
-
-var CopyObjectRequest_ContentEncoding *smithy.Schema
-
-var CopyObjectRequest_ContentLanguage *smithy.Schema
-
-var CopyObjectRequest_ContentType *smithy.Schema
-
-var CopyObjectRequest_CopySource *smithy.Schema
-
-var CopyObjectRequest_CopySourceIfMatch *smithy.Schema
-
-var CopyObjectRequest_CopySourceIfModifiedSince *smithy.Schema
-
-var CopyObjectRequest_CopySourceIfNoneMatch *smithy.Schema
-
-var CopyObjectRequest_CopySourceIfUnmodifiedSince *smithy.Schema
-
-var CopyObjectRequest_Expires *smithy.Schema
-
-var CopyObjectRequest_GrantFullControl *smithy.Schema
-
-var CopyObjectRequest_GrantRead *smithy.Schema
-
-var CopyObjectRequest_GrantReadACP *smithy.Schema
-
-var CopyObjectRequest_GrantWriteACP *smithy.Schema
-
-var CopyObjectRequest_IfMatch *smithy.Schema
-
-var CopyObjectRequest_IfNoneMatch *smithy.Schema
-
-var CopyObjectRequest_Key *smithy.Schema
-
-var CopyObjectRequest_MetadataDirective *smithy.Schema
-
-var CopyObjectRequest_TaggingDirective *smithy.Schema
-
-var CopyObjectRequest_ServerSideEncryption *smithy.Schema
-
-var CopyObjectRequest_StorageClass *smithy.Schema
-
-var CopyObjectRequest_WebsiteRedirectLocation *smithy.Schema
-
-var CopyObjectRequest_SSECustomerAlgorithm *smithy.Schema
-
-var CopyObjectRequest_SSECustomerKey *smithy.Schema
-
-var CopyObjectRequest_SSECustomerKeyMD5 *smithy.Schema
-
-var CopyObjectRequest_SSEKMSKeyId *smithy.Schema
-
-var CopyObjectRequest_SSEKMSEncryptionContext *smithy.Schema
-
-var CopyObjectRequest_BucketKeyEnabled *smithy.Schema
-
-var CopyObjectRequest_CopySourceSSECustomerAlgorithm *smithy.Schema
-
-var CopyObjectRequest_CopySourceSSECustomerKey *smithy.Schema
-
-var CopyObjectRequest_CopySourceSSECustomerKeyMD5 *smithy.Schema
-
-var CopyObjectRequest_RequestPayer *smithy.Schema
-
-var CopyObjectRequest_Tagging *smithy.Schema
-
-var CopyObjectRequest_ObjectLockMode *smithy.Schema
-
-var CopyObjectRequest_ObjectLockRetainUntilDate *smithy.Schema
-
-var CopyObjectRequest_ObjectLockLegalHoldStatus *smithy.Schema
-
-var CopyObjectRequest_ExpectedBucketOwner *smithy.Schema
-
-var CopyObjectRequest_ExpectedSourceBucketOwner *smithy.Schema
-
-var CopyObjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "CopyObjectOutput",
-}, smithy.ShapeTypeStructure, 18)
-var CopyObjectOutput_Expiration *smithy.Schema
-
-var CopyObjectOutput_CopySourceVersionId *smithy.Schema
-
-var CopyObjectOutput_VersionId *smithy.Schema
-
-var CopyObjectOutput_ServerSideEncryption *smithy.Schema
-
-var CopyObjectOutput_SSECustomerAlgorithm *smithy.Schema
-
-var CopyObjectOutput_SSECustomerKeyMD5 *smithy.Schema
-
-var CopyObjectOutput_SSEKMSKeyId *smithy.Schema
-
-var CopyObjectOutput_SSEKMSEncryptionContext *smithy.Schema
-
-var CopyObjectOutput_BucketKeyEnabled *smithy.Schema
-
-var CopyObjectOutput_RequestCharged *smithy.Schema
-
-var CopyObjectOutput_ETag *smithy.Schema
-
-var CopyObjectOutput_LastModified *smithy.Schema
-
-var CopyObjectOutput_ChecksumType *smithy.Schema
-
-var CopyObjectOutput_ChecksumCRC32 *smithy.Schema
-
-var CopyObjectOutput_ChecksumCRC32C *smithy.Schema
-
-var CopyObjectOutput_ChecksumCRC64NVME *smithy.Schema
-
-var CopyObjectOutput_ChecksumSHA1 *smithy.Schema
-
-var CopyObjectOutput_ChecksumSHA256 *smithy.Schema
-
-var GetMetricDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetMetricDataInput",
-}, smithy.ShapeTypeStructure, 7)
-var GetMetricDataInput_MetricDataQueries *smithy.Schema
-
-var GetMetricDataInput_StartTime *smithy.Schema
-
-var GetMetricDataInput_EndTime *smithy.Schema
-
-var GetMetricDataInput_NextToken *smithy.Schema
-
-var GetMetricDataInput_ScanBy *smithy.Schema
-
-var GetMetricDataInput_MaxDatapoints *smithy.Schema
-
-var GetMetricDataInput_LabelOptions *smithy.Schema
-
-var GetMetricDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetMetricDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMetricDataOutput_MetricDataResults *smithy.Schema
-
-var GetMetricDataOutput_NextToken *smithy.Schema
-
-var GetMetricDataOutput_Messages *smithy.Schema
-
-var GetObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetObjectRequest",
-}, smithy.ShapeTypeStructure, 21)
-var GetObjectRequest_Bucket *smithy.Schema
-
-var GetObjectRequest_Key *smithy.Schema
-
-var GetObjectRequest_IfMatch *smithy.Schema
-
-var GetObjectRequest_IfModifiedSince *smithy.Schema
-
-var GetObjectRequest_IfNoneMatch *smithy.Schema
-
-var GetObjectRequest_IfUnmodifiedSince *smithy.Schema
-
-var GetObjectRequest_Range *smithy.Schema
-
-var GetObjectRequest_ResponseCacheControl *smithy.Schema
-
-var GetObjectRequest_ResponseContentDisposition *smithy.Schema
-
-var GetObjectRequest_ResponseContentEncoding *smithy.Schema
-
-var GetObjectRequest_ResponseContentLanguage *smithy.Schema
-
-var GetObjectRequest_ResponseContentType *smithy.Schema
-
-var GetObjectRequest_ResponseExpires *smithy.Schema
-
-var GetObjectRequest_VersionId *smithy.Schema
-
-var GetObjectRequest_SSECustomerAlgorithm *smithy.Schema
-
-var GetObjectRequest_SSECustomerKey *smithy.Schema
-
-var GetObjectRequest_SSECustomerKeyMD5 *smithy.Schema
-
-var GetObjectRequest_RequestPayer *smithy.Schema
-
-var GetObjectRequest_PartNumber *smithy.Schema
-
-var GetObjectRequest_ExpectedBucketOwner *smithy.Schema
-
-var GetObjectRequest_ChecksumMode *smithy.Schema
-
-var GetObjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "GetObjectOutput",
-}, smithy.ShapeTypeStructure, 36)
-var GetObjectOutput_Body *smithy.Schema
-
-var GetObjectOutput_DeleteMarker *smithy.Schema
-
-var GetObjectOutput_AcceptRanges *smithy.Schema
-
-var GetObjectOutput_Expiration *smithy.Schema
-
-var GetObjectOutput_Restore *smithy.Schema
-
-var GetObjectOutput_LastModified *smithy.Schema
-
-var GetObjectOutput_ContentLength *smithy.Schema
-
-var GetObjectOutput_ETag *smithy.Schema
-
-var GetObjectOutput_ChecksumCRC32 *smithy.Schema
-
-var GetObjectOutput_ChecksumCRC32C *smithy.Schema
-
-var GetObjectOutput_ChecksumCRC64NVME *smithy.Schema
-
-var GetObjectOutput_ChecksumSHA1 *smithy.Schema
-
-var GetObjectOutput_ChecksumSHA256 *smithy.Schema
-
-var GetObjectOutput_ChecksumType *smithy.Schema
-
-var GetObjectOutput_MissingMeta *smithy.Schema
-
-var GetObjectOutput_VersionId *smithy.Schema
-
-var GetObjectOutput_CacheControl *smithy.Schema
-
-var GetObjectOutput_ContentDisposition *smithy.Schema
-
-var GetObjectOutput_ContentEncoding *smithy.Schema
-
-var GetObjectOutput_ContentLanguage *smithy.Schema
-
-var GetObjectOutput_ContentType *smithy.Schema
-
-var GetObjectOutput_Expires *smithy.Schema
-
-var GetObjectOutput_WebsiteRedirectLocation *smithy.Schema
-
-var GetObjectOutput_ServerSideEncryption *smithy.Schema
-
-var GetObjectOutput_SSECustomerAlgorithm *smithy.Schema
-
-var GetObjectOutput_SSECustomerKeyMD5 *smithy.Schema
-
-var GetObjectOutput_SSEKMSKeyId *smithy.Schema
-
-var GetObjectOutput_BucketKeyEnabled *smithy.Schema
-
-var GetObjectOutput_StorageClass *smithy.Schema
-
-var GetObjectOutput_RequestCharged *smithy.Schema
-
-var GetObjectOutput_ReplicationStatus *smithy.Schema
-
-var GetObjectOutput_PartsCount *smithy.Schema
-
-var GetObjectOutput_TagCount *smithy.Schema
-
-var GetObjectOutput_ObjectLockMode *smithy.Schema
-
-var GetObjectOutput_ObjectLockRetainUntilDate *smithy.Schema
-
-var GetObjectOutput_ObjectLockLegalHoldStatus *smithy.Schema
-
-var HeadObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "HeadObjectRequest",
-}, smithy.ShapeTypeStructure, 21)
-var HeadObjectRequest_Bucket *smithy.Schema
-
-var HeadObjectRequest_IfMatch *smithy.Schema
-
-var HeadObjectRequest_IfModifiedSince *smithy.Schema
-
-var HeadObjectRequest_IfNoneMatch *smithy.Schema
-
-var HeadObjectRequest_IfUnmodifiedSince *smithy.Schema
-
-var HeadObjectRequest_Key *smithy.Schema
-
-var HeadObjectRequest_Range *smithy.Schema
-
-var HeadObjectRequest_ResponseCacheControl *smithy.Schema
-
-var HeadObjectRequest_ResponseContentDisposition *smithy.Schema
-
-var HeadObjectRequest_ResponseContentEncoding *smithy.Schema
-
-var HeadObjectRequest_ResponseContentLanguage *smithy.Schema
-
-var HeadObjectRequest_ResponseContentType *smithy.Schema
-
-var HeadObjectRequest_ResponseExpires *smithy.Schema
-
-var HeadObjectRequest_VersionId *smithy.Schema
-
-var HeadObjectRequest_SSECustomerAlgorithm *smithy.Schema
-
-var HeadObjectRequest_SSECustomerKey *smithy.Schema
-
-var HeadObjectRequest_SSECustomerKeyMD5 *smithy.Schema
-
-var HeadObjectRequest_RequestPayer *smithy.Schema
-
-var HeadObjectRequest_PartNumber *smithy.Schema
-
-var HeadObjectRequest_ExpectedBucketOwner *smithy.Schema
-
-var HeadObjectRequest_ChecksumMode *smithy.Schema
-
-var HeadObjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "HeadObjectOutput",
-}, smithy.ShapeTypeStructure, 37)
-var HeadObjectOutput_DeleteMarker *smithy.Schema
-
-var HeadObjectOutput_AcceptRanges *smithy.Schema
-
-var HeadObjectOutput_Expiration *smithy.Schema
-
-var HeadObjectOutput_Restore *smithy.Schema
-
-var HeadObjectOutput_ArchiveStatus *smithy.Schema
-
-var HeadObjectOutput_LastModified *smithy.Schema
-
-var HeadObjectOutput_ContentLength *smithy.Schema
-
-var HeadObjectOutput_ChecksumCRC32 *smithy.Schema
-
-var HeadObjectOutput_ChecksumCRC32C *smithy.Schema
-
-var HeadObjectOutput_ChecksumCRC64NVME *smithy.Schema
-
-var HeadObjectOutput_ChecksumSHA1 *smithy.Schema
-
-var HeadObjectOutput_ChecksumSHA256 *smithy.Schema
-
-var HeadObjectOutput_ChecksumType *smithy.Schema
-
-var HeadObjectOutput_ETag *smithy.Schema
-
-var HeadObjectOutput_MissingMeta *smithy.Schema
-
-var HeadObjectOutput_VersionId *smithy.Schema
-
-var HeadObjectOutput_CacheControl *smithy.Schema
-
-var HeadObjectOutput_ContentDisposition *smithy.Schema
-
-var HeadObjectOutput_ContentEncoding *smithy.Schema
-
-var HeadObjectOutput_ContentLanguage *smithy.Schema
-
-var HeadObjectOutput_ContentType *smithy.Schema
-
-var HeadObjectOutput_ContentRange *smithy.Schema
-
-var HeadObjectOutput_Expires *smithy.Schema
-
-var HeadObjectOutput_WebsiteRedirectLocation *smithy.Schema
-
-var HeadObjectOutput_ServerSideEncryption *smithy.Schema
-
-var HeadObjectOutput_SSECustomerAlgorithm *smithy.Schema
-
-var HeadObjectOutput_SSECustomerKeyMD5 *smithy.Schema
-
-var HeadObjectOutput_SSEKMSKeyId *smithy.Schema
-
-var HeadObjectOutput_BucketKeyEnabled *smithy.Schema
-
-var HeadObjectOutput_StorageClass *smithy.Schema
-
-var HeadObjectOutput_RequestCharged *smithy.Schema
-
-var HeadObjectOutput_ReplicationStatus *smithy.Schema
-
-var HeadObjectOutput_PartsCount *smithy.Schema
-
-var HeadObjectOutput_TagCount *smithy.Schema
-
-var HeadObjectOutput_ObjectLockMode *smithy.Schema
-
-var HeadObjectOutput_ObjectLockRetainUntilDate *smithy.Schema
-
-var HeadObjectOutput_ObjectLockLegalHoldStatus *smithy.Schema
-
-var HealthcheckOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "HealthcheckOutput",
-}, smithy.ShapeTypeStructure, 1)
-var HealthcheckOutput_ok *smithy.Schema
-
-var PutMetricDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "PutMetricDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var PutMetricDataInput_Namespace *smithy.Schema
-
-var PutMetricDataInput_MetricData *smithy.Schema
-
-var PutMetricDataInput_EntityMetricData *smithy.Schema
-
-var PutMetricDataInput_StrictEntityValidation *smithy.Schema
-
-var PutObjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "PutObjectRequest",
-}, smithy.ShapeTypeStructure, 41)
-var PutObjectRequest_Bucket *smithy.Schema
-
-var PutObjectRequest_Key *smithy.Schema
-
-var PutObjectRequest_Body *smithy.Schema
-
-var PutObjectRequest_ACL *smithy.Schema
-
-var PutObjectRequest_CacheControl *smithy.Schema
-
-var PutObjectRequest_ContentDisposition *smithy.Schema
-
-var PutObjectRequest_ContentEncoding *smithy.Schema
-
-var PutObjectRequest_ContentLanguage *smithy.Schema
-
-var PutObjectRequest_ContentLength *smithy.Schema
-
-var PutObjectRequest_ContentMD5 *smithy.Schema
-
-var PutObjectRequest_ContentType *smithy.Schema
-
-var PutObjectRequest_ChecksumAlgorithm *smithy.Schema
-
-var PutObjectRequest_ChecksumCRC32 *smithy.Schema
-
-var PutObjectRequest_ChecksumCRC32C *smithy.Schema
-
-var PutObjectRequest_ChecksumCRC64NVME *smithy.Schema
-
-var PutObjectRequest_ChecksumSHA1 *smithy.Schema
-
-var PutObjectRequest_ChecksumSHA256 *smithy.Schema
-
-var PutObjectRequest_Expires *smithy.Schema
-
-var PutObjectRequest_IfMatch *smithy.Schema
-
-var PutObjectRequest_IfNoneMatch *smithy.Schema
-
-var PutObjectRequest_GrantFullControl *smithy.Schema
-
-var PutObjectRequest_GrantRead *smithy.Schema
-
-var PutObjectRequest_GrantReadACP *smithy.Schema
-
-var PutObjectRequest_GrantWriteACP *smithy.Schema
-
-var PutObjectRequest_WriteOffsetBytes *smithy.Schema
-
-var PutObjectRequest_Metadata *smithy.Schema
-
-var PutObjectRequest_ServerSideEncryption *smithy.Schema
-
-var PutObjectRequest_StorageClass *smithy.Schema
-
-var PutObjectRequest_WebsiteRedirectLocation *smithy.Schema
-
-var PutObjectRequest_SSECustomerAlgorithm *smithy.Schema
-
-var PutObjectRequest_SSECustomerKey *smithy.Schema
-
-var PutObjectRequest_SSECustomerKeyMD5 *smithy.Schema
-
-var PutObjectRequest_SSEKMSKeyId *smithy.Schema
-
-var PutObjectRequest_SSEKMSEncryptionContext *smithy.Schema
-
-var PutObjectRequest_BucketKeyEnabled *smithy.Schema
-
-var PutObjectRequest_RequestPayer *smithy.Schema
-
-var PutObjectRequest_Tagging *smithy.Schema
-
-var PutObjectRequest_ObjectLockMode *smithy.Schema
-
-var PutObjectRequest_ObjectLockRetainUntilDate *smithy.Schema
-
-var PutObjectRequest_ObjectLockLegalHoldStatus *smithy.Schema
-
-var PutObjectRequest_ExpectedBucketOwner *smithy.Schema
-
-var PutObjectOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sdk.benchmark",
-	Name:      "PutObjectOutput",
-}, smithy.ShapeTypeStructure, 17)
-var PutObjectOutput_Expiration *smithy.Schema
-
-var PutObjectOutput_ETag *smithy.Schema
-
-var PutObjectOutput_ChecksumCRC32 *smithy.Schema
-
-var PutObjectOutput_ChecksumCRC32C *smithy.Schema
-
-var PutObjectOutput_ChecksumCRC64NVME *smithy.Schema
-
-var PutObjectOutput_ChecksumSHA1 *smithy.Schema
-
-var PutObjectOutput_ChecksumSHA256 *smithy.Schema
-
-var PutObjectOutput_ChecksumType *smithy.Schema
-
-var PutObjectOutput_ServerSideEncryption *smithy.Schema
-
-var PutObjectOutput_VersionId *smithy.Schema
-
-var PutObjectOutput_SSECustomerAlgorithm *smithy.Schema
-
-var PutObjectOutput_SSECustomerKeyMD5 *smithy.Schema
-
-var PutObjectOutput_SSEKMSKeyId *smithy.Schema
-
-var PutObjectOutput_SSEKMSEncryptionContext *smithy.Schema
-
-var PutObjectOutput_BucketKeyEnabled *smithy.Schema
-
-var PutObjectOutput_Size *smithy.Schema
-
-var PutObjectOutput_RequestCharged *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ChecksumAlgorithm_CRC32 = ChecksumAlgorithm.AddMember("CRC32", smithyprelude.Unit)
-
-	ChecksumAlgorithm_CRC32C = ChecksumAlgorithm.AddMember("CRC32C", smithyprelude.Unit)
-
-	ChecksumAlgorithm_SHA1 = ChecksumAlgorithm.AddMember("SHA1", smithyprelude.Unit)
-
-	ChecksumAlgorithm_SHA256 = ChecksumAlgorithm.AddMember("SHA256", smithyprelude.Unit)
-
-	ChecksumAlgorithm_CRC64NVME = ChecksumAlgorithm.AddMember("CRC64NVME", smithyprelude.Unit)
-
-	ChecksumMode_ENABLED = ChecksumMode.AddMember("ENABLED", smithyprelude.Unit)
-
-	_Counts_member = _Counts.AddMember("member", smithyprelude.Double)
-
-	Dimension_Name = Dimension.AddMember("Name", smithyprelude.String)
-
-	Dimension_Value = Dimension.AddMember("Value", smithyprelude.String)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	_EntityKeyAttributesMap_key = _EntityKeyAttributesMap.AddMember("key", smithyprelude.String)
-
-	_EntityKeyAttributesMap_value = _EntityKeyAttributesMap.AddMember("value", smithyprelude.String)
-
-	_EntityAttributesMap_key = _EntityAttributesMap.AddMember("key", smithyprelude.String)
-
-	_EntityAttributesMap_value = _EntityAttributesMap.AddMember("value", smithyprelude.String)
-
-	Entity_KeyAttributes = Entity.AddMember("KeyAttributes", _EntityKeyAttributesMap)
-
-	Entity_Attributes = Entity.AddMember("Attributes", _EntityAttributesMap)
-
-	StatisticSet_SampleCount = StatisticSet.AddMember("SampleCount", smithyprelude.Double)
-
-	StatisticSet_Sum = StatisticSet.AddMember("Sum", smithyprelude.Double)
-
-	StatisticSet_Minimum = StatisticSet.AddMember("Minimum", smithyprelude.Double)
-
-	StatisticSet_Maximum = StatisticSet.AddMember("Maximum", smithyprelude.Double)
-
-	_Values_member = _Values.AddMember("member", smithyprelude.Double)
-
-	StandardUnit_SECONDS = StandardUnit.AddMember("SECONDS", smithyprelude.Unit)
-
-	StandardUnit_MICROSECONDS = StandardUnit.AddMember("MICROSECONDS", smithyprelude.Unit)
-
-	StandardUnit_MILLISECONDS = StandardUnit.AddMember("MILLISECONDS", smithyprelude.Unit)
-
-	StandardUnit_BYTES = StandardUnit.AddMember("BYTES", smithyprelude.Unit)
-
-	StandardUnit_KILOBYTES = StandardUnit.AddMember("KILOBYTES", smithyprelude.Unit)
-
-	StandardUnit_MEGABYTES = StandardUnit.AddMember("MEGABYTES", smithyprelude.Unit)
-
-	StandardUnit_GIGABYTES = StandardUnit.AddMember("GIGABYTES", smithyprelude.Unit)
-
-	StandardUnit_TERABYTES = StandardUnit.AddMember("TERABYTES", smithyprelude.Unit)
-
-	StandardUnit_BITS = StandardUnit.AddMember("BITS", smithyprelude.Unit)
-
-	StandardUnit_KILOBITS = StandardUnit.AddMember("KILOBITS", smithyprelude.Unit)
-
-	StandardUnit_MEGABITS = StandardUnit.AddMember("MEGABITS", smithyprelude.Unit)
-
-	StandardUnit_GIGABITS = StandardUnit.AddMember("GIGABITS", smithyprelude.Unit)
-
-	StandardUnit_TERABITS = StandardUnit.AddMember("TERABITS", smithyprelude.Unit)
-
-	StandardUnit_PERCENT = StandardUnit.AddMember("PERCENT", smithyprelude.Unit)
-
-	StandardUnit_COUNT = StandardUnit.AddMember("COUNT", smithyprelude.Unit)
-
-	StandardUnit_BYTES_SECOND = StandardUnit.AddMember("BYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_KILOBYTES_SECOND = StandardUnit.AddMember("KILOBYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_MEGABYTES_SECOND = StandardUnit.AddMember("MEGABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_GIGABYTES_SECOND = StandardUnit.AddMember("GIGABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_TERABYTES_SECOND = StandardUnit.AddMember("TERABYTES_SECOND", smithyprelude.Unit)
-
-	StandardUnit_BITS_SECOND = StandardUnit.AddMember("BITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_KILOBITS_SECOND = StandardUnit.AddMember("KILOBITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_MEGABITS_SECOND = StandardUnit.AddMember("MEGABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_GIGABITS_SECOND = StandardUnit.AddMember("GIGABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_TERABITS_SECOND = StandardUnit.AddMember("TERABITS_SECOND", smithyprelude.Unit)
-
-	StandardUnit_COUNT_SECOND = StandardUnit.AddMember("COUNT_SECOND", smithyprelude.Unit)
-
-	StandardUnit_NONE = StandardUnit.AddMember("NONE", smithyprelude.Unit)
-
-	MetricDatum_MetricName = MetricDatum.AddMember("MetricName", smithyprelude.String)
-
-	MetricDatum_Dimensions = MetricDatum.AddMember("Dimensions", _Dimensions)
-
-	MetricDatum_Timestamp = MetricDatum.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	MetricDatum_Value = MetricDatum.AddMember("Value", smithyprelude.Double)
-
-	MetricDatum_StatisticValues = MetricDatum.AddMember("StatisticValues", StatisticSet)
-
-	MetricDatum_Values = MetricDatum.AddMember("Values", _Values)
-
-	MetricDatum_Counts = MetricDatum.AddMember("Counts", _Counts)
-
-	MetricDatum_Unit = MetricDatum.AddMember("Unit", StandardUnit)
-
-	MetricDatum_StorageResolution = MetricDatum.AddMember("StorageResolution", smithyprelude.Integer)
-
-	_MetricData_member = _MetricData.AddMember("member", MetricDatum)
-
-	EntityMetricDatum_Entity = EntityMetricDatum.AddMember("Entity", Entity)
-
-	EntityMetricDatum_MetricData = EntityMetricDatum.AddMember("MetricData", _MetricData)
-
-	_EntityMetricDataList_member = _EntityMetricDataList.AddMember("member", EntityMetricDatum)
-
-	LabelOptions_Timezone = LabelOptions.AddMember("Timezone", smithyprelude.String)
-
-	MessageData_Code = MessageData.AddMember("Code", smithyprelude.String)
-
-	MessageData_Value = MessageData.AddMember("Value", smithyprelude.String)
-
-	_Metadata_key = _Metadata.AddMember("key", smithyprelude.String)
-
-	_Metadata_value = _Metadata.AddMember("value", smithyprelude.String)
-
-	Metric_Namespace = Metric.AddMember("Namespace", smithyprelude.String)
-
-	Metric_MetricName = Metric.AddMember("MetricName", smithyprelude.String)
-
-	Metric_Dimensions = Metric.AddMember("Dimensions", _Dimensions)
-
-	MetricStat_Metric = MetricStat.AddMember("Metric", Metric)
-
-	MetricStat_Period = MetricStat.AddMember("Period", smithyprelude.Integer)
-
-	MetricStat_Stat = MetricStat.AddMember("Stat", smithyprelude.String)
-
-	MetricStat_Unit = MetricStat.AddMember("Unit", StandardUnit)
-
-	MetricDataQuery_Id = MetricDataQuery.AddMember("Id", smithyprelude.String)
-
-	MetricDataQuery_MetricStat = MetricDataQuery.AddMember("MetricStat", MetricStat)
-
-	MetricDataQuery_Expression = MetricDataQuery.AddMember("Expression", smithyprelude.String)
-
-	MetricDataQuery_Label = MetricDataQuery.AddMember("Label", smithyprelude.String)
-
-	MetricDataQuery_ReturnData = MetricDataQuery.AddMember("ReturnData", smithyprelude.Boolean)
-
-	MetricDataQuery_Period = MetricDataQuery.AddMember("Period", smithyprelude.Integer)
-
-	MetricDataQuery_AccountId = MetricDataQuery.AddMember("AccountId", smithyprelude.String)
-
-	_MetricDataQueries_member = _MetricDataQueries.AddMember("member", MetricDataQuery)
-
-	_Timestamps_member = _Timestamps.AddMember("member", smithyprelude.Timestamp)
-
-	StatusCode_COMPLETE = StatusCode.AddMember("COMPLETE", smithyprelude.Unit)
-
-	StatusCode_INTERNAL_ERROR = StatusCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	StatusCode_PARTIAL_DATA = StatusCode.AddMember("PARTIAL_DATA", smithyprelude.Unit)
-
-	StatusCode_FORBIDDEN = StatusCode.AddMember("FORBIDDEN", smithyprelude.Unit)
-
-	_MetricDataResultMessages_member = _MetricDataResultMessages.AddMember("member", MessageData)
-
-	MetricDataResult_Id = MetricDataResult.AddMember("Id", smithyprelude.String)
-
-	MetricDataResult_Label = MetricDataResult.AddMember("Label", smithyprelude.String)
-
-	MetricDataResult_Timestamps = MetricDataResult.AddMember("Timestamps", _Timestamps)
-
-	MetricDataResult_Values = MetricDataResult.AddMember("Values", _Values)
-
-	MetricDataResult_StatusCode = MetricDataResult.AddMember("StatusCode", StatusCode)
-
-	MetricDataResult_Messages = MetricDataResult.AddMember("Messages", _MetricDataResultMessages)
-
-	_MetricDataResults_member = _MetricDataResults.AddMember("member", MetricDataResult)
-
-	ScanBy_TIMESTAMP_DESCENDING = ScanBy.AddMember("TIMESTAMP_DESCENDING", smithyprelude.Unit)
-
-	ScanBy_TIMESTAMP_ASCENDING = ScanBy.AddMember("TIMESTAMP_ASCENDING", smithyprelude.Unit)
-
-	CopyObjectRequest_ACL = CopyObjectRequest.AddMember("ACL", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-acl"})
-
-	CopyObjectRequest_Bucket = CopyObjectRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CopyObjectRequest_CacheControl = CopyObjectRequest.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	CopyObjectRequest_ChecksumAlgorithm = CopyObjectRequest.AddMember("ChecksumAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-algorithm"})
-
-	CopyObjectRequest_ContentDisposition = CopyObjectRequest.AddMember("ContentDisposition", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Disposition"})
-
-	CopyObjectRequest_ContentEncoding = CopyObjectRequest.AddMember("ContentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	CopyObjectRequest_ContentLanguage = CopyObjectRequest.AddMember("ContentLanguage", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Language"})
-
-	CopyObjectRequest_ContentType = CopyObjectRequest.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	CopyObjectRequest_CopySource = CopyObjectRequest.AddMember("CopySource", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source"})
-
-	CopyObjectRequest_CopySourceIfMatch = CopyObjectRequest.AddMember("CopySourceIfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-match"})
-
-	CopyObjectRequest_CopySourceIfModifiedSince = CopyObjectRequest.AddMember("CopySourceIfModifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-modified-since"})
-
-	CopyObjectRequest_CopySourceIfNoneMatch = CopyObjectRequest.AddMember("CopySourceIfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-none-match"})
-
-	CopyObjectRequest_CopySourceIfUnmodifiedSince = CopyObjectRequest.AddMember("CopySourceIfUnmodifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-unmodified-since"})
-
-	CopyObjectRequest_Expires = CopyObjectRequest.AddMember("Expires", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Expires"})
-
-	CopyObjectRequest_GrantFullControl = CopyObjectRequest.AddMember("GrantFullControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-full-control"})
-
-	CopyObjectRequest_GrantRead = CopyObjectRequest.AddMember("GrantRead", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-read"})
-
-	CopyObjectRequest_GrantReadACP = CopyObjectRequest.AddMember("GrantReadACP", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-read-acp"})
-
-	CopyObjectRequest_GrantWriteACP = CopyObjectRequest.AddMember("GrantWriteACP", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-write-acp"})
-
-	CopyObjectRequest_IfMatch = CopyObjectRequest.AddMember("IfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	CopyObjectRequest_IfNoneMatch = CopyObjectRequest.AddMember("IfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-None-Match"})
-
-	CopyObjectRequest_Key = CopyObjectRequest.AddMember("Key", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CopyObjectRequest_MetadataDirective = CopyObjectRequest.AddMember("MetadataDirective", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-metadata-directive"})
-
-	CopyObjectRequest_TaggingDirective = CopyObjectRequest.AddMember("TaggingDirective", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-tagging-directive"})
-
-	CopyObjectRequest_ServerSideEncryption = CopyObjectRequest.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	CopyObjectRequest_StorageClass = CopyObjectRequest.AddMember("StorageClass", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
-
-	CopyObjectRequest_WebsiteRedirectLocation = CopyObjectRequest.AddMember("WebsiteRedirectLocation", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"})
-
-	CopyObjectRequest_SSECustomerAlgorithm = CopyObjectRequest.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	CopyObjectRequest_SSECustomerKey = CopyObjectRequest.AddMember("SSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"})
-
-	CopyObjectRequest_SSECustomerKeyMD5 = CopyObjectRequest.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	CopyObjectRequest_SSEKMSKeyId = CopyObjectRequest.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	CopyObjectRequest_SSEKMSEncryptionContext = CopyObjectRequest.AddMember("SSEKMSEncryptionContext", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-context"})
-
-	CopyObjectRequest_BucketKeyEnabled = CopyObjectRequest.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	CopyObjectRequest_CopySourceSSECustomerAlgorithm = CopyObjectRequest.AddMember("CopySourceSSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-algorithm"})
-
-	CopyObjectRequest_CopySourceSSECustomerKey = CopyObjectRequest.AddMember("CopySourceSSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-key"})
-
-	CopyObjectRequest_CopySourceSSECustomerKeyMD5 = CopyObjectRequest.AddMember("CopySourceSSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"})
-
-	CopyObjectRequest_RequestPayer = CopyObjectRequest.AddMember("RequestPayer", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"})
-
-	CopyObjectRequest_Tagging = CopyObjectRequest.AddMember("Tagging", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-tagging"})
-
-	CopyObjectRequest_ObjectLockMode = CopyObjectRequest.AddMember("ObjectLockMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"})
-
-	CopyObjectRequest_ObjectLockRetainUntilDate = CopyObjectRequest.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
-
-	CopyObjectRequest_ObjectLockLegalHoldStatus = CopyObjectRequest.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
-
-	CopyObjectRequest_ExpectedBucketOwner = CopyObjectRequest.AddMember("ExpectedBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"})
-
-	CopyObjectRequest_ExpectedSourceBucketOwner = CopyObjectRequest.AddMember("ExpectedSourceBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-source-expected-bucket-owner"})
-
-	CopyObjectOutput_Expiration = CopyObjectOutput.AddMember("Expiration", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expiration"})
-
-	CopyObjectOutput_CopySourceVersionId = CopyObjectOutput.AddMember("CopySourceVersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-version-id"})
-
-	CopyObjectOutput_VersionId = CopyObjectOutput.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-version-id"})
-
-	CopyObjectOutput_ServerSideEncryption = CopyObjectOutput.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	CopyObjectOutput_SSECustomerAlgorithm = CopyObjectOutput.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	CopyObjectOutput_SSECustomerKeyMD5 = CopyObjectOutput.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	CopyObjectOutput_SSEKMSKeyId = CopyObjectOutput.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	CopyObjectOutput_SSEKMSEncryptionContext = CopyObjectOutput.AddMember("SSEKMSEncryptionContext", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-context"})
-
-	CopyObjectOutput_BucketKeyEnabled = CopyObjectOutput.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	CopyObjectOutput_RequestCharged = CopyObjectOutput.AddMember("RequestCharged", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"})
-
-	CopyObjectOutput_ETag = CopyObjectOutput.AddMember("ETag", smithyprelude.String)
-
-	CopyObjectOutput_LastModified = CopyObjectOutput.AddMember("LastModified", smithyprelude.Timestamp)
-
-	CopyObjectOutput_ChecksumType = CopyObjectOutput.AddMember("ChecksumType", smithyprelude.String)
-
-	CopyObjectOutput_ChecksumCRC32 = CopyObjectOutput.AddMember("ChecksumCRC32", smithyprelude.String)
-
-	CopyObjectOutput_ChecksumCRC32C = CopyObjectOutput.AddMember("ChecksumCRC32C", smithyprelude.String)
-
-	CopyObjectOutput_ChecksumCRC64NVME = CopyObjectOutput.AddMember("ChecksumCRC64NVME", smithyprelude.String)
-
-	CopyObjectOutput_ChecksumSHA1 = CopyObjectOutput.AddMember("ChecksumSHA1", smithyprelude.String)
-
-	CopyObjectOutput_ChecksumSHA256 = CopyObjectOutput.AddMember("ChecksumSHA256", smithyprelude.String)
-
-	GetMetricDataInput_MetricDataQueries = GetMetricDataInput.AddMember("MetricDataQueries", _MetricDataQueries)
-
-	GetMetricDataInput_StartTime = GetMetricDataInput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	GetMetricDataInput_EndTime = GetMetricDataInput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	GetMetricDataInput_NextToken = GetMetricDataInput.AddMember("NextToken", smithyprelude.String)
-
-	GetMetricDataInput_ScanBy = GetMetricDataInput.AddMember("ScanBy", ScanBy)
-
-	GetMetricDataInput_MaxDatapoints = GetMetricDataInput.AddMember("MaxDatapoints", smithyprelude.Integer)
-
-	GetMetricDataInput_LabelOptions = GetMetricDataInput.AddMember("LabelOptions", LabelOptions)
-
-	GetMetricDataOutput_MetricDataResults = GetMetricDataOutput.AddMember("MetricDataResults", _MetricDataResults)
-
-	GetMetricDataOutput_NextToken = GetMetricDataOutput.AddMember("NextToken", smithyprelude.String)
-
-	GetMetricDataOutput_Messages = GetMetricDataOutput.AddMember("Messages", _MetricDataResultMessages)
-
-	GetObjectRequest_Bucket = GetObjectRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetObjectRequest_Key = GetObjectRequest.AddMember("Key", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetObjectRequest_IfMatch = GetObjectRequest.AddMember("IfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	GetObjectRequest_IfModifiedSince = GetObjectRequest.AddMember("IfModifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Modified-Since"})
-
-	GetObjectRequest_IfNoneMatch = GetObjectRequest.AddMember("IfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-None-Match"})
-
-	GetObjectRequest_IfUnmodifiedSince = GetObjectRequest.AddMember("IfUnmodifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Unmodified-Since"})
-
-	GetObjectRequest_Range = GetObjectRequest.AddMember("Range", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Range"})
-
-	GetObjectRequest_ResponseCacheControl = GetObjectRequest.AddMember("ResponseCacheControl", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-cache-control"})
-
-	GetObjectRequest_ResponseContentDisposition = GetObjectRequest.AddMember("ResponseContentDisposition", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-disposition"})
-
-	GetObjectRequest_ResponseContentEncoding = GetObjectRequest.AddMember("ResponseContentEncoding", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-encoding"})
-
-	GetObjectRequest_ResponseContentLanguage = GetObjectRequest.AddMember("ResponseContentLanguage", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-language"})
-
-	GetObjectRequest_ResponseContentType = GetObjectRequest.AddMember("ResponseContentType", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-type"})
-
-	GetObjectRequest_ResponseExpires = GetObjectRequest.AddMember("ResponseExpires", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "response-expires"})
-
-	GetObjectRequest_VersionId = GetObjectRequest.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionId"})
-
-	GetObjectRequest_SSECustomerAlgorithm = GetObjectRequest.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	GetObjectRequest_SSECustomerKey = GetObjectRequest.AddMember("SSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"})
-
-	GetObjectRequest_SSECustomerKeyMD5 = GetObjectRequest.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	GetObjectRequest_RequestPayer = GetObjectRequest.AddMember("RequestPayer", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"})
-
-	GetObjectRequest_PartNumber = GetObjectRequest.AddMember("PartNumber", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "partNumber"})
-
-	GetObjectRequest_ExpectedBucketOwner = GetObjectRequest.AddMember("ExpectedBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"})
-
-	GetObjectRequest_ChecksumMode = GetObjectRequest.AddMember("ChecksumMode", ChecksumMode, &smithytraits.HTTPHeader{Name: "x-amz-checksum-mode"})
-
-	GetObjectOutput_Body = GetObjectOutput.AddMember("Body", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetObjectOutput_DeleteMarker = GetObjectOutput.AddMember("DeleteMarker", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-delete-marker"})
-
-	GetObjectOutput_AcceptRanges = GetObjectOutput.AddMember("AcceptRanges", smithyprelude.String, &smithytraits.HTTPHeader{Name: "accept-ranges"})
-
-	GetObjectOutput_Expiration = GetObjectOutput.AddMember("Expiration", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expiration"})
-
-	GetObjectOutput_Restore = GetObjectOutput.AddMember("Restore", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-restore"})
-
-	GetObjectOutput_LastModified = GetObjectOutput.AddMember("LastModified", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Last-Modified"})
-
-	GetObjectOutput_ContentLength = GetObjectOutput.AddMember("ContentLength", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "Content-Length"})
-
-	GetObjectOutput_ETag = GetObjectOutput.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetObjectOutput_ChecksumCRC32 = GetObjectOutput.AddMember("ChecksumCRC32", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"})
-
-	GetObjectOutput_ChecksumCRC32C = GetObjectOutput.AddMember("ChecksumCRC32C", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"})
-
-	GetObjectOutput_ChecksumCRC64NVME = GetObjectOutput.AddMember("ChecksumCRC64NVME", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"})
-
-	GetObjectOutput_ChecksumSHA1 = GetObjectOutput.AddMember("ChecksumSHA1", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"})
-
-	GetObjectOutput_ChecksumSHA256 = GetObjectOutput.AddMember("ChecksumSHA256", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"})
-
-	GetObjectOutput_ChecksumType = GetObjectOutput.AddMember("ChecksumType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-type"})
-
-	GetObjectOutput_MissingMeta = GetObjectOutput.AddMember("MissingMeta", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-missing-meta"})
-
-	GetObjectOutput_VersionId = GetObjectOutput.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-version-id"})
-
-	GetObjectOutput_CacheControl = GetObjectOutput.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetObjectOutput_ContentDisposition = GetObjectOutput.AddMember("ContentDisposition", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Disposition"})
-
-	GetObjectOutput_ContentEncoding = GetObjectOutput.AddMember("ContentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	GetObjectOutput_ContentLanguage = GetObjectOutput.AddMember("ContentLanguage", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Language"})
-
-	GetObjectOutput_ContentType = GetObjectOutput.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetObjectOutput_Expires = GetObjectOutput.AddMember("Expires", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Expires"})
-
-	GetObjectOutput_WebsiteRedirectLocation = GetObjectOutput.AddMember("WebsiteRedirectLocation", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"})
-
-	GetObjectOutput_ServerSideEncryption = GetObjectOutput.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	GetObjectOutput_SSECustomerAlgorithm = GetObjectOutput.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	GetObjectOutput_SSECustomerKeyMD5 = GetObjectOutput.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	GetObjectOutput_SSEKMSKeyId = GetObjectOutput.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	GetObjectOutput_BucketKeyEnabled = GetObjectOutput.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	GetObjectOutput_StorageClass = GetObjectOutput.AddMember("StorageClass", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
-
-	GetObjectOutput_RequestCharged = GetObjectOutput.AddMember("RequestCharged", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"})
-
-	GetObjectOutput_ReplicationStatus = GetObjectOutput.AddMember("ReplicationStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-replication-status"})
-
-	GetObjectOutput_PartsCount = GetObjectOutput.AddMember("PartsCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-mp-parts-count"})
-
-	GetObjectOutput_TagCount = GetObjectOutput.AddMember("TagCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-tagging-count"})
-
-	GetObjectOutput_ObjectLockMode = GetObjectOutput.AddMember("ObjectLockMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"})
-
-	GetObjectOutput_ObjectLockRetainUntilDate = GetObjectOutput.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
-
-	GetObjectOutput_ObjectLockLegalHoldStatus = GetObjectOutput.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
-
-	HeadObjectRequest_Bucket = HeadObjectRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	HeadObjectRequest_IfMatch = HeadObjectRequest.AddMember("IfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	HeadObjectRequest_IfModifiedSince = HeadObjectRequest.AddMember("IfModifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Modified-Since"})
-
-	HeadObjectRequest_IfNoneMatch = HeadObjectRequest.AddMember("IfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-None-Match"})
-
-	HeadObjectRequest_IfUnmodifiedSince = HeadObjectRequest.AddMember("IfUnmodifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Unmodified-Since"})
-
-	HeadObjectRequest_Key = HeadObjectRequest.AddMember("Key", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	HeadObjectRequest_Range = HeadObjectRequest.AddMember("Range", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Range"})
-
-	HeadObjectRequest_ResponseCacheControl = HeadObjectRequest.AddMember("ResponseCacheControl", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-cache-control"})
-
-	HeadObjectRequest_ResponseContentDisposition = HeadObjectRequest.AddMember("ResponseContentDisposition", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-disposition"})
-
-	HeadObjectRequest_ResponseContentEncoding = HeadObjectRequest.AddMember("ResponseContentEncoding", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-encoding"})
-
-	HeadObjectRequest_ResponseContentLanguage = HeadObjectRequest.AddMember("ResponseContentLanguage", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-language"})
-
-	HeadObjectRequest_ResponseContentType = HeadObjectRequest.AddMember("ResponseContentType", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-type"})
-
-	HeadObjectRequest_ResponseExpires = HeadObjectRequest.AddMember("ResponseExpires", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "response-expires"})
-
-	HeadObjectRequest_VersionId = HeadObjectRequest.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionId"})
-
-	HeadObjectRequest_SSECustomerAlgorithm = HeadObjectRequest.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	HeadObjectRequest_SSECustomerKey = HeadObjectRequest.AddMember("SSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"})
-
-	HeadObjectRequest_SSECustomerKeyMD5 = HeadObjectRequest.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	HeadObjectRequest_RequestPayer = HeadObjectRequest.AddMember("RequestPayer", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"})
-
-	HeadObjectRequest_PartNumber = HeadObjectRequest.AddMember("PartNumber", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "partNumber"})
-
-	HeadObjectRequest_ExpectedBucketOwner = HeadObjectRequest.AddMember("ExpectedBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"})
-
-	HeadObjectRequest_ChecksumMode = HeadObjectRequest.AddMember("ChecksumMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-mode"})
-
-	HeadObjectOutput_DeleteMarker = HeadObjectOutput.AddMember("DeleteMarker", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-delete-marker"})
-
-	HeadObjectOutput_AcceptRanges = HeadObjectOutput.AddMember("AcceptRanges", smithyprelude.String, &smithytraits.HTTPHeader{Name: "accept-ranges"})
-
-	HeadObjectOutput_Expiration = HeadObjectOutput.AddMember("Expiration", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expiration"})
-
-	HeadObjectOutput_Restore = HeadObjectOutput.AddMember("Restore", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-restore"})
-
-	HeadObjectOutput_ArchiveStatus = HeadObjectOutput.AddMember("ArchiveStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-archive-status"})
-
-	HeadObjectOutput_LastModified = HeadObjectOutput.AddMember("LastModified", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Last-Modified"})
-
-	HeadObjectOutput_ContentLength = HeadObjectOutput.AddMember("ContentLength", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "Content-Length"})
-
-	HeadObjectOutput_ChecksumCRC32 = HeadObjectOutput.AddMember("ChecksumCRC32", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"})
-
-	HeadObjectOutput_ChecksumCRC32C = HeadObjectOutput.AddMember("ChecksumCRC32C", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"})
-
-	HeadObjectOutput_ChecksumCRC64NVME = HeadObjectOutput.AddMember("ChecksumCRC64NVME", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"})
-
-	HeadObjectOutput_ChecksumSHA1 = HeadObjectOutput.AddMember("ChecksumSHA1", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"})
-
-	HeadObjectOutput_ChecksumSHA256 = HeadObjectOutput.AddMember("ChecksumSHA256", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"})
-
-	HeadObjectOutput_ChecksumType = HeadObjectOutput.AddMember("ChecksumType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-type"})
-
-	HeadObjectOutput_ETag = HeadObjectOutput.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	HeadObjectOutput_MissingMeta = HeadObjectOutput.AddMember("MissingMeta", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-missing-meta"})
-
-	HeadObjectOutput_VersionId = HeadObjectOutput.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-version-id"})
-
-	HeadObjectOutput_CacheControl = HeadObjectOutput.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	HeadObjectOutput_ContentDisposition = HeadObjectOutput.AddMember("ContentDisposition", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Disposition"})
-
-	HeadObjectOutput_ContentEncoding = HeadObjectOutput.AddMember("ContentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	HeadObjectOutput_ContentLanguage = HeadObjectOutput.AddMember("ContentLanguage", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Language"})
-
-	HeadObjectOutput_ContentType = HeadObjectOutput.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	HeadObjectOutput_ContentRange = HeadObjectOutput.AddMember("ContentRange", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Range"})
-
-	HeadObjectOutput_Expires = HeadObjectOutput.AddMember("Expires", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Expires"})
-
-	HeadObjectOutput_WebsiteRedirectLocation = HeadObjectOutput.AddMember("WebsiteRedirectLocation", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"})
-
-	HeadObjectOutput_ServerSideEncryption = HeadObjectOutput.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	HeadObjectOutput_SSECustomerAlgorithm = HeadObjectOutput.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	HeadObjectOutput_SSECustomerKeyMD5 = HeadObjectOutput.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	HeadObjectOutput_SSEKMSKeyId = HeadObjectOutput.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	HeadObjectOutput_BucketKeyEnabled = HeadObjectOutput.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	HeadObjectOutput_StorageClass = HeadObjectOutput.AddMember("StorageClass", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
-
-	HeadObjectOutput_RequestCharged = HeadObjectOutput.AddMember("RequestCharged", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"})
-
-	HeadObjectOutput_ReplicationStatus = HeadObjectOutput.AddMember("ReplicationStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-replication-status"})
-
-	HeadObjectOutput_PartsCount = HeadObjectOutput.AddMember("PartsCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-mp-parts-count"})
-
-	HeadObjectOutput_TagCount = HeadObjectOutput.AddMember("TagCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-tagging-count"})
-
-	HeadObjectOutput_ObjectLockMode = HeadObjectOutput.AddMember("ObjectLockMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"})
-
-	HeadObjectOutput_ObjectLockRetainUntilDate = HeadObjectOutput.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
-
-	HeadObjectOutput_ObjectLockLegalHoldStatus = HeadObjectOutput.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
-
-	HealthcheckOutput_ok = HealthcheckOutput.AddMember("ok", smithyprelude.String)
-
-	PutMetricDataInput_Namespace = PutMetricDataInput.AddMember("Namespace", smithyprelude.String)
-
-	PutMetricDataInput_MetricData = PutMetricDataInput.AddMember("MetricData", _MetricData)
-
-	PutMetricDataInput_EntityMetricData = PutMetricDataInput.AddMember("EntityMetricData", _EntityMetricDataList)
-
-	PutMetricDataInput_StrictEntityValidation = PutMetricDataInput.AddMember("StrictEntityValidation", smithyprelude.Boolean)
-
-	PutObjectRequest_Bucket = PutObjectRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	PutObjectRequest_Key = PutObjectRequest.AddMember("Key", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	PutObjectRequest_Body = PutObjectRequest.AddMember("Body", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	PutObjectRequest_ACL = PutObjectRequest.AddMember("ACL", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-acl"})
-
-	PutObjectRequest_CacheControl = PutObjectRequest.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	PutObjectRequest_ContentDisposition = PutObjectRequest.AddMember("ContentDisposition", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Disposition"})
-
-	PutObjectRequest_ContentEncoding = PutObjectRequest.AddMember("ContentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	PutObjectRequest_ContentLanguage = PutObjectRequest.AddMember("ContentLanguage", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Language"})
-
-	PutObjectRequest_ContentLength = PutObjectRequest.AddMember("ContentLength", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "Content-Length"})
-
-	PutObjectRequest_ContentMD5 = PutObjectRequest.AddMember("ContentMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-MD5"})
-
-	PutObjectRequest_ContentType = PutObjectRequest.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PutObjectRequest_ChecksumAlgorithm = PutObjectRequest.AddMember("ChecksumAlgorithm", ChecksumAlgorithm, &smithytraits.HTTPHeader{Name: "x-amz-sdk-checksum-algorithm"})
-
-	PutObjectRequest_ChecksumCRC32 = PutObjectRequest.AddMember("ChecksumCRC32", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"})
-
-	PutObjectRequest_ChecksumCRC32C = PutObjectRequest.AddMember("ChecksumCRC32C", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"})
-
-	PutObjectRequest_ChecksumCRC64NVME = PutObjectRequest.AddMember("ChecksumCRC64NVME", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"})
-
-	PutObjectRequest_ChecksumSHA1 = PutObjectRequest.AddMember("ChecksumSHA1", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"})
-
-	PutObjectRequest_ChecksumSHA256 = PutObjectRequest.AddMember("ChecksumSHA256", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"})
-
-	PutObjectRequest_Expires = PutObjectRequest.AddMember("Expires", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Expires"})
-
-	PutObjectRequest_IfMatch = PutObjectRequest.AddMember("IfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	PutObjectRequest_IfNoneMatch = PutObjectRequest.AddMember("IfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-None-Match"})
-
-	PutObjectRequest_GrantFullControl = PutObjectRequest.AddMember("GrantFullControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-full-control"})
-
-	PutObjectRequest_GrantRead = PutObjectRequest.AddMember("GrantRead", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-read"})
-
-	PutObjectRequest_GrantReadACP = PutObjectRequest.AddMember("GrantReadACP", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-read-acp"})
-
-	PutObjectRequest_GrantWriteACP = PutObjectRequest.AddMember("GrantWriteACP", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-grant-write-acp"})
-
-	PutObjectRequest_WriteOffsetBytes = PutObjectRequest.AddMember("WriteOffsetBytes", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "x-amz-write-offset-bytes"})
-
-	PutObjectRequest_Metadata = PutObjectRequest.AddMember("Metadata", _Metadata, &smithytraits.HTTPPrefixHeaders{Prefix: "x-amz-meta-"})
-
-	PutObjectRequest_ServerSideEncryption = PutObjectRequest.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	PutObjectRequest_StorageClass = PutObjectRequest.AddMember("StorageClass", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
-
-	PutObjectRequest_WebsiteRedirectLocation = PutObjectRequest.AddMember("WebsiteRedirectLocation", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"})
-
-	PutObjectRequest_SSECustomerAlgorithm = PutObjectRequest.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	PutObjectRequest_SSECustomerKey = PutObjectRequest.AddMember("SSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"})
-
-	PutObjectRequest_SSECustomerKeyMD5 = PutObjectRequest.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	PutObjectRequest_SSEKMSKeyId = PutObjectRequest.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	PutObjectRequest_SSEKMSEncryptionContext = PutObjectRequest.AddMember("SSEKMSEncryptionContext", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-context"})
-
-	PutObjectRequest_BucketKeyEnabled = PutObjectRequest.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	PutObjectRequest_RequestPayer = PutObjectRequest.AddMember("RequestPayer", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"})
-
-	PutObjectRequest_Tagging = PutObjectRequest.AddMember("Tagging", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-tagging"})
-
-	PutObjectRequest_ObjectLockMode = PutObjectRequest.AddMember("ObjectLockMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"})
-
-	PutObjectRequest_ObjectLockRetainUntilDate = PutObjectRequest.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
-
-	PutObjectRequest_ObjectLockLegalHoldStatus = PutObjectRequest.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
-
-	PutObjectRequest_ExpectedBucketOwner = PutObjectRequest.AddMember("ExpectedBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"})
-
-	PutObjectOutput_Expiration = PutObjectOutput.AddMember("Expiration", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expiration"})
-
-	PutObjectOutput_ETag = PutObjectOutput.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	PutObjectOutput_ChecksumCRC32 = PutObjectOutput.AddMember("ChecksumCRC32", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"})
-
-	PutObjectOutput_ChecksumCRC32C = PutObjectOutput.AddMember("ChecksumCRC32C", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"})
-
-	PutObjectOutput_ChecksumCRC64NVME = PutObjectOutput.AddMember("ChecksumCRC64NVME", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"})
-
-	PutObjectOutput_ChecksumSHA1 = PutObjectOutput.AddMember("ChecksumSHA1", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"})
-
-	PutObjectOutput_ChecksumSHA256 = PutObjectOutput.AddMember("ChecksumSHA256", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"})
-
-	PutObjectOutput_ChecksumType = PutObjectOutput.AddMember("ChecksumType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-type"})
-
-	PutObjectOutput_ServerSideEncryption = PutObjectOutput.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
-
-	PutObjectOutput_VersionId = PutObjectOutput.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-version-id"})
-
-	PutObjectOutput_SSECustomerAlgorithm = PutObjectOutput.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
-
-	PutObjectOutput_SSECustomerKeyMD5 = PutObjectOutput.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
-
-	PutObjectOutput_SSEKMSKeyId = PutObjectOutput.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
-
-	PutObjectOutput_SSEKMSEncryptionContext = PutObjectOutput.AddMember("SSEKMSEncryptionContext", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-context"})
-
-	PutObjectOutput_BucketKeyEnabled = PutObjectOutput.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
-
-	PutObjectOutput_Size = PutObjectOutput.AddMember("Size", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "x-amz-object-size"})
-
-	PutObjectOutput_RequestCharged = PutObjectOutput.AddMember("RequestCharged", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-acl"}}, DirectMask: 0x80}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Cache-Control"}}, DirectMask: 0x80}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-algorithm"}}, DirectMask: 0x80}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Disposition"}}, DirectMask: 0x80}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Encoding"}}, DirectMask: 0x80}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Language"}}, DirectMask: 0x80}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source"}}, DirectMask: 0x80}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-match"}}, DirectMask: 0x80}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-modified-since"}}, DirectMask: 0x80}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-none-match"}}, DirectMask: 0x80}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-if-unmodified-since"}}, DirectMask: 0x80}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Expires"}}, DirectMask: 0x80}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-grant-full-control"}}, DirectMask: 0x80}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-grant-read"}}, DirectMask: 0x80}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-grant-read-acp"}}, DirectMask: 0x80}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-grant-write-acp"}}, DirectMask: 0x80}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "If-Match"}}, DirectMask: 0x80}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "If-None-Match"}}, DirectMask: 0x80}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-metadata-directive"}}, DirectMask: 0x80}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-tagging-directive"}}, DirectMask: 0x80}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"}}, DirectMask: 0x80}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"}}, DirectMask: 0x80}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"}}, DirectMask: 0x80}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"}}, DirectMask: 0x80}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"}}, DirectMask: 0x80}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-context"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-algorithm"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-key"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"}}, DirectMask: 0x80}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"}}, DirectMask: 0x80}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-tagging"}}, DirectMask: 0x80}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"}}, DirectMask: 0x80}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"}}, DirectMask: 0x80}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"}}, DirectMask: 0x80}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"}}, DirectMask: 0x80}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-source-expected-bucket-owner"}}, DirectMask: 0x80}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-expiration"}}, DirectMask: 0x80}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-copy-source-version-id"}}, DirectMask: 0x80}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-version-id"}}, DirectMask: 0x80}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"}}, DirectMask: 0x80}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "If-Modified-Since"}}, DirectMask: 0x80}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "If-Unmodified-Since"}}, DirectMask: 0x80}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Range"}}, DirectMask: 0x80}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-cache-control"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-content-disposition"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-content-encoding"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-content-language"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-content-type"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "response-expires"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "versionId"}}, DirectMask: 0x10}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "partNumber"}}, DirectMask: 0x10}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-mode"}}, DirectMask: 0x80}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-delete-marker"}}, DirectMask: 0x80}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "accept-ranges"}}, DirectMask: 0x80}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-restore"}}, DirectMask: 0x80}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Last-Modified"}}, DirectMask: 0x80}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Length"}}, DirectMask: 0x80}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ETag"}}, DirectMask: 0x80}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"}}, DirectMask: 0x80}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"}}, DirectMask: 0x80}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"}}, DirectMask: 0x80}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"}}, DirectMask: 0x80}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"}}, DirectMask: 0x80}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-checksum-type"}}, DirectMask: 0x80}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-missing-meta"}}, DirectMask: 0x80}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-replication-status"}}, DirectMask: 0x80}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mp-parts-count"}}, DirectMask: 0x80}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-tagging-count"}}, DirectMask: 0x80}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-archive-status"}}, DirectMask: 0x80}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Range"}}, DirectMask: 0x80}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-MD5"}}, DirectMask: 0x80}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-sdk-checksum-algorithm"}}, DirectMask: 0x80}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-write-offset-bytes"}}, DirectMask: 0x80}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPrefixHeaders{Prefix: "x-amz-meta-"}}, DirectMask: 0x200000}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-object-size"}}, DirectMask: 0x80}
+
+var mChecksumAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sChecksumAlgorithm_CRC32, &sChecksumAlgorithm_CRC32C, &sChecksumAlgorithm_SHA1, &sChecksumAlgorithm_SHA256, &sChecksumAlgorithm_CRC64NVME}}
+var mChecksumMode = smithy.SchemaMembers{List: []*smithy.Schema{&sChecksumMode_ENABLED}}
+var m_Counts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Counts_member}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_Name, &sDimension_Value}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var mEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sEntity_KeyAttributes, &sEntity_Attributes}}
+var m_EntityAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityAttributesMap_key, &s_EntityAttributesMap_value}}
+var m_EntityKeyAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityKeyAttributesMap_key, &s_EntityKeyAttributesMap_value}}
+var m_EntityMetricDataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityMetricDataList_member}}
+var mEntityMetricDatum = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityMetricDatum_Entity, &sEntityMetricDatum_MetricData}}
+var mLabelOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelOptions_Timezone}}
+var mMessageData = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageData_Code, &sMessageData_Value}}
+var m_Metadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metadata_key, &s_Metadata_value}}
+var mMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sMetric_Namespace, &sMetric_MetricName, &sMetric_Dimensions}}
+var m_MetricData = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricData_member}}
+var m_MetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataQueries_member}}
+var mMetricDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataQuery_Id, &sMetricDataQuery_MetricStat, &sMetricDataQuery_Expression, &sMetricDataQuery_Label, &sMetricDataQuery_ReturnData, &sMetricDataQuery_Period, &sMetricDataQuery_AccountId}}
+var mMetricDataResult = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDataResult_Id, &sMetricDataResult_Label, &sMetricDataResult_Timestamps, &sMetricDataResult_Values, &sMetricDataResult_StatusCode, &sMetricDataResult_Messages}}
+var m_MetricDataResultMessages = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataResultMessages_member}}
+var m_MetricDataResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDataResults_member}}
+var mMetricDatum = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDatum_MetricName, &sMetricDatum_Dimensions, &sMetricDatum_Timestamp, &sMetricDatum_Value, &sMetricDatum_StatisticValues, &sMetricDatum_Values, &sMetricDatum_Counts, &sMetricDatum_Unit, &sMetricDatum_StorageResolution}, Hash: &hMetricDatum}
+var mMetricStat = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStat_Metric, &sMetricStat_Period, &sMetricStat_Stat, &sMetricStat_Unit}}
+var mScanBy = smithy.SchemaMembers{List: []*smithy.Schema{&sScanBy_TIMESTAMP_DESCENDING, &sScanBy_TIMESTAMP_ASCENDING}}
+var mStandardUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sStandardUnit_SECONDS, &sStandardUnit_MICROSECONDS, &sStandardUnit_MILLISECONDS, &sStandardUnit_BYTES, &sStandardUnit_KILOBYTES, &sStandardUnit_MEGABYTES, &sStandardUnit_GIGABYTES, &sStandardUnit_TERABYTES, &sStandardUnit_BITS, &sStandardUnit_KILOBITS, &sStandardUnit_MEGABITS, &sStandardUnit_GIGABITS, &sStandardUnit_TERABITS, &sStandardUnit_PERCENT, &sStandardUnit_COUNT, &sStandardUnit_BYTES_SECOND, &sStandardUnit_KILOBYTES_SECOND, &sStandardUnit_MEGABYTES_SECOND, &sStandardUnit_GIGABYTES_SECOND, &sStandardUnit_TERABYTES_SECOND, &sStandardUnit_BITS_SECOND, &sStandardUnit_KILOBITS_SECOND, &sStandardUnit_MEGABITS_SECOND, &sStandardUnit_GIGABITS_SECOND, &sStandardUnit_TERABITS_SECOND, &sStandardUnit_COUNT_SECOND, &sStandardUnit_NONE}, Hash: &hStandardUnit}
+var mStatisticSet = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticSet_SampleCount, &sStatisticSet_Sum, &sStatisticSet_Minimum, &sStatisticSet_Maximum}}
+var mStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusCode_COMPLETE, &sStatusCode_INTERNAL_ERROR, &sStatusCode_PARTIAL_DATA, &sStatusCode_FORBIDDEN}}
+var m_Timestamps = smithy.SchemaMembers{List: []*smithy.Schema{&s_Timestamps_member}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var mCopyObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyObjectRequest_ACL, &sCopyObjectRequest_Bucket, &sCopyObjectRequest_CacheControl, &sCopyObjectRequest_ChecksumAlgorithm, &sCopyObjectRequest_ContentDisposition, &sCopyObjectRequest_ContentEncoding, &sCopyObjectRequest_ContentLanguage, &sCopyObjectRequest_ContentType, &sCopyObjectRequest_CopySource, &sCopyObjectRequest_CopySourceIfMatch, &sCopyObjectRequest_CopySourceIfModifiedSince, &sCopyObjectRequest_CopySourceIfNoneMatch, &sCopyObjectRequest_CopySourceIfUnmodifiedSince, &sCopyObjectRequest_Expires, &sCopyObjectRequest_GrantFullControl, &sCopyObjectRequest_GrantRead, &sCopyObjectRequest_GrantReadACP, &sCopyObjectRequest_GrantWriteACP, &sCopyObjectRequest_IfMatch, &sCopyObjectRequest_IfNoneMatch, &sCopyObjectRequest_Key, &sCopyObjectRequest_MetadataDirective, &sCopyObjectRequest_TaggingDirective, &sCopyObjectRequest_ServerSideEncryption, &sCopyObjectRequest_StorageClass, &sCopyObjectRequest_WebsiteRedirectLocation, &sCopyObjectRequest_SSECustomerAlgorithm, &sCopyObjectRequest_SSECustomerKey, &sCopyObjectRequest_SSECustomerKeyMD5, &sCopyObjectRequest_SSEKMSKeyId, &sCopyObjectRequest_SSEKMSEncryptionContext, &sCopyObjectRequest_BucketKeyEnabled, &sCopyObjectRequest_CopySourceSSECustomerAlgorithm, &sCopyObjectRequest_CopySourceSSECustomerKey, &sCopyObjectRequest_CopySourceSSECustomerKeyMD5, &sCopyObjectRequest_RequestPayer, &sCopyObjectRequest_Tagging, &sCopyObjectRequest_ObjectLockMode, &sCopyObjectRequest_ObjectLockRetainUntilDate, &sCopyObjectRequest_ObjectLockLegalHoldStatus, &sCopyObjectRequest_ExpectedBucketOwner, &sCopyObjectRequest_ExpectedSourceBucketOwner}, Hash: &hCopyObjectRequest}
+var mCopyObjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyObjectOutput_Expiration, &sCopyObjectOutput_CopySourceVersionId, &sCopyObjectOutput_VersionId, &sCopyObjectOutput_ServerSideEncryption, &sCopyObjectOutput_SSECustomerAlgorithm, &sCopyObjectOutput_SSECustomerKeyMD5, &sCopyObjectOutput_SSEKMSKeyId, &sCopyObjectOutput_SSEKMSEncryptionContext, &sCopyObjectOutput_BucketKeyEnabled, &sCopyObjectOutput_RequestCharged, &sCopyObjectOutput_ETag, &sCopyObjectOutput_LastModified, &sCopyObjectOutput_ChecksumType, &sCopyObjectOutput_ChecksumCRC32, &sCopyObjectOutput_ChecksumCRC32C, &sCopyObjectOutput_ChecksumCRC64NVME, &sCopyObjectOutput_ChecksumSHA1, &sCopyObjectOutput_ChecksumSHA256}, Hash: &hCopyObjectOutput}
+var mGetMetricDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricDataInput_MetricDataQueries, &sGetMetricDataInput_StartTime, &sGetMetricDataInput_EndTime, &sGetMetricDataInput_NextToken, &sGetMetricDataInput_ScanBy, &sGetMetricDataInput_MaxDatapoints, &sGetMetricDataInput_LabelOptions}}
+var mGetMetricDataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetricDataOutput_MetricDataResults, &sGetMetricDataOutput_NextToken, &sGetMetricDataOutput_Messages}}
+var mGetObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectRequest_Bucket, &sGetObjectRequest_Key, &sGetObjectRequest_IfMatch, &sGetObjectRequest_IfModifiedSince, &sGetObjectRequest_IfNoneMatch, &sGetObjectRequest_IfUnmodifiedSince, &sGetObjectRequest_Range, &sGetObjectRequest_ResponseCacheControl, &sGetObjectRequest_ResponseContentDisposition, &sGetObjectRequest_ResponseContentEncoding, &sGetObjectRequest_ResponseContentLanguage, &sGetObjectRequest_ResponseContentType, &sGetObjectRequest_ResponseExpires, &sGetObjectRequest_VersionId, &sGetObjectRequest_SSECustomerAlgorithm, &sGetObjectRequest_SSECustomerKey, &sGetObjectRequest_SSECustomerKeyMD5, &sGetObjectRequest_RequestPayer, &sGetObjectRequest_PartNumber, &sGetObjectRequest_ExpectedBucketOwner, &sGetObjectRequest_ChecksumMode}, Hash: &hGetObjectRequest}
+var mGetObjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetObjectOutput_Body, &sGetObjectOutput_DeleteMarker, &sGetObjectOutput_AcceptRanges, &sGetObjectOutput_Expiration, &sGetObjectOutput_Restore, &sGetObjectOutput_LastModified, &sGetObjectOutput_ContentLength, &sGetObjectOutput_ETag, &sGetObjectOutput_ChecksumCRC32, &sGetObjectOutput_ChecksumCRC32C, &sGetObjectOutput_ChecksumCRC64NVME, &sGetObjectOutput_ChecksumSHA1, &sGetObjectOutput_ChecksumSHA256, &sGetObjectOutput_ChecksumType, &sGetObjectOutput_MissingMeta, &sGetObjectOutput_VersionId, &sGetObjectOutput_CacheControl, &sGetObjectOutput_ContentDisposition, &sGetObjectOutput_ContentEncoding, &sGetObjectOutput_ContentLanguage, &sGetObjectOutput_ContentType, &sGetObjectOutput_Expires, &sGetObjectOutput_WebsiteRedirectLocation, &sGetObjectOutput_ServerSideEncryption, &sGetObjectOutput_SSECustomerAlgorithm, &sGetObjectOutput_SSECustomerKeyMD5, &sGetObjectOutput_SSEKMSKeyId, &sGetObjectOutput_BucketKeyEnabled, &sGetObjectOutput_StorageClass, &sGetObjectOutput_RequestCharged, &sGetObjectOutput_ReplicationStatus, &sGetObjectOutput_PartsCount, &sGetObjectOutput_TagCount, &sGetObjectOutput_ObjectLockMode, &sGetObjectOutput_ObjectLockRetainUntilDate, &sGetObjectOutput_ObjectLockLegalHoldStatus}, Hash: &hGetObjectOutput}
+var mHeadObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sHeadObjectRequest_Bucket, &sHeadObjectRequest_IfMatch, &sHeadObjectRequest_IfModifiedSince, &sHeadObjectRequest_IfNoneMatch, &sHeadObjectRequest_IfUnmodifiedSince, &sHeadObjectRequest_Key, &sHeadObjectRequest_Range, &sHeadObjectRequest_ResponseCacheControl, &sHeadObjectRequest_ResponseContentDisposition, &sHeadObjectRequest_ResponseContentEncoding, &sHeadObjectRequest_ResponseContentLanguage, &sHeadObjectRequest_ResponseContentType, &sHeadObjectRequest_ResponseExpires, &sHeadObjectRequest_VersionId, &sHeadObjectRequest_SSECustomerAlgorithm, &sHeadObjectRequest_SSECustomerKey, &sHeadObjectRequest_SSECustomerKeyMD5, &sHeadObjectRequest_RequestPayer, &sHeadObjectRequest_PartNumber, &sHeadObjectRequest_ExpectedBucketOwner, &sHeadObjectRequest_ChecksumMode}, Hash: &hHeadObjectRequest}
+var mHeadObjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sHeadObjectOutput_DeleteMarker, &sHeadObjectOutput_AcceptRanges, &sHeadObjectOutput_Expiration, &sHeadObjectOutput_Restore, &sHeadObjectOutput_ArchiveStatus, &sHeadObjectOutput_LastModified, &sHeadObjectOutput_ContentLength, &sHeadObjectOutput_ChecksumCRC32, &sHeadObjectOutput_ChecksumCRC32C, &sHeadObjectOutput_ChecksumCRC64NVME, &sHeadObjectOutput_ChecksumSHA1, &sHeadObjectOutput_ChecksumSHA256, &sHeadObjectOutput_ChecksumType, &sHeadObjectOutput_ETag, &sHeadObjectOutput_MissingMeta, &sHeadObjectOutput_VersionId, &sHeadObjectOutput_CacheControl, &sHeadObjectOutput_ContentDisposition, &sHeadObjectOutput_ContentEncoding, &sHeadObjectOutput_ContentLanguage, &sHeadObjectOutput_ContentType, &sHeadObjectOutput_ContentRange, &sHeadObjectOutput_Expires, &sHeadObjectOutput_WebsiteRedirectLocation, &sHeadObjectOutput_ServerSideEncryption, &sHeadObjectOutput_SSECustomerAlgorithm, &sHeadObjectOutput_SSECustomerKeyMD5, &sHeadObjectOutput_SSEKMSKeyId, &sHeadObjectOutput_BucketKeyEnabled, &sHeadObjectOutput_StorageClass, &sHeadObjectOutput_RequestCharged, &sHeadObjectOutput_ReplicationStatus, &sHeadObjectOutput_PartsCount, &sHeadObjectOutput_TagCount, &sHeadObjectOutput_ObjectLockMode, &sHeadObjectOutput_ObjectLockRetainUntilDate, &sHeadObjectOutput_ObjectLockLegalHoldStatus}, Hash: &hHeadObjectOutput}
+var mHealthcheckOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthcheckOutput_ok}}
+var mPutMetricDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMetricDataInput_Namespace, &sPutMetricDataInput_MetricData, &sPutMetricDataInput_EntityMetricData, &sPutMetricDataInput_StrictEntityValidation}}
+var mPutObjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutObjectRequest_Bucket, &sPutObjectRequest_Key, &sPutObjectRequest_Body, &sPutObjectRequest_ACL, &sPutObjectRequest_CacheControl, &sPutObjectRequest_ContentDisposition, &sPutObjectRequest_ContentEncoding, &sPutObjectRequest_ContentLanguage, &sPutObjectRequest_ContentLength, &sPutObjectRequest_ContentMD5, &sPutObjectRequest_ContentType, &sPutObjectRequest_ChecksumAlgorithm, &sPutObjectRequest_ChecksumCRC32, &sPutObjectRequest_ChecksumCRC32C, &sPutObjectRequest_ChecksumCRC64NVME, &sPutObjectRequest_ChecksumSHA1, &sPutObjectRequest_ChecksumSHA256, &sPutObjectRequest_Expires, &sPutObjectRequest_IfMatch, &sPutObjectRequest_IfNoneMatch, &sPutObjectRequest_GrantFullControl, &sPutObjectRequest_GrantRead, &sPutObjectRequest_GrantReadACP, &sPutObjectRequest_GrantWriteACP, &sPutObjectRequest_WriteOffsetBytes, &sPutObjectRequest_Metadata, &sPutObjectRequest_ServerSideEncryption, &sPutObjectRequest_StorageClass, &sPutObjectRequest_WebsiteRedirectLocation, &sPutObjectRequest_SSECustomerAlgorithm, &sPutObjectRequest_SSECustomerKey, &sPutObjectRequest_SSECustomerKeyMD5, &sPutObjectRequest_SSEKMSKeyId, &sPutObjectRequest_SSEKMSEncryptionContext, &sPutObjectRequest_BucketKeyEnabled, &sPutObjectRequest_RequestPayer, &sPutObjectRequest_Tagging, &sPutObjectRequest_ObjectLockMode, &sPutObjectRequest_ObjectLockRetainUntilDate, &sPutObjectRequest_ObjectLockLegalHoldStatus, &sPutObjectRequest_ExpectedBucketOwner}, Hash: &hPutObjectRequest}
+var mPutObjectOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutObjectOutput_Expiration, &sPutObjectOutput_ETag, &sPutObjectOutput_ChecksumCRC32, &sPutObjectOutput_ChecksumCRC32C, &sPutObjectOutput_ChecksumCRC64NVME, &sPutObjectOutput_ChecksumSHA1, &sPutObjectOutput_ChecksumSHA256, &sPutObjectOutput_ChecksumType, &sPutObjectOutput_ServerSideEncryption, &sPutObjectOutput_VersionId, &sPutObjectOutput_SSECustomerAlgorithm, &sPutObjectOutput_SSECustomerKeyMD5, &sPutObjectOutput_SSEKMSKeyId, &sPutObjectOutput_SSEKMSEncryptionContext, &sPutObjectOutput_BucketKeyEnabled, &sPutObjectOutput_Size, &sPutObjectOutput_RequestCharged}, Hash: &hPutObjectOutput}
+
+var hMetricDatum = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 7, 0, 0, 0, 1, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 9,
+	3, 0, 2, 0, 0, 8, 0, 0,
+}}
+var hStandardUnit = smithy.MemberHash{Seed: 282, Slots: []uint16{
+	16, 7, 25, 18, 19, 0, 23, 11, 0, 5, 21, 12, 2, 6, 0, 0, 0, 0, 0, 27, 4, 10, 0, 0,
+	22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 15, 0, 17, 9, 0, 1, 3, 0, 13, 0, 0, 26, 0, 0, 24,
+}}
+var hCopyObjectRequest = smithy.MemberHash{Seed: 1004, Slots: []uint16{
+	0, 12, 0, 0, 4, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 15, 0, 0, 0, 38,
+	31, 0, 0, 25, 0, 34, 0, 0, 0, 0, 0, 0, 21, 16, 0, 0, 27, 0, 0, 0, 0, 0, 20, 0,
+	0, 0, 0, 0, 0, 1, 33, 0, 0, 0, 0, 28, 0, 0, 0, 42, 23, 0, 30, 0, 2, 0, 11, 3,
+	0, 37, 0, 0, 14, 0, 8, 41, 0, 9, 0, 19, 0, 0, 0, 0, 40, 5, 0, 17, 26, 10, 0, 0,
+	0, 0, 13, 0, 0, 0, 35, 0, 0, 0, 22, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 7, 39,
+	6, 0, 0, 29, 18, 0, 0, 0,
+}}
+var hCopyObjectOutput = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 0, 8, 18, 0, 0, 15, 0, 6, 0, 0, 3, 5, 0, 10, 0, 0, 0, 0, 13, 0, 0, 12,
+	0, 9, 17, 2, 0, 0, 0, 0, 1, 0, 0, 14, 4, 0, 0, 0, 7, 0, 0, 0, 0, 0, 16, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0,
+}}
+var hGetObjectRequest = smithy.MemberHash{Seed: 116, Slots: []uint16{
+	0, 6, 5, 0, 0, 17, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 4, 0,
+	0, 12, 15, 0, 18, 0, 0, 14, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 11, 9, 16,
+	0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 19, 21, 0, 2, 0, 13,
+}}
+var hGetObjectOutput = smithy.MemberHash{Seed: 529, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 1, 21, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 3, 9, 0, 12,
+	17, 15, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 31, 0, 0, 0,
+	0, 0, 0, 6, 0, 13, 0, 33, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0, 11, 0, 2,
+	0, 0, 0, 0, 0, 0, 0, 18, 14, 23, 0, 25, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 34,
+	0, 0, 0, 0, 27, 0, 0, 28, 0, 0, 8, 0, 0, 0, 0, 35, 0, 19, 29, 0, 0, 32, 36, 10,
+	0, 0, 7, 22, 0, 20, 5, 0,
+}}
+var hHeadObjectRequest = smithy.MemberHash{Seed: 116, Slots: []uint16{
+	0, 5, 4, 0, 0, 17, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 3, 0,
+	0, 12, 15, 0, 18, 0, 0, 14, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 11, 9, 16,
+	0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 19, 21, 0, 6, 0, 13,
+}}
+var hHeadObjectOutput = smithy.MemberHash{Seed: 351, Slots: []uint16{
+	0, 0, 4, 31, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 29,
+	0, 0, 26, 0, 0, 0, 0, 0, 37, 0, 0, 0, 33, 8, 0, 9, 19, 5, 0, 21, 0, 0, 0, 0,
+	20, 0, 0, 0, 0, 0, 0, 14, 10, 23, 13, 0, 0, 0, 0, 0, 11, 0, 1, 0, 0, 0, 25, 0,
+	0, 0, 0, 0, 32, 30, 0, 0, 0, 3, 0, 6, 35, 16, 0, 0, 0, 0, 15, 0, 0, 0, 27, 22,
+	36, 0, 0, 2, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 17, 0, 0, 0, 0, 0, 28, 0,
+	0, 0, 0, 0, 0, 0, 34, 0,
+}}
+var hPutObjectRequest = smithy.MemberHash{Seed: 1666, Slots: []uint16{
+	27, 0, 0, 0, 0, 24, 0, 17, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 15,
+	0, 11, 38, 19, 13, 0, 0, 0, 0, 34, 29, 0, 16, 10, 0, 0, 0, 37, 0, 0, 0, 0, 0, 36,
+	0, 28, 22, 40, 0, 0, 30, 0, 0, 32, 0, 0, 0, 5, 0, 0, 0, 0, 14, 0, 0, 0, 33, 0,
+	0, 0, 0, 0, 41, 35, 3, 0, 0, 0, 0, 0, 26, 0, 0, 0, 21, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 7, 2, 0, 23, 4, 25, 0, 0, 0, 39, 0, 0, 12, 0, 0, 31, 0,
+	0, 0, 9, 1, 0, 6, 0, 0,
+}}
+var hPutObjectOutput = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 0, 14, 7, 0, 0, 4, 0, 12, 0, 0, 10, 11, 0, 17, 0, 0, 0, 0, 8, 0, 0, 0,
+	0, 15, 6, 0, 0, 0, 0, 0, 1, 0, 0, 3, 9, 0, 0, 0, 13, 0, 0, 0, 0, 0, 5, 0,
+	0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+}}
+
+var sCopyObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyObject, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCopyObject})
+var sGetMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricData, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricData})
+var sGetObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObject, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetObject})
+var sHeadObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadObject, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eHeadObject})
+var sHealthcheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthcheck, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eHealthcheck})
+var sPutMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricData, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ePutMetricData})
+var sPutObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObject, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ePutObject})
+var s_AwsRestJsonDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRestJsonDataPlane, Type: smithy.ShapeTypeService, Ext: &e_AwsRestJsonDataPlane})
+var sChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eChecksumAlgorithm})
+var sChecksumAlgorithm_CRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_CRC32})
+var sChecksumAlgorithm_CRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC32C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_CRC32C})
+var sChecksumAlgorithm_SHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_SHA1})
+var sChecksumAlgorithm_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_SHA256})
+var sChecksumAlgorithm_CRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC64NVME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_CRC64NVME})
+var sChecksumMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumMode, Members: &mChecksumMode, Type: smithy.ShapeTypeEnum, Ext: &eChecksumMode})
+var sChecksumMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumMode_ENABLED})
+var s_Counts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Counts, Members: &m_Counts, Type: smithy.ShapeTypeList, Ext: &e_Counts})
+var s_Counts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_Counts_member})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var sDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDimension_Name})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDimension_Value})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eEntity})
+var sEntity_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &i_EntityKeyAttributesMap, Members: &m_EntityKeyAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eEntity_KeyAttributes})
+var sEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_EntityAttributesMap, Members: &m_EntityAttributesMap, Type: smithy.ShapeTypeMap, Ext: &eEntity_Attributes})
+var s_EntityAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAttributesMap, Members: &m_EntityAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_EntityAttributesMap})
+var s_EntityAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMap_key})
+var s_EntityAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityAttributesMap_value})
+var s_EntityKeyAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityKeyAttributesMap, Members: &m_EntityKeyAttributesMap, Type: smithy.ShapeTypeMap, Ext: &e_EntityKeyAttributesMap})
+var s_EntityKeyAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMap_key})
+var s_EntityKeyAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EntityKeyAttributesMap_value})
+var s_EntityMetricDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityMetricDataList, Members: &m_EntityMetricDataList, Type: smithy.ShapeTypeList, Ext: &e_EntityMetricDataList})
+var s_EntityMetricDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityMetricDatum, Members: &mEntityMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &e_EntityMetricDataList_member})
+var sEntityMetricDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityMetricDatum, Members: &mEntityMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &eEntityMetricDatum})
+var sEntityMetricDatum_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eEntityMetricDatum_Entity})
+var sEntityMetricDatum_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &eEntityMetricDatum_MetricData})
+var sLabelOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelOptions, Members: &mLabelOptions, Type: smithy.ShapeTypeStructure, Ext: &eLabelOptions})
+var sLabelOptions_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLabelOptions_Timezone})
+var sMessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageData, Members: &mMessageData, Type: smithy.ShapeTypeStructure, Ext: &eMessageData})
+var sMessageData_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageData_Code})
+var sMessageData_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageData_Value})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeMap, Ext: &e_Metadata})
+var s_Metadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Metadata_key})
+var s_Metadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Metadata_value})
+var sMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetric})
+var sMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetric_Namespace})
+var sMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetric_MetricName})
+var sMetric_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetric_Dimensions})
+var s_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &e_MetricData})
+var s_MetricData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &e_MetricData_member})
+var s_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &e_MetricDataQueries})
+var s_MetricDataQueries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataQueries_member})
+var sMetricDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataQuery, Members: &mMetricDataQuery, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery})
+var sMetricDataQuery_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Id})
+var sMetricDataQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataQuery_MetricStat})
+var sMetricDataQuery_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Expression})
+var sMetricDataQuery_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_Label})
+var sMetricDataQuery_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnData", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMetricDataQuery_ReturnData})
+var sMetricDataQuery_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMetricDataQuery_Period})
+var sMetricDataQuery_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataQuery_AccountId})
+var sMetricDataResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDataResult, Members: &mMetricDataResult, Type: smithy.ShapeTypeStructure, Ext: &eMetricDataResult})
+var sMetricDataResult_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataResult_Id})
+var sMetricDataResult_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDataResult_Label})
+var sMetricDataResult_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamps", ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Timestamps})
+var sMetricDataResult_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Values})
+var sMetricDataResult_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iStatusCode, Members: &mStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eMetricDataResult_StatusCode})
+var sMetricDataResult_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &eMetricDataResult_Messages})
+var s_MetricDataResultMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &e_MetricDataResultMessages})
+var s_MetricDataResultMessages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessageData, Members: &mMessageData, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataResultMessages_member})
+var s_MetricDataResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDataResults, Members: &m_MetricDataResults, Type: smithy.ShapeTypeList, Ext: &e_MetricDataResults})
+var s_MetricDataResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDataResult, Members: &mMetricDataResult, Type: smithy.ShapeTypeStructure, Ext: &e_MetricDataResults_member})
+var sMetricDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure, Ext: &eMetricDatum})
+var sMetricDatum_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricDatum_MetricName})
+var sMetricDatum_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Dimensions})
+var sMetricDatum_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricDatum_Timestamp})
+var sMetricDatum_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eMetricDatum_Value})
+var sMetricDatum_StatisticValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatisticValues", ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure, Ext: &eMetricDatum_StatisticValues})
+var sMetricDatum_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Values})
+var sMetricDatum_Counts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Counts", ID: &i_Counts, Members: &m_Counts, Type: smithy.ShapeTypeList, Ext: &eMetricDatum_Counts})
+var sMetricDatum_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricDatum_Unit})
+var sMetricDatum_StorageResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageResolution", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMetricDatum_StorageResolution})
+var sMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStat, Members: &mMetricStat, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat})
+var sMetricStat_Metric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metric", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeStructure, Ext: &eMetricStat_Metric})
+var sMetricStat_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMetricStat_Period})
+var sMetricStat_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMetricStat_Stat})
+var sMetricStat_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricStat_Unit})
+var sScanBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanBy, Members: &mScanBy, Type: smithy.ShapeTypeEnum, Ext: &eScanBy})
+var sScanBy_TIMESTAMP_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP_DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanBy_TIMESTAMP_DESCENDING})
+var sScanBy_TIMESTAMP_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP_ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanBy_TIMESTAMP_ASCENDING})
+var sStandardUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStandardUnit, Members: &mStandardUnit, Type: smithy.ShapeTypeEnum, Ext: &eStandardUnit})
+var sStandardUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_SECONDS})
+var sStandardUnit_MICROSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MICROSECONDS})
+var sStandardUnit_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MILLISECONDS})
+var sStandardUnit_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BYTES})
+var sStandardUnit_KILOBYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBYTES})
+var sStandardUnit_MEGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABYTES})
+var sStandardUnit_GIGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABYTES})
+var sStandardUnit_TERABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABYTES})
+var sStandardUnit_BITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BITS})
+var sStandardUnit_KILOBITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBITS})
+var sStandardUnit_MEGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABITS})
+var sStandardUnit_GIGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABITS})
+var sStandardUnit_TERABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABITS})
+var sStandardUnit_PERCENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_PERCENT})
+var sStandardUnit_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_COUNT})
+var sStandardUnit_BYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BYTES_SECOND})
+var sStandardUnit_KILOBYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBYTES_SECOND})
+var sStandardUnit_MEGABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABYTES_SECOND})
+var sStandardUnit_GIGABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABYTES_SECOND})
+var sStandardUnit_TERABYTES_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABYTES_SECOND})
+var sStandardUnit_BITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_BITS_SECOND})
+var sStandardUnit_KILOBITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_KILOBITS_SECOND})
+var sStandardUnit_MEGABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_MEGABITS_SECOND})
+var sStandardUnit_GIGABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_GIGABITS_SECOND})
+var sStandardUnit_TERABITS_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_TERABITS_SECOND})
+var sStandardUnit_COUNT_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_COUNT_SECOND})
+var sStandardUnit_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStandardUnit_NONE})
+var sStatisticSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure, Ext: &eStatisticSet})
+var sStatisticSet_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_SampleCount})
+var sStatisticSet_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Sum})
+var sStatisticSet_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Minimum})
+var sStatisticSet_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eStatisticSet_Maximum})
+var sStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusCode, Members: &mStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eStatusCode})
+var sStatusCode_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_COMPLETE})
+var sStatusCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_INTERNAL_ERROR})
+var sStatusCode_PARTIAL_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_PARTIAL_DATA})
+var sStatusCode_FORBIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORBIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusCode_FORBIDDEN})
+var s_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList, Ext: &e_Timestamps})
+var s_Timestamps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamps_member})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_Values_member})
+var sCopyObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyObjectRequest, Members: &mCopyObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eCopyObjectRequest})
+var sCopyObjectRequest_ACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACL", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ACL})
+var sCopyObjectRequest_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_Bucket})
+var sCopyObjectRequest_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CacheControl})
+var sCopyObjectRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &pString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ChecksumAlgorithm})
+var sCopyObjectRequest_ContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentDisposition", ID: &pString, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ContentDisposition})
+var sCopyObjectRequest_ContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentEncoding", ID: &pString, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ContentEncoding})
+var sCopyObjectRequest_ContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLanguage", ID: &pString, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ContentLanguage})
+var sCopyObjectRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ContentType})
+var sCopyObjectRequest_CopySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySource", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySource})
+var sCopyObjectRequest_CopySourceIfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceIfMatch", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySourceIfMatch})
+var sCopyObjectRequest_CopySourceIfModifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceIfModifiedSince", ID: &pTimestamp, Traits: &t17, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyObjectRequest_CopySourceIfModifiedSince})
+var sCopyObjectRequest_CopySourceIfNoneMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceIfNoneMatch", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySourceIfNoneMatch})
+var sCopyObjectRequest_CopySourceIfUnmodifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceIfUnmodifiedSince", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyObjectRequest_CopySourceIfUnmodifiedSince})
+var sCopyObjectRequest_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &pTimestamp, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyObjectRequest_Expires})
+var sCopyObjectRequest_GrantFullControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantFullControl", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_GrantFullControl})
+var sCopyObjectRequest_GrantRead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantRead", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_GrantRead})
+var sCopyObjectRequest_GrantReadACP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantReadACP", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_GrantReadACP})
+var sCopyObjectRequest_GrantWriteACP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantWriteACP", ID: &pString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_GrantWriteACP})
+var sCopyObjectRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_IfMatch})
+var sCopyObjectRequest_IfNoneMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfNoneMatch", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_IfNoneMatch})
+var sCopyObjectRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_Key})
+var sCopyObjectRequest_MetadataDirective = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataDirective", ID: &pString, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_MetadataDirective})
+var sCopyObjectRequest_TaggingDirective = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaggingDirective", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_TaggingDirective})
+var sCopyObjectRequest_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ServerSideEncryption})
+var sCopyObjectRequest_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &pString, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_StorageClass})
+var sCopyObjectRequest_WebsiteRedirectLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteRedirectLocation", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_WebsiteRedirectLocation})
+var sCopyObjectRequest_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_SSECustomerAlgorithm})
+var sCopyObjectRequest_SSECustomerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKey", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_SSECustomerKey})
+var sCopyObjectRequest_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_SSECustomerKeyMD5})
+var sCopyObjectRequest_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_SSEKMSKeyId})
+var sCopyObjectRequest_SSEKMSEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSEncryptionContext", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_SSEKMSEncryptionContext})
+var sCopyObjectRequest_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &eCopyObjectRequest_BucketKeyEnabled})
+var sCopyObjectRequest_CopySourceSSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceSSECustomerAlgorithm", ID: &pString, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySourceSSECustomerAlgorithm})
+var sCopyObjectRequest_CopySourceSSECustomerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceSSECustomerKey", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySourceSSECustomerKey})
+var sCopyObjectRequest_CopySourceSSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceSSECustomerKeyMD5", ID: &pString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_CopySourceSSECustomerKeyMD5})
+var sCopyObjectRequest_RequestPayer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestPayer", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_RequestPayer})
+var sCopyObjectRequest_Tagging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tagging", ID: &pString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_Tagging})
+var sCopyObjectRequest_ObjectLockMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockMode", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ObjectLockMode})
+var sCopyObjectRequest_ObjectLockRetainUntilDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockRetainUntilDate", ID: &pTimestamp, Traits: &t44, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyObjectRequest_ObjectLockRetainUntilDate})
+var sCopyObjectRequest_ObjectLockLegalHoldStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockLegalHoldStatus", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ObjectLockLegalHoldStatus})
+var sCopyObjectRequest_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ExpectedBucketOwner})
+var sCopyObjectRequest_ExpectedSourceBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedSourceBucketOwner", ID: &pString, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eCopyObjectRequest_ExpectedSourceBucketOwner})
+var sCopyObjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyObjectOutput, Members: &mCopyObjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eCopyObjectOutput})
+var sCopyObjectOutput_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_Expiration})
+var sCopyObjectOutput_CopySourceVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopySourceVersionId", ID: &pString, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_CopySourceVersionId})
+var sCopyObjectOutput_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_VersionId})
+var sCopyObjectOutput_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ServerSideEncryption})
+var sCopyObjectOutput_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_SSECustomerAlgorithm})
+var sCopyObjectOutput_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_SSECustomerKeyMD5})
+var sCopyObjectOutput_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_SSEKMSKeyId})
+var sCopyObjectOutput_SSEKMSEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSEncryptionContext", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_SSEKMSEncryptionContext})
+var sCopyObjectOutput_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &eCopyObjectOutput_BucketKeyEnabled})
+var sCopyObjectOutput_RequestCharged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharged", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_RequestCharged})
+var sCopyObjectOutput_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ETag})
+var sCopyObjectOutput_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCopyObjectOutput_LastModified})
+var sCopyObjectOutput_ChecksumType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumType})
+var sCopyObjectOutput_ChecksumCRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumCRC32})
+var sCopyObjectOutput_ChecksumCRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32C", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumCRC32C})
+var sCopyObjectOutput_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC64NVME", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumCRC64NVME})
+var sCopyObjectOutput_ChecksumSHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA1", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumSHA1})
+var sCopyObjectOutput_ChecksumSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA256", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyObjectOutput_ChecksumSHA256})
+var sGetMetricDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricDataInput, Members: &mGetMetricDataInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataInput})
+var sGetMetricDataInput_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_MetricDataQueries, Members: &m_MetricDataQueries, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataInput_MetricDataQueries})
+var sGetMetricDataInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricDataInput_StartTime})
+var sGetMetricDataInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricDataInput_EndTime})
+var sGetMetricDataInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMetricDataInput_NextToken})
+var sGetMetricDataInput_ScanBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScanBy", ID: &iScanBy, Members: &mScanBy, Type: smithy.ShapeTypeEnum, Ext: &eGetMetricDataInput_ScanBy})
+var sGetMetricDataInput_MaxDatapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxDatapoints", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMetricDataInput_MaxDatapoints})
+var sGetMetricDataInput_LabelOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelOptions", ID: &iLabelOptions, Members: &mLabelOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataInput_LabelOptions})
+var sGetMetricDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricDataOutput, Members: &mGetMetricDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricDataOutput})
+var sGetMetricDataOutput_MetricDataResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataResults", ID: &i_MetricDataResults, Members: &m_MetricDataResults, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataOutput_MetricDataResults})
+var sGetMetricDataOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMetricDataOutput_NextToken})
+var sGetMetricDataOutput_Messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Messages", ID: &i_MetricDataResultMessages, Members: &m_MetricDataResultMessages, Type: smithy.ShapeTypeList, Ext: &eGetMetricDataOutput_Messages})
+var sGetObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectRequest, Members: &mGetObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectRequest})
+var sGetObjectRequest_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_Bucket})
+var sGetObjectRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_Key})
+var sGetObjectRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_IfMatch})
+var sGetObjectRequest_IfModifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfModifiedSince", ID: &pTimestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectRequest_IfModifiedSince})
+var sGetObjectRequest_IfNoneMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfNoneMatch", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_IfNoneMatch})
+var sGetObjectRequest_IfUnmodifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfUnmodifiedSince", ID: &pTimestamp, Traits: &t53, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectRequest_IfUnmodifiedSince})
+var sGetObjectRequest_Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Range", ID: &pString, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_Range})
+var sGetObjectRequest_ResponseCacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseCacheControl", ID: &pString, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ResponseCacheControl})
+var sGetObjectRequest_ResponseContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentDisposition", ID: &pString, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ResponseContentDisposition})
+var sGetObjectRequest_ResponseContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentEncoding", ID: &pString, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ResponseContentEncoding})
+var sGetObjectRequest_ResponseContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentLanguage", ID: &pString, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ResponseContentLanguage})
+var sGetObjectRequest_ResponseContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentType", ID: &pString, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ResponseContentType})
+var sGetObjectRequest_ResponseExpires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseExpires", ID: &pTimestamp, Traits: &t60, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectRequest_ResponseExpires})
+var sGetObjectRequest_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_VersionId})
+var sGetObjectRequest_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_SSECustomerAlgorithm})
+var sGetObjectRequest_SSECustomerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKey", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_SSECustomerKey})
+var sGetObjectRequest_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_SSECustomerKeyMD5})
+var sGetObjectRequest_RequestPayer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestPayer", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_RequestPayer})
+var sGetObjectRequest_PartNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartNumber", ID: &pInteger, Traits: &t62, Type: smithy.ShapeTypeInteger, Ext: &eGetObjectRequest_PartNumber})
+var sGetObjectRequest_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetObjectRequest_ExpectedBucketOwner})
+var sGetObjectRequest_ChecksumMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumMode", ID: &iChecksumMode, Members: &mChecksumMode, Traits: &t63, Type: smithy.ShapeTypeEnum, Ext: &eGetObjectRequest_ChecksumMode})
+var sGetObjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetObjectOutput, Members: &mGetObjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetObjectOutput})
+var sGetObjectOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &pBlob, Traits: &t64, Type: smithy.ShapeTypeBlob, Ext: &eGetObjectOutput_Body})
+var sGetObjectOutput_DeleteMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteMarker", ID: &pBoolean, Traits: &t65, Type: smithy.ShapeTypeBoolean, Ext: &eGetObjectOutput_DeleteMarker})
+var sGetObjectOutput_AcceptRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptRanges", ID: &pString, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_AcceptRanges})
+var sGetObjectOutput_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_Expiration})
+var sGetObjectOutput_Restore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restore", ID: &pString, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_Restore})
+var sGetObjectOutput_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &pTimestamp, Traits: &t68, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectOutput_LastModified})
+var sGetObjectOutput_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &pLong, Traits: &t69, Type: smithy.ShapeTypeLong, Ext: &eGetObjectOutput_ContentLength})
+var sGetObjectOutput_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ETag})
+var sGetObjectOutput_ChecksumCRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32", ID: &pString, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumCRC32})
+var sGetObjectOutput_ChecksumCRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32C", ID: &pString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumCRC32C})
+var sGetObjectOutput_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC64NVME", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumCRC64NVME})
+var sGetObjectOutput_ChecksumSHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA1", ID: &pString, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumSHA1})
+var sGetObjectOutput_ChecksumSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA256", ID: &pString, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumSHA256})
+var sGetObjectOutput_ChecksumType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumType", ID: &pString, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ChecksumType})
+var sGetObjectOutput_MissingMeta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingMeta", ID: &pInteger, Traits: &t77, Type: smithy.ShapeTypeInteger, Ext: &eGetObjectOutput_MissingMeta})
+var sGetObjectOutput_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_VersionId})
+var sGetObjectOutput_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_CacheControl})
+var sGetObjectOutput_ContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentDisposition", ID: &pString, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ContentDisposition})
+var sGetObjectOutput_ContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentEncoding", ID: &pString, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ContentEncoding})
+var sGetObjectOutput_ContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLanguage", ID: &pString, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ContentLanguage})
+var sGetObjectOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ContentType})
+var sGetObjectOutput_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &pTimestamp, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectOutput_Expires})
+var sGetObjectOutput_WebsiteRedirectLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteRedirectLocation", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_WebsiteRedirectLocation})
+var sGetObjectOutput_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ServerSideEncryption})
+var sGetObjectOutput_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_SSECustomerAlgorithm})
+var sGetObjectOutput_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_SSECustomerKeyMD5})
+var sGetObjectOutput_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_SSEKMSKeyId})
+var sGetObjectOutput_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &eGetObjectOutput_BucketKeyEnabled})
+var sGetObjectOutput_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &pString, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_StorageClass})
+var sGetObjectOutput_RequestCharged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharged", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_RequestCharged})
+var sGetObjectOutput_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &pString, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ReplicationStatus})
+var sGetObjectOutput_PartsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartsCount", ID: &pInteger, Traits: &t79, Type: smithy.ShapeTypeInteger, Ext: &eGetObjectOutput_PartsCount})
+var sGetObjectOutput_TagCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagCount", ID: &pInteger, Traits: &t80, Type: smithy.ShapeTypeInteger, Ext: &eGetObjectOutput_TagCount})
+var sGetObjectOutput_ObjectLockMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockMode", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ObjectLockMode})
+var sGetObjectOutput_ObjectLockRetainUntilDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockRetainUntilDate", ID: &pTimestamp, Traits: &t44, Type: smithy.ShapeTypeTimestamp, Ext: &eGetObjectOutput_ObjectLockRetainUntilDate})
+var sGetObjectOutput_ObjectLockLegalHoldStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockLegalHoldStatus", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eGetObjectOutput_ObjectLockLegalHoldStatus})
+var sHeadObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadObjectRequest, Members: &mHeadObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &eHeadObjectRequest})
+var sHeadObjectRequest_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_Bucket})
+var sHeadObjectRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_IfMatch})
+var sHeadObjectRequest_IfModifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfModifiedSince", ID: &pTimestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectRequest_IfModifiedSince})
+var sHeadObjectRequest_IfNoneMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfNoneMatch", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_IfNoneMatch})
+var sHeadObjectRequest_IfUnmodifiedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfUnmodifiedSince", ID: &pTimestamp, Traits: &t53, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectRequest_IfUnmodifiedSince})
+var sHeadObjectRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_Key})
+var sHeadObjectRequest_Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Range", ID: &pString, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_Range})
+var sHeadObjectRequest_ResponseCacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseCacheControl", ID: &pString, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ResponseCacheControl})
+var sHeadObjectRequest_ResponseContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentDisposition", ID: &pString, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ResponseContentDisposition})
+var sHeadObjectRequest_ResponseContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentEncoding", ID: &pString, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ResponseContentEncoding})
+var sHeadObjectRequest_ResponseContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentLanguage", ID: &pString, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ResponseContentLanguage})
+var sHeadObjectRequest_ResponseContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseContentType", ID: &pString, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ResponseContentType})
+var sHeadObjectRequest_ResponseExpires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseExpires", ID: &pTimestamp, Traits: &t60, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectRequest_ResponseExpires})
+var sHeadObjectRequest_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_VersionId})
+var sHeadObjectRequest_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_SSECustomerAlgorithm})
+var sHeadObjectRequest_SSECustomerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKey", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_SSECustomerKey})
+var sHeadObjectRequest_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_SSECustomerKeyMD5})
+var sHeadObjectRequest_RequestPayer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestPayer", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_RequestPayer})
+var sHeadObjectRequest_PartNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartNumber", ID: &pInteger, Traits: &t62, Type: smithy.ShapeTypeInteger, Ext: &eHeadObjectRequest_PartNumber})
+var sHeadObjectRequest_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ExpectedBucketOwner})
+var sHeadObjectRequest_ChecksumMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumMode", ID: &pString, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eHeadObjectRequest_ChecksumMode})
+var sHeadObjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadObjectOutput, Members: &mHeadObjectOutput, Type: smithy.ShapeTypeStructure, Ext: &eHeadObjectOutput})
+var sHeadObjectOutput_DeleteMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteMarker", ID: &pBoolean, Traits: &t65, Type: smithy.ShapeTypeBoolean, Ext: &eHeadObjectOutput_DeleteMarker})
+var sHeadObjectOutput_AcceptRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptRanges", ID: &pString, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_AcceptRanges})
+var sHeadObjectOutput_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_Expiration})
+var sHeadObjectOutput_Restore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restore", ID: &pString, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_Restore})
+var sHeadObjectOutput_ArchiveStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveStatus", ID: &pString, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ArchiveStatus})
+var sHeadObjectOutput_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &pTimestamp, Traits: &t68, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectOutput_LastModified})
+var sHeadObjectOutput_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &pLong, Traits: &t69, Type: smithy.ShapeTypeLong, Ext: &eHeadObjectOutput_ContentLength})
+var sHeadObjectOutput_ChecksumCRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32", ID: &pString, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumCRC32})
+var sHeadObjectOutput_ChecksumCRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32C", ID: &pString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumCRC32C})
+var sHeadObjectOutput_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC64NVME", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumCRC64NVME})
+var sHeadObjectOutput_ChecksumSHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA1", ID: &pString, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumSHA1})
+var sHeadObjectOutput_ChecksumSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA256", ID: &pString, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumSHA256})
+var sHeadObjectOutput_ChecksumType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumType", ID: &pString, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ChecksumType})
+var sHeadObjectOutput_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ETag})
+var sHeadObjectOutput_MissingMeta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingMeta", ID: &pInteger, Traits: &t77, Type: smithy.ShapeTypeInteger, Ext: &eHeadObjectOutput_MissingMeta})
+var sHeadObjectOutput_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_VersionId})
+var sHeadObjectOutput_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_CacheControl})
+var sHeadObjectOutput_ContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentDisposition", ID: &pString, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ContentDisposition})
+var sHeadObjectOutput_ContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentEncoding", ID: &pString, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ContentEncoding})
+var sHeadObjectOutput_ContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLanguage", ID: &pString, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ContentLanguage})
+var sHeadObjectOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ContentType})
+var sHeadObjectOutput_ContentRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRange", ID: &pString, Traits: &t82, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ContentRange})
+var sHeadObjectOutput_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &pTimestamp, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectOutput_Expires})
+var sHeadObjectOutput_WebsiteRedirectLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteRedirectLocation", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_WebsiteRedirectLocation})
+var sHeadObjectOutput_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ServerSideEncryption})
+var sHeadObjectOutput_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_SSECustomerAlgorithm})
+var sHeadObjectOutput_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_SSECustomerKeyMD5})
+var sHeadObjectOutput_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_SSEKMSKeyId})
+var sHeadObjectOutput_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &eHeadObjectOutput_BucketKeyEnabled})
+var sHeadObjectOutput_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &pString, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_StorageClass})
+var sHeadObjectOutput_RequestCharged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharged", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_RequestCharged})
+var sHeadObjectOutput_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &pString, Traits: &t78, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ReplicationStatus})
+var sHeadObjectOutput_PartsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartsCount", ID: &pInteger, Traits: &t79, Type: smithy.ShapeTypeInteger, Ext: &eHeadObjectOutput_PartsCount})
+var sHeadObjectOutput_TagCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagCount", ID: &pInteger, Traits: &t80, Type: smithy.ShapeTypeInteger, Ext: &eHeadObjectOutput_TagCount})
+var sHeadObjectOutput_ObjectLockMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockMode", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ObjectLockMode})
+var sHeadObjectOutput_ObjectLockRetainUntilDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockRetainUntilDate", ID: &pTimestamp, Traits: &t44, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadObjectOutput_ObjectLockRetainUntilDate})
+var sHeadObjectOutput_ObjectLockLegalHoldStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockLegalHoldStatus", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eHeadObjectOutput_ObjectLockLegalHoldStatus})
+var sHealthcheckOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthcheckOutput, Members: &mHealthcheckOutput, Type: smithy.ShapeTypeStructure, Ext: &eHealthcheckOutput})
+var sHealthcheckOutput_ok = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ok", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHealthcheckOutput_ok})
+var sPutMetricDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricDataInput, Members: &mPutMetricDataInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricDataInput})
+var sPutMetricDataInput_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutMetricDataInput_Namespace})
+var sPutMetricDataInput_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList, Ext: &ePutMetricDataInput_MetricData})
+var sPutMetricDataInput_EntityMetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityMetricData", ID: &i_EntityMetricDataList, Members: &m_EntityMetricDataList, Type: smithy.ShapeTypeList, Ext: &ePutMetricDataInput_EntityMetricData})
+var sPutMetricDataInput_StrictEntityValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrictEntityValidation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutMetricDataInput_StrictEntityValidation})
+var sPutObjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObjectRequest, Members: &mPutObjectRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutObjectRequest})
+var sPutObjectRequest_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_Bucket})
+var sPutObjectRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_Key})
+var sPutObjectRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &pBlob, Traits: &t64, Type: smithy.ShapeTypeBlob, Ext: &ePutObjectRequest_Body})
+var sPutObjectRequest_ACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACL", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ACL})
+var sPutObjectRequest_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_CacheControl})
+var sPutObjectRequest_ContentDisposition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentDisposition", ID: &pString, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentDisposition})
+var sPutObjectRequest_ContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentEncoding", ID: &pString, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentEncoding})
+var sPutObjectRequest_ContentLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLanguage", ID: &pString, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentLanguage})
+var sPutObjectRequest_ContentLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentLength", ID: &pLong, Traits: &t69, Type: smithy.ShapeTypeLong, Ext: &ePutObjectRequest_ContentLength})
+var sPutObjectRequest_ContentMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentMD5", ID: &pString, Traits: &t83, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentMD5})
+var sPutObjectRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ContentType})
+var sPutObjectRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t84, Type: smithy.ShapeTypeEnum, Ext: &ePutObjectRequest_ChecksumAlgorithm})
+var sPutObjectRequest_ChecksumCRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32", ID: &pString, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ChecksumCRC32})
+var sPutObjectRequest_ChecksumCRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32C", ID: &pString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ChecksumCRC32C})
+var sPutObjectRequest_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC64NVME", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ChecksumCRC64NVME})
+var sPutObjectRequest_ChecksumSHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA1", ID: &pString, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ChecksumSHA1})
+var sPutObjectRequest_ChecksumSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA256", ID: &pString, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ChecksumSHA256})
+var sPutObjectRequest_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &pTimestamp, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &ePutObjectRequest_Expires})
+var sPutObjectRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_IfMatch})
+var sPutObjectRequest_IfNoneMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfNoneMatch", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_IfNoneMatch})
+var sPutObjectRequest_GrantFullControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantFullControl", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_GrantFullControl})
+var sPutObjectRequest_GrantRead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantRead", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_GrantRead})
+var sPutObjectRequest_GrantReadACP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantReadACP", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_GrantReadACP})
+var sPutObjectRequest_GrantWriteACP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantWriteACP", ID: &pString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_GrantWriteACP})
+var sPutObjectRequest_WriteOffsetBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WriteOffsetBytes", ID: &pLong, Traits: &t85, Type: smithy.ShapeTypeLong, Ext: &ePutObjectRequest_WriteOffsetBytes})
+var sPutObjectRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_Metadata, Members: &m_Metadata, Traits: &t86, Type: smithy.ShapeTypeMap, Ext: &ePutObjectRequest_Metadata})
+var sPutObjectRequest_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ServerSideEncryption})
+var sPutObjectRequest_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &pString, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_StorageClass})
+var sPutObjectRequest_WebsiteRedirectLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteRedirectLocation", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_WebsiteRedirectLocation})
+var sPutObjectRequest_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_SSECustomerAlgorithm})
+var sPutObjectRequest_SSECustomerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKey", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_SSECustomerKey})
+var sPutObjectRequest_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_SSECustomerKeyMD5})
+var sPutObjectRequest_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_SSEKMSKeyId})
+var sPutObjectRequest_SSEKMSEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSEncryptionContext", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_SSEKMSEncryptionContext})
+var sPutObjectRequest_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &ePutObjectRequest_BucketKeyEnabled})
+var sPutObjectRequest_RequestPayer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestPayer", ID: &pString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_RequestPayer})
+var sPutObjectRequest_Tagging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tagging", ID: &pString, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_Tagging})
+var sPutObjectRequest_ObjectLockMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockMode", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ObjectLockMode})
+var sPutObjectRequest_ObjectLockRetainUntilDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockRetainUntilDate", ID: &pTimestamp, Traits: &t44, Type: smithy.ShapeTypeTimestamp, Ext: &ePutObjectRequest_ObjectLockRetainUntilDate})
+var sPutObjectRequest_ObjectLockLegalHoldStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectLockLegalHoldStatus", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ObjectLockLegalHoldStatus})
+var sPutObjectRequest_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutObjectRequest_ExpectedBucketOwner})
+var sPutObjectOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutObjectOutput, Members: &mPutObjectOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutObjectOutput})
+var sPutObjectOutput_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &pString, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_Expiration})
+var sPutObjectOutput_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t70, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ETag})
+var sPutObjectOutput_ChecksumCRC32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32", ID: &pString, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumCRC32})
+var sPutObjectOutput_ChecksumCRC32C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC32C", ID: &pString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumCRC32C})
+var sPutObjectOutput_ChecksumCRC64NVME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumCRC64NVME", ID: &pString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumCRC64NVME})
+var sPutObjectOutput_ChecksumSHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA1", ID: &pString, Traits: &t74, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumSHA1})
+var sPutObjectOutput_ChecksumSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumSHA256", ID: &pString, Traits: &t75, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumSHA256})
+var sPutObjectOutput_ChecksumType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumType", ID: &pString, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ChecksumType})
+var sPutObjectOutput_ServerSideEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryption", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_ServerSideEncryption})
+var sPutObjectOutput_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_VersionId})
+var sPutObjectOutput_SSECustomerAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerAlgorithm", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_SSECustomerAlgorithm})
+var sPutObjectOutput_SSECustomerKeyMD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSECustomerKeyMD5", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_SSECustomerKeyMD5})
+var sPutObjectOutput_SSEKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSKeyId", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_SSEKMSKeyId})
+var sPutObjectOutput_SSEKMSEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMSEncryptionContext", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_SSEKMSEncryptionContext})
+var sPutObjectOutput_BucketKeyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketKeyEnabled", ID: &pBoolean, Traits: &t37, Type: smithy.ShapeTypeBoolean, Ext: &ePutObjectOutput_BucketKeyEnabled})
+var sPutObjectOutput_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &pLong, Traits: &t87, Type: smithy.ShapeTypeLong, Ext: &ePutObjectOutput_Size})
+var sPutObjectOutput_RequestCharged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCharged", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &ePutObjectOutput_RequestCharged})
+
+var CopyObject = &sCopyObject
+
+var GetMetricData = &sGetMetricData
+
+var GetObject = &sGetObject
+
+var HeadObject = &sHeadObject
+
+var Healthcheck = &sHealthcheck
+
+var PutMetricData = &sPutMetricData
+
+var PutObject = &sPutObject
+
+var _AwsRestJsonDataPlane = &s_AwsRestJsonDataPlane
+
+var ChecksumAlgorithm = &sChecksumAlgorithm
+var ChecksumAlgorithm_CRC32 = &sChecksumAlgorithm_CRC32
+var ChecksumAlgorithm_CRC32C = &sChecksumAlgorithm_CRC32C
+var ChecksumAlgorithm_SHA1 = &sChecksumAlgorithm_SHA1
+var ChecksumAlgorithm_SHA256 = &sChecksumAlgorithm_SHA256
+var ChecksumAlgorithm_CRC64NVME = &sChecksumAlgorithm_CRC64NVME
+
+var ChecksumMode = &sChecksumMode
+var ChecksumMode_ENABLED = &sChecksumMode_ENABLED
+
+var _Counts = &s_Counts
+var _Counts_member = &s_Counts_member
+
+var Dimension = &sDimension
+var Dimension_Name = &sDimension_Name
+var Dimension_Value = &sDimension_Value
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var Entity = &sEntity
+var Entity_KeyAttributes = &sEntity_KeyAttributes
+var Entity_Attributes = &sEntity_Attributes
+
+var _EntityAttributesMap = &s_EntityAttributesMap
+var _EntityAttributesMap_key = &s_EntityAttributesMap_key
+var _EntityAttributesMap_value = &s_EntityAttributesMap_value
+
+var _EntityKeyAttributesMap = &s_EntityKeyAttributesMap
+var _EntityKeyAttributesMap_key = &s_EntityKeyAttributesMap_key
+var _EntityKeyAttributesMap_value = &s_EntityKeyAttributesMap_value
+
+var _EntityMetricDataList = &s_EntityMetricDataList
+var _EntityMetricDataList_member = &s_EntityMetricDataList_member
+
+var EntityMetricDatum = &sEntityMetricDatum
+var EntityMetricDatum_Entity = &sEntityMetricDatum_Entity
+var EntityMetricDatum_MetricData = &sEntityMetricDatum_MetricData
+
+var LabelOptions = &sLabelOptions
+var LabelOptions_Timezone = &sLabelOptions_Timezone
+
+var MessageData = &sMessageData
+var MessageData_Code = &sMessageData_Code
+var MessageData_Value = &sMessageData_Value
+
+var _Metadata = &s_Metadata
+var _Metadata_key = &s_Metadata_key
+var _Metadata_value = &s_Metadata_value
+
+var Metric = &sMetric
+var Metric_Namespace = &sMetric_Namespace
+var Metric_MetricName = &sMetric_MetricName
+var Metric_Dimensions = &sMetric_Dimensions
+
+var _MetricData = &s_MetricData
+var _MetricData_member = &s_MetricData_member
+
+var _MetricDataQueries = &s_MetricDataQueries
+var _MetricDataQueries_member = &s_MetricDataQueries_member
+
+var MetricDataQuery = &sMetricDataQuery
+var MetricDataQuery_Id = &sMetricDataQuery_Id
+var MetricDataQuery_MetricStat = &sMetricDataQuery_MetricStat
+var MetricDataQuery_Expression = &sMetricDataQuery_Expression
+var MetricDataQuery_Label = &sMetricDataQuery_Label
+var MetricDataQuery_ReturnData = &sMetricDataQuery_ReturnData
+var MetricDataQuery_Period = &sMetricDataQuery_Period
+var MetricDataQuery_AccountId = &sMetricDataQuery_AccountId
+
+var MetricDataResult = &sMetricDataResult
+var MetricDataResult_Id = &sMetricDataResult_Id
+var MetricDataResult_Label = &sMetricDataResult_Label
+var MetricDataResult_Timestamps = &sMetricDataResult_Timestamps
+var MetricDataResult_Values = &sMetricDataResult_Values
+var MetricDataResult_StatusCode = &sMetricDataResult_StatusCode
+var MetricDataResult_Messages = &sMetricDataResult_Messages
+
+var _MetricDataResultMessages = &s_MetricDataResultMessages
+var _MetricDataResultMessages_member = &s_MetricDataResultMessages_member
+
+var _MetricDataResults = &s_MetricDataResults
+var _MetricDataResults_member = &s_MetricDataResults_member
+
+var MetricDatum = &sMetricDatum
+var MetricDatum_MetricName = &sMetricDatum_MetricName
+var MetricDatum_Dimensions = &sMetricDatum_Dimensions
+var MetricDatum_Timestamp = &sMetricDatum_Timestamp
+var MetricDatum_Value = &sMetricDatum_Value
+var MetricDatum_StatisticValues = &sMetricDatum_StatisticValues
+var MetricDatum_Values = &sMetricDatum_Values
+var MetricDatum_Counts = &sMetricDatum_Counts
+var MetricDatum_Unit = &sMetricDatum_Unit
+var MetricDatum_StorageResolution = &sMetricDatum_StorageResolution
+
+var MetricStat = &sMetricStat
+var MetricStat_Metric = &sMetricStat_Metric
+var MetricStat_Period = &sMetricStat_Period
+var MetricStat_Stat = &sMetricStat_Stat
+var MetricStat_Unit = &sMetricStat_Unit
+
+var ScanBy = &sScanBy
+var ScanBy_TIMESTAMP_DESCENDING = &sScanBy_TIMESTAMP_DESCENDING
+var ScanBy_TIMESTAMP_ASCENDING = &sScanBy_TIMESTAMP_ASCENDING
+
+var StandardUnit = &sStandardUnit
+var StandardUnit_SECONDS = &sStandardUnit_SECONDS
+var StandardUnit_MICROSECONDS = &sStandardUnit_MICROSECONDS
+var StandardUnit_MILLISECONDS = &sStandardUnit_MILLISECONDS
+var StandardUnit_BYTES = &sStandardUnit_BYTES
+var StandardUnit_KILOBYTES = &sStandardUnit_KILOBYTES
+var StandardUnit_MEGABYTES = &sStandardUnit_MEGABYTES
+var StandardUnit_GIGABYTES = &sStandardUnit_GIGABYTES
+var StandardUnit_TERABYTES = &sStandardUnit_TERABYTES
+var StandardUnit_BITS = &sStandardUnit_BITS
+var StandardUnit_KILOBITS = &sStandardUnit_KILOBITS
+var StandardUnit_MEGABITS = &sStandardUnit_MEGABITS
+var StandardUnit_GIGABITS = &sStandardUnit_GIGABITS
+var StandardUnit_TERABITS = &sStandardUnit_TERABITS
+var StandardUnit_PERCENT = &sStandardUnit_PERCENT
+var StandardUnit_COUNT = &sStandardUnit_COUNT
+var StandardUnit_BYTES_SECOND = &sStandardUnit_BYTES_SECOND
+var StandardUnit_KILOBYTES_SECOND = &sStandardUnit_KILOBYTES_SECOND
+var StandardUnit_MEGABYTES_SECOND = &sStandardUnit_MEGABYTES_SECOND
+var StandardUnit_GIGABYTES_SECOND = &sStandardUnit_GIGABYTES_SECOND
+var StandardUnit_TERABYTES_SECOND = &sStandardUnit_TERABYTES_SECOND
+var StandardUnit_BITS_SECOND = &sStandardUnit_BITS_SECOND
+var StandardUnit_KILOBITS_SECOND = &sStandardUnit_KILOBITS_SECOND
+var StandardUnit_MEGABITS_SECOND = &sStandardUnit_MEGABITS_SECOND
+var StandardUnit_GIGABITS_SECOND = &sStandardUnit_GIGABITS_SECOND
+var StandardUnit_TERABITS_SECOND = &sStandardUnit_TERABITS_SECOND
+var StandardUnit_COUNT_SECOND = &sStandardUnit_COUNT_SECOND
+var StandardUnit_NONE = &sStandardUnit_NONE
+
+var StatisticSet = &sStatisticSet
+var StatisticSet_SampleCount = &sStatisticSet_SampleCount
+var StatisticSet_Sum = &sStatisticSet_Sum
+var StatisticSet_Minimum = &sStatisticSet_Minimum
+var StatisticSet_Maximum = &sStatisticSet_Maximum
+
+var StatusCode = &sStatusCode
+var StatusCode_COMPLETE = &sStatusCode_COMPLETE
+var StatusCode_INTERNAL_ERROR = &sStatusCode_INTERNAL_ERROR
+var StatusCode_PARTIAL_DATA = &sStatusCode_PARTIAL_DATA
+var StatusCode_FORBIDDEN = &sStatusCode_FORBIDDEN
+
+var _Timestamps = &s_Timestamps
+var _Timestamps_member = &s_Timestamps_member
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var CopyObjectRequest = &sCopyObjectRequest
+var CopyObjectRequest_ACL = &sCopyObjectRequest_ACL
+var CopyObjectRequest_Bucket = &sCopyObjectRequest_Bucket
+var CopyObjectRequest_CacheControl = &sCopyObjectRequest_CacheControl
+var CopyObjectRequest_ChecksumAlgorithm = &sCopyObjectRequest_ChecksumAlgorithm
+var CopyObjectRequest_ContentDisposition = &sCopyObjectRequest_ContentDisposition
+var CopyObjectRequest_ContentEncoding = &sCopyObjectRequest_ContentEncoding
+var CopyObjectRequest_ContentLanguage = &sCopyObjectRequest_ContentLanguage
+var CopyObjectRequest_ContentType = &sCopyObjectRequest_ContentType
+var CopyObjectRequest_CopySource = &sCopyObjectRequest_CopySource
+var CopyObjectRequest_CopySourceIfMatch = &sCopyObjectRequest_CopySourceIfMatch
+var CopyObjectRequest_CopySourceIfModifiedSince = &sCopyObjectRequest_CopySourceIfModifiedSince
+var CopyObjectRequest_CopySourceIfNoneMatch = &sCopyObjectRequest_CopySourceIfNoneMatch
+var CopyObjectRequest_CopySourceIfUnmodifiedSince = &sCopyObjectRequest_CopySourceIfUnmodifiedSince
+var CopyObjectRequest_Expires = &sCopyObjectRequest_Expires
+var CopyObjectRequest_GrantFullControl = &sCopyObjectRequest_GrantFullControl
+var CopyObjectRequest_GrantRead = &sCopyObjectRequest_GrantRead
+var CopyObjectRequest_GrantReadACP = &sCopyObjectRequest_GrantReadACP
+var CopyObjectRequest_GrantWriteACP = &sCopyObjectRequest_GrantWriteACP
+var CopyObjectRequest_IfMatch = &sCopyObjectRequest_IfMatch
+var CopyObjectRequest_IfNoneMatch = &sCopyObjectRequest_IfNoneMatch
+var CopyObjectRequest_Key = &sCopyObjectRequest_Key
+var CopyObjectRequest_MetadataDirective = &sCopyObjectRequest_MetadataDirective
+var CopyObjectRequest_TaggingDirective = &sCopyObjectRequest_TaggingDirective
+var CopyObjectRequest_ServerSideEncryption = &sCopyObjectRequest_ServerSideEncryption
+var CopyObjectRequest_StorageClass = &sCopyObjectRequest_StorageClass
+var CopyObjectRequest_WebsiteRedirectLocation = &sCopyObjectRequest_WebsiteRedirectLocation
+var CopyObjectRequest_SSECustomerAlgorithm = &sCopyObjectRequest_SSECustomerAlgorithm
+var CopyObjectRequest_SSECustomerKey = &sCopyObjectRequest_SSECustomerKey
+var CopyObjectRequest_SSECustomerKeyMD5 = &sCopyObjectRequest_SSECustomerKeyMD5
+var CopyObjectRequest_SSEKMSKeyId = &sCopyObjectRequest_SSEKMSKeyId
+var CopyObjectRequest_SSEKMSEncryptionContext = &sCopyObjectRequest_SSEKMSEncryptionContext
+var CopyObjectRequest_BucketKeyEnabled = &sCopyObjectRequest_BucketKeyEnabled
+var CopyObjectRequest_CopySourceSSECustomerAlgorithm = &sCopyObjectRequest_CopySourceSSECustomerAlgorithm
+var CopyObjectRequest_CopySourceSSECustomerKey = &sCopyObjectRequest_CopySourceSSECustomerKey
+var CopyObjectRequest_CopySourceSSECustomerKeyMD5 = &sCopyObjectRequest_CopySourceSSECustomerKeyMD5
+var CopyObjectRequest_RequestPayer = &sCopyObjectRequest_RequestPayer
+var CopyObjectRequest_Tagging = &sCopyObjectRequest_Tagging
+var CopyObjectRequest_ObjectLockMode = &sCopyObjectRequest_ObjectLockMode
+var CopyObjectRequest_ObjectLockRetainUntilDate = &sCopyObjectRequest_ObjectLockRetainUntilDate
+var CopyObjectRequest_ObjectLockLegalHoldStatus = &sCopyObjectRequest_ObjectLockLegalHoldStatus
+var CopyObjectRequest_ExpectedBucketOwner = &sCopyObjectRequest_ExpectedBucketOwner
+var CopyObjectRequest_ExpectedSourceBucketOwner = &sCopyObjectRequest_ExpectedSourceBucketOwner
+
+var CopyObjectOutput = &sCopyObjectOutput
+var CopyObjectOutput_Expiration = &sCopyObjectOutput_Expiration
+var CopyObjectOutput_CopySourceVersionId = &sCopyObjectOutput_CopySourceVersionId
+var CopyObjectOutput_VersionId = &sCopyObjectOutput_VersionId
+var CopyObjectOutput_ServerSideEncryption = &sCopyObjectOutput_ServerSideEncryption
+var CopyObjectOutput_SSECustomerAlgorithm = &sCopyObjectOutput_SSECustomerAlgorithm
+var CopyObjectOutput_SSECustomerKeyMD5 = &sCopyObjectOutput_SSECustomerKeyMD5
+var CopyObjectOutput_SSEKMSKeyId = &sCopyObjectOutput_SSEKMSKeyId
+var CopyObjectOutput_SSEKMSEncryptionContext = &sCopyObjectOutput_SSEKMSEncryptionContext
+var CopyObjectOutput_BucketKeyEnabled = &sCopyObjectOutput_BucketKeyEnabled
+var CopyObjectOutput_RequestCharged = &sCopyObjectOutput_RequestCharged
+var CopyObjectOutput_ETag = &sCopyObjectOutput_ETag
+var CopyObjectOutput_LastModified = &sCopyObjectOutput_LastModified
+var CopyObjectOutput_ChecksumType = &sCopyObjectOutput_ChecksumType
+var CopyObjectOutput_ChecksumCRC32 = &sCopyObjectOutput_ChecksumCRC32
+var CopyObjectOutput_ChecksumCRC32C = &sCopyObjectOutput_ChecksumCRC32C
+var CopyObjectOutput_ChecksumCRC64NVME = &sCopyObjectOutput_ChecksumCRC64NVME
+var CopyObjectOutput_ChecksumSHA1 = &sCopyObjectOutput_ChecksumSHA1
+var CopyObjectOutput_ChecksumSHA256 = &sCopyObjectOutput_ChecksumSHA256
+
+var GetMetricDataInput = &sGetMetricDataInput
+var GetMetricDataInput_MetricDataQueries = &sGetMetricDataInput_MetricDataQueries
+var GetMetricDataInput_StartTime = &sGetMetricDataInput_StartTime
+var GetMetricDataInput_EndTime = &sGetMetricDataInput_EndTime
+var GetMetricDataInput_NextToken = &sGetMetricDataInput_NextToken
+var GetMetricDataInput_ScanBy = &sGetMetricDataInput_ScanBy
+var GetMetricDataInput_MaxDatapoints = &sGetMetricDataInput_MaxDatapoints
+var GetMetricDataInput_LabelOptions = &sGetMetricDataInput_LabelOptions
+
+var GetMetricDataOutput = &sGetMetricDataOutput
+var GetMetricDataOutput_MetricDataResults = &sGetMetricDataOutput_MetricDataResults
+var GetMetricDataOutput_NextToken = &sGetMetricDataOutput_NextToken
+var GetMetricDataOutput_Messages = &sGetMetricDataOutput_Messages
+
+var GetObjectRequest = &sGetObjectRequest
+var GetObjectRequest_Bucket = &sGetObjectRequest_Bucket
+var GetObjectRequest_Key = &sGetObjectRequest_Key
+var GetObjectRequest_IfMatch = &sGetObjectRequest_IfMatch
+var GetObjectRequest_IfModifiedSince = &sGetObjectRequest_IfModifiedSince
+var GetObjectRequest_IfNoneMatch = &sGetObjectRequest_IfNoneMatch
+var GetObjectRequest_IfUnmodifiedSince = &sGetObjectRequest_IfUnmodifiedSince
+var GetObjectRequest_Range = &sGetObjectRequest_Range
+var GetObjectRequest_ResponseCacheControl = &sGetObjectRequest_ResponseCacheControl
+var GetObjectRequest_ResponseContentDisposition = &sGetObjectRequest_ResponseContentDisposition
+var GetObjectRequest_ResponseContentEncoding = &sGetObjectRequest_ResponseContentEncoding
+var GetObjectRequest_ResponseContentLanguage = &sGetObjectRequest_ResponseContentLanguage
+var GetObjectRequest_ResponseContentType = &sGetObjectRequest_ResponseContentType
+var GetObjectRequest_ResponseExpires = &sGetObjectRequest_ResponseExpires
+var GetObjectRequest_VersionId = &sGetObjectRequest_VersionId
+var GetObjectRequest_SSECustomerAlgorithm = &sGetObjectRequest_SSECustomerAlgorithm
+var GetObjectRequest_SSECustomerKey = &sGetObjectRequest_SSECustomerKey
+var GetObjectRequest_SSECustomerKeyMD5 = &sGetObjectRequest_SSECustomerKeyMD5
+var GetObjectRequest_RequestPayer = &sGetObjectRequest_RequestPayer
+var GetObjectRequest_PartNumber = &sGetObjectRequest_PartNumber
+var GetObjectRequest_ExpectedBucketOwner = &sGetObjectRequest_ExpectedBucketOwner
+var GetObjectRequest_ChecksumMode = &sGetObjectRequest_ChecksumMode
+
+var GetObjectOutput = &sGetObjectOutput
+var GetObjectOutput_Body = &sGetObjectOutput_Body
+var GetObjectOutput_DeleteMarker = &sGetObjectOutput_DeleteMarker
+var GetObjectOutput_AcceptRanges = &sGetObjectOutput_AcceptRanges
+var GetObjectOutput_Expiration = &sGetObjectOutput_Expiration
+var GetObjectOutput_Restore = &sGetObjectOutput_Restore
+var GetObjectOutput_LastModified = &sGetObjectOutput_LastModified
+var GetObjectOutput_ContentLength = &sGetObjectOutput_ContentLength
+var GetObjectOutput_ETag = &sGetObjectOutput_ETag
+var GetObjectOutput_ChecksumCRC32 = &sGetObjectOutput_ChecksumCRC32
+var GetObjectOutput_ChecksumCRC32C = &sGetObjectOutput_ChecksumCRC32C
+var GetObjectOutput_ChecksumCRC64NVME = &sGetObjectOutput_ChecksumCRC64NVME
+var GetObjectOutput_ChecksumSHA1 = &sGetObjectOutput_ChecksumSHA1
+var GetObjectOutput_ChecksumSHA256 = &sGetObjectOutput_ChecksumSHA256
+var GetObjectOutput_ChecksumType = &sGetObjectOutput_ChecksumType
+var GetObjectOutput_MissingMeta = &sGetObjectOutput_MissingMeta
+var GetObjectOutput_VersionId = &sGetObjectOutput_VersionId
+var GetObjectOutput_CacheControl = &sGetObjectOutput_CacheControl
+var GetObjectOutput_ContentDisposition = &sGetObjectOutput_ContentDisposition
+var GetObjectOutput_ContentEncoding = &sGetObjectOutput_ContentEncoding
+var GetObjectOutput_ContentLanguage = &sGetObjectOutput_ContentLanguage
+var GetObjectOutput_ContentType = &sGetObjectOutput_ContentType
+var GetObjectOutput_Expires = &sGetObjectOutput_Expires
+var GetObjectOutput_WebsiteRedirectLocation = &sGetObjectOutput_WebsiteRedirectLocation
+var GetObjectOutput_ServerSideEncryption = &sGetObjectOutput_ServerSideEncryption
+var GetObjectOutput_SSECustomerAlgorithm = &sGetObjectOutput_SSECustomerAlgorithm
+var GetObjectOutput_SSECustomerKeyMD5 = &sGetObjectOutput_SSECustomerKeyMD5
+var GetObjectOutput_SSEKMSKeyId = &sGetObjectOutput_SSEKMSKeyId
+var GetObjectOutput_BucketKeyEnabled = &sGetObjectOutput_BucketKeyEnabled
+var GetObjectOutput_StorageClass = &sGetObjectOutput_StorageClass
+var GetObjectOutput_RequestCharged = &sGetObjectOutput_RequestCharged
+var GetObjectOutput_ReplicationStatus = &sGetObjectOutput_ReplicationStatus
+var GetObjectOutput_PartsCount = &sGetObjectOutput_PartsCount
+var GetObjectOutput_TagCount = &sGetObjectOutput_TagCount
+var GetObjectOutput_ObjectLockMode = &sGetObjectOutput_ObjectLockMode
+var GetObjectOutput_ObjectLockRetainUntilDate = &sGetObjectOutput_ObjectLockRetainUntilDate
+var GetObjectOutput_ObjectLockLegalHoldStatus = &sGetObjectOutput_ObjectLockLegalHoldStatus
+
+var HeadObjectRequest = &sHeadObjectRequest
+var HeadObjectRequest_Bucket = &sHeadObjectRequest_Bucket
+var HeadObjectRequest_IfMatch = &sHeadObjectRequest_IfMatch
+var HeadObjectRequest_IfModifiedSince = &sHeadObjectRequest_IfModifiedSince
+var HeadObjectRequest_IfNoneMatch = &sHeadObjectRequest_IfNoneMatch
+var HeadObjectRequest_IfUnmodifiedSince = &sHeadObjectRequest_IfUnmodifiedSince
+var HeadObjectRequest_Key = &sHeadObjectRequest_Key
+var HeadObjectRequest_Range = &sHeadObjectRequest_Range
+var HeadObjectRequest_ResponseCacheControl = &sHeadObjectRequest_ResponseCacheControl
+var HeadObjectRequest_ResponseContentDisposition = &sHeadObjectRequest_ResponseContentDisposition
+var HeadObjectRequest_ResponseContentEncoding = &sHeadObjectRequest_ResponseContentEncoding
+var HeadObjectRequest_ResponseContentLanguage = &sHeadObjectRequest_ResponseContentLanguage
+var HeadObjectRequest_ResponseContentType = &sHeadObjectRequest_ResponseContentType
+var HeadObjectRequest_ResponseExpires = &sHeadObjectRequest_ResponseExpires
+var HeadObjectRequest_VersionId = &sHeadObjectRequest_VersionId
+var HeadObjectRequest_SSECustomerAlgorithm = &sHeadObjectRequest_SSECustomerAlgorithm
+var HeadObjectRequest_SSECustomerKey = &sHeadObjectRequest_SSECustomerKey
+var HeadObjectRequest_SSECustomerKeyMD5 = &sHeadObjectRequest_SSECustomerKeyMD5
+var HeadObjectRequest_RequestPayer = &sHeadObjectRequest_RequestPayer
+var HeadObjectRequest_PartNumber = &sHeadObjectRequest_PartNumber
+var HeadObjectRequest_ExpectedBucketOwner = &sHeadObjectRequest_ExpectedBucketOwner
+var HeadObjectRequest_ChecksumMode = &sHeadObjectRequest_ChecksumMode
+
+var HeadObjectOutput = &sHeadObjectOutput
+var HeadObjectOutput_DeleteMarker = &sHeadObjectOutput_DeleteMarker
+var HeadObjectOutput_AcceptRanges = &sHeadObjectOutput_AcceptRanges
+var HeadObjectOutput_Expiration = &sHeadObjectOutput_Expiration
+var HeadObjectOutput_Restore = &sHeadObjectOutput_Restore
+var HeadObjectOutput_ArchiveStatus = &sHeadObjectOutput_ArchiveStatus
+var HeadObjectOutput_LastModified = &sHeadObjectOutput_LastModified
+var HeadObjectOutput_ContentLength = &sHeadObjectOutput_ContentLength
+var HeadObjectOutput_ChecksumCRC32 = &sHeadObjectOutput_ChecksumCRC32
+var HeadObjectOutput_ChecksumCRC32C = &sHeadObjectOutput_ChecksumCRC32C
+var HeadObjectOutput_ChecksumCRC64NVME = &sHeadObjectOutput_ChecksumCRC64NVME
+var HeadObjectOutput_ChecksumSHA1 = &sHeadObjectOutput_ChecksumSHA1
+var HeadObjectOutput_ChecksumSHA256 = &sHeadObjectOutput_ChecksumSHA256
+var HeadObjectOutput_ChecksumType = &sHeadObjectOutput_ChecksumType
+var HeadObjectOutput_ETag = &sHeadObjectOutput_ETag
+var HeadObjectOutput_MissingMeta = &sHeadObjectOutput_MissingMeta
+var HeadObjectOutput_VersionId = &sHeadObjectOutput_VersionId
+var HeadObjectOutput_CacheControl = &sHeadObjectOutput_CacheControl
+var HeadObjectOutput_ContentDisposition = &sHeadObjectOutput_ContentDisposition
+var HeadObjectOutput_ContentEncoding = &sHeadObjectOutput_ContentEncoding
+var HeadObjectOutput_ContentLanguage = &sHeadObjectOutput_ContentLanguage
+var HeadObjectOutput_ContentType = &sHeadObjectOutput_ContentType
+var HeadObjectOutput_ContentRange = &sHeadObjectOutput_ContentRange
+var HeadObjectOutput_Expires = &sHeadObjectOutput_Expires
+var HeadObjectOutput_WebsiteRedirectLocation = &sHeadObjectOutput_WebsiteRedirectLocation
+var HeadObjectOutput_ServerSideEncryption = &sHeadObjectOutput_ServerSideEncryption
+var HeadObjectOutput_SSECustomerAlgorithm = &sHeadObjectOutput_SSECustomerAlgorithm
+var HeadObjectOutput_SSECustomerKeyMD5 = &sHeadObjectOutput_SSECustomerKeyMD5
+var HeadObjectOutput_SSEKMSKeyId = &sHeadObjectOutput_SSEKMSKeyId
+var HeadObjectOutput_BucketKeyEnabled = &sHeadObjectOutput_BucketKeyEnabled
+var HeadObjectOutput_StorageClass = &sHeadObjectOutput_StorageClass
+var HeadObjectOutput_RequestCharged = &sHeadObjectOutput_RequestCharged
+var HeadObjectOutput_ReplicationStatus = &sHeadObjectOutput_ReplicationStatus
+var HeadObjectOutput_PartsCount = &sHeadObjectOutput_PartsCount
+var HeadObjectOutput_TagCount = &sHeadObjectOutput_TagCount
+var HeadObjectOutput_ObjectLockMode = &sHeadObjectOutput_ObjectLockMode
+var HeadObjectOutput_ObjectLockRetainUntilDate = &sHeadObjectOutput_ObjectLockRetainUntilDate
+var HeadObjectOutput_ObjectLockLegalHoldStatus = &sHeadObjectOutput_ObjectLockLegalHoldStatus
+
+var HealthcheckOutput = &sHealthcheckOutput
+var HealthcheckOutput_ok = &sHealthcheckOutput_ok
+
+var PutMetricDataInput = &sPutMetricDataInput
+var PutMetricDataInput_Namespace = &sPutMetricDataInput_Namespace
+var PutMetricDataInput_MetricData = &sPutMetricDataInput_MetricData
+var PutMetricDataInput_EntityMetricData = &sPutMetricDataInput_EntityMetricData
+var PutMetricDataInput_StrictEntityValidation = &sPutMetricDataInput_StrictEntityValidation
+
+var PutObjectRequest = &sPutObjectRequest
+var PutObjectRequest_Bucket = &sPutObjectRequest_Bucket
+var PutObjectRequest_Key = &sPutObjectRequest_Key
+var PutObjectRequest_Body = &sPutObjectRequest_Body
+var PutObjectRequest_ACL = &sPutObjectRequest_ACL
+var PutObjectRequest_CacheControl = &sPutObjectRequest_CacheControl
+var PutObjectRequest_ContentDisposition = &sPutObjectRequest_ContentDisposition
+var PutObjectRequest_ContentEncoding = &sPutObjectRequest_ContentEncoding
+var PutObjectRequest_ContentLanguage = &sPutObjectRequest_ContentLanguage
+var PutObjectRequest_ContentLength = &sPutObjectRequest_ContentLength
+var PutObjectRequest_ContentMD5 = &sPutObjectRequest_ContentMD5
+var PutObjectRequest_ContentType = &sPutObjectRequest_ContentType
+var PutObjectRequest_ChecksumAlgorithm = &sPutObjectRequest_ChecksumAlgorithm
+var PutObjectRequest_ChecksumCRC32 = &sPutObjectRequest_ChecksumCRC32
+var PutObjectRequest_ChecksumCRC32C = &sPutObjectRequest_ChecksumCRC32C
+var PutObjectRequest_ChecksumCRC64NVME = &sPutObjectRequest_ChecksumCRC64NVME
+var PutObjectRequest_ChecksumSHA1 = &sPutObjectRequest_ChecksumSHA1
+var PutObjectRequest_ChecksumSHA256 = &sPutObjectRequest_ChecksumSHA256
+var PutObjectRequest_Expires = &sPutObjectRequest_Expires
+var PutObjectRequest_IfMatch = &sPutObjectRequest_IfMatch
+var PutObjectRequest_IfNoneMatch = &sPutObjectRequest_IfNoneMatch
+var PutObjectRequest_GrantFullControl = &sPutObjectRequest_GrantFullControl
+var PutObjectRequest_GrantRead = &sPutObjectRequest_GrantRead
+var PutObjectRequest_GrantReadACP = &sPutObjectRequest_GrantReadACP
+var PutObjectRequest_GrantWriteACP = &sPutObjectRequest_GrantWriteACP
+var PutObjectRequest_WriteOffsetBytes = &sPutObjectRequest_WriteOffsetBytes
+var PutObjectRequest_Metadata = &sPutObjectRequest_Metadata
+var PutObjectRequest_ServerSideEncryption = &sPutObjectRequest_ServerSideEncryption
+var PutObjectRequest_StorageClass = &sPutObjectRequest_StorageClass
+var PutObjectRequest_WebsiteRedirectLocation = &sPutObjectRequest_WebsiteRedirectLocation
+var PutObjectRequest_SSECustomerAlgorithm = &sPutObjectRequest_SSECustomerAlgorithm
+var PutObjectRequest_SSECustomerKey = &sPutObjectRequest_SSECustomerKey
+var PutObjectRequest_SSECustomerKeyMD5 = &sPutObjectRequest_SSECustomerKeyMD5
+var PutObjectRequest_SSEKMSKeyId = &sPutObjectRequest_SSEKMSKeyId
+var PutObjectRequest_SSEKMSEncryptionContext = &sPutObjectRequest_SSEKMSEncryptionContext
+var PutObjectRequest_BucketKeyEnabled = &sPutObjectRequest_BucketKeyEnabled
+var PutObjectRequest_RequestPayer = &sPutObjectRequest_RequestPayer
+var PutObjectRequest_Tagging = &sPutObjectRequest_Tagging
+var PutObjectRequest_ObjectLockMode = &sPutObjectRequest_ObjectLockMode
+var PutObjectRequest_ObjectLockRetainUntilDate = &sPutObjectRequest_ObjectLockRetainUntilDate
+var PutObjectRequest_ObjectLockLegalHoldStatus = &sPutObjectRequest_ObjectLockLegalHoldStatus
+var PutObjectRequest_ExpectedBucketOwner = &sPutObjectRequest_ExpectedBucketOwner
+
+var PutObjectOutput = &sPutObjectOutput
+var PutObjectOutput_Expiration = &sPutObjectOutput_Expiration
+var PutObjectOutput_ETag = &sPutObjectOutput_ETag
+var PutObjectOutput_ChecksumCRC32 = &sPutObjectOutput_ChecksumCRC32
+var PutObjectOutput_ChecksumCRC32C = &sPutObjectOutput_ChecksumCRC32C
+var PutObjectOutput_ChecksumCRC64NVME = &sPutObjectOutput_ChecksumCRC64NVME
+var PutObjectOutput_ChecksumSHA1 = &sPutObjectOutput_ChecksumSHA1
+var PutObjectOutput_ChecksumSHA256 = &sPutObjectOutput_ChecksumSHA256
+var PutObjectOutput_ChecksumType = &sPutObjectOutput_ChecksumType
+var PutObjectOutput_ServerSideEncryption = &sPutObjectOutput_ServerSideEncryption
+var PutObjectOutput_VersionId = &sPutObjectOutput_VersionId
+var PutObjectOutput_SSECustomerAlgorithm = &sPutObjectOutput_SSECustomerAlgorithm
+var PutObjectOutput_SSECustomerKeyMD5 = &sPutObjectOutput_SSECustomerKeyMD5
+var PutObjectOutput_SSEKMSKeyId = &sPutObjectOutput_SSEKMSKeyId
+var PutObjectOutput_SSEKMSEncryptionContext = &sPutObjectOutput_SSEKMSEncryptionContext
+var PutObjectOutput_BucketKeyEnabled = &sPutObjectOutput_BucketKeyEnabled
+var PutObjectOutput_Size = &sPutObjectOutput_Size
+var PutObjectOutput_RequestCharged = &sPutObjectOutput_RequestCharged
+
+var AwsRestJsonDataPlane = &smithy.ServiceSchema{Schema: &s_AwsRestJsonDataPlane, Version: "1999-12-31"}

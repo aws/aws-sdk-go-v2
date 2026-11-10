@@ -4,5655 +4,5405 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddRoleToDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddRoleToDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddSourceIdentifierToSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddSourceIdentifierToSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTagsToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddTagsToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ApplyPendingMaintenanceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ApplyPendingMaintenanceAction",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopyDBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopyDBClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopyDBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBClusterEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDBSubnetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBSubnetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEventSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateEventSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBClusterEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDBSubnetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBSubnetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteEventSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusterEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusterParameterGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterParameterGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusterParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusterSnapshotAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterSnapshotAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBClusterSnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterSnapshots",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBEngineVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBEngineVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBInstances",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBParameterGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBParameterGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDBSubnetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBSubnetGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEngineDefaultClusterParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultClusterParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEngineDefaultParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultParameters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEventCategories",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEventSubscriptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGlobalClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeGlobalClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeOrderableDBInstanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeOrderableDBInstanceOptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribePendingMaintenanceActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeValidDBInstanceModifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeValidDBInstanceModifications",
-}, smithy.ShapeTypeOperation, 0)
-
-var FailoverDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var FailoverGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBClusterEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBClusterSnapshotAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterSnapshotAttribute",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyDBSubnetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBSubnetGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyEventSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyEventSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var PromoteReadReplicaDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PromoteReadReplicaDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var RebootDBInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RebootDBInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveFromGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveFromGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveRoleFromDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveRoleFromDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveSourceIdentifierFromSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveSourceIdentifierFromSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveTagsFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetDBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResetDBClusterParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetDBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResetDBParameterGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreDBClusterFromSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterFromSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreDBClusterToPointInTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterToPointInTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StartDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopDBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StopDBCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var SwitchoverGlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SwitchoverGlobalCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonRDSv19 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AmazonRDSv19",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://rds.amazonaws.com/doc/2014-10-31/"})
-
-var AmazonRDSv19 = smithy.NewServiceSchema(_AmazonRDSv19, "2014-10-31")
-
-var ApplyMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ApplyMethod",
-}, smithy.ShapeTypeEnum, 2)
-var ApplyMethod_immediate *smithy.Schema
-
-var ApplyMethod_pending_reboot *smithy.Schema
-
-var _AttributeValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AttributeValueList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeValueList_member *smithy.Schema
-
-var AuthorizationNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AuthorizationNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "AuthorizationNotFound",
-		StatusCode: 404})
-var AuthorizationNotFoundFault_message *smithy.Schema
-
-var AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeStructure, 1)
-var AvailabilityZone_Name *smithy.Schema
-
-var _AvailabilityZoneList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AvailabilityZoneList",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZoneList_member *smithy.Schema
-
-var _AvailabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AvailabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZones_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "BooleanOptional",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CertificateNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CertificateNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
-		StatusCode: 404})
-var CertificateNotFoundFault_message *smithy.Schema
-
-var CharacterSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CharacterSet",
-}, smithy.ShapeTypeStructure, 2)
-var CharacterSet_CharacterSetName *smithy.Schema
-
-var CharacterSet_CharacterSetDescription *smithy.Schema
-
-var CloudwatchLogsExportConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CloudwatchLogsExportConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CloudwatchLogsExportConfiguration_EnableLogTypes *smithy.Schema
-
-var CloudwatchLogsExportConfiguration_DisableLogTypes *smithy.Schema
-
-var ClusterPendingModifiedValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ClusterPendingModifiedValues",
-}, smithy.ShapeTypeStructure, 9)
-var ClusterPendingModifiedValues_PendingCloudwatchLogsExports *smithy.Schema
-
-var ClusterPendingModifiedValues_DBClusterIdentifier *smithy.Schema
-
-var ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled *smithy.Schema
-
-var ClusterPendingModifiedValues_EngineVersion *smithy.Schema
-
-var ClusterPendingModifiedValues_BackupRetentionPeriod *smithy.Schema
-
-var ClusterPendingModifiedValues_StorageType *smithy.Schema
-
-var ClusterPendingModifiedValues_AllocatedStorage *smithy.Schema
-
-var ClusterPendingModifiedValues_Iops *smithy.Schema
-
-var ClusterPendingModifiedValues_NetworkType *smithy.Schema
-
-var DBCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBCluster",
-}, smithy.ShapeTypeStructure, 46)
-var DBCluster_AllocatedStorage *smithy.Schema
-
-var DBCluster_AvailabilityZones *smithy.Schema
-
-var DBCluster_BackupRetentionPeriod *smithy.Schema
-
-var DBCluster_CharacterSetName *smithy.Schema
-
-var DBCluster_DatabaseName *smithy.Schema
-
-var DBCluster_DBClusterIdentifier *smithy.Schema
-
-var DBCluster_DBClusterParameterGroup *smithy.Schema
-
-var DBCluster_DBSubnetGroup *smithy.Schema
-
-var DBCluster_Status *smithy.Schema
-
-var DBCluster_PercentProgress *smithy.Schema
-
-var DBCluster_EarliestRestorableTime *smithy.Schema
-
-var DBCluster_Endpoint *smithy.Schema
-
-var DBCluster_ReaderEndpoint *smithy.Schema
-
-var DBCluster_MultiAZ *smithy.Schema
-
-var DBCluster_Engine *smithy.Schema
-
-var DBCluster_EngineVersion *smithy.Schema
-
-var DBCluster_LatestRestorableTime *smithy.Schema
-
-var DBCluster_Port *smithy.Schema
-
-var DBCluster_MasterUsername *smithy.Schema
-
-var DBCluster_DBClusterOptionGroupMemberships *smithy.Schema
-
-var DBCluster_PreferredBackupWindow *smithy.Schema
-
-var DBCluster_PreferredMaintenanceWindow *smithy.Schema
-
-var DBCluster_ReplicationSourceIdentifier *smithy.Schema
-
-var DBCluster_ReadReplicaIdentifiers *smithy.Schema
-
-var DBCluster_DBClusterMembers *smithy.Schema
-
-var DBCluster_VpcSecurityGroups *smithy.Schema
-
-var DBCluster_HostedZoneId *smithy.Schema
-
-var DBCluster_StorageEncrypted *smithy.Schema
-
-var DBCluster_KmsKeyId *smithy.Schema
-
-var DBCluster_DbClusterResourceId *smithy.Schema
-
-var DBCluster_DBClusterArn *smithy.Schema
-
-var DBCluster_AssociatedRoles *smithy.Schema
-
-var DBCluster_IAMDatabaseAuthenticationEnabled *smithy.Schema
-
-var DBCluster_CloneGroupId *smithy.Schema
-
-var DBCluster_ClusterCreateTime *smithy.Schema
-
-var DBCluster_CopyTagsToSnapshot *smithy.Schema
-
-var DBCluster_EnabledCloudwatchLogsExports *smithy.Schema
-
-var DBCluster_PendingModifiedValues *smithy.Schema
-
-var DBCluster_DeletionProtection *smithy.Schema
-
-var DBCluster_CrossAccountClone *smithy.Schema
-
-var DBCluster_AutomaticRestartTime *smithy.Schema
-
-var DBCluster_ServerlessV2ScalingConfiguration *smithy.Schema
-
-var DBCluster_GlobalClusterIdentifier *smithy.Schema
-
-var DBCluster_IOOptimizedNextAllowedModificationTime *smithy.Schema
-
-var DBCluster_StorageType *smithy.Schema
-
-var DBCluster_NetworkType *smithy.Schema
-
-var DBClusterAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterAlreadyExistsFault",
-		StatusCode: 400})
-var DBClusterAlreadyExistsFault_message *smithy.Schema
-
-var DBClusterEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpoint",
-}, smithy.ShapeTypeStructure, 10)
-var DBClusterEndpoint_DBClusterEndpointIdentifier *smithy.Schema
-
-var DBClusterEndpoint_DBClusterIdentifier *smithy.Schema
-
-var DBClusterEndpoint_DBClusterEndpointResourceIdentifier *smithy.Schema
-
-var DBClusterEndpoint_Endpoint *smithy.Schema
-
-var DBClusterEndpoint_Status *smithy.Schema
-
-var DBClusterEndpoint_EndpointType *smithy.Schema
-
-var DBClusterEndpoint_CustomEndpointType *smithy.Schema
-
-var DBClusterEndpoint_StaticMembers *smithy.Schema
-
-var DBClusterEndpoint_ExcludedMembers *smithy.Schema
-
-var DBClusterEndpoint_DBClusterEndpointArn *smithy.Schema
-
-var DBClusterEndpointAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpointAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointAlreadyExistsFault",
-		StatusCode: 400})
-var DBClusterEndpointAlreadyExistsFault_message *smithy.Schema
-
-var _DBClusterEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterEndpointList_member *smithy.Schema
-
-var DBClusterEndpointNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpointNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointNotFoundFault",
-		StatusCode: 400})
-var DBClusterEndpointNotFoundFault_message *smithy.Schema
-
-var DBClusterEndpointQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpointQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointQuotaExceededFault",
-		StatusCode: 403})
-var DBClusterEndpointQuotaExceededFault_message *smithy.Schema
-
-var _DBClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterList_member *smithy.Schema
-
-var DBClusterMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterMember",
-}, smithy.ShapeTypeStructure, 4)
-var DBClusterMember_DBInstanceIdentifier *smithy.Schema
-
-var DBClusterMember_IsClusterWriter *smithy.Schema
-
-var DBClusterMember_DBClusterParameterGroupStatus *smithy.Schema
-
-var DBClusterMember_PromotionTier *smithy.Schema
-
-var _DBClusterMemberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterMemberList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterMemberList_member *smithy.Schema
-
-var DBClusterNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterNotFoundFault",
-		StatusCode: 404})
-var DBClusterNotFoundFault_message *smithy.Schema
-
-var _DBClusterOptionGroupMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterOptionGroupMemberships",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterOptionGroupMemberships_member *smithy.Schema
-
-var DBClusterOptionGroupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterOptionGroupStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterOptionGroupStatus_DBClusterOptionGroupName *smithy.Schema
-
-var DBClusterOptionGroupStatus_Status *smithy.Schema
-
-var DBClusterParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroup",
-}, smithy.ShapeTypeStructure, 4)
-var DBClusterParameterGroup_DBClusterParameterGroupName *smithy.Schema
-
-var DBClusterParameterGroup_DBParameterGroupFamily *smithy.Schema
-
-var DBClusterParameterGroup_Description *smithy.Schema
-
-var DBClusterParameterGroup_DBClusterParameterGroupArn *smithy.Schema
-
-var _DBClusterParameterGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroupList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterParameterGroupList_member *smithy.Schema
-
-var DBClusterParameterGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterParameterGroupNotFound",
-		StatusCode: 404})
-var DBClusterParameterGroupNotFoundFault_message *smithy.Schema
-
-var DBClusterQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterQuotaExceededFault",
-		StatusCode: 403})
-var DBClusterQuotaExceededFault_message *smithy.Schema
-
-var DBClusterRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterRole",
-}, smithy.ShapeTypeStructure, 3)
-var DBClusterRole_RoleArn *smithy.Schema
-
-var DBClusterRole_Status *smithy.Schema
-
-var DBClusterRole_FeatureName *smithy.Schema
-
-var DBClusterRoleAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterRoleAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleAlreadyExists",
-		StatusCode: 400})
-var DBClusterRoleAlreadyExistsFault_message *smithy.Schema
-
-var DBClusterRoleNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterRoleNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleNotFound",
-		StatusCode: 404})
-var DBClusterRoleNotFoundFault_message *smithy.Schema
-
-var DBClusterRoleQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterRoleQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleQuotaExceeded",
-		StatusCode: 400})
-var DBClusterRoleQuotaExceededFault_message *smithy.Schema
-
-var _DBClusterRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterRoles",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterRoles_member *smithy.Schema
-
-var DBClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshot",
-}, smithy.ShapeTypeStructure, 21)
-var DBClusterSnapshot_AvailabilityZones *smithy.Schema
-
-var DBClusterSnapshot_DBClusterSnapshotIdentifier *smithy.Schema
-
-var DBClusterSnapshot_DBClusterIdentifier *smithy.Schema
-
-var DBClusterSnapshot_SnapshotCreateTime *smithy.Schema
-
-var DBClusterSnapshot_Engine *smithy.Schema
-
-var DBClusterSnapshot_AllocatedStorage *smithy.Schema
-
-var DBClusterSnapshot_Status *smithy.Schema
-
-var DBClusterSnapshot_Port *smithy.Schema
-
-var DBClusterSnapshot_VpcId *smithy.Schema
-
-var DBClusterSnapshot_ClusterCreateTime *smithy.Schema
-
-var DBClusterSnapshot_MasterUsername *smithy.Schema
-
-var DBClusterSnapshot_EngineVersion *smithy.Schema
-
-var DBClusterSnapshot_LicenseModel *smithy.Schema
-
-var DBClusterSnapshot_SnapshotType *smithy.Schema
-
-var DBClusterSnapshot_PercentProgress *smithy.Schema
-
-var DBClusterSnapshot_StorageEncrypted *smithy.Schema
-
-var DBClusterSnapshot_KmsKeyId *smithy.Schema
-
-var DBClusterSnapshot_DBClusterSnapshotArn *smithy.Schema
-
-var DBClusterSnapshot_SourceDBClusterSnapshotArn *smithy.Schema
-
-var DBClusterSnapshot_IAMDatabaseAuthenticationEnabled *smithy.Schema
-
-var DBClusterSnapshot_StorageType *smithy.Schema
-
-var DBClusterSnapshotAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterSnapshotAlreadyExistsFault",
-		StatusCode: 400})
-var DBClusterSnapshotAlreadyExistsFault_message *smithy.Schema
-
-var DBClusterSnapshotAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterSnapshotAttribute_AttributeName *smithy.Schema
-
-var DBClusterSnapshotAttribute_AttributeValues *smithy.Schema
-
-var _DBClusterSnapshotAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterSnapshotAttributeList_member *smithy.Schema
-
-var DBClusterSnapshotAttributesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotAttributesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier *smithy.Schema
-
-var DBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes *smithy.Schema
-
-var _DBClusterSnapshotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotList",
-}, smithy.ShapeTypeList, 1)
-var _DBClusterSnapshotList_member *smithy.Schema
-
-var DBClusterSnapshotNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBClusterSnapshotNotFoundFault",
-		StatusCode: 404})
-var DBClusterSnapshotNotFoundFault_message *smithy.Schema
-
-var DBEngineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBEngineVersion",
-}, smithy.ShapeTypeStructure, 13)
-var DBEngineVersion_Engine *smithy.Schema
-
-var DBEngineVersion_EngineVersion *smithy.Schema
-
-var DBEngineVersion_DBParameterGroupFamily *smithy.Schema
-
-var DBEngineVersion_DBEngineDescription *smithy.Schema
-
-var DBEngineVersion_DBEngineVersionDescription *smithy.Schema
-
-var DBEngineVersion_DefaultCharacterSet *smithy.Schema
-
-var DBEngineVersion_SupportedCharacterSets *smithy.Schema
-
-var DBEngineVersion_ValidUpgradeTarget *smithy.Schema
-
-var DBEngineVersion_SupportedTimezones *smithy.Schema
-
-var DBEngineVersion_ExportableLogTypes *smithy.Schema
-
-var DBEngineVersion_SupportsLogExportsToCloudwatchLogs *smithy.Schema
-
-var DBEngineVersion_SupportsReadReplica *smithy.Schema
-
-var DBEngineVersion_SupportsGlobalDatabases *smithy.Schema
-
-var _DBEngineVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBEngineVersionList",
-}, smithy.ShapeTypeList, 1)
-var _DBEngineVersionList_member *smithy.Schema
-
-var DBInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstance",
-}, smithy.ShapeTypeStructure, 54)
-var DBInstance_DBInstanceIdentifier *smithy.Schema
-
-var DBInstance_DBInstanceClass *smithy.Schema
-
-var DBInstance_Engine *smithy.Schema
-
-var DBInstance_DBInstanceStatus *smithy.Schema
-
-var DBInstance_MasterUsername *smithy.Schema
-
-var DBInstance_DBName *smithy.Schema
-
-var DBInstance_Endpoint *smithy.Schema
-
-var DBInstance_AllocatedStorage *smithy.Schema
-
-var DBInstance_InstanceCreateTime *smithy.Schema
-
-var DBInstance_PreferredBackupWindow *smithy.Schema
-
-var DBInstance_BackupRetentionPeriod *smithy.Schema
-
-var DBInstance_DBSecurityGroups *smithy.Schema
-
-var DBInstance_VpcSecurityGroups *smithy.Schema
-
-var DBInstance_DBParameterGroups *smithy.Schema
-
-var DBInstance_AvailabilityZone *smithy.Schema
-
-var DBInstance_DBSubnetGroup *smithy.Schema
-
-var DBInstance_PreferredMaintenanceWindow *smithy.Schema
-
-var DBInstance_PendingModifiedValues *smithy.Schema
-
-var DBInstance_LatestRestorableTime *smithy.Schema
-
-var DBInstance_MultiAZ *smithy.Schema
-
-var DBInstance_EngineVersion *smithy.Schema
-
-var DBInstance_AutoMinorVersionUpgrade *smithy.Schema
-
-var DBInstance_ReadReplicaSourceDBInstanceIdentifier *smithy.Schema
-
-var DBInstance_ReadReplicaDBInstanceIdentifiers *smithy.Schema
-
-var DBInstance_ReadReplicaDBClusterIdentifiers *smithy.Schema
-
-var DBInstance_LicenseModel *smithy.Schema
-
-var DBInstance_Iops *smithy.Schema
-
-var DBInstance_OptionGroupMemberships *smithy.Schema
-
-var DBInstance_CharacterSetName *smithy.Schema
-
-var DBInstance_SecondaryAvailabilityZone *smithy.Schema
-
-var DBInstance_PubliclyAccessible *smithy.Schema
-
-var DBInstance_StatusInfos *smithy.Schema
-
-var DBInstance_StorageType *smithy.Schema
-
-var DBInstance_TdeCredentialArn *smithy.Schema
-
-var DBInstance_DbInstancePort *smithy.Schema
-
-var DBInstance_DBClusterIdentifier *smithy.Schema
-
-var DBInstance_StorageEncrypted *smithy.Schema
-
-var DBInstance_KmsKeyId *smithy.Schema
-
-var DBInstance_DbiResourceId *smithy.Schema
-
-var DBInstance_CACertificateIdentifier *smithy.Schema
-
-var DBInstance_DomainMemberships *smithy.Schema
-
-var DBInstance_CopyTagsToSnapshot *smithy.Schema
-
-var DBInstance_MonitoringInterval *smithy.Schema
-
-var DBInstance_EnhancedMonitoringResourceArn *smithy.Schema
-
-var DBInstance_MonitoringRoleArn *smithy.Schema
-
-var DBInstance_PromotionTier *smithy.Schema
-
-var DBInstance_DBInstanceArn *smithy.Schema
-
-var DBInstance_Timezone *smithy.Schema
-
-var DBInstance_IAMDatabaseAuthenticationEnabled *smithy.Schema
-
-var DBInstance_PerformanceInsightsEnabled *smithy.Schema
-
-var DBInstance_PerformanceInsightsKMSKeyId *smithy.Schema
-
-var DBInstance_EnabledCloudwatchLogsExports *smithy.Schema
-
-var DBInstance_DeletionProtection *smithy.Schema
-
-var DBInstance_NetworkType *smithy.Schema
-
-var DBInstanceAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBInstanceAlreadyExists",
-		StatusCode: 400})
-var DBInstanceAlreadyExistsFault_message *smithy.Schema
-
-var _DBInstanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceList",
-}, smithy.ShapeTypeList, 1)
-var _DBInstanceList_member *smithy.Schema
-
-var DBInstanceNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBInstanceNotFound",
-		StatusCode: 404})
-var DBInstanceNotFoundFault_message *smithy.Schema
-
-var DBInstanceStatusInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceStatusInfo",
-}, smithy.ShapeTypeStructure, 4)
-var DBInstanceStatusInfo_StatusType *smithy.Schema
-
-var DBInstanceStatusInfo_Normal *smithy.Schema
-
-var DBInstanceStatusInfo_Status *smithy.Schema
-
-var DBInstanceStatusInfo_Message *smithy.Schema
-
-var _DBInstanceStatusInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceStatusInfoList",
-}, smithy.ShapeTypeList, 1)
-var _DBInstanceStatusInfoList_member *smithy.Schema
-
-var DBParameterGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroup",
-}, smithy.ShapeTypeStructure, 4)
-var DBParameterGroup_DBParameterGroupName *smithy.Schema
-
-var DBParameterGroup_DBParameterGroupFamily *smithy.Schema
-
-var DBParameterGroup_Description *smithy.Schema
-
-var DBParameterGroup_DBParameterGroupArn *smithy.Schema
-
-var DBParameterGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupAlreadyExists",
-		StatusCode: 400})
-var DBParameterGroupAlreadyExistsFault_message *smithy.Schema
-
-var _DBParameterGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupList",
-}, smithy.ShapeTypeList, 1)
-var _DBParameterGroupList_member *smithy.Schema
-
-var DBParameterGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupNotFound",
-		StatusCode: 404})
-var DBParameterGroupNotFoundFault_message *smithy.Schema
-
-var DBParameterGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupQuotaExceeded",
-		StatusCode: 400})
-var DBParameterGroupQuotaExceededFault_message *smithy.Schema
-
-var DBParameterGroupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DBParameterGroupStatus_DBParameterGroupName *smithy.Schema
-
-var DBParameterGroupStatus_ParameterApplyStatus *smithy.Schema
-
-var _DBParameterGroupStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupStatusList",
-}, smithy.ShapeTypeList, 1)
-var _DBParameterGroupStatusList_member *smithy.Schema
-
-var DBSecurityGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSecurityGroupMembership",
-}, smithy.ShapeTypeStructure, 2)
-var DBSecurityGroupMembership_DBSecurityGroupName *smithy.Schema
-
-var DBSecurityGroupMembership_Status *smithy.Schema
-
-var _DBSecurityGroupMembershipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSecurityGroupMembershipList",
-}, smithy.ShapeTypeList, 1)
-var _DBSecurityGroupMembershipList_member *smithy.Schema
-
-var _DBSecurityGroupNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSecurityGroupNameList",
-}, smithy.ShapeTypeList, 1)
-var _DBSecurityGroupNameList_member *smithy.Schema
-
-var DBSecurityGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSecurityGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSecurityGroupNotFound",
-		StatusCode: 404})
-var DBSecurityGroupNotFoundFault_message *smithy.Schema
-
-var DBSnapshotAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSnapshotAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSnapshotAlreadyExists",
-		StatusCode: 400})
-var DBSnapshotAlreadyExistsFault_message *smithy.Schema
-
-var DBSnapshotNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSnapshotNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSnapshotNotFound",
-		StatusCode: 404})
-var DBSnapshotNotFoundFault_message *smithy.Schema
-
-var DBSubnetGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroup",
-}, smithy.ShapeTypeStructure, 7)
-var DBSubnetGroup_DBSubnetGroupName *smithy.Schema
-
-var DBSubnetGroup_DBSubnetGroupDescription *smithy.Schema
-
-var DBSubnetGroup_VpcId *smithy.Schema
-
-var DBSubnetGroup_SubnetGroupStatus *smithy.Schema
-
-var DBSubnetGroup_Subnets *smithy.Schema
-
-var DBSubnetGroup_DBSubnetGroupArn *smithy.Schema
-
-var DBSubnetGroup_SupportedNetworkTypes *smithy.Schema
-
-var DBSubnetGroupAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroupAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupAlreadyExists",
-		StatusCode: 400})
-var DBSubnetGroupAlreadyExistsFault_message *smithy.Schema
-
-var DBSubnetGroupDoesNotCoverEnoughAZs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroupDoesNotCoverEnoughAZs",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupDoesNotCoverEnoughAZs",
-		StatusCode: 400})
-var DBSubnetGroupDoesNotCoverEnoughAZs_message *smithy.Schema
-
-var DBSubnetGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupNotFoundFault",
-		StatusCode: 404})
-var DBSubnetGroupNotFoundFault_message *smithy.Schema
-
-var DBSubnetGroupQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroupQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupQuotaExceeded",
-		StatusCode: 400})
-var DBSubnetGroupQuotaExceededFault_message *smithy.Schema
-
-var _DBSubnetGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroups",
-}, smithy.ShapeTypeList, 1)
-var _DBSubnetGroups_member *smithy.Schema
-
-var DBSubnetQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBSubnetQuotaExceededFault",
-		StatusCode: 400})
-var DBSubnetQuotaExceededFault_message *smithy.Schema
-
-var DBUpgradeDependencyFailureFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBUpgradeDependencyFailureFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DBUpgradeDependencyFailure",
-		StatusCode: 400})
-var DBUpgradeDependencyFailureFault_message *smithy.Schema
-
-var DomainMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DomainMembership",
-}, smithy.ShapeTypeStructure, 4)
-var DomainMembership_Domain *smithy.Schema
-
-var DomainMembership_Status *smithy.Schema
-
-var DomainMembership_FQDN *smithy.Schema
-
-var DomainMembership_IAMRoleName *smithy.Schema
-
-var _DomainMembershipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DomainMembershipList",
-}, smithy.ShapeTypeList, 1)
-var _DomainMembershipList_member *smithy.Schema
-
-var DomainNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DomainNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "DomainNotFoundFault",
-		StatusCode: 404})
-var DomainNotFoundFault_message *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DoubleOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DoubleOptional",
-}, smithy.ShapeTypeDouble, 0)
-
-var DoubleRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DoubleRange",
-}, smithy.ShapeTypeStructure, 2)
-var DoubleRange_From *smithy.Schema
-
-var DoubleRange_To *smithy.Schema
-
-var _DoubleRangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DoubleRangeList",
-}, smithy.ShapeTypeList, 1)
-var _DoubleRangeList_member *smithy.Schema
-
-var Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeStructure, 3)
-var Endpoint_Address *smithy.Schema
-
-var Endpoint_Port *smithy.Schema
-
-var Endpoint_HostedZoneId *smithy.Schema
-
-var EngineDefaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EngineDefaults",
-}, smithy.ShapeTypeStructure, 3)
-var EngineDefaults_DBParameterGroupFamily *smithy.Schema
-
-var EngineDefaults_Marker *smithy.Schema
-
-var EngineDefaults_Parameters *smithy.Schema
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 6)
-var Event_SourceIdentifier *smithy.Schema
-
-var Event_SourceType *smithy.Schema
-
-var Event_Message *smithy.Schema
-
-var Event_EventCategories *smithy.Schema
-
-var Event_Date *smithy.Schema
-
-var Event_SourceArn *smithy.Schema
-
-var _EventCategoriesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventCategoriesList",
-}, smithy.ShapeTypeList, 1)
-var _EventCategoriesList_member *smithy.Schema
-
-var EventCategoriesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventCategoriesMap",
-}, smithy.ShapeTypeStructure, 2)
-var EventCategoriesMap_SourceType *smithy.Schema
-
-var EventCategoriesMap_EventCategories *smithy.Schema
-
-var _EventCategoriesMapList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventCategoriesMapList",
-}, smithy.ShapeTypeList, 1)
-var _EventCategoriesMapList_member *smithy.Schema
-
-var _EventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventList",
-}, smithy.ShapeTypeList, 1)
-var _EventList_member *smithy.Schema
-
-var EventSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventSubscription",
-}, smithy.ShapeTypeStructure, 10)
-var EventSubscription_CustomerAwsId *smithy.Schema
-
-var EventSubscription_CustSubscriptionId *smithy.Schema
-
-var EventSubscription_SnsTopicArn *smithy.Schema
-
-var EventSubscription_Status *smithy.Schema
-
-var EventSubscription_SubscriptionCreationTime *smithy.Schema
-
-var EventSubscription_SourceType *smithy.Schema
-
-var EventSubscription_SourceIdsList *smithy.Schema
-
-var EventSubscription_EventCategoriesList *smithy.Schema
-
-var EventSubscription_Enabled *smithy.Schema
-
-var EventSubscription_EventSubscriptionArn *smithy.Schema
-
-var EventSubscriptionQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventSubscriptionQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventSubscriptionQuotaExceeded",
-		StatusCode: 400})
-var EventSubscriptionQuotaExceededFault_message *smithy.Schema
-
-var _EventSubscriptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventSubscriptionsList",
-}, smithy.ShapeTypeList, 1)
-var _EventSubscriptionsList_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FailoverState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverState",
-}, smithy.ShapeTypeStructure, 4)
-var FailoverState_Status *smithy.Schema
-
-var FailoverState_FromDbClusterArn *smithy.Schema
-
-var FailoverState_ToDbClusterArn *smithy.Schema
-
-var FailoverState_IsDataLossAllowed *smithy.Schema
-
-var FailoverStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverStatus",
-}, smithy.ShapeTypeEnum, 3)
-var FailoverStatus_PENDING *smithy.Schema
-
-var FailoverStatus_FAILING_OVER *smithy.Schema
-
-var FailoverStatus_CANCELLING *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _FilterValueList_member *smithy.Schema
-
-var GlobalCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalCluster",
-}, smithy.ShapeTypeStructure, 12)
-var GlobalCluster_GlobalClusterIdentifier *smithy.Schema
-
-var GlobalCluster_GlobalClusterResourceId *smithy.Schema
-
-var GlobalCluster_GlobalClusterArn *smithy.Schema
-
-var GlobalCluster_Status *smithy.Schema
-
-var GlobalCluster_Engine *smithy.Schema
-
-var GlobalCluster_EngineVersion *smithy.Schema
-
-var GlobalCluster_DatabaseName *smithy.Schema
-
-var GlobalCluster_StorageEncrypted *smithy.Schema
-
-var GlobalCluster_DeletionProtection *smithy.Schema
-
-var GlobalCluster_GlobalClusterMembers *smithy.Schema
-
-var GlobalCluster_FailoverState *smithy.Schema
-
-var GlobalCluster_TagList *smithy.Schema
-
-var GlobalClusterAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "GlobalClusterAlreadyExistsFault",
-		StatusCode: 400})
-var GlobalClusterAlreadyExistsFault_message *smithy.Schema
-
-var _GlobalClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _GlobalClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterList",
-}, smithy.ShapeTypeList, 1)
-var _GlobalClusterList_member *smithy.Schema
-
-var GlobalClusterMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterMember",
-}, smithy.ShapeTypeStructure, 3)
-var GlobalClusterMember_DBClusterArn *smithy.Schema
-
-var GlobalClusterMember_Readers *smithy.Schema
-
-var GlobalClusterMember_IsWriter *smithy.Schema
-
-var _GlobalClusterMemberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterMemberList",
-}, smithy.ShapeTypeList, 1)
-var _GlobalClusterMemberList_member *smithy.Schema
-
-var GlobalClusterNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "GlobalClusterNotFoundFault",
-		StatusCode: 404})
-var GlobalClusterNotFoundFault_message *smithy.Schema
-
-var GlobalClusterQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClusterQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "GlobalClusterQuotaExceededFault",
-		StatusCode: 400})
-var GlobalClusterQuotaExceededFault_message *smithy.Schema
-
-var InstanceQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InstanceQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InstanceQuotaExceeded",
-		StatusCode: 400})
-var InstanceQuotaExceededFault_message *smithy.Schema
-
-var InsufficientDBClusterCapacityFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InsufficientDBClusterCapacityFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientDBClusterCapacityFault",
-		StatusCode: 403})
-var InsufficientDBClusterCapacityFault_message *smithy.Schema
-
-var InsufficientDBInstanceCapacityFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InsufficientDBInstanceCapacityFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientDBInstanceCapacity",
-		StatusCode: 400})
-var InsufficientDBInstanceCapacityFault_message *smithy.Schema
-
-var InsufficientStorageClusterCapacityFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InsufficientStorageClusterCapacityFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientStorageClusterCapacity",
-		StatusCode: 400})
-var InsufficientStorageClusterCapacityFault_message *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "IntegerOptional",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidDBClusterEndpointStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBClusterEndpointStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterEndpointStateFault",
-		StatusCode: 400})
-var InvalidDBClusterEndpointStateFault_message *smithy.Schema
-
-var InvalidDBClusterSnapshotStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBClusterSnapshotStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterSnapshotStateFault",
-		StatusCode: 400})
-var InvalidDBClusterSnapshotStateFault_message *smithy.Schema
-
-var InvalidDBClusterStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBClusterStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterStateFault",
-		StatusCode: 400})
-var InvalidDBClusterStateFault_message *smithy.Schema
-
-var InvalidDBInstanceStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBInstanceStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBInstanceState",
-		StatusCode: 400})
-var InvalidDBInstanceStateFault_message *smithy.Schema
-
-var InvalidDBParameterGroupStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBParameterGroupStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBParameterGroupState",
-		StatusCode: 400})
-var InvalidDBParameterGroupStateFault_message *smithy.Schema
-
-var InvalidDBSecurityGroupStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBSecurityGroupStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBSecurityGroupState",
-		StatusCode: 400})
-var InvalidDBSecurityGroupStateFault_message *smithy.Schema
-
-var InvalidDBSnapshotStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBSnapshotStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBSnapshotState",
-		StatusCode: 400})
-var InvalidDBSnapshotStateFault_message *smithy.Schema
-
-var InvalidDBSubnetGroupStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBSubnetGroupStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBSubnetGroupStateFault",
-		StatusCode: 400})
-var InvalidDBSubnetGroupStateFault_message *smithy.Schema
-
-var InvalidDBSubnetStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidDBSubnetStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDBSubnetStateFault",
-		StatusCode: 400})
-var InvalidDBSubnetStateFault_message *smithy.Schema
-
-var InvalidEventSubscriptionStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidEventSubscriptionStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventSubscriptionState",
-		StatusCode: 400})
-var InvalidEventSubscriptionStateFault_message *smithy.Schema
-
-var InvalidGlobalClusterStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidGlobalClusterStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidGlobalClusterStateFault",
-		StatusCode: 400})
-var InvalidGlobalClusterStateFault_message *smithy.Schema
-
-var InvalidRestoreFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidRestoreFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRestoreFault",
-		StatusCode: 400})
-var InvalidRestoreFault_message *smithy.Schema
-
-var InvalidSubnet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidSubnet",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
-		StatusCode: 400})
-var InvalidSubnet_message *smithy.Schema
-
-var InvalidVPCNetworkStateFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "InvalidVPCNetworkStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidVPCNetworkStateFault",
-		StatusCode: 400})
-var InvalidVPCNetworkStateFault_message *smithy.Schema
-
-var _KeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "KeyList",
-}, smithy.ShapeTypeList, 1)
-var _KeyList_member *smithy.Schema
-
-var KMSKeyNotAccessibleFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "KMSKeyNotAccessibleFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KMSKeyNotAccessibleFault",
-		StatusCode: 400})
-var KMSKeyNotAccessibleFault_message *smithy.Schema
-
-var _LogTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "LogTypeList",
-}, smithy.ShapeTypeList, 1)
-var _LogTypeList_member *smithy.Schema
-
-var NetworkTypeNotSupportedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "NetworkTypeNotSupportedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NetworkTypeNotSupported",
-		StatusCode: 400})
-var NetworkTypeNotSupportedFault_message *smithy.Schema
-
-var OptionGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OptionGroupMembership",
-}, smithy.ShapeTypeStructure, 2)
-var OptionGroupMembership_OptionGroupName *smithy.Schema
-
-var OptionGroupMembership_Status *smithy.Schema
-
-var _OptionGroupMembershipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OptionGroupMembershipList",
-}, smithy.ShapeTypeList, 1)
-var _OptionGroupMembershipList_member *smithy.Schema
-
-var OptionGroupNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OptionGroupNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "OptionGroupNotFoundFault",
-		StatusCode: 404})
-var OptionGroupNotFoundFault_message *smithy.Schema
-
-var OrderableDBInstanceOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OrderableDBInstanceOption",
-}, smithy.ShapeTypeStructure, 22)
-var OrderableDBInstanceOption_Engine *smithy.Schema
-
-var OrderableDBInstanceOption_EngineVersion *smithy.Schema
-
-var OrderableDBInstanceOption_DBInstanceClass *smithy.Schema
-
-var OrderableDBInstanceOption_LicenseModel *smithy.Schema
-
-var OrderableDBInstanceOption_AvailabilityZones *smithy.Schema
-
-var OrderableDBInstanceOption_MultiAZCapable *smithy.Schema
-
-var OrderableDBInstanceOption_ReadReplicaCapable *smithy.Schema
-
-var OrderableDBInstanceOption_Vpc *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsStorageEncryption *smithy.Schema
-
-var OrderableDBInstanceOption_StorageType *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsIops *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsEnhancedMonitoring *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsIAMDatabaseAuthentication *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsPerformanceInsights *smithy.Schema
-
-var OrderableDBInstanceOption_MinStorageSize *smithy.Schema
-
-var OrderableDBInstanceOption_MaxStorageSize *smithy.Schema
-
-var OrderableDBInstanceOption_MinIopsPerDbInstance *smithy.Schema
-
-var OrderableDBInstanceOption_MaxIopsPerDbInstance *smithy.Schema
-
-var OrderableDBInstanceOption_MinIopsPerGib *smithy.Schema
-
-var OrderableDBInstanceOption_MaxIopsPerGib *smithy.Schema
-
-var OrderableDBInstanceOption_SupportsGlobalDatabases *smithy.Schema
-
-var OrderableDBInstanceOption_SupportedNetworkTypes *smithy.Schema
-
-var _OrderableDBInstanceOptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OrderableDBInstanceOptionsList",
-}, smithy.ShapeTypeList, 1)
-var _OrderableDBInstanceOptionsList_member *smithy.Schema
-
-var Parameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Parameter",
-}, smithy.ShapeTypeStructure, 10)
-var Parameter_ParameterName *smithy.Schema
-
-var Parameter_ParameterValue *smithy.Schema
-
-var Parameter_Description *smithy.Schema
-
-var Parameter_Source *smithy.Schema
-
-var Parameter_ApplyType *smithy.Schema
-
-var Parameter_DataType *smithy.Schema
-
-var Parameter_AllowedValues *smithy.Schema
-
-var Parameter_IsModifiable *smithy.Schema
-
-var Parameter_MinimumEngineVersion *smithy.Schema
-
-var Parameter_ApplyMethod *smithy.Schema
-
-var _ParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ParametersList",
-}, smithy.ShapeTypeList, 1)
-var _ParametersList_member *smithy.Schema
-
-var PendingCloudwatchLogsExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingCloudwatchLogsExports",
-}, smithy.ShapeTypeStructure, 2)
-var PendingCloudwatchLogsExports_LogTypesToEnable *smithy.Schema
-
-var PendingCloudwatchLogsExports_LogTypesToDisable *smithy.Schema
-
-var PendingMaintenanceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingMaintenanceAction",
-}, smithy.ShapeTypeStructure, 6)
-var PendingMaintenanceAction_Action *smithy.Schema
-
-var PendingMaintenanceAction_AutoAppliedAfterDate *smithy.Schema
-
-var PendingMaintenanceAction_ForcedApplyDate *smithy.Schema
-
-var PendingMaintenanceAction_OptInStatus *smithy.Schema
-
-var PendingMaintenanceAction_CurrentApplyDate *smithy.Schema
-
-var PendingMaintenanceAction_Description *smithy.Schema
-
-var _PendingMaintenanceActionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingMaintenanceActionDetails",
-}, smithy.ShapeTypeList, 1)
-var _PendingMaintenanceActionDetails_member *smithy.Schema
-
-var _PendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingMaintenanceActions",
-}, smithy.ShapeTypeList, 1)
-var _PendingMaintenanceActions_member *smithy.Schema
-
-var PendingModifiedValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingModifiedValues",
-}, smithy.ShapeTypeStructure, 14)
-var PendingModifiedValues_DBInstanceClass *smithy.Schema
-
-var PendingModifiedValues_AllocatedStorage *smithy.Schema
-
-var PendingModifiedValues_MasterUserPassword *smithy.Schema
-
-var PendingModifiedValues_Port *smithy.Schema
-
-var PendingModifiedValues_BackupRetentionPeriod *smithy.Schema
-
-var PendingModifiedValues_MultiAZ *smithy.Schema
-
-var PendingModifiedValues_EngineVersion *smithy.Schema
-
-var PendingModifiedValues_LicenseModel *smithy.Schema
-
-var PendingModifiedValues_Iops *smithy.Schema
-
-var PendingModifiedValues_DBInstanceIdentifier *smithy.Schema
-
-var PendingModifiedValues_StorageType *smithy.Schema
-
-var PendingModifiedValues_CACertificateIdentifier *smithy.Schema
-
-var PendingModifiedValues_DBSubnetGroupName *smithy.Schema
-
-var PendingModifiedValues_PendingCloudwatchLogsExports *smithy.Schema
-
-var ProvisionedIopsNotAvailableInAZFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ProvisionedIopsNotAvailableInAZFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ProvisionedIopsNotAvailableInAZFault",
-		StatusCode: 400})
-var ProvisionedIopsNotAvailableInAZFault_message *smithy.Schema
-
-var Range = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Range",
-}, smithy.ShapeTypeStructure, 3)
-var Range_From *smithy.Schema
-
-var Range_To *smithy.Schema
-
-var Range_Step *smithy.Schema
-
-var _RangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RangeList",
-}, smithy.ShapeTypeList, 1)
-var _RangeList_member *smithy.Schema
-
-var _ReadersArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ReadersArnList",
-}, smithy.ShapeTypeList, 1)
-var _ReadersArnList_member *smithy.Schema
-
-var _ReadReplicaDBClusterIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ReadReplicaDBClusterIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ReadReplicaDBClusterIdentifierList_member *smithy.Schema
-
-var _ReadReplicaDBInstanceIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ReadReplicaDBInstanceIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ReadReplicaDBInstanceIdentifierList_member *smithy.Schema
-
-var _ReadReplicaIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ReadReplicaIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ReadReplicaIdentifierList_member *smithy.Schema
-
-var ResourceNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResourceNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundFault",
-		StatusCode: 404})
-var ResourceNotFoundFault_message *smithy.Schema
-
-var ResourcePendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResourcePendingMaintenanceActions",
-}, smithy.ShapeTypeStructure, 2)
-var ResourcePendingMaintenanceActions_ResourceIdentifier *smithy.Schema
-
-var ResourcePendingMaintenanceActions_PendingMaintenanceActionDetails *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServerlessV2ScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ServerlessV2ScalingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ServerlessV2ScalingConfiguration_MinCapacity *smithy.Schema
-
-var ServerlessV2ScalingConfiguration_MaxCapacity *smithy.Schema
-
-var ServerlessV2ScalingConfigurationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ServerlessV2ScalingConfigurationInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ServerlessV2ScalingConfigurationInfo_MinCapacity *smithy.Schema
-
-var ServerlessV2ScalingConfigurationInfo_MaxCapacity *smithy.Schema
-
-var SharedSnapshotQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SharedSnapshotQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SharedSnapshotQuotaExceeded",
-		StatusCode: 400})
-var SharedSnapshotQuotaExceededFault_message *smithy.Schema
-
-var SnapshotQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SnapshotQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SnapshotQuotaExceeded",
-		StatusCode: 400})
-var SnapshotQuotaExceededFault_message *smithy.Schema
-
-var SNSInvalidTopicFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SNSInvalidTopicFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SNSInvalidTopic",
-		StatusCode: 400})
-var SNSInvalidTopicFault_message *smithy.Schema
-
-var SNSNoAuthorizationFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SNSNoAuthorizationFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SNSNoAuthorization",
-		StatusCode: 400})
-var SNSNoAuthorizationFault_message *smithy.Schema
-
-var SNSTopicArnNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SNSTopicArnNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "SNSTopicArnNotFound",
-		StatusCode: 404})
-var SNSTopicArnNotFoundFault_message *smithy.Schema
-
-var _SourceIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SourceIdsList",
-}, smithy.ShapeTypeList, 1)
-var _SourceIdsList_member *smithy.Schema
-
-var SourceNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SourceNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "SourceNotFound",
-		StatusCode: 404})
-var SourceNotFoundFault_message *smithy.Schema
-
-var SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SourceType",
-}, smithy.ShapeTypeEnum, 6)
-var SourceType_db_instance *smithy.Schema
-
-var SourceType_db_parameter_group *smithy.Schema
-
-var SourceType_db_security_group *smithy.Schema
-
-var SourceType_db_snapshot *smithy.Schema
-
-var SourceType_db_cluster *smithy.Schema
-
-var SourceType_db_cluster_snapshot *smithy.Schema
-
-var StorageQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StorageQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "StorageQuotaExceeded",
-		StatusCode: 400})
-var StorageQuotaExceededFault_message *smithy.Schema
-
-var StorageTypeNotSupportedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StorageTypeNotSupportedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "StorageTypeNotSupported",
-		StatusCode: 400})
-var StorageTypeNotSupportedFault_message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Subnet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Subnet",
-}, smithy.ShapeTypeStructure, 3)
-var Subnet_SubnetIdentifier *smithy.Schema
-
-var Subnet_SubnetAvailabilityZone *smithy.Schema
-
-var Subnet_SubnetStatus *smithy.Schema
-
-var SubnetAlreadyInUse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubnetAlreadyInUse",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SubnetAlreadyInUse",
-		StatusCode: 400})
-var SubnetAlreadyInUse_message *smithy.Schema
-
-var _SubnetIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubnetIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIdentifierList_member *smithy.Schema
-
-var _SubnetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubnetList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetList_member *smithy.Schema
-
-var SubscriptionAlreadyExistFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubscriptionAlreadyExistFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "SubscriptionAlreadyExist",
-		StatusCode: 400})
-var SubscriptionAlreadyExistFault_message *smithy.Schema
-
-var SubscriptionCategoryNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubscriptionCategoryNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "SubscriptionCategoryNotFound",
-		StatusCode: 404})
-var SubscriptionCategoryNotFoundFault_message *smithy.Schema
-
-var SubscriptionNotFoundFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SubscriptionNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "SubscriptionNotFound",
-		StatusCode: 404})
-var SubscriptionNotFoundFault_message *smithy.Schema
-
-var _SupportedCharacterSetsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SupportedCharacterSetsList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedCharacterSetsList_member *smithy.Schema
-
-var _SupportedTimezonesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SupportedTimezonesList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedTimezonesList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var Timezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "Timezone",
-}, smithy.ShapeTypeStructure, 1)
-var Timezone_TimezoneName *smithy.Schema
-
-var _TStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "TStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpgradeTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "UpgradeTarget",
-}, smithy.ShapeTypeStructure, 6)
-var UpgradeTarget_Engine *smithy.Schema
-
-var UpgradeTarget_EngineVersion *smithy.Schema
-
-var UpgradeTarget_Description *smithy.Schema
-
-var UpgradeTarget_AutoUpgrade *smithy.Schema
-
-var UpgradeTarget_IsMajorVersionUpgrade *smithy.Schema
-
-var UpgradeTarget_SupportsGlobalDatabases *smithy.Schema
-
-var ValidDBInstanceModificationsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ValidDBInstanceModificationsMessage",
-}, smithy.ShapeTypeStructure, 1)
-var ValidDBInstanceModificationsMessage_Storage *smithy.Schema
-
-var ValidStorageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ValidStorageOptions",
-}, smithy.ShapeTypeStructure, 4)
-var ValidStorageOptions_StorageType *smithy.Schema
-
-var ValidStorageOptions_StorageSize *smithy.Schema
-
-var ValidStorageOptions_ProvisionedIops *smithy.Schema
-
-var ValidStorageOptions_IopsToStorageRatio *smithy.Schema
-
-var _ValidStorageOptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ValidStorageOptionsList",
-}, smithy.ShapeTypeList, 1)
-var _ValidStorageOptionsList_member *smithy.Schema
-
-var _ValidUpgradeTargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ValidUpgradeTargetList",
-}, smithy.ShapeTypeList, 1)
-var _ValidUpgradeTargetList_member *smithy.Schema
-
-var _VpcSecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "VpcSecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _VpcSecurityGroupIdList_member *smithy.Schema
-
-var VpcSecurityGroupMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "VpcSecurityGroupMembership",
-}, smithy.ShapeTypeStructure, 2)
-var VpcSecurityGroupMembership_VpcSecurityGroupId *smithy.Schema
-
-var VpcSecurityGroupMembership_Status *smithy.Schema
-
-var _VpcSecurityGroupMembershipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "VpcSecurityGroupMembershipList",
-}, smithy.ShapeTypeList, 1)
-var _VpcSecurityGroupMembershipList_member *smithy.Schema
-
-var AddRoleToDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddRoleToDBClusterMessage",
-}, smithy.ShapeTypeStructure, 3)
-var AddRoleToDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var AddRoleToDBClusterMessage_RoleArn *smithy.Schema
-
-var AddRoleToDBClusterMessage_FeatureName *smithy.Schema
-
-var AddSourceIdentifierToSubscriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddSourceIdentifierToSubscriptionMessage",
-}, smithy.ShapeTypeStructure, 2)
-var AddSourceIdentifierToSubscriptionMessage_SubscriptionName *smithy.Schema
-
-var AddSourceIdentifierToSubscriptionMessage_SourceIdentifier *smithy.Schema
-
-var AddSourceIdentifierToSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddSourceIdentifierToSubscriptionResult",
-}, smithy.ShapeTypeStructure, 1)
-var AddSourceIdentifierToSubscriptionResult_EventSubscription *smithy.Schema
-
-var AddTagsToResourceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "AddTagsToResourceMessage",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToResourceMessage_ResourceName *smithy.Schema
-
-var AddTagsToResourceMessage_Tags *smithy.Schema
-
-var ApplyPendingMaintenanceActionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ApplyPendingMaintenanceActionMessage",
-}, smithy.ShapeTypeStructure, 3)
-var ApplyPendingMaintenanceActionMessage_ResourceIdentifier *smithy.Schema
-
-var ApplyPendingMaintenanceActionMessage_ApplyAction *smithy.Schema
-
-var ApplyPendingMaintenanceActionMessage_OptInType *smithy.Schema
-
-var ApplyPendingMaintenanceActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ApplyPendingMaintenanceActionResult",
-}, smithy.ShapeTypeStructure, 1)
-var ApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions *smithy.Schema
-
-var CopyDBClusterParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier *smithy.Schema
-
-var CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier *smithy.Schema
-
-var CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription *smithy.Schema
-
-var CopyDBClusterParameterGroupMessage_Tags *smithy.Schema
-
-var CopyDBClusterParameterGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterParameterGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CopyDBClusterParameterGroupResult_DBClusterParameterGroup *smithy.Schema
-
-var CopyDBClusterSnapshotMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterSnapshotMessage",
-}, smithy.ShapeTypeStructure, 8)
-var CopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_KmsKeyId *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_PreSignedUrl *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_CopyTags *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_Tags *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_SourceRegion *smithy.Schema
-
-var CopyDBClusterSnapshotMessage_DestinationRegion *smithy.Schema
-
-var CopyDBClusterSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBClusterSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var CopyDBClusterSnapshotResult_DBClusterSnapshot *smithy.Schema
-
-var CopyDBParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier *smithy.Schema
-
-var CopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier *smithy.Schema
-
-var CopyDBParameterGroupMessage_TargetDBParameterGroupDescription *smithy.Schema
-
-var CopyDBParameterGroupMessage_Tags *smithy.Schema
-
-var CopyDBParameterGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CopyDBParameterGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CopyDBParameterGroupResult_DBParameterGroup *smithy.Schema
-
-var CreateDBClusterEndpointMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterEndpointMessage",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDBClusterEndpointMessage_DBClusterIdentifier *smithy.Schema
-
-var CreateDBClusterEndpointMessage_DBClusterEndpointIdentifier *smithy.Schema
-
-var CreateDBClusterEndpointMessage_EndpointType *smithy.Schema
-
-var CreateDBClusterEndpointMessage_StaticMembers *smithy.Schema
-
-var CreateDBClusterEndpointMessage_ExcludedMembers *smithy.Schema
-
-var CreateDBClusterEndpointMessage_Tags *smithy.Schema
-
-var CreateDBClusterEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterEndpointOutput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateDBClusterEndpointOutput_DBClusterEndpointIdentifier *smithy.Schema
-
-var CreateDBClusterEndpointOutput_DBClusterIdentifier *smithy.Schema
-
-var CreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier *smithy.Schema
-
-var CreateDBClusterEndpointOutput_Endpoint *smithy.Schema
-
-var CreateDBClusterEndpointOutput_Status *smithy.Schema
-
-var CreateDBClusterEndpointOutput_EndpointType *smithy.Schema
-
-var CreateDBClusterEndpointOutput_CustomEndpointType *smithy.Schema
-
-var CreateDBClusterEndpointOutput_StaticMembers *smithy.Schema
-
-var CreateDBClusterEndpointOutput_ExcludedMembers *smithy.Schema
-
-var CreateDBClusterEndpointOutput_DBClusterEndpointArn *smithy.Schema
-
-var CreateDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterMessage",
-}, smithy.ShapeTypeStructure, 31)
-var CreateDBClusterMessage_AvailabilityZones *smithy.Schema
-
-var CreateDBClusterMessage_BackupRetentionPeriod *smithy.Schema
-
-var CreateDBClusterMessage_CharacterSetName *smithy.Schema
-
-var CreateDBClusterMessage_CopyTagsToSnapshot *smithy.Schema
-
-var CreateDBClusterMessage_DatabaseName *smithy.Schema
-
-var CreateDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var CreateDBClusterMessage_DBClusterParameterGroupName *smithy.Schema
-
-var CreateDBClusterMessage_VpcSecurityGroupIds *smithy.Schema
-
-var CreateDBClusterMessage_DBSubnetGroupName *smithy.Schema
-
-var CreateDBClusterMessage_Engine *smithy.Schema
-
-var CreateDBClusterMessage_EngineVersion *smithy.Schema
-
-var CreateDBClusterMessage_Port *smithy.Schema
-
-var CreateDBClusterMessage_MasterUsername *smithy.Schema
-
-var CreateDBClusterMessage_MasterUserPassword *smithy.Schema
-
-var CreateDBClusterMessage_OptionGroupName *smithy.Schema
-
-var CreateDBClusterMessage_PreferredBackupWindow *smithy.Schema
-
-var CreateDBClusterMessage_PreferredMaintenanceWindow *smithy.Schema
-
-var CreateDBClusterMessage_ReplicationSourceIdentifier *smithy.Schema
-
-var CreateDBClusterMessage_Tags *smithy.Schema
-
-var CreateDBClusterMessage_StorageEncrypted *smithy.Schema
-
-var CreateDBClusterMessage_KmsKeyId *smithy.Schema
-
-var CreateDBClusterMessage_PreSignedUrl *smithy.Schema
-
-var CreateDBClusterMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var CreateDBClusterMessage_EnableCloudwatchLogsExports *smithy.Schema
-
-var CreateDBClusterMessage_DeletionProtection *smithy.Schema
-
-var CreateDBClusterMessage_ServerlessV2ScalingConfiguration *smithy.Schema
-
-var CreateDBClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var CreateDBClusterMessage_StorageType *smithy.Schema
-
-var CreateDBClusterMessage_NetworkType *smithy.Schema
-
-var CreateDBClusterMessage_SourceRegion *smithy.Schema
-
-var CreateDBClusterMessage_DestinationRegion *smithy.Schema
-
-var CreateDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBClusterResult_DBCluster *smithy.Schema
-
-var CreateDBClusterParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDBClusterParameterGroupMessage_DBClusterParameterGroupName *smithy.Schema
-
-var CreateDBClusterParameterGroupMessage_DBParameterGroupFamily *smithy.Schema
-
-var CreateDBClusterParameterGroupMessage_Description *smithy.Schema
-
-var CreateDBClusterParameterGroupMessage_Tags *smithy.Schema
-
-var CreateDBClusterParameterGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterParameterGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBClusterParameterGroupResult_DBClusterParameterGroup *smithy.Schema
-
-var CreateDBClusterSnapshotMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterSnapshotMessage",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier *smithy.Schema
-
-var CreateDBClusterSnapshotMessage_DBClusterIdentifier *smithy.Schema
-
-var CreateDBClusterSnapshotMessage_Tags *smithy.Schema
-
-var CreateDBClusterSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBClusterSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBClusterSnapshotResult_DBClusterSnapshot *smithy.Schema
-
-var CreateDBInstanceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBInstanceMessage",
-}, smithy.ShapeTypeStructure, 43)
-var CreateDBInstanceMessage_DBName *smithy.Schema
-
-var CreateDBInstanceMessage_DBInstanceIdentifier *smithy.Schema
-
-var CreateDBInstanceMessage_AllocatedStorage *smithy.Schema
-
-var CreateDBInstanceMessage_DBInstanceClass *smithy.Schema
-
-var CreateDBInstanceMessage_Engine *smithy.Schema
-
-var CreateDBInstanceMessage_MasterUsername *smithy.Schema
-
-var CreateDBInstanceMessage_MasterUserPassword *smithy.Schema
-
-var CreateDBInstanceMessage_DBSecurityGroups *smithy.Schema
-
-var CreateDBInstanceMessage_VpcSecurityGroupIds *smithy.Schema
-
-var CreateDBInstanceMessage_AvailabilityZone *smithy.Schema
-
-var CreateDBInstanceMessage_DBSubnetGroupName *smithy.Schema
-
-var CreateDBInstanceMessage_PreferredMaintenanceWindow *smithy.Schema
-
-var CreateDBInstanceMessage_DBParameterGroupName *smithy.Schema
-
-var CreateDBInstanceMessage_BackupRetentionPeriod *smithy.Schema
-
-var CreateDBInstanceMessage_PreferredBackupWindow *smithy.Schema
-
-var CreateDBInstanceMessage_Port *smithy.Schema
-
-var CreateDBInstanceMessage_MultiAZ *smithy.Schema
-
-var CreateDBInstanceMessage_EngineVersion *smithy.Schema
-
-var CreateDBInstanceMessage_AutoMinorVersionUpgrade *smithy.Schema
-
-var CreateDBInstanceMessage_LicenseModel *smithy.Schema
-
-var CreateDBInstanceMessage_Iops *smithy.Schema
-
-var CreateDBInstanceMessage_OptionGroupName *smithy.Schema
-
-var CreateDBInstanceMessage_CharacterSetName *smithy.Schema
-
-var CreateDBInstanceMessage_PubliclyAccessible *smithy.Schema
-
-var CreateDBInstanceMessage_Tags *smithy.Schema
-
-var CreateDBInstanceMessage_DBClusterIdentifier *smithy.Schema
-
-var CreateDBInstanceMessage_StorageType *smithy.Schema
-
-var CreateDBInstanceMessage_TdeCredentialArn *smithy.Schema
-
-var CreateDBInstanceMessage_TdeCredentialPassword *smithy.Schema
-
-var CreateDBInstanceMessage_StorageEncrypted *smithy.Schema
-
-var CreateDBInstanceMessage_KmsKeyId *smithy.Schema
-
-var CreateDBInstanceMessage_Domain *smithy.Schema
-
-var CreateDBInstanceMessage_CopyTagsToSnapshot *smithy.Schema
-
-var CreateDBInstanceMessage_MonitoringInterval *smithy.Schema
-
-var CreateDBInstanceMessage_MonitoringRoleArn *smithy.Schema
-
-var CreateDBInstanceMessage_DomainIAMRoleName *smithy.Schema
-
-var CreateDBInstanceMessage_PromotionTier *smithy.Schema
-
-var CreateDBInstanceMessage_Timezone *smithy.Schema
-
-var CreateDBInstanceMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var CreateDBInstanceMessage_EnablePerformanceInsights *smithy.Schema
-
-var CreateDBInstanceMessage_PerformanceInsightsKMSKeyId *smithy.Schema
-
-var CreateDBInstanceMessage_EnableCloudwatchLogsExports *smithy.Schema
-
-var CreateDBInstanceMessage_DeletionProtection *smithy.Schema
-
-var CreateDBInstanceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBInstanceResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBInstanceResult_DBInstance *smithy.Schema
-
-var CreateDBParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDBParameterGroupMessage_DBParameterGroupName *smithy.Schema
-
-var CreateDBParameterGroupMessage_DBParameterGroupFamily *smithy.Schema
-
-var CreateDBParameterGroupMessage_Description *smithy.Schema
-
-var CreateDBParameterGroupMessage_Tags *smithy.Schema
-
-var CreateDBParameterGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBParameterGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBParameterGroupResult_DBParameterGroup *smithy.Schema
-
-var CreateDBSubnetGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBSubnetGroupMessage",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDBSubnetGroupMessage_DBSubnetGroupName *smithy.Schema
-
-var CreateDBSubnetGroupMessage_DBSubnetGroupDescription *smithy.Schema
-
-var CreateDBSubnetGroupMessage_SubnetIds *smithy.Schema
-
-var CreateDBSubnetGroupMessage_Tags *smithy.Schema
-
-var CreateDBSubnetGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateDBSubnetGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDBSubnetGroupResult_DBSubnetGroup *smithy.Schema
-
-var CreateEventSubscriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateEventSubscriptionMessage",
-}, smithy.ShapeTypeStructure, 7)
-var CreateEventSubscriptionMessage_SubscriptionName *smithy.Schema
-
-var CreateEventSubscriptionMessage_SnsTopicArn *smithy.Schema
-
-var CreateEventSubscriptionMessage_SourceType *smithy.Schema
-
-var CreateEventSubscriptionMessage_EventCategories *smithy.Schema
-
-var CreateEventSubscriptionMessage_SourceIds *smithy.Schema
-
-var CreateEventSubscriptionMessage_Enabled *smithy.Schema
-
-var CreateEventSubscriptionMessage_Tags *smithy.Schema
-
-var CreateEventSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateEventSubscriptionResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEventSubscriptionResult_EventSubscription *smithy.Schema
-
-var CreateGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 8)
-var CreateGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var CreateGlobalClusterMessage_SourceDBClusterIdentifier *smithy.Schema
-
-var CreateGlobalClusterMessage_Engine *smithy.Schema
-
-var CreateGlobalClusterMessage_EngineVersion *smithy.Schema
-
-var CreateGlobalClusterMessage_DeletionProtection *smithy.Schema
-
-var CreateGlobalClusterMessage_DatabaseName *smithy.Schema
-
-var CreateGlobalClusterMessage_Tags *smithy.Schema
-
-var CreateGlobalClusterMessage_StorageEncrypted *smithy.Schema
-
-var CreateGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "CreateGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGlobalClusterResult_GlobalCluster *smithy.Schema
-
-var DeleteDBClusterEndpointMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterEndpointMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier *smithy.Schema
-
-var DeleteDBClusterEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterEndpointOutput",
-}, smithy.ShapeTypeStructure, 10)
-var DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_DBClusterIdentifier *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_Endpoint *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_Status *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_EndpointType *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_CustomEndpointType *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_StaticMembers *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_ExcludedMembers *smithy.Schema
-
-var DeleteDBClusterEndpointOutput_DBClusterEndpointArn *smithy.Schema
-
-var DeleteDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterMessage",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var DeleteDBClusterMessage_SkipFinalSnapshot *smithy.Schema
-
-var DeleteDBClusterMessage_FinalDBSnapshotIdentifier *smithy.Schema
-
-var DeleteDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBClusterResult_DBCluster *smithy.Schema
-
-var DeleteDBClusterParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName *smithy.Schema
-
-var DeleteDBClusterSnapshotMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterSnapshotMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier *smithy.Schema
-
-var DeleteDBClusterSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBClusterSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBClusterSnapshotResult_DBClusterSnapshot *smithy.Schema
-
-var DeleteDBInstanceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBInstanceMessage",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDBInstanceMessage_DBInstanceIdentifier *smithy.Schema
-
-var DeleteDBInstanceMessage_SkipFinalSnapshot *smithy.Schema
-
-var DeleteDBInstanceMessage_FinalDBSnapshotIdentifier *smithy.Schema
-
-var DeleteDBInstanceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBInstanceResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBInstanceResult_DBInstance *smithy.Schema
-
-var DeleteDBParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBParameterGroupMessage_DBParameterGroupName *smithy.Schema
-
-var DeleteDBSubnetGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteDBSubnetGroupMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDBSubnetGroupMessage_DBSubnetGroupName *smithy.Schema
-
-var DeleteEventSubscriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteEventSubscriptionMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventSubscriptionMessage_SubscriptionName *smithy.Schema
-
-var DeleteEventSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteEventSubscriptionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventSubscriptionResult_EventSubscription *smithy.Schema
-
-var DeleteGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var DeleteGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DeleteGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGlobalClusterResult_GlobalCluster *smithy.Schema
-
-var DescribeDBClusterEndpointsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterEndpointsMessage",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeDBClusterEndpointsMessage_DBClusterIdentifier *smithy.Schema
-
-var DescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier *smithy.Schema
-
-var DescribeDBClusterEndpointsMessage_Filters *smithy.Schema
-
-var DescribeDBClusterEndpointsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBClusterEndpointsMessage_Marker *smithy.Schema
-
-var DBClusterEndpointMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterEndpointMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterEndpointMessage_Marker *smithy.Schema
-
-var DBClusterEndpointMessage_DBClusterEndpoints *smithy.Schema
-
-var DescribeDBClusterParameterGroupsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterParameterGroupsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName *smithy.Schema
-
-var DescribeDBClusterParameterGroupsMessage_Filters *smithy.Schema
-
-var DescribeDBClusterParameterGroupsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBClusterParameterGroupsMessage_Marker *smithy.Schema
-
-var DBClusterParameterGroupsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroupsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterParameterGroupsMessage_Marker *smithy.Schema
-
-var DBClusterParameterGroupsMessage_DBClusterParameterGroups *smithy.Schema
-
-var DescribeDBClusterParametersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterParametersMessage",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeDBClusterParametersMessage_DBClusterParameterGroupName *smithy.Schema
-
-var DescribeDBClusterParametersMessage_Source *smithy.Schema
-
-var DescribeDBClusterParametersMessage_Filters *smithy.Schema
-
-var DescribeDBClusterParametersMessage_MaxRecords *smithy.Schema
-
-var DescribeDBClusterParametersMessage_Marker *smithy.Schema
-
-var DBClusterParameterGroupDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroupDetails",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterParameterGroupDetails_Parameters *smithy.Schema
-
-var DBClusterParameterGroupDetails_Marker *smithy.Schema
-
-var DescribeDBClustersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClustersMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDBClustersMessage_DBClusterIdentifier *smithy.Schema
-
-var DescribeDBClustersMessage_Filters *smithy.Schema
-
-var DescribeDBClustersMessage_MaxRecords *smithy.Schema
-
-var DescribeDBClustersMessage_Marker *smithy.Schema
-
-var DescribeDBClusterSnapshotAttributesMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterSnapshotAttributesMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier *smithy.Schema
-
-var DescribeDBClusterSnapshotAttributesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterSnapshotAttributesResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBClusterSnapshotsMessage",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeDBClusterSnapshotsMessage_DBClusterIdentifier *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_SnapshotType *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_Filters *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_Marker *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_IncludeShared *smithy.Schema
-
-var DescribeDBClusterSnapshotsMessage_IncludePublic *smithy.Schema
-
-var DBClusterSnapshotMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterSnapshotMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterSnapshotMessage_Marker *smithy.Schema
-
-var DBClusterSnapshotMessage_DBClusterSnapshots *smithy.Schema
-
-var DBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBClusterMessage_Marker *smithy.Schema
-
-var DBClusterMessage_DBClusters *smithy.Schema
-
-var DescribeDBEngineVersionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBEngineVersionsMessage",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeDBEngineVersionsMessage_Engine *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_EngineVersion *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_DBParameterGroupFamily *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_Filters *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_Marker *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_DefaultOnly *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_ListSupportedCharacterSets *smithy.Schema
-
-var DescribeDBEngineVersionsMessage_ListSupportedTimezones *smithy.Schema
-
-var DBEngineVersionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBEngineVersionMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBEngineVersionMessage_Marker *smithy.Schema
-
-var DBEngineVersionMessage_DBEngineVersions *smithy.Schema
-
-var DescribeDBInstancesMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBInstancesMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDBInstancesMessage_DBInstanceIdentifier *smithy.Schema
-
-var DescribeDBInstancesMessage_Filters *smithy.Schema
-
-var DescribeDBInstancesMessage_MaxRecords *smithy.Schema
-
-var DescribeDBInstancesMessage_Marker *smithy.Schema
-
-var DBInstanceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBInstanceMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBInstanceMessage_Marker *smithy.Schema
-
-var DBInstanceMessage_DBInstances *smithy.Schema
-
-var DescribeDBParameterGroupsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBParameterGroupsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDBParameterGroupsMessage_DBParameterGroupName *smithy.Schema
-
-var DescribeDBParameterGroupsMessage_Filters *smithy.Schema
-
-var DescribeDBParameterGroupsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBParameterGroupsMessage_Marker *smithy.Schema
-
-var DBParameterGroupsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBParameterGroupsMessage_Marker *smithy.Schema
-
-var DBParameterGroupsMessage_DBParameterGroups *smithy.Schema
-
-var DescribeDBParametersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBParametersMessage",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeDBParametersMessage_DBParameterGroupName *smithy.Schema
-
-var DescribeDBParametersMessage_Source *smithy.Schema
-
-var DescribeDBParametersMessage_Filters *smithy.Schema
-
-var DescribeDBParametersMessage_MaxRecords *smithy.Schema
-
-var DescribeDBParametersMessage_Marker *smithy.Schema
-
-var DBParameterGroupDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupDetails",
-}, smithy.ShapeTypeStructure, 2)
-var DBParameterGroupDetails_Parameters *smithy.Schema
-
-var DBParameterGroupDetails_Marker *smithy.Schema
-
-var DescribeDBSubnetGroupsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeDBSubnetGroupsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDBSubnetGroupsMessage_DBSubnetGroupName *smithy.Schema
-
-var DescribeDBSubnetGroupsMessage_Filters *smithy.Schema
-
-var DescribeDBSubnetGroupsMessage_MaxRecords *smithy.Schema
-
-var DescribeDBSubnetGroupsMessage_Marker *smithy.Schema
-
-var DBSubnetGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBSubnetGroupMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DBSubnetGroupMessage_Marker *smithy.Schema
-
-var DBSubnetGroupMessage_DBSubnetGroups *smithy.Schema
-
-var DescribeEngineDefaultClusterParametersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultClusterParametersMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily *smithy.Schema
-
-var DescribeEngineDefaultClusterParametersMessage_Filters *smithy.Schema
-
-var DescribeEngineDefaultClusterParametersMessage_MaxRecords *smithy.Schema
-
-var DescribeEngineDefaultClusterParametersMessage_Marker *smithy.Schema
-
-var DescribeEngineDefaultClusterParametersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultClusterParametersResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEngineDefaultClusterParametersResult_EngineDefaults *smithy.Schema
-
-var DescribeEngineDefaultParametersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultParametersMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEngineDefaultParametersMessage_DBParameterGroupFamily *smithy.Schema
-
-var DescribeEngineDefaultParametersMessage_Filters *smithy.Schema
-
-var DescribeEngineDefaultParametersMessage_MaxRecords *smithy.Schema
-
-var DescribeEngineDefaultParametersMessage_Marker *smithy.Schema
-
-var DescribeEngineDefaultParametersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEngineDefaultParametersResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEngineDefaultParametersResult_EngineDefaults *smithy.Schema
-
-var DescribeEventCategoriesMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEventCategoriesMessage",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventCategoriesMessage_SourceType *smithy.Schema
-
-var DescribeEventCategoriesMessage_Filters *smithy.Schema
-
-var EventCategoriesMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventCategoriesMessage",
-}, smithy.ShapeTypeStructure, 1)
-var EventCategoriesMessage_EventCategoriesMapList *smithy.Schema
-
-var DescribeEventsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEventsMessage",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeEventsMessage_SourceIdentifier *smithy.Schema
-
-var DescribeEventsMessage_SourceType *smithy.Schema
-
-var DescribeEventsMessage_StartTime *smithy.Schema
-
-var DescribeEventsMessage_EndTime *smithy.Schema
-
-var DescribeEventsMessage_Duration *smithy.Schema
-
-var DescribeEventsMessage_EventCategories *smithy.Schema
-
-var DescribeEventsMessage_Filters *smithy.Schema
-
-var DescribeEventsMessage_MaxRecords *smithy.Schema
-
-var DescribeEventsMessage_Marker *smithy.Schema
-
-var EventsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var EventsMessage_Marker *smithy.Schema
-
-var EventsMessage_Events *smithy.Schema
-
-var DescribeEventSubscriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeEventSubscriptionsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEventSubscriptionsMessage_SubscriptionName *smithy.Schema
-
-var DescribeEventSubscriptionsMessage_Filters *smithy.Schema
-
-var DescribeEventSubscriptionsMessage_MaxRecords *smithy.Schema
-
-var DescribeEventSubscriptionsMessage_Marker *smithy.Schema
-
-var EventSubscriptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "EventSubscriptionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var EventSubscriptionsMessage_Marker *smithy.Schema
-
-var EventSubscriptionsMessage_EventSubscriptionsList *smithy.Schema
-
-var DescribeGlobalClustersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeGlobalClustersMessage",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeGlobalClustersMessage_GlobalClusterIdentifier *smithy.Schema
-
-var DescribeGlobalClustersMessage_MaxRecords *smithy.Schema
-
-var DescribeGlobalClustersMessage_Marker *smithy.Schema
-
-var GlobalClustersMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "GlobalClustersMessage",
-}, smithy.ShapeTypeStructure, 2)
-var GlobalClustersMessage_Marker *smithy.Schema
-
-var GlobalClustersMessage_GlobalClusters *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeOrderableDBInstanceOptionsMessage",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeOrderableDBInstanceOptionsMessage_Engine *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_EngineVersion *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_DBInstanceClass *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_LicenseModel *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_Vpc *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_Filters *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_MaxRecords *smithy.Schema
-
-var DescribeOrderableDBInstanceOptionsMessage_Marker *smithy.Schema
-
-var OrderableDBInstanceOptionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "OrderableDBInstanceOptionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var OrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions *smithy.Schema
-
-var OrderableDBInstanceOptionsMessage_Marker *smithy.Schema
-
-var DescribePendingMaintenanceActionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribePendingMaintenanceActionsMessage",
-}, smithy.ShapeTypeStructure, 4)
-var DescribePendingMaintenanceActionsMessage_ResourceIdentifier *smithy.Schema
-
-var DescribePendingMaintenanceActionsMessage_Filters *smithy.Schema
-
-var DescribePendingMaintenanceActionsMessage_Marker *smithy.Schema
-
-var DescribePendingMaintenanceActionsMessage_MaxRecords *smithy.Schema
-
-var PendingMaintenanceActionsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PendingMaintenanceActionsMessage",
-}, smithy.ShapeTypeStructure, 2)
-var PendingMaintenanceActionsMessage_PendingMaintenanceActions *smithy.Schema
-
-var PendingMaintenanceActionsMessage_Marker *smithy.Schema
-
-var DescribeValidDBInstanceModificationsMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeValidDBInstanceModificationsMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier *smithy.Schema
-
-var DescribeValidDBInstanceModificationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DescribeValidDBInstanceModificationsResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage *smithy.Schema
-
-var FailoverDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverDBClusterMessage",
-}, smithy.ShapeTypeStructure, 2)
-var FailoverDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var FailoverDBClusterMessage_TargetDBInstanceIdentifier *smithy.Schema
-
-var FailoverDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var FailoverDBClusterResult_DBCluster *smithy.Schema
-
-var FailoverGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 4)
-var FailoverGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var FailoverGlobalClusterMessage_TargetDbClusterIdentifier *smithy.Schema
-
-var FailoverGlobalClusterMessage_AllowDataLoss *smithy.Schema
-
-var FailoverGlobalClusterMessage_Switchover *smithy.Schema
-
-var FailoverGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "FailoverGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var FailoverGlobalClusterResult_GlobalCluster *smithy.Schema
-
-var ListTagsForResourceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ListTagsForResourceMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceMessage_ResourceName *smithy.Schema
-
-var ListTagsForResourceMessage_Filters *smithy.Schema
-
-var TagListMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "TagListMessage",
-}, smithy.ShapeTypeStructure, 1)
-var TagListMessage_TagList *smithy.Schema
-
-var ModifyDBClusterEndpointMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterEndpointMessage",
-}, smithy.ShapeTypeStructure, 4)
-var ModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier *smithy.Schema
-
-var ModifyDBClusterEndpointMessage_EndpointType *smithy.Schema
-
-var ModifyDBClusterEndpointMessage_StaticMembers *smithy.Schema
-
-var ModifyDBClusterEndpointMessage_ExcludedMembers *smithy.Schema
-
-var ModifyDBClusterEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterEndpointOutput",
-}, smithy.ShapeTypeStructure, 10)
-var ModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_DBClusterIdentifier *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_Endpoint *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_Status *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_EndpointType *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_CustomEndpointType *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_StaticMembers *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_ExcludedMembers *smithy.Schema
-
-var ModifyDBClusterEndpointOutput_DBClusterEndpointArn *smithy.Schema
-
-var ModifyDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterMessage",
-}, smithy.ShapeTypeStructure, 21)
-var ModifyDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var ModifyDBClusterMessage_NewDBClusterIdentifier *smithy.Schema
-
-var ModifyDBClusterMessage_ApplyImmediately *smithy.Schema
-
-var ModifyDBClusterMessage_BackupRetentionPeriod *smithy.Schema
-
-var ModifyDBClusterMessage_DBClusterParameterGroupName *smithy.Schema
-
-var ModifyDBClusterMessage_VpcSecurityGroupIds *smithy.Schema
-
-var ModifyDBClusterMessage_Port *smithy.Schema
-
-var ModifyDBClusterMessage_MasterUserPassword *smithy.Schema
-
-var ModifyDBClusterMessage_OptionGroupName *smithy.Schema
-
-var ModifyDBClusterMessage_PreferredBackupWindow *smithy.Schema
-
-var ModifyDBClusterMessage_PreferredMaintenanceWindow *smithy.Schema
-
-var ModifyDBClusterMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var ModifyDBClusterMessage_CloudwatchLogsExportConfiguration *smithy.Schema
-
-var ModifyDBClusterMessage_EngineVersion *smithy.Schema
-
-var ModifyDBClusterMessage_AllowMajorVersionUpgrade *smithy.Schema
-
-var ModifyDBClusterMessage_DBInstanceParameterGroupName *smithy.Schema
-
-var ModifyDBClusterMessage_DeletionProtection *smithy.Schema
-
-var ModifyDBClusterMessage_CopyTagsToSnapshot *smithy.Schema
-
-var ModifyDBClusterMessage_ServerlessV2ScalingConfiguration *smithy.Schema
-
-var ModifyDBClusterMessage_StorageType *smithy.Schema
-
-var ModifyDBClusterMessage_NetworkType *smithy.Schema
-
-var ModifyDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyDBClusterResult_DBCluster *smithy.Schema
-
-var ModifyDBClusterParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName *smithy.Schema
-
-var ModifyDBClusterParameterGroupMessage_Parameters *smithy.Schema
-
-var DBClusterParameterGroupNameMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBClusterParameterGroupNameMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DBClusterParameterGroupNameMessage_DBClusterParameterGroupName *smithy.Schema
-
-var ModifyDBClusterSnapshotAttributeMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterSnapshotAttributeMessage",
-}, smithy.ShapeTypeStructure, 4)
-var ModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier *smithy.Schema
-
-var ModifyDBClusterSnapshotAttributeMessage_AttributeName *smithy.Schema
-
-var ModifyDBClusterSnapshotAttributeMessage_ValuesToAdd *smithy.Schema
-
-var ModifyDBClusterSnapshotAttributeMessage_ValuesToRemove *smithy.Schema
-
-var ModifyDBClusterSnapshotAttributeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBClusterSnapshotAttributeResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult *smithy.Schema
-
-var ModifyDBInstanceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBInstanceMessage",
-}, smithy.ShapeTypeStructure, 37)
-var ModifyDBInstanceMessage_DBInstanceIdentifier *smithy.Schema
-
-var ModifyDBInstanceMessage_AllocatedStorage *smithy.Schema
-
-var ModifyDBInstanceMessage_DBInstanceClass *smithy.Schema
-
-var ModifyDBInstanceMessage_DBSubnetGroupName *smithy.Schema
-
-var ModifyDBInstanceMessage_DBSecurityGroups *smithy.Schema
-
-var ModifyDBInstanceMessage_VpcSecurityGroupIds *smithy.Schema
-
-var ModifyDBInstanceMessage_ApplyImmediately *smithy.Schema
-
-var ModifyDBInstanceMessage_MasterUserPassword *smithy.Schema
-
-var ModifyDBInstanceMessage_DBParameterGroupName *smithy.Schema
-
-var ModifyDBInstanceMessage_BackupRetentionPeriod *smithy.Schema
-
-var ModifyDBInstanceMessage_PreferredBackupWindow *smithy.Schema
-
-var ModifyDBInstanceMessage_PreferredMaintenanceWindow *smithy.Schema
-
-var ModifyDBInstanceMessage_MultiAZ *smithy.Schema
-
-var ModifyDBInstanceMessage_EngineVersion *smithy.Schema
-
-var ModifyDBInstanceMessage_AllowMajorVersionUpgrade *smithy.Schema
-
-var ModifyDBInstanceMessage_AutoMinorVersionUpgrade *smithy.Schema
-
-var ModifyDBInstanceMessage_LicenseModel *smithy.Schema
-
-var ModifyDBInstanceMessage_Iops *smithy.Schema
-
-var ModifyDBInstanceMessage_OptionGroupName *smithy.Schema
-
-var ModifyDBInstanceMessage_NewDBInstanceIdentifier *smithy.Schema
-
-var ModifyDBInstanceMessage_StorageType *smithy.Schema
-
-var ModifyDBInstanceMessage_TdeCredentialArn *smithy.Schema
-
-var ModifyDBInstanceMessage_TdeCredentialPassword *smithy.Schema
-
-var ModifyDBInstanceMessage_CACertificateIdentifier *smithy.Schema
-
-var ModifyDBInstanceMessage_Domain *smithy.Schema
-
-var ModifyDBInstanceMessage_CopyTagsToSnapshot *smithy.Schema
-
-var ModifyDBInstanceMessage_MonitoringInterval *smithy.Schema
-
-var ModifyDBInstanceMessage_DBPortNumber *smithy.Schema
-
-var ModifyDBInstanceMessage_PubliclyAccessible *smithy.Schema
-
-var ModifyDBInstanceMessage_MonitoringRoleArn *smithy.Schema
-
-var ModifyDBInstanceMessage_DomainIAMRoleName *smithy.Schema
-
-var ModifyDBInstanceMessage_PromotionTier *smithy.Schema
-
-var ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var ModifyDBInstanceMessage_EnablePerformanceInsights *smithy.Schema
-
-var ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId *smithy.Schema
-
-var ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration *smithy.Schema
-
-var ModifyDBInstanceMessage_DeletionProtection *smithy.Schema
-
-var ModifyDBInstanceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBInstanceResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyDBInstanceResult_DBInstance *smithy.Schema
-
-var ModifyDBParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyDBParameterGroupMessage_DBParameterGroupName *smithy.Schema
-
-var ModifyDBParameterGroupMessage_Parameters *smithy.Schema
-
-var DBParameterGroupNameMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "DBParameterGroupNameMessage",
-}, smithy.ShapeTypeStructure, 1)
-var DBParameterGroupNameMessage_DBParameterGroupName *smithy.Schema
-
-var ModifyDBSubnetGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBSubnetGroupMessage",
-}, smithy.ShapeTypeStructure, 3)
-var ModifyDBSubnetGroupMessage_DBSubnetGroupName *smithy.Schema
-
-var ModifyDBSubnetGroupMessage_DBSubnetGroupDescription *smithy.Schema
-
-var ModifyDBSubnetGroupMessage_SubnetIds *smithy.Schema
-
-var ModifyDBSubnetGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyDBSubnetGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyDBSubnetGroupResult_DBSubnetGroup *smithy.Schema
-
-var ModifyEventSubscriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyEventSubscriptionMessage",
-}, smithy.ShapeTypeStructure, 5)
-var ModifyEventSubscriptionMessage_SubscriptionName *smithy.Schema
-
-var ModifyEventSubscriptionMessage_SnsTopicArn *smithy.Schema
-
-var ModifyEventSubscriptionMessage_SourceType *smithy.Schema
-
-var ModifyEventSubscriptionMessage_EventCategories *smithy.Schema
-
-var ModifyEventSubscriptionMessage_Enabled *smithy.Schema
-
-var ModifyEventSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyEventSubscriptionResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyEventSubscriptionResult_EventSubscription *smithy.Schema
-
-var ModifyGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 5)
-var ModifyGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var ModifyGlobalClusterMessage_NewGlobalClusterIdentifier *smithy.Schema
-
-var ModifyGlobalClusterMessage_DeletionProtection *smithy.Schema
-
-var ModifyGlobalClusterMessage_EngineVersion *smithy.Schema
-
-var ModifyGlobalClusterMessage_AllowMajorVersionUpgrade *smithy.Schema
-
-var ModifyGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ModifyGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyGlobalClusterResult_GlobalCluster *smithy.Schema
-
-var PromoteReadReplicaDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PromoteReadReplicaDBClusterMessage",
-}, smithy.ShapeTypeStructure, 1)
-var PromoteReadReplicaDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var PromoteReadReplicaDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "PromoteReadReplicaDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var PromoteReadReplicaDBClusterResult_DBCluster *smithy.Schema
-
-var RebootDBInstanceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RebootDBInstanceMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RebootDBInstanceMessage_DBInstanceIdentifier *smithy.Schema
-
-var RebootDBInstanceMessage_ForceFailover *smithy.Schema
-
-var RebootDBInstanceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RebootDBInstanceResult",
-}, smithy.ShapeTypeStructure, 1)
-var RebootDBInstanceResult_DBInstance *smithy.Schema
-
-var RemoveFromGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveFromGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveFromGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var RemoveFromGlobalClusterMessage_DbClusterIdentifier *smithy.Schema
-
-var RemoveFromGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveFromGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveFromGlobalClusterResult_GlobalCluster *smithy.Schema
-
-var RemoveRoleFromDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveRoleFromDBClusterMessage",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveRoleFromDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var RemoveRoleFromDBClusterMessage_RoleArn *smithy.Schema
-
-var RemoveRoleFromDBClusterMessage_FeatureName *smithy.Schema
-
-var RemoveSourceIdentifierFromSubscriptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveSourceIdentifierFromSubscriptionMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName *smithy.Schema
-
-var RemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier *smithy.Schema
-
-var RemoveSourceIdentifierFromSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveSourceIdentifierFromSubscriptionResult",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveSourceIdentifierFromSubscriptionResult_EventSubscription *smithy.Schema
-
-var RemoveTagsFromResourceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RemoveTagsFromResourceMessage",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromResourceMessage_ResourceName *smithy.Schema
-
-var RemoveTagsFromResourceMessage_TagKeys *smithy.Schema
-
-var ResetDBClusterParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResetDBClusterParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 3)
-var ResetDBClusterParameterGroupMessage_DBClusterParameterGroupName *smithy.Schema
-
-var ResetDBClusterParameterGroupMessage_ResetAllParameters *smithy.Schema
-
-var ResetDBClusterParameterGroupMessage_Parameters *smithy.Schema
-
-var ResetDBParameterGroupMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "ResetDBParameterGroupMessage",
-}, smithy.ShapeTypeStructure, 3)
-var ResetDBParameterGroupMessage_DBParameterGroupName *smithy.Schema
-
-var ResetDBParameterGroupMessage_ResetAllParameters *smithy.Schema
-
-var ResetDBParameterGroupMessage_Parameters *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterFromSnapshotMessage",
-}, smithy.ShapeTypeStructure, 20)
-var RestoreDBClusterFromSnapshotMessage_AvailabilityZones *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_DBClusterIdentifier *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_SnapshotIdentifier *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_Engine *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_EngineVersion *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_Port *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_DBSubnetGroupName *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_DatabaseName *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_OptionGroupName *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_Tags *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_KmsKeyId *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_DeletionProtection *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_StorageType *smithy.Schema
-
-var RestoreDBClusterFromSnapshotMessage_NetworkType *smithy.Schema
-
-var RestoreDBClusterFromSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterFromSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreDBClusterFromSnapshotResult_DBCluster *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterToPointInTimeMessage",
-}, smithy.ShapeTypeStructure, 18)
-var RestoreDBClusterToPointInTimeMessage_DBClusterIdentifier *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_RestoreType *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_RestoreToTime *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_Port *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_DBSubnetGroupName *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_OptionGroupName *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_Tags *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_KmsKeyId *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_DeletionProtection *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_StorageType *smithy.Schema
-
-var RestoreDBClusterToPointInTimeMessage_NetworkType *smithy.Schema
-
-var RestoreDBClusterToPointInTimeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "RestoreDBClusterToPointInTimeResult",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreDBClusterToPointInTimeResult_DBCluster *smithy.Schema
-
-var StartDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StartDBClusterMessage",
-}, smithy.ShapeTypeStructure, 1)
-var StartDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var StartDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StartDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartDBClusterResult_DBCluster *smithy.Schema
-
-var StopDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StopDBClusterMessage",
-}, smithy.ShapeTypeStructure, 1)
-var StopDBClusterMessage_DBClusterIdentifier *smithy.Schema
-
-var StopDBClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "StopDBClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var StopDBClusterResult_DBCluster *smithy.Schema
-
-var SwitchoverGlobalClusterMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SwitchoverGlobalClusterMessage",
-}, smithy.ShapeTypeStructure, 2)
-var SwitchoverGlobalClusterMessage_GlobalClusterIdentifier *smithy.Schema
-
-var SwitchoverGlobalClusterMessage_TargetDbClusterIdentifier *smithy.Schema
-
-var SwitchoverGlobalClusterResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.neptune",
-	Name:      "SwitchoverGlobalClusterResult",
-}, smithy.ShapeTypeStructure, 1)
-var SwitchoverGlobalClusterResult_GlobalCluster *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ApplyMethod_immediate = ApplyMethod.AddMember("immediate", smithyprelude.Unit)
-
-	ApplyMethod_pending_reboot = ApplyMethod.AddMember("pending_reboot", smithyprelude.Unit)
-
-	_AttributeValueList_member = _AttributeValueList.AddMember("member", _String, &smithytraits.XMLName{Name: "AttributeValue"})
-
-	AuthorizationNotFoundFault_message = AuthorizationNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	AvailabilityZone_Name = AvailabilityZone.AddMember("Name", _String)
-
-	_AvailabilityZoneList_member = _AvailabilityZoneList.AddMember("member", AvailabilityZone, &smithytraits.XMLName{Name: "AvailabilityZone"})
-
-	_AvailabilityZones_member = _AvailabilityZones.AddMember("member", _String, &smithytraits.XMLName{Name: "AvailabilityZone"})
-
-	CertificateNotFoundFault_message = CertificateNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	CharacterSet_CharacterSetName = CharacterSet.AddMember("CharacterSetName", _String)
-
-	CharacterSet_CharacterSetDescription = CharacterSet.AddMember("CharacterSetDescription", _String)
-
-	_LogTypeList_member = _LogTypeList.AddMember("member", _String)
-
-	CloudwatchLogsExportConfiguration_EnableLogTypes = CloudwatchLogsExportConfiguration.AddMember("EnableLogTypes", _LogTypeList)
-
-	CloudwatchLogsExportConfiguration_DisableLogTypes = CloudwatchLogsExportConfiguration.AddMember("DisableLogTypes", _LogTypeList)
-
-	PendingCloudwatchLogsExports_LogTypesToEnable = PendingCloudwatchLogsExports.AddMember("LogTypesToEnable", _LogTypeList)
-
-	PendingCloudwatchLogsExports_LogTypesToDisable = PendingCloudwatchLogsExports.AddMember("LogTypesToDisable", _LogTypeList)
-
-	ClusterPendingModifiedValues_PendingCloudwatchLogsExports = ClusterPendingModifiedValues.AddMember("PendingCloudwatchLogsExports", PendingCloudwatchLogsExports)
-
-	ClusterPendingModifiedValues_DBClusterIdentifier = ClusterPendingModifiedValues.AddMember("DBClusterIdentifier", _String)
-
-	ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled = ClusterPendingModifiedValues.AddMember("IAMDatabaseAuthenticationEnabled", _BooleanOptional)
-
-	ClusterPendingModifiedValues_EngineVersion = ClusterPendingModifiedValues.AddMember("EngineVersion", _String)
-
-	ClusterPendingModifiedValues_BackupRetentionPeriod = ClusterPendingModifiedValues.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	ClusterPendingModifiedValues_StorageType = ClusterPendingModifiedValues.AddMember("StorageType", _String)
-
-	ClusterPendingModifiedValues_AllocatedStorage = ClusterPendingModifiedValues.AddMember("AllocatedStorage", _IntegerOptional)
-
-	ClusterPendingModifiedValues_Iops = ClusterPendingModifiedValues.AddMember("Iops", _IntegerOptional)
-
-	ClusterPendingModifiedValues_NetworkType = ClusterPendingModifiedValues.AddMember("NetworkType", _String)
-
-	DBClusterOptionGroupStatus_DBClusterOptionGroupName = DBClusterOptionGroupStatus.AddMember("DBClusterOptionGroupName", _String)
-
-	DBClusterOptionGroupStatus_Status = DBClusterOptionGroupStatus.AddMember("Status", _String)
-
-	_DBClusterOptionGroupMemberships_member = _DBClusterOptionGroupMemberships.AddMember("member", DBClusterOptionGroupStatus, &smithytraits.XMLName{Name: "DBClusterOptionGroup"})
-
-	_ReadReplicaIdentifierList_member = _ReadReplicaIdentifierList.AddMember("member", _String, &smithytraits.XMLName{Name: "ReadReplicaIdentifier"})
-
-	DBClusterMember_DBInstanceIdentifier = DBClusterMember.AddMember("DBInstanceIdentifier", _String)
-
-	DBClusterMember_IsClusterWriter = DBClusterMember.AddMember("IsClusterWriter", _Boolean)
-
-	DBClusterMember_DBClusterParameterGroupStatus = DBClusterMember.AddMember("DBClusterParameterGroupStatus", _String)
-
-	DBClusterMember_PromotionTier = DBClusterMember.AddMember("PromotionTier", _IntegerOptional)
-
-	_DBClusterMemberList_member = _DBClusterMemberList.AddMember("member", DBClusterMember, &smithytraits.XMLName{Name: "DBClusterMember"})
-
-	VpcSecurityGroupMembership_VpcSecurityGroupId = VpcSecurityGroupMembership.AddMember("VpcSecurityGroupId", _String)
-
-	VpcSecurityGroupMembership_Status = VpcSecurityGroupMembership.AddMember("Status", _String)
-
-	_VpcSecurityGroupMembershipList_member = _VpcSecurityGroupMembershipList.AddMember("member", VpcSecurityGroupMembership, &smithytraits.XMLName{Name: "VpcSecurityGroupMembership"})
-
-	DBClusterRole_RoleArn = DBClusterRole.AddMember("RoleArn", _String)
-
-	DBClusterRole_Status = DBClusterRole.AddMember("Status", _String)
-
-	DBClusterRole_FeatureName = DBClusterRole.AddMember("FeatureName", _String)
-
-	_DBClusterRoles_member = _DBClusterRoles.AddMember("member", DBClusterRole, &smithytraits.XMLName{Name: "DBClusterRole"})
-
-	ServerlessV2ScalingConfigurationInfo_MinCapacity = ServerlessV2ScalingConfigurationInfo.AddMember("MinCapacity", _DoubleOptional)
-
-	ServerlessV2ScalingConfigurationInfo_MaxCapacity = ServerlessV2ScalingConfigurationInfo.AddMember("MaxCapacity", _DoubleOptional)
-
-	DBCluster_AllocatedStorage = DBCluster.AddMember("AllocatedStorage", _IntegerOptional)
-
-	DBCluster_AvailabilityZones = DBCluster.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	DBCluster_BackupRetentionPeriod = DBCluster.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	DBCluster_CharacterSetName = DBCluster.AddMember("CharacterSetName", _String)
-
-	DBCluster_DatabaseName = DBCluster.AddMember("DatabaseName", _String)
-
-	DBCluster_DBClusterIdentifier = DBCluster.AddMember("DBClusterIdentifier", _String)
-
-	DBCluster_DBClusterParameterGroup = DBCluster.AddMember("DBClusterParameterGroup", _String)
-
-	DBCluster_DBSubnetGroup = DBCluster.AddMember("DBSubnetGroup", _String)
-
-	DBCluster_Status = DBCluster.AddMember("Status", _String)
-
-	DBCluster_PercentProgress = DBCluster.AddMember("PercentProgress", _String)
-
-	DBCluster_EarliestRestorableTime = DBCluster.AddMember("EarliestRestorableTime", _TStamp)
-
-	DBCluster_Endpoint = DBCluster.AddMember("Endpoint", _String)
-
-	DBCluster_ReaderEndpoint = DBCluster.AddMember("ReaderEndpoint", _String)
-
-	DBCluster_MultiAZ = DBCluster.AddMember("MultiAZ", _Boolean)
-
-	DBCluster_Engine = DBCluster.AddMember("Engine", _String)
-
-	DBCluster_EngineVersion = DBCluster.AddMember("EngineVersion", _String)
-
-	DBCluster_LatestRestorableTime = DBCluster.AddMember("LatestRestorableTime", _TStamp)
-
-	DBCluster_Port = DBCluster.AddMember("Port", _IntegerOptional)
-
-	DBCluster_MasterUsername = DBCluster.AddMember("MasterUsername", _String)
-
-	DBCluster_DBClusterOptionGroupMemberships = DBCluster.AddMember("DBClusterOptionGroupMemberships", _DBClusterOptionGroupMemberships)
-
-	DBCluster_PreferredBackupWindow = DBCluster.AddMember("PreferredBackupWindow", _String)
-
-	DBCluster_PreferredMaintenanceWindow = DBCluster.AddMember("PreferredMaintenanceWindow", _String)
-
-	DBCluster_ReplicationSourceIdentifier = DBCluster.AddMember("ReplicationSourceIdentifier", _String)
-
-	DBCluster_ReadReplicaIdentifiers = DBCluster.AddMember("ReadReplicaIdentifiers", _ReadReplicaIdentifierList)
-
-	DBCluster_DBClusterMembers = DBCluster.AddMember("DBClusterMembers", _DBClusterMemberList)
-
-	DBCluster_VpcSecurityGroups = DBCluster.AddMember("VpcSecurityGroups", _VpcSecurityGroupMembershipList)
-
-	DBCluster_HostedZoneId = DBCluster.AddMember("HostedZoneId", _String)
-
-	DBCluster_StorageEncrypted = DBCluster.AddMember("StorageEncrypted", _Boolean)
-
-	DBCluster_KmsKeyId = DBCluster.AddMember("KmsKeyId", _String)
-
-	DBCluster_DbClusterResourceId = DBCluster.AddMember("DbClusterResourceId", _String)
-
-	DBCluster_DBClusterArn = DBCluster.AddMember("DBClusterArn", _String)
-
-	DBCluster_AssociatedRoles = DBCluster.AddMember("AssociatedRoles", _DBClusterRoles)
-
-	DBCluster_IAMDatabaseAuthenticationEnabled = DBCluster.AddMember("IAMDatabaseAuthenticationEnabled", _Boolean)
-
-	DBCluster_CloneGroupId = DBCluster.AddMember("CloneGroupId", _String)
-
-	DBCluster_ClusterCreateTime = DBCluster.AddMember("ClusterCreateTime", _TStamp)
-
-	DBCluster_CopyTagsToSnapshot = DBCluster.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	DBCluster_EnabledCloudwatchLogsExports = DBCluster.AddMember("EnabledCloudwatchLogsExports", _LogTypeList)
-
-	DBCluster_PendingModifiedValues = DBCluster.AddMember("PendingModifiedValues", ClusterPendingModifiedValues)
-
-	DBCluster_DeletionProtection = DBCluster.AddMember("DeletionProtection", _BooleanOptional)
-
-	DBCluster_CrossAccountClone = DBCluster.AddMember("CrossAccountClone", _BooleanOptional)
-
-	DBCluster_AutomaticRestartTime = DBCluster.AddMember("AutomaticRestartTime", _TStamp)
-
-	DBCluster_ServerlessV2ScalingConfiguration = DBCluster.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfigurationInfo)
-
-	DBCluster_GlobalClusterIdentifier = DBCluster.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	DBCluster_IOOptimizedNextAllowedModificationTime = DBCluster.AddMember("IOOptimizedNextAllowedModificationTime", _TStamp)
-
-	DBCluster_StorageType = DBCluster.AddMember("StorageType", _String)
-
-	DBCluster_NetworkType = DBCluster.AddMember("NetworkType", _String)
-
-	DBClusterAlreadyExistsFault_message = DBClusterAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	DBClusterEndpoint_DBClusterEndpointIdentifier = DBClusterEndpoint.AddMember("DBClusterEndpointIdentifier", _String)
-
-	DBClusterEndpoint_DBClusterIdentifier = DBClusterEndpoint.AddMember("DBClusterIdentifier", _String)
-
-	DBClusterEndpoint_DBClusterEndpointResourceIdentifier = DBClusterEndpoint.AddMember("DBClusterEndpointResourceIdentifier", _String)
-
-	DBClusterEndpoint_Endpoint = DBClusterEndpoint.AddMember("Endpoint", _String)
-
-	DBClusterEndpoint_Status = DBClusterEndpoint.AddMember("Status", _String)
-
-	DBClusterEndpoint_EndpointType = DBClusterEndpoint.AddMember("EndpointType", _String)
-
-	DBClusterEndpoint_CustomEndpointType = DBClusterEndpoint.AddMember("CustomEndpointType", _String)
-
-	DBClusterEndpoint_StaticMembers = DBClusterEndpoint.AddMember("StaticMembers", _StringList)
-
-	DBClusterEndpoint_ExcludedMembers = DBClusterEndpoint.AddMember("ExcludedMembers", _StringList)
-
-	DBClusterEndpoint_DBClusterEndpointArn = DBClusterEndpoint.AddMember("DBClusterEndpointArn", _String)
-
-	DBClusterEndpointAlreadyExistsFault_message = DBClusterEndpointAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	_DBClusterEndpointList_member = _DBClusterEndpointList.AddMember("member", DBClusterEndpoint, &smithytraits.XMLName{Name: "DBClusterEndpointList"})
-
-	DBClusterEndpointNotFoundFault_message = DBClusterEndpointNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterEndpointQuotaExceededFault_message = DBClusterEndpointQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	_DBClusterList_member = _DBClusterList.AddMember("member", DBCluster, &smithytraits.XMLName{Name: "DBCluster"})
-
-	DBClusterNotFoundFault_message = DBClusterNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterParameterGroup_DBClusterParameterGroupName = DBClusterParameterGroup.AddMember("DBClusterParameterGroupName", _String)
-
-	DBClusterParameterGroup_DBParameterGroupFamily = DBClusterParameterGroup.AddMember("DBParameterGroupFamily", _String)
-
-	DBClusterParameterGroup_Description = DBClusterParameterGroup.AddMember("Description", _String)
-
-	DBClusterParameterGroup_DBClusterParameterGroupArn = DBClusterParameterGroup.AddMember("DBClusterParameterGroupArn", _String)
-
-	_DBClusterParameterGroupList_member = _DBClusterParameterGroupList.AddMember("member", DBClusterParameterGroup, &smithytraits.XMLName{Name: "DBClusterParameterGroup"})
-
-	DBClusterParameterGroupNotFoundFault_message = DBClusterParameterGroupNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterQuotaExceededFault_message = DBClusterQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterRoleAlreadyExistsFault_message = DBClusterRoleAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterRoleNotFoundFault_message = DBClusterRoleNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterRoleQuotaExceededFault_message = DBClusterRoleQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterSnapshot_AvailabilityZones = DBClusterSnapshot.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	DBClusterSnapshot_DBClusterSnapshotIdentifier = DBClusterSnapshot.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	DBClusterSnapshot_DBClusterIdentifier = DBClusterSnapshot.AddMember("DBClusterIdentifier", _String)
-
-	DBClusterSnapshot_SnapshotCreateTime = DBClusterSnapshot.AddMember("SnapshotCreateTime", _TStamp)
-
-	DBClusterSnapshot_Engine = DBClusterSnapshot.AddMember("Engine", _String)
-
-	DBClusterSnapshot_AllocatedStorage = DBClusterSnapshot.AddMember("AllocatedStorage", _Integer)
-
-	DBClusterSnapshot_Status = DBClusterSnapshot.AddMember("Status", _String)
-
-	DBClusterSnapshot_Port = DBClusterSnapshot.AddMember("Port", _Integer)
-
-	DBClusterSnapshot_VpcId = DBClusterSnapshot.AddMember("VpcId", _String)
-
-	DBClusterSnapshot_ClusterCreateTime = DBClusterSnapshot.AddMember("ClusterCreateTime", _TStamp)
-
-	DBClusterSnapshot_MasterUsername = DBClusterSnapshot.AddMember("MasterUsername", _String)
-
-	DBClusterSnapshot_EngineVersion = DBClusterSnapshot.AddMember("EngineVersion", _String)
-
-	DBClusterSnapshot_LicenseModel = DBClusterSnapshot.AddMember("LicenseModel", _String)
-
-	DBClusterSnapshot_SnapshotType = DBClusterSnapshot.AddMember("SnapshotType", _String)
-
-	DBClusterSnapshot_PercentProgress = DBClusterSnapshot.AddMember("PercentProgress", _Integer)
-
-	DBClusterSnapshot_StorageEncrypted = DBClusterSnapshot.AddMember("StorageEncrypted", _Boolean)
-
-	DBClusterSnapshot_KmsKeyId = DBClusterSnapshot.AddMember("KmsKeyId", _String)
-
-	DBClusterSnapshot_DBClusterSnapshotArn = DBClusterSnapshot.AddMember("DBClusterSnapshotArn", _String)
-
-	DBClusterSnapshot_SourceDBClusterSnapshotArn = DBClusterSnapshot.AddMember("SourceDBClusterSnapshotArn", _String)
-
-	DBClusterSnapshot_IAMDatabaseAuthenticationEnabled = DBClusterSnapshot.AddMember("IAMDatabaseAuthenticationEnabled", _Boolean)
-
-	DBClusterSnapshot_StorageType = DBClusterSnapshot.AddMember("StorageType", _String)
-
-	DBClusterSnapshotAlreadyExistsFault_message = DBClusterSnapshotAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	DBClusterSnapshotAttribute_AttributeName = DBClusterSnapshotAttribute.AddMember("AttributeName", _String)
-
-	DBClusterSnapshotAttribute_AttributeValues = DBClusterSnapshotAttribute.AddMember("AttributeValues", _AttributeValueList)
-
-	_DBClusterSnapshotAttributeList_member = _DBClusterSnapshotAttributeList.AddMember("member", DBClusterSnapshotAttribute, &smithytraits.XMLName{Name: "DBClusterSnapshotAttribute"})
-
-	DBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier = DBClusterSnapshotAttributesResult.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	DBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes = DBClusterSnapshotAttributesResult.AddMember("DBClusterSnapshotAttributes", _DBClusterSnapshotAttributeList)
-
-	_DBClusterSnapshotList_member = _DBClusterSnapshotList.AddMember("member", DBClusterSnapshot, &smithytraits.XMLName{Name: "DBClusterSnapshot"})
-
-	DBClusterSnapshotNotFoundFault_message = DBClusterSnapshotNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	_SupportedCharacterSetsList_member = _SupportedCharacterSetsList.AddMember("member", CharacterSet, &smithytraits.XMLName{Name: "CharacterSet"})
-
-	UpgradeTarget_Engine = UpgradeTarget.AddMember("Engine", _String)
-
-	UpgradeTarget_EngineVersion = UpgradeTarget.AddMember("EngineVersion", _String)
-
-	UpgradeTarget_Description = UpgradeTarget.AddMember("Description", _String)
-
-	UpgradeTarget_AutoUpgrade = UpgradeTarget.AddMember("AutoUpgrade", _Boolean)
-
-	UpgradeTarget_IsMajorVersionUpgrade = UpgradeTarget.AddMember("IsMajorVersionUpgrade", _Boolean)
-
-	UpgradeTarget_SupportsGlobalDatabases = UpgradeTarget.AddMember("SupportsGlobalDatabases", _BooleanOptional)
-
-	_ValidUpgradeTargetList_member = _ValidUpgradeTargetList.AddMember("member", UpgradeTarget, &smithytraits.XMLName{Name: "UpgradeTarget"})
-
-	Timezone_TimezoneName = Timezone.AddMember("TimezoneName", _String)
-
-	_SupportedTimezonesList_member = _SupportedTimezonesList.AddMember("member", Timezone, &smithytraits.XMLName{Name: "Timezone"})
-
-	DBEngineVersion_Engine = DBEngineVersion.AddMember("Engine", _String)
-
-	DBEngineVersion_EngineVersion = DBEngineVersion.AddMember("EngineVersion", _String)
-
-	DBEngineVersion_DBParameterGroupFamily = DBEngineVersion.AddMember("DBParameterGroupFamily", _String)
-
-	DBEngineVersion_DBEngineDescription = DBEngineVersion.AddMember("DBEngineDescription", _String)
-
-	DBEngineVersion_DBEngineVersionDescription = DBEngineVersion.AddMember("DBEngineVersionDescription", _String)
-
-	DBEngineVersion_DefaultCharacterSet = DBEngineVersion.AddMember("DefaultCharacterSet", CharacterSet)
-
-	DBEngineVersion_SupportedCharacterSets = DBEngineVersion.AddMember("SupportedCharacterSets", _SupportedCharacterSetsList)
-
-	DBEngineVersion_ValidUpgradeTarget = DBEngineVersion.AddMember("ValidUpgradeTarget", _ValidUpgradeTargetList)
-
-	DBEngineVersion_SupportedTimezones = DBEngineVersion.AddMember("SupportedTimezones", _SupportedTimezonesList)
-
-	DBEngineVersion_ExportableLogTypes = DBEngineVersion.AddMember("ExportableLogTypes", _LogTypeList)
-
-	DBEngineVersion_SupportsLogExportsToCloudwatchLogs = DBEngineVersion.AddMember("SupportsLogExportsToCloudwatchLogs", _Boolean)
-
-	DBEngineVersion_SupportsReadReplica = DBEngineVersion.AddMember("SupportsReadReplica", _Boolean)
-
-	DBEngineVersion_SupportsGlobalDatabases = DBEngineVersion.AddMember("SupportsGlobalDatabases", _Boolean)
-
-	_DBEngineVersionList_member = _DBEngineVersionList.AddMember("member", DBEngineVersion, &smithytraits.XMLName{Name: "DBEngineVersion"})
-
-	Endpoint_Address = Endpoint.AddMember("Address", _String)
-
-	Endpoint_Port = Endpoint.AddMember("Port", _Integer)
-
-	Endpoint_HostedZoneId = Endpoint.AddMember("HostedZoneId", _String)
-
-	DBSecurityGroupMembership_DBSecurityGroupName = DBSecurityGroupMembership.AddMember("DBSecurityGroupName", _String)
-
-	DBSecurityGroupMembership_Status = DBSecurityGroupMembership.AddMember("Status", _String)
-
-	_DBSecurityGroupMembershipList_member = _DBSecurityGroupMembershipList.AddMember("member", DBSecurityGroupMembership, &smithytraits.XMLName{Name: "DBSecurityGroup"})
-
-	DBParameterGroupStatus_DBParameterGroupName = DBParameterGroupStatus.AddMember("DBParameterGroupName", _String)
-
-	DBParameterGroupStatus_ParameterApplyStatus = DBParameterGroupStatus.AddMember("ParameterApplyStatus", _String)
-
-	_DBParameterGroupStatusList_member = _DBParameterGroupStatusList.AddMember("member", DBParameterGroupStatus, &smithytraits.XMLName{Name: "DBParameterGroup"})
-
-	Subnet_SubnetIdentifier = Subnet.AddMember("SubnetIdentifier", _String)
-
-	Subnet_SubnetAvailabilityZone = Subnet.AddMember("SubnetAvailabilityZone", AvailabilityZone)
-
-	Subnet_SubnetStatus = Subnet.AddMember("SubnetStatus", _String)
-
-	_SubnetList_member = _SubnetList.AddMember("member", Subnet, &smithytraits.XMLName{Name: "Subnet"})
-
-	DBSubnetGroup_DBSubnetGroupName = DBSubnetGroup.AddMember("DBSubnetGroupName", _String)
-
-	DBSubnetGroup_DBSubnetGroupDescription = DBSubnetGroup.AddMember("DBSubnetGroupDescription", _String)
-
-	DBSubnetGroup_VpcId = DBSubnetGroup.AddMember("VpcId", _String)
-
-	DBSubnetGroup_SubnetGroupStatus = DBSubnetGroup.AddMember("SubnetGroupStatus", _String)
-
-	DBSubnetGroup_Subnets = DBSubnetGroup.AddMember("Subnets", _SubnetList)
-
-	DBSubnetGroup_DBSubnetGroupArn = DBSubnetGroup.AddMember("DBSubnetGroupArn", _String)
-
-	DBSubnetGroup_SupportedNetworkTypes = DBSubnetGroup.AddMember("SupportedNetworkTypes", _StringList)
-
-	PendingModifiedValues_DBInstanceClass = PendingModifiedValues.AddMember("DBInstanceClass", _String)
-
-	PendingModifiedValues_AllocatedStorage = PendingModifiedValues.AddMember("AllocatedStorage", _IntegerOptional)
-
-	PendingModifiedValues_MasterUserPassword = PendingModifiedValues.AddMember("MasterUserPassword", _String)
-
-	PendingModifiedValues_Port = PendingModifiedValues.AddMember("Port", _IntegerOptional)
-
-	PendingModifiedValues_BackupRetentionPeriod = PendingModifiedValues.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	PendingModifiedValues_MultiAZ = PendingModifiedValues.AddMember("MultiAZ", _BooleanOptional)
-
-	PendingModifiedValues_EngineVersion = PendingModifiedValues.AddMember("EngineVersion", _String)
-
-	PendingModifiedValues_LicenseModel = PendingModifiedValues.AddMember("LicenseModel", _String)
-
-	PendingModifiedValues_Iops = PendingModifiedValues.AddMember("Iops", _IntegerOptional)
-
-	PendingModifiedValues_DBInstanceIdentifier = PendingModifiedValues.AddMember("DBInstanceIdentifier", _String)
-
-	PendingModifiedValues_StorageType = PendingModifiedValues.AddMember("StorageType", _String)
-
-	PendingModifiedValues_CACertificateIdentifier = PendingModifiedValues.AddMember("CACertificateIdentifier", _String)
-
-	PendingModifiedValues_DBSubnetGroupName = PendingModifiedValues.AddMember("DBSubnetGroupName", _String)
-
-	PendingModifiedValues_PendingCloudwatchLogsExports = PendingModifiedValues.AddMember("PendingCloudwatchLogsExports", PendingCloudwatchLogsExports)
-
-	_ReadReplicaDBInstanceIdentifierList_member = _ReadReplicaDBInstanceIdentifierList.AddMember("member", _String, &smithytraits.XMLName{Name: "ReadReplicaDBInstanceIdentifier"})
-
-	_ReadReplicaDBClusterIdentifierList_member = _ReadReplicaDBClusterIdentifierList.AddMember("member", _String, &smithytraits.XMLName{Name: "ReadReplicaDBClusterIdentifier"})
-
-	OptionGroupMembership_OptionGroupName = OptionGroupMembership.AddMember("OptionGroupName", _String)
-
-	OptionGroupMembership_Status = OptionGroupMembership.AddMember("Status", _String)
-
-	_OptionGroupMembershipList_member = _OptionGroupMembershipList.AddMember("member", OptionGroupMembership, &smithytraits.XMLName{Name: "OptionGroupMembership"})
-
-	DBInstanceStatusInfo_StatusType = DBInstanceStatusInfo.AddMember("StatusType", _String)
-
-	DBInstanceStatusInfo_Normal = DBInstanceStatusInfo.AddMember("Normal", _Boolean)
-
-	DBInstanceStatusInfo_Status = DBInstanceStatusInfo.AddMember("Status", _String)
-
-	DBInstanceStatusInfo_Message = DBInstanceStatusInfo.AddMember("Message", _String)
-
-	_DBInstanceStatusInfoList_member = _DBInstanceStatusInfoList.AddMember("member", DBInstanceStatusInfo, &smithytraits.XMLName{Name: "DBInstanceStatusInfo"})
-
-	DomainMembership_Domain = DomainMembership.AddMember("Domain", _String)
-
-	DomainMembership_Status = DomainMembership.AddMember("Status", _String)
-
-	DomainMembership_FQDN = DomainMembership.AddMember("FQDN", _String)
-
-	DomainMembership_IAMRoleName = DomainMembership.AddMember("IAMRoleName", _String)
-
-	_DomainMembershipList_member = _DomainMembershipList.AddMember("member", DomainMembership, &smithytraits.XMLName{Name: "DomainMembership"})
-
-	DBInstance_DBInstanceIdentifier = DBInstance.AddMember("DBInstanceIdentifier", _String)
-
-	DBInstance_DBInstanceClass = DBInstance.AddMember("DBInstanceClass", _String)
-
-	DBInstance_Engine = DBInstance.AddMember("Engine", _String)
-
-	DBInstance_DBInstanceStatus = DBInstance.AddMember("DBInstanceStatus", _String)
-
-	DBInstance_MasterUsername = DBInstance.AddMember("MasterUsername", _String)
-
-	DBInstance_DBName = DBInstance.AddMember("DBName", _String)
-
-	DBInstance_Endpoint = DBInstance.AddMember("Endpoint", Endpoint)
-
-	DBInstance_AllocatedStorage = DBInstance.AddMember("AllocatedStorage", _Integer)
-
-	DBInstance_InstanceCreateTime = DBInstance.AddMember("InstanceCreateTime", _TStamp)
-
-	DBInstance_PreferredBackupWindow = DBInstance.AddMember("PreferredBackupWindow", _String)
-
-	DBInstance_BackupRetentionPeriod = DBInstance.AddMember("BackupRetentionPeriod", _Integer)
-
-	DBInstance_DBSecurityGroups = DBInstance.AddMember("DBSecurityGroups", _DBSecurityGroupMembershipList)
-
-	DBInstance_VpcSecurityGroups = DBInstance.AddMember("VpcSecurityGroups", _VpcSecurityGroupMembershipList)
-
-	DBInstance_DBParameterGroups = DBInstance.AddMember("DBParameterGroups", _DBParameterGroupStatusList)
-
-	DBInstance_AvailabilityZone = DBInstance.AddMember("AvailabilityZone", _String)
-
-	DBInstance_DBSubnetGroup = DBInstance.AddMember("DBSubnetGroup", DBSubnetGroup)
-
-	DBInstance_PreferredMaintenanceWindow = DBInstance.AddMember("PreferredMaintenanceWindow", _String)
-
-	DBInstance_PendingModifiedValues = DBInstance.AddMember("PendingModifiedValues", PendingModifiedValues)
-
-	DBInstance_LatestRestorableTime = DBInstance.AddMember("LatestRestorableTime", _TStamp)
-
-	DBInstance_MultiAZ = DBInstance.AddMember("MultiAZ", _Boolean)
-
-	DBInstance_EngineVersion = DBInstance.AddMember("EngineVersion", _String)
-
-	DBInstance_AutoMinorVersionUpgrade = DBInstance.AddMember("AutoMinorVersionUpgrade", _Boolean)
-
-	DBInstance_ReadReplicaSourceDBInstanceIdentifier = DBInstance.AddMember("ReadReplicaSourceDBInstanceIdentifier", _String)
-
-	DBInstance_ReadReplicaDBInstanceIdentifiers = DBInstance.AddMember("ReadReplicaDBInstanceIdentifiers", _ReadReplicaDBInstanceIdentifierList)
-
-	DBInstance_ReadReplicaDBClusterIdentifiers = DBInstance.AddMember("ReadReplicaDBClusterIdentifiers", _ReadReplicaDBClusterIdentifierList)
-
-	DBInstance_LicenseModel = DBInstance.AddMember("LicenseModel", _String)
-
-	DBInstance_Iops = DBInstance.AddMember("Iops", _IntegerOptional)
-
-	DBInstance_OptionGroupMemberships = DBInstance.AddMember("OptionGroupMemberships", _OptionGroupMembershipList)
-
-	DBInstance_CharacterSetName = DBInstance.AddMember("CharacterSetName", _String)
-
-	DBInstance_SecondaryAvailabilityZone = DBInstance.AddMember("SecondaryAvailabilityZone", _String)
-
-	DBInstance_PubliclyAccessible = DBInstance.AddMember("PubliclyAccessible", _Boolean)
-
-	DBInstance_StatusInfos = DBInstance.AddMember("StatusInfos", _DBInstanceStatusInfoList)
-
-	DBInstance_StorageType = DBInstance.AddMember("StorageType", _String)
-
-	DBInstance_TdeCredentialArn = DBInstance.AddMember("TdeCredentialArn", _String)
-
-	DBInstance_DbInstancePort = DBInstance.AddMember("DbInstancePort", _Integer)
-
-	DBInstance_DBClusterIdentifier = DBInstance.AddMember("DBClusterIdentifier", _String)
-
-	DBInstance_StorageEncrypted = DBInstance.AddMember("StorageEncrypted", _Boolean)
-
-	DBInstance_KmsKeyId = DBInstance.AddMember("KmsKeyId", _String)
-
-	DBInstance_DbiResourceId = DBInstance.AddMember("DbiResourceId", _String)
-
-	DBInstance_CACertificateIdentifier = DBInstance.AddMember("CACertificateIdentifier", _String)
-
-	DBInstance_DomainMemberships = DBInstance.AddMember("DomainMemberships", _DomainMembershipList)
-
-	DBInstance_CopyTagsToSnapshot = DBInstance.AddMember("CopyTagsToSnapshot", _Boolean)
-
-	DBInstance_MonitoringInterval = DBInstance.AddMember("MonitoringInterval", _IntegerOptional)
-
-	DBInstance_EnhancedMonitoringResourceArn = DBInstance.AddMember("EnhancedMonitoringResourceArn", _String)
-
-	DBInstance_MonitoringRoleArn = DBInstance.AddMember("MonitoringRoleArn", _String)
-
-	DBInstance_PromotionTier = DBInstance.AddMember("PromotionTier", _IntegerOptional)
-
-	DBInstance_DBInstanceArn = DBInstance.AddMember("DBInstanceArn", _String)
-
-	DBInstance_Timezone = DBInstance.AddMember("Timezone", _String)
-
-	DBInstance_IAMDatabaseAuthenticationEnabled = DBInstance.AddMember("IAMDatabaseAuthenticationEnabled", _Boolean)
-
-	DBInstance_PerformanceInsightsEnabled = DBInstance.AddMember("PerformanceInsightsEnabled", _BooleanOptional)
-
-	DBInstance_PerformanceInsightsKMSKeyId = DBInstance.AddMember("PerformanceInsightsKMSKeyId", _String)
-
-	DBInstance_EnabledCloudwatchLogsExports = DBInstance.AddMember("EnabledCloudwatchLogsExports", _LogTypeList)
-
-	DBInstance_DeletionProtection = DBInstance.AddMember("DeletionProtection", _BooleanOptional)
-
-	DBInstance_NetworkType = DBInstance.AddMember("NetworkType", _String)
-
-	DBInstanceAlreadyExistsFault_message = DBInstanceAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	_DBInstanceList_member = _DBInstanceList.AddMember("member", DBInstance, &smithytraits.XMLName{Name: "DBInstance"})
-
-	DBInstanceNotFoundFault_message = DBInstanceNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBParameterGroup_DBParameterGroupName = DBParameterGroup.AddMember("DBParameterGroupName", _String)
-
-	DBParameterGroup_DBParameterGroupFamily = DBParameterGroup.AddMember("DBParameterGroupFamily", _String)
-
-	DBParameterGroup_Description = DBParameterGroup.AddMember("Description", _String)
-
-	DBParameterGroup_DBParameterGroupArn = DBParameterGroup.AddMember("DBParameterGroupArn", _String)
-
-	DBParameterGroupAlreadyExistsFault_message = DBParameterGroupAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	_DBParameterGroupList_member = _DBParameterGroupList.AddMember("member", DBParameterGroup, &smithytraits.XMLName{Name: "DBParameterGroup"})
-
-	DBParameterGroupNotFoundFault_message = DBParameterGroupNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBParameterGroupQuotaExceededFault_message = DBParameterGroupQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	_DBSecurityGroupNameList_member = _DBSecurityGroupNameList.AddMember("member", _String, &smithytraits.XMLName{Name: "DBSecurityGroupName"})
-
-	DBSecurityGroupNotFoundFault_message = DBSecurityGroupNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBSnapshotAlreadyExistsFault_message = DBSnapshotAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	DBSnapshotNotFoundFault_message = DBSnapshotNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBSubnetGroupAlreadyExistsFault_message = DBSubnetGroupAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	DBSubnetGroupDoesNotCoverEnoughAZs_message = DBSubnetGroupDoesNotCoverEnoughAZs.AddMember("message", _ExceptionMessage)
-
-	DBSubnetGroupNotFoundFault_message = DBSubnetGroupNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DBSubnetGroupQuotaExceededFault_message = DBSubnetGroupQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	_DBSubnetGroups_member = _DBSubnetGroups.AddMember("member", DBSubnetGroup, &smithytraits.XMLName{Name: "DBSubnetGroup"})
-
-	DBSubnetQuotaExceededFault_message = DBSubnetQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	DBUpgradeDependencyFailureFault_message = DBUpgradeDependencyFailureFault.AddMember("message", _ExceptionMessage)
-
-	DomainNotFoundFault_message = DomainNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	DoubleRange_From = DoubleRange.AddMember("From", _Double)
-
-	DoubleRange_To = DoubleRange.AddMember("To", _Double)
-
-	_DoubleRangeList_member = _DoubleRangeList.AddMember("member", DoubleRange, &smithytraits.XMLName{Name: "DoubleRange"})
-
-	Parameter_ParameterName = Parameter.AddMember("ParameterName", _String)
-
-	Parameter_ParameterValue = Parameter.AddMember("ParameterValue", _String)
-
-	Parameter_Description = Parameter.AddMember("Description", _String)
-
-	Parameter_Source = Parameter.AddMember("Source", _String)
-
-	Parameter_ApplyType = Parameter.AddMember("ApplyType", _String)
-
-	Parameter_DataType = Parameter.AddMember("DataType", _String)
-
-	Parameter_AllowedValues = Parameter.AddMember("AllowedValues", _String)
-
-	Parameter_IsModifiable = Parameter.AddMember("IsModifiable", _Boolean)
-
-	Parameter_MinimumEngineVersion = Parameter.AddMember("MinimumEngineVersion", _String)
-
-	Parameter_ApplyMethod = Parameter.AddMember("ApplyMethod", ApplyMethod)
-
-	_ParametersList_member = _ParametersList.AddMember("member", Parameter, &smithytraits.XMLName{Name: "Parameter"})
-
-	EngineDefaults_DBParameterGroupFamily = EngineDefaults.AddMember("DBParameterGroupFamily", _String)
-
-	EngineDefaults_Marker = EngineDefaults.AddMember("Marker", _String)
-
-	EngineDefaults_Parameters = EngineDefaults.AddMember("Parameters", _ParametersList)
-
-	SourceType_db_instance = SourceType.AddMember("db_instance", smithyprelude.Unit)
-
-	SourceType_db_parameter_group = SourceType.AddMember("db_parameter_group", smithyprelude.Unit)
-
-	SourceType_db_security_group = SourceType.AddMember("db_security_group", smithyprelude.Unit)
-
-	SourceType_db_snapshot = SourceType.AddMember("db_snapshot", smithyprelude.Unit)
-
-	SourceType_db_cluster = SourceType.AddMember("db_cluster", smithyprelude.Unit)
-
-	SourceType_db_cluster_snapshot = SourceType.AddMember("db_cluster_snapshot", smithyprelude.Unit)
-
-	_EventCategoriesList_member = _EventCategoriesList.AddMember("member", _String, &smithytraits.XMLName{Name: "EventCategory"})
-
-	Event_SourceIdentifier = Event.AddMember("SourceIdentifier", _String)
-
-	Event_SourceType = Event.AddMember("SourceType", SourceType)
-
-	Event_Message = Event.AddMember("Message", _String)
-
-	Event_EventCategories = Event.AddMember("EventCategories", _EventCategoriesList)
-
-	Event_Date = Event.AddMember("Date", _TStamp)
-
-	Event_SourceArn = Event.AddMember("SourceArn", _String)
-
-	EventCategoriesMap_SourceType = EventCategoriesMap.AddMember("SourceType", _String)
-
-	EventCategoriesMap_EventCategories = EventCategoriesMap.AddMember("EventCategories", _EventCategoriesList)
-
-	_EventCategoriesMapList_member = _EventCategoriesMapList.AddMember("member", EventCategoriesMap, &smithytraits.XMLName{Name: "EventCategoriesMap"})
-
-	_EventList_member = _EventList.AddMember("member", Event, &smithytraits.XMLName{Name: "Event"})
-
-	_SourceIdsList_member = _SourceIdsList.AddMember("member", _String, &smithytraits.XMLName{Name: "SourceId"})
-
-	EventSubscription_CustomerAwsId = EventSubscription.AddMember("CustomerAwsId", _String)
-
-	EventSubscription_CustSubscriptionId = EventSubscription.AddMember("CustSubscriptionId", _String)
-
-	EventSubscription_SnsTopicArn = EventSubscription.AddMember("SnsTopicArn", _String)
-
-	EventSubscription_Status = EventSubscription.AddMember("Status", _String)
-
-	EventSubscription_SubscriptionCreationTime = EventSubscription.AddMember("SubscriptionCreationTime", _String)
-
-	EventSubscription_SourceType = EventSubscription.AddMember("SourceType", _String)
-
-	EventSubscription_SourceIdsList = EventSubscription.AddMember("SourceIdsList", _SourceIdsList)
-
-	EventSubscription_EventCategoriesList = EventSubscription.AddMember("EventCategoriesList", _EventCategoriesList)
-
-	EventSubscription_Enabled = EventSubscription.AddMember("Enabled", _Boolean)
-
-	EventSubscription_EventSubscriptionArn = EventSubscription.AddMember("EventSubscriptionArn", _String)
-
-	EventSubscriptionQuotaExceededFault_message = EventSubscriptionQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	_EventSubscriptionsList_member = _EventSubscriptionsList.AddMember("member", EventSubscription, &smithytraits.XMLName{Name: "EventSubscription"})
-
-	FailoverStatus_PENDING = FailoverStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	FailoverStatus_FAILING_OVER = FailoverStatus.AddMember("FAILING_OVER", smithyprelude.Unit)
-
-	FailoverStatus_CANCELLING = FailoverStatus.AddMember("CANCELLING", smithyprelude.Unit)
-
-	FailoverState_Status = FailoverState.AddMember("Status", FailoverStatus)
-
-	FailoverState_FromDbClusterArn = FailoverState.AddMember("FromDbClusterArn", _String)
-
-	FailoverState_ToDbClusterArn = FailoverState.AddMember("ToDbClusterArn", _String)
-
-	FailoverState_IsDataLossAllowed = FailoverState.AddMember("IsDataLossAllowed", _Boolean)
-
-	_FilterValueList_member = _FilterValueList.AddMember("member", _String, &smithytraits.XMLName{Name: "Value"})
-
-	Filter_Name = Filter.AddMember("Name", _String)
-
-	Filter_Values = Filter.AddMember("Values", _FilterValueList)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter, &smithytraits.XMLName{Name: "Filter"})
-
-	_ReadersArnList_member = _ReadersArnList.AddMember("member", _String)
-
-	GlobalClusterMember_DBClusterArn = GlobalClusterMember.AddMember("DBClusterArn", _String)
-
-	GlobalClusterMember_Readers = GlobalClusterMember.AddMember("Readers", _ReadersArnList)
-
-	GlobalClusterMember_IsWriter = GlobalClusterMember.AddMember("IsWriter", _Boolean)
-
-	_GlobalClusterMemberList_member = _GlobalClusterMemberList.AddMember("member", GlobalClusterMember, &smithytraits.XMLName{Name: "GlobalClusterMember"})
-
-	Tag_Key = Tag.AddMember("Key", _String)
-
-	Tag_Value = Tag.AddMember("Value", _String)
-
-	_TagList_member = _TagList.AddMember("member", Tag, &smithytraits.XMLName{Name: "Tag"})
-
-	GlobalCluster_GlobalClusterIdentifier = GlobalCluster.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	GlobalCluster_GlobalClusterResourceId = GlobalCluster.AddMember("GlobalClusterResourceId", _String)
-
-	GlobalCluster_GlobalClusterArn = GlobalCluster.AddMember("GlobalClusterArn", _String)
-
-	GlobalCluster_Status = GlobalCluster.AddMember("Status", _String)
-
-	GlobalCluster_Engine = GlobalCluster.AddMember("Engine", _String)
-
-	GlobalCluster_EngineVersion = GlobalCluster.AddMember("EngineVersion", _String)
-
-	GlobalCluster_DatabaseName = GlobalCluster.AddMember("DatabaseName", _String)
-
-	GlobalCluster_StorageEncrypted = GlobalCluster.AddMember("StorageEncrypted", _BooleanOptional)
-
-	GlobalCluster_DeletionProtection = GlobalCluster.AddMember("DeletionProtection", _BooleanOptional)
-
-	GlobalCluster_GlobalClusterMembers = GlobalCluster.AddMember("GlobalClusterMembers", _GlobalClusterMemberList)
-
-	GlobalCluster_FailoverState = GlobalCluster.AddMember("FailoverState", FailoverState)
-
-	GlobalCluster_TagList = GlobalCluster.AddMember("TagList", _TagList)
-
-	GlobalClusterAlreadyExistsFault_message = GlobalClusterAlreadyExistsFault.AddMember("message", _ExceptionMessage)
-
-	_GlobalClusterList_member = _GlobalClusterList.AddMember("member", GlobalCluster, &smithytraits.XMLName{Name: "GlobalClusterMember"})
-
-	GlobalClusterNotFoundFault_message = GlobalClusterNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	GlobalClusterQuotaExceededFault_message = GlobalClusterQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	InstanceQuotaExceededFault_message = InstanceQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	InsufficientDBClusterCapacityFault_message = InsufficientDBClusterCapacityFault.AddMember("message", _ExceptionMessage)
-
-	InsufficientDBInstanceCapacityFault_message = InsufficientDBInstanceCapacityFault.AddMember("message", _ExceptionMessage)
-
-	InsufficientStorageClusterCapacityFault_message = InsufficientStorageClusterCapacityFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBClusterEndpointStateFault_message = InvalidDBClusterEndpointStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBClusterSnapshotStateFault_message = InvalidDBClusterSnapshotStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBClusterStateFault_message = InvalidDBClusterStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBInstanceStateFault_message = InvalidDBInstanceStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBParameterGroupStateFault_message = InvalidDBParameterGroupStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBSecurityGroupStateFault_message = InvalidDBSecurityGroupStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBSnapshotStateFault_message = InvalidDBSnapshotStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBSubnetGroupStateFault_message = InvalidDBSubnetGroupStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidDBSubnetStateFault_message = InvalidDBSubnetStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidEventSubscriptionStateFault_message = InvalidEventSubscriptionStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidGlobalClusterStateFault_message = InvalidGlobalClusterStateFault.AddMember("message", _ExceptionMessage)
-
-	InvalidRestoreFault_message = InvalidRestoreFault.AddMember("message", _ExceptionMessage)
-
-	InvalidSubnet_message = InvalidSubnet.AddMember("message", _ExceptionMessage)
-
-	InvalidVPCNetworkStateFault_message = InvalidVPCNetworkStateFault.AddMember("message", _ExceptionMessage)
-
-	_KeyList_member = _KeyList.AddMember("member", _String)
-
-	KMSKeyNotAccessibleFault_message = KMSKeyNotAccessibleFault.AddMember("message", _ExceptionMessage)
-
-	NetworkTypeNotSupportedFault_message = NetworkTypeNotSupportedFault.AddMember("message", _ExceptionMessage)
-
-	OptionGroupNotFoundFault_message = OptionGroupNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	OrderableDBInstanceOption_Engine = OrderableDBInstanceOption.AddMember("Engine", _String)
-
-	OrderableDBInstanceOption_EngineVersion = OrderableDBInstanceOption.AddMember("EngineVersion", _String)
-
-	OrderableDBInstanceOption_DBInstanceClass = OrderableDBInstanceOption.AddMember("DBInstanceClass", _String)
-
-	OrderableDBInstanceOption_LicenseModel = OrderableDBInstanceOption.AddMember("LicenseModel", _String)
-
-	OrderableDBInstanceOption_AvailabilityZones = OrderableDBInstanceOption.AddMember("AvailabilityZones", _AvailabilityZoneList)
-
-	OrderableDBInstanceOption_MultiAZCapable = OrderableDBInstanceOption.AddMember("MultiAZCapable", _Boolean)
-
-	OrderableDBInstanceOption_ReadReplicaCapable = OrderableDBInstanceOption.AddMember("ReadReplicaCapable", _Boolean)
-
-	OrderableDBInstanceOption_Vpc = OrderableDBInstanceOption.AddMember("Vpc", _Boolean)
-
-	OrderableDBInstanceOption_SupportsStorageEncryption = OrderableDBInstanceOption.AddMember("SupportsStorageEncryption", _Boolean)
-
-	OrderableDBInstanceOption_StorageType = OrderableDBInstanceOption.AddMember("StorageType", _String)
-
-	OrderableDBInstanceOption_SupportsIops = OrderableDBInstanceOption.AddMember("SupportsIops", _Boolean)
-
-	OrderableDBInstanceOption_SupportsEnhancedMonitoring = OrderableDBInstanceOption.AddMember("SupportsEnhancedMonitoring", _Boolean)
-
-	OrderableDBInstanceOption_SupportsIAMDatabaseAuthentication = OrderableDBInstanceOption.AddMember("SupportsIAMDatabaseAuthentication", _Boolean)
-
-	OrderableDBInstanceOption_SupportsPerformanceInsights = OrderableDBInstanceOption.AddMember("SupportsPerformanceInsights", _Boolean)
-
-	OrderableDBInstanceOption_MinStorageSize = OrderableDBInstanceOption.AddMember("MinStorageSize", _IntegerOptional)
-
-	OrderableDBInstanceOption_MaxStorageSize = OrderableDBInstanceOption.AddMember("MaxStorageSize", _IntegerOptional)
-
-	OrderableDBInstanceOption_MinIopsPerDbInstance = OrderableDBInstanceOption.AddMember("MinIopsPerDbInstance", _IntegerOptional)
-
-	OrderableDBInstanceOption_MaxIopsPerDbInstance = OrderableDBInstanceOption.AddMember("MaxIopsPerDbInstance", _IntegerOptional)
-
-	OrderableDBInstanceOption_MinIopsPerGib = OrderableDBInstanceOption.AddMember("MinIopsPerGib", _DoubleOptional)
-
-	OrderableDBInstanceOption_MaxIopsPerGib = OrderableDBInstanceOption.AddMember("MaxIopsPerGib", _DoubleOptional)
-
-	OrderableDBInstanceOption_SupportsGlobalDatabases = OrderableDBInstanceOption.AddMember("SupportsGlobalDatabases", _Boolean)
-
-	OrderableDBInstanceOption_SupportedNetworkTypes = OrderableDBInstanceOption.AddMember("SupportedNetworkTypes", _StringList)
-
-	_OrderableDBInstanceOptionsList_member = _OrderableDBInstanceOptionsList.AddMember("member", OrderableDBInstanceOption, &smithytraits.XMLName{Name: "OrderableDBInstanceOption"})
-
-	PendingMaintenanceAction_Action = PendingMaintenanceAction.AddMember("Action", _String)
-
-	PendingMaintenanceAction_AutoAppliedAfterDate = PendingMaintenanceAction.AddMember("AutoAppliedAfterDate", _TStamp)
-
-	PendingMaintenanceAction_ForcedApplyDate = PendingMaintenanceAction.AddMember("ForcedApplyDate", _TStamp)
-
-	PendingMaintenanceAction_OptInStatus = PendingMaintenanceAction.AddMember("OptInStatus", _String)
-
-	PendingMaintenanceAction_CurrentApplyDate = PendingMaintenanceAction.AddMember("CurrentApplyDate", _TStamp)
-
-	PendingMaintenanceAction_Description = PendingMaintenanceAction.AddMember("Description", _String)
-
-	_PendingMaintenanceActionDetails_member = _PendingMaintenanceActionDetails.AddMember("member", PendingMaintenanceAction, &smithytraits.XMLName{Name: "PendingMaintenanceAction"})
-
-	ResourcePendingMaintenanceActions_ResourceIdentifier = ResourcePendingMaintenanceActions.AddMember("ResourceIdentifier", _String)
-
-	ResourcePendingMaintenanceActions_PendingMaintenanceActionDetails = ResourcePendingMaintenanceActions.AddMember("PendingMaintenanceActionDetails", _PendingMaintenanceActionDetails)
-
-	_PendingMaintenanceActions_member = _PendingMaintenanceActions.AddMember("member", ResourcePendingMaintenanceActions, &smithytraits.XMLName{Name: "ResourcePendingMaintenanceActions"})
-
-	ProvisionedIopsNotAvailableInAZFault_message = ProvisionedIopsNotAvailableInAZFault.AddMember("message", _ExceptionMessage)
-
-	Range_From = Range.AddMember("From", _Integer)
-
-	Range_To = Range.AddMember("To", _Integer)
-
-	Range_Step = Range.AddMember("Step", _IntegerOptional)
-
-	_RangeList_member = _RangeList.AddMember("member", Range, &smithytraits.XMLName{Name: "Range"})
-
-	ResourceNotFoundFault_message = ResourceNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	ServerlessV2ScalingConfiguration_MinCapacity = ServerlessV2ScalingConfiguration.AddMember("MinCapacity", _DoubleOptional)
-
-	ServerlessV2ScalingConfiguration_MaxCapacity = ServerlessV2ScalingConfiguration.AddMember("MaxCapacity", _DoubleOptional)
-
-	SharedSnapshotQuotaExceededFault_message = SharedSnapshotQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	SnapshotQuotaExceededFault_message = SnapshotQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	SNSInvalidTopicFault_message = SNSInvalidTopicFault.AddMember("message", _ExceptionMessage)
-
-	SNSNoAuthorizationFault_message = SNSNoAuthorizationFault.AddMember("message", _ExceptionMessage)
-
-	SNSTopicArnNotFoundFault_message = SNSTopicArnNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	SourceNotFoundFault_message = SourceNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	StorageQuotaExceededFault_message = StorageQuotaExceededFault.AddMember("message", _ExceptionMessage)
-
-	StorageTypeNotSupportedFault_message = StorageTypeNotSupportedFault.AddMember("message", _ExceptionMessage)
-
-	SubnetAlreadyInUse_message = SubnetAlreadyInUse.AddMember("message", _ExceptionMessage)
-
-	_SubnetIdentifierList_member = _SubnetIdentifierList.AddMember("member", _String, &smithytraits.XMLName{Name: "SubnetIdentifier"})
-
-	SubscriptionAlreadyExistFault_message = SubscriptionAlreadyExistFault.AddMember("message", _ExceptionMessage)
-
-	SubscriptionCategoryNotFoundFault_message = SubscriptionCategoryNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	SubscriptionNotFoundFault_message = SubscriptionNotFoundFault.AddMember("message", _ExceptionMessage)
-
-	ValidStorageOptions_StorageType = ValidStorageOptions.AddMember("StorageType", _String)
-
-	ValidStorageOptions_StorageSize = ValidStorageOptions.AddMember("StorageSize", _RangeList)
-
-	ValidStorageOptions_ProvisionedIops = ValidStorageOptions.AddMember("ProvisionedIops", _RangeList)
-
-	ValidStorageOptions_IopsToStorageRatio = ValidStorageOptions.AddMember("IopsToStorageRatio", _DoubleRangeList)
-
-	_ValidStorageOptionsList_member = _ValidStorageOptionsList.AddMember("member", ValidStorageOptions, &smithytraits.XMLName{Name: "ValidStorageOptions"})
-
-	ValidDBInstanceModificationsMessage_Storage = ValidDBInstanceModificationsMessage.AddMember("Storage", _ValidStorageOptionsList)
-
-	_VpcSecurityGroupIdList_member = _VpcSecurityGroupIdList.AddMember("member", _String, &smithytraits.XMLName{Name: "VpcSecurityGroupId"})
-
-	AddRoleToDBClusterMessage_DBClusterIdentifier = AddRoleToDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	AddRoleToDBClusterMessage_RoleArn = AddRoleToDBClusterMessage.AddMember("RoleArn", _String)
-
-	AddRoleToDBClusterMessage_FeatureName = AddRoleToDBClusterMessage.AddMember("FeatureName", _String)
-
-	AddSourceIdentifierToSubscriptionMessage_SubscriptionName = AddSourceIdentifierToSubscriptionMessage.AddMember("SubscriptionName", _String)
-
-	AddSourceIdentifierToSubscriptionMessage_SourceIdentifier = AddSourceIdentifierToSubscriptionMessage.AddMember("SourceIdentifier", _String)
-
-	AddSourceIdentifierToSubscriptionResult_EventSubscription = AddSourceIdentifierToSubscriptionResult.AddMember("EventSubscription", EventSubscription)
-
-	AddTagsToResourceMessage_ResourceName = AddTagsToResourceMessage.AddMember("ResourceName", _String)
-
-	AddTagsToResourceMessage_Tags = AddTagsToResourceMessage.AddMember("Tags", _TagList)
-
-	ApplyPendingMaintenanceActionMessage_ResourceIdentifier = ApplyPendingMaintenanceActionMessage.AddMember("ResourceIdentifier", _String)
-
-	ApplyPendingMaintenanceActionMessage_ApplyAction = ApplyPendingMaintenanceActionMessage.AddMember("ApplyAction", _String)
-
-	ApplyPendingMaintenanceActionMessage_OptInType = ApplyPendingMaintenanceActionMessage.AddMember("OptInType", _String)
-
-	ApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions = ApplyPendingMaintenanceActionResult.AddMember("ResourcePendingMaintenanceActions", ResourcePendingMaintenanceActions)
-
-	CopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier = CopyDBClusterParameterGroupMessage.AddMember("SourceDBClusterParameterGroupIdentifier", _String)
-
-	CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier = CopyDBClusterParameterGroupMessage.AddMember("TargetDBClusterParameterGroupIdentifier", _String)
-
-	CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription = CopyDBClusterParameterGroupMessage.AddMember("TargetDBClusterParameterGroupDescription", _String)
-
-	CopyDBClusterParameterGroupMessage_Tags = CopyDBClusterParameterGroupMessage.AddMember("Tags", _TagList)
-
-	CopyDBClusterParameterGroupResult_DBClusterParameterGroup = CopyDBClusterParameterGroupResult.AddMember("DBClusterParameterGroup", DBClusterParameterGroup)
-
-	CopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier = CopyDBClusterSnapshotMessage.AddMember("SourceDBClusterSnapshotIdentifier", _String)
-
-	CopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier = CopyDBClusterSnapshotMessage.AddMember("TargetDBClusterSnapshotIdentifier", _String)
-
-	CopyDBClusterSnapshotMessage_KmsKeyId = CopyDBClusterSnapshotMessage.AddMember("KmsKeyId", _String)
-
-	CopyDBClusterSnapshotMessage_PreSignedUrl = CopyDBClusterSnapshotMessage.AddMember("PreSignedUrl", _String)
-
-	CopyDBClusterSnapshotMessage_CopyTags = CopyDBClusterSnapshotMessage.AddMember("CopyTags", _BooleanOptional)
-
-	CopyDBClusterSnapshotMessage_Tags = CopyDBClusterSnapshotMessage.AddMember("Tags", _TagList)
-
-	CopyDBClusterSnapshotMessage_SourceRegion = CopyDBClusterSnapshotMessage.AddMember("SourceRegion", smithyprelude.String)
-
-	CopyDBClusterSnapshotMessage_DestinationRegion = CopyDBClusterSnapshotMessage.AddMember("DestinationRegion", smithyprelude.String)
-
-	CopyDBClusterSnapshotResult_DBClusterSnapshot = CopyDBClusterSnapshotResult.AddMember("DBClusterSnapshot", DBClusterSnapshot)
-
-	CopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier = CopyDBParameterGroupMessage.AddMember("SourceDBParameterGroupIdentifier", _String)
-
-	CopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier = CopyDBParameterGroupMessage.AddMember("TargetDBParameterGroupIdentifier", _String)
-
-	CopyDBParameterGroupMessage_TargetDBParameterGroupDescription = CopyDBParameterGroupMessage.AddMember("TargetDBParameterGroupDescription", _String)
-
-	CopyDBParameterGroupMessage_Tags = CopyDBParameterGroupMessage.AddMember("Tags", _TagList)
-
-	CopyDBParameterGroupResult_DBParameterGroup = CopyDBParameterGroupResult.AddMember("DBParameterGroup", DBParameterGroup)
-
-	CreateDBClusterEndpointMessage_DBClusterIdentifier = CreateDBClusterEndpointMessage.AddMember("DBClusterIdentifier", _String)
-
-	CreateDBClusterEndpointMessage_DBClusterEndpointIdentifier = CreateDBClusterEndpointMessage.AddMember("DBClusterEndpointIdentifier", _String)
-
-	CreateDBClusterEndpointMessage_EndpointType = CreateDBClusterEndpointMessage.AddMember("EndpointType", _String)
-
-	CreateDBClusterEndpointMessage_StaticMembers = CreateDBClusterEndpointMessage.AddMember("StaticMembers", _StringList)
-
-	CreateDBClusterEndpointMessage_ExcludedMembers = CreateDBClusterEndpointMessage.AddMember("ExcludedMembers", _StringList)
-
-	CreateDBClusterEndpointMessage_Tags = CreateDBClusterEndpointMessage.AddMember("Tags", _TagList)
-
-	CreateDBClusterEndpointOutput_DBClusterEndpointIdentifier = CreateDBClusterEndpointOutput.AddMember("DBClusterEndpointIdentifier", _String)
-
-	CreateDBClusterEndpointOutput_DBClusterIdentifier = CreateDBClusterEndpointOutput.AddMember("DBClusterIdentifier", _String)
-
-	CreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = CreateDBClusterEndpointOutput.AddMember("DBClusterEndpointResourceIdentifier", _String)
-
-	CreateDBClusterEndpointOutput_Endpoint = CreateDBClusterEndpointOutput.AddMember("Endpoint", _String)
-
-	CreateDBClusterEndpointOutput_Status = CreateDBClusterEndpointOutput.AddMember("Status", _String)
-
-	CreateDBClusterEndpointOutput_EndpointType = CreateDBClusterEndpointOutput.AddMember("EndpointType", _String)
-
-	CreateDBClusterEndpointOutput_CustomEndpointType = CreateDBClusterEndpointOutput.AddMember("CustomEndpointType", _String)
-
-	CreateDBClusterEndpointOutput_StaticMembers = CreateDBClusterEndpointOutput.AddMember("StaticMembers", _StringList)
-
-	CreateDBClusterEndpointOutput_ExcludedMembers = CreateDBClusterEndpointOutput.AddMember("ExcludedMembers", _StringList)
-
-	CreateDBClusterEndpointOutput_DBClusterEndpointArn = CreateDBClusterEndpointOutput.AddMember("DBClusterEndpointArn", _String)
-
-	CreateDBClusterMessage_AvailabilityZones = CreateDBClusterMessage.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	CreateDBClusterMessage_BackupRetentionPeriod = CreateDBClusterMessage.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	CreateDBClusterMessage_CharacterSetName = CreateDBClusterMessage.AddMember("CharacterSetName", _String)
-
-	CreateDBClusterMessage_CopyTagsToSnapshot = CreateDBClusterMessage.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	CreateDBClusterMessage_DatabaseName = CreateDBClusterMessage.AddMember("DatabaseName", _String)
-
-	CreateDBClusterMessage_DBClusterIdentifier = CreateDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	CreateDBClusterMessage_DBClusterParameterGroupName = CreateDBClusterMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	CreateDBClusterMessage_VpcSecurityGroupIds = CreateDBClusterMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	CreateDBClusterMessage_DBSubnetGroupName = CreateDBClusterMessage.AddMember("DBSubnetGroupName", _String)
-
-	CreateDBClusterMessage_Engine = CreateDBClusterMessage.AddMember("Engine", _String)
-
-	CreateDBClusterMessage_EngineVersion = CreateDBClusterMessage.AddMember("EngineVersion", _String)
-
-	CreateDBClusterMessage_Port = CreateDBClusterMessage.AddMember("Port", _IntegerOptional)
-
-	CreateDBClusterMessage_MasterUsername = CreateDBClusterMessage.AddMember("MasterUsername", _String)
-
-	CreateDBClusterMessage_MasterUserPassword = CreateDBClusterMessage.AddMember("MasterUserPassword", _String)
-
-	CreateDBClusterMessage_OptionGroupName = CreateDBClusterMessage.AddMember("OptionGroupName", _String)
-
-	CreateDBClusterMessage_PreferredBackupWindow = CreateDBClusterMessage.AddMember("PreferredBackupWindow", _String)
-
-	CreateDBClusterMessage_PreferredMaintenanceWindow = CreateDBClusterMessage.AddMember("PreferredMaintenanceWindow", _String)
-
-	CreateDBClusterMessage_ReplicationSourceIdentifier = CreateDBClusterMessage.AddMember("ReplicationSourceIdentifier", _String)
-
-	CreateDBClusterMessage_Tags = CreateDBClusterMessage.AddMember("Tags", _TagList)
-
-	CreateDBClusterMessage_StorageEncrypted = CreateDBClusterMessage.AddMember("StorageEncrypted", _BooleanOptional)
-
-	CreateDBClusterMessage_KmsKeyId = CreateDBClusterMessage.AddMember("KmsKeyId", _String)
-
-	CreateDBClusterMessage_PreSignedUrl = CreateDBClusterMessage.AddMember("PreSignedUrl", _String)
-
-	CreateDBClusterMessage_EnableIAMDatabaseAuthentication = CreateDBClusterMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	CreateDBClusterMessage_EnableCloudwatchLogsExports = CreateDBClusterMessage.AddMember("EnableCloudwatchLogsExports", _LogTypeList)
-
-	CreateDBClusterMessage_DeletionProtection = CreateDBClusterMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	CreateDBClusterMessage_ServerlessV2ScalingConfiguration = CreateDBClusterMessage.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfiguration)
-
-	CreateDBClusterMessage_GlobalClusterIdentifier = CreateDBClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	CreateDBClusterMessage_StorageType = CreateDBClusterMessage.AddMember("StorageType", _String)
-
-	CreateDBClusterMessage_NetworkType = CreateDBClusterMessage.AddMember("NetworkType", _String)
-
-	CreateDBClusterMessage_SourceRegion = CreateDBClusterMessage.AddMember("SourceRegion", smithyprelude.String)
-
-	CreateDBClusterMessage_DestinationRegion = CreateDBClusterMessage.AddMember("DestinationRegion", smithyprelude.String)
-
-	CreateDBClusterResult_DBCluster = CreateDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	CreateDBClusterParameterGroupMessage_DBClusterParameterGroupName = CreateDBClusterParameterGroupMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	CreateDBClusterParameterGroupMessage_DBParameterGroupFamily = CreateDBClusterParameterGroupMessage.AddMember("DBParameterGroupFamily", _String)
-
-	CreateDBClusterParameterGroupMessage_Description = CreateDBClusterParameterGroupMessage.AddMember("Description", _String)
-
-	CreateDBClusterParameterGroupMessage_Tags = CreateDBClusterParameterGroupMessage.AddMember("Tags", _TagList)
-
-	CreateDBClusterParameterGroupResult_DBClusterParameterGroup = CreateDBClusterParameterGroupResult.AddMember("DBClusterParameterGroup", DBClusterParameterGroup)
-
-	CreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = CreateDBClusterSnapshotMessage.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	CreateDBClusterSnapshotMessage_DBClusterIdentifier = CreateDBClusterSnapshotMessage.AddMember("DBClusterIdentifier", _String)
-
-	CreateDBClusterSnapshotMessage_Tags = CreateDBClusterSnapshotMessage.AddMember("Tags", _TagList)
-
-	CreateDBClusterSnapshotResult_DBClusterSnapshot = CreateDBClusterSnapshotResult.AddMember("DBClusterSnapshot", DBClusterSnapshot)
-
-	CreateDBInstanceMessage_DBName = CreateDBInstanceMessage.AddMember("DBName", _String)
-
-	CreateDBInstanceMessage_DBInstanceIdentifier = CreateDBInstanceMessage.AddMember("DBInstanceIdentifier", _String)
-
-	CreateDBInstanceMessage_AllocatedStorage = CreateDBInstanceMessage.AddMember("AllocatedStorage", _IntegerOptional)
-
-	CreateDBInstanceMessage_DBInstanceClass = CreateDBInstanceMessage.AddMember("DBInstanceClass", _String)
-
-	CreateDBInstanceMessage_Engine = CreateDBInstanceMessage.AddMember("Engine", _String)
-
-	CreateDBInstanceMessage_MasterUsername = CreateDBInstanceMessage.AddMember("MasterUsername", _String)
-
-	CreateDBInstanceMessage_MasterUserPassword = CreateDBInstanceMessage.AddMember("MasterUserPassword", _String)
-
-	CreateDBInstanceMessage_DBSecurityGroups = CreateDBInstanceMessage.AddMember("DBSecurityGroups", _DBSecurityGroupNameList)
-
-	CreateDBInstanceMessage_VpcSecurityGroupIds = CreateDBInstanceMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	CreateDBInstanceMessage_AvailabilityZone = CreateDBInstanceMessage.AddMember("AvailabilityZone", _String)
-
-	CreateDBInstanceMessage_DBSubnetGroupName = CreateDBInstanceMessage.AddMember("DBSubnetGroupName", _String)
-
-	CreateDBInstanceMessage_PreferredMaintenanceWindow = CreateDBInstanceMessage.AddMember("PreferredMaintenanceWindow", _String)
-
-	CreateDBInstanceMessage_DBParameterGroupName = CreateDBInstanceMessage.AddMember("DBParameterGroupName", _String)
-
-	CreateDBInstanceMessage_BackupRetentionPeriod = CreateDBInstanceMessage.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	CreateDBInstanceMessage_PreferredBackupWindow = CreateDBInstanceMessage.AddMember("PreferredBackupWindow", _String)
-
-	CreateDBInstanceMessage_Port = CreateDBInstanceMessage.AddMember("Port", _IntegerOptional)
-
-	CreateDBInstanceMessage_MultiAZ = CreateDBInstanceMessage.AddMember("MultiAZ", _BooleanOptional)
-
-	CreateDBInstanceMessage_EngineVersion = CreateDBInstanceMessage.AddMember("EngineVersion", _String)
-
-	CreateDBInstanceMessage_AutoMinorVersionUpgrade = CreateDBInstanceMessage.AddMember("AutoMinorVersionUpgrade", _BooleanOptional)
-
-	CreateDBInstanceMessage_LicenseModel = CreateDBInstanceMessage.AddMember("LicenseModel", _String)
-
-	CreateDBInstanceMessage_Iops = CreateDBInstanceMessage.AddMember("Iops", _IntegerOptional)
-
-	CreateDBInstanceMessage_OptionGroupName = CreateDBInstanceMessage.AddMember("OptionGroupName", _String)
-
-	CreateDBInstanceMessage_CharacterSetName = CreateDBInstanceMessage.AddMember("CharacterSetName", _String)
-
-	CreateDBInstanceMessage_PubliclyAccessible = CreateDBInstanceMessage.AddMember("PubliclyAccessible", _BooleanOptional)
-
-	CreateDBInstanceMessage_Tags = CreateDBInstanceMessage.AddMember("Tags", _TagList)
-
-	CreateDBInstanceMessage_DBClusterIdentifier = CreateDBInstanceMessage.AddMember("DBClusterIdentifier", _String)
-
-	CreateDBInstanceMessage_StorageType = CreateDBInstanceMessage.AddMember("StorageType", _String)
-
-	CreateDBInstanceMessage_TdeCredentialArn = CreateDBInstanceMessage.AddMember("TdeCredentialArn", _String)
-
-	CreateDBInstanceMessage_TdeCredentialPassword = CreateDBInstanceMessage.AddMember("TdeCredentialPassword", _SensitiveString)
-
-	CreateDBInstanceMessage_StorageEncrypted = CreateDBInstanceMessage.AddMember("StorageEncrypted", _BooleanOptional)
-
-	CreateDBInstanceMessage_KmsKeyId = CreateDBInstanceMessage.AddMember("KmsKeyId", _String)
-
-	CreateDBInstanceMessage_Domain = CreateDBInstanceMessage.AddMember("Domain", _String)
-
-	CreateDBInstanceMessage_CopyTagsToSnapshot = CreateDBInstanceMessage.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	CreateDBInstanceMessage_MonitoringInterval = CreateDBInstanceMessage.AddMember("MonitoringInterval", _IntegerOptional)
-
-	CreateDBInstanceMessage_MonitoringRoleArn = CreateDBInstanceMessage.AddMember("MonitoringRoleArn", _String)
-
-	CreateDBInstanceMessage_DomainIAMRoleName = CreateDBInstanceMessage.AddMember("DomainIAMRoleName", _String)
-
-	CreateDBInstanceMessage_PromotionTier = CreateDBInstanceMessage.AddMember("PromotionTier", _IntegerOptional)
-
-	CreateDBInstanceMessage_Timezone = CreateDBInstanceMessage.AddMember("Timezone", _String)
-
-	CreateDBInstanceMessage_EnableIAMDatabaseAuthentication = CreateDBInstanceMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	CreateDBInstanceMessage_EnablePerformanceInsights = CreateDBInstanceMessage.AddMember("EnablePerformanceInsights", _BooleanOptional)
-
-	CreateDBInstanceMessage_PerformanceInsightsKMSKeyId = CreateDBInstanceMessage.AddMember("PerformanceInsightsKMSKeyId", _String)
-
-	CreateDBInstanceMessage_EnableCloudwatchLogsExports = CreateDBInstanceMessage.AddMember("EnableCloudwatchLogsExports", _LogTypeList)
-
-	CreateDBInstanceMessage_DeletionProtection = CreateDBInstanceMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	CreateDBInstanceResult_DBInstance = CreateDBInstanceResult.AddMember("DBInstance", DBInstance)
-
-	CreateDBParameterGroupMessage_DBParameterGroupName = CreateDBParameterGroupMessage.AddMember("DBParameterGroupName", _String)
-
-	CreateDBParameterGroupMessage_DBParameterGroupFamily = CreateDBParameterGroupMessage.AddMember("DBParameterGroupFamily", _String)
-
-	CreateDBParameterGroupMessage_Description = CreateDBParameterGroupMessage.AddMember("Description", _String)
-
-	CreateDBParameterGroupMessage_Tags = CreateDBParameterGroupMessage.AddMember("Tags", _TagList)
-
-	CreateDBParameterGroupResult_DBParameterGroup = CreateDBParameterGroupResult.AddMember("DBParameterGroup", DBParameterGroup)
-
-	CreateDBSubnetGroupMessage_DBSubnetGroupName = CreateDBSubnetGroupMessage.AddMember("DBSubnetGroupName", _String)
-
-	CreateDBSubnetGroupMessage_DBSubnetGroupDescription = CreateDBSubnetGroupMessage.AddMember("DBSubnetGroupDescription", _String)
-
-	CreateDBSubnetGroupMessage_SubnetIds = CreateDBSubnetGroupMessage.AddMember("SubnetIds", _SubnetIdentifierList)
-
-	CreateDBSubnetGroupMessage_Tags = CreateDBSubnetGroupMessage.AddMember("Tags", _TagList)
-
-	CreateDBSubnetGroupResult_DBSubnetGroup = CreateDBSubnetGroupResult.AddMember("DBSubnetGroup", DBSubnetGroup)
-
-	CreateEventSubscriptionMessage_SubscriptionName = CreateEventSubscriptionMessage.AddMember("SubscriptionName", _String)
-
-	CreateEventSubscriptionMessage_SnsTopicArn = CreateEventSubscriptionMessage.AddMember("SnsTopicArn", _String)
-
-	CreateEventSubscriptionMessage_SourceType = CreateEventSubscriptionMessage.AddMember("SourceType", _String)
-
-	CreateEventSubscriptionMessage_EventCategories = CreateEventSubscriptionMessage.AddMember("EventCategories", _EventCategoriesList)
-
-	CreateEventSubscriptionMessage_SourceIds = CreateEventSubscriptionMessage.AddMember("SourceIds", _SourceIdsList)
-
-	CreateEventSubscriptionMessage_Enabled = CreateEventSubscriptionMessage.AddMember("Enabled", _BooleanOptional)
-
-	CreateEventSubscriptionMessage_Tags = CreateEventSubscriptionMessage.AddMember("Tags", _TagList)
-
-	CreateEventSubscriptionResult_EventSubscription = CreateEventSubscriptionResult.AddMember("EventSubscription", EventSubscription)
-
-	CreateGlobalClusterMessage_GlobalClusterIdentifier = CreateGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	CreateGlobalClusterMessage_SourceDBClusterIdentifier = CreateGlobalClusterMessage.AddMember("SourceDBClusterIdentifier", _String)
-
-	CreateGlobalClusterMessage_Engine = CreateGlobalClusterMessage.AddMember("Engine", _String)
-
-	CreateGlobalClusterMessage_EngineVersion = CreateGlobalClusterMessage.AddMember("EngineVersion", _String)
-
-	CreateGlobalClusterMessage_DeletionProtection = CreateGlobalClusterMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	CreateGlobalClusterMessage_DatabaseName = CreateGlobalClusterMessage.AddMember("DatabaseName", _String)
-
-	CreateGlobalClusterMessage_Tags = CreateGlobalClusterMessage.AddMember("Tags", _TagList)
-
-	CreateGlobalClusterMessage_StorageEncrypted = CreateGlobalClusterMessage.AddMember("StorageEncrypted", _BooleanOptional)
-
-	CreateGlobalClusterResult_GlobalCluster = CreateGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-	DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier = DeleteDBClusterEndpointMessage.AddMember("DBClusterEndpointIdentifier", _String)
-
-	DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier = DeleteDBClusterEndpointOutput.AddMember("DBClusterEndpointIdentifier", _String)
-
-	DeleteDBClusterEndpointOutput_DBClusterIdentifier = DeleteDBClusterEndpointOutput.AddMember("DBClusterIdentifier", _String)
-
-	DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = DeleteDBClusterEndpointOutput.AddMember("DBClusterEndpointResourceIdentifier", _String)
-
-	DeleteDBClusterEndpointOutput_Endpoint = DeleteDBClusterEndpointOutput.AddMember("Endpoint", _String)
-
-	DeleteDBClusterEndpointOutput_Status = DeleteDBClusterEndpointOutput.AddMember("Status", _String)
-
-	DeleteDBClusterEndpointOutput_EndpointType = DeleteDBClusterEndpointOutput.AddMember("EndpointType", _String)
-
-	DeleteDBClusterEndpointOutput_CustomEndpointType = DeleteDBClusterEndpointOutput.AddMember("CustomEndpointType", _String)
-
-	DeleteDBClusterEndpointOutput_StaticMembers = DeleteDBClusterEndpointOutput.AddMember("StaticMembers", _StringList)
-
-	DeleteDBClusterEndpointOutput_ExcludedMembers = DeleteDBClusterEndpointOutput.AddMember("ExcludedMembers", _StringList)
-
-	DeleteDBClusterEndpointOutput_DBClusterEndpointArn = DeleteDBClusterEndpointOutput.AddMember("DBClusterEndpointArn", _String)
-
-	DeleteDBClusterMessage_DBClusterIdentifier = DeleteDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	DeleteDBClusterMessage_SkipFinalSnapshot = DeleteDBClusterMessage.AddMember("SkipFinalSnapshot", _Boolean)
-
-	DeleteDBClusterMessage_FinalDBSnapshotIdentifier = DeleteDBClusterMessage.AddMember("FinalDBSnapshotIdentifier", _String)
-
-	DeleteDBClusterResult_DBCluster = DeleteDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	DeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName = DeleteDBClusterParameterGroupMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	DeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = DeleteDBClusterSnapshotMessage.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	DeleteDBClusterSnapshotResult_DBClusterSnapshot = DeleteDBClusterSnapshotResult.AddMember("DBClusterSnapshot", DBClusterSnapshot)
-
-	DeleteDBInstanceMessage_DBInstanceIdentifier = DeleteDBInstanceMessage.AddMember("DBInstanceIdentifier", _String)
-
-	DeleteDBInstanceMessage_SkipFinalSnapshot = DeleteDBInstanceMessage.AddMember("SkipFinalSnapshot", _Boolean)
-
-	DeleteDBInstanceMessage_FinalDBSnapshotIdentifier = DeleteDBInstanceMessage.AddMember("FinalDBSnapshotIdentifier", _String)
-
-	DeleteDBInstanceResult_DBInstance = DeleteDBInstanceResult.AddMember("DBInstance", DBInstance)
-
-	DeleteDBParameterGroupMessage_DBParameterGroupName = DeleteDBParameterGroupMessage.AddMember("DBParameterGroupName", _String)
-
-	DeleteDBSubnetGroupMessage_DBSubnetGroupName = DeleteDBSubnetGroupMessage.AddMember("DBSubnetGroupName", _String)
-
-	DeleteEventSubscriptionMessage_SubscriptionName = DeleteEventSubscriptionMessage.AddMember("SubscriptionName", _String)
-
-	DeleteEventSubscriptionResult_EventSubscription = DeleteEventSubscriptionResult.AddMember("EventSubscription", EventSubscription)
-
-	DeleteGlobalClusterMessage_GlobalClusterIdentifier = DeleteGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	DeleteGlobalClusterResult_GlobalCluster = DeleteGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-	DescribeDBClusterEndpointsMessage_DBClusterIdentifier = DescribeDBClusterEndpointsMessage.AddMember("DBClusterIdentifier", _String)
-
-	DescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier = DescribeDBClusterEndpointsMessage.AddMember("DBClusterEndpointIdentifier", _String)
-
-	DescribeDBClusterEndpointsMessage_Filters = DescribeDBClusterEndpointsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBClusterEndpointsMessage_MaxRecords = DescribeDBClusterEndpointsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBClusterEndpointsMessage_Marker = DescribeDBClusterEndpointsMessage.AddMember("Marker", _String)
-
-	DBClusterEndpointMessage_Marker = DBClusterEndpointMessage.AddMember("Marker", _String)
-
-	DBClusterEndpointMessage_DBClusterEndpoints = DBClusterEndpointMessage.AddMember("DBClusterEndpoints", _DBClusterEndpointList)
-
-	DescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName = DescribeDBClusterParameterGroupsMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	DescribeDBClusterParameterGroupsMessage_Filters = DescribeDBClusterParameterGroupsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBClusterParameterGroupsMessage_MaxRecords = DescribeDBClusterParameterGroupsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBClusterParameterGroupsMessage_Marker = DescribeDBClusterParameterGroupsMessage.AddMember("Marker", _String)
-
-	DBClusterParameterGroupsMessage_Marker = DBClusterParameterGroupsMessage.AddMember("Marker", _String)
-
-	DBClusterParameterGroupsMessage_DBClusterParameterGroups = DBClusterParameterGroupsMessage.AddMember("DBClusterParameterGroups", _DBClusterParameterGroupList)
-
-	DescribeDBClusterParametersMessage_DBClusterParameterGroupName = DescribeDBClusterParametersMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	DescribeDBClusterParametersMessage_Source = DescribeDBClusterParametersMessage.AddMember("Source", _String)
-
-	DescribeDBClusterParametersMessage_Filters = DescribeDBClusterParametersMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBClusterParametersMessage_MaxRecords = DescribeDBClusterParametersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBClusterParametersMessage_Marker = DescribeDBClusterParametersMessage.AddMember("Marker", _String)
-
-	DBClusterParameterGroupDetails_Parameters = DBClusterParameterGroupDetails.AddMember("Parameters", _ParametersList)
-
-	DBClusterParameterGroupDetails_Marker = DBClusterParameterGroupDetails.AddMember("Marker", _String)
-
-	DescribeDBClustersMessage_DBClusterIdentifier = DescribeDBClustersMessage.AddMember("DBClusterIdentifier", _String)
-
-	DescribeDBClustersMessage_Filters = DescribeDBClustersMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBClustersMessage_MaxRecords = DescribeDBClustersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBClustersMessage_Marker = DescribeDBClustersMessage.AddMember("Marker", _String)
-
-	DescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier = DescribeDBClusterSnapshotAttributesMessage.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult = DescribeDBClusterSnapshotAttributesResult.AddMember("DBClusterSnapshotAttributesResult", DBClusterSnapshotAttributesResult)
-
-	DescribeDBClusterSnapshotsMessage_DBClusterIdentifier = DescribeDBClusterSnapshotsMessage.AddMember("DBClusterIdentifier", _String)
-
-	DescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier = DescribeDBClusterSnapshotsMessage.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	DescribeDBClusterSnapshotsMessage_SnapshotType = DescribeDBClusterSnapshotsMessage.AddMember("SnapshotType", _String)
-
-	DescribeDBClusterSnapshotsMessage_Filters = DescribeDBClusterSnapshotsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBClusterSnapshotsMessage_MaxRecords = DescribeDBClusterSnapshotsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBClusterSnapshotsMessage_Marker = DescribeDBClusterSnapshotsMessage.AddMember("Marker", _String)
-
-	DescribeDBClusterSnapshotsMessage_IncludeShared = DescribeDBClusterSnapshotsMessage.AddMember("IncludeShared", _Boolean)
-
-	DescribeDBClusterSnapshotsMessage_IncludePublic = DescribeDBClusterSnapshotsMessage.AddMember("IncludePublic", _Boolean)
-
-	DBClusterSnapshotMessage_Marker = DBClusterSnapshotMessage.AddMember("Marker", _String)
-
-	DBClusterSnapshotMessage_DBClusterSnapshots = DBClusterSnapshotMessage.AddMember("DBClusterSnapshots", _DBClusterSnapshotList)
-
-	DBClusterMessage_Marker = DBClusterMessage.AddMember("Marker", _String)
-
-	DBClusterMessage_DBClusters = DBClusterMessage.AddMember("DBClusters", _DBClusterList)
-
-	DescribeDBEngineVersionsMessage_Engine = DescribeDBEngineVersionsMessage.AddMember("Engine", _String)
-
-	DescribeDBEngineVersionsMessage_EngineVersion = DescribeDBEngineVersionsMessage.AddMember("EngineVersion", _String)
-
-	DescribeDBEngineVersionsMessage_DBParameterGroupFamily = DescribeDBEngineVersionsMessage.AddMember("DBParameterGroupFamily", _String)
-
-	DescribeDBEngineVersionsMessage_Filters = DescribeDBEngineVersionsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBEngineVersionsMessage_MaxRecords = DescribeDBEngineVersionsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBEngineVersionsMessage_Marker = DescribeDBEngineVersionsMessage.AddMember("Marker", _String)
-
-	DescribeDBEngineVersionsMessage_DefaultOnly = DescribeDBEngineVersionsMessage.AddMember("DefaultOnly", _Boolean)
-
-	DescribeDBEngineVersionsMessage_ListSupportedCharacterSets = DescribeDBEngineVersionsMessage.AddMember("ListSupportedCharacterSets", _BooleanOptional)
-
-	DescribeDBEngineVersionsMessage_ListSupportedTimezones = DescribeDBEngineVersionsMessage.AddMember("ListSupportedTimezones", _BooleanOptional)
-
-	DBEngineVersionMessage_Marker = DBEngineVersionMessage.AddMember("Marker", _String)
-
-	DBEngineVersionMessage_DBEngineVersions = DBEngineVersionMessage.AddMember("DBEngineVersions", _DBEngineVersionList)
-
-	DescribeDBInstancesMessage_DBInstanceIdentifier = DescribeDBInstancesMessage.AddMember("DBInstanceIdentifier", _String)
-
-	DescribeDBInstancesMessage_Filters = DescribeDBInstancesMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBInstancesMessage_MaxRecords = DescribeDBInstancesMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBInstancesMessage_Marker = DescribeDBInstancesMessage.AddMember("Marker", _String)
-
-	DBInstanceMessage_Marker = DBInstanceMessage.AddMember("Marker", _String)
-
-	DBInstanceMessage_DBInstances = DBInstanceMessage.AddMember("DBInstances", _DBInstanceList)
-
-	DescribeDBParameterGroupsMessage_DBParameterGroupName = DescribeDBParameterGroupsMessage.AddMember("DBParameterGroupName", _String)
-
-	DescribeDBParameterGroupsMessage_Filters = DescribeDBParameterGroupsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBParameterGroupsMessage_MaxRecords = DescribeDBParameterGroupsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBParameterGroupsMessage_Marker = DescribeDBParameterGroupsMessage.AddMember("Marker", _String)
-
-	DBParameterGroupsMessage_Marker = DBParameterGroupsMessage.AddMember("Marker", _String)
-
-	DBParameterGroupsMessage_DBParameterGroups = DBParameterGroupsMessage.AddMember("DBParameterGroups", _DBParameterGroupList)
-
-	DescribeDBParametersMessage_DBParameterGroupName = DescribeDBParametersMessage.AddMember("DBParameterGroupName", _String)
-
-	DescribeDBParametersMessage_Source = DescribeDBParametersMessage.AddMember("Source", _String)
-
-	DescribeDBParametersMessage_Filters = DescribeDBParametersMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBParametersMessage_MaxRecords = DescribeDBParametersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBParametersMessage_Marker = DescribeDBParametersMessage.AddMember("Marker", _String)
-
-	DBParameterGroupDetails_Parameters = DBParameterGroupDetails.AddMember("Parameters", _ParametersList)
-
-	DBParameterGroupDetails_Marker = DBParameterGroupDetails.AddMember("Marker", _String)
-
-	DescribeDBSubnetGroupsMessage_DBSubnetGroupName = DescribeDBSubnetGroupsMessage.AddMember("DBSubnetGroupName", _String)
-
-	DescribeDBSubnetGroupsMessage_Filters = DescribeDBSubnetGroupsMessage.AddMember("Filters", _FilterList)
-
-	DescribeDBSubnetGroupsMessage_MaxRecords = DescribeDBSubnetGroupsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeDBSubnetGroupsMessage_Marker = DescribeDBSubnetGroupsMessage.AddMember("Marker", _String)
-
-	DBSubnetGroupMessage_Marker = DBSubnetGroupMessage.AddMember("Marker", _String)
-
-	DBSubnetGroupMessage_DBSubnetGroups = DBSubnetGroupMessage.AddMember("DBSubnetGroups", _DBSubnetGroups)
-
-	DescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily = DescribeEngineDefaultClusterParametersMessage.AddMember("DBParameterGroupFamily", _String)
-
-	DescribeEngineDefaultClusterParametersMessage_Filters = DescribeEngineDefaultClusterParametersMessage.AddMember("Filters", _FilterList)
-
-	DescribeEngineDefaultClusterParametersMessage_MaxRecords = DescribeEngineDefaultClusterParametersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeEngineDefaultClusterParametersMessage_Marker = DescribeEngineDefaultClusterParametersMessage.AddMember("Marker", _String)
-
-	DescribeEngineDefaultClusterParametersResult_EngineDefaults = DescribeEngineDefaultClusterParametersResult.AddMember("EngineDefaults", EngineDefaults)
-
-	DescribeEngineDefaultParametersMessage_DBParameterGroupFamily = DescribeEngineDefaultParametersMessage.AddMember("DBParameterGroupFamily", _String)
-
-	DescribeEngineDefaultParametersMessage_Filters = DescribeEngineDefaultParametersMessage.AddMember("Filters", _FilterList)
-
-	DescribeEngineDefaultParametersMessage_MaxRecords = DescribeEngineDefaultParametersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeEngineDefaultParametersMessage_Marker = DescribeEngineDefaultParametersMessage.AddMember("Marker", _String)
-
-	DescribeEngineDefaultParametersResult_EngineDefaults = DescribeEngineDefaultParametersResult.AddMember("EngineDefaults", EngineDefaults)
-
-	DescribeEventCategoriesMessage_SourceType = DescribeEventCategoriesMessage.AddMember("SourceType", _String)
-
-	DescribeEventCategoriesMessage_Filters = DescribeEventCategoriesMessage.AddMember("Filters", _FilterList)
-
-	EventCategoriesMessage_EventCategoriesMapList = EventCategoriesMessage.AddMember("EventCategoriesMapList", _EventCategoriesMapList)
-
-	DescribeEventsMessage_SourceIdentifier = DescribeEventsMessage.AddMember("SourceIdentifier", _String)
-
-	DescribeEventsMessage_SourceType = DescribeEventsMessage.AddMember("SourceType", SourceType)
-
-	DescribeEventsMessage_StartTime = DescribeEventsMessage.AddMember("StartTime", _TStamp)
-
-	DescribeEventsMessage_EndTime = DescribeEventsMessage.AddMember("EndTime", _TStamp)
-
-	DescribeEventsMessage_Duration = DescribeEventsMessage.AddMember("Duration", _IntegerOptional)
-
-	DescribeEventsMessage_EventCategories = DescribeEventsMessage.AddMember("EventCategories", _EventCategoriesList)
-
-	DescribeEventsMessage_Filters = DescribeEventsMessage.AddMember("Filters", _FilterList)
-
-	DescribeEventsMessage_MaxRecords = DescribeEventsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeEventsMessage_Marker = DescribeEventsMessage.AddMember("Marker", _String)
-
-	EventsMessage_Marker = EventsMessage.AddMember("Marker", _String)
-
-	EventsMessage_Events = EventsMessage.AddMember("Events", _EventList)
-
-	DescribeEventSubscriptionsMessage_SubscriptionName = DescribeEventSubscriptionsMessage.AddMember("SubscriptionName", _String)
-
-	DescribeEventSubscriptionsMessage_Filters = DescribeEventSubscriptionsMessage.AddMember("Filters", _FilterList)
-
-	DescribeEventSubscriptionsMessage_MaxRecords = DescribeEventSubscriptionsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeEventSubscriptionsMessage_Marker = DescribeEventSubscriptionsMessage.AddMember("Marker", _String)
-
-	EventSubscriptionsMessage_Marker = EventSubscriptionsMessage.AddMember("Marker", _String)
-
-	EventSubscriptionsMessage_EventSubscriptionsList = EventSubscriptionsMessage.AddMember("EventSubscriptionsList", _EventSubscriptionsList)
-
-	DescribeGlobalClustersMessage_GlobalClusterIdentifier = DescribeGlobalClustersMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	DescribeGlobalClustersMessage_MaxRecords = DescribeGlobalClustersMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeGlobalClustersMessage_Marker = DescribeGlobalClustersMessage.AddMember("Marker", _String)
-
-	GlobalClustersMessage_Marker = GlobalClustersMessage.AddMember("Marker", _String)
-
-	GlobalClustersMessage_GlobalClusters = GlobalClustersMessage.AddMember("GlobalClusters", _GlobalClusterList)
-
-	DescribeOrderableDBInstanceOptionsMessage_Engine = DescribeOrderableDBInstanceOptionsMessage.AddMember("Engine", _String)
-
-	DescribeOrderableDBInstanceOptionsMessage_EngineVersion = DescribeOrderableDBInstanceOptionsMessage.AddMember("EngineVersion", _String)
-
-	DescribeOrderableDBInstanceOptionsMessage_DBInstanceClass = DescribeOrderableDBInstanceOptionsMessage.AddMember("DBInstanceClass", _String)
-
-	DescribeOrderableDBInstanceOptionsMessage_LicenseModel = DescribeOrderableDBInstanceOptionsMessage.AddMember("LicenseModel", _String)
-
-	DescribeOrderableDBInstanceOptionsMessage_Vpc = DescribeOrderableDBInstanceOptionsMessage.AddMember("Vpc", _BooleanOptional)
-
-	DescribeOrderableDBInstanceOptionsMessage_Filters = DescribeOrderableDBInstanceOptionsMessage.AddMember("Filters", _FilterList)
-
-	DescribeOrderableDBInstanceOptionsMessage_MaxRecords = DescribeOrderableDBInstanceOptionsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	DescribeOrderableDBInstanceOptionsMessage_Marker = DescribeOrderableDBInstanceOptionsMessage.AddMember("Marker", _String)
-
-	OrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions = OrderableDBInstanceOptionsMessage.AddMember("OrderableDBInstanceOptions", _OrderableDBInstanceOptionsList)
-
-	OrderableDBInstanceOptionsMessage_Marker = OrderableDBInstanceOptionsMessage.AddMember("Marker", _String)
-
-	DescribePendingMaintenanceActionsMessage_ResourceIdentifier = DescribePendingMaintenanceActionsMessage.AddMember("ResourceIdentifier", _String)
-
-	DescribePendingMaintenanceActionsMessage_Filters = DescribePendingMaintenanceActionsMessage.AddMember("Filters", _FilterList)
-
-	DescribePendingMaintenanceActionsMessage_Marker = DescribePendingMaintenanceActionsMessage.AddMember("Marker", _String)
-
-	DescribePendingMaintenanceActionsMessage_MaxRecords = DescribePendingMaintenanceActionsMessage.AddMember("MaxRecords", _IntegerOptional)
-
-	PendingMaintenanceActionsMessage_PendingMaintenanceActions = PendingMaintenanceActionsMessage.AddMember("PendingMaintenanceActions", _PendingMaintenanceActions)
-
-	PendingMaintenanceActionsMessage_Marker = PendingMaintenanceActionsMessage.AddMember("Marker", _String)
-
-	DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier = DescribeValidDBInstanceModificationsMessage.AddMember("DBInstanceIdentifier", _String)
-
-	DescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage = DescribeValidDBInstanceModificationsResult.AddMember("ValidDBInstanceModificationsMessage", ValidDBInstanceModificationsMessage)
-
-	FailoverDBClusterMessage_DBClusterIdentifier = FailoverDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	FailoverDBClusterMessage_TargetDBInstanceIdentifier = FailoverDBClusterMessage.AddMember("TargetDBInstanceIdentifier", _String)
-
-	FailoverDBClusterResult_DBCluster = FailoverDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	FailoverGlobalClusterMessage_GlobalClusterIdentifier = FailoverGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	FailoverGlobalClusterMessage_TargetDbClusterIdentifier = FailoverGlobalClusterMessage.AddMember("TargetDbClusterIdentifier", _String)
-
-	FailoverGlobalClusterMessage_AllowDataLoss = FailoverGlobalClusterMessage.AddMember("AllowDataLoss", _BooleanOptional)
-
-	FailoverGlobalClusterMessage_Switchover = FailoverGlobalClusterMessage.AddMember("Switchover", _BooleanOptional)
-
-	FailoverGlobalClusterResult_GlobalCluster = FailoverGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-	ListTagsForResourceMessage_ResourceName = ListTagsForResourceMessage.AddMember("ResourceName", _String)
-
-	ListTagsForResourceMessage_Filters = ListTagsForResourceMessage.AddMember("Filters", _FilterList)
-
-	TagListMessage_TagList = TagListMessage.AddMember("TagList", _TagList)
-
-	ModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier = ModifyDBClusterEndpointMessage.AddMember("DBClusterEndpointIdentifier", _String)
-
-	ModifyDBClusterEndpointMessage_EndpointType = ModifyDBClusterEndpointMessage.AddMember("EndpointType", _String)
-
-	ModifyDBClusterEndpointMessage_StaticMembers = ModifyDBClusterEndpointMessage.AddMember("StaticMembers", _StringList)
-
-	ModifyDBClusterEndpointMessage_ExcludedMembers = ModifyDBClusterEndpointMessage.AddMember("ExcludedMembers", _StringList)
-
-	ModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier = ModifyDBClusterEndpointOutput.AddMember("DBClusterEndpointIdentifier", _String)
-
-	ModifyDBClusterEndpointOutput_DBClusterIdentifier = ModifyDBClusterEndpointOutput.AddMember("DBClusterIdentifier", _String)
-
-	ModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = ModifyDBClusterEndpointOutput.AddMember("DBClusterEndpointResourceIdentifier", _String)
-
-	ModifyDBClusterEndpointOutput_Endpoint = ModifyDBClusterEndpointOutput.AddMember("Endpoint", _String)
-
-	ModifyDBClusterEndpointOutput_Status = ModifyDBClusterEndpointOutput.AddMember("Status", _String)
-
-	ModifyDBClusterEndpointOutput_EndpointType = ModifyDBClusterEndpointOutput.AddMember("EndpointType", _String)
-
-	ModifyDBClusterEndpointOutput_CustomEndpointType = ModifyDBClusterEndpointOutput.AddMember("CustomEndpointType", _String)
-
-	ModifyDBClusterEndpointOutput_StaticMembers = ModifyDBClusterEndpointOutput.AddMember("StaticMembers", _StringList)
-
-	ModifyDBClusterEndpointOutput_ExcludedMembers = ModifyDBClusterEndpointOutput.AddMember("ExcludedMembers", _StringList)
-
-	ModifyDBClusterEndpointOutput_DBClusterEndpointArn = ModifyDBClusterEndpointOutput.AddMember("DBClusterEndpointArn", _String)
-
-	ModifyDBClusterMessage_DBClusterIdentifier = ModifyDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	ModifyDBClusterMessage_NewDBClusterIdentifier = ModifyDBClusterMessage.AddMember("NewDBClusterIdentifier", _String)
-
-	ModifyDBClusterMessage_ApplyImmediately = ModifyDBClusterMessage.AddMember("ApplyImmediately", _Boolean)
-
-	ModifyDBClusterMessage_BackupRetentionPeriod = ModifyDBClusterMessage.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	ModifyDBClusterMessage_DBClusterParameterGroupName = ModifyDBClusterMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	ModifyDBClusterMessage_VpcSecurityGroupIds = ModifyDBClusterMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	ModifyDBClusterMessage_Port = ModifyDBClusterMessage.AddMember("Port", _IntegerOptional)
-
-	ModifyDBClusterMessage_MasterUserPassword = ModifyDBClusterMessage.AddMember("MasterUserPassword", _String)
-
-	ModifyDBClusterMessage_OptionGroupName = ModifyDBClusterMessage.AddMember("OptionGroupName", _String)
-
-	ModifyDBClusterMessage_PreferredBackupWindow = ModifyDBClusterMessage.AddMember("PreferredBackupWindow", _String)
-
-	ModifyDBClusterMessage_PreferredMaintenanceWindow = ModifyDBClusterMessage.AddMember("PreferredMaintenanceWindow", _String)
-
-	ModifyDBClusterMessage_EnableIAMDatabaseAuthentication = ModifyDBClusterMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	ModifyDBClusterMessage_CloudwatchLogsExportConfiguration = ModifyDBClusterMessage.AddMember("CloudwatchLogsExportConfiguration", CloudwatchLogsExportConfiguration)
-
-	ModifyDBClusterMessage_EngineVersion = ModifyDBClusterMessage.AddMember("EngineVersion", _String)
-
-	ModifyDBClusterMessage_AllowMajorVersionUpgrade = ModifyDBClusterMessage.AddMember("AllowMajorVersionUpgrade", _Boolean)
-
-	ModifyDBClusterMessage_DBInstanceParameterGroupName = ModifyDBClusterMessage.AddMember("DBInstanceParameterGroupName", _String)
-
-	ModifyDBClusterMessage_DeletionProtection = ModifyDBClusterMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	ModifyDBClusterMessage_CopyTagsToSnapshot = ModifyDBClusterMessage.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	ModifyDBClusterMessage_ServerlessV2ScalingConfiguration = ModifyDBClusterMessage.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfiguration)
-
-	ModifyDBClusterMessage_StorageType = ModifyDBClusterMessage.AddMember("StorageType", _String)
-
-	ModifyDBClusterMessage_NetworkType = ModifyDBClusterMessage.AddMember("NetworkType", _String)
-
-	ModifyDBClusterResult_DBCluster = ModifyDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	ModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName = ModifyDBClusterParameterGroupMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	ModifyDBClusterParameterGroupMessage_Parameters = ModifyDBClusterParameterGroupMessage.AddMember("Parameters", _ParametersList)
-
-	DBClusterParameterGroupNameMessage_DBClusterParameterGroupName = DBClusterParameterGroupNameMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	ModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier = ModifyDBClusterSnapshotAttributeMessage.AddMember("DBClusterSnapshotIdentifier", _String)
-
-	ModifyDBClusterSnapshotAttributeMessage_AttributeName = ModifyDBClusterSnapshotAttributeMessage.AddMember("AttributeName", _String)
-
-	ModifyDBClusterSnapshotAttributeMessage_ValuesToAdd = ModifyDBClusterSnapshotAttributeMessage.AddMember("ValuesToAdd", _AttributeValueList)
-
-	ModifyDBClusterSnapshotAttributeMessage_ValuesToRemove = ModifyDBClusterSnapshotAttributeMessage.AddMember("ValuesToRemove", _AttributeValueList)
-
-	ModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult = ModifyDBClusterSnapshotAttributeResult.AddMember("DBClusterSnapshotAttributesResult", DBClusterSnapshotAttributesResult)
-
-	ModifyDBInstanceMessage_DBInstanceIdentifier = ModifyDBInstanceMessage.AddMember("DBInstanceIdentifier", _String)
-
-	ModifyDBInstanceMessage_AllocatedStorage = ModifyDBInstanceMessage.AddMember("AllocatedStorage", _IntegerOptional)
-
-	ModifyDBInstanceMessage_DBInstanceClass = ModifyDBInstanceMessage.AddMember("DBInstanceClass", _String)
-
-	ModifyDBInstanceMessage_DBSubnetGroupName = ModifyDBInstanceMessage.AddMember("DBSubnetGroupName", _String)
-
-	ModifyDBInstanceMessage_DBSecurityGroups = ModifyDBInstanceMessage.AddMember("DBSecurityGroups", _DBSecurityGroupNameList)
-
-	ModifyDBInstanceMessage_VpcSecurityGroupIds = ModifyDBInstanceMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	ModifyDBInstanceMessage_ApplyImmediately = ModifyDBInstanceMessage.AddMember("ApplyImmediately", _Boolean)
-
-	ModifyDBInstanceMessage_MasterUserPassword = ModifyDBInstanceMessage.AddMember("MasterUserPassword", _String)
-
-	ModifyDBInstanceMessage_DBParameterGroupName = ModifyDBInstanceMessage.AddMember("DBParameterGroupName", _String)
-
-	ModifyDBInstanceMessage_BackupRetentionPeriod = ModifyDBInstanceMessage.AddMember("BackupRetentionPeriod", _IntegerOptional)
-
-	ModifyDBInstanceMessage_PreferredBackupWindow = ModifyDBInstanceMessage.AddMember("PreferredBackupWindow", _String)
-
-	ModifyDBInstanceMessage_PreferredMaintenanceWindow = ModifyDBInstanceMessage.AddMember("PreferredMaintenanceWindow", _String)
-
-	ModifyDBInstanceMessage_MultiAZ = ModifyDBInstanceMessage.AddMember("MultiAZ", _BooleanOptional)
-
-	ModifyDBInstanceMessage_EngineVersion = ModifyDBInstanceMessage.AddMember("EngineVersion", _String)
-
-	ModifyDBInstanceMessage_AllowMajorVersionUpgrade = ModifyDBInstanceMessage.AddMember("AllowMajorVersionUpgrade", _Boolean)
-
-	ModifyDBInstanceMessage_AutoMinorVersionUpgrade = ModifyDBInstanceMessage.AddMember("AutoMinorVersionUpgrade", _BooleanOptional)
-
-	ModifyDBInstanceMessage_LicenseModel = ModifyDBInstanceMessage.AddMember("LicenseModel", _String)
-
-	ModifyDBInstanceMessage_Iops = ModifyDBInstanceMessage.AddMember("Iops", _IntegerOptional)
-
-	ModifyDBInstanceMessage_OptionGroupName = ModifyDBInstanceMessage.AddMember("OptionGroupName", _String)
-
-	ModifyDBInstanceMessage_NewDBInstanceIdentifier = ModifyDBInstanceMessage.AddMember("NewDBInstanceIdentifier", _String)
-
-	ModifyDBInstanceMessage_StorageType = ModifyDBInstanceMessage.AddMember("StorageType", _String)
-
-	ModifyDBInstanceMessage_TdeCredentialArn = ModifyDBInstanceMessage.AddMember("TdeCredentialArn", _String)
-
-	ModifyDBInstanceMessage_TdeCredentialPassword = ModifyDBInstanceMessage.AddMember("TdeCredentialPassword", _SensitiveString)
-
-	ModifyDBInstanceMessage_CACertificateIdentifier = ModifyDBInstanceMessage.AddMember("CACertificateIdentifier", _String)
-
-	ModifyDBInstanceMessage_Domain = ModifyDBInstanceMessage.AddMember("Domain", _String)
-
-	ModifyDBInstanceMessage_CopyTagsToSnapshot = ModifyDBInstanceMessage.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	ModifyDBInstanceMessage_MonitoringInterval = ModifyDBInstanceMessage.AddMember("MonitoringInterval", _IntegerOptional)
-
-	ModifyDBInstanceMessage_DBPortNumber = ModifyDBInstanceMessage.AddMember("DBPortNumber", _IntegerOptional)
-
-	ModifyDBInstanceMessage_PubliclyAccessible = ModifyDBInstanceMessage.AddMember("PubliclyAccessible", _BooleanOptional)
-
-	ModifyDBInstanceMessage_MonitoringRoleArn = ModifyDBInstanceMessage.AddMember("MonitoringRoleArn", _String)
-
-	ModifyDBInstanceMessage_DomainIAMRoleName = ModifyDBInstanceMessage.AddMember("DomainIAMRoleName", _String)
-
-	ModifyDBInstanceMessage_PromotionTier = ModifyDBInstanceMessage.AddMember("PromotionTier", _IntegerOptional)
-
-	ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication = ModifyDBInstanceMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	ModifyDBInstanceMessage_EnablePerformanceInsights = ModifyDBInstanceMessage.AddMember("EnablePerformanceInsights", _BooleanOptional)
-
-	ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId = ModifyDBInstanceMessage.AddMember("PerformanceInsightsKMSKeyId", _String)
-
-	ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration = ModifyDBInstanceMessage.AddMember("CloudwatchLogsExportConfiguration", CloudwatchLogsExportConfiguration)
-
-	ModifyDBInstanceMessage_DeletionProtection = ModifyDBInstanceMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	ModifyDBInstanceResult_DBInstance = ModifyDBInstanceResult.AddMember("DBInstance", DBInstance)
-
-	ModifyDBParameterGroupMessage_DBParameterGroupName = ModifyDBParameterGroupMessage.AddMember("DBParameterGroupName", _String)
-
-	ModifyDBParameterGroupMessage_Parameters = ModifyDBParameterGroupMessage.AddMember("Parameters", _ParametersList)
-
-	DBParameterGroupNameMessage_DBParameterGroupName = DBParameterGroupNameMessage.AddMember("DBParameterGroupName", _String)
-
-	ModifyDBSubnetGroupMessage_DBSubnetGroupName = ModifyDBSubnetGroupMessage.AddMember("DBSubnetGroupName", _String)
-
-	ModifyDBSubnetGroupMessage_DBSubnetGroupDescription = ModifyDBSubnetGroupMessage.AddMember("DBSubnetGroupDescription", _String)
-
-	ModifyDBSubnetGroupMessage_SubnetIds = ModifyDBSubnetGroupMessage.AddMember("SubnetIds", _SubnetIdentifierList)
-
-	ModifyDBSubnetGroupResult_DBSubnetGroup = ModifyDBSubnetGroupResult.AddMember("DBSubnetGroup", DBSubnetGroup)
-
-	ModifyEventSubscriptionMessage_SubscriptionName = ModifyEventSubscriptionMessage.AddMember("SubscriptionName", _String)
-
-	ModifyEventSubscriptionMessage_SnsTopicArn = ModifyEventSubscriptionMessage.AddMember("SnsTopicArn", _String)
-
-	ModifyEventSubscriptionMessage_SourceType = ModifyEventSubscriptionMessage.AddMember("SourceType", _String)
-
-	ModifyEventSubscriptionMessage_EventCategories = ModifyEventSubscriptionMessage.AddMember("EventCategories", _EventCategoriesList)
-
-	ModifyEventSubscriptionMessage_Enabled = ModifyEventSubscriptionMessage.AddMember("Enabled", _BooleanOptional)
-
-	ModifyEventSubscriptionResult_EventSubscription = ModifyEventSubscriptionResult.AddMember("EventSubscription", EventSubscription)
-
-	ModifyGlobalClusterMessage_GlobalClusterIdentifier = ModifyGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	ModifyGlobalClusterMessage_NewGlobalClusterIdentifier = ModifyGlobalClusterMessage.AddMember("NewGlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	ModifyGlobalClusterMessage_DeletionProtection = ModifyGlobalClusterMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	ModifyGlobalClusterMessage_EngineVersion = ModifyGlobalClusterMessage.AddMember("EngineVersion", _String)
-
-	ModifyGlobalClusterMessage_AllowMajorVersionUpgrade = ModifyGlobalClusterMessage.AddMember("AllowMajorVersionUpgrade", _BooleanOptional)
-
-	ModifyGlobalClusterResult_GlobalCluster = ModifyGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-	PromoteReadReplicaDBClusterMessage_DBClusterIdentifier = PromoteReadReplicaDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	PromoteReadReplicaDBClusterResult_DBCluster = PromoteReadReplicaDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	RebootDBInstanceMessage_DBInstanceIdentifier = RebootDBInstanceMessage.AddMember("DBInstanceIdentifier", _String)
-
-	RebootDBInstanceMessage_ForceFailover = RebootDBInstanceMessage.AddMember("ForceFailover", _BooleanOptional)
-
-	RebootDBInstanceResult_DBInstance = RebootDBInstanceResult.AddMember("DBInstance", DBInstance)
-
-	RemoveFromGlobalClusterMessage_GlobalClusterIdentifier = RemoveFromGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	RemoveFromGlobalClusterMessage_DbClusterIdentifier = RemoveFromGlobalClusterMessage.AddMember("DbClusterIdentifier", _String)
-
-	RemoveFromGlobalClusterResult_GlobalCluster = RemoveFromGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-	RemoveRoleFromDBClusterMessage_DBClusterIdentifier = RemoveRoleFromDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	RemoveRoleFromDBClusterMessage_RoleArn = RemoveRoleFromDBClusterMessage.AddMember("RoleArn", _String)
-
-	RemoveRoleFromDBClusterMessage_FeatureName = RemoveRoleFromDBClusterMessage.AddMember("FeatureName", _String)
-
-	RemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName = RemoveSourceIdentifierFromSubscriptionMessage.AddMember("SubscriptionName", _String)
-
-	RemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier = RemoveSourceIdentifierFromSubscriptionMessage.AddMember("SourceIdentifier", _String)
-
-	RemoveSourceIdentifierFromSubscriptionResult_EventSubscription = RemoveSourceIdentifierFromSubscriptionResult.AddMember("EventSubscription", EventSubscription)
-
-	RemoveTagsFromResourceMessage_ResourceName = RemoveTagsFromResourceMessage.AddMember("ResourceName", _String)
-
-	RemoveTagsFromResourceMessage_TagKeys = RemoveTagsFromResourceMessage.AddMember("TagKeys", _KeyList)
-
-	ResetDBClusterParameterGroupMessage_DBClusterParameterGroupName = ResetDBClusterParameterGroupMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	ResetDBClusterParameterGroupMessage_ResetAllParameters = ResetDBClusterParameterGroupMessage.AddMember("ResetAllParameters", _Boolean)
-
-	ResetDBClusterParameterGroupMessage_Parameters = ResetDBClusterParameterGroupMessage.AddMember("Parameters", _ParametersList)
-
-	ResetDBParameterGroupMessage_DBParameterGroupName = ResetDBParameterGroupMessage.AddMember("DBParameterGroupName", _String)
-
-	ResetDBParameterGroupMessage_ResetAllParameters = ResetDBParameterGroupMessage.AddMember("ResetAllParameters", _Boolean)
-
-	ResetDBParameterGroupMessage_Parameters = ResetDBParameterGroupMessage.AddMember("Parameters", _ParametersList)
-
-	RestoreDBClusterFromSnapshotMessage_AvailabilityZones = RestoreDBClusterFromSnapshotMessage.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	RestoreDBClusterFromSnapshotMessage_DBClusterIdentifier = RestoreDBClusterFromSnapshotMessage.AddMember("DBClusterIdentifier", _String)
-
-	RestoreDBClusterFromSnapshotMessage_SnapshotIdentifier = RestoreDBClusterFromSnapshotMessage.AddMember("SnapshotIdentifier", _String)
-
-	RestoreDBClusterFromSnapshotMessage_Engine = RestoreDBClusterFromSnapshotMessage.AddMember("Engine", _String)
-
-	RestoreDBClusterFromSnapshotMessage_EngineVersion = RestoreDBClusterFromSnapshotMessage.AddMember("EngineVersion", _String)
-
-	RestoreDBClusterFromSnapshotMessage_Port = RestoreDBClusterFromSnapshotMessage.AddMember("Port", _IntegerOptional)
-
-	RestoreDBClusterFromSnapshotMessage_DBSubnetGroupName = RestoreDBClusterFromSnapshotMessage.AddMember("DBSubnetGroupName", _String)
-
-	RestoreDBClusterFromSnapshotMessage_DatabaseName = RestoreDBClusterFromSnapshotMessage.AddMember("DatabaseName", _String)
-
-	RestoreDBClusterFromSnapshotMessage_OptionGroupName = RestoreDBClusterFromSnapshotMessage.AddMember("OptionGroupName", _String)
-
-	RestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds = RestoreDBClusterFromSnapshotMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	RestoreDBClusterFromSnapshotMessage_Tags = RestoreDBClusterFromSnapshotMessage.AddMember("Tags", _TagList)
-
-	RestoreDBClusterFromSnapshotMessage_KmsKeyId = RestoreDBClusterFromSnapshotMessage.AddMember("KmsKeyId", _String)
-
-	RestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication = RestoreDBClusterFromSnapshotMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	RestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports = RestoreDBClusterFromSnapshotMessage.AddMember("EnableCloudwatchLogsExports", _LogTypeList)
-
-	RestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName = RestoreDBClusterFromSnapshotMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	RestoreDBClusterFromSnapshotMessage_DeletionProtection = RestoreDBClusterFromSnapshotMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	RestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot = RestoreDBClusterFromSnapshotMessage.AddMember("CopyTagsToSnapshot", _BooleanOptional)
-
-	RestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration = RestoreDBClusterFromSnapshotMessage.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfiguration)
-
-	RestoreDBClusterFromSnapshotMessage_StorageType = RestoreDBClusterFromSnapshotMessage.AddMember("StorageType", _String)
-
-	RestoreDBClusterFromSnapshotMessage_NetworkType = RestoreDBClusterFromSnapshotMessage.AddMember("NetworkType", _String)
-
-	RestoreDBClusterFromSnapshotResult_DBCluster = RestoreDBClusterFromSnapshotResult.AddMember("DBCluster", DBCluster)
-
-	RestoreDBClusterToPointInTimeMessage_DBClusterIdentifier = RestoreDBClusterToPointInTimeMessage.AddMember("DBClusterIdentifier", _String)
-
-	RestoreDBClusterToPointInTimeMessage_RestoreType = RestoreDBClusterToPointInTimeMessage.AddMember("RestoreType", _String)
-
-	RestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier = RestoreDBClusterToPointInTimeMessage.AddMember("SourceDBClusterIdentifier", _String)
-
-	RestoreDBClusterToPointInTimeMessage_RestoreToTime = RestoreDBClusterToPointInTimeMessage.AddMember("RestoreToTime", _TStamp)
-
-	RestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime = RestoreDBClusterToPointInTimeMessage.AddMember("UseLatestRestorableTime", _Boolean)
-
-	RestoreDBClusterToPointInTimeMessage_Port = RestoreDBClusterToPointInTimeMessage.AddMember("Port", _IntegerOptional)
-
-	RestoreDBClusterToPointInTimeMessage_DBSubnetGroupName = RestoreDBClusterToPointInTimeMessage.AddMember("DBSubnetGroupName", _String)
-
-	RestoreDBClusterToPointInTimeMessage_OptionGroupName = RestoreDBClusterToPointInTimeMessage.AddMember("OptionGroupName", _String)
-
-	RestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds = RestoreDBClusterToPointInTimeMessage.AddMember("VpcSecurityGroupIds", _VpcSecurityGroupIdList)
-
-	RestoreDBClusterToPointInTimeMessage_Tags = RestoreDBClusterToPointInTimeMessage.AddMember("Tags", _TagList)
-
-	RestoreDBClusterToPointInTimeMessage_KmsKeyId = RestoreDBClusterToPointInTimeMessage.AddMember("KmsKeyId", _String)
-
-	RestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication = RestoreDBClusterToPointInTimeMessage.AddMember("EnableIAMDatabaseAuthentication", _BooleanOptional)
-
-	RestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports = RestoreDBClusterToPointInTimeMessage.AddMember("EnableCloudwatchLogsExports", _LogTypeList)
-
-	RestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName = RestoreDBClusterToPointInTimeMessage.AddMember("DBClusterParameterGroupName", _String)
-
-	RestoreDBClusterToPointInTimeMessage_DeletionProtection = RestoreDBClusterToPointInTimeMessage.AddMember("DeletionProtection", _BooleanOptional)
-
-	RestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration = RestoreDBClusterToPointInTimeMessage.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfiguration)
-
-	RestoreDBClusterToPointInTimeMessage_StorageType = RestoreDBClusterToPointInTimeMessage.AddMember("StorageType", _String)
-
-	RestoreDBClusterToPointInTimeMessage_NetworkType = RestoreDBClusterToPointInTimeMessage.AddMember("NetworkType", _String)
-
-	RestoreDBClusterToPointInTimeResult_DBCluster = RestoreDBClusterToPointInTimeResult.AddMember("DBCluster", DBCluster)
-
-	StartDBClusterMessage_DBClusterIdentifier = StartDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	StartDBClusterResult_DBCluster = StartDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	StopDBClusterMessage_DBClusterIdentifier = StopDBClusterMessage.AddMember("DBClusterIdentifier", _String)
-
-	StopDBClusterResult_DBCluster = StopDBClusterResult.AddMember("DBCluster", DBCluster)
-
-	SwitchoverGlobalClusterMessage_GlobalClusterIdentifier = SwitchoverGlobalClusterMessage.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
-
-	SwitchoverGlobalClusterMessage_TargetDbClusterIdentifier = SwitchoverGlobalClusterMessage.AddMember("TargetDbClusterIdentifier", _String)
-
-	SwitchoverGlobalClusterResult_GlobalCluster = SwitchoverGlobalClusterResult.AddMember("GlobalCluster", GlobalCluster)
-
-}
+var (
+	eAddRoleToDBCluster                                                             smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscription                                              smithy.SchemaExtensions
+	eAddTagsToResource                                                              smithy.SchemaExtensions
+	eApplyPendingMaintenanceAction                                                  smithy.SchemaExtensions
+	eCopyDBClusterParameterGroup                                                    smithy.SchemaExtensions
+	eCopyDBClusterSnapshot                                                          smithy.SchemaExtensions
+	eCopyDBParameterGroup                                                           smithy.SchemaExtensions
+	eCreateDBCluster                                                                smithy.SchemaExtensions
+	eCreateDBClusterEndpoint                                                        smithy.SchemaExtensions
+	eCreateDBClusterParameterGroup                                                  smithy.SchemaExtensions
+	eCreateDBClusterSnapshot                                                        smithy.SchemaExtensions
+	eCreateDBInstance                                                               smithy.SchemaExtensions
+	eCreateDBParameterGroup                                                         smithy.SchemaExtensions
+	eCreateDBSubnetGroup                                                            smithy.SchemaExtensions
+	eCreateEventSubscription                                                        smithy.SchemaExtensions
+	eCreateGlobalCluster                                                            smithy.SchemaExtensions
+	eDeleteDBCluster                                                                smithy.SchemaExtensions
+	eDeleteDBClusterEndpoint                                                        smithy.SchemaExtensions
+	eDeleteDBClusterParameterGroup                                                  smithy.SchemaExtensions
+	eDeleteDBClusterSnapshot                                                        smithy.SchemaExtensions
+	eDeleteDBInstance                                                               smithy.SchemaExtensions
+	eDeleteDBParameterGroup                                                         smithy.SchemaExtensions
+	eDeleteDBSubnetGroup                                                            smithy.SchemaExtensions
+	eDeleteEventSubscription                                                        smithy.SchemaExtensions
+	eDeleteGlobalCluster                                                            smithy.SchemaExtensions
+	eDescribeDBClusterEndpoints                                                     smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroups                                               smithy.SchemaExtensions
+	eDescribeDBClusterParameters                                                    smithy.SchemaExtensions
+	eDescribeDBClusters                                                             smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotAttributes                                            smithy.SchemaExtensions
+	eDescribeDBClusterSnapshots                                                     smithy.SchemaExtensions
+	eDescribeDBEngineVersions                                                       smithy.SchemaExtensions
+	eDescribeDBInstances                                                            smithy.SchemaExtensions
+	eDescribeDBParameterGroups                                                      smithy.SchemaExtensions
+	eDescribeDBParameters                                                           smithy.SchemaExtensions
+	eDescribeDBSubnetGroups                                                         smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParameters                                         smithy.SchemaExtensions
+	eDescribeEngineDefaultParameters                                                smithy.SchemaExtensions
+	eDescribeEventCategories                                                        smithy.SchemaExtensions
+	eDescribeEvents                                                                 smithy.SchemaExtensions
+	eDescribeEventSubscriptions                                                     smithy.SchemaExtensions
+	eDescribeGlobalClusters                                                         smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptions                                             smithy.SchemaExtensions
+	eDescribePendingMaintenanceActions                                              smithy.SchemaExtensions
+	eDescribeValidDBInstanceModifications                                           smithy.SchemaExtensions
+	eFailoverDBCluster                                                              smithy.SchemaExtensions
+	eFailoverGlobalCluster                                                          smithy.SchemaExtensions
+	eListTagsForResource                                                            smithy.SchemaExtensions
+	eModifyDBCluster                                                                smithy.SchemaExtensions
+	eModifyDBClusterEndpoint                                                        smithy.SchemaExtensions
+	eModifyDBClusterParameterGroup                                                  smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttribute                                               smithy.SchemaExtensions
+	eModifyDBInstance                                                               smithy.SchemaExtensions
+	eModifyDBParameterGroup                                                         smithy.SchemaExtensions
+	eModifyDBSubnetGroup                                                            smithy.SchemaExtensions
+	eModifyEventSubscription                                                        smithy.SchemaExtensions
+	eModifyGlobalCluster                                                            smithy.SchemaExtensions
+	ePromoteReadReplicaDBCluster                                                    smithy.SchemaExtensions
+	eRebootDBInstance                                                               smithy.SchemaExtensions
+	eRemoveFromGlobalCluster                                                        smithy.SchemaExtensions
+	eRemoveRoleFromDBCluster                                                        smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscription                                         smithy.SchemaExtensions
+	eRemoveTagsFromResource                                                         smithy.SchemaExtensions
+	eResetDBClusterParameterGroup                                                   smithy.SchemaExtensions
+	eResetDBParameterGroup                                                          smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshot                                                   smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTime                                                  smithy.SchemaExtensions
+	eStartDBCluster                                                                 smithy.SchemaExtensions
+	eStopDBCluster                                                                  smithy.SchemaExtensions
+	eSwitchoverGlobalCluster                                                        smithy.SchemaExtensions
+	e_AmazonRDSv19                                                                  smithy.SchemaExtensions
+	eApplyMethod                                                                    smithy.SchemaExtensions
+	eApplyMethod_immediate                                                          smithy.SchemaExtensions
+	eApplyMethod_pending_reboot                                                     smithy.SchemaExtensions
+	e_AttributeValueList                                                            smithy.SchemaExtensions
+	e_AttributeValueList_member                                                     smithy.SchemaExtensions
+	eAuthorizationNotFoundFault                                                     smithy.SchemaExtensions
+	eAuthorizationNotFoundFault_message                                             smithy.SchemaExtensions
+	eAvailabilityZone                                                               smithy.SchemaExtensions
+	eAvailabilityZone_Name                                                          smithy.SchemaExtensions
+	e_AvailabilityZoneList                                                          smithy.SchemaExtensions
+	e_AvailabilityZoneList_member                                                   smithy.SchemaExtensions
+	e_AvailabilityZones                                                             smithy.SchemaExtensions
+	e_AvailabilityZones_member                                                      smithy.SchemaExtensions
+	e_Boolean                                                                       smithy.SchemaExtensions
+	e_BooleanOptional                                                               smithy.SchemaExtensions
+	eCertificateNotFoundFault                                                       smithy.SchemaExtensions
+	eCertificateNotFoundFault_message                                               smithy.SchemaExtensions
+	eCharacterSet                                                                   smithy.SchemaExtensions
+	eCharacterSet_CharacterSetName                                                  smithy.SchemaExtensions
+	eCharacterSet_CharacterSetDescription                                           smithy.SchemaExtensions
+	eCloudwatchLogsExportConfiguration                                              smithy.SchemaExtensions
+	eCloudwatchLogsExportConfiguration_EnableLogTypes                               smithy.SchemaExtensions
+	eCloudwatchLogsExportConfiguration_DisableLogTypes                              smithy.SchemaExtensions
+	eClusterPendingModifiedValues                                                   smithy.SchemaExtensions
+	eClusterPendingModifiedValues_PendingCloudwatchLogsExports                      smithy.SchemaExtensions
+	eClusterPendingModifiedValues_DBClusterIdentifier                               smithy.SchemaExtensions
+	eClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled                  smithy.SchemaExtensions
+	eClusterPendingModifiedValues_EngineVersion                                     smithy.SchemaExtensions
+	eClusterPendingModifiedValues_BackupRetentionPeriod                             smithy.SchemaExtensions
+	eClusterPendingModifiedValues_StorageType                                       smithy.SchemaExtensions
+	eClusterPendingModifiedValues_AllocatedStorage                                  smithy.SchemaExtensions
+	eClusterPendingModifiedValues_Iops                                              smithy.SchemaExtensions
+	eClusterPendingModifiedValues_NetworkType                                       smithy.SchemaExtensions
+	eDBCluster                                                                      smithy.SchemaExtensions
+	eDBCluster_AllocatedStorage                                                     smithy.SchemaExtensions
+	eDBCluster_AvailabilityZones                                                    smithy.SchemaExtensions
+	eDBCluster_BackupRetentionPeriod                                                smithy.SchemaExtensions
+	eDBCluster_CharacterSetName                                                     smithy.SchemaExtensions
+	eDBCluster_DatabaseName                                                         smithy.SchemaExtensions
+	eDBCluster_DBClusterIdentifier                                                  smithy.SchemaExtensions
+	eDBCluster_DBClusterParameterGroup                                              smithy.SchemaExtensions
+	eDBCluster_DBSubnetGroup                                                        smithy.SchemaExtensions
+	eDBCluster_Status                                                               smithy.SchemaExtensions
+	eDBCluster_PercentProgress                                                      smithy.SchemaExtensions
+	eDBCluster_EarliestRestorableTime                                               smithy.SchemaExtensions
+	eDBCluster_Endpoint                                                             smithy.SchemaExtensions
+	eDBCluster_ReaderEndpoint                                                       smithy.SchemaExtensions
+	eDBCluster_MultiAZ                                                              smithy.SchemaExtensions
+	eDBCluster_Engine                                                               smithy.SchemaExtensions
+	eDBCluster_EngineVersion                                                        smithy.SchemaExtensions
+	eDBCluster_LatestRestorableTime                                                 smithy.SchemaExtensions
+	eDBCluster_Port                                                                 smithy.SchemaExtensions
+	eDBCluster_MasterUsername                                                       smithy.SchemaExtensions
+	eDBCluster_DBClusterOptionGroupMemberships                                      smithy.SchemaExtensions
+	eDBCluster_PreferredBackupWindow                                                smithy.SchemaExtensions
+	eDBCluster_PreferredMaintenanceWindow                                           smithy.SchemaExtensions
+	eDBCluster_ReplicationSourceIdentifier                                          smithy.SchemaExtensions
+	eDBCluster_ReadReplicaIdentifiers                                               smithy.SchemaExtensions
+	eDBCluster_DBClusterMembers                                                     smithy.SchemaExtensions
+	eDBCluster_VpcSecurityGroups                                                    smithy.SchemaExtensions
+	eDBCluster_HostedZoneId                                                         smithy.SchemaExtensions
+	eDBCluster_StorageEncrypted                                                     smithy.SchemaExtensions
+	eDBCluster_KmsKeyId                                                             smithy.SchemaExtensions
+	eDBCluster_DbClusterResourceId                                                  smithy.SchemaExtensions
+	eDBCluster_DBClusterArn                                                         smithy.SchemaExtensions
+	eDBCluster_AssociatedRoles                                                      smithy.SchemaExtensions
+	eDBCluster_IAMDatabaseAuthenticationEnabled                                     smithy.SchemaExtensions
+	eDBCluster_CloneGroupId                                                         smithy.SchemaExtensions
+	eDBCluster_ClusterCreateTime                                                    smithy.SchemaExtensions
+	eDBCluster_CopyTagsToSnapshot                                                   smithy.SchemaExtensions
+	eDBCluster_EnabledCloudwatchLogsExports                                         smithy.SchemaExtensions
+	eDBCluster_PendingModifiedValues                                                smithy.SchemaExtensions
+	eDBCluster_DeletionProtection                                                   smithy.SchemaExtensions
+	eDBCluster_CrossAccountClone                                                    smithy.SchemaExtensions
+	eDBCluster_AutomaticRestartTime                                                 smithy.SchemaExtensions
+	eDBCluster_ServerlessV2ScalingConfiguration                                     smithy.SchemaExtensions
+	eDBCluster_GlobalClusterIdentifier                                              smithy.SchemaExtensions
+	eDBCluster_IOOptimizedNextAllowedModificationTime                               smithy.SchemaExtensions
+	eDBCluster_StorageType                                                          smithy.SchemaExtensions
+	eDBCluster_NetworkType                                                          smithy.SchemaExtensions
+	eDBClusterAlreadyExistsFault                                                    smithy.SchemaExtensions
+	eDBClusterAlreadyExistsFault_message                                            smithy.SchemaExtensions
+	eDBClusterEndpoint                                                              smithy.SchemaExtensions
+	eDBClusterEndpoint_DBClusterEndpointIdentifier                                  smithy.SchemaExtensions
+	eDBClusterEndpoint_DBClusterIdentifier                                          smithy.SchemaExtensions
+	eDBClusterEndpoint_DBClusterEndpointResourceIdentifier                          smithy.SchemaExtensions
+	eDBClusterEndpoint_Endpoint                                                     smithy.SchemaExtensions
+	eDBClusterEndpoint_Status                                                       smithy.SchemaExtensions
+	eDBClusterEndpoint_EndpointType                                                 smithy.SchemaExtensions
+	eDBClusterEndpoint_CustomEndpointType                                           smithy.SchemaExtensions
+	eDBClusterEndpoint_StaticMembers                                                smithy.SchemaExtensions
+	eDBClusterEndpoint_ExcludedMembers                                              smithy.SchemaExtensions
+	eDBClusterEndpoint_DBClusterEndpointArn                                         smithy.SchemaExtensions
+	eDBClusterEndpointAlreadyExistsFault                                            smithy.SchemaExtensions
+	eDBClusterEndpointAlreadyExistsFault_message                                    smithy.SchemaExtensions
+	e_DBClusterEndpointList                                                         smithy.SchemaExtensions
+	e_DBClusterEndpointList_member                                                  smithy.SchemaExtensions
+	eDBClusterEndpointNotFoundFault                                                 smithy.SchemaExtensions
+	eDBClusterEndpointNotFoundFault_message                                         smithy.SchemaExtensions
+	eDBClusterEndpointQuotaExceededFault                                            smithy.SchemaExtensions
+	eDBClusterEndpointQuotaExceededFault_message                                    smithy.SchemaExtensions
+	e_DBClusterList                                                                 smithy.SchemaExtensions
+	e_DBClusterList_member                                                          smithy.SchemaExtensions
+	eDBClusterMember                                                                smithy.SchemaExtensions
+	eDBClusterMember_DBInstanceIdentifier                                           smithy.SchemaExtensions
+	eDBClusterMember_IsClusterWriter                                                smithy.SchemaExtensions
+	eDBClusterMember_DBClusterParameterGroupStatus                                  smithy.SchemaExtensions
+	eDBClusterMember_PromotionTier                                                  smithy.SchemaExtensions
+	e_DBClusterMemberList                                                           smithy.SchemaExtensions
+	e_DBClusterMemberList_member                                                    smithy.SchemaExtensions
+	eDBClusterNotFoundFault                                                         smithy.SchemaExtensions
+	eDBClusterNotFoundFault_message                                                 smithy.SchemaExtensions
+	e_DBClusterOptionGroupMemberships                                               smithy.SchemaExtensions
+	e_DBClusterOptionGroupMemberships_member                                        smithy.SchemaExtensions
+	eDBClusterOptionGroupStatus                                                     smithy.SchemaExtensions
+	eDBClusterOptionGroupStatus_DBClusterOptionGroupName                            smithy.SchemaExtensions
+	eDBClusterOptionGroupStatus_Status                                              smithy.SchemaExtensions
+	eDBClusterParameterGroup                                                        smithy.SchemaExtensions
+	eDBClusterParameterGroup_DBClusterParameterGroupName                            smithy.SchemaExtensions
+	eDBClusterParameterGroup_DBParameterGroupFamily                                 smithy.SchemaExtensions
+	eDBClusterParameterGroup_Description                                            smithy.SchemaExtensions
+	eDBClusterParameterGroup_DBClusterParameterGroupArn                             smithy.SchemaExtensions
+	e_DBClusterParameterGroupList                                                   smithy.SchemaExtensions
+	e_DBClusterParameterGroupList_member                                            smithy.SchemaExtensions
+	eDBClusterParameterGroupNotFoundFault                                           smithy.SchemaExtensions
+	eDBClusterParameterGroupNotFoundFault_message                                   smithy.SchemaExtensions
+	eDBClusterQuotaExceededFault                                                    smithy.SchemaExtensions
+	eDBClusterQuotaExceededFault_message                                            smithy.SchemaExtensions
+	eDBClusterRole                                                                  smithy.SchemaExtensions
+	eDBClusterRole_RoleArn                                                          smithy.SchemaExtensions
+	eDBClusterRole_Status                                                           smithy.SchemaExtensions
+	eDBClusterRole_FeatureName                                                      smithy.SchemaExtensions
+	eDBClusterRoleAlreadyExistsFault                                                smithy.SchemaExtensions
+	eDBClusterRoleAlreadyExistsFault_message                                        smithy.SchemaExtensions
+	eDBClusterRoleNotFoundFault                                                     smithy.SchemaExtensions
+	eDBClusterRoleNotFoundFault_message                                             smithy.SchemaExtensions
+	eDBClusterRoleQuotaExceededFault                                                smithy.SchemaExtensions
+	eDBClusterRoleQuotaExceededFault_message                                        smithy.SchemaExtensions
+	e_DBClusterRoles                                                                smithy.SchemaExtensions
+	e_DBClusterRoles_member                                                         smithy.SchemaExtensions
+	eDBClusterSnapshot                                                              smithy.SchemaExtensions
+	eDBClusterSnapshot_AvailabilityZones                                            smithy.SchemaExtensions
+	eDBClusterSnapshot_DBClusterSnapshotIdentifier                                  smithy.SchemaExtensions
+	eDBClusterSnapshot_DBClusterIdentifier                                          smithy.SchemaExtensions
+	eDBClusterSnapshot_SnapshotCreateTime                                           smithy.SchemaExtensions
+	eDBClusterSnapshot_Engine                                                       smithy.SchemaExtensions
+	eDBClusterSnapshot_AllocatedStorage                                             smithy.SchemaExtensions
+	eDBClusterSnapshot_Status                                                       smithy.SchemaExtensions
+	eDBClusterSnapshot_Port                                                         smithy.SchemaExtensions
+	eDBClusterSnapshot_VpcId                                                        smithy.SchemaExtensions
+	eDBClusterSnapshot_ClusterCreateTime                                            smithy.SchemaExtensions
+	eDBClusterSnapshot_MasterUsername                                               smithy.SchemaExtensions
+	eDBClusterSnapshot_EngineVersion                                                smithy.SchemaExtensions
+	eDBClusterSnapshot_LicenseModel                                                 smithy.SchemaExtensions
+	eDBClusterSnapshot_SnapshotType                                                 smithy.SchemaExtensions
+	eDBClusterSnapshot_PercentProgress                                              smithy.SchemaExtensions
+	eDBClusterSnapshot_StorageEncrypted                                             smithy.SchemaExtensions
+	eDBClusterSnapshot_KmsKeyId                                                     smithy.SchemaExtensions
+	eDBClusterSnapshot_DBClusterSnapshotArn                                         smithy.SchemaExtensions
+	eDBClusterSnapshot_SourceDBClusterSnapshotArn                                   smithy.SchemaExtensions
+	eDBClusterSnapshot_IAMDatabaseAuthenticationEnabled                             smithy.SchemaExtensions
+	eDBClusterSnapshot_StorageType                                                  smithy.SchemaExtensions
+	eDBClusterSnapshotAlreadyExistsFault                                            smithy.SchemaExtensions
+	eDBClusterSnapshotAlreadyExistsFault_message                                    smithy.SchemaExtensions
+	eDBClusterSnapshotAttribute                                                     smithy.SchemaExtensions
+	eDBClusterSnapshotAttribute_AttributeName                                       smithy.SchemaExtensions
+	eDBClusterSnapshotAttribute_AttributeValues                                     smithy.SchemaExtensions
+	e_DBClusterSnapshotAttributeList                                                smithy.SchemaExtensions
+	e_DBClusterSnapshotAttributeList_member                                         smithy.SchemaExtensions
+	eDBClusterSnapshotAttributesResult                                              smithy.SchemaExtensions
+	eDBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier                  smithy.SchemaExtensions
+	eDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes                  smithy.SchemaExtensions
+	e_DBClusterSnapshotList                                                         smithy.SchemaExtensions
+	e_DBClusterSnapshotList_member                                                  smithy.SchemaExtensions
+	eDBClusterSnapshotNotFoundFault                                                 smithy.SchemaExtensions
+	eDBClusterSnapshotNotFoundFault_message                                         smithy.SchemaExtensions
+	eDBEngineVersion                                                                smithy.SchemaExtensions
+	eDBEngineVersion_Engine                                                         smithy.SchemaExtensions
+	eDBEngineVersion_EngineVersion                                                  smithy.SchemaExtensions
+	eDBEngineVersion_DBParameterGroupFamily                                         smithy.SchemaExtensions
+	eDBEngineVersion_DBEngineDescription                                            smithy.SchemaExtensions
+	eDBEngineVersion_DBEngineVersionDescription                                     smithy.SchemaExtensions
+	eDBEngineVersion_DefaultCharacterSet                                            smithy.SchemaExtensions
+	eDBEngineVersion_SupportedCharacterSets                                         smithy.SchemaExtensions
+	eDBEngineVersion_ValidUpgradeTarget                                             smithy.SchemaExtensions
+	eDBEngineVersion_SupportedTimezones                                             smithy.SchemaExtensions
+	eDBEngineVersion_ExportableLogTypes                                             smithy.SchemaExtensions
+	eDBEngineVersion_SupportsLogExportsToCloudwatchLogs                             smithy.SchemaExtensions
+	eDBEngineVersion_SupportsReadReplica                                            smithy.SchemaExtensions
+	eDBEngineVersion_SupportsGlobalDatabases                                        smithy.SchemaExtensions
+	e_DBEngineVersionList                                                           smithy.SchemaExtensions
+	e_DBEngineVersionList_member                                                    smithy.SchemaExtensions
+	eDBInstance                                                                     smithy.SchemaExtensions
+	eDBInstance_DBInstanceIdentifier                                                smithy.SchemaExtensions
+	eDBInstance_DBInstanceClass                                                     smithy.SchemaExtensions
+	eDBInstance_Engine                                                              smithy.SchemaExtensions
+	eDBInstance_DBInstanceStatus                                                    smithy.SchemaExtensions
+	eDBInstance_MasterUsername                                                      smithy.SchemaExtensions
+	eDBInstance_DBName                                                              smithy.SchemaExtensions
+	eDBInstance_Endpoint                                                            smithy.SchemaExtensions
+	eDBInstance_AllocatedStorage                                                    smithy.SchemaExtensions
+	eDBInstance_InstanceCreateTime                                                  smithy.SchemaExtensions
+	eDBInstance_PreferredBackupWindow                                               smithy.SchemaExtensions
+	eDBInstance_BackupRetentionPeriod                                               smithy.SchemaExtensions
+	eDBInstance_DBSecurityGroups                                                    smithy.SchemaExtensions
+	eDBInstance_VpcSecurityGroups                                                   smithy.SchemaExtensions
+	eDBInstance_DBParameterGroups                                                   smithy.SchemaExtensions
+	eDBInstance_AvailabilityZone                                                    smithy.SchemaExtensions
+	eDBInstance_DBSubnetGroup                                                       smithy.SchemaExtensions
+	eDBInstance_PreferredMaintenanceWindow                                          smithy.SchemaExtensions
+	eDBInstance_PendingModifiedValues                                               smithy.SchemaExtensions
+	eDBInstance_LatestRestorableTime                                                smithy.SchemaExtensions
+	eDBInstance_MultiAZ                                                             smithy.SchemaExtensions
+	eDBInstance_EngineVersion                                                       smithy.SchemaExtensions
+	eDBInstance_AutoMinorVersionUpgrade                                             smithy.SchemaExtensions
+	eDBInstance_ReadReplicaSourceDBInstanceIdentifier                               smithy.SchemaExtensions
+	eDBInstance_ReadReplicaDBInstanceIdentifiers                                    smithy.SchemaExtensions
+	eDBInstance_ReadReplicaDBClusterIdentifiers                                     smithy.SchemaExtensions
+	eDBInstance_LicenseModel                                                        smithy.SchemaExtensions
+	eDBInstance_Iops                                                                smithy.SchemaExtensions
+	eDBInstance_OptionGroupMemberships                                              smithy.SchemaExtensions
+	eDBInstance_CharacterSetName                                                    smithy.SchemaExtensions
+	eDBInstance_SecondaryAvailabilityZone                                           smithy.SchemaExtensions
+	eDBInstance_PubliclyAccessible                                                  smithy.SchemaExtensions
+	eDBInstance_StatusInfos                                                         smithy.SchemaExtensions
+	eDBInstance_StorageType                                                         smithy.SchemaExtensions
+	eDBInstance_TdeCredentialArn                                                    smithy.SchemaExtensions
+	eDBInstance_DbInstancePort                                                      smithy.SchemaExtensions
+	eDBInstance_DBClusterIdentifier                                                 smithy.SchemaExtensions
+	eDBInstance_StorageEncrypted                                                    smithy.SchemaExtensions
+	eDBInstance_KmsKeyId                                                            smithy.SchemaExtensions
+	eDBInstance_DbiResourceId                                                       smithy.SchemaExtensions
+	eDBInstance_CACertificateIdentifier                                             smithy.SchemaExtensions
+	eDBInstance_DomainMemberships                                                   smithy.SchemaExtensions
+	eDBInstance_CopyTagsToSnapshot                                                  smithy.SchemaExtensions
+	eDBInstance_MonitoringInterval                                                  smithy.SchemaExtensions
+	eDBInstance_EnhancedMonitoringResourceArn                                       smithy.SchemaExtensions
+	eDBInstance_MonitoringRoleArn                                                   smithy.SchemaExtensions
+	eDBInstance_PromotionTier                                                       smithy.SchemaExtensions
+	eDBInstance_DBInstanceArn                                                       smithy.SchemaExtensions
+	eDBInstance_Timezone                                                            smithy.SchemaExtensions
+	eDBInstance_IAMDatabaseAuthenticationEnabled                                    smithy.SchemaExtensions
+	eDBInstance_PerformanceInsightsEnabled                                          smithy.SchemaExtensions
+	eDBInstance_PerformanceInsightsKMSKeyId                                         smithy.SchemaExtensions
+	eDBInstance_EnabledCloudwatchLogsExports                                        smithy.SchemaExtensions
+	eDBInstance_DeletionProtection                                                  smithy.SchemaExtensions
+	eDBInstance_NetworkType                                                         smithy.SchemaExtensions
+	eDBInstanceAlreadyExistsFault                                                   smithy.SchemaExtensions
+	eDBInstanceAlreadyExistsFault_message                                           smithy.SchemaExtensions
+	e_DBInstanceList                                                                smithy.SchemaExtensions
+	e_DBInstanceList_member                                                         smithy.SchemaExtensions
+	eDBInstanceNotFoundFault                                                        smithy.SchemaExtensions
+	eDBInstanceNotFoundFault_message                                                smithy.SchemaExtensions
+	eDBInstanceStatusInfo                                                           smithy.SchemaExtensions
+	eDBInstanceStatusInfo_StatusType                                                smithy.SchemaExtensions
+	eDBInstanceStatusInfo_Normal                                                    smithy.SchemaExtensions
+	eDBInstanceStatusInfo_Status                                                    smithy.SchemaExtensions
+	eDBInstanceStatusInfo_Message                                                   smithy.SchemaExtensions
+	e_DBInstanceStatusInfoList                                                      smithy.SchemaExtensions
+	e_DBInstanceStatusInfoList_member                                               smithy.SchemaExtensions
+	eDBParameterGroup                                                               smithy.SchemaExtensions
+	eDBParameterGroup_DBParameterGroupName                                          smithy.SchemaExtensions
+	eDBParameterGroup_DBParameterGroupFamily                                        smithy.SchemaExtensions
+	eDBParameterGroup_Description                                                   smithy.SchemaExtensions
+	eDBParameterGroup_DBParameterGroupArn                                           smithy.SchemaExtensions
+	eDBParameterGroupAlreadyExistsFault                                             smithy.SchemaExtensions
+	eDBParameterGroupAlreadyExistsFault_message                                     smithy.SchemaExtensions
+	e_DBParameterGroupList                                                          smithy.SchemaExtensions
+	e_DBParameterGroupList_member                                                   smithy.SchemaExtensions
+	eDBParameterGroupNotFoundFault                                                  smithy.SchemaExtensions
+	eDBParameterGroupNotFoundFault_message                                          smithy.SchemaExtensions
+	eDBParameterGroupQuotaExceededFault                                             smithy.SchemaExtensions
+	eDBParameterGroupQuotaExceededFault_message                                     smithy.SchemaExtensions
+	eDBParameterGroupStatus                                                         smithy.SchemaExtensions
+	eDBParameterGroupStatus_DBParameterGroupName                                    smithy.SchemaExtensions
+	eDBParameterGroupStatus_ParameterApplyStatus                                    smithy.SchemaExtensions
+	e_DBParameterGroupStatusList                                                    smithy.SchemaExtensions
+	e_DBParameterGroupStatusList_member                                             smithy.SchemaExtensions
+	eDBSecurityGroupMembership                                                      smithy.SchemaExtensions
+	eDBSecurityGroupMembership_DBSecurityGroupName                                  smithy.SchemaExtensions
+	eDBSecurityGroupMembership_Status                                               smithy.SchemaExtensions
+	e_DBSecurityGroupMembershipList                                                 smithy.SchemaExtensions
+	e_DBSecurityGroupMembershipList_member                                          smithy.SchemaExtensions
+	e_DBSecurityGroupNameList                                                       smithy.SchemaExtensions
+	e_DBSecurityGroupNameList_member                                                smithy.SchemaExtensions
+	eDBSecurityGroupNotFoundFault                                                   smithy.SchemaExtensions
+	eDBSecurityGroupNotFoundFault_message                                           smithy.SchemaExtensions
+	eDBSnapshotAlreadyExistsFault                                                   smithy.SchemaExtensions
+	eDBSnapshotAlreadyExistsFault_message                                           smithy.SchemaExtensions
+	eDBSnapshotNotFoundFault                                                        smithy.SchemaExtensions
+	eDBSnapshotNotFoundFault_message                                                smithy.SchemaExtensions
+	eDBSubnetGroup                                                                  smithy.SchemaExtensions
+	eDBSubnetGroup_DBSubnetGroupName                                                smithy.SchemaExtensions
+	eDBSubnetGroup_DBSubnetGroupDescription                                         smithy.SchemaExtensions
+	eDBSubnetGroup_VpcId                                                            smithy.SchemaExtensions
+	eDBSubnetGroup_SubnetGroupStatus                                                smithy.SchemaExtensions
+	eDBSubnetGroup_Subnets                                                          smithy.SchemaExtensions
+	eDBSubnetGroup_DBSubnetGroupArn                                                 smithy.SchemaExtensions
+	eDBSubnetGroup_SupportedNetworkTypes                                            smithy.SchemaExtensions
+	eDBSubnetGroupAlreadyExistsFault                                                smithy.SchemaExtensions
+	eDBSubnetGroupAlreadyExistsFault_message                                        smithy.SchemaExtensions
+	eDBSubnetGroupDoesNotCoverEnoughAZs                                             smithy.SchemaExtensions
+	eDBSubnetGroupDoesNotCoverEnoughAZs_message                                     smithy.SchemaExtensions
+	eDBSubnetGroupNotFoundFault                                                     smithy.SchemaExtensions
+	eDBSubnetGroupNotFoundFault_message                                             smithy.SchemaExtensions
+	eDBSubnetGroupQuotaExceededFault                                                smithy.SchemaExtensions
+	eDBSubnetGroupQuotaExceededFault_message                                        smithy.SchemaExtensions
+	e_DBSubnetGroups                                                                smithy.SchemaExtensions
+	e_DBSubnetGroups_member                                                         smithy.SchemaExtensions
+	eDBSubnetQuotaExceededFault                                                     smithy.SchemaExtensions
+	eDBSubnetQuotaExceededFault_message                                             smithy.SchemaExtensions
+	eDBUpgradeDependencyFailureFault                                                smithy.SchemaExtensions
+	eDBUpgradeDependencyFailureFault_message                                        smithy.SchemaExtensions
+	eDomainMembership                                                               smithy.SchemaExtensions
+	eDomainMembership_Domain                                                        smithy.SchemaExtensions
+	eDomainMembership_Status                                                        smithy.SchemaExtensions
+	eDomainMembership_FQDN                                                          smithy.SchemaExtensions
+	eDomainMembership_IAMRoleName                                                   smithy.SchemaExtensions
+	e_DomainMembershipList                                                          smithy.SchemaExtensions
+	e_DomainMembershipList_member                                                   smithy.SchemaExtensions
+	eDomainNotFoundFault                                                            smithy.SchemaExtensions
+	eDomainNotFoundFault_message                                                    smithy.SchemaExtensions
+	e_Double                                                                        smithy.SchemaExtensions
+	e_DoubleOptional                                                                smithy.SchemaExtensions
+	eDoubleRange                                                                    smithy.SchemaExtensions
+	eDoubleRange_From                                                               smithy.SchemaExtensions
+	eDoubleRange_To                                                                 smithy.SchemaExtensions
+	e_DoubleRangeList                                                               smithy.SchemaExtensions
+	e_DoubleRangeList_member                                                        smithy.SchemaExtensions
+	eEndpoint                                                                       smithy.SchemaExtensions
+	eEndpoint_Address                                                               smithy.SchemaExtensions
+	eEndpoint_Port                                                                  smithy.SchemaExtensions
+	eEndpoint_HostedZoneId                                                          smithy.SchemaExtensions
+	eEngineDefaults                                                                 smithy.SchemaExtensions
+	eEngineDefaults_DBParameterGroupFamily                                          smithy.SchemaExtensions
+	eEngineDefaults_Marker                                                          smithy.SchemaExtensions
+	eEngineDefaults_Parameters                                                      smithy.SchemaExtensions
+	eEvent                                                                          smithy.SchemaExtensions
+	eEvent_SourceIdentifier                                                         smithy.SchemaExtensions
+	eEvent_SourceType                                                               smithy.SchemaExtensions
+	eEvent_Message                                                                  smithy.SchemaExtensions
+	eEvent_EventCategories                                                          smithy.SchemaExtensions
+	eEvent_Date                                                                     smithy.SchemaExtensions
+	eEvent_SourceArn                                                                smithy.SchemaExtensions
+	e_EventCategoriesList                                                           smithy.SchemaExtensions
+	e_EventCategoriesList_member                                                    smithy.SchemaExtensions
+	eEventCategoriesMap                                                             smithy.SchemaExtensions
+	eEventCategoriesMap_SourceType                                                  smithy.SchemaExtensions
+	eEventCategoriesMap_EventCategories                                             smithy.SchemaExtensions
+	e_EventCategoriesMapList                                                        smithy.SchemaExtensions
+	e_EventCategoriesMapList_member                                                 smithy.SchemaExtensions
+	e_EventList                                                                     smithy.SchemaExtensions
+	e_EventList_member                                                              smithy.SchemaExtensions
+	eEventSubscription                                                              smithy.SchemaExtensions
+	eEventSubscription_CustomerAwsId                                                smithy.SchemaExtensions
+	eEventSubscription_CustSubscriptionId                                           smithy.SchemaExtensions
+	eEventSubscription_SnsTopicArn                                                  smithy.SchemaExtensions
+	eEventSubscription_Status                                                       smithy.SchemaExtensions
+	eEventSubscription_SubscriptionCreationTime                                     smithy.SchemaExtensions
+	eEventSubscription_SourceType                                                   smithy.SchemaExtensions
+	eEventSubscription_SourceIdsList                                                smithy.SchemaExtensions
+	eEventSubscription_EventCategoriesList                                          smithy.SchemaExtensions
+	eEventSubscription_Enabled                                                      smithy.SchemaExtensions
+	eEventSubscription_EventSubscriptionArn                                         smithy.SchemaExtensions
+	eEventSubscriptionQuotaExceededFault                                            smithy.SchemaExtensions
+	eEventSubscriptionQuotaExceededFault_message                                    smithy.SchemaExtensions
+	e_EventSubscriptionsList                                                        smithy.SchemaExtensions
+	e_EventSubscriptionsList_member                                                 smithy.SchemaExtensions
+	e_ExceptionMessage                                                              smithy.SchemaExtensions
+	eFailoverState                                                                  smithy.SchemaExtensions
+	eFailoverState_Status                                                           smithy.SchemaExtensions
+	eFailoverState_FromDbClusterArn                                                 smithy.SchemaExtensions
+	eFailoverState_ToDbClusterArn                                                   smithy.SchemaExtensions
+	eFailoverState_IsDataLossAllowed                                                smithy.SchemaExtensions
+	eFailoverStatus                                                                 smithy.SchemaExtensions
+	eFailoverStatus_PENDING                                                         smithy.SchemaExtensions
+	eFailoverStatus_FAILING_OVER                                                    smithy.SchemaExtensions
+	eFailoverStatus_CANCELLING                                                      smithy.SchemaExtensions
+	eFilter                                                                         smithy.SchemaExtensions
+	eFilter_Name                                                                    smithy.SchemaExtensions
+	eFilter_Values                                                                  smithy.SchemaExtensions
+	e_FilterList                                                                    smithy.SchemaExtensions
+	e_FilterList_member                                                             smithy.SchemaExtensions
+	e_FilterValueList                                                               smithy.SchemaExtensions
+	e_FilterValueList_member                                                        smithy.SchemaExtensions
+	eGlobalCluster                                                                  smithy.SchemaExtensions
+	eGlobalCluster_GlobalClusterIdentifier                                          smithy.SchemaExtensions
+	eGlobalCluster_GlobalClusterResourceId                                          smithy.SchemaExtensions
+	eGlobalCluster_GlobalClusterArn                                                 smithy.SchemaExtensions
+	eGlobalCluster_Status                                                           smithy.SchemaExtensions
+	eGlobalCluster_Engine                                                           smithy.SchemaExtensions
+	eGlobalCluster_EngineVersion                                                    smithy.SchemaExtensions
+	eGlobalCluster_DatabaseName                                                     smithy.SchemaExtensions
+	eGlobalCluster_StorageEncrypted                                                 smithy.SchemaExtensions
+	eGlobalCluster_DeletionProtection                                               smithy.SchemaExtensions
+	eGlobalCluster_GlobalClusterMembers                                             smithy.SchemaExtensions
+	eGlobalCluster_FailoverState                                                    smithy.SchemaExtensions
+	eGlobalCluster_TagList                                                          smithy.SchemaExtensions
+	eGlobalClusterAlreadyExistsFault                                                smithy.SchemaExtensions
+	eGlobalClusterAlreadyExistsFault_message                                        smithy.SchemaExtensions
+	e_GlobalClusterIdentifier                                                       smithy.SchemaExtensions
+	e_GlobalClusterList                                                             smithy.SchemaExtensions
+	e_GlobalClusterList_member                                                      smithy.SchemaExtensions
+	eGlobalClusterMember                                                            smithy.SchemaExtensions
+	eGlobalClusterMember_DBClusterArn                                               smithy.SchemaExtensions
+	eGlobalClusterMember_Readers                                                    smithy.SchemaExtensions
+	eGlobalClusterMember_IsWriter                                                   smithy.SchemaExtensions
+	e_GlobalClusterMemberList                                                       smithy.SchemaExtensions
+	e_GlobalClusterMemberList_member                                                smithy.SchemaExtensions
+	eGlobalClusterNotFoundFault                                                     smithy.SchemaExtensions
+	eGlobalClusterNotFoundFault_message                                             smithy.SchemaExtensions
+	eGlobalClusterQuotaExceededFault                                                smithy.SchemaExtensions
+	eGlobalClusterQuotaExceededFault_message                                        smithy.SchemaExtensions
+	eInstanceQuotaExceededFault                                                     smithy.SchemaExtensions
+	eInstanceQuotaExceededFault_message                                             smithy.SchemaExtensions
+	eInsufficientDBClusterCapacityFault                                             smithy.SchemaExtensions
+	eInsufficientDBClusterCapacityFault_message                                     smithy.SchemaExtensions
+	eInsufficientDBInstanceCapacityFault                                            smithy.SchemaExtensions
+	eInsufficientDBInstanceCapacityFault_message                                    smithy.SchemaExtensions
+	eInsufficientStorageClusterCapacityFault                                        smithy.SchemaExtensions
+	eInsufficientStorageClusterCapacityFault_message                                smithy.SchemaExtensions
+	e_Integer                                                                       smithy.SchemaExtensions
+	e_IntegerOptional                                                               smithy.SchemaExtensions
+	eInvalidDBClusterEndpointStateFault                                             smithy.SchemaExtensions
+	eInvalidDBClusterEndpointStateFault_message                                     smithy.SchemaExtensions
+	eInvalidDBClusterSnapshotStateFault                                             smithy.SchemaExtensions
+	eInvalidDBClusterSnapshotStateFault_message                                     smithy.SchemaExtensions
+	eInvalidDBClusterStateFault                                                     smithy.SchemaExtensions
+	eInvalidDBClusterStateFault_message                                             smithy.SchemaExtensions
+	eInvalidDBInstanceStateFault                                                    smithy.SchemaExtensions
+	eInvalidDBInstanceStateFault_message                                            smithy.SchemaExtensions
+	eInvalidDBParameterGroupStateFault                                              smithy.SchemaExtensions
+	eInvalidDBParameterGroupStateFault_message                                      smithy.SchemaExtensions
+	eInvalidDBSecurityGroupStateFault                                               smithy.SchemaExtensions
+	eInvalidDBSecurityGroupStateFault_message                                       smithy.SchemaExtensions
+	eInvalidDBSnapshotStateFault                                                    smithy.SchemaExtensions
+	eInvalidDBSnapshotStateFault_message                                            smithy.SchemaExtensions
+	eInvalidDBSubnetGroupStateFault                                                 smithy.SchemaExtensions
+	eInvalidDBSubnetGroupStateFault_message                                         smithy.SchemaExtensions
+	eInvalidDBSubnetStateFault                                                      smithy.SchemaExtensions
+	eInvalidDBSubnetStateFault_message                                              smithy.SchemaExtensions
+	eInvalidEventSubscriptionStateFault                                             smithy.SchemaExtensions
+	eInvalidEventSubscriptionStateFault_message                                     smithy.SchemaExtensions
+	eInvalidGlobalClusterStateFault                                                 smithy.SchemaExtensions
+	eInvalidGlobalClusterStateFault_message                                         smithy.SchemaExtensions
+	eInvalidRestoreFault                                                            smithy.SchemaExtensions
+	eInvalidRestoreFault_message                                                    smithy.SchemaExtensions
+	eInvalidSubnet                                                                  smithy.SchemaExtensions
+	eInvalidSubnet_message                                                          smithy.SchemaExtensions
+	eInvalidVPCNetworkStateFault                                                    smithy.SchemaExtensions
+	eInvalidVPCNetworkStateFault_message                                            smithy.SchemaExtensions
+	e_KeyList                                                                       smithy.SchemaExtensions
+	e_KeyList_member                                                                smithy.SchemaExtensions
+	eKMSKeyNotAccessibleFault                                                       smithy.SchemaExtensions
+	eKMSKeyNotAccessibleFault_message                                               smithy.SchemaExtensions
+	e_LogTypeList                                                                   smithy.SchemaExtensions
+	e_LogTypeList_member                                                            smithy.SchemaExtensions
+	eNetworkTypeNotSupportedFault                                                   smithy.SchemaExtensions
+	eNetworkTypeNotSupportedFault_message                                           smithy.SchemaExtensions
+	eOptionGroupMembership                                                          smithy.SchemaExtensions
+	eOptionGroupMembership_OptionGroupName                                          smithy.SchemaExtensions
+	eOptionGroupMembership_Status                                                   smithy.SchemaExtensions
+	e_OptionGroupMembershipList                                                     smithy.SchemaExtensions
+	e_OptionGroupMembershipList_member                                              smithy.SchemaExtensions
+	eOptionGroupNotFoundFault                                                       smithy.SchemaExtensions
+	eOptionGroupNotFoundFault_message                                               smithy.SchemaExtensions
+	eOrderableDBInstanceOption                                                      smithy.SchemaExtensions
+	eOrderableDBInstanceOption_Engine                                               smithy.SchemaExtensions
+	eOrderableDBInstanceOption_EngineVersion                                        smithy.SchemaExtensions
+	eOrderableDBInstanceOption_DBInstanceClass                                      smithy.SchemaExtensions
+	eOrderableDBInstanceOption_LicenseModel                                         smithy.SchemaExtensions
+	eOrderableDBInstanceOption_AvailabilityZones                                    smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MultiAZCapable                                       smithy.SchemaExtensions
+	eOrderableDBInstanceOption_ReadReplicaCapable                                   smithy.SchemaExtensions
+	eOrderableDBInstanceOption_Vpc                                                  smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsStorageEncryption                            smithy.SchemaExtensions
+	eOrderableDBInstanceOption_StorageType                                          smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsIops                                         smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsEnhancedMonitoring                           smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsIAMDatabaseAuthentication                    smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsPerformanceInsights                          smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MinStorageSize                                       smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MaxStorageSize                                       smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MinIopsPerDbInstance                                 smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MaxIopsPerDbInstance                                 smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MinIopsPerGib                                        smithy.SchemaExtensions
+	eOrderableDBInstanceOption_MaxIopsPerGib                                        smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportsGlobalDatabases                              smithy.SchemaExtensions
+	eOrderableDBInstanceOption_SupportedNetworkTypes                                smithy.SchemaExtensions
+	e_OrderableDBInstanceOptionsList                                                smithy.SchemaExtensions
+	e_OrderableDBInstanceOptionsList_member                                         smithy.SchemaExtensions
+	eParameter                                                                      smithy.SchemaExtensions
+	eParameter_ParameterName                                                        smithy.SchemaExtensions
+	eParameter_ParameterValue                                                       smithy.SchemaExtensions
+	eParameter_Description                                                          smithy.SchemaExtensions
+	eParameter_Source                                                               smithy.SchemaExtensions
+	eParameter_ApplyType                                                            smithy.SchemaExtensions
+	eParameter_DataType                                                             smithy.SchemaExtensions
+	eParameter_AllowedValues                                                        smithy.SchemaExtensions
+	eParameter_IsModifiable                                                         smithy.SchemaExtensions
+	eParameter_MinimumEngineVersion                                                 smithy.SchemaExtensions
+	eParameter_ApplyMethod                                                          smithy.SchemaExtensions
+	e_ParametersList                                                                smithy.SchemaExtensions
+	e_ParametersList_member                                                         smithy.SchemaExtensions
+	ePendingCloudwatchLogsExports                                                   smithy.SchemaExtensions
+	ePendingCloudwatchLogsExports_LogTypesToEnable                                  smithy.SchemaExtensions
+	ePendingCloudwatchLogsExports_LogTypesToDisable                                 smithy.SchemaExtensions
+	ePendingMaintenanceAction                                                       smithy.SchemaExtensions
+	ePendingMaintenanceAction_Action                                                smithy.SchemaExtensions
+	ePendingMaintenanceAction_AutoAppliedAfterDate                                  smithy.SchemaExtensions
+	ePendingMaintenanceAction_ForcedApplyDate                                       smithy.SchemaExtensions
+	ePendingMaintenanceAction_OptInStatus                                           smithy.SchemaExtensions
+	ePendingMaintenanceAction_CurrentApplyDate                                      smithy.SchemaExtensions
+	ePendingMaintenanceAction_Description                                           smithy.SchemaExtensions
+	e_PendingMaintenanceActionDetails                                               smithy.SchemaExtensions
+	e_PendingMaintenanceActionDetails_member                                        smithy.SchemaExtensions
+	e_PendingMaintenanceActions                                                     smithy.SchemaExtensions
+	e_PendingMaintenanceActions_member                                              smithy.SchemaExtensions
+	ePendingModifiedValues                                                          smithy.SchemaExtensions
+	ePendingModifiedValues_DBInstanceClass                                          smithy.SchemaExtensions
+	ePendingModifiedValues_AllocatedStorage                                         smithy.SchemaExtensions
+	ePendingModifiedValues_MasterUserPassword                                       smithy.SchemaExtensions
+	ePendingModifiedValues_Port                                                     smithy.SchemaExtensions
+	ePendingModifiedValues_BackupRetentionPeriod                                    smithy.SchemaExtensions
+	ePendingModifiedValues_MultiAZ                                                  smithy.SchemaExtensions
+	ePendingModifiedValues_EngineVersion                                            smithy.SchemaExtensions
+	ePendingModifiedValues_LicenseModel                                             smithy.SchemaExtensions
+	ePendingModifiedValues_Iops                                                     smithy.SchemaExtensions
+	ePendingModifiedValues_DBInstanceIdentifier                                     smithy.SchemaExtensions
+	ePendingModifiedValues_StorageType                                              smithy.SchemaExtensions
+	ePendingModifiedValues_CACertificateIdentifier                                  smithy.SchemaExtensions
+	ePendingModifiedValues_DBSubnetGroupName                                        smithy.SchemaExtensions
+	ePendingModifiedValues_PendingCloudwatchLogsExports                             smithy.SchemaExtensions
+	eProvisionedIopsNotAvailableInAZFault                                           smithy.SchemaExtensions
+	eProvisionedIopsNotAvailableInAZFault_message                                   smithy.SchemaExtensions
+	eRange                                                                          smithy.SchemaExtensions
+	eRange_From                                                                     smithy.SchemaExtensions
+	eRange_To                                                                       smithy.SchemaExtensions
+	eRange_Step                                                                     smithy.SchemaExtensions
+	e_RangeList                                                                     smithy.SchemaExtensions
+	e_RangeList_member                                                              smithy.SchemaExtensions
+	e_ReadersArnList                                                                smithy.SchemaExtensions
+	e_ReadersArnList_member                                                         smithy.SchemaExtensions
+	e_ReadReplicaDBClusterIdentifierList                                            smithy.SchemaExtensions
+	e_ReadReplicaDBClusterIdentifierList_member                                     smithy.SchemaExtensions
+	e_ReadReplicaDBInstanceIdentifierList                                           smithy.SchemaExtensions
+	e_ReadReplicaDBInstanceIdentifierList_member                                    smithy.SchemaExtensions
+	e_ReadReplicaIdentifierList                                                     smithy.SchemaExtensions
+	e_ReadReplicaIdentifierList_member                                              smithy.SchemaExtensions
+	eResourceNotFoundFault                                                          smithy.SchemaExtensions
+	eResourceNotFoundFault_message                                                  smithy.SchemaExtensions
+	eResourcePendingMaintenanceActions                                              smithy.SchemaExtensions
+	eResourcePendingMaintenanceActions_ResourceIdentifier                           smithy.SchemaExtensions
+	eResourcePendingMaintenanceActions_PendingMaintenanceActionDetails              smithy.SchemaExtensions
+	e_SensitiveString                                                               smithy.SchemaExtensions
+	eServerlessV2ScalingConfiguration                                               smithy.SchemaExtensions
+	eServerlessV2ScalingConfiguration_MinCapacity                                   smithy.SchemaExtensions
+	eServerlessV2ScalingConfiguration_MaxCapacity                                   smithy.SchemaExtensions
+	eServerlessV2ScalingConfigurationInfo                                           smithy.SchemaExtensions
+	eServerlessV2ScalingConfigurationInfo_MinCapacity                               smithy.SchemaExtensions
+	eServerlessV2ScalingConfigurationInfo_MaxCapacity                               smithy.SchemaExtensions
+	eSharedSnapshotQuotaExceededFault                                               smithy.SchemaExtensions
+	eSharedSnapshotQuotaExceededFault_message                                       smithy.SchemaExtensions
+	eSnapshotQuotaExceededFault                                                     smithy.SchemaExtensions
+	eSnapshotQuotaExceededFault_message                                             smithy.SchemaExtensions
+	eSNSInvalidTopicFault                                                           smithy.SchemaExtensions
+	eSNSInvalidTopicFault_message                                                   smithy.SchemaExtensions
+	eSNSNoAuthorizationFault                                                        smithy.SchemaExtensions
+	eSNSNoAuthorizationFault_message                                                smithy.SchemaExtensions
+	eSNSTopicArnNotFoundFault                                                       smithy.SchemaExtensions
+	eSNSTopicArnNotFoundFault_message                                               smithy.SchemaExtensions
+	e_SourceIdsList                                                                 smithy.SchemaExtensions
+	e_SourceIdsList_member                                                          smithy.SchemaExtensions
+	eSourceNotFoundFault                                                            smithy.SchemaExtensions
+	eSourceNotFoundFault_message                                                    smithy.SchemaExtensions
+	eSourceType                                                                     smithy.SchemaExtensions
+	eSourceType_db_instance                                                         smithy.SchemaExtensions
+	eSourceType_db_parameter_group                                                  smithy.SchemaExtensions
+	eSourceType_db_security_group                                                   smithy.SchemaExtensions
+	eSourceType_db_snapshot                                                         smithy.SchemaExtensions
+	eSourceType_db_cluster                                                          smithy.SchemaExtensions
+	eSourceType_db_cluster_snapshot                                                 smithy.SchemaExtensions
+	eStorageQuotaExceededFault                                                      smithy.SchemaExtensions
+	eStorageQuotaExceededFault_message                                              smithy.SchemaExtensions
+	eStorageTypeNotSupportedFault                                                   smithy.SchemaExtensions
+	eStorageTypeNotSupportedFault_message                                           smithy.SchemaExtensions
+	e_String                                                                        smithy.SchemaExtensions
+	e_StringList                                                                    smithy.SchemaExtensions
+	e_StringList_member                                                             smithy.SchemaExtensions
+	eSubnet                                                                         smithy.SchemaExtensions
+	eSubnet_SubnetIdentifier                                                        smithy.SchemaExtensions
+	eSubnet_SubnetAvailabilityZone                                                  smithy.SchemaExtensions
+	eSubnet_SubnetStatus                                                            smithy.SchemaExtensions
+	eSubnetAlreadyInUse                                                             smithy.SchemaExtensions
+	eSubnetAlreadyInUse_message                                                     smithy.SchemaExtensions
+	e_SubnetIdentifierList                                                          smithy.SchemaExtensions
+	e_SubnetIdentifierList_member                                                   smithy.SchemaExtensions
+	e_SubnetList                                                                    smithy.SchemaExtensions
+	e_SubnetList_member                                                             smithy.SchemaExtensions
+	eSubscriptionAlreadyExistFault                                                  smithy.SchemaExtensions
+	eSubscriptionAlreadyExistFault_message                                          smithy.SchemaExtensions
+	eSubscriptionCategoryNotFoundFault                                              smithy.SchemaExtensions
+	eSubscriptionCategoryNotFoundFault_message                                      smithy.SchemaExtensions
+	eSubscriptionNotFoundFault                                                      smithy.SchemaExtensions
+	eSubscriptionNotFoundFault_message                                              smithy.SchemaExtensions
+	e_SupportedCharacterSetsList                                                    smithy.SchemaExtensions
+	e_SupportedCharacterSetsList_member                                             smithy.SchemaExtensions
+	e_SupportedTimezonesList                                                        smithy.SchemaExtensions
+	e_SupportedTimezonesList_member                                                 smithy.SchemaExtensions
+	eTag                                                                            smithy.SchemaExtensions
+	eTag_Key                                                                        smithy.SchemaExtensions
+	eTag_Value                                                                      smithy.SchemaExtensions
+	e_TagList                                                                       smithy.SchemaExtensions
+	e_TagList_member                                                                smithy.SchemaExtensions
+	eTimezone                                                                       smithy.SchemaExtensions
+	eTimezone_TimezoneName                                                          smithy.SchemaExtensions
+	e_TStamp                                                                        smithy.SchemaExtensions
+	eUpgradeTarget                                                                  smithy.SchemaExtensions
+	eUpgradeTarget_Engine                                                           smithy.SchemaExtensions
+	eUpgradeTarget_EngineVersion                                                    smithy.SchemaExtensions
+	eUpgradeTarget_Description                                                      smithy.SchemaExtensions
+	eUpgradeTarget_AutoUpgrade                                                      smithy.SchemaExtensions
+	eUpgradeTarget_IsMajorVersionUpgrade                                            smithy.SchemaExtensions
+	eUpgradeTarget_SupportsGlobalDatabases                                          smithy.SchemaExtensions
+	eValidDBInstanceModificationsMessage                                            smithy.SchemaExtensions
+	eValidDBInstanceModificationsMessage_Storage                                    smithy.SchemaExtensions
+	eValidStorageOptions                                                            smithy.SchemaExtensions
+	eValidStorageOptions_StorageType                                                smithy.SchemaExtensions
+	eValidStorageOptions_StorageSize                                                smithy.SchemaExtensions
+	eValidStorageOptions_ProvisionedIops                                            smithy.SchemaExtensions
+	eValidStorageOptions_IopsToStorageRatio                                         smithy.SchemaExtensions
+	e_ValidStorageOptionsList                                                       smithy.SchemaExtensions
+	e_ValidStorageOptionsList_member                                                smithy.SchemaExtensions
+	e_ValidUpgradeTargetList                                                        smithy.SchemaExtensions
+	e_ValidUpgradeTargetList_member                                                 smithy.SchemaExtensions
+	e_VpcSecurityGroupIdList                                                        smithy.SchemaExtensions
+	e_VpcSecurityGroupIdList_member                                                 smithy.SchemaExtensions
+	eVpcSecurityGroupMembership                                                     smithy.SchemaExtensions
+	eVpcSecurityGroupMembership_VpcSecurityGroupId                                  smithy.SchemaExtensions
+	eVpcSecurityGroupMembership_Status                                              smithy.SchemaExtensions
+	e_VpcSecurityGroupMembershipList                                                smithy.SchemaExtensions
+	e_VpcSecurityGroupMembershipList_member                                         smithy.SchemaExtensions
+	eAddRoleToDBClusterMessage                                                      smithy.SchemaExtensions
+	eAddRoleToDBClusterMessage_DBClusterIdentifier                                  smithy.SchemaExtensions
+	eAddRoleToDBClusterMessage_RoleArn                                              smithy.SchemaExtensions
+	eAddRoleToDBClusterMessage_FeatureName                                          smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscriptionMessage                                       smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscriptionMessage_SubscriptionName                      smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscriptionMessage_SourceIdentifier                      smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscriptionResult                                        smithy.SchemaExtensions
+	eAddSourceIdentifierToSubscriptionResult_EventSubscription                      smithy.SchemaExtensions
+	eAddTagsToResourceMessage                                                       smithy.SchemaExtensions
+	eAddTagsToResourceMessage_ResourceName                                          smithy.SchemaExtensions
+	eAddTagsToResourceMessage_Tags                                                  smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionMessage                                           smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionMessage_ResourceIdentifier                        smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionMessage_ApplyAction                               smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionMessage_OptInType                                 smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionResult                                            smithy.SchemaExtensions
+	eApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions          smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupMessage                                             smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier     smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier     smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription    smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupMessage_Tags                                        smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupResult                                              smithy.SchemaExtensions
+	eCopyDBClusterParameterGroupResult_DBClusterParameterGroup                      smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage                                                   smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier                 smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier                 smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_KmsKeyId                                          smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_PreSignedUrl                                      smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_CopyTags                                          smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_Tags                                              smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_SourceRegion                                      smithy.SchemaExtensions
+	eCopyDBClusterSnapshotMessage_DestinationRegion                                 smithy.SchemaExtensions
+	eCopyDBClusterSnapshotResult                                                    smithy.SchemaExtensions
+	eCopyDBClusterSnapshotResult_DBClusterSnapshot                                  smithy.SchemaExtensions
+	eCopyDBParameterGroupMessage                                                    smithy.SchemaExtensions
+	eCopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier                   smithy.SchemaExtensions
+	eCopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier                   smithy.SchemaExtensions
+	eCopyDBParameterGroupMessage_TargetDBParameterGroupDescription                  smithy.SchemaExtensions
+	eCopyDBParameterGroupMessage_Tags                                               smithy.SchemaExtensions
+	eCopyDBParameterGroupResult                                                     smithy.SchemaExtensions
+	eCopyDBParameterGroupResult_DBParameterGroup                                    smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage                                                 smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_DBClusterIdentifier                             smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_DBClusterEndpointIdentifier                     smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_EndpointType                                    smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_StaticMembers                                   smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_ExcludedMembers                                 smithy.SchemaExtensions
+	eCreateDBClusterEndpointMessage_Tags                                            smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput                                                  smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_DBClusterEndpointIdentifier                      smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_DBClusterIdentifier                              smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier              smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_Endpoint                                         smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_Status                                           smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_EndpointType                                     smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_CustomEndpointType                               smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_StaticMembers                                    smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_ExcludedMembers                                  smithy.SchemaExtensions
+	eCreateDBClusterEndpointOutput_DBClusterEndpointArn                             smithy.SchemaExtensions
+	eCreateDBClusterMessage                                                         smithy.SchemaExtensions
+	eCreateDBClusterMessage_AvailabilityZones                                       smithy.SchemaExtensions
+	eCreateDBClusterMessage_BackupRetentionPeriod                                   smithy.SchemaExtensions
+	eCreateDBClusterMessage_CharacterSetName                                        smithy.SchemaExtensions
+	eCreateDBClusterMessage_CopyTagsToSnapshot                                      smithy.SchemaExtensions
+	eCreateDBClusterMessage_DatabaseName                                            smithy.SchemaExtensions
+	eCreateDBClusterMessage_DBClusterIdentifier                                     smithy.SchemaExtensions
+	eCreateDBClusterMessage_DBClusterParameterGroupName                             smithy.SchemaExtensions
+	eCreateDBClusterMessage_VpcSecurityGroupIds                                     smithy.SchemaExtensions
+	eCreateDBClusterMessage_DBSubnetGroupName                                       smithy.SchemaExtensions
+	eCreateDBClusterMessage_Engine                                                  smithy.SchemaExtensions
+	eCreateDBClusterMessage_EngineVersion                                           smithy.SchemaExtensions
+	eCreateDBClusterMessage_Port                                                    smithy.SchemaExtensions
+	eCreateDBClusterMessage_MasterUsername                                          smithy.SchemaExtensions
+	eCreateDBClusterMessage_MasterUserPassword                                      smithy.SchemaExtensions
+	eCreateDBClusterMessage_OptionGroupName                                         smithy.SchemaExtensions
+	eCreateDBClusterMessage_PreferredBackupWindow                                   smithy.SchemaExtensions
+	eCreateDBClusterMessage_PreferredMaintenanceWindow                              smithy.SchemaExtensions
+	eCreateDBClusterMessage_ReplicationSourceIdentifier                             smithy.SchemaExtensions
+	eCreateDBClusterMessage_Tags                                                    smithy.SchemaExtensions
+	eCreateDBClusterMessage_StorageEncrypted                                        smithy.SchemaExtensions
+	eCreateDBClusterMessage_KmsKeyId                                                smithy.SchemaExtensions
+	eCreateDBClusterMessage_PreSignedUrl                                            smithy.SchemaExtensions
+	eCreateDBClusterMessage_EnableIAMDatabaseAuthentication                         smithy.SchemaExtensions
+	eCreateDBClusterMessage_EnableCloudwatchLogsExports                             smithy.SchemaExtensions
+	eCreateDBClusterMessage_DeletionProtection                                      smithy.SchemaExtensions
+	eCreateDBClusterMessage_ServerlessV2ScalingConfiguration                        smithy.SchemaExtensions
+	eCreateDBClusterMessage_GlobalClusterIdentifier                                 smithy.SchemaExtensions
+	eCreateDBClusterMessage_StorageType                                             smithy.SchemaExtensions
+	eCreateDBClusterMessage_NetworkType                                             smithy.SchemaExtensions
+	eCreateDBClusterMessage_SourceRegion                                            smithy.SchemaExtensions
+	eCreateDBClusterMessage_DestinationRegion                                       smithy.SchemaExtensions
+	eCreateDBClusterResult                                                          smithy.SchemaExtensions
+	eCreateDBClusterResult_DBCluster                                                smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupMessage                                           smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupMessage_DBClusterParameterGroupName               smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupMessage_DBParameterGroupFamily                    smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupMessage_Description                               smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupMessage_Tags                                      smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupResult                                            smithy.SchemaExtensions
+	eCreateDBClusterParameterGroupResult_DBClusterParameterGroup                    smithy.SchemaExtensions
+	eCreateDBClusterSnapshotMessage                                                 smithy.SchemaExtensions
+	eCreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier                     smithy.SchemaExtensions
+	eCreateDBClusterSnapshotMessage_DBClusterIdentifier                             smithy.SchemaExtensions
+	eCreateDBClusterSnapshotMessage_Tags                                            smithy.SchemaExtensions
+	eCreateDBClusterSnapshotResult                                                  smithy.SchemaExtensions
+	eCreateDBClusterSnapshotResult_DBClusterSnapshot                                smithy.SchemaExtensions
+	eCreateDBInstanceMessage                                                        smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBName                                                 smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBInstanceIdentifier                                   smithy.SchemaExtensions
+	eCreateDBInstanceMessage_AllocatedStorage                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBInstanceClass                                        smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Engine                                                 smithy.SchemaExtensions
+	eCreateDBInstanceMessage_MasterUsername                                         smithy.SchemaExtensions
+	eCreateDBInstanceMessage_MasterUserPassword                                     smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBSecurityGroups                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_VpcSecurityGroupIds                                    smithy.SchemaExtensions
+	eCreateDBInstanceMessage_AvailabilityZone                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBSubnetGroupName                                      smithy.SchemaExtensions
+	eCreateDBInstanceMessage_PreferredMaintenanceWindow                             smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBParameterGroupName                                   smithy.SchemaExtensions
+	eCreateDBInstanceMessage_BackupRetentionPeriod                                  smithy.SchemaExtensions
+	eCreateDBInstanceMessage_PreferredBackupWindow                                  smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Port                                                   smithy.SchemaExtensions
+	eCreateDBInstanceMessage_MultiAZ                                                smithy.SchemaExtensions
+	eCreateDBInstanceMessage_EngineVersion                                          smithy.SchemaExtensions
+	eCreateDBInstanceMessage_AutoMinorVersionUpgrade                                smithy.SchemaExtensions
+	eCreateDBInstanceMessage_LicenseModel                                           smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Iops                                                   smithy.SchemaExtensions
+	eCreateDBInstanceMessage_OptionGroupName                                        smithy.SchemaExtensions
+	eCreateDBInstanceMessage_CharacterSetName                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_PubliclyAccessible                                     smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Tags                                                   smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DBClusterIdentifier                                    smithy.SchemaExtensions
+	eCreateDBInstanceMessage_StorageType                                            smithy.SchemaExtensions
+	eCreateDBInstanceMessage_TdeCredentialArn                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_TdeCredentialPassword                                  smithy.SchemaExtensions
+	eCreateDBInstanceMessage_StorageEncrypted                                       smithy.SchemaExtensions
+	eCreateDBInstanceMessage_KmsKeyId                                               smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Domain                                                 smithy.SchemaExtensions
+	eCreateDBInstanceMessage_CopyTagsToSnapshot                                     smithy.SchemaExtensions
+	eCreateDBInstanceMessage_MonitoringInterval                                     smithy.SchemaExtensions
+	eCreateDBInstanceMessage_MonitoringRoleArn                                      smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DomainIAMRoleName                                      smithy.SchemaExtensions
+	eCreateDBInstanceMessage_PromotionTier                                          smithy.SchemaExtensions
+	eCreateDBInstanceMessage_Timezone                                               smithy.SchemaExtensions
+	eCreateDBInstanceMessage_EnableIAMDatabaseAuthentication                        smithy.SchemaExtensions
+	eCreateDBInstanceMessage_EnablePerformanceInsights                              smithy.SchemaExtensions
+	eCreateDBInstanceMessage_PerformanceInsightsKMSKeyId                            smithy.SchemaExtensions
+	eCreateDBInstanceMessage_EnableCloudwatchLogsExports                            smithy.SchemaExtensions
+	eCreateDBInstanceMessage_DeletionProtection                                     smithy.SchemaExtensions
+	eCreateDBInstanceResult                                                         smithy.SchemaExtensions
+	eCreateDBInstanceResult_DBInstance                                              smithy.SchemaExtensions
+	eCreateDBParameterGroupMessage                                                  smithy.SchemaExtensions
+	eCreateDBParameterGroupMessage_DBParameterGroupName                             smithy.SchemaExtensions
+	eCreateDBParameterGroupMessage_DBParameterGroupFamily                           smithy.SchemaExtensions
+	eCreateDBParameterGroupMessage_Description                                      smithy.SchemaExtensions
+	eCreateDBParameterGroupMessage_Tags                                             smithy.SchemaExtensions
+	eCreateDBParameterGroupResult                                                   smithy.SchemaExtensions
+	eCreateDBParameterGroupResult_DBParameterGroup                                  smithy.SchemaExtensions
+	eCreateDBSubnetGroupMessage                                                     smithy.SchemaExtensions
+	eCreateDBSubnetGroupMessage_DBSubnetGroupName                                   smithy.SchemaExtensions
+	eCreateDBSubnetGroupMessage_DBSubnetGroupDescription                            smithy.SchemaExtensions
+	eCreateDBSubnetGroupMessage_SubnetIds                                           smithy.SchemaExtensions
+	eCreateDBSubnetGroupMessage_Tags                                                smithy.SchemaExtensions
+	eCreateDBSubnetGroupResult                                                      smithy.SchemaExtensions
+	eCreateDBSubnetGroupResult_DBSubnetGroup                                        smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage                                                 smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_SubscriptionName                                smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_SnsTopicArn                                     smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_SourceType                                      smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_EventCategories                                 smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_SourceIds                                       smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_Enabled                                         smithy.SchemaExtensions
+	eCreateEventSubscriptionMessage_Tags                                            smithy.SchemaExtensions
+	eCreateEventSubscriptionResult                                                  smithy.SchemaExtensions
+	eCreateEventSubscriptionResult_EventSubscription                                smithy.SchemaExtensions
+	eCreateGlobalClusterMessage                                                     smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_GlobalClusterIdentifier                             smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_SourceDBClusterIdentifier                           smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_Engine                                              smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_EngineVersion                                       smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_DeletionProtection                                  smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_DatabaseName                                        smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_Tags                                                smithy.SchemaExtensions
+	eCreateGlobalClusterMessage_StorageEncrypted                                    smithy.SchemaExtensions
+	eCreateGlobalClusterResult                                                      smithy.SchemaExtensions
+	eCreateGlobalClusterResult_GlobalCluster                                        smithy.SchemaExtensions
+	eDeleteDBClusterEndpointMessage                                                 smithy.SchemaExtensions
+	eDeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier                     smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput                                                  smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier                      smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_DBClusterIdentifier                              smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier              smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_Endpoint                                         smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_Status                                           smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_EndpointType                                     smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_CustomEndpointType                               smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_StaticMembers                                    smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_ExcludedMembers                                  smithy.SchemaExtensions
+	eDeleteDBClusterEndpointOutput_DBClusterEndpointArn                             smithy.SchemaExtensions
+	eDeleteDBClusterMessage                                                         smithy.SchemaExtensions
+	eDeleteDBClusterMessage_DBClusterIdentifier                                     smithy.SchemaExtensions
+	eDeleteDBClusterMessage_SkipFinalSnapshot                                       smithy.SchemaExtensions
+	eDeleteDBClusterMessage_FinalDBSnapshotIdentifier                               smithy.SchemaExtensions
+	eDeleteDBClusterResult                                                          smithy.SchemaExtensions
+	eDeleteDBClusterResult_DBCluster                                                smithy.SchemaExtensions
+	eDeleteDBClusterParameterGroupMessage                                           smithy.SchemaExtensions
+	eDeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName               smithy.SchemaExtensions
+	eDeleteDBClusterSnapshotMessage                                                 smithy.SchemaExtensions
+	eDeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier                     smithy.SchemaExtensions
+	eDeleteDBClusterSnapshotResult                                                  smithy.SchemaExtensions
+	eDeleteDBClusterSnapshotResult_DBClusterSnapshot                                smithy.SchemaExtensions
+	eDeleteDBInstanceMessage                                                        smithy.SchemaExtensions
+	eDeleteDBInstanceMessage_DBInstanceIdentifier                                   smithy.SchemaExtensions
+	eDeleteDBInstanceMessage_SkipFinalSnapshot                                      smithy.SchemaExtensions
+	eDeleteDBInstanceMessage_FinalDBSnapshotIdentifier                              smithy.SchemaExtensions
+	eDeleteDBInstanceResult                                                         smithy.SchemaExtensions
+	eDeleteDBInstanceResult_DBInstance                                              smithy.SchemaExtensions
+	eDeleteDBParameterGroupMessage                                                  smithy.SchemaExtensions
+	eDeleteDBParameterGroupMessage_DBParameterGroupName                             smithy.SchemaExtensions
+	eDeleteDBSubnetGroupMessage                                                     smithy.SchemaExtensions
+	eDeleteDBSubnetGroupMessage_DBSubnetGroupName                                   smithy.SchemaExtensions
+	eDeleteEventSubscriptionMessage                                                 smithy.SchemaExtensions
+	eDeleteEventSubscriptionMessage_SubscriptionName                                smithy.SchemaExtensions
+	eDeleteEventSubscriptionResult                                                  smithy.SchemaExtensions
+	eDeleteEventSubscriptionResult_EventSubscription                                smithy.SchemaExtensions
+	eDeleteGlobalClusterMessage                                                     smithy.SchemaExtensions
+	eDeleteGlobalClusterMessage_GlobalClusterIdentifier                             smithy.SchemaExtensions
+	eDeleteGlobalClusterResult                                                      smithy.SchemaExtensions
+	eDeleteGlobalClusterResult_GlobalCluster                                        smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage                                              smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage_DBClusterIdentifier                          smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier                  smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage_Filters                                      smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage_MaxRecords                                   smithy.SchemaExtensions
+	eDescribeDBClusterEndpointsMessage_Marker                                       smithy.SchemaExtensions
+	eDBClusterEndpointMessage                                                       smithy.SchemaExtensions
+	eDBClusterEndpointMessage_Marker                                                smithy.SchemaExtensions
+	eDBClusterEndpointMessage_DBClusterEndpoints                                    smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroupsMessage                                        smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName            smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroupsMessage_Filters                                smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroupsMessage_MaxRecords                             smithy.SchemaExtensions
+	eDescribeDBClusterParameterGroupsMessage_Marker                                 smithy.SchemaExtensions
+	eDBClusterParameterGroupsMessage                                                smithy.SchemaExtensions
+	eDBClusterParameterGroupsMessage_Marker                                         smithy.SchemaExtensions
+	eDBClusterParameterGroupsMessage_DBClusterParameterGroups                       smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage                                             smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage_DBClusterParameterGroupName                 smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage_Source                                      smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage_Filters                                     smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage_MaxRecords                                  smithy.SchemaExtensions
+	eDescribeDBClusterParametersMessage_Marker                                      smithy.SchemaExtensions
+	eDBClusterParameterGroupDetails                                                 smithy.SchemaExtensions
+	eDBClusterParameterGroupDetails_Parameters                                      smithy.SchemaExtensions
+	eDBClusterParameterGroupDetails_Marker                                          smithy.SchemaExtensions
+	eDescribeDBClustersMessage                                                      smithy.SchemaExtensions
+	eDescribeDBClustersMessage_DBClusterIdentifier                                  smithy.SchemaExtensions
+	eDescribeDBClustersMessage_Filters                                              smithy.SchemaExtensions
+	eDescribeDBClustersMessage_MaxRecords                                           smithy.SchemaExtensions
+	eDescribeDBClustersMessage_Marker                                               smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotAttributesMessage                                     smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier         smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotAttributesResult                                      smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult    smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage                                              smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_DBClusterIdentifier                          smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier                  smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_SnapshotType                                 smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_Filters                                      smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_MaxRecords                                   smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_Marker                                       smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_IncludeShared                                smithy.SchemaExtensions
+	eDescribeDBClusterSnapshotsMessage_IncludePublic                                smithy.SchemaExtensions
+	eDBClusterSnapshotMessage                                                       smithy.SchemaExtensions
+	eDBClusterSnapshotMessage_Marker                                                smithy.SchemaExtensions
+	eDBClusterSnapshotMessage_DBClusterSnapshots                                    smithy.SchemaExtensions
+	eDBClusterMessage                                                               smithy.SchemaExtensions
+	eDBClusterMessage_Marker                                                        smithy.SchemaExtensions
+	eDBClusterMessage_DBClusters                                                    smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage                                                smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_Engine                                         smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_EngineVersion                                  smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_DBParameterGroupFamily                         smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_Filters                                        smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_MaxRecords                                     smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_Marker                                         smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_DefaultOnly                                    smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_ListSupportedCharacterSets                     smithy.SchemaExtensions
+	eDescribeDBEngineVersionsMessage_ListSupportedTimezones                         smithy.SchemaExtensions
+	eDBEngineVersionMessage                                                         smithy.SchemaExtensions
+	eDBEngineVersionMessage_Marker                                                  smithy.SchemaExtensions
+	eDBEngineVersionMessage_DBEngineVersions                                        smithy.SchemaExtensions
+	eDescribeDBInstancesMessage                                                     smithy.SchemaExtensions
+	eDescribeDBInstancesMessage_DBInstanceIdentifier                                smithy.SchemaExtensions
+	eDescribeDBInstancesMessage_Filters                                             smithy.SchemaExtensions
+	eDescribeDBInstancesMessage_MaxRecords                                          smithy.SchemaExtensions
+	eDescribeDBInstancesMessage_Marker                                              smithy.SchemaExtensions
+	eDBInstanceMessage                                                              smithy.SchemaExtensions
+	eDBInstanceMessage_Marker                                                       smithy.SchemaExtensions
+	eDBInstanceMessage_DBInstances                                                  smithy.SchemaExtensions
+	eDescribeDBParameterGroupsMessage                                               smithy.SchemaExtensions
+	eDescribeDBParameterGroupsMessage_DBParameterGroupName                          smithy.SchemaExtensions
+	eDescribeDBParameterGroupsMessage_Filters                                       smithy.SchemaExtensions
+	eDescribeDBParameterGroupsMessage_MaxRecords                                    smithy.SchemaExtensions
+	eDescribeDBParameterGroupsMessage_Marker                                        smithy.SchemaExtensions
+	eDBParameterGroupsMessage                                                       smithy.SchemaExtensions
+	eDBParameterGroupsMessage_Marker                                                smithy.SchemaExtensions
+	eDBParameterGroupsMessage_DBParameterGroups                                     smithy.SchemaExtensions
+	eDescribeDBParametersMessage                                                    smithy.SchemaExtensions
+	eDescribeDBParametersMessage_DBParameterGroupName                               smithy.SchemaExtensions
+	eDescribeDBParametersMessage_Source                                             smithy.SchemaExtensions
+	eDescribeDBParametersMessage_Filters                                            smithy.SchemaExtensions
+	eDescribeDBParametersMessage_MaxRecords                                         smithy.SchemaExtensions
+	eDescribeDBParametersMessage_Marker                                             smithy.SchemaExtensions
+	eDBParameterGroupDetails                                                        smithy.SchemaExtensions
+	eDBParameterGroupDetails_Parameters                                             smithy.SchemaExtensions
+	eDBParameterGroupDetails_Marker                                                 smithy.SchemaExtensions
+	eDescribeDBSubnetGroupsMessage                                                  smithy.SchemaExtensions
+	eDescribeDBSubnetGroupsMessage_DBSubnetGroupName                                smithy.SchemaExtensions
+	eDescribeDBSubnetGroupsMessage_Filters                                          smithy.SchemaExtensions
+	eDescribeDBSubnetGroupsMessage_MaxRecords                                       smithy.SchemaExtensions
+	eDescribeDBSubnetGroupsMessage_Marker                                           smithy.SchemaExtensions
+	eDBSubnetGroupMessage                                                           smithy.SchemaExtensions
+	eDBSubnetGroupMessage_Marker                                                    smithy.SchemaExtensions
+	eDBSubnetGroupMessage_DBSubnetGroups                                            smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersMessage                                  smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily           smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersMessage_Filters                          smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersMessage_MaxRecords                       smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersMessage_Marker                           smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersResult                                   smithy.SchemaExtensions
+	eDescribeEngineDefaultClusterParametersResult_EngineDefaults                    smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersMessage                                         smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersMessage_DBParameterGroupFamily                  smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersMessage_Filters                                 smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersMessage_MaxRecords                              smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersMessage_Marker                                  smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersResult                                          smithy.SchemaExtensions
+	eDescribeEngineDefaultParametersResult_EngineDefaults                           smithy.SchemaExtensions
+	eDescribeEventCategoriesMessage                                                 smithy.SchemaExtensions
+	eDescribeEventCategoriesMessage_SourceType                                      smithy.SchemaExtensions
+	eDescribeEventCategoriesMessage_Filters                                         smithy.SchemaExtensions
+	eEventCategoriesMessage                                                         smithy.SchemaExtensions
+	eEventCategoriesMessage_EventCategoriesMapList                                  smithy.SchemaExtensions
+	eDescribeEventsMessage                                                          smithy.SchemaExtensions
+	eDescribeEventsMessage_SourceIdentifier                                         smithy.SchemaExtensions
+	eDescribeEventsMessage_SourceType                                               smithy.SchemaExtensions
+	eDescribeEventsMessage_StartTime                                                smithy.SchemaExtensions
+	eDescribeEventsMessage_EndTime                                                  smithy.SchemaExtensions
+	eDescribeEventsMessage_Duration                                                 smithy.SchemaExtensions
+	eDescribeEventsMessage_EventCategories                                          smithy.SchemaExtensions
+	eDescribeEventsMessage_Filters                                                  smithy.SchemaExtensions
+	eDescribeEventsMessage_MaxRecords                                               smithy.SchemaExtensions
+	eDescribeEventsMessage_Marker                                                   smithy.SchemaExtensions
+	eEventsMessage                                                                  smithy.SchemaExtensions
+	eEventsMessage_Marker                                                           smithy.SchemaExtensions
+	eEventsMessage_Events                                                           smithy.SchemaExtensions
+	eDescribeEventSubscriptionsMessage                                              smithy.SchemaExtensions
+	eDescribeEventSubscriptionsMessage_SubscriptionName                             smithy.SchemaExtensions
+	eDescribeEventSubscriptionsMessage_Filters                                      smithy.SchemaExtensions
+	eDescribeEventSubscriptionsMessage_MaxRecords                                   smithy.SchemaExtensions
+	eDescribeEventSubscriptionsMessage_Marker                                       smithy.SchemaExtensions
+	eEventSubscriptionsMessage                                                      smithy.SchemaExtensions
+	eEventSubscriptionsMessage_Marker                                               smithy.SchemaExtensions
+	eEventSubscriptionsMessage_EventSubscriptionsList                               smithy.SchemaExtensions
+	eDescribeGlobalClustersMessage                                                  smithy.SchemaExtensions
+	eDescribeGlobalClustersMessage_GlobalClusterIdentifier                          smithy.SchemaExtensions
+	eDescribeGlobalClustersMessage_MaxRecords                                       smithy.SchemaExtensions
+	eDescribeGlobalClustersMessage_Marker                                           smithy.SchemaExtensions
+	eGlobalClustersMessage                                                          smithy.SchemaExtensions
+	eGlobalClustersMessage_Marker                                                   smithy.SchemaExtensions
+	eGlobalClustersMessage_GlobalClusters                                           smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage                                      smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_Engine                               smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_EngineVersion                        smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_DBInstanceClass                      smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_LicenseModel                         smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_Vpc                                  smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_Filters                              smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_MaxRecords                           smithy.SchemaExtensions
+	eDescribeOrderableDBInstanceOptionsMessage_Marker                               smithy.SchemaExtensions
+	eOrderableDBInstanceOptionsMessage                                              smithy.SchemaExtensions
+	eOrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions                   smithy.SchemaExtensions
+	eOrderableDBInstanceOptionsMessage_Marker                                       smithy.SchemaExtensions
+	eDescribePendingMaintenanceActionsMessage                                       smithy.SchemaExtensions
+	eDescribePendingMaintenanceActionsMessage_ResourceIdentifier                    smithy.SchemaExtensions
+	eDescribePendingMaintenanceActionsMessage_Filters                               smithy.SchemaExtensions
+	eDescribePendingMaintenanceActionsMessage_Marker                                smithy.SchemaExtensions
+	eDescribePendingMaintenanceActionsMessage_MaxRecords                            smithy.SchemaExtensions
+	ePendingMaintenanceActionsMessage                                               smithy.SchemaExtensions
+	ePendingMaintenanceActionsMessage_PendingMaintenanceActions                     smithy.SchemaExtensions
+	ePendingMaintenanceActionsMessage_Marker                                        smithy.SchemaExtensions
+	eDescribeValidDBInstanceModificationsMessage                                    smithy.SchemaExtensions
+	eDescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier               smithy.SchemaExtensions
+	eDescribeValidDBInstanceModificationsResult                                     smithy.SchemaExtensions
+	eDescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage smithy.SchemaExtensions
+	eFailoverDBClusterMessage                                                       smithy.SchemaExtensions
+	eFailoverDBClusterMessage_DBClusterIdentifier                                   smithy.SchemaExtensions
+	eFailoverDBClusterMessage_TargetDBInstanceIdentifier                            smithy.SchemaExtensions
+	eFailoverDBClusterResult                                                        smithy.SchemaExtensions
+	eFailoverDBClusterResult_DBCluster                                              smithy.SchemaExtensions
+	eFailoverGlobalClusterMessage                                                   smithy.SchemaExtensions
+	eFailoverGlobalClusterMessage_GlobalClusterIdentifier                           smithy.SchemaExtensions
+	eFailoverGlobalClusterMessage_TargetDbClusterIdentifier                         smithy.SchemaExtensions
+	eFailoverGlobalClusterMessage_AllowDataLoss                                     smithy.SchemaExtensions
+	eFailoverGlobalClusterMessage_Switchover                                        smithy.SchemaExtensions
+	eFailoverGlobalClusterResult                                                    smithy.SchemaExtensions
+	eFailoverGlobalClusterResult_GlobalCluster                                      smithy.SchemaExtensions
+	eListTagsForResourceMessage                                                     smithy.SchemaExtensions
+	eListTagsForResourceMessage_ResourceName                                        smithy.SchemaExtensions
+	eListTagsForResourceMessage_Filters                                             smithy.SchemaExtensions
+	eTagListMessage                                                                 smithy.SchemaExtensions
+	eTagListMessage_TagList                                                         smithy.SchemaExtensions
+	eModifyDBClusterEndpointMessage                                                 smithy.SchemaExtensions
+	eModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier                     smithy.SchemaExtensions
+	eModifyDBClusterEndpointMessage_EndpointType                                    smithy.SchemaExtensions
+	eModifyDBClusterEndpointMessage_StaticMembers                                   smithy.SchemaExtensions
+	eModifyDBClusterEndpointMessage_ExcludedMembers                                 smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput                                                  smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier                      smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_DBClusterIdentifier                              smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier              smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_Endpoint                                         smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_Status                                           smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_EndpointType                                     smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_CustomEndpointType                               smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_StaticMembers                                    smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_ExcludedMembers                                  smithy.SchemaExtensions
+	eModifyDBClusterEndpointOutput_DBClusterEndpointArn                             smithy.SchemaExtensions
+	eModifyDBClusterMessage                                                         smithy.SchemaExtensions
+	eModifyDBClusterMessage_DBClusterIdentifier                                     smithy.SchemaExtensions
+	eModifyDBClusterMessage_NewDBClusterIdentifier                                  smithy.SchemaExtensions
+	eModifyDBClusterMessage_ApplyImmediately                                        smithy.SchemaExtensions
+	eModifyDBClusterMessage_BackupRetentionPeriod                                   smithy.SchemaExtensions
+	eModifyDBClusterMessage_DBClusterParameterGroupName                             smithy.SchemaExtensions
+	eModifyDBClusterMessage_VpcSecurityGroupIds                                     smithy.SchemaExtensions
+	eModifyDBClusterMessage_Port                                                    smithy.SchemaExtensions
+	eModifyDBClusterMessage_MasterUserPassword                                      smithy.SchemaExtensions
+	eModifyDBClusterMessage_OptionGroupName                                         smithy.SchemaExtensions
+	eModifyDBClusterMessage_PreferredBackupWindow                                   smithy.SchemaExtensions
+	eModifyDBClusterMessage_PreferredMaintenanceWindow                              smithy.SchemaExtensions
+	eModifyDBClusterMessage_EnableIAMDatabaseAuthentication                         smithy.SchemaExtensions
+	eModifyDBClusterMessage_CloudwatchLogsExportConfiguration                       smithy.SchemaExtensions
+	eModifyDBClusterMessage_EngineVersion                                           smithy.SchemaExtensions
+	eModifyDBClusterMessage_AllowMajorVersionUpgrade                                smithy.SchemaExtensions
+	eModifyDBClusterMessage_DBInstanceParameterGroupName                            smithy.SchemaExtensions
+	eModifyDBClusterMessage_DeletionProtection                                      smithy.SchemaExtensions
+	eModifyDBClusterMessage_CopyTagsToSnapshot                                      smithy.SchemaExtensions
+	eModifyDBClusterMessage_ServerlessV2ScalingConfiguration                        smithy.SchemaExtensions
+	eModifyDBClusterMessage_StorageType                                             smithy.SchemaExtensions
+	eModifyDBClusterMessage_NetworkType                                             smithy.SchemaExtensions
+	eModifyDBClusterResult                                                          smithy.SchemaExtensions
+	eModifyDBClusterResult_DBCluster                                                smithy.SchemaExtensions
+	eModifyDBClusterParameterGroupMessage                                           smithy.SchemaExtensions
+	eModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName               smithy.SchemaExtensions
+	eModifyDBClusterParameterGroupMessage_Parameters                                smithy.SchemaExtensions
+	eDBClusterParameterGroupNameMessage                                             smithy.SchemaExtensions
+	eDBClusterParameterGroupNameMessage_DBClusterParameterGroupName                 smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeMessage                                        smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier            smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeMessage_AttributeName                          smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeMessage_ValuesToAdd                            smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeMessage_ValuesToRemove                         smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeResult                                         smithy.SchemaExtensions
+	eModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult       smithy.SchemaExtensions
+	eModifyDBInstanceMessage                                                        smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBInstanceIdentifier                                   smithy.SchemaExtensions
+	eModifyDBInstanceMessage_AllocatedStorage                                       smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBInstanceClass                                        smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBSubnetGroupName                                      smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBSecurityGroups                                       smithy.SchemaExtensions
+	eModifyDBInstanceMessage_VpcSecurityGroupIds                                    smithy.SchemaExtensions
+	eModifyDBInstanceMessage_ApplyImmediately                                       smithy.SchemaExtensions
+	eModifyDBInstanceMessage_MasterUserPassword                                     smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBParameterGroupName                                   smithy.SchemaExtensions
+	eModifyDBInstanceMessage_BackupRetentionPeriod                                  smithy.SchemaExtensions
+	eModifyDBInstanceMessage_PreferredBackupWindow                                  smithy.SchemaExtensions
+	eModifyDBInstanceMessage_PreferredMaintenanceWindow                             smithy.SchemaExtensions
+	eModifyDBInstanceMessage_MultiAZ                                                smithy.SchemaExtensions
+	eModifyDBInstanceMessage_EngineVersion                                          smithy.SchemaExtensions
+	eModifyDBInstanceMessage_AllowMajorVersionUpgrade                               smithy.SchemaExtensions
+	eModifyDBInstanceMessage_AutoMinorVersionUpgrade                                smithy.SchemaExtensions
+	eModifyDBInstanceMessage_LicenseModel                                           smithy.SchemaExtensions
+	eModifyDBInstanceMessage_Iops                                                   smithy.SchemaExtensions
+	eModifyDBInstanceMessage_OptionGroupName                                        smithy.SchemaExtensions
+	eModifyDBInstanceMessage_NewDBInstanceIdentifier                                smithy.SchemaExtensions
+	eModifyDBInstanceMessage_StorageType                                            smithy.SchemaExtensions
+	eModifyDBInstanceMessage_TdeCredentialArn                                       smithy.SchemaExtensions
+	eModifyDBInstanceMessage_TdeCredentialPassword                                  smithy.SchemaExtensions
+	eModifyDBInstanceMessage_CACertificateIdentifier                                smithy.SchemaExtensions
+	eModifyDBInstanceMessage_Domain                                                 smithy.SchemaExtensions
+	eModifyDBInstanceMessage_CopyTagsToSnapshot                                     smithy.SchemaExtensions
+	eModifyDBInstanceMessage_MonitoringInterval                                     smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DBPortNumber                                           smithy.SchemaExtensions
+	eModifyDBInstanceMessage_PubliclyAccessible                                     smithy.SchemaExtensions
+	eModifyDBInstanceMessage_MonitoringRoleArn                                      smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DomainIAMRoleName                                      smithy.SchemaExtensions
+	eModifyDBInstanceMessage_PromotionTier                                          smithy.SchemaExtensions
+	eModifyDBInstanceMessage_EnableIAMDatabaseAuthentication                        smithy.SchemaExtensions
+	eModifyDBInstanceMessage_EnablePerformanceInsights                              smithy.SchemaExtensions
+	eModifyDBInstanceMessage_PerformanceInsightsKMSKeyId                            smithy.SchemaExtensions
+	eModifyDBInstanceMessage_CloudwatchLogsExportConfiguration                      smithy.SchemaExtensions
+	eModifyDBInstanceMessage_DeletionProtection                                     smithy.SchemaExtensions
+	eModifyDBInstanceResult                                                         smithy.SchemaExtensions
+	eModifyDBInstanceResult_DBInstance                                              smithy.SchemaExtensions
+	eModifyDBParameterGroupMessage                                                  smithy.SchemaExtensions
+	eModifyDBParameterGroupMessage_DBParameterGroupName                             smithy.SchemaExtensions
+	eModifyDBParameterGroupMessage_Parameters                                       smithy.SchemaExtensions
+	eDBParameterGroupNameMessage                                                    smithy.SchemaExtensions
+	eDBParameterGroupNameMessage_DBParameterGroupName                               smithy.SchemaExtensions
+	eModifyDBSubnetGroupMessage                                                     smithy.SchemaExtensions
+	eModifyDBSubnetGroupMessage_DBSubnetGroupName                                   smithy.SchemaExtensions
+	eModifyDBSubnetGroupMessage_DBSubnetGroupDescription                            smithy.SchemaExtensions
+	eModifyDBSubnetGroupMessage_SubnetIds                                           smithy.SchemaExtensions
+	eModifyDBSubnetGroupResult                                                      smithy.SchemaExtensions
+	eModifyDBSubnetGroupResult_DBSubnetGroup                                        smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage                                                 smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage_SubscriptionName                                smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage_SnsTopicArn                                     smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage_SourceType                                      smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage_EventCategories                                 smithy.SchemaExtensions
+	eModifyEventSubscriptionMessage_Enabled                                         smithy.SchemaExtensions
+	eModifyEventSubscriptionResult                                                  smithy.SchemaExtensions
+	eModifyEventSubscriptionResult_EventSubscription                                smithy.SchemaExtensions
+	eModifyGlobalClusterMessage                                                     smithy.SchemaExtensions
+	eModifyGlobalClusterMessage_GlobalClusterIdentifier                             smithy.SchemaExtensions
+	eModifyGlobalClusterMessage_NewGlobalClusterIdentifier                          smithy.SchemaExtensions
+	eModifyGlobalClusterMessage_DeletionProtection                                  smithy.SchemaExtensions
+	eModifyGlobalClusterMessage_EngineVersion                                       smithy.SchemaExtensions
+	eModifyGlobalClusterMessage_AllowMajorVersionUpgrade                            smithy.SchemaExtensions
+	eModifyGlobalClusterResult                                                      smithy.SchemaExtensions
+	eModifyGlobalClusterResult_GlobalCluster                                        smithy.SchemaExtensions
+	ePromoteReadReplicaDBClusterMessage                                             smithy.SchemaExtensions
+	ePromoteReadReplicaDBClusterMessage_DBClusterIdentifier                         smithy.SchemaExtensions
+	ePromoteReadReplicaDBClusterResult                                              smithy.SchemaExtensions
+	ePromoteReadReplicaDBClusterResult_DBCluster                                    smithy.SchemaExtensions
+	eRebootDBInstanceMessage                                                        smithy.SchemaExtensions
+	eRebootDBInstanceMessage_DBInstanceIdentifier                                   smithy.SchemaExtensions
+	eRebootDBInstanceMessage_ForceFailover                                          smithy.SchemaExtensions
+	eRebootDBInstanceResult                                                         smithy.SchemaExtensions
+	eRebootDBInstanceResult_DBInstance                                              smithy.SchemaExtensions
+	eRemoveFromGlobalClusterMessage                                                 smithy.SchemaExtensions
+	eRemoveFromGlobalClusterMessage_GlobalClusterIdentifier                         smithy.SchemaExtensions
+	eRemoveFromGlobalClusterMessage_DbClusterIdentifier                             smithy.SchemaExtensions
+	eRemoveFromGlobalClusterResult                                                  smithy.SchemaExtensions
+	eRemoveFromGlobalClusterResult_GlobalCluster                                    smithy.SchemaExtensions
+	eRemoveRoleFromDBClusterMessage                                                 smithy.SchemaExtensions
+	eRemoveRoleFromDBClusterMessage_DBClusterIdentifier                             smithy.SchemaExtensions
+	eRemoveRoleFromDBClusterMessage_RoleArn                                         smithy.SchemaExtensions
+	eRemoveRoleFromDBClusterMessage_FeatureName                                     smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscriptionMessage                                  smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName                 smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier                 smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscriptionResult                                   smithy.SchemaExtensions
+	eRemoveSourceIdentifierFromSubscriptionResult_EventSubscription                 smithy.SchemaExtensions
+	eRemoveTagsFromResourceMessage                                                  smithy.SchemaExtensions
+	eRemoveTagsFromResourceMessage_ResourceName                                     smithy.SchemaExtensions
+	eRemoveTagsFromResourceMessage_TagKeys                                          smithy.SchemaExtensions
+	eResetDBClusterParameterGroupMessage                                            smithy.SchemaExtensions
+	eResetDBClusterParameterGroupMessage_DBClusterParameterGroupName                smithy.SchemaExtensions
+	eResetDBClusterParameterGroupMessage_ResetAllParameters                         smithy.SchemaExtensions
+	eResetDBClusterParameterGroupMessage_Parameters                                 smithy.SchemaExtensions
+	eResetDBParameterGroupMessage                                                   smithy.SchemaExtensions
+	eResetDBParameterGroupMessage_DBParameterGroupName                              smithy.SchemaExtensions
+	eResetDBParameterGroupMessage_ResetAllParameters                                smithy.SchemaExtensions
+	eResetDBParameterGroupMessage_Parameters                                        smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage                                            smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_AvailabilityZones                          smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_DBClusterIdentifier                        smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_SnapshotIdentifier                         smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_Engine                                     smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_EngineVersion                              smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_Port                                       smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_DBSubnetGroupName                          smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_DatabaseName                               smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_OptionGroupName                            smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds                        smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_Tags                                       smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_KmsKeyId                                   smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication            smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports                smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName                smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_DeletionProtection                         smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot                         smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration           smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_StorageType                                smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotMessage_NetworkType                                smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotResult                                             smithy.SchemaExtensions
+	eRestoreDBClusterFromSnapshotResult_DBCluster                                   smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage                                           smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_DBClusterIdentifier                       smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_RestoreType                               smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier                 smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_RestoreToTime                             smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime                   smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_Port                                      smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_DBSubnetGroupName                         smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_OptionGroupName                           smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds                       smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_Tags                                      smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_KmsKeyId                                  smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication           smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports               smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName               smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_DeletionProtection                        smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration          smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_StorageType                               smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeMessage_NetworkType                               smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeResult                                            smithy.SchemaExtensions
+	eRestoreDBClusterToPointInTimeResult_DBCluster                                  smithy.SchemaExtensions
+	eStartDBClusterMessage                                                          smithy.SchemaExtensions
+	eStartDBClusterMessage_DBClusterIdentifier                                      smithy.SchemaExtensions
+	eStartDBClusterResult                                                           smithy.SchemaExtensions
+	eStartDBClusterResult_DBCluster                                                 smithy.SchemaExtensions
+	eStopDBClusterMessage                                                           smithy.SchemaExtensions
+	eStopDBClusterMessage_DBClusterIdentifier                                       smithy.SchemaExtensions
+	eStopDBClusterResult                                                            smithy.SchemaExtensions
+	eStopDBClusterResult_DBCluster                                                  smithy.SchemaExtensions
+	eSwitchoverGlobalClusterMessage                                                 smithy.SchemaExtensions
+	eSwitchoverGlobalClusterMessage_GlobalClusterIdentifier                         smithy.SchemaExtensions
+	eSwitchoverGlobalClusterMessage_TargetDbClusterIdentifier                       smithy.SchemaExtensions
+	eSwitchoverGlobalClusterResult                                                  smithy.SchemaExtensions
+	eSwitchoverGlobalClusterResult_GlobalCluster                                    smithy.SchemaExtensions
+)
+
+var (
+	iAddRoleToDBCluster                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddRoleToDBCluster"}
+	iAddSourceIdentifierToSubscription             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddSourceIdentifierToSubscription"}
+	iAddTagsToResource                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddTagsToResource"}
+	iApplyPendingMaintenanceAction                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ApplyPendingMaintenanceAction"}
+	iCopyDBClusterParameterGroup                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterParameterGroup"}
+	iCopyDBClusterSnapshot                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterSnapshot"}
+	iCopyDBParameterGroup                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBParameterGroup"}
+	iCreateDBCluster                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBCluster"}
+	iCreateDBClusterEndpoint                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterEndpoint"}
+	iCreateDBClusterParameterGroup                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterParameterGroup"}
+	iCreateDBClusterSnapshot                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterSnapshot"}
+	iCreateDBInstance                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBInstance"}
+	iCreateDBParameterGroup                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBParameterGroup"}
+	iCreateDBSubnetGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBSubnetGroup"}
+	iCreateEventSubscription                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateEventSubscription"}
+	iCreateGlobalCluster                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateGlobalCluster"}
+	iDeleteDBCluster                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBCluster"}
+	iDeleteDBClusterEndpoint                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterEndpoint"}
+	iDeleteDBClusterParameterGroup                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterParameterGroup"}
+	iDeleteDBClusterSnapshot                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterSnapshot"}
+	iDeleteDBInstance                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBInstance"}
+	iDeleteDBParameterGroup                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBParameterGroup"}
+	iDeleteDBSubnetGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBSubnetGroup"}
+	iDeleteEventSubscription                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteEventSubscription"}
+	iDeleteGlobalCluster                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteGlobalCluster"}
+	iDescribeDBClusterEndpoints                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterEndpoints"}
+	iDescribeDBClusterParameterGroups              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterParameterGroups"}
+	iDescribeDBClusterParameters                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterParameters"}
+	iDescribeDBClusters                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusters"}
+	iDescribeDBClusterSnapshotAttributes           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterSnapshotAttributes"}
+	iDescribeDBClusterSnapshots                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterSnapshots"}
+	iDescribeDBEngineVersions                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBEngineVersions"}
+	iDescribeDBInstances                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBInstances"}
+	iDescribeDBParameterGroups                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBParameterGroups"}
+	iDescribeDBParameters                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBParameters"}
+	iDescribeDBSubnetGroups                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBSubnetGroups"}
+	iDescribeEngineDefaultClusterParameters        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultClusterParameters"}
+	iDescribeEngineDefaultParameters               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultParameters"}
+	iDescribeEventCategories                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEventCategories"}
+	iDescribeEvents                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEvents"}
+	iDescribeEventSubscriptions                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEventSubscriptions"}
+	iDescribeGlobalClusters                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeGlobalClusters"}
+	iDescribeOrderableDBInstanceOptions            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeOrderableDBInstanceOptions"}
+	iDescribePendingMaintenanceActions             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribePendingMaintenanceActions"}
+	iDescribeValidDBInstanceModifications          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeValidDBInstanceModifications"}
+	iFailoverDBCluster                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverDBCluster"}
+	iFailoverGlobalCluster                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverGlobalCluster"}
+	iListTagsForResource                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ListTagsForResource"}
+	iModifyDBCluster                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBCluster"}
+	iModifyDBClusterEndpoint                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterEndpoint"}
+	iModifyDBClusterParameterGroup                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterParameterGroup"}
+	iModifyDBClusterSnapshotAttribute              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterSnapshotAttribute"}
+	iModifyDBInstance                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBInstance"}
+	iModifyDBParameterGroup                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBParameterGroup"}
+	iModifyDBSubnetGroup                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBSubnetGroup"}
+	iModifyEventSubscription                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyEventSubscription"}
+	iModifyGlobalCluster                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyGlobalCluster"}
+	iPromoteReadReplicaDBCluster                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PromoteReadReplicaDBCluster"}
+	iRebootDBInstance                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RebootDBInstance"}
+	iRemoveFromGlobalCluster                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveFromGlobalCluster"}
+	iRemoveRoleFromDBCluster                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveRoleFromDBCluster"}
+	iRemoveSourceIdentifierFromSubscription        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveSourceIdentifierFromSubscription"}
+	iRemoveTagsFromResource                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveTagsFromResource"}
+	iResetDBClusterParameterGroup                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResetDBClusterParameterGroup"}
+	iResetDBParameterGroup                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResetDBParameterGroup"}
+	iRestoreDBClusterFromSnapshot                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterFromSnapshot"}
+	iRestoreDBClusterToPointInTime                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterToPointInTime"}
+	iStartDBCluster                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StartDBCluster"}
+	iStopDBCluster                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StopDBCluster"}
+	iSwitchoverGlobalCluster                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SwitchoverGlobalCluster"}
+	i_AmazonRDSv19                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AmazonRDSv19"}
+	iApplyMethod                                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ApplyMethod"}
+	i_AttributeValueList                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AttributeValueList"}
+	iAuthorizationNotFoundFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AuthorizationNotFoundFault"}
+	iAvailabilityZone                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AvailabilityZone"}
+	i_AvailabilityZoneList                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AvailabilityZoneList"}
+	i_AvailabilityZones                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AvailabilityZones"}
+	i_Boolean                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Boolean"}
+	i_BooleanOptional                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "BooleanOptional"}
+	iCertificateNotFoundFault                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CertificateNotFoundFault"}
+	iCharacterSet                                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CharacterSet"}
+	iCloudwatchLogsExportConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CloudwatchLogsExportConfiguration"}
+	iClusterPendingModifiedValues                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ClusterPendingModifiedValues"}
+	iDBCluster                                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBCluster"}
+	iDBClusterAlreadyExistsFault                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterAlreadyExistsFault"}
+	iDBClusterEndpoint                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpoint"}
+	iDBClusterEndpointAlreadyExistsFault           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpointAlreadyExistsFault"}
+	i_DBClusterEndpointList                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpointList"}
+	iDBClusterEndpointNotFoundFault                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpointNotFoundFault"}
+	iDBClusterEndpointQuotaExceededFault           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpointQuotaExceededFault"}
+	i_DBClusterList                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterList"}
+	iDBClusterMember                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterMember"}
+	i_DBClusterMemberList                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterMemberList"}
+	iDBClusterNotFoundFault                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterNotFoundFault"}
+	i_DBClusterOptionGroupMemberships              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterOptionGroupMemberships"}
+	iDBClusterOptionGroupStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterOptionGroupStatus"}
+	iDBClusterParameterGroup                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroup"}
+	i_DBClusterParameterGroupList                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroupList"}
+	iDBClusterParameterGroupNotFoundFault          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroupNotFoundFault"}
+	iDBClusterQuotaExceededFault                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterQuotaExceededFault"}
+	iDBClusterRole                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterRole"}
+	iDBClusterRoleAlreadyExistsFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterRoleAlreadyExistsFault"}
+	iDBClusterRoleNotFoundFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterRoleNotFoundFault"}
+	iDBClusterRoleQuotaExceededFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterRoleQuotaExceededFault"}
+	i_DBClusterRoles                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterRoles"}
+	iDBClusterSnapshot                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshot"}
+	iDBClusterSnapshotAlreadyExistsFault           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotAlreadyExistsFault"}
+	iDBClusterSnapshotAttribute                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotAttribute"}
+	i_DBClusterSnapshotAttributeList               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotAttributeList"}
+	iDBClusterSnapshotAttributesResult             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotAttributesResult"}
+	i_DBClusterSnapshotList                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotList"}
+	iDBClusterSnapshotNotFoundFault                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotNotFoundFault"}
+	iDBEngineVersion                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBEngineVersion"}
+	i_DBEngineVersionList                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBEngineVersionList"}
+	iDBInstance                                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstance"}
+	iDBInstanceAlreadyExistsFault                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceAlreadyExistsFault"}
+	i_DBInstanceList                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceList"}
+	iDBInstanceNotFoundFault                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceNotFoundFault"}
+	iDBInstanceStatusInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceStatusInfo"}
+	i_DBInstanceStatusInfoList                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceStatusInfoList"}
+	iDBParameterGroup                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroup"}
+	iDBParameterGroupAlreadyExistsFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupAlreadyExistsFault"}
+	i_DBParameterGroupList                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupList"}
+	iDBParameterGroupNotFoundFault                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupNotFoundFault"}
+	iDBParameterGroupQuotaExceededFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupQuotaExceededFault"}
+	iDBParameterGroupStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupStatus"}
+	i_DBParameterGroupStatusList                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupStatusList"}
+	iDBSecurityGroupMembership                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSecurityGroupMembership"}
+	i_DBSecurityGroupMembershipList                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSecurityGroupMembershipList"}
+	i_DBSecurityGroupNameList                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSecurityGroupNameList"}
+	iDBSecurityGroupNotFoundFault                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSecurityGroupNotFoundFault"}
+	iDBSnapshotAlreadyExistsFault                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSnapshotAlreadyExistsFault"}
+	iDBSnapshotNotFoundFault                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSnapshotNotFoundFault"}
+	iDBSubnetGroup                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroup"}
+	iDBSubnetGroupAlreadyExistsFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroupAlreadyExistsFault"}
+	iDBSubnetGroupDoesNotCoverEnoughAZs            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroupDoesNotCoverEnoughAZs"}
+	iDBSubnetGroupNotFoundFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroupNotFoundFault"}
+	iDBSubnetGroupQuotaExceededFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroupQuotaExceededFault"}
+	i_DBSubnetGroups                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroups"}
+	iDBSubnetQuotaExceededFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetQuotaExceededFault"}
+	iDBUpgradeDependencyFailureFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBUpgradeDependencyFailureFault"}
+	iDomainMembership                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DomainMembership"}
+	i_DomainMembershipList                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DomainMembershipList"}
+	iDomainNotFoundFault                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DomainNotFoundFault"}
+	i_Double                                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Double"}
+	i_DoubleOptional                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DoubleOptional"}
+	iDoubleRange                                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DoubleRange"}
+	i_DoubleRangeList                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DoubleRangeList"}
+	iEndpoint                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Endpoint"}
+	iEngineDefaults                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EngineDefaults"}
+	iEvent                                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Event"}
+	i_EventCategoriesList                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventCategoriesList"}
+	iEventCategoriesMap                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventCategoriesMap"}
+	i_EventCategoriesMapList                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventCategoriesMapList"}
+	i_EventList                                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventList"}
+	iEventSubscription                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventSubscription"}
+	iEventSubscriptionQuotaExceededFault           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventSubscriptionQuotaExceededFault"}
+	i_EventSubscriptionsList                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventSubscriptionsList"}
+	i_ExceptionMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ExceptionMessage"}
+	iFailoverState                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverState"}
+	iFailoverStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverStatus"}
+	iFilter                                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Filter"}
+	i_FilterList                                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FilterList"}
+	i_FilterValueList                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FilterValueList"}
+	iGlobalCluster                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalCluster"}
+	iGlobalClusterAlreadyExistsFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterAlreadyExistsFault"}
+	i_GlobalClusterIdentifier                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterIdentifier"}
+	i_GlobalClusterList                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterList"}
+	iGlobalClusterMember                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterMember"}
+	i_GlobalClusterMemberList                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterMemberList"}
+	iGlobalClusterNotFoundFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterNotFoundFault"}
+	iGlobalClusterQuotaExceededFault               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClusterQuotaExceededFault"}
+	iInstanceQuotaExceededFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InstanceQuotaExceededFault"}
+	iInsufficientDBClusterCapacityFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InsufficientDBClusterCapacityFault"}
+	iInsufficientDBInstanceCapacityFault           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InsufficientDBInstanceCapacityFault"}
+	iInsufficientStorageClusterCapacityFault       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InsufficientStorageClusterCapacityFault"}
+	i_Integer                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Integer"}
+	i_IntegerOptional                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "IntegerOptional"}
+	iInvalidDBClusterEndpointStateFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBClusterEndpointStateFault"}
+	iInvalidDBClusterSnapshotStateFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBClusterSnapshotStateFault"}
+	iInvalidDBClusterStateFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBClusterStateFault"}
+	iInvalidDBInstanceStateFault                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBInstanceStateFault"}
+	iInvalidDBParameterGroupStateFault             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBParameterGroupStateFault"}
+	iInvalidDBSecurityGroupStateFault              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBSecurityGroupStateFault"}
+	iInvalidDBSnapshotStateFault                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBSnapshotStateFault"}
+	iInvalidDBSubnetGroupStateFault                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBSubnetGroupStateFault"}
+	iInvalidDBSubnetStateFault                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidDBSubnetStateFault"}
+	iInvalidEventSubscriptionStateFault            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidEventSubscriptionStateFault"}
+	iInvalidGlobalClusterStateFault                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidGlobalClusterStateFault"}
+	iInvalidRestoreFault                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidRestoreFault"}
+	iInvalidSubnet                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidSubnet"}
+	iInvalidVPCNetworkStateFault                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "InvalidVPCNetworkStateFault"}
+	i_KeyList                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "KeyList"}
+	iKMSKeyNotAccessibleFault                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "KMSKeyNotAccessibleFault"}
+	i_LogTypeList                                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "LogTypeList"}
+	iNetworkTypeNotSupportedFault                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "NetworkTypeNotSupportedFault"}
+	iOptionGroupMembership                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OptionGroupMembership"}
+	i_OptionGroupMembershipList                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OptionGroupMembershipList"}
+	iOptionGroupNotFoundFault                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OptionGroupNotFoundFault"}
+	iOrderableDBInstanceOption                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OrderableDBInstanceOption"}
+	i_OrderableDBInstanceOptionsList               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OrderableDBInstanceOptionsList"}
+	iParameter                                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Parameter"}
+	i_ParametersList                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ParametersList"}
+	iPendingCloudwatchLogsExports                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingCloudwatchLogsExports"}
+	iPendingMaintenanceAction                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingMaintenanceAction"}
+	i_PendingMaintenanceActionDetails              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingMaintenanceActionDetails"}
+	i_PendingMaintenanceActions                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingMaintenanceActions"}
+	iPendingModifiedValues                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingModifiedValues"}
+	iProvisionedIopsNotAvailableInAZFault          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ProvisionedIopsNotAvailableInAZFault"}
+	iRange                                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Range"}
+	i_RangeList                                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RangeList"}
+	i_ReadersArnList                               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ReadersArnList"}
+	i_ReadReplicaDBClusterIdentifierList           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ReadReplicaDBClusterIdentifierList"}
+	i_ReadReplicaDBInstanceIdentifierList          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ReadReplicaDBInstanceIdentifierList"}
+	i_ReadReplicaIdentifierList                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ReadReplicaIdentifierList"}
+	iResourceNotFoundFault                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResourceNotFoundFault"}
+	iResourcePendingMaintenanceActions             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResourcePendingMaintenanceActions"}
+	i_SensitiveString                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SensitiveString"}
+	iServerlessV2ScalingConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ServerlessV2ScalingConfiguration"}
+	iServerlessV2ScalingConfigurationInfo          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ServerlessV2ScalingConfigurationInfo"}
+	iSharedSnapshotQuotaExceededFault              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SharedSnapshotQuotaExceededFault"}
+	iSnapshotQuotaExceededFault                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SnapshotQuotaExceededFault"}
+	iSNSInvalidTopicFault                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SNSInvalidTopicFault"}
+	iSNSNoAuthorizationFault                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SNSNoAuthorizationFault"}
+	iSNSTopicArnNotFoundFault                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SNSTopicArnNotFoundFault"}
+	i_SourceIdsList                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SourceIdsList"}
+	iSourceNotFoundFault                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SourceNotFoundFault"}
+	iSourceType                                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SourceType"}
+	iStorageQuotaExceededFault                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StorageQuotaExceededFault"}
+	iStorageTypeNotSupportedFault                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StorageTypeNotSupportedFault"}
+	i_String                                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "String"}
+	i_StringList                                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StringList"}
+	iSubnet                                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Subnet"}
+	iSubnetAlreadyInUse                            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubnetAlreadyInUse"}
+	i_SubnetIdentifierList                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubnetIdentifierList"}
+	i_SubnetList                                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubnetList"}
+	iSubscriptionAlreadyExistFault                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubscriptionAlreadyExistFault"}
+	iSubscriptionCategoryNotFoundFault             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubscriptionCategoryNotFoundFault"}
+	iSubscriptionNotFoundFault                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SubscriptionNotFoundFault"}
+	i_SupportedCharacterSetsList                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SupportedCharacterSetsList"}
+	i_SupportedTimezonesList                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SupportedTimezonesList"}
+	iTag                                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Tag"}
+	i_TagList                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "TagList"}
+	iTimezone                                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "Timezone"}
+	i_TStamp                                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "TStamp"}
+	iUpgradeTarget                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "UpgradeTarget"}
+	iValidDBInstanceModificationsMessage           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ValidDBInstanceModificationsMessage"}
+	iValidStorageOptions                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ValidStorageOptions"}
+	i_ValidStorageOptionsList                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ValidStorageOptionsList"}
+	i_ValidUpgradeTargetList                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ValidUpgradeTargetList"}
+	i_VpcSecurityGroupIdList                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "VpcSecurityGroupIdList"}
+	iVpcSecurityGroupMembership                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "VpcSecurityGroupMembership"}
+	i_VpcSecurityGroupMembershipList               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "VpcSecurityGroupMembershipList"}
+	iAddRoleToDBClusterMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddRoleToDBClusterMessage"}
+	iAddSourceIdentifierToSubscriptionMessage      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddSourceIdentifierToSubscriptionMessage"}
+	iAddSourceIdentifierToSubscriptionResult       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddSourceIdentifierToSubscriptionResult"}
+	iAddTagsToResourceMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "AddTagsToResourceMessage"}
+	iApplyPendingMaintenanceActionMessage          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ApplyPendingMaintenanceActionMessage"}
+	iApplyPendingMaintenanceActionResult           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ApplyPendingMaintenanceActionResult"}
+	iCopyDBClusterParameterGroupMessage            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterParameterGroupMessage"}
+	iCopyDBClusterParameterGroupResult             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterParameterGroupResult"}
+	iCopyDBClusterSnapshotMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterSnapshotMessage"}
+	iCopyDBClusterSnapshotResult                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBClusterSnapshotResult"}
+	iCopyDBParameterGroupMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBParameterGroupMessage"}
+	iCopyDBParameterGroupResult                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CopyDBParameterGroupResult"}
+	iCreateDBClusterEndpointMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterEndpointMessage"}
+	iCreateDBClusterEndpointOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterEndpointOutput"}
+	iCreateDBClusterMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterMessage"}
+	iCreateDBClusterResult                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterResult"}
+	iCreateDBClusterParameterGroupMessage          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterParameterGroupMessage"}
+	iCreateDBClusterParameterGroupResult           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterParameterGroupResult"}
+	iCreateDBClusterSnapshotMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterSnapshotMessage"}
+	iCreateDBClusterSnapshotResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBClusterSnapshotResult"}
+	iCreateDBInstanceMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBInstanceMessage"}
+	iCreateDBInstanceResult                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBInstanceResult"}
+	iCreateDBParameterGroupMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBParameterGroupMessage"}
+	iCreateDBParameterGroupResult                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBParameterGroupResult"}
+	iCreateDBSubnetGroupMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBSubnetGroupMessage"}
+	iCreateDBSubnetGroupResult                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateDBSubnetGroupResult"}
+	iCreateEventSubscriptionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateEventSubscriptionMessage"}
+	iCreateEventSubscriptionResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateEventSubscriptionResult"}
+	iCreateGlobalClusterMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateGlobalClusterMessage"}
+	iCreateGlobalClusterResult                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "CreateGlobalClusterResult"}
+	iDeleteDBClusterEndpointMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterEndpointMessage"}
+	iDeleteDBClusterEndpointOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterEndpointOutput"}
+	iDeleteDBClusterMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterMessage"}
+	iDeleteDBClusterResult                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterResult"}
+	iDeleteDBClusterParameterGroupMessage          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterParameterGroupMessage"}
+	iDeleteDBClusterSnapshotMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterSnapshotMessage"}
+	iDeleteDBClusterSnapshotResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBClusterSnapshotResult"}
+	iDeleteDBInstanceMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBInstanceMessage"}
+	iDeleteDBInstanceResult                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBInstanceResult"}
+	iDeleteDBParameterGroupMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBParameterGroupMessage"}
+	iDeleteDBSubnetGroupMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteDBSubnetGroupMessage"}
+	iDeleteEventSubscriptionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteEventSubscriptionMessage"}
+	iDeleteEventSubscriptionResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteEventSubscriptionResult"}
+	iDeleteGlobalClusterMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteGlobalClusterMessage"}
+	iDeleteGlobalClusterResult                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DeleteGlobalClusterResult"}
+	iDescribeDBClusterEndpointsMessage             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterEndpointsMessage"}
+	iDBClusterEndpointMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterEndpointMessage"}
+	iDescribeDBClusterParameterGroupsMessage       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterParameterGroupsMessage"}
+	iDBClusterParameterGroupsMessage               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroupsMessage"}
+	iDescribeDBClusterParametersMessage            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterParametersMessage"}
+	iDBClusterParameterGroupDetails                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroupDetails"}
+	iDescribeDBClustersMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClustersMessage"}
+	iDescribeDBClusterSnapshotAttributesMessage    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterSnapshotAttributesMessage"}
+	iDescribeDBClusterSnapshotAttributesResult     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterSnapshotAttributesResult"}
+	iDescribeDBClusterSnapshotsMessage             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBClusterSnapshotsMessage"}
+	iDBClusterSnapshotMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterSnapshotMessage"}
+	iDBClusterMessage                              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterMessage"}
+	iDescribeDBEngineVersionsMessage               = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBEngineVersionsMessage"}
+	iDBEngineVersionMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBEngineVersionMessage"}
+	iDescribeDBInstancesMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBInstancesMessage"}
+	iDBInstanceMessage                             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBInstanceMessage"}
+	iDescribeDBParameterGroupsMessage              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBParameterGroupsMessage"}
+	iDBParameterGroupsMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupsMessage"}
+	iDescribeDBParametersMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBParametersMessage"}
+	iDBParameterGroupDetails                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupDetails"}
+	iDescribeDBSubnetGroupsMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeDBSubnetGroupsMessage"}
+	iDBSubnetGroupMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBSubnetGroupMessage"}
+	iDescribeEngineDefaultClusterParametersMessage = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultClusterParametersMessage"}
+	iDescribeEngineDefaultClusterParametersResult  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultClusterParametersResult"}
+	iDescribeEngineDefaultParametersMessage        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultParametersMessage"}
+	iDescribeEngineDefaultParametersResult         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEngineDefaultParametersResult"}
+	iDescribeEventCategoriesMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEventCategoriesMessage"}
+	iEventCategoriesMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventCategoriesMessage"}
+	iDescribeEventsMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEventsMessage"}
+	iEventsMessage                                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventsMessage"}
+	iDescribeEventSubscriptionsMessage             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeEventSubscriptionsMessage"}
+	iEventSubscriptionsMessage                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "EventSubscriptionsMessage"}
+	iDescribeGlobalClustersMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeGlobalClustersMessage"}
+	iGlobalClustersMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "GlobalClustersMessage"}
+	iDescribeOrderableDBInstanceOptionsMessage     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeOrderableDBInstanceOptionsMessage"}
+	iOrderableDBInstanceOptionsMessage             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "OrderableDBInstanceOptionsMessage"}
+	iDescribePendingMaintenanceActionsMessage      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribePendingMaintenanceActionsMessage"}
+	iPendingMaintenanceActionsMessage              = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PendingMaintenanceActionsMessage"}
+	iDescribeValidDBInstanceModificationsMessage   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeValidDBInstanceModificationsMessage"}
+	iDescribeValidDBInstanceModificationsResult    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DescribeValidDBInstanceModificationsResult"}
+	iFailoverDBClusterMessage                      = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverDBClusterMessage"}
+	iFailoverDBClusterResult                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverDBClusterResult"}
+	iFailoverGlobalClusterMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverGlobalClusterMessage"}
+	iFailoverGlobalClusterResult                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "FailoverGlobalClusterResult"}
+	iListTagsForResourceMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ListTagsForResourceMessage"}
+	iTagListMessage                                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "TagListMessage"}
+	iModifyDBClusterEndpointMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterEndpointMessage"}
+	iModifyDBClusterEndpointOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterEndpointOutput"}
+	iModifyDBClusterMessage                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterMessage"}
+	iModifyDBClusterResult                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterResult"}
+	iModifyDBClusterParameterGroupMessage          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterParameterGroupMessage"}
+	iDBClusterParameterGroupNameMessage            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBClusterParameterGroupNameMessage"}
+	iModifyDBClusterSnapshotAttributeMessage       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterSnapshotAttributeMessage"}
+	iModifyDBClusterSnapshotAttributeResult        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBClusterSnapshotAttributeResult"}
+	iModifyDBInstanceMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBInstanceMessage"}
+	iModifyDBInstanceResult                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBInstanceResult"}
+	iModifyDBParameterGroupMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBParameterGroupMessage"}
+	iDBParameterGroupNameMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "DBParameterGroupNameMessage"}
+	iModifyDBSubnetGroupMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBSubnetGroupMessage"}
+	iModifyDBSubnetGroupResult                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyDBSubnetGroupResult"}
+	iModifyEventSubscriptionMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyEventSubscriptionMessage"}
+	iModifyEventSubscriptionResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyEventSubscriptionResult"}
+	iModifyGlobalClusterMessage                    = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyGlobalClusterMessage"}
+	iModifyGlobalClusterResult                     = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ModifyGlobalClusterResult"}
+	iPromoteReadReplicaDBClusterMessage            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PromoteReadReplicaDBClusterMessage"}
+	iPromoteReadReplicaDBClusterResult             = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "PromoteReadReplicaDBClusterResult"}
+	iRebootDBInstanceMessage                       = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RebootDBInstanceMessage"}
+	iRebootDBInstanceResult                        = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RebootDBInstanceResult"}
+	iRemoveFromGlobalClusterMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveFromGlobalClusterMessage"}
+	iRemoveFromGlobalClusterResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveFromGlobalClusterResult"}
+	iRemoveRoleFromDBClusterMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveRoleFromDBClusterMessage"}
+	iRemoveSourceIdentifierFromSubscriptionMessage = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveSourceIdentifierFromSubscriptionMessage"}
+	iRemoveSourceIdentifierFromSubscriptionResult  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveSourceIdentifierFromSubscriptionResult"}
+	iRemoveTagsFromResourceMessage                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RemoveTagsFromResourceMessage"}
+	iResetDBClusterParameterGroupMessage           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResetDBClusterParameterGroupMessage"}
+	iResetDBParameterGroupMessage                  = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "ResetDBParameterGroupMessage"}
+	iRestoreDBClusterFromSnapshotMessage           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterFromSnapshotMessage"}
+	iRestoreDBClusterFromSnapshotResult            = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterFromSnapshotResult"}
+	iRestoreDBClusterToPointInTimeMessage          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterToPointInTimeMessage"}
+	iRestoreDBClusterToPointInTimeResult           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "RestoreDBClusterToPointInTimeResult"}
+	iStartDBClusterMessage                         = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StartDBClusterMessage"}
+	iStartDBClusterResult                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StartDBClusterResult"}
+	iStopDBClusterMessage                          = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StopDBClusterMessage"}
+	iStopDBClusterResult                           = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "StopDBClusterResult"}
+	iSwitchoverGlobalClusterMessage                = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SwitchoverGlobalClusterMessage"}
+	iSwitchoverGlobalClusterResult                 = smithy.ShapeName{Namespace: "com.amazonaws.neptune", Name: "SwitchoverGlobalClusterResult"}
+	pUnit                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pString                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://rds.amazonaws.com/doc/2014-10-31/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "AttributeValue"}}, DirectMask: 0x8}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AuthorizationNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "AvailabilityZone"}}, DirectMask: 0x8}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CertificateNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterAlreadyExistsFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointAlreadyExistsFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterEndpointList"}}, DirectMask: 0x8}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointNotFoundFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterEndpointQuotaExceededFault",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBCluster"}}, DirectMask: 0x8}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterMember"}}, DirectMask: 0x8}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterOptionGroup"}}, DirectMask: 0x8}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterParameterGroup"}}, DirectMask: 0x8}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterParameterGroupNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterQuotaExceededFault",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterRoleQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterRole"}}, DirectMask: 0x8}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterSnapshotAlreadyExistsFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterSnapshotAttribute"}}, DirectMask: 0x8}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBClusterSnapshot"}}, DirectMask: 0x8}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBClusterSnapshotNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBEngineVersion"}}, DirectMask: 0x8}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBInstanceAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBInstance"}}, DirectMask: 0x8}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBInstanceNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBInstanceStatusInfo"}}, DirectMask: 0x8}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBParameterGroup"}}, DirectMask: 0x8}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBParameterGroupQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBSecurityGroup"}}, DirectMask: 0x8}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBSecurityGroupName"}}, DirectMask: 0x8}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSecurityGroupNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSnapshotAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSnapshotNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupDoesNotCoverEnoughAZs",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSubnetGroupQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DBSubnetGroup"}}, DirectMask: 0x8}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBSubnetQuotaExceededFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DBUpgradeDependencyFailure",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DomainMembership"}}, DirectMask: 0x8}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DomainNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DoubleRange"}}, DirectMask: 0x8}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "EventCategory"}}, DirectMask: 0x8}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "EventCategoriesMap"}}, DirectMask: 0x8}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Event"}}, DirectMask: 0x8}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventSubscriptionQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "EventSubscription"}}, DirectMask: 0x8}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Filter"}}, DirectMask: 0x8}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Value"}}, DirectMask: 0x8}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GlobalClusterAlreadyExistsFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "GlobalClusterMember"}}, DirectMask: 0x8}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GlobalClusterNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GlobalClusterQuotaExceededFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InstanceQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientDBClusterCapacityFault",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientDBInstanceCapacity",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientStorageClusterCapacity",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterEndpointStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterSnapshotStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBClusterStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBInstanceState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBParameterGroupState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBSecurityGroupState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBSnapshotState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBSubnetGroupStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDBSubnetStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidEventSubscriptionState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidGlobalClusterStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRestoreFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSubnet",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidVPCNetworkStateFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KMSKeyNotAccessibleFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NetworkTypeNotSupported",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "OptionGroupMembership"}}, DirectMask: 0x8}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OptionGroupNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "OrderableDBInstanceOption"}}, DirectMask: 0x8}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Parameter"}}, DirectMask: 0x8}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "PendingMaintenanceAction"}}, DirectMask: 0x8}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ResourcePendingMaintenanceActions"}}, DirectMask: 0x8}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ProvisionedIopsNotAvailableInAZFault",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Range"}}, DirectMask: 0x8}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ReadReplicaDBClusterIdentifier"}}, DirectMask: 0x8}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ReadReplicaDBInstanceIdentifier"}}, DirectMask: 0x8}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ReadReplicaIdentifier"}}, DirectMask: 0x8}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundFault",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SharedSnapshotQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SnapshotQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SNSInvalidTopic",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SNSNoAuthorization",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SNSTopicArnNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SourceId"}}, DirectMask: 0x8}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SourceNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "StorageQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "StorageTypeNotSupported",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubnetAlreadyInUse",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SubnetIdentifier"}}, DirectMask: 0x8}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Subnet"}}, DirectMask: 0x8}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubscriptionAlreadyExist",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubscriptionCategoryNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "SubscriptionNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "CharacterSet"}}, DirectMask: 0x8}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Timezone"}}, DirectMask: 0x8}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Tag"}}, DirectMask: 0x8}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ValidStorageOptions"}}, DirectMask: 0x8}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "UpgradeTarget"}}, DirectMask: 0x8}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "VpcSecurityGroupId"}}, DirectMask: 0x8}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "VpcSecurityGroupMembership"}}, DirectMask: 0x8}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mApplyMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyMethod_immediate, &sApplyMethod_pending_reboot}}
+var m_AttributeValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeValueList_member}}
+var mAuthorizationNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationNotFoundFault_message}}
+var mAvailabilityZone = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityZone_Name}}
+var m_AvailabilityZoneList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityZoneList_member}}
+var m_AvailabilityZones = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityZones_member}}
+var mCertificateNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateNotFoundFault_message}}
+var mCharacterSet = smithy.SchemaMembers{List: []*smithy.Schema{&sCharacterSet_CharacterSetName, &sCharacterSet_CharacterSetDescription}}
+var mCloudwatchLogsExportConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudwatchLogsExportConfiguration_EnableLogTypes, &sCloudwatchLogsExportConfiguration_DisableLogTypes}}
+var mClusterPendingModifiedValues = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterPendingModifiedValues_PendingCloudwatchLogsExports, &sClusterPendingModifiedValues_DBClusterIdentifier, &sClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled, &sClusterPendingModifiedValues_EngineVersion, &sClusterPendingModifiedValues_BackupRetentionPeriod, &sClusterPendingModifiedValues_StorageType, &sClusterPendingModifiedValues_AllocatedStorage, &sClusterPendingModifiedValues_Iops, &sClusterPendingModifiedValues_NetworkType}, Hash: &hClusterPendingModifiedValues}
+var mDBCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sDBCluster_AllocatedStorage, &sDBCluster_AvailabilityZones, &sDBCluster_BackupRetentionPeriod, &sDBCluster_CharacterSetName, &sDBCluster_DatabaseName, &sDBCluster_DBClusterIdentifier, &sDBCluster_DBClusterParameterGroup, &sDBCluster_DBSubnetGroup, &sDBCluster_Status, &sDBCluster_PercentProgress, &sDBCluster_EarliestRestorableTime, &sDBCluster_Endpoint, &sDBCluster_ReaderEndpoint, &sDBCluster_MultiAZ, &sDBCluster_Engine, &sDBCluster_EngineVersion, &sDBCluster_LatestRestorableTime, &sDBCluster_Port, &sDBCluster_MasterUsername, &sDBCluster_DBClusterOptionGroupMemberships, &sDBCluster_PreferredBackupWindow, &sDBCluster_PreferredMaintenanceWindow, &sDBCluster_ReplicationSourceIdentifier, &sDBCluster_ReadReplicaIdentifiers, &sDBCluster_DBClusterMembers, &sDBCluster_VpcSecurityGroups, &sDBCluster_HostedZoneId, &sDBCluster_StorageEncrypted, &sDBCluster_KmsKeyId, &sDBCluster_DbClusterResourceId, &sDBCluster_DBClusterArn, &sDBCluster_AssociatedRoles, &sDBCluster_IAMDatabaseAuthenticationEnabled, &sDBCluster_CloneGroupId, &sDBCluster_ClusterCreateTime, &sDBCluster_CopyTagsToSnapshot, &sDBCluster_EnabledCloudwatchLogsExports, &sDBCluster_PendingModifiedValues, &sDBCluster_DeletionProtection, &sDBCluster_CrossAccountClone, &sDBCluster_AutomaticRestartTime, &sDBCluster_ServerlessV2ScalingConfiguration, &sDBCluster_GlobalClusterIdentifier, &sDBCluster_IOOptimizedNextAllowedModificationTime, &sDBCluster_StorageType, &sDBCluster_NetworkType}, Hash: &hDBCluster}
+var mDBClusterAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterAlreadyExistsFault_message}}
+var mDBClusterEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterEndpoint_DBClusterEndpointIdentifier, &sDBClusterEndpoint_DBClusterIdentifier, &sDBClusterEndpoint_DBClusterEndpointResourceIdentifier, &sDBClusterEndpoint_Endpoint, &sDBClusterEndpoint_Status, &sDBClusterEndpoint_EndpointType, &sDBClusterEndpoint_CustomEndpointType, &sDBClusterEndpoint_StaticMembers, &sDBClusterEndpoint_ExcludedMembers, &sDBClusterEndpoint_DBClusterEndpointArn}, Hash: &hDBClusterEndpoint}
+var mDBClusterEndpointAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterEndpointAlreadyExistsFault_message}}
+var m_DBClusterEndpointList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterEndpointList_member}}
+var mDBClusterEndpointNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterEndpointNotFoundFault_message}}
+var mDBClusterEndpointQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterEndpointQuotaExceededFault_message}}
+var m_DBClusterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterList_member}}
+var mDBClusterMember = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterMember_DBInstanceIdentifier, &sDBClusterMember_IsClusterWriter, &sDBClusterMember_DBClusterParameterGroupStatus, &sDBClusterMember_PromotionTier}}
+var m_DBClusterMemberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterMemberList_member}}
+var mDBClusterNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterNotFoundFault_message}}
+var m_DBClusterOptionGroupMemberships = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterOptionGroupMemberships_member}}
+var mDBClusterOptionGroupStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterOptionGroupStatus_DBClusterOptionGroupName, &sDBClusterOptionGroupStatus_Status}}
+var mDBClusterParameterGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterParameterGroup_DBClusterParameterGroupName, &sDBClusterParameterGroup_DBParameterGroupFamily, &sDBClusterParameterGroup_Description, &sDBClusterParameterGroup_DBClusterParameterGroupArn}}
+var m_DBClusterParameterGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterParameterGroupList_member}}
+var mDBClusterParameterGroupNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterParameterGroupNotFoundFault_message}}
+var mDBClusterQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterQuotaExceededFault_message}}
+var mDBClusterRole = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterRole_RoleArn, &sDBClusterRole_Status, &sDBClusterRole_FeatureName}}
+var mDBClusterRoleAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterRoleAlreadyExistsFault_message}}
+var mDBClusterRoleNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterRoleNotFoundFault_message}}
+var mDBClusterRoleQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterRoleQuotaExceededFault_message}}
+var m_DBClusterRoles = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterRoles_member}}
+var mDBClusterSnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshot_AvailabilityZones, &sDBClusterSnapshot_DBClusterSnapshotIdentifier, &sDBClusterSnapshot_DBClusterIdentifier, &sDBClusterSnapshot_SnapshotCreateTime, &sDBClusterSnapshot_Engine, &sDBClusterSnapshot_AllocatedStorage, &sDBClusterSnapshot_Status, &sDBClusterSnapshot_Port, &sDBClusterSnapshot_VpcId, &sDBClusterSnapshot_ClusterCreateTime, &sDBClusterSnapshot_MasterUsername, &sDBClusterSnapshot_EngineVersion, &sDBClusterSnapshot_LicenseModel, &sDBClusterSnapshot_SnapshotType, &sDBClusterSnapshot_PercentProgress, &sDBClusterSnapshot_StorageEncrypted, &sDBClusterSnapshot_KmsKeyId, &sDBClusterSnapshot_DBClusterSnapshotArn, &sDBClusterSnapshot_SourceDBClusterSnapshotArn, &sDBClusterSnapshot_IAMDatabaseAuthenticationEnabled, &sDBClusterSnapshot_StorageType}, Hash: &hDBClusterSnapshot}
+var mDBClusterSnapshotAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshotAlreadyExistsFault_message}}
+var mDBClusterSnapshotAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshotAttribute_AttributeName, &sDBClusterSnapshotAttribute_AttributeValues}}
+var m_DBClusterSnapshotAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterSnapshotAttributeList_member}}
+var mDBClusterSnapshotAttributesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier, &sDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes}}
+var m_DBClusterSnapshotList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBClusterSnapshotList_member}}
+var mDBClusterSnapshotNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshotNotFoundFault_message}}
+var mDBEngineVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sDBEngineVersion_Engine, &sDBEngineVersion_EngineVersion, &sDBEngineVersion_DBParameterGroupFamily, &sDBEngineVersion_DBEngineDescription, &sDBEngineVersion_DBEngineVersionDescription, &sDBEngineVersion_DefaultCharacterSet, &sDBEngineVersion_SupportedCharacterSets, &sDBEngineVersion_ValidUpgradeTarget, &sDBEngineVersion_SupportedTimezones, &sDBEngineVersion_ExportableLogTypes, &sDBEngineVersion_SupportsLogExportsToCloudwatchLogs, &sDBEngineVersion_SupportsReadReplica, &sDBEngineVersion_SupportsGlobalDatabases}, Hash: &hDBEngineVersion}
+var m_DBEngineVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBEngineVersionList_member}}
+var mDBInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sDBInstance_DBInstanceIdentifier, &sDBInstance_DBInstanceClass, &sDBInstance_Engine, &sDBInstance_DBInstanceStatus, &sDBInstance_MasterUsername, &sDBInstance_DBName, &sDBInstance_Endpoint, &sDBInstance_AllocatedStorage, &sDBInstance_InstanceCreateTime, &sDBInstance_PreferredBackupWindow, &sDBInstance_BackupRetentionPeriod, &sDBInstance_DBSecurityGroups, &sDBInstance_VpcSecurityGroups, &sDBInstance_DBParameterGroups, &sDBInstance_AvailabilityZone, &sDBInstance_DBSubnetGroup, &sDBInstance_PreferredMaintenanceWindow, &sDBInstance_PendingModifiedValues, &sDBInstance_LatestRestorableTime, &sDBInstance_MultiAZ, &sDBInstance_EngineVersion, &sDBInstance_AutoMinorVersionUpgrade, &sDBInstance_ReadReplicaSourceDBInstanceIdentifier, &sDBInstance_ReadReplicaDBInstanceIdentifiers, &sDBInstance_ReadReplicaDBClusterIdentifiers, &sDBInstance_LicenseModel, &sDBInstance_Iops, &sDBInstance_OptionGroupMemberships, &sDBInstance_CharacterSetName, &sDBInstance_SecondaryAvailabilityZone, &sDBInstance_PubliclyAccessible, &sDBInstance_StatusInfos, &sDBInstance_StorageType, &sDBInstance_TdeCredentialArn, &sDBInstance_DbInstancePort, &sDBInstance_DBClusterIdentifier, &sDBInstance_StorageEncrypted, &sDBInstance_KmsKeyId, &sDBInstance_DbiResourceId, &sDBInstance_CACertificateIdentifier, &sDBInstance_DomainMemberships, &sDBInstance_CopyTagsToSnapshot, &sDBInstance_MonitoringInterval, &sDBInstance_EnhancedMonitoringResourceArn, &sDBInstance_MonitoringRoleArn, &sDBInstance_PromotionTier, &sDBInstance_DBInstanceArn, &sDBInstance_Timezone, &sDBInstance_IAMDatabaseAuthenticationEnabled, &sDBInstance_PerformanceInsightsEnabled, &sDBInstance_PerformanceInsightsKMSKeyId, &sDBInstance_EnabledCloudwatchLogsExports, &sDBInstance_DeletionProtection, &sDBInstance_NetworkType}, Hash: &hDBInstance}
+var mDBInstanceAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBInstanceAlreadyExistsFault_message}}
+var m_DBInstanceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBInstanceList_member}}
+var mDBInstanceNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBInstanceNotFoundFault_message}}
+var mDBInstanceStatusInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDBInstanceStatusInfo_StatusType, &sDBInstanceStatusInfo_Normal, &sDBInstanceStatusInfo_Status, &sDBInstanceStatusInfo_Message}}
+var m_DBInstanceStatusInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBInstanceStatusInfoList_member}}
+var mDBParameterGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroup_DBParameterGroupName, &sDBParameterGroup_DBParameterGroupFamily, &sDBParameterGroup_Description, &sDBParameterGroup_DBParameterGroupArn}}
+var mDBParameterGroupAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupAlreadyExistsFault_message}}
+var m_DBParameterGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBParameterGroupList_member}}
+var mDBParameterGroupNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupNotFoundFault_message}}
+var mDBParameterGroupQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupQuotaExceededFault_message}}
+var mDBParameterGroupStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupStatus_DBParameterGroupName, &sDBParameterGroupStatus_ParameterApplyStatus}}
+var m_DBParameterGroupStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBParameterGroupStatusList_member}}
+var mDBSecurityGroupMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSecurityGroupMembership_DBSecurityGroupName, &sDBSecurityGroupMembership_Status}}
+var m_DBSecurityGroupMembershipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBSecurityGroupMembershipList_member}}
+var m_DBSecurityGroupNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBSecurityGroupNameList_member}}
+var mDBSecurityGroupNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSecurityGroupNotFoundFault_message}}
+var mDBSnapshotAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSnapshotAlreadyExistsFault_message}}
+var mDBSnapshotNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSnapshotNotFoundFault_message}}
+var mDBSubnetGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroup_DBSubnetGroupName, &sDBSubnetGroup_DBSubnetGroupDescription, &sDBSubnetGroup_VpcId, &sDBSubnetGroup_SubnetGroupStatus, &sDBSubnetGroup_Subnets, &sDBSubnetGroup_DBSubnetGroupArn, &sDBSubnetGroup_SupportedNetworkTypes}}
+var mDBSubnetGroupAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroupAlreadyExistsFault_message}}
+var mDBSubnetGroupDoesNotCoverEnoughAZs = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroupDoesNotCoverEnoughAZs_message}}
+var mDBSubnetGroupNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroupNotFoundFault_message}}
+var mDBSubnetGroupQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroupQuotaExceededFault_message}}
+var m_DBSubnetGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_DBSubnetGroups_member}}
+var mDBSubnetQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetQuotaExceededFault_message}}
+var mDBUpgradeDependencyFailureFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDBUpgradeDependencyFailureFault_message}}
+var mDomainMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainMembership_Domain, &sDomainMembership_Status, &sDomainMembership_FQDN, &sDomainMembership_IAMRoleName}}
+var m_DomainMembershipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainMembershipList_member}}
+var mDomainNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainNotFoundFault_message}}
+var mDoubleRange = smithy.SchemaMembers{List: []*smithy.Schema{&sDoubleRange_From, &sDoubleRange_To}}
+var m_DoubleRangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DoubleRangeList_member}}
+var mEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpoint_Address, &sEndpoint_Port, &sEndpoint_HostedZoneId}}
+var mEngineDefaults = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineDefaults_DBParameterGroupFamily, &sEngineDefaults_Marker, &sEngineDefaults_Parameters}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_SourceIdentifier, &sEvent_SourceType, &sEvent_Message, &sEvent_EventCategories, &sEvent_Date, &sEvent_SourceArn}}
+var m_EventCategoriesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventCategoriesList_member}}
+var mEventCategoriesMap = smithy.SchemaMembers{List: []*smithy.Schema{&sEventCategoriesMap_SourceType, &sEventCategoriesMap_EventCategories}}
+var m_EventCategoriesMapList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventCategoriesMapList_member}}
+var m_EventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventList_member}}
+var mEventSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSubscription_CustomerAwsId, &sEventSubscription_CustSubscriptionId, &sEventSubscription_SnsTopicArn, &sEventSubscription_Status, &sEventSubscription_SubscriptionCreationTime, &sEventSubscription_SourceType, &sEventSubscription_SourceIdsList, &sEventSubscription_EventCategoriesList, &sEventSubscription_Enabled, &sEventSubscription_EventSubscriptionArn}, Hash: &hEventSubscription}
+var mEventSubscriptionQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSubscriptionQuotaExceededFault_message}}
+var m_EventSubscriptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventSubscriptionsList_member}}
+var mFailoverState = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverState_Status, &sFailoverState_FromDbClusterArn, &sFailoverState_ToDbClusterArn, &sFailoverState_IsDataLossAllowed}}
+var mFailoverStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverStatus_PENDING, &sFailoverStatus_FAILING_OVER, &sFailoverStatus_CANCELLING}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_Values}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var m_FilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValueList_member}}
+var mGlobalCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalCluster_GlobalClusterIdentifier, &sGlobalCluster_GlobalClusterResourceId, &sGlobalCluster_GlobalClusterArn, &sGlobalCluster_Status, &sGlobalCluster_Engine, &sGlobalCluster_EngineVersion, &sGlobalCluster_DatabaseName, &sGlobalCluster_StorageEncrypted, &sGlobalCluster_DeletionProtection, &sGlobalCluster_GlobalClusterMembers, &sGlobalCluster_FailoverState, &sGlobalCluster_TagList}, Hash: &hGlobalCluster}
+var mGlobalClusterAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalClusterAlreadyExistsFault_message}}
+var m_GlobalClusterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalClusterList_member}}
+var mGlobalClusterMember = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalClusterMember_DBClusterArn, &sGlobalClusterMember_Readers, &sGlobalClusterMember_IsWriter}}
+var m_GlobalClusterMemberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalClusterMemberList_member}}
+var mGlobalClusterNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalClusterNotFoundFault_message}}
+var mGlobalClusterQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalClusterQuotaExceededFault_message}}
+var mInstanceQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceQuotaExceededFault_message}}
+var mInsufficientDBClusterCapacityFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientDBClusterCapacityFault_message}}
+var mInsufficientDBInstanceCapacityFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientDBInstanceCapacityFault_message}}
+var mInsufficientStorageClusterCapacityFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientStorageClusterCapacityFault_message}}
+var mInvalidDBClusterEndpointStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBClusterEndpointStateFault_message}}
+var mInvalidDBClusterSnapshotStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBClusterSnapshotStateFault_message}}
+var mInvalidDBClusterStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBClusterStateFault_message}}
+var mInvalidDBInstanceStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBInstanceStateFault_message}}
+var mInvalidDBParameterGroupStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBParameterGroupStateFault_message}}
+var mInvalidDBSecurityGroupStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBSecurityGroupStateFault_message}}
+var mInvalidDBSnapshotStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBSnapshotStateFault_message}}
+var mInvalidDBSubnetGroupStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBSubnetGroupStateFault_message}}
+var mInvalidDBSubnetStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDBSubnetStateFault_message}}
+var mInvalidEventSubscriptionStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventSubscriptionStateFault_message}}
+var mInvalidGlobalClusterStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidGlobalClusterStateFault_message}}
+var mInvalidRestoreFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRestoreFault_message}}
+var mInvalidSubnet = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSubnet_message}}
+var mInvalidVPCNetworkStateFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidVPCNetworkStateFault_message}}
+var m_KeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyList_member}}
+var mKMSKeyNotAccessibleFault = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSKeyNotAccessibleFault_message}}
+var m_LogTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogTypeList_member}}
+var mNetworkTypeNotSupportedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkTypeNotSupportedFault_message}}
+var mOptionGroupMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionGroupMembership_OptionGroupName, &sOptionGroupMembership_Status}}
+var m_OptionGroupMembershipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OptionGroupMembershipList_member}}
+var mOptionGroupNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sOptionGroupNotFoundFault_message}}
+var mOrderableDBInstanceOption = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderableDBInstanceOption_Engine, &sOrderableDBInstanceOption_EngineVersion, &sOrderableDBInstanceOption_DBInstanceClass, &sOrderableDBInstanceOption_LicenseModel, &sOrderableDBInstanceOption_AvailabilityZones, &sOrderableDBInstanceOption_MultiAZCapable, &sOrderableDBInstanceOption_ReadReplicaCapable, &sOrderableDBInstanceOption_Vpc, &sOrderableDBInstanceOption_SupportsStorageEncryption, &sOrderableDBInstanceOption_StorageType, &sOrderableDBInstanceOption_SupportsIops, &sOrderableDBInstanceOption_SupportsEnhancedMonitoring, &sOrderableDBInstanceOption_SupportsIAMDatabaseAuthentication, &sOrderableDBInstanceOption_SupportsPerformanceInsights, &sOrderableDBInstanceOption_MinStorageSize, &sOrderableDBInstanceOption_MaxStorageSize, &sOrderableDBInstanceOption_MinIopsPerDbInstance, &sOrderableDBInstanceOption_MaxIopsPerDbInstance, &sOrderableDBInstanceOption_MinIopsPerGib, &sOrderableDBInstanceOption_MaxIopsPerGib, &sOrderableDBInstanceOption_SupportsGlobalDatabases, &sOrderableDBInstanceOption_SupportedNetworkTypes}, Hash: &hOrderableDBInstanceOption}
+var m_OrderableDBInstanceOptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrderableDBInstanceOptionsList_member}}
+var mParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sParameter_ParameterName, &sParameter_ParameterValue, &sParameter_Description, &sParameter_Source, &sParameter_ApplyType, &sParameter_DataType, &sParameter_AllowedValues, &sParameter_IsModifiable, &sParameter_MinimumEngineVersion, &sParameter_ApplyMethod}, Hash: &hParameter}
+var m_ParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParametersList_member}}
+var mPendingCloudwatchLogsExports = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingCloudwatchLogsExports_LogTypesToEnable, &sPendingCloudwatchLogsExports_LogTypesToDisable}}
+var mPendingMaintenanceAction = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingMaintenanceAction_Action, &sPendingMaintenanceAction_AutoAppliedAfterDate, &sPendingMaintenanceAction_ForcedApplyDate, &sPendingMaintenanceAction_OptInStatus, &sPendingMaintenanceAction_CurrentApplyDate, &sPendingMaintenanceAction_Description}}
+var m_PendingMaintenanceActionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_PendingMaintenanceActionDetails_member}}
+var m_PendingMaintenanceActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PendingMaintenanceActions_member}}
+var mPendingModifiedValues = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingModifiedValues_DBInstanceClass, &sPendingModifiedValues_AllocatedStorage, &sPendingModifiedValues_MasterUserPassword, &sPendingModifiedValues_Port, &sPendingModifiedValues_BackupRetentionPeriod, &sPendingModifiedValues_MultiAZ, &sPendingModifiedValues_EngineVersion, &sPendingModifiedValues_LicenseModel, &sPendingModifiedValues_Iops, &sPendingModifiedValues_DBInstanceIdentifier, &sPendingModifiedValues_StorageType, &sPendingModifiedValues_CACertificateIdentifier, &sPendingModifiedValues_DBSubnetGroupName, &sPendingModifiedValues_PendingCloudwatchLogsExports}, Hash: &hPendingModifiedValues}
+var mProvisionedIopsNotAvailableInAZFault = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedIopsNotAvailableInAZFault_message}}
+var mRange = smithy.SchemaMembers{List: []*smithy.Schema{&sRange_From, &sRange_To, &sRange_Step}}
+var m_RangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RangeList_member}}
+var m_ReadersArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReadersArnList_member}}
+var m_ReadReplicaDBClusterIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReadReplicaDBClusterIdentifierList_member}}
+var m_ReadReplicaDBInstanceIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReadReplicaDBInstanceIdentifierList_member}}
+var m_ReadReplicaIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReadReplicaIdentifierList_member}}
+var mResourceNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundFault_message}}
+var mResourcePendingMaintenanceActions = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePendingMaintenanceActions_ResourceIdentifier, &sResourcePendingMaintenanceActions_PendingMaintenanceActionDetails}}
+var mServerlessV2ScalingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessV2ScalingConfiguration_MinCapacity, &sServerlessV2ScalingConfiguration_MaxCapacity}}
+var mServerlessV2ScalingConfigurationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessV2ScalingConfigurationInfo_MinCapacity, &sServerlessV2ScalingConfigurationInfo_MaxCapacity}}
+var mSharedSnapshotQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedSnapshotQuotaExceededFault_message}}
+var mSnapshotQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotQuotaExceededFault_message}}
+var mSNSInvalidTopicFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSNSInvalidTopicFault_message}}
+var mSNSNoAuthorizationFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSNSNoAuthorizationFault_message}}
+var mSNSTopicArnNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSNSTopicArnNotFoundFault_message}}
+var m_SourceIdsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceIdsList_member}}
+var mSourceNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceNotFoundFault_message}}
+var mSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceType_db_instance, &sSourceType_db_parameter_group, &sSourceType_db_security_group, &sSourceType_db_snapshot, &sSourceType_db_cluster, &sSourceType_db_cluster_snapshot}}
+var mStorageQuotaExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageQuotaExceededFault_message}}
+var mStorageTypeNotSupportedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageTypeNotSupportedFault_message}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mSubnet = smithy.SchemaMembers{List: []*smithy.Schema{&sSubnet_SubnetIdentifier, &sSubnet_SubnetAvailabilityZone, &sSubnet_SubnetStatus}}
+var mSubnetAlreadyInUse = smithy.SchemaMembers{List: []*smithy.Schema{&sSubnetAlreadyInUse_message}}
+var m_SubnetIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIdentifierList_member}}
+var m_SubnetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetList_member}}
+var mSubscriptionAlreadyExistFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionAlreadyExistFault_message}}
+var mSubscriptionCategoryNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionCategoryNotFoundFault_message}}
+var mSubscriptionNotFoundFault = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionNotFoundFault_message}}
+var m_SupportedCharacterSetsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedCharacterSetsList_member}}
+var m_SupportedTimezonesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedTimezonesList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTimezone = smithy.SchemaMembers{List: []*smithy.Schema{&sTimezone_TimezoneName}}
+var mUpgradeTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sUpgradeTarget_Engine, &sUpgradeTarget_EngineVersion, &sUpgradeTarget_Description, &sUpgradeTarget_AutoUpgrade, &sUpgradeTarget_IsMajorVersionUpgrade, &sUpgradeTarget_SupportsGlobalDatabases}}
+var mValidDBInstanceModificationsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sValidDBInstanceModificationsMessage_Storage}}
+var mValidStorageOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sValidStorageOptions_StorageType, &sValidStorageOptions_StorageSize, &sValidStorageOptions_ProvisionedIops, &sValidStorageOptions_IopsToStorageRatio}}
+var m_ValidStorageOptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidStorageOptionsList_member}}
+var m_ValidUpgradeTargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidUpgradeTargetList_member}}
+var m_VpcSecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcSecurityGroupIdList_member}}
+var mVpcSecurityGroupMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcSecurityGroupMembership_VpcSecurityGroupId, &sVpcSecurityGroupMembership_Status}}
+var m_VpcSecurityGroupMembershipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcSecurityGroupMembershipList_member}}
+var mAddRoleToDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sAddRoleToDBClusterMessage_DBClusterIdentifier, &sAddRoleToDBClusterMessage_RoleArn, &sAddRoleToDBClusterMessage_FeatureName}}
+var mAddSourceIdentifierToSubscriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sAddSourceIdentifierToSubscriptionMessage_SubscriptionName, &sAddSourceIdentifierToSubscriptionMessage_SourceIdentifier}}
+var mAddSourceIdentifierToSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAddSourceIdentifierToSubscriptionResult_EventSubscription}}
+var mAddTagsToResourceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceMessage_ResourceName, &sAddTagsToResourceMessage_Tags}}
+var mApplyPendingMaintenanceActionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyPendingMaintenanceActionMessage_ResourceIdentifier, &sApplyPendingMaintenanceActionMessage_ApplyAction, &sApplyPendingMaintenanceActionMessage_OptInType}}
+var mApplyPendingMaintenanceActionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions}}
+var mCopyDBClusterParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier, &sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier, &sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription, &sCopyDBClusterParameterGroupMessage_Tags}}
+var mCopyDBClusterParameterGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBClusterParameterGroupResult_DBClusterParameterGroup}}
+var mCopyDBClusterSnapshotMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier, &sCopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier, &sCopyDBClusterSnapshotMessage_KmsKeyId, &sCopyDBClusterSnapshotMessage_PreSignedUrl, &sCopyDBClusterSnapshotMessage_CopyTags, &sCopyDBClusterSnapshotMessage_Tags, &sCopyDBClusterSnapshotMessage_SourceRegion, &sCopyDBClusterSnapshotMessage_DestinationRegion}}
+var mCopyDBClusterSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBClusterSnapshotResult_DBClusterSnapshot}}
+var mCopyDBParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier, &sCopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier, &sCopyDBParameterGroupMessage_TargetDBParameterGroupDescription, &sCopyDBParameterGroupMessage_Tags}}
+var mCopyDBParameterGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyDBParameterGroupResult_DBParameterGroup}}
+var mCreateDBClusterEndpointMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterEndpointMessage_DBClusterIdentifier, &sCreateDBClusterEndpointMessage_DBClusterEndpointIdentifier, &sCreateDBClusterEndpointMessage_EndpointType, &sCreateDBClusterEndpointMessage_StaticMembers, &sCreateDBClusterEndpointMessage_ExcludedMembers, &sCreateDBClusterEndpointMessage_Tags}}
+var mCreateDBClusterEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterEndpointOutput_DBClusterEndpointIdentifier, &sCreateDBClusterEndpointOutput_DBClusterIdentifier, &sCreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, &sCreateDBClusterEndpointOutput_Endpoint, &sCreateDBClusterEndpointOutput_Status, &sCreateDBClusterEndpointOutput_EndpointType, &sCreateDBClusterEndpointOutput_CustomEndpointType, &sCreateDBClusterEndpointOutput_StaticMembers, &sCreateDBClusterEndpointOutput_ExcludedMembers, &sCreateDBClusterEndpointOutput_DBClusterEndpointArn}, Hash: &hCreateDBClusterEndpointOutput}
+var mCreateDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterMessage_AvailabilityZones, &sCreateDBClusterMessage_BackupRetentionPeriod, &sCreateDBClusterMessage_CharacterSetName, &sCreateDBClusterMessage_CopyTagsToSnapshot, &sCreateDBClusterMessage_DatabaseName, &sCreateDBClusterMessage_DBClusterIdentifier, &sCreateDBClusterMessage_DBClusterParameterGroupName, &sCreateDBClusterMessage_VpcSecurityGroupIds, &sCreateDBClusterMessage_DBSubnetGroupName, &sCreateDBClusterMessage_Engine, &sCreateDBClusterMessage_EngineVersion, &sCreateDBClusterMessage_Port, &sCreateDBClusterMessage_MasterUsername, &sCreateDBClusterMessage_MasterUserPassword, &sCreateDBClusterMessage_OptionGroupName, &sCreateDBClusterMessage_PreferredBackupWindow, &sCreateDBClusterMessage_PreferredMaintenanceWindow, &sCreateDBClusterMessage_ReplicationSourceIdentifier, &sCreateDBClusterMessage_Tags, &sCreateDBClusterMessage_StorageEncrypted, &sCreateDBClusterMessage_KmsKeyId, &sCreateDBClusterMessage_PreSignedUrl, &sCreateDBClusterMessage_EnableIAMDatabaseAuthentication, &sCreateDBClusterMessage_EnableCloudwatchLogsExports, &sCreateDBClusterMessage_DeletionProtection, &sCreateDBClusterMessage_ServerlessV2ScalingConfiguration, &sCreateDBClusterMessage_GlobalClusterIdentifier, &sCreateDBClusterMessage_StorageType, &sCreateDBClusterMessage_NetworkType, &sCreateDBClusterMessage_SourceRegion, &sCreateDBClusterMessage_DestinationRegion}, Hash: &hCreateDBClusterMessage}
+var mCreateDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterResult_DBCluster}}
+var mCreateDBClusterParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterParameterGroupMessage_DBClusterParameterGroupName, &sCreateDBClusterParameterGroupMessage_DBParameterGroupFamily, &sCreateDBClusterParameterGroupMessage_Description, &sCreateDBClusterParameterGroupMessage_Tags}}
+var mCreateDBClusterParameterGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterParameterGroupResult_DBClusterParameterGroup}}
+var mCreateDBClusterSnapshotMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier, &sCreateDBClusterSnapshotMessage_DBClusterIdentifier, &sCreateDBClusterSnapshotMessage_Tags}}
+var mCreateDBClusterSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBClusterSnapshotResult_DBClusterSnapshot}}
+var mCreateDBInstanceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBInstanceMessage_DBName, &sCreateDBInstanceMessage_DBInstanceIdentifier, &sCreateDBInstanceMessage_AllocatedStorage, &sCreateDBInstanceMessage_DBInstanceClass, &sCreateDBInstanceMessage_Engine, &sCreateDBInstanceMessage_MasterUsername, &sCreateDBInstanceMessage_MasterUserPassword, &sCreateDBInstanceMessage_DBSecurityGroups, &sCreateDBInstanceMessage_VpcSecurityGroupIds, &sCreateDBInstanceMessage_AvailabilityZone, &sCreateDBInstanceMessage_DBSubnetGroupName, &sCreateDBInstanceMessage_PreferredMaintenanceWindow, &sCreateDBInstanceMessage_DBParameterGroupName, &sCreateDBInstanceMessage_BackupRetentionPeriod, &sCreateDBInstanceMessage_PreferredBackupWindow, &sCreateDBInstanceMessage_Port, &sCreateDBInstanceMessage_MultiAZ, &sCreateDBInstanceMessage_EngineVersion, &sCreateDBInstanceMessage_AutoMinorVersionUpgrade, &sCreateDBInstanceMessage_LicenseModel, &sCreateDBInstanceMessage_Iops, &sCreateDBInstanceMessage_OptionGroupName, &sCreateDBInstanceMessage_CharacterSetName, &sCreateDBInstanceMessage_PubliclyAccessible, &sCreateDBInstanceMessage_Tags, &sCreateDBInstanceMessage_DBClusterIdentifier, &sCreateDBInstanceMessage_StorageType, &sCreateDBInstanceMessage_TdeCredentialArn, &sCreateDBInstanceMessage_TdeCredentialPassword, &sCreateDBInstanceMessage_StorageEncrypted, &sCreateDBInstanceMessage_KmsKeyId, &sCreateDBInstanceMessage_Domain, &sCreateDBInstanceMessage_CopyTagsToSnapshot, &sCreateDBInstanceMessage_MonitoringInterval, &sCreateDBInstanceMessage_MonitoringRoleArn, &sCreateDBInstanceMessage_DomainIAMRoleName, &sCreateDBInstanceMessage_PromotionTier, &sCreateDBInstanceMessage_Timezone, &sCreateDBInstanceMessage_EnableIAMDatabaseAuthentication, &sCreateDBInstanceMessage_EnablePerformanceInsights, &sCreateDBInstanceMessage_PerformanceInsightsKMSKeyId, &sCreateDBInstanceMessage_EnableCloudwatchLogsExports, &sCreateDBInstanceMessage_DeletionProtection}, Hash: &hCreateDBInstanceMessage}
+var mCreateDBInstanceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBInstanceResult_DBInstance}}
+var mCreateDBParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBParameterGroupMessage_DBParameterGroupName, &sCreateDBParameterGroupMessage_DBParameterGroupFamily, &sCreateDBParameterGroupMessage_Description, &sCreateDBParameterGroupMessage_Tags}}
+var mCreateDBParameterGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBParameterGroupResult_DBParameterGroup}}
+var mCreateDBSubnetGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBSubnetGroupMessage_DBSubnetGroupName, &sCreateDBSubnetGroupMessage_DBSubnetGroupDescription, &sCreateDBSubnetGroupMessage_SubnetIds, &sCreateDBSubnetGroupMessage_Tags}}
+var mCreateDBSubnetGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDBSubnetGroupResult_DBSubnetGroup}}
+var mCreateEventSubscriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventSubscriptionMessage_SubscriptionName, &sCreateEventSubscriptionMessage_SnsTopicArn, &sCreateEventSubscriptionMessage_SourceType, &sCreateEventSubscriptionMessage_EventCategories, &sCreateEventSubscriptionMessage_SourceIds, &sCreateEventSubscriptionMessage_Enabled, &sCreateEventSubscriptionMessage_Tags}}
+var mCreateEventSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventSubscriptionResult_EventSubscription}}
+var mCreateGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalClusterMessage_GlobalClusterIdentifier, &sCreateGlobalClusterMessage_SourceDBClusterIdentifier, &sCreateGlobalClusterMessage_Engine, &sCreateGlobalClusterMessage_EngineVersion, &sCreateGlobalClusterMessage_DeletionProtection, &sCreateGlobalClusterMessage_DatabaseName, &sCreateGlobalClusterMessage_Tags, &sCreateGlobalClusterMessage_StorageEncrypted}}
+var mCreateGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalClusterResult_GlobalCluster}}
+var mDeleteDBClusterEndpointMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier}}
+var mDeleteDBClusterEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier, &sDeleteDBClusterEndpointOutput_DBClusterIdentifier, &sDeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, &sDeleteDBClusterEndpointOutput_Endpoint, &sDeleteDBClusterEndpointOutput_Status, &sDeleteDBClusterEndpointOutput_EndpointType, &sDeleteDBClusterEndpointOutput_CustomEndpointType, &sDeleteDBClusterEndpointOutput_StaticMembers, &sDeleteDBClusterEndpointOutput_ExcludedMembers, &sDeleteDBClusterEndpointOutput_DBClusterEndpointArn}, Hash: &hDeleteDBClusterEndpointOutput}
+var mDeleteDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterMessage_DBClusterIdentifier, &sDeleteDBClusterMessage_SkipFinalSnapshot, &sDeleteDBClusterMessage_FinalDBSnapshotIdentifier}}
+var mDeleteDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterResult_DBCluster}}
+var mDeleteDBClusterParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName}}
+var mDeleteDBClusterSnapshotMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier}}
+var mDeleteDBClusterSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBClusterSnapshotResult_DBClusterSnapshot}}
+var mDeleteDBInstanceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBInstanceMessage_DBInstanceIdentifier, &sDeleteDBInstanceMessage_SkipFinalSnapshot, &sDeleteDBInstanceMessage_FinalDBSnapshotIdentifier}}
+var mDeleteDBInstanceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBInstanceResult_DBInstance}}
+var mDeleteDBParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBParameterGroupMessage_DBParameterGroupName}}
+var mDeleteDBSubnetGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDBSubnetGroupMessage_DBSubnetGroupName}}
+var mDeleteEventSubscriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventSubscriptionMessage_SubscriptionName}}
+var mDeleteEventSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventSubscriptionResult_EventSubscription}}
+var mDeleteGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalClusterMessage_GlobalClusterIdentifier}}
+var mDeleteGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalClusterResult_GlobalCluster}}
+var mDescribeDBClusterEndpointsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterEndpointsMessage_DBClusterIdentifier, &sDescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier, &sDescribeDBClusterEndpointsMessage_Filters, &sDescribeDBClusterEndpointsMessage_MaxRecords, &sDescribeDBClusterEndpointsMessage_Marker}}
+var mDBClusterEndpointMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterEndpointMessage_Marker, &sDBClusterEndpointMessage_DBClusterEndpoints}}
+var mDescribeDBClusterParameterGroupsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName, &sDescribeDBClusterParameterGroupsMessage_Filters, &sDescribeDBClusterParameterGroupsMessage_MaxRecords, &sDescribeDBClusterParameterGroupsMessage_Marker}}
+var mDBClusterParameterGroupsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterParameterGroupsMessage_Marker, &sDBClusterParameterGroupsMessage_DBClusterParameterGroups}}
+var mDescribeDBClusterParametersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterParametersMessage_DBClusterParameterGroupName, &sDescribeDBClusterParametersMessage_Source, &sDescribeDBClusterParametersMessage_Filters, &sDescribeDBClusterParametersMessage_MaxRecords, &sDescribeDBClusterParametersMessage_Marker}}
+var mDBClusterParameterGroupDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterParameterGroupDetails_Parameters, &sDBClusterParameterGroupDetails_Marker}}
+var mDescribeDBClustersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClustersMessage_DBClusterIdentifier, &sDescribeDBClustersMessage_Filters, &sDescribeDBClustersMessage_MaxRecords, &sDescribeDBClustersMessage_Marker}}
+var mDescribeDBClusterSnapshotAttributesMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier}}
+var mDescribeDBClusterSnapshotAttributesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult}}
+var mDescribeDBClusterSnapshotsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBClusterSnapshotsMessage_DBClusterIdentifier, &sDescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier, &sDescribeDBClusterSnapshotsMessage_SnapshotType, &sDescribeDBClusterSnapshotsMessage_Filters, &sDescribeDBClusterSnapshotsMessage_MaxRecords, &sDescribeDBClusterSnapshotsMessage_Marker, &sDescribeDBClusterSnapshotsMessage_IncludeShared, &sDescribeDBClusterSnapshotsMessage_IncludePublic}}
+var mDBClusterSnapshotMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterSnapshotMessage_Marker, &sDBClusterSnapshotMessage_DBClusterSnapshots}}
+var mDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterMessage_Marker, &sDBClusterMessage_DBClusters}}
+var mDescribeDBEngineVersionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBEngineVersionsMessage_Engine, &sDescribeDBEngineVersionsMessage_EngineVersion, &sDescribeDBEngineVersionsMessage_DBParameterGroupFamily, &sDescribeDBEngineVersionsMessage_Filters, &sDescribeDBEngineVersionsMessage_MaxRecords, &sDescribeDBEngineVersionsMessage_Marker, &sDescribeDBEngineVersionsMessage_DefaultOnly, &sDescribeDBEngineVersionsMessage_ListSupportedCharacterSets, &sDescribeDBEngineVersionsMessage_ListSupportedTimezones}, Hash: &hDescribeDBEngineVersionsMessage}
+var mDBEngineVersionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBEngineVersionMessage_Marker, &sDBEngineVersionMessage_DBEngineVersions}}
+var mDescribeDBInstancesMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBInstancesMessage_DBInstanceIdentifier, &sDescribeDBInstancesMessage_Filters, &sDescribeDBInstancesMessage_MaxRecords, &sDescribeDBInstancesMessage_Marker}}
+var mDBInstanceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBInstanceMessage_Marker, &sDBInstanceMessage_DBInstances}}
+var mDescribeDBParameterGroupsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBParameterGroupsMessage_DBParameterGroupName, &sDescribeDBParameterGroupsMessage_Filters, &sDescribeDBParameterGroupsMessage_MaxRecords, &sDescribeDBParameterGroupsMessage_Marker}}
+var mDBParameterGroupsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupsMessage_Marker, &sDBParameterGroupsMessage_DBParameterGroups}}
+var mDescribeDBParametersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBParametersMessage_DBParameterGroupName, &sDescribeDBParametersMessage_Source, &sDescribeDBParametersMessage_Filters, &sDescribeDBParametersMessage_MaxRecords, &sDescribeDBParametersMessage_Marker}}
+var mDBParameterGroupDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupDetails_Parameters, &sDBParameterGroupDetails_Marker}}
+var mDescribeDBSubnetGroupsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDBSubnetGroupsMessage_DBSubnetGroupName, &sDescribeDBSubnetGroupsMessage_Filters, &sDescribeDBSubnetGroupsMessage_MaxRecords, &sDescribeDBSubnetGroupsMessage_Marker}}
+var mDBSubnetGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBSubnetGroupMessage_Marker, &sDBSubnetGroupMessage_DBSubnetGroups}}
+var mDescribeEngineDefaultClusterParametersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily, &sDescribeEngineDefaultClusterParametersMessage_Filters, &sDescribeEngineDefaultClusterParametersMessage_MaxRecords, &sDescribeEngineDefaultClusterParametersMessage_Marker}}
+var mDescribeEngineDefaultClusterParametersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngineDefaultClusterParametersResult_EngineDefaults}}
+var mDescribeEngineDefaultParametersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngineDefaultParametersMessage_DBParameterGroupFamily, &sDescribeEngineDefaultParametersMessage_Filters, &sDescribeEngineDefaultParametersMessage_MaxRecords, &sDescribeEngineDefaultParametersMessage_Marker}}
+var mDescribeEngineDefaultParametersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEngineDefaultParametersResult_EngineDefaults}}
+var mDescribeEventCategoriesMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventCategoriesMessage_SourceType, &sDescribeEventCategoriesMessage_Filters}}
+var mEventCategoriesMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEventCategoriesMessage_EventCategoriesMapList}}
+var mDescribeEventsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsMessage_SourceIdentifier, &sDescribeEventsMessage_SourceType, &sDescribeEventsMessage_StartTime, &sDescribeEventsMessage_EndTime, &sDescribeEventsMessage_Duration, &sDescribeEventsMessage_EventCategories, &sDescribeEventsMessage_Filters, &sDescribeEventsMessage_MaxRecords, &sDescribeEventsMessage_Marker}, Hash: &hDescribeEventsMessage}
+var mEventsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEventsMessage_Marker, &sEventsMessage_Events}}
+var mDescribeEventSubscriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventSubscriptionsMessage_SubscriptionName, &sDescribeEventSubscriptionsMessage_Filters, &sDescribeEventSubscriptionsMessage_MaxRecords, &sDescribeEventSubscriptionsMessage_Marker}}
+var mEventSubscriptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSubscriptionsMessage_Marker, &sEventSubscriptionsMessage_EventSubscriptionsList}}
+var mDescribeGlobalClustersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGlobalClustersMessage_GlobalClusterIdentifier, &sDescribeGlobalClustersMessage_MaxRecords, &sDescribeGlobalClustersMessage_Marker}}
+var mGlobalClustersMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalClustersMessage_Marker, &sGlobalClustersMessage_GlobalClusters}}
+var mDescribeOrderableDBInstanceOptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOrderableDBInstanceOptionsMessage_Engine, &sDescribeOrderableDBInstanceOptionsMessage_EngineVersion, &sDescribeOrderableDBInstanceOptionsMessage_DBInstanceClass, &sDescribeOrderableDBInstanceOptionsMessage_LicenseModel, &sDescribeOrderableDBInstanceOptionsMessage_Vpc, &sDescribeOrderableDBInstanceOptionsMessage_Filters, &sDescribeOrderableDBInstanceOptionsMessage_MaxRecords, &sDescribeOrderableDBInstanceOptionsMessage_Marker}}
+var mOrderableDBInstanceOptionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions, &sOrderableDBInstanceOptionsMessage_Marker}}
+var mDescribePendingMaintenanceActionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePendingMaintenanceActionsMessage_ResourceIdentifier, &sDescribePendingMaintenanceActionsMessage_Filters, &sDescribePendingMaintenanceActionsMessage_Marker, &sDescribePendingMaintenanceActionsMessage_MaxRecords}}
+var mPendingMaintenanceActionsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingMaintenanceActionsMessage_PendingMaintenanceActions, &sPendingMaintenanceActionsMessage_Marker}}
+var mDescribeValidDBInstanceModificationsMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier}}
+var mDescribeValidDBInstanceModificationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage}}
+var mFailoverDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverDBClusterMessage_DBClusterIdentifier, &sFailoverDBClusterMessage_TargetDBInstanceIdentifier}}
+var mFailoverDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverDBClusterResult_DBCluster}}
+var mFailoverGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverGlobalClusterMessage_GlobalClusterIdentifier, &sFailoverGlobalClusterMessage_TargetDbClusterIdentifier, &sFailoverGlobalClusterMessage_AllowDataLoss, &sFailoverGlobalClusterMessage_Switchover}}
+var mFailoverGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sFailoverGlobalClusterResult_GlobalCluster}}
+var mListTagsForResourceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceMessage_ResourceName, &sListTagsForResourceMessage_Filters}}
+var mTagListMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sTagListMessage_TagList}}
+var mModifyDBClusterEndpointMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier, &sModifyDBClusterEndpointMessage_EndpointType, &sModifyDBClusterEndpointMessage_StaticMembers, &sModifyDBClusterEndpointMessage_ExcludedMembers}}
+var mModifyDBClusterEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier, &sModifyDBClusterEndpointOutput_DBClusterIdentifier, &sModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, &sModifyDBClusterEndpointOutput_Endpoint, &sModifyDBClusterEndpointOutput_Status, &sModifyDBClusterEndpointOutput_EndpointType, &sModifyDBClusterEndpointOutput_CustomEndpointType, &sModifyDBClusterEndpointOutput_StaticMembers, &sModifyDBClusterEndpointOutput_ExcludedMembers, &sModifyDBClusterEndpointOutput_DBClusterEndpointArn}, Hash: &hModifyDBClusterEndpointOutput}
+var mModifyDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterMessage_DBClusterIdentifier, &sModifyDBClusterMessage_NewDBClusterIdentifier, &sModifyDBClusterMessage_ApplyImmediately, &sModifyDBClusterMessage_BackupRetentionPeriod, &sModifyDBClusterMessage_DBClusterParameterGroupName, &sModifyDBClusterMessage_VpcSecurityGroupIds, &sModifyDBClusterMessage_Port, &sModifyDBClusterMessage_MasterUserPassword, &sModifyDBClusterMessage_OptionGroupName, &sModifyDBClusterMessage_PreferredBackupWindow, &sModifyDBClusterMessage_PreferredMaintenanceWindow, &sModifyDBClusterMessage_EnableIAMDatabaseAuthentication, &sModifyDBClusterMessage_CloudwatchLogsExportConfiguration, &sModifyDBClusterMessage_EngineVersion, &sModifyDBClusterMessage_AllowMajorVersionUpgrade, &sModifyDBClusterMessage_DBInstanceParameterGroupName, &sModifyDBClusterMessage_DeletionProtection, &sModifyDBClusterMessage_CopyTagsToSnapshot, &sModifyDBClusterMessage_ServerlessV2ScalingConfiguration, &sModifyDBClusterMessage_StorageType, &sModifyDBClusterMessage_NetworkType}, Hash: &hModifyDBClusterMessage}
+var mModifyDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterResult_DBCluster}}
+var mModifyDBClusterParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName, &sModifyDBClusterParameterGroupMessage_Parameters}}
+var mDBClusterParameterGroupNameMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBClusterParameterGroupNameMessage_DBClusterParameterGroupName}}
+var mModifyDBClusterSnapshotAttributeMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier, &sModifyDBClusterSnapshotAttributeMessage_AttributeName, &sModifyDBClusterSnapshotAttributeMessage_ValuesToAdd, &sModifyDBClusterSnapshotAttributeMessage_ValuesToRemove}}
+var mModifyDBClusterSnapshotAttributeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult}}
+var mModifyDBInstanceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBInstanceMessage_DBInstanceIdentifier, &sModifyDBInstanceMessage_AllocatedStorage, &sModifyDBInstanceMessage_DBInstanceClass, &sModifyDBInstanceMessage_DBSubnetGroupName, &sModifyDBInstanceMessage_DBSecurityGroups, &sModifyDBInstanceMessage_VpcSecurityGroupIds, &sModifyDBInstanceMessage_ApplyImmediately, &sModifyDBInstanceMessage_MasterUserPassword, &sModifyDBInstanceMessage_DBParameterGroupName, &sModifyDBInstanceMessage_BackupRetentionPeriod, &sModifyDBInstanceMessage_PreferredBackupWindow, &sModifyDBInstanceMessage_PreferredMaintenanceWindow, &sModifyDBInstanceMessage_MultiAZ, &sModifyDBInstanceMessage_EngineVersion, &sModifyDBInstanceMessage_AllowMajorVersionUpgrade, &sModifyDBInstanceMessage_AutoMinorVersionUpgrade, &sModifyDBInstanceMessage_LicenseModel, &sModifyDBInstanceMessage_Iops, &sModifyDBInstanceMessage_OptionGroupName, &sModifyDBInstanceMessage_NewDBInstanceIdentifier, &sModifyDBInstanceMessage_StorageType, &sModifyDBInstanceMessage_TdeCredentialArn, &sModifyDBInstanceMessage_TdeCredentialPassword, &sModifyDBInstanceMessage_CACertificateIdentifier, &sModifyDBInstanceMessage_Domain, &sModifyDBInstanceMessage_CopyTagsToSnapshot, &sModifyDBInstanceMessage_MonitoringInterval, &sModifyDBInstanceMessage_DBPortNumber, &sModifyDBInstanceMessage_PubliclyAccessible, &sModifyDBInstanceMessage_MonitoringRoleArn, &sModifyDBInstanceMessage_DomainIAMRoleName, &sModifyDBInstanceMessage_PromotionTier, &sModifyDBInstanceMessage_EnableIAMDatabaseAuthentication, &sModifyDBInstanceMessage_EnablePerformanceInsights, &sModifyDBInstanceMessage_PerformanceInsightsKMSKeyId, &sModifyDBInstanceMessage_CloudwatchLogsExportConfiguration, &sModifyDBInstanceMessage_DeletionProtection}, Hash: &hModifyDBInstanceMessage}
+var mModifyDBInstanceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBInstanceResult_DBInstance}}
+var mModifyDBParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBParameterGroupMessage_DBParameterGroupName, &sModifyDBParameterGroupMessage_Parameters}}
+var mDBParameterGroupNameMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sDBParameterGroupNameMessage_DBParameterGroupName}}
+var mModifyDBSubnetGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBSubnetGroupMessage_DBSubnetGroupName, &sModifyDBSubnetGroupMessage_DBSubnetGroupDescription, &sModifyDBSubnetGroupMessage_SubnetIds}}
+var mModifyDBSubnetGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyDBSubnetGroupResult_DBSubnetGroup}}
+var mModifyEventSubscriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyEventSubscriptionMessage_SubscriptionName, &sModifyEventSubscriptionMessage_SnsTopicArn, &sModifyEventSubscriptionMessage_SourceType, &sModifyEventSubscriptionMessage_EventCategories, &sModifyEventSubscriptionMessage_Enabled}}
+var mModifyEventSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyEventSubscriptionResult_EventSubscription}}
+var mModifyGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyGlobalClusterMessage_GlobalClusterIdentifier, &sModifyGlobalClusterMessage_NewGlobalClusterIdentifier, &sModifyGlobalClusterMessage_DeletionProtection, &sModifyGlobalClusterMessage_EngineVersion, &sModifyGlobalClusterMessage_AllowMajorVersionUpgrade}}
+var mModifyGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyGlobalClusterResult_GlobalCluster}}
+var mPromoteReadReplicaDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteReadReplicaDBClusterMessage_DBClusterIdentifier}}
+var mPromoteReadReplicaDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPromoteReadReplicaDBClusterResult_DBCluster}}
+var mRebootDBInstanceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRebootDBInstanceMessage_DBInstanceIdentifier, &sRebootDBInstanceMessage_ForceFailover}}
+var mRebootDBInstanceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRebootDBInstanceResult_DBInstance}}
+var mRemoveFromGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveFromGlobalClusterMessage_GlobalClusterIdentifier, &sRemoveFromGlobalClusterMessage_DbClusterIdentifier}}
+var mRemoveFromGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveFromGlobalClusterResult_GlobalCluster}}
+var mRemoveRoleFromDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveRoleFromDBClusterMessage_DBClusterIdentifier, &sRemoveRoleFromDBClusterMessage_RoleArn, &sRemoveRoleFromDBClusterMessage_FeatureName}}
+var mRemoveSourceIdentifierFromSubscriptionMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName, &sRemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier}}
+var mRemoveSourceIdentifierFromSubscriptionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveSourceIdentifierFromSubscriptionResult_EventSubscription}}
+var mRemoveTagsFromResourceMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceMessage_ResourceName, &sRemoveTagsFromResourceMessage_TagKeys}}
+var mResetDBClusterParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sResetDBClusterParameterGroupMessage_DBClusterParameterGroupName, &sResetDBClusterParameterGroupMessage_ResetAllParameters, &sResetDBClusterParameterGroupMessage_Parameters}}
+var mResetDBParameterGroupMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sResetDBParameterGroupMessage_DBParameterGroupName, &sResetDBParameterGroupMessage_ResetAllParameters, &sResetDBParameterGroupMessage_Parameters}}
+var mRestoreDBClusterFromSnapshotMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreDBClusterFromSnapshotMessage_AvailabilityZones, &sRestoreDBClusterFromSnapshotMessage_DBClusterIdentifier, &sRestoreDBClusterFromSnapshotMessage_SnapshotIdentifier, &sRestoreDBClusterFromSnapshotMessage_Engine, &sRestoreDBClusterFromSnapshotMessage_EngineVersion, &sRestoreDBClusterFromSnapshotMessage_Port, &sRestoreDBClusterFromSnapshotMessage_DBSubnetGroupName, &sRestoreDBClusterFromSnapshotMessage_DatabaseName, &sRestoreDBClusterFromSnapshotMessage_OptionGroupName, &sRestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds, &sRestoreDBClusterFromSnapshotMessage_Tags, &sRestoreDBClusterFromSnapshotMessage_KmsKeyId, &sRestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication, &sRestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports, &sRestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName, &sRestoreDBClusterFromSnapshotMessage_DeletionProtection, &sRestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot, &sRestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration, &sRestoreDBClusterFromSnapshotMessage_StorageType, &sRestoreDBClusterFromSnapshotMessage_NetworkType}, Hash: &hRestoreDBClusterFromSnapshotMessage}
+var mRestoreDBClusterFromSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreDBClusterFromSnapshotResult_DBCluster}}
+var mRestoreDBClusterToPointInTimeMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreDBClusterToPointInTimeMessage_DBClusterIdentifier, &sRestoreDBClusterToPointInTimeMessage_RestoreType, &sRestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier, &sRestoreDBClusterToPointInTimeMessage_RestoreToTime, &sRestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime, &sRestoreDBClusterToPointInTimeMessage_Port, &sRestoreDBClusterToPointInTimeMessage_DBSubnetGroupName, &sRestoreDBClusterToPointInTimeMessage_OptionGroupName, &sRestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds, &sRestoreDBClusterToPointInTimeMessage_Tags, &sRestoreDBClusterToPointInTimeMessage_KmsKeyId, &sRestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication, &sRestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports, &sRestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName, &sRestoreDBClusterToPointInTimeMessage_DeletionProtection, &sRestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration, &sRestoreDBClusterToPointInTimeMessage_StorageType, &sRestoreDBClusterToPointInTimeMessage_NetworkType}, Hash: &hRestoreDBClusterToPointInTimeMessage}
+var mRestoreDBClusterToPointInTimeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreDBClusterToPointInTimeResult_DBCluster}}
+var mStartDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDBClusterMessage_DBClusterIdentifier}}
+var mStartDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDBClusterResult_DBCluster}}
+var mStopDBClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDBClusterMessage_DBClusterIdentifier}}
+var mStopDBClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDBClusterResult_DBCluster}}
+var mSwitchoverGlobalClusterMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sSwitchoverGlobalClusterMessage_GlobalClusterIdentifier, &sSwitchoverGlobalClusterMessage_TargetDbClusterIdentifier}}
+var mSwitchoverGlobalClusterResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSwitchoverGlobalClusterResult_GlobalCluster}}
+
+var hClusterPendingModifiedValues = smithy.MemberHash{Seed: 12, Slots: []uint16{
+	0, 5, 3, 8, 1, 0, 0, 4, 0, 0, 2, 0, 0, 0, 0, 7, 0, 0, 0, 6, 0, 9, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hDBCluster = smithy.MemberHash{Seed: 16736, Slots: []uint16{
+	0, 0, 39, 0, 0, 0, 32, 0, 0, 14, 0, 0, 42, 3, 0, 0, 37, 0, 0, 0, 0, 41, 0, 0,
+	2, 0, 0, 0, 12, 0, 10, 31, 0, 0, 18, 0, 0, 0, 0, 21, 38, 6, 0, 40, 17, 0, 0, 0,
+	0, 24, 22, 44, 45, 0, 0, 0, 35, 0, 27, 0, 20, 0, 0, 0, 0, 0, 1, 25, 0, 16, 19, 0,
+	0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 26, 5, 0, 36, 0, 0, 0, 33,
+	8, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 15, 4, 0, 7, 0, 0, 0, 0, 28, 9, 0, 0, 0,
+	0, 0, 23, 13, 0, 46, 29, 34,
+}}
+var hDBClusterEndpoint = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 1, 3, 0, 0, 8, 0, 0, 4, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+	6, 0, 0, 0, 0, 5, 0, 7,
+}}
+var hDBClusterSnapshot = smithy.MemberHash{Seed: 63, Slots: []uint16{
+	0, 16, 0, 3, 0, 0, 0, 1, 18, 0, 0, 11, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 4, 9,
+	0, 2, 0, 0, 19, 0, 0, 0, 0, 0, 8, 0, 0, 0, 6, 21, 0, 0, 0, 0, 0, 0, 13, 20,
+	0, 0, 0, 15, 0, 10, 7, 0, 0, 0, 12, 17, 5, 0, 0, 0,
+}}
+var hDBEngineVersion = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 5, 6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 4, 13, 0, 0, 9, 0, 0, 8, 1,
+	7, 0, 0, 10, 0, 0, 11, 12,
+}}
+var hDBInstance = smithy.MemberHash{Seed: 649, Slots: []uint16{
+	28, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 17, 42, 0, 35, 0, 0, 38, 0, 0, 0,
+	46, 0, 0, 0, 0, 0, 0, 0, 0, 15, 31, 0, 0, 0, 0, 0, 0, 47, 39, 0, 0, 40, 0, 0,
+	33, 0, 0, 0, 0, 0, 0, 0, 14, 52, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 25, 20,
+	5, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 27, 0, 0, 21, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 9, 0, 34, 23, 1, 0, 0, 0, 0, 0, 0, 4, 0, 2, 0, 0, 50, 0,
+	49, 0, 0, 0, 0, 0, 26, 0, 0, 0, 44, 0, 13, 0, 0, 0, 0, 0, 0, 0, 53, 0, 51, 18,
+	0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 54, 6, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 32, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 0,
+	0, 0, 37, 0, 12, 0, 48, 0, 0, 0, 0, 0, 19, 0, 0, 0,
+}}
+var hEventSubscription = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 9, 2, 0, 0, 8, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1,
+	10, 0, 0, 7, 0, 0, 6, 0,
+}}
+var hGlobalCluster = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 2, 12, 11, 0, 0, 6, 0, 5, 0, 0, 0, 0, 3, 1, 0, 0, 8, 0, 0, 0, 0, 0, 0,
+	7, 0, 0, 0, 0, 4, 10, 9,
+}}
+var hOrderableDBInstanceOption = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	3, 12, 0, 0, 0, 8, 5, 19, 0, 4, 18, 0, 0, 21, 0, 0, 0, 0, 0, 1, 0, 0, 16, 0,
+	9, 2, 0, 0, 17, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 20, 22, 15, 13, 0,
+}}
+var hParameter = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	0, 0, 8, 0, 7, 0, 0, 9, 5, 10, 0, 6, 2, 0, 3, 0, 1, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hPendingModifiedValues = smithy.MemberHash{Seed: 24, Slots: []uint16{
+	0, 12, 0, 9, 0, 0, 0, 1, 11, 0, 13, 6, 0, 0, 14, 0, 0, 3, 0, 0, 5, 7, 8, 4,
+	10, 0, 0, 0, 0, 0, 2, 0,
+}}
+var hCreateDBClusterEndpointOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 1, 3, 0, 0, 8, 0, 0, 4, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+	6, 0, 0, 0, 0, 5, 0, 7,
+}}
+var hCreateDBClusterMessage = smithy.MemberHash{Seed: 21683, Slots: []uint16{
+	12, 0, 0, 0, 0, 4, 1, 18, 27, 0, 0, 15, 0, 23, 7, 29, 0, 0, 25, 16, 5, 8, 13, 17,
+	0, 0, 0, 0, 3, 28, 10, 0, 0, 0, 21, 19, 0, 0, 2, 0, 0, 20, 22, 0, 0, 0, 0, 6,
+	0, 0, 26, 0, 0, 14, 0, 30, 11, 0, 0, 9, 24, 0, 0, 31,
+}}
+var hCreateDBInstanceMessage = smithy.MemberHash{Seed: 9904, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 31, 0, 23, 33, 6, 29, 26, 0, 0, 15, 17,
+	9, 0, 0, 0, 3, 19, 5, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 28, 0, 0, 0,
+	0, 0, 0, 0, 24, 0, 0, 40, 43, 0, 27, 0, 4, 0, 0, 32, 12, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 25, 11, 0, 0, 13, 0, 22, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 41, 21, 38, 0, 0,
+	0, 10, 42, 0, 35, 0, 0, 0, 18, 0, 0, 30, 0, 34, 36, 0, 0, 0, 37, 16, 0, 0, 0, 8,
+	0, 0, 0, 0, 0, 0, 0, 14,
+}}
+var hDeleteDBClusterEndpointOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 1, 3, 0, 0, 8, 0, 0, 4, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+	6, 0, 0, 0, 0, 5, 0, 7,
+}}
+var hDescribeDBEngineVersionsMessage = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 2, 0, 1, 6, 9, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 8, 0,
+	0, 0, 0, 0, 3, 0, 0, 7,
+}}
+var hDescribeEventsMessage = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 2, 0, 0, 0, 0, 9, 0, 7, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 5, 0,
+	0, 6, 0, 0, 0, 3, 0, 4,
+}}
+var hModifyDBClusterEndpointOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 1, 3, 0, 0, 8, 0, 0, 4, 2, 0, 10, 0, 0, 0, 0, 0, 0, 0, 9, 0,
+	6, 0, 0, 0, 0, 5, 0, 7,
+}}
+var hModifyDBClusterMessage = smithy.MemberHash{Seed: 34, Slots: []uint16{
+	7, 0, 15, 0, 11, 0, 0, 0, 0, 0, 0, 0, 21, 13, 0, 0, 8, 10, 0, 0, 0, 0, 0, 0,
+	19, 2, 0, 1, 0, 0, 0, 4, 6, 14, 17, 0, 0, 0, 5, 0, 20, 0, 0, 0, 0, 3, 0, 0,
+	0, 12, 16, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 9, 0,
+}}
+var hModifyDBInstanceMessage = smithy.MemberHash{Seed: 275, Slots: []uint16{
+	4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 28, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 7, 0, 0, 0, 23, 12, 0, 0, 14, 0, 0, 13, 0, 0, 27, 0, 0, 0, 22, 0, 0, 20,
+	11, 0, 3, 0, 0, 2, 9, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 25, 0,
+	0, 0, 8, 0, 33, 16, 0, 0, 17, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 30, 0, 0, 31, 0,
+	0, 0, 19, 0, 0, 35, 0, 6, 5, 34, 0, 0, 0, 0, 0, 0, 29, 15, 0, 0, 37, 0, 18, 0,
+	10, 0, 0, 0, 36, 0, 0, 0,
+}}
+var hRestoreDBClusterFromSnapshotMessage = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	0, 0, 0, 0, 5, 14, 3, 0, 13, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 4, 0, 0, 18, 20,
+	0, 0, 0, 0, 0, 10, 15, 1, 2, 0, 0, 12, 19, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0,
+	0, 0, 9, 8, 0, 0, 0, 0, 0, 16, 11, 0, 6, 0, 0, 0,
+}}
+var hRestoreDBClusterToPointInTimeMessage = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 18, 4, 9, 0, 15, 0,
+	0, 0, 0, 0, 14, 0, 7, 3, 0, 12, 0, 6, 13, 0, 0, 0, 0, 16, 11, 0, 0, 0, 17, 0,
+	0, 2, 0, 0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 0, 0, 0,
+}}
+
+var sAddRoleToDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRoleToDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eAddRoleToDBCluster})
+var sAddSourceIdentifierToSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddSourceIdentifierToSubscription, Type: smithy.ShapeTypeOperation, Ext: &eAddSourceIdentifierToSubscription})
+var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation, Ext: &eAddTagsToResource})
+var sApplyPendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceAction, Type: smithy.ShapeTypeOperation, Ext: &eApplyPendingMaintenanceAction})
+var sCopyDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eCopyDBClusterParameterGroup})
+var sCopyDBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterSnapshot, Type: smithy.ShapeTypeOperation, Ext: &eCopyDBClusterSnapshot})
+var sCopyDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eCopyDBParameterGroup})
+var sCreateDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBCluster})
+var sCreateDBClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBClusterEndpoint})
+var sCreateDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBClusterParameterGroup})
+var sCreateDBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterSnapshot, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBClusterSnapshot})
+var sCreateDBInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBInstance, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBInstance})
+var sCreateDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBParameterGroup})
+var sCreateDBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBSubnetGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateDBSubnetGroup})
+var sCreateEventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSubscription, Type: smithy.ShapeTypeOperation, Ext: &eCreateEventSubscription})
+var sCreateGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eCreateGlobalCluster})
+var sDeleteDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBCluster})
+var sDeleteDBClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBClusterEndpoint})
+var sDeleteDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBClusterParameterGroup})
+var sDeleteDBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterSnapshot, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBClusterSnapshot})
+var sDeleteDBInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBInstance, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBInstance})
+var sDeleteDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBParameterGroup})
+var sDeleteDBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBSubnetGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDBSubnetGroup})
+var sDeleteEventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSubscription, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEventSubscription})
+var sDeleteGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGlobalCluster})
+var sDescribeDBClusterEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterEndpoints, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusterEndpoints})
+var sDescribeDBClusterParameterGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterParameterGroups, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusterParameterGroups})
+var sDescribeDBClusterParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterParameters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusterParameters})
+var sDescribeDBClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusters})
+var sDescribeDBClusterSnapshotAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterSnapshotAttributes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusterSnapshotAttributes})
+var sDescribeDBClusterSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterSnapshots, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBClusterSnapshots})
+var sDescribeDBEngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBEngineVersions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBEngineVersions})
+var sDescribeDBInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBInstances, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBInstances})
+var sDescribeDBParameterGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBParameterGroups, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBParameterGroups})
+var sDescribeDBParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBParameters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBParameters})
+var sDescribeDBSubnetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBSubnetGroups, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDBSubnetGroups})
+var sDescribeEngineDefaultClusterParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultClusterParameters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEngineDefaultClusterParameters})
+var sDescribeEngineDefaultParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultParameters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEngineDefaultParameters})
+var sDescribeEventCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventCategories, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventCategories})
+var sDescribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvents, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEvents})
+var sDescribeEventSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSubscriptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventSubscriptions})
+var sDescribeGlobalClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGlobalClusters, Type: smithy.ShapeTypeOperation, Ext: &eDescribeGlobalClusters})
+var sDescribeOrderableDBInstanceOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrderableDBInstanceOptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeOrderableDBInstanceOptions})
+var sDescribePendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePendingMaintenanceActions, Type: smithy.ShapeTypeOperation, Ext: &eDescribePendingMaintenanceActions})
+var sDescribeValidDBInstanceModifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeValidDBInstanceModifications, Type: smithy.ShapeTypeOperation, Ext: &eDescribeValidDBInstanceModifications})
+var sFailoverDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eFailoverDBCluster})
+var sFailoverGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eFailoverGlobalCluster})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sModifyDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBCluster})
+var sModifyDBClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterEndpoint, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBClusterEndpoint})
+var sModifyDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBClusterParameterGroup})
+var sModifyDBClusterSnapshotAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterSnapshotAttribute, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBClusterSnapshotAttribute})
+var sModifyDBInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBInstance, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBInstance})
+var sModifyDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBParameterGroup})
+var sModifyDBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBSubnetGroup, Type: smithy.ShapeTypeOperation, Ext: &eModifyDBSubnetGroup})
+var sModifyEventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyEventSubscription, Type: smithy.ShapeTypeOperation, Ext: &eModifyEventSubscription})
+var sModifyGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eModifyGlobalCluster})
+var sPromoteReadReplicaDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteReadReplicaDBCluster, Type: smithy.ShapeTypeOperation, Ext: &ePromoteReadReplicaDBCluster})
+var sRebootDBInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootDBInstance, Type: smithy.ShapeTypeOperation, Ext: &eRebootDBInstance})
+var sRemoveFromGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFromGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eRemoveFromGlobalCluster})
+var sRemoveRoleFromDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRoleFromDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eRemoveRoleFromDBCluster})
+var sRemoveSourceIdentifierFromSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveSourceIdentifierFromSubscription, Type: smithy.ShapeTypeOperation, Ext: &eRemoveSourceIdentifierFromSubscription})
+var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTagsFromResource})
+var sResetDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetDBClusterParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eResetDBClusterParameterGroup})
+var sResetDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetDBParameterGroup, Type: smithy.ShapeTypeOperation, Ext: &eResetDBParameterGroup})
+var sRestoreDBClusterFromSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterFromSnapshot, Type: smithy.ShapeTypeOperation, Ext: &eRestoreDBClusterFromSnapshot})
+var sRestoreDBClusterToPointInTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterToPointInTime, Type: smithy.ShapeTypeOperation, Ext: &eRestoreDBClusterToPointInTime})
+var sStartDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eStartDBCluster})
+var sStopDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDBCluster, Type: smithy.ShapeTypeOperation, Ext: &eStopDBCluster})
+var sSwitchoverGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSwitchoverGlobalCluster, Type: smithy.ShapeTypeOperation, Ext: &eSwitchoverGlobalCluster})
+var s_AmazonRDSv19 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonRDSv19, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AmazonRDSv19})
+var sApplyMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyMethod, Members: &mApplyMethod, Type: smithy.ShapeTypeEnum, Ext: &eApplyMethod})
+var sApplyMethod_immediate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "immediate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplyMethod_immediate})
+var sApplyMethod_pending_reboot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending_reboot", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplyMethod_pending_reboot})
+var s_AttributeValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &e_AttributeValueList})
+var s_AttributeValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_AttributeValueList_member})
+var sAuthorizationNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationNotFoundFault, Members: &mAuthorizationNotFoundFault, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizationNotFoundFault})
+var sAuthorizationNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAuthorizationNotFoundFault_message})
+var sAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZone})
+var sAvailabilityZone_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZone_Name})
+var s_AvailabilityZoneList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZoneList})
+var s_AvailabilityZoneList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityZone, Members: &mAvailabilityZone, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &e_AvailabilityZoneList_member})
+var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZones})
+var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZones_member})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_BooleanOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanOptional})
+var sCertificateNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateNotFoundFault, Members: &mCertificateNotFoundFault, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eCertificateNotFoundFault})
+var sCertificateNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eCertificateNotFoundFault_message})
+var sCharacterSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCharacterSet, Members: &mCharacterSet, Type: smithy.ShapeTypeStructure, Ext: &eCharacterSet})
+var sCharacterSet_CharacterSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCharacterSet_CharacterSetName})
+var sCharacterSet_CharacterSetDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCharacterSet_CharacterSetDescription})
+var sCloudwatchLogsExportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudwatchLogsExportConfiguration, Members: &mCloudwatchLogsExportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCloudwatchLogsExportConfiguration})
+var sCloudwatchLogsExportConfiguration_EnableLogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableLogTypes", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eCloudwatchLogsExportConfiguration_EnableLogTypes})
+var sCloudwatchLogsExportConfiguration_DisableLogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableLogTypes", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eCloudwatchLogsExportConfiguration_DisableLogTypes})
+var sClusterPendingModifiedValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterPendingModifiedValues, Members: &mClusterPendingModifiedValues, Type: smithy.ShapeTypeStructure, Ext: &eClusterPendingModifiedValues})
+var sClusterPendingModifiedValues_PendingCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingCloudwatchLogsExports", ID: &iPendingCloudwatchLogsExports, Members: &mPendingCloudwatchLogsExports, Type: smithy.ShapeTypeStructure, Ext: &eClusterPendingModifiedValues_PendingCloudwatchLogsExports})
+var sClusterPendingModifiedValues_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterPendingModifiedValues_DBClusterIdentifier})
+var sClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMDatabaseAuthenticationEnabled", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled})
+var sClusterPendingModifiedValues_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterPendingModifiedValues_EngineVersion})
+var sClusterPendingModifiedValues_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eClusterPendingModifiedValues_BackupRetentionPeriod})
+var sClusterPendingModifiedValues_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterPendingModifiedValues_StorageType})
+var sClusterPendingModifiedValues_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eClusterPendingModifiedValues_AllocatedStorage})
+var sClusterPendingModifiedValues_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eClusterPendingModifiedValues_Iops})
+var sClusterPendingModifiedValues_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eClusterPendingModifiedValues_NetworkType})
+var sDBCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eDBCluster})
+var sDBCluster_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBCluster_AllocatedStorage})
+var sDBCluster_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eDBCluster_AvailabilityZones})
+var sDBCluster_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBCluster_BackupRetentionPeriod})
+var sDBCluster_CharacterSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_CharacterSetName})
+var sDBCluster_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DatabaseName})
+var sDBCluster_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DBClusterIdentifier})
+var sDBCluster_DBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroup", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DBClusterParameterGroup})
+var sDBCluster_DBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroup", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DBSubnetGroup})
+var sDBCluster_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_Status})
+var sDBCluster_PercentProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentProgress", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_PercentProgress})
+var sDBCluster_EarliestRestorableTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EarliestRestorableTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBCluster_EarliestRestorableTime})
+var sDBCluster_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_Endpoint})
+var sDBCluster_ReaderEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReaderEndpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_ReaderEndpoint})
+var sDBCluster_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_MultiAZ})
+var sDBCluster_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_Engine})
+var sDBCluster_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_EngineVersion})
+var sDBCluster_LatestRestorableTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRestorableTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBCluster_LatestRestorableTime})
+var sDBCluster_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBCluster_Port})
+var sDBCluster_MasterUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUsername", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_MasterUsername})
+var sDBCluster_DBClusterOptionGroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterOptionGroupMemberships", ID: &i_DBClusterOptionGroupMemberships, Members: &m_DBClusterOptionGroupMemberships, Type: smithy.ShapeTypeList, Ext: &eDBCluster_DBClusterOptionGroupMemberships})
+var sDBCluster_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_PreferredBackupWindow})
+var sDBCluster_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_PreferredMaintenanceWindow})
+var sDBCluster_ReplicationSourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationSourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_ReplicationSourceIdentifier})
+var sDBCluster_ReadReplicaIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadReplicaIdentifiers", ID: &i_ReadReplicaIdentifierList, Members: &m_ReadReplicaIdentifierList, Type: smithy.ShapeTypeList, Ext: &eDBCluster_ReadReplicaIdentifiers})
+var sDBCluster_DBClusterMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterMembers", ID: &i_DBClusterMemberList, Members: &m_DBClusterMemberList, Type: smithy.ShapeTypeList, Ext: &eDBCluster_DBClusterMembers})
+var sDBCluster_VpcSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroups", ID: &i_VpcSecurityGroupMembershipList, Members: &m_VpcSecurityGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &eDBCluster_VpcSecurityGroups})
+var sDBCluster_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_HostedZoneId})
+var sDBCluster_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_StorageEncrypted})
+var sDBCluster_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_KmsKeyId})
+var sDBCluster_DbClusterResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbClusterResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DbClusterResourceId})
+var sDBCluster_DBClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_DBClusterArn})
+var sDBCluster_AssociatedRoles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedRoles", ID: &i_DBClusterRoles, Members: &m_DBClusterRoles, Type: smithy.ShapeTypeList, Ext: &eDBCluster_AssociatedRoles})
+var sDBCluster_IAMDatabaseAuthenticationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMDatabaseAuthenticationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_IAMDatabaseAuthenticationEnabled})
+var sDBCluster_CloneGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloneGroupId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_CloneGroupId})
+var sDBCluster_ClusterCreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterCreateTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBCluster_ClusterCreateTime})
+var sDBCluster_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_CopyTagsToSnapshot})
+var sDBCluster_EnabledCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eDBCluster_EnabledCloudwatchLogsExports})
+var sDBCluster_PendingModifiedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingModifiedValues", ID: &iClusterPendingModifiedValues, Members: &mClusterPendingModifiedValues, Type: smithy.ShapeTypeStructure, Ext: &eDBCluster_PendingModifiedValues})
+var sDBCluster_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_DeletionProtection})
+var sDBCluster_CrossAccountClone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountClone", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDBCluster_CrossAccountClone})
+var sDBCluster_AutomaticRestartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticRestartTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBCluster_AutomaticRestartTime})
+var sDBCluster_ServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessV2ScalingConfiguration", ID: &iServerlessV2ScalingConfigurationInfo, Members: &mServerlessV2ScalingConfigurationInfo, Type: smithy.ShapeTypeStructure, Ext: &eDBCluster_ServerlessV2ScalingConfiguration})
+var sDBCluster_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDBCluster_GlobalClusterIdentifier})
+var sDBCluster_IOOptimizedNextAllowedModificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IOOptimizedNextAllowedModificationTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBCluster_IOOptimizedNextAllowedModificationTime})
+var sDBCluster_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_StorageType})
+var sDBCluster_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBCluster_NetworkType})
+var sDBClusterAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterAlreadyExistsFault, Members: &mDBClusterAlreadyExistsFault, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterAlreadyExistsFault})
+var sDBClusterAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterAlreadyExistsFault_message})
+var sDBClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterEndpoint, Members: &mDBClusterEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterEndpoint})
+var sDBClusterEndpoint_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_DBClusterEndpointIdentifier})
+var sDBClusterEndpoint_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_DBClusterIdentifier})
+var sDBClusterEndpoint_DBClusterEndpointResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_DBClusterEndpointResourceIdentifier})
+var sDBClusterEndpoint_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_Endpoint})
+var sDBClusterEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_Status})
+var sDBClusterEndpoint_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_EndpointType})
+var sDBClusterEndpoint_CustomEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_CustomEndpointType})
+var sDBClusterEndpoint_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDBClusterEndpoint_StaticMembers})
+var sDBClusterEndpoint_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDBClusterEndpoint_ExcludedMembers})
+var sDBClusterEndpoint_DBClusterEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpoint_DBClusterEndpointArn})
+var sDBClusterEndpointAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterEndpointAlreadyExistsFault, Members: &mDBClusterEndpointAlreadyExistsFault, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterEndpointAlreadyExistsFault})
+var sDBClusterEndpointAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpointAlreadyExistsFault_message})
+var s_DBClusterEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterEndpointList, Members: &m_DBClusterEndpointList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterEndpointList})
+var s_DBClusterEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterEndpoint, Members: &mDBClusterEndpoint, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterEndpointList_member})
+var sDBClusterEndpointNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterEndpointNotFoundFault, Members: &mDBClusterEndpointNotFoundFault, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterEndpointNotFoundFault})
+var sDBClusterEndpointNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpointNotFoundFault_message})
+var sDBClusterEndpointQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterEndpointQuotaExceededFault, Members: &mDBClusterEndpointQuotaExceededFault, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterEndpointQuotaExceededFault})
+var sDBClusterEndpointQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpointQuotaExceededFault_message})
+var s_DBClusterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterList, Members: &m_DBClusterList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterList})
+var s_DBClusterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBCluster, Members: &mDBCluster, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterList_member})
+var sDBClusterMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterMember, Members: &mDBClusterMember, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterMember})
+var sDBClusterMember_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterMember_DBInstanceIdentifier})
+var sDBClusterMember_IsClusterWriter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsClusterWriter", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBClusterMember_IsClusterWriter})
+var sDBClusterMember_DBClusterParameterGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterMember_DBClusterParameterGroupStatus})
+var sDBClusterMember_PromotionTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromotionTier", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBClusterMember_PromotionTier})
+var s_DBClusterMemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterMemberList, Members: &m_DBClusterMemberList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterMemberList})
+var s_DBClusterMemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterMember, Members: &mDBClusterMember, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterMemberList_member})
+var sDBClusterNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterNotFoundFault, Members: &mDBClusterNotFoundFault, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterNotFoundFault})
+var sDBClusterNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterNotFoundFault_message})
+var s_DBClusterOptionGroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterOptionGroupMemberships, Members: &m_DBClusterOptionGroupMemberships, Type: smithy.ShapeTypeList, Ext: &e_DBClusterOptionGroupMemberships})
+var s_DBClusterOptionGroupMemberships_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterOptionGroupStatus, Members: &mDBClusterOptionGroupStatus, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterOptionGroupMemberships_member})
+var sDBClusterOptionGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterOptionGroupStatus, Members: &mDBClusterOptionGroupStatus, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterOptionGroupStatus})
+var sDBClusterOptionGroupStatus_DBClusterOptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterOptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterOptionGroupStatus_DBClusterOptionGroupName})
+var sDBClusterOptionGroupStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterOptionGroupStatus_Status})
+var sDBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterParameterGroup, Members: &mDBClusterParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterParameterGroup})
+var sDBClusterParameterGroup_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroup_DBClusterParameterGroupName})
+var sDBClusterParameterGroup_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroup_DBParameterGroupFamily})
+var sDBClusterParameterGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroup_Description})
+var sDBClusterParameterGroup_DBClusterParameterGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroup_DBClusterParameterGroupArn})
+var s_DBClusterParameterGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterParameterGroupList, Members: &m_DBClusterParameterGroupList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterParameterGroupList})
+var s_DBClusterParameterGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterParameterGroup, Members: &mDBClusterParameterGroup, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterParameterGroupList_member})
+var sDBClusterParameterGroupNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterParameterGroupNotFoundFault, Members: &mDBClusterParameterGroupNotFoundFault, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterParameterGroupNotFoundFault})
+var sDBClusterParameterGroupNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroupNotFoundFault_message})
+var sDBClusterQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterQuotaExceededFault, Members: &mDBClusterQuotaExceededFault, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterQuotaExceededFault})
+var sDBClusterQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterQuotaExceededFault_message})
+var sDBClusterRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterRole, Members: &mDBClusterRole, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterRole})
+var sDBClusterRole_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterRole_RoleArn})
+var sDBClusterRole_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterRole_Status})
+var sDBClusterRole_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterRole_FeatureName})
+var sDBClusterRoleAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterRoleAlreadyExistsFault, Members: &mDBClusterRoleAlreadyExistsFault, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterRoleAlreadyExistsFault})
+var sDBClusterRoleAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterRoleAlreadyExistsFault_message})
+var sDBClusterRoleNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterRoleNotFoundFault, Members: &mDBClusterRoleNotFoundFault, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterRoleNotFoundFault})
+var sDBClusterRoleNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterRoleNotFoundFault_message})
+var sDBClusterRoleQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterRoleQuotaExceededFault, Members: &mDBClusterRoleQuotaExceededFault, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterRoleQuotaExceededFault})
+var sDBClusterRoleQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterRoleQuotaExceededFault_message})
+var s_DBClusterRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterRoles, Members: &m_DBClusterRoles, Type: smithy.ShapeTypeList, Ext: &e_DBClusterRoles})
+var s_DBClusterRoles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterRole, Members: &mDBClusterRole, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterRoles_member})
+var sDBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshot, Members: &mDBClusterSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshot})
+var sDBClusterSnapshot_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eDBClusterSnapshot_AvailabilityZones})
+var sDBClusterSnapshot_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_DBClusterSnapshotIdentifier})
+var sDBClusterSnapshot_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_DBClusterIdentifier})
+var sDBClusterSnapshot_SnapshotCreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotCreateTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBClusterSnapshot_SnapshotCreateTime})
+var sDBClusterSnapshot_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_Engine})
+var sDBClusterSnapshot_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBClusterSnapshot_AllocatedStorage})
+var sDBClusterSnapshot_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_Status})
+var sDBClusterSnapshot_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBClusterSnapshot_Port})
+var sDBClusterSnapshot_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_VpcId})
+var sDBClusterSnapshot_ClusterCreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterCreateTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBClusterSnapshot_ClusterCreateTime})
+var sDBClusterSnapshot_MasterUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUsername", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_MasterUsername})
+var sDBClusterSnapshot_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_EngineVersion})
+var sDBClusterSnapshot_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_LicenseModel})
+var sDBClusterSnapshot_SnapshotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_SnapshotType})
+var sDBClusterSnapshot_PercentProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentProgress", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBClusterSnapshot_PercentProgress})
+var sDBClusterSnapshot_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBClusterSnapshot_StorageEncrypted})
+var sDBClusterSnapshot_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_KmsKeyId})
+var sDBClusterSnapshot_DBClusterSnapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_DBClusterSnapshotArn})
+var sDBClusterSnapshot_SourceDBClusterSnapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBClusterSnapshotArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_SourceDBClusterSnapshotArn})
+var sDBClusterSnapshot_IAMDatabaseAuthenticationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMDatabaseAuthenticationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBClusterSnapshot_IAMDatabaseAuthenticationEnabled})
+var sDBClusterSnapshot_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshot_StorageType})
+var sDBClusterSnapshotAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshotAlreadyExistsFault, Members: &mDBClusterSnapshotAlreadyExistsFault, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshotAlreadyExistsFault})
+var sDBClusterSnapshotAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshotAlreadyExistsFault_message})
+var sDBClusterSnapshotAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshotAttribute, Members: &mDBClusterSnapshotAttribute, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshotAttribute})
+var sDBClusterSnapshotAttribute_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshotAttribute_AttributeName})
+var sDBClusterSnapshotAttribute_AttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValues", ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &eDBClusterSnapshotAttribute_AttributeValues})
+var s_DBClusterSnapshotAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterSnapshotAttributeList, Members: &m_DBClusterSnapshotAttributeList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterSnapshotAttributeList})
+var s_DBClusterSnapshotAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterSnapshotAttribute, Members: &mDBClusterSnapshotAttribute, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterSnapshotAttributeList_member})
+var sDBClusterSnapshotAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshotAttributesResult, Members: &mDBClusterSnapshotAttributesResult, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshotAttributesResult})
+var sDBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier})
+var sDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotAttributes", ID: &i_DBClusterSnapshotAttributeList, Members: &m_DBClusterSnapshotAttributeList, Type: smithy.ShapeTypeList, Ext: &eDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes})
+var s_DBClusterSnapshotList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBClusterSnapshotList, Members: &m_DBClusterSnapshotList, Type: smithy.ShapeTypeList, Ext: &e_DBClusterSnapshotList})
+var s_DBClusterSnapshotList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBClusterSnapshot, Members: &mDBClusterSnapshot, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &e_DBClusterSnapshotList_member})
+var sDBClusterSnapshotNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshotNotFoundFault, Members: &mDBClusterSnapshotNotFoundFault, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshotNotFoundFault})
+var sDBClusterSnapshotNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshotNotFoundFault_message})
+var sDBEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBEngineVersion, Members: &mDBEngineVersion, Type: smithy.ShapeTypeStructure, Ext: &eDBEngineVersion})
+var sDBEngineVersion_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersion_Engine})
+var sDBEngineVersion_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersion_EngineVersion})
+var sDBEngineVersion_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersion_DBParameterGroupFamily})
+var sDBEngineVersion_DBEngineDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBEngineDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersion_DBEngineDescription})
+var sDBEngineVersion_DBEngineVersionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBEngineVersionDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersion_DBEngineVersionDescription})
+var sDBEngineVersion_DefaultCharacterSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultCharacterSet", ID: &iCharacterSet, Members: &mCharacterSet, Type: smithy.ShapeTypeStructure, Ext: &eDBEngineVersion_DefaultCharacterSet})
+var sDBEngineVersion_SupportedCharacterSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedCharacterSets", ID: &i_SupportedCharacterSetsList, Members: &m_SupportedCharacterSetsList, Type: smithy.ShapeTypeList, Ext: &eDBEngineVersion_SupportedCharacterSets})
+var sDBEngineVersion_ValidUpgradeTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidUpgradeTarget", ID: &i_ValidUpgradeTargetList, Members: &m_ValidUpgradeTargetList, Type: smithy.ShapeTypeList, Ext: &eDBEngineVersion_ValidUpgradeTarget})
+var sDBEngineVersion_SupportedTimezones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedTimezones", ID: &i_SupportedTimezonesList, Members: &m_SupportedTimezonesList, Type: smithy.ShapeTypeList, Ext: &eDBEngineVersion_SupportedTimezones})
+var sDBEngineVersion_ExportableLogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportableLogTypes", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eDBEngineVersion_ExportableLogTypes})
+var sDBEngineVersion_SupportsLogExportsToCloudwatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsLogExportsToCloudwatchLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBEngineVersion_SupportsLogExportsToCloudwatchLogs})
+var sDBEngineVersion_SupportsReadReplica = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsReadReplica", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBEngineVersion_SupportsReadReplica})
+var sDBEngineVersion_SupportsGlobalDatabases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsGlobalDatabases", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBEngineVersion_SupportsGlobalDatabases})
+var s_DBEngineVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBEngineVersionList, Members: &m_DBEngineVersionList, Type: smithy.ShapeTypeList, Ext: &e_DBEngineVersionList})
+var s_DBEngineVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBEngineVersion, Members: &mDBEngineVersion, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &e_DBEngineVersionList_member})
+var sDBInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBInstance, Members: &mDBInstance, Type: smithy.ShapeTypeStructure, Ext: &eDBInstance})
+var sDBInstance_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBInstanceIdentifier})
+var sDBInstance_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBInstanceClass})
+var sDBInstance_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_Engine})
+var sDBInstance_DBInstanceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBInstanceStatus})
+var sDBInstance_MasterUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUsername", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_MasterUsername})
+var sDBInstance_DBName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBName})
+var sDBInstance_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDBInstance_Endpoint})
+var sDBInstance_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_AllocatedStorage})
+var sDBInstance_InstanceCreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCreateTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBInstance_InstanceCreateTime})
+var sDBInstance_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_PreferredBackupWindow})
+var sDBInstance_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_BackupRetentionPeriod})
+var sDBInstance_DBSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSecurityGroups", ID: &i_DBSecurityGroupMembershipList, Members: &m_DBSecurityGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_DBSecurityGroups})
+var sDBInstance_VpcSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroups", ID: &i_VpcSecurityGroupMembershipList, Members: &m_VpcSecurityGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_VpcSecurityGroups})
+var sDBInstance_DBParameterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroups", ID: &i_DBParameterGroupStatusList, Members: &m_DBParameterGroupStatusList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_DBParameterGroups})
+var sDBInstance_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_AvailabilityZone})
+var sDBInstance_DBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroup", ID: &iDBSubnetGroup, Members: &mDBSubnetGroup, Type: smithy.ShapeTypeStructure, Ext: &eDBInstance_DBSubnetGroup})
+var sDBInstance_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_PreferredMaintenanceWindow})
+var sDBInstance_PendingModifiedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingModifiedValues", ID: &iPendingModifiedValues, Members: &mPendingModifiedValues, Type: smithy.ShapeTypeStructure, Ext: &eDBInstance_PendingModifiedValues})
+var sDBInstance_LatestRestorableTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRestorableTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDBInstance_LatestRestorableTime})
+var sDBInstance_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_MultiAZ})
+var sDBInstance_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_EngineVersion})
+var sDBInstance_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_AutoMinorVersionUpgrade})
+var sDBInstance_ReadReplicaSourceDBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadReplicaSourceDBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_ReadReplicaSourceDBInstanceIdentifier})
+var sDBInstance_ReadReplicaDBInstanceIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadReplicaDBInstanceIdentifiers", ID: &i_ReadReplicaDBInstanceIdentifierList, Members: &m_ReadReplicaDBInstanceIdentifierList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_ReadReplicaDBInstanceIdentifiers})
+var sDBInstance_ReadReplicaDBClusterIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadReplicaDBClusterIdentifiers", ID: &i_ReadReplicaDBClusterIdentifierList, Members: &m_ReadReplicaDBClusterIdentifierList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_ReadReplicaDBClusterIdentifiers})
+var sDBInstance_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_LicenseModel})
+var sDBInstance_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_Iops})
+var sDBInstance_OptionGroupMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupMemberships", ID: &i_OptionGroupMembershipList, Members: &m_OptionGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_OptionGroupMemberships})
+var sDBInstance_CharacterSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_CharacterSetName})
+var sDBInstance_SecondaryAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAvailabilityZone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_SecondaryAvailabilityZone})
+var sDBInstance_PubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PubliclyAccessible", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_PubliclyAccessible})
+var sDBInstance_StatusInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusInfos", ID: &i_DBInstanceStatusInfoList, Members: &m_DBInstanceStatusInfoList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_StatusInfos})
+var sDBInstance_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_StorageType})
+var sDBInstance_TdeCredentialArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TdeCredentialArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_TdeCredentialArn})
+var sDBInstance_DbInstancePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbInstancePort", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_DbInstancePort})
+var sDBInstance_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBClusterIdentifier})
+var sDBInstance_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_StorageEncrypted})
+var sDBInstance_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_KmsKeyId})
+var sDBInstance_DbiResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbiResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DbiResourceId})
+var sDBInstance_CACertificateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACertificateIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_CACertificateIdentifier})
+var sDBInstance_DomainMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainMemberships", ID: &i_DomainMembershipList, Members: &m_DomainMembershipList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_DomainMemberships})
+var sDBInstance_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_CopyTagsToSnapshot})
+var sDBInstance_MonitoringInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringInterval", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_MonitoringInterval})
+var sDBInstance_EnhancedMonitoringResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoringResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_EnhancedMonitoringResourceArn})
+var sDBInstance_MonitoringRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_MonitoringRoleArn})
+var sDBInstance_PromotionTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromotionTier", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDBInstance_PromotionTier})
+var sDBInstance_DBInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_DBInstanceArn})
+var sDBInstance_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_Timezone})
+var sDBInstance_IAMDatabaseAuthenticationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMDatabaseAuthenticationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_IAMDatabaseAuthenticationEnabled})
+var sDBInstance_PerformanceInsightsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceInsightsEnabled", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_PerformanceInsightsEnabled})
+var sDBInstance_PerformanceInsightsKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceInsightsKMSKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_PerformanceInsightsKMSKeyId})
+var sDBInstance_EnabledCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eDBInstance_EnabledCloudwatchLogsExports})
+var sDBInstance_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstance_DeletionProtection})
+var sDBInstance_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstance_NetworkType})
+var sDBInstanceAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBInstanceAlreadyExistsFault, Members: &mDBInstanceAlreadyExistsFault, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eDBInstanceAlreadyExistsFault})
+var sDBInstanceAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBInstanceAlreadyExistsFault_message})
+var s_DBInstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBInstanceList, Members: &m_DBInstanceList, Type: smithy.ShapeTypeList, Ext: &e_DBInstanceList})
+var s_DBInstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBInstance, Members: &mDBInstance, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &e_DBInstanceList_member})
+var sDBInstanceNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBInstanceNotFoundFault, Members: &mDBInstanceNotFoundFault, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eDBInstanceNotFoundFault})
+var sDBInstanceNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBInstanceNotFoundFault_message})
+var sDBInstanceStatusInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBInstanceStatusInfo, Members: &mDBInstanceStatusInfo, Type: smithy.ShapeTypeStructure, Ext: &eDBInstanceStatusInfo})
+var sDBInstanceStatusInfo_StatusType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstanceStatusInfo_StatusType})
+var sDBInstanceStatusInfo_Normal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Normal", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDBInstanceStatusInfo_Normal})
+var sDBInstanceStatusInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstanceStatusInfo_Status})
+var sDBInstanceStatusInfo_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstanceStatusInfo_Message})
+var s_DBInstanceStatusInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBInstanceStatusInfoList, Members: &m_DBInstanceStatusInfoList, Type: smithy.ShapeTypeList, Ext: &e_DBInstanceStatusInfoList})
+var s_DBInstanceStatusInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBInstanceStatusInfo, Members: &mDBInstanceStatusInfo, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &e_DBInstanceStatusInfoList_member})
+var sDBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroup, Members: &mDBParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroup})
+var sDBParameterGroup_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroup_DBParameterGroupName})
+var sDBParameterGroup_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroup_DBParameterGroupFamily})
+var sDBParameterGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroup_Description})
+var sDBParameterGroup_DBParameterGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroup_DBParameterGroupArn})
+var sDBParameterGroupAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupAlreadyExistsFault, Members: &mDBParameterGroupAlreadyExistsFault, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupAlreadyExistsFault})
+var sDBParameterGroupAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupAlreadyExistsFault_message})
+var s_DBParameterGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBParameterGroupList, Members: &m_DBParameterGroupList, Type: smithy.ShapeTypeList, Ext: &e_DBParameterGroupList})
+var s_DBParameterGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBParameterGroup, Members: &mDBParameterGroup, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &e_DBParameterGroupList_member})
+var sDBParameterGroupNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupNotFoundFault, Members: &mDBParameterGroupNotFoundFault, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupNotFoundFault})
+var sDBParameterGroupNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupNotFoundFault_message})
+var sDBParameterGroupQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupQuotaExceededFault, Members: &mDBParameterGroupQuotaExceededFault, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupQuotaExceededFault})
+var sDBParameterGroupQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupQuotaExceededFault_message})
+var sDBParameterGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupStatus, Members: &mDBParameterGroupStatus, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupStatus})
+var sDBParameterGroupStatus_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupStatus_DBParameterGroupName})
+var sDBParameterGroupStatus_ParameterApplyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterApplyStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupStatus_ParameterApplyStatus})
+var s_DBParameterGroupStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBParameterGroupStatusList, Members: &m_DBParameterGroupStatusList, Type: smithy.ShapeTypeList, Ext: &e_DBParameterGroupStatusList})
+var s_DBParameterGroupStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBParameterGroupStatus, Members: &mDBParameterGroupStatus, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &e_DBParameterGroupStatusList_member})
+var sDBSecurityGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSecurityGroupMembership, Members: &mDBSecurityGroupMembership, Type: smithy.ShapeTypeStructure, Ext: &eDBSecurityGroupMembership})
+var sDBSecurityGroupMembership_DBSecurityGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSecurityGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSecurityGroupMembership_DBSecurityGroupName})
+var sDBSecurityGroupMembership_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSecurityGroupMembership_Status})
+var s_DBSecurityGroupMembershipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBSecurityGroupMembershipList, Members: &m_DBSecurityGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &e_DBSecurityGroupMembershipList})
+var s_DBSecurityGroupMembershipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBSecurityGroupMembership, Members: &mDBSecurityGroupMembership, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &e_DBSecurityGroupMembershipList_member})
+var s_DBSecurityGroupNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBSecurityGroupNameList, Members: &m_DBSecurityGroupNameList, Type: smithy.ShapeTypeList, Ext: &e_DBSecurityGroupNameList})
+var s_DBSecurityGroupNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &e_DBSecurityGroupNameList_member})
+var sDBSecurityGroupNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSecurityGroupNotFoundFault, Members: &mDBSecurityGroupNotFoundFault, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eDBSecurityGroupNotFoundFault})
+var sDBSecurityGroupNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSecurityGroupNotFoundFault_message})
+var sDBSnapshotAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSnapshotAlreadyExistsFault, Members: &mDBSnapshotAlreadyExistsFault, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eDBSnapshotAlreadyExistsFault})
+var sDBSnapshotAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSnapshotAlreadyExistsFault_message})
+var sDBSnapshotNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSnapshotNotFoundFault, Members: &mDBSnapshotNotFoundFault, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eDBSnapshotNotFoundFault})
+var sDBSnapshotNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSnapshotNotFoundFault_message})
+var sDBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroup, Members: &mDBSubnetGroup, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroup})
+var sDBSubnetGroup_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroup_DBSubnetGroupName})
+var sDBSubnetGroup_DBSubnetGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroup_DBSubnetGroupDescription})
+var sDBSubnetGroup_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroup_VpcId})
+var sDBSubnetGroup_SubnetGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetGroupStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroup_SubnetGroupStatus})
+var sDBSubnetGroup_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList, Ext: &eDBSubnetGroup_Subnets})
+var sDBSubnetGroup_DBSubnetGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroup_DBSubnetGroupArn})
+var sDBSubnetGroup_SupportedNetworkTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedNetworkTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDBSubnetGroup_SupportedNetworkTypes})
+var sDBSubnetGroupAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroupAlreadyExistsFault, Members: &mDBSubnetGroupAlreadyExistsFault, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroupAlreadyExistsFault})
+var sDBSubnetGroupAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroupAlreadyExistsFault_message})
+var sDBSubnetGroupDoesNotCoverEnoughAZs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroupDoesNotCoverEnoughAZs, Members: &mDBSubnetGroupDoesNotCoverEnoughAZs, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroupDoesNotCoverEnoughAZs})
+var sDBSubnetGroupDoesNotCoverEnoughAZs_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroupDoesNotCoverEnoughAZs_message})
+var sDBSubnetGroupNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroupNotFoundFault, Members: &mDBSubnetGroupNotFoundFault, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroupNotFoundFault})
+var sDBSubnetGroupNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroupNotFoundFault_message})
+var sDBSubnetGroupQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroupQuotaExceededFault, Members: &mDBSubnetGroupQuotaExceededFault, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroupQuotaExceededFault})
+var sDBSubnetGroupQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroupQuotaExceededFault_message})
+var s_DBSubnetGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DBSubnetGroups, Members: &m_DBSubnetGroups, Type: smithy.ShapeTypeList, Ext: &e_DBSubnetGroups})
+var s_DBSubnetGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDBSubnetGroup, Members: &mDBSubnetGroup, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &e_DBSubnetGroups_member})
+var sDBSubnetQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetQuotaExceededFault, Members: &mDBSubnetQuotaExceededFault, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetQuotaExceededFault})
+var sDBSubnetQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBSubnetQuotaExceededFault_message})
+var sDBUpgradeDependencyFailureFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBUpgradeDependencyFailureFault, Members: &mDBUpgradeDependencyFailureFault, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eDBUpgradeDependencyFailureFault})
+var sDBUpgradeDependencyFailureFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDBUpgradeDependencyFailureFault_message})
+var sDomainMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainMembership, Members: &mDomainMembership, Type: smithy.ShapeTypeStructure, Ext: &eDomainMembership})
+var sDomainMembership_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainMembership_Domain})
+var sDomainMembership_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainMembership_Status})
+var sDomainMembership_FQDN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FQDN", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainMembership_FQDN})
+var sDomainMembership_IAMRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMRoleName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainMembership_IAMRoleName})
+var s_DomainMembershipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainMembershipList, Members: &m_DomainMembershipList, Type: smithy.ShapeTypeList, Ext: &e_DomainMembershipList})
+var s_DomainMembershipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainMembership, Members: &mDomainMembership, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &e_DomainMembershipList_member})
+var sDomainNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainNotFoundFault, Members: &mDomainNotFoundFault, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eDomainNotFoundFault})
+var sDomainNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDomainNotFoundFault_message})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_DoubleOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &e_DoubleOptional})
+var sDoubleRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDoubleRange, Members: &mDoubleRange, Type: smithy.ShapeTypeStructure, Ext: &eDoubleRange})
+var sDoubleRange_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDoubleRange_From})
+var sDoubleRange_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDoubleRange_To})
+var s_DoubleRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleRangeList, Members: &m_DoubleRangeList, Type: smithy.ShapeTypeList, Ext: &e_DoubleRangeList})
+var s_DoubleRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDoubleRange, Members: &mDoubleRange, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &e_DoubleRangeList_member})
+var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint})
+var sEndpoint_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpoint_Address})
+var sEndpoint_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eEndpoint_Port})
+var sEndpoint_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpoint_HostedZoneId})
+var sEngineDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineDefaults, Members: &mEngineDefaults, Type: smithy.ShapeTypeStructure, Ext: &eEngineDefaults})
+var sEngineDefaults_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEngineDefaults_DBParameterGroupFamily})
+var sEngineDefaults_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEngineDefaults_Marker})
+var sEngineDefaults_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eEngineDefaults_Parameters})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eEvent})
+var sEvent_SourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvent_SourceIdentifier})
+var sEvent_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eEvent_SourceType})
+var sEvent_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvent_Message})
+var sEvent_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eEvent_EventCategories})
+var sEvent_Date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Date", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEvent_Date})
+var sEvent_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEvent_SourceArn})
+var s_EventCategoriesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &e_EventCategoriesList})
+var s_EventCategoriesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &e_EventCategoriesList_member})
+var sEventCategoriesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventCategoriesMap, Members: &mEventCategoriesMap, Type: smithy.ShapeTypeStructure, Ext: &eEventCategoriesMap})
+var sEventCategoriesMap_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventCategoriesMap_SourceType})
+var sEventCategoriesMap_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eEventCategoriesMap_EventCategories})
+var s_EventCategoriesMapList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventCategoriesMapList, Members: &m_EventCategoriesMapList, Type: smithy.ShapeTypeList, Ext: &e_EventCategoriesMapList})
+var s_EventCategoriesMapList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventCategoriesMap, Members: &mEventCategoriesMap, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &e_EventCategoriesMapList_member})
+var s_EventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &e_EventList})
+var s_EventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &e_EventList_member})
+var sEventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eEventSubscription})
+var sEventSubscription_CustomerAwsId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_CustomerAwsId})
+var sEventSubscription_CustSubscriptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustSubscriptionId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_CustSubscriptionId})
+var sEventSubscription_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_SnsTopicArn})
+var sEventSubscription_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_Status})
+var sEventSubscription_SubscriptionCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionCreationTime", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_SubscriptionCreationTime})
+var sEventSubscription_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_SourceType})
+var sEventSubscription_SourceIdsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdsList", ID: &i_SourceIdsList, Members: &m_SourceIdsList, Type: smithy.ShapeTypeList, Ext: &eEventSubscription_SourceIdsList})
+var sEventSubscription_EventCategoriesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategoriesList", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eEventSubscription_EventCategoriesList})
+var sEventSubscription_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEventSubscription_Enabled})
+var sEventSubscription_EventSubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscriptionArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscription_EventSubscriptionArn})
+var sEventSubscriptionQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSubscriptionQuotaExceededFault, Members: &mEventSubscriptionQuotaExceededFault, Traits: &t52, Type: smithy.ShapeTypeStructure, Ext: &eEventSubscriptionQuotaExceededFault})
+var sEventSubscriptionQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eEventSubscriptionQuotaExceededFault_message})
+var s_EventSubscriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSubscriptionsList, Members: &m_EventSubscriptionsList, Type: smithy.ShapeTypeList, Ext: &e_EventSubscriptionsList})
+var s_EventSubscriptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventSubscription, Members: &mEventSubscription, Traits: &t53, Type: smithy.ShapeTypeStructure, Ext: &e_EventSubscriptionsList_member})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sFailoverState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverState, Members: &mFailoverState, Type: smithy.ShapeTypeStructure, Ext: &eFailoverState})
+var sFailoverState_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFailoverStatus, Members: &mFailoverStatus, Type: smithy.ShapeTypeEnum, Ext: &eFailoverState_Status})
+var sFailoverState_FromDbClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromDbClusterArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailoverState_FromDbClusterArn})
+var sFailoverState_ToDbClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToDbClusterArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailoverState_ToDbClusterArn})
+var sFailoverState_IsDataLossAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDataLossAllowed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFailoverState_IsDataLossAllowed})
+var sFailoverStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverStatus, Members: &mFailoverStatus, Type: smithy.ShapeTypeEnum, Ext: &eFailoverStatus})
+var sFailoverStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailoverStatus_PENDING})
+var sFailoverStatus_FAILING_OVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILING_OVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailoverStatus_FAILING_OVER})
+var sFailoverStatus_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailoverStatus_CANCELLING})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFilter_Name})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &eFilter_Values})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var s_FilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &e_FilterValueList})
+var s_FilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &e_FilterValueList_member})
+var sGlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eGlobalCluster})
+var sGlobalCluster_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_GlobalClusterIdentifier})
+var sGlobalCluster_GlobalClusterResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_GlobalClusterResourceId})
+var sGlobalCluster_GlobalClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_GlobalClusterArn})
+var sGlobalCluster_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_Status})
+var sGlobalCluster_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_Engine})
+var sGlobalCluster_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_EngineVersion})
+var sGlobalCluster_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalCluster_DatabaseName})
+var sGlobalCluster_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eGlobalCluster_StorageEncrypted})
+var sGlobalCluster_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eGlobalCluster_DeletionProtection})
+var sGlobalCluster_GlobalClusterMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterMembers", ID: &i_GlobalClusterMemberList, Members: &m_GlobalClusterMemberList, Type: smithy.ShapeTypeList, Ext: &eGlobalCluster_GlobalClusterMembers})
+var sGlobalCluster_FailoverState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailoverState", ID: &iFailoverState, Members: &mFailoverState, Type: smithy.ShapeTypeStructure, Ext: &eGlobalCluster_FailoverState})
+var sGlobalCluster_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGlobalCluster_TagList})
+var sGlobalClusterAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalClusterAlreadyExistsFault, Members: &mGlobalClusterAlreadyExistsFault, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eGlobalClusterAlreadyExistsFault})
+var sGlobalClusterAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eGlobalClusterAlreadyExistsFault_message})
+var s_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &e_GlobalClusterIdentifier})
+var s_GlobalClusterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalClusterList, Members: &m_GlobalClusterList, Type: smithy.ShapeTypeList, Ext: &e_GlobalClusterList})
+var s_GlobalClusterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGlobalCluster, Members: &mGlobalCluster, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &e_GlobalClusterList_member})
+var sGlobalClusterMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalClusterMember, Members: &mGlobalClusterMember, Type: smithy.ShapeTypeStructure, Ext: &eGlobalClusterMember})
+var sGlobalClusterMember_DBClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalClusterMember_DBClusterArn})
+var sGlobalClusterMember_Readers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Readers", ID: &i_ReadersArnList, Members: &m_ReadersArnList, Type: smithy.ShapeTypeList, Ext: &eGlobalClusterMember_Readers})
+var sGlobalClusterMember_IsWriter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsWriter", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGlobalClusterMember_IsWriter})
+var s_GlobalClusterMemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalClusterMemberList, Members: &m_GlobalClusterMemberList, Type: smithy.ShapeTypeList, Ext: &e_GlobalClusterMemberList})
+var s_GlobalClusterMemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGlobalClusterMember, Members: &mGlobalClusterMember, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &e_GlobalClusterMemberList_member})
+var sGlobalClusterNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalClusterNotFoundFault, Members: &mGlobalClusterNotFoundFault, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eGlobalClusterNotFoundFault})
+var sGlobalClusterNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eGlobalClusterNotFoundFault_message})
+var sGlobalClusterQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalClusterQuotaExceededFault, Members: &mGlobalClusterQuotaExceededFault, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eGlobalClusterQuotaExceededFault})
+var sGlobalClusterQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eGlobalClusterQuotaExceededFault_message})
+var sInstanceQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceQuotaExceededFault, Members: &mInstanceQuotaExceededFault, Traits: &t60, Type: smithy.ShapeTypeStructure, Ext: &eInstanceQuotaExceededFault})
+var sInstanceQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInstanceQuotaExceededFault_message})
+var sInsufficientDBClusterCapacityFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientDBClusterCapacityFault, Members: &mInsufficientDBClusterCapacityFault, Traits: &t61, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientDBClusterCapacityFault})
+var sInsufficientDBClusterCapacityFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInsufficientDBClusterCapacityFault_message})
+var sInsufficientDBInstanceCapacityFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientDBInstanceCapacityFault, Members: &mInsufficientDBInstanceCapacityFault, Traits: &t62, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientDBInstanceCapacityFault})
+var sInsufficientDBInstanceCapacityFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInsufficientDBInstanceCapacityFault_message})
+var sInsufficientStorageClusterCapacityFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientStorageClusterCapacityFault, Members: &mInsufficientStorageClusterCapacityFault, Traits: &t63, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientStorageClusterCapacityFault})
+var sInsufficientStorageClusterCapacityFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInsufficientStorageClusterCapacityFault_message})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_IntegerOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerOptional})
+var sInvalidDBClusterEndpointStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBClusterEndpointStateFault, Members: &mInvalidDBClusterEndpointStateFault, Traits: &t64, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBClusterEndpointStateFault})
+var sInvalidDBClusterEndpointStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBClusterEndpointStateFault_message})
+var sInvalidDBClusterSnapshotStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBClusterSnapshotStateFault, Members: &mInvalidDBClusterSnapshotStateFault, Traits: &t65, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBClusterSnapshotStateFault})
+var sInvalidDBClusterSnapshotStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBClusterSnapshotStateFault_message})
+var sInvalidDBClusterStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBClusterStateFault, Members: &mInvalidDBClusterStateFault, Traits: &t66, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBClusterStateFault})
+var sInvalidDBClusterStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBClusterStateFault_message})
+var sInvalidDBInstanceStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBInstanceStateFault, Members: &mInvalidDBInstanceStateFault, Traits: &t67, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBInstanceStateFault})
+var sInvalidDBInstanceStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBInstanceStateFault_message})
+var sInvalidDBParameterGroupStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBParameterGroupStateFault, Members: &mInvalidDBParameterGroupStateFault, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBParameterGroupStateFault})
+var sInvalidDBParameterGroupStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBParameterGroupStateFault_message})
+var sInvalidDBSecurityGroupStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBSecurityGroupStateFault, Members: &mInvalidDBSecurityGroupStateFault, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBSecurityGroupStateFault})
+var sInvalidDBSecurityGroupStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBSecurityGroupStateFault_message})
+var sInvalidDBSnapshotStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBSnapshotStateFault, Members: &mInvalidDBSnapshotStateFault, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBSnapshotStateFault})
+var sInvalidDBSnapshotStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBSnapshotStateFault_message})
+var sInvalidDBSubnetGroupStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBSubnetGroupStateFault, Members: &mInvalidDBSubnetGroupStateFault, Traits: &t71, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBSubnetGroupStateFault})
+var sInvalidDBSubnetGroupStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBSubnetGroupStateFault_message})
+var sInvalidDBSubnetStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDBSubnetStateFault, Members: &mInvalidDBSubnetStateFault, Traits: &t72, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDBSubnetStateFault})
+var sInvalidDBSubnetStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidDBSubnetStateFault_message})
+var sInvalidEventSubscriptionStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventSubscriptionStateFault, Members: &mInvalidEventSubscriptionStateFault, Traits: &t73, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEventSubscriptionStateFault})
+var sInvalidEventSubscriptionStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidEventSubscriptionStateFault_message})
+var sInvalidGlobalClusterStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGlobalClusterStateFault, Members: &mInvalidGlobalClusterStateFault, Traits: &t74, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGlobalClusterStateFault})
+var sInvalidGlobalClusterStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidGlobalClusterStateFault_message})
+var sInvalidRestoreFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRestoreFault, Members: &mInvalidRestoreFault, Traits: &t75, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRestoreFault})
+var sInvalidRestoreFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRestoreFault_message})
+var sInvalidSubnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSubnet, Members: &mInvalidSubnet, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSubnet})
+var sInvalidSubnet_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSubnet_message})
+var sInvalidVPCNetworkStateFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidVPCNetworkStateFault, Members: &mInvalidVPCNetworkStateFault, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eInvalidVPCNetworkStateFault})
+var sInvalidVPCNetworkStateFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidVPCNetworkStateFault_message})
+var s_KeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &e_KeyList})
+var s_KeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_KeyList_member})
+var sKMSKeyNotAccessibleFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSKeyNotAccessibleFault, Members: &mKMSKeyNotAccessibleFault, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eKMSKeyNotAccessibleFault})
+var sKMSKeyNotAccessibleFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eKMSKeyNotAccessibleFault_message})
+var s_LogTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &e_LogTypeList})
+var s_LogTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_LogTypeList_member})
+var sNetworkTypeNotSupportedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkTypeNotSupportedFault, Members: &mNetworkTypeNotSupportedFault, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eNetworkTypeNotSupportedFault})
+var sNetworkTypeNotSupportedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNetworkTypeNotSupportedFault_message})
+var sOptionGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionGroupMembership, Members: &mOptionGroupMembership, Type: smithy.ShapeTypeStructure, Ext: &eOptionGroupMembership})
+var sOptionGroupMembership_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOptionGroupMembership_OptionGroupName})
+var sOptionGroupMembership_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOptionGroupMembership_Status})
+var s_OptionGroupMembershipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionGroupMembershipList, Members: &m_OptionGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &e_OptionGroupMembershipList})
+var s_OptionGroupMembershipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOptionGroupMembership, Members: &mOptionGroupMembership, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &e_OptionGroupMembershipList_member})
+var sOptionGroupNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptionGroupNotFoundFault, Members: &mOptionGroupNotFoundFault, Traits: &t81, Type: smithy.ShapeTypeStructure, Ext: &eOptionGroupNotFoundFault})
+var sOptionGroupNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eOptionGroupNotFoundFault_message})
+var sOrderableDBInstanceOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderableDBInstanceOption, Members: &mOrderableDBInstanceOption, Type: smithy.ShapeTypeStructure, Ext: &eOrderableDBInstanceOption})
+var sOrderableDBInstanceOption_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOption_Engine})
+var sOrderableDBInstanceOption_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOption_EngineVersion})
+var sOrderableDBInstanceOption_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOption_DBInstanceClass})
+var sOrderableDBInstanceOption_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOption_LicenseModel})
+var sOrderableDBInstanceOption_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &eOrderableDBInstanceOption_AvailabilityZones})
+var sOrderableDBInstanceOption_MultiAZCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZCapable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_MultiAZCapable})
+var sOrderableDBInstanceOption_ReadReplicaCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadReplicaCapable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_ReadReplicaCapable})
+var sOrderableDBInstanceOption_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_Vpc})
+var sOrderableDBInstanceOption_SupportsStorageEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsStorageEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsStorageEncryption})
+var sOrderableDBInstanceOption_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOption_StorageType})
+var sOrderableDBInstanceOption_SupportsIops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsIops", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsIops})
+var sOrderableDBInstanceOption_SupportsEnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsEnhancedMonitoring", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsEnhancedMonitoring})
+var sOrderableDBInstanceOption_SupportsIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsIAMDatabaseAuthentication", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsIAMDatabaseAuthentication})
+var sOrderableDBInstanceOption_SupportsPerformanceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsPerformanceInsights", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsPerformanceInsights})
+var sOrderableDBInstanceOption_MinStorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinStorageSize", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eOrderableDBInstanceOption_MinStorageSize})
+var sOrderableDBInstanceOption_MaxStorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxStorageSize", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eOrderableDBInstanceOption_MaxStorageSize})
+var sOrderableDBInstanceOption_MinIopsPerDbInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinIopsPerDbInstance", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eOrderableDBInstanceOption_MinIopsPerDbInstance})
+var sOrderableDBInstanceOption_MaxIopsPerDbInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxIopsPerDbInstance", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eOrderableDBInstanceOption_MaxIopsPerDbInstance})
+var sOrderableDBInstanceOption_MinIopsPerGib = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinIopsPerGib", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eOrderableDBInstanceOption_MinIopsPerGib})
+var sOrderableDBInstanceOption_MaxIopsPerGib = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxIopsPerGib", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eOrderableDBInstanceOption_MaxIopsPerGib})
+var sOrderableDBInstanceOption_SupportsGlobalDatabases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsGlobalDatabases", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrderableDBInstanceOption_SupportsGlobalDatabases})
+var sOrderableDBInstanceOption_SupportedNetworkTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedNetworkTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eOrderableDBInstanceOption_SupportedNetworkTypes})
+var s_OrderableDBInstanceOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderableDBInstanceOptionsList, Members: &m_OrderableDBInstanceOptionsList, Type: smithy.ShapeTypeList, Ext: &e_OrderableDBInstanceOptionsList})
+var s_OrderableDBInstanceOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrderableDBInstanceOption, Members: &mOrderableDBInstanceOption, Traits: &t82, Type: smithy.ShapeTypeStructure, Ext: &e_OrderableDBInstanceOptionsList_member})
+var sParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameter, Members: &mParameter, Type: smithy.ShapeTypeStructure, Ext: &eParameter})
+var sParameter_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_ParameterName})
+var sParameter_ParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_ParameterValue})
+var sParameter_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_Description})
+var sParameter_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_Source})
+var sParameter_ApplyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_ApplyType})
+var sParameter_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_DataType})
+var sParameter_AllowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedValues", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_AllowedValues})
+var sParameter_IsModifiable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsModifiable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eParameter_IsModifiable})
+var sParameter_MinimumEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumEngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameter_MinimumEngineVersion})
+var sParameter_ApplyMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyMethod", ID: &iApplyMethod, Members: &mApplyMethod, Type: smithy.ShapeTypeEnum, Ext: &eParameter_ApplyMethod})
+var s_ParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &e_ParametersList})
+var s_ParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameter, Members: &mParameter, Traits: &t83, Type: smithy.ShapeTypeStructure, Ext: &e_ParametersList_member})
+var sPendingCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingCloudwatchLogsExports, Members: &mPendingCloudwatchLogsExports, Type: smithy.ShapeTypeStructure, Ext: &ePendingCloudwatchLogsExports})
+var sPendingCloudwatchLogsExports_LogTypesToEnable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypesToEnable", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &ePendingCloudwatchLogsExports_LogTypesToEnable})
+var sPendingCloudwatchLogsExports_LogTypesToDisable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypesToDisable", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &ePendingCloudwatchLogsExports_LogTypesToDisable})
+var sPendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingMaintenanceAction, Members: &mPendingMaintenanceAction, Type: smithy.ShapeTypeStructure, Ext: &ePendingMaintenanceAction})
+var sPendingMaintenanceAction_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingMaintenanceAction_Action})
+var sPendingMaintenanceAction_AutoAppliedAfterDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAppliedAfterDate", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePendingMaintenanceAction_AutoAppliedAfterDate})
+var sPendingMaintenanceAction_ForcedApplyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForcedApplyDate", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePendingMaintenanceAction_ForcedApplyDate})
+var sPendingMaintenanceAction_OptInStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingMaintenanceAction_OptInStatus})
+var sPendingMaintenanceAction_CurrentApplyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentApplyDate", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePendingMaintenanceAction_CurrentApplyDate})
+var sPendingMaintenanceAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingMaintenanceAction_Description})
+var s_PendingMaintenanceActionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingMaintenanceActionDetails, Members: &m_PendingMaintenanceActionDetails, Type: smithy.ShapeTypeList, Ext: &e_PendingMaintenanceActionDetails})
+var s_PendingMaintenanceActionDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPendingMaintenanceAction, Members: &mPendingMaintenanceAction, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &e_PendingMaintenanceActionDetails_member})
+var s_PendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingMaintenanceActions, Members: &m_PendingMaintenanceActions, Type: smithy.ShapeTypeList, Ext: &e_PendingMaintenanceActions})
+var s_PendingMaintenanceActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourcePendingMaintenanceActions, Members: &mResourcePendingMaintenanceActions, Traits: &t85, Type: smithy.ShapeTypeStructure, Ext: &e_PendingMaintenanceActions_member})
+var sPendingModifiedValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingModifiedValues, Members: &mPendingModifiedValues, Type: smithy.ShapeTypeStructure, Ext: &ePendingModifiedValues})
+var sPendingModifiedValues_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_DBInstanceClass})
+var sPendingModifiedValues_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &ePendingModifiedValues_AllocatedStorage})
+var sPendingModifiedValues_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_MasterUserPassword})
+var sPendingModifiedValues_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &ePendingModifiedValues_Port})
+var sPendingModifiedValues_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &ePendingModifiedValues_BackupRetentionPeriod})
+var sPendingModifiedValues_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &ePendingModifiedValues_MultiAZ})
+var sPendingModifiedValues_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_EngineVersion})
+var sPendingModifiedValues_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_LicenseModel})
+var sPendingModifiedValues_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &ePendingModifiedValues_Iops})
+var sPendingModifiedValues_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_DBInstanceIdentifier})
+var sPendingModifiedValues_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_StorageType})
+var sPendingModifiedValues_CACertificateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACertificateIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_CACertificateIdentifier})
+var sPendingModifiedValues_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingModifiedValues_DBSubnetGroupName})
+var sPendingModifiedValues_PendingCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingCloudwatchLogsExports", ID: &iPendingCloudwatchLogsExports, Members: &mPendingCloudwatchLogsExports, Type: smithy.ShapeTypeStructure, Ext: &ePendingModifiedValues_PendingCloudwatchLogsExports})
+var sProvisionedIopsNotAvailableInAZFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedIopsNotAvailableInAZFault, Members: &mProvisionedIopsNotAvailableInAZFault, Traits: &t86, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedIopsNotAvailableInAZFault})
+var sProvisionedIopsNotAvailableInAZFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eProvisionedIopsNotAvailableInAZFault_message})
+var sRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure, Ext: &eRange})
+var sRange_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eRange_From})
+var sRange_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eRange_To})
+var sRange_Step = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Step", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eRange_Step})
+var s_RangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RangeList, Members: &m_RangeList, Type: smithy.ShapeTypeList, Ext: &e_RangeList})
+var s_RangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRange, Members: &mRange, Traits: &t87, Type: smithy.ShapeTypeStructure, Ext: &e_RangeList_member})
+var s_ReadersArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadersArnList, Members: &m_ReadersArnList, Type: smithy.ShapeTypeList, Ext: &e_ReadersArnList})
+var s_ReadersArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ReadersArnList_member})
+var s_ReadReplicaDBClusterIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadReplicaDBClusterIdentifierList, Members: &m_ReadReplicaDBClusterIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ReadReplicaDBClusterIdentifierList})
+var s_ReadReplicaDBClusterIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &e_ReadReplicaDBClusterIdentifierList_member})
+var s_ReadReplicaDBInstanceIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadReplicaDBInstanceIdentifierList, Members: &m_ReadReplicaDBInstanceIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ReadReplicaDBInstanceIdentifierList})
+var s_ReadReplicaDBInstanceIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t89, Type: smithy.ShapeTypeString, Ext: &e_ReadReplicaDBInstanceIdentifierList_member})
+var s_ReadReplicaIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadReplicaIdentifierList, Members: &m_ReadReplicaIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ReadReplicaIdentifierList})
+var s_ReadReplicaIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &e_ReadReplicaIdentifierList_member})
+var sResourceNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundFault, Members: &mResourceNotFoundFault, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundFault})
+var sResourceNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundFault_message})
+var sResourcePendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePendingMaintenanceActions, Members: &mResourcePendingMaintenanceActions, Type: smithy.ShapeTypeStructure, Ext: &eResourcePendingMaintenanceActions})
+var sResourcePendingMaintenanceActions_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourcePendingMaintenanceActions_ResourceIdentifier})
+var sResourcePendingMaintenanceActions_PendingMaintenanceActionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingMaintenanceActionDetails", ID: &i_PendingMaintenanceActionDetails, Members: &m_PendingMaintenanceActionDetails, Type: smithy.ShapeTypeList, Ext: &eResourcePendingMaintenanceActions_PendingMaintenanceActionDetails})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t92, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessV2ScalingConfiguration, Members: &mServerlessV2ScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eServerlessV2ScalingConfiguration})
+var sServerlessV2ScalingConfiguration_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eServerlessV2ScalingConfiguration_MinCapacity})
+var sServerlessV2ScalingConfiguration_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eServerlessV2ScalingConfiguration_MaxCapacity})
+var sServerlessV2ScalingConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessV2ScalingConfigurationInfo, Members: &mServerlessV2ScalingConfigurationInfo, Type: smithy.ShapeTypeStructure, Ext: &eServerlessV2ScalingConfigurationInfo})
+var sServerlessV2ScalingConfigurationInfo_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eServerlessV2ScalingConfigurationInfo_MinCapacity})
+var sServerlessV2ScalingConfigurationInfo_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_DoubleOptional, Type: smithy.ShapeTypeDouble, Ext: &eServerlessV2ScalingConfigurationInfo_MaxCapacity})
+var sSharedSnapshotQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedSnapshotQuotaExceededFault, Members: &mSharedSnapshotQuotaExceededFault, Traits: &t93, Type: smithy.ShapeTypeStructure, Ext: &eSharedSnapshotQuotaExceededFault})
+var sSharedSnapshotQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSharedSnapshotQuotaExceededFault_message})
+var sSnapshotQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotQuotaExceededFault, Members: &mSnapshotQuotaExceededFault, Traits: &t94, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotQuotaExceededFault})
+var sSnapshotQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSnapshotQuotaExceededFault_message})
+var sSNSInvalidTopicFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNSInvalidTopicFault, Members: &mSNSInvalidTopicFault, Traits: &t95, Type: smithy.ShapeTypeStructure, Ext: &eSNSInvalidTopicFault})
+var sSNSInvalidTopicFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSNSInvalidTopicFault_message})
+var sSNSNoAuthorizationFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNSNoAuthorizationFault, Members: &mSNSNoAuthorizationFault, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &eSNSNoAuthorizationFault})
+var sSNSNoAuthorizationFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSNSNoAuthorizationFault_message})
+var sSNSTopicArnNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNSTopicArnNotFoundFault, Members: &mSNSTopicArnNotFoundFault, Traits: &t97, Type: smithy.ShapeTypeStructure, Ext: &eSNSTopicArnNotFoundFault})
+var sSNSTopicArnNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSNSTopicArnNotFoundFault_message})
+var s_SourceIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceIdsList, Members: &m_SourceIdsList, Type: smithy.ShapeTypeList, Ext: &e_SourceIdsList})
+var s_SourceIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_SourceIdsList_member})
+var sSourceNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceNotFoundFault, Members: &mSourceNotFoundFault, Traits: &t99, Type: smithy.ShapeTypeStructure, Ext: &eSourceNotFoundFault})
+var sSourceNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSourceNotFoundFault_message})
+var sSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eSourceType})
+var sSourceType_db_instance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_instance", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_instance})
+var sSourceType_db_parameter_group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_parameter_group", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_parameter_group})
+var sSourceType_db_security_group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_security_group", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_security_group})
+var sSourceType_db_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_snapshot", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_snapshot})
+var sSourceType_db_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_cluster", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_cluster})
+var sSourceType_db_cluster_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "db_cluster_snapshot", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceType_db_cluster_snapshot})
+var sStorageQuotaExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageQuotaExceededFault, Members: &mStorageQuotaExceededFault, Traits: &t100, Type: smithy.ShapeTypeStructure, Ext: &eStorageQuotaExceededFault})
+var sStorageQuotaExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eStorageQuotaExceededFault_message})
+var sStorageTypeNotSupportedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageTypeNotSupportedFault, Members: &mStorageTypeNotSupportedFault, Traits: &t101, Type: smithy.ShapeTypeStructure, Ext: &eStorageTypeNotSupportedFault})
+var sStorageTypeNotSupportedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eStorageTypeNotSupportedFault_message})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sSubnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnet, Members: &mSubnet, Type: smithy.ShapeTypeStructure, Ext: &eSubnet})
+var sSubnet_SubnetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSubnet_SubnetIdentifier})
+var sSubnet_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &iAvailabilityZone, Members: &mAvailabilityZone, Type: smithy.ShapeTypeStructure, Ext: &eSubnet_SubnetAvailabilityZone})
+var sSubnet_SubnetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetStatus", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSubnet_SubnetStatus})
+var sSubnetAlreadyInUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetAlreadyInUse, Members: &mSubnetAlreadyInUse, Traits: &t102, Type: smithy.ShapeTypeStructure, Ext: &eSubnetAlreadyInUse})
+var sSubnetAlreadyInUse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSubnetAlreadyInUse_message})
+var s_SubnetIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdentifierList, Members: &m_SubnetIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_SubnetIdentifierList})
+var s_SubnetIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &e_SubnetIdentifierList_member})
+var s_SubnetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList, Ext: &e_SubnetList})
+var s_SubnetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubnet, Members: &mSubnet, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &e_SubnetList_member})
+var sSubscriptionAlreadyExistFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionAlreadyExistFault, Members: &mSubscriptionAlreadyExistFault, Traits: &t105, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionAlreadyExistFault})
+var sSubscriptionAlreadyExistFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSubscriptionAlreadyExistFault_message})
+var sSubscriptionCategoryNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionCategoryNotFoundFault, Members: &mSubscriptionCategoryNotFoundFault, Traits: &t106, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionCategoryNotFoundFault})
+var sSubscriptionCategoryNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSubscriptionCategoryNotFoundFault_message})
+var sSubscriptionNotFoundFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionNotFoundFault, Members: &mSubscriptionNotFoundFault, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionNotFoundFault})
+var sSubscriptionNotFoundFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eSubscriptionNotFoundFault_message})
+var s_SupportedCharacterSetsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedCharacterSetsList, Members: &m_SupportedCharacterSetsList, Type: smithy.ShapeTypeList, Ext: &e_SupportedCharacterSetsList})
+var s_SupportedCharacterSetsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCharacterSet, Members: &mCharacterSet, Traits: &t108, Type: smithy.ShapeTypeStructure, Ext: &e_SupportedCharacterSetsList_member})
+var s_SupportedTimezonesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedTimezonesList, Members: &m_SupportedTimezonesList, Type: smithy.ShapeTypeList, Ext: &e_SupportedTimezonesList})
+var s_SupportedTimezonesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTimezone, Members: &mTimezone, Traits: &t109, Type: smithy.ShapeTypeStructure, Ext: &e_SupportedTimezonesList_member})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimezone, Members: &mTimezone, Type: smithy.ShapeTypeStructure, Ext: &eTimezone})
+var sTimezone_TimezoneName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimezoneName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTimezone_TimezoneName})
+var s_TStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TStamp})
+var sUpgradeTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpgradeTarget, Members: &mUpgradeTarget, Type: smithy.ShapeTypeStructure, Ext: &eUpgradeTarget})
+var sUpgradeTarget_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpgradeTarget_Engine})
+var sUpgradeTarget_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpgradeTarget_EngineVersion})
+var sUpgradeTarget_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpgradeTarget_Description})
+var sUpgradeTarget_AutoUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoUpgrade", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeTarget_AutoUpgrade})
+var sUpgradeTarget_IsMajorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMajorVersionUpgrade", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeTarget_IsMajorVersionUpgrade})
+var sUpgradeTarget_SupportsGlobalDatabases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportsGlobalDatabases", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eUpgradeTarget_SupportsGlobalDatabases})
+var sValidDBInstanceModificationsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidDBInstanceModificationsMessage, Members: &mValidDBInstanceModificationsMessage, Type: smithy.ShapeTypeStructure, Ext: &eValidDBInstanceModificationsMessage})
+var sValidDBInstanceModificationsMessage_Storage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Storage", ID: &i_ValidStorageOptionsList, Members: &m_ValidStorageOptionsList, Type: smithy.ShapeTypeList, Ext: &eValidDBInstanceModificationsMessage_Storage})
+var sValidStorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidStorageOptions, Members: &mValidStorageOptions, Type: smithy.ShapeTypeStructure, Ext: &eValidStorageOptions})
+var sValidStorageOptions_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidStorageOptions_StorageType})
+var sValidStorageOptions_StorageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageSize", ID: &i_RangeList, Members: &m_RangeList, Type: smithy.ShapeTypeList, Ext: &eValidStorageOptions_StorageSize})
+var sValidStorageOptions_ProvisionedIops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedIops", ID: &i_RangeList, Members: &m_RangeList, Type: smithy.ShapeTypeList, Ext: &eValidStorageOptions_ProvisionedIops})
+var sValidStorageOptions_IopsToStorageRatio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IopsToStorageRatio", ID: &i_DoubleRangeList, Members: &m_DoubleRangeList, Type: smithy.ShapeTypeList, Ext: &eValidStorageOptions_IopsToStorageRatio})
+var s_ValidStorageOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidStorageOptionsList, Members: &m_ValidStorageOptionsList, Type: smithy.ShapeTypeList, Ext: &e_ValidStorageOptionsList})
+var s_ValidStorageOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidStorageOptions, Members: &mValidStorageOptions, Traits: &t111, Type: smithy.ShapeTypeStructure, Ext: &e_ValidStorageOptionsList_member})
+var s_ValidUpgradeTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidUpgradeTargetList, Members: &m_ValidUpgradeTargetList, Type: smithy.ShapeTypeList, Ext: &e_ValidUpgradeTargetList})
+var s_ValidUpgradeTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpgradeTarget, Members: &mUpgradeTarget, Traits: &t112, Type: smithy.ShapeTypeStructure, Ext: &e_ValidUpgradeTargetList_member})
+var s_VpcSecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_VpcSecurityGroupIdList})
+var s_VpcSecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &e_VpcSecurityGroupIdList_member})
+var sVpcSecurityGroupMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcSecurityGroupMembership, Members: &mVpcSecurityGroupMembership, Type: smithy.ShapeTypeStructure, Ext: &eVpcSecurityGroupMembership})
+var sVpcSecurityGroupMembership_VpcSecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcSecurityGroupMembership_VpcSecurityGroupId})
+var sVpcSecurityGroupMembership_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcSecurityGroupMembership_Status})
+var s_VpcSecurityGroupMembershipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcSecurityGroupMembershipList, Members: &m_VpcSecurityGroupMembershipList, Type: smithy.ShapeTypeList, Ext: &e_VpcSecurityGroupMembershipList})
+var s_VpcSecurityGroupMembershipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcSecurityGroupMembership, Members: &mVpcSecurityGroupMembership, Traits: &t114, Type: smithy.ShapeTypeStructure, Ext: &e_VpcSecurityGroupMembershipList_member})
+var sAddRoleToDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRoleToDBClusterMessage, Members: &mAddRoleToDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eAddRoleToDBClusterMessage})
+var sAddRoleToDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddRoleToDBClusterMessage_DBClusterIdentifier})
+var sAddRoleToDBClusterMessage_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddRoleToDBClusterMessage_RoleArn})
+var sAddRoleToDBClusterMessage_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddRoleToDBClusterMessage_FeatureName})
+var sAddSourceIdentifierToSubscriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddSourceIdentifierToSubscriptionMessage, Members: &mAddSourceIdentifierToSubscriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eAddSourceIdentifierToSubscriptionMessage})
+var sAddSourceIdentifierToSubscriptionMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddSourceIdentifierToSubscriptionMessage_SubscriptionName})
+var sAddSourceIdentifierToSubscriptionMessage_SourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddSourceIdentifierToSubscriptionMessage_SourceIdentifier})
+var sAddSourceIdentifierToSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddSourceIdentifierToSubscriptionResult, Members: &mAddSourceIdentifierToSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eAddSourceIdentifierToSubscriptionResult})
+var sAddSourceIdentifierToSubscriptionResult_EventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscription", ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eAddSourceIdentifierToSubscriptionResult_EventSubscription})
+var sAddTagsToResourceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceMessage, Members: &mAddTagsToResourceMessage, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsToResourceMessage})
+var sAddTagsToResourceMessage_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddTagsToResourceMessage_ResourceName})
+var sAddTagsToResourceMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsToResourceMessage_Tags})
+var sApplyPendingMaintenanceActionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceActionMessage, Members: &mApplyPendingMaintenanceActionMessage, Type: smithy.ShapeTypeStructure, Ext: &eApplyPendingMaintenanceActionMessage})
+var sApplyPendingMaintenanceActionMessage_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyPendingMaintenanceActionMessage_ResourceIdentifier})
+var sApplyPendingMaintenanceActionMessage_ApplyAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyAction", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyPendingMaintenanceActionMessage_ApplyAction})
+var sApplyPendingMaintenanceActionMessage_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApplyPendingMaintenanceActionMessage_OptInType})
+var sApplyPendingMaintenanceActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceActionResult, Members: &mApplyPendingMaintenanceActionResult, Type: smithy.ShapeTypeStructure, Ext: &eApplyPendingMaintenanceActionResult})
+var sApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePendingMaintenanceActions", ID: &iResourcePendingMaintenanceActions, Members: &mResourcePendingMaintenanceActions, Type: smithy.ShapeTypeStructure, Ext: &eApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions})
+var sCopyDBClusterParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterParameterGroupMessage, Members: &mCopyDBClusterParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterParameterGroupMessage})
+var sCopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBClusterParameterGroupIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier})
+var sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBClusterParameterGroupIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier})
+var sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBClusterParameterGroupDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription})
+var sCopyDBClusterParameterGroupMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCopyDBClusterParameterGroupMessage_Tags})
+var sCopyDBClusterParameterGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterParameterGroupResult, Members: &mCopyDBClusterParameterGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterParameterGroupResult})
+var sCopyDBClusterParameterGroupResult_DBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroup", ID: &iDBClusterParameterGroup, Members: &mDBClusterParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterParameterGroupResult_DBClusterParameterGroup})
+var sCopyDBClusterSnapshotMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterSnapshotMessage, Members: &mCopyDBClusterSnapshotMessage, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterSnapshotMessage})
+var sCopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier})
+var sCopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier})
+var sCopyDBClusterSnapshotMessage_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_KmsKeyId})
+var sCopyDBClusterSnapshotMessage_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreSignedUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_PreSignedUrl})
+var sCopyDBClusterSnapshotMessage_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCopyDBClusterSnapshotMessage_CopyTags})
+var sCopyDBClusterSnapshotMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCopyDBClusterSnapshotMessage_Tags})
+var sCopyDBClusterSnapshotMessage_SourceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_SourceRegion})
+var sCopyDBClusterSnapshotMessage_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCopyDBClusterSnapshotMessage_DestinationRegion})
+var sCopyDBClusterSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBClusterSnapshotResult, Members: &mCopyDBClusterSnapshotResult, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterSnapshotResult})
+var sCopyDBClusterSnapshotResult_DBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshot", ID: &iDBClusterSnapshot, Members: &mDBClusterSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBClusterSnapshotResult_DBClusterSnapshot})
+var sCopyDBParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBParameterGroupMessage, Members: &mCopyDBParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBParameterGroupMessage})
+var sCopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBParameterGroupIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier})
+var sCopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBParameterGroupIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier})
+var sCopyDBParameterGroupMessage_TargetDBParameterGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBParameterGroupDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCopyDBParameterGroupMessage_TargetDBParameterGroupDescription})
+var sCopyDBParameterGroupMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCopyDBParameterGroupMessage_Tags})
+var sCopyDBParameterGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyDBParameterGroupResult, Members: &mCopyDBParameterGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBParameterGroupResult})
+var sCopyDBParameterGroupResult_DBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroup", ID: &iDBParameterGroup, Members: &mDBParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eCopyDBParameterGroupResult_DBParameterGroup})
+var sCreateDBClusterEndpointMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterEndpointMessage, Members: &mCreateDBClusterEndpointMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterEndpointMessage})
+var sCreateDBClusterEndpointMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointMessage_DBClusterIdentifier})
+var sCreateDBClusterEndpointMessage_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointMessage_DBClusterEndpointIdentifier})
+var sCreateDBClusterEndpointMessage_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointMessage_EndpointType})
+var sCreateDBClusterEndpointMessage_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterEndpointMessage_StaticMembers})
+var sCreateDBClusterEndpointMessage_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterEndpointMessage_ExcludedMembers})
+var sCreateDBClusterEndpointMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterEndpointMessage_Tags})
+var sCreateDBClusterEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterEndpointOutput, Members: &mCreateDBClusterEndpointOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterEndpointOutput})
+var sCreateDBClusterEndpointOutput_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_DBClusterEndpointIdentifier})
+var sCreateDBClusterEndpointOutput_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_DBClusterIdentifier})
+var sCreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier})
+var sCreateDBClusterEndpointOutput_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_Endpoint})
+var sCreateDBClusterEndpointOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_Status})
+var sCreateDBClusterEndpointOutput_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_EndpointType})
+var sCreateDBClusterEndpointOutput_CustomEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_CustomEndpointType})
+var sCreateDBClusterEndpointOutput_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterEndpointOutput_StaticMembers})
+var sCreateDBClusterEndpointOutput_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterEndpointOutput_ExcludedMembers})
+var sCreateDBClusterEndpointOutput_DBClusterEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterEndpointOutput_DBClusterEndpointArn})
+var sCreateDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterMessage, Members: &mCreateDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterMessage})
+var sCreateDBClusterMessage_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterMessage_AvailabilityZones})
+var sCreateDBClusterMessage_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBClusterMessage_BackupRetentionPeriod})
+var sCreateDBClusterMessage_CharacterSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_CharacterSetName})
+var sCreateDBClusterMessage_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBClusterMessage_CopyTagsToSnapshot})
+var sCreateDBClusterMessage_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_DatabaseName})
+var sCreateDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_DBClusterIdentifier})
+var sCreateDBClusterMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_DBClusterParameterGroupName})
+var sCreateDBClusterMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterMessage_VpcSecurityGroupIds})
+var sCreateDBClusterMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_DBSubnetGroupName})
+var sCreateDBClusterMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_Engine})
+var sCreateDBClusterMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_EngineVersion})
+var sCreateDBClusterMessage_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBClusterMessage_Port})
+var sCreateDBClusterMessage_MasterUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUsername", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_MasterUsername})
+var sCreateDBClusterMessage_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_MasterUserPassword})
+var sCreateDBClusterMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_OptionGroupName})
+var sCreateDBClusterMessage_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_PreferredBackupWindow})
+var sCreateDBClusterMessage_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_PreferredMaintenanceWindow})
+var sCreateDBClusterMessage_ReplicationSourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationSourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_ReplicationSourceIdentifier})
+var sCreateDBClusterMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterMessage_Tags})
+var sCreateDBClusterMessage_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBClusterMessage_StorageEncrypted})
+var sCreateDBClusterMessage_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_KmsKeyId})
+var sCreateDBClusterMessage_PreSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreSignedUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_PreSignedUrl})
+var sCreateDBClusterMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBClusterMessage_EnableIAMDatabaseAuthentication})
+var sCreateDBClusterMessage_EnableCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterMessage_EnableCloudwatchLogsExports})
+var sCreateDBClusterMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBClusterMessage_DeletionProtection})
+var sCreateDBClusterMessage_ServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessV2ScalingConfiguration", ID: &iServerlessV2ScalingConfiguration, Members: &mServerlessV2ScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterMessage_ServerlessV2ScalingConfiguration})
+var sCreateDBClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_GlobalClusterIdentifier})
+var sCreateDBClusterMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_StorageType})
+var sCreateDBClusterMessage_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_NetworkType})
+var sCreateDBClusterMessage_SourceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_SourceRegion})
+var sCreateDBClusterMessage_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterMessage_DestinationRegion})
+var sCreateDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterResult, Members: &mCreateDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterResult})
+var sCreateDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterResult_DBCluster})
+var sCreateDBClusterParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterParameterGroupMessage, Members: &mCreateDBClusterParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterParameterGroupMessage})
+var sCreateDBClusterParameterGroupMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterParameterGroupMessage_DBClusterParameterGroupName})
+var sCreateDBClusterParameterGroupMessage_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterParameterGroupMessage_DBParameterGroupFamily})
+var sCreateDBClusterParameterGroupMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterParameterGroupMessage_Description})
+var sCreateDBClusterParameterGroupMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterParameterGroupMessage_Tags})
+var sCreateDBClusterParameterGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterParameterGroupResult, Members: &mCreateDBClusterParameterGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterParameterGroupResult})
+var sCreateDBClusterParameterGroupResult_DBClusterParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroup", ID: &iDBClusterParameterGroup, Members: &mDBClusterParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterParameterGroupResult_DBClusterParameterGroup})
+var sCreateDBClusterSnapshotMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterSnapshotMessage, Members: &mCreateDBClusterSnapshotMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterSnapshotMessage})
+var sCreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier})
+var sCreateDBClusterSnapshotMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBClusterSnapshotMessage_DBClusterIdentifier})
+var sCreateDBClusterSnapshotMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBClusterSnapshotMessage_Tags})
+var sCreateDBClusterSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBClusterSnapshotResult, Members: &mCreateDBClusterSnapshotResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterSnapshotResult})
+var sCreateDBClusterSnapshotResult_DBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshot", ID: &iDBClusterSnapshot, Members: &mDBClusterSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBClusterSnapshotResult_DBClusterSnapshot})
+var sCreateDBInstanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBInstanceMessage, Members: &mCreateDBInstanceMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBInstanceMessage})
+var sCreateDBInstanceMessage_DBName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBName})
+var sCreateDBInstanceMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBInstanceIdentifier})
+var sCreateDBInstanceMessage_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_AllocatedStorage})
+var sCreateDBInstanceMessage_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBInstanceClass})
+var sCreateDBInstanceMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_Engine})
+var sCreateDBInstanceMessage_MasterUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUsername", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_MasterUsername})
+var sCreateDBInstanceMessage_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_MasterUserPassword})
+var sCreateDBInstanceMessage_DBSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSecurityGroups", ID: &i_DBSecurityGroupNameList, Members: &m_DBSecurityGroupNameList, Type: smithy.ShapeTypeList, Ext: &eCreateDBInstanceMessage_DBSecurityGroups})
+var sCreateDBInstanceMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eCreateDBInstanceMessage_VpcSecurityGroupIds})
+var sCreateDBInstanceMessage_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_AvailabilityZone})
+var sCreateDBInstanceMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBSubnetGroupName})
+var sCreateDBInstanceMessage_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_PreferredMaintenanceWindow})
+var sCreateDBInstanceMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBParameterGroupName})
+var sCreateDBInstanceMessage_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_BackupRetentionPeriod})
+var sCreateDBInstanceMessage_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_PreferredBackupWindow})
+var sCreateDBInstanceMessage_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_Port})
+var sCreateDBInstanceMessage_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_MultiAZ})
+var sCreateDBInstanceMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_EngineVersion})
+var sCreateDBInstanceMessage_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_AutoMinorVersionUpgrade})
+var sCreateDBInstanceMessage_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_LicenseModel})
+var sCreateDBInstanceMessage_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_Iops})
+var sCreateDBInstanceMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_OptionGroupName})
+var sCreateDBInstanceMessage_CharacterSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterSetName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_CharacterSetName})
+var sCreateDBInstanceMessage_PubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PubliclyAccessible", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_PubliclyAccessible})
+var sCreateDBInstanceMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBInstanceMessage_Tags})
+var sCreateDBInstanceMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DBClusterIdentifier})
+var sCreateDBInstanceMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_StorageType})
+var sCreateDBInstanceMessage_TdeCredentialArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TdeCredentialArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_TdeCredentialArn})
+var sCreateDBInstanceMessage_TdeCredentialPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TdeCredentialPassword", ID: &i_SensitiveString, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_TdeCredentialPassword})
+var sCreateDBInstanceMessage_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_StorageEncrypted})
+var sCreateDBInstanceMessage_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_KmsKeyId})
+var sCreateDBInstanceMessage_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_Domain})
+var sCreateDBInstanceMessage_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_CopyTagsToSnapshot})
+var sCreateDBInstanceMessage_MonitoringInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringInterval", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_MonitoringInterval})
+var sCreateDBInstanceMessage_MonitoringRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_MonitoringRoleArn})
+var sCreateDBInstanceMessage_DomainIAMRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIAMRoleName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_DomainIAMRoleName})
+var sCreateDBInstanceMessage_PromotionTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromotionTier", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eCreateDBInstanceMessage_PromotionTier})
+var sCreateDBInstanceMessage_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_Timezone})
+var sCreateDBInstanceMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_EnableIAMDatabaseAuthentication})
+var sCreateDBInstanceMessage_EnablePerformanceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePerformanceInsights", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_EnablePerformanceInsights})
+var sCreateDBInstanceMessage_PerformanceInsightsKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceInsightsKMSKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBInstanceMessage_PerformanceInsightsKMSKeyId})
+var sCreateDBInstanceMessage_EnableCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eCreateDBInstanceMessage_EnableCloudwatchLogsExports})
+var sCreateDBInstanceMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateDBInstanceMessage_DeletionProtection})
+var sCreateDBInstanceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBInstanceResult, Members: &mCreateDBInstanceResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBInstanceResult})
+var sCreateDBInstanceResult_DBInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstance", ID: &iDBInstance, Members: &mDBInstance, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBInstanceResult_DBInstance})
+var sCreateDBParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBParameterGroupMessage, Members: &mCreateDBParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBParameterGroupMessage})
+var sCreateDBParameterGroupMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBParameterGroupMessage_DBParameterGroupName})
+var sCreateDBParameterGroupMessage_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBParameterGroupMessage_DBParameterGroupFamily})
+var sCreateDBParameterGroupMessage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBParameterGroupMessage_Description})
+var sCreateDBParameterGroupMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBParameterGroupMessage_Tags})
+var sCreateDBParameterGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBParameterGroupResult, Members: &mCreateDBParameterGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBParameterGroupResult})
+var sCreateDBParameterGroupResult_DBParameterGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroup", ID: &iDBParameterGroup, Members: &mDBParameterGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBParameterGroupResult_DBParameterGroup})
+var sCreateDBSubnetGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBSubnetGroupMessage, Members: &mCreateDBSubnetGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBSubnetGroupMessage})
+var sCreateDBSubnetGroupMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBSubnetGroupMessage_DBSubnetGroupName})
+var sCreateDBSubnetGroupMessage_DBSubnetGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateDBSubnetGroupMessage_DBSubnetGroupDescription})
+var sCreateDBSubnetGroupMessage_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdentifierList, Members: &m_SubnetIdentifierList, Type: smithy.ShapeTypeList, Ext: &eCreateDBSubnetGroupMessage_SubnetIds})
+var sCreateDBSubnetGroupMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDBSubnetGroupMessage_Tags})
+var sCreateDBSubnetGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDBSubnetGroupResult, Members: &mCreateDBSubnetGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBSubnetGroupResult})
+var sCreateDBSubnetGroupResult_DBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroup", ID: &iDBSubnetGroup, Members: &mDBSubnetGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateDBSubnetGroupResult_DBSubnetGroup})
+var sCreateEventSubscriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSubscriptionMessage, Members: &mCreateEventSubscriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateEventSubscriptionMessage})
+var sCreateEventSubscriptionMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateEventSubscriptionMessage_SubscriptionName})
+var sCreateEventSubscriptionMessage_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateEventSubscriptionMessage_SnsTopicArn})
+var sCreateEventSubscriptionMessage_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateEventSubscriptionMessage_SourceType})
+var sCreateEventSubscriptionMessage_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eCreateEventSubscriptionMessage_EventCategories})
+var sCreateEventSubscriptionMessage_SourceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIds", ID: &i_SourceIdsList, Members: &m_SourceIdsList, Type: smithy.ShapeTypeList, Ext: &eCreateEventSubscriptionMessage_SourceIds})
+var sCreateEventSubscriptionMessage_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateEventSubscriptionMessage_Enabled})
+var sCreateEventSubscriptionMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateEventSubscriptionMessage_Tags})
+var sCreateEventSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSubscriptionResult, Members: &mCreateEventSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateEventSubscriptionResult})
+var sCreateEventSubscriptionResult_EventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscription", ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eCreateEventSubscriptionResult_EventSubscription})
+var sCreateGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalClusterMessage, Members: &mCreateGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalClusterMessage})
+var sCreateGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalClusterMessage_GlobalClusterIdentifier})
+var sCreateGlobalClusterMessage_SourceDBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalClusterMessage_SourceDBClusterIdentifier})
+var sCreateGlobalClusterMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalClusterMessage_Engine})
+var sCreateGlobalClusterMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalClusterMessage_EngineVersion})
+var sCreateGlobalClusterMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateGlobalClusterMessage_DeletionProtection})
+var sCreateGlobalClusterMessage_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalClusterMessage_DatabaseName})
+var sCreateGlobalClusterMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateGlobalClusterMessage_Tags})
+var sCreateGlobalClusterMessage_StorageEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEncrypted", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eCreateGlobalClusterMessage_StorageEncrypted})
+var sCreateGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalClusterResult, Members: &mCreateGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalClusterResult})
+var sCreateGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalClusterResult_GlobalCluster})
+var sDeleteDBClusterEndpointMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterEndpointMessage, Members: &mDeleteDBClusterEndpointMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterEndpointMessage})
+var sDeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier})
+var sDeleteDBClusterEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterEndpointOutput, Members: &mDeleteDBClusterEndpointOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterEndpointOutput})
+var sDeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier})
+var sDeleteDBClusterEndpointOutput_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_DBClusterIdentifier})
+var sDeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier})
+var sDeleteDBClusterEndpointOutput_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_Endpoint})
+var sDeleteDBClusterEndpointOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_Status})
+var sDeleteDBClusterEndpointOutput_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_EndpointType})
+var sDeleteDBClusterEndpointOutput_CustomEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_CustomEndpointType})
+var sDeleteDBClusterEndpointOutput_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDeleteDBClusterEndpointOutput_StaticMembers})
+var sDeleteDBClusterEndpointOutput_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDeleteDBClusterEndpointOutput_ExcludedMembers})
+var sDeleteDBClusterEndpointOutput_DBClusterEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterEndpointOutput_DBClusterEndpointArn})
+var sDeleteDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterMessage, Members: &mDeleteDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterMessage})
+var sDeleteDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterMessage_DBClusterIdentifier})
+var sDeleteDBClusterMessage_SkipFinalSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalSnapshot", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteDBClusterMessage_SkipFinalSnapshot})
+var sDeleteDBClusterMessage_FinalDBSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalDBSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterMessage_FinalDBSnapshotIdentifier})
+var sDeleteDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterResult, Members: &mDeleteDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterResult})
+var sDeleteDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterResult_DBCluster})
+var sDeleteDBClusterParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterParameterGroupMessage, Members: &mDeleteDBClusterParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterParameterGroupMessage})
+var sDeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName})
+var sDeleteDBClusterSnapshotMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterSnapshotMessage, Members: &mDeleteDBClusterSnapshotMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterSnapshotMessage})
+var sDeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier})
+var sDeleteDBClusterSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBClusterSnapshotResult, Members: &mDeleteDBClusterSnapshotResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterSnapshotResult})
+var sDeleteDBClusterSnapshotResult_DBClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshot", ID: &iDBClusterSnapshot, Members: &mDBClusterSnapshot, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBClusterSnapshotResult_DBClusterSnapshot})
+var sDeleteDBInstanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBInstanceMessage, Members: &mDeleteDBInstanceMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBInstanceMessage})
+var sDeleteDBInstanceMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBInstanceMessage_DBInstanceIdentifier})
+var sDeleteDBInstanceMessage_SkipFinalSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalSnapshot", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteDBInstanceMessage_SkipFinalSnapshot})
+var sDeleteDBInstanceMessage_FinalDBSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalDBSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBInstanceMessage_FinalDBSnapshotIdentifier})
+var sDeleteDBInstanceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBInstanceResult, Members: &mDeleteDBInstanceResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBInstanceResult})
+var sDeleteDBInstanceResult_DBInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstance", ID: &iDBInstance, Members: &mDBInstance, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBInstanceResult_DBInstance})
+var sDeleteDBParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBParameterGroupMessage, Members: &mDeleteDBParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBParameterGroupMessage})
+var sDeleteDBParameterGroupMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBParameterGroupMessage_DBParameterGroupName})
+var sDeleteDBSubnetGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDBSubnetGroupMessage, Members: &mDeleteDBSubnetGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDBSubnetGroupMessage})
+var sDeleteDBSubnetGroupMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteDBSubnetGroupMessage_DBSubnetGroupName})
+var sDeleteEventSubscriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSubscriptionMessage, Members: &mDeleteEventSubscriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventSubscriptionMessage})
+var sDeleteEventSubscriptionMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteEventSubscriptionMessage_SubscriptionName})
+var sDeleteEventSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSubscriptionResult, Members: &mDeleteEventSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventSubscriptionResult})
+var sDeleteEventSubscriptionResult_EventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscription", ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventSubscriptionResult_EventSubscription})
+var sDeleteGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalClusterMessage, Members: &mDeleteGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalClusterMessage})
+var sDeleteGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteGlobalClusterMessage_GlobalClusterIdentifier})
+var sDeleteGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalClusterResult, Members: &mDeleteGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalClusterResult})
+var sDeleteGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalClusterResult_GlobalCluster})
+var sDescribeDBClusterEndpointsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterEndpointsMessage, Members: &mDescribeDBClusterEndpointsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterEndpointsMessage})
+var sDescribeDBClusterEndpointsMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterEndpointsMessage_DBClusterIdentifier})
+var sDescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier})
+var sDescribeDBClusterEndpointsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBClusterEndpointsMessage_Filters})
+var sDescribeDBClusterEndpointsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBClusterEndpointsMessage_MaxRecords})
+var sDescribeDBClusterEndpointsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterEndpointsMessage_Marker})
+var sDBClusterEndpointMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterEndpointMessage, Members: &mDBClusterEndpointMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterEndpointMessage})
+var sDBClusterEndpointMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterEndpointMessage_Marker})
+var sDBClusterEndpointMessage_DBClusterEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpoints", ID: &i_DBClusterEndpointList, Members: &m_DBClusterEndpointList, Type: smithy.ShapeTypeList, Ext: &eDBClusterEndpointMessage_DBClusterEndpoints})
+var sDescribeDBClusterParameterGroupsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterParameterGroupsMessage, Members: &mDescribeDBClusterParameterGroupsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterParameterGroupsMessage})
+var sDescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName})
+var sDescribeDBClusterParameterGroupsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBClusterParameterGroupsMessage_Filters})
+var sDescribeDBClusterParameterGroupsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBClusterParameterGroupsMessage_MaxRecords})
+var sDescribeDBClusterParameterGroupsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterParameterGroupsMessage_Marker})
+var sDBClusterParameterGroupsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterParameterGroupsMessage, Members: &mDBClusterParameterGroupsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterParameterGroupsMessage})
+var sDBClusterParameterGroupsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroupsMessage_Marker})
+var sDBClusterParameterGroupsMessage_DBClusterParameterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroups", ID: &i_DBClusterParameterGroupList, Members: &m_DBClusterParameterGroupList, Type: smithy.ShapeTypeList, Ext: &eDBClusterParameterGroupsMessage_DBClusterParameterGroups})
+var sDescribeDBClusterParametersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterParametersMessage, Members: &mDescribeDBClusterParametersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterParametersMessage})
+var sDescribeDBClusterParametersMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterParametersMessage_DBClusterParameterGroupName})
+var sDescribeDBClusterParametersMessage_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterParametersMessage_Source})
+var sDescribeDBClusterParametersMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBClusterParametersMessage_Filters})
+var sDescribeDBClusterParametersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBClusterParametersMessage_MaxRecords})
+var sDescribeDBClusterParametersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterParametersMessage_Marker})
+var sDBClusterParameterGroupDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterParameterGroupDetails, Members: &mDBClusterParameterGroupDetails, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterParameterGroupDetails})
+var sDBClusterParameterGroupDetails_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eDBClusterParameterGroupDetails_Parameters})
+var sDBClusterParameterGroupDetails_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroupDetails_Marker})
+var sDescribeDBClustersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClustersMessage, Members: &mDescribeDBClustersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClustersMessage})
+var sDescribeDBClustersMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClustersMessage_DBClusterIdentifier})
+var sDescribeDBClustersMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBClustersMessage_Filters})
+var sDescribeDBClustersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBClustersMessage_MaxRecords})
+var sDescribeDBClustersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClustersMessage_Marker})
+var sDescribeDBClusterSnapshotAttributesMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterSnapshotAttributesMessage, Members: &mDescribeDBClusterSnapshotAttributesMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterSnapshotAttributesMessage})
+var sDescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier})
+var sDescribeDBClusterSnapshotAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterSnapshotAttributesResult, Members: &mDescribeDBClusterSnapshotAttributesResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterSnapshotAttributesResult})
+var sDescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotAttributesResult", ID: &iDBClusterSnapshotAttributesResult, Members: &mDBClusterSnapshotAttributesResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult})
+var sDescribeDBClusterSnapshotsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBClusterSnapshotsMessage, Members: &mDescribeDBClusterSnapshotsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBClusterSnapshotsMessage})
+var sDescribeDBClusterSnapshotsMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterSnapshotsMessage_DBClusterIdentifier})
+var sDescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier})
+var sDescribeDBClusterSnapshotsMessage_SnapshotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterSnapshotsMessage_SnapshotType})
+var sDescribeDBClusterSnapshotsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBClusterSnapshotsMessage_Filters})
+var sDescribeDBClusterSnapshotsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBClusterSnapshotsMessage_MaxRecords})
+var sDescribeDBClusterSnapshotsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBClusterSnapshotsMessage_Marker})
+var sDescribeDBClusterSnapshotsMessage_IncludeShared = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeShared", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDBClusterSnapshotsMessage_IncludeShared})
+var sDescribeDBClusterSnapshotsMessage_IncludePublic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePublic", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDBClusterSnapshotsMessage_IncludePublic})
+var sDBClusterSnapshotMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterSnapshotMessage, Members: &mDBClusterSnapshotMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterSnapshotMessage})
+var sDBClusterSnapshotMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterSnapshotMessage_Marker})
+var sDBClusterSnapshotMessage_DBClusterSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshots", ID: &i_DBClusterSnapshotList, Members: &m_DBClusterSnapshotList, Type: smithy.ShapeTypeList, Ext: &eDBClusterSnapshotMessage_DBClusterSnapshots})
+var sDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterMessage, Members: &mDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterMessage})
+var sDBClusterMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterMessage_Marker})
+var sDBClusterMessage_DBClusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusters", ID: &i_DBClusterList, Members: &m_DBClusterList, Type: smithy.ShapeTypeList, Ext: &eDBClusterMessage_DBClusters})
+var sDescribeDBEngineVersionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBEngineVersionsMessage, Members: &mDescribeDBEngineVersionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBEngineVersionsMessage})
+var sDescribeDBEngineVersionsMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBEngineVersionsMessage_Engine})
+var sDescribeDBEngineVersionsMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBEngineVersionsMessage_EngineVersion})
+var sDescribeDBEngineVersionsMessage_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBEngineVersionsMessage_DBParameterGroupFamily})
+var sDescribeDBEngineVersionsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBEngineVersionsMessage_Filters})
+var sDescribeDBEngineVersionsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBEngineVersionsMessage_MaxRecords})
+var sDescribeDBEngineVersionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBEngineVersionsMessage_Marker})
+var sDescribeDBEngineVersionsMessage_DefaultOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDBEngineVersionsMessage_DefaultOnly})
+var sDescribeDBEngineVersionsMessage_ListSupportedCharacterSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListSupportedCharacterSets", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDBEngineVersionsMessage_ListSupportedCharacterSets})
+var sDescribeDBEngineVersionsMessage_ListSupportedTimezones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListSupportedTimezones", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeDBEngineVersionsMessage_ListSupportedTimezones})
+var sDBEngineVersionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBEngineVersionMessage, Members: &mDBEngineVersionMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBEngineVersionMessage})
+var sDBEngineVersionMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBEngineVersionMessage_Marker})
+var sDBEngineVersionMessage_DBEngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBEngineVersions", ID: &i_DBEngineVersionList, Members: &m_DBEngineVersionList, Type: smithy.ShapeTypeList, Ext: &eDBEngineVersionMessage_DBEngineVersions})
+var sDescribeDBInstancesMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBInstancesMessage, Members: &mDescribeDBInstancesMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBInstancesMessage})
+var sDescribeDBInstancesMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBInstancesMessage_DBInstanceIdentifier})
+var sDescribeDBInstancesMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBInstancesMessage_Filters})
+var sDescribeDBInstancesMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBInstancesMessage_MaxRecords})
+var sDescribeDBInstancesMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBInstancesMessage_Marker})
+var sDBInstanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBInstanceMessage, Members: &mDBInstanceMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBInstanceMessage})
+var sDBInstanceMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBInstanceMessage_Marker})
+var sDBInstanceMessage_DBInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstances", ID: &i_DBInstanceList, Members: &m_DBInstanceList, Type: smithy.ShapeTypeList, Ext: &eDBInstanceMessage_DBInstances})
+var sDescribeDBParameterGroupsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBParameterGroupsMessage, Members: &mDescribeDBParameterGroupsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBParameterGroupsMessage})
+var sDescribeDBParameterGroupsMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBParameterGroupsMessage_DBParameterGroupName})
+var sDescribeDBParameterGroupsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBParameterGroupsMessage_Filters})
+var sDescribeDBParameterGroupsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBParameterGroupsMessage_MaxRecords})
+var sDescribeDBParameterGroupsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBParameterGroupsMessage_Marker})
+var sDBParameterGroupsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupsMessage, Members: &mDBParameterGroupsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupsMessage})
+var sDBParameterGroupsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupsMessage_Marker})
+var sDBParameterGroupsMessage_DBParameterGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroups", ID: &i_DBParameterGroupList, Members: &m_DBParameterGroupList, Type: smithy.ShapeTypeList, Ext: &eDBParameterGroupsMessage_DBParameterGroups})
+var sDescribeDBParametersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBParametersMessage, Members: &mDescribeDBParametersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBParametersMessage})
+var sDescribeDBParametersMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBParametersMessage_DBParameterGroupName})
+var sDescribeDBParametersMessage_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBParametersMessage_Source})
+var sDescribeDBParametersMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBParametersMessage_Filters})
+var sDescribeDBParametersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBParametersMessage_MaxRecords})
+var sDescribeDBParametersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBParametersMessage_Marker})
+var sDBParameterGroupDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupDetails, Members: &mDBParameterGroupDetails, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupDetails})
+var sDBParameterGroupDetails_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eDBParameterGroupDetails_Parameters})
+var sDBParameterGroupDetails_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupDetails_Marker})
+var sDescribeDBSubnetGroupsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDBSubnetGroupsMessage, Members: &mDescribeDBSubnetGroupsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDBSubnetGroupsMessage})
+var sDescribeDBSubnetGroupsMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBSubnetGroupsMessage_DBSubnetGroupName})
+var sDescribeDBSubnetGroupsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeDBSubnetGroupsMessage_Filters})
+var sDescribeDBSubnetGroupsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDBSubnetGroupsMessage_MaxRecords})
+var sDescribeDBSubnetGroupsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeDBSubnetGroupsMessage_Marker})
+var sDBSubnetGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBSubnetGroupMessage, Members: &mDBSubnetGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBSubnetGroupMessage})
+var sDBSubnetGroupMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBSubnetGroupMessage_Marker})
+var sDBSubnetGroupMessage_DBSubnetGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroups", ID: &i_DBSubnetGroups, Members: &m_DBSubnetGroups, Type: smithy.ShapeTypeList, Ext: &eDBSubnetGroupMessage_DBSubnetGroups})
+var sDescribeEngineDefaultClusterParametersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultClusterParametersMessage, Members: &mDescribeEngineDefaultClusterParametersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultClusterParametersMessage})
+var sDescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily})
+var sDescribeEngineDefaultClusterParametersMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeEngineDefaultClusterParametersMessage_Filters})
+var sDescribeEngineDefaultClusterParametersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEngineDefaultClusterParametersMessage_MaxRecords})
+var sDescribeEngineDefaultClusterParametersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEngineDefaultClusterParametersMessage_Marker})
+var sDescribeEngineDefaultClusterParametersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultClusterParametersResult, Members: &mDescribeEngineDefaultClusterParametersResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultClusterParametersResult})
+var sDescribeEngineDefaultClusterParametersResult_EngineDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineDefaults", ID: &iEngineDefaults, Members: &mEngineDefaults, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultClusterParametersResult_EngineDefaults})
+var sDescribeEngineDefaultParametersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultParametersMessage, Members: &mDescribeEngineDefaultParametersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultParametersMessage})
+var sDescribeEngineDefaultParametersMessage_DBParameterGroupFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupFamily", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEngineDefaultParametersMessage_DBParameterGroupFamily})
+var sDescribeEngineDefaultParametersMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeEngineDefaultParametersMessage_Filters})
+var sDescribeEngineDefaultParametersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEngineDefaultParametersMessage_MaxRecords})
+var sDescribeEngineDefaultParametersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEngineDefaultParametersMessage_Marker})
+var sDescribeEngineDefaultParametersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEngineDefaultParametersResult, Members: &mDescribeEngineDefaultParametersResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultParametersResult})
+var sDescribeEngineDefaultParametersResult_EngineDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineDefaults", ID: &iEngineDefaults, Members: &mEngineDefaults, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEngineDefaultParametersResult_EngineDefaults})
+var sDescribeEventCategoriesMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventCategoriesMessage, Members: &mDescribeEventCategoriesMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventCategoriesMessage})
+var sDescribeEventCategoriesMessage_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEventCategoriesMessage_SourceType})
+var sDescribeEventCategoriesMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventCategoriesMessage_Filters})
+var sEventCategoriesMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventCategoriesMessage, Members: &mEventCategoriesMessage, Type: smithy.ShapeTypeStructure, Ext: &eEventCategoriesMessage})
+var sEventCategoriesMessage_EventCategoriesMapList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategoriesMapList", ID: &i_EventCategoriesMapList, Members: &m_EventCategoriesMapList, Type: smithy.ShapeTypeList, Ext: &eEventCategoriesMessage_EventCategoriesMapList})
+var sDescribeEventsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsMessage, Members: &mDescribeEventsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsMessage})
+var sDescribeEventsMessage_SourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_SourceIdentifier})
+var sDescribeEventsMessage_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iSourceType, Members: &mSourceType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEventsMessage_SourceType})
+var sDescribeEventsMessage_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEventsMessage_StartTime})
+var sDescribeEventsMessage_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEventsMessage_EndTime})
+var sDescribeEventsMessage_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventsMessage_Duration})
+var sDescribeEventsMessage_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventsMessage_EventCategories})
+var sDescribeEventsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventsMessage_Filters})
+var sDescribeEventsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventsMessage_MaxRecords})
+var sDescribeEventsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsMessage_Marker})
+var sEventsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventsMessage, Members: &mEventsMessage, Type: smithy.ShapeTypeStructure, Ext: &eEventsMessage})
+var sEventsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventsMessage_Marker})
+var sEventsMessage_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &eEventsMessage_Events})
+var sDescribeEventSubscriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSubscriptionsMessage, Members: &mDescribeEventSubscriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventSubscriptionsMessage})
+var sDescribeEventSubscriptionsMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEventSubscriptionsMessage_SubscriptionName})
+var sDescribeEventSubscriptionsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventSubscriptionsMessage_Filters})
+var sDescribeEventSubscriptionsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventSubscriptionsMessage_MaxRecords})
+var sDescribeEventSubscriptionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeEventSubscriptionsMessage_Marker})
+var sEventSubscriptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSubscriptionsMessage, Members: &mEventSubscriptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eEventSubscriptionsMessage})
+var sEventSubscriptionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEventSubscriptionsMessage_Marker})
+var sEventSubscriptionsMessage_EventSubscriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscriptionsList", ID: &i_EventSubscriptionsList, Members: &m_EventSubscriptionsList, Type: smithy.ShapeTypeList, Ext: &eEventSubscriptionsMessage_EventSubscriptionsList})
+var sDescribeGlobalClustersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGlobalClustersMessage, Members: &mDescribeGlobalClustersMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGlobalClustersMessage})
+var sDescribeGlobalClustersMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDescribeGlobalClustersMessage_GlobalClusterIdentifier})
+var sDescribeGlobalClustersMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeGlobalClustersMessage_MaxRecords})
+var sDescribeGlobalClustersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeGlobalClustersMessage_Marker})
+var sGlobalClustersMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalClustersMessage, Members: &mGlobalClustersMessage, Type: smithy.ShapeTypeStructure, Ext: &eGlobalClustersMessage})
+var sGlobalClustersMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGlobalClustersMessage_Marker})
+var sGlobalClustersMessage_GlobalClusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusters", ID: &i_GlobalClusterList, Members: &m_GlobalClusterList, Type: smithy.ShapeTypeList, Ext: &eGlobalClustersMessage_GlobalClusters})
+var sDescribeOrderableDBInstanceOptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrderableDBInstanceOptionsMessage, Members: &mDescribeOrderableDBInstanceOptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOrderableDBInstanceOptionsMessage})
+var sDescribeOrderableDBInstanceOptionsMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeOrderableDBInstanceOptionsMessage_Engine})
+var sDescribeOrderableDBInstanceOptionsMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeOrderableDBInstanceOptionsMessage_EngineVersion})
+var sDescribeOrderableDBInstanceOptionsMessage_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeOrderableDBInstanceOptionsMessage_DBInstanceClass})
+var sDescribeOrderableDBInstanceOptionsMessage_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeOrderableDBInstanceOptionsMessage_LicenseModel})
+var sDescribeOrderableDBInstanceOptionsMessage_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeOrderableDBInstanceOptionsMessage_Vpc})
+var sDescribeOrderableDBInstanceOptionsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribeOrderableDBInstanceOptionsMessage_Filters})
+var sDescribeOrderableDBInstanceOptionsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribeOrderableDBInstanceOptionsMessage_MaxRecords})
+var sDescribeOrderableDBInstanceOptionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeOrderableDBInstanceOptionsMessage_Marker})
+var sOrderableDBInstanceOptionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderableDBInstanceOptionsMessage, Members: &mOrderableDBInstanceOptionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eOrderableDBInstanceOptionsMessage})
+var sOrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderableDBInstanceOptions", ID: &i_OrderableDBInstanceOptionsList, Members: &m_OrderableDBInstanceOptionsList, Type: smithy.ShapeTypeList, Ext: &eOrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions})
+var sOrderableDBInstanceOptionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOrderableDBInstanceOptionsMessage_Marker})
+var sDescribePendingMaintenanceActionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePendingMaintenanceActionsMessage, Members: &mDescribePendingMaintenanceActionsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribePendingMaintenanceActionsMessage})
+var sDescribePendingMaintenanceActionsMessage_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribePendingMaintenanceActionsMessage_ResourceIdentifier})
+var sDescribePendingMaintenanceActionsMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eDescribePendingMaintenanceActionsMessage_Filters})
+var sDescribePendingMaintenanceActionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribePendingMaintenanceActionsMessage_Marker})
+var sDescribePendingMaintenanceActionsMessage_MaxRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecords", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eDescribePendingMaintenanceActionsMessage_MaxRecords})
+var sPendingMaintenanceActionsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingMaintenanceActionsMessage, Members: &mPendingMaintenanceActionsMessage, Type: smithy.ShapeTypeStructure, Ext: &ePendingMaintenanceActionsMessage})
+var sPendingMaintenanceActionsMessage_PendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingMaintenanceActions", ID: &i_PendingMaintenanceActions, Members: &m_PendingMaintenanceActions, Type: smithy.ShapeTypeList, Ext: &ePendingMaintenanceActionsMessage_PendingMaintenanceActions})
+var sPendingMaintenanceActionsMessage_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePendingMaintenanceActionsMessage_Marker})
+var sDescribeValidDBInstanceModificationsMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeValidDBInstanceModificationsMessage, Members: &mDescribeValidDBInstanceModificationsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeValidDBInstanceModificationsMessage})
+var sDescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier})
+var sDescribeValidDBInstanceModificationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeValidDBInstanceModificationsResult, Members: &mDescribeValidDBInstanceModificationsResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeValidDBInstanceModificationsResult})
+var sDescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidDBInstanceModificationsMessage", ID: &iValidDBInstanceModificationsMessage, Members: &mValidDBInstanceModificationsMessage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage})
+var sFailoverDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverDBClusterMessage, Members: &mFailoverDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eFailoverDBClusterMessage})
+var sFailoverDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailoverDBClusterMessage_DBClusterIdentifier})
+var sFailoverDBClusterMessage_TargetDBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailoverDBClusterMessage_TargetDBInstanceIdentifier})
+var sFailoverDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverDBClusterResult, Members: &mFailoverDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eFailoverDBClusterResult})
+var sFailoverDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eFailoverDBClusterResult_DBCluster})
+var sFailoverGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverGlobalClusterMessage, Members: &mFailoverGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eFailoverGlobalClusterMessage})
+var sFailoverGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eFailoverGlobalClusterMessage_GlobalClusterIdentifier})
+var sFailoverGlobalClusterMessage_TargetDbClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDbClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailoverGlobalClusterMessage_TargetDbClusterIdentifier})
+var sFailoverGlobalClusterMessage_AllowDataLoss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowDataLoss", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eFailoverGlobalClusterMessage_AllowDataLoss})
+var sFailoverGlobalClusterMessage_Switchover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Switchover", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eFailoverGlobalClusterMessage_Switchover})
+var sFailoverGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailoverGlobalClusterResult, Members: &mFailoverGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eFailoverGlobalClusterResult})
+var sFailoverGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eFailoverGlobalClusterResult_GlobalCluster})
+var sListTagsForResourceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceMessage, Members: &mListTagsForResourceMessage, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceMessage})
+var sListTagsForResourceMessage_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceMessage_ResourceName})
+var sListTagsForResourceMessage_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceMessage_Filters})
+var sTagListMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagListMessage, Members: &mTagListMessage, Type: smithy.ShapeTypeStructure, Ext: &eTagListMessage})
+var sTagListMessage_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagListMessage_TagList})
+var sModifyDBClusterEndpointMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterEndpointMessage, Members: &mModifyDBClusterEndpointMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterEndpointMessage})
+var sModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier})
+var sModifyDBClusterEndpointMessage_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointMessage_EndpointType})
+var sModifyDBClusterEndpointMessage_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterEndpointMessage_StaticMembers})
+var sModifyDBClusterEndpointMessage_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterEndpointMessage_ExcludedMembers})
+var sModifyDBClusterEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterEndpointOutput, Members: &mModifyDBClusterEndpointOutput, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterEndpointOutput})
+var sModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier})
+var sModifyDBClusterEndpointOutput_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_DBClusterIdentifier})
+var sModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointResourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier})
+var sModifyDBClusterEndpointOutput_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_Endpoint})
+var sModifyDBClusterEndpointOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_Status})
+var sModifyDBClusterEndpointOutput_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_EndpointType})
+var sModifyDBClusterEndpointOutput_CustomEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEndpointType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_CustomEndpointType})
+var sModifyDBClusterEndpointOutput_StaticMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StaticMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterEndpointOutput_StaticMembers})
+var sModifyDBClusterEndpointOutput_ExcludedMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedMembers", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterEndpointOutput_ExcludedMembers})
+var sModifyDBClusterEndpointOutput_DBClusterEndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterEndpointArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterEndpointOutput_DBClusterEndpointArn})
+var sModifyDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterMessage, Members: &mModifyDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterMessage})
+var sModifyDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_DBClusterIdentifier})
+var sModifyDBClusterMessage_NewDBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewDBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_NewDBClusterIdentifier})
+var sModifyDBClusterMessage_ApplyImmediately = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyImmediately", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBClusterMessage_ApplyImmediately})
+var sModifyDBClusterMessage_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBClusterMessage_BackupRetentionPeriod})
+var sModifyDBClusterMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_DBClusterParameterGroupName})
+var sModifyDBClusterMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterMessage_VpcSecurityGroupIds})
+var sModifyDBClusterMessage_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBClusterMessage_Port})
+var sModifyDBClusterMessage_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_MasterUserPassword})
+var sModifyDBClusterMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_OptionGroupName})
+var sModifyDBClusterMessage_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_PreferredBackupWindow})
+var sModifyDBClusterMessage_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_PreferredMaintenanceWindow})
+var sModifyDBClusterMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBClusterMessage_EnableIAMDatabaseAuthentication})
+var sModifyDBClusterMessage_CloudwatchLogsExportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudwatchLogsExportConfiguration", ID: &iCloudwatchLogsExportConfiguration, Members: &mCloudwatchLogsExportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterMessage_CloudwatchLogsExportConfiguration})
+var sModifyDBClusterMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_EngineVersion})
+var sModifyDBClusterMessage_AllowMajorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowMajorVersionUpgrade", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBClusterMessage_AllowMajorVersionUpgrade})
+var sModifyDBClusterMessage_DBInstanceParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_DBInstanceParameterGroupName})
+var sModifyDBClusterMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBClusterMessage_DeletionProtection})
+var sModifyDBClusterMessage_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBClusterMessage_CopyTagsToSnapshot})
+var sModifyDBClusterMessage_ServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessV2ScalingConfiguration", ID: &iServerlessV2ScalingConfiguration, Members: &mServerlessV2ScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterMessage_ServerlessV2ScalingConfiguration})
+var sModifyDBClusterMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_StorageType})
+var sModifyDBClusterMessage_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterMessage_NetworkType})
+var sModifyDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterResult, Members: &mModifyDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterResult})
+var sModifyDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterResult_DBCluster})
+var sModifyDBClusterParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterParameterGroupMessage, Members: &mModifyDBClusterParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterParameterGroupMessage})
+var sModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName})
+var sModifyDBClusterParameterGroupMessage_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterParameterGroupMessage_Parameters})
+var sDBClusterParameterGroupNameMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBClusterParameterGroupNameMessage, Members: &mDBClusterParameterGroupNameMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBClusterParameterGroupNameMessage})
+var sDBClusterParameterGroupNameMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBClusterParameterGroupNameMessage_DBClusterParameterGroupName})
+var sModifyDBClusterSnapshotAttributeMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterSnapshotAttributeMessage, Members: &mModifyDBClusterSnapshotAttributeMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterSnapshotAttributeMessage})
+var sModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier})
+var sModifyDBClusterSnapshotAttributeMessage_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBClusterSnapshotAttributeMessage_AttributeName})
+var sModifyDBClusterSnapshotAttributeMessage_ValuesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValuesToAdd", ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterSnapshotAttributeMessage_ValuesToAdd})
+var sModifyDBClusterSnapshotAttributeMessage_ValuesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValuesToRemove", ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &eModifyDBClusterSnapshotAttributeMessage_ValuesToRemove})
+var sModifyDBClusterSnapshotAttributeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBClusterSnapshotAttributeResult, Members: &mModifyDBClusterSnapshotAttributeResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterSnapshotAttributeResult})
+var sModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterSnapshotAttributesResult", ID: &iDBClusterSnapshotAttributesResult, Members: &mDBClusterSnapshotAttributesResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult})
+var sModifyDBInstanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBInstanceMessage, Members: &mModifyDBInstanceMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBInstanceMessage})
+var sModifyDBInstanceMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_DBInstanceIdentifier})
+var sModifyDBInstanceMessage_AllocatedStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedStorage", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_AllocatedStorage})
+var sModifyDBInstanceMessage_DBInstanceClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceClass", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_DBInstanceClass})
+var sModifyDBInstanceMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_DBSubnetGroupName})
+var sModifyDBInstanceMessage_DBSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSecurityGroups", ID: &i_DBSecurityGroupNameList, Members: &m_DBSecurityGroupNameList, Type: smithy.ShapeTypeList, Ext: &eModifyDBInstanceMessage_DBSecurityGroups})
+var sModifyDBInstanceMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eModifyDBInstanceMessage_VpcSecurityGroupIds})
+var sModifyDBInstanceMessage_ApplyImmediately = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyImmediately", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_ApplyImmediately})
+var sModifyDBInstanceMessage_MasterUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterUserPassword", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_MasterUserPassword})
+var sModifyDBInstanceMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_DBParameterGroupName})
+var sModifyDBInstanceMessage_BackupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupRetentionPeriod", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_BackupRetentionPeriod})
+var sModifyDBInstanceMessage_PreferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredBackupWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_PreferredBackupWindow})
+var sModifyDBInstanceMessage_PreferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredMaintenanceWindow", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_PreferredMaintenanceWindow})
+var sModifyDBInstanceMessage_MultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiAZ", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_MultiAZ})
+var sModifyDBInstanceMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_EngineVersion})
+var sModifyDBInstanceMessage_AllowMajorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowMajorVersionUpgrade", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_AllowMajorVersionUpgrade})
+var sModifyDBInstanceMessage_AutoMinorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoMinorVersionUpgrade", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_AutoMinorVersionUpgrade})
+var sModifyDBInstanceMessage_LicenseModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseModel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_LicenseModel})
+var sModifyDBInstanceMessage_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_Iops})
+var sModifyDBInstanceMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_OptionGroupName})
+var sModifyDBInstanceMessage_NewDBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewDBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_NewDBInstanceIdentifier})
+var sModifyDBInstanceMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_StorageType})
+var sModifyDBInstanceMessage_TdeCredentialArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TdeCredentialArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_TdeCredentialArn})
+var sModifyDBInstanceMessage_TdeCredentialPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TdeCredentialPassword", ID: &i_SensitiveString, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_TdeCredentialPassword})
+var sModifyDBInstanceMessage_CACertificateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACertificateIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_CACertificateIdentifier})
+var sModifyDBInstanceMessage_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_Domain})
+var sModifyDBInstanceMessage_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_CopyTagsToSnapshot})
+var sModifyDBInstanceMessage_MonitoringInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringInterval", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_MonitoringInterval})
+var sModifyDBInstanceMessage_DBPortNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBPortNumber", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_DBPortNumber})
+var sModifyDBInstanceMessage_PubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PubliclyAccessible", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_PubliclyAccessible})
+var sModifyDBInstanceMessage_MonitoringRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringRoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_MonitoringRoleArn})
+var sModifyDBInstanceMessage_DomainIAMRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIAMRoleName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_DomainIAMRoleName})
+var sModifyDBInstanceMessage_PromotionTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromotionTier", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eModifyDBInstanceMessage_PromotionTier})
+var sModifyDBInstanceMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_EnableIAMDatabaseAuthentication})
+var sModifyDBInstanceMessage_EnablePerformanceInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePerformanceInsights", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_EnablePerformanceInsights})
+var sModifyDBInstanceMessage_PerformanceInsightsKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceInsightsKMSKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBInstanceMessage_PerformanceInsightsKMSKeyId})
+var sModifyDBInstanceMessage_CloudwatchLogsExportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudwatchLogsExportConfiguration", ID: &iCloudwatchLogsExportConfiguration, Members: &mCloudwatchLogsExportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBInstanceMessage_CloudwatchLogsExportConfiguration})
+var sModifyDBInstanceMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyDBInstanceMessage_DeletionProtection})
+var sModifyDBInstanceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBInstanceResult, Members: &mModifyDBInstanceResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBInstanceResult})
+var sModifyDBInstanceResult_DBInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstance", ID: &iDBInstance, Members: &mDBInstance, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBInstanceResult_DBInstance})
+var sModifyDBParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBParameterGroupMessage, Members: &mModifyDBParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBParameterGroupMessage})
+var sModifyDBParameterGroupMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBParameterGroupMessage_DBParameterGroupName})
+var sModifyDBParameterGroupMessage_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eModifyDBParameterGroupMessage_Parameters})
+var sDBParameterGroupNameMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDBParameterGroupNameMessage, Members: &mDBParameterGroupNameMessage, Type: smithy.ShapeTypeStructure, Ext: &eDBParameterGroupNameMessage})
+var sDBParameterGroupNameMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDBParameterGroupNameMessage_DBParameterGroupName})
+var sModifyDBSubnetGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBSubnetGroupMessage, Members: &mModifyDBSubnetGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBSubnetGroupMessage})
+var sModifyDBSubnetGroupMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBSubnetGroupMessage_DBSubnetGroupName})
+var sModifyDBSubnetGroupMessage_DBSubnetGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyDBSubnetGroupMessage_DBSubnetGroupDescription})
+var sModifyDBSubnetGroupMessage_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdentifierList, Members: &m_SubnetIdentifierList, Type: smithy.ShapeTypeList, Ext: &eModifyDBSubnetGroupMessage_SubnetIds})
+var sModifyDBSubnetGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyDBSubnetGroupResult, Members: &mModifyDBSubnetGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBSubnetGroupResult})
+var sModifyDBSubnetGroupResult_DBSubnetGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroup", ID: &iDBSubnetGroup, Members: &mDBSubnetGroup, Type: smithy.ShapeTypeStructure, Ext: &eModifyDBSubnetGroupResult_DBSubnetGroup})
+var sModifyEventSubscriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyEventSubscriptionMessage, Members: &mModifyEventSubscriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyEventSubscriptionMessage})
+var sModifyEventSubscriptionMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyEventSubscriptionMessage_SubscriptionName})
+var sModifyEventSubscriptionMessage_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyEventSubscriptionMessage_SnsTopicArn})
+var sModifyEventSubscriptionMessage_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyEventSubscriptionMessage_SourceType})
+var sModifyEventSubscriptionMessage_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_EventCategoriesList, Members: &m_EventCategoriesList, Type: smithy.ShapeTypeList, Ext: &eModifyEventSubscriptionMessage_EventCategories})
+var sModifyEventSubscriptionMessage_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyEventSubscriptionMessage_Enabled})
+var sModifyEventSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyEventSubscriptionResult, Members: &mModifyEventSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyEventSubscriptionResult})
+var sModifyEventSubscriptionResult_EventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscription", ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eModifyEventSubscriptionResult_EventSubscription})
+var sModifyGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyGlobalClusterMessage, Members: &mModifyGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eModifyGlobalClusterMessage})
+var sModifyGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eModifyGlobalClusterMessage_GlobalClusterIdentifier})
+var sModifyGlobalClusterMessage_NewGlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewGlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eModifyGlobalClusterMessage_NewGlobalClusterIdentifier})
+var sModifyGlobalClusterMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyGlobalClusterMessage_DeletionProtection})
+var sModifyGlobalClusterMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eModifyGlobalClusterMessage_EngineVersion})
+var sModifyGlobalClusterMessage_AllowMajorVersionUpgrade = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowMajorVersionUpgrade", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eModifyGlobalClusterMessage_AllowMajorVersionUpgrade})
+var sModifyGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyGlobalClusterResult, Members: &mModifyGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eModifyGlobalClusterResult})
+var sModifyGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eModifyGlobalClusterResult_GlobalCluster})
+var sPromoteReadReplicaDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteReadReplicaDBClusterMessage, Members: &mPromoteReadReplicaDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &ePromoteReadReplicaDBClusterMessage})
+var sPromoteReadReplicaDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePromoteReadReplicaDBClusterMessage_DBClusterIdentifier})
+var sPromoteReadReplicaDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromoteReadReplicaDBClusterResult, Members: &mPromoteReadReplicaDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &ePromoteReadReplicaDBClusterResult})
+var sPromoteReadReplicaDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &ePromoteReadReplicaDBClusterResult_DBCluster})
+var sRebootDBInstanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootDBInstanceMessage, Members: &mRebootDBInstanceMessage, Type: smithy.ShapeTypeStructure, Ext: &eRebootDBInstanceMessage})
+var sRebootDBInstanceMessage_DBInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstanceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRebootDBInstanceMessage_DBInstanceIdentifier})
+var sRebootDBInstanceMessage_ForceFailover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceFailover", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRebootDBInstanceMessage_ForceFailover})
+var sRebootDBInstanceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootDBInstanceResult, Members: &mRebootDBInstanceResult, Type: smithy.ShapeTypeStructure, Ext: &eRebootDBInstanceResult})
+var sRebootDBInstanceResult_DBInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBInstance", ID: &iDBInstance, Members: &mDBInstance, Type: smithy.ShapeTypeStructure, Ext: &eRebootDBInstanceResult_DBInstance})
+var sRemoveFromGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFromGlobalClusterMessage, Members: &mRemoveFromGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFromGlobalClusterMessage})
+var sRemoveFromGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eRemoveFromGlobalClusterMessage_GlobalClusterIdentifier})
+var sRemoveFromGlobalClusterMessage_DbClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveFromGlobalClusterMessage_DbClusterIdentifier})
+var sRemoveFromGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveFromGlobalClusterResult, Members: &mRemoveFromGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFromGlobalClusterResult})
+var sRemoveFromGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eRemoveFromGlobalClusterResult_GlobalCluster})
+var sRemoveRoleFromDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRoleFromDBClusterMessage, Members: &mRemoveRoleFromDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eRemoveRoleFromDBClusterMessage})
+var sRemoveRoleFromDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveRoleFromDBClusterMessage_DBClusterIdentifier})
+var sRemoveRoleFromDBClusterMessage_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveRoleFromDBClusterMessage_RoleArn})
+var sRemoveRoleFromDBClusterMessage_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveRoleFromDBClusterMessage_FeatureName})
+var sRemoveSourceIdentifierFromSubscriptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveSourceIdentifierFromSubscriptionMessage, Members: &mRemoveSourceIdentifierFromSubscriptionMessage, Type: smithy.ShapeTypeStructure, Ext: &eRemoveSourceIdentifierFromSubscriptionMessage})
+var sRemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName})
+var sRemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier})
+var sRemoveSourceIdentifierFromSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveSourceIdentifierFromSubscriptionResult, Members: &mRemoveSourceIdentifierFromSubscriptionResult, Type: smithy.ShapeTypeStructure, Ext: &eRemoveSourceIdentifierFromSubscriptionResult})
+var sRemoveSourceIdentifierFromSubscriptionResult_EventSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSubscription", ID: &iEventSubscription, Members: &mEventSubscription, Type: smithy.ShapeTypeStructure, Ext: &eRemoveSourceIdentifierFromSubscriptionResult_EventSubscription})
+var sRemoveTagsFromResourceMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceMessage, Members: &mRemoveTagsFromResourceMessage, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsFromResourceMessage})
+var sRemoveTagsFromResourceMessage_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsFromResourceMessage_ResourceName})
+var sRemoveTagsFromResourceMessage_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsFromResourceMessage_TagKeys})
+var sResetDBClusterParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetDBClusterParameterGroupMessage, Members: &mResetDBClusterParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eResetDBClusterParameterGroupMessage})
+var sResetDBClusterParameterGroupMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResetDBClusterParameterGroupMessage_DBClusterParameterGroupName})
+var sResetDBClusterParameterGroupMessage_ResetAllParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAllParameters", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResetDBClusterParameterGroupMessage_ResetAllParameters})
+var sResetDBClusterParameterGroupMessage_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eResetDBClusterParameterGroupMessage_Parameters})
+var sResetDBParameterGroupMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetDBParameterGroupMessage, Members: &mResetDBParameterGroupMessage, Type: smithy.ShapeTypeStructure, Ext: &eResetDBParameterGroupMessage})
+var sResetDBParameterGroupMessage_DBParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResetDBParameterGroupMessage_DBParameterGroupName})
+var sResetDBParameterGroupMessage_ResetAllParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAllParameters", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResetDBParameterGroupMessage_ResetAllParameters})
+var sResetDBParameterGroupMessage_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersList, Members: &m_ParametersList, Type: smithy.ShapeTypeList, Ext: &eResetDBParameterGroupMessage_Parameters})
+var sRestoreDBClusterFromSnapshotMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterFromSnapshotMessage, Members: &mRestoreDBClusterFromSnapshotMessage, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterFromSnapshotMessage})
+var sRestoreDBClusterFromSnapshotMessage_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterFromSnapshotMessage_AvailabilityZones})
+var sRestoreDBClusterFromSnapshotMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_DBClusterIdentifier})
+var sRestoreDBClusterFromSnapshotMessage_SnapshotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_SnapshotIdentifier})
+var sRestoreDBClusterFromSnapshotMessage_Engine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engine", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_Engine})
+var sRestoreDBClusterFromSnapshotMessage_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_EngineVersion})
+var sRestoreDBClusterFromSnapshotMessage_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eRestoreDBClusterFromSnapshotMessage_Port})
+var sRestoreDBClusterFromSnapshotMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_DBSubnetGroupName})
+var sRestoreDBClusterFromSnapshotMessage_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_DatabaseName})
+var sRestoreDBClusterFromSnapshotMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_OptionGroupName})
+var sRestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds})
+var sRestoreDBClusterFromSnapshotMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterFromSnapshotMessage_Tags})
+var sRestoreDBClusterFromSnapshotMessage_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_KmsKeyId})
+var sRestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication})
+var sRestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports})
+var sRestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName})
+var sRestoreDBClusterFromSnapshotMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterFromSnapshotMessage_DeletionProtection})
+var sRestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshot", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot})
+var sRestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessV2ScalingConfiguration", ID: &iServerlessV2ScalingConfiguration, Members: &mServerlessV2ScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration})
+var sRestoreDBClusterFromSnapshotMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_StorageType})
+var sRestoreDBClusterFromSnapshotMessage_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterFromSnapshotMessage_NetworkType})
+var sRestoreDBClusterFromSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterFromSnapshotResult, Members: &mRestoreDBClusterFromSnapshotResult, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterFromSnapshotResult})
+var sRestoreDBClusterFromSnapshotResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterFromSnapshotResult_DBCluster})
+var sRestoreDBClusterToPointInTimeMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterToPointInTimeMessage, Members: &mRestoreDBClusterToPointInTimeMessage, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterToPointInTimeMessage})
+var sRestoreDBClusterToPointInTimeMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_DBClusterIdentifier})
+var sRestoreDBClusterToPointInTimeMessage_RestoreType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestoreType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_RestoreType})
+var sRestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier})
+var sRestoreDBClusterToPointInTimeMessage_RestoreToTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestoreToTime", ID: &i_TStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRestoreDBClusterToPointInTimeMessage_RestoreToTime})
+var sRestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseLatestRestorableTime", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime})
+var sRestoreDBClusterToPointInTimeMessage_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IntegerOptional, Type: smithy.ShapeTypeInteger, Ext: &eRestoreDBClusterToPointInTimeMessage_Port})
+var sRestoreDBClusterToPointInTimeMessage_DBSubnetGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBSubnetGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_DBSubnetGroupName})
+var sRestoreDBClusterToPointInTimeMessage_OptionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_OptionGroupName})
+var sRestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSecurityGroupIds", ID: &i_VpcSecurityGroupIdList, Members: &m_VpcSecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds})
+var sRestoreDBClusterToPointInTimeMessage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterToPointInTimeMessage_Tags})
+var sRestoreDBClusterToPointInTimeMessage_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_KmsKeyId})
+var sRestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIAMDatabaseAuthentication", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication})
+var sRestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableCloudwatchLogsExports", ID: &i_LogTypeList, Members: &m_LogTypeList, Type: smithy.ShapeTypeList, Ext: &eRestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports})
+var sRestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterParameterGroupName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName})
+var sRestoreDBClusterToPointInTimeMessage_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionProtection", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean, Ext: &eRestoreDBClusterToPointInTimeMessage_DeletionProtection})
+var sRestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessV2ScalingConfiguration", ID: &iServerlessV2ScalingConfiguration, Members: &mServerlessV2ScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration})
+var sRestoreDBClusterToPointInTimeMessage_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_StorageType})
+var sRestoreDBClusterToPointInTimeMessage_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRestoreDBClusterToPointInTimeMessage_NetworkType})
+var sRestoreDBClusterToPointInTimeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreDBClusterToPointInTimeResult, Members: &mRestoreDBClusterToPointInTimeResult, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterToPointInTimeResult})
+var sRestoreDBClusterToPointInTimeResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eRestoreDBClusterToPointInTimeResult_DBCluster})
+var sStartDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDBClusterMessage, Members: &mStartDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eStartDBClusterMessage})
+var sStartDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStartDBClusterMessage_DBClusterIdentifier})
+var sStartDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDBClusterResult, Members: &mStartDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eStartDBClusterResult})
+var sStartDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eStartDBClusterResult_DBCluster})
+var sStopDBClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDBClusterMessage, Members: &mStopDBClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eStopDBClusterMessage})
+var sStopDBClusterMessage_DBClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStopDBClusterMessage_DBClusterIdentifier})
+var sStopDBClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDBClusterResult, Members: &mStopDBClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eStopDBClusterResult})
+var sStopDBClusterResult_DBCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBCluster", ID: &iDBCluster, Members: &mDBCluster, Type: smithy.ShapeTypeStructure, Ext: &eStopDBClusterResult_DBCluster})
+var sSwitchoverGlobalClusterMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSwitchoverGlobalClusterMessage, Members: &mSwitchoverGlobalClusterMessage, Type: smithy.ShapeTypeStructure, Ext: &eSwitchoverGlobalClusterMessage})
+var sSwitchoverGlobalClusterMessage_GlobalClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalClusterIdentifier", ID: &i_GlobalClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eSwitchoverGlobalClusterMessage_GlobalClusterIdentifier})
+var sSwitchoverGlobalClusterMessage_TargetDbClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDbClusterIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSwitchoverGlobalClusterMessage_TargetDbClusterIdentifier})
+var sSwitchoverGlobalClusterResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSwitchoverGlobalClusterResult, Members: &mSwitchoverGlobalClusterResult, Type: smithy.ShapeTypeStructure, Ext: &eSwitchoverGlobalClusterResult})
+var sSwitchoverGlobalClusterResult_GlobalCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalCluster", ID: &iGlobalCluster, Members: &mGlobalCluster, Type: smithy.ShapeTypeStructure, Ext: &eSwitchoverGlobalClusterResult_GlobalCluster})
+
+var AddRoleToDBCluster = &sAddRoleToDBCluster
+
+var AddSourceIdentifierToSubscription = &sAddSourceIdentifierToSubscription
+
+var AddTagsToResource = &sAddTagsToResource
+
+var ApplyPendingMaintenanceAction = &sApplyPendingMaintenanceAction
+
+var CopyDBClusterParameterGroup = &sCopyDBClusterParameterGroup
+
+var CopyDBClusterSnapshot = &sCopyDBClusterSnapshot
+
+var CopyDBParameterGroup = &sCopyDBParameterGroup
+
+var CreateDBCluster = &sCreateDBCluster
+
+var CreateDBClusterEndpoint = &sCreateDBClusterEndpoint
+
+var CreateDBClusterParameterGroup = &sCreateDBClusterParameterGroup
+
+var CreateDBClusterSnapshot = &sCreateDBClusterSnapshot
+
+var CreateDBInstance = &sCreateDBInstance
+
+var CreateDBParameterGroup = &sCreateDBParameterGroup
+
+var CreateDBSubnetGroup = &sCreateDBSubnetGroup
+
+var CreateEventSubscription = &sCreateEventSubscription
+
+var CreateGlobalCluster = &sCreateGlobalCluster
+
+var DeleteDBCluster = &sDeleteDBCluster
+
+var DeleteDBClusterEndpoint = &sDeleteDBClusterEndpoint
+
+var DeleteDBClusterParameterGroup = &sDeleteDBClusterParameterGroup
+
+var DeleteDBClusterSnapshot = &sDeleteDBClusterSnapshot
+
+var DeleteDBInstance = &sDeleteDBInstance
+
+var DeleteDBParameterGroup = &sDeleteDBParameterGroup
+
+var DeleteDBSubnetGroup = &sDeleteDBSubnetGroup
+
+var DeleteEventSubscription = &sDeleteEventSubscription
+
+var DeleteGlobalCluster = &sDeleteGlobalCluster
+
+var DescribeDBClusterEndpoints = &sDescribeDBClusterEndpoints
+
+var DescribeDBClusterParameterGroups = &sDescribeDBClusterParameterGroups
+
+var DescribeDBClusterParameters = &sDescribeDBClusterParameters
+
+var DescribeDBClusters = &sDescribeDBClusters
+
+var DescribeDBClusterSnapshotAttributes = &sDescribeDBClusterSnapshotAttributes
+
+var DescribeDBClusterSnapshots = &sDescribeDBClusterSnapshots
+
+var DescribeDBEngineVersions = &sDescribeDBEngineVersions
+
+var DescribeDBInstances = &sDescribeDBInstances
+
+var DescribeDBParameterGroups = &sDescribeDBParameterGroups
+
+var DescribeDBParameters = &sDescribeDBParameters
+
+var DescribeDBSubnetGroups = &sDescribeDBSubnetGroups
+
+var DescribeEngineDefaultClusterParameters = &sDescribeEngineDefaultClusterParameters
+
+var DescribeEngineDefaultParameters = &sDescribeEngineDefaultParameters
+
+var DescribeEventCategories = &sDescribeEventCategories
+
+var DescribeEvents = &sDescribeEvents
+
+var DescribeEventSubscriptions = &sDescribeEventSubscriptions
+
+var DescribeGlobalClusters = &sDescribeGlobalClusters
+
+var DescribeOrderableDBInstanceOptions = &sDescribeOrderableDBInstanceOptions
+
+var DescribePendingMaintenanceActions = &sDescribePendingMaintenanceActions
+
+var DescribeValidDBInstanceModifications = &sDescribeValidDBInstanceModifications
+
+var FailoverDBCluster = &sFailoverDBCluster
+
+var FailoverGlobalCluster = &sFailoverGlobalCluster
+
+var ListTagsForResource = &sListTagsForResource
+
+var ModifyDBCluster = &sModifyDBCluster
+
+var ModifyDBClusterEndpoint = &sModifyDBClusterEndpoint
+
+var ModifyDBClusterParameterGroup = &sModifyDBClusterParameterGroup
+
+var ModifyDBClusterSnapshotAttribute = &sModifyDBClusterSnapshotAttribute
+
+var ModifyDBInstance = &sModifyDBInstance
+
+var ModifyDBParameterGroup = &sModifyDBParameterGroup
+
+var ModifyDBSubnetGroup = &sModifyDBSubnetGroup
+
+var ModifyEventSubscription = &sModifyEventSubscription
+
+var ModifyGlobalCluster = &sModifyGlobalCluster
+
+var PromoteReadReplicaDBCluster = &sPromoteReadReplicaDBCluster
+
+var RebootDBInstance = &sRebootDBInstance
+
+var RemoveFromGlobalCluster = &sRemoveFromGlobalCluster
+
+var RemoveRoleFromDBCluster = &sRemoveRoleFromDBCluster
+
+var RemoveSourceIdentifierFromSubscription = &sRemoveSourceIdentifierFromSubscription
+
+var RemoveTagsFromResource = &sRemoveTagsFromResource
+
+var ResetDBClusterParameterGroup = &sResetDBClusterParameterGroup
+
+var ResetDBParameterGroup = &sResetDBParameterGroup
+
+var RestoreDBClusterFromSnapshot = &sRestoreDBClusterFromSnapshot
+
+var RestoreDBClusterToPointInTime = &sRestoreDBClusterToPointInTime
+
+var StartDBCluster = &sStartDBCluster
+
+var StopDBCluster = &sStopDBCluster
+
+var SwitchoverGlobalCluster = &sSwitchoverGlobalCluster
+
+var _AmazonRDSv19 = &s_AmazonRDSv19
+
+var ApplyMethod = &sApplyMethod
+var ApplyMethod_immediate = &sApplyMethod_immediate
+var ApplyMethod_pending_reboot = &sApplyMethod_pending_reboot
+
+var _AttributeValueList = &s_AttributeValueList
+var _AttributeValueList_member = &s_AttributeValueList_member
+
+var AuthorizationNotFoundFault = &sAuthorizationNotFoundFault
+var AuthorizationNotFoundFault_message = &sAuthorizationNotFoundFault_message
+
+var AvailabilityZone = &sAvailabilityZone
+var AvailabilityZone_Name = &sAvailabilityZone_Name
+
+var _AvailabilityZoneList = &s_AvailabilityZoneList
+var _AvailabilityZoneList_member = &s_AvailabilityZoneList_member
+
+var _AvailabilityZones = &s_AvailabilityZones
+var _AvailabilityZones_member = &s_AvailabilityZones_member
+
+var _Boolean = &s_Boolean
+
+var _BooleanOptional = &s_BooleanOptional
+
+var CertificateNotFoundFault = &sCertificateNotFoundFault
+var CertificateNotFoundFault_message = &sCertificateNotFoundFault_message
+
+var CharacterSet = &sCharacterSet
+var CharacterSet_CharacterSetName = &sCharacterSet_CharacterSetName
+var CharacterSet_CharacterSetDescription = &sCharacterSet_CharacterSetDescription
+
+var CloudwatchLogsExportConfiguration = &sCloudwatchLogsExportConfiguration
+var CloudwatchLogsExportConfiguration_EnableLogTypes = &sCloudwatchLogsExportConfiguration_EnableLogTypes
+var CloudwatchLogsExportConfiguration_DisableLogTypes = &sCloudwatchLogsExportConfiguration_DisableLogTypes
+
+var ClusterPendingModifiedValues = &sClusterPendingModifiedValues
+var ClusterPendingModifiedValues_PendingCloudwatchLogsExports = &sClusterPendingModifiedValues_PendingCloudwatchLogsExports
+var ClusterPendingModifiedValues_DBClusterIdentifier = &sClusterPendingModifiedValues_DBClusterIdentifier
+var ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled = &sClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled
+var ClusterPendingModifiedValues_EngineVersion = &sClusterPendingModifiedValues_EngineVersion
+var ClusterPendingModifiedValues_BackupRetentionPeriod = &sClusterPendingModifiedValues_BackupRetentionPeriod
+var ClusterPendingModifiedValues_StorageType = &sClusterPendingModifiedValues_StorageType
+var ClusterPendingModifiedValues_AllocatedStorage = &sClusterPendingModifiedValues_AllocatedStorage
+var ClusterPendingModifiedValues_Iops = &sClusterPendingModifiedValues_Iops
+var ClusterPendingModifiedValues_NetworkType = &sClusterPendingModifiedValues_NetworkType
+
+var DBCluster = &sDBCluster
+var DBCluster_AllocatedStorage = &sDBCluster_AllocatedStorage
+var DBCluster_AvailabilityZones = &sDBCluster_AvailabilityZones
+var DBCluster_BackupRetentionPeriod = &sDBCluster_BackupRetentionPeriod
+var DBCluster_CharacterSetName = &sDBCluster_CharacterSetName
+var DBCluster_DatabaseName = &sDBCluster_DatabaseName
+var DBCluster_DBClusterIdentifier = &sDBCluster_DBClusterIdentifier
+var DBCluster_DBClusterParameterGroup = &sDBCluster_DBClusterParameterGroup
+var DBCluster_DBSubnetGroup = &sDBCluster_DBSubnetGroup
+var DBCluster_Status = &sDBCluster_Status
+var DBCluster_PercentProgress = &sDBCluster_PercentProgress
+var DBCluster_EarliestRestorableTime = &sDBCluster_EarliestRestorableTime
+var DBCluster_Endpoint = &sDBCluster_Endpoint
+var DBCluster_ReaderEndpoint = &sDBCluster_ReaderEndpoint
+var DBCluster_MultiAZ = &sDBCluster_MultiAZ
+var DBCluster_Engine = &sDBCluster_Engine
+var DBCluster_EngineVersion = &sDBCluster_EngineVersion
+var DBCluster_LatestRestorableTime = &sDBCluster_LatestRestorableTime
+var DBCluster_Port = &sDBCluster_Port
+var DBCluster_MasterUsername = &sDBCluster_MasterUsername
+var DBCluster_DBClusterOptionGroupMemberships = &sDBCluster_DBClusterOptionGroupMemberships
+var DBCluster_PreferredBackupWindow = &sDBCluster_PreferredBackupWindow
+var DBCluster_PreferredMaintenanceWindow = &sDBCluster_PreferredMaintenanceWindow
+var DBCluster_ReplicationSourceIdentifier = &sDBCluster_ReplicationSourceIdentifier
+var DBCluster_ReadReplicaIdentifiers = &sDBCluster_ReadReplicaIdentifiers
+var DBCluster_DBClusterMembers = &sDBCluster_DBClusterMembers
+var DBCluster_VpcSecurityGroups = &sDBCluster_VpcSecurityGroups
+var DBCluster_HostedZoneId = &sDBCluster_HostedZoneId
+var DBCluster_StorageEncrypted = &sDBCluster_StorageEncrypted
+var DBCluster_KmsKeyId = &sDBCluster_KmsKeyId
+var DBCluster_DbClusterResourceId = &sDBCluster_DbClusterResourceId
+var DBCluster_DBClusterArn = &sDBCluster_DBClusterArn
+var DBCluster_AssociatedRoles = &sDBCluster_AssociatedRoles
+var DBCluster_IAMDatabaseAuthenticationEnabled = &sDBCluster_IAMDatabaseAuthenticationEnabled
+var DBCluster_CloneGroupId = &sDBCluster_CloneGroupId
+var DBCluster_ClusterCreateTime = &sDBCluster_ClusterCreateTime
+var DBCluster_CopyTagsToSnapshot = &sDBCluster_CopyTagsToSnapshot
+var DBCluster_EnabledCloudwatchLogsExports = &sDBCluster_EnabledCloudwatchLogsExports
+var DBCluster_PendingModifiedValues = &sDBCluster_PendingModifiedValues
+var DBCluster_DeletionProtection = &sDBCluster_DeletionProtection
+var DBCluster_CrossAccountClone = &sDBCluster_CrossAccountClone
+var DBCluster_AutomaticRestartTime = &sDBCluster_AutomaticRestartTime
+var DBCluster_ServerlessV2ScalingConfiguration = &sDBCluster_ServerlessV2ScalingConfiguration
+var DBCluster_GlobalClusterIdentifier = &sDBCluster_GlobalClusterIdentifier
+var DBCluster_IOOptimizedNextAllowedModificationTime = &sDBCluster_IOOptimizedNextAllowedModificationTime
+var DBCluster_StorageType = &sDBCluster_StorageType
+var DBCluster_NetworkType = &sDBCluster_NetworkType
+
+var DBClusterAlreadyExistsFault = &sDBClusterAlreadyExistsFault
+var DBClusterAlreadyExistsFault_message = &sDBClusterAlreadyExistsFault_message
+
+var DBClusterEndpoint = &sDBClusterEndpoint
+var DBClusterEndpoint_DBClusterEndpointIdentifier = &sDBClusterEndpoint_DBClusterEndpointIdentifier
+var DBClusterEndpoint_DBClusterIdentifier = &sDBClusterEndpoint_DBClusterIdentifier
+var DBClusterEndpoint_DBClusterEndpointResourceIdentifier = &sDBClusterEndpoint_DBClusterEndpointResourceIdentifier
+var DBClusterEndpoint_Endpoint = &sDBClusterEndpoint_Endpoint
+var DBClusterEndpoint_Status = &sDBClusterEndpoint_Status
+var DBClusterEndpoint_EndpointType = &sDBClusterEndpoint_EndpointType
+var DBClusterEndpoint_CustomEndpointType = &sDBClusterEndpoint_CustomEndpointType
+var DBClusterEndpoint_StaticMembers = &sDBClusterEndpoint_StaticMembers
+var DBClusterEndpoint_ExcludedMembers = &sDBClusterEndpoint_ExcludedMembers
+var DBClusterEndpoint_DBClusterEndpointArn = &sDBClusterEndpoint_DBClusterEndpointArn
+
+var DBClusterEndpointAlreadyExistsFault = &sDBClusterEndpointAlreadyExistsFault
+var DBClusterEndpointAlreadyExistsFault_message = &sDBClusterEndpointAlreadyExistsFault_message
+
+var _DBClusterEndpointList = &s_DBClusterEndpointList
+var _DBClusterEndpointList_member = &s_DBClusterEndpointList_member
+
+var DBClusterEndpointNotFoundFault = &sDBClusterEndpointNotFoundFault
+var DBClusterEndpointNotFoundFault_message = &sDBClusterEndpointNotFoundFault_message
+
+var DBClusterEndpointQuotaExceededFault = &sDBClusterEndpointQuotaExceededFault
+var DBClusterEndpointQuotaExceededFault_message = &sDBClusterEndpointQuotaExceededFault_message
+
+var _DBClusterList = &s_DBClusterList
+var _DBClusterList_member = &s_DBClusterList_member
+
+var DBClusterMember = &sDBClusterMember
+var DBClusterMember_DBInstanceIdentifier = &sDBClusterMember_DBInstanceIdentifier
+var DBClusterMember_IsClusterWriter = &sDBClusterMember_IsClusterWriter
+var DBClusterMember_DBClusterParameterGroupStatus = &sDBClusterMember_DBClusterParameterGroupStatus
+var DBClusterMember_PromotionTier = &sDBClusterMember_PromotionTier
+
+var _DBClusterMemberList = &s_DBClusterMemberList
+var _DBClusterMemberList_member = &s_DBClusterMemberList_member
+
+var DBClusterNotFoundFault = &sDBClusterNotFoundFault
+var DBClusterNotFoundFault_message = &sDBClusterNotFoundFault_message
+
+var _DBClusterOptionGroupMemberships = &s_DBClusterOptionGroupMemberships
+var _DBClusterOptionGroupMemberships_member = &s_DBClusterOptionGroupMemberships_member
+
+var DBClusterOptionGroupStatus = &sDBClusterOptionGroupStatus
+var DBClusterOptionGroupStatus_DBClusterOptionGroupName = &sDBClusterOptionGroupStatus_DBClusterOptionGroupName
+var DBClusterOptionGroupStatus_Status = &sDBClusterOptionGroupStatus_Status
+
+var DBClusterParameterGroup = &sDBClusterParameterGroup
+var DBClusterParameterGroup_DBClusterParameterGroupName = &sDBClusterParameterGroup_DBClusterParameterGroupName
+var DBClusterParameterGroup_DBParameterGroupFamily = &sDBClusterParameterGroup_DBParameterGroupFamily
+var DBClusterParameterGroup_Description = &sDBClusterParameterGroup_Description
+var DBClusterParameterGroup_DBClusterParameterGroupArn = &sDBClusterParameterGroup_DBClusterParameterGroupArn
+
+var _DBClusterParameterGroupList = &s_DBClusterParameterGroupList
+var _DBClusterParameterGroupList_member = &s_DBClusterParameterGroupList_member
+
+var DBClusterParameterGroupNotFoundFault = &sDBClusterParameterGroupNotFoundFault
+var DBClusterParameterGroupNotFoundFault_message = &sDBClusterParameterGroupNotFoundFault_message
+
+var DBClusterQuotaExceededFault = &sDBClusterQuotaExceededFault
+var DBClusterQuotaExceededFault_message = &sDBClusterQuotaExceededFault_message
+
+var DBClusterRole = &sDBClusterRole
+var DBClusterRole_RoleArn = &sDBClusterRole_RoleArn
+var DBClusterRole_Status = &sDBClusterRole_Status
+var DBClusterRole_FeatureName = &sDBClusterRole_FeatureName
+
+var DBClusterRoleAlreadyExistsFault = &sDBClusterRoleAlreadyExistsFault
+var DBClusterRoleAlreadyExistsFault_message = &sDBClusterRoleAlreadyExistsFault_message
+
+var DBClusterRoleNotFoundFault = &sDBClusterRoleNotFoundFault
+var DBClusterRoleNotFoundFault_message = &sDBClusterRoleNotFoundFault_message
+
+var DBClusterRoleQuotaExceededFault = &sDBClusterRoleQuotaExceededFault
+var DBClusterRoleQuotaExceededFault_message = &sDBClusterRoleQuotaExceededFault_message
+
+var _DBClusterRoles = &s_DBClusterRoles
+var _DBClusterRoles_member = &s_DBClusterRoles_member
+
+var DBClusterSnapshot = &sDBClusterSnapshot
+var DBClusterSnapshot_AvailabilityZones = &sDBClusterSnapshot_AvailabilityZones
+var DBClusterSnapshot_DBClusterSnapshotIdentifier = &sDBClusterSnapshot_DBClusterSnapshotIdentifier
+var DBClusterSnapshot_DBClusterIdentifier = &sDBClusterSnapshot_DBClusterIdentifier
+var DBClusterSnapshot_SnapshotCreateTime = &sDBClusterSnapshot_SnapshotCreateTime
+var DBClusterSnapshot_Engine = &sDBClusterSnapshot_Engine
+var DBClusterSnapshot_AllocatedStorage = &sDBClusterSnapshot_AllocatedStorage
+var DBClusterSnapshot_Status = &sDBClusterSnapshot_Status
+var DBClusterSnapshot_Port = &sDBClusterSnapshot_Port
+var DBClusterSnapshot_VpcId = &sDBClusterSnapshot_VpcId
+var DBClusterSnapshot_ClusterCreateTime = &sDBClusterSnapshot_ClusterCreateTime
+var DBClusterSnapshot_MasterUsername = &sDBClusterSnapshot_MasterUsername
+var DBClusterSnapshot_EngineVersion = &sDBClusterSnapshot_EngineVersion
+var DBClusterSnapshot_LicenseModel = &sDBClusterSnapshot_LicenseModel
+var DBClusterSnapshot_SnapshotType = &sDBClusterSnapshot_SnapshotType
+var DBClusterSnapshot_PercentProgress = &sDBClusterSnapshot_PercentProgress
+var DBClusterSnapshot_StorageEncrypted = &sDBClusterSnapshot_StorageEncrypted
+var DBClusterSnapshot_KmsKeyId = &sDBClusterSnapshot_KmsKeyId
+var DBClusterSnapshot_DBClusterSnapshotArn = &sDBClusterSnapshot_DBClusterSnapshotArn
+var DBClusterSnapshot_SourceDBClusterSnapshotArn = &sDBClusterSnapshot_SourceDBClusterSnapshotArn
+var DBClusterSnapshot_IAMDatabaseAuthenticationEnabled = &sDBClusterSnapshot_IAMDatabaseAuthenticationEnabled
+var DBClusterSnapshot_StorageType = &sDBClusterSnapshot_StorageType
+
+var DBClusterSnapshotAlreadyExistsFault = &sDBClusterSnapshotAlreadyExistsFault
+var DBClusterSnapshotAlreadyExistsFault_message = &sDBClusterSnapshotAlreadyExistsFault_message
+
+var DBClusterSnapshotAttribute = &sDBClusterSnapshotAttribute
+var DBClusterSnapshotAttribute_AttributeName = &sDBClusterSnapshotAttribute_AttributeName
+var DBClusterSnapshotAttribute_AttributeValues = &sDBClusterSnapshotAttribute_AttributeValues
+
+var _DBClusterSnapshotAttributeList = &s_DBClusterSnapshotAttributeList
+var _DBClusterSnapshotAttributeList_member = &s_DBClusterSnapshotAttributeList_member
+
+var DBClusterSnapshotAttributesResult = &sDBClusterSnapshotAttributesResult
+var DBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier = &sDBClusterSnapshotAttributesResult_DBClusterSnapshotIdentifier
+var DBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes = &sDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributes
+
+var _DBClusterSnapshotList = &s_DBClusterSnapshotList
+var _DBClusterSnapshotList_member = &s_DBClusterSnapshotList_member
+
+var DBClusterSnapshotNotFoundFault = &sDBClusterSnapshotNotFoundFault
+var DBClusterSnapshotNotFoundFault_message = &sDBClusterSnapshotNotFoundFault_message
+
+var DBEngineVersion = &sDBEngineVersion
+var DBEngineVersion_Engine = &sDBEngineVersion_Engine
+var DBEngineVersion_EngineVersion = &sDBEngineVersion_EngineVersion
+var DBEngineVersion_DBParameterGroupFamily = &sDBEngineVersion_DBParameterGroupFamily
+var DBEngineVersion_DBEngineDescription = &sDBEngineVersion_DBEngineDescription
+var DBEngineVersion_DBEngineVersionDescription = &sDBEngineVersion_DBEngineVersionDescription
+var DBEngineVersion_DefaultCharacterSet = &sDBEngineVersion_DefaultCharacterSet
+var DBEngineVersion_SupportedCharacterSets = &sDBEngineVersion_SupportedCharacterSets
+var DBEngineVersion_ValidUpgradeTarget = &sDBEngineVersion_ValidUpgradeTarget
+var DBEngineVersion_SupportedTimezones = &sDBEngineVersion_SupportedTimezones
+var DBEngineVersion_ExportableLogTypes = &sDBEngineVersion_ExportableLogTypes
+var DBEngineVersion_SupportsLogExportsToCloudwatchLogs = &sDBEngineVersion_SupportsLogExportsToCloudwatchLogs
+var DBEngineVersion_SupportsReadReplica = &sDBEngineVersion_SupportsReadReplica
+var DBEngineVersion_SupportsGlobalDatabases = &sDBEngineVersion_SupportsGlobalDatabases
+
+var _DBEngineVersionList = &s_DBEngineVersionList
+var _DBEngineVersionList_member = &s_DBEngineVersionList_member
+
+var DBInstance = &sDBInstance
+var DBInstance_DBInstanceIdentifier = &sDBInstance_DBInstanceIdentifier
+var DBInstance_DBInstanceClass = &sDBInstance_DBInstanceClass
+var DBInstance_Engine = &sDBInstance_Engine
+var DBInstance_DBInstanceStatus = &sDBInstance_DBInstanceStatus
+var DBInstance_MasterUsername = &sDBInstance_MasterUsername
+var DBInstance_DBName = &sDBInstance_DBName
+var DBInstance_Endpoint = &sDBInstance_Endpoint
+var DBInstance_AllocatedStorage = &sDBInstance_AllocatedStorage
+var DBInstance_InstanceCreateTime = &sDBInstance_InstanceCreateTime
+var DBInstance_PreferredBackupWindow = &sDBInstance_PreferredBackupWindow
+var DBInstance_BackupRetentionPeriod = &sDBInstance_BackupRetentionPeriod
+var DBInstance_DBSecurityGroups = &sDBInstance_DBSecurityGroups
+var DBInstance_VpcSecurityGroups = &sDBInstance_VpcSecurityGroups
+var DBInstance_DBParameterGroups = &sDBInstance_DBParameterGroups
+var DBInstance_AvailabilityZone = &sDBInstance_AvailabilityZone
+var DBInstance_DBSubnetGroup = &sDBInstance_DBSubnetGroup
+var DBInstance_PreferredMaintenanceWindow = &sDBInstance_PreferredMaintenanceWindow
+var DBInstance_PendingModifiedValues = &sDBInstance_PendingModifiedValues
+var DBInstance_LatestRestorableTime = &sDBInstance_LatestRestorableTime
+var DBInstance_MultiAZ = &sDBInstance_MultiAZ
+var DBInstance_EngineVersion = &sDBInstance_EngineVersion
+var DBInstance_AutoMinorVersionUpgrade = &sDBInstance_AutoMinorVersionUpgrade
+var DBInstance_ReadReplicaSourceDBInstanceIdentifier = &sDBInstance_ReadReplicaSourceDBInstanceIdentifier
+var DBInstance_ReadReplicaDBInstanceIdentifiers = &sDBInstance_ReadReplicaDBInstanceIdentifiers
+var DBInstance_ReadReplicaDBClusterIdentifiers = &sDBInstance_ReadReplicaDBClusterIdentifiers
+var DBInstance_LicenseModel = &sDBInstance_LicenseModel
+var DBInstance_Iops = &sDBInstance_Iops
+var DBInstance_OptionGroupMemberships = &sDBInstance_OptionGroupMemberships
+var DBInstance_CharacterSetName = &sDBInstance_CharacterSetName
+var DBInstance_SecondaryAvailabilityZone = &sDBInstance_SecondaryAvailabilityZone
+var DBInstance_PubliclyAccessible = &sDBInstance_PubliclyAccessible
+var DBInstance_StatusInfos = &sDBInstance_StatusInfos
+var DBInstance_StorageType = &sDBInstance_StorageType
+var DBInstance_TdeCredentialArn = &sDBInstance_TdeCredentialArn
+var DBInstance_DbInstancePort = &sDBInstance_DbInstancePort
+var DBInstance_DBClusterIdentifier = &sDBInstance_DBClusterIdentifier
+var DBInstance_StorageEncrypted = &sDBInstance_StorageEncrypted
+var DBInstance_KmsKeyId = &sDBInstance_KmsKeyId
+var DBInstance_DbiResourceId = &sDBInstance_DbiResourceId
+var DBInstance_CACertificateIdentifier = &sDBInstance_CACertificateIdentifier
+var DBInstance_DomainMemberships = &sDBInstance_DomainMemberships
+var DBInstance_CopyTagsToSnapshot = &sDBInstance_CopyTagsToSnapshot
+var DBInstance_MonitoringInterval = &sDBInstance_MonitoringInterval
+var DBInstance_EnhancedMonitoringResourceArn = &sDBInstance_EnhancedMonitoringResourceArn
+var DBInstance_MonitoringRoleArn = &sDBInstance_MonitoringRoleArn
+var DBInstance_PromotionTier = &sDBInstance_PromotionTier
+var DBInstance_DBInstanceArn = &sDBInstance_DBInstanceArn
+var DBInstance_Timezone = &sDBInstance_Timezone
+var DBInstance_IAMDatabaseAuthenticationEnabled = &sDBInstance_IAMDatabaseAuthenticationEnabled
+var DBInstance_PerformanceInsightsEnabled = &sDBInstance_PerformanceInsightsEnabled
+var DBInstance_PerformanceInsightsKMSKeyId = &sDBInstance_PerformanceInsightsKMSKeyId
+var DBInstance_EnabledCloudwatchLogsExports = &sDBInstance_EnabledCloudwatchLogsExports
+var DBInstance_DeletionProtection = &sDBInstance_DeletionProtection
+var DBInstance_NetworkType = &sDBInstance_NetworkType
+
+var DBInstanceAlreadyExistsFault = &sDBInstanceAlreadyExistsFault
+var DBInstanceAlreadyExistsFault_message = &sDBInstanceAlreadyExistsFault_message
+
+var _DBInstanceList = &s_DBInstanceList
+var _DBInstanceList_member = &s_DBInstanceList_member
+
+var DBInstanceNotFoundFault = &sDBInstanceNotFoundFault
+var DBInstanceNotFoundFault_message = &sDBInstanceNotFoundFault_message
+
+var DBInstanceStatusInfo = &sDBInstanceStatusInfo
+var DBInstanceStatusInfo_StatusType = &sDBInstanceStatusInfo_StatusType
+var DBInstanceStatusInfo_Normal = &sDBInstanceStatusInfo_Normal
+var DBInstanceStatusInfo_Status = &sDBInstanceStatusInfo_Status
+var DBInstanceStatusInfo_Message = &sDBInstanceStatusInfo_Message
+
+var _DBInstanceStatusInfoList = &s_DBInstanceStatusInfoList
+var _DBInstanceStatusInfoList_member = &s_DBInstanceStatusInfoList_member
+
+var DBParameterGroup = &sDBParameterGroup
+var DBParameterGroup_DBParameterGroupName = &sDBParameterGroup_DBParameterGroupName
+var DBParameterGroup_DBParameterGroupFamily = &sDBParameterGroup_DBParameterGroupFamily
+var DBParameterGroup_Description = &sDBParameterGroup_Description
+var DBParameterGroup_DBParameterGroupArn = &sDBParameterGroup_DBParameterGroupArn
+
+var DBParameterGroupAlreadyExistsFault = &sDBParameterGroupAlreadyExistsFault
+var DBParameterGroupAlreadyExistsFault_message = &sDBParameterGroupAlreadyExistsFault_message
+
+var _DBParameterGroupList = &s_DBParameterGroupList
+var _DBParameterGroupList_member = &s_DBParameterGroupList_member
+
+var DBParameterGroupNotFoundFault = &sDBParameterGroupNotFoundFault
+var DBParameterGroupNotFoundFault_message = &sDBParameterGroupNotFoundFault_message
+
+var DBParameterGroupQuotaExceededFault = &sDBParameterGroupQuotaExceededFault
+var DBParameterGroupQuotaExceededFault_message = &sDBParameterGroupQuotaExceededFault_message
+
+var DBParameterGroupStatus = &sDBParameterGroupStatus
+var DBParameterGroupStatus_DBParameterGroupName = &sDBParameterGroupStatus_DBParameterGroupName
+var DBParameterGroupStatus_ParameterApplyStatus = &sDBParameterGroupStatus_ParameterApplyStatus
+
+var _DBParameterGroupStatusList = &s_DBParameterGroupStatusList
+var _DBParameterGroupStatusList_member = &s_DBParameterGroupStatusList_member
+
+var DBSecurityGroupMembership = &sDBSecurityGroupMembership
+var DBSecurityGroupMembership_DBSecurityGroupName = &sDBSecurityGroupMembership_DBSecurityGroupName
+var DBSecurityGroupMembership_Status = &sDBSecurityGroupMembership_Status
+
+var _DBSecurityGroupMembershipList = &s_DBSecurityGroupMembershipList
+var _DBSecurityGroupMembershipList_member = &s_DBSecurityGroupMembershipList_member
+
+var _DBSecurityGroupNameList = &s_DBSecurityGroupNameList
+var _DBSecurityGroupNameList_member = &s_DBSecurityGroupNameList_member
+
+var DBSecurityGroupNotFoundFault = &sDBSecurityGroupNotFoundFault
+var DBSecurityGroupNotFoundFault_message = &sDBSecurityGroupNotFoundFault_message
+
+var DBSnapshotAlreadyExistsFault = &sDBSnapshotAlreadyExistsFault
+var DBSnapshotAlreadyExistsFault_message = &sDBSnapshotAlreadyExistsFault_message
+
+var DBSnapshotNotFoundFault = &sDBSnapshotNotFoundFault
+var DBSnapshotNotFoundFault_message = &sDBSnapshotNotFoundFault_message
+
+var DBSubnetGroup = &sDBSubnetGroup
+var DBSubnetGroup_DBSubnetGroupName = &sDBSubnetGroup_DBSubnetGroupName
+var DBSubnetGroup_DBSubnetGroupDescription = &sDBSubnetGroup_DBSubnetGroupDescription
+var DBSubnetGroup_VpcId = &sDBSubnetGroup_VpcId
+var DBSubnetGroup_SubnetGroupStatus = &sDBSubnetGroup_SubnetGroupStatus
+var DBSubnetGroup_Subnets = &sDBSubnetGroup_Subnets
+var DBSubnetGroup_DBSubnetGroupArn = &sDBSubnetGroup_DBSubnetGroupArn
+var DBSubnetGroup_SupportedNetworkTypes = &sDBSubnetGroup_SupportedNetworkTypes
+
+var DBSubnetGroupAlreadyExistsFault = &sDBSubnetGroupAlreadyExistsFault
+var DBSubnetGroupAlreadyExistsFault_message = &sDBSubnetGroupAlreadyExistsFault_message
+
+var DBSubnetGroupDoesNotCoverEnoughAZs = &sDBSubnetGroupDoesNotCoverEnoughAZs
+var DBSubnetGroupDoesNotCoverEnoughAZs_message = &sDBSubnetGroupDoesNotCoverEnoughAZs_message
+
+var DBSubnetGroupNotFoundFault = &sDBSubnetGroupNotFoundFault
+var DBSubnetGroupNotFoundFault_message = &sDBSubnetGroupNotFoundFault_message
+
+var DBSubnetGroupQuotaExceededFault = &sDBSubnetGroupQuotaExceededFault
+var DBSubnetGroupQuotaExceededFault_message = &sDBSubnetGroupQuotaExceededFault_message
+
+var _DBSubnetGroups = &s_DBSubnetGroups
+var _DBSubnetGroups_member = &s_DBSubnetGroups_member
+
+var DBSubnetQuotaExceededFault = &sDBSubnetQuotaExceededFault
+var DBSubnetQuotaExceededFault_message = &sDBSubnetQuotaExceededFault_message
+
+var DBUpgradeDependencyFailureFault = &sDBUpgradeDependencyFailureFault
+var DBUpgradeDependencyFailureFault_message = &sDBUpgradeDependencyFailureFault_message
+
+var DomainMembership = &sDomainMembership
+var DomainMembership_Domain = &sDomainMembership_Domain
+var DomainMembership_Status = &sDomainMembership_Status
+var DomainMembership_FQDN = &sDomainMembership_FQDN
+var DomainMembership_IAMRoleName = &sDomainMembership_IAMRoleName
+
+var _DomainMembershipList = &s_DomainMembershipList
+var _DomainMembershipList_member = &s_DomainMembershipList_member
+
+var DomainNotFoundFault = &sDomainNotFoundFault
+var DomainNotFoundFault_message = &sDomainNotFoundFault_message
+
+var _Double = &s_Double
+
+var _DoubleOptional = &s_DoubleOptional
+
+var DoubleRange = &sDoubleRange
+var DoubleRange_From = &sDoubleRange_From
+var DoubleRange_To = &sDoubleRange_To
+
+var _DoubleRangeList = &s_DoubleRangeList
+var _DoubleRangeList_member = &s_DoubleRangeList_member
+
+var Endpoint = &sEndpoint
+var Endpoint_Address = &sEndpoint_Address
+var Endpoint_Port = &sEndpoint_Port
+var Endpoint_HostedZoneId = &sEndpoint_HostedZoneId
+
+var EngineDefaults = &sEngineDefaults
+var EngineDefaults_DBParameterGroupFamily = &sEngineDefaults_DBParameterGroupFamily
+var EngineDefaults_Marker = &sEngineDefaults_Marker
+var EngineDefaults_Parameters = &sEngineDefaults_Parameters
+
+var Event = &sEvent
+var Event_SourceIdentifier = &sEvent_SourceIdentifier
+var Event_SourceType = &sEvent_SourceType
+var Event_Message = &sEvent_Message
+var Event_EventCategories = &sEvent_EventCategories
+var Event_Date = &sEvent_Date
+var Event_SourceArn = &sEvent_SourceArn
+
+var _EventCategoriesList = &s_EventCategoriesList
+var _EventCategoriesList_member = &s_EventCategoriesList_member
+
+var EventCategoriesMap = &sEventCategoriesMap
+var EventCategoriesMap_SourceType = &sEventCategoriesMap_SourceType
+var EventCategoriesMap_EventCategories = &sEventCategoriesMap_EventCategories
+
+var _EventCategoriesMapList = &s_EventCategoriesMapList
+var _EventCategoriesMapList_member = &s_EventCategoriesMapList_member
+
+var _EventList = &s_EventList
+var _EventList_member = &s_EventList_member
+
+var EventSubscription = &sEventSubscription
+var EventSubscription_CustomerAwsId = &sEventSubscription_CustomerAwsId
+var EventSubscription_CustSubscriptionId = &sEventSubscription_CustSubscriptionId
+var EventSubscription_SnsTopicArn = &sEventSubscription_SnsTopicArn
+var EventSubscription_Status = &sEventSubscription_Status
+var EventSubscription_SubscriptionCreationTime = &sEventSubscription_SubscriptionCreationTime
+var EventSubscription_SourceType = &sEventSubscription_SourceType
+var EventSubscription_SourceIdsList = &sEventSubscription_SourceIdsList
+var EventSubscription_EventCategoriesList = &sEventSubscription_EventCategoriesList
+var EventSubscription_Enabled = &sEventSubscription_Enabled
+var EventSubscription_EventSubscriptionArn = &sEventSubscription_EventSubscriptionArn
+
+var EventSubscriptionQuotaExceededFault = &sEventSubscriptionQuotaExceededFault
+var EventSubscriptionQuotaExceededFault_message = &sEventSubscriptionQuotaExceededFault_message
+
+var _EventSubscriptionsList = &s_EventSubscriptionsList
+var _EventSubscriptionsList_member = &s_EventSubscriptionsList_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var FailoverState = &sFailoverState
+var FailoverState_Status = &sFailoverState_Status
+var FailoverState_FromDbClusterArn = &sFailoverState_FromDbClusterArn
+var FailoverState_ToDbClusterArn = &sFailoverState_ToDbClusterArn
+var FailoverState_IsDataLossAllowed = &sFailoverState_IsDataLossAllowed
+
+var FailoverStatus = &sFailoverStatus
+var FailoverStatus_PENDING = &sFailoverStatus_PENDING
+var FailoverStatus_FAILING_OVER = &sFailoverStatus_FAILING_OVER
+var FailoverStatus_CANCELLING = &sFailoverStatus_CANCELLING
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_Values = &sFilter_Values
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _FilterValueList = &s_FilterValueList
+var _FilterValueList_member = &s_FilterValueList_member
+
+var GlobalCluster = &sGlobalCluster
+var GlobalCluster_GlobalClusterIdentifier = &sGlobalCluster_GlobalClusterIdentifier
+var GlobalCluster_GlobalClusterResourceId = &sGlobalCluster_GlobalClusterResourceId
+var GlobalCluster_GlobalClusterArn = &sGlobalCluster_GlobalClusterArn
+var GlobalCluster_Status = &sGlobalCluster_Status
+var GlobalCluster_Engine = &sGlobalCluster_Engine
+var GlobalCluster_EngineVersion = &sGlobalCluster_EngineVersion
+var GlobalCluster_DatabaseName = &sGlobalCluster_DatabaseName
+var GlobalCluster_StorageEncrypted = &sGlobalCluster_StorageEncrypted
+var GlobalCluster_DeletionProtection = &sGlobalCluster_DeletionProtection
+var GlobalCluster_GlobalClusterMembers = &sGlobalCluster_GlobalClusterMembers
+var GlobalCluster_FailoverState = &sGlobalCluster_FailoverState
+var GlobalCluster_TagList = &sGlobalCluster_TagList
+
+var GlobalClusterAlreadyExistsFault = &sGlobalClusterAlreadyExistsFault
+var GlobalClusterAlreadyExistsFault_message = &sGlobalClusterAlreadyExistsFault_message
+
+var _GlobalClusterIdentifier = &s_GlobalClusterIdentifier
+
+var _GlobalClusterList = &s_GlobalClusterList
+var _GlobalClusterList_member = &s_GlobalClusterList_member
+
+var GlobalClusterMember = &sGlobalClusterMember
+var GlobalClusterMember_DBClusterArn = &sGlobalClusterMember_DBClusterArn
+var GlobalClusterMember_Readers = &sGlobalClusterMember_Readers
+var GlobalClusterMember_IsWriter = &sGlobalClusterMember_IsWriter
+
+var _GlobalClusterMemberList = &s_GlobalClusterMemberList
+var _GlobalClusterMemberList_member = &s_GlobalClusterMemberList_member
+
+var GlobalClusterNotFoundFault = &sGlobalClusterNotFoundFault
+var GlobalClusterNotFoundFault_message = &sGlobalClusterNotFoundFault_message
+
+var GlobalClusterQuotaExceededFault = &sGlobalClusterQuotaExceededFault
+var GlobalClusterQuotaExceededFault_message = &sGlobalClusterQuotaExceededFault_message
+
+var InstanceQuotaExceededFault = &sInstanceQuotaExceededFault
+var InstanceQuotaExceededFault_message = &sInstanceQuotaExceededFault_message
+
+var InsufficientDBClusterCapacityFault = &sInsufficientDBClusterCapacityFault
+var InsufficientDBClusterCapacityFault_message = &sInsufficientDBClusterCapacityFault_message
+
+var InsufficientDBInstanceCapacityFault = &sInsufficientDBInstanceCapacityFault
+var InsufficientDBInstanceCapacityFault_message = &sInsufficientDBInstanceCapacityFault_message
+
+var InsufficientStorageClusterCapacityFault = &sInsufficientStorageClusterCapacityFault
+var InsufficientStorageClusterCapacityFault_message = &sInsufficientStorageClusterCapacityFault_message
+
+var _Integer = &s_Integer
+
+var _IntegerOptional = &s_IntegerOptional
+
+var InvalidDBClusterEndpointStateFault = &sInvalidDBClusterEndpointStateFault
+var InvalidDBClusterEndpointStateFault_message = &sInvalidDBClusterEndpointStateFault_message
+
+var InvalidDBClusterSnapshotStateFault = &sInvalidDBClusterSnapshotStateFault
+var InvalidDBClusterSnapshotStateFault_message = &sInvalidDBClusterSnapshotStateFault_message
+
+var InvalidDBClusterStateFault = &sInvalidDBClusterStateFault
+var InvalidDBClusterStateFault_message = &sInvalidDBClusterStateFault_message
+
+var InvalidDBInstanceStateFault = &sInvalidDBInstanceStateFault
+var InvalidDBInstanceStateFault_message = &sInvalidDBInstanceStateFault_message
+
+var InvalidDBParameterGroupStateFault = &sInvalidDBParameterGroupStateFault
+var InvalidDBParameterGroupStateFault_message = &sInvalidDBParameterGroupStateFault_message
+
+var InvalidDBSecurityGroupStateFault = &sInvalidDBSecurityGroupStateFault
+var InvalidDBSecurityGroupStateFault_message = &sInvalidDBSecurityGroupStateFault_message
+
+var InvalidDBSnapshotStateFault = &sInvalidDBSnapshotStateFault
+var InvalidDBSnapshotStateFault_message = &sInvalidDBSnapshotStateFault_message
+
+var InvalidDBSubnetGroupStateFault = &sInvalidDBSubnetGroupStateFault
+var InvalidDBSubnetGroupStateFault_message = &sInvalidDBSubnetGroupStateFault_message
+
+var InvalidDBSubnetStateFault = &sInvalidDBSubnetStateFault
+var InvalidDBSubnetStateFault_message = &sInvalidDBSubnetStateFault_message
+
+var InvalidEventSubscriptionStateFault = &sInvalidEventSubscriptionStateFault
+var InvalidEventSubscriptionStateFault_message = &sInvalidEventSubscriptionStateFault_message
+
+var InvalidGlobalClusterStateFault = &sInvalidGlobalClusterStateFault
+var InvalidGlobalClusterStateFault_message = &sInvalidGlobalClusterStateFault_message
+
+var InvalidRestoreFault = &sInvalidRestoreFault
+var InvalidRestoreFault_message = &sInvalidRestoreFault_message
+
+var InvalidSubnet = &sInvalidSubnet
+var InvalidSubnet_message = &sInvalidSubnet_message
+
+var InvalidVPCNetworkStateFault = &sInvalidVPCNetworkStateFault
+var InvalidVPCNetworkStateFault_message = &sInvalidVPCNetworkStateFault_message
+
+var _KeyList = &s_KeyList
+var _KeyList_member = &s_KeyList_member
+
+var KMSKeyNotAccessibleFault = &sKMSKeyNotAccessibleFault
+var KMSKeyNotAccessibleFault_message = &sKMSKeyNotAccessibleFault_message
+
+var _LogTypeList = &s_LogTypeList
+var _LogTypeList_member = &s_LogTypeList_member
+
+var NetworkTypeNotSupportedFault = &sNetworkTypeNotSupportedFault
+var NetworkTypeNotSupportedFault_message = &sNetworkTypeNotSupportedFault_message
+
+var OptionGroupMembership = &sOptionGroupMembership
+var OptionGroupMembership_OptionGroupName = &sOptionGroupMembership_OptionGroupName
+var OptionGroupMembership_Status = &sOptionGroupMembership_Status
+
+var _OptionGroupMembershipList = &s_OptionGroupMembershipList
+var _OptionGroupMembershipList_member = &s_OptionGroupMembershipList_member
+
+var OptionGroupNotFoundFault = &sOptionGroupNotFoundFault
+var OptionGroupNotFoundFault_message = &sOptionGroupNotFoundFault_message
+
+var OrderableDBInstanceOption = &sOrderableDBInstanceOption
+var OrderableDBInstanceOption_Engine = &sOrderableDBInstanceOption_Engine
+var OrderableDBInstanceOption_EngineVersion = &sOrderableDBInstanceOption_EngineVersion
+var OrderableDBInstanceOption_DBInstanceClass = &sOrderableDBInstanceOption_DBInstanceClass
+var OrderableDBInstanceOption_LicenseModel = &sOrderableDBInstanceOption_LicenseModel
+var OrderableDBInstanceOption_AvailabilityZones = &sOrderableDBInstanceOption_AvailabilityZones
+var OrderableDBInstanceOption_MultiAZCapable = &sOrderableDBInstanceOption_MultiAZCapable
+var OrderableDBInstanceOption_ReadReplicaCapable = &sOrderableDBInstanceOption_ReadReplicaCapable
+var OrderableDBInstanceOption_Vpc = &sOrderableDBInstanceOption_Vpc
+var OrderableDBInstanceOption_SupportsStorageEncryption = &sOrderableDBInstanceOption_SupportsStorageEncryption
+var OrderableDBInstanceOption_StorageType = &sOrderableDBInstanceOption_StorageType
+var OrderableDBInstanceOption_SupportsIops = &sOrderableDBInstanceOption_SupportsIops
+var OrderableDBInstanceOption_SupportsEnhancedMonitoring = &sOrderableDBInstanceOption_SupportsEnhancedMonitoring
+var OrderableDBInstanceOption_SupportsIAMDatabaseAuthentication = &sOrderableDBInstanceOption_SupportsIAMDatabaseAuthentication
+var OrderableDBInstanceOption_SupportsPerformanceInsights = &sOrderableDBInstanceOption_SupportsPerformanceInsights
+var OrderableDBInstanceOption_MinStorageSize = &sOrderableDBInstanceOption_MinStorageSize
+var OrderableDBInstanceOption_MaxStorageSize = &sOrderableDBInstanceOption_MaxStorageSize
+var OrderableDBInstanceOption_MinIopsPerDbInstance = &sOrderableDBInstanceOption_MinIopsPerDbInstance
+var OrderableDBInstanceOption_MaxIopsPerDbInstance = &sOrderableDBInstanceOption_MaxIopsPerDbInstance
+var OrderableDBInstanceOption_MinIopsPerGib = &sOrderableDBInstanceOption_MinIopsPerGib
+var OrderableDBInstanceOption_MaxIopsPerGib = &sOrderableDBInstanceOption_MaxIopsPerGib
+var OrderableDBInstanceOption_SupportsGlobalDatabases = &sOrderableDBInstanceOption_SupportsGlobalDatabases
+var OrderableDBInstanceOption_SupportedNetworkTypes = &sOrderableDBInstanceOption_SupportedNetworkTypes
+
+var _OrderableDBInstanceOptionsList = &s_OrderableDBInstanceOptionsList
+var _OrderableDBInstanceOptionsList_member = &s_OrderableDBInstanceOptionsList_member
+
+var Parameter = &sParameter
+var Parameter_ParameterName = &sParameter_ParameterName
+var Parameter_ParameterValue = &sParameter_ParameterValue
+var Parameter_Description = &sParameter_Description
+var Parameter_Source = &sParameter_Source
+var Parameter_ApplyType = &sParameter_ApplyType
+var Parameter_DataType = &sParameter_DataType
+var Parameter_AllowedValues = &sParameter_AllowedValues
+var Parameter_IsModifiable = &sParameter_IsModifiable
+var Parameter_MinimumEngineVersion = &sParameter_MinimumEngineVersion
+var Parameter_ApplyMethod = &sParameter_ApplyMethod
+
+var _ParametersList = &s_ParametersList
+var _ParametersList_member = &s_ParametersList_member
+
+var PendingCloudwatchLogsExports = &sPendingCloudwatchLogsExports
+var PendingCloudwatchLogsExports_LogTypesToEnable = &sPendingCloudwatchLogsExports_LogTypesToEnable
+var PendingCloudwatchLogsExports_LogTypesToDisable = &sPendingCloudwatchLogsExports_LogTypesToDisable
+
+var PendingMaintenanceAction = &sPendingMaintenanceAction
+var PendingMaintenanceAction_Action = &sPendingMaintenanceAction_Action
+var PendingMaintenanceAction_AutoAppliedAfterDate = &sPendingMaintenanceAction_AutoAppliedAfterDate
+var PendingMaintenanceAction_ForcedApplyDate = &sPendingMaintenanceAction_ForcedApplyDate
+var PendingMaintenanceAction_OptInStatus = &sPendingMaintenanceAction_OptInStatus
+var PendingMaintenanceAction_CurrentApplyDate = &sPendingMaintenanceAction_CurrentApplyDate
+var PendingMaintenanceAction_Description = &sPendingMaintenanceAction_Description
+
+var _PendingMaintenanceActionDetails = &s_PendingMaintenanceActionDetails
+var _PendingMaintenanceActionDetails_member = &s_PendingMaintenanceActionDetails_member
+
+var _PendingMaintenanceActions = &s_PendingMaintenanceActions
+var _PendingMaintenanceActions_member = &s_PendingMaintenanceActions_member
+
+var PendingModifiedValues = &sPendingModifiedValues
+var PendingModifiedValues_DBInstanceClass = &sPendingModifiedValues_DBInstanceClass
+var PendingModifiedValues_AllocatedStorage = &sPendingModifiedValues_AllocatedStorage
+var PendingModifiedValues_MasterUserPassword = &sPendingModifiedValues_MasterUserPassword
+var PendingModifiedValues_Port = &sPendingModifiedValues_Port
+var PendingModifiedValues_BackupRetentionPeriod = &sPendingModifiedValues_BackupRetentionPeriod
+var PendingModifiedValues_MultiAZ = &sPendingModifiedValues_MultiAZ
+var PendingModifiedValues_EngineVersion = &sPendingModifiedValues_EngineVersion
+var PendingModifiedValues_LicenseModel = &sPendingModifiedValues_LicenseModel
+var PendingModifiedValues_Iops = &sPendingModifiedValues_Iops
+var PendingModifiedValues_DBInstanceIdentifier = &sPendingModifiedValues_DBInstanceIdentifier
+var PendingModifiedValues_StorageType = &sPendingModifiedValues_StorageType
+var PendingModifiedValues_CACertificateIdentifier = &sPendingModifiedValues_CACertificateIdentifier
+var PendingModifiedValues_DBSubnetGroupName = &sPendingModifiedValues_DBSubnetGroupName
+var PendingModifiedValues_PendingCloudwatchLogsExports = &sPendingModifiedValues_PendingCloudwatchLogsExports
+
+var ProvisionedIopsNotAvailableInAZFault = &sProvisionedIopsNotAvailableInAZFault
+var ProvisionedIopsNotAvailableInAZFault_message = &sProvisionedIopsNotAvailableInAZFault_message
+
+var Range = &sRange
+var Range_From = &sRange_From
+var Range_To = &sRange_To
+var Range_Step = &sRange_Step
+
+var _RangeList = &s_RangeList
+var _RangeList_member = &s_RangeList_member
+
+var _ReadersArnList = &s_ReadersArnList
+var _ReadersArnList_member = &s_ReadersArnList_member
+
+var _ReadReplicaDBClusterIdentifierList = &s_ReadReplicaDBClusterIdentifierList
+var _ReadReplicaDBClusterIdentifierList_member = &s_ReadReplicaDBClusterIdentifierList_member
+
+var _ReadReplicaDBInstanceIdentifierList = &s_ReadReplicaDBInstanceIdentifierList
+var _ReadReplicaDBInstanceIdentifierList_member = &s_ReadReplicaDBInstanceIdentifierList_member
+
+var _ReadReplicaIdentifierList = &s_ReadReplicaIdentifierList
+var _ReadReplicaIdentifierList_member = &s_ReadReplicaIdentifierList_member
+
+var ResourceNotFoundFault = &sResourceNotFoundFault
+var ResourceNotFoundFault_message = &sResourceNotFoundFault_message
+
+var ResourcePendingMaintenanceActions = &sResourcePendingMaintenanceActions
+var ResourcePendingMaintenanceActions_ResourceIdentifier = &sResourcePendingMaintenanceActions_ResourceIdentifier
+var ResourcePendingMaintenanceActions_PendingMaintenanceActionDetails = &sResourcePendingMaintenanceActions_PendingMaintenanceActionDetails
+
+var _SensitiveString = &s_SensitiveString
+
+var ServerlessV2ScalingConfiguration = &sServerlessV2ScalingConfiguration
+var ServerlessV2ScalingConfiguration_MinCapacity = &sServerlessV2ScalingConfiguration_MinCapacity
+var ServerlessV2ScalingConfiguration_MaxCapacity = &sServerlessV2ScalingConfiguration_MaxCapacity
+
+var ServerlessV2ScalingConfigurationInfo = &sServerlessV2ScalingConfigurationInfo
+var ServerlessV2ScalingConfigurationInfo_MinCapacity = &sServerlessV2ScalingConfigurationInfo_MinCapacity
+var ServerlessV2ScalingConfigurationInfo_MaxCapacity = &sServerlessV2ScalingConfigurationInfo_MaxCapacity
+
+var SharedSnapshotQuotaExceededFault = &sSharedSnapshotQuotaExceededFault
+var SharedSnapshotQuotaExceededFault_message = &sSharedSnapshotQuotaExceededFault_message
+
+var SnapshotQuotaExceededFault = &sSnapshotQuotaExceededFault
+var SnapshotQuotaExceededFault_message = &sSnapshotQuotaExceededFault_message
+
+var SNSInvalidTopicFault = &sSNSInvalidTopicFault
+var SNSInvalidTopicFault_message = &sSNSInvalidTopicFault_message
+
+var SNSNoAuthorizationFault = &sSNSNoAuthorizationFault
+var SNSNoAuthorizationFault_message = &sSNSNoAuthorizationFault_message
+
+var SNSTopicArnNotFoundFault = &sSNSTopicArnNotFoundFault
+var SNSTopicArnNotFoundFault_message = &sSNSTopicArnNotFoundFault_message
+
+var _SourceIdsList = &s_SourceIdsList
+var _SourceIdsList_member = &s_SourceIdsList_member
+
+var SourceNotFoundFault = &sSourceNotFoundFault
+var SourceNotFoundFault_message = &sSourceNotFoundFault_message
+
+var SourceType = &sSourceType
+var SourceType_db_instance = &sSourceType_db_instance
+var SourceType_db_parameter_group = &sSourceType_db_parameter_group
+var SourceType_db_security_group = &sSourceType_db_security_group
+var SourceType_db_snapshot = &sSourceType_db_snapshot
+var SourceType_db_cluster = &sSourceType_db_cluster
+var SourceType_db_cluster_snapshot = &sSourceType_db_cluster_snapshot
+
+var StorageQuotaExceededFault = &sStorageQuotaExceededFault
+var StorageQuotaExceededFault_message = &sStorageQuotaExceededFault_message
+
+var StorageTypeNotSupportedFault = &sStorageTypeNotSupportedFault
+var StorageTypeNotSupportedFault_message = &sStorageTypeNotSupportedFault_message
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Subnet = &sSubnet
+var Subnet_SubnetIdentifier = &sSubnet_SubnetIdentifier
+var Subnet_SubnetAvailabilityZone = &sSubnet_SubnetAvailabilityZone
+var Subnet_SubnetStatus = &sSubnet_SubnetStatus
+
+var SubnetAlreadyInUse = &sSubnetAlreadyInUse
+var SubnetAlreadyInUse_message = &sSubnetAlreadyInUse_message
+
+var _SubnetIdentifierList = &s_SubnetIdentifierList
+var _SubnetIdentifierList_member = &s_SubnetIdentifierList_member
+
+var _SubnetList = &s_SubnetList
+var _SubnetList_member = &s_SubnetList_member
+
+var SubscriptionAlreadyExistFault = &sSubscriptionAlreadyExistFault
+var SubscriptionAlreadyExistFault_message = &sSubscriptionAlreadyExistFault_message
+
+var SubscriptionCategoryNotFoundFault = &sSubscriptionCategoryNotFoundFault
+var SubscriptionCategoryNotFoundFault_message = &sSubscriptionCategoryNotFoundFault_message
+
+var SubscriptionNotFoundFault = &sSubscriptionNotFoundFault
+var SubscriptionNotFoundFault_message = &sSubscriptionNotFoundFault_message
+
+var _SupportedCharacterSetsList = &s_SupportedCharacterSetsList
+var _SupportedCharacterSetsList_member = &s_SupportedCharacterSetsList_member
+
+var _SupportedTimezonesList = &s_SupportedTimezonesList
+var _SupportedTimezonesList_member = &s_SupportedTimezonesList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var Timezone = &sTimezone
+var Timezone_TimezoneName = &sTimezone_TimezoneName
+
+var _TStamp = &s_TStamp
+
+var UpgradeTarget = &sUpgradeTarget
+var UpgradeTarget_Engine = &sUpgradeTarget_Engine
+var UpgradeTarget_EngineVersion = &sUpgradeTarget_EngineVersion
+var UpgradeTarget_Description = &sUpgradeTarget_Description
+var UpgradeTarget_AutoUpgrade = &sUpgradeTarget_AutoUpgrade
+var UpgradeTarget_IsMajorVersionUpgrade = &sUpgradeTarget_IsMajorVersionUpgrade
+var UpgradeTarget_SupportsGlobalDatabases = &sUpgradeTarget_SupportsGlobalDatabases
+
+var ValidDBInstanceModificationsMessage = &sValidDBInstanceModificationsMessage
+var ValidDBInstanceModificationsMessage_Storage = &sValidDBInstanceModificationsMessage_Storage
+
+var ValidStorageOptions = &sValidStorageOptions
+var ValidStorageOptions_StorageType = &sValidStorageOptions_StorageType
+var ValidStorageOptions_StorageSize = &sValidStorageOptions_StorageSize
+var ValidStorageOptions_ProvisionedIops = &sValidStorageOptions_ProvisionedIops
+var ValidStorageOptions_IopsToStorageRatio = &sValidStorageOptions_IopsToStorageRatio
+
+var _ValidStorageOptionsList = &s_ValidStorageOptionsList
+var _ValidStorageOptionsList_member = &s_ValidStorageOptionsList_member
+
+var _ValidUpgradeTargetList = &s_ValidUpgradeTargetList
+var _ValidUpgradeTargetList_member = &s_ValidUpgradeTargetList_member
+
+var _VpcSecurityGroupIdList = &s_VpcSecurityGroupIdList
+var _VpcSecurityGroupIdList_member = &s_VpcSecurityGroupIdList_member
+
+var VpcSecurityGroupMembership = &sVpcSecurityGroupMembership
+var VpcSecurityGroupMembership_VpcSecurityGroupId = &sVpcSecurityGroupMembership_VpcSecurityGroupId
+var VpcSecurityGroupMembership_Status = &sVpcSecurityGroupMembership_Status
+
+var _VpcSecurityGroupMembershipList = &s_VpcSecurityGroupMembershipList
+var _VpcSecurityGroupMembershipList_member = &s_VpcSecurityGroupMembershipList_member
+
+var AddRoleToDBClusterMessage = &sAddRoleToDBClusterMessage
+var AddRoleToDBClusterMessage_DBClusterIdentifier = &sAddRoleToDBClusterMessage_DBClusterIdentifier
+var AddRoleToDBClusterMessage_RoleArn = &sAddRoleToDBClusterMessage_RoleArn
+var AddRoleToDBClusterMessage_FeatureName = &sAddRoleToDBClusterMessage_FeatureName
+
+var AddSourceIdentifierToSubscriptionMessage = &sAddSourceIdentifierToSubscriptionMessage
+var AddSourceIdentifierToSubscriptionMessage_SubscriptionName = &sAddSourceIdentifierToSubscriptionMessage_SubscriptionName
+var AddSourceIdentifierToSubscriptionMessage_SourceIdentifier = &sAddSourceIdentifierToSubscriptionMessage_SourceIdentifier
+
+var AddSourceIdentifierToSubscriptionResult = &sAddSourceIdentifierToSubscriptionResult
+var AddSourceIdentifierToSubscriptionResult_EventSubscription = &sAddSourceIdentifierToSubscriptionResult_EventSubscription
+
+var AddTagsToResourceMessage = &sAddTagsToResourceMessage
+var AddTagsToResourceMessage_ResourceName = &sAddTagsToResourceMessage_ResourceName
+var AddTagsToResourceMessage_Tags = &sAddTagsToResourceMessage_Tags
+
+var ApplyPendingMaintenanceActionMessage = &sApplyPendingMaintenanceActionMessage
+var ApplyPendingMaintenanceActionMessage_ResourceIdentifier = &sApplyPendingMaintenanceActionMessage_ResourceIdentifier
+var ApplyPendingMaintenanceActionMessage_ApplyAction = &sApplyPendingMaintenanceActionMessage_ApplyAction
+var ApplyPendingMaintenanceActionMessage_OptInType = &sApplyPendingMaintenanceActionMessage_OptInType
+
+var ApplyPendingMaintenanceActionResult = &sApplyPendingMaintenanceActionResult
+var ApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions = &sApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions
+
+var CopyDBClusterParameterGroupMessage = &sCopyDBClusterParameterGroupMessage
+var CopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier = &sCopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier
+var CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier = &sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier
+var CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription = &sCopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription
+var CopyDBClusterParameterGroupMessage_Tags = &sCopyDBClusterParameterGroupMessage_Tags
+
+var CopyDBClusterParameterGroupResult = &sCopyDBClusterParameterGroupResult
+var CopyDBClusterParameterGroupResult_DBClusterParameterGroup = &sCopyDBClusterParameterGroupResult_DBClusterParameterGroup
+
+var CopyDBClusterSnapshotMessage = &sCopyDBClusterSnapshotMessage
+var CopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier = &sCopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier
+var CopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier = &sCopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier
+var CopyDBClusterSnapshotMessage_KmsKeyId = &sCopyDBClusterSnapshotMessage_KmsKeyId
+var CopyDBClusterSnapshotMessage_PreSignedUrl = &sCopyDBClusterSnapshotMessage_PreSignedUrl
+var CopyDBClusterSnapshotMessage_CopyTags = &sCopyDBClusterSnapshotMessage_CopyTags
+var CopyDBClusterSnapshotMessage_Tags = &sCopyDBClusterSnapshotMessage_Tags
+var CopyDBClusterSnapshotMessage_SourceRegion = &sCopyDBClusterSnapshotMessage_SourceRegion
+var CopyDBClusterSnapshotMessage_DestinationRegion = &sCopyDBClusterSnapshotMessage_DestinationRegion
+
+var CopyDBClusterSnapshotResult = &sCopyDBClusterSnapshotResult
+var CopyDBClusterSnapshotResult_DBClusterSnapshot = &sCopyDBClusterSnapshotResult_DBClusterSnapshot
+
+var CopyDBParameterGroupMessage = &sCopyDBParameterGroupMessage
+var CopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier = &sCopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier
+var CopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier = &sCopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier
+var CopyDBParameterGroupMessage_TargetDBParameterGroupDescription = &sCopyDBParameterGroupMessage_TargetDBParameterGroupDescription
+var CopyDBParameterGroupMessage_Tags = &sCopyDBParameterGroupMessage_Tags
+
+var CopyDBParameterGroupResult = &sCopyDBParameterGroupResult
+var CopyDBParameterGroupResult_DBParameterGroup = &sCopyDBParameterGroupResult_DBParameterGroup
+
+var CreateDBClusterEndpointMessage = &sCreateDBClusterEndpointMessage
+var CreateDBClusterEndpointMessage_DBClusterIdentifier = &sCreateDBClusterEndpointMessage_DBClusterIdentifier
+var CreateDBClusterEndpointMessage_DBClusterEndpointIdentifier = &sCreateDBClusterEndpointMessage_DBClusterEndpointIdentifier
+var CreateDBClusterEndpointMessage_EndpointType = &sCreateDBClusterEndpointMessage_EndpointType
+var CreateDBClusterEndpointMessage_StaticMembers = &sCreateDBClusterEndpointMessage_StaticMembers
+var CreateDBClusterEndpointMessage_ExcludedMembers = &sCreateDBClusterEndpointMessage_ExcludedMembers
+var CreateDBClusterEndpointMessage_Tags = &sCreateDBClusterEndpointMessage_Tags
+
+var CreateDBClusterEndpointOutput = &sCreateDBClusterEndpointOutput
+var CreateDBClusterEndpointOutput_DBClusterEndpointIdentifier = &sCreateDBClusterEndpointOutput_DBClusterEndpointIdentifier
+var CreateDBClusterEndpointOutput_DBClusterIdentifier = &sCreateDBClusterEndpointOutput_DBClusterIdentifier
+var CreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = &sCreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier
+var CreateDBClusterEndpointOutput_Endpoint = &sCreateDBClusterEndpointOutput_Endpoint
+var CreateDBClusterEndpointOutput_Status = &sCreateDBClusterEndpointOutput_Status
+var CreateDBClusterEndpointOutput_EndpointType = &sCreateDBClusterEndpointOutput_EndpointType
+var CreateDBClusterEndpointOutput_CustomEndpointType = &sCreateDBClusterEndpointOutput_CustomEndpointType
+var CreateDBClusterEndpointOutput_StaticMembers = &sCreateDBClusterEndpointOutput_StaticMembers
+var CreateDBClusterEndpointOutput_ExcludedMembers = &sCreateDBClusterEndpointOutput_ExcludedMembers
+var CreateDBClusterEndpointOutput_DBClusterEndpointArn = &sCreateDBClusterEndpointOutput_DBClusterEndpointArn
+
+var CreateDBClusterMessage = &sCreateDBClusterMessage
+var CreateDBClusterMessage_AvailabilityZones = &sCreateDBClusterMessage_AvailabilityZones
+var CreateDBClusterMessage_BackupRetentionPeriod = &sCreateDBClusterMessage_BackupRetentionPeriod
+var CreateDBClusterMessage_CharacterSetName = &sCreateDBClusterMessage_CharacterSetName
+var CreateDBClusterMessage_CopyTagsToSnapshot = &sCreateDBClusterMessage_CopyTagsToSnapshot
+var CreateDBClusterMessage_DatabaseName = &sCreateDBClusterMessage_DatabaseName
+var CreateDBClusterMessage_DBClusterIdentifier = &sCreateDBClusterMessage_DBClusterIdentifier
+var CreateDBClusterMessage_DBClusterParameterGroupName = &sCreateDBClusterMessage_DBClusterParameterGroupName
+var CreateDBClusterMessage_VpcSecurityGroupIds = &sCreateDBClusterMessage_VpcSecurityGroupIds
+var CreateDBClusterMessage_DBSubnetGroupName = &sCreateDBClusterMessage_DBSubnetGroupName
+var CreateDBClusterMessage_Engine = &sCreateDBClusterMessage_Engine
+var CreateDBClusterMessage_EngineVersion = &sCreateDBClusterMessage_EngineVersion
+var CreateDBClusterMessage_Port = &sCreateDBClusterMessage_Port
+var CreateDBClusterMessage_MasterUsername = &sCreateDBClusterMessage_MasterUsername
+var CreateDBClusterMessage_MasterUserPassword = &sCreateDBClusterMessage_MasterUserPassword
+var CreateDBClusterMessage_OptionGroupName = &sCreateDBClusterMessage_OptionGroupName
+var CreateDBClusterMessage_PreferredBackupWindow = &sCreateDBClusterMessage_PreferredBackupWindow
+var CreateDBClusterMessage_PreferredMaintenanceWindow = &sCreateDBClusterMessage_PreferredMaintenanceWindow
+var CreateDBClusterMessage_ReplicationSourceIdentifier = &sCreateDBClusterMessage_ReplicationSourceIdentifier
+var CreateDBClusterMessage_Tags = &sCreateDBClusterMessage_Tags
+var CreateDBClusterMessage_StorageEncrypted = &sCreateDBClusterMessage_StorageEncrypted
+var CreateDBClusterMessage_KmsKeyId = &sCreateDBClusterMessage_KmsKeyId
+var CreateDBClusterMessage_PreSignedUrl = &sCreateDBClusterMessage_PreSignedUrl
+var CreateDBClusterMessage_EnableIAMDatabaseAuthentication = &sCreateDBClusterMessage_EnableIAMDatabaseAuthentication
+var CreateDBClusterMessage_EnableCloudwatchLogsExports = &sCreateDBClusterMessage_EnableCloudwatchLogsExports
+var CreateDBClusterMessage_DeletionProtection = &sCreateDBClusterMessage_DeletionProtection
+var CreateDBClusterMessage_ServerlessV2ScalingConfiguration = &sCreateDBClusterMessage_ServerlessV2ScalingConfiguration
+var CreateDBClusterMessage_GlobalClusterIdentifier = &sCreateDBClusterMessage_GlobalClusterIdentifier
+var CreateDBClusterMessage_StorageType = &sCreateDBClusterMessage_StorageType
+var CreateDBClusterMessage_NetworkType = &sCreateDBClusterMessage_NetworkType
+var CreateDBClusterMessage_SourceRegion = &sCreateDBClusterMessage_SourceRegion
+var CreateDBClusterMessage_DestinationRegion = &sCreateDBClusterMessage_DestinationRegion
+
+var CreateDBClusterResult = &sCreateDBClusterResult
+var CreateDBClusterResult_DBCluster = &sCreateDBClusterResult_DBCluster
+
+var CreateDBClusterParameterGroupMessage = &sCreateDBClusterParameterGroupMessage
+var CreateDBClusterParameterGroupMessage_DBClusterParameterGroupName = &sCreateDBClusterParameterGroupMessage_DBClusterParameterGroupName
+var CreateDBClusterParameterGroupMessage_DBParameterGroupFamily = &sCreateDBClusterParameterGroupMessage_DBParameterGroupFamily
+var CreateDBClusterParameterGroupMessage_Description = &sCreateDBClusterParameterGroupMessage_Description
+var CreateDBClusterParameterGroupMessage_Tags = &sCreateDBClusterParameterGroupMessage_Tags
+
+var CreateDBClusterParameterGroupResult = &sCreateDBClusterParameterGroupResult
+var CreateDBClusterParameterGroupResult_DBClusterParameterGroup = &sCreateDBClusterParameterGroupResult_DBClusterParameterGroup
+
+var CreateDBClusterSnapshotMessage = &sCreateDBClusterSnapshotMessage
+var CreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = &sCreateDBClusterSnapshotMessage_DBClusterSnapshotIdentifier
+var CreateDBClusterSnapshotMessage_DBClusterIdentifier = &sCreateDBClusterSnapshotMessage_DBClusterIdentifier
+var CreateDBClusterSnapshotMessage_Tags = &sCreateDBClusterSnapshotMessage_Tags
+
+var CreateDBClusterSnapshotResult = &sCreateDBClusterSnapshotResult
+var CreateDBClusterSnapshotResult_DBClusterSnapshot = &sCreateDBClusterSnapshotResult_DBClusterSnapshot
+
+var CreateDBInstanceMessage = &sCreateDBInstanceMessage
+var CreateDBInstanceMessage_DBName = &sCreateDBInstanceMessage_DBName
+var CreateDBInstanceMessage_DBInstanceIdentifier = &sCreateDBInstanceMessage_DBInstanceIdentifier
+var CreateDBInstanceMessage_AllocatedStorage = &sCreateDBInstanceMessage_AllocatedStorage
+var CreateDBInstanceMessage_DBInstanceClass = &sCreateDBInstanceMessage_DBInstanceClass
+var CreateDBInstanceMessage_Engine = &sCreateDBInstanceMessage_Engine
+var CreateDBInstanceMessage_MasterUsername = &sCreateDBInstanceMessage_MasterUsername
+var CreateDBInstanceMessage_MasterUserPassword = &sCreateDBInstanceMessage_MasterUserPassword
+var CreateDBInstanceMessage_DBSecurityGroups = &sCreateDBInstanceMessage_DBSecurityGroups
+var CreateDBInstanceMessage_VpcSecurityGroupIds = &sCreateDBInstanceMessage_VpcSecurityGroupIds
+var CreateDBInstanceMessage_AvailabilityZone = &sCreateDBInstanceMessage_AvailabilityZone
+var CreateDBInstanceMessage_DBSubnetGroupName = &sCreateDBInstanceMessage_DBSubnetGroupName
+var CreateDBInstanceMessage_PreferredMaintenanceWindow = &sCreateDBInstanceMessage_PreferredMaintenanceWindow
+var CreateDBInstanceMessage_DBParameterGroupName = &sCreateDBInstanceMessage_DBParameterGroupName
+var CreateDBInstanceMessage_BackupRetentionPeriod = &sCreateDBInstanceMessage_BackupRetentionPeriod
+var CreateDBInstanceMessage_PreferredBackupWindow = &sCreateDBInstanceMessage_PreferredBackupWindow
+var CreateDBInstanceMessage_Port = &sCreateDBInstanceMessage_Port
+var CreateDBInstanceMessage_MultiAZ = &sCreateDBInstanceMessage_MultiAZ
+var CreateDBInstanceMessage_EngineVersion = &sCreateDBInstanceMessage_EngineVersion
+var CreateDBInstanceMessage_AutoMinorVersionUpgrade = &sCreateDBInstanceMessage_AutoMinorVersionUpgrade
+var CreateDBInstanceMessage_LicenseModel = &sCreateDBInstanceMessage_LicenseModel
+var CreateDBInstanceMessage_Iops = &sCreateDBInstanceMessage_Iops
+var CreateDBInstanceMessage_OptionGroupName = &sCreateDBInstanceMessage_OptionGroupName
+var CreateDBInstanceMessage_CharacterSetName = &sCreateDBInstanceMessage_CharacterSetName
+var CreateDBInstanceMessage_PubliclyAccessible = &sCreateDBInstanceMessage_PubliclyAccessible
+var CreateDBInstanceMessage_Tags = &sCreateDBInstanceMessage_Tags
+var CreateDBInstanceMessage_DBClusterIdentifier = &sCreateDBInstanceMessage_DBClusterIdentifier
+var CreateDBInstanceMessage_StorageType = &sCreateDBInstanceMessage_StorageType
+var CreateDBInstanceMessage_TdeCredentialArn = &sCreateDBInstanceMessage_TdeCredentialArn
+var CreateDBInstanceMessage_TdeCredentialPassword = &sCreateDBInstanceMessage_TdeCredentialPassword
+var CreateDBInstanceMessage_StorageEncrypted = &sCreateDBInstanceMessage_StorageEncrypted
+var CreateDBInstanceMessage_KmsKeyId = &sCreateDBInstanceMessage_KmsKeyId
+var CreateDBInstanceMessage_Domain = &sCreateDBInstanceMessage_Domain
+var CreateDBInstanceMessage_CopyTagsToSnapshot = &sCreateDBInstanceMessage_CopyTagsToSnapshot
+var CreateDBInstanceMessage_MonitoringInterval = &sCreateDBInstanceMessage_MonitoringInterval
+var CreateDBInstanceMessage_MonitoringRoleArn = &sCreateDBInstanceMessage_MonitoringRoleArn
+var CreateDBInstanceMessage_DomainIAMRoleName = &sCreateDBInstanceMessage_DomainIAMRoleName
+var CreateDBInstanceMessage_PromotionTier = &sCreateDBInstanceMessage_PromotionTier
+var CreateDBInstanceMessage_Timezone = &sCreateDBInstanceMessage_Timezone
+var CreateDBInstanceMessage_EnableIAMDatabaseAuthentication = &sCreateDBInstanceMessage_EnableIAMDatabaseAuthentication
+var CreateDBInstanceMessage_EnablePerformanceInsights = &sCreateDBInstanceMessage_EnablePerformanceInsights
+var CreateDBInstanceMessage_PerformanceInsightsKMSKeyId = &sCreateDBInstanceMessage_PerformanceInsightsKMSKeyId
+var CreateDBInstanceMessage_EnableCloudwatchLogsExports = &sCreateDBInstanceMessage_EnableCloudwatchLogsExports
+var CreateDBInstanceMessage_DeletionProtection = &sCreateDBInstanceMessage_DeletionProtection
+
+var CreateDBInstanceResult = &sCreateDBInstanceResult
+var CreateDBInstanceResult_DBInstance = &sCreateDBInstanceResult_DBInstance
+
+var CreateDBParameterGroupMessage = &sCreateDBParameterGroupMessage
+var CreateDBParameterGroupMessage_DBParameterGroupName = &sCreateDBParameterGroupMessage_DBParameterGroupName
+var CreateDBParameterGroupMessage_DBParameterGroupFamily = &sCreateDBParameterGroupMessage_DBParameterGroupFamily
+var CreateDBParameterGroupMessage_Description = &sCreateDBParameterGroupMessage_Description
+var CreateDBParameterGroupMessage_Tags = &sCreateDBParameterGroupMessage_Tags
+
+var CreateDBParameterGroupResult = &sCreateDBParameterGroupResult
+var CreateDBParameterGroupResult_DBParameterGroup = &sCreateDBParameterGroupResult_DBParameterGroup
+
+var CreateDBSubnetGroupMessage = &sCreateDBSubnetGroupMessage
+var CreateDBSubnetGroupMessage_DBSubnetGroupName = &sCreateDBSubnetGroupMessage_DBSubnetGroupName
+var CreateDBSubnetGroupMessage_DBSubnetGroupDescription = &sCreateDBSubnetGroupMessage_DBSubnetGroupDescription
+var CreateDBSubnetGroupMessage_SubnetIds = &sCreateDBSubnetGroupMessage_SubnetIds
+var CreateDBSubnetGroupMessage_Tags = &sCreateDBSubnetGroupMessage_Tags
+
+var CreateDBSubnetGroupResult = &sCreateDBSubnetGroupResult
+var CreateDBSubnetGroupResult_DBSubnetGroup = &sCreateDBSubnetGroupResult_DBSubnetGroup
+
+var CreateEventSubscriptionMessage = &sCreateEventSubscriptionMessage
+var CreateEventSubscriptionMessage_SubscriptionName = &sCreateEventSubscriptionMessage_SubscriptionName
+var CreateEventSubscriptionMessage_SnsTopicArn = &sCreateEventSubscriptionMessage_SnsTopicArn
+var CreateEventSubscriptionMessage_SourceType = &sCreateEventSubscriptionMessage_SourceType
+var CreateEventSubscriptionMessage_EventCategories = &sCreateEventSubscriptionMessage_EventCategories
+var CreateEventSubscriptionMessage_SourceIds = &sCreateEventSubscriptionMessage_SourceIds
+var CreateEventSubscriptionMessage_Enabled = &sCreateEventSubscriptionMessage_Enabled
+var CreateEventSubscriptionMessage_Tags = &sCreateEventSubscriptionMessage_Tags
+
+var CreateEventSubscriptionResult = &sCreateEventSubscriptionResult
+var CreateEventSubscriptionResult_EventSubscription = &sCreateEventSubscriptionResult_EventSubscription
+
+var CreateGlobalClusterMessage = &sCreateGlobalClusterMessage
+var CreateGlobalClusterMessage_GlobalClusterIdentifier = &sCreateGlobalClusterMessage_GlobalClusterIdentifier
+var CreateGlobalClusterMessage_SourceDBClusterIdentifier = &sCreateGlobalClusterMessage_SourceDBClusterIdentifier
+var CreateGlobalClusterMessage_Engine = &sCreateGlobalClusterMessage_Engine
+var CreateGlobalClusterMessage_EngineVersion = &sCreateGlobalClusterMessage_EngineVersion
+var CreateGlobalClusterMessage_DeletionProtection = &sCreateGlobalClusterMessage_DeletionProtection
+var CreateGlobalClusterMessage_DatabaseName = &sCreateGlobalClusterMessage_DatabaseName
+var CreateGlobalClusterMessage_Tags = &sCreateGlobalClusterMessage_Tags
+var CreateGlobalClusterMessage_StorageEncrypted = &sCreateGlobalClusterMessage_StorageEncrypted
+
+var CreateGlobalClusterResult = &sCreateGlobalClusterResult
+var CreateGlobalClusterResult_GlobalCluster = &sCreateGlobalClusterResult_GlobalCluster
+
+var DeleteDBClusterEndpointMessage = &sDeleteDBClusterEndpointMessage
+var DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier = &sDeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier
+
+var DeleteDBClusterEndpointOutput = &sDeleteDBClusterEndpointOutput
+var DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier = &sDeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier
+var DeleteDBClusterEndpointOutput_DBClusterIdentifier = &sDeleteDBClusterEndpointOutput_DBClusterIdentifier
+var DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = &sDeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier
+var DeleteDBClusterEndpointOutput_Endpoint = &sDeleteDBClusterEndpointOutput_Endpoint
+var DeleteDBClusterEndpointOutput_Status = &sDeleteDBClusterEndpointOutput_Status
+var DeleteDBClusterEndpointOutput_EndpointType = &sDeleteDBClusterEndpointOutput_EndpointType
+var DeleteDBClusterEndpointOutput_CustomEndpointType = &sDeleteDBClusterEndpointOutput_CustomEndpointType
+var DeleteDBClusterEndpointOutput_StaticMembers = &sDeleteDBClusterEndpointOutput_StaticMembers
+var DeleteDBClusterEndpointOutput_ExcludedMembers = &sDeleteDBClusterEndpointOutput_ExcludedMembers
+var DeleteDBClusterEndpointOutput_DBClusterEndpointArn = &sDeleteDBClusterEndpointOutput_DBClusterEndpointArn
+
+var DeleteDBClusterMessage = &sDeleteDBClusterMessage
+var DeleteDBClusterMessage_DBClusterIdentifier = &sDeleteDBClusterMessage_DBClusterIdentifier
+var DeleteDBClusterMessage_SkipFinalSnapshot = &sDeleteDBClusterMessage_SkipFinalSnapshot
+var DeleteDBClusterMessage_FinalDBSnapshotIdentifier = &sDeleteDBClusterMessage_FinalDBSnapshotIdentifier
+
+var DeleteDBClusterResult = &sDeleteDBClusterResult
+var DeleteDBClusterResult_DBCluster = &sDeleteDBClusterResult_DBCluster
+
+var DeleteDBClusterParameterGroupMessage = &sDeleteDBClusterParameterGroupMessage
+var DeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName = &sDeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName
+
+var DeleteDBClusterSnapshotMessage = &sDeleteDBClusterSnapshotMessage
+var DeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier = &sDeleteDBClusterSnapshotMessage_DBClusterSnapshotIdentifier
+
+var DeleteDBClusterSnapshotResult = &sDeleteDBClusterSnapshotResult
+var DeleteDBClusterSnapshotResult_DBClusterSnapshot = &sDeleteDBClusterSnapshotResult_DBClusterSnapshot
+
+var DeleteDBInstanceMessage = &sDeleteDBInstanceMessage
+var DeleteDBInstanceMessage_DBInstanceIdentifier = &sDeleteDBInstanceMessage_DBInstanceIdentifier
+var DeleteDBInstanceMessage_SkipFinalSnapshot = &sDeleteDBInstanceMessage_SkipFinalSnapshot
+var DeleteDBInstanceMessage_FinalDBSnapshotIdentifier = &sDeleteDBInstanceMessage_FinalDBSnapshotIdentifier
+
+var DeleteDBInstanceResult = &sDeleteDBInstanceResult
+var DeleteDBInstanceResult_DBInstance = &sDeleteDBInstanceResult_DBInstance
+
+var DeleteDBParameterGroupMessage = &sDeleteDBParameterGroupMessage
+var DeleteDBParameterGroupMessage_DBParameterGroupName = &sDeleteDBParameterGroupMessage_DBParameterGroupName
+
+var DeleteDBSubnetGroupMessage = &sDeleteDBSubnetGroupMessage
+var DeleteDBSubnetGroupMessage_DBSubnetGroupName = &sDeleteDBSubnetGroupMessage_DBSubnetGroupName
+
+var DeleteEventSubscriptionMessage = &sDeleteEventSubscriptionMessage
+var DeleteEventSubscriptionMessage_SubscriptionName = &sDeleteEventSubscriptionMessage_SubscriptionName
+
+var DeleteEventSubscriptionResult = &sDeleteEventSubscriptionResult
+var DeleteEventSubscriptionResult_EventSubscription = &sDeleteEventSubscriptionResult_EventSubscription
+
+var DeleteGlobalClusterMessage = &sDeleteGlobalClusterMessage
+var DeleteGlobalClusterMessage_GlobalClusterIdentifier = &sDeleteGlobalClusterMessage_GlobalClusterIdentifier
+
+var DeleteGlobalClusterResult = &sDeleteGlobalClusterResult
+var DeleteGlobalClusterResult_GlobalCluster = &sDeleteGlobalClusterResult_GlobalCluster
+
+var DescribeDBClusterEndpointsMessage = &sDescribeDBClusterEndpointsMessage
+var DescribeDBClusterEndpointsMessage_DBClusterIdentifier = &sDescribeDBClusterEndpointsMessage_DBClusterIdentifier
+var DescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier = &sDescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier
+var DescribeDBClusterEndpointsMessage_Filters = &sDescribeDBClusterEndpointsMessage_Filters
+var DescribeDBClusterEndpointsMessage_MaxRecords = &sDescribeDBClusterEndpointsMessage_MaxRecords
+var DescribeDBClusterEndpointsMessage_Marker = &sDescribeDBClusterEndpointsMessage_Marker
+
+var DBClusterEndpointMessage = &sDBClusterEndpointMessage
+var DBClusterEndpointMessage_Marker = &sDBClusterEndpointMessage_Marker
+var DBClusterEndpointMessage_DBClusterEndpoints = &sDBClusterEndpointMessage_DBClusterEndpoints
+
+var DescribeDBClusterParameterGroupsMessage = &sDescribeDBClusterParameterGroupsMessage
+var DescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName = &sDescribeDBClusterParameterGroupsMessage_DBClusterParameterGroupName
+var DescribeDBClusterParameterGroupsMessage_Filters = &sDescribeDBClusterParameterGroupsMessage_Filters
+var DescribeDBClusterParameterGroupsMessage_MaxRecords = &sDescribeDBClusterParameterGroupsMessage_MaxRecords
+var DescribeDBClusterParameterGroupsMessage_Marker = &sDescribeDBClusterParameterGroupsMessage_Marker
+
+var DBClusterParameterGroupsMessage = &sDBClusterParameterGroupsMessage
+var DBClusterParameterGroupsMessage_Marker = &sDBClusterParameterGroupsMessage_Marker
+var DBClusterParameterGroupsMessage_DBClusterParameterGroups = &sDBClusterParameterGroupsMessage_DBClusterParameterGroups
+
+var DescribeDBClusterParametersMessage = &sDescribeDBClusterParametersMessage
+var DescribeDBClusterParametersMessage_DBClusterParameterGroupName = &sDescribeDBClusterParametersMessage_DBClusterParameterGroupName
+var DescribeDBClusterParametersMessage_Source = &sDescribeDBClusterParametersMessage_Source
+var DescribeDBClusterParametersMessage_Filters = &sDescribeDBClusterParametersMessage_Filters
+var DescribeDBClusterParametersMessage_MaxRecords = &sDescribeDBClusterParametersMessage_MaxRecords
+var DescribeDBClusterParametersMessage_Marker = &sDescribeDBClusterParametersMessage_Marker
+
+var DBClusterParameterGroupDetails = &sDBClusterParameterGroupDetails
+var DBClusterParameterGroupDetails_Parameters = &sDBClusterParameterGroupDetails_Parameters
+var DBClusterParameterGroupDetails_Marker = &sDBClusterParameterGroupDetails_Marker
+
+var DescribeDBClustersMessage = &sDescribeDBClustersMessage
+var DescribeDBClustersMessage_DBClusterIdentifier = &sDescribeDBClustersMessage_DBClusterIdentifier
+var DescribeDBClustersMessage_Filters = &sDescribeDBClustersMessage_Filters
+var DescribeDBClustersMessage_MaxRecords = &sDescribeDBClustersMessage_MaxRecords
+var DescribeDBClustersMessage_Marker = &sDescribeDBClustersMessage_Marker
+
+var DescribeDBClusterSnapshotAttributesMessage = &sDescribeDBClusterSnapshotAttributesMessage
+var DescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier = &sDescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier
+
+var DescribeDBClusterSnapshotAttributesResult = &sDescribeDBClusterSnapshotAttributesResult
+var DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult = &sDescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult
+
+var DescribeDBClusterSnapshotsMessage = &sDescribeDBClusterSnapshotsMessage
+var DescribeDBClusterSnapshotsMessage_DBClusterIdentifier = &sDescribeDBClusterSnapshotsMessage_DBClusterIdentifier
+var DescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier = &sDescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier
+var DescribeDBClusterSnapshotsMessage_SnapshotType = &sDescribeDBClusterSnapshotsMessage_SnapshotType
+var DescribeDBClusterSnapshotsMessage_Filters = &sDescribeDBClusterSnapshotsMessage_Filters
+var DescribeDBClusterSnapshotsMessage_MaxRecords = &sDescribeDBClusterSnapshotsMessage_MaxRecords
+var DescribeDBClusterSnapshotsMessage_Marker = &sDescribeDBClusterSnapshotsMessage_Marker
+var DescribeDBClusterSnapshotsMessage_IncludeShared = &sDescribeDBClusterSnapshotsMessage_IncludeShared
+var DescribeDBClusterSnapshotsMessage_IncludePublic = &sDescribeDBClusterSnapshotsMessage_IncludePublic
+
+var DBClusterSnapshotMessage = &sDBClusterSnapshotMessage
+var DBClusterSnapshotMessage_Marker = &sDBClusterSnapshotMessage_Marker
+var DBClusterSnapshotMessage_DBClusterSnapshots = &sDBClusterSnapshotMessage_DBClusterSnapshots
+
+var DBClusterMessage = &sDBClusterMessage
+var DBClusterMessage_Marker = &sDBClusterMessage_Marker
+var DBClusterMessage_DBClusters = &sDBClusterMessage_DBClusters
+
+var DescribeDBEngineVersionsMessage = &sDescribeDBEngineVersionsMessage
+var DescribeDBEngineVersionsMessage_Engine = &sDescribeDBEngineVersionsMessage_Engine
+var DescribeDBEngineVersionsMessage_EngineVersion = &sDescribeDBEngineVersionsMessage_EngineVersion
+var DescribeDBEngineVersionsMessage_DBParameterGroupFamily = &sDescribeDBEngineVersionsMessage_DBParameterGroupFamily
+var DescribeDBEngineVersionsMessage_Filters = &sDescribeDBEngineVersionsMessage_Filters
+var DescribeDBEngineVersionsMessage_MaxRecords = &sDescribeDBEngineVersionsMessage_MaxRecords
+var DescribeDBEngineVersionsMessage_Marker = &sDescribeDBEngineVersionsMessage_Marker
+var DescribeDBEngineVersionsMessage_DefaultOnly = &sDescribeDBEngineVersionsMessage_DefaultOnly
+var DescribeDBEngineVersionsMessage_ListSupportedCharacterSets = &sDescribeDBEngineVersionsMessage_ListSupportedCharacterSets
+var DescribeDBEngineVersionsMessage_ListSupportedTimezones = &sDescribeDBEngineVersionsMessage_ListSupportedTimezones
+
+var DBEngineVersionMessage = &sDBEngineVersionMessage
+var DBEngineVersionMessage_Marker = &sDBEngineVersionMessage_Marker
+var DBEngineVersionMessage_DBEngineVersions = &sDBEngineVersionMessage_DBEngineVersions
+
+var DescribeDBInstancesMessage = &sDescribeDBInstancesMessage
+var DescribeDBInstancesMessage_DBInstanceIdentifier = &sDescribeDBInstancesMessage_DBInstanceIdentifier
+var DescribeDBInstancesMessage_Filters = &sDescribeDBInstancesMessage_Filters
+var DescribeDBInstancesMessage_MaxRecords = &sDescribeDBInstancesMessage_MaxRecords
+var DescribeDBInstancesMessage_Marker = &sDescribeDBInstancesMessage_Marker
+
+var DBInstanceMessage = &sDBInstanceMessage
+var DBInstanceMessage_Marker = &sDBInstanceMessage_Marker
+var DBInstanceMessage_DBInstances = &sDBInstanceMessage_DBInstances
+
+var DescribeDBParameterGroupsMessage = &sDescribeDBParameterGroupsMessage
+var DescribeDBParameterGroupsMessage_DBParameterGroupName = &sDescribeDBParameterGroupsMessage_DBParameterGroupName
+var DescribeDBParameterGroupsMessage_Filters = &sDescribeDBParameterGroupsMessage_Filters
+var DescribeDBParameterGroupsMessage_MaxRecords = &sDescribeDBParameterGroupsMessage_MaxRecords
+var DescribeDBParameterGroupsMessage_Marker = &sDescribeDBParameterGroupsMessage_Marker
+
+var DBParameterGroupsMessage = &sDBParameterGroupsMessage
+var DBParameterGroupsMessage_Marker = &sDBParameterGroupsMessage_Marker
+var DBParameterGroupsMessage_DBParameterGroups = &sDBParameterGroupsMessage_DBParameterGroups
+
+var DescribeDBParametersMessage = &sDescribeDBParametersMessage
+var DescribeDBParametersMessage_DBParameterGroupName = &sDescribeDBParametersMessage_DBParameterGroupName
+var DescribeDBParametersMessage_Source = &sDescribeDBParametersMessage_Source
+var DescribeDBParametersMessage_Filters = &sDescribeDBParametersMessage_Filters
+var DescribeDBParametersMessage_MaxRecords = &sDescribeDBParametersMessage_MaxRecords
+var DescribeDBParametersMessage_Marker = &sDescribeDBParametersMessage_Marker
+
+var DBParameterGroupDetails = &sDBParameterGroupDetails
+var DBParameterGroupDetails_Parameters = &sDBParameterGroupDetails_Parameters
+var DBParameterGroupDetails_Marker = &sDBParameterGroupDetails_Marker
+
+var DescribeDBSubnetGroupsMessage = &sDescribeDBSubnetGroupsMessage
+var DescribeDBSubnetGroupsMessage_DBSubnetGroupName = &sDescribeDBSubnetGroupsMessage_DBSubnetGroupName
+var DescribeDBSubnetGroupsMessage_Filters = &sDescribeDBSubnetGroupsMessage_Filters
+var DescribeDBSubnetGroupsMessage_MaxRecords = &sDescribeDBSubnetGroupsMessage_MaxRecords
+var DescribeDBSubnetGroupsMessage_Marker = &sDescribeDBSubnetGroupsMessage_Marker
+
+var DBSubnetGroupMessage = &sDBSubnetGroupMessage
+var DBSubnetGroupMessage_Marker = &sDBSubnetGroupMessage_Marker
+var DBSubnetGroupMessage_DBSubnetGroups = &sDBSubnetGroupMessage_DBSubnetGroups
+
+var DescribeEngineDefaultClusterParametersMessage = &sDescribeEngineDefaultClusterParametersMessage
+var DescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily = &sDescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily
+var DescribeEngineDefaultClusterParametersMessage_Filters = &sDescribeEngineDefaultClusterParametersMessage_Filters
+var DescribeEngineDefaultClusterParametersMessage_MaxRecords = &sDescribeEngineDefaultClusterParametersMessage_MaxRecords
+var DescribeEngineDefaultClusterParametersMessage_Marker = &sDescribeEngineDefaultClusterParametersMessage_Marker
+
+var DescribeEngineDefaultClusterParametersResult = &sDescribeEngineDefaultClusterParametersResult
+var DescribeEngineDefaultClusterParametersResult_EngineDefaults = &sDescribeEngineDefaultClusterParametersResult_EngineDefaults
+
+var DescribeEngineDefaultParametersMessage = &sDescribeEngineDefaultParametersMessage
+var DescribeEngineDefaultParametersMessage_DBParameterGroupFamily = &sDescribeEngineDefaultParametersMessage_DBParameterGroupFamily
+var DescribeEngineDefaultParametersMessage_Filters = &sDescribeEngineDefaultParametersMessage_Filters
+var DescribeEngineDefaultParametersMessage_MaxRecords = &sDescribeEngineDefaultParametersMessage_MaxRecords
+var DescribeEngineDefaultParametersMessage_Marker = &sDescribeEngineDefaultParametersMessage_Marker
+
+var DescribeEngineDefaultParametersResult = &sDescribeEngineDefaultParametersResult
+var DescribeEngineDefaultParametersResult_EngineDefaults = &sDescribeEngineDefaultParametersResult_EngineDefaults
+
+var DescribeEventCategoriesMessage = &sDescribeEventCategoriesMessage
+var DescribeEventCategoriesMessage_SourceType = &sDescribeEventCategoriesMessage_SourceType
+var DescribeEventCategoriesMessage_Filters = &sDescribeEventCategoriesMessage_Filters
+
+var EventCategoriesMessage = &sEventCategoriesMessage
+var EventCategoriesMessage_EventCategoriesMapList = &sEventCategoriesMessage_EventCategoriesMapList
+
+var DescribeEventsMessage = &sDescribeEventsMessage
+var DescribeEventsMessage_SourceIdentifier = &sDescribeEventsMessage_SourceIdentifier
+var DescribeEventsMessage_SourceType = &sDescribeEventsMessage_SourceType
+var DescribeEventsMessage_StartTime = &sDescribeEventsMessage_StartTime
+var DescribeEventsMessage_EndTime = &sDescribeEventsMessage_EndTime
+var DescribeEventsMessage_Duration = &sDescribeEventsMessage_Duration
+var DescribeEventsMessage_EventCategories = &sDescribeEventsMessage_EventCategories
+var DescribeEventsMessage_Filters = &sDescribeEventsMessage_Filters
+var DescribeEventsMessage_MaxRecords = &sDescribeEventsMessage_MaxRecords
+var DescribeEventsMessage_Marker = &sDescribeEventsMessage_Marker
+
+var EventsMessage = &sEventsMessage
+var EventsMessage_Marker = &sEventsMessage_Marker
+var EventsMessage_Events = &sEventsMessage_Events
+
+var DescribeEventSubscriptionsMessage = &sDescribeEventSubscriptionsMessage
+var DescribeEventSubscriptionsMessage_SubscriptionName = &sDescribeEventSubscriptionsMessage_SubscriptionName
+var DescribeEventSubscriptionsMessage_Filters = &sDescribeEventSubscriptionsMessage_Filters
+var DescribeEventSubscriptionsMessage_MaxRecords = &sDescribeEventSubscriptionsMessage_MaxRecords
+var DescribeEventSubscriptionsMessage_Marker = &sDescribeEventSubscriptionsMessage_Marker
+
+var EventSubscriptionsMessage = &sEventSubscriptionsMessage
+var EventSubscriptionsMessage_Marker = &sEventSubscriptionsMessage_Marker
+var EventSubscriptionsMessage_EventSubscriptionsList = &sEventSubscriptionsMessage_EventSubscriptionsList
+
+var DescribeGlobalClustersMessage = &sDescribeGlobalClustersMessage
+var DescribeGlobalClustersMessage_GlobalClusterIdentifier = &sDescribeGlobalClustersMessage_GlobalClusterIdentifier
+var DescribeGlobalClustersMessage_MaxRecords = &sDescribeGlobalClustersMessage_MaxRecords
+var DescribeGlobalClustersMessage_Marker = &sDescribeGlobalClustersMessage_Marker
+
+var GlobalClustersMessage = &sGlobalClustersMessage
+var GlobalClustersMessage_Marker = &sGlobalClustersMessage_Marker
+var GlobalClustersMessage_GlobalClusters = &sGlobalClustersMessage_GlobalClusters
+
+var DescribeOrderableDBInstanceOptionsMessage = &sDescribeOrderableDBInstanceOptionsMessage
+var DescribeOrderableDBInstanceOptionsMessage_Engine = &sDescribeOrderableDBInstanceOptionsMessage_Engine
+var DescribeOrderableDBInstanceOptionsMessage_EngineVersion = &sDescribeOrderableDBInstanceOptionsMessage_EngineVersion
+var DescribeOrderableDBInstanceOptionsMessage_DBInstanceClass = &sDescribeOrderableDBInstanceOptionsMessage_DBInstanceClass
+var DescribeOrderableDBInstanceOptionsMessage_LicenseModel = &sDescribeOrderableDBInstanceOptionsMessage_LicenseModel
+var DescribeOrderableDBInstanceOptionsMessage_Vpc = &sDescribeOrderableDBInstanceOptionsMessage_Vpc
+var DescribeOrderableDBInstanceOptionsMessage_Filters = &sDescribeOrderableDBInstanceOptionsMessage_Filters
+var DescribeOrderableDBInstanceOptionsMessage_MaxRecords = &sDescribeOrderableDBInstanceOptionsMessage_MaxRecords
+var DescribeOrderableDBInstanceOptionsMessage_Marker = &sDescribeOrderableDBInstanceOptionsMessage_Marker
+
+var OrderableDBInstanceOptionsMessage = &sOrderableDBInstanceOptionsMessage
+var OrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions = &sOrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions
+var OrderableDBInstanceOptionsMessage_Marker = &sOrderableDBInstanceOptionsMessage_Marker
+
+var DescribePendingMaintenanceActionsMessage = &sDescribePendingMaintenanceActionsMessage
+var DescribePendingMaintenanceActionsMessage_ResourceIdentifier = &sDescribePendingMaintenanceActionsMessage_ResourceIdentifier
+var DescribePendingMaintenanceActionsMessage_Filters = &sDescribePendingMaintenanceActionsMessage_Filters
+var DescribePendingMaintenanceActionsMessage_Marker = &sDescribePendingMaintenanceActionsMessage_Marker
+var DescribePendingMaintenanceActionsMessage_MaxRecords = &sDescribePendingMaintenanceActionsMessage_MaxRecords
+
+var PendingMaintenanceActionsMessage = &sPendingMaintenanceActionsMessage
+var PendingMaintenanceActionsMessage_PendingMaintenanceActions = &sPendingMaintenanceActionsMessage_PendingMaintenanceActions
+var PendingMaintenanceActionsMessage_Marker = &sPendingMaintenanceActionsMessage_Marker
+
+var DescribeValidDBInstanceModificationsMessage = &sDescribeValidDBInstanceModificationsMessage
+var DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier = &sDescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier
+
+var DescribeValidDBInstanceModificationsResult = &sDescribeValidDBInstanceModificationsResult
+var DescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage = &sDescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage
+
+var FailoverDBClusterMessage = &sFailoverDBClusterMessage
+var FailoverDBClusterMessage_DBClusterIdentifier = &sFailoverDBClusterMessage_DBClusterIdentifier
+var FailoverDBClusterMessage_TargetDBInstanceIdentifier = &sFailoverDBClusterMessage_TargetDBInstanceIdentifier
+
+var FailoverDBClusterResult = &sFailoverDBClusterResult
+var FailoverDBClusterResult_DBCluster = &sFailoverDBClusterResult_DBCluster
+
+var FailoverGlobalClusterMessage = &sFailoverGlobalClusterMessage
+var FailoverGlobalClusterMessage_GlobalClusterIdentifier = &sFailoverGlobalClusterMessage_GlobalClusterIdentifier
+var FailoverGlobalClusterMessage_TargetDbClusterIdentifier = &sFailoverGlobalClusterMessage_TargetDbClusterIdentifier
+var FailoverGlobalClusterMessage_AllowDataLoss = &sFailoverGlobalClusterMessage_AllowDataLoss
+var FailoverGlobalClusterMessage_Switchover = &sFailoverGlobalClusterMessage_Switchover
+
+var FailoverGlobalClusterResult = &sFailoverGlobalClusterResult
+var FailoverGlobalClusterResult_GlobalCluster = &sFailoverGlobalClusterResult_GlobalCluster
+
+var ListTagsForResourceMessage = &sListTagsForResourceMessage
+var ListTagsForResourceMessage_ResourceName = &sListTagsForResourceMessage_ResourceName
+var ListTagsForResourceMessage_Filters = &sListTagsForResourceMessage_Filters
+
+var TagListMessage = &sTagListMessage
+var TagListMessage_TagList = &sTagListMessage_TagList
+
+var ModifyDBClusterEndpointMessage = &sModifyDBClusterEndpointMessage
+var ModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier = &sModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier
+var ModifyDBClusterEndpointMessage_EndpointType = &sModifyDBClusterEndpointMessage_EndpointType
+var ModifyDBClusterEndpointMessage_StaticMembers = &sModifyDBClusterEndpointMessage_StaticMembers
+var ModifyDBClusterEndpointMessage_ExcludedMembers = &sModifyDBClusterEndpointMessage_ExcludedMembers
+
+var ModifyDBClusterEndpointOutput = &sModifyDBClusterEndpointOutput
+var ModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier = &sModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier
+var ModifyDBClusterEndpointOutput_DBClusterIdentifier = &sModifyDBClusterEndpointOutput_DBClusterIdentifier
+var ModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier = &sModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier
+var ModifyDBClusterEndpointOutput_Endpoint = &sModifyDBClusterEndpointOutput_Endpoint
+var ModifyDBClusterEndpointOutput_Status = &sModifyDBClusterEndpointOutput_Status
+var ModifyDBClusterEndpointOutput_EndpointType = &sModifyDBClusterEndpointOutput_EndpointType
+var ModifyDBClusterEndpointOutput_CustomEndpointType = &sModifyDBClusterEndpointOutput_CustomEndpointType
+var ModifyDBClusterEndpointOutput_StaticMembers = &sModifyDBClusterEndpointOutput_StaticMembers
+var ModifyDBClusterEndpointOutput_ExcludedMembers = &sModifyDBClusterEndpointOutput_ExcludedMembers
+var ModifyDBClusterEndpointOutput_DBClusterEndpointArn = &sModifyDBClusterEndpointOutput_DBClusterEndpointArn
+
+var ModifyDBClusterMessage = &sModifyDBClusterMessage
+var ModifyDBClusterMessage_DBClusterIdentifier = &sModifyDBClusterMessage_DBClusterIdentifier
+var ModifyDBClusterMessage_NewDBClusterIdentifier = &sModifyDBClusterMessage_NewDBClusterIdentifier
+var ModifyDBClusterMessage_ApplyImmediately = &sModifyDBClusterMessage_ApplyImmediately
+var ModifyDBClusterMessage_BackupRetentionPeriod = &sModifyDBClusterMessage_BackupRetentionPeriod
+var ModifyDBClusterMessage_DBClusterParameterGroupName = &sModifyDBClusterMessage_DBClusterParameterGroupName
+var ModifyDBClusterMessage_VpcSecurityGroupIds = &sModifyDBClusterMessage_VpcSecurityGroupIds
+var ModifyDBClusterMessage_Port = &sModifyDBClusterMessage_Port
+var ModifyDBClusterMessage_MasterUserPassword = &sModifyDBClusterMessage_MasterUserPassword
+var ModifyDBClusterMessage_OptionGroupName = &sModifyDBClusterMessage_OptionGroupName
+var ModifyDBClusterMessage_PreferredBackupWindow = &sModifyDBClusterMessage_PreferredBackupWindow
+var ModifyDBClusterMessage_PreferredMaintenanceWindow = &sModifyDBClusterMessage_PreferredMaintenanceWindow
+var ModifyDBClusterMessage_EnableIAMDatabaseAuthentication = &sModifyDBClusterMessage_EnableIAMDatabaseAuthentication
+var ModifyDBClusterMessage_CloudwatchLogsExportConfiguration = &sModifyDBClusterMessage_CloudwatchLogsExportConfiguration
+var ModifyDBClusterMessage_EngineVersion = &sModifyDBClusterMessage_EngineVersion
+var ModifyDBClusterMessage_AllowMajorVersionUpgrade = &sModifyDBClusterMessage_AllowMajorVersionUpgrade
+var ModifyDBClusterMessage_DBInstanceParameterGroupName = &sModifyDBClusterMessage_DBInstanceParameterGroupName
+var ModifyDBClusterMessage_DeletionProtection = &sModifyDBClusterMessage_DeletionProtection
+var ModifyDBClusterMessage_CopyTagsToSnapshot = &sModifyDBClusterMessage_CopyTagsToSnapshot
+var ModifyDBClusterMessage_ServerlessV2ScalingConfiguration = &sModifyDBClusterMessage_ServerlessV2ScalingConfiguration
+var ModifyDBClusterMessage_StorageType = &sModifyDBClusterMessage_StorageType
+var ModifyDBClusterMessage_NetworkType = &sModifyDBClusterMessage_NetworkType
+
+var ModifyDBClusterResult = &sModifyDBClusterResult
+var ModifyDBClusterResult_DBCluster = &sModifyDBClusterResult_DBCluster
+
+var ModifyDBClusterParameterGroupMessage = &sModifyDBClusterParameterGroupMessage
+var ModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName = &sModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName
+var ModifyDBClusterParameterGroupMessage_Parameters = &sModifyDBClusterParameterGroupMessage_Parameters
+
+var DBClusterParameterGroupNameMessage = &sDBClusterParameterGroupNameMessage
+var DBClusterParameterGroupNameMessage_DBClusterParameterGroupName = &sDBClusterParameterGroupNameMessage_DBClusterParameterGroupName
+
+var ModifyDBClusterSnapshotAttributeMessage = &sModifyDBClusterSnapshotAttributeMessage
+var ModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier = &sModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier
+var ModifyDBClusterSnapshotAttributeMessage_AttributeName = &sModifyDBClusterSnapshotAttributeMessage_AttributeName
+var ModifyDBClusterSnapshotAttributeMessage_ValuesToAdd = &sModifyDBClusterSnapshotAttributeMessage_ValuesToAdd
+var ModifyDBClusterSnapshotAttributeMessage_ValuesToRemove = &sModifyDBClusterSnapshotAttributeMessage_ValuesToRemove
+
+var ModifyDBClusterSnapshotAttributeResult = &sModifyDBClusterSnapshotAttributeResult
+var ModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult = &sModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult
+
+var ModifyDBInstanceMessage = &sModifyDBInstanceMessage
+var ModifyDBInstanceMessage_DBInstanceIdentifier = &sModifyDBInstanceMessage_DBInstanceIdentifier
+var ModifyDBInstanceMessage_AllocatedStorage = &sModifyDBInstanceMessage_AllocatedStorage
+var ModifyDBInstanceMessage_DBInstanceClass = &sModifyDBInstanceMessage_DBInstanceClass
+var ModifyDBInstanceMessage_DBSubnetGroupName = &sModifyDBInstanceMessage_DBSubnetGroupName
+var ModifyDBInstanceMessage_DBSecurityGroups = &sModifyDBInstanceMessage_DBSecurityGroups
+var ModifyDBInstanceMessage_VpcSecurityGroupIds = &sModifyDBInstanceMessage_VpcSecurityGroupIds
+var ModifyDBInstanceMessage_ApplyImmediately = &sModifyDBInstanceMessage_ApplyImmediately
+var ModifyDBInstanceMessage_MasterUserPassword = &sModifyDBInstanceMessage_MasterUserPassword
+var ModifyDBInstanceMessage_DBParameterGroupName = &sModifyDBInstanceMessage_DBParameterGroupName
+var ModifyDBInstanceMessage_BackupRetentionPeriod = &sModifyDBInstanceMessage_BackupRetentionPeriod
+var ModifyDBInstanceMessage_PreferredBackupWindow = &sModifyDBInstanceMessage_PreferredBackupWindow
+var ModifyDBInstanceMessage_PreferredMaintenanceWindow = &sModifyDBInstanceMessage_PreferredMaintenanceWindow
+var ModifyDBInstanceMessage_MultiAZ = &sModifyDBInstanceMessage_MultiAZ
+var ModifyDBInstanceMessage_EngineVersion = &sModifyDBInstanceMessage_EngineVersion
+var ModifyDBInstanceMessage_AllowMajorVersionUpgrade = &sModifyDBInstanceMessage_AllowMajorVersionUpgrade
+var ModifyDBInstanceMessage_AutoMinorVersionUpgrade = &sModifyDBInstanceMessage_AutoMinorVersionUpgrade
+var ModifyDBInstanceMessage_LicenseModel = &sModifyDBInstanceMessage_LicenseModel
+var ModifyDBInstanceMessage_Iops = &sModifyDBInstanceMessage_Iops
+var ModifyDBInstanceMessage_OptionGroupName = &sModifyDBInstanceMessage_OptionGroupName
+var ModifyDBInstanceMessage_NewDBInstanceIdentifier = &sModifyDBInstanceMessage_NewDBInstanceIdentifier
+var ModifyDBInstanceMessage_StorageType = &sModifyDBInstanceMessage_StorageType
+var ModifyDBInstanceMessage_TdeCredentialArn = &sModifyDBInstanceMessage_TdeCredentialArn
+var ModifyDBInstanceMessage_TdeCredentialPassword = &sModifyDBInstanceMessage_TdeCredentialPassword
+var ModifyDBInstanceMessage_CACertificateIdentifier = &sModifyDBInstanceMessage_CACertificateIdentifier
+var ModifyDBInstanceMessage_Domain = &sModifyDBInstanceMessage_Domain
+var ModifyDBInstanceMessage_CopyTagsToSnapshot = &sModifyDBInstanceMessage_CopyTagsToSnapshot
+var ModifyDBInstanceMessage_MonitoringInterval = &sModifyDBInstanceMessage_MonitoringInterval
+var ModifyDBInstanceMessage_DBPortNumber = &sModifyDBInstanceMessage_DBPortNumber
+var ModifyDBInstanceMessage_PubliclyAccessible = &sModifyDBInstanceMessage_PubliclyAccessible
+var ModifyDBInstanceMessage_MonitoringRoleArn = &sModifyDBInstanceMessage_MonitoringRoleArn
+var ModifyDBInstanceMessage_DomainIAMRoleName = &sModifyDBInstanceMessage_DomainIAMRoleName
+var ModifyDBInstanceMessage_PromotionTier = &sModifyDBInstanceMessage_PromotionTier
+var ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication = &sModifyDBInstanceMessage_EnableIAMDatabaseAuthentication
+var ModifyDBInstanceMessage_EnablePerformanceInsights = &sModifyDBInstanceMessage_EnablePerformanceInsights
+var ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId = &sModifyDBInstanceMessage_PerformanceInsightsKMSKeyId
+var ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration = &sModifyDBInstanceMessage_CloudwatchLogsExportConfiguration
+var ModifyDBInstanceMessage_DeletionProtection = &sModifyDBInstanceMessage_DeletionProtection
+
+var ModifyDBInstanceResult = &sModifyDBInstanceResult
+var ModifyDBInstanceResult_DBInstance = &sModifyDBInstanceResult_DBInstance
+
+var ModifyDBParameterGroupMessage = &sModifyDBParameterGroupMessage
+var ModifyDBParameterGroupMessage_DBParameterGroupName = &sModifyDBParameterGroupMessage_DBParameterGroupName
+var ModifyDBParameterGroupMessage_Parameters = &sModifyDBParameterGroupMessage_Parameters
+
+var DBParameterGroupNameMessage = &sDBParameterGroupNameMessage
+var DBParameterGroupNameMessage_DBParameterGroupName = &sDBParameterGroupNameMessage_DBParameterGroupName
+
+var ModifyDBSubnetGroupMessage = &sModifyDBSubnetGroupMessage
+var ModifyDBSubnetGroupMessage_DBSubnetGroupName = &sModifyDBSubnetGroupMessage_DBSubnetGroupName
+var ModifyDBSubnetGroupMessage_DBSubnetGroupDescription = &sModifyDBSubnetGroupMessage_DBSubnetGroupDescription
+var ModifyDBSubnetGroupMessage_SubnetIds = &sModifyDBSubnetGroupMessage_SubnetIds
+
+var ModifyDBSubnetGroupResult = &sModifyDBSubnetGroupResult
+var ModifyDBSubnetGroupResult_DBSubnetGroup = &sModifyDBSubnetGroupResult_DBSubnetGroup
+
+var ModifyEventSubscriptionMessage = &sModifyEventSubscriptionMessage
+var ModifyEventSubscriptionMessage_SubscriptionName = &sModifyEventSubscriptionMessage_SubscriptionName
+var ModifyEventSubscriptionMessage_SnsTopicArn = &sModifyEventSubscriptionMessage_SnsTopicArn
+var ModifyEventSubscriptionMessage_SourceType = &sModifyEventSubscriptionMessage_SourceType
+var ModifyEventSubscriptionMessage_EventCategories = &sModifyEventSubscriptionMessage_EventCategories
+var ModifyEventSubscriptionMessage_Enabled = &sModifyEventSubscriptionMessage_Enabled
+
+var ModifyEventSubscriptionResult = &sModifyEventSubscriptionResult
+var ModifyEventSubscriptionResult_EventSubscription = &sModifyEventSubscriptionResult_EventSubscription
+
+var ModifyGlobalClusterMessage = &sModifyGlobalClusterMessage
+var ModifyGlobalClusterMessage_GlobalClusterIdentifier = &sModifyGlobalClusterMessage_GlobalClusterIdentifier
+var ModifyGlobalClusterMessage_NewGlobalClusterIdentifier = &sModifyGlobalClusterMessage_NewGlobalClusterIdentifier
+var ModifyGlobalClusterMessage_DeletionProtection = &sModifyGlobalClusterMessage_DeletionProtection
+var ModifyGlobalClusterMessage_EngineVersion = &sModifyGlobalClusterMessage_EngineVersion
+var ModifyGlobalClusterMessage_AllowMajorVersionUpgrade = &sModifyGlobalClusterMessage_AllowMajorVersionUpgrade
+
+var ModifyGlobalClusterResult = &sModifyGlobalClusterResult
+var ModifyGlobalClusterResult_GlobalCluster = &sModifyGlobalClusterResult_GlobalCluster
+
+var PromoteReadReplicaDBClusterMessage = &sPromoteReadReplicaDBClusterMessage
+var PromoteReadReplicaDBClusterMessage_DBClusterIdentifier = &sPromoteReadReplicaDBClusterMessage_DBClusterIdentifier
+
+var PromoteReadReplicaDBClusterResult = &sPromoteReadReplicaDBClusterResult
+var PromoteReadReplicaDBClusterResult_DBCluster = &sPromoteReadReplicaDBClusterResult_DBCluster
+
+var RebootDBInstanceMessage = &sRebootDBInstanceMessage
+var RebootDBInstanceMessage_DBInstanceIdentifier = &sRebootDBInstanceMessage_DBInstanceIdentifier
+var RebootDBInstanceMessage_ForceFailover = &sRebootDBInstanceMessage_ForceFailover
+
+var RebootDBInstanceResult = &sRebootDBInstanceResult
+var RebootDBInstanceResult_DBInstance = &sRebootDBInstanceResult_DBInstance
+
+var RemoveFromGlobalClusterMessage = &sRemoveFromGlobalClusterMessage
+var RemoveFromGlobalClusterMessage_GlobalClusterIdentifier = &sRemoveFromGlobalClusterMessage_GlobalClusterIdentifier
+var RemoveFromGlobalClusterMessage_DbClusterIdentifier = &sRemoveFromGlobalClusterMessage_DbClusterIdentifier
+
+var RemoveFromGlobalClusterResult = &sRemoveFromGlobalClusterResult
+var RemoveFromGlobalClusterResult_GlobalCluster = &sRemoveFromGlobalClusterResult_GlobalCluster
+
+var RemoveRoleFromDBClusterMessage = &sRemoveRoleFromDBClusterMessage
+var RemoveRoleFromDBClusterMessage_DBClusterIdentifier = &sRemoveRoleFromDBClusterMessage_DBClusterIdentifier
+var RemoveRoleFromDBClusterMessage_RoleArn = &sRemoveRoleFromDBClusterMessage_RoleArn
+var RemoveRoleFromDBClusterMessage_FeatureName = &sRemoveRoleFromDBClusterMessage_FeatureName
+
+var RemoveSourceIdentifierFromSubscriptionMessage = &sRemoveSourceIdentifierFromSubscriptionMessage
+var RemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName = &sRemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName
+var RemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier = &sRemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier
+
+var RemoveSourceIdentifierFromSubscriptionResult = &sRemoveSourceIdentifierFromSubscriptionResult
+var RemoveSourceIdentifierFromSubscriptionResult_EventSubscription = &sRemoveSourceIdentifierFromSubscriptionResult_EventSubscription
+
+var RemoveTagsFromResourceMessage = &sRemoveTagsFromResourceMessage
+var RemoveTagsFromResourceMessage_ResourceName = &sRemoveTagsFromResourceMessage_ResourceName
+var RemoveTagsFromResourceMessage_TagKeys = &sRemoveTagsFromResourceMessage_TagKeys
+
+var ResetDBClusterParameterGroupMessage = &sResetDBClusterParameterGroupMessage
+var ResetDBClusterParameterGroupMessage_DBClusterParameterGroupName = &sResetDBClusterParameterGroupMessage_DBClusterParameterGroupName
+var ResetDBClusterParameterGroupMessage_ResetAllParameters = &sResetDBClusterParameterGroupMessage_ResetAllParameters
+var ResetDBClusterParameterGroupMessage_Parameters = &sResetDBClusterParameterGroupMessage_Parameters
+
+var ResetDBParameterGroupMessage = &sResetDBParameterGroupMessage
+var ResetDBParameterGroupMessage_DBParameterGroupName = &sResetDBParameterGroupMessage_DBParameterGroupName
+var ResetDBParameterGroupMessage_ResetAllParameters = &sResetDBParameterGroupMessage_ResetAllParameters
+var ResetDBParameterGroupMessage_Parameters = &sResetDBParameterGroupMessage_Parameters
+
+var RestoreDBClusterFromSnapshotMessage = &sRestoreDBClusterFromSnapshotMessage
+var RestoreDBClusterFromSnapshotMessage_AvailabilityZones = &sRestoreDBClusterFromSnapshotMessage_AvailabilityZones
+var RestoreDBClusterFromSnapshotMessage_DBClusterIdentifier = &sRestoreDBClusterFromSnapshotMessage_DBClusterIdentifier
+var RestoreDBClusterFromSnapshotMessage_SnapshotIdentifier = &sRestoreDBClusterFromSnapshotMessage_SnapshotIdentifier
+var RestoreDBClusterFromSnapshotMessage_Engine = &sRestoreDBClusterFromSnapshotMessage_Engine
+var RestoreDBClusterFromSnapshotMessage_EngineVersion = &sRestoreDBClusterFromSnapshotMessage_EngineVersion
+var RestoreDBClusterFromSnapshotMessage_Port = &sRestoreDBClusterFromSnapshotMessage_Port
+var RestoreDBClusterFromSnapshotMessage_DBSubnetGroupName = &sRestoreDBClusterFromSnapshotMessage_DBSubnetGroupName
+var RestoreDBClusterFromSnapshotMessage_DatabaseName = &sRestoreDBClusterFromSnapshotMessage_DatabaseName
+var RestoreDBClusterFromSnapshotMessage_OptionGroupName = &sRestoreDBClusterFromSnapshotMessage_OptionGroupName
+var RestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds = &sRestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds
+var RestoreDBClusterFromSnapshotMessage_Tags = &sRestoreDBClusterFromSnapshotMessage_Tags
+var RestoreDBClusterFromSnapshotMessage_KmsKeyId = &sRestoreDBClusterFromSnapshotMessage_KmsKeyId
+var RestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication = &sRestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication
+var RestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports = &sRestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports
+var RestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName = &sRestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName
+var RestoreDBClusterFromSnapshotMessage_DeletionProtection = &sRestoreDBClusterFromSnapshotMessage_DeletionProtection
+var RestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot = &sRestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot
+var RestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration = &sRestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration
+var RestoreDBClusterFromSnapshotMessage_StorageType = &sRestoreDBClusterFromSnapshotMessage_StorageType
+var RestoreDBClusterFromSnapshotMessage_NetworkType = &sRestoreDBClusterFromSnapshotMessage_NetworkType
+
+var RestoreDBClusterFromSnapshotResult = &sRestoreDBClusterFromSnapshotResult
+var RestoreDBClusterFromSnapshotResult_DBCluster = &sRestoreDBClusterFromSnapshotResult_DBCluster
+
+var RestoreDBClusterToPointInTimeMessage = &sRestoreDBClusterToPointInTimeMessage
+var RestoreDBClusterToPointInTimeMessage_DBClusterIdentifier = &sRestoreDBClusterToPointInTimeMessage_DBClusterIdentifier
+var RestoreDBClusterToPointInTimeMessage_RestoreType = &sRestoreDBClusterToPointInTimeMessage_RestoreType
+var RestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier = &sRestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier
+var RestoreDBClusterToPointInTimeMessage_RestoreToTime = &sRestoreDBClusterToPointInTimeMessage_RestoreToTime
+var RestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime = &sRestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime
+var RestoreDBClusterToPointInTimeMessage_Port = &sRestoreDBClusterToPointInTimeMessage_Port
+var RestoreDBClusterToPointInTimeMessage_DBSubnetGroupName = &sRestoreDBClusterToPointInTimeMessage_DBSubnetGroupName
+var RestoreDBClusterToPointInTimeMessage_OptionGroupName = &sRestoreDBClusterToPointInTimeMessage_OptionGroupName
+var RestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds = &sRestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds
+var RestoreDBClusterToPointInTimeMessage_Tags = &sRestoreDBClusterToPointInTimeMessage_Tags
+var RestoreDBClusterToPointInTimeMessage_KmsKeyId = &sRestoreDBClusterToPointInTimeMessage_KmsKeyId
+var RestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication = &sRestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication
+var RestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports = &sRestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports
+var RestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName = &sRestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName
+var RestoreDBClusterToPointInTimeMessage_DeletionProtection = &sRestoreDBClusterToPointInTimeMessage_DeletionProtection
+var RestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration = &sRestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration
+var RestoreDBClusterToPointInTimeMessage_StorageType = &sRestoreDBClusterToPointInTimeMessage_StorageType
+var RestoreDBClusterToPointInTimeMessage_NetworkType = &sRestoreDBClusterToPointInTimeMessage_NetworkType
+
+var RestoreDBClusterToPointInTimeResult = &sRestoreDBClusterToPointInTimeResult
+var RestoreDBClusterToPointInTimeResult_DBCluster = &sRestoreDBClusterToPointInTimeResult_DBCluster
+
+var StartDBClusterMessage = &sStartDBClusterMessage
+var StartDBClusterMessage_DBClusterIdentifier = &sStartDBClusterMessage_DBClusterIdentifier
+
+var StartDBClusterResult = &sStartDBClusterResult
+var StartDBClusterResult_DBCluster = &sStartDBClusterResult_DBCluster
+
+var StopDBClusterMessage = &sStopDBClusterMessage
+var StopDBClusterMessage_DBClusterIdentifier = &sStopDBClusterMessage_DBClusterIdentifier
+
+var StopDBClusterResult = &sStopDBClusterResult
+var StopDBClusterResult_DBCluster = &sStopDBClusterResult_DBCluster
+
+var SwitchoverGlobalClusterMessage = &sSwitchoverGlobalClusterMessage
+var SwitchoverGlobalClusterMessage_GlobalClusterIdentifier = &sSwitchoverGlobalClusterMessage_GlobalClusterIdentifier
+var SwitchoverGlobalClusterMessage_TargetDbClusterIdentifier = &sSwitchoverGlobalClusterMessage_TargetDbClusterIdentifier
+
+var SwitchoverGlobalClusterResult = &sSwitchoverGlobalClusterResult
+var SwitchoverGlobalClusterResult_GlobalCluster = &sSwitchoverGlobalClusterResult_GlobalCluster
+
+var AmazonRDSv19 = &smithy.ServiceSchema{Schema: &s_AmazonRDSv19, Version: "2014-10-31"}

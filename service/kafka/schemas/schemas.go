@@ -4,5731 +4,5846 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchAssociateScramSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchAssociateScramSecret",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
-	Code: 200})
+var (
+	eBatchAssociateScramSecret                                                   smithy.SchemaExtensions
+	eBatchDisassociateScramSecret                                                smithy.SchemaExtensions
+	eCreateChannel                                                               smithy.SchemaExtensions
+	eCreateCluster                                                               smithy.SchemaExtensions
+	eCreateClusterV2                                                             smithy.SchemaExtensions
+	eCreateConfiguration                                                         smithy.SchemaExtensions
+	eCreateReplicator                                                            smithy.SchemaExtensions
+	eCreateTopic                                                                 smithy.SchemaExtensions
+	eCreateVpcConnection                                                         smithy.SchemaExtensions
+	eDeleteChannel                                                               smithy.SchemaExtensions
+	eDeleteCluster                                                               smithy.SchemaExtensions
+	eDeleteClusterPolicy                                                         smithy.SchemaExtensions
+	eDeleteConfiguration                                                         smithy.SchemaExtensions
+	eDeleteReplicator                                                            smithy.SchemaExtensions
+	eDeleteTopic                                                                 smithy.SchemaExtensions
+	eDeleteVpcConnection                                                         smithy.SchemaExtensions
+	eDescribeChannel                                                             smithy.SchemaExtensions
+	eDescribeCluster                                                             smithy.SchemaExtensions
+	eDescribeClusterOperation                                                    smithy.SchemaExtensions
+	eDescribeClusterOperationV2                                                  smithy.SchemaExtensions
+	eDescribeClusterV2                                                           smithy.SchemaExtensions
+	eDescribeConfiguration                                                       smithy.SchemaExtensions
+	eDescribeConfigurationRevision                                               smithy.SchemaExtensions
+	eDescribeReplicator                                                          smithy.SchemaExtensions
+	eDescribeTopic                                                               smithy.SchemaExtensions
+	eDescribeTopicPartitions                                                     smithy.SchemaExtensions
+	eDescribeVpcConnection                                                       smithy.SchemaExtensions
+	eGetBootstrapBrokers                                                         smithy.SchemaExtensions
+	eGetClusterPolicy                                                            smithy.SchemaExtensions
+	eGetCompatibleKafkaVersions                                                  smithy.SchemaExtensions
+	eListChannels                                                                smithy.SchemaExtensions
+	eListClientVpcConnections                                                    smithy.SchemaExtensions
+	eListClusterOperations                                                       smithy.SchemaExtensions
+	eListClusterOperationsV2                                                     smithy.SchemaExtensions
+	eListClusters                                                                smithy.SchemaExtensions
+	eListClustersV2                                                              smithy.SchemaExtensions
+	eListConfigurationRevisions                                                  smithy.SchemaExtensions
+	eListConfigurations                                                          smithy.SchemaExtensions
+	eListKafkaVersions                                                           smithy.SchemaExtensions
+	eListNodes                                                                   smithy.SchemaExtensions
+	eListReplicators                                                             smithy.SchemaExtensions
+	eListScramSecrets                                                            smithy.SchemaExtensions
+	eListTagsForResource                                                         smithy.SchemaExtensions
+	eListTopics                                                                  smithy.SchemaExtensions
+	eListVpcConnections                                                          smithy.SchemaExtensions
+	ePutClusterPolicy                                                            smithy.SchemaExtensions
+	eRebootBroker                                                                smithy.SchemaExtensions
+	eRejectClientVpcConnection                                                   smithy.SchemaExtensions
+	eTagResource                                                                 smithy.SchemaExtensions
+	eUntagResource                                                               smithy.SchemaExtensions
+	eUpdateBrokerCount                                                           smithy.SchemaExtensions
+	eUpdateBrokerStorage                                                         smithy.SchemaExtensions
+	eUpdateBrokerType                                                            smithy.SchemaExtensions
+	eUpdateChannel                                                               smithy.SchemaExtensions
+	eUpdateClusterConfiguration                                                  smithy.SchemaExtensions
+	eUpdateClusterKafkaVersion                                                   smithy.SchemaExtensions
+	eUpdateConfiguration                                                         smithy.SchemaExtensions
+	eUpdateConnectivity                                                          smithy.SchemaExtensions
+	eUpdateMonitoring                                                            smithy.SchemaExtensions
+	eUpdateRebalancing                                                           smithy.SchemaExtensions
+	eUpdateReplicationInfo                                                       smithy.SchemaExtensions
+	eUpdateSecurity                                                              smithy.SchemaExtensions
+	eUpdateStorage                                                               smithy.SchemaExtensions
+	eUpdateTopic                                                                 smithy.SchemaExtensions
+	e_Kafka                                                                      smithy.SchemaExtensions
+	e___blob                                                                     smithy.SchemaExtensions
+	e___boolean                                                                  smithy.SchemaExtensions
+	e___double                                                                   smithy.SchemaExtensions
+	e___integer                                                                  smithy.SchemaExtensions
+	e___integerMin1                                                              smithy.SchemaExtensions
+	e___integerMin1Max15                                                         smithy.SchemaExtensions
+	e___integerMin1Max16384                                                      smithy.SchemaExtensions
+	e___listOf__double                                                           smithy.SchemaExtensions
+	e___listOf__double_member                                                    smithy.SchemaExtensions
+	e___listOf__integer                                                          smithy.SchemaExtensions
+	e___listOf__integer_member                                                   smithy.SchemaExtensions
+	e___listOf__string                                                           smithy.SchemaExtensions
+	e___listOf__string_member                                                    smithy.SchemaExtensions
+	e___listOf__stringMax249                                                     smithy.SchemaExtensions
+	e___listOf__stringMax249_member                                              smithy.SchemaExtensions
+	e___listOf__stringMax256                                                     smithy.SchemaExtensions
+	e___listOf__stringMax256_member                                              smithy.SchemaExtensions
+	e___listOfBrokerEBSVolumeInfo                                                smithy.SchemaExtensions
+	e___listOfBrokerEBSVolumeInfo_member                                         smithy.SchemaExtensions
+	e___listOfChannelInfo                                                        smithy.SchemaExtensions
+	e___listOfChannelInfo_member                                                 smithy.SchemaExtensions
+	e___listOfClientVpcConnection                                                smithy.SchemaExtensions
+	e___listOfClientVpcConnection_member                                         smithy.SchemaExtensions
+	e___listOfCluster                                                            smithy.SchemaExtensions
+	e___listOfCluster_member                                                     smithy.SchemaExtensions
+	e___listOfClusterInfo                                                        smithy.SchemaExtensions
+	e___listOfClusterInfo_member                                                 smithy.SchemaExtensions
+	e___listOfClusterOperationInfo                                               smithy.SchemaExtensions
+	e___listOfClusterOperationInfo_member                                        smithy.SchemaExtensions
+	e___listOfClusterOperationStep                                               smithy.SchemaExtensions
+	e___listOfClusterOperationStep_member                                        smithy.SchemaExtensions
+	e___listOfClusterOperationV2Summary                                          smithy.SchemaExtensions
+	e___listOfClusterOperationV2Summary_member                                   smithy.SchemaExtensions
+	e___listOfCompatibleKafkaVersion                                             smithy.SchemaExtensions
+	e___listOfCompatibleKafkaVersion_member                                      smithy.SchemaExtensions
+	e___listOfConfiguration                                                      smithy.SchemaExtensions
+	e___listOfConfiguration_member                                               smithy.SchemaExtensions
+	e___listOfConfigurationRevision                                              smithy.SchemaExtensions
+	e___listOfConfigurationRevision_member                                       smithy.SchemaExtensions
+	e___listOfDestinationTable                                                   smithy.SchemaExtensions
+	e___listOfDestinationTable_member                                            smithy.SchemaExtensions
+	e___listOfKafkaCluster                                                       smithy.SchemaExtensions
+	e___listOfKafkaCluster_member                                                smithy.SchemaExtensions
+	e___listOfKafkaClusterDescription                                            smithy.SchemaExtensions
+	e___listOfKafkaClusterDescription_member                                     smithy.SchemaExtensions
+	e___listOfKafkaClusterSummary                                                smithy.SchemaExtensions
+	e___listOfKafkaClusterSummary_member                                         smithy.SchemaExtensions
+	e___listOfKafkaVersion                                                       smithy.SchemaExtensions
+	e___listOfKafkaVersion_member                                                smithy.SchemaExtensions
+	e___listOfNodeInfo                                                           smithy.SchemaExtensions
+	e___listOfNodeInfo_member                                                    smithy.SchemaExtensions
+	e___listOfPartitionSource                                                    smithy.SchemaExtensions
+	e___listOfPartitionSource_member                                             smithy.SchemaExtensions
+	e___listOfReplicationInfo                                                    smithy.SchemaExtensions
+	e___listOfReplicationInfo_member                                             smithy.SchemaExtensions
+	e___listOfReplicationInfoDescription                                         smithy.SchemaExtensions
+	e___listOfReplicationInfoDescription_member                                  smithy.SchemaExtensions
+	e___listOfReplicationInfoSummary                                             smithy.SchemaExtensions
+	e___listOfReplicationInfoSummary_member                                      smithy.SchemaExtensions
+	e___listOfReplicatorSummary                                                  smithy.SchemaExtensions
+	e___listOfReplicatorSummary_member                                           smithy.SchemaExtensions
+	e___listOfTopicConfiguration                                                 smithy.SchemaExtensions
+	e___listOfTopicConfiguration_member                                          smithy.SchemaExtensions
+	e___listOfTopicInfo                                                          smithy.SchemaExtensions
+	e___listOfTopicInfo_member                                                   smithy.SchemaExtensions
+	e___listOfTopicPartitionInfo                                                 smithy.SchemaExtensions
+	e___listOfTopicPartitionInfo_member                                          smithy.SchemaExtensions
+	e___listOfUnprocessedScramSecret                                             smithy.SchemaExtensions
+	e___listOfUnprocessedScramSecret_member                                      smithy.SchemaExtensions
+	e___listOfVpcConfig                                                          smithy.SchemaExtensions
+	e___listOfVpcConfig_member                                                   smithy.SchemaExtensions
+	e___listOfVpcConnection                                                      smithy.SchemaExtensions
+	e___listOfVpcConnection_member                                               smithy.SchemaExtensions
+	e___long                                                                     smithy.SchemaExtensions
+	e___mapOf__string                                                            smithy.SchemaExtensions
+	e___mapOf__string_key                                                        smithy.SchemaExtensions
+	e___mapOf__string_value                                                      smithy.SchemaExtensions
+	e___string                                                                   smithy.SchemaExtensions
+	e___stringMax1024                                                            smithy.SchemaExtensions
+	e___stringMax249                                                             smithy.SchemaExtensions
+	e___stringMax256                                                             smithy.SchemaExtensions
+	e___stringMin1Max128                                                         smithy.SchemaExtensions
+	e___stringMin1Max128Pattern09AZaZ09AZaZ0                                     smithy.SchemaExtensions
+	e___stringMin1Max64                                                          smithy.SchemaExtensions
+	e___stringMin5Max32                                                          smithy.SchemaExtensions
+	e___timestampIso8601                                                         smithy.SchemaExtensions
+	eAmazonMskCluster                                                            smithy.SchemaExtensions
+	eAmazonMskCluster_MskClusterArn                                              smithy.SchemaExtensions
+	eApacheKafkaCluster                                                          smithy.SchemaExtensions
+	eApacheKafkaCluster_ApacheKafkaClusterId                                     smithy.SchemaExtensions
+	eApacheKafkaCluster_BootstrapBrokerString                                    smithy.SchemaExtensions
+	eAuthorizerLogs                                                              smithy.SchemaExtensions
+	eAuthorizerLogs_CloudWatchLogs                                               smithy.SchemaExtensions
+	eAuthorizerLogs_Firehose                                                     smithy.SchemaExtensions
+	eAuthorizerLogs_S3                                                           smithy.SchemaExtensions
+	eBadRequestException                                                         smithy.SchemaExtensions
+	eBadRequestException_InvalidParameter                                        smithy.SchemaExtensions
+	eBadRequestException_Message                                                 smithy.SchemaExtensions
+	eBrokerAZDistribution                                                        smithy.SchemaExtensions
+	eBrokerAZDistribution_DEFAULT                                                smithy.SchemaExtensions
+	eBrokerCountUpdateInfo                                                       smithy.SchemaExtensions
+	eBrokerCountUpdateInfo_CreatedBrokerIds                                      smithy.SchemaExtensions
+	eBrokerCountUpdateInfo_DeletedBrokerIds                                      smithy.SchemaExtensions
+	eBrokerEBSVolumeInfo                                                         smithy.SchemaExtensions
+	eBrokerEBSVolumeInfo_KafkaBrokerNodeId                                       smithy.SchemaExtensions
+	eBrokerEBSVolumeInfo_ProvisionedThroughput                                   smithy.SchemaExtensions
+	eBrokerEBSVolumeInfo_VolumeSizeGB                                            smithy.SchemaExtensions
+	eBrokerLogs                                                                  smithy.SchemaExtensions
+	eBrokerLogs_CloudWatchLogs                                                   smithy.SchemaExtensions
+	eBrokerLogs_Firehose                                                         smithy.SchemaExtensions
+	eBrokerLogs_S3                                                               smithy.SchemaExtensions
+	eBrokerNodeGroupInfo                                                         smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_BrokerAZDistribution                                    smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_ClientSubnets                                           smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_InstanceType                                            smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_SecurityGroups                                          smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_StorageInfo                                             smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_ConnectivityInfo                                        smithy.SchemaExtensions
+	eBrokerNodeGroupInfo_ZoneIds                                                 smithy.SchemaExtensions
+	eBrokerNodeInfo                                                              smithy.SchemaExtensions
+	eBrokerNodeInfo_AttachedENIId                                                smithy.SchemaExtensions
+	eBrokerNodeInfo_BrokerId                                                     smithy.SchemaExtensions
+	eBrokerNodeInfo_ClientSubnet                                                 smithy.SchemaExtensions
+	eBrokerNodeInfo_ClientVpcIpAddress                                           smithy.SchemaExtensions
+	eBrokerNodeInfo_CurrentBrokerSoftwareInfo                                    smithy.SchemaExtensions
+	eBrokerNodeInfo_Endpoints                                                    smithy.SchemaExtensions
+	eBrokerSoftwareInfo                                                          smithy.SchemaExtensions
+	eBrokerSoftwareInfo_ConfigurationArn                                         smithy.SchemaExtensions
+	eBrokerSoftwareInfo_ConfigurationRevision                                    smithy.SchemaExtensions
+	eBrokerSoftwareInfo_KafkaVersion                                             smithy.SchemaExtensions
+	eCatalog                                                                     smithy.SchemaExtensions
+	eCatalog_CatalogArn                                                          smithy.SchemaExtensions
+	eCatalog_WarehouseLocation                                                   smithy.SchemaExtensions
+	eChannelDestinationType                                                      smithy.SchemaExtensions
+	eChannelDestinationType_ICEBERG                                              smithy.SchemaExtensions
+	eChannelDestinationType_S3                                                   smithy.SchemaExtensions
+	eChannelInfo                                                                 smithy.SchemaExtensions
+	eChannelInfo_ChannelArn                                                      smithy.SchemaExtensions
+	eChannelInfo_ChannelName                                                     smithy.SchemaExtensions
+	eChannelInfo_Status                                                          smithy.SchemaExtensions
+	eChannelInfo_CreationTime                                                    smithy.SchemaExtensions
+	eChannelInfo_DestinationType                                                 smithy.SchemaExtensions
+	eChannelInfo_ClusterOperationArn                                             smithy.SchemaExtensions
+	eChannelLoggingInfo                                                          smithy.SchemaExtensions
+	eChannelLoggingInfo_CloudWatchLogs                                           smithy.SchemaExtensions
+	eChannelLoggingInfo_Firehose                                                 smithy.SchemaExtensions
+	eChannelLoggingInfo_S3                                                       smithy.SchemaExtensions
+	eChannelStateInfo                                                            smithy.SchemaExtensions
+	eChannelStateInfo_Code                                                       smithy.SchemaExtensions
+	eChannelStateInfo_Message                                                    smithy.SchemaExtensions
+	eChannelStatus                                                               smithy.SchemaExtensions
+	eChannelStatus_CREATING                                                      smithy.SchemaExtensions
+	eChannelStatus_ACTIVE                                                        smithy.SchemaExtensions
+	eChannelStatus_UPDATING                                                      smithy.SchemaExtensions
+	eChannelStatus_DELETING                                                      smithy.SchemaExtensions
+	eChannelStatus_FAILED                                                        smithy.SchemaExtensions
+	eChannelStatus_SUSPENDING                                                    smithy.SchemaExtensions
+	eChannelStatus_SUSPENDED                                                     smithy.SchemaExtensions
+	eClientAuthentication                                                        smithy.SchemaExtensions
+	eClientAuthentication_Sasl                                                   smithy.SchemaExtensions
+	eClientAuthentication_Tls                                                    smithy.SchemaExtensions
+	eClientAuthentication_Unauthenticated                                        smithy.SchemaExtensions
+	eClientBroker                                                                smithy.SchemaExtensions
+	eClientBroker_TLS                                                            smithy.SchemaExtensions
+	eClientBroker_TLS_PLAINTEXT                                                  smithy.SchemaExtensions
+	eClientBroker_PLAINTEXT                                                      smithy.SchemaExtensions
+	eClientVpcConnection                                                         smithy.SchemaExtensions
+	eClientVpcConnection_Authentication                                          smithy.SchemaExtensions
+	eClientVpcConnection_CreationTime                                            smithy.SchemaExtensions
+	eClientVpcConnection_State                                                   smithy.SchemaExtensions
+	eClientVpcConnection_VpcConnectionArn                                        smithy.SchemaExtensions
+	eClientVpcConnection_Owner                                                   smithy.SchemaExtensions
+	eCloudWatchLogs                                                              smithy.SchemaExtensions
+	eCloudWatchLogs_Enabled                                                      smithy.SchemaExtensions
+	eCloudWatchLogs_LogGroup                                                     smithy.SchemaExtensions
+	eCluster                                                                     smithy.SchemaExtensions
+	eCluster_ActiveOperationArn                                                  smithy.SchemaExtensions
+	eCluster_ClusterType                                                         smithy.SchemaExtensions
+	eCluster_ClusterArn                                                          smithy.SchemaExtensions
+	eCluster_ClusterName                                                         smithy.SchemaExtensions
+	eCluster_CreationTime                                                        smithy.SchemaExtensions
+	eCluster_CurrentVersion                                                      smithy.SchemaExtensions
+	eCluster_State                                                               smithy.SchemaExtensions
+	eCluster_StateInfo                                                           smithy.SchemaExtensions
+	eCluster_Tags                                                                smithy.SchemaExtensions
+	eCluster_Provisioned                                                         smithy.SchemaExtensions
+	eCluster_Serverless                                                          smithy.SchemaExtensions
+	eClusterConnectivityException                                                smithy.SchemaExtensions
+	eClusterConnectivityException_InvalidParameter                               smithy.SchemaExtensions
+	eClusterConnectivityException_Message                                        smithy.SchemaExtensions
+	eClusterInfo                                                                 smithy.SchemaExtensions
+	eClusterInfo_ActiveOperationArn                                              smithy.SchemaExtensions
+	eClusterInfo_BrokerNodeGroupInfo                                             smithy.SchemaExtensions
+	eClusterInfo_Rebalancing                                                     smithy.SchemaExtensions
+	eClusterInfo_ClientAuthentication                                            smithy.SchemaExtensions
+	eClusterInfo_ClusterArn                                                      smithy.SchemaExtensions
+	eClusterInfo_ClusterName                                                     smithy.SchemaExtensions
+	eClusterInfo_CreationTime                                                    smithy.SchemaExtensions
+	eClusterInfo_CurrentBrokerSoftwareInfo                                       smithy.SchemaExtensions
+	eClusterInfo_CurrentVersion                                                  smithy.SchemaExtensions
+	eClusterInfo_EncryptionInfo                                                  smithy.SchemaExtensions
+	eClusterInfo_EnhancedMonitoring                                              smithy.SchemaExtensions
+	eClusterInfo_OpenMonitoring                                                  smithy.SchemaExtensions
+	eClusterInfo_LoggingInfo                                                     smithy.SchemaExtensions
+	eClusterInfo_NumberOfBrokerNodes                                             smithy.SchemaExtensions
+	eClusterInfo_State                                                           smithy.SchemaExtensions
+	eClusterInfo_StateInfo                                                       smithy.SchemaExtensions
+	eClusterInfo_Tags                                                            smithy.SchemaExtensions
+	eClusterInfo_ZookeeperConnectString                                          smithy.SchemaExtensions
+	eClusterInfo_ZookeeperConnectStringTls                                       smithy.SchemaExtensions
+	eClusterInfo_StorageMode                                                     smithy.SchemaExtensions
+	eClusterInfo_CustomerActionStatus                                            smithy.SchemaExtensions
+	eClusterOperationInfo                                                        smithy.SchemaExtensions
+	eClusterOperationInfo_ClientRequestId                                        smithy.SchemaExtensions
+	eClusterOperationInfo_ClusterArn                                             smithy.SchemaExtensions
+	eClusterOperationInfo_CreationTime                                           smithy.SchemaExtensions
+	eClusterOperationInfo_EndTime                                                smithy.SchemaExtensions
+	eClusterOperationInfo_ErrorInfo                                              smithy.SchemaExtensions
+	eClusterOperationInfo_OperationArn                                           smithy.SchemaExtensions
+	eClusterOperationInfo_OperationState                                         smithy.SchemaExtensions
+	eClusterOperationInfo_OperationSteps                                         smithy.SchemaExtensions
+	eClusterOperationInfo_OperationType                                          smithy.SchemaExtensions
+	eClusterOperationInfo_SourceClusterInfo                                      smithy.SchemaExtensions
+	eClusterOperationInfo_TargetClusterInfo                                      smithy.SchemaExtensions
+	eClusterOperationInfo_VpcConnectionInfo                                      smithy.SchemaExtensions
+	eClusterOperationStep                                                        smithy.SchemaExtensions
+	eClusterOperationStep_StepInfo                                               smithy.SchemaExtensions
+	eClusterOperationStep_StepName                                               smithy.SchemaExtensions
+	eClusterOperationStepInfo                                                    smithy.SchemaExtensions
+	eClusterOperationStepInfo_StepStatus                                         smithy.SchemaExtensions
+	eClusterOperationV2                                                          smithy.SchemaExtensions
+	eClusterOperationV2_ClusterArn                                               smithy.SchemaExtensions
+	eClusterOperationV2_ClusterType                                              smithy.SchemaExtensions
+	eClusterOperationV2_StartTime                                                smithy.SchemaExtensions
+	eClusterOperationV2_EndTime                                                  smithy.SchemaExtensions
+	eClusterOperationV2_ErrorInfo                                                smithy.SchemaExtensions
+	eClusterOperationV2_OperationArn                                             smithy.SchemaExtensions
+	eClusterOperationV2_OperationState                                           smithy.SchemaExtensions
+	eClusterOperationV2_OperationType                                            smithy.SchemaExtensions
+	eClusterOperationV2_Provisioned                                              smithy.SchemaExtensions
+	eClusterOperationV2_Serverless                                               smithy.SchemaExtensions
+	eClusterOperationV2Provisioned                                               smithy.SchemaExtensions
+	eClusterOperationV2Provisioned_OperationSteps                                smithy.SchemaExtensions
+	eClusterOperationV2Provisioned_SourceClusterInfo                             smithy.SchemaExtensions
+	eClusterOperationV2Provisioned_TargetClusterInfo                             smithy.SchemaExtensions
+	eClusterOperationV2Provisioned_VpcConnectionInfo                             smithy.SchemaExtensions
+	eClusterOperationV2Serverless                                                smithy.SchemaExtensions
+	eClusterOperationV2Serverless_SourceClusterInfo                              smithy.SchemaExtensions
+	eClusterOperationV2Serverless_TargetClusterInfo                              smithy.SchemaExtensions
+	eClusterOperationV2Serverless_VpcConnectionInfo                              smithy.SchemaExtensions
+	eClusterOperationV2Summary                                                   smithy.SchemaExtensions
+	eClusterOperationV2Summary_ClusterArn                                        smithy.SchemaExtensions
+	eClusterOperationV2Summary_ClusterType                                       smithy.SchemaExtensions
+	eClusterOperationV2Summary_StartTime                                         smithy.SchemaExtensions
+	eClusterOperationV2Summary_EndTime                                           smithy.SchemaExtensions
+	eClusterOperationV2Summary_OperationArn                                      smithy.SchemaExtensions
+	eClusterOperationV2Summary_OperationState                                    smithy.SchemaExtensions
+	eClusterOperationV2Summary_OperationType                                     smithy.SchemaExtensions
+	eClusterState                                                                smithy.SchemaExtensions
+	eClusterState_ACTIVE                                                         smithy.SchemaExtensions
+	eClusterState_CREATING                                                       smithy.SchemaExtensions
+	eClusterState_DELETING                                                       smithy.SchemaExtensions
+	eClusterState_FAILED                                                         smithy.SchemaExtensions
+	eClusterState_HEALING                                                        smithy.SchemaExtensions
+	eClusterState_MAINTENANCE                                                    smithy.SchemaExtensions
+	eClusterState_REBOOTING_BROKER                                               smithy.SchemaExtensions
+	eClusterState_UPDATING                                                       smithy.SchemaExtensions
+	eClusterType                                                                 smithy.SchemaExtensions
+	eClusterType_PROVISIONED                                                     smithy.SchemaExtensions
+	eClusterType_SERVERLESS                                                      smithy.SchemaExtensions
+	eCompatibleKafkaVersion                                                      smithy.SchemaExtensions
+	eCompatibleKafkaVersion_SourceVersion                                        smithy.SchemaExtensions
+	eCompatibleKafkaVersion_TargetVersions                                       smithy.SchemaExtensions
+	eConfiguration                                                               smithy.SchemaExtensions
+	eConfiguration_Arn                                                           smithy.SchemaExtensions
+	eConfiguration_CreationTime                                                  smithy.SchemaExtensions
+	eConfiguration_Description                                                   smithy.SchemaExtensions
+	eConfiguration_KafkaVersions                                                 smithy.SchemaExtensions
+	eConfiguration_LatestRevision                                                smithy.SchemaExtensions
+	eConfiguration_Name                                                          smithy.SchemaExtensions
+	eConfiguration_State                                                         smithy.SchemaExtensions
+	eConfigurationInfo                                                           smithy.SchemaExtensions
+	eConfigurationInfo_Arn                                                       smithy.SchemaExtensions
+	eConfigurationInfo_Revision                                                  smithy.SchemaExtensions
+	eConfigurationRevision                                                       smithy.SchemaExtensions
+	eConfigurationRevision_CreationTime                                          smithy.SchemaExtensions
+	eConfigurationRevision_Description                                           smithy.SchemaExtensions
+	eConfigurationRevision_Revision                                              smithy.SchemaExtensions
+	eConfigurationState                                                          smithy.SchemaExtensions
+	eConfigurationState_ACTIVE                                                   smithy.SchemaExtensions
+	eConfigurationState_DELETING                                                 smithy.SchemaExtensions
+	eConfigurationState_DELETE_FAILED                                            smithy.SchemaExtensions
+	eConflictException                                                           smithy.SchemaExtensions
+	eConflictException_InvalidParameter                                          smithy.SchemaExtensions
+	eConflictException_Message                                                   smithy.SchemaExtensions
+	eConnectivityInfo                                                            smithy.SchemaExtensions
+	eConnectivityInfo_PublicAccess                                               smithy.SchemaExtensions
+	eConnectivityInfo_VpcConnectivity                                            smithy.SchemaExtensions
+	eConnectivityInfo_NetworkType                                                smithy.SchemaExtensions
+	eConsumerGroupOffsetSyncMode                                                 smithy.SchemaExtensions
+	eConsumerGroupOffsetSyncMode_LEGACY                                          smithy.SchemaExtensions
+	eConsumerGroupOffsetSyncMode_ENHANCED                                        smithy.SchemaExtensions
+	eConsumerGroupReplication                                                    smithy.SchemaExtensions
+	eConsumerGroupReplication_ConsumerGroupsToExclude                            smithy.SchemaExtensions
+	eConsumerGroupReplication_ConsumerGroupsToReplicate                          smithy.SchemaExtensions
+	eConsumerGroupReplication_DetectAndCopyNewConsumerGroups                     smithy.SchemaExtensions
+	eConsumerGroupReplication_SynchroniseConsumerGroupOffsets                    smithy.SchemaExtensions
+	eConsumerGroupReplication_ConsumerGroupOffsetSyncMode                        smithy.SchemaExtensions
+	eConsumerGroupReplicationUpdate                                              smithy.SchemaExtensions
+	eConsumerGroupReplicationUpdate_ConsumerGroupsToExclude                      smithy.SchemaExtensions
+	eConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate                    smithy.SchemaExtensions
+	eConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups               smithy.SchemaExtensions
+	eConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets              smithy.SchemaExtensions
+	eControllerMovedException                                                    smithy.SchemaExtensions
+	eControllerMovedException_InvalidParameter                                   smithy.SchemaExtensions
+	eControllerMovedException_Message                                            smithy.SchemaExtensions
+	eControllerNodeInfo                                                          smithy.SchemaExtensions
+	eControllerNodeInfo_Endpoints                                                smithy.SchemaExtensions
+	eCustomerActionStatus                                                        smithy.SchemaExtensions
+	eCustomerActionStatus_CRITICAL_ACTION_REQUIRED                               smithy.SchemaExtensions
+	eCustomerActionStatus_ACTION_RECOMMENDED                                     smithy.SchemaExtensions
+	eCustomerActionStatus_NONE                                                   smithy.SchemaExtensions
+	eDeadLetterQueueS3                                                           smithy.SchemaExtensions
+	eDeadLetterQueueS3_BucketArn                                                 smithy.SchemaExtensions
+	eDeadLetterQueueS3_ErrorOutputPrefix                                         smithy.SchemaExtensions
+	eDeadLetterQueueS3_ExpectedBucketOwner                                       smithy.SchemaExtensions
+	eDestinationTable                                                            smithy.SchemaExtensions
+	eDestinationTable_DestinationDatabaseName                                    smithy.SchemaExtensions
+	eDestinationTable_DestinationTableName                                       smithy.SchemaExtensions
+	eDestinationTable_PartitionSpec                                              smithy.SchemaExtensions
+	eEBSStorageInfo                                                              smithy.SchemaExtensions
+	eEBSStorageInfo_ProvisionedThroughput                                        smithy.SchemaExtensions
+	eEBSStorageInfo_VolumeSize                                                   smithy.SchemaExtensions
+	eEncryptionAtRest                                                            smithy.SchemaExtensions
+	eEncryptionAtRest_DataVolumeKMSKeyId                                         smithy.SchemaExtensions
+	eEncryptionConfiguration                                                     smithy.SchemaExtensions
+	eEncryptionConfiguration_KmsKeyArn                                           smithy.SchemaExtensions
+	eEncryptionInfo                                                              smithy.SchemaExtensions
+	eEncryptionInfo_EncryptionAtRest                                             smithy.SchemaExtensions
+	eEncryptionInfo_EncryptionInTransit                                          smithy.SchemaExtensions
+	eEncryptionInTransit                                                         smithy.SchemaExtensions
+	eEncryptionInTransit_ClientBroker                                            smithy.SchemaExtensions
+	eEncryptionInTransit_InCluster                                               smithy.SchemaExtensions
+	eEnhancedMonitoring                                                          smithy.SchemaExtensions
+	eEnhancedMonitoring_DEFAULT                                                  smithy.SchemaExtensions
+	eEnhancedMonitoring_PER_BROKER                                               smithy.SchemaExtensions
+	eEnhancedMonitoring_PER_TOPIC_PER_BROKER                                     smithy.SchemaExtensions
+	eEnhancedMonitoring_PER_TOPIC_PER_PARTITION                                  smithy.SchemaExtensions
+	eErrorInfo                                                                   smithy.SchemaExtensions
+	eErrorInfo_ErrorCode                                                         smithy.SchemaExtensions
+	eErrorInfo_ErrorString                                                       smithy.SchemaExtensions
+	eFirehose                                                                    smithy.SchemaExtensions
+	eFirehose_DeliveryStream                                                     smithy.SchemaExtensions
+	eFirehose_Enabled                                                            smithy.SchemaExtensions
+	eForbiddenException                                                          smithy.SchemaExtensions
+	eForbiddenException_InvalidParameter                                         smithy.SchemaExtensions
+	eForbiddenException_Message                                                  smithy.SchemaExtensions
+	eGroupSubscribedToTopicException                                             smithy.SchemaExtensions
+	eGroupSubscribedToTopicException_InvalidParameter                            smithy.SchemaExtensions
+	eGroupSubscribedToTopicException_Message                                     smithy.SchemaExtensions
+	eIam                                                                         smithy.SchemaExtensions
+	eIam_Enabled                                                                 smithy.SchemaExtensions
+	eIcebergCompressionType                                                      smithy.SchemaExtensions
+	eIcebergCompressionType_ZSTD                                                 smithy.SchemaExtensions
+	eIcebergCompressionType_SNAPPY                                               smithy.SchemaExtensions
+	eIcebergDestinationConfiguration                                             smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_AppendOnly                                  smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_Catalog                                     smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_DataFreshnessInSeconds                      smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_DeadLetterQueueS3                           smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_DestinationTableList                        smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_SchemaEvolution                             smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_ServiceExecutionRoleArn                     smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_TableCreation                               smithy.SchemaExtensions
+	eIcebergDestinationConfiguration_CompressionType                             smithy.SchemaExtensions
+	eIcebergDestinationUpdate                                                    smithy.SchemaExtensions
+	eIcebergDestinationUpdate_DataFreshnessInSeconds                             smithy.SchemaExtensions
+	eInternalServerErrorException                                                smithy.SchemaExtensions
+	eInternalServerErrorException_InvalidParameter                               smithy.SchemaExtensions
+	eInternalServerErrorException_Message                                        smithy.SchemaExtensions
+	eJmxExporter                                                                 smithy.SchemaExtensions
+	eJmxExporter_EnabledInBroker                                                 smithy.SchemaExtensions
+	eJmxExporterInfo                                                             smithy.SchemaExtensions
+	eJmxExporterInfo_EnabledInBroker                                             smithy.SchemaExtensions
+	eJwtSigningAlgorithm                                                         smithy.SchemaExtensions
+	eJwtSigningAlgorithm_RS256                                                   smithy.SchemaExtensions
+	eJwtSigningAlgorithm_ES384                                                   smithy.SchemaExtensions
+	eKafkaCluster                                                                smithy.SchemaExtensions
+	eKafkaCluster_AmazonMskCluster                                               smithy.SchemaExtensions
+	eKafkaCluster_ApacheKafkaCluster                                             smithy.SchemaExtensions
+	eKafkaCluster_VpcConfig                                                      smithy.SchemaExtensions
+	eKafkaCluster_ClientAuthentication                                           smithy.SchemaExtensions
+	eKafkaCluster_EncryptionInTransit                                            smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication                                            smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication_SaslScram                                  smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication_MTLS                                       smithy.SchemaExtensions
+	eKafkaClusterClientAuthentication_SaslOAuthBearer                            smithy.SchemaExtensions
+	eKafkaClusterClientVpcConfig                                                 smithy.SchemaExtensions
+	eKafkaClusterClientVpcConfig_SecurityGroupIds                                smithy.SchemaExtensions
+	eKafkaClusterClientVpcConfig_SubnetIds                                       smithy.SchemaExtensions
+	eKafkaClusterDescription                                                     smithy.SchemaExtensions
+	eKafkaClusterDescription_AmazonMskCluster                                    smithy.SchemaExtensions
+	eKafkaClusterDescription_ApacheKafkaCluster                                  smithy.SchemaExtensions
+	eKafkaClusterDescription_KafkaClusterAlias                                   smithy.SchemaExtensions
+	eKafkaClusterDescription_VpcConfig                                           smithy.SchemaExtensions
+	eKafkaClusterDescription_ClientAuthentication                                smithy.SchemaExtensions
+	eKafkaClusterDescription_EncryptionInTransit                                 smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransit                                             smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransit_EncryptionType                              smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransit_RootCaCertificate                           smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransitType                                         smithy.SchemaExtensions
+	eKafkaClusterEncryptionInTransitType_TLS                                     smithy.SchemaExtensions
+	eKafkaClusterMTLSAuthentication                                              smithy.SchemaExtensions
+	eKafkaClusterMTLSAuthentication_SecretArn                                    smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentials                                          smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentials_TokenRequestSecretArn                    smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentialsAssertion                                 smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentialsAssertion_Audience                        smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm                smithy.SchemaExtensions
+	eKafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn           smithy.SchemaExtensions
+	eKafkaClusterOAuthIamJwtBearer                                               smithy.SchemaExtensions
+	eKafkaClusterOAuthIamJwtBearer_Audience                                      smithy.SchemaExtensions
+	eKafkaClusterOAuthIamJwtBearer_SigningAlgorithm                              smithy.SchemaExtensions
+	eKafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn                         smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication                                   smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl                  smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_ClientCredentials                 smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer                      smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion        smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_Scope                             smithy.SchemaExtensions
+	eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn    smithy.SchemaExtensions
+	eKafkaClusterSaslScramAuthentication                                         smithy.SchemaExtensions
+	eKafkaClusterSaslScramAuthentication_Mechanism                               smithy.SchemaExtensions
+	eKafkaClusterSaslScramAuthentication_SecretArn                               smithy.SchemaExtensions
+	eKafkaClusterSaslScramMechanism                                              smithy.SchemaExtensions
+	eKafkaClusterSaslScramMechanism_SHA256                                       smithy.SchemaExtensions
+	eKafkaClusterSaslScramMechanism_SHA512                                       smithy.SchemaExtensions
+	eKafkaClusterSummary                                                         smithy.SchemaExtensions
+	eKafkaClusterSummary_AmazonMskCluster                                        smithy.SchemaExtensions
+	eKafkaClusterSummary_ApacheKafkaCluster                                      smithy.SchemaExtensions
+	eKafkaClusterSummary_KafkaClusterAlias                                       smithy.SchemaExtensions
+	eKafkaRequestException                                                       smithy.SchemaExtensions
+	eKafkaRequestException_InvalidParameter                                      smithy.SchemaExtensions
+	eKafkaRequestException_Message                                               smithy.SchemaExtensions
+	eKafkaTimeoutException                                                       smithy.SchemaExtensions
+	eKafkaTimeoutException_InvalidParameter                                      smithy.SchemaExtensions
+	eKafkaTimeoutException_Message                                               smithy.SchemaExtensions
+	eKafkaVersion                                                                smithy.SchemaExtensions
+	eKafkaVersion_Version                                                        smithy.SchemaExtensions
+	eKafkaVersion_Status                                                         smithy.SchemaExtensions
+	eKafkaVersionStatus                                                          smithy.SchemaExtensions
+	eKafkaVersionStatus_ACTIVE                                                   smithy.SchemaExtensions
+	eKafkaVersionStatus_DEPRECATED                                               smithy.SchemaExtensions
+	eLogDelivery                                                                 smithy.SchemaExtensions
+	eLogDelivery_ReplicatorLogDelivery                                           smithy.SchemaExtensions
+	eLoggingInfo                                                                 smithy.SchemaExtensions
+	eLoggingInfo_AuthorizerLogs                                                  smithy.SchemaExtensions
+	eLoggingInfo_BrokerLogs                                                      smithy.SchemaExtensions
+	e_MaxResults                                                                 smithy.SchemaExtensions
+	eMutableClusterInfo                                                          smithy.SchemaExtensions
+	eMutableClusterInfo_BrokerEBSVolumeInfo                                      smithy.SchemaExtensions
+	eMutableClusterInfo_ConfigurationInfo                                        smithy.SchemaExtensions
+	eMutableClusterInfo_NumberOfBrokerNodes                                      smithy.SchemaExtensions
+	eMutableClusterInfo_EnhancedMonitoring                                       smithy.SchemaExtensions
+	eMutableClusterInfo_OpenMonitoring                                           smithy.SchemaExtensions
+	eMutableClusterInfo_ZookeeperAccess                                          smithy.SchemaExtensions
+	eMutableClusterInfo_KafkaVersion                                             smithy.SchemaExtensions
+	eMutableClusterInfo_LoggingInfo                                              smithy.SchemaExtensions
+	eMutableClusterInfo_InstanceType                                             smithy.SchemaExtensions
+	eMutableClusterInfo_ClientAuthentication                                     smithy.SchemaExtensions
+	eMutableClusterInfo_EncryptionInfo                                           smithy.SchemaExtensions
+	eMutableClusterInfo_ConnectivityInfo                                         smithy.SchemaExtensions
+	eMutableClusterInfo_StorageMode                                              smithy.SchemaExtensions
+	eMutableClusterInfo_BrokerCountUpdateInfo                                    smithy.SchemaExtensions
+	eMutableClusterInfo_Rebalancing                                              smithy.SchemaExtensions
+	eNetworkType                                                                 smithy.SchemaExtensions
+	eNetworkType_IPV4                                                            smithy.SchemaExtensions
+	eNetworkType_DUAL                                                            smithy.SchemaExtensions
+	eNodeExporter                                                                smithy.SchemaExtensions
+	eNodeExporter_EnabledInBroker                                                smithy.SchemaExtensions
+	eNodeExporterInfo                                                            smithy.SchemaExtensions
+	eNodeExporterInfo_EnabledInBroker                                            smithy.SchemaExtensions
+	eNodeInfo                                                                    smithy.SchemaExtensions
+	eNodeInfo_AddedToClusterTime                                                 smithy.SchemaExtensions
+	eNodeInfo_BrokerNodeInfo                                                     smithy.SchemaExtensions
+	eNodeInfo_ControllerNodeInfo                                                 smithy.SchemaExtensions
+	eNodeInfo_InstanceType                                                       smithy.SchemaExtensions
+	eNodeInfo_NodeARN                                                            smithy.SchemaExtensions
+	eNodeInfo_NodeType                                                           smithy.SchemaExtensions
+	eNodeInfo_ZookeeperNodeInfo                                                  smithy.SchemaExtensions
+	eNodeType                                                                    smithy.SchemaExtensions
+	eNodeType_BROKER                                                             smithy.SchemaExtensions
+	eNotControllerException                                                      smithy.SchemaExtensions
+	eNotControllerException_InvalidParameter                                     smithy.SchemaExtensions
+	eNotControllerException_Message                                              smithy.SchemaExtensions
+	eNotFoundException                                                           smithy.SchemaExtensions
+	eNotFoundException_InvalidParameter                                          smithy.SchemaExtensions
+	eNotFoundException_Message                                                   smithy.SchemaExtensions
+	eOpenMonitoring                                                              smithy.SchemaExtensions
+	eOpenMonitoring_Prometheus                                                   smithy.SchemaExtensions
+	eOpenMonitoringInfo                                                          smithy.SchemaExtensions
+	eOpenMonitoringInfo_Prometheus                                               smithy.SchemaExtensions
+	ePartitionSource                                                             smithy.SchemaExtensions
+	ePartitionSource_SourceName                                                  smithy.SchemaExtensions
+	ePartitionSpec                                                               smithy.SchemaExtensions
+	ePartitionSpec_PartitionStrategy                                             smithy.SchemaExtensions
+	ePartitionSpec_SourceList                                                    smithy.SchemaExtensions
+	ePartitionStrategy                                                           smithy.SchemaExtensions
+	ePartitionStrategy_TIME_HOUR                                                 smithy.SchemaExtensions
+	ePrometheus                                                                  smithy.SchemaExtensions
+	ePrometheus_JmxExporter                                                      smithy.SchemaExtensions
+	ePrometheus_NodeExporter                                                     smithy.SchemaExtensions
+	ePrometheusInfo                                                              smithy.SchemaExtensions
+	ePrometheusInfo_JmxExporter                                                  smithy.SchemaExtensions
+	ePrometheusInfo_NodeExporter                                                 smithy.SchemaExtensions
+	eProvisioned                                                                 smithy.SchemaExtensions
+	eProvisioned_BrokerNodeGroupInfo                                             smithy.SchemaExtensions
+	eProvisioned_Rebalancing                                                     smithy.SchemaExtensions
+	eProvisioned_CurrentBrokerSoftwareInfo                                       smithy.SchemaExtensions
+	eProvisioned_ClientAuthentication                                            smithy.SchemaExtensions
+	eProvisioned_EncryptionInfo                                                  smithy.SchemaExtensions
+	eProvisioned_EnhancedMonitoring                                              smithy.SchemaExtensions
+	eProvisioned_OpenMonitoring                                                  smithy.SchemaExtensions
+	eProvisioned_LoggingInfo                                                     smithy.SchemaExtensions
+	eProvisioned_NumberOfBrokerNodes                                             smithy.SchemaExtensions
+	eProvisioned_ZookeeperConnectString                                          smithy.SchemaExtensions
+	eProvisioned_ZookeeperConnectStringTls                                       smithy.SchemaExtensions
+	eProvisioned_StorageMode                                                     smithy.SchemaExtensions
+	eProvisioned_CustomerActionStatus                                            smithy.SchemaExtensions
+	eProvisionedRequest                                                          smithy.SchemaExtensions
+	eProvisionedRequest_BrokerNodeGroupInfo                                      smithy.SchemaExtensions
+	eProvisionedRequest_Rebalancing                                              smithy.SchemaExtensions
+	eProvisionedRequest_ClientAuthentication                                     smithy.SchemaExtensions
+	eProvisionedRequest_ConfigurationInfo                                        smithy.SchemaExtensions
+	eProvisionedRequest_EncryptionInfo                                           smithy.SchemaExtensions
+	eProvisionedRequest_EnhancedMonitoring                                       smithy.SchemaExtensions
+	eProvisionedRequest_OpenMonitoring                                           smithy.SchemaExtensions
+	eProvisionedRequest_KafkaVersion                                             smithy.SchemaExtensions
+	eProvisionedRequest_LoggingInfo                                              smithy.SchemaExtensions
+	eProvisionedRequest_NumberOfBrokerNodes                                      smithy.SchemaExtensions
+	eProvisionedRequest_StorageMode                                              smithy.SchemaExtensions
+	eProvisionedThroughput                                                       smithy.SchemaExtensions
+	eProvisionedThroughput_Enabled                                               smithy.SchemaExtensions
+	eProvisionedThroughput_VolumeThroughput                                      smithy.SchemaExtensions
+	ePublicAccess                                                                smithy.SchemaExtensions
+	ePublicAccess_Type                                                           smithy.SchemaExtensions
+	eReassignmentInProgressException                                             smithy.SchemaExtensions
+	eReassignmentInProgressException_InvalidParameter                            smithy.SchemaExtensions
+	eReassignmentInProgressException_Message                                     smithy.SchemaExtensions
+	eRebalancing                                                                 smithy.SchemaExtensions
+	eRebalancing_Status                                                          smithy.SchemaExtensions
+	eRebalancingStatus                                                           smithy.SchemaExtensions
+	eRebalancingStatus_PAUSED                                                    smithy.SchemaExtensions
+	eRebalancingStatus_ACTIVE                                                    smithy.SchemaExtensions
+	eRecordConverter                                                             smithy.SchemaExtensions
+	eRecordConverter_ValueConverter                                              smithy.SchemaExtensions
+	eRecordSchema                                                                smithy.SchemaExtensions
+	eRecordSchema_GsrArn                                                         smithy.SchemaExtensions
+	eReplicationInfo                                                             smithy.SchemaExtensions
+	eReplicationInfo_ConsumerGroupReplication                                    smithy.SchemaExtensions
+	eReplicationInfo_SourceKafkaClusterArn                                       smithy.SchemaExtensions
+	eReplicationInfo_SourceKafkaClusterId                                        smithy.SchemaExtensions
+	eReplicationInfo_TargetCompressionType                                       smithy.SchemaExtensions
+	eReplicationInfo_TargetKafkaClusterArn                                       smithy.SchemaExtensions
+	eReplicationInfo_TargetKafkaClusterId                                        smithy.SchemaExtensions
+	eReplicationInfo_TopicReplication                                            smithy.SchemaExtensions
+	eReplicationInfoDescription                                                  smithy.SchemaExtensions
+	eReplicationInfoDescription_ConsumerGroupReplication                         smithy.SchemaExtensions
+	eReplicationInfoDescription_SourceKafkaClusterAlias                          smithy.SchemaExtensions
+	eReplicationInfoDescription_TargetCompressionType                            smithy.SchemaExtensions
+	eReplicationInfoDescription_TargetKafkaClusterAlias                          smithy.SchemaExtensions
+	eReplicationInfoDescription_TopicReplication                                 smithy.SchemaExtensions
+	eReplicationInfoSummary                                                      smithy.SchemaExtensions
+	eReplicationInfoSummary_SourceKafkaClusterAlias                              smithy.SchemaExtensions
+	eReplicationInfoSummary_TargetKafkaClusterAlias                              smithy.SchemaExtensions
+	eReplicationStartingPosition                                                 smithy.SchemaExtensions
+	eReplicationStartingPosition_Type                                            smithy.SchemaExtensions
+	eReplicationStartingPositionType                                             smithy.SchemaExtensions
+	eReplicationStartingPositionType_LATEST                                      smithy.SchemaExtensions
+	eReplicationStartingPositionType_EARLIEST                                    smithy.SchemaExtensions
+	eReplicationStateInfo                                                        smithy.SchemaExtensions
+	eReplicationStateInfo_Code                                                   smithy.SchemaExtensions
+	eReplicationStateInfo_Message                                                smithy.SchemaExtensions
+	eReplicationTopicNameConfiguration                                           smithy.SchemaExtensions
+	eReplicationTopicNameConfiguration_Type                                      smithy.SchemaExtensions
+	eReplicationTopicNameConfigurationType                                       smithy.SchemaExtensions
+	eReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS    smithy.SchemaExtensions
+	eReplicationTopicNameConfigurationType_IDENTICAL                             smithy.SchemaExtensions
+	eReplicatorCloudWatchLogs                                                    smithy.SchemaExtensions
+	eReplicatorCloudWatchLogs_Enabled                                            smithy.SchemaExtensions
+	eReplicatorCloudWatchLogs_LogGroup                                           smithy.SchemaExtensions
+	eReplicatorFirehose                                                          smithy.SchemaExtensions
+	eReplicatorFirehose_Enabled                                                  smithy.SchemaExtensions
+	eReplicatorFirehose_DeliveryStream                                           smithy.SchemaExtensions
+	eReplicatorLogDelivery                                                       smithy.SchemaExtensions
+	eReplicatorLogDelivery_CloudWatchLogs                                        smithy.SchemaExtensions
+	eReplicatorLogDelivery_Firehose                                              smithy.SchemaExtensions
+	eReplicatorLogDelivery_S3                                                    smithy.SchemaExtensions
+	eReplicatorS3                                                                smithy.SchemaExtensions
+	eReplicatorS3_Enabled                                                        smithy.SchemaExtensions
+	eReplicatorS3_Bucket                                                         smithy.SchemaExtensions
+	eReplicatorS3_Prefix                                                         smithy.SchemaExtensions
+	eReplicatorState                                                             smithy.SchemaExtensions
+	eReplicatorState_RUNNING                                                     smithy.SchemaExtensions
+	eReplicatorState_CREATING                                                    smithy.SchemaExtensions
+	eReplicatorState_UPDATING                                                    smithy.SchemaExtensions
+	eReplicatorState_DELETING                                                    smithy.SchemaExtensions
+	eReplicatorState_FAILED                                                      smithy.SchemaExtensions
+	eReplicatorSummary                                                           smithy.SchemaExtensions
+	eReplicatorSummary_CreationTime                                              smithy.SchemaExtensions
+	eReplicatorSummary_CurrentVersion                                            smithy.SchemaExtensions
+	eReplicatorSummary_IsReplicatorReference                                     smithy.SchemaExtensions
+	eReplicatorSummary_KafkaClustersSummary                                      smithy.SchemaExtensions
+	eReplicatorSummary_ReplicationInfoSummaryList                                smithy.SchemaExtensions
+	eReplicatorSummary_ReplicatorArn                                             smithy.SchemaExtensions
+	eReplicatorSummary_ReplicatorName                                            smithy.SchemaExtensions
+	eReplicatorSummary_ReplicatorResourceArn                                     smithy.SchemaExtensions
+	eReplicatorSummary_ReplicatorState                                           smithy.SchemaExtensions
+	eS3                                                                          smithy.SchemaExtensions
+	eS3_Bucket                                                                   smithy.SchemaExtensions
+	eS3_Enabled                                                                  smithy.SchemaExtensions
+	eS3_Prefix                                                                   smithy.SchemaExtensions
+	eS3CompressionType                                                           smithy.SchemaExtensions
+	eS3CompressionType_NONE                                                      smithy.SchemaExtensions
+	eS3CompressionType_GZIP                                                      smithy.SchemaExtensions
+	eS3CompressionType_ZSTD                                                      smithy.SchemaExtensions
+	eS3DestinationConfiguration                                                  smithy.SchemaExtensions
+	eS3DestinationConfiguration_DataFreshnessInSeconds                           smithy.SchemaExtensions
+	eS3DestinationConfiguration_DeadLetterQueueS3                                smithy.SchemaExtensions
+	eS3DestinationConfiguration_ServiceExecutionRoleArn                          smithy.SchemaExtensions
+	eS3DestinationConfiguration_Storage                                          smithy.SchemaExtensions
+	eS3DestinationUpdate                                                         smithy.SchemaExtensions
+	eS3DestinationUpdate_DataFreshnessInSeconds                                  smithy.SchemaExtensions
+	eS3Storage                                                                   smithy.SchemaExtensions
+	eS3Storage_BucketArn                                                         smithy.SchemaExtensions
+	eS3Storage_CompressionType                                                   smithy.SchemaExtensions
+	eS3Storage_OutputPrefix                                                      smithy.SchemaExtensions
+	eS3Storage_OutputKeyTemplate                                                 smithy.SchemaExtensions
+	eS3Storage_StorageClass                                                      smithy.SchemaExtensions
+	eS3Storage_ExpectedBucketOwner                                               smithy.SchemaExtensions
+	eS3StorageClass                                                              smithy.SchemaExtensions
+	eS3StorageClass_STANDARD                                                     smithy.SchemaExtensions
+	eS3StorageClass_INTELLIGENT_TIERING                                          smithy.SchemaExtensions
+	eS3StorageClass_GLACIER_IR                                                   smithy.SchemaExtensions
+	eSasl                                                                        smithy.SchemaExtensions
+	eSasl_Scram                                                                  smithy.SchemaExtensions
+	eSasl_Iam                                                                    smithy.SchemaExtensions
+	eSchemaEvolution                                                             smithy.SchemaExtensions
+	eSchemaEvolution_EnableSchemaEvolution                                       smithy.SchemaExtensions
+	eScram                                                                       smithy.SchemaExtensions
+	eScram_Enabled                                                               smithy.SchemaExtensions
+	eServerless                                                                  smithy.SchemaExtensions
+	eServerless_VpcConfigs                                                       smithy.SchemaExtensions
+	eServerless_ClientAuthentication                                             smithy.SchemaExtensions
+	eServerless_ConnectivityInfo                                                 smithy.SchemaExtensions
+	eServerlessClientAuthentication                                              smithy.SchemaExtensions
+	eServerlessClientAuthentication_Sasl                                         smithy.SchemaExtensions
+	eServerlessConnectivityInfo                                                  smithy.SchemaExtensions
+	eServerlessConnectivityInfo_NetworkType                                      smithy.SchemaExtensions
+	eServerlessRequest                                                           smithy.SchemaExtensions
+	eServerlessRequest_VpcConfigs                                                smithy.SchemaExtensions
+	eServerlessRequest_ClientAuthentication                                      smithy.SchemaExtensions
+	eServerlessSasl                                                              smithy.SchemaExtensions
+	eServerlessSasl_Iam                                                          smithy.SchemaExtensions
+	eServiceUnavailableException                                                 smithy.SchemaExtensions
+	eServiceUnavailableException_InvalidParameter                                smithy.SchemaExtensions
+	eServiceUnavailableException_Message                                         smithy.SchemaExtensions
+	eStateInfo                                                                   smithy.SchemaExtensions
+	eStateInfo_Code                                                              smithy.SchemaExtensions
+	eStateInfo_Message                                                           smithy.SchemaExtensions
+	eStorageInfo                                                                 smithy.SchemaExtensions
+	eStorageInfo_EbsStorageInfo                                                  smithy.SchemaExtensions
+	eStorageMode                                                                 smithy.SchemaExtensions
+	eStorageMode_LOCAL                                                           smithy.SchemaExtensions
+	eStorageMode_TIERED                                                          smithy.SchemaExtensions
+	eTableCreation                                                               smithy.SchemaExtensions
+	eTableCreation_EnableTableCreation                                           smithy.SchemaExtensions
+	eTargetCompressionType                                                       smithy.SchemaExtensions
+	eTargetCompressionType_NONE                                                  smithy.SchemaExtensions
+	eTargetCompressionType_GZIP                                                  smithy.SchemaExtensions
+	eTargetCompressionType_SNAPPY                                                smithy.SchemaExtensions
+	eTargetCompressionType_LZ4                                                   smithy.SchemaExtensions
+	eTargetCompressionType_ZSTD                                                  smithy.SchemaExtensions
+	eTls                                                                         smithy.SchemaExtensions
+	eTls_CertificateAuthorityArnList                                             smithy.SchemaExtensions
+	eTls_Enabled                                                                 smithy.SchemaExtensions
+	eTokenEndpointAuthenticationMethod                                           smithy.SchemaExtensions
+	eTokenEndpointAuthenticationMethod_POST                                      smithy.SchemaExtensions
+	eTokenEndpointAuthenticationMethod_BASIC                                     smithy.SchemaExtensions
+	eTokenEndpointAuthenticationMethod_NONE                                      smithy.SchemaExtensions
+	eTooManyRequestsException                                                    smithy.SchemaExtensions
+	eTooManyRequestsException_InvalidParameter                                   smithy.SchemaExtensions
+	eTooManyRequestsException_Message                                            smithy.SchemaExtensions
+	eTopicConfiguration                                                          smithy.SchemaExtensions
+	eTopicConfiguration_RecordConverter                                          smithy.SchemaExtensions
+	eTopicConfiguration_RecordSchema                                             smithy.SchemaExtensions
+	eTopicConfiguration_TopicArn                                                 smithy.SchemaExtensions
+	eTopicExistsException                                                        smithy.SchemaExtensions
+	eTopicExistsException_InvalidParameter                                       smithy.SchemaExtensions
+	eTopicExistsException_Message                                                smithy.SchemaExtensions
+	eTopicInfo                                                                   smithy.SchemaExtensions
+	eTopicInfo_TopicArn                                                          smithy.SchemaExtensions
+	eTopicInfo_TopicName                                                         smithy.SchemaExtensions
+	eTopicInfo_ReplicationFactor                                                 smithy.SchemaExtensions
+	eTopicInfo_PartitionCount                                                    smithy.SchemaExtensions
+	eTopicInfo_OutOfSyncReplicaCount                                             smithy.SchemaExtensions
+	eTopicPartitionInfo                                                          smithy.SchemaExtensions
+	eTopicPartitionInfo_Partition                                                smithy.SchemaExtensions
+	eTopicPartitionInfo_Leader                                                   smithy.SchemaExtensions
+	eTopicPartitionInfo_Replicas                                                 smithy.SchemaExtensions
+	eTopicPartitionInfo_Isr                                                      smithy.SchemaExtensions
+	eTopicReplication                                                            smithy.SchemaExtensions
+	eTopicReplication_CopyAccessControlListsForTopics                            smithy.SchemaExtensions
+	eTopicReplication_CopyTopicConfigurations                                    smithy.SchemaExtensions
+	eTopicReplication_DetectAndCopyNewTopics                                     smithy.SchemaExtensions
+	eTopicReplication_StartingPosition                                           smithy.SchemaExtensions
+	eTopicReplication_TopicNameConfiguration                                     smithy.SchemaExtensions
+	eTopicReplication_TopicsToExclude                                            smithy.SchemaExtensions
+	eTopicReplication_TopicsToReplicate                                          smithy.SchemaExtensions
+	eTopicReplicationUpdate                                                      smithy.SchemaExtensions
+	eTopicReplicationUpdate_CopyAccessControlListsForTopics                      smithy.SchemaExtensions
+	eTopicReplicationUpdate_CopyTopicConfigurations                              smithy.SchemaExtensions
+	eTopicReplicationUpdate_DetectAndCopyNewTopics                               smithy.SchemaExtensions
+	eTopicReplicationUpdate_TopicsToExclude                                      smithy.SchemaExtensions
+	eTopicReplicationUpdate_TopicsToReplicate                                    smithy.SchemaExtensions
+	eTopicState                                                                  smithy.SchemaExtensions
+	eTopicState_CREATING                                                         smithy.SchemaExtensions
+	eTopicState_UPDATING                                                         smithy.SchemaExtensions
+	eTopicState_DELETING                                                         smithy.SchemaExtensions
+	eTopicState_ACTIVE                                                           smithy.SchemaExtensions
+	eUnauthenticated                                                             smithy.SchemaExtensions
+	eUnauthenticated_Enabled                                                     smithy.SchemaExtensions
+	eUnauthorizedException                                                       smithy.SchemaExtensions
+	eUnauthorizedException_InvalidParameter                                      smithy.SchemaExtensions
+	eUnauthorizedException_Message                                               smithy.SchemaExtensions
+	eUnknownTopicOrPartitionException                                            smithy.SchemaExtensions
+	eUnknownTopicOrPartitionException_InvalidParameter                           smithy.SchemaExtensions
+	eUnknownTopicOrPartitionException_Message                                    smithy.SchemaExtensions
+	eUnprocessedScramSecret                                                      smithy.SchemaExtensions
+	eUnprocessedScramSecret_ErrorCode                                            smithy.SchemaExtensions
+	eUnprocessedScramSecret_ErrorMessage                                         smithy.SchemaExtensions
+	eUnprocessedScramSecret_SecretArn                                            smithy.SchemaExtensions
+	eUserIdentity                                                                smithy.SchemaExtensions
+	eUserIdentity_Type                                                           smithy.SchemaExtensions
+	eUserIdentity_PrincipalId                                                    smithy.SchemaExtensions
+	eUserIdentityType                                                            smithy.SchemaExtensions
+	eUserIdentityType_AWSACCOUNT                                                 smithy.SchemaExtensions
+	eUserIdentityType_AWSSERVICE                                                 smithy.SchemaExtensions
+	eValueConverter                                                              smithy.SchemaExtensions
+	eValueConverter_BYTE_ARRAY                                                   smithy.SchemaExtensions
+	eValueConverter_JSON                                                         smithy.SchemaExtensions
+	eValueConverter_JSON_SCHEMA_GSR                                              smithy.SchemaExtensions
+	eValueConverter_STRING                                                       smithy.SchemaExtensions
+	eVpcConfig                                                                   smithy.SchemaExtensions
+	eVpcConfig_SubnetIds                                                         smithy.SchemaExtensions
+	eVpcConfig_SecurityGroupIds                                                  smithy.SchemaExtensions
+	eVpcConnection                                                               smithy.SchemaExtensions
+	eVpcConnection_VpcConnectionArn                                              smithy.SchemaExtensions
+	eVpcConnection_TargetClusterArn                                              smithy.SchemaExtensions
+	eVpcConnection_CreationTime                                                  smithy.SchemaExtensions
+	eVpcConnection_Authentication                                                smithy.SchemaExtensions
+	eVpcConnection_VpcId                                                         smithy.SchemaExtensions
+	eVpcConnection_State                                                         smithy.SchemaExtensions
+	eVpcConnectionInfo                                                           smithy.SchemaExtensions
+	eVpcConnectionInfo_VpcConnectionArn                                          smithy.SchemaExtensions
+	eVpcConnectionInfo_Owner                                                     smithy.SchemaExtensions
+	eVpcConnectionInfo_UserIdentity                                              smithy.SchemaExtensions
+	eVpcConnectionInfo_CreationTime                                              smithy.SchemaExtensions
+	eVpcConnectionInfoServerless                                                 smithy.SchemaExtensions
+	eVpcConnectionInfoServerless_CreationTime                                    smithy.SchemaExtensions
+	eVpcConnectionInfoServerless_Owner                                           smithy.SchemaExtensions
+	eVpcConnectionInfoServerless_UserIdentity                                    smithy.SchemaExtensions
+	eVpcConnectionInfoServerless_VpcConnectionArn                                smithy.SchemaExtensions
+	eVpcConnectionState                                                          smithy.SchemaExtensions
+	eVpcConnectionState_CREATING                                                 smithy.SchemaExtensions
+	eVpcConnectionState_AVAILABLE                                                smithy.SchemaExtensions
+	eVpcConnectionState_INACTIVE                                                 smithy.SchemaExtensions
+	eVpcConnectionState_DEACTIVATING                                             smithy.SchemaExtensions
+	eVpcConnectionState_DELETING                                                 smithy.SchemaExtensions
+	eVpcConnectionState_FAILED                                                   smithy.SchemaExtensions
+	eVpcConnectionState_REJECTED                                                 smithy.SchemaExtensions
+	eVpcConnectionState_REJECTING                                                smithy.SchemaExtensions
+	eVpcConnectivity                                                             smithy.SchemaExtensions
+	eVpcConnectivity_ClientAuthentication                                        smithy.SchemaExtensions
+	eVpcConnectivityClientAuthentication                                         smithy.SchemaExtensions
+	eVpcConnectivityClientAuthentication_Sasl                                    smithy.SchemaExtensions
+	eVpcConnectivityClientAuthentication_Tls                                     smithy.SchemaExtensions
+	eVpcConnectivityIam                                                          smithy.SchemaExtensions
+	eVpcConnectivityIam_Enabled                                                  smithy.SchemaExtensions
+	eVpcConnectivitySasl                                                         smithy.SchemaExtensions
+	eVpcConnectivitySasl_Scram                                                   smithy.SchemaExtensions
+	eVpcConnectivitySasl_Iam                                                     smithy.SchemaExtensions
+	eVpcConnectivityScram                                                        smithy.SchemaExtensions
+	eVpcConnectivityScram_Enabled                                                smithy.SchemaExtensions
+	eVpcConnectivityTls                                                          smithy.SchemaExtensions
+	eVpcConnectivityTls_Enabled                                                  smithy.SchemaExtensions
+	eZookeeperAccess                                                             smithy.SchemaExtensions
+	eZookeeperAccess_Enabled                                                     smithy.SchemaExtensions
+	eZookeeperNodeInfo                                                           smithy.SchemaExtensions
+	eZookeeperNodeInfo_AttachedENIId                                             smithy.SchemaExtensions
+	eZookeeperNodeInfo_ClientVpcIpAddress                                        smithy.SchemaExtensions
+	eZookeeperNodeInfo_Endpoints                                                 smithy.SchemaExtensions
+	eZookeeperNodeInfo_ZookeeperId                                               smithy.SchemaExtensions
+	eZookeeperNodeInfo_ZookeeperVersion                                          smithy.SchemaExtensions
+	eBatchAssociateScramSecretRequest                                            smithy.SchemaExtensions
+	eBatchAssociateScramSecretRequest_ClusterArn                                 smithy.SchemaExtensions
+	eBatchAssociateScramSecretRequest_SecretArnList                              smithy.SchemaExtensions
+	eBatchAssociateScramSecretResponse                                           smithy.SchemaExtensions
+	eBatchAssociateScramSecretResponse_ClusterArn                                smithy.SchemaExtensions
+	eBatchAssociateScramSecretResponse_UnprocessedScramSecrets                   smithy.SchemaExtensions
+	eBatchDisassociateScramSecretRequest                                         smithy.SchemaExtensions
+	eBatchDisassociateScramSecretRequest_ClusterArn                              smithy.SchemaExtensions
+	eBatchDisassociateScramSecretRequest_SecretArnList                           smithy.SchemaExtensions
+	eBatchDisassociateScramSecretResponse                                        smithy.SchemaExtensions
+	eBatchDisassociateScramSecretResponse_ClusterArn                             smithy.SchemaExtensions
+	eBatchDisassociateScramSecretResponse_UnprocessedScramSecrets                smithy.SchemaExtensions
+	eCreateChannelRequest                                                        smithy.SchemaExtensions
+	eCreateChannelRequest_ChannelName                                            smithy.SchemaExtensions
+	eCreateChannelRequest_ClusterArn                                             smithy.SchemaExtensions
+	eCreateChannelRequest_EncryptionConfiguration                                smithy.SchemaExtensions
+	eCreateChannelRequest_IcebergDestinationConfiguration                        smithy.SchemaExtensions
+	eCreateChannelRequest_S3DestinationConfiguration                             smithy.SchemaExtensions
+	eCreateChannelRequest_Tags                                                   smithy.SchemaExtensions
+	eCreateChannelRequest_TopicConfigurationList                                 smithy.SchemaExtensions
+	eCreateChannelRequest_LoggingInfo                                            smithy.SchemaExtensions
+	eCreateChannelResponse                                                       smithy.SchemaExtensions
+	eCreateChannelResponse_ChannelArn                                            smithy.SchemaExtensions
+	eCreateChannelResponse_ClusterOperationArn                                   smithy.SchemaExtensions
+	eCreateClusterRequest                                                        smithy.SchemaExtensions
+	eCreateClusterRequest_BrokerNodeGroupInfo                                    smithy.SchemaExtensions
+	eCreateClusterRequest_Rebalancing                                            smithy.SchemaExtensions
+	eCreateClusterRequest_ClientAuthentication                                   smithy.SchemaExtensions
+	eCreateClusterRequest_ClusterName                                            smithy.SchemaExtensions
+	eCreateClusterRequest_ConfigurationInfo                                      smithy.SchemaExtensions
+	eCreateClusterRequest_EncryptionInfo                                         smithy.SchemaExtensions
+	eCreateClusterRequest_EnhancedMonitoring                                     smithy.SchemaExtensions
+	eCreateClusterRequest_OpenMonitoring                                         smithy.SchemaExtensions
+	eCreateClusterRequest_KafkaVersion                                           smithy.SchemaExtensions
+	eCreateClusterRequest_LoggingInfo                                            smithy.SchemaExtensions
+	eCreateClusterRequest_NumberOfBrokerNodes                                    smithy.SchemaExtensions
+	eCreateClusterRequest_Tags                                                   smithy.SchemaExtensions
+	eCreateClusterRequest_StorageMode                                            smithy.SchemaExtensions
+	eCreateClusterResponse                                                       smithy.SchemaExtensions
+	eCreateClusterResponse_ClusterArn                                            smithy.SchemaExtensions
+	eCreateClusterResponse_ClusterName                                           smithy.SchemaExtensions
+	eCreateClusterResponse_State                                                 smithy.SchemaExtensions
+	eCreateClusterV2Request                                                      smithy.SchemaExtensions
+	eCreateClusterV2Request_ClusterName                                          smithy.SchemaExtensions
+	eCreateClusterV2Request_Tags                                                 smithy.SchemaExtensions
+	eCreateClusterV2Request_Provisioned                                          smithy.SchemaExtensions
+	eCreateClusterV2Request_Serverless                                           smithy.SchemaExtensions
+	eCreateClusterV2Response                                                     smithy.SchemaExtensions
+	eCreateClusterV2Response_ClusterArn                                          smithy.SchemaExtensions
+	eCreateClusterV2Response_ClusterName                                         smithy.SchemaExtensions
+	eCreateClusterV2Response_State                                               smithy.SchemaExtensions
+	eCreateClusterV2Response_ClusterType                                         smithy.SchemaExtensions
+	eCreateConfigurationRequest                                                  smithy.SchemaExtensions
+	eCreateConfigurationRequest_Description                                      smithy.SchemaExtensions
+	eCreateConfigurationRequest_KafkaVersions                                    smithy.SchemaExtensions
+	eCreateConfigurationRequest_Name                                             smithy.SchemaExtensions
+	eCreateConfigurationRequest_ServerProperties                                 smithy.SchemaExtensions
+	eCreateConfigurationResponse                                                 smithy.SchemaExtensions
+	eCreateConfigurationResponse_Arn                                             smithy.SchemaExtensions
+	eCreateConfigurationResponse_CreationTime                                    smithy.SchemaExtensions
+	eCreateConfigurationResponse_LatestRevision                                  smithy.SchemaExtensions
+	eCreateConfigurationResponse_Name                                            smithy.SchemaExtensions
+	eCreateConfigurationResponse_State                                           smithy.SchemaExtensions
+	eCreateReplicatorRequest                                                     smithy.SchemaExtensions
+	eCreateReplicatorRequest_Description                                         smithy.SchemaExtensions
+	eCreateReplicatorRequest_KafkaClusters                                       smithy.SchemaExtensions
+	eCreateReplicatorRequest_ReplicationInfoList                                 smithy.SchemaExtensions
+	eCreateReplicatorRequest_ReplicatorName                                      smithy.SchemaExtensions
+	eCreateReplicatorRequest_ServiceExecutionRoleArn                             smithy.SchemaExtensions
+	eCreateReplicatorRequest_Tags                                                smithy.SchemaExtensions
+	eCreateReplicatorRequest_LogDelivery                                         smithy.SchemaExtensions
+	eCreateReplicatorResponse                                                    smithy.SchemaExtensions
+	eCreateReplicatorResponse_ReplicatorArn                                      smithy.SchemaExtensions
+	eCreateReplicatorResponse_ReplicatorName                                     smithy.SchemaExtensions
+	eCreateReplicatorResponse_ReplicatorState                                    smithy.SchemaExtensions
+	eCreateTopicRequest                                                          smithy.SchemaExtensions
+	eCreateTopicRequest_ClusterArn                                               smithy.SchemaExtensions
+	eCreateTopicRequest_TopicName                                                smithy.SchemaExtensions
+	eCreateTopicRequest_PartitionCount                                           smithy.SchemaExtensions
+	eCreateTopicRequest_ReplicationFactor                                        smithy.SchemaExtensions
+	eCreateTopicRequest_Configs                                                  smithy.SchemaExtensions
+	eCreateTopicResponse                                                         smithy.SchemaExtensions
+	eCreateTopicResponse_TopicArn                                                smithy.SchemaExtensions
+	eCreateTopicResponse_TopicName                                               smithy.SchemaExtensions
+	eCreateTopicResponse_Status                                                  smithy.SchemaExtensions
+	eCreateVpcConnectionRequest                                                  smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_TargetClusterArn                                 smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_Authentication                                   smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_VpcId                                            smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_ClientSubnets                                    smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_SecurityGroups                                   smithy.SchemaExtensions
+	eCreateVpcConnectionRequest_Tags                                             smithy.SchemaExtensions
+	eCreateVpcConnectionResponse                                                 smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_VpcConnectionArn                                smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_State                                           smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_Authentication                                  smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_VpcId                                           smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_ClientSubnets                                   smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_SecurityGroups                                  smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_CreationTime                                    smithy.SchemaExtensions
+	eCreateVpcConnectionResponse_Tags                                            smithy.SchemaExtensions
+	eDeleteChannelRequest                                                        smithy.SchemaExtensions
+	eDeleteChannelRequest_ChannelArn                                             smithy.SchemaExtensions
+	eDeleteChannelRequest_ClusterArn                                             smithy.SchemaExtensions
+	eDeleteChannelResponse                                                       smithy.SchemaExtensions
+	eDeleteChannelResponse_ChannelArn                                            smithy.SchemaExtensions
+	eDeleteChannelResponse_ClusterOperationArn                                   smithy.SchemaExtensions
+	eDeleteClusterRequest                                                        smithy.SchemaExtensions
+	eDeleteClusterRequest_ClusterArn                                             smithy.SchemaExtensions
+	eDeleteClusterRequest_CurrentVersion                                         smithy.SchemaExtensions
+	eDeleteClusterResponse                                                       smithy.SchemaExtensions
+	eDeleteClusterResponse_ClusterArn                                            smithy.SchemaExtensions
+	eDeleteClusterResponse_State                                                 smithy.SchemaExtensions
+	eDeleteClusterPolicyRequest                                                  smithy.SchemaExtensions
+	eDeleteClusterPolicyRequest_ClusterArn                                       smithy.SchemaExtensions
+	eDeleteClusterPolicyResponse                                                 smithy.SchemaExtensions
+	eDeleteConfigurationRequest                                                  smithy.SchemaExtensions
+	eDeleteConfigurationRequest_Arn                                              smithy.SchemaExtensions
+	eDeleteConfigurationResponse                                                 smithy.SchemaExtensions
+	eDeleteConfigurationResponse_Arn                                             smithy.SchemaExtensions
+	eDeleteConfigurationResponse_State                                           smithy.SchemaExtensions
+	eDeleteReplicatorRequest                                                     smithy.SchemaExtensions
+	eDeleteReplicatorRequest_CurrentVersion                                      smithy.SchemaExtensions
+	eDeleteReplicatorRequest_ReplicatorArn                                       smithy.SchemaExtensions
+	eDeleteReplicatorResponse                                                    smithy.SchemaExtensions
+	eDeleteReplicatorResponse_ReplicatorArn                                      smithy.SchemaExtensions
+	eDeleteReplicatorResponse_ReplicatorState                                    smithy.SchemaExtensions
+	eDeleteTopicRequest                                                          smithy.SchemaExtensions
+	eDeleteTopicRequest_ClusterArn                                               smithy.SchemaExtensions
+	eDeleteTopicRequest_TopicName                                                smithy.SchemaExtensions
+	eDeleteTopicResponse                                                         smithy.SchemaExtensions
+	eDeleteTopicResponse_TopicArn                                                smithy.SchemaExtensions
+	eDeleteTopicResponse_TopicName                                               smithy.SchemaExtensions
+	eDeleteTopicResponse_Status                                                  smithy.SchemaExtensions
+	eDeleteVpcConnectionRequest                                                  smithy.SchemaExtensions
+	eDeleteVpcConnectionRequest_Arn                                              smithy.SchemaExtensions
+	eDeleteVpcConnectionResponse                                                 smithy.SchemaExtensions
+	eDeleteVpcConnectionResponse_VpcConnectionArn                                smithy.SchemaExtensions
+	eDeleteVpcConnectionResponse_State                                           smithy.SchemaExtensions
+	eDescribeChannelRequest                                                      smithy.SchemaExtensions
+	eDescribeChannelRequest_ChannelArn                                           smithy.SchemaExtensions
+	eDescribeChannelRequest_ClusterArn                                           smithy.SchemaExtensions
+	eDescribeChannelResponse                                                     smithy.SchemaExtensions
+	eDescribeChannelResponse_ChannelArn                                          smithy.SchemaExtensions
+	eDescribeChannelResponse_ChannelName                                         smithy.SchemaExtensions
+	eDescribeChannelResponse_EncryptionConfiguration                             smithy.SchemaExtensions
+	eDescribeChannelResponse_IcebergDestinationConfiguration                     smithy.SchemaExtensions
+	eDescribeChannelResponse_S3DestinationConfiguration                          smithy.SchemaExtensions
+	eDescribeChannelResponse_Status                                              smithy.SchemaExtensions
+	eDescribeChannelResponse_DestinationType                                     smithy.SchemaExtensions
+	eDescribeChannelResponse_CreationTime                                        smithy.SchemaExtensions
+	eDescribeChannelResponse_TopicConfigurationList                              smithy.SchemaExtensions
+	eDescribeChannelResponse_LoggingInfo                                         smithy.SchemaExtensions
+	eDescribeChannelResponse_StateInfo                                           smithy.SchemaExtensions
+	eDescribeChannelResponse_ClusterOperationArn                                 smithy.SchemaExtensions
+	eDescribeChannelResponse_Tags                                                smithy.SchemaExtensions
+	eDescribeClusterRequest                                                      smithy.SchemaExtensions
+	eDescribeClusterRequest_ClusterArn                                           smithy.SchemaExtensions
+	eDescribeClusterOperationRequest                                             smithy.SchemaExtensions
+	eDescribeClusterOperationRequest_ClusterOperationArn                         smithy.SchemaExtensions
+	eDescribeClusterOperationResponse                                            smithy.SchemaExtensions
+	eDescribeClusterOperationResponse_ClusterOperationInfo                       smithy.SchemaExtensions
+	eDescribeClusterOperationV2Request                                           smithy.SchemaExtensions
+	eDescribeClusterOperationV2Request_ClusterOperationArn                       smithy.SchemaExtensions
+	eDescribeClusterOperationV2Response                                          smithy.SchemaExtensions
+	eDescribeClusterOperationV2Response_ClusterOperationInfo                     smithy.SchemaExtensions
+	eDescribeClusterResponse                                                     smithy.SchemaExtensions
+	eDescribeClusterResponse_ClusterInfo                                         smithy.SchemaExtensions
+	eDescribeClusterV2Request                                                    smithy.SchemaExtensions
+	eDescribeClusterV2Request_ClusterArn                                         smithy.SchemaExtensions
+	eDescribeClusterV2Response                                                   smithy.SchemaExtensions
+	eDescribeClusterV2Response_ClusterInfo                                       smithy.SchemaExtensions
+	eDescribeConfigurationRequest                                                smithy.SchemaExtensions
+	eDescribeConfigurationRequest_Arn                                            smithy.SchemaExtensions
+	eDescribeConfigurationResponse                                               smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Arn                                           smithy.SchemaExtensions
+	eDescribeConfigurationResponse_CreationTime                                  smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Description                                   smithy.SchemaExtensions
+	eDescribeConfigurationResponse_KafkaVersions                                 smithy.SchemaExtensions
+	eDescribeConfigurationResponse_LatestRevision                                smithy.SchemaExtensions
+	eDescribeConfigurationResponse_Name                                          smithy.SchemaExtensions
+	eDescribeConfigurationResponse_State                                         smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest                                        smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest_Arn                                    smithy.SchemaExtensions
+	eDescribeConfigurationRevisionRequest_Revision                               smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse                                       smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Arn                                   smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_CreationTime                          smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Description                           smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_Revision                              smithy.SchemaExtensions
+	eDescribeConfigurationRevisionResponse_ServerProperties                      smithy.SchemaExtensions
+	eDescribeReplicatorRequest                                                   smithy.SchemaExtensions
+	eDescribeReplicatorRequest_ReplicatorArn                                     smithy.SchemaExtensions
+	eDescribeReplicatorResponse                                                  smithy.SchemaExtensions
+	eDescribeReplicatorResponse_CreationTime                                     smithy.SchemaExtensions
+	eDescribeReplicatorResponse_CurrentVersion                                   smithy.SchemaExtensions
+	eDescribeReplicatorResponse_IsReplicatorReference                            smithy.SchemaExtensions
+	eDescribeReplicatorResponse_KafkaClusters                                    smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicationInfoList                              smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicatorArn                                    smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicatorDescription                            smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicatorName                                   smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicatorResourceArn                            smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ReplicatorState                                  smithy.SchemaExtensions
+	eDescribeReplicatorResponse_ServiceExecutionRoleArn                          smithy.SchemaExtensions
+	eDescribeReplicatorResponse_StateInfo                                        smithy.SchemaExtensions
+	eDescribeReplicatorResponse_Tags                                             smithy.SchemaExtensions
+	eDescribeReplicatorResponse_LogDelivery                                      smithy.SchemaExtensions
+	eDescribeTopicRequest                                                        smithy.SchemaExtensions
+	eDescribeTopicRequest_ClusterArn                                             smithy.SchemaExtensions
+	eDescribeTopicRequest_TopicName                                              smithy.SchemaExtensions
+	eDescribeTopicResponse                                                       smithy.SchemaExtensions
+	eDescribeTopicResponse_TopicArn                                              smithy.SchemaExtensions
+	eDescribeTopicResponse_TopicName                                             smithy.SchemaExtensions
+	eDescribeTopicResponse_ReplicationFactor                                     smithy.SchemaExtensions
+	eDescribeTopicResponse_PartitionCount                                        smithy.SchemaExtensions
+	eDescribeTopicResponse_Configs                                               smithy.SchemaExtensions
+	eDescribeTopicResponse_Status                                                smithy.SchemaExtensions
+	eDescribeTopicPartitionsRequest                                              smithy.SchemaExtensions
+	eDescribeTopicPartitionsRequest_ClusterArn                                   smithy.SchemaExtensions
+	eDescribeTopicPartitionsRequest_TopicName                                    smithy.SchemaExtensions
+	eDescribeTopicPartitionsRequest_MaxResults                                   smithy.SchemaExtensions
+	eDescribeTopicPartitionsRequest_NextToken                                    smithy.SchemaExtensions
+	eDescribeTopicPartitionsResponse                                             smithy.SchemaExtensions
+	eDescribeTopicPartitionsResponse_Partitions                                  smithy.SchemaExtensions
+	eDescribeTopicPartitionsResponse_NextToken                                   smithy.SchemaExtensions
+	eDescribeVpcConnectionRequest                                                smithy.SchemaExtensions
+	eDescribeVpcConnectionRequest_Arn                                            smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse                                               smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_VpcConnectionArn                              smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_TargetClusterArn                              smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_State                                         smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_Authentication                                smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_VpcId                                         smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_Subnets                                       smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_SecurityGroups                                smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_CreationTime                                  smithy.SchemaExtensions
+	eDescribeVpcConnectionResponse_Tags                                          smithy.SchemaExtensions
+	eGetBootstrapBrokersRequest                                                  smithy.SchemaExtensions
+	eGetBootstrapBrokersRequest_ClusterArn                                       smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse                                                 smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerString                           smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringTls                        smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram                  smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam                    smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls                  smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram            smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam              smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls         smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram   smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam     smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringIpv6                       smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6                    smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6              smithy.SchemaExtensions
+	eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6                smithy.SchemaExtensions
+	eGetClusterPolicyRequest                                                     smithy.SchemaExtensions
+	eGetClusterPolicyRequest_ClusterArn                                          smithy.SchemaExtensions
+	eGetClusterPolicyResponse                                                    smithy.SchemaExtensions
+	eGetClusterPolicyResponse_CurrentVersion                                     smithy.SchemaExtensions
+	eGetClusterPolicyResponse_Policy                                             smithy.SchemaExtensions
+	eGetCompatibleKafkaVersionsRequest                                           smithy.SchemaExtensions
+	eGetCompatibleKafkaVersionsRequest_ClusterArn                                smithy.SchemaExtensions
+	eGetCompatibleKafkaVersionsResponse                                          smithy.SchemaExtensions
+	eGetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions                  smithy.SchemaExtensions
+	eListChannelsRequest                                                         smithy.SchemaExtensions
+	eListChannelsRequest_ClusterArn                                              smithy.SchemaExtensions
+	eListChannelsRequest_MaxResults                                              smithy.SchemaExtensions
+	eListChannelsRequest_NextToken                                               smithy.SchemaExtensions
+	eListChannelsRequest_TopicNameFilter                                         smithy.SchemaExtensions
+	eListChannelsResponse                                                        smithy.SchemaExtensions
+	eListChannelsResponse_Channels                                               smithy.SchemaExtensions
+	eListChannelsResponse_NextToken                                              smithy.SchemaExtensions
+	eListClientVpcConnectionsRequest                                             smithy.SchemaExtensions
+	eListClientVpcConnectionsRequest_ClusterArn                                  smithy.SchemaExtensions
+	eListClientVpcConnectionsRequest_MaxResults                                  smithy.SchemaExtensions
+	eListClientVpcConnectionsRequest_NextToken                                   smithy.SchemaExtensions
+	eListClientVpcConnectionsResponse                                            smithy.SchemaExtensions
+	eListClientVpcConnectionsResponse_ClientVpcConnections                       smithy.SchemaExtensions
+	eListClientVpcConnectionsResponse_NextToken                                  smithy.SchemaExtensions
+	eListClusterOperationsRequest                                                smithy.SchemaExtensions
+	eListClusterOperationsRequest_ClusterArn                                     smithy.SchemaExtensions
+	eListClusterOperationsRequest_MaxResults                                     smithy.SchemaExtensions
+	eListClusterOperationsRequest_NextToken                                      smithy.SchemaExtensions
+	eListClusterOperationsResponse                                               smithy.SchemaExtensions
+	eListClusterOperationsResponse_ClusterOperationInfoList                      smithy.SchemaExtensions
+	eListClusterOperationsResponse_NextToken                                     smithy.SchemaExtensions
+	eListClusterOperationsV2Request                                              smithy.SchemaExtensions
+	eListClusterOperationsV2Request_ClusterArn                                   smithy.SchemaExtensions
+	eListClusterOperationsV2Request_MaxResults                                   smithy.SchemaExtensions
+	eListClusterOperationsV2Request_NextToken                                    smithy.SchemaExtensions
+	eListClusterOperationsV2Response                                             smithy.SchemaExtensions
+	eListClusterOperationsV2Response_ClusterOperationInfoList                    smithy.SchemaExtensions
+	eListClusterOperationsV2Response_NextToken                                   smithy.SchemaExtensions
+	eListClustersRequest                                                         smithy.SchemaExtensions
+	eListClustersRequest_ClusterNameFilter                                       smithy.SchemaExtensions
+	eListClustersRequest_MaxResults                                              smithy.SchemaExtensions
+	eListClustersRequest_NextToken                                               smithy.SchemaExtensions
+	eListClustersResponse                                                        smithy.SchemaExtensions
+	eListClustersResponse_ClusterInfoList                                        smithy.SchemaExtensions
+	eListClustersResponse_NextToken                                              smithy.SchemaExtensions
+	eListClustersV2Request                                                       smithy.SchemaExtensions
+	eListClustersV2Request_ClusterNameFilter                                     smithy.SchemaExtensions
+	eListClustersV2Request_ClusterTypeFilter                                     smithy.SchemaExtensions
+	eListClustersV2Request_MaxResults                                            smithy.SchemaExtensions
+	eListClustersV2Request_NextToken                                             smithy.SchemaExtensions
+	eListClustersV2Response                                                      smithy.SchemaExtensions
+	eListClustersV2Response_ClusterInfoList                                      smithy.SchemaExtensions
+	eListClustersV2Response_NextToken                                            smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest                                           smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_Arn                                       smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_MaxResults                                smithy.SchemaExtensions
+	eListConfigurationRevisionsRequest_NextToken                                 smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse                                          smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_NextToken                                smithy.SchemaExtensions
+	eListConfigurationRevisionsResponse_Revisions                                smithy.SchemaExtensions
+	eListConfigurationsRequest                                                   smithy.SchemaExtensions
+	eListConfigurationsRequest_MaxResults                                        smithy.SchemaExtensions
+	eListConfigurationsRequest_NextToken                                         smithy.SchemaExtensions
+	eListConfigurationsResponse                                                  smithy.SchemaExtensions
+	eListConfigurationsResponse_Configurations                                   smithy.SchemaExtensions
+	eListConfigurationsResponse_NextToken                                        smithy.SchemaExtensions
+	eListKafkaVersionsRequest                                                    smithy.SchemaExtensions
+	eListKafkaVersionsRequest_MaxResults                                         smithy.SchemaExtensions
+	eListKafkaVersionsRequest_NextToken                                          smithy.SchemaExtensions
+	eListKafkaVersionsResponse                                                   smithy.SchemaExtensions
+	eListKafkaVersionsResponse_KafkaVersions                                     smithy.SchemaExtensions
+	eListKafkaVersionsResponse_NextToken                                         smithy.SchemaExtensions
+	eListNodesRequest                                                            smithy.SchemaExtensions
+	eListNodesRequest_ClusterArn                                                 smithy.SchemaExtensions
+	eListNodesRequest_MaxResults                                                 smithy.SchemaExtensions
+	eListNodesRequest_NextToken                                                  smithy.SchemaExtensions
+	eListNodesResponse                                                           smithy.SchemaExtensions
+	eListNodesResponse_NextToken                                                 smithy.SchemaExtensions
+	eListNodesResponse_NodeInfoList                                              smithy.SchemaExtensions
+	eListReplicatorsRequest                                                      smithy.SchemaExtensions
+	eListReplicatorsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListReplicatorsRequest_NextToken                                            smithy.SchemaExtensions
+	eListReplicatorsRequest_ReplicatorNameFilter                                 smithy.SchemaExtensions
+	eListReplicatorsResponse                                                     smithy.SchemaExtensions
+	eListReplicatorsResponse_NextToken                                           smithy.SchemaExtensions
+	eListReplicatorsResponse_Replicators                                         smithy.SchemaExtensions
+	eListScramSecretsRequest                                                     smithy.SchemaExtensions
+	eListScramSecretsRequest_ClusterArn                                          smithy.SchemaExtensions
+	eListScramSecretsRequest_MaxResults                                          smithy.SchemaExtensions
+	eListScramSecretsRequest_NextToken                                           smithy.SchemaExtensions
+	eListScramSecretsResponse                                                    smithy.SchemaExtensions
+	eListScramSecretsResponse_NextToken                                          smithy.SchemaExtensions
+	eListScramSecretsResponse_SecretArnList                                      smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                            smithy.SchemaExtensions
+	eListTopicsRequest                                                           smithy.SchemaExtensions
+	eListTopicsRequest_ClusterArn                                                smithy.SchemaExtensions
+	eListTopicsRequest_MaxResults                                                smithy.SchemaExtensions
+	eListTopicsRequest_NextToken                                                 smithy.SchemaExtensions
+	eListTopicsRequest_TopicNameFilter                                           smithy.SchemaExtensions
+	eListTopicsResponse                                                          smithy.SchemaExtensions
+	eListTopicsResponse_Topics                                                   smithy.SchemaExtensions
+	eListTopicsResponse_NextToken                                                smithy.SchemaExtensions
+	eListVpcConnectionsRequest                                                   smithy.SchemaExtensions
+	eListVpcConnectionsRequest_MaxResults                                        smithy.SchemaExtensions
+	eListVpcConnectionsRequest_NextToken                                         smithy.SchemaExtensions
+	eListVpcConnectionsResponse                                                  smithy.SchemaExtensions
+	eListVpcConnectionsResponse_VpcConnections                                   smithy.SchemaExtensions
+	eListVpcConnectionsResponse_NextToken                                        smithy.SchemaExtensions
+	ePutClusterPolicyRequest                                                     smithy.SchemaExtensions
+	ePutClusterPolicyRequest_ClusterArn                                          smithy.SchemaExtensions
+	ePutClusterPolicyRequest_CurrentVersion                                      smithy.SchemaExtensions
+	ePutClusterPolicyRequest_Policy                                              smithy.SchemaExtensions
+	ePutClusterPolicyResponse                                                    smithy.SchemaExtensions
+	ePutClusterPolicyResponse_CurrentVersion                                     smithy.SchemaExtensions
+	eRebootBrokerRequest                                                         smithy.SchemaExtensions
+	eRebootBrokerRequest_BrokerIds                                               smithy.SchemaExtensions
+	eRebootBrokerRequest_ClusterArn                                              smithy.SchemaExtensions
+	eRebootBrokerResponse                                                        smithy.SchemaExtensions
+	eRebootBrokerResponse_ClusterArn                                             smithy.SchemaExtensions
+	eRebootBrokerResponse_ClusterOperationArn                                    smithy.SchemaExtensions
+	eRejectClientVpcConnectionRequest                                            smithy.SchemaExtensions
+	eRejectClientVpcConnectionRequest_ClusterArn                                 smithy.SchemaExtensions
+	eRejectClientVpcConnectionRequest_VpcConnectionArn                           smithy.SchemaExtensions
+	eRejectClientVpcConnectionResponse                                           smithy.SchemaExtensions
+	eTagResourceRequest                                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                              smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                            smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                smithy.SchemaExtensions
+	eUpdateBrokerCountRequest                                                    smithy.SchemaExtensions
+	eUpdateBrokerCountRequest_ClusterArn                                         smithy.SchemaExtensions
+	eUpdateBrokerCountRequest_CurrentVersion                                     smithy.SchemaExtensions
+	eUpdateBrokerCountRequest_TargetNumberOfBrokerNodes                          smithy.SchemaExtensions
+	eUpdateBrokerCountResponse                                                   smithy.SchemaExtensions
+	eUpdateBrokerCountResponse_ClusterArn                                        smithy.SchemaExtensions
+	eUpdateBrokerCountResponse_ClusterOperationArn                               smithy.SchemaExtensions
+	eUpdateBrokerStorageRequest                                                  smithy.SchemaExtensions
+	eUpdateBrokerStorageRequest_ClusterArn                                       smithy.SchemaExtensions
+	eUpdateBrokerStorageRequest_CurrentVersion                                   smithy.SchemaExtensions
+	eUpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo                        smithy.SchemaExtensions
+	eUpdateBrokerStorageResponse                                                 smithy.SchemaExtensions
+	eUpdateBrokerStorageResponse_ClusterArn                                      smithy.SchemaExtensions
+	eUpdateBrokerStorageResponse_ClusterOperationArn                             smithy.SchemaExtensions
+	eUpdateBrokerTypeRequest                                                     smithy.SchemaExtensions
+	eUpdateBrokerTypeRequest_ClusterArn                                          smithy.SchemaExtensions
+	eUpdateBrokerTypeRequest_CurrentVersion                                      smithy.SchemaExtensions
+	eUpdateBrokerTypeRequest_TargetInstanceType                                  smithy.SchemaExtensions
+	eUpdateBrokerTypeResponse                                                    smithy.SchemaExtensions
+	eUpdateBrokerTypeResponse_ClusterArn                                         smithy.SchemaExtensions
+	eUpdateBrokerTypeResponse_ClusterOperationArn                                smithy.SchemaExtensions
+	eUpdateChannelRequest                                                        smithy.SchemaExtensions
+	eUpdateChannelRequest_ChannelArn                                             smithy.SchemaExtensions
+	eUpdateChannelRequest_ClusterArn                                             smithy.SchemaExtensions
+	eUpdateChannelRequest_IcebergDestinationUpdate                               smithy.SchemaExtensions
+	eUpdateChannelRequest_S3DestinationUpdate                                    smithy.SchemaExtensions
+	eUpdateChannelResponse                                                       smithy.SchemaExtensions
+	eUpdateChannelResponse_ChannelArn                                            smithy.SchemaExtensions
+	eUpdateChannelResponse_ClusterOperationArn                                   smithy.SchemaExtensions
+	eUpdateClusterConfigurationRequest                                           smithy.SchemaExtensions
+	eUpdateClusterConfigurationRequest_ClusterArn                                smithy.SchemaExtensions
+	eUpdateClusterConfigurationRequest_ConfigurationInfo                         smithy.SchemaExtensions
+	eUpdateClusterConfigurationRequest_CurrentVersion                            smithy.SchemaExtensions
+	eUpdateClusterConfigurationResponse                                          smithy.SchemaExtensions
+	eUpdateClusterConfigurationResponse_ClusterArn                               smithy.SchemaExtensions
+	eUpdateClusterConfigurationResponse_ClusterOperationArn                      smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionRequest                                            smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionRequest_ClusterArn                                 smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionRequest_ConfigurationInfo                          smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionRequest_CurrentVersion                             smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionRequest_TargetKafkaVersion                         smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionResponse                                           smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionResponse_ClusterArn                                smithy.SchemaExtensions
+	eUpdateClusterKafkaVersionResponse_ClusterOperationArn                       smithy.SchemaExtensions
+	eUpdateConfigurationRequest                                                  smithy.SchemaExtensions
+	eUpdateConfigurationRequest_Arn                                              smithy.SchemaExtensions
+	eUpdateConfigurationRequest_Description                                      smithy.SchemaExtensions
+	eUpdateConfigurationRequest_ServerProperties                                 smithy.SchemaExtensions
+	eUpdateConfigurationResponse                                                 smithy.SchemaExtensions
+	eUpdateConfigurationResponse_Arn                                             smithy.SchemaExtensions
+	eUpdateConfigurationResponse_LatestRevision                                  smithy.SchemaExtensions
+	eUpdateConnectivityRequest                                                   smithy.SchemaExtensions
+	eUpdateConnectivityRequest_ClusterArn                                        smithy.SchemaExtensions
+	eUpdateConnectivityRequest_ConnectivityInfo                                  smithy.SchemaExtensions
+	eUpdateConnectivityRequest_CurrentVersion                                    smithy.SchemaExtensions
+	eUpdateConnectivityRequest_ZookeeperAccess                                   smithy.SchemaExtensions
+	eUpdateConnectivityResponse                                                  smithy.SchemaExtensions
+	eUpdateConnectivityResponse_ClusterArn                                       smithy.SchemaExtensions
+	eUpdateConnectivityResponse_ClusterOperationArn                              smithy.SchemaExtensions
+	eUpdateMonitoringRequest                                                     smithy.SchemaExtensions
+	eUpdateMonitoringRequest_ClusterArn                                          smithy.SchemaExtensions
+	eUpdateMonitoringRequest_CurrentVersion                                      smithy.SchemaExtensions
+	eUpdateMonitoringRequest_EnhancedMonitoring                                  smithy.SchemaExtensions
+	eUpdateMonitoringRequest_OpenMonitoring                                      smithy.SchemaExtensions
+	eUpdateMonitoringRequest_LoggingInfo                                         smithy.SchemaExtensions
+	eUpdateMonitoringResponse                                                    smithy.SchemaExtensions
+	eUpdateMonitoringResponse_ClusterArn                                         smithy.SchemaExtensions
+	eUpdateMonitoringResponse_ClusterOperationArn                                smithy.SchemaExtensions
+	eUpdateRebalancingRequest                                                    smithy.SchemaExtensions
+	eUpdateRebalancingRequest_ClusterArn                                         smithy.SchemaExtensions
+	eUpdateRebalancingRequest_CurrentVersion                                     smithy.SchemaExtensions
+	eUpdateRebalancingRequest_Rebalancing                                        smithy.SchemaExtensions
+	eUpdateRebalancingResponse                                                   smithy.SchemaExtensions
+	eUpdateRebalancingResponse_ClusterArn                                        smithy.SchemaExtensions
+	eUpdateRebalancingResponse_ClusterOperationArn                               smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest                                                smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_ConsumerGroupReplication                       smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_CurrentVersion                                 smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_ReplicatorArn                                  smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_SourceKafkaClusterArn                          smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_SourceKafkaClusterId                           smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_TargetKafkaClusterArn                          smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_TargetKafkaClusterId                           smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_TopicReplication                               smithy.SchemaExtensions
+	eUpdateReplicationInfoRequest_LogDelivery                                    smithy.SchemaExtensions
+	eUpdateReplicationInfoResponse                                               smithy.SchemaExtensions
+	eUpdateReplicationInfoResponse_ReplicatorArn                                 smithy.SchemaExtensions
+	eUpdateReplicationInfoResponse_ReplicatorState                               smithy.SchemaExtensions
+	eUpdateSecurityRequest                                                       smithy.SchemaExtensions
+	eUpdateSecurityRequest_ClientAuthentication                                  smithy.SchemaExtensions
+	eUpdateSecurityRequest_ClusterArn                                            smithy.SchemaExtensions
+	eUpdateSecurityRequest_CurrentVersion                                        smithy.SchemaExtensions
+	eUpdateSecurityRequest_EncryptionInfo                                        smithy.SchemaExtensions
+	eUpdateSecurityResponse                                                      smithy.SchemaExtensions
+	eUpdateSecurityResponse_ClusterArn                                           smithy.SchemaExtensions
+	eUpdateSecurityResponse_ClusterOperationArn                                  smithy.SchemaExtensions
+	eUpdateStorageRequest                                                        smithy.SchemaExtensions
+	eUpdateStorageRequest_ClusterArn                                             smithy.SchemaExtensions
+	eUpdateStorageRequest_CurrentVersion                                         smithy.SchemaExtensions
+	eUpdateStorageRequest_ProvisionedThroughput                                  smithy.SchemaExtensions
+	eUpdateStorageRequest_StorageMode                                            smithy.SchemaExtensions
+	eUpdateStorageRequest_VolumeSizeGB                                           smithy.SchemaExtensions
+	eUpdateStorageResponse                                                       smithy.SchemaExtensions
+	eUpdateStorageResponse_ClusterArn                                            smithy.SchemaExtensions
+	eUpdateStorageResponse_ClusterOperationArn                                   smithy.SchemaExtensions
+	eUpdateTopicRequest                                                          smithy.SchemaExtensions
+	eUpdateTopicRequest_ClusterArn                                               smithy.SchemaExtensions
+	eUpdateTopicRequest_TopicName                                                smithy.SchemaExtensions
+	eUpdateTopicRequest_Configs                                                  smithy.SchemaExtensions
+	eUpdateTopicRequest_PartitionCount                                           smithy.SchemaExtensions
+	eUpdateTopicResponse                                                         smithy.SchemaExtensions
+	eUpdateTopicResponse_TopicArn                                                smithy.SchemaExtensions
+	eUpdateTopicResponse_TopicName                                               smithy.SchemaExtensions
+	eUpdateTopicResponse_Status                                                  smithy.SchemaExtensions
+)
 
-var BatchDisassociateScramSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchDisassociateScramSecret",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
-	Code: 200})
+var (
+	iBatchAssociateScramSecret                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchAssociateScramSecret"}
+	iBatchDisassociateScramSecret                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchDisassociateScramSecret"}
+	iCreateChannel                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateChannel"}
+	iCreateCluster                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateCluster"}
+	iCreateClusterV2                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateClusterV2"}
+	iCreateConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateConfiguration"}
+	iCreateReplicator                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateReplicator"}
+	iCreateTopic                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateTopic"}
+	iCreateVpcConnection                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateVpcConnection"}
+	iDeleteChannel                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteChannel"}
+	iDeleteCluster                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteCluster"}
+	iDeleteClusterPolicy                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteClusterPolicy"}
+	iDeleteConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteConfiguration"}
+	iDeleteReplicator                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteReplicator"}
+	iDeleteTopic                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteTopic"}
+	iDeleteVpcConnection                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteVpcConnection"}
+	iDescribeChannel                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeChannel"}
+	iDescribeCluster                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeCluster"}
+	iDescribeClusterOperation                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperation"}
+	iDescribeClusterOperationV2                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperationV2"}
+	iDescribeClusterV2                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterV2"}
+	iDescribeConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfiguration"}
+	iDescribeConfigurationRevision               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfigurationRevision"}
+	iDescribeReplicator                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeReplicator"}
+	iDescribeTopic                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopic"}
+	iDescribeTopicPartitions                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopicPartitions"}
+	iDescribeVpcConnection                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeVpcConnection"}
+	iGetBootstrapBrokers                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetBootstrapBrokers"}
+	iGetClusterPolicy                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetClusterPolicy"}
+	iGetCompatibleKafkaVersions                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetCompatibleKafkaVersions"}
+	iListChannels                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListChannels"}
+	iListClientVpcConnections                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClientVpcConnections"}
+	iListClusterOperations                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperations"}
+	iListClusterOperationsV2                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperationsV2"}
+	iListClusters                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusters"}
+	iListClustersV2                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClustersV2"}
+	iListConfigurationRevisions                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurationRevisions"}
+	iListConfigurations                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurations"}
+	iListKafkaVersions                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListKafkaVersions"}
+	iListNodes                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListNodes"}
+	iListReplicators                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListReplicators"}
+	iListScramSecrets                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListScramSecrets"}
+	iListTagsForResource                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTagsForResource"}
+	iListTopics                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTopics"}
+	iListVpcConnections                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListVpcConnections"}
+	iPutClusterPolicy                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PutClusterPolicy"}
+	iRebootBroker                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RebootBroker"}
+	iRejectClientVpcConnection                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RejectClientVpcConnection"}
+	iTagResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UntagResource"}
+	iUpdateBrokerCount                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerCount"}
+	iUpdateBrokerStorage                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerStorage"}
+	iUpdateBrokerType                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerType"}
+	iUpdateChannel                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateChannel"}
+	iUpdateClusterConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterConfiguration"}
+	iUpdateClusterKafkaVersion                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterKafkaVersion"}
+	iUpdateConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConfiguration"}
+	iUpdateConnectivity                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConnectivity"}
+	iUpdateMonitoring                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateMonitoring"}
+	iUpdateRebalancing                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateRebalancing"}
+	iUpdateReplicationInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateReplicationInfo"}
+	iUpdateSecurity                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateSecurity"}
+	iUpdateStorage                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateStorage"}
+	iUpdateTopic                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateTopic"}
+	i_Kafka                                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Kafka"}
+	i___blob                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__blob"}
+	i___boolean                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__boolean"}
+	i___double                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__double"}
+	i___integer                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__integer"}
+	i___integerMin1                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__integerMin1"}
+	i___integerMin1Max15                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__integerMin1Max15"}
+	i___integerMin1Max16384                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__integerMin1Max16384"}
+	i___listOf__double                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOf__double"}
+	i___listOf__integer                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOf__integer"}
+	i___listOf__string                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOf__string"}
+	i___listOf__stringMax249                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOf__stringMax249"}
+	i___listOf__stringMax256                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOf__stringMax256"}
+	i___listOfBrokerEBSVolumeInfo                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfBrokerEBSVolumeInfo"}
+	i___listOfChannelInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfChannelInfo"}
+	i___listOfClientVpcConnection                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfClientVpcConnection"}
+	i___listOfCluster                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfCluster"}
+	i___listOfClusterInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfClusterInfo"}
+	i___listOfClusterOperationInfo               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfClusterOperationInfo"}
+	i___listOfClusterOperationStep               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfClusterOperationStep"}
+	i___listOfClusterOperationV2Summary          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfClusterOperationV2Summary"}
+	i___listOfCompatibleKafkaVersion             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfCompatibleKafkaVersion"}
+	i___listOfConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfConfiguration"}
+	i___listOfConfigurationRevision              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfConfigurationRevision"}
+	i___listOfDestinationTable                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfDestinationTable"}
+	i___listOfKafkaCluster                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfKafkaCluster"}
+	i___listOfKafkaClusterDescription            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfKafkaClusterDescription"}
+	i___listOfKafkaClusterSummary                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfKafkaClusterSummary"}
+	i___listOfKafkaVersion                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfKafkaVersion"}
+	i___listOfNodeInfo                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfNodeInfo"}
+	i___listOfPartitionSource                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfPartitionSource"}
+	i___listOfReplicationInfo                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfReplicationInfo"}
+	i___listOfReplicationInfoDescription         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfReplicationInfoDescription"}
+	i___listOfReplicationInfoSummary             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfReplicationInfoSummary"}
+	i___listOfReplicatorSummary                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfReplicatorSummary"}
+	i___listOfTopicConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfTopicConfiguration"}
+	i___listOfTopicInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfTopicInfo"}
+	i___listOfTopicPartitionInfo                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfTopicPartitionInfo"}
+	i___listOfUnprocessedScramSecret             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfUnprocessedScramSecret"}
+	i___listOfVpcConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfVpcConfig"}
+	i___listOfVpcConnection                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__listOfVpcConnection"}
+	i___long                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__long"}
+	i___mapOf__string                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__mapOf__string"}
+	i___string                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__string"}
+	i___stringMax1024                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMax1024"}
+	i___stringMax249                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMax249"}
+	i___stringMax256                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMax256"}
+	i___stringMin1Max128                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMin1Max128"}
+	i___stringMin1Max128Pattern09AZaZ09AZaZ0     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMin1Max128Pattern09AZaZ09AZaZ0"}
+	i___stringMin1Max64                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMin1Max64"}
+	i___stringMin5Max32                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__stringMin5Max32"}
+	i___timestampIso8601                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "__timestampIso8601"}
+	iAmazonMskCluster                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "AmazonMskCluster"}
+	iApacheKafkaCluster                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ApacheKafkaCluster"}
+	iAuthorizerLogs                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "AuthorizerLogs"}
+	iBadRequestException                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BadRequestException"}
+	iBrokerAZDistribution                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerAZDistribution"}
+	iBrokerCountUpdateInfo                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerCountUpdateInfo"}
+	iBrokerEBSVolumeInfo                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerEBSVolumeInfo"}
+	iBrokerLogs                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerLogs"}
+	iBrokerNodeGroupInfo                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerNodeGroupInfo"}
+	iBrokerNodeInfo                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerNodeInfo"}
+	iBrokerSoftwareInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BrokerSoftwareInfo"}
+	iCatalog                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Catalog"}
+	iChannelDestinationType                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ChannelDestinationType"}
+	iChannelInfo                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ChannelInfo"}
+	iChannelLoggingInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ChannelLoggingInfo"}
+	iChannelStateInfo                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ChannelStateInfo"}
+	iChannelStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ChannelStatus"}
+	iClientAuthentication                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClientAuthentication"}
+	iClientBroker                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClientBroker"}
+	iClientVpcConnection                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClientVpcConnection"}
+	iCloudWatchLogs                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CloudWatchLogs"}
+	iCluster                                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Cluster"}
+	iClusterConnectivityException                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterConnectivityException"}
+	iClusterInfo                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterInfo"}
+	iClusterOperationInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationInfo"}
+	iClusterOperationStep                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationStep"}
+	iClusterOperationStepInfo                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationStepInfo"}
+	iClusterOperationV2                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationV2"}
+	iClusterOperationV2Provisioned               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationV2Provisioned"}
+	iClusterOperationV2Serverless                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationV2Serverless"}
+	iClusterOperationV2Summary                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterOperationV2Summary"}
+	iClusterState                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterState"}
+	iClusterType                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ClusterType"}
+	iCompatibleKafkaVersion                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CompatibleKafkaVersion"}
+	iConfiguration                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Configuration"}
+	iConfigurationInfo                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConfigurationInfo"}
+	iConfigurationRevision                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConfigurationRevision"}
+	iConfigurationState                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConfigurationState"}
+	iConflictException                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConflictException"}
+	iConnectivityInfo                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConnectivityInfo"}
+	iConsumerGroupOffsetSyncMode                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConsumerGroupOffsetSyncMode"}
+	iConsumerGroupReplication                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConsumerGroupReplication"}
+	iConsumerGroupReplicationUpdate              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ConsumerGroupReplicationUpdate"}
+	iControllerMovedException                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ControllerMovedException"}
+	iControllerNodeInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ControllerNodeInfo"}
+	iCustomerActionStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CustomerActionStatus"}
+	iDeadLetterQueueS3                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeadLetterQueueS3"}
+	iDestinationTable                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DestinationTable"}
+	iEBSStorageInfo                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EBSStorageInfo"}
+	iEncryptionAtRest                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EncryptionAtRest"}
+	iEncryptionConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EncryptionConfiguration"}
+	iEncryptionInfo                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EncryptionInfo"}
+	iEncryptionInTransit                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EncryptionInTransit"}
+	iEnhancedMonitoring                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "EnhancedMonitoring"}
+	iErrorInfo                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ErrorInfo"}
+	iFirehose                                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Firehose"}
+	iForbiddenException                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ForbiddenException"}
+	iGroupSubscribedToTopicException             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GroupSubscribedToTopicException"}
+	iIam                                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Iam"}
+	iIcebergCompressionType                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "IcebergCompressionType"}
+	iIcebergDestinationConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "IcebergDestinationConfiguration"}
+	iIcebergDestinationUpdate                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "IcebergDestinationUpdate"}
+	iInternalServerErrorException                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "InternalServerErrorException"}
+	iJmxExporter                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "JmxExporter"}
+	iJmxExporterInfo                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "JmxExporterInfo"}
+	iJwtSigningAlgorithm                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "JwtSigningAlgorithm"}
+	iKafkaCluster                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaCluster"}
+	iKafkaClusterClientAuthentication            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterClientAuthentication"}
+	iKafkaClusterClientVpcConfig                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterClientVpcConfig"}
+	iKafkaClusterDescription                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterDescription"}
+	iKafkaClusterEncryptionInTransit             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterEncryptionInTransit"}
+	iKafkaClusterEncryptionInTransitType         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterEncryptionInTransitType"}
+	iKafkaClusterMTLSAuthentication              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterMTLSAuthentication"}
+	iKafkaClusterOAuthClientCredentials          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterOAuthClientCredentials"}
+	iKafkaClusterOAuthClientCredentialsAssertion = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterOAuthClientCredentialsAssertion"}
+	iKafkaClusterOAuthIamJwtBearer               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterOAuthIamJwtBearer"}
+	iKafkaClusterSaslOAuthBearerAuthentication   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterSaslOAuthBearerAuthentication"}
+	iKafkaClusterSaslScramAuthentication         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterSaslScramAuthentication"}
+	iKafkaClusterSaslScramMechanism              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterSaslScramMechanism"}
+	iKafkaClusterSummary                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaClusterSummary"}
+	iKafkaRequestException                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaRequestException"}
+	iKafkaTimeoutException                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaTimeoutException"}
+	iKafkaVersion                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaVersion"}
+	iKafkaVersionStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "KafkaVersionStatus"}
+	iLogDelivery                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "LogDelivery"}
+	iLoggingInfo                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "LoggingInfo"}
+	i_MaxResults                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "MaxResults"}
+	iMutableClusterInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "MutableClusterInfo"}
+	iNetworkType                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NetworkType"}
+	iNodeExporter                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NodeExporter"}
+	iNodeExporterInfo                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NodeExporterInfo"}
+	iNodeInfo                                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NodeInfo"}
+	iNodeType                                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NodeType"}
+	iNotControllerException                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NotControllerException"}
+	iNotFoundException                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "NotFoundException"}
+	iOpenMonitoring                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "OpenMonitoring"}
+	iOpenMonitoringInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "OpenMonitoringInfo"}
+	iPartitionSource                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PartitionSource"}
+	iPartitionSpec                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PartitionSpec"}
+	iPartitionStrategy                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PartitionStrategy"}
+	iPrometheus                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Prometheus"}
+	iPrometheusInfo                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PrometheusInfo"}
+	iProvisioned                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Provisioned"}
+	iProvisionedRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ProvisionedRequest"}
+	iProvisionedThroughput                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ProvisionedThroughput"}
+	iPublicAccess                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PublicAccess"}
+	iReassignmentInProgressException             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReassignmentInProgressException"}
+	iRebalancing                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Rebalancing"}
+	iRebalancingStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RebalancingStatus"}
+	iRecordConverter                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RecordConverter"}
+	iRecordSchema                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RecordSchema"}
+	iReplicationInfo                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationInfo"}
+	iReplicationInfoDescription                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationInfoDescription"}
+	iReplicationInfoSummary                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationInfoSummary"}
+	iReplicationStartingPosition                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationStartingPosition"}
+	iReplicationStartingPositionType             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationStartingPositionType"}
+	iReplicationStateInfo                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationStateInfo"}
+	iReplicationTopicNameConfiguration           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationTopicNameConfiguration"}
+	iReplicationTopicNameConfigurationType       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicationTopicNameConfigurationType"}
+	iReplicatorCloudWatchLogs                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorCloudWatchLogs"}
+	iReplicatorFirehose                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorFirehose"}
+	iReplicatorLogDelivery                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorLogDelivery"}
+	iReplicatorS3                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorS3"}
+	iReplicatorState                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorState"}
+	iReplicatorSummary                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ReplicatorSummary"}
+	iS3                                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3"}
+	iS3CompressionType                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3CompressionType"}
+	iS3DestinationConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3DestinationConfiguration"}
+	iS3DestinationUpdate                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3DestinationUpdate"}
+	iS3Storage                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3Storage"}
+	iS3StorageClass                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "S3StorageClass"}
+	iSasl                                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Sasl"}
+	iSchemaEvolution                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "SchemaEvolution"}
+	iScram                                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Scram"}
+	iServerless                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Serverless"}
+	iServerlessClientAuthentication              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ServerlessClientAuthentication"}
+	iServerlessConnectivityInfo                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ServerlessConnectivityInfo"}
+	iServerlessRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ServerlessRequest"}
+	iServerlessSasl                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ServerlessSasl"}
+	iServiceUnavailableException                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ServiceUnavailableException"}
+	iStateInfo                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "StateInfo"}
+	iStorageInfo                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "StorageInfo"}
+	iStorageMode                                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "StorageMode"}
+	iTableCreation                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TableCreation"}
+	iTargetCompressionType                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TargetCompressionType"}
+	iTls                                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Tls"}
+	iTokenEndpointAuthenticationMethod           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TokenEndpointAuthenticationMethod"}
+	iTooManyRequestsException                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TooManyRequestsException"}
+	iTopicConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicConfiguration"}
+	iTopicExistsException                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicExistsException"}
+	iTopicInfo                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicInfo"}
+	iTopicPartitionInfo                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicPartitionInfo"}
+	iTopicReplication                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicReplication"}
+	iTopicReplicationUpdate                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicReplicationUpdate"}
+	iTopicState                                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TopicState"}
+	iUnauthenticated                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "Unauthenticated"}
+	iUnauthorizedException                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UnauthorizedException"}
+	iUnknownTopicOrPartitionException            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UnknownTopicOrPartitionException"}
+	iUnprocessedScramSecret                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UnprocessedScramSecret"}
+	iUserIdentity                                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UserIdentity"}
+	iUserIdentityType                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UserIdentityType"}
+	iValueConverter                              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ValueConverter"}
+	iVpcConfig                                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConfig"}
+	iVpcConnection                               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnection"}
+	iVpcConnectionInfo                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectionInfo"}
+	iVpcConnectionInfoServerless                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectionInfoServerless"}
+	iVpcConnectionState                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectionState"}
+	iVpcConnectivity                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivity"}
+	iVpcConnectivityClientAuthentication         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivityClientAuthentication"}
+	iVpcConnectivityIam                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivityIam"}
+	iVpcConnectivitySasl                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivitySasl"}
+	iVpcConnectivityScram                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivityScram"}
+	iVpcConnectivityTls                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "VpcConnectivityTls"}
+	iZookeeperAccess                             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ZookeeperAccess"}
+	iZookeeperNodeInfo                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ZookeeperNodeInfo"}
+	iBatchAssociateScramSecretRequest            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchAssociateScramSecretRequest"}
+	iBatchAssociateScramSecretResponse           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchAssociateScramSecretResponse"}
+	iBatchDisassociateScramSecretRequest         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchDisassociateScramSecretRequest"}
+	iBatchDisassociateScramSecretResponse        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "BatchDisassociateScramSecretResponse"}
+	iCreateChannelRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateChannelRequest"}
+	iCreateChannelResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateChannelResponse"}
+	iCreateClusterRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateClusterRequest"}
+	iCreateClusterResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateClusterResponse"}
+	iCreateClusterV2Request                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateClusterV2Request"}
+	iCreateClusterV2Response                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateClusterV2Response"}
+	iCreateConfigurationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateConfigurationRequest"}
+	iCreateConfigurationResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateConfigurationResponse"}
+	iCreateReplicatorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateReplicatorRequest"}
+	iCreateReplicatorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateReplicatorResponse"}
+	iCreateTopicRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateTopicRequest"}
+	iCreateTopicResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateTopicResponse"}
+	iCreateVpcConnectionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateVpcConnectionRequest"}
+	iCreateVpcConnectionResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "CreateVpcConnectionResponse"}
+	iDeleteChannelRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteChannelRequest"}
+	iDeleteChannelResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteChannelResponse"}
+	iDeleteClusterRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteClusterRequest"}
+	iDeleteClusterResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteClusterResponse"}
+	iDeleteClusterPolicyRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteClusterPolicyRequest"}
+	iDeleteClusterPolicyResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteClusterPolicyResponse"}
+	iDeleteConfigurationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteConfigurationRequest"}
+	iDeleteConfigurationResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteConfigurationResponse"}
+	iDeleteReplicatorRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteReplicatorRequest"}
+	iDeleteReplicatorResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteReplicatorResponse"}
+	iDeleteTopicRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteTopicRequest"}
+	iDeleteTopicResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteTopicResponse"}
+	iDeleteVpcConnectionRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteVpcConnectionRequest"}
+	iDeleteVpcConnectionResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DeleteVpcConnectionResponse"}
+	iDescribeChannelRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeChannelRequest"}
+	iDescribeChannelResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeChannelResponse"}
+	iDescribeClusterRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterRequest"}
+	iDescribeClusterOperationRequest             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperationRequest"}
+	iDescribeClusterOperationResponse            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperationResponse"}
+	iDescribeClusterOperationV2Request           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperationV2Request"}
+	iDescribeClusterOperationV2Response          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterOperationV2Response"}
+	iDescribeClusterResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterResponse"}
+	iDescribeClusterV2Request                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterV2Request"}
+	iDescribeClusterV2Response                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeClusterV2Response"}
+	iDescribeConfigurationRequest                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfigurationRequest"}
+	iDescribeConfigurationResponse               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfigurationResponse"}
+	iDescribeConfigurationRevisionRequest        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfigurationRevisionRequest"}
+	iDescribeConfigurationRevisionResponse       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeConfigurationRevisionResponse"}
+	iDescribeReplicatorRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeReplicatorRequest"}
+	iDescribeReplicatorResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeReplicatorResponse"}
+	iDescribeTopicRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopicRequest"}
+	iDescribeTopicResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopicResponse"}
+	iDescribeTopicPartitionsRequest              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopicPartitionsRequest"}
+	iDescribeTopicPartitionsResponse             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeTopicPartitionsResponse"}
+	iDescribeVpcConnectionRequest                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeVpcConnectionRequest"}
+	iDescribeVpcConnectionResponse               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "DescribeVpcConnectionResponse"}
+	iGetBootstrapBrokersRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetBootstrapBrokersRequest"}
+	iGetBootstrapBrokersResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetBootstrapBrokersResponse"}
+	iGetClusterPolicyRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetClusterPolicyRequest"}
+	iGetClusterPolicyResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetClusterPolicyResponse"}
+	iGetCompatibleKafkaVersionsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetCompatibleKafkaVersionsRequest"}
+	iGetCompatibleKafkaVersionsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "GetCompatibleKafkaVersionsResponse"}
+	iListChannelsRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListChannelsRequest"}
+	iListChannelsResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListChannelsResponse"}
+	iListClientVpcConnectionsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClientVpcConnectionsRequest"}
+	iListClientVpcConnectionsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClientVpcConnectionsResponse"}
+	iListClusterOperationsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperationsRequest"}
+	iListClusterOperationsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperationsResponse"}
+	iListClusterOperationsV2Request              = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperationsV2Request"}
+	iListClusterOperationsV2Response             = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClusterOperationsV2Response"}
+	iListClustersRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClustersRequest"}
+	iListClustersResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClustersResponse"}
+	iListClustersV2Request                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClustersV2Request"}
+	iListClustersV2Response                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListClustersV2Response"}
+	iListConfigurationRevisionsRequest           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurationRevisionsRequest"}
+	iListConfigurationRevisionsResponse          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurationRevisionsResponse"}
+	iListConfigurationsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurationsRequest"}
+	iListConfigurationsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListConfigurationsResponse"}
+	iListKafkaVersionsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListKafkaVersionsRequest"}
+	iListKafkaVersionsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListKafkaVersionsResponse"}
+	iListNodesRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListNodesRequest"}
+	iListNodesResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListNodesResponse"}
+	iListReplicatorsRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListReplicatorsRequest"}
+	iListReplicatorsResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListReplicatorsResponse"}
+	iListScramSecretsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListScramSecretsRequest"}
+	iListScramSecretsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListScramSecretsResponse"}
+	iListTagsForResourceRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTagsForResourceResponse"}
+	iListTopicsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTopicsRequest"}
+	iListTopicsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListTopicsResponse"}
+	iListVpcConnectionsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListVpcConnectionsRequest"}
+	iListVpcConnectionsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "ListVpcConnectionsResponse"}
+	iPutClusterPolicyRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PutClusterPolicyRequest"}
+	iPutClusterPolicyResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "PutClusterPolicyResponse"}
+	iRebootBrokerRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RebootBrokerRequest"}
+	iRebootBrokerResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RebootBrokerResponse"}
+	iRejectClientVpcConnectionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RejectClientVpcConnectionRequest"}
+	iRejectClientVpcConnectionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "RejectClientVpcConnectionResponse"}
+	iTagResourceRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "TagResourceRequest"}
+	iUntagResourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UntagResourceRequest"}
+	iUpdateBrokerCountRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerCountRequest"}
+	iUpdateBrokerCountResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerCountResponse"}
+	iUpdateBrokerStorageRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerStorageRequest"}
+	iUpdateBrokerStorageResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerStorageResponse"}
+	iUpdateBrokerTypeRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerTypeRequest"}
+	iUpdateBrokerTypeResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateBrokerTypeResponse"}
+	iUpdateChannelRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateChannelRequest"}
+	iUpdateChannelResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateChannelResponse"}
+	iUpdateClusterConfigurationRequest           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterConfigurationRequest"}
+	iUpdateClusterConfigurationResponse          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterConfigurationResponse"}
+	iUpdateClusterKafkaVersionRequest            = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterKafkaVersionRequest"}
+	iUpdateClusterKafkaVersionResponse           = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateClusterKafkaVersionResponse"}
+	iUpdateConfigurationRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConfigurationRequest"}
+	iUpdateConfigurationResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConfigurationResponse"}
+	iUpdateConnectivityRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConnectivityRequest"}
+	iUpdateConnectivityResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateConnectivityResponse"}
+	iUpdateMonitoringRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateMonitoringRequest"}
+	iUpdateMonitoringResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateMonitoringResponse"}
+	iUpdateRebalancingRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateRebalancingRequest"}
+	iUpdateRebalancingResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateRebalancingResponse"}
+	iUpdateReplicationInfoRequest                = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateReplicationInfoRequest"}
+	iUpdateReplicationInfoResponse               = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateReplicationInfoResponse"}
+	iUpdateSecurityRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateSecurityRequest"}
+	iUpdateSecurityResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateSecurityResponse"}
+	iUpdateStorageRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateStorageRequest"}
+	iUpdateStorageResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateStorageResponse"}
+	iUpdateTopicRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateTopicRequest"}
+	iUpdateTopicResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.kafka", Name: "UpdateTopicResponse"}
+	pUnit                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/clusters/{ClusterArn}/channels",
-	Code: 200})
-
-var CreateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/clusters",
-	Code: 200})
-
-var CreateClusterV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateClusterV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/api/v2/clusters",
-	Code: 200})
-
-var CreateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/configurations",
-	Code: 200})
-
-var CreateReplicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateReplicator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/replication/v1/replicators",
-	Code: 200})
-
-var CreateTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateTopic",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/clusters/{ClusterArn}/topics",
-	Code: 200})
-
-var CreateVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateVpcConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/vpc-connection",
-	Code: 200})
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
-	Code: 200})
-
-var DeleteCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/clusters/{ClusterArn}",
-	Code: 200})
-
-var DeleteClusterPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteClusterPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/clusters/{ClusterArn}/policy",
-	Code: 200})
-
-var DeleteConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/configurations/{Arn}",
-	Code: 200})
-
-var DeleteReplicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteReplicator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/replication/v1/replicators/{ReplicatorArn}",
-	Code: 200})
-
-var DeleteTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteTopic",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/clusters/{ClusterArn}/topics/{TopicName}",
-	Code: 200})
-
-var DeleteVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteVpcConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/vpc-connection/{Arn}",
-	Code: 200})
-
-var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
-	Code: 200})
-
-var DescribeCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}",
-	Code: 200})
-
-var DescribeClusterOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/operations/{ClusterOperationArn}",
-	Code: 200})
-
-var DescribeClusterOperationV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperationV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v2/operations/{ClusterOperationArn}",
-	Code: 200})
-
-var DescribeClusterV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v2/clusters/{ClusterArn}",
-	Code: 200})
-
-var DescribeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{Arn}",
-	Code: 200})
-
-var DescribeConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfigurationRevision",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{Arn}/revisions/{Revision}",
-	Code: 200})
-
-var DescribeReplicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeReplicator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/replication/v1/replicators/{ReplicatorArn}",
-	Code: 200})
-
-var DescribeTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopic",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/topics/{TopicName}",
-	Code: 200})
-
-var DescribeTopicPartitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopicPartitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/topics/{TopicName}/partitions",
-	Code: 200})
-
-var DescribeVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeVpcConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/vpc-connection/{Arn}",
-	Code: 200})
-
-var GetBootstrapBrokers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetBootstrapBrokers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/bootstrap-brokers",
-	Code: 200})
-
-var GetClusterPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetClusterPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/policy",
-	Code: 200})
-
-var GetCompatibleKafkaVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetCompatibleKafkaVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/compatible-kafka-versions",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/channels",
-	Code: 200})
-
-var ListClientVpcConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClientVpcConnections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/client-vpc-connections",
-	Code: 200})
-
-var ListClusterOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/operations",
-	Code: 200})
-
-var ListClusterOperationsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperationsV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v2/clusters/{ClusterArn}/operations",
-	Code: 200})
-
-var ListClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusters",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters",
-	Code: 200})
-
-var ListClustersV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClustersV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v2/clusters",
-	Code: 200})
-
-var ListConfigurationRevisions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurationRevisions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations/{Arn}/revisions",
-	Code: 200})
-
-var ListConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/configurations",
-	Code: 200})
-
-var ListKafkaVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListKafkaVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/kafka-versions",
-	Code: 200})
-
-var ListNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListNodes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/nodes",
-	Code: 200})
-
-var ListReplicators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListReplicators",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/replication/v1/replicators",
-	Code: 200})
-
-var ListScramSecrets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListScramSecrets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 200})
-
-var ListTopics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTopics",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/clusters/{ClusterArn}/topics",
-	Code: 200})
-
-var ListVpcConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListVpcConnections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/vpc-connections",
-	Code: 200})
-
-var PutClusterPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PutClusterPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/policy",
-	Code: 200})
-
-var RebootBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RebootBroker",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/reboot-broker",
-	Code: 200})
-
-var RejectClientVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RejectClientVpcConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/client-vpc-connection",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateBrokerCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerCount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/nodes/count",
-	Code: 200})
-
-var UpdateBrokerStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/nodes/storage",
-	Code: 200})
-
-var UpdateBrokerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/nodes/type",
-	Code: 200})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
-	Code: 200})
-
-var UpdateClusterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/configuration",
-	Code: 200})
-
-var UpdateClusterKafkaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterKafkaVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/version",
-	Code: 200})
-
-var UpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/configurations/{Arn}",
-	Code: 200})
-
-var UpdateConnectivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConnectivity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/connectivity",
-	Code: 200})
-
-var UpdateMonitoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateMonitoring",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/monitoring",
-	Code: 200})
-
-var UpdateRebalancing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateRebalancing",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/rebalancing",
-	Code: 200})
-
-var UpdateReplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateReplicationInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/replication/v1/replicators/{ReplicatorArn}/replication-info",
-	Code: 200})
-
-var UpdateSecurity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateSecurity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v1/clusters/{ClusterArn}/security",
-	Code: 200})
-
-var UpdateStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateStorage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/storage",
-	Code: 200})
-
-var UpdateTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateTopic",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/topics/{TopicName}",
-	Code: 200})
-
-var _Kafka = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Kafka",
-}, smithy.ShapeTypeService, 0)
-
-var Kafka = smithy.NewServiceSchema(_Kafka, "2018-11-14")
-
-var ___blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__double",
-}, smithy.ShapeTypeDouble, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__integerMin1",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max15 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__integerMin1Max15",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max16384 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__integerMin1Max16384",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOf__double",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__double_member *smithy.Schema
-
-var ___listOf__integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOf__integer",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__integer_member *smithy.Schema
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOf__stringMax249 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOf__stringMax249",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__stringMax249_member *smithy.Schema
-
-var ___listOf__stringMax256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOf__stringMax256",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__stringMax256_member *smithy.Schema
-
-var ___listOfBrokerEBSVolumeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfBrokerEBSVolumeInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfBrokerEBSVolumeInfo_member *smithy.Schema
-
-var ___listOfChannelInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfChannelInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfChannelInfo_member *smithy.Schema
-
-var ___listOfClientVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfClientVpcConnection",
-}, smithy.ShapeTypeList, 1)
-var ___listOfClientVpcConnection_member *smithy.Schema
-
-var ___listOfCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfCluster",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCluster_member *smithy.Schema
-
-var ___listOfClusterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfClusterInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfClusterInfo_member *smithy.Schema
-
-var ___listOfClusterOperationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfClusterOperationInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfClusterOperationInfo_member *smithy.Schema
-
-var ___listOfClusterOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfClusterOperationStep",
-}, smithy.ShapeTypeList, 1)
-var ___listOfClusterOperationStep_member *smithy.Schema
-
-var ___listOfClusterOperationV2Summary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfClusterOperationV2Summary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfClusterOperationV2Summary_member *smithy.Schema
-
-var ___listOfCompatibleKafkaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfCompatibleKafkaVersion",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCompatibleKafkaVersion_member *smithy.Schema
-
-var ___listOfConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfConfiguration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConfiguration_member *smithy.Schema
-
-var ___listOfConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfConfigurationRevision",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConfigurationRevision_member *smithy.Schema
-
-var ___listOfDestinationTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfDestinationTable",
-}, smithy.ShapeTypeList, 1)
-var ___listOfDestinationTable_member *smithy.Schema
-
-var ___listOfKafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfKafkaCluster",
-}, smithy.ShapeTypeList, 1)
-var ___listOfKafkaCluster_member *smithy.Schema
-
-var ___listOfKafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfKafkaClusterDescription",
-}, smithy.ShapeTypeList, 1)
-var ___listOfKafkaClusterDescription_member *smithy.Schema
-
-var ___listOfKafkaClusterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfKafkaClusterSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfKafkaClusterSummary_member *smithy.Schema
-
-var ___listOfKafkaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfKafkaVersion",
-}, smithy.ShapeTypeList, 1)
-var ___listOfKafkaVersion_member *smithy.Schema
-
-var ___listOfNodeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfNodeInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfNodeInfo_member *smithy.Schema
-
-var ___listOfPartitionSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfPartitionSource",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPartitionSource_member *smithy.Schema
-
-var ___listOfReplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfReplicationInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReplicationInfo_member *smithy.Schema
-
-var ___listOfReplicationInfoDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfReplicationInfoDescription",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReplicationInfoDescription_member *smithy.Schema
-
-var ___listOfReplicationInfoSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfReplicationInfoSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReplicationInfoSummary_member *smithy.Schema
-
-var ___listOfReplicatorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfReplicatorSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfReplicatorSummary_member *smithy.Schema
-
-var ___listOfTopicConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfTopicConfiguration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfTopicConfiguration_member *smithy.Schema
-
-var ___listOfTopicInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfTopicInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfTopicInfo_member *smithy.Schema
-
-var ___listOfTopicPartitionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfTopicPartitionInfo",
-}, smithy.ShapeTypeList, 1)
-var ___listOfTopicPartitionInfo_member *smithy.Schema
-
-var ___listOfUnprocessedScramSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfUnprocessedScramSecret",
-}, smithy.ShapeTypeList, 1)
-var ___listOfUnprocessedScramSecret_member *smithy.Schema
-
-var ___listOfVpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfVpcConfig",
-}, smithy.ShapeTypeList, 1)
-var ___listOfVpcConfig_member *smithy.Schema
-
-var ___listOfVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__listOfVpcConnection",
-}, smithy.ShapeTypeList, 1)
-var ___listOfVpcConnection_member *smithy.Schema
-
-var ___long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__long",
-}, smithy.ShapeTypeLong, 0)
-
-var ___mapOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__mapOf__string",
-}, smithy.ShapeTypeMap, 2)
-var ___mapOf__string_key *smithy.Schema
-
-var ___mapOf__string_value *smithy.Schema
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMax1024",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax249 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMax249",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMax256",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMin1Max128",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max128Pattern09AZaZ09AZaZ0 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMin1Max128Pattern09AZaZ09AZaZ0",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMin1Max64",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin5Max32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMin5Max32",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var AmazonMskCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "AmazonMskCluster",
-}, smithy.ShapeTypeStructure, 1)
-var AmazonMskCluster_MskClusterArn *smithy.Schema
-
-var ApacheKafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ApacheKafkaCluster",
-}, smithy.ShapeTypeStructure, 2)
-var ApacheKafkaCluster_ApacheKafkaClusterId *smithy.Schema
-
-var ApacheKafkaCluster_BootstrapBrokerString *smithy.Schema
-
-var AuthorizerLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "AuthorizerLogs",
-}, smithy.ShapeTypeStructure, 3)
-var AuthorizerLogs_CloudWatchLogs *smithy.Schema
-
-var AuthorizerLogs_Firehose *smithy.Schema
-
-var AuthorizerLogs_S3 *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_InvalidParameter *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var BrokerAZDistribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerAZDistribution",
-}, smithy.ShapeTypeEnum, 1)
-var BrokerAZDistribution_DEFAULT *smithy.Schema
-
-var BrokerCountUpdateInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerCountUpdateInfo",
-}, smithy.ShapeTypeStructure, 2)
-var BrokerCountUpdateInfo_CreatedBrokerIds *smithy.Schema
-
-var BrokerCountUpdateInfo_DeletedBrokerIds *smithy.Schema
-
-var BrokerEBSVolumeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerEBSVolumeInfo",
-}, smithy.ShapeTypeStructure, 3)
-var BrokerEBSVolumeInfo_KafkaBrokerNodeId *smithy.Schema
-
-var BrokerEBSVolumeInfo_ProvisionedThroughput *smithy.Schema
-
-var BrokerEBSVolumeInfo_VolumeSizeGB *smithy.Schema
-
-var BrokerLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerLogs",
-}, smithy.ShapeTypeStructure, 3)
-var BrokerLogs_CloudWatchLogs *smithy.Schema
-
-var BrokerLogs_Firehose *smithy.Schema
-
-var BrokerLogs_S3 *smithy.Schema
-
-var BrokerNodeGroupInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerNodeGroupInfo",
-}, smithy.ShapeTypeStructure, 7)
-var BrokerNodeGroupInfo_BrokerAZDistribution *smithy.Schema
-
-var BrokerNodeGroupInfo_ClientSubnets *smithy.Schema
-
-var BrokerNodeGroupInfo_InstanceType *smithy.Schema
-
-var BrokerNodeGroupInfo_SecurityGroups *smithy.Schema
-
-var BrokerNodeGroupInfo_StorageInfo *smithy.Schema
-
-var BrokerNodeGroupInfo_ConnectivityInfo *smithy.Schema
-
-var BrokerNodeGroupInfo_ZoneIds *smithy.Schema
-
-var BrokerNodeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerNodeInfo",
-}, smithy.ShapeTypeStructure, 6)
-var BrokerNodeInfo_AttachedENIId *smithy.Schema
-
-var BrokerNodeInfo_BrokerId *smithy.Schema
-
-var BrokerNodeInfo_ClientSubnet *smithy.Schema
-
-var BrokerNodeInfo_ClientVpcIpAddress *smithy.Schema
-
-var BrokerNodeInfo_CurrentBrokerSoftwareInfo *smithy.Schema
-
-var BrokerNodeInfo_Endpoints *smithy.Schema
-
-var BrokerSoftwareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BrokerSoftwareInfo",
-}, smithy.ShapeTypeStructure, 3)
-var BrokerSoftwareInfo_ConfigurationArn *smithy.Schema
-
-var BrokerSoftwareInfo_ConfigurationRevision *smithy.Schema
-
-var BrokerSoftwareInfo_KafkaVersion *smithy.Schema
-
-var Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Catalog",
-}, smithy.ShapeTypeStructure, 2)
-var Catalog_CatalogArn *smithy.Schema
-
-var Catalog_WarehouseLocation *smithy.Schema
-
-var ChannelDestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ChannelDestinationType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelDestinationType_ICEBERG *smithy.Schema
-
-var ChannelDestinationType_S3 *smithy.Schema
-
-var ChannelInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ChannelInfo",
-}, smithy.ShapeTypeStructure, 6)
-var ChannelInfo_ChannelArn *smithy.Schema
-
-var ChannelInfo_ChannelName *smithy.Schema
-
-var ChannelInfo_Status *smithy.Schema
-
-var ChannelInfo_CreationTime *smithy.Schema
-
-var ChannelInfo_DestinationType *smithy.Schema
-
-var ChannelInfo_ClusterOperationArn *smithy.Schema
-
-var ChannelLoggingInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ChannelLoggingInfo",
-}, smithy.ShapeTypeStructure, 3)
-var ChannelLoggingInfo_CloudWatchLogs *smithy.Schema
-
-var ChannelLoggingInfo_Firehose *smithy.Schema
-
-var ChannelLoggingInfo_S3 *smithy.Schema
-
-var ChannelStateInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ChannelStateInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelStateInfo_Code *smithy.Schema
-
-var ChannelStateInfo_Message *smithy.Schema
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 7)
-var ChannelStatus_CREATING *smithy.Schema
-
-var ChannelStatus_ACTIVE *smithy.Schema
-
-var ChannelStatus_UPDATING *smithy.Schema
-
-var ChannelStatus_DELETING *smithy.Schema
-
-var ChannelStatus_FAILED *smithy.Schema
-
-var ChannelStatus_SUSPENDING *smithy.Schema
-
-var ChannelStatus_SUSPENDED *smithy.Schema
-
-var ClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClientAuthentication",
-}, smithy.ShapeTypeStructure, 3)
-var ClientAuthentication_Sasl *smithy.Schema
-
-var ClientAuthentication_Tls *smithy.Schema
-
-var ClientAuthentication_Unauthenticated *smithy.Schema
-
-var ClientBroker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClientBroker",
-}, smithy.ShapeTypeEnum, 3)
-var ClientBroker_TLS *smithy.Schema
-
-var ClientBroker_TLS_PLAINTEXT *smithy.Schema
-
-var ClientBroker_PLAINTEXT *smithy.Schema
-
-var ClientVpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClientVpcConnection",
-}, smithy.ShapeTypeStructure, 5)
-var ClientVpcConnection_Authentication *smithy.Schema
-
-var ClientVpcConnection_CreationTime *smithy.Schema
-
-var ClientVpcConnection_State *smithy.Schema
-
-var ClientVpcConnection_VpcConnectionArn *smithy.Schema
-
-var ClientVpcConnection_Owner *smithy.Schema
-
-var CloudWatchLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CloudWatchLogs",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogs_Enabled *smithy.Schema
-
-var CloudWatchLogs_LogGroup *smithy.Schema
-
-var Cluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Cluster",
-}, smithy.ShapeTypeStructure, 11)
-var Cluster_ActiveOperationArn *smithy.Schema
-
-var Cluster_ClusterType *smithy.Schema
-
-var Cluster_ClusterArn *smithy.Schema
-
-var Cluster_ClusterName *smithy.Schema
-
-var Cluster_CreationTime *smithy.Schema
-
-var Cluster_CurrentVersion *smithy.Schema
-
-var Cluster_State *smithy.Schema
-
-var Cluster_StateInfo *smithy.Schema
-
-var Cluster_Tags *smithy.Schema
-
-var Cluster_Provisioned *smithy.Schema
-
-var Cluster_Serverless *smithy.Schema
-
-var ClusterConnectivityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterConnectivityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ClusterConnectivityException_InvalidParameter *smithy.Schema
-
-var ClusterConnectivityException_Message *smithy.Schema
-
-var ClusterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterInfo",
-}, smithy.ShapeTypeStructure, 21)
-var ClusterInfo_ActiveOperationArn *smithy.Schema
-
-var ClusterInfo_BrokerNodeGroupInfo *smithy.Schema
-
-var ClusterInfo_Rebalancing *smithy.Schema
-
-var ClusterInfo_ClientAuthentication *smithy.Schema
-
-var ClusterInfo_ClusterArn *smithy.Schema
-
-var ClusterInfo_ClusterName *smithy.Schema
-
-var ClusterInfo_CreationTime *smithy.Schema
-
-var ClusterInfo_CurrentBrokerSoftwareInfo *smithy.Schema
-
-var ClusterInfo_CurrentVersion *smithy.Schema
-
-var ClusterInfo_EncryptionInfo *smithy.Schema
-
-var ClusterInfo_EnhancedMonitoring *smithy.Schema
-
-var ClusterInfo_OpenMonitoring *smithy.Schema
-
-var ClusterInfo_LoggingInfo *smithy.Schema
-
-var ClusterInfo_NumberOfBrokerNodes *smithy.Schema
-
-var ClusterInfo_State *smithy.Schema
-
-var ClusterInfo_StateInfo *smithy.Schema
-
-var ClusterInfo_Tags *smithy.Schema
-
-var ClusterInfo_ZookeeperConnectString *smithy.Schema
-
-var ClusterInfo_ZookeeperConnectStringTls *smithy.Schema
-
-var ClusterInfo_StorageMode *smithy.Schema
-
-var ClusterInfo_CustomerActionStatus *smithy.Schema
-
-var ClusterOperationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationInfo",
-}, smithy.ShapeTypeStructure, 12)
-var ClusterOperationInfo_ClientRequestId *smithy.Schema
-
-var ClusterOperationInfo_ClusterArn *smithy.Schema
-
-var ClusterOperationInfo_CreationTime *smithy.Schema
-
-var ClusterOperationInfo_EndTime *smithy.Schema
-
-var ClusterOperationInfo_ErrorInfo *smithy.Schema
-
-var ClusterOperationInfo_OperationArn *smithy.Schema
-
-var ClusterOperationInfo_OperationState *smithy.Schema
-
-var ClusterOperationInfo_OperationSteps *smithy.Schema
-
-var ClusterOperationInfo_OperationType *smithy.Schema
-
-var ClusterOperationInfo_SourceClusterInfo *smithy.Schema
-
-var ClusterOperationInfo_TargetClusterInfo *smithy.Schema
-
-var ClusterOperationInfo_VpcConnectionInfo *smithy.Schema
-
-var ClusterOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationStep",
-}, smithy.ShapeTypeStructure, 2)
-var ClusterOperationStep_StepInfo *smithy.Schema
-
-var ClusterOperationStep_StepName *smithy.Schema
-
-var ClusterOperationStepInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationStepInfo",
-}, smithy.ShapeTypeStructure, 1)
-var ClusterOperationStepInfo_StepStatus *smithy.Schema
-
-var ClusterOperationV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationV2",
-}, smithy.ShapeTypeStructure, 10)
-var ClusterOperationV2_ClusterArn *smithy.Schema
-
-var ClusterOperationV2_ClusterType *smithy.Schema
-
-var ClusterOperationV2_StartTime *smithy.Schema
-
-var ClusterOperationV2_EndTime *smithy.Schema
-
-var ClusterOperationV2_ErrorInfo *smithy.Schema
-
-var ClusterOperationV2_OperationArn *smithy.Schema
-
-var ClusterOperationV2_OperationState *smithy.Schema
-
-var ClusterOperationV2_OperationType *smithy.Schema
-
-var ClusterOperationV2_Provisioned *smithy.Schema
-
-var ClusterOperationV2_Serverless *smithy.Schema
-
-var ClusterOperationV2Provisioned = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationV2Provisioned",
-}, smithy.ShapeTypeStructure, 4)
-var ClusterOperationV2Provisioned_OperationSteps *smithy.Schema
-
-var ClusterOperationV2Provisioned_SourceClusterInfo *smithy.Schema
-
-var ClusterOperationV2Provisioned_TargetClusterInfo *smithy.Schema
-
-var ClusterOperationV2Provisioned_VpcConnectionInfo *smithy.Schema
-
-var ClusterOperationV2Serverless = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationV2Serverless",
-}, smithy.ShapeTypeStructure, 3)
-var ClusterOperationV2Serverless_SourceClusterInfo *smithy.Schema
-
-var ClusterOperationV2Serverless_TargetClusterInfo *smithy.Schema
-
-var ClusterOperationV2Serverless_VpcConnectionInfo *smithy.Schema
-
-var ClusterOperationV2Summary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterOperationV2Summary",
-}, smithy.ShapeTypeStructure, 7)
-var ClusterOperationV2Summary_ClusterArn *smithy.Schema
-
-var ClusterOperationV2Summary_ClusterType *smithy.Schema
-
-var ClusterOperationV2Summary_StartTime *smithy.Schema
-
-var ClusterOperationV2Summary_EndTime *smithy.Schema
-
-var ClusterOperationV2Summary_OperationArn *smithy.Schema
-
-var ClusterOperationV2Summary_OperationState *smithy.Schema
-
-var ClusterOperationV2Summary_OperationType *smithy.Schema
-
-var ClusterState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterState",
-}, smithy.ShapeTypeEnum, 8)
-var ClusterState_ACTIVE *smithy.Schema
-
-var ClusterState_CREATING *smithy.Schema
-
-var ClusterState_DELETING *smithy.Schema
-
-var ClusterState_FAILED *smithy.Schema
-
-var ClusterState_HEALING *smithy.Schema
-
-var ClusterState_MAINTENANCE *smithy.Schema
-
-var ClusterState_REBOOTING_BROKER *smithy.Schema
-
-var ClusterState_UPDATING *smithy.Schema
-
-var ClusterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ClusterType",
-}, smithy.ShapeTypeEnum, 2)
-var ClusterType_PROVISIONED *smithy.Schema
-
-var ClusterType_SERVERLESS *smithy.Schema
-
-var CompatibleKafkaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CompatibleKafkaVersion",
-}, smithy.ShapeTypeStructure, 2)
-var CompatibleKafkaVersion_SourceVersion *smithy.Schema
-
-var CompatibleKafkaVersion_TargetVersions *smithy.Schema
-
-var Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Configuration",
-}, smithy.ShapeTypeStructure, 7)
-var Configuration_Arn *smithy.Schema
-
-var Configuration_CreationTime *smithy.Schema
-
-var Configuration_Description *smithy.Schema
-
-var Configuration_KafkaVersions *smithy.Schema
-
-var Configuration_LatestRevision *smithy.Schema
-
-var Configuration_Name *smithy.Schema
-
-var Configuration_State *smithy.Schema
-
-var ConfigurationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConfigurationInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ConfigurationInfo_Arn *smithy.Schema
-
-var ConfigurationInfo_Revision *smithy.Schema
-
-var ConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConfigurationRevision",
-}, smithy.ShapeTypeStructure, 3)
-var ConfigurationRevision_CreationTime *smithy.Schema
-
-var ConfigurationRevision_Description *smithy.Schema
-
-var ConfigurationRevision_Revision *smithy.Schema
-
-var ConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConfigurationState",
-}, smithy.ShapeTypeEnum, 3)
-var ConfigurationState_ACTIVE *smithy.Schema
-
-var ConfigurationState_DELETING *smithy.Schema
-
-var ConfigurationState_DELETE_FAILED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_InvalidParameter *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var ConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConnectivityInfo",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectivityInfo_PublicAccess *smithy.Schema
-
-var ConnectivityInfo_VpcConnectivity *smithy.Schema
-
-var ConnectivityInfo_NetworkType *smithy.Schema
-
-var ConsumerGroupOffsetSyncMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConsumerGroupOffsetSyncMode",
-}, smithy.ShapeTypeEnum, 2)
-var ConsumerGroupOffsetSyncMode_LEGACY *smithy.Schema
-
-var ConsumerGroupOffsetSyncMode_ENHANCED *smithy.Schema
-
-var ConsumerGroupReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConsumerGroupReplication",
-}, smithy.ShapeTypeStructure, 5)
-var ConsumerGroupReplication_ConsumerGroupsToExclude *smithy.Schema
-
-var ConsumerGroupReplication_ConsumerGroupsToReplicate *smithy.Schema
-
-var ConsumerGroupReplication_DetectAndCopyNewConsumerGroups *smithy.Schema
-
-var ConsumerGroupReplication_SynchroniseConsumerGroupOffsets *smithy.Schema
-
-var ConsumerGroupReplication_ConsumerGroupOffsetSyncMode *smithy.Schema
-
-var ConsumerGroupReplicationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ConsumerGroupReplicationUpdate",
-}, smithy.ShapeTypeStructure, 4)
-var ConsumerGroupReplicationUpdate_ConsumerGroupsToExclude *smithy.Schema
-
-var ConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate *smithy.Schema
-
-var ConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups *smithy.Schema
-
-var ConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets *smithy.Schema
-
-var ControllerMovedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ControllerMovedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ControllerMovedException_InvalidParameter *smithy.Schema
-
-var ControllerMovedException_Message *smithy.Schema
-
-var ControllerNodeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ControllerNodeInfo",
-}, smithy.ShapeTypeStructure, 1)
-var ControllerNodeInfo_Endpoints *smithy.Schema
-
-var CustomerActionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CustomerActionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CustomerActionStatus_CRITICAL_ACTION_REQUIRED *smithy.Schema
-
-var CustomerActionStatus_ACTION_RECOMMENDED *smithy.Schema
-
-var CustomerActionStatus_NONE *smithy.Schema
-
-var DeadLetterQueueS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeadLetterQueueS3",
-}, smithy.ShapeTypeStructure, 3)
-var DeadLetterQueueS3_BucketArn *smithy.Schema
-
-var DeadLetterQueueS3_ErrorOutputPrefix *smithy.Schema
-
-var DeadLetterQueueS3_ExpectedBucketOwner *smithy.Schema
-
-var DestinationTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DestinationTable",
-}, smithy.ShapeTypeStructure, 3)
-var DestinationTable_DestinationDatabaseName *smithy.Schema
-
-var DestinationTable_DestinationTableName *smithy.Schema
-
-var DestinationTable_PartitionSpec *smithy.Schema
-
-var EBSStorageInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EBSStorageInfo",
-}, smithy.ShapeTypeStructure, 2)
-var EBSStorageInfo_ProvisionedThroughput *smithy.Schema
-
-var EBSStorageInfo_VolumeSize *smithy.Schema
-
-var EncryptionAtRest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EncryptionAtRest",
-}, smithy.ShapeTypeStructure, 1)
-var EncryptionAtRest_DataVolumeKMSKeyId *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EncryptionConfiguration_KmsKeyArn *smithy.Schema
-
-var EncryptionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EncryptionInfo",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionInfo_EncryptionAtRest *smithy.Schema
-
-var EncryptionInfo_EncryptionInTransit *smithy.Schema
-
-var EncryptionInTransit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EncryptionInTransit",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionInTransit_ClientBroker *smithy.Schema
-
-var EncryptionInTransit_InCluster *smithy.Schema
-
-var EnhancedMonitoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "EnhancedMonitoring",
-}, smithy.ShapeTypeEnum, 4)
-var EnhancedMonitoring_DEFAULT *smithy.Schema
-
-var EnhancedMonitoring_PER_BROKER *smithy.Schema
-
-var EnhancedMonitoring_PER_TOPIC_PER_BROKER *smithy.Schema
-
-var EnhancedMonitoring_PER_TOPIC_PER_PARTITION *smithy.Schema
-
-var ErrorInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ErrorInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorInfo_ErrorCode *smithy.Schema
-
-var ErrorInfo_ErrorString *smithy.Schema
-
-var Firehose = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Firehose",
-}, smithy.ShapeTypeStructure, 2)
-var Firehose_DeliveryStream *smithy.Schema
-
-var Firehose_Enabled *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_InvalidParameter *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var GroupSubscribedToTopicException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GroupSubscribedToTopicException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var GroupSubscribedToTopicException_InvalidParameter *smithy.Schema
-
-var GroupSubscribedToTopicException_Message *smithy.Schema
-
-var Iam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Iam",
-}, smithy.ShapeTypeStructure, 1)
-var Iam_Enabled *smithy.Schema
-
-var IcebergCompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "IcebergCompressionType",
-}, smithy.ShapeTypeEnum, 2)
-var IcebergCompressionType_ZSTD *smithy.Schema
-
-var IcebergCompressionType_SNAPPY *smithy.Schema
-
-var IcebergDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "IcebergDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var IcebergDestinationConfiguration_AppendOnly *smithy.Schema
-
-var IcebergDestinationConfiguration_Catalog *smithy.Schema
-
-var IcebergDestinationConfiguration_DataFreshnessInSeconds *smithy.Schema
-
-var IcebergDestinationConfiguration_DeadLetterQueueS3 *smithy.Schema
-
-var IcebergDestinationConfiguration_DestinationTableList *smithy.Schema
-
-var IcebergDestinationConfiguration_SchemaEvolution *smithy.Schema
-
-var IcebergDestinationConfiguration_ServiceExecutionRoleArn *smithy.Schema
-
-var IcebergDestinationConfiguration_TableCreation *smithy.Schema
-
-var IcebergDestinationConfiguration_CompressionType *smithy.Schema
-
-var IcebergDestinationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "IcebergDestinationUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var IcebergDestinationUpdate_DataFreshnessInSeconds *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_InvalidParameter *smithy.Schema
-
-var InternalServerErrorException_Message *smithy.Schema
-
-var JmxExporter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "JmxExporter",
-}, smithy.ShapeTypeStructure, 1)
-var JmxExporter_EnabledInBroker *smithy.Schema
-
-var JmxExporterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "JmxExporterInfo",
-}, smithy.ShapeTypeStructure, 1)
-var JmxExporterInfo_EnabledInBroker *smithy.Schema
-
-var JwtSigningAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "JwtSigningAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var JwtSigningAlgorithm_RS256 *smithy.Schema
-
-var JwtSigningAlgorithm_ES384 *smithy.Schema
-
-var KafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaCluster",
-}, smithy.ShapeTypeStructure, 5)
-var KafkaCluster_AmazonMskCluster *smithy.Schema
-
-var KafkaCluster_ApacheKafkaCluster *smithy.Schema
-
-var KafkaCluster_VpcConfig *smithy.Schema
-
-var KafkaCluster_ClientAuthentication *smithy.Schema
-
-var KafkaCluster_EncryptionInTransit *smithy.Schema
-
-var KafkaClusterClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterClientAuthentication",
-}, smithy.ShapeTypeStructure, 3)
-var KafkaClusterClientAuthentication_SaslScram *smithy.Schema
-
-var KafkaClusterClientAuthentication_MTLS *smithy.Schema
-
-var KafkaClusterClientAuthentication_SaslOAuthBearer *smithy.Schema
-
-var KafkaClusterClientVpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterClientVpcConfig",
-}, smithy.ShapeTypeStructure, 2)
-var KafkaClusterClientVpcConfig_SecurityGroupIds *smithy.Schema
-
-var KafkaClusterClientVpcConfig_SubnetIds *smithy.Schema
-
-var KafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterDescription",
-}, smithy.ShapeTypeStructure, 6)
-var KafkaClusterDescription_AmazonMskCluster *smithy.Schema
-
-var KafkaClusterDescription_ApacheKafkaCluster *smithy.Schema
-
-var KafkaClusterDescription_KafkaClusterAlias *smithy.Schema
-
-var KafkaClusterDescription_VpcConfig *smithy.Schema
-
-var KafkaClusterDescription_ClientAuthentication *smithy.Schema
-
-var KafkaClusterDescription_EncryptionInTransit *smithy.Schema
-
-var KafkaClusterEncryptionInTransit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterEncryptionInTransit",
-}, smithy.ShapeTypeStructure, 2)
-var KafkaClusterEncryptionInTransit_EncryptionType *smithy.Schema
-
-var KafkaClusterEncryptionInTransit_RootCaCertificate *smithy.Schema
-
-var KafkaClusterEncryptionInTransitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterEncryptionInTransitType",
-}, smithy.ShapeTypeEnum, 1)
-var KafkaClusterEncryptionInTransitType_TLS *smithy.Schema
-
-var KafkaClusterMTLSAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterMTLSAuthentication",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterMTLSAuthentication_SecretArn *smithy.Schema
-
-var KafkaClusterOAuthClientCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterOAuthClientCredentials",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterOAuthClientCredentials_TokenRequestSecretArn *smithy.Schema
-
-var KafkaClusterOAuthClientCredentialsAssertion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterOAuthClientCredentialsAssertion",
-}, smithy.ShapeTypeStructure, 3)
-var KafkaClusterOAuthClientCredentialsAssertion_Audience *smithy.Schema
-
-var KafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm *smithy.Schema
-
-var KafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn *smithy.Schema
-
-var KafkaClusterOAuthIamJwtBearer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterOAuthIamJwtBearer",
-}, smithy.ShapeTypeStructure, 3)
-var KafkaClusterOAuthIamJwtBearer_Audience *smithy.Schema
-
-var KafkaClusterOAuthIamJwtBearer_SigningAlgorithm *smithy.Schema
-
-var KafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterSaslOAuthBearerAuthentication",
-}, smithy.ShapeTypeStructure, 7)
-var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_ClientCredentials *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_Scope *smithy.Schema
-
-var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn *smithy.Schema
-
-var KafkaClusterSaslScramAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterSaslScramAuthentication",
-}, smithy.ShapeTypeStructure, 2)
-var KafkaClusterSaslScramAuthentication_Mechanism *smithy.Schema
-
-var KafkaClusterSaslScramAuthentication_SecretArn *smithy.Schema
-
-var KafkaClusterSaslScramMechanism = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterSaslScramMechanism",
-}, smithy.ShapeTypeEnum, 2)
-var KafkaClusterSaslScramMechanism_SHA256 *smithy.Schema
-
-var KafkaClusterSaslScramMechanism_SHA512 *smithy.Schema
-
-var KafkaClusterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaClusterSummary",
-}, smithy.ShapeTypeStructure, 3)
-var KafkaClusterSummary_AmazonMskCluster *smithy.Schema
-
-var KafkaClusterSummary_ApacheKafkaCluster *smithy.Schema
-
-var KafkaClusterSummary_KafkaClusterAlias *smithy.Schema
-
-var KafkaRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var KafkaRequestException_InvalidParameter *smithy.Schema
-
-var KafkaRequestException_Message *smithy.Schema
-
-var KafkaTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var KafkaTimeoutException_InvalidParameter *smithy.Schema
-
-var KafkaTimeoutException_Message *smithy.Schema
-
-var KafkaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaVersion",
-}, smithy.ShapeTypeStructure, 2)
-var KafkaVersion_Version *smithy.Schema
-
-var KafkaVersion_Status *smithy.Schema
-
-var KafkaVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "KafkaVersionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var KafkaVersionStatus_ACTIVE *smithy.Schema
-
-var KafkaVersionStatus_DEPRECATED *smithy.Schema
-
-var LogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "LogDelivery",
-}, smithy.ShapeTypeStructure, 1)
-var LogDelivery_ReplicatorLogDelivery *smithy.Schema
-
-var LoggingInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "LoggingInfo",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingInfo_AuthorizerLogs *smithy.Schema
-
-var LoggingInfo_BrokerLogs *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MutableClusterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "MutableClusterInfo",
-}, smithy.ShapeTypeStructure, 15)
-var MutableClusterInfo_BrokerEBSVolumeInfo *smithy.Schema
-
-var MutableClusterInfo_ConfigurationInfo *smithy.Schema
-
-var MutableClusterInfo_NumberOfBrokerNodes *smithy.Schema
-
-var MutableClusterInfo_EnhancedMonitoring *smithy.Schema
-
-var MutableClusterInfo_OpenMonitoring *smithy.Schema
-
-var MutableClusterInfo_ZookeeperAccess *smithy.Schema
-
-var MutableClusterInfo_KafkaVersion *smithy.Schema
-
-var MutableClusterInfo_LoggingInfo *smithy.Schema
-
-var MutableClusterInfo_InstanceType *smithy.Schema
-
-var MutableClusterInfo_ClientAuthentication *smithy.Schema
-
-var MutableClusterInfo_EncryptionInfo *smithy.Schema
-
-var MutableClusterInfo_ConnectivityInfo *smithy.Schema
-
-var MutableClusterInfo_StorageMode *smithy.Schema
-
-var MutableClusterInfo_BrokerCountUpdateInfo *smithy.Schema
-
-var MutableClusterInfo_Rebalancing *smithy.Schema
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkType_IPV4 *smithy.Schema
-
-var NetworkType_DUAL *smithy.Schema
-
-var NodeExporter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NodeExporter",
-}, smithy.ShapeTypeStructure, 1)
-var NodeExporter_EnabledInBroker *smithy.Schema
-
-var NodeExporterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NodeExporterInfo",
-}, smithy.ShapeTypeStructure, 1)
-var NodeExporterInfo_EnabledInBroker *smithy.Schema
-
-var NodeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NodeInfo",
-}, smithy.ShapeTypeStructure, 7)
-var NodeInfo_AddedToClusterTime *smithy.Schema
-
-var NodeInfo_BrokerNodeInfo *smithy.Schema
-
-var NodeInfo_ControllerNodeInfo *smithy.Schema
-
-var NodeInfo_InstanceType *smithy.Schema
-
-var NodeInfo_NodeARN *smithy.Schema
-
-var NodeInfo_NodeType *smithy.Schema
-
-var NodeInfo_ZookeeperNodeInfo *smithy.Schema
-
-var NodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NodeType",
-}, smithy.ShapeTypeEnum, 1)
-var NodeType_BROKER *smithy.Schema
-
-var NotControllerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NotControllerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var NotControllerException_InvalidParameter *smithy.Schema
-
-var NotControllerException_Message *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_InvalidParameter *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var OpenMonitoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "OpenMonitoring",
-}, smithy.ShapeTypeStructure, 1)
-var OpenMonitoring_Prometheus *smithy.Schema
-
-var OpenMonitoringInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "OpenMonitoringInfo",
-}, smithy.ShapeTypeStructure, 1)
-var OpenMonitoringInfo_Prometheus *smithy.Schema
-
-var PartitionSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PartitionSource",
-}, smithy.ShapeTypeStructure, 1)
-var PartitionSource_SourceName *smithy.Schema
-
-var PartitionSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PartitionSpec",
-}, smithy.ShapeTypeStructure, 2)
-var PartitionSpec_PartitionStrategy *smithy.Schema
-
-var PartitionSpec_SourceList *smithy.Schema
-
-var PartitionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PartitionStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var PartitionStrategy_TIME_HOUR *smithy.Schema
-
-var Prometheus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Prometheus",
-}, smithy.ShapeTypeStructure, 2)
-var Prometheus_JmxExporter *smithy.Schema
-
-var Prometheus_NodeExporter *smithy.Schema
-
-var PrometheusInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PrometheusInfo",
-}, smithy.ShapeTypeStructure, 2)
-var PrometheusInfo_JmxExporter *smithy.Schema
-
-var PrometheusInfo_NodeExporter *smithy.Schema
-
-var Provisioned = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Provisioned",
-}, smithy.ShapeTypeStructure, 13)
-var Provisioned_BrokerNodeGroupInfo *smithy.Schema
-
-var Provisioned_Rebalancing *smithy.Schema
-
-var Provisioned_CurrentBrokerSoftwareInfo *smithy.Schema
-
-var Provisioned_ClientAuthentication *smithy.Schema
-
-var Provisioned_EncryptionInfo *smithy.Schema
-
-var Provisioned_EnhancedMonitoring *smithy.Schema
-
-var Provisioned_OpenMonitoring *smithy.Schema
-
-var Provisioned_LoggingInfo *smithy.Schema
-
-var Provisioned_NumberOfBrokerNodes *smithy.Schema
-
-var Provisioned_ZookeeperConnectString *smithy.Schema
-
-var Provisioned_ZookeeperConnectStringTls *smithy.Schema
-
-var Provisioned_StorageMode *smithy.Schema
-
-var Provisioned_CustomerActionStatus *smithy.Schema
-
-var ProvisionedRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ProvisionedRequest",
-}, smithy.ShapeTypeStructure, 11)
-var ProvisionedRequest_BrokerNodeGroupInfo *smithy.Schema
-
-var ProvisionedRequest_Rebalancing *smithy.Schema
-
-var ProvisionedRequest_ClientAuthentication *smithy.Schema
-
-var ProvisionedRequest_ConfigurationInfo *smithy.Schema
-
-var ProvisionedRequest_EncryptionInfo *smithy.Schema
-
-var ProvisionedRequest_EnhancedMonitoring *smithy.Schema
-
-var ProvisionedRequest_OpenMonitoring *smithy.Schema
-
-var ProvisionedRequest_KafkaVersion *smithy.Schema
-
-var ProvisionedRequest_LoggingInfo *smithy.Schema
-
-var ProvisionedRequest_NumberOfBrokerNodes *smithy.Schema
-
-var ProvisionedRequest_StorageMode *smithy.Schema
-
-var ProvisionedThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ProvisionedThroughput",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedThroughput_Enabled *smithy.Schema
-
-var ProvisionedThroughput_VolumeThroughput *smithy.Schema
-
-var PublicAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PublicAccess",
-}, smithy.ShapeTypeStructure, 1)
-var PublicAccess_Type *smithy.Schema
-
-var ReassignmentInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReassignmentInProgressException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ReassignmentInProgressException_InvalidParameter *smithy.Schema
-
-var ReassignmentInProgressException_Message *smithy.Schema
-
-var Rebalancing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Rebalancing",
-}, smithy.ShapeTypeStructure, 1)
-var Rebalancing_Status *smithy.Schema
-
-var RebalancingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RebalancingStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RebalancingStatus_PAUSED *smithy.Schema
-
-var RebalancingStatus_ACTIVE *smithy.Schema
-
-var RecordConverter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RecordConverter",
-}, smithy.ShapeTypeStructure, 1)
-var RecordConverter_ValueConverter *smithy.Schema
-
-var RecordSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RecordSchema",
-}, smithy.ShapeTypeStructure, 1)
-var RecordSchema_GsrArn *smithy.Schema
-
-var ReplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationInfo",
-}, smithy.ShapeTypeStructure, 7)
-var ReplicationInfo_ConsumerGroupReplication *smithy.Schema
-
-var ReplicationInfo_SourceKafkaClusterArn *smithy.Schema
-
-var ReplicationInfo_SourceKafkaClusterId *smithy.Schema
-
-var ReplicationInfo_TargetCompressionType *smithy.Schema
-
-var ReplicationInfo_TargetKafkaClusterArn *smithy.Schema
-
-var ReplicationInfo_TargetKafkaClusterId *smithy.Schema
-
-var ReplicationInfo_TopicReplication *smithy.Schema
-
-var ReplicationInfoDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationInfoDescription",
-}, smithy.ShapeTypeStructure, 5)
-var ReplicationInfoDescription_ConsumerGroupReplication *smithy.Schema
-
-var ReplicationInfoDescription_SourceKafkaClusterAlias *smithy.Schema
-
-var ReplicationInfoDescription_TargetCompressionType *smithy.Schema
-
-var ReplicationInfoDescription_TargetKafkaClusterAlias *smithy.Schema
-
-var ReplicationInfoDescription_TopicReplication *smithy.Schema
-
-var ReplicationInfoSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationInfoSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicationInfoSummary_SourceKafkaClusterAlias *smithy.Schema
-
-var ReplicationInfoSummary_TargetKafkaClusterAlias *smithy.Schema
-
-var ReplicationStartingPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationStartingPosition",
-}, smithy.ShapeTypeStructure, 1)
-var ReplicationStartingPosition_Type *smithy.Schema
-
-var ReplicationStartingPositionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationStartingPositionType",
-}, smithy.ShapeTypeEnum, 2)
-var ReplicationStartingPositionType_LATEST *smithy.Schema
-
-var ReplicationStartingPositionType_EARLIEST *smithy.Schema
-
-var ReplicationStateInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationStateInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicationStateInfo_Code *smithy.Schema
-
-var ReplicationStateInfo_Message *smithy.Schema
-
-var ReplicationTopicNameConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationTopicNameConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ReplicationTopicNameConfiguration_Type *smithy.Schema
-
-var ReplicationTopicNameConfigurationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicationTopicNameConfigurationType",
-}, smithy.ShapeTypeEnum, 2)
-var ReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS *smithy.Schema
-
-var ReplicationTopicNameConfigurationType_IDENTICAL *smithy.Schema
-
-var ReplicatorCloudWatchLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorCloudWatchLogs",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicatorCloudWatchLogs_Enabled *smithy.Schema
-
-var ReplicatorCloudWatchLogs_LogGroup *smithy.Schema
-
-var ReplicatorFirehose = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorFirehose",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicatorFirehose_Enabled *smithy.Schema
-
-var ReplicatorFirehose_DeliveryStream *smithy.Schema
-
-var ReplicatorLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorLogDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var ReplicatorLogDelivery_CloudWatchLogs *smithy.Schema
-
-var ReplicatorLogDelivery_Firehose *smithy.Schema
-
-var ReplicatorLogDelivery_S3 *smithy.Schema
-
-var ReplicatorS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorS3",
-}, smithy.ShapeTypeStructure, 3)
-var ReplicatorS3_Enabled *smithy.Schema
-
-var ReplicatorS3_Bucket *smithy.Schema
-
-var ReplicatorS3_Prefix *smithy.Schema
-
-var ReplicatorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorState",
-}, smithy.ShapeTypeEnum, 5)
-var ReplicatorState_RUNNING *smithy.Schema
-
-var ReplicatorState_CREATING *smithy.Schema
-
-var ReplicatorState_UPDATING *smithy.Schema
-
-var ReplicatorState_DELETING *smithy.Schema
-
-var ReplicatorState_FAILED *smithy.Schema
-
-var ReplicatorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ReplicatorSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ReplicatorSummary_CreationTime *smithy.Schema
-
-var ReplicatorSummary_CurrentVersion *smithy.Schema
-
-var ReplicatorSummary_IsReplicatorReference *smithy.Schema
-
-var ReplicatorSummary_KafkaClustersSummary *smithy.Schema
-
-var ReplicatorSummary_ReplicationInfoSummaryList *smithy.Schema
-
-var ReplicatorSummary_ReplicatorArn *smithy.Schema
-
-var ReplicatorSummary_ReplicatorName *smithy.Schema
-
-var ReplicatorSummary_ReplicatorResourceArn *smithy.Schema
-
-var ReplicatorSummary_ReplicatorState *smithy.Schema
-
-var S3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3",
-}, smithy.ShapeTypeStructure, 3)
-var S3_Bucket *smithy.Schema
-
-var S3_Enabled *smithy.Schema
-
-var S3_Prefix *smithy.Schema
-
-var S3CompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3CompressionType",
-}, smithy.ShapeTypeEnum, 3)
-var S3CompressionType_NONE *smithy.Schema
-
-var S3CompressionType_GZIP *smithy.Schema
-
-var S3CompressionType_ZSTD *smithy.Schema
-
-var S3DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var S3DestinationConfiguration_DataFreshnessInSeconds *smithy.Schema
-
-var S3DestinationConfiguration_DeadLetterQueueS3 *smithy.Schema
-
-var S3DestinationConfiguration_ServiceExecutionRoleArn *smithy.Schema
-
-var S3DestinationConfiguration_Storage *smithy.Schema
-
-var S3DestinationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3DestinationUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var S3DestinationUpdate_DataFreshnessInSeconds *smithy.Schema
-
-var S3Storage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3Storage",
-}, smithy.ShapeTypeStructure, 6)
-var S3Storage_BucketArn *smithy.Schema
-
-var S3Storage_CompressionType *smithy.Schema
-
-var S3Storage_OutputPrefix *smithy.Schema
-
-var S3Storage_OutputKeyTemplate *smithy.Schema
-
-var S3Storage_StorageClass *smithy.Schema
-
-var S3Storage_ExpectedBucketOwner *smithy.Schema
-
-var S3StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "S3StorageClass",
-}, smithy.ShapeTypeEnum, 3)
-var S3StorageClass_STANDARD *smithy.Schema
-
-var S3StorageClass_INTELLIGENT_TIERING *smithy.Schema
-
-var S3StorageClass_GLACIER_IR *smithy.Schema
-
-var Sasl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Sasl",
-}, smithy.ShapeTypeStructure, 2)
-var Sasl_Scram *smithy.Schema
-
-var Sasl_Iam *smithy.Schema
-
-var SchemaEvolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "SchemaEvolution",
-}, smithy.ShapeTypeStructure, 1)
-var SchemaEvolution_EnableSchemaEvolution *smithy.Schema
-
-var Scram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Scram",
-}, smithy.ShapeTypeStructure, 1)
-var Scram_Enabled *smithy.Schema
-
-var Serverless = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Serverless",
-}, smithy.ShapeTypeStructure, 3)
-var Serverless_VpcConfigs *smithy.Schema
-
-var Serverless_ClientAuthentication *smithy.Schema
-
-var Serverless_ConnectivityInfo *smithy.Schema
-
-var ServerlessClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ServerlessClientAuthentication",
-}, smithy.ShapeTypeStructure, 1)
-var ServerlessClientAuthentication_Sasl *smithy.Schema
-
-var ServerlessConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ServerlessConnectivityInfo",
-}, smithy.ShapeTypeStructure, 1)
-var ServerlessConnectivityInfo_NetworkType *smithy.Schema
-
-var ServerlessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ServerlessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ServerlessRequest_VpcConfigs *smithy.Schema
-
-var ServerlessRequest_ClientAuthentication *smithy.Schema
-
-var ServerlessSasl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ServerlessSasl",
-}, smithy.ShapeTypeStructure, 1)
-var ServerlessSasl_Iam *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_InvalidParameter *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var StateInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "StateInfo",
-}, smithy.ShapeTypeStructure, 2)
-var StateInfo_Code *smithy.Schema
-
-var StateInfo_Message *smithy.Schema
-
-var StorageInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "StorageInfo",
-}, smithy.ShapeTypeStructure, 1)
-var StorageInfo_EbsStorageInfo *smithy.Schema
-
-var StorageMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "StorageMode",
-}, smithy.ShapeTypeEnum, 2)
-var StorageMode_LOCAL *smithy.Schema
-
-var StorageMode_TIERED *smithy.Schema
-
-var TableCreation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TableCreation",
-}, smithy.ShapeTypeStructure, 1)
-var TableCreation_EnableTableCreation *smithy.Schema
-
-var TargetCompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TargetCompressionType",
-}, smithy.ShapeTypeEnum, 5)
-var TargetCompressionType_NONE *smithy.Schema
-
-var TargetCompressionType_GZIP *smithy.Schema
-
-var TargetCompressionType_SNAPPY *smithy.Schema
-
-var TargetCompressionType_LZ4 *smithy.Schema
-
-var TargetCompressionType_ZSTD *smithy.Schema
-
-var Tls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Tls",
-}, smithy.ShapeTypeStructure, 2)
-var Tls_CertificateAuthorityArnList *smithy.Schema
-
-var Tls_Enabled *smithy.Schema
-
-var TokenEndpointAuthenticationMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TokenEndpointAuthenticationMethod",
-}, smithy.ShapeTypeEnum, 3)
-var TokenEndpointAuthenticationMethod_POST *smithy.Schema
-
-var TokenEndpointAuthenticationMethod_BASIC *smithy.Schema
-
-var TokenEndpointAuthenticationMethod_NONE *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_InvalidParameter *smithy.Schema
-
-var TooManyRequestsException_Message *smithy.Schema
-
-var TopicConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var TopicConfiguration_RecordConverter *smithy.Schema
-
-var TopicConfiguration_RecordSchema *smithy.Schema
-
-var TopicConfiguration_TopicArn *smithy.Schema
-
-var TopicExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicExistsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var TopicExistsException_InvalidParameter *smithy.Schema
-
-var TopicExistsException_Message *smithy.Schema
-
-var TopicInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicInfo",
-}, smithy.ShapeTypeStructure, 5)
-var TopicInfo_TopicArn *smithy.Schema
-
-var TopicInfo_TopicName *smithy.Schema
-
-var TopicInfo_ReplicationFactor *smithy.Schema
-
-var TopicInfo_PartitionCount *smithy.Schema
-
-var TopicInfo_OutOfSyncReplicaCount *smithy.Schema
-
-var TopicPartitionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicPartitionInfo",
-}, smithy.ShapeTypeStructure, 4)
-var TopicPartitionInfo_Partition *smithy.Schema
-
-var TopicPartitionInfo_Leader *smithy.Schema
-
-var TopicPartitionInfo_Replicas *smithy.Schema
-
-var TopicPartitionInfo_Isr *smithy.Schema
-
-var TopicReplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicReplication",
-}, smithy.ShapeTypeStructure, 7)
-var TopicReplication_CopyAccessControlListsForTopics *smithy.Schema
-
-var TopicReplication_CopyTopicConfigurations *smithy.Schema
-
-var TopicReplication_DetectAndCopyNewTopics *smithy.Schema
-
-var TopicReplication_StartingPosition *smithy.Schema
-
-var TopicReplication_TopicNameConfiguration *smithy.Schema
-
-var TopicReplication_TopicsToExclude *smithy.Schema
-
-var TopicReplication_TopicsToReplicate *smithy.Schema
-
-var TopicReplicationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicReplicationUpdate",
-}, smithy.ShapeTypeStructure, 5)
-var TopicReplicationUpdate_CopyAccessControlListsForTopics *smithy.Schema
-
-var TopicReplicationUpdate_CopyTopicConfigurations *smithy.Schema
-
-var TopicReplicationUpdate_DetectAndCopyNewTopics *smithy.Schema
-
-var TopicReplicationUpdate_TopicsToExclude *smithy.Schema
-
-var TopicReplicationUpdate_TopicsToReplicate *smithy.Schema
-
-var TopicState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TopicState",
-}, smithy.ShapeTypeEnum, 4)
-var TopicState_CREATING *smithy.Schema
-
-var TopicState_UPDATING *smithy.Schema
-
-var TopicState_DELETING *smithy.Schema
-
-var TopicState_ACTIVE *smithy.Schema
-
-var Unauthenticated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "Unauthenticated",
-}, smithy.ShapeTypeStructure, 1)
-var Unauthenticated_Enabled *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_InvalidParameter *smithy.Schema
-
-var UnauthorizedException_Message *smithy.Schema
-
-var UnknownTopicOrPartitionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UnknownTopicOrPartitionException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var UnknownTopicOrPartitionException_InvalidParameter *smithy.Schema
-
-var UnknownTopicOrPartitionException_Message *smithy.Schema
-
-var UnprocessedScramSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UnprocessedScramSecret",
-}, smithy.ShapeTypeStructure, 3)
-var UnprocessedScramSecret_ErrorCode *smithy.Schema
-
-var UnprocessedScramSecret_ErrorMessage *smithy.Schema
-
-var UnprocessedScramSecret_SecretArn *smithy.Schema
-
-var UserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UserIdentity",
-}, smithy.ShapeTypeStructure, 2)
-var UserIdentity_Type *smithy.Schema
-
-var UserIdentity_PrincipalId *smithy.Schema
-
-var UserIdentityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UserIdentityType",
-}, smithy.ShapeTypeEnum, 2)
-var UserIdentityType_AWSACCOUNT *smithy.Schema
-
-var UserIdentityType_AWSSERVICE *smithy.Schema
-
-var ValueConverter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ValueConverter",
-}, smithy.ShapeTypeEnum, 4)
-var ValueConverter_BYTE_ARRAY *smithy.Schema
-
-var ValueConverter_JSON *smithy.Schema
-
-var ValueConverter_JSON_SCHEMA_GSR *smithy.Schema
-
-var ValueConverter_STRING *smithy.Schema
-
-var VpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConfig",
-}, smithy.ShapeTypeStructure, 2)
-var VpcConfig_SubnetIds *smithy.Schema
-
-var VpcConfig_SecurityGroupIds *smithy.Schema
-
-var VpcConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnection",
-}, smithy.ShapeTypeStructure, 6)
-var VpcConnection_VpcConnectionArn *smithy.Schema
-
-var VpcConnection_TargetClusterArn *smithy.Schema
-
-var VpcConnection_CreationTime *smithy.Schema
-
-var VpcConnection_Authentication *smithy.Schema
-
-var VpcConnection_VpcId *smithy.Schema
-
-var VpcConnection_State *smithy.Schema
-
-var VpcConnectionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectionInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VpcConnectionInfo_VpcConnectionArn *smithy.Schema
-
-var VpcConnectionInfo_Owner *smithy.Schema
-
-var VpcConnectionInfo_UserIdentity *smithy.Schema
-
-var VpcConnectionInfo_CreationTime *smithy.Schema
-
-var VpcConnectionInfoServerless = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectionInfoServerless",
-}, smithy.ShapeTypeStructure, 4)
-var VpcConnectionInfoServerless_CreationTime *smithy.Schema
-
-var VpcConnectionInfoServerless_Owner *smithy.Schema
-
-var VpcConnectionInfoServerless_UserIdentity *smithy.Schema
-
-var VpcConnectionInfoServerless_VpcConnectionArn *smithy.Schema
-
-var VpcConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectionState",
-}, smithy.ShapeTypeEnum, 8)
-var VpcConnectionState_CREATING *smithy.Schema
-
-var VpcConnectionState_AVAILABLE *smithy.Schema
-
-var VpcConnectionState_INACTIVE *smithy.Schema
-
-var VpcConnectionState_DEACTIVATING *smithy.Schema
-
-var VpcConnectionState_DELETING *smithy.Schema
-
-var VpcConnectionState_FAILED *smithy.Schema
-
-var VpcConnectionState_REJECTED *smithy.Schema
-
-var VpcConnectionState_REJECTING *smithy.Schema
-
-var VpcConnectivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivity",
-}, smithy.ShapeTypeStructure, 1)
-var VpcConnectivity_ClientAuthentication *smithy.Schema
-
-var VpcConnectivityClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivityClientAuthentication",
-}, smithy.ShapeTypeStructure, 2)
-var VpcConnectivityClientAuthentication_Sasl *smithy.Schema
-
-var VpcConnectivityClientAuthentication_Tls *smithy.Schema
-
-var VpcConnectivityIam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivityIam",
-}, smithy.ShapeTypeStructure, 1)
-var VpcConnectivityIam_Enabled *smithy.Schema
-
-var VpcConnectivitySasl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivitySasl",
-}, smithy.ShapeTypeStructure, 2)
-var VpcConnectivitySasl_Scram *smithy.Schema
-
-var VpcConnectivitySasl_Iam *smithy.Schema
-
-var VpcConnectivityScram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivityScram",
-}, smithy.ShapeTypeStructure, 1)
-var VpcConnectivityScram_Enabled *smithy.Schema
-
-var VpcConnectivityTls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "VpcConnectivityTls",
-}, smithy.ShapeTypeStructure, 1)
-var VpcConnectivityTls_Enabled *smithy.Schema
-
-var ZookeeperAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ZookeeperAccess",
-}, smithy.ShapeTypeStructure, 1)
-var ZookeeperAccess_Enabled *smithy.Schema
-
-var ZookeeperNodeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ZookeeperNodeInfo",
-}, smithy.ShapeTypeStructure, 5)
-var ZookeeperNodeInfo_AttachedENIId *smithy.Schema
-
-var ZookeeperNodeInfo_ClientVpcIpAddress *smithy.Schema
-
-var ZookeeperNodeInfo_Endpoints *smithy.Schema
-
-var ZookeeperNodeInfo_ZookeeperId *smithy.Schema
-
-var ZookeeperNodeInfo_ZookeeperVersion *smithy.Schema
-
-var BatchAssociateScramSecretRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchAssociateScramSecretRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateScramSecretRequest_ClusterArn *smithy.Schema
-
-var BatchAssociateScramSecretRequest_SecretArnList *smithy.Schema
-
-var BatchAssociateScramSecretResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchAssociateScramSecretResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateScramSecretResponse_ClusterArn *smithy.Schema
-
-var BatchAssociateScramSecretResponse_UnprocessedScramSecrets *smithy.Schema
-
-var BatchDisassociateScramSecretRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchDisassociateScramSecretRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateScramSecretRequest_ClusterArn *smithy.Schema
-
-var BatchDisassociateScramSecretRequest_SecretArnList *smithy.Schema
-
-var BatchDisassociateScramSecretResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "BatchDisassociateScramSecretResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateScramSecretResponse_ClusterArn *smithy.Schema
-
-var BatchDisassociateScramSecretResponse_UnprocessedScramSecrets *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateChannelRequest_ChannelName *smithy.Schema
-
-var CreateChannelRequest_ClusterArn *smithy.Schema
-
-var CreateChannelRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateChannelRequest_IcebergDestinationConfiguration *smithy.Schema
-
-var CreateChannelRequest_S3DestinationConfiguration *smithy.Schema
-
-var CreateChannelRequest_Tags *smithy.Schema
-
-var CreateChannelRequest_TopicConfigurationList *smithy.Schema
-
-var CreateChannelRequest_LoggingInfo *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateChannelResponse_ChannelArn *smithy.Schema
-
-var CreateChannelResponse_ClusterOperationArn *smithy.Schema
-
-var CreateClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateClusterRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateClusterRequest_BrokerNodeGroupInfo *smithy.Schema
-
-var CreateClusterRequest_Rebalancing *smithy.Schema
-
-var CreateClusterRequest_ClientAuthentication *smithy.Schema
-
-var CreateClusterRequest_ClusterName *smithy.Schema
-
-var CreateClusterRequest_ConfigurationInfo *smithy.Schema
-
-var CreateClusterRequest_EncryptionInfo *smithy.Schema
-
-var CreateClusterRequest_EnhancedMonitoring *smithy.Schema
-
-var CreateClusterRequest_OpenMonitoring *smithy.Schema
-
-var CreateClusterRequest_KafkaVersion *smithy.Schema
-
-var CreateClusterRequest_LoggingInfo *smithy.Schema
-
-var CreateClusterRequest_NumberOfBrokerNodes *smithy.Schema
-
-var CreateClusterRequest_Tags *smithy.Schema
-
-var CreateClusterRequest_StorageMode *smithy.Schema
-
-var CreateClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateClusterResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateClusterResponse_ClusterArn *smithy.Schema
-
-var CreateClusterResponse_ClusterName *smithy.Schema
-
-var CreateClusterResponse_State *smithy.Schema
-
-var CreateClusterV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateClusterV2Request",
-}, smithy.ShapeTypeStructure, 4)
-var CreateClusterV2Request_ClusterName *smithy.Schema
-
-var CreateClusterV2Request_Tags *smithy.Schema
-
-var CreateClusterV2Request_Provisioned *smithy.Schema
-
-var CreateClusterV2Request_Serverless *smithy.Schema
-
-var CreateClusterV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateClusterV2Response",
-}, smithy.ShapeTypeStructure, 4)
-var CreateClusterV2Response_ClusterArn *smithy.Schema
-
-var CreateClusterV2Response_ClusterName *smithy.Schema
-
-var CreateClusterV2Response_State *smithy.Schema
-
-var CreateClusterV2Response_ClusterType *smithy.Schema
-
-var CreateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConfigurationRequest_Description *smithy.Schema
-
-var CreateConfigurationRequest_KafkaVersions *smithy.Schema
-
-var CreateConfigurationRequest_Name *smithy.Schema
-
-var CreateConfigurationRequest_ServerProperties *smithy.Schema
-
-var CreateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateConfigurationResponse_Arn *smithy.Schema
-
-var CreateConfigurationResponse_CreationTime *smithy.Schema
-
-var CreateConfigurationResponse_LatestRevision *smithy.Schema
-
-var CreateConfigurationResponse_Name *smithy.Schema
-
-var CreateConfigurationResponse_State *smithy.Schema
-
-var CreateReplicatorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateReplicatorRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateReplicatorRequest_Description *smithy.Schema
-
-var CreateReplicatorRequest_KafkaClusters *smithy.Schema
-
-var CreateReplicatorRequest_ReplicationInfoList *smithy.Schema
-
-var CreateReplicatorRequest_ReplicatorName *smithy.Schema
-
-var CreateReplicatorRequest_ServiceExecutionRoleArn *smithy.Schema
-
-var CreateReplicatorRequest_Tags *smithy.Schema
-
-var CreateReplicatorRequest_LogDelivery *smithy.Schema
-
-var CreateReplicatorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateReplicatorResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateReplicatorResponse_ReplicatorArn *smithy.Schema
-
-var CreateReplicatorResponse_ReplicatorName *smithy.Schema
-
-var CreateReplicatorResponse_ReplicatorState *smithy.Schema
-
-var CreateTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateTopicRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTopicRequest_ClusterArn *smithy.Schema
-
-var CreateTopicRequest_TopicName *smithy.Schema
-
-var CreateTopicRequest_PartitionCount *smithy.Schema
-
-var CreateTopicRequest_ReplicationFactor *smithy.Schema
-
-var CreateTopicRequest_Configs *smithy.Schema
-
-var CreateTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateTopicResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTopicResponse_TopicArn *smithy.Schema
-
-var CreateTopicResponse_TopicName *smithy.Schema
-
-var CreateTopicResponse_Status *smithy.Schema
-
-var CreateVpcConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateVpcConnectionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVpcConnectionRequest_TargetClusterArn *smithy.Schema
-
-var CreateVpcConnectionRequest_Authentication *smithy.Schema
-
-var CreateVpcConnectionRequest_VpcId *smithy.Schema
-
-var CreateVpcConnectionRequest_ClientSubnets *smithy.Schema
-
-var CreateVpcConnectionRequest_SecurityGroups *smithy.Schema
-
-var CreateVpcConnectionRequest_Tags *smithy.Schema
-
-var CreateVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "CreateVpcConnectionResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateVpcConnectionResponse_VpcConnectionArn *smithy.Schema
-
-var CreateVpcConnectionResponse_State *smithy.Schema
-
-var CreateVpcConnectionResponse_Authentication *smithy.Schema
-
-var CreateVpcConnectionResponse_VpcId *smithy.Schema
-
-var CreateVpcConnectionResponse_ClientSubnets *smithy.Schema
-
-var CreateVpcConnectionResponse_SecurityGroups *smithy.Schema
-
-var CreateVpcConnectionResponse_CreationTime *smithy.Schema
-
-var CreateVpcConnectionResponse_Tags *smithy.Schema
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelRequest_ChannelArn *smithy.Schema
-
-var DeleteChannelRequest_ClusterArn *smithy.Schema
-
-var DeleteChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelResponse_ChannelArn *smithy.Schema
-
-var DeleteChannelResponse_ClusterOperationArn *smithy.Schema
-
-var DeleteClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteClusterRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteClusterRequest_ClusterArn *smithy.Schema
-
-var DeleteClusterRequest_CurrentVersion *smithy.Schema
-
-var DeleteClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteClusterResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteClusterResponse_ClusterArn *smithy.Schema
-
-var DeleteClusterResponse_State *smithy.Schema
-
-var DeleteClusterPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteClusterPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterPolicyRequest_ClusterArn *smithy.Schema
-
-var DeleteClusterPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteClusterPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationRequest_Arn *smithy.Schema
-
-var DeleteConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfigurationResponse_Arn *smithy.Schema
-
-var DeleteConfigurationResponse_State *smithy.Schema
-
-var DeleteReplicatorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteReplicatorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteReplicatorRequest_CurrentVersion *smithy.Schema
-
-var DeleteReplicatorRequest_ReplicatorArn *smithy.Schema
-
-var DeleteReplicatorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteReplicatorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteReplicatorResponse_ReplicatorArn *smithy.Schema
-
-var DeleteReplicatorResponse_ReplicatorState *smithy.Schema
-
-var DeleteTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteTopicRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTopicRequest_ClusterArn *smithy.Schema
-
-var DeleteTopicRequest_TopicName *smithy.Schema
-
-var DeleteTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteTopicResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTopicResponse_TopicArn *smithy.Schema
-
-var DeleteTopicResponse_TopicName *smithy.Schema
-
-var DeleteTopicResponse_Status *smithy.Schema
-
-var DeleteVpcConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteVpcConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcConnectionRequest_Arn *smithy.Schema
-
-var DeleteVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DeleteVpcConnectionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVpcConnectionResponse_VpcConnectionArn *smithy.Schema
-
-var DeleteVpcConnectionResponse_State *smithy.Schema
-
-var DescribeChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeChannelRequest_ChannelArn *smithy.Schema
-
-var DescribeChannelRequest_ClusterArn *smithy.Schema
-
-var DescribeChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeChannelResponse",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeChannelResponse_ChannelArn *smithy.Schema
-
-var DescribeChannelResponse_ChannelName *smithy.Schema
-
-var DescribeChannelResponse_EncryptionConfiguration *smithy.Schema
-
-var DescribeChannelResponse_IcebergDestinationConfiguration *smithy.Schema
-
-var DescribeChannelResponse_S3DestinationConfiguration *smithy.Schema
-
-var DescribeChannelResponse_Status *smithy.Schema
-
-var DescribeChannelResponse_DestinationType *smithy.Schema
-
-var DescribeChannelResponse_CreationTime *smithy.Schema
-
-var DescribeChannelResponse_TopicConfigurationList *smithy.Schema
-
-var DescribeChannelResponse_LoggingInfo *smithy.Schema
-
-var DescribeChannelResponse_StateInfo *smithy.Schema
-
-var DescribeChannelResponse_ClusterOperationArn *smithy.Schema
-
-var DescribeChannelResponse_Tags *smithy.Schema
-
-var DescribeClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterRequest_ClusterArn *smithy.Schema
-
-var DescribeClusterOperationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterOperationRequest_ClusterOperationArn *smithy.Schema
-
-var DescribeClusterOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterOperationResponse_ClusterOperationInfo *smithy.Schema
-
-var DescribeClusterOperationV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperationV2Request",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterOperationV2Request_ClusterOperationArn *smithy.Schema
-
-var DescribeClusterOperationV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterOperationV2Response",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterOperationV2Response_ClusterOperationInfo *smithy.Schema
-
-var DescribeClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterResponse_ClusterInfo *smithy.Schema
-
-var DescribeClusterV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterV2Request",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterV2Request_ClusterArn *smithy.Schema
-
-var DescribeClusterV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeClusterV2Response",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeClusterV2Response_ClusterInfo *smithy.Schema
-
-var DescribeConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConfigurationRequest_Arn *smithy.Schema
-
-var DescribeConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfigurationResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeConfigurationResponse_Arn *smithy.Schema
-
-var DescribeConfigurationResponse_CreationTime *smithy.Schema
-
-var DescribeConfigurationResponse_Description *smithy.Schema
-
-var DescribeConfigurationResponse_KafkaVersions *smithy.Schema
-
-var DescribeConfigurationResponse_LatestRevision *smithy.Schema
-
-var DescribeConfigurationResponse_Name *smithy.Schema
-
-var DescribeConfigurationResponse_State *smithy.Schema
-
-var DescribeConfigurationRevisionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfigurationRevisionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeConfigurationRevisionRequest_Arn *smithy.Schema
-
-var DescribeConfigurationRevisionRequest_Revision *smithy.Schema
-
-var DescribeConfigurationRevisionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeConfigurationRevisionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeConfigurationRevisionResponse_Arn *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_CreationTime *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_Description *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_Revision *smithy.Schema
-
-var DescribeConfigurationRevisionResponse_ServerProperties *smithy.Schema
-
-var DescribeReplicatorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeReplicatorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeReplicatorRequest_ReplicatorArn *smithy.Schema
-
-var DescribeReplicatorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeReplicatorResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeReplicatorResponse_CreationTime *smithy.Schema
-
-var DescribeReplicatorResponse_CurrentVersion *smithy.Schema
-
-var DescribeReplicatorResponse_IsReplicatorReference *smithy.Schema
-
-var DescribeReplicatorResponse_KafkaClusters *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicationInfoList *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicatorArn *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicatorDescription *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicatorName *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicatorResourceArn *smithy.Schema
-
-var DescribeReplicatorResponse_ReplicatorState *smithy.Schema
-
-var DescribeReplicatorResponse_ServiceExecutionRoleArn *smithy.Schema
-
-var DescribeReplicatorResponse_StateInfo *smithy.Schema
-
-var DescribeReplicatorResponse_Tags *smithy.Schema
-
-var DescribeReplicatorResponse_LogDelivery *smithy.Schema
-
-var DescribeTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopicRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTopicRequest_ClusterArn *smithy.Schema
-
-var DescribeTopicRequest_TopicName *smithy.Schema
-
-var DescribeTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopicResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeTopicResponse_TopicArn *smithy.Schema
-
-var DescribeTopicResponse_TopicName *smithy.Schema
-
-var DescribeTopicResponse_ReplicationFactor *smithy.Schema
-
-var DescribeTopicResponse_PartitionCount *smithy.Schema
-
-var DescribeTopicResponse_Configs *smithy.Schema
-
-var DescribeTopicResponse_Status *smithy.Schema
-
-var DescribeTopicPartitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopicPartitionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTopicPartitionsRequest_ClusterArn *smithy.Schema
-
-var DescribeTopicPartitionsRequest_TopicName *smithy.Schema
-
-var DescribeTopicPartitionsRequest_MaxResults *smithy.Schema
-
-var DescribeTopicPartitionsRequest_NextToken *smithy.Schema
-
-var DescribeTopicPartitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeTopicPartitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTopicPartitionsResponse_Partitions *smithy.Schema
-
-var DescribeTopicPartitionsResponse_NextToken *smithy.Schema
-
-var DescribeVpcConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeVpcConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcConnectionRequest_Arn *smithy.Schema
-
-var DescribeVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "DescribeVpcConnectionResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeVpcConnectionResponse_VpcConnectionArn *smithy.Schema
-
-var DescribeVpcConnectionResponse_TargetClusterArn *smithy.Schema
-
-var DescribeVpcConnectionResponse_State *smithy.Schema
-
-var DescribeVpcConnectionResponse_Authentication *smithy.Schema
-
-var DescribeVpcConnectionResponse_VpcId *smithy.Schema
-
-var DescribeVpcConnectionResponse_Subnets *smithy.Schema
-
-var DescribeVpcConnectionResponse_SecurityGroups *smithy.Schema
-
-var DescribeVpcConnectionResponse_CreationTime *smithy.Schema
-
-var DescribeVpcConnectionResponse_Tags *smithy.Schema
-
-var GetBootstrapBrokersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetBootstrapBrokersRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBootstrapBrokersRequest_ClusterArn *smithy.Schema
-
-var GetBootstrapBrokersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetBootstrapBrokersResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetBootstrapBrokersResponse_BootstrapBrokerString *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringTls *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6 *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6 *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6 *smithy.Schema
-
-var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6 *smithy.Schema
-
-var GetClusterPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetClusterPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetClusterPolicyRequest_ClusterArn *smithy.Schema
-
-var GetClusterPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetClusterPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetClusterPolicyResponse_CurrentVersion *smithy.Schema
-
-var GetClusterPolicyResponse_Policy *smithy.Schema
-
-var GetCompatibleKafkaVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetCompatibleKafkaVersionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCompatibleKafkaVersionsRequest_ClusterArn *smithy.Schema
-
-var GetCompatibleKafkaVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "GetCompatibleKafkaVersionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListChannelsRequest_ClusterArn *smithy.Schema
-
-var ListChannelsRequest_MaxResults *smithy.Schema
-
-var ListChannelsRequest_NextToken *smithy.Schema
-
-var ListChannelsRequest_TopicNameFilter *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_Channels *smithy.Schema
-
-var ListChannelsResponse_NextToken *smithy.Schema
-
-var ListClientVpcConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClientVpcConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClientVpcConnectionsRequest_ClusterArn *smithy.Schema
-
-var ListClientVpcConnectionsRequest_MaxResults *smithy.Schema
-
-var ListClientVpcConnectionsRequest_NextToken *smithy.Schema
-
-var ListClientVpcConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClientVpcConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListClientVpcConnectionsResponse_ClientVpcConnections *smithy.Schema
-
-var ListClientVpcConnectionsResponse_NextToken *smithy.Schema
-
-var ListClusterOperationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClusterOperationsRequest_ClusterArn *smithy.Schema
-
-var ListClusterOperationsRequest_MaxResults *smithy.Schema
-
-var ListClusterOperationsRequest_NextToken *smithy.Schema
-
-var ListClusterOperationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListClusterOperationsResponse_ClusterOperationInfoList *smithy.Schema
-
-var ListClusterOperationsResponse_NextToken *smithy.Schema
-
-var ListClusterOperationsV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperationsV2Request",
-}, smithy.ShapeTypeStructure, 3)
-var ListClusterOperationsV2Request_ClusterArn *smithy.Schema
-
-var ListClusterOperationsV2Request_MaxResults *smithy.Schema
-
-var ListClusterOperationsV2Request_NextToken *smithy.Schema
-
-var ListClusterOperationsV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClusterOperationsV2Response",
-}, smithy.ShapeTypeStructure, 2)
-var ListClusterOperationsV2Response_ClusterOperationInfoList *smithy.Schema
-
-var ListClusterOperationsV2Response_NextToken *smithy.Schema
-
-var ListClustersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClustersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClustersRequest_ClusterNameFilter *smithy.Schema
-
-var ListClustersRequest_MaxResults *smithy.Schema
-
-var ListClustersRequest_NextToken *smithy.Schema
-
-var ListClustersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClustersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersResponse_ClusterInfoList *smithy.Schema
-
-var ListClustersResponse_NextToken *smithy.Schema
-
-var ListClustersV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClustersV2Request",
-}, smithy.ShapeTypeStructure, 4)
-var ListClustersV2Request_ClusterNameFilter *smithy.Schema
-
-var ListClustersV2Request_ClusterTypeFilter *smithy.Schema
-
-var ListClustersV2Request_MaxResults *smithy.Schema
-
-var ListClustersV2Request_NextToken *smithy.Schema
-
-var ListClustersV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListClustersV2Response",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersV2Response_ClusterInfoList *smithy.Schema
-
-var ListClustersV2Response_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurationRevisionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConfigurationRevisionsRequest_Arn *smithy.Schema
-
-var ListConfigurationRevisionsRequest_MaxResults *smithy.Schema
-
-var ListConfigurationRevisionsRequest_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurationRevisionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationRevisionsResponse_NextToken *smithy.Schema
-
-var ListConfigurationRevisionsResponse_Revisions *smithy.Schema
-
-var ListConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListConfigurationsRequest_NextToken *smithy.Schema
-
-var ListConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationsResponse_Configurations *smithy.Schema
-
-var ListConfigurationsResponse_NextToken *smithy.Schema
-
-var ListKafkaVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListKafkaVersionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListKafkaVersionsRequest_MaxResults *smithy.Schema
-
-var ListKafkaVersionsRequest_NextToken *smithy.Schema
-
-var ListKafkaVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListKafkaVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListKafkaVersionsResponse_KafkaVersions *smithy.Schema
-
-var ListKafkaVersionsResponse_NextToken *smithy.Schema
-
-var ListNodesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListNodesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNodesRequest_ClusterArn *smithy.Schema
-
-var ListNodesRequest_MaxResults *smithy.Schema
-
-var ListNodesRequest_NextToken *smithy.Schema
-
-var ListNodesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListNodesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNodesResponse_NextToken *smithy.Schema
-
-var ListNodesResponse_NodeInfoList *smithy.Schema
-
-var ListReplicatorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListReplicatorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListReplicatorsRequest_MaxResults *smithy.Schema
-
-var ListReplicatorsRequest_NextToken *smithy.Schema
-
-var ListReplicatorsRequest_ReplicatorNameFilter *smithy.Schema
-
-var ListReplicatorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListReplicatorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListReplicatorsResponse_NextToken *smithy.Schema
-
-var ListReplicatorsResponse_Replicators *smithy.Schema
-
-var ListScramSecretsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListScramSecretsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListScramSecretsRequest_ClusterArn *smithy.Schema
-
-var ListScramSecretsRequest_MaxResults *smithy.Schema
-
-var ListScramSecretsRequest_NextToken *smithy.Schema
-
-var ListScramSecretsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListScramSecretsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListScramSecretsResponse_NextToken *smithy.Schema
-
-var ListScramSecretsResponse_SecretArnList *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTopicsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTopicsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTopicsRequest_ClusterArn *smithy.Schema
-
-var ListTopicsRequest_MaxResults *smithy.Schema
-
-var ListTopicsRequest_NextToken *smithy.Schema
-
-var ListTopicsRequest_TopicNameFilter *smithy.Schema
-
-var ListTopicsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListTopicsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTopicsResponse_Topics *smithy.Schema
-
-var ListTopicsResponse_NextToken *smithy.Schema
-
-var ListVpcConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListVpcConnectionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcConnectionsRequest_MaxResults *smithy.Schema
-
-var ListVpcConnectionsRequest_NextToken *smithy.Schema
-
-var ListVpcConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "ListVpcConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcConnectionsResponse_VpcConnections *smithy.Schema
-
-var ListVpcConnectionsResponse_NextToken *smithy.Schema
-
-var PutClusterPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PutClusterPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutClusterPolicyRequest_ClusterArn *smithy.Schema
-
-var PutClusterPolicyRequest_CurrentVersion *smithy.Schema
-
-var PutClusterPolicyRequest_Policy *smithy.Schema
-
-var PutClusterPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "PutClusterPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutClusterPolicyResponse_CurrentVersion *smithy.Schema
-
-var RebootBrokerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RebootBrokerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RebootBrokerRequest_BrokerIds *smithy.Schema
-
-var RebootBrokerRequest_ClusterArn *smithy.Schema
-
-var RebootBrokerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RebootBrokerResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RebootBrokerResponse_ClusterArn *smithy.Schema
-
-var RebootBrokerResponse_ClusterOperationArn *smithy.Schema
-
-var RejectClientVpcConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RejectClientVpcConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RejectClientVpcConnectionRequest_ClusterArn *smithy.Schema
-
-var RejectClientVpcConnectionRequest_VpcConnectionArn *smithy.Schema
-
-var RejectClientVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "RejectClientVpcConnectionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateBrokerCountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerCountRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBrokerCountRequest_ClusterArn *smithy.Schema
-
-var UpdateBrokerCountRequest_CurrentVersion *smithy.Schema
-
-var UpdateBrokerCountRequest_TargetNumberOfBrokerNodes *smithy.Schema
-
-var UpdateBrokerCountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerCountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBrokerCountResponse_ClusterArn *smithy.Schema
-
-var UpdateBrokerCountResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateBrokerStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerStorageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBrokerStorageRequest_ClusterArn *smithy.Schema
-
-var UpdateBrokerStorageRequest_CurrentVersion *smithy.Schema
-
-var UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo *smithy.Schema
-
-var UpdateBrokerStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerStorageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBrokerStorageResponse_ClusterArn *smithy.Schema
-
-var UpdateBrokerStorageResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateBrokerTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBrokerTypeRequest_ClusterArn *smithy.Schema
-
-var UpdateBrokerTypeRequest_CurrentVersion *smithy.Schema
-
-var UpdateBrokerTypeRequest_TargetInstanceType *smithy.Schema
-
-var UpdateBrokerTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateBrokerTypeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBrokerTypeResponse_ClusterArn *smithy.Schema
-
-var UpdateBrokerTypeResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelRequest_ChannelArn *smithy.Schema
-
-var UpdateChannelRequest_ClusterArn *smithy.Schema
-
-var UpdateChannelRequest_IcebergDestinationUpdate *smithy.Schema
-
-var UpdateChannelRequest_S3DestinationUpdate *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateChannelResponse_ChannelArn *smithy.Schema
-
-var UpdateChannelResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateClusterConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateClusterConfigurationRequest_ClusterArn *smithy.Schema
-
-var UpdateClusterConfigurationRequest_ConfigurationInfo *smithy.Schema
-
-var UpdateClusterConfigurationRequest_CurrentVersion *smithy.Schema
-
-var UpdateClusterConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateClusterConfigurationResponse_ClusterArn *smithy.Schema
-
-var UpdateClusterConfigurationResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateClusterKafkaVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterKafkaVersionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateClusterKafkaVersionRequest_ClusterArn *smithy.Schema
-
-var UpdateClusterKafkaVersionRequest_ConfigurationInfo *smithy.Schema
-
-var UpdateClusterKafkaVersionRequest_CurrentVersion *smithy.Schema
-
-var UpdateClusterKafkaVersionRequest_TargetKafkaVersion *smithy.Schema
-
-var UpdateClusterKafkaVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateClusterKafkaVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateClusterKafkaVersionResponse_ClusterArn *smithy.Schema
-
-var UpdateClusterKafkaVersionResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConfigurationRequest_Arn *smithy.Schema
-
-var UpdateConfigurationRequest_Description *smithy.Schema
-
-var UpdateConfigurationRequest_ServerProperties *smithy.Schema
-
-var UpdateConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConfigurationResponse_Arn *smithy.Schema
-
-var UpdateConfigurationResponse_LatestRevision *smithy.Schema
-
-var UpdateConnectivityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConnectivityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectivityRequest_ClusterArn *smithy.Schema
-
-var UpdateConnectivityRequest_ConnectivityInfo *smithy.Schema
-
-var UpdateConnectivityRequest_CurrentVersion *smithy.Schema
-
-var UpdateConnectivityRequest_ZookeeperAccess *smithy.Schema
-
-var UpdateConnectivityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateConnectivityResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectivityResponse_ClusterArn *smithy.Schema
-
-var UpdateConnectivityResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateMonitoringRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateMonitoringRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateMonitoringRequest_ClusterArn *smithy.Schema
-
-var UpdateMonitoringRequest_CurrentVersion *smithy.Schema
-
-var UpdateMonitoringRequest_EnhancedMonitoring *smithy.Schema
-
-var UpdateMonitoringRequest_OpenMonitoring *smithy.Schema
-
-var UpdateMonitoringRequest_LoggingInfo *smithy.Schema
-
-var UpdateMonitoringResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateMonitoringResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMonitoringResponse_ClusterArn *smithy.Schema
-
-var UpdateMonitoringResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateRebalancingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateRebalancingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRebalancingRequest_ClusterArn *smithy.Schema
-
-var UpdateRebalancingRequest_CurrentVersion *smithy.Schema
-
-var UpdateRebalancingRequest_Rebalancing *smithy.Schema
-
-var UpdateRebalancingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateRebalancingResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRebalancingResponse_ClusterArn *smithy.Schema
-
-var UpdateRebalancingResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateReplicationInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateReplicationInfoRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateReplicationInfoRequest_ConsumerGroupReplication *smithy.Schema
-
-var UpdateReplicationInfoRequest_CurrentVersion *smithy.Schema
-
-var UpdateReplicationInfoRequest_ReplicatorArn *smithy.Schema
-
-var UpdateReplicationInfoRequest_SourceKafkaClusterArn *smithy.Schema
-
-var UpdateReplicationInfoRequest_SourceKafkaClusterId *smithy.Schema
-
-var UpdateReplicationInfoRequest_TargetKafkaClusterArn *smithy.Schema
-
-var UpdateReplicationInfoRequest_TargetKafkaClusterId *smithy.Schema
-
-var UpdateReplicationInfoRequest_TopicReplication *smithy.Schema
-
-var UpdateReplicationInfoRequest_LogDelivery *smithy.Schema
-
-var UpdateReplicationInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateReplicationInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateReplicationInfoResponse_ReplicatorArn *smithy.Schema
-
-var UpdateReplicationInfoResponse_ReplicatorState *smithy.Schema
-
-var UpdateSecurityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateSecurityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSecurityRequest_ClientAuthentication *smithy.Schema
-
-var UpdateSecurityRequest_ClusterArn *smithy.Schema
-
-var UpdateSecurityRequest_CurrentVersion *smithy.Schema
-
-var UpdateSecurityRequest_EncryptionInfo *smithy.Schema
-
-var UpdateSecurityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateSecurityResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSecurityResponse_ClusterArn *smithy.Schema
-
-var UpdateSecurityResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateStorageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateStorageRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateStorageRequest_ClusterArn *smithy.Schema
-
-var UpdateStorageRequest_CurrentVersion *smithy.Schema
-
-var UpdateStorageRequest_ProvisionedThroughput *smithy.Schema
-
-var UpdateStorageRequest_StorageMode *smithy.Schema
-
-var UpdateStorageRequest_VolumeSizeGB *smithy.Schema
-
-var UpdateStorageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateStorageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateStorageResponse_ClusterArn *smithy.Schema
-
-var UpdateStorageResponse_ClusterOperationArn *smithy.Schema
-
-var UpdateTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateTopicRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTopicRequest_ClusterArn *smithy.Schema
-
-var UpdateTopicRequest_TopicName *smithy.Schema
-
-var UpdateTopicRequest_Configs *smithy.Schema
-
-var UpdateTopicRequest_PartitionCount *smithy.Schema
-
-var UpdateTopicResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafka",
-	Name:      "UpdateTopicResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateTopicResponse_TopicArn *smithy.Schema
-
-var UpdateTopicResponse_TopicName *smithy.Schema
-
-var UpdateTopicResponse_Status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__double_member = ___listOf__double.AddMember("member", ___double)
-
-	___listOf__integer_member = ___listOf__integer.AddMember("member", ___integer)
-
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	___listOf__stringMax249_member = ___listOf__stringMax249.AddMember("member", ___stringMax249)
-
-	___listOf__stringMax256_member = ___listOf__stringMax256.AddMember("member", ___stringMax256)
-
-	ProvisionedThroughput_Enabled = ProvisionedThroughput.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	ProvisionedThroughput_VolumeThroughput = ProvisionedThroughput.AddMember("VolumeThroughput", ___integer, &smithytraits.JSONName{Name: "volumeThroughput"})
-
-	BrokerEBSVolumeInfo_KafkaBrokerNodeId = BrokerEBSVolumeInfo.AddMember("KafkaBrokerNodeId", ___string, &smithytraits.JSONName{Name: "kafkaBrokerNodeId"})
-
-	BrokerEBSVolumeInfo_ProvisionedThroughput = BrokerEBSVolumeInfo.AddMember("ProvisionedThroughput", ProvisionedThroughput, &smithytraits.JSONName{Name: "provisionedThroughput"})
-
-	BrokerEBSVolumeInfo_VolumeSizeGB = BrokerEBSVolumeInfo.AddMember("VolumeSizeGB", ___integer, &smithytraits.JSONName{Name: "volumeSizeGB"})
-
-	___listOfBrokerEBSVolumeInfo_member = ___listOfBrokerEBSVolumeInfo.AddMember("member", BrokerEBSVolumeInfo)
-
-	ChannelStatus_CREATING = ChannelStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ChannelStatus_ACTIVE = ChannelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ChannelStatus_UPDATING = ChannelStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ChannelStatus_DELETING = ChannelStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ChannelStatus_FAILED = ChannelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ChannelStatus_SUSPENDING = ChannelStatus.AddMember("SUSPENDING", smithyprelude.Unit)
-
-	ChannelStatus_SUSPENDED = ChannelStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	ChannelDestinationType_ICEBERG = ChannelDestinationType.AddMember("ICEBERG", smithyprelude.Unit)
-
-	ChannelDestinationType_S3 = ChannelDestinationType.AddMember("S3", smithyprelude.Unit)
-
-	ChannelInfo_ChannelArn = ChannelInfo.AddMember("ChannelArn", ___string, &smithytraits.JSONName{Name: "channelArn"})
-
-	ChannelInfo_ChannelName = ChannelInfo.AddMember("ChannelName", ___string, &smithytraits.JSONName{Name: "channelName"})
-
-	ChannelInfo_Status = ChannelInfo.AddMember("Status", ChannelStatus, &smithytraits.JSONName{Name: "status"})
-
-	ChannelInfo_CreationTime = ChannelInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ChannelInfo_DestinationType = ChannelInfo.AddMember("DestinationType", ChannelDestinationType, &smithytraits.JSONName{Name: "destinationType"})
-
-	ChannelInfo_ClusterOperationArn = ChannelInfo.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	___listOfChannelInfo_member = ___listOfChannelInfo.AddMember("member", ChannelInfo)
-
-	VpcConnectionState_CREATING = VpcConnectionState.AddMember("CREATING", smithyprelude.Unit)
-
-	VpcConnectionState_AVAILABLE = VpcConnectionState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	VpcConnectionState_INACTIVE = VpcConnectionState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	VpcConnectionState_DEACTIVATING = VpcConnectionState.AddMember("DEACTIVATING", smithyprelude.Unit)
-
-	VpcConnectionState_DELETING = VpcConnectionState.AddMember("DELETING", smithyprelude.Unit)
-
-	VpcConnectionState_FAILED = VpcConnectionState.AddMember("FAILED", smithyprelude.Unit)
-
-	VpcConnectionState_REJECTED = VpcConnectionState.AddMember("REJECTED", smithyprelude.Unit)
-
-	VpcConnectionState_REJECTING = VpcConnectionState.AddMember("REJECTING", smithyprelude.Unit)
-
-	ClientVpcConnection_Authentication = ClientVpcConnection.AddMember("Authentication", ___string, &smithytraits.JSONName{Name: "authentication"})
-
-	ClientVpcConnection_CreationTime = ClientVpcConnection.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ClientVpcConnection_State = ClientVpcConnection.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
-
-	ClientVpcConnection_VpcConnectionArn = ClientVpcConnection.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	ClientVpcConnection_Owner = ClientVpcConnection.AddMember("Owner", ___string, &smithytraits.JSONName{Name: "owner"})
-
-	___listOfClientVpcConnection_member = ___listOfClientVpcConnection.AddMember("member", ClientVpcConnection)
-
-	ClusterType_PROVISIONED = ClusterType.AddMember("PROVISIONED", smithyprelude.Unit)
-
-	ClusterType_SERVERLESS = ClusterType.AddMember("SERVERLESS", smithyprelude.Unit)
-
-	ClusterState_ACTIVE = ClusterState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ClusterState_CREATING = ClusterState.AddMember("CREATING", smithyprelude.Unit)
-
-	ClusterState_DELETING = ClusterState.AddMember("DELETING", smithyprelude.Unit)
-
-	ClusterState_FAILED = ClusterState.AddMember("FAILED", smithyprelude.Unit)
-
-	ClusterState_HEALING = ClusterState.AddMember("HEALING", smithyprelude.Unit)
-
-	ClusterState_MAINTENANCE = ClusterState.AddMember("MAINTENANCE", smithyprelude.Unit)
-
-	ClusterState_REBOOTING_BROKER = ClusterState.AddMember("REBOOTING_BROKER", smithyprelude.Unit)
-
-	ClusterState_UPDATING = ClusterState.AddMember("UPDATING", smithyprelude.Unit)
-
-	StateInfo_Code = StateInfo.AddMember("Code", ___string, &smithytraits.JSONName{Name: "code"})
-
-	StateInfo_Message = StateInfo.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	___mapOf__string_key = ___mapOf__string.AddMember("key", ___string)
-
-	___mapOf__string_value = ___mapOf__string.AddMember("value", ___string)
-
-	BrokerAZDistribution_DEFAULT = BrokerAZDistribution.AddMember("DEFAULT", smithyprelude.Unit)
-
-	EBSStorageInfo_ProvisionedThroughput = EBSStorageInfo.AddMember("ProvisionedThroughput", ProvisionedThroughput, &smithytraits.JSONName{Name: "provisionedThroughput"})
-
-	EBSStorageInfo_VolumeSize = EBSStorageInfo.AddMember("VolumeSize", ___integerMin1Max16384, &smithytraits.JSONName{Name: "volumeSize"})
-
-	StorageInfo_EbsStorageInfo = StorageInfo.AddMember("EbsStorageInfo", EBSStorageInfo, &smithytraits.JSONName{Name: "ebsStorageInfo"})
-
-	PublicAccess_Type = PublicAccess.AddMember("Type", ___string, &smithytraits.JSONName{Name: "type"})
-
-	VpcConnectivityScram_Enabled = VpcConnectivityScram.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	VpcConnectivityIam_Enabled = VpcConnectivityIam.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	VpcConnectivitySasl_Scram = VpcConnectivitySasl.AddMember("Scram", VpcConnectivityScram, &smithytraits.JSONName{Name: "scram"})
-
-	VpcConnectivitySasl_Iam = VpcConnectivitySasl.AddMember("Iam", VpcConnectivityIam, &smithytraits.JSONName{Name: "iam"})
-
-	VpcConnectivityTls_Enabled = VpcConnectivityTls.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	VpcConnectivityClientAuthentication_Sasl = VpcConnectivityClientAuthentication.AddMember("Sasl", VpcConnectivitySasl, &smithytraits.JSONName{Name: "sasl"})
-
-	VpcConnectivityClientAuthentication_Tls = VpcConnectivityClientAuthentication.AddMember("Tls", VpcConnectivityTls, &smithytraits.JSONName{Name: "tls"})
-
-	VpcConnectivity_ClientAuthentication = VpcConnectivity.AddMember("ClientAuthentication", VpcConnectivityClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	NetworkType_IPV4 = NetworkType.AddMember("IPV4", smithyprelude.Unit)
-
-	NetworkType_DUAL = NetworkType.AddMember("DUAL", smithyprelude.Unit)
-
-	ConnectivityInfo_PublicAccess = ConnectivityInfo.AddMember("PublicAccess", PublicAccess, &smithytraits.JSONName{Name: "publicAccess"})
-
-	ConnectivityInfo_VpcConnectivity = ConnectivityInfo.AddMember("VpcConnectivity", VpcConnectivity, &smithytraits.JSONName{Name: "vpcConnectivity"})
-
-	ConnectivityInfo_NetworkType = ConnectivityInfo.AddMember("NetworkType", NetworkType, &smithytraits.JSONName{Name: "networkType"})
-
-	BrokerNodeGroupInfo_BrokerAZDistribution = BrokerNodeGroupInfo.AddMember("BrokerAZDistribution", BrokerAZDistribution, &smithytraits.JSONName{Name: "brokerAZDistribution"})
-
-	BrokerNodeGroupInfo_ClientSubnets = BrokerNodeGroupInfo.AddMember("ClientSubnets", ___listOf__string, &smithytraits.JSONName{Name: "clientSubnets"})
-
-	BrokerNodeGroupInfo_InstanceType = BrokerNodeGroupInfo.AddMember("InstanceType", ___stringMin5Max32, &smithytraits.JSONName{Name: "instanceType"})
-
-	BrokerNodeGroupInfo_SecurityGroups = BrokerNodeGroupInfo.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	BrokerNodeGroupInfo_StorageInfo = BrokerNodeGroupInfo.AddMember("StorageInfo", StorageInfo, &smithytraits.JSONName{Name: "storageInfo"})
-
-	BrokerNodeGroupInfo_ConnectivityInfo = BrokerNodeGroupInfo.AddMember("ConnectivityInfo", ConnectivityInfo, &smithytraits.JSONName{Name: "connectivityInfo"})
-
-	BrokerNodeGroupInfo_ZoneIds = BrokerNodeGroupInfo.AddMember("ZoneIds", ___listOf__string, &smithytraits.JSONName{Name: "zoneIds"})
-
-	RebalancingStatus_PAUSED = RebalancingStatus.AddMember("PAUSED", smithyprelude.Unit)
-
-	RebalancingStatus_ACTIVE = RebalancingStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Rebalancing_Status = Rebalancing.AddMember("Status", RebalancingStatus, &smithytraits.JSONName{Name: "status"})
-
-	BrokerSoftwareInfo_ConfigurationArn = BrokerSoftwareInfo.AddMember("ConfigurationArn", ___string, &smithytraits.JSONName{Name: "configurationArn"})
-
-	BrokerSoftwareInfo_ConfigurationRevision = BrokerSoftwareInfo.AddMember("ConfigurationRevision", ___long, &smithytraits.JSONName{Name: "configurationRevision"})
-
-	BrokerSoftwareInfo_KafkaVersion = BrokerSoftwareInfo.AddMember("KafkaVersion", ___string, &smithytraits.JSONName{Name: "kafkaVersion"})
-
-	Scram_Enabled = Scram.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	Iam_Enabled = Iam.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	Sasl_Scram = Sasl.AddMember("Scram", Scram, &smithytraits.JSONName{Name: "scram"})
-
-	Sasl_Iam = Sasl.AddMember("Iam", Iam, &smithytraits.JSONName{Name: "iam"})
-
-	Tls_CertificateAuthorityArnList = Tls.AddMember("CertificateAuthorityArnList", ___listOf__string, &smithytraits.JSONName{Name: "certificateAuthorityArnList"})
-
-	Tls_Enabled = Tls.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	Unauthenticated_Enabled = Unauthenticated.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	ClientAuthentication_Sasl = ClientAuthentication.AddMember("Sasl", Sasl, &smithytraits.JSONName{Name: "sasl"})
-
-	ClientAuthentication_Tls = ClientAuthentication.AddMember("Tls", Tls, &smithytraits.JSONName{Name: "tls"})
-
-	ClientAuthentication_Unauthenticated = ClientAuthentication.AddMember("Unauthenticated", Unauthenticated, &smithytraits.JSONName{Name: "unauthenticated"})
-
-	EncryptionAtRest_DataVolumeKMSKeyId = EncryptionAtRest.AddMember("DataVolumeKMSKeyId", ___string, &smithytraits.JSONName{Name: "dataVolumeKMSKeyId"})
-
-	ClientBroker_TLS = ClientBroker.AddMember("TLS", smithyprelude.Unit)
-
-	ClientBroker_TLS_PLAINTEXT = ClientBroker.AddMember("TLS_PLAINTEXT", smithyprelude.Unit)
-
-	ClientBroker_PLAINTEXT = ClientBroker.AddMember("PLAINTEXT", smithyprelude.Unit)
-
-	EncryptionInTransit_ClientBroker = EncryptionInTransit.AddMember("ClientBroker", ClientBroker, &smithytraits.JSONName{Name: "clientBroker"})
-
-	EncryptionInTransit_InCluster = EncryptionInTransit.AddMember("InCluster", ___boolean, &smithytraits.JSONName{Name: "inCluster"})
-
-	EncryptionInfo_EncryptionAtRest = EncryptionInfo.AddMember("EncryptionAtRest", EncryptionAtRest, &smithytraits.JSONName{Name: "encryptionAtRest"})
-
-	EncryptionInfo_EncryptionInTransit = EncryptionInfo.AddMember("EncryptionInTransit", EncryptionInTransit, &smithytraits.JSONName{Name: "encryptionInTransit"})
-
-	EnhancedMonitoring_DEFAULT = EnhancedMonitoring.AddMember("DEFAULT", smithyprelude.Unit)
-
-	EnhancedMonitoring_PER_BROKER = EnhancedMonitoring.AddMember("PER_BROKER", smithyprelude.Unit)
-
-	EnhancedMonitoring_PER_TOPIC_PER_BROKER = EnhancedMonitoring.AddMember("PER_TOPIC_PER_BROKER", smithyprelude.Unit)
-
-	EnhancedMonitoring_PER_TOPIC_PER_PARTITION = EnhancedMonitoring.AddMember("PER_TOPIC_PER_PARTITION", smithyprelude.Unit)
-
-	JmxExporterInfo_EnabledInBroker = JmxExporterInfo.AddMember("EnabledInBroker", ___boolean, &smithytraits.JSONName{Name: "enabledInBroker"})
-
-	NodeExporterInfo_EnabledInBroker = NodeExporterInfo.AddMember("EnabledInBroker", ___boolean, &smithytraits.JSONName{Name: "enabledInBroker"})
-
-	PrometheusInfo_JmxExporter = PrometheusInfo.AddMember("JmxExporter", JmxExporterInfo, &smithytraits.JSONName{Name: "jmxExporter"})
-
-	PrometheusInfo_NodeExporter = PrometheusInfo.AddMember("NodeExporter", NodeExporterInfo, &smithytraits.JSONName{Name: "nodeExporter"})
-
-	OpenMonitoringInfo_Prometheus = OpenMonitoringInfo.AddMember("Prometheus", PrometheusInfo, &smithytraits.JSONName{Name: "prometheus"})
-
-	CloudWatchLogs_Enabled = CloudWatchLogs.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	CloudWatchLogs_LogGroup = CloudWatchLogs.AddMember("LogGroup", ___string, &smithytraits.JSONName{Name: "logGroup"})
-
-	Firehose_DeliveryStream = Firehose.AddMember("DeliveryStream", ___string, &smithytraits.JSONName{Name: "deliveryStream"})
-
-	Firehose_Enabled = Firehose.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	S3_Bucket = S3.AddMember("Bucket", ___string, &smithytraits.JSONName{Name: "bucket"})
-
-	S3_Enabled = S3.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	S3_Prefix = S3.AddMember("Prefix", ___string, &smithytraits.JSONName{Name: "prefix"})
-
-	AuthorizerLogs_CloudWatchLogs = AuthorizerLogs.AddMember("CloudWatchLogs", CloudWatchLogs, &smithytraits.JSONName{Name: "cloudWatchLogs"})
-
-	AuthorizerLogs_Firehose = AuthorizerLogs.AddMember("Firehose", Firehose, &smithytraits.JSONName{Name: "firehose"})
-
-	AuthorizerLogs_S3 = AuthorizerLogs.AddMember("S3", S3, &smithytraits.JSONName{Name: "s3"})
-
-	BrokerLogs_CloudWatchLogs = BrokerLogs.AddMember("CloudWatchLogs", CloudWatchLogs, &smithytraits.JSONName{Name: "cloudWatchLogs"})
-
-	BrokerLogs_Firehose = BrokerLogs.AddMember("Firehose", Firehose, &smithytraits.JSONName{Name: "firehose"})
-
-	BrokerLogs_S3 = BrokerLogs.AddMember("S3", S3, &smithytraits.JSONName{Name: "s3"})
-
-	LoggingInfo_AuthorizerLogs = LoggingInfo.AddMember("AuthorizerLogs", AuthorizerLogs, &smithytraits.JSONName{Name: "authorizerLogs"})
-
-	LoggingInfo_BrokerLogs = LoggingInfo.AddMember("BrokerLogs", BrokerLogs, &smithytraits.JSONName{Name: "brokerLogs"})
-
-	StorageMode_LOCAL = StorageMode.AddMember("LOCAL", smithyprelude.Unit)
-
-	StorageMode_TIERED = StorageMode.AddMember("TIERED", smithyprelude.Unit)
-
-	CustomerActionStatus_CRITICAL_ACTION_REQUIRED = CustomerActionStatus.AddMember("CRITICAL_ACTION_REQUIRED", smithyprelude.Unit)
-
-	CustomerActionStatus_ACTION_RECOMMENDED = CustomerActionStatus.AddMember("ACTION_RECOMMENDED", smithyprelude.Unit)
-
-	CustomerActionStatus_NONE = CustomerActionStatus.AddMember("NONE", smithyprelude.Unit)
-
-	Provisioned_BrokerNodeGroupInfo = Provisioned.AddMember("BrokerNodeGroupInfo", BrokerNodeGroupInfo, &smithytraits.JSONName{Name: "brokerNodeGroupInfo"})
-
-	Provisioned_Rebalancing = Provisioned.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	Provisioned_CurrentBrokerSoftwareInfo = Provisioned.AddMember("CurrentBrokerSoftwareInfo", BrokerSoftwareInfo, &smithytraits.JSONName{Name: "currentBrokerSoftwareInfo"})
-
-	Provisioned_ClientAuthentication = Provisioned.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	Provisioned_EncryptionInfo = Provisioned.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	Provisioned_EnhancedMonitoring = Provisioned.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	Provisioned_OpenMonitoring = Provisioned.AddMember("OpenMonitoring", OpenMonitoringInfo, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	Provisioned_LoggingInfo = Provisioned.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	Provisioned_NumberOfBrokerNodes = Provisioned.AddMember("NumberOfBrokerNodes", ___integerMin1Max15, &smithytraits.JSONName{Name: "numberOfBrokerNodes"})
-
-	Provisioned_ZookeeperConnectString = Provisioned.AddMember("ZookeeperConnectString", ___string, &smithytraits.JSONName{Name: "zookeeperConnectString"})
-
-	Provisioned_ZookeeperConnectStringTls = Provisioned.AddMember("ZookeeperConnectStringTls", ___string, &smithytraits.JSONName{Name: "zookeeperConnectStringTls"})
-
-	Provisioned_StorageMode = Provisioned.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	Provisioned_CustomerActionStatus = Provisioned.AddMember("CustomerActionStatus", CustomerActionStatus, &smithytraits.JSONName{Name: "customerActionStatus"})
-
-	VpcConfig_SubnetIds = VpcConfig.AddMember("SubnetIds", ___listOf__string, &smithytraits.JSONName{Name: "subnetIds"})
-
-	VpcConfig_SecurityGroupIds = VpcConfig.AddMember("SecurityGroupIds", ___listOf__string, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	___listOfVpcConfig_member = ___listOfVpcConfig.AddMember("member", VpcConfig)
-
-	ServerlessSasl_Iam = ServerlessSasl.AddMember("Iam", Iam, &smithytraits.JSONName{Name: "iam"})
-
-	ServerlessClientAuthentication_Sasl = ServerlessClientAuthentication.AddMember("Sasl", ServerlessSasl, &smithytraits.JSONName{Name: "sasl"})
-
-	ServerlessConnectivityInfo_NetworkType = ServerlessConnectivityInfo.AddMember("NetworkType", NetworkType, &smithytraits.JSONName{Name: "networkType"})
-
-	Serverless_VpcConfigs = Serverless.AddMember("VpcConfigs", ___listOfVpcConfig, &smithytraits.JSONName{Name: "vpcConfigs"})
-
-	Serverless_ClientAuthentication = Serverless.AddMember("ClientAuthentication", ServerlessClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	Serverless_ConnectivityInfo = Serverless.AddMember("ConnectivityInfo", ServerlessConnectivityInfo, &smithytraits.JSONName{Name: "connectivityInfo"})
-
-	Cluster_ActiveOperationArn = Cluster.AddMember("ActiveOperationArn", ___string, &smithytraits.JSONName{Name: "activeOperationArn"})
-
-	Cluster_ClusterType = Cluster.AddMember("ClusterType", ClusterType, &smithytraits.JSONName{Name: "clusterType"})
-
-	Cluster_ClusterArn = Cluster.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	Cluster_ClusterName = Cluster.AddMember("ClusterName", ___string, &smithytraits.JSONName{Name: "clusterName"})
-
-	Cluster_CreationTime = Cluster.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	Cluster_CurrentVersion = Cluster.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	Cluster_State = Cluster.AddMember("State", ClusterState, &smithytraits.JSONName{Name: "state"})
-
-	Cluster_StateInfo = Cluster.AddMember("StateInfo", StateInfo, &smithytraits.JSONName{Name: "stateInfo"})
-
-	Cluster_Tags = Cluster.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	Cluster_Provisioned = Cluster.AddMember("Provisioned", Provisioned, &smithytraits.JSONName{Name: "provisioned"})
-
-	Cluster_Serverless = Cluster.AddMember("Serverless", Serverless, &smithytraits.JSONName{Name: "serverless"})
-
-	___listOfCluster_member = ___listOfCluster.AddMember("member", Cluster)
-
-	JmxExporter_EnabledInBroker = JmxExporter.AddMember("EnabledInBroker", ___boolean, &smithytraits.JSONName{Name: "enabledInBroker"})
-
-	NodeExporter_EnabledInBroker = NodeExporter.AddMember("EnabledInBroker", ___boolean, &smithytraits.JSONName{Name: "enabledInBroker"})
-
-	Prometheus_JmxExporter = Prometheus.AddMember("JmxExporter", JmxExporter, &smithytraits.JSONName{Name: "jmxExporter"})
-
-	Prometheus_NodeExporter = Prometheus.AddMember("NodeExporter", NodeExporter, &smithytraits.JSONName{Name: "nodeExporter"})
-
-	OpenMonitoring_Prometheus = OpenMonitoring.AddMember("Prometheus", Prometheus, &smithytraits.JSONName{Name: "prometheus"})
-
-	ClusterInfo_ActiveOperationArn = ClusterInfo.AddMember("ActiveOperationArn", ___string, &smithytraits.JSONName{Name: "activeOperationArn"})
-
-	ClusterInfo_BrokerNodeGroupInfo = ClusterInfo.AddMember("BrokerNodeGroupInfo", BrokerNodeGroupInfo, &smithytraits.JSONName{Name: "brokerNodeGroupInfo"})
-
-	ClusterInfo_Rebalancing = ClusterInfo.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	ClusterInfo_ClientAuthentication = ClusterInfo.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	ClusterInfo_ClusterArn = ClusterInfo.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	ClusterInfo_ClusterName = ClusterInfo.AddMember("ClusterName", ___string, &smithytraits.JSONName{Name: "clusterName"})
-
-	ClusterInfo_CreationTime = ClusterInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ClusterInfo_CurrentBrokerSoftwareInfo = ClusterInfo.AddMember("CurrentBrokerSoftwareInfo", BrokerSoftwareInfo, &smithytraits.JSONName{Name: "currentBrokerSoftwareInfo"})
-
-	ClusterInfo_CurrentVersion = ClusterInfo.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	ClusterInfo_EncryptionInfo = ClusterInfo.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	ClusterInfo_EnhancedMonitoring = ClusterInfo.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	ClusterInfo_OpenMonitoring = ClusterInfo.AddMember("OpenMonitoring", OpenMonitoring, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	ClusterInfo_LoggingInfo = ClusterInfo.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	ClusterInfo_NumberOfBrokerNodes = ClusterInfo.AddMember("NumberOfBrokerNodes", ___integer, &smithytraits.JSONName{Name: "numberOfBrokerNodes"})
-
-	ClusterInfo_State = ClusterInfo.AddMember("State", ClusterState, &smithytraits.JSONName{Name: "state"})
-
-	ClusterInfo_StateInfo = ClusterInfo.AddMember("StateInfo", StateInfo, &smithytraits.JSONName{Name: "stateInfo"})
-
-	ClusterInfo_Tags = ClusterInfo.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	ClusterInfo_ZookeeperConnectString = ClusterInfo.AddMember("ZookeeperConnectString", ___string, &smithytraits.JSONName{Name: "zookeeperConnectString"})
-
-	ClusterInfo_ZookeeperConnectStringTls = ClusterInfo.AddMember("ZookeeperConnectStringTls", ___string, &smithytraits.JSONName{Name: "zookeeperConnectStringTls"})
-
-	ClusterInfo_StorageMode = ClusterInfo.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	ClusterInfo_CustomerActionStatus = ClusterInfo.AddMember("CustomerActionStatus", CustomerActionStatus, &smithytraits.JSONName{Name: "customerActionStatus"})
-
-	___listOfClusterInfo_member = ___listOfClusterInfo.AddMember("member", ClusterInfo)
-
-	ErrorInfo_ErrorCode = ErrorInfo.AddMember("ErrorCode", ___string, &smithytraits.JSONName{Name: "errorCode"})
-
-	ErrorInfo_ErrorString = ErrorInfo.AddMember("ErrorString", ___string, &smithytraits.JSONName{Name: "errorString"})
-
-	ClusterOperationStepInfo_StepStatus = ClusterOperationStepInfo.AddMember("StepStatus", ___string, &smithytraits.JSONName{Name: "stepStatus"})
-
-	ClusterOperationStep_StepInfo = ClusterOperationStep.AddMember("StepInfo", ClusterOperationStepInfo, &smithytraits.JSONName{Name: "stepInfo"})
-
-	ClusterOperationStep_StepName = ClusterOperationStep.AddMember("StepName", ___string, &smithytraits.JSONName{Name: "stepName"})
-
-	___listOfClusterOperationStep_member = ___listOfClusterOperationStep.AddMember("member", ClusterOperationStep)
-
-	ConfigurationInfo_Arn = ConfigurationInfo.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	ConfigurationInfo_Revision = ConfigurationInfo.AddMember("Revision", ___long, &smithytraits.JSONName{Name: "revision"})
-
-	ZookeeperAccess_Enabled = ZookeeperAccess.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	BrokerCountUpdateInfo_CreatedBrokerIds = BrokerCountUpdateInfo.AddMember("CreatedBrokerIds", ___listOf__double, &smithytraits.JSONName{Name: "createdBrokerIds"})
-
-	BrokerCountUpdateInfo_DeletedBrokerIds = BrokerCountUpdateInfo.AddMember("DeletedBrokerIds", ___listOf__double, &smithytraits.JSONName{Name: "deletedBrokerIds"})
-
-	MutableClusterInfo_BrokerEBSVolumeInfo = MutableClusterInfo.AddMember("BrokerEBSVolumeInfo", ___listOfBrokerEBSVolumeInfo, &smithytraits.JSONName{Name: "brokerEBSVolumeInfo"})
-
-	MutableClusterInfo_ConfigurationInfo = MutableClusterInfo.AddMember("ConfigurationInfo", ConfigurationInfo, &smithytraits.JSONName{Name: "configurationInfo"})
-
-	MutableClusterInfo_NumberOfBrokerNodes = MutableClusterInfo.AddMember("NumberOfBrokerNodes", ___integer, &smithytraits.JSONName{Name: "numberOfBrokerNodes"})
-
-	MutableClusterInfo_EnhancedMonitoring = MutableClusterInfo.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	MutableClusterInfo_OpenMonitoring = MutableClusterInfo.AddMember("OpenMonitoring", OpenMonitoring, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	MutableClusterInfo_ZookeeperAccess = MutableClusterInfo.AddMember("ZookeeperAccess", ZookeeperAccess, &smithytraits.JSONName{Name: "zookeeperAccess"})
-
-	MutableClusterInfo_KafkaVersion = MutableClusterInfo.AddMember("KafkaVersion", ___string, &smithytraits.JSONName{Name: "kafkaVersion"})
-
-	MutableClusterInfo_LoggingInfo = MutableClusterInfo.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	MutableClusterInfo_InstanceType = MutableClusterInfo.AddMember("InstanceType", ___stringMin5Max32, &smithytraits.JSONName{Name: "instanceType"})
-
-	MutableClusterInfo_ClientAuthentication = MutableClusterInfo.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	MutableClusterInfo_EncryptionInfo = MutableClusterInfo.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	MutableClusterInfo_ConnectivityInfo = MutableClusterInfo.AddMember("ConnectivityInfo", ConnectivityInfo, &smithytraits.JSONName{Name: "connectivityInfo"})
-
-	MutableClusterInfo_StorageMode = MutableClusterInfo.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	MutableClusterInfo_BrokerCountUpdateInfo = MutableClusterInfo.AddMember("BrokerCountUpdateInfo", BrokerCountUpdateInfo, &smithytraits.JSONName{Name: "brokerCountUpdateInfo"})
-
-	MutableClusterInfo_Rebalancing = MutableClusterInfo.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	UserIdentityType_AWSACCOUNT = UserIdentityType.AddMember("AWSACCOUNT", smithyprelude.Unit)
-
-	UserIdentityType_AWSSERVICE = UserIdentityType.AddMember("AWSSERVICE", smithyprelude.Unit)
-
-	UserIdentity_Type = UserIdentity.AddMember("Type", UserIdentityType, &smithytraits.JSONName{Name: "type"})
-
-	UserIdentity_PrincipalId = UserIdentity.AddMember("PrincipalId", ___string, &smithytraits.JSONName{Name: "principalId"})
-
-	VpcConnectionInfo_VpcConnectionArn = VpcConnectionInfo.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	VpcConnectionInfo_Owner = VpcConnectionInfo.AddMember("Owner", ___string, &smithytraits.JSONName{Name: "owner"})
-
-	VpcConnectionInfo_UserIdentity = VpcConnectionInfo.AddMember("UserIdentity", UserIdentity, &smithytraits.JSONName{Name: "userIdentity"})
-
-	VpcConnectionInfo_CreationTime = VpcConnectionInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ClusterOperationInfo_ClientRequestId = ClusterOperationInfo.AddMember("ClientRequestId", ___string, &smithytraits.JSONName{Name: "clientRequestId"})
-
-	ClusterOperationInfo_ClusterArn = ClusterOperationInfo.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	ClusterOperationInfo_CreationTime = ClusterOperationInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ClusterOperationInfo_EndTime = ClusterOperationInfo.AddMember("EndTime", ___timestampIso8601, &smithytraits.JSONName{Name: "endTime"})
-
-	ClusterOperationInfo_ErrorInfo = ClusterOperationInfo.AddMember("ErrorInfo", ErrorInfo, &smithytraits.JSONName{Name: "errorInfo"})
-
-	ClusterOperationInfo_OperationArn = ClusterOperationInfo.AddMember("OperationArn", ___string, &smithytraits.JSONName{Name: "operationArn"})
-
-	ClusterOperationInfo_OperationState = ClusterOperationInfo.AddMember("OperationState", ___string, &smithytraits.JSONName{Name: "operationState"})
-
-	ClusterOperationInfo_OperationSteps = ClusterOperationInfo.AddMember("OperationSteps", ___listOfClusterOperationStep, &smithytraits.JSONName{Name: "operationSteps"})
-
-	ClusterOperationInfo_OperationType = ClusterOperationInfo.AddMember("OperationType", ___string, &smithytraits.JSONName{Name: "operationType"})
-
-	ClusterOperationInfo_SourceClusterInfo = ClusterOperationInfo.AddMember("SourceClusterInfo", MutableClusterInfo, &smithytraits.JSONName{Name: "sourceClusterInfo"})
-
-	ClusterOperationInfo_TargetClusterInfo = ClusterOperationInfo.AddMember("TargetClusterInfo", MutableClusterInfo, &smithytraits.JSONName{Name: "targetClusterInfo"})
-
-	ClusterOperationInfo_VpcConnectionInfo = ClusterOperationInfo.AddMember("VpcConnectionInfo", VpcConnectionInfo, &smithytraits.JSONName{Name: "vpcConnectionInfo"})
-
-	___listOfClusterOperationInfo_member = ___listOfClusterOperationInfo.AddMember("member", ClusterOperationInfo)
-
-	ClusterOperationV2Summary_ClusterArn = ClusterOperationV2Summary.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	ClusterOperationV2Summary_ClusterType = ClusterOperationV2Summary.AddMember("ClusterType", ClusterType, &smithytraits.JSONName{Name: "clusterType"})
-
-	ClusterOperationV2Summary_StartTime = ClusterOperationV2Summary.AddMember("StartTime", ___timestampIso8601, &smithytraits.JSONName{Name: "startTime"})
-
-	ClusterOperationV2Summary_EndTime = ClusterOperationV2Summary.AddMember("EndTime", ___timestampIso8601, &smithytraits.JSONName{Name: "endTime"})
-
-	ClusterOperationV2Summary_OperationArn = ClusterOperationV2Summary.AddMember("OperationArn", ___string, &smithytraits.JSONName{Name: "operationArn"})
-
-	ClusterOperationV2Summary_OperationState = ClusterOperationV2Summary.AddMember("OperationState", ___string, &smithytraits.JSONName{Name: "operationState"})
-
-	ClusterOperationV2Summary_OperationType = ClusterOperationV2Summary.AddMember("OperationType", ___string, &smithytraits.JSONName{Name: "operationType"})
-
-	___listOfClusterOperationV2Summary_member = ___listOfClusterOperationV2Summary.AddMember("member", ClusterOperationV2Summary)
-
-	CompatibleKafkaVersion_SourceVersion = CompatibleKafkaVersion.AddMember("SourceVersion", ___string, &smithytraits.JSONName{Name: "sourceVersion"})
-
-	CompatibleKafkaVersion_TargetVersions = CompatibleKafkaVersion.AddMember("TargetVersions", ___listOf__string, &smithytraits.JSONName{Name: "targetVersions"})
-
-	___listOfCompatibleKafkaVersion_member = ___listOfCompatibleKafkaVersion.AddMember("member", CompatibleKafkaVersion)
-
-	ConfigurationRevision_CreationTime = ConfigurationRevision.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ConfigurationRevision_Description = ConfigurationRevision.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	ConfigurationRevision_Revision = ConfigurationRevision.AddMember("Revision", ___long, &smithytraits.JSONName{Name: "revision"})
-
-	ConfigurationState_ACTIVE = ConfigurationState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ConfigurationState_DELETING = ConfigurationState.AddMember("DELETING", smithyprelude.Unit)
-
-	ConfigurationState_DELETE_FAILED = ConfigurationState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	Configuration_Arn = Configuration.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	Configuration_CreationTime = Configuration.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	Configuration_Description = Configuration.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	Configuration_KafkaVersions = Configuration.AddMember("KafkaVersions", ___listOf__string, &smithytraits.JSONName{Name: "kafkaVersions"})
-
-	Configuration_LatestRevision = Configuration.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	Configuration_Name = Configuration.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	Configuration_State = Configuration.AddMember("State", ConfigurationState, &smithytraits.JSONName{Name: "state"})
-
-	___listOfConfiguration_member = ___listOfConfiguration.AddMember("member", Configuration)
-
-	___listOfConfigurationRevision_member = ___listOfConfigurationRevision.AddMember("member", ConfigurationRevision)
-
-	PartitionStrategy_TIME_HOUR = PartitionStrategy.AddMember("TIME_HOUR", smithyprelude.Unit)
-
-	PartitionSource_SourceName = PartitionSource.AddMember("SourceName", ___string, &smithytraits.JSONName{Name: "sourceName"})
-
-	___listOfPartitionSource_member = ___listOfPartitionSource.AddMember("member", PartitionSource)
-
-	PartitionSpec_PartitionStrategy = PartitionSpec.AddMember("PartitionStrategy", PartitionStrategy, &smithytraits.JSONName{Name: "partitionStrategy"})
-
-	PartitionSpec_SourceList = PartitionSpec.AddMember("SourceList", ___listOfPartitionSource, &smithytraits.JSONName{Name: "sourceList"})
-
-	DestinationTable_DestinationDatabaseName = DestinationTable.AddMember("DestinationDatabaseName", ___string, &smithytraits.JSONName{Name: "destinationDatabaseName"})
-
-	DestinationTable_DestinationTableName = DestinationTable.AddMember("DestinationTableName", ___string, &smithytraits.JSONName{Name: "destinationTableName"})
-
-	DestinationTable_PartitionSpec = DestinationTable.AddMember("PartitionSpec", PartitionSpec, &smithytraits.JSONName{Name: "partitionSpec"})
-
-	___listOfDestinationTable_member = ___listOfDestinationTable.AddMember("member", DestinationTable)
-
-	AmazonMskCluster_MskClusterArn = AmazonMskCluster.AddMember("MskClusterArn", ___string, &smithytraits.JSONName{Name: "mskClusterArn"})
-
-	ApacheKafkaCluster_ApacheKafkaClusterId = ApacheKafkaCluster.AddMember("ApacheKafkaClusterId", ___string, &smithytraits.JSONName{Name: "apacheKafkaClusterId"})
-
-	ApacheKafkaCluster_BootstrapBrokerString = ApacheKafkaCluster.AddMember("BootstrapBrokerString", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerString"})
-
-	KafkaClusterClientVpcConfig_SecurityGroupIds = KafkaClusterClientVpcConfig.AddMember("SecurityGroupIds", ___listOf__string, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	KafkaClusterClientVpcConfig_SubnetIds = KafkaClusterClientVpcConfig.AddMember("SubnetIds", ___listOf__string, &smithytraits.JSONName{Name: "subnetIds"})
-
-	KafkaClusterSaslScramMechanism_SHA256 = KafkaClusterSaslScramMechanism.AddMember("SHA256", smithyprelude.Unit)
-
-	KafkaClusterSaslScramMechanism_SHA512 = KafkaClusterSaslScramMechanism.AddMember("SHA512", smithyprelude.Unit)
-
-	KafkaClusterSaslScramAuthentication_Mechanism = KafkaClusterSaslScramAuthentication.AddMember("Mechanism", KafkaClusterSaslScramMechanism, &smithytraits.JSONName{Name: "mechanism"})
-
-	KafkaClusterSaslScramAuthentication_SecretArn = KafkaClusterSaslScramAuthentication.AddMember("SecretArn", ___string, &smithytraits.JSONName{Name: "secretArn"})
-
-	KafkaClusterMTLSAuthentication_SecretArn = KafkaClusterMTLSAuthentication.AddMember("SecretArn", ___string, &smithytraits.JSONName{Name: "secretArn"})
-
-	KafkaClusterOAuthClientCredentials_TokenRequestSecretArn = KafkaClusterOAuthClientCredentials.AddMember("TokenRequestSecretArn", ___string, &smithytraits.JSONName{Name: "tokenRequestSecretArn"})
-
-	JwtSigningAlgorithm_RS256 = JwtSigningAlgorithm.AddMember("RS256", smithyprelude.Unit)
-
-	JwtSigningAlgorithm_ES384 = JwtSigningAlgorithm.AddMember("ES384", smithyprelude.Unit)
-
-	KafkaClusterOAuthIamJwtBearer_Audience = KafkaClusterOAuthIamJwtBearer.AddMember("Audience", ___string, &smithytraits.JSONName{Name: "audience"})
-
-	KafkaClusterOAuthIamJwtBearer_SigningAlgorithm = KafkaClusterOAuthIamJwtBearer.AddMember("SigningAlgorithm", JwtSigningAlgorithm, &smithytraits.JSONName{Name: "signingAlgorithm"})
-
-	KafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn = KafkaClusterOAuthIamJwtBearer.AddMember("TokenRequestSecretArn", ___string, &smithytraits.JSONName{Name: "tokenRequestSecretArn"})
-
-	KafkaClusterOAuthClientCredentialsAssertion_Audience = KafkaClusterOAuthClientCredentialsAssertion.AddMember("Audience", ___string, &smithytraits.JSONName{Name: "audience"})
-
-	KafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm = KafkaClusterOAuthClientCredentialsAssertion.AddMember("SigningAlgorithm", JwtSigningAlgorithm, &smithytraits.JSONName{Name: "signingAlgorithm"})
-
-	KafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn = KafkaClusterOAuthClientCredentialsAssertion.AddMember("TokenRequestSecretArn", ___string, &smithytraits.JSONName{Name: "tokenRequestSecretArn"})
-
-	TokenEndpointAuthenticationMethod_POST = TokenEndpointAuthenticationMethod.AddMember("POST", smithyprelude.Unit)
-
-	TokenEndpointAuthenticationMethod_BASIC = TokenEndpointAuthenticationMethod.AddMember("BASIC", smithyprelude.Unit)
-
-	TokenEndpointAuthenticationMethod_NONE = TokenEndpointAuthenticationMethod.AddMember("NONE", smithyprelude.Unit)
-
-	KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl = KafkaClusterSaslOAuthBearerAuthentication.AddMember("TokenEndpointUrl", ___string, &smithytraits.JSONName{Name: "tokenEndpointUrl"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_ClientCredentials = KafkaClusterSaslOAuthBearerAuthentication.AddMember("ClientCredentials", KafkaClusterOAuthClientCredentials, &smithytraits.JSONName{Name: "clientCredentials"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer = KafkaClusterSaslOAuthBearerAuthentication.AddMember("IamJwtBearer", KafkaClusterOAuthIamJwtBearer, &smithytraits.JSONName{Name: "iamJwtBearer"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion = KafkaClusterSaslOAuthBearerAuthentication.AddMember("ClientCredentialsAssertion", KafkaClusterOAuthClientCredentialsAssertion, &smithytraits.JSONName{Name: "clientCredentialsAssertion"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod = KafkaClusterSaslOAuthBearerAuthentication.AddMember("TokenEndpointAuthenticationMethod", TokenEndpointAuthenticationMethod, &smithytraits.JSONName{Name: "tokenEndpointAuthenticationMethod"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_Scope = KafkaClusterSaslOAuthBearerAuthentication.AddMember("Scope", ___string, &smithytraits.JSONName{Name: "scope"})
-
-	KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn = KafkaClusterSaslOAuthBearerAuthentication.AddMember("TokenEndpointTlsCertificateArn", ___string, &smithytraits.JSONName{Name: "tokenEndpointTlsCertificateArn"})
-
-	KafkaClusterClientAuthentication_SaslScram = KafkaClusterClientAuthentication.AddMember("SaslScram", KafkaClusterSaslScramAuthentication, &smithytraits.JSONName{Name: "saslScram"})
-
-	KafkaClusterClientAuthentication_MTLS = KafkaClusterClientAuthentication.AddMember("MTLS", KafkaClusterMTLSAuthentication, &smithytraits.JSONName{Name: "mTLS"})
-
-	KafkaClusterClientAuthentication_SaslOAuthBearer = KafkaClusterClientAuthentication.AddMember("SaslOAuthBearer", KafkaClusterSaslOAuthBearerAuthentication, &smithytraits.JSONName{Name: "saslOAuthBearer"})
-
-	KafkaClusterEncryptionInTransitType_TLS = KafkaClusterEncryptionInTransitType.AddMember("TLS", smithyprelude.Unit)
-
-	KafkaClusterEncryptionInTransit_EncryptionType = KafkaClusterEncryptionInTransit.AddMember("EncryptionType", KafkaClusterEncryptionInTransitType, &smithytraits.JSONName{Name: "encryptionType"})
-
-	KafkaClusterEncryptionInTransit_RootCaCertificate = KafkaClusterEncryptionInTransit.AddMember("RootCaCertificate", ___string, &smithytraits.JSONName{Name: "rootCaCertificate"})
-
-	KafkaCluster_AmazonMskCluster = KafkaCluster.AddMember("AmazonMskCluster", AmazonMskCluster, &smithytraits.JSONName{Name: "amazonMskCluster"})
-
-	KafkaCluster_ApacheKafkaCluster = KafkaCluster.AddMember("ApacheKafkaCluster", ApacheKafkaCluster, &smithytraits.JSONName{Name: "apacheKafkaCluster"})
-
-	KafkaCluster_VpcConfig = KafkaCluster.AddMember("VpcConfig", KafkaClusterClientVpcConfig, &smithytraits.JSONName{Name: "vpcConfig"})
-
-	KafkaCluster_ClientAuthentication = KafkaCluster.AddMember("ClientAuthentication", KafkaClusterClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	KafkaCluster_EncryptionInTransit = KafkaCluster.AddMember("EncryptionInTransit", KafkaClusterEncryptionInTransit, &smithytraits.JSONName{Name: "encryptionInTransit"})
-
-	___listOfKafkaCluster_member = ___listOfKafkaCluster.AddMember("member", KafkaCluster)
-
-	KafkaClusterDescription_AmazonMskCluster = KafkaClusterDescription.AddMember("AmazonMskCluster", AmazonMskCluster, &smithytraits.JSONName{Name: "amazonMskCluster"})
-
-	KafkaClusterDescription_ApacheKafkaCluster = KafkaClusterDescription.AddMember("ApacheKafkaCluster", ApacheKafkaCluster, &smithytraits.JSONName{Name: "apacheKafkaCluster"})
-
-	KafkaClusterDescription_KafkaClusterAlias = KafkaClusterDescription.AddMember("KafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "kafkaClusterAlias"})
-
-	KafkaClusterDescription_VpcConfig = KafkaClusterDescription.AddMember("VpcConfig", KafkaClusterClientVpcConfig, &smithytraits.JSONName{Name: "vpcConfig"})
-
-	KafkaClusterDescription_ClientAuthentication = KafkaClusterDescription.AddMember("ClientAuthentication", KafkaClusterClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	KafkaClusterDescription_EncryptionInTransit = KafkaClusterDescription.AddMember("EncryptionInTransit", KafkaClusterEncryptionInTransit, &smithytraits.JSONName{Name: "encryptionInTransit"})
-
-	___listOfKafkaClusterDescription_member = ___listOfKafkaClusterDescription.AddMember("member", KafkaClusterDescription)
-
-	KafkaClusterSummary_AmazonMskCluster = KafkaClusterSummary.AddMember("AmazonMskCluster", AmazonMskCluster, &smithytraits.JSONName{Name: "amazonMskCluster"})
-
-	KafkaClusterSummary_ApacheKafkaCluster = KafkaClusterSummary.AddMember("ApacheKafkaCluster", ApacheKafkaCluster, &smithytraits.JSONName{Name: "apacheKafkaCluster"})
-
-	KafkaClusterSummary_KafkaClusterAlias = KafkaClusterSummary.AddMember("KafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "kafkaClusterAlias"})
-
-	___listOfKafkaClusterSummary_member = ___listOfKafkaClusterSummary.AddMember("member", KafkaClusterSummary)
-
-	KafkaVersionStatus_ACTIVE = KafkaVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	KafkaVersionStatus_DEPRECATED = KafkaVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	KafkaVersion_Version = KafkaVersion.AddMember("Version", ___string, &smithytraits.JSONName{Name: "version"})
-
-	KafkaVersion_Status = KafkaVersion.AddMember("Status", KafkaVersionStatus, &smithytraits.JSONName{Name: "status"})
-
-	___listOfKafkaVersion_member = ___listOfKafkaVersion.AddMember("member", KafkaVersion)
-
-	BrokerNodeInfo_AttachedENIId = BrokerNodeInfo.AddMember("AttachedENIId", ___string, &smithytraits.JSONName{Name: "attachedENIId"})
-
-	BrokerNodeInfo_BrokerId = BrokerNodeInfo.AddMember("BrokerId", ___double, &smithytraits.JSONName{Name: "brokerId"})
-
-	BrokerNodeInfo_ClientSubnet = BrokerNodeInfo.AddMember("ClientSubnet", ___string, &smithytraits.JSONName{Name: "clientSubnet"})
-
-	BrokerNodeInfo_ClientVpcIpAddress = BrokerNodeInfo.AddMember("ClientVpcIpAddress", ___string, &smithytraits.JSONName{Name: "clientVpcIpAddress"})
-
-	BrokerNodeInfo_CurrentBrokerSoftwareInfo = BrokerNodeInfo.AddMember("CurrentBrokerSoftwareInfo", BrokerSoftwareInfo, &smithytraits.JSONName{Name: "currentBrokerSoftwareInfo"})
-
-	BrokerNodeInfo_Endpoints = BrokerNodeInfo.AddMember("Endpoints", ___listOf__string, &smithytraits.JSONName{Name: "endpoints"})
-
-	ControllerNodeInfo_Endpoints = ControllerNodeInfo.AddMember("Endpoints", ___listOf__string, &smithytraits.JSONName{Name: "endpoints"})
-
-	NodeType_BROKER = NodeType.AddMember("BROKER", smithyprelude.Unit)
-
-	ZookeeperNodeInfo_AttachedENIId = ZookeeperNodeInfo.AddMember("AttachedENIId", ___string, &smithytraits.JSONName{Name: "attachedENIId"})
-
-	ZookeeperNodeInfo_ClientVpcIpAddress = ZookeeperNodeInfo.AddMember("ClientVpcIpAddress", ___string, &smithytraits.JSONName{Name: "clientVpcIpAddress"})
-
-	ZookeeperNodeInfo_Endpoints = ZookeeperNodeInfo.AddMember("Endpoints", ___listOf__string, &smithytraits.JSONName{Name: "endpoints"})
-
-	ZookeeperNodeInfo_ZookeeperId = ZookeeperNodeInfo.AddMember("ZookeeperId", ___double, &smithytraits.JSONName{Name: "zookeeperId"})
-
-	ZookeeperNodeInfo_ZookeeperVersion = ZookeeperNodeInfo.AddMember("ZookeeperVersion", ___string, &smithytraits.JSONName{Name: "zookeeperVersion"})
-
-	NodeInfo_AddedToClusterTime = NodeInfo.AddMember("AddedToClusterTime", ___string, &smithytraits.JSONName{Name: "addedToClusterTime"})
-
-	NodeInfo_BrokerNodeInfo = NodeInfo.AddMember("BrokerNodeInfo", BrokerNodeInfo, &smithytraits.JSONName{Name: "brokerNodeInfo"})
-
-	NodeInfo_ControllerNodeInfo = NodeInfo.AddMember("ControllerNodeInfo", ControllerNodeInfo, &smithytraits.JSONName{Name: "controllerNodeInfo"})
-
-	NodeInfo_InstanceType = NodeInfo.AddMember("InstanceType", ___string, &smithytraits.JSONName{Name: "instanceType"})
-
-	NodeInfo_NodeARN = NodeInfo.AddMember("NodeARN", ___string, &smithytraits.JSONName{Name: "nodeARN"})
-
-	NodeInfo_NodeType = NodeInfo.AddMember("NodeType", NodeType, &smithytraits.JSONName{Name: "nodeType"})
-
-	NodeInfo_ZookeeperNodeInfo = NodeInfo.AddMember("ZookeeperNodeInfo", ZookeeperNodeInfo, &smithytraits.JSONName{Name: "zookeeperNodeInfo"})
-
-	___listOfNodeInfo_member = ___listOfNodeInfo.AddMember("member", NodeInfo)
-
-	ConsumerGroupOffsetSyncMode_LEGACY = ConsumerGroupOffsetSyncMode.AddMember("LEGACY", smithyprelude.Unit)
-
-	ConsumerGroupOffsetSyncMode_ENHANCED = ConsumerGroupOffsetSyncMode.AddMember("ENHANCED", smithyprelude.Unit)
-
-	ConsumerGroupReplication_ConsumerGroupsToExclude = ConsumerGroupReplication.AddMember("ConsumerGroupsToExclude", ___listOf__stringMax256, &smithytraits.JSONName{Name: "consumerGroupsToExclude"})
-
-	ConsumerGroupReplication_ConsumerGroupsToReplicate = ConsumerGroupReplication.AddMember("ConsumerGroupsToReplicate", ___listOf__stringMax256, &smithytraits.JSONName{Name: "consumerGroupsToReplicate"})
-
-	ConsumerGroupReplication_DetectAndCopyNewConsumerGroups = ConsumerGroupReplication.AddMember("DetectAndCopyNewConsumerGroups", ___boolean, &smithytraits.JSONName{Name: "detectAndCopyNewConsumerGroups"})
-
-	ConsumerGroupReplication_SynchroniseConsumerGroupOffsets = ConsumerGroupReplication.AddMember("SynchroniseConsumerGroupOffsets", ___boolean, &smithytraits.JSONName{Name: "synchroniseConsumerGroupOffsets"})
-
-	ConsumerGroupReplication_ConsumerGroupOffsetSyncMode = ConsumerGroupReplication.AddMember("ConsumerGroupOffsetSyncMode", ConsumerGroupOffsetSyncMode, &smithytraits.JSONName{Name: "consumerGroupOffsetSyncMode"})
-
-	TargetCompressionType_NONE = TargetCompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	TargetCompressionType_GZIP = TargetCompressionType.AddMember("GZIP", smithyprelude.Unit)
-
-	TargetCompressionType_SNAPPY = TargetCompressionType.AddMember("SNAPPY", smithyprelude.Unit)
-
-	TargetCompressionType_LZ4 = TargetCompressionType.AddMember("LZ4", smithyprelude.Unit)
-
-	TargetCompressionType_ZSTD = TargetCompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	ReplicationStartingPositionType_LATEST = ReplicationStartingPositionType.AddMember("LATEST", smithyprelude.Unit)
-
-	ReplicationStartingPositionType_EARLIEST = ReplicationStartingPositionType.AddMember("EARLIEST", smithyprelude.Unit)
-
-	ReplicationStartingPosition_Type = ReplicationStartingPosition.AddMember("Type", ReplicationStartingPositionType, &smithytraits.JSONName{Name: "type"})
-
-	ReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS = ReplicationTopicNameConfigurationType.AddMember("PREFIXED_WITH_SOURCE_CLUSTER_ALIAS", smithyprelude.Unit)
-
-	ReplicationTopicNameConfigurationType_IDENTICAL = ReplicationTopicNameConfigurationType.AddMember("IDENTICAL", smithyprelude.Unit)
-
-	ReplicationTopicNameConfiguration_Type = ReplicationTopicNameConfiguration.AddMember("Type", ReplicationTopicNameConfigurationType, &smithytraits.JSONName{Name: "type"})
-
-	TopicReplication_CopyAccessControlListsForTopics = TopicReplication.AddMember("CopyAccessControlListsForTopics", ___boolean, &smithytraits.JSONName{Name: "copyAccessControlListsForTopics"})
-
-	TopicReplication_CopyTopicConfigurations = TopicReplication.AddMember("CopyTopicConfigurations", ___boolean, &smithytraits.JSONName{Name: "copyTopicConfigurations"})
-
-	TopicReplication_DetectAndCopyNewTopics = TopicReplication.AddMember("DetectAndCopyNewTopics", ___boolean, &smithytraits.JSONName{Name: "detectAndCopyNewTopics"})
-
-	TopicReplication_StartingPosition = TopicReplication.AddMember("StartingPosition", ReplicationStartingPosition, &smithytraits.JSONName{Name: "startingPosition"})
-
-	TopicReplication_TopicNameConfiguration = TopicReplication.AddMember("TopicNameConfiguration", ReplicationTopicNameConfiguration, &smithytraits.JSONName{Name: "topicNameConfiguration"})
-
-	TopicReplication_TopicsToExclude = TopicReplication.AddMember("TopicsToExclude", ___listOf__stringMax249, &smithytraits.JSONName{Name: "topicsToExclude"})
-
-	TopicReplication_TopicsToReplicate = TopicReplication.AddMember("TopicsToReplicate", ___listOf__stringMax249, &smithytraits.JSONName{Name: "topicsToReplicate"})
-
-	ReplicationInfo_ConsumerGroupReplication = ReplicationInfo.AddMember("ConsumerGroupReplication", ConsumerGroupReplication, &smithytraits.JSONName{Name: "consumerGroupReplication"})
-
-	ReplicationInfo_SourceKafkaClusterArn = ReplicationInfo.AddMember("SourceKafkaClusterArn", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterArn"})
-
-	ReplicationInfo_SourceKafkaClusterId = ReplicationInfo.AddMember("SourceKafkaClusterId", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterId"})
-
-	ReplicationInfo_TargetCompressionType = ReplicationInfo.AddMember("TargetCompressionType", TargetCompressionType, &smithytraits.JSONName{Name: "targetCompressionType"})
-
-	ReplicationInfo_TargetKafkaClusterArn = ReplicationInfo.AddMember("TargetKafkaClusterArn", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterArn"})
-
-	ReplicationInfo_TargetKafkaClusterId = ReplicationInfo.AddMember("TargetKafkaClusterId", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterId"})
-
-	ReplicationInfo_TopicReplication = ReplicationInfo.AddMember("TopicReplication", TopicReplication, &smithytraits.JSONName{Name: "topicReplication"})
-
-	___listOfReplicationInfo_member = ___listOfReplicationInfo.AddMember("member", ReplicationInfo)
-
-	ReplicationInfoDescription_ConsumerGroupReplication = ReplicationInfoDescription.AddMember("ConsumerGroupReplication", ConsumerGroupReplication, &smithytraits.JSONName{Name: "consumerGroupReplication"})
-
-	ReplicationInfoDescription_SourceKafkaClusterAlias = ReplicationInfoDescription.AddMember("SourceKafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterAlias"})
-
-	ReplicationInfoDescription_TargetCompressionType = ReplicationInfoDescription.AddMember("TargetCompressionType", TargetCompressionType, &smithytraits.JSONName{Name: "targetCompressionType"})
-
-	ReplicationInfoDescription_TargetKafkaClusterAlias = ReplicationInfoDescription.AddMember("TargetKafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterAlias"})
-
-	ReplicationInfoDescription_TopicReplication = ReplicationInfoDescription.AddMember("TopicReplication", TopicReplication, &smithytraits.JSONName{Name: "topicReplication"})
-
-	___listOfReplicationInfoDescription_member = ___listOfReplicationInfoDescription.AddMember("member", ReplicationInfoDescription)
-
-	ReplicationInfoSummary_SourceKafkaClusterAlias = ReplicationInfoSummary.AddMember("SourceKafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterAlias"})
-
-	ReplicationInfoSummary_TargetKafkaClusterAlias = ReplicationInfoSummary.AddMember("TargetKafkaClusterAlias", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterAlias"})
-
-	___listOfReplicationInfoSummary_member = ___listOfReplicationInfoSummary.AddMember("member", ReplicationInfoSummary)
-
-	ReplicatorState_RUNNING = ReplicatorState.AddMember("RUNNING", smithyprelude.Unit)
-
-	ReplicatorState_CREATING = ReplicatorState.AddMember("CREATING", smithyprelude.Unit)
-
-	ReplicatorState_UPDATING = ReplicatorState.AddMember("UPDATING", smithyprelude.Unit)
-
-	ReplicatorState_DELETING = ReplicatorState.AddMember("DELETING", smithyprelude.Unit)
-
-	ReplicatorState_FAILED = ReplicatorState.AddMember("FAILED", smithyprelude.Unit)
-
-	ReplicatorSummary_CreationTime = ReplicatorSummary.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	ReplicatorSummary_CurrentVersion = ReplicatorSummary.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	ReplicatorSummary_IsReplicatorReference = ReplicatorSummary.AddMember("IsReplicatorReference", ___boolean, &smithytraits.JSONName{Name: "isReplicatorReference"})
-
-	ReplicatorSummary_KafkaClustersSummary = ReplicatorSummary.AddMember("KafkaClustersSummary", ___listOfKafkaClusterSummary, &smithytraits.JSONName{Name: "kafkaClustersSummary"})
-
-	ReplicatorSummary_ReplicationInfoSummaryList = ReplicatorSummary.AddMember("ReplicationInfoSummaryList", ___listOfReplicationInfoSummary, &smithytraits.JSONName{Name: "replicationInfoSummaryList"})
-
-	ReplicatorSummary_ReplicatorArn = ReplicatorSummary.AddMember("ReplicatorArn", ___string, &smithytraits.JSONName{Name: "replicatorArn"})
-
-	ReplicatorSummary_ReplicatorName = ReplicatorSummary.AddMember("ReplicatorName", ___string, &smithytraits.JSONName{Name: "replicatorName"})
-
-	ReplicatorSummary_ReplicatorResourceArn = ReplicatorSummary.AddMember("ReplicatorResourceArn", ___string, &smithytraits.JSONName{Name: "replicatorResourceArn"})
-
-	ReplicatorSummary_ReplicatorState = ReplicatorSummary.AddMember("ReplicatorState", ReplicatorState, &smithytraits.JSONName{Name: "replicatorState"})
-
-	___listOfReplicatorSummary_member = ___listOfReplicatorSummary.AddMember("member", ReplicatorSummary)
-
-	ValueConverter_BYTE_ARRAY = ValueConverter.AddMember("BYTE_ARRAY", smithyprelude.Unit)
-
-	ValueConverter_JSON = ValueConverter.AddMember("JSON", smithyprelude.Unit)
-
-	ValueConverter_JSON_SCHEMA_GSR = ValueConverter.AddMember("JSON_SCHEMA_GSR", smithyprelude.Unit)
-
-	ValueConverter_STRING = ValueConverter.AddMember("STRING", smithyprelude.Unit)
-
-	RecordConverter_ValueConverter = RecordConverter.AddMember("ValueConverter", ValueConverter, &smithytraits.JSONName{Name: "valueConverter"})
-
-	RecordSchema_GsrArn = RecordSchema.AddMember("GsrArn", ___string, &smithytraits.JSONName{Name: "gsrArn"})
-
-	TopicConfiguration_RecordConverter = TopicConfiguration.AddMember("RecordConverter", RecordConverter, &smithytraits.JSONName{Name: "recordConverter"})
-
-	TopicConfiguration_RecordSchema = TopicConfiguration.AddMember("RecordSchema", RecordSchema, &smithytraits.JSONName{Name: "recordSchema"})
-
-	TopicConfiguration_TopicArn = TopicConfiguration.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	___listOfTopicConfiguration_member = ___listOfTopicConfiguration.AddMember("member", TopicConfiguration)
-
-	TopicInfo_TopicArn = TopicInfo.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	TopicInfo_TopicName = TopicInfo.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	TopicInfo_ReplicationFactor = TopicInfo.AddMember("ReplicationFactor", ___integer, &smithytraits.JSONName{Name: "replicationFactor"})
-
-	TopicInfo_PartitionCount = TopicInfo.AddMember("PartitionCount", ___integer, &smithytraits.JSONName{Name: "partitionCount"})
-
-	TopicInfo_OutOfSyncReplicaCount = TopicInfo.AddMember("OutOfSyncReplicaCount", ___integer, &smithytraits.JSONName{Name: "outOfSyncReplicaCount"})
-
-	___listOfTopicInfo_member = ___listOfTopicInfo.AddMember("member", TopicInfo)
-
-	TopicPartitionInfo_Partition = TopicPartitionInfo.AddMember("Partition", ___integer, &smithytraits.JSONName{Name: "partition"})
-
-	TopicPartitionInfo_Leader = TopicPartitionInfo.AddMember("Leader", ___integer, &smithytraits.JSONName{Name: "leader"})
-
-	TopicPartitionInfo_Replicas = TopicPartitionInfo.AddMember("Replicas", ___listOf__integer, &smithytraits.JSONName{Name: "replicas"})
-
-	TopicPartitionInfo_Isr = TopicPartitionInfo.AddMember("Isr", ___listOf__integer, &smithytraits.JSONName{Name: "isr"})
-
-	___listOfTopicPartitionInfo_member = ___listOfTopicPartitionInfo.AddMember("member", TopicPartitionInfo)
-
-	UnprocessedScramSecret_ErrorCode = UnprocessedScramSecret.AddMember("ErrorCode", ___string, &smithytraits.JSONName{Name: "errorCode"})
-
-	UnprocessedScramSecret_ErrorMessage = UnprocessedScramSecret.AddMember("ErrorMessage", ___string, &smithytraits.JSONName{Name: "errorMessage"})
-
-	UnprocessedScramSecret_SecretArn = UnprocessedScramSecret.AddMember("SecretArn", ___string, &smithytraits.JSONName{Name: "secretArn"})
-
-	___listOfUnprocessedScramSecret_member = ___listOfUnprocessedScramSecret.AddMember("member", UnprocessedScramSecret)
-
-	VpcConnection_VpcConnectionArn = VpcConnection.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	VpcConnection_TargetClusterArn = VpcConnection.AddMember("TargetClusterArn", ___string, &smithytraits.JSONName{Name: "targetClusterArn"})
-
-	VpcConnection_CreationTime = VpcConnection.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	VpcConnection_Authentication = VpcConnection.AddMember("Authentication", ___string, &smithytraits.JSONName{Name: "authentication"})
-
-	VpcConnection_VpcId = VpcConnection.AddMember("VpcId", ___string, &smithytraits.JSONName{Name: "vpcId"})
-
-	VpcConnection_State = VpcConnection.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
-
-	___listOfVpcConnection_member = ___listOfVpcConnection.AddMember("member", VpcConnection)
-
-	BadRequestException_InvalidParameter = BadRequestException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	Catalog_CatalogArn = Catalog.AddMember("CatalogArn", ___string, &smithytraits.JSONName{Name: "catalogArn"})
-
-	Catalog_WarehouseLocation = Catalog.AddMember("WarehouseLocation", ___string, &smithytraits.JSONName{Name: "warehouseLocation"})
-
-	ChannelLoggingInfo_CloudWatchLogs = ChannelLoggingInfo.AddMember("CloudWatchLogs", CloudWatchLogs, &smithytraits.JSONName{Name: "cloudWatchLogs"})
-
-	ChannelLoggingInfo_Firehose = ChannelLoggingInfo.AddMember("Firehose", Firehose, &smithytraits.JSONName{Name: "firehose"})
-
-	ChannelLoggingInfo_S3 = ChannelLoggingInfo.AddMember("S3", S3, &smithytraits.JSONName{Name: "s3"})
-
-	ChannelStateInfo_Code = ChannelStateInfo.AddMember("Code", ___string, &smithytraits.JSONName{Name: "code"})
-
-	ChannelStateInfo_Message = ChannelStateInfo.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ClusterConnectivityException_InvalidParameter = ClusterConnectivityException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ClusterConnectivityException_Message = ClusterConnectivityException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ClusterOperationV2Provisioned_OperationSteps = ClusterOperationV2Provisioned.AddMember("OperationSteps", ___listOfClusterOperationStep, &smithytraits.JSONName{Name: "operationSteps"})
-
-	ClusterOperationV2Provisioned_SourceClusterInfo = ClusterOperationV2Provisioned.AddMember("SourceClusterInfo", MutableClusterInfo, &smithytraits.JSONName{Name: "sourceClusterInfo"})
-
-	ClusterOperationV2Provisioned_TargetClusterInfo = ClusterOperationV2Provisioned.AddMember("TargetClusterInfo", MutableClusterInfo, &smithytraits.JSONName{Name: "targetClusterInfo"})
-
-	ClusterOperationV2Provisioned_VpcConnectionInfo = ClusterOperationV2Provisioned.AddMember("VpcConnectionInfo", VpcConnectionInfo, &smithytraits.JSONName{Name: "vpcConnectionInfo"})
-
-	VpcConnectionInfoServerless_CreationTime = VpcConnectionInfoServerless.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	VpcConnectionInfoServerless_Owner = VpcConnectionInfoServerless.AddMember("Owner", ___string, &smithytraits.JSONName{Name: "owner"})
-
-	VpcConnectionInfoServerless_UserIdentity = VpcConnectionInfoServerless.AddMember("UserIdentity", UserIdentity, &smithytraits.JSONName{Name: "userIdentity"})
-
-	VpcConnectionInfoServerless_VpcConnectionArn = VpcConnectionInfoServerless.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	ClusterOperationV2Serverless_SourceClusterInfo = ClusterOperationV2Serverless.AddMember("SourceClusterInfo", ServerlessConnectivityInfo, &smithytraits.JSONName{Name: "sourceClusterInfo"})
-
-	ClusterOperationV2Serverless_TargetClusterInfo = ClusterOperationV2Serverless.AddMember("TargetClusterInfo", ServerlessConnectivityInfo, &smithytraits.JSONName{Name: "targetClusterInfo"})
-
-	ClusterOperationV2Serverless_VpcConnectionInfo = ClusterOperationV2Serverless.AddMember("VpcConnectionInfo", VpcConnectionInfoServerless, &smithytraits.JSONName{Name: "vpcConnectionInfo"})
-
-	ClusterOperationV2_ClusterArn = ClusterOperationV2.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	ClusterOperationV2_ClusterType = ClusterOperationV2.AddMember("ClusterType", ClusterType, &smithytraits.JSONName{Name: "clusterType"})
-
-	ClusterOperationV2_StartTime = ClusterOperationV2.AddMember("StartTime", ___timestampIso8601, &smithytraits.JSONName{Name: "startTime"})
-
-	ClusterOperationV2_EndTime = ClusterOperationV2.AddMember("EndTime", ___timestampIso8601, &smithytraits.JSONName{Name: "endTime"})
-
-	ClusterOperationV2_ErrorInfo = ClusterOperationV2.AddMember("ErrorInfo", ErrorInfo, &smithytraits.JSONName{Name: "errorInfo"})
-
-	ClusterOperationV2_OperationArn = ClusterOperationV2.AddMember("OperationArn", ___string, &smithytraits.JSONName{Name: "operationArn"})
-
-	ClusterOperationV2_OperationState = ClusterOperationV2.AddMember("OperationState", ___string, &smithytraits.JSONName{Name: "operationState"})
-
-	ClusterOperationV2_OperationType = ClusterOperationV2.AddMember("OperationType", ___string, &smithytraits.JSONName{Name: "operationType"})
-
-	ClusterOperationV2_Provisioned = ClusterOperationV2.AddMember("Provisioned", ClusterOperationV2Provisioned, &smithytraits.JSONName{Name: "provisioned"})
-
-	ClusterOperationV2_Serverless = ClusterOperationV2.AddMember("Serverless", ClusterOperationV2Serverless, &smithytraits.JSONName{Name: "serverless"})
-
-	ConflictException_InvalidParameter = ConflictException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ConflictException_Message = ConflictException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ConsumerGroupReplicationUpdate_ConsumerGroupsToExclude = ConsumerGroupReplicationUpdate.AddMember("ConsumerGroupsToExclude", ___listOf__stringMax256, &smithytraits.JSONName{Name: "consumerGroupsToExclude"})
-
-	ConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate = ConsumerGroupReplicationUpdate.AddMember("ConsumerGroupsToReplicate", ___listOf__stringMax256, &smithytraits.JSONName{Name: "consumerGroupsToReplicate"})
-
-	ConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups = ConsumerGroupReplicationUpdate.AddMember("DetectAndCopyNewConsumerGroups", ___boolean, &smithytraits.JSONName{Name: "detectAndCopyNewConsumerGroups"})
-
-	ConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets = ConsumerGroupReplicationUpdate.AddMember("SynchroniseConsumerGroupOffsets", ___boolean, &smithytraits.JSONName{Name: "synchroniseConsumerGroupOffsets"})
-
-	ControllerMovedException_InvalidParameter = ControllerMovedException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ControllerMovedException_Message = ControllerMovedException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	DeadLetterQueueS3_BucketArn = DeadLetterQueueS3.AddMember("BucketArn", ___string, &smithytraits.JSONName{Name: "bucketArn"})
-
-	DeadLetterQueueS3_ErrorOutputPrefix = DeadLetterQueueS3.AddMember("ErrorOutputPrefix", ___string, &smithytraits.JSONName{Name: "errorOutputPrefix"})
-
-	DeadLetterQueueS3_ExpectedBucketOwner = DeadLetterQueueS3.AddMember("ExpectedBucketOwner", ___string, &smithytraits.JSONName{Name: "expectedBucketOwner"})
-
-	EncryptionConfiguration_KmsKeyArn = EncryptionConfiguration.AddMember("KmsKeyArn", ___string, &smithytraits.JSONName{Name: "kmsKeyArn"})
-
-	ForbiddenException_InvalidParameter = ForbiddenException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	GroupSubscribedToTopicException_InvalidParameter = GroupSubscribedToTopicException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	GroupSubscribedToTopicException_Message = GroupSubscribedToTopicException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	IcebergCompressionType_ZSTD = IcebergCompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	IcebergCompressionType_SNAPPY = IcebergCompressionType.AddMember("SNAPPY", smithyprelude.Unit)
-
-	SchemaEvolution_EnableSchemaEvolution = SchemaEvolution.AddMember("EnableSchemaEvolution", ___boolean, &smithytraits.JSONName{Name: "enableSchemaEvolution"})
-
-	TableCreation_EnableTableCreation = TableCreation.AddMember("EnableTableCreation", ___boolean, &smithytraits.JSONName{Name: "enableTableCreation"})
-
-	IcebergDestinationConfiguration_AppendOnly = IcebergDestinationConfiguration.AddMember("AppendOnly", ___boolean, &smithytraits.JSONName{Name: "appendOnly"})
-
-	IcebergDestinationConfiguration_Catalog = IcebergDestinationConfiguration.AddMember("Catalog", Catalog, &smithytraits.JSONName{Name: "catalog"})
-
-	IcebergDestinationConfiguration_DataFreshnessInSeconds = IcebergDestinationConfiguration.AddMember("DataFreshnessInSeconds", ___integer, &smithytraits.JSONName{Name: "dataFreshnessInSeconds"})
-
-	IcebergDestinationConfiguration_DeadLetterQueueS3 = IcebergDestinationConfiguration.AddMember("DeadLetterQueueS3", DeadLetterQueueS3, &smithytraits.JSONName{Name: "deadLetterQueueS3"})
-
-	IcebergDestinationConfiguration_DestinationTableList = IcebergDestinationConfiguration.AddMember("DestinationTableList", ___listOfDestinationTable, &smithytraits.JSONName{Name: "destinationTableList"})
-
-	IcebergDestinationConfiguration_SchemaEvolution = IcebergDestinationConfiguration.AddMember("SchemaEvolution", SchemaEvolution, &smithytraits.JSONName{Name: "schemaEvolution"})
-
-	IcebergDestinationConfiguration_ServiceExecutionRoleArn = IcebergDestinationConfiguration.AddMember("ServiceExecutionRoleArn", ___string, &smithytraits.JSONName{Name: "serviceExecutionRoleArn"})
-
-	IcebergDestinationConfiguration_TableCreation = IcebergDestinationConfiguration.AddMember("TableCreation", TableCreation, &smithytraits.JSONName{Name: "tableCreation"})
-
-	IcebergDestinationConfiguration_CompressionType = IcebergDestinationConfiguration.AddMember("CompressionType", IcebergCompressionType, &smithytraits.JSONName{Name: "compressionType"})
-
-	IcebergDestinationUpdate_DataFreshnessInSeconds = IcebergDestinationUpdate.AddMember("DataFreshnessInSeconds", ___integer, &smithytraits.JSONName{Name: "dataFreshnessInSeconds"})
-
-	InternalServerErrorException_InvalidParameter = InternalServerErrorException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	InternalServerErrorException_Message = InternalServerErrorException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	KafkaRequestException_InvalidParameter = KafkaRequestException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	KafkaRequestException_Message = KafkaRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	KafkaTimeoutException_InvalidParameter = KafkaTimeoutException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	KafkaTimeoutException_Message = KafkaTimeoutException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ReplicatorCloudWatchLogs_Enabled = ReplicatorCloudWatchLogs.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	ReplicatorCloudWatchLogs_LogGroup = ReplicatorCloudWatchLogs.AddMember("LogGroup", ___string, &smithytraits.JSONName{Name: "logGroup"})
-
-	ReplicatorFirehose_Enabled = ReplicatorFirehose.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	ReplicatorFirehose_DeliveryStream = ReplicatorFirehose.AddMember("DeliveryStream", ___string, &smithytraits.JSONName{Name: "deliveryStream"})
-
-	ReplicatorS3_Enabled = ReplicatorS3.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
-
-	ReplicatorS3_Bucket = ReplicatorS3.AddMember("Bucket", ___string, &smithytraits.JSONName{Name: "bucket"})
-
-	ReplicatorS3_Prefix = ReplicatorS3.AddMember("Prefix", ___string, &smithytraits.JSONName{Name: "prefix"})
-
-	ReplicatorLogDelivery_CloudWatchLogs = ReplicatorLogDelivery.AddMember("CloudWatchLogs", ReplicatorCloudWatchLogs, &smithytraits.JSONName{Name: "cloudWatchLogs"})
-
-	ReplicatorLogDelivery_Firehose = ReplicatorLogDelivery.AddMember("Firehose", ReplicatorFirehose, &smithytraits.JSONName{Name: "firehose"})
-
-	ReplicatorLogDelivery_S3 = ReplicatorLogDelivery.AddMember("S3", ReplicatorS3, &smithytraits.JSONName{Name: "s3"})
-
-	LogDelivery_ReplicatorLogDelivery = LogDelivery.AddMember("ReplicatorLogDelivery", ReplicatorLogDelivery, &smithytraits.JSONName{Name: "replicatorLogDelivery"})
-
-	NotControllerException_InvalidParameter = NotControllerException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	NotControllerException_Message = NotControllerException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	NotFoundException_InvalidParameter = NotFoundException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ProvisionedRequest_BrokerNodeGroupInfo = ProvisionedRequest.AddMember("BrokerNodeGroupInfo", BrokerNodeGroupInfo, &smithytraits.JSONName{Name: "brokerNodeGroupInfo"})
-
-	ProvisionedRequest_Rebalancing = ProvisionedRequest.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	ProvisionedRequest_ClientAuthentication = ProvisionedRequest.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	ProvisionedRequest_ConfigurationInfo = ProvisionedRequest.AddMember("ConfigurationInfo", ConfigurationInfo, &smithytraits.JSONName{Name: "configurationInfo"})
-
-	ProvisionedRequest_EncryptionInfo = ProvisionedRequest.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	ProvisionedRequest_EnhancedMonitoring = ProvisionedRequest.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	ProvisionedRequest_OpenMonitoring = ProvisionedRequest.AddMember("OpenMonitoring", OpenMonitoringInfo, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	ProvisionedRequest_KafkaVersion = ProvisionedRequest.AddMember("KafkaVersion", ___stringMin1Max128, &smithytraits.JSONName{Name: "kafkaVersion"})
-
-	ProvisionedRequest_LoggingInfo = ProvisionedRequest.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	ProvisionedRequest_NumberOfBrokerNodes = ProvisionedRequest.AddMember("NumberOfBrokerNodes", ___integerMin1Max15, &smithytraits.JSONName{Name: "numberOfBrokerNodes"})
-
-	ProvisionedRequest_StorageMode = ProvisionedRequest.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	ReassignmentInProgressException_InvalidParameter = ReassignmentInProgressException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ReassignmentInProgressException_Message = ReassignmentInProgressException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ReplicationStateInfo_Code = ReplicationStateInfo.AddMember("Code", ___string, &smithytraits.JSONName{Name: "code"})
-
-	ReplicationStateInfo_Message = ReplicationStateInfo.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	S3CompressionType_NONE = S3CompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	S3CompressionType_GZIP = S3CompressionType.AddMember("GZIP", smithyprelude.Unit)
-
-	S3CompressionType_ZSTD = S3CompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	S3StorageClass_STANDARD = S3StorageClass.AddMember("STANDARD", smithyprelude.Unit)
-
-	S3StorageClass_INTELLIGENT_TIERING = S3StorageClass.AddMember("INTELLIGENT_TIERING", smithyprelude.Unit)
-
-	S3StorageClass_GLACIER_IR = S3StorageClass.AddMember("GLACIER_IR", smithyprelude.Unit)
-
-	S3Storage_BucketArn = S3Storage.AddMember("BucketArn", ___string, &smithytraits.JSONName{Name: "bucketArn"})
-
-	S3Storage_CompressionType = S3Storage.AddMember("CompressionType", S3CompressionType, &smithytraits.JSONName{Name: "compressionType"})
-
-	S3Storage_OutputPrefix = S3Storage.AddMember("OutputPrefix", ___string, &smithytraits.JSONName{Name: "outputPrefix"})
-
-	S3Storage_OutputKeyTemplate = S3Storage.AddMember("OutputKeyTemplate", ___string, &smithytraits.JSONName{Name: "outputKeyTemplate"})
-
-	S3Storage_StorageClass = S3Storage.AddMember("StorageClass", S3StorageClass, &smithytraits.JSONName{Name: "storageClass"})
-
-	S3Storage_ExpectedBucketOwner = S3Storage.AddMember("ExpectedBucketOwner", ___string, &smithytraits.JSONName{Name: "expectedBucketOwner"})
-
-	S3DestinationConfiguration_DataFreshnessInSeconds = S3DestinationConfiguration.AddMember("DataFreshnessInSeconds", ___integer, &smithytraits.JSONName{Name: "dataFreshnessInSeconds"})
-
-	S3DestinationConfiguration_DeadLetterQueueS3 = S3DestinationConfiguration.AddMember("DeadLetterQueueS3", DeadLetterQueueS3, &smithytraits.JSONName{Name: "deadLetterQueueS3"})
-
-	S3DestinationConfiguration_ServiceExecutionRoleArn = S3DestinationConfiguration.AddMember("ServiceExecutionRoleArn", ___string, &smithytraits.JSONName{Name: "serviceExecutionRoleArn"})
-
-	S3DestinationConfiguration_Storage = S3DestinationConfiguration.AddMember("Storage", S3Storage, &smithytraits.JSONName{Name: "storage"})
-
-	S3DestinationUpdate_DataFreshnessInSeconds = S3DestinationUpdate.AddMember("DataFreshnessInSeconds", ___integer, &smithytraits.JSONName{Name: "dataFreshnessInSeconds"})
-
-	ServerlessRequest_VpcConfigs = ServerlessRequest.AddMember("VpcConfigs", ___listOfVpcConfig, &smithytraits.JSONName{Name: "vpcConfigs"})
-
-	ServerlessRequest_ClientAuthentication = ServerlessRequest.AddMember("ClientAuthentication", ServerlessClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	ServiceUnavailableException_InvalidParameter = ServiceUnavailableException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	TooManyRequestsException_InvalidParameter = TooManyRequestsException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	TopicExistsException_InvalidParameter = TopicExistsException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	TopicExistsException_Message = TopicExistsException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	TopicReplicationUpdate_CopyAccessControlListsForTopics = TopicReplicationUpdate.AddMember("CopyAccessControlListsForTopics", ___boolean, &smithytraits.JSONName{Name: "copyAccessControlListsForTopics"})
-
-	TopicReplicationUpdate_CopyTopicConfigurations = TopicReplicationUpdate.AddMember("CopyTopicConfigurations", ___boolean, &smithytraits.JSONName{Name: "copyTopicConfigurations"})
-
-	TopicReplicationUpdate_DetectAndCopyNewTopics = TopicReplicationUpdate.AddMember("DetectAndCopyNewTopics", ___boolean, &smithytraits.JSONName{Name: "detectAndCopyNewTopics"})
-
-	TopicReplicationUpdate_TopicsToExclude = TopicReplicationUpdate.AddMember("TopicsToExclude", ___listOf__stringMax249, &smithytraits.JSONName{Name: "topicsToExclude"})
-
-	TopicReplicationUpdate_TopicsToReplicate = TopicReplicationUpdate.AddMember("TopicsToReplicate", ___listOf__stringMax249, &smithytraits.JSONName{Name: "topicsToReplicate"})
-
-	TopicState_CREATING = TopicState.AddMember("CREATING", smithyprelude.Unit)
-
-	TopicState_UPDATING = TopicState.AddMember("UPDATING", smithyprelude.Unit)
-
-	TopicState_DELETING = TopicState.AddMember("DELETING", smithyprelude.Unit)
-
-	TopicState_ACTIVE = TopicState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	UnauthorizedException_InvalidParameter = UnauthorizedException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	UnknownTopicOrPartitionException_InvalidParameter = UnknownTopicOrPartitionException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
-
-	UnknownTopicOrPartitionException_Message = UnknownTopicOrPartitionException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	BatchAssociateScramSecretRequest_ClusterArn = BatchAssociateScramSecretRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	BatchAssociateScramSecretRequest_SecretArnList = BatchAssociateScramSecretRequest.AddMember("SecretArnList", ___listOf__string, &smithytraits.JSONName{Name: "secretArnList"})
-
-	BatchAssociateScramSecretResponse_ClusterArn = BatchAssociateScramSecretResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	BatchAssociateScramSecretResponse_UnprocessedScramSecrets = BatchAssociateScramSecretResponse.AddMember("UnprocessedScramSecrets", ___listOfUnprocessedScramSecret, &smithytraits.JSONName{Name: "unprocessedScramSecrets"})
-
-	BatchDisassociateScramSecretRequest_ClusterArn = BatchDisassociateScramSecretRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	BatchDisassociateScramSecretRequest_SecretArnList = BatchDisassociateScramSecretRequest.AddMember("SecretArnList", ___listOf__string, &smithytraits.JSONName{Name: "secretArnList"})
-
-	BatchDisassociateScramSecretResponse_ClusterArn = BatchDisassociateScramSecretResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	BatchDisassociateScramSecretResponse_UnprocessedScramSecrets = BatchDisassociateScramSecretResponse.AddMember("UnprocessedScramSecrets", ___listOfUnprocessedScramSecret, &smithytraits.JSONName{Name: "unprocessedScramSecrets"})
-
-	CreateChannelRequest_ChannelName = CreateChannelRequest.AddMember("ChannelName", ___string, &smithytraits.JSONName{Name: "channelName"})
-
-	CreateChannelRequest_ClusterArn = CreateChannelRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	CreateChannelRequest_EncryptionConfiguration = CreateChannelRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
-
-	CreateChannelRequest_IcebergDestinationConfiguration = CreateChannelRequest.AddMember("IcebergDestinationConfiguration", IcebergDestinationConfiguration, &smithytraits.JSONName{Name: "icebergDestinationConfiguration"})
-
-	CreateChannelRequest_S3DestinationConfiguration = CreateChannelRequest.AddMember("S3DestinationConfiguration", S3DestinationConfiguration, &smithytraits.JSONName{Name: "s3DestinationConfiguration"})
-
-	CreateChannelRequest_Tags = CreateChannelRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateChannelRequest_TopicConfigurationList = CreateChannelRequest.AddMember("TopicConfigurationList", ___listOfTopicConfiguration, &smithytraits.JSONName{Name: "topicConfigurationList"})
-
-	CreateChannelRequest_LoggingInfo = CreateChannelRequest.AddMember("LoggingInfo", ChannelLoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	CreateChannelResponse_ChannelArn = CreateChannelResponse.AddMember("ChannelArn", ___string, &smithytraits.JSONName{Name: "channelArn"})
-
-	CreateChannelResponse_ClusterOperationArn = CreateChannelResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	CreateClusterRequest_BrokerNodeGroupInfo = CreateClusterRequest.AddMember("BrokerNodeGroupInfo", BrokerNodeGroupInfo, &smithytraits.JSONName{Name: "brokerNodeGroupInfo"})
-
-	CreateClusterRequest_Rebalancing = CreateClusterRequest.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	CreateClusterRequest_ClientAuthentication = CreateClusterRequest.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	CreateClusterRequest_ClusterName = CreateClusterRequest.AddMember("ClusterName", ___stringMin1Max64, &smithytraits.JSONName{Name: "clusterName"})
-
-	CreateClusterRequest_ConfigurationInfo = CreateClusterRequest.AddMember("ConfigurationInfo", ConfigurationInfo, &smithytraits.JSONName{Name: "configurationInfo"})
-
-	CreateClusterRequest_EncryptionInfo = CreateClusterRequest.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	CreateClusterRequest_EnhancedMonitoring = CreateClusterRequest.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	CreateClusterRequest_OpenMonitoring = CreateClusterRequest.AddMember("OpenMonitoring", OpenMonitoringInfo, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	CreateClusterRequest_KafkaVersion = CreateClusterRequest.AddMember("KafkaVersion", ___stringMin1Max128, &smithytraits.JSONName{Name: "kafkaVersion"})
-
-	CreateClusterRequest_LoggingInfo = CreateClusterRequest.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	CreateClusterRequest_NumberOfBrokerNodes = CreateClusterRequest.AddMember("NumberOfBrokerNodes", ___integerMin1Max15, &smithytraits.JSONName{Name: "numberOfBrokerNodes"})
-
-	CreateClusterRequest_Tags = CreateClusterRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateClusterRequest_StorageMode = CreateClusterRequest.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	CreateClusterResponse_ClusterArn = CreateClusterResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	CreateClusterResponse_ClusterName = CreateClusterResponse.AddMember("ClusterName", ___string, &smithytraits.JSONName{Name: "clusterName"})
-
-	CreateClusterResponse_State = CreateClusterResponse.AddMember("State", ClusterState, &smithytraits.JSONName{Name: "state"})
-
-	CreateClusterV2Request_ClusterName = CreateClusterV2Request.AddMember("ClusterName", ___stringMin1Max64, &smithytraits.JSONName{Name: "clusterName"})
-
-	CreateClusterV2Request_Tags = CreateClusterV2Request.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateClusterV2Request_Provisioned = CreateClusterV2Request.AddMember("Provisioned", ProvisionedRequest, &smithytraits.JSONName{Name: "provisioned"})
-
-	CreateClusterV2Request_Serverless = CreateClusterV2Request.AddMember("Serverless", ServerlessRequest, &smithytraits.JSONName{Name: "serverless"})
-
-	CreateClusterV2Response_ClusterArn = CreateClusterV2Response.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	CreateClusterV2Response_ClusterName = CreateClusterV2Response.AddMember("ClusterName", ___string, &smithytraits.JSONName{Name: "clusterName"})
-
-	CreateClusterV2Response_State = CreateClusterV2Response.AddMember("State", ClusterState, &smithytraits.JSONName{Name: "state"})
-
-	CreateClusterV2Response_ClusterType = CreateClusterV2Response.AddMember("ClusterType", ClusterType, &smithytraits.JSONName{Name: "clusterType"})
-
-	CreateConfigurationRequest_Description = CreateConfigurationRequest.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	CreateConfigurationRequest_KafkaVersions = CreateConfigurationRequest.AddMember("KafkaVersions", ___listOf__string, &smithytraits.JSONName{Name: "kafkaVersions"})
-
-	CreateConfigurationRequest_Name = CreateConfigurationRequest.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	CreateConfigurationRequest_ServerProperties = CreateConfigurationRequest.AddMember("ServerProperties", ___blob, &smithytraits.JSONName{Name: "serverProperties"})
-
-	CreateConfigurationResponse_Arn = CreateConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	CreateConfigurationResponse_CreationTime = CreateConfigurationResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	CreateConfigurationResponse_LatestRevision = CreateConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	CreateConfigurationResponse_Name = CreateConfigurationResponse.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	CreateConfigurationResponse_State = CreateConfigurationResponse.AddMember("State", ConfigurationState, &smithytraits.JSONName{Name: "state"})
-
-	CreateReplicatorRequest_Description = CreateReplicatorRequest.AddMember("Description", ___stringMax1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateReplicatorRequest_KafkaClusters = CreateReplicatorRequest.AddMember("KafkaClusters", ___listOfKafkaCluster, &smithytraits.JSONName{Name: "kafkaClusters"})
-
-	CreateReplicatorRequest_ReplicationInfoList = CreateReplicatorRequest.AddMember("ReplicationInfoList", ___listOfReplicationInfo, &smithytraits.JSONName{Name: "replicationInfoList"})
-
-	CreateReplicatorRequest_ReplicatorName = CreateReplicatorRequest.AddMember("ReplicatorName", ___stringMin1Max128Pattern09AZaZ09AZaZ0, &smithytraits.JSONName{Name: "replicatorName"})
-
-	CreateReplicatorRequest_ServiceExecutionRoleArn = CreateReplicatorRequest.AddMember("ServiceExecutionRoleArn", ___string, &smithytraits.JSONName{Name: "serviceExecutionRoleArn"})
-
-	CreateReplicatorRequest_Tags = CreateReplicatorRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateReplicatorRequest_LogDelivery = CreateReplicatorRequest.AddMember("LogDelivery", LogDelivery, &smithytraits.JSONName{Name: "logDelivery"})
-
-	CreateReplicatorResponse_ReplicatorArn = CreateReplicatorResponse.AddMember("ReplicatorArn", ___string, &smithytraits.JSONName{Name: "replicatorArn"})
-
-	CreateReplicatorResponse_ReplicatorName = CreateReplicatorResponse.AddMember("ReplicatorName", ___string, &smithytraits.JSONName{Name: "replicatorName"})
-
-	CreateReplicatorResponse_ReplicatorState = CreateReplicatorResponse.AddMember("ReplicatorState", ReplicatorState, &smithytraits.JSONName{Name: "replicatorState"})
-
-	CreateTopicRequest_ClusterArn = CreateTopicRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	CreateTopicRequest_TopicName = CreateTopicRequest.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	CreateTopicRequest_PartitionCount = CreateTopicRequest.AddMember("PartitionCount", ___integerMin1, &smithytraits.JSONName{Name: "partitionCount"})
-
-	CreateTopicRequest_ReplicationFactor = CreateTopicRequest.AddMember("ReplicationFactor", ___integerMin1, &smithytraits.JSONName{Name: "replicationFactor"})
-
-	CreateTopicRequest_Configs = CreateTopicRequest.AddMember("Configs", ___string, &smithytraits.JSONName{Name: "configs"})
-
-	CreateTopicResponse_TopicArn = CreateTopicResponse.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	CreateTopicResponse_TopicName = CreateTopicResponse.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	CreateTopicResponse_Status = CreateTopicResponse.AddMember("Status", TopicState, &smithytraits.JSONName{Name: "status"})
-
-	CreateVpcConnectionRequest_TargetClusterArn = CreateVpcConnectionRequest.AddMember("TargetClusterArn", ___string, &smithytraits.JSONName{Name: "targetClusterArn"})
-
-	CreateVpcConnectionRequest_Authentication = CreateVpcConnectionRequest.AddMember("Authentication", ___string, &smithytraits.JSONName{Name: "authentication"})
-
-	CreateVpcConnectionRequest_VpcId = CreateVpcConnectionRequest.AddMember("VpcId", ___string, &smithytraits.JSONName{Name: "vpcId"})
-
-	CreateVpcConnectionRequest_ClientSubnets = CreateVpcConnectionRequest.AddMember("ClientSubnets", ___listOf__string, &smithytraits.JSONName{Name: "clientSubnets"})
-
-	CreateVpcConnectionRequest_SecurityGroups = CreateVpcConnectionRequest.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	CreateVpcConnectionRequest_Tags = CreateVpcConnectionRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVpcConnectionResponse_VpcConnectionArn = CreateVpcConnectionResponse.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	CreateVpcConnectionResponse_State = CreateVpcConnectionResponse.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
-
-	CreateVpcConnectionResponse_Authentication = CreateVpcConnectionResponse.AddMember("Authentication", ___string, &smithytraits.JSONName{Name: "authentication"})
-
-	CreateVpcConnectionResponse_VpcId = CreateVpcConnectionResponse.AddMember("VpcId", ___string, &smithytraits.JSONName{Name: "vpcId"})
-
-	CreateVpcConnectionResponse_ClientSubnets = CreateVpcConnectionResponse.AddMember("ClientSubnets", ___listOf__string, &smithytraits.JSONName{Name: "clientSubnets"})
-
-	CreateVpcConnectionResponse_SecurityGroups = CreateVpcConnectionResponse.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	CreateVpcConnectionResponse_CreationTime = CreateVpcConnectionResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	CreateVpcConnectionResponse_Tags = CreateVpcConnectionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DeleteChannelRequest_ChannelArn = DeleteChannelRequest.AddMember("ChannelArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteChannelRequest_ClusterArn = DeleteChannelRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteChannelResponse_ChannelArn = DeleteChannelResponse.AddMember("ChannelArn", ___string, &smithytraits.JSONName{Name: "channelArn"})
-
-	DeleteChannelResponse_ClusterOperationArn = DeleteChannelResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	DeleteClusterRequest_ClusterArn = DeleteClusterRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteClusterRequest_CurrentVersion = DeleteClusterRequest.AddMember("CurrentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	DeleteClusterResponse_ClusterArn = DeleteClusterResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	DeleteClusterResponse_State = DeleteClusterResponse.AddMember("State", ClusterState, &smithytraits.JSONName{Name: "state"})
-
-	DeleteClusterPolicyRequest_ClusterArn = DeleteClusterPolicyRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationRequest_Arn = DeleteConfigurationRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationResponse_Arn = DeleteConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	DeleteConfigurationResponse_State = DeleteConfigurationResponse.AddMember("State", ConfigurationState, &smithytraits.JSONName{Name: "state"})
-
-	DeleteReplicatorRequest_CurrentVersion = DeleteReplicatorRequest.AddMember("CurrentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	DeleteReplicatorRequest_ReplicatorArn = DeleteReplicatorRequest.AddMember("ReplicatorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteReplicatorResponse_ReplicatorArn = DeleteReplicatorResponse.AddMember("ReplicatorArn", ___string, &smithytraits.JSONName{Name: "replicatorArn"})
-
-	DeleteReplicatorResponse_ReplicatorState = DeleteReplicatorResponse.AddMember("ReplicatorState", ReplicatorState, &smithytraits.JSONName{Name: "replicatorState"})
-
-	DeleteTopicRequest_ClusterArn = DeleteTopicRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteTopicRequest_TopicName = DeleteTopicRequest.AddMember("TopicName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteTopicResponse_TopicArn = DeleteTopicResponse.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	DeleteTopicResponse_TopicName = DeleteTopicResponse.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	DeleteTopicResponse_Status = DeleteTopicResponse.AddMember("Status", TopicState, &smithytraits.JSONName{Name: "status"})
-
-	DeleteVpcConnectionRequest_Arn = DeleteVpcConnectionRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteVpcConnectionResponse_VpcConnectionArn = DeleteVpcConnectionResponse.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	DeleteVpcConnectionResponse_State = DeleteVpcConnectionResponse.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
-
-	DescribeChannelRequest_ChannelArn = DescribeChannelRequest.AddMember("ChannelArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeChannelRequest_ClusterArn = DescribeChannelRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeChannelResponse_ChannelArn = DescribeChannelResponse.AddMember("ChannelArn", ___string, &smithytraits.JSONName{Name: "channelArn"})
-
-	DescribeChannelResponse_ChannelName = DescribeChannelResponse.AddMember("ChannelName", ___string, &smithytraits.JSONName{Name: "channelName"})
-
-	DescribeChannelResponse_EncryptionConfiguration = DescribeChannelResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
-
-	DescribeChannelResponse_IcebergDestinationConfiguration = DescribeChannelResponse.AddMember("IcebergDestinationConfiguration", IcebergDestinationConfiguration, &smithytraits.JSONName{Name: "icebergDestinationConfiguration"})
-
-	DescribeChannelResponse_S3DestinationConfiguration = DescribeChannelResponse.AddMember("S3DestinationConfiguration", S3DestinationConfiguration, &smithytraits.JSONName{Name: "s3DestinationConfiguration"})
-
-	DescribeChannelResponse_Status = DescribeChannelResponse.AddMember("Status", ChannelStatus, &smithytraits.JSONName{Name: "status"})
-
-	DescribeChannelResponse_DestinationType = DescribeChannelResponse.AddMember("DestinationType", ChannelDestinationType, &smithytraits.JSONName{Name: "destinationType"})
-
-	DescribeChannelResponse_CreationTime = DescribeChannelResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	DescribeChannelResponse_TopicConfigurationList = DescribeChannelResponse.AddMember("TopicConfigurationList", ___listOfTopicConfiguration, &smithytraits.JSONName{Name: "topicConfigurationList"})
-
-	DescribeChannelResponse_LoggingInfo = DescribeChannelResponse.AddMember("LoggingInfo", ChannelLoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	DescribeChannelResponse_StateInfo = DescribeChannelResponse.AddMember("StateInfo", ChannelStateInfo, &smithytraits.JSONName{Name: "stateInfo"})
-
-	DescribeChannelResponse_ClusterOperationArn = DescribeChannelResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	DescribeChannelResponse_Tags = DescribeChannelResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeClusterRequest_ClusterArn = DescribeClusterRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeClusterOperationRequest_ClusterOperationArn = DescribeClusterOperationRequest.AddMember("ClusterOperationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeClusterOperationResponse_ClusterOperationInfo = DescribeClusterOperationResponse.AddMember("ClusterOperationInfo", ClusterOperationInfo, &smithytraits.JSONName{Name: "clusterOperationInfo"})
-
-	DescribeClusterOperationV2Request_ClusterOperationArn = DescribeClusterOperationV2Request.AddMember("ClusterOperationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeClusterOperationV2Response_ClusterOperationInfo = DescribeClusterOperationV2Response.AddMember("ClusterOperationInfo", ClusterOperationV2, &smithytraits.JSONName{Name: "clusterOperationInfo"})
-
-	DescribeClusterResponse_ClusterInfo = DescribeClusterResponse.AddMember("ClusterInfo", ClusterInfo, &smithytraits.JSONName{Name: "clusterInfo"})
-
-	DescribeClusterV2Request_ClusterArn = DescribeClusterV2Request.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeClusterV2Response_ClusterInfo = DescribeClusterV2Response.AddMember("ClusterInfo", Cluster, &smithytraits.JSONName{Name: "clusterInfo"})
-
-	DescribeConfigurationRequest_Arn = DescribeConfigurationRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationResponse_Arn = DescribeConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	DescribeConfigurationResponse_CreationTime = DescribeConfigurationResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	DescribeConfigurationResponse_Description = DescribeConfigurationResponse.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	DescribeConfigurationResponse_KafkaVersions = DescribeConfigurationResponse.AddMember("KafkaVersions", ___listOf__string, &smithytraits.JSONName{Name: "kafkaVersions"})
-
-	DescribeConfigurationResponse_LatestRevision = DescribeConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	DescribeConfigurationResponse_Name = DescribeConfigurationResponse.AddMember("Name", ___string, &smithytraits.JSONName{Name: "name"})
-
-	DescribeConfigurationResponse_State = DescribeConfigurationResponse.AddMember("State", ConfigurationState, &smithytraits.JSONName{Name: "state"})
-
-	DescribeConfigurationRevisionRequest_Arn = DescribeConfigurationRevisionRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationRevisionRequest_Revision = DescribeConfigurationRevisionRequest.AddMember("Revision", ___long, &smithytraits.HTTPLabel{})
-
-	DescribeConfigurationRevisionResponse_Arn = DescribeConfigurationRevisionResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	DescribeConfigurationRevisionResponse_CreationTime = DescribeConfigurationRevisionResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	DescribeConfigurationRevisionResponse_Description = DescribeConfigurationRevisionResponse.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	DescribeConfigurationRevisionResponse_Revision = DescribeConfigurationRevisionResponse.AddMember("Revision", ___long, &smithytraits.JSONName{Name: "revision"})
-
-	DescribeConfigurationRevisionResponse_ServerProperties = DescribeConfigurationRevisionResponse.AddMember("ServerProperties", ___blob, &smithytraits.JSONName{Name: "serverProperties"})
-
-	DescribeReplicatorRequest_ReplicatorArn = DescribeReplicatorRequest.AddMember("ReplicatorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeReplicatorResponse_CreationTime = DescribeReplicatorResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	DescribeReplicatorResponse_CurrentVersion = DescribeReplicatorResponse.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	DescribeReplicatorResponse_IsReplicatorReference = DescribeReplicatorResponse.AddMember("IsReplicatorReference", ___boolean, &smithytraits.JSONName{Name: "isReplicatorReference"})
-
-	DescribeReplicatorResponse_KafkaClusters = DescribeReplicatorResponse.AddMember("KafkaClusters", ___listOfKafkaClusterDescription, &smithytraits.JSONName{Name: "kafkaClusters"})
-
-	DescribeReplicatorResponse_ReplicationInfoList = DescribeReplicatorResponse.AddMember("ReplicationInfoList", ___listOfReplicationInfoDescription, &smithytraits.JSONName{Name: "replicationInfoList"})
-
-	DescribeReplicatorResponse_ReplicatorArn = DescribeReplicatorResponse.AddMember("ReplicatorArn", ___string, &smithytraits.JSONName{Name: "replicatorArn"})
-
-	DescribeReplicatorResponse_ReplicatorDescription = DescribeReplicatorResponse.AddMember("ReplicatorDescription", ___string, &smithytraits.JSONName{Name: "replicatorDescription"})
-
-	DescribeReplicatorResponse_ReplicatorName = DescribeReplicatorResponse.AddMember("ReplicatorName", ___string, &smithytraits.JSONName{Name: "replicatorName"})
-
-	DescribeReplicatorResponse_ReplicatorResourceArn = DescribeReplicatorResponse.AddMember("ReplicatorResourceArn", ___string, &smithytraits.JSONName{Name: "replicatorResourceArn"})
-
-	DescribeReplicatorResponse_ReplicatorState = DescribeReplicatorResponse.AddMember("ReplicatorState", ReplicatorState, &smithytraits.JSONName{Name: "replicatorState"})
-
-	DescribeReplicatorResponse_ServiceExecutionRoleArn = DescribeReplicatorResponse.AddMember("ServiceExecutionRoleArn", ___string, &smithytraits.JSONName{Name: "serviceExecutionRoleArn"})
-
-	DescribeReplicatorResponse_StateInfo = DescribeReplicatorResponse.AddMember("StateInfo", ReplicationStateInfo, &smithytraits.JSONName{Name: "stateInfo"})
-
-	DescribeReplicatorResponse_Tags = DescribeReplicatorResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeReplicatorResponse_LogDelivery = DescribeReplicatorResponse.AddMember("LogDelivery", LogDelivery, &smithytraits.JSONName{Name: "logDelivery"})
-
-	DescribeTopicRequest_ClusterArn = DescribeTopicRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeTopicRequest_TopicName = DescribeTopicRequest.AddMember("TopicName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeTopicResponse_TopicArn = DescribeTopicResponse.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	DescribeTopicResponse_TopicName = DescribeTopicResponse.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	DescribeTopicResponse_ReplicationFactor = DescribeTopicResponse.AddMember("ReplicationFactor", ___integer, &smithytraits.JSONName{Name: "replicationFactor"})
-
-	DescribeTopicResponse_PartitionCount = DescribeTopicResponse.AddMember("PartitionCount", ___integer, &smithytraits.JSONName{Name: "partitionCount"})
-
-	DescribeTopicResponse_Configs = DescribeTopicResponse.AddMember("Configs", ___string, &smithytraits.JSONName{Name: "configs"})
-
-	DescribeTopicResponse_Status = DescribeTopicResponse.AddMember("Status", TopicState, &smithytraits.JSONName{Name: "status"})
-
-	DescribeTopicPartitionsRequest_ClusterArn = DescribeTopicPartitionsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeTopicPartitionsRequest_TopicName = DescribeTopicPartitionsRequest.AddMember("TopicName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeTopicPartitionsRequest_MaxResults = DescribeTopicPartitionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeTopicPartitionsRequest_NextToken = DescribeTopicPartitionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeTopicPartitionsResponse_Partitions = DescribeTopicPartitionsResponse.AddMember("Partitions", ___listOfTopicPartitionInfo, &smithytraits.JSONName{Name: "partitions"})
-
-	DescribeTopicPartitionsResponse_NextToken = DescribeTopicPartitionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	DescribeVpcConnectionRequest_Arn = DescribeVpcConnectionRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeVpcConnectionResponse_VpcConnectionArn = DescribeVpcConnectionResponse.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	DescribeVpcConnectionResponse_TargetClusterArn = DescribeVpcConnectionResponse.AddMember("TargetClusterArn", ___string, &smithytraits.JSONName{Name: "targetClusterArn"})
-
-	DescribeVpcConnectionResponse_State = DescribeVpcConnectionResponse.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
-
-	DescribeVpcConnectionResponse_Authentication = DescribeVpcConnectionResponse.AddMember("Authentication", ___string, &smithytraits.JSONName{Name: "authentication"})
-
-	DescribeVpcConnectionResponse_VpcId = DescribeVpcConnectionResponse.AddMember("VpcId", ___string, &smithytraits.JSONName{Name: "vpcId"})
-
-	DescribeVpcConnectionResponse_Subnets = DescribeVpcConnectionResponse.AddMember("Subnets", ___listOf__string, &smithytraits.JSONName{Name: "subnets"})
-
-	DescribeVpcConnectionResponse_SecurityGroups = DescribeVpcConnectionResponse.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
-
-	DescribeVpcConnectionResponse_CreationTime = DescribeVpcConnectionResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
-
-	DescribeVpcConnectionResponse_Tags = DescribeVpcConnectionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	GetBootstrapBrokersRequest_ClusterArn = GetBootstrapBrokersRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerString = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerString", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerString"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringTls = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringTls", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringTls"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringSaslScram", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringSaslScram"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringSaslIam", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringSaslIam"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringPublicTls", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringPublicTls"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringPublicSaslScram", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringPublicSaslScram"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringPublicSaslIam", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringPublicSaslIam"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringVpcConnectivityTls", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivityTls"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringVpcConnectivitySaslScram", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivitySaslScram"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringVpcConnectivitySaslIam", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivitySaslIam"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6 = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringIpv6", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringIpv6"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6 = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringTlsIpv6", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringTlsIpv6"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6 = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringSaslScramIpv6", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringSaslScramIpv6"})
-
-	GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6 = GetBootstrapBrokersResponse.AddMember("BootstrapBrokerStringSaslIamIpv6", ___string, &smithytraits.JSONName{Name: "bootstrapBrokerStringSaslIamIpv6"})
-
-	GetClusterPolicyRequest_ClusterArn = GetClusterPolicyRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	GetClusterPolicyResponse_CurrentVersion = GetClusterPolicyResponse.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	GetClusterPolicyResponse_Policy = GetClusterPolicyResponse.AddMember("Policy", ___string, &smithytraits.JSONName{Name: "policy"})
-
-	GetCompatibleKafkaVersionsRequest_ClusterArn = GetCompatibleKafkaVersionsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPQuery{Name: "clusterArn"})
-
-	GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions = GetCompatibleKafkaVersionsResponse.AddMember("CompatibleKafkaVersions", ___listOfCompatibleKafkaVersion, &smithytraits.JSONName{Name: "compatibleKafkaVersions"})
-
-	ListChannelsRequest_ClusterArn = ListChannelsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListChannelsRequest_MaxResults = ListChannelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsRequest_NextToken = ListChannelsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsRequest_TopicNameFilter = ListChannelsRequest.AddMember("TopicNameFilter", ___string, &smithytraits.HTTPQuery{Name: "topicNameFilter"})
-
-	ListChannelsResponse_Channels = ListChannelsResponse.AddMember("Channels", ___listOfChannelInfo, &smithytraits.JSONName{Name: "channels"})
-
-	ListChannelsResponse_NextToken = ListChannelsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListClientVpcConnectionsRequest_ClusterArn = ListClientVpcConnectionsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListClientVpcConnectionsRequest_MaxResults = ListClientVpcConnectionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClientVpcConnectionsRequest_NextToken = ListClientVpcConnectionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClientVpcConnectionsResponse_ClientVpcConnections = ListClientVpcConnectionsResponse.AddMember("ClientVpcConnections", ___listOfClientVpcConnection, &smithytraits.JSONName{Name: "clientVpcConnections"})
-
-	ListClientVpcConnectionsResponse_NextToken = ListClientVpcConnectionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListClusterOperationsRequest_ClusterArn = ListClusterOperationsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListClusterOperationsRequest_MaxResults = ListClusterOperationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClusterOperationsRequest_NextToken = ListClusterOperationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClusterOperationsResponse_ClusterOperationInfoList = ListClusterOperationsResponse.AddMember("ClusterOperationInfoList", ___listOfClusterOperationInfo, &smithytraits.JSONName{Name: "clusterOperationInfoList"})
-
-	ListClusterOperationsResponse_NextToken = ListClusterOperationsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListClusterOperationsV2Request_ClusterArn = ListClusterOperationsV2Request.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListClusterOperationsV2Request_MaxResults = ListClusterOperationsV2Request.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClusterOperationsV2Request_NextToken = ListClusterOperationsV2Request.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClusterOperationsV2Response_ClusterOperationInfoList = ListClusterOperationsV2Response.AddMember("ClusterOperationInfoList", ___listOfClusterOperationV2Summary, &smithytraits.JSONName{Name: "clusterOperationInfoList"})
-
-	ListClusterOperationsV2Response_NextToken = ListClusterOperationsV2Response.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListClustersRequest_ClusterNameFilter = ListClustersRequest.AddMember("ClusterNameFilter", ___string, &smithytraits.HTTPQuery{Name: "clusterNameFilter"})
-
-	ListClustersRequest_MaxResults = ListClustersRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClustersRequest_NextToken = ListClustersRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClustersResponse_ClusterInfoList = ListClustersResponse.AddMember("ClusterInfoList", ___listOfClusterInfo, &smithytraits.JSONName{Name: "clusterInfoList"})
-
-	ListClustersResponse_NextToken = ListClustersResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListClustersV2Request_ClusterNameFilter = ListClustersV2Request.AddMember("ClusterNameFilter", ___string, &smithytraits.HTTPQuery{Name: "clusterNameFilter"})
-
-	ListClustersV2Request_ClusterTypeFilter = ListClustersV2Request.AddMember("ClusterTypeFilter", ___string, &smithytraits.HTTPQuery{Name: "clusterTypeFilter"})
-
-	ListClustersV2Request_MaxResults = ListClustersV2Request.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClustersV2Request_NextToken = ListClustersV2Request.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClustersV2Response_ClusterInfoList = ListClustersV2Response.AddMember("ClusterInfoList", ___listOfCluster, &smithytraits.JSONName{Name: "clusterInfoList"})
-
-	ListClustersV2Response_NextToken = ListClustersV2Response.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListConfigurationRevisionsRequest_Arn = ListConfigurationRevisionsRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	ListConfigurationRevisionsRequest_MaxResults = ListConfigurationRevisionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfigurationRevisionsRequest_NextToken = ListConfigurationRevisionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfigurationRevisionsResponse_NextToken = ListConfigurationRevisionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListConfigurationRevisionsResponse_Revisions = ListConfigurationRevisionsResponse.AddMember("Revisions", ___listOfConfigurationRevision, &smithytraits.JSONName{Name: "revisions"})
-
-	ListConfigurationsRequest_MaxResults = ListConfigurationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfigurationsRequest_NextToken = ListConfigurationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfigurationsResponse_Configurations = ListConfigurationsResponse.AddMember("Configurations", ___listOfConfiguration, &smithytraits.JSONName{Name: "configurations"})
-
-	ListConfigurationsResponse_NextToken = ListConfigurationsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListKafkaVersionsRequest_MaxResults = ListKafkaVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListKafkaVersionsRequest_NextToken = ListKafkaVersionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListKafkaVersionsResponse_KafkaVersions = ListKafkaVersionsResponse.AddMember("KafkaVersions", ___listOfKafkaVersion, &smithytraits.JSONName{Name: "kafkaVersions"})
-
-	ListKafkaVersionsResponse_NextToken = ListKafkaVersionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListNodesRequest_ClusterArn = ListNodesRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListNodesRequest_MaxResults = ListNodesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNodesRequest_NextToken = ListNodesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNodesResponse_NextToken = ListNodesResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListNodesResponse_NodeInfoList = ListNodesResponse.AddMember("NodeInfoList", ___listOfNodeInfo, &smithytraits.JSONName{Name: "nodeInfoList"})
-
-	ListReplicatorsRequest_MaxResults = ListReplicatorsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListReplicatorsRequest_NextToken = ListReplicatorsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListReplicatorsRequest_ReplicatorNameFilter = ListReplicatorsRequest.AddMember("ReplicatorNameFilter", ___string, &smithytraits.HTTPQuery{Name: "replicatorNameFilter"})
-
-	ListReplicatorsResponse_NextToken = ListReplicatorsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListReplicatorsResponse_Replicators = ListReplicatorsResponse.AddMember("Replicators", ___listOfReplicatorSummary, &smithytraits.JSONName{Name: "replicators"})
-
-	ListScramSecretsRequest_ClusterArn = ListScramSecretsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListScramSecretsRequest_MaxResults = ListScramSecretsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListScramSecretsRequest_NextToken = ListScramSecretsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListScramSecretsResponse_NextToken = ListScramSecretsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListScramSecretsResponse_SecretArnList = ListScramSecretsResponse.AddMember("SecretArnList", ___listOf__string, &smithytraits.JSONName{Name: "secretArnList"})
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	ListTopicsRequest_ClusterArn = ListTopicsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTopicsRequest_MaxResults = ListTopicsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTopicsRequest_NextToken = ListTopicsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTopicsRequest_TopicNameFilter = ListTopicsRequest.AddMember("TopicNameFilter", ___string, &smithytraits.HTTPQuery{Name: "topicNameFilter"})
-
-	ListTopicsResponse_Topics = ListTopicsResponse.AddMember("Topics", ___listOfTopicInfo, &smithytraits.JSONName{Name: "topics"})
-
-	ListTopicsResponse_NextToken = ListTopicsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListVpcConnectionsRequest_MaxResults = ListVpcConnectionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListVpcConnectionsRequest_NextToken = ListVpcConnectionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListVpcConnectionsResponse_VpcConnections = ListVpcConnectionsResponse.AddMember("VpcConnections", ___listOfVpcConnection, &smithytraits.JSONName{Name: "vpcConnections"})
-
-	ListVpcConnectionsResponse_NextToken = ListVpcConnectionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	PutClusterPolicyRequest_ClusterArn = PutClusterPolicyRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	PutClusterPolicyRequest_CurrentVersion = PutClusterPolicyRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	PutClusterPolicyRequest_Policy = PutClusterPolicyRequest.AddMember("Policy", ___string, &smithytraits.JSONName{Name: "policy"})
-
-	PutClusterPolicyResponse_CurrentVersion = PutClusterPolicyResponse.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	RebootBrokerRequest_BrokerIds = RebootBrokerRequest.AddMember("BrokerIds", ___listOf__string, &smithytraits.JSONName{Name: "brokerIds"})
-
-	RebootBrokerRequest_ClusterArn = RebootBrokerRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	RebootBrokerResponse_ClusterArn = RebootBrokerResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	RebootBrokerResponse_ClusterOperationArn = RebootBrokerResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	RejectClientVpcConnectionRequest_ClusterArn = RejectClientVpcConnectionRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	RejectClientVpcConnectionRequest_VpcConnectionArn = RejectClientVpcConnectionRequest.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateBrokerCountRequest_ClusterArn = UpdateBrokerCountRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBrokerCountRequest_CurrentVersion = UpdateBrokerCountRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateBrokerCountRequest_TargetNumberOfBrokerNodes = UpdateBrokerCountRequest.AddMember("TargetNumberOfBrokerNodes", ___integerMin1Max15, &smithytraits.JSONName{Name: "targetNumberOfBrokerNodes"})
-
-	UpdateBrokerCountResponse_ClusterArn = UpdateBrokerCountResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateBrokerCountResponse_ClusterOperationArn = UpdateBrokerCountResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateBrokerStorageRequest_ClusterArn = UpdateBrokerStorageRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBrokerStorageRequest_CurrentVersion = UpdateBrokerStorageRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo = UpdateBrokerStorageRequest.AddMember("TargetBrokerEBSVolumeInfo", ___listOfBrokerEBSVolumeInfo, &smithytraits.JSONName{Name: "targetBrokerEBSVolumeInfo"})
-
-	UpdateBrokerStorageResponse_ClusterArn = UpdateBrokerStorageResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateBrokerStorageResponse_ClusterOperationArn = UpdateBrokerStorageResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateBrokerTypeRequest_ClusterArn = UpdateBrokerTypeRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateBrokerTypeRequest_CurrentVersion = UpdateBrokerTypeRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateBrokerTypeRequest_TargetInstanceType = UpdateBrokerTypeRequest.AddMember("TargetInstanceType", ___string, &smithytraits.JSONName{Name: "targetInstanceType"})
-
-	UpdateBrokerTypeResponse_ClusterArn = UpdateBrokerTypeResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateBrokerTypeResponse_ClusterOperationArn = UpdateBrokerTypeResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateChannelRequest_ChannelArn = UpdateChannelRequest.AddMember("ChannelArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_ClusterArn = UpdateChannelRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_IcebergDestinationUpdate = UpdateChannelRequest.AddMember("IcebergDestinationUpdate", IcebergDestinationUpdate, &smithytraits.JSONName{Name: "icebergDestinationUpdate"})
-
-	UpdateChannelRequest_S3DestinationUpdate = UpdateChannelRequest.AddMember("S3DestinationUpdate", S3DestinationUpdate, &smithytraits.JSONName{Name: "s3DestinationUpdate"})
-
-	UpdateChannelResponse_ChannelArn = UpdateChannelResponse.AddMember("ChannelArn", ___string, &smithytraits.JSONName{Name: "channelArn"})
-
-	UpdateChannelResponse_ClusterOperationArn = UpdateChannelResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateClusterConfigurationRequest_ClusterArn = UpdateClusterConfigurationRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateClusterConfigurationRequest_ConfigurationInfo = UpdateClusterConfigurationRequest.AddMember("ConfigurationInfo", ConfigurationInfo, &smithytraits.JSONName{Name: "configurationInfo"})
-
-	UpdateClusterConfigurationRequest_CurrentVersion = UpdateClusterConfigurationRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateClusterConfigurationResponse_ClusterArn = UpdateClusterConfigurationResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateClusterConfigurationResponse_ClusterOperationArn = UpdateClusterConfigurationResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateClusterKafkaVersionRequest_ClusterArn = UpdateClusterKafkaVersionRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateClusterKafkaVersionRequest_ConfigurationInfo = UpdateClusterKafkaVersionRequest.AddMember("ConfigurationInfo", ConfigurationInfo, &smithytraits.JSONName{Name: "configurationInfo"})
-
-	UpdateClusterKafkaVersionRequest_CurrentVersion = UpdateClusterKafkaVersionRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateClusterKafkaVersionRequest_TargetKafkaVersion = UpdateClusterKafkaVersionRequest.AddMember("TargetKafkaVersion", ___string, &smithytraits.JSONName{Name: "targetKafkaVersion"})
-
-	UpdateClusterKafkaVersionResponse_ClusterArn = UpdateClusterKafkaVersionResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateClusterKafkaVersionResponse_ClusterOperationArn = UpdateClusterKafkaVersionResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateConfigurationRequest_Arn = UpdateConfigurationRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationRequest_Description = UpdateConfigurationRequest.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
-
-	UpdateConfigurationRequest_ServerProperties = UpdateConfigurationRequest.AddMember("ServerProperties", ___blob, &smithytraits.JSONName{Name: "serverProperties"})
-
-	UpdateConfigurationResponse_Arn = UpdateConfigurationResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
-
-	UpdateConfigurationResponse_LatestRevision = UpdateConfigurationResponse.AddMember("LatestRevision", ConfigurationRevision, &smithytraits.JSONName{Name: "latestRevision"})
-
-	UpdateConnectivityRequest_ClusterArn = UpdateConnectivityRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConnectivityRequest_ConnectivityInfo = UpdateConnectivityRequest.AddMember("ConnectivityInfo", ConnectivityInfo, &smithytraits.JSONName{Name: "connectivityInfo"})
-
-	UpdateConnectivityRequest_CurrentVersion = UpdateConnectivityRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateConnectivityRequest_ZookeeperAccess = UpdateConnectivityRequest.AddMember("ZookeeperAccess", ZookeeperAccess, &smithytraits.JSONName{Name: "zookeeperAccess"})
-
-	UpdateConnectivityResponse_ClusterArn = UpdateConnectivityResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateConnectivityResponse_ClusterOperationArn = UpdateConnectivityResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateMonitoringRequest_ClusterArn = UpdateMonitoringRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateMonitoringRequest_CurrentVersion = UpdateMonitoringRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateMonitoringRequest_EnhancedMonitoring = UpdateMonitoringRequest.AddMember("EnhancedMonitoring", EnhancedMonitoring, &smithytraits.JSONName{Name: "enhancedMonitoring"})
-
-	UpdateMonitoringRequest_OpenMonitoring = UpdateMonitoringRequest.AddMember("OpenMonitoring", OpenMonitoringInfo, &smithytraits.JSONName{Name: "openMonitoring"})
-
-	UpdateMonitoringRequest_LoggingInfo = UpdateMonitoringRequest.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
-
-	UpdateMonitoringResponse_ClusterArn = UpdateMonitoringResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateMonitoringResponse_ClusterOperationArn = UpdateMonitoringResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateRebalancingRequest_ClusterArn = UpdateRebalancingRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRebalancingRequest_CurrentVersion = UpdateRebalancingRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateRebalancingRequest_Rebalancing = UpdateRebalancingRequest.AddMember("Rebalancing", Rebalancing, &smithytraits.JSONName{Name: "rebalancing"})
-
-	UpdateRebalancingResponse_ClusterArn = UpdateRebalancingResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateRebalancingResponse_ClusterOperationArn = UpdateRebalancingResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateReplicationInfoRequest_ConsumerGroupReplication = UpdateReplicationInfoRequest.AddMember("ConsumerGroupReplication", ConsumerGroupReplicationUpdate, &smithytraits.JSONName{Name: "consumerGroupReplication"})
-
-	UpdateReplicationInfoRequest_CurrentVersion = UpdateReplicationInfoRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateReplicationInfoRequest_ReplicatorArn = UpdateReplicationInfoRequest.AddMember("ReplicatorArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateReplicationInfoRequest_SourceKafkaClusterArn = UpdateReplicationInfoRequest.AddMember("SourceKafkaClusterArn", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterArn"})
-
-	UpdateReplicationInfoRequest_SourceKafkaClusterId = UpdateReplicationInfoRequest.AddMember("SourceKafkaClusterId", ___string, &smithytraits.JSONName{Name: "sourceKafkaClusterId"})
-
-	UpdateReplicationInfoRequest_TargetKafkaClusterArn = UpdateReplicationInfoRequest.AddMember("TargetKafkaClusterArn", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterArn"})
-
-	UpdateReplicationInfoRequest_TargetKafkaClusterId = UpdateReplicationInfoRequest.AddMember("TargetKafkaClusterId", ___string, &smithytraits.JSONName{Name: "targetKafkaClusterId"})
-
-	UpdateReplicationInfoRequest_TopicReplication = UpdateReplicationInfoRequest.AddMember("TopicReplication", TopicReplicationUpdate, &smithytraits.JSONName{Name: "topicReplication"})
-
-	UpdateReplicationInfoRequest_LogDelivery = UpdateReplicationInfoRequest.AddMember("LogDelivery", LogDelivery, &smithytraits.JSONName{Name: "logDelivery"})
-
-	UpdateReplicationInfoResponse_ReplicatorArn = UpdateReplicationInfoResponse.AddMember("ReplicatorArn", ___string, &smithytraits.JSONName{Name: "replicatorArn"})
-
-	UpdateReplicationInfoResponse_ReplicatorState = UpdateReplicationInfoResponse.AddMember("ReplicatorState", ReplicatorState, &smithytraits.JSONName{Name: "replicatorState"})
-
-	UpdateSecurityRequest_ClientAuthentication = UpdateSecurityRequest.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
-
-	UpdateSecurityRequest_ClusterArn = UpdateSecurityRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateSecurityRequest_CurrentVersion = UpdateSecurityRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateSecurityRequest_EncryptionInfo = UpdateSecurityRequest.AddMember("EncryptionInfo", EncryptionInfo, &smithytraits.JSONName{Name: "encryptionInfo"})
-
-	UpdateSecurityResponse_ClusterArn = UpdateSecurityResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateSecurityResponse_ClusterOperationArn = UpdateSecurityResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateStorageRequest_ClusterArn = UpdateStorageRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateStorageRequest_CurrentVersion = UpdateStorageRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
-
-	UpdateStorageRequest_ProvisionedThroughput = UpdateStorageRequest.AddMember("ProvisionedThroughput", ProvisionedThroughput, &smithytraits.JSONName{Name: "provisionedThroughput"})
-
-	UpdateStorageRequest_StorageMode = UpdateStorageRequest.AddMember("StorageMode", StorageMode, &smithytraits.JSONName{Name: "storageMode"})
-
-	UpdateStorageRequest_VolumeSizeGB = UpdateStorageRequest.AddMember("VolumeSizeGB", ___integer, &smithytraits.JSONName{Name: "volumeSizeGB"})
-
-	UpdateStorageResponse_ClusterArn = UpdateStorageResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
-
-	UpdateStorageResponse_ClusterOperationArn = UpdateStorageResponse.AddMember("ClusterOperationArn", ___string, &smithytraits.JSONName{Name: "clusterOperationArn"})
-
-	UpdateTopicRequest_ClusterArn = UpdateTopicRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateTopicRequest_TopicName = UpdateTopicRequest.AddMember("TopicName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateTopicRequest_Configs = UpdateTopicRequest.AddMember("Configs", ___string, &smithytraits.JSONName{Name: "configs"})
-
-	UpdateTopicRequest_PartitionCount = UpdateTopicRequest.AddMember("PartitionCount", ___integer, &smithytraits.JSONName{Name: "partitionCount"})
-
-	UpdateTopicResponse_TopicArn = UpdateTopicResponse.AddMember("TopicArn", ___string, &smithytraits.JSONName{Name: "topicArn"})
-
-	UpdateTopicResponse_TopicName = UpdateTopicResponse.AddMember("TopicName", ___string, &smithytraits.JSONName{Name: "topicName"})
-
-	UpdateTopicResponse_Status = UpdateTopicResponse.AddMember("Status", TopicState, &smithytraits.JSONName{Name: "status"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mskClusterArn"}}, DirectMask: 0x1}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apacheKafkaClusterId"}}, DirectMask: 0x1}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerString"}}, DirectMask: 0x1}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cloudWatchLogs"}}, DirectMask: 0x1}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "firehose"}}, DirectMask: 0x1}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "s3"}}, DirectMask: 0x1}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "invalidParameter"}}, DirectMask: 0x1}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "createdBrokerIds"}}, DirectMask: 0x1}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deletedBrokerIds"}}, DirectMask: 0x1}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaBrokerNodeId"}}, DirectMask: 0x1}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "provisionedThroughput"}}, DirectMask: 0x1}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "volumeSizeGB"}}, DirectMask: 0x1}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerAZDistribution"}}, DirectMask: 0x1}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientSubnets"}}, DirectMask: 0x1}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "instanceType"}}, DirectMask: 0x1}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "securityGroups"}}, DirectMask: 0x1}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storageInfo"}}, DirectMask: 0x1}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "connectivityInfo"}}, DirectMask: 0x1}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zoneIds"}}, DirectMask: 0x1}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "attachedENIId"}}, DirectMask: 0x1}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerId"}}, DirectMask: 0x1}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientSubnet"}}, DirectMask: 0x1}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientVpcIpAddress"}}, DirectMask: 0x1}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "currentBrokerSoftwareInfo"}}, DirectMask: 0x1}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endpoints"}}, DirectMask: 0x1}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurationArn"}}, DirectMask: 0x1}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurationRevision"}}, DirectMask: 0x1}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaVersion"}}, DirectMask: 0x1}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "catalogArn"}}, DirectMask: 0x1}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "warehouseLocation"}}, DirectMask: 0x1}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "channelArn"}}, DirectMask: 0x1}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "channelName"}}, DirectMask: 0x1}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "status"}}, DirectMask: 0x1}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "creationTime"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "destinationType"}}, DirectMask: 0x1}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterOperationArn"}}, DirectMask: 0x1}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "code"}}, DirectMask: 0x1}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sasl"}}, DirectMask: 0x1}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tls"}}, DirectMask: 0x1}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "unauthenticated"}}, DirectMask: 0x1}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authentication"}}, DirectMask: 0x1}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "state"}}, DirectMask: 0x1}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConnectionArn"}}, DirectMask: 0x1}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "owner"}}, DirectMask: 0x1}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enabled"}}, DirectMask: 0x1}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "logGroup"}}, DirectMask: 0x1}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "activeOperationArn"}}, DirectMask: 0x1}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterType"}}, DirectMask: 0x1}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterArn"}}, DirectMask: 0x1}
+var t116 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterName"}}, DirectMask: 0x1}
+var t117 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "currentVersion"}}, DirectMask: 0x1}
+var t118 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stateInfo"}}, DirectMask: 0x1}
+var t119 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t120 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "provisioned"}}, DirectMask: 0x1}
+var t121 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serverless"}}, DirectMask: 0x1}
+var t122 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t123 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerNodeGroupInfo"}}, DirectMask: 0x1}
+var t124 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "rebalancing"}}, DirectMask: 0x1}
+var t125 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientAuthentication"}}, DirectMask: 0x1}
+var t126 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionInfo"}}, DirectMask: 0x1}
+var t127 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enhancedMonitoring"}}, DirectMask: 0x1}
+var t128 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "openMonitoring"}}, DirectMask: 0x1}
+var t129 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "loggingInfo"}}, DirectMask: 0x1}
+var t130 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "numberOfBrokerNodes"}}, DirectMask: 0x1}
+var t131 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperConnectString"}}, DirectMask: 0x1}
+var t132 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperConnectStringTls"}}, DirectMask: 0x1}
+var t133 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storageMode"}}, DirectMask: 0x1}
+var t134 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "customerActionStatus"}}, DirectMask: 0x1}
+var t135 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientRequestId"}}, DirectMask: 0x1}
+var t136 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endTime"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t137 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorInfo"}}, DirectMask: 0x1}
+var t138 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operationArn"}}, DirectMask: 0x1}
+var t139 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operationState"}}, DirectMask: 0x1}
+var t140 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operationSteps"}}, DirectMask: 0x1}
+var t141 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operationType"}}, DirectMask: 0x1}
+var t142 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceClusterInfo"}}, DirectMask: 0x1}
+var t143 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetClusterInfo"}}, DirectMask: 0x1}
+var t144 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConnectionInfo"}}, DirectMask: 0x1}
+var t145 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stepInfo"}}, DirectMask: 0x1}
+var t146 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stepName"}}, DirectMask: 0x1}
+var t147 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stepStatus"}}, DirectMask: 0x1}
+var t148 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "startTime"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t149 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceVersion"}}, DirectMask: 0x1}
+var t150 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetVersions"}}, DirectMask: 0x1}
+var t151 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "arn"}}, DirectMask: 0x1}
+var t152 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "description"}}, DirectMask: 0x1}
+var t153 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaVersions"}}, DirectMask: 0x1}
+var t154 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "latestRevision"}}, DirectMask: 0x1}
+var t155 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1}
+var t156 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "revision"}}, DirectMask: 0x1}
+var t157 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "publicAccess"}}, DirectMask: 0x1}
+var t158 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConnectivity"}}, DirectMask: 0x1}
+var t159 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "networkType"}}, DirectMask: 0x1}
+var t160 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consumerGroupsToExclude"}}, DirectMask: 0x1}
+var t161 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consumerGroupsToReplicate"}}, DirectMask: 0x1}
+var t162 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "detectAndCopyNewConsumerGroups"}}, DirectMask: 0x1}
+var t163 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "synchroniseConsumerGroupOffsets"}}, DirectMask: 0x1}
+var t164 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consumerGroupOffsetSyncMode"}}, DirectMask: 0x1}
+var t165 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bucketArn"}}, DirectMask: 0x1}
+var t166 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorOutputPrefix"}}, DirectMask: 0x1}
+var t167 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "expectedBucketOwner"}}, DirectMask: 0x1}
+var t168 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "destinationDatabaseName"}}, DirectMask: 0x1}
+var t169 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "destinationTableName"}}, DirectMask: 0x1}
+var t170 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "partitionSpec"}}, DirectMask: 0x1}
+var t171 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "volumeSize"}}, DirectMask: 0x1}
+var t172 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataVolumeKMSKeyId"}}, DirectMask: 0x1}
+var t173 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kmsKeyArn"}}, DirectMask: 0x1}
+var t174 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionAtRest"}}, DirectMask: 0x1}
+var t175 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionInTransit"}}, DirectMask: 0x1}
+var t176 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientBroker"}}, DirectMask: 0x1}
+var t177 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "inCluster"}}, DirectMask: 0x1}
+var t178 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorCode"}}, DirectMask: 0x1}
+var t179 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorString"}}, DirectMask: 0x1}
+var t180 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deliveryStream"}}, DirectMask: 0x1}
+var t181 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t182 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "appendOnly"}}, DirectMask: 0x1}
+var t183 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "catalog"}}, DirectMask: 0x1}
+var t184 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataFreshnessInSeconds"}}, DirectMask: 0x1}
+var t185 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deadLetterQueueS3"}}, DirectMask: 0x1}
+var t186 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "destinationTableList"}}, DirectMask: 0x1}
+var t187 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "schemaEvolution"}}, DirectMask: 0x1}
+var t188 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serviceExecutionRoleArn"}}, DirectMask: 0x1}
+var t189 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tableCreation"}}, DirectMask: 0x1}
+var t190 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "compressionType"}}, DirectMask: 0x1}
+var t191 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t192 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enabledInBroker"}}, DirectMask: 0x1}
+var t193 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "amazonMskCluster"}}, DirectMask: 0x1}
+var t194 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apacheKafkaCluster"}}, DirectMask: 0x1}
+var t195 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConfig"}}, DirectMask: 0x1}
+var t196 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "saslScram"}}, DirectMask: 0x1}
+var t197 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mTLS"}}, DirectMask: 0x1}
+var t198 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "saslOAuthBearer"}}, DirectMask: 0x1}
+var t199 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "securityGroupIds"}}, DirectMask: 0x1}
+var t200 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "subnetIds"}}, DirectMask: 0x1}
+var t201 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaClusterAlias"}}, DirectMask: 0x1}
+var t202 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionType"}}, DirectMask: 0x1}
+var t203 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "rootCaCertificate"}}, DirectMask: 0x1}
+var t204 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "secretArn"}}, DirectMask: 0x1}
+var t205 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tokenRequestSecretArn"}}, DirectMask: 0x1}
+var t206 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "audience"}}, DirectMask: 0x1}
+var t207 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "signingAlgorithm"}}, DirectMask: 0x1}
+var t208 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tokenEndpointUrl"}}, DirectMask: 0x1}
+var t209 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientCredentials"}}, DirectMask: 0x1}
+var t210 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "iamJwtBearer"}}, DirectMask: 0x1}
+var t211 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientCredentialsAssertion"}}, DirectMask: 0x1}
+var t212 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tokenEndpointAuthenticationMethod"}}, DirectMask: 0x1}
+var t213 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "scope"}}, DirectMask: 0x1}
+var t214 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tokenEndpointTlsCertificateArn"}}, DirectMask: 0x1}
+var t215 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mechanism"}}, DirectMask: 0x1}
+var t216 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "version"}}, DirectMask: 0x1}
+var t217 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorLogDelivery"}}, DirectMask: 0x1}
+var t218 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerLogs"}}, DirectMask: 0x1}
+var t219 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerLogs"}}, DirectMask: 0x1}
+var t220 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerEBSVolumeInfo"}}, DirectMask: 0x1}
+var t221 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurationInfo"}}, DirectMask: 0x1}
+var t222 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperAccess"}}, DirectMask: 0x1}
+var t223 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerCountUpdateInfo"}}, DirectMask: 0x1}
+var t224 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "addedToClusterTime"}}, DirectMask: 0x1}
+var t225 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerNodeInfo"}}, DirectMask: 0x1}
+var t226 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "controllerNodeInfo"}}, DirectMask: 0x1}
+var t227 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nodeARN"}}, DirectMask: 0x1}
+var t228 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nodeType"}}, DirectMask: 0x1}
+var t229 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperNodeInfo"}}, DirectMask: 0x1}
+var t230 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t231 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "prometheus"}}, DirectMask: 0x1}
+var t232 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceName"}}, DirectMask: 0x1}
+var t233 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "partitionStrategy"}}, DirectMask: 0x1}
+var t234 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceList"}}, DirectMask: 0x1}
+var t235 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "jmxExporter"}}, DirectMask: 0x1}
+var t236 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nodeExporter"}}, DirectMask: 0x1}
+var t237 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "volumeThroughput"}}, DirectMask: 0x1}
+var t238 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "type"}}, DirectMask: 0x1}
+var t239 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "valueConverter"}}, DirectMask: 0x1}
+var t240 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "gsrArn"}}, DirectMask: 0x1}
+var t241 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "consumerGroupReplication"}}, DirectMask: 0x1}
+var t242 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceKafkaClusterArn"}}, DirectMask: 0x1}
+var t243 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceKafkaClusterId"}}, DirectMask: 0x1}
+var t244 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetCompressionType"}}, DirectMask: 0x1}
+var t245 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetKafkaClusterArn"}}, DirectMask: 0x1}
+var t246 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetKafkaClusterId"}}, DirectMask: 0x1}
+var t247 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicReplication"}}, DirectMask: 0x1}
+var t248 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceKafkaClusterAlias"}}, DirectMask: 0x1}
+var t249 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetKafkaClusterAlias"}}, DirectMask: 0x1}
+var t250 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bucket"}}, DirectMask: 0x1}
+var t251 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "prefix"}}, DirectMask: 0x1}
+var t252 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "isReplicatorReference"}}, DirectMask: 0x1}
+var t253 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaClustersSummary"}}, DirectMask: 0x1}
+var t254 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicationInfoSummaryList"}}, DirectMask: 0x1}
+var t255 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorArn"}}, DirectMask: 0x1}
+var t256 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorName"}}, DirectMask: 0x1}
+var t257 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorResourceArn"}}, DirectMask: 0x1}
+var t258 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorState"}}, DirectMask: 0x1}
+var t259 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storage"}}, DirectMask: 0x1}
+var t260 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "outputPrefix"}}, DirectMask: 0x1}
+var t261 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "outputKeyTemplate"}}, DirectMask: 0x1}
+var t262 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "storageClass"}}, DirectMask: 0x1}
+var t263 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "scram"}}, DirectMask: 0x1}
+var t264 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "iam"}}, DirectMask: 0x1}
+var t265 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enableSchemaEvolution"}}, DirectMask: 0x1}
+var t266 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConfigs"}}, DirectMask: 0x1}
+var t267 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t268 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ebsStorageInfo"}}, DirectMask: 0x1}
+var t269 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enableTableCreation"}}, DirectMask: 0x1}
+var t270 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "certificateAuthorityArnList"}}, DirectMask: 0x1}
+var t271 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t272 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recordConverter"}}, DirectMask: 0x1}
+var t273 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "recordSchema"}}, DirectMask: 0x1}
+var t274 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicArn"}}, DirectMask: 0x1}
+var t275 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicName"}}, DirectMask: 0x1}
+var t276 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicationFactor"}}, DirectMask: 0x1}
+var t277 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "partitionCount"}}, DirectMask: 0x1}
+var t278 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "outOfSyncReplicaCount"}}, DirectMask: 0x1}
+var t279 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "partition"}}, DirectMask: 0x1}
+var t280 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "leader"}}, DirectMask: 0x1}
+var t281 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicas"}}, DirectMask: 0x1}
+var t282 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "isr"}}, DirectMask: 0x1}
+var t283 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "copyAccessControlListsForTopics"}}, DirectMask: 0x1}
+var t284 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "copyTopicConfigurations"}}, DirectMask: 0x1}
+var t285 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "detectAndCopyNewTopics"}}, DirectMask: 0x1}
+var t286 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "startingPosition"}}, DirectMask: 0x1}
+var t287 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicNameConfiguration"}}, DirectMask: 0x1}
+var t288 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicsToExclude"}}, DirectMask: 0x1}
+var t289 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicsToReplicate"}}, DirectMask: 0x1}
+var t290 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t291 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorMessage"}}, DirectMask: 0x1}
+var t292 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "principalId"}}, DirectMask: 0x1}
+var t293 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetClusterArn"}}, DirectMask: 0x1}
+var t294 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcId"}}, DirectMask: 0x1}
+var t295 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userIdentity"}}, DirectMask: 0x1}
+var t296 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperId"}}, DirectMask: 0x1}
+var t297 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "zookeeperVersion"}}, DirectMask: 0x1}
+var t298 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t299 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "secretArnList"}}, DirectMask: 0x1}
+var t300 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "unprocessedScramSecrets"}}, DirectMask: 0x1}
+var t301 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "encryptionConfiguration"}}, DirectMask: 0x1}
+var t302 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "icebergDestinationConfiguration"}}, DirectMask: 0x1}
+var t303 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "s3DestinationConfiguration"}}, DirectMask: 0x1}
+var t304 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topicConfigurationList"}}, DirectMask: 0x1}
+var t305 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serverProperties"}}, DirectMask: 0x1}
+var t306 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "kafkaClusters"}}, DirectMask: 0x1}
+var t307 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicationInfoList"}}, DirectMask: 0x1}
+var t308 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "logDelivery"}}, DirectMask: 0x1}
+var t309 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configs"}}, DirectMask: 0x1}
+var t310 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "currentVersion"}}, DirectMask: 0x10}
+var t311 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterOperationInfo"}}, DirectMask: 0x1}
+var t312 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterInfo"}}, DirectMask: 0x1}
+var t313 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicatorDescription"}}, DirectMask: 0x1}
+var t314 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t315 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t316 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "partitions"}}, DirectMask: 0x1}
+var t317 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nextToken"}}, DirectMask: 0x1}
+var t318 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "subnets"}}, DirectMask: 0x1}
+var t319 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringTls"}}, DirectMask: 0x1}
+var t320 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringSaslScram"}}, DirectMask: 0x1}
+var t321 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringSaslIam"}}, DirectMask: 0x1}
+var t322 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringPublicTls"}}, DirectMask: 0x1}
+var t323 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringPublicSaslScram"}}, DirectMask: 0x1}
+var t324 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringPublicSaslIam"}}, DirectMask: 0x1}
+var t325 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivityTls"}}, DirectMask: 0x1}
+var t326 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivitySaslScram"}}, DirectMask: 0x1}
+var t327 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringVpcConnectivitySaslIam"}}, DirectMask: 0x1}
+var t328 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringIpv6"}}, DirectMask: 0x1}
+var t329 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringTlsIpv6"}}, DirectMask: 0x1}
+var t330 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringSaslScramIpv6"}}, DirectMask: 0x1}
+var t331 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "bootstrapBrokerStringSaslIamIpv6"}}, DirectMask: 0x1}
+var t332 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "policy"}}, DirectMask: 0x1}
+var t333 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clusterArn"}}, DirectMask: 0x10}
+var t334 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "compatibleKafkaVersions"}}, DirectMask: 0x1}
+var t335 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "topicNameFilter"}}, DirectMask: 0x10}
+var t336 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "channels"}}, DirectMask: 0x1}
+var t337 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientVpcConnections"}}, DirectMask: 0x1}
+var t338 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterOperationInfoList"}}, DirectMask: 0x1}
+var t339 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clusterNameFilter"}}, DirectMask: 0x10}
+var t340 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clusterInfoList"}}, DirectMask: 0x1}
+var t341 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clusterTypeFilter"}}, DirectMask: 0x10}
+var t342 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "revisions"}}, DirectMask: 0x1}
+var t343 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "configurations"}}, DirectMask: 0x1}
+var t344 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nodeInfoList"}}, DirectMask: 0x1}
+var t345 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "replicatorNameFilter"}}, DirectMask: 0x10}
+var t346 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "replicators"}}, DirectMask: 0x1}
+var t347 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "topics"}}, DirectMask: 0x1}
+var t348 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcConnections"}}, DirectMask: 0x1}
+var t349 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "brokerIds"}}, DirectMask: 0x1}
+var t350 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+var t351 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetNumberOfBrokerNodes"}}, DirectMask: 0x1}
+var t352 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetBrokerEBSVolumeInfo"}}, DirectMask: 0x1}
+var t353 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetInstanceType"}}, DirectMask: 0x1}
+var t354 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "icebergDestinationUpdate"}}, DirectMask: 0x1}
+var t355 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "s3DestinationUpdate"}}, DirectMask: 0x1}
+var t356 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "targetKafkaVersion"}}, DirectMask: 0x1}
+
+var m___listOf__double = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__double_member}}
+var m___listOf__integer = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__integer_member}}
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOf__stringMax249 = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__stringMax249_member}}
+var m___listOf__stringMax256 = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__stringMax256_member}}
+var m___listOfBrokerEBSVolumeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfBrokerEBSVolumeInfo_member}}
+var m___listOfChannelInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfChannelInfo_member}}
+var m___listOfClientVpcConnection = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfClientVpcConnection_member}}
+var m___listOfCluster = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfCluster_member}}
+var m___listOfClusterInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfClusterInfo_member}}
+var m___listOfClusterOperationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfClusterOperationInfo_member}}
+var m___listOfClusterOperationStep = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfClusterOperationStep_member}}
+var m___listOfClusterOperationV2Summary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfClusterOperationV2Summary_member}}
+var m___listOfCompatibleKafkaVersion = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfCompatibleKafkaVersion_member}}
+var m___listOfConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConfiguration_member}}
+var m___listOfConfigurationRevision = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfConfigurationRevision_member}}
+var m___listOfDestinationTable = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfDestinationTable_member}}
+var m___listOfKafkaCluster = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfKafkaCluster_member}}
+var m___listOfKafkaClusterDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfKafkaClusterDescription_member}}
+var m___listOfKafkaClusterSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfKafkaClusterSummary_member}}
+var m___listOfKafkaVersion = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfKafkaVersion_member}}
+var m___listOfNodeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfNodeInfo_member}}
+var m___listOfPartitionSource = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPartitionSource_member}}
+var m___listOfReplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReplicationInfo_member}}
+var m___listOfReplicationInfoDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReplicationInfoDescription_member}}
+var m___listOfReplicationInfoSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReplicationInfoSummary_member}}
+var m___listOfReplicatorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfReplicatorSummary_member}}
+var m___listOfTopicConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfTopicConfiguration_member}}
+var m___listOfTopicInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfTopicInfo_member}}
+var m___listOfTopicPartitionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfTopicPartitionInfo_member}}
+var m___listOfUnprocessedScramSecret = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfUnprocessedScramSecret_member}}
+var m___listOfVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfVpcConfig_member}}
+var m___listOfVpcConnection = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfVpcConnection_member}}
+var m___mapOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___mapOf__string_key, &s___mapOf__string_value}}
+var mAmazonMskCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonMskCluster_MskClusterArn}}
+var mApacheKafkaCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sApacheKafkaCluster_ApacheKafkaClusterId, &sApacheKafkaCluster_BootstrapBrokerString}}
+var mAuthorizerLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizerLogs_CloudWatchLogs, &sAuthorizerLogs_Firehose, &sAuthorizerLogs_S3}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_InvalidParameter, &sBadRequestException_Message}}
+var mBrokerAZDistribution = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerAZDistribution_DEFAULT}}
+var mBrokerCountUpdateInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerCountUpdateInfo_CreatedBrokerIds, &sBrokerCountUpdateInfo_DeletedBrokerIds}}
+var mBrokerEBSVolumeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerEBSVolumeInfo_KafkaBrokerNodeId, &sBrokerEBSVolumeInfo_ProvisionedThroughput, &sBrokerEBSVolumeInfo_VolumeSizeGB}}
+var mBrokerLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerLogs_CloudWatchLogs, &sBrokerLogs_Firehose, &sBrokerLogs_S3}}
+var mBrokerNodeGroupInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerNodeGroupInfo_BrokerAZDistribution, &sBrokerNodeGroupInfo_ClientSubnets, &sBrokerNodeGroupInfo_InstanceType, &sBrokerNodeGroupInfo_SecurityGroups, &sBrokerNodeGroupInfo_StorageInfo, &sBrokerNodeGroupInfo_ConnectivityInfo, &sBrokerNodeGroupInfo_ZoneIds}}
+var mBrokerNodeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerNodeInfo_AttachedENIId, &sBrokerNodeInfo_BrokerId, &sBrokerNodeInfo_ClientSubnet, &sBrokerNodeInfo_ClientVpcIpAddress, &sBrokerNodeInfo_CurrentBrokerSoftwareInfo, &sBrokerNodeInfo_Endpoints}}
+var mBrokerSoftwareInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sBrokerSoftwareInfo_ConfigurationArn, &sBrokerSoftwareInfo_ConfigurationRevision, &sBrokerSoftwareInfo_KafkaVersion}}
+var mCatalog = smithy.SchemaMembers{List: []*smithy.Schema{&sCatalog_CatalogArn, &sCatalog_WarehouseLocation}}
+var mChannelDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelDestinationType_ICEBERG, &sChannelDestinationType_S3}}
+var mChannelInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelInfo_ChannelArn, &sChannelInfo_ChannelName, &sChannelInfo_Status, &sChannelInfo_CreationTime, &sChannelInfo_DestinationType, &sChannelInfo_ClusterOperationArn}}
+var mChannelLoggingInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelLoggingInfo_CloudWatchLogs, &sChannelLoggingInfo_Firehose, &sChannelLoggingInfo_S3}}
+var mChannelStateInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStateInfo_Code, &sChannelStateInfo_Message}}
+var mChannelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStatus_CREATING, &sChannelStatus_ACTIVE, &sChannelStatus_UPDATING, &sChannelStatus_DELETING, &sChannelStatus_FAILED, &sChannelStatus_SUSPENDING, &sChannelStatus_SUSPENDED}}
+var mClientAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sClientAuthentication_Sasl, &sClientAuthentication_Tls, &sClientAuthentication_Unauthenticated}}
+var mClientBroker = smithy.SchemaMembers{List: []*smithy.Schema{&sClientBroker_TLS, &sClientBroker_TLS_PLAINTEXT, &sClientBroker_PLAINTEXT}}
+var mClientVpcConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sClientVpcConnection_Authentication, &sClientVpcConnection_CreationTime, &sClientVpcConnection_State, &sClientVpcConnection_VpcConnectionArn, &sClientVpcConnection_Owner}}
+var mCloudWatchLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogs_Enabled, &sCloudWatchLogs_LogGroup}}
+var mCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sCluster_ActiveOperationArn, &sCluster_ClusterType, &sCluster_ClusterArn, &sCluster_ClusterName, &sCluster_CreationTime, &sCluster_CurrentVersion, &sCluster_State, &sCluster_StateInfo, &sCluster_Tags, &sCluster_Provisioned, &sCluster_Serverless}, Hash: &hCluster}
+var mClusterConnectivityException = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterConnectivityException_InvalidParameter, &sClusterConnectivityException_Message}}
+var mClusterInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterInfo_ActiveOperationArn, &sClusterInfo_BrokerNodeGroupInfo, &sClusterInfo_Rebalancing, &sClusterInfo_ClientAuthentication, &sClusterInfo_ClusterArn, &sClusterInfo_ClusterName, &sClusterInfo_CreationTime, &sClusterInfo_CurrentBrokerSoftwareInfo, &sClusterInfo_CurrentVersion, &sClusterInfo_EncryptionInfo, &sClusterInfo_EnhancedMonitoring, &sClusterInfo_OpenMonitoring, &sClusterInfo_LoggingInfo, &sClusterInfo_NumberOfBrokerNodes, &sClusterInfo_State, &sClusterInfo_StateInfo, &sClusterInfo_Tags, &sClusterInfo_ZookeeperConnectString, &sClusterInfo_ZookeeperConnectStringTls, &sClusterInfo_StorageMode, &sClusterInfo_CustomerActionStatus}, Hash: &hClusterInfo}
+var mClusterOperationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationInfo_ClientRequestId, &sClusterOperationInfo_ClusterArn, &sClusterOperationInfo_CreationTime, &sClusterOperationInfo_EndTime, &sClusterOperationInfo_ErrorInfo, &sClusterOperationInfo_OperationArn, &sClusterOperationInfo_OperationState, &sClusterOperationInfo_OperationSteps, &sClusterOperationInfo_OperationType, &sClusterOperationInfo_SourceClusterInfo, &sClusterOperationInfo_TargetClusterInfo, &sClusterOperationInfo_VpcConnectionInfo}, Hash: &hClusterOperationInfo}
+var mClusterOperationStep = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationStep_StepInfo, &sClusterOperationStep_StepName}}
+var mClusterOperationStepInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationStepInfo_StepStatus}}
+var mClusterOperationV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationV2_ClusterArn, &sClusterOperationV2_ClusterType, &sClusterOperationV2_StartTime, &sClusterOperationV2_EndTime, &sClusterOperationV2_ErrorInfo, &sClusterOperationV2_OperationArn, &sClusterOperationV2_OperationState, &sClusterOperationV2_OperationType, &sClusterOperationV2_Provisioned, &sClusterOperationV2_Serverless}, Hash: &hClusterOperationV2}
+var mClusterOperationV2Provisioned = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationV2Provisioned_OperationSteps, &sClusterOperationV2Provisioned_SourceClusterInfo, &sClusterOperationV2Provisioned_TargetClusterInfo, &sClusterOperationV2Provisioned_VpcConnectionInfo}}
+var mClusterOperationV2Serverless = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationV2Serverless_SourceClusterInfo, &sClusterOperationV2Serverless_TargetClusterInfo, &sClusterOperationV2Serverless_VpcConnectionInfo}}
+var mClusterOperationV2Summary = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterOperationV2Summary_ClusterArn, &sClusterOperationV2Summary_ClusterType, &sClusterOperationV2Summary_StartTime, &sClusterOperationV2Summary_EndTime, &sClusterOperationV2Summary_OperationArn, &sClusterOperationV2Summary_OperationState, &sClusterOperationV2Summary_OperationType}}
+var mClusterState = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterState_ACTIVE, &sClusterState_CREATING, &sClusterState_DELETING, &sClusterState_FAILED, &sClusterState_HEALING, &sClusterState_MAINTENANCE, &sClusterState_REBOOTING_BROKER, &sClusterState_UPDATING}}
+var mClusterType = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterType_PROVISIONED, &sClusterType_SERVERLESS}}
+var mCompatibleKafkaVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibleKafkaVersion_SourceVersion, &sCompatibleKafkaVersion_TargetVersions}}
+var mConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguration_Arn, &sConfiguration_CreationTime, &sConfiguration_Description, &sConfiguration_KafkaVersions, &sConfiguration_LatestRevision, &sConfiguration_Name, &sConfiguration_State}}
+var mConfigurationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationInfo_Arn, &sConfigurationInfo_Revision}}
+var mConfigurationRevision = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationRevision_CreationTime, &sConfigurationRevision_Description, &sConfigurationRevision_Revision}}
+var mConfigurationState = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationState_ACTIVE, &sConfigurationState_DELETING, &sConfigurationState_DELETE_FAILED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_InvalidParameter, &sConflictException_Message}}
+var mConnectivityInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectivityInfo_PublicAccess, &sConnectivityInfo_VpcConnectivity, &sConnectivityInfo_NetworkType}}
+var mConsumerGroupOffsetSyncMode = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumerGroupOffsetSyncMode_LEGACY, &sConsumerGroupOffsetSyncMode_ENHANCED}}
+var mConsumerGroupReplication = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumerGroupReplication_ConsumerGroupsToExclude, &sConsumerGroupReplication_ConsumerGroupsToReplicate, &sConsumerGroupReplication_DetectAndCopyNewConsumerGroups, &sConsumerGroupReplication_SynchroniseConsumerGroupOffsets, &sConsumerGroupReplication_ConsumerGroupOffsetSyncMode}}
+var mConsumerGroupReplicationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumerGroupReplicationUpdate_ConsumerGroupsToExclude, &sConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate, &sConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups, &sConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets}}
+var mControllerMovedException = smithy.SchemaMembers{List: []*smithy.Schema{&sControllerMovedException_InvalidParameter, &sControllerMovedException_Message}}
+var mControllerNodeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sControllerNodeInfo_Endpoints}}
+var mCustomerActionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerActionStatus_CRITICAL_ACTION_REQUIRED, &sCustomerActionStatus_ACTION_RECOMMENDED, &sCustomerActionStatus_NONE}}
+var mDeadLetterQueueS3 = smithy.SchemaMembers{List: []*smithy.Schema{&sDeadLetterQueueS3_BucketArn, &sDeadLetterQueueS3_ErrorOutputPrefix, &sDeadLetterQueueS3_ExpectedBucketOwner}}
+var mDestinationTable = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationTable_DestinationDatabaseName, &sDestinationTable_DestinationTableName, &sDestinationTable_PartitionSpec}}
+var mEBSStorageInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sEBSStorageInfo_ProvisionedThroughput, &sEBSStorageInfo_VolumeSize}}
+var mEncryptionAtRest = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAtRest_DataVolumeKMSKeyId}}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_KmsKeyArn}}
+var mEncryptionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionInfo_EncryptionAtRest, &sEncryptionInfo_EncryptionInTransit}}
+var mEncryptionInTransit = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionInTransit_ClientBroker, &sEncryptionInTransit_InCluster}}
+var mEnhancedMonitoring = smithy.SchemaMembers{List: []*smithy.Schema{&sEnhancedMonitoring_DEFAULT, &sEnhancedMonitoring_PER_BROKER, &sEnhancedMonitoring_PER_TOPIC_PER_BROKER, &sEnhancedMonitoring_PER_TOPIC_PER_PARTITION}}
+var mErrorInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorInfo_ErrorCode, &sErrorInfo_ErrorString}}
+var mFirehose = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehose_DeliveryStream, &sFirehose_Enabled}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_InvalidParameter, &sForbiddenException_Message}}
+var mGroupSubscribedToTopicException = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupSubscribedToTopicException_InvalidParameter, &sGroupSubscribedToTopicException_Message}}
+var mIam = smithy.SchemaMembers{List: []*smithy.Schema{&sIam_Enabled}}
+var mIcebergCompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergCompressionType_ZSTD, &sIcebergCompressionType_SNAPPY}}
+var mIcebergDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationConfiguration_AppendOnly, &sIcebergDestinationConfiguration_Catalog, &sIcebergDestinationConfiguration_DataFreshnessInSeconds, &sIcebergDestinationConfiguration_DeadLetterQueueS3, &sIcebergDestinationConfiguration_DestinationTableList, &sIcebergDestinationConfiguration_SchemaEvolution, &sIcebergDestinationConfiguration_ServiceExecutionRoleArn, &sIcebergDestinationConfiguration_TableCreation, &sIcebergDestinationConfiguration_CompressionType}, Hash: &hIcebergDestinationConfiguration}
+var mIcebergDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationUpdate_DataFreshnessInSeconds}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_InvalidParameter, &sInternalServerErrorException_Message}}
+var mJmxExporter = smithy.SchemaMembers{List: []*smithy.Schema{&sJmxExporter_EnabledInBroker}}
+var mJmxExporterInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sJmxExporterInfo_EnabledInBroker}}
+var mJwtSigningAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sJwtSigningAlgorithm_RS256, &sJwtSigningAlgorithm_ES384}}
+var mKafkaCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaCluster_AmazonMskCluster, &sKafkaCluster_ApacheKafkaCluster, &sKafkaCluster_VpcConfig, &sKafkaCluster_ClientAuthentication, &sKafkaCluster_EncryptionInTransit}}
+var mKafkaClusterClientAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterClientAuthentication_SaslScram, &sKafkaClusterClientAuthentication_MTLS, &sKafkaClusterClientAuthentication_SaslOAuthBearer}}
+var mKafkaClusterClientVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterClientVpcConfig_SecurityGroupIds, &sKafkaClusterClientVpcConfig_SubnetIds}}
+var mKafkaClusterDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterDescription_AmazonMskCluster, &sKafkaClusterDescription_ApacheKafkaCluster, &sKafkaClusterDescription_KafkaClusterAlias, &sKafkaClusterDescription_VpcConfig, &sKafkaClusterDescription_ClientAuthentication, &sKafkaClusterDescription_EncryptionInTransit}}
+var mKafkaClusterEncryptionInTransit = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterEncryptionInTransit_EncryptionType, &sKafkaClusterEncryptionInTransit_RootCaCertificate}}
+var mKafkaClusterEncryptionInTransitType = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterEncryptionInTransitType_TLS}}
+var mKafkaClusterMTLSAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterMTLSAuthentication_SecretArn}}
+var mKafkaClusterOAuthClientCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterOAuthClientCredentials_TokenRequestSecretArn}}
+var mKafkaClusterOAuthClientCredentialsAssertion = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterOAuthClientCredentialsAssertion_Audience, &sKafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm, &sKafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn}}
+var mKafkaClusterOAuthIamJwtBearer = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterOAuthIamJwtBearer_Audience, &sKafkaClusterOAuthIamJwtBearer_SigningAlgorithm, &sKafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn}}
+var mKafkaClusterSaslOAuthBearerAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl, &sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentials, &sKafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer, &sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion, &sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod, &sKafkaClusterSaslOAuthBearerAuthentication_Scope, &sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn}}
+var mKafkaClusterSaslScramAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterSaslScramAuthentication_Mechanism, &sKafkaClusterSaslScramAuthentication_SecretArn}}
+var mKafkaClusterSaslScramMechanism = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterSaslScramMechanism_SHA256, &sKafkaClusterSaslScramMechanism_SHA512}}
+var mKafkaClusterSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaClusterSummary_AmazonMskCluster, &sKafkaClusterSummary_ApacheKafkaCluster, &sKafkaClusterSummary_KafkaClusterAlias}}
+var mKafkaRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaRequestException_InvalidParameter, &sKafkaRequestException_Message}}
+var mKafkaTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaTimeoutException_InvalidParameter, &sKafkaTimeoutException_Message}}
+var mKafkaVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaVersion_Version, &sKafkaVersion_Status}}
+var mKafkaVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sKafkaVersionStatus_ACTIVE, &sKafkaVersionStatus_DEPRECATED}}
+var mLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sLogDelivery_ReplicatorLogDelivery}}
+var mLoggingInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingInfo_AuthorizerLogs, &sLoggingInfo_BrokerLogs}}
+var mMutableClusterInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMutableClusterInfo_BrokerEBSVolumeInfo, &sMutableClusterInfo_ConfigurationInfo, &sMutableClusterInfo_NumberOfBrokerNodes, &sMutableClusterInfo_EnhancedMonitoring, &sMutableClusterInfo_OpenMonitoring, &sMutableClusterInfo_ZookeeperAccess, &sMutableClusterInfo_KafkaVersion, &sMutableClusterInfo_LoggingInfo, &sMutableClusterInfo_InstanceType, &sMutableClusterInfo_ClientAuthentication, &sMutableClusterInfo_EncryptionInfo, &sMutableClusterInfo_ConnectivityInfo, &sMutableClusterInfo_StorageMode, &sMutableClusterInfo_BrokerCountUpdateInfo, &sMutableClusterInfo_Rebalancing}, Hash: &hMutableClusterInfo}
+var mNetworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkType_IPV4, &sNetworkType_DUAL}}
+var mNodeExporter = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeExporter_EnabledInBroker}}
+var mNodeExporterInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeExporterInfo_EnabledInBroker}}
+var mNodeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeInfo_AddedToClusterTime, &sNodeInfo_BrokerNodeInfo, &sNodeInfo_ControllerNodeInfo, &sNodeInfo_InstanceType, &sNodeInfo_NodeARN, &sNodeInfo_NodeType, &sNodeInfo_ZookeeperNodeInfo}}
+var mNodeType = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeType_BROKER}}
+var mNotControllerException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotControllerException_InvalidParameter, &sNotControllerException_Message}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_InvalidParameter, &sNotFoundException_Message}}
+var mOpenMonitoring = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenMonitoring_Prometheus}}
+var mOpenMonitoringInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenMonitoringInfo_Prometheus}}
+var mPartitionSource = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionSource_SourceName}}
+var mPartitionSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionSpec_PartitionStrategy, &sPartitionSpec_SourceList}}
+var mPartitionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionStrategy_TIME_HOUR}}
+var mPrometheus = smithy.SchemaMembers{List: []*smithy.Schema{&sPrometheus_JmxExporter, &sPrometheus_NodeExporter}}
+var mPrometheusInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPrometheusInfo_JmxExporter, &sPrometheusInfo_NodeExporter}}
+var mProvisioned = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisioned_BrokerNodeGroupInfo, &sProvisioned_Rebalancing, &sProvisioned_CurrentBrokerSoftwareInfo, &sProvisioned_ClientAuthentication, &sProvisioned_EncryptionInfo, &sProvisioned_EnhancedMonitoring, &sProvisioned_OpenMonitoring, &sProvisioned_LoggingInfo, &sProvisioned_NumberOfBrokerNodes, &sProvisioned_ZookeeperConnectString, &sProvisioned_ZookeeperConnectStringTls, &sProvisioned_StorageMode, &sProvisioned_CustomerActionStatus}, Hash: &hProvisioned}
+var mProvisionedRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedRequest_BrokerNodeGroupInfo, &sProvisionedRequest_Rebalancing, &sProvisionedRequest_ClientAuthentication, &sProvisionedRequest_ConfigurationInfo, &sProvisionedRequest_EncryptionInfo, &sProvisionedRequest_EnhancedMonitoring, &sProvisionedRequest_OpenMonitoring, &sProvisionedRequest_KafkaVersion, &sProvisionedRequest_LoggingInfo, &sProvisionedRequest_NumberOfBrokerNodes, &sProvisionedRequest_StorageMode}, Hash: &hProvisionedRequest}
+var mProvisionedThroughput = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedThroughput_Enabled, &sProvisionedThroughput_VolumeThroughput}}
+var mPublicAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicAccess_Type}}
+var mReassignmentInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sReassignmentInProgressException_InvalidParameter, &sReassignmentInProgressException_Message}}
+var mRebalancing = smithy.SchemaMembers{List: []*smithy.Schema{&sRebalancing_Status}}
+var mRebalancingStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRebalancingStatus_PAUSED, &sRebalancingStatus_ACTIVE}}
+var mRecordConverter = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordConverter_ValueConverter}}
+var mRecordSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordSchema_GsrArn}}
+var mReplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationInfo_ConsumerGroupReplication, &sReplicationInfo_SourceKafkaClusterArn, &sReplicationInfo_SourceKafkaClusterId, &sReplicationInfo_TargetCompressionType, &sReplicationInfo_TargetKafkaClusterArn, &sReplicationInfo_TargetKafkaClusterId, &sReplicationInfo_TopicReplication}}
+var mReplicationInfoDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationInfoDescription_ConsumerGroupReplication, &sReplicationInfoDescription_SourceKafkaClusterAlias, &sReplicationInfoDescription_TargetCompressionType, &sReplicationInfoDescription_TargetKafkaClusterAlias, &sReplicationInfoDescription_TopicReplication}}
+var mReplicationInfoSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationInfoSummary_SourceKafkaClusterAlias, &sReplicationInfoSummary_TargetKafkaClusterAlias}}
+var mReplicationStartingPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStartingPosition_Type}}
+var mReplicationStartingPositionType = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStartingPositionType_LATEST, &sReplicationStartingPositionType_EARLIEST}}
+var mReplicationStateInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStateInfo_Code, &sReplicationStateInfo_Message}}
+var mReplicationTopicNameConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationTopicNameConfiguration_Type}}
+var mReplicationTopicNameConfigurationType = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS, &sReplicationTopicNameConfigurationType_IDENTICAL}}
+var mReplicatorCloudWatchLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorCloudWatchLogs_Enabled, &sReplicatorCloudWatchLogs_LogGroup}}
+var mReplicatorFirehose = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorFirehose_Enabled, &sReplicatorFirehose_DeliveryStream}}
+var mReplicatorLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorLogDelivery_CloudWatchLogs, &sReplicatorLogDelivery_Firehose, &sReplicatorLogDelivery_S3}}
+var mReplicatorS3 = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorS3_Enabled, &sReplicatorS3_Bucket, &sReplicatorS3_Prefix}}
+var mReplicatorState = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorState_RUNNING, &sReplicatorState_CREATING, &sReplicatorState_UPDATING, &sReplicatorState_DELETING, &sReplicatorState_FAILED}}
+var mReplicatorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicatorSummary_CreationTime, &sReplicatorSummary_CurrentVersion, &sReplicatorSummary_IsReplicatorReference, &sReplicatorSummary_KafkaClustersSummary, &sReplicatorSummary_ReplicationInfoSummaryList, &sReplicatorSummary_ReplicatorArn, &sReplicatorSummary_ReplicatorName, &sReplicatorSummary_ReplicatorResourceArn, &sReplicatorSummary_ReplicatorState}, Hash: &hReplicatorSummary}
+var mS3 = smithy.SchemaMembers{List: []*smithy.Schema{&sS3_Bucket, &sS3_Enabled, &sS3_Prefix}}
+var mS3CompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3CompressionType_NONE, &sS3CompressionType_GZIP, &sS3CompressionType_ZSTD}}
+var mS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationConfiguration_DataFreshnessInSeconds, &sS3DestinationConfiguration_DeadLetterQueueS3, &sS3DestinationConfiguration_ServiceExecutionRoleArn, &sS3DestinationConfiguration_Storage}}
+var mS3DestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationUpdate_DataFreshnessInSeconds}}
+var mS3Storage = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Storage_BucketArn, &sS3Storage_CompressionType, &sS3Storage_OutputPrefix, &sS3Storage_OutputKeyTemplate, &sS3Storage_StorageClass, &sS3Storage_ExpectedBucketOwner}}
+var mS3StorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sS3StorageClass_STANDARD, &sS3StorageClass_INTELLIGENT_TIERING, &sS3StorageClass_GLACIER_IR}}
+var mSasl = smithy.SchemaMembers{List: []*smithy.Schema{&sSasl_Scram, &sSasl_Iam}}
+var mSchemaEvolution = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaEvolution_EnableSchemaEvolution}}
+var mScram = smithy.SchemaMembers{List: []*smithy.Schema{&sScram_Enabled}}
+var mServerless = smithy.SchemaMembers{List: []*smithy.Schema{&sServerless_VpcConfigs, &sServerless_ClientAuthentication, &sServerless_ConnectivityInfo}}
+var mServerlessClientAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessClientAuthentication_Sasl}}
+var mServerlessConnectivityInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessConnectivityInfo_NetworkType}}
+var mServerlessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessRequest_VpcConfigs, &sServerlessRequest_ClientAuthentication}}
+var mServerlessSasl = smithy.SchemaMembers{List: []*smithy.Schema{&sServerlessSasl_Iam}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_InvalidParameter, &sServiceUnavailableException_Message}}
+var mStateInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sStateInfo_Code, &sStateInfo_Message}}
+var mStorageInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageInfo_EbsStorageInfo}}
+var mStorageMode = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageMode_LOCAL, &sStorageMode_TIERED}}
+var mTableCreation = smithy.SchemaMembers{List: []*smithy.Schema{&sTableCreation_EnableTableCreation}}
+var mTargetCompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetCompressionType_NONE, &sTargetCompressionType_GZIP, &sTargetCompressionType_SNAPPY, &sTargetCompressionType_LZ4, &sTargetCompressionType_ZSTD}}
+var mTls = smithy.SchemaMembers{List: []*smithy.Schema{&sTls_CertificateAuthorityArnList, &sTls_Enabled}}
+var mTokenEndpointAuthenticationMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sTokenEndpointAuthenticationMethod_POST, &sTokenEndpointAuthenticationMethod_BASIC, &sTokenEndpointAuthenticationMethod_NONE}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_InvalidParameter, &sTooManyRequestsException_Message}}
+var mTopicConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicConfiguration_RecordConverter, &sTopicConfiguration_RecordSchema, &sTopicConfiguration_TopicArn}}
+var mTopicExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicExistsException_InvalidParameter, &sTopicExistsException_Message}}
+var mTopicInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicInfo_TopicArn, &sTopicInfo_TopicName, &sTopicInfo_ReplicationFactor, &sTopicInfo_PartitionCount, &sTopicInfo_OutOfSyncReplicaCount}}
+var mTopicPartitionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicPartitionInfo_Partition, &sTopicPartitionInfo_Leader, &sTopicPartitionInfo_Replicas, &sTopicPartitionInfo_Isr}}
+var mTopicReplication = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicReplication_CopyAccessControlListsForTopics, &sTopicReplication_CopyTopicConfigurations, &sTopicReplication_DetectAndCopyNewTopics, &sTopicReplication_StartingPosition, &sTopicReplication_TopicNameConfiguration, &sTopicReplication_TopicsToExclude, &sTopicReplication_TopicsToReplicate}}
+var mTopicReplicationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicReplicationUpdate_CopyAccessControlListsForTopics, &sTopicReplicationUpdate_CopyTopicConfigurations, &sTopicReplicationUpdate_DetectAndCopyNewTopics, &sTopicReplicationUpdate_TopicsToExclude, &sTopicReplicationUpdate_TopicsToReplicate}}
+var mTopicState = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicState_CREATING, &sTopicState_UPDATING, &sTopicState_DELETING, &sTopicState_ACTIVE}}
+var mUnauthenticated = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthenticated_Enabled}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_InvalidParameter, &sUnauthorizedException_Message}}
+var mUnknownTopicOrPartitionException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnknownTopicOrPartitionException_InvalidParameter, &sUnknownTopicOrPartitionException_Message}}
+var mUnprocessedScramSecret = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedScramSecret_ErrorCode, &sUnprocessedScramSecret_ErrorMessage, &sUnprocessedScramSecret_SecretArn}}
+var mUserIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sUserIdentity_Type, &sUserIdentity_PrincipalId}}
+var mUserIdentityType = smithy.SchemaMembers{List: []*smithy.Schema{&sUserIdentityType_AWSACCOUNT, &sUserIdentityType_AWSSERVICE}}
+var mValueConverter = smithy.SchemaMembers{List: []*smithy.Schema{&sValueConverter_BYTE_ARRAY, &sValueConverter_JSON, &sValueConverter_JSON_SCHEMA_GSR, &sValueConverter_STRING}}
+var mVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfig_SubnetIds, &sVpcConfig_SecurityGroupIds}}
+var mVpcConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnection_VpcConnectionArn, &sVpcConnection_TargetClusterArn, &sVpcConnection_CreationTime, &sVpcConnection_Authentication, &sVpcConnection_VpcId, &sVpcConnection_State}}
+var mVpcConnectionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectionInfo_VpcConnectionArn, &sVpcConnectionInfo_Owner, &sVpcConnectionInfo_UserIdentity, &sVpcConnectionInfo_CreationTime}}
+var mVpcConnectionInfoServerless = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectionInfoServerless_CreationTime, &sVpcConnectionInfoServerless_Owner, &sVpcConnectionInfoServerless_UserIdentity, &sVpcConnectionInfoServerless_VpcConnectionArn}}
+var mVpcConnectionState = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectionState_CREATING, &sVpcConnectionState_AVAILABLE, &sVpcConnectionState_INACTIVE, &sVpcConnectionState_DEACTIVATING, &sVpcConnectionState_DELETING, &sVpcConnectionState_FAILED, &sVpcConnectionState_REJECTED, &sVpcConnectionState_REJECTING}}
+var mVpcConnectivity = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivity_ClientAuthentication}}
+var mVpcConnectivityClientAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivityClientAuthentication_Sasl, &sVpcConnectivityClientAuthentication_Tls}}
+var mVpcConnectivityIam = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivityIam_Enabled}}
+var mVpcConnectivitySasl = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivitySasl_Scram, &sVpcConnectivitySasl_Iam}}
+var mVpcConnectivityScram = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivityScram_Enabled}}
+var mVpcConnectivityTls = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectivityTls_Enabled}}
+var mZookeeperAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sZookeeperAccess_Enabled}}
+var mZookeeperNodeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sZookeeperNodeInfo_AttachedENIId, &sZookeeperNodeInfo_ClientVpcIpAddress, &sZookeeperNodeInfo_Endpoints, &sZookeeperNodeInfo_ZookeeperId, &sZookeeperNodeInfo_ZookeeperVersion}}
+var mBatchAssociateScramSecretRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateScramSecretRequest_ClusterArn, &sBatchAssociateScramSecretRequest_SecretArnList}}
+var mBatchAssociateScramSecretResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateScramSecretResponse_ClusterArn, &sBatchAssociateScramSecretResponse_UnprocessedScramSecrets}}
+var mBatchDisassociateScramSecretRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateScramSecretRequest_ClusterArn, &sBatchDisassociateScramSecretRequest_SecretArnList}}
+var mBatchDisassociateScramSecretResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateScramSecretResponse_ClusterArn, &sBatchDisassociateScramSecretResponse_UnprocessedScramSecrets}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_ChannelName, &sCreateChannelRequest_ClusterArn, &sCreateChannelRequest_EncryptionConfiguration, &sCreateChannelRequest_IcebergDestinationConfiguration, &sCreateChannelRequest_S3DestinationConfiguration, &sCreateChannelRequest_Tags, &sCreateChannelRequest_TopicConfigurationList, &sCreateChannelRequest_LoggingInfo}}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_ChannelArn, &sCreateChannelResponse_ClusterOperationArn}}
+var mCreateClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterRequest_BrokerNodeGroupInfo, &sCreateClusterRequest_Rebalancing, &sCreateClusterRequest_ClientAuthentication, &sCreateClusterRequest_ClusterName, &sCreateClusterRequest_ConfigurationInfo, &sCreateClusterRequest_EncryptionInfo, &sCreateClusterRequest_EnhancedMonitoring, &sCreateClusterRequest_OpenMonitoring, &sCreateClusterRequest_KafkaVersion, &sCreateClusterRequest_LoggingInfo, &sCreateClusterRequest_NumberOfBrokerNodes, &sCreateClusterRequest_Tags, &sCreateClusterRequest_StorageMode}, Hash: &hCreateClusterRequest}
+var mCreateClusterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterResponse_ClusterArn, &sCreateClusterResponse_ClusterName, &sCreateClusterResponse_State}}
+var mCreateClusterV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterV2Request_ClusterName, &sCreateClusterV2Request_Tags, &sCreateClusterV2Request_Provisioned, &sCreateClusterV2Request_Serverless}}
+var mCreateClusterV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterV2Response_ClusterArn, &sCreateClusterV2Response_ClusterName, &sCreateClusterV2Response_State, &sCreateClusterV2Response_ClusterType}}
+var mCreateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationRequest_Description, &sCreateConfigurationRequest_KafkaVersions, &sCreateConfigurationRequest_Name, &sCreateConfigurationRequest_ServerProperties}}
+var mCreateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationResponse_Arn, &sCreateConfigurationResponse_CreationTime, &sCreateConfigurationResponse_LatestRevision, &sCreateConfigurationResponse_Name, &sCreateConfigurationResponse_State}}
+var mCreateReplicatorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReplicatorRequest_Description, &sCreateReplicatorRequest_KafkaClusters, &sCreateReplicatorRequest_ReplicationInfoList, &sCreateReplicatorRequest_ReplicatorName, &sCreateReplicatorRequest_ServiceExecutionRoleArn, &sCreateReplicatorRequest_Tags, &sCreateReplicatorRequest_LogDelivery}}
+var mCreateReplicatorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateReplicatorResponse_ReplicatorArn, &sCreateReplicatorResponse_ReplicatorName, &sCreateReplicatorResponse_ReplicatorState}}
+var mCreateTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTopicRequest_ClusterArn, &sCreateTopicRequest_TopicName, &sCreateTopicRequest_PartitionCount, &sCreateTopicRequest_ReplicationFactor, &sCreateTopicRequest_Configs}}
+var mCreateTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTopicResponse_TopicArn, &sCreateTopicResponse_TopicName, &sCreateTopicResponse_Status}}
+var mCreateVpcConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcConnectionRequest_TargetClusterArn, &sCreateVpcConnectionRequest_Authentication, &sCreateVpcConnectionRequest_VpcId, &sCreateVpcConnectionRequest_ClientSubnets, &sCreateVpcConnectionRequest_SecurityGroups, &sCreateVpcConnectionRequest_Tags}}
+var mCreateVpcConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcConnectionResponse_VpcConnectionArn, &sCreateVpcConnectionResponse_State, &sCreateVpcConnectionResponse_Authentication, &sCreateVpcConnectionResponse_VpcId, &sCreateVpcConnectionResponse_ClientSubnets, &sCreateVpcConnectionResponse_SecurityGroups, &sCreateVpcConnectionResponse_CreationTime, &sCreateVpcConnectionResponse_Tags}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_ChannelArn, &sDeleteChannelRequest_ClusterArn}}
+var mDeleteChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelResponse_ChannelArn, &sDeleteChannelResponse_ClusterOperationArn}}
+var mDeleteClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterRequest_ClusterArn, &sDeleteClusterRequest_CurrentVersion}}
+var mDeleteClusterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterResponse_ClusterArn, &sDeleteClusterResponse_State}}
+var mDeleteClusterPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterPolicyRequest_ClusterArn}}
+var mDeleteConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationRequest_Arn}}
+var mDeleteConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationResponse_Arn, &sDeleteConfigurationResponse_State}}
+var mDeleteReplicatorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReplicatorRequest_CurrentVersion, &sDeleteReplicatorRequest_ReplicatorArn}}
+var mDeleteReplicatorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteReplicatorResponse_ReplicatorArn, &sDeleteReplicatorResponse_ReplicatorState}}
+var mDeleteTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTopicRequest_ClusterArn, &sDeleteTopicRequest_TopicName}}
+var mDeleteTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTopicResponse_TopicArn, &sDeleteTopicResponse_TopicName, &sDeleteTopicResponse_Status}}
+var mDeleteVpcConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcConnectionRequest_Arn}}
+var mDeleteVpcConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcConnectionResponse_VpcConnectionArn, &sDeleteVpcConnectionResponse_State}}
+var mDescribeChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelRequest_ChannelArn, &sDescribeChannelRequest_ClusterArn}}
+var mDescribeChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelResponse_ChannelArn, &sDescribeChannelResponse_ChannelName, &sDescribeChannelResponse_EncryptionConfiguration, &sDescribeChannelResponse_IcebergDestinationConfiguration, &sDescribeChannelResponse_S3DestinationConfiguration, &sDescribeChannelResponse_Status, &sDescribeChannelResponse_DestinationType, &sDescribeChannelResponse_CreationTime, &sDescribeChannelResponse_TopicConfigurationList, &sDescribeChannelResponse_LoggingInfo, &sDescribeChannelResponse_StateInfo, &sDescribeChannelResponse_ClusterOperationArn, &sDescribeChannelResponse_Tags}, Hash: &hDescribeChannelResponse}
+var mDescribeClusterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterRequest_ClusterArn}}
+var mDescribeClusterOperationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterOperationRequest_ClusterOperationArn}}
+var mDescribeClusterOperationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterOperationResponse_ClusterOperationInfo}}
+var mDescribeClusterOperationV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterOperationV2Request_ClusterOperationArn}}
+var mDescribeClusterOperationV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterOperationV2Response_ClusterOperationInfo}}
+var mDescribeClusterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterResponse_ClusterInfo}}
+var mDescribeClusterV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterV2Request_ClusterArn}}
+var mDescribeClusterV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClusterV2Response_ClusterInfo}}
+var mDescribeConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRequest_Arn}}
+var mDescribeConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationResponse_Arn, &sDescribeConfigurationResponse_CreationTime, &sDescribeConfigurationResponse_Description, &sDescribeConfigurationResponse_KafkaVersions, &sDescribeConfigurationResponse_LatestRevision, &sDescribeConfigurationResponse_Name, &sDescribeConfigurationResponse_State}}
+var mDescribeConfigurationRevisionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRevisionRequest_Arn, &sDescribeConfigurationRevisionRequest_Revision}}
+var mDescribeConfigurationRevisionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConfigurationRevisionResponse_Arn, &sDescribeConfigurationRevisionResponse_CreationTime, &sDescribeConfigurationRevisionResponse_Description, &sDescribeConfigurationRevisionResponse_Revision, &sDescribeConfigurationRevisionResponse_ServerProperties}}
+var mDescribeReplicatorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplicatorRequest_ReplicatorArn}}
+var mDescribeReplicatorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplicatorResponse_CreationTime, &sDescribeReplicatorResponse_CurrentVersion, &sDescribeReplicatorResponse_IsReplicatorReference, &sDescribeReplicatorResponse_KafkaClusters, &sDescribeReplicatorResponse_ReplicationInfoList, &sDescribeReplicatorResponse_ReplicatorArn, &sDescribeReplicatorResponse_ReplicatorDescription, &sDescribeReplicatorResponse_ReplicatorName, &sDescribeReplicatorResponse_ReplicatorResourceArn, &sDescribeReplicatorResponse_ReplicatorState, &sDescribeReplicatorResponse_ServiceExecutionRoleArn, &sDescribeReplicatorResponse_StateInfo, &sDescribeReplicatorResponse_Tags, &sDescribeReplicatorResponse_LogDelivery}, Hash: &hDescribeReplicatorResponse}
+var mDescribeTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTopicRequest_ClusterArn, &sDescribeTopicRequest_TopicName}}
+var mDescribeTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTopicResponse_TopicArn, &sDescribeTopicResponse_TopicName, &sDescribeTopicResponse_ReplicationFactor, &sDescribeTopicResponse_PartitionCount, &sDescribeTopicResponse_Configs, &sDescribeTopicResponse_Status}}
+var mDescribeTopicPartitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTopicPartitionsRequest_ClusterArn, &sDescribeTopicPartitionsRequest_TopicName, &sDescribeTopicPartitionsRequest_MaxResults, &sDescribeTopicPartitionsRequest_NextToken}}
+var mDescribeTopicPartitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTopicPartitionsResponse_Partitions, &sDescribeTopicPartitionsResponse_NextToken}}
+var mDescribeVpcConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcConnectionRequest_Arn}}
+var mDescribeVpcConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcConnectionResponse_VpcConnectionArn, &sDescribeVpcConnectionResponse_TargetClusterArn, &sDescribeVpcConnectionResponse_State, &sDescribeVpcConnectionResponse_Authentication, &sDescribeVpcConnectionResponse_VpcId, &sDescribeVpcConnectionResponse_Subnets, &sDescribeVpcConnectionResponse_SecurityGroups, &sDescribeVpcConnectionResponse_CreationTime, &sDescribeVpcConnectionResponse_Tags}, Hash: &hDescribeVpcConnectionResponse}
+var mGetBootstrapBrokersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBootstrapBrokersRequest_ClusterArn}}
+var mGetBootstrapBrokersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBootstrapBrokersResponse_BootstrapBrokerString, &sGetBootstrapBrokersResponse_BootstrapBrokerStringTls, &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram, &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam, &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls, &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram, &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam, &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls, &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram, &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam, &sGetBootstrapBrokersResponse_BootstrapBrokerStringIpv6, &sGetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6, &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6, &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6}, Hash: &hGetBootstrapBrokersResponse}
+var mGetClusterPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterPolicyRequest_ClusterArn}}
+var mGetClusterPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterPolicyResponse_CurrentVersion, &sGetClusterPolicyResponse_Policy}}
+var mGetCompatibleKafkaVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCompatibleKafkaVersionsRequest_ClusterArn}}
+var mGetCompatibleKafkaVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_ClusterArn, &sListChannelsRequest_MaxResults, &sListChannelsRequest_NextToken, &sListChannelsRequest_TopicNameFilter}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_Channels, &sListChannelsResponse_NextToken}}
+var mListClientVpcConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClientVpcConnectionsRequest_ClusterArn, &sListClientVpcConnectionsRequest_MaxResults, &sListClientVpcConnectionsRequest_NextToken}}
+var mListClientVpcConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListClientVpcConnectionsResponse_ClientVpcConnections, &sListClientVpcConnectionsResponse_NextToken}}
+var mListClusterOperationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterOperationsRequest_ClusterArn, &sListClusterOperationsRequest_MaxResults, &sListClusterOperationsRequest_NextToken}}
+var mListClusterOperationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterOperationsResponse_ClusterOperationInfoList, &sListClusterOperationsResponse_NextToken}}
+var mListClusterOperationsV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterOperationsV2Request_ClusterArn, &sListClusterOperationsV2Request_MaxResults, &sListClusterOperationsV2Request_NextToken}}
+var mListClusterOperationsV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterOperationsV2Response_ClusterOperationInfoList, &sListClusterOperationsV2Response_NextToken}}
+var mListClustersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersRequest_ClusterNameFilter, &sListClustersRequest_MaxResults, &sListClustersRequest_NextToken}}
+var mListClustersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersResponse_ClusterInfoList, &sListClustersResponse_NextToken}}
+var mListClustersV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersV2Request_ClusterNameFilter, &sListClustersV2Request_ClusterTypeFilter, &sListClustersV2Request_MaxResults, &sListClustersV2Request_NextToken}}
+var mListClustersV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersV2Response_ClusterInfoList, &sListClustersV2Response_NextToken}}
+var mListConfigurationRevisionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationRevisionsRequest_Arn, &sListConfigurationRevisionsRequest_MaxResults, &sListConfigurationRevisionsRequest_NextToken}}
+var mListConfigurationRevisionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationRevisionsResponse_NextToken, &sListConfigurationRevisionsResponse_Revisions}}
+var mListConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsRequest_MaxResults, &sListConfigurationsRequest_NextToken}}
+var mListConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsResponse_Configurations, &sListConfigurationsResponse_NextToken}}
+var mListKafkaVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListKafkaVersionsRequest_MaxResults, &sListKafkaVersionsRequest_NextToken}}
+var mListKafkaVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListKafkaVersionsResponse_KafkaVersions, &sListKafkaVersionsResponse_NextToken}}
+var mListNodesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNodesRequest_ClusterArn, &sListNodesRequest_MaxResults, &sListNodesRequest_NextToken}}
+var mListNodesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNodesResponse_NextToken, &sListNodesResponse_NodeInfoList}}
+var mListReplicatorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplicatorsRequest_MaxResults, &sListReplicatorsRequest_NextToken, &sListReplicatorsRequest_ReplicatorNameFilter}}
+var mListReplicatorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplicatorsResponse_NextToken, &sListReplicatorsResponse_Replicators}}
+var mListScramSecretsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListScramSecretsRequest_ClusterArn, &sListScramSecretsRequest_MaxResults, &sListScramSecretsRequest_NextToken}}
+var mListScramSecretsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListScramSecretsResponse_NextToken, &sListScramSecretsResponse_SecretArnList}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTopicsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTopicsRequest_ClusterArn, &sListTopicsRequest_MaxResults, &sListTopicsRequest_NextToken, &sListTopicsRequest_TopicNameFilter}}
+var mListTopicsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTopicsResponse_Topics, &sListTopicsResponse_NextToken}}
+var mListVpcConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcConnectionsRequest_MaxResults, &sListVpcConnectionsRequest_NextToken}}
+var mListVpcConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcConnectionsResponse_VpcConnections, &sListVpcConnectionsResponse_NextToken}}
+var mPutClusterPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutClusterPolicyRequest_ClusterArn, &sPutClusterPolicyRequest_CurrentVersion, &sPutClusterPolicyRequest_Policy}}
+var mPutClusterPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutClusterPolicyResponse_CurrentVersion}}
+var mRebootBrokerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRebootBrokerRequest_BrokerIds, &sRebootBrokerRequest_ClusterArn}}
+var mRebootBrokerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRebootBrokerResponse_ClusterArn, &sRebootBrokerResponse_ClusterOperationArn}}
+var mRejectClientVpcConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectClientVpcConnectionRequest_ClusterArn, &sRejectClientVpcConnectionRequest_VpcConnectionArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateBrokerCountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerCountRequest_ClusterArn, &sUpdateBrokerCountRequest_CurrentVersion, &sUpdateBrokerCountRequest_TargetNumberOfBrokerNodes}}
+var mUpdateBrokerCountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerCountResponse_ClusterArn, &sUpdateBrokerCountResponse_ClusterOperationArn}}
+var mUpdateBrokerStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerStorageRequest_ClusterArn, &sUpdateBrokerStorageRequest_CurrentVersion, &sUpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo}}
+var mUpdateBrokerStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerStorageResponse_ClusterArn, &sUpdateBrokerStorageResponse_ClusterOperationArn}}
+var mUpdateBrokerTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerTypeRequest_ClusterArn, &sUpdateBrokerTypeRequest_CurrentVersion, &sUpdateBrokerTypeRequest_TargetInstanceType}}
+var mUpdateBrokerTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrokerTypeResponse_ClusterArn, &sUpdateBrokerTypeResponse_ClusterOperationArn}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_ChannelArn, &sUpdateChannelRequest_ClusterArn, &sUpdateChannelRequest_IcebergDestinationUpdate, &sUpdateChannelRequest_S3DestinationUpdate}}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_ChannelArn, &sUpdateChannelResponse_ClusterOperationArn}}
+var mUpdateClusterConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterConfigurationRequest_ClusterArn, &sUpdateClusterConfigurationRequest_ConfigurationInfo, &sUpdateClusterConfigurationRequest_CurrentVersion}}
+var mUpdateClusterConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterConfigurationResponse_ClusterArn, &sUpdateClusterConfigurationResponse_ClusterOperationArn}}
+var mUpdateClusterKafkaVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterKafkaVersionRequest_ClusterArn, &sUpdateClusterKafkaVersionRequest_ConfigurationInfo, &sUpdateClusterKafkaVersionRequest_CurrentVersion, &sUpdateClusterKafkaVersionRequest_TargetKafkaVersion}}
+var mUpdateClusterKafkaVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterKafkaVersionResponse_ClusterArn, &sUpdateClusterKafkaVersionResponse_ClusterOperationArn}}
+var mUpdateConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationRequest_Arn, &sUpdateConfigurationRequest_Description, &sUpdateConfigurationRequest_ServerProperties}}
+var mUpdateConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationResponse_Arn, &sUpdateConfigurationResponse_LatestRevision}}
+var mUpdateConnectivityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectivityRequest_ClusterArn, &sUpdateConnectivityRequest_ConnectivityInfo, &sUpdateConnectivityRequest_CurrentVersion, &sUpdateConnectivityRequest_ZookeeperAccess}}
+var mUpdateConnectivityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectivityResponse_ClusterArn, &sUpdateConnectivityResponse_ClusterOperationArn}}
+var mUpdateMonitoringRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitoringRequest_ClusterArn, &sUpdateMonitoringRequest_CurrentVersion, &sUpdateMonitoringRequest_EnhancedMonitoring, &sUpdateMonitoringRequest_OpenMonitoring, &sUpdateMonitoringRequest_LoggingInfo}}
+var mUpdateMonitoringResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitoringResponse_ClusterArn, &sUpdateMonitoringResponse_ClusterOperationArn}}
+var mUpdateRebalancingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRebalancingRequest_ClusterArn, &sUpdateRebalancingRequest_CurrentVersion, &sUpdateRebalancingRequest_Rebalancing}}
+var mUpdateRebalancingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRebalancingResponse_ClusterArn, &sUpdateRebalancingResponse_ClusterOperationArn}}
+var mUpdateReplicationInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationInfoRequest_ConsumerGroupReplication, &sUpdateReplicationInfoRequest_CurrentVersion, &sUpdateReplicationInfoRequest_ReplicatorArn, &sUpdateReplicationInfoRequest_SourceKafkaClusterArn, &sUpdateReplicationInfoRequest_SourceKafkaClusterId, &sUpdateReplicationInfoRequest_TargetKafkaClusterArn, &sUpdateReplicationInfoRequest_TargetKafkaClusterId, &sUpdateReplicationInfoRequest_TopicReplication, &sUpdateReplicationInfoRequest_LogDelivery}, Hash: &hUpdateReplicationInfoRequest}
+var mUpdateReplicationInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateReplicationInfoResponse_ReplicatorArn, &sUpdateReplicationInfoResponse_ReplicatorState}}
+var mUpdateSecurityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityRequest_ClientAuthentication, &sUpdateSecurityRequest_ClusterArn, &sUpdateSecurityRequest_CurrentVersion, &sUpdateSecurityRequest_EncryptionInfo}}
+var mUpdateSecurityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityResponse_ClusterArn, &sUpdateSecurityResponse_ClusterOperationArn}}
+var mUpdateStorageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStorageRequest_ClusterArn, &sUpdateStorageRequest_CurrentVersion, &sUpdateStorageRequest_ProvisionedThroughput, &sUpdateStorageRequest_StorageMode, &sUpdateStorageRequest_VolumeSizeGB}}
+var mUpdateStorageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStorageResponse_ClusterArn, &sUpdateStorageResponse_ClusterOperationArn}}
+var mUpdateTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTopicRequest_ClusterArn, &sUpdateTopicRequest_TopicName, &sUpdateTopicRequest_Configs, &sUpdateTopicRequest_PartitionCount}}
+var mUpdateTopicResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTopicResponse_TopicArn, &sUpdateTopicResponse_TopicName, &sUpdateTopicResponse_Status}}
+
+var hCluster = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	7, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 9, 0, 0, 3, 5, 1, 0, 0, 0, 6, 0, 0,
+	2, 0, 10, 0, 8, 0, 0, 4,
+}}
+var hClusterInfo = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 21, 16, 0, 15, 0, 0, 5, 0, 0, 14, 18, 9, 7, 19, 0, 13, 8, 0, 0, 0, 11, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 12, 4, 0, 0, 0, 0, 0, 0, 1,
+	0, 0, 2, 0, 0, 10, 0, 0, 0, 3, 0, 20, 0, 0, 0, 0,
+}}
+var hClusterOperationInfo = smithy.MemberHash{Seed: 11, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0, 5, 12, 9, 0, 0, 0, 0, 0, 0, 2, 0, 8,
+	0, 0, 3, 0, 0, 11, 7, 4,
+}}
+var hClusterOperationV2 = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	0, 2, 7, 0, 0, 8, 0, 3, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+	9, 0, 10, 0, 0, 5, 0, 0,
+}}
+var hIcebergDestinationConfiguration = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 5, 8, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 7, 0, 4, 0, 0, 0,
+	9, 0, 0, 0, 1, 0, 6, 0,
+}}
+var hMutableClusterInfo = smithy.MemberHash{Seed: 38, Slots: []uint16{
+	0, 0, 0, 0, 5, 15, 8, 1, 0, 0, 12, 0, 4, 11, 7, 10, 6, 0, 0, 0, 3, 0, 0, 0,
+	0, 9, 0, 0, 13, 2, 14, 0,
+}}
+var hProvisioned = smithy.MemberHash{Seed: 25, Slots: []uint16{
+	0, 0, 1, 8, 0, 0, 6, 2, 0, 11, 0, 5, 10, 7, 13, 0, 0, 0, 0, 12, 0, 0, 0, 9,
+	3, 0, 0, 0, 0, 4, 0, 0,
+}}
+var hProvisionedRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 7, 3, 0, 0, 10, 0, 0, 0, 0, 0, 9, 1, 0, 0, 5, 6, 0,
+	8, 2, 0, 11, 0, 0, 4, 0,
+}}
+var hReplicatorSummary = smithy.MemberHash{Seed: 6, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 8, 0, 5, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+	0, 7, 2, 0, 0, 0, 4, 0,
+}}
+var hCreateClusterRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	4, 12, 0, 0, 0, 0, 0, 8, 3, 0, 0, 11, 0, 0, 0, 0, 0, 10, 1, 0, 0, 6, 7, 0,
+	9, 2, 0, 13, 0, 0, 5, 0,
+}}
+var hDescribeChannelResponse = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	0, 4, 12, 13, 0, 0, 0, 0, 0, 0, 9, 0, 0, 10, 0, 11, 0, 6, 0, 8, 0, 0, 0, 2,
+	1, 3, 0, 7, 0, 0, 5, 0,
+}}
+var hDescribeReplicatorResponse = smithy.MemberHash{Seed: 28, Slots: []uint16{
+	0, 12, 0, 0, 0, 3, 0, 14, 0, 0, 10, 0, 0, 2, 7, 0, 0, 0, 0, 11, 0, 5, 8, 0,
+	4, 0, 9, 1, 6, 0, 0, 13,
+}}
+var hDescribeVpcConnectionResponse = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 0, 0, 0, 0, 4, 2, 0, 0, 0, 0, 0, 7, 1, 0,
+	9, 0, 0, 3, 0, 0, 0, 6,
+}}
+var hGetBootstrapBrokersResponse = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	2, 3, 0, 0, 11, 0, 6, 0, 14, 5, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 9, 0, 13, 1,
+	0, 0, 7, 10, 0, 4, 8, 0,
+}}
+var hUpdateReplicationInfoRequest = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	5, 0, 0, 0, 8, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 7, 9,
+	0, 2, 0, 1, 0, 0, 0, 0,
+}}
+
+var sBatchAssociateScramSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateScramSecret, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchAssociateScramSecret})
+var sBatchDisassociateScramSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateScramSecret, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchDisassociateScramSecret})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannel})
+var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateCluster})
+var sCreateClusterV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterV2, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateClusterV2})
+var sCreateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfiguration})
+var sCreateReplicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicator, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateReplicator})
+var sCreateTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopic, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateTopic})
+var sCreateVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnection, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateVpcConnection})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannel})
+var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCluster})
+var sDeleteClusterPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterPolicy, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteClusterPolicy})
+var sDeleteConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfiguration})
+var sDeleteReplicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicator, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteReplicator})
+var sDeleteTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTopic, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTopic})
+var sDeleteVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnection, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVpcConnection})
+var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannel})
+var sDescribeCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCluster, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCluster})
+var sDescribeClusterOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperation, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDescribeClusterOperation})
+var sDescribeClusterOperationV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperationV2, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDescribeClusterOperationV2})
+var sDescribeClusterV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterV2, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDescribeClusterV2})
+var sDescribeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfiguration, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfiguration})
+var sDescribeConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevision, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConfigurationRevision})
+var sDescribeReplicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicator, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDescribeReplicator})
+var sDescribeTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopic, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTopic})
+var sDescribeTopicPartitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopicPartitions, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTopicPartitions})
+var sDescribeVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnection, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVpcConnection})
+var sGetBootstrapBrokers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBootstrapBrokers, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eGetBootstrapBrokers})
+var sGetClusterPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterPolicy, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eGetClusterPolicy})
+var sGetCompatibleKafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleKafkaVersions, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eGetCompatibleKafkaVersions})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListClientVpcConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientVpcConnections, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListClientVpcConnections})
+var sListClusterOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperations, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListClusterOperations})
+var sListClusterOperationsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperationsV2, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListClusterOperationsV2})
+var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eListClusters})
+var sListClustersV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersV2, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eListClustersV2})
+var sListConfigurationRevisions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisions, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurationRevisions})
+var sListConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurations, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurations})
+var sListKafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKafkaVersions, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eListKafkaVersions})
+var sListNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodes, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eListNodes})
+var sListReplicators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicators, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eListReplicators})
+var sListScramSecrets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScramSecrets, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eListScramSecrets})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTopics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopics, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eListTopics})
+var sListVpcConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnections, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eListVpcConnections})
+var sPutClusterPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutClusterPolicy, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ePutClusterPolicy})
+var sRebootBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBroker, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eRebootBroker})
+var sRejectClientVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectClientVpcConnection, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eRejectClientVpcConnection})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateBrokerCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerCount, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrokerCount})
+var sUpdateBrokerStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerStorage, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrokerStorage})
+var sUpdateBrokerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerType, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBrokerType})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannel})
+var sUpdateClusterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterConfiguration, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eUpdateClusterConfiguration})
+var sUpdateClusterKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterKafkaVersion, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eUpdateClusterKafkaVersion})
+var sUpdateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguration, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfiguration})
+var sUpdateConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivity, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConnectivity})
+var sUpdateMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitoring, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMonitoring})
+var sUpdateRebalancing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRebalancing, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRebalancing})
+var sUpdateReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationInfo, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eUpdateReplicationInfo})
+var sUpdateSecurity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurity, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSecurity})
+var sUpdateStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorage, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eUpdateStorage})
+var sUpdateTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTopic, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTopic})
+var s_Kafka = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Kafka, Type: smithy.ShapeTypeService, Ext: &e_Kafka})
+var s___blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___blob, Type: smithy.ShapeTypeBlob, Ext: &e___blob})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___double, Type: smithy.ShapeTypeDouble, Ext: &e___double})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___integerMin1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1})
+var s___integerMin1Max15 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max15, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max15})
+var s___integerMin1Max16384 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integerMin1Max16384, Type: smithy.ShapeTypeInteger, Ext: &e___integerMin1Max16384})
+var s___listOf__double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__double, Members: &m___listOf__double, Type: smithy.ShapeTypeList, Ext: &e___listOf__double})
+var s___listOf__double_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___double, Type: smithy.ShapeTypeDouble, Ext: &e___listOf__double_member})
+var s___listOf__integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__integer, Members: &m___listOf__integer, Type: smithy.ShapeTypeList, Ext: &e___listOf__integer})
+var s___listOf__integer_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___listOf__integer_member})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOf__stringMax249 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMax249, Members: &m___listOf__stringMax249, Type: smithy.ShapeTypeList, Ext: &e___listOf__stringMax249})
+var s___listOf__stringMax249_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMax249, Type: smithy.ShapeTypeString, Ext: &e___listOf__stringMax249_member})
+var s___listOf__stringMax256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMax256, Members: &m___listOf__stringMax256, Type: smithy.ShapeTypeList, Ext: &e___listOf__stringMax256})
+var s___listOf__stringMax256_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMax256, Type: smithy.ShapeTypeString, Ext: &e___listOf__stringMax256_member})
+var s___listOfBrokerEBSVolumeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfBrokerEBSVolumeInfo, Members: &m___listOfBrokerEBSVolumeInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfBrokerEBSVolumeInfo})
+var s___listOfBrokerEBSVolumeInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrokerEBSVolumeInfo, Members: &mBrokerEBSVolumeInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfBrokerEBSVolumeInfo_member})
+var s___listOfChannelInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfChannelInfo, Members: &m___listOfChannelInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfChannelInfo})
+var s___listOfChannelInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelInfo, Members: &mChannelInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfChannelInfo_member})
+var s___listOfClientVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClientVpcConnection, Members: &m___listOfClientVpcConnection, Type: smithy.ShapeTypeList, Ext: &e___listOfClientVpcConnection})
+var s___listOfClientVpcConnection_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClientVpcConnection, Members: &mClientVpcConnection, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClientVpcConnection_member})
+var s___listOfCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCluster, Members: &m___listOfCluster, Type: smithy.ShapeTypeList, Ext: &e___listOfCluster})
+var s___listOfCluster_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &e___listOfCluster_member})
+var s___listOfClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterInfo, Members: &m___listOfClusterInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfClusterInfo})
+var s___listOfClusterInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterInfo, Members: &mClusterInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClusterInfo_member})
+var s___listOfClusterOperationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterOperationInfo, Members: &m___listOfClusterOperationInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfClusterOperationInfo})
+var s___listOfClusterOperationInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterOperationInfo, Members: &mClusterOperationInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClusterOperationInfo_member})
+var s___listOfClusterOperationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterOperationStep, Members: &m___listOfClusterOperationStep, Type: smithy.ShapeTypeList, Ext: &e___listOfClusterOperationStep})
+var s___listOfClusterOperationStep_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterOperationStep, Members: &mClusterOperationStep, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClusterOperationStep_member})
+var s___listOfClusterOperationV2Summary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterOperationV2Summary, Members: &m___listOfClusterOperationV2Summary, Type: smithy.ShapeTypeList, Ext: &e___listOfClusterOperationV2Summary})
+var s___listOfClusterOperationV2Summary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterOperationV2Summary, Members: &mClusterOperationV2Summary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClusterOperationV2Summary_member})
+var s___listOfCompatibleKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCompatibleKafkaVersion, Members: &m___listOfCompatibleKafkaVersion, Type: smithy.ShapeTypeList, Ext: &e___listOfCompatibleKafkaVersion})
+var s___listOfCompatibleKafkaVersion_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompatibleKafkaVersion, Members: &mCompatibleKafkaVersion, Type: smithy.ShapeTypeStructure, Ext: &e___listOfCompatibleKafkaVersion_member})
+var s___listOfConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConfiguration, Members: &m___listOfConfiguration, Type: smithy.ShapeTypeList, Ext: &e___listOfConfiguration})
+var s___listOfConfiguration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConfiguration_member})
+var s___listOfConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfConfigurationRevision, Members: &m___listOfConfigurationRevision, Type: smithy.ShapeTypeList, Ext: &e___listOfConfigurationRevision})
+var s___listOfConfigurationRevision_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Type: smithy.ShapeTypeStructure, Ext: &e___listOfConfigurationRevision_member})
+var s___listOfDestinationTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfDestinationTable, Members: &m___listOfDestinationTable, Type: smithy.ShapeTypeList, Ext: &e___listOfDestinationTable})
+var s___listOfDestinationTable_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestinationTable, Members: &mDestinationTable, Type: smithy.ShapeTypeStructure, Ext: &e___listOfDestinationTable_member})
+var s___listOfKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfKafkaCluster, Members: &m___listOfKafkaCluster, Type: smithy.ShapeTypeList, Ext: &e___listOfKafkaCluster})
+var s___listOfKafkaCluster_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKafkaCluster, Members: &mKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &e___listOfKafkaCluster_member})
+var s___listOfKafkaClusterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfKafkaClusterDescription, Members: &m___listOfKafkaClusterDescription, Type: smithy.ShapeTypeList, Ext: &e___listOfKafkaClusterDescription})
+var s___listOfKafkaClusterDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKafkaClusterDescription, Members: &mKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &e___listOfKafkaClusterDescription_member})
+var s___listOfKafkaClusterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfKafkaClusterSummary, Members: &m___listOfKafkaClusterSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfKafkaClusterSummary})
+var s___listOfKafkaClusterSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKafkaClusterSummary, Members: &mKafkaClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfKafkaClusterSummary_member})
+var s___listOfKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfKafkaVersion, Members: &m___listOfKafkaVersion, Type: smithy.ShapeTypeList, Ext: &e___listOfKafkaVersion})
+var s___listOfKafkaVersion_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKafkaVersion, Members: &mKafkaVersion, Type: smithy.ShapeTypeStructure, Ext: &e___listOfKafkaVersion_member})
+var s___listOfNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfNodeInfo, Members: &m___listOfNodeInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfNodeInfo})
+var s___listOfNodeInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodeInfo, Members: &mNodeInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfNodeInfo_member})
+var s___listOfPartitionSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPartitionSource, Members: &m___listOfPartitionSource, Type: smithy.ShapeTypeList, Ext: &e___listOfPartitionSource})
+var s___listOfPartitionSource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionSource, Members: &mPartitionSource, Type: smithy.ShapeTypeStructure, Ext: &e___listOfPartitionSource_member})
+var s___listOfReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReplicationInfo, Members: &m___listOfReplicationInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfReplicationInfo})
+var s___listOfReplicationInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationInfo, Members: &mReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReplicationInfo_member})
+var s___listOfReplicationInfoDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReplicationInfoDescription, Members: &m___listOfReplicationInfoDescription, Type: smithy.ShapeTypeList, Ext: &e___listOfReplicationInfoDescription})
+var s___listOfReplicationInfoDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationInfoDescription, Members: &mReplicationInfoDescription, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReplicationInfoDescription_member})
+var s___listOfReplicationInfoSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReplicationInfoSummary, Members: &m___listOfReplicationInfoSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfReplicationInfoSummary})
+var s___listOfReplicationInfoSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationInfoSummary, Members: &mReplicationInfoSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReplicationInfoSummary_member})
+var s___listOfReplicatorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfReplicatorSummary, Members: &m___listOfReplicatorSummary, Type: smithy.ShapeTypeList, Ext: &e___listOfReplicatorSummary})
+var s___listOfReplicatorSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicatorSummary, Members: &mReplicatorSummary, Type: smithy.ShapeTypeStructure, Ext: &e___listOfReplicatorSummary_member})
+var s___listOfTopicConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfTopicConfiguration, Members: &m___listOfTopicConfiguration, Type: smithy.ShapeTypeList, Ext: &e___listOfTopicConfiguration})
+var s___listOfTopicConfiguration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTopicConfiguration, Members: &mTopicConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e___listOfTopicConfiguration_member})
+var s___listOfTopicInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfTopicInfo, Members: &m___listOfTopicInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfTopicInfo})
+var s___listOfTopicInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTopicInfo, Members: &mTopicInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfTopicInfo_member})
+var s___listOfTopicPartitionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfTopicPartitionInfo, Members: &m___listOfTopicPartitionInfo, Type: smithy.ShapeTypeList, Ext: &e___listOfTopicPartitionInfo})
+var s___listOfTopicPartitionInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTopicPartitionInfo, Members: &mTopicPartitionInfo, Type: smithy.ShapeTypeStructure, Ext: &e___listOfTopicPartitionInfo_member})
+var s___listOfUnprocessedScramSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfUnprocessedScramSecret, Members: &m___listOfUnprocessedScramSecret, Type: smithy.ShapeTypeList, Ext: &e___listOfUnprocessedScramSecret})
+var s___listOfUnprocessedScramSecret_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedScramSecret, Members: &mUnprocessedScramSecret, Type: smithy.ShapeTypeStructure, Ext: &e___listOfUnprocessedScramSecret_member})
+var s___listOfVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfVpcConfig, Members: &m___listOfVpcConfig, Type: smithy.ShapeTypeList, Ext: &e___listOfVpcConfig})
+var s___listOfVpcConfig_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &e___listOfVpcConfig_member})
+var s___listOfVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfVpcConnection, Members: &m___listOfVpcConnection, Type: smithy.ShapeTypeList, Ext: &e___listOfVpcConnection})
+var s___listOfVpcConnection_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcConnection, Members: &mVpcConnection, Type: smithy.ShapeTypeStructure, Ext: &e___listOfVpcConnection_member})
+var s___long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___long, Type: smithy.ShapeTypeLong, Ext: &e___long})
+var s___mapOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e___mapOf__string})
+var s___mapOf__string_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_key})
+var s___mapOf__string_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_value})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___stringMax1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax1024, Type: smithy.ShapeTypeString, Ext: &e___stringMax1024})
+var s___stringMax249 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax249, Type: smithy.ShapeTypeString, Ext: &e___stringMax249})
+var s___stringMax256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax256, Type: smithy.ShapeTypeString, Ext: &e___stringMax256})
+var s___stringMin1Max128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max128})
+var s___stringMin1Max128Pattern09AZaZ09AZaZ0 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128Pattern09AZaZ09AZaZ0, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max128Pattern09AZaZ09AZaZ0})
+var s___stringMin1Max64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max64, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max64})
+var s___stringMin5Max32 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin5Max32, Type: smithy.ShapeTypeString, Ext: &e___stringMin5Max32})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t64, Type: smithy.ShapeTypeTimestamp, Ext: &e___timestampIso8601})
+var sAmazonMskCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonMskCluster, Members: &mAmazonMskCluster, Type: smithy.ShapeTypeStructure, Ext: &eAmazonMskCluster})
+var sAmazonMskCluster_MskClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MskClusterArn", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eAmazonMskCluster_MskClusterArn})
+var sApacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eApacheKafkaCluster})
+var sApacheKafkaCluster_ApacheKafkaClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApacheKafkaClusterId", ID: &i___string, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eApacheKafkaCluster_ApacheKafkaClusterId})
+var sApacheKafkaCluster_BootstrapBrokerString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerString", ID: &i___string, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eApacheKafkaCluster_BootstrapBrokerString})
+var sAuthorizerLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizerLogs, Members: &mAuthorizerLogs, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizerLogs})
+var sAuthorizerLogs_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizerLogs_CloudWatchLogs})
+var sAuthorizerLogs_Firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firehose", ID: &iFirehose, Members: &mFirehose, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizerLogs_Firehose})
+var sAuthorizerLogs_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3, Members: &mS3, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eAuthorizerLogs_S3})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t71, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_InvalidParameter})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sBrokerAZDistribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerAZDistribution, Members: &mBrokerAZDistribution, Type: smithy.ShapeTypeEnum, Ext: &eBrokerAZDistribution})
+var sBrokerAZDistribution_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBrokerAZDistribution_DEFAULT})
+var sBrokerCountUpdateInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerCountUpdateInfo, Members: &mBrokerCountUpdateInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrokerCountUpdateInfo})
+var sBrokerCountUpdateInfo_CreatedBrokerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBrokerIds", ID: &i___listOf__double, Members: &m___listOf__double, Traits: &t74, Type: smithy.ShapeTypeList, Ext: &eBrokerCountUpdateInfo_CreatedBrokerIds})
+var sBrokerCountUpdateInfo_DeletedBrokerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedBrokerIds", ID: &i___listOf__double, Members: &m___listOf__double, Traits: &t75, Type: smithy.ShapeTypeList, Ext: &eBrokerCountUpdateInfo_DeletedBrokerIds})
+var sBrokerEBSVolumeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerEBSVolumeInfo, Members: &mBrokerEBSVolumeInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrokerEBSVolumeInfo})
+var sBrokerEBSVolumeInfo_KafkaBrokerNodeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaBrokerNodeId", ID: &i___string, Traits: &t76, Type: smithy.ShapeTypeString, Ext: &eBrokerEBSVolumeInfo_KafkaBrokerNodeId})
+var sBrokerEBSVolumeInfo_ProvisionedThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedThroughput", ID: &iProvisionedThroughput, Members: &mProvisionedThroughput, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eBrokerEBSVolumeInfo_ProvisionedThroughput})
+var sBrokerEBSVolumeInfo_VolumeSizeGB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeGB", ID: &i___integer, Traits: &t78, Type: smithy.ShapeTypeInteger, Ext: &eBrokerEBSVolumeInfo_VolumeSizeGB})
+var sBrokerLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerLogs, Members: &mBrokerLogs, Type: smithy.ShapeTypeStructure, Ext: &eBrokerLogs})
+var sBrokerLogs_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eBrokerLogs_CloudWatchLogs})
+var sBrokerLogs_Firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firehose", ID: &iFirehose, Members: &mFirehose, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eBrokerLogs_Firehose})
+var sBrokerLogs_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3, Members: &mS3, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eBrokerLogs_S3})
+var sBrokerNodeGroupInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerNodeGroupInfo, Members: &mBrokerNodeGroupInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrokerNodeGroupInfo})
+var sBrokerNodeGroupInfo_BrokerAZDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerAZDistribution", ID: &iBrokerAZDistribution, Members: &mBrokerAZDistribution, Traits: &t79, Type: smithy.ShapeTypeEnum, Ext: &eBrokerNodeGroupInfo_BrokerAZDistribution})
+var sBrokerNodeGroupInfo_ClientSubnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSubnets", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t80, Type: smithy.ShapeTypeList, Ext: &eBrokerNodeGroupInfo_ClientSubnets})
+var sBrokerNodeGroupInfo_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i___stringMin5Max32, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eBrokerNodeGroupInfo_InstanceType})
+var sBrokerNodeGroupInfo_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eBrokerNodeGroupInfo_SecurityGroups})
+var sBrokerNodeGroupInfo_StorageInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageInfo", ID: &iStorageInfo, Members: &mStorageInfo, Traits: &t83, Type: smithy.ShapeTypeStructure, Ext: &eBrokerNodeGroupInfo_StorageInfo})
+var sBrokerNodeGroupInfo_ConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectivityInfo", ID: &iConnectivityInfo, Members: &mConnectivityInfo, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eBrokerNodeGroupInfo_ConnectivityInfo})
+var sBrokerNodeGroupInfo_ZoneIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t85, Type: smithy.ShapeTypeList, Ext: &eBrokerNodeGroupInfo_ZoneIds})
+var sBrokerNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerNodeInfo, Members: &mBrokerNodeInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrokerNodeInfo})
+var sBrokerNodeInfo_AttachedENIId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedENIId", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eBrokerNodeInfo_AttachedENIId})
+var sBrokerNodeInfo_BrokerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerId", ID: &i___double, Traits: &t87, Type: smithy.ShapeTypeDouble, Ext: &eBrokerNodeInfo_BrokerId})
+var sBrokerNodeInfo_ClientSubnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSubnet", ID: &i___string, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &eBrokerNodeInfo_ClientSubnet})
+var sBrokerNodeInfo_ClientVpcIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVpcIpAddress", ID: &i___string, Traits: &t89, Type: smithy.ShapeTypeString, Ext: &eBrokerNodeInfo_ClientVpcIpAddress})
+var sBrokerNodeInfo_CurrentBrokerSoftwareInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentBrokerSoftwareInfo", ID: &iBrokerSoftwareInfo, Members: &mBrokerSoftwareInfo, Traits: &t90, Type: smithy.ShapeTypeStructure, Ext: &eBrokerNodeInfo_CurrentBrokerSoftwareInfo})
+var sBrokerNodeInfo_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t91, Type: smithy.ShapeTypeList, Ext: &eBrokerNodeInfo_Endpoints})
+var sBrokerSoftwareInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrokerSoftwareInfo, Members: &mBrokerSoftwareInfo, Type: smithy.ShapeTypeStructure, Ext: &eBrokerSoftwareInfo})
+var sBrokerSoftwareInfo_ConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationArn", ID: &i___string, Traits: &t92, Type: smithy.ShapeTypeString, Ext: &eBrokerSoftwareInfo_ConfigurationArn})
+var sBrokerSoftwareInfo_ConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationRevision", ID: &i___long, Traits: &t93, Type: smithy.ShapeTypeLong, Ext: &eBrokerSoftwareInfo_ConfigurationRevision})
+var sBrokerSoftwareInfo_KafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersion", ID: &i___string, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eBrokerSoftwareInfo_KafkaVersion})
+var sCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalog, Members: &mCatalog, Type: smithy.ShapeTypeStructure, Ext: &eCatalog})
+var sCatalog_CatalogArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogArn", ID: &i___string, Traits: &t95, Type: smithy.ShapeTypeString, Ext: &eCatalog_CatalogArn})
+var sCatalog_WarehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarehouseLocation", ID: &i___string, Traits: &t96, Type: smithy.ShapeTypeString, Ext: &eCatalog_WarehouseLocation})
+var sChannelDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelDestinationType, Members: &mChannelDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eChannelDestinationType})
+var sChannelDestinationType_ICEBERG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICEBERG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelDestinationType_ICEBERG})
+var sChannelDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelDestinationType_S3})
+var sChannelInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelInfo, Members: &mChannelInfo, Type: smithy.ShapeTypeStructure, Ext: &eChannelInfo})
+var sChannelInfo_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eChannelInfo_ChannelArn})
+var sChannelInfo_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &eChannelInfo_ChannelName})
+var sChannelInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelStatus, Members: &mChannelStatus, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eChannelInfo_Status})
+var sChannelInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelInfo_CreationTime})
+var sChannelInfo_DestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationType", ID: &iChannelDestinationType, Members: &mChannelDestinationType, Traits: &t101, Type: smithy.ShapeTypeEnum, Ext: &eChannelInfo_DestinationType})
+var sChannelInfo_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eChannelInfo_ClusterOperationArn})
+var sChannelLoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelLoggingInfo, Members: &mChannelLoggingInfo, Type: smithy.ShapeTypeStructure, Ext: &eChannelLoggingInfo})
+var sChannelLoggingInfo_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eChannelLoggingInfo_CloudWatchLogs})
+var sChannelLoggingInfo_Firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firehose", ID: &iFirehose, Members: &mFirehose, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eChannelLoggingInfo_Firehose})
+var sChannelLoggingInfo_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3, Members: &mS3, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eChannelLoggingInfo_S3})
+var sChannelStateInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStateInfo, Members: &mChannelStateInfo, Type: smithy.ShapeTypeStructure, Ext: &eChannelStateInfo})
+var sChannelStateInfo_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eChannelStateInfo_Code})
+var sChannelStateInfo_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eChannelStateInfo_Message})
+var sChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum, Ext: &eChannelStatus})
+var sChannelStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_CREATING})
+var sChannelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_ACTIVE})
+var sChannelStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_UPDATING})
+var sChannelStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_DELETING})
+var sChannelStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_FAILED})
+var sChannelStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_SUSPENDING})
+var sChannelStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelStatus_SUSPENDED})
+var sClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientAuthentication, Members: &mClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eClientAuthentication})
+var sClientAuthentication_Sasl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sasl", ID: &iSasl, Members: &mSasl, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &eClientAuthentication_Sasl})
+var sClientAuthentication_Tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tls", ID: &iTls, Members: &mTls, Traits: &t105, Type: smithy.ShapeTypeStructure, Ext: &eClientAuthentication_Tls})
+var sClientAuthentication_Unauthenticated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unauthenticated", ID: &iUnauthenticated, Members: &mUnauthenticated, Traits: &t106, Type: smithy.ShapeTypeStructure, Ext: &eClientAuthentication_Unauthenticated})
+var sClientBroker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientBroker, Members: &mClientBroker, Type: smithy.ShapeTypeEnum, Ext: &eClientBroker})
+var sClientBroker_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientBroker_TLS})
+var sClientBroker_TLS_PLAINTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_PLAINTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientBroker_TLS_PLAINTEXT})
+var sClientBroker_PLAINTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAINTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientBroker_PLAINTEXT})
+var sClientVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientVpcConnection, Members: &mClientVpcConnection, Type: smithy.ShapeTypeStructure, Ext: &eClientVpcConnection})
+var sClientVpcConnection_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eClientVpcConnection_Authentication})
+var sClientVpcConnection_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eClientVpcConnection_CreationTime})
+var sClientVpcConnection_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iVpcConnectionState, Members: &mVpcConnectionState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eClientVpcConnection_State})
+var sClientVpcConnection_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eClientVpcConnection_VpcConnectionArn})
+var sClientVpcConnection_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eClientVpcConnection_Owner})
+var sCloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogs})
+var sCloudWatchLogs_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eCloudWatchLogs_Enabled})
+var sCloudWatchLogs_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i___string, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogs_LogGroup})
+var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCluster})
+var sCluster_ActiveOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveOperationArn", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eCluster_ActiveOperationArn})
+var sCluster_ClusterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterType", ID: &iClusterType, Members: &mClusterType, Traits: &t114, Type: smithy.ShapeTypeEnum, Ext: &eCluster_ClusterType})
+var sCluster_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eCluster_ClusterArn})
+var sCluster_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCluster_ClusterName})
+var sCluster_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eCluster_CreationTime})
+var sCluster_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eCluster_CurrentVersion})
+var sCluster_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iClusterState, Members: &mClusterState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eCluster_State})
+var sCluster_StateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateInfo", ID: &iStateInfo, Members: &mStateInfo, Traits: &t118, Type: smithy.ShapeTypeStructure, Ext: &eCluster_StateInfo})
+var sCluster_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCluster_Tags})
+var sCluster_Provisioned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provisioned", ID: &iProvisioned, Members: &mProvisioned, Traits: &t120, Type: smithy.ShapeTypeStructure, Ext: &eCluster_Provisioned})
+var sCluster_Serverless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serverless", ID: &iServerless, Members: &mServerless, Traits: &t121, Type: smithy.ShapeTypeStructure, Ext: &eCluster_Serverless})
+var sClusterConnectivityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterConnectivityException, Members: &mClusterConnectivityException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eClusterConnectivityException})
+var sClusterConnectivityException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eClusterConnectivityException_InvalidParameter})
+var sClusterConnectivityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eClusterConnectivityException_Message})
+var sClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterInfo, Members: &mClusterInfo, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo})
+var sClusterInfo_ActiveOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveOperationArn", ID: &i___string, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_ActiveOperationArn})
+var sClusterInfo_BrokerNodeGroupInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerNodeGroupInfo", ID: &iBrokerNodeGroupInfo, Members: &mBrokerNodeGroupInfo, Traits: &t123, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_BrokerNodeGroupInfo})
+var sClusterInfo_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_Rebalancing})
+var sClusterInfo_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_ClientAuthentication})
+var sClusterInfo_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_ClusterArn})
+var sClusterInfo_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_ClusterName})
+var sClusterInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterInfo_CreationTime})
+var sClusterInfo_CurrentBrokerSoftwareInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentBrokerSoftwareInfo", ID: &iBrokerSoftwareInfo, Members: &mBrokerSoftwareInfo, Traits: &t90, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_CurrentBrokerSoftwareInfo})
+var sClusterInfo_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_CurrentVersion})
+var sClusterInfo_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_EncryptionInfo})
+var sClusterInfo_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eClusterInfo_EnhancedMonitoring})
+var sClusterInfo_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoring, Members: &mOpenMonitoring, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_OpenMonitoring})
+var sClusterInfo_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_LoggingInfo})
+var sClusterInfo_NumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBrokerNodes", ID: &i___integer, Traits: &t130, Type: smithy.ShapeTypeInteger, Ext: &eClusterInfo_NumberOfBrokerNodes})
+var sClusterInfo_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iClusterState, Members: &mClusterState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eClusterInfo_State})
+var sClusterInfo_StateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateInfo", ID: &iStateInfo, Members: &mStateInfo, Traits: &t118, Type: smithy.ShapeTypeStructure, Ext: &eClusterInfo_StateInfo})
+var sClusterInfo_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eClusterInfo_Tags})
+var sClusterInfo_ZookeeperConnectString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperConnectString", ID: &i___string, Traits: &t131, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_ZookeeperConnectString})
+var sClusterInfo_ZookeeperConnectStringTls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperConnectStringTls", ID: &i___string, Traits: &t132, Type: smithy.ShapeTypeString, Ext: &eClusterInfo_ZookeeperConnectStringTls})
+var sClusterInfo_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eClusterInfo_StorageMode})
+var sClusterInfo_CustomerActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerActionStatus", ID: &iCustomerActionStatus, Members: &mCustomerActionStatus, Traits: &t134, Type: smithy.ShapeTypeEnum, Ext: &eClusterInfo_CustomerActionStatus})
+var sClusterOperationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationInfo, Members: &mClusterOperationInfo, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationInfo})
+var sClusterOperationInfo_ClientRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestId", ID: &i___string, Traits: &t135, Type: smithy.ShapeTypeString, Ext: &eClusterOperationInfo_ClientRequestId})
+var sClusterOperationInfo_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eClusterOperationInfo_ClusterArn})
+var sClusterOperationInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationInfo_CreationTime})
+var sClusterOperationInfo_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampIso8601, Traits: &t136, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationInfo_EndTime})
+var sClusterOperationInfo_ErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorInfo", ID: &iErrorInfo, Members: &mErrorInfo, Traits: &t137, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationInfo_ErrorInfo})
+var sClusterOperationInfo_OperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationArn", ID: &i___string, Traits: &t138, Type: smithy.ShapeTypeString, Ext: &eClusterOperationInfo_OperationArn})
+var sClusterOperationInfo_OperationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationState", ID: &i___string, Traits: &t139, Type: smithy.ShapeTypeString, Ext: &eClusterOperationInfo_OperationState})
+var sClusterOperationInfo_OperationSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationSteps", ID: &i___listOfClusterOperationStep, Members: &m___listOfClusterOperationStep, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &eClusterOperationInfo_OperationSteps})
+var sClusterOperationInfo_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationType", ID: &i___string, Traits: &t141, Type: smithy.ShapeTypeString, Ext: &eClusterOperationInfo_OperationType})
+var sClusterOperationInfo_SourceClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceClusterInfo", ID: &iMutableClusterInfo, Members: &mMutableClusterInfo, Traits: &t142, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationInfo_SourceClusterInfo})
+var sClusterOperationInfo_TargetClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterInfo", ID: &iMutableClusterInfo, Members: &mMutableClusterInfo, Traits: &t143, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationInfo_TargetClusterInfo})
+var sClusterOperationInfo_VpcConnectionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionInfo", ID: &iVpcConnectionInfo, Members: &mVpcConnectionInfo, Traits: &t144, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationInfo_VpcConnectionInfo})
+var sClusterOperationStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationStep, Members: &mClusterOperationStep, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationStep})
+var sClusterOperationStep_StepInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepInfo", ID: &iClusterOperationStepInfo, Members: &mClusterOperationStepInfo, Traits: &t145, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationStep_StepInfo})
+var sClusterOperationStep_StepName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepName", ID: &i___string, Traits: &t146, Type: smithy.ShapeTypeString, Ext: &eClusterOperationStep_StepName})
+var sClusterOperationStepInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationStepInfo, Members: &mClusterOperationStepInfo, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationStepInfo})
+var sClusterOperationStepInfo_StepStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepStatus", ID: &i___string, Traits: &t147, Type: smithy.ShapeTypeString, Ext: &eClusterOperationStepInfo_StepStatus})
+var sClusterOperationV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationV2, Members: &mClusterOperationV2, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2})
+var sClusterOperationV2_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2_ClusterArn})
+var sClusterOperationV2_ClusterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterType", ID: &iClusterType, Members: &mClusterType, Traits: &t114, Type: smithy.ShapeTypeEnum, Ext: &eClusterOperationV2_ClusterType})
+var sClusterOperationV2_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___timestampIso8601, Traits: &t148, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationV2_StartTime})
+var sClusterOperationV2_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampIso8601, Traits: &t136, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationV2_EndTime})
+var sClusterOperationV2_ErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorInfo", ID: &iErrorInfo, Members: &mErrorInfo, Traits: &t137, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2_ErrorInfo})
+var sClusterOperationV2_OperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationArn", ID: &i___string, Traits: &t138, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2_OperationArn})
+var sClusterOperationV2_OperationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationState", ID: &i___string, Traits: &t139, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2_OperationState})
+var sClusterOperationV2_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationType", ID: &i___string, Traits: &t141, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2_OperationType})
+var sClusterOperationV2_Provisioned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provisioned", ID: &iClusterOperationV2Provisioned, Members: &mClusterOperationV2Provisioned, Traits: &t120, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2_Provisioned})
+var sClusterOperationV2_Serverless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serverless", ID: &iClusterOperationV2Serverless, Members: &mClusterOperationV2Serverless, Traits: &t121, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2_Serverless})
+var sClusterOperationV2Provisioned = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationV2Provisioned, Members: &mClusterOperationV2Provisioned, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Provisioned})
+var sClusterOperationV2Provisioned_OperationSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationSteps", ID: &i___listOfClusterOperationStep, Members: &m___listOfClusterOperationStep, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &eClusterOperationV2Provisioned_OperationSteps})
+var sClusterOperationV2Provisioned_SourceClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceClusterInfo", ID: &iMutableClusterInfo, Members: &mMutableClusterInfo, Traits: &t142, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Provisioned_SourceClusterInfo})
+var sClusterOperationV2Provisioned_TargetClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterInfo", ID: &iMutableClusterInfo, Members: &mMutableClusterInfo, Traits: &t143, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Provisioned_TargetClusterInfo})
+var sClusterOperationV2Provisioned_VpcConnectionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionInfo", ID: &iVpcConnectionInfo, Members: &mVpcConnectionInfo, Traits: &t144, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Provisioned_VpcConnectionInfo})
+var sClusterOperationV2Serverless = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationV2Serverless, Members: &mClusterOperationV2Serverless, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Serverless})
+var sClusterOperationV2Serverless_SourceClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceClusterInfo", ID: &iServerlessConnectivityInfo, Members: &mServerlessConnectivityInfo, Traits: &t142, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Serverless_SourceClusterInfo})
+var sClusterOperationV2Serverless_TargetClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterInfo", ID: &iServerlessConnectivityInfo, Members: &mServerlessConnectivityInfo, Traits: &t143, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Serverless_TargetClusterInfo})
+var sClusterOperationV2Serverless_VpcConnectionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionInfo", ID: &iVpcConnectionInfoServerless, Members: &mVpcConnectionInfoServerless, Traits: &t144, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Serverless_VpcConnectionInfo})
+var sClusterOperationV2Summary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterOperationV2Summary, Members: &mClusterOperationV2Summary, Type: smithy.ShapeTypeStructure, Ext: &eClusterOperationV2Summary})
+var sClusterOperationV2Summary_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2Summary_ClusterArn})
+var sClusterOperationV2Summary_ClusterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterType", ID: &iClusterType, Members: &mClusterType, Traits: &t114, Type: smithy.ShapeTypeEnum, Ext: &eClusterOperationV2Summary_ClusterType})
+var sClusterOperationV2Summary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___timestampIso8601, Traits: &t148, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationV2Summary_StartTime})
+var sClusterOperationV2Summary_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___timestampIso8601, Traits: &t136, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterOperationV2Summary_EndTime})
+var sClusterOperationV2Summary_OperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationArn", ID: &i___string, Traits: &t138, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2Summary_OperationArn})
+var sClusterOperationV2Summary_OperationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationState", ID: &i___string, Traits: &t139, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2Summary_OperationState})
+var sClusterOperationV2Summary_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationType", ID: &i___string, Traits: &t141, Type: smithy.ShapeTypeString, Ext: &eClusterOperationV2Summary_OperationType})
+var sClusterState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterState, Members: &mClusterState, Type: smithy.ShapeTypeEnum, Ext: &eClusterState})
+var sClusterState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_ACTIVE})
+var sClusterState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_CREATING})
+var sClusterState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_DELETING})
+var sClusterState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_FAILED})
+var sClusterState_HEALING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_HEALING})
+var sClusterState_MAINTENANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAINTENANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_MAINTENANCE})
+var sClusterState_REBOOTING_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REBOOTING_BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_REBOOTING_BROKER})
+var sClusterState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterState_UPDATING})
+var sClusterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterType, Members: &mClusterType, Type: smithy.ShapeTypeEnum, Ext: &eClusterType})
+var sClusterType_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterType_PROVISIONED})
+var sClusterType_SERVERLESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVERLESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterType_SERVERLESS})
+var sCompatibleKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibleKafkaVersion, Members: &mCompatibleKafkaVersion, Type: smithy.ShapeTypeStructure, Ext: &eCompatibleKafkaVersion})
+var sCompatibleKafkaVersion_SourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceVersion", ID: &i___string, Traits: &t149, Type: smithy.ShapeTypeString, Ext: &eCompatibleKafkaVersion_SourceVersion})
+var sCompatibleKafkaVersion_TargetVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVersions", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t150, Type: smithy.ShapeTypeList, Ext: &eCompatibleKafkaVersion_TargetVersions})
+var sConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguration, Members: &mConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration})
+var sConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Arn})
+var sConfiguration_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eConfiguration_CreationTime})
+var sConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Description})
+var sConfiguration_KafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersions", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eConfiguration_KafkaVersions})
+var sConfiguration_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t154, Type: smithy.ShapeTypeStructure, Ext: &eConfiguration_LatestRevision})
+var sConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eConfiguration_Name})
+var sConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConfigurationState, Members: &mConfigurationState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eConfiguration_State})
+var sConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationInfo, Members: &mConfigurationInfo, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationInfo})
+var sConfigurationInfo_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eConfigurationInfo_Arn})
+var sConfigurationInfo_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___long, Traits: &t156, Type: smithy.ShapeTypeLong, Ext: &eConfigurationInfo_Revision})
+var sConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationRevision, Members: &mConfigurationRevision, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationRevision})
+var sConfigurationRevision_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eConfigurationRevision_CreationTime})
+var sConfigurationRevision_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eConfigurationRevision_Description})
+var sConfigurationRevision_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___long, Traits: &t156, Type: smithy.ShapeTypeLong, Ext: &eConfigurationRevision_Revision})
+var sConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationState, Members: &mConfigurationState, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationState})
+var sConfigurationState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationState_ACTIVE})
+var sConfigurationState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationState_DELETING})
+var sConfigurationState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationState_DELETE_FAILED})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eConflictException_InvalidParameter})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectivityInfo, Members: &mConnectivityInfo, Type: smithy.ShapeTypeStructure, Ext: &eConnectivityInfo})
+var sConnectivityInfo_PublicAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicAccess", ID: &iPublicAccess, Members: &mPublicAccess, Traits: &t157, Type: smithy.ShapeTypeStructure, Ext: &eConnectivityInfo_PublicAccess})
+var sConnectivityInfo_VpcConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectivity", ID: &iVpcConnectivity, Members: &mVpcConnectivity, Traits: &t158, Type: smithy.ShapeTypeStructure, Ext: &eConnectivityInfo_VpcConnectivity})
+var sConnectivityInfo_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Traits: &t159, Type: smithy.ShapeTypeEnum, Ext: &eConnectivityInfo_NetworkType})
+var sConsumerGroupOffsetSyncMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumerGroupOffsetSyncMode, Members: &mConsumerGroupOffsetSyncMode, Type: smithy.ShapeTypeEnum, Ext: &eConsumerGroupOffsetSyncMode})
+var sConsumerGroupOffsetSyncMode_LEGACY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGACY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConsumerGroupOffsetSyncMode_LEGACY})
+var sConsumerGroupOffsetSyncMode_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConsumerGroupOffsetSyncMode_ENHANCED})
+var sConsumerGroupReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumerGroupReplication, Members: &mConsumerGroupReplication, Type: smithy.ShapeTypeStructure, Ext: &eConsumerGroupReplication})
+var sConsumerGroupReplication_ConsumerGroupsToExclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupsToExclude", ID: &i___listOf__stringMax256, Members: &m___listOf__stringMax256, Traits: &t160, Type: smithy.ShapeTypeList, Ext: &eConsumerGroupReplication_ConsumerGroupsToExclude})
+var sConsumerGroupReplication_ConsumerGroupsToReplicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupsToReplicate", ID: &i___listOf__stringMax256, Members: &m___listOf__stringMax256, Traits: &t161, Type: smithy.ShapeTypeList, Ext: &eConsumerGroupReplication_ConsumerGroupsToReplicate})
+var sConsumerGroupReplication_DetectAndCopyNewConsumerGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectAndCopyNewConsumerGroups", ID: &i___boolean, Traits: &t162, Type: smithy.ShapeTypeBoolean, Ext: &eConsumerGroupReplication_DetectAndCopyNewConsumerGroups})
+var sConsumerGroupReplication_SynchroniseConsumerGroupOffsets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SynchroniseConsumerGroupOffsets", ID: &i___boolean, Traits: &t163, Type: smithy.ShapeTypeBoolean, Ext: &eConsumerGroupReplication_SynchroniseConsumerGroupOffsets})
+var sConsumerGroupReplication_ConsumerGroupOffsetSyncMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupOffsetSyncMode", ID: &iConsumerGroupOffsetSyncMode, Members: &mConsumerGroupOffsetSyncMode, Traits: &t164, Type: smithy.ShapeTypeEnum, Ext: &eConsumerGroupReplication_ConsumerGroupOffsetSyncMode})
+var sConsumerGroupReplicationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumerGroupReplicationUpdate, Members: &mConsumerGroupReplicationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eConsumerGroupReplicationUpdate})
+var sConsumerGroupReplicationUpdate_ConsumerGroupsToExclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupsToExclude", ID: &i___listOf__stringMax256, Members: &m___listOf__stringMax256, Traits: &t160, Type: smithy.ShapeTypeList, Ext: &eConsumerGroupReplicationUpdate_ConsumerGroupsToExclude})
+var sConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupsToReplicate", ID: &i___listOf__stringMax256, Members: &m___listOf__stringMax256, Traits: &t161, Type: smithy.ShapeTypeList, Ext: &eConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate})
+var sConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectAndCopyNewConsumerGroups", ID: &i___boolean, Traits: &t162, Type: smithy.ShapeTypeBoolean, Ext: &eConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups})
+var sConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SynchroniseConsumerGroupOffsets", ID: &i___boolean, Traits: &t163, Type: smithy.ShapeTypeBoolean, Ext: &eConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets})
+var sControllerMovedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControllerMovedException, Members: &mControllerMovedException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eControllerMovedException})
+var sControllerMovedException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eControllerMovedException_InvalidParameter})
+var sControllerMovedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eControllerMovedException_Message})
+var sControllerNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControllerNodeInfo, Members: &mControllerNodeInfo, Type: smithy.ShapeTypeStructure, Ext: &eControllerNodeInfo})
+var sControllerNodeInfo_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t91, Type: smithy.ShapeTypeList, Ext: &eControllerNodeInfo_Endpoints})
+var sCustomerActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerActionStatus, Members: &mCustomerActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eCustomerActionStatus})
+var sCustomerActionStatus_CRITICAL_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL_ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerActionStatus_CRITICAL_ACTION_REQUIRED})
+var sCustomerActionStatus_ACTION_RECOMMENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_RECOMMENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerActionStatus_ACTION_RECOMMENDED})
+var sCustomerActionStatus_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerActionStatus_NONE})
+var sDeadLetterQueueS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeadLetterQueueS3, Members: &mDeadLetterQueueS3, Type: smithy.ShapeTypeStructure, Ext: &eDeadLetterQueueS3})
+var sDeadLetterQueueS3_BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketArn", ID: &i___string, Traits: &t165, Type: smithy.ShapeTypeString, Ext: &eDeadLetterQueueS3_BucketArn})
+var sDeadLetterQueueS3_ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorOutputPrefix", ID: &i___string, Traits: &t166, Type: smithy.ShapeTypeString, Ext: &eDeadLetterQueueS3_ErrorOutputPrefix})
+var sDeadLetterQueueS3_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i___string, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eDeadLetterQueueS3_ExpectedBucketOwner})
+var sDestinationTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationTable, Members: &mDestinationTable, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable})
+var sDestinationTable_DestinationDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDatabaseName", ID: &i___string, Traits: &t168, Type: smithy.ShapeTypeString, Ext: &eDestinationTable_DestinationDatabaseName})
+var sDestinationTable_DestinationTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableName", ID: &i___string, Traits: &t169, Type: smithy.ShapeTypeString, Ext: &eDestinationTable_DestinationTableName})
+var sDestinationTable_PartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSpec", ID: &iPartitionSpec, Members: &mPartitionSpec, Traits: &t170, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTable_PartitionSpec})
+var sEBSStorageInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEBSStorageInfo, Members: &mEBSStorageInfo, Type: smithy.ShapeTypeStructure, Ext: &eEBSStorageInfo})
+var sEBSStorageInfo_ProvisionedThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedThroughput", ID: &iProvisionedThroughput, Members: &mProvisionedThroughput, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eEBSStorageInfo_ProvisionedThroughput})
+var sEBSStorageInfo_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i___integerMin1Max16384, Traits: &t171, Type: smithy.ShapeTypeInteger, Ext: &eEBSStorageInfo_VolumeSize})
+var sEncryptionAtRest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAtRest, Members: &mEncryptionAtRest, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRest})
+var sEncryptionAtRest_DataVolumeKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataVolumeKMSKeyId", ID: &i___string, Traits: &t172, Type: smithy.ShapeTypeString, Ext: &eEncryptionAtRest_DataVolumeKMSKeyId})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var sEncryptionConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i___string, Traits: &t173, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_KmsKeyArn})
+var sEncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionInfo, Members: &mEncryptionInfo, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionInfo})
+var sEncryptionInfo_EncryptionAtRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRest", ID: &iEncryptionAtRest, Members: &mEncryptionAtRest, Traits: &t174, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionInfo_EncryptionAtRest})
+var sEncryptionInfo_EncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInTransit", ID: &iEncryptionInTransit, Members: &mEncryptionInTransit, Traits: &t175, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionInfo_EncryptionInTransit})
+var sEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionInTransit, Members: &mEncryptionInTransit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionInTransit})
+var sEncryptionInTransit_ClientBroker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientBroker", ID: &iClientBroker, Members: &mClientBroker, Traits: &t176, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionInTransit_ClientBroker})
+var sEncryptionInTransit_InCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InCluster", ID: &i___boolean, Traits: &t177, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptionInTransit_InCluster})
+var sEnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Type: smithy.ShapeTypeEnum, Ext: &eEnhancedMonitoring})
+var sEnhancedMonitoring_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnhancedMonitoring_DEFAULT})
+var sEnhancedMonitoring_PER_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnhancedMonitoring_PER_BROKER})
+var sEnhancedMonitoring_PER_TOPIC_PER_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_TOPIC_PER_BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnhancedMonitoring_PER_TOPIC_PER_BROKER})
+var sEnhancedMonitoring_PER_TOPIC_PER_PARTITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_TOPIC_PER_PARTITION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnhancedMonitoring_PER_TOPIC_PER_PARTITION})
+var sErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure, Ext: &eErrorInfo})
+var sErrorInfo_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i___string, Traits: &t178, Type: smithy.ShapeTypeString, Ext: &eErrorInfo_ErrorCode})
+var sErrorInfo_ErrorString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorString", ID: &i___string, Traits: &t179, Type: smithy.ShapeTypeString, Ext: &eErrorInfo_ErrorString})
+var sFirehose = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehose, Members: &mFirehose, Type: smithy.ShapeTypeStructure, Ext: &eFirehose})
+var sFirehose_DeliveryStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStream", ID: &i___string, Traits: &t180, Type: smithy.ShapeTypeString, Ext: &eFirehose_DeliveryStream})
+var sFirehose_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eFirehose_Enabled})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t181, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sForbiddenException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_InvalidParameter})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_Message})
+var sGroupSubscribedToTopicException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupSubscribedToTopicException, Members: &mGroupSubscribedToTopicException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eGroupSubscribedToTopicException})
+var sGroupSubscribedToTopicException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eGroupSubscribedToTopicException_InvalidParameter})
+var sGroupSubscribedToTopicException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eGroupSubscribedToTopicException_Message})
+var sIam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIam, Members: &mIam, Type: smithy.ShapeTypeStructure, Ext: &eIam})
+var sIam_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eIam_Enabled})
+var sIcebergCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergCompressionType, Members: &mIcebergCompressionType, Type: smithy.ShapeTypeEnum, Ext: &eIcebergCompressionType})
+var sIcebergCompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompressionType_ZSTD})
+var sIcebergCompressionType_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergCompressionType_SNAPPY})
+var sIcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration})
+var sIcebergDestinationConfiguration_AppendOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppendOnly", ID: &i___boolean, Traits: &t182, Type: smithy.ShapeTypeBoolean, Ext: &eIcebergDestinationConfiguration_AppendOnly})
+var sIcebergDestinationConfiguration_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalog, Members: &mCatalog, Traits: &t183, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_Catalog})
+var sIcebergDestinationConfiguration_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i___integer, Traits: &t184, Type: smithy.ShapeTypeInteger, Ext: &eIcebergDestinationConfiguration_DataFreshnessInSeconds})
+var sIcebergDestinationConfiguration_DeadLetterQueueS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3", ID: &iDeadLetterQueueS3, Members: &mDeadLetterQueueS3, Traits: &t185, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_DeadLetterQueueS3})
+var sIcebergDestinationConfiguration_DestinationTableList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableList", ID: &i___listOfDestinationTable, Members: &m___listOfDestinationTable, Traits: &t186, Type: smithy.ShapeTypeList, Ext: &eIcebergDestinationConfiguration_DestinationTableList})
+var sIcebergDestinationConfiguration_SchemaEvolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaEvolution", ID: &iSchemaEvolution, Members: &mSchemaEvolution, Traits: &t187, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_SchemaEvolution})
+var sIcebergDestinationConfiguration_ServiceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleArn", ID: &i___string, Traits: &t188, Type: smithy.ShapeTypeString, Ext: &eIcebergDestinationConfiguration_ServiceExecutionRoleArn})
+var sIcebergDestinationConfiguration_TableCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableCreation", ID: &iTableCreation, Members: &mTableCreation, Traits: &t189, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_TableCreation})
+var sIcebergDestinationConfiguration_CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionType", ID: &iIcebergCompressionType, Members: &mIcebergCompressionType, Traits: &t190, Type: smithy.ShapeTypeEnum, Ext: &eIcebergDestinationConfiguration_CompressionType})
+var sIcebergDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationUpdate, Members: &mIcebergDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate})
+var sIcebergDestinationUpdate_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i___integer, Traits: &t184, Type: smithy.ShapeTypeInteger, Ext: &eIcebergDestinationUpdate_DataFreshnessInSeconds})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t191, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_InvalidParameter})
+var sInternalServerErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_Message})
+var sJmxExporter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJmxExporter, Members: &mJmxExporter, Type: smithy.ShapeTypeStructure, Ext: &eJmxExporter})
+var sJmxExporter_EnabledInBroker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledInBroker", ID: &i___boolean, Traits: &t192, Type: smithy.ShapeTypeBoolean, Ext: &eJmxExporter_EnabledInBroker})
+var sJmxExporterInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJmxExporterInfo, Members: &mJmxExporterInfo, Type: smithy.ShapeTypeStructure, Ext: &eJmxExporterInfo})
+var sJmxExporterInfo_EnabledInBroker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledInBroker", ID: &i___boolean, Traits: &t192, Type: smithy.ShapeTypeBoolean, Ext: &eJmxExporterInfo_EnabledInBroker})
+var sJwtSigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtSigningAlgorithm, Members: &mJwtSigningAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eJwtSigningAlgorithm})
+var sJwtSigningAlgorithm_RS256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RS256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJwtSigningAlgorithm_RS256})
+var sJwtSigningAlgorithm_ES384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJwtSigningAlgorithm_ES384})
+var sKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaCluster, Members: &mKafkaCluster, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster})
+var sKafkaCluster_AmazonMskCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonMskCluster", ID: &iAmazonMskCluster, Members: &mAmazonMskCluster, Traits: &t193, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_AmazonMskCluster})
+var sKafkaCluster_ApacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApacheKafkaCluster", ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Traits: &t194, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_ApacheKafkaCluster})
+var sKafkaCluster_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iKafkaClusterClientVpcConfig, Members: &mKafkaClusterClientVpcConfig, Traits: &t195, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_VpcConfig})
+var sKafkaCluster_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iKafkaClusterClientAuthentication, Members: &mKafkaClusterClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_ClientAuthentication})
+var sKafkaCluster_EncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInTransit", ID: &iKafkaClusterEncryptionInTransit, Members: &mKafkaClusterEncryptionInTransit, Traits: &t175, Type: smithy.ShapeTypeStructure, Ext: &eKafkaCluster_EncryptionInTransit})
+var sKafkaClusterClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterClientAuthentication, Members: &mKafkaClusterClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthentication})
+var sKafkaClusterClientAuthentication_SaslScram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaslScram", ID: &iKafkaClusterSaslScramAuthentication, Members: &mKafkaClusterSaslScramAuthentication, Traits: &t196, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthentication_SaslScram})
+var sKafkaClusterClientAuthentication_MTLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MTLS", ID: &iKafkaClusterMTLSAuthentication, Members: &mKafkaClusterMTLSAuthentication, Traits: &t197, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthentication_MTLS})
+var sKafkaClusterClientAuthentication_SaslOAuthBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaslOAuthBearer", ID: &iKafkaClusterSaslOAuthBearerAuthentication, Members: &mKafkaClusterSaslOAuthBearerAuthentication, Traits: &t198, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientAuthentication_SaslOAuthBearer})
+var sKafkaClusterClientVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterClientVpcConfig, Members: &mKafkaClusterClientVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterClientVpcConfig})
+var sKafkaClusterClientVpcConfig_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t199, Type: smithy.ShapeTypeList, Ext: &eKafkaClusterClientVpcConfig_SecurityGroupIds})
+var sKafkaClusterClientVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t200, Type: smithy.ShapeTypeList, Ext: &eKafkaClusterClientVpcConfig_SubnetIds})
+var sKafkaClusterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterDescription, Members: &mKafkaClusterDescription, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription})
+var sKafkaClusterDescription_AmazonMskCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonMskCluster", ID: &iAmazonMskCluster, Members: &mAmazonMskCluster, Traits: &t193, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_AmazonMskCluster})
+var sKafkaClusterDescription_ApacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApacheKafkaCluster", ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Traits: &t194, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_ApacheKafkaCluster})
+var sKafkaClusterDescription_KafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaClusterAlias", ID: &i___string, Traits: &t201, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterDescription_KafkaClusterAlias})
+var sKafkaClusterDescription_VpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfig", ID: &iKafkaClusterClientVpcConfig, Members: &mKafkaClusterClientVpcConfig, Traits: &t195, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_VpcConfig})
+var sKafkaClusterDescription_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iKafkaClusterClientAuthentication, Members: &mKafkaClusterClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_ClientAuthentication})
+var sKafkaClusterDescription_EncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInTransit", ID: &iKafkaClusterEncryptionInTransit, Members: &mKafkaClusterEncryptionInTransit, Traits: &t175, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterDescription_EncryptionInTransit})
+var sKafkaClusterEncryptionInTransit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterEncryptionInTransit, Members: &mKafkaClusterEncryptionInTransit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterEncryptionInTransit})
+var sKafkaClusterEncryptionInTransit_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iKafkaClusterEncryptionInTransitType, Members: &mKafkaClusterEncryptionInTransitType, Traits: &t202, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterEncryptionInTransit_EncryptionType})
+var sKafkaClusterEncryptionInTransit_RootCaCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootCaCertificate", ID: &i___string, Traits: &t203, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterEncryptionInTransit_RootCaCertificate})
+var sKafkaClusterEncryptionInTransitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterEncryptionInTransitType, Members: &mKafkaClusterEncryptionInTransitType, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterEncryptionInTransitType})
+var sKafkaClusterEncryptionInTransitType_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterEncryptionInTransitType_TLS})
+var sKafkaClusterMTLSAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterMTLSAuthentication, Members: &mKafkaClusterMTLSAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterMTLSAuthentication})
+var sKafkaClusterMTLSAuthentication_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i___string, Traits: &t204, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterMTLSAuthentication_SecretArn})
+var sKafkaClusterOAuthClientCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterOAuthClientCredentials, Members: &mKafkaClusterOAuthClientCredentials, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterOAuthClientCredentials})
+var sKafkaClusterOAuthClientCredentials_TokenRequestSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenRequestSecretArn", ID: &i___string, Traits: &t205, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterOAuthClientCredentials_TokenRequestSecretArn})
+var sKafkaClusterOAuthClientCredentialsAssertion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterOAuthClientCredentialsAssertion, Members: &mKafkaClusterOAuthClientCredentialsAssertion, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterOAuthClientCredentialsAssertion})
+var sKafkaClusterOAuthClientCredentialsAssertion_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i___string, Traits: &t206, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterOAuthClientCredentialsAssertion_Audience})
+var sKafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iJwtSigningAlgorithm, Members: &mJwtSigningAlgorithm, Traits: &t207, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm})
+var sKafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenRequestSecretArn", ID: &i___string, Traits: &t205, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn})
+var sKafkaClusterOAuthIamJwtBearer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterOAuthIamJwtBearer, Members: &mKafkaClusterOAuthIamJwtBearer, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterOAuthIamJwtBearer})
+var sKafkaClusterOAuthIamJwtBearer_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i___string, Traits: &t206, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterOAuthIamJwtBearer_Audience})
+var sKafkaClusterOAuthIamJwtBearer_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iJwtSigningAlgorithm, Members: &mJwtSigningAlgorithm, Traits: &t207, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterOAuthIamJwtBearer_SigningAlgorithm})
+var sKafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenRequestSecretArn", ID: &i___string, Traits: &t205, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn})
+var sKafkaClusterSaslOAuthBearerAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterSaslOAuthBearerAuthentication, Members: &mKafkaClusterSaslOAuthBearerAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslOAuthBearerAuthentication})
+var sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenEndpointUrl", ID: &i___string, Traits: &t208, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl})
+var sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCredentials", ID: &iKafkaClusterOAuthClientCredentials, Members: &mKafkaClusterOAuthClientCredentials, Traits: &t209, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_ClientCredentials})
+var sKafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamJwtBearer", ID: &iKafkaClusterOAuthIamJwtBearer, Members: &mKafkaClusterOAuthIamJwtBearer, Traits: &t210, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer})
+var sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCredentialsAssertion", ID: &iKafkaClusterOAuthClientCredentialsAssertion, Members: &mKafkaClusterOAuthClientCredentialsAssertion, Traits: &t211, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion})
+var sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenEndpointAuthenticationMethod", ID: &iTokenEndpointAuthenticationMethod, Members: &mTokenEndpointAuthenticationMethod, Traits: &t212, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod})
+var sKafkaClusterSaslOAuthBearerAuthentication_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i___string, Traits: &t213, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_Scope})
+var sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenEndpointTlsCertificateArn", ID: &i___string, Traits: &t214, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn})
+var sKafkaClusterSaslScramAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterSaslScramAuthentication, Members: &mKafkaClusterSaslScramAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslScramAuthentication})
+var sKafkaClusterSaslScramAuthentication_Mechanism = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mechanism", ID: &iKafkaClusterSaslScramMechanism, Members: &mKafkaClusterSaslScramMechanism, Traits: &t215, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterSaslScramAuthentication_Mechanism})
+var sKafkaClusterSaslScramAuthentication_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i___string, Traits: &t204, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterSaslScramAuthentication_SecretArn})
+var sKafkaClusterSaslScramMechanism = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterSaslScramMechanism, Members: &mKafkaClusterSaslScramMechanism, Type: smithy.ShapeTypeEnum, Ext: &eKafkaClusterSaslScramMechanism})
+var sKafkaClusterSaslScramMechanism_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslScramMechanism_SHA256})
+var sKafkaClusterSaslScramMechanism_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSaslScramMechanism_SHA512})
+var sKafkaClusterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaClusterSummary, Members: &mKafkaClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSummary})
+var sKafkaClusterSummary_AmazonMskCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonMskCluster", ID: &iAmazonMskCluster, Members: &mAmazonMskCluster, Traits: &t193, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSummary_AmazonMskCluster})
+var sKafkaClusterSummary_ApacheKafkaCluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApacheKafkaCluster", ID: &iApacheKafkaCluster, Members: &mApacheKafkaCluster, Traits: &t194, Type: smithy.ShapeTypeStructure, Ext: &eKafkaClusterSummary_ApacheKafkaCluster})
+var sKafkaClusterSummary_KafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaClusterAlias", ID: &i___string, Traits: &t201, Type: smithy.ShapeTypeString, Ext: &eKafkaClusterSummary_KafkaClusterAlias})
+var sKafkaRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaRequestException, Members: &mKafkaRequestException, Traits: &t71, Type: smithy.ShapeTypeStructure, Ext: &eKafkaRequestException})
+var sKafkaRequestException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eKafkaRequestException_InvalidParameter})
+var sKafkaRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eKafkaRequestException_Message})
+var sKafkaTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaTimeoutException, Members: &mKafkaTimeoutException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eKafkaTimeoutException})
+var sKafkaTimeoutException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eKafkaTimeoutException_InvalidParameter})
+var sKafkaTimeoutException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eKafkaTimeoutException_Message})
+var sKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaVersion, Members: &mKafkaVersion, Type: smithy.ShapeTypeStructure, Ext: &eKafkaVersion})
+var sKafkaVersion_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i___string, Traits: &t216, Type: smithy.ShapeTypeString, Ext: &eKafkaVersion_Version})
+var sKafkaVersion_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iKafkaVersionStatus, Members: &mKafkaVersionStatus, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eKafkaVersion_Status})
+var sKafkaVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKafkaVersionStatus, Members: &mKafkaVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eKafkaVersionStatus})
+var sKafkaVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaVersionStatus_ACTIVE})
+var sKafkaVersionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKafkaVersionStatus_DEPRECATED})
+var sLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDelivery, Members: &mLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eLogDelivery})
+var sLogDelivery_ReplicatorLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorLogDelivery", ID: &iReplicatorLogDelivery, Members: &mReplicatorLogDelivery, Traits: &t217, Type: smithy.ShapeTypeStructure, Ext: &eLogDelivery_ReplicatorLogDelivery})
+var sLoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingInfo, Members: &mLoggingInfo, Type: smithy.ShapeTypeStructure, Ext: &eLoggingInfo})
+var sLoggingInfo_AuthorizerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerLogs", ID: &iAuthorizerLogs, Members: &mAuthorizerLogs, Traits: &t218, Type: smithy.ShapeTypeStructure, Ext: &eLoggingInfo_AuthorizerLogs})
+var sLoggingInfo_BrokerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerLogs", ID: &iBrokerLogs, Members: &mBrokerLogs, Traits: &t219, Type: smithy.ShapeTypeStructure, Ext: &eLoggingInfo_BrokerLogs})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMutableClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMutableClusterInfo, Members: &mMutableClusterInfo, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo})
+var sMutableClusterInfo_BrokerEBSVolumeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerEBSVolumeInfo", ID: &i___listOfBrokerEBSVolumeInfo, Members: &m___listOfBrokerEBSVolumeInfo, Traits: &t220, Type: smithy.ShapeTypeList, Ext: &eMutableClusterInfo_BrokerEBSVolumeInfo})
+var sMutableClusterInfo_ConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationInfo", ID: &iConfigurationInfo, Members: &mConfigurationInfo, Traits: &t221, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_ConfigurationInfo})
+var sMutableClusterInfo_NumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBrokerNodes", ID: &i___integer, Traits: &t130, Type: smithy.ShapeTypeInteger, Ext: &eMutableClusterInfo_NumberOfBrokerNodes})
+var sMutableClusterInfo_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eMutableClusterInfo_EnhancedMonitoring})
+var sMutableClusterInfo_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoring, Members: &mOpenMonitoring, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_OpenMonitoring})
+var sMutableClusterInfo_ZookeeperAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperAccess", ID: &iZookeeperAccess, Members: &mZookeeperAccess, Traits: &t222, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_ZookeeperAccess})
+var sMutableClusterInfo_KafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersion", ID: &i___string, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eMutableClusterInfo_KafkaVersion})
+var sMutableClusterInfo_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_LoggingInfo})
+var sMutableClusterInfo_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i___stringMin5Max32, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eMutableClusterInfo_InstanceType})
+var sMutableClusterInfo_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_ClientAuthentication})
+var sMutableClusterInfo_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_EncryptionInfo})
+var sMutableClusterInfo_ConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectivityInfo", ID: &iConnectivityInfo, Members: &mConnectivityInfo, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_ConnectivityInfo})
+var sMutableClusterInfo_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eMutableClusterInfo_StorageMode})
+var sMutableClusterInfo_BrokerCountUpdateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerCountUpdateInfo", ID: &iBrokerCountUpdateInfo, Members: &mBrokerCountUpdateInfo, Traits: &t223, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_BrokerCountUpdateInfo})
+var sMutableClusterInfo_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eMutableClusterInfo_Rebalancing})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkType})
+var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV4})
+var sNetworkType_DUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_DUAL})
+var sNodeExporter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeExporter, Members: &mNodeExporter, Type: smithy.ShapeTypeStructure, Ext: &eNodeExporter})
+var sNodeExporter_EnabledInBroker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledInBroker", ID: &i___boolean, Traits: &t192, Type: smithy.ShapeTypeBoolean, Ext: &eNodeExporter_EnabledInBroker})
+var sNodeExporterInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeExporterInfo, Members: &mNodeExporterInfo, Type: smithy.ShapeTypeStructure, Ext: &eNodeExporterInfo})
+var sNodeExporterInfo_EnabledInBroker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledInBroker", ID: &i___boolean, Traits: &t192, Type: smithy.ShapeTypeBoolean, Ext: &eNodeExporterInfo_EnabledInBroker})
+var sNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeInfo, Members: &mNodeInfo, Type: smithy.ShapeTypeStructure, Ext: &eNodeInfo})
+var sNodeInfo_AddedToClusterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddedToClusterTime", ID: &i___string, Traits: &t224, Type: smithy.ShapeTypeString, Ext: &eNodeInfo_AddedToClusterTime})
+var sNodeInfo_BrokerNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerNodeInfo", ID: &iBrokerNodeInfo, Members: &mBrokerNodeInfo, Traits: &t225, Type: smithy.ShapeTypeStructure, Ext: &eNodeInfo_BrokerNodeInfo})
+var sNodeInfo_ControllerNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControllerNodeInfo", ID: &iControllerNodeInfo, Members: &mControllerNodeInfo, Traits: &t226, Type: smithy.ShapeTypeStructure, Ext: &eNodeInfo_ControllerNodeInfo})
+var sNodeInfo_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &i___string, Traits: &t81, Type: smithy.ShapeTypeString, Ext: &eNodeInfo_InstanceType})
+var sNodeInfo_NodeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeARN", ID: &i___string, Traits: &t227, Type: smithy.ShapeTypeString, Ext: &eNodeInfo_NodeARN})
+var sNodeInfo_NodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeType", ID: &iNodeType, Members: &mNodeType, Traits: &t228, Type: smithy.ShapeTypeEnum, Ext: &eNodeInfo_NodeType})
+var sNodeInfo_ZookeeperNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperNodeInfo", ID: &iZookeeperNodeInfo, Members: &mZookeeperNodeInfo, Traits: &t229, Type: smithy.ShapeTypeStructure, Ext: &eNodeInfo_ZookeeperNodeInfo})
+var sNodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeType, Members: &mNodeType, Type: smithy.ShapeTypeEnum, Ext: &eNodeType})
+var sNodeType_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNodeType_BROKER})
+var sNotControllerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotControllerException, Members: &mNotControllerException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eNotControllerException})
+var sNotControllerException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eNotControllerException_InvalidParameter})
+var sNotControllerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eNotControllerException_Message})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t230, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_InvalidParameter})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sOpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenMonitoring, Members: &mOpenMonitoring, Type: smithy.ShapeTypeStructure, Ext: &eOpenMonitoring})
+var sOpenMonitoring_Prometheus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prometheus", ID: &iPrometheus, Members: &mPrometheus, Traits: &t231, Type: smithy.ShapeTypeStructure, Ext: &eOpenMonitoring_Prometheus})
+var sOpenMonitoringInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenMonitoringInfo, Members: &mOpenMonitoringInfo, Type: smithy.ShapeTypeStructure, Ext: &eOpenMonitoringInfo})
+var sOpenMonitoringInfo_Prometheus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prometheus", ID: &iPrometheusInfo, Members: &mPrometheusInfo, Traits: &t231, Type: smithy.ShapeTypeStructure, Ext: &eOpenMonitoringInfo_Prometheus})
+var sPartitionSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionSource, Members: &mPartitionSource, Type: smithy.ShapeTypeStructure, Ext: &ePartitionSource})
+var sPartitionSource_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceName", ID: &i___string, Traits: &t232, Type: smithy.ShapeTypeString, Ext: &ePartitionSource_SourceName})
+var sPartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &ePartitionSpec})
+var sPartitionSpec_PartitionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionStrategy", ID: &iPartitionStrategy, Members: &mPartitionStrategy, Traits: &t233, Type: smithy.ShapeTypeEnum, Ext: &ePartitionSpec_PartitionStrategy})
+var sPartitionSpec_SourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceList", ID: &i___listOfPartitionSource, Members: &m___listOfPartitionSource, Traits: &t234, Type: smithy.ShapeTypeList, Ext: &ePartitionSpec_SourceList})
+var sPartitionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionStrategy, Members: &mPartitionStrategy, Type: smithy.ShapeTypeEnum, Ext: &ePartitionStrategy})
+var sPartitionStrategy_TIME_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePartitionStrategy_TIME_HOUR})
+var sPrometheus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrometheus, Members: &mPrometheus, Type: smithy.ShapeTypeStructure, Ext: &ePrometheus})
+var sPrometheus_JmxExporter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JmxExporter", ID: &iJmxExporter, Members: &mJmxExporter, Traits: &t235, Type: smithy.ShapeTypeStructure, Ext: &ePrometheus_JmxExporter})
+var sPrometheus_NodeExporter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeExporter", ID: &iNodeExporter, Members: &mNodeExporter, Traits: &t236, Type: smithy.ShapeTypeStructure, Ext: &ePrometheus_NodeExporter})
+var sPrometheusInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrometheusInfo, Members: &mPrometheusInfo, Type: smithy.ShapeTypeStructure, Ext: &ePrometheusInfo})
+var sPrometheusInfo_JmxExporter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JmxExporter", ID: &iJmxExporterInfo, Members: &mJmxExporterInfo, Traits: &t235, Type: smithy.ShapeTypeStructure, Ext: &ePrometheusInfo_JmxExporter})
+var sPrometheusInfo_NodeExporter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeExporter", ID: &iNodeExporterInfo, Members: &mNodeExporterInfo, Traits: &t236, Type: smithy.ShapeTypeStructure, Ext: &ePrometheusInfo_NodeExporter})
+var sProvisioned = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisioned, Members: &mProvisioned, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned})
+var sProvisioned_BrokerNodeGroupInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerNodeGroupInfo", ID: &iBrokerNodeGroupInfo, Members: &mBrokerNodeGroupInfo, Traits: &t123, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_BrokerNodeGroupInfo})
+var sProvisioned_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_Rebalancing})
+var sProvisioned_CurrentBrokerSoftwareInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentBrokerSoftwareInfo", ID: &iBrokerSoftwareInfo, Members: &mBrokerSoftwareInfo, Traits: &t90, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_CurrentBrokerSoftwareInfo})
+var sProvisioned_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_ClientAuthentication})
+var sProvisioned_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_EncryptionInfo})
+var sProvisioned_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eProvisioned_EnhancedMonitoring})
+var sProvisioned_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoringInfo, Members: &mOpenMonitoringInfo, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_OpenMonitoring})
+var sProvisioned_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eProvisioned_LoggingInfo})
+var sProvisioned_NumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBrokerNodes", ID: &i___integerMin1Max15, Traits: &t130, Type: smithy.ShapeTypeInteger, Ext: &eProvisioned_NumberOfBrokerNodes})
+var sProvisioned_ZookeeperConnectString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperConnectString", ID: &i___string, Traits: &t131, Type: smithy.ShapeTypeString, Ext: &eProvisioned_ZookeeperConnectString})
+var sProvisioned_ZookeeperConnectStringTls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperConnectStringTls", ID: &i___string, Traits: &t132, Type: smithy.ShapeTypeString, Ext: &eProvisioned_ZookeeperConnectStringTls})
+var sProvisioned_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eProvisioned_StorageMode})
+var sProvisioned_CustomerActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerActionStatus", ID: &iCustomerActionStatus, Members: &mCustomerActionStatus, Traits: &t134, Type: smithy.ShapeTypeEnum, Ext: &eProvisioned_CustomerActionStatus})
+var sProvisionedRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedRequest, Members: &mProvisionedRequest, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest})
+var sProvisionedRequest_BrokerNodeGroupInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerNodeGroupInfo", ID: &iBrokerNodeGroupInfo, Members: &mBrokerNodeGroupInfo, Traits: &t123, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_BrokerNodeGroupInfo})
+var sProvisionedRequest_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_Rebalancing})
+var sProvisionedRequest_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_ClientAuthentication})
+var sProvisionedRequest_ConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationInfo", ID: &iConfigurationInfo, Members: &mConfigurationInfo, Traits: &t221, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_ConfigurationInfo})
+var sProvisionedRequest_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_EncryptionInfo})
+var sProvisionedRequest_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eProvisionedRequest_EnhancedMonitoring})
+var sProvisionedRequest_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoringInfo, Members: &mOpenMonitoringInfo, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_OpenMonitoring})
+var sProvisionedRequest_KafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersion", ID: &i___stringMin1Max128, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eProvisionedRequest_KafkaVersion})
+var sProvisionedRequest_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedRequest_LoggingInfo})
+var sProvisionedRequest_NumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBrokerNodes", ID: &i___integerMin1Max15, Traits: &t130, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedRequest_NumberOfBrokerNodes})
+var sProvisionedRequest_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eProvisionedRequest_StorageMode})
+var sProvisionedThroughput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedThroughput, Members: &mProvisionedThroughput, Type: smithy.ShapeTypeStructure, Ext: &eProvisionedThroughput})
+var sProvisionedThroughput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eProvisionedThroughput_Enabled})
+var sProvisionedThroughput_VolumeThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeThroughput", ID: &i___integer, Traits: &t237, Type: smithy.ShapeTypeInteger, Ext: &eProvisionedThroughput_VolumeThroughput})
+var sPublicAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicAccess, Members: &mPublicAccess, Type: smithy.ShapeTypeStructure, Ext: &ePublicAccess})
+var sPublicAccess_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Traits: &t238, Type: smithy.ShapeTypeString, Ext: &ePublicAccess_Type})
+var sReassignmentInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReassignmentInProgressException, Members: &mReassignmentInProgressException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eReassignmentInProgressException})
+var sReassignmentInProgressException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eReassignmentInProgressException_InvalidParameter})
+var sReassignmentInProgressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eReassignmentInProgressException_Message})
+var sRebalancing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebalancing, Members: &mRebalancing, Type: smithy.ShapeTypeStructure, Ext: &eRebalancing})
+var sRebalancing_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRebalancingStatus, Members: &mRebalancingStatus, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eRebalancing_Status})
+var sRebalancingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebalancingStatus, Members: &mRebalancingStatus, Type: smithy.ShapeTypeEnum, Ext: &eRebalancingStatus})
+var sRebalancingStatus_PAUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRebalancingStatus_PAUSED})
+var sRebalancingStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRebalancingStatus_ACTIVE})
+var sRecordConverter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordConverter, Members: &mRecordConverter, Type: smithy.ShapeTypeStructure, Ext: &eRecordConverter})
+var sRecordConverter_ValueConverter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueConverter", ID: &iValueConverter, Members: &mValueConverter, Traits: &t239, Type: smithy.ShapeTypeEnum, Ext: &eRecordConverter_ValueConverter})
+var sRecordSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordSchema, Members: &mRecordSchema, Type: smithy.ShapeTypeStructure, Ext: &eRecordSchema})
+var sRecordSchema_GsrArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GsrArn", ID: &i___string, Traits: &t240, Type: smithy.ShapeTypeString, Ext: &eRecordSchema_GsrArn})
+var sReplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationInfo, Members: &mReplicationInfo, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfo})
+var sReplicationInfo_ConsumerGroupReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupReplication", ID: &iConsumerGroupReplication, Members: &mConsumerGroupReplication, Traits: &t241, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfo_ConsumerGroupReplication})
+var sReplicationInfo_SourceKafkaClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterArn", ID: &i___string, Traits: &t242, Type: smithy.ShapeTypeString, Ext: &eReplicationInfo_SourceKafkaClusterArn})
+var sReplicationInfo_SourceKafkaClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterId", ID: &i___string, Traits: &t243, Type: smithy.ShapeTypeString, Ext: &eReplicationInfo_SourceKafkaClusterId})
+var sReplicationInfo_TargetCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCompressionType", ID: &iTargetCompressionType, Members: &mTargetCompressionType, Traits: &t244, Type: smithy.ShapeTypeEnum, Ext: &eReplicationInfo_TargetCompressionType})
+var sReplicationInfo_TargetKafkaClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterArn", ID: &i___string, Traits: &t245, Type: smithy.ShapeTypeString, Ext: &eReplicationInfo_TargetKafkaClusterArn})
+var sReplicationInfo_TargetKafkaClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterId", ID: &i___string, Traits: &t246, Type: smithy.ShapeTypeString, Ext: &eReplicationInfo_TargetKafkaClusterId})
+var sReplicationInfo_TopicReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicReplication", ID: &iTopicReplication, Members: &mTopicReplication, Traits: &t247, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfo_TopicReplication})
+var sReplicationInfoDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationInfoDescription, Members: &mReplicationInfoDescription, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfoDescription})
+var sReplicationInfoDescription_ConsumerGroupReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupReplication", ID: &iConsumerGroupReplication, Members: &mConsumerGroupReplication, Traits: &t241, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfoDescription_ConsumerGroupReplication})
+var sReplicationInfoDescription_SourceKafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterAlias", ID: &i___string, Traits: &t248, Type: smithy.ShapeTypeString, Ext: &eReplicationInfoDescription_SourceKafkaClusterAlias})
+var sReplicationInfoDescription_TargetCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCompressionType", ID: &iTargetCompressionType, Members: &mTargetCompressionType, Traits: &t244, Type: smithy.ShapeTypeEnum, Ext: &eReplicationInfoDescription_TargetCompressionType})
+var sReplicationInfoDescription_TargetKafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterAlias", ID: &i___string, Traits: &t249, Type: smithy.ShapeTypeString, Ext: &eReplicationInfoDescription_TargetKafkaClusterAlias})
+var sReplicationInfoDescription_TopicReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicReplication", ID: &iTopicReplication, Members: &mTopicReplication, Traits: &t247, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfoDescription_TopicReplication})
+var sReplicationInfoSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationInfoSummary, Members: &mReplicationInfoSummary, Type: smithy.ShapeTypeStructure, Ext: &eReplicationInfoSummary})
+var sReplicationInfoSummary_SourceKafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterAlias", ID: &i___string, Traits: &t248, Type: smithy.ShapeTypeString, Ext: &eReplicationInfoSummary_SourceKafkaClusterAlias})
+var sReplicationInfoSummary_TargetKafkaClusterAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterAlias", ID: &i___string, Traits: &t249, Type: smithy.ShapeTypeString, Ext: &eReplicationInfoSummary_TargetKafkaClusterAlias})
+var sReplicationStartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStartingPosition, Members: &mReplicationStartingPosition, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStartingPosition})
+var sReplicationStartingPosition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iReplicationStartingPositionType, Members: &mReplicationStartingPositionType, Traits: &t238, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStartingPosition_Type})
+var sReplicationStartingPositionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStartingPositionType, Members: &mReplicationStartingPositionType, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStartingPositionType})
+var sReplicationStartingPositionType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStartingPositionType_LATEST})
+var sReplicationStartingPositionType_EARLIEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EARLIEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStartingPositionType_EARLIEST})
+var sReplicationStateInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStateInfo, Members: &mReplicationStateInfo, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStateInfo})
+var sReplicationStateInfo_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eReplicationStateInfo_Code})
+var sReplicationStateInfo_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eReplicationStateInfo_Message})
+var sReplicationTopicNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationTopicNameConfiguration, Members: &mReplicationTopicNameConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eReplicationTopicNameConfiguration})
+var sReplicationTopicNameConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iReplicationTopicNameConfigurationType, Members: &mReplicationTopicNameConfigurationType, Traits: &t238, Type: smithy.ShapeTypeEnum, Ext: &eReplicationTopicNameConfiguration_Type})
+var sReplicationTopicNameConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationTopicNameConfigurationType, Members: &mReplicationTopicNameConfigurationType, Type: smithy.ShapeTypeEnum, Ext: &eReplicationTopicNameConfigurationType})
+var sReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS})
+var sReplicationTopicNameConfigurationType_IDENTICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationTopicNameConfigurationType_IDENTICAL})
+var sReplicatorCloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorCloudWatchLogs, Members: &mReplicatorCloudWatchLogs, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorCloudWatchLogs})
+var sReplicatorCloudWatchLogs_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eReplicatorCloudWatchLogs_Enabled})
+var sReplicatorCloudWatchLogs_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i___string, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eReplicatorCloudWatchLogs_LogGroup})
+var sReplicatorFirehose = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorFirehose, Members: &mReplicatorFirehose, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorFirehose})
+var sReplicatorFirehose_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eReplicatorFirehose_Enabled})
+var sReplicatorFirehose_DeliveryStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStream", ID: &i___string, Traits: &t180, Type: smithy.ShapeTypeString, Ext: &eReplicatorFirehose_DeliveryStream})
+var sReplicatorLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorLogDelivery, Members: &mReplicatorLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorLogDelivery})
+var sReplicatorLogDelivery_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iReplicatorCloudWatchLogs, Members: &mReplicatorCloudWatchLogs, Traits: &t68, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorLogDelivery_CloudWatchLogs})
+var sReplicatorLogDelivery_Firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firehose", ID: &iReplicatorFirehose, Members: &mReplicatorFirehose, Traits: &t69, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorLogDelivery_Firehose})
+var sReplicatorLogDelivery_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iReplicatorS3, Members: &mReplicatorS3, Traits: &t70, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorLogDelivery_S3})
+var sReplicatorS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorS3, Members: &mReplicatorS3, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorS3})
+var sReplicatorS3_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eReplicatorS3_Enabled})
+var sReplicatorS3_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i___string, Traits: &t250, Type: smithy.ShapeTypeString, Ext: &eReplicatorS3_Bucket})
+var sReplicatorS3_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i___string, Traits: &t251, Type: smithy.ShapeTypeString, Ext: &eReplicatorS3_Prefix})
+var sReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorState, Members: &mReplicatorState, Type: smithy.ShapeTypeEnum, Ext: &eReplicatorState})
+var sReplicatorState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorState_RUNNING})
+var sReplicatorState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorState_CREATING})
+var sReplicatorState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorState_UPDATING})
+var sReplicatorState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorState_DELETING})
+var sReplicatorState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorState_FAILED})
+var sReplicatorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicatorSummary, Members: &mReplicatorSummary, Type: smithy.ShapeTypeStructure, Ext: &eReplicatorSummary})
+var sReplicatorSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eReplicatorSummary_CreationTime})
+var sReplicatorSummary_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eReplicatorSummary_CurrentVersion})
+var sReplicatorSummary_IsReplicatorReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsReplicatorReference", ID: &i___boolean, Traits: &t252, Type: smithy.ShapeTypeBoolean, Ext: &eReplicatorSummary_IsReplicatorReference})
+var sReplicatorSummary_KafkaClustersSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaClustersSummary", ID: &i___listOfKafkaClusterSummary, Members: &m___listOfKafkaClusterSummary, Traits: &t253, Type: smithy.ShapeTypeList, Ext: &eReplicatorSummary_KafkaClustersSummary})
+var sReplicatorSummary_ReplicationInfoSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationInfoSummaryList", ID: &i___listOfReplicationInfoSummary, Members: &m___listOfReplicationInfoSummary, Traits: &t254, Type: smithy.ShapeTypeList, Ext: &eReplicatorSummary_ReplicationInfoSummaryList})
+var sReplicatorSummary_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t255, Type: smithy.ShapeTypeString, Ext: &eReplicatorSummary_ReplicatorArn})
+var sReplicatorSummary_ReplicatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorName", ID: &i___string, Traits: &t256, Type: smithy.ShapeTypeString, Ext: &eReplicatorSummary_ReplicatorName})
+var sReplicatorSummary_ReplicatorResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorResourceArn", ID: &i___string, Traits: &t257, Type: smithy.ShapeTypeString, Ext: &eReplicatorSummary_ReplicatorResourceArn})
+var sReplicatorSummary_ReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorState", ID: &iReplicatorState, Members: &mReplicatorState, Traits: &t258, Type: smithy.ShapeTypeEnum, Ext: &eReplicatorSummary_ReplicatorState})
+var sS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3, Members: &mS3, Type: smithy.ShapeTypeStructure, Ext: &eS3})
+var sS3_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i___string, Traits: &t250, Type: smithy.ShapeTypeString, Ext: &eS3_Bucket})
+var sS3_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eS3_Enabled})
+var sS3_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i___string, Traits: &t251, Type: smithy.ShapeTypeString, Ext: &eS3_Prefix})
+var sS3CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3CompressionType, Members: &mS3CompressionType, Type: smithy.ShapeTypeEnum, Ext: &eS3CompressionType})
+var sS3CompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3CompressionType_NONE})
+var sS3CompressionType_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3CompressionType_GZIP})
+var sS3CompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3CompressionType_ZSTD})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration})
+var sS3DestinationConfiguration_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i___integer, Traits: &t184, Type: smithy.ShapeTypeInteger, Ext: &eS3DestinationConfiguration_DataFreshnessInSeconds})
+var sS3DestinationConfiguration_DeadLetterQueueS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3", ID: &iDeadLetterQueueS3, Members: &mDeadLetterQueueS3, Traits: &t185, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration_DeadLetterQueueS3})
+var sS3DestinationConfiguration_ServiceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleArn", ID: &i___string, Traits: &t188, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_ServiceExecutionRoleArn})
+var sS3DestinationConfiguration_Storage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Storage", ID: &iS3Storage, Members: &mS3Storage, Traits: &t259, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration_Storage})
+var sS3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationUpdate})
+var sS3DestinationUpdate_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i___integer, Traits: &t184, Type: smithy.ShapeTypeInteger, Ext: &eS3DestinationUpdate_DataFreshnessInSeconds})
+var sS3Storage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Storage, Members: &mS3Storage, Type: smithy.ShapeTypeStructure, Ext: &eS3Storage})
+var sS3Storage_BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketArn", ID: &i___string, Traits: &t165, Type: smithy.ShapeTypeString, Ext: &eS3Storage_BucketArn})
+var sS3Storage_CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionType", ID: &iS3CompressionType, Members: &mS3CompressionType, Traits: &t190, Type: smithy.ShapeTypeEnum, Ext: &eS3Storage_CompressionType})
+var sS3Storage_OutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputPrefix", ID: &i___string, Traits: &t260, Type: smithy.ShapeTypeString, Ext: &eS3Storage_OutputPrefix})
+var sS3Storage_OutputKeyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputKeyTemplate", ID: &i___string, Traits: &t261, Type: smithy.ShapeTypeString, Ext: &eS3Storage_OutputKeyTemplate})
+var sS3Storage_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iS3StorageClass, Members: &mS3StorageClass, Traits: &t262, Type: smithy.ShapeTypeEnum, Ext: &eS3Storage_StorageClass})
+var sS3Storage_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i___string, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eS3Storage_ExpectedBucketOwner})
+var sS3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum, Ext: &eS3StorageClass})
+var sS3StorageClass_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_STANDARD})
+var sS3StorageClass_INTELLIGENT_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTELLIGENT_TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_INTELLIGENT_TIERING})
+var sS3StorageClass_GLACIER_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLACIER_IR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3StorageClass_GLACIER_IR})
+var sSasl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSasl, Members: &mSasl, Type: smithy.ShapeTypeStructure, Ext: &eSasl})
+var sSasl_Scram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scram", ID: &iScram, Members: &mScram, Traits: &t263, Type: smithy.ShapeTypeStructure, Ext: &eSasl_Scram})
+var sSasl_Iam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iam", ID: &iIam, Members: &mIam, Traits: &t264, Type: smithy.ShapeTypeStructure, Ext: &eSasl_Iam})
+var sSchemaEvolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaEvolution, Members: &mSchemaEvolution, Type: smithy.ShapeTypeStructure, Ext: &eSchemaEvolution})
+var sSchemaEvolution_EnableSchemaEvolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSchemaEvolution", ID: &i___boolean, Traits: &t265, Type: smithy.ShapeTypeBoolean, Ext: &eSchemaEvolution_EnableSchemaEvolution})
+var sScram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScram, Members: &mScram, Type: smithy.ShapeTypeStructure, Ext: &eScram})
+var sScram_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eScram_Enabled})
+var sServerless = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerless, Members: &mServerless, Type: smithy.ShapeTypeStructure, Ext: &eServerless})
+var sServerless_VpcConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfigs", ID: &i___listOfVpcConfig, Members: &m___listOfVpcConfig, Traits: &t266, Type: smithy.ShapeTypeList, Ext: &eServerless_VpcConfigs})
+var sServerless_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iServerlessClientAuthentication, Members: &mServerlessClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eServerless_ClientAuthentication})
+var sServerless_ConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectivityInfo", ID: &iServerlessConnectivityInfo, Members: &mServerlessConnectivityInfo, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eServerless_ConnectivityInfo})
+var sServerlessClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessClientAuthentication, Members: &mServerlessClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eServerlessClientAuthentication})
+var sServerlessClientAuthentication_Sasl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sasl", ID: &iServerlessSasl, Members: &mServerlessSasl, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &eServerlessClientAuthentication_Sasl})
+var sServerlessConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessConnectivityInfo, Members: &mServerlessConnectivityInfo, Type: smithy.ShapeTypeStructure, Ext: &eServerlessConnectivityInfo})
+var sServerlessConnectivityInfo_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Traits: &t159, Type: smithy.ShapeTypeEnum, Ext: &eServerlessConnectivityInfo_NetworkType})
+var sServerlessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessRequest, Members: &mServerlessRequest, Type: smithy.ShapeTypeStructure, Ext: &eServerlessRequest})
+var sServerlessRequest_VpcConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfigs", ID: &i___listOfVpcConfig, Members: &m___listOfVpcConfig, Traits: &t266, Type: smithy.ShapeTypeList, Ext: &eServerlessRequest_VpcConfigs})
+var sServerlessRequest_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iServerlessClientAuthentication, Members: &mServerlessClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eServerlessRequest_ClientAuthentication})
+var sServerlessSasl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerlessSasl, Members: &mServerlessSasl, Type: smithy.ShapeTypeStructure, Ext: &eServerlessSasl})
+var sServerlessSasl_Iam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iam", ID: &iIam, Members: &mIam, Traits: &t264, Type: smithy.ShapeTypeStructure, Ext: &eServerlessSasl_Iam})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t267, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sServiceUnavailableException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_InvalidParameter})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_Message})
+var sStateInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStateInfo, Members: &mStateInfo, Type: smithy.ShapeTypeStructure, Ext: &eStateInfo})
+var sStateInfo_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eStateInfo_Code})
+var sStateInfo_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eStateInfo_Message})
+var sStorageInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageInfo, Members: &mStorageInfo, Type: smithy.ShapeTypeStructure, Ext: &eStorageInfo})
+var sStorageInfo_EbsStorageInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EbsStorageInfo", ID: &iEBSStorageInfo, Members: &mEBSStorageInfo, Traits: &t268, Type: smithy.ShapeTypeStructure, Ext: &eStorageInfo_EbsStorageInfo})
+var sStorageMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageMode, Members: &mStorageMode, Type: smithy.ShapeTypeEnum, Ext: &eStorageMode})
+var sStorageMode_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMode_LOCAL})
+var sStorageMode_TIERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStorageMode_TIERED})
+var sTableCreation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableCreation, Members: &mTableCreation, Type: smithy.ShapeTypeStructure, Ext: &eTableCreation})
+var sTableCreation_EnableTableCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableTableCreation", ID: &i___boolean, Traits: &t269, Type: smithy.ShapeTypeBoolean, Ext: &eTableCreation_EnableTableCreation})
+var sTargetCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetCompressionType, Members: &mTargetCompressionType, Type: smithy.ShapeTypeEnum, Ext: &eTargetCompressionType})
+var sTargetCompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetCompressionType_NONE})
+var sTargetCompressionType_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetCompressionType_GZIP})
+var sTargetCompressionType_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetCompressionType_SNAPPY})
+var sTargetCompressionType_LZ4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LZ4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetCompressionType_LZ4})
+var sTargetCompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetCompressionType_ZSTD})
+var sTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTls, Members: &mTls, Type: smithy.ShapeTypeStructure, Ext: &eTls})
+var sTls_CertificateAuthorityArnList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArnList", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t270, Type: smithy.ShapeTypeList, Ext: &eTls_CertificateAuthorityArnList})
+var sTls_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eTls_Enabled})
+var sTokenEndpointAuthenticationMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenEndpointAuthenticationMethod, Members: &mTokenEndpointAuthenticationMethod, Type: smithy.ShapeTypeEnum, Ext: &eTokenEndpointAuthenticationMethod})
+var sTokenEndpointAuthenticationMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenEndpointAuthenticationMethod_POST})
+var sTokenEndpointAuthenticationMethod_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenEndpointAuthenticationMethod_BASIC})
+var sTokenEndpointAuthenticationMethod_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenEndpointAuthenticationMethod_NONE})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t271, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_InvalidParameter})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var sTopicConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicConfiguration, Members: &mTopicConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTopicConfiguration})
+var sTopicConfiguration_RecordConverter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordConverter", ID: &iRecordConverter, Members: &mRecordConverter, Traits: &t272, Type: smithy.ShapeTypeStructure, Ext: &eTopicConfiguration_RecordConverter})
+var sTopicConfiguration_RecordSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSchema", ID: &iRecordSchema, Members: &mRecordSchema, Traits: &t273, Type: smithy.ShapeTypeStructure, Ext: &eTopicConfiguration_RecordSchema})
+var sTopicConfiguration_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eTopicConfiguration_TopicArn})
+var sTopicExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicExistsException, Members: &mTopicExistsException, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eTopicExistsException})
+var sTopicExistsException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eTopicExistsException_InvalidParameter})
+var sTopicExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eTopicExistsException_Message})
+var sTopicInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicInfo, Members: &mTopicInfo, Type: smithy.ShapeTypeStructure, Ext: &eTopicInfo})
+var sTopicInfo_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eTopicInfo_TopicArn})
+var sTopicInfo_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eTopicInfo_TopicName})
+var sTopicInfo_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i___integer, Traits: &t276, Type: smithy.ShapeTypeInteger, Ext: &eTopicInfo_ReplicationFactor})
+var sTopicInfo_PartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionCount", ID: &i___integer, Traits: &t277, Type: smithy.ShapeTypeInteger, Ext: &eTopicInfo_PartitionCount})
+var sTopicInfo_OutOfSyncReplicaCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutOfSyncReplicaCount", ID: &i___integer, Traits: &t278, Type: smithy.ShapeTypeInteger, Ext: &eTopicInfo_OutOfSyncReplicaCount})
+var sTopicPartitionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicPartitionInfo, Members: &mTopicPartitionInfo, Type: smithy.ShapeTypeStructure, Ext: &eTopicPartitionInfo})
+var sTopicPartitionInfo_Partition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partition", ID: &i___integer, Traits: &t279, Type: smithy.ShapeTypeInteger, Ext: &eTopicPartitionInfo_Partition})
+var sTopicPartitionInfo_Leader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Leader", ID: &i___integer, Traits: &t280, Type: smithy.ShapeTypeInteger, Ext: &eTopicPartitionInfo_Leader})
+var sTopicPartitionInfo_Replicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replicas", ID: &i___listOf__integer, Members: &m___listOf__integer, Traits: &t281, Type: smithy.ShapeTypeList, Ext: &eTopicPartitionInfo_Replicas})
+var sTopicPartitionInfo_Isr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Isr", ID: &i___listOf__integer, Members: &m___listOf__integer, Traits: &t282, Type: smithy.ShapeTypeList, Ext: &eTopicPartitionInfo_Isr})
+var sTopicReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicReplication, Members: &mTopicReplication, Type: smithy.ShapeTypeStructure, Ext: &eTopicReplication})
+var sTopicReplication_CopyAccessControlListsForTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyAccessControlListsForTopics", ID: &i___boolean, Traits: &t283, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplication_CopyAccessControlListsForTopics})
+var sTopicReplication_CopyTopicConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTopicConfigurations", ID: &i___boolean, Traits: &t284, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplication_CopyTopicConfigurations})
+var sTopicReplication_DetectAndCopyNewTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectAndCopyNewTopics", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplication_DetectAndCopyNewTopics})
+var sTopicReplication_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iReplicationStartingPosition, Members: &mReplicationStartingPosition, Traits: &t286, Type: smithy.ShapeTypeStructure, Ext: &eTopicReplication_StartingPosition})
+var sTopicReplication_TopicNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicNameConfiguration", ID: &iReplicationTopicNameConfiguration, Members: &mReplicationTopicNameConfiguration, Traits: &t287, Type: smithy.ShapeTypeStructure, Ext: &eTopicReplication_TopicNameConfiguration})
+var sTopicReplication_TopicsToExclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicsToExclude", ID: &i___listOf__stringMax249, Members: &m___listOf__stringMax249, Traits: &t288, Type: smithy.ShapeTypeList, Ext: &eTopicReplication_TopicsToExclude})
+var sTopicReplication_TopicsToReplicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicsToReplicate", ID: &i___listOf__stringMax249, Members: &m___listOf__stringMax249, Traits: &t289, Type: smithy.ShapeTypeList, Ext: &eTopicReplication_TopicsToReplicate})
+var sTopicReplicationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicReplicationUpdate, Members: &mTopicReplicationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eTopicReplicationUpdate})
+var sTopicReplicationUpdate_CopyAccessControlListsForTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyAccessControlListsForTopics", ID: &i___boolean, Traits: &t283, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplicationUpdate_CopyAccessControlListsForTopics})
+var sTopicReplicationUpdate_CopyTopicConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTopicConfigurations", ID: &i___boolean, Traits: &t284, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplicationUpdate_CopyTopicConfigurations})
+var sTopicReplicationUpdate_DetectAndCopyNewTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectAndCopyNewTopics", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean, Ext: &eTopicReplicationUpdate_DetectAndCopyNewTopics})
+var sTopicReplicationUpdate_TopicsToExclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicsToExclude", ID: &i___listOf__stringMax249, Members: &m___listOf__stringMax249, Traits: &t288, Type: smithy.ShapeTypeList, Ext: &eTopicReplicationUpdate_TopicsToExclude})
+var sTopicReplicationUpdate_TopicsToReplicate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicsToReplicate", ID: &i___listOf__stringMax249, Members: &m___listOf__stringMax249, Traits: &t289, Type: smithy.ShapeTypeList, Ext: &eTopicReplicationUpdate_TopicsToReplicate})
+var sTopicState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicState, Members: &mTopicState, Type: smithy.ShapeTypeEnum, Ext: &eTopicState})
+var sTopicState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTopicState_CREATING})
+var sTopicState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTopicState_UPDATING})
+var sTopicState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTopicState_DELETING})
+var sTopicState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTopicState_ACTIVE})
+var sUnauthenticated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthenticated, Members: &mUnauthenticated, Type: smithy.ShapeTypeStructure, Ext: &eUnauthenticated})
+var sUnauthenticated_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eUnauthenticated_Enabled})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t290, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sUnauthorizedException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_InvalidParameter})
+var sUnauthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_Message})
+var sUnknownTopicOrPartitionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnknownTopicOrPartitionException, Members: &mUnknownTopicOrPartitionException, Traits: &t230, Type: smithy.ShapeTypeStructure, Ext: &eUnknownTopicOrPartitionException})
+var sUnknownTopicOrPartitionException_InvalidParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameter", ID: &i___string, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eUnknownTopicOrPartitionException_InvalidParameter})
+var sUnknownTopicOrPartitionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eUnknownTopicOrPartitionException_Message})
+var sUnprocessedScramSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedScramSecret, Members: &mUnprocessedScramSecret, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessedScramSecret})
+var sUnprocessedScramSecret_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i___string, Traits: &t178, Type: smithy.ShapeTypeString, Ext: &eUnprocessedScramSecret_ErrorCode})
+var sUnprocessedScramSecret_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i___string, Traits: &t291, Type: smithy.ShapeTypeString, Ext: &eUnprocessedScramSecret_ErrorMessage})
+var sUnprocessedScramSecret_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i___string, Traits: &t204, Type: smithy.ShapeTypeString, Ext: &eUnprocessedScramSecret_SecretArn})
+var sUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserIdentity, Members: &mUserIdentity, Type: smithy.ShapeTypeStructure, Ext: &eUserIdentity})
+var sUserIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iUserIdentityType, Members: &mUserIdentityType, Traits: &t238, Type: smithy.ShapeTypeEnum, Ext: &eUserIdentity_Type})
+var sUserIdentity_PrincipalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalId", ID: &i___string, Traits: &t292, Type: smithy.ShapeTypeString, Ext: &eUserIdentity_PrincipalId})
+var sUserIdentityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserIdentityType, Members: &mUserIdentityType, Type: smithy.ShapeTypeEnum, Ext: &eUserIdentityType})
+var sUserIdentityType_AWSACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserIdentityType_AWSACCOUNT})
+var sUserIdentityType_AWSSERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSSERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUserIdentityType_AWSSERVICE})
+var sValueConverter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValueConverter, Members: &mValueConverter, Type: smithy.ShapeTypeEnum, Ext: &eValueConverter})
+var sValueConverter_BYTE_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValueConverter_BYTE_ARRAY})
+var sValueConverter_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValueConverter_JSON})
+var sValueConverter_JSON_SCHEMA_GSR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_SCHEMA_GSR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValueConverter_JSON_SCHEMA_GSR})
+var sValueConverter_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValueConverter_STRING})
+var sVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfig, Members: &mVpcConfig, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfig})
+var sVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t200, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_SubnetIds})
+var sVpcConfig_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t199, Type: smithy.ShapeTypeList, Ext: &eVpcConfig_SecurityGroupIds})
+var sVpcConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnection, Members: &mVpcConnection, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnection})
+var sVpcConnection_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eVpcConnection_VpcConnectionArn})
+var sVpcConnection_TargetClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterArn", ID: &i___string, Traits: &t293, Type: smithy.ShapeTypeString, Ext: &eVpcConnection_TargetClusterArn})
+var sVpcConnection_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eVpcConnection_CreationTime})
+var sVpcConnection_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eVpcConnection_Authentication})
+var sVpcConnection_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i___string, Traits: &t294, Type: smithy.ShapeTypeString, Ext: &eVpcConnection_VpcId})
+var sVpcConnection_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iVpcConnectionState, Members: &mVpcConnectionState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eVpcConnection_State})
+var sVpcConnectionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectionInfo, Members: &mVpcConnectionInfo, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionInfo})
+var sVpcConnectionInfo_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eVpcConnectionInfo_VpcConnectionArn})
+var sVpcConnectionInfo_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eVpcConnectionInfo_Owner})
+var sVpcConnectionInfo_UserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIdentity", ID: &iUserIdentity, Members: &mUserIdentity, Traits: &t295, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionInfo_UserIdentity})
+var sVpcConnectionInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eVpcConnectionInfo_CreationTime})
+var sVpcConnectionInfoServerless = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectionInfoServerless, Members: &mVpcConnectionInfoServerless, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionInfoServerless})
+var sVpcConnectionInfoServerless_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eVpcConnectionInfoServerless_CreationTime})
+var sVpcConnectionInfoServerless_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString, Ext: &eVpcConnectionInfoServerless_Owner})
+var sVpcConnectionInfoServerless_UserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIdentity", ID: &iUserIdentity, Members: &mUserIdentity, Traits: &t295, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionInfoServerless_UserIdentity})
+var sVpcConnectionInfoServerless_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eVpcConnectionInfoServerless_VpcConnectionArn})
+var sVpcConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectionState, Members: &mVpcConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eVpcConnectionState})
+var sVpcConnectionState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_CREATING})
+var sVpcConnectionState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_AVAILABLE})
+var sVpcConnectionState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_INACTIVE})
+var sVpcConnectionState_DEACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_DEACTIVATING})
+var sVpcConnectionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_DELETING})
+var sVpcConnectionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_FAILED})
+var sVpcConnectionState_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_REJECTED})
+var sVpcConnectionState_REJECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectionState_REJECTING})
+var sVpcConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivity, Members: &mVpcConnectivity, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivity})
+var sVpcConnectivity_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iVpcConnectivityClientAuthentication, Members: &mVpcConnectivityClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivity_ClientAuthentication})
+var sVpcConnectivityClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivityClientAuthentication, Members: &mVpcConnectivityClientAuthentication, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityClientAuthentication})
+var sVpcConnectivityClientAuthentication_Sasl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sasl", ID: &iVpcConnectivitySasl, Members: &mVpcConnectivitySasl, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityClientAuthentication_Sasl})
+var sVpcConnectivityClientAuthentication_Tls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tls", ID: &iVpcConnectivityTls, Members: &mVpcConnectivityTls, Traits: &t105, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityClientAuthentication_Tls})
+var sVpcConnectivityIam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivityIam, Members: &mVpcConnectivityIam, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityIam})
+var sVpcConnectivityIam_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eVpcConnectivityIam_Enabled})
+var sVpcConnectivitySasl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivitySasl, Members: &mVpcConnectivitySasl, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivitySasl})
+var sVpcConnectivitySasl_Scram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scram", ID: &iVpcConnectivityScram, Members: &mVpcConnectivityScram, Traits: &t263, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivitySasl_Scram})
+var sVpcConnectivitySasl_Iam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iam", ID: &iVpcConnectivityIam, Members: &mVpcConnectivityIam, Traits: &t264, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivitySasl_Iam})
+var sVpcConnectivityScram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivityScram, Members: &mVpcConnectivityScram, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityScram})
+var sVpcConnectivityScram_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eVpcConnectivityScram_Enabled})
+var sVpcConnectivityTls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectivityTls, Members: &mVpcConnectivityTls, Type: smithy.ShapeTypeStructure, Ext: &eVpcConnectivityTls})
+var sVpcConnectivityTls_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eVpcConnectivityTls_Enabled})
+var sZookeeperAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZookeeperAccess, Members: &mZookeeperAccess, Type: smithy.ShapeTypeStructure, Ext: &eZookeeperAccess})
+var sZookeeperAccess_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean, Ext: &eZookeeperAccess_Enabled})
+var sZookeeperNodeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZookeeperNodeInfo, Members: &mZookeeperNodeInfo, Type: smithy.ShapeTypeStructure, Ext: &eZookeeperNodeInfo})
+var sZookeeperNodeInfo_AttachedENIId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedENIId", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eZookeeperNodeInfo_AttachedENIId})
+var sZookeeperNodeInfo_ClientVpcIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVpcIpAddress", ID: &i___string, Traits: &t89, Type: smithy.ShapeTypeString, Ext: &eZookeeperNodeInfo_ClientVpcIpAddress})
+var sZookeeperNodeInfo_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t91, Type: smithy.ShapeTypeList, Ext: &eZookeeperNodeInfo_Endpoints})
+var sZookeeperNodeInfo_ZookeeperId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperId", ID: &i___double, Traits: &t296, Type: smithy.ShapeTypeDouble, Ext: &eZookeeperNodeInfo_ZookeeperId})
+var sZookeeperNodeInfo_ZookeeperVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperVersion", ID: &i___string, Traits: &t297, Type: smithy.ShapeTypeString, Ext: &eZookeeperNodeInfo_ZookeeperVersion})
+var sBatchAssociateScramSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateScramSecretRequest, Members: &mBatchAssociateScramSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateScramSecretRequest})
+var sBatchAssociateScramSecretRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateScramSecretRequest_ClusterArn})
+var sBatchAssociateScramSecretRequest_SecretArnList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArnList", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t299, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateScramSecretRequest_SecretArnList})
+var sBatchAssociateScramSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateScramSecretResponse, Members: &mBatchAssociateScramSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateScramSecretResponse})
+var sBatchAssociateScramSecretResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateScramSecretResponse_ClusterArn})
+var sBatchAssociateScramSecretResponse_UnprocessedScramSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedScramSecrets", ID: &i___listOfUnprocessedScramSecret, Members: &m___listOfUnprocessedScramSecret, Traits: &t300, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateScramSecretResponse_UnprocessedScramSecrets})
+var sBatchDisassociateScramSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateScramSecretRequest, Members: &mBatchDisassociateScramSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateScramSecretRequest})
+var sBatchDisassociateScramSecretRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateScramSecretRequest_ClusterArn})
+var sBatchDisassociateScramSecretRequest_SecretArnList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArnList", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t299, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateScramSecretRequest_SecretArnList})
+var sBatchDisassociateScramSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateScramSecretResponse, Members: &mBatchDisassociateScramSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateScramSecretResponse})
+var sBatchDisassociateScramSecretResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateScramSecretResponse_ClusterArn})
+var sBatchDisassociateScramSecretResponse_UnprocessedScramSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedScramSecrets", ID: &i___listOfUnprocessedScramSecret, Members: &m___listOfUnprocessedScramSecret, Traits: &t300, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateScramSecretResponse_UnprocessedScramSecrets})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest})
+var sCreateChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ChannelName})
+var sCreateChannelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_ClusterArn})
+var sCreateChannelRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Traits: &t301, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_EncryptionConfiguration})
+var sCreateChannelRequest_IcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationConfiguration", ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Traits: &t302, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_IcebergDestinationConfiguration})
+var sCreateChannelRequest_S3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationConfiguration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Traits: &t303, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_S3DestinationConfiguration})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelRequest_Tags})
+var sCreateChannelRequest_TopicConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicConfigurationList", ID: &i___listOfTopicConfiguration, Members: &m___listOfTopicConfiguration, Traits: &t304, Type: smithy.ShapeTypeList, Ext: &eCreateChannelRequest_TopicConfigurationList})
+var sCreateChannelRequest_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iChannelLoggingInfo, Members: &mChannelLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest_LoggingInfo})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse})
+var sCreateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_ChannelArn})
+var sCreateChannelResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_ClusterOperationArn})
+var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest})
+var sCreateClusterRequest_BrokerNodeGroupInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerNodeGroupInfo", ID: &iBrokerNodeGroupInfo, Members: &mBrokerNodeGroupInfo, Traits: &t123, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_BrokerNodeGroupInfo})
+var sCreateClusterRequest_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_Rebalancing})
+var sCreateClusterRequest_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_ClientAuthentication})
+var sCreateClusterRequest_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___stringMin1Max64, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_ClusterName})
+var sCreateClusterRequest_ConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationInfo", ID: &iConfigurationInfo, Members: &mConfigurationInfo, Traits: &t221, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_ConfigurationInfo})
+var sCreateClusterRequest_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_EncryptionInfo})
+var sCreateClusterRequest_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_EnhancedMonitoring})
+var sCreateClusterRequest_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoringInfo, Members: &mOpenMonitoringInfo, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_OpenMonitoring})
+var sCreateClusterRequest_KafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersion", ID: &i___stringMin1Max128, Traits: &t94, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_KafkaVersion})
+var sCreateClusterRequest_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_LoggingInfo})
+var sCreateClusterRequest_NumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBrokerNodes", ID: &i___integerMin1Max15, Traits: &t130, Type: smithy.ShapeTypeInteger, Ext: &eCreateClusterRequest_NumberOfBrokerNodes})
+var sCreateClusterRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateClusterRequest_Tags})
+var sCreateClusterRequest_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_StorageMode})
+var sCreateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResponse, Members: &mCreateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResponse})
+var sCreateClusterResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eCreateClusterResponse_ClusterArn})
+var sCreateClusterResponse_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCreateClusterResponse_ClusterName})
+var sCreateClusterResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iClusterState, Members: &mClusterState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterResponse_State})
+var sCreateClusterV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterV2Request, Members: &mCreateClusterV2Request, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterV2Request})
+var sCreateClusterV2Request_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___stringMin1Max64, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCreateClusterV2Request_ClusterName})
+var sCreateClusterV2Request_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateClusterV2Request_Tags})
+var sCreateClusterV2Request_Provisioned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provisioned", ID: &iProvisionedRequest, Members: &mProvisionedRequest, Traits: &t120, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterV2Request_Provisioned})
+var sCreateClusterV2Request_Serverless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serverless", ID: &iServerlessRequest, Members: &mServerlessRequest, Traits: &t121, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterV2Request_Serverless})
+var sCreateClusterV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterV2Response, Members: &mCreateClusterV2Response, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterV2Response})
+var sCreateClusterV2Response_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eCreateClusterV2Response_ClusterArn})
+var sCreateClusterV2Response_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___string, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eCreateClusterV2Response_ClusterName})
+var sCreateClusterV2Response_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iClusterState, Members: &mClusterState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterV2Response_State})
+var sCreateClusterV2Response_ClusterType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterType", ID: &iClusterType, Members: &mClusterType, Traits: &t114, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterV2Response_ClusterType})
+var sCreateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationRequest, Members: &mCreateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationRequest})
+var sCreateConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationRequest_Description})
+var sCreateConfigurationRequest_KafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersions", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eCreateConfigurationRequest_KafkaVersions})
+var sCreateConfigurationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationRequest_Name})
+var sCreateConfigurationRequest_ServerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProperties", ID: &i___blob, Traits: &t305, Type: smithy.ShapeTypeBlob, Ext: &eCreateConfigurationRequest_ServerProperties})
+var sCreateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationResponse, Members: &mCreateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationResponse})
+var sCreateConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationResponse_Arn})
+var sCreateConfigurationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateConfigurationResponse_CreationTime})
+var sCreateConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t154, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationResponse_LatestRevision})
+var sCreateConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationResponse_Name})
+var sCreateConfigurationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConfigurationState, Members: &mConfigurationState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eCreateConfigurationResponse_State})
+var sCreateReplicatorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicatorRequest, Members: &mCreateReplicatorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicatorRequest})
+var sCreateReplicatorRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMax1024, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eCreateReplicatorRequest_Description})
+var sCreateReplicatorRequest_KafkaClusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaClusters", ID: &i___listOfKafkaCluster, Members: &m___listOfKafkaCluster, Traits: &t306, Type: smithy.ShapeTypeList, Ext: &eCreateReplicatorRequest_KafkaClusters})
+var sCreateReplicatorRequest_ReplicationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationInfoList", ID: &i___listOfReplicationInfo, Members: &m___listOfReplicationInfo, Traits: &t307, Type: smithy.ShapeTypeList, Ext: &eCreateReplicatorRequest_ReplicationInfoList})
+var sCreateReplicatorRequest_ReplicatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorName", ID: &i___stringMin1Max128Pattern09AZaZ09AZaZ0, Traits: &t256, Type: smithy.ShapeTypeString, Ext: &eCreateReplicatorRequest_ReplicatorName})
+var sCreateReplicatorRequest_ServiceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleArn", ID: &i___string, Traits: &t188, Type: smithy.ShapeTypeString, Ext: &eCreateReplicatorRequest_ServiceExecutionRoleArn})
+var sCreateReplicatorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateReplicatorRequest_Tags})
+var sCreateReplicatorRequest_LogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDelivery", ID: &iLogDelivery, Members: &mLogDelivery, Traits: &t308, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicatorRequest_LogDelivery})
+var sCreateReplicatorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateReplicatorResponse, Members: &mCreateReplicatorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateReplicatorResponse})
+var sCreateReplicatorResponse_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t255, Type: smithy.ShapeTypeString, Ext: &eCreateReplicatorResponse_ReplicatorArn})
+var sCreateReplicatorResponse_ReplicatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorName", ID: &i___string, Traits: &t256, Type: smithy.ShapeTypeString, Ext: &eCreateReplicatorResponse_ReplicatorName})
+var sCreateReplicatorResponse_ReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorState", ID: &iReplicatorState, Members: &mReplicatorState, Traits: &t258, Type: smithy.ShapeTypeEnum, Ext: &eCreateReplicatorResponse_ReplicatorState})
+var sCreateTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopicRequest, Members: &mCreateTopicRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTopicRequest})
+var sCreateTopicRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eCreateTopicRequest_ClusterArn})
+var sCreateTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eCreateTopicRequest_TopicName})
+var sCreateTopicRequest_PartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionCount", ID: &i___integerMin1, Traits: &t277, Type: smithy.ShapeTypeInteger, Ext: &eCreateTopicRequest_PartitionCount})
+var sCreateTopicRequest_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i___integerMin1, Traits: &t276, Type: smithy.ShapeTypeInteger, Ext: &eCreateTopicRequest_ReplicationFactor})
+var sCreateTopicRequest_Configs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configs", ID: &i___string, Traits: &t309, Type: smithy.ShapeTypeString, Ext: &eCreateTopicRequest_Configs})
+var sCreateTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTopicResponse, Members: &mCreateTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTopicResponse})
+var sCreateTopicResponse_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eCreateTopicResponse_TopicArn})
+var sCreateTopicResponse_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eCreateTopicResponse_TopicName})
+var sCreateTopicResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTopicState, Members: &mTopicState, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eCreateTopicResponse_Status})
+var sCreateVpcConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnectionRequest, Members: &mCreateVpcConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcConnectionRequest})
+var sCreateVpcConnectionRequest_TargetClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterArn", ID: &i___string, Traits: &t293, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionRequest_TargetClusterArn})
+var sCreateVpcConnectionRequest_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionRequest_Authentication})
+var sCreateVpcConnectionRequest_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i___string, Traits: &t294, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionRequest_VpcId})
+var sCreateVpcConnectionRequest_ClientSubnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSubnets", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t80, Type: smithy.ShapeTypeList, Ext: &eCreateVpcConnectionRequest_ClientSubnets})
+var sCreateVpcConnectionRequest_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eCreateVpcConnectionRequest_SecurityGroups})
+var sCreateVpcConnectionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateVpcConnectionRequest_Tags})
+var sCreateVpcConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnectionResponse, Members: &mCreateVpcConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcConnectionResponse})
+var sCreateVpcConnectionResponse_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionResponse_VpcConnectionArn})
+var sCreateVpcConnectionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iVpcConnectionState, Members: &mVpcConnectionState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eCreateVpcConnectionResponse_State})
+var sCreateVpcConnectionResponse_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionResponse_Authentication})
+var sCreateVpcConnectionResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i___string, Traits: &t294, Type: smithy.ShapeTypeString, Ext: &eCreateVpcConnectionResponse_VpcId})
+var sCreateVpcConnectionResponse_ClientSubnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSubnets", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t80, Type: smithy.ShapeTypeList, Ext: &eCreateVpcConnectionResponse_ClientSubnets})
+var sCreateVpcConnectionResponse_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eCreateVpcConnectionResponse_SecurityGroups})
+var sCreateVpcConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateVpcConnectionResponse_CreationTime})
+var sCreateVpcConnectionResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eCreateVpcConnectionResponse_Tags})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelRequest})
+var sDeleteChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_ChannelArn})
+var sDeleteChannelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_ClusterArn})
+var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Members: &mDeleteChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelResponse})
+var sDeleteChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelResponse_ChannelArn})
+var sDeleteChannelResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelResponse_ClusterOperationArn})
+var sDeleteClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterRequest, Members: &mDeleteClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterRequest})
+var sDeleteClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterRequest_ClusterArn})
+var sDeleteClusterRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t310, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterRequest_CurrentVersion})
+var sDeleteClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterResponse, Members: &mDeleteClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterResponse})
+var sDeleteClusterResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterResponse_ClusterArn})
+var sDeleteClusterResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iClusterState, Members: &mClusterState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eDeleteClusterResponse_State})
+var sDeleteClusterPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterPolicyRequest, Members: &mDeleteClusterPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterPolicyRequest})
+var sDeleteClusterPolicyRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterPolicyRequest_ClusterArn})
+var sDeleteClusterPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterPolicyResponse})
+var sDeleteConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationRequest, Members: &mDeleteConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationRequest})
+var sDeleteConfigurationRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationRequest_Arn})
+var sDeleteConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationResponse, Members: &mDeleteConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationResponse})
+var sDeleteConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationResponse_Arn})
+var sDeleteConfigurationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConfigurationState, Members: &mConfigurationState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eDeleteConfigurationResponse_State})
+var sDeleteReplicatorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicatorRequest, Members: &mDeleteReplicatorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicatorRequest})
+var sDeleteReplicatorRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t310, Type: smithy.ShapeTypeString, Ext: &eDeleteReplicatorRequest_CurrentVersion})
+var sDeleteReplicatorRequest_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteReplicatorRequest_ReplicatorArn})
+var sDeleteReplicatorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteReplicatorResponse, Members: &mDeleteReplicatorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteReplicatorResponse})
+var sDeleteReplicatorResponse_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t255, Type: smithy.ShapeTypeString, Ext: &eDeleteReplicatorResponse_ReplicatorArn})
+var sDeleteReplicatorResponse_ReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorState", ID: &iReplicatorState, Members: &mReplicatorState, Traits: &t258, Type: smithy.ShapeTypeEnum, Ext: &eDeleteReplicatorResponse_ReplicatorState})
+var sDeleteTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTopicRequest, Members: &mDeleteTopicRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTopicRequest})
+var sDeleteTopicRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteTopicRequest_ClusterArn})
+var sDeleteTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteTopicRequest_TopicName})
+var sDeleteTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTopicResponse, Members: &mDeleteTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTopicResponse})
+var sDeleteTopicResponse_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eDeleteTopicResponse_TopicArn})
+var sDeleteTopicResponse_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eDeleteTopicResponse_TopicName})
+var sDeleteTopicResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTopicState, Members: &mTopicState, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eDeleteTopicResponse_Status})
+var sDeleteVpcConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnectionRequest, Members: &mDeleteVpcConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcConnectionRequest})
+var sDeleteVpcConnectionRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDeleteVpcConnectionRequest_Arn})
+var sDeleteVpcConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnectionResponse, Members: &mDeleteVpcConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcConnectionResponse})
+var sDeleteVpcConnectionResponse_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eDeleteVpcConnectionResponse_VpcConnectionArn})
+var sDeleteVpcConnectionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iVpcConnectionState, Members: &mVpcConnectionState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eDeleteVpcConnectionResponse_State})
+var sDescribeChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelRequest, Members: &mDescribeChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelRequest})
+var sDescribeChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_ChannelArn})
+var sDescribeChannelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_ClusterArn})
+var sDescribeChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelResponse, Members: &mDescribeChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse})
+var sDescribeChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_ChannelArn})
+var sDescribeChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i___string, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_ChannelName})
+var sDescribeChannelResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Traits: &t301, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_EncryptionConfiguration})
+var sDescribeChannelResponse_IcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationConfiguration", ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Traits: &t302, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_IcebergDestinationConfiguration})
+var sDescribeChannelResponse_S3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationConfiguration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Traits: &t303, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_S3DestinationConfiguration})
+var sDescribeChannelResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChannelStatus, Members: &mChannelStatus, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eDescribeChannelResponse_Status})
+var sDescribeChannelResponse_DestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationType", ID: &iChannelDestinationType, Members: &mChannelDestinationType, Traits: &t101, Type: smithy.ShapeTypeEnum, Ext: &eDescribeChannelResponse_DestinationType})
+var sDescribeChannelResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeChannelResponse_CreationTime})
+var sDescribeChannelResponse_TopicConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicConfigurationList", ID: &i___listOfTopicConfiguration, Members: &m___listOfTopicConfiguration, Traits: &t304, Type: smithy.ShapeTypeList, Ext: &eDescribeChannelResponse_TopicConfigurationList})
+var sDescribeChannelResponse_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iChannelLoggingInfo, Members: &mChannelLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_LoggingInfo})
+var sDescribeChannelResponse_StateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateInfo", ID: &iChannelStateInfo, Members: &mChannelStateInfo, Traits: &t118, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_StateInfo})
+var sDescribeChannelResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_ClusterOperationArn})
+var sDescribeChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eDescribeChannelResponse_Tags})
+var sDescribeClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterRequest, Members: &mDescribeClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterRequest})
+var sDescribeClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterRequest_ClusterArn})
+var sDescribeClusterOperationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperationRequest, Members: &mDescribeClusterOperationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationRequest})
+var sDescribeClusterOperationRequest_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterOperationRequest_ClusterOperationArn})
+var sDescribeClusterOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperationResponse, Members: &mDescribeClusterOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationResponse})
+var sDescribeClusterOperationResponse_ClusterOperationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationInfo", ID: &iClusterOperationInfo, Members: &mClusterOperationInfo, Traits: &t311, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationResponse_ClusterOperationInfo})
+var sDescribeClusterOperationV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperationV2Request, Members: &mDescribeClusterOperationV2Request, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationV2Request})
+var sDescribeClusterOperationV2Request_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterOperationV2Request_ClusterOperationArn})
+var sDescribeClusterOperationV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterOperationV2Response, Members: &mDescribeClusterOperationV2Response, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationV2Response})
+var sDescribeClusterOperationV2Response_ClusterOperationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationInfo", ID: &iClusterOperationV2, Members: &mClusterOperationV2, Traits: &t311, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterOperationV2Response_ClusterOperationInfo})
+var sDescribeClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterResponse, Members: &mDescribeClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResponse})
+var sDescribeClusterResponse_ClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterInfo", ID: &iClusterInfo, Members: &mClusterInfo, Traits: &t312, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResponse_ClusterInfo})
+var sDescribeClusterV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterV2Request, Members: &mDescribeClusterV2Request, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterV2Request})
+var sDescribeClusterV2Request_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterV2Request_ClusterArn})
+var sDescribeClusterV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterV2Response, Members: &mDescribeClusterV2Response, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterV2Response})
+var sDescribeClusterV2Response_ClusterInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterInfo", ID: &iCluster, Members: &mCluster, Traits: &t312, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterV2Response_ClusterInfo})
+var sDescribeConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRequest, Members: &mDescribeConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRequest})
+var sDescribeConfigurationRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRequest_Arn})
+var sDescribeConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationResponse, Members: &mDescribeConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationResponse})
+var sDescribeConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Arn})
+var sDescribeConfigurationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConfigurationResponse_CreationTime})
+var sDescribeConfigurationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Description})
+var sDescribeConfigurationResponse_KafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersions", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eDescribeConfigurationResponse_KafkaVersions})
+var sDescribeConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t154, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationResponse_LatestRevision})
+var sDescribeConfigurationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___string, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationResponse_Name})
+var sDescribeConfigurationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConfigurationState, Members: &mConfigurationState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eDescribeConfigurationResponse_State})
+var sDescribeConfigurationRevisionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevisionRequest, Members: &mDescribeConfigurationRevisionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRevisionRequest})
+var sDescribeConfigurationRevisionRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionRequest_Arn})
+var sDescribeConfigurationRevisionRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___long, Traits: &t298, Type: smithy.ShapeTypeLong, Ext: &eDescribeConfigurationRevisionRequest_Revision})
+var sDescribeConfigurationRevisionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConfigurationRevisionResponse, Members: &mDescribeConfigurationRevisionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConfigurationRevisionResponse})
+var sDescribeConfigurationRevisionResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionResponse_Arn})
+var sDescribeConfigurationRevisionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeConfigurationRevisionResponse_CreationTime})
+var sDescribeConfigurationRevisionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eDescribeConfigurationRevisionResponse_Description})
+var sDescribeConfigurationRevisionResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i___long, Traits: &t156, Type: smithy.ShapeTypeLong, Ext: &eDescribeConfigurationRevisionResponse_Revision})
+var sDescribeConfigurationRevisionResponse_ServerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProperties", ID: &i___blob, Traits: &t305, Type: smithy.ShapeTypeBlob, Ext: &eDescribeConfigurationRevisionResponse_ServerProperties})
+var sDescribeReplicatorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicatorRequest, Members: &mDescribeReplicatorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicatorRequest})
+var sDescribeReplicatorRequest_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorRequest_ReplicatorArn})
+var sDescribeReplicatorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplicatorResponse, Members: &mDescribeReplicatorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicatorResponse})
+var sDescribeReplicatorResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeReplicatorResponse_CreationTime})
+var sDescribeReplicatorResponse_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_CurrentVersion})
+var sDescribeReplicatorResponse_IsReplicatorReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsReplicatorReference", ID: &i___boolean, Traits: &t252, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeReplicatorResponse_IsReplicatorReference})
+var sDescribeReplicatorResponse_KafkaClusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaClusters", ID: &i___listOfKafkaClusterDescription, Members: &m___listOfKafkaClusterDescription, Traits: &t306, Type: smithy.ShapeTypeList, Ext: &eDescribeReplicatorResponse_KafkaClusters})
+var sDescribeReplicatorResponse_ReplicationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationInfoList", ID: &i___listOfReplicationInfoDescription, Members: &m___listOfReplicationInfoDescription, Traits: &t307, Type: smithy.ShapeTypeList, Ext: &eDescribeReplicatorResponse_ReplicationInfoList})
+var sDescribeReplicatorResponse_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t255, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_ReplicatorArn})
+var sDescribeReplicatorResponse_ReplicatorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorDescription", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_ReplicatorDescription})
+var sDescribeReplicatorResponse_ReplicatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorName", ID: &i___string, Traits: &t256, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_ReplicatorName})
+var sDescribeReplicatorResponse_ReplicatorResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorResourceArn", ID: &i___string, Traits: &t257, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_ReplicatorResourceArn})
+var sDescribeReplicatorResponse_ReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorState", ID: &iReplicatorState, Members: &mReplicatorState, Traits: &t258, Type: smithy.ShapeTypeEnum, Ext: &eDescribeReplicatorResponse_ReplicatorState})
+var sDescribeReplicatorResponse_ServiceExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleArn", ID: &i___string, Traits: &t188, Type: smithy.ShapeTypeString, Ext: &eDescribeReplicatorResponse_ServiceExecutionRoleArn})
+var sDescribeReplicatorResponse_StateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateInfo", ID: &iReplicationStateInfo, Members: &mReplicationStateInfo, Traits: &t118, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicatorResponse_StateInfo})
+var sDescribeReplicatorResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eDescribeReplicatorResponse_Tags})
+var sDescribeReplicatorResponse_LogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDelivery", ID: &iLogDelivery, Members: &mLogDelivery, Traits: &t308, Type: smithy.ShapeTypeStructure, Ext: &eDescribeReplicatorResponse_LogDelivery})
+var sDescribeTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopicRequest, Members: &mDescribeTopicRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTopicRequest})
+var sDescribeTopicRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicRequest_ClusterArn})
+var sDescribeTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicRequest_TopicName})
+var sDescribeTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopicResponse, Members: &mDescribeTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTopicResponse})
+var sDescribeTopicResponse_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicResponse_TopicArn})
+var sDescribeTopicResponse_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicResponse_TopicName})
+var sDescribeTopicResponse_ReplicationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationFactor", ID: &i___integer, Traits: &t276, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTopicResponse_ReplicationFactor})
+var sDescribeTopicResponse_PartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionCount", ID: &i___integer, Traits: &t277, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTopicResponse_PartitionCount})
+var sDescribeTopicResponse_Configs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configs", ID: &i___string, Traits: &t309, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicResponse_Configs})
+var sDescribeTopicResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTopicState, Members: &mTopicState, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eDescribeTopicResponse_Status})
+var sDescribeTopicPartitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopicPartitionsRequest, Members: &mDescribeTopicPartitionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTopicPartitionsRequest})
+var sDescribeTopicPartitionsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicPartitionsRequest_ClusterArn})
+var sDescribeTopicPartitionsRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicPartitionsRequest_TopicName})
+var sDescribeTopicPartitionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eDescribeTopicPartitionsRequest_MaxResults})
+var sDescribeTopicPartitionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicPartitionsRequest_NextToken})
+var sDescribeTopicPartitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTopicPartitionsResponse, Members: &mDescribeTopicPartitionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTopicPartitionsResponse})
+var sDescribeTopicPartitionsResponse_Partitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partitions", ID: &i___listOfTopicPartitionInfo, Members: &m___listOfTopicPartitionInfo, Traits: &t316, Type: smithy.ShapeTypeList, Ext: &eDescribeTopicPartitionsResponse_Partitions})
+var sDescribeTopicPartitionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eDescribeTopicPartitionsResponse_NextToken})
+var sDescribeVpcConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnectionRequest, Members: &mDescribeVpcConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcConnectionRequest})
+var sDescribeVpcConnectionRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcConnectionRequest_Arn})
+var sDescribeVpcConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnectionResponse, Members: &mDescribeVpcConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcConnectionResponse})
+var sDescribeVpcConnectionResponse_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcConnectionResponse_VpcConnectionArn})
+var sDescribeVpcConnectionResponse_TargetClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetClusterArn", ID: &i___string, Traits: &t293, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcConnectionResponse_TargetClusterArn})
+var sDescribeVpcConnectionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iVpcConnectionState, Members: &mVpcConnectionState, Traits: &t108, Type: smithy.ShapeTypeEnum, Ext: &eDescribeVpcConnectionResponse_State})
+var sDescribeVpcConnectionResponse_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcConnectionResponse_Authentication})
+var sDescribeVpcConnectionResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i___string, Traits: &t294, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcConnectionResponse_VpcId})
+var sDescribeVpcConnectionResponse_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t318, Type: smithy.ShapeTypeList, Ext: &eDescribeVpcConnectionResponse_Subnets})
+var sDescribeVpcConnectionResponse_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t82, Type: smithy.ShapeTypeList, Ext: &eDescribeVpcConnectionResponse_SecurityGroups})
+var sDescribeVpcConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i___timestampIso8601, Traits: &t100, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeVpcConnectionResponse_CreationTime})
+var sDescribeVpcConnectionResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eDescribeVpcConnectionResponse_Tags})
+var sGetBootstrapBrokersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBootstrapBrokersRequest, Members: &mGetBootstrapBrokersRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBootstrapBrokersRequest})
+var sGetBootstrapBrokersRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersRequest_ClusterArn})
+var sGetBootstrapBrokersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBootstrapBrokersResponse, Members: &mGetBootstrapBrokersResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBootstrapBrokersResponse})
+var sGetBootstrapBrokersResponse_BootstrapBrokerString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerString", ID: &i___string, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerString})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringTls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringTls", ID: &i___string, Traits: &t319, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringTls})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringSaslScram", ID: &i___string, Traits: &t320, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringSaslIam", ID: &i___string, Traits: &t321, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringPublicTls", ID: &i___string, Traits: &t322, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringPublicSaslScram", ID: &i___string, Traits: &t323, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringPublicSaslIam", ID: &i___string, Traits: &t324, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringVpcConnectivityTls", ID: &i___string, Traits: &t325, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringVpcConnectivitySaslScram", ID: &i___string, Traits: &t326, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringVpcConnectivitySaslIam", ID: &i___string, Traits: &t327, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringIpv6", ID: &i___string, Traits: &t328, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringIpv6})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringTlsIpv6", ID: &i___string, Traits: &t329, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringSaslScramIpv6", ID: &i___string, Traits: &t330, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6})
+var sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BootstrapBrokerStringSaslIamIpv6", ID: &i___string, Traits: &t331, Type: smithy.ShapeTypeString, Ext: &eGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6})
+var sGetClusterPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterPolicyRequest, Members: &mGetClusterPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetClusterPolicyRequest})
+var sGetClusterPolicyRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eGetClusterPolicyRequest_ClusterArn})
+var sGetClusterPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterPolicyResponse, Members: &mGetClusterPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetClusterPolicyResponse})
+var sGetClusterPolicyResponse_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eGetClusterPolicyResponse_CurrentVersion})
+var sGetClusterPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___string, Traits: &t332, Type: smithy.ShapeTypeString, Ext: &eGetClusterPolicyResponse_Policy})
+var sGetCompatibleKafkaVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleKafkaVersionsRequest, Members: &mGetCompatibleKafkaVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCompatibleKafkaVersionsRequest})
+var sGetCompatibleKafkaVersionsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t333, Type: smithy.ShapeTypeString, Ext: &eGetCompatibleKafkaVersionsRequest_ClusterArn})
+var sGetCompatibleKafkaVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCompatibleKafkaVersionsResponse, Members: &mGetCompatibleKafkaVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCompatibleKafkaVersionsResponse})
+var sGetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompatibleKafkaVersions", ID: &i___listOfCompatibleKafkaVersion, Members: &m___listOfCompatibleKafkaVersion, Traits: &t334, Type: smithy.ShapeTypeList, Ext: &eGetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_ClusterArn})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_MaxResults})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_NextToken})
+var sListChannelsRequest_TopicNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicNameFilter", ID: &i___string, Traits: &t335, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_TopicNameFilter})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i___listOfChannelInfo, Members: &m___listOfChannelInfo, Traits: &t336, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_Channels})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_NextToken})
+var sListClientVpcConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientVpcConnectionsRequest, Members: &mListClientVpcConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClientVpcConnectionsRequest})
+var sListClientVpcConnectionsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListClientVpcConnectionsRequest_ClusterArn})
+var sListClientVpcConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListClientVpcConnectionsRequest_MaxResults})
+var sListClientVpcConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListClientVpcConnectionsRequest_NextToken})
+var sListClientVpcConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientVpcConnectionsResponse, Members: &mListClientVpcConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListClientVpcConnectionsResponse})
+var sListClientVpcConnectionsResponse_ClientVpcConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVpcConnections", ID: &i___listOfClientVpcConnection, Members: &m___listOfClientVpcConnection, Traits: &t337, Type: smithy.ShapeTypeList, Ext: &eListClientVpcConnectionsResponse_ClientVpcConnections})
+var sListClientVpcConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListClientVpcConnectionsResponse_NextToken})
+var sListClusterOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperationsRequest, Members: &mListClusterOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClusterOperationsRequest})
+var sListClusterOperationsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsRequest_ClusterArn})
+var sListClusterOperationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListClusterOperationsRequest_MaxResults})
+var sListClusterOperationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsRequest_NextToken})
+var sListClusterOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperationsResponse, Members: &mListClusterOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListClusterOperationsResponse})
+var sListClusterOperationsResponse_ClusterOperationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationInfoList", ID: &i___listOfClusterOperationInfo, Members: &m___listOfClusterOperationInfo, Traits: &t338, Type: smithy.ShapeTypeList, Ext: &eListClusterOperationsResponse_ClusterOperationInfoList})
+var sListClusterOperationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsResponse_NextToken})
+var sListClusterOperationsV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperationsV2Request, Members: &mListClusterOperationsV2Request, Type: smithy.ShapeTypeStructure, Ext: &eListClusterOperationsV2Request})
+var sListClusterOperationsV2Request_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsV2Request_ClusterArn})
+var sListClusterOperationsV2Request_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListClusterOperationsV2Request_MaxResults})
+var sListClusterOperationsV2Request_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsV2Request_NextToken})
+var sListClusterOperationsV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterOperationsV2Response, Members: &mListClusterOperationsV2Response, Type: smithy.ShapeTypeStructure, Ext: &eListClusterOperationsV2Response})
+var sListClusterOperationsV2Response_ClusterOperationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationInfoList", ID: &i___listOfClusterOperationV2Summary, Members: &m___listOfClusterOperationV2Summary, Traits: &t338, Type: smithy.ShapeTypeList, Ext: &eListClusterOperationsV2Response_ClusterOperationInfoList})
+var sListClusterOperationsV2Response_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListClusterOperationsV2Response_NextToken})
+var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClustersRequest})
+var sListClustersRequest_ClusterNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterNameFilter", ID: &i___string, Traits: &t339, Type: smithy.ShapeTypeString, Ext: &eListClustersRequest_ClusterNameFilter})
+var sListClustersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListClustersRequest_MaxResults})
+var sListClustersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListClustersRequest_NextToken})
+var sListClustersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResponse, Members: &mListClustersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListClustersResponse})
+var sListClustersResponse_ClusterInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterInfoList", ID: &i___listOfClusterInfo, Members: &m___listOfClusterInfo, Traits: &t340, Type: smithy.ShapeTypeList, Ext: &eListClustersResponse_ClusterInfoList})
+var sListClustersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListClustersResponse_NextToken})
+var sListClustersV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersV2Request, Members: &mListClustersV2Request, Type: smithy.ShapeTypeStructure, Ext: &eListClustersV2Request})
+var sListClustersV2Request_ClusterNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterNameFilter", ID: &i___string, Traits: &t339, Type: smithy.ShapeTypeString, Ext: &eListClustersV2Request_ClusterNameFilter})
+var sListClustersV2Request_ClusterTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterTypeFilter", ID: &i___string, Traits: &t341, Type: smithy.ShapeTypeString, Ext: &eListClustersV2Request_ClusterTypeFilter})
+var sListClustersV2Request_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListClustersV2Request_MaxResults})
+var sListClustersV2Request_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListClustersV2Request_NextToken})
+var sListClustersV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersV2Response, Members: &mListClustersV2Response, Type: smithy.ShapeTypeStructure, Ext: &eListClustersV2Response})
+var sListClustersV2Response_ClusterInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterInfoList", ID: &i___listOfCluster, Members: &m___listOfCluster, Traits: &t340, Type: smithy.ShapeTypeList, Ext: &eListClustersV2Response_ClusterInfoList})
+var sListClustersV2Response_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListClustersV2Response_NextToken})
+var sListConfigurationRevisionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisionsRequest, Members: &mListConfigurationRevisionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationRevisionsRequest})
+var sListConfigurationRevisionsRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsRequest_Arn})
+var sListConfigurationRevisionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationRevisionsRequest_MaxResults})
+var sListConfigurationRevisionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsRequest_NextToken})
+var sListConfigurationRevisionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationRevisionsResponse, Members: &mListConfigurationRevisionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationRevisionsResponse})
+var sListConfigurationRevisionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListConfigurationRevisionsResponse_NextToken})
+var sListConfigurationRevisionsResponse_Revisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revisions", ID: &i___listOfConfigurationRevision, Members: &m___listOfConfigurationRevision, Traits: &t342, Type: smithy.ShapeTypeList, Ext: &eListConfigurationRevisionsResponse_Revisions})
+var sListConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsRequest, Members: &mListConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationsRequest})
+var sListConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationsRequest_MaxResults})
+var sListConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListConfigurationsRequest_NextToken})
+var sListConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsResponse, Members: &mListConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationsResponse})
+var sListConfigurationsResponse_Configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configurations", ID: &i___listOfConfiguration, Members: &m___listOfConfiguration, Traits: &t343, Type: smithy.ShapeTypeList, Ext: &eListConfigurationsResponse_Configurations})
+var sListConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListConfigurationsResponse_NextToken})
+var sListKafkaVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKafkaVersionsRequest, Members: &mListKafkaVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKafkaVersionsRequest})
+var sListKafkaVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListKafkaVersionsRequest_MaxResults})
+var sListKafkaVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListKafkaVersionsRequest_NextToken})
+var sListKafkaVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKafkaVersionsResponse, Members: &mListKafkaVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKafkaVersionsResponse})
+var sListKafkaVersionsResponse_KafkaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaVersions", ID: &i___listOfKafkaVersion, Members: &m___listOfKafkaVersion, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eListKafkaVersionsResponse_KafkaVersions})
+var sListKafkaVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListKafkaVersionsResponse_NextToken})
+var sListNodesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodesRequest, Members: &mListNodesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNodesRequest})
+var sListNodesRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListNodesRequest_ClusterArn})
+var sListNodesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListNodesRequest_MaxResults})
+var sListNodesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListNodesRequest_NextToken})
+var sListNodesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNodesResponse, Members: &mListNodesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNodesResponse})
+var sListNodesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListNodesResponse_NextToken})
+var sListNodesResponse_NodeInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NodeInfoList", ID: &i___listOfNodeInfo, Members: &m___listOfNodeInfo, Traits: &t344, Type: smithy.ShapeTypeList, Ext: &eListNodesResponse_NodeInfoList})
+var sListReplicatorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicatorsRequest, Members: &mListReplicatorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReplicatorsRequest})
+var sListReplicatorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListReplicatorsRequest_MaxResults})
+var sListReplicatorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListReplicatorsRequest_NextToken})
+var sListReplicatorsRequest_ReplicatorNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorNameFilter", ID: &i___string, Traits: &t345, Type: smithy.ShapeTypeString, Ext: &eListReplicatorsRequest_ReplicatorNameFilter})
+var sListReplicatorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplicatorsResponse, Members: &mListReplicatorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListReplicatorsResponse})
+var sListReplicatorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListReplicatorsResponse_NextToken})
+var sListReplicatorsResponse_Replicators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replicators", ID: &i___listOfReplicatorSummary, Members: &m___listOfReplicatorSummary, Traits: &t346, Type: smithy.ShapeTypeList, Ext: &eListReplicatorsResponse_Replicators})
+var sListScramSecretsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScramSecretsRequest, Members: &mListScramSecretsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListScramSecretsRequest})
+var sListScramSecretsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListScramSecretsRequest_ClusterArn})
+var sListScramSecretsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListScramSecretsRequest_MaxResults})
+var sListScramSecretsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListScramSecretsRequest_NextToken})
+var sListScramSecretsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScramSecretsResponse, Members: &mListScramSecretsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListScramSecretsResponse})
+var sListScramSecretsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListScramSecretsResponse_NextToken})
+var sListScramSecretsResponse_SecretArnList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArnList", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t299, Type: smithy.ShapeTypeList, Ext: &eListScramSecretsResponse_SecretArnList})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sListTopicsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopicsRequest, Members: &mListTopicsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTopicsRequest})
+var sListTopicsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eListTopicsRequest_ClusterArn})
+var sListTopicsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListTopicsRequest_MaxResults})
+var sListTopicsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListTopicsRequest_NextToken})
+var sListTopicsRequest_TopicNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicNameFilter", ID: &i___string, Traits: &t335, Type: smithy.ShapeTypeString, Ext: &eListTopicsRequest_TopicNameFilter})
+var sListTopicsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTopicsResponse, Members: &mListTopicsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTopicsResponse})
+var sListTopicsResponse_Topics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Topics", ID: &i___listOfTopicInfo, Members: &m___listOfTopicInfo, Traits: &t347, Type: smithy.ShapeTypeList, Ext: &eListTopicsResponse_Topics})
+var sListTopicsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListTopicsResponse_NextToken})
+var sListVpcConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnectionsRequest, Members: &mListVpcConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVpcConnectionsRequest})
+var sListVpcConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t314, Type: smithy.ShapeTypeInteger, Ext: &eListVpcConnectionsRequest_MaxResults})
+var sListVpcConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t315, Type: smithy.ShapeTypeString, Ext: &eListVpcConnectionsRequest_NextToken})
+var sListVpcConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnectionsResponse, Members: &mListVpcConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVpcConnectionsResponse})
+var sListVpcConnectionsResponse_VpcConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnections", ID: &i___listOfVpcConnection, Members: &m___listOfVpcConnection, Traits: &t348, Type: smithy.ShapeTypeList, Ext: &eListVpcConnectionsResponse_VpcConnections})
+var sListVpcConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString, Ext: &eListVpcConnectionsResponse_NextToken})
+var sPutClusterPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutClusterPolicyRequest, Members: &mPutClusterPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutClusterPolicyRequest})
+var sPutClusterPolicyRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &ePutClusterPolicyRequest_ClusterArn})
+var sPutClusterPolicyRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &ePutClusterPolicyRequest_CurrentVersion})
+var sPutClusterPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___string, Traits: &t332, Type: smithy.ShapeTypeString, Ext: &ePutClusterPolicyRequest_Policy})
+var sPutClusterPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutClusterPolicyResponse, Members: &mPutClusterPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutClusterPolicyResponse})
+var sPutClusterPolicyResponse_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &ePutClusterPolicyResponse_CurrentVersion})
+var sRebootBrokerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBrokerRequest, Members: &mRebootBrokerRequest, Type: smithy.ShapeTypeStructure, Ext: &eRebootBrokerRequest})
+var sRebootBrokerRequest_BrokerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BrokerIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t349, Type: smithy.ShapeTypeList, Ext: &eRebootBrokerRequest_BrokerIds})
+var sRebootBrokerRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eRebootBrokerRequest_ClusterArn})
+var sRebootBrokerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRebootBrokerResponse, Members: &mRebootBrokerResponse, Type: smithy.ShapeTypeStructure, Ext: &eRebootBrokerResponse})
+var sRebootBrokerResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eRebootBrokerResponse_ClusterArn})
+var sRebootBrokerResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eRebootBrokerResponse_ClusterOperationArn})
+var sRejectClientVpcConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectClientVpcConnectionRequest, Members: &mRejectClientVpcConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectClientVpcConnectionRequest})
+var sRejectClientVpcConnectionRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eRejectClientVpcConnectionRequest_ClusterArn})
+var sRejectClientVpcConnectionRequest_VpcConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectionArn", ID: &i___string, Traits: &t109, Type: smithy.ShapeTypeString, Ext: &eRejectClientVpcConnectionRequest_VpcConnectionArn})
+var sRejectClientVpcConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectClientVpcConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectClientVpcConnectionResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t119, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t350, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateBrokerCountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerCountRequest, Members: &mUpdateBrokerCountRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerCountRequest})
+var sUpdateBrokerCountRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerCountRequest_ClusterArn})
+var sUpdateBrokerCountRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerCountRequest_CurrentVersion})
+var sUpdateBrokerCountRequest_TargetNumberOfBrokerNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetNumberOfBrokerNodes", ID: &i___integerMin1Max15, Traits: &t351, Type: smithy.ShapeTypeInteger, Ext: &eUpdateBrokerCountRequest_TargetNumberOfBrokerNodes})
+var sUpdateBrokerCountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerCountResponse, Members: &mUpdateBrokerCountResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerCountResponse})
+var sUpdateBrokerCountResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerCountResponse_ClusterArn})
+var sUpdateBrokerCountResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerCountResponse_ClusterOperationArn})
+var sUpdateBrokerStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerStorageRequest, Members: &mUpdateBrokerStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerStorageRequest})
+var sUpdateBrokerStorageRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerStorageRequest_ClusterArn})
+var sUpdateBrokerStorageRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerStorageRequest_CurrentVersion})
+var sUpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBrokerEBSVolumeInfo", ID: &i___listOfBrokerEBSVolumeInfo, Members: &m___listOfBrokerEBSVolumeInfo, Traits: &t352, Type: smithy.ShapeTypeList, Ext: &eUpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo})
+var sUpdateBrokerStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerStorageResponse, Members: &mUpdateBrokerStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerStorageResponse})
+var sUpdateBrokerStorageResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerStorageResponse_ClusterArn})
+var sUpdateBrokerStorageResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerStorageResponse_ClusterOperationArn})
+var sUpdateBrokerTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerTypeRequest, Members: &mUpdateBrokerTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerTypeRequest})
+var sUpdateBrokerTypeRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerTypeRequest_ClusterArn})
+var sUpdateBrokerTypeRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerTypeRequest_CurrentVersion})
+var sUpdateBrokerTypeRequest_TargetInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetInstanceType", ID: &i___string, Traits: &t353, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerTypeRequest_TargetInstanceType})
+var sUpdateBrokerTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrokerTypeResponse, Members: &mUpdateBrokerTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBrokerTypeResponse})
+var sUpdateBrokerTypeResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerTypeResponse_ClusterArn})
+var sUpdateBrokerTypeResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateBrokerTypeResponse_ClusterOperationArn})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest})
+var sUpdateChannelRequest_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_ChannelArn})
+var sUpdateChannelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_ClusterArn})
+var sUpdateChannelRequest_IcebergDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationUpdate", ID: &iIcebergDestinationUpdate, Members: &mIcebergDestinationUpdate, Traits: &t354, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest_IcebergDestinationUpdate})
+var sUpdateChannelRequest_S3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationUpdate", ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Traits: &t355, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest_S3DestinationUpdate})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse})
+var sUpdateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i___string, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_ChannelArn})
+var sUpdateChannelResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_ClusterOperationArn})
+var sUpdateClusterConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterConfigurationRequest, Members: &mUpdateClusterConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterConfigurationRequest})
+var sUpdateClusterConfigurationRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterConfigurationRequest_ClusterArn})
+var sUpdateClusterConfigurationRequest_ConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationInfo", ID: &iConfigurationInfo, Members: &mConfigurationInfo, Traits: &t221, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterConfigurationRequest_ConfigurationInfo})
+var sUpdateClusterConfigurationRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterConfigurationRequest_CurrentVersion})
+var sUpdateClusterConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterConfigurationResponse, Members: &mUpdateClusterConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterConfigurationResponse})
+var sUpdateClusterConfigurationResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterConfigurationResponse_ClusterArn})
+var sUpdateClusterConfigurationResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterConfigurationResponse_ClusterOperationArn})
+var sUpdateClusterKafkaVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterKafkaVersionRequest, Members: &mUpdateClusterKafkaVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterKafkaVersionRequest})
+var sUpdateClusterKafkaVersionRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterKafkaVersionRequest_ClusterArn})
+var sUpdateClusterKafkaVersionRequest_ConfigurationInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationInfo", ID: &iConfigurationInfo, Members: &mConfigurationInfo, Traits: &t221, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterKafkaVersionRequest_ConfigurationInfo})
+var sUpdateClusterKafkaVersionRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterKafkaVersionRequest_CurrentVersion})
+var sUpdateClusterKafkaVersionRequest_TargetKafkaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaVersion", ID: &i___string, Traits: &t356, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterKafkaVersionRequest_TargetKafkaVersion})
+var sUpdateClusterKafkaVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterKafkaVersionResponse, Members: &mUpdateClusterKafkaVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterKafkaVersionResponse})
+var sUpdateClusterKafkaVersionResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterKafkaVersionResponse_ClusterArn})
+var sUpdateClusterKafkaVersionResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterKafkaVersionResponse_ClusterOperationArn})
+var sUpdateConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationRequest, Members: &mUpdateConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationRequest})
+var sUpdateConfigurationRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationRequest_Arn})
+var sUpdateConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t152, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationRequest_Description})
+var sUpdateConfigurationRequest_ServerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProperties", ID: &i___blob, Traits: &t305, Type: smithy.ShapeTypeBlob, Ext: &eUpdateConfigurationRequest_ServerProperties})
+var sUpdateConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationResponse, Members: &mUpdateConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationResponse})
+var sUpdateConfigurationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t151, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationResponse_Arn})
+var sUpdateConfigurationResponse_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &iConfigurationRevision, Members: &mConfigurationRevision, Traits: &t154, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationResponse_LatestRevision})
+var sUpdateConnectivityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivityRequest, Members: &mUpdateConnectivityRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectivityRequest})
+var sUpdateConnectivityRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectivityRequest_ClusterArn})
+var sUpdateConnectivityRequest_ConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectivityInfo", ID: &iConnectivityInfo, Members: &mConnectivityInfo, Traits: &t84, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectivityRequest_ConnectivityInfo})
+var sUpdateConnectivityRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectivityRequest_CurrentVersion})
+var sUpdateConnectivityRequest_ZookeeperAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZookeeperAccess", ID: &iZookeeperAccess, Members: &mZookeeperAccess, Traits: &t222, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectivityRequest_ZookeeperAccess})
+var sUpdateConnectivityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivityResponse, Members: &mUpdateConnectivityResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectivityResponse})
+var sUpdateConnectivityResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectivityResponse_ClusterArn})
+var sUpdateConnectivityResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectivityResponse_ClusterOperationArn})
+var sUpdateMonitoringRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitoringRequest, Members: &mUpdateMonitoringRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitoringRequest})
+var sUpdateMonitoringRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitoringRequest_ClusterArn})
+var sUpdateMonitoringRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitoringRequest_CurrentVersion})
+var sUpdateMonitoringRequest_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iEnhancedMonitoring, Members: &mEnhancedMonitoring, Traits: &t127, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMonitoringRequest_EnhancedMonitoring})
+var sUpdateMonitoringRequest_OpenMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenMonitoring", ID: &iOpenMonitoringInfo, Members: &mOpenMonitoringInfo, Traits: &t128, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitoringRequest_OpenMonitoring})
+var sUpdateMonitoringRequest_LoggingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingInfo", ID: &iLoggingInfo, Members: &mLoggingInfo, Traits: &t129, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitoringRequest_LoggingInfo})
+var sUpdateMonitoringResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitoringResponse, Members: &mUpdateMonitoringResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitoringResponse})
+var sUpdateMonitoringResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitoringResponse_ClusterArn})
+var sUpdateMonitoringResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitoringResponse_ClusterOperationArn})
+var sUpdateRebalancingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRebalancingRequest, Members: &mUpdateRebalancingRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRebalancingRequest})
+var sUpdateRebalancingRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateRebalancingRequest_ClusterArn})
+var sUpdateRebalancingRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateRebalancingRequest_CurrentVersion})
+var sUpdateRebalancingRequest_Rebalancing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rebalancing", ID: &iRebalancing, Members: &mRebalancing, Traits: &t124, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRebalancingRequest_Rebalancing})
+var sUpdateRebalancingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRebalancingResponse, Members: &mUpdateRebalancingResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRebalancingResponse})
+var sUpdateRebalancingResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateRebalancingResponse_ClusterArn})
+var sUpdateRebalancingResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateRebalancingResponse_ClusterOperationArn})
+var sUpdateReplicationInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationInfoRequest, Members: &mUpdateReplicationInfoRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationInfoRequest})
+var sUpdateReplicationInfoRequest_ConsumerGroupReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupReplication", ID: &iConsumerGroupReplicationUpdate, Members: &mConsumerGroupReplicationUpdate, Traits: &t241, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationInfoRequest_ConsumerGroupReplication})
+var sUpdateReplicationInfoRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_CurrentVersion})
+var sUpdateReplicationInfoRequest_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_ReplicatorArn})
+var sUpdateReplicationInfoRequest_SourceKafkaClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterArn", ID: &i___string, Traits: &t242, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_SourceKafkaClusterArn})
+var sUpdateReplicationInfoRequest_SourceKafkaClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKafkaClusterId", ID: &i___string, Traits: &t243, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_SourceKafkaClusterId})
+var sUpdateReplicationInfoRequest_TargetKafkaClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterArn", ID: &i___string, Traits: &t245, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_TargetKafkaClusterArn})
+var sUpdateReplicationInfoRequest_TargetKafkaClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKafkaClusterId", ID: &i___string, Traits: &t246, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoRequest_TargetKafkaClusterId})
+var sUpdateReplicationInfoRequest_TopicReplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicReplication", ID: &iTopicReplicationUpdate, Members: &mTopicReplicationUpdate, Traits: &t247, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationInfoRequest_TopicReplication})
+var sUpdateReplicationInfoRequest_LogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDelivery", ID: &iLogDelivery, Members: &mLogDelivery, Traits: &t308, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationInfoRequest_LogDelivery})
+var sUpdateReplicationInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateReplicationInfoResponse, Members: &mUpdateReplicationInfoResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateReplicationInfoResponse})
+var sUpdateReplicationInfoResponse_ReplicatorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorArn", ID: &i___string, Traits: &t255, Type: smithy.ShapeTypeString, Ext: &eUpdateReplicationInfoResponse_ReplicatorArn})
+var sUpdateReplicationInfoResponse_ReplicatorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatorState", ID: &iReplicatorState, Members: &mReplicatorState, Traits: &t258, Type: smithy.ShapeTypeEnum, Ext: &eUpdateReplicationInfoResponse_ReplicatorState})
+var sUpdateSecurityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityRequest, Members: &mUpdateSecurityRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecurityRequest})
+var sUpdateSecurityRequest_ClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthentication", ID: &iClientAuthentication, Members: &mClientAuthentication, Traits: &t125, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecurityRequest_ClientAuthentication})
+var sUpdateSecurityRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateSecurityRequest_ClusterArn})
+var sUpdateSecurityRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateSecurityRequest_CurrentVersion})
+var sUpdateSecurityRequest_EncryptionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionInfo", ID: &iEncryptionInfo, Members: &mEncryptionInfo, Traits: &t126, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecurityRequest_EncryptionInfo})
+var sUpdateSecurityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityResponse, Members: &mUpdateSecurityResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecurityResponse})
+var sUpdateSecurityResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateSecurityResponse_ClusterArn})
+var sUpdateSecurityResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateSecurityResponse_ClusterOperationArn})
+var sUpdateStorageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorageRequest, Members: &mUpdateStorageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStorageRequest})
+var sUpdateStorageRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateStorageRequest_ClusterArn})
+var sUpdateStorageRequest_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i___string, Traits: &t117, Type: smithy.ShapeTypeString, Ext: &eUpdateStorageRequest_CurrentVersion})
+var sUpdateStorageRequest_ProvisionedThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProvisionedThroughput", ID: &iProvisionedThroughput, Members: &mProvisionedThroughput, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStorageRequest_ProvisionedThroughput})
+var sUpdateStorageRequest_StorageMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageMode", ID: &iStorageMode, Members: &mStorageMode, Traits: &t133, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStorageRequest_StorageMode})
+var sUpdateStorageRequest_VolumeSizeGB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeGB", ID: &i___integer, Traits: &t78, Type: smithy.ShapeTypeInteger, Ext: &eUpdateStorageRequest_VolumeSizeGB})
+var sUpdateStorageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorageResponse, Members: &mUpdateStorageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStorageResponse})
+var sUpdateStorageResponse_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eUpdateStorageResponse_ClusterArn})
+var sUpdateStorageResponse_ClusterOperationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterOperationArn", ID: &i___string, Traits: &t102, Type: smithy.ShapeTypeString, Ext: &eUpdateStorageResponse_ClusterOperationArn})
+var sUpdateTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTopicRequest, Members: &mUpdateTopicRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTopicRequest})
+var sUpdateTopicRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateTopicRequest_ClusterArn})
+var sUpdateTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t298, Type: smithy.ShapeTypeString, Ext: &eUpdateTopicRequest_TopicName})
+var sUpdateTopicRequest_Configs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configs", ID: &i___string, Traits: &t309, Type: smithy.ShapeTypeString, Ext: &eUpdateTopicRequest_Configs})
+var sUpdateTopicRequest_PartitionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionCount", ID: &i___integer, Traits: &t277, Type: smithy.ShapeTypeInteger, Ext: &eUpdateTopicRequest_PartitionCount})
+var sUpdateTopicResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTopicResponse, Members: &mUpdateTopicResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTopicResponse})
+var sUpdateTopicResponse_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i___string, Traits: &t274, Type: smithy.ShapeTypeString, Ext: &eUpdateTopicResponse_TopicArn})
+var sUpdateTopicResponse_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i___string, Traits: &t275, Type: smithy.ShapeTypeString, Ext: &eUpdateTopicResponse_TopicName})
+var sUpdateTopicResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTopicState, Members: &mTopicState, Traits: &t99, Type: smithy.ShapeTypeEnum, Ext: &eUpdateTopicResponse_Status})
+
+var BatchAssociateScramSecret = &sBatchAssociateScramSecret
+
+var BatchDisassociateScramSecret = &sBatchDisassociateScramSecret
+
+var CreateChannel = &sCreateChannel
+
+var CreateCluster = &sCreateCluster
+
+var CreateClusterV2 = &sCreateClusterV2
+
+var CreateConfiguration = &sCreateConfiguration
+
+var CreateReplicator = &sCreateReplicator
+
+var CreateTopic = &sCreateTopic
+
+var CreateVpcConnection = &sCreateVpcConnection
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteCluster = &sDeleteCluster
+
+var DeleteClusterPolicy = &sDeleteClusterPolicy
+
+var DeleteConfiguration = &sDeleteConfiguration
+
+var DeleteReplicator = &sDeleteReplicator
+
+var DeleteTopic = &sDeleteTopic
+
+var DeleteVpcConnection = &sDeleteVpcConnection
+
+var DescribeChannel = &sDescribeChannel
+
+var DescribeCluster = &sDescribeCluster
+
+var DescribeClusterOperation = &sDescribeClusterOperation
+
+var DescribeClusterOperationV2 = &sDescribeClusterOperationV2
+
+var DescribeClusterV2 = &sDescribeClusterV2
+
+var DescribeConfiguration = &sDescribeConfiguration
+
+var DescribeConfigurationRevision = &sDescribeConfigurationRevision
+
+var DescribeReplicator = &sDescribeReplicator
+
+var DescribeTopic = &sDescribeTopic
+
+var DescribeTopicPartitions = &sDescribeTopicPartitions
+
+var DescribeVpcConnection = &sDescribeVpcConnection
+
+var GetBootstrapBrokers = &sGetBootstrapBrokers
+
+var GetClusterPolicy = &sGetClusterPolicy
+
+var GetCompatibleKafkaVersions = &sGetCompatibleKafkaVersions
+
+var ListChannels = &sListChannels
+
+var ListClientVpcConnections = &sListClientVpcConnections
+
+var ListClusterOperations = &sListClusterOperations
+
+var ListClusterOperationsV2 = &sListClusterOperationsV2
+
+var ListClusters = &sListClusters
+
+var ListClustersV2 = &sListClustersV2
+
+var ListConfigurationRevisions = &sListConfigurationRevisions
+
+var ListConfigurations = &sListConfigurations
+
+var ListKafkaVersions = &sListKafkaVersions
+
+var ListNodes = &sListNodes
+
+var ListReplicators = &sListReplicators
+
+var ListScramSecrets = &sListScramSecrets
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTopics = &sListTopics
+
+var ListVpcConnections = &sListVpcConnections
+
+var PutClusterPolicy = &sPutClusterPolicy
+
+var RebootBroker = &sRebootBroker
+
+var RejectClientVpcConnection = &sRejectClientVpcConnection
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateBrokerCount = &sUpdateBrokerCount
+
+var UpdateBrokerStorage = &sUpdateBrokerStorage
+
+var UpdateBrokerType = &sUpdateBrokerType
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateClusterConfiguration = &sUpdateClusterConfiguration
+
+var UpdateClusterKafkaVersion = &sUpdateClusterKafkaVersion
+
+var UpdateConfiguration = &sUpdateConfiguration
+
+var UpdateConnectivity = &sUpdateConnectivity
+
+var UpdateMonitoring = &sUpdateMonitoring
+
+var UpdateRebalancing = &sUpdateRebalancing
+
+var UpdateReplicationInfo = &sUpdateReplicationInfo
+
+var UpdateSecurity = &sUpdateSecurity
+
+var UpdateStorage = &sUpdateStorage
+
+var UpdateTopic = &sUpdateTopic
+
+var _Kafka = &s_Kafka
+
+var ___blob = &s___blob
+
+var ___boolean = &s___boolean
+
+var ___double = &s___double
+
+var ___integer = &s___integer
+
+var ___integerMin1 = &s___integerMin1
+
+var ___integerMin1Max15 = &s___integerMin1Max15
+
+var ___integerMin1Max16384 = &s___integerMin1Max16384
+
+var ___listOf__double = &s___listOf__double
+var ___listOf__double_member = &s___listOf__double_member
+
+var ___listOf__integer = &s___listOf__integer
+var ___listOf__integer_member = &s___listOf__integer_member
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOf__stringMax249 = &s___listOf__stringMax249
+var ___listOf__stringMax249_member = &s___listOf__stringMax249_member
+
+var ___listOf__stringMax256 = &s___listOf__stringMax256
+var ___listOf__stringMax256_member = &s___listOf__stringMax256_member
+
+var ___listOfBrokerEBSVolumeInfo = &s___listOfBrokerEBSVolumeInfo
+var ___listOfBrokerEBSVolumeInfo_member = &s___listOfBrokerEBSVolumeInfo_member
+
+var ___listOfChannelInfo = &s___listOfChannelInfo
+var ___listOfChannelInfo_member = &s___listOfChannelInfo_member
+
+var ___listOfClientVpcConnection = &s___listOfClientVpcConnection
+var ___listOfClientVpcConnection_member = &s___listOfClientVpcConnection_member
+
+var ___listOfCluster = &s___listOfCluster
+var ___listOfCluster_member = &s___listOfCluster_member
+
+var ___listOfClusterInfo = &s___listOfClusterInfo
+var ___listOfClusterInfo_member = &s___listOfClusterInfo_member
+
+var ___listOfClusterOperationInfo = &s___listOfClusterOperationInfo
+var ___listOfClusterOperationInfo_member = &s___listOfClusterOperationInfo_member
+
+var ___listOfClusterOperationStep = &s___listOfClusterOperationStep
+var ___listOfClusterOperationStep_member = &s___listOfClusterOperationStep_member
+
+var ___listOfClusterOperationV2Summary = &s___listOfClusterOperationV2Summary
+var ___listOfClusterOperationV2Summary_member = &s___listOfClusterOperationV2Summary_member
+
+var ___listOfCompatibleKafkaVersion = &s___listOfCompatibleKafkaVersion
+var ___listOfCompatibleKafkaVersion_member = &s___listOfCompatibleKafkaVersion_member
+
+var ___listOfConfiguration = &s___listOfConfiguration
+var ___listOfConfiguration_member = &s___listOfConfiguration_member
+
+var ___listOfConfigurationRevision = &s___listOfConfigurationRevision
+var ___listOfConfigurationRevision_member = &s___listOfConfigurationRevision_member
+
+var ___listOfDestinationTable = &s___listOfDestinationTable
+var ___listOfDestinationTable_member = &s___listOfDestinationTable_member
+
+var ___listOfKafkaCluster = &s___listOfKafkaCluster
+var ___listOfKafkaCluster_member = &s___listOfKafkaCluster_member
+
+var ___listOfKafkaClusterDescription = &s___listOfKafkaClusterDescription
+var ___listOfKafkaClusterDescription_member = &s___listOfKafkaClusterDescription_member
+
+var ___listOfKafkaClusterSummary = &s___listOfKafkaClusterSummary
+var ___listOfKafkaClusterSummary_member = &s___listOfKafkaClusterSummary_member
+
+var ___listOfKafkaVersion = &s___listOfKafkaVersion
+var ___listOfKafkaVersion_member = &s___listOfKafkaVersion_member
+
+var ___listOfNodeInfo = &s___listOfNodeInfo
+var ___listOfNodeInfo_member = &s___listOfNodeInfo_member
+
+var ___listOfPartitionSource = &s___listOfPartitionSource
+var ___listOfPartitionSource_member = &s___listOfPartitionSource_member
+
+var ___listOfReplicationInfo = &s___listOfReplicationInfo
+var ___listOfReplicationInfo_member = &s___listOfReplicationInfo_member
+
+var ___listOfReplicationInfoDescription = &s___listOfReplicationInfoDescription
+var ___listOfReplicationInfoDescription_member = &s___listOfReplicationInfoDescription_member
+
+var ___listOfReplicationInfoSummary = &s___listOfReplicationInfoSummary
+var ___listOfReplicationInfoSummary_member = &s___listOfReplicationInfoSummary_member
+
+var ___listOfReplicatorSummary = &s___listOfReplicatorSummary
+var ___listOfReplicatorSummary_member = &s___listOfReplicatorSummary_member
+
+var ___listOfTopicConfiguration = &s___listOfTopicConfiguration
+var ___listOfTopicConfiguration_member = &s___listOfTopicConfiguration_member
+
+var ___listOfTopicInfo = &s___listOfTopicInfo
+var ___listOfTopicInfo_member = &s___listOfTopicInfo_member
+
+var ___listOfTopicPartitionInfo = &s___listOfTopicPartitionInfo
+var ___listOfTopicPartitionInfo_member = &s___listOfTopicPartitionInfo_member
+
+var ___listOfUnprocessedScramSecret = &s___listOfUnprocessedScramSecret
+var ___listOfUnprocessedScramSecret_member = &s___listOfUnprocessedScramSecret_member
+
+var ___listOfVpcConfig = &s___listOfVpcConfig
+var ___listOfVpcConfig_member = &s___listOfVpcConfig_member
+
+var ___listOfVpcConnection = &s___listOfVpcConnection
+var ___listOfVpcConnection_member = &s___listOfVpcConnection_member
+
+var ___long = &s___long
+
+var ___mapOf__string = &s___mapOf__string
+var ___mapOf__string_key = &s___mapOf__string_key
+var ___mapOf__string_value = &s___mapOf__string_value
+
+var ___string = &s___string
+
+var ___stringMax1024 = &s___stringMax1024
+
+var ___stringMax249 = &s___stringMax249
+
+var ___stringMax256 = &s___stringMax256
+
+var ___stringMin1Max128 = &s___stringMin1Max128
+
+var ___stringMin1Max128Pattern09AZaZ09AZaZ0 = &s___stringMin1Max128Pattern09AZaZ09AZaZ0
+
+var ___stringMin1Max64 = &s___stringMin1Max64
+
+var ___stringMin5Max32 = &s___stringMin5Max32
+
+var ___timestampIso8601 = &s___timestampIso8601
+
+var AmazonMskCluster = &sAmazonMskCluster
+var AmazonMskCluster_MskClusterArn = &sAmazonMskCluster_MskClusterArn
+
+var ApacheKafkaCluster = &sApacheKafkaCluster
+var ApacheKafkaCluster_ApacheKafkaClusterId = &sApacheKafkaCluster_ApacheKafkaClusterId
+var ApacheKafkaCluster_BootstrapBrokerString = &sApacheKafkaCluster_BootstrapBrokerString
+
+var AuthorizerLogs = &sAuthorizerLogs
+var AuthorizerLogs_CloudWatchLogs = &sAuthorizerLogs_CloudWatchLogs
+var AuthorizerLogs_Firehose = &sAuthorizerLogs_Firehose
+var AuthorizerLogs_S3 = &sAuthorizerLogs_S3
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_InvalidParameter = &sBadRequestException_InvalidParameter
+var BadRequestException_Message = &sBadRequestException_Message
+
+var BrokerAZDistribution = &sBrokerAZDistribution
+var BrokerAZDistribution_DEFAULT = &sBrokerAZDistribution_DEFAULT
+
+var BrokerCountUpdateInfo = &sBrokerCountUpdateInfo
+var BrokerCountUpdateInfo_CreatedBrokerIds = &sBrokerCountUpdateInfo_CreatedBrokerIds
+var BrokerCountUpdateInfo_DeletedBrokerIds = &sBrokerCountUpdateInfo_DeletedBrokerIds
+
+var BrokerEBSVolumeInfo = &sBrokerEBSVolumeInfo
+var BrokerEBSVolumeInfo_KafkaBrokerNodeId = &sBrokerEBSVolumeInfo_KafkaBrokerNodeId
+var BrokerEBSVolumeInfo_ProvisionedThroughput = &sBrokerEBSVolumeInfo_ProvisionedThroughput
+var BrokerEBSVolumeInfo_VolumeSizeGB = &sBrokerEBSVolumeInfo_VolumeSizeGB
+
+var BrokerLogs = &sBrokerLogs
+var BrokerLogs_CloudWatchLogs = &sBrokerLogs_CloudWatchLogs
+var BrokerLogs_Firehose = &sBrokerLogs_Firehose
+var BrokerLogs_S3 = &sBrokerLogs_S3
+
+var BrokerNodeGroupInfo = &sBrokerNodeGroupInfo
+var BrokerNodeGroupInfo_BrokerAZDistribution = &sBrokerNodeGroupInfo_BrokerAZDistribution
+var BrokerNodeGroupInfo_ClientSubnets = &sBrokerNodeGroupInfo_ClientSubnets
+var BrokerNodeGroupInfo_InstanceType = &sBrokerNodeGroupInfo_InstanceType
+var BrokerNodeGroupInfo_SecurityGroups = &sBrokerNodeGroupInfo_SecurityGroups
+var BrokerNodeGroupInfo_StorageInfo = &sBrokerNodeGroupInfo_StorageInfo
+var BrokerNodeGroupInfo_ConnectivityInfo = &sBrokerNodeGroupInfo_ConnectivityInfo
+var BrokerNodeGroupInfo_ZoneIds = &sBrokerNodeGroupInfo_ZoneIds
+
+var BrokerNodeInfo = &sBrokerNodeInfo
+var BrokerNodeInfo_AttachedENIId = &sBrokerNodeInfo_AttachedENIId
+var BrokerNodeInfo_BrokerId = &sBrokerNodeInfo_BrokerId
+var BrokerNodeInfo_ClientSubnet = &sBrokerNodeInfo_ClientSubnet
+var BrokerNodeInfo_ClientVpcIpAddress = &sBrokerNodeInfo_ClientVpcIpAddress
+var BrokerNodeInfo_CurrentBrokerSoftwareInfo = &sBrokerNodeInfo_CurrentBrokerSoftwareInfo
+var BrokerNodeInfo_Endpoints = &sBrokerNodeInfo_Endpoints
+
+var BrokerSoftwareInfo = &sBrokerSoftwareInfo
+var BrokerSoftwareInfo_ConfigurationArn = &sBrokerSoftwareInfo_ConfigurationArn
+var BrokerSoftwareInfo_ConfigurationRevision = &sBrokerSoftwareInfo_ConfigurationRevision
+var BrokerSoftwareInfo_KafkaVersion = &sBrokerSoftwareInfo_KafkaVersion
+
+var Catalog = &sCatalog
+var Catalog_CatalogArn = &sCatalog_CatalogArn
+var Catalog_WarehouseLocation = &sCatalog_WarehouseLocation
+
+var ChannelDestinationType = &sChannelDestinationType
+var ChannelDestinationType_ICEBERG = &sChannelDestinationType_ICEBERG
+var ChannelDestinationType_S3 = &sChannelDestinationType_S3
+
+var ChannelInfo = &sChannelInfo
+var ChannelInfo_ChannelArn = &sChannelInfo_ChannelArn
+var ChannelInfo_ChannelName = &sChannelInfo_ChannelName
+var ChannelInfo_Status = &sChannelInfo_Status
+var ChannelInfo_CreationTime = &sChannelInfo_CreationTime
+var ChannelInfo_DestinationType = &sChannelInfo_DestinationType
+var ChannelInfo_ClusterOperationArn = &sChannelInfo_ClusterOperationArn
+
+var ChannelLoggingInfo = &sChannelLoggingInfo
+var ChannelLoggingInfo_CloudWatchLogs = &sChannelLoggingInfo_CloudWatchLogs
+var ChannelLoggingInfo_Firehose = &sChannelLoggingInfo_Firehose
+var ChannelLoggingInfo_S3 = &sChannelLoggingInfo_S3
+
+var ChannelStateInfo = &sChannelStateInfo
+var ChannelStateInfo_Code = &sChannelStateInfo_Code
+var ChannelStateInfo_Message = &sChannelStateInfo_Message
+
+var ChannelStatus = &sChannelStatus
+var ChannelStatus_CREATING = &sChannelStatus_CREATING
+var ChannelStatus_ACTIVE = &sChannelStatus_ACTIVE
+var ChannelStatus_UPDATING = &sChannelStatus_UPDATING
+var ChannelStatus_DELETING = &sChannelStatus_DELETING
+var ChannelStatus_FAILED = &sChannelStatus_FAILED
+var ChannelStatus_SUSPENDING = &sChannelStatus_SUSPENDING
+var ChannelStatus_SUSPENDED = &sChannelStatus_SUSPENDED
+
+var ClientAuthentication = &sClientAuthentication
+var ClientAuthentication_Sasl = &sClientAuthentication_Sasl
+var ClientAuthentication_Tls = &sClientAuthentication_Tls
+var ClientAuthentication_Unauthenticated = &sClientAuthentication_Unauthenticated
+
+var ClientBroker = &sClientBroker
+var ClientBroker_TLS = &sClientBroker_TLS
+var ClientBroker_TLS_PLAINTEXT = &sClientBroker_TLS_PLAINTEXT
+var ClientBroker_PLAINTEXT = &sClientBroker_PLAINTEXT
+
+var ClientVpcConnection = &sClientVpcConnection
+var ClientVpcConnection_Authentication = &sClientVpcConnection_Authentication
+var ClientVpcConnection_CreationTime = &sClientVpcConnection_CreationTime
+var ClientVpcConnection_State = &sClientVpcConnection_State
+var ClientVpcConnection_VpcConnectionArn = &sClientVpcConnection_VpcConnectionArn
+var ClientVpcConnection_Owner = &sClientVpcConnection_Owner
+
+var CloudWatchLogs = &sCloudWatchLogs
+var CloudWatchLogs_Enabled = &sCloudWatchLogs_Enabled
+var CloudWatchLogs_LogGroup = &sCloudWatchLogs_LogGroup
+
+var Cluster = &sCluster
+var Cluster_ActiveOperationArn = &sCluster_ActiveOperationArn
+var Cluster_ClusterType = &sCluster_ClusterType
+var Cluster_ClusterArn = &sCluster_ClusterArn
+var Cluster_ClusterName = &sCluster_ClusterName
+var Cluster_CreationTime = &sCluster_CreationTime
+var Cluster_CurrentVersion = &sCluster_CurrentVersion
+var Cluster_State = &sCluster_State
+var Cluster_StateInfo = &sCluster_StateInfo
+var Cluster_Tags = &sCluster_Tags
+var Cluster_Provisioned = &sCluster_Provisioned
+var Cluster_Serverless = &sCluster_Serverless
+
+var ClusterConnectivityException = &sClusterConnectivityException
+var ClusterConnectivityException_InvalidParameter = &sClusterConnectivityException_InvalidParameter
+var ClusterConnectivityException_Message = &sClusterConnectivityException_Message
+
+var ClusterInfo = &sClusterInfo
+var ClusterInfo_ActiveOperationArn = &sClusterInfo_ActiveOperationArn
+var ClusterInfo_BrokerNodeGroupInfo = &sClusterInfo_BrokerNodeGroupInfo
+var ClusterInfo_Rebalancing = &sClusterInfo_Rebalancing
+var ClusterInfo_ClientAuthentication = &sClusterInfo_ClientAuthentication
+var ClusterInfo_ClusterArn = &sClusterInfo_ClusterArn
+var ClusterInfo_ClusterName = &sClusterInfo_ClusterName
+var ClusterInfo_CreationTime = &sClusterInfo_CreationTime
+var ClusterInfo_CurrentBrokerSoftwareInfo = &sClusterInfo_CurrentBrokerSoftwareInfo
+var ClusterInfo_CurrentVersion = &sClusterInfo_CurrentVersion
+var ClusterInfo_EncryptionInfo = &sClusterInfo_EncryptionInfo
+var ClusterInfo_EnhancedMonitoring = &sClusterInfo_EnhancedMonitoring
+var ClusterInfo_OpenMonitoring = &sClusterInfo_OpenMonitoring
+var ClusterInfo_LoggingInfo = &sClusterInfo_LoggingInfo
+var ClusterInfo_NumberOfBrokerNodes = &sClusterInfo_NumberOfBrokerNodes
+var ClusterInfo_State = &sClusterInfo_State
+var ClusterInfo_StateInfo = &sClusterInfo_StateInfo
+var ClusterInfo_Tags = &sClusterInfo_Tags
+var ClusterInfo_ZookeeperConnectString = &sClusterInfo_ZookeeperConnectString
+var ClusterInfo_ZookeeperConnectStringTls = &sClusterInfo_ZookeeperConnectStringTls
+var ClusterInfo_StorageMode = &sClusterInfo_StorageMode
+var ClusterInfo_CustomerActionStatus = &sClusterInfo_CustomerActionStatus
+
+var ClusterOperationInfo = &sClusterOperationInfo
+var ClusterOperationInfo_ClientRequestId = &sClusterOperationInfo_ClientRequestId
+var ClusterOperationInfo_ClusterArn = &sClusterOperationInfo_ClusterArn
+var ClusterOperationInfo_CreationTime = &sClusterOperationInfo_CreationTime
+var ClusterOperationInfo_EndTime = &sClusterOperationInfo_EndTime
+var ClusterOperationInfo_ErrorInfo = &sClusterOperationInfo_ErrorInfo
+var ClusterOperationInfo_OperationArn = &sClusterOperationInfo_OperationArn
+var ClusterOperationInfo_OperationState = &sClusterOperationInfo_OperationState
+var ClusterOperationInfo_OperationSteps = &sClusterOperationInfo_OperationSteps
+var ClusterOperationInfo_OperationType = &sClusterOperationInfo_OperationType
+var ClusterOperationInfo_SourceClusterInfo = &sClusterOperationInfo_SourceClusterInfo
+var ClusterOperationInfo_TargetClusterInfo = &sClusterOperationInfo_TargetClusterInfo
+var ClusterOperationInfo_VpcConnectionInfo = &sClusterOperationInfo_VpcConnectionInfo
+
+var ClusterOperationStep = &sClusterOperationStep
+var ClusterOperationStep_StepInfo = &sClusterOperationStep_StepInfo
+var ClusterOperationStep_StepName = &sClusterOperationStep_StepName
+
+var ClusterOperationStepInfo = &sClusterOperationStepInfo
+var ClusterOperationStepInfo_StepStatus = &sClusterOperationStepInfo_StepStatus
+
+var ClusterOperationV2 = &sClusterOperationV2
+var ClusterOperationV2_ClusterArn = &sClusterOperationV2_ClusterArn
+var ClusterOperationV2_ClusterType = &sClusterOperationV2_ClusterType
+var ClusterOperationV2_StartTime = &sClusterOperationV2_StartTime
+var ClusterOperationV2_EndTime = &sClusterOperationV2_EndTime
+var ClusterOperationV2_ErrorInfo = &sClusterOperationV2_ErrorInfo
+var ClusterOperationV2_OperationArn = &sClusterOperationV2_OperationArn
+var ClusterOperationV2_OperationState = &sClusterOperationV2_OperationState
+var ClusterOperationV2_OperationType = &sClusterOperationV2_OperationType
+var ClusterOperationV2_Provisioned = &sClusterOperationV2_Provisioned
+var ClusterOperationV2_Serverless = &sClusterOperationV2_Serverless
+
+var ClusterOperationV2Provisioned = &sClusterOperationV2Provisioned
+var ClusterOperationV2Provisioned_OperationSteps = &sClusterOperationV2Provisioned_OperationSteps
+var ClusterOperationV2Provisioned_SourceClusterInfo = &sClusterOperationV2Provisioned_SourceClusterInfo
+var ClusterOperationV2Provisioned_TargetClusterInfo = &sClusterOperationV2Provisioned_TargetClusterInfo
+var ClusterOperationV2Provisioned_VpcConnectionInfo = &sClusterOperationV2Provisioned_VpcConnectionInfo
+
+var ClusterOperationV2Serverless = &sClusterOperationV2Serverless
+var ClusterOperationV2Serverless_SourceClusterInfo = &sClusterOperationV2Serverless_SourceClusterInfo
+var ClusterOperationV2Serverless_TargetClusterInfo = &sClusterOperationV2Serverless_TargetClusterInfo
+var ClusterOperationV2Serverless_VpcConnectionInfo = &sClusterOperationV2Serverless_VpcConnectionInfo
+
+var ClusterOperationV2Summary = &sClusterOperationV2Summary
+var ClusterOperationV2Summary_ClusterArn = &sClusterOperationV2Summary_ClusterArn
+var ClusterOperationV2Summary_ClusterType = &sClusterOperationV2Summary_ClusterType
+var ClusterOperationV2Summary_StartTime = &sClusterOperationV2Summary_StartTime
+var ClusterOperationV2Summary_EndTime = &sClusterOperationV2Summary_EndTime
+var ClusterOperationV2Summary_OperationArn = &sClusterOperationV2Summary_OperationArn
+var ClusterOperationV2Summary_OperationState = &sClusterOperationV2Summary_OperationState
+var ClusterOperationV2Summary_OperationType = &sClusterOperationV2Summary_OperationType
+
+var ClusterState = &sClusterState
+var ClusterState_ACTIVE = &sClusterState_ACTIVE
+var ClusterState_CREATING = &sClusterState_CREATING
+var ClusterState_DELETING = &sClusterState_DELETING
+var ClusterState_FAILED = &sClusterState_FAILED
+var ClusterState_HEALING = &sClusterState_HEALING
+var ClusterState_MAINTENANCE = &sClusterState_MAINTENANCE
+var ClusterState_REBOOTING_BROKER = &sClusterState_REBOOTING_BROKER
+var ClusterState_UPDATING = &sClusterState_UPDATING
+
+var ClusterType = &sClusterType
+var ClusterType_PROVISIONED = &sClusterType_PROVISIONED
+var ClusterType_SERVERLESS = &sClusterType_SERVERLESS
+
+var CompatibleKafkaVersion = &sCompatibleKafkaVersion
+var CompatibleKafkaVersion_SourceVersion = &sCompatibleKafkaVersion_SourceVersion
+var CompatibleKafkaVersion_TargetVersions = &sCompatibleKafkaVersion_TargetVersions
+
+var Configuration = &sConfiguration
+var Configuration_Arn = &sConfiguration_Arn
+var Configuration_CreationTime = &sConfiguration_CreationTime
+var Configuration_Description = &sConfiguration_Description
+var Configuration_KafkaVersions = &sConfiguration_KafkaVersions
+var Configuration_LatestRevision = &sConfiguration_LatestRevision
+var Configuration_Name = &sConfiguration_Name
+var Configuration_State = &sConfiguration_State
+
+var ConfigurationInfo = &sConfigurationInfo
+var ConfigurationInfo_Arn = &sConfigurationInfo_Arn
+var ConfigurationInfo_Revision = &sConfigurationInfo_Revision
+
+var ConfigurationRevision = &sConfigurationRevision
+var ConfigurationRevision_CreationTime = &sConfigurationRevision_CreationTime
+var ConfigurationRevision_Description = &sConfigurationRevision_Description
+var ConfigurationRevision_Revision = &sConfigurationRevision_Revision
+
+var ConfigurationState = &sConfigurationState
+var ConfigurationState_ACTIVE = &sConfigurationState_ACTIVE
+var ConfigurationState_DELETING = &sConfigurationState_DELETING
+var ConfigurationState_DELETE_FAILED = &sConfigurationState_DELETE_FAILED
+
+var ConflictException = &sConflictException
+var ConflictException_InvalidParameter = &sConflictException_InvalidParameter
+var ConflictException_Message = &sConflictException_Message
+
+var ConnectivityInfo = &sConnectivityInfo
+var ConnectivityInfo_PublicAccess = &sConnectivityInfo_PublicAccess
+var ConnectivityInfo_VpcConnectivity = &sConnectivityInfo_VpcConnectivity
+var ConnectivityInfo_NetworkType = &sConnectivityInfo_NetworkType
+
+var ConsumerGroupOffsetSyncMode = &sConsumerGroupOffsetSyncMode
+var ConsumerGroupOffsetSyncMode_LEGACY = &sConsumerGroupOffsetSyncMode_LEGACY
+var ConsumerGroupOffsetSyncMode_ENHANCED = &sConsumerGroupOffsetSyncMode_ENHANCED
+
+var ConsumerGroupReplication = &sConsumerGroupReplication
+var ConsumerGroupReplication_ConsumerGroupsToExclude = &sConsumerGroupReplication_ConsumerGroupsToExclude
+var ConsumerGroupReplication_ConsumerGroupsToReplicate = &sConsumerGroupReplication_ConsumerGroupsToReplicate
+var ConsumerGroupReplication_DetectAndCopyNewConsumerGroups = &sConsumerGroupReplication_DetectAndCopyNewConsumerGroups
+var ConsumerGroupReplication_SynchroniseConsumerGroupOffsets = &sConsumerGroupReplication_SynchroniseConsumerGroupOffsets
+var ConsumerGroupReplication_ConsumerGroupOffsetSyncMode = &sConsumerGroupReplication_ConsumerGroupOffsetSyncMode
+
+var ConsumerGroupReplicationUpdate = &sConsumerGroupReplicationUpdate
+var ConsumerGroupReplicationUpdate_ConsumerGroupsToExclude = &sConsumerGroupReplicationUpdate_ConsumerGroupsToExclude
+var ConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate = &sConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate
+var ConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups = &sConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups
+var ConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets = &sConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets
+
+var ControllerMovedException = &sControllerMovedException
+var ControllerMovedException_InvalidParameter = &sControllerMovedException_InvalidParameter
+var ControllerMovedException_Message = &sControllerMovedException_Message
+
+var ControllerNodeInfo = &sControllerNodeInfo
+var ControllerNodeInfo_Endpoints = &sControllerNodeInfo_Endpoints
+
+var CustomerActionStatus = &sCustomerActionStatus
+var CustomerActionStatus_CRITICAL_ACTION_REQUIRED = &sCustomerActionStatus_CRITICAL_ACTION_REQUIRED
+var CustomerActionStatus_ACTION_RECOMMENDED = &sCustomerActionStatus_ACTION_RECOMMENDED
+var CustomerActionStatus_NONE = &sCustomerActionStatus_NONE
+
+var DeadLetterQueueS3 = &sDeadLetterQueueS3
+var DeadLetterQueueS3_BucketArn = &sDeadLetterQueueS3_BucketArn
+var DeadLetterQueueS3_ErrorOutputPrefix = &sDeadLetterQueueS3_ErrorOutputPrefix
+var DeadLetterQueueS3_ExpectedBucketOwner = &sDeadLetterQueueS3_ExpectedBucketOwner
+
+var DestinationTable = &sDestinationTable
+var DestinationTable_DestinationDatabaseName = &sDestinationTable_DestinationDatabaseName
+var DestinationTable_DestinationTableName = &sDestinationTable_DestinationTableName
+var DestinationTable_PartitionSpec = &sDestinationTable_PartitionSpec
+
+var EBSStorageInfo = &sEBSStorageInfo
+var EBSStorageInfo_ProvisionedThroughput = &sEBSStorageInfo_ProvisionedThroughput
+var EBSStorageInfo_VolumeSize = &sEBSStorageInfo_VolumeSize
+
+var EncryptionAtRest = &sEncryptionAtRest
+var EncryptionAtRest_DataVolumeKMSKeyId = &sEncryptionAtRest_DataVolumeKMSKeyId
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_KmsKeyArn = &sEncryptionConfiguration_KmsKeyArn
+
+var EncryptionInfo = &sEncryptionInfo
+var EncryptionInfo_EncryptionAtRest = &sEncryptionInfo_EncryptionAtRest
+var EncryptionInfo_EncryptionInTransit = &sEncryptionInfo_EncryptionInTransit
+
+var EncryptionInTransit = &sEncryptionInTransit
+var EncryptionInTransit_ClientBroker = &sEncryptionInTransit_ClientBroker
+var EncryptionInTransit_InCluster = &sEncryptionInTransit_InCluster
+
+var EnhancedMonitoring = &sEnhancedMonitoring
+var EnhancedMonitoring_DEFAULT = &sEnhancedMonitoring_DEFAULT
+var EnhancedMonitoring_PER_BROKER = &sEnhancedMonitoring_PER_BROKER
+var EnhancedMonitoring_PER_TOPIC_PER_BROKER = &sEnhancedMonitoring_PER_TOPIC_PER_BROKER
+var EnhancedMonitoring_PER_TOPIC_PER_PARTITION = &sEnhancedMonitoring_PER_TOPIC_PER_PARTITION
+
+var ErrorInfo = &sErrorInfo
+var ErrorInfo_ErrorCode = &sErrorInfo_ErrorCode
+var ErrorInfo_ErrorString = &sErrorInfo_ErrorString
+
+var Firehose = &sFirehose
+var Firehose_DeliveryStream = &sFirehose_DeliveryStream
+var Firehose_Enabled = &sFirehose_Enabled
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_InvalidParameter = &sForbiddenException_InvalidParameter
+var ForbiddenException_Message = &sForbiddenException_Message
+
+var GroupSubscribedToTopicException = &sGroupSubscribedToTopicException
+var GroupSubscribedToTopicException_InvalidParameter = &sGroupSubscribedToTopicException_InvalidParameter
+var GroupSubscribedToTopicException_Message = &sGroupSubscribedToTopicException_Message
+
+var Iam = &sIam
+var Iam_Enabled = &sIam_Enabled
+
+var IcebergCompressionType = &sIcebergCompressionType
+var IcebergCompressionType_ZSTD = &sIcebergCompressionType_ZSTD
+var IcebergCompressionType_SNAPPY = &sIcebergCompressionType_SNAPPY
+
+var IcebergDestinationConfiguration = &sIcebergDestinationConfiguration
+var IcebergDestinationConfiguration_AppendOnly = &sIcebergDestinationConfiguration_AppendOnly
+var IcebergDestinationConfiguration_Catalog = &sIcebergDestinationConfiguration_Catalog
+var IcebergDestinationConfiguration_DataFreshnessInSeconds = &sIcebergDestinationConfiguration_DataFreshnessInSeconds
+var IcebergDestinationConfiguration_DeadLetterQueueS3 = &sIcebergDestinationConfiguration_DeadLetterQueueS3
+var IcebergDestinationConfiguration_DestinationTableList = &sIcebergDestinationConfiguration_DestinationTableList
+var IcebergDestinationConfiguration_SchemaEvolution = &sIcebergDestinationConfiguration_SchemaEvolution
+var IcebergDestinationConfiguration_ServiceExecutionRoleArn = &sIcebergDestinationConfiguration_ServiceExecutionRoleArn
+var IcebergDestinationConfiguration_TableCreation = &sIcebergDestinationConfiguration_TableCreation
+var IcebergDestinationConfiguration_CompressionType = &sIcebergDestinationConfiguration_CompressionType
+
+var IcebergDestinationUpdate = &sIcebergDestinationUpdate
+var IcebergDestinationUpdate_DataFreshnessInSeconds = &sIcebergDestinationUpdate_DataFreshnessInSeconds
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_InvalidParameter = &sInternalServerErrorException_InvalidParameter
+var InternalServerErrorException_Message = &sInternalServerErrorException_Message
+
+var JmxExporter = &sJmxExporter
+var JmxExporter_EnabledInBroker = &sJmxExporter_EnabledInBroker
+
+var JmxExporterInfo = &sJmxExporterInfo
+var JmxExporterInfo_EnabledInBroker = &sJmxExporterInfo_EnabledInBroker
+
+var JwtSigningAlgorithm = &sJwtSigningAlgorithm
+var JwtSigningAlgorithm_RS256 = &sJwtSigningAlgorithm_RS256
+var JwtSigningAlgorithm_ES384 = &sJwtSigningAlgorithm_ES384
+
+var KafkaCluster = &sKafkaCluster
+var KafkaCluster_AmazonMskCluster = &sKafkaCluster_AmazonMskCluster
+var KafkaCluster_ApacheKafkaCluster = &sKafkaCluster_ApacheKafkaCluster
+var KafkaCluster_VpcConfig = &sKafkaCluster_VpcConfig
+var KafkaCluster_ClientAuthentication = &sKafkaCluster_ClientAuthentication
+var KafkaCluster_EncryptionInTransit = &sKafkaCluster_EncryptionInTransit
+
+var KafkaClusterClientAuthentication = &sKafkaClusterClientAuthentication
+var KafkaClusterClientAuthentication_SaslScram = &sKafkaClusterClientAuthentication_SaslScram
+var KafkaClusterClientAuthentication_MTLS = &sKafkaClusterClientAuthentication_MTLS
+var KafkaClusterClientAuthentication_SaslOAuthBearer = &sKafkaClusterClientAuthentication_SaslOAuthBearer
+
+var KafkaClusterClientVpcConfig = &sKafkaClusterClientVpcConfig
+var KafkaClusterClientVpcConfig_SecurityGroupIds = &sKafkaClusterClientVpcConfig_SecurityGroupIds
+var KafkaClusterClientVpcConfig_SubnetIds = &sKafkaClusterClientVpcConfig_SubnetIds
+
+var KafkaClusterDescription = &sKafkaClusterDescription
+var KafkaClusterDescription_AmazonMskCluster = &sKafkaClusterDescription_AmazonMskCluster
+var KafkaClusterDescription_ApacheKafkaCluster = &sKafkaClusterDescription_ApacheKafkaCluster
+var KafkaClusterDescription_KafkaClusterAlias = &sKafkaClusterDescription_KafkaClusterAlias
+var KafkaClusterDescription_VpcConfig = &sKafkaClusterDescription_VpcConfig
+var KafkaClusterDescription_ClientAuthentication = &sKafkaClusterDescription_ClientAuthentication
+var KafkaClusterDescription_EncryptionInTransit = &sKafkaClusterDescription_EncryptionInTransit
+
+var KafkaClusterEncryptionInTransit = &sKafkaClusterEncryptionInTransit
+var KafkaClusterEncryptionInTransit_EncryptionType = &sKafkaClusterEncryptionInTransit_EncryptionType
+var KafkaClusterEncryptionInTransit_RootCaCertificate = &sKafkaClusterEncryptionInTransit_RootCaCertificate
+
+var KafkaClusterEncryptionInTransitType = &sKafkaClusterEncryptionInTransitType
+var KafkaClusterEncryptionInTransitType_TLS = &sKafkaClusterEncryptionInTransitType_TLS
+
+var KafkaClusterMTLSAuthentication = &sKafkaClusterMTLSAuthentication
+var KafkaClusterMTLSAuthentication_SecretArn = &sKafkaClusterMTLSAuthentication_SecretArn
+
+var KafkaClusterOAuthClientCredentials = &sKafkaClusterOAuthClientCredentials
+var KafkaClusterOAuthClientCredentials_TokenRequestSecretArn = &sKafkaClusterOAuthClientCredentials_TokenRequestSecretArn
+
+var KafkaClusterOAuthClientCredentialsAssertion = &sKafkaClusterOAuthClientCredentialsAssertion
+var KafkaClusterOAuthClientCredentialsAssertion_Audience = &sKafkaClusterOAuthClientCredentialsAssertion_Audience
+var KafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm = &sKafkaClusterOAuthClientCredentialsAssertion_SigningAlgorithm
+var KafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn = &sKafkaClusterOAuthClientCredentialsAssertion_TokenRequestSecretArn
+
+var KafkaClusterOAuthIamJwtBearer = &sKafkaClusterOAuthIamJwtBearer
+var KafkaClusterOAuthIamJwtBearer_Audience = &sKafkaClusterOAuthIamJwtBearer_Audience
+var KafkaClusterOAuthIamJwtBearer_SigningAlgorithm = &sKafkaClusterOAuthIamJwtBearer_SigningAlgorithm
+var KafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn = &sKafkaClusterOAuthIamJwtBearer_TokenRequestSecretArn
+
+var KafkaClusterSaslOAuthBearerAuthentication = &sKafkaClusterSaslOAuthBearerAuthentication
+var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl = &sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointUrl
+var KafkaClusterSaslOAuthBearerAuthentication_ClientCredentials = &sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentials
+var KafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer = &sKafkaClusterSaslOAuthBearerAuthentication_IamJwtBearer
+var KafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion = &sKafkaClusterSaslOAuthBearerAuthentication_ClientCredentialsAssertion
+var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod = &sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointAuthenticationMethod
+var KafkaClusterSaslOAuthBearerAuthentication_Scope = &sKafkaClusterSaslOAuthBearerAuthentication_Scope
+var KafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn = &sKafkaClusterSaslOAuthBearerAuthentication_TokenEndpointTlsCertificateArn
+
+var KafkaClusterSaslScramAuthentication = &sKafkaClusterSaslScramAuthentication
+var KafkaClusterSaslScramAuthentication_Mechanism = &sKafkaClusterSaslScramAuthentication_Mechanism
+var KafkaClusterSaslScramAuthentication_SecretArn = &sKafkaClusterSaslScramAuthentication_SecretArn
+
+var KafkaClusterSaslScramMechanism = &sKafkaClusterSaslScramMechanism
+var KafkaClusterSaslScramMechanism_SHA256 = &sKafkaClusterSaslScramMechanism_SHA256
+var KafkaClusterSaslScramMechanism_SHA512 = &sKafkaClusterSaslScramMechanism_SHA512
+
+var KafkaClusterSummary = &sKafkaClusterSummary
+var KafkaClusterSummary_AmazonMskCluster = &sKafkaClusterSummary_AmazonMskCluster
+var KafkaClusterSummary_ApacheKafkaCluster = &sKafkaClusterSummary_ApacheKafkaCluster
+var KafkaClusterSummary_KafkaClusterAlias = &sKafkaClusterSummary_KafkaClusterAlias
+
+var KafkaRequestException = &sKafkaRequestException
+var KafkaRequestException_InvalidParameter = &sKafkaRequestException_InvalidParameter
+var KafkaRequestException_Message = &sKafkaRequestException_Message
+
+var KafkaTimeoutException = &sKafkaTimeoutException
+var KafkaTimeoutException_InvalidParameter = &sKafkaTimeoutException_InvalidParameter
+var KafkaTimeoutException_Message = &sKafkaTimeoutException_Message
+
+var KafkaVersion = &sKafkaVersion
+var KafkaVersion_Version = &sKafkaVersion_Version
+var KafkaVersion_Status = &sKafkaVersion_Status
+
+var KafkaVersionStatus = &sKafkaVersionStatus
+var KafkaVersionStatus_ACTIVE = &sKafkaVersionStatus_ACTIVE
+var KafkaVersionStatus_DEPRECATED = &sKafkaVersionStatus_DEPRECATED
+
+var LogDelivery = &sLogDelivery
+var LogDelivery_ReplicatorLogDelivery = &sLogDelivery_ReplicatorLogDelivery
+
+var LoggingInfo = &sLoggingInfo
+var LoggingInfo_AuthorizerLogs = &sLoggingInfo_AuthorizerLogs
+var LoggingInfo_BrokerLogs = &sLoggingInfo_BrokerLogs
+
+var _MaxResults = &s_MaxResults
+
+var MutableClusterInfo = &sMutableClusterInfo
+var MutableClusterInfo_BrokerEBSVolumeInfo = &sMutableClusterInfo_BrokerEBSVolumeInfo
+var MutableClusterInfo_ConfigurationInfo = &sMutableClusterInfo_ConfigurationInfo
+var MutableClusterInfo_NumberOfBrokerNodes = &sMutableClusterInfo_NumberOfBrokerNodes
+var MutableClusterInfo_EnhancedMonitoring = &sMutableClusterInfo_EnhancedMonitoring
+var MutableClusterInfo_OpenMonitoring = &sMutableClusterInfo_OpenMonitoring
+var MutableClusterInfo_ZookeeperAccess = &sMutableClusterInfo_ZookeeperAccess
+var MutableClusterInfo_KafkaVersion = &sMutableClusterInfo_KafkaVersion
+var MutableClusterInfo_LoggingInfo = &sMutableClusterInfo_LoggingInfo
+var MutableClusterInfo_InstanceType = &sMutableClusterInfo_InstanceType
+var MutableClusterInfo_ClientAuthentication = &sMutableClusterInfo_ClientAuthentication
+var MutableClusterInfo_EncryptionInfo = &sMutableClusterInfo_EncryptionInfo
+var MutableClusterInfo_ConnectivityInfo = &sMutableClusterInfo_ConnectivityInfo
+var MutableClusterInfo_StorageMode = &sMutableClusterInfo_StorageMode
+var MutableClusterInfo_BrokerCountUpdateInfo = &sMutableClusterInfo_BrokerCountUpdateInfo
+var MutableClusterInfo_Rebalancing = &sMutableClusterInfo_Rebalancing
+
+var NetworkType = &sNetworkType
+var NetworkType_IPV4 = &sNetworkType_IPV4
+var NetworkType_DUAL = &sNetworkType_DUAL
+
+var NodeExporter = &sNodeExporter
+var NodeExporter_EnabledInBroker = &sNodeExporter_EnabledInBroker
+
+var NodeExporterInfo = &sNodeExporterInfo
+var NodeExporterInfo_EnabledInBroker = &sNodeExporterInfo_EnabledInBroker
+
+var NodeInfo = &sNodeInfo
+var NodeInfo_AddedToClusterTime = &sNodeInfo_AddedToClusterTime
+var NodeInfo_BrokerNodeInfo = &sNodeInfo_BrokerNodeInfo
+var NodeInfo_ControllerNodeInfo = &sNodeInfo_ControllerNodeInfo
+var NodeInfo_InstanceType = &sNodeInfo_InstanceType
+var NodeInfo_NodeARN = &sNodeInfo_NodeARN
+var NodeInfo_NodeType = &sNodeInfo_NodeType
+var NodeInfo_ZookeeperNodeInfo = &sNodeInfo_ZookeeperNodeInfo
+
+var NodeType = &sNodeType
+var NodeType_BROKER = &sNodeType_BROKER
+
+var NotControllerException = &sNotControllerException
+var NotControllerException_InvalidParameter = &sNotControllerException_InvalidParameter
+var NotControllerException_Message = &sNotControllerException_Message
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_InvalidParameter = &sNotFoundException_InvalidParameter
+var NotFoundException_Message = &sNotFoundException_Message
+
+var OpenMonitoring = &sOpenMonitoring
+var OpenMonitoring_Prometheus = &sOpenMonitoring_Prometheus
+
+var OpenMonitoringInfo = &sOpenMonitoringInfo
+var OpenMonitoringInfo_Prometheus = &sOpenMonitoringInfo_Prometheus
+
+var PartitionSource = &sPartitionSource
+var PartitionSource_SourceName = &sPartitionSource_SourceName
+
+var PartitionSpec = &sPartitionSpec
+var PartitionSpec_PartitionStrategy = &sPartitionSpec_PartitionStrategy
+var PartitionSpec_SourceList = &sPartitionSpec_SourceList
+
+var PartitionStrategy = &sPartitionStrategy
+var PartitionStrategy_TIME_HOUR = &sPartitionStrategy_TIME_HOUR
+
+var Prometheus = &sPrometheus
+var Prometheus_JmxExporter = &sPrometheus_JmxExporter
+var Prometheus_NodeExporter = &sPrometheus_NodeExporter
+
+var PrometheusInfo = &sPrometheusInfo
+var PrometheusInfo_JmxExporter = &sPrometheusInfo_JmxExporter
+var PrometheusInfo_NodeExporter = &sPrometheusInfo_NodeExporter
+
+var Provisioned = &sProvisioned
+var Provisioned_BrokerNodeGroupInfo = &sProvisioned_BrokerNodeGroupInfo
+var Provisioned_Rebalancing = &sProvisioned_Rebalancing
+var Provisioned_CurrentBrokerSoftwareInfo = &sProvisioned_CurrentBrokerSoftwareInfo
+var Provisioned_ClientAuthentication = &sProvisioned_ClientAuthentication
+var Provisioned_EncryptionInfo = &sProvisioned_EncryptionInfo
+var Provisioned_EnhancedMonitoring = &sProvisioned_EnhancedMonitoring
+var Provisioned_OpenMonitoring = &sProvisioned_OpenMonitoring
+var Provisioned_LoggingInfo = &sProvisioned_LoggingInfo
+var Provisioned_NumberOfBrokerNodes = &sProvisioned_NumberOfBrokerNodes
+var Provisioned_ZookeeperConnectString = &sProvisioned_ZookeeperConnectString
+var Provisioned_ZookeeperConnectStringTls = &sProvisioned_ZookeeperConnectStringTls
+var Provisioned_StorageMode = &sProvisioned_StorageMode
+var Provisioned_CustomerActionStatus = &sProvisioned_CustomerActionStatus
+
+var ProvisionedRequest = &sProvisionedRequest
+var ProvisionedRequest_BrokerNodeGroupInfo = &sProvisionedRequest_BrokerNodeGroupInfo
+var ProvisionedRequest_Rebalancing = &sProvisionedRequest_Rebalancing
+var ProvisionedRequest_ClientAuthentication = &sProvisionedRequest_ClientAuthentication
+var ProvisionedRequest_ConfigurationInfo = &sProvisionedRequest_ConfigurationInfo
+var ProvisionedRequest_EncryptionInfo = &sProvisionedRequest_EncryptionInfo
+var ProvisionedRequest_EnhancedMonitoring = &sProvisionedRequest_EnhancedMonitoring
+var ProvisionedRequest_OpenMonitoring = &sProvisionedRequest_OpenMonitoring
+var ProvisionedRequest_KafkaVersion = &sProvisionedRequest_KafkaVersion
+var ProvisionedRequest_LoggingInfo = &sProvisionedRequest_LoggingInfo
+var ProvisionedRequest_NumberOfBrokerNodes = &sProvisionedRequest_NumberOfBrokerNodes
+var ProvisionedRequest_StorageMode = &sProvisionedRequest_StorageMode
+
+var ProvisionedThroughput = &sProvisionedThroughput
+var ProvisionedThroughput_Enabled = &sProvisionedThroughput_Enabled
+var ProvisionedThroughput_VolumeThroughput = &sProvisionedThroughput_VolumeThroughput
+
+var PublicAccess = &sPublicAccess
+var PublicAccess_Type = &sPublicAccess_Type
+
+var ReassignmentInProgressException = &sReassignmentInProgressException
+var ReassignmentInProgressException_InvalidParameter = &sReassignmentInProgressException_InvalidParameter
+var ReassignmentInProgressException_Message = &sReassignmentInProgressException_Message
+
+var Rebalancing = &sRebalancing
+var Rebalancing_Status = &sRebalancing_Status
+
+var RebalancingStatus = &sRebalancingStatus
+var RebalancingStatus_PAUSED = &sRebalancingStatus_PAUSED
+var RebalancingStatus_ACTIVE = &sRebalancingStatus_ACTIVE
+
+var RecordConverter = &sRecordConverter
+var RecordConverter_ValueConverter = &sRecordConverter_ValueConverter
+
+var RecordSchema = &sRecordSchema
+var RecordSchema_GsrArn = &sRecordSchema_GsrArn
+
+var ReplicationInfo = &sReplicationInfo
+var ReplicationInfo_ConsumerGroupReplication = &sReplicationInfo_ConsumerGroupReplication
+var ReplicationInfo_SourceKafkaClusterArn = &sReplicationInfo_SourceKafkaClusterArn
+var ReplicationInfo_SourceKafkaClusterId = &sReplicationInfo_SourceKafkaClusterId
+var ReplicationInfo_TargetCompressionType = &sReplicationInfo_TargetCompressionType
+var ReplicationInfo_TargetKafkaClusterArn = &sReplicationInfo_TargetKafkaClusterArn
+var ReplicationInfo_TargetKafkaClusterId = &sReplicationInfo_TargetKafkaClusterId
+var ReplicationInfo_TopicReplication = &sReplicationInfo_TopicReplication
+
+var ReplicationInfoDescription = &sReplicationInfoDescription
+var ReplicationInfoDescription_ConsumerGroupReplication = &sReplicationInfoDescription_ConsumerGroupReplication
+var ReplicationInfoDescription_SourceKafkaClusterAlias = &sReplicationInfoDescription_SourceKafkaClusterAlias
+var ReplicationInfoDescription_TargetCompressionType = &sReplicationInfoDescription_TargetCompressionType
+var ReplicationInfoDescription_TargetKafkaClusterAlias = &sReplicationInfoDescription_TargetKafkaClusterAlias
+var ReplicationInfoDescription_TopicReplication = &sReplicationInfoDescription_TopicReplication
+
+var ReplicationInfoSummary = &sReplicationInfoSummary
+var ReplicationInfoSummary_SourceKafkaClusterAlias = &sReplicationInfoSummary_SourceKafkaClusterAlias
+var ReplicationInfoSummary_TargetKafkaClusterAlias = &sReplicationInfoSummary_TargetKafkaClusterAlias
+
+var ReplicationStartingPosition = &sReplicationStartingPosition
+var ReplicationStartingPosition_Type = &sReplicationStartingPosition_Type
+
+var ReplicationStartingPositionType = &sReplicationStartingPositionType
+var ReplicationStartingPositionType_LATEST = &sReplicationStartingPositionType_LATEST
+var ReplicationStartingPositionType_EARLIEST = &sReplicationStartingPositionType_EARLIEST
+
+var ReplicationStateInfo = &sReplicationStateInfo
+var ReplicationStateInfo_Code = &sReplicationStateInfo_Code
+var ReplicationStateInfo_Message = &sReplicationStateInfo_Message
+
+var ReplicationTopicNameConfiguration = &sReplicationTopicNameConfiguration
+var ReplicationTopicNameConfiguration_Type = &sReplicationTopicNameConfiguration_Type
+
+var ReplicationTopicNameConfigurationType = &sReplicationTopicNameConfigurationType
+var ReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS = &sReplicationTopicNameConfigurationType_PREFIXED_WITH_SOURCE_CLUSTER_ALIAS
+var ReplicationTopicNameConfigurationType_IDENTICAL = &sReplicationTopicNameConfigurationType_IDENTICAL
+
+var ReplicatorCloudWatchLogs = &sReplicatorCloudWatchLogs
+var ReplicatorCloudWatchLogs_Enabled = &sReplicatorCloudWatchLogs_Enabled
+var ReplicatorCloudWatchLogs_LogGroup = &sReplicatorCloudWatchLogs_LogGroup
+
+var ReplicatorFirehose = &sReplicatorFirehose
+var ReplicatorFirehose_Enabled = &sReplicatorFirehose_Enabled
+var ReplicatorFirehose_DeliveryStream = &sReplicatorFirehose_DeliveryStream
+
+var ReplicatorLogDelivery = &sReplicatorLogDelivery
+var ReplicatorLogDelivery_CloudWatchLogs = &sReplicatorLogDelivery_CloudWatchLogs
+var ReplicatorLogDelivery_Firehose = &sReplicatorLogDelivery_Firehose
+var ReplicatorLogDelivery_S3 = &sReplicatorLogDelivery_S3
+
+var ReplicatorS3 = &sReplicatorS3
+var ReplicatorS3_Enabled = &sReplicatorS3_Enabled
+var ReplicatorS3_Bucket = &sReplicatorS3_Bucket
+var ReplicatorS3_Prefix = &sReplicatorS3_Prefix
+
+var ReplicatorState = &sReplicatorState
+var ReplicatorState_RUNNING = &sReplicatorState_RUNNING
+var ReplicatorState_CREATING = &sReplicatorState_CREATING
+var ReplicatorState_UPDATING = &sReplicatorState_UPDATING
+var ReplicatorState_DELETING = &sReplicatorState_DELETING
+var ReplicatorState_FAILED = &sReplicatorState_FAILED
+
+var ReplicatorSummary = &sReplicatorSummary
+var ReplicatorSummary_CreationTime = &sReplicatorSummary_CreationTime
+var ReplicatorSummary_CurrentVersion = &sReplicatorSummary_CurrentVersion
+var ReplicatorSummary_IsReplicatorReference = &sReplicatorSummary_IsReplicatorReference
+var ReplicatorSummary_KafkaClustersSummary = &sReplicatorSummary_KafkaClustersSummary
+var ReplicatorSummary_ReplicationInfoSummaryList = &sReplicatorSummary_ReplicationInfoSummaryList
+var ReplicatorSummary_ReplicatorArn = &sReplicatorSummary_ReplicatorArn
+var ReplicatorSummary_ReplicatorName = &sReplicatorSummary_ReplicatorName
+var ReplicatorSummary_ReplicatorResourceArn = &sReplicatorSummary_ReplicatorResourceArn
+var ReplicatorSummary_ReplicatorState = &sReplicatorSummary_ReplicatorState
+
+var S3 = &sS3
+var S3_Bucket = &sS3_Bucket
+var S3_Enabled = &sS3_Enabled
+var S3_Prefix = &sS3_Prefix
+
+var S3CompressionType = &sS3CompressionType
+var S3CompressionType_NONE = &sS3CompressionType_NONE
+var S3CompressionType_GZIP = &sS3CompressionType_GZIP
+var S3CompressionType_ZSTD = &sS3CompressionType_ZSTD
+
+var S3DestinationConfiguration = &sS3DestinationConfiguration
+var S3DestinationConfiguration_DataFreshnessInSeconds = &sS3DestinationConfiguration_DataFreshnessInSeconds
+var S3DestinationConfiguration_DeadLetterQueueS3 = &sS3DestinationConfiguration_DeadLetterQueueS3
+var S3DestinationConfiguration_ServiceExecutionRoleArn = &sS3DestinationConfiguration_ServiceExecutionRoleArn
+var S3DestinationConfiguration_Storage = &sS3DestinationConfiguration_Storage
+
+var S3DestinationUpdate = &sS3DestinationUpdate
+var S3DestinationUpdate_DataFreshnessInSeconds = &sS3DestinationUpdate_DataFreshnessInSeconds
+
+var S3Storage = &sS3Storage
+var S3Storage_BucketArn = &sS3Storage_BucketArn
+var S3Storage_CompressionType = &sS3Storage_CompressionType
+var S3Storage_OutputPrefix = &sS3Storage_OutputPrefix
+var S3Storage_OutputKeyTemplate = &sS3Storage_OutputKeyTemplate
+var S3Storage_StorageClass = &sS3Storage_StorageClass
+var S3Storage_ExpectedBucketOwner = &sS3Storage_ExpectedBucketOwner
+
+var S3StorageClass = &sS3StorageClass
+var S3StorageClass_STANDARD = &sS3StorageClass_STANDARD
+var S3StorageClass_INTELLIGENT_TIERING = &sS3StorageClass_INTELLIGENT_TIERING
+var S3StorageClass_GLACIER_IR = &sS3StorageClass_GLACIER_IR
+
+var Sasl = &sSasl
+var Sasl_Scram = &sSasl_Scram
+var Sasl_Iam = &sSasl_Iam
+
+var SchemaEvolution = &sSchemaEvolution
+var SchemaEvolution_EnableSchemaEvolution = &sSchemaEvolution_EnableSchemaEvolution
+
+var Scram = &sScram
+var Scram_Enabled = &sScram_Enabled
+
+var Serverless = &sServerless
+var Serverless_VpcConfigs = &sServerless_VpcConfigs
+var Serverless_ClientAuthentication = &sServerless_ClientAuthentication
+var Serverless_ConnectivityInfo = &sServerless_ConnectivityInfo
+
+var ServerlessClientAuthentication = &sServerlessClientAuthentication
+var ServerlessClientAuthentication_Sasl = &sServerlessClientAuthentication_Sasl
+
+var ServerlessConnectivityInfo = &sServerlessConnectivityInfo
+var ServerlessConnectivityInfo_NetworkType = &sServerlessConnectivityInfo_NetworkType
+
+var ServerlessRequest = &sServerlessRequest
+var ServerlessRequest_VpcConfigs = &sServerlessRequest_VpcConfigs
+var ServerlessRequest_ClientAuthentication = &sServerlessRequest_ClientAuthentication
+
+var ServerlessSasl = &sServerlessSasl
+var ServerlessSasl_Iam = &sServerlessSasl_Iam
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_InvalidParameter = &sServiceUnavailableException_InvalidParameter
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var StateInfo = &sStateInfo
+var StateInfo_Code = &sStateInfo_Code
+var StateInfo_Message = &sStateInfo_Message
+
+var StorageInfo = &sStorageInfo
+var StorageInfo_EbsStorageInfo = &sStorageInfo_EbsStorageInfo
+
+var StorageMode = &sStorageMode
+var StorageMode_LOCAL = &sStorageMode_LOCAL
+var StorageMode_TIERED = &sStorageMode_TIERED
+
+var TableCreation = &sTableCreation
+var TableCreation_EnableTableCreation = &sTableCreation_EnableTableCreation
+
+var TargetCompressionType = &sTargetCompressionType
+var TargetCompressionType_NONE = &sTargetCompressionType_NONE
+var TargetCompressionType_GZIP = &sTargetCompressionType_GZIP
+var TargetCompressionType_SNAPPY = &sTargetCompressionType_SNAPPY
+var TargetCompressionType_LZ4 = &sTargetCompressionType_LZ4
+var TargetCompressionType_ZSTD = &sTargetCompressionType_ZSTD
+
+var Tls = &sTls
+var Tls_CertificateAuthorityArnList = &sTls_CertificateAuthorityArnList
+var Tls_Enabled = &sTls_Enabled
+
+var TokenEndpointAuthenticationMethod = &sTokenEndpointAuthenticationMethod
+var TokenEndpointAuthenticationMethod_POST = &sTokenEndpointAuthenticationMethod_POST
+var TokenEndpointAuthenticationMethod_BASIC = &sTokenEndpointAuthenticationMethod_BASIC
+var TokenEndpointAuthenticationMethod_NONE = &sTokenEndpointAuthenticationMethod_NONE
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_InvalidParameter = &sTooManyRequestsException_InvalidParameter
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var TopicConfiguration = &sTopicConfiguration
+var TopicConfiguration_RecordConverter = &sTopicConfiguration_RecordConverter
+var TopicConfiguration_RecordSchema = &sTopicConfiguration_RecordSchema
+var TopicConfiguration_TopicArn = &sTopicConfiguration_TopicArn
+
+var TopicExistsException = &sTopicExistsException
+var TopicExistsException_InvalidParameter = &sTopicExistsException_InvalidParameter
+var TopicExistsException_Message = &sTopicExistsException_Message
+
+var TopicInfo = &sTopicInfo
+var TopicInfo_TopicArn = &sTopicInfo_TopicArn
+var TopicInfo_TopicName = &sTopicInfo_TopicName
+var TopicInfo_ReplicationFactor = &sTopicInfo_ReplicationFactor
+var TopicInfo_PartitionCount = &sTopicInfo_PartitionCount
+var TopicInfo_OutOfSyncReplicaCount = &sTopicInfo_OutOfSyncReplicaCount
+
+var TopicPartitionInfo = &sTopicPartitionInfo
+var TopicPartitionInfo_Partition = &sTopicPartitionInfo_Partition
+var TopicPartitionInfo_Leader = &sTopicPartitionInfo_Leader
+var TopicPartitionInfo_Replicas = &sTopicPartitionInfo_Replicas
+var TopicPartitionInfo_Isr = &sTopicPartitionInfo_Isr
+
+var TopicReplication = &sTopicReplication
+var TopicReplication_CopyAccessControlListsForTopics = &sTopicReplication_CopyAccessControlListsForTopics
+var TopicReplication_CopyTopicConfigurations = &sTopicReplication_CopyTopicConfigurations
+var TopicReplication_DetectAndCopyNewTopics = &sTopicReplication_DetectAndCopyNewTopics
+var TopicReplication_StartingPosition = &sTopicReplication_StartingPosition
+var TopicReplication_TopicNameConfiguration = &sTopicReplication_TopicNameConfiguration
+var TopicReplication_TopicsToExclude = &sTopicReplication_TopicsToExclude
+var TopicReplication_TopicsToReplicate = &sTopicReplication_TopicsToReplicate
+
+var TopicReplicationUpdate = &sTopicReplicationUpdate
+var TopicReplicationUpdate_CopyAccessControlListsForTopics = &sTopicReplicationUpdate_CopyAccessControlListsForTopics
+var TopicReplicationUpdate_CopyTopicConfigurations = &sTopicReplicationUpdate_CopyTopicConfigurations
+var TopicReplicationUpdate_DetectAndCopyNewTopics = &sTopicReplicationUpdate_DetectAndCopyNewTopics
+var TopicReplicationUpdate_TopicsToExclude = &sTopicReplicationUpdate_TopicsToExclude
+var TopicReplicationUpdate_TopicsToReplicate = &sTopicReplicationUpdate_TopicsToReplicate
+
+var TopicState = &sTopicState
+var TopicState_CREATING = &sTopicState_CREATING
+var TopicState_UPDATING = &sTopicState_UPDATING
+var TopicState_DELETING = &sTopicState_DELETING
+var TopicState_ACTIVE = &sTopicState_ACTIVE
+
+var Unauthenticated = &sUnauthenticated
+var Unauthenticated_Enabled = &sUnauthenticated_Enabled
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_InvalidParameter = &sUnauthorizedException_InvalidParameter
+var UnauthorizedException_Message = &sUnauthorizedException_Message
+
+var UnknownTopicOrPartitionException = &sUnknownTopicOrPartitionException
+var UnknownTopicOrPartitionException_InvalidParameter = &sUnknownTopicOrPartitionException_InvalidParameter
+var UnknownTopicOrPartitionException_Message = &sUnknownTopicOrPartitionException_Message
+
+var UnprocessedScramSecret = &sUnprocessedScramSecret
+var UnprocessedScramSecret_ErrorCode = &sUnprocessedScramSecret_ErrorCode
+var UnprocessedScramSecret_ErrorMessage = &sUnprocessedScramSecret_ErrorMessage
+var UnprocessedScramSecret_SecretArn = &sUnprocessedScramSecret_SecretArn
+
+var UserIdentity = &sUserIdentity
+var UserIdentity_Type = &sUserIdentity_Type
+var UserIdentity_PrincipalId = &sUserIdentity_PrincipalId
+
+var UserIdentityType = &sUserIdentityType
+var UserIdentityType_AWSACCOUNT = &sUserIdentityType_AWSACCOUNT
+var UserIdentityType_AWSSERVICE = &sUserIdentityType_AWSSERVICE
+
+var ValueConverter = &sValueConverter
+var ValueConverter_BYTE_ARRAY = &sValueConverter_BYTE_ARRAY
+var ValueConverter_JSON = &sValueConverter_JSON
+var ValueConverter_JSON_SCHEMA_GSR = &sValueConverter_JSON_SCHEMA_GSR
+var ValueConverter_STRING = &sValueConverter_STRING
+
+var VpcConfig = &sVpcConfig
+var VpcConfig_SubnetIds = &sVpcConfig_SubnetIds
+var VpcConfig_SecurityGroupIds = &sVpcConfig_SecurityGroupIds
+
+var VpcConnection = &sVpcConnection
+var VpcConnection_VpcConnectionArn = &sVpcConnection_VpcConnectionArn
+var VpcConnection_TargetClusterArn = &sVpcConnection_TargetClusterArn
+var VpcConnection_CreationTime = &sVpcConnection_CreationTime
+var VpcConnection_Authentication = &sVpcConnection_Authentication
+var VpcConnection_VpcId = &sVpcConnection_VpcId
+var VpcConnection_State = &sVpcConnection_State
+
+var VpcConnectionInfo = &sVpcConnectionInfo
+var VpcConnectionInfo_VpcConnectionArn = &sVpcConnectionInfo_VpcConnectionArn
+var VpcConnectionInfo_Owner = &sVpcConnectionInfo_Owner
+var VpcConnectionInfo_UserIdentity = &sVpcConnectionInfo_UserIdentity
+var VpcConnectionInfo_CreationTime = &sVpcConnectionInfo_CreationTime
+
+var VpcConnectionInfoServerless = &sVpcConnectionInfoServerless
+var VpcConnectionInfoServerless_CreationTime = &sVpcConnectionInfoServerless_CreationTime
+var VpcConnectionInfoServerless_Owner = &sVpcConnectionInfoServerless_Owner
+var VpcConnectionInfoServerless_UserIdentity = &sVpcConnectionInfoServerless_UserIdentity
+var VpcConnectionInfoServerless_VpcConnectionArn = &sVpcConnectionInfoServerless_VpcConnectionArn
+
+var VpcConnectionState = &sVpcConnectionState
+var VpcConnectionState_CREATING = &sVpcConnectionState_CREATING
+var VpcConnectionState_AVAILABLE = &sVpcConnectionState_AVAILABLE
+var VpcConnectionState_INACTIVE = &sVpcConnectionState_INACTIVE
+var VpcConnectionState_DEACTIVATING = &sVpcConnectionState_DEACTIVATING
+var VpcConnectionState_DELETING = &sVpcConnectionState_DELETING
+var VpcConnectionState_FAILED = &sVpcConnectionState_FAILED
+var VpcConnectionState_REJECTED = &sVpcConnectionState_REJECTED
+var VpcConnectionState_REJECTING = &sVpcConnectionState_REJECTING
+
+var VpcConnectivity = &sVpcConnectivity
+var VpcConnectivity_ClientAuthentication = &sVpcConnectivity_ClientAuthentication
+
+var VpcConnectivityClientAuthentication = &sVpcConnectivityClientAuthentication
+var VpcConnectivityClientAuthentication_Sasl = &sVpcConnectivityClientAuthentication_Sasl
+var VpcConnectivityClientAuthentication_Tls = &sVpcConnectivityClientAuthentication_Tls
+
+var VpcConnectivityIam = &sVpcConnectivityIam
+var VpcConnectivityIam_Enabled = &sVpcConnectivityIam_Enabled
+
+var VpcConnectivitySasl = &sVpcConnectivitySasl
+var VpcConnectivitySasl_Scram = &sVpcConnectivitySasl_Scram
+var VpcConnectivitySasl_Iam = &sVpcConnectivitySasl_Iam
+
+var VpcConnectivityScram = &sVpcConnectivityScram
+var VpcConnectivityScram_Enabled = &sVpcConnectivityScram_Enabled
+
+var VpcConnectivityTls = &sVpcConnectivityTls
+var VpcConnectivityTls_Enabled = &sVpcConnectivityTls_Enabled
+
+var ZookeeperAccess = &sZookeeperAccess
+var ZookeeperAccess_Enabled = &sZookeeperAccess_Enabled
+
+var ZookeeperNodeInfo = &sZookeeperNodeInfo
+var ZookeeperNodeInfo_AttachedENIId = &sZookeeperNodeInfo_AttachedENIId
+var ZookeeperNodeInfo_ClientVpcIpAddress = &sZookeeperNodeInfo_ClientVpcIpAddress
+var ZookeeperNodeInfo_Endpoints = &sZookeeperNodeInfo_Endpoints
+var ZookeeperNodeInfo_ZookeeperId = &sZookeeperNodeInfo_ZookeeperId
+var ZookeeperNodeInfo_ZookeeperVersion = &sZookeeperNodeInfo_ZookeeperVersion
+
+var BatchAssociateScramSecretRequest = &sBatchAssociateScramSecretRequest
+var BatchAssociateScramSecretRequest_ClusterArn = &sBatchAssociateScramSecretRequest_ClusterArn
+var BatchAssociateScramSecretRequest_SecretArnList = &sBatchAssociateScramSecretRequest_SecretArnList
+
+var BatchAssociateScramSecretResponse = &sBatchAssociateScramSecretResponse
+var BatchAssociateScramSecretResponse_ClusterArn = &sBatchAssociateScramSecretResponse_ClusterArn
+var BatchAssociateScramSecretResponse_UnprocessedScramSecrets = &sBatchAssociateScramSecretResponse_UnprocessedScramSecrets
+
+var BatchDisassociateScramSecretRequest = &sBatchDisassociateScramSecretRequest
+var BatchDisassociateScramSecretRequest_ClusterArn = &sBatchDisassociateScramSecretRequest_ClusterArn
+var BatchDisassociateScramSecretRequest_SecretArnList = &sBatchDisassociateScramSecretRequest_SecretArnList
+
+var BatchDisassociateScramSecretResponse = &sBatchDisassociateScramSecretResponse
+var BatchDisassociateScramSecretResponse_ClusterArn = &sBatchDisassociateScramSecretResponse_ClusterArn
+var BatchDisassociateScramSecretResponse_UnprocessedScramSecrets = &sBatchDisassociateScramSecretResponse_UnprocessedScramSecrets
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_ChannelName = &sCreateChannelRequest_ChannelName
+var CreateChannelRequest_ClusterArn = &sCreateChannelRequest_ClusterArn
+var CreateChannelRequest_EncryptionConfiguration = &sCreateChannelRequest_EncryptionConfiguration
+var CreateChannelRequest_IcebergDestinationConfiguration = &sCreateChannelRequest_IcebergDestinationConfiguration
+var CreateChannelRequest_S3DestinationConfiguration = &sCreateChannelRequest_S3DestinationConfiguration
+var CreateChannelRequest_Tags = &sCreateChannelRequest_Tags
+var CreateChannelRequest_TopicConfigurationList = &sCreateChannelRequest_TopicConfigurationList
+var CreateChannelRequest_LoggingInfo = &sCreateChannelRequest_LoggingInfo
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_ChannelArn = &sCreateChannelResponse_ChannelArn
+var CreateChannelResponse_ClusterOperationArn = &sCreateChannelResponse_ClusterOperationArn
+
+var CreateClusterRequest = &sCreateClusterRequest
+var CreateClusterRequest_BrokerNodeGroupInfo = &sCreateClusterRequest_BrokerNodeGroupInfo
+var CreateClusterRequest_Rebalancing = &sCreateClusterRequest_Rebalancing
+var CreateClusterRequest_ClientAuthentication = &sCreateClusterRequest_ClientAuthentication
+var CreateClusterRequest_ClusterName = &sCreateClusterRequest_ClusterName
+var CreateClusterRequest_ConfigurationInfo = &sCreateClusterRequest_ConfigurationInfo
+var CreateClusterRequest_EncryptionInfo = &sCreateClusterRequest_EncryptionInfo
+var CreateClusterRequest_EnhancedMonitoring = &sCreateClusterRequest_EnhancedMonitoring
+var CreateClusterRequest_OpenMonitoring = &sCreateClusterRequest_OpenMonitoring
+var CreateClusterRequest_KafkaVersion = &sCreateClusterRequest_KafkaVersion
+var CreateClusterRequest_LoggingInfo = &sCreateClusterRequest_LoggingInfo
+var CreateClusterRequest_NumberOfBrokerNodes = &sCreateClusterRequest_NumberOfBrokerNodes
+var CreateClusterRequest_Tags = &sCreateClusterRequest_Tags
+var CreateClusterRequest_StorageMode = &sCreateClusterRequest_StorageMode
+
+var CreateClusterResponse = &sCreateClusterResponse
+var CreateClusterResponse_ClusterArn = &sCreateClusterResponse_ClusterArn
+var CreateClusterResponse_ClusterName = &sCreateClusterResponse_ClusterName
+var CreateClusterResponse_State = &sCreateClusterResponse_State
+
+var CreateClusterV2Request = &sCreateClusterV2Request
+var CreateClusterV2Request_ClusterName = &sCreateClusterV2Request_ClusterName
+var CreateClusterV2Request_Tags = &sCreateClusterV2Request_Tags
+var CreateClusterV2Request_Provisioned = &sCreateClusterV2Request_Provisioned
+var CreateClusterV2Request_Serverless = &sCreateClusterV2Request_Serverless
+
+var CreateClusterV2Response = &sCreateClusterV2Response
+var CreateClusterV2Response_ClusterArn = &sCreateClusterV2Response_ClusterArn
+var CreateClusterV2Response_ClusterName = &sCreateClusterV2Response_ClusterName
+var CreateClusterV2Response_State = &sCreateClusterV2Response_State
+var CreateClusterV2Response_ClusterType = &sCreateClusterV2Response_ClusterType
+
+var CreateConfigurationRequest = &sCreateConfigurationRequest
+var CreateConfigurationRequest_Description = &sCreateConfigurationRequest_Description
+var CreateConfigurationRequest_KafkaVersions = &sCreateConfigurationRequest_KafkaVersions
+var CreateConfigurationRequest_Name = &sCreateConfigurationRequest_Name
+var CreateConfigurationRequest_ServerProperties = &sCreateConfigurationRequest_ServerProperties
+
+var CreateConfigurationResponse = &sCreateConfigurationResponse
+var CreateConfigurationResponse_Arn = &sCreateConfigurationResponse_Arn
+var CreateConfigurationResponse_CreationTime = &sCreateConfigurationResponse_CreationTime
+var CreateConfigurationResponse_LatestRevision = &sCreateConfigurationResponse_LatestRevision
+var CreateConfigurationResponse_Name = &sCreateConfigurationResponse_Name
+var CreateConfigurationResponse_State = &sCreateConfigurationResponse_State
+
+var CreateReplicatorRequest = &sCreateReplicatorRequest
+var CreateReplicatorRequest_Description = &sCreateReplicatorRequest_Description
+var CreateReplicatorRequest_KafkaClusters = &sCreateReplicatorRequest_KafkaClusters
+var CreateReplicatorRequest_ReplicationInfoList = &sCreateReplicatorRequest_ReplicationInfoList
+var CreateReplicatorRequest_ReplicatorName = &sCreateReplicatorRequest_ReplicatorName
+var CreateReplicatorRequest_ServiceExecutionRoleArn = &sCreateReplicatorRequest_ServiceExecutionRoleArn
+var CreateReplicatorRequest_Tags = &sCreateReplicatorRequest_Tags
+var CreateReplicatorRequest_LogDelivery = &sCreateReplicatorRequest_LogDelivery
+
+var CreateReplicatorResponse = &sCreateReplicatorResponse
+var CreateReplicatorResponse_ReplicatorArn = &sCreateReplicatorResponse_ReplicatorArn
+var CreateReplicatorResponse_ReplicatorName = &sCreateReplicatorResponse_ReplicatorName
+var CreateReplicatorResponse_ReplicatorState = &sCreateReplicatorResponse_ReplicatorState
+
+var CreateTopicRequest = &sCreateTopicRequest
+var CreateTopicRequest_ClusterArn = &sCreateTopicRequest_ClusterArn
+var CreateTopicRequest_TopicName = &sCreateTopicRequest_TopicName
+var CreateTopicRequest_PartitionCount = &sCreateTopicRequest_PartitionCount
+var CreateTopicRequest_ReplicationFactor = &sCreateTopicRequest_ReplicationFactor
+var CreateTopicRequest_Configs = &sCreateTopicRequest_Configs
+
+var CreateTopicResponse = &sCreateTopicResponse
+var CreateTopicResponse_TopicArn = &sCreateTopicResponse_TopicArn
+var CreateTopicResponse_TopicName = &sCreateTopicResponse_TopicName
+var CreateTopicResponse_Status = &sCreateTopicResponse_Status
+
+var CreateVpcConnectionRequest = &sCreateVpcConnectionRequest
+var CreateVpcConnectionRequest_TargetClusterArn = &sCreateVpcConnectionRequest_TargetClusterArn
+var CreateVpcConnectionRequest_Authentication = &sCreateVpcConnectionRequest_Authentication
+var CreateVpcConnectionRequest_VpcId = &sCreateVpcConnectionRequest_VpcId
+var CreateVpcConnectionRequest_ClientSubnets = &sCreateVpcConnectionRequest_ClientSubnets
+var CreateVpcConnectionRequest_SecurityGroups = &sCreateVpcConnectionRequest_SecurityGroups
+var CreateVpcConnectionRequest_Tags = &sCreateVpcConnectionRequest_Tags
+
+var CreateVpcConnectionResponse = &sCreateVpcConnectionResponse
+var CreateVpcConnectionResponse_VpcConnectionArn = &sCreateVpcConnectionResponse_VpcConnectionArn
+var CreateVpcConnectionResponse_State = &sCreateVpcConnectionResponse_State
+var CreateVpcConnectionResponse_Authentication = &sCreateVpcConnectionResponse_Authentication
+var CreateVpcConnectionResponse_VpcId = &sCreateVpcConnectionResponse_VpcId
+var CreateVpcConnectionResponse_ClientSubnets = &sCreateVpcConnectionResponse_ClientSubnets
+var CreateVpcConnectionResponse_SecurityGroups = &sCreateVpcConnectionResponse_SecurityGroups
+var CreateVpcConnectionResponse_CreationTime = &sCreateVpcConnectionResponse_CreationTime
+var CreateVpcConnectionResponse_Tags = &sCreateVpcConnectionResponse_Tags
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_ChannelArn = &sDeleteChannelRequest_ChannelArn
+var DeleteChannelRequest_ClusterArn = &sDeleteChannelRequest_ClusterArn
+
+var DeleteChannelResponse = &sDeleteChannelResponse
+var DeleteChannelResponse_ChannelArn = &sDeleteChannelResponse_ChannelArn
+var DeleteChannelResponse_ClusterOperationArn = &sDeleteChannelResponse_ClusterOperationArn
+
+var DeleteClusterRequest = &sDeleteClusterRequest
+var DeleteClusterRequest_ClusterArn = &sDeleteClusterRequest_ClusterArn
+var DeleteClusterRequest_CurrentVersion = &sDeleteClusterRequest_CurrentVersion
+
+var DeleteClusterResponse = &sDeleteClusterResponse
+var DeleteClusterResponse_ClusterArn = &sDeleteClusterResponse_ClusterArn
+var DeleteClusterResponse_State = &sDeleteClusterResponse_State
+
+var DeleteClusterPolicyRequest = &sDeleteClusterPolicyRequest
+var DeleteClusterPolicyRequest_ClusterArn = &sDeleteClusterPolicyRequest_ClusterArn
+
+var DeleteClusterPolicyResponse = &sDeleteClusterPolicyResponse
+
+var DeleteConfigurationRequest = &sDeleteConfigurationRequest
+var DeleteConfigurationRequest_Arn = &sDeleteConfigurationRequest_Arn
+
+var DeleteConfigurationResponse = &sDeleteConfigurationResponse
+var DeleteConfigurationResponse_Arn = &sDeleteConfigurationResponse_Arn
+var DeleteConfigurationResponse_State = &sDeleteConfigurationResponse_State
+
+var DeleteReplicatorRequest = &sDeleteReplicatorRequest
+var DeleteReplicatorRequest_CurrentVersion = &sDeleteReplicatorRequest_CurrentVersion
+var DeleteReplicatorRequest_ReplicatorArn = &sDeleteReplicatorRequest_ReplicatorArn
+
+var DeleteReplicatorResponse = &sDeleteReplicatorResponse
+var DeleteReplicatorResponse_ReplicatorArn = &sDeleteReplicatorResponse_ReplicatorArn
+var DeleteReplicatorResponse_ReplicatorState = &sDeleteReplicatorResponse_ReplicatorState
+
+var DeleteTopicRequest = &sDeleteTopicRequest
+var DeleteTopicRequest_ClusterArn = &sDeleteTopicRequest_ClusterArn
+var DeleteTopicRequest_TopicName = &sDeleteTopicRequest_TopicName
+
+var DeleteTopicResponse = &sDeleteTopicResponse
+var DeleteTopicResponse_TopicArn = &sDeleteTopicResponse_TopicArn
+var DeleteTopicResponse_TopicName = &sDeleteTopicResponse_TopicName
+var DeleteTopicResponse_Status = &sDeleteTopicResponse_Status
+
+var DeleteVpcConnectionRequest = &sDeleteVpcConnectionRequest
+var DeleteVpcConnectionRequest_Arn = &sDeleteVpcConnectionRequest_Arn
+
+var DeleteVpcConnectionResponse = &sDeleteVpcConnectionResponse
+var DeleteVpcConnectionResponse_VpcConnectionArn = &sDeleteVpcConnectionResponse_VpcConnectionArn
+var DeleteVpcConnectionResponse_State = &sDeleteVpcConnectionResponse_State
+
+var DescribeChannelRequest = &sDescribeChannelRequest
+var DescribeChannelRequest_ChannelArn = &sDescribeChannelRequest_ChannelArn
+var DescribeChannelRequest_ClusterArn = &sDescribeChannelRequest_ClusterArn
+
+var DescribeChannelResponse = &sDescribeChannelResponse
+var DescribeChannelResponse_ChannelArn = &sDescribeChannelResponse_ChannelArn
+var DescribeChannelResponse_ChannelName = &sDescribeChannelResponse_ChannelName
+var DescribeChannelResponse_EncryptionConfiguration = &sDescribeChannelResponse_EncryptionConfiguration
+var DescribeChannelResponse_IcebergDestinationConfiguration = &sDescribeChannelResponse_IcebergDestinationConfiguration
+var DescribeChannelResponse_S3DestinationConfiguration = &sDescribeChannelResponse_S3DestinationConfiguration
+var DescribeChannelResponse_Status = &sDescribeChannelResponse_Status
+var DescribeChannelResponse_DestinationType = &sDescribeChannelResponse_DestinationType
+var DescribeChannelResponse_CreationTime = &sDescribeChannelResponse_CreationTime
+var DescribeChannelResponse_TopicConfigurationList = &sDescribeChannelResponse_TopicConfigurationList
+var DescribeChannelResponse_LoggingInfo = &sDescribeChannelResponse_LoggingInfo
+var DescribeChannelResponse_StateInfo = &sDescribeChannelResponse_StateInfo
+var DescribeChannelResponse_ClusterOperationArn = &sDescribeChannelResponse_ClusterOperationArn
+var DescribeChannelResponse_Tags = &sDescribeChannelResponse_Tags
+
+var DescribeClusterRequest = &sDescribeClusterRequest
+var DescribeClusterRequest_ClusterArn = &sDescribeClusterRequest_ClusterArn
+
+var DescribeClusterOperationRequest = &sDescribeClusterOperationRequest
+var DescribeClusterOperationRequest_ClusterOperationArn = &sDescribeClusterOperationRequest_ClusterOperationArn
+
+var DescribeClusterOperationResponse = &sDescribeClusterOperationResponse
+var DescribeClusterOperationResponse_ClusterOperationInfo = &sDescribeClusterOperationResponse_ClusterOperationInfo
+
+var DescribeClusterOperationV2Request = &sDescribeClusterOperationV2Request
+var DescribeClusterOperationV2Request_ClusterOperationArn = &sDescribeClusterOperationV2Request_ClusterOperationArn
+
+var DescribeClusterOperationV2Response = &sDescribeClusterOperationV2Response
+var DescribeClusterOperationV2Response_ClusterOperationInfo = &sDescribeClusterOperationV2Response_ClusterOperationInfo
+
+var DescribeClusterResponse = &sDescribeClusterResponse
+var DescribeClusterResponse_ClusterInfo = &sDescribeClusterResponse_ClusterInfo
+
+var DescribeClusterV2Request = &sDescribeClusterV2Request
+var DescribeClusterV2Request_ClusterArn = &sDescribeClusterV2Request_ClusterArn
+
+var DescribeClusterV2Response = &sDescribeClusterV2Response
+var DescribeClusterV2Response_ClusterInfo = &sDescribeClusterV2Response_ClusterInfo
+
+var DescribeConfigurationRequest = &sDescribeConfigurationRequest
+var DescribeConfigurationRequest_Arn = &sDescribeConfigurationRequest_Arn
+
+var DescribeConfigurationResponse = &sDescribeConfigurationResponse
+var DescribeConfigurationResponse_Arn = &sDescribeConfigurationResponse_Arn
+var DescribeConfigurationResponse_CreationTime = &sDescribeConfigurationResponse_CreationTime
+var DescribeConfigurationResponse_Description = &sDescribeConfigurationResponse_Description
+var DescribeConfigurationResponse_KafkaVersions = &sDescribeConfigurationResponse_KafkaVersions
+var DescribeConfigurationResponse_LatestRevision = &sDescribeConfigurationResponse_LatestRevision
+var DescribeConfigurationResponse_Name = &sDescribeConfigurationResponse_Name
+var DescribeConfigurationResponse_State = &sDescribeConfigurationResponse_State
+
+var DescribeConfigurationRevisionRequest = &sDescribeConfigurationRevisionRequest
+var DescribeConfigurationRevisionRequest_Arn = &sDescribeConfigurationRevisionRequest_Arn
+var DescribeConfigurationRevisionRequest_Revision = &sDescribeConfigurationRevisionRequest_Revision
+
+var DescribeConfigurationRevisionResponse = &sDescribeConfigurationRevisionResponse
+var DescribeConfigurationRevisionResponse_Arn = &sDescribeConfigurationRevisionResponse_Arn
+var DescribeConfigurationRevisionResponse_CreationTime = &sDescribeConfigurationRevisionResponse_CreationTime
+var DescribeConfigurationRevisionResponse_Description = &sDescribeConfigurationRevisionResponse_Description
+var DescribeConfigurationRevisionResponse_Revision = &sDescribeConfigurationRevisionResponse_Revision
+var DescribeConfigurationRevisionResponse_ServerProperties = &sDescribeConfigurationRevisionResponse_ServerProperties
+
+var DescribeReplicatorRequest = &sDescribeReplicatorRequest
+var DescribeReplicatorRequest_ReplicatorArn = &sDescribeReplicatorRequest_ReplicatorArn
+
+var DescribeReplicatorResponse = &sDescribeReplicatorResponse
+var DescribeReplicatorResponse_CreationTime = &sDescribeReplicatorResponse_CreationTime
+var DescribeReplicatorResponse_CurrentVersion = &sDescribeReplicatorResponse_CurrentVersion
+var DescribeReplicatorResponse_IsReplicatorReference = &sDescribeReplicatorResponse_IsReplicatorReference
+var DescribeReplicatorResponse_KafkaClusters = &sDescribeReplicatorResponse_KafkaClusters
+var DescribeReplicatorResponse_ReplicationInfoList = &sDescribeReplicatorResponse_ReplicationInfoList
+var DescribeReplicatorResponse_ReplicatorArn = &sDescribeReplicatorResponse_ReplicatorArn
+var DescribeReplicatorResponse_ReplicatorDescription = &sDescribeReplicatorResponse_ReplicatorDescription
+var DescribeReplicatorResponse_ReplicatorName = &sDescribeReplicatorResponse_ReplicatorName
+var DescribeReplicatorResponse_ReplicatorResourceArn = &sDescribeReplicatorResponse_ReplicatorResourceArn
+var DescribeReplicatorResponse_ReplicatorState = &sDescribeReplicatorResponse_ReplicatorState
+var DescribeReplicatorResponse_ServiceExecutionRoleArn = &sDescribeReplicatorResponse_ServiceExecutionRoleArn
+var DescribeReplicatorResponse_StateInfo = &sDescribeReplicatorResponse_StateInfo
+var DescribeReplicatorResponse_Tags = &sDescribeReplicatorResponse_Tags
+var DescribeReplicatorResponse_LogDelivery = &sDescribeReplicatorResponse_LogDelivery
+
+var DescribeTopicRequest = &sDescribeTopicRequest
+var DescribeTopicRequest_ClusterArn = &sDescribeTopicRequest_ClusterArn
+var DescribeTopicRequest_TopicName = &sDescribeTopicRequest_TopicName
+
+var DescribeTopicResponse = &sDescribeTopicResponse
+var DescribeTopicResponse_TopicArn = &sDescribeTopicResponse_TopicArn
+var DescribeTopicResponse_TopicName = &sDescribeTopicResponse_TopicName
+var DescribeTopicResponse_ReplicationFactor = &sDescribeTopicResponse_ReplicationFactor
+var DescribeTopicResponse_PartitionCount = &sDescribeTopicResponse_PartitionCount
+var DescribeTopicResponse_Configs = &sDescribeTopicResponse_Configs
+var DescribeTopicResponse_Status = &sDescribeTopicResponse_Status
+
+var DescribeTopicPartitionsRequest = &sDescribeTopicPartitionsRequest
+var DescribeTopicPartitionsRequest_ClusterArn = &sDescribeTopicPartitionsRequest_ClusterArn
+var DescribeTopicPartitionsRequest_TopicName = &sDescribeTopicPartitionsRequest_TopicName
+var DescribeTopicPartitionsRequest_MaxResults = &sDescribeTopicPartitionsRequest_MaxResults
+var DescribeTopicPartitionsRequest_NextToken = &sDescribeTopicPartitionsRequest_NextToken
+
+var DescribeTopicPartitionsResponse = &sDescribeTopicPartitionsResponse
+var DescribeTopicPartitionsResponse_Partitions = &sDescribeTopicPartitionsResponse_Partitions
+var DescribeTopicPartitionsResponse_NextToken = &sDescribeTopicPartitionsResponse_NextToken
+
+var DescribeVpcConnectionRequest = &sDescribeVpcConnectionRequest
+var DescribeVpcConnectionRequest_Arn = &sDescribeVpcConnectionRequest_Arn
+
+var DescribeVpcConnectionResponse = &sDescribeVpcConnectionResponse
+var DescribeVpcConnectionResponse_VpcConnectionArn = &sDescribeVpcConnectionResponse_VpcConnectionArn
+var DescribeVpcConnectionResponse_TargetClusterArn = &sDescribeVpcConnectionResponse_TargetClusterArn
+var DescribeVpcConnectionResponse_State = &sDescribeVpcConnectionResponse_State
+var DescribeVpcConnectionResponse_Authentication = &sDescribeVpcConnectionResponse_Authentication
+var DescribeVpcConnectionResponse_VpcId = &sDescribeVpcConnectionResponse_VpcId
+var DescribeVpcConnectionResponse_Subnets = &sDescribeVpcConnectionResponse_Subnets
+var DescribeVpcConnectionResponse_SecurityGroups = &sDescribeVpcConnectionResponse_SecurityGroups
+var DescribeVpcConnectionResponse_CreationTime = &sDescribeVpcConnectionResponse_CreationTime
+var DescribeVpcConnectionResponse_Tags = &sDescribeVpcConnectionResponse_Tags
+
+var GetBootstrapBrokersRequest = &sGetBootstrapBrokersRequest
+var GetBootstrapBrokersRequest_ClusterArn = &sGetBootstrapBrokersRequest_ClusterArn
+
+var GetBootstrapBrokersResponse = &sGetBootstrapBrokersResponse
+var GetBootstrapBrokersResponse_BootstrapBrokerString = &sGetBootstrapBrokersResponse_BootstrapBrokerString
+var GetBootstrapBrokersResponse_BootstrapBrokerStringTls = &sGetBootstrapBrokersResponse_BootstrapBrokerStringTls
+var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram = &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram
+var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam = &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam
+var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls = &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls
+var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram = &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram
+var GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam = &sGetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam
+var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls = &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls
+var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram = &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram
+var GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam = &sGetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam
+var GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6 = &sGetBootstrapBrokersResponse_BootstrapBrokerStringIpv6
+var GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6 = &sGetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6
+var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6 = &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6
+var GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6 = &sGetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6
+
+var GetClusterPolicyRequest = &sGetClusterPolicyRequest
+var GetClusterPolicyRequest_ClusterArn = &sGetClusterPolicyRequest_ClusterArn
+
+var GetClusterPolicyResponse = &sGetClusterPolicyResponse
+var GetClusterPolicyResponse_CurrentVersion = &sGetClusterPolicyResponse_CurrentVersion
+var GetClusterPolicyResponse_Policy = &sGetClusterPolicyResponse_Policy
+
+var GetCompatibleKafkaVersionsRequest = &sGetCompatibleKafkaVersionsRequest
+var GetCompatibleKafkaVersionsRequest_ClusterArn = &sGetCompatibleKafkaVersionsRequest_ClusterArn
+
+var GetCompatibleKafkaVersionsResponse = &sGetCompatibleKafkaVersionsResponse
+var GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions = &sGetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_ClusterArn = &sListChannelsRequest_ClusterArn
+var ListChannelsRequest_MaxResults = &sListChannelsRequest_MaxResults
+var ListChannelsRequest_NextToken = &sListChannelsRequest_NextToken
+var ListChannelsRequest_TopicNameFilter = &sListChannelsRequest_TopicNameFilter
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_Channels = &sListChannelsResponse_Channels
+var ListChannelsResponse_NextToken = &sListChannelsResponse_NextToken
+
+var ListClientVpcConnectionsRequest = &sListClientVpcConnectionsRequest
+var ListClientVpcConnectionsRequest_ClusterArn = &sListClientVpcConnectionsRequest_ClusterArn
+var ListClientVpcConnectionsRequest_MaxResults = &sListClientVpcConnectionsRequest_MaxResults
+var ListClientVpcConnectionsRequest_NextToken = &sListClientVpcConnectionsRequest_NextToken
+
+var ListClientVpcConnectionsResponse = &sListClientVpcConnectionsResponse
+var ListClientVpcConnectionsResponse_ClientVpcConnections = &sListClientVpcConnectionsResponse_ClientVpcConnections
+var ListClientVpcConnectionsResponse_NextToken = &sListClientVpcConnectionsResponse_NextToken
+
+var ListClusterOperationsRequest = &sListClusterOperationsRequest
+var ListClusterOperationsRequest_ClusterArn = &sListClusterOperationsRequest_ClusterArn
+var ListClusterOperationsRequest_MaxResults = &sListClusterOperationsRequest_MaxResults
+var ListClusterOperationsRequest_NextToken = &sListClusterOperationsRequest_NextToken
+
+var ListClusterOperationsResponse = &sListClusterOperationsResponse
+var ListClusterOperationsResponse_ClusterOperationInfoList = &sListClusterOperationsResponse_ClusterOperationInfoList
+var ListClusterOperationsResponse_NextToken = &sListClusterOperationsResponse_NextToken
+
+var ListClusterOperationsV2Request = &sListClusterOperationsV2Request
+var ListClusterOperationsV2Request_ClusterArn = &sListClusterOperationsV2Request_ClusterArn
+var ListClusterOperationsV2Request_MaxResults = &sListClusterOperationsV2Request_MaxResults
+var ListClusterOperationsV2Request_NextToken = &sListClusterOperationsV2Request_NextToken
+
+var ListClusterOperationsV2Response = &sListClusterOperationsV2Response
+var ListClusterOperationsV2Response_ClusterOperationInfoList = &sListClusterOperationsV2Response_ClusterOperationInfoList
+var ListClusterOperationsV2Response_NextToken = &sListClusterOperationsV2Response_NextToken
+
+var ListClustersRequest = &sListClustersRequest
+var ListClustersRequest_ClusterNameFilter = &sListClustersRequest_ClusterNameFilter
+var ListClustersRequest_MaxResults = &sListClustersRequest_MaxResults
+var ListClustersRequest_NextToken = &sListClustersRequest_NextToken
+
+var ListClustersResponse = &sListClustersResponse
+var ListClustersResponse_ClusterInfoList = &sListClustersResponse_ClusterInfoList
+var ListClustersResponse_NextToken = &sListClustersResponse_NextToken
+
+var ListClustersV2Request = &sListClustersV2Request
+var ListClustersV2Request_ClusterNameFilter = &sListClustersV2Request_ClusterNameFilter
+var ListClustersV2Request_ClusterTypeFilter = &sListClustersV2Request_ClusterTypeFilter
+var ListClustersV2Request_MaxResults = &sListClustersV2Request_MaxResults
+var ListClustersV2Request_NextToken = &sListClustersV2Request_NextToken
+
+var ListClustersV2Response = &sListClustersV2Response
+var ListClustersV2Response_ClusterInfoList = &sListClustersV2Response_ClusterInfoList
+var ListClustersV2Response_NextToken = &sListClustersV2Response_NextToken
+
+var ListConfigurationRevisionsRequest = &sListConfigurationRevisionsRequest
+var ListConfigurationRevisionsRequest_Arn = &sListConfigurationRevisionsRequest_Arn
+var ListConfigurationRevisionsRequest_MaxResults = &sListConfigurationRevisionsRequest_MaxResults
+var ListConfigurationRevisionsRequest_NextToken = &sListConfigurationRevisionsRequest_NextToken
+
+var ListConfigurationRevisionsResponse = &sListConfigurationRevisionsResponse
+var ListConfigurationRevisionsResponse_NextToken = &sListConfigurationRevisionsResponse_NextToken
+var ListConfigurationRevisionsResponse_Revisions = &sListConfigurationRevisionsResponse_Revisions
+
+var ListConfigurationsRequest = &sListConfigurationsRequest
+var ListConfigurationsRequest_MaxResults = &sListConfigurationsRequest_MaxResults
+var ListConfigurationsRequest_NextToken = &sListConfigurationsRequest_NextToken
+
+var ListConfigurationsResponse = &sListConfigurationsResponse
+var ListConfigurationsResponse_Configurations = &sListConfigurationsResponse_Configurations
+var ListConfigurationsResponse_NextToken = &sListConfigurationsResponse_NextToken
+
+var ListKafkaVersionsRequest = &sListKafkaVersionsRequest
+var ListKafkaVersionsRequest_MaxResults = &sListKafkaVersionsRequest_MaxResults
+var ListKafkaVersionsRequest_NextToken = &sListKafkaVersionsRequest_NextToken
+
+var ListKafkaVersionsResponse = &sListKafkaVersionsResponse
+var ListKafkaVersionsResponse_KafkaVersions = &sListKafkaVersionsResponse_KafkaVersions
+var ListKafkaVersionsResponse_NextToken = &sListKafkaVersionsResponse_NextToken
+
+var ListNodesRequest = &sListNodesRequest
+var ListNodesRequest_ClusterArn = &sListNodesRequest_ClusterArn
+var ListNodesRequest_MaxResults = &sListNodesRequest_MaxResults
+var ListNodesRequest_NextToken = &sListNodesRequest_NextToken
+
+var ListNodesResponse = &sListNodesResponse
+var ListNodesResponse_NextToken = &sListNodesResponse_NextToken
+var ListNodesResponse_NodeInfoList = &sListNodesResponse_NodeInfoList
+
+var ListReplicatorsRequest = &sListReplicatorsRequest
+var ListReplicatorsRequest_MaxResults = &sListReplicatorsRequest_MaxResults
+var ListReplicatorsRequest_NextToken = &sListReplicatorsRequest_NextToken
+var ListReplicatorsRequest_ReplicatorNameFilter = &sListReplicatorsRequest_ReplicatorNameFilter
+
+var ListReplicatorsResponse = &sListReplicatorsResponse
+var ListReplicatorsResponse_NextToken = &sListReplicatorsResponse_NextToken
+var ListReplicatorsResponse_Replicators = &sListReplicatorsResponse_Replicators
+
+var ListScramSecretsRequest = &sListScramSecretsRequest
+var ListScramSecretsRequest_ClusterArn = &sListScramSecretsRequest_ClusterArn
+var ListScramSecretsRequest_MaxResults = &sListScramSecretsRequest_MaxResults
+var ListScramSecretsRequest_NextToken = &sListScramSecretsRequest_NextToken
+
+var ListScramSecretsResponse = &sListScramSecretsResponse
+var ListScramSecretsResponse_NextToken = &sListScramSecretsResponse_NextToken
+var ListScramSecretsResponse_SecretArnList = &sListScramSecretsResponse_SecretArnList
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTopicsRequest = &sListTopicsRequest
+var ListTopicsRequest_ClusterArn = &sListTopicsRequest_ClusterArn
+var ListTopicsRequest_MaxResults = &sListTopicsRequest_MaxResults
+var ListTopicsRequest_NextToken = &sListTopicsRequest_NextToken
+var ListTopicsRequest_TopicNameFilter = &sListTopicsRequest_TopicNameFilter
+
+var ListTopicsResponse = &sListTopicsResponse
+var ListTopicsResponse_Topics = &sListTopicsResponse_Topics
+var ListTopicsResponse_NextToken = &sListTopicsResponse_NextToken
+
+var ListVpcConnectionsRequest = &sListVpcConnectionsRequest
+var ListVpcConnectionsRequest_MaxResults = &sListVpcConnectionsRequest_MaxResults
+var ListVpcConnectionsRequest_NextToken = &sListVpcConnectionsRequest_NextToken
+
+var ListVpcConnectionsResponse = &sListVpcConnectionsResponse
+var ListVpcConnectionsResponse_VpcConnections = &sListVpcConnectionsResponse_VpcConnections
+var ListVpcConnectionsResponse_NextToken = &sListVpcConnectionsResponse_NextToken
+
+var PutClusterPolicyRequest = &sPutClusterPolicyRequest
+var PutClusterPolicyRequest_ClusterArn = &sPutClusterPolicyRequest_ClusterArn
+var PutClusterPolicyRequest_CurrentVersion = &sPutClusterPolicyRequest_CurrentVersion
+var PutClusterPolicyRequest_Policy = &sPutClusterPolicyRequest_Policy
+
+var PutClusterPolicyResponse = &sPutClusterPolicyResponse
+var PutClusterPolicyResponse_CurrentVersion = &sPutClusterPolicyResponse_CurrentVersion
+
+var RebootBrokerRequest = &sRebootBrokerRequest
+var RebootBrokerRequest_BrokerIds = &sRebootBrokerRequest_BrokerIds
+var RebootBrokerRequest_ClusterArn = &sRebootBrokerRequest_ClusterArn
+
+var RebootBrokerResponse = &sRebootBrokerResponse
+var RebootBrokerResponse_ClusterArn = &sRebootBrokerResponse_ClusterArn
+var RebootBrokerResponse_ClusterOperationArn = &sRebootBrokerResponse_ClusterOperationArn
+
+var RejectClientVpcConnectionRequest = &sRejectClientVpcConnectionRequest
+var RejectClientVpcConnectionRequest_ClusterArn = &sRejectClientVpcConnectionRequest_ClusterArn
+var RejectClientVpcConnectionRequest_VpcConnectionArn = &sRejectClientVpcConnectionRequest_VpcConnectionArn
+
+var RejectClientVpcConnectionResponse = &sRejectClientVpcConnectionResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateBrokerCountRequest = &sUpdateBrokerCountRequest
+var UpdateBrokerCountRequest_ClusterArn = &sUpdateBrokerCountRequest_ClusterArn
+var UpdateBrokerCountRequest_CurrentVersion = &sUpdateBrokerCountRequest_CurrentVersion
+var UpdateBrokerCountRequest_TargetNumberOfBrokerNodes = &sUpdateBrokerCountRequest_TargetNumberOfBrokerNodes
+
+var UpdateBrokerCountResponse = &sUpdateBrokerCountResponse
+var UpdateBrokerCountResponse_ClusterArn = &sUpdateBrokerCountResponse_ClusterArn
+var UpdateBrokerCountResponse_ClusterOperationArn = &sUpdateBrokerCountResponse_ClusterOperationArn
+
+var UpdateBrokerStorageRequest = &sUpdateBrokerStorageRequest
+var UpdateBrokerStorageRequest_ClusterArn = &sUpdateBrokerStorageRequest_ClusterArn
+var UpdateBrokerStorageRequest_CurrentVersion = &sUpdateBrokerStorageRequest_CurrentVersion
+var UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo = &sUpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo
+
+var UpdateBrokerStorageResponse = &sUpdateBrokerStorageResponse
+var UpdateBrokerStorageResponse_ClusterArn = &sUpdateBrokerStorageResponse_ClusterArn
+var UpdateBrokerStorageResponse_ClusterOperationArn = &sUpdateBrokerStorageResponse_ClusterOperationArn
+
+var UpdateBrokerTypeRequest = &sUpdateBrokerTypeRequest
+var UpdateBrokerTypeRequest_ClusterArn = &sUpdateBrokerTypeRequest_ClusterArn
+var UpdateBrokerTypeRequest_CurrentVersion = &sUpdateBrokerTypeRequest_CurrentVersion
+var UpdateBrokerTypeRequest_TargetInstanceType = &sUpdateBrokerTypeRequest_TargetInstanceType
+
+var UpdateBrokerTypeResponse = &sUpdateBrokerTypeResponse
+var UpdateBrokerTypeResponse_ClusterArn = &sUpdateBrokerTypeResponse_ClusterArn
+var UpdateBrokerTypeResponse_ClusterOperationArn = &sUpdateBrokerTypeResponse_ClusterOperationArn
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_ChannelArn = &sUpdateChannelRequest_ChannelArn
+var UpdateChannelRequest_ClusterArn = &sUpdateChannelRequest_ClusterArn
+var UpdateChannelRequest_IcebergDestinationUpdate = &sUpdateChannelRequest_IcebergDestinationUpdate
+var UpdateChannelRequest_S3DestinationUpdate = &sUpdateChannelRequest_S3DestinationUpdate
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_ChannelArn = &sUpdateChannelResponse_ChannelArn
+var UpdateChannelResponse_ClusterOperationArn = &sUpdateChannelResponse_ClusterOperationArn
+
+var UpdateClusterConfigurationRequest = &sUpdateClusterConfigurationRequest
+var UpdateClusterConfigurationRequest_ClusterArn = &sUpdateClusterConfigurationRequest_ClusterArn
+var UpdateClusterConfigurationRequest_ConfigurationInfo = &sUpdateClusterConfigurationRequest_ConfigurationInfo
+var UpdateClusterConfigurationRequest_CurrentVersion = &sUpdateClusterConfigurationRequest_CurrentVersion
+
+var UpdateClusterConfigurationResponse = &sUpdateClusterConfigurationResponse
+var UpdateClusterConfigurationResponse_ClusterArn = &sUpdateClusterConfigurationResponse_ClusterArn
+var UpdateClusterConfigurationResponse_ClusterOperationArn = &sUpdateClusterConfigurationResponse_ClusterOperationArn
+
+var UpdateClusterKafkaVersionRequest = &sUpdateClusterKafkaVersionRequest
+var UpdateClusterKafkaVersionRequest_ClusterArn = &sUpdateClusterKafkaVersionRequest_ClusterArn
+var UpdateClusterKafkaVersionRequest_ConfigurationInfo = &sUpdateClusterKafkaVersionRequest_ConfigurationInfo
+var UpdateClusterKafkaVersionRequest_CurrentVersion = &sUpdateClusterKafkaVersionRequest_CurrentVersion
+var UpdateClusterKafkaVersionRequest_TargetKafkaVersion = &sUpdateClusterKafkaVersionRequest_TargetKafkaVersion
+
+var UpdateClusterKafkaVersionResponse = &sUpdateClusterKafkaVersionResponse
+var UpdateClusterKafkaVersionResponse_ClusterArn = &sUpdateClusterKafkaVersionResponse_ClusterArn
+var UpdateClusterKafkaVersionResponse_ClusterOperationArn = &sUpdateClusterKafkaVersionResponse_ClusterOperationArn
+
+var UpdateConfigurationRequest = &sUpdateConfigurationRequest
+var UpdateConfigurationRequest_Arn = &sUpdateConfigurationRequest_Arn
+var UpdateConfigurationRequest_Description = &sUpdateConfigurationRequest_Description
+var UpdateConfigurationRequest_ServerProperties = &sUpdateConfigurationRequest_ServerProperties
+
+var UpdateConfigurationResponse = &sUpdateConfigurationResponse
+var UpdateConfigurationResponse_Arn = &sUpdateConfigurationResponse_Arn
+var UpdateConfigurationResponse_LatestRevision = &sUpdateConfigurationResponse_LatestRevision
+
+var UpdateConnectivityRequest = &sUpdateConnectivityRequest
+var UpdateConnectivityRequest_ClusterArn = &sUpdateConnectivityRequest_ClusterArn
+var UpdateConnectivityRequest_ConnectivityInfo = &sUpdateConnectivityRequest_ConnectivityInfo
+var UpdateConnectivityRequest_CurrentVersion = &sUpdateConnectivityRequest_CurrentVersion
+var UpdateConnectivityRequest_ZookeeperAccess = &sUpdateConnectivityRequest_ZookeeperAccess
+
+var UpdateConnectivityResponse = &sUpdateConnectivityResponse
+var UpdateConnectivityResponse_ClusterArn = &sUpdateConnectivityResponse_ClusterArn
+var UpdateConnectivityResponse_ClusterOperationArn = &sUpdateConnectivityResponse_ClusterOperationArn
+
+var UpdateMonitoringRequest = &sUpdateMonitoringRequest
+var UpdateMonitoringRequest_ClusterArn = &sUpdateMonitoringRequest_ClusterArn
+var UpdateMonitoringRequest_CurrentVersion = &sUpdateMonitoringRequest_CurrentVersion
+var UpdateMonitoringRequest_EnhancedMonitoring = &sUpdateMonitoringRequest_EnhancedMonitoring
+var UpdateMonitoringRequest_OpenMonitoring = &sUpdateMonitoringRequest_OpenMonitoring
+var UpdateMonitoringRequest_LoggingInfo = &sUpdateMonitoringRequest_LoggingInfo
+
+var UpdateMonitoringResponse = &sUpdateMonitoringResponse
+var UpdateMonitoringResponse_ClusterArn = &sUpdateMonitoringResponse_ClusterArn
+var UpdateMonitoringResponse_ClusterOperationArn = &sUpdateMonitoringResponse_ClusterOperationArn
+
+var UpdateRebalancingRequest = &sUpdateRebalancingRequest
+var UpdateRebalancingRequest_ClusterArn = &sUpdateRebalancingRequest_ClusterArn
+var UpdateRebalancingRequest_CurrentVersion = &sUpdateRebalancingRequest_CurrentVersion
+var UpdateRebalancingRequest_Rebalancing = &sUpdateRebalancingRequest_Rebalancing
+
+var UpdateRebalancingResponse = &sUpdateRebalancingResponse
+var UpdateRebalancingResponse_ClusterArn = &sUpdateRebalancingResponse_ClusterArn
+var UpdateRebalancingResponse_ClusterOperationArn = &sUpdateRebalancingResponse_ClusterOperationArn
+
+var UpdateReplicationInfoRequest = &sUpdateReplicationInfoRequest
+var UpdateReplicationInfoRequest_ConsumerGroupReplication = &sUpdateReplicationInfoRequest_ConsumerGroupReplication
+var UpdateReplicationInfoRequest_CurrentVersion = &sUpdateReplicationInfoRequest_CurrentVersion
+var UpdateReplicationInfoRequest_ReplicatorArn = &sUpdateReplicationInfoRequest_ReplicatorArn
+var UpdateReplicationInfoRequest_SourceKafkaClusterArn = &sUpdateReplicationInfoRequest_SourceKafkaClusterArn
+var UpdateReplicationInfoRequest_SourceKafkaClusterId = &sUpdateReplicationInfoRequest_SourceKafkaClusterId
+var UpdateReplicationInfoRequest_TargetKafkaClusterArn = &sUpdateReplicationInfoRequest_TargetKafkaClusterArn
+var UpdateReplicationInfoRequest_TargetKafkaClusterId = &sUpdateReplicationInfoRequest_TargetKafkaClusterId
+var UpdateReplicationInfoRequest_TopicReplication = &sUpdateReplicationInfoRequest_TopicReplication
+var UpdateReplicationInfoRequest_LogDelivery = &sUpdateReplicationInfoRequest_LogDelivery
+
+var UpdateReplicationInfoResponse = &sUpdateReplicationInfoResponse
+var UpdateReplicationInfoResponse_ReplicatorArn = &sUpdateReplicationInfoResponse_ReplicatorArn
+var UpdateReplicationInfoResponse_ReplicatorState = &sUpdateReplicationInfoResponse_ReplicatorState
+
+var UpdateSecurityRequest = &sUpdateSecurityRequest
+var UpdateSecurityRequest_ClientAuthentication = &sUpdateSecurityRequest_ClientAuthentication
+var UpdateSecurityRequest_ClusterArn = &sUpdateSecurityRequest_ClusterArn
+var UpdateSecurityRequest_CurrentVersion = &sUpdateSecurityRequest_CurrentVersion
+var UpdateSecurityRequest_EncryptionInfo = &sUpdateSecurityRequest_EncryptionInfo
+
+var UpdateSecurityResponse = &sUpdateSecurityResponse
+var UpdateSecurityResponse_ClusterArn = &sUpdateSecurityResponse_ClusterArn
+var UpdateSecurityResponse_ClusterOperationArn = &sUpdateSecurityResponse_ClusterOperationArn
+
+var UpdateStorageRequest = &sUpdateStorageRequest
+var UpdateStorageRequest_ClusterArn = &sUpdateStorageRequest_ClusterArn
+var UpdateStorageRequest_CurrentVersion = &sUpdateStorageRequest_CurrentVersion
+var UpdateStorageRequest_ProvisionedThroughput = &sUpdateStorageRequest_ProvisionedThroughput
+var UpdateStorageRequest_StorageMode = &sUpdateStorageRequest_StorageMode
+var UpdateStorageRequest_VolumeSizeGB = &sUpdateStorageRequest_VolumeSizeGB
+
+var UpdateStorageResponse = &sUpdateStorageResponse
+var UpdateStorageResponse_ClusterArn = &sUpdateStorageResponse_ClusterArn
+var UpdateStorageResponse_ClusterOperationArn = &sUpdateStorageResponse_ClusterOperationArn
+
+var UpdateTopicRequest = &sUpdateTopicRequest
+var UpdateTopicRequest_ClusterArn = &sUpdateTopicRequest_ClusterArn
+var UpdateTopicRequest_TopicName = &sUpdateTopicRequest_TopicName
+var UpdateTopicRequest_Configs = &sUpdateTopicRequest_Configs
+var UpdateTopicRequest_PartitionCount = &sUpdateTopicRequest_PartitionCount
+
+var UpdateTopicResponse = &sUpdateTopicResponse
+var UpdateTopicResponse_TopicArn = &sUpdateTopicResponse_TopicArn
+var UpdateTopicResponse_TopicName = &sUpdateTopicResponse_TopicName
+var UpdateTopicResponse_Status = &sUpdateTopicResponse_Status
+
+var Kafka = &smithy.ServiceSchema{Schema: &s_Kafka, Version: "2018-11-14"}

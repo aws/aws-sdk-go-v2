@@ -4,4133 +4,4003 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CancelContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+var (
+	eCancelContact                                                       smithy.SchemaExtensions
+	eCreateConfig                                                        smithy.SchemaExtensions
+	eCreateDataflowEndpointGroup                                         smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2                                       smithy.SchemaExtensions
+	eCreateEphemeris                                                     smithy.SchemaExtensions
+	eCreateMissionProfile                                                smithy.SchemaExtensions
+	eDeleteConfig                                                        smithy.SchemaExtensions
+	eDeleteDataflowEndpointGroup                                         smithy.SchemaExtensions
+	eDeleteEphemeris                                                     smithy.SchemaExtensions
+	eDeleteMissionProfile                                                smithy.SchemaExtensions
+	eDescribeContact                                                     smithy.SchemaExtensions
+	eDescribeContactVersion                                              smithy.SchemaExtensions
+	eDescribeEphemeris                                                   smithy.SchemaExtensions
+	eGetAgentConfiguration                                               smithy.SchemaExtensions
+	eGetAgentTaskResponseUrl                                             smithy.SchemaExtensions
+	eGetConfig                                                           smithy.SchemaExtensions
+	eGetDataflowEndpointGroup                                            smithy.SchemaExtensions
+	eGetMinuteUsage                                                      smithy.SchemaExtensions
+	eGetMissionProfile                                                   smithy.SchemaExtensions
+	eGetSatellite                                                        smithy.SchemaExtensions
+	eListAntennas                                                        smithy.SchemaExtensions
+	eListConfigs                                                         smithy.SchemaExtensions
+	eListContacts                                                        smithy.SchemaExtensions
+	eListContactVersions                                                 smithy.SchemaExtensions
+	eListDataflowEndpointGroups                                          smithy.SchemaExtensions
+	eListEphemerides                                                     smithy.SchemaExtensions
+	eListGroundStationReservations                                       smithy.SchemaExtensions
+	eListGroundStations                                                  smithy.SchemaExtensions
+	eListMissionProfiles                                                 smithy.SchemaExtensions
+	eListSatellites                                                      smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	eRegisterAgent                                                       smithy.SchemaExtensions
+	eReserveContact                                                      smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdateAgentStatus                                                   smithy.SchemaExtensions
+	eUpdateConfig                                                        smithy.SchemaExtensions
+	eUpdateContact                                                       smithy.SchemaExtensions
+	eUpdateEphemeris                                                     smithy.SchemaExtensions
+	eUpdateMissionProfile                                                smithy.SchemaExtensions
+	e_GroundStation                                                      smithy.SchemaExtensions
+	e_AgentCpuCoresList                                                  smithy.SchemaExtensions
+	e_AgentCpuCoresList_member                                           smithy.SchemaExtensions
+	eAgentDetails                                                        smithy.SchemaExtensions
+	eAgentDetails_agentVersion                                           smithy.SchemaExtensions
+	eAgentDetails_instanceId                                             smithy.SchemaExtensions
+	eAgentDetails_instanceType                                           smithy.SchemaExtensions
+	eAgentDetails_reservedCpuCores                                       smithy.SchemaExtensions
+	eAgentDetails_agentCpuCores                                          smithy.SchemaExtensions
+	eAgentDetails_componentVersions                                      smithy.SchemaExtensions
+	eAgentStatus                                                         smithy.SchemaExtensions
+	eAgentStatus_SUCCESS                                                 smithy.SchemaExtensions
+	eAgentStatus_FAILED                                                  smithy.SchemaExtensions
+	eAgentStatus_ACTIVE                                                  smithy.SchemaExtensions
+	eAgentStatus_INACTIVE                                                smithy.SchemaExtensions
+	eAggregateStatus                                                     smithy.SchemaExtensions
+	eAggregateStatus_status                                              smithy.SchemaExtensions
+	eAggregateStatus_signatureMap                                        smithy.SchemaExtensions
+	eAngleUnits                                                          smithy.SchemaExtensions
+	eAngleUnits_DEGREE_ANGLE                                             smithy.SchemaExtensions
+	eAngleUnits_RADIAN                                                   smithy.SchemaExtensions
+	eAntennaDemodDecodeDetails                                           smithy.SchemaExtensions
+	eAntennaDemodDecodeDetails_outputNode                                smithy.SchemaExtensions
+	eAntennaDownlinkConfig                                               smithy.SchemaExtensions
+	eAntennaDownlinkConfig_spectrumConfig                                smithy.SchemaExtensions
+	eAntennaDownlinkDemodDecodeConfig                                    smithy.SchemaExtensions
+	eAntennaDownlinkDemodDecodeConfig_spectrumConfig                     smithy.SchemaExtensions
+	eAntennaDownlinkDemodDecodeConfig_demodulationConfig                 smithy.SchemaExtensions
+	eAntennaDownlinkDemodDecodeConfig_decodeConfig                       smithy.SchemaExtensions
+	e_AntennaList                                                        smithy.SchemaExtensions
+	e_AntennaList_member                                                 smithy.SchemaExtensions
+	eAntennaListItem                                                     smithy.SchemaExtensions
+	eAntennaListItem_groundStationName                                   smithy.SchemaExtensions
+	eAntennaListItem_antennaName                                         smithy.SchemaExtensions
+	eAntennaListItem_region                                              smithy.SchemaExtensions
+	e_AntennaName                                                        smithy.SchemaExtensions
+	eAntennaUplinkConfig                                                 smithy.SchemaExtensions
+	eAntennaUplinkConfig_transmitDisabled                                smithy.SchemaExtensions
+	eAntennaUplinkConfig_spectrumConfig                                  smithy.SchemaExtensions
+	eAntennaUplinkConfig_targetEirp                                      smithy.SchemaExtensions
+	e_AnyArn                                                             smithy.SchemaExtensions
+	eAuditResults                                                        smithy.SchemaExtensions
+	eAuditResults_HEALTHY                                                smithy.SchemaExtensions
+	eAuditResults_UNHEALTHY                                              smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint                                       smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint_name                                  smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint_egressAddress                         smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint_ingressAddress                        smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint_agentStatus                           smithy.SchemaExtensions
+	eAwsGroundStationAgentEndpoint_auditResults                          smithy.SchemaExtensions
+	e_AWSRegion                                                          smithy.SchemaExtensions
+	eAzElEphemeris                                                       smithy.SchemaExtensions
+	eAzElEphemeris_groundStation                                         smithy.SchemaExtensions
+	eAzElEphemeris_data                                                  smithy.SchemaExtensions
+	eAzElEphemerisFilter                                                 smithy.SchemaExtensions
+	eAzElEphemerisFilter_id                                              smithy.SchemaExtensions
+	eAzElProgramTrackSettings                                            smithy.SchemaExtensions
+	eAzElProgramTrackSettings_ephemerisId                                smithy.SchemaExtensions
+	eAzElSegment                                                         smithy.SchemaExtensions
+	eAzElSegment_referenceEpoch                                          smithy.SchemaExtensions
+	eAzElSegment_validTimeRange                                          smithy.SchemaExtensions
+	eAzElSegment_azElList                                                smithy.SchemaExtensions
+	e_AzElSegmentList                                                    smithy.SchemaExtensions
+	e_AzElSegmentList_member                                             smithy.SchemaExtensions
+	eAzElSegments                                                        smithy.SchemaExtensions
+	eAzElSegments_angleUnit                                              smithy.SchemaExtensions
+	eAzElSegments_azElSegmentList                                        smithy.SchemaExtensions
+	eAzElSegmentsData                                                    smithy.SchemaExtensions
+	eAzElSegmentsData_s3Object                                           smithy.SchemaExtensions
+	eAzElSegmentsData_azElData                                           smithy.SchemaExtensions
+	eBandwidthUnits                                                      smithy.SchemaExtensions
+	eBandwidthUnits_GHZ                                                  smithy.SchemaExtensions
+	eBandwidthUnits_MHZ                                                  smithy.SchemaExtensions
+	eBandwidthUnits_KHZ                                                  smithy.SchemaExtensions
+	e_BucketArn                                                          smithy.SchemaExtensions
+	e_CapabilityArn                                                      smithy.SchemaExtensions
+	e_CapabilityArnList                                                  smithy.SchemaExtensions
+	e_CapabilityArnList_member                                           smithy.SchemaExtensions
+	eCapabilityHealth                                                    smithy.SchemaExtensions
+	eCapabilityHealth_HEALTHY                                            smithy.SchemaExtensions
+	eCapabilityHealth_UNHEALTHY                                          smithy.SchemaExtensions
+	eCapabilityHealthReason                                              smithy.SchemaExtensions
+	eCapabilityHealthReason_NO_REGISTERED_AGENT                          smithy.SchemaExtensions
+	eCapabilityHealthReason_INVALID_IP_OWNERSHIP                         smithy.SchemaExtensions
+	eCapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR                 smithy.SchemaExtensions
+	eCapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP                      smithy.SchemaExtensions
+	eCapabilityHealthReason_INITIALIZING_DATAPLANE                       smithy.SchemaExtensions
+	eCapabilityHealthReason_DATAPLANE_FAILURE                            smithy.SchemaExtensions
+	eCapabilityHealthReason_HEALTHY                                      smithy.SchemaExtensions
+	e_CapabilityHealthReasonList                                         smithy.SchemaExtensions
+	e_CapabilityHealthReasonList_member                                  smithy.SchemaExtensions
+	e_ClientToken                                                        smithy.SchemaExtensions
+	eComponentStatusData                                                 smithy.SchemaExtensions
+	eComponentStatusData_componentType                                   smithy.SchemaExtensions
+	eComponentStatusData_capabilityArn                                   smithy.SchemaExtensions
+	eComponentStatusData_status                                          smithy.SchemaExtensions
+	eComponentStatusData_bytesSent                                       smithy.SchemaExtensions
+	eComponentStatusData_bytesReceived                                   smithy.SchemaExtensions
+	eComponentStatusData_packetsDropped                                  smithy.SchemaExtensions
+	eComponentStatusData_dataflowId                                      smithy.SchemaExtensions
+	e_ComponentStatusList                                                smithy.SchemaExtensions
+	e_ComponentStatusList_member                                         smithy.SchemaExtensions
+	e_ComponentTypeString                                                smithy.SchemaExtensions
+	eComponentVersion                                                    smithy.SchemaExtensions
+	eComponentVersion_componentType                                      smithy.SchemaExtensions
+	eComponentVersion_versions                                           smithy.SchemaExtensions
+	e_ComponentVersionList                                               smithy.SchemaExtensions
+	e_ComponentVersionList_member                                        smithy.SchemaExtensions
+	e_ConfigArn                                                          smithy.SchemaExtensions
+	eConfigCapabilityType                                                smithy.SchemaExtensions
+	eConfigCapabilityType_ANTENNA_DOWNLINK                               smithy.SchemaExtensions
+	eConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE                  smithy.SchemaExtensions
+	eConfigCapabilityType_TRACKING                                       smithy.SchemaExtensions
+	eConfigCapabilityType_DATAFLOW_ENDPOINT                              smithy.SchemaExtensions
+	eConfigCapabilityType_ANTENNA_UPLINK                                 smithy.SchemaExtensions
+	eConfigCapabilityType_UPLINK_ECHO                                    smithy.SchemaExtensions
+	eConfigCapabilityType_S3_RECORDING                                   smithy.SchemaExtensions
+	eConfigCapabilityType_TELEMETRY_SINK                                 smithy.SchemaExtensions
+	eConfigDetails                                                       smithy.SchemaExtensions
+	eConfigDetails_endpointDetails                                       smithy.SchemaExtensions
+	eConfigDetails_antennaDemodDecodeDetails                             smithy.SchemaExtensions
+	eConfigDetails_s3RecordingDetails                                    smithy.SchemaExtensions
+	e_ConfigList                                                         smithy.SchemaExtensions
+	e_ConfigList_member                                                  smithy.SchemaExtensions
+	eConfigListItem                                                      smithy.SchemaExtensions
+	eConfigListItem_configId                                             smithy.SchemaExtensions
+	eConfigListItem_configType                                           smithy.SchemaExtensions
+	eConfigListItem_configArn                                            smithy.SchemaExtensions
+	eConfigListItem_name                                                 smithy.SchemaExtensions
+	eConfigTypeData                                                      smithy.SchemaExtensions
+	eConfigTypeData_antennaDownlinkConfig                                smithy.SchemaExtensions
+	eConfigTypeData_trackingConfig                                       smithy.SchemaExtensions
+	eConfigTypeData_dataflowEndpointConfig                               smithy.SchemaExtensions
+	eConfigTypeData_antennaDownlinkDemodDecodeConfig                     smithy.SchemaExtensions
+	eConfigTypeData_antennaUplinkConfig                                  smithy.SchemaExtensions
+	eConfigTypeData_uplinkEchoConfig                                     smithy.SchemaExtensions
+	eConfigTypeData_s3RecordingConfig                                    smithy.SchemaExtensions
+	eConfigTypeData_telemetrySinkConfig                                  smithy.SchemaExtensions
+	eConnectionDetails                                                   smithy.SchemaExtensions
+	eConnectionDetails_socketAddress                                     smithy.SchemaExtensions
+	eConnectionDetails_mtu                                               smithy.SchemaExtensions
+	eContactData                                                         smithy.SchemaExtensions
+	eContactData_contactId                                               smithy.SchemaExtensions
+	eContactData_missionProfileArn                                       smithy.SchemaExtensions
+	eContactData_satelliteArn                                            smithy.SchemaExtensions
+	eContactData_startTime                                               smithy.SchemaExtensions
+	eContactData_endTime                                                 smithy.SchemaExtensions
+	eContactData_prePassStartTime                                        smithy.SchemaExtensions
+	eContactData_postPassEndTime                                         smithy.SchemaExtensions
+	eContactData_groundStation                                           smithy.SchemaExtensions
+	eContactData_contactStatus                                           smithy.SchemaExtensions
+	eContactData_errorMessage                                            smithy.SchemaExtensions
+	eContactData_maximumElevation                                        smithy.SchemaExtensions
+	eContactData_region                                                  smithy.SchemaExtensions
+	eContactData_tags                                                    smithy.SchemaExtensions
+	eContactData_visibilityStartTime                                     smithy.SchemaExtensions
+	eContactData_visibilityEndTime                                       smithy.SchemaExtensions
+	eContactData_ephemeris                                               smithy.SchemaExtensions
+	eContactData_version                                                 smithy.SchemaExtensions
+	e_ContactList                                                        smithy.SchemaExtensions
+	e_ContactList_member                                                 smithy.SchemaExtensions
+	eContactReservationDetails                                           smithy.SchemaExtensions
+	eContactReservationDetails_contactId                                 smithy.SchemaExtensions
+	eContactStatus                                                       smithy.SchemaExtensions
+	eContactStatus_SCHEDULING                                            smithy.SchemaExtensions
+	eContactStatus_FAILED_TO_SCHEDULE                                    smithy.SchemaExtensions
+	eContactStatus_SCHEDULED                                             smithy.SchemaExtensions
+	eContactStatus_CANCELLED                                             smithy.SchemaExtensions
+	eContactStatus_AWS_CANCELLED                                         smithy.SchemaExtensions
+	eContactStatus_PREPASS                                               smithy.SchemaExtensions
+	eContactStatus_PASS                                                  smithy.SchemaExtensions
+	eContactStatus_POSTPASS                                              smithy.SchemaExtensions
+	eContactStatus_COMPLETED                                             smithy.SchemaExtensions
+	eContactStatus_FAILED                                                smithy.SchemaExtensions
+	eContactStatus_AVAILABLE                                             smithy.SchemaExtensions
+	eContactStatus_CANCELLING                                            smithy.SchemaExtensions
+	eContactStatus_AWS_FAILED                                            smithy.SchemaExtensions
+	eContactVersion                                                      smithy.SchemaExtensions
+	eContactVersion_versionId                                            smithy.SchemaExtensions
+	eContactVersion_created                                              smithy.SchemaExtensions
+	eContactVersion_activated                                            smithy.SchemaExtensions
+	eContactVersion_superseded                                           smithy.SchemaExtensions
+	eContactVersion_lastUpdated                                          smithy.SchemaExtensions
+	eContactVersion_status                                               smithy.SchemaExtensions
+	eContactVersion_failureCodes                                         smithy.SchemaExtensions
+	eContactVersion_failureMessage                                       smithy.SchemaExtensions
+	e_ContactVersionsList                                                smithy.SchemaExtensions
+	e_ContactVersionsList_member                                         smithy.SchemaExtensions
+	eCreateEndpointDetails                                               smithy.SchemaExtensions
+	eCreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint           smithy.SchemaExtensions
+	eCreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint         smithy.SchemaExtensions
+	e_CreateEndpointDetailsList                                          smithy.SchemaExtensions
+	e_CreateEndpointDetailsList_member                                   smithy.SchemaExtensions
+	eCriticality                                                         smithy.SchemaExtensions
+	eCriticality_REQUIRED                                                smithy.SchemaExtensions
+	eCriticality_PREFERRED                                               smithy.SchemaExtensions
+	eCriticality_REMOVED                                                 smithy.SchemaExtensions
+	e_CustomerEphemerisPriority                                          smithy.SchemaExtensions
+	eDataflowDetail                                                      smithy.SchemaExtensions
+	eDataflowDetail_source                                               smithy.SchemaExtensions
+	eDataflowDetail_destination                                          smithy.SchemaExtensions
+	eDataflowDetail_errorMessage                                         smithy.SchemaExtensions
+	e_DataflowEdge                                                       smithy.SchemaExtensions
+	e_DataflowEdge_member                                                smithy.SchemaExtensions
+	e_DataflowEdgeList                                                   smithy.SchemaExtensions
+	e_DataflowEdgeList_member                                            smithy.SchemaExtensions
+	eDataflowEndpoint                                                    smithy.SchemaExtensions
+	eDataflowEndpoint_name                                               smithy.SchemaExtensions
+	eDataflowEndpoint_address                                            smithy.SchemaExtensions
+	eDataflowEndpoint_status                                             smithy.SchemaExtensions
+	eDataflowEndpoint_mtu                                                smithy.SchemaExtensions
+	eDataflowEndpointConfig                                              smithy.SchemaExtensions
+	eDataflowEndpointConfig_dataflowEndpointName                         smithy.SchemaExtensions
+	eDataflowEndpointConfig_dataflowEndpointRegion                       smithy.SchemaExtensions
+	e_DataflowEndpointGroupArn                                           smithy.SchemaExtensions
+	e_DataflowEndpointGroupDurationInSeconds                             smithy.SchemaExtensions
+	e_DataflowEndpointGroupList                                          smithy.SchemaExtensions
+	e_DataflowEndpointGroupList_member                                   smithy.SchemaExtensions
+	eDataflowEndpointListItem                                            smithy.SchemaExtensions
+	eDataflowEndpointListItem_dataflowEndpointGroupId                    smithy.SchemaExtensions
+	eDataflowEndpointListItem_dataflowEndpointGroupArn                   smithy.SchemaExtensions
+	e_DataflowList                                                       smithy.SchemaExtensions
+	e_DataflowList_member                                                smithy.SchemaExtensions
+	eDecodeConfig                                                        smithy.SchemaExtensions
+	eDecodeConfig_unvalidatedJSON                                        smithy.SchemaExtensions
+	eDemodulationConfig                                                  smithy.SchemaExtensions
+	eDemodulationConfig_unvalidatedJSON                                  smithy.SchemaExtensions
+	eDependencyException                                                 smithy.SchemaExtensions
+	eDependencyException_message                                         smithy.SchemaExtensions
+	eDependencyException_parameterName                                   smithy.SchemaExtensions
+	eDestination                                                         smithy.SchemaExtensions
+	eDestination_configType                                              smithy.SchemaExtensions
+	eDestination_configId                                                smithy.SchemaExtensions
+	eDestination_configDetails                                           smithy.SchemaExtensions
+	eDestination_dataflowDestinationRegion                               smithy.SchemaExtensions
+	eDiscoveryData                                                       smithy.SchemaExtensions
+	eDiscoveryData_publicIpAddresses                                     smithy.SchemaExtensions
+	eDiscoveryData_privateIpAddresses                                    smithy.SchemaExtensions
+	eDiscoveryData_capabilityArns                                        smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpoint                               smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpoint_name                          smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpoint_dataflowDetails               smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpointDetails                        smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpointDetails_name                   smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails        smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpointDetails_agentStatus            smithy.SchemaExtensions
+	eDownlinkAwsGroundStationAgentEndpointDetails_auditResults           smithy.SchemaExtensions
+	eDownlinkConnectionDetails                                           smithy.SchemaExtensions
+	eDownlinkConnectionDetails_agentIpAndPortAddress                     smithy.SchemaExtensions
+	eDownlinkConnectionDetails_egressAddressAndPort                      smithy.SchemaExtensions
+	eDownlinkDataflowDetails                                             smithy.SchemaExtensions
+	eDownlinkDataflowDetails_agentConnectionDetails                      smithy.SchemaExtensions
+	e_DurationInSeconds                                                  smithy.SchemaExtensions
+	eEirp                                                                smithy.SchemaExtensions
+	eEirp_value                                                          smithy.SchemaExtensions
+	eEirp_units                                                          smithy.SchemaExtensions
+	eEirpUnits                                                           smithy.SchemaExtensions
+	eEirpUnits_DBW                                                       smithy.SchemaExtensions
+	eElevation                                                           smithy.SchemaExtensions
+	eElevation_value                                                     smithy.SchemaExtensions
+	eElevation_unit                                                      smithy.SchemaExtensions
+	eEndpointDetails                                                     smithy.SchemaExtensions
+	eEndpointDetails_securityDetails                                     smithy.SchemaExtensions
+	eEndpointDetails_endpoint                                            smithy.SchemaExtensions
+	eEndpointDetails_awsGroundStationAgentEndpoint                       smithy.SchemaExtensions
+	eEndpointDetails_uplinkAwsGroundStationAgentEndpoint                 smithy.SchemaExtensions
+	eEndpointDetails_downlinkAwsGroundStationAgentEndpoint               smithy.SchemaExtensions
+	eEndpointDetails_healthStatus                                        smithy.SchemaExtensions
+	eEndpointDetails_healthReasons                                       smithy.SchemaExtensions
+	e_EndpointDetailsList                                                smithy.SchemaExtensions
+	e_EndpointDetailsList_member                                         smithy.SchemaExtensions
+	eEndpointStatus                                                      smithy.SchemaExtensions
+	eEndpointStatus_created                                              smithy.SchemaExtensions
+	eEndpointStatus_creating                                             smithy.SchemaExtensions
+	eEndpointStatus_deleted                                              smithy.SchemaExtensions
+	eEndpointStatus_deleting                                             smithy.SchemaExtensions
+	eEndpointStatus_failed                                               smithy.SchemaExtensions
+	e_EphemeridesList                                                    smithy.SchemaExtensions
+	e_EphemeridesList_member                                             smithy.SchemaExtensions
+	eEphemerisData                                                       smithy.SchemaExtensions
+	eEphemerisData_tle                                                   smithy.SchemaExtensions
+	eEphemerisData_oem                                                   smithy.SchemaExtensions
+	eEphemerisData_azEl                                                  smithy.SchemaExtensions
+	eEphemerisDescription                                                smithy.SchemaExtensions
+	eEphemerisDescription_sourceS3Object                                 smithy.SchemaExtensions
+	eEphemerisDescription_ephemerisData                                  smithy.SchemaExtensions
+	eEphemerisErrorCode                                                  smithy.SchemaExtensions
+	eEphemerisErrorCode_INTERNAL_ERROR                                   smithy.SchemaExtensions
+	eEphemerisErrorCode_MISMATCHED_SATCAT_ID                             smithy.SchemaExtensions
+	eEphemerisErrorCode_OEM_VERSION_UNSUPPORTED                          smithy.SchemaExtensions
+	eEphemerisErrorCode_ORIGINATOR_MISSING                               smithy.SchemaExtensions
+	eEphemerisErrorCode_CREATION_DATE_MISSING                            smithy.SchemaExtensions
+	eEphemerisErrorCode_OBJECT_NAME_MISSING                              smithy.SchemaExtensions
+	eEphemerisErrorCode_OBJECT_ID_MISSING                                smithy.SchemaExtensions
+	eEphemerisErrorCode_REF_FRAME_UNSUPPORTED                            smithy.SchemaExtensions
+	eEphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED                      smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED                          smithy.SchemaExtensions
+	eEphemerisErrorCode_CENTER_BODY_UNSUPPORTED                          smithy.SchemaExtensions
+	eEphemerisErrorCode_INTERPOLATION_MISSING                            smithy.SchemaExtensions
+	eEphemerisErrorCode_INTERPOLATION_DEGREE_INVALID                     smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING                       smithy.SchemaExtensions
+	eEphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL                          smithy.SchemaExtensions
+	eEphemerisErrorCode_START_TIME_IN_FUTURE                             smithy.SchemaExtensions
+	eEphemerisErrorCode_END_TIME_IN_PAST                                 smithy.SchemaExtensions
+	eEphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY                        smithy.SchemaExtensions
+	eEphemerisErrorCode_START_TIME_METADATA_TOO_EARLY                    smithy.SchemaExtensions
+	eEphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE                      smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME         smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP                      smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER                      smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER                    smithy.SchemaExtensions
+	eEphemerisErrorCode_MEAN_MOTION_INVALID                              smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID               smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID               smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID               smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID               smithy.SchemaExtensions
+	eEphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID                   smithy.SchemaExtensions
+	eEphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS                     smithy.SchemaExtensions
+	eEphemerisErrorCode_FILE_FORMAT_INVALID                              smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID            smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID                 smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID                   smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID           smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE                  smithy.SchemaExtensions
+	eEphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED                    smithy.SchemaExtensions
+	eEphemerisErrorReason                                                smithy.SchemaExtensions
+	eEphemerisErrorReason_errorCode                                      smithy.SchemaExtensions
+	eEphemerisErrorReason_errorMessage                                   smithy.SchemaExtensions
+	e_EphemerisErrorReasonList                                           smithy.SchemaExtensions
+	e_EphemerisErrorReasonList_member                                    smithy.SchemaExtensions
+	eEphemerisFilter                                                     smithy.SchemaExtensions
+	eEphemerisFilter_azEl                                                smithy.SchemaExtensions
+	eEphemerisInvalidReason                                              smithy.SchemaExtensions
+	eEphemerisInvalidReason_METADATA_INVALID                             smithy.SchemaExtensions
+	eEphemerisInvalidReason_TIME_RANGE_INVALID                           smithy.SchemaExtensions
+	eEphemerisInvalidReason_TRAJECTORY_INVALID                           smithy.SchemaExtensions
+	eEphemerisInvalidReason_KMS_KEY_INVALID                              smithy.SchemaExtensions
+	eEphemerisInvalidReason_VALIDATION_ERROR                             smithy.SchemaExtensions
+	eEphemerisItem                                                       smithy.SchemaExtensions
+	eEphemerisItem_ephemerisId                                           smithy.SchemaExtensions
+	eEphemerisItem_ephemerisType                                         smithy.SchemaExtensions
+	eEphemerisItem_status                                                smithy.SchemaExtensions
+	eEphemerisItem_priority                                              smithy.SchemaExtensions
+	eEphemerisItem_enabled                                               smithy.SchemaExtensions
+	eEphemerisItem_creationTime                                          smithy.SchemaExtensions
+	eEphemerisItem_name                                                  smithy.SchemaExtensions
+	eEphemerisItem_sourceS3Object                                        smithy.SchemaExtensions
+	eEphemerisMetaData                                                   smithy.SchemaExtensions
+	eEphemerisMetaData_source                                            smithy.SchemaExtensions
+	eEphemerisMetaData_ephemerisId                                       smithy.SchemaExtensions
+	eEphemerisMetaData_epoch                                             smithy.SchemaExtensions
+	eEphemerisMetaData_name                                              smithy.SchemaExtensions
+	e_EphemerisPriority                                                  smithy.SchemaExtensions
+	eEphemerisResponseData                                               smithy.SchemaExtensions
+	eEphemerisResponseData_ephemerisId                                   smithy.SchemaExtensions
+	eEphemerisResponseData_ephemerisType                                 smithy.SchemaExtensions
+	eEphemerisSource                                                     smithy.SchemaExtensions
+	eEphemerisSource_CUSTOMER_PROVIDED                                   smithy.SchemaExtensions
+	eEphemerisSource_SPACE_TRACK                                         smithy.SchemaExtensions
+	eEphemerisStatus                                                     smithy.SchemaExtensions
+	eEphemerisStatus_VALIDATING                                          smithy.SchemaExtensions
+	eEphemerisStatus_INVALID                                             smithy.SchemaExtensions
+	eEphemerisStatus_ERROR                                               smithy.SchemaExtensions
+	eEphemerisStatus_ENABLED                                             smithy.SchemaExtensions
+	eEphemerisStatus_DISABLED                                            smithy.SchemaExtensions
+	eEphemerisStatus_EXPIRED                                             smithy.SchemaExtensions
+	e_EphemerisStatusList                                                smithy.SchemaExtensions
+	e_EphemerisStatusList_member                                         smithy.SchemaExtensions
+	eEphemerisType                                                       smithy.SchemaExtensions
+	eEphemerisType_TLE                                                   smithy.SchemaExtensions
+	eEphemerisType_OEM                                                   smithy.SchemaExtensions
+	eEphemerisType_AZ_EL                                                 smithy.SchemaExtensions
+	eEphemerisType_SERVICE_MANAGED                                       smithy.SchemaExtensions
+	eEphemerisTypeDescription                                            smithy.SchemaExtensions
+	eEphemerisTypeDescription_tle                                        smithy.SchemaExtensions
+	eEphemerisTypeDescription_oem                                        smithy.SchemaExtensions
+	eEphemerisTypeDescription_azEl                                       smithy.SchemaExtensions
+	e_ErrorString                                                        smithy.SchemaExtensions
+	eFrequency                                                           smithy.SchemaExtensions
+	eFrequency_value                                                     smithy.SchemaExtensions
+	eFrequency_units                                                     smithy.SchemaExtensions
+	eFrequencyBandwidth                                                  smithy.SchemaExtensions
+	eFrequencyBandwidth_value                                            smithy.SchemaExtensions
+	eFrequencyBandwidth_units                                            smithy.SchemaExtensions
+	eFrequencyUnits                                                      smithy.SchemaExtensions
+	eFrequencyUnits_GHZ                                                  smithy.SchemaExtensions
+	eFrequencyUnits_MHZ                                                  smithy.SchemaExtensions
+	eFrequencyUnits_KHZ                                                  smithy.SchemaExtensions
+	eGroundStationData                                                   smithy.SchemaExtensions
+	eGroundStationData_groundStationId                                   smithy.SchemaExtensions
+	eGroundStationData_groundStationName                                 smithy.SchemaExtensions
+	eGroundStationData_region                                            smithy.SchemaExtensions
+	e_GroundStationIdList                                                smithy.SchemaExtensions
+	e_GroundStationIdList_member                                         smithy.SchemaExtensions
+	e_GroundStationList                                                  smithy.SchemaExtensions
+	e_GroundStationList_member                                           smithy.SchemaExtensions
+	e_GroundStationName                                                  smithy.SchemaExtensions
+	e_GroundStationReservationList                                       smithy.SchemaExtensions
+	e_GroundStationReservationList_member                                smithy.SchemaExtensions
+	eGroundStationReservationListItem                                    smithy.SchemaExtensions
+	eGroundStationReservationListItem_reservationType                    smithy.SchemaExtensions
+	eGroundStationReservationListItem_groundStationId                    smithy.SchemaExtensions
+	eGroundStationReservationListItem_antennaName                        smithy.SchemaExtensions
+	eGroundStationReservationListItem_startTime                          smithy.SchemaExtensions
+	eGroundStationReservationListItem_endTime                            smithy.SchemaExtensions
+	eGroundStationReservationListItem_reservationDetails                 smithy.SchemaExtensions
+	e_InstanceId                                                         smithy.SchemaExtensions
+	e_InstanceType                                                       smithy.SchemaExtensions
+	eIntegerRange                                                        smithy.SchemaExtensions
+	eIntegerRange_minimum                                                smithy.SchemaExtensions
+	eIntegerRange_maximum                                                smithy.SchemaExtensions
+	eInvalidParameterException                                           smithy.SchemaExtensions
+	eInvalidParameterException_message                                   smithy.SchemaExtensions
+	eInvalidParameterException_parameterName                             smithy.SchemaExtensions
+	e_IpAddressList                                                      smithy.SchemaExtensions
+	e_IpAddressList_member                                               smithy.SchemaExtensions
+	e_IpV4Address                                                        smithy.SchemaExtensions
+	eISO8601TimeRange                                                    smithy.SchemaExtensions
+	eISO8601TimeRange_startTime                                          smithy.SchemaExtensions
+	eISO8601TimeRange_endTime                                            smithy.SchemaExtensions
+	e_JsonString                                                         smithy.SchemaExtensions
+	e_KeyAliasArn                                                        smithy.SchemaExtensions
+	e_KeyAliasName                                                       smithy.SchemaExtensions
+	e_KeyArn                                                             smithy.SchemaExtensions
+	e_KinesisDataStreamArn                                               smithy.SchemaExtensions
+	eKinesisDataStreamData                                               smithy.SchemaExtensions
+	eKinesisDataStreamData_kinesisRoleArn                                smithy.SchemaExtensions
+	eKinesisDataStreamData_kinesisDataStreamArn                          smithy.SchemaExtensions
+	eKmsKey                                                              smithy.SchemaExtensions
+	eKmsKey_kmsKeyArn                                                    smithy.SchemaExtensions
+	eKmsKey_kmsAliasArn                                                  smithy.SchemaExtensions
+	eKmsKey_kmsAliasName                                                 smithy.SchemaExtensions
+	eMaintenanceReservationDetails                                       smithy.SchemaExtensions
+	eMaintenanceReservationDetails_maintenanceType                       smithy.SchemaExtensions
+	eMaintenanceType                                                     smithy.SchemaExtensions
+	eMaintenanceType_PLANNED                                             smithy.SchemaExtensions
+	eMaintenanceType_UNPLANNED                                           smithy.SchemaExtensions
+	e_MissionProfileArn                                                  smithy.SchemaExtensions
+	e_MissionProfileList                                                 smithy.SchemaExtensions
+	e_MissionProfileList_member                                          smithy.SchemaExtensions
+	eMissionProfileListItem                                              smithy.SchemaExtensions
+	eMissionProfileListItem_missionProfileId                             smithy.SchemaExtensions
+	eMissionProfileListItem_missionProfileArn                            smithy.SchemaExtensions
+	eMissionProfileListItem_region                                       smithy.SchemaExtensions
+	eMissionProfileListItem_name                                         smithy.SchemaExtensions
+	e_Month                                                              smithy.SchemaExtensions
+	e_noradSatelliteID                                                   smithy.SchemaExtensions
+	eOEMEphemeris                                                        smithy.SchemaExtensions
+	eOEMEphemeris_s3Object                                               smithy.SchemaExtensions
+	eOEMEphemeris_oemData                                                smithy.SchemaExtensions
+	eOemProgramTrackSettings                                             smithy.SchemaExtensions
+	eOemProgramTrackSettings_ephemerisId                                 smithy.SchemaExtensions
+	e_PaginationMaxResults                                               smithy.SchemaExtensions
+	e_PaginationToken                                                    smithy.SchemaExtensions
+	ePolarization                                                        smithy.SchemaExtensions
+	ePolarization_RIGHT_HAND                                             smithy.SchemaExtensions
+	ePolarization_LEFT_HAND                                              smithy.SchemaExtensions
+	ePolarization_NONE                                                   smithy.SchemaExtensions
+	e_PositiveDurationInSeconds                                          smithy.SchemaExtensions
+	eProgramTrackSettings                                                smithy.SchemaExtensions
+	eProgramTrackSettings_azEl                                           smithy.SchemaExtensions
+	eProgramTrackSettings_oem                                            smithy.SchemaExtensions
+	eProgramTrackSettings_tle                                            smithy.SchemaExtensions
+	eRangedConnectionDetails                                             smithy.SchemaExtensions
+	eRangedConnectionDetails_socketAddress                               smithy.SchemaExtensions
+	eRangedConnectionDetails_mtu                                         smithy.SchemaExtensions
+	eRangedSocketAddress                                                 smithy.SchemaExtensions
+	eRangedSocketAddress_name                                            smithy.SchemaExtensions
+	eRangedSocketAddress_portRange                                       smithy.SchemaExtensions
+	eReservationDetails                                                  smithy.SchemaExtensions
+	eReservationDetails_maintenance                                      smithy.SchemaExtensions
+	eReservationDetails_contact                                          smithy.SchemaExtensions
+	eReservationType                                                     smithy.SchemaExtensions
+	eReservationType_MAINTENANCE                                         smithy.SchemaExtensions
+	eReservationType_CONTACT                                             smithy.SchemaExtensions
+	e_ReservationTypeFilterList                                          smithy.SchemaExtensions
+	e_ReservationTypeFilterList_member                                   smithy.SchemaExtensions
+	eResourceInUseException                                              smithy.SchemaExtensions
+	eResourceInUseException_message                                      smithy.SchemaExtensions
+	eResourceLimitExceededException                                      smithy.SchemaExtensions
+	eResourceLimitExceededException_message                              smithy.SchemaExtensions
+	eResourceLimitExceededException_parameterName                        smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	e_RoleArn                                                            smithy.SchemaExtensions
+	e_S3BucketName                                                       smithy.SchemaExtensions
+	e_S3KeyPrefix                                                        smithy.SchemaExtensions
+	eS3Object                                                            smithy.SchemaExtensions
+	eS3Object_bucket                                                     smithy.SchemaExtensions
+	eS3Object_key                                                        smithy.SchemaExtensions
+	eS3Object_version                                                    smithy.SchemaExtensions
+	e_S3ObjectKey                                                        smithy.SchemaExtensions
+	eS3RecordingConfig                                                   smithy.SchemaExtensions
+	eS3RecordingConfig_bucketArn                                         smithy.SchemaExtensions
+	eS3RecordingConfig_roleArn                                           smithy.SchemaExtensions
+	eS3RecordingConfig_prefix                                            smithy.SchemaExtensions
+	eS3RecordingDetails                                                  smithy.SchemaExtensions
+	eS3RecordingDetails_bucketArn                                        smithy.SchemaExtensions
+	eS3RecordingDetails_keyTemplate                                      smithy.SchemaExtensions
+	e_S3VersionId                                                        smithy.SchemaExtensions
+	e_SafeName                                                           smithy.SchemaExtensions
+	e_satelliteArn                                                       smithy.SchemaExtensions
+	e_SatelliteList                                                      smithy.SchemaExtensions
+	e_SatelliteList_member                                               smithy.SchemaExtensions
+	eSatelliteListItem                                                   smithy.SchemaExtensions
+	eSatelliteListItem_satelliteId                                       smithy.SchemaExtensions
+	eSatelliteListItem_satelliteArn                                      smithy.SchemaExtensions
+	eSatelliteListItem_noradSatelliteID                                  smithy.SchemaExtensions
+	eSatelliteListItem_groundStations                                    smithy.SchemaExtensions
+	eSatelliteListItem_currentEphemeris                                  smithy.SchemaExtensions
+	eSecurityDetails                                                     smithy.SchemaExtensions
+	eSecurityDetails_subnetIds                                           smithy.SchemaExtensions
+	eSecurityDetails_securityGroupIds                                    smithy.SchemaExtensions
+	eSecurityDetails_roleArn                                             smithy.SchemaExtensions
+	e_SecurityGroupIdList                                                smithy.SchemaExtensions
+	e_SecurityGroupIdList_member                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_parameterName                         smithy.SchemaExtensions
+	e_SignatureMap                                                       smithy.SchemaExtensions
+	e_SignatureMap_key                                                   smithy.SchemaExtensions
+	e_SignatureMap_value                                                 smithy.SchemaExtensions
+	eSocketAddress                                                       smithy.SchemaExtensions
+	eSocketAddress_name                                                  smithy.SchemaExtensions
+	eSocketAddress_port                                                  smithy.SchemaExtensions
+	eSource                                                              smithy.SchemaExtensions
+	eSource_configType                                                   smithy.SchemaExtensions
+	eSource_configId                                                     smithy.SchemaExtensions
+	eSource_configDetails                                                smithy.SchemaExtensions
+	eSource_dataflowSourceRegion                                         smithy.SchemaExtensions
+	eSpectrumConfig                                                      smithy.SchemaExtensions
+	eSpectrumConfig_centerFrequency                                      smithy.SchemaExtensions
+	eSpectrumConfig_bandwidth                                            smithy.SchemaExtensions
+	eSpectrumConfig_polarization                                         smithy.SchemaExtensions
+	e_StatusList                                                         smithy.SchemaExtensions
+	e_StatusList_member                                                  smithy.SchemaExtensions
+	e_SubnetList                                                         smithy.SchemaExtensions
+	e_SubnetList_member                                                  smithy.SchemaExtensions
+	e_TagKeys                                                            smithy.SchemaExtensions
+	e_TagKeys_member                                                     smithy.SchemaExtensions
+	e_TagsMap                                                            smithy.SchemaExtensions
+	e_TagsMap_key                                                        smithy.SchemaExtensions
+	e_TagsMap_value                                                      smithy.SchemaExtensions
+	eTelemetrySinkConfig                                                 smithy.SchemaExtensions
+	eTelemetrySinkConfig_telemetrySinkType                               smithy.SchemaExtensions
+	eTelemetrySinkConfig_telemetrySinkData                               smithy.SchemaExtensions
+	eTelemetrySinkData                                                   smithy.SchemaExtensions
+	eTelemetrySinkData_kinesisDataStreamData                             smithy.SchemaExtensions
+	eTelemetrySinkType                                                   smithy.SchemaExtensions
+	eTelemetrySinkType_KINESIS_DATA_STREAM                               smithy.SchemaExtensions
+	eTimeAzEl                                                            smithy.SchemaExtensions
+	eTimeAzEl_dt                                                         smithy.SchemaExtensions
+	eTimeAzEl_az                                                         smithy.SchemaExtensions
+	eTimeAzEl_el                                                         smithy.SchemaExtensions
+	e_TimeAzElList                                                       smithy.SchemaExtensions
+	e_TimeAzElList_member                                                smithy.SchemaExtensions
+	eTimeRange                                                           smithy.SchemaExtensions
+	eTimeRange_startTime                                                 smithy.SchemaExtensions
+	eTimeRange_endTime                                                   smithy.SchemaExtensions
+	eTLEData                                                             smithy.SchemaExtensions
+	eTLEData_tleLine1                                                    smithy.SchemaExtensions
+	eTLEData_tleLine2                                                    smithy.SchemaExtensions
+	eTLEData_validTimeRange                                              smithy.SchemaExtensions
+	e_TLEDataList                                                        smithy.SchemaExtensions
+	e_TLEDataList_member                                                 smithy.SchemaExtensions
+	eTLEEphemeris                                                        smithy.SchemaExtensions
+	eTLEEphemeris_s3Object                                               smithy.SchemaExtensions
+	eTLEEphemeris_tleData                                                smithy.SchemaExtensions
+	e_TleLineOne                                                         smithy.SchemaExtensions
+	e_TleLineTwo                                                         smithy.SchemaExtensions
+	eTleProgramTrackSettings                                             smithy.SchemaExtensions
+	eTleProgramTrackSettings_ephemerisId                                 smithy.SchemaExtensions
+	eTrackingConfig                                                      smithy.SchemaExtensions
+	eTrackingConfig_autotrack                                            smithy.SchemaExtensions
+	eTrackingOverrides                                                   smithy.SchemaExtensions
+	eTrackingOverrides_programTrackSettings                              smithy.SchemaExtensions
+	e_UnboundedString                                                    smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpoint                                 smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpoint_name                            smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpoint_dataflowDetails                 smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpointDetails                          smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpointDetails_name                     smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpointDetails_dataflowDetails          smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpointDetails_agentStatus              smithy.SchemaExtensions
+	eUplinkAwsGroundStationAgentEndpointDetails_auditResults             smithy.SchemaExtensions
+	eUplinkConnectionDetails                                             smithy.SchemaExtensions
+	eUplinkConnectionDetails_ingressAddressAndPort                       smithy.SchemaExtensions
+	eUplinkConnectionDetails_agentIpAndPortAddress                       smithy.SchemaExtensions
+	eUplinkDataflowDetails                                               smithy.SchemaExtensions
+	eUplinkDataflowDetails_agentConnectionDetails                        smithy.SchemaExtensions
+	eUplinkEchoConfig                                                    smithy.SchemaExtensions
+	eUplinkEchoConfig_enabled                                            smithy.SchemaExtensions
+	eUplinkEchoConfig_antennaUplinkConfigArn                             smithy.SchemaExtensions
+	eUplinkSpectrumConfig                                                smithy.SchemaExtensions
+	eUplinkSpectrumConfig_centerFrequency                                smithy.SchemaExtensions
+	eUplinkSpectrumConfig_polarization                                   smithy.SchemaExtensions
+	e_Uuid                                                               smithy.SchemaExtensions
+	eVersionFailureReasonCode                                            smithy.SchemaExtensions
+	eVersionFailureReasonCode_INTERNAL_ERROR                             smithy.SchemaExtensions
+	eVersionFailureReasonCode_INVALID_SATELLITE_ARN                      smithy.SchemaExtensions
+	eVersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST             smithy.SchemaExtensions
+	eVersionFailureReasonCode_EPHEMERIS_NOT_FOUND                        smithy.SchemaExtensions
+	eVersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID               smithy.SchemaExtensions
+	eVersionFailureReasonCode_EPHEMERIS_NOT_ENABLED                      smithy.SchemaExtensions
+	eVersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS         smithy.SchemaExtensions
+	eVersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS            smithy.SchemaExtensions
+	eVersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND                   smithy.SchemaExtensions
+	eVersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION        smithy.SchemaExtensions
+	eVersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS              smithy.SchemaExtensions
+	eVersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID          smithy.SchemaExtensions
+	e_VersionFailureReasonCodes                                          smithy.SchemaExtensions
+	e_VersionFailureReasonCodes_member                                   smithy.SchemaExtensions
+	e_VersionId                                                          smithy.SchemaExtensions
+	eVersionStatus                                                       smithy.SchemaExtensions
+	eVersionStatus_UPDATING                                              smithy.SchemaExtensions
+	eVersionStatus_ACTIVE                                                smithy.SchemaExtensions
+	eVersionStatus_SUPERSEDED                                            smithy.SchemaExtensions
+	eVersionStatus_FAILED_TO_UPDATE                                      smithy.SchemaExtensions
+	e_VersionString                                                      smithy.SchemaExtensions
+	e_VersionStringList                                                  smithy.SchemaExtensions
+	e_VersionStringList_member                                           smithy.SchemaExtensions
+	e_Year                                                               smithy.SchemaExtensions
+	eCancelContactRequest                                                smithy.SchemaExtensions
+	eCancelContactRequest_contactId                                      smithy.SchemaExtensions
+	eContactIdResponse                                                   smithy.SchemaExtensions
+	eContactIdResponse_contactId                                         smithy.SchemaExtensions
+	eContactIdResponse_versionId                                         smithy.SchemaExtensions
+	eCreateConfigRequest                                                 smithy.SchemaExtensions
+	eCreateConfigRequest_name                                            smithy.SchemaExtensions
+	eCreateConfigRequest_configData                                      smithy.SchemaExtensions
+	eCreateConfigRequest_tags                                            smithy.SchemaExtensions
+	eConfigIdResponse                                                    smithy.SchemaExtensions
+	eConfigIdResponse_configId                                           smithy.SchemaExtensions
+	eConfigIdResponse_configType                                         smithy.SchemaExtensions
+	eConfigIdResponse_configArn                                          smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupRequest                                  smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupRequest_endpointDetails                  smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupRequest_tags                             smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds    smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds   smithy.SchemaExtensions
+	eDataflowEndpointGroupIdResponse                                     smithy.SchemaExtensions
+	eDataflowEndpointGroupIdResponse_dataflowEndpointGroupId             smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Request                                smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Request_endpoints                      smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds  smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Request_tags                           smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Response                               smithy.SchemaExtensions
+	eCreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId       smithy.SchemaExtensions
+	eCreateEphemerisRequest                                              smithy.SchemaExtensions
+	eCreateEphemerisRequest_satelliteId                                  smithy.SchemaExtensions
+	eCreateEphemerisRequest_enabled                                      smithy.SchemaExtensions
+	eCreateEphemerisRequest_priority                                     smithy.SchemaExtensions
+	eCreateEphemerisRequest_expirationTime                               smithy.SchemaExtensions
+	eCreateEphemerisRequest_name                                         smithy.SchemaExtensions
+	eCreateEphemerisRequest_kmsKeyArn                                    smithy.SchemaExtensions
+	eCreateEphemerisRequest_ephemeris                                    smithy.SchemaExtensions
+	eCreateEphemerisRequest_tags                                         smithy.SchemaExtensions
+	eEphemerisIdResponse                                                 smithy.SchemaExtensions
+	eEphemerisIdResponse_ephemerisId                                     smithy.SchemaExtensions
+	eCreateMissionProfileRequest                                         smithy.SchemaExtensions
+	eCreateMissionProfileRequest_name                                    smithy.SchemaExtensions
+	eCreateMissionProfileRequest_contactPrePassDurationSeconds           smithy.SchemaExtensions
+	eCreateMissionProfileRequest_contactPostPassDurationSeconds          smithy.SchemaExtensions
+	eCreateMissionProfileRequest_minimumViableContactDurationSeconds     smithy.SchemaExtensions
+	eCreateMissionProfileRequest_dataflowEdges                           smithy.SchemaExtensions
+	eCreateMissionProfileRequest_trackingConfigArn                       smithy.SchemaExtensions
+	eCreateMissionProfileRequest_telemetrySinkConfigArn                  smithy.SchemaExtensions
+	eCreateMissionProfileRequest_tags                                    smithy.SchemaExtensions
+	eCreateMissionProfileRequest_streamsKmsKey                           smithy.SchemaExtensions
+	eCreateMissionProfileRequest_streamsKmsRole                          smithy.SchemaExtensions
+	eMissionProfileIdResponse                                            smithy.SchemaExtensions
+	eMissionProfileIdResponse_missionProfileId                           smithy.SchemaExtensions
+	eDeleteConfigRequest                                                 smithy.SchemaExtensions
+	eDeleteConfigRequest_configId                                        smithy.SchemaExtensions
+	eDeleteConfigRequest_configType                                      smithy.SchemaExtensions
+	eDeleteDataflowEndpointGroupRequest                                  smithy.SchemaExtensions
+	eDeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId          smithy.SchemaExtensions
+	eDeleteEphemerisRequest                                              smithy.SchemaExtensions
+	eDeleteEphemerisRequest_ephemerisId                                  smithy.SchemaExtensions
+	eDeleteMissionProfileRequest                                         smithy.SchemaExtensions
+	eDeleteMissionProfileRequest_missionProfileId                        smithy.SchemaExtensions
+	eDescribeContactRequest                                              smithy.SchemaExtensions
+	eDescribeContactRequest_contactId                                    smithy.SchemaExtensions
+	eDescribeContactResponse                                             smithy.SchemaExtensions
+	eDescribeContactResponse_contactId                                   smithy.SchemaExtensions
+	eDescribeContactResponse_missionProfileArn                           smithy.SchemaExtensions
+	eDescribeContactResponse_satelliteArn                                smithy.SchemaExtensions
+	eDescribeContactResponse_startTime                                   smithy.SchemaExtensions
+	eDescribeContactResponse_endTime                                     smithy.SchemaExtensions
+	eDescribeContactResponse_prePassStartTime                            smithy.SchemaExtensions
+	eDescribeContactResponse_postPassEndTime                             smithy.SchemaExtensions
+	eDescribeContactResponse_groundStation                               smithy.SchemaExtensions
+	eDescribeContactResponse_contactStatus                               smithy.SchemaExtensions
+	eDescribeContactResponse_errorMessage                                smithy.SchemaExtensions
+	eDescribeContactResponse_maximumElevation                            smithy.SchemaExtensions
+	eDescribeContactResponse_tags                                        smithy.SchemaExtensions
+	eDescribeContactResponse_region                                      smithy.SchemaExtensions
+	eDescribeContactResponse_dataflowList                                smithy.SchemaExtensions
+	eDescribeContactResponse_visibilityStartTime                         smithy.SchemaExtensions
+	eDescribeContactResponse_visibilityEndTime                           smithy.SchemaExtensions
+	eDescribeContactResponse_trackingOverrides                           smithy.SchemaExtensions
+	eDescribeContactResponse_ephemeris                                   smithy.SchemaExtensions
+	eDescribeContactResponse_version                                     smithy.SchemaExtensions
+	eDescribeContactVersionRequest                                       smithy.SchemaExtensions
+	eDescribeContactVersionRequest_contactId                             smithy.SchemaExtensions
+	eDescribeContactVersionRequest_versionId                             smithy.SchemaExtensions
+	eDescribeContactVersionResponse                                      smithy.SchemaExtensions
+	eDescribeContactVersionResponse_contactId                            smithy.SchemaExtensions
+	eDescribeContactVersionResponse_missionProfileArn                    smithy.SchemaExtensions
+	eDescribeContactVersionResponse_satelliteArn                         smithy.SchemaExtensions
+	eDescribeContactVersionResponse_startTime                            smithy.SchemaExtensions
+	eDescribeContactVersionResponse_endTime                              smithy.SchemaExtensions
+	eDescribeContactVersionResponse_prePassStartTime                     smithy.SchemaExtensions
+	eDescribeContactVersionResponse_postPassEndTime                      smithy.SchemaExtensions
+	eDescribeContactVersionResponse_groundStation                        smithy.SchemaExtensions
+	eDescribeContactVersionResponse_contactStatus                        smithy.SchemaExtensions
+	eDescribeContactVersionResponse_errorMessage                         smithy.SchemaExtensions
+	eDescribeContactVersionResponse_maximumElevation                     smithy.SchemaExtensions
+	eDescribeContactVersionResponse_tags                                 smithy.SchemaExtensions
+	eDescribeContactVersionResponse_region                               smithy.SchemaExtensions
+	eDescribeContactVersionResponse_dataflowList                         smithy.SchemaExtensions
+	eDescribeContactVersionResponse_visibilityStartTime                  smithy.SchemaExtensions
+	eDescribeContactVersionResponse_visibilityEndTime                    smithy.SchemaExtensions
+	eDescribeContactVersionResponse_trackingOverrides                    smithy.SchemaExtensions
+	eDescribeContactVersionResponse_ephemeris                            smithy.SchemaExtensions
+	eDescribeContactVersionResponse_version                              smithy.SchemaExtensions
+	eDescribeEphemerisRequest                                            smithy.SchemaExtensions
+	eDescribeEphemerisRequest_ephemerisId                                smithy.SchemaExtensions
+	eDescribeEphemerisResponse                                           smithy.SchemaExtensions
+	eDescribeEphemerisResponse_ephemerisId                               smithy.SchemaExtensions
+	eDescribeEphemerisResponse_satelliteId                               smithy.SchemaExtensions
+	eDescribeEphemerisResponse_status                                    smithy.SchemaExtensions
+	eDescribeEphemerisResponse_priority                                  smithy.SchemaExtensions
+	eDescribeEphemerisResponse_creationTime                              smithy.SchemaExtensions
+	eDescribeEphemerisResponse_enabled                                   smithy.SchemaExtensions
+	eDescribeEphemerisResponse_name                                      smithy.SchemaExtensions
+	eDescribeEphemerisResponse_tags                                      smithy.SchemaExtensions
+	eDescribeEphemerisResponse_suppliedData                              smithy.SchemaExtensions
+	eDescribeEphemerisResponse_invalidReason                             smithy.SchemaExtensions
+	eDescribeEphemerisResponse_errorReasons                              smithy.SchemaExtensions
+	eGetAgentConfigurationRequest                                        smithy.SchemaExtensions
+	eGetAgentConfigurationRequest_agentId                                smithy.SchemaExtensions
+	eGetAgentConfigurationResponse                                       smithy.SchemaExtensions
+	eGetAgentConfigurationResponse_agentId                               smithy.SchemaExtensions
+	eGetAgentConfigurationResponse_taskingDocument                       smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlRequest                                      smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlRequest_agentId                              smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlRequest_taskId                               smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlResponse                                     smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlResponse_agentId                             smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlResponse_taskId                              smithy.SchemaExtensions
+	eGetAgentTaskResponseUrlResponse_presignedLogUrl                     smithy.SchemaExtensions
+	eGetConfigRequest                                                    smithy.SchemaExtensions
+	eGetConfigRequest_configId                                           smithy.SchemaExtensions
+	eGetConfigRequest_configType                                         smithy.SchemaExtensions
+	eGetConfigResponse                                                   smithy.SchemaExtensions
+	eGetConfigResponse_configId                                          smithy.SchemaExtensions
+	eGetConfigResponse_configArn                                         smithy.SchemaExtensions
+	eGetConfigResponse_name                                              smithy.SchemaExtensions
+	eGetConfigResponse_configType                                        smithy.SchemaExtensions
+	eGetConfigResponse_configData                                        smithy.SchemaExtensions
+	eGetConfigResponse_tags                                              smithy.SchemaExtensions
+	eGetDataflowEndpointGroupRequest                                     smithy.SchemaExtensions
+	eGetDataflowEndpointGroupRequest_dataflowEndpointGroupId             smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse                                    smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_dataflowEndpointGroupId            smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_dataflowEndpointGroupArn           smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_endpointsDetails                   smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_tags                               smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_contactPrePassDurationSeconds      smithy.SchemaExtensions
+	eGetDataflowEndpointGroupResponse_contactPostPassDurationSeconds     smithy.SchemaExtensions
+	eGetMinuteUsageRequest                                               smithy.SchemaExtensions
+	eGetMinuteUsageRequest_month                                         smithy.SchemaExtensions
+	eGetMinuteUsageRequest_year                                          smithy.SchemaExtensions
+	eGetMinuteUsageResponse                                              smithy.SchemaExtensions
+	eGetMinuteUsageResponse_isReservedMinutesCustomer                    smithy.SchemaExtensions
+	eGetMinuteUsageResponse_totalReservedMinuteAllocation                smithy.SchemaExtensions
+	eGetMinuteUsageResponse_upcomingMinutesScheduled                     smithy.SchemaExtensions
+	eGetMinuteUsageResponse_totalScheduledMinutes                        smithy.SchemaExtensions
+	eGetMinuteUsageResponse_estimatedMinutesRemaining                    smithy.SchemaExtensions
+	eGetMissionProfileRequest                                            smithy.SchemaExtensions
+	eGetMissionProfileRequest_missionProfileId                           smithy.SchemaExtensions
+	eGetMissionProfileResponse                                           smithy.SchemaExtensions
+	eGetMissionProfileResponse_missionProfileId                          smithy.SchemaExtensions
+	eGetMissionProfileResponse_missionProfileArn                         smithy.SchemaExtensions
+	eGetMissionProfileResponse_name                                      smithy.SchemaExtensions
+	eGetMissionProfileResponse_region                                    smithy.SchemaExtensions
+	eGetMissionProfileResponse_contactPrePassDurationSeconds             smithy.SchemaExtensions
+	eGetMissionProfileResponse_contactPostPassDurationSeconds            smithy.SchemaExtensions
+	eGetMissionProfileResponse_minimumViableContactDurationSeconds       smithy.SchemaExtensions
+	eGetMissionProfileResponse_dataflowEdges                             smithy.SchemaExtensions
+	eGetMissionProfileResponse_trackingConfigArn                         smithy.SchemaExtensions
+	eGetMissionProfileResponse_telemetrySinkConfigArn                    smithy.SchemaExtensions
+	eGetMissionProfileResponse_tags                                      smithy.SchemaExtensions
+	eGetMissionProfileResponse_streamsKmsKey                             smithy.SchemaExtensions
+	eGetMissionProfileResponse_streamsKmsRole                            smithy.SchemaExtensions
+	eGetSatelliteRequest                                                 smithy.SchemaExtensions
+	eGetSatelliteRequest_satelliteId                                     smithy.SchemaExtensions
+	eGetSatelliteResponse                                                smithy.SchemaExtensions
+	eGetSatelliteResponse_satelliteId                                    smithy.SchemaExtensions
+	eGetSatelliteResponse_satelliteArn                                   smithy.SchemaExtensions
+	eGetSatelliteResponse_noradSatelliteID                               smithy.SchemaExtensions
+	eGetSatelliteResponse_groundStations                                 smithy.SchemaExtensions
+	eGetSatelliteResponse_currentEphemeris                               smithy.SchemaExtensions
+	eListAntennasRequest                                                 smithy.SchemaExtensions
+	eListAntennasRequest_groundStationId                                 smithy.SchemaExtensions
+	eListAntennasRequest_maxResults                                      smithy.SchemaExtensions
+	eListAntennasRequest_nextToken                                       smithy.SchemaExtensions
+	eListAntennasResponse                                                smithy.SchemaExtensions
+	eListAntennasResponse_antennaList                                    smithy.SchemaExtensions
+	eListAntennasResponse_nextToken                                      smithy.SchemaExtensions
+	eListConfigsRequest                                                  smithy.SchemaExtensions
+	eListConfigsRequest_maxResults                                       smithy.SchemaExtensions
+	eListConfigsRequest_nextToken                                        smithy.SchemaExtensions
+	eListConfigsResponse                                                 smithy.SchemaExtensions
+	eListConfigsResponse_nextToken                                       smithy.SchemaExtensions
+	eListConfigsResponse_configList                                      smithy.SchemaExtensions
+	eListContactsRequest                                                 smithy.SchemaExtensions
+	eListContactsRequest_maxResults                                      smithy.SchemaExtensions
+	eListContactsRequest_nextToken                                       smithy.SchemaExtensions
+	eListContactsRequest_statusList                                      smithy.SchemaExtensions
+	eListContactsRequest_startTime                                       smithy.SchemaExtensions
+	eListContactsRequest_endTime                                         smithy.SchemaExtensions
+	eListContactsRequest_groundStation                                   smithy.SchemaExtensions
+	eListContactsRequest_satelliteArn                                    smithy.SchemaExtensions
+	eListContactsRequest_missionProfileArn                               smithy.SchemaExtensions
+	eListContactsRequest_ephemeris                                       smithy.SchemaExtensions
+	eListContactsResponse                                                smithy.SchemaExtensions
+	eListContactsResponse_nextToken                                      smithy.SchemaExtensions
+	eListContactsResponse_contactList                                    smithy.SchemaExtensions
+	eListContactVersionsRequest                                          smithy.SchemaExtensions
+	eListContactVersionsRequest_contactId                                smithy.SchemaExtensions
+	eListContactVersionsRequest_maxResults                               smithy.SchemaExtensions
+	eListContactVersionsRequest_nextToken                                smithy.SchemaExtensions
+	eListContactVersionsResponse                                         smithy.SchemaExtensions
+	eListContactVersionsResponse_nextToken                               smithy.SchemaExtensions
+	eListContactVersionsResponse_contactVersionsList                     smithy.SchemaExtensions
+	eListDataflowEndpointGroupsRequest                                   smithy.SchemaExtensions
+	eListDataflowEndpointGroupsRequest_maxResults                        smithy.SchemaExtensions
+	eListDataflowEndpointGroupsRequest_nextToken                         smithy.SchemaExtensions
+	eListDataflowEndpointGroupsResponse                                  smithy.SchemaExtensions
+	eListDataflowEndpointGroupsResponse_nextToken                        smithy.SchemaExtensions
+	eListDataflowEndpointGroupsResponse_dataflowEndpointGroupList        smithy.SchemaExtensions
+	eListEphemeridesRequest                                              smithy.SchemaExtensions
+	eListEphemeridesRequest_satelliteId                                  smithy.SchemaExtensions
+	eListEphemeridesRequest_ephemerisType                                smithy.SchemaExtensions
+	eListEphemeridesRequest_startTime                                    smithy.SchemaExtensions
+	eListEphemeridesRequest_endTime                                      smithy.SchemaExtensions
+	eListEphemeridesRequest_statusList                                   smithy.SchemaExtensions
+	eListEphemeridesRequest_maxResults                                   smithy.SchemaExtensions
+	eListEphemeridesRequest_nextToken                                    smithy.SchemaExtensions
+	eListEphemeridesResponse                                             smithy.SchemaExtensions
+	eListEphemeridesResponse_nextToken                                   smithy.SchemaExtensions
+	eListEphemeridesResponse_ephemerides                                 smithy.SchemaExtensions
+	eListGroundStationReservationsRequest                                smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_groundStationId                smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_startTime                      smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_endTime                        smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_reservationTypes               smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_maxResults                     smithy.SchemaExtensions
+	eListGroundStationReservationsRequest_nextToken                      smithy.SchemaExtensions
+	eListGroundStationReservationsResponse                               smithy.SchemaExtensions
+	eListGroundStationReservationsResponse_reservationList               smithy.SchemaExtensions
+	eListGroundStationReservationsResponse_nextToken                     smithy.SchemaExtensions
+	eListGroundStationsRequest                                           smithy.SchemaExtensions
+	eListGroundStationsRequest_satelliteId                               smithy.SchemaExtensions
+	eListGroundStationsRequest_maxResults                                smithy.SchemaExtensions
+	eListGroundStationsRequest_nextToken                                 smithy.SchemaExtensions
+	eListGroundStationsResponse                                          smithy.SchemaExtensions
+	eListGroundStationsResponse_nextToken                                smithy.SchemaExtensions
+	eListGroundStationsResponse_groundStationList                        smithy.SchemaExtensions
+	eListMissionProfilesRequest                                          smithy.SchemaExtensions
+	eListMissionProfilesRequest_maxResults                               smithy.SchemaExtensions
+	eListMissionProfilesRequest_nextToken                                smithy.SchemaExtensions
+	eListMissionProfilesResponse                                         smithy.SchemaExtensions
+	eListMissionProfilesResponse_nextToken                               smithy.SchemaExtensions
+	eListMissionProfilesResponse_missionProfileList                      smithy.SchemaExtensions
+	eListSatellitesRequest                                               smithy.SchemaExtensions
+	eListSatellitesRequest_maxResults                                    smithy.SchemaExtensions
+	eListSatellitesRequest_nextToken                                     smithy.SchemaExtensions
+	eListSatellitesResponse                                              smithy.SchemaExtensions
+	eListSatellitesResponse_nextToken                                    smithy.SchemaExtensions
+	eListSatellitesResponse_satellites                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eListTagsForResourceResponse                                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                    smithy.SchemaExtensions
+	eRegisterAgentRequest                                                smithy.SchemaExtensions
+	eRegisterAgentRequest_discoveryData                                  smithy.SchemaExtensions
+	eRegisterAgentRequest_agentDetails                                   smithy.SchemaExtensions
+	eRegisterAgentRequest_tags                                           smithy.SchemaExtensions
+	eRegisterAgentResponse                                               smithy.SchemaExtensions
+	eRegisterAgentResponse_agentId                                       smithy.SchemaExtensions
+	eReserveContactRequest                                               smithy.SchemaExtensions
+	eReserveContactRequest_missionProfileArn                             smithy.SchemaExtensions
+	eReserveContactRequest_satelliteArn                                  smithy.SchemaExtensions
+	eReserveContactRequest_startTime                                     smithy.SchemaExtensions
+	eReserveContactRequest_endTime                                       smithy.SchemaExtensions
+	eReserveContactRequest_groundStation                                 smithy.SchemaExtensions
+	eReserveContactRequest_tags                                          smithy.SchemaExtensions
+	eReserveContactRequest_trackingOverrides                             smithy.SchemaExtensions
+	eTagResourceRequest                                                  smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                      smithy.SchemaExtensions
+	eTagResourceRequest_tags                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                                smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                    smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                               smithy.SchemaExtensions
+	eUpdateAgentStatusRequest                                            smithy.SchemaExtensions
+	eUpdateAgentStatusRequest_agentId                                    smithy.SchemaExtensions
+	eUpdateAgentStatusRequest_taskId                                     smithy.SchemaExtensions
+	eUpdateAgentStatusRequest_aggregateStatus                            smithy.SchemaExtensions
+	eUpdateAgentStatusRequest_componentStatuses                          smithy.SchemaExtensions
+	eUpdateAgentStatusResponse                                           smithy.SchemaExtensions
+	eUpdateAgentStatusResponse_agentId                                   smithy.SchemaExtensions
+	eUpdateConfigRequest                                                 smithy.SchemaExtensions
+	eUpdateConfigRequest_configId                                        smithy.SchemaExtensions
+	eUpdateConfigRequest_name                                            smithy.SchemaExtensions
+	eUpdateConfigRequest_configType                                      smithy.SchemaExtensions
+	eUpdateConfigRequest_configData                                      smithy.SchemaExtensions
+	eUpdateContactRequest                                                smithy.SchemaExtensions
+	eUpdateContactRequest_contactId                                      smithy.SchemaExtensions
+	eUpdateContactRequest_clientToken                                    smithy.SchemaExtensions
+	eUpdateContactRequest_trackingOverrides                              smithy.SchemaExtensions
+	eUpdateContactRequest_satelliteArn                                   smithy.SchemaExtensions
+	eUpdateContactResponse                                               smithy.SchemaExtensions
+	eUpdateContactResponse_contactId                                     smithy.SchemaExtensions
+	eUpdateContactResponse_versionId                                     smithy.SchemaExtensions
+	eUpdateEphemerisRequest                                              smithy.SchemaExtensions
+	eUpdateEphemerisRequest_ephemerisId                                  smithy.SchemaExtensions
+	eUpdateEphemerisRequest_enabled                                      smithy.SchemaExtensions
+	eUpdateEphemerisRequest_name                                         smithy.SchemaExtensions
+	eUpdateEphemerisRequest_priority                                     smithy.SchemaExtensions
+	eUpdateMissionProfileRequest                                         smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_missionProfileId                        smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_name                                    smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_contactPrePassDurationSeconds           smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_contactPostPassDurationSeconds          smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_minimumViableContactDurationSeconds     smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_dataflowEdges                           smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_trackingConfigArn                       smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_telemetrySinkConfigArn                  smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_streamsKmsKey                           smithy.SchemaExtensions
+	eUpdateMissionProfileRequest_streamsKmsRole                          smithy.SchemaExtensions
+)
+
+var (
+	iCancelContact                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CancelContact"}
+	iCreateConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateConfig"}
+	iCreateDataflowEndpointGroup                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateDataflowEndpointGroup"}
+	iCreateDataflowEndpointGroupV2                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateDataflowEndpointGroupV2"}
+	iCreateEphemeris                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateEphemeris"}
+	iCreateMissionProfile                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateMissionProfile"}
+	iDeleteConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteConfig"}
+	iDeleteDataflowEndpointGroup                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteDataflowEndpointGroup"}
+	iDeleteEphemeris                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteEphemeris"}
+	iDeleteMissionProfile                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteMissionProfile"}
+	iDescribeContact                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContact"}
+	iDescribeContactVersion                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContactVersion"}
+	iDescribeEphemeris                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeEphemeris"}
+	iGetAgentConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentConfiguration"}
+	iGetAgentTaskResponseUrl                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentTaskResponseUrl"}
+	iGetConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetConfig"}
+	iGetDataflowEndpointGroup                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetDataflowEndpointGroup"}
+	iGetMinuteUsage                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMinuteUsage"}
+	iGetMissionProfile                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMissionProfile"}
+	iGetSatellite                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetSatellite"}
+	iListAntennas                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListAntennas"}
+	iListConfigs                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListConfigs"}
+	iListContacts                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContacts"}
+	iListContactVersions                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContactVersions"}
+	iListDataflowEndpointGroups                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListDataflowEndpointGroups"}
+	iListEphemerides                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListEphemerides"}
+	iListGroundStationReservations                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStationReservations"}
+	iListGroundStations                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStations"}
+	iListMissionProfiles                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListMissionProfiles"}
+	iListSatellites                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListSatellites"}
+	iListTagsForResource                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListTagsForResource"}
+	iRegisterAgent                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RegisterAgent"}
+	iReserveContact                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ReserveContact"}
+	iTagResource                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TagResource"}
+	iUntagResource                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UntagResource"}
+	iUpdateAgentStatus                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateAgentStatus"}
+	iUpdateConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateConfig"}
+	iUpdateContact                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateContact"}
+	iUpdateEphemeris                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateEphemeris"}
+	iUpdateMissionProfile                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateMissionProfile"}
+	i_GroundStation                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStation"}
+	i_AgentCpuCoresList                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AgentCpuCoresList"}
+	iAgentDetails                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AgentDetails"}
+	iAgentStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AgentStatus"}
+	iAggregateStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AggregateStatus"}
+	iAngleUnits                                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AngleUnits"}
+	iAntennaDemodDecodeDetails                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaDemodDecodeDetails"}
+	iAntennaDownlinkConfig                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaDownlinkConfig"}
+	iAntennaDownlinkDemodDecodeConfig             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaDownlinkDemodDecodeConfig"}
+	i_AntennaList                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaList"}
+	iAntennaListItem                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaListItem"}
+	i_AntennaName                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaName"}
+	iAntennaUplinkConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AntennaUplinkConfig"}
+	i_AnyArn                                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AnyArn"}
+	iAuditResults                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AuditResults"}
+	iAwsGroundStationAgentEndpoint                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AwsGroundStationAgentEndpoint"}
+	i_AWSRegion                                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AWSRegion"}
+	iAzElEphemeris                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElEphemeris"}
+	iAzElEphemerisFilter                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElEphemerisFilter"}
+	iAzElProgramTrackSettings                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElProgramTrackSettings"}
+	iAzElSegment                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElSegment"}
+	i_AzElSegmentList                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElSegmentList"}
+	iAzElSegments                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElSegments"}
+	iAzElSegmentsData                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "AzElSegmentsData"}
+	iBandwidthUnits                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "BandwidthUnits"}
+	i_BucketArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "BucketArn"}
+	i_CapabilityArn                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CapabilityArn"}
+	i_CapabilityArnList                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CapabilityArnList"}
+	iCapabilityHealth                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CapabilityHealth"}
+	iCapabilityHealthReason                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CapabilityHealthReason"}
+	i_CapabilityHealthReasonList                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CapabilityHealthReasonList"}
+	i_ClientToken                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ClientToken"}
+	iComponentStatusData                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ComponentStatusData"}
+	i_ComponentStatusList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ComponentStatusList"}
+	i_ComponentTypeString                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ComponentTypeString"}
+	iComponentVersion                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ComponentVersion"}
+	i_ComponentVersionList                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ComponentVersionList"}
+	i_ConfigArn                                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigArn"}
+	iConfigCapabilityType                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigCapabilityType"}
+	iConfigDetails                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigDetails"}
+	i_ConfigList                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigList"}
+	iConfigListItem                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigListItem"}
+	iConfigTypeData                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigTypeData"}
+	iConnectionDetails                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConnectionDetails"}
+	iContactData                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactData"}
+	i_ContactList                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactList"}
+	iContactReservationDetails                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactReservationDetails"}
+	iContactStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactStatus"}
+	iContactVersion                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactVersion"}
+	i_ContactVersionsList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactVersionsList"}
+	iCreateEndpointDetails                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateEndpointDetails"}
+	i_CreateEndpointDetailsList                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateEndpointDetailsList"}
+	iCriticality                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Criticality"}
+	i_CustomerEphemerisPriority                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CustomerEphemerisPriority"}
+	iDataflowDetail                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowDetail"}
+	i_DataflowEdge                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEdge"}
+	i_DataflowEdgeList                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEdgeList"}
+	iDataflowEndpoint                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpoint"}
+	iDataflowEndpointConfig                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointConfig"}
+	i_DataflowEndpointGroupArn                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointGroupArn"}
+	i_DataflowEndpointGroupDurationInSeconds      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointGroupDurationInSeconds"}
+	i_DataflowEndpointGroupList                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointGroupList"}
+	iDataflowEndpointListItem                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointListItem"}
+	i_DataflowList                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowList"}
+	iDecodeConfig                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DecodeConfig"}
+	iDemodulationConfig                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DemodulationConfig"}
+	iDependencyException                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DependencyException"}
+	iDestination                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Destination"}
+	iDiscoveryData                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DiscoveryData"}
+	iDownlinkAwsGroundStationAgentEndpoint        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DownlinkAwsGroundStationAgentEndpoint"}
+	iDownlinkAwsGroundStationAgentEndpointDetails = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DownlinkAwsGroundStationAgentEndpointDetails"}
+	iDownlinkConnectionDetails                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DownlinkConnectionDetails"}
+	iDownlinkDataflowDetails                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DownlinkDataflowDetails"}
+	i_DurationInSeconds                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DurationInSeconds"}
+	iEirp                                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Eirp"}
+	iEirpUnits                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EirpUnits"}
+	iElevation                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Elevation"}
+	iEndpointDetails                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EndpointDetails"}
+	i_EndpointDetailsList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EndpointDetailsList"}
+	iEndpointStatus                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EndpointStatus"}
+	i_EphemeridesList                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemeridesList"}
+	iEphemerisData                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisData"}
+	iEphemerisDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisDescription"}
+	iEphemerisErrorCode                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisErrorCode"}
+	iEphemerisErrorReason                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisErrorReason"}
+	i_EphemerisErrorReasonList                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisErrorReasonList"}
+	iEphemerisFilter                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisFilter"}
+	iEphemerisInvalidReason                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisInvalidReason"}
+	iEphemerisItem                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisItem"}
+	iEphemerisMetaData                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisMetaData"}
+	i_EphemerisPriority                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisPriority"}
+	iEphemerisResponseData                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisResponseData"}
+	iEphemerisSource                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisSource"}
+	iEphemerisStatus                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisStatus"}
+	i_EphemerisStatusList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisStatusList"}
+	iEphemerisType                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisType"}
+	iEphemerisTypeDescription                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisTypeDescription"}
+	i_ErrorString                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ErrorString"}
+	iFrequency                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Frequency"}
+	iFrequencyBandwidth                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "FrequencyBandwidth"}
+	iFrequencyUnits                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "FrequencyUnits"}
+	iGroundStationData                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationData"}
+	i_GroundStationIdList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationIdList"}
+	i_GroundStationList                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationList"}
+	i_GroundStationName                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationName"}
+	i_GroundStationReservationList                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationReservationList"}
+	iGroundStationReservationListItem             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GroundStationReservationListItem"}
+	i_InstanceId                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "InstanceId"}
+	i_InstanceType                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "InstanceType"}
+	iIntegerRange                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "IntegerRange"}
+	iInvalidParameterException                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "InvalidParameterException"}
+	i_IpAddressList                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "IpAddressList"}
+	i_IpV4Address                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "IpV4Address"}
+	iISO8601TimeRange                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ISO8601TimeRange"}
+	i_JsonString                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "JsonString"}
+	i_KeyAliasArn                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KeyAliasArn"}
+	i_KeyAliasName                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KeyAliasName"}
+	i_KeyArn                                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KeyArn"}
+	i_KinesisDataStreamArn                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KinesisDataStreamArn"}
+	iKinesisDataStreamData                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KinesisDataStreamData"}
+	iKmsKey                                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "KmsKey"}
+	iMaintenanceReservationDetails                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MaintenanceReservationDetails"}
+	iMaintenanceType                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MaintenanceType"}
+	i_MissionProfileArn                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MissionProfileArn"}
+	i_MissionProfileList                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MissionProfileList"}
+	iMissionProfileListItem                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MissionProfileListItem"}
+	i_Month                                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Month"}
+	i_noradSatelliteID                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "noradSatelliteID"}
+	iOEMEphemeris                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "OEMEphemeris"}
+	iOemProgramTrackSettings                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "OemProgramTrackSettings"}
+	i_PaginationMaxResults                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "PaginationMaxResults"}
+	i_PaginationToken                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "PaginationToken"}
+	iPolarization                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Polarization"}
+	i_PositiveDurationInSeconds                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "PositiveDurationInSeconds"}
+	iProgramTrackSettings                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ProgramTrackSettings"}
+	iRangedConnectionDetails                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RangedConnectionDetails"}
+	iRangedSocketAddress                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RangedSocketAddress"}
+	iReservationDetails                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ReservationDetails"}
+	iReservationType                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ReservationType"}
+	i_ReservationTypeFilterList                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ReservationTypeFilterList"}
+	iResourceInUseException                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ResourceInUseException"}
+	iResourceLimitExceededException               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ResourceLimitExceededException"}
+	iResourceNotFoundException                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ResourceNotFoundException"}
+	i_RoleArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RoleArn"}
+	i_S3BucketName                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3BucketName"}
+	i_S3KeyPrefix                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3KeyPrefix"}
+	iS3Object                                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3Object"}
+	i_S3ObjectKey                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3ObjectKey"}
+	iS3RecordingConfig                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3RecordingConfig"}
+	iS3RecordingDetails                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3RecordingDetails"}
+	i_S3VersionId                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "S3VersionId"}
+	i_SafeName                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SafeName"}
+	i_satelliteArn                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "satelliteArn"}
+	i_SatelliteList                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SatelliteList"}
+	iSatelliteListItem                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SatelliteListItem"}
+	iSecurityDetails                              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SecurityDetails"}
+	i_SecurityGroupIdList                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SecurityGroupIdList"}
+	iServiceQuotaExceededException                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ServiceQuotaExceededException"}
+	i_SignatureMap                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SignatureMap"}
+	iSocketAddress                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SocketAddress"}
+	iSource                                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Source"}
+	iSpectrumConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SpectrumConfig"}
+	i_StatusList                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "StatusList"}
+	i_SubnetList                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "SubnetList"}
+	i_TagKeys                                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TagKeys"}
+	i_TagsMap                                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TagsMap"}
+	iTelemetrySinkConfig                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TelemetrySinkConfig"}
+	iTelemetrySinkData                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TelemetrySinkData"}
+	iTelemetrySinkType                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TelemetrySinkType"}
+	iTimeAzEl                                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TimeAzEl"}
+	i_TimeAzElList                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TimeAzElList"}
+	iTimeRange                                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TimeRange"}
+	iTLEData                                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TLEData"}
+	i_TLEDataList                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TLEDataList"}
+	iTLEEphemeris                                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TLEEphemeris"}
+	i_TleLineOne                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TleLineOne"}
+	i_TleLineTwo                                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TleLineTwo"}
+	iTleProgramTrackSettings                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TleProgramTrackSettings"}
+	iTrackingConfig                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TrackingConfig"}
+	iTrackingOverrides                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TrackingOverrides"}
+	i_UnboundedString                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UnboundedString"}
+	iUplinkAwsGroundStationAgentEndpoint          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkAwsGroundStationAgentEndpoint"}
+	iUplinkAwsGroundStationAgentEndpointDetails   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkAwsGroundStationAgentEndpointDetails"}
+	iUplinkConnectionDetails                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkConnectionDetails"}
+	iUplinkDataflowDetails                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkDataflowDetails"}
+	iUplinkEchoConfig                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkEchoConfig"}
+	iUplinkSpectrumConfig                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UplinkSpectrumConfig"}
+	i_Uuid                                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Uuid"}
+	iVersionFailureReasonCode                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionFailureReasonCode"}
+	i_VersionFailureReasonCodes                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionFailureReasonCodes"}
+	i_VersionId                                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionId"}
+	iVersionStatus                                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionStatus"}
+	i_VersionString                               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionString"}
+	i_VersionStringList                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "VersionStringList"}
+	i_Year                                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "Year"}
+	iCancelContactRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CancelContactRequest"}
+	iContactIdResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ContactIdResponse"}
+	iCreateConfigRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateConfigRequest"}
+	iConfigIdResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ConfigIdResponse"}
+	iCreateDataflowEndpointGroupRequest           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateDataflowEndpointGroupRequest"}
+	iDataflowEndpointGroupIdResponse              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DataflowEndpointGroupIdResponse"}
+	iCreateDataflowEndpointGroupV2Request         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateDataflowEndpointGroupV2Request"}
+	iCreateDataflowEndpointGroupV2Response        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateDataflowEndpointGroupV2Response"}
+	iCreateEphemerisRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateEphemerisRequest"}
+	iEphemerisIdResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "EphemerisIdResponse"}
+	iCreateMissionProfileRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "CreateMissionProfileRequest"}
+	iMissionProfileIdResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "MissionProfileIdResponse"}
+	iDeleteConfigRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteConfigRequest"}
+	iDeleteDataflowEndpointGroupRequest           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteDataflowEndpointGroupRequest"}
+	iDeleteEphemerisRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteEphemerisRequest"}
+	iDeleteMissionProfileRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DeleteMissionProfileRequest"}
+	iDescribeContactRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContactRequest"}
+	iDescribeContactResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContactResponse"}
+	iDescribeContactVersionRequest                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContactVersionRequest"}
+	iDescribeContactVersionResponse               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeContactVersionResponse"}
+	iDescribeEphemerisRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeEphemerisRequest"}
+	iDescribeEphemerisResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "DescribeEphemerisResponse"}
+	iGetAgentConfigurationRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentConfigurationRequest"}
+	iGetAgentConfigurationResponse                = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentConfigurationResponse"}
+	iGetAgentTaskResponseUrlRequest               = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentTaskResponseUrlRequest"}
+	iGetAgentTaskResponseUrlResponse              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetAgentTaskResponseUrlResponse"}
+	iGetConfigRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetConfigRequest"}
+	iGetConfigResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetConfigResponse"}
+	iGetDataflowEndpointGroupRequest              = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetDataflowEndpointGroupRequest"}
+	iGetDataflowEndpointGroupResponse             = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetDataflowEndpointGroupResponse"}
+	iGetMinuteUsageRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMinuteUsageRequest"}
+	iGetMinuteUsageResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMinuteUsageResponse"}
+	iGetMissionProfileRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMissionProfileRequest"}
+	iGetMissionProfileResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetMissionProfileResponse"}
+	iGetSatelliteRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetSatelliteRequest"}
+	iGetSatelliteResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "GetSatelliteResponse"}
+	iListAntennasRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListAntennasRequest"}
+	iListAntennasResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListAntennasResponse"}
+	iListConfigsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListConfigsRequest"}
+	iListConfigsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListConfigsResponse"}
+	iListContactsRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContactsRequest"}
+	iListContactsResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContactsResponse"}
+	iListContactVersionsRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContactVersionsRequest"}
+	iListContactVersionsResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListContactVersionsResponse"}
+	iListDataflowEndpointGroupsRequest            = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListDataflowEndpointGroupsRequest"}
+	iListDataflowEndpointGroupsResponse           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListDataflowEndpointGroupsResponse"}
+	iListEphemeridesRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListEphemeridesRequest"}
+	iListEphemeridesResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListEphemeridesResponse"}
+	iListGroundStationReservationsRequest         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStationReservationsRequest"}
+	iListGroundStationReservationsResponse        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStationReservationsResponse"}
+	iListGroundStationsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStationsRequest"}
+	iListGroundStationsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListGroundStationsResponse"}
+	iListMissionProfilesRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListMissionProfilesRequest"}
+	iListMissionProfilesResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListMissionProfilesResponse"}
+	iListSatellitesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListSatellitesRequest"}
+	iListSatellitesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListSatellitesResponse"}
+	iListTagsForResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ListTagsForResourceResponse"}
+	iRegisterAgentRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RegisterAgentRequest"}
+	iRegisterAgentResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "RegisterAgentResponse"}
+	iReserveContactRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "ReserveContactRequest"}
+	iTagResourceRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TagResourceRequest"}
+	iTagResourceResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "TagResourceResponse"}
+	iUntagResourceRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UntagResourceResponse"}
+	iUpdateAgentStatusRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateAgentStatusRequest"}
+	iUpdateAgentStatusResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateAgentStatusResponse"}
+	iUpdateConfigRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateConfigRequest"}
+	iUpdateContactRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateContactRequest"}
+	iUpdateContactResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateContactResponse"}
+	iUpdateEphemerisRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateEphemerisRequest"}
+	iUpdateMissionProfileRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.groundstation", Name: "UpdateMissionProfileRequest"}
+	pInteger                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pUnit                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pString                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                      = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pTimestamp                                    = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pLong                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pDouble                                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/contact/{contactId}",
-	Code: 200})
-
-var CreateConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/config",
-	Code: 200})
-
-var CreateDataflowEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateDataflowEndpointGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/dataflowEndpointGroup",
-	Code: 200})
-
-var CreateDataflowEndpointGroupV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateDataflowEndpointGroupV2",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/dataflowEndpointGroupV2",
-	Code: 200})
-
-var CreateEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateEphemeris",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ephemeris",
-	Code: 200})
-
-var CreateMissionProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateMissionProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/missionprofile",
-	Code: 200})
-
-var DeleteConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/config/{configType}/{configId}",
-	Code: 200})
-
-var DeleteDataflowEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteDataflowEndpointGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/dataflowEndpointGroup/{dataflowEndpointGroupId}",
-	Code: 200})
-
-var DeleteEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteEphemeris",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/ephemeris/{ephemerisId}",
-	Code: 200})
-
-var DeleteMissionProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteMissionProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/missionprofile/{missionProfileId}",
-	Code: 200})
-
-var DescribeContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/contact/{contactId}",
-	Code: 200})
-
-var DescribeContactVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContactVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/contact/{contactId}/versions/{versionId}",
-	Code: 200})
-
-var DescribeEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeEphemeris",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/ephemeris/{ephemerisId}",
-	Code: 200})
-
-var GetAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/agent/{agentId}/configuration",
-	Code: 200})
-
-var GetAgentTaskResponseUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentTaskResponseUrl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/agentResponseUrl/{agentId}/{taskId}",
-	Code: 200})
-
-var GetConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/config/{configType}/{configId}",
-	Code: 200})
-
-var GetDataflowEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetDataflowEndpointGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/dataflowEndpointGroup/{dataflowEndpointGroupId}",
-	Code: 200})
-
-var GetMinuteUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMinuteUsage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/minute-usage",
-	Code: 200})
-
-var GetMissionProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMissionProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/missionprofile/{missionProfileId}",
-	Code: 200})
-
-var GetSatellite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetSatellite",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/satellite/{satelliteId}",
-	Code: 200})
-
-var ListAntennas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListAntennas",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/groundstation/{groundStationId}/antenna",
-	Code: 200})
-
-var ListConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListConfigs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/config",
-	Code: 200})
-
-var ListContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContacts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/contacts",
-	Code: 200})
-
-var ListContactVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContactVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/contact/{contactId}/versions",
-	Code: 200})
-
-var ListDataflowEndpointGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListDataflowEndpointGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/dataflowEndpointGroup",
-	Code: 200})
-
-var ListEphemerides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListEphemerides",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ephemerides",
-	Code: 200})
-
-var ListGroundStationReservations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStationReservations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/groundstation/{groundStationId}/reservation",
-	Code: 200})
-
-var ListGroundStations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/groundstation",
-	Code: 200})
-
-var ListMissionProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListMissionProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/missionprofile",
-	Code: 200})
-
-var ListSatellites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListSatellites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/satellite",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RegisterAgent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/agent",
-	Code: 200})
-
-var ReserveContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ReserveContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/contact",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateAgentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateAgentStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/agent/{agentId}",
-	Code: 200})
-
-var UpdateConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/config/{configType}/{configId}",
-	Code: 200})
-
-var UpdateContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/contact/{contactId}/versions",
-	Code: 200})
-
-var UpdateEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateEphemeris",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/ephemeris/{ephemerisId}",
-	Code: 200})
-
-var UpdateMissionProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateMissionProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/missionprofile/{missionProfileId}",
-	Code: 200})
-
-var _GroundStation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStation",
-}, smithy.ShapeTypeService, 0)
-
-var GroundStation = smithy.NewServiceSchema(_GroundStation, "2019-05-23")
-
-var _AgentCpuCoresList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AgentCpuCoresList",
-}, smithy.ShapeTypeList, 1)
-var _AgentCpuCoresList_member *smithy.Schema
-
-var AgentDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AgentDetails",
-}, smithy.ShapeTypeStructure, 6)
-var AgentDetails_agentVersion *smithy.Schema
-
-var AgentDetails_instanceId *smithy.Schema
-
-var AgentDetails_instanceType *smithy.Schema
-
-var AgentDetails_reservedCpuCores *smithy.Schema
-
-var AgentDetails_agentCpuCores *smithy.Schema
-
-var AgentDetails_componentVersions *smithy.Schema
-
-var AgentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AgentStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AgentStatus_SUCCESS *smithy.Schema
-
-var AgentStatus_FAILED *smithy.Schema
-
-var AgentStatus_ACTIVE *smithy.Schema
-
-var AgentStatus_INACTIVE *smithy.Schema
-
-var AggregateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AggregateStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AggregateStatus_status *smithy.Schema
-
-var AggregateStatus_signatureMap *smithy.Schema
-
-var AngleUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AngleUnits",
-}, smithy.ShapeTypeEnum, 2)
-var AngleUnits_DEGREE_ANGLE *smithy.Schema
-
-var AngleUnits_RADIAN *smithy.Schema
-
-var AntennaDemodDecodeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaDemodDecodeDetails",
-}, smithy.ShapeTypeStructure, 1)
-var AntennaDemodDecodeDetails_outputNode *smithy.Schema
-
-var AntennaDownlinkConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaDownlinkConfig",
-}, smithy.ShapeTypeStructure, 1)
-var AntennaDownlinkConfig_spectrumConfig *smithy.Schema
-
-var AntennaDownlinkDemodDecodeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaDownlinkDemodDecodeConfig",
-}, smithy.ShapeTypeStructure, 3)
-var AntennaDownlinkDemodDecodeConfig_spectrumConfig *smithy.Schema
-
-var AntennaDownlinkDemodDecodeConfig_demodulationConfig *smithy.Schema
-
-var AntennaDownlinkDemodDecodeConfig_decodeConfig *smithy.Schema
-
-var _AntennaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaList",
-}, smithy.ShapeTypeList, 1)
-var _AntennaList_member *smithy.Schema
-
-var AntennaListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaListItem",
-}, smithy.ShapeTypeStructure, 3)
-var AntennaListItem_groundStationName *smithy.Schema
-
-var AntennaListItem_antennaName *smithy.Schema
-
-var AntennaListItem_region *smithy.Schema
-
-var _AntennaName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaName",
-}, smithy.ShapeTypeString, 0)
-
-var AntennaUplinkConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AntennaUplinkConfig",
-}, smithy.ShapeTypeStructure, 3)
-var AntennaUplinkConfig_transmitDisabled *smithy.Schema
-
-var AntennaUplinkConfig_spectrumConfig *smithy.Schema
-
-var AntennaUplinkConfig_targetEirp *smithy.Schema
-
-var _AnyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AnyArn",
-}, smithy.ShapeTypeString, 0)
-
-var AuditResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AuditResults",
-}, smithy.ShapeTypeEnum, 2)
-var AuditResults_HEALTHY *smithy.Schema
-
-var AuditResults_UNHEALTHY *smithy.Schema
-
-var AwsGroundStationAgentEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AwsGroundStationAgentEndpoint",
-}, smithy.ShapeTypeStructure, 5)
-var AwsGroundStationAgentEndpoint_name *smithy.Schema
-
-var AwsGroundStationAgentEndpoint_egressAddress *smithy.Schema
-
-var AwsGroundStationAgentEndpoint_ingressAddress *smithy.Schema
-
-var AwsGroundStationAgentEndpoint_agentStatus *smithy.Schema
-
-var AwsGroundStationAgentEndpoint_auditResults *smithy.Schema
-
-var _AWSRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AWSRegion",
-}, smithy.ShapeTypeString, 0)
-
-var AzElEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElEphemeris",
-}, smithy.ShapeTypeStructure, 2)
-var AzElEphemeris_groundStation *smithy.Schema
-
-var AzElEphemeris_data *smithy.Schema
-
-var AzElEphemerisFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElEphemerisFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AzElEphemerisFilter_id *smithy.Schema
-
-var AzElProgramTrackSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElProgramTrackSettings",
-}, smithy.ShapeTypeStructure, 1)
-var AzElProgramTrackSettings_ephemerisId *smithy.Schema
-
-var AzElSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElSegment",
-}, smithy.ShapeTypeStructure, 3)
-var AzElSegment_referenceEpoch *smithy.Schema
-
-var AzElSegment_validTimeRange *smithy.Schema
-
-var AzElSegment_azElList *smithy.Schema
-
-var _AzElSegmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElSegmentList",
-}, smithy.ShapeTypeList, 1)
-var _AzElSegmentList_member *smithy.Schema
-
-var AzElSegments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElSegments",
-}, smithy.ShapeTypeStructure, 2)
-var AzElSegments_angleUnit *smithy.Schema
-
-var AzElSegments_azElSegmentList *smithy.Schema
-
-var AzElSegmentsData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "AzElSegmentsData",
-}, smithy.ShapeTypeUnion, 2)
-var AzElSegmentsData_s3Object *smithy.Schema
-
-var AzElSegmentsData_azElData *smithy.Schema
-
-var BandwidthUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "BandwidthUnits",
-}, smithy.ShapeTypeEnum, 3)
-var BandwidthUnits_GHZ *smithy.Schema
-
-var BandwidthUnits_MHZ *smithy.Schema
-
-var BandwidthUnits_KHZ *smithy.Schema
-
-var _BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CapabilityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CapabilityArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CapabilityArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CapabilityArnList",
-}, smithy.ShapeTypeList, 1)
-var _CapabilityArnList_member *smithy.Schema
-
-var CapabilityHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CapabilityHealth",
-}, smithy.ShapeTypeEnum, 2)
-var CapabilityHealth_HEALTHY *smithy.Schema
-
-var CapabilityHealth_UNHEALTHY *smithy.Schema
-
-var CapabilityHealthReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CapabilityHealthReason",
-}, smithy.ShapeTypeEnum, 7)
-var CapabilityHealthReason_NO_REGISTERED_AGENT *smithy.Schema
-
-var CapabilityHealthReason_INVALID_IP_OWNERSHIP *smithy.Schema
-
-var CapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR *smithy.Schema
-
-var CapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP *smithy.Schema
-
-var CapabilityHealthReason_INITIALIZING_DATAPLANE *smithy.Schema
-
-var CapabilityHealthReason_DATAPLANE_FAILURE *smithy.Schema
-
-var CapabilityHealthReason_HEALTHY *smithy.Schema
-
-var _CapabilityHealthReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CapabilityHealthReasonList",
-}, smithy.ShapeTypeList, 1)
-var _CapabilityHealthReasonList_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentStatusData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ComponentStatusData",
-}, smithy.ShapeTypeStructure, 7)
-var ComponentStatusData_componentType *smithy.Schema
-
-var ComponentStatusData_capabilityArn *smithy.Schema
-
-var ComponentStatusData_status *smithy.Schema
-
-var ComponentStatusData_bytesSent *smithy.Schema
-
-var ComponentStatusData_bytesReceived *smithy.Schema
-
-var ComponentStatusData_packetsDropped *smithy.Schema
-
-var ComponentStatusData_dataflowId *smithy.Schema
-
-var _ComponentStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ComponentStatusList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentStatusList_member *smithy.Schema
-
-var _ComponentTypeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ComponentTypeString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ComponentVersion",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentVersion_componentType *smithy.Schema
-
-var ComponentVersion_versions *smithy.Schema
-
-var _ComponentVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ComponentVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentVersionList_member *smithy.Schema
-
-var _ConfigArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigArn",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigCapabilityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigCapabilityType",
-}, smithy.ShapeTypeEnum, 8)
-var ConfigCapabilityType_ANTENNA_DOWNLINK *smithy.Schema
-
-var ConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE *smithy.Schema
-
-var ConfigCapabilityType_TRACKING *smithy.Schema
-
-var ConfigCapabilityType_DATAFLOW_ENDPOINT *smithy.Schema
-
-var ConfigCapabilityType_ANTENNA_UPLINK *smithy.Schema
-
-var ConfigCapabilityType_UPLINK_ECHO *smithy.Schema
-
-var ConfigCapabilityType_S3_RECORDING *smithy.Schema
-
-var ConfigCapabilityType_TELEMETRY_SINK *smithy.Schema
-
-var ConfigDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigDetails",
-}, smithy.ShapeTypeUnion, 3)
-var ConfigDetails_endpointDetails *smithy.Schema
-
-var ConfigDetails_antennaDemodDecodeDetails *smithy.Schema
-
-var ConfigDetails_s3RecordingDetails *smithy.Schema
-
-var _ConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigList_member *smithy.Schema
-
-var ConfigListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigListItem",
-}, smithy.ShapeTypeStructure, 4)
-var ConfigListItem_configId *smithy.Schema
-
-var ConfigListItem_configType *smithy.Schema
-
-var ConfigListItem_configArn *smithy.Schema
-
-var ConfigListItem_name *smithy.Schema
-
-var ConfigTypeData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigTypeData",
-}, smithy.ShapeTypeUnion, 8)
-var ConfigTypeData_antennaDownlinkConfig *smithy.Schema
-
-var ConfigTypeData_trackingConfig *smithy.Schema
-
-var ConfigTypeData_dataflowEndpointConfig *smithy.Schema
-
-var ConfigTypeData_antennaDownlinkDemodDecodeConfig *smithy.Schema
-
-var ConfigTypeData_antennaUplinkConfig *smithy.Schema
-
-var ConfigTypeData_uplinkEchoConfig *smithy.Schema
-
-var ConfigTypeData_s3RecordingConfig *smithy.Schema
-
-var ConfigTypeData_telemetrySinkConfig *smithy.Schema
-
-var ConnectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConnectionDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectionDetails_socketAddress *smithy.Schema
-
-var ConnectionDetails_mtu *smithy.Schema
-
-var ContactData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactData",
-}, smithy.ShapeTypeStructure, 17)
-var ContactData_contactId *smithy.Schema
-
-var ContactData_missionProfileArn *smithy.Schema
-
-var ContactData_satelliteArn *smithy.Schema
-
-var ContactData_startTime *smithy.Schema
-
-var ContactData_endTime *smithy.Schema
-
-var ContactData_prePassStartTime *smithy.Schema
-
-var ContactData_postPassEndTime *smithy.Schema
-
-var ContactData_groundStation *smithy.Schema
-
-var ContactData_contactStatus *smithy.Schema
-
-var ContactData_errorMessage *smithy.Schema
-
-var ContactData_maximumElevation *smithy.Schema
-
-var ContactData_region *smithy.Schema
-
-var ContactData_tags *smithy.Schema
-
-var ContactData_visibilityStartTime *smithy.Schema
-
-var ContactData_visibilityEndTime *smithy.Schema
-
-var ContactData_ephemeris *smithy.Schema
-
-var ContactData_version *smithy.Schema
-
-var _ContactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactList",
-}, smithy.ShapeTypeList, 1)
-var _ContactList_member *smithy.Schema
-
-var ContactReservationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactReservationDetails",
-}, smithy.ShapeTypeStructure, 1)
-var ContactReservationDetails_contactId *smithy.Schema
-
-var ContactStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactStatus",
-}, smithy.ShapeTypeEnum, 13)
-var ContactStatus_SCHEDULING *smithy.Schema
-
-var ContactStatus_FAILED_TO_SCHEDULE *smithy.Schema
-
-var ContactStatus_SCHEDULED *smithy.Schema
-
-var ContactStatus_CANCELLED *smithy.Schema
-
-var ContactStatus_AWS_CANCELLED *smithy.Schema
-
-var ContactStatus_PREPASS *smithy.Schema
-
-var ContactStatus_PASS *smithy.Schema
-
-var ContactStatus_POSTPASS *smithy.Schema
-
-var ContactStatus_COMPLETED *smithy.Schema
-
-var ContactStatus_FAILED *smithy.Schema
-
-var ContactStatus_AVAILABLE *smithy.Schema
-
-var ContactStatus_CANCELLING *smithy.Schema
-
-var ContactStatus_AWS_FAILED *smithy.Schema
-
-var ContactVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactVersion",
-}, smithy.ShapeTypeStructure, 8)
-var ContactVersion_versionId *smithy.Schema
-
-var ContactVersion_created *smithy.Schema
-
-var ContactVersion_activated *smithy.Schema
-
-var ContactVersion_superseded *smithy.Schema
-
-var ContactVersion_lastUpdated *smithy.Schema
-
-var ContactVersion_status *smithy.Schema
-
-var ContactVersion_failureCodes *smithy.Schema
-
-var ContactVersion_failureMessage *smithy.Schema
-
-var _ContactVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _ContactVersionsList_member *smithy.Schema
-
-var CreateEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateEndpointDetails",
-}, smithy.ShapeTypeUnion, 2)
-var CreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint *smithy.Schema
-
-var CreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint *smithy.Schema
-
-var _CreateEndpointDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateEndpointDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _CreateEndpointDetailsList_member *smithy.Schema
-
-var Criticality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Criticality",
-}, smithy.ShapeTypeEnum, 3)
-var Criticality_REQUIRED *smithy.Schema
-
-var Criticality_PREFERRED *smithy.Schema
-
-var Criticality_REMOVED *smithy.Schema
-
-var _CustomerEphemerisPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CustomerEphemerisPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var DataflowDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowDetail",
-}, smithy.ShapeTypeStructure, 3)
-var DataflowDetail_source *smithy.Schema
-
-var DataflowDetail_destination *smithy.Schema
-
-var DataflowDetail_errorMessage *smithy.Schema
-
-var _DataflowEdge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEdge",
-}, smithy.ShapeTypeList, 1)
-var _DataflowEdge_member *smithy.Schema
-
-var _DataflowEdgeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEdgeList",
-}, smithy.ShapeTypeList, 1)
-var _DataflowEdgeList_member *smithy.Schema
-
-var DataflowEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpoint",
-}, smithy.ShapeTypeStructure, 4)
-var DataflowEndpoint_name *smithy.Schema
-
-var DataflowEndpoint_address *smithy.Schema
-
-var DataflowEndpoint_status *smithy.Schema
-
-var DataflowEndpoint_mtu *smithy.Schema
-
-var DataflowEndpointConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointConfig",
-}, smithy.ShapeTypeStructure, 2)
-var DataflowEndpointConfig_dataflowEndpointName *smithy.Schema
-
-var DataflowEndpointConfig_dataflowEndpointRegion *smithy.Schema
-
-var _DataflowEndpointGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DataflowEndpointGroupDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointGroupDurationInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DataflowEndpointGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointGroupList",
-}, smithy.ShapeTypeList, 1)
-var _DataflowEndpointGroupList_member *smithy.Schema
-
-var DataflowEndpointListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointListItem",
-}, smithy.ShapeTypeStructure, 2)
-var DataflowEndpointListItem_dataflowEndpointGroupId *smithy.Schema
-
-var DataflowEndpointListItem_dataflowEndpointGroupArn *smithy.Schema
-
-var _DataflowList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowList",
-}, smithy.ShapeTypeList, 1)
-var _DataflowList_member *smithy.Schema
-
-var DecodeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DecodeConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DecodeConfig_unvalidatedJSON *smithy.Schema
-
-var DemodulationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DemodulationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DemodulationConfig_unvalidatedJSON *smithy.Schema
-
-var DependencyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DependencyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 531})
-var DependencyException_message *smithy.Schema
-
-var DependencyException_parameterName *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 4)
-var Destination_configType *smithy.Schema
-
-var Destination_configId *smithy.Schema
-
-var Destination_configDetails *smithy.Schema
-
-var Destination_dataflowDestinationRegion *smithy.Schema
-
-var DiscoveryData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DiscoveryData",
-}, smithy.ShapeTypeStructure, 3)
-var DiscoveryData_publicIpAddresses *smithy.Schema
-
-var DiscoveryData_privateIpAddresses *smithy.Schema
-
-var DiscoveryData_capabilityArns *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DownlinkAwsGroundStationAgentEndpoint",
-}, smithy.ShapeTypeStructure, 2)
-var DownlinkAwsGroundStationAgentEndpoint_name *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpoint_dataflowDetails *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DownlinkAwsGroundStationAgentEndpointDetails",
-}, smithy.ShapeTypeStructure, 4)
-var DownlinkAwsGroundStationAgentEndpointDetails_name *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpointDetails_agentStatus *smithy.Schema
-
-var DownlinkAwsGroundStationAgentEndpointDetails_auditResults *smithy.Schema
-
-var DownlinkConnectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DownlinkConnectionDetails",
-}, smithy.ShapeTypeStructure, 2)
-var DownlinkConnectionDetails_agentIpAndPortAddress *smithy.Schema
-
-var DownlinkConnectionDetails_egressAddressAndPort *smithy.Schema
-
-var DownlinkDataflowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DownlinkDataflowDetails",
-}, smithy.ShapeTypeUnion, 1)
-var DownlinkDataflowDetails_agentConnectionDetails *smithy.Schema
-
-var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DurationInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var Eirp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Eirp",
-}, smithy.ShapeTypeStructure, 2)
-var Eirp_value *smithy.Schema
-
-var Eirp_units *smithy.Schema
-
-var EirpUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EirpUnits",
-}, smithy.ShapeTypeEnum, 1)
-var EirpUnits_DBW *smithy.Schema
-
-var Elevation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Elevation",
-}, smithy.ShapeTypeStructure, 2)
-var Elevation_value *smithy.Schema
-
-var Elevation_unit *smithy.Schema
-
-var EndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EndpointDetails",
-}, smithy.ShapeTypeStructure, 7)
-var EndpointDetails_securityDetails *smithy.Schema
-
-var EndpointDetails_endpoint *smithy.Schema
-
-var EndpointDetails_awsGroundStationAgentEndpoint *smithy.Schema
-
-var EndpointDetails_uplinkAwsGroundStationAgentEndpoint *smithy.Schema
-
-var EndpointDetails_downlinkAwsGroundStationAgentEndpoint *smithy.Schema
-
-var EndpointDetails_healthStatus *smithy.Schema
-
-var EndpointDetails_healthReasons *smithy.Schema
-
-var _EndpointDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EndpointDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _EndpointDetailsList_member *smithy.Schema
-
-var EndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EndpointStatus",
-}, smithy.ShapeTypeEnum, 5)
-var EndpointStatus_created *smithy.Schema
-
-var EndpointStatus_creating *smithy.Schema
-
-var EndpointStatus_deleted *smithy.Schema
-
-var EndpointStatus_deleting *smithy.Schema
-
-var EndpointStatus_failed *smithy.Schema
-
-var _EphemeridesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemeridesList",
-}, smithy.ShapeTypeList, 1)
-var _EphemeridesList_member *smithy.Schema
-
-var EphemerisData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisData",
-}, smithy.ShapeTypeUnion, 3)
-var EphemerisData_tle *smithy.Schema
-
-var EphemerisData_oem *smithy.Schema
-
-var EphemerisData_azEl *smithy.Schema
-
-var EphemerisDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisDescription",
-}, smithy.ShapeTypeStructure, 2)
-var EphemerisDescription_sourceS3Object *smithy.Schema
-
-var EphemerisDescription_ephemerisData *smithy.Schema
-
-var EphemerisErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisErrorCode",
-}, smithy.ShapeTypeEnum, 38)
-var EphemerisErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var EphemerisErrorCode_MISMATCHED_SATCAT_ID *smithy.Schema
-
-var EphemerisErrorCode_OEM_VERSION_UNSUPPORTED *smithy.Schema
-
-var EphemerisErrorCode_ORIGINATOR_MISSING *smithy.Schema
-
-var EphemerisErrorCode_CREATION_DATE_MISSING *smithy.Schema
-
-var EphemerisErrorCode_OBJECT_NAME_MISSING *smithy.Schema
-
-var EphemerisErrorCode_OBJECT_ID_MISSING *smithy.Schema
-
-var EphemerisErrorCode_REF_FRAME_UNSUPPORTED *smithy.Schema
-
-var EphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED *smithy.Schema
-
-var EphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED *smithy.Schema
-
-var EphemerisErrorCode_CENTER_BODY_UNSUPPORTED *smithy.Schema
-
-var EphemerisErrorCode_INTERPOLATION_MISSING *smithy.Schema
-
-var EphemerisErrorCode_INTERPOLATION_DEGREE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING *smithy.Schema
-
-var EphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL *smithy.Schema
-
-var EphemerisErrorCode_START_TIME_IN_FUTURE *smithy.Schema
-
-var EphemerisErrorCode_END_TIME_IN_PAST *smithy.Schema
-
-var EphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY *smithy.Schema
-
-var EphemerisErrorCode_START_TIME_METADATA_TOO_EARLY *smithy.Schema
-
-var EphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER *smithy.Schema
-
-var EphemerisErrorCode_MEAN_MOTION_INVALID *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID *smithy.Schema
-
-var EphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS *smithy.Schema
-
-var EphemerisErrorCode_FILE_FORMAT_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE *smithy.Schema
-
-var EphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED *smithy.Schema
-
-var EphemerisErrorReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisErrorReason",
-}, smithy.ShapeTypeStructure, 2)
-var EphemerisErrorReason_errorCode *smithy.Schema
-
-var EphemerisErrorReason_errorMessage *smithy.Schema
-
-var _EphemerisErrorReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisErrorReasonList",
-}, smithy.ShapeTypeList, 1)
-var _EphemerisErrorReasonList_member *smithy.Schema
-
-var EphemerisFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisFilter",
-}, smithy.ShapeTypeUnion, 1)
-var EphemerisFilter_azEl *smithy.Schema
-
-var EphemerisInvalidReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisInvalidReason",
-}, smithy.ShapeTypeEnum, 5)
-var EphemerisInvalidReason_METADATA_INVALID *smithy.Schema
-
-var EphemerisInvalidReason_TIME_RANGE_INVALID *smithy.Schema
-
-var EphemerisInvalidReason_TRAJECTORY_INVALID *smithy.Schema
-
-var EphemerisInvalidReason_KMS_KEY_INVALID *smithy.Schema
-
-var EphemerisInvalidReason_VALIDATION_ERROR *smithy.Schema
-
-var EphemerisItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisItem",
-}, smithy.ShapeTypeStructure, 8)
-var EphemerisItem_ephemerisId *smithy.Schema
-
-var EphemerisItem_ephemerisType *smithy.Schema
-
-var EphemerisItem_status *smithy.Schema
-
-var EphemerisItem_priority *smithy.Schema
-
-var EphemerisItem_enabled *smithy.Schema
-
-var EphemerisItem_creationTime *smithy.Schema
-
-var EphemerisItem_name *smithy.Schema
-
-var EphemerisItem_sourceS3Object *smithy.Schema
-
-var EphemerisMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisMetaData",
-}, smithy.ShapeTypeStructure, 4)
-var EphemerisMetaData_source *smithy.Schema
-
-var EphemerisMetaData_ephemerisId *smithy.Schema
-
-var EphemerisMetaData_epoch *smithy.Schema
-
-var EphemerisMetaData_name *smithy.Schema
-
-var _EphemerisPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var EphemerisResponseData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisResponseData",
-}, smithy.ShapeTypeStructure, 2)
-var EphemerisResponseData_ephemerisId *smithy.Schema
-
-var EphemerisResponseData_ephemerisType *smithy.Schema
-
-var EphemerisSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisSource",
-}, smithy.ShapeTypeEnum, 2)
-var EphemerisSource_CUSTOMER_PROVIDED *smithy.Schema
-
-var EphemerisSource_SPACE_TRACK *smithy.Schema
-
-var EphemerisStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisStatus",
-}, smithy.ShapeTypeEnum, 6)
-var EphemerisStatus_VALIDATING *smithy.Schema
-
-var EphemerisStatus_INVALID *smithy.Schema
-
-var EphemerisStatus_ERROR *smithy.Schema
-
-var EphemerisStatus_ENABLED *smithy.Schema
-
-var EphemerisStatus_DISABLED *smithy.Schema
-
-var EphemerisStatus_EXPIRED *smithy.Schema
-
-var _EphemerisStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisStatusList",
-}, smithy.ShapeTypeList, 1)
-var _EphemerisStatusList_member *smithy.Schema
-
-var EphemerisType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisType",
-}, smithy.ShapeTypeEnum, 4)
-var EphemerisType_TLE *smithy.Schema
-
-var EphemerisType_OEM *smithy.Schema
-
-var EphemerisType_AZ_EL *smithy.Schema
-
-var EphemerisType_SERVICE_MANAGED *smithy.Schema
-
-var EphemerisTypeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisTypeDescription",
-}, smithy.ShapeTypeUnion, 3)
-var EphemerisTypeDescription_tle *smithy.Schema
-
-var EphemerisTypeDescription_oem *smithy.Schema
-
-var EphemerisTypeDescription_azEl *smithy.Schema
-
-var _ErrorString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ErrorString",
-}, smithy.ShapeTypeString, 0)
-
-var Frequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Frequency",
-}, smithy.ShapeTypeStructure, 2)
-var Frequency_value *smithy.Schema
-
-var Frequency_units *smithy.Schema
-
-var FrequencyBandwidth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "FrequencyBandwidth",
-}, smithy.ShapeTypeStructure, 2)
-var FrequencyBandwidth_value *smithy.Schema
-
-var FrequencyBandwidth_units *smithy.Schema
-
-var FrequencyUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "FrequencyUnits",
-}, smithy.ShapeTypeEnum, 3)
-var FrequencyUnits_GHZ *smithy.Schema
-
-var FrequencyUnits_MHZ *smithy.Schema
-
-var FrequencyUnits_KHZ *smithy.Schema
-
-var GroundStationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationData",
-}, smithy.ShapeTypeStructure, 3)
-var GroundStationData_groundStationId *smithy.Schema
-
-var GroundStationData_groundStationName *smithy.Schema
-
-var GroundStationData_region *smithy.Schema
-
-var _GroundStationIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationIdList",
-}, smithy.ShapeTypeList, 1)
-var _GroundStationIdList_member *smithy.Schema
-
-var _GroundStationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationList",
-}, smithy.ShapeTypeList, 1)
-var _GroundStationList_member *smithy.Schema
-
-var _GroundStationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationName",
-}, smithy.ShapeTypeString, 0)
-
-var _GroundStationReservationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationReservationList",
-}, smithy.ShapeTypeList, 1)
-var _GroundStationReservationList_member *smithy.Schema
-
-var GroundStationReservationListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GroundStationReservationListItem",
-}, smithy.ShapeTypeStructure, 6)
-var GroundStationReservationListItem_reservationType *smithy.Schema
-
-var GroundStationReservationListItem_groundStationId *smithy.Schema
-
-var GroundStationReservationListItem_antennaName *smithy.Schema
-
-var GroundStationReservationListItem_startTime *smithy.Schema
-
-var GroundStationReservationListItem_endTime *smithy.Schema
-
-var GroundStationReservationListItem_reservationDetails *smithy.Schema
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var IntegerRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "IntegerRange",
-}, smithy.ShapeTypeStructure, 2)
-var IntegerRange_minimum *smithy.Schema
-
-var IntegerRange_maximum *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 431})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidParameterException_parameterName *smithy.Schema
-
-var _IpAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "IpAddressList",
-}, smithy.ShapeTypeList, 1)
-var _IpAddressList_member *smithy.Schema
-
-var _IpV4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "IpV4Address",
-}, smithy.ShapeTypeString, 0)
-
-var ISO8601TimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ISO8601TimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var ISO8601TimeRange_startTime *smithy.Schema
-
-var ISO8601TimeRange_endTime *smithy.Schema
-
-var _JsonString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "JsonString",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyAliasArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KeyAliasArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyAliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KeyAliasName",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KinesisDataStreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KinesisDataStreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var KinesisDataStreamData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KinesisDataStreamData",
-}, smithy.ShapeTypeStructure, 2)
-var KinesisDataStreamData_kinesisRoleArn *smithy.Schema
-
-var KinesisDataStreamData_kinesisDataStreamArn *smithy.Schema
-
-var KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeUnion, 3)
-var KmsKey_kmsKeyArn *smithy.Schema
-
-var KmsKey_kmsAliasArn *smithy.Schema
-
-var KmsKey_kmsAliasName *smithy.Schema
-
-var MaintenanceReservationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MaintenanceReservationDetails",
-}, smithy.ShapeTypeStructure, 1)
-var MaintenanceReservationDetails_maintenanceType *smithy.Schema
-
-var MaintenanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MaintenanceType",
-}, smithy.ShapeTypeEnum, 2)
-var MaintenanceType_PLANNED *smithy.Schema
-
-var MaintenanceType_UNPLANNED *smithy.Schema
-
-var _MissionProfileArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MissionProfileArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MissionProfileList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MissionProfileList",
-}, smithy.ShapeTypeList, 1)
-var _MissionProfileList_member *smithy.Schema
-
-var MissionProfileListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MissionProfileListItem",
-}, smithy.ShapeTypeStructure, 4)
-var MissionProfileListItem_missionProfileId *smithy.Schema
-
-var MissionProfileListItem_missionProfileArn *smithy.Schema
-
-var MissionProfileListItem_region *smithy.Schema
-
-var MissionProfileListItem_name *smithy.Schema
-
-var _Month = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Month",
-}, smithy.ShapeTypeInteger, 0)
-
-var _noradSatelliteID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "noradSatelliteID",
-}, smithy.ShapeTypeInteger, 0)
-
-var OEMEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "OEMEphemeris",
-}, smithy.ShapeTypeStructure, 2)
-var OEMEphemeris_s3Object *smithy.Schema
-
-var OEMEphemeris_oemData *smithy.Schema
-
-var OemProgramTrackSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "OemProgramTrackSettings",
-}, smithy.ShapeTypeStructure, 1)
-var OemProgramTrackSettings_ephemerisId *smithy.Schema
-
-var _PaginationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "PaginationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var Polarization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Polarization",
-}, smithy.ShapeTypeEnum, 3)
-var Polarization_RIGHT_HAND *smithy.Schema
-
-var Polarization_LEFT_HAND *smithy.Schema
-
-var Polarization_NONE *smithy.Schema
-
-var _PositiveDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "PositiveDurationInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProgramTrackSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ProgramTrackSettings",
-}, smithy.ShapeTypeUnion, 3)
-var ProgramTrackSettings_azEl *smithy.Schema
-
-var ProgramTrackSettings_oem *smithy.Schema
-
-var ProgramTrackSettings_tle *smithy.Schema
-
-var RangedConnectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RangedConnectionDetails",
-}, smithy.ShapeTypeStructure, 2)
-var RangedConnectionDetails_socketAddress *smithy.Schema
-
-var RangedConnectionDetails_mtu *smithy.Schema
-
-var RangedSocketAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RangedSocketAddress",
-}, smithy.ShapeTypeStructure, 2)
-var RangedSocketAddress_name *smithy.Schema
-
-var RangedSocketAddress_portRange *smithy.Schema
-
-var ReservationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ReservationDetails",
-}, smithy.ShapeTypeUnion, 2)
-var ReservationDetails_maintenance *smithy.Schema
-
-var ReservationDetails_contact *smithy.Schema
-
-var ReservationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ReservationType",
-}, smithy.ShapeTypeEnum, 2)
-var ReservationType_MAINTENANCE *smithy.Schema
-
-var ReservationType_CONTACT *smithy.Schema
-
-var _ReservationTypeFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ReservationTypeFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ReservationTypeFilterList_member *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ResourceLimitExceededException_message *smithy.Schema
-
-var ResourceLimitExceededException_parameterName *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 434})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3KeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var S3Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3Object",
-}, smithy.ShapeTypeStructure, 3)
-var S3Object_bucket *smithy.Schema
-
-var S3Object_key *smithy.Schema
-
-var S3Object_version *smithy.Schema
-
-var _S3ObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3ObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var S3RecordingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3RecordingConfig",
-}, smithy.ShapeTypeStructure, 3)
-var S3RecordingConfig_bucketArn *smithy.Schema
-
-var S3RecordingConfig_roleArn *smithy.Schema
-
-var S3RecordingConfig_prefix *smithy.Schema
-
-var S3RecordingDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3RecordingDetails",
-}, smithy.ShapeTypeStructure, 2)
-var S3RecordingDetails_bucketArn *smithy.Schema
-
-var S3RecordingDetails_keyTemplate *smithy.Schema
-
-var _S3VersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "S3VersionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SafeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SafeName",
-}, smithy.ShapeTypeString, 0)
-
-var _satelliteArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "satelliteArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SatelliteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SatelliteList",
-}, smithy.ShapeTypeList, 1)
-var _SatelliteList_member *smithy.Schema
-
-var SatelliteListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SatelliteListItem",
-}, smithy.ShapeTypeStructure, 5)
-var SatelliteListItem_satelliteId *smithy.Schema
-
-var SatelliteListItem_satelliteArn *smithy.Schema
-
-var SatelliteListItem_noradSatelliteID *smithy.Schema
-
-var SatelliteListItem_groundStations *smithy.Schema
-
-var SatelliteListItem_currentEphemeris *smithy.Schema
-
-var SecurityDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SecurityDetails",
-}, smithy.ShapeTypeStructure, 3)
-var SecurityDetails_subnetIds *smithy.Schema
-
-var SecurityDetails_securityGroupIds *smithy.Schema
-
-var SecurityDetails_roleArn *smithy.Schema
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_parameterName *smithy.Schema
-
-var _SignatureMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SignatureMap",
-}, smithy.ShapeTypeMap, 2)
-var _SignatureMap_key *smithy.Schema
-
-var _SignatureMap_value *smithy.Schema
-
-var SocketAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SocketAddress",
-}, smithy.ShapeTypeStructure, 2)
-var SocketAddress_name *smithy.Schema
-
-var SocketAddress_port *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Source",
-}, smithy.ShapeTypeStructure, 4)
-var Source_configType *smithy.Schema
-
-var Source_configId *smithy.Schema
-
-var Source_configDetails *smithy.Schema
-
-var Source_dataflowSourceRegion *smithy.Schema
-
-var SpectrumConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SpectrumConfig",
-}, smithy.ShapeTypeStructure, 3)
-var SpectrumConfig_centerFrequency *smithy.Schema
-
-var SpectrumConfig_bandwidth *smithy.Schema
-
-var SpectrumConfig_polarization *smithy.Schema
-
-var _StatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "StatusList",
-}, smithy.ShapeTypeList, 1)
-var _StatusList_member *smithy.Schema
-
-var _SubnetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "SubnetList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetList_member *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var TelemetrySinkConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TelemetrySinkConfig",
-}, smithy.ShapeTypeStructure, 2)
-var TelemetrySinkConfig_telemetrySinkType *smithy.Schema
-
-var TelemetrySinkConfig_telemetrySinkData *smithy.Schema
-
-var TelemetrySinkData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TelemetrySinkData",
-}, smithy.ShapeTypeUnion, 1)
-var TelemetrySinkData_kinesisDataStreamData *smithy.Schema
-
-var TelemetrySinkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TelemetrySinkType",
-}, smithy.ShapeTypeEnum, 1)
-var TelemetrySinkType_KINESIS_DATA_STREAM *smithy.Schema
-
-var TimeAzEl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TimeAzEl",
-}, smithy.ShapeTypeStructure, 3)
-var TimeAzEl_dt *smithy.Schema
-
-var TimeAzEl_az *smithy.Schema
-
-var TimeAzEl_el *smithy.Schema
-
-var _TimeAzElList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TimeAzElList",
-}, smithy.ShapeTypeList, 1)
-var _TimeAzElList_member *smithy.Schema
-
-var TimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimeRange_startTime *smithy.Schema
-
-var TimeRange_endTime *smithy.Schema
-
-var TLEData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TLEData",
-}, smithy.ShapeTypeStructure, 3)
-var TLEData_tleLine1 *smithy.Schema
-
-var TLEData_tleLine2 *smithy.Schema
-
-var TLEData_validTimeRange *smithy.Schema
-
-var _TLEDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TLEDataList",
-}, smithy.ShapeTypeList, 1)
-var _TLEDataList_member *smithy.Schema
-
-var TLEEphemeris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TLEEphemeris",
-}, smithy.ShapeTypeStructure, 2)
-var TLEEphemeris_s3Object *smithy.Schema
-
-var TLEEphemeris_tleData *smithy.Schema
-
-var _TleLineOne = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TleLineOne",
-}, smithy.ShapeTypeString, 0)
-
-var _TleLineTwo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TleLineTwo",
-}, smithy.ShapeTypeString, 0)
-
-var TleProgramTrackSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TleProgramTrackSettings",
-}, smithy.ShapeTypeStructure, 1)
-var TleProgramTrackSettings_ephemerisId *smithy.Schema
-
-var TrackingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TrackingConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TrackingConfig_autotrack *smithy.Schema
-
-var TrackingOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TrackingOverrides",
-}, smithy.ShapeTypeStructure, 1)
-var TrackingOverrides_programTrackSettings *smithy.Schema
-
-var _UnboundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UnboundedString",
-}, smithy.ShapeTypeString, 0)
-
-var UplinkAwsGroundStationAgentEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkAwsGroundStationAgentEndpoint",
-}, smithy.ShapeTypeStructure, 2)
-var UplinkAwsGroundStationAgentEndpoint_name *smithy.Schema
-
-var UplinkAwsGroundStationAgentEndpoint_dataflowDetails *smithy.Schema
-
-var UplinkAwsGroundStationAgentEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkAwsGroundStationAgentEndpointDetails",
-}, smithy.ShapeTypeStructure, 4)
-var UplinkAwsGroundStationAgentEndpointDetails_name *smithy.Schema
-
-var UplinkAwsGroundStationAgentEndpointDetails_dataflowDetails *smithy.Schema
-
-var UplinkAwsGroundStationAgentEndpointDetails_agentStatus *smithy.Schema
-
-var UplinkAwsGroundStationAgentEndpointDetails_auditResults *smithy.Schema
-
-var UplinkConnectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkConnectionDetails",
-}, smithy.ShapeTypeStructure, 2)
-var UplinkConnectionDetails_ingressAddressAndPort *smithy.Schema
-
-var UplinkConnectionDetails_agentIpAndPortAddress *smithy.Schema
-
-var UplinkDataflowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkDataflowDetails",
-}, smithy.ShapeTypeUnion, 1)
-var UplinkDataflowDetails_agentConnectionDetails *smithy.Schema
-
-var UplinkEchoConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkEchoConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UplinkEchoConfig_enabled *smithy.Schema
-
-var UplinkEchoConfig_antennaUplinkConfigArn *smithy.Schema
-
-var UplinkSpectrumConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UplinkSpectrumConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UplinkSpectrumConfig_centerFrequency *smithy.Schema
-
-var UplinkSpectrumConfig_polarization *smithy.Schema
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var VersionFailureReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionFailureReasonCode",
-}, smithy.ShapeTypeEnum, 12)
-var VersionFailureReasonCode_INTERNAL_ERROR *smithy.Schema
-
-var VersionFailureReasonCode_INVALID_SATELLITE_ARN *smithy.Schema
-
-var VersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST *smithy.Schema
-
-var VersionFailureReasonCode_EPHEMERIS_NOT_FOUND *smithy.Schema
-
-var VersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID *smithy.Schema
-
-var VersionFailureReasonCode_EPHEMERIS_NOT_ENABLED *smithy.Schema
-
-var VersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS *smithy.Schema
-
-var VersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS *smithy.Schema
-
-var VersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND *smithy.Schema
-
-var VersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION *smithy.Schema
-
-var VersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS *smithy.Schema
-
-var VersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID *smithy.Schema
-
-var _VersionFailureReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionFailureReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _VersionFailureReasonCodes_member *smithy.Schema
-
-var _VersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionId",
-}, smithy.ShapeTypeInteger, 0)
-
-var VersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionStatus",
-}, smithy.ShapeTypeEnum, 4)
-var VersionStatus_UPDATING *smithy.Schema
-
-var VersionStatus_ACTIVE *smithy.Schema
-
-var VersionStatus_SUPERSEDED *smithy.Schema
-
-var VersionStatus_FAILED_TO_UPDATE *smithy.Schema
-
-var _VersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionString",
-}, smithy.ShapeTypeString, 0)
-
-var _VersionStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "VersionStringList",
-}, smithy.ShapeTypeList, 1)
-var _VersionStringList_member *smithy.Schema
-
-var _Year = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "Year",
-}, smithy.ShapeTypeInteger, 0)
-
-var CancelContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CancelContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelContactRequest_contactId *smithy.Schema
-
-var ContactIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ContactIdResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ContactIdResponse_contactId *smithy.Schema
-
-var ContactIdResponse_versionId *smithy.Schema
-
-var CreateConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateConfigRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConfigRequest_name *smithy.Schema
-
-var CreateConfigRequest_configData *smithy.Schema
-
-var CreateConfigRequest_tags *smithy.Schema
-
-var ConfigIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ConfigIdResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ConfigIdResponse_configId *smithy.Schema
-
-var ConfigIdResponse_configType *smithy.Schema
-
-var ConfigIdResponse_configArn *smithy.Schema
-
-var CreateDataflowEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateDataflowEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDataflowEndpointGroupRequest_endpointDetails *smithy.Schema
-
-var CreateDataflowEndpointGroupRequest_tags *smithy.Schema
-
-var CreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds *smithy.Schema
-
-var CreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds *smithy.Schema
-
-var DataflowEndpointGroupIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DataflowEndpointGroupIdResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DataflowEndpointGroupIdResponse_dataflowEndpointGroupId *smithy.Schema
-
-var CreateDataflowEndpointGroupV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateDataflowEndpointGroupV2Request",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDataflowEndpointGroupV2Request_endpoints *smithy.Schema
-
-var CreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds *smithy.Schema
-
-var CreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds *smithy.Schema
-
-var CreateDataflowEndpointGroupV2Request_tags *smithy.Schema
-
-var CreateDataflowEndpointGroupV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateDataflowEndpointGroupV2Response",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId *smithy.Schema
-
-var CreateEphemerisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateEphemerisRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateEphemerisRequest_satelliteId *smithy.Schema
-
-var CreateEphemerisRequest_enabled *smithy.Schema
-
-var CreateEphemerisRequest_priority *smithy.Schema
-
-var CreateEphemerisRequest_expirationTime *smithy.Schema
-
-var CreateEphemerisRequest_name *smithy.Schema
-
-var CreateEphemerisRequest_kmsKeyArn *smithy.Schema
-
-var CreateEphemerisRequest_ephemeris *smithy.Schema
-
-var CreateEphemerisRequest_tags *smithy.Schema
-
-var EphemerisIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "EphemerisIdResponse",
-}, smithy.ShapeTypeStructure, 1)
-var EphemerisIdResponse_ephemerisId *smithy.Schema
-
-var CreateMissionProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "CreateMissionProfileRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateMissionProfileRequest_name *smithy.Schema
-
-var CreateMissionProfileRequest_contactPrePassDurationSeconds *smithy.Schema
-
-var CreateMissionProfileRequest_contactPostPassDurationSeconds *smithy.Schema
-
-var CreateMissionProfileRequest_minimumViableContactDurationSeconds *smithy.Schema
-
-var CreateMissionProfileRequest_dataflowEdges *smithy.Schema
-
-var CreateMissionProfileRequest_trackingConfigArn *smithy.Schema
-
-var CreateMissionProfileRequest_telemetrySinkConfigArn *smithy.Schema
-
-var CreateMissionProfileRequest_tags *smithy.Schema
-
-var CreateMissionProfileRequest_streamsKmsKey *smithy.Schema
-
-var CreateMissionProfileRequest_streamsKmsRole *smithy.Schema
-
-var MissionProfileIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "MissionProfileIdResponse",
-}, smithy.ShapeTypeStructure, 1)
-var MissionProfileIdResponse_missionProfileId *smithy.Schema
-
-var DeleteConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfigRequest_configId *smithy.Schema
-
-var DeleteConfigRequest_configType *smithy.Schema
-
-var DeleteDataflowEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteDataflowEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId *smithy.Schema
-
-var DeleteEphemerisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteEphemerisRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEphemerisRequest_ephemerisId *smithy.Schema
-
-var DeleteMissionProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DeleteMissionProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMissionProfileRequest_missionProfileId *smithy.Schema
-
-var DescribeContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeContactRequest_contactId *smithy.Schema
-
-var DescribeContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContactResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeContactResponse_contactId *smithy.Schema
-
-var DescribeContactResponse_missionProfileArn *smithy.Schema
-
-var DescribeContactResponse_satelliteArn *smithy.Schema
-
-var DescribeContactResponse_startTime *smithy.Schema
-
-var DescribeContactResponse_endTime *smithy.Schema
-
-var DescribeContactResponse_prePassStartTime *smithy.Schema
-
-var DescribeContactResponse_postPassEndTime *smithy.Schema
-
-var DescribeContactResponse_groundStation *smithy.Schema
-
-var DescribeContactResponse_contactStatus *smithy.Schema
-
-var DescribeContactResponse_errorMessage *smithy.Schema
-
-var DescribeContactResponse_maximumElevation *smithy.Schema
-
-var DescribeContactResponse_tags *smithy.Schema
-
-var DescribeContactResponse_region *smithy.Schema
-
-var DescribeContactResponse_dataflowList *smithy.Schema
-
-var DescribeContactResponse_visibilityStartTime *smithy.Schema
-
-var DescribeContactResponse_visibilityEndTime *smithy.Schema
-
-var DescribeContactResponse_trackingOverrides *smithy.Schema
-
-var DescribeContactResponse_ephemeris *smithy.Schema
-
-var DescribeContactResponse_version *smithy.Schema
-
-var DescribeContactVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContactVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeContactVersionRequest_contactId *smithy.Schema
-
-var DescribeContactVersionRequest_versionId *smithy.Schema
-
-var DescribeContactVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeContactVersionResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeContactVersionResponse_contactId *smithy.Schema
-
-var DescribeContactVersionResponse_missionProfileArn *smithy.Schema
-
-var DescribeContactVersionResponse_satelliteArn *smithy.Schema
-
-var DescribeContactVersionResponse_startTime *smithy.Schema
-
-var DescribeContactVersionResponse_endTime *smithy.Schema
-
-var DescribeContactVersionResponse_prePassStartTime *smithy.Schema
-
-var DescribeContactVersionResponse_postPassEndTime *smithy.Schema
-
-var DescribeContactVersionResponse_groundStation *smithy.Schema
-
-var DescribeContactVersionResponse_contactStatus *smithy.Schema
-
-var DescribeContactVersionResponse_errorMessage *smithy.Schema
-
-var DescribeContactVersionResponse_maximumElevation *smithy.Schema
-
-var DescribeContactVersionResponse_tags *smithy.Schema
-
-var DescribeContactVersionResponse_region *smithy.Schema
-
-var DescribeContactVersionResponse_dataflowList *smithy.Schema
-
-var DescribeContactVersionResponse_visibilityStartTime *smithy.Schema
-
-var DescribeContactVersionResponse_visibilityEndTime *smithy.Schema
-
-var DescribeContactVersionResponse_trackingOverrides *smithy.Schema
-
-var DescribeContactVersionResponse_ephemeris *smithy.Schema
-
-var DescribeContactVersionResponse_version *smithy.Schema
-
-var DescribeEphemerisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeEphemerisRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEphemerisRequest_ephemerisId *smithy.Schema
-
-var DescribeEphemerisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "DescribeEphemerisResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeEphemerisResponse_ephemerisId *smithy.Schema
-
-var DescribeEphemerisResponse_satelliteId *smithy.Schema
-
-var DescribeEphemerisResponse_status *smithy.Schema
-
-var DescribeEphemerisResponse_priority *smithy.Schema
-
-var DescribeEphemerisResponse_creationTime *smithy.Schema
-
-var DescribeEphemerisResponse_enabled *smithy.Schema
-
-var DescribeEphemerisResponse_name *smithy.Schema
-
-var DescribeEphemerisResponse_tags *smithy.Schema
-
-var DescribeEphemerisResponse_suppliedData *smithy.Schema
-
-var DescribeEphemerisResponse_invalidReason *smithy.Schema
-
-var DescribeEphemerisResponse_errorReasons *smithy.Schema
-
-var GetAgentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAgentConfigurationRequest_agentId *smithy.Schema
-
-var GetAgentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAgentConfigurationResponse_agentId *smithy.Schema
-
-var GetAgentConfigurationResponse_taskingDocument *smithy.Schema
-
-var GetAgentTaskResponseUrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentTaskResponseUrlRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAgentTaskResponseUrlRequest_agentId *smithy.Schema
-
-var GetAgentTaskResponseUrlRequest_taskId *smithy.Schema
-
-var GetAgentTaskResponseUrlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetAgentTaskResponseUrlResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetAgentTaskResponseUrlResponse_agentId *smithy.Schema
-
-var GetAgentTaskResponseUrlResponse_taskId *smithy.Schema
-
-var GetAgentTaskResponseUrlResponse_presignedLogUrl *smithy.Schema
-
-var GetConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetConfigRequest_configId *smithy.Schema
-
-var GetConfigRequest_configType *smithy.Schema
-
-var GetConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetConfigResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetConfigResponse_configId *smithy.Schema
-
-var GetConfigResponse_configArn *smithy.Schema
-
-var GetConfigResponse_name *smithy.Schema
-
-var GetConfigResponse_configType *smithy.Schema
-
-var GetConfigResponse_configData *smithy.Schema
-
-var GetConfigResponse_tags *smithy.Schema
-
-var GetDataflowEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetDataflowEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataflowEndpointGroupRequest_dataflowEndpointGroupId *smithy.Schema
-
-var GetDataflowEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetDataflowEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetDataflowEndpointGroupResponse_dataflowEndpointGroupId *smithy.Schema
-
-var GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn *smithy.Schema
-
-var GetDataflowEndpointGroupResponse_endpointsDetails *smithy.Schema
-
-var GetDataflowEndpointGroupResponse_tags *smithy.Schema
-
-var GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds *smithy.Schema
-
-var GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds *smithy.Schema
-
-var GetMinuteUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMinuteUsageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMinuteUsageRequest_month *smithy.Schema
-
-var GetMinuteUsageRequest_year *smithy.Schema
-
-var GetMinuteUsageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMinuteUsageResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetMinuteUsageResponse_isReservedMinutesCustomer *smithy.Schema
-
-var GetMinuteUsageResponse_totalReservedMinuteAllocation *smithy.Schema
-
-var GetMinuteUsageResponse_upcomingMinutesScheduled *smithy.Schema
-
-var GetMinuteUsageResponse_totalScheduledMinutes *smithy.Schema
-
-var GetMinuteUsageResponse_estimatedMinutesRemaining *smithy.Schema
-
-var GetMissionProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMissionProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMissionProfileRequest_missionProfileId *smithy.Schema
-
-var GetMissionProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetMissionProfileResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetMissionProfileResponse_missionProfileId *smithy.Schema
-
-var GetMissionProfileResponse_missionProfileArn *smithy.Schema
-
-var GetMissionProfileResponse_name *smithy.Schema
-
-var GetMissionProfileResponse_region *smithy.Schema
-
-var GetMissionProfileResponse_contactPrePassDurationSeconds *smithy.Schema
-
-var GetMissionProfileResponse_contactPostPassDurationSeconds *smithy.Schema
-
-var GetMissionProfileResponse_minimumViableContactDurationSeconds *smithy.Schema
-
-var GetMissionProfileResponse_dataflowEdges *smithy.Schema
-
-var GetMissionProfileResponse_trackingConfigArn *smithy.Schema
-
-var GetMissionProfileResponse_telemetrySinkConfigArn *smithy.Schema
-
-var GetMissionProfileResponse_tags *smithy.Schema
-
-var GetMissionProfileResponse_streamsKmsKey *smithy.Schema
-
-var GetMissionProfileResponse_streamsKmsRole *smithy.Schema
-
-var GetSatelliteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetSatelliteRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSatelliteRequest_satelliteId *smithy.Schema
-
-var GetSatelliteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "GetSatelliteResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetSatelliteResponse_satelliteId *smithy.Schema
-
-var GetSatelliteResponse_satelliteArn *smithy.Schema
-
-var GetSatelliteResponse_noradSatelliteID *smithy.Schema
-
-var GetSatelliteResponse_groundStations *smithy.Schema
-
-var GetSatelliteResponse_currentEphemeris *smithy.Schema
-
-var ListAntennasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListAntennasRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAntennasRequest_groundStationId *smithy.Schema
-
-var ListAntennasRequest_maxResults *smithy.Schema
-
-var ListAntennasRequest_nextToken *smithy.Schema
-
-var ListAntennasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListAntennasResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAntennasResponse_antennaList *smithy.Schema
-
-var ListAntennasResponse_nextToken *smithy.Schema
-
-var ListConfigsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListConfigsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigsRequest_maxResults *smithy.Schema
-
-var ListConfigsRequest_nextToken *smithy.Schema
-
-var ListConfigsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListConfigsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigsResponse_nextToken *smithy.Schema
-
-var ListConfigsResponse_configList *smithy.Schema
-
-var ListContactsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContactsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListContactsRequest_maxResults *smithy.Schema
-
-var ListContactsRequest_nextToken *smithy.Schema
-
-var ListContactsRequest_statusList *smithy.Schema
-
-var ListContactsRequest_startTime *smithy.Schema
-
-var ListContactsRequest_endTime *smithy.Schema
-
-var ListContactsRequest_groundStation *smithy.Schema
-
-var ListContactsRequest_satelliteArn *smithy.Schema
-
-var ListContactsRequest_missionProfileArn *smithy.Schema
-
-var ListContactsRequest_ephemeris *smithy.Schema
-
-var ListContactsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContactsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListContactsResponse_nextToken *smithy.Schema
-
-var ListContactsResponse_contactList *smithy.Schema
-
-var ListContactVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContactVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListContactVersionsRequest_contactId *smithy.Schema
-
-var ListContactVersionsRequest_maxResults *smithy.Schema
-
-var ListContactVersionsRequest_nextToken *smithy.Schema
-
-var ListContactVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListContactVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListContactVersionsResponse_nextToken *smithy.Schema
-
-var ListContactVersionsResponse_contactVersionsList *smithy.Schema
-
-var ListDataflowEndpointGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListDataflowEndpointGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataflowEndpointGroupsRequest_maxResults *smithy.Schema
-
-var ListDataflowEndpointGroupsRequest_nextToken *smithy.Schema
-
-var ListDataflowEndpointGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListDataflowEndpointGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataflowEndpointGroupsResponse_nextToken *smithy.Schema
-
-var ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList *smithy.Schema
-
-var ListEphemeridesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListEphemeridesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListEphemeridesRequest_satelliteId *smithy.Schema
-
-var ListEphemeridesRequest_ephemerisType *smithy.Schema
-
-var ListEphemeridesRequest_startTime *smithy.Schema
-
-var ListEphemeridesRequest_endTime *smithy.Schema
-
-var ListEphemeridesRequest_statusList *smithy.Schema
-
-var ListEphemeridesRequest_maxResults *smithy.Schema
-
-var ListEphemeridesRequest_nextToken *smithy.Schema
-
-var ListEphemeridesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListEphemeridesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEphemeridesResponse_nextToken *smithy.Schema
-
-var ListEphemeridesResponse_ephemerides *smithy.Schema
-
-var ListGroundStationReservationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStationReservationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListGroundStationReservationsRequest_groundStationId *smithy.Schema
-
-var ListGroundStationReservationsRequest_startTime *smithy.Schema
-
-var ListGroundStationReservationsRequest_endTime *smithy.Schema
-
-var ListGroundStationReservationsRequest_reservationTypes *smithy.Schema
-
-var ListGroundStationReservationsRequest_maxResults *smithy.Schema
-
-var ListGroundStationReservationsRequest_nextToken *smithy.Schema
-
-var ListGroundStationReservationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStationReservationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroundStationReservationsResponse_reservationList *smithy.Schema
-
-var ListGroundStationReservationsResponse_nextToken *smithy.Schema
-
-var ListGroundStationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListGroundStationsRequest_satelliteId *smithy.Schema
-
-var ListGroundStationsRequest_maxResults *smithy.Schema
-
-var ListGroundStationsRequest_nextToken *smithy.Schema
-
-var ListGroundStationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListGroundStationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroundStationsResponse_nextToken *smithy.Schema
-
-var ListGroundStationsResponse_groundStationList *smithy.Schema
-
-var ListMissionProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListMissionProfilesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMissionProfilesRequest_maxResults *smithy.Schema
-
-var ListMissionProfilesRequest_nextToken *smithy.Schema
-
-var ListMissionProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListMissionProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMissionProfilesResponse_nextToken *smithy.Schema
-
-var ListMissionProfilesResponse_missionProfileList *smithy.Schema
-
-var ListSatellitesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListSatellitesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSatellitesRequest_maxResults *smithy.Schema
-
-var ListSatellitesRequest_nextToken *smithy.Schema
-
-var ListSatellitesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListSatellitesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSatellitesResponse_nextToken *smithy.Schema
-
-var ListSatellitesResponse_satellites *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RegisterAgentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterAgentRequest_discoveryData *smithy.Schema
-
-var RegisterAgentRequest_agentDetails *smithy.Schema
-
-var RegisterAgentRequest_tags *smithy.Schema
-
-var RegisterAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "RegisterAgentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterAgentResponse_agentId *smithy.Schema
-
-var ReserveContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "ReserveContactRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ReserveContactRequest_missionProfileArn *smithy.Schema
-
-var ReserveContactRequest_satelliteArn *smithy.Schema
-
-var ReserveContactRequest_startTime *smithy.Schema
-
-var ReserveContactRequest_endTime *smithy.Schema
-
-var ReserveContactRequest_groundStation *smithy.Schema
-
-var ReserveContactRequest_tags *smithy.Schema
-
-var ReserveContactRequest_trackingOverrides *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAgentStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateAgentStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAgentStatusRequest_agentId *smithy.Schema
-
-var UpdateAgentStatusRequest_taskId *smithy.Schema
-
-var UpdateAgentStatusRequest_aggregateStatus *smithy.Schema
-
-var UpdateAgentStatusRequest_componentStatuses *smithy.Schema
-
-var UpdateAgentStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateAgentStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAgentStatusResponse_agentId *smithy.Schema
-
-var UpdateConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConfigRequest_configId *smithy.Schema
-
-var UpdateConfigRequest_name *smithy.Schema
-
-var UpdateConfigRequest_configType *smithy.Schema
-
-var UpdateConfigRequest_configData *smithy.Schema
-
-var UpdateContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateContactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateContactRequest_contactId *smithy.Schema
-
-var UpdateContactRequest_clientToken *smithy.Schema
-
-var UpdateContactRequest_trackingOverrides *smithy.Schema
-
-var UpdateContactRequest_satelliteArn *smithy.Schema
-
-var UpdateContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateContactResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateContactResponse_contactId *smithy.Schema
-
-var UpdateContactResponse_versionId *smithy.Schema
-
-var UpdateEphemerisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateEphemerisRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateEphemerisRequest_ephemerisId *smithy.Schema
-
-var UpdateEphemerisRequest_enabled *smithy.Schema
-
-var UpdateEphemerisRequest_name *smithy.Schema
-
-var UpdateEphemerisRequest_priority *smithy.Schema
-
-var UpdateMissionProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.groundstation",
-	Name:      "UpdateMissionProfileRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateMissionProfileRequest_missionProfileId *smithy.Schema
-
-var UpdateMissionProfileRequest_name *smithy.Schema
-
-var UpdateMissionProfileRequest_contactPrePassDurationSeconds *smithy.Schema
-
-var UpdateMissionProfileRequest_contactPostPassDurationSeconds *smithy.Schema
-
-var UpdateMissionProfileRequest_minimumViableContactDurationSeconds *smithy.Schema
-
-var UpdateMissionProfileRequest_dataflowEdges *smithy.Schema
-
-var UpdateMissionProfileRequest_trackingConfigArn *smithy.Schema
-
-var UpdateMissionProfileRequest_telemetrySinkConfigArn *smithy.Schema
-
-var UpdateMissionProfileRequest_streamsKmsKey *smithy.Schema
-
-var UpdateMissionProfileRequest_streamsKmsRole *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_AgentCpuCoresList_member = _AgentCpuCoresList.AddMember("member", smithyprelude.Integer)
-
-	_VersionStringList_member = _VersionStringList.AddMember("member", _VersionString)
-
-	ComponentVersion_componentType = ComponentVersion.AddMember("componentType", _ComponentTypeString)
-
-	ComponentVersion_versions = ComponentVersion.AddMember("versions", _VersionStringList)
-
-	_ComponentVersionList_member = _ComponentVersionList.AddMember("member", ComponentVersion)
-
-	AgentDetails_agentVersion = AgentDetails.AddMember("agentVersion", _VersionString)
-
-	AgentDetails_instanceId = AgentDetails.AddMember("instanceId", _InstanceId)
-
-	AgentDetails_instanceType = AgentDetails.AddMember("instanceType", _InstanceType)
-
-	AgentDetails_reservedCpuCores = AgentDetails.AddMember("reservedCpuCores", _AgentCpuCoresList)
-
-	AgentDetails_agentCpuCores = AgentDetails.AddMember("agentCpuCores", _AgentCpuCoresList)
-
-	AgentDetails_componentVersions = AgentDetails.AddMember("componentVersions", _ComponentVersionList)
-
-	AgentStatus_SUCCESS = AgentStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	AgentStatus_FAILED = AgentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AgentStatus_ACTIVE = AgentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AgentStatus_INACTIVE = AgentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	_SignatureMap_key = _SignatureMap.AddMember("key", smithyprelude.String)
-
-	_SignatureMap_value = _SignatureMap.AddMember("value", smithyprelude.Boolean)
-
-	AggregateStatus_status = AggregateStatus.AddMember("status", AgentStatus)
-
-	AggregateStatus_signatureMap = AggregateStatus.AddMember("signatureMap", _SignatureMap)
-
-	AngleUnits_DEGREE_ANGLE = AngleUnits.AddMember("DEGREE_ANGLE", smithyprelude.Unit)
-
-	AngleUnits_RADIAN = AngleUnits.AddMember("RADIAN", smithyprelude.Unit)
-
-	AntennaDemodDecodeDetails_outputNode = AntennaDemodDecodeDetails.AddMember("outputNode", smithyprelude.String)
-
-	FrequencyUnits_GHZ = FrequencyUnits.AddMember("GHZ", smithyprelude.Unit)
-
-	FrequencyUnits_MHZ = FrequencyUnits.AddMember("MHZ", smithyprelude.Unit)
-
-	FrequencyUnits_KHZ = FrequencyUnits.AddMember("KHZ", smithyprelude.Unit)
-
-	Frequency_value = Frequency.AddMember("value", smithyprelude.Double)
-
-	Frequency_units = Frequency.AddMember("units", FrequencyUnits)
-
-	BandwidthUnits_GHZ = BandwidthUnits.AddMember("GHZ", smithyprelude.Unit)
-
-	BandwidthUnits_MHZ = BandwidthUnits.AddMember("MHZ", smithyprelude.Unit)
-
-	BandwidthUnits_KHZ = BandwidthUnits.AddMember("KHZ", smithyprelude.Unit)
-
-	FrequencyBandwidth_value = FrequencyBandwidth.AddMember("value", smithyprelude.Double)
-
-	FrequencyBandwidth_units = FrequencyBandwidth.AddMember("units", BandwidthUnits)
-
-	Polarization_RIGHT_HAND = Polarization.AddMember("RIGHT_HAND", smithyprelude.Unit)
-
-	Polarization_LEFT_HAND = Polarization.AddMember("LEFT_HAND", smithyprelude.Unit)
-
-	Polarization_NONE = Polarization.AddMember("NONE", smithyprelude.Unit)
-
-	SpectrumConfig_centerFrequency = SpectrumConfig.AddMember("centerFrequency", Frequency)
-
-	SpectrumConfig_bandwidth = SpectrumConfig.AddMember("bandwidth", FrequencyBandwidth)
-
-	SpectrumConfig_polarization = SpectrumConfig.AddMember("polarization", Polarization)
-
-	AntennaDownlinkConfig_spectrumConfig = AntennaDownlinkConfig.AddMember("spectrumConfig", SpectrumConfig)
-
-	DemodulationConfig_unvalidatedJSON = DemodulationConfig.AddMember("unvalidatedJSON", _JsonString)
-
-	DecodeConfig_unvalidatedJSON = DecodeConfig.AddMember("unvalidatedJSON", _JsonString)
-
-	AntennaDownlinkDemodDecodeConfig_spectrumConfig = AntennaDownlinkDemodDecodeConfig.AddMember("spectrumConfig", SpectrumConfig)
-
-	AntennaDownlinkDemodDecodeConfig_demodulationConfig = AntennaDownlinkDemodDecodeConfig.AddMember("demodulationConfig", DemodulationConfig)
-
-	AntennaDownlinkDemodDecodeConfig_decodeConfig = AntennaDownlinkDemodDecodeConfig.AddMember("decodeConfig", DecodeConfig)
-
-	AntennaListItem_groundStationName = AntennaListItem.AddMember("groundStationName", _GroundStationName)
-
-	AntennaListItem_antennaName = AntennaListItem.AddMember("antennaName", _AntennaName)
-
-	AntennaListItem_region = AntennaListItem.AddMember("region", _AWSRegion)
-
-	_AntennaList_member = _AntennaList.AddMember("member", AntennaListItem)
-
-	UplinkSpectrumConfig_centerFrequency = UplinkSpectrumConfig.AddMember("centerFrequency", Frequency)
-
-	UplinkSpectrumConfig_polarization = UplinkSpectrumConfig.AddMember("polarization", Polarization)
-
-	EirpUnits_DBW = EirpUnits.AddMember("DBW", smithyprelude.Unit)
-
-	Eirp_value = Eirp.AddMember("value", smithyprelude.Double)
-
-	Eirp_units = Eirp.AddMember("units", EirpUnits)
-
-	AntennaUplinkConfig_transmitDisabled = AntennaUplinkConfig.AddMember("transmitDisabled", smithyprelude.Boolean)
-
-	AntennaUplinkConfig_spectrumConfig = AntennaUplinkConfig.AddMember("spectrumConfig", UplinkSpectrumConfig)
-
-	AntennaUplinkConfig_targetEirp = AntennaUplinkConfig.AddMember("targetEirp", Eirp)
-
-	AuditResults_HEALTHY = AuditResults.AddMember("HEALTHY", smithyprelude.Unit)
-
-	AuditResults_UNHEALTHY = AuditResults.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	SocketAddress_name = SocketAddress.AddMember("name", smithyprelude.String)
-
-	SocketAddress_port = SocketAddress.AddMember("port", smithyprelude.Integer)
-
-	ConnectionDetails_socketAddress = ConnectionDetails.AddMember("socketAddress", SocketAddress)
-
-	ConnectionDetails_mtu = ConnectionDetails.AddMember("mtu", smithyprelude.Integer)
-
-	IntegerRange_minimum = IntegerRange.AddMember("minimum", smithyprelude.Integer)
-
-	IntegerRange_maximum = IntegerRange.AddMember("maximum", smithyprelude.Integer)
-
-	RangedSocketAddress_name = RangedSocketAddress.AddMember("name", _IpV4Address)
-
-	RangedSocketAddress_portRange = RangedSocketAddress.AddMember("portRange", IntegerRange)
-
-	RangedConnectionDetails_socketAddress = RangedConnectionDetails.AddMember("socketAddress", RangedSocketAddress)
-
-	RangedConnectionDetails_mtu = RangedConnectionDetails.AddMember("mtu", smithyprelude.Integer)
-
-	AwsGroundStationAgentEndpoint_name = AwsGroundStationAgentEndpoint.AddMember("name", _SafeName)
-
-	AwsGroundStationAgentEndpoint_egressAddress = AwsGroundStationAgentEndpoint.AddMember("egressAddress", ConnectionDetails)
-
-	AwsGroundStationAgentEndpoint_ingressAddress = AwsGroundStationAgentEndpoint.AddMember("ingressAddress", RangedConnectionDetails)
-
-	AwsGroundStationAgentEndpoint_agentStatus = AwsGroundStationAgentEndpoint.AddMember("agentStatus", AgentStatus)
-
-	AwsGroundStationAgentEndpoint_auditResults = AwsGroundStationAgentEndpoint.AddMember("auditResults", AuditResults)
-
-	S3Object_bucket = S3Object.AddMember("bucket", _S3BucketName)
-
-	S3Object_key = S3Object.AddMember("key", _S3ObjectKey)
-
-	S3Object_version = S3Object.AddMember("version", _S3VersionId)
-
-	ISO8601TimeRange_startTime = ISO8601TimeRange.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ISO8601TimeRange_endTime = ISO8601TimeRange.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TimeAzEl_dt = TimeAzEl.AddMember("dt", smithyprelude.Double)
-
-	TimeAzEl_az = TimeAzEl.AddMember("az", smithyprelude.Double)
-
-	TimeAzEl_el = TimeAzEl.AddMember("el", smithyprelude.Double)
-
-	_TimeAzElList_member = _TimeAzElList.AddMember("member", TimeAzEl)
-
-	AzElSegment_referenceEpoch = AzElSegment.AddMember("referenceEpoch", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AzElSegment_validTimeRange = AzElSegment.AddMember("validTimeRange", ISO8601TimeRange)
-
-	AzElSegment_azElList = AzElSegment.AddMember("azElList", _TimeAzElList)
-
-	_AzElSegmentList_member = _AzElSegmentList.AddMember("member", AzElSegment)
-
-	AzElSegments_angleUnit = AzElSegments.AddMember("angleUnit", AngleUnits)
-
-	AzElSegments_azElSegmentList = AzElSegments.AddMember("azElSegmentList", _AzElSegmentList)
-
-	AzElSegmentsData_s3Object = AzElSegmentsData.AddMember("s3Object", S3Object)
-
-	AzElSegmentsData_azElData = AzElSegmentsData.AddMember("azElData", AzElSegments)
-
-	AzElEphemeris_groundStation = AzElEphemeris.AddMember("groundStation", _GroundStationName)
-
-	AzElEphemeris_data = AzElEphemeris.AddMember("data", AzElSegmentsData)
-
-	AzElEphemerisFilter_id = AzElEphemerisFilter.AddMember("id", _Uuid)
-
-	AzElProgramTrackSettings_ephemerisId = AzElProgramTrackSettings.AddMember("ephemerisId", _Uuid)
-
-	_CapabilityArnList_member = _CapabilityArnList.AddMember("member", _CapabilityArn)
-
-	CapabilityHealth_HEALTHY = CapabilityHealth.AddMember("HEALTHY", smithyprelude.Unit)
-
-	CapabilityHealth_UNHEALTHY = CapabilityHealth.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	CapabilityHealthReason_NO_REGISTERED_AGENT = CapabilityHealthReason.AddMember("NO_REGISTERED_AGENT", smithyprelude.Unit)
-
-	CapabilityHealthReason_INVALID_IP_OWNERSHIP = CapabilityHealthReason.AddMember("INVALID_IP_OWNERSHIP", smithyprelude.Unit)
-
-	CapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR = CapabilityHealthReason.AddMember("NOT_AUTHORIZED_TO_CREATE_SLR", smithyprelude.Unit)
-
-	CapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP = CapabilityHealthReason.AddMember("UNVERIFIED_IP_OWNERSHIP", smithyprelude.Unit)
-
-	CapabilityHealthReason_INITIALIZING_DATAPLANE = CapabilityHealthReason.AddMember("INITIALIZING_DATAPLANE", smithyprelude.Unit)
-
-	CapabilityHealthReason_DATAPLANE_FAILURE = CapabilityHealthReason.AddMember("DATAPLANE_FAILURE", smithyprelude.Unit)
-
-	CapabilityHealthReason_HEALTHY = CapabilityHealthReason.AddMember("HEALTHY", smithyprelude.Unit)
-
-	_CapabilityHealthReasonList_member = _CapabilityHealthReasonList.AddMember("member", CapabilityHealthReason)
-
-	ComponentStatusData_componentType = ComponentStatusData.AddMember("componentType", _ComponentTypeString)
-
-	ComponentStatusData_capabilityArn = ComponentStatusData.AddMember("capabilityArn", _CapabilityArn)
-
-	ComponentStatusData_status = ComponentStatusData.AddMember("status", AgentStatus)
-
-	ComponentStatusData_bytesSent = ComponentStatusData.AddMember("bytesSent", smithyprelude.Long)
-
-	ComponentStatusData_bytesReceived = ComponentStatusData.AddMember("bytesReceived", smithyprelude.Long)
-
-	ComponentStatusData_packetsDropped = ComponentStatusData.AddMember("packetsDropped", smithyprelude.Long)
-
-	ComponentStatusData_dataflowId = ComponentStatusData.AddMember("dataflowId", _Uuid)
-
-	_ComponentStatusList_member = _ComponentStatusList.AddMember("member", ComponentStatusData)
-
-	ConfigCapabilityType_ANTENNA_DOWNLINK = ConfigCapabilityType.AddMember("ANTENNA_DOWNLINK", smithyprelude.Unit)
-
-	ConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE = ConfigCapabilityType.AddMember("ANTENNA_DOWNLINK_DEMOD_DECODE", smithyprelude.Unit)
-
-	ConfigCapabilityType_TRACKING = ConfigCapabilityType.AddMember("TRACKING", smithyprelude.Unit)
-
-	ConfigCapabilityType_DATAFLOW_ENDPOINT = ConfigCapabilityType.AddMember("DATAFLOW_ENDPOINT", smithyprelude.Unit)
-
-	ConfigCapabilityType_ANTENNA_UPLINK = ConfigCapabilityType.AddMember("ANTENNA_UPLINK", smithyprelude.Unit)
-
-	ConfigCapabilityType_UPLINK_ECHO = ConfigCapabilityType.AddMember("UPLINK_ECHO", smithyprelude.Unit)
-
-	ConfigCapabilityType_S3_RECORDING = ConfigCapabilityType.AddMember("S3_RECORDING", smithyprelude.Unit)
-
-	ConfigCapabilityType_TELEMETRY_SINK = ConfigCapabilityType.AddMember("TELEMETRY_SINK", smithyprelude.Unit)
-
-	_SubnetList_member = _SubnetList.AddMember("member", smithyprelude.String)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", smithyprelude.String)
-
-	SecurityDetails_subnetIds = SecurityDetails.AddMember("subnetIds", _SubnetList)
-
-	SecurityDetails_securityGroupIds = SecurityDetails.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	SecurityDetails_roleArn = SecurityDetails.AddMember("roleArn", _RoleArn)
-
-	EndpointStatus_created = EndpointStatus.AddMember("created", smithyprelude.Unit)
-
-	EndpointStatus_creating = EndpointStatus.AddMember("creating", smithyprelude.Unit)
-
-	EndpointStatus_deleted = EndpointStatus.AddMember("deleted", smithyprelude.Unit)
-
-	EndpointStatus_deleting = EndpointStatus.AddMember("deleting", smithyprelude.Unit)
-
-	EndpointStatus_failed = EndpointStatus.AddMember("failed", smithyprelude.Unit)
-
-	DataflowEndpoint_name = DataflowEndpoint.AddMember("name", _SafeName)
-
-	DataflowEndpoint_address = DataflowEndpoint.AddMember("address", SocketAddress)
-
-	DataflowEndpoint_status = DataflowEndpoint.AddMember("status", EndpointStatus)
-
-	DataflowEndpoint_mtu = DataflowEndpoint.AddMember("mtu", smithyprelude.Integer)
-
-	UplinkConnectionDetails_ingressAddressAndPort = UplinkConnectionDetails.AddMember("ingressAddressAndPort", ConnectionDetails)
-
-	UplinkConnectionDetails_agentIpAndPortAddress = UplinkConnectionDetails.AddMember("agentIpAndPortAddress", RangedConnectionDetails)
-
-	UplinkDataflowDetails_agentConnectionDetails = UplinkDataflowDetails.AddMember("agentConnectionDetails", UplinkConnectionDetails)
-
-	UplinkAwsGroundStationAgentEndpointDetails_name = UplinkAwsGroundStationAgentEndpointDetails.AddMember("name", _SafeName)
-
-	UplinkAwsGroundStationAgentEndpointDetails_dataflowDetails = UplinkAwsGroundStationAgentEndpointDetails.AddMember("dataflowDetails", UplinkDataflowDetails)
-
-	UplinkAwsGroundStationAgentEndpointDetails_agentStatus = UplinkAwsGroundStationAgentEndpointDetails.AddMember("agentStatus", AgentStatus)
-
-	UplinkAwsGroundStationAgentEndpointDetails_auditResults = UplinkAwsGroundStationAgentEndpointDetails.AddMember("auditResults", AuditResults)
-
-	DownlinkConnectionDetails_agentIpAndPortAddress = DownlinkConnectionDetails.AddMember("agentIpAndPortAddress", RangedConnectionDetails)
-
-	DownlinkConnectionDetails_egressAddressAndPort = DownlinkConnectionDetails.AddMember("egressAddressAndPort", ConnectionDetails)
-
-	DownlinkDataflowDetails_agentConnectionDetails = DownlinkDataflowDetails.AddMember("agentConnectionDetails", DownlinkConnectionDetails)
-
-	DownlinkAwsGroundStationAgentEndpointDetails_name = DownlinkAwsGroundStationAgentEndpointDetails.AddMember("name", _SafeName)
-
-	DownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails = DownlinkAwsGroundStationAgentEndpointDetails.AddMember("dataflowDetails", DownlinkDataflowDetails)
-
-	DownlinkAwsGroundStationAgentEndpointDetails_agentStatus = DownlinkAwsGroundStationAgentEndpointDetails.AddMember("agentStatus", AgentStatus)
-
-	DownlinkAwsGroundStationAgentEndpointDetails_auditResults = DownlinkAwsGroundStationAgentEndpointDetails.AddMember("auditResults", AuditResults)
-
-	EndpointDetails_securityDetails = EndpointDetails.AddMember("securityDetails", SecurityDetails)
-
-	EndpointDetails_endpoint = EndpointDetails.AddMember("endpoint", DataflowEndpoint)
-
-	EndpointDetails_awsGroundStationAgentEndpoint = EndpointDetails.AddMember("awsGroundStationAgentEndpoint", AwsGroundStationAgentEndpoint)
-
-	EndpointDetails_uplinkAwsGroundStationAgentEndpoint = EndpointDetails.AddMember("uplinkAwsGroundStationAgentEndpoint", UplinkAwsGroundStationAgentEndpointDetails)
-
-	EndpointDetails_downlinkAwsGroundStationAgentEndpoint = EndpointDetails.AddMember("downlinkAwsGroundStationAgentEndpoint", DownlinkAwsGroundStationAgentEndpointDetails)
-
-	EndpointDetails_healthStatus = EndpointDetails.AddMember("healthStatus", CapabilityHealth)
-
-	EndpointDetails_healthReasons = EndpointDetails.AddMember("healthReasons", _CapabilityHealthReasonList)
-
-	S3RecordingDetails_bucketArn = S3RecordingDetails.AddMember("bucketArn", _BucketArn)
-
-	S3RecordingDetails_keyTemplate = S3RecordingDetails.AddMember("keyTemplate", smithyprelude.String)
-
-	ConfigDetails_endpointDetails = ConfigDetails.AddMember("endpointDetails", EndpointDetails)
-
-	ConfigDetails_antennaDemodDecodeDetails = ConfigDetails.AddMember("antennaDemodDecodeDetails", AntennaDemodDecodeDetails)
-
-	ConfigDetails_s3RecordingDetails = ConfigDetails.AddMember("s3RecordingDetails", S3RecordingDetails)
-
-	ConfigListItem_configId = ConfigListItem.AddMember("configId", smithyprelude.String)
-
-	ConfigListItem_configType = ConfigListItem.AddMember("configType", ConfigCapabilityType)
-
-	ConfigListItem_configArn = ConfigListItem.AddMember("configArn", _ConfigArn)
-
-	ConfigListItem_name = ConfigListItem.AddMember("name", smithyprelude.String)
-
-	_ConfigList_member = _ConfigList.AddMember("member", ConfigListItem)
-
-	Criticality_REQUIRED = Criticality.AddMember("REQUIRED", smithyprelude.Unit)
-
-	Criticality_PREFERRED = Criticality.AddMember("PREFERRED", smithyprelude.Unit)
-
-	Criticality_REMOVED = Criticality.AddMember("REMOVED", smithyprelude.Unit)
-
-	TrackingConfig_autotrack = TrackingConfig.AddMember("autotrack", Criticality)
-
-	DataflowEndpointConfig_dataflowEndpointName = DataflowEndpointConfig.AddMember("dataflowEndpointName", smithyprelude.String)
-
-	DataflowEndpointConfig_dataflowEndpointRegion = DataflowEndpointConfig.AddMember("dataflowEndpointRegion", smithyprelude.String)
-
-	UplinkEchoConfig_enabled = UplinkEchoConfig.AddMember("enabled", smithyprelude.Boolean)
-
-	UplinkEchoConfig_antennaUplinkConfigArn = UplinkEchoConfig.AddMember("antennaUplinkConfigArn", _ConfigArn)
-
-	S3RecordingConfig_bucketArn = S3RecordingConfig.AddMember("bucketArn", _BucketArn)
-
-	S3RecordingConfig_roleArn = S3RecordingConfig.AddMember("roleArn", _RoleArn)
-
-	S3RecordingConfig_prefix = S3RecordingConfig.AddMember("prefix", _S3KeyPrefix)
-
-	TelemetrySinkType_KINESIS_DATA_STREAM = TelemetrySinkType.AddMember("KINESIS_DATA_STREAM", smithyprelude.Unit)
-
-	KinesisDataStreamData_kinesisRoleArn = KinesisDataStreamData.AddMember("kinesisRoleArn", _RoleArn)
-
-	KinesisDataStreamData_kinesisDataStreamArn = KinesisDataStreamData.AddMember("kinesisDataStreamArn", _KinesisDataStreamArn)
-
-	TelemetrySinkData_kinesisDataStreamData = TelemetrySinkData.AddMember("kinesisDataStreamData", KinesisDataStreamData)
-
-	TelemetrySinkConfig_telemetrySinkType = TelemetrySinkConfig.AddMember("telemetrySinkType", TelemetrySinkType)
-
-	TelemetrySinkConfig_telemetrySinkData = TelemetrySinkConfig.AddMember("telemetrySinkData", TelemetrySinkData)
-
-	ConfigTypeData_antennaDownlinkConfig = ConfigTypeData.AddMember("antennaDownlinkConfig", AntennaDownlinkConfig)
-
-	ConfigTypeData_trackingConfig = ConfigTypeData.AddMember("trackingConfig", TrackingConfig)
-
-	ConfigTypeData_dataflowEndpointConfig = ConfigTypeData.AddMember("dataflowEndpointConfig", DataflowEndpointConfig)
-
-	ConfigTypeData_antennaDownlinkDemodDecodeConfig = ConfigTypeData.AddMember("antennaDownlinkDemodDecodeConfig", AntennaDownlinkDemodDecodeConfig)
-
-	ConfigTypeData_antennaUplinkConfig = ConfigTypeData.AddMember("antennaUplinkConfig", AntennaUplinkConfig)
-
-	ConfigTypeData_uplinkEchoConfig = ConfigTypeData.AddMember("uplinkEchoConfig", UplinkEchoConfig)
-
-	ConfigTypeData_s3RecordingConfig = ConfigTypeData.AddMember("s3RecordingConfig", S3RecordingConfig)
-
-	ConfigTypeData_telemetrySinkConfig = ConfigTypeData.AddMember("telemetrySinkConfig", TelemetrySinkConfig)
-
-	ContactStatus_SCHEDULING = ContactStatus.AddMember("SCHEDULING", smithyprelude.Unit)
-
-	ContactStatus_FAILED_TO_SCHEDULE = ContactStatus.AddMember("FAILED_TO_SCHEDULE", smithyprelude.Unit)
-
-	ContactStatus_SCHEDULED = ContactStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	ContactStatus_CANCELLED = ContactStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ContactStatus_AWS_CANCELLED = ContactStatus.AddMember("AWS_CANCELLED", smithyprelude.Unit)
-
-	ContactStatus_PREPASS = ContactStatus.AddMember("PREPASS", smithyprelude.Unit)
-
-	ContactStatus_PASS = ContactStatus.AddMember("PASS", smithyprelude.Unit)
-
-	ContactStatus_POSTPASS = ContactStatus.AddMember("POSTPASS", smithyprelude.Unit)
-
-	ContactStatus_COMPLETED = ContactStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ContactStatus_FAILED = ContactStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ContactStatus_AVAILABLE = ContactStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ContactStatus_CANCELLING = ContactStatus.AddMember("CANCELLING", smithyprelude.Unit)
-
-	ContactStatus_AWS_FAILED = ContactStatus.AddMember("AWS_FAILED", smithyprelude.Unit)
-
-	Elevation_value = Elevation.AddMember("value", smithyprelude.Double)
-
-	Elevation_unit = Elevation.AddMember("unit", AngleUnits)
-
-	_TagsMap_key = _TagsMap.AddMember("key", smithyprelude.String)
-
-	_TagsMap_value = _TagsMap.AddMember("value", smithyprelude.String)
-
-	EphemerisType_TLE = EphemerisType.AddMember("TLE", smithyprelude.Unit)
-
-	EphemerisType_OEM = EphemerisType.AddMember("OEM", smithyprelude.Unit)
-
-	EphemerisType_AZ_EL = EphemerisType.AddMember("AZ_EL", smithyprelude.Unit)
-
-	EphemerisType_SERVICE_MANAGED = EphemerisType.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
-
-	EphemerisResponseData_ephemerisId = EphemerisResponseData.AddMember("ephemerisId", _Uuid)
-
-	EphemerisResponseData_ephemerisType = EphemerisResponseData.AddMember("ephemerisType", EphemerisType)
-
-	VersionStatus_UPDATING = VersionStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	VersionStatus_ACTIVE = VersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	VersionStatus_SUPERSEDED = VersionStatus.AddMember("SUPERSEDED", smithyprelude.Unit)
-
-	VersionStatus_FAILED_TO_UPDATE = VersionStatus.AddMember("FAILED_TO_UPDATE", smithyprelude.Unit)
-
-	VersionFailureReasonCode_INTERNAL_ERROR = VersionFailureReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	VersionFailureReasonCode_INVALID_SATELLITE_ARN = VersionFailureReasonCode.AddMember("INVALID_SATELLITE_ARN", smithyprelude.Unit)
-
-	VersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST = VersionFailureReasonCode.AddMember("INVALID_UPDATE_CONTACT_REQUEST", smithyprelude.Unit)
-
-	VersionFailureReasonCode_EPHEMERIS_NOT_FOUND = VersionFailureReasonCode.AddMember("EPHEMERIS_NOT_FOUND", smithyprelude.Unit)
-
-	VersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID = VersionFailureReasonCode.AddMember("EPHEMERIS_TIME_RANGE_INVALID", smithyprelude.Unit)
-
-	VersionFailureReasonCode_EPHEMERIS_NOT_ENABLED = VersionFailureReasonCode.AddMember("EPHEMERIS_NOT_ENABLED", smithyprelude.Unit)
-
-	VersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS = VersionFailureReasonCode.AddMember("SATELLITE_DOES_NOT_MATCH_EPHEMERIS", smithyprelude.Unit)
-
-	VersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS = VersionFailureReasonCode.AddMember("NOT_ONBOARDED_TO_AZEL_EPHEMERIS", smithyprelude.Unit)
-
-	VersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND = VersionFailureReasonCode.AddMember("AZEL_EPHEMERIS_NOT_FOUND", smithyprelude.Unit)
-
-	VersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION = VersionFailureReasonCode.AddMember("AZEL_EPHEMERIS_WRONG_GROUND_STATION", smithyprelude.Unit)
-
-	VersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS = VersionFailureReasonCode.AddMember("AZEL_EPHEMERIS_INVALID_STATUS", smithyprelude.Unit)
-
-	VersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID = VersionFailureReasonCode.AddMember("AZEL_EPHEMERIS_TIME_RANGE_INVALID", smithyprelude.Unit)
-
-	_VersionFailureReasonCodes_member = _VersionFailureReasonCodes.AddMember("member", VersionFailureReasonCode)
-
-	ContactVersion_versionId = ContactVersion.AddMember("versionId", _VersionId)
-
-	ContactVersion_created = ContactVersion.AddMember("created", smithyprelude.Timestamp)
-
-	ContactVersion_activated = ContactVersion.AddMember("activated", smithyprelude.Timestamp)
-
-	ContactVersion_superseded = ContactVersion.AddMember("superseded", smithyprelude.Timestamp)
-
-	ContactVersion_lastUpdated = ContactVersion.AddMember("lastUpdated", smithyprelude.Timestamp)
-
-	ContactVersion_status = ContactVersion.AddMember("status", VersionStatus)
-
-	ContactVersion_failureCodes = ContactVersion.AddMember("failureCodes", _VersionFailureReasonCodes)
-
-	ContactVersion_failureMessage = ContactVersion.AddMember("failureMessage", smithyprelude.String)
-
-	ContactData_contactId = ContactData.AddMember("contactId", _Uuid)
-
-	ContactData_missionProfileArn = ContactData.AddMember("missionProfileArn", _MissionProfileArn)
-
-	ContactData_satelliteArn = ContactData.AddMember("satelliteArn", _satelliteArn)
-
-	ContactData_startTime = ContactData.AddMember("startTime", smithyprelude.Timestamp)
-
-	ContactData_endTime = ContactData.AddMember("endTime", smithyprelude.Timestamp)
-
-	ContactData_prePassStartTime = ContactData.AddMember("prePassStartTime", smithyprelude.Timestamp)
-
-	ContactData_postPassEndTime = ContactData.AddMember("postPassEndTime", smithyprelude.Timestamp)
-
-	ContactData_groundStation = ContactData.AddMember("groundStation", smithyprelude.String)
-
-	ContactData_contactStatus = ContactData.AddMember("contactStatus", ContactStatus)
-
-	ContactData_errorMessage = ContactData.AddMember("errorMessage", smithyprelude.String)
-
-	ContactData_maximumElevation = ContactData.AddMember("maximumElevation", Elevation)
-
-	ContactData_region = ContactData.AddMember("region", smithyprelude.String)
-
-	ContactData_tags = ContactData.AddMember("tags", _TagsMap)
-
-	ContactData_visibilityStartTime = ContactData.AddMember("visibilityStartTime", smithyprelude.Timestamp)
-
-	ContactData_visibilityEndTime = ContactData.AddMember("visibilityEndTime", smithyprelude.Timestamp)
-
-	ContactData_ephemeris = ContactData.AddMember("ephemeris", EphemerisResponseData)
-
-	ContactData_version = ContactData.AddMember("version", ContactVersion)
-
-	_ContactList_member = _ContactList.AddMember("member", ContactData)
-
-	ContactReservationDetails_contactId = ContactReservationDetails.AddMember("contactId", _Uuid)
-
-	_ContactVersionsList_member = _ContactVersionsList.AddMember("member", ContactVersion)
-
-	UplinkAwsGroundStationAgentEndpoint_name = UplinkAwsGroundStationAgentEndpoint.AddMember("name", _SafeName)
-
-	UplinkAwsGroundStationAgentEndpoint_dataflowDetails = UplinkAwsGroundStationAgentEndpoint.AddMember("dataflowDetails", UplinkDataflowDetails)
-
-	DownlinkAwsGroundStationAgentEndpoint_name = DownlinkAwsGroundStationAgentEndpoint.AddMember("name", _SafeName)
-
-	DownlinkAwsGroundStationAgentEndpoint_dataflowDetails = DownlinkAwsGroundStationAgentEndpoint.AddMember("dataflowDetails", DownlinkDataflowDetails)
-
-	CreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint = CreateEndpointDetails.AddMember("uplinkAwsGroundStationAgentEndpoint", UplinkAwsGroundStationAgentEndpoint)
-
-	CreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint = CreateEndpointDetails.AddMember("downlinkAwsGroundStationAgentEndpoint", DownlinkAwsGroundStationAgentEndpoint)
-
-	_CreateEndpointDetailsList_member = _CreateEndpointDetailsList.AddMember("member", CreateEndpointDetails)
-
-	Source_configType = Source.AddMember("configType", ConfigCapabilityType)
-
-	Source_configId = Source.AddMember("configId", smithyprelude.String)
-
-	Source_configDetails = Source.AddMember("configDetails", ConfigDetails)
-
-	Source_dataflowSourceRegion = Source.AddMember("dataflowSourceRegion", smithyprelude.String)
-
-	Destination_configType = Destination.AddMember("configType", ConfigCapabilityType)
-
-	Destination_configId = Destination.AddMember("configId", _Uuid)
-
-	Destination_configDetails = Destination.AddMember("configDetails", ConfigDetails)
-
-	Destination_dataflowDestinationRegion = Destination.AddMember("dataflowDestinationRegion", smithyprelude.String)
-
-	DataflowDetail_source = DataflowDetail.AddMember("source", Source)
-
-	DataflowDetail_destination = DataflowDetail.AddMember("destination", Destination)
-
-	DataflowDetail_errorMessage = DataflowDetail.AddMember("errorMessage", smithyprelude.String)
-
-	_DataflowEdge_member = _DataflowEdge.AddMember("member", _ConfigArn)
-
-	_DataflowEdgeList_member = _DataflowEdgeList.AddMember("member", _DataflowEdge)
-
-	DataflowEndpointListItem_dataflowEndpointGroupId = DataflowEndpointListItem.AddMember("dataflowEndpointGroupId", _Uuid)
-
-	DataflowEndpointListItem_dataflowEndpointGroupArn = DataflowEndpointListItem.AddMember("dataflowEndpointGroupArn", _DataflowEndpointGroupArn)
-
-	_DataflowEndpointGroupList_member = _DataflowEndpointGroupList.AddMember("member", DataflowEndpointListItem)
-
-	_DataflowList_member = _DataflowList.AddMember("member", DataflowDetail)
-
-	DependencyException_message = DependencyException.AddMember("message", smithyprelude.String)
-
-	DependencyException_parameterName = DependencyException.AddMember("parameterName", smithyprelude.String)
-
-	_IpAddressList_member = _IpAddressList.AddMember("member", _IpV4Address)
-
-	DiscoveryData_publicIpAddresses = DiscoveryData.AddMember("publicIpAddresses", _IpAddressList)
-
-	DiscoveryData_privateIpAddresses = DiscoveryData.AddMember("privateIpAddresses", _IpAddressList)
-
-	DiscoveryData_capabilityArns = DiscoveryData.AddMember("capabilityArns", _CapabilityArnList)
-
-	_EndpointDetailsList_member = _EndpointDetailsList.AddMember("member", EndpointDetails)
-
-	EphemerisStatus_VALIDATING = EphemerisStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	EphemerisStatus_INVALID = EphemerisStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	EphemerisStatus_ERROR = EphemerisStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	EphemerisStatus_ENABLED = EphemerisStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	EphemerisStatus_DISABLED = EphemerisStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	EphemerisStatus_EXPIRED = EphemerisStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	EphemerisItem_ephemerisId = EphemerisItem.AddMember("ephemerisId", _Uuid)
-
-	EphemerisItem_ephemerisType = EphemerisItem.AddMember("ephemerisType", EphemerisType)
-
-	EphemerisItem_status = EphemerisItem.AddMember("status", EphemerisStatus)
-
-	EphemerisItem_priority = EphemerisItem.AddMember("priority", _EphemerisPriority)
-
-	EphemerisItem_enabled = EphemerisItem.AddMember("enabled", smithyprelude.Boolean)
-
-	EphemerisItem_creationTime = EphemerisItem.AddMember("creationTime", smithyprelude.Timestamp)
-
-	EphemerisItem_name = EphemerisItem.AddMember("name", _SafeName)
-
-	EphemerisItem_sourceS3Object = EphemerisItem.AddMember("sourceS3Object", S3Object)
-
-	_EphemeridesList_member = _EphemeridesList.AddMember("member", EphemerisItem)
-
-	TimeRange_startTime = TimeRange.AddMember("startTime", smithyprelude.Timestamp)
-
-	TimeRange_endTime = TimeRange.AddMember("endTime", smithyprelude.Timestamp)
-
-	TLEData_tleLine1 = TLEData.AddMember("tleLine1", _TleLineOne)
-
-	TLEData_tleLine2 = TLEData.AddMember("tleLine2", _TleLineTwo)
-
-	TLEData_validTimeRange = TLEData.AddMember("validTimeRange", TimeRange)
-
-	_TLEDataList_member = _TLEDataList.AddMember("member", TLEData)
-
-	TLEEphemeris_s3Object = TLEEphemeris.AddMember("s3Object", S3Object)
-
-	TLEEphemeris_tleData = TLEEphemeris.AddMember("tleData", _TLEDataList)
-
-	OEMEphemeris_s3Object = OEMEphemeris.AddMember("s3Object", S3Object)
-
-	OEMEphemeris_oemData = OEMEphemeris.AddMember("oemData", _UnboundedString)
-
-	EphemerisData_tle = EphemerisData.AddMember("tle", TLEEphemeris)
-
-	EphemerisData_oem = EphemerisData.AddMember("oem", OEMEphemeris)
-
-	EphemerisData_azEl = EphemerisData.AddMember("azEl", AzElEphemeris)
-
-	EphemerisDescription_sourceS3Object = EphemerisDescription.AddMember("sourceS3Object", S3Object)
-
-	EphemerisDescription_ephemerisData = EphemerisDescription.AddMember("ephemerisData", _UnboundedString)
-
-	EphemerisErrorCode_INTERNAL_ERROR = EphemerisErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	EphemerisErrorCode_MISMATCHED_SATCAT_ID = EphemerisErrorCode.AddMember("MISMATCHED_SATCAT_ID", smithyprelude.Unit)
-
-	EphemerisErrorCode_OEM_VERSION_UNSUPPORTED = EphemerisErrorCode.AddMember("OEM_VERSION_UNSUPPORTED", smithyprelude.Unit)
-
-	EphemerisErrorCode_ORIGINATOR_MISSING = EphemerisErrorCode.AddMember("ORIGINATOR_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_CREATION_DATE_MISSING = EphemerisErrorCode.AddMember("CREATION_DATE_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_OBJECT_NAME_MISSING = EphemerisErrorCode.AddMember("OBJECT_NAME_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_OBJECT_ID_MISSING = EphemerisErrorCode.AddMember("OBJECT_ID_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_REF_FRAME_UNSUPPORTED = EphemerisErrorCode.AddMember("REF_FRAME_UNSUPPORTED", smithyprelude.Unit)
-
-	EphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED = EphemerisErrorCode.AddMember("REF_FRAME_EPOCH_UNSUPPORTED", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED = EphemerisErrorCode.AddMember("TIME_SYSTEM_UNSUPPORTED", smithyprelude.Unit)
-
-	EphemerisErrorCode_CENTER_BODY_UNSUPPORTED = EphemerisErrorCode.AddMember("CENTER_BODY_UNSUPPORTED", smithyprelude.Unit)
-
-	EphemerisErrorCode_INTERPOLATION_MISSING = EphemerisErrorCode.AddMember("INTERPOLATION_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_INTERPOLATION_DEGREE_INVALID = EphemerisErrorCode.AddMember("INTERPOLATION_DEGREE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_LIST_MISSING", smithyprelude.Unit)
-
-	EphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL = EphemerisErrorCode.AddMember("INSUFFICIENT_TIME_AZ_EL", smithyprelude.Unit)
-
-	EphemerisErrorCode_START_TIME_IN_FUTURE = EphemerisErrorCode.AddMember("START_TIME_IN_FUTURE", smithyprelude.Unit)
-
-	EphemerisErrorCode_END_TIME_IN_PAST = EphemerisErrorCode.AddMember("END_TIME_IN_PAST", smithyprelude.Unit)
-
-	EphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY = EphemerisErrorCode.AddMember("EXPIRATION_TIME_TOO_EARLY", smithyprelude.Unit)
-
-	EphemerisErrorCode_START_TIME_METADATA_TOO_EARLY = EphemerisErrorCode.AddMember("START_TIME_METADATA_TOO_EARLY", smithyprelude.Unit)
-
-	EphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE = EphemerisErrorCode.AddMember("STOP_TIME_METADATA_TOO_LATE", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_TIMES_OVERLAP", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER = EphemerisErrorCode.AddMember("AZ_EL_SEGMENTS_OUT_OF_ORDER", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER = EphemerisErrorCode.AddMember("TIME_AZ_EL_ITEMS_OUT_OF_ORDER", smithyprelude.Unit)
-
-	EphemerisErrorCode_MEAN_MOTION_INVALID = EphemerisErrorCode.AddMember("MEAN_MOTION_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID = EphemerisErrorCode.AddMember("TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID = EphemerisErrorCode.AddMember("TIME_AZ_EL_EL_RADIAN_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID = EphemerisErrorCode.AddMember("TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID = EphemerisErrorCode.AddMember("TIME_AZ_EL_EL_DEGREE_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID = EphemerisErrorCode.AddMember("TIME_AZ_EL_ANGLE_UNITS_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS = EphemerisErrorCode.AddMember("INSUFFICIENT_KMS_PERMISSIONS", smithyprelude.Unit)
-
-	EphemerisErrorCode_FILE_FORMAT_INVALID = EphemerisErrorCode.AddMember("FILE_FORMAT_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_START_TIME_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_END_TIME_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE = EphemerisErrorCode.AddMember("AZ_EL_SEGMENT_END_TIME_TOO_LATE", smithyprelude.Unit)
-
-	EphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED = EphemerisErrorCode.AddMember("AZ_EL_TOTAL_DURATION_EXCEEDED", smithyprelude.Unit)
-
-	EphemerisErrorReason_errorCode = EphemerisErrorReason.AddMember("errorCode", EphemerisErrorCode)
-
-	EphemerisErrorReason_errorMessage = EphemerisErrorReason.AddMember("errorMessage", _ErrorString)
-
-	_EphemerisErrorReasonList_member = _EphemerisErrorReasonList.AddMember("member", EphemerisErrorReason)
-
-	EphemerisFilter_azEl = EphemerisFilter.AddMember("azEl", AzElEphemerisFilter)
-
-	EphemerisInvalidReason_METADATA_INVALID = EphemerisInvalidReason.AddMember("METADATA_INVALID", smithyprelude.Unit)
-
-	EphemerisInvalidReason_TIME_RANGE_INVALID = EphemerisInvalidReason.AddMember("TIME_RANGE_INVALID", smithyprelude.Unit)
-
-	EphemerisInvalidReason_TRAJECTORY_INVALID = EphemerisInvalidReason.AddMember("TRAJECTORY_INVALID", smithyprelude.Unit)
-
-	EphemerisInvalidReason_KMS_KEY_INVALID = EphemerisInvalidReason.AddMember("KMS_KEY_INVALID", smithyprelude.Unit)
-
-	EphemerisInvalidReason_VALIDATION_ERROR = EphemerisInvalidReason.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
-
-	EphemerisSource_CUSTOMER_PROVIDED = EphemerisSource.AddMember("CUSTOMER_PROVIDED", smithyprelude.Unit)
-
-	EphemerisSource_SPACE_TRACK = EphemerisSource.AddMember("SPACE_TRACK", smithyprelude.Unit)
-
-	EphemerisMetaData_source = EphemerisMetaData.AddMember("source", EphemerisSource)
-
-	EphemerisMetaData_ephemerisId = EphemerisMetaData.AddMember("ephemerisId", _Uuid)
-
-	EphemerisMetaData_epoch = EphemerisMetaData.AddMember("epoch", smithyprelude.Timestamp)
-
-	EphemerisMetaData_name = EphemerisMetaData.AddMember("name", _SafeName)
-
-	_EphemerisStatusList_member = _EphemerisStatusList.AddMember("member", EphemerisStatus)
-
-	EphemerisTypeDescription_tle = EphemerisTypeDescription.AddMember("tle", EphemerisDescription)
-
-	EphemerisTypeDescription_oem = EphemerisTypeDescription.AddMember("oem", EphemerisDescription)
-
-	EphemerisTypeDescription_azEl = EphemerisTypeDescription.AddMember("azEl", EphemerisDescription)
-
-	GroundStationData_groundStationId = GroundStationData.AddMember("groundStationId", _GroundStationName)
-
-	GroundStationData_groundStationName = GroundStationData.AddMember("groundStationName", _GroundStationName)
-
-	GroundStationData_region = GroundStationData.AddMember("region", _AWSRegion)
-
-	_GroundStationIdList_member = _GroundStationIdList.AddMember("member", _GroundStationName)
-
-	_GroundStationList_member = _GroundStationList.AddMember("member", GroundStationData)
-
-	ReservationType_MAINTENANCE = ReservationType.AddMember("MAINTENANCE", smithyprelude.Unit)
-
-	ReservationType_CONTACT = ReservationType.AddMember("CONTACT", smithyprelude.Unit)
-
-	MaintenanceType_PLANNED = MaintenanceType.AddMember("PLANNED", smithyprelude.Unit)
-
-	MaintenanceType_UNPLANNED = MaintenanceType.AddMember("UNPLANNED", smithyprelude.Unit)
-
-	MaintenanceReservationDetails_maintenanceType = MaintenanceReservationDetails.AddMember("maintenanceType", MaintenanceType)
-
-	ReservationDetails_maintenance = ReservationDetails.AddMember("maintenance", MaintenanceReservationDetails)
-
-	ReservationDetails_contact = ReservationDetails.AddMember("contact", ContactReservationDetails)
-
-	GroundStationReservationListItem_reservationType = GroundStationReservationListItem.AddMember("reservationType", ReservationType)
-
-	GroundStationReservationListItem_groundStationId = GroundStationReservationListItem.AddMember("groundStationId", _GroundStationName)
-
-	GroundStationReservationListItem_antennaName = GroundStationReservationListItem.AddMember("antennaName", _AntennaName)
-
-	GroundStationReservationListItem_startTime = GroundStationReservationListItem.AddMember("startTime", smithyprelude.Timestamp)
-
-	GroundStationReservationListItem_endTime = GroundStationReservationListItem.AddMember("endTime", smithyprelude.Timestamp)
-
-	GroundStationReservationListItem_reservationDetails = GroundStationReservationListItem.AddMember("reservationDetails", ReservationDetails)
-
-	_GroundStationReservationList_member = _GroundStationReservationList.AddMember("member", GroundStationReservationListItem)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterException_parameterName = InvalidParameterException.AddMember("parameterName", smithyprelude.String)
-
-	KmsKey_kmsKeyArn = KmsKey.AddMember("kmsKeyArn", _KeyArn)
-
-	KmsKey_kmsAliasArn = KmsKey.AddMember("kmsAliasArn", _KeyAliasArn)
-
-	KmsKey_kmsAliasName = KmsKey.AddMember("kmsAliasName", _KeyAliasName)
-
-	MissionProfileListItem_missionProfileId = MissionProfileListItem.AddMember("missionProfileId", _Uuid)
-
-	MissionProfileListItem_missionProfileArn = MissionProfileListItem.AddMember("missionProfileArn", _MissionProfileArn)
-
-	MissionProfileListItem_region = MissionProfileListItem.AddMember("region", _AWSRegion)
-
-	MissionProfileListItem_name = MissionProfileListItem.AddMember("name", _SafeName)
-
-	_MissionProfileList_member = _MissionProfileList.AddMember("member", MissionProfileListItem)
-
-	OemProgramTrackSettings_ephemerisId = OemProgramTrackSettings.AddMember("ephemerisId", _Uuid)
-
-	TleProgramTrackSettings_ephemerisId = TleProgramTrackSettings.AddMember("ephemerisId", _Uuid)
-
-	ProgramTrackSettings_azEl = ProgramTrackSettings.AddMember("azEl", AzElProgramTrackSettings)
-
-	ProgramTrackSettings_oem = ProgramTrackSettings.AddMember("oem", OemProgramTrackSettings)
-
-	ProgramTrackSettings_tle = ProgramTrackSettings.AddMember("tle", TleProgramTrackSettings)
-
-	_ReservationTypeFilterList_member = _ReservationTypeFilterList.AddMember("member", ReservationType)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", smithyprelude.String)
-
-	ResourceLimitExceededException_message = ResourceLimitExceededException.AddMember("message", smithyprelude.String)
-
-	ResourceLimitExceededException_parameterName = ResourceLimitExceededException.AddMember("parameterName", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	SatelliteListItem_satelliteId = SatelliteListItem.AddMember("satelliteId", _Uuid)
-
-	SatelliteListItem_satelliteArn = SatelliteListItem.AddMember("satelliteArn", _satelliteArn)
-
-	SatelliteListItem_noradSatelliteID = SatelliteListItem.AddMember("noradSatelliteID", _noradSatelliteID)
-
-	SatelliteListItem_groundStations = SatelliteListItem.AddMember("groundStations", _GroundStationIdList)
-
-	SatelliteListItem_currentEphemeris = SatelliteListItem.AddMember("currentEphemeris", EphemerisMetaData)
-
-	_SatelliteList_member = _SatelliteList.AddMember("member", SatelliteListItem)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_parameterName = ServiceQuotaExceededException.AddMember("parameterName", smithyprelude.String)
-
-	_StatusList_member = _StatusList.AddMember("member", ContactStatus)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _UnboundedString)
-
-	TrackingOverrides_programTrackSettings = TrackingOverrides.AddMember("programTrackSettings", ProgramTrackSettings)
-
-	CancelContactRequest_contactId = CancelContactRequest.AddMember("contactId", _Uuid, &smithytraits.HTTPLabel{})
-
-	ContactIdResponse_contactId = ContactIdResponse.AddMember("contactId", _Uuid)
-
-	ContactIdResponse_versionId = ContactIdResponse.AddMember("versionId", _VersionId)
-
-	CreateConfigRequest_name = CreateConfigRequest.AddMember("name", _SafeName)
-
-	CreateConfigRequest_configData = CreateConfigRequest.AddMember("configData", ConfigTypeData)
-
-	CreateConfigRequest_tags = CreateConfigRequest.AddMember("tags", _TagsMap)
-
-	ConfigIdResponse_configId = ConfigIdResponse.AddMember("configId", smithyprelude.String)
-
-	ConfigIdResponse_configType = ConfigIdResponse.AddMember("configType", ConfigCapabilityType)
-
-	ConfigIdResponse_configArn = ConfigIdResponse.AddMember("configArn", _ConfigArn)
-
-	CreateDataflowEndpointGroupRequest_endpointDetails = CreateDataflowEndpointGroupRequest.AddMember("endpointDetails", _EndpointDetailsList)
-
-	CreateDataflowEndpointGroupRequest_tags = CreateDataflowEndpointGroupRequest.AddMember("tags", _TagsMap)
-
-	CreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds = CreateDataflowEndpointGroupRequest.AddMember("contactPrePassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	CreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds = CreateDataflowEndpointGroupRequest.AddMember("contactPostPassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	DataflowEndpointGroupIdResponse_dataflowEndpointGroupId = DataflowEndpointGroupIdResponse.AddMember("dataflowEndpointGroupId", _Uuid)
-
-	CreateDataflowEndpointGroupV2Request_endpoints = CreateDataflowEndpointGroupV2Request.AddMember("endpoints", _CreateEndpointDetailsList)
-
-	CreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds = CreateDataflowEndpointGroupV2Request.AddMember("contactPrePassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	CreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds = CreateDataflowEndpointGroupV2Request.AddMember("contactPostPassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	CreateDataflowEndpointGroupV2Request_tags = CreateDataflowEndpointGroupV2Request.AddMember("tags", _TagsMap)
-
-	CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId = CreateDataflowEndpointGroupV2Response.AddMember("dataflowEndpointGroupId", _Uuid)
-
-	CreateEphemerisRequest_satelliteId = CreateEphemerisRequest.AddMember("satelliteId", _Uuid)
-
-	CreateEphemerisRequest_enabled = CreateEphemerisRequest.AddMember("enabled", smithyprelude.Boolean)
-
-	CreateEphemerisRequest_priority = CreateEphemerisRequest.AddMember("priority", _CustomerEphemerisPriority)
-
-	CreateEphemerisRequest_expirationTime = CreateEphemerisRequest.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	CreateEphemerisRequest_name = CreateEphemerisRequest.AddMember("name", _SafeName)
-
-	CreateEphemerisRequest_kmsKeyArn = CreateEphemerisRequest.AddMember("kmsKeyArn", _KeyArn)
-
-	CreateEphemerisRequest_ephemeris = CreateEphemerisRequest.AddMember("ephemeris", EphemerisData)
-
-	CreateEphemerisRequest_tags = CreateEphemerisRequest.AddMember("tags", _TagsMap)
-
-	EphemerisIdResponse_ephemerisId = EphemerisIdResponse.AddMember("ephemerisId", _Uuid)
-
-	CreateMissionProfileRequest_name = CreateMissionProfileRequest.AddMember("name", _SafeName)
-
-	CreateMissionProfileRequest_contactPrePassDurationSeconds = CreateMissionProfileRequest.AddMember("contactPrePassDurationSeconds", _DurationInSeconds)
-
-	CreateMissionProfileRequest_contactPostPassDurationSeconds = CreateMissionProfileRequest.AddMember("contactPostPassDurationSeconds", _DurationInSeconds)
-
-	CreateMissionProfileRequest_minimumViableContactDurationSeconds = CreateMissionProfileRequest.AddMember("minimumViableContactDurationSeconds", _PositiveDurationInSeconds)
-
-	CreateMissionProfileRequest_dataflowEdges = CreateMissionProfileRequest.AddMember("dataflowEdges", _DataflowEdgeList)
-
-	CreateMissionProfileRequest_trackingConfigArn = CreateMissionProfileRequest.AddMember("trackingConfigArn", _ConfigArn)
-
-	CreateMissionProfileRequest_telemetrySinkConfigArn = CreateMissionProfileRequest.AddMember("telemetrySinkConfigArn", _ConfigArn)
-
-	CreateMissionProfileRequest_tags = CreateMissionProfileRequest.AddMember("tags", _TagsMap)
-
-	CreateMissionProfileRequest_streamsKmsKey = CreateMissionProfileRequest.AddMember("streamsKmsKey", KmsKey)
-
-	CreateMissionProfileRequest_streamsKmsRole = CreateMissionProfileRequest.AddMember("streamsKmsRole", _RoleArn)
-
-	MissionProfileIdResponse_missionProfileId = MissionProfileIdResponse.AddMember("missionProfileId", _Uuid)
-
-	DeleteConfigRequest_configId = DeleteConfigRequest.AddMember("configId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteConfigRequest_configType = DeleteConfigRequest.AddMember("configType", ConfigCapabilityType, &smithytraits.HTTPLabel{})
-
-	DeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId = DeleteDataflowEndpointGroupRequest.AddMember("dataflowEndpointGroupId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteEphemerisRequest_ephemerisId = DeleteEphemerisRequest.AddMember("ephemerisId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DeleteMissionProfileRequest_missionProfileId = DeleteMissionProfileRequest.AddMember("missionProfileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DescribeContactRequest_contactId = DescribeContactRequest.AddMember("contactId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DescribeContactResponse_contactId = DescribeContactResponse.AddMember("contactId", _Uuid)
-
-	DescribeContactResponse_missionProfileArn = DescribeContactResponse.AddMember("missionProfileArn", _MissionProfileArn)
-
-	DescribeContactResponse_satelliteArn = DescribeContactResponse.AddMember("satelliteArn", _satelliteArn)
-
-	DescribeContactResponse_startTime = DescribeContactResponse.AddMember("startTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_endTime = DescribeContactResponse.AddMember("endTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_prePassStartTime = DescribeContactResponse.AddMember("prePassStartTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_postPassEndTime = DescribeContactResponse.AddMember("postPassEndTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_groundStation = DescribeContactResponse.AddMember("groundStation", smithyprelude.String)
-
-	DescribeContactResponse_contactStatus = DescribeContactResponse.AddMember("contactStatus", ContactStatus)
-
-	DescribeContactResponse_errorMessage = DescribeContactResponse.AddMember("errorMessage", smithyprelude.String)
-
-	DescribeContactResponse_maximumElevation = DescribeContactResponse.AddMember("maximumElevation", Elevation)
-
-	DescribeContactResponse_tags = DescribeContactResponse.AddMember("tags", _TagsMap)
-
-	DescribeContactResponse_region = DescribeContactResponse.AddMember("region", smithyprelude.String)
-
-	DescribeContactResponse_dataflowList = DescribeContactResponse.AddMember("dataflowList", _DataflowList)
-
-	DescribeContactResponse_visibilityStartTime = DescribeContactResponse.AddMember("visibilityStartTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_visibilityEndTime = DescribeContactResponse.AddMember("visibilityEndTime", smithyprelude.Timestamp)
-
-	DescribeContactResponse_trackingOverrides = DescribeContactResponse.AddMember("trackingOverrides", TrackingOverrides)
-
-	DescribeContactResponse_ephemeris = DescribeContactResponse.AddMember("ephemeris", EphemerisResponseData)
-
-	DescribeContactResponse_version = DescribeContactResponse.AddMember("version", ContactVersion)
-
-	DescribeContactVersionRequest_contactId = DescribeContactVersionRequest.AddMember("contactId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DescribeContactVersionRequest_versionId = DescribeContactVersionRequest.AddMember("versionId", _VersionId, &smithytraits.HTTPLabel{})
-
-	DescribeContactVersionResponse_contactId = DescribeContactVersionResponse.AddMember("contactId", _Uuid)
-
-	DescribeContactVersionResponse_missionProfileArn = DescribeContactVersionResponse.AddMember("missionProfileArn", _MissionProfileArn)
-
-	DescribeContactVersionResponse_satelliteArn = DescribeContactVersionResponse.AddMember("satelliteArn", _satelliteArn)
-
-	DescribeContactVersionResponse_startTime = DescribeContactVersionResponse.AddMember("startTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_endTime = DescribeContactVersionResponse.AddMember("endTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_prePassStartTime = DescribeContactVersionResponse.AddMember("prePassStartTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_postPassEndTime = DescribeContactVersionResponse.AddMember("postPassEndTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_groundStation = DescribeContactVersionResponse.AddMember("groundStation", smithyprelude.String)
-
-	DescribeContactVersionResponse_contactStatus = DescribeContactVersionResponse.AddMember("contactStatus", ContactStatus)
-
-	DescribeContactVersionResponse_errorMessage = DescribeContactVersionResponse.AddMember("errorMessage", smithyprelude.String)
-
-	DescribeContactVersionResponse_maximumElevation = DescribeContactVersionResponse.AddMember("maximumElevation", Elevation)
-
-	DescribeContactVersionResponse_tags = DescribeContactVersionResponse.AddMember("tags", _TagsMap)
-
-	DescribeContactVersionResponse_region = DescribeContactVersionResponse.AddMember("region", smithyprelude.String)
-
-	DescribeContactVersionResponse_dataflowList = DescribeContactVersionResponse.AddMember("dataflowList", _DataflowList)
-
-	DescribeContactVersionResponse_visibilityStartTime = DescribeContactVersionResponse.AddMember("visibilityStartTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_visibilityEndTime = DescribeContactVersionResponse.AddMember("visibilityEndTime", smithyprelude.Timestamp)
-
-	DescribeContactVersionResponse_trackingOverrides = DescribeContactVersionResponse.AddMember("trackingOverrides", TrackingOverrides)
-
-	DescribeContactVersionResponse_ephemeris = DescribeContactVersionResponse.AddMember("ephemeris", EphemerisResponseData)
-
-	DescribeContactVersionResponse_version = DescribeContactVersionResponse.AddMember("version", ContactVersion)
-
-	DescribeEphemerisRequest_ephemerisId = DescribeEphemerisRequest.AddMember("ephemerisId", _Uuid, &smithytraits.HTTPLabel{})
-
-	DescribeEphemerisResponse_ephemerisId = DescribeEphemerisResponse.AddMember("ephemerisId", _Uuid)
-
-	DescribeEphemerisResponse_satelliteId = DescribeEphemerisResponse.AddMember("satelliteId", _Uuid)
-
-	DescribeEphemerisResponse_status = DescribeEphemerisResponse.AddMember("status", EphemerisStatus)
-
-	DescribeEphemerisResponse_priority = DescribeEphemerisResponse.AddMember("priority", _EphemerisPriority)
-
-	DescribeEphemerisResponse_creationTime = DescribeEphemerisResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	DescribeEphemerisResponse_enabled = DescribeEphemerisResponse.AddMember("enabled", smithyprelude.Boolean)
-
-	DescribeEphemerisResponse_name = DescribeEphemerisResponse.AddMember("name", _SafeName)
-
-	DescribeEphemerisResponse_tags = DescribeEphemerisResponse.AddMember("tags", _TagsMap)
-
-	DescribeEphemerisResponse_suppliedData = DescribeEphemerisResponse.AddMember("suppliedData", EphemerisTypeDescription)
-
-	DescribeEphemerisResponse_invalidReason = DescribeEphemerisResponse.AddMember("invalidReason", EphemerisInvalidReason)
-
-	DescribeEphemerisResponse_errorReasons = DescribeEphemerisResponse.AddMember("errorReasons", _EphemerisErrorReasonList)
-
-	GetAgentConfigurationRequest_agentId = GetAgentConfigurationRequest.AddMember("agentId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetAgentConfigurationResponse_agentId = GetAgentConfigurationResponse.AddMember("agentId", _Uuid)
-
-	GetAgentConfigurationResponse_taskingDocument = GetAgentConfigurationResponse.AddMember("taskingDocument", smithyprelude.String)
-
-	GetAgentTaskResponseUrlRequest_agentId = GetAgentTaskResponseUrlRequest.AddMember("agentId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetAgentTaskResponseUrlRequest_taskId = GetAgentTaskResponseUrlRequest.AddMember("taskId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetAgentTaskResponseUrlResponse_agentId = GetAgentTaskResponseUrlResponse.AddMember("agentId", _Uuid)
-
-	GetAgentTaskResponseUrlResponse_taskId = GetAgentTaskResponseUrlResponse.AddMember("taskId", _Uuid)
-
-	GetAgentTaskResponseUrlResponse_presignedLogUrl = GetAgentTaskResponseUrlResponse.AddMember("presignedLogUrl", smithyprelude.String)
-
-	GetConfigRequest_configId = GetConfigRequest.AddMember("configId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetConfigRequest_configType = GetConfigRequest.AddMember("configType", ConfigCapabilityType, &smithytraits.HTTPLabel{})
-
-	GetConfigResponse_configId = GetConfigResponse.AddMember("configId", smithyprelude.String)
-
-	GetConfigResponse_configArn = GetConfigResponse.AddMember("configArn", _ConfigArn)
-
-	GetConfigResponse_name = GetConfigResponse.AddMember("name", smithyprelude.String)
-
-	GetConfigResponse_configType = GetConfigResponse.AddMember("configType", ConfigCapabilityType)
-
-	GetConfigResponse_configData = GetConfigResponse.AddMember("configData", ConfigTypeData)
-
-	GetConfigResponse_tags = GetConfigResponse.AddMember("tags", _TagsMap)
-
-	GetDataflowEndpointGroupRequest_dataflowEndpointGroupId = GetDataflowEndpointGroupRequest.AddMember("dataflowEndpointGroupId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetDataflowEndpointGroupResponse_dataflowEndpointGroupId = GetDataflowEndpointGroupResponse.AddMember("dataflowEndpointGroupId", _Uuid)
-
-	GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn = GetDataflowEndpointGroupResponse.AddMember("dataflowEndpointGroupArn", _DataflowEndpointGroupArn)
-
-	GetDataflowEndpointGroupResponse_endpointsDetails = GetDataflowEndpointGroupResponse.AddMember("endpointsDetails", _EndpointDetailsList)
-
-	GetDataflowEndpointGroupResponse_tags = GetDataflowEndpointGroupResponse.AddMember("tags", _TagsMap)
-
-	GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds = GetDataflowEndpointGroupResponse.AddMember("contactPrePassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds = GetDataflowEndpointGroupResponse.AddMember("contactPostPassDurationSeconds", _DataflowEndpointGroupDurationInSeconds)
-
-	GetMinuteUsageRequest_month = GetMinuteUsageRequest.AddMember("month", _Month)
-
-	GetMinuteUsageRequest_year = GetMinuteUsageRequest.AddMember("year", _Year)
-
-	GetMinuteUsageResponse_isReservedMinutesCustomer = GetMinuteUsageResponse.AddMember("isReservedMinutesCustomer", smithyprelude.Boolean)
-
-	GetMinuteUsageResponse_totalReservedMinuteAllocation = GetMinuteUsageResponse.AddMember("totalReservedMinuteAllocation", smithyprelude.Integer)
-
-	GetMinuteUsageResponse_upcomingMinutesScheduled = GetMinuteUsageResponse.AddMember("upcomingMinutesScheduled", smithyprelude.Integer)
-
-	GetMinuteUsageResponse_totalScheduledMinutes = GetMinuteUsageResponse.AddMember("totalScheduledMinutes", smithyprelude.Integer)
-
-	GetMinuteUsageResponse_estimatedMinutesRemaining = GetMinuteUsageResponse.AddMember("estimatedMinutesRemaining", smithyprelude.Integer)
-
-	GetMissionProfileRequest_missionProfileId = GetMissionProfileRequest.AddMember("missionProfileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetMissionProfileResponse_missionProfileId = GetMissionProfileResponse.AddMember("missionProfileId", _Uuid)
-
-	GetMissionProfileResponse_missionProfileArn = GetMissionProfileResponse.AddMember("missionProfileArn", _MissionProfileArn)
-
-	GetMissionProfileResponse_name = GetMissionProfileResponse.AddMember("name", _SafeName)
-
-	GetMissionProfileResponse_region = GetMissionProfileResponse.AddMember("region", _AWSRegion)
-
-	GetMissionProfileResponse_contactPrePassDurationSeconds = GetMissionProfileResponse.AddMember("contactPrePassDurationSeconds", _DurationInSeconds)
-
-	GetMissionProfileResponse_contactPostPassDurationSeconds = GetMissionProfileResponse.AddMember("contactPostPassDurationSeconds", _DurationInSeconds)
-
-	GetMissionProfileResponse_minimumViableContactDurationSeconds = GetMissionProfileResponse.AddMember("minimumViableContactDurationSeconds", _PositiveDurationInSeconds)
-
-	GetMissionProfileResponse_dataflowEdges = GetMissionProfileResponse.AddMember("dataflowEdges", _DataflowEdgeList)
-
-	GetMissionProfileResponse_trackingConfigArn = GetMissionProfileResponse.AddMember("trackingConfigArn", _ConfigArn)
-
-	GetMissionProfileResponse_telemetrySinkConfigArn = GetMissionProfileResponse.AddMember("telemetrySinkConfigArn", _ConfigArn)
-
-	GetMissionProfileResponse_tags = GetMissionProfileResponse.AddMember("tags", _TagsMap)
-
-	GetMissionProfileResponse_streamsKmsKey = GetMissionProfileResponse.AddMember("streamsKmsKey", KmsKey)
-
-	GetMissionProfileResponse_streamsKmsRole = GetMissionProfileResponse.AddMember("streamsKmsRole", _RoleArn)
-
-	GetSatelliteRequest_satelliteId = GetSatelliteRequest.AddMember("satelliteId", _Uuid, &smithytraits.HTTPLabel{})
-
-	GetSatelliteResponse_satelliteId = GetSatelliteResponse.AddMember("satelliteId", _Uuid)
-
-	GetSatelliteResponse_satelliteArn = GetSatelliteResponse.AddMember("satelliteArn", _satelliteArn)
-
-	GetSatelliteResponse_noradSatelliteID = GetSatelliteResponse.AddMember("noradSatelliteID", _noradSatelliteID)
-
-	GetSatelliteResponse_groundStations = GetSatelliteResponse.AddMember("groundStations", _GroundStationIdList)
-
-	GetSatelliteResponse_currentEphemeris = GetSatelliteResponse.AddMember("currentEphemeris", EphemerisMetaData)
-
-	ListAntennasRequest_groundStationId = ListAntennasRequest.AddMember("groundStationId", _GroundStationName, &smithytraits.HTTPLabel{})
-
-	ListAntennasRequest_maxResults = ListAntennasRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAntennasRequest_nextToken = ListAntennasRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAntennasResponse_antennaList = ListAntennasResponse.AddMember("antennaList", _AntennaList)
-
-	ListAntennasResponse_nextToken = ListAntennasResponse.AddMember("nextToken", _PaginationToken)
-
-	ListConfigsRequest_maxResults = ListConfigsRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfigsRequest_nextToken = ListConfigsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfigsResponse_nextToken = ListConfigsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListConfigsResponse_configList = ListConfigsResponse.AddMember("configList", _ConfigList)
-
-	ListContactsRequest_maxResults = ListContactsRequest.AddMember("maxResults", _PaginationMaxResults)
-
-	ListContactsRequest_nextToken = ListContactsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListContactsRequest_statusList = ListContactsRequest.AddMember("statusList", _StatusList)
-
-	ListContactsRequest_startTime = ListContactsRequest.AddMember("startTime", smithyprelude.Timestamp)
-
-	ListContactsRequest_endTime = ListContactsRequest.AddMember("endTime", smithyprelude.Timestamp)
-
-	ListContactsRequest_groundStation = ListContactsRequest.AddMember("groundStation", _GroundStationName)
-
-	ListContactsRequest_satelliteArn = ListContactsRequest.AddMember("satelliteArn", _satelliteArn)
-
-	ListContactsRequest_missionProfileArn = ListContactsRequest.AddMember("missionProfileArn", _MissionProfileArn)
-
-	ListContactsRequest_ephemeris = ListContactsRequest.AddMember("ephemeris", EphemerisFilter)
-
-	ListContactsResponse_nextToken = ListContactsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListContactsResponse_contactList = ListContactsResponse.AddMember("contactList", _ContactList)
-
-	ListContactVersionsRequest_contactId = ListContactVersionsRequest.AddMember("contactId", _Uuid, &smithytraits.HTTPLabel{})
-
-	ListContactVersionsRequest_maxResults = ListContactVersionsRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListContactVersionsRequest_nextToken = ListContactVersionsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListContactVersionsResponse_nextToken = ListContactVersionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListContactVersionsResponse_contactVersionsList = ListContactVersionsResponse.AddMember("contactVersionsList", _ContactVersionsList)
-
-	ListDataflowEndpointGroupsRequest_maxResults = ListDataflowEndpointGroupsRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataflowEndpointGroupsRequest_nextToken = ListDataflowEndpointGroupsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataflowEndpointGroupsResponse_nextToken = ListDataflowEndpointGroupsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList = ListDataflowEndpointGroupsResponse.AddMember("dataflowEndpointGroupList", _DataflowEndpointGroupList)
-
-	ListEphemeridesRequest_satelliteId = ListEphemeridesRequest.AddMember("satelliteId", _Uuid)
-
-	ListEphemeridesRequest_ephemerisType = ListEphemeridesRequest.AddMember("ephemerisType", EphemerisType)
-
-	ListEphemeridesRequest_startTime = ListEphemeridesRequest.AddMember("startTime", smithyprelude.Timestamp)
-
-	ListEphemeridesRequest_endTime = ListEphemeridesRequest.AddMember("endTime", smithyprelude.Timestamp)
-
-	ListEphemeridesRequest_statusList = ListEphemeridesRequest.AddMember("statusList", _EphemerisStatusList)
-
-	ListEphemeridesRequest_maxResults = ListEphemeridesRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEphemeridesRequest_nextToken = ListEphemeridesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEphemeridesResponse_nextToken = ListEphemeridesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListEphemeridesResponse_ephemerides = ListEphemeridesResponse.AddMember("ephemerides", _EphemeridesList)
-
-	ListGroundStationReservationsRequest_groundStationId = ListGroundStationReservationsRequest.AddMember("groundStationId", _GroundStationName, &smithytraits.HTTPLabel{})
-
-	ListGroundStationReservationsRequest_startTime = ListGroundStationReservationsRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
-
-		&smithytraits.HTTPQuery{Name: "startTime"})
-
-	ListGroundStationReservationsRequest_endTime = ListGroundStationReservationsRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
-
-		&smithytraits.HTTPQuery{Name: "endTime"})
-
-	ListGroundStationReservationsRequest_reservationTypes = ListGroundStationReservationsRequest.AddMember("reservationTypes", _ReservationTypeFilterList, &smithytraits.HTTPQuery{Name: "reservationTypes"})
-
-	ListGroundStationReservationsRequest_maxResults = ListGroundStationReservationsRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListGroundStationReservationsRequest_nextToken = ListGroundStationReservationsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGroundStationReservationsResponse_reservationList = ListGroundStationReservationsResponse.AddMember("reservationList", _GroundStationReservationList)
-
-	ListGroundStationReservationsResponse_nextToken = ListGroundStationReservationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListGroundStationsRequest_satelliteId = ListGroundStationsRequest.AddMember("satelliteId", _Uuid, &smithytraits.HTTPQuery{Name: "satelliteId"})
-
-	ListGroundStationsRequest_maxResults = ListGroundStationsRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListGroundStationsRequest_nextToken = ListGroundStationsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGroundStationsResponse_nextToken = ListGroundStationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListGroundStationsResponse_groundStationList = ListGroundStationsResponse.AddMember("groundStationList", _GroundStationList)
-
-	ListMissionProfilesRequest_maxResults = ListMissionProfilesRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMissionProfilesRequest_nextToken = ListMissionProfilesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMissionProfilesResponse_nextToken = ListMissionProfilesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListMissionProfilesResponse_missionProfileList = ListMissionProfilesResponse.AddMember("missionProfileList", _MissionProfileList)
-
-	ListSatellitesRequest_maxResults = ListSatellitesRequest.AddMember("maxResults", _PaginationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSatellitesRequest_nextToken = ListSatellitesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSatellitesResponse_nextToken = ListSatellitesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListSatellitesResponse_satellites = ListSatellitesResponse.AddMember("satellites", _SatelliteList)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AnyArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagsMap)
-
-	RegisterAgentRequest_discoveryData = RegisterAgentRequest.AddMember("discoveryData", DiscoveryData)
-
-	RegisterAgentRequest_agentDetails = RegisterAgentRequest.AddMember("agentDetails", AgentDetails)
-
-	RegisterAgentRequest_tags = RegisterAgentRequest.AddMember("tags", _TagsMap)
-
-	RegisterAgentResponse_agentId = RegisterAgentResponse.AddMember("agentId", _Uuid)
-
-	ReserveContactRequest_missionProfileArn = ReserveContactRequest.AddMember("missionProfileArn", _MissionProfileArn)
-
-	ReserveContactRequest_satelliteArn = ReserveContactRequest.AddMember("satelliteArn", _satelliteArn)
-
-	ReserveContactRequest_startTime = ReserveContactRequest.AddMember("startTime", smithyprelude.Timestamp)
-
-	ReserveContactRequest_endTime = ReserveContactRequest.AddMember("endTime", smithyprelude.Timestamp)
-
-	ReserveContactRequest_groundStation = ReserveContactRequest.AddMember("groundStation", _GroundStationName)
-
-	ReserveContactRequest_tags = ReserveContactRequest.AddMember("tags", _TagsMap)
-
-	ReserveContactRequest_trackingOverrides = ReserveContactRequest.AddMember("trackingOverrides", TrackingOverrides)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AnyArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagsMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AnyArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAgentStatusRequest_agentId = UpdateAgentStatusRequest.AddMember("agentId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateAgentStatusRequest_taskId = UpdateAgentStatusRequest.AddMember("taskId", _Uuid)
-
-	UpdateAgentStatusRequest_aggregateStatus = UpdateAgentStatusRequest.AddMember("aggregateStatus", AggregateStatus)
-
-	UpdateAgentStatusRequest_componentStatuses = UpdateAgentStatusRequest.AddMember("componentStatuses", _ComponentStatusList)
-
-	UpdateAgentStatusResponse_agentId = UpdateAgentStatusResponse.AddMember("agentId", _Uuid)
-
-	UpdateConfigRequest_configId = UpdateConfigRequest.AddMember("configId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateConfigRequest_name = UpdateConfigRequest.AddMember("name", _SafeName)
-
-	UpdateConfigRequest_configType = UpdateConfigRequest.AddMember("configType", ConfigCapabilityType, &smithytraits.HTTPLabel{})
-
-	UpdateConfigRequest_configData = UpdateConfigRequest.AddMember("configData", ConfigTypeData)
-
-	UpdateContactRequest_contactId = UpdateContactRequest.AddMember("contactId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateContactRequest_clientToken = UpdateContactRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateContactRequest_trackingOverrides = UpdateContactRequest.AddMember("trackingOverrides", TrackingOverrides)
-
-	UpdateContactRequest_satelliteArn = UpdateContactRequest.AddMember("satelliteArn", _satelliteArn)
-
-	UpdateContactResponse_contactId = UpdateContactResponse.AddMember("contactId", _Uuid)
-
-	UpdateContactResponse_versionId = UpdateContactResponse.AddMember("versionId", _VersionId)
-
-	UpdateEphemerisRequest_ephemerisId = UpdateEphemerisRequest.AddMember("ephemerisId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateEphemerisRequest_enabled = UpdateEphemerisRequest.AddMember("enabled", smithyprelude.Boolean)
-
-	UpdateEphemerisRequest_name = UpdateEphemerisRequest.AddMember("name", _SafeName)
-
-	UpdateEphemerisRequest_priority = UpdateEphemerisRequest.AddMember("priority", _EphemerisPriority)
-
-	UpdateMissionProfileRequest_missionProfileId = UpdateMissionProfileRequest.AddMember("missionProfileId", _Uuid, &smithytraits.HTTPLabel{})
-
-	UpdateMissionProfileRequest_name = UpdateMissionProfileRequest.AddMember("name", _SafeName)
-
-	UpdateMissionProfileRequest_contactPrePassDurationSeconds = UpdateMissionProfileRequest.AddMember("contactPrePassDurationSeconds", _DurationInSeconds)
-
-	UpdateMissionProfileRequest_contactPostPassDurationSeconds = UpdateMissionProfileRequest.AddMember("contactPostPassDurationSeconds", _DurationInSeconds)
-
-	UpdateMissionProfileRequest_minimumViableContactDurationSeconds = UpdateMissionProfileRequest.AddMember("minimumViableContactDurationSeconds", _PositiveDurationInSeconds)
-
-	UpdateMissionProfileRequest_dataflowEdges = UpdateMissionProfileRequest.AddMember("dataflowEdges", _DataflowEdgeList)
-
-	UpdateMissionProfileRequest_trackingConfigArn = UpdateMissionProfileRequest.AddMember("trackingConfigArn", _ConfigArn)
-
-	UpdateMissionProfileRequest_telemetrySinkConfigArn = UpdateMissionProfileRequest.AddMember("telemetrySinkConfigArn", _ConfigArn)
-
-	UpdateMissionProfileRequest_streamsKmsKey = UpdateMissionProfileRequest.AddMember("streamsKmsKey", KmsKey)
-
-	UpdateMissionProfileRequest_streamsKmsRole = UpdateMissionProfileRequest.AddMember("streamsKmsRole", _RoleArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 531}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 431}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 434}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "startTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x410}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "endTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x410}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "reservationTypes"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "satelliteId"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m_AgentCpuCoresList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AgentCpuCoresList_member}}
+var mAgentDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentDetails_agentVersion, &sAgentDetails_instanceId, &sAgentDetails_instanceType, &sAgentDetails_reservedCpuCores, &sAgentDetails_agentCpuCores, &sAgentDetails_componentVersions}}
+var mAgentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentStatus_SUCCESS, &sAgentStatus_FAILED, &sAgentStatus_ACTIVE, &sAgentStatus_INACTIVE}}
+var mAggregateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregateStatus_status, &sAggregateStatus_signatureMap}}
+var mAngleUnits = smithy.SchemaMembers{List: []*smithy.Schema{&sAngleUnits_DEGREE_ANGLE, &sAngleUnits_RADIAN}}
+var mAntennaDemodDecodeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAntennaDemodDecodeDetails_outputNode}}
+var mAntennaDownlinkConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAntennaDownlinkConfig_spectrumConfig}}
+var mAntennaDownlinkDemodDecodeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAntennaDownlinkDemodDecodeConfig_spectrumConfig, &sAntennaDownlinkDemodDecodeConfig_demodulationConfig, &sAntennaDownlinkDemodDecodeConfig_decodeConfig}}
+var m_AntennaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AntennaList_member}}
+var mAntennaListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAntennaListItem_groundStationName, &sAntennaListItem_antennaName, &sAntennaListItem_region}}
+var mAntennaUplinkConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAntennaUplinkConfig_transmitDisabled, &sAntennaUplinkConfig_spectrumConfig, &sAntennaUplinkConfig_targetEirp}}
+var mAuditResults = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditResults_HEALTHY, &sAuditResults_UNHEALTHY}}
+var mAwsGroundStationAgentEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsGroundStationAgentEndpoint_name, &sAwsGroundStationAgentEndpoint_egressAddress, &sAwsGroundStationAgentEndpoint_ingressAddress, &sAwsGroundStationAgentEndpoint_agentStatus, &sAwsGroundStationAgentEndpoint_auditResults}}
+var mAzElEphemeris = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElEphemeris_groundStation, &sAzElEphemeris_data}}
+var mAzElEphemerisFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElEphemerisFilter_id}}
+var mAzElProgramTrackSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElProgramTrackSettings_ephemerisId}}
+var mAzElSegment = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElSegment_referenceEpoch, &sAzElSegment_validTimeRange, &sAzElSegment_azElList}}
+var m_AzElSegmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AzElSegmentList_member}}
+var mAzElSegments = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElSegments_angleUnit, &sAzElSegments_azElSegmentList}}
+var mAzElSegmentsData = smithy.SchemaMembers{List: []*smithy.Schema{&sAzElSegmentsData_s3Object, &sAzElSegmentsData_azElData}}
+var mBandwidthUnits = smithy.SchemaMembers{List: []*smithy.Schema{&sBandwidthUnits_GHZ, &sBandwidthUnits_MHZ, &sBandwidthUnits_KHZ}}
+var m_CapabilityArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapabilityArnList_member}}
+var mCapabilityHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sCapabilityHealth_HEALTHY, &sCapabilityHealth_UNHEALTHY}}
+var mCapabilityHealthReason = smithy.SchemaMembers{List: []*smithy.Schema{&sCapabilityHealthReason_NO_REGISTERED_AGENT, &sCapabilityHealthReason_INVALID_IP_OWNERSHIP, &sCapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR, &sCapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP, &sCapabilityHealthReason_INITIALIZING_DATAPLANE, &sCapabilityHealthReason_DATAPLANE_FAILURE, &sCapabilityHealthReason_HEALTHY}}
+var m_CapabilityHealthReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapabilityHealthReasonList_member}}
+var mComponentStatusData = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentStatusData_componentType, &sComponentStatusData_capabilityArn, &sComponentStatusData_status, &sComponentStatusData_bytesSent, &sComponentStatusData_bytesReceived, &sComponentStatusData_packetsDropped, &sComponentStatusData_dataflowId}}
+var m_ComponentStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentStatusList_member}}
+var mComponentVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentVersion_componentType, &sComponentVersion_versions}}
+var m_ComponentVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentVersionList_member}}
+var mConfigCapabilityType = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigCapabilityType_ANTENNA_DOWNLINK, &sConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE, &sConfigCapabilityType_TRACKING, &sConfigCapabilityType_DATAFLOW_ENDPOINT, &sConfigCapabilityType_ANTENNA_UPLINK, &sConfigCapabilityType_UPLINK_ECHO, &sConfigCapabilityType_S3_RECORDING, &sConfigCapabilityType_TELEMETRY_SINK}}
+var mConfigDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigDetails_endpointDetails, &sConfigDetails_antennaDemodDecodeDetails, &sConfigDetails_s3RecordingDetails}}
+var m_ConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigList_member}}
+var mConfigListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigListItem_configId, &sConfigListItem_configType, &sConfigListItem_configArn, &sConfigListItem_name}}
+var mConfigTypeData = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigTypeData_antennaDownlinkConfig, &sConfigTypeData_trackingConfig, &sConfigTypeData_dataflowEndpointConfig, &sConfigTypeData_antennaDownlinkDemodDecodeConfig, &sConfigTypeData_antennaUplinkConfig, &sConfigTypeData_uplinkEchoConfig, &sConfigTypeData_s3RecordingConfig, &sConfigTypeData_telemetrySinkConfig}}
+var mConnectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionDetails_socketAddress, &sConnectionDetails_mtu}}
+var mContactData = smithy.SchemaMembers{List: []*smithy.Schema{&sContactData_contactId, &sContactData_missionProfileArn, &sContactData_satelliteArn, &sContactData_startTime, &sContactData_endTime, &sContactData_prePassStartTime, &sContactData_postPassEndTime, &sContactData_groundStation, &sContactData_contactStatus, &sContactData_errorMessage, &sContactData_maximumElevation, &sContactData_region, &sContactData_tags, &sContactData_visibilityStartTime, &sContactData_visibilityEndTime, &sContactData_ephemeris, &sContactData_version}, Hash: &hContactData}
+var m_ContactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContactList_member}}
+var mContactReservationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sContactReservationDetails_contactId}}
+var mContactStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sContactStatus_SCHEDULING, &sContactStatus_FAILED_TO_SCHEDULE, &sContactStatus_SCHEDULED, &sContactStatus_CANCELLED, &sContactStatus_AWS_CANCELLED, &sContactStatus_PREPASS, &sContactStatus_PASS, &sContactStatus_POSTPASS, &sContactStatus_COMPLETED, &sContactStatus_FAILED, &sContactStatus_AVAILABLE, &sContactStatus_CANCELLING, &sContactStatus_AWS_FAILED}, Hash: &hContactStatus}
+var mContactVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sContactVersion_versionId, &sContactVersion_created, &sContactVersion_activated, &sContactVersion_superseded, &sContactVersion_lastUpdated, &sContactVersion_status, &sContactVersion_failureCodes, &sContactVersion_failureMessage}}
+var m_ContactVersionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContactVersionsList_member}}
+var mCreateEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint, &sCreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint}}
+var m_CreateEndpointDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateEndpointDetailsList_member}}
+var mCriticality = smithy.SchemaMembers{List: []*smithy.Schema{&sCriticality_REQUIRED, &sCriticality_PREFERRED, &sCriticality_REMOVED}}
+var mDataflowDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDataflowDetail_source, &sDataflowDetail_destination, &sDataflowDetail_errorMessage}}
+var m_DataflowEdge = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataflowEdge_member}}
+var m_DataflowEdgeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataflowEdgeList_member}}
+var mDataflowEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sDataflowEndpoint_name, &sDataflowEndpoint_address, &sDataflowEndpoint_status, &sDataflowEndpoint_mtu}}
+var mDataflowEndpointConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDataflowEndpointConfig_dataflowEndpointName, &sDataflowEndpointConfig_dataflowEndpointRegion}}
+var m_DataflowEndpointGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataflowEndpointGroupList_member}}
+var mDataflowEndpointListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sDataflowEndpointListItem_dataflowEndpointGroupId, &sDataflowEndpointListItem_dataflowEndpointGroupArn}}
+var m_DataflowList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataflowList_member}}
+var mDecodeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDecodeConfig_unvalidatedJSON}}
+var mDemodulationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDemodulationConfig_unvalidatedJSON}}
+var mDependencyException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyException_message, &sDependencyException_parameterName}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_configType, &sDestination_configId, &sDestination_configDetails, &sDestination_dataflowDestinationRegion}}
+var mDiscoveryData = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoveryData_publicIpAddresses, &sDiscoveryData_privateIpAddresses, &sDiscoveryData_capabilityArns}}
+var mDownlinkAwsGroundStationAgentEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sDownlinkAwsGroundStationAgentEndpoint_name, &sDownlinkAwsGroundStationAgentEndpoint_dataflowDetails}}
+var mDownlinkAwsGroundStationAgentEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDownlinkAwsGroundStationAgentEndpointDetails_name, &sDownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails, &sDownlinkAwsGroundStationAgentEndpointDetails_agentStatus, &sDownlinkAwsGroundStationAgentEndpointDetails_auditResults}}
+var mDownlinkConnectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDownlinkConnectionDetails_agentIpAndPortAddress, &sDownlinkConnectionDetails_egressAddressAndPort}}
+var mDownlinkDataflowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDownlinkDataflowDetails_agentConnectionDetails}}
+var mEirp = smithy.SchemaMembers{List: []*smithy.Schema{&sEirp_value, &sEirp_units}}
+var mEirpUnits = smithy.SchemaMembers{List: []*smithy.Schema{&sEirpUnits_DBW}}
+var mElevation = smithy.SchemaMembers{List: []*smithy.Schema{&sElevation_value, &sElevation_unit}}
+var mEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDetails_securityDetails, &sEndpointDetails_endpoint, &sEndpointDetails_awsGroundStationAgentEndpoint, &sEndpointDetails_uplinkAwsGroundStationAgentEndpoint, &sEndpointDetails_downlinkAwsGroundStationAgentEndpoint, &sEndpointDetails_healthStatus, &sEndpointDetails_healthReasons}}
+var m_EndpointDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointDetailsList_member}}
+var mEndpointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointStatus_created, &sEndpointStatus_creating, &sEndpointStatus_deleted, &sEndpointStatus_deleting, &sEndpointStatus_failed}}
+var m_EphemeridesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EphemeridesList_member}}
+var mEphemerisData = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisData_tle, &sEphemerisData_oem, &sEphemerisData_azEl}}
+var mEphemerisDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisDescription_sourceS3Object, &sEphemerisDescription_ephemerisData}}
+var mEphemerisErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisErrorCode_INTERNAL_ERROR, &sEphemerisErrorCode_MISMATCHED_SATCAT_ID, &sEphemerisErrorCode_OEM_VERSION_UNSUPPORTED, &sEphemerisErrorCode_ORIGINATOR_MISSING, &sEphemerisErrorCode_CREATION_DATE_MISSING, &sEphemerisErrorCode_OBJECT_NAME_MISSING, &sEphemerisErrorCode_OBJECT_ID_MISSING, &sEphemerisErrorCode_REF_FRAME_UNSUPPORTED, &sEphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED, &sEphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED, &sEphemerisErrorCode_CENTER_BODY_UNSUPPORTED, &sEphemerisErrorCode_INTERPOLATION_MISSING, &sEphemerisErrorCode_INTERPOLATION_DEGREE_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING, &sEphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL, &sEphemerisErrorCode_START_TIME_IN_FUTURE, &sEphemerisErrorCode_END_TIME_IN_PAST, &sEphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY, &sEphemerisErrorCode_START_TIME_METADATA_TOO_EARLY, &sEphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE, &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME, &sEphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP, &sEphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER, &sEphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER, &sEphemerisErrorCode_MEAN_MOTION_INVALID, &sEphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID, &sEphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID, &sEphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID, &sEphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID, &sEphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID, &sEphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS, &sEphemerisErrorCode_FILE_FORMAT_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID, &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE, &sEphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED}, Hash: &hEphemerisErrorCode}
+var mEphemerisErrorReason = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisErrorReason_errorCode, &sEphemerisErrorReason_errorMessage}}
+var m_EphemerisErrorReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EphemerisErrorReasonList_member}}
+var mEphemerisFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisFilter_azEl}}
+var mEphemerisInvalidReason = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisInvalidReason_METADATA_INVALID, &sEphemerisInvalidReason_TIME_RANGE_INVALID, &sEphemerisInvalidReason_TRAJECTORY_INVALID, &sEphemerisInvalidReason_KMS_KEY_INVALID, &sEphemerisInvalidReason_VALIDATION_ERROR}}
+var mEphemerisItem = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisItem_ephemerisId, &sEphemerisItem_ephemerisType, &sEphemerisItem_status, &sEphemerisItem_priority, &sEphemerisItem_enabled, &sEphemerisItem_creationTime, &sEphemerisItem_name, &sEphemerisItem_sourceS3Object}}
+var mEphemerisMetaData = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisMetaData_source, &sEphemerisMetaData_ephemerisId, &sEphemerisMetaData_epoch, &sEphemerisMetaData_name}}
+var mEphemerisResponseData = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisResponseData_ephemerisId, &sEphemerisResponseData_ephemerisType}}
+var mEphemerisSource = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisSource_CUSTOMER_PROVIDED, &sEphemerisSource_SPACE_TRACK}}
+var mEphemerisStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisStatus_VALIDATING, &sEphemerisStatus_INVALID, &sEphemerisStatus_ERROR, &sEphemerisStatus_ENABLED, &sEphemerisStatus_DISABLED, &sEphemerisStatus_EXPIRED}}
+var m_EphemerisStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EphemerisStatusList_member}}
+var mEphemerisType = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisType_TLE, &sEphemerisType_OEM, &sEphemerisType_AZ_EL, &sEphemerisType_SERVICE_MANAGED}}
+var mEphemerisTypeDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisTypeDescription_tle, &sEphemerisTypeDescription_oem, &sEphemerisTypeDescription_azEl}}
+var mFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sFrequency_value, &sFrequency_units}}
+var mFrequencyBandwidth = smithy.SchemaMembers{List: []*smithy.Schema{&sFrequencyBandwidth_value, &sFrequencyBandwidth_units}}
+var mFrequencyUnits = smithy.SchemaMembers{List: []*smithy.Schema{&sFrequencyUnits_GHZ, &sFrequencyUnits_MHZ, &sFrequencyUnits_KHZ}}
+var mGroundStationData = smithy.SchemaMembers{List: []*smithy.Schema{&sGroundStationData_groundStationId, &sGroundStationData_groundStationName, &sGroundStationData_region}}
+var m_GroundStationIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroundStationIdList_member}}
+var m_GroundStationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroundStationList_member}}
+var m_GroundStationReservationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroundStationReservationList_member}}
+var mGroundStationReservationListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sGroundStationReservationListItem_reservationType, &sGroundStationReservationListItem_groundStationId, &sGroundStationReservationListItem_antennaName, &sGroundStationReservationListItem_startTime, &sGroundStationReservationListItem_endTime, &sGroundStationReservationListItem_reservationDetails}}
+var mIntegerRange = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegerRange_minimum, &sIntegerRange_maximum}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message, &sInvalidParameterException_parameterName}}
+var m_IpAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddressList_member}}
+var mISO8601TimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sISO8601TimeRange_startTime, &sISO8601TimeRange_endTime}}
+var mKinesisDataStreamData = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisDataStreamData_kinesisRoleArn, &sKinesisDataStreamData_kinesisDataStreamArn}}
+var mKmsKey = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsKey_kmsKeyArn, &sKmsKey_kmsAliasArn, &sKmsKey_kmsAliasName}}
+var mMaintenanceReservationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sMaintenanceReservationDetails_maintenanceType}}
+var mMaintenanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sMaintenanceType_PLANNED, &sMaintenanceType_UNPLANNED}}
+var m_MissionProfileList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MissionProfileList_member}}
+var mMissionProfileListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sMissionProfileListItem_missionProfileId, &sMissionProfileListItem_missionProfileArn, &sMissionProfileListItem_region, &sMissionProfileListItem_name}}
+var mOEMEphemeris = smithy.SchemaMembers{List: []*smithy.Schema{&sOEMEphemeris_s3Object, &sOEMEphemeris_oemData}}
+var mOemProgramTrackSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sOemProgramTrackSettings_ephemerisId}}
+var mPolarization = smithy.SchemaMembers{List: []*smithy.Schema{&sPolarization_RIGHT_HAND, &sPolarization_LEFT_HAND, &sPolarization_NONE}}
+var mProgramTrackSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sProgramTrackSettings_azEl, &sProgramTrackSettings_oem, &sProgramTrackSettings_tle}}
+var mRangedConnectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sRangedConnectionDetails_socketAddress, &sRangedConnectionDetails_mtu}}
+var mRangedSocketAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sRangedSocketAddress_name, &sRangedSocketAddress_portRange}}
+var mReservationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sReservationDetails_maintenance, &sReservationDetails_contact}}
+var mReservationType = smithy.SchemaMembers{List: []*smithy.Schema{&sReservationType_MAINTENANCE, &sReservationType_CONTACT}}
+var m_ReservationTypeFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReservationTypeFilterList_member}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
+var mResourceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceededException_message, &sResourceLimitExceededException_parameterName}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3Object = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Object_bucket, &sS3Object_key, &sS3Object_version}}
+var mS3RecordingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3RecordingConfig_bucketArn, &sS3RecordingConfig_roleArn, &sS3RecordingConfig_prefix}}
+var mS3RecordingDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sS3RecordingDetails_bucketArn, &sS3RecordingDetails_keyTemplate}}
+var m_SatelliteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SatelliteList_member}}
+var mSatelliteListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sSatelliteListItem_satelliteId, &sSatelliteListItem_satelliteArn, &sSatelliteListItem_noradSatelliteID, &sSatelliteListItem_groundStations, &sSatelliteListItem_currentEphemeris}}
+var mSecurityDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityDetails_subnetIds, &sSecurityDetails_securityGroupIds, &sSecurityDetails_roleArn}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_parameterName}}
+var m_SignatureMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SignatureMap_key, &s_SignatureMap_value}}
+var mSocketAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sSocketAddress_name, &sSocketAddress_port}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_configType, &sSource_configId, &sSource_configDetails, &sSource_dataflowSourceRegion}}
+var mSpectrumConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSpectrumConfig_centerFrequency, &sSpectrumConfig_bandwidth, &sSpectrumConfig_polarization}}
+var m_StatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatusList_member}}
+var m_SubnetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetList_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsMap_key, &s_TagsMap_value}}
+var mTelemetrySinkConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetrySinkConfig_telemetrySinkType, &sTelemetrySinkConfig_telemetrySinkData}}
+var mTelemetrySinkData = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetrySinkData_kinesisDataStreamData}}
+var mTelemetrySinkType = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetrySinkType_KINESIS_DATA_STREAM}}
+var mTimeAzEl = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeAzEl_dt, &sTimeAzEl_az, &sTimeAzEl_el}}
+var m_TimeAzElList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TimeAzElList_member}}
+var mTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeRange_startTime, &sTimeRange_endTime}}
+var mTLEData = smithy.SchemaMembers{List: []*smithy.Schema{&sTLEData_tleLine1, &sTLEData_tleLine2, &sTLEData_validTimeRange}}
+var m_TLEDataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TLEDataList_member}}
+var mTLEEphemeris = smithy.SchemaMembers{List: []*smithy.Schema{&sTLEEphemeris_s3Object, &sTLEEphemeris_tleData}}
+var mTleProgramTrackSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTleProgramTrackSettings_ephemerisId}}
+var mTrackingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTrackingConfig_autotrack}}
+var mTrackingOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sTrackingOverrides_programTrackSettings}}
+var mUplinkAwsGroundStationAgentEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkAwsGroundStationAgentEndpoint_name, &sUplinkAwsGroundStationAgentEndpoint_dataflowDetails}}
+var mUplinkAwsGroundStationAgentEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkAwsGroundStationAgentEndpointDetails_name, &sUplinkAwsGroundStationAgentEndpointDetails_dataflowDetails, &sUplinkAwsGroundStationAgentEndpointDetails_agentStatus, &sUplinkAwsGroundStationAgentEndpointDetails_auditResults}}
+var mUplinkConnectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkConnectionDetails_ingressAddressAndPort, &sUplinkConnectionDetails_agentIpAndPortAddress}}
+var mUplinkDataflowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkDataflowDetails_agentConnectionDetails}}
+var mUplinkEchoConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkEchoConfig_enabled, &sUplinkEchoConfig_antennaUplinkConfigArn}}
+var mUplinkSpectrumConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUplinkSpectrumConfig_centerFrequency, &sUplinkSpectrumConfig_polarization}}
+var mVersionFailureReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sVersionFailureReasonCode_INTERNAL_ERROR, &sVersionFailureReasonCode_INVALID_SATELLITE_ARN, &sVersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST, &sVersionFailureReasonCode_EPHEMERIS_NOT_FOUND, &sVersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID, &sVersionFailureReasonCode_EPHEMERIS_NOT_ENABLED, &sVersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS, &sVersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS, &sVersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND, &sVersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION, &sVersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS, &sVersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID}, Hash: &hVersionFailureReasonCode}
+var m_VersionFailureReasonCodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_VersionFailureReasonCodes_member}}
+var mVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVersionStatus_UPDATING, &sVersionStatus_ACTIVE, &sVersionStatus_SUPERSEDED, &sVersionStatus_FAILED_TO_UPDATE}}
+var m_VersionStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VersionStringList_member}}
+var mCancelContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelContactRequest_contactId}}
+var mContactIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sContactIdResponse_contactId, &sContactIdResponse_versionId}}
+var mCreateConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigRequest_name, &sCreateConfigRequest_configData, &sCreateConfigRequest_tags}}
+var mConfigIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigIdResponse_configId, &sConfigIdResponse_configType, &sConfigIdResponse_configArn}}
+var mCreateDataflowEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataflowEndpointGroupRequest_endpointDetails, &sCreateDataflowEndpointGroupRequest_tags, &sCreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds, &sCreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds}}
+var mDataflowEndpointGroupIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDataflowEndpointGroupIdResponse_dataflowEndpointGroupId}}
+var mCreateDataflowEndpointGroupV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataflowEndpointGroupV2Request_endpoints, &sCreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds, &sCreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds, &sCreateDataflowEndpointGroupV2Request_tags}}
+var mCreateDataflowEndpointGroupV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId}}
+var mCreateEphemerisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEphemerisRequest_satelliteId, &sCreateEphemerisRequest_enabled, &sCreateEphemerisRequest_priority, &sCreateEphemerisRequest_expirationTime, &sCreateEphemerisRequest_name, &sCreateEphemerisRequest_kmsKeyArn, &sCreateEphemerisRequest_ephemeris, &sCreateEphemerisRequest_tags}}
+var mEphemerisIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemerisIdResponse_ephemerisId}}
+var mCreateMissionProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMissionProfileRequest_name, &sCreateMissionProfileRequest_contactPrePassDurationSeconds, &sCreateMissionProfileRequest_contactPostPassDurationSeconds, &sCreateMissionProfileRequest_minimumViableContactDurationSeconds, &sCreateMissionProfileRequest_dataflowEdges, &sCreateMissionProfileRequest_trackingConfigArn, &sCreateMissionProfileRequest_telemetrySinkConfigArn, &sCreateMissionProfileRequest_tags, &sCreateMissionProfileRequest_streamsKmsKey, &sCreateMissionProfileRequest_streamsKmsRole}, Hash: &hCreateMissionProfileRequest}
+var mMissionProfileIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sMissionProfileIdResponse_missionProfileId}}
+var mDeleteConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigRequest_configId, &sDeleteConfigRequest_configType}}
+var mDeleteDataflowEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId}}
+var mDeleteEphemerisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEphemerisRequest_ephemerisId}}
+var mDeleteMissionProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMissionProfileRequest_missionProfileId}}
+var mDescribeContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeContactRequest_contactId}}
+var mDescribeContactResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeContactResponse_contactId, &sDescribeContactResponse_missionProfileArn, &sDescribeContactResponse_satelliteArn, &sDescribeContactResponse_startTime, &sDescribeContactResponse_endTime, &sDescribeContactResponse_prePassStartTime, &sDescribeContactResponse_postPassEndTime, &sDescribeContactResponse_groundStation, &sDescribeContactResponse_contactStatus, &sDescribeContactResponse_errorMessage, &sDescribeContactResponse_maximumElevation, &sDescribeContactResponse_tags, &sDescribeContactResponse_region, &sDescribeContactResponse_dataflowList, &sDescribeContactResponse_visibilityStartTime, &sDescribeContactResponse_visibilityEndTime, &sDescribeContactResponse_trackingOverrides, &sDescribeContactResponse_ephemeris, &sDescribeContactResponse_version}, Hash: &hDescribeContactResponse}
+var mDescribeContactVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeContactVersionRequest_contactId, &sDescribeContactVersionRequest_versionId}}
+var mDescribeContactVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeContactVersionResponse_contactId, &sDescribeContactVersionResponse_missionProfileArn, &sDescribeContactVersionResponse_satelliteArn, &sDescribeContactVersionResponse_startTime, &sDescribeContactVersionResponse_endTime, &sDescribeContactVersionResponse_prePassStartTime, &sDescribeContactVersionResponse_postPassEndTime, &sDescribeContactVersionResponse_groundStation, &sDescribeContactVersionResponse_contactStatus, &sDescribeContactVersionResponse_errorMessage, &sDescribeContactVersionResponse_maximumElevation, &sDescribeContactVersionResponse_tags, &sDescribeContactVersionResponse_region, &sDescribeContactVersionResponse_dataflowList, &sDescribeContactVersionResponse_visibilityStartTime, &sDescribeContactVersionResponse_visibilityEndTime, &sDescribeContactVersionResponse_trackingOverrides, &sDescribeContactVersionResponse_ephemeris, &sDescribeContactVersionResponse_version}, Hash: &hDescribeContactVersionResponse}
+var mDescribeEphemerisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEphemerisRequest_ephemerisId}}
+var mDescribeEphemerisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEphemerisResponse_ephemerisId, &sDescribeEphemerisResponse_satelliteId, &sDescribeEphemerisResponse_status, &sDescribeEphemerisResponse_priority, &sDescribeEphemerisResponse_creationTime, &sDescribeEphemerisResponse_enabled, &sDescribeEphemerisResponse_name, &sDescribeEphemerisResponse_tags, &sDescribeEphemerisResponse_suppliedData, &sDescribeEphemerisResponse_invalidReason, &sDescribeEphemerisResponse_errorReasons}, Hash: &hDescribeEphemerisResponse}
+var mGetAgentConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAgentConfigurationRequest_agentId}}
+var mGetAgentConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAgentConfigurationResponse_agentId, &sGetAgentConfigurationResponse_taskingDocument}}
+var mGetAgentTaskResponseUrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAgentTaskResponseUrlRequest_agentId, &sGetAgentTaskResponseUrlRequest_taskId}}
+var mGetAgentTaskResponseUrlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAgentTaskResponseUrlResponse_agentId, &sGetAgentTaskResponseUrlResponse_taskId, &sGetAgentTaskResponseUrlResponse_presignedLogUrl}}
+var mGetConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigRequest_configId, &sGetConfigRequest_configType}}
+var mGetConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigResponse_configId, &sGetConfigResponse_configArn, &sGetConfigResponse_name, &sGetConfigResponse_configType, &sGetConfigResponse_configData, &sGetConfigResponse_tags}}
+var mGetDataflowEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataflowEndpointGroupRequest_dataflowEndpointGroupId}}
+var mGetDataflowEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataflowEndpointGroupResponse_dataflowEndpointGroupId, &sGetDataflowEndpointGroupResponse_dataflowEndpointGroupArn, &sGetDataflowEndpointGroupResponse_endpointsDetails, &sGetDataflowEndpointGroupResponse_tags, &sGetDataflowEndpointGroupResponse_contactPrePassDurationSeconds, &sGetDataflowEndpointGroupResponse_contactPostPassDurationSeconds}}
+var mGetMinuteUsageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMinuteUsageRequest_month, &sGetMinuteUsageRequest_year}}
+var mGetMinuteUsageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMinuteUsageResponse_isReservedMinutesCustomer, &sGetMinuteUsageResponse_totalReservedMinuteAllocation, &sGetMinuteUsageResponse_upcomingMinutesScheduled, &sGetMinuteUsageResponse_totalScheduledMinutes, &sGetMinuteUsageResponse_estimatedMinutesRemaining}}
+var mGetMissionProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMissionProfileRequest_missionProfileId}}
+var mGetMissionProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMissionProfileResponse_missionProfileId, &sGetMissionProfileResponse_missionProfileArn, &sGetMissionProfileResponse_name, &sGetMissionProfileResponse_region, &sGetMissionProfileResponse_contactPrePassDurationSeconds, &sGetMissionProfileResponse_contactPostPassDurationSeconds, &sGetMissionProfileResponse_minimumViableContactDurationSeconds, &sGetMissionProfileResponse_dataflowEdges, &sGetMissionProfileResponse_trackingConfigArn, &sGetMissionProfileResponse_telemetrySinkConfigArn, &sGetMissionProfileResponse_tags, &sGetMissionProfileResponse_streamsKmsKey, &sGetMissionProfileResponse_streamsKmsRole}, Hash: &hGetMissionProfileResponse}
+var mGetSatelliteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSatelliteRequest_satelliteId}}
+var mGetSatelliteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSatelliteResponse_satelliteId, &sGetSatelliteResponse_satelliteArn, &sGetSatelliteResponse_noradSatelliteID, &sGetSatelliteResponse_groundStations, &sGetSatelliteResponse_currentEphemeris}}
+var mListAntennasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAntennasRequest_groundStationId, &sListAntennasRequest_maxResults, &sListAntennasRequest_nextToken}}
+var mListAntennasResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAntennasResponse_antennaList, &sListAntennasResponse_nextToken}}
+var mListConfigsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigsRequest_maxResults, &sListConfigsRequest_nextToken}}
+var mListConfigsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigsResponse_nextToken, &sListConfigsResponse_configList}}
+var mListContactsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactsRequest_maxResults, &sListContactsRequest_nextToken, &sListContactsRequest_statusList, &sListContactsRequest_startTime, &sListContactsRequest_endTime, &sListContactsRequest_groundStation, &sListContactsRequest_satelliteArn, &sListContactsRequest_missionProfileArn, &sListContactsRequest_ephemeris}, Hash: &hListContactsRequest}
+var mListContactsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactsResponse_nextToken, &sListContactsResponse_contactList}}
+var mListContactVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactVersionsRequest_contactId, &sListContactVersionsRequest_maxResults, &sListContactVersionsRequest_nextToken}}
+var mListContactVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListContactVersionsResponse_nextToken, &sListContactVersionsResponse_contactVersionsList}}
+var mListDataflowEndpointGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataflowEndpointGroupsRequest_maxResults, &sListDataflowEndpointGroupsRequest_nextToken}}
+var mListDataflowEndpointGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataflowEndpointGroupsResponse_nextToken, &sListDataflowEndpointGroupsResponse_dataflowEndpointGroupList}}
+var mListEphemeridesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEphemeridesRequest_satelliteId, &sListEphemeridesRequest_ephemerisType, &sListEphemeridesRequest_startTime, &sListEphemeridesRequest_endTime, &sListEphemeridesRequest_statusList, &sListEphemeridesRequest_maxResults, &sListEphemeridesRequest_nextToken}}
+var mListEphemeridesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEphemeridesResponse_nextToken, &sListEphemeridesResponse_ephemerides}}
+var mListGroundStationReservationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroundStationReservationsRequest_groundStationId, &sListGroundStationReservationsRequest_startTime, &sListGroundStationReservationsRequest_endTime, &sListGroundStationReservationsRequest_reservationTypes, &sListGroundStationReservationsRequest_maxResults, &sListGroundStationReservationsRequest_nextToken}}
+var mListGroundStationReservationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroundStationReservationsResponse_reservationList, &sListGroundStationReservationsResponse_nextToken}}
+var mListGroundStationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroundStationsRequest_satelliteId, &sListGroundStationsRequest_maxResults, &sListGroundStationsRequest_nextToken}}
+var mListGroundStationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroundStationsResponse_nextToken, &sListGroundStationsResponse_groundStationList}}
+var mListMissionProfilesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMissionProfilesRequest_maxResults, &sListMissionProfilesRequest_nextToken}}
+var mListMissionProfilesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMissionProfilesResponse_nextToken, &sListMissionProfilesResponse_missionProfileList}}
+var mListSatellitesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSatellitesRequest_maxResults, &sListSatellitesRequest_nextToken}}
+var mListSatellitesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSatellitesResponse_nextToken, &sListSatellitesResponse_satellites}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterAgentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAgentRequest_discoveryData, &sRegisterAgentRequest_agentDetails, &sRegisterAgentRequest_tags}}
+var mRegisterAgentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAgentResponse_agentId}}
+var mReserveContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReserveContactRequest_missionProfileArn, &sReserveContactRequest_satelliteArn, &sReserveContactRequest_startTime, &sReserveContactRequest_endTime, &sReserveContactRequest_groundStation, &sReserveContactRequest_tags, &sReserveContactRequest_trackingOverrides}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateAgentStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAgentStatusRequest_agentId, &sUpdateAgentStatusRequest_taskId, &sUpdateAgentStatusRequest_aggregateStatus, &sUpdateAgentStatusRequest_componentStatuses}}
+var mUpdateAgentStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAgentStatusResponse_agentId}}
+var mUpdateConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigRequest_configId, &sUpdateConfigRequest_name, &sUpdateConfigRequest_configType, &sUpdateConfigRequest_configData}}
+var mUpdateContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateContactRequest_contactId, &sUpdateContactRequest_clientToken, &sUpdateContactRequest_trackingOverrides, &sUpdateContactRequest_satelliteArn}}
+var mUpdateContactResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateContactResponse_contactId, &sUpdateContactResponse_versionId}}
+var mUpdateEphemerisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEphemerisRequest_ephemerisId, &sUpdateEphemerisRequest_enabled, &sUpdateEphemerisRequest_name, &sUpdateEphemerisRequest_priority}}
+var mUpdateMissionProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMissionProfileRequest_missionProfileId, &sUpdateMissionProfileRequest_name, &sUpdateMissionProfileRequest_contactPrePassDurationSeconds, &sUpdateMissionProfileRequest_contactPostPassDurationSeconds, &sUpdateMissionProfileRequest_minimumViableContactDurationSeconds, &sUpdateMissionProfileRequest_dataflowEdges, &sUpdateMissionProfileRequest_trackingConfigArn, &sUpdateMissionProfileRequest_telemetrySinkConfigArn, &sUpdateMissionProfileRequest_streamsKmsKey, &sUpdateMissionProfileRequest_streamsKmsRole}, Hash: &hUpdateMissionProfileRequest}
+
+var hContactData = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 6, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 12, 0, 0, 0, 0,
+	0, 0, 15, 0, 0, 0, 17, 0, 0, 0, 5, 0, 0, 0, 0, 0, 11, 3, 0, 0, 0, 0, 0, 0,
+	7, 0, 0, 4, 9, 0, 0, 0, 8, 0, 10, 14, 0, 0, 1, 0,
+}}
+var hContactStatus = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 8, 4, 10, 12, 0, 5, 6, 0, 7, 0, 2, 0, 1, 9, 0, 0, 0, 0, 3, 0, 0, 0, 13,
+	0, 0, 0, 0, 0, 11, 0, 0,
+}}
+var hEphemerisErrorCode = smithy.MemberHash{Seed: 451, Slots: []uint16{
+	0, 0, 27, 34, 0, 0, 0, 0, 0, 0, 18, 7, 17, 0, 0, 35, 0, 0, 20, 33, 0, 0, 0, 0,
+	0, 38, 0, 23, 10, 0, 0, 0, 19, 0, 0, 29, 22, 0, 0, 0, 36, 0, 0, 0, 0, 0, 24, 0,
+	6, 0, 0, 1, 0, 32, 0, 26, 0, 0, 0, 3, 0, 14, 0, 0, 12, 0, 28, 0, 0, 0, 0, 0,
+	21, 0, 13, 0, 0, 0, 0, 37, 4, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 25, 0, 9, 5, 0,
+	0, 0, 0, 0, 0, 0, 30, 8, 0, 31, 0, 0, 15, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 2,
+}}
+var hVersionFailureReasonCode = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	7, 0, 6, 4, 1, 9, 8, 0, 11, 0, 12, 0, 0, 0, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0,
+	0, 2, 0, 10, 0, 0, 0, 0,
+}}
+var hCreateMissionProfileRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	5, 0, 0, 0, 8, 0, 1, 0, 9, 0, 10, 0, 0, 0, 0, 7, 0, 0, 4, 0, 2, 0, 0, 3,
+	0, 0, 6, 0, 0, 0, 0, 0,
+}}
+var hDescribeContactResponse = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 6, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 18, 13, 0, 0, 0, 0,
+	0, 0, 16, 0, 0, 0, 19, 0, 0, 0, 5, 0, 0, 0, 0, 0, 11, 3, 0, 0, 0, 0, 0, 14,
+	7, 0, 0, 4, 9, 0, 0, 0, 8, 0, 10, 15, 0, 0, 1, 0,
+}}
+var hDescribeContactVersionResponse = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 6, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 18, 13, 0, 0, 0, 0,
+	0, 0, 16, 0, 0, 0, 19, 0, 0, 0, 5, 0, 0, 0, 0, 0, 11, 3, 0, 0, 0, 0, 0, 14,
+	7, 0, 0, 4, 9, 0, 0, 0, 8, 0, 10, 15, 0, 0, 1, 0,
+}}
+var hDescribeEphemerisResponse = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 0, 0, 5, 0, 11, 7, 6, 0, 0, 2, 8, 10, 0, 9, 0, 0, 0, 0, 0, 1, 3, 0, 0,
+	0, 0, 0, 0, 0, 0, 4, 0,
+}}
+var hGetMissionProfileResponse = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 8, 3, 0, 0, 7, 0, 5, 0, 0, 0, 0, 12, 6, 9, 0, 4, 0, 10, 1, 0, 11, 0,
+	0, 13, 0, 2, 0, 0, 0, 0,
+}}
+var hListContactsRequest = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 8, 3, 0, 5, 0, 0, 7, 0, 9,
+	0, 0, 4, 0, 0, 0, 0, 1,
+}}
+var hUpdateMissionProfileRequest = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 2, 0, 9, 0, 10, 0, 0, 0, 0, 8, 0, 1, 5, 0, 3, 0, 0, 4,
+	0, 0, 7, 0, 0, 0, 0, 0,
+}}
+
+var sCancelContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelContact, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCancelContact})
+var sCreateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfig, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfig})
+var sCreateDataflowEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataflowEndpointGroup, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataflowEndpointGroup})
+var sCreateDataflowEndpointGroupV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataflowEndpointGroupV2, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataflowEndpointGroupV2})
+var sCreateEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEphemeris, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateEphemeris})
+var sCreateMissionProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMissionProfile, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateMissionProfile})
+var sDeleteConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfig, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfig})
+var sDeleteDataflowEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataflowEndpointGroup, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataflowEndpointGroup})
+var sDeleteEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEphemeris, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEphemeris})
+var sDeleteMissionProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMissionProfile, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMissionProfile})
+var sDescribeContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContact, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDescribeContact})
+var sDescribeContactVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContactVersion, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDescribeContactVersion})
+var sDescribeEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEphemeris, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEphemeris})
+var sGetAgentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentConfiguration, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetAgentConfiguration})
+var sGetAgentTaskResponseUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentTaskResponseUrl, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetAgentTaskResponseUrl})
+var sGetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfig, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetConfig})
+var sGetDataflowEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataflowEndpointGroup, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetDataflowEndpointGroup})
+var sGetMinuteUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMinuteUsage, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetMinuteUsage})
+var sGetMissionProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMissionProfile, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetMissionProfile})
+var sGetSatellite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSatellite, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetSatellite})
+var sListAntennas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAntennas, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListAntennas})
+var sListConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigs, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListConfigs})
+var sListContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContacts, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListContacts})
+var sListContactVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactVersions, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListContactVersions})
+var sListDataflowEndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataflowEndpointGroups, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListDataflowEndpointGroups})
+var sListEphemerides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEphemerides, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListEphemerides})
+var sListGroundStationReservations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStationReservations, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListGroundStationReservations})
+var sListGroundStations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStations, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListGroundStations})
+var sListMissionProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMissionProfiles, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListMissionProfiles})
+var sListSatellites = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSatellites, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListSatellites})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAgent, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eRegisterAgent})
+var sReserveContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReserveContact, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eReserveContact})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAgentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgentStatus, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAgentStatus})
+var sUpdateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfig, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfig})
+var sUpdateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContact, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eUpdateContact})
+var sUpdateEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEphemeris, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEphemeris})
+var sUpdateMissionProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMissionProfile, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMissionProfile})
+var s_GroundStation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroundStation, Type: smithy.ShapeTypeService, Ext: &e_GroundStation})
+var s_AgentCpuCoresList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentCpuCoresList, Members: &m_AgentCpuCoresList, Type: smithy.ShapeTypeList, Ext: &e_AgentCpuCoresList})
+var s_AgentCpuCoresList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_AgentCpuCoresList_member})
+var sAgentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentDetails, Members: &mAgentDetails, Type: smithy.ShapeTypeStructure, Ext: &eAgentDetails})
+var sAgentDetails_agentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentVersion", ID: &i_VersionString, Type: smithy.ShapeTypeString, Ext: &eAgentDetails_agentVersion})
+var sAgentDetails_instanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eAgentDetails_instanceId})
+var sAgentDetails_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &eAgentDetails_instanceType})
+var sAgentDetails_reservedCpuCores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservedCpuCores", ID: &i_AgentCpuCoresList, Members: &m_AgentCpuCoresList, Type: smithy.ShapeTypeList, Ext: &eAgentDetails_reservedCpuCores})
+var sAgentDetails_agentCpuCores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentCpuCores", ID: &i_AgentCpuCoresList, Members: &m_AgentCpuCoresList, Type: smithy.ShapeTypeList, Ext: &eAgentDetails_agentCpuCores})
+var sAgentDetails_componentVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersions", ID: &i_ComponentVersionList, Members: &m_ComponentVersionList, Type: smithy.ShapeTypeList, Ext: &eAgentDetails_componentVersions})
+var sAgentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAgentStatus})
+var sAgentStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_SUCCESS})
+var sAgentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_FAILED})
+var sAgentStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_ACTIVE})
+var sAgentStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAgentStatus_INACTIVE})
+var sAggregateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregateStatus, Members: &mAggregateStatus, Type: smithy.ShapeTypeStructure, Ext: &eAggregateStatus})
+var sAggregateStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAggregateStatus_status})
+var sAggregateStatus_signatureMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureMap", ID: &i_SignatureMap, Members: &m_SignatureMap, Type: smithy.ShapeTypeMap, Ext: &eAggregateStatus_signatureMap})
+var sAngleUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAngleUnits, Members: &mAngleUnits, Type: smithy.ShapeTypeEnum, Ext: &eAngleUnits})
+var sAngleUnits_DEGREE_ANGLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGREE_ANGLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAngleUnits_DEGREE_ANGLE})
+var sAngleUnits_RADIAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RADIAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAngleUnits_RADIAN})
+var sAntennaDemodDecodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntennaDemodDecodeDetails, Members: &mAntennaDemodDecodeDetails, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDemodDecodeDetails})
+var sAntennaDemodDecodeDetails_outputNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputNode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAntennaDemodDecodeDetails_outputNode})
+var sAntennaDownlinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntennaDownlinkConfig, Members: &mAntennaDownlinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkConfig})
+var sAntennaDownlinkConfig_spectrumConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spectrumConfig", ID: &iSpectrumConfig, Members: &mSpectrumConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkConfig_spectrumConfig})
+var sAntennaDownlinkDemodDecodeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntennaDownlinkDemodDecodeConfig, Members: &mAntennaDownlinkDemodDecodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkDemodDecodeConfig})
+var sAntennaDownlinkDemodDecodeConfig_spectrumConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spectrumConfig", ID: &iSpectrumConfig, Members: &mSpectrumConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkDemodDecodeConfig_spectrumConfig})
+var sAntennaDownlinkDemodDecodeConfig_demodulationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "demodulationConfig", ID: &iDemodulationConfig, Members: &mDemodulationConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkDemodDecodeConfig_demodulationConfig})
+var sAntennaDownlinkDemodDecodeConfig_decodeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decodeConfig", ID: &iDecodeConfig, Members: &mDecodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaDownlinkDemodDecodeConfig_decodeConfig})
+var s_AntennaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AntennaList, Members: &m_AntennaList, Type: smithy.ShapeTypeList, Ext: &e_AntennaList})
+var s_AntennaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAntennaListItem, Members: &mAntennaListItem, Type: smithy.ShapeTypeStructure, Ext: &e_AntennaList_member})
+var sAntennaListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntennaListItem, Members: &mAntennaListItem, Type: smithy.ShapeTypeStructure, Ext: &eAntennaListItem})
+var sAntennaListItem_groundStationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationName", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eAntennaListItem_groundStationName})
+var sAntennaListItem_antennaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaName", ID: &i_AntennaName, Type: smithy.ShapeTypeString, Ext: &eAntennaListItem_antennaName})
+var sAntennaListItem_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegion, Type: smithy.ShapeTypeString, Ext: &eAntennaListItem_region})
+var s_AntennaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AntennaName, Type: smithy.ShapeTypeString, Ext: &e_AntennaName})
+var sAntennaUplinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntennaUplinkConfig, Members: &mAntennaUplinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaUplinkConfig})
+var sAntennaUplinkConfig_transmitDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transmitDisabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAntennaUplinkConfig_transmitDisabled})
+var sAntennaUplinkConfig_spectrumConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spectrumConfig", ID: &iUplinkSpectrumConfig, Members: &mUplinkSpectrumConfig, Type: smithy.ShapeTypeStructure, Ext: &eAntennaUplinkConfig_spectrumConfig})
+var sAntennaUplinkConfig_targetEirp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEirp", ID: &iEirp, Members: &mEirp, Type: smithy.ShapeTypeStructure, Ext: &eAntennaUplinkConfig_targetEirp})
+var s_AnyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnyArn, Type: smithy.ShapeTypeString, Ext: &e_AnyArn})
+var sAuditResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditResults, Members: &mAuditResults, Type: smithy.ShapeTypeEnum, Ext: &eAuditResults})
+var sAuditResults_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuditResults_HEALTHY})
+var sAuditResults_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAuditResults_UNHEALTHY})
+var sAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsGroundStationAgentEndpoint, Members: &mAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eAwsGroundStationAgentEndpoint})
+var sAwsGroundStationAgentEndpoint_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eAwsGroundStationAgentEndpoint_name})
+var sAwsGroundStationAgentEndpoint_egressAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressAddress", ID: &iConnectionDetails, Members: &mConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eAwsGroundStationAgentEndpoint_egressAddress})
+var sAwsGroundStationAgentEndpoint_ingressAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressAddress", ID: &iRangedConnectionDetails, Members: &mRangedConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eAwsGroundStationAgentEndpoint_ingressAddress})
+var sAwsGroundStationAgentEndpoint_agentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentStatus", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAwsGroundStationAgentEndpoint_agentStatus})
+var sAwsGroundStationAgentEndpoint_auditResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditResults", ID: &iAuditResults, Members: &mAuditResults, Type: smithy.ShapeTypeEnum, Ext: &eAwsGroundStationAgentEndpoint_auditResults})
+var s_AWSRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSRegion, Type: smithy.ShapeTypeString, Ext: &e_AWSRegion})
+var sAzElEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElEphemeris, Members: &mAzElEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eAzElEphemeris})
+var sAzElEphemeris_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eAzElEphemeris_groundStation})
+var sAzElEphemeris_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iAzElSegmentsData, Members: &mAzElSegmentsData, Type: smithy.ShapeTypeUnion, Ext: &eAzElEphemeris_data})
+var sAzElEphemerisFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElEphemerisFilter, Members: &mAzElEphemerisFilter, Type: smithy.ShapeTypeStructure, Ext: &eAzElEphemerisFilter})
+var sAzElEphemerisFilter_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eAzElEphemerisFilter_id})
+var sAzElProgramTrackSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElProgramTrackSettings, Members: &mAzElProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eAzElProgramTrackSettings})
+var sAzElProgramTrackSettings_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eAzElProgramTrackSettings_ephemerisId})
+var sAzElSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElSegment, Members: &mAzElSegment, Type: smithy.ShapeTypeStructure, Ext: &eAzElSegment})
+var sAzElSegment_referenceEpoch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceEpoch", ID: &pTimestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eAzElSegment_referenceEpoch})
+var sAzElSegment_validTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validTimeRange", ID: &iISO8601TimeRange, Members: &mISO8601TimeRange, Type: smithy.ShapeTypeStructure, Ext: &eAzElSegment_validTimeRange})
+var sAzElSegment_azElList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azElList", ID: &i_TimeAzElList, Members: &m_TimeAzElList, Type: smithy.ShapeTypeList, Ext: &eAzElSegment_azElList})
+var s_AzElSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzElSegmentList, Members: &m_AzElSegmentList, Type: smithy.ShapeTypeList, Ext: &e_AzElSegmentList})
+var s_AzElSegmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAzElSegment, Members: &mAzElSegment, Type: smithy.ShapeTypeStructure, Ext: &e_AzElSegmentList_member})
+var sAzElSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElSegments, Members: &mAzElSegments, Type: smithy.ShapeTypeStructure, Ext: &eAzElSegments})
+var sAzElSegments_angleUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "angleUnit", ID: &iAngleUnits, Members: &mAngleUnits, Type: smithy.ShapeTypeEnum, Ext: &eAzElSegments_angleUnit})
+var sAzElSegments_azElSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azElSegmentList", ID: &i_AzElSegmentList, Members: &m_AzElSegmentList, Type: smithy.ShapeTypeList, Ext: &eAzElSegments_azElSegmentList})
+var sAzElSegmentsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAzElSegmentsData, Members: &mAzElSegmentsData, Type: smithy.ShapeTypeUnion, Ext: &eAzElSegmentsData})
+var sAzElSegmentsData_s3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eAzElSegmentsData_s3Object})
+var sAzElSegmentsData_azElData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azElData", ID: &iAzElSegments, Members: &mAzElSegments, Type: smithy.ShapeTypeStructure, Ext: &eAzElSegmentsData_azElData})
+var sBandwidthUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidthUnits, Members: &mBandwidthUnits, Type: smithy.ShapeTypeEnum, Ext: &eBandwidthUnits})
+var sBandwidthUnits_GHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBandwidthUnits_GHZ})
+var sBandwidthUnits_MHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBandwidthUnits_MHZ})
+var sBandwidthUnits_KHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBandwidthUnits_KHZ})
+var s_BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &e_BucketArn})
+var s_CapabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityArn, Type: smithy.ShapeTypeString, Ext: &e_CapabilityArn})
+var s_CapabilityArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityArnList, Members: &m_CapabilityArnList, Type: smithy.ShapeTypeList, Ext: &e_CapabilityArnList})
+var s_CapabilityArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CapabilityArn, Type: smithy.ShapeTypeString, Ext: &e_CapabilityArnList_member})
+var sCapabilityHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapabilityHealth, Members: &mCapabilityHealth, Type: smithy.ShapeTypeEnum, Ext: &eCapabilityHealth})
+var sCapabilityHealth_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealth_HEALTHY})
+var sCapabilityHealth_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealth_UNHEALTHY})
+var sCapabilityHealthReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapabilityHealthReason, Members: &mCapabilityHealthReason, Type: smithy.ShapeTypeEnum, Ext: &eCapabilityHealthReason})
+var sCapabilityHealthReason_NO_REGISTERED_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_REGISTERED_AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_NO_REGISTERED_AGENT})
+var sCapabilityHealthReason_INVALID_IP_OWNERSHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_IP_OWNERSHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_INVALID_IP_OWNERSHIP})
+var sCapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_AUTHORIZED_TO_CREATE_SLR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR})
+var sCapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNVERIFIED_IP_OWNERSHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP})
+var sCapabilityHealthReason_INITIALIZING_DATAPLANE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING_DATAPLANE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_INITIALIZING_DATAPLANE})
+var sCapabilityHealthReason_DATAPLANE_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATAPLANE_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_DATAPLANE_FAILURE})
+var sCapabilityHealthReason_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapabilityHealthReason_HEALTHY})
+var s_CapabilityHealthReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityHealthReasonList, Members: &m_CapabilityHealthReasonList, Type: smithy.ShapeTypeList, Ext: &e_CapabilityHealthReasonList})
+var s_CapabilityHealthReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapabilityHealthReason, Members: &mCapabilityHealthReason, Type: smithy.ShapeTypeEnum, Ext: &e_CapabilityHealthReasonList_member})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sComponentStatusData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentStatusData, Members: &mComponentStatusData, Type: smithy.ShapeTypeStructure, Ext: &eComponentStatusData})
+var sComponentStatusData_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentTypeString, Type: smithy.ShapeTypeString, Ext: &eComponentStatusData_componentType})
+var sComponentStatusData_capabilityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilityArn", ID: &i_CapabilityArn, Type: smithy.ShapeTypeString, Ext: &eComponentStatusData_capabilityArn})
+var sComponentStatusData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eComponentStatusData_status})
+var sComponentStatusData_bytesSent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytesSent", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eComponentStatusData_bytesSent})
+var sComponentStatusData_bytesReceived = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytesReceived", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eComponentStatusData_bytesReceived})
+var sComponentStatusData_packetsDropped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packetsDropped", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eComponentStatusData_packetsDropped})
+var sComponentStatusData_dataflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eComponentStatusData_dataflowId})
+var s_ComponentStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentStatusList, Members: &m_ComponentStatusList, Type: smithy.ShapeTypeList, Ext: &e_ComponentStatusList})
+var s_ComponentStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentStatusData, Members: &mComponentStatusData, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentStatusList_member})
+var s_ComponentTypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentTypeString, Type: smithy.ShapeTypeString, Ext: &e_ComponentTypeString})
+var sComponentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentVersion, Members: &mComponentVersion, Type: smithy.ShapeTypeStructure, Ext: &eComponentVersion})
+var sComponentVersion_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentTypeString, Type: smithy.ShapeTypeString, Ext: &eComponentVersion_componentType})
+var sComponentVersion_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_VersionStringList, Members: &m_VersionStringList, Type: smithy.ShapeTypeList, Ext: &eComponentVersion_versions})
+var s_ComponentVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVersionList, Members: &m_ComponentVersionList, Type: smithy.ShapeTypeList, Ext: &e_ComponentVersionList})
+var s_ComponentVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentVersion, Members: &mComponentVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ComponentVersionList_member})
+var s_ConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &e_ConfigArn})
+var sConfigCapabilityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eConfigCapabilityType})
+var sConfigCapabilityType_ANTENNA_DOWNLINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANTENNA_DOWNLINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_ANTENNA_DOWNLINK})
+var sConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANTENNA_DOWNLINK_DEMOD_DECODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE})
+var sConfigCapabilityType_TRACKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRACKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_TRACKING})
+var sConfigCapabilityType_DATAFLOW_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATAFLOW_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_DATAFLOW_ENDPOINT})
+var sConfigCapabilityType_ANTENNA_UPLINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANTENNA_UPLINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_ANTENNA_UPLINK})
+var sConfigCapabilityType_UPLINK_ECHO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPLINK_ECHO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_UPLINK_ECHO})
+var sConfigCapabilityType_S3_RECORDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_RECORDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_S3_RECORDING})
+var sConfigCapabilityType_TELEMETRY_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TELEMETRY_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigCapabilityType_TELEMETRY_SINK})
+var sConfigDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigDetails, Members: &mConfigDetails, Type: smithy.ShapeTypeUnion, Ext: &eConfigDetails})
+var sConfigDetails_endpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointDetails", ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eConfigDetails_endpointDetails})
+var sConfigDetails_antennaDemodDecodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaDemodDecodeDetails", ID: &iAntennaDemodDecodeDetails, Members: &mAntennaDemodDecodeDetails, Type: smithy.ShapeTypeStructure, Ext: &eConfigDetails_antennaDemodDecodeDetails})
+var sConfigDetails_s3RecordingDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3RecordingDetails", ID: &iS3RecordingDetails, Members: &mS3RecordingDetails, Type: smithy.ShapeTypeStructure, Ext: &eConfigDetails_s3RecordingDetails})
+var s_ConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigList, Members: &m_ConfigList, Type: smithy.ShapeTypeList, Ext: &e_ConfigList})
+var s_ConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigListItem, Members: &mConfigListItem, Type: smithy.ShapeTypeStructure, Ext: &e_ConfigList_member})
+var sConfigListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigListItem, Members: &mConfigListItem, Type: smithy.ShapeTypeStructure, Ext: &eConfigListItem})
+var sConfigListItem_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConfigListItem_configId})
+var sConfigListItem_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eConfigListItem_configType})
+var sConfigListItem_configArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eConfigListItem_configArn})
+var sConfigListItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConfigListItem_name})
+var sConfigTypeData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigTypeData, Members: &mConfigTypeData, Type: smithy.ShapeTypeUnion, Ext: &eConfigTypeData})
+var sConfigTypeData_antennaDownlinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaDownlinkConfig", ID: &iAntennaDownlinkConfig, Members: &mAntennaDownlinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_antennaDownlinkConfig})
+var sConfigTypeData_trackingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingConfig", ID: &iTrackingConfig, Members: &mTrackingConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_trackingConfig})
+var sConfigTypeData_dataflowEndpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointConfig", ID: &iDataflowEndpointConfig, Members: &mDataflowEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_dataflowEndpointConfig})
+var sConfigTypeData_antennaDownlinkDemodDecodeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaDownlinkDemodDecodeConfig", ID: &iAntennaDownlinkDemodDecodeConfig, Members: &mAntennaDownlinkDemodDecodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_antennaDownlinkDemodDecodeConfig})
+var sConfigTypeData_antennaUplinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaUplinkConfig", ID: &iAntennaUplinkConfig, Members: &mAntennaUplinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_antennaUplinkConfig})
+var sConfigTypeData_uplinkEchoConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uplinkEchoConfig", ID: &iUplinkEchoConfig, Members: &mUplinkEchoConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_uplinkEchoConfig})
+var sConfigTypeData_s3RecordingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3RecordingConfig", ID: &iS3RecordingConfig, Members: &mS3RecordingConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_s3RecordingConfig})
+var sConfigTypeData_telemetrySinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkConfig", ID: &iTelemetrySinkConfig, Members: &mTelemetrySinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eConfigTypeData_telemetrySinkConfig})
+var sConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionDetails, Members: &mConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eConnectionDetails})
+var sConnectionDetails_socketAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "socketAddress", ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure, Ext: &eConnectionDetails_socketAddress})
+var sConnectionDetails_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eConnectionDetails_mtu})
+var sContactData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactData, Members: &mContactData, Type: smithy.ShapeTypeStructure, Ext: &eContactData})
+var sContactData_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eContactData_contactId})
+var sContactData_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eContactData_missionProfileArn})
+var sContactData_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eContactData_satelliteArn})
+var sContactData_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_startTime})
+var sContactData_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_endTime})
+var sContactData_prePassStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prePassStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_prePassStartTime})
+var sContactData_postPassEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postPassEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_postPassEndTime})
+var sContactData_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContactData_groundStation})
+var sContactData_contactStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactStatus", ID: &iContactStatus, Members: &mContactStatus, Type: smithy.ShapeTypeEnum, Ext: &eContactData_contactStatus})
+var sContactData_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContactData_errorMessage})
+var sContactData_maximumElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumElevation", ID: &iElevation, Members: &mElevation, Type: smithy.ShapeTypeStructure, Ext: &eContactData_maximumElevation})
+var sContactData_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContactData_region})
+var sContactData_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eContactData_tags})
+var sContactData_visibilityStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_visibilityStartTime})
+var sContactData_visibilityEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactData_visibilityEndTime})
+var sContactData_ephemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeris", ID: &iEphemerisResponseData, Members: &mEphemerisResponseData, Type: smithy.ShapeTypeStructure, Ext: &eContactData_ephemeris})
+var sContactData_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &iContactVersion, Members: &mContactVersion, Type: smithy.ShapeTypeStructure, Ext: &eContactData_version})
+var s_ContactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactList, Members: &m_ContactList, Type: smithy.ShapeTypeList, Ext: &e_ContactList})
+var s_ContactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactData, Members: &mContactData, Type: smithy.ShapeTypeStructure, Ext: &e_ContactList_member})
+var sContactReservationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactReservationDetails, Members: &mContactReservationDetails, Type: smithy.ShapeTypeStructure, Ext: &eContactReservationDetails})
+var sContactReservationDetails_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eContactReservationDetails_contactId})
+var sContactStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactStatus, Members: &mContactStatus, Type: smithy.ShapeTypeEnum, Ext: &eContactStatus})
+var sContactStatus_SCHEDULING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_SCHEDULING})
+var sContactStatus_FAILED_TO_SCHEDULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_TO_SCHEDULE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_FAILED_TO_SCHEDULE})
+var sContactStatus_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_SCHEDULED})
+var sContactStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_CANCELLED})
+var sContactStatus_AWS_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_AWS_CANCELLED})
+var sContactStatus_PREPASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_PREPASS})
+var sContactStatus_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_PASS})
+var sContactStatus_POSTPASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTPASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_POSTPASS})
+var sContactStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_COMPLETED})
+var sContactStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_FAILED})
+var sContactStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_AVAILABLE})
+var sContactStatus_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_CANCELLING})
+var sContactStatus_AWS_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactStatus_AWS_FAILED})
+var sContactVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactVersion, Members: &mContactVersion, Type: smithy.ShapeTypeStructure, Ext: &eContactVersion})
+var sContactVersion_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_VersionId, Type: smithy.ShapeTypeInteger, Ext: &eContactVersion_versionId})
+var sContactVersion_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactVersion_created})
+var sContactVersion_activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activated", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactVersion_activated})
+var sContactVersion_superseded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "superseded", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactVersion_superseded})
+var sContactVersion_lastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdated", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContactVersion_lastUpdated})
+var sContactVersion_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iVersionStatus, Members: &mVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eContactVersion_status})
+var sContactVersion_failureCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCodes", ID: &i_VersionFailureReasonCodes, Members: &m_VersionFailureReasonCodes, Type: smithy.ShapeTypeList, Ext: &eContactVersion_failureCodes})
+var sContactVersion_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContactVersion_failureMessage})
+var s_ContactVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactVersionsList, Members: &m_ContactVersionsList, Type: smithy.ShapeTypeList, Ext: &e_ContactVersionsList})
+var s_ContactVersionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactVersion, Members: &mContactVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ContactVersionsList_member})
+var sCreateEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointDetails, Members: &mCreateEndpointDetails, Type: smithy.ShapeTypeUnion, Ext: &eCreateEndpointDetails})
+var sCreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uplinkAwsGroundStationAgentEndpoint", ID: &iUplinkAwsGroundStationAgentEndpoint, Members: &mUplinkAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eCreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint})
+var sCreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downlinkAwsGroundStationAgentEndpoint", ID: &iDownlinkAwsGroundStationAgentEndpoint, Members: &mDownlinkAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eCreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint})
+var s_CreateEndpointDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateEndpointDetailsList, Members: &m_CreateEndpointDetailsList, Type: smithy.ShapeTypeList, Ext: &e_CreateEndpointDetailsList})
+var s_CreateEndpointDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateEndpointDetails, Members: &mCreateEndpointDetails, Type: smithy.ShapeTypeUnion, Ext: &e_CreateEndpointDetailsList_member})
+var sCriticality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCriticality, Members: &mCriticality, Type: smithy.ShapeTypeEnum, Ext: &eCriticality})
+var sCriticality_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCriticality_REQUIRED})
+var sCriticality_PREFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCriticality_PREFERRED})
+var sCriticality_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCriticality_REMOVED})
+var s_CustomerEphemerisPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerEphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &e_CustomerEphemerisPriority})
+var sDataflowDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataflowDetail, Members: &mDataflowDetail, Type: smithy.ShapeTypeStructure, Ext: &eDataflowDetail})
+var sDataflowDetail_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eDataflowDetail_source})
+var sDataflowDetail_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &eDataflowDetail_destination})
+var sDataflowDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataflowDetail_errorMessage})
+var s_DataflowEdge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowEdge, Members: &m_DataflowEdge, Type: smithy.ShapeTypeList, Ext: &e_DataflowEdge})
+var s_DataflowEdge_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &e_DataflowEdge_member})
+var s_DataflowEdgeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowEdgeList, Members: &m_DataflowEdgeList, Type: smithy.ShapeTypeList, Ext: &e_DataflowEdgeList})
+var s_DataflowEdgeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataflowEdge, Members: &m_DataflowEdge, Type: smithy.ShapeTypeList, Ext: &e_DataflowEdgeList_member})
+var sDataflowEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataflowEndpoint, Members: &mDataflowEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDataflowEndpoint})
+var sDataflowEndpoint_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpoint_name})
+var sDataflowEndpoint_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure, Ext: &eDataflowEndpoint_address})
+var sDataflowEndpoint_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataflowEndpoint_status})
+var sDataflowEndpoint_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDataflowEndpoint_mtu})
+var sDataflowEndpointConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataflowEndpointConfig, Members: &mDataflowEndpointConfig, Type: smithy.ShapeTypeStructure, Ext: &eDataflowEndpointConfig})
+var sDataflowEndpointConfig_dataflowEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpointConfig_dataflowEndpointName})
+var sDataflowEndpointConfig_dataflowEndpointRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpointConfig_dataflowEndpointRegion})
+var s_DataflowEndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowEndpointGroupArn, Type: smithy.ShapeTypeString, Ext: &e_DataflowEndpointGroupArn})
+var s_DataflowEndpointGroupDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_DataflowEndpointGroupDurationInSeconds})
+var s_DataflowEndpointGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowEndpointGroupList, Members: &m_DataflowEndpointGroupList, Type: smithy.ShapeTypeList, Ext: &e_DataflowEndpointGroupList})
+var s_DataflowEndpointGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataflowEndpointListItem, Members: &mDataflowEndpointListItem, Type: smithy.ShapeTypeStructure, Ext: &e_DataflowEndpointGroupList_member})
+var sDataflowEndpointListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataflowEndpointListItem, Members: &mDataflowEndpointListItem, Type: smithy.ShapeTypeStructure, Ext: &eDataflowEndpointListItem})
+var sDataflowEndpointListItem_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpointListItem_dataflowEndpointGroupId})
+var sDataflowEndpointListItem_dataflowEndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupArn", ID: &i_DataflowEndpointGroupArn, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpointListItem_dataflowEndpointGroupArn})
+var s_DataflowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataflowList, Members: &m_DataflowList, Type: smithy.ShapeTypeList, Ext: &e_DataflowList})
+var s_DataflowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataflowDetail, Members: &mDataflowDetail, Type: smithy.ShapeTypeStructure, Ext: &e_DataflowList_member})
+var sDecodeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecodeConfig, Members: &mDecodeConfig, Type: smithy.ShapeTypeStructure, Ext: &eDecodeConfig})
+var sDecodeConfig_unvalidatedJSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unvalidatedJSON", ID: &i_JsonString, Type: smithy.ShapeTypeString, Ext: &eDecodeConfig_unvalidatedJSON})
+var sDemodulationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDemodulationConfig, Members: &mDemodulationConfig, Type: smithy.ShapeTypeStructure, Ext: &eDemodulationConfig})
+var sDemodulationConfig_unvalidatedJSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unvalidatedJSON", ID: &i_JsonString, Type: smithy.ShapeTypeString, Ext: &eDemodulationConfig_unvalidatedJSON})
+var sDependencyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyException, Members: &mDependencyException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eDependencyException})
+var sDependencyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDependencyException_message})
+var sDependencyException_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDependencyException_parameterName})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &eDestination})
+var sDestination_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eDestination_configType})
+var sDestination_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDestination_configId})
+var sDestination_configDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configDetails", ID: &iConfigDetails, Members: &mConfigDetails, Type: smithy.ShapeTypeUnion, Ext: &eDestination_configDetails})
+var sDestination_dataflowDestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowDestinationRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDestination_dataflowDestinationRegion})
+var sDiscoveryData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoveryData, Members: &mDiscoveryData, Type: smithy.ShapeTypeStructure, Ext: &eDiscoveryData})
+var sDiscoveryData_publicIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicIpAddresses", ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList, Ext: &eDiscoveryData_publicIpAddresses})
+var sDiscoveryData_privateIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateIpAddresses", ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList, Ext: &eDiscoveryData_privateIpAddresses})
+var sDiscoveryData_capabilityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilityArns", ID: &i_CapabilityArnList, Members: &m_CapabilityArnList, Type: smithy.ShapeTypeList, Ext: &eDiscoveryData_capabilityArns})
+var sDownlinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownlinkAwsGroundStationAgentEndpoint, Members: &mDownlinkAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkAwsGroundStationAgentEndpoint})
+var sDownlinkAwsGroundStationAgentEndpoint_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eDownlinkAwsGroundStationAgentEndpoint_name})
+var sDownlinkAwsGroundStationAgentEndpoint_dataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowDetails", ID: &iDownlinkDataflowDetails, Members: &mDownlinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eDownlinkAwsGroundStationAgentEndpoint_dataflowDetails})
+var sDownlinkAwsGroundStationAgentEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownlinkAwsGroundStationAgentEndpointDetails, Members: &mDownlinkAwsGroundStationAgentEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkAwsGroundStationAgentEndpointDetails})
+var sDownlinkAwsGroundStationAgentEndpointDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eDownlinkAwsGroundStationAgentEndpointDetails_name})
+var sDownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowDetails", ID: &iDownlinkDataflowDetails, Members: &mDownlinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eDownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails})
+var sDownlinkAwsGroundStationAgentEndpointDetails_agentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentStatus", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDownlinkAwsGroundStationAgentEndpointDetails_agentStatus})
+var sDownlinkAwsGroundStationAgentEndpointDetails_auditResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditResults", ID: &iAuditResults, Members: &mAuditResults, Type: smithy.ShapeTypeEnum, Ext: &eDownlinkAwsGroundStationAgentEndpointDetails_auditResults})
+var sDownlinkConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownlinkConnectionDetails, Members: &mDownlinkConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkConnectionDetails})
+var sDownlinkConnectionDetails_agentIpAndPortAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentIpAndPortAddress", ID: &iRangedConnectionDetails, Members: &mRangedConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkConnectionDetails_agentIpAndPortAddress})
+var sDownlinkConnectionDetails_egressAddressAndPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressAddressAndPort", ID: &iConnectionDetails, Members: &mConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkConnectionDetails_egressAddressAndPort})
+var sDownlinkDataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownlinkDataflowDetails, Members: &mDownlinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eDownlinkDataflowDetails})
+var sDownlinkDataflowDetails_agentConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentConnectionDetails", ID: &iDownlinkConnectionDetails, Members: &mDownlinkConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eDownlinkDataflowDetails_agentConnectionDetails})
+var s_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_DurationInSeconds})
+var sEirp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEirp, Members: &mEirp, Type: smithy.ShapeTypeStructure, Ext: &eEirp})
+var sEirp_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eEirp_value})
+var sEirp_units = smithy.NewStaticSchema(smithy.StaticSchema{Member: "units", ID: &iEirpUnits, Members: &mEirpUnits, Type: smithy.ShapeTypeEnum, Ext: &eEirp_units})
+var sEirpUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEirpUnits, Members: &mEirpUnits, Type: smithy.ShapeTypeEnum, Ext: &eEirpUnits})
+var sEirpUnits_DBW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DBW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEirpUnits_DBW})
+var sElevation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElevation, Members: &mElevation, Type: smithy.ShapeTypeStructure, Ext: &eElevation})
+var sElevation_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eElevation_value})
+var sElevation_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iAngleUnits, Members: &mAngleUnits, Type: smithy.ShapeTypeEnum, Ext: &eElevation_unit})
+var sEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails})
+var sEndpointDetails_securityDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityDetails", ID: &iSecurityDetails, Members: &mSecurityDetails, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails_securityDetails})
+var sEndpointDetails_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &iDataflowEndpoint, Members: &mDataflowEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails_endpoint})
+var sEndpointDetails_awsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsGroundStationAgentEndpoint", ID: &iAwsGroundStationAgentEndpoint, Members: &mAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails_awsGroundStationAgentEndpoint})
+var sEndpointDetails_uplinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uplinkAwsGroundStationAgentEndpoint", ID: &iUplinkAwsGroundStationAgentEndpointDetails, Members: &mUplinkAwsGroundStationAgentEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails_uplinkAwsGroundStationAgentEndpoint})
+var sEndpointDetails_downlinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downlinkAwsGroundStationAgentEndpoint", ID: &iDownlinkAwsGroundStationAgentEndpointDetails, Members: &mDownlinkAwsGroundStationAgentEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eEndpointDetails_downlinkAwsGroundStationAgentEndpoint})
+var sEndpointDetails_healthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthStatus", ID: &iCapabilityHealth, Members: &mCapabilityHealth, Type: smithy.ShapeTypeEnum, Ext: &eEndpointDetails_healthStatus})
+var sEndpointDetails_healthReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthReasons", ID: &i_CapabilityHealthReasonList, Members: &m_CapabilityHealthReasonList, Type: smithy.ShapeTypeList, Ext: &eEndpointDetails_healthReasons})
+var s_EndpointDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointDetailsList, Members: &m_EndpointDetailsList, Type: smithy.ShapeTypeList, Ext: &e_EndpointDetailsList})
+var s_EndpointDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &e_EndpointDetailsList_member})
+var sEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eEndpointStatus})
+var sEndpointStatus_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_created})
+var sEndpointStatus_creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_creating})
+var sEndpointStatus_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_deleted})
+var sEndpointStatus_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_deleting})
+var sEndpointStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_failed})
+var s_EphemeridesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemeridesList, Members: &m_EphemeridesList, Type: smithy.ShapeTypeList, Ext: &e_EphemeridesList})
+var s_EphemeridesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEphemerisItem, Members: &mEphemerisItem, Type: smithy.ShapeTypeStructure, Ext: &e_EphemeridesList_member})
+var sEphemerisData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisData, Members: &mEphemerisData, Type: smithy.ShapeTypeUnion, Ext: &eEphemerisData})
+var sEphemerisData_tle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tle", ID: &iTLEEphemeris, Members: &mTLEEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisData_tle})
+var sEphemerisData_oem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oem", ID: &iOEMEphemeris, Members: &mOEMEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisData_oem})
+var sEphemerisData_azEl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azEl", ID: &iAzElEphemeris, Members: &mAzElEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisData_azEl})
+var sEphemerisDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisDescription, Members: &mEphemerisDescription, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisDescription})
+var sEphemerisDescription_sourceS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisDescription_sourceS3Object})
+var sEphemerisDescription_ephemerisData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisData", ID: &i_UnboundedString, Type: smithy.ShapeTypeString, Ext: &eEphemerisDescription_ephemerisData})
+var sEphemerisErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisErrorCode, Members: &mEphemerisErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisErrorCode})
+var sEphemerisErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_INTERNAL_ERROR})
+var sEphemerisErrorCode_MISMATCHED_SATCAT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_SATCAT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_MISMATCHED_SATCAT_ID})
+var sEphemerisErrorCode_OEM_VERSION_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OEM_VERSION_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_OEM_VERSION_UNSUPPORTED})
+var sEphemerisErrorCode_ORIGINATOR_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGINATOR_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_ORIGINATOR_MISSING})
+var sEphemerisErrorCode_CREATION_DATE_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_DATE_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_CREATION_DATE_MISSING})
+var sEphemerisErrorCode_OBJECT_NAME_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBJECT_NAME_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_OBJECT_NAME_MISSING})
+var sEphemerisErrorCode_OBJECT_ID_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OBJECT_ID_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_OBJECT_ID_MISSING})
+var sEphemerisErrorCode_REF_FRAME_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REF_FRAME_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_REF_FRAME_UNSUPPORTED})
+var sEphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REF_FRAME_EPOCH_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED})
+var sEphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_SYSTEM_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED})
+var sEphemerisErrorCode_CENTER_BODY_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CENTER_BODY_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_CENTER_BODY_UNSUPPORTED})
+var sEphemerisErrorCode_INTERPOLATION_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATION_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_INTERPOLATION_MISSING})
+var sEphemerisErrorCode_INTERPOLATION_DEGREE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATION_DEGREE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_INTERPOLATION_DEGREE_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_LIST_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING})
+var sEphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_TIME_AZ_EL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL})
+var sEphemerisErrorCode_START_TIME_IN_FUTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TIME_IN_FUTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_START_TIME_IN_FUTURE})
+var sEphemerisErrorCode_END_TIME_IN_PAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_TIME_IN_PAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_END_TIME_IN_PAST})
+var sEphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRATION_TIME_TOO_EARLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY})
+var sEphemerisErrorCode_START_TIME_METADATA_TOO_EARLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TIME_METADATA_TOO_EARLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_START_TIME_METADATA_TOO_EARLY})
+var sEphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_TIME_METADATA_TOO_LATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_TIMES_OVERLAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP})
+var sEphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENTS_OUT_OF_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER})
+var sEphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_ITEMS_OUT_OF_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER})
+var sEphemerisErrorCode_MEAN_MOTION_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEAN_MOTION_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_MEAN_MOTION_INVALID})
+var sEphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID})
+var sEphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID})
+var sEphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID})
+var sEphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID})
+var sEphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_AZ_EL_ANGLE_UNITS_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID})
+var sEphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_KMS_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS})
+var sEphemerisErrorCode_FILE_FORMAT_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_FORMAT_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_FILE_FORMAT_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_START_TIME_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_END_TIME_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID})
+var sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_SEGMENT_END_TIME_TOO_LATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE})
+var sEphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL_TOTAL_DURATION_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED})
+var sEphemerisErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisErrorReason, Members: &mEphemerisErrorReason, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisErrorReason})
+var sEphemerisErrorReason_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iEphemerisErrorCode, Members: &mEphemerisErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisErrorReason_errorCode})
+var sEphemerisErrorReason_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorString, Type: smithy.ShapeTypeString, Ext: &eEphemerisErrorReason_errorMessage})
+var s_EphemerisErrorReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemerisErrorReasonList, Members: &m_EphemerisErrorReasonList, Type: smithy.ShapeTypeList, Ext: &e_EphemerisErrorReasonList})
+var s_EphemerisErrorReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEphemerisErrorReason, Members: &mEphemerisErrorReason, Type: smithy.ShapeTypeStructure, Ext: &e_EphemerisErrorReasonList_member})
+var sEphemerisFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisFilter, Members: &mEphemerisFilter, Type: smithy.ShapeTypeUnion, Ext: &eEphemerisFilter})
+var sEphemerisFilter_azEl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azEl", ID: &iAzElEphemerisFilter, Members: &mAzElEphemerisFilter, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisFilter_azEl})
+var sEphemerisInvalidReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisInvalidReason, Members: &mEphemerisInvalidReason, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisInvalidReason})
+var sEphemerisInvalidReason_METADATA_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisInvalidReason_METADATA_INVALID})
+var sEphemerisInvalidReason_TIME_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisInvalidReason_TIME_RANGE_INVALID})
+var sEphemerisInvalidReason_TRAJECTORY_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAJECTORY_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisInvalidReason_TRAJECTORY_INVALID})
+var sEphemerisInvalidReason_KMS_KEY_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS_KEY_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisInvalidReason_KMS_KEY_INVALID})
+var sEphemerisInvalidReason_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisInvalidReason_VALIDATION_ERROR})
+var sEphemerisItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisItem, Members: &mEphemerisItem, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisItem})
+var sEphemerisItem_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eEphemerisItem_ephemerisId})
+var sEphemerisItem_ephemerisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisType", ID: &iEphemerisType, Members: &mEphemerisType, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisItem_ephemerisType})
+var sEphemerisItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEphemerisStatus, Members: &mEphemerisStatus, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisItem_status})
+var sEphemerisItem_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_EphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &eEphemerisItem_priority})
+var sEphemerisItem_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eEphemerisItem_enabled})
+var sEphemerisItem_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEphemerisItem_creationTime})
+var sEphemerisItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eEphemerisItem_name})
+var sEphemerisItem_sourceS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisItem_sourceS3Object})
+var sEphemerisMetaData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisMetaData, Members: &mEphemerisMetaData, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisMetaData})
+var sEphemerisMetaData_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iEphemerisSource, Members: &mEphemerisSource, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisMetaData_source})
+var sEphemerisMetaData_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eEphemerisMetaData_ephemerisId})
+var sEphemerisMetaData_epoch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epoch", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEphemerisMetaData_epoch})
+var sEphemerisMetaData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eEphemerisMetaData_name})
+var s_EphemerisPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &e_EphemerisPriority})
+var sEphemerisResponseData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisResponseData, Members: &mEphemerisResponseData, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisResponseData})
+var sEphemerisResponseData_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eEphemerisResponseData_ephemerisId})
+var sEphemerisResponseData_ephemerisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisType", ID: &iEphemerisType, Members: &mEphemerisType, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisResponseData_ephemerisType})
+var sEphemerisSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisSource, Members: &mEphemerisSource, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisSource})
+var sEphemerisSource_CUSTOMER_PROVIDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROVIDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisSource_CUSTOMER_PROVIDED})
+var sEphemerisSource_SPACE_TRACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPACE_TRACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisSource_SPACE_TRACK})
+var sEphemerisStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisStatus, Members: &mEphemerisStatus, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisStatus})
+var sEphemerisStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_VALIDATING})
+var sEphemerisStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_INVALID})
+var sEphemerisStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_ERROR})
+var sEphemerisStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_ENABLED})
+var sEphemerisStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_DISABLED})
+var sEphemerisStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisStatus_EXPIRED})
+var s_EphemerisStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemerisStatusList, Members: &m_EphemerisStatusList, Type: smithy.ShapeTypeList, Ext: &e_EphemerisStatusList})
+var s_EphemerisStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEphemerisStatus, Members: &mEphemerisStatus, Type: smithy.ShapeTypeEnum, Ext: &e_EphemerisStatusList_member})
+var sEphemerisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisType, Members: &mEphemerisType, Type: smithy.ShapeTypeEnum, Ext: &eEphemerisType})
+var sEphemerisType_TLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisType_TLE})
+var sEphemerisType_OEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisType_OEM})
+var sEphemerisType_AZ_EL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ_EL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisType_AZ_EL})
+var sEphemerisType_SERVICE_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisType_SERVICE_MANAGED})
+var sEphemerisTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisTypeDescription, Members: &mEphemerisTypeDescription, Type: smithy.ShapeTypeUnion, Ext: &eEphemerisTypeDescription})
+var sEphemerisTypeDescription_tle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tle", ID: &iEphemerisDescription, Members: &mEphemerisDescription, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisTypeDescription_tle})
+var sEphemerisTypeDescription_oem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oem", ID: &iEphemerisDescription, Members: &mEphemerisDescription, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisTypeDescription_oem})
+var sEphemerisTypeDescription_azEl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azEl", ID: &iEphemerisDescription, Members: &mEphemerisDescription, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisTypeDescription_azEl})
+var s_ErrorString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorString, Type: smithy.ShapeTypeString, Ext: &e_ErrorString})
+var sFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrequency, Members: &mFrequency, Type: smithy.ShapeTypeStructure, Ext: &eFrequency})
+var sFrequency_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFrequency_value})
+var sFrequency_units = smithy.NewStaticSchema(smithy.StaticSchema{Member: "units", ID: &iFrequencyUnits, Members: &mFrequencyUnits, Type: smithy.ShapeTypeEnum, Ext: &eFrequency_units})
+var sFrequencyBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrequencyBandwidth, Members: &mFrequencyBandwidth, Type: smithy.ShapeTypeStructure, Ext: &eFrequencyBandwidth})
+var sFrequencyBandwidth_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFrequencyBandwidth_value})
+var sFrequencyBandwidth_units = smithy.NewStaticSchema(smithy.StaticSchema{Member: "units", ID: &iBandwidthUnits, Members: &mBandwidthUnits, Type: smithy.ShapeTypeEnum, Ext: &eFrequencyBandwidth_units})
+var sFrequencyUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrequencyUnits, Members: &mFrequencyUnits, Type: smithy.ShapeTypeEnum, Ext: &eFrequencyUnits})
+var sFrequencyUnits_GHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrequencyUnits_GHZ})
+var sFrequencyUnits_MHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrequencyUnits_MHZ})
+var sFrequencyUnits_KHZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KHZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFrequencyUnits_KHZ})
+var sGroundStationData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroundStationData, Members: &mGroundStationData, Type: smithy.ShapeTypeStructure, Ext: &eGroundStationData})
+var sGroundStationData_groundStationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationId", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eGroundStationData_groundStationId})
+var sGroundStationData_groundStationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationName", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eGroundStationData_groundStationName})
+var sGroundStationData_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegion, Type: smithy.ShapeTypeString, Ext: &eGroundStationData_region})
+var s_GroundStationIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroundStationIdList, Members: &m_GroundStationIdList, Type: smithy.ShapeTypeList, Ext: &e_GroundStationIdList})
+var s_GroundStationIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &e_GroundStationIdList_member})
+var s_GroundStationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroundStationList, Members: &m_GroundStationList, Type: smithy.ShapeTypeList, Ext: &e_GroundStationList})
+var s_GroundStationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroundStationData, Members: &mGroundStationData, Type: smithy.ShapeTypeStructure, Ext: &e_GroundStationList_member})
+var s_GroundStationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &e_GroundStationName})
+var s_GroundStationReservationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroundStationReservationList, Members: &m_GroundStationReservationList, Type: smithy.ShapeTypeList, Ext: &e_GroundStationReservationList})
+var s_GroundStationReservationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroundStationReservationListItem, Members: &mGroundStationReservationListItem, Type: smithy.ShapeTypeStructure, Ext: &e_GroundStationReservationList_member})
+var sGroundStationReservationListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroundStationReservationListItem, Members: &mGroundStationReservationListItem, Type: smithy.ShapeTypeStructure, Ext: &eGroundStationReservationListItem})
+var sGroundStationReservationListItem_reservationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationType", ID: &iReservationType, Members: &mReservationType, Type: smithy.ShapeTypeEnum, Ext: &eGroundStationReservationListItem_reservationType})
+var sGroundStationReservationListItem_groundStationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationId", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eGroundStationReservationListItem_groundStationId})
+var sGroundStationReservationListItem_antennaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaName", ID: &i_AntennaName, Type: smithy.ShapeTypeString, Ext: &eGroundStationReservationListItem_antennaName})
+var sGroundStationReservationListItem_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGroundStationReservationListItem_startTime})
+var sGroundStationReservationListItem_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGroundStationReservationListItem_endTime})
+var sGroundStationReservationListItem_reservationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationDetails", ID: &iReservationDetails, Members: &mReservationDetails, Type: smithy.ShapeTypeUnion, Ext: &eGroundStationReservationListItem_reservationDetails})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceType, Type: smithy.ShapeTypeString, Ext: &e_InstanceType})
+var sIntegerRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegerRange, Members: &mIntegerRange, Type: smithy.ShapeTypeStructure, Ext: &eIntegerRange})
+var sIntegerRange_minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimum", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eIntegerRange_minimum})
+var sIntegerRange_maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximum", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eIntegerRange_maximum})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sInvalidParameterException_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_parameterName})
+var s_IpAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList, Ext: &e_IpAddressList})
+var s_IpAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpV4Address, Type: smithy.ShapeTypeString, Ext: &e_IpAddressList_member})
+var s_IpV4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpV4Address, Type: smithy.ShapeTypeString, Ext: &e_IpV4Address})
+var sISO8601TimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iISO8601TimeRange, Members: &mISO8601TimeRange, Type: smithy.ShapeTypeStructure, Ext: &eISO8601TimeRange})
+var sISO8601TimeRange_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eISO8601TimeRange_startTime})
+var sISO8601TimeRange_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t40, Type: smithy.ShapeTypeTimestamp, Ext: &eISO8601TimeRange_endTime})
+var s_JsonString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonString, Type: smithy.ShapeTypeString, Ext: &e_JsonString})
+var s_KeyAliasArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAliasArn, Type: smithy.ShapeTypeString, Ext: &e_KeyAliasArn})
+var s_KeyAliasName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAliasName, Type: smithy.ShapeTypeString, Ext: &e_KeyAliasName})
+var s_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyArn, Type: smithy.ShapeTypeString, Ext: &e_KeyArn})
+var s_KinesisDataStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisDataStreamArn, Type: smithy.ShapeTypeString, Ext: &e_KinesisDataStreamArn})
+var sKinesisDataStreamData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisDataStreamData, Members: &mKinesisDataStreamData, Type: smithy.ShapeTypeStructure, Ext: &eKinesisDataStreamData})
+var sKinesisDataStreamData_kinesisRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eKinesisDataStreamData_kinesisRoleArn})
+var sKinesisDataStreamData_kinesisDataStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisDataStreamArn", ID: &i_KinesisDataStreamArn, Type: smithy.ShapeTypeString, Ext: &eKinesisDataStreamData_kinesisDataStreamArn})
+var sKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsKey, Members: &mKmsKey, Type: smithy.ShapeTypeUnion, Ext: &eKmsKey})
+var sKmsKey_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString, Ext: &eKmsKey_kmsKeyArn})
+var sKmsKey_kmsAliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsAliasArn", ID: &i_KeyAliasArn, Type: smithy.ShapeTypeString, Ext: &eKmsKey_kmsAliasArn})
+var sKmsKey_kmsAliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsAliasName", ID: &i_KeyAliasName, Type: smithy.ShapeTypeString, Ext: &eKmsKey_kmsAliasName})
+var sMaintenanceReservationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaintenanceReservationDetails, Members: &mMaintenanceReservationDetails, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceReservationDetails})
+var sMaintenanceReservationDetails_maintenanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maintenanceType", ID: &iMaintenanceType, Members: &mMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &eMaintenanceReservationDetails_maintenanceType})
+var sMaintenanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaintenanceType, Members: &mMaintenanceType, Type: smithy.ShapeTypeEnum, Ext: &eMaintenanceType})
+var sMaintenanceType_PLANNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLANNED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceType_PLANNED})
+var sMaintenanceType_UNPLANNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNPLANNED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMaintenanceType_UNPLANNED})
+var s_MissionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &e_MissionProfileArn})
+var s_MissionProfileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MissionProfileList, Members: &m_MissionProfileList, Type: smithy.ShapeTypeList, Ext: &e_MissionProfileList})
+var s_MissionProfileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMissionProfileListItem, Members: &mMissionProfileListItem, Type: smithy.ShapeTypeStructure, Ext: &e_MissionProfileList_member})
+var sMissionProfileListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissionProfileListItem, Members: &mMissionProfileListItem, Type: smithy.ShapeTypeStructure, Ext: &eMissionProfileListItem})
+var sMissionProfileListItem_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eMissionProfileListItem_missionProfileId})
+var sMissionProfileListItem_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eMissionProfileListItem_missionProfileArn})
+var sMissionProfileListItem_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegion, Type: smithy.ShapeTypeString, Ext: &eMissionProfileListItem_region})
+var sMissionProfileListItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eMissionProfileListItem_name})
+var s_Month = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &e_Month})
+var s_noradSatelliteID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_noradSatelliteID, Type: smithy.ShapeTypeInteger, Ext: &e_noradSatelliteID})
+var sOEMEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOEMEphemeris, Members: &mOEMEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eOEMEphemeris})
+var sOEMEphemeris_s3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eOEMEphemeris_s3Object})
+var sOEMEphemeris_oemData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oemData", ID: &i_UnboundedString, Type: smithy.ShapeTypeString, Ext: &eOEMEphemeris_oemData})
+var sOemProgramTrackSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOemProgramTrackSettings, Members: &mOemProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eOemProgramTrackSettings})
+var sOemProgramTrackSettings_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eOemProgramTrackSettings_ephemerisId})
+var s_PaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_PaginationMaxResults})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPolarization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolarization, Members: &mPolarization, Type: smithy.ShapeTypeEnum, Ext: &ePolarization})
+var sPolarization_RIGHT_HAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIGHT_HAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolarization_RIGHT_HAND})
+var sPolarization_LEFT_HAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEFT_HAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolarization_LEFT_HAND})
+var sPolarization_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolarization_NONE})
+var s_PositiveDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveDurationInSeconds})
+var sProgramTrackSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramTrackSettings, Members: &mProgramTrackSettings, Type: smithy.ShapeTypeUnion, Ext: &eProgramTrackSettings})
+var sProgramTrackSettings_azEl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "azEl", ID: &iAzElProgramTrackSettings, Members: &mAzElProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eProgramTrackSettings_azEl})
+var sProgramTrackSettings_oem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oem", ID: &iOemProgramTrackSettings, Members: &mOemProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eProgramTrackSettings_oem})
+var sProgramTrackSettings_tle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tle", ID: &iTleProgramTrackSettings, Members: &mTleProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eProgramTrackSettings_tle})
+var sRangedConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRangedConnectionDetails, Members: &mRangedConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eRangedConnectionDetails})
+var sRangedConnectionDetails_socketAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "socketAddress", ID: &iRangedSocketAddress, Members: &mRangedSocketAddress, Type: smithy.ShapeTypeStructure, Ext: &eRangedConnectionDetails_socketAddress})
+var sRangedConnectionDetails_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRangedConnectionDetails_mtu})
+var sRangedSocketAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRangedSocketAddress, Members: &mRangedSocketAddress, Type: smithy.ShapeTypeStructure, Ext: &eRangedSocketAddress})
+var sRangedSocketAddress_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IpV4Address, Type: smithy.ShapeTypeString, Ext: &eRangedSocketAddress_name})
+var sRangedSocketAddress_portRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portRange", ID: &iIntegerRange, Members: &mIntegerRange, Type: smithy.ShapeTypeStructure, Ext: &eRangedSocketAddress_portRange})
+var sReservationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservationDetails, Members: &mReservationDetails, Type: smithy.ShapeTypeUnion, Ext: &eReservationDetails})
+var sReservationDetails_maintenance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maintenance", ID: &iMaintenanceReservationDetails, Members: &mMaintenanceReservationDetails, Type: smithy.ShapeTypeStructure, Ext: &eReservationDetails_maintenance})
+var sReservationDetails_contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contact", ID: &iContactReservationDetails, Members: &mContactReservationDetails, Type: smithy.ShapeTypeStructure, Ext: &eReservationDetails_contact})
+var sReservationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservationType, Members: &mReservationType, Type: smithy.ShapeTypeEnum, Ext: &eReservationType})
+var sReservationType_MAINTENANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAINTENANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReservationType_MAINTENANCE})
+var sReservationType_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReservationType_CONTACT})
+var s_ReservationTypeFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReservationTypeFilterList, Members: &m_ReservationTypeFilterList, Type: smithy.ShapeTypeList, Ext: &e_ReservationTypeFilterList})
+var s_ReservationTypeFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReservationType, Members: &mReservationType, Type: smithy.ShapeTypeEnum, Ext: &e_ReservationTypeFilterList_member})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_message})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitExceededException})
+var sResourceLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceededException_message})
+var sResourceLimitExceededException_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceededException_parameterName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3KeyPrefix, Type: smithy.ShapeTypeString, Ext: &e_S3KeyPrefix})
+var sS3Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eS3Object})
+var sS3Object_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eS3Object_bucket})
+var sS3Object_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eS3Object_key})
+var sS3Object_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_S3VersionId, Type: smithy.ShapeTypeString, Ext: &eS3Object_version})
+var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectKey})
+var sS3RecordingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3RecordingConfig, Members: &mS3RecordingConfig, Type: smithy.ShapeTypeStructure, Ext: &eS3RecordingConfig})
+var sS3RecordingConfig_bucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketArn", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eS3RecordingConfig_bucketArn})
+var sS3RecordingConfig_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eS3RecordingConfig_roleArn})
+var sS3RecordingConfig_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3KeyPrefix, Type: smithy.ShapeTypeString, Ext: &eS3RecordingConfig_prefix})
+var sS3RecordingDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3RecordingDetails, Members: &mS3RecordingDetails, Type: smithy.ShapeTypeStructure, Ext: &eS3RecordingDetails})
+var sS3RecordingDetails_bucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketArn", ID: &i_BucketArn, Type: smithy.ShapeTypeString, Ext: &eS3RecordingDetails_bucketArn})
+var sS3RecordingDetails_keyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyTemplate", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3RecordingDetails_keyTemplate})
+var s_S3VersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3VersionId, Type: smithy.ShapeTypeString, Ext: &e_S3VersionId})
+var s_SafeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &e_SafeName})
+var s_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &e_satelliteArn})
+var s_SatelliteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SatelliteList, Members: &m_SatelliteList, Type: smithy.ShapeTypeList, Ext: &e_SatelliteList})
+var s_SatelliteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSatelliteListItem, Members: &mSatelliteListItem, Type: smithy.ShapeTypeStructure, Ext: &e_SatelliteList_member})
+var sSatelliteListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSatelliteListItem, Members: &mSatelliteListItem, Type: smithy.ShapeTypeStructure, Ext: &eSatelliteListItem})
+var sSatelliteListItem_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eSatelliteListItem_satelliteId})
+var sSatelliteListItem_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eSatelliteListItem_satelliteArn})
+var sSatelliteListItem_noradSatelliteID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noradSatelliteID", ID: &i_noradSatelliteID, Type: smithy.ShapeTypeInteger, Ext: &eSatelliteListItem_noradSatelliteID})
+var sSatelliteListItem_groundStations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStations", ID: &i_GroundStationIdList, Members: &m_GroundStationIdList, Type: smithy.ShapeTypeList, Ext: &eSatelliteListItem_groundStations})
+var sSatelliteListItem_currentEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentEphemeris", ID: &iEphemerisMetaData, Members: &mEphemerisMetaData, Type: smithy.ShapeTypeStructure, Ext: &eSatelliteListItem_currentEphemeris})
+var sSecurityDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityDetails, Members: &mSecurityDetails, Type: smithy.ShapeTypeStructure, Ext: &eSecurityDetails})
+var sSecurityDetails_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList, Ext: &eSecurityDetails_subnetIds})
+var sSecurityDetails_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eSecurityDetails_securityGroupIds})
+var sSecurityDetails_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eSecurityDetails_roleArn})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdList})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIdList_member})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_parameterName})
+var s_SignatureMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignatureMap, Members: &m_SignatureMap, Type: smithy.ShapeTypeMap, Ext: &e_SignatureMap})
+var s_SignatureMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SignatureMap_key})
+var s_SignatureMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_SignatureMap_value})
+var sSocketAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure, Ext: &eSocketAddress})
+var sSocketAddress_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSocketAddress_name})
+var sSocketAddress_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSocketAddress_port})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure, Ext: &eSource})
+var sSource_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eSource_configType})
+var sSource_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSource_configId})
+var sSource_configDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configDetails", ID: &iConfigDetails, Members: &mConfigDetails, Type: smithy.ShapeTypeUnion, Ext: &eSource_configDetails})
+var sSource_dataflowSourceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowSourceRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSource_dataflowSourceRegion})
+var sSpectrumConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpectrumConfig, Members: &mSpectrumConfig, Type: smithy.ShapeTypeStructure, Ext: &eSpectrumConfig})
+var sSpectrumConfig_centerFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "centerFrequency", ID: &iFrequency, Members: &mFrequency, Type: smithy.ShapeTypeStructure, Ext: &eSpectrumConfig_centerFrequency})
+var sSpectrumConfig_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &iFrequencyBandwidth, Members: &mFrequencyBandwidth, Type: smithy.ShapeTypeStructure, Ext: &eSpectrumConfig_bandwidth})
+var sSpectrumConfig_polarization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "polarization", ID: &iPolarization, Members: &mPolarization, Type: smithy.ShapeTypeEnum, Ext: &eSpectrumConfig_polarization})
+var s_StatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusList, Members: &m_StatusList, Type: smithy.ShapeTypeList, Ext: &e_StatusList})
+var s_StatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactStatus, Members: &mContactStatus, Type: smithy.ShapeTypeEnum, Ext: &e_StatusList_member})
+var s_SubnetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList, Ext: &e_SubnetList})
+var s_SubnetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SubnetList_member})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UnboundedString, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &e_TagsMap})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_key})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_value})
+var sTelemetrySinkConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetrySinkConfig, Members: &mTelemetrySinkConfig, Type: smithy.ShapeTypeStructure, Ext: &eTelemetrySinkConfig})
+var sTelemetrySinkConfig_telemetrySinkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkType", ID: &iTelemetrySinkType, Members: &mTelemetrySinkType, Type: smithy.ShapeTypeEnum, Ext: &eTelemetrySinkConfig_telemetrySinkType})
+var sTelemetrySinkConfig_telemetrySinkData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkData", ID: &iTelemetrySinkData, Members: &mTelemetrySinkData, Type: smithy.ShapeTypeUnion, Ext: &eTelemetrySinkConfig_telemetrySinkData})
+var sTelemetrySinkData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetrySinkData, Members: &mTelemetrySinkData, Type: smithy.ShapeTypeUnion, Ext: &eTelemetrySinkData})
+var sTelemetrySinkData_kinesisDataStreamData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisDataStreamData", ID: &iKinesisDataStreamData, Members: &mKinesisDataStreamData, Type: smithy.ShapeTypeStructure, Ext: &eTelemetrySinkData_kinesisDataStreamData})
+var sTelemetrySinkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetrySinkType, Members: &mTelemetrySinkType, Type: smithy.ShapeTypeEnum, Ext: &eTelemetrySinkType})
+var sTelemetrySinkType_KINESIS_DATA_STREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KINESIS_DATA_STREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTelemetrySinkType_KINESIS_DATA_STREAM})
+var sTimeAzEl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeAzEl, Members: &mTimeAzEl, Type: smithy.ShapeTypeStructure, Ext: &eTimeAzEl})
+var sTimeAzEl_dt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dt", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eTimeAzEl_dt})
+var sTimeAzEl_az = smithy.NewStaticSchema(smithy.StaticSchema{Member: "az", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eTimeAzEl_az})
+var sTimeAzEl_el = smithy.NewStaticSchema(smithy.StaticSchema{Member: "el", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eTimeAzEl_el})
+var s_TimeAzElList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeAzElList, Members: &m_TimeAzElList, Type: smithy.ShapeTypeList, Ext: &e_TimeAzElList})
+var s_TimeAzElList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTimeAzEl, Members: &mTimeAzEl, Type: smithy.ShapeTypeStructure, Ext: &e_TimeAzElList_member})
+var sTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eTimeRange})
+var sTimeRange_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRange_startTime})
+var sTimeRange_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRange_endTime})
+var sTLEData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLEData, Members: &mTLEData, Type: smithy.ShapeTypeStructure, Ext: &eTLEData})
+var sTLEData_tleLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tleLine1", ID: &i_TleLineOne, Type: smithy.ShapeTypeString, Ext: &eTLEData_tleLine1})
+var sTLEData_tleLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tleLine2", ID: &i_TleLineTwo, Type: smithy.ShapeTypeString, Ext: &eTLEData_tleLine2})
+var sTLEData_validTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validTimeRange", ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eTLEData_validTimeRange})
+var s_TLEDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TLEDataList, Members: &m_TLEDataList, Type: smithy.ShapeTypeList, Ext: &e_TLEDataList})
+var s_TLEDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTLEData, Members: &mTLEData, Type: smithy.ShapeTypeStructure, Ext: &e_TLEDataList_member})
+var sTLEEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLEEphemeris, Members: &mTLEEphemeris, Type: smithy.ShapeTypeStructure, Ext: &eTLEEphemeris})
+var sTLEEphemeris_s3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure, Ext: &eTLEEphemeris_s3Object})
+var sTLEEphemeris_tleData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tleData", ID: &i_TLEDataList, Members: &m_TLEDataList, Type: smithy.ShapeTypeList, Ext: &eTLEEphemeris_tleData})
+var s_TleLineOne = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TleLineOne, Type: smithy.ShapeTypeString, Ext: &e_TleLineOne})
+var s_TleLineTwo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TleLineTwo, Type: smithy.ShapeTypeString, Ext: &e_TleLineTwo})
+var sTleProgramTrackSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTleProgramTrackSettings, Members: &mTleProgramTrackSettings, Type: smithy.ShapeTypeStructure, Ext: &eTleProgramTrackSettings})
+var sTleProgramTrackSettings_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eTleProgramTrackSettings_ephemerisId})
+var sTrackingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrackingConfig, Members: &mTrackingConfig, Type: smithy.ShapeTypeStructure, Ext: &eTrackingConfig})
+var sTrackingConfig_autotrack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autotrack", ID: &iCriticality, Members: &mCriticality, Type: smithy.ShapeTypeEnum, Ext: &eTrackingConfig_autotrack})
+var sTrackingOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrackingOverrides, Members: &mTrackingOverrides, Type: smithy.ShapeTypeStructure, Ext: &eTrackingOverrides})
+var sTrackingOverrides_programTrackSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programTrackSettings", ID: &iProgramTrackSettings, Members: &mProgramTrackSettings, Type: smithy.ShapeTypeUnion, Ext: &eTrackingOverrides_programTrackSettings})
+var s_UnboundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnboundedString, Type: smithy.ShapeTypeString, Ext: &e_UnboundedString})
+var sUplinkAwsGroundStationAgentEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkAwsGroundStationAgentEndpoint, Members: &mUplinkAwsGroundStationAgentEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eUplinkAwsGroundStationAgentEndpoint})
+var sUplinkAwsGroundStationAgentEndpoint_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eUplinkAwsGroundStationAgentEndpoint_name})
+var sUplinkAwsGroundStationAgentEndpoint_dataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowDetails", ID: &iUplinkDataflowDetails, Members: &mUplinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eUplinkAwsGroundStationAgentEndpoint_dataflowDetails})
+var sUplinkAwsGroundStationAgentEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkAwsGroundStationAgentEndpointDetails, Members: &mUplinkAwsGroundStationAgentEndpointDetails, Type: smithy.ShapeTypeStructure, Ext: &eUplinkAwsGroundStationAgentEndpointDetails})
+var sUplinkAwsGroundStationAgentEndpointDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eUplinkAwsGroundStationAgentEndpointDetails_name})
+var sUplinkAwsGroundStationAgentEndpointDetails_dataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowDetails", ID: &iUplinkDataflowDetails, Members: &mUplinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eUplinkAwsGroundStationAgentEndpointDetails_dataflowDetails})
+var sUplinkAwsGroundStationAgentEndpointDetails_agentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentStatus", ID: &iAgentStatus, Members: &mAgentStatus, Type: smithy.ShapeTypeEnum, Ext: &eUplinkAwsGroundStationAgentEndpointDetails_agentStatus})
+var sUplinkAwsGroundStationAgentEndpointDetails_auditResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditResults", ID: &iAuditResults, Members: &mAuditResults, Type: smithy.ShapeTypeEnum, Ext: &eUplinkAwsGroundStationAgentEndpointDetails_auditResults})
+var sUplinkConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkConnectionDetails, Members: &mUplinkConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eUplinkConnectionDetails})
+var sUplinkConnectionDetails_ingressAddressAndPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressAddressAndPort", ID: &iConnectionDetails, Members: &mConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eUplinkConnectionDetails_ingressAddressAndPort})
+var sUplinkConnectionDetails_agentIpAndPortAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentIpAndPortAddress", ID: &iRangedConnectionDetails, Members: &mRangedConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eUplinkConnectionDetails_agentIpAndPortAddress})
+var sUplinkDataflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkDataflowDetails, Members: &mUplinkDataflowDetails, Type: smithy.ShapeTypeUnion, Ext: &eUplinkDataflowDetails})
+var sUplinkDataflowDetails_agentConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentConnectionDetails", ID: &iUplinkConnectionDetails, Members: &mUplinkConnectionDetails, Type: smithy.ShapeTypeStructure, Ext: &eUplinkDataflowDetails_agentConnectionDetails})
+var sUplinkEchoConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkEchoConfig, Members: &mUplinkEchoConfig, Type: smithy.ShapeTypeStructure, Ext: &eUplinkEchoConfig})
+var sUplinkEchoConfig_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUplinkEchoConfig_enabled})
+var sUplinkEchoConfig_antennaUplinkConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaUplinkConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eUplinkEchoConfig_antennaUplinkConfigArn})
+var sUplinkSpectrumConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUplinkSpectrumConfig, Members: &mUplinkSpectrumConfig, Type: smithy.ShapeTypeStructure, Ext: &eUplinkSpectrumConfig})
+var sUplinkSpectrumConfig_centerFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "centerFrequency", ID: &iFrequency, Members: &mFrequency, Type: smithy.ShapeTypeStructure, Ext: &eUplinkSpectrumConfig_centerFrequency})
+var sUplinkSpectrumConfig_polarization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "polarization", ID: &iPolarization, Members: &mPolarization, Type: smithy.ShapeTypeEnum, Ext: &eUplinkSpectrumConfig_polarization})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var sVersionFailureReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVersionFailureReasonCode, Members: &mVersionFailureReasonCode, Type: smithy.ShapeTypeEnum, Ext: &eVersionFailureReasonCode})
+var sVersionFailureReasonCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_INTERNAL_ERROR})
+var sVersionFailureReasonCode_INVALID_SATELLITE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SATELLITE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_INVALID_SATELLITE_ARN})
+var sVersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_UPDATE_CONTACT_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST})
+var sVersionFailureReasonCode_EPHEMERIS_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EPHEMERIS_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_EPHEMERIS_NOT_FOUND})
+var sVersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EPHEMERIS_TIME_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID})
+var sVersionFailureReasonCode_EPHEMERIS_NOT_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EPHEMERIS_NOT_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_EPHEMERIS_NOT_ENABLED})
+var sVersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATELLITE_DOES_NOT_MATCH_EPHEMERIS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS})
+var sVersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ONBOARDED_TO_AZEL_EPHEMERIS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS})
+var sVersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZEL_EPHEMERIS_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND})
+var sVersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZEL_EPHEMERIS_WRONG_GROUND_STATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION})
+var sVersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZEL_EPHEMERIS_INVALID_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS})
+var sVersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZEL_EPHEMERIS_TIME_RANGE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID})
+var s_VersionFailureReasonCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionFailureReasonCodes, Members: &m_VersionFailureReasonCodes, Type: smithy.ShapeTypeList, Ext: &e_VersionFailureReasonCodes})
+var s_VersionFailureReasonCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVersionFailureReasonCode, Members: &mVersionFailureReasonCode, Type: smithy.ShapeTypeEnum, Ext: &e_VersionFailureReasonCodes_member})
+var s_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionId, Type: smithy.ShapeTypeInteger, Ext: &e_VersionId})
+var sVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVersionStatus, Members: &mVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eVersionStatus})
+var sVersionStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionStatus_UPDATING})
+var sVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionStatus_ACTIVE})
+var sVersionStatus_SUPERSEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPERSEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionStatus_SUPERSEDED})
+var sVersionStatus_FAILED_TO_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_TO_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVersionStatus_FAILED_TO_UPDATE})
+var s_VersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionString, Type: smithy.ShapeTypeString, Ext: &e_VersionString})
+var s_VersionStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionStringList, Members: &m_VersionStringList, Type: smithy.ShapeTypeList, Ext: &e_VersionStringList})
+var s_VersionStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VersionString, Type: smithy.ShapeTypeString, Ext: &e_VersionStringList_member})
+var s_Year = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &e_Year})
+var sCancelContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelContactRequest, Members: &mCancelContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelContactRequest})
+var sCancelContactRequest_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eCancelContactRequest_contactId})
+var sContactIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactIdResponse, Members: &mContactIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eContactIdResponse})
+var sContactIdResponse_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eContactIdResponse_contactId})
+var sContactIdResponse_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_VersionId, Type: smithy.ShapeTypeInteger, Ext: &eContactIdResponse_versionId})
+var sCreateConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigRequest, Members: &mCreateConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigRequest})
+var sCreateConfigRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigRequest_name})
+var sCreateConfigRequest_configData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configData", ID: &iConfigTypeData, Members: &mConfigTypeData, Type: smithy.ShapeTypeUnion, Ext: &eCreateConfigRequest_configData})
+var sCreateConfigRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateConfigRequest_tags})
+var sConfigIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigIdResponse, Members: &mConfigIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eConfigIdResponse})
+var sConfigIdResponse_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConfigIdResponse_configId})
+var sConfigIdResponse_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eConfigIdResponse_configType})
+var sConfigIdResponse_configArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eConfigIdResponse_configArn})
+var sCreateDataflowEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataflowEndpointGroupRequest, Members: &mCreateDataflowEndpointGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataflowEndpointGroupRequest})
+var sCreateDataflowEndpointGroupRequest_endpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointDetails", ID: &i_EndpointDetailsList, Members: &m_EndpointDetailsList, Type: smithy.ShapeTypeList, Ext: &eCreateDataflowEndpointGroupRequest_endpointDetails})
+var sCreateDataflowEndpointGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDataflowEndpointGroupRequest_tags})
+var sCreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds})
+var sCreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds})
+var sDataflowEndpointGroupIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataflowEndpointGroupIdResponse, Members: &mDataflowEndpointGroupIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eDataflowEndpointGroupIdResponse})
+var sDataflowEndpointGroupIdResponse_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDataflowEndpointGroupIdResponse_dataflowEndpointGroupId})
+var sCreateDataflowEndpointGroupV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataflowEndpointGroupV2Request, Members: &mCreateDataflowEndpointGroupV2Request, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataflowEndpointGroupV2Request})
+var sCreateDataflowEndpointGroupV2Request_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_CreateEndpointDetailsList, Members: &m_CreateEndpointDetailsList, Type: smithy.ShapeTypeList, Ext: &eCreateDataflowEndpointGroupV2Request_endpoints})
+var sCreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds})
+var sCreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds})
+var sCreateDataflowEndpointGroupV2Request_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateDataflowEndpointGroupV2Request_tags})
+var sCreateDataflowEndpointGroupV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataflowEndpointGroupV2Response, Members: &mCreateDataflowEndpointGroupV2Response, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataflowEndpointGroupV2Response})
+var sCreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId})
+var sCreateEphemerisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEphemerisRequest, Members: &mCreateEphemerisRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEphemerisRequest})
+var sCreateEphemerisRequest_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateEphemerisRequest_satelliteId})
+var sCreateEphemerisRequest_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateEphemerisRequest_enabled})
+var sCreateEphemerisRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_CustomerEphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &eCreateEphemerisRequest_priority})
+var sCreateEphemerisRequest_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateEphemerisRequest_expirationTime})
+var sCreateEphemerisRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eCreateEphemerisRequest_name})
+var sCreateEphemerisRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString, Ext: &eCreateEphemerisRequest_kmsKeyArn})
+var sCreateEphemerisRequest_ephemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeris", ID: &iEphemerisData, Members: &mEphemerisData, Type: smithy.ShapeTypeUnion, Ext: &eCreateEphemerisRequest_ephemeris})
+var sCreateEphemerisRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateEphemerisRequest_tags})
+var sEphemerisIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemerisIdResponse, Members: &mEphemerisIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eEphemerisIdResponse})
+var sEphemerisIdResponse_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eEphemerisIdResponse_ephemerisId})
+var sCreateMissionProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMissionProfileRequest, Members: &mCreateMissionProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMissionProfileRequest})
+var sCreateMissionProfileRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eCreateMissionProfileRequest_name})
+var sCreateMissionProfileRequest_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateMissionProfileRequest_contactPrePassDurationSeconds})
+var sCreateMissionProfileRequest_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateMissionProfileRequest_contactPostPassDurationSeconds})
+var sCreateMissionProfileRequest_minimumViableContactDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumViableContactDurationSeconds", ID: &i_PositiveDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateMissionProfileRequest_minimumViableContactDurationSeconds})
+var sCreateMissionProfileRequest_dataflowEdges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEdges", ID: &i_DataflowEdgeList, Members: &m_DataflowEdgeList, Type: smithy.ShapeTypeList, Ext: &eCreateMissionProfileRequest_dataflowEdges})
+var sCreateMissionProfileRequest_trackingConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eCreateMissionProfileRequest_trackingConfigArn})
+var sCreateMissionProfileRequest_telemetrySinkConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eCreateMissionProfileRequest_telemetrySinkConfigArn})
+var sCreateMissionProfileRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMissionProfileRequest_tags})
+var sCreateMissionProfileRequest_streamsKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsKey", ID: &iKmsKey, Members: &mKmsKey, Type: smithy.ShapeTypeUnion, Ext: &eCreateMissionProfileRequest_streamsKmsKey})
+var sCreateMissionProfileRequest_streamsKmsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateMissionProfileRequest_streamsKmsRole})
+var sMissionProfileIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissionProfileIdResponse, Members: &mMissionProfileIdResponse, Type: smithy.ShapeTypeStructure, Ext: &eMissionProfileIdResponse})
+var sMissionProfileIdResponse_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eMissionProfileIdResponse_missionProfileId})
+var sDeleteConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigRequest, Members: &mDeleteConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigRequest})
+var sDeleteConfigRequest_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigRequest_configId})
+var sDeleteConfigRequest_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Traits: &t47, Type: smithy.ShapeTypeEnum, Ext: &eDeleteConfigRequest_configType})
+var sDeleteDataflowEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataflowEndpointGroupRequest, Members: &mDeleteDataflowEndpointGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataflowEndpointGroupRequest})
+var sDeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId})
+var sDeleteEphemerisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEphemerisRequest, Members: &mDeleteEphemerisRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEphemerisRequest})
+var sDeleteEphemerisRequest_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDeleteEphemerisRequest_ephemerisId})
+var sDeleteMissionProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMissionProfileRequest, Members: &mDeleteMissionProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMissionProfileRequest})
+var sDeleteMissionProfileRequest_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDeleteMissionProfileRequest_missionProfileId})
+var sDescribeContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContactRequest, Members: &mDescribeContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactRequest})
+var sDescribeContactRequest_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDescribeContactRequest_contactId})
+var sDescribeContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContactResponse, Members: &mDescribeContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactResponse})
+var sDescribeContactResponse_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_contactId})
+var sDescribeContactResponse_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_missionProfileArn})
+var sDescribeContactResponse_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_satelliteArn})
+var sDescribeContactResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_startTime})
+var sDescribeContactResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_endTime})
+var sDescribeContactResponse_prePassStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prePassStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_prePassStartTime})
+var sDescribeContactResponse_postPassEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postPassEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_postPassEndTime})
+var sDescribeContactResponse_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_groundStation})
+var sDescribeContactResponse_contactStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactStatus", ID: &iContactStatus, Members: &mContactStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeContactResponse_contactStatus})
+var sDescribeContactResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_errorMessage})
+var sDescribeContactResponse_maximumElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumElevation", ID: &iElevation, Members: &mElevation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactResponse_maximumElevation})
+var sDescribeContactResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeContactResponse_tags})
+var sDescribeContactResponse_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactResponse_region})
+var sDescribeContactResponse_dataflowList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowList", ID: &i_DataflowList, Members: &m_DataflowList, Type: smithy.ShapeTypeList, Ext: &eDescribeContactResponse_dataflowList})
+var sDescribeContactResponse_visibilityStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_visibilityStartTime})
+var sDescribeContactResponse_visibilityEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactResponse_visibilityEndTime})
+var sDescribeContactResponse_trackingOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingOverrides", ID: &iTrackingOverrides, Members: &mTrackingOverrides, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactResponse_trackingOverrides})
+var sDescribeContactResponse_ephemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeris", ID: &iEphemerisResponseData, Members: &mEphemerisResponseData, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactResponse_ephemeris})
+var sDescribeContactResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &iContactVersion, Members: &mContactVersion, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactResponse_version})
+var sDescribeContactVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContactVersionRequest, Members: &mDescribeContactVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionRequest})
+var sDescribeContactVersionRequest_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionRequest_contactId})
+var sDescribeContactVersionRequest_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_VersionId, Traits: &t47, Type: smithy.ShapeTypeInteger, Ext: &eDescribeContactVersionRequest_versionId})
+var sDescribeContactVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContactVersionResponse, Members: &mDescribeContactVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionResponse})
+var sDescribeContactVersionResponse_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_contactId})
+var sDescribeContactVersionResponse_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_missionProfileArn})
+var sDescribeContactVersionResponse_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_satelliteArn})
+var sDescribeContactVersionResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_startTime})
+var sDescribeContactVersionResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_endTime})
+var sDescribeContactVersionResponse_prePassStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prePassStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_prePassStartTime})
+var sDescribeContactVersionResponse_postPassEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postPassEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_postPassEndTime})
+var sDescribeContactVersionResponse_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_groundStation})
+var sDescribeContactVersionResponse_contactStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactStatus", ID: &iContactStatus, Members: &mContactStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeContactVersionResponse_contactStatus})
+var sDescribeContactVersionResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_errorMessage})
+var sDescribeContactVersionResponse_maximumElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumElevation", ID: &iElevation, Members: &mElevation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionResponse_maximumElevation})
+var sDescribeContactVersionResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeContactVersionResponse_tags})
+var sDescribeContactVersionResponse_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeContactVersionResponse_region})
+var sDescribeContactVersionResponse_dataflowList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowList", ID: &i_DataflowList, Members: &m_DataflowList, Type: smithy.ShapeTypeList, Ext: &eDescribeContactVersionResponse_dataflowList})
+var sDescribeContactVersionResponse_visibilityStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_visibilityStartTime})
+var sDescribeContactVersionResponse_visibilityEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibilityEndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContactVersionResponse_visibilityEndTime})
+var sDescribeContactVersionResponse_trackingOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingOverrides", ID: &iTrackingOverrides, Members: &mTrackingOverrides, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionResponse_trackingOverrides})
+var sDescribeContactVersionResponse_ephemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeris", ID: &iEphemerisResponseData, Members: &mEphemerisResponseData, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionResponse_ephemeris})
+var sDescribeContactVersionResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &iContactVersion, Members: &mContactVersion, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContactVersionResponse_version})
+var sDescribeEphemerisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEphemerisRequest, Members: &mDescribeEphemerisRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEphemerisRequest})
+var sDescribeEphemerisRequest_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eDescribeEphemerisRequest_ephemerisId})
+var sDescribeEphemerisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEphemerisResponse, Members: &mDescribeEphemerisResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEphemerisResponse})
+var sDescribeEphemerisResponse_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDescribeEphemerisResponse_ephemerisId})
+var sDescribeEphemerisResponse_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eDescribeEphemerisResponse_satelliteId})
+var sDescribeEphemerisResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEphemerisStatus, Members: &mEphemerisStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEphemerisResponse_status})
+var sDescribeEphemerisResponse_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_EphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEphemerisResponse_priority})
+var sDescribeEphemerisResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeEphemerisResponse_creationTime})
+var sDescribeEphemerisResponse_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeEphemerisResponse_enabled})
+var sDescribeEphemerisResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eDescribeEphemerisResponse_name})
+var sDescribeEphemerisResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eDescribeEphemerisResponse_tags})
+var sDescribeEphemerisResponse_suppliedData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suppliedData", ID: &iEphemerisTypeDescription, Members: &mEphemerisTypeDescription, Type: smithy.ShapeTypeUnion, Ext: &eDescribeEphemerisResponse_suppliedData})
+var sDescribeEphemerisResponse_invalidReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidReason", ID: &iEphemerisInvalidReason, Members: &mEphemerisInvalidReason, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEphemerisResponse_invalidReason})
+var sDescribeEphemerisResponse_errorReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorReasons", ID: &i_EphemerisErrorReasonList, Members: &m_EphemerisErrorReasonList, Type: smithy.ShapeTypeList, Ext: &eDescribeEphemerisResponse_errorReasons})
+var sGetAgentConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentConfigurationRequest, Members: &mGetAgentConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAgentConfigurationRequest})
+var sGetAgentConfigurationRequest_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetAgentConfigurationRequest_agentId})
+var sGetAgentConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentConfigurationResponse, Members: &mGetAgentConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAgentConfigurationResponse})
+var sGetAgentConfigurationResponse_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetAgentConfigurationResponse_agentId})
+var sGetAgentConfigurationResponse_taskingDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskingDocument", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetAgentConfigurationResponse_taskingDocument})
+var sGetAgentTaskResponseUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentTaskResponseUrlRequest, Members: &mGetAgentTaskResponseUrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAgentTaskResponseUrlRequest})
+var sGetAgentTaskResponseUrlRequest_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetAgentTaskResponseUrlRequest_agentId})
+var sGetAgentTaskResponseUrlRequest_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetAgentTaskResponseUrlRequest_taskId})
+var sGetAgentTaskResponseUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAgentTaskResponseUrlResponse, Members: &mGetAgentTaskResponseUrlResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAgentTaskResponseUrlResponse})
+var sGetAgentTaskResponseUrlResponse_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetAgentTaskResponseUrlResponse_agentId})
+var sGetAgentTaskResponseUrlResponse_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetAgentTaskResponseUrlResponse_taskId})
+var sGetAgentTaskResponseUrlResponse_presignedLogUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "presignedLogUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetAgentTaskResponseUrlResponse_presignedLogUrl})
+var sGetConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigRequest, Members: &mGetConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigRequest})
+var sGetConfigRequest_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetConfigRequest_configId})
+var sGetConfigRequest_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Traits: &t47, Type: smithy.ShapeTypeEnum, Ext: &eGetConfigRequest_configType})
+var sGetConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigResponse, Members: &mGetConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigResponse})
+var sGetConfigResponse_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_configId})
+var sGetConfigResponse_configArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_configArn})
+var sGetConfigResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_name})
+var sGetConfigResponse_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Type: smithy.ShapeTypeEnum, Ext: &eGetConfigResponse_configType})
+var sGetConfigResponse_configData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configData", ID: &iConfigTypeData, Members: &mConfigTypeData, Type: smithy.ShapeTypeUnion, Ext: &eGetConfigResponse_configData})
+var sGetConfigResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eGetConfigResponse_tags})
+var sGetDataflowEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataflowEndpointGroupRequest, Members: &mGetDataflowEndpointGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataflowEndpointGroupRequest})
+var sGetDataflowEndpointGroupRequest_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetDataflowEndpointGroupRequest_dataflowEndpointGroupId})
+var sGetDataflowEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataflowEndpointGroupResponse, Members: &mGetDataflowEndpointGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataflowEndpointGroupResponse})
+var sGetDataflowEndpointGroupResponse_dataflowEndpointGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetDataflowEndpointGroupResponse_dataflowEndpointGroupId})
+var sGetDataflowEndpointGroupResponse_dataflowEndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupArn", ID: &i_DataflowEndpointGroupArn, Type: smithy.ShapeTypeString, Ext: &eGetDataflowEndpointGroupResponse_dataflowEndpointGroupArn})
+var sGetDataflowEndpointGroupResponse_endpointsDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointsDetails", ID: &i_EndpointDetailsList, Members: &m_EndpointDetailsList, Type: smithy.ShapeTypeList, Ext: &eGetDataflowEndpointGroupResponse_endpointsDetails})
+var sGetDataflowEndpointGroupResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eGetDataflowEndpointGroupResponse_tags})
+var sGetDataflowEndpointGroupResponse_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetDataflowEndpointGroupResponse_contactPrePassDurationSeconds})
+var sGetDataflowEndpointGroupResponse_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DataflowEndpointGroupDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetDataflowEndpointGroupResponse_contactPostPassDurationSeconds})
+var sGetMinuteUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMinuteUsageRequest, Members: &mGetMinuteUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMinuteUsageRequest})
+var sGetMinuteUsageRequest_month = smithy.NewStaticSchema(smithy.StaticSchema{Member: "month", ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageRequest_month})
+var sGetMinuteUsageRequest_year = smithy.NewStaticSchema(smithy.StaticSchema{Member: "year", ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageRequest_year})
+var sGetMinuteUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMinuteUsageResponse, Members: &mGetMinuteUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMinuteUsageResponse})
+var sGetMinuteUsageResponse_isReservedMinutesCustomer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isReservedMinutesCustomer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetMinuteUsageResponse_isReservedMinutesCustomer})
+var sGetMinuteUsageResponse_totalReservedMinuteAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalReservedMinuteAllocation", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageResponse_totalReservedMinuteAllocation})
+var sGetMinuteUsageResponse_upcomingMinutesScheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upcomingMinutesScheduled", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageResponse_upcomingMinutesScheduled})
+var sGetMinuteUsageResponse_totalScheduledMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalScheduledMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageResponse_totalScheduledMinutes})
+var sGetMinuteUsageResponse_estimatedMinutesRemaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMinutesRemaining", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMinuteUsageResponse_estimatedMinutesRemaining})
+var sGetMissionProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMissionProfileRequest, Members: &mGetMissionProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMissionProfileRequest})
+var sGetMissionProfileRequest_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileRequest_missionProfileId})
+var sGetMissionProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMissionProfileResponse, Members: &mGetMissionProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMissionProfileResponse})
+var sGetMissionProfileResponse_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_missionProfileId})
+var sGetMissionProfileResponse_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_missionProfileArn})
+var sGetMissionProfileResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_name})
+var sGetMissionProfileResponse_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegion, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_region})
+var sGetMissionProfileResponse_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetMissionProfileResponse_contactPrePassDurationSeconds})
+var sGetMissionProfileResponse_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetMissionProfileResponse_contactPostPassDurationSeconds})
+var sGetMissionProfileResponse_minimumViableContactDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumViableContactDurationSeconds", ID: &i_PositiveDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetMissionProfileResponse_minimumViableContactDurationSeconds})
+var sGetMissionProfileResponse_dataflowEdges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEdges", ID: &i_DataflowEdgeList, Members: &m_DataflowEdgeList, Type: smithy.ShapeTypeList, Ext: &eGetMissionProfileResponse_dataflowEdges})
+var sGetMissionProfileResponse_trackingConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_trackingConfigArn})
+var sGetMissionProfileResponse_telemetrySinkConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_telemetrySinkConfigArn})
+var sGetMissionProfileResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eGetMissionProfileResponse_tags})
+var sGetMissionProfileResponse_streamsKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsKey", ID: &iKmsKey, Members: &mKmsKey, Type: smithy.ShapeTypeUnion, Ext: &eGetMissionProfileResponse_streamsKmsKey})
+var sGetMissionProfileResponse_streamsKmsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetMissionProfileResponse_streamsKmsRole})
+var sGetSatelliteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSatelliteRequest, Members: &mGetSatelliteRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSatelliteRequest})
+var sGetSatelliteRequest_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eGetSatelliteRequest_satelliteId})
+var sGetSatelliteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSatelliteResponse, Members: &mGetSatelliteResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSatelliteResponse})
+var sGetSatelliteResponse_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetSatelliteResponse_satelliteId})
+var sGetSatelliteResponse_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eGetSatelliteResponse_satelliteArn})
+var sGetSatelliteResponse_noradSatelliteID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noradSatelliteID", ID: &i_noradSatelliteID, Type: smithy.ShapeTypeInteger, Ext: &eGetSatelliteResponse_noradSatelliteID})
+var sGetSatelliteResponse_groundStations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStations", ID: &i_GroundStationIdList, Members: &m_GroundStationIdList, Type: smithy.ShapeTypeList, Ext: &eGetSatelliteResponse_groundStations})
+var sGetSatelliteResponse_currentEphemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentEphemeris", ID: &iEphemerisMetaData, Members: &mEphemerisMetaData, Type: smithy.ShapeTypeStructure, Ext: &eGetSatelliteResponse_currentEphemeris})
+var sListAntennasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAntennasRequest, Members: &mListAntennasRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAntennasRequest})
+var sListAntennasRequest_groundStationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationId", ID: &i_GroundStationName, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListAntennasRequest_groundStationId})
+var sListAntennasRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListAntennasRequest_maxResults})
+var sListAntennasRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListAntennasRequest_nextToken})
+var sListAntennasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAntennasResponse, Members: &mListAntennasResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAntennasResponse})
+var sListAntennasResponse_antennaList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antennaList", ID: &i_AntennaList, Members: &m_AntennaList, Type: smithy.ShapeTypeList, Ext: &eListAntennasResponse_antennaList})
+var sListAntennasResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAntennasResponse_nextToken})
+var sListConfigsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigsRequest, Members: &mListConfigsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigsRequest})
+var sListConfigsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListConfigsRequest_maxResults})
+var sListConfigsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListConfigsRequest_nextToken})
+var sListConfigsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigsResponse, Members: &mListConfigsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigsResponse})
+var sListConfigsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListConfigsResponse_nextToken})
+var sListConfigsResponse_configList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configList", ID: &i_ConfigList, Members: &m_ConfigList, Type: smithy.ShapeTypeList, Ext: &eListConfigsResponse_configList})
+var sListContactsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactsRequest, Members: &mListContactsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListContactsRequest})
+var sListContactsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListContactsRequest_maxResults})
+var sListContactsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_nextToken})
+var sListContactsRequest_statusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusList", ID: &i_StatusList, Members: &m_StatusList, Type: smithy.ShapeTypeList, Ext: &eListContactsRequest_statusList})
+var sListContactsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListContactsRequest_startTime})
+var sListContactsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListContactsRequest_endTime})
+var sListContactsRequest_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_groundStation})
+var sListContactsRequest_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_satelliteArn})
+var sListContactsRequest_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eListContactsRequest_missionProfileArn})
+var sListContactsRequest_ephemeris = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeris", ID: &iEphemerisFilter, Members: &mEphemerisFilter, Type: smithy.ShapeTypeUnion, Ext: &eListContactsRequest_ephemeris})
+var sListContactsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactsResponse, Members: &mListContactsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListContactsResponse})
+var sListContactsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactsResponse_nextToken})
+var sListContactsResponse_contactList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactList", ID: &i_ContactList, Members: &m_ContactList, Type: smithy.ShapeTypeList, Ext: &eListContactsResponse_contactList})
+var sListContactVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactVersionsRequest, Members: &mListContactVersionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListContactVersionsRequest})
+var sListContactVersionsRequest_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListContactVersionsRequest_contactId})
+var sListContactVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListContactVersionsRequest_maxResults})
+var sListContactVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListContactVersionsRequest_nextToken})
+var sListContactVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContactVersionsResponse, Members: &mListContactVersionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListContactVersionsResponse})
+var sListContactVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContactVersionsResponse_nextToken})
+var sListContactVersionsResponse_contactVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactVersionsList", ID: &i_ContactVersionsList, Members: &m_ContactVersionsList, Type: smithy.ShapeTypeList, Ext: &eListContactVersionsResponse_contactVersionsList})
+var sListDataflowEndpointGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataflowEndpointGroupsRequest, Members: &mListDataflowEndpointGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDataflowEndpointGroupsRequest})
+var sListDataflowEndpointGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListDataflowEndpointGroupsRequest_maxResults})
+var sListDataflowEndpointGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListDataflowEndpointGroupsRequest_nextToken})
+var sListDataflowEndpointGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataflowEndpointGroupsResponse, Members: &mListDataflowEndpointGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDataflowEndpointGroupsResponse})
+var sListDataflowEndpointGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListDataflowEndpointGroupsResponse_nextToken})
+var sListDataflowEndpointGroupsResponse_dataflowEndpointGroupList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEndpointGroupList", ID: &i_DataflowEndpointGroupList, Members: &m_DataflowEndpointGroupList, Type: smithy.ShapeTypeList, Ext: &eListDataflowEndpointGroupsResponse_dataflowEndpointGroupList})
+var sListEphemeridesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEphemeridesRequest, Members: &mListEphemeridesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEphemeridesRequest})
+var sListEphemeridesRequest_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eListEphemeridesRequest_satelliteId})
+var sListEphemeridesRequest_ephemerisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisType", ID: &iEphemerisType, Members: &mEphemerisType, Type: smithy.ShapeTypeEnum, Ext: &eListEphemeridesRequest_ephemerisType})
+var sListEphemeridesRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEphemeridesRequest_startTime})
+var sListEphemeridesRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListEphemeridesRequest_endTime})
+var sListEphemeridesRequest_statusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusList", ID: &i_EphemerisStatusList, Members: &m_EphemerisStatusList, Type: smithy.ShapeTypeList, Ext: &eListEphemeridesRequest_statusList})
+var sListEphemeridesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListEphemeridesRequest_maxResults})
+var sListEphemeridesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListEphemeridesRequest_nextToken})
+var sListEphemeridesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEphemeridesResponse, Members: &mListEphemeridesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEphemeridesResponse})
+var sListEphemeridesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListEphemeridesResponse_nextToken})
+var sListEphemeridesResponse_ephemerides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerides", ID: &i_EphemeridesList, Members: &m_EphemeridesList, Type: smithy.ShapeTypeList, Ext: &eListEphemeridesResponse_ephemerides})
+var sListGroundStationReservationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStationReservationsRequest, Members: &mListGroundStationReservationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroundStationReservationsRequest})
+var sListGroundStationReservationsRequest_groundStationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationId", ID: &i_GroundStationName, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListGroundStationReservationsRequest_groundStationId})
+var sListGroundStationReservationsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t50, Type: smithy.ShapeTypeTimestamp, Ext: &eListGroundStationReservationsRequest_startTime})
+var sListGroundStationReservationsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp, Ext: &eListGroundStationReservationsRequest_endTime})
+var sListGroundStationReservationsRequest_reservationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationTypes", ID: &i_ReservationTypeFilterList, Members: &m_ReservationTypeFilterList, Traits: &t52, Type: smithy.ShapeTypeList, Ext: &eListGroundStationReservationsRequest_reservationTypes})
+var sListGroundStationReservationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListGroundStationReservationsRequest_maxResults})
+var sListGroundStationReservationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListGroundStationReservationsRequest_nextToken})
+var sListGroundStationReservationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStationReservationsResponse, Members: &mListGroundStationReservationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroundStationReservationsResponse})
+var sListGroundStationReservationsResponse_reservationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationList", ID: &i_GroundStationReservationList, Members: &m_GroundStationReservationList, Type: smithy.ShapeTypeList, Ext: &eListGroundStationReservationsResponse_reservationList})
+var sListGroundStationReservationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGroundStationReservationsResponse_nextToken})
+var sListGroundStationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStationsRequest, Members: &mListGroundStationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroundStationsRequest})
+var sListGroundStationsRequest_satelliteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteId", ID: &i_Uuid, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eListGroundStationsRequest_satelliteId})
+var sListGroundStationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListGroundStationsRequest_maxResults})
+var sListGroundStationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListGroundStationsRequest_nextToken})
+var sListGroundStationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroundStationsResponse, Members: &mListGroundStationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGroundStationsResponse})
+var sListGroundStationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListGroundStationsResponse_nextToken})
+var sListGroundStationsResponse_groundStationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStationList", ID: &i_GroundStationList, Members: &m_GroundStationList, Type: smithy.ShapeTypeList, Ext: &eListGroundStationsResponse_groundStationList})
+var sListMissionProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMissionProfilesRequest, Members: &mListMissionProfilesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMissionProfilesRequest})
+var sListMissionProfilesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListMissionProfilesRequest_maxResults})
+var sListMissionProfilesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListMissionProfilesRequest_nextToken})
+var sListMissionProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMissionProfilesResponse, Members: &mListMissionProfilesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMissionProfilesResponse})
+var sListMissionProfilesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListMissionProfilesResponse_nextToken})
+var sListMissionProfilesResponse_missionProfileList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileList", ID: &i_MissionProfileList, Members: &m_MissionProfileList, Type: smithy.ShapeTypeList, Ext: &eListMissionProfilesResponse_missionProfileList})
+var sListSatellitesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSatellitesRequest, Members: &mListSatellitesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSatellitesRequest})
+var sListSatellitesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PaginationMaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eListSatellitesRequest_maxResults})
+var sListSatellitesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListSatellitesRequest_nextToken})
+var sListSatellitesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSatellitesResponse, Members: &mListSatellitesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSatellitesResponse})
+var sListSatellitesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListSatellitesResponse_nextToken})
+var sListSatellitesResponse_satellites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satellites", ID: &i_SatelliteList, Members: &m_SatelliteList, Type: smithy.ShapeTypeList, Ext: &eListSatellitesResponse_satellites})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AnyArn, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sRegisterAgentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAgentRequest, Members: &mRegisterAgentRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAgentRequest})
+var sRegisterAgentRequest_discoveryData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discoveryData", ID: &iDiscoveryData, Members: &mDiscoveryData, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAgentRequest_discoveryData})
+var sRegisterAgentRequest_agentDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentDetails", ID: &iAgentDetails, Members: &mAgentDetails, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAgentRequest_agentDetails})
+var sRegisterAgentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eRegisterAgentRequest_tags})
+var sRegisterAgentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAgentResponse, Members: &mRegisterAgentResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterAgentResponse})
+var sRegisterAgentResponse_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eRegisterAgentResponse_agentId})
+var sReserveContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReserveContactRequest, Members: &mReserveContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eReserveContactRequest})
+var sReserveContactRequest_missionProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileArn", ID: &i_MissionProfileArn, Type: smithy.ShapeTypeString, Ext: &eReserveContactRequest_missionProfileArn})
+var sReserveContactRequest_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eReserveContactRequest_satelliteArn})
+var sReserveContactRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReserveContactRequest_startTime})
+var sReserveContactRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReserveContactRequest_endTime})
+var sReserveContactRequest_groundStation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groundStation", ID: &i_GroundStationName, Type: smithy.ShapeTypeString, Ext: &eReserveContactRequest_groundStation})
+var sReserveContactRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eReserveContactRequest_tags})
+var sReserveContactRequest_trackingOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingOverrides", ID: &iTrackingOverrides, Members: &mTrackingOverrides, Type: smithy.ShapeTypeStructure, Ext: &eReserveContactRequest_trackingOverrides})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AnyArn, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AnyArn, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t54, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAgentStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgentStatusRequest, Members: &mUpdateAgentStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAgentStatusRequest})
+var sUpdateAgentStatusRequest_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUpdateAgentStatusRequest_agentId})
+var sUpdateAgentStatusRequest_taskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateAgentStatusRequest_taskId})
+var sUpdateAgentStatusRequest_aggregateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateStatus", ID: &iAggregateStatus, Members: &mAggregateStatus, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAgentStatusRequest_aggregateStatus})
+var sUpdateAgentStatusRequest_componentStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentStatuses", ID: &i_ComponentStatusList, Members: &m_ComponentStatusList, Type: smithy.ShapeTypeList, Ext: &eUpdateAgentStatusRequest_componentStatuses})
+var sUpdateAgentStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgentStatusResponse, Members: &mUpdateAgentStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAgentStatusResponse})
+var sUpdateAgentStatusResponse_agentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateAgentStatusResponse_agentId})
+var sUpdateConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigRequest, Members: &mUpdateConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigRequest})
+var sUpdateConfigRequest_configId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigRequest_configId})
+var sUpdateConfigRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigRequest_name})
+var sUpdateConfigRequest_configType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configType", ID: &iConfigCapabilityType, Members: &mConfigCapabilityType, Traits: &t47, Type: smithy.ShapeTypeEnum, Ext: &eUpdateConfigRequest_configType})
+var sUpdateConfigRequest_configData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configData", ID: &iConfigTypeData, Members: &mConfigTypeData, Type: smithy.ShapeTypeUnion, Ext: &eUpdateConfigRequest_configData})
+var sUpdateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactRequest, Members: &mUpdateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactRequest})
+var sUpdateContactRequest_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUpdateContactRequest_contactId})
+var sUpdateContactRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateContactRequest_clientToken})
+var sUpdateContactRequest_trackingOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingOverrides", ID: &iTrackingOverrides, Members: &mTrackingOverrides, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactRequest_trackingOverrides})
+var sUpdateContactRequest_satelliteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "satelliteArn", ID: &i_satelliteArn, Type: smithy.ShapeTypeString, Ext: &eUpdateContactRequest_satelliteArn})
+var sUpdateContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContactResponse, Members: &mUpdateContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContactResponse})
+var sUpdateContactResponse_contactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eUpdateContactResponse_contactId})
+var sUpdateContactResponse_versionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionId", ID: &i_VersionId, Type: smithy.ShapeTypeInteger, Ext: &eUpdateContactResponse_versionId})
+var sUpdateEphemerisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEphemerisRequest, Members: &mUpdateEphemerisRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEphemerisRequest})
+var sUpdateEphemerisRequest_ephemerisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemerisId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUpdateEphemerisRequest_ephemerisId})
+var sUpdateEphemerisRequest_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateEphemerisRequest_enabled})
+var sUpdateEphemerisRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eUpdateEphemerisRequest_name})
+var sUpdateEphemerisRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_EphemerisPriority, Type: smithy.ShapeTypeInteger, Ext: &eUpdateEphemerisRequest_priority})
+var sUpdateMissionProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMissionProfileRequest, Members: &mUpdateMissionProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMissionProfileRequest})
+var sUpdateMissionProfileRequest_missionProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missionProfileId", ID: &i_Uuid, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eUpdateMissionProfileRequest_missionProfileId})
+var sUpdateMissionProfileRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SafeName, Type: smithy.ShapeTypeString, Ext: &eUpdateMissionProfileRequest_name})
+var sUpdateMissionProfileRequest_contactPrePassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPrePassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMissionProfileRequest_contactPrePassDurationSeconds})
+var sUpdateMissionProfileRequest_contactPostPassDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactPostPassDurationSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMissionProfileRequest_contactPostPassDurationSeconds})
+var sUpdateMissionProfileRequest_minimumViableContactDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumViableContactDurationSeconds", ID: &i_PositiveDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMissionProfileRequest_minimumViableContactDurationSeconds})
+var sUpdateMissionProfileRequest_dataflowEdges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataflowEdges", ID: &i_DataflowEdgeList, Members: &m_DataflowEdgeList, Type: smithy.ShapeTypeList, Ext: &eUpdateMissionProfileRequest_dataflowEdges})
+var sUpdateMissionProfileRequest_trackingConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trackingConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMissionProfileRequest_trackingConfigArn})
+var sUpdateMissionProfileRequest_telemetrySinkConfigArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "telemetrySinkConfigArn", ID: &i_ConfigArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMissionProfileRequest_telemetrySinkConfigArn})
+var sUpdateMissionProfileRequest_streamsKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsKey", ID: &iKmsKey, Members: &mKmsKey, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMissionProfileRequest_streamsKmsKey})
+var sUpdateMissionProfileRequest_streamsKmsRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streamsKmsRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMissionProfileRequest_streamsKmsRole})
+
+var CancelContact = &sCancelContact
+
+var CreateConfig = &sCreateConfig
+
+var CreateDataflowEndpointGroup = &sCreateDataflowEndpointGroup
+
+var CreateDataflowEndpointGroupV2 = &sCreateDataflowEndpointGroupV2
+
+var CreateEphemeris = &sCreateEphemeris
+
+var CreateMissionProfile = &sCreateMissionProfile
+
+var DeleteConfig = &sDeleteConfig
+
+var DeleteDataflowEndpointGroup = &sDeleteDataflowEndpointGroup
+
+var DeleteEphemeris = &sDeleteEphemeris
+
+var DeleteMissionProfile = &sDeleteMissionProfile
+
+var DescribeContact = &sDescribeContact
+
+var DescribeContactVersion = &sDescribeContactVersion
+
+var DescribeEphemeris = &sDescribeEphemeris
+
+var GetAgentConfiguration = &sGetAgentConfiguration
+
+var GetAgentTaskResponseUrl = &sGetAgentTaskResponseUrl
+
+var GetConfig = &sGetConfig
+
+var GetDataflowEndpointGroup = &sGetDataflowEndpointGroup
+
+var GetMinuteUsage = &sGetMinuteUsage
+
+var GetMissionProfile = &sGetMissionProfile
+
+var GetSatellite = &sGetSatellite
+
+var ListAntennas = &sListAntennas
+
+var ListConfigs = &sListConfigs
+
+var ListContacts = &sListContacts
+
+var ListContactVersions = &sListContactVersions
+
+var ListDataflowEndpointGroups = &sListDataflowEndpointGroups
+
+var ListEphemerides = &sListEphemerides
+
+var ListGroundStationReservations = &sListGroundStationReservations
+
+var ListGroundStations = &sListGroundStations
+
+var ListMissionProfiles = &sListMissionProfiles
+
+var ListSatellites = &sListSatellites
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterAgent = &sRegisterAgent
+
+var ReserveContact = &sReserveContact
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAgentStatus = &sUpdateAgentStatus
+
+var UpdateConfig = &sUpdateConfig
+
+var UpdateContact = &sUpdateContact
+
+var UpdateEphemeris = &sUpdateEphemeris
+
+var UpdateMissionProfile = &sUpdateMissionProfile
+
+var _GroundStation = &s_GroundStation
+
+var _AgentCpuCoresList = &s_AgentCpuCoresList
+var _AgentCpuCoresList_member = &s_AgentCpuCoresList_member
+
+var AgentDetails = &sAgentDetails
+var AgentDetails_agentVersion = &sAgentDetails_agentVersion
+var AgentDetails_instanceId = &sAgentDetails_instanceId
+var AgentDetails_instanceType = &sAgentDetails_instanceType
+var AgentDetails_reservedCpuCores = &sAgentDetails_reservedCpuCores
+var AgentDetails_agentCpuCores = &sAgentDetails_agentCpuCores
+var AgentDetails_componentVersions = &sAgentDetails_componentVersions
+
+var AgentStatus = &sAgentStatus
+var AgentStatus_SUCCESS = &sAgentStatus_SUCCESS
+var AgentStatus_FAILED = &sAgentStatus_FAILED
+var AgentStatus_ACTIVE = &sAgentStatus_ACTIVE
+var AgentStatus_INACTIVE = &sAgentStatus_INACTIVE
+
+var AggregateStatus = &sAggregateStatus
+var AggregateStatus_status = &sAggregateStatus_status
+var AggregateStatus_signatureMap = &sAggregateStatus_signatureMap
+
+var AngleUnits = &sAngleUnits
+var AngleUnits_DEGREE_ANGLE = &sAngleUnits_DEGREE_ANGLE
+var AngleUnits_RADIAN = &sAngleUnits_RADIAN
+
+var AntennaDemodDecodeDetails = &sAntennaDemodDecodeDetails
+var AntennaDemodDecodeDetails_outputNode = &sAntennaDemodDecodeDetails_outputNode
+
+var AntennaDownlinkConfig = &sAntennaDownlinkConfig
+var AntennaDownlinkConfig_spectrumConfig = &sAntennaDownlinkConfig_spectrumConfig
+
+var AntennaDownlinkDemodDecodeConfig = &sAntennaDownlinkDemodDecodeConfig
+var AntennaDownlinkDemodDecodeConfig_spectrumConfig = &sAntennaDownlinkDemodDecodeConfig_spectrumConfig
+var AntennaDownlinkDemodDecodeConfig_demodulationConfig = &sAntennaDownlinkDemodDecodeConfig_demodulationConfig
+var AntennaDownlinkDemodDecodeConfig_decodeConfig = &sAntennaDownlinkDemodDecodeConfig_decodeConfig
+
+var _AntennaList = &s_AntennaList
+var _AntennaList_member = &s_AntennaList_member
+
+var AntennaListItem = &sAntennaListItem
+var AntennaListItem_groundStationName = &sAntennaListItem_groundStationName
+var AntennaListItem_antennaName = &sAntennaListItem_antennaName
+var AntennaListItem_region = &sAntennaListItem_region
+
+var _AntennaName = &s_AntennaName
+
+var AntennaUplinkConfig = &sAntennaUplinkConfig
+var AntennaUplinkConfig_transmitDisabled = &sAntennaUplinkConfig_transmitDisabled
+var AntennaUplinkConfig_spectrumConfig = &sAntennaUplinkConfig_spectrumConfig
+var AntennaUplinkConfig_targetEirp = &sAntennaUplinkConfig_targetEirp
+
+var _AnyArn = &s_AnyArn
+
+var AuditResults = &sAuditResults
+var AuditResults_HEALTHY = &sAuditResults_HEALTHY
+var AuditResults_UNHEALTHY = &sAuditResults_UNHEALTHY
+
+var AwsGroundStationAgentEndpoint = &sAwsGroundStationAgentEndpoint
+var AwsGroundStationAgentEndpoint_name = &sAwsGroundStationAgentEndpoint_name
+var AwsGroundStationAgentEndpoint_egressAddress = &sAwsGroundStationAgentEndpoint_egressAddress
+var AwsGroundStationAgentEndpoint_ingressAddress = &sAwsGroundStationAgentEndpoint_ingressAddress
+var AwsGroundStationAgentEndpoint_agentStatus = &sAwsGroundStationAgentEndpoint_agentStatus
+var AwsGroundStationAgentEndpoint_auditResults = &sAwsGroundStationAgentEndpoint_auditResults
+
+var _AWSRegion = &s_AWSRegion
+
+var AzElEphemeris = &sAzElEphemeris
+var AzElEphemeris_groundStation = &sAzElEphemeris_groundStation
+var AzElEphemeris_data = &sAzElEphemeris_data
+
+var AzElEphemerisFilter = &sAzElEphemerisFilter
+var AzElEphemerisFilter_id = &sAzElEphemerisFilter_id
+
+var AzElProgramTrackSettings = &sAzElProgramTrackSettings
+var AzElProgramTrackSettings_ephemerisId = &sAzElProgramTrackSettings_ephemerisId
+
+var AzElSegment = &sAzElSegment
+var AzElSegment_referenceEpoch = &sAzElSegment_referenceEpoch
+var AzElSegment_validTimeRange = &sAzElSegment_validTimeRange
+var AzElSegment_azElList = &sAzElSegment_azElList
+
+var _AzElSegmentList = &s_AzElSegmentList
+var _AzElSegmentList_member = &s_AzElSegmentList_member
+
+var AzElSegments = &sAzElSegments
+var AzElSegments_angleUnit = &sAzElSegments_angleUnit
+var AzElSegments_azElSegmentList = &sAzElSegments_azElSegmentList
+
+var AzElSegmentsData = &sAzElSegmentsData
+var AzElSegmentsData_s3Object = &sAzElSegmentsData_s3Object
+var AzElSegmentsData_azElData = &sAzElSegmentsData_azElData
+
+var BandwidthUnits = &sBandwidthUnits
+var BandwidthUnits_GHZ = &sBandwidthUnits_GHZ
+var BandwidthUnits_MHZ = &sBandwidthUnits_MHZ
+var BandwidthUnits_KHZ = &sBandwidthUnits_KHZ
+
+var _BucketArn = &s_BucketArn
+
+var _CapabilityArn = &s_CapabilityArn
+
+var _CapabilityArnList = &s_CapabilityArnList
+var _CapabilityArnList_member = &s_CapabilityArnList_member
+
+var CapabilityHealth = &sCapabilityHealth
+var CapabilityHealth_HEALTHY = &sCapabilityHealth_HEALTHY
+var CapabilityHealth_UNHEALTHY = &sCapabilityHealth_UNHEALTHY
+
+var CapabilityHealthReason = &sCapabilityHealthReason
+var CapabilityHealthReason_NO_REGISTERED_AGENT = &sCapabilityHealthReason_NO_REGISTERED_AGENT
+var CapabilityHealthReason_INVALID_IP_OWNERSHIP = &sCapabilityHealthReason_INVALID_IP_OWNERSHIP
+var CapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR = &sCapabilityHealthReason_NOT_AUTHORIZED_TO_CREATE_SLR
+var CapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP = &sCapabilityHealthReason_UNVERIFIED_IP_OWNERSHIP
+var CapabilityHealthReason_INITIALIZING_DATAPLANE = &sCapabilityHealthReason_INITIALIZING_DATAPLANE
+var CapabilityHealthReason_DATAPLANE_FAILURE = &sCapabilityHealthReason_DATAPLANE_FAILURE
+var CapabilityHealthReason_HEALTHY = &sCapabilityHealthReason_HEALTHY
+
+var _CapabilityHealthReasonList = &s_CapabilityHealthReasonList
+var _CapabilityHealthReasonList_member = &s_CapabilityHealthReasonList_member
+
+var _ClientToken = &s_ClientToken
+
+var ComponentStatusData = &sComponentStatusData
+var ComponentStatusData_componentType = &sComponentStatusData_componentType
+var ComponentStatusData_capabilityArn = &sComponentStatusData_capabilityArn
+var ComponentStatusData_status = &sComponentStatusData_status
+var ComponentStatusData_bytesSent = &sComponentStatusData_bytesSent
+var ComponentStatusData_bytesReceived = &sComponentStatusData_bytesReceived
+var ComponentStatusData_packetsDropped = &sComponentStatusData_packetsDropped
+var ComponentStatusData_dataflowId = &sComponentStatusData_dataflowId
+
+var _ComponentStatusList = &s_ComponentStatusList
+var _ComponentStatusList_member = &s_ComponentStatusList_member
+
+var _ComponentTypeString = &s_ComponentTypeString
+
+var ComponentVersion = &sComponentVersion
+var ComponentVersion_componentType = &sComponentVersion_componentType
+var ComponentVersion_versions = &sComponentVersion_versions
+
+var _ComponentVersionList = &s_ComponentVersionList
+var _ComponentVersionList_member = &s_ComponentVersionList_member
+
+var _ConfigArn = &s_ConfigArn
+
+var ConfigCapabilityType = &sConfigCapabilityType
+var ConfigCapabilityType_ANTENNA_DOWNLINK = &sConfigCapabilityType_ANTENNA_DOWNLINK
+var ConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE = &sConfigCapabilityType_ANTENNA_DOWNLINK_DEMOD_DECODE
+var ConfigCapabilityType_TRACKING = &sConfigCapabilityType_TRACKING
+var ConfigCapabilityType_DATAFLOW_ENDPOINT = &sConfigCapabilityType_DATAFLOW_ENDPOINT
+var ConfigCapabilityType_ANTENNA_UPLINK = &sConfigCapabilityType_ANTENNA_UPLINK
+var ConfigCapabilityType_UPLINK_ECHO = &sConfigCapabilityType_UPLINK_ECHO
+var ConfigCapabilityType_S3_RECORDING = &sConfigCapabilityType_S3_RECORDING
+var ConfigCapabilityType_TELEMETRY_SINK = &sConfigCapabilityType_TELEMETRY_SINK
+
+var ConfigDetails = &sConfigDetails
+var ConfigDetails_endpointDetails = &sConfigDetails_endpointDetails
+var ConfigDetails_antennaDemodDecodeDetails = &sConfigDetails_antennaDemodDecodeDetails
+var ConfigDetails_s3RecordingDetails = &sConfigDetails_s3RecordingDetails
+
+var _ConfigList = &s_ConfigList
+var _ConfigList_member = &s_ConfigList_member
+
+var ConfigListItem = &sConfigListItem
+var ConfigListItem_configId = &sConfigListItem_configId
+var ConfigListItem_configType = &sConfigListItem_configType
+var ConfigListItem_configArn = &sConfigListItem_configArn
+var ConfigListItem_name = &sConfigListItem_name
+
+var ConfigTypeData = &sConfigTypeData
+var ConfigTypeData_antennaDownlinkConfig = &sConfigTypeData_antennaDownlinkConfig
+var ConfigTypeData_trackingConfig = &sConfigTypeData_trackingConfig
+var ConfigTypeData_dataflowEndpointConfig = &sConfigTypeData_dataflowEndpointConfig
+var ConfigTypeData_antennaDownlinkDemodDecodeConfig = &sConfigTypeData_antennaDownlinkDemodDecodeConfig
+var ConfigTypeData_antennaUplinkConfig = &sConfigTypeData_antennaUplinkConfig
+var ConfigTypeData_uplinkEchoConfig = &sConfigTypeData_uplinkEchoConfig
+var ConfigTypeData_s3RecordingConfig = &sConfigTypeData_s3RecordingConfig
+var ConfigTypeData_telemetrySinkConfig = &sConfigTypeData_telemetrySinkConfig
+
+var ConnectionDetails = &sConnectionDetails
+var ConnectionDetails_socketAddress = &sConnectionDetails_socketAddress
+var ConnectionDetails_mtu = &sConnectionDetails_mtu
+
+var ContactData = &sContactData
+var ContactData_contactId = &sContactData_contactId
+var ContactData_missionProfileArn = &sContactData_missionProfileArn
+var ContactData_satelliteArn = &sContactData_satelliteArn
+var ContactData_startTime = &sContactData_startTime
+var ContactData_endTime = &sContactData_endTime
+var ContactData_prePassStartTime = &sContactData_prePassStartTime
+var ContactData_postPassEndTime = &sContactData_postPassEndTime
+var ContactData_groundStation = &sContactData_groundStation
+var ContactData_contactStatus = &sContactData_contactStatus
+var ContactData_errorMessage = &sContactData_errorMessage
+var ContactData_maximumElevation = &sContactData_maximumElevation
+var ContactData_region = &sContactData_region
+var ContactData_tags = &sContactData_tags
+var ContactData_visibilityStartTime = &sContactData_visibilityStartTime
+var ContactData_visibilityEndTime = &sContactData_visibilityEndTime
+var ContactData_ephemeris = &sContactData_ephemeris
+var ContactData_version = &sContactData_version
+
+var _ContactList = &s_ContactList
+var _ContactList_member = &s_ContactList_member
+
+var ContactReservationDetails = &sContactReservationDetails
+var ContactReservationDetails_contactId = &sContactReservationDetails_contactId
+
+var ContactStatus = &sContactStatus
+var ContactStatus_SCHEDULING = &sContactStatus_SCHEDULING
+var ContactStatus_FAILED_TO_SCHEDULE = &sContactStatus_FAILED_TO_SCHEDULE
+var ContactStatus_SCHEDULED = &sContactStatus_SCHEDULED
+var ContactStatus_CANCELLED = &sContactStatus_CANCELLED
+var ContactStatus_AWS_CANCELLED = &sContactStatus_AWS_CANCELLED
+var ContactStatus_PREPASS = &sContactStatus_PREPASS
+var ContactStatus_PASS = &sContactStatus_PASS
+var ContactStatus_POSTPASS = &sContactStatus_POSTPASS
+var ContactStatus_COMPLETED = &sContactStatus_COMPLETED
+var ContactStatus_FAILED = &sContactStatus_FAILED
+var ContactStatus_AVAILABLE = &sContactStatus_AVAILABLE
+var ContactStatus_CANCELLING = &sContactStatus_CANCELLING
+var ContactStatus_AWS_FAILED = &sContactStatus_AWS_FAILED
+
+var ContactVersion = &sContactVersion
+var ContactVersion_versionId = &sContactVersion_versionId
+var ContactVersion_created = &sContactVersion_created
+var ContactVersion_activated = &sContactVersion_activated
+var ContactVersion_superseded = &sContactVersion_superseded
+var ContactVersion_lastUpdated = &sContactVersion_lastUpdated
+var ContactVersion_status = &sContactVersion_status
+var ContactVersion_failureCodes = &sContactVersion_failureCodes
+var ContactVersion_failureMessage = &sContactVersion_failureMessage
+
+var _ContactVersionsList = &s_ContactVersionsList
+var _ContactVersionsList_member = &s_ContactVersionsList_member
+
+var CreateEndpointDetails = &sCreateEndpointDetails
+var CreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint = &sCreateEndpointDetails_uplinkAwsGroundStationAgentEndpoint
+var CreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint = &sCreateEndpointDetails_downlinkAwsGroundStationAgentEndpoint
+
+var _CreateEndpointDetailsList = &s_CreateEndpointDetailsList
+var _CreateEndpointDetailsList_member = &s_CreateEndpointDetailsList_member
+
+var Criticality = &sCriticality
+var Criticality_REQUIRED = &sCriticality_REQUIRED
+var Criticality_PREFERRED = &sCriticality_PREFERRED
+var Criticality_REMOVED = &sCriticality_REMOVED
+
+var _CustomerEphemerisPriority = &s_CustomerEphemerisPriority
+
+var DataflowDetail = &sDataflowDetail
+var DataflowDetail_source = &sDataflowDetail_source
+var DataflowDetail_destination = &sDataflowDetail_destination
+var DataflowDetail_errorMessage = &sDataflowDetail_errorMessage
+
+var _DataflowEdge = &s_DataflowEdge
+var _DataflowEdge_member = &s_DataflowEdge_member
+
+var _DataflowEdgeList = &s_DataflowEdgeList
+var _DataflowEdgeList_member = &s_DataflowEdgeList_member
+
+var DataflowEndpoint = &sDataflowEndpoint
+var DataflowEndpoint_name = &sDataflowEndpoint_name
+var DataflowEndpoint_address = &sDataflowEndpoint_address
+var DataflowEndpoint_status = &sDataflowEndpoint_status
+var DataflowEndpoint_mtu = &sDataflowEndpoint_mtu
+
+var DataflowEndpointConfig = &sDataflowEndpointConfig
+var DataflowEndpointConfig_dataflowEndpointName = &sDataflowEndpointConfig_dataflowEndpointName
+var DataflowEndpointConfig_dataflowEndpointRegion = &sDataflowEndpointConfig_dataflowEndpointRegion
+
+var _DataflowEndpointGroupArn = &s_DataflowEndpointGroupArn
+
+var _DataflowEndpointGroupDurationInSeconds = &s_DataflowEndpointGroupDurationInSeconds
+
+var _DataflowEndpointGroupList = &s_DataflowEndpointGroupList
+var _DataflowEndpointGroupList_member = &s_DataflowEndpointGroupList_member
+
+var DataflowEndpointListItem = &sDataflowEndpointListItem
+var DataflowEndpointListItem_dataflowEndpointGroupId = &sDataflowEndpointListItem_dataflowEndpointGroupId
+var DataflowEndpointListItem_dataflowEndpointGroupArn = &sDataflowEndpointListItem_dataflowEndpointGroupArn
+
+var _DataflowList = &s_DataflowList
+var _DataflowList_member = &s_DataflowList_member
+
+var DecodeConfig = &sDecodeConfig
+var DecodeConfig_unvalidatedJSON = &sDecodeConfig_unvalidatedJSON
+
+var DemodulationConfig = &sDemodulationConfig
+var DemodulationConfig_unvalidatedJSON = &sDemodulationConfig_unvalidatedJSON
+
+var DependencyException = &sDependencyException
+var DependencyException_message = &sDependencyException_message
+var DependencyException_parameterName = &sDependencyException_parameterName
+
+var Destination = &sDestination
+var Destination_configType = &sDestination_configType
+var Destination_configId = &sDestination_configId
+var Destination_configDetails = &sDestination_configDetails
+var Destination_dataflowDestinationRegion = &sDestination_dataflowDestinationRegion
+
+var DiscoveryData = &sDiscoveryData
+var DiscoveryData_publicIpAddresses = &sDiscoveryData_publicIpAddresses
+var DiscoveryData_privateIpAddresses = &sDiscoveryData_privateIpAddresses
+var DiscoveryData_capabilityArns = &sDiscoveryData_capabilityArns
+
+var DownlinkAwsGroundStationAgentEndpoint = &sDownlinkAwsGroundStationAgentEndpoint
+var DownlinkAwsGroundStationAgentEndpoint_name = &sDownlinkAwsGroundStationAgentEndpoint_name
+var DownlinkAwsGroundStationAgentEndpoint_dataflowDetails = &sDownlinkAwsGroundStationAgentEndpoint_dataflowDetails
+
+var DownlinkAwsGroundStationAgentEndpointDetails = &sDownlinkAwsGroundStationAgentEndpointDetails
+var DownlinkAwsGroundStationAgentEndpointDetails_name = &sDownlinkAwsGroundStationAgentEndpointDetails_name
+var DownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails = &sDownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails
+var DownlinkAwsGroundStationAgentEndpointDetails_agentStatus = &sDownlinkAwsGroundStationAgentEndpointDetails_agentStatus
+var DownlinkAwsGroundStationAgentEndpointDetails_auditResults = &sDownlinkAwsGroundStationAgentEndpointDetails_auditResults
+
+var DownlinkConnectionDetails = &sDownlinkConnectionDetails
+var DownlinkConnectionDetails_agentIpAndPortAddress = &sDownlinkConnectionDetails_agentIpAndPortAddress
+var DownlinkConnectionDetails_egressAddressAndPort = &sDownlinkConnectionDetails_egressAddressAndPort
+
+var DownlinkDataflowDetails = &sDownlinkDataflowDetails
+var DownlinkDataflowDetails_agentConnectionDetails = &sDownlinkDataflowDetails_agentConnectionDetails
+
+var _DurationInSeconds = &s_DurationInSeconds
+
+var Eirp = &sEirp
+var Eirp_value = &sEirp_value
+var Eirp_units = &sEirp_units
+
+var EirpUnits = &sEirpUnits
+var EirpUnits_DBW = &sEirpUnits_DBW
+
+var Elevation = &sElevation
+var Elevation_value = &sElevation_value
+var Elevation_unit = &sElevation_unit
+
+var EndpointDetails = &sEndpointDetails
+var EndpointDetails_securityDetails = &sEndpointDetails_securityDetails
+var EndpointDetails_endpoint = &sEndpointDetails_endpoint
+var EndpointDetails_awsGroundStationAgentEndpoint = &sEndpointDetails_awsGroundStationAgentEndpoint
+var EndpointDetails_uplinkAwsGroundStationAgentEndpoint = &sEndpointDetails_uplinkAwsGroundStationAgentEndpoint
+var EndpointDetails_downlinkAwsGroundStationAgentEndpoint = &sEndpointDetails_downlinkAwsGroundStationAgentEndpoint
+var EndpointDetails_healthStatus = &sEndpointDetails_healthStatus
+var EndpointDetails_healthReasons = &sEndpointDetails_healthReasons
+
+var _EndpointDetailsList = &s_EndpointDetailsList
+var _EndpointDetailsList_member = &s_EndpointDetailsList_member
+
+var EndpointStatus = &sEndpointStatus
+var EndpointStatus_created = &sEndpointStatus_created
+var EndpointStatus_creating = &sEndpointStatus_creating
+var EndpointStatus_deleted = &sEndpointStatus_deleted
+var EndpointStatus_deleting = &sEndpointStatus_deleting
+var EndpointStatus_failed = &sEndpointStatus_failed
+
+var _EphemeridesList = &s_EphemeridesList
+var _EphemeridesList_member = &s_EphemeridesList_member
+
+var EphemerisData = &sEphemerisData
+var EphemerisData_tle = &sEphemerisData_tle
+var EphemerisData_oem = &sEphemerisData_oem
+var EphemerisData_azEl = &sEphemerisData_azEl
+
+var EphemerisDescription = &sEphemerisDescription
+var EphemerisDescription_sourceS3Object = &sEphemerisDescription_sourceS3Object
+var EphemerisDescription_ephemerisData = &sEphemerisDescription_ephemerisData
+
+var EphemerisErrorCode = &sEphemerisErrorCode
+var EphemerisErrorCode_INTERNAL_ERROR = &sEphemerisErrorCode_INTERNAL_ERROR
+var EphemerisErrorCode_MISMATCHED_SATCAT_ID = &sEphemerisErrorCode_MISMATCHED_SATCAT_ID
+var EphemerisErrorCode_OEM_VERSION_UNSUPPORTED = &sEphemerisErrorCode_OEM_VERSION_UNSUPPORTED
+var EphemerisErrorCode_ORIGINATOR_MISSING = &sEphemerisErrorCode_ORIGINATOR_MISSING
+var EphemerisErrorCode_CREATION_DATE_MISSING = &sEphemerisErrorCode_CREATION_DATE_MISSING
+var EphemerisErrorCode_OBJECT_NAME_MISSING = &sEphemerisErrorCode_OBJECT_NAME_MISSING
+var EphemerisErrorCode_OBJECT_ID_MISSING = &sEphemerisErrorCode_OBJECT_ID_MISSING
+var EphemerisErrorCode_REF_FRAME_UNSUPPORTED = &sEphemerisErrorCode_REF_FRAME_UNSUPPORTED
+var EphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED = &sEphemerisErrorCode_REF_FRAME_EPOCH_UNSUPPORTED
+var EphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED = &sEphemerisErrorCode_TIME_SYSTEM_UNSUPPORTED
+var EphemerisErrorCode_CENTER_BODY_UNSUPPORTED = &sEphemerisErrorCode_CENTER_BODY_UNSUPPORTED
+var EphemerisErrorCode_INTERPOLATION_MISSING = &sEphemerisErrorCode_INTERPOLATION_MISSING
+var EphemerisErrorCode_INTERPOLATION_DEGREE_INVALID = &sEphemerisErrorCode_INTERPOLATION_DEGREE_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING = &sEphemerisErrorCode_AZ_EL_SEGMENT_LIST_MISSING
+var EphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL = &sEphemerisErrorCode_INSUFFICIENT_TIME_AZ_EL
+var EphemerisErrorCode_START_TIME_IN_FUTURE = &sEphemerisErrorCode_START_TIME_IN_FUTURE
+var EphemerisErrorCode_END_TIME_IN_PAST = &sEphemerisErrorCode_END_TIME_IN_PAST
+var EphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY = &sEphemerisErrorCode_EXPIRATION_TIME_TOO_EARLY
+var EphemerisErrorCode_START_TIME_METADATA_TOO_EARLY = &sEphemerisErrorCode_START_TIME_METADATA_TOO_EARLY
+var EphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE = &sEphemerisErrorCode_STOP_TIME_METADATA_TOO_LATE
+var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME = &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME
+var EphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP = &sEphemerisErrorCode_AZ_EL_SEGMENT_TIMES_OVERLAP
+var EphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER = &sEphemerisErrorCode_AZ_EL_SEGMENTS_OUT_OF_ORDER
+var EphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER = &sEphemerisErrorCode_TIME_AZ_EL_ITEMS_OUT_OF_ORDER
+var EphemerisErrorCode_MEAN_MOTION_INVALID = &sEphemerisErrorCode_MEAN_MOTION_INVALID
+var EphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID = &sEphemerisErrorCode_TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID
+var EphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID = &sEphemerisErrorCode_TIME_AZ_EL_EL_RADIAN_RANGE_INVALID
+var EphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID = &sEphemerisErrorCode_TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID
+var EphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID = &sEphemerisErrorCode_TIME_AZ_EL_EL_DEGREE_RANGE_INVALID
+var EphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID = &sEphemerisErrorCode_TIME_AZ_EL_ANGLE_UNITS_INVALID
+var EphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS = &sEphemerisErrorCode_INSUFFICIENT_KMS_PERMISSIONS
+var EphemerisErrorCode_FILE_FORMAT_INVALID = &sEphemerisErrorCode_FILE_FORMAT_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID = &sEphemerisErrorCode_AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID = &sEphemerisErrorCode_AZ_EL_SEGMENT_START_TIME_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID = &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID = &sEphemerisErrorCode_AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID
+var EphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE = &sEphemerisErrorCode_AZ_EL_SEGMENT_END_TIME_TOO_LATE
+var EphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED = &sEphemerisErrorCode_AZ_EL_TOTAL_DURATION_EXCEEDED
+
+var EphemerisErrorReason = &sEphemerisErrorReason
+var EphemerisErrorReason_errorCode = &sEphemerisErrorReason_errorCode
+var EphemerisErrorReason_errorMessage = &sEphemerisErrorReason_errorMessage
+
+var _EphemerisErrorReasonList = &s_EphemerisErrorReasonList
+var _EphemerisErrorReasonList_member = &s_EphemerisErrorReasonList_member
+
+var EphemerisFilter = &sEphemerisFilter
+var EphemerisFilter_azEl = &sEphemerisFilter_azEl
+
+var EphemerisInvalidReason = &sEphemerisInvalidReason
+var EphemerisInvalidReason_METADATA_INVALID = &sEphemerisInvalidReason_METADATA_INVALID
+var EphemerisInvalidReason_TIME_RANGE_INVALID = &sEphemerisInvalidReason_TIME_RANGE_INVALID
+var EphemerisInvalidReason_TRAJECTORY_INVALID = &sEphemerisInvalidReason_TRAJECTORY_INVALID
+var EphemerisInvalidReason_KMS_KEY_INVALID = &sEphemerisInvalidReason_KMS_KEY_INVALID
+var EphemerisInvalidReason_VALIDATION_ERROR = &sEphemerisInvalidReason_VALIDATION_ERROR
+
+var EphemerisItem = &sEphemerisItem
+var EphemerisItem_ephemerisId = &sEphemerisItem_ephemerisId
+var EphemerisItem_ephemerisType = &sEphemerisItem_ephemerisType
+var EphemerisItem_status = &sEphemerisItem_status
+var EphemerisItem_priority = &sEphemerisItem_priority
+var EphemerisItem_enabled = &sEphemerisItem_enabled
+var EphemerisItem_creationTime = &sEphemerisItem_creationTime
+var EphemerisItem_name = &sEphemerisItem_name
+var EphemerisItem_sourceS3Object = &sEphemerisItem_sourceS3Object
+
+var EphemerisMetaData = &sEphemerisMetaData
+var EphemerisMetaData_source = &sEphemerisMetaData_source
+var EphemerisMetaData_ephemerisId = &sEphemerisMetaData_ephemerisId
+var EphemerisMetaData_epoch = &sEphemerisMetaData_epoch
+var EphemerisMetaData_name = &sEphemerisMetaData_name
+
+var _EphemerisPriority = &s_EphemerisPriority
+
+var EphemerisResponseData = &sEphemerisResponseData
+var EphemerisResponseData_ephemerisId = &sEphemerisResponseData_ephemerisId
+var EphemerisResponseData_ephemerisType = &sEphemerisResponseData_ephemerisType
+
+var EphemerisSource = &sEphemerisSource
+var EphemerisSource_CUSTOMER_PROVIDED = &sEphemerisSource_CUSTOMER_PROVIDED
+var EphemerisSource_SPACE_TRACK = &sEphemerisSource_SPACE_TRACK
+
+var EphemerisStatus = &sEphemerisStatus
+var EphemerisStatus_VALIDATING = &sEphemerisStatus_VALIDATING
+var EphemerisStatus_INVALID = &sEphemerisStatus_INVALID
+var EphemerisStatus_ERROR = &sEphemerisStatus_ERROR
+var EphemerisStatus_ENABLED = &sEphemerisStatus_ENABLED
+var EphemerisStatus_DISABLED = &sEphemerisStatus_DISABLED
+var EphemerisStatus_EXPIRED = &sEphemerisStatus_EXPIRED
+
+var _EphemerisStatusList = &s_EphemerisStatusList
+var _EphemerisStatusList_member = &s_EphemerisStatusList_member
+
+var EphemerisType = &sEphemerisType
+var EphemerisType_TLE = &sEphemerisType_TLE
+var EphemerisType_OEM = &sEphemerisType_OEM
+var EphemerisType_AZ_EL = &sEphemerisType_AZ_EL
+var EphemerisType_SERVICE_MANAGED = &sEphemerisType_SERVICE_MANAGED
+
+var EphemerisTypeDescription = &sEphemerisTypeDescription
+var EphemerisTypeDescription_tle = &sEphemerisTypeDescription_tle
+var EphemerisTypeDescription_oem = &sEphemerisTypeDescription_oem
+var EphemerisTypeDescription_azEl = &sEphemerisTypeDescription_azEl
+
+var _ErrorString = &s_ErrorString
+
+var Frequency = &sFrequency
+var Frequency_value = &sFrequency_value
+var Frequency_units = &sFrequency_units
+
+var FrequencyBandwidth = &sFrequencyBandwidth
+var FrequencyBandwidth_value = &sFrequencyBandwidth_value
+var FrequencyBandwidth_units = &sFrequencyBandwidth_units
+
+var FrequencyUnits = &sFrequencyUnits
+var FrequencyUnits_GHZ = &sFrequencyUnits_GHZ
+var FrequencyUnits_MHZ = &sFrequencyUnits_MHZ
+var FrequencyUnits_KHZ = &sFrequencyUnits_KHZ
+
+var GroundStationData = &sGroundStationData
+var GroundStationData_groundStationId = &sGroundStationData_groundStationId
+var GroundStationData_groundStationName = &sGroundStationData_groundStationName
+var GroundStationData_region = &sGroundStationData_region
+
+var _GroundStationIdList = &s_GroundStationIdList
+var _GroundStationIdList_member = &s_GroundStationIdList_member
+
+var _GroundStationList = &s_GroundStationList
+var _GroundStationList_member = &s_GroundStationList_member
+
+var _GroundStationName = &s_GroundStationName
+
+var _GroundStationReservationList = &s_GroundStationReservationList
+var _GroundStationReservationList_member = &s_GroundStationReservationList_member
+
+var GroundStationReservationListItem = &sGroundStationReservationListItem
+var GroundStationReservationListItem_reservationType = &sGroundStationReservationListItem_reservationType
+var GroundStationReservationListItem_groundStationId = &sGroundStationReservationListItem_groundStationId
+var GroundStationReservationListItem_antennaName = &sGroundStationReservationListItem_antennaName
+var GroundStationReservationListItem_startTime = &sGroundStationReservationListItem_startTime
+var GroundStationReservationListItem_endTime = &sGroundStationReservationListItem_endTime
+var GroundStationReservationListItem_reservationDetails = &sGroundStationReservationListItem_reservationDetails
+
+var _InstanceId = &s_InstanceId
+
+var _InstanceType = &s_InstanceType
+
+var IntegerRange = &sIntegerRange
+var IntegerRange_minimum = &sIntegerRange_minimum
+var IntegerRange_maximum = &sIntegerRange_maximum
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+var InvalidParameterException_parameterName = &sInvalidParameterException_parameterName
+
+var _IpAddressList = &s_IpAddressList
+var _IpAddressList_member = &s_IpAddressList_member
+
+var _IpV4Address = &s_IpV4Address
+
+var ISO8601TimeRange = &sISO8601TimeRange
+var ISO8601TimeRange_startTime = &sISO8601TimeRange_startTime
+var ISO8601TimeRange_endTime = &sISO8601TimeRange_endTime
+
+var _JsonString = &s_JsonString
+
+var _KeyAliasArn = &s_KeyAliasArn
+
+var _KeyAliasName = &s_KeyAliasName
+
+var _KeyArn = &s_KeyArn
+
+var _KinesisDataStreamArn = &s_KinesisDataStreamArn
+
+var KinesisDataStreamData = &sKinesisDataStreamData
+var KinesisDataStreamData_kinesisRoleArn = &sKinesisDataStreamData_kinesisRoleArn
+var KinesisDataStreamData_kinesisDataStreamArn = &sKinesisDataStreamData_kinesisDataStreamArn
+
+var KmsKey = &sKmsKey
+var KmsKey_kmsKeyArn = &sKmsKey_kmsKeyArn
+var KmsKey_kmsAliasArn = &sKmsKey_kmsAliasArn
+var KmsKey_kmsAliasName = &sKmsKey_kmsAliasName
+
+var MaintenanceReservationDetails = &sMaintenanceReservationDetails
+var MaintenanceReservationDetails_maintenanceType = &sMaintenanceReservationDetails_maintenanceType
+
+var MaintenanceType = &sMaintenanceType
+var MaintenanceType_PLANNED = &sMaintenanceType_PLANNED
+var MaintenanceType_UNPLANNED = &sMaintenanceType_UNPLANNED
+
+var _MissionProfileArn = &s_MissionProfileArn
+
+var _MissionProfileList = &s_MissionProfileList
+var _MissionProfileList_member = &s_MissionProfileList_member
+
+var MissionProfileListItem = &sMissionProfileListItem
+var MissionProfileListItem_missionProfileId = &sMissionProfileListItem_missionProfileId
+var MissionProfileListItem_missionProfileArn = &sMissionProfileListItem_missionProfileArn
+var MissionProfileListItem_region = &sMissionProfileListItem_region
+var MissionProfileListItem_name = &sMissionProfileListItem_name
+
+var _Month = &s_Month
+
+var _noradSatelliteID = &s_noradSatelliteID
+
+var OEMEphemeris = &sOEMEphemeris
+var OEMEphemeris_s3Object = &sOEMEphemeris_s3Object
+var OEMEphemeris_oemData = &sOEMEphemeris_oemData
+
+var OemProgramTrackSettings = &sOemProgramTrackSettings
+var OemProgramTrackSettings_ephemerisId = &sOemProgramTrackSettings_ephemerisId
+
+var _PaginationMaxResults = &s_PaginationMaxResults
+
+var _PaginationToken = &s_PaginationToken
+
+var Polarization = &sPolarization
+var Polarization_RIGHT_HAND = &sPolarization_RIGHT_HAND
+var Polarization_LEFT_HAND = &sPolarization_LEFT_HAND
+var Polarization_NONE = &sPolarization_NONE
+
+var _PositiveDurationInSeconds = &s_PositiveDurationInSeconds
+
+var ProgramTrackSettings = &sProgramTrackSettings
+var ProgramTrackSettings_azEl = &sProgramTrackSettings_azEl
+var ProgramTrackSettings_oem = &sProgramTrackSettings_oem
+var ProgramTrackSettings_tle = &sProgramTrackSettings_tle
+
+var RangedConnectionDetails = &sRangedConnectionDetails
+var RangedConnectionDetails_socketAddress = &sRangedConnectionDetails_socketAddress
+var RangedConnectionDetails_mtu = &sRangedConnectionDetails_mtu
+
+var RangedSocketAddress = &sRangedSocketAddress
+var RangedSocketAddress_name = &sRangedSocketAddress_name
+var RangedSocketAddress_portRange = &sRangedSocketAddress_portRange
+
+var ReservationDetails = &sReservationDetails
+var ReservationDetails_maintenance = &sReservationDetails_maintenance
+var ReservationDetails_contact = &sReservationDetails_contact
+
+var ReservationType = &sReservationType
+var ReservationType_MAINTENANCE = &sReservationType_MAINTENANCE
+var ReservationType_CONTACT = &sReservationType_CONTACT
+
+var _ReservationTypeFilterList = &s_ReservationTypeFilterList
+var _ReservationTypeFilterList_member = &s_ReservationTypeFilterList_member
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_message = &sResourceInUseException_message
+
+var ResourceLimitExceededException = &sResourceLimitExceededException
+var ResourceLimitExceededException_message = &sResourceLimitExceededException_message
+var ResourceLimitExceededException_parameterName = &sResourceLimitExceededException_parameterName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3KeyPrefix = &s_S3KeyPrefix
+
+var S3Object = &sS3Object
+var S3Object_bucket = &sS3Object_bucket
+var S3Object_key = &sS3Object_key
+var S3Object_version = &sS3Object_version
+
+var _S3ObjectKey = &s_S3ObjectKey
+
+var S3RecordingConfig = &sS3RecordingConfig
+var S3RecordingConfig_bucketArn = &sS3RecordingConfig_bucketArn
+var S3RecordingConfig_roleArn = &sS3RecordingConfig_roleArn
+var S3RecordingConfig_prefix = &sS3RecordingConfig_prefix
+
+var S3RecordingDetails = &sS3RecordingDetails
+var S3RecordingDetails_bucketArn = &sS3RecordingDetails_bucketArn
+var S3RecordingDetails_keyTemplate = &sS3RecordingDetails_keyTemplate
+
+var _S3VersionId = &s_S3VersionId
+
+var _SafeName = &s_SafeName
+
+var _satelliteArn = &s_satelliteArn
+
+var _SatelliteList = &s_SatelliteList
+var _SatelliteList_member = &s_SatelliteList_member
+
+var SatelliteListItem = &sSatelliteListItem
+var SatelliteListItem_satelliteId = &sSatelliteListItem_satelliteId
+var SatelliteListItem_satelliteArn = &sSatelliteListItem_satelliteArn
+var SatelliteListItem_noradSatelliteID = &sSatelliteListItem_noradSatelliteID
+var SatelliteListItem_groundStations = &sSatelliteListItem_groundStations
+var SatelliteListItem_currentEphemeris = &sSatelliteListItem_currentEphemeris
+
+var SecurityDetails = &sSecurityDetails
+var SecurityDetails_subnetIds = &sSecurityDetails_subnetIds
+var SecurityDetails_securityGroupIds = &sSecurityDetails_securityGroupIds
+var SecurityDetails_roleArn = &sSecurityDetails_roleArn
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_parameterName = &sServiceQuotaExceededException_parameterName
+
+var _SignatureMap = &s_SignatureMap
+var _SignatureMap_key = &s_SignatureMap_key
+var _SignatureMap_value = &s_SignatureMap_value
+
+var SocketAddress = &sSocketAddress
+var SocketAddress_name = &sSocketAddress_name
+var SocketAddress_port = &sSocketAddress_port
+
+var Source = &sSource
+var Source_configType = &sSource_configType
+var Source_configId = &sSource_configId
+var Source_configDetails = &sSource_configDetails
+var Source_dataflowSourceRegion = &sSource_dataflowSourceRegion
+
+var SpectrumConfig = &sSpectrumConfig
+var SpectrumConfig_centerFrequency = &sSpectrumConfig_centerFrequency
+var SpectrumConfig_bandwidth = &sSpectrumConfig_bandwidth
+var SpectrumConfig_polarization = &sSpectrumConfig_polarization
+
+var _StatusList = &s_StatusList
+var _StatusList_member = &s_StatusList_member
+
+var _SubnetList = &s_SubnetList
+var _SubnetList_member = &s_SubnetList_member
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagsMap = &s_TagsMap
+var _TagsMap_key = &s_TagsMap_key
+var _TagsMap_value = &s_TagsMap_value
+
+var TelemetrySinkConfig = &sTelemetrySinkConfig
+var TelemetrySinkConfig_telemetrySinkType = &sTelemetrySinkConfig_telemetrySinkType
+var TelemetrySinkConfig_telemetrySinkData = &sTelemetrySinkConfig_telemetrySinkData
+
+var TelemetrySinkData = &sTelemetrySinkData
+var TelemetrySinkData_kinesisDataStreamData = &sTelemetrySinkData_kinesisDataStreamData
+
+var TelemetrySinkType = &sTelemetrySinkType
+var TelemetrySinkType_KINESIS_DATA_STREAM = &sTelemetrySinkType_KINESIS_DATA_STREAM
+
+var TimeAzEl = &sTimeAzEl
+var TimeAzEl_dt = &sTimeAzEl_dt
+var TimeAzEl_az = &sTimeAzEl_az
+var TimeAzEl_el = &sTimeAzEl_el
+
+var _TimeAzElList = &s_TimeAzElList
+var _TimeAzElList_member = &s_TimeAzElList_member
+
+var TimeRange = &sTimeRange
+var TimeRange_startTime = &sTimeRange_startTime
+var TimeRange_endTime = &sTimeRange_endTime
+
+var TLEData = &sTLEData
+var TLEData_tleLine1 = &sTLEData_tleLine1
+var TLEData_tleLine2 = &sTLEData_tleLine2
+var TLEData_validTimeRange = &sTLEData_validTimeRange
+
+var _TLEDataList = &s_TLEDataList
+var _TLEDataList_member = &s_TLEDataList_member
+
+var TLEEphemeris = &sTLEEphemeris
+var TLEEphemeris_s3Object = &sTLEEphemeris_s3Object
+var TLEEphemeris_tleData = &sTLEEphemeris_tleData
+
+var _TleLineOne = &s_TleLineOne
+
+var _TleLineTwo = &s_TleLineTwo
+
+var TleProgramTrackSettings = &sTleProgramTrackSettings
+var TleProgramTrackSettings_ephemerisId = &sTleProgramTrackSettings_ephemerisId
+
+var TrackingConfig = &sTrackingConfig
+var TrackingConfig_autotrack = &sTrackingConfig_autotrack
+
+var TrackingOverrides = &sTrackingOverrides
+var TrackingOverrides_programTrackSettings = &sTrackingOverrides_programTrackSettings
+
+var _UnboundedString = &s_UnboundedString
+
+var UplinkAwsGroundStationAgentEndpoint = &sUplinkAwsGroundStationAgentEndpoint
+var UplinkAwsGroundStationAgentEndpoint_name = &sUplinkAwsGroundStationAgentEndpoint_name
+var UplinkAwsGroundStationAgentEndpoint_dataflowDetails = &sUplinkAwsGroundStationAgentEndpoint_dataflowDetails
+
+var UplinkAwsGroundStationAgentEndpointDetails = &sUplinkAwsGroundStationAgentEndpointDetails
+var UplinkAwsGroundStationAgentEndpointDetails_name = &sUplinkAwsGroundStationAgentEndpointDetails_name
+var UplinkAwsGroundStationAgentEndpointDetails_dataflowDetails = &sUplinkAwsGroundStationAgentEndpointDetails_dataflowDetails
+var UplinkAwsGroundStationAgentEndpointDetails_agentStatus = &sUplinkAwsGroundStationAgentEndpointDetails_agentStatus
+var UplinkAwsGroundStationAgentEndpointDetails_auditResults = &sUplinkAwsGroundStationAgentEndpointDetails_auditResults
+
+var UplinkConnectionDetails = &sUplinkConnectionDetails
+var UplinkConnectionDetails_ingressAddressAndPort = &sUplinkConnectionDetails_ingressAddressAndPort
+var UplinkConnectionDetails_agentIpAndPortAddress = &sUplinkConnectionDetails_agentIpAndPortAddress
+
+var UplinkDataflowDetails = &sUplinkDataflowDetails
+var UplinkDataflowDetails_agentConnectionDetails = &sUplinkDataflowDetails_agentConnectionDetails
+
+var UplinkEchoConfig = &sUplinkEchoConfig
+var UplinkEchoConfig_enabled = &sUplinkEchoConfig_enabled
+var UplinkEchoConfig_antennaUplinkConfigArn = &sUplinkEchoConfig_antennaUplinkConfigArn
+
+var UplinkSpectrumConfig = &sUplinkSpectrumConfig
+var UplinkSpectrumConfig_centerFrequency = &sUplinkSpectrumConfig_centerFrequency
+var UplinkSpectrumConfig_polarization = &sUplinkSpectrumConfig_polarization
+
+var _Uuid = &s_Uuid
+
+var VersionFailureReasonCode = &sVersionFailureReasonCode
+var VersionFailureReasonCode_INTERNAL_ERROR = &sVersionFailureReasonCode_INTERNAL_ERROR
+var VersionFailureReasonCode_INVALID_SATELLITE_ARN = &sVersionFailureReasonCode_INVALID_SATELLITE_ARN
+var VersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST = &sVersionFailureReasonCode_INVALID_UPDATE_CONTACT_REQUEST
+var VersionFailureReasonCode_EPHEMERIS_NOT_FOUND = &sVersionFailureReasonCode_EPHEMERIS_NOT_FOUND
+var VersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID = &sVersionFailureReasonCode_EPHEMERIS_TIME_RANGE_INVALID
+var VersionFailureReasonCode_EPHEMERIS_NOT_ENABLED = &sVersionFailureReasonCode_EPHEMERIS_NOT_ENABLED
+var VersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS = &sVersionFailureReasonCode_SATELLITE_DOES_NOT_MATCH_EPHEMERIS
+var VersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS = &sVersionFailureReasonCode_NOT_ONBOARDED_TO_AZEL_EPHEMERIS
+var VersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND = &sVersionFailureReasonCode_AZEL_EPHEMERIS_NOT_FOUND
+var VersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION = &sVersionFailureReasonCode_AZEL_EPHEMERIS_WRONG_GROUND_STATION
+var VersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS = &sVersionFailureReasonCode_AZEL_EPHEMERIS_INVALID_STATUS
+var VersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID = &sVersionFailureReasonCode_AZEL_EPHEMERIS_TIME_RANGE_INVALID
+
+var _VersionFailureReasonCodes = &s_VersionFailureReasonCodes
+var _VersionFailureReasonCodes_member = &s_VersionFailureReasonCodes_member
+
+var _VersionId = &s_VersionId
+
+var VersionStatus = &sVersionStatus
+var VersionStatus_UPDATING = &sVersionStatus_UPDATING
+var VersionStatus_ACTIVE = &sVersionStatus_ACTIVE
+var VersionStatus_SUPERSEDED = &sVersionStatus_SUPERSEDED
+var VersionStatus_FAILED_TO_UPDATE = &sVersionStatus_FAILED_TO_UPDATE
+
+var _VersionString = &s_VersionString
+
+var _VersionStringList = &s_VersionStringList
+var _VersionStringList_member = &s_VersionStringList_member
+
+var _Year = &s_Year
+
+var CancelContactRequest = &sCancelContactRequest
+var CancelContactRequest_contactId = &sCancelContactRequest_contactId
+
+var ContactIdResponse = &sContactIdResponse
+var ContactIdResponse_contactId = &sContactIdResponse_contactId
+var ContactIdResponse_versionId = &sContactIdResponse_versionId
+
+var CreateConfigRequest = &sCreateConfigRequest
+var CreateConfigRequest_name = &sCreateConfigRequest_name
+var CreateConfigRequest_configData = &sCreateConfigRequest_configData
+var CreateConfigRequest_tags = &sCreateConfigRequest_tags
+
+var ConfigIdResponse = &sConfigIdResponse
+var ConfigIdResponse_configId = &sConfigIdResponse_configId
+var ConfigIdResponse_configType = &sConfigIdResponse_configType
+var ConfigIdResponse_configArn = &sConfigIdResponse_configArn
+
+var CreateDataflowEndpointGroupRequest = &sCreateDataflowEndpointGroupRequest
+var CreateDataflowEndpointGroupRequest_endpointDetails = &sCreateDataflowEndpointGroupRequest_endpointDetails
+var CreateDataflowEndpointGroupRequest_tags = &sCreateDataflowEndpointGroupRequest_tags
+var CreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds = &sCreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds
+var CreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds = &sCreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds
+
+var DataflowEndpointGroupIdResponse = &sDataflowEndpointGroupIdResponse
+var DataflowEndpointGroupIdResponse_dataflowEndpointGroupId = &sDataflowEndpointGroupIdResponse_dataflowEndpointGroupId
+
+var CreateDataflowEndpointGroupV2Request = &sCreateDataflowEndpointGroupV2Request
+var CreateDataflowEndpointGroupV2Request_endpoints = &sCreateDataflowEndpointGroupV2Request_endpoints
+var CreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds = &sCreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds
+var CreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds = &sCreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds
+var CreateDataflowEndpointGroupV2Request_tags = &sCreateDataflowEndpointGroupV2Request_tags
+
+var CreateDataflowEndpointGroupV2Response = &sCreateDataflowEndpointGroupV2Response
+var CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId = &sCreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId
+
+var CreateEphemerisRequest = &sCreateEphemerisRequest
+var CreateEphemerisRequest_satelliteId = &sCreateEphemerisRequest_satelliteId
+var CreateEphemerisRequest_enabled = &sCreateEphemerisRequest_enabled
+var CreateEphemerisRequest_priority = &sCreateEphemerisRequest_priority
+var CreateEphemerisRequest_expirationTime = &sCreateEphemerisRequest_expirationTime
+var CreateEphemerisRequest_name = &sCreateEphemerisRequest_name
+var CreateEphemerisRequest_kmsKeyArn = &sCreateEphemerisRequest_kmsKeyArn
+var CreateEphemerisRequest_ephemeris = &sCreateEphemerisRequest_ephemeris
+var CreateEphemerisRequest_tags = &sCreateEphemerisRequest_tags
+
+var EphemerisIdResponse = &sEphemerisIdResponse
+var EphemerisIdResponse_ephemerisId = &sEphemerisIdResponse_ephemerisId
+
+var CreateMissionProfileRequest = &sCreateMissionProfileRequest
+var CreateMissionProfileRequest_name = &sCreateMissionProfileRequest_name
+var CreateMissionProfileRequest_contactPrePassDurationSeconds = &sCreateMissionProfileRequest_contactPrePassDurationSeconds
+var CreateMissionProfileRequest_contactPostPassDurationSeconds = &sCreateMissionProfileRequest_contactPostPassDurationSeconds
+var CreateMissionProfileRequest_minimumViableContactDurationSeconds = &sCreateMissionProfileRequest_minimumViableContactDurationSeconds
+var CreateMissionProfileRequest_dataflowEdges = &sCreateMissionProfileRequest_dataflowEdges
+var CreateMissionProfileRequest_trackingConfigArn = &sCreateMissionProfileRequest_trackingConfigArn
+var CreateMissionProfileRequest_telemetrySinkConfigArn = &sCreateMissionProfileRequest_telemetrySinkConfigArn
+var CreateMissionProfileRequest_tags = &sCreateMissionProfileRequest_tags
+var CreateMissionProfileRequest_streamsKmsKey = &sCreateMissionProfileRequest_streamsKmsKey
+var CreateMissionProfileRequest_streamsKmsRole = &sCreateMissionProfileRequest_streamsKmsRole
+
+var MissionProfileIdResponse = &sMissionProfileIdResponse
+var MissionProfileIdResponse_missionProfileId = &sMissionProfileIdResponse_missionProfileId
+
+var DeleteConfigRequest = &sDeleteConfigRequest
+var DeleteConfigRequest_configId = &sDeleteConfigRequest_configId
+var DeleteConfigRequest_configType = &sDeleteConfigRequest_configType
+
+var DeleteDataflowEndpointGroupRequest = &sDeleteDataflowEndpointGroupRequest
+var DeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId = &sDeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId
+
+var DeleteEphemerisRequest = &sDeleteEphemerisRequest
+var DeleteEphemerisRequest_ephemerisId = &sDeleteEphemerisRequest_ephemerisId
+
+var DeleteMissionProfileRequest = &sDeleteMissionProfileRequest
+var DeleteMissionProfileRequest_missionProfileId = &sDeleteMissionProfileRequest_missionProfileId
+
+var DescribeContactRequest = &sDescribeContactRequest
+var DescribeContactRequest_contactId = &sDescribeContactRequest_contactId
+
+var DescribeContactResponse = &sDescribeContactResponse
+var DescribeContactResponse_contactId = &sDescribeContactResponse_contactId
+var DescribeContactResponse_missionProfileArn = &sDescribeContactResponse_missionProfileArn
+var DescribeContactResponse_satelliteArn = &sDescribeContactResponse_satelliteArn
+var DescribeContactResponse_startTime = &sDescribeContactResponse_startTime
+var DescribeContactResponse_endTime = &sDescribeContactResponse_endTime
+var DescribeContactResponse_prePassStartTime = &sDescribeContactResponse_prePassStartTime
+var DescribeContactResponse_postPassEndTime = &sDescribeContactResponse_postPassEndTime
+var DescribeContactResponse_groundStation = &sDescribeContactResponse_groundStation
+var DescribeContactResponse_contactStatus = &sDescribeContactResponse_contactStatus
+var DescribeContactResponse_errorMessage = &sDescribeContactResponse_errorMessage
+var DescribeContactResponse_maximumElevation = &sDescribeContactResponse_maximumElevation
+var DescribeContactResponse_tags = &sDescribeContactResponse_tags
+var DescribeContactResponse_region = &sDescribeContactResponse_region
+var DescribeContactResponse_dataflowList = &sDescribeContactResponse_dataflowList
+var DescribeContactResponse_visibilityStartTime = &sDescribeContactResponse_visibilityStartTime
+var DescribeContactResponse_visibilityEndTime = &sDescribeContactResponse_visibilityEndTime
+var DescribeContactResponse_trackingOverrides = &sDescribeContactResponse_trackingOverrides
+var DescribeContactResponse_ephemeris = &sDescribeContactResponse_ephemeris
+var DescribeContactResponse_version = &sDescribeContactResponse_version
+
+var DescribeContactVersionRequest = &sDescribeContactVersionRequest
+var DescribeContactVersionRequest_contactId = &sDescribeContactVersionRequest_contactId
+var DescribeContactVersionRequest_versionId = &sDescribeContactVersionRequest_versionId
+
+var DescribeContactVersionResponse = &sDescribeContactVersionResponse
+var DescribeContactVersionResponse_contactId = &sDescribeContactVersionResponse_contactId
+var DescribeContactVersionResponse_missionProfileArn = &sDescribeContactVersionResponse_missionProfileArn
+var DescribeContactVersionResponse_satelliteArn = &sDescribeContactVersionResponse_satelliteArn
+var DescribeContactVersionResponse_startTime = &sDescribeContactVersionResponse_startTime
+var DescribeContactVersionResponse_endTime = &sDescribeContactVersionResponse_endTime
+var DescribeContactVersionResponse_prePassStartTime = &sDescribeContactVersionResponse_prePassStartTime
+var DescribeContactVersionResponse_postPassEndTime = &sDescribeContactVersionResponse_postPassEndTime
+var DescribeContactVersionResponse_groundStation = &sDescribeContactVersionResponse_groundStation
+var DescribeContactVersionResponse_contactStatus = &sDescribeContactVersionResponse_contactStatus
+var DescribeContactVersionResponse_errorMessage = &sDescribeContactVersionResponse_errorMessage
+var DescribeContactVersionResponse_maximumElevation = &sDescribeContactVersionResponse_maximumElevation
+var DescribeContactVersionResponse_tags = &sDescribeContactVersionResponse_tags
+var DescribeContactVersionResponse_region = &sDescribeContactVersionResponse_region
+var DescribeContactVersionResponse_dataflowList = &sDescribeContactVersionResponse_dataflowList
+var DescribeContactVersionResponse_visibilityStartTime = &sDescribeContactVersionResponse_visibilityStartTime
+var DescribeContactVersionResponse_visibilityEndTime = &sDescribeContactVersionResponse_visibilityEndTime
+var DescribeContactVersionResponse_trackingOverrides = &sDescribeContactVersionResponse_trackingOverrides
+var DescribeContactVersionResponse_ephemeris = &sDescribeContactVersionResponse_ephemeris
+var DescribeContactVersionResponse_version = &sDescribeContactVersionResponse_version
+
+var DescribeEphemerisRequest = &sDescribeEphemerisRequest
+var DescribeEphemerisRequest_ephemerisId = &sDescribeEphemerisRequest_ephemerisId
+
+var DescribeEphemerisResponse = &sDescribeEphemerisResponse
+var DescribeEphemerisResponse_ephemerisId = &sDescribeEphemerisResponse_ephemerisId
+var DescribeEphemerisResponse_satelliteId = &sDescribeEphemerisResponse_satelliteId
+var DescribeEphemerisResponse_status = &sDescribeEphemerisResponse_status
+var DescribeEphemerisResponse_priority = &sDescribeEphemerisResponse_priority
+var DescribeEphemerisResponse_creationTime = &sDescribeEphemerisResponse_creationTime
+var DescribeEphemerisResponse_enabled = &sDescribeEphemerisResponse_enabled
+var DescribeEphemerisResponse_name = &sDescribeEphemerisResponse_name
+var DescribeEphemerisResponse_tags = &sDescribeEphemerisResponse_tags
+var DescribeEphemerisResponse_suppliedData = &sDescribeEphemerisResponse_suppliedData
+var DescribeEphemerisResponse_invalidReason = &sDescribeEphemerisResponse_invalidReason
+var DescribeEphemerisResponse_errorReasons = &sDescribeEphemerisResponse_errorReasons
+
+var GetAgentConfigurationRequest = &sGetAgentConfigurationRequest
+var GetAgentConfigurationRequest_agentId = &sGetAgentConfigurationRequest_agentId
+
+var GetAgentConfigurationResponse = &sGetAgentConfigurationResponse
+var GetAgentConfigurationResponse_agentId = &sGetAgentConfigurationResponse_agentId
+var GetAgentConfigurationResponse_taskingDocument = &sGetAgentConfigurationResponse_taskingDocument
+
+var GetAgentTaskResponseUrlRequest = &sGetAgentTaskResponseUrlRequest
+var GetAgentTaskResponseUrlRequest_agentId = &sGetAgentTaskResponseUrlRequest_agentId
+var GetAgentTaskResponseUrlRequest_taskId = &sGetAgentTaskResponseUrlRequest_taskId
+
+var GetAgentTaskResponseUrlResponse = &sGetAgentTaskResponseUrlResponse
+var GetAgentTaskResponseUrlResponse_agentId = &sGetAgentTaskResponseUrlResponse_agentId
+var GetAgentTaskResponseUrlResponse_taskId = &sGetAgentTaskResponseUrlResponse_taskId
+var GetAgentTaskResponseUrlResponse_presignedLogUrl = &sGetAgentTaskResponseUrlResponse_presignedLogUrl
+
+var GetConfigRequest = &sGetConfigRequest
+var GetConfigRequest_configId = &sGetConfigRequest_configId
+var GetConfigRequest_configType = &sGetConfigRequest_configType
+
+var GetConfigResponse = &sGetConfigResponse
+var GetConfigResponse_configId = &sGetConfigResponse_configId
+var GetConfigResponse_configArn = &sGetConfigResponse_configArn
+var GetConfigResponse_name = &sGetConfigResponse_name
+var GetConfigResponse_configType = &sGetConfigResponse_configType
+var GetConfigResponse_configData = &sGetConfigResponse_configData
+var GetConfigResponse_tags = &sGetConfigResponse_tags
+
+var GetDataflowEndpointGroupRequest = &sGetDataflowEndpointGroupRequest
+var GetDataflowEndpointGroupRequest_dataflowEndpointGroupId = &sGetDataflowEndpointGroupRequest_dataflowEndpointGroupId
+
+var GetDataflowEndpointGroupResponse = &sGetDataflowEndpointGroupResponse
+var GetDataflowEndpointGroupResponse_dataflowEndpointGroupId = &sGetDataflowEndpointGroupResponse_dataflowEndpointGroupId
+var GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn = &sGetDataflowEndpointGroupResponse_dataflowEndpointGroupArn
+var GetDataflowEndpointGroupResponse_endpointsDetails = &sGetDataflowEndpointGroupResponse_endpointsDetails
+var GetDataflowEndpointGroupResponse_tags = &sGetDataflowEndpointGroupResponse_tags
+var GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds = &sGetDataflowEndpointGroupResponse_contactPrePassDurationSeconds
+var GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds = &sGetDataflowEndpointGroupResponse_contactPostPassDurationSeconds
+
+var GetMinuteUsageRequest = &sGetMinuteUsageRequest
+var GetMinuteUsageRequest_month = &sGetMinuteUsageRequest_month
+var GetMinuteUsageRequest_year = &sGetMinuteUsageRequest_year
+
+var GetMinuteUsageResponse = &sGetMinuteUsageResponse
+var GetMinuteUsageResponse_isReservedMinutesCustomer = &sGetMinuteUsageResponse_isReservedMinutesCustomer
+var GetMinuteUsageResponse_totalReservedMinuteAllocation = &sGetMinuteUsageResponse_totalReservedMinuteAllocation
+var GetMinuteUsageResponse_upcomingMinutesScheduled = &sGetMinuteUsageResponse_upcomingMinutesScheduled
+var GetMinuteUsageResponse_totalScheduledMinutes = &sGetMinuteUsageResponse_totalScheduledMinutes
+var GetMinuteUsageResponse_estimatedMinutesRemaining = &sGetMinuteUsageResponse_estimatedMinutesRemaining
+
+var GetMissionProfileRequest = &sGetMissionProfileRequest
+var GetMissionProfileRequest_missionProfileId = &sGetMissionProfileRequest_missionProfileId
+
+var GetMissionProfileResponse = &sGetMissionProfileResponse
+var GetMissionProfileResponse_missionProfileId = &sGetMissionProfileResponse_missionProfileId
+var GetMissionProfileResponse_missionProfileArn = &sGetMissionProfileResponse_missionProfileArn
+var GetMissionProfileResponse_name = &sGetMissionProfileResponse_name
+var GetMissionProfileResponse_region = &sGetMissionProfileResponse_region
+var GetMissionProfileResponse_contactPrePassDurationSeconds = &sGetMissionProfileResponse_contactPrePassDurationSeconds
+var GetMissionProfileResponse_contactPostPassDurationSeconds = &sGetMissionProfileResponse_contactPostPassDurationSeconds
+var GetMissionProfileResponse_minimumViableContactDurationSeconds = &sGetMissionProfileResponse_minimumViableContactDurationSeconds
+var GetMissionProfileResponse_dataflowEdges = &sGetMissionProfileResponse_dataflowEdges
+var GetMissionProfileResponse_trackingConfigArn = &sGetMissionProfileResponse_trackingConfigArn
+var GetMissionProfileResponse_telemetrySinkConfigArn = &sGetMissionProfileResponse_telemetrySinkConfigArn
+var GetMissionProfileResponse_tags = &sGetMissionProfileResponse_tags
+var GetMissionProfileResponse_streamsKmsKey = &sGetMissionProfileResponse_streamsKmsKey
+var GetMissionProfileResponse_streamsKmsRole = &sGetMissionProfileResponse_streamsKmsRole
+
+var GetSatelliteRequest = &sGetSatelliteRequest
+var GetSatelliteRequest_satelliteId = &sGetSatelliteRequest_satelliteId
+
+var GetSatelliteResponse = &sGetSatelliteResponse
+var GetSatelliteResponse_satelliteId = &sGetSatelliteResponse_satelliteId
+var GetSatelliteResponse_satelliteArn = &sGetSatelliteResponse_satelliteArn
+var GetSatelliteResponse_noradSatelliteID = &sGetSatelliteResponse_noradSatelliteID
+var GetSatelliteResponse_groundStations = &sGetSatelliteResponse_groundStations
+var GetSatelliteResponse_currentEphemeris = &sGetSatelliteResponse_currentEphemeris
+
+var ListAntennasRequest = &sListAntennasRequest
+var ListAntennasRequest_groundStationId = &sListAntennasRequest_groundStationId
+var ListAntennasRequest_maxResults = &sListAntennasRequest_maxResults
+var ListAntennasRequest_nextToken = &sListAntennasRequest_nextToken
+
+var ListAntennasResponse = &sListAntennasResponse
+var ListAntennasResponse_antennaList = &sListAntennasResponse_antennaList
+var ListAntennasResponse_nextToken = &sListAntennasResponse_nextToken
+
+var ListConfigsRequest = &sListConfigsRequest
+var ListConfigsRequest_maxResults = &sListConfigsRequest_maxResults
+var ListConfigsRequest_nextToken = &sListConfigsRequest_nextToken
+
+var ListConfigsResponse = &sListConfigsResponse
+var ListConfigsResponse_nextToken = &sListConfigsResponse_nextToken
+var ListConfigsResponse_configList = &sListConfigsResponse_configList
+
+var ListContactsRequest = &sListContactsRequest
+var ListContactsRequest_maxResults = &sListContactsRequest_maxResults
+var ListContactsRequest_nextToken = &sListContactsRequest_nextToken
+var ListContactsRequest_statusList = &sListContactsRequest_statusList
+var ListContactsRequest_startTime = &sListContactsRequest_startTime
+var ListContactsRequest_endTime = &sListContactsRequest_endTime
+var ListContactsRequest_groundStation = &sListContactsRequest_groundStation
+var ListContactsRequest_satelliteArn = &sListContactsRequest_satelliteArn
+var ListContactsRequest_missionProfileArn = &sListContactsRequest_missionProfileArn
+var ListContactsRequest_ephemeris = &sListContactsRequest_ephemeris
+
+var ListContactsResponse = &sListContactsResponse
+var ListContactsResponse_nextToken = &sListContactsResponse_nextToken
+var ListContactsResponse_contactList = &sListContactsResponse_contactList
+
+var ListContactVersionsRequest = &sListContactVersionsRequest
+var ListContactVersionsRequest_contactId = &sListContactVersionsRequest_contactId
+var ListContactVersionsRequest_maxResults = &sListContactVersionsRequest_maxResults
+var ListContactVersionsRequest_nextToken = &sListContactVersionsRequest_nextToken
+
+var ListContactVersionsResponse = &sListContactVersionsResponse
+var ListContactVersionsResponse_nextToken = &sListContactVersionsResponse_nextToken
+var ListContactVersionsResponse_contactVersionsList = &sListContactVersionsResponse_contactVersionsList
+
+var ListDataflowEndpointGroupsRequest = &sListDataflowEndpointGroupsRequest
+var ListDataflowEndpointGroupsRequest_maxResults = &sListDataflowEndpointGroupsRequest_maxResults
+var ListDataflowEndpointGroupsRequest_nextToken = &sListDataflowEndpointGroupsRequest_nextToken
+
+var ListDataflowEndpointGroupsResponse = &sListDataflowEndpointGroupsResponse
+var ListDataflowEndpointGroupsResponse_nextToken = &sListDataflowEndpointGroupsResponse_nextToken
+var ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList = &sListDataflowEndpointGroupsResponse_dataflowEndpointGroupList
+
+var ListEphemeridesRequest = &sListEphemeridesRequest
+var ListEphemeridesRequest_satelliteId = &sListEphemeridesRequest_satelliteId
+var ListEphemeridesRequest_ephemerisType = &sListEphemeridesRequest_ephemerisType
+var ListEphemeridesRequest_startTime = &sListEphemeridesRequest_startTime
+var ListEphemeridesRequest_endTime = &sListEphemeridesRequest_endTime
+var ListEphemeridesRequest_statusList = &sListEphemeridesRequest_statusList
+var ListEphemeridesRequest_maxResults = &sListEphemeridesRequest_maxResults
+var ListEphemeridesRequest_nextToken = &sListEphemeridesRequest_nextToken
+
+var ListEphemeridesResponse = &sListEphemeridesResponse
+var ListEphemeridesResponse_nextToken = &sListEphemeridesResponse_nextToken
+var ListEphemeridesResponse_ephemerides = &sListEphemeridesResponse_ephemerides
+
+var ListGroundStationReservationsRequest = &sListGroundStationReservationsRequest
+var ListGroundStationReservationsRequest_groundStationId = &sListGroundStationReservationsRequest_groundStationId
+var ListGroundStationReservationsRequest_startTime = &sListGroundStationReservationsRequest_startTime
+var ListGroundStationReservationsRequest_endTime = &sListGroundStationReservationsRequest_endTime
+var ListGroundStationReservationsRequest_reservationTypes = &sListGroundStationReservationsRequest_reservationTypes
+var ListGroundStationReservationsRequest_maxResults = &sListGroundStationReservationsRequest_maxResults
+var ListGroundStationReservationsRequest_nextToken = &sListGroundStationReservationsRequest_nextToken
+
+var ListGroundStationReservationsResponse = &sListGroundStationReservationsResponse
+var ListGroundStationReservationsResponse_reservationList = &sListGroundStationReservationsResponse_reservationList
+var ListGroundStationReservationsResponse_nextToken = &sListGroundStationReservationsResponse_nextToken
+
+var ListGroundStationsRequest = &sListGroundStationsRequest
+var ListGroundStationsRequest_satelliteId = &sListGroundStationsRequest_satelliteId
+var ListGroundStationsRequest_maxResults = &sListGroundStationsRequest_maxResults
+var ListGroundStationsRequest_nextToken = &sListGroundStationsRequest_nextToken
+
+var ListGroundStationsResponse = &sListGroundStationsResponse
+var ListGroundStationsResponse_nextToken = &sListGroundStationsResponse_nextToken
+var ListGroundStationsResponse_groundStationList = &sListGroundStationsResponse_groundStationList
+
+var ListMissionProfilesRequest = &sListMissionProfilesRequest
+var ListMissionProfilesRequest_maxResults = &sListMissionProfilesRequest_maxResults
+var ListMissionProfilesRequest_nextToken = &sListMissionProfilesRequest_nextToken
+
+var ListMissionProfilesResponse = &sListMissionProfilesResponse
+var ListMissionProfilesResponse_nextToken = &sListMissionProfilesResponse_nextToken
+var ListMissionProfilesResponse_missionProfileList = &sListMissionProfilesResponse_missionProfileList
+
+var ListSatellitesRequest = &sListSatellitesRequest
+var ListSatellitesRequest_maxResults = &sListSatellitesRequest_maxResults
+var ListSatellitesRequest_nextToken = &sListSatellitesRequest_nextToken
+
+var ListSatellitesResponse = &sListSatellitesResponse
+var ListSatellitesResponse_nextToken = &sListSatellitesResponse_nextToken
+var ListSatellitesResponse_satellites = &sListSatellitesResponse_satellites
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterAgentRequest = &sRegisterAgentRequest
+var RegisterAgentRequest_discoveryData = &sRegisterAgentRequest_discoveryData
+var RegisterAgentRequest_agentDetails = &sRegisterAgentRequest_agentDetails
+var RegisterAgentRequest_tags = &sRegisterAgentRequest_tags
+
+var RegisterAgentResponse = &sRegisterAgentResponse
+var RegisterAgentResponse_agentId = &sRegisterAgentResponse_agentId
+
+var ReserveContactRequest = &sReserveContactRequest
+var ReserveContactRequest_missionProfileArn = &sReserveContactRequest_missionProfileArn
+var ReserveContactRequest_satelliteArn = &sReserveContactRequest_satelliteArn
+var ReserveContactRequest_startTime = &sReserveContactRequest_startTime
+var ReserveContactRequest_endTime = &sReserveContactRequest_endTime
+var ReserveContactRequest_groundStation = &sReserveContactRequest_groundStation
+var ReserveContactRequest_tags = &sReserveContactRequest_tags
+var ReserveContactRequest_trackingOverrides = &sReserveContactRequest_trackingOverrides
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAgentStatusRequest = &sUpdateAgentStatusRequest
+var UpdateAgentStatusRequest_agentId = &sUpdateAgentStatusRequest_agentId
+var UpdateAgentStatusRequest_taskId = &sUpdateAgentStatusRequest_taskId
+var UpdateAgentStatusRequest_aggregateStatus = &sUpdateAgentStatusRequest_aggregateStatus
+var UpdateAgentStatusRequest_componentStatuses = &sUpdateAgentStatusRequest_componentStatuses
+
+var UpdateAgentStatusResponse = &sUpdateAgentStatusResponse
+var UpdateAgentStatusResponse_agentId = &sUpdateAgentStatusResponse_agentId
+
+var UpdateConfigRequest = &sUpdateConfigRequest
+var UpdateConfigRequest_configId = &sUpdateConfigRequest_configId
+var UpdateConfigRequest_name = &sUpdateConfigRequest_name
+var UpdateConfigRequest_configType = &sUpdateConfigRequest_configType
+var UpdateConfigRequest_configData = &sUpdateConfigRequest_configData
+
+var UpdateContactRequest = &sUpdateContactRequest
+var UpdateContactRequest_contactId = &sUpdateContactRequest_contactId
+var UpdateContactRequest_clientToken = &sUpdateContactRequest_clientToken
+var UpdateContactRequest_trackingOverrides = &sUpdateContactRequest_trackingOverrides
+var UpdateContactRequest_satelliteArn = &sUpdateContactRequest_satelliteArn
+
+var UpdateContactResponse = &sUpdateContactResponse
+var UpdateContactResponse_contactId = &sUpdateContactResponse_contactId
+var UpdateContactResponse_versionId = &sUpdateContactResponse_versionId
+
+var UpdateEphemerisRequest = &sUpdateEphemerisRequest
+var UpdateEphemerisRequest_ephemerisId = &sUpdateEphemerisRequest_ephemerisId
+var UpdateEphemerisRequest_enabled = &sUpdateEphemerisRequest_enabled
+var UpdateEphemerisRequest_name = &sUpdateEphemerisRequest_name
+var UpdateEphemerisRequest_priority = &sUpdateEphemerisRequest_priority
+
+var UpdateMissionProfileRequest = &sUpdateMissionProfileRequest
+var UpdateMissionProfileRequest_missionProfileId = &sUpdateMissionProfileRequest_missionProfileId
+var UpdateMissionProfileRequest_name = &sUpdateMissionProfileRequest_name
+var UpdateMissionProfileRequest_contactPrePassDurationSeconds = &sUpdateMissionProfileRequest_contactPrePassDurationSeconds
+var UpdateMissionProfileRequest_contactPostPassDurationSeconds = &sUpdateMissionProfileRequest_contactPostPassDurationSeconds
+var UpdateMissionProfileRequest_minimumViableContactDurationSeconds = &sUpdateMissionProfileRequest_minimumViableContactDurationSeconds
+var UpdateMissionProfileRequest_dataflowEdges = &sUpdateMissionProfileRequest_dataflowEdges
+var UpdateMissionProfileRequest_trackingConfigArn = &sUpdateMissionProfileRequest_trackingConfigArn
+var UpdateMissionProfileRequest_telemetrySinkConfigArn = &sUpdateMissionProfileRequest_telemetrySinkConfigArn
+var UpdateMissionProfileRequest_streamsKmsKey = &sUpdateMissionProfileRequest_streamsKmsKey
+var UpdateMissionProfileRequest_streamsKmsRole = &sUpdateMissionProfileRequest_streamsKmsRole
+
+var GroundStation = &smithy.ServiceSchema{Schema: &s_GroundStation, Version: "2019-05-23"}

@@ -4,2888 +4,2840 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eAssociateChannel                                                                            smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContact                                                  smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannel                                               smithy.SchemaExtensions
+	eAssociateOrganizationalUnit                                                                 smithy.SchemaExtensions
+	eCreateEventRule                                                                             smithy.SchemaExtensions
+	eCreateNotificationConfiguration                                                             smithy.SchemaExtensions
+	eDeleteEventRule                                                                             smithy.SchemaExtensions
+	eDeleteNotificationConfiguration                                                             smithy.SchemaExtensions
+	eDeregisterNotificationHub                                                                   smithy.SchemaExtensions
+	eDisableNotificationsAccessForOrganization                                                   smithy.SchemaExtensions
+	eDisassociateChannel                                                                         smithy.SchemaExtensions
+	eDisassociateManagedNotificationAccountContact                                               smithy.SchemaExtensions
+	eDisassociateManagedNotificationAdditionalChannel                                            smithy.SchemaExtensions
+	eDisassociateOrganizationalUnit                                                              smithy.SchemaExtensions
+	eEnableNotificationsAccessForOrganization                                                    smithy.SchemaExtensions
+	eGetEventRule                                                                                smithy.SchemaExtensions
+	eGetManagedNotificationChildEvent                                                            smithy.SchemaExtensions
+	eGetManagedNotificationConfiguration                                                         smithy.SchemaExtensions
+	eGetManagedNotificationEvent                                                                 smithy.SchemaExtensions
+	eGetNotificationConfiguration                                                                smithy.SchemaExtensions
+	eGetNotificationEvent                                                                        smithy.SchemaExtensions
+	eGetNotificationsAccessForOrganization                                                       smithy.SchemaExtensions
+	eListChannels                                                                                smithy.SchemaExtensions
+	eListEventRules                                                                              smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociations                                                  smithy.SchemaExtensions
+	eListManagedNotificationChildEvents                                                          smithy.SchemaExtensions
+	eListManagedNotificationConfigurations                                                       smithy.SchemaExtensions
+	eListManagedNotificationEvents                                                               smithy.SchemaExtensions
+	eListMemberAccounts                                                                          smithy.SchemaExtensions
+	eListNotificationConfigurations                                                              smithy.SchemaExtensions
+	eListNotificationEvents                                                                      smithy.SchemaExtensions
+	eListNotificationHubs                                                                        smithy.SchemaExtensions
+	eListOrganizationalUnits                                                                     smithy.SchemaExtensions
+	eListTagsForResource                                                                         smithy.SchemaExtensions
+	eRegisterNotificationHub                                                                     smithy.SchemaExtensions
+	eTagResource                                                                                 smithy.SchemaExtensions
+	eUntagResource                                                                               smithy.SchemaExtensions
+	eUpdateEventRule                                                                             smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociation                                                 smithy.SchemaExtensions
+	eUpdateNotificationConfiguration                                                             smithy.SchemaExtensions
+	e_Notifications                                                                              smithy.SchemaExtensions
+	eAccessDeniedException                                                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                                                               smithy.SchemaExtensions
+	eAccessStatus                                                                                smithy.SchemaExtensions
+	eAccessStatus_ENABLED                                                                        smithy.SchemaExtensions
+	eAccessStatus_DISABLED                                                                       smithy.SchemaExtensions
+	eAccessStatus_PENDING                                                                        smithy.SchemaExtensions
+	eAccessStatus_FAILED                                                                         smithy.SchemaExtensions
+	e_AccountContactType                                                                         smithy.SchemaExtensions
+	e_AccountId                                                                                  smithy.SchemaExtensions
+	e_AggregatedNotificationRegions                                                              smithy.SchemaExtensions
+	e_AggregatedNotificationRegions_member                                                       smithy.SchemaExtensions
+	eAggregationDetail                                                                           smithy.SchemaExtensions
+	eAggregationDetail_summarizationDimensions                                                   smithy.SchemaExtensions
+	e_AggregationDuration                                                                        smithy.SchemaExtensions
+	e_AggregationEventType                                                                       smithy.SchemaExtensions
+	eAggregationKey                                                                              smithy.SchemaExtensions
+	eAggregationKey_name                                                                         smithy.SchemaExtensions
+	eAggregationKey_value                                                                        smithy.SchemaExtensions
+	e_AggregationKeys                                                                            smithy.SchemaExtensions
+	e_AggregationKeys_member                                                                     smithy.SchemaExtensions
+	eAggregationSummary                                                                          smithy.SchemaExtensions
+	eAggregationSummary_eventCount                                                               smithy.SchemaExtensions
+	eAggregationSummary_aggregatedBy                                                             smithy.SchemaExtensions
+	eAggregationSummary_aggregatedAccounts                                                       smithy.SchemaExtensions
+	eAggregationSummary_aggregatedRegions                                                        smithy.SchemaExtensions
+	eAggregationSummary_aggregatedOrganizationalUnits                                            smithy.SchemaExtensions
+	eAggregationSummary_additionalSummarizationDimensions                                        smithy.SchemaExtensions
+	e_Arn                                                                                        smithy.SchemaExtensions
+	e_AttachmentContentType                                                                      smithy.SchemaExtensions
+	e_AttachmentDisplayName                                                                      smithy.SchemaExtensions
+	e_ChannelArn                                                                                 smithy.SchemaExtensions
+	e_ChannelAssociationOverrideOption                                                           smithy.SchemaExtensions
+	e_ChannelIdentifier                                                                          smithy.SchemaExtensions
+	e_Channels                                                                                   smithy.SchemaExtensions
+	e_Channels_member                                                                            smithy.SchemaExtensions
+	eChannelType                                                                                 smithy.SchemaExtensions
+	eChannelType_MOBILE                                                                          smithy.SchemaExtensions
+	eChannelType_CHATBOT                                                                         smithy.SchemaExtensions
+	eChannelType_EMAIL                                                                           smithy.SchemaExtensions
+	eChannelType_ACCOUNT_CONTACT                                                                 smithy.SchemaExtensions
+	eConflictException                                                                           smithy.SchemaExtensions
+	eConflictException_message                                                                   smithy.SchemaExtensions
+	eConflictException_resourceId                                                                smithy.SchemaExtensions
+	e_CreationTime                                                                               smithy.SchemaExtensions
+	eDimension                                                                                   smithy.SchemaExtensions
+	eDimension_name                                                                              smithy.SchemaExtensions
+	eDimension_value                                                                             smithy.SchemaExtensions
+	e_Dimensions                                                                                 smithy.SchemaExtensions
+	e_Dimensions_member                                                                          smithy.SchemaExtensions
+	e_ErrorMessage                                                                               smithy.SchemaExtensions
+	e_EventRuleArn                                                                               smithy.SchemaExtensions
+	e_EventRuleEventPattern                                                                      smithy.SchemaExtensions
+	e_EventRules                                                                                 smithy.SchemaExtensions
+	e_EventRules_member                                                                          smithy.SchemaExtensions
+	e_EventRuleStatus                                                                            smithy.SchemaExtensions
+	e_EventRuleStatusReason                                                                      smithy.SchemaExtensions
+	eEventRuleStatusSummary                                                                      smithy.SchemaExtensions
+	eEventRuleStatusSummary_status                                                               smithy.SchemaExtensions
+	eEventRuleStatusSummary_reason                                                               smithy.SchemaExtensions
+	eEventRuleStructure                                                                          smithy.SchemaExtensions
+	eEventRuleStructure_arn                                                                      smithy.SchemaExtensions
+	eEventRuleStructure_notificationConfigurationArn                                             smithy.SchemaExtensions
+	eEventRuleStructure_creationTime                                                             smithy.SchemaExtensions
+	eEventRuleStructure_source                                                                   smithy.SchemaExtensions
+	eEventRuleStructure_eventType                                                                smithy.SchemaExtensions
+	eEventRuleStructure_eventPattern                                                             smithy.SchemaExtensions
+	eEventRuleStructure_regions                                                                  smithy.SchemaExtensions
+	eEventRuleStructure_managedRules                                                             smithy.SchemaExtensions
+	eEventRuleStructure_statusSummaryByRegion                                                    smithy.SchemaExtensions
+	e_EventStatus                                                                                smithy.SchemaExtensions
+	e_EventType                                                                                  smithy.SchemaExtensions
+	eInternalServerException                                                                     smithy.SchemaExtensions
+	eInternalServerException_message                                                             smithy.SchemaExtensions
+	e_LastActivationTime                                                                         smithy.SchemaExtensions
+	e_LocaleCode                                                                                 smithy.SchemaExtensions
+	e_ManagedNotificationChannelAssociations                                                     smithy.SchemaExtensions
+	e_ManagedNotificationChannelAssociations_member                                              smithy.SchemaExtensions
+	eManagedNotificationChannelAssociationSummary                                                smithy.SchemaExtensions
+	eManagedNotificationChannelAssociationSummary_channelIdentifier                              smithy.SchemaExtensions
+	eManagedNotificationChannelAssociationSummary_channelType                                    smithy.SchemaExtensions
+	eManagedNotificationChannelAssociationSummary_overrideOption                                 smithy.SchemaExtensions
+	eManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed                    smithy.SchemaExtensions
+	e_ManagedNotificationChannelIdentifier                                                       smithy.SchemaExtensions
+	eManagedNotificationChildEvent                                                               smithy.SchemaExtensions
+	eManagedNotificationChildEvent_schemaVersion                                                 smithy.SchemaExtensions
+	eManagedNotificationChildEvent_id                                                            smithy.SchemaExtensions
+	eManagedNotificationChildEvent_messageComponents                                             smithy.SchemaExtensions
+	eManagedNotificationChildEvent_sourceEventDetailUrl                                          smithy.SchemaExtensions
+	eManagedNotificationChildEvent_sourceEventDetailUrlDisplayText                               smithy.SchemaExtensions
+	eManagedNotificationChildEvent_notificationType                                              smithy.SchemaExtensions
+	eManagedNotificationChildEvent_eventStatus                                                   smithy.SchemaExtensions
+	eManagedNotificationChildEvent_aggregateManagedNotificationEventArn                          smithy.SchemaExtensions
+	eManagedNotificationChildEvent_startTime                                                     smithy.SchemaExtensions
+	eManagedNotificationChildEvent_endTime                                                       smithy.SchemaExtensions
+	eManagedNotificationChildEvent_textParts                                                     smithy.SchemaExtensions
+	eManagedNotificationChildEvent_organizationalUnitId                                          smithy.SchemaExtensions
+	eManagedNotificationChildEvent_aggregationDetail                                             smithy.SchemaExtensions
+	e_ManagedNotificationChildEventArn                                                           smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview                                                       smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_arn                                                   smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_managedNotificationConfigurationArn                   smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_relatedAccount                                        smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_creationTime                                          smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_childEvent                                            smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn                  smithy.SchemaExtensions
+	eManagedNotificationChildEventOverview_organizationalUnitId                                  smithy.SchemaExtensions
+	e_ManagedNotificationChildEvents                                                             smithy.SchemaExtensions
+	e_ManagedNotificationChildEvents_member                                                      smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary                                                        smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_schemaVersion                                          smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_sourceEventMetadata                                    smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_messageComponents                                      smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_aggregationDetail                                      smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_eventStatus                                            smithy.SchemaExtensions
+	eManagedNotificationChildEventSummary_notificationType                                       smithy.SchemaExtensions
+	e_ManagedNotificationConfigurationDescription                                                smithy.SchemaExtensions
+	e_ManagedNotificationConfigurationName                                                       smithy.SchemaExtensions
+	e_ManagedNotificationConfigurationOsArn                                                      smithy.SchemaExtensions
+	e_ManagedNotificationConfigurations                                                          smithy.SchemaExtensions
+	e_ManagedNotificationConfigurations_member                                                   smithy.SchemaExtensions
+	eManagedNotificationConfigurationStructure                                                   smithy.SchemaExtensions
+	eManagedNotificationConfigurationStructure_arn                                               smithy.SchemaExtensions
+	eManagedNotificationConfigurationStructure_name                                              smithy.SchemaExtensions
+	eManagedNotificationConfigurationStructure_description                                       smithy.SchemaExtensions
+	eManagedNotificationEvent                                                                    smithy.SchemaExtensions
+	eManagedNotificationEvent_schemaVersion                                                      smithy.SchemaExtensions
+	eManagedNotificationEvent_id                                                                 smithy.SchemaExtensions
+	eManagedNotificationEvent_messageComponents                                                  smithy.SchemaExtensions
+	eManagedNotificationEvent_sourceEventDetailUrl                                               smithy.SchemaExtensions
+	eManagedNotificationEvent_sourceEventDetailUrlDisplayText                                    smithy.SchemaExtensions
+	eManagedNotificationEvent_notificationType                                                   smithy.SchemaExtensions
+	eManagedNotificationEvent_eventStatus                                                        smithy.SchemaExtensions
+	eManagedNotificationEvent_aggregationEventType                                               smithy.SchemaExtensions
+	eManagedNotificationEvent_aggregationSummary                                                 smithy.SchemaExtensions
+	eManagedNotificationEvent_startTime                                                          smithy.SchemaExtensions
+	eManagedNotificationEvent_endTime                                                            smithy.SchemaExtensions
+	eManagedNotificationEvent_textParts                                                          smithy.SchemaExtensions
+	eManagedNotificationEvent_organizationalUnitId                                               smithy.SchemaExtensions
+	eManagedNotificationEvent_attachments                                                        smithy.SchemaExtensions
+	e_ManagedNotificationEventArn                                                                smithy.SchemaExtensions
+	eManagedNotificationEventOverview                                                            smithy.SchemaExtensions
+	eManagedNotificationEventOverview_arn                                                        smithy.SchemaExtensions
+	eManagedNotificationEventOverview_managedNotificationConfigurationArn                        smithy.SchemaExtensions
+	eManagedNotificationEventOverview_relatedAccount                                             smithy.SchemaExtensions
+	eManagedNotificationEventOverview_creationTime                                               smithy.SchemaExtensions
+	eManagedNotificationEventOverview_notificationEvent                                          smithy.SchemaExtensions
+	eManagedNotificationEventOverview_aggregationEventType                                       smithy.SchemaExtensions
+	eManagedNotificationEventOverview_organizationalUnitId                                       smithy.SchemaExtensions
+	eManagedNotificationEventOverview_aggregationSummary                                         smithy.SchemaExtensions
+	eManagedNotificationEventOverview_aggregatedNotificationRegions                              smithy.SchemaExtensions
+	e_ManagedNotificationEvents                                                                  smithy.SchemaExtensions
+	e_ManagedNotificationEvents_member                                                           smithy.SchemaExtensions
+	eManagedNotificationEventSummary                                                             smithy.SchemaExtensions
+	eManagedNotificationEventSummary_schemaVersion                                               smithy.SchemaExtensions
+	eManagedNotificationEventSummary_sourceEventMetadata                                         smithy.SchemaExtensions
+	eManagedNotificationEventSummary_messageComponents                                           smithy.SchemaExtensions
+	eManagedNotificationEventSummary_eventStatus                                                 smithy.SchemaExtensions
+	eManagedNotificationEventSummary_notificationType                                            smithy.SchemaExtensions
+	e_ManagedRuleArn                                                                             smithy.SchemaExtensions
+	e_ManagedRuleArns                                                                            smithy.SchemaExtensions
+	e_ManagedRuleArns_member                                                                     smithy.SchemaExtensions
+	eManagedSourceEventMetadataSummary                                                           smithy.SchemaExtensions
+	eManagedSourceEventMetadataSummary_eventOriginRegion                                         smithy.SchemaExtensions
+	eManagedSourceEventMetadataSummary_source                                                    smithy.SchemaExtensions
+	eManagedSourceEventMetadataSummary_eventType                                                 smithy.SchemaExtensions
+	e_Media                                                                                      smithy.SchemaExtensions
+	e_Media_member                                                                               smithy.SchemaExtensions
+	eMediaElement                                                                                smithy.SchemaExtensions
+	eMediaElement_mediaId                                                                        smithy.SchemaExtensions
+	eMediaElement_type                                                                           smithy.SchemaExtensions
+	eMediaElement_url                                                                            smithy.SchemaExtensions
+	eMediaElement_caption                                                                        smithy.SchemaExtensions
+	e_MediaElementType                                                                           smithy.SchemaExtensions
+	e_MediaId                                                                                    smithy.SchemaExtensions
+	eMemberAccount                                                                               smithy.SchemaExtensions
+	eMemberAccount_notificationConfigurationArn                                                  smithy.SchemaExtensions
+	eMemberAccount_accountId                                                                     smithy.SchemaExtensions
+	eMemberAccount_status                                                                        smithy.SchemaExtensions
+	eMemberAccount_statusReason                                                                  smithy.SchemaExtensions
+	eMemberAccount_organizationalUnitId                                                          smithy.SchemaExtensions
+	e_MemberAccountNotificationConfigurationStatus                                               smithy.SchemaExtensions
+	e_MemberAccounts                                                                             smithy.SchemaExtensions
+	e_MemberAccounts_member                                                                      smithy.SchemaExtensions
+	eMessageComponents                                                                           smithy.SchemaExtensions
+	eMessageComponents_headline                                                                  smithy.SchemaExtensions
+	eMessageComponents_paragraphSummary                                                          smithy.SchemaExtensions
+	eMessageComponents_completeDescription                                                       smithy.SchemaExtensions
+	eMessageComponents_markupDescription                                                         smithy.SchemaExtensions
+	eMessageComponents_dimensions                                                                smithy.SchemaExtensions
+	eMessageComponentsSummary                                                                    smithy.SchemaExtensions
+	eMessageComponentsSummary_headline                                                           smithy.SchemaExtensions
+	e_NextToken                                                                                  smithy.SchemaExtensions
+	e_NotificationConfigurationArn                                                               smithy.SchemaExtensions
+	e_NotificationConfigurationDescription                                                       smithy.SchemaExtensions
+	e_NotificationConfigurationName                                                              smithy.SchemaExtensions
+	e_NotificationConfigurations                                                                 smithy.SchemaExtensions
+	e_NotificationConfigurations_member                                                          smithy.SchemaExtensions
+	e_NotificationConfigurationStatus                                                            smithy.SchemaExtensions
+	eNotificationConfigurationStructure                                                          smithy.SchemaExtensions
+	eNotificationConfigurationStructure_arn                                                      smithy.SchemaExtensions
+	eNotificationConfigurationStructure_name                                                     smithy.SchemaExtensions
+	eNotificationConfigurationStructure_description                                              smithy.SchemaExtensions
+	eNotificationConfigurationStructure_status                                                   smithy.SchemaExtensions
+	eNotificationConfigurationStructure_creationTime                                             smithy.SchemaExtensions
+	eNotificationConfigurationStructure_aggregationDuration                                      smithy.SchemaExtensions
+	eNotificationConfigurationStructure_subtype                                                  smithy.SchemaExtensions
+	e_NotificationConfigurationSubtype                                                           smithy.SchemaExtensions
+	e_NotificationEventArn                                                                       smithy.SchemaExtensions
+	eNotificationEventAttachment                                                                 smithy.SchemaExtensions
+	eNotificationEventAttachment_displayName                                                     smithy.SchemaExtensions
+	eNotificationEventAttachment_attachmentDownloadUrl                                           smithy.SchemaExtensions
+	eNotificationEventAttachment_contentType                                                     smithy.SchemaExtensions
+	e_NotificationEventAttachmentList                                                            smithy.SchemaExtensions
+	e_NotificationEventAttachmentList_member                                                     smithy.SchemaExtensions
+	e_NotificationEventId                                                                        smithy.SchemaExtensions
+	eNotificationEventOverview                                                                   smithy.SchemaExtensions
+	eNotificationEventOverview_arn                                                               smithy.SchemaExtensions
+	eNotificationEventOverview_notificationConfigurationArn                                      smithy.SchemaExtensions
+	eNotificationEventOverview_relatedAccount                                                    smithy.SchemaExtensions
+	eNotificationEventOverview_creationTime                                                      smithy.SchemaExtensions
+	eNotificationEventOverview_notificationEvent                                                 smithy.SchemaExtensions
+	eNotificationEventOverview_aggregationEventType                                              smithy.SchemaExtensions
+	eNotificationEventOverview_aggregateNotificationEventArn                                     smithy.SchemaExtensions
+	eNotificationEventOverview_aggregationSummary                                                smithy.SchemaExtensions
+	eNotificationEventOverview_organizationalUnitId                                              smithy.SchemaExtensions
+	e_NotificationEvents                                                                         smithy.SchemaExtensions
+	e_NotificationEvents_member                                                                  smithy.SchemaExtensions
+	eNotificationEventSchema                                                                     smithy.SchemaExtensions
+	eNotificationEventSchema_schemaVersion                                                       smithy.SchemaExtensions
+	eNotificationEventSchema_id                                                                  smithy.SchemaExtensions
+	eNotificationEventSchema_sourceEventMetadata                                                 smithy.SchemaExtensions
+	eNotificationEventSchema_messageComponents                                                   smithy.SchemaExtensions
+	eNotificationEventSchema_sourceEventDetailUrl                                                smithy.SchemaExtensions
+	eNotificationEventSchema_sourceEventDetailUrlDisplayText                                     smithy.SchemaExtensions
+	eNotificationEventSchema_notificationType                                                    smithy.SchemaExtensions
+	eNotificationEventSchema_eventStatus                                                         smithy.SchemaExtensions
+	eNotificationEventSchema_aggregationEventType                                                smithy.SchemaExtensions
+	eNotificationEventSchema_aggregateNotificationEventArn                                       smithy.SchemaExtensions
+	eNotificationEventSchema_aggregationSummary                                                  smithy.SchemaExtensions
+	eNotificationEventSchema_startTime                                                           smithy.SchemaExtensions
+	eNotificationEventSchema_endTime                                                             smithy.SchemaExtensions
+	eNotificationEventSchema_textParts                                                           smithy.SchemaExtensions
+	eNotificationEventSchema_media                                                               smithy.SchemaExtensions
+	eNotificationEventSchema_organizationalUnitId                                                smithy.SchemaExtensions
+	eNotificationEventSummary                                                                    smithy.SchemaExtensions
+	eNotificationEventSummary_schemaVersion                                                      smithy.SchemaExtensions
+	eNotificationEventSummary_sourceEventMetadata                                                smithy.SchemaExtensions
+	eNotificationEventSummary_messageComponents                                                  smithy.SchemaExtensions
+	eNotificationEventSummary_eventStatus                                                        smithy.SchemaExtensions
+	eNotificationEventSummary_notificationType                                                   smithy.SchemaExtensions
+	eNotificationHubOverview                                                                     smithy.SchemaExtensions
+	eNotificationHubOverview_notificationHubRegion                                               smithy.SchemaExtensions
+	eNotificationHubOverview_statusSummary                                                       smithy.SchemaExtensions
+	eNotificationHubOverview_creationTime                                                        smithy.SchemaExtensions
+	eNotificationHubOverview_lastActivationTime                                                  smithy.SchemaExtensions
+	e_NotificationHubs                                                                           smithy.SchemaExtensions
+	e_NotificationHubs_member                                                                    smithy.SchemaExtensions
+	e_NotificationHubStatus                                                                      smithy.SchemaExtensions
+	e_NotificationHubStatusReason                                                                smithy.SchemaExtensions
+	eNotificationHubStatusSummary                                                                smithy.SchemaExtensions
+	eNotificationHubStatusSummary_status                                                         smithy.SchemaExtensions
+	eNotificationHubStatusSummary_reason                                                         smithy.SchemaExtensions
+	eNotificationsAccessForOrganization                                                          smithy.SchemaExtensions
+	eNotificationsAccessForOrganization_accessStatus                                             smithy.SchemaExtensions
+	e_NotificationType                                                                           smithy.SchemaExtensions
+	e_OrganizationalUnitId                                                                       smithy.SchemaExtensions
+	e_OrganizationalUnits                                                                        smithy.SchemaExtensions
+	e_OrganizationalUnits_member                                                                 smithy.SchemaExtensions
+	e_QuotaCode                                                                                  smithy.SchemaExtensions
+	e_Region                                                                                     smithy.SchemaExtensions
+	e_Regions                                                                                    smithy.SchemaExtensions
+	e_Regions_member                                                                             smithy.SchemaExtensions
+	eResource                                                                                    smithy.SchemaExtensions
+	eResource_id                                                                                 smithy.SchemaExtensions
+	eResource_arn                                                                                smithy.SchemaExtensions
+	eResource_detailUrl                                                                          smithy.SchemaExtensions
+	eResource_tags                                                                               smithy.SchemaExtensions
+	e_ResourceId                                                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                                        smithy.SchemaExtensions
+	e_Resources                                                                                  smithy.SchemaExtensions
+	e_Resources_member                                                                           smithy.SchemaExtensions
+	e_ResourceType                                                                               smithy.SchemaExtensions
+	e_SampleAggregationDimensionValues                                                           smithy.SchemaExtensions
+	e_SampleAggregationDimensionValues_member                                                    smithy.SchemaExtensions
+	e_SchemaVersion                                                                              smithy.SchemaExtensions
+	e_SensitiveUrl                                                                               smithy.SchemaExtensions
+	e_ServiceCode                                                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                                                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                                                     smithy.SchemaExtensions
+	e_Source                                                                                     smithy.SchemaExtensions
+	eSourceEventMetadata                                                                         smithy.SchemaExtensions
+	eSourceEventMetadata_eventTypeVersion                                                        smithy.SchemaExtensions
+	eSourceEventMetadata_sourceEventId                                                           smithy.SchemaExtensions
+	eSourceEventMetadata_eventOriginRegion                                                       smithy.SchemaExtensions
+	eSourceEventMetadata_relatedAccount                                                          smithy.SchemaExtensions
+	eSourceEventMetadata_source                                                                  smithy.SchemaExtensions
+	eSourceEventMetadata_eventOccurrenceTime                                                     smithy.SchemaExtensions
+	eSourceEventMetadata_eventType                                                               smithy.SchemaExtensions
+	eSourceEventMetadata_relatedResources                                                        smithy.SchemaExtensions
+	eSourceEventMetadataSummary                                                                  smithy.SchemaExtensions
+	eSourceEventMetadataSummary_eventOriginRegion                                                smithy.SchemaExtensions
+	eSourceEventMetadataSummary_source                                                           smithy.SchemaExtensions
+	eSourceEventMetadataSummary_eventType                                                        smithy.SchemaExtensions
+	e_StatusSummaryByRegion                                                                      smithy.SchemaExtensions
+	e_StatusSummaryByRegion_key                                                                  smithy.SchemaExtensions
+	e_StatusSummaryByRegion_value                                                                smithy.SchemaExtensions
+	eSummarizationDimensionDetail                                                                smithy.SchemaExtensions
+	eSummarizationDimensionDetail_name                                                           smithy.SchemaExtensions
+	eSummarizationDimensionDetail_value                                                          smithy.SchemaExtensions
+	e_SummarizationDimensionDetails                                                              smithy.SchemaExtensions
+	e_SummarizationDimensionDetails_member                                                       smithy.SchemaExtensions
+	eSummarizationDimensionOverview                                                              smithy.SchemaExtensions
+	eSummarizationDimensionOverview_name                                                         smithy.SchemaExtensions
+	eSummarizationDimensionOverview_count                                                        smithy.SchemaExtensions
+	eSummarizationDimensionOverview_sampleValues                                                 smithy.SchemaExtensions
+	e_SummarizationDimensionOverviews                                                            smithy.SchemaExtensions
+	e_SummarizationDimensionOverviews_member                                                     smithy.SchemaExtensions
+	e_TagKey                                                                                     smithy.SchemaExtensions
+	e_TagKeys                                                                                    smithy.SchemaExtensions
+	e_TagKeys_member                                                                             smithy.SchemaExtensions
+	e_TagMap                                                                                     smithy.SchemaExtensions
+	e_TagMap_key                                                                                 smithy.SchemaExtensions
+	e_TagMap_value                                                                               smithy.SchemaExtensions
+	e_Tags                                                                                       smithy.SchemaExtensions
+	e_Tags_member                                                                                smithy.SchemaExtensions
+	e_TagValue                                                                                   smithy.SchemaExtensions
+	e_TextByLocale                                                                               smithy.SchemaExtensions
+	e_TextByLocale_key                                                                           smithy.SchemaExtensions
+	e_TextByLocale_value                                                                         smithy.SchemaExtensions
+	e_TextPartId                                                                                 smithy.SchemaExtensions
+	e_TextPartReference                                                                          smithy.SchemaExtensions
+	e_TextParts                                                                                  smithy.SchemaExtensions
+	e_TextParts_key                                                                              smithy.SchemaExtensions
+	e_TextParts_value                                                                            smithy.SchemaExtensions
+	e_TextPartType                                                                               smithy.SchemaExtensions
+	eTextPartValue                                                                               smithy.SchemaExtensions
+	eTextPartValue_type                                                                          smithy.SchemaExtensions
+	eTextPartValue_displayText                                                                   smithy.SchemaExtensions
+	eTextPartValue_textByLocale                                                                  smithy.SchemaExtensions
+	eTextPartValue_url                                                                           smithy.SchemaExtensions
+	eThrottlingException                                                                         smithy.SchemaExtensions
+	eThrottlingException_message                                                                 smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                                             smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                                               smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                                                       smithy.SchemaExtensions
+	e_Url                                                                                        smithy.SchemaExtensions
+	eValidationException                                                                         smithy.SchemaExtensions
+	eValidationException_message                                                                 smithy.SchemaExtensions
+	eValidationException_reason                                                                  smithy.SchemaExtensions
+	eValidationException_fieldList                                                               smithy.SchemaExtensions
+	eValidationExceptionField                                                                    smithy.SchemaExtensions
+	eValidationExceptionField_name                                                               smithy.SchemaExtensions
+	eValidationExceptionField_message                                                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                        smithy.SchemaExtensions
+	e_ValidationExceptionReason                                                                  smithy.SchemaExtensions
+	eAssociateChannelRequest                                                                     smithy.SchemaExtensions
+	eAssociateChannelRequest_arn                                                                 smithy.SchemaExtensions
+	eAssociateChannelRequest_notificationConfigurationArn                                        smithy.SchemaExtensions
+	eAssociateChannelResponse                                                                    smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContactRequest                                           smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContactRequest_contactIdentifier                         smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn       smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed               smithy.SchemaExtensions
+	eAssociateManagedNotificationAccountContactResponse                                          smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannelRequest                                        smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannelRequest_channelArn                             smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn    smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed            smithy.SchemaExtensions
+	eAssociateManagedNotificationAdditionalChannelResponse                                       smithy.SchemaExtensions
+	eAssociateOrganizationalUnitRequest                                                          smithy.SchemaExtensions
+	eAssociateOrganizationalUnitRequest_organizationalUnitId                                     smithy.SchemaExtensions
+	eAssociateOrganizationalUnitRequest_notificationConfigurationArn                             smithy.SchemaExtensions
+	eAssociateOrganizationalUnitResponse                                                         smithy.SchemaExtensions
+	eCreateEventRuleRequest                                                                      smithy.SchemaExtensions
+	eCreateEventRuleRequest_notificationConfigurationArn                                         smithy.SchemaExtensions
+	eCreateEventRuleRequest_source                                                               smithy.SchemaExtensions
+	eCreateEventRuleRequest_eventType                                                            smithy.SchemaExtensions
+	eCreateEventRuleRequest_eventPattern                                                         smithy.SchemaExtensions
+	eCreateEventRuleRequest_regions                                                              smithy.SchemaExtensions
+	eCreateEventRuleResponse                                                                     smithy.SchemaExtensions
+	eCreateEventRuleResponse_arn                                                                 smithy.SchemaExtensions
+	eCreateEventRuleResponse_notificationConfigurationArn                                        smithy.SchemaExtensions
+	eCreateEventRuleResponse_statusSummaryByRegion                                               smithy.SchemaExtensions
+	eCreateNotificationConfigurationRequest                                                      smithy.SchemaExtensions
+	eCreateNotificationConfigurationRequest_name                                                 smithy.SchemaExtensions
+	eCreateNotificationConfigurationRequest_description                                          smithy.SchemaExtensions
+	eCreateNotificationConfigurationRequest_aggregationDuration                                  smithy.SchemaExtensions
+	eCreateNotificationConfigurationRequest_tags                                                 smithy.SchemaExtensions
+	eCreateNotificationConfigurationResponse                                                     smithy.SchemaExtensions
+	eCreateNotificationConfigurationResponse_arn                                                 smithy.SchemaExtensions
+	eCreateNotificationConfigurationResponse_status                                              smithy.SchemaExtensions
+	eDeleteEventRuleRequest                                                                      smithy.SchemaExtensions
+	eDeleteEventRuleRequest_arn                                                                  smithy.SchemaExtensions
+	eDeleteEventRuleResponse                                                                     smithy.SchemaExtensions
+	eDeleteNotificationConfigurationRequest                                                      smithy.SchemaExtensions
+	eDeleteNotificationConfigurationRequest_arn                                                  smithy.SchemaExtensions
+	eDeleteNotificationConfigurationResponse                                                     smithy.SchemaExtensions
+	eDeregisterNotificationHubRequest                                                            smithy.SchemaExtensions
+	eDeregisterNotificationHubRequest_notificationHubRegion                                      smithy.SchemaExtensions
+	eDeregisterNotificationHubResponse                                                           smithy.SchemaExtensions
+	eDeregisterNotificationHubResponse_notificationHubRegion                                     smithy.SchemaExtensions
+	eDeregisterNotificationHubResponse_statusSummary                                             smithy.SchemaExtensions
+	eDisableNotificationsAccessForOrganizationRequest                                            smithy.SchemaExtensions
+	eDisableNotificationsAccessForOrganizationResponse                                           smithy.SchemaExtensions
+	eDisassociateChannelRequest                                                                  smithy.SchemaExtensions
+	eDisassociateChannelRequest_arn                                                              smithy.SchemaExtensions
+	eDisassociateChannelRequest_notificationConfigurationArn                                     smithy.SchemaExtensions
+	eDisassociateChannelResponse                                                                 smithy.SchemaExtensions
+	eDisassociateManagedNotificationAccountContactRequest                                        smithy.SchemaExtensions
+	eDisassociateManagedNotificationAccountContactRequest_contactIdentifier                      smithy.SchemaExtensions
+	eDisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn    smithy.SchemaExtensions
+	eDisassociateManagedNotificationAccountContactResponse                                       smithy.SchemaExtensions
+	eDisassociateManagedNotificationAdditionalChannelRequest                                     smithy.SchemaExtensions
+	eDisassociateManagedNotificationAdditionalChannelRequest_channelArn                          smithy.SchemaExtensions
+	eDisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn smithy.SchemaExtensions
+	eDisassociateManagedNotificationAdditionalChannelResponse                                    smithy.SchemaExtensions
+	eDisassociateOrganizationalUnitRequest                                                       smithy.SchemaExtensions
+	eDisassociateOrganizationalUnitRequest_organizationalUnitId                                  smithy.SchemaExtensions
+	eDisassociateOrganizationalUnitRequest_notificationConfigurationArn                          smithy.SchemaExtensions
+	eDisassociateOrganizationalUnitResponse                                                      smithy.SchemaExtensions
+	eEnableNotificationsAccessForOrganizationRequest                                             smithy.SchemaExtensions
+	eEnableNotificationsAccessForOrganizationResponse                                            smithy.SchemaExtensions
+	eGetEventRuleRequest                                                                         smithy.SchemaExtensions
+	eGetEventRuleRequest_arn                                                                     smithy.SchemaExtensions
+	eGetEventRuleResponse                                                                        smithy.SchemaExtensions
+	eGetEventRuleResponse_arn                                                                    smithy.SchemaExtensions
+	eGetEventRuleResponse_notificationConfigurationArn                                           smithy.SchemaExtensions
+	eGetEventRuleResponse_creationTime                                                           smithy.SchemaExtensions
+	eGetEventRuleResponse_source                                                                 smithy.SchemaExtensions
+	eGetEventRuleResponse_eventType                                                              smithy.SchemaExtensions
+	eGetEventRuleResponse_eventPattern                                                           smithy.SchemaExtensions
+	eGetEventRuleResponse_regions                                                                smithy.SchemaExtensions
+	eGetEventRuleResponse_managedRules                                                           smithy.SchemaExtensions
+	eGetEventRuleResponse_statusSummaryByRegion                                                  smithy.SchemaExtensions
+	eGetManagedNotificationChildEventRequest                                                     smithy.SchemaExtensions
+	eGetManagedNotificationChildEventRequest_arn                                                 smithy.SchemaExtensions
+	eGetManagedNotificationChildEventRequest_locale                                              smithy.SchemaExtensions
+	eGetManagedNotificationChildEventResponse                                                    smithy.SchemaExtensions
+	eGetManagedNotificationChildEventResponse_arn                                                smithy.SchemaExtensions
+	eGetManagedNotificationChildEventResponse_managedNotificationConfigurationArn                smithy.SchemaExtensions
+	eGetManagedNotificationChildEventResponse_creationTime                                       smithy.SchemaExtensions
+	eGetManagedNotificationChildEventResponse_content                                            smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationRequest                                                  smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationRequest_arn                                              smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse                                                 smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse_arn                                             smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse_name                                            smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse_description                                     smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse_category                                        smithy.SchemaExtensions
+	eGetManagedNotificationConfigurationResponse_subCategory                                     smithy.SchemaExtensions
+	eGetManagedNotificationEventRequest                                                          smithy.SchemaExtensions
+	eGetManagedNotificationEventRequest_arn                                                      smithy.SchemaExtensions
+	eGetManagedNotificationEventRequest_locale                                                   smithy.SchemaExtensions
+	eGetManagedNotificationEventResponse                                                         smithy.SchemaExtensions
+	eGetManagedNotificationEventResponse_arn                                                     smithy.SchemaExtensions
+	eGetManagedNotificationEventResponse_managedNotificationConfigurationArn                     smithy.SchemaExtensions
+	eGetManagedNotificationEventResponse_creationTime                                            smithy.SchemaExtensions
+	eGetManagedNotificationEventResponse_content                                                 smithy.SchemaExtensions
+	eGetNotificationConfigurationRequest                                                         smithy.SchemaExtensions
+	eGetNotificationConfigurationRequest_arn                                                     smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse                                                        smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_arn                                                    smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_name                                                   smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_description                                            smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_status                                                 smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_creationTime                                           smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_aggregationDuration                                    smithy.SchemaExtensions
+	eGetNotificationConfigurationResponse_subtype                                                smithy.SchemaExtensions
+	eGetNotificationEventRequest                                                                 smithy.SchemaExtensions
+	eGetNotificationEventRequest_arn                                                             smithy.SchemaExtensions
+	eGetNotificationEventRequest_locale                                                          smithy.SchemaExtensions
+	eGetNotificationEventResponse                                                                smithy.SchemaExtensions
+	eGetNotificationEventResponse_arn                                                            smithy.SchemaExtensions
+	eGetNotificationEventResponse_notificationConfigurationArn                                   smithy.SchemaExtensions
+	eGetNotificationEventResponse_creationTime                                                   smithy.SchemaExtensions
+	eGetNotificationEventResponse_content                                                        smithy.SchemaExtensions
+	eGetNotificationsAccessForOrganizationRequest                                                smithy.SchemaExtensions
+	eGetNotificationsAccessForOrganizationResponse                                               smithy.SchemaExtensions
+	eGetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization            smithy.SchemaExtensions
+	eListChannelsRequest                                                                         smithy.SchemaExtensions
+	eListChannelsRequest_notificationConfigurationArn                                            smithy.SchemaExtensions
+	eListChannelsRequest_maxResults                                                              smithy.SchemaExtensions
+	eListChannelsRequest_nextToken                                                               smithy.SchemaExtensions
+	eListChannelsResponse                                                                        smithy.SchemaExtensions
+	eListChannelsResponse_nextToken                                                              smithy.SchemaExtensions
+	eListChannelsResponse_channels                                                               smithy.SchemaExtensions
+	eListEventRulesRequest                                                                       smithy.SchemaExtensions
+	eListEventRulesRequest_notificationConfigurationArn                                          smithy.SchemaExtensions
+	eListEventRulesRequest_maxResults                                                            smithy.SchemaExtensions
+	eListEventRulesRequest_nextToken                                                             smithy.SchemaExtensions
+	eListEventRulesResponse                                                                      smithy.SchemaExtensions
+	eListEventRulesResponse_nextToken                                                            smithy.SchemaExtensions
+	eListEventRulesResponse_eventRules                                                           smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsRequest                                           smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn       smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsRequest_maxResults                                smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsRequest_nextToken                                 smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsResponse                                          smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsResponse_nextToken                                smithy.SchemaExtensions
+	eListManagedNotificationChannelAssociationsResponse_channelAssociations                      smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest                                                   smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn              smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_startTime                                         smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_endTime                                           smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_locale                                            smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_maxResults                                        smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_relatedAccount                                    smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_organizationalUnitId                              smithy.SchemaExtensions
+	eListManagedNotificationChildEventsRequest_nextToken                                         smithy.SchemaExtensions
+	eListManagedNotificationChildEventsResponse                                                  smithy.SchemaExtensions
+	eListManagedNotificationChildEventsResponse_nextToken                                        smithy.SchemaExtensions
+	eListManagedNotificationChildEventsResponse_managedNotificationChildEvents                   smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsRequest                                                smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsRequest_channelIdentifier                              smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsRequest_maxResults                                     smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsRequest_nextToken                                      smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsResponse                                               smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsResponse_nextToken                                     smithy.SchemaExtensions
+	eListManagedNotificationConfigurationsResponse_managedNotificationConfigurations             smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest                                                        smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_startTime                                              smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_endTime                                                smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_locale                                                 smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_source                                                 smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_maxResults                                             smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_nextToken                                              smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_organizationalUnitId                                   smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_relatedAccount                                         smithy.SchemaExtensions
+	eListManagedNotificationEventsRequest_includeSensitiveEvents                                 smithy.SchemaExtensions
+	eListManagedNotificationEventsResponse                                                       smithy.SchemaExtensions
+	eListManagedNotificationEventsResponse_nextToken                                             smithy.SchemaExtensions
+	eListManagedNotificationEventsResponse_managedNotificationEvents                             smithy.SchemaExtensions
+	eListMemberAccountsRequest                                                                   smithy.SchemaExtensions
+	eListMemberAccountsRequest_notificationConfigurationArn                                      smithy.SchemaExtensions
+	eListMemberAccountsRequest_maxResults                                                        smithy.SchemaExtensions
+	eListMemberAccountsRequest_nextToken                                                         smithy.SchemaExtensions
+	eListMemberAccountsRequest_memberAccount                                                     smithy.SchemaExtensions
+	eListMemberAccountsRequest_status                                                            smithy.SchemaExtensions
+	eListMemberAccountsRequest_organizationalUnitId                                              smithy.SchemaExtensions
+	eListMemberAccountsResponse                                                                  smithy.SchemaExtensions
+	eListMemberAccountsResponse_memberAccounts                                                   smithy.SchemaExtensions
+	eListMemberAccountsResponse_nextToken                                                        smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest                                                       smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_eventRuleSource                                       smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_channelArn                                            smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_status                                                smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_subtype                                               smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_maxResults                                            smithy.SchemaExtensions
+	eListNotificationConfigurationsRequest_nextToken                                             smithy.SchemaExtensions
+	eListNotificationConfigurationsResponse                                                      smithy.SchemaExtensions
+	eListNotificationConfigurationsResponse_nextToken                                            smithy.SchemaExtensions
+	eListNotificationConfigurationsResponse_notificationConfigurations                           smithy.SchemaExtensions
+	eListNotificationEventsRequest                                                               smithy.SchemaExtensions
+	eListNotificationEventsRequest_startTime                                                     smithy.SchemaExtensions
+	eListNotificationEventsRequest_endTime                                                       smithy.SchemaExtensions
+	eListNotificationEventsRequest_locale                                                        smithy.SchemaExtensions
+	eListNotificationEventsRequest_source                                                        smithy.SchemaExtensions
+	eListNotificationEventsRequest_includeChildEvents                                            smithy.SchemaExtensions
+	eListNotificationEventsRequest_aggregateNotificationEventArn                                 smithy.SchemaExtensions
+	eListNotificationEventsRequest_maxResults                                                    smithy.SchemaExtensions
+	eListNotificationEventsRequest_nextToken                                                     smithy.SchemaExtensions
+	eListNotificationEventsRequest_organizationalUnitId                                          smithy.SchemaExtensions
+	eListNotificationEventsResponse                                                              smithy.SchemaExtensions
+	eListNotificationEventsResponse_nextToken                                                    smithy.SchemaExtensions
+	eListNotificationEventsResponse_notificationEvents                                           smithy.SchemaExtensions
+	eListNotificationHubsRequest                                                                 smithy.SchemaExtensions
+	eListNotificationHubsRequest_maxResults                                                      smithy.SchemaExtensions
+	eListNotificationHubsRequest_nextToken                                                       smithy.SchemaExtensions
+	eListNotificationHubsResponse                                                                smithy.SchemaExtensions
+	eListNotificationHubsResponse_notificationHubs                                               smithy.SchemaExtensions
+	eListNotificationHubsResponse_nextToken                                                      smithy.SchemaExtensions
+	eListOrganizationalUnitsRequest                                                              smithy.SchemaExtensions
+	eListOrganizationalUnitsRequest_notificationConfigurationArn                                 smithy.SchemaExtensions
+	eListOrganizationalUnitsRequest_maxResults                                                   smithy.SchemaExtensions
+	eListOrganizationalUnitsRequest_nextToken                                                    smithy.SchemaExtensions
+	eListOrganizationalUnitsResponse                                                             smithy.SchemaExtensions
+	eListOrganizationalUnitsResponse_organizationalUnits                                         smithy.SchemaExtensions
+	eListOrganizationalUnitsResponse_nextToken                                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_arn                                                              smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                                            smithy.SchemaExtensions
+	eRegisterNotificationHubRequest                                                              smithy.SchemaExtensions
+	eRegisterNotificationHubRequest_notificationHubRegion                                        smithy.SchemaExtensions
+	eRegisterNotificationHubResponse                                                             smithy.SchemaExtensions
+	eRegisterNotificationHubResponse_notificationHubRegion                                       smithy.SchemaExtensions
+	eRegisterNotificationHubResponse_statusSummary                                               smithy.SchemaExtensions
+	eRegisterNotificationHubResponse_creationTime                                                smithy.SchemaExtensions
+	eRegisterNotificationHubResponse_lastActivationTime                                          smithy.SchemaExtensions
+	eTagResourceRequest                                                                          smithy.SchemaExtensions
+	eTagResourceRequest_arn                                                                      smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                                     smithy.SchemaExtensions
+	eTagResourceResponse                                                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_arn                                                                    smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                                smithy.SchemaExtensions
+	eUntagResourceResponse                                                                       smithy.SchemaExtensions
+	eUpdateEventRuleRequest                                                                      smithy.SchemaExtensions
+	eUpdateEventRuleRequest_arn                                                                  smithy.SchemaExtensions
+	eUpdateEventRuleRequest_eventPattern                                                         smithy.SchemaExtensions
+	eUpdateEventRuleRequest_regions                                                              smithy.SchemaExtensions
+	eUpdateEventRuleResponse                                                                     smithy.SchemaExtensions
+	eUpdateEventRuleResponse_arn                                                                 smithy.SchemaExtensions
+	eUpdateEventRuleResponse_notificationConfigurationArn                                        smithy.SchemaExtensions
+	eUpdateEventRuleResponse_statusSummaryByRegion                                               smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociationRequest                                          smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn      smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociationRequest_channelIdentifier                        smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed              smithy.SchemaExtensions
+	eUpdateManagedNotificationChannelAssociationResponse                                         smithy.SchemaExtensions
+	eUpdateNotificationConfigurationRequest                                                      smithy.SchemaExtensions
+	eUpdateNotificationConfigurationRequest_arn                                                  smithy.SchemaExtensions
+	eUpdateNotificationConfigurationRequest_name                                                 smithy.SchemaExtensions
+	eUpdateNotificationConfigurationRequest_description                                          smithy.SchemaExtensions
+	eUpdateNotificationConfigurationRequest_aggregationDuration                                  smithy.SchemaExtensions
+	eUpdateNotificationConfigurationResponse                                                     smithy.SchemaExtensions
+	eUpdateNotificationConfigurationResponse_arn                                                 smithy.SchemaExtensions
+)
+
+var (
+	iAssociateChannel                                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateChannel"}
+	iAssociateManagedNotificationAccountContact               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAccountContact"}
+	iAssociateManagedNotificationAdditionalChannel            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAdditionalChannel"}
+	iAssociateOrganizationalUnit                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateOrganizationalUnit"}
+	iCreateEventRule                                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateEventRule"}
+	iCreateNotificationConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateNotificationConfiguration"}
+	iDeleteEventRule                                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteEventRule"}
+	iDeleteNotificationConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteNotificationConfiguration"}
+	iDeregisterNotificationHub                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeregisterNotificationHub"}
+	iDisableNotificationsAccessForOrganization                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisableNotificationsAccessForOrganization"}
+	iDisassociateChannel                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateChannel"}
+	iDisassociateManagedNotificationAccountContact            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAccountContact"}
+	iDisassociateManagedNotificationAdditionalChannel         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAdditionalChannel"}
+	iDisassociateOrganizationalUnit                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateOrganizationalUnit"}
+	iEnableNotificationsAccessForOrganization                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EnableNotificationsAccessForOrganization"}
+	iGetEventRule                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetEventRule"}
+	iGetManagedNotificationChildEvent                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationChildEvent"}
+	iGetManagedNotificationConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationConfiguration"}
+	iGetManagedNotificationEvent                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationEvent"}
+	iGetNotificationConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationConfiguration"}
+	iGetNotificationEvent                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationEvent"}
+	iGetNotificationsAccessForOrganization                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationsAccessForOrganization"}
+	iListChannels                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListChannels"}
+	iListEventRules                                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListEventRules"}
+	iListManagedNotificationChannelAssociations               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChannelAssociations"}
+	iListManagedNotificationChildEvents                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChildEvents"}
+	iListManagedNotificationConfigurations                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationConfigurations"}
+	iListManagedNotificationEvents                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationEvents"}
+	iListMemberAccounts                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListMemberAccounts"}
+	iListNotificationConfigurations                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationConfigurations"}
+	iListNotificationEvents                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationEvents"}
+	iListNotificationHubs                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationHubs"}
+	iListOrganizationalUnits                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListOrganizationalUnits"}
+	iListTagsForResource                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListTagsForResource"}
+	iRegisterNotificationHub                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "RegisterNotificationHub"}
+	iTagResource                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagResource"}
+	iUntagResource                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UntagResource"}
+	iUpdateEventRule                                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateEventRule"}
+	iUpdateManagedNotificationChannelAssociation              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateManagedNotificationChannelAssociation"}
+	iUpdateNotificationConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateNotificationConfiguration"}
+	i_Notifications                                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Notifications"}
+	iAccessDeniedException                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AccessDeniedException"}
+	iAccessStatus                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AccessStatus"}
+	i_AccountContactType                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AccountContactType"}
+	i_AccountId                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AccountId"}
+	i_AggregatedNotificationRegions                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregatedNotificationRegions"}
+	iAggregationDetail                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationDetail"}
+	i_AggregationDuration                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationDuration"}
+	i_AggregationEventType                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationEventType"}
+	iAggregationKey                                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationKey"}
+	i_AggregationKeys                                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationKeys"}
+	iAggregationSummary                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AggregationSummary"}
+	i_Arn                                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Arn"}
+	i_AttachmentContentType                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AttachmentContentType"}
+	i_AttachmentDisplayName                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AttachmentDisplayName"}
+	i_ChannelArn                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ChannelArn"}
+	i_ChannelAssociationOverrideOption                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ChannelAssociationOverrideOption"}
+	i_ChannelIdentifier                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ChannelIdentifier"}
+	i_Channels                                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Channels"}
+	iChannelType                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ChannelType"}
+	iConflictException                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ConflictException"}
+	i_CreationTime                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreationTime"}
+	iDimension                                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Dimension"}
+	i_Dimensions                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Dimensions"}
+	i_ErrorMessage                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ErrorMessage"}
+	i_EventRuleArn                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleArn"}
+	i_EventRuleEventPattern                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleEventPattern"}
+	i_EventRules                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRules"}
+	i_EventRuleStatus                                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleStatus"}
+	i_EventRuleStatusReason                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleStatusReason"}
+	iEventRuleStatusSummary                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleStatusSummary"}
+	iEventRuleStructure                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventRuleStructure"}
+	i_EventStatus                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventStatus"}
+	i_EventType                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EventType"}
+	iInternalServerException                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "InternalServerException"}
+	i_LastActivationTime                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "LastActivationTime"}
+	i_LocaleCode                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "LocaleCode"}
+	i_ManagedNotificationChannelAssociations                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChannelAssociations"}
+	iManagedNotificationChannelAssociationSummary             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChannelAssociationSummary"}
+	i_ManagedNotificationChannelIdentifier                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChannelIdentifier"}
+	iManagedNotificationChildEvent                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChildEvent"}
+	i_ManagedNotificationChildEventArn                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChildEventArn"}
+	iManagedNotificationChildEventOverview                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChildEventOverview"}
+	i_ManagedNotificationChildEvents                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChildEvents"}
+	iManagedNotificationChildEventSummary                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationChildEventSummary"}
+	i_ManagedNotificationConfigurationDescription             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationConfigurationDescription"}
+	i_ManagedNotificationConfigurationName                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationConfigurationName"}
+	i_ManagedNotificationConfigurationOsArn                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationConfigurationOsArn"}
+	i_ManagedNotificationConfigurations                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationConfigurations"}
+	iManagedNotificationConfigurationStructure                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationConfigurationStructure"}
+	iManagedNotificationEvent                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationEvent"}
+	i_ManagedNotificationEventArn                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationEventArn"}
+	iManagedNotificationEventOverview                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationEventOverview"}
+	i_ManagedNotificationEvents                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationEvents"}
+	iManagedNotificationEventSummary                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedNotificationEventSummary"}
+	i_ManagedRuleArn                                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedRuleArn"}
+	i_ManagedRuleArns                                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedRuleArns"}
+	iManagedSourceEventMetadataSummary                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ManagedSourceEventMetadataSummary"}
+	i_Media                                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Media"}
+	iMediaElement                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MediaElement"}
+	i_MediaElementType                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MediaElementType"}
+	i_MediaId                                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MediaId"}
+	iMemberAccount                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MemberAccount"}
+	i_MemberAccountNotificationConfigurationStatus            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MemberAccountNotificationConfigurationStatus"}
+	i_MemberAccounts                                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MemberAccounts"}
+	iMessageComponents                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MessageComponents"}
+	iMessageComponentsSummary                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "MessageComponentsSummary"}
+	i_NextToken                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NextToken"}
+	i_NotificationConfigurationArn                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationArn"}
+	i_NotificationConfigurationDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationDescription"}
+	i_NotificationConfigurationName                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationName"}
+	i_NotificationConfigurations                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurations"}
+	i_NotificationConfigurationStatus                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationStatus"}
+	iNotificationConfigurationStructure                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationStructure"}
+	i_NotificationConfigurationSubtype                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationConfigurationSubtype"}
+	i_NotificationEventArn                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventArn"}
+	iNotificationEventAttachment                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventAttachment"}
+	i_NotificationEventAttachmentList                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventAttachmentList"}
+	i_NotificationEventId                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventId"}
+	iNotificationEventOverview                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventOverview"}
+	i_NotificationEvents                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEvents"}
+	iNotificationEventSchema                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventSchema"}
+	iNotificationEventSummary                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationEventSummary"}
+	iNotificationHubOverview                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationHubOverview"}
+	i_NotificationHubs                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationHubs"}
+	i_NotificationHubStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationHubStatus"}
+	i_NotificationHubStatusReason                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationHubStatusReason"}
+	iNotificationHubStatusSummary                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationHubStatusSummary"}
+	iNotificationsAccessForOrganization                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationsAccessForOrganization"}
+	i_NotificationType                                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "NotificationType"}
+	i_OrganizationalUnitId                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "OrganizationalUnitId"}
+	i_OrganizationalUnits                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "OrganizationalUnits"}
+	i_QuotaCode                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "QuotaCode"}
+	i_Region                                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Region"}
+	i_Regions                                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Regions"}
+	iResource                                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Resource"}
+	i_ResourceId                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ResourceId"}
+	iResourceNotFoundException                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ResourceNotFoundException"}
+	i_Resources                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Resources"}
+	i_ResourceType                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ResourceType"}
+	i_SampleAggregationDimensionValues                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SampleAggregationDimensionValues"}
+	i_SchemaVersion                                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SchemaVersion"}
+	i_SensitiveUrl                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SensitiveUrl"}
+	i_ServiceCode                                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ServiceCode"}
+	iServiceQuotaExceededException                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ServiceQuotaExceededException"}
+	i_Source                                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Source"}
+	iSourceEventMetadata                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SourceEventMetadata"}
+	iSourceEventMetadataSummary                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SourceEventMetadataSummary"}
+	i_StatusSummaryByRegion                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "StatusSummaryByRegion"}
+	iSummarizationDimensionDetail                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SummarizationDimensionDetail"}
+	i_SummarizationDimensionDetails                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SummarizationDimensionDetails"}
+	iSummarizationDimensionOverview                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SummarizationDimensionOverview"}
+	i_SummarizationDimensionOverviews                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "SummarizationDimensionOverviews"}
+	i_TagKey                                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagKey"}
+	i_TagKeys                                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagKeys"}
+	i_TagMap                                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagMap"}
+	i_Tags                                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Tags"}
+	i_TagValue                                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagValue"}
+	i_TextByLocale                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextByLocale"}
+	i_TextPartId                                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextPartId"}
+	i_TextPartReference                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextPartReference"}
+	i_TextParts                                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextParts"}
+	i_TextPartType                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextPartType"}
+	iTextPartValue                                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TextPartValue"}
+	iThrottlingException                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ThrottlingException"}
+	i_Url                                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "Url"}
+	iValidationException                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ValidationException"}
+	iValidationExceptionField                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ValidationExceptionReason"}
+	iAssociateChannelRequest                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateChannelRequest"}
+	iAssociateChannelResponse                                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateChannelResponse"}
+	iAssociateManagedNotificationAccountContactRequest        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAccountContactRequest"}
+	iAssociateManagedNotificationAccountContactResponse       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAccountContactResponse"}
+	iAssociateManagedNotificationAdditionalChannelRequest     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAdditionalChannelRequest"}
+	iAssociateManagedNotificationAdditionalChannelResponse    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateManagedNotificationAdditionalChannelResponse"}
+	iAssociateOrganizationalUnitRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateOrganizationalUnitRequest"}
+	iAssociateOrganizationalUnitResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "AssociateOrganizationalUnitResponse"}
+	iCreateEventRuleRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateEventRuleRequest"}
+	iCreateEventRuleResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateEventRuleResponse"}
+	iCreateNotificationConfigurationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateNotificationConfigurationRequest"}
+	iCreateNotificationConfigurationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "CreateNotificationConfigurationResponse"}
+	iDeleteEventRuleRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteEventRuleRequest"}
+	iDeleteEventRuleResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteEventRuleResponse"}
+	iDeleteNotificationConfigurationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteNotificationConfigurationRequest"}
+	iDeleteNotificationConfigurationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeleteNotificationConfigurationResponse"}
+	iDeregisterNotificationHubRequest                         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeregisterNotificationHubRequest"}
+	iDeregisterNotificationHubResponse                        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DeregisterNotificationHubResponse"}
+	iDisableNotificationsAccessForOrganizationRequest         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisableNotificationsAccessForOrganizationRequest"}
+	iDisableNotificationsAccessForOrganizationResponse        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisableNotificationsAccessForOrganizationResponse"}
+	iDisassociateChannelRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateChannelRequest"}
+	iDisassociateChannelResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateChannelResponse"}
+	iDisassociateManagedNotificationAccountContactRequest     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAccountContactRequest"}
+	iDisassociateManagedNotificationAccountContactResponse    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAccountContactResponse"}
+	iDisassociateManagedNotificationAdditionalChannelRequest  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAdditionalChannelRequest"}
+	iDisassociateManagedNotificationAdditionalChannelResponse = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateManagedNotificationAdditionalChannelResponse"}
+	iDisassociateOrganizationalUnitRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateOrganizationalUnitRequest"}
+	iDisassociateOrganizationalUnitResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "DisassociateOrganizationalUnitResponse"}
+	iEnableNotificationsAccessForOrganizationRequest          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EnableNotificationsAccessForOrganizationRequest"}
+	iEnableNotificationsAccessForOrganizationResponse         = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "EnableNotificationsAccessForOrganizationResponse"}
+	iGetEventRuleRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetEventRuleRequest"}
+	iGetEventRuleResponse                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetEventRuleResponse"}
+	iGetManagedNotificationChildEventRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationChildEventRequest"}
+	iGetManagedNotificationChildEventResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationChildEventResponse"}
+	iGetManagedNotificationConfigurationRequest               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationConfigurationRequest"}
+	iGetManagedNotificationConfigurationResponse              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationConfigurationResponse"}
+	iGetManagedNotificationEventRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationEventRequest"}
+	iGetManagedNotificationEventResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetManagedNotificationEventResponse"}
+	iGetNotificationConfigurationRequest                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationConfigurationRequest"}
+	iGetNotificationConfigurationResponse                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationConfigurationResponse"}
+	iGetNotificationEventRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationEventRequest"}
+	iGetNotificationEventResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationEventResponse"}
+	iGetNotificationsAccessForOrganizationRequest             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationsAccessForOrganizationRequest"}
+	iGetNotificationsAccessForOrganizationResponse            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "GetNotificationsAccessForOrganizationResponse"}
+	iListChannelsRequest                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListChannelsRequest"}
+	iListChannelsResponse                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListChannelsResponse"}
+	iListEventRulesRequest                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListEventRulesRequest"}
+	iListEventRulesResponse                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListEventRulesResponse"}
+	iListManagedNotificationChannelAssociationsRequest        = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChannelAssociationsRequest"}
+	iListManagedNotificationChannelAssociationsResponse       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChannelAssociationsResponse"}
+	iListManagedNotificationChildEventsRequest                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChildEventsRequest"}
+	iListManagedNotificationChildEventsResponse               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationChildEventsResponse"}
+	iListManagedNotificationConfigurationsRequest             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationConfigurationsRequest"}
+	iListManagedNotificationConfigurationsResponse            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationConfigurationsResponse"}
+	iListManagedNotificationEventsRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationEventsRequest"}
+	iListManagedNotificationEventsResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListManagedNotificationEventsResponse"}
+	iListMemberAccountsRequest                                = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListMemberAccountsRequest"}
+	iListMemberAccountsResponse                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListMemberAccountsResponse"}
+	iListNotificationConfigurationsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationConfigurationsRequest"}
+	iListNotificationConfigurationsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationConfigurationsResponse"}
+	iListNotificationEventsRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationEventsRequest"}
+	iListNotificationEventsResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationEventsResponse"}
+	iListNotificationHubsRequest                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationHubsRequest"}
+	iListNotificationHubsResponse                             = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListNotificationHubsResponse"}
+	iListOrganizationalUnitsRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListOrganizationalUnitsRequest"}
+	iListOrganizationalUnitsResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListOrganizationalUnitsResponse"}
+	iListTagsForResourceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "ListTagsForResourceResponse"}
+	iRegisterNotificationHubRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "RegisterNotificationHubRequest"}
+	iRegisterNotificationHubResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "RegisterNotificationHubResponse"}
+	iTagResourceRequest                                       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagResourceRequest"}
+	iTagResourceResponse                                      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                     = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                    = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UntagResourceResponse"}
+	iUpdateEventRuleRequest                                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateEventRuleRequest"}
+	iUpdateEventRuleResponse                                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateEventRuleResponse"}
+	iUpdateManagedNotificationChannelAssociationRequest       = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateManagedNotificationChannelAssociationRequest"}
+	iUpdateManagedNotificationChannelAssociationResponse      = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateManagedNotificationChannelAssociationResponse"}
+	iUpdateNotificationConfigurationRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateNotificationConfigurationRequest"}
+	iUpdateNotificationConfigurationResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.notifications", Name: "UpdateNotificationConfigurationResponse"}
+	pUnit                                                     = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pString                                                   = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+	pTimestamp                                                = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/associate/{arn}",
-	Code: 201})
-
-var AssociateManagedNotificationAccountContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAccountContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/contacts/associate-managed-notification/{contactIdentifier}",
-	Code: 201})
-
-var AssociateManagedNotificationAdditionalChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAdditionalChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/associate-managed-notification/{channelArn}",
-	Code: 201})
-
-var AssociateOrganizationalUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateOrganizationalUnit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/organizational-units/associate/{organizationalUnitId}",
-	Code: 201})
-
-var CreateEventRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateEventRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/event-rules",
-	Code: 201})
-
-var CreateNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/notification-configurations",
-	Code: 201})
-
-var DeleteEventRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteEventRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/event-rules/{arn}",
-	Code: 200})
-
-var DeleteNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/notification-configurations/{arn}",
-	Code: 200})
-
-var DeregisterNotificationHub = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeregisterNotificationHub",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/notification-hubs/{notificationHubRegion}",
-	Code: 200})
-
-var DisableNotificationsAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisableNotificationsAccessForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/organization/access",
-	Code: 200})
-
-var DisassociateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channels/disassociate/{arn}",
-	Code: 200})
-
-var DisassociateManagedNotificationAccountContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAccountContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/contacts/disassociate-managed-notification/{contactIdentifier}",
-	Code: 200})
-
-var DisassociateManagedNotificationAdditionalChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAdditionalChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/disassociate-managed-notification/{channelArn}",
-	Code: 200})
-
-var DisassociateOrganizationalUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateOrganizationalUnit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/organizational-units/disassociate/{organizationalUnitId}",
-	Code: 200})
-
-var EnableNotificationsAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EnableNotificationsAccessForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/organization/access",
-	Code: 200})
-
-var GetEventRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetEventRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/event-rules/{arn}",
-	Code: 200})
-
-var GetManagedNotificationChildEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationChildEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-notification-child-events/{arn}",
-	Code: 200})
-
-var GetManagedNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-notification-configurations/{arn}",
-	Code: 200})
-
-var GetManagedNotificationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-notification-events/{arn}",
-	Code: 200})
-
-var GetNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notification-configurations/{arn}",
-	Code: 200})
-
-var GetNotificationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notification-events/{arn}",
-	Code: 200})
-
-var GetNotificationsAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationsAccessForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/organization/access",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels",
-	Code: 200})
-
-var ListEventRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListEventRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/event-rules",
-	Code: 200})
-
-var ListManagedNotificationChannelAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChannelAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channels/list-managed-notification-channel-associations",
-	Code: 200})
-
-var ListManagedNotificationChildEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChildEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/list-managed-notification-child-events/{aggregateManagedNotificationEventArn}",
-	Code: 200})
-
-var ListManagedNotificationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-notification-configurations",
-	Code: 200})
-
-var ListManagedNotificationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/managed-notification-events",
-	Code: 200})
-
-var ListMemberAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListMemberAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/list-member-accounts",
-	Code: 200})
-
-var ListNotificationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notification-configurations",
-	Code: 200})
-
-var ListNotificationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notification-events",
-	Code: 200})
-
-var ListNotificationHubs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationHubs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/notification-hubs",
-	Code: 200})
-
-var ListOrganizationalUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListOrganizationalUnits",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/organizational-units",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var RegisterNotificationHub = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "RegisterNotificationHub",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/notification-hubs",
-	Code: 201})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UpdateEventRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateEventRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/event-rules/{arn}",
-	Code: 200})
-
-var UpdateManagedNotificationChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateManagedNotificationChannelAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channels/update-managed-notification-channel-association",
-	Code: 200})
-
-var UpdateNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/notification-configurations/{arn}",
-	Code: 200})
-
-var _Notifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Notifications",
-}, smithy.ShapeTypeService, 0)
-
-var Notifications = smithy.NewServiceSchema(_Notifications, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AccessStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AccessStatus_ENABLED *smithy.Schema
-
-var AccessStatus_DISABLED *smithy.Schema
-
-var AccessStatus_PENDING *smithy.Schema
-
-var AccessStatus_FAILED *smithy.Schema
-
-var _AccountContactType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AccountContactType",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AggregatedNotificationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregatedNotificationRegions",
-}, smithy.ShapeTypeList, 1)
-var _AggregatedNotificationRegions_member *smithy.Schema
-
-var AggregationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationDetail",
-}, smithy.ShapeTypeStructure, 1)
-var AggregationDetail_summarizationDimensions *smithy.Schema
-
-var _AggregationDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationDuration",
-}, smithy.ShapeTypeString, 0)
-
-var _AggregationEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationEventType",
-}, smithy.ShapeTypeString, 0)
-
-var AggregationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationKey",
-}, smithy.ShapeTypeStructure, 2)
-var AggregationKey_name *smithy.Schema
-
-var AggregationKey_value *smithy.Schema
-
-var _AggregationKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationKeys",
-}, smithy.ShapeTypeList, 1)
-var _AggregationKeys_member *smithy.Schema
-
-var AggregationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AggregationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AggregationSummary_eventCount *smithy.Schema
-
-var AggregationSummary_aggregatedBy *smithy.Schema
-
-var AggregationSummary_aggregatedAccounts *smithy.Schema
-
-var AggregationSummary_aggregatedRegions *smithy.Schema
-
-var AggregationSummary_aggregatedOrganizationalUnits *smithy.Schema
-
-var AggregationSummary_additionalSummarizationDimensions *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttachmentContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AttachmentContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _AttachmentDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AttachmentDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ChannelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelAssociationOverrideOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ChannelAssociationOverrideOption",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ChannelIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _Channels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Channels",
-}, smithy.ShapeTypeList, 1)
-var _Channels_member *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelType_MOBILE *smithy.Schema
-
-var ChannelType_CHATBOT *smithy.Schema
-
-var ChannelType_EMAIL *smithy.Schema
-
-var ChannelType_ACCOUNT_CONTACT *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var _CreationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreationTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 2)
-var Dimension_name *smithy.Schema
-
-var Dimension_value *smithy.Schema
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventRuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EventRuleEventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleEventPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _EventRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRules",
-}, smithy.ShapeTypeList, 1)
-var _EventRules_member *smithy.Schema
-
-var _EventRuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _EventRuleStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var EventRuleStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EventRuleStatusSummary_status *smithy.Schema
-
-var EventRuleStatusSummary_reason *smithy.Schema
-
-var EventRuleStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventRuleStructure",
-}, smithy.ShapeTypeStructure, 9)
-var EventRuleStructure_arn *smithy.Schema
-
-var EventRuleStructure_notificationConfigurationArn *smithy.Schema
-
-var EventRuleStructure_creationTime *smithy.Schema
-
-var EventRuleStructure_source *smithy.Schema
-
-var EventRuleStructure_eventType *smithy.Schema
-
-var EventRuleStructure_eventPattern *smithy.Schema
-
-var EventRuleStructure_regions *smithy.Schema
-
-var EventRuleStructure_managedRules *smithy.Schema
-
-var EventRuleStructure_statusSummaryByRegion *smithy.Schema
-
-var _EventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EventType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _LastActivationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "LastActivationTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _LocaleCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "LocaleCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedNotificationChannelAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChannelAssociations",
-}, smithy.ShapeTypeList, 1)
-var _ManagedNotificationChannelAssociations_member *smithy.Schema
-
-var ManagedNotificationChannelAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChannelAssociationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ManagedNotificationChannelAssociationSummary_channelIdentifier *smithy.Schema
-
-var ManagedNotificationChannelAssociationSummary_channelType *smithy.Schema
-
-var ManagedNotificationChannelAssociationSummary_overrideOption *smithy.Schema
-
-var ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed *smithy.Schema
-
-var _ManagedNotificationChannelIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChannelIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedNotificationChildEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChildEvent",
-}, smithy.ShapeTypeStructure, 13)
-var ManagedNotificationChildEvent_schemaVersion *smithy.Schema
-
-var ManagedNotificationChildEvent_id *smithy.Schema
-
-var ManagedNotificationChildEvent_messageComponents *smithy.Schema
-
-var ManagedNotificationChildEvent_sourceEventDetailUrl *smithy.Schema
-
-var ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText *smithy.Schema
-
-var ManagedNotificationChildEvent_notificationType *smithy.Schema
-
-var ManagedNotificationChildEvent_eventStatus *smithy.Schema
-
-var ManagedNotificationChildEvent_aggregateManagedNotificationEventArn *smithy.Schema
-
-var ManagedNotificationChildEvent_startTime *smithy.Schema
-
-var ManagedNotificationChildEvent_endTime *smithy.Schema
-
-var ManagedNotificationChildEvent_textParts *smithy.Schema
-
-var ManagedNotificationChildEvent_organizationalUnitId *smithy.Schema
-
-var ManagedNotificationChildEvent_aggregationDetail *smithy.Schema
-
-var _ManagedNotificationChildEventArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChildEventArn",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedNotificationChildEventOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChildEventOverview",
-}, smithy.ShapeTypeStructure, 7)
-var ManagedNotificationChildEventOverview_arn *smithy.Schema
-
-var ManagedNotificationChildEventOverview_managedNotificationConfigurationArn *smithy.Schema
-
-var ManagedNotificationChildEventOverview_relatedAccount *smithy.Schema
-
-var ManagedNotificationChildEventOverview_creationTime *smithy.Schema
-
-var ManagedNotificationChildEventOverview_childEvent *smithy.Schema
-
-var ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn *smithy.Schema
-
-var ManagedNotificationChildEventOverview_organizationalUnitId *smithy.Schema
-
-var _ManagedNotificationChildEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChildEvents",
-}, smithy.ShapeTypeList, 1)
-var _ManagedNotificationChildEvents_member *smithy.Schema
-
-var ManagedNotificationChildEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationChildEventSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ManagedNotificationChildEventSummary_schemaVersion *smithy.Schema
-
-var ManagedNotificationChildEventSummary_sourceEventMetadata *smithy.Schema
-
-var ManagedNotificationChildEventSummary_messageComponents *smithy.Schema
-
-var ManagedNotificationChildEventSummary_aggregationDetail *smithy.Schema
-
-var ManagedNotificationChildEventSummary_eventStatus *smithy.Schema
-
-var ManagedNotificationChildEventSummary_notificationType *smithy.Schema
-
-var _ManagedNotificationConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationConfigurationDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedNotificationConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedNotificationConfigurationOsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationConfigurationOsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedNotificationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _ManagedNotificationConfigurations_member *smithy.Schema
-
-var ManagedNotificationConfigurationStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationConfigurationStructure",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedNotificationConfigurationStructure_arn *smithy.Schema
-
-var ManagedNotificationConfigurationStructure_name *smithy.Schema
-
-var ManagedNotificationConfigurationStructure_description *smithy.Schema
-
-var ManagedNotificationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationEvent",
-}, smithy.ShapeTypeStructure, 14)
-var ManagedNotificationEvent_schemaVersion *smithy.Schema
-
-var ManagedNotificationEvent_id *smithy.Schema
-
-var ManagedNotificationEvent_messageComponents *smithy.Schema
-
-var ManagedNotificationEvent_sourceEventDetailUrl *smithy.Schema
-
-var ManagedNotificationEvent_sourceEventDetailUrlDisplayText *smithy.Schema
-
-var ManagedNotificationEvent_notificationType *smithy.Schema
-
-var ManagedNotificationEvent_eventStatus *smithy.Schema
-
-var ManagedNotificationEvent_aggregationEventType *smithy.Schema
-
-var ManagedNotificationEvent_aggregationSummary *smithy.Schema
-
-var ManagedNotificationEvent_startTime *smithy.Schema
-
-var ManagedNotificationEvent_endTime *smithy.Schema
-
-var ManagedNotificationEvent_textParts *smithy.Schema
-
-var ManagedNotificationEvent_organizationalUnitId *smithy.Schema
-
-var ManagedNotificationEvent_attachments *smithy.Schema
-
-var _ManagedNotificationEventArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationEventArn",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedNotificationEventOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationEventOverview",
-}, smithy.ShapeTypeStructure, 9)
-var ManagedNotificationEventOverview_arn *smithy.Schema
-
-var ManagedNotificationEventOverview_managedNotificationConfigurationArn *smithy.Schema
-
-var ManagedNotificationEventOverview_relatedAccount *smithy.Schema
-
-var ManagedNotificationEventOverview_creationTime *smithy.Schema
-
-var ManagedNotificationEventOverview_notificationEvent *smithy.Schema
-
-var ManagedNotificationEventOverview_aggregationEventType *smithy.Schema
-
-var ManagedNotificationEventOverview_organizationalUnitId *smithy.Schema
-
-var ManagedNotificationEventOverview_aggregationSummary *smithy.Schema
-
-var ManagedNotificationEventOverview_aggregatedNotificationRegions *smithy.Schema
-
-var _ManagedNotificationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationEvents",
-}, smithy.ShapeTypeList, 1)
-var _ManagedNotificationEvents_member *smithy.Schema
-
-var ManagedNotificationEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedNotificationEventSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ManagedNotificationEventSummary_schemaVersion *smithy.Schema
-
-var ManagedNotificationEventSummary_sourceEventMetadata *smithy.Schema
-
-var ManagedNotificationEventSummary_messageComponents *smithy.Schema
-
-var ManagedNotificationEventSummary_eventStatus *smithy.Schema
-
-var ManagedNotificationEventSummary_notificationType *smithy.Schema
-
-var _ManagedRuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedRuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedRuleArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedRuleArns",
-}, smithy.ShapeTypeList, 1)
-var _ManagedRuleArns_member *smithy.Schema
-
-var ManagedSourceEventMetadataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ManagedSourceEventMetadataSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedSourceEventMetadataSummary_eventOriginRegion *smithy.Schema
-
-var ManagedSourceEventMetadataSummary_source *smithy.Schema
-
-var ManagedSourceEventMetadataSummary_eventType *smithy.Schema
-
-var _Media = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Media",
-}, smithy.ShapeTypeList, 1)
-var _Media_member *smithy.Schema
-
-var MediaElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MediaElement",
-}, smithy.ShapeTypeStructure, 4)
-var MediaElement_mediaId *smithy.Schema
-
-var MediaElement_type *smithy.Schema
-
-var MediaElement_url *smithy.Schema
-
-var MediaElement_caption *smithy.Schema
-
-var _MediaElementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MediaElementType",
-}, smithy.ShapeTypeString, 0)
-
-var _MediaId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MediaId",
-}, smithy.ShapeTypeString, 0)
-
-var MemberAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MemberAccount",
-}, smithy.ShapeTypeStructure, 5)
-var MemberAccount_notificationConfigurationArn *smithy.Schema
-
-var MemberAccount_accountId *smithy.Schema
-
-var MemberAccount_status *smithy.Schema
-
-var MemberAccount_statusReason *smithy.Schema
-
-var MemberAccount_organizationalUnitId *smithy.Schema
-
-var _MemberAccountNotificationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MemberAccountNotificationConfigurationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _MemberAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MemberAccounts",
-}, smithy.ShapeTypeList, 1)
-var _MemberAccounts_member *smithy.Schema
-
-var MessageComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MessageComponents",
-}, smithy.ShapeTypeStructure, 5)
-var MessageComponents_headline *smithy.Schema
-
-var MessageComponents_paragraphSummary *smithy.Schema
-
-var MessageComponents_completeDescription *smithy.Schema
-
-var MessageComponents_markupDescription *smithy.Schema
-
-var MessageComponents_dimensions *smithy.Schema
-
-var MessageComponentsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "MessageComponentsSummary",
-}, smithy.ShapeTypeStructure, 1)
-var MessageComponentsSummary_headline *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _NotificationConfigurations_member *smithy.Schema
-
-var _NotificationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationConfigurationStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationStructure",
-}, smithy.ShapeTypeStructure, 7)
-var NotificationConfigurationStructure_arn *smithy.Schema
-
-var NotificationConfigurationStructure_name *smithy.Schema
-
-var NotificationConfigurationStructure_description *smithy.Schema
-
-var NotificationConfigurationStructure_status *smithy.Schema
-
-var NotificationConfigurationStructure_creationTime *smithy.Schema
-
-var NotificationConfigurationStructure_aggregationDuration *smithy.Schema
-
-var NotificationConfigurationStructure_subtype *smithy.Schema
-
-var _NotificationConfigurationSubtype = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationConfigurationSubtype",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationEventArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventArn",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationEventAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventAttachment",
-}, smithy.ShapeTypeStructure, 3)
-var NotificationEventAttachment_displayName *smithy.Schema
-
-var NotificationEventAttachment_attachmentDownloadUrl *smithy.Schema
-
-var NotificationEventAttachment_contentType *smithy.Schema
-
-var _NotificationEventAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _NotificationEventAttachmentList_member *smithy.Schema
-
-var _NotificationEventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventId",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationEventOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventOverview",
-}, smithy.ShapeTypeStructure, 9)
-var NotificationEventOverview_arn *smithy.Schema
-
-var NotificationEventOverview_notificationConfigurationArn *smithy.Schema
-
-var NotificationEventOverview_relatedAccount *smithy.Schema
-
-var NotificationEventOverview_creationTime *smithy.Schema
-
-var NotificationEventOverview_notificationEvent *smithy.Schema
-
-var NotificationEventOverview_aggregationEventType *smithy.Schema
-
-var NotificationEventOverview_aggregateNotificationEventArn *smithy.Schema
-
-var NotificationEventOverview_aggregationSummary *smithy.Schema
-
-var NotificationEventOverview_organizationalUnitId *smithy.Schema
-
-var _NotificationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEvents",
-}, smithy.ShapeTypeList, 1)
-var _NotificationEvents_member *smithy.Schema
-
-var NotificationEventSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventSchema",
-}, smithy.ShapeTypeStructure, 16)
-var NotificationEventSchema_schemaVersion *smithy.Schema
-
-var NotificationEventSchema_id *smithy.Schema
-
-var NotificationEventSchema_sourceEventMetadata *smithy.Schema
-
-var NotificationEventSchema_messageComponents *smithy.Schema
-
-var NotificationEventSchema_sourceEventDetailUrl *smithy.Schema
-
-var NotificationEventSchema_sourceEventDetailUrlDisplayText *smithy.Schema
-
-var NotificationEventSchema_notificationType *smithy.Schema
-
-var NotificationEventSchema_eventStatus *smithy.Schema
-
-var NotificationEventSchema_aggregationEventType *smithy.Schema
-
-var NotificationEventSchema_aggregateNotificationEventArn *smithy.Schema
-
-var NotificationEventSchema_aggregationSummary *smithy.Schema
-
-var NotificationEventSchema_startTime *smithy.Schema
-
-var NotificationEventSchema_endTime *smithy.Schema
-
-var NotificationEventSchema_textParts *smithy.Schema
-
-var NotificationEventSchema_media *smithy.Schema
-
-var NotificationEventSchema_organizationalUnitId *smithy.Schema
-
-var NotificationEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationEventSummary",
-}, smithy.ShapeTypeStructure, 5)
-var NotificationEventSummary_schemaVersion *smithy.Schema
-
-var NotificationEventSummary_sourceEventMetadata *smithy.Schema
-
-var NotificationEventSummary_messageComponents *smithy.Schema
-
-var NotificationEventSummary_eventStatus *smithy.Schema
-
-var NotificationEventSummary_notificationType *smithy.Schema
-
-var NotificationHubOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationHubOverview",
-}, smithy.ShapeTypeStructure, 4)
-var NotificationHubOverview_notificationHubRegion *smithy.Schema
-
-var NotificationHubOverview_statusSummary *smithy.Schema
-
-var NotificationHubOverview_creationTime *smithy.Schema
-
-var NotificationHubOverview_lastActivationTime *smithy.Schema
-
-var _NotificationHubs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationHubs",
-}, smithy.ShapeTypeList, 1)
-var _NotificationHubs_member *smithy.Schema
-
-var _NotificationHubStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationHubStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationHubStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationHubStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationHubStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationHubStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationHubStatusSummary_status *smithy.Schema
-
-var NotificationHubStatusSummary_reason *smithy.Schema
-
-var NotificationsAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationsAccessForOrganization",
-}, smithy.ShapeTypeStructure, 1)
-var NotificationsAccessForOrganization_accessStatus *smithy.Schema
-
-var _NotificationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "NotificationType",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationalUnitId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "OrganizationalUnitId",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationalUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "OrganizationalUnits",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationalUnits_member *smithy.Schema
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Regions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Regions",
-}, smithy.ShapeTypeList, 1)
-var _Regions_member *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
-var Resource_id *smithy.Schema
-
-var Resource_arn *smithy.Schema
-
-var Resource_detailUrl *smithy.Schema
-
-var Resource_tags *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _SampleAggregationDimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SampleAggregationDimensionValues",
-}, smithy.ShapeTypeList, 1)
-var _SampleAggregationDimensionValues_member *smithy.Schema
-
-var _SchemaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SchemaVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SensitiveUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Source",
-}, smithy.ShapeTypeString, 0)
-
-var SourceEventMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SourceEventMetadata",
-}, smithy.ShapeTypeStructure, 8)
-var SourceEventMetadata_eventTypeVersion *smithy.Schema
-
-var SourceEventMetadata_sourceEventId *smithy.Schema
-
-var SourceEventMetadata_eventOriginRegion *smithy.Schema
-
-var SourceEventMetadata_relatedAccount *smithy.Schema
-
-var SourceEventMetadata_source *smithy.Schema
-
-var SourceEventMetadata_eventOccurrenceTime *smithy.Schema
-
-var SourceEventMetadata_eventType *smithy.Schema
-
-var SourceEventMetadata_relatedResources *smithy.Schema
-
-var SourceEventMetadataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SourceEventMetadataSummary",
-}, smithy.ShapeTypeStructure, 3)
-var SourceEventMetadataSummary_eventOriginRegion *smithy.Schema
-
-var SourceEventMetadataSummary_source *smithy.Schema
-
-var SourceEventMetadataSummary_eventType *smithy.Schema
-
-var _StatusSummaryByRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "StatusSummaryByRegion",
-}, smithy.ShapeTypeMap, 2)
-var _StatusSummaryByRegion_key *smithy.Schema
-
-var _StatusSummaryByRegion_value *smithy.Schema
-
-var SummarizationDimensionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SummarizationDimensionDetail",
-}, smithy.ShapeTypeStructure, 2)
-var SummarizationDimensionDetail_name *smithy.Schema
-
-var SummarizationDimensionDetail_value *smithy.Schema
-
-var _SummarizationDimensionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SummarizationDimensionDetails",
-}, smithy.ShapeTypeList, 1)
-var _SummarizationDimensionDetails_member *smithy.Schema
-
-var SummarizationDimensionOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SummarizationDimensionOverview",
-}, smithy.ShapeTypeStructure, 3)
-var SummarizationDimensionOverview_name *smithy.Schema
-
-var SummarizationDimensionOverview_count *smithy.Schema
-
-var SummarizationDimensionOverview_sampleValues *smithy.Schema
-
-var _SummarizationDimensionOverviews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "SummarizationDimensionOverviews",
-}, smithy.ShapeTypeList, 1)
-var _SummarizationDimensionOverviews_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TextByLocale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextByLocale",
-}, smithy.ShapeTypeMap, 2)
-var _TextByLocale_key *smithy.Schema
-
-var _TextByLocale_value *smithy.Schema
-
-var _TextPartId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextPartId",
-}, smithy.ShapeTypeString, 0)
-
-var _TextPartReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextPartReference",
-}, smithy.ShapeTypeString, 0)
-
-var _TextParts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextParts",
-}, smithy.ShapeTypeMap, 2)
-var _TextParts_key *smithy.Schema
-
-var _TextParts_value *smithy.Schema
-
-var _TextPartType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextPartType",
-}, smithy.ShapeTypeString, 0)
-
-var TextPartValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TextPartValue",
-}, smithy.ShapeTypeStructure, 4)
-var TextPartValue_type *smithy.Schema
-
-var TextPartValue_displayText *smithy.Schema
-
-var TextPartValue_textByLocale *smithy.Schema
-
-var TextPartValue_url *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateChannelRequest_arn *smithy.Schema
-
-var AssociateChannelRequest_notificationConfigurationArn *smithy.Schema
-
-var AssociateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateManagedNotificationAccountContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAccountContactRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateManagedNotificationAccountContactRequest_contactIdentifier *smithy.Schema
-
-var AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed *smithy.Schema
-
-var AssociateManagedNotificationAccountContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAccountContactResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateManagedNotificationAdditionalChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAdditionalChannelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateManagedNotificationAdditionalChannelRequest_channelArn *smithy.Schema
-
-var AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed *smithy.Schema
-
-var AssociateManagedNotificationAdditionalChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateManagedNotificationAdditionalChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateOrganizationalUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateOrganizationalUnitRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateOrganizationalUnitRequest_organizationalUnitId *smithy.Schema
-
-var AssociateOrganizationalUnitRequest_notificationConfigurationArn *smithy.Schema
-
-var AssociateOrganizationalUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "AssociateOrganizationalUnitResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateEventRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateEventRuleRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEventRuleRequest_notificationConfigurationArn *smithy.Schema
-
-var CreateEventRuleRequest_source *smithy.Schema
-
-var CreateEventRuleRequest_eventType *smithy.Schema
-
-var CreateEventRuleRequest_eventPattern *smithy.Schema
-
-var CreateEventRuleRequest_regions *smithy.Schema
-
-var CreateEventRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateEventRuleResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateEventRuleResponse_arn *smithy.Schema
-
-var CreateEventRuleResponse_notificationConfigurationArn *smithy.Schema
-
-var CreateEventRuleResponse_statusSummaryByRegion *smithy.Schema
-
-var CreateNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateNotificationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateNotificationConfigurationRequest_name *smithy.Schema
-
-var CreateNotificationConfigurationRequest_description *smithy.Schema
-
-var CreateNotificationConfigurationRequest_aggregationDuration *smithy.Schema
-
-var CreateNotificationConfigurationRequest_tags *smithy.Schema
-
-var CreateNotificationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "CreateNotificationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateNotificationConfigurationResponse_arn *smithy.Schema
-
-var CreateNotificationConfigurationResponse_status *smithy.Schema
-
-var DeleteEventRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteEventRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventRuleRequest_arn *smithy.Schema
-
-var DeleteEventRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteEventRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteNotificationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotificationConfigurationRequest_arn *smithy.Schema
-
-var DeleteNotificationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeleteNotificationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterNotificationHubRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeregisterNotificationHubRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterNotificationHubRequest_notificationHubRegion *smithy.Schema
-
-var DeregisterNotificationHubResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DeregisterNotificationHubResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterNotificationHubResponse_notificationHubRegion *smithy.Schema
-
-var DeregisterNotificationHubResponse_statusSummary *smithy.Schema
-
-var DisableNotificationsAccessForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisableNotificationsAccessForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableNotificationsAccessForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisableNotificationsAccessForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateChannelRequest_arn *smithy.Schema
-
-var DisassociateChannelRequest_notificationConfigurationArn *smithy.Schema
-
-var DisassociateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateManagedNotificationAccountContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAccountContactRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateManagedNotificationAccountContactRequest_contactIdentifier *smithy.Schema
-
-var DisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var DisassociateManagedNotificationAccountContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAccountContactResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateManagedNotificationAdditionalChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAdditionalChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateManagedNotificationAdditionalChannelRequest_channelArn *smithy.Schema
-
-var DisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var DisassociateManagedNotificationAdditionalChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateManagedNotificationAdditionalChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateOrganizationalUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateOrganizationalUnitRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateOrganizationalUnitRequest_organizationalUnitId *smithy.Schema
-
-var DisassociateOrganizationalUnitRequest_notificationConfigurationArn *smithy.Schema
-
-var DisassociateOrganizationalUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "DisassociateOrganizationalUnitResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableNotificationsAccessForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EnableNotificationsAccessForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableNotificationsAccessForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "EnableNotificationsAccessForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEventRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetEventRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEventRuleRequest_arn *smithy.Schema
-
-var GetEventRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetEventRuleResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetEventRuleResponse_arn *smithy.Schema
-
-var GetEventRuleResponse_notificationConfigurationArn *smithy.Schema
-
-var GetEventRuleResponse_creationTime *smithy.Schema
-
-var GetEventRuleResponse_source *smithy.Schema
-
-var GetEventRuleResponse_eventType *smithy.Schema
-
-var GetEventRuleResponse_eventPattern *smithy.Schema
-
-var GetEventRuleResponse_regions *smithy.Schema
-
-var GetEventRuleResponse_managedRules *smithy.Schema
-
-var GetEventRuleResponse_statusSummaryByRegion *smithy.Schema
-
-var GetManagedNotificationChildEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationChildEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetManagedNotificationChildEventRequest_arn *smithy.Schema
-
-var GetManagedNotificationChildEventRequest_locale *smithy.Schema
-
-var GetManagedNotificationChildEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationChildEventResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetManagedNotificationChildEventResponse_arn *smithy.Schema
-
-var GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn *smithy.Schema
-
-var GetManagedNotificationChildEventResponse_creationTime *smithy.Schema
-
-var GetManagedNotificationChildEventResponse_content *smithy.Schema
-
-var GetManagedNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetManagedNotificationConfigurationRequest_arn *smithy.Schema
-
-var GetManagedNotificationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetManagedNotificationConfigurationResponse_arn *smithy.Schema
-
-var GetManagedNotificationConfigurationResponse_name *smithy.Schema
-
-var GetManagedNotificationConfigurationResponse_description *smithy.Schema
-
-var GetManagedNotificationConfigurationResponse_category *smithy.Schema
-
-var GetManagedNotificationConfigurationResponse_subCategory *smithy.Schema
-
-var GetManagedNotificationEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetManagedNotificationEventRequest_arn *smithy.Schema
-
-var GetManagedNotificationEventRequest_locale *smithy.Schema
-
-var GetManagedNotificationEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetManagedNotificationEventResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetManagedNotificationEventResponse_arn *smithy.Schema
-
-var GetManagedNotificationEventResponse_managedNotificationConfigurationArn *smithy.Schema
-
-var GetManagedNotificationEventResponse_creationTime *smithy.Schema
-
-var GetManagedNotificationEventResponse_content *smithy.Schema
-
-var GetNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotificationConfigurationRequest_arn *smithy.Schema
-
-var GetNotificationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetNotificationConfigurationResponse_arn *smithy.Schema
-
-var GetNotificationConfigurationResponse_name *smithy.Schema
-
-var GetNotificationConfigurationResponse_description *smithy.Schema
-
-var GetNotificationConfigurationResponse_status *smithy.Schema
-
-var GetNotificationConfigurationResponse_creationTime *smithy.Schema
-
-var GetNotificationConfigurationResponse_aggregationDuration *smithy.Schema
-
-var GetNotificationConfigurationResponse_subtype *smithy.Schema
-
-var GetNotificationEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetNotificationEventRequest_arn *smithy.Schema
-
-var GetNotificationEventRequest_locale *smithy.Schema
-
-var GetNotificationEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationEventResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetNotificationEventResponse_arn *smithy.Schema
-
-var GetNotificationEventResponse_notificationConfigurationArn *smithy.Schema
-
-var GetNotificationEventResponse_creationTime *smithy.Schema
-
-var GetNotificationEventResponse_content *smithy.Schema
-
-var GetNotificationsAccessForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationsAccessForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetNotificationsAccessForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "GetNotificationsAccessForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsRequest_notificationConfigurationArn *smithy.Schema
-
-var ListChannelsRequest_maxResults *smithy.Schema
-
-var ListChannelsRequest_nextToken *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_nextToken *smithy.Schema
-
-var ListChannelsResponse_channels *smithy.Schema
-
-var ListEventRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListEventRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEventRulesRequest_notificationConfigurationArn *smithy.Schema
-
-var ListEventRulesRequest_maxResults *smithy.Schema
-
-var ListEventRulesRequest_nextToken *smithy.Schema
-
-var ListEventRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListEventRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventRulesResponse_nextToken *smithy.Schema
-
-var ListEventRulesResponse_eventRules *smithy.Schema
-
-var ListManagedNotificationChannelAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChannelAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var ListManagedNotificationChannelAssociationsRequest_maxResults *smithy.Schema
-
-var ListManagedNotificationChannelAssociationsRequest_nextToken *smithy.Schema
-
-var ListManagedNotificationChannelAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChannelAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedNotificationChannelAssociationsResponse_nextToken *smithy.Schema
-
-var ListManagedNotificationChannelAssociationsResponse_channelAssociations *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChildEventsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_startTime *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_endTime *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_locale *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_maxResults *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_relatedAccount *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_organizationalUnitId *smithy.Schema
-
-var ListManagedNotificationChildEventsRequest_nextToken *smithy.Schema
-
-var ListManagedNotificationChildEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationChildEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedNotificationChildEventsResponse_nextToken *smithy.Schema
-
-var ListManagedNotificationChildEventsResponse_managedNotificationChildEvents *smithy.Schema
-
-var ListManagedNotificationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedNotificationConfigurationsRequest_channelIdentifier *smithy.Schema
-
-var ListManagedNotificationConfigurationsRequest_maxResults *smithy.Schema
-
-var ListManagedNotificationConfigurationsRequest_nextToken *smithy.Schema
-
-var ListManagedNotificationConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedNotificationConfigurationsResponse_nextToken *smithy.Schema
-
-var ListManagedNotificationConfigurationsResponse_managedNotificationConfigurations *smithy.Schema
-
-var ListManagedNotificationEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationEventsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListManagedNotificationEventsRequest_startTime *smithy.Schema
-
-var ListManagedNotificationEventsRequest_endTime *smithy.Schema
-
-var ListManagedNotificationEventsRequest_locale *smithy.Schema
-
-var ListManagedNotificationEventsRequest_source *smithy.Schema
-
-var ListManagedNotificationEventsRequest_maxResults *smithy.Schema
-
-var ListManagedNotificationEventsRequest_nextToken *smithy.Schema
-
-var ListManagedNotificationEventsRequest_organizationalUnitId *smithy.Schema
-
-var ListManagedNotificationEventsRequest_relatedAccount *smithy.Schema
-
-var ListManagedNotificationEventsRequest_includeSensitiveEvents *smithy.Schema
-
-var ListManagedNotificationEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListManagedNotificationEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedNotificationEventsResponse_nextToken *smithy.Schema
-
-var ListManagedNotificationEventsResponse_managedNotificationEvents *smithy.Schema
-
-var ListMemberAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListMemberAccountsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListMemberAccountsRequest_notificationConfigurationArn *smithy.Schema
-
-var ListMemberAccountsRequest_maxResults *smithy.Schema
-
-var ListMemberAccountsRequest_nextToken *smithy.Schema
-
-var ListMemberAccountsRequest_memberAccount *smithy.Schema
-
-var ListMemberAccountsRequest_status *smithy.Schema
-
-var ListMemberAccountsRequest_organizationalUnitId *smithy.Schema
-
-var ListMemberAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListMemberAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMemberAccountsResponse_memberAccounts *smithy.Schema
-
-var ListMemberAccountsResponse_nextToken *smithy.Schema
-
-var ListNotificationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListNotificationConfigurationsRequest_eventRuleSource *smithy.Schema
-
-var ListNotificationConfigurationsRequest_channelArn *smithy.Schema
-
-var ListNotificationConfigurationsRequest_status *smithy.Schema
-
-var ListNotificationConfigurationsRequest_subtype *smithy.Schema
-
-var ListNotificationConfigurationsRequest_maxResults *smithy.Schema
-
-var ListNotificationConfigurationsRequest_nextToken *smithy.Schema
-
-var ListNotificationConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationConfigurationsResponse_nextToken *smithy.Schema
-
-var ListNotificationConfigurationsResponse_notificationConfigurations *smithy.Schema
-
-var ListNotificationEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationEventsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListNotificationEventsRequest_startTime *smithy.Schema
-
-var ListNotificationEventsRequest_endTime *smithy.Schema
-
-var ListNotificationEventsRequest_locale *smithy.Schema
-
-var ListNotificationEventsRequest_source *smithy.Schema
-
-var ListNotificationEventsRequest_includeChildEvents *smithy.Schema
-
-var ListNotificationEventsRequest_aggregateNotificationEventArn *smithy.Schema
-
-var ListNotificationEventsRequest_maxResults *smithy.Schema
-
-var ListNotificationEventsRequest_nextToken *smithy.Schema
-
-var ListNotificationEventsRequest_organizationalUnitId *smithy.Schema
-
-var ListNotificationEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationEventsResponse_nextToken *smithy.Schema
-
-var ListNotificationEventsResponse_notificationEvents *smithy.Schema
-
-var ListNotificationHubsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationHubsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationHubsRequest_maxResults *smithy.Schema
-
-var ListNotificationHubsRequest_nextToken *smithy.Schema
-
-var ListNotificationHubsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListNotificationHubsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationHubsResponse_notificationHubs *smithy.Schema
-
-var ListNotificationHubsResponse_nextToken *smithy.Schema
-
-var ListOrganizationalUnitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListOrganizationalUnitsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListOrganizationalUnitsRequest_notificationConfigurationArn *smithy.Schema
-
-var ListOrganizationalUnitsRequest_maxResults *smithy.Schema
-
-var ListOrganizationalUnitsRequest_nextToken *smithy.Schema
-
-var ListOrganizationalUnitsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListOrganizationalUnitsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationalUnitsResponse_organizationalUnits *smithy.Schema
-
-var ListOrganizationalUnitsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_arn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterNotificationHubRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "RegisterNotificationHubRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterNotificationHubRequest_notificationHubRegion *smithy.Schema
-
-var RegisterNotificationHubResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "RegisterNotificationHubResponse",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterNotificationHubResponse_notificationHubRegion *smithy.Schema
-
-var RegisterNotificationHubResponse_statusSummary *smithy.Schema
-
-var RegisterNotificationHubResponse_creationTime *smithy.Schema
-
-var RegisterNotificationHubResponse_lastActivationTime *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_arn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_arn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEventRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateEventRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEventRuleRequest_arn *smithy.Schema
-
-var UpdateEventRuleRequest_eventPattern *smithy.Schema
-
-var UpdateEventRuleRequest_regions *smithy.Schema
-
-var UpdateEventRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateEventRuleResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEventRuleResponse_arn *smithy.Schema
-
-var UpdateEventRuleResponse_notificationConfigurationArn *smithy.Schema
-
-var UpdateEventRuleResponse_statusSummaryByRegion *smithy.Schema
-
-var UpdateManagedNotificationChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateManagedNotificationChannelAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn *smithy.Schema
-
-var UpdateManagedNotificationChannelAssociationRequest_channelIdentifier *smithy.Schema
-
-var UpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed *smithy.Schema
-
-var UpdateManagedNotificationChannelAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateManagedNotificationChannelAssociationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotificationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateNotificationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateNotificationConfigurationRequest_arn *smithy.Schema
-
-var UpdateNotificationConfigurationRequest_name *smithy.Schema
-
-var UpdateNotificationConfigurationRequest_description *smithy.Schema
-
-var UpdateNotificationConfigurationRequest_aggregationDuration *smithy.Schema
-
-var UpdateNotificationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notifications",
-	Name:      "UpdateNotificationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNotificationConfigurationResponse_arn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	AccessStatus_ENABLED = AccessStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	AccessStatus_DISABLED = AccessStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	AccessStatus_PENDING = AccessStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	AccessStatus_FAILED = AccessStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_AggregatedNotificationRegions_member = _AggregatedNotificationRegions.AddMember("member", _Region)
-
-	SummarizationDimensionDetail_name = SummarizationDimensionDetail.AddMember("name", smithyprelude.String)
-
-	SummarizationDimensionDetail_value = SummarizationDimensionDetail.AddMember("value", smithyprelude.String)
-
-	_SummarizationDimensionDetails_member = _SummarizationDimensionDetails.AddMember("member", SummarizationDimensionDetail)
-
-	AggregationDetail_summarizationDimensions = AggregationDetail.AddMember("summarizationDimensions", _SummarizationDimensionDetails)
-
-	AggregationKey_name = AggregationKey.AddMember("name", smithyprelude.String)
-
-	AggregationKey_value = AggregationKey.AddMember("value", smithyprelude.String)
-
-	_AggregationKeys_member = _AggregationKeys.AddMember("member", AggregationKey)
-
-	_SampleAggregationDimensionValues_member = _SampleAggregationDimensionValues.AddMember("member", smithyprelude.String)
-
-	SummarizationDimensionOverview_name = SummarizationDimensionOverview.AddMember("name", smithyprelude.String)
-
-	SummarizationDimensionOverview_count = SummarizationDimensionOverview.AddMember("count", smithyprelude.Integer)
-
-	SummarizationDimensionOverview_sampleValues = SummarizationDimensionOverview.AddMember("sampleValues", _SampleAggregationDimensionValues)
-
-	_SummarizationDimensionOverviews_member = _SummarizationDimensionOverviews.AddMember("member", SummarizationDimensionOverview)
-
-	AggregationSummary_eventCount = AggregationSummary.AddMember("eventCount", smithyprelude.Integer)
-
-	AggregationSummary_aggregatedBy = AggregationSummary.AddMember("aggregatedBy", _AggregationKeys)
-
-	AggregationSummary_aggregatedAccounts = AggregationSummary.AddMember("aggregatedAccounts", SummarizationDimensionOverview)
-
-	AggregationSummary_aggregatedRegions = AggregationSummary.AddMember("aggregatedRegions", SummarizationDimensionOverview)
-
-	AggregationSummary_aggregatedOrganizationalUnits = AggregationSummary.AddMember("aggregatedOrganizationalUnits", SummarizationDimensionOverview)
-
-	AggregationSummary_additionalSummarizationDimensions = AggregationSummary.AddMember("additionalSummarizationDimensions", _SummarizationDimensionOverviews)
-
-	_Channels_member = _Channels.AddMember("member", _ChannelArn)
-
-	ChannelType_MOBILE = ChannelType.AddMember("MOBILE", smithyprelude.Unit)
-
-	ChannelType_CHATBOT = ChannelType.AddMember("CHATBOT", smithyprelude.Unit)
-
-	ChannelType_EMAIL = ChannelType.AddMember("EMAIL", smithyprelude.Unit)
-
-	ChannelType_ACCOUNT_CONTACT = ChannelType.AddMember("ACCOUNT_CONTACT", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
-
-	Dimension_name = Dimension.AddMember("name", _TextPartReference)
-
-	Dimension_value = Dimension.AddMember("value", _TextPartReference)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	_Regions_member = _Regions.AddMember("member", _Region)
-
-	_ManagedRuleArns_member = _ManagedRuleArns.AddMember("member", _ManagedRuleArn)
-
-	EventRuleStatusSummary_status = EventRuleStatusSummary.AddMember("status", _EventRuleStatus)
-
-	EventRuleStatusSummary_reason = EventRuleStatusSummary.AddMember("reason", _EventRuleStatusReason)
-
-	_StatusSummaryByRegion_key = _StatusSummaryByRegion.AddMember("key", _Region)
-
-	_StatusSummaryByRegion_value = _StatusSummaryByRegion.AddMember("value", EventRuleStatusSummary)
-
-	EventRuleStructure_arn = EventRuleStructure.AddMember("arn", _EventRuleArn)
-
-	EventRuleStructure_notificationConfigurationArn = EventRuleStructure.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	EventRuleStructure_creationTime = EventRuleStructure.AddMember("creationTime", _CreationTime)
-
-	EventRuleStructure_source = EventRuleStructure.AddMember("source", _Source)
-
-	EventRuleStructure_eventType = EventRuleStructure.AddMember("eventType", _EventType)
-
-	EventRuleStructure_eventPattern = EventRuleStructure.AddMember("eventPattern", _EventRuleEventPattern)
-
-	EventRuleStructure_regions = EventRuleStructure.AddMember("regions", _Regions)
-
-	EventRuleStructure_managedRules = EventRuleStructure.AddMember("managedRules", _ManagedRuleArns)
-
-	EventRuleStructure_statusSummaryByRegion = EventRuleStructure.AddMember("statusSummaryByRegion", _StatusSummaryByRegion)
-
-	_EventRules_member = _EventRules.AddMember("member", EventRuleStructure)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	ManagedNotificationChannelAssociationSummary_channelIdentifier = ManagedNotificationChannelAssociationSummary.AddMember("channelIdentifier", smithyprelude.String)
-
-	ManagedNotificationChannelAssociationSummary_channelType = ManagedNotificationChannelAssociationSummary.AddMember("channelType", ChannelType)
-
-	ManagedNotificationChannelAssociationSummary_overrideOption = ManagedNotificationChannelAssociationSummary.AddMember("overrideOption", _ChannelAssociationOverrideOption)
-
-	ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed = ManagedNotificationChannelAssociationSummary.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
-
-	_ManagedNotificationChannelAssociations_member = _ManagedNotificationChannelAssociations.AddMember("member", ManagedNotificationChannelAssociationSummary)
-
-	MessageComponents_headline = MessageComponents.AddMember("headline", _TextPartReference)
-
-	MessageComponents_paragraphSummary = MessageComponents.AddMember("paragraphSummary", _TextPartReference)
-
-	MessageComponents_completeDescription = MessageComponents.AddMember("completeDescription", _TextPartReference)
-
-	MessageComponents_markupDescription = MessageComponents.AddMember("markupDescription", _TextPartReference)
-
-	MessageComponents_dimensions = MessageComponents.AddMember("dimensions", _Dimensions)
-
-	_TextByLocale_key = _TextByLocale.AddMember("key", _LocaleCode)
-
-	_TextByLocale_value = _TextByLocale.AddMember("value", smithyprelude.String)
-
-	TextPartValue_type = TextPartValue.AddMember("type", _TextPartType)
-
-	TextPartValue_displayText = TextPartValue.AddMember("displayText", smithyprelude.String)
-
-	TextPartValue_textByLocale = TextPartValue.AddMember("textByLocale", _TextByLocale)
-
-	TextPartValue_url = TextPartValue.AddMember("url", _Url)
-
-	_TextParts_key = _TextParts.AddMember("key", _TextPartId)
-
-	_TextParts_value = _TextParts.AddMember("value", TextPartValue)
-
-	ManagedNotificationChildEvent_schemaVersion = ManagedNotificationChildEvent.AddMember("schemaVersion", _SchemaVersion)
-
-	ManagedNotificationChildEvent_id = ManagedNotificationChildEvent.AddMember("id", _NotificationEventId)
-
-	ManagedNotificationChildEvent_messageComponents = ManagedNotificationChildEvent.AddMember("messageComponents", MessageComponents)
-
-	ManagedNotificationChildEvent_sourceEventDetailUrl = ManagedNotificationChildEvent.AddMember("sourceEventDetailUrl", _Url)
-
-	ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText = ManagedNotificationChildEvent.AddMember("sourceEventDetailUrlDisplayText", smithyprelude.String)
-
-	ManagedNotificationChildEvent_notificationType = ManagedNotificationChildEvent.AddMember("notificationType", _NotificationType)
-
-	ManagedNotificationChildEvent_eventStatus = ManagedNotificationChildEvent.AddMember("eventStatus", _EventStatus)
-
-	ManagedNotificationChildEvent_aggregateManagedNotificationEventArn = ManagedNotificationChildEvent.AddMember("aggregateManagedNotificationEventArn", _ManagedNotificationEventArn)
-
-	ManagedNotificationChildEvent_startTime = ManagedNotificationChildEvent.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ManagedNotificationChildEvent_endTime = ManagedNotificationChildEvent.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ManagedNotificationChildEvent_textParts = ManagedNotificationChildEvent.AddMember("textParts", _TextParts)
-
-	ManagedNotificationChildEvent_organizationalUnitId = ManagedNotificationChildEvent.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	ManagedNotificationChildEvent_aggregationDetail = ManagedNotificationChildEvent.AddMember("aggregationDetail", AggregationDetail)
-
-	ManagedSourceEventMetadataSummary_eventOriginRegion = ManagedSourceEventMetadataSummary.AddMember("eventOriginRegion", _Region)
-
-	ManagedSourceEventMetadataSummary_source = ManagedSourceEventMetadataSummary.AddMember("source", _Source)
-
-	ManagedSourceEventMetadataSummary_eventType = ManagedSourceEventMetadataSummary.AddMember("eventType", _EventType)
-
-	MessageComponentsSummary_headline = MessageComponentsSummary.AddMember("headline", smithyprelude.String)
-
-	ManagedNotificationChildEventSummary_schemaVersion = ManagedNotificationChildEventSummary.AddMember("schemaVersion", _SchemaVersion)
-
-	ManagedNotificationChildEventSummary_sourceEventMetadata = ManagedNotificationChildEventSummary.AddMember("sourceEventMetadata", ManagedSourceEventMetadataSummary)
-
-	ManagedNotificationChildEventSummary_messageComponents = ManagedNotificationChildEventSummary.AddMember("messageComponents", MessageComponentsSummary)
-
-	ManagedNotificationChildEventSummary_aggregationDetail = ManagedNotificationChildEventSummary.AddMember("aggregationDetail", AggregationDetail)
-
-	ManagedNotificationChildEventSummary_eventStatus = ManagedNotificationChildEventSummary.AddMember("eventStatus", _EventStatus)
-
-	ManagedNotificationChildEventSummary_notificationType = ManagedNotificationChildEventSummary.AddMember("notificationType", _NotificationType)
-
-	ManagedNotificationChildEventOverview_arn = ManagedNotificationChildEventOverview.AddMember("arn", _ManagedNotificationEventArn)
-
-	ManagedNotificationChildEventOverview_managedNotificationConfigurationArn = ManagedNotificationChildEventOverview.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	ManagedNotificationChildEventOverview_relatedAccount = ManagedNotificationChildEventOverview.AddMember("relatedAccount", _AccountId)
-
-	ManagedNotificationChildEventOverview_creationTime = ManagedNotificationChildEventOverview.AddMember("creationTime", _CreationTime)
-
-	ManagedNotificationChildEventOverview_childEvent = ManagedNotificationChildEventOverview.AddMember("childEvent", ManagedNotificationChildEventSummary)
-
-	ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn = ManagedNotificationChildEventOverview.AddMember("aggregateManagedNotificationEventArn", _ManagedNotificationEventArn)
-
-	ManagedNotificationChildEventOverview_organizationalUnitId = ManagedNotificationChildEventOverview.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	_ManagedNotificationChildEvents_member = _ManagedNotificationChildEvents.AddMember("member", ManagedNotificationChildEventOverview)
-
-	ManagedNotificationConfigurationStructure_arn = ManagedNotificationConfigurationStructure.AddMember("arn", _ManagedNotificationConfigurationOsArn)
-
-	ManagedNotificationConfigurationStructure_name = ManagedNotificationConfigurationStructure.AddMember("name", _ManagedNotificationConfigurationName)
-
-	ManagedNotificationConfigurationStructure_description = ManagedNotificationConfigurationStructure.AddMember("description", _ManagedNotificationConfigurationDescription)
-
-	_ManagedNotificationConfigurations_member = _ManagedNotificationConfigurations.AddMember("member", ManagedNotificationConfigurationStructure)
-
-	NotificationEventAttachment_displayName = NotificationEventAttachment.AddMember("displayName", _AttachmentDisplayName)
-
-	NotificationEventAttachment_attachmentDownloadUrl = NotificationEventAttachment.AddMember("attachmentDownloadUrl", _SensitiveUrl)
-
-	NotificationEventAttachment_contentType = NotificationEventAttachment.AddMember("contentType", _AttachmentContentType)
-
-	_NotificationEventAttachmentList_member = _NotificationEventAttachmentList.AddMember("member", NotificationEventAttachment)
-
-	ManagedNotificationEvent_schemaVersion = ManagedNotificationEvent.AddMember("schemaVersion", _SchemaVersion)
-
-	ManagedNotificationEvent_id = ManagedNotificationEvent.AddMember("id", _NotificationEventId)
-
-	ManagedNotificationEvent_messageComponents = ManagedNotificationEvent.AddMember("messageComponents", MessageComponents)
-
-	ManagedNotificationEvent_sourceEventDetailUrl = ManagedNotificationEvent.AddMember("sourceEventDetailUrl", _Url)
-
-	ManagedNotificationEvent_sourceEventDetailUrlDisplayText = ManagedNotificationEvent.AddMember("sourceEventDetailUrlDisplayText", smithyprelude.String)
-
-	ManagedNotificationEvent_notificationType = ManagedNotificationEvent.AddMember("notificationType", _NotificationType)
-
-	ManagedNotificationEvent_eventStatus = ManagedNotificationEvent.AddMember("eventStatus", _EventStatus)
-
-	ManagedNotificationEvent_aggregationEventType = ManagedNotificationEvent.AddMember("aggregationEventType", _AggregationEventType)
-
-	ManagedNotificationEvent_aggregationSummary = ManagedNotificationEvent.AddMember("aggregationSummary", AggregationSummary)
-
-	ManagedNotificationEvent_startTime = ManagedNotificationEvent.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ManagedNotificationEvent_endTime = ManagedNotificationEvent.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ManagedNotificationEvent_textParts = ManagedNotificationEvent.AddMember("textParts", _TextParts)
-
-	ManagedNotificationEvent_organizationalUnitId = ManagedNotificationEvent.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	ManagedNotificationEvent_attachments = ManagedNotificationEvent.AddMember("attachments", _NotificationEventAttachmentList)
-
-	ManagedNotificationEventSummary_schemaVersion = ManagedNotificationEventSummary.AddMember("schemaVersion", _SchemaVersion)
-
-	ManagedNotificationEventSummary_sourceEventMetadata = ManagedNotificationEventSummary.AddMember("sourceEventMetadata", ManagedSourceEventMetadataSummary)
-
-	ManagedNotificationEventSummary_messageComponents = ManagedNotificationEventSummary.AddMember("messageComponents", MessageComponentsSummary)
-
-	ManagedNotificationEventSummary_eventStatus = ManagedNotificationEventSummary.AddMember("eventStatus", _EventStatus)
-
-	ManagedNotificationEventSummary_notificationType = ManagedNotificationEventSummary.AddMember("notificationType", _NotificationType)
-
-	ManagedNotificationEventOverview_arn = ManagedNotificationEventOverview.AddMember("arn", _ManagedNotificationEventArn)
-
-	ManagedNotificationEventOverview_managedNotificationConfigurationArn = ManagedNotificationEventOverview.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	ManagedNotificationEventOverview_relatedAccount = ManagedNotificationEventOverview.AddMember("relatedAccount", _AccountId)
-
-	ManagedNotificationEventOverview_creationTime = ManagedNotificationEventOverview.AddMember("creationTime", _CreationTime)
-
-	ManagedNotificationEventOverview_notificationEvent = ManagedNotificationEventOverview.AddMember("notificationEvent", ManagedNotificationEventSummary)
-
-	ManagedNotificationEventOverview_aggregationEventType = ManagedNotificationEventOverview.AddMember("aggregationEventType", _AggregationEventType)
-
-	ManagedNotificationEventOverview_organizationalUnitId = ManagedNotificationEventOverview.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	ManagedNotificationEventOverview_aggregationSummary = ManagedNotificationEventOverview.AddMember("aggregationSummary", AggregationSummary)
-
-	ManagedNotificationEventOverview_aggregatedNotificationRegions = ManagedNotificationEventOverview.AddMember("aggregatedNotificationRegions", _AggregatedNotificationRegions)
-
-	_ManagedNotificationEvents_member = _ManagedNotificationEvents.AddMember("member", ManagedNotificationEventOverview)
-
-	MediaElement_mediaId = MediaElement.AddMember("mediaId", _MediaId)
-
-	MediaElement_type = MediaElement.AddMember("type", _MediaElementType)
-
-	MediaElement_url = MediaElement.AddMember("url", _Url)
-
-	MediaElement_caption = MediaElement.AddMember("caption", _TextPartReference)
-
-	_Media_member = _Media.AddMember("member", MediaElement)
-
-	MemberAccount_notificationConfigurationArn = MemberAccount.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	MemberAccount_accountId = MemberAccount.AddMember("accountId", _AccountId)
-
-	MemberAccount_status = MemberAccount.AddMember("status", _MemberAccountNotificationConfigurationStatus)
-
-	MemberAccount_statusReason = MemberAccount.AddMember("statusReason", smithyprelude.String)
-
-	MemberAccount_organizationalUnitId = MemberAccount.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	_MemberAccounts_member = _MemberAccounts.AddMember("member", MemberAccount)
-
-	NotificationConfigurationStructure_arn = NotificationConfigurationStructure.AddMember("arn", _NotificationConfigurationArn)
-
-	NotificationConfigurationStructure_name = NotificationConfigurationStructure.AddMember("name", _NotificationConfigurationName)
-
-	NotificationConfigurationStructure_description = NotificationConfigurationStructure.AddMember("description", _NotificationConfigurationDescription)
-
-	NotificationConfigurationStructure_status = NotificationConfigurationStructure.AddMember("status", _NotificationConfigurationStatus)
-
-	NotificationConfigurationStructure_creationTime = NotificationConfigurationStructure.AddMember("creationTime", _CreationTime)
-
-	NotificationConfigurationStructure_aggregationDuration = NotificationConfigurationStructure.AddMember("aggregationDuration", _AggregationDuration)
-
-	NotificationConfigurationStructure_subtype = NotificationConfigurationStructure.AddMember("subtype", _NotificationConfigurationSubtype)
-
-	_NotificationConfigurations_member = _NotificationConfigurations.AddMember("member", NotificationConfigurationStructure)
-
-	SourceEventMetadataSummary_eventOriginRegion = SourceEventMetadataSummary.AddMember("eventOriginRegion", smithyprelude.String)
-
-	SourceEventMetadataSummary_source = SourceEventMetadataSummary.AddMember("source", smithyprelude.String)
-
-	SourceEventMetadataSummary_eventType = SourceEventMetadataSummary.AddMember("eventType", smithyprelude.String)
-
-	NotificationEventSummary_schemaVersion = NotificationEventSummary.AddMember("schemaVersion", _SchemaVersion)
-
-	NotificationEventSummary_sourceEventMetadata = NotificationEventSummary.AddMember("sourceEventMetadata", SourceEventMetadataSummary)
-
-	NotificationEventSummary_messageComponents = NotificationEventSummary.AddMember("messageComponents", MessageComponentsSummary)
-
-	NotificationEventSummary_eventStatus = NotificationEventSummary.AddMember("eventStatus", _EventStatus)
-
-	NotificationEventSummary_notificationType = NotificationEventSummary.AddMember("notificationType", _NotificationType)
-
-	NotificationEventOverview_arn = NotificationEventOverview.AddMember("arn", _NotificationEventArn)
-
-	NotificationEventOverview_notificationConfigurationArn = NotificationEventOverview.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	NotificationEventOverview_relatedAccount = NotificationEventOverview.AddMember("relatedAccount", _AccountId)
-
-	NotificationEventOverview_creationTime = NotificationEventOverview.AddMember("creationTime", _CreationTime)
-
-	NotificationEventOverview_notificationEvent = NotificationEventOverview.AddMember("notificationEvent", NotificationEventSummary)
-
-	NotificationEventOverview_aggregationEventType = NotificationEventOverview.AddMember("aggregationEventType", _AggregationEventType)
-
-	NotificationEventOverview_aggregateNotificationEventArn = NotificationEventOverview.AddMember("aggregateNotificationEventArn", _NotificationEventArn)
-
-	NotificationEventOverview_aggregationSummary = NotificationEventOverview.AddMember("aggregationSummary", AggregationSummary)
-
-	NotificationEventOverview_organizationalUnitId = NotificationEventOverview.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	_NotificationEvents_member = _NotificationEvents.AddMember("member", NotificationEventOverview)
-
-	_Tags_member = _Tags.AddMember("member", smithyprelude.String)
-
-	Resource_id = Resource.AddMember("id", smithyprelude.String)
-
-	Resource_arn = Resource.AddMember("arn", _Arn)
-
-	Resource_detailUrl = Resource.AddMember("detailUrl", _Url)
-
-	Resource_tags = Resource.AddMember("tags", _Tags)
-
-	_Resources_member = _Resources.AddMember("member", Resource)
-
-	SourceEventMetadata_eventTypeVersion = SourceEventMetadata.AddMember("eventTypeVersion", smithyprelude.String)
-
-	SourceEventMetadata_sourceEventId = SourceEventMetadata.AddMember("sourceEventId", smithyprelude.String)
-
-	SourceEventMetadata_eventOriginRegion = SourceEventMetadata.AddMember("eventOriginRegion", _Region)
-
-	SourceEventMetadata_relatedAccount = SourceEventMetadata.AddMember("relatedAccount", _AccountId)
-
-	SourceEventMetadata_source = SourceEventMetadata.AddMember("source", _Source)
-
-	SourceEventMetadata_eventOccurrenceTime = SourceEventMetadata.AddMember("eventOccurrenceTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SourceEventMetadata_eventType = SourceEventMetadata.AddMember("eventType", smithyprelude.String)
-
-	SourceEventMetadata_relatedResources = SourceEventMetadata.AddMember("relatedResources", _Resources)
-
-	NotificationEventSchema_schemaVersion = NotificationEventSchema.AddMember("schemaVersion", _SchemaVersion)
-
-	NotificationEventSchema_id = NotificationEventSchema.AddMember("id", _NotificationEventId)
-
-	NotificationEventSchema_sourceEventMetadata = NotificationEventSchema.AddMember("sourceEventMetadata", SourceEventMetadata)
-
-	NotificationEventSchema_messageComponents = NotificationEventSchema.AddMember("messageComponents", MessageComponents)
-
-	NotificationEventSchema_sourceEventDetailUrl = NotificationEventSchema.AddMember("sourceEventDetailUrl", _Url)
-
-	NotificationEventSchema_sourceEventDetailUrlDisplayText = NotificationEventSchema.AddMember("sourceEventDetailUrlDisplayText", smithyprelude.String)
-
-	NotificationEventSchema_notificationType = NotificationEventSchema.AddMember("notificationType", _NotificationType)
-
-	NotificationEventSchema_eventStatus = NotificationEventSchema.AddMember("eventStatus", _EventStatus)
-
-	NotificationEventSchema_aggregationEventType = NotificationEventSchema.AddMember("aggregationEventType", _AggregationEventType)
-
-	NotificationEventSchema_aggregateNotificationEventArn = NotificationEventSchema.AddMember("aggregateNotificationEventArn", _NotificationEventArn)
-
-	NotificationEventSchema_aggregationSummary = NotificationEventSchema.AddMember("aggregationSummary", AggregationSummary)
-
-	NotificationEventSchema_startTime = NotificationEventSchema.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	NotificationEventSchema_endTime = NotificationEventSchema.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	NotificationEventSchema_textParts = NotificationEventSchema.AddMember("textParts", _TextParts)
-
-	NotificationEventSchema_media = NotificationEventSchema.AddMember("media", _Media)
-
-	NotificationEventSchema_organizationalUnitId = NotificationEventSchema.AddMember("organizationalUnitId", _OrganizationalUnitId)
-
-	NotificationHubStatusSummary_status = NotificationHubStatusSummary.AddMember("status", _NotificationHubStatus)
-
-	NotificationHubStatusSummary_reason = NotificationHubStatusSummary.AddMember("reason", _NotificationHubStatusReason)
-
-	NotificationHubOverview_notificationHubRegion = NotificationHubOverview.AddMember("notificationHubRegion", _Region)
-
-	NotificationHubOverview_statusSummary = NotificationHubOverview.AddMember("statusSummary", NotificationHubStatusSummary)
-
-	NotificationHubOverview_creationTime = NotificationHubOverview.AddMember("creationTime", _CreationTime)
-
-	NotificationHubOverview_lastActivationTime = NotificationHubOverview.AddMember("lastActivationTime", _LastActivationTime)
-
-	_NotificationHubs_member = _NotificationHubs.AddMember("member", NotificationHubOverview)
-
-	NotificationsAccessForOrganization_accessStatus = NotificationsAccessForOrganization.AddMember("accessStatus", AccessStatus)
-
-	_OrganizationalUnits_member = _OrganizationalUnits.AddMember("member", _OrganizationalUnitId)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AssociateChannelRequest_arn = AssociateChannelRequest.AddMember("arn", _ChannelArn, &smithytraits.HTTPLabel{})
-
-	AssociateChannelRequest_notificationConfigurationArn = AssociateChannelRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	AssociateManagedNotificationAccountContactRequest_contactIdentifier = AssociateManagedNotificationAccountContactRequest.AddMember("contactIdentifier", _AccountContactType, &smithytraits.HTTPLabel{})
-
-	AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = AssociateManagedNotificationAccountContactRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed = AssociateManagedNotificationAccountContactRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
-
-	AssociateManagedNotificationAdditionalChannelRequest_channelArn = AssociateManagedNotificationAdditionalChannelRequest.AddMember("channelArn", _ChannelArn, &smithytraits.HTTPLabel{})
-
-	AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = AssociateManagedNotificationAdditionalChannelRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed = AssociateManagedNotificationAdditionalChannelRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
-
-	AssociateOrganizationalUnitRequest_organizationalUnitId = AssociateOrganizationalUnitRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPLabel{})
-
-	AssociateOrganizationalUnitRequest_notificationConfigurationArn = AssociateOrganizationalUnitRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	CreateEventRuleRequest_notificationConfigurationArn = CreateEventRuleRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	CreateEventRuleRequest_source = CreateEventRuleRequest.AddMember("source", _Source)
-
-	CreateEventRuleRequest_eventType = CreateEventRuleRequest.AddMember("eventType", _EventType)
-
-	CreateEventRuleRequest_eventPattern = CreateEventRuleRequest.AddMember("eventPattern", _EventRuleEventPattern)
-
-	CreateEventRuleRequest_regions = CreateEventRuleRequest.AddMember("regions", _Regions)
-
-	CreateEventRuleResponse_arn = CreateEventRuleResponse.AddMember("arn", _EventRuleArn)
-
-	CreateEventRuleResponse_notificationConfigurationArn = CreateEventRuleResponse.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	CreateEventRuleResponse_statusSummaryByRegion = CreateEventRuleResponse.AddMember("statusSummaryByRegion", _StatusSummaryByRegion)
-
-	CreateNotificationConfigurationRequest_name = CreateNotificationConfigurationRequest.AddMember("name", _NotificationConfigurationName)
-
-	CreateNotificationConfigurationRequest_description = CreateNotificationConfigurationRequest.AddMember("description", _NotificationConfigurationDescription)
-
-	CreateNotificationConfigurationRequest_aggregationDuration = CreateNotificationConfigurationRequest.AddMember("aggregationDuration", _AggregationDuration)
-
-	CreateNotificationConfigurationRequest_tags = CreateNotificationConfigurationRequest.AddMember("tags", _TagMap)
-
-	CreateNotificationConfigurationResponse_arn = CreateNotificationConfigurationResponse.AddMember("arn", _NotificationConfigurationArn)
-
-	CreateNotificationConfigurationResponse_status = CreateNotificationConfigurationResponse.AddMember("status", _NotificationConfigurationStatus)
-
-	DeleteEventRuleRequest_arn = DeleteEventRuleRequest.AddMember("arn", _EventRuleArn, &smithytraits.HTTPLabel{})
-
-	DeleteNotificationConfigurationRequest_arn = DeleteNotificationConfigurationRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	DeregisterNotificationHubRequest_notificationHubRegion = DeregisterNotificationHubRequest.AddMember("notificationHubRegion", _Region, &smithytraits.HTTPLabel{})
-
-	DeregisterNotificationHubResponse_notificationHubRegion = DeregisterNotificationHubResponse.AddMember("notificationHubRegion", _Region)
-
-	DeregisterNotificationHubResponse_statusSummary = DeregisterNotificationHubResponse.AddMember("statusSummary", NotificationHubStatusSummary)
-
-	DisassociateChannelRequest_arn = DisassociateChannelRequest.AddMember("arn", _ChannelArn, &smithytraits.HTTPLabel{})
-
-	DisassociateChannelRequest_notificationConfigurationArn = DisassociateChannelRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	DisassociateManagedNotificationAccountContactRequest_contactIdentifier = DisassociateManagedNotificationAccountContactRequest.AddMember("contactIdentifier", _AccountContactType, &smithytraits.HTTPLabel{})
-
-	DisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = DisassociateManagedNotificationAccountContactRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	DisassociateManagedNotificationAdditionalChannelRequest_channelArn = DisassociateManagedNotificationAdditionalChannelRequest.AddMember("channelArn", _ChannelArn, &smithytraits.HTTPLabel{})
-
-	DisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = DisassociateManagedNotificationAdditionalChannelRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	DisassociateOrganizationalUnitRequest_organizationalUnitId = DisassociateOrganizationalUnitRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPLabel{})
-
-	DisassociateOrganizationalUnitRequest_notificationConfigurationArn = DisassociateOrganizationalUnitRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	GetEventRuleRequest_arn = GetEventRuleRequest.AddMember("arn", _EventRuleArn, &smithytraits.HTTPLabel{})
-
-	GetEventRuleResponse_arn = GetEventRuleResponse.AddMember("arn", _EventRuleArn)
-
-	GetEventRuleResponse_notificationConfigurationArn = GetEventRuleResponse.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	GetEventRuleResponse_creationTime = GetEventRuleResponse.AddMember("creationTime", _CreationTime)
-
-	GetEventRuleResponse_source = GetEventRuleResponse.AddMember("source", _Source)
-
-	GetEventRuleResponse_eventType = GetEventRuleResponse.AddMember("eventType", _EventType)
-
-	GetEventRuleResponse_eventPattern = GetEventRuleResponse.AddMember("eventPattern", _EventRuleEventPattern)
-
-	GetEventRuleResponse_regions = GetEventRuleResponse.AddMember("regions", _Regions)
-
-	GetEventRuleResponse_managedRules = GetEventRuleResponse.AddMember("managedRules", _ManagedRuleArns)
-
-	GetEventRuleResponse_statusSummaryByRegion = GetEventRuleResponse.AddMember("statusSummaryByRegion", _StatusSummaryByRegion)
-
-	GetManagedNotificationChildEventRequest_arn = GetManagedNotificationChildEventRequest.AddMember("arn", _ManagedNotificationChildEventArn, &smithytraits.HTTPLabel{})
-
-	GetManagedNotificationChildEventRequest_locale = GetManagedNotificationChildEventRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetManagedNotificationChildEventResponse_arn = GetManagedNotificationChildEventResponse.AddMember("arn", _ManagedNotificationChildEventArn)
-
-	GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn = GetManagedNotificationChildEventResponse.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	GetManagedNotificationChildEventResponse_creationTime = GetManagedNotificationChildEventResponse.AddMember("creationTime", _CreationTime)
-
-	GetManagedNotificationChildEventResponse_content = GetManagedNotificationChildEventResponse.AddMember("content", ManagedNotificationChildEvent)
-
-	GetManagedNotificationConfigurationRequest_arn = GetManagedNotificationConfigurationRequest.AddMember("arn", _ManagedNotificationConfigurationOsArn, &smithytraits.HTTPLabel{})
-
-	GetManagedNotificationConfigurationResponse_arn = GetManagedNotificationConfigurationResponse.AddMember("arn", _ManagedNotificationConfigurationOsArn)
-
-	GetManagedNotificationConfigurationResponse_name = GetManagedNotificationConfigurationResponse.AddMember("name", _ManagedNotificationConfigurationName)
-
-	GetManagedNotificationConfigurationResponse_description = GetManagedNotificationConfigurationResponse.AddMember("description", _ManagedNotificationConfigurationDescription)
-
-	GetManagedNotificationConfigurationResponse_category = GetManagedNotificationConfigurationResponse.AddMember("category", smithyprelude.String)
-
-	GetManagedNotificationConfigurationResponse_subCategory = GetManagedNotificationConfigurationResponse.AddMember("subCategory", smithyprelude.String)
-
-	GetManagedNotificationEventRequest_arn = GetManagedNotificationEventRequest.AddMember("arn", _ManagedNotificationEventArn, &smithytraits.HTTPLabel{})
-
-	GetManagedNotificationEventRequest_locale = GetManagedNotificationEventRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetManagedNotificationEventResponse_arn = GetManagedNotificationEventResponse.AddMember("arn", _ManagedNotificationEventArn)
-
-	GetManagedNotificationEventResponse_managedNotificationConfigurationArn = GetManagedNotificationEventResponse.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	GetManagedNotificationEventResponse_creationTime = GetManagedNotificationEventResponse.AddMember("creationTime", _CreationTime)
-
-	GetManagedNotificationEventResponse_content = GetManagedNotificationEventResponse.AddMember("content", ManagedNotificationEvent)
-
-	GetNotificationConfigurationRequest_arn = GetNotificationConfigurationRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	GetNotificationConfigurationResponse_arn = GetNotificationConfigurationResponse.AddMember("arn", _NotificationConfigurationArn)
-
-	GetNotificationConfigurationResponse_name = GetNotificationConfigurationResponse.AddMember("name", _NotificationConfigurationName)
-
-	GetNotificationConfigurationResponse_description = GetNotificationConfigurationResponse.AddMember("description", _NotificationConfigurationDescription)
-
-	GetNotificationConfigurationResponse_status = GetNotificationConfigurationResponse.AddMember("status", _NotificationConfigurationStatus)
-
-	GetNotificationConfigurationResponse_creationTime = GetNotificationConfigurationResponse.AddMember("creationTime", _CreationTime)
-
-	GetNotificationConfigurationResponse_aggregationDuration = GetNotificationConfigurationResponse.AddMember("aggregationDuration", _AggregationDuration)
-
-	GetNotificationConfigurationResponse_subtype = GetNotificationConfigurationResponse.AddMember("subtype", _NotificationConfigurationSubtype)
-
-	GetNotificationEventRequest_arn = GetNotificationEventRequest.AddMember("arn", _NotificationEventArn, &smithytraits.HTTPLabel{})
-
-	GetNotificationEventRequest_locale = GetNotificationEventRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetNotificationEventResponse_arn = GetNotificationEventResponse.AddMember("arn", _NotificationEventArn)
-
-	GetNotificationEventResponse_notificationConfigurationArn = GetNotificationEventResponse.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	GetNotificationEventResponse_creationTime = GetNotificationEventResponse.AddMember("creationTime", _CreationTime)
-
-	GetNotificationEventResponse_content = GetNotificationEventResponse.AddMember("content", NotificationEventSchema)
-
-	GetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization = GetNotificationsAccessForOrganizationResponse.AddMember("notificationsAccessForOrganization", NotificationsAccessForOrganization)
-
-	ListChannelsRequest_notificationConfigurationArn = ListChannelsRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn, &smithytraits.HTTPQuery{Name: "notificationConfigurationArn"})
-
-	ListChannelsRequest_maxResults = ListChannelsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsRequest_nextToken = ListChannelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsResponse_nextToken = ListChannelsResponse.AddMember("nextToken", _NextToken)
-
-	ListChannelsResponse_channels = ListChannelsResponse.AddMember("channels", _Channels)
-
-	ListEventRulesRequest_notificationConfigurationArn = ListEventRulesRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn, &smithytraits.HTTPQuery{Name: "notificationConfigurationArn"})
-
-	ListEventRulesRequest_maxResults = ListEventRulesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEventRulesRequest_nextToken = ListEventRulesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEventRulesResponse_nextToken = ListEventRulesResponse.AddMember("nextToken", _NextToken)
-
-	ListEventRulesResponse_eventRules = ListEventRulesResponse.AddMember("eventRules", _EventRules)
-
-	ListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn = ListManagedNotificationChannelAssociationsRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn, &smithytraits.HTTPQuery{Name: "managedNotificationConfigurationArn"})
-
-	ListManagedNotificationChannelAssociationsRequest_maxResults = ListManagedNotificationChannelAssociationsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedNotificationChannelAssociationsRequest_nextToken = ListManagedNotificationChannelAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedNotificationChannelAssociationsResponse_nextToken = ListManagedNotificationChannelAssociationsResponse.AddMember("nextToken", _NextToken)
-
-	ListManagedNotificationChannelAssociationsResponse_channelAssociations = ListManagedNotificationChannelAssociationsResponse.AddMember("channelAssociations", _ManagedNotificationChannelAssociations)
-
-	ListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn = ListManagedNotificationChildEventsRequest.AddMember("aggregateManagedNotificationEventArn", _ManagedNotificationEventArn, &smithytraits.HTTPLabel{})
-
-	ListManagedNotificationChildEventsRequest_startTime = ListManagedNotificationChildEventsRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "startTime"})
-
-	ListManagedNotificationChildEventsRequest_endTime = ListManagedNotificationChildEventsRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "endTime"})
-
-	ListManagedNotificationChildEventsRequest_locale = ListManagedNotificationChildEventsRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	ListManagedNotificationChildEventsRequest_maxResults = ListManagedNotificationChildEventsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedNotificationChildEventsRequest_relatedAccount = ListManagedNotificationChildEventsRequest.AddMember("relatedAccount", _AccountId, &smithytraits.HTTPQuery{Name: "relatedAccount"})
-
-	ListManagedNotificationChildEventsRequest_organizationalUnitId = ListManagedNotificationChildEventsRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPQuery{Name: "organizationalUnitId"})
-
-	ListManagedNotificationChildEventsRequest_nextToken = ListManagedNotificationChildEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedNotificationChildEventsResponse_nextToken = ListManagedNotificationChildEventsResponse.AddMember("nextToken", _NextToken)
-
-	ListManagedNotificationChildEventsResponse_managedNotificationChildEvents = ListManagedNotificationChildEventsResponse.AddMember("managedNotificationChildEvents", _ManagedNotificationChildEvents)
-
-	ListManagedNotificationConfigurationsRequest_channelIdentifier = ListManagedNotificationConfigurationsRequest.AddMember("channelIdentifier", _ChannelIdentifier, &smithytraits.HTTPQuery{Name: "channelIdentifier"})
-
-	ListManagedNotificationConfigurationsRequest_maxResults = ListManagedNotificationConfigurationsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedNotificationConfigurationsRequest_nextToken = ListManagedNotificationConfigurationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedNotificationConfigurationsResponse_nextToken = ListManagedNotificationConfigurationsResponse.AddMember("nextToken", _NextToken)
-
-	ListManagedNotificationConfigurationsResponse_managedNotificationConfigurations = ListManagedNotificationConfigurationsResponse.AddMember("managedNotificationConfigurations", _ManagedNotificationConfigurations)
-
-	ListManagedNotificationEventsRequest_startTime = ListManagedNotificationEventsRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "startTime"})
-
-	ListManagedNotificationEventsRequest_endTime = ListManagedNotificationEventsRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "endTime"})
-
-	ListManagedNotificationEventsRequest_locale = ListManagedNotificationEventsRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	ListManagedNotificationEventsRequest_source = ListManagedNotificationEventsRequest.AddMember("source", _Source, &smithytraits.HTTPQuery{Name: "source"})
-
-	ListManagedNotificationEventsRequest_maxResults = ListManagedNotificationEventsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedNotificationEventsRequest_nextToken = ListManagedNotificationEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedNotificationEventsRequest_organizationalUnitId = ListManagedNotificationEventsRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPQuery{Name: "organizationalUnitId"})
-
-	ListManagedNotificationEventsRequest_relatedAccount = ListManagedNotificationEventsRequest.AddMember("relatedAccount", _AccountId, &smithytraits.HTTPQuery{Name: "relatedAccount"})
-
-	ListManagedNotificationEventsRequest_includeSensitiveEvents = ListManagedNotificationEventsRequest.AddMember("includeSensitiveEvents", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "includeSensitiveEvents"})
-
-	ListManagedNotificationEventsResponse_nextToken = ListManagedNotificationEventsResponse.AddMember("nextToken", _NextToken)
-
-	ListManagedNotificationEventsResponse_managedNotificationEvents = ListManagedNotificationEventsResponse.AddMember("managedNotificationEvents", _ManagedNotificationEvents)
-
-	ListMemberAccountsRequest_notificationConfigurationArn = ListMemberAccountsRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn, &smithytraits.HTTPQuery{Name: "notificationConfigurationArn"})
-
-	ListMemberAccountsRequest_maxResults = ListMemberAccountsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMemberAccountsRequest_nextToken = ListMemberAccountsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMemberAccountsRequest_memberAccount = ListMemberAccountsRequest.AddMember("memberAccount", _AccountId, &smithytraits.HTTPQuery{Name: "memberAccount"})
-
-	ListMemberAccountsRequest_status = ListMemberAccountsRequest.AddMember("status", _MemberAccountNotificationConfigurationStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListMemberAccountsRequest_organizationalUnitId = ListMemberAccountsRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPQuery{Name: "organizationalUnitId"})
-
-	ListMemberAccountsResponse_memberAccounts = ListMemberAccountsResponse.AddMember("memberAccounts", _MemberAccounts)
-
-	ListMemberAccountsResponse_nextToken = ListMemberAccountsResponse.AddMember("nextToken", _NextToken)
-
-	ListNotificationConfigurationsRequest_eventRuleSource = ListNotificationConfigurationsRequest.AddMember("eventRuleSource", _Source, &smithytraits.HTTPQuery{Name: "eventRuleSource"})
-
-	ListNotificationConfigurationsRequest_channelArn = ListNotificationConfigurationsRequest.AddMember("channelArn", _ChannelArn, &smithytraits.HTTPQuery{Name: "channelArn"})
-
-	ListNotificationConfigurationsRequest_status = ListNotificationConfigurationsRequest.AddMember("status", _NotificationConfigurationStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListNotificationConfigurationsRequest_subtype = ListNotificationConfigurationsRequest.AddMember("subtype", _NotificationConfigurationSubtype, &smithytraits.HTTPQuery{Name: "subtype"})
-
-	ListNotificationConfigurationsRequest_maxResults = ListNotificationConfigurationsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNotificationConfigurationsRequest_nextToken = ListNotificationConfigurationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNotificationConfigurationsResponse_nextToken = ListNotificationConfigurationsResponse.AddMember("nextToken", _NextToken)
-
-	ListNotificationConfigurationsResponse_notificationConfigurations = ListNotificationConfigurationsResponse.AddMember("notificationConfigurations", _NotificationConfigurations)
-
-	ListNotificationEventsRequest_startTime = ListNotificationEventsRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "startTime"})
-
-	ListNotificationEventsRequest_endTime = ListNotificationEventsRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "endTime"})
-
-	ListNotificationEventsRequest_locale = ListNotificationEventsRequest.AddMember("locale", _LocaleCode, &smithytraits.HTTPQuery{Name: "locale"})
-
-	ListNotificationEventsRequest_source = ListNotificationEventsRequest.AddMember("source", _Source, &smithytraits.HTTPQuery{Name: "source"})
-
-	ListNotificationEventsRequest_includeChildEvents = ListNotificationEventsRequest.AddMember("includeChildEvents", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "includeChildEvents"})
-
-	ListNotificationEventsRequest_aggregateNotificationEventArn = ListNotificationEventsRequest.AddMember("aggregateNotificationEventArn", _NotificationEventArn, &smithytraits.HTTPQuery{Name: "aggregateNotificationEventArn"})
-
-	ListNotificationEventsRequest_maxResults = ListNotificationEventsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNotificationEventsRequest_nextToken = ListNotificationEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNotificationEventsRequest_organizationalUnitId = ListNotificationEventsRequest.AddMember("organizationalUnitId", _OrganizationalUnitId, &smithytraits.HTTPQuery{Name: "organizationalUnitId"})
-
-	ListNotificationEventsResponse_nextToken = ListNotificationEventsResponse.AddMember("nextToken", _NextToken)
-
-	ListNotificationEventsResponse_notificationEvents = ListNotificationEventsResponse.AddMember("notificationEvents", _NotificationEvents)
-
-	ListNotificationHubsRequest_maxResults = ListNotificationHubsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNotificationHubsRequest_nextToken = ListNotificationHubsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNotificationHubsResponse_notificationHubs = ListNotificationHubsResponse.AddMember("notificationHubs", _NotificationHubs)
-
-	ListNotificationHubsResponse_nextToken = ListNotificationHubsResponse.AddMember("nextToken", _NextToken)
-
-	ListOrganizationalUnitsRequest_notificationConfigurationArn = ListOrganizationalUnitsRequest.AddMember("notificationConfigurationArn", _NotificationConfigurationArn, &smithytraits.HTTPQuery{Name: "notificationConfigurationArn"})
-
-	ListOrganizationalUnitsRequest_maxResults = ListOrganizationalUnitsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOrganizationalUnitsRequest_nextToken = ListOrganizationalUnitsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOrganizationalUnitsResponse_organizationalUnits = ListOrganizationalUnitsResponse.AddMember("organizationalUnits", _OrganizationalUnits)
-
-	ListOrganizationalUnitsResponse_nextToken = ListOrganizationalUnitsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	RegisterNotificationHubRequest_notificationHubRegion = RegisterNotificationHubRequest.AddMember("notificationHubRegion", _Region)
-
-	RegisterNotificationHubResponse_notificationHubRegion = RegisterNotificationHubResponse.AddMember("notificationHubRegion", _Region)
-
-	RegisterNotificationHubResponse_statusSummary = RegisterNotificationHubResponse.AddMember("statusSummary", NotificationHubStatusSummary)
-
-	RegisterNotificationHubResponse_creationTime = RegisterNotificationHubResponse.AddMember("creationTime", _CreationTime)
-
-	RegisterNotificationHubResponse_lastActivationTime = RegisterNotificationHubResponse.AddMember("lastActivationTime", _LastActivationTime)
-
-	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_arn = UntagResourceRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateEventRuleRequest_arn = UpdateEventRuleRequest.AddMember("arn", _EventRuleArn, &smithytraits.HTTPLabel{})
-
-	UpdateEventRuleRequest_eventPattern = UpdateEventRuleRequest.AddMember("eventPattern", _EventRuleEventPattern)
-
-	UpdateEventRuleRequest_regions = UpdateEventRuleRequest.AddMember("regions", _Regions)
-
-	UpdateEventRuleResponse_arn = UpdateEventRuleResponse.AddMember("arn", _EventRuleArn)
-
-	UpdateEventRuleResponse_notificationConfigurationArn = UpdateEventRuleResponse.AddMember("notificationConfigurationArn", _NotificationConfigurationArn)
-
-	UpdateEventRuleResponse_statusSummaryByRegion = UpdateEventRuleResponse.AddMember("statusSummaryByRegion", _StatusSummaryByRegion)
-
-	UpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn = UpdateManagedNotificationChannelAssociationRequest.AddMember("managedNotificationConfigurationArn", _ManagedNotificationConfigurationOsArn)
-
-	UpdateManagedNotificationChannelAssociationRequest_channelIdentifier = UpdateManagedNotificationChannelAssociationRequest.AddMember("channelIdentifier", _ManagedNotificationChannelIdentifier)
-
-	UpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed = UpdateManagedNotificationChannelAssociationRequest.AddMember("isSensitiveEventsSubscribed", smithyprelude.Boolean)
-
-	UpdateNotificationConfigurationRequest_arn = UpdateNotificationConfigurationRequest.AddMember("arn", _NotificationConfigurationArn, &smithytraits.HTTPLabel{})
-
-	UpdateNotificationConfigurationRequest_name = UpdateNotificationConfigurationRequest.AddMember("name", _NotificationConfigurationName)
-
-	UpdateNotificationConfigurationRequest_description = UpdateNotificationConfigurationRequest.AddMember("description", _NotificationConfigurationDescription)
-
-	UpdateNotificationConfigurationRequest_aggregationDuration = UpdateNotificationConfigurationRequest.AddMember("aggregationDuration", _AggregationDuration)
-
-	UpdateNotificationConfigurationResponse_arn = UpdateNotificationConfigurationResponse.AddMember("arn", _NotificationConfigurationArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "locale"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "notificationConfigurationArn"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "managedNotificationConfigurationArn"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "startTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x410}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "endTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x410}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "relatedAccount"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "organizationalUnitId"}}, DirectMask: 0x10}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "channelIdentifier"}}, DirectMask: 0x10}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "source"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeSensitiveEvents"}}, DirectMask: 0x10}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "memberAccount"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "eventRuleSource"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "channelArn"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "subtype"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeChildEvents"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "aggregateNotificationEventArn"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccessStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessStatus_ENABLED, &sAccessStatus_DISABLED, &sAccessStatus_PENDING, &sAccessStatus_FAILED}}
+var m_AggregatedNotificationRegions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AggregatedNotificationRegions_member}}
+var mAggregationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationDetail_summarizationDimensions}}
+var mAggregationKey = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationKey_name, &sAggregationKey_value}}
+var m_AggregationKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_AggregationKeys_member}}
+var mAggregationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationSummary_eventCount, &sAggregationSummary_aggregatedBy, &sAggregationSummary_aggregatedAccounts, &sAggregationSummary_aggregatedRegions, &sAggregationSummary_aggregatedOrganizationalUnits, &sAggregationSummary_additionalSummarizationDimensions}}
+var m_Channels = smithy.SchemaMembers{List: []*smithy.Schema{&s_Channels_member}}
+var mChannelType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelType_MOBILE, &sChannelType_CHATBOT, &sChannelType_EMAIL, &sChannelType_ACCOUNT_CONTACT}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_name, &sDimension_value}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var m_EventRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventRules_member}}
+var mEventRuleStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventRuleStatusSummary_status, &sEventRuleStatusSummary_reason}}
+var mEventRuleStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sEventRuleStructure_arn, &sEventRuleStructure_notificationConfigurationArn, &sEventRuleStructure_creationTime, &sEventRuleStructure_source, &sEventRuleStructure_eventType, &sEventRuleStructure_eventPattern, &sEventRuleStructure_regions, &sEventRuleStructure_managedRules, &sEventRuleStructure_statusSummaryByRegion}, Hash: &hEventRuleStructure}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_ManagedNotificationChannelAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedNotificationChannelAssociations_member}}
+var mManagedNotificationChannelAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationChannelAssociationSummary_channelIdentifier, &sManagedNotificationChannelAssociationSummary_channelType, &sManagedNotificationChannelAssociationSummary_overrideOption, &sManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed}}
+var mManagedNotificationChildEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationChildEvent_schemaVersion, &sManagedNotificationChildEvent_id, &sManagedNotificationChildEvent_messageComponents, &sManagedNotificationChildEvent_sourceEventDetailUrl, &sManagedNotificationChildEvent_sourceEventDetailUrlDisplayText, &sManagedNotificationChildEvent_notificationType, &sManagedNotificationChildEvent_eventStatus, &sManagedNotificationChildEvent_aggregateManagedNotificationEventArn, &sManagedNotificationChildEvent_startTime, &sManagedNotificationChildEvent_endTime, &sManagedNotificationChildEvent_textParts, &sManagedNotificationChildEvent_organizationalUnitId, &sManagedNotificationChildEvent_aggregationDetail}, Hash: &hManagedNotificationChildEvent}
+var mManagedNotificationChildEventOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationChildEventOverview_arn, &sManagedNotificationChildEventOverview_managedNotificationConfigurationArn, &sManagedNotificationChildEventOverview_relatedAccount, &sManagedNotificationChildEventOverview_creationTime, &sManagedNotificationChildEventOverview_childEvent, &sManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn, &sManagedNotificationChildEventOverview_organizationalUnitId}}
+var m_ManagedNotificationChildEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedNotificationChildEvents_member}}
+var mManagedNotificationChildEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationChildEventSummary_schemaVersion, &sManagedNotificationChildEventSummary_sourceEventMetadata, &sManagedNotificationChildEventSummary_messageComponents, &sManagedNotificationChildEventSummary_aggregationDetail, &sManagedNotificationChildEventSummary_eventStatus, &sManagedNotificationChildEventSummary_notificationType}}
+var m_ManagedNotificationConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedNotificationConfigurations_member}}
+var mManagedNotificationConfigurationStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationConfigurationStructure_arn, &sManagedNotificationConfigurationStructure_name, &sManagedNotificationConfigurationStructure_description}}
+var mManagedNotificationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationEvent_schemaVersion, &sManagedNotificationEvent_id, &sManagedNotificationEvent_messageComponents, &sManagedNotificationEvent_sourceEventDetailUrl, &sManagedNotificationEvent_sourceEventDetailUrlDisplayText, &sManagedNotificationEvent_notificationType, &sManagedNotificationEvent_eventStatus, &sManagedNotificationEvent_aggregationEventType, &sManagedNotificationEvent_aggregationSummary, &sManagedNotificationEvent_startTime, &sManagedNotificationEvent_endTime, &sManagedNotificationEvent_textParts, &sManagedNotificationEvent_organizationalUnitId, &sManagedNotificationEvent_attachments}, Hash: &hManagedNotificationEvent}
+var mManagedNotificationEventOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationEventOverview_arn, &sManagedNotificationEventOverview_managedNotificationConfigurationArn, &sManagedNotificationEventOverview_relatedAccount, &sManagedNotificationEventOverview_creationTime, &sManagedNotificationEventOverview_notificationEvent, &sManagedNotificationEventOverview_aggregationEventType, &sManagedNotificationEventOverview_organizationalUnitId, &sManagedNotificationEventOverview_aggregationSummary, &sManagedNotificationEventOverview_aggregatedNotificationRegions}, Hash: &hManagedNotificationEventOverview}
+var m_ManagedNotificationEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedNotificationEvents_member}}
+var mManagedNotificationEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedNotificationEventSummary_schemaVersion, &sManagedNotificationEventSummary_sourceEventMetadata, &sManagedNotificationEventSummary_messageComponents, &sManagedNotificationEventSummary_eventStatus, &sManagedNotificationEventSummary_notificationType}}
+var m_ManagedRuleArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedRuleArns_member}}
+var mManagedSourceEventMetadataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedSourceEventMetadataSummary_eventOriginRegion, &sManagedSourceEventMetadataSummary_source, &sManagedSourceEventMetadataSummary_eventType}}
+var m_Media = smithy.SchemaMembers{List: []*smithy.Schema{&s_Media_member}}
+var mMediaElement = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaElement_mediaId, &sMediaElement_type, &sMediaElement_url, &sMediaElement_caption}}
+var mMemberAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberAccount_notificationConfigurationArn, &sMemberAccount_accountId, &sMemberAccount_status, &sMemberAccount_statusReason, &sMemberAccount_organizationalUnitId}}
+var m_MemberAccounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberAccounts_member}}
+var mMessageComponents = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageComponents_headline, &sMessageComponents_paragraphSummary, &sMessageComponents_completeDescription, &sMessageComponents_markupDescription, &sMessageComponents_dimensions}}
+var mMessageComponentsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageComponentsSummary_headline}}
+var m_NotificationConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationConfigurations_member}}
+var mNotificationConfigurationStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationConfigurationStructure_arn, &sNotificationConfigurationStructure_name, &sNotificationConfigurationStructure_description, &sNotificationConfigurationStructure_status, &sNotificationConfigurationStructure_creationTime, &sNotificationConfigurationStructure_aggregationDuration, &sNotificationConfigurationStructure_subtype}}
+var mNotificationEventAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationEventAttachment_displayName, &sNotificationEventAttachment_attachmentDownloadUrl, &sNotificationEventAttachment_contentType}}
+var m_NotificationEventAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationEventAttachmentList_member}}
+var mNotificationEventOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationEventOverview_arn, &sNotificationEventOverview_notificationConfigurationArn, &sNotificationEventOverview_relatedAccount, &sNotificationEventOverview_creationTime, &sNotificationEventOverview_notificationEvent, &sNotificationEventOverview_aggregationEventType, &sNotificationEventOverview_aggregateNotificationEventArn, &sNotificationEventOverview_aggregationSummary, &sNotificationEventOverview_organizationalUnitId}, Hash: &hNotificationEventOverview}
+var m_NotificationEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationEvents_member}}
+var mNotificationEventSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationEventSchema_schemaVersion, &sNotificationEventSchema_id, &sNotificationEventSchema_sourceEventMetadata, &sNotificationEventSchema_messageComponents, &sNotificationEventSchema_sourceEventDetailUrl, &sNotificationEventSchema_sourceEventDetailUrlDisplayText, &sNotificationEventSchema_notificationType, &sNotificationEventSchema_eventStatus, &sNotificationEventSchema_aggregationEventType, &sNotificationEventSchema_aggregateNotificationEventArn, &sNotificationEventSchema_aggregationSummary, &sNotificationEventSchema_startTime, &sNotificationEventSchema_endTime, &sNotificationEventSchema_textParts, &sNotificationEventSchema_media, &sNotificationEventSchema_organizationalUnitId}, Hash: &hNotificationEventSchema}
+var mNotificationEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationEventSummary_schemaVersion, &sNotificationEventSummary_sourceEventMetadata, &sNotificationEventSummary_messageComponents, &sNotificationEventSummary_eventStatus, &sNotificationEventSummary_notificationType}}
+var mNotificationHubOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationHubOverview_notificationHubRegion, &sNotificationHubOverview_statusSummary, &sNotificationHubOverview_creationTime, &sNotificationHubOverview_lastActivationTime}}
+var m_NotificationHubs = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotificationHubs_member}}
+var mNotificationHubStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationHubStatusSummary_status, &sNotificationHubStatusSummary_reason}}
+var mNotificationsAccessForOrganization = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationsAccessForOrganization_accessStatus}}
+var m_OrganizationalUnits = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationalUnits_member}}
+var m_Regions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Regions_member}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_id, &sResource_arn, &sResource_detailUrl, &sResource_tags}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId}}
+var m_Resources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resources_member}}
+var m_SampleAggregationDimensionValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SampleAggregationDimensionValues_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSourceEventMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceEventMetadata_eventTypeVersion, &sSourceEventMetadata_sourceEventId, &sSourceEventMetadata_eventOriginRegion, &sSourceEventMetadata_relatedAccount, &sSourceEventMetadata_source, &sSourceEventMetadata_eventOccurrenceTime, &sSourceEventMetadata_eventType, &sSourceEventMetadata_relatedResources}}
+var mSourceEventMetadataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceEventMetadataSummary_eventOriginRegion, &sSourceEventMetadataSummary_source, &sSourceEventMetadataSummary_eventType}}
+var m_StatusSummaryByRegion = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatusSummaryByRegion_key, &s_StatusSummaryByRegion_value}}
+var mSummarizationDimensionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSummarizationDimensionDetail_name, &sSummarizationDimensionDetail_value}}
+var m_SummarizationDimensionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_SummarizationDimensionDetails_member}}
+var mSummarizationDimensionOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sSummarizationDimensionOverview_name, &sSummarizationDimensionOverview_count, &sSummarizationDimensionOverview_sampleValues}}
+var m_SummarizationDimensionOverviews = smithy.SchemaMembers{List: []*smithy.Schema{&s_SummarizationDimensionOverviews_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var m_TextByLocale = smithy.SchemaMembers{List: []*smithy.Schema{&s_TextByLocale_key, &s_TextByLocale_value}}
+var m_TextParts = smithy.SchemaMembers{List: []*smithy.Schema{&s_TextParts_key, &s_TextParts_value}}
+var mTextPartValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTextPartValue_type, &sTextPartValue_displayText, &sTextPartValue_textByLocale, &sTextPartValue_url}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mAssociateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateChannelRequest_arn, &sAssociateChannelRequest_notificationConfigurationArn}}
+var mAssociateManagedNotificationAccountContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateManagedNotificationAccountContactRequest_contactIdentifier, &sAssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn, &sAssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed}}
+var mAssociateManagedNotificationAdditionalChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateManagedNotificationAdditionalChannelRequest_channelArn, &sAssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn, &sAssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed}}
+var mAssociateOrganizationalUnitRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateOrganizationalUnitRequest_organizationalUnitId, &sAssociateOrganizationalUnitRequest_notificationConfigurationArn}}
+var mCreateEventRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventRuleRequest_notificationConfigurationArn, &sCreateEventRuleRequest_source, &sCreateEventRuleRequest_eventType, &sCreateEventRuleRequest_eventPattern, &sCreateEventRuleRequest_regions}}
+var mCreateEventRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventRuleResponse_arn, &sCreateEventRuleResponse_notificationConfigurationArn, &sCreateEventRuleResponse_statusSummaryByRegion}}
+var mCreateNotificationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotificationConfigurationRequest_name, &sCreateNotificationConfigurationRequest_description, &sCreateNotificationConfigurationRequest_aggregationDuration, &sCreateNotificationConfigurationRequest_tags}}
+var mCreateNotificationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotificationConfigurationResponse_arn, &sCreateNotificationConfigurationResponse_status}}
+var mDeleteEventRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventRuleRequest_arn}}
+var mDeleteNotificationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNotificationConfigurationRequest_arn}}
+var mDeregisterNotificationHubRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterNotificationHubRequest_notificationHubRegion}}
+var mDeregisterNotificationHubResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterNotificationHubResponse_notificationHubRegion, &sDeregisterNotificationHubResponse_statusSummary}}
+var mDisassociateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateChannelRequest_arn, &sDisassociateChannelRequest_notificationConfigurationArn}}
+var mDisassociateManagedNotificationAccountContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateManagedNotificationAccountContactRequest_contactIdentifier, &sDisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn}}
+var mDisassociateManagedNotificationAdditionalChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateManagedNotificationAdditionalChannelRequest_channelArn, &sDisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn}}
+var mDisassociateOrganizationalUnitRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateOrganizationalUnitRequest_organizationalUnitId, &sDisassociateOrganizationalUnitRequest_notificationConfigurationArn}}
+var mGetEventRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventRuleRequest_arn}}
+var mGetEventRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventRuleResponse_arn, &sGetEventRuleResponse_notificationConfigurationArn, &sGetEventRuleResponse_creationTime, &sGetEventRuleResponse_source, &sGetEventRuleResponse_eventType, &sGetEventRuleResponse_eventPattern, &sGetEventRuleResponse_regions, &sGetEventRuleResponse_managedRules, &sGetEventRuleResponse_statusSummaryByRegion}, Hash: &hGetEventRuleResponse}
+var mGetManagedNotificationChildEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationChildEventRequest_arn, &sGetManagedNotificationChildEventRequest_locale}}
+var mGetManagedNotificationChildEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationChildEventResponse_arn, &sGetManagedNotificationChildEventResponse_managedNotificationConfigurationArn, &sGetManagedNotificationChildEventResponse_creationTime, &sGetManagedNotificationChildEventResponse_content}}
+var mGetManagedNotificationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationConfigurationRequest_arn}}
+var mGetManagedNotificationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationConfigurationResponse_arn, &sGetManagedNotificationConfigurationResponse_name, &sGetManagedNotificationConfigurationResponse_description, &sGetManagedNotificationConfigurationResponse_category, &sGetManagedNotificationConfigurationResponse_subCategory}}
+var mGetManagedNotificationEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationEventRequest_arn, &sGetManagedNotificationEventRequest_locale}}
+var mGetManagedNotificationEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedNotificationEventResponse_arn, &sGetManagedNotificationEventResponse_managedNotificationConfigurationArn, &sGetManagedNotificationEventResponse_creationTime, &sGetManagedNotificationEventResponse_content}}
+var mGetNotificationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationConfigurationRequest_arn}}
+var mGetNotificationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationConfigurationResponse_arn, &sGetNotificationConfigurationResponse_name, &sGetNotificationConfigurationResponse_description, &sGetNotificationConfigurationResponse_status, &sGetNotificationConfigurationResponse_creationTime, &sGetNotificationConfigurationResponse_aggregationDuration, &sGetNotificationConfigurationResponse_subtype}}
+var mGetNotificationEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationEventRequest_arn, &sGetNotificationEventRequest_locale}}
+var mGetNotificationEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationEventResponse_arn, &sGetNotificationEventResponse_notificationConfigurationArn, &sGetNotificationEventResponse_creationTime, &sGetNotificationEventResponse_content}}
+var mGetNotificationsAccessForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_notificationConfigurationArn, &sListChannelsRequest_maxResults, &sListChannelsRequest_nextToken}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_nextToken, &sListChannelsResponse_channels}}
+var mListEventRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventRulesRequest_notificationConfigurationArn, &sListEventRulesRequest_maxResults, &sListEventRulesRequest_nextToken}}
+var mListEventRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventRulesResponse_nextToken, &sListEventRulesResponse_eventRules}}
+var mListManagedNotificationChannelAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn, &sListManagedNotificationChannelAssociationsRequest_maxResults, &sListManagedNotificationChannelAssociationsRequest_nextToken}}
+var mListManagedNotificationChannelAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationChannelAssociationsResponse_nextToken, &sListManagedNotificationChannelAssociationsResponse_channelAssociations}}
+var mListManagedNotificationChildEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn, &sListManagedNotificationChildEventsRequest_startTime, &sListManagedNotificationChildEventsRequest_endTime, &sListManagedNotificationChildEventsRequest_locale, &sListManagedNotificationChildEventsRequest_maxResults, &sListManagedNotificationChildEventsRequest_relatedAccount, &sListManagedNotificationChildEventsRequest_organizationalUnitId, &sListManagedNotificationChildEventsRequest_nextToken}}
+var mListManagedNotificationChildEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationChildEventsResponse_nextToken, &sListManagedNotificationChildEventsResponse_managedNotificationChildEvents}}
+var mListManagedNotificationConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationConfigurationsRequest_channelIdentifier, &sListManagedNotificationConfigurationsRequest_maxResults, &sListManagedNotificationConfigurationsRequest_nextToken}}
+var mListManagedNotificationConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationConfigurationsResponse_nextToken, &sListManagedNotificationConfigurationsResponse_managedNotificationConfigurations}}
+var mListManagedNotificationEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationEventsRequest_startTime, &sListManagedNotificationEventsRequest_endTime, &sListManagedNotificationEventsRequest_locale, &sListManagedNotificationEventsRequest_source, &sListManagedNotificationEventsRequest_maxResults, &sListManagedNotificationEventsRequest_nextToken, &sListManagedNotificationEventsRequest_organizationalUnitId, &sListManagedNotificationEventsRequest_relatedAccount, &sListManagedNotificationEventsRequest_includeSensitiveEvents}, Hash: &hListManagedNotificationEventsRequest}
+var mListManagedNotificationEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedNotificationEventsResponse_nextToken, &sListManagedNotificationEventsResponse_managedNotificationEvents}}
+var mListMemberAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMemberAccountsRequest_notificationConfigurationArn, &sListMemberAccountsRequest_maxResults, &sListMemberAccountsRequest_nextToken, &sListMemberAccountsRequest_memberAccount, &sListMemberAccountsRequest_status, &sListMemberAccountsRequest_organizationalUnitId}}
+var mListMemberAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMemberAccountsResponse_memberAccounts, &sListMemberAccountsResponse_nextToken}}
+var mListNotificationConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationConfigurationsRequest_eventRuleSource, &sListNotificationConfigurationsRequest_channelArn, &sListNotificationConfigurationsRequest_status, &sListNotificationConfigurationsRequest_subtype, &sListNotificationConfigurationsRequest_maxResults, &sListNotificationConfigurationsRequest_nextToken}}
+var mListNotificationConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationConfigurationsResponse_nextToken, &sListNotificationConfigurationsResponse_notificationConfigurations}}
+var mListNotificationEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationEventsRequest_startTime, &sListNotificationEventsRequest_endTime, &sListNotificationEventsRequest_locale, &sListNotificationEventsRequest_source, &sListNotificationEventsRequest_includeChildEvents, &sListNotificationEventsRequest_aggregateNotificationEventArn, &sListNotificationEventsRequest_maxResults, &sListNotificationEventsRequest_nextToken, &sListNotificationEventsRequest_organizationalUnitId}, Hash: &hListNotificationEventsRequest}
+var mListNotificationEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationEventsResponse_nextToken, &sListNotificationEventsResponse_notificationEvents}}
+var mListNotificationHubsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationHubsRequest_maxResults, &sListNotificationHubsRequest_nextToken}}
+var mListNotificationHubsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotificationHubsResponse_notificationHubs, &sListNotificationHubsResponse_nextToken}}
+var mListOrganizationalUnitsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationalUnitsRequest_notificationConfigurationArn, &sListOrganizationalUnitsRequest_maxResults, &sListOrganizationalUnitsRequest_nextToken}}
+var mListOrganizationalUnitsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationalUnitsResponse_organizationalUnits, &sListOrganizationalUnitsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_arn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterNotificationHubRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterNotificationHubRequest_notificationHubRegion}}
+var mRegisterNotificationHubResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterNotificationHubResponse_notificationHubRegion, &sRegisterNotificationHubResponse_statusSummary, &sRegisterNotificationHubResponse_creationTime, &sRegisterNotificationHubResponse_lastActivationTime}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_arn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_arn, &sUntagResourceRequest_tagKeys}}
+var mUpdateEventRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventRuleRequest_arn, &sUpdateEventRuleRequest_eventPattern, &sUpdateEventRuleRequest_regions}}
+var mUpdateEventRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventRuleResponse_arn, &sUpdateEventRuleResponse_notificationConfigurationArn, &sUpdateEventRuleResponse_statusSummaryByRegion}}
+var mUpdateManagedNotificationChannelAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn, &sUpdateManagedNotificationChannelAssociationRequest_channelIdentifier, &sUpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed}}
+var mUpdateNotificationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotificationConfigurationRequest_arn, &sUpdateNotificationConfigurationRequest_name, &sUpdateNotificationConfigurationRequest_description, &sUpdateNotificationConfigurationRequest_aggregationDuration}}
+var mUpdateNotificationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotificationConfigurationResponse_arn}}
+
+var hEventRuleStructure = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 3, 0, 0, 0, 0, 5, 8, 0, 0, 0, 0, 0,
+	6, 2, 0, 0, 0, 4, 7, 0,
+}}
+var hManagedNotificationChildEvent = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 6, 0, 7, 8, 0, 0, 5, 0, 0, 0, 0, 9, 3, 11, 4, 0, 0, 0, 0, 1, 12, 0,
+	0, 0, 13, 2, 0, 0, 0, 10,
+}}
+var hManagedNotificationEvent = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 6, 0, 7, 0, 0, 0, 5, 0, 0, 0, 0, 10, 3, 12, 4, 8, 0, 0, 0, 1, 13, 0,
+	14, 0, 0, 2, 0, 0, 9, 11,
+}}
+var hManagedNotificationEventOverview = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 1, 9, 0, 0, 0, 0, 0, 0, 0, 3, 0, 6, 4, 2, 0, 7, 8,
+	0, 0, 0, 0, 5, 0, 0, 0,
+}}
+var hNotificationEventOverview = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 7, 0, 6, 8, 0, 0, 4, 0,
+	0, 0, 0, 0, 3, 0, 9, 0,
+}}
+var hNotificationEventSchema = smithy.MemberHash{Seed: 49, Slots: []uint16{
+	0, 9, 0, 8, 0, 0, 12, 2, 3, 7, 0, 13, 0, 4, 0, 0, 0, 10, 6, 0, 0, 0, 0, 1,
+	15, 0, 0, 14, 11, 16, 5, 0,
+}}
+var hGetEventRuleResponse = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 3, 0, 0, 0, 0, 5, 8, 0, 0, 0, 0, 0,
+	6, 2, 0, 0, 0, 4, 7, 0,
+}}
+var hListManagedNotificationEventsRequest = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 3, 9, 0, 0, 0, 1, 2, 0, 0, 0, 4, 0, 0, 8, 0, 0, 0, 0, 0, 7, 0,
+	6, 0, 0, 0, 0, 0, 5, 0,
+}}
+var hListNotificationEventsRequest = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 6, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0,
+	8, 0, 1, 5, 9, 0, 0, 2,
+}}
+
+var sAssociateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateChannel, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateChannel})
+var sAssociateManagedNotificationAccountContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAccountContact, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateManagedNotificationAccountContact})
+var sAssociateManagedNotificationAdditionalChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAdditionalChannel, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eAssociateManagedNotificationAdditionalChannel})
+var sAssociateOrganizationalUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateOrganizationalUnit, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eAssociateOrganizationalUnit})
+var sCreateEventRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventRule, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateEventRule})
+var sCreateNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateNotificationConfiguration})
+var sDeleteEventRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventRule, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEventRule})
+var sDeleteNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNotificationConfiguration})
+var sDeregisterNotificationHub = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterNotificationHub, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterNotificationHub})
+var sDisableNotificationsAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableNotificationsAccessForOrganization, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDisableNotificationsAccessForOrganization})
+var sDisassociateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateChannel, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateChannel})
+var sDisassociateManagedNotificationAccountContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAccountContact, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateManagedNotificationAccountContact})
+var sDisassociateManagedNotificationAdditionalChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAdditionalChannel, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateManagedNotificationAdditionalChannel})
+var sDisassociateOrganizationalUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateOrganizationalUnit, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateOrganizationalUnit})
+var sEnableNotificationsAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableNotificationsAccessForOrganization, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eEnableNotificationsAccessForOrganization})
+var sGetEventRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventRule, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetEventRule})
+var sGetManagedNotificationChildEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationChildEvent, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetManagedNotificationChildEvent})
+var sGetManagedNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationConfiguration, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetManagedNotificationConfiguration})
+var sGetManagedNotificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationEvent, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetManagedNotificationEvent})
+var sGetNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationConfiguration, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetNotificationConfiguration})
+var sGetNotificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationEvent, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eGetNotificationEvent})
+var sGetNotificationsAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationsAccessForOrganization, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eGetNotificationsAccessForOrganization})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListEventRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventRules, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListEventRules})
+var sListManagedNotificationChannelAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChannelAssociations, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListManagedNotificationChannelAssociations})
+var sListManagedNotificationChildEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChildEvents, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListManagedNotificationChildEvents})
+var sListManagedNotificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationConfigurations, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListManagedNotificationConfigurations})
+var sListManagedNotificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationEvents, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eListManagedNotificationEvents})
+var sListMemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccounts, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eListMemberAccounts})
+var sListNotificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationConfigurations, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eListNotificationConfigurations})
+var sListNotificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationEvents, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eListNotificationEvents})
+var sListNotificationHubs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationHubs, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eListNotificationHubs})
+var sListOrganizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationalUnits, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eListOrganizationalUnits})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterNotificationHub = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterNotificationHub, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eRegisterNotificationHub})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateEventRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventRule, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEventRule})
+var sUpdateManagedNotificationChannelAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateManagedNotificationChannelAssociation, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eUpdateManagedNotificationChannelAssociation})
+var sUpdateNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfiguration, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNotificationConfiguration})
+var s_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Notifications, Type: smithy.ShapeTypeService, Ext: &e_Notifications})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessStatus, Members: &mAccessStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessStatus})
+var sAccessStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessStatus_ENABLED})
+var sAccessStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessStatus_DISABLED})
+var sAccessStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessStatus_PENDING})
+var sAccessStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessStatus_FAILED})
+var s_AccountContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountContactType, Type: smithy.ShapeTypeString, Ext: &e_AccountContactType})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AggregatedNotificationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregatedNotificationRegions, Members: &m_AggregatedNotificationRegions, Type: smithy.ShapeTypeList, Ext: &e_AggregatedNotificationRegions})
+var s_AggregatedNotificationRegions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_AggregatedNotificationRegions_member})
+var sAggregationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationDetail, Members: &mAggregationDetail, Type: smithy.ShapeTypeStructure, Ext: &eAggregationDetail})
+var sAggregationDetail_summarizationDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summarizationDimensions", ID: &i_SummarizationDimensionDetails, Members: &m_SummarizationDimensionDetails, Type: smithy.ShapeTypeList, Ext: &eAggregationDetail_summarizationDimensions})
+var s_AggregationDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationDuration, Type: smithy.ShapeTypeString, Ext: &e_AggregationDuration})
+var s_AggregationEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationEventType, Type: smithy.ShapeTypeString, Ext: &e_AggregationEventType})
+var sAggregationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationKey, Members: &mAggregationKey, Type: smithy.ShapeTypeStructure, Ext: &eAggregationKey})
+var sAggregationKey_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAggregationKey_name})
+var sAggregationKey_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAggregationKey_value})
+var s_AggregationKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationKeys, Members: &m_AggregationKeys, Type: smithy.ShapeTypeList, Ext: &e_AggregationKeys})
+var s_AggregationKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAggregationKey, Members: &mAggregationKey, Type: smithy.ShapeTypeStructure, Ext: &e_AggregationKeys_member})
+var sAggregationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationSummary, Members: &mAggregationSummary, Type: smithy.ShapeTypeStructure, Ext: &eAggregationSummary})
+var sAggregationSummary_eventCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAggregationSummary_eventCount})
+var sAggregationSummary_aggregatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedBy", ID: &i_AggregationKeys, Members: &m_AggregationKeys, Type: smithy.ShapeTypeList, Ext: &eAggregationSummary_aggregatedBy})
+var sAggregationSummary_aggregatedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedAccounts", ID: &iSummarizationDimensionOverview, Members: &mSummarizationDimensionOverview, Type: smithy.ShapeTypeStructure, Ext: &eAggregationSummary_aggregatedAccounts})
+var sAggregationSummary_aggregatedRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedRegions", ID: &iSummarizationDimensionOverview, Members: &mSummarizationDimensionOverview, Type: smithy.ShapeTypeStructure, Ext: &eAggregationSummary_aggregatedRegions})
+var sAggregationSummary_aggregatedOrganizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedOrganizationalUnits", ID: &iSummarizationDimensionOverview, Members: &mSummarizationDimensionOverview, Type: smithy.ShapeTypeStructure, Ext: &eAggregationSummary_aggregatedOrganizationalUnits})
+var sAggregationSummary_additionalSummarizationDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalSummarizationDimensions", ID: &i_SummarizationDimensionOverviews, Members: &m_SummarizationDimensionOverviews, Type: smithy.ShapeTypeList, Ext: &eAggregationSummary_additionalSummarizationDimensions})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AttachmentContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentContentType, Type: smithy.ShapeTypeString, Ext: &e_AttachmentContentType})
+var s_AttachmentDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentDisplayName, Type: smithy.ShapeTypeString, Ext: &e_AttachmentDisplayName})
+var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelArn})
+var s_ChannelAssociationOverrideOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelAssociationOverrideOption, Type: smithy.ShapeTypeString, Ext: &e_ChannelAssociationOverrideOption})
+var s_ChannelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ChannelIdentifier})
+var s_Channels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList, Ext: &e_Channels})
+var s_Channels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &e_Channels_member})
+var sChannelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eChannelType})
+var sChannelType_MOBILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOBILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_MOBILE})
+var sChannelType_CHATBOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHATBOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_CHATBOT})
+var sChannelType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_EMAIL})
+var sChannelType_ACCOUNT_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChannelType_ACCOUNT_CONTACT})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationTime})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var sDimension_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eDimension_name})
+var sDimension_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eDimension_value})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_EventRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventRuleArn, Type: smithy.ShapeTypeString, Ext: &e_EventRuleArn})
+var s_EventRuleEventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventRuleEventPattern, Type: smithy.ShapeTypeString, Ext: &e_EventRuleEventPattern})
+var s_EventRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventRules, Members: &m_EventRules, Type: smithy.ShapeTypeList, Ext: &e_EventRules})
+var s_EventRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventRuleStructure, Members: &mEventRuleStructure, Type: smithy.ShapeTypeStructure, Ext: &e_EventRules_member})
+var s_EventRuleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventRuleStatus, Type: smithy.ShapeTypeString, Ext: &e_EventRuleStatus})
+var s_EventRuleStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventRuleStatusReason, Type: smithy.ShapeTypeString, Ext: &e_EventRuleStatusReason})
+var sEventRuleStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventRuleStatusSummary, Members: &mEventRuleStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEventRuleStatusSummary})
+var sEventRuleStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_EventRuleStatus, Type: smithy.ShapeTypeString, Ext: &eEventRuleStatusSummary_status})
+var sEventRuleStatusSummary_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_EventRuleStatusReason, Type: smithy.ShapeTypeString, Ext: &eEventRuleStatusSummary_reason})
+var sEventRuleStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventRuleStructure, Members: &mEventRuleStructure, Type: smithy.ShapeTypeStructure, Ext: &eEventRuleStructure})
+var sEventRuleStructure_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Type: smithy.ShapeTypeString, Ext: &eEventRuleStructure_arn})
+var sEventRuleStructure_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eEventRuleStructure_notificationConfigurationArn})
+var sEventRuleStructure_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eEventRuleStructure_creationTime})
+var sEventRuleStructure_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eEventRuleStructure_source})
+var sEventRuleStructure_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_EventType, Type: smithy.ShapeTypeString, Ext: &eEventRuleStructure_eventType})
+var sEventRuleStructure_eventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventPattern", ID: &i_EventRuleEventPattern, Type: smithy.ShapeTypeString, Ext: &eEventRuleStructure_eventPattern})
+var sEventRuleStructure_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eEventRuleStructure_regions})
+var sEventRuleStructure_managedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedRules", ID: &i_ManagedRuleArns, Members: &m_ManagedRuleArns, Type: smithy.ShapeTypeList, Ext: &eEventRuleStructure_managedRules})
+var sEventRuleStructure_statusSummaryByRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryByRegion", ID: &i_StatusSummaryByRegion, Members: &m_StatusSummaryByRegion, Type: smithy.ShapeTypeMap, Ext: &eEventRuleStructure_statusSummaryByRegion})
+var s_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &e_EventStatus})
+var s_EventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventType, Type: smithy.ShapeTypeString, Ext: &e_EventType})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_LastActivationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastActivationTime, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastActivationTime})
+var s_LocaleCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleCode, Type: smithy.ShapeTypeString, Ext: &e_LocaleCode})
+var s_ManagedNotificationChannelAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationChannelAssociations, Members: &m_ManagedNotificationChannelAssociations, Type: smithy.ShapeTypeList, Ext: &e_ManagedNotificationChannelAssociations})
+var s_ManagedNotificationChannelAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedNotificationChannelAssociationSummary, Members: &mManagedNotificationChannelAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedNotificationChannelAssociations_member})
+var sManagedNotificationChannelAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationChannelAssociationSummary, Members: &mManagedNotificationChannelAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChannelAssociationSummary})
+var sManagedNotificationChannelAssociationSummary_channelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChannelAssociationSummary_channelIdentifier})
+var sManagedNotificationChannelAssociationSummary_channelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelType", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum, Ext: &eManagedNotificationChannelAssociationSummary_channelType})
+var sManagedNotificationChannelAssociationSummary_overrideOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideOption", ID: &i_ChannelAssociationOverrideOption, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChannelAssociationSummary_overrideOption})
+var sManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveEventsSubscribed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed})
+var s_ManagedNotificationChannelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationChannelIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationChannelIdentifier})
+var sManagedNotificationChildEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationChildEvent, Members: &mManagedNotificationChildEvent, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEvent})
+var sManagedNotificationChildEvent_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_schemaVersion})
+var sManagedNotificationChildEvent_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NotificationEventId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_id})
+var sManagedNotificationChildEvent_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponents, Members: &mMessageComponents, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEvent_messageComponents})
+var sManagedNotificationChildEvent_sourceEventDetailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_sourceEventDetailUrl})
+var sManagedNotificationChildEvent_sourceEventDetailUrlDisplayText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrlDisplayText", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_sourceEventDetailUrlDisplayText})
+var sManagedNotificationChildEvent_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_notificationType})
+var sManagedNotificationChildEvent_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_eventStatus})
+var sManagedNotificationChildEvent_aggregateManagedNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateManagedNotificationEventArn", ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_aggregateManagedNotificationEventArn})
+var sManagedNotificationChildEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationChildEvent_startTime})
+var sManagedNotificationChildEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationChildEvent_endTime})
+var sManagedNotificationChildEvent_textParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textParts", ID: &i_TextParts, Members: &m_TextParts, Type: smithy.ShapeTypeMap, Ext: &eManagedNotificationChildEvent_textParts})
+var sManagedNotificationChildEvent_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEvent_organizationalUnitId})
+var sManagedNotificationChildEvent_aggregationDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDetail", ID: &iAggregationDetail, Members: &mAggregationDetail, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEvent_aggregationDetail})
+var s_ManagedNotificationChildEventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationChildEventArn, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationChildEventArn})
+var sManagedNotificationChildEventOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationChildEventOverview, Members: &mManagedNotificationChildEventOverview, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventOverview})
+var sManagedNotificationChildEventOverview_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventOverview_arn})
+var sManagedNotificationChildEventOverview_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventOverview_managedNotificationConfigurationArn})
+var sManagedNotificationChildEventOverview_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventOverview_relatedAccount})
+var sManagedNotificationChildEventOverview_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationChildEventOverview_creationTime})
+var sManagedNotificationChildEventOverview_childEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childEvent", ID: &iManagedNotificationChildEventSummary, Members: &mManagedNotificationChildEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventOverview_childEvent})
+var sManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateManagedNotificationEventArn", ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn})
+var sManagedNotificationChildEventOverview_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventOverview_organizationalUnitId})
+var s_ManagedNotificationChildEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationChildEvents, Members: &m_ManagedNotificationChildEvents, Type: smithy.ShapeTypeList, Ext: &e_ManagedNotificationChildEvents})
+var s_ManagedNotificationChildEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedNotificationChildEventOverview, Members: &mManagedNotificationChildEventOverview, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedNotificationChildEvents_member})
+var sManagedNotificationChildEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationChildEventSummary, Members: &mManagedNotificationChildEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventSummary})
+var sManagedNotificationChildEventSummary_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventSummary_schemaVersion})
+var sManagedNotificationChildEventSummary_sourceEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventMetadata", ID: &iManagedSourceEventMetadataSummary, Members: &mManagedSourceEventMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventSummary_sourceEventMetadata})
+var sManagedNotificationChildEventSummary_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponentsSummary, Members: &mMessageComponentsSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventSummary_messageComponents})
+var sManagedNotificationChildEventSummary_aggregationDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDetail", ID: &iAggregationDetail, Members: &mAggregationDetail, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationChildEventSummary_aggregationDetail})
+var sManagedNotificationChildEventSummary_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventSummary_eventStatus})
+var sManagedNotificationChildEventSummary_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationChildEventSummary_notificationType})
+var s_ManagedNotificationConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationConfigurationDescription})
+var s_ManagedNotificationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationConfigurationName})
+var s_ManagedNotificationConfigurationOsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationConfigurationOsArn})
+var s_ManagedNotificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationConfigurations, Members: &m_ManagedNotificationConfigurations, Type: smithy.ShapeTypeList, Ext: &e_ManagedNotificationConfigurations})
+var s_ManagedNotificationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedNotificationConfigurationStructure, Members: &mManagedNotificationConfigurationStructure, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedNotificationConfigurations_member})
+var sManagedNotificationConfigurationStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationConfigurationStructure, Members: &mManagedNotificationConfigurationStructure, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationConfigurationStructure})
+var sManagedNotificationConfigurationStructure_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationConfigurationStructure_arn})
+var sManagedNotificationConfigurationStructure_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ManagedNotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationConfigurationStructure_name})
+var sManagedNotificationConfigurationStructure_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ManagedNotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationConfigurationStructure_description})
+var sManagedNotificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationEvent, Members: &mManagedNotificationEvent, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEvent})
+var sManagedNotificationEvent_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_schemaVersion})
+var sManagedNotificationEvent_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NotificationEventId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_id})
+var sManagedNotificationEvent_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponents, Members: &mMessageComponents, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEvent_messageComponents})
+var sManagedNotificationEvent_sourceEventDetailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_sourceEventDetailUrl})
+var sManagedNotificationEvent_sourceEventDetailUrlDisplayText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrlDisplayText", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_sourceEventDetailUrlDisplayText})
+var sManagedNotificationEvent_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_notificationType})
+var sManagedNotificationEvent_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_eventStatus})
+var sManagedNotificationEvent_aggregationEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationEventType", ID: &i_AggregationEventType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_aggregationEventType})
+var sManagedNotificationEvent_aggregationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationSummary", ID: &iAggregationSummary, Members: &mAggregationSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEvent_aggregationSummary})
+var sManagedNotificationEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationEvent_startTime})
+var sManagedNotificationEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationEvent_endTime})
+var sManagedNotificationEvent_textParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textParts", ID: &i_TextParts, Members: &m_TextParts, Type: smithy.ShapeTypeMap, Ext: &eManagedNotificationEvent_textParts})
+var sManagedNotificationEvent_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEvent_organizationalUnitId})
+var sManagedNotificationEvent_attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachments", ID: &i_NotificationEventAttachmentList, Members: &m_NotificationEventAttachmentList, Type: smithy.ShapeTypeList, Ext: &eManagedNotificationEvent_attachments})
+var s_ManagedNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &e_ManagedNotificationEventArn})
+var sManagedNotificationEventOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationEventOverview, Members: &mManagedNotificationEventOverview, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventOverview})
+var sManagedNotificationEventOverview_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventOverview_arn})
+var sManagedNotificationEventOverview_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventOverview_managedNotificationConfigurationArn})
+var sManagedNotificationEventOverview_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventOverview_relatedAccount})
+var sManagedNotificationEventOverview_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedNotificationEventOverview_creationTime})
+var sManagedNotificationEventOverview_notificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEvent", ID: &iManagedNotificationEventSummary, Members: &mManagedNotificationEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventOverview_notificationEvent})
+var sManagedNotificationEventOverview_aggregationEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationEventType", ID: &i_AggregationEventType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventOverview_aggregationEventType})
+var sManagedNotificationEventOverview_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventOverview_organizationalUnitId})
+var sManagedNotificationEventOverview_aggregationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationSummary", ID: &iAggregationSummary, Members: &mAggregationSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventOverview_aggregationSummary})
+var sManagedNotificationEventOverview_aggregatedNotificationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregatedNotificationRegions", ID: &i_AggregatedNotificationRegions, Members: &m_AggregatedNotificationRegions, Type: smithy.ShapeTypeList, Ext: &eManagedNotificationEventOverview_aggregatedNotificationRegions})
+var s_ManagedNotificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedNotificationEvents, Members: &m_ManagedNotificationEvents, Type: smithy.ShapeTypeList, Ext: &e_ManagedNotificationEvents})
+var s_ManagedNotificationEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedNotificationEventOverview, Members: &mManagedNotificationEventOverview, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedNotificationEvents_member})
+var sManagedNotificationEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedNotificationEventSummary, Members: &mManagedNotificationEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventSummary})
+var sManagedNotificationEventSummary_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventSummary_schemaVersion})
+var sManagedNotificationEventSummary_sourceEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventMetadata", ID: &iManagedSourceEventMetadataSummary, Members: &mManagedSourceEventMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventSummary_sourceEventMetadata})
+var sManagedNotificationEventSummary_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponentsSummary, Members: &mMessageComponentsSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedNotificationEventSummary_messageComponents})
+var sManagedNotificationEventSummary_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventSummary_eventStatus})
+var sManagedNotificationEventSummary_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eManagedNotificationEventSummary_notificationType})
+var s_ManagedRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedRuleArn, Type: smithy.ShapeTypeString, Ext: &e_ManagedRuleArn})
+var s_ManagedRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedRuleArns, Members: &m_ManagedRuleArns, Type: smithy.ShapeTypeList, Ext: &e_ManagedRuleArns})
+var s_ManagedRuleArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ManagedRuleArn, Type: smithy.ShapeTypeString, Ext: &e_ManagedRuleArns_member})
+var sManagedSourceEventMetadataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedSourceEventMetadataSummary, Members: &mManagedSourceEventMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedSourceEventMetadataSummary})
+var sManagedSourceEventMetadataSummary_eventOriginRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOriginRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eManagedSourceEventMetadataSummary_eventOriginRegion})
+var sManagedSourceEventMetadataSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eManagedSourceEventMetadataSummary_source})
+var sManagedSourceEventMetadataSummary_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_EventType, Type: smithy.ShapeTypeString, Ext: &eManagedSourceEventMetadataSummary_eventType})
+var s_Media = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Media, Members: &m_Media, Type: smithy.ShapeTypeList, Ext: &e_Media})
+var s_Media_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaElement, Members: &mMediaElement, Type: smithy.ShapeTypeStructure, Ext: &e_Media_member})
+var sMediaElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaElement, Members: &mMediaElement, Type: smithy.ShapeTypeStructure, Ext: &eMediaElement})
+var sMediaElement_mediaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaId", ID: &i_MediaId, Type: smithy.ShapeTypeString, Ext: &eMediaElement_mediaId})
+var sMediaElement_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_MediaElementType, Type: smithy.ShapeTypeString, Ext: &eMediaElement_type})
+var sMediaElement_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eMediaElement_url})
+var sMediaElement_caption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caption", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eMediaElement_caption})
+var s_MediaElementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaElementType, Type: smithy.ShapeTypeString, Ext: &e_MediaElementType})
+var s_MediaId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaId, Type: smithy.ShapeTypeString, Ext: &e_MediaId})
+var sMemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberAccount, Members: &mMemberAccount, Type: smithy.ShapeTypeStructure, Ext: &eMemberAccount})
+var sMemberAccount_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eMemberAccount_notificationConfigurationArn})
+var sMemberAccount_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eMemberAccount_accountId})
+var sMemberAccount_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MemberAccountNotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &eMemberAccount_status})
+var sMemberAccount_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMemberAccount_statusReason})
+var sMemberAccount_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eMemberAccount_organizationalUnitId})
+var s_MemberAccountNotificationConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberAccountNotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &e_MemberAccountNotificationConfigurationStatus})
+var s_MemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberAccounts, Members: &m_MemberAccounts, Type: smithy.ShapeTypeList, Ext: &e_MemberAccounts})
+var s_MemberAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMemberAccount, Members: &mMemberAccount, Type: smithy.ShapeTypeStructure, Ext: &e_MemberAccounts_member})
+var sMessageComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageComponents, Members: &mMessageComponents, Type: smithy.ShapeTypeStructure, Ext: &eMessageComponents})
+var sMessageComponents_headline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headline", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eMessageComponents_headline})
+var sMessageComponents_paragraphSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paragraphSummary", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eMessageComponents_paragraphSummary})
+var sMessageComponents_completeDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completeDescription", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eMessageComponents_completeDescription})
+var sMessageComponents_markupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markupDescription", ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &eMessageComponents_markupDescription})
+var sMessageComponents_dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &eMessageComponents_dimensions})
+var sMessageComponentsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageComponentsSummary, Members: &mMessageComponentsSummary, Type: smithy.ShapeTypeStructure, Ext: &eMessageComponentsSummary})
+var sMessageComponentsSummary_headline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headline", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageComponentsSummary_headline})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_NotificationConfigurationArn})
+var s_NotificationConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &e_NotificationConfigurationDescription})
+var s_NotificationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_NotificationConfigurationName})
+var s_NotificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurations, Members: &m_NotificationConfigurations, Type: smithy.ShapeTypeList, Ext: &e_NotificationConfigurations})
+var s_NotificationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationConfigurationStructure, Members: &mNotificationConfigurationStructure, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationConfigurations_member})
+var s_NotificationConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &e_NotificationConfigurationStatus})
+var sNotificationConfigurationStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationConfigurationStructure, Members: &mNotificationConfigurationStructure, Type: smithy.ShapeTypeStructure, Ext: &eNotificationConfigurationStructure})
+var sNotificationConfigurationStructure_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_arn})
+var sNotificationConfigurationStructure_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_name})
+var sNotificationConfigurationStructure_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_description})
+var sNotificationConfigurationStructure_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_status})
+var sNotificationConfigurationStructure_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationConfigurationStructure_creationTime})
+var sNotificationConfigurationStructure_aggregationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDuration", ID: &i_AggregationDuration, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_aggregationDuration})
+var sNotificationConfigurationStructure_subtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subtype", ID: &i_NotificationConfigurationSubtype, Type: smithy.ShapeTypeString, Ext: &eNotificationConfigurationStructure_subtype})
+var s_NotificationConfigurationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationConfigurationSubtype, Type: smithy.ShapeTypeString, Ext: &e_NotificationConfigurationSubtype})
+var s_NotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationEventArn, Type: smithy.ShapeTypeString, Ext: &e_NotificationEventArn})
+var sNotificationEventAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationEventAttachment, Members: &mNotificationEventAttachment, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventAttachment})
+var sNotificationEventAttachment_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_AttachmentDisplayName, Type: smithy.ShapeTypeString, Ext: &eNotificationEventAttachment_displayName})
+var sNotificationEventAttachment_attachmentDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentDownloadUrl", ID: &i_SensitiveUrl, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eNotificationEventAttachment_attachmentDownloadUrl})
+var sNotificationEventAttachment_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_AttachmentContentType, Type: smithy.ShapeTypeString, Ext: &eNotificationEventAttachment_contentType})
+var s_NotificationEventAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationEventAttachmentList, Members: &m_NotificationEventAttachmentList, Type: smithy.ShapeTypeList, Ext: &e_NotificationEventAttachmentList})
+var s_NotificationEventAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationEventAttachment, Members: &mNotificationEventAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationEventAttachmentList_member})
+var s_NotificationEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationEventId, Type: smithy.ShapeTypeString, Ext: &e_NotificationEventId})
+var sNotificationEventOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationEventOverview, Members: &mNotificationEventOverview, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventOverview})
+var sNotificationEventOverview_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_arn})
+var sNotificationEventOverview_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_notificationConfigurationArn})
+var sNotificationEventOverview_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_relatedAccount})
+var sNotificationEventOverview_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationEventOverview_creationTime})
+var sNotificationEventOverview_notificationEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEvent", ID: &iNotificationEventSummary, Members: &mNotificationEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventOverview_notificationEvent})
+var sNotificationEventOverview_aggregationEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationEventType", ID: &i_AggregationEventType, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_aggregationEventType})
+var sNotificationEventOverview_aggregateNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateNotificationEventArn", ID: &i_NotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_aggregateNotificationEventArn})
+var sNotificationEventOverview_aggregationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationSummary", ID: &iAggregationSummary, Members: &mAggregationSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventOverview_aggregationSummary})
+var sNotificationEventOverview_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eNotificationEventOverview_organizationalUnitId})
+var s_NotificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationEvents, Members: &m_NotificationEvents, Type: smithy.ShapeTypeList, Ext: &e_NotificationEvents})
+var s_NotificationEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationEventOverview, Members: &mNotificationEventOverview, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationEvents_member})
+var sNotificationEventSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationEventSchema, Members: &mNotificationEventSchema, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSchema})
+var sNotificationEventSchema_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_schemaVersion})
+var sNotificationEventSchema_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_NotificationEventId, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_id})
+var sNotificationEventSchema_sourceEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventMetadata", ID: &iSourceEventMetadata, Members: &mSourceEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSchema_sourceEventMetadata})
+var sNotificationEventSchema_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponents, Members: &mMessageComponents, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSchema_messageComponents})
+var sNotificationEventSchema_sourceEventDetailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_sourceEventDetailUrl})
+var sNotificationEventSchema_sourceEventDetailUrlDisplayText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventDetailUrlDisplayText", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_sourceEventDetailUrlDisplayText})
+var sNotificationEventSchema_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_notificationType})
+var sNotificationEventSchema_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_eventStatus})
+var sNotificationEventSchema_aggregationEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationEventType", ID: &i_AggregationEventType, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_aggregationEventType})
+var sNotificationEventSchema_aggregateNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateNotificationEventArn", ID: &i_NotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_aggregateNotificationEventArn})
+var sNotificationEventSchema_aggregationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationSummary", ID: &iAggregationSummary, Members: &mAggregationSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSchema_aggregationSummary})
+var sNotificationEventSchema_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationEventSchema_startTime})
+var sNotificationEventSchema_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationEventSchema_endTime})
+var sNotificationEventSchema_textParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textParts", ID: &i_TextParts, Members: &m_TextParts, Type: smithy.ShapeTypeMap, Ext: &eNotificationEventSchema_textParts})
+var sNotificationEventSchema_media = smithy.NewStaticSchema(smithy.StaticSchema{Member: "media", ID: &i_Media, Members: &m_Media, Type: smithy.ShapeTypeList, Ext: &eNotificationEventSchema_media})
+var sNotificationEventSchema_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSchema_organizationalUnitId})
+var sNotificationEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationEventSummary, Members: &mNotificationEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSummary})
+var sNotificationEventSummary_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSummary_schemaVersion})
+var sNotificationEventSummary_sourceEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventMetadata", ID: &iSourceEventMetadataSummary, Members: &mSourceEventMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSummary_sourceEventMetadata})
+var sNotificationEventSummary_messageComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageComponents", ID: &iMessageComponentsSummary, Members: &mMessageComponentsSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationEventSummary_messageComponents})
+var sNotificationEventSummary_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &i_EventStatus, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSummary_eventStatus})
+var sNotificationEventSummary_notificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationType", ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &eNotificationEventSummary_notificationType})
+var sNotificationHubOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationHubOverview, Members: &mNotificationHubOverview, Type: smithy.ShapeTypeStructure, Ext: &eNotificationHubOverview})
+var sNotificationHubOverview_notificationHubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eNotificationHubOverview_notificationHubRegion})
+var sNotificationHubOverview_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iNotificationHubStatusSummary, Members: &mNotificationHubStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationHubOverview_statusSummary})
+var sNotificationHubOverview_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationHubOverview_creationTime})
+var sNotificationHubOverview_lastActivationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivationTime", ID: &i_LastActivationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eNotificationHubOverview_lastActivationTime})
+var s_NotificationHubs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationHubs, Members: &m_NotificationHubs, Type: smithy.ShapeTypeList, Ext: &e_NotificationHubs})
+var s_NotificationHubs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationHubOverview, Members: &mNotificationHubOverview, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationHubs_member})
+var s_NotificationHubStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationHubStatus, Type: smithy.ShapeTypeString, Ext: &e_NotificationHubStatus})
+var s_NotificationHubStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationHubStatusReason, Type: smithy.ShapeTypeString, Ext: &e_NotificationHubStatusReason})
+var sNotificationHubStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationHubStatusSummary, Members: &mNotificationHubStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eNotificationHubStatusSummary})
+var sNotificationHubStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NotificationHubStatus, Type: smithy.ShapeTypeString, Ext: &eNotificationHubStatusSummary_status})
+var sNotificationHubStatusSummary_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_NotificationHubStatusReason, Type: smithy.ShapeTypeString, Ext: &eNotificationHubStatusSummary_reason})
+var sNotificationsAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationsAccessForOrganization, Members: &mNotificationsAccessForOrganization, Type: smithy.ShapeTypeStructure, Ext: &eNotificationsAccessForOrganization})
+var sNotificationsAccessForOrganization_accessStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessStatus", ID: &iAccessStatus, Members: &mAccessStatus, Type: smithy.ShapeTypeEnum, Ext: &eNotificationsAccessForOrganization_accessStatus})
+var s_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationType, Type: smithy.ShapeTypeString, Ext: &e_NotificationType})
+var s_OrganizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &e_OrganizationalUnitId})
+var s_OrganizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnits, Members: &m_OrganizationalUnits, Type: smithy.ShapeTypeList, Ext: &e_OrganizationalUnits})
+var s_OrganizationalUnits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString, Ext: &e_OrganizationalUnits_member})
+var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &e_QuotaCode})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_Regions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &e_Regions})
+var s_Regions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Regions_member})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResource_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResource_id})
+var sResource_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResource_arn})
+var sResource_detailUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detailUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eResource_detailUrl})
+var sResource_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eResource_tags})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &e_Resources})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &e_Resources_member})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_SampleAggregationDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleAggregationDimensionValues, Members: &m_SampleAggregationDimensionValues, Type: smithy.ShapeTypeList, Ext: &e_SampleAggregationDimensionValues})
+var s_SampleAggregationDimensionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SampleAggregationDimensionValues_member})
+var s_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaVersion, Type: smithy.ShapeTypeString, Ext: &e_SchemaVersion})
+var s_SensitiveUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveUrl, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &e_SensitiveUrl})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &e_Source})
+var sSourceEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceEventMetadata, Members: &mSourceEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &eSourceEventMetadata})
+var sSourceEventMetadata_eventTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_eventTypeVersion})
+var sSourceEventMetadata_sourceEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceEventId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_sourceEventId})
+var sSourceEventMetadata_eventOriginRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOriginRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_eventOriginRegion})
+var sSourceEventMetadata_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_relatedAccount})
+var sSourceEventMetadata_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_source})
+var sSourceEventMetadata_eventOccurrenceTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOccurrenceTime", ID: &pTimestamp, Traits: &t42, Type: smithy.ShapeTypeTimestamp, Ext: &eSourceEventMetadata_eventOccurrenceTime})
+var sSourceEventMetadata_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadata_eventType})
+var sSourceEventMetadata_relatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedResources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &eSourceEventMetadata_relatedResources})
+var sSourceEventMetadataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceEventMetadataSummary, Members: &mSourceEventMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eSourceEventMetadataSummary})
+var sSourceEventMetadataSummary_eventOriginRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventOriginRegion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadataSummary_eventOriginRegion})
+var sSourceEventMetadataSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadataSummary_source})
+var sSourceEventMetadataSummary_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSourceEventMetadataSummary_eventType})
+var s_StatusSummaryByRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusSummaryByRegion, Members: &m_StatusSummaryByRegion, Type: smithy.ShapeTypeMap, Ext: &e_StatusSummaryByRegion})
+var s_StatusSummaryByRegion_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_StatusSummaryByRegion_key})
+var s_StatusSummaryByRegion_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iEventRuleStatusSummary, Members: &mEventRuleStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StatusSummaryByRegion_value})
+var sSummarizationDimensionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummarizationDimensionDetail, Members: &mSummarizationDimensionDetail, Type: smithy.ShapeTypeStructure, Ext: &eSummarizationDimensionDetail})
+var sSummarizationDimensionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSummarizationDimensionDetail_name})
+var sSummarizationDimensionDetail_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSummarizationDimensionDetail_value})
+var s_SummarizationDimensionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummarizationDimensionDetails, Members: &m_SummarizationDimensionDetails, Type: smithy.ShapeTypeList, Ext: &e_SummarizationDimensionDetails})
+var s_SummarizationDimensionDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummarizationDimensionDetail, Members: &mSummarizationDimensionDetail, Type: smithy.ShapeTypeStructure, Ext: &e_SummarizationDimensionDetails_member})
+var sSummarizationDimensionOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummarizationDimensionOverview, Members: &mSummarizationDimensionOverview, Type: smithy.ShapeTypeStructure, Ext: &eSummarizationDimensionOverview})
+var sSummarizationDimensionOverview_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSummarizationDimensionOverview_name})
+var sSummarizationDimensionOverview_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSummarizationDimensionOverview_count})
+var sSummarizationDimensionOverview_sampleValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sampleValues", ID: &i_SampleAggregationDimensionValues, Members: &m_SampleAggregationDimensionValues, Type: smithy.ShapeTypeList, Ext: &eSummarizationDimensionOverview_sampleValues})
+var s_SummarizationDimensionOverviews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummarizationDimensionOverviews, Members: &m_SummarizationDimensionOverviews, Type: smithy.ShapeTypeList, Ext: &e_SummarizationDimensionOverviews})
+var s_SummarizationDimensionOverviews_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummarizationDimensionOverview, Members: &mSummarizationDimensionOverview, Type: smithy.ShapeTypeStructure, Ext: &e_SummarizationDimensionOverviews_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TextByLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextByLocale, Members: &m_TextByLocale, Type: smithy.ShapeTypeMap, Ext: &e_TextByLocale})
+var s_TextByLocale_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LocaleCode, Type: smithy.ShapeTypeString, Ext: &e_TextByLocale_key})
+var s_TextByLocale_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TextByLocale_value})
+var s_TextPartId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextPartId, Type: smithy.ShapeTypeString, Ext: &e_TextPartId})
+var s_TextPartReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextPartReference, Type: smithy.ShapeTypeString, Ext: &e_TextPartReference})
+var s_TextParts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextParts, Members: &m_TextParts, Type: smithy.ShapeTypeMap, Ext: &e_TextParts})
+var s_TextParts_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TextPartId, Type: smithy.ShapeTypeString, Ext: &e_TextParts_key})
+var s_TextParts_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTextPartValue, Members: &mTextPartValue, Type: smithy.ShapeTypeStructure, Ext: &e_TextParts_value})
+var s_TextPartType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextPartType, Type: smithy.ShapeTypeString, Ext: &e_TextPartType})
+var sTextPartValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextPartValue, Members: &mTextPartValue, Type: smithy.ShapeTypeStructure, Ext: &eTextPartValue})
+var sTextPartValue_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_TextPartType, Type: smithy.ShapeTypeString, Ext: &eTextPartValue_type})
+var sTextPartValue_displayText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayText", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTextPartValue_displayText})
+var sTextPartValue_textByLocale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "textByLocale", ID: &i_TextByLocale, Members: &m_TextByLocale, Type: smithy.ShapeTypeMap, Ext: &eTextPartValue_textByLocale})
+var sTextPartValue_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eTextPartValue_url})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &e_Url})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var sAssociateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateChannelRequest, Members: &mAssociateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateChannelRequest})
+var sAssociateChannelRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eAssociateChannelRequest_arn})
+var sAssociateChannelRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eAssociateChannelRequest_notificationConfigurationArn})
+var sAssociateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateChannelResponse})
+var sAssociateManagedNotificationAccountContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAccountContactRequest, Members: &mAssociateManagedNotificationAccountContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateManagedNotificationAccountContactRequest})
+var sAssociateManagedNotificationAccountContactRequest_contactIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactIdentifier", ID: &i_AccountContactType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eAssociateManagedNotificationAccountContactRequest_contactIdentifier})
+var sAssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eAssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn})
+var sAssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveEventsSubscribed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed})
+var sAssociateManagedNotificationAccountContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAccountContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateManagedNotificationAccountContactResponse})
+var sAssociateManagedNotificationAdditionalChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAdditionalChannelRequest, Members: &mAssociateManagedNotificationAdditionalChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateManagedNotificationAdditionalChannelRequest})
+var sAssociateManagedNotificationAdditionalChannelRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eAssociateManagedNotificationAdditionalChannelRequest_channelArn})
+var sAssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eAssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn})
+var sAssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveEventsSubscribed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed})
+var sAssociateManagedNotificationAdditionalChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateManagedNotificationAdditionalChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateManagedNotificationAdditionalChannelResponse})
+var sAssociateOrganizationalUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateOrganizationalUnitRequest, Members: &mAssociateOrganizationalUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateOrganizationalUnitRequest})
+var sAssociateOrganizationalUnitRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eAssociateOrganizationalUnitRequest_organizationalUnitId})
+var sAssociateOrganizationalUnitRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eAssociateOrganizationalUnitRequest_notificationConfigurationArn})
+var sAssociateOrganizationalUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateOrganizationalUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateOrganizationalUnitResponse})
+var sCreateEventRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventRuleRequest, Members: &mCreateEventRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEventRuleRequest})
+var sCreateEventRuleRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleRequest_notificationConfigurationArn})
+var sCreateEventRuleRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleRequest_source})
+var sCreateEventRuleRequest_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_EventType, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleRequest_eventType})
+var sCreateEventRuleRequest_eventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventPattern", ID: &i_EventRuleEventPattern, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleRequest_eventPattern})
+var sCreateEventRuleRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eCreateEventRuleRequest_regions})
+var sCreateEventRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventRuleResponse, Members: &mCreateEventRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateEventRuleResponse})
+var sCreateEventRuleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleResponse_arn})
+var sCreateEventRuleResponse_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateEventRuleResponse_notificationConfigurationArn})
+var sCreateEventRuleResponse_statusSummaryByRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryByRegion", ID: &i_StatusSummaryByRegion, Members: &m_StatusSummaryByRegion, Type: smithy.ShapeTypeMap, Ext: &eCreateEventRuleResponse_statusSummaryByRegion})
+var sCreateNotificationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationConfigurationRequest, Members: &mCreateNotificationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationConfigurationRequest})
+var sCreateNotificationConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationConfigurationRequest_name})
+var sCreateNotificationConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationConfigurationRequest_description})
+var sCreateNotificationConfigurationRequest_aggregationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDuration", ID: &i_AggregationDuration, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationConfigurationRequest_aggregationDuration})
+var sCreateNotificationConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateNotificationConfigurationRequest_tags})
+var sCreateNotificationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationConfigurationResponse, Members: &mCreateNotificationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationConfigurationResponse})
+var sCreateNotificationConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationConfigurationResponse_arn})
+var sCreateNotificationConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationConfigurationResponse_status})
+var sDeleteEventRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventRuleRequest, Members: &mDeleteEventRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventRuleRequest})
+var sDeleteEventRuleRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteEventRuleRequest_arn})
+var sDeleteEventRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEventRuleResponse})
+var sDeleteNotificationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationConfigurationRequest, Members: &mDeleteNotificationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationConfigurationRequest})
+var sDeleteNotificationConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeleteNotificationConfigurationRequest_arn})
+var sDeleteNotificationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationConfigurationResponse})
+var sDeregisterNotificationHubRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterNotificationHubRequest, Members: &mDeregisterNotificationHubRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterNotificationHubRequest})
+var sDeregisterNotificationHubRequest_notificationHubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubRegion", ID: &i_Region, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDeregisterNotificationHubRequest_notificationHubRegion})
+var sDeregisterNotificationHubResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterNotificationHubResponse, Members: &mDeregisterNotificationHubResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterNotificationHubResponse})
+var sDeregisterNotificationHubResponse_notificationHubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDeregisterNotificationHubResponse_notificationHubRegion})
+var sDeregisterNotificationHubResponse_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iNotificationHubStatusSummary, Members: &mNotificationHubStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterNotificationHubResponse_statusSummary})
+var sDisableNotificationsAccessForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableNotificationsAccessForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableNotificationsAccessForOrganizationRequest})
+var sDisableNotificationsAccessForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableNotificationsAccessForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisableNotificationsAccessForOrganizationResponse})
+var sDisassociateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateChannelRequest, Members: &mDisassociateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateChannelRequest})
+var sDisassociateChannelRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ChannelArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDisassociateChannelRequest_arn})
+var sDisassociateChannelRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateChannelRequest_notificationConfigurationArn})
+var sDisassociateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateChannelResponse})
+var sDisassociateManagedNotificationAccountContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAccountContactRequest, Members: &mDisassociateManagedNotificationAccountContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateManagedNotificationAccountContactRequest})
+var sDisassociateManagedNotificationAccountContactRequest_contactIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactIdentifier", ID: &i_AccountContactType, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDisassociateManagedNotificationAccountContactRequest_contactIdentifier})
+var sDisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn})
+var sDisassociateManagedNotificationAccountContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAccountContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateManagedNotificationAccountContactResponse})
+var sDisassociateManagedNotificationAdditionalChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAdditionalChannelRequest, Members: &mDisassociateManagedNotificationAdditionalChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateManagedNotificationAdditionalChannelRequest})
+var sDisassociateManagedNotificationAdditionalChannelRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDisassociateManagedNotificationAdditionalChannelRequest_channelArn})
+var sDisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn})
+var sDisassociateManagedNotificationAdditionalChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateManagedNotificationAdditionalChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateManagedNotificationAdditionalChannelResponse})
+var sDisassociateOrganizationalUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateOrganizationalUnitRequest, Members: &mDisassociateOrganizationalUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateOrganizationalUnitRequest})
+var sDisassociateOrganizationalUnitRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eDisassociateOrganizationalUnitRequest_organizationalUnitId})
+var sDisassociateOrganizationalUnitRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateOrganizationalUnitRequest_notificationConfigurationArn})
+var sDisassociateOrganizationalUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateOrganizationalUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateOrganizationalUnitResponse})
+var sEnableNotificationsAccessForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableNotificationsAccessForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableNotificationsAccessForOrganizationRequest})
+var sEnableNotificationsAccessForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableNotificationsAccessForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eEnableNotificationsAccessForOrganizationResponse})
+var sGetEventRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventRuleRequest, Members: &mGetEventRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEventRuleRequest})
+var sGetEventRuleRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleRequest_arn})
+var sGetEventRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventRuleResponse, Members: &mGetEventRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEventRuleResponse})
+var sGetEventRuleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleResponse_arn})
+var sGetEventRuleResponse_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleResponse_notificationConfigurationArn})
+var sGetEventRuleResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetEventRuleResponse_creationTime})
+var sGetEventRuleResponse_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleResponse_source})
+var sGetEventRuleResponse_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &i_EventType, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleResponse_eventType})
+var sGetEventRuleResponse_eventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventPattern", ID: &i_EventRuleEventPattern, Type: smithy.ShapeTypeString, Ext: &eGetEventRuleResponse_eventPattern})
+var sGetEventRuleResponse_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eGetEventRuleResponse_regions})
+var sGetEventRuleResponse_managedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedRules", ID: &i_ManagedRuleArns, Members: &m_ManagedRuleArns, Type: smithy.ShapeTypeList, Ext: &eGetEventRuleResponse_managedRules})
+var sGetEventRuleResponse_statusSummaryByRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryByRegion", ID: &i_StatusSummaryByRegion, Members: &m_StatusSummaryByRegion, Type: smithy.ShapeTypeMap, Ext: &eGetEventRuleResponse_statusSummaryByRegion})
+var sGetManagedNotificationChildEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationChildEventRequest, Members: &mGetManagedNotificationChildEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationChildEventRequest})
+var sGetManagedNotificationChildEventRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationChildEventArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationChildEventRequest_arn})
+var sGetManagedNotificationChildEventRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationChildEventRequest_locale})
+var sGetManagedNotificationChildEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationChildEventResponse, Members: &mGetManagedNotificationChildEventResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationChildEventResponse})
+var sGetManagedNotificationChildEventResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationChildEventArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationChildEventResponse_arn})
+var sGetManagedNotificationChildEventResponse_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationChildEventResponse_managedNotificationConfigurationArn})
+var sGetManagedNotificationChildEventResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetManagedNotificationChildEventResponse_creationTime})
+var sGetManagedNotificationChildEventResponse_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iManagedNotificationChildEvent, Members: &mManagedNotificationChildEvent, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationChildEventResponse_content})
+var sGetManagedNotificationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationConfigurationRequest, Members: &mGetManagedNotificationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationConfigurationRequest})
+var sGetManagedNotificationConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationConfigurationOsArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationRequest_arn})
+var sGetManagedNotificationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationConfigurationResponse, Members: &mGetManagedNotificationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationConfigurationResponse})
+var sGetManagedNotificationConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationResponse_arn})
+var sGetManagedNotificationConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ManagedNotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationResponse_name})
+var sGetManagedNotificationConfigurationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ManagedNotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationResponse_description})
+var sGetManagedNotificationConfigurationResponse_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationResponse_category})
+var sGetManagedNotificationConfigurationResponse_subCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subCategory", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationConfigurationResponse_subCategory})
+var sGetManagedNotificationEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationEventRequest, Members: &mGetManagedNotificationEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationEventRequest})
+var sGetManagedNotificationEventRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationEventArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationEventRequest_arn})
+var sGetManagedNotificationEventRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationEventRequest_locale})
+var sGetManagedNotificationEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedNotificationEventResponse, Members: &mGetManagedNotificationEventResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationEventResponse})
+var sGetManagedNotificationEventResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ManagedNotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationEventResponse_arn})
+var sGetManagedNotificationEventResponse_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedNotificationEventResponse_managedNotificationConfigurationArn})
+var sGetManagedNotificationEventResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetManagedNotificationEventResponse_creationTime})
+var sGetManagedNotificationEventResponse_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iManagedNotificationEvent, Members: &mManagedNotificationEvent, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedNotificationEventResponse_content})
+var sGetNotificationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationConfigurationRequest, Members: &mGetNotificationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationConfigurationRequest})
+var sGetNotificationConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationRequest_arn})
+var sGetNotificationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationConfigurationResponse, Members: &mGetNotificationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationConfigurationResponse})
+var sGetNotificationConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_arn})
+var sGetNotificationConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_name})
+var sGetNotificationConfigurationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_description})
+var sGetNotificationConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NotificationConfigurationStatus, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_status})
+var sGetNotificationConfigurationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetNotificationConfigurationResponse_creationTime})
+var sGetNotificationConfigurationResponse_aggregationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDuration", ID: &i_AggregationDuration, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_aggregationDuration})
+var sGetNotificationConfigurationResponse_subtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subtype", ID: &i_NotificationConfigurationSubtype, Type: smithy.ShapeTypeString, Ext: &eGetNotificationConfigurationResponse_subtype})
+var sGetNotificationEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationEventRequest, Members: &mGetNotificationEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationEventRequest})
+var sGetNotificationEventRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationEventArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eGetNotificationEventRequest_arn})
+var sGetNotificationEventRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eGetNotificationEventRequest_locale})
+var sGetNotificationEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationEventResponse, Members: &mGetNotificationEventResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationEventResponse})
+var sGetNotificationEventResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationEventArn, Type: smithy.ShapeTypeString, Ext: &eGetNotificationEventResponse_arn})
+var sGetNotificationEventResponse_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetNotificationEventResponse_notificationConfigurationArn})
+var sGetNotificationEventResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eGetNotificationEventResponse_creationTime})
+var sGetNotificationEventResponse_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iNotificationEventSchema, Members: &mNotificationEventSchema, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationEventResponse_content})
+var sGetNotificationsAccessForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationsAccessForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationsAccessForOrganizationRequest})
+var sGetNotificationsAccessForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationsAccessForOrganizationResponse, Members: &mGetNotificationsAccessForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationsAccessForOrganizationResponse})
+var sGetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationsAccessForOrganization", ID: &iNotificationsAccessForOrganization, Members: &mNotificationsAccessForOrganization, Type: smithy.ShapeTypeStructure, Ext: &eGetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_notificationConfigurationArn})
+var sListChannelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_maxResults})
+var sListChannelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_nextToken})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListChannelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_nextToken})
+var sListChannelsResponse_channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channels", ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_channels})
+var sListEventRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventRulesRequest, Members: &mListEventRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEventRulesRequest})
+var sListEventRulesRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eListEventRulesRequest_notificationConfigurationArn})
+var sListEventRulesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListEventRulesRequest_maxResults})
+var sListEventRulesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListEventRulesRequest_nextToken})
+var sListEventRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventRulesResponse, Members: &mListEventRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEventRulesResponse})
+var sListEventRulesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEventRulesResponse_nextToken})
+var sListEventRulesResponse_eventRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventRules", ID: &i_EventRules, Members: &m_EventRules, Type: smithy.ShapeTypeList, Ext: &eListEventRulesResponse_eventRules})
+var sListManagedNotificationChannelAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChannelAssociationsRequest, Members: &mListManagedNotificationChannelAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationChannelAssociationsRequest})
+var sListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn})
+var sListManagedNotificationChannelAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListManagedNotificationChannelAssociationsRequest_maxResults})
+var sListManagedNotificationChannelAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChannelAssociationsRequest_nextToken})
+var sListManagedNotificationChannelAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChannelAssociationsResponse, Members: &mListManagedNotificationChannelAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationChannelAssociationsResponse})
+var sListManagedNotificationChannelAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChannelAssociationsResponse_nextToken})
+var sListManagedNotificationChannelAssociationsResponse_channelAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelAssociations", ID: &i_ManagedNotificationChannelAssociations, Members: &m_ManagedNotificationChannelAssociations, Type: smithy.ShapeTypeList, Ext: &eListManagedNotificationChannelAssociationsResponse_channelAssociations})
+var sListManagedNotificationChildEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChildEventsRequest, Members: &mListManagedNotificationChildEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationChildEventsRequest})
+var sListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateManagedNotificationEventArn", ID: &i_ManagedNotificationEventArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn})
+var sListManagedNotificationChildEventsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t58, Type: smithy.ShapeTypeTimestamp, Ext: &eListManagedNotificationChildEventsRequest_startTime})
+var sListManagedNotificationChildEventsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eListManagedNotificationChildEventsRequest_endTime})
+var sListManagedNotificationChildEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsRequest_locale})
+var sListManagedNotificationChildEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListManagedNotificationChildEventsRequest_maxResults})
+var sListManagedNotificationChildEventsRequest_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsRequest_relatedAccount})
+var sListManagedNotificationChildEventsRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsRequest_organizationalUnitId})
+var sListManagedNotificationChildEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsRequest_nextToken})
+var sListManagedNotificationChildEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationChildEventsResponse, Members: &mListManagedNotificationChildEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationChildEventsResponse})
+var sListManagedNotificationChildEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationChildEventsResponse_nextToken})
+var sListManagedNotificationChildEventsResponse_managedNotificationChildEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationChildEvents", ID: &i_ManagedNotificationChildEvents, Members: &m_ManagedNotificationChildEvents, Type: smithy.ShapeTypeList, Ext: &eListManagedNotificationChildEventsResponse_managedNotificationChildEvents})
+var sListManagedNotificationConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationConfigurationsRequest, Members: &mListManagedNotificationConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationConfigurationsRequest})
+var sListManagedNotificationConfigurationsRequest_channelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelIdentifier", ID: &i_ChannelIdentifier, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationConfigurationsRequest_channelIdentifier})
+var sListManagedNotificationConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListManagedNotificationConfigurationsRequest_maxResults})
+var sListManagedNotificationConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationConfigurationsRequest_nextToken})
+var sListManagedNotificationConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationConfigurationsResponse, Members: &mListManagedNotificationConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationConfigurationsResponse})
+var sListManagedNotificationConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationConfigurationsResponse_nextToken})
+var sListManagedNotificationConfigurationsResponse_managedNotificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurations", ID: &i_ManagedNotificationConfigurations, Members: &m_ManagedNotificationConfigurations, Type: smithy.ShapeTypeList, Ext: &eListManagedNotificationConfigurationsResponse_managedNotificationConfigurations})
+var sListManagedNotificationEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationEventsRequest, Members: &mListManagedNotificationEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationEventsRequest})
+var sListManagedNotificationEventsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t58, Type: smithy.ShapeTypeTimestamp, Ext: &eListManagedNotificationEventsRequest_startTime})
+var sListManagedNotificationEventsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eListManagedNotificationEventsRequest_endTime})
+var sListManagedNotificationEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsRequest_locale})
+var sListManagedNotificationEventsRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsRequest_source})
+var sListManagedNotificationEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListManagedNotificationEventsRequest_maxResults})
+var sListManagedNotificationEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsRequest_nextToken})
+var sListManagedNotificationEventsRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsRequest_organizationalUnitId})
+var sListManagedNotificationEventsRequest_relatedAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedAccount", ID: &i_AccountId, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsRequest_relatedAccount})
+var sListManagedNotificationEventsRequest_includeSensitiveEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeSensitiveEvents", ID: &pBoolean, Traits: &t64, Type: smithy.ShapeTypeBoolean, Ext: &eListManagedNotificationEventsRequest_includeSensitiveEvents})
+var sListManagedNotificationEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedNotificationEventsResponse, Members: &mListManagedNotificationEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedNotificationEventsResponse})
+var sListManagedNotificationEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListManagedNotificationEventsResponse_nextToken})
+var sListManagedNotificationEventsResponse_managedNotificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationEvents", ID: &i_ManagedNotificationEvents, Members: &m_ManagedNotificationEvents, Type: smithy.ShapeTypeList, Ext: &eListManagedNotificationEventsResponse_managedNotificationEvents})
+var sListMemberAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccountsRequest, Members: &mListMemberAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMemberAccountsRequest})
+var sListMemberAccountsRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsRequest_notificationConfigurationArn})
+var sListMemberAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListMemberAccountsRequest_maxResults})
+var sListMemberAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsRequest_nextToken})
+var sListMemberAccountsRequest_memberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberAccount", ID: &i_AccountId, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsRequest_memberAccount})
+var sListMemberAccountsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MemberAccountNotificationConfigurationStatus, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsRequest_status})
+var sListMemberAccountsRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsRequest_organizationalUnitId})
+var sListMemberAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccountsResponse, Members: &mListMemberAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMemberAccountsResponse})
+var sListMemberAccountsResponse_memberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberAccounts", ID: &i_MemberAccounts, Members: &m_MemberAccounts, Type: smithy.ShapeTypeList, Ext: &eListMemberAccountsResponse_memberAccounts})
+var sListMemberAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMemberAccountsResponse_nextToken})
+var sListNotificationConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationConfigurationsRequest, Members: &mListNotificationConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationConfigurationsRequest})
+var sListNotificationConfigurationsRequest_eventRuleSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventRuleSource", ID: &i_Source, Traits: &t67, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsRequest_eventRuleSource})
+var sListNotificationConfigurationsRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Traits: &t68, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsRequest_channelArn})
+var sListNotificationConfigurationsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_NotificationConfigurationStatus, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsRequest_status})
+var sListNotificationConfigurationsRequest_subtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subtype", ID: &i_NotificationConfigurationSubtype, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsRequest_subtype})
+var sListNotificationConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListNotificationConfigurationsRequest_maxResults})
+var sListNotificationConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsRequest_nextToken})
+var sListNotificationConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationConfigurationsResponse, Members: &mListNotificationConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationConfigurationsResponse})
+var sListNotificationConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotificationConfigurationsResponse_nextToken})
+var sListNotificationConfigurationsResponse_notificationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurations", ID: &i_NotificationConfigurations, Members: &m_NotificationConfigurations, Type: smithy.ShapeTypeList, Ext: &eListNotificationConfigurationsResponse_notificationConfigurations})
+var sListNotificationEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationEventsRequest, Members: &mListNotificationEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationEventsRequest})
+var sListNotificationEventsRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t58, Type: smithy.ShapeTypeTimestamp, Ext: &eListNotificationEventsRequest_startTime})
+var sListNotificationEventsRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp, Ext: &eListNotificationEventsRequest_endTime})
+var sListNotificationEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_LocaleCode, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsRequest_locale})
+var sListNotificationEventsRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_Source, Traits: &t63, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsRequest_source})
+var sListNotificationEventsRequest_includeChildEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildEvents", ID: &pBoolean, Traits: &t70, Type: smithy.ShapeTypeBoolean, Ext: &eListNotificationEventsRequest_includeChildEvents})
+var sListNotificationEventsRequest_aggregateNotificationEventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateNotificationEventArn", ID: &i_NotificationEventArn, Traits: &t71, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsRequest_aggregateNotificationEventArn})
+var sListNotificationEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListNotificationEventsRequest_maxResults})
+var sListNotificationEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsRequest_nextToken})
+var sListNotificationEventsRequest_organizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnitId", ID: &i_OrganizationalUnitId, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsRequest_organizationalUnitId})
+var sListNotificationEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationEventsResponse, Members: &mListNotificationEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationEventsResponse})
+var sListNotificationEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotificationEventsResponse_nextToken})
+var sListNotificationEventsResponse_notificationEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEvents", ID: &i_NotificationEvents, Members: &m_NotificationEvents, Type: smithy.ShapeTypeList, Ext: &eListNotificationEventsResponse_notificationEvents})
+var sListNotificationHubsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationHubsRequest, Members: &mListNotificationHubsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationHubsRequest})
+var sListNotificationHubsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListNotificationHubsRequest_maxResults})
+var sListNotificationHubsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListNotificationHubsRequest_nextToken})
+var sListNotificationHubsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotificationHubsResponse, Members: &mListNotificationHubsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListNotificationHubsResponse})
+var sListNotificationHubsResponse_notificationHubs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubs", ID: &i_NotificationHubs, Members: &m_NotificationHubs, Type: smithy.ShapeTypeList, Ext: &eListNotificationHubsResponse_notificationHubs})
+var sListNotificationHubsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListNotificationHubsResponse_nextToken})
+var sListOrganizationalUnitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationalUnitsRequest, Members: &mListOrganizationalUnitsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOrganizationalUnitsRequest})
+var sListOrganizationalUnitsRequest_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Traits: &t54, Type: smithy.ShapeTypeString, Ext: &eListOrganizationalUnitsRequest_notificationConfigurationArn})
+var sListOrganizationalUnitsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t55, Type: smithy.ShapeTypeInteger, Ext: &eListOrganizationalUnitsRequest_maxResults})
+var sListOrganizationalUnitsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eListOrganizationalUnitsRequest_nextToken})
+var sListOrganizationalUnitsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationalUnitsResponse, Members: &mListOrganizationalUnitsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListOrganizationalUnitsResponse})
+var sListOrganizationalUnitsResponse_organizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationalUnits", ID: &i_OrganizationalUnits, Members: &m_OrganizationalUnits, Type: smithy.ShapeTypeList, Ext: &eListOrganizationalUnitsResponse_organizationalUnits})
+var sListOrganizationalUnitsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOrganizationalUnitsResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_arn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sRegisterNotificationHubRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterNotificationHubRequest, Members: &mRegisterNotificationHubRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterNotificationHubRequest})
+var sRegisterNotificationHubRequest_notificationHubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eRegisterNotificationHubRequest_notificationHubRegion})
+var sRegisterNotificationHubResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterNotificationHubResponse, Members: &mRegisterNotificationHubResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterNotificationHubResponse})
+var sRegisterNotificationHubResponse_notificationHubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationHubRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eRegisterNotificationHubResponse_notificationHubRegion})
+var sRegisterNotificationHubResponse_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iNotificationHubStatusSummary, Members: &mNotificationHubStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eRegisterNotificationHubResponse_statusSummary})
+var sRegisterNotificationHubResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eRegisterNotificationHubResponse_creationTime})
+var sRegisterNotificationHubResponse_lastActivationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivationTime", ID: &i_LastActivationTime, Traits: &t43, Type: smithy.ShapeTypeTimestamp, Ext: &eRegisterNotificationHubResponse_lastActivationTime})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_arn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_arn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t72, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateEventRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventRuleRequest, Members: &mUpdateEventRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEventRuleRequest})
+var sUpdateEventRuleRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateEventRuleRequest_arn})
+var sUpdateEventRuleRequest_eventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventPattern", ID: &i_EventRuleEventPattern, Type: smithy.ShapeTypeString, Ext: &eUpdateEventRuleRequest_eventPattern})
+var sUpdateEventRuleRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eUpdateEventRuleRequest_regions})
+var sUpdateEventRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventRuleResponse, Members: &mUpdateEventRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEventRuleResponse})
+var sUpdateEventRuleResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EventRuleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateEventRuleResponse_arn})
+var sUpdateEventRuleResponse_notificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfigurationArn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateEventRuleResponse_notificationConfigurationArn})
+var sUpdateEventRuleResponse_statusSummaryByRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryByRegion", ID: &i_StatusSummaryByRegion, Members: &m_StatusSummaryByRegion, Type: smithy.ShapeTypeMap, Ext: &eUpdateEventRuleResponse_statusSummaryByRegion})
+var sUpdateManagedNotificationChannelAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateManagedNotificationChannelAssociationRequest, Members: &mUpdateManagedNotificationChannelAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateManagedNotificationChannelAssociationRequest})
+var sUpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedNotificationConfigurationArn", ID: &i_ManagedNotificationConfigurationOsArn, Type: smithy.ShapeTypeString, Ext: &eUpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn})
+var sUpdateManagedNotificationChannelAssociationRequest_channelIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelIdentifier", ID: &i_ManagedNotificationChannelIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateManagedNotificationChannelAssociationRequest_channelIdentifier})
+var sUpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveEventsSubscribed", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed})
+var sUpdateManagedNotificationChannelAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateManagedNotificationChannelAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateManagedNotificationChannelAssociationResponse})
+var sUpdateNotificationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfigurationRequest, Members: &mUpdateNotificationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationConfigurationRequest})
+var sUpdateNotificationConfigurationRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Traits: &t52, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationConfigurationRequest_arn})
+var sUpdateNotificationConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NotificationConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationConfigurationRequest_name})
+var sUpdateNotificationConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NotificationConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationConfigurationRequest_description})
+var sUpdateNotificationConfigurationRequest_aggregationDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationDuration", ID: &i_AggregationDuration, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationConfigurationRequest_aggregationDuration})
+var sUpdateNotificationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfigurationResponse, Members: &mUpdateNotificationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationConfigurationResponse})
+var sUpdateNotificationConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NotificationConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationConfigurationResponse_arn})
+
+var AssociateChannel = &sAssociateChannel
+
+var AssociateManagedNotificationAccountContact = &sAssociateManagedNotificationAccountContact
+
+var AssociateManagedNotificationAdditionalChannel = &sAssociateManagedNotificationAdditionalChannel
+
+var AssociateOrganizationalUnit = &sAssociateOrganizationalUnit
+
+var CreateEventRule = &sCreateEventRule
+
+var CreateNotificationConfiguration = &sCreateNotificationConfiguration
+
+var DeleteEventRule = &sDeleteEventRule
+
+var DeleteNotificationConfiguration = &sDeleteNotificationConfiguration
+
+var DeregisterNotificationHub = &sDeregisterNotificationHub
+
+var DisableNotificationsAccessForOrganization = &sDisableNotificationsAccessForOrganization
+
+var DisassociateChannel = &sDisassociateChannel
+
+var DisassociateManagedNotificationAccountContact = &sDisassociateManagedNotificationAccountContact
+
+var DisassociateManagedNotificationAdditionalChannel = &sDisassociateManagedNotificationAdditionalChannel
+
+var DisassociateOrganizationalUnit = &sDisassociateOrganizationalUnit
+
+var EnableNotificationsAccessForOrganization = &sEnableNotificationsAccessForOrganization
+
+var GetEventRule = &sGetEventRule
+
+var GetManagedNotificationChildEvent = &sGetManagedNotificationChildEvent
+
+var GetManagedNotificationConfiguration = &sGetManagedNotificationConfiguration
+
+var GetManagedNotificationEvent = &sGetManagedNotificationEvent
+
+var GetNotificationConfiguration = &sGetNotificationConfiguration
+
+var GetNotificationEvent = &sGetNotificationEvent
+
+var GetNotificationsAccessForOrganization = &sGetNotificationsAccessForOrganization
+
+var ListChannels = &sListChannels
+
+var ListEventRules = &sListEventRules
+
+var ListManagedNotificationChannelAssociations = &sListManagedNotificationChannelAssociations
+
+var ListManagedNotificationChildEvents = &sListManagedNotificationChildEvents
+
+var ListManagedNotificationConfigurations = &sListManagedNotificationConfigurations
+
+var ListManagedNotificationEvents = &sListManagedNotificationEvents
+
+var ListMemberAccounts = &sListMemberAccounts
+
+var ListNotificationConfigurations = &sListNotificationConfigurations
+
+var ListNotificationEvents = &sListNotificationEvents
+
+var ListNotificationHubs = &sListNotificationHubs
+
+var ListOrganizationalUnits = &sListOrganizationalUnits
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterNotificationHub = &sRegisterNotificationHub
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateEventRule = &sUpdateEventRule
+
+var UpdateManagedNotificationChannelAssociation = &sUpdateManagedNotificationChannelAssociation
+
+var UpdateNotificationConfiguration = &sUpdateNotificationConfiguration
+
+var _Notifications = &s_Notifications
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AccessStatus = &sAccessStatus
+var AccessStatus_ENABLED = &sAccessStatus_ENABLED
+var AccessStatus_DISABLED = &sAccessStatus_DISABLED
+var AccessStatus_PENDING = &sAccessStatus_PENDING
+var AccessStatus_FAILED = &sAccessStatus_FAILED
+
+var _AccountContactType = &s_AccountContactType
+
+var _AccountId = &s_AccountId
+
+var _AggregatedNotificationRegions = &s_AggregatedNotificationRegions
+var _AggregatedNotificationRegions_member = &s_AggregatedNotificationRegions_member
+
+var AggregationDetail = &sAggregationDetail
+var AggregationDetail_summarizationDimensions = &sAggregationDetail_summarizationDimensions
+
+var _AggregationDuration = &s_AggregationDuration
+
+var _AggregationEventType = &s_AggregationEventType
+
+var AggregationKey = &sAggregationKey
+var AggregationKey_name = &sAggregationKey_name
+var AggregationKey_value = &sAggregationKey_value
+
+var _AggregationKeys = &s_AggregationKeys
+var _AggregationKeys_member = &s_AggregationKeys_member
+
+var AggregationSummary = &sAggregationSummary
+var AggregationSummary_eventCount = &sAggregationSummary_eventCount
+var AggregationSummary_aggregatedBy = &sAggregationSummary_aggregatedBy
+var AggregationSummary_aggregatedAccounts = &sAggregationSummary_aggregatedAccounts
+var AggregationSummary_aggregatedRegions = &sAggregationSummary_aggregatedRegions
+var AggregationSummary_aggregatedOrganizationalUnits = &sAggregationSummary_aggregatedOrganizationalUnits
+var AggregationSummary_additionalSummarizationDimensions = &sAggregationSummary_additionalSummarizationDimensions
+
+var _Arn = &s_Arn
+
+var _AttachmentContentType = &s_AttachmentContentType
+
+var _AttachmentDisplayName = &s_AttachmentDisplayName
+
+var _ChannelArn = &s_ChannelArn
+
+var _ChannelAssociationOverrideOption = &s_ChannelAssociationOverrideOption
+
+var _ChannelIdentifier = &s_ChannelIdentifier
+
+var _Channels = &s_Channels
+var _Channels_member = &s_Channels_member
+
+var ChannelType = &sChannelType
+var ChannelType_MOBILE = &sChannelType_MOBILE
+var ChannelType_CHATBOT = &sChannelType_CHATBOT
+var ChannelType_EMAIL = &sChannelType_EMAIL
+var ChannelType_ACCOUNT_CONTACT = &sChannelType_ACCOUNT_CONTACT
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+
+var _CreationTime = &s_CreationTime
+
+var Dimension = &sDimension
+var Dimension_name = &sDimension_name
+var Dimension_value = &sDimension_value
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventRuleArn = &s_EventRuleArn
+
+var _EventRuleEventPattern = &s_EventRuleEventPattern
+
+var _EventRules = &s_EventRules
+var _EventRules_member = &s_EventRules_member
+
+var _EventRuleStatus = &s_EventRuleStatus
+
+var _EventRuleStatusReason = &s_EventRuleStatusReason
+
+var EventRuleStatusSummary = &sEventRuleStatusSummary
+var EventRuleStatusSummary_status = &sEventRuleStatusSummary_status
+var EventRuleStatusSummary_reason = &sEventRuleStatusSummary_reason
+
+var EventRuleStructure = &sEventRuleStructure
+var EventRuleStructure_arn = &sEventRuleStructure_arn
+var EventRuleStructure_notificationConfigurationArn = &sEventRuleStructure_notificationConfigurationArn
+var EventRuleStructure_creationTime = &sEventRuleStructure_creationTime
+var EventRuleStructure_source = &sEventRuleStructure_source
+var EventRuleStructure_eventType = &sEventRuleStructure_eventType
+var EventRuleStructure_eventPattern = &sEventRuleStructure_eventPattern
+var EventRuleStructure_regions = &sEventRuleStructure_regions
+var EventRuleStructure_managedRules = &sEventRuleStructure_managedRules
+var EventRuleStructure_statusSummaryByRegion = &sEventRuleStructure_statusSummaryByRegion
+
+var _EventStatus = &s_EventStatus
+
+var _EventType = &s_EventType
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _LastActivationTime = &s_LastActivationTime
+
+var _LocaleCode = &s_LocaleCode
+
+var _ManagedNotificationChannelAssociations = &s_ManagedNotificationChannelAssociations
+var _ManagedNotificationChannelAssociations_member = &s_ManagedNotificationChannelAssociations_member
+
+var ManagedNotificationChannelAssociationSummary = &sManagedNotificationChannelAssociationSummary
+var ManagedNotificationChannelAssociationSummary_channelIdentifier = &sManagedNotificationChannelAssociationSummary_channelIdentifier
+var ManagedNotificationChannelAssociationSummary_channelType = &sManagedNotificationChannelAssociationSummary_channelType
+var ManagedNotificationChannelAssociationSummary_overrideOption = &sManagedNotificationChannelAssociationSummary_overrideOption
+var ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed = &sManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed
+
+var _ManagedNotificationChannelIdentifier = &s_ManagedNotificationChannelIdentifier
+
+var ManagedNotificationChildEvent = &sManagedNotificationChildEvent
+var ManagedNotificationChildEvent_schemaVersion = &sManagedNotificationChildEvent_schemaVersion
+var ManagedNotificationChildEvent_id = &sManagedNotificationChildEvent_id
+var ManagedNotificationChildEvent_messageComponents = &sManagedNotificationChildEvent_messageComponents
+var ManagedNotificationChildEvent_sourceEventDetailUrl = &sManagedNotificationChildEvent_sourceEventDetailUrl
+var ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText = &sManagedNotificationChildEvent_sourceEventDetailUrlDisplayText
+var ManagedNotificationChildEvent_notificationType = &sManagedNotificationChildEvent_notificationType
+var ManagedNotificationChildEvent_eventStatus = &sManagedNotificationChildEvent_eventStatus
+var ManagedNotificationChildEvent_aggregateManagedNotificationEventArn = &sManagedNotificationChildEvent_aggregateManagedNotificationEventArn
+var ManagedNotificationChildEvent_startTime = &sManagedNotificationChildEvent_startTime
+var ManagedNotificationChildEvent_endTime = &sManagedNotificationChildEvent_endTime
+var ManagedNotificationChildEvent_textParts = &sManagedNotificationChildEvent_textParts
+var ManagedNotificationChildEvent_organizationalUnitId = &sManagedNotificationChildEvent_organizationalUnitId
+var ManagedNotificationChildEvent_aggregationDetail = &sManagedNotificationChildEvent_aggregationDetail
+
+var _ManagedNotificationChildEventArn = &s_ManagedNotificationChildEventArn
+
+var ManagedNotificationChildEventOverview = &sManagedNotificationChildEventOverview
+var ManagedNotificationChildEventOverview_arn = &sManagedNotificationChildEventOverview_arn
+var ManagedNotificationChildEventOverview_managedNotificationConfigurationArn = &sManagedNotificationChildEventOverview_managedNotificationConfigurationArn
+var ManagedNotificationChildEventOverview_relatedAccount = &sManagedNotificationChildEventOverview_relatedAccount
+var ManagedNotificationChildEventOverview_creationTime = &sManagedNotificationChildEventOverview_creationTime
+var ManagedNotificationChildEventOverview_childEvent = &sManagedNotificationChildEventOverview_childEvent
+var ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn = &sManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn
+var ManagedNotificationChildEventOverview_organizationalUnitId = &sManagedNotificationChildEventOverview_organizationalUnitId
+
+var _ManagedNotificationChildEvents = &s_ManagedNotificationChildEvents
+var _ManagedNotificationChildEvents_member = &s_ManagedNotificationChildEvents_member
+
+var ManagedNotificationChildEventSummary = &sManagedNotificationChildEventSummary
+var ManagedNotificationChildEventSummary_schemaVersion = &sManagedNotificationChildEventSummary_schemaVersion
+var ManagedNotificationChildEventSummary_sourceEventMetadata = &sManagedNotificationChildEventSummary_sourceEventMetadata
+var ManagedNotificationChildEventSummary_messageComponents = &sManagedNotificationChildEventSummary_messageComponents
+var ManagedNotificationChildEventSummary_aggregationDetail = &sManagedNotificationChildEventSummary_aggregationDetail
+var ManagedNotificationChildEventSummary_eventStatus = &sManagedNotificationChildEventSummary_eventStatus
+var ManagedNotificationChildEventSummary_notificationType = &sManagedNotificationChildEventSummary_notificationType
+
+var _ManagedNotificationConfigurationDescription = &s_ManagedNotificationConfigurationDescription
+
+var _ManagedNotificationConfigurationName = &s_ManagedNotificationConfigurationName
+
+var _ManagedNotificationConfigurationOsArn = &s_ManagedNotificationConfigurationOsArn
+
+var _ManagedNotificationConfigurations = &s_ManagedNotificationConfigurations
+var _ManagedNotificationConfigurations_member = &s_ManagedNotificationConfigurations_member
+
+var ManagedNotificationConfigurationStructure = &sManagedNotificationConfigurationStructure
+var ManagedNotificationConfigurationStructure_arn = &sManagedNotificationConfigurationStructure_arn
+var ManagedNotificationConfigurationStructure_name = &sManagedNotificationConfigurationStructure_name
+var ManagedNotificationConfigurationStructure_description = &sManagedNotificationConfigurationStructure_description
+
+var ManagedNotificationEvent = &sManagedNotificationEvent
+var ManagedNotificationEvent_schemaVersion = &sManagedNotificationEvent_schemaVersion
+var ManagedNotificationEvent_id = &sManagedNotificationEvent_id
+var ManagedNotificationEvent_messageComponents = &sManagedNotificationEvent_messageComponents
+var ManagedNotificationEvent_sourceEventDetailUrl = &sManagedNotificationEvent_sourceEventDetailUrl
+var ManagedNotificationEvent_sourceEventDetailUrlDisplayText = &sManagedNotificationEvent_sourceEventDetailUrlDisplayText
+var ManagedNotificationEvent_notificationType = &sManagedNotificationEvent_notificationType
+var ManagedNotificationEvent_eventStatus = &sManagedNotificationEvent_eventStatus
+var ManagedNotificationEvent_aggregationEventType = &sManagedNotificationEvent_aggregationEventType
+var ManagedNotificationEvent_aggregationSummary = &sManagedNotificationEvent_aggregationSummary
+var ManagedNotificationEvent_startTime = &sManagedNotificationEvent_startTime
+var ManagedNotificationEvent_endTime = &sManagedNotificationEvent_endTime
+var ManagedNotificationEvent_textParts = &sManagedNotificationEvent_textParts
+var ManagedNotificationEvent_organizationalUnitId = &sManagedNotificationEvent_organizationalUnitId
+var ManagedNotificationEvent_attachments = &sManagedNotificationEvent_attachments
+
+var _ManagedNotificationEventArn = &s_ManagedNotificationEventArn
+
+var ManagedNotificationEventOverview = &sManagedNotificationEventOverview
+var ManagedNotificationEventOverview_arn = &sManagedNotificationEventOverview_arn
+var ManagedNotificationEventOverview_managedNotificationConfigurationArn = &sManagedNotificationEventOverview_managedNotificationConfigurationArn
+var ManagedNotificationEventOverview_relatedAccount = &sManagedNotificationEventOverview_relatedAccount
+var ManagedNotificationEventOverview_creationTime = &sManagedNotificationEventOverview_creationTime
+var ManagedNotificationEventOverview_notificationEvent = &sManagedNotificationEventOverview_notificationEvent
+var ManagedNotificationEventOverview_aggregationEventType = &sManagedNotificationEventOverview_aggregationEventType
+var ManagedNotificationEventOverview_organizationalUnitId = &sManagedNotificationEventOverview_organizationalUnitId
+var ManagedNotificationEventOverview_aggregationSummary = &sManagedNotificationEventOverview_aggregationSummary
+var ManagedNotificationEventOverview_aggregatedNotificationRegions = &sManagedNotificationEventOverview_aggregatedNotificationRegions
+
+var _ManagedNotificationEvents = &s_ManagedNotificationEvents
+var _ManagedNotificationEvents_member = &s_ManagedNotificationEvents_member
+
+var ManagedNotificationEventSummary = &sManagedNotificationEventSummary
+var ManagedNotificationEventSummary_schemaVersion = &sManagedNotificationEventSummary_schemaVersion
+var ManagedNotificationEventSummary_sourceEventMetadata = &sManagedNotificationEventSummary_sourceEventMetadata
+var ManagedNotificationEventSummary_messageComponents = &sManagedNotificationEventSummary_messageComponents
+var ManagedNotificationEventSummary_eventStatus = &sManagedNotificationEventSummary_eventStatus
+var ManagedNotificationEventSummary_notificationType = &sManagedNotificationEventSummary_notificationType
+
+var _ManagedRuleArn = &s_ManagedRuleArn
+
+var _ManagedRuleArns = &s_ManagedRuleArns
+var _ManagedRuleArns_member = &s_ManagedRuleArns_member
+
+var ManagedSourceEventMetadataSummary = &sManagedSourceEventMetadataSummary
+var ManagedSourceEventMetadataSummary_eventOriginRegion = &sManagedSourceEventMetadataSummary_eventOriginRegion
+var ManagedSourceEventMetadataSummary_source = &sManagedSourceEventMetadataSummary_source
+var ManagedSourceEventMetadataSummary_eventType = &sManagedSourceEventMetadataSummary_eventType
+
+var _Media = &s_Media
+var _Media_member = &s_Media_member
+
+var MediaElement = &sMediaElement
+var MediaElement_mediaId = &sMediaElement_mediaId
+var MediaElement_type = &sMediaElement_type
+var MediaElement_url = &sMediaElement_url
+var MediaElement_caption = &sMediaElement_caption
+
+var _MediaElementType = &s_MediaElementType
+
+var _MediaId = &s_MediaId
+
+var MemberAccount = &sMemberAccount
+var MemberAccount_notificationConfigurationArn = &sMemberAccount_notificationConfigurationArn
+var MemberAccount_accountId = &sMemberAccount_accountId
+var MemberAccount_status = &sMemberAccount_status
+var MemberAccount_statusReason = &sMemberAccount_statusReason
+var MemberAccount_organizationalUnitId = &sMemberAccount_organizationalUnitId
+
+var _MemberAccountNotificationConfigurationStatus = &s_MemberAccountNotificationConfigurationStatus
+
+var _MemberAccounts = &s_MemberAccounts
+var _MemberAccounts_member = &s_MemberAccounts_member
+
+var MessageComponents = &sMessageComponents
+var MessageComponents_headline = &sMessageComponents_headline
+var MessageComponents_paragraphSummary = &sMessageComponents_paragraphSummary
+var MessageComponents_completeDescription = &sMessageComponents_completeDescription
+var MessageComponents_markupDescription = &sMessageComponents_markupDescription
+var MessageComponents_dimensions = &sMessageComponents_dimensions
+
+var MessageComponentsSummary = &sMessageComponentsSummary
+var MessageComponentsSummary_headline = &sMessageComponentsSummary_headline
+
+var _NextToken = &s_NextToken
+
+var _NotificationConfigurationArn = &s_NotificationConfigurationArn
+
+var _NotificationConfigurationDescription = &s_NotificationConfigurationDescription
+
+var _NotificationConfigurationName = &s_NotificationConfigurationName
+
+var _NotificationConfigurations = &s_NotificationConfigurations
+var _NotificationConfigurations_member = &s_NotificationConfigurations_member
+
+var _NotificationConfigurationStatus = &s_NotificationConfigurationStatus
+
+var NotificationConfigurationStructure = &sNotificationConfigurationStructure
+var NotificationConfigurationStructure_arn = &sNotificationConfigurationStructure_arn
+var NotificationConfigurationStructure_name = &sNotificationConfigurationStructure_name
+var NotificationConfigurationStructure_description = &sNotificationConfigurationStructure_description
+var NotificationConfigurationStructure_status = &sNotificationConfigurationStructure_status
+var NotificationConfigurationStructure_creationTime = &sNotificationConfigurationStructure_creationTime
+var NotificationConfigurationStructure_aggregationDuration = &sNotificationConfigurationStructure_aggregationDuration
+var NotificationConfigurationStructure_subtype = &sNotificationConfigurationStructure_subtype
+
+var _NotificationConfigurationSubtype = &s_NotificationConfigurationSubtype
+
+var _NotificationEventArn = &s_NotificationEventArn
+
+var NotificationEventAttachment = &sNotificationEventAttachment
+var NotificationEventAttachment_displayName = &sNotificationEventAttachment_displayName
+var NotificationEventAttachment_attachmentDownloadUrl = &sNotificationEventAttachment_attachmentDownloadUrl
+var NotificationEventAttachment_contentType = &sNotificationEventAttachment_contentType
+
+var _NotificationEventAttachmentList = &s_NotificationEventAttachmentList
+var _NotificationEventAttachmentList_member = &s_NotificationEventAttachmentList_member
+
+var _NotificationEventId = &s_NotificationEventId
+
+var NotificationEventOverview = &sNotificationEventOverview
+var NotificationEventOverview_arn = &sNotificationEventOverview_arn
+var NotificationEventOverview_notificationConfigurationArn = &sNotificationEventOverview_notificationConfigurationArn
+var NotificationEventOverview_relatedAccount = &sNotificationEventOverview_relatedAccount
+var NotificationEventOverview_creationTime = &sNotificationEventOverview_creationTime
+var NotificationEventOverview_notificationEvent = &sNotificationEventOverview_notificationEvent
+var NotificationEventOverview_aggregationEventType = &sNotificationEventOverview_aggregationEventType
+var NotificationEventOverview_aggregateNotificationEventArn = &sNotificationEventOverview_aggregateNotificationEventArn
+var NotificationEventOverview_aggregationSummary = &sNotificationEventOverview_aggregationSummary
+var NotificationEventOverview_organizationalUnitId = &sNotificationEventOverview_organizationalUnitId
+
+var _NotificationEvents = &s_NotificationEvents
+var _NotificationEvents_member = &s_NotificationEvents_member
+
+var NotificationEventSchema = &sNotificationEventSchema
+var NotificationEventSchema_schemaVersion = &sNotificationEventSchema_schemaVersion
+var NotificationEventSchema_id = &sNotificationEventSchema_id
+var NotificationEventSchema_sourceEventMetadata = &sNotificationEventSchema_sourceEventMetadata
+var NotificationEventSchema_messageComponents = &sNotificationEventSchema_messageComponents
+var NotificationEventSchema_sourceEventDetailUrl = &sNotificationEventSchema_sourceEventDetailUrl
+var NotificationEventSchema_sourceEventDetailUrlDisplayText = &sNotificationEventSchema_sourceEventDetailUrlDisplayText
+var NotificationEventSchema_notificationType = &sNotificationEventSchema_notificationType
+var NotificationEventSchema_eventStatus = &sNotificationEventSchema_eventStatus
+var NotificationEventSchema_aggregationEventType = &sNotificationEventSchema_aggregationEventType
+var NotificationEventSchema_aggregateNotificationEventArn = &sNotificationEventSchema_aggregateNotificationEventArn
+var NotificationEventSchema_aggregationSummary = &sNotificationEventSchema_aggregationSummary
+var NotificationEventSchema_startTime = &sNotificationEventSchema_startTime
+var NotificationEventSchema_endTime = &sNotificationEventSchema_endTime
+var NotificationEventSchema_textParts = &sNotificationEventSchema_textParts
+var NotificationEventSchema_media = &sNotificationEventSchema_media
+var NotificationEventSchema_organizationalUnitId = &sNotificationEventSchema_organizationalUnitId
+
+var NotificationEventSummary = &sNotificationEventSummary
+var NotificationEventSummary_schemaVersion = &sNotificationEventSummary_schemaVersion
+var NotificationEventSummary_sourceEventMetadata = &sNotificationEventSummary_sourceEventMetadata
+var NotificationEventSummary_messageComponents = &sNotificationEventSummary_messageComponents
+var NotificationEventSummary_eventStatus = &sNotificationEventSummary_eventStatus
+var NotificationEventSummary_notificationType = &sNotificationEventSummary_notificationType
+
+var NotificationHubOverview = &sNotificationHubOverview
+var NotificationHubOverview_notificationHubRegion = &sNotificationHubOverview_notificationHubRegion
+var NotificationHubOverview_statusSummary = &sNotificationHubOverview_statusSummary
+var NotificationHubOverview_creationTime = &sNotificationHubOverview_creationTime
+var NotificationHubOverview_lastActivationTime = &sNotificationHubOverview_lastActivationTime
+
+var _NotificationHubs = &s_NotificationHubs
+var _NotificationHubs_member = &s_NotificationHubs_member
+
+var _NotificationHubStatus = &s_NotificationHubStatus
+
+var _NotificationHubStatusReason = &s_NotificationHubStatusReason
+
+var NotificationHubStatusSummary = &sNotificationHubStatusSummary
+var NotificationHubStatusSummary_status = &sNotificationHubStatusSummary_status
+var NotificationHubStatusSummary_reason = &sNotificationHubStatusSummary_reason
+
+var NotificationsAccessForOrganization = &sNotificationsAccessForOrganization
+var NotificationsAccessForOrganization_accessStatus = &sNotificationsAccessForOrganization_accessStatus
+
+var _NotificationType = &s_NotificationType
+
+var _OrganizationalUnitId = &s_OrganizationalUnitId
+
+var _OrganizationalUnits = &s_OrganizationalUnits
+var _OrganizationalUnits_member = &s_OrganizationalUnits_member
+
+var _QuotaCode = &s_QuotaCode
+
+var _Region = &s_Region
+
+var _Regions = &s_Regions
+var _Regions_member = &s_Regions_member
+
+var Resource = &sResource
+var Resource_id = &sResource_id
+var Resource_arn = &sResource_arn
+var Resource_detailUrl = &sResource_detailUrl
+var Resource_tags = &sResource_tags
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+
+var _Resources = &s_Resources
+var _Resources_member = &s_Resources_member
+
+var _ResourceType = &s_ResourceType
+
+var _SampleAggregationDimensionValues = &s_SampleAggregationDimensionValues
+var _SampleAggregationDimensionValues_member = &s_SampleAggregationDimensionValues_member
+
+var _SchemaVersion = &s_SchemaVersion
+
+var _SensitiveUrl = &s_SensitiveUrl
+
+var _ServiceCode = &s_ServiceCode
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _Source = &s_Source
+
+var SourceEventMetadata = &sSourceEventMetadata
+var SourceEventMetadata_eventTypeVersion = &sSourceEventMetadata_eventTypeVersion
+var SourceEventMetadata_sourceEventId = &sSourceEventMetadata_sourceEventId
+var SourceEventMetadata_eventOriginRegion = &sSourceEventMetadata_eventOriginRegion
+var SourceEventMetadata_relatedAccount = &sSourceEventMetadata_relatedAccount
+var SourceEventMetadata_source = &sSourceEventMetadata_source
+var SourceEventMetadata_eventOccurrenceTime = &sSourceEventMetadata_eventOccurrenceTime
+var SourceEventMetadata_eventType = &sSourceEventMetadata_eventType
+var SourceEventMetadata_relatedResources = &sSourceEventMetadata_relatedResources
+
+var SourceEventMetadataSummary = &sSourceEventMetadataSummary
+var SourceEventMetadataSummary_eventOriginRegion = &sSourceEventMetadataSummary_eventOriginRegion
+var SourceEventMetadataSummary_source = &sSourceEventMetadataSummary_source
+var SourceEventMetadataSummary_eventType = &sSourceEventMetadataSummary_eventType
+
+var _StatusSummaryByRegion = &s_StatusSummaryByRegion
+var _StatusSummaryByRegion_key = &s_StatusSummaryByRegion_key
+var _StatusSummaryByRegion_value = &s_StatusSummaryByRegion_value
+
+var SummarizationDimensionDetail = &sSummarizationDimensionDetail
+var SummarizationDimensionDetail_name = &sSummarizationDimensionDetail_name
+var SummarizationDimensionDetail_value = &sSummarizationDimensionDetail_value
+
+var _SummarizationDimensionDetails = &s_SummarizationDimensionDetails
+var _SummarizationDimensionDetails_member = &s_SummarizationDimensionDetails_member
+
+var SummarizationDimensionOverview = &sSummarizationDimensionOverview
+var SummarizationDimensionOverview_name = &sSummarizationDimensionOverview_name
+var SummarizationDimensionOverview_count = &sSummarizationDimensionOverview_count
+var SummarizationDimensionOverview_sampleValues = &sSummarizationDimensionOverview_sampleValues
+
+var _SummarizationDimensionOverviews = &s_SummarizationDimensionOverviews
+var _SummarizationDimensionOverviews_member = &s_SummarizationDimensionOverviews_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TextByLocale = &s_TextByLocale
+var _TextByLocale_key = &s_TextByLocale_key
+var _TextByLocale_value = &s_TextByLocale_value
+
+var _TextPartId = &s_TextPartId
+
+var _TextPartReference = &s_TextPartReference
+
+var _TextParts = &s_TextParts
+var _TextParts_key = &s_TextParts_key
+var _TextParts_value = &s_TextParts_value
+
+var _TextPartType = &s_TextPartType
+
+var TextPartValue = &sTextPartValue
+var TextPartValue_type = &sTextPartValue_type
+var TextPartValue_displayText = &sTextPartValue_displayText
+var TextPartValue_textByLocale = &sTextPartValue_textByLocale
+var TextPartValue_url = &sTextPartValue_url
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Url = &s_Url
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var AssociateChannelRequest = &sAssociateChannelRequest
+var AssociateChannelRequest_arn = &sAssociateChannelRequest_arn
+var AssociateChannelRequest_notificationConfigurationArn = &sAssociateChannelRequest_notificationConfigurationArn
+
+var AssociateChannelResponse = &sAssociateChannelResponse
+
+var AssociateManagedNotificationAccountContactRequest = &sAssociateManagedNotificationAccountContactRequest
+var AssociateManagedNotificationAccountContactRequest_contactIdentifier = &sAssociateManagedNotificationAccountContactRequest_contactIdentifier
+var AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = &sAssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn
+var AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed = &sAssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed
+
+var AssociateManagedNotificationAccountContactResponse = &sAssociateManagedNotificationAccountContactResponse
+
+var AssociateManagedNotificationAdditionalChannelRequest = &sAssociateManagedNotificationAdditionalChannelRequest
+var AssociateManagedNotificationAdditionalChannelRequest_channelArn = &sAssociateManagedNotificationAdditionalChannelRequest_channelArn
+var AssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = &sAssociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn
+var AssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed = &sAssociateManagedNotificationAdditionalChannelRequest_isSensitiveEventsSubscribed
+
+var AssociateManagedNotificationAdditionalChannelResponse = &sAssociateManagedNotificationAdditionalChannelResponse
+
+var AssociateOrganizationalUnitRequest = &sAssociateOrganizationalUnitRequest
+var AssociateOrganizationalUnitRequest_organizationalUnitId = &sAssociateOrganizationalUnitRequest_organizationalUnitId
+var AssociateOrganizationalUnitRequest_notificationConfigurationArn = &sAssociateOrganizationalUnitRequest_notificationConfigurationArn
+
+var AssociateOrganizationalUnitResponse = &sAssociateOrganizationalUnitResponse
+
+var CreateEventRuleRequest = &sCreateEventRuleRequest
+var CreateEventRuleRequest_notificationConfigurationArn = &sCreateEventRuleRequest_notificationConfigurationArn
+var CreateEventRuleRequest_source = &sCreateEventRuleRequest_source
+var CreateEventRuleRequest_eventType = &sCreateEventRuleRequest_eventType
+var CreateEventRuleRequest_eventPattern = &sCreateEventRuleRequest_eventPattern
+var CreateEventRuleRequest_regions = &sCreateEventRuleRequest_regions
+
+var CreateEventRuleResponse = &sCreateEventRuleResponse
+var CreateEventRuleResponse_arn = &sCreateEventRuleResponse_arn
+var CreateEventRuleResponse_notificationConfigurationArn = &sCreateEventRuleResponse_notificationConfigurationArn
+var CreateEventRuleResponse_statusSummaryByRegion = &sCreateEventRuleResponse_statusSummaryByRegion
+
+var CreateNotificationConfigurationRequest = &sCreateNotificationConfigurationRequest
+var CreateNotificationConfigurationRequest_name = &sCreateNotificationConfigurationRequest_name
+var CreateNotificationConfigurationRequest_description = &sCreateNotificationConfigurationRequest_description
+var CreateNotificationConfigurationRequest_aggregationDuration = &sCreateNotificationConfigurationRequest_aggregationDuration
+var CreateNotificationConfigurationRequest_tags = &sCreateNotificationConfigurationRequest_tags
+
+var CreateNotificationConfigurationResponse = &sCreateNotificationConfigurationResponse
+var CreateNotificationConfigurationResponse_arn = &sCreateNotificationConfigurationResponse_arn
+var CreateNotificationConfigurationResponse_status = &sCreateNotificationConfigurationResponse_status
+
+var DeleteEventRuleRequest = &sDeleteEventRuleRequest
+var DeleteEventRuleRequest_arn = &sDeleteEventRuleRequest_arn
+
+var DeleteEventRuleResponse = &sDeleteEventRuleResponse
+
+var DeleteNotificationConfigurationRequest = &sDeleteNotificationConfigurationRequest
+var DeleteNotificationConfigurationRequest_arn = &sDeleteNotificationConfigurationRequest_arn
+
+var DeleteNotificationConfigurationResponse = &sDeleteNotificationConfigurationResponse
+
+var DeregisterNotificationHubRequest = &sDeregisterNotificationHubRequest
+var DeregisterNotificationHubRequest_notificationHubRegion = &sDeregisterNotificationHubRequest_notificationHubRegion
+
+var DeregisterNotificationHubResponse = &sDeregisterNotificationHubResponse
+var DeregisterNotificationHubResponse_notificationHubRegion = &sDeregisterNotificationHubResponse_notificationHubRegion
+var DeregisterNotificationHubResponse_statusSummary = &sDeregisterNotificationHubResponse_statusSummary
+
+var DisableNotificationsAccessForOrganizationRequest = &sDisableNotificationsAccessForOrganizationRequest
+
+var DisableNotificationsAccessForOrganizationResponse = &sDisableNotificationsAccessForOrganizationResponse
+
+var DisassociateChannelRequest = &sDisassociateChannelRequest
+var DisassociateChannelRequest_arn = &sDisassociateChannelRequest_arn
+var DisassociateChannelRequest_notificationConfigurationArn = &sDisassociateChannelRequest_notificationConfigurationArn
+
+var DisassociateChannelResponse = &sDisassociateChannelResponse
+
+var DisassociateManagedNotificationAccountContactRequest = &sDisassociateManagedNotificationAccountContactRequest
+var DisassociateManagedNotificationAccountContactRequest_contactIdentifier = &sDisassociateManagedNotificationAccountContactRequest_contactIdentifier
+var DisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn = &sDisassociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn
+
+var DisassociateManagedNotificationAccountContactResponse = &sDisassociateManagedNotificationAccountContactResponse
+
+var DisassociateManagedNotificationAdditionalChannelRequest = &sDisassociateManagedNotificationAdditionalChannelRequest
+var DisassociateManagedNotificationAdditionalChannelRequest_channelArn = &sDisassociateManagedNotificationAdditionalChannelRequest_channelArn
+var DisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn = &sDisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn
+
+var DisassociateManagedNotificationAdditionalChannelResponse = &sDisassociateManagedNotificationAdditionalChannelResponse
+
+var DisassociateOrganizationalUnitRequest = &sDisassociateOrganizationalUnitRequest
+var DisassociateOrganizationalUnitRequest_organizationalUnitId = &sDisassociateOrganizationalUnitRequest_organizationalUnitId
+var DisassociateOrganizationalUnitRequest_notificationConfigurationArn = &sDisassociateOrganizationalUnitRequest_notificationConfigurationArn
+
+var DisassociateOrganizationalUnitResponse = &sDisassociateOrganizationalUnitResponse
+
+var EnableNotificationsAccessForOrganizationRequest = &sEnableNotificationsAccessForOrganizationRequest
+
+var EnableNotificationsAccessForOrganizationResponse = &sEnableNotificationsAccessForOrganizationResponse
+
+var GetEventRuleRequest = &sGetEventRuleRequest
+var GetEventRuleRequest_arn = &sGetEventRuleRequest_arn
+
+var GetEventRuleResponse = &sGetEventRuleResponse
+var GetEventRuleResponse_arn = &sGetEventRuleResponse_arn
+var GetEventRuleResponse_notificationConfigurationArn = &sGetEventRuleResponse_notificationConfigurationArn
+var GetEventRuleResponse_creationTime = &sGetEventRuleResponse_creationTime
+var GetEventRuleResponse_source = &sGetEventRuleResponse_source
+var GetEventRuleResponse_eventType = &sGetEventRuleResponse_eventType
+var GetEventRuleResponse_eventPattern = &sGetEventRuleResponse_eventPattern
+var GetEventRuleResponse_regions = &sGetEventRuleResponse_regions
+var GetEventRuleResponse_managedRules = &sGetEventRuleResponse_managedRules
+var GetEventRuleResponse_statusSummaryByRegion = &sGetEventRuleResponse_statusSummaryByRegion
+
+var GetManagedNotificationChildEventRequest = &sGetManagedNotificationChildEventRequest
+var GetManagedNotificationChildEventRequest_arn = &sGetManagedNotificationChildEventRequest_arn
+var GetManagedNotificationChildEventRequest_locale = &sGetManagedNotificationChildEventRequest_locale
+
+var GetManagedNotificationChildEventResponse = &sGetManagedNotificationChildEventResponse
+var GetManagedNotificationChildEventResponse_arn = &sGetManagedNotificationChildEventResponse_arn
+var GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn = &sGetManagedNotificationChildEventResponse_managedNotificationConfigurationArn
+var GetManagedNotificationChildEventResponse_creationTime = &sGetManagedNotificationChildEventResponse_creationTime
+var GetManagedNotificationChildEventResponse_content = &sGetManagedNotificationChildEventResponse_content
+
+var GetManagedNotificationConfigurationRequest = &sGetManagedNotificationConfigurationRequest
+var GetManagedNotificationConfigurationRequest_arn = &sGetManagedNotificationConfigurationRequest_arn
+
+var GetManagedNotificationConfigurationResponse = &sGetManagedNotificationConfigurationResponse
+var GetManagedNotificationConfigurationResponse_arn = &sGetManagedNotificationConfigurationResponse_arn
+var GetManagedNotificationConfigurationResponse_name = &sGetManagedNotificationConfigurationResponse_name
+var GetManagedNotificationConfigurationResponse_description = &sGetManagedNotificationConfigurationResponse_description
+var GetManagedNotificationConfigurationResponse_category = &sGetManagedNotificationConfigurationResponse_category
+var GetManagedNotificationConfigurationResponse_subCategory = &sGetManagedNotificationConfigurationResponse_subCategory
+
+var GetManagedNotificationEventRequest = &sGetManagedNotificationEventRequest
+var GetManagedNotificationEventRequest_arn = &sGetManagedNotificationEventRequest_arn
+var GetManagedNotificationEventRequest_locale = &sGetManagedNotificationEventRequest_locale
+
+var GetManagedNotificationEventResponse = &sGetManagedNotificationEventResponse
+var GetManagedNotificationEventResponse_arn = &sGetManagedNotificationEventResponse_arn
+var GetManagedNotificationEventResponse_managedNotificationConfigurationArn = &sGetManagedNotificationEventResponse_managedNotificationConfigurationArn
+var GetManagedNotificationEventResponse_creationTime = &sGetManagedNotificationEventResponse_creationTime
+var GetManagedNotificationEventResponse_content = &sGetManagedNotificationEventResponse_content
+
+var GetNotificationConfigurationRequest = &sGetNotificationConfigurationRequest
+var GetNotificationConfigurationRequest_arn = &sGetNotificationConfigurationRequest_arn
+
+var GetNotificationConfigurationResponse = &sGetNotificationConfigurationResponse
+var GetNotificationConfigurationResponse_arn = &sGetNotificationConfigurationResponse_arn
+var GetNotificationConfigurationResponse_name = &sGetNotificationConfigurationResponse_name
+var GetNotificationConfigurationResponse_description = &sGetNotificationConfigurationResponse_description
+var GetNotificationConfigurationResponse_status = &sGetNotificationConfigurationResponse_status
+var GetNotificationConfigurationResponse_creationTime = &sGetNotificationConfigurationResponse_creationTime
+var GetNotificationConfigurationResponse_aggregationDuration = &sGetNotificationConfigurationResponse_aggregationDuration
+var GetNotificationConfigurationResponse_subtype = &sGetNotificationConfigurationResponse_subtype
+
+var GetNotificationEventRequest = &sGetNotificationEventRequest
+var GetNotificationEventRequest_arn = &sGetNotificationEventRequest_arn
+var GetNotificationEventRequest_locale = &sGetNotificationEventRequest_locale
+
+var GetNotificationEventResponse = &sGetNotificationEventResponse
+var GetNotificationEventResponse_arn = &sGetNotificationEventResponse_arn
+var GetNotificationEventResponse_notificationConfigurationArn = &sGetNotificationEventResponse_notificationConfigurationArn
+var GetNotificationEventResponse_creationTime = &sGetNotificationEventResponse_creationTime
+var GetNotificationEventResponse_content = &sGetNotificationEventResponse_content
+
+var GetNotificationsAccessForOrganizationRequest = &sGetNotificationsAccessForOrganizationRequest
+
+var GetNotificationsAccessForOrganizationResponse = &sGetNotificationsAccessForOrganizationResponse
+var GetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization = &sGetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_notificationConfigurationArn = &sListChannelsRequest_notificationConfigurationArn
+var ListChannelsRequest_maxResults = &sListChannelsRequest_maxResults
+var ListChannelsRequest_nextToken = &sListChannelsRequest_nextToken
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_nextToken = &sListChannelsResponse_nextToken
+var ListChannelsResponse_channels = &sListChannelsResponse_channels
+
+var ListEventRulesRequest = &sListEventRulesRequest
+var ListEventRulesRequest_notificationConfigurationArn = &sListEventRulesRequest_notificationConfigurationArn
+var ListEventRulesRequest_maxResults = &sListEventRulesRequest_maxResults
+var ListEventRulesRequest_nextToken = &sListEventRulesRequest_nextToken
+
+var ListEventRulesResponse = &sListEventRulesResponse
+var ListEventRulesResponse_nextToken = &sListEventRulesResponse_nextToken
+var ListEventRulesResponse_eventRules = &sListEventRulesResponse_eventRules
+
+var ListManagedNotificationChannelAssociationsRequest = &sListManagedNotificationChannelAssociationsRequest
+var ListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn = &sListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn
+var ListManagedNotificationChannelAssociationsRequest_maxResults = &sListManagedNotificationChannelAssociationsRequest_maxResults
+var ListManagedNotificationChannelAssociationsRequest_nextToken = &sListManagedNotificationChannelAssociationsRequest_nextToken
+
+var ListManagedNotificationChannelAssociationsResponse = &sListManagedNotificationChannelAssociationsResponse
+var ListManagedNotificationChannelAssociationsResponse_nextToken = &sListManagedNotificationChannelAssociationsResponse_nextToken
+var ListManagedNotificationChannelAssociationsResponse_channelAssociations = &sListManagedNotificationChannelAssociationsResponse_channelAssociations
+
+var ListManagedNotificationChildEventsRequest = &sListManagedNotificationChildEventsRequest
+var ListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn = &sListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn
+var ListManagedNotificationChildEventsRequest_startTime = &sListManagedNotificationChildEventsRequest_startTime
+var ListManagedNotificationChildEventsRequest_endTime = &sListManagedNotificationChildEventsRequest_endTime
+var ListManagedNotificationChildEventsRequest_locale = &sListManagedNotificationChildEventsRequest_locale
+var ListManagedNotificationChildEventsRequest_maxResults = &sListManagedNotificationChildEventsRequest_maxResults
+var ListManagedNotificationChildEventsRequest_relatedAccount = &sListManagedNotificationChildEventsRequest_relatedAccount
+var ListManagedNotificationChildEventsRequest_organizationalUnitId = &sListManagedNotificationChildEventsRequest_organizationalUnitId
+var ListManagedNotificationChildEventsRequest_nextToken = &sListManagedNotificationChildEventsRequest_nextToken
+
+var ListManagedNotificationChildEventsResponse = &sListManagedNotificationChildEventsResponse
+var ListManagedNotificationChildEventsResponse_nextToken = &sListManagedNotificationChildEventsResponse_nextToken
+var ListManagedNotificationChildEventsResponse_managedNotificationChildEvents = &sListManagedNotificationChildEventsResponse_managedNotificationChildEvents
+
+var ListManagedNotificationConfigurationsRequest = &sListManagedNotificationConfigurationsRequest
+var ListManagedNotificationConfigurationsRequest_channelIdentifier = &sListManagedNotificationConfigurationsRequest_channelIdentifier
+var ListManagedNotificationConfigurationsRequest_maxResults = &sListManagedNotificationConfigurationsRequest_maxResults
+var ListManagedNotificationConfigurationsRequest_nextToken = &sListManagedNotificationConfigurationsRequest_nextToken
+
+var ListManagedNotificationConfigurationsResponse = &sListManagedNotificationConfigurationsResponse
+var ListManagedNotificationConfigurationsResponse_nextToken = &sListManagedNotificationConfigurationsResponse_nextToken
+var ListManagedNotificationConfigurationsResponse_managedNotificationConfigurations = &sListManagedNotificationConfigurationsResponse_managedNotificationConfigurations
+
+var ListManagedNotificationEventsRequest = &sListManagedNotificationEventsRequest
+var ListManagedNotificationEventsRequest_startTime = &sListManagedNotificationEventsRequest_startTime
+var ListManagedNotificationEventsRequest_endTime = &sListManagedNotificationEventsRequest_endTime
+var ListManagedNotificationEventsRequest_locale = &sListManagedNotificationEventsRequest_locale
+var ListManagedNotificationEventsRequest_source = &sListManagedNotificationEventsRequest_source
+var ListManagedNotificationEventsRequest_maxResults = &sListManagedNotificationEventsRequest_maxResults
+var ListManagedNotificationEventsRequest_nextToken = &sListManagedNotificationEventsRequest_nextToken
+var ListManagedNotificationEventsRequest_organizationalUnitId = &sListManagedNotificationEventsRequest_organizationalUnitId
+var ListManagedNotificationEventsRequest_relatedAccount = &sListManagedNotificationEventsRequest_relatedAccount
+var ListManagedNotificationEventsRequest_includeSensitiveEvents = &sListManagedNotificationEventsRequest_includeSensitiveEvents
+
+var ListManagedNotificationEventsResponse = &sListManagedNotificationEventsResponse
+var ListManagedNotificationEventsResponse_nextToken = &sListManagedNotificationEventsResponse_nextToken
+var ListManagedNotificationEventsResponse_managedNotificationEvents = &sListManagedNotificationEventsResponse_managedNotificationEvents
+
+var ListMemberAccountsRequest = &sListMemberAccountsRequest
+var ListMemberAccountsRequest_notificationConfigurationArn = &sListMemberAccountsRequest_notificationConfigurationArn
+var ListMemberAccountsRequest_maxResults = &sListMemberAccountsRequest_maxResults
+var ListMemberAccountsRequest_nextToken = &sListMemberAccountsRequest_nextToken
+var ListMemberAccountsRequest_memberAccount = &sListMemberAccountsRequest_memberAccount
+var ListMemberAccountsRequest_status = &sListMemberAccountsRequest_status
+var ListMemberAccountsRequest_organizationalUnitId = &sListMemberAccountsRequest_organizationalUnitId
+
+var ListMemberAccountsResponse = &sListMemberAccountsResponse
+var ListMemberAccountsResponse_memberAccounts = &sListMemberAccountsResponse_memberAccounts
+var ListMemberAccountsResponse_nextToken = &sListMemberAccountsResponse_nextToken
+
+var ListNotificationConfigurationsRequest = &sListNotificationConfigurationsRequest
+var ListNotificationConfigurationsRequest_eventRuleSource = &sListNotificationConfigurationsRequest_eventRuleSource
+var ListNotificationConfigurationsRequest_channelArn = &sListNotificationConfigurationsRequest_channelArn
+var ListNotificationConfigurationsRequest_status = &sListNotificationConfigurationsRequest_status
+var ListNotificationConfigurationsRequest_subtype = &sListNotificationConfigurationsRequest_subtype
+var ListNotificationConfigurationsRequest_maxResults = &sListNotificationConfigurationsRequest_maxResults
+var ListNotificationConfigurationsRequest_nextToken = &sListNotificationConfigurationsRequest_nextToken
+
+var ListNotificationConfigurationsResponse = &sListNotificationConfigurationsResponse
+var ListNotificationConfigurationsResponse_nextToken = &sListNotificationConfigurationsResponse_nextToken
+var ListNotificationConfigurationsResponse_notificationConfigurations = &sListNotificationConfigurationsResponse_notificationConfigurations
+
+var ListNotificationEventsRequest = &sListNotificationEventsRequest
+var ListNotificationEventsRequest_startTime = &sListNotificationEventsRequest_startTime
+var ListNotificationEventsRequest_endTime = &sListNotificationEventsRequest_endTime
+var ListNotificationEventsRequest_locale = &sListNotificationEventsRequest_locale
+var ListNotificationEventsRequest_source = &sListNotificationEventsRequest_source
+var ListNotificationEventsRequest_includeChildEvents = &sListNotificationEventsRequest_includeChildEvents
+var ListNotificationEventsRequest_aggregateNotificationEventArn = &sListNotificationEventsRequest_aggregateNotificationEventArn
+var ListNotificationEventsRequest_maxResults = &sListNotificationEventsRequest_maxResults
+var ListNotificationEventsRequest_nextToken = &sListNotificationEventsRequest_nextToken
+var ListNotificationEventsRequest_organizationalUnitId = &sListNotificationEventsRequest_organizationalUnitId
+
+var ListNotificationEventsResponse = &sListNotificationEventsResponse
+var ListNotificationEventsResponse_nextToken = &sListNotificationEventsResponse_nextToken
+var ListNotificationEventsResponse_notificationEvents = &sListNotificationEventsResponse_notificationEvents
+
+var ListNotificationHubsRequest = &sListNotificationHubsRequest
+var ListNotificationHubsRequest_maxResults = &sListNotificationHubsRequest_maxResults
+var ListNotificationHubsRequest_nextToken = &sListNotificationHubsRequest_nextToken
+
+var ListNotificationHubsResponse = &sListNotificationHubsResponse
+var ListNotificationHubsResponse_notificationHubs = &sListNotificationHubsResponse_notificationHubs
+var ListNotificationHubsResponse_nextToken = &sListNotificationHubsResponse_nextToken
+
+var ListOrganizationalUnitsRequest = &sListOrganizationalUnitsRequest
+var ListOrganizationalUnitsRequest_notificationConfigurationArn = &sListOrganizationalUnitsRequest_notificationConfigurationArn
+var ListOrganizationalUnitsRequest_maxResults = &sListOrganizationalUnitsRequest_maxResults
+var ListOrganizationalUnitsRequest_nextToken = &sListOrganizationalUnitsRequest_nextToken
+
+var ListOrganizationalUnitsResponse = &sListOrganizationalUnitsResponse
+var ListOrganizationalUnitsResponse_organizationalUnits = &sListOrganizationalUnitsResponse_organizationalUnits
+var ListOrganizationalUnitsResponse_nextToken = &sListOrganizationalUnitsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_arn = &sListTagsForResourceRequest_arn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterNotificationHubRequest = &sRegisterNotificationHubRequest
+var RegisterNotificationHubRequest_notificationHubRegion = &sRegisterNotificationHubRequest_notificationHubRegion
+
+var RegisterNotificationHubResponse = &sRegisterNotificationHubResponse
+var RegisterNotificationHubResponse_notificationHubRegion = &sRegisterNotificationHubResponse_notificationHubRegion
+var RegisterNotificationHubResponse_statusSummary = &sRegisterNotificationHubResponse_statusSummary
+var RegisterNotificationHubResponse_creationTime = &sRegisterNotificationHubResponse_creationTime
+var RegisterNotificationHubResponse_lastActivationTime = &sRegisterNotificationHubResponse_lastActivationTime
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_arn = &sTagResourceRequest_arn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_arn = &sUntagResourceRequest_arn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateEventRuleRequest = &sUpdateEventRuleRequest
+var UpdateEventRuleRequest_arn = &sUpdateEventRuleRequest_arn
+var UpdateEventRuleRequest_eventPattern = &sUpdateEventRuleRequest_eventPattern
+var UpdateEventRuleRequest_regions = &sUpdateEventRuleRequest_regions
+
+var UpdateEventRuleResponse = &sUpdateEventRuleResponse
+var UpdateEventRuleResponse_arn = &sUpdateEventRuleResponse_arn
+var UpdateEventRuleResponse_notificationConfigurationArn = &sUpdateEventRuleResponse_notificationConfigurationArn
+var UpdateEventRuleResponse_statusSummaryByRegion = &sUpdateEventRuleResponse_statusSummaryByRegion
+
+var UpdateManagedNotificationChannelAssociationRequest = &sUpdateManagedNotificationChannelAssociationRequest
+var UpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn = &sUpdateManagedNotificationChannelAssociationRequest_managedNotificationConfigurationArn
+var UpdateManagedNotificationChannelAssociationRequest_channelIdentifier = &sUpdateManagedNotificationChannelAssociationRequest_channelIdentifier
+var UpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed = &sUpdateManagedNotificationChannelAssociationRequest_isSensitiveEventsSubscribed
+
+var UpdateManagedNotificationChannelAssociationResponse = &sUpdateManagedNotificationChannelAssociationResponse
+
+var UpdateNotificationConfigurationRequest = &sUpdateNotificationConfigurationRequest
+var UpdateNotificationConfigurationRequest_arn = &sUpdateNotificationConfigurationRequest_arn
+var UpdateNotificationConfigurationRequest_name = &sUpdateNotificationConfigurationRequest_name
+var UpdateNotificationConfigurationRequest_description = &sUpdateNotificationConfigurationRequest_description
+var UpdateNotificationConfigurationRequest_aggregationDuration = &sUpdateNotificationConfigurationRequest_aggregationDuration
+
+var UpdateNotificationConfigurationResponse = &sUpdateNotificationConfigurationResponse
+var UpdateNotificationConfigurationResponse_arn = &sUpdateNotificationConfigurationResponse_arn
+
+var Notifications = &smithy.ServiceSchema{Schema: &s_Notifications, Version: "2018-05-10"}

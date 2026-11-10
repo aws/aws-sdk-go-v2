@@ -4,1423 +4,1397 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "CreateMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateMonitor                                           smithy.SchemaExtensions
+	eDeleteMonitor                                           smithy.SchemaExtensions
+	eGetHealthEvent                                          smithy.SchemaExtensions
+	eGetInternetEvent                                        smithy.SchemaExtensions
+	eGetMonitor                                              smithy.SchemaExtensions
+	eGetQueryResults                                         smithy.SchemaExtensions
+	eGetQueryStatus                                          smithy.SchemaExtensions
+	eListHealthEvents                                        smithy.SchemaExtensions
+	eListInternetEvents                                      smithy.SchemaExtensions
+	eListMonitors                                            smithy.SchemaExtensions
+	eListTagsForResource                                     smithy.SchemaExtensions
+	eStartQuery                                              smithy.SchemaExtensions
+	eStopQuery                                               smithy.SchemaExtensions
+	eTagResource                                             smithy.SchemaExtensions
+	eUntagResource                                           smithy.SchemaExtensions
+	eUpdateMonitor                                           smithy.SchemaExtensions
+	e_InternetMonitor20210603                                smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_message                           smithy.SchemaExtensions
+	e_AccountId                                              smithy.SchemaExtensions
+	e_Arn                                                    smithy.SchemaExtensions
+	eAvailabilityMeasurement                                 smithy.SchemaExtensions
+	eAvailabilityMeasurement_ExperienceScore                 smithy.SchemaExtensions
+	eAvailabilityMeasurement_PercentOfTotalTrafficImpacted   smithy.SchemaExtensions
+	eAvailabilityMeasurement_PercentOfClientLocationImpacted smithy.SchemaExtensions
+	eBadRequestException                                     smithy.SchemaExtensions
+	eBadRequestException_message                             smithy.SchemaExtensions
+	eClientLocation                                          smithy.SchemaExtensions
+	eClientLocation_ASName                                   smithy.SchemaExtensions
+	eClientLocation_ASNumber                                 smithy.SchemaExtensions
+	eClientLocation_Country                                  smithy.SchemaExtensions
+	eClientLocation_Subdivision                              smithy.SchemaExtensions
+	eClientLocation_Metro                                    smithy.SchemaExtensions
+	eClientLocation_City                                     smithy.SchemaExtensions
+	eClientLocation_Latitude                                 smithy.SchemaExtensions
+	eClientLocation_Longitude                                smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_message                               smithy.SchemaExtensions
+	e_FilterList                                             smithy.SchemaExtensions
+	e_FilterList_member                                      smithy.SchemaExtensions
+	eFilterParameter                                         smithy.SchemaExtensions
+	eFilterParameter_Field                                   smithy.SchemaExtensions
+	eFilterParameter_Operator                                smithy.SchemaExtensions
+	eFilterParameter_Values                                  smithy.SchemaExtensions
+	e_FilterParameters                                       smithy.SchemaExtensions
+	e_FilterParameters_member                                smithy.SchemaExtensions
+	eHealthEvent                                             smithy.SchemaExtensions
+	eHealthEvent_EventArn                                    smithy.SchemaExtensions
+	eHealthEvent_EventId                                     smithy.SchemaExtensions
+	eHealthEvent_StartedAt                                   smithy.SchemaExtensions
+	eHealthEvent_EndedAt                                     smithy.SchemaExtensions
+	eHealthEvent_CreatedAt                                   smithy.SchemaExtensions
+	eHealthEvent_LastUpdatedAt                               smithy.SchemaExtensions
+	eHealthEvent_ImpactedLocations                           smithy.SchemaExtensions
+	eHealthEvent_Status                                      smithy.SchemaExtensions
+	eHealthEvent_PercentOfTotalTrafficImpacted               smithy.SchemaExtensions
+	eHealthEvent_ImpactType                                  smithy.SchemaExtensions
+	eHealthEvent_HealthScoreThreshold                        smithy.SchemaExtensions
+	e_HealthEventImpactType                                  smithy.SchemaExtensions
+	e_HealthEventList                                        smithy.SchemaExtensions
+	e_HealthEventList_member                                 smithy.SchemaExtensions
+	e_HealthEventName                                        smithy.SchemaExtensions
+	eHealthEventsConfig                                      smithy.SchemaExtensions
+	eHealthEventsConfig_AvailabilityScoreThreshold           smithy.SchemaExtensions
+	eHealthEventsConfig_PerformanceScoreThreshold            smithy.SchemaExtensions
+	eHealthEventsConfig_AvailabilityLocalHealthEventsConfig  smithy.SchemaExtensions
+	eHealthEventsConfig_PerformanceLocalHealthEventsConfig   smithy.SchemaExtensions
+	e_HealthEventStatus                                      smithy.SchemaExtensions
+	eImpactedLocation                                        smithy.SchemaExtensions
+	eImpactedLocation_ASName                                 smithy.SchemaExtensions
+	eImpactedLocation_ASNumber                               smithy.SchemaExtensions
+	eImpactedLocation_Country                                smithy.SchemaExtensions
+	eImpactedLocation_Subdivision                            smithy.SchemaExtensions
+	eImpactedLocation_Metro                                  smithy.SchemaExtensions
+	eImpactedLocation_City                                   smithy.SchemaExtensions
+	eImpactedLocation_Latitude                               smithy.SchemaExtensions
+	eImpactedLocation_Longitude                              smithy.SchemaExtensions
+	eImpactedLocation_CountryCode                            smithy.SchemaExtensions
+	eImpactedLocation_SubdivisionCode                        smithy.SchemaExtensions
+	eImpactedLocation_ServiceLocation                        smithy.SchemaExtensions
+	eImpactedLocation_Status                                 smithy.SchemaExtensions
+	eImpactedLocation_CausedBy                               smithy.SchemaExtensions
+	eImpactedLocation_InternetHealth                         smithy.SchemaExtensions
+	eImpactedLocation_Ipv4Prefixes                           smithy.SchemaExtensions
+	e_ImpactedLocationsList                                  smithy.SchemaExtensions
+	e_ImpactedLocationsList_member                           smithy.SchemaExtensions
+	eInternalServerErrorException                            smithy.SchemaExtensions
+	eInternalServerErrorException_message                    smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_message                         smithy.SchemaExtensions
+	e_InternetEventId                                        smithy.SchemaExtensions
+	e_InternetEventMaxResults                                smithy.SchemaExtensions
+	e_InternetEventsList                                     smithy.SchemaExtensions
+	e_InternetEventsList_member                              smithy.SchemaExtensions
+	e_InternetEventStatus                                    smithy.SchemaExtensions
+	eInternetEventSummary                                    smithy.SchemaExtensions
+	eInternetEventSummary_EventId                            smithy.SchemaExtensions
+	eInternetEventSummary_EventArn                           smithy.SchemaExtensions
+	eInternetEventSummary_StartedAt                          smithy.SchemaExtensions
+	eInternetEventSummary_EndedAt                            smithy.SchemaExtensions
+	eInternetEventSummary_ClientLocation                     smithy.SchemaExtensions
+	eInternetEventSummary_EventType                          smithy.SchemaExtensions
+	eInternetEventSummary_EventStatus                        smithy.SchemaExtensions
+	e_InternetEventType                                      smithy.SchemaExtensions
+	eInternetHealth                                          smithy.SchemaExtensions
+	eInternetHealth_Availability                             smithy.SchemaExtensions
+	eInternetHealth_Performance                              smithy.SchemaExtensions
+	eInternetMeasurementsLogDelivery                         smithy.SchemaExtensions
+	eInternetMeasurementsLogDelivery_S3Config                smithy.SchemaExtensions
+	e_Ipv4PrefixList                                         smithy.SchemaExtensions
+	e_Ipv4PrefixList_member                                  smithy.SchemaExtensions
+	eLimitExceededException                                  smithy.SchemaExtensions
+	eLimitExceededException_message                          smithy.SchemaExtensions
+	eLocalHealthEventsConfig                                 smithy.SchemaExtensions
+	eLocalHealthEventsConfig_Status                          smithy.SchemaExtensions
+	eLocalHealthEventsConfig_HealthScoreThreshold            smithy.SchemaExtensions
+	eLocalHealthEventsConfig_MinTrafficImpact                smithy.SchemaExtensions
+	e_LocalHealthEventsConfigStatus                          smithy.SchemaExtensions
+	e_LogDeliveryStatus                                      smithy.SchemaExtensions
+	e_MaxCityNetworksToMonitor                               smithy.SchemaExtensions
+	e_MaxResults                                             smithy.SchemaExtensions
+	eMonitor                                                 smithy.SchemaExtensions
+	eMonitor_MonitorName                                     smithy.SchemaExtensions
+	eMonitor_MonitorArn                                      smithy.SchemaExtensions
+	eMonitor_Status                                          smithy.SchemaExtensions
+	eMonitor_ProcessingStatus                                smithy.SchemaExtensions
+	e_MonitorArn                                             smithy.SchemaExtensions
+	e_MonitorConfigState                                     smithy.SchemaExtensions
+	e_MonitorList                                            smithy.SchemaExtensions
+	e_MonitorList_member                                     smithy.SchemaExtensions
+	e_MonitorProcessingStatusCode                            smithy.SchemaExtensions
+	eNetwork                                                 smithy.SchemaExtensions
+	eNetwork_ASName                                          smithy.SchemaExtensions
+	eNetwork_ASNumber                                        smithy.SchemaExtensions
+	eNetworkImpairment                                       smithy.SchemaExtensions
+	eNetworkImpairment_Networks                              smithy.SchemaExtensions
+	eNetworkImpairment_AsPath                                smithy.SchemaExtensions
+	eNetworkImpairment_NetworkEventType                      smithy.SchemaExtensions
+	e_NetworkList                                            smithy.SchemaExtensions
+	e_NetworkList_member                                     smithy.SchemaExtensions
+	eNotFoundException                                       smithy.SchemaExtensions
+	eNotFoundException_message                               smithy.SchemaExtensions
+	e_Operator                                               smithy.SchemaExtensions
+	e_Percentage                                             smithy.SchemaExtensions
+	ePerformanceMeasurement                                  smithy.SchemaExtensions
+	ePerformanceMeasurement_ExperienceScore                  smithy.SchemaExtensions
+	ePerformanceMeasurement_PercentOfTotalTrafficImpacted    smithy.SchemaExtensions
+	ePerformanceMeasurement_PercentOfClientLocationImpacted  smithy.SchemaExtensions
+	ePerformanceMeasurement_RoundTripTime                    smithy.SchemaExtensions
+	e_QueryData                                              smithy.SchemaExtensions
+	e_QueryData_member                                       smithy.SchemaExtensions
+	eQueryField                                              smithy.SchemaExtensions
+	eQueryField_Name                                         smithy.SchemaExtensions
+	eQueryField_Type                                         smithy.SchemaExtensions
+	e_QueryFields                                            smithy.SchemaExtensions
+	e_QueryFields_member                                     smithy.SchemaExtensions
+	e_QueryMaxResults                                        smithy.SchemaExtensions
+	e_QueryRow                                               smithy.SchemaExtensions
+	e_QueryRow_member                                        smithy.SchemaExtensions
+	e_QueryStatus                                            smithy.SchemaExtensions
+	e_QueryType                                              smithy.SchemaExtensions
+	e_ResourceName                                           smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                       smithy.SchemaExtensions
+	eRoundTripTime                                           smithy.SchemaExtensions
+	eRoundTripTime_P50                                       smithy.SchemaExtensions
+	eRoundTripTime_P90                                       smithy.SchemaExtensions
+	eRoundTripTime_P95                                       smithy.SchemaExtensions
+	eS3Config                                                smithy.SchemaExtensions
+	eS3Config_BucketName                                     smithy.SchemaExtensions
+	eS3Config_BucketPrefix                                   smithy.SchemaExtensions
+	eS3Config_LogDeliveryStatus                              smithy.SchemaExtensions
+	e_SetOfARNs                                              smithy.SchemaExtensions
+	e_SetOfARNs_member                                       smithy.SchemaExtensions
+	e_TagKey                                                 smithy.SchemaExtensions
+	e_TagKeys                                                smithy.SchemaExtensions
+	e_TagKeys_member                                         smithy.SchemaExtensions
+	e_TagMap                                                 smithy.SchemaExtensions
+	e_TagMap_key                                             smithy.SchemaExtensions
+	e_TagMap_value                                           smithy.SchemaExtensions
+	e_TagValue                                               smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_message                             smithy.SchemaExtensions
+	eTooManyRequestsException                                smithy.SchemaExtensions
+	eTooManyRequestsException_message                        smithy.SchemaExtensions
+	e_TrafficPercentageToMonitor                             smithy.SchemaExtensions
+	e_TriangulationEventType                                 smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_message                             smithy.SchemaExtensions
+	eCreateMonitorInput                                      smithy.SchemaExtensions
+	eCreateMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eCreateMonitorInput_Resources                            smithy.SchemaExtensions
+	eCreateMonitorInput_ClientToken                          smithy.SchemaExtensions
+	eCreateMonitorInput_Tags                                 smithy.SchemaExtensions
+	eCreateMonitorInput_MaxCityNetworksToMonitor             smithy.SchemaExtensions
+	eCreateMonitorInput_InternetMeasurementsLogDelivery      smithy.SchemaExtensions
+	eCreateMonitorInput_TrafficPercentageToMonitor           smithy.SchemaExtensions
+	eCreateMonitorInput_HealthEventsConfig                   smithy.SchemaExtensions
+	eCreateMonitorOutput                                     smithy.SchemaExtensions
+	eCreateMonitorOutput_Arn                                 smithy.SchemaExtensions
+	eCreateMonitorOutput_Status                              smithy.SchemaExtensions
+	eDeleteMonitorInput                                      smithy.SchemaExtensions
+	eDeleteMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eDeleteMonitorOutput                                     smithy.SchemaExtensions
+	eGetHealthEventInput                                     smithy.SchemaExtensions
+	eGetHealthEventInput_MonitorName                         smithy.SchemaExtensions
+	eGetHealthEventInput_EventId                             smithy.SchemaExtensions
+	eGetHealthEventInput_LinkedAccountId                     smithy.SchemaExtensions
+	eGetHealthEventOutput                                    smithy.SchemaExtensions
+	eGetHealthEventOutput_EventArn                           smithy.SchemaExtensions
+	eGetHealthEventOutput_EventId                            smithy.SchemaExtensions
+	eGetHealthEventOutput_StartedAt                          smithy.SchemaExtensions
+	eGetHealthEventOutput_EndedAt                            smithy.SchemaExtensions
+	eGetHealthEventOutput_CreatedAt                          smithy.SchemaExtensions
+	eGetHealthEventOutput_LastUpdatedAt                      smithy.SchemaExtensions
+	eGetHealthEventOutput_ImpactedLocations                  smithy.SchemaExtensions
+	eGetHealthEventOutput_Status                             smithy.SchemaExtensions
+	eGetHealthEventOutput_PercentOfTotalTrafficImpacted      smithy.SchemaExtensions
+	eGetHealthEventOutput_ImpactType                         smithy.SchemaExtensions
+	eGetHealthEventOutput_HealthScoreThreshold               smithy.SchemaExtensions
+	eGetInternetEventInput                                   smithy.SchemaExtensions
+	eGetInternetEventInput_EventId                           smithy.SchemaExtensions
+	eGetInternetEventOutput                                  smithy.SchemaExtensions
+	eGetInternetEventOutput_EventId                          smithy.SchemaExtensions
+	eGetInternetEventOutput_EventArn                         smithy.SchemaExtensions
+	eGetInternetEventOutput_StartedAt                        smithy.SchemaExtensions
+	eGetInternetEventOutput_EndedAt                          smithy.SchemaExtensions
+	eGetInternetEventOutput_ClientLocation                   smithy.SchemaExtensions
+	eGetInternetEventOutput_EventType                        smithy.SchemaExtensions
+	eGetInternetEventOutput_EventStatus                      smithy.SchemaExtensions
+	eGetMonitorInput                                         smithy.SchemaExtensions
+	eGetMonitorInput_MonitorName                             smithy.SchemaExtensions
+	eGetMonitorInput_LinkedAccountId                         smithy.SchemaExtensions
+	eGetMonitorOutput                                        smithy.SchemaExtensions
+	eGetMonitorOutput_MonitorName                            smithy.SchemaExtensions
+	eGetMonitorOutput_MonitorArn                             smithy.SchemaExtensions
+	eGetMonitorOutput_Resources                              smithy.SchemaExtensions
+	eGetMonitorOutput_Status                                 smithy.SchemaExtensions
+	eGetMonitorOutput_CreatedAt                              smithy.SchemaExtensions
+	eGetMonitorOutput_ModifiedAt                             smithy.SchemaExtensions
+	eGetMonitorOutput_ProcessingStatus                       smithy.SchemaExtensions
+	eGetMonitorOutput_ProcessingStatusInfo                   smithy.SchemaExtensions
+	eGetMonitorOutput_Tags                                   smithy.SchemaExtensions
+	eGetMonitorOutput_MaxCityNetworksToMonitor               smithy.SchemaExtensions
+	eGetMonitorOutput_InternetMeasurementsLogDelivery        smithy.SchemaExtensions
+	eGetMonitorOutput_TrafficPercentageToMonitor             smithy.SchemaExtensions
+	eGetMonitorOutput_HealthEventsConfig                     smithy.SchemaExtensions
+	eGetQueryResultsInput                                    smithy.SchemaExtensions
+	eGetQueryResultsInput_MonitorName                        smithy.SchemaExtensions
+	eGetQueryResultsInput_QueryId                            smithy.SchemaExtensions
+	eGetQueryResultsInput_NextToken                          smithy.SchemaExtensions
+	eGetQueryResultsInput_MaxResults                         smithy.SchemaExtensions
+	eGetQueryResultsOutput                                   smithy.SchemaExtensions
+	eGetQueryResultsOutput_Fields                            smithy.SchemaExtensions
+	eGetQueryResultsOutput_Data                              smithy.SchemaExtensions
+	eGetQueryResultsOutput_NextToken                         smithy.SchemaExtensions
+	eGetQueryStatusInput                                     smithy.SchemaExtensions
+	eGetQueryStatusInput_MonitorName                         smithy.SchemaExtensions
+	eGetQueryStatusInput_QueryId                             smithy.SchemaExtensions
+	eGetQueryStatusOutput                                    smithy.SchemaExtensions
+	eGetQueryStatusOutput_Status                             smithy.SchemaExtensions
+	eListHealthEventsInput                                   smithy.SchemaExtensions
+	eListHealthEventsInput_MonitorName                       smithy.SchemaExtensions
+	eListHealthEventsInput_StartTime                         smithy.SchemaExtensions
+	eListHealthEventsInput_EndTime                           smithy.SchemaExtensions
+	eListHealthEventsInput_NextToken                         smithy.SchemaExtensions
+	eListHealthEventsInput_MaxResults                        smithy.SchemaExtensions
+	eListHealthEventsInput_EventStatus                       smithy.SchemaExtensions
+	eListHealthEventsInput_LinkedAccountId                   smithy.SchemaExtensions
+	eListHealthEventsOutput                                  smithy.SchemaExtensions
+	eListHealthEventsOutput_HealthEvents                     smithy.SchemaExtensions
+	eListHealthEventsOutput_NextToken                        smithy.SchemaExtensions
+	eListInternetEventsInput                                 smithy.SchemaExtensions
+	eListInternetEventsInput_NextToken                       smithy.SchemaExtensions
+	eListInternetEventsInput_MaxResults                      smithy.SchemaExtensions
+	eListInternetEventsInput_StartTime                       smithy.SchemaExtensions
+	eListInternetEventsInput_EndTime                         smithy.SchemaExtensions
+	eListInternetEventsInput_EventStatus                     smithy.SchemaExtensions
+	eListInternetEventsInput_EventType                       smithy.SchemaExtensions
+	eListInternetEventsOutput                                smithy.SchemaExtensions
+	eListInternetEventsOutput_InternetEvents                 smithy.SchemaExtensions
+	eListInternetEventsOutput_NextToken                      smithy.SchemaExtensions
+	eListMonitorsInput                                       smithy.SchemaExtensions
+	eListMonitorsInput_NextToken                             smithy.SchemaExtensions
+	eListMonitorsInput_MaxResults                            smithy.SchemaExtensions
+	eListMonitorsInput_MonitorStatus                         smithy.SchemaExtensions
+	eListMonitorsInput_IncludeLinkedAccounts                 smithy.SchemaExtensions
+	eListMonitorsOutput                                      smithy.SchemaExtensions
+	eListMonitorsOutput_Monitors                             smithy.SchemaExtensions
+	eListMonitorsOutput_NextToken                            smithy.SchemaExtensions
+	eListTagsForResourceInput                                smithy.SchemaExtensions
+	eListTagsForResourceInput_ResourceArn                    smithy.SchemaExtensions
+	eListTagsForResourceOutput                               smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags                          smithy.SchemaExtensions
+	eStartQueryInput                                         smithy.SchemaExtensions
+	eStartQueryInput_MonitorName                             smithy.SchemaExtensions
+	eStartQueryInput_StartTime                               smithy.SchemaExtensions
+	eStartQueryInput_EndTime                                 smithy.SchemaExtensions
+	eStartQueryInput_QueryType                               smithy.SchemaExtensions
+	eStartQueryInput_FilterParameters                        smithy.SchemaExtensions
+	eStartQueryInput_LinkedAccountId                         smithy.SchemaExtensions
+	eStartQueryOutput                                        smithy.SchemaExtensions
+	eStartQueryOutput_QueryId                                smithy.SchemaExtensions
+	eStopQueryInput                                          smithy.SchemaExtensions
+	eStopQueryInput_MonitorName                              smithy.SchemaExtensions
+	eStopQueryInput_QueryId                                  smithy.SchemaExtensions
+	eStopQueryOutput                                         smithy.SchemaExtensions
+	eTagResourceInput                                        smithy.SchemaExtensions
+	eTagResourceInput_ResourceArn                            smithy.SchemaExtensions
+	eTagResourceInput_Tags                                   smithy.SchemaExtensions
+	eTagResourceOutput                                       smithy.SchemaExtensions
+	eUntagResourceInput                                      smithy.SchemaExtensions
+	eUntagResourceInput_ResourceArn                          smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys                              smithy.SchemaExtensions
+	eUntagResourceOutput                                     smithy.SchemaExtensions
+	eUpdateMonitorInput                                      smithy.SchemaExtensions
+	eUpdateMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eUpdateMonitorInput_ResourcesToAdd                       smithy.SchemaExtensions
+	eUpdateMonitorInput_ResourcesToRemove                    smithy.SchemaExtensions
+	eUpdateMonitorInput_Status                               smithy.SchemaExtensions
+	eUpdateMonitorInput_ClientToken                          smithy.SchemaExtensions
+	eUpdateMonitorInput_MaxCityNetworksToMonitor             smithy.SchemaExtensions
+	eUpdateMonitorInput_InternetMeasurementsLogDelivery      smithy.SchemaExtensions
+	eUpdateMonitorInput_TrafficPercentageToMonitor           smithy.SchemaExtensions
+	eUpdateMonitorInput_HealthEventsConfig                   smithy.SchemaExtensions
+	eUpdateMonitorOutput                                     smithy.SchemaExtensions
+	eUpdateMonitorOutput_MonitorArn                          smithy.SchemaExtensions
+	eUpdateMonitorOutput_Status                              smithy.SchemaExtensions
+)
+
+var (
+	iCreateMonitor                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "CreateMonitor"}
+	iDeleteMonitor                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "DeleteMonitor"}
+	iGetHealthEvent                  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetHealthEvent"}
+	iGetInternetEvent                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetInternetEvent"}
+	iGetMonitor                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetMonitor"}
+	iGetQueryResults                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryResults"}
+	iGetQueryStatus                  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryStatus"}
+	iListHealthEvents                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListHealthEvents"}
+	iListInternetEvents              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListInternetEvents"}
+	iListMonitors                    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListMonitors"}
+	iListTagsForResource             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListTagsForResource"}
+	iStartQuery                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StartQuery"}
+	iStopQuery                       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StopQuery"}
+	iTagResource                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagResource"}
+	iUntagResource                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UntagResource"}
+	iUpdateMonitor                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UpdateMonitor"}
+	i_InternetMonitor20210603        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetMonitor20210603"}
+	iAccessDeniedException           = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "AccessDeniedException"}
+	i_AccountId                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "AccountId"}
+	i_Arn                            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Arn"}
+	iAvailabilityMeasurement         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "AvailabilityMeasurement"}
+	iBadRequestException             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "BadRequestException"}
+	iClientLocation                  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ClientLocation"}
+	iConflictException               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ConflictException"}
+	i_FilterList                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "FilterList"}
+	iFilterParameter                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "FilterParameter"}
+	i_FilterParameters               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "FilterParameters"}
+	iHealthEvent                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEvent"}
+	i_HealthEventImpactType          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEventImpactType"}
+	i_HealthEventList                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEventList"}
+	i_HealthEventName                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEventName"}
+	iHealthEventsConfig              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEventsConfig"}
+	i_HealthEventStatus              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "HealthEventStatus"}
+	iImpactedLocation                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ImpactedLocation"}
+	i_ImpactedLocationsList          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ImpactedLocationsList"}
+	iInternalServerErrorException    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternalServerErrorException"}
+	iInternalServerException         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternalServerException"}
+	i_InternetEventId                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventId"}
+	i_InternetEventMaxResults        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventMaxResults"}
+	i_InternetEventsList             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventsList"}
+	i_InternetEventStatus            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventStatus"}
+	iInternetEventSummary            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventSummary"}
+	i_InternetEventType              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetEventType"}
+	iInternetHealth                  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetHealth"}
+	iInternetMeasurementsLogDelivery = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "InternetMeasurementsLogDelivery"}
+	i_Ipv4PrefixList                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Ipv4PrefixList"}
+	iLimitExceededException          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "LimitExceededException"}
+	iLocalHealthEventsConfig         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "LocalHealthEventsConfig"}
+	i_LocalHealthEventsConfigStatus  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "LocalHealthEventsConfigStatus"}
+	i_LogDeliveryStatus              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "LogDeliveryStatus"}
+	i_MaxCityNetworksToMonitor       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MaxCityNetworksToMonitor"}
+	i_MaxResults                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MaxResults"}
+	iMonitor                         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Monitor"}
+	i_MonitorArn                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MonitorArn"}
+	i_MonitorConfigState             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MonitorConfigState"}
+	i_MonitorList                    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MonitorList"}
+	i_MonitorProcessingStatusCode    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "MonitorProcessingStatusCode"}
+	iNetwork                         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Network"}
+	iNetworkImpairment               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "NetworkImpairment"}
+	i_NetworkList                    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "NetworkList"}
+	iNotFoundException               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "NotFoundException"}
+	i_Operator                       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Operator"}
+	i_Percentage                     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "Percentage"}
+	iPerformanceMeasurement          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "PerformanceMeasurement"}
+	i_QueryData                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryData"}
+	iQueryField                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryField"}
+	i_QueryFields                    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryFields"}
+	i_QueryMaxResults                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryMaxResults"}
+	i_QueryRow                       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryRow"}
+	i_QueryStatus                    = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryStatus"}
+	i_QueryType                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "QueryType"}
+	i_ResourceName                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ResourceName"}
+	iResourceNotFoundException       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ResourceNotFoundException"}
+	iRoundTripTime                   = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "RoundTripTime"}
+	iS3Config                        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "S3Config"}
+	i_SetOfARNs                      = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "SetOfARNs"}
+	i_TagKey                         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagKey"}
+	i_TagKeys                        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagKeys"}
+	i_TagMap                         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagMap"}
+	i_TagValue                       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagValue"}
+	iThrottlingException             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ThrottlingException"}
+	iTooManyRequestsException        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TooManyRequestsException"}
+	i_TrafficPercentageToMonitor     = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TrafficPercentageToMonitor"}
+	i_TriangulationEventType         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TriangulationEventType"}
+	iValidationException             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ValidationException"}
+	iCreateMonitorInput              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "CreateMonitorInput"}
+	iCreateMonitorOutput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "CreateMonitorOutput"}
+	iDeleteMonitorInput              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "DeleteMonitorInput"}
+	iDeleteMonitorOutput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "DeleteMonitorOutput"}
+	iGetHealthEventInput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetHealthEventInput"}
+	iGetHealthEventOutput            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetHealthEventOutput"}
+	iGetInternetEventInput           = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetInternetEventInput"}
+	iGetInternetEventOutput          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetInternetEventOutput"}
+	iGetMonitorInput                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetMonitorInput"}
+	iGetMonitorOutput                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetMonitorOutput"}
+	iGetQueryResultsInput            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryResultsInput"}
+	iGetQueryResultsOutput           = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryResultsOutput"}
+	iGetQueryStatusInput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryStatusInput"}
+	iGetQueryStatusOutput            = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "GetQueryStatusOutput"}
+	iListHealthEventsInput           = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListHealthEventsInput"}
+	iListHealthEventsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListHealthEventsOutput"}
+	iListInternetEventsInput         = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListInternetEventsInput"}
+	iListInternetEventsOutput        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListInternetEventsOutput"}
+	iListMonitorsInput               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListMonitorsInput"}
+	iListMonitorsOutput              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListMonitorsOutput"}
+	iListTagsForResourceInput        = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput       = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "ListTagsForResourceOutput"}
+	iStartQueryInput                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StartQueryInput"}
+	iStartQueryOutput                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StartQueryOutput"}
+	iStopQueryInput                  = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StopQueryInput"}
+	iStopQueryOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "StopQueryOutput"}
+	iTagResourceInput                = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagResourceInput"}
+	iTagResourceOutput               = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "TagResourceOutput"}
+	iUntagResourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UntagResourceInput"}
+	iUntagResourceOutput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UntagResourceOutput"}
+	iUpdateMonitorInput              = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UpdateMonitorInput"}
+	iUpdateMonitorOutput             = smithy.ShapeName{Namespace: "com.amazonaws.internetmonitor", Name: "UpdateMonitorOutput"}
+	pString                          = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pDouble                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Double"}
+	pLong                            = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+	pTimestamp                       = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                         = smithy.ShapeName{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v20210603/Monitors",
-	Code: 200})
-
-var DeleteMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "DeleteMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20210603/Monitors/{MonitorName}",
-	Code: 200})
-
-var GetHealthEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetHealthEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}",
-	Code: 200})
-
-var GetInternetEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetInternetEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/InternetEvents/{EventId}",
-	Code: 200})
-
-var GetMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors/{MonitorName}",
-	Code: 200})
-
-var GetQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryResults",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results",
-	Code: 200})
-
-var GetQueryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status",
-	Code: 200})
-
-var ListHealthEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListHealthEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors/{MonitorName}/HealthEvents",
-	Code: 200})
-
-var ListInternetEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListInternetEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/InternetEvents",
-	Code: 200})
-
-var ListMonitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListMonitors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v20210603/Monitors",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var StartQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StartQuery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v20210603/Monitors/{MonitorName}/Queries",
-	Code: 200})
-
-var StopQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StopQuery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UpdateMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v20210603/Monitors/{MonitorName}",
-	Code: 200})
-
-var _InternetMonitor20210603 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetMonitor20210603",
-}, smithy.ShapeTypeService, 0)
-
-var InternetMonitor20210603 = smithy.NewServiceSchema(_InternetMonitor20210603, "2021-06-03")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AvailabilityMeasurement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "AvailabilityMeasurement",
-}, smithy.ShapeTypeStructure, 3)
-var AvailabilityMeasurement_ExperienceScore *smithy.Schema
-
-var AvailabilityMeasurement_PercentOfTotalTrafficImpacted *smithy.Schema
-
-var AvailabilityMeasurement_PercentOfClientLocationImpacted *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var ClientLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ClientLocation",
-}, smithy.ShapeTypeStructure, 8)
-var ClientLocation_ASName *smithy.Schema
-
-var ClientLocation_ASNumber *smithy.Schema
-
-var ClientLocation_Country *smithy.Schema
-
-var ClientLocation_Subdivision *smithy.Schema
-
-var ClientLocation_Metro *smithy.Schema
-
-var ClientLocation_City *smithy.Schema
-
-var ClientLocation_Latitude *smithy.Schema
-
-var ClientLocation_Longitude *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var FilterParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "FilterParameter",
-}, smithy.ShapeTypeStructure, 3)
-var FilterParameter_Field *smithy.Schema
-
-var FilterParameter_Operator *smithy.Schema
-
-var FilterParameter_Values *smithy.Schema
-
-var _FilterParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "FilterParameters",
-}, smithy.ShapeTypeList, 1)
-var _FilterParameters_member *smithy.Schema
-
-var HealthEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEvent",
-}, smithy.ShapeTypeStructure, 11)
-var HealthEvent_EventArn *smithy.Schema
-
-var HealthEvent_EventId *smithy.Schema
-
-var HealthEvent_StartedAt *smithy.Schema
-
-var HealthEvent_EndedAt *smithy.Schema
-
-var HealthEvent_CreatedAt *smithy.Schema
-
-var HealthEvent_LastUpdatedAt *smithy.Schema
-
-var HealthEvent_ImpactedLocations *smithy.Schema
-
-var HealthEvent_Status *smithy.Schema
-
-var HealthEvent_PercentOfTotalTrafficImpacted *smithy.Schema
-
-var HealthEvent_ImpactType *smithy.Schema
-
-var HealthEvent_HealthScoreThreshold *smithy.Schema
-
-var _HealthEventImpactType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEventImpactType",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEventList",
-}, smithy.ShapeTypeList, 1)
-var _HealthEventList_member *smithy.Schema
-
-var _HealthEventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEventName",
-}, smithy.ShapeTypeString, 0)
-
-var HealthEventsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEventsConfig",
-}, smithy.ShapeTypeStructure, 4)
-var HealthEventsConfig_AvailabilityScoreThreshold *smithy.Schema
-
-var HealthEventsConfig_PerformanceScoreThreshold *smithy.Schema
-
-var HealthEventsConfig_AvailabilityLocalHealthEventsConfig *smithy.Schema
-
-var HealthEventsConfig_PerformanceLocalHealthEventsConfig *smithy.Schema
-
-var _HealthEventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "HealthEventStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ImpactedLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ImpactedLocation",
-}, smithy.ShapeTypeStructure, 15)
-var ImpactedLocation_ASName *smithy.Schema
-
-var ImpactedLocation_ASNumber *smithy.Schema
-
-var ImpactedLocation_Country *smithy.Schema
-
-var ImpactedLocation_Subdivision *smithy.Schema
-
-var ImpactedLocation_Metro *smithy.Schema
-
-var ImpactedLocation_City *smithy.Schema
-
-var ImpactedLocation_Latitude *smithy.Schema
-
-var ImpactedLocation_Longitude *smithy.Schema
-
-var ImpactedLocation_CountryCode *smithy.Schema
-
-var ImpactedLocation_SubdivisionCode *smithy.Schema
-
-var ImpactedLocation_ServiceLocation *smithy.Schema
-
-var ImpactedLocation_Status *smithy.Schema
-
-var ImpactedLocation_CausedBy *smithy.Schema
-
-var ImpactedLocation_InternetHealth *smithy.Schema
-
-var ImpactedLocation_Ipv4Prefixes *smithy.Schema
-
-var _ImpactedLocationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ImpactedLocationsList",
-}, smithy.ShapeTypeList, 1)
-var _ImpactedLocationsList_member *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _InternetEventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventId",
-}, smithy.ShapeTypeString, 0)
-
-var _InternetEventMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InternetEventsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventsList",
-}, smithy.ShapeTypeList, 1)
-var _InternetEventsList_member *smithy.Schema
-
-var _InternetEventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventStatus",
-}, smithy.ShapeTypeString, 0)
-
-var InternetEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventSummary",
-}, smithy.ShapeTypeStructure, 7)
-var InternetEventSummary_EventId *smithy.Schema
-
-var InternetEventSummary_EventArn *smithy.Schema
-
-var InternetEventSummary_StartedAt *smithy.Schema
-
-var InternetEventSummary_EndedAt *smithy.Schema
-
-var InternetEventSummary_ClientLocation *smithy.Schema
-
-var InternetEventSummary_EventType *smithy.Schema
-
-var InternetEventSummary_EventStatus *smithy.Schema
-
-var _InternetEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetEventType",
-}, smithy.ShapeTypeString, 0)
-
-var InternetHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetHealth",
-}, smithy.ShapeTypeStructure, 2)
-var InternetHealth_Availability *smithy.Schema
-
-var InternetHealth_Performance *smithy.Schema
-
-var InternetMeasurementsLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "InternetMeasurementsLogDelivery",
-}, smithy.ShapeTypeStructure, 1)
-var InternetMeasurementsLogDelivery_S3Config *smithy.Schema
-
-var _Ipv4PrefixList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Ipv4PrefixList",
-}, smithy.ShapeTypeList, 1)
-var _Ipv4PrefixList_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var LimitExceededException_message *smithy.Schema
-
-var LocalHealthEventsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "LocalHealthEventsConfig",
-}, smithy.ShapeTypeStructure, 3)
-var LocalHealthEventsConfig_Status *smithy.Schema
-
-var LocalHealthEventsConfig_HealthScoreThreshold *smithy.Schema
-
-var LocalHealthEventsConfig_MinTrafficImpact *smithy.Schema
-
-var _LocalHealthEventsConfigStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "LocalHealthEventsConfigStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _LogDeliveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "LogDeliveryStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxCityNetworksToMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MaxCityNetworksToMonitor",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Monitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Monitor",
-}, smithy.ShapeTypeStructure, 4)
-var Monitor_MonitorName *smithy.Schema
-
-var Monitor_MonitorArn *smithy.Schema
-
-var Monitor_Status *smithy.Schema
-
-var Monitor_ProcessingStatus *smithy.Schema
-
-var _MonitorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MonitorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MonitorConfigState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MonitorConfigState",
-}, smithy.ShapeTypeString, 0)
-
-var _MonitorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MonitorList",
-}, smithy.ShapeTypeList, 1)
-var _MonitorList_member *smithy.Schema
-
-var _MonitorProcessingStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "MonitorProcessingStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var Network = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Network",
-}, smithy.ShapeTypeStructure, 2)
-var Network_ASName *smithy.Schema
-
-var Network_ASNumber *smithy.Schema
-
-var NetworkImpairment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "NetworkImpairment",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkImpairment_Networks *smithy.Schema
-
-var NetworkImpairment_AsPath *smithy.Schema
-
-var NetworkImpairment_NetworkEventType *smithy.Schema
-
-var _NetworkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "NetworkList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkList_member *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Operator",
-}, smithy.ShapeTypeString, 0)
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "Percentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var PerformanceMeasurement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "PerformanceMeasurement",
-}, smithy.ShapeTypeStructure, 4)
-var PerformanceMeasurement_ExperienceScore *smithy.Schema
-
-var PerformanceMeasurement_PercentOfTotalTrafficImpacted *smithy.Schema
-
-var PerformanceMeasurement_PercentOfClientLocationImpacted *smithy.Schema
-
-var PerformanceMeasurement_RoundTripTime *smithy.Schema
-
-var _QueryData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryData",
-}, smithy.ShapeTypeList, 1)
-var _QueryData_member *smithy.Schema
-
-var QueryField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryField",
-}, smithy.ShapeTypeStructure, 2)
-var QueryField_Name *smithy.Schema
-
-var QueryField_Type *smithy.Schema
-
-var _QueryFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryFields",
-}, smithy.ShapeTypeList, 1)
-var _QueryFields_member *smithy.Schema
-
-var _QueryMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryRow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryRow",
-}, smithy.ShapeTypeList, 1)
-var _QueryRow_member *smithy.Schema
-
-var _QueryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "QueryType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RoundTripTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "RoundTripTime",
-}, smithy.ShapeTypeStructure, 3)
-var RoundTripTime_P50 *smithy.Schema
-
-var RoundTripTime_P90 *smithy.Schema
-
-var RoundTripTime_P95 *smithy.Schema
-
-var S3Config = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "S3Config",
-}, smithy.ShapeTypeStructure, 3)
-var S3Config_BucketName *smithy.Schema
-
-var S3Config_BucketPrefix *smithy.Schema
-
-var S3Config_LogDeliveryStatus *smithy.Schema
-
-var _SetOfARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "SetOfARNs",
-}, smithy.ShapeTypeList, 1)
-var _SetOfARNs_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var _TrafficPercentageToMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TrafficPercentageToMonitor",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TriangulationEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TriangulationEventType",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "CreateMonitorInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateMonitorInput_MonitorName *smithy.Schema
-
-var CreateMonitorInput_Resources *smithy.Schema
-
-var CreateMonitorInput_ClientToken *smithy.Schema
-
-var CreateMonitorInput_Tags *smithy.Schema
-
-var CreateMonitorInput_MaxCityNetworksToMonitor *smithy.Schema
-
-var CreateMonitorInput_InternetMeasurementsLogDelivery *smithy.Schema
-
-var CreateMonitorInput_TrafficPercentageToMonitor *smithy.Schema
-
-var CreateMonitorInput_HealthEventsConfig *smithy.Schema
-
-var CreateMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "CreateMonitorOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateMonitorOutput_Arn *smithy.Schema
-
-var CreateMonitorOutput_Status *smithy.Schema
-
-var DeleteMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "DeleteMonitorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMonitorInput_MonitorName *smithy.Schema
-
-var DeleteMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "DeleteMonitorOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetHealthEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetHealthEventInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetHealthEventInput_MonitorName *smithy.Schema
-
-var GetHealthEventInput_EventId *smithy.Schema
-
-var GetHealthEventInput_LinkedAccountId *smithy.Schema
-
-var GetHealthEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetHealthEventOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetHealthEventOutput_EventArn *smithy.Schema
-
-var GetHealthEventOutput_EventId *smithy.Schema
-
-var GetHealthEventOutput_StartedAt *smithy.Schema
-
-var GetHealthEventOutput_EndedAt *smithy.Schema
-
-var GetHealthEventOutput_CreatedAt *smithy.Schema
-
-var GetHealthEventOutput_LastUpdatedAt *smithy.Schema
-
-var GetHealthEventOutput_ImpactedLocations *smithy.Schema
-
-var GetHealthEventOutput_Status *smithy.Schema
-
-var GetHealthEventOutput_PercentOfTotalTrafficImpacted *smithy.Schema
-
-var GetHealthEventOutput_ImpactType *smithy.Schema
-
-var GetHealthEventOutput_HealthScoreThreshold *smithy.Schema
-
-var GetInternetEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetInternetEventInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetInternetEventInput_EventId *smithy.Schema
-
-var GetInternetEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetInternetEventOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetInternetEventOutput_EventId *smithy.Schema
-
-var GetInternetEventOutput_EventArn *smithy.Schema
-
-var GetInternetEventOutput_StartedAt *smithy.Schema
-
-var GetInternetEventOutput_EndedAt *smithy.Schema
-
-var GetInternetEventOutput_ClientLocation *smithy.Schema
-
-var GetInternetEventOutput_EventType *smithy.Schema
-
-var GetInternetEventOutput_EventStatus *smithy.Schema
-
-var GetMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetMonitorInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMonitorInput_MonitorName *smithy.Schema
-
-var GetMonitorInput_LinkedAccountId *smithy.Schema
-
-var GetMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetMonitorOutput",
-}, smithy.ShapeTypeStructure, 13)
-var GetMonitorOutput_MonitorName *smithy.Schema
-
-var GetMonitorOutput_MonitorArn *smithy.Schema
-
-var GetMonitorOutput_Resources *smithy.Schema
-
-var GetMonitorOutput_Status *smithy.Schema
-
-var GetMonitorOutput_CreatedAt *smithy.Schema
-
-var GetMonitorOutput_ModifiedAt *smithy.Schema
-
-var GetMonitorOutput_ProcessingStatus *smithy.Schema
-
-var GetMonitorOutput_ProcessingStatusInfo *smithy.Schema
-
-var GetMonitorOutput_Tags *smithy.Schema
-
-var GetMonitorOutput_MaxCityNetworksToMonitor *smithy.Schema
-
-var GetMonitorOutput_InternetMeasurementsLogDelivery *smithy.Schema
-
-var GetMonitorOutput_TrafficPercentageToMonitor *smithy.Schema
-
-var GetMonitorOutput_HealthEventsConfig *smithy.Schema
-
-var GetQueryResultsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryResultsInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetQueryResultsInput_MonitorName *smithy.Schema
-
-var GetQueryResultsInput_QueryId *smithy.Schema
-
-var GetQueryResultsInput_NextToken *smithy.Schema
-
-var GetQueryResultsInput_MaxResults *smithy.Schema
-
-var GetQueryResultsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryResultsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetQueryResultsOutput_Fields *smithy.Schema
-
-var GetQueryResultsOutput_Data *smithy.Schema
-
-var GetQueryResultsOutput_NextToken *smithy.Schema
-
-var GetQueryStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryStatusInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetQueryStatusInput_MonitorName *smithy.Schema
-
-var GetQueryStatusInput_QueryId *smithy.Schema
-
-var GetQueryStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "GetQueryStatusOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetQueryStatusOutput_Status *smithy.Schema
-
-var ListHealthEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListHealthEventsInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListHealthEventsInput_MonitorName *smithy.Schema
-
-var ListHealthEventsInput_StartTime *smithy.Schema
-
-var ListHealthEventsInput_EndTime *smithy.Schema
-
-var ListHealthEventsInput_NextToken *smithy.Schema
-
-var ListHealthEventsInput_MaxResults *smithy.Schema
-
-var ListHealthEventsInput_EventStatus *smithy.Schema
-
-var ListHealthEventsInput_LinkedAccountId *smithy.Schema
-
-var ListHealthEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListHealthEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHealthEventsOutput_HealthEvents *smithy.Schema
-
-var ListHealthEventsOutput_NextToken *smithy.Schema
-
-var ListInternetEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListInternetEventsInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListInternetEventsInput_NextToken *smithy.Schema
-
-var ListInternetEventsInput_MaxResults *smithy.Schema
-
-var ListInternetEventsInput_StartTime *smithy.Schema
-
-var ListInternetEventsInput_EndTime *smithy.Schema
-
-var ListInternetEventsInput_EventStatus *smithy.Schema
-
-var ListInternetEventsInput_EventType *smithy.Schema
-
-var ListInternetEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListInternetEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInternetEventsOutput_InternetEvents *smithy.Schema
-
-var ListInternetEventsOutput_NextToken *smithy.Schema
-
-var ListMonitorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListMonitorsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListMonitorsInput_NextToken *smithy.Schema
-
-var ListMonitorsInput_MaxResults *smithy.Schema
-
-var ListMonitorsInput_MonitorStatus *smithy.Schema
-
-var ListMonitorsInput_IncludeLinkedAccounts *smithy.Schema
-
-var ListMonitorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListMonitorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMonitorsOutput_Monitors *smithy.Schema
-
-var ListMonitorsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var StartQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StartQueryInput",
-}, smithy.ShapeTypeStructure, 6)
-var StartQueryInput_MonitorName *smithy.Schema
-
-var StartQueryInput_StartTime *smithy.Schema
-
-var StartQueryInput_EndTime *smithy.Schema
-
-var StartQueryInput_QueryType *smithy.Schema
-
-var StartQueryInput_FilterParameters *smithy.Schema
-
-var StartQueryInput_LinkedAccountId *smithy.Schema
-
-var StartQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StartQueryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartQueryOutput_QueryId *smithy.Schema
-
-var StopQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StopQueryInput",
-}, smithy.ShapeTypeStructure, 2)
-var StopQueryInput_MonitorName *smithy.Schema
-
-var StopQueryInput_QueryId *smithy.Schema
-
-var StopQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "StopQueryOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMonitorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UpdateMonitorInput",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateMonitorInput_MonitorName *smithy.Schema
-
-var UpdateMonitorInput_ResourcesToAdd *smithy.Schema
-
-var UpdateMonitorInput_ResourcesToRemove *smithy.Schema
-
-var UpdateMonitorInput_Status *smithy.Schema
-
-var UpdateMonitorInput_ClientToken *smithy.Schema
-
-var UpdateMonitorInput_MaxCityNetworksToMonitor *smithy.Schema
-
-var UpdateMonitorInput_InternetMeasurementsLogDelivery *smithy.Schema
-
-var UpdateMonitorInput_TrafficPercentageToMonitor *smithy.Schema
-
-var UpdateMonitorInput_HealthEventsConfig *smithy.Schema
-
-var UpdateMonitorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.internetmonitor",
-	Name:      "UpdateMonitorOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMonitorOutput_MonitorArn *smithy.Schema
-
-var UpdateMonitorOutput_Status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AvailabilityMeasurement_ExperienceScore = AvailabilityMeasurement.AddMember("ExperienceScore", smithyprelude.Double)
-
-	AvailabilityMeasurement_PercentOfTotalTrafficImpacted = AvailabilityMeasurement.AddMember("PercentOfTotalTrafficImpacted", smithyprelude.Double)
-
-	AvailabilityMeasurement_PercentOfClientLocationImpacted = AvailabilityMeasurement.AddMember("PercentOfClientLocationImpacted", smithyprelude.Double)
-
-	BadRequestException_message = BadRequestException.AddMember("message", smithyprelude.String)
-
-	ClientLocation_ASName = ClientLocation.AddMember("ASName", smithyprelude.String)
-
-	ClientLocation_ASNumber = ClientLocation.AddMember("ASNumber", smithyprelude.Long)
-
-	ClientLocation_Country = ClientLocation.AddMember("Country", smithyprelude.String)
-
-	ClientLocation_Subdivision = ClientLocation.AddMember("Subdivision", smithyprelude.String)
-
-	ClientLocation_Metro = ClientLocation.AddMember("Metro", smithyprelude.String)
-
-	ClientLocation_City = ClientLocation.AddMember("City", smithyprelude.String)
-
-	ClientLocation_Latitude = ClientLocation.AddMember("Latitude", smithyprelude.Double)
-
-	ClientLocation_Longitude = ClientLocation.AddMember("Longitude", smithyprelude.Double)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	_FilterList_member = _FilterList.AddMember("member", smithyprelude.String)
-
-	FilterParameter_Field = FilterParameter.AddMember("Field", smithyprelude.String)
-
-	FilterParameter_Operator = FilterParameter.AddMember("Operator", _Operator)
-
-	FilterParameter_Values = FilterParameter.AddMember("Values", _FilterList)
-
-	_FilterParameters_member = _FilterParameters.AddMember("member", FilterParameter)
-
-	Network_ASName = Network.AddMember("ASName", smithyprelude.String)
-
-	Network_ASNumber = Network.AddMember("ASNumber", smithyprelude.Long)
-
-	_NetworkList_member = _NetworkList.AddMember("member", Network)
-
-	NetworkImpairment_Networks = NetworkImpairment.AddMember("Networks", _NetworkList)
-
-	NetworkImpairment_AsPath = NetworkImpairment.AddMember("AsPath", _NetworkList)
-
-	NetworkImpairment_NetworkEventType = NetworkImpairment.AddMember("NetworkEventType", _TriangulationEventType)
-
-	RoundTripTime_P50 = RoundTripTime.AddMember("P50", smithyprelude.Double)
-
-	RoundTripTime_P90 = RoundTripTime.AddMember("P90", smithyprelude.Double)
-
-	RoundTripTime_P95 = RoundTripTime.AddMember("P95", smithyprelude.Double)
-
-	PerformanceMeasurement_ExperienceScore = PerformanceMeasurement.AddMember("ExperienceScore", smithyprelude.Double)
-
-	PerformanceMeasurement_PercentOfTotalTrafficImpacted = PerformanceMeasurement.AddMember("PercentOfTotalTrafficImpacted", smithyprelude.Double)
-
-	PerformanceMeasurement_PercentOfClientLocationImpacted = PerformanceMeasurement.AddMember("PercentOfClientLocationImpacted", smithyprelude.Double)
-
-	PerformanceMeasurement_RoundTripTime = PerformanceMeasurement.AddMember("RoundTripTime", RoundTripTime)
-
-	InternetHealth_Availability = InternetHealth.AddMember("Availability", AvailabilityMeasurement)
-
-	InternetHealth_Performance = InternetHealth.AddMember("Performance", PerformanceMeasurement)
-
-	_Ipv4PrefixList_member = _Ipv4PrefixList.AddMember("member", smithyprelude.String)
-
-	ImpactedLocation_ASName = ImpactedLocation.AddMember("ASName", smithyprelude.String)
-
-	ImpactedLocation_ASNumber = ImpactedLocation.AddMember("ASNumber", smithyprelude.Long)
-
-	ImpactedLocation_Country = ImpactedLocation.AddMember("Country", smithyprelude.String)
-
-	ImpactedLocation_Subdivision = ImpactedLocation.AddMember("Subdivision", smithyprelude.String)
-
-	ImpactedLocation_Metro = ImpactedLocation.AddMember("Metro", smithyprelude.String)
-
-	ImpactedLocation_City = ImpactedLocation.AddMember("City", smithyprelude.String)
-
-	ImpactedLocation_Latitude = ImpactedLocation.AddMember("Latitude", smithyprelude.Double)
-
-	ImpactedLocation_Longitude = ImpactedLocation.AddMember("Longitude", smithyprelude.Double)
-
-	ImpactedLocation_CountryCode = ImpactedLocation.AddMember("CountryCode", smithyprelude.String)
-
-	ImpactedLocation_SubdivisionCode = ImpactedLocation.AddMember("SubdivisionCode", smithyprelude.String)
-
-	ImpactedLocation_ServiceLocation = ImpactedLocation.AddMember("ServiceLocation", smithyprelude.String)
-
-	ImpactedLocation_Status = ImpactedLocation.AddMember("Status", _HealthEventStatus)
-
-	ImpactedLocation_CausedBy = ImpactedLocation.AddMember("CausedBy", NetworkImpairment)
-
-	ImpactedLocation_InternetHealth = ImpactedLocation.AddMember("InternetHealth", InternetHealth)
-
-	ImpactedLocation_Ipv4Prefixes = ImpactedLocation.AddMember("Ipv4Prefixes", _Ipv4PrefixList)
-
-	_ImpactedLocationsList_member = _ImpactedLocationsList.AddMember("member", ImpactedLocation)
-
-	HealthEvent_EventArn = HealthEvent.AddMember("EventArn", _Arn)
-
-	HealthEvent_EventId = HealthEvent.AddMember("EventId", _HealthEventName)
-
-	HealthEvent_StartedAt = HealthEvent.AddMember("StartedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	HealthEvent_EndedAt = HealthEvent.AddMember("EndedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	HealthEvent_CreatedAt = HealthEvent.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	HealthEvent_LastUpdatedAt = HealthEvent.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	HealthEvent_ImpactedLocations = HealthEvent.AddMember("ImpactedLocations", _ImpactedLocationsList)
-
-	HealthEvent_Status = HealthEvent.AddMember("Status", _HealthEventStatus)
-
-	HealthEvent_PercentOfTotalTrafficImpacted = HealthEvent.AddMember("PercentOfTotalTrafficImpacted", smithyprelude.Double)
-
-	HealthEvent_ImpactType = HealthEvent.AddMember("ImpactType", _HealthEventImpactType)
-
-	HealthEvent_HealthScoreThreshold = HealthEvent.AddMember("HealthScoreThreshold", _Percentage)
-
-	_HealthEventList_member = _HealthEventList.AddMember("member", HealthEvent)
-
-	LocalHealthEventsConfig_Status = LocalHealthEventsConfig.AddMember("Status", _LocalHealthEventsConfigStatus)
-
-	LocalHealthEventsConfig_HealthScoreThreshold = LocalHealthEventsConfig.AddMember("HealthScoreThreshold", _Percentage)
-
-	LocalHealthEventsConfig_MinTrafficImpact = LocalHealthEventsConfig.AddMember("MinTrafficImpact", _Percentage)
-
-	HealthEventsConfig_AvailabilityScoreThreshold = HealthEventsConfig.AddMember("AvailabilityScoreThreshold", _Percentage)
-
-	HealthEventsConfig_PerformanceScoreThreshold = HealthEventsConfig.AddMember("PerformanceScoreThreshold", _Percentage)
-
-	HealthEventsConfig_AvailabilityLocalHealthEventsConfig = HealthEventsConfig.AddMember("AvailabilityLocalHealthEventsConfig", LocalHealthEventsConfig)
-
-	HealthEventsConfig_PerformanceLocalHealthEventsConfig = HealthEventsConfig.AddMember("PerformanceLocalHealthEventsConfig", LocalHealthEventsConfig)
-
-	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternetEventSummary_EventId = InternetEventSummary.AddMember("EventId", _InternetEventId)
-
-	InternetEventSummary_EventArn = InternetEventSummary.AddMember("EventArn", _Arn)
-
-	InternetEventSummary_StartedAt = InternetEventSummary.AddMember("StartedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	InternetEventSummary_EndedAt = InternetEventSummary.AddMember("EndedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	InternetEventSummary_ClientLocation = InternetEventSummary.AddMember("ClientLocation", ClientLocation)
-
-	InternetEventSummary_EventType = InternetEventSummary.AddMember("EventType", _InternetEventType)
-
-	InternetEventSummary_EventStatus = InternetEventSummary.AddMember("EventStatus", _InternetEventStatus)
-
-	_InternetEventsList_member = _InternetEventsList.AddMember("member", InternetEventSummary)
-
-	S3Config_BucketName = S3Config.AddMember("BucketName", smithyprelude.String)
-
-	S3Config_BucketPrefix = S3Config.AddMember("BucketPrefix", smithyprelude.String)
-
-	S3Config_LogDeliveryStatus = S3Config.AddMember("LogDeliveryStatus", _LogDeliveryStatus)
-
-	InternetMeasurementsLogDelivery_S3Config = InternetMeasurementsLogDelivery.AddMember("S3Config", S3Config)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", smithyprelude.String)
-
-	Monitor_MonitorName = Monitor.AddMember("MonitorName", _ResourceName)
-
-	Monitor_MonitorArn = Monitor.AddMember("MonitorArn", _MonitorArn)
-
-	Monitor_Status = Monitor.AddMember("Status", _MonitorConfigState)
-
-	Monitor_ProcessingStatus = Monitor.AddMember("ProcessingStatus", _MonitorProcessingStatusCode)
-
-	_MonitorList_member = _MonitorList.AddMember("member", Monitor)
-
-	NotFoundException_message = NotFoundException.AddMember("message", smithyprelude.String)
-
-	_QueryRow_member = _QueryRow.AddMember("member", smithyprelude.String)
-
-	_QueryData_member = _QueryData.AddMember("member", _QueryRow)
-
-	QueryField_Name = QueryField.AddMember("Name", smithyprelude.String)
-
-	QueryField_Type = QueryField.AddMember("Type", smithyprelude.String)
-
-	_QueryFields_member = _QueryFields.AddMember("member", QueryField)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	_SetOfARNs_member = _SetOfARNs.AddMember("member", _Arn)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateMonitorInput_MonitorName = CreateMonitorInput.AddMember("MonitorName", _ResourceName)
-
-	CreateMonitorInput_Resources = CreateMonitorInput.AddMember("Resources", _SetOfARNs)
-
-	CreateMonitorInput_ClientToken = CreateMonitorInput.AddMember("ClientToken", smithyprelude.String)
-
-	CreateMonitorInput_Tags = CreateMonitorInput.AddMember("Tags", _TagMap)
-
-	CreateMonitorInput_MaxCityNetworksToMonitor = CreateMonitorInput.AddMember("MaxCityNetworksToMonitor", _MaxCityNetworksToMonitor)
-
-	CreateMonitorInput_InternetMeasurementsLogDelivery = CreateMonitorInput.AddMember("InternetMeasurementsLogDelivery", InternetMeasurementsLogDelivery)
-
-	CreateMonitorInput_TrafficPercentageToMonitor = CreateMonitorInput.AddMember("TrafficPercentageToMonitor", _TrafficPercentageToMonitor)
-
-	CreateMonitorInput_HealthEventsConfig = CreateMonitorInput.AddMember("HealthEventsConfig", HealthEventsConfig)
-
-	CreateMonitorOutput_Arn = CreateMonitorOutput.AddMember("Arn", _MonitorArn)
-
-	CreateMonitorOutput_Status = CreateMonitorOutput.AddMember("Status", _MonitorConfigState)
-
-	DeleteMonitorInput_MonitorName = DeleteMonitorInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHealthEventInput_MonitorName = GetHealthEventInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHealthEventInput_EventId = GetHealthEventInput.AddMember("EventId", _HealthEventName, &smithytraits.HTTPLabel{})
-
-	GetHealthEventInput_LinkedAccountId = GetHealthEventInput.AddMember("LinkedAccountId", _AccountId, &smithytraits.HTTPQuery{Name: "LinkedAccountId"})
-
-	GetHealthEventOutput_EventArn = GetHealthEventOutput.AddMember("EventArn", _Arn)
-
-	GetHealthEventOutput_EventId = GetHealthEventOutput.AddMember("EventId", _HealthEventName)
-
-	GetHealthEventOutput_StartedAt = GetHealthEventOutput.AddMember("StartedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetHealthEventOutput_EndedAt = GetHealthEventOutput.AddMember("EndedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetHealthEventOutput_CreatedAt = GetHealthEventOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetHealthEventOutput_LastUpdatedAt = GetHealthEventOutput.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetHealthEventOutput_ImpactedLocations = GetHealthEventOutput.AddMember("ImpactedLocations", _ImpactedLocationsList)
-
-	GetHealthEventOutput_Status = GetHealthEventOutput.AddMember("Status", _HealthEventStatus)
-
-	GetHealthEventOutput_PercentOfTotalTrafficImpacted = GetHealthEventOutput.AddMember("PercentOfTotalTrafficImpacted", smithyprelude.Double)
-
-	GetHealthEventOutput_ImpactType = GetHealthEventOutput.AddMember("ImpactType", _HealthEventImpactType)
-
-	GetHealthEventOutput_HealthScoreThreshold = GetHealthEventOutput.AddMember("HealthScoreThreshold", _Percentage)
-
-	GetInternetEventInput_EventId = GetInternetEventInput.AddMember("EventId", _InternetEventId, &smithytraits.HTTPLabel{})
-
-	GetInternetEventOutput_EventId = GetInternetEventOutput.AddMember("EventId", _InternetEventId)
-
-	GetInternetEventOutput_EventArn = GetInternetEventOutput.AddMember("EventArn", _Arn)
-
-	GetInternetEventOutput_StartedAt = GetInternetEventOutput.AddMember("StartedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetInternetEventOutput_EndedAt = GetInternetEventOutput.AddMember("EndedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetInternetEventOutput_ClientLocation = GetInternetEventOutput.AddMember("ClientLocation", ClientLocation)
-
-	GetInternetEventOutput_EventType = GetInternetEventOutput.AddMember("EventType", _InternetEventType)
-
-	GetInternetEventOutput_EventStatus = GetInternetEventOutput.AddMember("EventStatus", _InternetEventStatus)
-
-	GetMonitorInput_MonitorName = GetMonitorInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetMonitorInput_LinkedAccountId = GetMonitorInput.AddMember("LinkedAccountId", _AccountId, &smithytraits.HTTPQuery{Name: "LinkedAccountId"})
-
-	GetMonitorOutput_MonitorName = GetMonitorOutput.AddMember("MonitorName", _ResourceName)
-
-	GetMonitorOutput_MonitorArn = GetMonitorOutput.AddMember("MonitorArn", _MonitorArn)
-
-	GetMonitorOutput_Resources = GetMonitorOutput.AddMember("Resources", _SetOfARNs)
-
-	GetMonitorOutput_Status = GetMonitorOutput.AddMember("Status", _MonitorConfigState)
-
-	GetMonitorOutput_CreatedAt = GetMonitorOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMonitorOutput_ModifiedAt = GetMonitorOutput.AddMember("ModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMonitorOutput_ProcessingStatus = GetMonitorOutput.AddMember("ProcessingStatus", _MonitorProcessingStatusCode)
-
-	GetMonitorOutput_ProcessingStatusInfo = GetMonitorOutput.AddMember("ProcessingStatusInfo", smithyprelude.String)
-
-	GetMonitorOutput_Tags = GetMonitorOutput.AddMember("Tags", _TagMap)
-
-	GetMonitorOutput_MaxCityNetworksToMonitor = GetMonitorOutput.AddMember("MaxCityNetworksToMonitor", _MaxCityNetworksToMonitor)
-
-	GetMonitorOutput_InternetMeasurementsLogDelivery = GetMonitorOutput.AddMember("InternetMeasurementsLogDelivery", InternetMeasurementsLogDelivery)
-
-	GetMonitorOutput_TrafficPercentageToMonitor = GetMonitorOutput.AddMember("TrafficPercentageToMonitor", _TrafficPercentageToMonitor)
-
-	GetMonitorOutput_HealthEventsConfig = GetMonitorOutput.AddMember("HealthEventsConfig", HealthEventsConfig)
-
-	GetQueryResultsInput_MonitorName = GetQueryResultsInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetQueryResultsInput_QueryId = GetQueryResultsInput.AddMember("QueryId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetQueryResultsInput_NextToken = GetQueryResultsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	GetQueryResultsInput_MaxResults = GetQueryResultsInput.AddMember("MaxResults", _QueryMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	GetQueryResultsOutput_Fields = GetQueryResultsOutput.AddMember("Fields", _QueryFields)
-
-	GetQueryResultsOutput_Data = GetQueryResultsOutput.AddMember("Data", _QueryData)
-
-	GetQueryResultsOutput_NextToken = GetQueryResultsOutput.AddMember("NextToken", smithyprelude.String)
-
-	GetQueryStatusInput_MonitorName = GetQueryStatusInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetQueryStatusInput_QueryId = GetQueryStatusInput.AddMember("QueryId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetQueryStatusOutput_Status = GetQueryStatusOutput.AddMember("Status", _QueryStatus)
-
-	ListHealthEventsInput_MonitorName = ListHealthEventsInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListHealthEventsInput_StartTime = ListHealthEventsInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListHealthEventsInput_EndTime = ListHealthEventsInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListHealthEventsInput_NextToken = ListHealthEventsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListHealthEventsInput_MaxResults = ListHealthEventsInput.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListHealthEventsInput_EventStatus = ListHealthEventsInput.AddMember("EventStatus", _HealthEventStatus, &smithytraits.HTTPQuery{Name: "EventStatus"})
-
-	ListHealthEventsInput_LinkedAccountId = ListHealthEventsInput.AddMember("LinkedAccountId", _AccountId, &smithytraits.HTTPQuery{Name: "LinkedAccountId"})
-
-	ListHealthEventsOutput_HealthEvents = ListHealthEventsOutput.AddMember("HealthEvents", _HealthEventList)
-
-	ListHealthEventsOutput_NextToken = ListHealthEventsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListInternetEventsInput_NextToken = ListInternetEventsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListInternetEventsInput_MaxResults = ListInternetEventsInput.AddMember("MaxResults", _InternetEventMaxResults, &smithytraits.HTTPQuery{Name: "InternetEventMaxResults"})
-
-	ListInternetEventsInput_StartTime = ListInternetEventsInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "StartTime"})
-
-	ListInternetEventsInput_EndTime = ListInternetEventsInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
-		&smithytraits.HTTPQuery{Name: "EndTime"})
-
-	ListInternetEventsInput_EventStatus = ListInternetEventsInput.AddMember("EventStatus", smithyprelude.String, &smithytraits.HTTPQuery{Name: "EventStatus"})
-
-	ListInternetEventsInput_EventType = ListInternetEventsInput.AddMember("EventType", smithyprelude.String, &smithytraits.HTTPQuery{Name: "EventType"})
-
-	ListInternetEventsOutput_InternetEvents = ListInternetEventsOutput.AddMember("InternetEvents", _InternetEventsList)
-
-	ListInternetEventsOutput_NextToken = ListInternetEventsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListMonitorsInput_NextToken = ListMonitorsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListMonitorsInput_MaxResults = ListMonitorsInput.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListMonitorsInput_MonitorStatus = ListMonitorsInput.AddMember("MonitorStatus", smithyprelude.String, &smithytraits.HTTPQuery{Name: "MonitorStatus"})
-
-	ListMonitorsInput_IncludeLinkedAccounts = ListMonitorsInput.AddMember("IncludeLinkedAccounts", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"})
-
-	ListMonitorsOutput_Monitors = ListMonitorsOutput.AddMember("Monitors", _MonitorList)
-
-	ListMonitorsOutput_NextToken = ListMonitorsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _MonitorArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMap)
-
-	StartQueryInput_MonitorName = StartQueryInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	StartQueryInput_StartTime = StartQueryInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	StartQueryInput_EndTime = StartQueryInput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	StartQueryInput_QueryType = StartQueryInput.AddMember("QueryType", _QueryType)
-
-	StartQueryInput_FilterParameters = StartQueryInput.AddMember("FilterParameters", _FilterParameters)
-
-	StartQueryInput_LinkedAccountId = StartQueryInput.AddMember("LinkedAccountId", _AccountId)
-
-	StartQueryOutput_QueryId = StartQueryOutput.AddMember("QueryId", smithyprelude.String)
-
-	StopQueryInput_MonitorName = StopQueryInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	StopQueryInput_QueryId = StopQueryInput.AddMember("QueryId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _MonitorArn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _MonitorArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateMonitorInput_MonitorName = UpdateMonitorInput.AddMember("MonitorName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateMonitorInput_ResourcesToAdd = UpdateMonitorInput.AddMember("ResourcesToAdd", _SetOfARNs)
-
-	UpdateMonitorInput_ResourcesToRemove = UpdateMonitorInput.AddMember("ResourcesToRemove", _SetOfARNs)
-
-	UpdateMonitorInput_Status = UpdateMonitorInput.AddMember("Status", _MonitorConfigState)
-
-	UpdateMonitorInput_ClientToken = UpdateMonitorInput.AddMember("ClientToken", smithyprelude.String)
-
-	UpdateMonitorInput_MaxCityNetworksToMonitor = UpdateMonitorInput.AddMember("MaxCityNetworksToMonitor", _MaxCityNetworksToMonitor)
-
-	UpdateMonitorInput_InternetMeasurementsLogDelivery = UpdateMonitorInput.AddMember("InternetMeasurementsLogDelivery", InternetMeasurementsLogDelivery)
-
-	UpdateMonitorInput_TrafficPercentageToMonitor = UpdateMonitorInput.AddMember("TrafficPercentageToMonitor", _TrafficPercentageToMonitor)
-
-	UpdateMonitorInput_HealthEventsConfig = UpdateMonitorInput.AddMember("HealthEventsConfig", HealthEventsConfig)
-
-	UpdateMonitorOutput_MonitorArn = UpdateMonitorOutput.AddMember("MonitorArn", _MonitorArn)
-
-	UpdateMonitorOutput_Status = UpdateMonitorOutput.AddMember("Status", _MonitorConfigState)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "LinkedAccountId"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "StartTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x410}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "EndTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x410}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "EventStatus"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "InternetEventMaxResults"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "EventType"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MonitorStatus"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "IncludeLinkedAccounts"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAvailabilityMeasurement = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityMeasurement_ExperienceScore, &sAvailabilityMeasurement_PercentOfTotalTrafficImpacted, &sAvailabilityMeasurement_PercentOfClientLocationImpacted}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mClientLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sClientLocation_ASName, &sClientLocation_ASNumber, &sClientLocation_Country, &sClientLocation_Subdivision, &sClientLocation_Metro, &sClientLocation_City, &sClientLocation_Latitude, &sClientLocation_Longitude}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFilterParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterParameter_Field, &sFilterParameter_Operator, &sFilterParameter_Values}}
+var m_FilterParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterParameters_member}}
+var mHealthEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthEvent_EventArn, &sHealthEvent_EventId, &sHealthEvent_StartedAt, &sHealthEvent_EndedAt, &sHealthEvent_CreatedAt, &sHealthEvent_LastUpdatedAt, &sHealthEvent_ImpactedLocations, &sHealthEvent_Status, &sHealthEvent_PercentOfTotalTrafficImpacted, &sHealthEvent_ImpactType, &sHealthEvent_HealthScoreThreshold}, Hash: &hHealthEvent}
+var m_HealthEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HealthEventList_member}}
+var mHealthEventsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthEventsConfig_AvailabilityScoreThreshold, &sHealthEventsConfig_PerformanceScoreThreshold, &sHealthEventsConfig_AvailabilityLocalHealthEventsConfig, &sHealthEventsConfig_PerformanceLocalHealthEventsConfig}}
+var mImpactedLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sImpactedLocation_ASName, &sImpactedLocation_ASNumber, &sImpactedLocation_Country, &sImpactedLocation_Subdivision, &sImpactedLocation_Metro, &sImpactedLocation_City, &sImpactedLocation_Latitude, &sImpactedLocation_Longitude, &sImpactedLocation_CountryCode, &sImpactedLocation_SubdivisionCode, &sImpactedLocation_ServiceLocation, &sImpactedLocation_Status, &sImpactedLocation_CausedBy, &sImpactedLocation_InternetHealth, &sImpactedLocation_Ipv4Prefixes}, Hash: &hImpactedLocation}
+var m_ImpactedLocationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpactedLocationsList_member}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_message}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_InternetEventsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InternetEventsList_member}}
+var mInternetEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInternetEventSummary_EventId, &sInternetEventSummary_EventArn, &sInternetEventSummary_StartedAt, &sInternetEventSummary_EndedAt, &sInternetEventSummary_ClientLocation, &sInternetEventSummary_EventType, &sInternetEventSummary_EventStatus}}
+var mInternetHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sInternetHealth_Availability, &sInternetHealth_Performance}}
+var mInternetMeasurementsLogDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sInternetMeasurementsLogDelivery_S3Config}}
+var m_Ipv4PrefixList = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ipv4PrefixList_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mLocalHealthEventsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLocalHealthEventsConfig_Status, &sLocalHealthEventsConfig_HealthScoreThreshold, &sLocalHealthEventsConfig_MinTrafficImpact}}
+var mMonitor = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitor_MonitorName, &sMonitor_MonitorArn, &sMonitor_Status, &sMonitor_ProcessingStatus}}
+var m_MonitorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MonitorList_member}}
+var mNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sNetwork_ASName, &sNetwork_ASNumber}}
+var mNetworkImpairment = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkImpairment_Networks, &sNetworkImpairment_AsPath, &sNetworkImpairment_NetworkEventType}}
+var m_NetworkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkList_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mPerformanceMeasurement = smithy.SchemaMembers{List: []*smithy.Schema{&sPerformanceMeasurement_ExperienceScore, &sPerformanceMeasurement_PercentOfTotalTrafficImpacted, &sPerformanceMeasurement_PercentOfClientLocationImpacted, &sPerformanceMeasurement_RoundTripTime}}
+var m_QueryData = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryData_member}}
+var mQueryField = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryField_Name, &sQueryField_Type}}
+var m_QueryFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryFields_member}}
+var m_QueryRow = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryRow_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRoundTripTime = smithy.SchemaMembers{List: []*smithy.Schema{&sRoundTripTime_P50, &sRoundTripTime_P90, &sRoundTripTime_P95}}
+var mS3Config = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Config_BucketName, &sS3Config_BucketPrefix, &sS3Config_LogDeliveryStatus}}
+var m_SetOfARNs = smithy.SchemaMembers{List: []*smithy.Schema{&s_SetOfARNs_member}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorInput_MonitorName, &sCreateMonitorInput_Resources, &sCreateMonitorInput_ClientToken, &sCreateMonitorInput_Tags, &sCreateMonitorInput_MaxCityNetworksToMonitor, &sCreateMonitorInput_InternetMeasurementsLogDelivery, &sCreateMonitorInput_TrafficPercentageToMonitor, &sCreateMonitorInput_HealthEventsConfig}}
+var mCreateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMonitorOutput_Arn, &sCreateMonitorOutput_Status}}
+var mDeleteMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMonitorInput_MonitorName}}
+var mGetHealthEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHealthEventInput_MonitorName, &sGetHealthEventInput_EventId, &sGetHealthEventInput_LinkedAccountId}}
+var mGetHealthEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHealthEventOutput_EventArn, &sGetHealthEventOutput_EventId, &sGetHealthEventOutput_StartedAt, &sGetHealthEventOutput_EndedAt, &sGetHealthEventOutput_CreatedAt, &sGetHealthEventOutput_LastUpdatedAt, &sGetHealthEventOutput_ImpactedLocations, &sGetHealthEventOutput_Status, &sGetHealthEventOutput_PercentOfTotalTrafficImpacted, &sGetHealthEventOutput_ImpactType, &sGetHealthEventOutput_HealthScoreThreshold}, Hash: &hGetHealthEventOutput}
+var mGetInternetEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInternetEventInput_EventId}}
+var mGetInternetEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInternetEventOutput_EventId, &sGetInternetEventOutput_EventArn, &sGetInternetEventOutput_StartedAt, &sGetInternetEventOutput_EndedAt, &sGetInternetEventOutput_ClientLocation, &sGetInternetEventOutput_EventType, &sGetInternetEventOutput_EventStatus}}
+var mGetMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMonitorInput_MonitorName, &sGetMonitorInput_LinkedAccountId}}
+var mGetMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMonitorOutput_MonitorName, &sGetMonitorOutput_MonitorArn, &sGetMonitorOutput_Resources, &sGetMonitorOutput_Status, &sGetMonitorOutput_CreatedAt, &sGetMonitorOutput_ModifiedAt, &sGetMonitorOutput_ProcessingStatus, &sGetMonitorOutput_ProcessingStatusInfo, &sGetMonitorOutput_Tags, &sGetMonitorOutput_MaxCityNetworksToMonitor, &sGetMonitorOutput_InternetMeasurementsLogDelivery, &sGetMonitorOutput_TrafficPercentageToMonitor, &sGetMonitorOutput_HealthEventsConfig}, Hash: &hGetMonitorOutput}
+var mGetQueryResultsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsInput_MonitorName, &sGetQueryResultsInput_QueryId, &sGetQueryResultsInput_NextToken, &sGetQueryResultsInput_MaxResults}}
+var mGetQueryResultsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsOutput_Fields, &sGetQueryResultsOutput_Data, &sGetQueryResultsOutput_NextToken}}
+var mGetQueryStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryStatusInput_MonitorName, &sGetQueryStatusInput_QueryId}}
+var mGetQueryStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryStatusOutput_Status}}
+var mListHealthEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHealthEventsInput_MonitorName, &sListHealthEventsInput_StartTime, &sListHealthEventsInput_EndTime, &sListHealthEventsInput_NextToken, &sListHealthEventsInput_MaxResults, &sListHealthEventsInput_EventStatus, &sListHealthEventsInput_LinkedAccountId}}
+var mListHealthEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHealthEventsOutput_HealthEvents, &sListHealthEventsOutput_NextToken}}
+var mListInternetEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInternetEventsInput_NextToken, &sListInternetEventsInput_MaxResults, &sListInternetEventsInput_StartTime, &sListInternetEventsInput_EndTime, &sListInternetEventsInput_EventStatus, &sListInternetEventsInput_EventType}}
+var mListInternetEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListInternetEventsOutput_InternetEvents, &sListInternetEventsOutput_NextToken}}
+var mListMonitorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsInput_NextToken, &sListMonitorsInput_MaxResults, &sListMonitorsInput_MonitorStatus, &sListMonitorsInput_IncludeLinkedAccounts}}
+var mListMonitorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListMonitorsOutput_Monitors, &sListMonitorsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mStartQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryInput_MonitorName, &sStartQueryInput_StartTime, &sStartQueryInput_EndTime, &sStartQueryInput_QueryType, &sStartQueryInput_FilterParameters, &sStartQueryInput_LinkedAccountId}}
+var mStartQueryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryOutput_QueryId}}
+var mStopQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopQueryInput_MonitorName, &sStopQueryInput_QueryId}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitorInput_MonitorName, &sUpdateMonitorInput_ResourcesToAdd, &sUpdateMonitorInput_ResourcesToRemove, &sUpdateMonitorInput_Status, &sUpdateMonitorInput_ClientToken, &sUpdateMonitorInput_MaxCityNetworksToMonitor, &sUpdateMonitorInput_InternetMeasurementsLogDelivery, &sUpdateMonitorInput_TrafficPercentageToMonitor, &sUpdateMonitorInput_HealthEventsConfig}, Hash: &hUpdateMonitorInput}
+var mUpdateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitorOutput_MonitorArn, &sUpdateMonitorOutput_Status}}
+
+var hHealthEvent = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 4, 10, 11, 7, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 3, 0, 0, 6, 5, 0,
+	8, 0, 0, 0, 0, 0, 2, 0,
+}}
+var hImpactedLocation = smithy.MemberHash{Seed: 90, Slots: []uint16{
+	0, 11, 12, 0, 0, 0, 9, 0, 4, 0, 1, 0, 13, 0, 6, 0, 0, 8, 10, 5, 7, 0, 14, 0,
+	0, 0, 15, 2, 3, 0, 0, 0,
+}}
+var hGetHealthEventOutput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 4, 10, 11, 7, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 3, 0, 0, 6, 5, 0,
+	8, 0, 0, 0, 0, 0, 2, 0,
+}}
+var hGetMonitorOutput = smithy.MemberHash{Seed: 14, Slots: []uint16{
+	0, 0, 0, 6, 2, 0, 3, 13, 0, 1, 12, 0, 0, 0, 0, 11, 0, 4, 7, 5, 0, 0, 0, 0,
+	9, 10, 0, 0, 0, 0, 0, 8,
+}}
+var hUpdateMonitorInput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 3, 8, 0, 0, 2, 1, 9, 0, 0, 0, 0, 0, 0, 0, 7, 5, 0,
+	4, 0, 0, 0, 0, 6, 0, 0,
+}}
+
+var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMonitor})
+var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMonitor})
+var sGetHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEvent, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetHealthEvent})
+var sGetInternetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEvent, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetInternetEvent})
+var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetMonitor})
+var sGetQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResults, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryResults})
+var sGetQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatus, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryStatus})
+var sListHealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEvents, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListHealthEvents})
+var sListInternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEvents, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListInternetEvents})
+var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListMonitors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuery, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eStartQuery})
+var sStopQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQuery, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eStopQuery})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMonitor})
+var s_InternetMonitor20210603 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetMonitor20210603, Type: smithy.ShapeTypeService, Ext: &e_InternetMonitor20210603})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAvailabilityMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityMeasurement})
+var sAvailabilityMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_ExperienceScore})
+var sAvailabilityMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_PercentOfTotalTrafficImpacted})
+var sAvailabilityMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_PercentOfClientLocationImpacted})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eClientLocation})
+var sClientLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_ASName})
+var sClientLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eClientLocation_ASNumber})
+var sClientLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Country})
+var sClientLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Subdivision})
+var sClientLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Metro})
+var sClientLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_City})
+var sClientLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eClientLocation_Latitude})
+var sClientLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eClientLocation_Longitude})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FilterList_member})
+var sFilterParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &eFilterParameter})
+var sFilterParameter_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilterParameter_Field})
+var sFilterParameter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &eFilterParameter_Operator})
+var sFilterParameter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eFilterParameter_Values})
+var s_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &e_FilterParameters})
+var s_FilterParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterParameters_member})
+var sHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &eHealthEvent})
+var sHealthEvent_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_EventArn})
+var sHealthEvent_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_EventId})
+var sHealthEvent_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_StartedAt})
+var sHealthEvent_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_EndedAt})
+var sHealthEvent_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_CreatedAt})
+var sHealthEvent_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_LastUpdatedAt})
+var sHealthEvent_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &eHealthEvent_ImpactedLocations})
+var sHealthEvent_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_Status})
+var sHealthEvent_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eHealthEvent_PercentOfTotalTrafficImpacted})
+var sHealthEvent_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_ImpactType})
+var sHealthEvent_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEvent_HealthScoreThreshold})
+var s_HealthEventImpactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &e_HealthEventImpactType})
+var s_HealthEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &e_HealthEventList})
+var s_HealthEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &e_HealthEventList_member})
+var s_HealthEventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &e_HealthEventName})
+var sHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig})
+var sHealthEventsConfig_AvailabilityScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEventsConfig_AvailabilityScoreThreshold})
+var sHealthEventsConfig_PerformanceScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEventsConfig_PerformanceScoreThreshold})
+var sHealthEventsConfig_AvailabilityLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig_AvailabilityLocalHealthEventsConfig})
+var sHealthEventsConfig_PerformanceLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig_PerformanceLocalHealthEventsConfig})
+var s_HealthEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &e_HealthEventStatus})
+var sImpactedLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation})
+var sImpactedLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_ASName})
+var sImpactedLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eImpactedLocation_ASNumber})
+var sImpactedLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Country})
+var sImpactedLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Subdivision})
+var sImpactedLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Metro})
+var sImpactedLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_City})
+var sImpactedLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eImpactedLocation_Latitude})
+var sImpactedLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eImpactedLocation_Longitude})
+var sImpactedLocation_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_CountryCode})
+var sImpactedLocation_SubdivisionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubdivisionCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_SubdivisionCode})
+var sImpactedLocation_ServiceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_ServiceLocation})
+var sImpactedLocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Status})
+var sImpactedLocation_CausedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CausedBy", ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation_CausedBy})
+var sImpactedLocation_InternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetHealth", ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation_InternetHealth})
+var sImpactedLocation_Ipv4Prefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4Prefixes", ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &eImpactedLocation_Ipv4Prefixes})
+var s_ImpactedLocationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &e_ImpactedLocationsList})
+var s_ImpactedLocationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &e_ImpactedLocationsList_member})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_message})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_InternetEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &e_InternetEventId})
+var s_InternetEventMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_InternetEventMaxResults})
+var s_InternetEventsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &e_InternetEventsList})
+var s_InternetEventsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &e_InternetEventsList_member})
+var s_InternetEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &e_InternetEventStatus})
+var sInternetEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eInternetEventSummary})
+var sInternetEventSummary_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventId})
+var sInternetEventSummary_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventArn})
+var sInternetEventSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eInternetEventSummary_StartedAt})
+var sInternetEventSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eInternetEventSummary_EndedAt})
+var sInternetEventSummary_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eInternetEventSummary_ClientLocation})
+var sInternetEventSummary_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventType})
+var sInternetEventSummary_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventStatus})
+var s_InternetEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &e_InternetEventType})
+var sInternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth})
+var sInternetHealth_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth_Availability})
+var sInternetHealth_Performance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Performance", ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth_Performance})
+var sInternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eInternetMeasurementsLogDelivery})
+var sInternetMeasurementsLogDelivery_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eInternetMeasurementsLogDelivery_S3Config})
+var s_Ipv4PrefixList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &e_Ipv4PrefixList})
+var s_Ipv4PrefixList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Ipv4PrefixList_member})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLocalHealthEventsConfig})
+var sLocalHealthEventsConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &eLocalHealthEventsConfig_Status})
+var sLocalHealthEventsConfig_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eLocalHealthEventsConfig_HealthScoreThreshold})
+var sLocalHealthEventsConfig_MinTrafficImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinTrafficImpact", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eLocalHealthEventsConfig_MinTrafficImpact})
+var s_LocalHealthEventsConfigStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &e_LocalHealthEventsConfigStatus})
+var s_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &e_LogDeliveryStatus})
+var s_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &e_MaxCityNetworksToMonitor})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &eMonitor})
+var sMonitor_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMonitor_MonitorName})
+var sMonitor_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eMonitor_MonitorArn})
+var sMonitor_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eMonitor_Status})
+var sMonitor_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &eMonitor_ProcessingStatus})
+var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &e_MonitorArn})
+var s_MonitorConfigState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &e_MonitorConfigState})
+var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &e_MonitorList})
+var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorList_member})
+var s_MonitorProcessingStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &e_MonitorProcessingStatusCode})
+var sNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &eNetwork})
+var sNetwork_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNetwork_ASName})
+var sNetwork_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eNetwork_ASNumber})
+var sNetworkImpairment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &eNetworkImpairment})
+var sNetworkImpairment_Networks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Networks", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &eNetworkImpairment_Networks})
+var sNetworkImpairment_AsPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsPath", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &eNetworkImpairment_AsPath})
+var sNetworkImpairment_NetworkEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkEventType", ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &eNetworkImpairment_NetworkEventType})
+var s_NetworkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &e_NetworkList})
+var s_NetworkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkList_member})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var s_Operator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &e_Operator})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &e_Percentage})
+var sPerformanceMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceMeasurement})
+var sPerformanceMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_ExperienceScore})
+var sPerformanceMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_PercentOfTotalTrafficImpacted})
+var sPerformanceMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_PercentOfClientLocationImpacted})
+var sPerformanceMeasurement_RoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoundTripTime", ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceMeasurement_RoundTripTime})
+var s_QueryData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &e_QueryData})
+var s_QueryData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &e_QueryData_member})
+var sQueryField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &eQueryField})
+var sQueryField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryField_Name})
+var sQueryField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryField_Type})
+var s_QueryFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &e_QueryFields})
+var s_QueryFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &e_QueryFields_member})
+var s_QueryMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_QueryMaxResults})
+var s_QueryRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &e_QueryRow})
+var s_QueryRow_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_QueryRow_member})
+var s_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &e_QueryStatus})
+var s_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &e_QueryType})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &eRoundTripTime})
+var sRoundTripTime_P50 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P50", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P50})
+var sRoundTripTime_P90 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P90", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P90})
+var sRoundTripTime_P95 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P95", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P95})
+var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eS3Config})
+var sS3Config_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Config_BucketName})
+var sS3Config_BucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketPrefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Config_BucketPrefix})
+var sS3Config_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDeliveryStatus", ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &eS3Config_LogDeliveryStatus})
+var s_SetOfARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &e_SetOfARNs})
+var s_SetOfARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_SetOfARNs_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var s_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &e_TrafficPercentageToMonitor})
+var s_TriangulationEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &e_TriangulationEventType})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput})
+var sCreateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_MonitorName})
+var sCreateMonitorInput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorInput_Resources})
+var sCreateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_ClientToken})
+var sCreateMonitorInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorInput_Tags})
+var sCreateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorInput_MaxCityNetworksToMonitor})
+var sCreateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput_InternetMeasurementsLogDelivery})
+var sCreateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorInput_TrafficPercentageToMonitor})
+var sCreateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput_HealthEventsConfig})
+var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorOutput})
+var sCreateMonitorOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_Arn})
+var sCreateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_Status})
+var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorInput})
+var sDeleteMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eDeleteMonitorInput_MonitorName})
+var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorOutput})
+var sGetHealthEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventInput, Members: &mGetHealthEventInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHealthEventInput})
+var sGetHealthEventInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_MonitorName})
+var sGetHealthEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_EventId})
+var sGetHealthEventInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_LinkedAccountId})
+var sGetHealthEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventOutput, Members: &mGetHealthEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHealthEventOutput})
+var sGetHealthEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_EventArn})
+var sGetHealthEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_EventId})
+var sGetHealthEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_StartedAt})
+var sGetHealthEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_EndedAt})
+var sGetHealthEventOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_CreatedAt})
+var sGetHealthEventOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_LastUpdatedAt})
+var sGetHealthEventOutput_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &eGetHealthEventOutput_ImpactedLocations})
+var sGetHealthEventOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_Status})
+var sGetHealthEventOutput_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGetHealthEventOutput_PercentOfTotalTrafficImpacted})
+var sGetHealthEventOutput_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_ImpactType})
+var sGetHealthEventOutput_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eGetHealthEventOutput_HealthScoreThreshold})
+var sGetInternetEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventInput, Members: &mGetInternetEventInput, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventInput})
+var sGetInternetEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventInput_EventId})
+var sGetInternetEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventOutput, Members: &mGetInternetEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventOutput})
+var sGetInternetEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventId})
+var sGetInternetEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventArn})
+var sGetInternetEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInternetEventOutput_StartedAt})
+var sGetInternetEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInternetEventOutput_EndedAt})
+var sGetInternetEventOutput_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventOutput_ClientLocation})
+var sGetInternetEventOutput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventType})
+var sGetInternetEventOutput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventStatus})
+var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorInput})
+var sGetMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_MonitorName})
+var sGetMonitorInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_LinkedAccountId})
+var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput})
+var sGetMonitorOutput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_MonitorName})
+var sGetMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_MonitorArn})
+var sGetMonitorOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eGetMonitorOutput_Resources})
+var sGetMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_Status})
+var sGetMonitorOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_CreatedAt})
+var sGetMonitorOutput_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_ModifiedAt})
+var sGetMonitorOutput_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_ProcessingStatus})
+var sGetMonitorOutput_ProcessingStatusInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatusInfo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_ProcessingStatusInfo})
+var sGetMonitorOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetMonitorOutput_Tags})
+var sGetMonitorOutput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eGetMonitorOutput_MaxCityNetworksToMonitor})
+var sGetMonitorOutput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput_InternetMeasurementsLogDelivery})
+var sGetMonitorOutput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eGetMonitorOutput_TrafficPercentageToMonitor})
+var sGetMonitorOutput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput_HealthEventsConfig})
+var sGetQueryResultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsInput, Members: &mGetQueryResultsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsInput})
+var sGetQueryResultsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_MonitorName})
+var sGetQueryResultsInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_QueryId})
+var sGetQueryResultsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_NextToken})
+var sGetQueryResultsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_QueryMaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eGetQueryResultsInput_MaxResults})
+var sGetQueryResultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsOutput, Members: &mGetQueryResultsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsOutput})
+var sGetQueryResultsOutput_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsOutput_Fields})
+var sGetQueryResultsOutput_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsOutput_Data})
+var sGetQueryResultsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsOutput_NextToken})
+var sGetQueryStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusInput, Members: &mGetQueryStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusInput})
+var sGetQueryStatusInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusInput_MonitorName})
+var sGetQueryStatusInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusInput_QueryId})
+var sGetQueryStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusOutput, Members: &mGetQueryStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusOutput})
+var sGetQueryStatusOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusOutput_Status})
+var sListHealthEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsInput, Members: &mListHealthEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListHealthEventsInput})
+var sListHealthEventsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_MonitorName})
+var sListHealthEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eListHealthEventsInput_StartTime})
+var sListHealthEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eListHealthEventsInput_EndTime})
+var sListHealthEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_NextToken})
+var sListHealthEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListHealthEventsInput_MaxResults})
+var sListHealthEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_HealthEventStatus, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_EventStatus})
+var sListHealthEventsInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_LinkedAccountId})
+var sListHealthEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsOutput, Members: &mListHealthEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListHealthEventsOutput})
+var sListHealthEventsOutput_HealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEvents", ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &eListHealthEventsOutput_HealthEvents})
+var sListHealthEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsOutput_NextToken})
+var sListInternetEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsInput, Members: &mListInternetEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListInternetEventsInput})
+var sListInternetEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_NextToken})
+var sListInternetEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InternetEventMaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eListInternetEventsInput_MaxResults})
+var sListInternetEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eListInternetEventsInput_StartTime})
+var sListInternetEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eListInternetEventsInput_EndTime})
+var sListInternetEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_EventStatus})
+var sListInternetEventsInput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_EventType})
+var sListInternetEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsOutput, Members: &mListInternetEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListInternetEventsOutput})
+var sListInternetEventsOutput_InternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetEvents", ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &eListInternetEventsOutput_InternetEvents})
+var sListInternetEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsOutput_NextToken})
+var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsInput})
+var sListMonitorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_NextToken})
+var sListMonitorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorsInput_MaxResults})
+var sListMonitorsInput_MonitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorStatus", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_MonitorStatus})
+var sListMonitorsInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t33, Type: smithy.ShapeTypeBoolean, Ext: &eListMonitorsInput_IncludeLinkedAccounts})
+var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsOutput})
+var sListMonitorsOutput_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eListMonitorsOutput_Monitors})
+var sListMonitorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMonitorsOutput_NextToken})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_ResourceArn})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_Tags})
+var sStartQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryInput, Members: &mStartQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryInput})
+var sStartQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_MonitorName})
+var sStartQueryInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryInput_StartTime})
+var sStartQueryInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryInput_EndTime})
+var sStartQueryInput_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryType", ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_QueryType})
+var sStartQueryInput_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterParameters", ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &eStartQueryInput_FilterParameters})
+var sStartQueryInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_LinkedAccountId})
+var sStartQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryOutput, Members: &mStartQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryOutput})
+var sStartQueryOutput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartQueryOutput_QueryId})
+var sStopQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryInput, Members: &mStopQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryInput})
+var sStopQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStopQueryInput_MonitorName})
+var sStopQueryInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStopQueryInput_QueryId})
+var sStopQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_ResourceArn})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_Tags})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_ResourceArn})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput})
+var sUpdateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_MonitorName})
+var sUpdateMonitorInput_ResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToAdd", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_ResourcesToAdd})
+var sUpdateMonitorInput_ResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToRemove", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_ResourcesToRemove})
+var sUpdateMonitorInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_Status})
+var sUpdateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_ClientToken})
+var sUpdateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMonitorInput_MaxCityNetworksToMonitor})
+var sUpdateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput_InternetMeasurementsLogDelivery})
+var sUpdateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMonitorInput_TrafficPercentageToMonitor})
+var sUpdateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput_HealthEventsConfig})
+var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorOutput})
+var sUpdateMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_MonitorArn})
+var sUpdateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_Status})
+
+var CreateMonitor = &sCreateMonitor
+
+var DeleteMonitor = &sDeleteMonitor
+
+var GetHealthEvent = &sGetHealthEvent
+
+var GetInternetEvent = &sGetInternetEvent
+
+var GetMonitor = &sGetMonitor
+
+var GetQueryResults = &sGetQueryResults
+
+var GetQueryStatus = &sGetQueryStatus
+
+var ListHealthEvents = &sListHealthEvents
+
+var ListInternetEvents = &sListInternetEvents
+
+var ListMonitors = &sListMonitors
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartQuery = &sStartQuery
+
+var StopQuery = &sStopQuery
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateMonitor = &sUpdateMonitor
+
+var _InternetMonitor20210603 = &s_InternetMonitor20210603
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var _Arn = &s_Arn
+
+var AvailabilityMeasurement = &sAvailabilityMeasurement
+var AvailabilityMeasurement_ExperienceScore = &sAvailabilityMeasurement_ExperienceScore
+var AvailabilityMeasurement_PercentOfTotalTrafficImpacted = &sAvailabilityMeasurement_PercentOfTotalTrafficImpacted
+var AvailabilityMeasurement_PercentOfClientLocationImpacted = &sAvailabilityMeasurement_PercentOfClientLocationImpacted
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var ClientLocation = &sClientLocation
+var ClientLocation_ASName = &sClientLocation_ASName
+var ClientLocation_ASNumber = &sClientLocation_ASNumber
+var ClientLocation_Country = &sClientLocation_Country
+var ClientLocation_Subdivision = &sClientLocation_Subdivision
+var ClientLocation_Metro = &sClientLocation_Metro
+var ClientLocation_City = &sClientLocation_City
+var ClientLocation_Latitude = &sClientLocation_Latitude
+var ClientLocation_Longitude = &sClientLocation_Longitude
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var FilterParameter = &sFilterParameter
+var FilterParameter_Field = &sFilterParameter_Field
+var FilterParameter_Operator = &sFilterParameter_Operator
+var FilterParameter_Values = &sFilterParameter_Values
+
+var _FilterParameters = &s_FilterParameters
+var _FilterParameters_member = &s_FilterParameters_member
+
+var HealthEvent = &sHealthEvent
+var HealthEvent_EventArn = &sHealthEvent_EventArn
+var HealthEvent_EventId = &sHealthEvent_EventId
+var HealthEvent_StartedAt = &sHealthEvent_StartedAt
+var HealthEvent_EndedAt = &sHealthEvent_EndedAt
+var HealthEvent_CreatedAt = &sHealthEvent_CreatedAt
+var HealthEvent_LastUpdatedAt = &sHealthEvent_LastUpdatedAt
+var HealthEvent_ImpactedLocations = &sHealthEvent_ImpactedLocations
+var HealthEvent_Status = &sHealthEvent_Status
+var HealthEvent_PercentOfTotalTrafficImpacted = &sHealthEvent_PercentOfTotalTrafficImpacted
+var HealthEvent_ImpactType = &sHealthEvent_ImpactType
+var HealthEvent_HealthScoreThreshold = &sHealthEvent_HealthScoreThreshold
+
+var _HealthEventImpactType = &s_HealthEventImpactType
+
+var _HealthEventList = &s_HealthEventList
+var _HealthEventList_member = &s_HealthEventList_member
+
+var _HealthEventName = &s_HealthEventName
+
+var HealthEventsConfig = &sHealthEventsConfig
+var HealthEventsConfig_AvailabilityScoreThreshold = &sHealthEventsConfig_AvailabilityScoreThreshold
+var HealthEventsConfig_PerformanceScoreThreshold = &sHealthEventsConfig_PerformanceScoreThreshold
+var HealthEventsConfig_AvailabilityLocalHealthEventsConfig = &sHealthEventsConfig_AvailabilityLocalHealthEventsConfig
+var HealthEventsConfig_PerformanceLocalHealthEventsConfig = &sHealthEventsConfig_PerformanceLocalHealthEventsConfig
+
+var _HealthEventStatus = &s_HealthEventStatus
+
+var ImpactedLocation = &sImpactedLocation
+var ImpactedLocation_ASName = &sImpactedLocation_ASName
+var ImpactedLocation_ASNumber = &sImpactedLocation_ASNumber
+var ImpactedLocation_Country = &sImpactedLocation_Country
+var ImpactedLocation_Subdivision = &sImpactedLocation_Subdivision
+var ImpactedLocation_Metro = &sImpactedLocation_Metro
+var ImpactedLocation_City = &sImpactedLocation_City
+var ImpactedLocation_Latitude = &sImpactedLocation_Latitude
+var ImpactedLocation_Longitude = &sImpactedLocation_Longitude
+var ImpactedLocation_CountryCode = &sImpactedLocation_CountryCode
+var ImpactedLocation_SubdivisionCode = &sImpactedLocation_SubdivisionCode
+var ImpactedLocation_ServiceLocation = &sImpactedLocation_ServiceLocation
+var ImpactedLocation_Status = &sImpactedLocation_Status
+var ImpactedLocation_CausedBy = &sImpactedLocation_CausedBy
+var ImpactedLocation_InternetHealth = &sImpactedLocation_InternetHealth
+var ImpactedLocation_Ipv4Prefixes = &sImpactedLocation_Ipv4Prefixes
+
+var _ImpactedLocationsList = &s_ImpactedLocationsList
+var _ImpactedLocationsList_member = &s_ImpactedLocationsList_member
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_message = &sInternalServerErrorException_message
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _InternetEventId = &s_InternetEventId
+
+var _InternetEventMaxResults = &s_InternetEventMaxResults
+
+var _InternetEventsList = &s_InternetEventsList
+var _InternetEventsList_member = &s_InternetEventsList_member
+
+var _InternetEventStatus = &s_InternetEventStatus
+
+var InternetEventSummary = &sInternetEventSummary
+var InternetEventSummary_EventId = &sInternetEventSummary_EventId
+var InternetEventSummary_EventArn = &sInternetEventSummary_EventArn
+var InternetEventSummary_StartedAt = &sInternetEventSummary_StartedAt
+var InternetEventSummary_EndedAt = &sInternetEventSummary_EndedAt
+var InternetEventSummary_ClientLocation = &sInternetEventSummary_ClientLocation
+var InternetEventSummary_EventType = &sInternetEventSummary_EventType
+var InternetEventSummary_EventStatus = &sInternetEventSummary_EventStatus
+
+var _InternetEventType = &s_InternetEventType
+
+var InternetHealth = &sInternetHealth
+var InternetHealth_Availability = &sInternetHealth_Availability
+var InternetHealth_Performance = &sInternetHealth_Performance
+
+var InternetMeasurementsLogDelivery = &sInternetMeasurementsLogDelivery
+var InternetMeasurementsLogDelivery_S3Config = &sInternetMeasurementsLogDelivery_S3Config
+
+var _Ipv4PrefixList = &s_Ipv4PrefixList
+var _Ipv4PrefixList_member = &s_Ipv4PrefixList_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var LocalHealthEventsConfig = &sLocalHealthEventsConfig
+var LocalHealthEventsConfig_Status = &sLocalHealthEventsConfig_Status
+var LocalHealthEventsConfig_HealthScoreThreshold = &sLocalHealthEventsConfig_HealthScoreThreshold
+var LocalHealthEventsConfig_MinTrafficImpact = &sLocalHealthEventsConfig_MinTrafficImpact
+
+var _LocalHealthEventsConfigStatus = &s_LocalHealthEventsConfigStatus
+
+var _LogDeliveryStatus = &s_LogDeliveryStatus
+
+var _MaxCityNetworksToMonitor = &s_MaxCityNetworksToMonitor
+
+var _MaxResults = &s_MaxResults
+
+var Monitor = &sMonitor
+var Monitor_MonitorName = &sMonitor_MonitorName
+var Monitor_MonitorArn = &sMonitor_MonitorArn
+var Monitor_Status = &sMonitor_Status
+var Monitor_ProcessingStatus = &sMonitor_ProcessingStatus
+
+var _MonitorArn = &s_MonitorArn
+
+var _MonitorConfigState = &s_MonitorConfigState
+
+var _MonitorList = &s_MonitorList
+var _MonitorList_member = &s_MonitorList_member
+
+var _MonitorProcessingStatusCode = &s_MonitorProcessingStatusCode
+
+var Network = &sNetwork
+var Network_ASName = &sNetwork_ASName
+var Network_ASNumber = &sNetwork_ASNumber
+
+var NetworkImpairment = &sNetworkImpairment
+var NetworkImpairment_Networks = &sNetworkImpairment_Networks
+var NetworkImpairment_AsPath = &sNetworkImpairment_AsPath
+var NetworkImpairment_NetworkEventType = &sNetworkImpairment_NetworkEventType
+
+var _NetworkList = &s_NetworkList
+var _NetworkList_member = &s_NetworkList_member
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _Operator = &s_Operator
+
+var _Percentage = &s_Percentage
+
+var PerformanceMeasurement = &sPerformanceMeasurement
+var PerformanceMeasurement_ExperienceScore = &sPerformanceMeasurement_ExperienceScore
+var PerformanceMeasurement_PercentOfTotalTrafficImpacted = &sPerformanceMeasurement_PercentOfTotalTrafficImpacted
+var PerformanceMeasurement_PercentOfClientLocationImpacted = &sPerformanceMeasurement_PercentOfClientLocationImpacted
+var PerformanceMeasurement_RoundTripTime = &sPerformanceMeasurement_RoundTripTime
+
+var _QueryData = &s_QueryData
+var _QueryData_member = &s_QueryData_member
+
+var QueryField = &sQueryField
+var QueryField_Name = &sQueryField_Name
+var QueryField_Type = &sQueryField_Type
+
+var _QueryFields = &s_QueryFields
+var _QueryFields_member = &s_QueryFields_member
+
+var _QueryMaxResults = &s_QueryMaxResults
+
+var _QueryRow = &s_QueryRow
+var _QueryRow_member = &s_QueryRow_member
+
+var _QueryStatus = &s_QueryStatus
+
+var _QueryType = &s_QueryType
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RoundTripTime = &sRoundTripTime
+var RoundTripTime_P50 = &sRoundTripTime_P50
+var RoundTripTime_P90 = &sRoundTripTime_P90
+var RoundTripTime_P95 = &sRoundTripTime_P95
+
+var S3Config = &sS3Config
+var S3Config_BucketName = &sS3Config_BucketName
+var S3Config_BucketPrefix = &sS3Config_BucketPrefix
+var S3Config_LogDeliveryStatus = &sS3Config_LogDeliveryStatus
+
+var _SetOfARNs = &s_SetOfARNs
+var _SetOfARNs_member = &s_SetOfARNs_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+
+var _TrafficPercentageToMonitor = &s_TrafficPercentageToMonitor
+
+var _TriangulationEventType = &s_TriangulationEventType
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateMonitorInput = &sCreateMonitorInput
+var CreateMonitorInput_MonitorName = &sCreateMonitorInput_MonitorName
+var CreateMonitorInput_Resources = &sCreateMonitorInput_Resources
+var CreateMonitorInput_ClientToken = &sCreateMonitorInput_ClientToken
+var CreateMonitorInput_Tags = &sCreateMonitorInput_Tags
+var CreateMonitorInput_MaxCityNetworksToMonitor = &sCreateMonitorInput_MaxCityNetworksToMonitor
+var CreateMonitorInput_InternetMeasurementsLogDelivery = &sCreateMonitorInput_InternetMeasurementsLogDelivery
+var CreateMonitorInput_TrafficPercentageToMonitor = &sCreateMonitorInput_TrafficPercentageToMonitor
+var CreateMonitorInput_HealthEventsConfig = &sCreateMonitorInput_HealthEventsConfig
+
+var CreateMonitorOutput = &sCreateMonitorOutput
+var CreateMonitorOutput_Arn = &sCreateMonitorOutput_Arn
+var CreateMonitorOutput_Status = &sCreateMonitorOutput_Status
+
+var DeleteMonitorInput = &sDeleteMonitorInput
+var DeleteMonitorInput_MonitorName = &sDeleteMonitorInput_MonitorName
+
+var DeleteMonitorOutput = &sDeleteMonitorOutput
+
+var GetHealthEventInput = &sGetHealthEventInput
+var GetHealthEventInput_MonitorName = &sGetHealthEventInput_MonitorName
+var GetHealthEventInput_EventId = &sGetHealthEventInput_EventId
+var GetHealthEventInput_LinkedAccountId = &sGetHealthEventInput_LinkedAccountId
+
+var GetHealthEventOutput = &sGetHealthEventOutput
+var GetHealthEventOutput_EventArn = &sGetHealthEventOutput_EventArn
+var GetHealthEventOutput_EventId = &sGetHealthEventOutput_EventId
+var GetHealthEventOutput_StartedAt = &sGetHealthEventOutput_StartedAt
+var GetHealthEventOutput_EndedAt = &sGetHealthEventOutput_EndedAt
+var GetHealthEventOutput_CreatedAt = &sGetHealthEventOutput_CreatedAt
+var GetHealthEventOutput_LastUpdatedAt = &sGetHealthEventOutput_LastUpdatedAt
+var GetHealthEventOutput_ImpactedLocations = &sGetHealthEventOutput_ImpactedLocations
+var GetHealthEventOutput_Status = &sGetHealthEventOutput_Status
+var GetHealthEventOutput_PercentOfTotalTrafficImpacted = &sGetHealthEventOutput_PercentOfTotalTrafficImpacted
+var GetHealthEventOutput_ImpactType = &sGetHealthEventOutput_ImpactType
+var GetHealthEventOutput_HealthScoreThreshold = &sGetHealthEventOutput_HealthScoreThreshold
+
+var GetInternetEventInput = &sGetInternetEventInput
+var GetInternetEventInput_EventId = &sGetInternetEventInput_EventId
+
+var GetInternetEventOutput = &sGetInternetEventOutput
+var GetInternetEventOutput_EventId = &sGetInternetEventOutput_EventId
+var GetInternetEventOutput_EventArn = &sGetInternetEventOutput_EventArn
+var GetInternetEventOutput_StartedAt = &sGetInternetEventOutput_StartedAt
+var GetInternetEventOutput_EndedAt = &sGetInternetEventOutput_EndedAt
+var GetInternetEventOutput_ClientLocation = &sGetInternetEventOutput_ClientLocation
+var GetInternetEventOutput_EventType = &sGetInternetEventOutput_EventType
+var GetInternetEventOutput_EventStatus = &sGetInternetEventOutput_EventStatus
+
+var GetMonitorInput = &sGetMonitorInput
+var GetMonitorInput_MonitorName = &sGetMonitorInput_MonitorName
+var GetMonitorInput_LinkedAccountId = &sGetMonitorInput_LinkedAccountId
+
+var GetMonitorOutput = &sGetMonitorOutput
+var GetMonitorOutput_MonitorName = &sGetMonitorOutput_MonitorName
+var GetMonitorOutput_MonitorArn = &sGetMonitorOutput_MonitorArn
+var GetMonitorOutput_Resources = &sGetMonitorOutput_Resources
+var GetMonitorOutput_Status = &sGetMonitorOutput_Status
+var GetMonitorOutput_CreatedAt = &sGetMonitorOutput_CreatedAt
+var GetMonitorOutput_ModifiedAt = &sGetMonitorOutput_ModifiedAt
+var GetMonitorOutput_ProcessingStatus = &sGetMonitorOutput_ProcessingStatus
+var GetMonitorOutput_ProcessingStatusInfo = &sGetMonitorOutput_ProcessingStatusInfo
+var GetMonitorOutput_Tags = &sGetMonitorOutput_Tags
+var GetMonitorOutput_MaxCityNetworksToMonitor = &sGetMonitorOutput_MaxCityNetworksToMonitor
+var GetMonitorOutput_InternetMeasurementsLogDelivery = &sGetMonitorOutput_InternetMeasurementsLogDelivery
+var GetMonitorOutput_TrafficPercentageToMonitor = &sGetMonitorOutput_TrafficPercentageToMonitor
+var GetMonitorOutput_HealthEventsConfig = &sGetMonitorOutput_HealthEventsConfig
+
+var GetQueryResultsInput = &sGetQueryResultsInput
+var GetQueryResultsInput_MonitorName = &sGetQueryResultsInput_MonitorName
+var GetQueryResultsInput_QueryId = &sGetQueryResultsInput_QueryId
+var GetQueryResultsInput_NextToken = &sGetQueryResultsInput_NextToken
+var GetQueryResultsInput_MaxResults = &sGetQueryResultsInput_MaxResults
+
+var GetQueryResultsOutput = &sGetQueryResultsOutput
+var GetQueryResultsOutput_Fields = &sGetQueryResultsOutput_Fields
+var GetQueryResultsOutput_Data = &sGetQueryResultsOutput_Data
+var GetQueryResultsOutput_NextToken = &sGetQueryResultsOutput_NextToken
+
+var GetQueryStatusInput = &sGetQueryStatusInput
+var GetQueryStatusInput_MonitorName = &sGetQueryStatusInput_MonitorName
+var GetQueryStatusInput_QueryId = &sGetQueryStatusInput_QueryId
+
+var GetQueryStatusOutput = &sGetQueryStatusOutput
+var GetQueryStatusOutput_Status = &sGetQueryStatusOutput_Status
+
+var ListHealthEventsInput = &sListHealthEventsInput
+var ListHealthEventsInput_MonitorName = &sListHealthEventsInput_MonitorName
+var ListHealthEventsInput_StartTime = &sListHealthEventsInput_StartTime
+var ListHealthEventsInput_EndTime = &sListHealthEventsInput_EndTime
+var ListHealthEventsInput_NextToken = &sListHealthEventsInput_NextToken
+var ListHealthEventsInput_MaxResults = &sListHealthEventsInput_MaxResults
+var ListHealthEventsInput_EventStatus = &sListHealthEventsInput_EventStatus
+var ListHealthEventsInput_LinkedAccountId = &sListHealthEventsInput_LinkedAccountId
+
+var ListHealthEventsOutput = &sListHealthEventsOutput
+var ListHealthEventsOutput_HealthEvents = &sListHealthEventsOutput_HealthEvents
+var ListHealthEventsOutput_NextToken = &sListHealthEventsOutput_NextToken
+
+var ListInternetEventsInput = &sListInternetEventsInput
+var ListInternetEventsInput_NextToken = &sListInternetEventsInput_NextToken
+var ListInternetEventsInput_MaxResults = &sListInternetEventsInput_MaxResults
+var ListInternetEventsInput_StartTime = &sListInternetEventsInput_StartTime
+var ListInternetEventsInput_EndTime = &sListInternetEventsInput_EndTime
+var ListInternetEventsInput_EventStatus = &sListInternetEventsInput_EventStatus
+var ListInternetEventsInput_EventType = &sListInternetEventsInput_EventType
+
+var ListInternetEventsOutput = &sListInternetEventsOutput
+var ListInternetEventsOutput_InternetEvents = &sListInternetEventsOutput_InternetEvents
+var ListInternetEventsOutput_NextToken = &sListInternetEventsOutput_NextToken
+
+var ListMonitorsInput = &sListMonitorsInput
+var ListMonitorsInput_NextToken = &sListMonitorsInput_NextToken
+var ListMonitorsInput_MaxResults = &sListMonitorsInput_MaxResults
+var ListMonitorsInput_MonitorStatus = &sListMonitorsInput_MonitorStatus
+var ListMonitorsInput_IncludeLinkedAccounts = &sListMonitorsInput_IncludeLinkedAccounts
+
+var ListMonitorsOutput = &sListMonitorsOutput
+var ListMonitorsOutput_Monitors = &sListMonitorsOutput_Monitors
+var ListMonitorsOutput_NextToken = &sListMonitorsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var StartQueryInput = &sStartQueryInput
+var StartQueryInput_MonitorName = &sStartQueryInput_MonitorName
+var StartQueryInput_StartTime = &sStartQueryInput_StartTime
+var StartQueryInput_EndTime = &sStartQueryInput_EndTime
+var StartQueryInput_QueryType = &sStartQueryInput_QueryType
+var StartQueryInput_FilterParameters = &sStartQueryInput_FilterParameters
+var StartQueryInput_LinkedAccountId = &sStartQueryInput_LinkedAccountId
+
+var StartQueryOutput = &sStartQueryOutput
+var StartQueryOutput_QueryId = &sStartQueryOutput_QueryId
+
+var StopQueryInput = &sStopQueryInput
+var StopQueryInput_MonitorName = &sStopQueryInput_MonitorName
+var StopQueryInput_QueryId = &sStopQueryInput_QueryId
+
+var StopQueryOutput = &sStopQueryOutput
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateMonitorInput = &sUpdateMonitorInput
+var UpdateMonitorInput_MonitorName = &sUpdateMonitorInput_MonitorName
+var UpdateMonitorInput_ResourcesToAdd = &sUpdateMonitorInput_ResourcesToAdd
+var UpdateMonitorInput_ResourcesToRemove = &sUpdateMonitorInput_ResourcesToRemove
+var UpdateMonitorInput_Status = &sUpdateMonitorInput_Status
+var UpdateMonitorInput_ClientToken = &sUpdateMonitorInput_ClientToken
+var UpdateMonitorInput_MaxCityNetworksToMonitor = &sUpdateMonitorInput_MaxCityNetworksToMonitor
+var UpdateMonitorInput_InternetMeasurementsLogDelivery = &sUpdateMonitorInput_InternetMeasurementsLogDelivery
+var UpdateMonitorInput_TrafficPercentageToMonitor = &sUpdateMonitorInput_TrafficPercentageToMonitor
+var UpdateMonitorInput_HealthEventsConfig = &sUpdateMonitorInput_HealthEventsConfig
+
+var UpdateMonitorOutput = &sUpdateMonitorOutput
+var UpdateMonitorOutput_MonitorArn = &sUpdateMonitorOutput_MonitorArn
+var UpdateMonitorOutput_Status = &sUpdateMonitorOutput_Status
+
+var InternetMonitor20210603 = &smithy.ServiceSchema{Schema: &s_InternetMonitor20210603, Version: "2021-06-03"}

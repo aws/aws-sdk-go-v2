@@ -4,1758 +4,1788 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAwsLogSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateAwsLogSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	eCreateAwsLogSource                                                  smithy.SchemaExtensions
+	eCreateCustomLogSource                                               smithy.SchemaExtensions
+	eCreateDataLake                                                      smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscription                                 smithy.SchemaExtensions
+	eCreateDataLakeOrganizationConfiguration                             smithy.SchemaExtensions
+	eCreateSubscriber                                                    smithy.SchemaExtensions
+	eCreateSubscriberNotification                                        smithy.SchemaExtensions
+	eDeleteAwsLogSource                                                  smithy.SchemaExtensions
+	eDeleteCustomLogSource                                               smithy.SchemaExtensions
+	eDeleteDataLake                                                      smithy.SchemaExtensions
+	eDeleteDataLakeExceptionSubscription                                 smithy.SchemaExtensions
+	eDeleteDataLakeOrganizationConfiguration                             smithy.SchemaExtensions
+	eDeleteSubscriber                                                    smithy.SchemaExtensions
+	eDeleteSubscriberNotification                                        smithy.SchemaExtensions
+	eDeregisterDataLakeDelegatedAdministrator                            smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscription                                    smithy.SchemaExtensions
+	eGetDataLakeOrganizationConfiguration                                smithy.SchemaExtensions
+	eGetDataLakeSources                                                  smithy.SchemaExtensions
+	eGetSubscriber                                                       smithy.SchemaExtensions
+	eListDataLakeExceptions                                              smithy.SchemaExtensions
+	eListDataLakes                                                       smithy.SchemaExtensions
+	eListLogSources                                                      smithy.SchemaExtensions
+	eListSubscribers                                                     smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	eRegisterDataLakeDelegatedAdministrator                              smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdateDataLake                                                      smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscription                                 smithy.SchemaExtensions
+	eUpdateSubscriber                                                    smithy.SchemaExtensions
+	eUpdateSubscriberNotification                                        smithy.SchemaExtensions
+	e_SecurityLake                                                       smithy.SchemaExtensions
+	eAccessDeniedException                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                       smithy.SchemaExtensions
+	eAccessDeniedException_errorCode                                     smithy.SchemaExtensions
+	eAccessType                                                          smithy.SchemaExtensions
+	eAccessType_LAKEFORMATION                                            smithy.SchemaExtensions
+	eAccessType_S3                                                       smithy.SchemaExtensions
+	e_AccessTypeList                                                     smithy.SchemaExtensions
+	e_AccessTypeList_member                                              smithy.SchemaExtensions
+	e_AccountList                                                        smithy.SchemaExtensions
+	e_AccountList_member                                                 smithy.SchemaExtensions
+	e_AmazonResourceName                                                 smithy.SchemaExtensions
+	e_AwsAccountId                                                       smithy.SchemaExtensions
+	eAwsIdentity                                                         smithy.SchemaExtensions
+	eAwsIdentity_principal                                               smithy.SchemaExtensions
+	eAwsIdentity_externalId                                              smithy.SchemaExtensions
+	eAwsLogSourceConfiguration                                           smithy.SchemaExtensions
+	eAwsLogSourceConfiguration_accounts                                  smithy.SchemaExtensions
+	eAwsLogSourceConfiguration_regions                                   smithy.SchemaExtensions
+	eAwsLogSourceConfiguration_sourceName                                smithy.SchemaExtensions
+	eAwsLogSourceConfiguration_sourceVersion                             smithy.SchemaExtensions
+	e_AwsLogSourceConfigurationList                                      smithy.SchemaExtensions
+	e_AwsLogSourceConfigurationList_member                               smithy.SchemaExtensions
+	eAwsLogSourceName                                                    smithy.SchemaExtensions
+	eAwsLogSourceName_ROUTE53                                            smithy.SchemaExtensions
+	eAwsLogSourceName_VPC_FLOW                                           smithy.SchemaExtensions
+	eAwsLogSourceName_SH_FINDINGS                                        smithy.SchemaExtensions
+	eAwsLogSourceName_CLOUD_TRAIL_MGMT                                   smithy.SchemaExtensions
+	eAwsLogSourceName_LAMBDA_EXECUTION                                   smithy.SchemaExtensions
+	eAwsLogSourceName_S3_DATA                                            smithy.SchemaExtensions
+	eAwsLogSourceName_EKS_AUDIT                                          smithy.SchemaExtensions
+	eAwsLogSourceName_WAF                                                smithy.SchemaExtensions
+	eAwsLogSourceResource                                                smithy.SchemaExtensions
+	eAwsLogSourceResource_sourceName                                     smithy.SchemaExtensions
+	eAwsLogSourceResource_sourceVersion                                  smithy.SchemaExtensions
+	e_AwsLogSourceResourceList                                           smithy.SchemaExtensions
+	e_AwsLogSourceResourceList_member                                    smithy.SchemaExtensions
+	e_AwsLogSourceVersion                                                smithy.SchemaExtensions
+	e_AwsPrincipal                                                       smithy.SchemaExtensions
+	eBadRequestException                                                 smithy.SchemaExtensions
+	eBadRequestException_message                                         smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	eConflictException_resourceName                                      smithy.SchemaExtensions
+	eConflictException_resourceType                                      smithy.SchemaExtensions
+	eCustomLogSourceAttributes                                           smithy.SchemaExtensions
+	eCustomLogSourceAttributes_crawlerArn                                smithy.SchemaExtensions
+	eCustomLogSourceAttributes_databaseArn                               smithy.SchemaExtensions
+	eCustomLogSourceAttributes_tableArn                                  smithy.SchemaExtensions
+	eCustomLogSourceConfiguration                                        smithy.SchemaExtensions
+	eCustomLogSourceConfiguration_crawlerConfiguration                   smithy.SchemaExtensions
+	eCustomLogSourceConfiguration_providerIdentity                       smithy.SchemaExtensions
+	eCustomLogSourceCrawlerConfiguration                                 smithy.SchemaExtensions
+	eCustomLogSourceCrawlerConfiguration_roleArn                         smithy.SchemaExtensions
+	e_CustomLogSourceName                                                smithy.SchemaExtensions
+	eCustomLogSourceProvider                                             smithy.SchemaExtensions
+	eCustomLogSourceProvider_roleArn                                     smithy.SchemaExtensions
+	eCustomLogSourceProvider_location                                    smithy.SchemaExtensions
+	eCustomLogSourceResource                                             smithy.SchemaExtensions
+	eCustomLogSourceResource_sourceName                                  smithy.SchemaExtensions
+	eCustomLogSourceResource_sourceVersion                               smithy.SchemaExtensions
+	eCustomLogSourceResource_provider                                    smithy.SchemaExtensions
+	eCustomLogSourceResource_attributes                                  smithy.SchemaExtensions
+	e_CustomLogSourceVersion                                             smithy.SchemaExtensions
+	eDataLakeAutoEnableNewAccountConfiguration                           smithy.SchemaExtensions
+	eDataLakeAutoEnableNewAccountConfiguration_region                    smithy.SchemaExtensions
+	eDataLakeAutoEnableNewAccountConfiguration_sources                   smithy.SchemaExtensions
+	e_DataLakeAutoEnableNewAccountConfigurationList                      smithy.SchemaExtensions
+	e_DataLakeAutoEnableNewAccountConfigurationList_member               smithy.SchemaExtensions
+	eDataLakeConfiguration                                               smithy.SchemaExtensions
+	eDataLakeConfiguration_region                                        smithy.SchemaExtensions
+	eDataLakeConfiguration_encryptionConfiguration                       smithy.SchemaExtensions
+	eDataLakeConfiguration_lifecycleConfiguration                        smithy.SchemaExtensions
+	eDataLakeConfiguration_replicationConfiguration                      smithy.SchemaExtensions
+	e_DataLakeConfigurationList                                          smithy.SchemaExtensions
+	e_DataLakeConfigurationList_member                                   smithy.SchemaExtensions
+	eDataLakeEncryptionConfiguration                                     smithy.SchemaExtensions
+	eDataLakeEncryptionConfiguration_kmsKeyId                            smithy.SchemaExtensions
+	eDataLakeException                                                   smithy.SchemaExtensions
+	eDataLakeException_region                                            smithy.SchemaExtensions
+	eDataLakeException_exception                                         smithy.SchemaExtensions
+	eDataLakeException_remediation                                       smithy.SchemaExtensions
+	eDataLakeException_timestamp                                         smithy.SchemaExtensions
+	e_DataLakeExceptionList                                              smithy.SchemaExtensions
+	e_DataLakeExceptionList_member                                       smithy.SchemaExtensions
+	eDataLakeLifecycleConfiguration                                      smithy.SchemaExtensions
+	eDataLakeLifecycleConfiguration_expiration                           smithy.SchemaExtensions
+	eDataLakeLifecycleConfiguration_transitions                          smithy.SchemaExtensions
+	eDataLakeLifecycleExpiration                                         smithy.SchemaExtensions
+	eDataLakeLifecycleExpiration_days                                    smithy.SchemaExtensions
+	eDataLakeLifecycleTransition                                         smithy.SchemaExtensions
+	eDataLakeLifecycleTransition_storageClass                            smithy.SchemaExtensions
+	eDataLakeLifecycleTransition_days                                    smithy.SchemaExtensions
+	e_DataLakeLifecycleTransitionList                                    smithy.SchemaExtensions
+	e_DataLakeLifecycleTransitionList_member                             smithy.SchemaExtensions
+	eDataLakeReplicationConfiguration                                    smithy.SchemaExtensions
+	eDataLakeReplicationConfiguration_regions                            smithy.SchemaExtensions
+	eDataLakeReplicationConfiguration_roleArn                            smithy.SchemaExtensions
+	eDataLakeResource                                                    smithy.SchemaExtensions
+	eDataLakeResource_dataLakeArn                                        smithy.SchemaExtensions
+	eDataLakeResource_region                                             smithy.SchemaExtensions
+	eDataLakeResource_s3BucketArn                                        smithy.SchemaExtensions
+	eDataLakeResource_encryptionConfiguration                            smithy.SchemaExtensions
+	eDataLakeResource_lifecycleConfiguration                             smithy.SchemaExtensions
+	eDataLakeResource_replicationConfiguration                           smithy.SchemaExtensions
+	eDataLakeResource_createStatus                                       smithy.SchemaExtensions
+	eDataLakeResource_updateStatus                                       smithy.SchemaExtensions
+	e_DataLakeResourceList                                               smithy.SchemaExtensions
+	e_DataLakeResourceList_member                                        smithy.SchemaExtensions
+	eDataLakeSource                                                      smithy.SchemaExtensions
+	eDataLakeSource_account                                              smithy.SchemaExtensions
+	eDataLakeSource_sourceName                                           smithy.SchemaExtensions
+	eDataLakeSource_eventClasses                                         smithy.SchemaExtensions
+	eDataLakeSource_sourceStatuses                                       smithy.SchemaExtensions
+	e_DataLakeSourceList                                                 smithy.SchemaExtensions
+	e_DataLakeSourceList_member                                          smithy.SchemaExtensions
+	eDataLakeSourceStatus                                                smithy.SchemaExtensions
+	eDataLakeSourceStatus_resource                                       smithy.SchemaExtensions
+	eDataLakeSourceStatus_status                                         smithy.SchemaExtensions
+	e_DataLakeSourceStatusList                                           smithy.SchemaExtensions
+	e_DataLakeSourceStatusList_member                                    smithy.SchemaExtensions
+	eDataLakeStatus                                                      smithy.SchemaExtensions
+	eDataLakeStatus_INITIALIZED                                          smithy.SchemaExtensions
+	eDataLakeStatus_PENDING                                              smithy.SchemaExtensions
+	eDataLakeStatus_COMPLETED                                            smithy.SchemaExtensions
+	eDataLakeStatus_FAILED                                               smithy.SchemaExtensions
+	e_DataLakeStorageClass                                               smithy.SchemaExtensions
+	eDataLakeUpdateException                                             smithy.SchemaExtensions
+	eDataLakeUpdateException_reason                                      smithy.SchemaExtensions
+	eDataLakeUpdateException_code                                        smithy.SchemaExtensions
+	eDataLakeUpdateStatus                                                smithy.SchemaExtensions
+	eDataLakeUpdateStatus_requestId                                      smithy.SchemaExtensions
+	eDataLakeUpdateStatus_status                                         smithy.SchemaExtensions
+	eDataLakeUpdateStatus_exception                                      smithy.SchemaExtensions
+	e_DescriptionString                                                  smithy.SchemaExtensions
+	e_ExternalId                                                         smithy.SchemaExtensions
+	eHttpMethod                                                          smithy.SchemaExtensions
+	eHttpMethod_POST                                                     smithy.SchemaExtensions
+	eHttpMethod_PUT                                                      smithy.SchemaExtensions
+	eHttpsNotificationConfiguration                                      smithy.SchemaExtensions
+	eHttpsNotificationConfiguration_endpoint                             smithy.SchemaExtensions
+	eHttpsNotificationConfiguration_authorizationApiKeyName              smithy.SchemaExtensions
+	eHttpsNotificationConfiguration_authorizationApiKeyValue             smithy.SchemaExtensions
+	eHttpsNotificationConfiguration_httpMethod                           smithy.SchemaExtensions
+	eHttpsNotificationConfiguration_targetRoleArn                        smithy.SchemaExtensions
+	eInternalServerException                                             smithy.SchemaExtensions
+	eInternalServerException_message                                     smithy.SchemaExtensions
+	eLogSource                                                           smithy.SchemaExtensions
+	eLogSource_account                                                   smithy.SchemaExtensions
+	eLogSource_region                                                    smithy.SchemaExtensions
+	eLogSource_sources                                                   smithy.SchemaExtensions
+	e_LogSourceList                                                      smithy.SchemaExtensions
+	e_LogSourceList_member                                               smithy.SchemaExtensions
+	eLogSourceResource                                                   smithy.SchemaExtensions
+	eLogSourceResource_awsLogSource                                      smithy.SchemaExtensions
+	eLogSourceResource_customLogSource                                   smithy.SchemaExtensions
+	e_LogSourceResourceList                                              smithy.SchemaExtensions
+	e_LogSourceResourceList_member                                       smithy.SchemaExtensions
+	e_MaxResults                                                         smithy.SchemaExtensions
+	e_NextToken                                                          smithy.SchemaExtensions
+	eNotificationConfiguration                                           smithy.SchemaExtensions
+	eNotificationConfiguration_sqsNotificationConfiguration              smithy.SchemaExtensions
+	eNotificationConfiguration_httpsNotificationConfiguration            smithy.SchemaExtensions
+	e_OcsfEventClass                                                     smithy.SchemaExtensions
+	e_OcsfEventClassList                                                 smithy.SchemaExtensions
+	e_OcsfEventClassList_member                                          smithy.SchemaExtensions
+	e_Region                                                             smithy.SchemaExtensions
+	e_RegionList                                                         smithy.SchemaExtensions
+	e_RegionList_member                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	eResourceNotFoundException_resourceName                              smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                              smithy.SchemaExtensions
+	e_ResourceShareArn                                                   smithy.SchemaExtensions
+	e_ResourceShareName                                                  smithy.SchemaExtensions
+	e_RoleArn                                                            smithy.SchemaExtensions
+	e_S3BucketArn                                                        smithy.SchemaExtensions
+	e_S3URI                                                              smithy.SchemaExtensions
+	e_SafeString                                                         smithy.SchemaExtensions
+	eSourceCollectionStatus                                              smithy.SchemaExtensions
+	eSourceCollectionStatus_COLLECTING                                   smithy.SchemaExtensions
+	eSourceCollectionStatus_MISCONFIGURED                                smithy.SchemaExtensions
+	eSourceCollectionStatus_NOT_COLLECTING                               smithy.SchemaExtensions
+	eSqsNotificationConfiguration                                        smithy.SchemaExtensions
+	eSubscriberResource                                                  smithy.SchemaExtensions
+	eSubscriberResource_subscriberId                                     smithy.SchemaExtensions
+	eSubscriberResource_subscriberArn                                    smithy.SchemaExtensions
+	eSubscriberResource_subscriberIdentity                               smithy.SchemaExtensions
+	eSubscriberResource_subscriberName                                   smithy.SchemaExtensions
+	eSubscriberResource_subscriberDescription                            smithy.SchemaExtensions
+	eSubscriberResource_sources                                          smithy.SchemaExtensions
+	eSubscriberResource_accessTypes                                      smithy.SchemaExtensions
+	eSubscriberResource_roleArn                                          smithy.SchemaExtensions
+	eSubscriberResource_s3BucketArn                                      smithy.SchemaExtensions
+	eSubscriberResource_subscriberEndpoint                               smithy.SchemaExtensions
+	eSubscriberResource_subscriberStatus                                 smithy.SchemaExtensions
+	eSubscriberResource_resourceShareArn                                 smithy.SchemaExtensions
+	eSubscriberResource_resourceShareName                                smithy.SchemaExtensions
+	eSubscriberResource_createdAt                                        smithy.SchemaExtensions
+	eSubscriberResource_updatedAt                                        smithy.SchemaExtensions
+	e_SubscriberResourceList                                             smithy.SchemaExtensions
+	e_SubscriberResourceList_member                                      smithy.SchemaExtensions
+	eSubscriberStatus                                                    smithy.SchemaExtensions
+	eSubscriberStatus_ACTIVE                                             smithy.SchemaExtensions
+	eSubscriberStatus_DEACTIVATED                                        smithy.SchemaExtensions
+	eSubscriberStatus_PENDING                                            smithy.SchemaExtensions
+	eSubscriberStatus_READY                                              smithy.SchemaExtensions
+	e_SubscriptionProtocol                                               smithy.SchemaExtensions
+	eTag                                                                 smithy.SchemaExtensions
+	eTag_key                                                             smithy.SchemaExtensions
+	eTag_value                                                           smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagKeyList                                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                                  smithy.SchemaExtensions
+	e_TagList                                                            smithy.SchemaExtensions
+	e_TagList_member                                                     smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	eThrottlingException                                                 smithy.SchemaExtensions
+	eThrottlingException_message                                         smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                     smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                       smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                               smithy.SchemaExtensions
+	e_UUID                                                               smithy.SchemaExtensions
+	eCreateAwsLogSourceRequest                                           smithy.SchemaExtensions
+	eCreateAwsLogSourceRequest_sources                                   smithy.SchemaExtensions
+	eCreateAwsLogSourceResponse                                          smithy.SchemaExtensions
+	eCreateAwsLogSourceResponse_failed                                   smithy.SchemaExtensions
+	eCreateCustomLogSourceRequest                                        smithy.SchemaExtensions
+	eCreateCustomLogSourceRequest_sourceName                             smithy.SchemaExtensions
+	eCreateCustomLogSourceRequest_sourceVersion                          smithy.SchemaExtensions
+	eCreateCustomLogSourceRequest_eventClasses                           smithy.SchemaExtensions
+	eCreateCustomLogSourceRequest_configuration                          smithy.SchemaExtensions
+	eCreateCustomLogSourceResponse                                       smithy.SchemaExtensions
+	eCreateCustomLogSourceResponse_source                                smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscriptionRequest                          smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol     smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscriptionRequest_notificationEndpoint     smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive      smithy.SchemaExtensions
+	eCreateDataLakeExceptionSubscriptionResponse                         smithy.SchemaExtensions
+	eCreateDataLakeRequest                                               smithy.SchemaExtensions
+	eCreateDataLakeRequest_configurations                                smithy.SchemaExtensions
+	eCreateDataLakeRequest_metaStoreManagerRoleArn                       smithy.SchemaExtensions
+	eCreateDataLakeRequest_tags                                          smithy.SchemaExtensions
+	eCreateDataLakeOrganizationConfigurationRequest                      smithy.SchemaExtensions
+	eCreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount smithy.SchemaExtensions
+	eCreateDataLakeOrganizationConfigurationResponse                     smithy.SchemaExtensions
+	eCreateDataLakeResponse                                              smithy.SchemaExtensions
+	eCreateDataLakeResponse_dataLakes                                    smithy.SchemaExtensions
+	eCreateSubscriberRequest                                             smithy.SchemaExtensions
+	eCreateSubscriberRequest_subscriberIdentity                          smithy.SchemaExtensions
+	eCreateSubscriberRequest_subscriberName                              smithy.SchemaExtensions
+	eCreateSubscriberRequest_subscriberDescription                       smithy.SchemaExtensions
+	eCreateSubscriberRequest_sources                                     smithy.SchemaExtensions
+	eCreateSubscriberRequest_accessTypes                                 smithy.SchemaExtensions
+	eCreateSubscriberRequest_tags                                        smithy.SchemaExtensions
+	eCreateSubscriberNotificationRequest                                 smithy.SchemaExtensions
+	eCreateSubscriberNotificationRequest_subscriberId                    smithy.SchemaExtensions
+	eCreateSubscriberNotificationRequest_configuration                   smithy.SchemaExtensions
+	eCreateSubscriberNotificationResponse                                smithy.SchemaExtensions
+	eCreateSubscriberNotificationResponse_subscriberEndpoint             smithy.SchemaExtensions
+	eCreateSubscriberResponse                                            smithy.SchemaExtensions
+	eCreateSubscriberResponse_subscriber                                 smithy.SchemaExtensions
+	eDeleteAwsLogSourceRequest                                           smithy.SchemaExtensions
+	eDeleteAwsLogSourceRequest_sources                                   smithy.SchemaExtensions
+	eDeleteAwsLogSourceResponse                                          smithy.SchemaExtensions
+	eDeleteAwsLogSourceResponse_failed                                   smithy.SchemaExtensions
+	eDeleteCustomLogSourceRequest                                        smithy.SchemaExtensions
+	eDeleteCustomLogSourceRequest_sourceName                             smithy.SchemaExtensions
+	eDeleteCustomLogSourceRequest_sourceVersion                          smithy.SchemaExtensions
+	eDeleteCustomLogSourceResponse                                       smithy.SchemaExtensions
+	eDeleteDataLakeExceptionSubscriptionRequest                          smithy.SchemaExtensions
+	eDeleteDataLakeExceptionSubscriptionResponse                         smithy.SchemaExtensions
+	eDeleteDataLakeRequest                                               smithy.SchemaExtensions
+	eDeleteDataLakeRequest_regions                                       smithy.SchemaExtensions
+	eDeleteDataLakeOrganizationConfigurationRequest                      smithy.SchemaExtensions
+	eDeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount smithy.SchemaExtensions
+	eDeleteDataLakeOrganizationConfigurationResponse                     smithy.SchemaExtensions
+	eDeleteDataLakeResponse                                              smithy.SchemaExtensions
+	eDeleteSubscriberRequest                                             smithy.SchemaExtensions
+	eDeleteSubscriberRequest_subscriberId                                smithy.SchemaExtensions
+	eDeleteSubscriberNotificationRequest                                 smithy.SchemaExtensions
+	eDeleteSubscriberNotificationRequest_subscriberId                    smithy.SchemaExtensions
+	eDeleteSubscriberNotificationResponse                                smithy.SchemaExtensions
+	eDeleteSubscriberResponse                                            smithy.SchemaExtensions
+	eDeregisterDataLakeDelegatedAdministratorRequest                     smithy.SchemaExtensions
+	eDeregisterDataLakeDelegatedAdministratorResponse                    smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscriptionRequest                             smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscriptionResponse                            smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscriptionResponse_subscriptionProtocol       smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscriptionResponse_notificationEndpoint       smithy.SchemaExtensions
+	eGetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive        smithy.SchemaExtensions
+	eGetDataLakeOrganizationConfigurationRequest                         smithy.SchemaExtensions
+	eGetDataLakeOrganizationConfigurationResponse                        smithy.SchemaExtensions
+	eGetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount   smithy.SchemaExtensions
+	eGetDataLakeSourcesRequest                                           smithy.SchemaExtensions
+	eGetDataLakeSourcesRequest_accounts                                  smithy.SchemaExtensions
+	eGetDataLakeSourcesRequest_maxResults                                smithy.SchemaExtensions
+	eGetDataLakeSourcesRequest_nextToken                                 smithy.SchemaExtensions
+	eGetDataLakeSourcesResponse                                          smithy.SchemaExtensions
+	eGetDataLakeSourcesResponse_dataLakeArn                              smithy.SchemaExtensions
+	eGetDataLakeSourcesResponse_dataLakeSources                          smithy.SchemaExtensions
+	eGetDataLakeSourcesResponse_nextToken                                smithy.SchemaExtensions
+	eGetSubscriberRequest                                                smithy.SchemaExtensions
+	eGetSubscriberRequest_subscriberId                                   smithy.SchemaExtensions
+	eGetSubscriberResponse                                               smithy.SchemaExtensions
+	eGetSubscriberResponse_subscriber                                    smithy.SchemaExtensions
+	eListDataLakeExceptionsRequest                                       smithy.SchemaExtensions
+	eListDataLakeExceptionsRequest_regions                               smithy.SchemaExtensions
+	eListDataLakeExceptionsRequest_maxResults                            smithy.SchemaExtensions
+	eListDataLakeExceptionsRequest_nextToken                             smithy.SchemaExtensions
+	eListDataLakeExceptionsResponse                                      smithy.SchemaExtensions
+	eListDataLakeExceptionsResponse_exceptions                           smithy.SchemaExtensions
+	eListDataLakeExceptionsResponse_nextToken                            smithy.SchemaExtensions
+	eListDataLakesRequest                                                smithy.SchemaExtensions
+	eListDataLakesRequest_regions                                        smithy.SchemaExtensions
+	eListDataLakesResponse                                               smithy.SchemaExtensions
+	eListDataLakesResponse_dataLakes                                     smithy.SchemaExtensions
+	eListLogSourcesRequest                                               smithy.SchemaExtensions
+	eListLogSourcesRequest_accounts                                      smithy.SchemaExtensions
+	eListLogSourcesRequest_regions                                       smithy.SchemaExtensions
+	eListLogSourcesRequest_sources                                       smithy.SchemaExtensions
+	eListLogSourcesRequest_maxResults                                    smithy.SchemaExtensions
+	eListLogSourcesRequest_nextToken                                     smithy.SchemaExtensions
+	eListLogSourcesResponse                                              smithy.SchemaExtensions
+	eListLogSourcesResponse_sources                                      smithy.SchemaExtensions
+	eListLogSourcesResponse_nextToken                                    smithy.SchemaExtensions
+	eListSubscribersRequest                                              smithy.SchemaExtensions
+	eListSubscribersRequest_nextToken                                    smithy.SchemaExtensions
+	eListSubscribersRequest_maxResults                                   smithy.SchemaExtensions
+	eListSubscribersResponse                                             smithy.SchemaExtensions
+	eListSubscribersResponse_subscribers                                 smithy.SchemaExtensions
+	eListSubscribersResponse_nextToken                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eListTagsForResourceResponse                                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                    smithy.SchemaExtensions
+	eRegisterDataLakeDelegatedAdministratorRequest                       smithy.SchemaExtensions
+	eRegisterDataLakeDelegatedAdministratorRequest_accountId             smithy.SchemaExtensions
+	eRegisterDataLakeDelegatedAdministratorResponse                      smithy.SchemaExtensions
+	eTagResourceRequest                                                  smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                      smithy.SchemaExtensions
+	eTagResourceRequest_tags                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                                smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                    smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                               smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscriptionRequest                          smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol     smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint     smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive      smithy.SchemaExtensions
+	eUpdateDataLakeExceptionSubscriptionResponse                         smithy.SchemaExtensions
+	eUpdateDataLakeRequest                                               smithy.SchemaExtensions
+	eUpdateDataLakeRequest_configurations                                smithy.SchemaExtensions
+	eUpdateDataLakeRequest_metaStoreManagerRoleArn                       smithy.SchemaExtensions
+	eUpdateDataLakeResponse                                              smithy.SchemaExtensions
+	eUpdateDataLakeResponse_dataLakes                                    smithy.SchemaExtensions
+	eUpdateSubscriberRequest                                             smithy.SchemaExtensions
+	eUpdateSubscriberRequest_subscriberId                                smithy.SchemaExtensions
+	eUpdateSubscriberRequest_subscriberIdentity                          smithy.SchemaExtensions
+	eUpdateSubscriberRequest_subscriberName                              smithy.SchemaExtensions
+	eUpdateSubscriberRequest_subscriberDescription                       smithy.SchemaExtensions
+	eUpdateSubscriberRequest_sources                                     smithy.SchemaExtensions
+	eUpdateSubscriberNotificationRequest                                 smithy.SchemaExtensions
+	eUpdateSubscriberNotificationRequest_subscriberId                    smithy.SchemaExtensions
+	eUpdateSubscriberNotificationRequest_configuration                   smithy.SchemaExtensions
+	eUpdateSubscriberNotificationResponse                                smithy.SchemaExtensions
+	eUpdateSubscriberNotificationResponse_subscriberEndpoint             smithy.SchemaExtensions
+	eUpdateSubscriberResponse                                            smithy.SchemaExtensions
+	eUpdateSubscriberResponse_subscriber                                 smithy.SchemaExtensions
+)
+
+var (
+	iCreateAwsLogSource                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateAwsLogSource"}
+	iCreateCustomLogSource                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateCustomLogSource"}
+	iCreateDataLake                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLake"}
+	iCreateDataLakeExceptionSubscription              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeExceptionSubscription"}
+	iCreateDataLakeOrganizationConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeOrganizationConfiguration"}
+	iCreateSubscriber                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriber"}
+	iCreateSubscriberNotification                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriberNotification"}
+	iDeleteAwsLogSource                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteAwsLogSource"}
+	iDeleteCustomLogSource                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteCustomLogSource"}
+	iDeleteDataLake                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLake"}
+	iDeleteDataLakeExceptionSubscription              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeExceptionSubscription"}
+	iDeleteDataLakeOrganizationConfiguration          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeOrganizationConfiguration"}
+	iDeleteSubscriber                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriber"}
+	iDeleteSubscriberNotification                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriberNotification"}
+	iDeregisterDataLakeDelegatedAdministrator         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeregisterDataLakeDelegatedAdministrator"}
+	iGetDataLakeExceptionSubscription                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeExceptionSubscription"}
+	iGetDataLakeOrganizationConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeOrganizationConfiguration"}
+	iGetDataLakeSources                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeSources"}
+	iGetSubscriber                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetSubscriber"}
+	iListDataLakeExceptions                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakeExceptions"}
+	iListDataLakes                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakes"}
+	iListLogSources                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListLogSources"}
+	iListSubscribers                                  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListSubscribers"}
+	iListTagsForResource                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListTagsForResource"}
+	iRegisterDataLakeDelegatedAdministrator           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "RegisterDataLakeDelegatedAdministrator"}
+	iTagResource                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagResource"}
+	iUntagResource                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UntagResource"}
+	iUpdateDataLake                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLake"}
+	iUpdateDataLakeExceptionSubscription              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLakeExceptionSubscription"}
+	iUpdateSubscriber                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriber"}
+	iUpdateSubscriberNotification                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriberNotification"}
+	i_SecurityLake                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SecurityLake"}
+	iAccessDeniedException                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AccessDeniedException"}
+	iAccessType                                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AccessType"}
+	i_AccessTypeList                                  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AccessTypeList"}
+	i_AccountList                                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AccountList"}
+	i_AmazonResourceName                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AmazonResourceName"}
+	i_AwsAccountId                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsAccountId"}
+	iAwsIdentity                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsIdentity"}
+	iAwsLogSourceConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceConfiguration"}
+	i_AwsLogSourceConfigurationList                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceConfigurationList"}
+	iAwsLogSourceName                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceName"}
+	iAwsLogSourceResource                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceResource"}
+	i_AwsLogSourceResourceList                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceResourceList"}
+	i_AwsLogSourceVersion                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsLogSourceVersion"}
+	i_AwsPrincipal                                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "AwsPrincipal"}
+	iBadRequestException                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "BadRequestException"}
+	iConflictException                                = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ConflictException"}
+	iCustomLogSourceAttributes                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceAttributes"}
+	iCustomLogSourceConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceConfiguration"}
+	iCustomLogSourceCrawlerConfiguration              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceCrawlerConfiguration"}
+	i_CustomLogSourceName                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceName"}
+	iCustomLogSourceProvider                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceProvider"}
+	iCustomLogSourceResource                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceResource"}
+	i_CustomLogSourceVersion                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CustomLogSourceVersion"}
+	iDataLakeAutoEnableNewAccountConfiguration        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeAutoEnableNewAccountConfiguration"}
+	i_DataLakeAutoEnableNewAccountConfigurationList   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeAutoEnableNewAccountConfigurationList"}
+	iDataLakeConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeConfiguration"}
+	i_DataLakeConfigurationList                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeConfigurationList"}
+	iDataLakeEncryptionConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeEncryptionConfiguration"}
+	iDataLakeException                                = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeException"}
+	i_DataLakeExceptionList                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeExceptionList"}
+	iDataLakeLifecycleConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeLifecycleConfiguration"}
+	iDataLakeLifecycleExpiration                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeLifecycleExpiration"}
+	iDataLakeLifecycleTransition                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeLifecycleTransition"}
+	i_DataLakeLifecycleTransitionList                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeLifecycleTransitionList"}
+	iDataLakeReplicationConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeReplicationConfiguration"}
+	iDataLakeResource                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeResource"}
+	i_DataLakeResourceList                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeResourceList"}
+	iDataLakeSource                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeSource"}
+	i_DataLakeSourceList                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeSourceList"}
+	iDataLakeSourceStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeSourceStatus"}
+	i_DataLakeSourceStatusList                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeSourceStatusList"}
+	iDataLakeStatus                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeStatus"}
+	i_DataLakeStorageClass                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeStorageClass"}
+	iDataLakeUpdateException                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeUpdateException"}
+	iDataLakeUpdateStatus                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DataLakeUpdateStatus"}
+	i_DescriptionString                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DescriptionString"}
+	i_ExternalId                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ExternalId"}
+	iHttpMethod                                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "HttpMethod"}
+	iHttpsNotificationConfiguration                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "HttpsNotificationConfiguration"}
+	iInternalServerException                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "InternalServerException"}
+	iLogSource                                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "LogSource"}
+	i_LogSourceList                                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "LogSourceList"}
+	iLogSourceResource                                = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "LogSourceResource"}
+	i_LogSourceResourceList                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "LogSourceResourceList"}
+	i_MaxResults                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "MaxResults"}
+	i_NextToken                                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "NextToken"}
+	iNotificationConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "NotificationConfiguration"}
+	i_OcsfEventClass                                  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "OcsfEventClass"}
+	i_OcsfEventClassList                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "OcsfEventClassList"}
+	i_Region                                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "Region"}
+	i_RegionList                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "RegionList"}
+	iResourceNotFoundException                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ResourceNotFoundException"}
+	i_ResourceShareArn                                = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ResourceShareArn"}
+	i_ResourceShareName                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ResourceShareName"}
+	i_RoleArn                                         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "RoleArn"}
+	i_S3BucketArn                                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "S3BucketArn"}
+	i_S3URI                                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "S3URI"}
+	i_SafeString                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SafeString"}
+	iSourceCollectionStatus                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SourceCollectionStatus"}
+	iSqsNotificationConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SqsNotificationConfiguration"}
+	iSubscriberResource                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SubscriberResource"}
+	i_SubscriberResourceList                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SubscriberResourceList"}
+	iSubscriberStatus                                 = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SubscriberStatus"}
+	i_SubscriptionProtocol                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "SubscriptionProtocol"}
+	iTag                                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "Tag"}
+	i_TagKey                                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagKey"}
+	i_TagKeyList                                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagKeyList"}
+	i_TagList                                         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagList"}
+	i_TagValue                                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagValue"}
+	iThrottlingException                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ThrottlingException"}
+	i_UUID                                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UUID"}
+	iCreateAwsLogSourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateAwsLogSourceRequest"}
+	iCreateAwsLogSourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateAwsLogSourceResponse"}
+	iCreateCustomLogSourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateCustomLogSourceRequest"}
+	iCreateCustomLogSourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateCustomLogSourceResponse"}
+	iCreateDataLakeExceptionSubscriptionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeExceptionSubscriptionRequest"}
+	iCreateDataLakeExceptionSubscriptionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeExceptionSubscriptionResponse"}
+	iCreateDataLakeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeRequest"}
+	iCreateDataLakeOrganizationConfigurationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeOrganizationConfigurationRequest"}
+	iCreateDataLakeOrganizationConfigurationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeOrganizationConfigurationResponse"}
+	iCreateDataLakeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateDataLakeResponse"}
+	iCreateSubscriberRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriberRequest"}
+	iCreateSubscriberNotificationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriberNotificationRequest"}
+	iCreateSubscriberNotificationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriberNotificationResponse"}
+	iCreateSubscriberResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "CreateSubscriberResponse"}
+	iDeleteAwsLogSourceRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteAwsLogSourceRequest"}
+	iDeleteAwsLogSourceResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteAwsLogSourceResponse"}
+	iDeleteCustomLogSourceRequest                     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteCustomLogSourceRequest"}
+	iDeleteCustomLogSourceResponse                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteCustomLogSourceResponse"}
+	iDeleteDataLakeExceptionSubscriptionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeExceptionSubscriptionRequest"}
+	iDeleteDataLakeExceptionSubscriptionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeExceptionSubscriptionResponse"}
+	iDeleteDataLakeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeRequest"}
+	iDeleteDataLakeOrganizationConfigurationRequest   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeOrganizationConfigurationRequest"}
+	iDeleteDataLakeOrganizationConfigurationResponse  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeOrganizationConfigurationResponse"}
+	iDeleteDataLakeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteDataLakeResponse"}
+	iDeleteSubscriberRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriberRequest"}
+	iDeleteSubscriberNotificationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriberNotificationRequest"}
+	iDeleteSubscriberNotificationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriberNotificationResponse"}
+	iDeleteSubscriberResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeleteSubscriberResponse"}
+	iDeregisterDataLakeDelegatedAdministratorRequest  = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeregisterDataLakeDelegatedAdministratorRequest"}
+	iDeregisterDataLakeDelegatedAdministratorResponse = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "DeregisterDataLakeDelegatedAdministratorResponse"}
+	iGetDataLakeExceptionSubscriptionRequest          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeExceptionSubscriptionRequest"}
+	iGetDataLakeExceptionSubscriptionResponse         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeExceptionSubscriptionResponse"}
+	iGetDataLakeOrganizationConfigurationRequest      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeOrganizationConfigurationRequest"}
+	iGetDataLakeOrganizationConfigurationResponse     = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeOrganizationConfigurationResponse"}
+	iGetDataLakeSourcesRequest                        = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeSourcesRequest"}
+	iGetDataLakeSourcesResponse                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetDataLakeSourcesResponse"}
+	iGetSubscriberRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetSubscriberRequest"}
+	iGetSubscriberResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "GetSubscriberResponse"}
+	iListDataLakeExceptionsRequest                    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakeExceptionsRequest"}
+	iListDataLakeExceptionsResponse                   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakeExceptionsResponse"}
+	iListDataLakesRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakesRequest"}
+	iListDataLakesResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListDataLakesResponse"}
+	iListLogSourcesRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListLogSourcesRequest"}
+	iListLogSourcesResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListLogSourcesResponse"}
+	iListSubscribersRequest                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListSubscribersRequest"}
+	iListSubscribersResponse                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListSubscribersResponse"}
+	iListTagsForResourceRequest                       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "ListTagsForResourceResponse"}
+	iRegisterDataLakeDelegatedAdministratorRequest    = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "RegisterDataLakeDelegatedAdministratorRequest"}
+	iRegisterDataLakeDelegatedAdministratorResponse   = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "RegisterDataLakeDelegatedAdministratorResponse"}
+	iTagResourceRequest                               = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagResourceRequest"}
+	iTagResourceResponse                              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "TagResourceResponse"}
+	iUntagResourceRequest                             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UntagResourceResponse"}
+	iUpdateDataLakeExceptionSubscriptionRequest       = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLakeExceptionSubscriptionRequest"}
+	iUpdateDataLakeExceptionSubscriptionResponse      = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLakeExceptionSubscriptionResponse"}
+	iUpdateDataLakeRequest                            = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLakeRequest"}
+	iUpdateDataLakeResponse                           = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateDataLakeResponse"}
+	iUpdateSubscriberRequest                          = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriberRequest"}
+	iUpdateSubscriberNotificationRequest              = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriberNotificationRequest"}
+	iUpdateSubscriberNotificationResponse             = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriberNotificationResponse"}
+	iUpdateSubscriberResponse                         = smithy.ShapeName{Namespace: "com.amazonaws.securitylake", Name: "UpdateSubscriberResponse"}
+	pString                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                        = smithy.ShapeName{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                          = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                             = smithy.ShapeName{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/logsources/aws",
-	Code: 200})
-
-var CreateCustomLogSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateCustomLogSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/logsources/custom",
-	Code: 200})
-
-var CreateDataLake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake",
-	Code: 200})
-
-var CreateDataLakeExceptionSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeExceptionSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/exceptions/subscription",
-	Code: 200})
-
-var CreateDataLakeOrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeOrganizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/organization/configuration",
-	Code: 200})
-
-var CreateSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/subscribers",
-	Code: 200})
-
-var CreateSubscriberNotification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriberNotification",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/subscribers/{subscriberId}/notification",
-	Code: 200})
-
-var DeleteAwsLogSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteAwsLogSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/logsources/aws/delete",
-	Code: 200})
-
-var DeleteCustomLogSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteCustomLogSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/datalake/logsources/custom/{sourceName}",
-	Code: 200})
-
-var DeleteDataLake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/delete",
-	Code: 200})
-
-var DeleteDataLakeExceptionSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeExceptionSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/datalake/exceptions/subscription",
-	Code: 200})
-
-var DeleteDataLakeOrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeOrganizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/organization/configuration/delete",
-	Code: 200})
-
-var DeleteSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/subscribers/{subscriberId}",
-	Code: 200})
-
-var DeleteSubscriberNotification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriberNotification",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/subscribers/{subscriberId}/notification",
-	Code: 200})
-
-var DeregisterDataLakeDelegatedAdministrator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeregisterDataLakeDelegatedAdministrator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/datalake/delegate",
-	Code: 200})
-
-var GetDataLakeExceptionSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeExceptionSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/datalake/exceptions/subscription",
-	Code: 200})
-
-var GetDataLakeOrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeOrganizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/datalake/organization/configuration",
-	Code: 200})
-
-var GetDataLakeSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/sources",
-	Code: 200})
-
-var GetSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetSubscriber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/subscribers/{subscriberId}",
-	Code: 200})
-
-var ListDataLakeExceptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakeExceptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/exceptions",
-	Code: 200})
-
-var ListDataLakes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/datalakes",
-	Code: 200})
-
-var ListLogSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListLogSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/logsources/list",
-	Code: 200})
-
-var ListSubscribers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListSubscribers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/subscribers",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterDataLakeDelegatedAdministrator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "RegisterDataLakeDelegatedAdministrator",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/datalake/delegate",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateDataLake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/datalake",
-	Code: 200})
-
-var UpdateDataLakeExceptionSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLakeExceptionSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/datalake/exceptions/subscription",
-	Code: 200})
-
-var UpdateSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/subscribers/{subscriberId}",
-	Code: 200})
-
-var UpdateSubscriberNotification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriberNotification",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/subscribers/{subscriberId}/notification",
-	Code: 200})
-
-var _SecurityLake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SecurityLake",
-}, smithy.ShapeTypeService, 0)
-
-var SecurityLake = smithy.NewServiceSchema(_SecurityLake, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_errorCode *smithy.Schema
-
-var AccessType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AccessType",
-}, smithy.ShapeTypeEnum, 2)
-var AccessType_LAKEFORMATION *smithy.Schema
-
-var AccessType_S3 *smithy.Schema
-
-var _AccessTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AccessTypeList",
-}, smithy.ShapeTypeList, 1)
-var _AccessTypeList_member *smithy.Schema
-
-var _AccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AccountList",
-}, smithy.ShapeTypeList, 1)
-var _AccountList_member *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AwsIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsIdentity",
-}, smithy.ShapeTypeStructure, 2)
-var AwsIdentity_principal *smithy.Schema
-
-var AwsIdentity_externalId *smithy.Schema
-
-var AwsLogSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var AwsLogSourceConfiguration_accounts *smithy.Schema
-
-var AwsLogSourceConfiguration_regions *smithy.Schema
-
-var AwsLogSourceConfiguration_sourceName *smithy.Schema
-
-var AwsLogSourceConfiguration_sourceVersion *smithy.Schema
-
-var _AwsLogSourceConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _AwsLogSourceConfigurationList_member *smithy.Schema
-
-var AwsLogSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceName",
-}, smithy.ShapeTypeEnum, 8)
-var AwsLogSourceName_ROUTE53 *smithy.Schema
-
-var AwsLogSourceName_VPC_FLOW *smithy.Schema
-
-var AwsLogSourceName_SH_FINDINGS *smithy.Schema
-
-var AwsLogSourceName_CLOUD_TRAIL_MGMT *smithy.Schema
-
-var AwsLogSourceName_LAMBDA_EXECUTION *smithy.Schema
-
-var AwsLogSourceName_S3_DATA *smithy.Schema
-
-var AwsLogSourceName_EKS_AUDIT *smithy.Schema
-
-var AwsLogSourceName_WAF *smithy.Schema
-
-var AwsLogSourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceResource",
-}, smithy.ShapeTypeStructure, 2)
-var AwsLogSourceResource_sourceName *smithy.Schema
-
-var AwsLogSourceResource_sourceVersion *smithy.Schema
-
-var _AwsLogSourceResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceResourceList",
-}, smithy.ShapeTypeList, 1)
-var _AwsLogSourceResourceList_member *smithy.Schema
-
-var _AwsLogSourceVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsLogSourceVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsPrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "AwsPrincipal",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceName *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CustomLogSourceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var CustomLogSourceAttributes_crawlerArn *smithy.Schema
-
-var CustomLogSourceAttributes_databaseArn *smithy.Schema
-
-var CustomLogSourceAttributes_tableArn *smithy.Schema
-
-var CustomLogSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CustomLogSourceConfiguration_crawlerConfiguration *smithy.Schema
-
-var CustomLogSourceConfiguration_providerIdentity *smithy.Schema
-
-var CustomLogSourceCrawlerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceCrawlerConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CustomLogSourceCrawlerConfiguration_roleArn *smithy.Schema
-
-var _CustomLogSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceName",
-}, smithy.ShapeTypeString, 0)
-
-var CustomLogSourceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceProvider",
-}, smithy.ShapeTypeStructure, 2)
-var CustomLogSourceProvider_roleArn *smithy.Schema
-
-var CustomLogSourceProvider_location *smithy.Schema
-
-var CustomLogSourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceResource",
-}, smithy.ShapeTypeStructure, 4)
-var CustomLogSourceResource_sourceName *smithy.Schema
-
-var CustomLogSourceResource_sourceVersion *smithy.Schema
-
-var CustomLogSourceResource_provider *smithy.Schema
-
-var CustomLogSourceResource_attributes *smithy.Schema
-
-var _CustomLogSourceVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CustomLogSourceVersion",
-}, smithy.ShapeTypeString, 0)
-
-var DataLakeAutoEnableNewAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeAutoEnableNewAccountConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeAutoEnableNewAccountConfiguration_region *smithy.Schema
-
-var DataLakeAutoEnableNewAccountConfiguration_sources *smithy.Schema
-
-var _DataLakeAutoEnableNewAccountConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeAutoEnableNewAccountConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeAutoEnableNewAccountConfigurationList_member *smithy.Schema
-
-var DataLakeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var DataLakeConfiguration_region *smithy.Schema
-
-var DataLakeConfiguration_encryptionConfiguration *smithy.Schema
-
-var DataLakeConfiguration_lifecycleConfiguration *smithy.Schema
-
-var DataLakeConfiguration_replicationConfiguration *smithy.Schema
-
-var _DataLakeConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeConfigurationList_member *smithy.Schema
-
-var DataLakeEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DataLakeEncryptionConfiguration_kmsKeyId *smithy.Schema
-
-var DataLakeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeException",
-}, smithy.ShapeTypeStructure, 4)
-var DataLakeException_region *smithy.Schema
-
-var DataLakeException_exception *smithy.Schema
-
-var DataLakeException_remediation *smithy.Schema
-
-var DataLakeException_timestamp *smithy.Schema
-
-var _DataLakeExceptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeExceptionList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeExceptionList_member *smithy.Schema
-
-var DataLakeLifecycleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeLifecycleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeLifecycleConfiguration_expiration *smithy.Schema
-
-var DataLakeLifecycleConfiguration_transitions *smithy.Schema
-
-var DataLakeLifecycleExpiration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeLifecycleExpiration",
-}, smithy.ShapeTypeStructure, 1)
-var DataLakeLifecycleExpiration_days *smithy.Schema
-
-var DataLakeLifecycleTransition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeLifecycleTransition",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeLifecycleTransition_storageClass *smithy.Schema
-
-var DataLakeLifecycleTransition_days *smithy.Schema
-
-var _DataLakeLifecycleTransitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeLifecycleTransitionList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeLifecycleTransitionList_member *smithy.Schema
-
-var DataLakeReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeReplicationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeReplicationConfiguration_regions *smithy.Schema
-
-var DataLakeReplicationConfiguration_roleArn *smithy.Schema
-
-var DataLakeResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeResource",
-}, smithy.ShapeTypeStructure, 8)
-var DataLakeResource_dataLakeArn *smithy.Schema
-
-var DataLakeResource_region *smithy.Schema
-
-var DataLakeResource_s3BucketArn *smithy.Schema
-
-var DataLakeResource_encryptionConfiguration *smithy.Schema
-
-var DataLakeResource_lifecycleConfiguration *smithy.Schema
-
-var DataLakeResource_replicationConfiguration *smithy.Schema
-
-var DataLakeResource_createStatus *smithy.Schema
-
-var DataLakeResource_updateStatus *smithy.Schema
-
-var _DataLakeResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeResourceList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeResourceList_member *smithy.Schema
-
-var DataLakeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeSource",
-}, smithy.ShapeTypeStructure, 4)
-var DataLakeSource_account *smithy.Schema
-
-var DataLakeSource_sourceName *smithy.Schema
-
-var DataLakeSource_eventClasses *smithy.Schema
-
-var DataLakeSource_sourceStatuses *smithy.Schema
-
-var _DataLakeSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeSourceList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeSourceList_member *smithy.Schema
-
-var DataLakeSourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeSourceStatus",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeSourceStatus_resource *smithy.Schema
-
-var DataLakeSourceStatus_status *smithy.Schema
-
-var _DataLakeSourceStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeSourceStatusList",
-}, smithy.ShapeTypeList, 1)
-var _DataLakeSourceStatusList_member *smithy.Schema
-
-var DataLakeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DataLakeStatus_INITIALIZED *smithy.Schema
-
-var DataLakeStatus_PENDING *smithy.Schema
-
-var DataLakeStatus_COMPLETED *smithy.Schema
-
-var DataLakeStatus_FAILED *smithy.Schema
-
-var _DataLakeStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeStorageClass",
-}, smithy.ShapeTypeString, 0)
-
-var DataLakeUpdateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeUpdateException",
-}, smithy.ShapeTypeStructure, 2)
-var DataLakeUpdateException_reason *smithy.Schema
-
-var DataLakeUpdateException_code *smithy.Schema
-
-var DataLakeUpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DataLakeUpdateStatus",
-}, smithy.ShapeTypeStructure, 3)
-var DataLakeUpdateStatus_requestId *smithy.Schema
-
-var DataLakeUpdateStatus_status *smithy.Schema
-
-var DataLakeUpdateStatus_exception *smithy.Schema
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeString, 0)
-
-var HttpMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "HttpMethod",
-}, smithy.ShapeTypeEnum, 2)
-var HttpMethod_POST *smithy.Schema
-
-var HttpMethod_PUT *smithy.Schema
-
-var HttpsNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "HttpsNotificationConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var HttpsNotificationConfiguration_endpoint *smithy.Schema
-
-var HttpsNotificationConfiguration_authorizationApiKeyName *smithy.Schema
-
-var HttpsNotificationConfiguration_authorizationApiKeyValue *smithy.Schema
-
-var HttpsNotificationConfiguration_httpMethod *smithy.Schema
-
-var HttpsNotificationConfiguration_targetRoleArn *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LogSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "LogSource",
-}, smithy.ShapeTypeStructure, 3)
-var LogSource_account *smithy.Schema
-
-var LogSource_region *smithy.Schema
-
-var LogSource_sources *smithy.Schema
-
-var _LogSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "LogSourceList",
-}, smithy.ShapeTypeList, 1)
-var _LogSourceList_member *smithy.Schema
-
-var LogSourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "LogSourceResource",
-}, smithy.ShapeTypeUnion, 2)
-var LogSourceResource_awsLogSource *smithy.Schema
-
-var LogSourceResource_customLogSource *smithy.Schema
-
-var _LogSourceResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "LogSourceResourceList",
-}, smithy.ShapeTypeList, 1)
-var _LogSourceResourceList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "NotificationConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var NotificationConfiguration_sqsNotificationConfiguration *smithy.Schema
-
-var NotificationConfiguration_httpsNotificationConfiguration *smithy.Schema
-
-var _OcsfEventClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "OcsfEventClass",
-}, smithy.ShapeTypeString, 0)
-
-var _OcsfEventClassList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "OcsfEventClassList",
-}, smithy.ShapeTypeList, 1)
-var _OcsfEventClassList_member *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceName *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceShareArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ResourceShareArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceShareName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ResourceShareName",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "S3BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3URI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "S3URI",
-}, smithy.ShapeTypeString, 0)
-
-var _SafeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SafeString",
-}, smithy.ShapeTypeString, 0)
-
-var SourceCollectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SourceCollectionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SourceCollectionStatus_COLLECTING *smithy.Schema
-
-var SourceCollectionStatus_MISCONFIGURED *smithy.Schema
-
-var SourceCollectionStatus_NOT_COLLECTING *smithy.Schema
-
-var SqsNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SqsNotificationConfiguration",
-}, smithy.ShapeTypeStructure, 0)
-
-var SubscriberResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SubscriberResource",
-}, smithy.ShapeTypeStructure, 15)
-var SubscriberResource_subscriberId *smithy.Schema
-
-var SubscriberResource_subscriberArn *smithy.Schema
-
-var SubscriberResource_subscriberIdentity *smithy.Schema
-
-var SubscriberResource_subscriberName *smithy.Schema
-
-var SubscriberResource_subscriberDescription *smithy.Schema
-
-var SubscriberResource_sources *smithy.Schema
-
-var SubscriberResource_accessTypes *smithy.Schema
-
-var SubscriberResource_roleArn *smithy.Schema
-
-var SubscriberResource_s3BucketArn *smithy.Schema
-
-var SubscriberResource_subscriberEndpoint *smithy.Schema
-
-var SubscriberResource_subscriberStatus *smithy.Schema
-
-var SubscriberResource_resourceShareArn *smithy.Schema
-
-var SubscriberResource_resourceShareName *smithy.Schema
-
-var SubscriberResource_createdAt *smithy.Schema
-
-var SubscriberResource_updatedAt *smithy.Schema
-
-var _SubscriberResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SubscriberResourceList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriberResourceList_member *smithy.Schema
-
-var SubscriberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SubscriberStatus",
-}, smithy.ShapeTypeEnum, 4)
-var SubscriberStatus_ACTIVE *smithy.Schema
-
-var SubscriberStatus_DEACTIVATED *smithy.Schema
-
-var SubscriberStatus_PENDING *smithy.Schema
-
-var SubscriberStatus_READY *smithy.Schema
-
-var _SubscriptionProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "SubscriptionProtocol",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var CreateAwsLogSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateAwsLogSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAwsLogSourceRequest_sources *smithy.Schema
-
-var CreateAwsLogSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateAwsLogSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAwsLogSourceResponse_failed *smithy.Schema
-
-var CreateCustomLogSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateCustomLogSourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCustomLogSourceRequest_sourceName *smithy.Schema
-
-var CreateCustomLogSourceRequest_sourceVersion *smithy.Schema
-
-var CreateCustomLogSourceRequest_eventClasses *smithy.Schema
-
-var CreateCustomLogSourceRequest_configuration *smithy.Schema
-
-var CreateCustomLogSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateCustomLogSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCustomLogSourceResponse_source *smithy.Schema
-
-var CreateDataLakeExceptionSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeExceptionSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol *smithy.Schema
-
-var CreateDataLakeExceptionSubscriptionRequest_notificationEndpoint *smithy.Schema
-
-var CreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive *smithy.Schema
-
-var CreateDataLakeExceptionSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeExceptionSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDataLakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDataLakeRequest_configurations *smithy.Schema
-
-var CreateDataLakeRequest_metaStoreManagerRoleArn *smithy.Schema
-
-var CreateDataLakeRequest_tags *smithy.Schema
-
-var CreateDataLakeOrganizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeOrganizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount *smithy.Schema
-
-var CreateDataLakeOrganizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeOrganizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDataLakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateDataLakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataLakeResponse_dataLakes *smithy.Schema
-
-var CreateSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriberRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSubscriberRequest_subscriberIdentity *smithy.Schema
-
-var CreateSubscriberRequest_subscriberName *smithy.Schema
-
-var CreateSubscriberRequest_subscriberDescription *smithy.Schema
-
-var CreateSubscriberRequest_sources *smithy.Schema
-
-var CreateSubscriberRequest_accessTypes *smithy.Schema
-
-var CreateSubscriberRequest_tags *smithy.Schema
-
-var CreateSubscriberNotificationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriberNotificationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSubscriberNotificationRequest_subscriberId *smithy.Schema
-
-var CreateSubscriberNotificationRequest_configuration *smithy.Schema
-
-var CreateSubscriberNotificationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriberNotificationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSubscriberNotificationResponse_subscriberEndpoint *smithy.Schema
-
-var CreateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "CreateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSubscriberResponse_subscriber *smithy.Schema
-
-var DeleteAwsLogSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteAwsLogSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAwsLogSourceRequest_sources *smithy.Schema
-
-var DeleteAwsLogSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteAwsLogSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAwsLogSourceResponse_failed *smithy.Schema
-
-var DeleteCustomLogSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteCustomLogSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCustomLogSourceRequest_sourceName *smithy.Schema
-
-var DeleteCustomLogSourceRequest_sourceVersion *smithy.Schema
-
-var DeleteCustomLogSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteCustomLogSourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataLakeExceptionSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeExceptionSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataLakeExceptionSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeExceptionSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataLakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataLakeRequest_regions *smithy.Schema
-
-var DeleteDataLakeOrganizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeOrganizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount *smithy.Schema
-
-var DeleteDataLakeOrganizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeOrganizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataLakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteDataLakeResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSubscriberRequest_subscriberId *smithy.Schema
-
-var DeleteSubscriberNotificationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriberNotificationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSubscriberNotificationRequest_subscriberId *smithy.Schema
-
-var DeleteSubscriberNotificationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriberNotificationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeleteSubscriberResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterDataLakeDelegatedAdministratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeregisterDataLakeDelegatedAdministratorRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterDataLakeDelegatedAdministratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "DeregisterDataLakeDelegatedAdministratorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDataLakeExceptionSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeExceptionSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDataLakeExceptionSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeExceptionSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol *smithy.Schema
-
-var GetDataLakeExceptionSubscriptionResponse_notificationEndpoint *smithy.Schema
-
-var GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive *smithy.Schema
-
-var GetDataLakeOrganizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeOrganizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDataLakeOrganizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeOrganizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount *smithy.Schema
-
-var GetDataLakeSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDataLakeSourcesRequest_accounts *smithy.Schema
-
-var GetDataLakeSourcesRequest_maxResults *smithy.Schema
-
-var GetDataLakeSourcesRequest_nextToken *smithy.Schema
-
-var GetDataLakeSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetDataLakeSourcesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetDataLakeSourcesResponse_dataLakeArn *smithy.Schema
-
-var GetDataLakeSourcesResponse_dataLakeSources *smithy.Schema
-
-var GetDataLakeSourcesResponse_nextToken *smithy.Schema
-
-var GetSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetSubscriberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriberRequest_subscriberId *smithy.Schema
-
-var GetSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "GetSubscriberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriberResponse_subscriber *smithy.Schema
-
-var ListDataLakeExceptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakeExceptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDataLakeExceptionsRequest_regions *smithy.Schema
-
-var ListDataLakeExceptionsRequest_maxResults *smithy.Schema
-
-var ListDataLakeExceptionsRequest_nextToken *smithy.Schema
-
-var ListDataLakeExceptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakeExceptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataLakeExceptionsResponse_exceptions *smithy.Schema
-
-var ListDataLakeExceptionsResponse_nextToken *smithy.Schema
-
-var ListDataLakesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListDataLakesRequest_regions *smithy.Schema
-
-var ListDataLakesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListDataLakesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListDataLakesResponse_dataLakes *smithy.Schema
-
-var ListLogSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListLogSourcesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListLogSourcesRequest_accounts *smithy.Schema
-
-var ListLogSourcesRequest_regions *smithy.Schema
-
-var ListLogSourcesRequest_sources *smithy.Schema
-
-var ListLogSourcesRequest_maxResults *smithy.Schema
-
-var ListLogSourcesRequest_nextToken *smithy.Schema
-
-var ListLogSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListLogSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLogSourcesResponse_sources *smithy.Schema
-
-var ListLogSourcesResponse_nextToken *smithy.Schema
-
-var ListSubscribersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListSubscribersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscribersRequest_nextToken *smithy.Schema
-
-var ListSubscribersRequest_maxResults *smithy.Schema
-
-var ListSubscribersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListSubscribersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscribersResponse_subscribers *smithy.Schema
-
-var ListSubscribersResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterDataLakeDelegatedAdministratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "RegisterDataLakeDelegatedAdministratorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterDataLakeDelegatedAdministratorRequest_accountId *smithy.Schema
-
-var RegisterDataLakeDelegatedAdministratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "RegisterDataLakeDelegatedAdministratorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataLakeExceptionSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLakeExceptionSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol *smithy.Schema
-
-var UpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint *smithy.Schema
-
-var UpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive *smithy.Schema
-
-var UpdateDataLakeExceptionSubscriptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLakeExceptionSubscriptionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataLakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLakeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDataLakeRequest_configurations *smithy.Schema
-
-var UpdateDataLakeRequest_metaStoreManagerRoleArn *smithy.Schema
-
-var UpdateDataLakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateDataLakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataLakeResponse_dataLakes *smithy.Schema
-
-var UpdateSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriberRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSubscriberRequest_subscriberId *smithy.Schema
-
-var UpdateSubscriberRequest_subscriberIdentity *smithy.Schema
-
-var UpdateSubscriberRequest_subscriberName *smithy.Schema
-
-var UpdateSubscriberRequest_subscriberDescription *smithy.Schema
-
-var UpdateSubscriberRequest_sources *smithy.Schema
-
-var UpdateSubscriberNotificationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriberNotificationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSubscriberNotificationRequest_subscriberId *smithy.Schema
-
-var UpdateSubscriberNotificationRequest_configuration *smithy.Schema
-
-var UpdateSubscriberNotificationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriberNotificationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSubscriberNotificationResponse_subscriberEndpoint *smithy.Schema
-
-var UpdateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.securitylake",
-	Name:      "UpdateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSubscriberResponse_subscriber *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccessDeniedException_errorCode = AccessDeniedException.AddMember("errorCode", smithyprelude.String)
-
-	AccessType_LAKEFORMATION = AccessType.AddMember("LAKEFORMATION", smithyprelude.Unit)
-
-	AccessType_S3 = AccessType.AddMember("S3", smithyprelude.Unit)
-
-	_AccessTypeList_member = _AccessTypeList.AddMember("member", AccessType)
-
-	_AccountList_member = _AccountList.AddMember("member", _AwsAccountId)
-
-	AwsIdentity_principal = AwsIdentity.AddMember("principal", _AwsPrincipal)
-
-	AwsIdentity_externalId = AwsIdentity.AddMember("externalId", _ExternalId)
-
-	_RegionList_member = _RegionList.AddMember("member", _Region)
-
-	AwsLogSourceName_ROUTE53 = AwsLogSourceName.AddMember("ROUTE53", smithyprelude.Unit)
-
-	AwsLogSourceName_VPC_FLOW = AwsLogSourceName.AddMember("VPC_FLOW", smithyprelude.Unit)
-
-	AwsLogSourceName_SH_FINDINGS = AwsLogSourceName.AddMember("SH_FINDINGS", smithyprelude.Unit)
-
-	AwsLogSourceName_CLOUD_TRAIL_MGMT = AwsLogSourceName.AddMember("CLOUD_TRAIL_MGMT", smithyprelude.Unit)
-
-	AwsLogSourceName_LAMBDA_EXECUTION = AwsLogSourceName.AddMember("LAMBDA_EXECUTION", smithyprelude.Unit)
-
-	AwsLogSourceName_S3_DATA = AwsLogSourceName.AddMember("S3_DATA", smithyprelude.Unit)
-
-	AwsLogSourceName_EKS_AUDIT = AwsLogSourceName.AddMember("EKS_AUDIT", smithyprelude.Unit)
-
-	AwsLogSourceName_WAF = AwsLogSourceName.AddMember("WAF", smithyprelude.Unit)
-
-	AwsLogSourceConfiguration_accounts = AwsLogSourceConfiguration.AddMember("accounts", _AccountList)
-
-	AwsLogSourceConfiguration_regions = AwsLogSourceConfiguration.AddMember("regions", _RegionList)
-
-	AwsLogSourceConfiguration_sourceName = AwsLogSourceConfiguration.AddMember("sourceName", AwsLogSourceName)
-
-	AwsLogSourceConfiguration_sourceVersion = AwsLogSourceConfiguration.AddMember("sourceVersion", _AwsLogSourceVersion)
-
-	_AwsLogSourceConfigurationList_member = _AwsLogSourceConfigurationList.AddMember("member", AwsLogSourceConfiguration)
-
-	AwsLogSourceResource_sourceName = AwsLogSourceResource.AddMember("sourceName", AwsLogSourceName)
-
-	AwsLogSourceResource_sourceVersion = AwsLogSourceResource.AddMember("sourceVersion", _AwsLogSourceVersion)
-
-	_AwsLogSourceResourceList_member = _AwsLogSourceResourceList.AddMember("member", AwsLogSourceResource)
-
-	BadRequestException_message = BadRequestException.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceName = ConflictException.AddMember("resourceName", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	CustomLogSourceAttributes_crawlerArn = CustomLogSourceAttributes.AddMember("crawlerArn", _AmazonResourceName)
-
-	CustomLogSourceAttributes_databaseArn = CustomLogSourceAttributes.AddMember("databaseArn", _AmazonResourceName)
-
-	CustomLogSourceAttributes_tableArn = CustomLogSourceAttributes.AddMember("tableArn", _AmazonResourceName)
-
-	CustomLogSourceCrawlerConfiguration_roleArn = CustomLogSourceCrawlerConfiguration.AddMember("roleArn", _RoleArn)
-
-	CustomLogSourceConfiguration_crawlerConfiguration = CustomLogSourceConfiguration.AddMember("crawlerConfiguration", CustomLogSourceCrawlerConfiguration)
-
-	CustomLogSourceConfiguration_providerIdentity = CustomLogSourceConfiguration.AddMember("providerIdentity", AwsIdentity)
-
-	CustomLogSourceProvider_roleArn = CustomLogSourceProvider.AddMember("roleArn", _RoleArn)
-
-	CustomLogSourceProvider_location = CustomLogSourceProvider.AddMember("location", _S3URI)
-
-	CustomLogSourceResource_sourceName = CustomLogSourceResource.AddMember("sourceName", _CustomLogSourceName)
-
-	CustomLogSourceResource_sourceVersion = CustomLogSourceResource.AddMember("sourceVersion", _CustomLogSourceVersion)
-
-	CustomLogSourceResource_provider = CustomLogSourceResource.AddMember("provider", CustomLogSourceProvider)
-
-	CustomLogSourceResource_attributes = CustomLogSourceResource.AddMember("attributes", CustomLogSourceAttributes)
-
-	DataLakeAutoEnableNewAccountConfiguration_region = DataLakeAutoEnableNewAccountConfiguration.AddMember("region", _Region)
-
-	DataLakeAutoEnableNewAccountConfiguration_sources = DataLakeAutoEnableNewAccountConfiguration.AddMember("sources", _AwsLogSourceResourceList)
-
-	_DataLakeAutoEnableNewAccountConfigurationList_member = _DataLakeAutoEnableNewAccountConfigurationList.AddMember("member", DataLakeAutoEnableNewAccountConfiguration)
-
-	DataLakeEncryptionConfiguration_kmsKeyId = DataLakeEncryptionConfiguration.AddMember("kmsKeyId", smithyprelude.String)
-
-	DataLakeLifecycleExpiration_days = DataLakeLifecycleExpiration.AddMember("days", smithyprelude.Integer)
-
-	DataLakeLifecycleTransition_storageClass = DataLakeLifecycleTransition.AddMember("storageClass", _DataLakeStorageClass)
-
-	DataLakeLifecycleTransition_days = DataLakeLifecycleTransition.AddMember("days", smithyprelude.Integer)
-
-	_DataLakeLifecycleTransitionList_member = _DataLakeLifecycleTransitionList.AddMember("member", DataLakeLifecycleTransition)
-
-	DataLakeLifecycleConfiguration_expiration = DataLakeLifecycleConfiguration.AddMember("expiration", DataLakeLifecycleExpiration)
-
-	DataLakeLifecycleConfiguration_transitions = DataLakeLifecycleConfiguration.AddMember("transitions", _DataLakeLifecycleTransitionList)
-
-	DataLakeReplicationConfiguration_regions = DataLakeReplicationConfiguration.AddMember("regions", _RegionList)
-
-	DataLakeReplicationConfiguration_roleArn = DataLakeReplicationConfiguration.AddMember("roleArn", _RoleArn)
-
-	DataLakeConfiguration_region = DataLakeConfiguration.AddMember("region", _Region)
-
-	DataLakeConfiguration_encryptionConfiguration = DataLakeConfiguration.AddMember("encryptionConfiguration", DataLakeEncryptionConfiguration)
-
-	DataLakeConfiguration_lifecycleConfiguration = DataLakeConfiguration.AddMember("lifecycleConfiguration", DataLakeLifecycleConfiguration)
-
-	DataLakeConfiguration_replicationConfiguration = DataLakeConfiguration.AddMember("replicationConfiguration", DataLakeReplicationConfiguration)
-
-	_DataLakeConfigurationList_member = _DataLakeConfigurationList.AddMember("member", DataLakeConfiguration)
-
-	DataLakeException_region = DataLakeException.AddMember("region", _Region)
-
-	DataLakeException_exception = DataLakeException.AddMember("exception", _SafeString)
-
-	DataLakeException_remediation = DataLakeException.AddMember("remediation", _SafeString)
-
-	DataLakeException_timestamp = DataLakeException.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_DataLakeExceptionList_member = _DataLakeExceptionList.AddMember("member", DataLakeException)
-
-	DataLakeStatus_INITIALIZED = DataLakeStatus.AddMember("INITIALIZED", smithyprelude.Unit)
-
-	DataLakeStatus_PENDING = DataLakeStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DataLakeStatus_COMPLETED = DataLakeStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DataLakeStatus_FAILED = DataLakeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DataLakeUpdateException_reason = DataLakeUpdateException.AddMember("reason", smithyprelude.String)
-
-	DataLakeUpdateException_code = DataLakeUpdateException.AddMember("code", smithyprelude.String)
-
-	DataLakeUpdateStatus_requestId = DataLakeUpdateStatus.AddMember("requestId", smithyprelude.String)
-
-	DataLakeUpdateStatus_status = DataLakeUpdateStatus.AddMember("status", DataLakeStatus)
-
-	DataLakeUpdateStatus_exception = DataLakeUpdateStatus.AddMember("exception", DataLakeUpdateException)
-
-	DataLakeResource_dataLakeArn = DataLakeResource.AddMember("dataLakeArn", _AmazonResourceName)
-
-	DataLakeResource_region = DataLakeResource.AddMember("region", _Region)
-
-	DataLakeResource_s3BucketArn = DataLakeResource.AddMember("s3BucketArn", _S3BucketArn)
-
-	DataLakeResource_encryptionConfiguration = DataLakeResource.AddMember("encryptionConfiguration", DataLakeEncryptionConfiguration)
-
-	DataLakeResource_lifecycleConfiguration = DataLakeResource.AddMember("lifecycleConfiguration", DataLakeLifecycleConfiguration)
-
-	DataLakeResource_replicationConfiguration = DataLakeResource.AddMember("replicationConfiguration", DataLakeReplicationConfiguration)
-
-	DataLakeResource_createStatus = DataLakeResource.AddMember("createStatus", DataLakeStatus)
-
-	DataLakeResource_updateStatus = DataLakeResource.AddMember("updateStatus", DataLakeUpdateStatus)
-
-	_DataLakeResourceList_member = _DataLakeResourceList.AddMember("member", DataLakeResource)
-
-	_OcsfEventClassList_member = _OcsfEventClassList.AddMember("member", _OcsfEventClass)
-
-	SourceCollectionStatus_COLLECTING = SourceCollectionStatus.AddMember("COLLECTING", smithyprelude.Unit)
-
-	SourceCollectionStatus_MISCONFIGURED = SourceCollectionStatus.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	SourceCollectionStatus_NOT_COLLECTING = SourceCollectionStatus.AddMember("NOT_COLLECTING", smithyprelude.Unit)
-
-	DataLakeSourceStatus_resource = DataLakeSourceStatus.AddMember("resource", smithyprelude.String)
-
-	DataLakeSourceStatus_status = DataLakeSourceStatus.AddMember("status", SourceCollectionStatus)
-
-	_DataLakeSourceStatusList_member = _DataLakeSourceStatusList.AddMember("member", DataLakeSourceStatus)
-
-	DataLakeSource_account = DataLakeSource.AddMember("account", smithyprelude.String)
-
-	DataLakeSource_sourceName = DataLakeSource.AddMember("sourceName", smithyprelude.String)
-
-	DataLakeSource_eventClasses = DataLakeSource.AddMember("eventClasses", _OcsfEventClassList)
-
-	DataLakeSource_sourceStatuses = DataLakeSource.AddMember("sourceStatuses", _DataLakeSourceStatusList)
-
-	_DataLakeSourceList_member = _DataLakeSourceList.AddMember("member", DataLakeSource)
-
-	HttpMethod_POST = HttpMethod.AddMember("POST", smithyprelude.Unit)
-
-	HttpMethod_PUT = HttpMethod.AddMember("PUT", smithyprelude.Unit)
-
-	HttpsNotificationConfiguration_endpoint = HttpsNotificationConfiguration.AddMember("endpoint", smithyprelude.String)
-
-	HttpsNotificationConfiguration_authorizationApiKeyName = HttpsNotificationConfiguration.AddMember("authorizationApiKeyName", smithyprelude.String)
-
-	HttpsNotificationConfiguration_authorizationApiKeyValue = HttpsNotificationConfiguration.AddMember("authorizationApiKeyValue", smithyprelude.String)
-
-	HttpsNotificationConfiguration_httpMethod = HttpsNotificationConfiguration.AddMember("httpMethod", HttpMethod)
-
-	HttpsNotificationConfiguration_targetRoleArn = HttpsNotificationConfiguration.AddMember("targetRoleArn", _RoleArn)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	LogSourceResource_awsLogSource = LogSourceResource.AddMember("awsLogSource", AwsLogSourceResource)
-
-	LogSourceResource_customLogSource = LogSourceResource.AddMember("customLogSource", CustomLogSourceResource)
-
-	_LogSourceResourceList_member = _LogSourceResourceList.AddMember("member", LogSourceResource)
-
-	LogSource_account = LogSource.AddMember("account", _AwsAccountId)
-
-	LogSource_region = LogSource.AddMember("region", _Region)
-
-	LogSource_sources = LogSource.AddMember("sources", _LogSourceResourceList)
-
-	_LogSourceList_member = _LogSourceList.AddMember("member", LogSource)
-
-	NotificationConfiguration_sqsNotificationConfiguration = NotificationConfiguration.AddMember("sqsNotificationConfiguration", SqsNotificationConfiguration)
-
-	NotificationConfiguration_httpsNotificationConfiguration = NotificationConfiguration.AddMember("httpsNotificationConfiguration", HttpsNotificationConfiguration)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceName = ResourceNotFoundException.AddMember("resourceName", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	SubscriberStatus_ACTIVE = SubscriberStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SubscriberStatus_DEACTIVATED = SubscriberStatus.AddMember("DEACTIVATED", smithyprelude.Unit)
-
-	SubscriberStatus_PENDING = SubscriberStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	SubscriberStatus_READY = SubscriberStatus.AddMember("READY", smithyprelude.Unit)
-
-	SubscriberResource_subscriberId = SubscriberResource.AddMember("subscriberId", _UUID)
-
-	SubscriberResource_subscriberArn = SubscriberResource.AddMember("subscriberArn", _AmazonResourceName)
-
-	SubscriberResource_subscriberIdentity = SubscriberResource.AddMember("subscriberIdentity", AwsIdentity)
-
-	SubscriberResource_subscriberName = SubscriberResource.AddMember("subscriberName", _SafeString)
-
-	SubscriberResource_subscriberDescription = SubscriberResource.AddMember("subscriberDescription", _SafeString)
-
-	SubscriberResource_sources = SubscriberResource.AddMember("sources", _LogSourceResourceList)
-
-	SubscriberResource_accessTypes = SubscriberResource.AddMember("accessTypes", _AccessTypeList)
-
-	SubscriberResource_roleArn = SubscriberResource.AddMember("roleArn", _RoleArn)
-
-	SubscriberResource_s3BucketArn = SubscriberResource.AddMember("s3BucketArn", _S3BucketArn)
-
-	SubscriberResource_subscriberEndpoint = SubscriberResource.AddMember("subscriberEndpoint", _SafeString)
-
-	SubscriberResource_subscriberStatus = SubscriberResource.AddMember("subscriberStatus", SubscriberStatus)
-
-	SubscriberResource_resourceShareArn = SubscriberResource.AddMember("resourceShareArn", _ResourceShareArn)
-
-	SubscriberResource_resourceShareName = SubscriberResource.AddMember("resourceShareName", _ResourceShareName)
-
-	SubscriberResource_createdAt = SubscriberResource.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubscriberResource_updatedAt = SubscriberResource.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_SubscriberResourceList_member = _SubscriberResourceList.AddMember("member", SubscriberResource)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	CreateAwsLogSourceRequest_sources = CreateAwsLogSourceRequest.AddMember("sources", _AwsLogSourceConfigurationList)
-
-	CreateAwsLogSourceResponse_failed = CreateAwsLogSourceResponse.AddMember("failed", _AccountList)
-
-	CreateCustomLogSourceRequest_sourceName = CreateCustomLogSourceRequest.AddMember("sourceName", _CustomLogSourceName)
-
-	CreateCustomLogSourceRequest_sourceVersion = CreateCustomLogSourceRequest.AddMember("sourceVersion", _CustomLogSourceVersion)
-
-	CreateCustomLogSourceRequest_eventClasses = CreateCustomLogSourceRequest.AddMember("eventClasses", _OcsfEventClassList)
-
-	CreateCustomLogSourceRequest_configuration = CreateCustomLogSourceRequest.AddMember("configuration", CustomLogSourceConfiguration)
-
-	CreateCustomLogSourceResponse_source = CreateCustomLogSourceResponse.AddMember("source", CustomLogSourceResource)
-
-	CreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = CreateDataLakeExceptionSubscriptionRequest.AddMember("subscriptionProtocol", _SubscriptionProtocol)
-
-	CreateDataLakeExceptionSubscriptionRequest_notificationEndpoint = CreateDataLakeExceptionSubscriptionRequest.AddMember("notificationEndpoint", _SafeString)
-
-	CreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = CreateDataLakeExceptionSubscriptionRequest.AddMember("exceptionTimeToLive", smithyprelude.Long)
-
-	CreateDataLakeRequest_configurations = CreateDataLakeRequest.AddMember("configurations", _DataLakeConfigurationList)
-
-	CreateDataLakeRequest_metaStoreManagerRoleArn = CreateDataLakeRequest.AddMember("metaStoreManagerRoleArn", _RoleArn)
-
-	CreateDataLakeRequest_tags = CreateDataLakeRequest.AddMember("tags", _TagList)
-
-	CreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = CreateDataLakeOrganizationConfigurationRequest.AddMember("autoEnableNewAccount", _DataLakeAutoEnableNewAccountConfigurationList)
-
-	CreateDataLakeResponse_dataLakes = CreateDataLakeResponse.AddMember("dataLakes", _DataLakeResourceList)
-
-	CreateSubscriberRequest_subscriberIdentity = CreateSubscriberRequest.AddMember("subscriberIdentity", AwsIdentity)
-
-	CreateSubscriberRequest_subscriberName = CreateSubscriberRequest.AddMember("subscriberName", smithyprelude.String)
-
-	CreateSubscriberRequest_subscriberDescription = CreateSubscriberRequest.AddMember("subscriberDescription", _DescriptionString)
-
-	CreateSubscriberRequest_sources = CreateSubscriberRequest.AddMember("sources", _LogSourceResourceList)
-
-	CreateSubscriberRequest_accessTypes = CreateSubscriberRequest.AddMember("accessTypes", _AccessTypeList)
-
-	CreateSubscriberRequest_tags = CreateSubscriberRequest.AddMember("tags", _TagList)
-
-	CreateSubscriberNotificationRequest_subscriberId = CreateSubscriberNotificationRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	CreateSubscriberNotificationRequest_configuration = CreateSubscriberNotificationRequest.AddMember("configuration", NotificationConfiguration)
-
-	CreateSubscriberNotificationResponse_subscriberEndpoint = CreateSubscriberNotificationResponse.AddMember("subscriberEndpoint", _SafeString)
-
-	CreateSubscriberResponse_subscriber = CreateSubscriberResponse.AddMember("subscriber", SubscriberResource)
-
-	DeleteAwsLogSourceRequest_sources = DeleteAwsLogSourceRequest.AddMember("sources", _AwsLogSourceConfigurationList)
-
-	DeleteAwsLogSourceResponse_failed = DeleteAwsLogSourceResponse.AddMember("failed", _AccountList)
-
-	DeleteCustomLogSourceRequest_sourceName = DeleteCustomLogSourceRequest.AddMember("sourceName", _CustomLogSourceName, &smithytraits.HTTPLabel{})
-
-	DeleteCustomLogSourceRequest_sourceVersion = DeleteCustomLogSourceRequest.AddMember("sourceVersion", _CustomLogSourceVersion, &smithytraits.HTTPQuery{Name: "sourceVersion"})
-
-	DeleteDataLakeRequest_regions = DeleteDataLakeRequest.AddMember("regions", _RegionList)
-
-	DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = DeleteDataLakeOrganizationConfigurationRequest.AddMember("autoEnableNewAccount", _DataLakeAutoEnableNewAccountConfigurationList)
-
-	DeleteSubscriberRequest_subscriberId = DeleteSubscriberRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteSubscriberNotificationRequest_subscriberId = DeleteSubscriberNotificationRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol = GetDataLakeExceptionSubscriptionResponse.AddMember("subscriptionProtocol", _SubscriptionProtocol)
-
-	GetDataLakeExceptionSubscriptionResponse_notificationEndpoint = GetDataLakeExceptionSubscriptionResponse.AddMember("notificationEndpoint", _SafeString)
-
-	GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive = GetDataLakeExceptionSubscriptionResponse.AddMember("exceptionTimeToLive", smithyprelude.Long)
-
-	GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount = GetDataLakeOrganizationConfigurationResponse.AddMember("autoEnableNewAccount", _DataLakeAutoEnableNewAccountConfigurationList)
-
-	GetDataLakeSourcesRequest_accounts = GetDataLakeSourcesRequest.AddMember("accounts", _AccountList)
-
-	GetDataLakeSourcesRequest_maxResults = GetDataLakeSourcesRequest.AddMember("maxResults", _MaxResults)
-
-	GetDataLakeSourcesRequest_nextToken = GetDataLakeSourcesRequest.AddMember("nextToken", _NextToken)
-
-	GetDataLakeSourcesResponse_dataLakeArn = GetDataLakeSourcesResponse.AddMember("dataLakeArn", _AmazonResourceName)
-
-	GetDataLakeSourcesResponse_dataLakeSources = GetDataLakeSourcesResponse.AddMember("dataLakeSources", _DataLakeSourceList)
-
-	GetDataLakeSourcesResponse_nextToken = GetDataLakeSourcesResponse.AddMember("nextToken", _NextToken)
-
-	GetSubscriberRequest_subscriberId = GetSubscriberRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	GetSubscriberResponse_subscriber = GetSubscriberResponse.AddMember("subscriber", SubscriberResource)
-
-	ListDataLakeExceptionsRequest_regions = ListDataLakeExceptionsRequest.AddMember("regions", _RegionList)
-
-	ListDataLakeExceptionsRequest_maxResults = ListDataLakeExceptionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListDataLakeExceptionsRequest_nextToken = ListDataLakeExceptionsRequest.AddMember("nextToken", _NextToken)
-
-	ListDataLakeExceptionsResponse_exceptions = ListDataLakeExceptionsResponse.AddMember("exceptions", _DataLakeExceptionList)
-
-	ListDataLakeExceptionsResponse_nextToken = ListDataLakeExceptionsResponse.AddMember("nextToken", _NextToken)
-
-	ListDataLakesRequest_regions = ListDataLakesRequest.AddMember("regions", _RegionList, &smithytraits.HTTPQuery{Name: "regions"})
-
-	ListDataLakesResponse_dataLakes = ListDataLakesResponse.AddMember("dataLakes", _DataLakeResourceList)
-
-	ListLogSourcesRequest_accounts = ListLogSourcesRequest.AddMember("accounts", _AccountList)
-
-	ListLogSourcesRequest_regions = ListLogSourcesRequest.AddMember("regions", _RegionList)
-
-	ListLogSourcesRequest_sources = ListLogSourcesRequest.AddMember("sources", _LogSourceResourceList)
-
-	ListLogSourcesRequest_maxResults = ListLogSourcesRequest.AddMember("maxResults", _MaxResults)
-
-	ListLogSourcesRequest_nextToken = ListLogSourcesRequest.AddMember("nextToken", _NextToken)
-
-	ListLogSourcesResponse_sources = ListLogSourcesResponse.AddMember("sources", _LogSourceList)
-
-	ListLogSourcesResponse_nextToken = ListLogSourcesResponse.AddMember("nextToken", _NextToken)
-
-	ListSubscribersRequest_nextToken = ListSubscribersRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSubscribersRequest_maxResults = ListSubscribersRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSubscribersResponse_subscribers = ListSubscribersResponse.AddMember("subscribers", _SubscriberResourceList)
-
-	ListSubscribersResponse_nextToken = ListSubscribersResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	RegisterDataLakeDelegatedAdministratorRequest_accountId = RegisterDataLakeDelegatedAdministratorRequest.AddMember("accountId", _SafeString)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = UpdateDataLakeExceptionSubscriptionRequest.AddMember("subscriptionProtocol", _SubscriptionProtocol)
-
-	UpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint = UpdateDataLakeExceptionSubscriptionRequest.AddMember("notificationEndpoint", _SafeString)
-
-	UpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = UpdateDataLakeExceptionSubscriptionRequest.AddMember("exceptionTimeToLive", smithyprelude.Long)
-
-	UpdateDataLakeRequest_configurations = UpdateDataLakeRequest.AddMember("configurations", _DataLakeConfigurationList)
-
-	UpdateDataLakeRequest_metaStoreManagerRoleArn = UpdateDataLakeRequest.AddMember("metaStoreManagerRoleArn", _RoleArn)
-
-	UpdateDataLakeResponse_dataLakes = UpdateDataLakeResponse.AddMember("dataLakes", _DataLakeResourceList)
-
-	UpdateSubscriberRequest_subscriberId = UpdateSubscriberRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateSubscriberRequest_subscriberIdentity = UpdateSubscriberRequest.AddMember("subscriberIdentity", AwsIdentity)
-
-	UpdateSubscriberRequest_subscriberName = UpdateSubscriberRequest.AddMember("subscriberName", _SafeString)
-
-	UpdateSubscriberRequest_subscriberDescription = UpdateSubscriberRequest.AddMember("subscriberDescription", _DescriptionString)
-
-	UpdateSubscriberRequest_sources = UpdateSubscriberRequest.AddMember("sources", _LogSourceResourceList)
-
-	UpdateSubscriberNotificationRequest_subscriberId = UpdateSubscriberNotificationRequest.AddMember("subscriberId", _UUID, &smithytraits.HTTPLabel{})
-
-	UpdateSubscriberNotificationRequest_configuration = UpdateSubscriberNotificationRequest.AddMember("configuration", NotificationConfiguration)
-
-	UpdateSubscriberNotificationResponse_subscriberEndpoint = UpdateSubscriberNotificationResponse.AddMember("subscriberEndpoint", _SafeString)
-
-	UpdateSubscriberResponse_subscriber = UpdateSubscriberResponse.AddMember("subscriber", SubscriberResource)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sourceVersion"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "regions"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message, &sAccessDeniedException_errorCode}}
+var mAccessType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessType_LAKEFORMATION, &sAccessType_S3}}
+var m_AccessTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessTypeList_member}}
+var m_AccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountList_member}}
+var mAwsIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsIdentity_principal, &sAwsIdentity_externalId}}
+var mAwsLogSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsLogSourceConfiguration_accounts, &sAwsLogSourceConfiguration_regions, &sAwsLogSourceConfiguration_sourceName, &sAwsLogSourceConfiguration_sourceVersion}}
+var m_AwsLogSourceConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsLogSourceConfigurationList_member}}
+var mAwsLogSourceName = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsLogSourceName_ROUTE53, &sAwsLogSourceName_VPC_FLOW, &sAwsLogSourceName_SH_FINDINGS, &sAwsLogSourceName_CLOUD_TRAIL_MGMT, &sAwsLogSourceName_LAMBDA_EXECUTION, &sAwsLogSourceName_S3_DATA, &sAwsLogSourceName_EKS_AUDIT, &sAwsLogSourceName_WAF}}
+var mAwsLogSourceResource = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsLogSourceResource_sourceName, &sAwsLogSourceResource_sourceVersion}}
+var m_AwsLogSourceResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsLogSourceResourceList_member}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceName, &sConflictException_resourceType}}
+var mCustomLogSourceAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomLogSourceAttributes_crawlerArn, &sCustomLogSourceAttributes_databaseArn, &sCustomLogSourceAttributes_tableArn}}
+var mCustomLogSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomLogSourceConfiguration_crawlerConfiguration, &sCustomLogSourceConfiguration_providerIdentity}}
+var mCustomLogSourceCrawlerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomLogSourceCrawlerConfiguration_roleArn}}
+var mCustomLogSourceProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomLogSourceProvider_roleArn, &sCustomLogSourceProvider_location}}
+var mCustomLogSourceResource = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomLogSourceResource_sourceName, &sCustomLogSourceResource_sourceVersion, &sCustomLogSourceResource_provider, &sCustomLogSourceResource_attributes}}
+var mDataLakeAutoEnableNewAccountConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeAutoEnableNewAccountConfiguration_region, &sDataLakeAutoEnableNewAccountConfiguration_sources}}
+var m_DataLakeAutoEnableNewAccountConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeAutoEnableNewAccountConfigurationList_member}}
+var mDataLakeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeConfiguration_region, &sDataLakeConfiguration_encryptionConfiguration, &sDataLakeConfiguration_lifecycleConfiguration, &sDataLakeConfiguration_replicationConfiguration}}
+var m_DataLakeConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeConfigurationList_member}}
+var mDataLakeEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeEncryptionConfiguration_kmsKeyId}}
+var mDataLakeException = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeException_region, &sDataLakeException_exception, &sDataLakeException_remediation, &sDataLakeException_timestamp}}
+var m_DataLakeExceptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeExceptionList_member}}
+var mDataLakeLifecycleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeLifecycleConfiguration_expiration, &sDataLakeLifecycleConfiguration_transitions}}
+var mDataLakeLifecycleExpiration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeLifecycleExpiration_days}}
+var mDataLakeLifecycleTransition = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeLifecycleTransition_storageClass, &sDataLakeLifecycleTransition_days}}
+var m_DataLakeLifecycleTransitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeLifecycleTransitionList_member}}
+var mDataLakeReplicationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeReplicationConfiguration_regions, &sDataLakeReplicationConfiguration_roleArn}}
+var mDataLakeResource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeResource_dataLakeArn, &sDataLakeResource_region, &sDataLakeResource_s3BucketArn, &sDataLakeResource_encryptionConfiguration, &sDataLakeResource_lifecycleConfiguration, &sDataLakeResource_replicationConfiguration, &sDataLakeResource_createStatus, &sDataLakeResource_updateStatus}}
+var m_DataLakeResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeResourceList_member}}
+var mDataLakeSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeSource_account, &sDataLakeSource_sourceName, &sDataLakeSource_eventClasses, &sDataLakeSource_sourceStatuses}}
+var m_DataLakeSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeSourceList_member}}
+var mDataLakeSourceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeSourceStatus_resource, &sDataLakeSourceStatus_status}}
+var m_DataLakeSourceStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataLakeSourceStatusList_member}}
+var mDataLakeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeStatus_INITIALIZED, &sDataLakeStatus_PENDING, &sDataLakeStatus_COMPLETED, &sDataLakeStatus_FAILED}}
+var mDataLakeUpdateException = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeUpdateException_reason, &sDataLakeUpdateException_code}}
+var mDataLakeUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataLakeUpdateStatus_requestId, &sDataLakeUpdateStatus_status, &sDataLakeUpdateStatus_exception}}
+var mHttpMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpMethod_POST, &sHttpMethod_PUT}}
+var mHttpsNotificationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpsNotificationConfiguration_endpoint, &sHttpsNotificationConfiguration_authorizationApiKeyName, &sHttpsNotificationConfiguration_authorizationApiKeyValue, &sHttpsNotificationConfiguration_httpMethod, &sHttpsNotificationConfiguration_targetRoleArn}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLogSource = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSource_account, &sLogSource_region, &sLogSource_sources}}
+var m_LogSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogSourceList_member}}
+var mLogSourceResource = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSourceResource_awsLogSource, &sLogSourceResource_customLogSource}}
+var m_LogSourceResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogSourceResourceList_member}}
+var mNotificationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationConfiguration_sqsNotificationConfiguration, &sNotificationConfiguration_httpsNotificationConfiguration}}
+var m_OcsfEventClassList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OcsfEventClassList_member}}
+var m_RegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceName, &sResourceNotFoundException_resourceType}}
+var mSourceCollectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCollectionStatus_COLLECTING, &sSourceCollectionStatus_MISCONFIGURED, &sSourceCollectionStatus_NOT_COLLECTING}}
+var mSubscriberResource = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriberResource_subscriberId, &sSubscriberResource_subscriberArn, &sSubscriberResource_subscriberIdentity, &sSubscriberResource_subscriberName, &sSubscriberResource_subscriberDescription, &sSubscriberResource_sources, &sSubscriberResource_accessTypes, &sSubscriberResource_roleArn, &sSubscriberResource_s3BucketArn, &sSubscriberResource_subscriberEndpoint, &sSubscriberResource_subscriberStatus, &sSubscriberResource_resourceShareArn, &sSubscriberResource_resourceShareName, &sSubscriberResource_createdAt, &sSubscriberResource_updatedAt}, Hash: &hSubscriberResource}
+var m_SubscriberResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriberResourceList_member}}
+var mSubscriberStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriberStatus_ACTIVE, &sSubscriberStatus_DEACTIVATED, &sSubscriberStatus_PENDING, &sSubscriberStatus_READY}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mCreateAwsLogSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAwsLogSourceRequest_sources}}
+var mCreateAwsLogSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAwsLogSourceResponse_failed}}
+var mCreateCustomLogSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomLogSourceRequest_sourceName, &sCreateCustomLogSourceRequest_sourceVersion, &sCreateCustomLogSourceRequest_eventClasses, &sCreateCustomLogSourceRequest_configuration}}
+var mCreateCustomLogSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomLogSourceResponse_source}}
+var mCreateDataLakeExceptionSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol, &sCreateDataLakeExceptionSubscriptionRequest_notificationEndpoint, &sCreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive}}
+var mCreateDataLakeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataLakeRequest_configurations, &sCreateDataLakeRequest_metaStoreManagerRoleArn, &sCreateDataLakeRequest_tags}}
+var mCreateDataLakeOrganizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount}}
+var mCreateDataLakeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataLakeResponse_dataLakes}}
+var mCreateSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberRequest_subscriberIdentity, &sCreateSubscriberRequest_subscriberName, &sCreateSubscriberRequest_subscriberDescription, &sCreateSubscriberRequest_sources, &sCreateSubscriberRequest_accessTypes, &sCreateSubscriberRequest_tags}}
+var mCreateSubscriberNotificationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberNotificationRequest_subscriberId, &sCreateSubscriberNotificationRequest_configuration}}
+var mCreateSubscriberNotificationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberNotificationResponse_subscriberEndpoint}}
+var mCreateSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberResponse_subscriber}}
+var mDeleteAwsLogSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAwsLogSourceRequest_sources}}
+var mDeleteAwsLogSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAwsLogSourceResponse_failed}}
+var mDeleteCustomLogSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomLogSourceRequest_sourceName, &sDeleteCustomLogSourceRequest_sourceVersion}}
+var mDeleteDataLakeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataLakeRequest_regions}}
+var mDeleteDataLakeOrganizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount}}
+var mDeleteSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSubscriberRequest_subscriberId}}
+var mDeleteSubscriberNotificationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSubscriberNotificationRequest_subscriberId}}
+var mGetDataLakeExceptionSubscriptionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataLakeExceptionSubscriptionResponse_subscriptionProtocol, &sGetDataLakeExceptionSubscriptionResponse_notificationEndpoint, &sGetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive}}
+var mGetDataLakeOrganizationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount}}
+var mGetDataLakeSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataLakeSourcesRequest_accounts, &sGetDataLakeSourcesRequest_maxResults, &sGetDataLakeSourcesRequest_nextToken}}
+var mGetDataLakeSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataLakeSourcesResponse_dataLakeArn, &sGetDataLakeSourcesResponse_dataLakeSources, &sGetDataLakeSourcesResponse_nextToken}}
+var mGetSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriberRequest_subscriberId}}
+var mGetSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriberResponse_subscriber}}
+var mListDataLakeExceptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataLakeExceptionsRequest_regions, &sListDataLakeExceptionsRequest_maxResults, &sListDataLakeExceptionsRequest_nextToken}}
+var mListDataLakeExceptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataLakeExceptionsResponse_exceptions, &sListDataLakeExceptionsResponse_nextToken}}
+var mListDataLakesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataLakesRequest_regions}}
+var mListDataLakesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataLakesResponse_dataLakes}}
+var mListLogSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogSourcesRequest_accounts, &sListLogSourcesRequest_regions, &sListLogSourcesRequest_sources, &sListLogSourcesRequest_maxResults, &sListLogSourcesRequest_nextToken}}
+var mListLogSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogSourcesResponse_sources, &sListLogSourcesResponse_nextToken}}
+var mListSubscribersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribersRequest_nextToken, &sListSubscribersRequest_maxResults}}
+var mListSubscribersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribersResponse_subscribers, &sListSubscribersResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterDataLakeDelegatedAdministratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterDataLakeDelegatedAdministratorRequest_accountId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateDataLakeExceptionSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol, &sUpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint, &sUpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive}}
+var mUpdateDataLakeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataLakeRequest_configurations, &sUpdateDataLakeRequest_metaStoreManagerRoleArn}}
+var mUpdateDataLakeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataLakeResponse_dataLakes}}
+var mUpdateSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberRequest_subscriberId, &sUpdateSubscriberRequest_subscriberIdentity, &sUpdateSubscriberRequest_subscriberName, &sUpdateSubscriberRequest_subscriberDescription, &sUpdateSubscriberRequest_sources}}
+var mUpdateSubscriberNotificationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberNotificationRequest_subscriberId, &sUpdateSubscriberNotificationRequest_configuration}}
+var mUpdateSubscriberNotificationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberNotificationResponse_subscriberEndpoint}}
+var mUpdateSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberResponse_subscriber}}
+
+var hSubscriberResource = smithy.MemberHash{Seed: 30, Slots: []uint16{
+	0, 0, 14, 0, 0, 7, 11, 0, 0, 0, 3, 0, 13, 6, 10, 0, 0, 0, 0, 0, 0, 12, 9, 4,
+	5, 15, 0, 0, 0, 2, 1, 8,
+}}
+
+var sCreateAwsLogSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAwsLogSource, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateAwsLogSource})
+var sCreateCustomLogSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLogSource, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateCustomLogSource})
+var sCreateDataLake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLake, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataLake})
+var sCreateDataLakeExceptionSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeExceptionSubscription, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataLakeExceptionSubscription})
+var sCreateDataLakeOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeOrganizationConfiguration, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateDataLakeOrganizationConfiguration})
+var sCreateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriber, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateSubscriber})
+var sCreateSubscriberNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberNotification, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateSubscriberNotification})
+var sDeleteAwsLogSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAwsLogSource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAwsLogSource})
+var sDeleteCustomLogSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLogSource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCustomLogSource})
+var sDeleteDataLake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLake, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataLake})
+var sDeleteDataLakeExceptionSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeExceptionSubscription, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataLakeExceptionSubscription})
+var sDeleteDataLakeOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeOrganizationConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataLakeOrganizationConfiguration})
+var sDeleteSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriber, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSubscriber})
+var sDeleteSubscriberNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberNotification, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSubscriberNotification})
+var sDeregisterDataLakeDelegatedAdministrator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterDataLakeDelegatedAdministrator, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterDataLakeDelegatedAdministrator})
+var sGetDataLakeExceptionSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeExceptionSubscription, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetDataLakeExceptionSubscription})
+var sGetDataLakeOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeOrganizationConfiguration, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetDataLakeOrganizationConfiguration})
+var sGetDataLakeSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeSources, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetDataLakeSources})
+var sGetSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriber, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetSubscriber})
+var sListDataLakeExceptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakeExceptions, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListDataLakeExceptions})
+var sListDataLakes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakes, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListDataLakes})
+var sListLogSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSources, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListLogSources})
+var sListSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribers, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListSubscribers})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterDataLakeDelegatedAdministrator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDataLakeDelegatedAdministrator, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eRegisterDataLakeDelegatedAdministrator})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDataLake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLake, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDataLake})
+var sUpdateDataLakeExceptionSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLakeExceptionSubscription, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDataLakeExceptionSubscription})
+var sUpdateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriber, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSubscriber})
+var sUpdateSubscriberNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberNotification, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSubscriberNotification})
+var s_SecurityLake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityLake, Type: smithy.ShapeTypeService, Ext: &e_SecurityLake})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_errorCode})
+var sAccessType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessType, Members: &mAccessType, Type: smithy.ShapeTypeEnum, Ext: &eAccessType})
+var sAccessType_LAKEFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAKEFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_LAKEFORMATION})
+var sAccessType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessType_S3})
+var s_AccessTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTypeList, Members: &m_AccessTypeList, Type: smithy.ShapeTypeList, Ext: &e_AccessTypeList})
+var s_AccessTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessType, Members: &mAccessType, Type: smithy.ShapeTypeEnum, Ext: &e_AccessTypeList_member})
+var s_AccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &e_AccountList})
+var s_AccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountList_member})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var sAwsIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsIdentity, Members: &mAwsIdentity, Type: smithy.ShapeTypeStructure, Ext: &eAwsIdentity})
+var sAwsIdentity_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_AwsPrincipal, Type: smithy.ShapeTypeString, Ext: &eAwsIdentity_principal})
+var sAwsIdentity_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString, Ext: &eAwsIdentity_externalId})
+var sAwsLogSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsLogSourceConfiguration, Members: &mAwsLogSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceConfiguration})
+var sAwsLogSourceConfiguration_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &eAwsLogSourceConfiguration_accounts})
+var sAwsLogSourceConfiguration_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eAwsLogSourceConfiguration_regions})
+var sAwsLogSourceConfiguration_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &iAwsLogSourceName, Members: &mAwsLogSourceName, Type: smithy.ShapeTypeEnum, Ext: &eAwsLogSourceConfiguration_sourceName})
+var sAwsLogSourceConfiguration_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_AwsLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &eAwsLogSourceConfiguration_sourceVersion})
+var s_AwsLogSourceConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsLogSourceConfigurationList, Members: &m_AwsLogSourceConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_AwsLogSourceConfigurationList})
+var s_AwsLogSourceConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsLogSourceConfiguration, Members: &mAwsLogSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_AwsLogSourceConfigurationList_member})
+var sAwsLogSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsLogSourceName, Members: &mAwsLogSourceName, Type: smithy.ShapeTypeEnum, Ext: &eAwsLogSourceName})
+var sAwsLogSourceName_ROUTE53 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE53", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_ROUTE53})
+var sAwsLogSourceName_VPC_FLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_FLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_VPC_FLOW})
+var sAwsLogSourceName_SH_FINDINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SH_FINDINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_SH_FINDINGS})
+var sAwsLogSourceName_CLOUD_TRAIL_MGMT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUD_TRAIL_MGMT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_CLOUD_TRAIL_MGMT})
+var sAwsLogSourceName_LAMBDA_EXECUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_EXECUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_LAMBDA_EXECUTION})
+var sAwsLogSourceName_S3_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_S3_DATA})
+var sAwsLogSourceName_EKS_AUDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_AUDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_EKS_AUDIT})
+var sAwsLogSourceName_WAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceName_WAF})
+var sAwsLogSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsLogSourceResource, Members: &mAwsLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &eAwsLogSourceResource})
+var sAwsLogSourceResource_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &iAwsLogSourceName, Members: &mAwsLogSourceName, Type: smithy.ShapeTypeEnum, Ext: &eAwsLogSourceResource_sourceName})
+var sAwsLogSourceResource_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_AwsLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &eAwsLogSourceResource_sourceVersion})
+var s_AwsLogSourceResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsLogSourceResourceList, Members: &m_AwsLogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &e_AwsLogSourceResourceList})
+var s_AwsLogSourceResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsLogSourceResource, Members: &mAwsLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &e_AwsLogSourceResourceList_member})
+var s_AwsLogSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &e_AwsLogSourceVersion})
+var s_AwsPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsPrincipal, Type: smithy.ShapeTypeString, Ext: &e_AwsPrincipal})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceName})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCustomLogSourceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLogSourceAttributes, Members: &mCustomLogSourceAttributes, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceAttributes})
+var sCustomLogSourceAttributes_crawlerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crawlerArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceAttributes_crawlerArn})
+var sCustomLogSourceAttributes_databaseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceAttributes_databaseArn})
+var sCustomLogSourceAttributes_tableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceAttributes_tableArn})
+var sCustomLogSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLogSourceConfiguration, Members: &mCustomLogSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceConfiguration})
+var sCustomLogSourceConfiguration_crawlerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "crawlerConfiguration", ID: &iCustomLogSourceCrawlerConfiguration, Members: &mCustomLogSourceCrawlerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceConfiguration_crawlerConfiguration})
+var sCustomLogSourceConfiguration_providerIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerIdentity", ID: &iAwsIdentity, Members: &mAwsIdentity, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceConfiguration_providerIdentity})
+var sCustomLogSourceCrawlerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLogSourceCrawlerConfiguration, Members: &mCustomLogSourceCrawlerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceCrawlerConfiguration})
+var sCustomLogSourceCrawlerConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceCrawlerConfiguration_roleArn})
+var s_CustomLogSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLogSourceName, Type: smithy.ShapeTypeString, Ext: &e_CustomLogSourceName})
+var sCustomLogSourceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLogSourceProvider, Members: &mCustomLogSourceProvider, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceProvider})
+var sCustomLogSourceProvider_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceProvider_roleArn})
+var sCustomLogSourceProvider_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_S3URI, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceProvider_location})
+var sCustomLogSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLogSourceResource, Members: &mCustomLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceResource})
+var sCustomLogSourceResource_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_CustomLogSourceName, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceResource_sourceName})
+var sCustomLogSourceResource_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_CustomLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &eCustomLogSourceResource_sourceVersion})
+var sCustomLogSourceResource_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iCustomLogSourceProvider, Members: &mCustomLogSourceProvider, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceResource_provider})
+var sCustomLogSourceResource_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &iCustomLogSourceAttributes, Members: &mCustomLogSourceAttributes, Type: smithy.ShapeTypeStructure, Ext: &eCustomLogSourceResource_attributes})
+var s_CustomLogSourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &e_CustomLogSourceVersion})
+var sDataLakeAutoEnableNewAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeAutoEnableNewAccountConfiguration, Members: &mDataLakeAutoEnableNewAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeAutoEnableNewAccountConfiguration})
+var sDataLakeAutoEnableNewAccountConfiguration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDataLakeAutoEnableNewAccountConfiguration_region})
+var sDataLakeAutoEnableNewAccountConfiguration_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_AwsLogSourceResourceList, Members: &m_AwsLogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eDataLakeAutoEnableNewAccountConfiguration_sources})
+var s_DataLakeAutoEnableNewAccountConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeAutoEnableNewAccountConfigurationList, Members: &m_DataLakeAutoEnableNewAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeAutoEnableNewAccountConfigurationList})
+var s_DataLakeAutoEnableNewAccountConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeAutoEnableNewAccountConfiguration, Members: &mDataLakeAutoEnableNewAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeAutoEnableNewAccountConfigurationList_member})
+var sDataLakeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeConfiguration, Members: &mDataLakeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeConfiguration})
+var sDataLakeConfiguration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDataLakeConfiguration_region})
+var sDataLakeConfiguration_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iDataLakeEncryptionConfiguration, Members: &mDataLakeEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeConfiguration_encryptionConfiguration})
+var sDataLakeConfiguration_lifecycleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleConfiguration", ID: &iDataLakeLifecycleConfiguration, Members: &mDataLakeLifecycleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeConfiguration_lifecycleConfiguration})
+var sDataLakeConfiguration_replicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfiguration", ID: &iDataLakeReplicationConfiguration, Members: &mDataLakeReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeConfiguration_replicationConfiguration})
+var s_DataLakeConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeConfigurationList, Members: &m_DataLakeConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeConfigurationList})
+var s_DataLakeConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeConfiguration, Members: &mDataLakeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeConfigurationList_member})
+var sDataLakeEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeEncryptionConfiguration, Members: &mDataLakeEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeEncryptionConfiguration})
+var sDataLakeEncryptionConfiguration_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeEncryptionConfiguration_kmsKeyId})
+var sDataLakeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeException, Members: &mDataLakeException, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeException})
+var sDataLakeException_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDataLakeException_region})
+var sDataLakeException_exception = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exception", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eDataLakeException_exception})
+var sDataLakeException_remediation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediation", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eDataLakeException_remediation})
+var sDataLakeException_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp, Ext: &eDataLakeException_timestamp})
+var s_DataLakeExceptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeExceptionList, Members: &m_DataLakeExceptionList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeExceptionList})
+var s_DataLakeExceptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeException, Members: &mDataLakeException, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeExceptionList_member})
+var sDataLakeLifecycleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeLifecycleConfiguration, Members: &mDataLakeLifecycleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeLifecycleConfiguration})
+var sDataLakeLifecycleConfiguration_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &iDataLakeLifecycleExpiration, Members: &mDataLakeLifecycleExpiration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeLifecycleConfiguration_expiration})
+var sDataLakeLifecycleConfiguration_transitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitions", ID: &i_DataLakeLifecycleTransitionList, Members: &m_DataLakeLifecycleTransitionList, Type: smithy.ShapeTypeList, Ext: &eDataLakeLifecycleConfiguration_transitions})
+var sDataLakeLifecycleExpiration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeLifecycleExpiration, Members: &mDataLakeLifecycleExpiration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeLifecycleExpiration})
+var sDataLakeLifecycleExpiration_days = smithy.NewStaticSchema(smithy.StaticSchema{Member: "days", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDataLakeLifecycleExpiration_days})
+var sDataLakeLifecycleTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeLifecycleTransition, Members: &mDataLakeLifecycleTransition, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeLifecycleTransition})
+var sDataLakeLifecycleTransition_storageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageClass", ID: &i_DataLakeStorageClass, Type: smithy.ShapeTypeString, Ext: &eDataLakeLifecycleTransition_storageClass})
+var sDataLakeLifecycleTransition_days = smithy.NewStaticSchema(smithy.StaticSchema{Member: "days", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDataLakeLifecycleTransition_days})
+var s_DataLakeLifecycleTransitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeLifecycleTransitionList, Members: &m_DataLakeLifecycleTransitionList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeLifecycleTransitionList})
+var s_DataLakeLifecycleTransitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeLifecycleTransition, Members: &mDataLakeLifecycleTransition, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeLifecycleTransitionList_member})
+var sDataLakeReplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeReplicationConfiguration, Members: &mDataLakeReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeReplicationConfiguration})
+var sDataLakeReplicationConfiguration_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eDataLakeReplicationConfiguration_regions})
+var sDataLakeReplicationConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eDataLakeReplicationConfiguration_roleArn})
+var sDataLakeResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeResource, Members: &mDataLakeResource, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeResource})
+var sDataLakeResource_dataLakeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakeArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eDataLakeResource_dataLakeArn})
+var sDataLakeResource_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eDataLakeResource_region})
+var sDataLakeResource_s3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eDataLakeResource_s3BucketArn})
+var sDataLakeResource_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iDataLakeEncryptionConfiguration, Members: &mDataLakeEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeResource_encryptionConfiguration})
+var sDataLakeResource_lifecycleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleConfiguration", ID: &iDataLakeLifecycleConfiguration, Members: &mDataLakeLifecycleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeResource_lifecycleConfiguration})
+var sDataLakeResource_replicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationConfiguration", ID: &iDataLakeReplicationConfiguration, Members: &mDataLakeReplicationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeResource_replicationConfiguration})
+var sDataLakeResource_createStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createStatus", ID: &iDataLakeStatus, Members: &mDataLakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataLakeResource_createStatus})
+var sDataLakeResource_updateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateStatus", ID: &iDataLakeUpdateStatus, Members: &mDataLakeUpdateStatus, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeResource_updateStatus})
+var s_DataLakeResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeResourceList, Members: &m_DataLakeResourceList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeResourceList})
+var s_DataLakeResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeResource, Members: &mDataLakeResource, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeResourceList_member})
+var sDataLakeSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeSource, Members: &mDataLakeSource, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeSource})
+var sDataLakeSource_account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "account", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeSource_account})
+var sDataLakeSource_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeSource_sourceName})
+var sDataLakeSource_eventClasses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventClasses", ID: &i_OcsfEventClassList, Members: &m_OcsfEventClassList, Type: smithy.ShapeTypeList, Ext: &eDataLakeSource_eventClasses})
+var sDataLakeSource_sourceStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceStatuses", ID: &i_DataLakeSourceStatusList, Members: &m_DataLakeSourceStatusList, Type: smithy.ShapeTypeList, Ext: &eDataLakeSource_sourceStatuses})
+var s_DataLakeSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeSourceList, Members: &m_DataLakeSourceList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeSourceList})
+var s_DataLakeSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeSource, Members: &mDataLakeSource, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeSourceList_member})
+var sDataLakeSourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeSourceStatus, Members: &mDataLakeSourceStatus, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeSourceStatus})
+var sDataLakeSourceStatus_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeSourceStatus_resource})
+var sDataLakeSourceStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSourceCollectionStatus, Members: &mSourceCollectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataLakeSourceStatus_status})
+var s_DataLakeSourceStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeSourceStatusList, Members: &m_DataLakeSourceStatusList, Type: smithy.ShapeTypeList, Ext: &e_DataLakeSourceStatusList})
+var s_DataLakeSourceStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataLakeSourceStatus, Members: &mDataLakeSourceStatus, Type: smithy.ShapeTypeStructure, Ext: &e_DataLakeSourceStatusList_member})
+var sDataLakeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeStatus, Members: &mDataLakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataLakeStatus})
+var sDataLakeStatus_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeStatus_INITIALIZED})
+var sDataLakeStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeStatus_PENDING})
+var sDataLakeStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeStatus_COMPLETED})
+var sDataLakeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeStatus_FAILED})
+var s_DataLakeStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLakeStorageClass, Type: smithy.ShapeTypeString, Ext: &e_DataLakeStorageClass})
+var sDataLakeUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeUpdateException, Members: &mDataLakeUpdateException, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeUpdateException})
+var sDataLakeUpdateException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeUpdateException_reason})
+var sDataLakeUpdateException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeUpdateException_code})
+var sDataLakeUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataLakeUpdateStatus, Members: &mDataLakeUpdateStatus, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeUpdateStatus})
+var sDataLakeUpdateStatus_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDataLakeUpdateStatus_requestId})
+var sDataLakeUpdateStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDataLakeStatus, Members: &mDataLakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eDataLakeUpdateStatus_status})
+var sDataLakeUpdateStatus_exception = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exception", ID: &iDataLakeUpdateException, Members: &mDataLakeUpdateException, Type: smithy.ShapeTypeStructure, Ext: &eDataLakeUpdateStatus_exception})
+var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &e_DescriptionString})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString, Ext: &e_ExternalId})
+var sHttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpMethod, Members: &mHttpMethod, Type: smithy.ShapeTypeEnum, Ext: &eHttpMethod})
+var sHttpMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHttpMethod_POST})
+var sHttpMethod_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHttpMethod_PUT})
+var sHttpsNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpsNotificationConfiguration, Members: &mHttpsNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpsNotificationConfiguration})
+var sHttpsNotificationConfiguration_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpsNotificationConfiguration_endpoint})
+var sHttpsNotificationConfiguration_authorizationApiKeyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationApiKeyName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpsNotificationConfiguration_authorizationApiKeyName})
+var sHttpsNotificationConfiguration_authorizationApiKeyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationApiKeyValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpsNotificationConfiguration_authorizationApiKeyValue})
+var sHttpsNotificationConfiguration_httpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpMethod", ID: &iHttpMethod, Members: &mHttpMethod, Type: smithy.ShapeTypeEnum, Ext: &eHttpsNotificationConfiguration_httpMethod})
+var sHttpsNotificationConfiguration_targetRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eHttpsNotificationConfiguration_targetRoleArn})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sLogSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSource, Members: &mLogSource, Type: smithy.ShapeTypeStructure, Ext: &eLogSource})
+var sLogSource_account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "account", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eLogSource_account})
+var sLogSource_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eLogSource_region})
+var sLogSource_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eLogSource_sources})
+var s_LogSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSourceList, Members: &m_LogSourceList, Type: smithy.ShapeTypeList, Ext: &e_LogSourceList})
+var s_LogSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogSource, Members: &mLogSource, Type: smithy.ShapeTypeStructure, Ext: &e_LogSourceList_member})
+var sLogSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSourceResource, Members: &mLogSourceResource, Type: smithy.ShapeTypeUnion, Ext: &eLogSourceResource})
+var sLogSourceResource_awsLogSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogSource", ID: &iAwsLogSourceResource, Members: &mAwsLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &eLogSourceResource_awsLogSource})
+var sLogSourceResource_customLogSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLogSource", ID: &iCustomLogSourceResource, Members: &mCustomLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &eLogSourceResource_customLogSource})
+var s_LogSourceResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &e_LogSourceResourceList})
+var s_LogSourceResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogSourceResource, Members: &mLogSourceResource, Type: smithy.ShapeTypeUnion, Ext: &e_LogSourceResourceList_member})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eNotificationConfiguration})
+var sNotificationConfiguration_sqsNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqsNotificationConfiguration", ID: &iSqsNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNotificationConfiguration_sqsNotificationConfiguration})
+var sNotificationConfiguration_httpsNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpsNotificationConfiguration", ID: &iHttpsNotificationConfiguration, Members: &mHttpsNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNotificationConfiguration_httpsNotificationConfiguration})
+var s_OcsfEventClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OcsfEventClass, Type: smithy.ShapeTypeString, Ext: &e_OcsfEventClass})
+var s_OcsfEventClassList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OcsfEventClassList, Members: &m_OcsfEventClassList, Type: smithy.ShapeTypeList, Ext: &e_OcsfEventClassList})
+var s_OcsfEventClassList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OcsfEventClass, Type: smithy.ShapeTypeString, Ext: &e_OcsfEventClassList_member})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &e_RegionList})
+var s_RegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_RegionList_member})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceName})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_ResourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceShareArn})
+var s_ResourceShareName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceShareName, Type: smithy.ShapeTypeString, Ext: &e_ResourceShareName})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &e_S3BucketArn})
+var s_S3URI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3URI, Type: smithy.ShapeTypeString, Ext: &e_S3URI})
+var s_SafeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &e_SafeString})
+var sSourceCollectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCollectionStatus, Members: &mSourceCollectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eSourceCollectionStatus})
+var sSourceCollectionStatus_COLLECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COLLECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceCollectionStatus_COLLECTING})
+var sSourceCollectionStatus_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceCollectionStatus_MISCONFIGURED})
+var sSourceCollectionStatus_NOT_COLLECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_COLLECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceCollectionStatus_NOT_COLLECTING})
+var sSqsNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSqsNotificationConfiguration})
+var sSubscriberResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriberResource, Members: &mSubscriberResource, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberResource})
+var sSubscriberResource_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_subscriberId})
+var sSubscriberResource_subscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_subscriberArn})
+var sSubscriberResource_subscriberIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberIdentity", ID: &iAwsIdentity, Members: &mAwsIdentity, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberResource_subscriberIdentity})
+var sSubscriberResource_subscriberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberName", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_subscriberName})
+var sSubscriberResource_subscriberDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberDescription", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_subscriberDescription})
+var sSubscriberResource_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eSubscriberResource_sources})
+var sSubscriberResource_accessTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTypes", ID: &i_AccessTypeList, Members: &m_AccessTypeList, Type: smithy.ShapeTypeList, Ext: &eSubscriberResource_accessTypes})
+var sSubscriberResource_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_roleArn})
+var sSubscriberResource_s3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3BucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_s3BucketArn})
+var sSubscriberResource_subscriberEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_subscriberEndpoint})
+var sSubscriberResource_subscriberStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberStatus", ID: &iSubscriberStatus, Members: &mSubscriberStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriberResource_subscriberStatus})
+var sSubscriberResource_resourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareArn", ID: &i_ResourceShareArn, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_resourceShareArn})
+var sSubscriberResource_resourceShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceShareName", ID: &i_ResourceShareName, Type: smithy.ShapeTypeString, Ext: &eSubscriberResource_resourceShareName})
+var sSubscriberResource_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriberResource_createdAt})
+var sSubscriberResource_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriberResource_updatedAt})
+var s_SubscriberResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberResourceList, Members: &m_SubscriberResourceList, Type: smithy.ShapeTypeList, Ext: &e_SubscriberResourceList})
+var s_SubscriberResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriberResource, Members: &mSubscriberResource, Type: smithy.ShapeTypeStructure, Ext: &e_SubscriberResourceList_member})
+var sSubscriberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriberStatus, Members: &mSubscriberStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriberStatus})
+var sSubscriberStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberStatus_ACTIVE})
+var sSubscriberStatus_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberStatus_DEACTIVATED})
+var sSubscriberStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberStatus_PENDING})
+var sSubscriberStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriberStatus_READY})
+var s_SubscriptionProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionProtocol, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionProtocol})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t38, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString, Ext: &e_UUID})
+var sCreateAwsLogSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAwsLogSourceRequest, Members: &mCreateAwsLogSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAwsLogSourceRequest})
+var sCreateAwsLogSourceRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_AwsLogSourceConfigurationList, Members: &m_AwsLogSourceConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateAwsLogSourceRequest_sources})
+var sCreateAwsLogSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAwsLogSourceResponse, Members: &mCreateAwsLogSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAwsLogSourceResponse})
+var sCreateAwsLogSourceResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &eCreateAwsLogSourceResponse_failed})
+var sCreateCustomLogSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLogSourceRequest, Members: &mCreateCustomLogSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLogSourceRequest})
+var sCreateCustomLogSourceRequest_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_CustomLogSourceName, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLogSourceRequest_sourceName})
+var sCreateCustomLogSourceRequest_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_CustomLogSourceVersion, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLogSourceRequest_sourceVersion})
+var sCreateCustomLogSourceRequest_eventClasses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventClasses", ID: &i_OcsfEventClassList, Members: &m_OcsfEventClassList, Type: smithy.ShapeTypeList, Ext: &eCreateCustomLogSourceRequest_eventClasses})
+var sCreateCustomLogSourceRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iCustomLogSourceConfiguration, Members: &mCustomLogSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLogSourceRequest_configuration})
+var sCreateCustomLogSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLogSourceResponse, Members: &mCreateCustomLogSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLogSourceResponse})
+var sCreateCustomLogSourceResponse_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iCustomLogSourceResource, Members: &mCustomLogSourceResource, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLogSourceResponse_source})
+var sCreateDataLakeExceptionSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeExceptionSubscriptionRequest, Members: &mCreateDataLakeExceptionSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeExceptionSubscriptionRequest})
+var sCreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionProtocol", ID: &i_SubscriptionProtocol, Type: smithy.ShapeTypeString, Ext: &eCreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol})
+var sCreateDataLakeExceptionSubscriptionRequest_notificationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eCreateDataLakeExceptionSubscriptionRequest_notificationEndpoint})
+var sCreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionTimeToLive", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eCreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive})
+var sCreateDataLakeExceptionSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeExceptionSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeExceptionSubscriptionResponse})
+var sCreateDataLakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeRequest, Members: &mCreateDataLakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeRequest})
+var sCreateDataLakeRequest_configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurations", ID: &i_DataLakeConfigurationList, Members: &m_DataLakeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateDataLakeRequest_configurations})
+var sCreateDataLakeRequest_metaStoreManagerRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaStoreManagerRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateDataLakeRequest_metaStoreManagerRoleArn})
+var sCreateDataLakeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDataLakeRequest_tags})
+var sCreateDataLakeOrganizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeOrganizationConfigurationRequest, Members: &mCreateDataLakeOrganizationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeOrganizationConfigurationRequest})
+var sCreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoEnableNewAccount", ID: &i_DataLakeAutoEnableNewAccountConfigurationList, Members: &m_DataLakeAutoEnableNewAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount})
+var sCreateDataLakeOrganizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeOrganizationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeOrganizationConfigurationResponse})
+var sCreateDataLakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataLakeResponse, Members: &mCreateDataLakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDataLakeResponse})
+var sCreateDataLakeResponse_dataLakes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakes", ID: &i_DataLakeResourceList, Members: &m_DataLakeResourceList, Type: smithy.ShapeTypeList, Ext: &eCreateDataLakeResponse_dataLakes})
+var sCreateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberRequest, Members: &mCreateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberRequest})
+var sCreateSubscriberRequest_subscriberIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberIdentity", ID: &iAwsIdentity, Members: &mAwsIdentity, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberRequest_subscriberIdentity})
+var sCreateSubscriberRequest_subscriberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberRequest_subscriberName})
+var sCreateSubscriberRequest_subscriberDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberDescription", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberRequest_subscriberDescription})
+var sCreateSubscriberRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eCreateSubscriberRequest_sources})
+var sCreateSubscriberRequest_accessTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTypes", ID: &i_AccessTypeList, Members: &m_AccessTypeList, Type: smithy.ShapeTypeList, Ext: &eCreateSubscriberRequest_accessTypes})
+var sCreateSubscriberRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateSubscriberRequest_tags})
+var sCreateSubscriberNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberNotificationRequest, Members: &mCreateSubscriberNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberNotificationRequest})
+var sCreateSubscriberNotificationRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberNotificationRequest_subscriberId})
+var sCreateSubscriberNotificationRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateSubscriberNotificationRequest_configuration})
+var sCreateSubscriberNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberNotificationResponse, Members: &mCreateSubscriberNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberNotificationResponse})
+var sCreateSubscriberNotificationResponse_subscriberEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberNotificationResponse_subscriberEndpoint})
+var sCreateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberResponse, Members: &mCreateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberResponse})
+var sCreateSubscriberResponse_subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriber", ID: &iSubscriberResource, Members: &mSubscriberResource, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberResponse_subscriber})
+var sDeleteAwsLogSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAwsLogSourceRequest, Members: &mDeleteAwsLogSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAwsLogSourceRequest})
+var sDeleteAwsLogSourceRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_AwsLogSourceConfigurationList, Members: &m_AwsLogSourceConfigurationList, Type: smithy.ShapeTypeList, Ext: &eDeleteAwsLogSourceRequest_sources})
+var sDeleteAwsLogSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAwsLogSourceResponse, Members: &mDeleteAwsLogSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAwsLogSourceResponse})
+var sDeleteAwsLogSourceResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &eDeleteAwsLogSourceResponse_failed})
+var sDeleteCustomLogSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLogSourceRequest, Members: &mDeleteCustomLogSourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomLogSourceRequest})
+var sDeleteCustomLogSourceRequest_sourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceName", ID: &i_CustomLogSourceName, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomLogSourceRequest_sourceName})
+var sDeleteCustomLogSourceRequest_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_CustomLogSourceVersion, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomLogSourceRequest_sourceVersion})
+var sDeleteCustomLogSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLogSourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomLogSourceResponse})
+var sDeleteDataLakeExceptionSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeExceptionSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeExceptionSubscriptionRequest})
+var sDeleteDataLakeExceptionSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeExceptionSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeExceptionSubscriptionResponse})
+var sDeleteDataLakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeRequest, Members: &mDeleteDataLakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeRequest})
+var sDeleteDataLakeRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eDeleteDataLakeRequest_regions})
+var sDeleteDataLakeOrganizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeOrganizationConfigurationRequest, Members: &mDeleteDataLakeOrganizationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeOrganizationConfigurationRequest})
+var sDeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoEnableNewAccount", ID: &i_DataLakeAutoEnableNewAccountConfigurationList, Members: &m_DataLakeAutoEnableNewAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &eDeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount})
+var sDeleteDataLakeOrganizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeOrganizationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeOrganizationConfigurationResponse})
+var sDeleteDataLakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataLakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDataLakeResponse})
+var sDeleteSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberRequest, Members: &mDeleteSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberRequest})
+var sDeleteSubscriberRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteSubscriberRequest_subscriberId})
+var sDeleteSubscriberNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberNotificationRequest, Members: &mDeleteSubscriberNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberNotificationRequest})
+var sDeleteSubscriberNotificationRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteSubscriberNotificationRequest_subscriberId})
+var sDeleteSubscriberNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberNotificationResponse})
+var sDeleteSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberResponse})
+var sDeregisterDataLakeDelegatedAdministratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterDataLakeDelegatedAdministratorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterDataLakeDelegatedAdministratorRequest})
+var sDeregisterDataLakeDelegatedAdministratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterDataLakeDelegatedAdministratorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterDataLakeDelegatedAdministratorResponse})
+var sGetDataLakeExceptionSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeExceptionSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeExceptionSubscriptionRequest})
+var sGetDataLakeExceptionSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeExceptionSubscriptionResponse, Members: &mGetDataLakeExceptionSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeExceptionSubscriptionResponse})
+var sGetDataLakeExceptionSubscriptionResponse_subscriptionProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionProtocol", ID: &i_SubscriptionProtocol, Type: smithy.ShapeTypeString, Ext: &eGetDataLakeExceptionSubscriptionResponse_subscriptionProtocol})
+var sGetDataLakeExceptionSubscriptionResponse_notificationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eGetDataLakeExceptionSubscriptionResponse_notificationEndpoint})
+var sGetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionTimeToLive", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive})
+var sGetDataLakeOrganizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeOrganizationConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeOrganizationConfigurationRequest})
+var sGetDataLakeOrganizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeOrganizationConfigurationResponse, Members: &mGetDataLakeOrganizationConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeOrganizationConfigurationResponse})
+var sGetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoEnableNewAccount", ID: &i_DataLakeAutoEnableNewAccountConfigurationList, Members: &m_DataLakeAutoEnableNewAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &eGetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount})
+var sGetDataLakeSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeSourcesRequest, Members: &mGetDataLakeSourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeSourcesRequest})
+var sGetDataLakeSourcesRequest_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &eGetDataLakeSourcesRequest_accounts})
+var sGetDataLakeSourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetDataLakeSourcesRequest_maxResults})
+var sGetDataLakeSourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetDataLakeSourcesRequest_nextToken})
+var sGetDataLakeSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataLakeSourcesResponse, Members: &mGetDataLakeSourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataLakeSourcesResponse})
+var sGetDataLakeSourcesResponse_dataLakeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakeArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetDataLakeSourcesResponse_dataLakeArn})
+var sGetDataLakeSourcesResponse_dataLakeSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakeSources", ID: &i_DataLakeSourceList, Members: &m_DataLakeSourceList, Type: smithy.ShapeTypeList, Ext: &eGetDataLakeSourcesResponse_dataLakeSources})
+var sGetDataLakeSourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetDataLakeSourcesResponse_nextToken})
+var sGetSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriberRequest, Members: &mGetSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriberRequest})
+var sGetSubscriberRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetSubscriberRequest_subscriberId})
+var sGetSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriberResponse, Members: &mGetSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriberResponse})
+var sGetSubscriberResponse_subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriber", ID: &iSubscriberResource, Members: &mSubscriberResource, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriberResponse_subscriber})
+var sListDataLakeExceptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakeExceptionsRequest, Members: &mListDataLakeExceptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDataLakeExceptionsRequest})
+var sListDataLakeExceptionsRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eListDataLakeExceptionsRequest_regions})
+var sListDataLakeExceptionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListDataLakeExceptionsRequest_maxResults})
+var sListDataLakeExceptionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDataLakeExceptionsRequest_nextToken})
+var sListDataLakeExceptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakeExceptionsResponse, Members: &mListDataLakeExceptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDataLakeExceptionsResponse})
+var sListDataLakeExceptionsResponse_exceptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptions", ID: &i_DataLakeExceptionList, Members: &m_DataLakeExceptionList, Type: smithy.ShapeTypeList, Ext: &eListDataLakeExceptionsResponse_exceptions})
+var sListDataLakeExceptionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDataLakeExceptionsResponse_nextToken})
+var sListDataLakesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakesRequest, Members: &mListDataLakesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDataLakesRequest})
+var sListDataLakesRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Traits: &t41, Type: smithy.ShapeTypeList, Ext: &eListDataLakesRequest_regions})
+var sListDataLakesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataLakesResponse, Members: &mListDataLakesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDataLakesResponse})
+var sListDataLakesResponse_dataLakes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakes", ID: &i_DataLakeResourceList, Members: &m_DataLakeResourceList, Type: smithy.ShapeTypeList, Ext: &eListDataLakesResponse_dataLakes})
+var sListLogSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSourcesRequest, Members: &mListLogSourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLogSourcesRequest})
+var sListLogSourcesRequest_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList, Ext: &eListLogSourcesRequest_accounts})
+var sListLogSourcesRequest_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList, Ext: &eListLogSourcesRequest_regions})
+var sListLogSourcesRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eListLogSourcesRequest_sources})
+var sListLogSourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListLogSourcesRequest_maxResults})
+var sListLogSourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLogSourcesRequest_nextToken})
+var sListLogSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSourcesResponse, Members: &mListLogSourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLogSourcesResponse})
+var sListLogSourcesResponse_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceList, Members: &m_LogSourceList, Type: smithy.ShapeTypeList, Ext: &eListLogSourcesResponse_sources})
+var sListLogSourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListLogSourcesResponse_nextToken})
+var sListSubscribersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribersRequest, Members: &mListSubscribersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSubscribersRequest})
+var sListSubscribersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListSubscribersRequest_nextToken})
+var sListSubscribersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListSubscribersRequest_maxResults})
+var sListSubscribersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribersResponse, Members: &mListSubscribersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSubscribersResponse})
+var sListSubscribersResponse_subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscribers", ID: &i_SubscriberResourceList, Members: &m_SubscriberResourceList, Type: smithy.ShapeTypeList, Ext: &eListSubscribersResponse_subscribers})
+var sListSubscribersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSubscribersResponse_nextToken})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sRegisterDataLakeDelegatedAdministratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDataLakeDelegatedAdministratorRequest, Members: &mRegisterDataLakeDelegatedAdministratorRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDataLakeDelegatedAdministratorRequest})
+var sRegisterDataLakeDelegatedAdministratorRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eRegisterDataLakeDelegatedAdministratorRequest_accountId})
+var sRegisterDataLakeDelegatedAdministratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDataLakeDelegatedAdministratorResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDataLakeDelegatedAdministratorResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t44, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateDataLakeExceptionSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLakeExceptionSubscriptionRequest, Members: &mUpdateDataLakeExceptionSubscriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataLakeExceptionSubscriptionRequest})
+var sUpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionProtocol", ID: &i_SubscriptionProtocol, Type: smithy.ShapeTypeString, Ext: &eUpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol})
+var sUpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eUpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint})
+var sUpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionTimeToLive", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eUpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive})
+var sUpdateDataLakeExceptionSubscriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLakeExceptionSubscriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataLakeExceptionSubscriptionResponse})
+var sUpdateDataLakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLakeRequest, Members: &mUpdateDataLakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataLakeRequest})
+var sUpdateDataLakeRequest_configurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurations", ID: &i_DataLakeConfigurationList, Members: &m_DataLakeConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateDataLakeRequest_configurations})
+var sUpdateDataLakeRequest_metaStoreManagerRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaStoreManagerRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateDataLakeRequest_metaStoreManagerRoleArn})
+var sUpdateDataLakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataLakeResponse, Members: &mUpdateDataLakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDataLakeResponse})
+var sUpdateDataLakeResponse_dataLakes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLakes", ID: &i_DataLakeResourceList, Members: &m_DataLakeResourceList, Type: smithy.ShapeTypeList, Ext: &eUpdateDataLakeResponse_dataLakes})
+var sUpdateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberRequest, Members: &mUpdateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest})
+var sUpdateSubscriberRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberRequest_subscriberId})
+var sUpdateSubscriberRequest_subscriberIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberIdentity", ID: &iAwsIdentity, Members: &mAwsIdentity, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest_subscriberIdentity})
+var sUpdateSubscriberRequest_subscriberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberName", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberRequest_subscriberName})
+var sUpdateSubscriberRequest_subscriberDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberDescription", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberRequest_subscriberDescription})
+var sUpdateSubscriberRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_LogSourceResourceList, Members: &m_LogSourceResourceList, Type: smithy.ShapeTypeList, Ext: &eUpdateSubscriberRequest_sources})
+var sUpdateSubscriberNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberNotificationRequest, Members: &mUpdateSubscriberNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberNotificationRequest})
+var sUpdateSubscriberNotificationRequest_subscriberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberId", ID: &i_UUID, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberNotificationRequest_subscriberId})
+var sUpdateSubscriberNotificationRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateSubscriberNotificationRequest_configuration})
+var sUpdateSubscriberNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberNotificationResponse, Members: &mUpdateSubscriberNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberNotificationResponse})
+var sUpdateSubscriberNotificationResponse_subscriberEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriberEndpoint", ID: &i_SafeString, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberNotificationResponse_subscriberEndpoint})
+var sUpdateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberResponse, Members: &mUpdateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberResponse})
+var sUpdateSubscriberResponse_subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriber", ID: &iSubscriberResource, Members: &mSubscriberResource, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberResponse_subscriber})
+
+var CreateAwsLogSource = &sCreateAwsLogSource
+
+var CreateCustomLogSource = &sCreateCustomLogSource
+
+var CreateDataLake = &sCreateDataLake
+
+var CreateDataLakeExceptionSubscription = &sCreateDataLakeExceptionSubscription
+
+var CreateDataLakeOrganizationConfiguration = &sCreateDataLakeOrganizationConfiguration
+
+var CreateSubscriber = &sCreateSubscriber
+
+var CreateSubscriberNotification = &sCreateSubscriberNotification
+
+var DeleteAwsLogSource = &sDeleteAwsLogSource
+
+var DeleteCustomLogSource = &sDeleteCustomLogSource
+
+var DeleteDataLake = &sDeleteDataLake
+
+var DeleteDataLakeExceptionSubscription = &sDeleteDataLakeExceptionSubscription
+
+var DeleteDataLakeOrganizationConfiguration = &sDeleteDataLakeOrganizationConfiguration
+
+var DeleteSubscriber = &sDeleteSubscriber
+
+var DeleteSubscriberNotification = &sDeleteSubscriberNotification
+
+var DeregisterDataLakeDelegatedAdministrator = &sDeregisterDataLakeDelegatedAdministrator
+
+var GetDataLakeExceptionSubscription = &sGetDataLakeExceptionSubscription
+
+var GetDataLakeOrganizationConfiguration = &sGetDataLakeOrganizationConfiguration
+
+var GetDataLakeSources = &sGetDataLakeSources
+
+var GetSubscriber = &sGetSubscriber
+
+var ListDataLakeExceptions = &sListDataLakeExceptions
+
+var ListDataLakes = &sListDataLakes
+
+var ListLogSources = &sListLogSources
+
+var ListSubscribers = &sListSubscribers
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterDataLakeDelegatedAdministrator = &sRegisterDataLakeDelegatedAdministrator
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDataLake = &sUpdateDataLake
+
+var UpdateDataLakeExceptionSubscription = &sUpdateDataLakeExceptionSubscription
+
+var UpdateSubscriber = &sUpdateSubscriber
+
+var UpdateSubscriberNotification = &sUpdateSubscriberNotification
+
+var _SecurityLake = &s_SecurityLake
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+var AccessDeniedException_errorCode = &sAccessDeniedException_errorCode
+
+var AccessType = &sAccessType
+var AccessType_LAKEFORMATION = &sAccessType_LAKEFORMATION
+var AccessType_S3 = &sAccessType_S3
+
+var _AccessTypeList = &s_AccessTypeList
+var _AccessTypeList_member = &s_AccessTypeList_member
+
+var _AccountList = &s_AccountList
+var _AccountList_member = &s_AccountList_member
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _AwsAccountId = &s_AwsAccountId
+
+var AwsIdentity = &sAwsIdentity
+var AwsIdentity_principal = &sAwsIdentity_principal
+var AwsIdentity_externalId = &sAwsIdentity_externalId
+
+var AwsLogSourceConfiguration = &sAwsLogSourceConfiguration
+var AwsLogSourceConfiguration_accounts = &sAwsLogSourceConfiguration_accounts
+var AwsLogSourceConfiguration_regions = &sAwsLogSourceConfiguration_regions
+var AwsLogSourceConfiguration_sourceName = &sAwsLogSourceConfiguration_sourceName
+var AwsLogSourceConfiguration_sourceVersion = &sAwsLogSourceConfiguration_sourceVersion
+
+var _AwsLogSourceConfigurationList = &s_AwsLogSourceConfigurationList
+var _AwsLogSourceConfigurationList_member = &s_AwsLogSourceConfigurationList_member
+
+var AwsLogSourceName = &sAwsLogSourceName
+var AwsLogSourceName_ROUTE53 = &sAwsLogSourceName_ROUTE53
+var AwsLogSourceName_VPC_FLOW = &sAwsLogSourceName_VPC_FLOW
+var AwsLogSourceName_SH_FINDINGS = &sAwsLogSourceName_SH_FINDINGS
+var AwsLogSourceName_CLOUD_TRAIL_MGMT = &sAwsLogSourceName_CLOUD_TRAIL_MGMT
+var AwsLogSourceName_LAMBDA_EXECUTION = &sAwsLogSourceName_LAMBDA_EXECUTION
+var AwsLogSourceName_S3_DATA = &sAwsLogSourceName_S3_DATA
+var AwsLogSourceName_EKS_AUDIT = &sAwsLogSourceName_EKS_AUDIT
+var AwsLogSourceName_WAF = &sAwsLogSourceName_WAF
+
+var AwsLogSourceResource = &sAwsLogSourceResource
+var AwsLogSourceResource_sourceName = &sAwsLogSourceResource_sourceName
+var AwsLogSourceResource_sourceVersion = &sAwsLogSourceResource_sourceVersion
+
+var _AwsLogSourceResourceList = &s_AwsLogSourceResourceList
+var _AwsLogSourceResourceList_member = &s_AwsLogSourceResourceList_member
+
+var _AwsLogSourceVersion = &s_AwsLogSourceVersion
+
+var _AwsPrincipal = &s_AwsPrincipal
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceName = &sConflictException_resourceName
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var CustomLogSourceAttributes = &sCustomLogSourceAttributes
+var CustomLogSourceAttributes_crawlerArn = &sCustomLogSourceAttributes_crawlerArn
+var CustomLogSourceAttributes_databaseArn = &sCustomLogSourceAttributes_databaseArn
+var CustomLogSourceAttributes_tableArn = &sCustomLogSourceAttributes_tableArn
+
+var CustomLogSourceConfiguration = &sCustomLogSourceConfiguration
+var CustomLogSourceConfiguration_crawlerConfiguration = &sCustomLogSourceConfiguration_crawlerConfiguration
+var CustomLogSourceConfiguration_providerIdentity = &sCustomLogSourceConfiguration_providerIdentity
+
+var CustomLogSourceCrawlerConfiguration = &sCustomLogSourceCrawlerConfiguration
+var CustomLogSourceCrawlerConfiguration_roleArn = &sCustomLogSourceCrawlerConfiguration_roleArn
+
+var _CustomLogSourceName = &s_CustomLogSourceName
+
+var CustomLogSourceProvider = &sCustomLogSourceProvider
+var CustomLogSourceProvider_roleArn = &sCustomLogSourceProvider_roleArn
+var CustomLogSourceProvider_location = &sCustomLogSourceProvider_location
+
+var CustomLogSourceResource = &sCustomLogSourceResource
+var CustomLogSourceResource_sourceName = &sCustomLogSourceResource_sourceName
+var CustomLogSourceResource_sourceVersion = &sCustomLogSourceResource_sourceVersion
+var CustomLogSourceResource_provider = &sCustomLogSourceResource_provider
+var CustomLogSourceResource_attributes = &sCustomLogSourceResource_attributes
+
+var _CustomLogSourceVersion = &s_CustomLogSourceVersion
+
+var DataLakeAutoEnableNewAccountConfiguration = &sDataLakeAutoEnableNewAccountConfiguration
+var DataLakeAutoEnableNewAccountConfiguration_region = &sDataLakeAutoEnableNewAccountConfiguration_region
+var DataLakeAutoEnableNewAccountConfiguration_sources = &sDataLakeAutoEnableNewAccountConfiguration_sources
+
+var _DataLakeAutoEnableNewAccountConfigurationList = &s_DataLakeAutoEnableNewAccountConfigurationList
+var _DataLakeAutoEnableNewAccountConfigurationList_member = &s_DataLakeAutoEnableNewAccountConfigurationList_member
+
+var DataLakeConfiguration = &sDataLakeConfiguration
+var DataLakeConfiguration_region = &sDataLakeConfiguration_region
+var DataLakeConfiguration_encryptionConfiguration = &sDataLakeConfiguration_encryptionConfiguration
+var DataLakeConfiguration_lifecycleConfiguration = &sDataLakeConfiguration_lifecycleConfiguration
+var DataLakeConfiguration_replicationConfiguration = &sDataLakeConfiguration_replicationConfiguration
+
+var _DataLakeConfigurationList = &s_DataLakeConfigurationList
+var _DataLakeConfigurationList_member = &s_DataLakeConfigurationList_member
+
+var DataLakeEncryptionConfiguration = &sDataLakeEncryptionConfiguration
+var DataLakeEncryptionConfiguration_kmsKeyId = &sDataLakeEncryptionConfiguration_kmsKeyId
+
+var DataLakeException = &sDataLakeException
+var DataLakeException_region = &sDataLakeException_region
+var DataLakeException_exception = &sDataLakeException_exception
+var DataLakeException_remediation = &sDataLakeException_remediation
+var DataLakeException_timestamp = &sDataLakeException_timestamp
+
+var _DataLakeExceptionList = &s_DataLakeExceptionList
+var _DataLakeExceptionList_member = &s_DataLakeExceptionList_member
+
+var DataLakeLifecycleConfiguration = &sDataLakeLifecycleConfiguration
+var DataLakeLifecycleConfiguration_expiration = &sDataLakeLifecycleConfiguration_expiration
+var DataLakeLifecycleConfiguration_transitions = &sDataLakeLifecycleConfiguration_transitions
+
+var DataLakeLifecycleExpiration = &sDataLakeLifecycleExpiration
+var DataLakeLifecycleExpiration_days = &sDataLakeLifecycleExpiration_days
+
+var DataLakeLifecycleTransition = &sDataLakeLifecycleTransition
+var DataLakeLifecycleTransition_storageClass = &sDataLakeLifecycleTransition_storageClass
+var DataLakeLifecycleTransition_days = &sDataLakeLifecycleTransition_days
+
+var _DataLakeLifecycleTransitionList = &s_DataLakeLifecycleTransitionList
+var _DataLakeLifecycleTransitionList_member = &s_DataLakeLifecycleTransitionList_member
+
+var DataLakeReplicationConfiguration = &sDataLakeReplicationConfiguration
+var DataLakeReplicationConfiguration_regions = &sDataLakeReplicationConfiguration_regions
+var DataLakeReplicationConfiguration_roleArn = &sDataLakeReplicationConfiguration_roleArn
+
+var DataLakeResource = &sDataLakeResource
+var DataLakeResource_dataLakeArn = &sDataLakeResource_dataLakeArn
+var DataLakeResource_region = &sDataLakeResource_region
+var DataLakeResource_s3BucketArn = &sDataLakeResource_s3BucketArn
+var DataLakeResource_encryptionConfiguration = &sDataLakeResource_encryptionConfiguration
+var DataLakeResource_lifecycleConfiguration = &sDataLakeResource_lifecycleConfiguration
+var DataLakeResource_replicationConfiguration = &sDataLakeResource_replicationConfiguration
+var DataLakeResource_createStatus = &sDataLakeResource_createStatus
+var DataLakeResource_updateStatus = &sDataLakeResource_updateStatus
+
+var _DataLakeResourceList = &s_DataLakeResourceList
+var _DataLakeResourceList_member = &s_DataLakeResourceList_member
+
+var DataLakeSource = &sDataLakeSource
+var DataLakeSource_account = &sDataLakeSource_account
+var DataLakeSource_sourceName = &sDataLakeSource_sourceName
+var DataLakeSource_eventClasses = &sDataLakeSource_eventClasses
+var DataLakeSource_sourceStatuses = &sDataLakeSource_sourceStatuses
+
+var _DataLakeSourceList = &s_DataLakeSourceList
+var _DataLakeSourceList_member = &s_DataLakeSourceList_member
+
+var DataLakeSourceStatus = &sDataLakeSourceStatus
+var DataLakeSourceStatus_resource = &sDataLakeSourceStatus_resource
+var DataLakeSourceStatus_status = &sDataLakeSourceStatus_status
+
+var _DataLakeSourceStatusList = &s_DataLakeSourceStatusList
+var _DataLakeSourceStatusList_member = &s_DataLakeSourceStatusList_member
+
+var DataLakeStatus = &sDataLakeStatus
+var DataLakeStatus_INITIALIZED = &sDataLakeStatus_INITIALIZED
+var DataLakeStatus_PENDING = &sDataLakeStatus_PENDING
+var DataLakeStatus_COMPLETED = &sDataLakeStatus_COMPLETED
+var DataLakeStatus_FAILED = &sDataLakeStatus_FAILED
+
+var _DataLakeStorageClass = &s_DataLakeStorageClass
+
+var DataLakeUpdateException = &sDataLakeUpdateException
+var DataLakeUpdateException_reason = &sDataLakeUpdateException_reason
+var DataLakeUpdateException_code = &sDataLakeUpdateException_code
+
+var DataLakeUpdateStatus = &sDataLakeUpdateStatus
+var DataLakeUpdateStatus_requestId = &sDataLakeUpdateStatus_requestId
+var DataLakeUpdateStatus_status = &sDataLakeUpdateStatus_status
+var DataLakeUpdateStatus_exception = &sDataLakeUpdateStatus_exception
+
+var _DescriptionString = &s_DescriptionString
+
+var _ExternalId = &s_ExternalId
+
+var HttpMethod = &sHttpMethod
+var HttpMethod_POST = &sHttpMethod_POST
+var HttpMethod_PUT = &sHttpMethod_PUT
+
+var HttpsNotificationConfiguration = &sHttpsNotificationConfiguration
+var HttpsNotificationConfiguration_endpoint = &sHttpsNotificationConfiguration_endpoint
+var HttpsNotificationConfiguration_authorizationApiKeyName = &sHttpsNotificationConfiguration_authorizationApiKeyName
+var HttpsNotificationConfiguration_authorizationApiKeyValue = &sHttpsNotificationConfiguration_authorizationApiKeyValue
+var HttpsNotificationConfiguration_httpMethod = &sHttpsNotificationConfiguration_httpMethod
+var HttpsNotificationConfiguration_targetRoleArn = &sHttpsNotificationConfiguration_targetRoleArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LogSource = &sLogSource
+var LogSource_account = &sLogSource_account
+var LogSource_region = &sLogSource_region
+var LogSource_sources = &sLogSource_sources
+
+var _LogSourceList = &s_LogSourceList
+var _LogSourceList_member = &s_LogSourceList_member
+
+var LogSourceResource = &sLogSourceResource
+var LogSourceResource_awsLogSource = &sLogSourceResource_awsLogSource
+var LogSourceResource_customLogSource = &sLogSourceResource_customLogSource
+
+var _LogSourceResourceList = &s_LogSourceResourceList
+var _LogSourceResourceList_member = &s_LogSourceResourceList_member
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var NotificationConfiguration = &sNotificationConfiguration
+var NotificationConfiguration_sqsNotificationConfiguration = &sNotificationConfiguration_sqsNotificationConfiguration
+var NotificationConfiguration_httpsNotificationConfiguration = &sNotificationConfiguration_httpsNotificationConfiguration
+
+var _OcsfEventClass = &s_OcsfEventClass
+
+var _OcsfEventClassList = &s_OcsfEventClassList
+var _OcsfEventClassList_member = &s_OcsfEventClassList_member
+
+var _Region = &s_Region
+
+var _RegionList = &s_RegionList
+var _RegionList_member = &s_RegionList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceName = &sResourceNotFoundException_resourceName
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _ResourceShareArn = &s_ResourceShareArn
+
+var _ResourceShareName = &s_ResourceShareName
+
+var _RoleArn = &s_RoleArn
+
+var _S3BucketArn = &s_S3BucketArn
+
+var _S3URI = &s_S3URI
+
+var _SafeString = &s_SafeString
+
+var SourceCollectionStatus = &sSourceCollectionStatus
+var SourceCollectionStatus_COLLECTING = &sSourceCollectionStatus_COLLECTING
+var SourceCollectionStatus_MISCONFIGURED = &sSourceCollectionStatus_MISCONFIGURED
+var SourceCollectionStatus_NOT_COLLECTING = &sSourceCollectionStatus_NOT_COLLECTING
+
+var SqsNotificationConfiguration = &sSqsNotificationConfiguration
+
+var SubscriberResource = &sSubscriberResource
+var SubscriberResource_subscriberId = &sSubscriberResource_subscriberId
+var SubscriberResource_subscriberArn = &sSubscriberResource_subscriberArn
+var SubscriberResource_subscriberIdentity = &sSubscriberResource_subscriberIdentity
+var SubscriberResource_subscriberName = &sSubscriberResource_subscriberName
+var SubscriberResource_subscriberDescription = &sSubscriberResource_subscriberDescription
+var SubscriberResource_sources = &sSubscriberResource_sources
+var SubscriberResource_accessTypes = &sSubscriberResource_accessTypes
+var SubscriberResource_roleArn = &sSubscriberResource_roleArn
+var SubscriberResource_s3BucketArn = &sSubscriberResource_s3BucketArn
+var SubscriberResource_subscriberEndpoint = &sSubscriberResource_subscriberEndpoint
+var SubscriberResource_subscriberStatus = &sSubscriberResource_subscriberStatus
+var SubscriberResource_resourceShareArn = &sSubscriberResource_resourceShareArn
+var SubscriberResource_resourceShareName = &sSubscriberResource_resourceShareName
+var SubscriberResource_createdAt = &sSubscriberResource_createdAt
+var SubscriberResource_updatedAt = &sSubscriberResource_updatedAt
+
+var _SubscriberResourceList = &s_SubscriberResourceList
+var _SubscriberResourceList_member = &s_SubscriberResourceList_member
+
+var SubscriberStatus = &sSubscriberStatus
+var SubscriberStatus_ACTIVE = &sSubscriberStatus_ACTIVE
+var SubscriberStatus_DEACTIVATED = &sSubscriberStatus_DEACTIVATED
+var SubscriberStatus_PENDING = &sSubscriberStatus_PENDING
+var SubscriberStatus_READY = &sSubscriberStatus_READY
+
+var _SubscriptionProtocol = &s_SubscriptionProtocol
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _UUID = &s_UUID
+
+var CreateAwsLogSourceRequest = &sCreateAwsLogSourceRequest
+var CreateAwsLogSourceRequest_sources = &sCreateAwsLogSourceRequest_sources
+
+var CreateAwsLogSourceResponse = &sCreateAwsLogSourceResponse
+var CreateAwsLogSourceResponse_failed = &sCreateAwsLogSourceResponse_failed
+
+var CreateCustomLogSourceRequest = &sCreateCustomLogSourceRequest
+var CreateCustomLogSourceRequest_sourceName = &sCreateCustomLogSourceRequest_sourceName
+var CreateCustomLogSourceRequest_sourceVersion = &sCreateCustomLogSourceRequest_sourceVersion
+var CreateCustomLogSourceRequest_eventClasses = &sCreateCustomLogSourceRequest_eventClasses
+var CreateCustomLogSourceRequest_configuration = &sCreateCustomLogSourceRequest_configuration
+
+var CreateCustomLogSourceResponse = &sCreateCustomLogSourceResponse
+var CreateCustomLogSourceResponse_source = &sCreateCustomLogSourceResponse_source
+
+var CreateDataLakeExceptionSubscriptionRequest = &sCreateDataLakeExceptionSubscriptionRequest
+var CreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = &sCreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol
+var CreateDataLakeExceptionSubscriptionRequest_notificationEndpoint = &sCreateDataLakeExceptionSubscriptionRequest_notificationEndpoint
+var CreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = &sCreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive
+
+var CreateDataLakeExceptionSubscriptionResponse = &sCreateDataLakeExceptionSubscriptionResponse
+
+var CreateDataLakeRequest = &sCreateDataLakeRequest
+var CreateDataLakeRequest_configurations = &sCreateDataLakeRequest_configurations
+var CreateDataLakeRequest_metaStoreManagerRoleArn = &sCreateDataLakeRequest_metaStoreManagerRoleArn
+var CreateDataLakeRequest_tags = &sCreateDataLakeRequest_tags
+
+var CreateDataLakeOrganizationConfigurationRequest = &sCreateDataLakeOrganizationConfigurationRequest
+var CreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = &sCreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount
+
+var CreateDataLakeOrganizationConfigurationResponse = &sCreateDataLakeOrganizationConfigurationResponse
+
+var CreateDataLakeResponse = &sCreateDataLakeResponse
+var CreateDataLakeResponse_dataLakes = &sCreateDataLakeResponse_dataLakes
+
+var CreateSubscriberRequest = &sCreateSubscriberRequest
+var CreateSubscriberRequest_subscriberIdentity = &sCreateSubscriberRequest_subscriberIdentity
+var CreateSubscriberRequest_subscriberName = &sCreateSubscriberRequest_subscriberName
+var CreateSubscriberRequest_subscriberDescription = &sCreateSubscriberRequest_subscriberDescription
+var CreateSubscriberRequest_sources = &sCreateSubscriberRequest_sources
+var CreateSubscriberRequest_accessTypes = &sCreateSubscriberRequest_accessTypes
+var CreateSubscriberRequest_tags = &sCreateSubscriberRequest_tags
+
+var CreateSubscriberNotificationRequest = &sCreateSubscriberNotificationRequest
+var CreateSubscriberNotificationRequest_subscriberId = &sCreateSubscriberNotificationRequest_subscriberId
+var CreateSubscriberNotificationRequest_configuration = &sCreateSubscriberNotificationRequest_configuration
+
+var CreateSubscriberNotificationResponse = &sCreateSubscriberNotificationResponse
+var CreateSubscriberNotificationResponse_subscriberEndpoint = &sCreateSubscriberNotificationResponse_subscriberEndpoint
+
+var CreateSubscriberResponse = &sCreateSubscriberResponse
+var CreateSubscriberResponse_subscriber = &sCreateSubscriberResponse_subscriber
+
+var DeleteAwsLogSourceRequest = &sDeleteAwsLogSourceRequest
+var DeleteAwsLogSourceRequest_sources = &sDeleteAwsLogSourceRequest_sources
+
+var DeleteAwsLogSourceResponse = &sDeleteAwsLogSourceResponse
+var DeleteAwsLogSourceResponse_failed = &sDeleteAwsLogSourceResponse_failed
+
+var DeleteCustomLogSourceRequest = &sDeleteCustomLogSourceRequest
+var DeleteCustomLogSourceRequest_sourceName = &sDeleteCustomLogSourceRequest_sourceName
+var DeleteCustomLogSourceRequest_sourceVersion = &sDeleteCustomLogSourceRequest_sourceVersion
+
+var DeleteCustomLogSourceResponse = &sDeleteCustomLogSourceResponse
+
+var DeleteDataLakeExceptionSubscriptionRequest = &sDeleteDataLakeExceptionSubscriptionRequest
+
+var DeleteDataLakeExceptionSubscriptionResponse = &sDeleteDataLakeExceptionSubscriptionResponse
+
+var DeleteDataLakeRequest = &sDeleteDataLakeRequest
+var DeleteDataLakeRequest_regions = &sDeleteDataLakeRequest_regions
+
+var DeleteDataLakeOrganizationConfigurationRequest = &sDeleteDataLakeOrganizationConfigurationRequest
+var DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount = &sDeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount
+
+var DeleteDataLakeOrganizationConfigurationResponse = &sDeleteDataLakeOrganizationConfigurationResponse
+
+var DeleteDataLakeResponse = &sDeleteDataLakeResponse
+
+var DeleteSubscriberRequest = &sDeleteSubscriberRequest
+var DeleteSubscriberRequest_subscriberId = &sDeleteSubscriberRequest_subscriberId
+
+var DeleteSubscriberNotificationRequest = &sDeleteSubscriberNotificationRequest
+var DeleteSubscriberNotificationRequest_subscriberId = &sDeleteSubscriberNotificationRequest_subscriberId
+
+var DeleteSubscriberNotificationResponse = &sDeleteSubscriberNotificationResponse
+
+var DeleteSubscriberResponse = &sDeleteSubscriberResponse
+
+var DeregisterDataLakeDelegatedAdministratorRequest = &sDeregisterDataLakeDelegatedAdministratorRequest
+
+var DeregisterDataLakeDelegatedAdministratorResponse = &sDeregisterDataLakeDelegatedAdministratorResponse
+
+var GetDataLakeExceptionSubscriptionRequest = &sGetDataLakeExceptionSubscriptionRequest
+
+var GetDataLakeExceptionSubscriptionResponse = &sGetDataLakeExceptionSubscriptionResponse
+var GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol = &sGetDataLakeExceptionSubscriptionResponse_subscriptionProtocol
+var GetDataLakeExceptionSubscriptionResponse_notificationEndpoint = &sGetDataLakeExceptionSubscriptionResponse_notificationEndpoint
+var GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive = &sGetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive
+
+var GetDataLakeOrganizationConfigurationRequest = &sGetDataLakeOrganizationConfigurationRequest
+
+var GetDataLakeOrganizationConfigurationResponse = &sGetDataLakeOrganizationConfigurationResponse
+var GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount = &sGetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount
+
+var GetDataLakeSourcesRequest = &sGetDataLakeSourcesRequest
+var GetDataLakeSourcesRequest_accounts = &sGetDataLakeSourcesRequest_accounts
+var GetDataLakeSourcesRequest_maxResults = &sGetDataLakeSourcesRequest_maxResults
+var GetDataLakeSourcesRequest_nextToken = &sGetDataLakeSourcesRequest_nextToken
+
+var GetDataLakeSourcesResponse = &sGetDataLakeSourcesResponse
+var GetDataLakeSourcesResponse_dataLakeArn = &sGetDataLakeSourcesResponse_dataLakeArn
+var GetDataLakeSourcesResponse_dataLakeSources = &sGetDataLakeSourcesResponse_dataLakeSources
+var GetDataLakeSourcesResponse_nextToken = &sGetDataLakeSourcesResponse_nextToken
+
+var GetSubscriberRequest = &sGetSubscriberRequest
+var GetSubscriberRequest_subscriberId = &sGetSubscriberRequest_subscriberId
+
+var GetSubscriberResponse = &sGetSubscriberResponse
+var GetSubscriberResponse_subscriber = &sGetSubscriberResponse_subscriber
+
+var ListDataLakeExceptionsRequest = &sListDataLakeExceptionsRequest
+var ListDataLakeExceptionsRequest_regions = &sListDataLakeExceptionsRequest_regions
+var ListDataLakeExceptionsRequest_maxResults = &sListDataLakeExceptionsRequest_maxResults
+var ListDataLakeExceptionsRequest_nextToken = &sListDataLakeExceptionsRequest_nextToken
+
+var ListDataLakeExceptionsResponse = &sListDataLakeExceptionsResponse
+var ListDataLakeExceptionsResponse_exceptions = &sListDataLakeExceptionsResponse_exceptions
+var ListDataLakeExceptionsResponse_nextToken = &sListDataLakeExceptionsResponse_nextToken
+
+var ListDataLakesRequest = &sListDataLakesRequest
+var ListDataLakesRequest_regions = &sListDataLakesRequest_regions
+
+var ListDataLakesResponse = &sListDataLakesResponse
+var ListDataLakesResponse_dataLakes = &sListDataLakesResponse_dataLakes
+
+var ListLogSourcesRequest = &sListLogSourcesRequest
+var ListLogSourcesRequest_accounts = &sListLogSourcesRequest_accounts
+var ListLogSourcesRequest_regions = &sListLogSourcesRequest_regions
+var ListLogSourcesRequest_sources = &sListLogSourcesRequest_sources
+var ListLogSourcesRequest_maxResults = &sListLogSourcesRequest_maxResults
+var ListLogSourcesRequest_nextToken = &sListLogSourcesRequest_nextToken
+
+var ListLogSourcesResponse = &sListLogSourcesResponse
+var ListLogSourcesResponse_sources = &sListLogSourcesResponse_sources
+var ListLogSourcesResponse_nextToken = &sListLogSourcesResponse_nextToken
+
+var ListSubscribersRequest = &sListSubscribersRequest
+var ListSubscribersRequest_nextToken = &sListSubscribersRequest_nextToken
+var ListSubscribersRequest_maxResults = &sListSubscribersRequest_maxResults
+
+var ListSubscribersResponse = &sListSubscribersResponse
+var ListSubscribersResponse_subscribers = &sListSubscribersResponse_subscribers
+var ListSubscribersResponse_nextToken = &sListSubscribersResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterDataLakeDelegatedAdministratorRequest = &sRegisterDataLakeDelegatedAdministratorRequest
+var RegisterDataLakeDelegatedAdministratorRequest_accountId = &sRegisterDataLakeDelegatedAdministratorRequest_accountId
+
+var RegisterDataLakeDelegatedAdministratorResponse = &sRegisterDataLakeDelegatedAdministratorResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDataLakeExceptionSubscriptionRequest = &sUpdateDataLakeExceptionSubscriptionRequest
+var UpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol = &sUpdateDataLakeExceptionSubscriptionRequest_subscriptionProtocol
+var UpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint = &sUpdateDataLakeExceptionSubscriptionRequest_notificationEndpoint
+var UpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive = &sUpdateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive
+
+var UpdateDataLakeExceptionSubscriptionResponse = &sUpdateDataLakeExceptionSubscriptionResponse
+
+var UpdateDataLakeRequest = &sUpdateDataLakeRequest
+var UpdateDataLakeRequest_configurations = &sUpdateDataLakeRequest_configurations
+var UpdateDataLakeRequest_metaStoreManagerRoleArn = &sUpdateDataLakeRequest_metaStoreManagerRoleArn
+
+var UpdateDataLakeResponse = &sUpdateDataLakeResponse
+var UpdateDataLakeResponse_dataLakes = &sUpdateDataLakeResponse_dataLakes
+
+var UpdateSubscriberRequest = &sUpdateSubscriberRequest
+var UpdateSubscriberRequest_subscriberId = &sUpdateSubscriberRequest_subscriberId
+var UpdateSubscriberRequest_subscriberIdentity = &sUpdateSubscriberRequest_subscriberIdentity
+var UpdateSubscriberRequest_subscriberName = &sUpdateSubscriberRequest_subscriberName
+var UpdateSubscriberRequest_subscriberDescription = &sUpdateSubscriberRequest_subscriberDescription
+var UpdateSubscriberRequest_sources = &sUpdateSubscriberRequest_sources
+
+var UpdateSubscriberNotificationRequest = &sUpdateSubscriberNotificationRequest
+var UpdateSubscriberNotificationRequest_subscriberId = &sUpdateSubscriberNotificationRequest_subscriberId
+var UpdateSubscriberNotificationRequest_configuration = &sUpdateSubscriberNotificationRequest_configuration
+
+var UpdateSubscriberNotificationResponse = &sUpdateSubscriberNotificationResponse
+var UpdateSubscriberNotificationResponse_subscriberEndpoint = &sUpdateSubscriberNotificationResponse_subscriberEndpoint
+
+var UpdateSubscriberResponse = &sUpdateSubscriberResponse
+var UpdateSubscriberResponse_subscriber = &sUpdateSubscriberResponse_subscriber
+
+var SecurityLake = &smithy.ServiceSchema{Schema: &s_SecurityLake, Version: "2018-05-10"}
